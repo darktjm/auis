@@ -1,0 +1,983 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+/* $Disclaimer: 
+ * Permission to use, copy, modify, and distribute this software and its 
+ * documentation for any purpose and without fee is hereby granted, provided 
+ * that the above copyright notice appear in all copies and that both that 
+ * copyright notice and this permission notice appear in supporting 
+ * documentation, and that the name of IBM not be used in advertising or 
+ * publicity pertaining to distribution of the software without specific, 
+ * written prior permission. 
+ *                         
+ * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+ * TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+ * HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+ * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+ * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+ * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ * 
+ *  $ */ 
+/*
+ * parse.y
+ * This module parses the datastream.
+ */
+
+%token Y_GOESTO Y_D Y_INT Y_EQ Y_OP Y_UNOP Y_BINOP
+%token Y_ITER Y_LIM Y_FUNC Y_ATOM Y_PRIME Y_DOT Y_BAD
+ 
+%token Y_OPEN Y_CLOSE Y_ROOT Y_BEGIN Y_OVER Y_END
+%token Y_SUP Y_SUB Y_PILE Y_EQSTYLE Y_SPACE
+ 
+%start choose
+ 
+%{
+#include <andrewos.h>
+#include <exfont.h>
+#include <util.h>
+static short AdobeSym_map[256] = {
+0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xa5, 0x00, 0x00, 0x00, 0x00, 0xb4, 0x2b, 0x00, 0x2d, 0x00, 0xb8, 0x00 ,0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3c, 0x3d, 0x3e, 0x00, 0x00, 0x00, 0x00, 0xF2, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF2, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x50, 0x00, 0x00, 0x53, 0x00, 0xc8, 0x00, 0xc7, 0x00, 0x00, 0x00, 0x00, 0xaf, 0xae, 0xad, 0xac, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xb3, 0x00, 0x00, 0x00, 0x00, 0xa3, 0xb1, 0x00, 0x00, 0xb1, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+};
+
+struct ptr {
+    short isnode;
+    long width, height, centerl; /* these are set when the node is parsed. centerl is the height of the "centerline" of the rectangle. */
+    long offx, offy; /* set when the parent node is parsed. These are relative to the parent. */
+    union {
+	struct node *n;
+	struct symbol *sym;
+    } p;
+};
+
+typedef struct ptr YYSTYPE;
+
+const long BaseOff = 217; /* amount to offset a character's baseline from the bottom of its bounding box. Stolen from the "descender" value in the Times-Roman AFM file. */
+const long ParenOff = 333; /* Width of a parenthesis. Stolen from the char width value from the Symbol AFM file. */
+const long BraceOff = 480; /* Width of a curly brace. Stolen from the char width value from the Symbol AFM file. */
+const long RootOff = 549; /* Width of a radical. Stolen from the char width value from the Symbol AFM file. */
+const long RootWOff = 80;
+const long RootHOff = 125;
+const double SubSizeFac = 0.6;
+const double FracSizeFac = 0.8;
+
+static struct ptr x(char *fmt, struct ptr *a0);
+static char *SnarfStr(int size); 
+static struct ptr value;
+ 
+#include <eq.H>
+#include <print.H>
+
+/* convert measurement values (line height is 1000) to PS values (line height is 12) */
+static inline double ToPS(long val)
+{
+    return ((double)val) * 0.012;
+}
+static inline char *OpenString(struct ptr *ptr)
+{
+    if (ptr->isnode)
+	return "###";
+    switch (ptr->p.sym->what) {
+	case EX_LPAREN:
+	    return "\\(";
+	case EX_LSQUARE:
+	    return "[";
+	case EX_LBRACE:
+	    return "{";
+	case EX_LANGLE:
+	    return "<";
+	default:
+	    return "###";
+    }
+}
+static inline char *CloseString(struct ptr *ptr)
+{
+    if (ptr->isnode)
+	return "###";
+    switch (ptr->p.sym->what) {
+	case EX_RPAREN:
+	    return "\\)";
+	case EX_RSQUARE:
+	    return "]";
+	case EX_RBRACE:
+	    return "}";
+	case EX_RANGLE:
+	    return ">";
+	default:
+	    return "###";
+    }
+}
+
+%}
+ 
+%%
+ 
+ 
+/*
+ * Switch between the grammars depending on output desired
+ * yylex inserts one of 'c', 'e', etc. as the first token
+ */
+ 
+choose  : 'c' c_prog                                    { value = $2; }
+        | 'e' e_prog                                    { value = $2; }
+        | 'p' p_prog                                    { value = $2; }
+        ;
+ 
+/*
+ PS translator
+ Note that each node has to set offx and offy of its children, if those values are to be nonzero. It must do this before the x() call, since the structures are copied by that call. 
+ */
+
+p_prog	: Y_BEGIN Y_PILE Y_EQSTYLE p_lines Y_END	{$$=x("$4",&$0); $$.width=$4.width; $$.height=$4.height;}
+	;
+p_group	: Y_BEGIN p_eqstyle p_expr Y_END	{$$=x("$3",&$0); $$.width=$3.width; $$.height=$3.height;}
+	;
+
+p_lines	: p_group {
+	    $$=x("$1\n",&$0);
+	    $$.width=$1.width;
+	    $$.height=$1.height;
+	}
+	| p_lines p_group {
+	    long wx, wy; wy=$1.height+$2.height;
+	    wx=MAX($1.width,$2.width);
+	    $1.offy=$2.height;
+	    $$=x("$1$2\n",&$0);
+	    $$.width=wx;
+	    $$.height=wy;
+	}
+	;
+
+p_pile	: p_group				{$$=x("{$1}",&$0);}
+	| p_pile p_group			{$$=x("% <$1> above % <$2>",&$0);}
+	;
+
+p_eqstyle	: /* empty */
+	| Y_EQSTYLE
+	;
+
+p_thing	: Y_GOESTO
+	| Y_D
+	| Y_EQ
+	| Y_OP
+	| Y_UNOP
+	| Y_BINOP
+	| Y_LIM
+	| Y_FUNC
+	| Y_ATOM	/*			{$$=x("$1",&$0); $$.width=$1.width; $$.height=$1.height;}*/
+	| Y_BAD
+	| Y_OPEN
+	| Y_CLOSE
+	| Y_ITER
+	| Y_INT
+	| Y_DOT
+	| Y_PRIME
+	| Y_SPACE {
+	    $$=x(" ",&$0);
+	    switch ($1.p.sym->what) {
+		case EX_THICK:
+		case EX_CTHICK:
+		    $$.width=500;
+		    break;
+		case EX_THIN:
+		case EX_CTHIN:
+		    $$.width=150;
+		    break;
+		default:
+		    $$.width=333;
+		    break;
+	    }
+	    $$.height=1000;
+	    $$.centerl=$$.height/2;
+	}
+	| Y_BEGIN Y_PILE p_eqstyle p_pile Y_END	{$$=x("zoxB $2 {$4}",&$0);}
+	| Y_BEGIN Y_PILE p_group Y_OVER p_group Y_END	{
+	    long wx, wy, sub1x, sub1y, sub2x, sub2y;
+	    char *sx;
+	    sub1x=(long)((double)$3.width*FracSizeFac);
+	    sub1y=(long)((double)$3.height*FracSizeFac);
+	    sub2x=(long)((double)$5.width*FracSizeFac);
+	    sub2y=(long)((double)$5.height*FracSizeFac);
+	    wy=sub1y+sub2y;
+	    wx=MAX(sub1x,sub2x);
+	    $3.offx=((long)((wx-sub1x)/FracSizeFac))/2;
+	    $5.offx=((long)((wx-sub2x)/FracSizeFac))/2;
+	    $3.offy=$5.height; /* yup */
+	    sx=SnarfStr(120);
+	    sprintf(sx, "0 %.2f moveto %.2f 0 rlineto 1 setlinewidth stroke\ngsave %.2f dup scale\n$3\n$5 grestore\n", ToPS(sub2y), ToPS(wx), FracSizeFac);
+	    $$=x(sx,&$0);
+	    $$.width=wx;
+	    $$.height=wy;
+	    $$.centerl=sub2y;
+	}
+	| Y_ROOT p_group {
+	    long wx, wy, pwid;
+	    char *sx;
+	    double parsc;
+	    parsc=(double)($2.height)/1000.0;
+	    pwid=RootOff;
+	    wy=$2.height+RootHOff;
+	    wx=$2.width+pwid;
+	    $2.offx=pwid;
+	    sx=SnarfStr(140);
+	    sprintf(sx, "$2\ngsave 1 %.4g scale eqFs 0 %.2f moveto (%s) show grestore %.2f %.2f moveto %.2f 0 rlineto 0.75 setlinewidth stroke\n",
+		    parsc, ToPS(BaseOff), "\\326", ToPS(RootOff-RootWOff), ToPS(wy-RootHOff), ToPS($2.width+RootWOff));
+	    $$=x(sx,&$0);
+	    $$.width=wx;
+	    $$.height=wy;
+	    $$.centerl=wy/2;
+	}
+	| Y_OPEN p_group Y_CLOSE {
+	    long wx, wy, pwid;
+	    char *sx;
+	    double parsc;
+	    parsc=(double)($2.height)/1000.0;
+	    pwid=($1.p.sym->what==EX_LBRACE?BraceOff:ParenOff);
+	    wy=$2.height;
+	    wx=$2.width+2*pwid;
+	    $2.offx=pwid;
+	    sx=SnarfStr(120);
+	    sprintf(sx, "$2\ngsave 1 %.4g scale eqFs 0 %.2f moveto (%s) show %.2f %.2f moveto (%s) show grestore\n",
+		    parsc, ToPS(BaseOff), OpenString(&$1), ToPS($2.width+pwid), ToPS(BaseOff), CloseString(&$3));
+	    $$=x(sx,&$0);
+	    $$.width=wx;
+	    $$.height=wy;
+	    $$.centerl=$2.centerl;
+	}
+	;
+
+p_scr	: p_thing	
+	| p_thing Y_SUB p_group	 {
+	    if ($2.p.sym->what==BELOW) {
+		long wx, wy, subx, suby;
+		char *sx;
+		subx=(long)((double)$3.width*SubSizeFac);
+		suby=(long)((double)$3.height*SubSizeFac);
+		wy=$1.height+suby;
+		wx=MAX($1.width,subx);
+		$1.offx=(wx-$1.width)/2;
+		$1.offy=suby;
+		$3.offx=((long)(wx/SubSizeFac)-$3.width)/2;
+		$3.offy=0;
+		sx=SnarfStr(60);
+		sprintf(sx, "$1\ngsave %.2f dup scale $3 grestore\n", SubSizeFac);
+		$$=x(sx,&$0);
+		$$.width=wx;
+		$$.height=wy;
+		$$.centerl=$1.offy+$1.centerl;
+	    }
+	    else {
+		long wx, wy, subx, suby;
+		char *sx;
+		subx=(long)((double)$3.width*SubSizeFac);
+		suby=(long)((double)$3.height*SubSizeFac);
+		wy=$1.height+suby/2;
+		wx=$1.width+subx;
+		$1.offx=0;
+		$1.offy=suby/2;
+		$3.offx=(long)($1.width/SubSizeFac);
+		$3.offy=0;
+		sx=SnarfStr(60);
+		sprintf(sx, "$1\ngsave %.2f dup scale $3 grestore\n", SubSizeFac);
+		$$=x(sx,&$0);
+		$$.width=wx;
+		$$.height=wy;
+		$$.centerl=$1.offy+$1.centerl;
+	    }
+	}
+	| p_thing Y_SUP p_group	 {
+	    if ($2.p.sym->what==ABOVE) {
+		long wx, wy, subx, suby;
+		char *sx;
+		subx=(long)((double)$3.width*SubSizeFac);
+		suby=(long)((double)$3.height*SubSizeFac);
+		wy=$1.height+suby;
+		wx=MAX($1.width,subx);
+		$1.offx=(wx-$1.width)/2;
+		$1.offy=0;
+		$3.offx=((long)(wx/SubSizeFac)-$3.width)/2;
+		$3.offy=(long)($1.height/SubSizeFac);
+		sx=SnarfStr(60);
+		sprintf(sx, "$1\ngsave %.2f dup scale $3 grestore\n", SubSizeFac);
+		$$=x(sx,&$0);
+		$$.width=wx;
+		$$.height=wy;
+		$$.centerl=$1.offy+$1.centerl;
+	    }
+	    else {
+		long wx, wy, subx, suby;
+		char *sx;
+		subx=(long)((double)$3.width*SubSizeFac);
+		suby=(long)((double)$3.height*SubSizeFac);
+		wy=$1.height+suby/2;
+		wx=$1.width+subx;
+		$1.offx=0;
+		$1.offy=0;
+		$3.offx=(long)($1.width/SubSizeFac);
+		$3.offy=(long)((wy-suby)/SubSizeFac);
+		sx=SnarfStr(60);
+		sprintf(sx, "$1\ngsave %.2f dup scale $3 grestore\n", SubSizeFac);
+		$$=x(sx,&$0);
+		$$.width=wx;
+		$$.height=wy;
+		$$.centerl=$1.offy+$1.centerl;
+	    }
+	}
+	| p_thing Y_SUP p_group Y_SUB p_group	 {
+	    long wx, wy, sub1x, sub1y, sub2x, sub2y;
+	    char *sx;
+	    sub1x=(long)((double)$5.width*SubSizeFac);
+	    sub1y=(long)((double)$5.height*SubSizeFac);
+	    sub2x=(long)((double)$3.width*SubSizeFac);
+	    sub2y=(long)((double)$3.height*SubSizeFac);
+	    if ($2.p.sym->what==BELOW) {
+		wy=$1.height+sub1y+sub2y;
+		wx=MAX($1.width,sub1x);
+		wx=MAX(wx,sub2x);
+		$1.offx=(wx-$1.width)/2;
+		$1.offy=sub1y;
+		$5.offx=((long)(wx/SubSizeFac)-$5.width)/2;
+		$5.offy=0;
+		$3.offx=((long)(wx/SubSizeFac)-$3.width)/2;
+		$3.offy=(long)(($1.height+sub1y)/SubSizeFac);
+	    }
+	    else {
+		wy=$1.height+sub1y/2+sub2y/2;
+		$1.offy=sub1y/2;
+		if (sub1y+sub2y > wy) {
+		    wy=sub1y+sub2y;
+		    $1.offy=sub1y-$1.height/2;
+		}
+		wx=MAX($1.width+sub1x,$1.width+sub2x);
+		$1.offx=0;
+		$5.offx=(long)($1.width/SubSizeFac);
+		$3.offx=(long)($1.width/SubSizeFac);
+		$5.offy=0;
+		$3.offy=(long)((wy-sub2y)/SubSizeFac);
+	    }
+	    sx=SnarfStr(70);
+	    sprintf(sx, "$1\ngsave %.2f dup scale $5 $3 grestore\n", SubSizeFac);
+	    $$=x(sx,&$0);
+	    $$.width=wx;
+	    $$.height=wy;
+	    $$.centerl=$1.offy+$1.centerl;
+	}
+	| p_thing Y_SUB p_group Y_SUP p_group	 {
+	    long wx, wy, sub1x, sub1y, sub2x, sub2y;
+	    char *sx;
+	    sub1x=(long)((double)$3.width*SubSizeFac);
+	    sub1y=(long)((double)$3.height*SubSizeFac);
+	    sub2x=(long)((double)$5.width*SubSizeFac);
+	    sub2y=(long)((double)$5.height*SubSizeFac);
+	    if ($2.p.sym->what==ABOVE) {
+		wy=$1.height+sub1y+sub2y;
+		wx=MAX($1.width,sub1x);
+		wx=MAX(wx,sub2x);
+		$1.offx=(wx-$1.width)/2;
+		$1.offy=sub1y;
+		$3.offx=((long)(wx/SubSizeFac)-$3.width)/2;
+		$3.offy=0;
+		$5.offx=((long)(wx/SubSizeFac)-$5.width)/2;
+		$5.offy=(long)(($1.height+sub1y)/SubSizeFac);
+	    }
+	    else {
+		wy=$1.height+sub1y/2+sub2y/2;
+		$1.offy=sub1y/2;
+		if (sub1y+sub2y > wy) {
+		    wy=sub1y+sub2y;
+		    $1.offy=sub1y-$1.height/2;
+		}
+		wx=MAX($1.width+sub1x,$1.width+sub2x);
+		$1.offx=0;
+		$3.offx=(long)($1.width/SubSizeFac);
+		$5.offx=(long)($1.width/SubSizeFac);
+		$3.offy=0;
+		$5.offy=(long)((wy-sub2y)/SubSizeFac);
+	    }
+	    sx=SnarfStr(70);
+	    sprintf(sx, "$1\ngsave %.2f dup scale $3 $5 grestore\n", SubSizeFac);
+	    $$=x(sx,&$0);
+	    $$.width=wx;
+	    $$.height=wy;
+	    $$.centerl=$1.offy+$1.centerl;
+	}
+	;
+
+p_accs	: p_acc
+	| p_accs p_acc					{$$=x("$1 $2",&$0);}
+	;
+
+p_acc	: Y_DOT						{$$=x("dot",&$0);}
+	| Y_PRIME					{$$=x("prime",&$0);}
+	;
+	
+p_expr	: p_scr						/*{$$=x("$1",&$0);}*/
+	| p_expr p_scr	{
+	    long wx, wy, yu, yd;
+	    wx=$1.width+$2.width;
+	    yu=MAX($1.height-$1.centerl,$2.height-$2.centerl);
+	    yd=MAX($1.centerl,$2.centerl);
+	    wy=yu+yd;
+	    $1.offy=yd-$1.centerl;
+	    $2.offy=yd-$2.centerl;
+	    $1.offx=0;
+	    $2.offx=$1.width;
+	    $$=x("$1\n$2\n",&$0);
+	    $$.width=wx;
+	    $$.height=wy;
+	    $$.centerl=yd;
+	}
+;
+
+
+/*
+ * C translator
+ */
+
+c_prog	: Y_BEGIN Y_PILE Y_EQSTYLE c_lines Y_END		{$$=x("$4",&$0);}
+	;
+
+c_lines	: c_group					{$$=x("$1;\n",&$0);}
+	| c_lines c_group				{$$=x("$1$2;\n",&$0);}
+	;
+
+c_group	: Y_BEGIN c_expr Y_END				{$$=x("$2",&$0);}
+	;
+
+c_paren	: Y_OPEN c_group Y_CLOSE			{$$=x("$2",&$0);}
+	| Y_OPEN c_expr Y_CLOSE				{$$=x("$2",&$0);}
+	;
+
+c_cplx	: Y_ROOT c_group				{$$=x("sqrt($2)",&$0);}
+	| Y_BEGIN Y_PILE c_group Y_OVER c_group Y_END	{$$=x("(($3)/($5))",&$0);}
+	;
+
+c_sup	: Y_SUP c_group					{$$=x("$2",&$0);} ;
+c_sub	: Y_SUB c_group					{$$=x("$2",&$0);} ;
+c_atom	: Y_ATOM | Y_D;
+c_func	: c_atom | Y_FUNC;
+
+
+c_term	: c_xterm
+	| c_paren					{$$=x("($1)",&$0);}
+	| c_paren c_term				{$$=x("($1)*$2",&$0);}
+	;
+
+c_unit	: c_atom c_paren				{$$=x("$1($2)",&$0);}
+	| c_atom c_sub c_paren				{$$=x("$1[$2]($3)",&$0);}
+	| c_atom c_sup c_paren				{$$=x("pow($1($3),$2)",&$0);}
+	| c_atom c_sub c_sup c_paren			{$$=x("pow($1[$2]($4),$3)",&$0);}
+	| c_atom c_sup c_sub c_paren			{$$=x("pow($1[$3]($4),$2)",&$0);}
+
+	| c_cplx					{$$=x("$1",&$0);}
+	| c_cplx c_sub					{$$=x("$1[$2]",&$0);}
+	| c_cplx c_sup					{$$=x("pow($1,$2)",&$0);}
+	| c_cplx c_sub c_sup				{$$=x("pow($1[$2], c_$3)",&$0);}
+	| c_cplx c_sup c_sub				{$$=x("pow($1[$3], c_$2)",&$0);}
+	;
+
+c_unitx	: c_atom					{$$=x("$1",&$0);}
+	| c_atom c_sub					{$$=x("$1[$2]",&$0);}
+	| c_atom c_sup					{$$=x("pow($1,$2)",&$0);}
+	| c_atom c_sub c_sup				{$$=x("pow($1[$2], c_$3)",&$0);}
+	| c_atom c_sup c_sub				{$$=x("pow($1[$3], c_$2)",&$0);}
+	;
+
+c_xterm	: c_unitx
+	| c_unit
+	| c_unitx c_xterm				{$$=x("$1*$2",&$0);}
+	| c_unit c_term					{$$=x("$1*$2",&$0);}
+
+	| Y_FUNC c_term					{$$=x("$1($2)",&$0);}
+	| Y_FUNC c_sup c_term				{$$=x("pow($1($3),$2)",&$0);}
+
+	| Y_ITER c_term					{$$=x("$1($2)",&$0);}
+	| Y_ITER Y_SUB Y_BEGIN c_atom Y_EQ c_expr Y_END c_sup c_term
+							{$$=x("$1($4=$6,$8,$9)",&$0);}
+	| Y_ITER c_sup Y_SUB Y_BEGIN c_atom Y_EQ c_expr Y_END c_term
+							{$$=x("$1($5=$7,$2,$9)",&$0);}
+
+	| Y_INT c_term Y_SPACE Y_D c_atom		{$$=x("$1($5,$2)",&$0);}
+	| Y_INT c_sub c_term Y_SPACE Y_D c_atom		{$$=x("$1($6=$2,INF,$3)",&$0);}
+	| Y_INT c_sup c_term Y_SPACE Y_D c_atom		{$$=x("$1($6=-INF,$2,$3)",&$0);}
+	| Y_INT c_sub c_sup c_term Y_SPACE Y_D c_atom	{$$=x("$1($7=$2,$3,$4)",&$0);}
+	| Y_INT c_sup c_sub c_term Y_SPACE Y_D c_atom	{$$=x("$1($7=$3,$2,$4)",&$0);}
+
+	| Y_LIM c_xterm					{$$=x("$1($2)",&$0);}
+	| Y_LIM Y_SUB Y_BEGIN c_atom Y_GOESTO c_expr Y_END c_xterm
+							{$$=x("$1($4->$6,$8)",&$0);}
+	;
+
+
+c_binop	: Y_BINOP | Y_OP | Y_EQ | Y_GOESTO;
+c_unop	: Y_UNOP | Y_OP;
+
+c_opterm: c_term
+        | c_unop c_term                                 {$$=x("$1$2",&$0);}
+        ;
+ 
+c_expr  : c_opterm
+        | c_opterm c_binop c_expr                       {$$=x("$1 $2 $3",&$0);}
+        ;
+ 
+ 
+/*
+ * Eqn translator
+ */
+ 
+e_prog  : Y_BEGIN Y_PILE Y_EQSTYLE e_lines Y_END
+{$$=x(".EQ\n\
+delim ##\n\
+define above \"to\"\n\
+define below \"from\"\n\
+define zilch \"\"\n\
+define thick \" ~ \"\n\
+define med \" ^ \"\n\
+define thin \" ^ \"\n\
+define vartheta \"theta\"\n\
+define varsigma \"sigma\"\n\
+define varphi \"phi\"\n\
+define varomega \"omega\"\n\
+define Alpha \"A\"\n\
+define Beta \"B\"\n\
+define Epsilon \"E\"\n\
+define Zeta \"Z\"\n\
+define Eta \"H\"\n\
+define Iota \"I\"\n\
+define Kappa \"K\"\n\
+define Mu \"M\"\n\
+define Nu \"N\"\n\
+define Omicron \"O\"\n\
+define Rho \"P\"\n\
+define Tau \"T\"\n\
+define Chi \"X\"\n\
+define Gamma \"GAMMA\"\n\
+define Delta \"DELTA\"\n\
+define Theta \"THETA\"\n\
+define Lambda \"LAMBDA\"\n\
+define Xi \"XI\"\n\
+define Sigma \"SIGMA\"\n\
+define Upsilon \"UPSILON\"\n\
+define Phi \"PHI\"\n\
+define Psi \"PSI\"\n\
+define Omega \"OMEGA\"\n\
+define cint \"int\"\n\
+define product \"prod\"\n\
+define union_op \"union\"\n\
+define inter_op \"inter\"\n\
+define bold-a \"fat a\"\n\
+define * \"times\"\n\
+define down \"\\(da\"\n\
+define up \"\\(ua\"\n\
+define slash \"\\(sl\"\n\
+define approx \"\\(ap\"\n\
+define / \"\\(di\"\n\
+define cthick \" ~ \"\n\
+define cmed \" ^ \"\n\
+define cthin \" ^ \"\n\
+define or_op \"or\"\n\
+define and_op \"and\"\n\
+define -+ \"+-\"\n\
+gsize 12\n\
+.EN\n\
+$4",&$0);}
+	;
+
+e_group	: Y_BEGIN e_eqstyle e_expr Y_END			{$$=x("$3",&$0);}
+	;
+
+e_lines	: e_group					{$$=x("\n#$1#\n",&$0);}
+	| e_lines e_group				{$$=x("$1\n#$2#\n",&$0);}
+	;
+
+e_pile	: e_group					{$$=x("{$1}",&$0);}
+	| e_pile e_group				{$$=x("% <$1> above % <$2>",&$0);}
+	;
+
+e_eqstyle	: /* empty */
+	| Y_EQSTYLE
+	;
+
+e_thing	: Y_GOESTO | Y_D | Y_EQ | Y_OP | Y_UNOP | Y_BINOP
+	| Y_LIM | Y_FUNC | Y_ATOM | Y_BAD | Y_OPEN | Y_CLOSE
+	| Y_INT | Y_ITER | Y_SPACE			{$$=x("$1",&$0);}
+	| Y_BEGIN Y_PILE e_eqstyle e_pile Y_END		{$$=x("$2 {$4}",&$0);}
+	| Y_BEGIN Y_PILE e_group Y_OVER e_group Y_END	{$$=x("% <$3> over % <$5>",&$0);}
+	| Y_ROOT e_group				{$$=x("sqrt {$2}",&$0);}
+	| Y_OPEN e_group Y_CLOSE			{$$=x("left $1 $2 right $3",&$0);}
+	;
+
+e_scr	: e_thing
+	| e_thing Y_SUP Y_BEGIN e_accs Y_END		{$$=x("$1 $4",&$0);}
+	| e_thing Y_SUB e_group				{$$=x("$1 $2 <$3>",&$0);}
+	| e_thing Y_SUP e_group				{$$=x("$1 $2 <$3>",&$0);}
+	| e_thing Y_SUP e_group Y_SUB e_group		{$$=x("$1 $4 <$5> $2 <$3>",&$0);}
+	| e_thing Y_SUB e_group Y_SUP e_group		{$$=x("$1 $2 <$3> $4 <$5>",&$0);}
+	;
+
+e_accs	: e_acc
+	| e_accs e_acc					{$$=x("$1 $2",&$0);}
+	;
+
+e_acc	: Y_DOT						{$$=x("dot",&$0);}
+	| Y_PRIME					{$$=x("prime",&$0);}
+	;
+	
+e_expr	: e_scr
+	| e_expr e_scr					{$$=x("$1 $2",&$0);}
+	;
+
+%%
+static char *parse_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/eq/RCS/eqparse.gra,v 1.12 1996/10/14 17:48:21 robr Exp $";
+
+ 
+ 
+#define NNODES 20              /* nodes to allocate at a time */
+
+/*NCHILDREN must be as large as the maximum number of components
+yacc will find on the right side of a rule */
+#define NCHILDREN 10            /* children per node */
+ 
+ 
+static struct node {
+    char *fmt;
+    struct ptr children[10];
+} *first_node, *next_node, *last_node;
+ 
+static struct node_table {
+    struct node *first;
+    struct node *last;
+    struct node_table *next;
+} *all_nodes, *cur_nodes;
+
+static struct strcache_t {
+    char *s;
+    struct strcache_t *next;
+} *strcache;
+
+static long posn;
+static struct eq *eqptr;
+static long which;
+static int roman_fnum, italic_fnum, symbol_fnum;
+
+/* the following only need to be inited once per process */
+static boolean statics_inited = FALSE;
+static struct font_afm *roman_afm, *italic_afm, *symbol_afm;
+static short *normal_encoding, *symbol_encoding;
+
+static void ptprint(FILE *file, struct ptr *ptr);
+
+static char *SnarfStr(int size)  
+{
+    struct strcache_t *tmp = (struct strcache_t *)malloc(sizeof(struct strcache_t));
+    tmp->next = strcache;
+    strcache = tmp;
+    tmp->s = (char *)malloc(size);
+    return tmp->s;
+}
+
+void eq::Parse(FILE *file, long w, long *width, long *height)
+{
+    extern int yydebug;
+    class eqparse *eqp=new eqparse;
+    if(eqp==NULL) {
+	fprintf(stderr, "Couldn't allocate memory for eqparse.\n");
+	return;
+    }
+    /* make initial table of nodes */
+    all_nodes = (struct node_table *)malloc (sizeof(struct node_table));
+    all_nodes->next = NULL;
+    all_nodes->first = (struct node *) calloc(NNODES, sizeof(struct node));
+    all_nodes->last = &(all_nodes->first[NNODES-1]);
+
+    cur_nodes = all_nodes;
+    next_node = all_nodes->first;
+
+    if (!statics_inited) {
+	statics_inited = TRUE;
+	roman_afm = print::GetPSFontAFM("Times-Roman");
+	italic_afm = print::GetPSFontAFM("Times-Italic");
+	symbol_afm = print::GetPSFontAFM("Symbol");
+	normal_encoding = print::EncodeISO8859();
+	symbol_encoding = print::EncodeAdobeSymbol();
+    }
+    roman_fnum = (-1);
+    italic_fnum = (-1);
+    symbol_fnum = (-1);
+    strcache = NULL;
+
+    eqptr = this;
+    which = w;
+    posn = -1;
+    if (!eqp->Parse(eq::Lex, eqp)) {
+	if (width)
+	    *width = (long)ToPS(value.width);
+	if (height)
+	    *height = (long)ToPS(value.height);
+	if (file) {
+	    ptprint(file, &value);
+	    fflush(file);
+	}
+    }
+
+    /* free all the nodes */
+    cur_nodes = all_nodes;
+    while (cur_nodes != NULL) {
+	struct node_table *temp;
+	if (cur_nodes->first) free (cur_nodes->first);
+	temp = cur_nodes->next;
+	free (cur_nodes);
+	cur_nodes = temp;
+    }
+    while (strcache) {
+	struct strcache_t *temp;
+	if (strcache->s)
+	    free(strcache->s);
+	temp = strcache->next;
+	free(strcache);
+	strcache = temp;
+    }
+    delete eqp;
+}
+
+/* x(fmt, a0) creates a new node in the cur_nodes table, giving it format fmt and children a0..a0+NCHILDREN, then returns a ptr to the new node. */ 
+static struct ptr x(char *fmt, struct ptr *a0)
+{
+    struct ptr ret;
+    register int i;
+ 
+    for (i=0; i<NCHILDREN; i++)
+        next_node->children[i] = a0[i];
+    next_node->fmt = fmt;
+    ret.isnode = TRUE;
+    ret.width = 0;
+    ret.height = 0;
+    ret.centerl = 0;
+    ret.offx = 0;
+    ret.offy = 0;
+    ret.p.n = next_node;
+    next_node += 1;
+
+    /* If the current table is full, allocate another and fill it. */
+    if (next_node > cur_nodes->last)
+        {
+	cur_nodes->next = (struct node_table *)malloc (sizeof(struct node_table));
+	cur_nodes = cur_nodes->next;
+	cur_nodes->next = NULL;
+	cur_nodes->first = (struct node *) calloc(NNODES, sizeof(struct node));
+	cur_nodes->last = &(cur_nodes->first[NNODES-1]);
+	next_node = cur_nodes->first;
+        }
+    return ret;
+}
+ 
+static int eqstyleval = 1;  /* 1=display, 0=text, -1=script, ... */
+
+#if 0
+#define is_in_table(addr,table) \
+    ((table)->first<=(addr) && (addr)<=(table)->last)
+
+/*
+ * Go over list of all tables of nodes.
+ * See if this address is in any of the tables.
+ */
+
+static int is_node(struct node *addr)
+
+{
+    struct node_table *this_c;
+    for (this_c = all_nodes; this_c != NULL; this_c = this_c->next)
+        {
+	if (is_in_table (addr, this_c)) return 1;
+        }
+    return 0;
+}
+#endif
+
+/* print a ptr. If it's a string, just output it; if it's a node, output its fmt string, substituting children (recursively) for "$N" substrings. */
+static void ptprint(FILE *file, struct ptr *ptr)
+{
+    if (ptr->isnode) {
+	register char *s;
+	if (which=='p') {
+	    if (ptr->offx || ptr->offy) {
+		fprintf(file, "%.2f %.2f translate\n", ToPS(ptr->offx), ToPS(ptr->offy));
+	    }
+	}
+	for (s = ptr->p.n->fmt;  *s;  s++) {
+	    if (*s == '$') {
+		register int i;
+		for (i=0; '0'<=s[1] && s[1]<='9'; s++)
+		    i = 10*i + s[1] - '0';
+		if (i<NCHILDREN)
+		    ptprint(file, &(ptr->p.n->children[i]));
+		else
+		    fprintf(stderr, "Too many children!\n");
+	    } else if (*s == '<') {
+		fputs("{", file);
+		eqstyleval--;
+	    } else if (*s == '>') {
+		eqstyleval++;
+		fputs("}", file);
+	    } else if (*s == '%') {
+/*
+                if (eqstyleval<=0)
+                    fprintf(file, "size -2");
+*/
+            } else
+                putc(*s, file);
+	}
+	if (which=='p') {
+	    if (ptr->offx || ptr->offy) {
+		fprintf(file, "%.2f %.2f translate\n", -ToPS(ptr->offx), -ToPS(ptr->offy));
+	    }
+	}
+    }
+    else {
+	if (ptr->p.sym->name) {
+	    if (which=='p') {
+		enum simple simp;
+		char *fontcode;
+		short *encoding=NULL;
+		if (ptr->p.sym->type == SIMPLE)
+		    simp = (enum simple)(ptr->p.sym->what);
+		else
+		    simp = MAX_simple;
+		switch (simp) {
+		    case SYMBOL:
+			fontcode = "eqFs";
+			break;
+		    case SYM:
+			fontcode = "eqFs";
+			encoding=AdobeSym_map;
+			break;
+		    case ITALIC:
+			fontcode = "eqFi";
+			break;
+		    case ROMAN:
+		    default:
+			fontcode = "eqFr";
+			break;
+		}
+		if(encoding==NULL  || ptr->p.sym->string==NULL) {
+			fprintf(file, "%s (%s) %.2f %.2f moveto show ", fontcode, 				ptr->p.sym->string?ptr->p.sym->string:"", ToPS(ptr->offx), 					ToPS(ptr->offy+BaseOff));
+		} else {
+			char buf[256], *d=buf;
+			unsigned char *p=(unsigned char *)ptr->p.sym->string;
+			if(simp==SYM && (*p=='V' ||  *p=='X')) {
+				if(*p=='V') p=(unsigned char *)"or";
+				else p=(unsigned char *)"and";
+				fontcode="eqFr";
+				fprintf(file, "%s (%s) %.2f %.2f moveto show ", fontcode, 				p, ToPS(ptr->offx), 					ToPS(ptr->offy+BaseOff));	
+			} else {
+				buf[0]='\0';
+				while(*p) {
+					sprintf(d, "%0.2x", encoding[*p]);
+					d=d+strlen(d);
+					p++;
+				}
+
+				fprintf(file, "%s <%s> %.2f %.2f moveto show ", fontcode, 				buf, ToPS(ptr->offx), 					ToPS(ptr->offy+BaseOff));
+			}
+		}
+	    }
+	    else {
+		fputs(ptr->p.sym->name, file);
+	    }
+	}
+    }
+}
+
+int eq::Lex(void *lrock, void *lval)
+{
+    YYSTYPE *pyylval=(YYSTYPE *)lval;
+    class eqparse *eqp=(class eqparse *)lrock;
+    register struct formula *f;
+    enum simple simp;
+    int ix, ch;
+    struct font_afm *afm;
+    short *encoding;
+    struct font_afm_char *charsize;
+
+    if (posn==-1) {
+        posn = 0;
+        return (eqp)->TranslateTokenNumber(which);
+    }
+    f = eqptr->Access(posn);
+    posn++;
+    if (f) {
+	pyylval->isnode = FALSE;
+        pyylval->p.sym = f->symbol;
+	if (which == 'p') {
+	    if (f->symbol->type == SIMPLE)
+		simp = (enum simple)(f->symbol->what);
+	    else
+		simp = MAX_simple;
+	    switch (simp) {
+		case SYMBOL:
+		    afm = symbol_afm;
+		    encoding = symbol_encoding;
+		break;
+		case SYM:
+		    afm = symbol_afm;
+		    encoding = AdobeSym_map;
+		break;
+		case ITALIC:
+		    afm = italic_afm;
+		    encoding = normal_encoding;
+		    break;
+		case ROMAN:
+		default:
+		    afm = roman_afm;
+		    encoding = normal_encoding;
+		    break;
+	    }
+	    pyylval->width = 0;
+	    if(f->symbol->string)   {
+		unsigned char *p=(unsigned char *)f->symbol->string;
+		if(simp==SYM && (*p=='V' || *p=='X')) {
+			if(*p=='V') p=(unsigned char *)"or";
+			else p=(unsigned char *)"and";
+			afm = roman_afm;
+			encoding = normal_encoding;
+		}
+		for (ix=0; p[ix]; ix++) {
+			ch = encoding[p[ix]];
+			charsize = (&(afm->ch[ch]));
+			if (charsize->numparts == print_SymbolChar)
+			    charsize = (&(symbol_afm->ch[charsize->u.symbolchar]));
+			pyylval->width += (long)charsize->x;
+		    }
+	    }
+	    pyylval->height = 1000;
+	    /*printf("<symbol %s (%s) is %d by %d>\n", f->symbol->name, f->symbol->string, pyylval->width, pyylval->height);*/
+	}
+	else {
+	    pyylval->width = 0;
+	    pyylval->height = 0;
+	}
+	pyylval->centerl = pyylval->height/2;
+	pyylval->offx = 0;
+	pyylval->offy = 0;
+        return  (eqp)->TranslateTokenNumber(f->symbol->y_genre);
+    } else {
+        return 0;
+    }
+}
+ 
+void eqparse::ErrorGuts(int severity, char *severityname, char *s)
+{
+    int i;
+    printf("%s:%s\n", severityname, s);
+    if (posn>=1) {
+        for (i=posn-1; !eqptr->Access( i)->has_hot_spot; i++);
+/*      eq_SetDot(eqptr, i, 0); */ /* does this ever get called? */
+    } else {
+        printf("totally malformed\n");
+    }
+    if(severity&parser_FREEMSG) free(s);
+}
+

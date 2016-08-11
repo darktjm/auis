@@ -1,0 +1,385 @@
+\begindata{text,539697688}
+\textdsversion{12}
+\template{default}
+\majorheading{ATK, Dynamic Loading and C++
+
+}\center{Rob Ryan
+
+robr@cmu.edu
+
+}
+\chapter{Introduction}
+
+In C, ATK was able to provide a simple means to extend the toolkit with new 
+functions and widgets via dynamically loaded code.   The key features were 
+auto-loading of code upon the first call and loading classes by name. 
+ These features allowed us to avoid excessive executable size in many 
+situations since code would not to be loaded until needed.  Auto-loading 
+and class loading by name also allowed a quick compile-debug cycle since 
+often only a few object files would need to be recompiled and re-linked. 
+ Without dynamic loading the compile-debug cycle was limited because link 
+times for the main executable were on the order of 5-10 minutes.  The 
+compile/link times for most dynamic objects are under a minute.
+
+
+In C++, the potential benefits of dynamic loading on executable size and 
+compile-debug times are even greater than under C.  Linking C++ code with 
+some compilers takes twice as long as with normal C code, due to the need 
+to arrange for constructors and destructors to be called.  Also executables 
+tend to be larger partly because the symbol names are much longer, and 
+partly because of the large number of inline functions which get replicated 
+in many object files.  (Particularly the view methods which are forwarded 
+to graphic.)
+
+
+\chapter{Issues in Dynamic Loading of C++ Code}
+
+The auto-loading feature has not been implemented for the C++ version of 
+ATK.  The auto-loading feature was made possible in the C version by the 
+implementation of macros which appeared to be normal function calls. These 
+macros arranged to load the requested code if necessary before actually 
+calling the function.  The code for a class which had not been statically 
+linked was thus loaded just before the first call to one of it's class 
+procedures (static member functions in C++) , or just before the first 
+object of the class was created.  Unfortunately since the syntax for C++ 
+method calls and object creation are quite different from C, a macro 
+approach is not possible unless the old C syntax is kept.  Our goals 
+included keeping ATK C++ code as 'normal' looking to C++ programmers as 
+possible, so the macro approach was rejected.  A lower level approach 
+implemented at the level of the linker could also provide auto-loading. 
+ The linker approach was rejected because it's implementation would 
+generally require assembly language and would be dependent on details of 
+the particular OS and of the C++ compiler used!  \
+
+
+
+Even loading classes by name turned out to be problematic to implement with 
+the full generality of the C version.  For the time being it has been 
+decided to allow dynamic loading of code only when it depends only on 
+classes linked into the main executable.  The primary issue is that any use 
+of a class (including derivation from) will usually generate undefined 
+symbols which must be resolved by linking against the appropriate library 
+or object file.  For HP-UX, Solaris, and AIX this could be handled by 
+linking the dynamic objects with one another.   Even this is more 
+restrictive than the C version of ATK, because it would not be possible to 
+independently dynamically load two classes which included calls to one 
+another.  Under SunOS 4.1.3 there is no way to do the inter-module linking 
+supported under the other OS's so dynamic objects can only depend on 
+classes in the main executable.  (It is 'supposed' to work, but is broken 
+on most versions of 4.1.3.) \
+
+
+
+A secondary issue encountered when dynamically loading C++ code is that 
+when any global or file scope object with a constructor or destructor is 
+present special functions must be called upon loading of the class and/or 
+upon the process exiting.  Handling this issue involves a compiler 
+dependency.  With some compilers this dependency is minor, but in others it 
+requires delving into the compiler documentation at best, or the generated 
+object files at worst.
+
+
+\section{Future Issues}
+
+In the future dynamic loading of C++ code is likely to involve even more 
+compiler dependencies than it does today.  The introduction of templates 
+and run time type identification both have implications for support of 
+dynamic loading.  For templates the compiler must somehow decide where to 
+generate the code for any instances of a particular template function or 
+type.    Today compilers typically do this with some explicit directive, or 
+by maintaining a "repository" containing the information on what templates 
+have been utilized.  In the case of the explicit directive the code is 
+generated at the point where the directive occurs, in the case of the 
+repository system it is done when an application is linked.  When dynamic 
+loading is involved the question becomes how to generate code for any 
+templates it uses, and how to avoid generating code in a dynamic object for 
+templates whose code has been generated for the main executable or a shared 
+library.    Run time type identification could complicate matters in that 
+it may be implemented with data structures built by the compiler at link 
+time, raising the question of how the system is made aware of dynamically 
+loaded classes.  In some implementations it might not be possible at all!
+
+
+\chapter{Building and Installing Dynamic Object Files }\section{\
+
+
+}The Imake rules used to produce dynamic object files have naturally 
+changed in the C++ version of ATK.  Two new features were introduced, first 
+multiple classes may be linked into the same dynamic object, second the ATK 
+libraries needed for a dynamic object will be computed automatically. 
+Normal C libraries must still be specified explicitly unless they are also 
+used by one or more of the automatically selected libraries.  When deciding 
+what to make dynamically loadable and how the programmer must remember that 
+a dynamic object can only refer to classes and functions defined in itself, 
+the base executable or a library.  If the programmer is using archive 
+libraries he should be careful to avoid situations where more than one 
+instance of the code and data for a library are present.  (This could be a 
+problem if the library uses local data.)
+
+
+Two rules are used to create dynamic objects:
+
+
+DynamicMultiObject(dobj,extraclasses,objs,libs,syslibs,extraargs)
+
+\bold{dobj}
+
+\leftindent{The name of one of the classes to be put in the dynamic object. 
+ The filename of the dynamic object will be dobj.+ (by default, the 
+extension can be overridden if necessary by the system.mcr file)}
+
+\bold{extraclasses}
+
+\leftindent{A space separated list of any other classes to be included in 
+the dynamic object.}
+
+\bold{objs}\leftindent{
+
+A space separated list of the object files to be used.}
+
+\bold{libs}\leftindent{
+
+A space separated list of full path names to any libraries needed. 
+ Libraries exporting only ATK classes may be omitted as genstatl will 
+automatically detect the need for them.}
+
+\bold{syslibs}
+
+	A space separated list of any system libraries needed, this list may 
+include -L and -l directives as needed.
+
+\bold{extraargs}
+
+\leftindent{Usually empty, but useful in additional arguments must be 
+passed to genstatl to produce the Imakefile.dyn which will actually build 
+the dynamic object.}
+
+
+DynamicObject(dobj,libs,syslibs,extraargs)
+
+Like DynamicMultiObject, except dealing only with one class defined in the 
+dynamic object.
+
+
+Two new rules are used to install dynamic objects:
+
+
+InstallDynamicObject(dobj,extraclasses,dest)
+
+Installs the file dobj.+ into the directory dest.  Also installs links to 
+dobj.+ in dest called name for each name listed in the extraclasses 
+argument.
+
+
+InstallDynamicObjectClass(dobj,dest)
+
+The same as InstallDynamicObject, except dealing only with one class in the 
+dynamic object.
+
+
+\chapter{Porting}\section{
+
+}The best place to start looking for clues on how to provide dynamic 
+loading for the C++ version of ATK is in the C version.  The C version code 
+will usually suffice for actually loading the code in, but investigation 
+with a debugger or nm may be necessary to discover how to run the 
+constructors and destructors for global and static objects.
+
+
+The C++ dynamic loading code resides in 
+overhead/dynlink/\{common,$(SYS_IDENT)\}.  The current systems for which 
+dynamic loading is supported include ix86_Linux, rs_aix3, and hp700_90. 
+ (There is no known reason why the hp700 implementation would not work on 
+an hp800 machine.) The common code includes several utilities for use in 
+implementing the adynlink and aexelink programs for the particular 
+architecture.  Currently all systems implement adynlink and aexelink even 
+though only ix86_Linux uses them.
+
+
+\subsection{DynamicMultiObjectTarget
+
+}A dynamic object is by default linked with the following rule from 
+andrew.rls.  This rule may be overridden in system.h if necessary.  It is 
+normally not used in hand-written Imakefiles, but is present in the 
+generated Imakefile produced when the DynamicMultiObject rule invokes 
+genstatl.  The DynamicMultiObject rule takes care of the housekeeping 
+necessary to know which ATK libraries need to be linked in, and which C and 
+ATK libraries those ATK libraries will need.
+
+
+#define	DynamicMultiObjectTarget(dobj, extraclasses, objs, libs, syslibs)	
+	@@\\
+
+all:: dobj.$(DYNEXT)							@@\\
+
+dobj.$(DYNEXT): objs libs					@@\\
+
+	$(RM) $(DYNMAIN).C;$(MKDYNMAIN) dobj extraclasses>$(DYNMAIN).C; $(CPPC) 
+$(CFLAGS) -c $(DYNMAIN).C; $(DYNLINKPROG) $(PREDYNFLAGS) $(CFLAGS)  -o 
+dobj.$(TMPDYNEXT) $(DYNMAIN).o objs libs syslibs $(POSTDYNFLAGS) $(LDFLAGS) 
+; $(RM) $(DYNMAIN).C $(DYNMAIN).o @@\\
+
+	$(DYNPOSTPROCESS) dobj.$(TMPDYNEXT) dobj.$(DYNEXT) DYNPOSTEXTRA	@@\\
+
+	@sh -c 'for i in extraclasses +++;  do  \\				@@\\
+
+		case $$i in +++) ;; *) (echo "Making local link for "$$i; \\			@@\\
+
+		$(RM) $$i.$(DYNEXT); \\			@@\\
+
+		$(LN) dobj.$(DYNEXT) $$i.$(DYNEXT)) esac; \\	@@\\
+
+		done; \\ @@\\
+
+		exit 0' \
+
+
+
+What does this monster do?  Read on...
+
+
+$(RM) $(DYNMAIN).C;$(MKDYNMAIN) dobj extraclasses>$(DYNMAIN).C; $(CPPC) 
+$(CFLAGS) -c $(DYNMAIN).C; \
+
+
+
+This line is generates a function which will be used to register dobj and 
+the extraclasses when the dynamic object is loaded.  The function is called 
+main by default, but may be overridden by setting MKDYNMAIN to 
+$(BASEDIR)/etc/mkdynmain - fooname.  The dynamic loading code will call 
+this function just after loading the object. DYNMAIN may be overridden in 
+system.mcr if the object file should be called something different. (By 
+default it is ,DynM.$$$$ so that the name fits in 14 characters and 
+includes the shell's pid to help ensure uniqueness.) \
+
+
+
+$(DYNLINKPROG) $(PREDYNFLAGS) $(CFLAGS)  -o dobj.$(TMPDYNEXT) $(DYNMAIN).o 
+objs libs syslibs $(POSTDYNFLAGS) $(LDFLAGS) \
+
+
+
+DYNLINKPROG defaults to $(LINKPREFIX) $(CPPC), but on systems requiring 
+adynlink it is set to $(BASEDIR)/etc/adynlink $(CPPC).  It may be necessary 
+to include $(LINKPREFIX) on some systems which need adynlink as well, in 
+this case it would appear as adynlink  $(LINKPREFIX)  $(CPPC).  The 
+LINKPREFIX is typically set to invoke the relativize program, this program 
+ensures that hard coded paths to dynamic libraries are not built into the 
+executable or dynamic object.
+
+
+The purpose of adynlink is to edit the link line as required for producing 
+a dynamic object, and to invoke the link command produced.  For example, 
+under Linux adynlink excludes from the actual link command any libraries of 
+ATK code which must be obtained from the base executable.  It also ensures 
+that any undefined symbols will be detected at link time.
+
+
+PREDYNFLAGS is empty by default and may be set to any flags needed by the 
+link program.
+
+
+CFLAGS is the usual list of flags passed to a compile or link invocation.
+
+
+dobj.$(TMPDYNEXT) is the name of the dynamic object to be produced.  If a 
+two step process is needed TMPDYNEXT should be -.  In this case a later 
+part of the rule will perform the post processing.
+
+
+$(DYNMAIN).o is automatically generated from the list of classes to be 
+included in the dynamic object.  It contains one function (called main by 
+default) which will call ATKregister for each of the classes.
+
+
+objs, libs, and syslibs are as for any link command.  \
+
+
+
+$(POSTDYNFLAGS) are any flags needed at this position for building dynamic 
+objects.
+
+
+$(LDFLAGS) are the usual flags passed into a link command.
+
+
+	$(DYNPOSTPROCESS) dobj.$(TMPDYNEXT) dobj.$(DYNEXT) DYNPOSTEXTRA	@@\\
+
+
+If any post linkage processing is needed it can be done here.  It should 
+process dobj.$(TMPDYNEXT) to produce dobj.$(DYNEXT).  By default 
+DYNPOSTPROCESS is set to @true so the command does nothing and doesn't 
+generate any output.  Any additional arguments needed by DYNPOSTPROCESS may 
+be included in the #define macro DYNPOSTEXTRA.
+
+
+	@sh -c 'for i in extraclasses +++;  do  \\				@@\\
+
+		case $$i in +++) ;; *) (echo "Making local link for "$$i; \\			@@\\
+
+		$(RM) $$i.$(DYNEXT); \\			@@\\
+
+		$(LN) dobj.$(DYNEXT) $$i.$(DYNEXT)) esac; \\	@@\\
+
+		done; \\ @@\\
+
+		exit 0' \
+
+
+
+This section makes a link for each of the class names other than dobj from 
+classname.+ to dobj.+.  This allows a reference to any of the included 
+classes to load the appropriate dynamic object.  This section probably 
+won't need to be modified at all.  If it is the corresponding section of 
+the InstallDynamicObject rule should be updated as well.
+
+
+\subsection{CPPDynProgramTarget
+
+}CPPDynProgramTarget is also not usually used directly in hand-written 
+Imakefiles, but via the Runapp rule.
+
+
+#define CPPDynProgramTarget(program, objs, libs, syslibs)		@@\\
+
+all:: program 							@@\\
+
+program: objs libs $(DYNEXELIBS)			@@\\
+
+	$(RM) $@						@@\\
+
+	$(AEXELINK) $(LINKPREFIX) $(CPPC) $(CPPFLAGS) $(CFLAGS) -o $@ objs libs 
+$(DYNEXELIBS) syslibs $(LDFLAGS)	@@\\
+
+clean:: ; $(RM) program
+
+
+AEXELINK is empty by default, but can be set to $(BASEDIR)/etc/aexelink if 
+needed.  For example under Linux it is used to generate the symbol table 
+used to resolve symbol references in dynamic objects.
+
+
+DYNEXELIBS is set to any libraries required by the dynamic loading code, by 
+default this includes libATKDynLoad and libATKLink from overhead/dynlink/*.
+
+
+\chapter{Conclusion}
+
+Considerable sacrifices in functionality are required to prevent undue 
+difficulty in implementing dynamic loading for new architectures. 
+ Nevertheless the dynamic loading support described here does provide the 
+critical support for dynamically loading new insets and proctable 
+functions. Several issues still need to be resolved however.  The benefits 
+of dynamic loading on executable size are limited by the restrictions 
+placed on what can be dynamically loaded, since many classes which could be 
+dynamically loaded under the C version cannot be in C++.  Also, currently 
+no general support is provided for using iostreams in dynamically loaded 
+code.  Future issues which will restrict the use and coding of dynamic 
+objects include templates and run time type identification.  We must hope 
+that C++ compiler vendors will address these issues with documentation and 
+APIs where appropriate.
+
+
+
+
+\enddata{text,539697688}

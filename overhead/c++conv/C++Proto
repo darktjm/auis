@@ -1,0 +1,52 @@
+#!/bin/csh -f
+
+set andrewdir = `andrewdirs andrewdir`
+set rnessrun = nessrun
+set conv_n = ${andrewdir}/lib/c++conv/h2c++h.n
+
+set clist = ()
+set hlist = ()
+set badlist = ()
+set other = ""
+set othertail = ""
+
+if ( ${#argv} == 0 ) then
+	echo "usage: C++Proto [ -c ] files ... --- classindexes ..."
+	exit 1
+endif
+
+while ( "$argv" != "" )
+set arg = $argv[1]
+if ( "$arg" == "---" ) then
+	set othertail = ( $argv )
+	set argv = "dummy"
+else if ( "$arg" == "-c" ) then
+	set other = "-c"
+else
+	set ext = $arg:e
+	if ( "$ext" == "h" ) then
+		set hlist = ( $hlist $arg )
+	else if ( "$ext" == "c" ) then
+		set clist = ( $clist $arg )
+	else
+		set badlist = ( $badlist $arg )
+	endif
+endif
+shift
+end
+
+if ( ${#badlist} != 0 ) then
+	echo "C++Proto: the following files were neither .h nor .c files:"
+	echo "   " $badlist
+	exit 1
+endif
+
+if ( ${#hlist} == 0 ) then
+	echo "C++Proto: No .h files were listed."
+	exit 1
+endif
+
+echo "C++Proto: converting: " $hlist
+echo "               using: " $clist
+
+exec $rnessrun $conv_n $other $clist $hlist $othertail

@@ -1,0 +1,953 @@
+\begindata{text,537746792}
+\textdsversion{12}
+\template{default}
+\majorheading{\bigger{\bigger{\bigger{\bigger{Imake Variables for Andrew \
+
+
+}}}}
+\bigger{Andrew User Interface System}
+
+V\bigger{ersion 8   (September 1996)
+
+}}
+
+
+\bold{\indent{\indent{\indent{\indent{Andrew Consortium
+
+School of Computer Science
+
+Carnegie Mellon University
+
+5000 Forbes Avenue
+
+Pittsburgh, PA 15213-3891
+
+USA}}}}
+
+}
+\indent{Phone:			\bold{(412) 268-6710}
+
+Fax:			\bold{(412) 268-5576}
+
+Web:			\bold{http://www.cs.cmu.edu/~AUIS}
+
+Demo:			\bold{finger @atk.cs.cmu.edu}
+
+Archives:		\bold{ftp.andrew.cmu.edu:  /pub/AUIS}
+
+Bugs:			\bold{\bold{info-andrew-bugs@andrew.cmu.edu
+
+}}Info & Subscriptions:	\bold{info-andrew-request@andrew.cmu.edu}}
+
+
+
+\indent{\indent{
+
+
+In the documentation, the source directory will be referred to as 
+\typewriter{$/} and the destination as \typewriter{$ANDREWDIR/}.
+
+}}
+\indent{\indent{If you are reading an all-ASCII version of this file, the 
+version in Andrew format is in the distribution at:}}
+
+
+\center{\typewriter{$ANDREWDIR/doc/ADMINISTRATOR/Imak}}\typewriter{\center{\
+\typewriter{e}}Vars.ez}\smaller{
+
+
+
+
+
+
+
+
+
+\smaller{\bigger{Copyright 1996 Carnegie Mellon University.  All rights 
+reserved. Please see further copyrights and disclaimer at the end of this 
+file.}}}
+
+\begindata{bp,537784136}
+Version 2
+n 0
+\enddata{bp,537784136}
+\view{bpv,537784136,0,0,0}
+
+\bigger{\bigger{\bold{Introduction}}}
+
+
+
+\bold{\bigger{1.  Variables of interest to authors of Imakefiles}}
+
+
+
+\bold{\bigger{2.  Variables which can be set in Imakefiles}}
+
+
+DEFINES
+
+LOCALINCLUDES
+
+
+OBJS the value should be the list of desired .o files
+
+these will be made any time the directory is made for target `all'
+
+
+
+\bold{\bigger{3.  Variables utilized by rules in andrew.rls}}
+
+	(these must be adjusted by port authors and site installers)
+
+
+\bold{\bigger{4.  Andrew program names }}\
+
+
+
+
+\bold{\bigger{5.  Non-Andrew program names utilized by rules in andrew.rls}}
+
+
+
+AFSAUDITLIB =	:imake.tmpl:
+
+AFSAUDITLIB = $(AFSBASEDIR)/lib/afs/libaudit.a	:imake.tmpl:
+
+
+AFSBASEDIR = /usr/andrew	:allsys.mcr:
+
+
+AFSSYSLIB = $(AFSBASEDIR)/lib/afs/libafssys.a	:imake.tmpl:
+
+AFSSYSLIB = $(AFSBASEDIR)/lib/afs/libsys.a	:imake.tmpl:
+
+
+AFSUTILS = $(BASEDIR)/lib/libafs.a	:imake.tmpl:
+
+AFSUTILS = $(BASEDIR)/lib/libafs.a $\{AFSBASEDIR\}/lib/afs/util.a	
+:imake.tmpl:
+
+
+ALL_DEFINES = $(STD_DEFINES) $(DEFINES)	:imake.tmpl:
+
+
+ALL_INCLUDES = -I. $(LOCALINCLUDES) $(INCLUDES)	:imake.tmpl:
+
+
+AR = ar clq	:allsys.mcr:
+
+
+ARDEL = ar d	:allsys.mcr:
+
+
+AS = as	:allsys.mcr:
+
+
+ASMPP_CC = $(CC) -E	:allsys.mcr:
+
+ASMPP_CC = $(CC) -E	:allsys.mcr:
+
+ASMPP_CC = $(CPP)	:allsys.mcr:
+
+ASMPP_CC = $(CPP)	:allsys.mcr:
+
+
+AS_FLAGS =	:allsys.mcr:
+
+AS_FLAGS =	:allsys.mcr:
+
+AS_FLAGS =	:allsys.mcr:
+
+AS_FLAGS = -nocpp	:allsys.mcr:
+
+
+ATKDYNEXTM=+	:allsys.mcr:
+
+ATKDYNPREFIXM=	:allsys.mcr:
+
+
+ATKLIBEXTM=a	:allsys.mcr:
+
+
+ATKLIBFLAGS = -d '$(BASEDIR)/etc/alibexp'	:ix86_Linux/system.mcr:
+
+ATKLIBFLAGS = -d '$(BASEDIR)/etc/alibexp'	:pmax_ul4/system.mcr:
+
+ATKLIBFLAGS = -d '$(BASEDIR)/etc/alibexp'	:sun4_41/system.mcr:
+
+ATKLIBFLAGS = -s	:ix86_Linux/system.mcr:
+
+ATKLIBFLAGS=	:hp700_90/system.mcr:
+
+ATKLIBFLAGS=-s	:hp700_90/system.mcr:
+
+ATKLIBFLAGS=-s	:rs_aix3/system.mcr:
+
+ATKLIBLDARGS = -L/usr/lpp/xlC/lib -lC -lc	:rs_aix3/system.mcr:
+
+ATKLIBLDARGS=$(GPPCSTDLIB) $(GCCLIB)  -lc	:allsys.mcr:
+
+
+ATKTMPDYNEXTM=+	:allsys.mcr:
+
+ATKTMPDYNEXTM=-	:pmax_ul4/system.mcr:
+
+
+AWK = awk	:allsys.mcr:
+
+
+BASEDIR = DEFAULT_ANDREWDIR_ENV	:allsys.mcr:
+
+
+/* BSDLIB = -lbsd */	:rs_aix3/system.mcr:
+
+
+CC = cc	:rs_aix3/system.mcr:
+
+CC = cc -Dvoid=int -G 0	:pmax_41/system.mcr:
+
+CC = cc -Dvoid=int -G 0	:pmax_mach/system.mcr:
+
+CC = gcc	:allsys.mcr:
+
+CC = gcc	:pmax_ul4/system.mcr:
+
+CC = gcc	:rs_aix3/system.mcr:
+
+CC=cc	:hp700_90/system.mcr:
+
+
+CCNOG0 = cc -Dvoid=int	:pmax_41/system.mcr:
+
+CCNOG0 = cc -Dvoid=int	:pmax_mach/system.mcr:
+
+CCNOG0 = gcc	:pmax_ul4/system.mcr:
+
+
+CDEBUGFLAGS =	:rs_aix3/system.mcr:
+
+CDEBUGFLAGS = 	:hp700_90/system.mcr:
+
+CDEBUGFLAGS = 	:ix86_Linux/system.mcr:
+
+CDEBUGFLAGS = 	:sun4_41/system.mcr:
+
+CDEBUGFLAGS = -O	:allsys.mcr:
+
+CDEBUGFLAGS=	:hp700_90/system.mcr:
+
+CDEBUGFLAGS=	:sun4_41/system.mcr:
+
+
+set CFILES=`/bin/ls *.c`	:depend.csh:
+
+
+CFLAGS = $(COMPILERFLAGS) $(CDEBUGFLAGS) $(ALL_INCLUDES) $(ALL_DEFINES)	
+:imake.tmpl:
+
+
+CHMODW = chmod +w	:allsys.mcr:
+
+
+CLASS = $\{BASEDIR\}/bin/class	:allsys.mcr:
+
+
+CLASSINCLUDES = 	:allsys.mcr:
+
+
+CLIB = /lib/libc.a	:allsys.mcr:
+
+CLIB = /usr/cs/lib/libc.a	:allsys.mcr:
+
+
+COMMON = "/afs/.andrew.cmu.edu/common" :ImakeMacros.d:
+
+
+COMPILERFLAGS =$(ECOMPFLAGS) -Aa -D_HPUX_SOURCE -Dhpux -Dunix $(PICFLAG)	
+:hp700_90/system.mcr:
+
+COMPILERFLAGS =  -Wl,-D,1000000	:pmax_mach/system.mcr:
+
+COMPILERFLAGS =$(ECOMPFLAGS) $(PICFLAG)	:sun4_41/system.mcr:
+
+COMPILERFLAGS="-Wl,-D,1000000"	:pmax_ul4/system.mcr:
+
+
+CP = cp	:allsys.mcr:
+
+
+CPP = /lib/cpp	:allsys.mcr:
+
+
+CPPC = /usr/bin/CC  -D__STDC__ +T	:hp700_90/system.mcr:
+
+CPPC = g++	:allsys.mcr:
+
+CPPC = g++	:ix86_Linux/system.mcr:
+
+CPPC = g++	:sun4_41/system.mcr:
+
+CPPC = xlC -qlanglvl=extended	:rs_aix3/system.mcr:
+
+
+CPPC_DEFINES = $(STD_CPPC_DEFINES) $(DEFINES)	:imake.tmpl:
+
+
+set CPPFILES=`/bin/ls *.C`	:depend.csh:
+
+
+CPPFLAGS = $(COMPILERFLAGS) $(CDEBUGFLAGS) $(CPPINCLUDES) $(ALL_INCLUDES) 
+$(CPPC_DEFINES)	:imake.tmpl:
+
+
+CRT0PATH = /lib/crt0.o	:allsys.mcr:
+
+CRT0PATH = /usr/cs/lib/crt0.o	:allsys.mcr:
+
+
+CSHELL = /bin/csh	:allsys.mcr:
+
+
+set DEFINES=" "	:depend.csh:
+
+set DEFINES="$3"	:depend.csh:
+
+
+set DEPEND=$1	:depend.csh:
+
+
+set DEPENDS=.depends	:depend.csh:
+
+
+set C_DEPENDS=/tmp/Dep2_$$	:depend.csh:
+
+
+DEPENDSCRIPT = $(TOP)/config/depend.csh	:allsys.mcr:
+
+
+DESLIB = $(AFSBASEDIR)/lib/libdes.a	:imake.tmpl:
+
+
+DESTDIR = $\{BASEDIR\}	:allsys.mcr:
+
+
+DOINDEX = 	:allsys.mcr:
+
+
+DOTDOTIMAKE_CMD = $(IMAKE) -Timake.tmpl -I. -I../$(IRULESRC) -s Makefile	
+:imake.tmpl:
+
+
+DYNEXELIBS =	:allsys.mcr:
+
+DYNEXELIBS = $(BASEDIR)/lib/libATKDynLoad.a $(BASEDIR)/lib/libATKLink.a	
+:allsys.mcr:
+
+
+DYNLINKPROG = $(LINKPREFIX) $(CPPC)	:allsys.mcr:
+
+DYNLINKPROG = CLASSPATH=$(LOCALCLASSPATH)$(BASEDIR)/lib/atk;export 
+CLASSPATH;$(BASEDIR)/etc/adynlink $(CPPC)	:ix86_Linux/system.mcr:
+
+DYNLINKPROG =ANDREWDIR=$(BASEDIR);export ANDREWDIR;$(BASEDIR)/etc/adynlink 
+$(CPPC) $(ATKDYNDEBUG)	:pmax_ul4/system.mcr:
+
+DYNLINKPROG =ANDREWDIR=$(BASEDIR);export ANDREWDIR;$(BASEDIR)/etc/adynlink 
+$(GCCLIBDIR)/ld	:sun4_41/system.mcr:
+
+DYNLINKPROG =gcc-elf -shared	:ix86_Linux/system.mcr:
+
+
+DYNMAIN = ,DynM.$$$$	:allsys.mcr:
+
+
+DYNPOSTPROCESS =@true	:allsys.mcr:
+
+
+DYN_LINK_LIB = -ldl	:allsys.mcr:
+
+DYN_LINK_LIB = -ldl	:sun4_41/system.mcr:
+
+DYN_LINK_LIB = -ldld	:hp700_90/system.mcr:
+
+DYN_LINK_LIB=-ldl -lm	:ix86_Linux/system.mcr:
+
+
+ECOMPFLAGS=	:hp700_90/system.mcr:
+
+ECOMPFLAGS=	:ix86_Linux/system.mcr:
+
+ECOMPFLAGS=	:sun4_41/system.mcr:
+
+ECOMPFLAGS= -Wl,+s -Wl,+b,\\:	:hp700_90/system.mcr:
+
+
+FDBBDF = $(BASEDIR)/bin/fdbbdf	:allsys.mcr:
+
+
+FDBWM = $(BASEDIR)/bin/fdbwm	:allsys.mcr:
+
+
+FULLATKDLIBDIR=$(DESTDIR)ATKDLIBDIR	:allsys.mcr:
+
+
+GCCLIB = "/usr/lib/gcc-lib/i486-linux/2.5.8/libgcc.a"	
+:ix86_Linux/system.mcr:
+
+GCCLIB = -lC	:hp700_90/system.mcr:
+
+GCCLIB = /usr/lib/libC.a	:hp700_90/system.mcr:
+
+
+GCCLIBDIR = "/usr/local/lib/gcc-lib/sparc-sun-sunos4.1.3/2.5.8"	
+:sun4_41/system.mcr:
+
+
+GENREFS = $(BASEDIR)/etc/grefs	:allsys.mcr:
+
+
+IMAKE = $(XUTILDIR)/imake	:allsys.mcr:
+
+IMAKE_CMD = $(IMAKE) -Timake.tmpl -I. -I$(IRULESRC) -s Makefile	:imake.tmpl:
+
+IMAKE_DYNCMD = $(IMAKE) -Timake.tmpl -I. -I$(IRULESRC) -s Makefile.dyn -f 
+Imakefile.dyn	:imake.tmpl:
+
+IMAKE_LIBCMD = $(IMAKE) -Timake.tmpl -I. -I$(IRULESRC) -s Makefile.lib -f 
+Imakefile.lib	:imake.tmpl:
+
+IMAKE_RUNAPPCMD = $(IMAKE) -Timake.tmpl -I. -I$(IRULESRC) -s Makefile.run 
+-f Imakefile.run	:imake.tmpl:
+
+
+set INCLUDES="$2"	:depend.csh:
+
+INCLUDES =  -I$\{BASEDIR\}/include/atk -I$\{BASEDIR\}/include 
+-I$(AFSBASEDIR)/include -I$\{XINCDIR\}	:allsys.mcr:
+
+INCLUDES =  -I$\{BASEDIR\}/include/atk -I$\{BASEDIR\}/include 
+-I$\{XINCDIR\}	:allsys.mcr:
+
+
+INSTALL = $(BASEDIR)/etc/install	:allsys.mcr:
+
+INSTALL = install	:allsys.mcr:
+
+
+INSTAPPFLAGS = $(INSTMODEFLAGS) 0444	:imake.tmpl:
+
+INSTAPPFLAGS = -c -m 0444	:ImakeMacros.d:
+
+
+INSTCLASSPROGFLAGS = $(INSTPROGFLAGS)	:imake.tmpl:
+
+
+INSTDOFLAGS = $(INSTMODEFLAGS) 0444	:imake.tmpl:
+
+INSTDOFLAGS = $(INSTMODEFLAGS) 0555	:imake.tmpl:
+
+INSTDOFLAGS = -c -m 0444\}	:ImakeMacros.d:
+
+
+INSTINCFLAGS = $(INSTMODEFLAGS) 0444	:imake.tmpl:
+
+INSTINCFLAGS = -c -m 0444	:ImakeMacros.d:
+
+
+INSTLIBFLAGS = $(INSTMODEFLAGS) 0664	:imake.tmpl:
+
+INSTLIBFLAGS = $(INSTMODEFLAGS) 0775	:imake.tmpl:
+
+INSTLIBFLAGS = -c -m 0664	:ImakeMacros.d:
+
+
+INSTMANFLAGS = $(INSTMODEFLAGS) 0444	:imake.tmpl:
+
+INSTMANFLAGS = -c -m 0444	:ImakeMacros.d:
+
+
+INSTMODEFLAGS = -c -m	:imake.tmpl:
+
+
+INSTPROGFLAGS = $(INSTMODEFLAGS) 0555	:imake.tmpl:
+
+INSTPROGFLAGS = -c -m 0555	:ImakeMacros.d:
+
+
+INSTPROGRWFLAGS = $(INSTMODEFLAGS) 0755	:imake.tmpl:
+
+INSTPROGRWFLAGS = -c -m 0755	:ImakeMacros.d:
+
+
+INSTUIDFLAGS = $(INSTMODEFLAGS) 4755	:imake.tmpl:
+
+INSTUIDFLAGS = -c -m 4755	:ImakeMacros.d:
+
+
+IRULESRC = $(TOP)/config	:allsys.mcr:
+
+
+JPEGLIB =$(JPEGLIBDIR)/libjpeg.a	:allsys.mcr:
+
+
+JPEGLIBDIR=$(BASEDIR)/lib	:allsys.mcr:
+
+
+KRBLIB = 	:allsys.mcr:
+
+
+LD = ld	:allsys.mcr:
+
+
+LDFLAGS = $(RESOLVLIB) $(SYS_LIBRARIES) \\	:imake.tmpl:
+
+
+LEX = flex	:ix86_Linux/system.mcr:
+
+LEX = lex	:allsys.mcr:
+
+
+LEXLIB = -fl	:allsys.mcr:
+
+LEXLIB = -lfl	:ix86_Linux/system.mcr:
+
+LEXLIB = -ll	:allsys.mcr:
+
+
+LINKPREFIX = $(BASEDIR)/etc/relativize $(LOCALNORELS) $(NORELS) ---	
+:hp700_90/system.mcr:
+
+LINKPREFIX = $(BASEDIR)/etc/relativize $(LOCALNORELS) $(NORELS) ---	
+:ix86_Linux/system.mcr:
+
+LINKPREFIX = $(BASEDIR)/etc/relativize $(LOCALNORELS) $(NORELS) ---	
+:sun4_41/system.mcr:
+
+LINKPREFIX=$(BASEDIR)/etc/relativize $(LOCALNORELS) $(NORELS) --- 
+	:rs_aix3/system.mcr:
+
+
+LINT = lint	:allsys.mcr:
+
+
+LINTLIBFLAG = -C	:allsys.mcr:
+
+
+LINTOPTS = -axz	:allsys.mcr:
+
+
+LN = ln -s	:allsys.mcr:
+
+
+LOCALDIR = DEFAULT_LOCALDIR_ENV	:allsys.mcr:
+
+
+LOCALPACKAGEDIRS=	:allsys.mcr:
+
+
+LS = ls	:allsys.mcr:
+
+
+MACH = and	:allsys.mcr:
+
+
+MACROFILE = MacroIncludeFile	:imake.tmpl:
+
+
+MAKE = make	:allsys.mcr:
+
+
+MAKEDO = 	:allsys.mcr:
+
+
+MAKEDODEBUG = 	:allsys.mcr:
+
+
+MAKEDOFLAGS = 	:allsys.mcr:
+
+
+MAKE_SUBDIR=$$i;\\\\	:ImakeMacros.d:
+
+
+MALLOCALIGNMENT = 4	:allsys.mcr:
+
+MALLOCALIGNMENT = 8	:hp700_90/system.mcr:
+
+MALLOCALIGNMENT = 8	:ix86_Linux/system.mcr:
+
+MALLOCALIGNMENT = 8	:sun4_41/system.mcr:
+
+
+MALLOCLIB = 	:imake.tmpl:
+
+MALLOCLIB = $(BASEDIR)/lib/libmalloc.a	:imake.tmpl:
+
+MALLOCLIB = $(BASEDIR)/lib/libplumber.a	:imake.tmpl:
+
+
+MATHLIB =	:hp700_90/system.mcr:
+
+MATHLIB =	:sun4_41/system.mcr:
+
+MATHLIB = -lm	:allsys.mcr:
+
+
+MFLAGS = -$(MAKEFLAGS)	:imake.tmpl:
+
+
+MIPS_GSIZE_SCRIPT = $(DESTDIR)/etc/mips_gsize.awk	:pmax_41/system.mcr:
+
+MIPS_GSIZE_SCRIPT = $(DESTDIR)/etc/mips_gsize.awk	:pmax_mach/system.mcr:
+
+MIPS_GSIZE_SCRIPT = $(DESTDIR)/etc/mips_gsize.awk	:pmax_ul4/system.mcr:
+
+
+MIPS_GS_FILE = $(DESTDIR)/etc/mips_glspace.c	:pmax_41/system.mcr:
+
+MIPS_GS_FILE = $(DESTDIR)/etc/mips_glspace.c	:pmax_mach/system.mcr:
+
+MIPS_GS_FILE = $(DESTDIR)/etc/mips_glspace.c	:pmax_ul4/system.mcr:
+
+
+MKDYNMAIN = $(BASEDIR)/etc/mkdynmain	:allsys.mcr:
+
+MKDYNMAIN = $(BASEDIR)/etc/mkdynmain - ATK_EntryFunction	
+:hp700_90/system.mcr:
+
+MKDYNMAIN = $(BASEDIR)/etc/mkdynmain -ctor -main	:pmax_ul4/system.mcr:
+
+MKDYNMAIN=$(BASEDIR)/etc/mkdynmain - ATK_EntryFunction	:sun4_41/system.mcr:
+
+MKDYNMAIN=$(BASEDIR)/etc/mkdynmain -ctor	:ix86_Linux/system.mcr:
+
+
+MKPARSER = $(BASEDIR)/bin/mkparser	:imake.tmpl:
+
+
+MKPARSERCLASS = $(BASEDIR)/bin/mkparserclass	:imake.tmpl:
+
+
+MV = mv	:allsys.mcr:
+
+
+NETLIBS =	:allsys.mcr:
+
+
+$(MAKE) subdirMakefiles NEWTOP=../ \\\\	:ImakeMacros.d:
+
+
+NM = nm	:allsys.mcr:
+
+
+OLDXLIB = $(XLIBDIR)/liboldX.a	:allsys.mcr:
+
+
+OSSUPPORT= ossupport	:ix86_Linux/system.mcr:
+
+
+PICFLAG=	:hp700_90/system.mcr:
+
+PICFLAG=	:ix86_Linux/system.mcr:
+
+PICFLAG=	:sun4_41/system.mcr:
+
+PICFLAG= +Z	:hp700_90/system.mcr:
+
+
+POSTDYNFLAGS = -L$(BASEDIR)/dlib/atk	:allsys.mcr:
+
+POSTDYNFLAGS=	:ix86_Linux/system.mcr:
+
+POSTDYNFLAGS= -L$(BASEDIR)/lib/dynlink	:pmax_ul4/system.mcr:
+
+POSTDYNFLAGS= -lg++ -lc -lgcc -lc	:ix86_Linux/system.mcr:
+
+POSTDYNFLAGS=-L$(GCCLIBDIR) -lgcc	:sun4_41/system.mcr:
+
+
+PREDYNFLAGS = -Wl,-r,	:pmax_ul4/system.mcr:
+
+PREDYNFLAGS=	:ix86_Linux/system.mcr:
+
+PREDYNFLAGS=	:rs_aix3/system.mcr:
+
+PREDYNFLAGS= -Wl,-e,_main,-r,-x -nostdlib	:ix86_Linux/system.mcr:
+
+PREDYNFLAGS= -b	:hp700_90/system.mcr:
+
+
+PRSLIB =	:imake.tmpl:
+
+PRSLIB = 	:imake.tmpl:
+
+PRSLIB = $(AFSBASEDIR)/lib/afs/libprot.a \\	:imake.tmpl:
+
+PRSLIB = $(AFSBASEDIR)/lib/afs/libprot.a \\	:imake.tmpl:
+
+
+PWD=`pwd` ; \\\\	:ImakeMacros.d:
+
+
+RANLIB = echo ranlib is not needed this system	:rs_aix3/system.mcr:
+
+RANLIB = ranlib	:allsys.mcr:
+
+
+REFSNM = /bin/nm	:allsys.mcr:
+
+
+REGISTER=$(BASEDIR)/bin/cregister	:allsys.mcr:
+
+
+RESOLVLIB =	:allsys.mcr:
+
+
+RM = rm -f	:allsys.mcr:
+
+
+SCRIBE = scribe	:allsys.mcr:
+
+
+SED = sed	:allsys.mcr:
+
+
+SHARED_LIB_PATH = -L$\{BASEDIR\}/lib	:rs_aix3/system.mcr:
+
+
+SHELL = /bin/sh	:allsys.mcr:
+
+SHELL=/bin/sh	:rs_aix3/system.mcr:
+
+
+SHLIBLDFLAGS= -b -E	:hp700_90/system.mcr:
+
+
+SORT = sort	:allsys.mcr:
+
+
+STDPACKAGEDIRS=$(BASEDIR)/lib/packages $(BASEDIR)/lib/packages/atk	
+:allsys.mcr:
+
+
+STD_CPPC_DEFINES = -DAIX -D_POSIX_SOURCE -D_ALL_SOURCE	:rs_aix3/system.mcr:
+
+
+/*       STD_DEFINES =  "-Wl,-D,1000000" */	:pmax_ul4/system.mcr:
+
+STD_DEFINES =	:allsys.mcr:
+
+STD_DEFINES = 	:pmax_ul4/system.mcr:
+
+STD_DEFINES =  "-Wl,-D,1000000"	:pmax_41/system.mcr:
+
+STD_DEFINES = -DAIX -D_POSIX_SOURCE -D_ALL_SOURCE	:rs_aix3/system.mcr:
+
+
+SUPLIBS =	:allsys.mcr:
+
+
+SYSTEM_H_FILE = hp700_90/system.h	:hp700_90/system.mcr:
+
+SYSTEM_H_FILE = ix86_Linux/system.h	:ix86_Linux/system.mcr:
+
+SYSTEM_H_FILE = pmax_41/system.h	:pmax_41/system.mcr:
+
+SYSTEM_H_FILE = pmax_mach/system.h	:pmax_mach/system.mcr:
+
+SYSTEM_H_FILE = pmax_ul4/system.h	:pmax_ul4/system.mcr:
+
+SYSTEM_H_FILE = rs_aix3/system.h	:rs_aix3/system.mcr:
+
+SYSTEM_H_FILE = sun4_41/system.h	:sun4_41/system.mcr:
+
+
+SYS_CONFDIR = hp700_90	:hp700_90/system.mcr:
+
+SYS_CONFDIR = ix86_Linux	:ix86_Linux/system.mcr:
+
+SYS_CONFDIR = rs_aix3	:rs_aix3/system.mcr:
+
+SYS_CONFDIR = sun4_41	:sun4_41/system.mcr:
+
+SYS_CONFDIR= pmax_ul4	:pmax_ul4/system.mcr:
+
+
+SYS_IDENT = hp700	:hp700_90/system.mcr:
+
+SYS_IDENT = ix86_Linux	:ix86_Linux/system.mcr:
+
+SYS_IDENT = pmax_41	:pmax_41/system.mcr:
+
+SYS_IDENT = pmax_mach	:pmax_mach/system.mcr:
+
+SYS_IDENT = pmax_ul4	:pmax_ul4/system.mcr:
+
+SYS_IDENT = rs_aix3	:rs_aix3/system.mcr:
+
+SYS_IDENT = sun4_41	:sun4_41/system.mcr:
+
+
+SYS_LIBRARIES = $(BASEDIR)/lib/libossup.a	:rs_aix3/system.mcr:
+
+SYS_LIBRARIES = $(DESTDIR)/lib/libatkos.a	:ix86_Linux/system.mcr:
+
+SYS_LIBRARIES = $(DESTDIR)/lib/libatkos.a $(DESTDIR)/lib/libossup.a	
+:hp700_90/system.mcr:
+
+SYS_LIBRARIES = $(DESTDIR)/lib/libossup.a */	:sun4_41/system.mcr:
+
+
+SYS_OS_ARCH = aix_3	:rs_aix3/system.mcr:
+
+SYS_OS_ARCH = dec_mach	:pmax_mach/system.mcr:
+
+SYS_OS_ARCH = dec_mips	:pmax_41/system.mcr:
+
+SYS_OS_ARCH = dec_mips	:pmax_ul4/system.mcr:
+
+SYS_OS_ARCH = hp_pa_risc_90	:hp700_90/system.mcr:
+
+SYS_OS_ARCH = ix86_Linux	:ix86_Linux/system.mcr:
+
+SYS_OS_ARCH = sun_sparc_41	:sun4_41/system.mcr:
+
+
+TAGS = ctags	:allsys.mcr:
+
+
+TESTING_CFLAGS = -DTESTINGONLYTESTING $(CFLAGS)	:imake.tmpl:
+
+
+TIFFLIB = $(TIFFLIBDIR)/libtiff.a	:allsys.mcr:
+
+
+TIFFLIBDIR=$(BASEDIR)/lib	:allsys.mcr:
+
+
+TMPDYNEXT=$(DYNEXT)	:hp700_90/system.mcr:
+
+TMPDYNEXT=+	:ix86_Linux/system.mcr:
+
+TMPDYNEXT=-	:ix86_Linux/system.mcr:
+
+
+set TMP_MKFILE=/tmp/Dep1_$$	:depend.csh:
+
+
+TOP = TOPDIR	:allsys.mcr:
+
+
+TR = tr	:allsys.mcr:
+
+
+UTILLIB = $(BASEDIR)/lib/libutil.a $(BASEDIR)/lib/libafs.a	:imake.tmpl:
+
+UTILLIB = $(BASEDIR)/lib/libutil.a \\	:imake.tmpl:
+
+
+XBASEDIR = 	:allsys.mcr:
+
+
+XBINDIR = /usr/bin/X11	:allsys.mcr:
+
+XBINDIR = /usr/bin/X11	:hp700_90/system.mcr:
+
+XBINDIR = /usr/bin/X11	:ix86_Linux/system.mcr:
+
+XBINDIR = /usr/local/bin	:sun4_41/system.mcr:
+
+
+XCOMM         JPEGINCLUDES = $\{BASEDIR\}/include	:allsys.mcr:
+
+XCOMM         TIFFINCLUDES = -I$\{BASEDIR\}/include	:allsys.mcr:
+
+
+XFC = /usr/bin/X11/bdftopcf	:hp700_90/system.mcr:
+
+XFC = /usr/bin/X11/bdftopcf	:ix86_Linux/system.mcr:
+
+XFC = /usr/local/bin/bdftopcf	:sun4_41/system.mcr:
+
+
+XINCDIR = $(XBASEDIR)/usr/include	:allsys.mcr:
+
+XINCDIR = /usr/include	:ix86_Linux/system.mcr:
+
+XINCDIR = /usr/include	:sun4_41/system.mcr:
+
+XINCDIR = /usr/include/X11R5	:hp700_90/system.mcr:
+
+
+XLIBDIR = $(XBASEDIR)/usr/lib	:allsys.mcr:
+
+XLIBDIR = /usr/X386/lib	:ix86_Linux/system.mcr:
+
+XLIBDIR = /usr/lib/X11R5	:hp700_90/system.mcr:
+
+XLIBDIR = /usr/local/lib	:sun4_41/system.mcr:
+
+
+XMAKEDEPEND = $(XUTILDIR)/makedepend	:allsys.mcr:
+
+XMAKEDEPEND=$(XUTILDIR)/gccmakedep	:ix86_Linux/system.mcr:
+
+
+XMKFONTDIR = $(XUTILDIR)/mkfontdir	:ix86_Linux/system.mcr:
+
+
+XSRCDIR = 	:allsys.mcr:
+
+
+XUTILDIR = /usr/bin/X11	:allsys.mcr:
+
+XUTILDIR = /usr/bin/X11	:hp700_90/system.mcr:
+
+XUTILDIR = /usr/bin/X11	:ix86_Linux/system.mcr:
+
+XUTILDIR = /usr/local/bin	:sun4_41/system.mcr:
+
+
+YACC = yacc	:allsys.mcr:
+
+YACC=yacc	:hp700_90/system.mcr:
+
+YACC=yacc	:sun4_41/system.mcr:
+
+\begindata{bp,537787800}
+Version 2
+n 0
+\enddata{bp,537787800}
+\view{bpv,537787800,1,0,0}
+\smaller{Copyrights for this file and the entire Andrew User Interface 
+System:
+
+
+\leftindent{Copyright Carnegie Mellon University 1996 - All Rights Reserved
+
+Additional copyright information can be found in config/COPYRITE.bls, 
+config/COPYRITE.att, and config/COPYRITE.img in both the source and 
+destination areas. This product includes software developed by the
+
+University of California, Berkeley and its contributors.}
+
+
+$Disclaimer: 
+# Permission to use, copy, modify, and distribute this software and its 
+# documentation for any purpose and without fee is hereby granted, provided 
+# that the above copyright notice appear in all copies and that both that 
+# copyright notice and this permission notice appear in supporting 
+# documentation, and that the name of IBM not be used in advertising or 
+# publicity pertaining to distribution of the software without specific, 
+# written prior permission. 
+#                         
+# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# 
+#  $\
+}\enddata{text,537746792}

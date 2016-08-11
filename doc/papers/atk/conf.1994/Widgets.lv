@@ -1,0 +1,315 @@
+\begindata{text,537938800}
+\textdsversion{12}
+\template{default}
+\section{
+
+}\bigger{\bigger{\bigger{\section{
+
+\center{\underline{Widgets}}}
+
+
+
+Widget is
+
+
+	Unit building block for applications
+
+
+	E. g., button, text entry field, ...
+
+
+
+\subsection{Requirements -  User apparent
+
+}
+	Cut/paste
+
+	Search-able
+
+	Persistent storage
+
+	Mail-able
+
+	Printing
+
+	Internationalization
+
+	Attractive and intuitive default look and feel
+
+	Optional Motif look and feel
+
+	Keyboard control of all functions  \
+
+
+		(in addition to mouse control)
+
+	Continuous and clear feedback depicting state
+
+
+
+
+
+
+
+
+
+\begindata{bp,537815000}
+\enddata{bp,537815000}
+\view{bpv,537815000,0,0,0}
+
+
+\subsection{Requirements - Author  \
+
+
+	}Construct applications using widgets
+
+	Customize look and feel  \
+
+
+	Full access and control via \
+
+
+		C++ code
+
+		resource file
+
+		meta-x type interface
+
+		extension language
+
+	Generally applicable insets
+
+		for common application needs
+
+
+
+\subsection{Requirements - Developer}
+
+	Extend widgets or build new ones
+
+	Ease of writing new insets
+
+	Clean, consistent, easy-to-use \
+
+
+			programmatic interfaces
+
+
+
+\subsection{Requirements - Optional}
+
+\leftindent{Inter-operation with other X applications
+
+Drag and drop interfaces}
+
+
+
+
+\begindata{bp,537815048}
+\enddata{bp,537815048}
+\view{bpv,537815048,1,0,0}
+
+\center{\underline{\bold{Existing widgets that remain unchanged}}}
+
+
+\bold{High level widgets and substrates}
+
+
+	text, 	eq, fad, figure, layout, lset
+
+	ness, org, page, raster, table, 	image
+
+
+\bold{Embedded widgets}
+
+
+	clock, header, link, month, note, timeoday, writestamp
+
+
+\bold{And convert existing}
+
+	popup menus
+
+	pull down menus
+
+
+\begindata{bp,537815096}
+\enddata{bp,537815096}
+\view{bpv,537815096,2,0,0}
+
+
+\center{\underline{\bold{Widget requirements (ala Motif)}}}
+
+
+\bold{Input widgets}
+
+
+	ArrowButton, ColorChoice, DateChoice, DrawingArea,
+
+	DrawnButton, FileSelectionBox, FontList, Integer, \
+
+
+	Label, List, OptionMenu, PathList, PushButton, \
+
+
+	Scale, ScrollBar, SelectionBox, Separator, \
+
+
+	TextResponse, ToggleButton, ComboBox, SpinBox
+
+
+\bold{Output widgets}
+
+
+\leftindent{BarGraph, Dial, EKGGraph, Gauge, Indicator
+
+}
+\leftindent{ErrorDialog, InformationDialog, QuestionDialog
+
+WarningDialog, WorkingDialog}
+
+
+\bold{Compound widgets  (substrates)}
+
+
+\leftindent{BulletinBoard, Command, DialogShell, Form, Frame,
+
+MainWindow, PanedWindow, Pager, RadioBox,
+
+RowColumn, ScrolledList, ScrolledText, ScrolledWindow}
+
+
+\begindata{bp,537815144}
+\enddata{bp,537815144}
+\view{bpv,537815144,3,0,0}
+
+
+\center{\underline{\bold{Resources}}}
+
+
+Specification of values in a file
+
+
+Useful for internationalization and tailoring
+
+
+
+Similar to preferences, but more general
+
+
+X resources
+
+
+	dot notation
+
+
+	Mail.*.HilitBox.color: Red
+
+	*.Mychooser.Hilitbox.color: green
+
+	*.Hilitbox.color: blue
+
+	\
+
+
+\begindata{bp,537815192}
+\enddata{bp,537815192}
+\view{bpv,537815192,4,0,0}
+
+
+
+\center{\bold{\underline{Proposal -  Specify widget entirely in resource 
+file}}}
+
+
+
+More rapid construction of the widgets we need
+
+
+More flexible resulting system
+
+
+Recursive development of widgets
+
+
+
+Images
+
+	specified with a language that is \
+
+
+		interpreted as images by the figure inset
+
+	created by drawing
+
+
+Functions
+
+	specified in Ness
+
+	(or name of function in C++)
+
+
+
+
+Machine independent dynamic loading !
+
+
+\begindata{bp,537815240}
+\enddata{bp,537815240}
+\view{bpv,537815240,5,0,0}
+\subsection{
+Work Scope}
+
+
+
+hooks to load widgets from resource files
+
+	in addition to code files
+
+
+develop attribute list as a "universal" data object
+
+
+modify figure to \
+
+
+	interpret the drawing language
+
+	utilize resource manager
+
+
+
+\begindata{bp,537815288}
+\enddata{bp,537815288}
+\view{bpv,537815288,6,0,0}
+
+\center{\underline{\bold{Proposed Alternative}}}
+
+
+
+Allow ATK view to be a motif widget
+
+
+Implement "mim" as an im
+
+
+	utilize Motif's DrawingArea as window
+
+
+
+Advantage
+
+
+	immediate wide usability of AUIS
+
+
+
+Disadvantage
+
+
+	no embeddable widgets for HTML
+
+
+}}}
+\enddata{text,537938800}

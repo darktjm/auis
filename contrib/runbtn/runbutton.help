@@ -1,0 +1,257 @@
+\begindata{text,537982808}
+\textdsversion{12}
+\template{help}
+\chapter{runbutton: A button that runs a command
+
+}
+\section{What runbutton is
+
+}\leftindent{
+The \italic{runbutton} \helptopic{inset} is a button that runs a command 
+when pushed.  It may be placed in a document, or mailed through the mail 
+system.  It will only run commands from directories of your choice, so 
+there is some protection against running unacceptable programs.
+
+}
+\section{Starting runbutton
+
+}\leftindent{
+To insert a runbutton in a document either choose the \helptopic{ez} menu 
+\bold{Media,Run Button} or press ESC-TAB and answer the ``Data object to 
+insert here'' prompt with the word \italic{runbutton}.  A button will 
+appear which is not configured to do anything.
+
+}
+\section{Warnings
+
+}\leftindent{
+Do not push a runbutton if you do not trust the author of the document! 
+ Instead, click the \italic{right} mouse button to see what the button will 
+do.  See the section on \bold{security} below.
+
+}
+\section{Working with a runbutton
+
+}\leftindent{
+Press the \italic{left} mouse button over a runbutton to run the command 
+configured into the button.  The button will appear depressed while the 
+command is executing.  When the command finishes, the button will appear 
+normal again and a message will be written in the message line indicating 
+success or failure.  A runbutton will typically run a command which 
+launches an application.  The runbutton will appear to complete once the 
+application is successfully launched even though the application is still 
+running.
+
+
+Press the \italic{right} mouse button over a runbutton to configure the 
+button.  When the right button is pressed, two things will happen.  First, 
+a message is written in the message line explaining what command if any 
+will execute when the button is pressed.  Remember this if there is any 
+reason to suspect that the button may do something malicious (see 
+\bold{security} below).  Second, a new menu will appear with the title 
+\bold{RunButton} (see \bold{Pop-up menu meanings}).  Other menus may 
+disappear because they are no longer appropriate.  Click somewhere else in 
+the document to revert to the original menus.
+
+}
+\section{Pop-up menu meanings
+
+}\leftindent{
+A \bold{RunButton} menu will appear when the right mouse button is clicked 
+somewhere over a runbutton.  The following items appear on this menu:
+
+
+\subsection{Set Command
+
+}Choose this item to set a new command to execute in the button.  The 
+command line may be a maximum of 4096 characters and no shell 
+metacharacters will be interpreted (>, <, |, &, $, etc).  However, single 
+and double quote characters may be used to quote arguments containing 
+spaces.  The backslash character will escape a quote within an argument 
+(similar to a shell).
+
+
+The first word of the command line is the command to execute.  This command 
+name may not contain a slash `/' character.  Also, the runcommand button 
+does not use the PATH environment variable to locate this command.  See the 
+\bold{RUNBUTTONPATH} environment variable and the section on 
+\bold{Security}.
+
+
+\subsection{Set Label
+
+}Choose this item to enter a string for use as the label.  By default, the 
+label is ``Push Me'' which should always be changed.  Word the label as 
+clearly as possible to explain what the button will do.  For example, 
+``View Document on Release 5.0'', ``Edit your preferences'', etc.
+
+
+}\section{Programming runbutton
+
+}
+\leftindent{A runbutton is programmed with a menu.  \italic{Right} click on 
+the button to see the \bold{RunButton} menu, then choose menu items on that 
+menu to change the characteristics of the menu.  The label and the command 
+should be changed (see \bold{Pop-up menu meanings}).
+
+
+The command is a string of words where the first word indicates the command 
+to execute, and the rest of the words are provided as arguments to that 
+command.  Double or single quotes may be used to quote multiple words into 
+a single argument containing blanks.  For example:
+
+
+\example{mycmd "Now is the time"
+
+}
+will run a command called mycmd with the single argument \italic{Now is the 
+time}.  To include a quote character in an argument, procede the quote with 
+a blackslash.  To include a backslash, use two backslashes.
+
+
+The PATH environment variable is not used to locate the command.  Instead 
+the \bold{RUNBUTTONPATH} environment variable is used to specify the path 
+where commands are found.  It is unwise to include directories on the PATH 
+in the RUNBUTTONPATH (see \bold{security} below).  The command must be both 
+readable and executable in order to be recognized.
+
+
+The command name may not include slash (/) characters.
+
+
+Shell metacharacters such as $, <, >, etc, are not interpreted.  However, 
+the command itself may be a shell script and these characters may be 
+interpreted within that script.
+
+
+Standard input and output are currently directed to /dev/null (i.e. 
+discarded).  Standard error (i.e. error messages) will go to the console.
+
+
+\subsection{Ness and Runbuttons
+
+}If the command's name has a \italic{.n} extension it will be treated as a 
+special \helptopic{ness} macro.  The command must be a ness script.
+
+
+}
+\section{Preferences
+
+}\leftindent{
+\bold{RunButtonBackground:	\italic{PaleGreen}
+
+RunButtonForeground:	\italic{Black}
+
+}These are the default colors for new runbuttons which are inserted into a 
+document.  They may be permanently overridden via the \bold{RunButton,Set 
+Colors} menu.
+
+
+\bold{RunButtonFont: \italic{AndySans12b}
+
+}This preference specifies the font to use for the runbutton label.
+
+
+}\section{Environment
+
+
+}\leftindent{The following environment variable must be set for the button 
+to be functional:
+
+\bold{
+RUNBUTTONPATH
+
+}The RUNBUTTONPATH is a colon separated list of directories where runbutton 
+will look for the command to execute.  \italic{Do not place common bin 
+directories on this path!}  (i.e. /bin, /usr/bin, /usr/local/bin).
+
+
+Here is an example (using the C-shell syntax):
+
+
+\example{% setenv RUNBUTTONPATH ~/rb:/usr/local/lib/runbutton}
+
+
+This example assumes a directory called ~/rb has been created and contains 
+some commands that can safely be executed by a runbutton.  Note that a 
+runbutton is useless if the command it executes is not in the runbutton 
+path.  This makes user created directories less useful unless everyone who 
+reads the document also has that user created directory on their 
+RUNBUTTONPATHs.
+
+}
+\section{Security
+
+}\leftindent{
+Runbuttons are inherently dangerous.  Inexperienced users will tend to push 
+a runbutton before verifying that the button will do what is documented. 
+ This problem is worsened by the fact that runbuttons may be mailed through 
+the mail system.  A malicious user can mail a button that declares it will 
+do one thing which in reality will do another.  This cannot be tolerated.
+
+
+Right clicking on a runbutton will quickly show the command that will 
+execute when the button is pushed.  Do this when the author of the document 
+cannot be trusted.
+
+
+A runbutton does not execute a command using the PATH environment variable. 
+ Nor does it allow a command to contain slash (/) characters.  Therefore, 
+the set of commands that can possibly be executed is extremely limited.  Do 
+not defeat this protection by adding /bin, /usr/bin, /usr/local/bin, etc to 
+the RUNBUTTONPATH!
+
+
+When writing a script, use extra caution to prevent security ``holes.'' 
+ Here are some guidelines:
+
+
+\description{1.	Always define the PATH environment variable to a known path 
+containing as few directories as possible.
+
+
+2.	Be careful evaluating arguments.  Always keep arguments quoted.  For 
+example, does the script execute the command in an argument if it is 
+enclosed in backquotes?  Verify that it doesn't.  Verify that $ expansions 
+are not performed unintentionally.
+
+}
+}
+\section{Related tools}  \
+
+
+
+\leftindent{Move your mouse cursor to one of the following names and click 
+your left mouse button to see the help file for:
+
+
+}\leftindent{\helptopic{linkinset}
+
+\helptopic{insets}
+
+\helptopic{preferences}
+
+}\
+\begindata{bp,537869496}
+\enddata{bp,537869496}
+\view{bpv,537869496,0,0,0}
+\smaller{$Disclaimer: 
+# Permission to use, copy, modify, and distribute this software and its 
+# documentation for any purpose and without fee is hereby granted, provided 
+# that the above copyright notice appear in all copies and that both that 
+# copyright notice and this permission notice appear in supporting 
+# documentation, and that the name of IBM not be used in advertising or 
+# publicity pertaining to distribution of the software without specific, 
+# written prior permission. 
+#                         
+# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# 
+#  $\
+}\enddata{text,537982808}

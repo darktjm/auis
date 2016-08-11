@@ -1,0 +1,305 @@
+\begindata{text,537692296}
+\textdsversion{12}
+\template{default}
+\define{global
+}
+\begindata{table,538454584}
+\cols 142 224
+\begindata{link,538455640}
+Datastream version: 3
+$(ANDREWDIR)/doc/AtkTour/Tour
+0
+0
+\begindata{link,538455640}
+Datastream version: 2
+Tour
+2
+
+black
+white
+\enddata{link,538455640}
+\enddata{link,538455640}
+	\begindata{text,538455880}
+\textdsversion{12}
+An introduction to the ATK tour\
+\enddata{text,538455880}
+
+\begindata{link,538456488}
+Datastream version: 3
+$(ANDREWDIR)/doc/AtkTour/Text
+0
+0
+\begindata{link,538456488}
+Datastream version: 2
+Text
+2
+
+black
+white
+\enddata{link,538456488}
+\enddata{link,538456488}
+	\begindata{text,538456728}
+\textdsversion{12}
+The ATK rich-text inset\
+\enddata{text,538456728}
+
+\begindata{link,538456360}
+Datastream version: 3
+$(ANDREWDIR)/doc/AtkTour/Insets
+0
+0
+\begindata{link,538456360}
+Datastream version: 2
+Insets
+2
+
+black
+white
+\enddata{link,538456360}
+\enddata{link,538456360}
+	\begindata{text,538457528}
+\textdsversion{12}
+The ATK inset concept\
+\enddata{text,538457528}
+
+\begindata{link,538457208}
+Datastream version: 3
+$(ANDREWDIR)/doc/AtkTour/Datastream
+0
+0
+\begindata{link,538457208}
+Datastream version: 2
+Datastream
+2
+
+black
+white
+\enddata{link,538457208}
+\enddata{link,538457208}
+	\begindata{text,538458376}
+\textdsversion{12}
+The format in which ATK insets save themselves\
+\enddata{text,538458376}
+
+\begindata{link,538458008}
+Datastream version: 3
+$(ANDREWDIR)/doc/AtkTour/Focus
+0
+0
+\begindata{link,538458008}
+Datastream version: 2
+Focus
+2
+
+black
+white
+\enddata{link,538458008}
+\enddata{link,538458008}
+	\begindata{text,538459224}
+\textdsversion{12}
+ATK input focus rules; which inset are you talking to?\
+\enddata{text,538459224}
+
+\begindata{link,538458888}
+Datastream version: 3
+$(ANDREWDIR)/doc/AtkTour/Media
+0
+0
+\begindata{link,538458888}
+Datastream version: 2
+Media
+2
+
+black
+white
+\enddata{link,538458888}
+\enddata{link,538458888}
+	\begindata{text,538460008}
+\textdsversion{12}
+Some of the more interesting predefined inset types\
+\enddata{text,538460008}
+
+\begindata{link,538459656}
+Datastream version: 3
+$(ANDREWDIR)/doc/AtkTour/Layout
+0
+0
+\begindata{link,538459656}
+Datastream version: 2
+Layout
+2
+
+black
+white
+\enddata{link,538459656}
+\enddata{link,538459656}
+	\begindata{text,538460888}
+\textdsversion{12}
+Inset types which are used to contain other insets\
+\enddata{text,538460888}
+
+\begindata{link,538460584}
+Datastream version: 3
+$(ANDREWDIR)/doc/AtkTour/Ness
+0
+0
+\begindata{link,538460584}
+Datastream version: 2
+Ness
+2
+
+black
+white
+\enddata{link,538460584}
+\enddata{link,538460584}
+	\begindata{text,538461736}
+\textdsversion{12}
+The ATK extension language, can customize inset behavior\
+\enddata{text,538461736}
+
+\begindata{link,538461272}
+Datastream version: 3
+$(ANDREWDIR)/doc/AtkTour/Adew
+0
+0
+\begindata{link,538461272}
+Datastream version: 2
+Adew
+2
+
+black
+white
+\enddata{link,538461272}
+\enddata{link,538461272}
+	\begindata{text,538461528}
+\textdsversion{12}
+An application-builder for ATK\
+\enddata{text,538461528}
+
+\begindata{link,538462136}
+Datastream version: 3
+$(ANDREWDIR)/doc/AtkTour/Class
+0
+0
+\begindata{link,538462136}
+Datastream version: 2
+Class
+2
+
+black
+white
+\enddata{link,538462136}
+\enddata{link,538462136}
+	\begindata{text,538462392}
+\textdsversion{12}
+The implementation language of the ATK core.  Describes the object-oriented 
+ATK class hierarchy\
+\enddata{text,538462392}
+
+\begindata{link,538462936}
+Datastream version: 3
+$(ANDREWDIR)/doc/AtkTour/Dict
+0
+0
+\begindata{link,538462936}
+Datastream version: 2
+Dict
+2
+
+black
+white
+\enddata{link,538462936}
+\enddata{link,538462936}
+	\begindata{text,538463208}
+\textdsversion{12}
+A Ness example:  Looking up words in a dictionary\
+\enddata{text,538463208}
+
+\begindata{link,538463736}
+Datastream version: 3
+$(ANDREWDIR)/doc/AtkTour/Birth
+0
+0
+\begindata{link,538463736}
+Datastream version: 2
+Birth
+2
+
+black
+white
+\enddata{link,538463736}
+\enddata{link,538463736}
+	\begindata{text,538464008}
+\textdsversion{12}
+An ADEW/Ness example:  A birthday quotation database\
+\enddata{text,538464008}
+
+\begindata{link,538464600}
+Datastream version: 3
+$(ANDREWDIR)/doc/AtkTour/Volume
+0
+0
+\begindata{link,538464600}
+Datastream version: 2
+Volume
+2
+
+black
+white
+\enddata{link,538464600}
+\enddata{link,538464600}
+	\begindata{text,538464824}
+\textdsversion{12}
+An ADEW/Ness example:  A logarithmic ``volume control''\
+\enddata{text,538464824}
+
+\enddata{table,538454584}
+\view{spread,538454584,0,0,0}
+
+
+\begindata{bp,538468872}
+Version 2
+n 0
+\enddata{bp,538468872}
+\view{bpv,538468872,1,0,0}
+Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
+
+\smaller{\smaller{$Disclaimer: 
+
+Permission to use, copy, modify, and distribute this software and its 
+
+documentation for any purpose and without fee is hereby granted, provided 
+
+that the above copyright notice appear in all copies and that both that 
+
+copyright notice and this permission notice appear in supporting 
+
+documentation, and that the name of IBM not be used in advertising or 
+
+publicity pertaining to distribution of the software without specific, 
+
+written prior permission. 
+
+                        
+
+THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+
+TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+
+HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+
+DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+
+DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+
+OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+
+WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+
+
+ $
+
+}}\enddata{text,537692296}

@@ -1,0 +1,59 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+#ifdef DPS_ENV
+OBJS = note.o icon.o ps.o noteview.o iconview.o psview.o dpstextview.o IHFILES = note.H icon.H ps.H noteview.H iconview.H psview.H dpstextview.H 
+DPSTXTV = dpstextview
+#else /* DPS_ENV */
+OBJS = note.o icon.o ps.o noteview.o iconview.o psview.o
+IHFILES = note.H icon.H ps.H noteview.H iconview.H psview.H
+DPSTXTV=
+#endif /* DPS_ENV */
+
+InstallClassFiles(${IHFILES})
+
+DependTarget()
+
+#ifdef DPS_ENV
+#if defined(SGI_4D_ENV) || defined(PMAX_ENV)
+DPSCLIENTLIBS	= -ldps -lXext -lX11
+#else /* defined(SGI_4D_ENV) || defined(PMAX_ENV) */
+DPSCLIENTLIBS	= -ldps -lX11
+#endif /* defined(SGI_4D_ENV) || defined(PMAX_ENV) */
+LOCALINCLUDES	= -I/usr/include/DPS -I$(XINCDIR)/X11 -I/usr/include/X11
+
+#endif /* DPS_ENV */
+LIBS =  
+EXTRACLASSES=icon ps noteview iconview psview $(DPSTXTV) 
+DynamicMultiObject(note,$(EXTRACLASSES),$(OBJS),$(LIBS), $(DPSCLIENTLIBS) $(DYNMATHLIB),)
+InstallDynamicObject(note,$(EXTRACLASSES), $(FULLATKDLIBDIR))
+
+NormalHelpRule()
+InstallDocs(psinset.help, ${DESTDIR}/help)
+InstallDocs(note.help, ${DESTDIR}/help)
+InstallHelpAlias(psinset, ps-inset postscript postscript-inset)
+InstallHelpAlias(note, note-inset footnote-inset)

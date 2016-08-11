@@ -1,0 +1,479 @@
+\begindata{text,8409384}
+\textdsversion{12}
+\template{help}
+\define{global
+}
+\define{keyword
+}
+\define{bindlist
+}
+\define{binddesc
+}
+
+
+\chapter{gofig: Go Diagram Editor}
+
+
+\section{What gofig is}
+
+\leftindent{
+Gofig is an editor for go diagrams.  The diagram can be any fragment of a 
+board or an entire board up to 25x25.  Stones may be annotated with 
+numbers, letters, or any of several marks.  Conversions to and from ASCII 
+representations are supported.
+
+}
+\section{Starting gofig}
+
+\leftindent{
+gofig is an inset and may be inserted in documents or other insets in the 
+standard way.  In ez this is done by typing escape-control-I and then 
+responding in the message line with the word "gofig".
+
+
+gofig is also an application program which edits files having the extension 
+".gofig".  To start this program, type gofig at the command prompt or 
+switch file to a file with the special extension.  You must have in your 
+.atkinit or .ezinit or somewhere a line of the form
+
+	addfiletype .gofig gofig
+
+
+If you are an author and have compiled the gofig sources, you have compiled 
+an application driver--gofigvt--which tests both the data object and the 
+view.  \{To test gofig as an application, set the CLASSPATH to include the 
+gofig directory and run
+
+	runapp gofigapp
+
+\}
+
+
+\bold{Looking at the gofig inset. }  A gofig inset displays a fragment of a 
+go board with stones on it.  One stone or intersection may have a dotted 
+border to indicate that it is selected.}
+
+
+\section{Mouse Clicks}
+
+\leftindent{
+Pointing at an intersection and clicking with the right mouse button 
+selects that intersection.
+
+
+If you point at an intersection, push down a mouse button, moving the mouse 
+to another intersection, and let up the mouse button, the only effect is to 
+seelct the second intersection.  Thus if you don't like a change made by 
+depressing the left mouse button, you can undo the change by moving the 
+mouse before releasing the button.
+
+
+If a gofig inset does not have the input focus, a mouse click with either 
+button will give it the input focus and select the stone or intersection 
+where the mouse was clicked.
+
+
+If the gofig already has the input focus, a left mouse click at the 
+selected intersection will change the intersection's color:  empty to 
+black, black to white, or white to empty.
+
+
+If the gofig has the input focus, a left mouse click at an unselected 
+intersection will change that intersection's color according to the mode 
+indicated in the menu;  see the menu options Black-White, White, Black, 
+Empty, and Select.  That intersection is also selected.}
+
+
+\section{Pop-Up Menu Meanings}
+
+
+\leftindent{\bold{Main menus}
+
+}\leftindent{
+Whenever you are using gofig, you can press the middle mouse button to see 
+the menus.  Here is a listing of the menu options and what they do:
+
+}
+\leftindent{\italic{Front Menu Card}
+
+\leftindent{
+\bold{Copy:} Puts an ASCII version of the diagram into the cut buffer. 
+ This can be pasted into text, or used with Replace to fill in another 
+gofig inset.
+
+
+\bold{Replace:} Scans the current cutbuffer for an ASCII go diagram and 
+replaces the gofig contents with that diagram.  The cut buffer could have 
+come from a Copy on a gofig or by copying an ASCII diagram.
+
+}}\leftindent{
+\italic{Gofig menu card}
+
+
+This \italic{first set} determines what happens for a mouse click on the 
+diagram.  One of these menu entries will be "current" and will be marked by 
+being followed with "<=".
+
+
+\leftindent{\bold{Black-White:} A mouse click will put a stone of the color 
+opposite to the most recently placed color.
+
+
+\bold{White:} A mouse click will put a white stone.
+
+
+\bold{Black:} A mouse click will put a black stone.
+
+
+\bold{Empty:} A mouse click will make the intersection empty.
+
+
+\bold{Select:} A mouse click selects the intersection and inserts 
+annotations if \bold{Auto a b c ...} or \bold{Auto 1 2 3 ...} has been 
+selected (see just below).
+
+}
+This \italic{second set} determines what kind of annotation is 
+automatically inserted ona new stone.  One of these menu entries will be 
+"current" and will be marked by being followed with "<=".
+
+
+\leftindent{\bold{Auto a b c ...:}  Clicks will put successive letters from 
+the set a, b, c, ..., n.
+
+
+\bold{Auto 1 2 3 ...:}  Clicks will put successive integers, starting from 
+1.
+
+
+\bold{No Auto Notes:}  No annotations will be inserted automatically.
+
+
+Enter Note:  You are prompted in the message line for a note.  You may type 
+an integer, a letter, or any graphic character.  These characters are 
+displayed specially:   ^ + % @ # - ~ _ &;  see the discussion of 
+\bold{ASCII format}.}
+
+
+Additional options on the \italic{gofig} card.
+
+
+\leftindent{\bold{Board Layout:}  You are prompted for a board layout 
+description.  The parts of the description are each optional:
+
+\leftindent{
+\italic{n n}  -  Two integers giving the height and width of the fragment.
+
+
+\italic{LRTBAN} - Edges.  L, R, T, and B, make an edge at the left, right, 
+top, and bottom, respectively.  A makes all four sides be edges and N makes 
+none of them be edges.
+
+
+\italic{I} - Indices.  If specified, the coordinates 1,2,3,... and A,B,C, 
+... will appear around the edge of the board.  If any of LRTBAN is 
+specified, the I must be given as well if indices are desired.}
+
+
+\bold{Printed Size:} You are told what size the image will print at and 
+prompted for a new spacing for the vertical lines.  Ten is the default and 
+gives reasonably readable diagrams.  The value given may be an integer or a 
+decimal value.
+
+}}
+\section{Functions from keys}
+
+
+\leftindent{\bold{Arrow keys:}  Move the selected intersection in the 
+indicated direction.  Movement wraps so uparrow from the top row goes to 
+the bottom row, and so on.
+
+\bold{^-P, ^N, ^B, ^F:}  Up, Down, Right, Left.
+
+\bold{m, n, period, comma:}  Up, Down, Right, Left.
+
+
+\bold{o:}  Put white stone at selected intersection, no annotation.
+
+\bold{x:} Put black stone at selected intersection, no annotation.
+
+\bold{space:} Clear selected intersection, no annotation.
+
+\bold{a..l:} Put letter at selected intersection  (and reset base for 
+\bold{Auto a,b,c,...}).
+
+\bold{0...9:} Append digit to annotation at selected intersection
+
+	(and reset base for \bold{Auto 1,2,3,...}).
+
+\bold{backspace, DEL:} Modify annotation or remove stone:
+
+	no annotation - clear intersection to empty
+
+	letter annotation - clear annotation
+
+	digit annotation - remove rightmost digit
+
+\bold{^, @, #, %, +, -:}  Put mark at selected intersection (see 
+\bold{ASCII format}).
+
+\bold{N:} Prompt for annotation (same as EnterNote menu option).
+
+\bold{L:}  Prompt for new board layout (same as Board layout menu option).
+
+\bold{P:} Prompt for new print size.
+
+\bold{A:} Set alternating Black/White for mouse clicks.
+
+\bold{X:} Set to place Black stone for each mouse click.
+
+\bold{O:} Set to place White stone for each mouse click.
+
+\bold{E:} Set to clear the point for each mouse click.
+
+\bold{S:} Set to select the point for each mouse click.
+
+\bold{^W:} Copy diagram to the cut buffer as ASCII.
+
+\bold{ESC-w:} Copy diagram to the cut buffer as ASCII.
+
+\bold{^Y: }Copy ASCII from cut buffer and fill diagram.
+
+\bold{ESC-y: }Copy ASCII from cut buffer and fill diagram.
+
+\smaller{
+\bold{D:}  Dump gofig values to stdout}
+
+}
+\section{Preferences}
+
+
+\leftindent{\bold{BoardColor} - specifies the color for the board 
+background.  The default value is a light brown.  Another, somewhat darker, 
+color is: #EAD27D.}
+
+
+\section{Conversion operator
+
+}\leftindent{
+An operation is available to convert ASCII diagrams to gofigs in place: 
+ select the ASCII text, initiate the operation, and the ASCII text is 
+replaced by a gofig containing the converted form of the diagram. 
+ Initiating the object is done by whatever keystroke or menu binding you 
+choose.
+
+
+Bindings are specified in your $HOME/.atkinit file or the .\italic{app}init 
+file for some application.  To bind to a keystroke like ESC-g use:
+
+
+	load gofig
+
+	addkey gofig-convert "\\eg" textview gofig inherit
+
+
+or to bind to a menu item like GoCvt on the Media card write:
+
+
+	load gofig
+
+	addmenu gofig-convert "Media,GoCvt" textview gofig inherit
+
+}
+
+\section{Proctable entries
+
+}\leftindent{
+The following proctable entries are bound to keys and menu items noted 
+above.  The values in parentheses can be supplied as a single character 
+argument to produce the indicated effect.
+
+
+\bindlist{\bold{gofigview-char-to-note}   }\binddesc{- put letter in 
+selected spot}
+
+\bindlist{\bold{gofigview-copy}  }\binddesc{- copy the go diagram as ASCII 
+to the cut buffer}
+
+\bindlist{\bold{gofigview-do-nothing}  }\binddesc{- does nothing}
+
+\bindlist{\bold{gofigview-move-spot}  }\binddesc{- move selected spot}
+
+\bindlist{\bold{gofigview-print-dobj}  }\binddesc{- print contents of dobj 
+to stdout}
+
+\bindlist{\bold{gofigview-prompt-for-board-layout }}\binddesc{- prompts for 
+size and edges of board}
+
+\bindlist{\bold{gofigview-prompt-for-note}}\binddesc{- prompts for note to 
+put in stone}
+
+\bindlist{\bold{gofigview-prompt-for-print-size }}\binddesc{- prompts for 
+printing size parameter}
+
+\bindlist{\bold{gofigview-put-stone}   }\binddesc{- put stone (B or W) or 
+empty (/) in selected spot}
+
+\bindlist{\bold{gofigview-replace}   }\binddesc{- replaces contents from 
+cut buffer}
+
+\bindlist{\bold{gofigview-set-click-mode} }\binddesc{- set action for 
+clicking on stones (A, B, W, E, or S)}
+
+\bindlist{\bold{gofigview-set-note-mode}}\binddesc{  - chooses note 
+sequence for subsequent stones (a, 0, or -)
+
+\bindlist{\bold{gofigview-board-color}    }\binddesc{- adjust board color 
+(R, G, B, r, g, b)}}
+
+\bindlist{\bold{gofig-invert-debug}       }\binddesc{- Toggle the gofigview 
+debug flag}
+
+
+}\section{ASCII Format}
+
+
+\leftindent{The ASCII format processor assumes that each line begins with a 
+"prefix" of non-diagram characters and that all prefixes are the same 
+length.  The prefix length is computed from the first line and used for all 
+other lines.  The start of the board after the prefix is indicated by the 
+first instance of \
+
+
+	.  X  x  O  o  #  0 \
+
+
+or else it is one past the first |.  If none of these is found, the line is 
+ignored.
+
+
+In processing the diagram:
+
+	spaces and tabs are skipped
+
+	O o and 0 are white stones
+
+	X x and # are black stones
+
+	. + are empty intersections
+
+Any stone or empty intersection symbol may be followed (with no intervening 
+space) with a digit string or a letter, which is then taken as the 
+annotation for that stone or intersection.
+
+
+The following may also appear after white space to indicate an empty 
+intersection and give it an annotation:
+
+	digit string numbers the intersection
+
+	a, b, c, ... n puts a letter in the intersection
+
+	^, @, -, % puts the corresponding special symbol \
+
+
+
+The following characters have special meaning as annotations:
+
+	^  marks with a triangle
+
+	@  marks with a circle
+
+	#  marks with a square
+
+	%  marks with an X
+
+	+  marks with a plus
+
+	-  marks with a dash
+
+	~ marks with a dash having a short line ascending from the middle
+
+	~ marks with a dash having a short line descending from the middle
+
+	& marks with a down-pointing triangle
+
+(The last three are for Ing rule tournament result marking.)}
+
+
+\section{Advice}
+
+\leftindent{
+Keys work well for entering diagrams.  Use the arrow keys to move the 
+selected spot and use x, o, and space to put the desired color stone.
+
+
+Note that the cutbuffer stream is ASCII.  This means you can take a diagram 
+from most mail messages and insert it into a gofig: select the diagram, use 
+text's Copy operation, select the gofig, and use gofig's Replace menu 
+option.
+
+
+Similarly, you can construct a diagram with gofig and then Copy it from the 
+gofig and Paste it into text as ASCII.
+
+}\leftindent{
+}
+\section{Quick Reference}
+
+
+\bold{Syntax:}
+
+
+\leftindent{gofig  [\italic{-d}]  [\italic{filename}]}
+
+
+\bold{Options/arguments:}
+
+
+\leftindent{\italic{filename}  If a filename is specified, a gofig data 
+stream is read from it to initialize the data object.  If the streamis 
+ASCII, it will be parsed to find a go diagram.
+
+
+\italic{-d}  Surpresses the "fork" that is normally done at startup.  The 
+fork frees the typescript or command window for further commands, but 
+interferes with debugging.
+
+}
+\section{Related tools}  \
+
+
+
+Select (put a box around) one of the italicized names and choose "Get Help 
+on Selected Word" from the pop-up menu to see the help file for:
+
+
+\leftindent{\keyword{\italic{\helptopic{text}}}        Standard text
+
+\keyword{\italic{\helptopic{ez}}}          Text editing
+
+}
+\begindata{bp,8509080}
+Version 2
+n 0
+\enddata{bp,8509080}
+\view{bpv,8509080,0,0,0}
+Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
+
+\smaller{\smaller{$Disclaimer: 
+# Permission to use, copy, modify, and distribute this software and its 
+# documentation for any purpose and without fee is hereby granted, provided 
+# that the above copyright notice appear in all copies and that both that 
+# copyright notice and this permission notice appear in supporting 
+# documentation, and that the name of IBM not be used in advertising or 
+# publicity pertaining to distribution of the software without specific, 
+# written prior permission. 
+#                         
+# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# 
+#  $
+
+}}\enddata{text,8409384}

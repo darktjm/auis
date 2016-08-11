@@ -1,0 +1,193 @@
+<HTML>
+<HEAD>
+<TITLE>URI Parsing in the WWW Library</TITLE>
+<NEXTID N="1">
+</HEAD>
+<BODY>
+
+<H1>HTParse</H1>
+
+<PRE>
+/*
+**	(c) COPYRIGHT CERN 1994.
+**	Please first read the full copyright statement in the file COPYRIGH.
+*/
+</PRE>
+
+This module contains code to parse URIs and various related things such as:
+
+<UL>
+<LI> Parse a URI relative to another URI
+<LI> Get the URI relative to another URI 
+<LI> Remove redundant data from the URI (HTSimplify and HTCanon)
+<LI> Expand a local host name into a full domain name (HTExpand)
+<LI> Search a URI for illigal characters in order to prevent security holes
+</UL>
+
+This module is implemented by <A HREF="HTParse.c">HTParse.c</A>, and it is
+a part of the <A
+HREF="http://info.cern.ch/hypertext/WWW/Library/User/Guide/Guide.html">
+Library of Common Code</A>.
+
+<PRE>
+#ifndef HTPARSE_H
+#define HTPARSE_H
+
+#include "HTEscape.h"
+</PRE>
+
+<H2>HTParse:  Parse a URI relative to another URI</H2>
+
+This returns those parts of a name which are given (and requested) substituting
+bits from the related name where necessary.
+
+<H3>Control Flags for HTParse</H3>
+
+The following are flag bits which may be ORed together to form a number
+to give the 'wanted' argument to HTParse.
+
+<PRE>
+#define PARSE_ACCESS		16
+#define PARSE_HOST		 8
+#define PARSE_PATH		 4
+#define PARSE_ANCHOR		 2
+#define PARSE_PUNCTUATION	 1
+#define PARSE_ALL		31
+</PRE>
+
+<H3>On entry</H3>
+<DL>
+<DT>aName
+<DD> A filename given
+<DT>relatedName
+<DD> A name relative to which
+aName is to be parsed
+<DT>wanted
+<DD> A mask for the bits which
+are wanted.
+</DL>
+
+<H3>On exit,</H3>
+<DL>
+<DT>returns
+<DD> A pointer to a malloc'd string
+which MUST BE FREED
+</DL>
+
+<PRE>
+extern char * HTParse  PARAMS((	const char * aName,
+				const char * relatedName,
+				int wanted));
+</PRE>
+
+<H2>HTStrip: Strip white space off a string</H2>
+
+<H3>On exit</H3>Return value points to first non-white
+character, or to 0 if none.<P>
+All trailing white space is OVERWRITTEN
+with zero.
+
+<PRE>
+extern char * HTStrip PARAMS((char * s));
+</PRE>
+
+<H2>HTSimplify: Simplify a UTL</H2>
+
+A URI is allowed to contain the seqeunce xxx/../ which may be
+replaced by "" , and the seqeunce "/./" which may be replaced by "/".
+Simplification helps us recognize duplicate URIs. Thus, the following
+transformations are done:
+
+<UL>
+<LI> /etc/junk/../fred 	becomes	/etc/fred
+<LI> /etc/junk/./fred	becomes	/etc/junk/fred
+</UL>
+
+but we should NOT change
+<UL>
+<LI> http://fred.xxx.edu/../.. or
+<LI> ../../albert.html
+</UL>
+
+In the same manner, the following prefixed are preserved:
+
+<UL>
+<LI> ./<etc>
+<LI> //<etc>
+</UL>
+
+In order to avoid empty URIs the following URIs become:
+
+<UL>
+<LI> /fred/..		becomes /fred/..
+<LI> /fred/././..		becomes /fred/..
+<LI> /fred/.././junk/.././	becomes /fred/..
+</UL>
+
+If more than one set of `://' is found (several proxies in cascade) then
+only the part after the last `://' is simplified.
+
+<PRE>
+extern char *HTSimplify PARAMS((char *filename));
+</PRE>
+
+
+<H2>HTRelative:  Make Relative (Partial)
+URI</H2>This function creates and returns
+a string which gives an expression
+of one address as related to another.
+Where there is no relation, an absolute
+address is retured.
+<H3>On entry,</H3>Both names must be absolute, fully
+qualified names of nodes (no anchor
+bits)
+<H3>On exit,</H3>The return result points to a newly
+allocated name which, if parsed by
+HTParse relative to relatedName,
+will yield aName. The caller is responsible
+for freeing the resulting name later.
+
+<PRE>
+extern char * HTRelative PARAMS((const char * aName, const char *relatedName));
+</PRE>
+
+<H2>HTExpand: Expand a Local Host Name Into a Full Domain Name</H2>
+
+This function expands the host name of the URI from a local name to a
+full domain name and converts the host name to lower case. The
+advantage by doing this is that we only have one entry in the host
+case and one entry in the document cache.
+
+<PRE>
+extern char *HTCanon PARAMS ((	char **	filename,
+				char *	host));
+</PRE>
+
+<H2>Prevent Security Holes</H2>
+
+<CODE>HTCleanTelnetString()</CODE> makes sure that the given string
+doesn't contain characters that could cause security holes, such as
+newlines in ftp, gopher, news or telnet URLs; more specifically:
+allows everything between hexadesimal ASCII 20-7E, and also A0-FE,
+inclusive.
+<DL>
+<DT> <CODE>str</CODE>
+<DD> the string that is *modified* if necessary.  The string will be
+     truncated at the first illegal character that is encountered.
+<DT>returns
+<DD> YES, if the string was modified.
+     NO, otherwise.
+</DL>
+
+<PRE>
+extern BOOL HTCleanTelnetString PARAMS((char * str));
+</PRE>
+
+<PRE>
+#endif	/* HTPARSE_H */
+</PRE>
+
+End of HTParse Module
+</BODY>
+</HTML>
+

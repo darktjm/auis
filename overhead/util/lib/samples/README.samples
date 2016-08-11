@@ -1,0 +1,150 @@
+\begindata{text,537746824}
+\textdsversion{12}
+\template{default}
+\define{global
+}
+\define{symbol
+menu:[Font~1,Symbol~84]
+attr:[FontFamily symbol Int 0]}
+\define{symbola
+menu:[Font~1,SymbolA~86]
+attr:[FontFamily symbola Int 0]}
+\define{definition
+menu:[Region~4,Definition~85]
+attr:[LeftMargin LeftMargin Cm 138717]
+attr:[RightMargin RightMargin Cm 138717]
+attr:[FontSize PreviousFontSize Point -2]}
+\define{realsmall
+menu:[Font~1,RealSmall~88]
+attr:[Script PreviousScriptMovement Point -4]
+attr:[FontSize PreviousFontSize Point -4]}
+\majorheading{\bigger{\bigger{\bigger{\bigger{Introduction to Default 
+Setting Samples \
+
+
+}}}}
+\bigger{Andrew User Interface System}
+
+V\bigger{ersion 8   (September 1996)
+
+}}
+
+
+\bold{\indent{\indent{\indent{\indent{Andrew Consortium
+
+School of Computer Science
+
+Carnegie Mellon University
+
+5000 Forbes Avenue
+
+Pittsburgh, PA 15213-3891
+
+USA}}}}
+
+}
+\indent{Phone:			\bold{(412) 268-6710}
+
+Fax:			\bold{(412) 268-5576}
+
+Web:			\bold{http://www.cs.cmu.edu/~AUIS}
+
+Demo:			\bold{finger @atk.cs.cmu.edu}
+
+Archives:		\bold{ftp.andrew.cmu.edu:  /pub/AUIS}
+
+Bugs:			\bold{\bold{info-andrew-bugs@andrew.cmu.edu
+
+}}Info & Subscriptions:	\bold{info-andrew-request@andrew.cmu.edu}}
+
+
+
+\indent{\indent{
+
+
+In the documentation, the source directory will be referred to as 
+\typewriter{$/} and the destination as \typewriter{$ANDREWDIR/}.
+
+}}
+\indent{\indent{If you are reading an all-ASCII version of this file, the 
+version in Andrew format is in the distribution at:}}
+
+
+\center{\typewriter{$ANDREWDI}}\typewriter{\center{\typewriter{R/}}doc/ADMIN\
+ISTRATOR/\typewriter{README.samples}}\smaller{
+
+
+
+
+
+
+
+
+
+\smaller{\bigger{Copyright 1992, 1996 Carnegie Mellon University and IBM. 
+ All rights reserved. Please see further copyrights and disclaimer at the 
+end of this file.}}}
+
+\begindata{bp,537785528}
+Version 2
+n 0
+\enddata{bp,537785528}
+\view{bpv,537785528,0,0,0}
+\bold{
+\bigger{\bigger{Introduction to Default Setting Samples}}}\bigger{\bigger{
+
+}}
+The Andrew User Interface System offers a huge array of settings from which 
+to choose when building the system on your machine.  These settings are 
+maintained in "init" and "preference" files.  These contain settings which 
+give the Andrew system its "look and feel"; the user can customize from 
+these to find a "look and feel" that suits his or her own taste.  Use one 
+of these global files "as is", or copy and convert as you see fit.  In 
+\typewriter{$ANDREWDIR/doc/ADMINISTRATOR}, see the files\typewriter{ 
+global.prf}, \typewriter{global.atkinit}, and \typewriter{global.ezinit}.
+
+
+Andrew users and Andrew Consortium staffers at Carnegie Mellon University 
+have also contributed sample default setting files from which customized 
+settings can be created for your own computer.  Five individualized sets of 
+sample files from which you could also work can be found in 
+\typewriter{$ANDREWDIR/doc/ADMINISTRATOR/samples}.  In order to set up a 
+specific environment, you will need to copy all of one user's files to your 
+directory as \typewriter{.\{programname\}init}.  For example, you would 
+want to copy all files beginning with one of the five names 
+(\typewriter{bobg}, \typewriter{ghoti}, \typewriter{jhh}, 
+\typewriter{jz1j}, or \typewriter{mcinerny}) to \typewriter{$HOMEDIR/*.*}. 
+ You will also need to modify the path names and remove references to any 
+features that are not supported at your site.
+
+\begindata{bp,537789224}
+Version 2
+n 0
+\enddata{bp,537789224}
+\view{bpv,537789224,1,0,0}
+
+\smaller{Copyright 1992, 1996 Carnegie Mellon University and IBM.  All 
+rights reserved.}
+
+
+\smaller{\smaller{$Disclaimer: 
+# Permission to use, copy, modify, and distribute this software and its 
+# documentation for any purpose and without fee is hereby granted, provided 
+# that the above copyright notice appear in all copies and that both that 
+# copyright notice and this permission notice appear in supporting 
+# documentation, and that the name of IBM not be used in advertising or 
+# publicity pertaining to distribution of the software without specific, 
+# written prior permission. 
+#                         
+# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# 
+#  $
+
+}}\enddata{text,537746824}

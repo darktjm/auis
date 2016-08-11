@@ -1,0 +1,22 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+IHFILES		=	circlepiview.H \
+			circlepi.H
+OBJS = circlepiview.o circlepi.o
+LIBS = 
+
+NormalObjectRule()
+NormalATKRule()
+DependTarget()
+
+DynamicMultiObject(circlepi,circlepiview,$(OBJS),$(LIBS),,)
+InstallDynamicObject(circlepi,circlepiview,$(FULLATKDLIBDIR))
+
+OptionalATKLibrary(circlepi, $(OBJS), $(LIBS),,)
+InstallOptionalATKLibrary(circlepi, $(DESTDIR)/lib/atk)
+
+InstallDocs(circpi.help, $(DESTDIR)/help)
+InstallClassFiles($(IHFILES))

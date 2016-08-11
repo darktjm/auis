@@ -1,0 +1,67 @@
+\begindata{text,538671776}
+\textdsversion{12}
+\template{default}
+\bigger{\center{
+
+
+Andrew Consortium
+
+}}\heading{\majorheading{
+}}\bigger{\center{June, 1993}}\heading{\majorheading{
+
+
+}}\center{\bigger{Technical Conference Proceedings}}
+
+
+
+
+I	Progress Report on the Andrew User Interface System
+
+	\italic{Wilfred J. Hansen, Andrew Consortium, Carnegie Mellon}
+
+	[Hansen]
+
+
+II	Smart Styles:  Text Styles with a Controller
+
+	\italic{Todd Inglett, IBM Rochester}  [Inglett]
+
+
+III	Compressing Text Using "Compress"
+
+	\italic{Robert S. Kemmetmueller, IBM Rochester}  [Kemmetmueller]
+
+
+IV	Display Services for Distributed Objects
+
+	\italic{Ellis Cohen, Open Software Foundation}
+
+
+V	ELAR:  Safety and Flexibility through Type Conformance
+
+	\italic{Todd V. Jonker, Alexandria, CMU
+
+}	\italic{Michael L. Horowitz, Alexandria, CMU}  [Jonker]
+
+
+VI	The Alexandria Information Habitiat:  Supporting Long-term Information \
+
+
+	Management
+
+	\italic{Michael L. Horowitz, Alexandria, CMU}  [Horowitz]
+
+
+VII	Tactus:  Continuous Time Interactive Distribution Multi-media 
+Application \
+
+
+	Development Toolkit Based on ATK
+
+	\italic{Dean Rubine, Tactus, CMU}  [Rubine.ps]\italic{
+
+
+}VIII	Survey of Andrew Sites
+
+	\italic{Susan Straub, Andrew Consortium, CMU}  [Straub]\
+\enddata{text,538671776}

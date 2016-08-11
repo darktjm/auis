@@ -1,0 +1,11 @@
+
+InstallShScript(getnms, $(DESTDIR)/etc)
+InstallFileToFile(exp.csh, $(INSTPROGFLAGS), $(DESTDIR)/etc) 
+
+#if SY_AIX4
+InstallFileToFile(mkatkshlib41, $(INSTPROGFLAGS), $(DESTDIR)/etc/mkatkshlib)
+InstallFileToFile(exp41.awk, $(INSTPROGFLAGS), $(DESTDIR)/etc/exp.awk)
+#else
+InstallFileToFile(mkatkshlib, $(INSTPROGFLAGS), $(DESTDIR)/etc)
+InstallFileToFile(exp.awk, $(INSTPROGFLAGS), $(DESTDIR)/etc)
+#endif

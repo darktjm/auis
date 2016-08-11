@@ -1,0 +1,7 @@
+!Class: Button
+widgetDataClass:(String)AButton
+widgetViewClass:(String)AButtonv
+indicatorOn:(Bool)True
+indicatorType:(String)O
+units:(Real)0
+activateCallback:(Function)PROC:abutton-radiotoggle

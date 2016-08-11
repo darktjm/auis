@@ -1,0 +1,41 @@
+\begindata{text,537668644}
+\textdsversion{12}
+\template{help}
+\chapter{andrewdirs: Finding pathnames to parts of AUIS
+
+}
+\section{What andrewdirs is
+
+}\leftindent{
+Andrewdirs is a program which outputs the current pathnames in effect for 
+parts of AUIS.  It is intended primarily for use in shell scripts.}
+
+
+\section{Quick reference
+
+}\leftindent{
+andrewdirs [andrewdir] [xlibdir] [andydir] [localdir] [afsbasedir]
+
+
+Any or all of the optional arguments may be present.  The requested 
+paths, each ending in '/', will be written to stdout in order one per line.
+
+}
+\section{Changes}
+
+
+The argument "xlibdir" has been added.  It gives the path to the X11 library; 
+ that is, the directory containing libX11.a and friends.  
+
+
+Formerly the argument "xbasedir" was supported.  This is no longer supported
+because on some platforms there is no single base directory from which all
+X files can be accessed.
+
+
+\section{Program Author}
+
+\leftindent{\leftindent{
+}Rob Ryan (robr@cmu.edu)}
+
+\enddata{text,537668644}

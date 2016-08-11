@@ -1,0 +1,70 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+#define	IHaveSubdirs
+
+
+#include <pkgs.mcr>
+Makefile:: pkgs.mcr
+
+SUBDIRS = $(ATKSUBDIRS)
+
+DIRS = $(DESTDIR)/include \
+	$(DESTDIR)/include/atk \
+	$(DESTDIR)/lib \
+	$(DESTDIR)/lib/atk \
+	$(DESTDIR)/lib/afm \
+	$(DESTDIR)/lib/tpls \
+	$(DESTDIR)/lib/arbiters \
+	$(DESTDIR)/lib/packages/atk
+MkdirTarget($(DIRS))
+
+atk:: pkgs.mcr
+RegisterLibPackage(atk,ANDREWDIR,lib/atk/lib,.a,  \
+		$(ATKREGISTERLIBS),$(DESTDIR)/lib/packages/atk)
+defaults:
+	$(RM) ,defaults defaults
+	echo atk>,defaults
+	mv ,defaults defaults
+InstallFile(defaults,$(INSTINCFLAGS),$(DESTDIR)/lib/packages/atk)
+
+libs.all: Imakefile pkgs.mcr
+	$(RM) ,libs.all
+	echo " " $(ATKRUNAPPLIBS) | sed \
+			-e 's/[ 	][ 	]*\([a-zA-Z0-9_]\)/ @\1/g' \
+ 			>,libs.all
+	$(RM) libs.all
+	mv ,libs.all  libs.all
+InstallFile(libs.all, $(INSTINCFLAGS), $(DESTDIR)/lib/atk)
+CleanTarget(libs.all)
+
+
+#if !SY_OS2
+install.time::
+	$(RM) $(DESTDIR)/lib/templates
+	$(LN) tpls $(DESTDIR)/lib/templates
+#endif

@@ -1,0 +1,118 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+
+/*
+ * NOTE:  toolcnt.h is a misc file used by IBM Rochester and is
+ *        found here as a dummy file.  It does not need to be
+ *        installed anywhere.
+ */
+
+OBJS = asmtext.o asmtextview.o \
+	compress.o compressv.o \
+	cpptext.o cpptextview.o \
+	ctext.o ctextview.o \
+	hlptext.o \
+	idltext.o idltextview.o \
+	ltext.o ltextview.o \
+	m3text.o m3textview.o \
+	modtext.o modtextview.o \
+	mtext.o mtextview.o \
+	perltext.o perltextview.o \
+	ptext.o ptextview.o \
+	rawtext.o rawtextview.o \
+	rexxtext.o rexxtextview.o \
+	srctext.o srctextview.o dogtags.o
+
+HFILES = asmtext.H asmtextview.H \
+	compress.H compressv.H \
+	cpptext.H cpptextview.H \
+	ctext.H ctextview.H \
+	hlptext.H \
+	m3text.H m3textview.H \
+	modtext.H modtextview.H \
+	mtext.H mtextview.H \
+	rawtext.H rawtextview.H \
+	srctext.H srctextview.H
+
+EXTRACLASSES = asmtext \
+asmtextview \
+compress \
+compressv \
+cpptext \
+cpptextview \
+ctext \
+ctextview \
+hlptext \
+idltext \
+idltextview \
+ltext \
+ltextview \
+m3text \
+m3textview \
+modtext \
+modtextview \
+mtext \
+mtextview \
+perltext \
+perltextview \
+ptext \
+ptextview \
+rawtext \
+rawtextview \
+rexxtext \
+rexxtextview \
+srctextview
+
+
+LIBS =
+
+TEMPLATES = C.tpl H.tpl asm.tpl c.tpl def.tpl \
+            h.tpl help.tpl i3.tpl idl.tpl m3.tpl \
+            mod.tpl rawtext.tpl
+
+HELPFILES = asmtext.help cpptext.help ctext.help dogtags.help \
+            ezpretty.help hlptext.help idltext.help ltext.help \
+            m3text.help mtext.help perltext.help ptext.help \
+            rawtext.help rexxtext.help srctext.help dogtags.help
+
+NormalObjectRule()
+NormalATKRule()
+
+DynamicMultiObjectWithExports(srctext,$(EXTRACLASSES),$(OBJS),,,)
+InstallDynamicObjectWithExports(srctext,$(EXTRACLASSES),$(FULLATKDLIBDIR))
+
+InstallClassFiles($(HFILES))
+InstallMultiple(${TEMPLATES}, ${INSTINCFLAGS}, ${DESTDIR}/lib/tpls)
+
+DependTarget()
+NormalHelpRule()
+
+InstallDocs(${HELPFILES}, ${DESTDIR}/help)
+
+InstallHelpAlias(cpptext, c++text)
+InstallHelpAlias(srctext, srcview sourceview sourceviews editview editviews)

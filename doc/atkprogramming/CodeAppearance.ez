@@ -1,0 +1,844 @@
+\begindata{text,537746808}
+\textdsversion{12}
+\template{default}
+\majorheading{\bigger{\bigger{\bigger{\bigger{Writing Readable Code \
+
+
+}}}}
+\bigger{Andrew User Interface System}
+
+V\bigger{ersion 8   (October 1996)
+
+}}
+
+
+\bold{\indent{\indent{\indent{\indent{Andrew Consortium
+
+School of Computer Science
+
+Carnegie Mellon University
+
+5000 Forbes Avenue
+
+Pittsburgh, PA 15213-3891
+
+USA}}}}
+
+}
+\indent{Phone:			\bold{(412) 268-6710}
+
+Fax:			\bold{(412) 268-5576}
+
+Web:			\bold{http://www.cs.cmu.edu/~AUIS}
+
+Demo:			\bold{finger @atk.cs.cmu.edu}
+
+Archives:		\bold{ftp.andrew.cmu.edu:  /pub/AUIS}
+
+Bugs:			\bold{\bold{info-andrew-bugs@andrew.cmu.edu
+
+}}Info & Subscriptions:	\bold{info-andrew-request@andrew.cmu.edu}}
+
+
+
+\indent{\indent{
+
+
+In the documentation, the source directory will be referred to as 
+\typewriter{$/} and the destination as \typewriter{$ANDREWDIR/}.
+
+}}
+\indent{\indent{If you are reading an all-ASCII version of this file, the 
+version in Andrew format is in the distribution at:}}
+
+
+\center{\typewriter{$ANDREWDIR}}\typewriter{\center{\typewriter{/}}doc/DEVEL\
+OPER/CodeAppearance.ez}\smaller{
+
+
+
+
+
+
+
+
+
+\smaller{\bigger{Copyright 1996 Carnegie Mellon University.  All rights 
+reserved. Please see further copyrights and disclaimer at the end of this 
+file.}}}
+
+\begindata{bp,537781112}
+Version 2
+n 0
+\enddata{bp,537781112}
+\view{bpv,537781112,0,0,0}
+
+\bold{\bigger{Introduction
+
+}}
+One of the secondary purposes of a program is its execution in a computer. 
+ Its primary purpose is to describe to humans what it does;  to serve as 
+documentation of what-is-being-done so that another person can convert it 
+to a newer vision of what-should-be-done.  To serve its descriptive 
+purpose, a program must be constructed with an eye to its readability.  The 
+notes below describe one set of conventions for readable code.  The first 
+is the most important for avoiding errors as well as contributing to 
+readability.
+
+
+
+\section{1.	Brace Style}
+
+
+An opening brace should be at the end of the line after the \bold{if}, 
+\bold{while}, or \bold{switch} header.  Lines within the braces should be 
+indented from the header.  The closing brace should be on a line of its 
+own, indented to line up with the start of the header.
+
+
+		if (predicate) \{
+
+			// indented statements
+
+		\}
+
+		else \{
+
+		\}
+
+
+		while (predicate) \{
+
+			// indented statements
+
+		\}
+
+
+\section{2.	Size and Complexity   (The 7 +- 2 Rule)}
+
+
+Limiting the size and complexity of functions is an important part of 
+readability size the reader's mind needs to encompass an entire function 
+before understanding it and its use elsewhere.  It is possible to state 
+various rules to limit size.  For instance
+
+
+\indent{(Complexity) For any given module, (# of decisions + # of
+
+connectors + 1) should be no more than 7+-2, where decisions are IF, CASE, 
+WHILE, UNTIL and connectors are AND, OR.
+
+
+(Module Size) For any given module, non-documentary source lines should not 
+exceed 50-160 lines.
+
+
+(Nested Decisions) Nested Decisions greater than 3 levels deep should be 
+contained in a separate module and referred to via a sub-routine call.
+
+
+(Span of Control) A module should directly control no more than 7+-2 other 
+modules.}
+
+
+The notion of 7+/-2 ("seven plus or minus two") derives from psychology 
+experiments showing that human short term memory is roughly that size.  The 
+idea is that a small function can be understood in short term memory and 
+thence converted to a single mental token for preservation in long-term 
+memory.
+
+
+In many instances, the above guidelines are too restrictive.  The most 
+common example is a switch statement with dozens of cases;  the whole thing 
+can be understood easily if each case follows the guidelines, although 
+clearly the entire function will not.
+
+
+\section{3. 	Non-text}
+
+
+White space and layout is an important component of readability.
+
+
+\subsection{3.1	Spacing}
+
+
+The indentation unit is a TAB.  This is the only universally understandable 
+and displayable unit.  Do not expect to line up code within lines.
+
+
+Make an effort to keep lines to less than 80 characters.  Longer lines are 
+not transportable via some media.
+
+
+Put spaces
+
+	around assignment operators
+
+	around comparison operators
+
+	after commas
+
+	around question mark and colon in a conditional expression
+
+Use two spaces
+
+	after colon and semicolon
+
+	around && and || in boolean expressions
+
+OMIT spaces
+
+	between function name and left parenthesis
+
+	after left parenthesis
+
+	before right parenthesis
+
+
+Have at least one blank line between function definitions.
+
+
+\subsection{3.2	Comments}
+
+
+Use // for statement description comments.  Reserve /* ... */ for narrative 
+comments prior to each function.  By avoiding /* ... */ within functions, 
+that form can be used to comment out sections of code;  it is a little 
+cleaner than using #if 0.
+
+
+Describe each global variable with a comment.
+
+
+\subsection{3.3	Pre-processor Directives}
+
+
+\paragraph{Avoid the use of #define.}   As much as possible, use const for 
+constants and inline for more complex expressions.
+
+
+Use \
+
+
+		#if 0 \
+
+
+			... \
+
+
+		#endif \
+
+
+to omit large blocks of code while retaining them in the text.
+
+	\
+
+
+Do not use indentation, some C++ compilers don't support the indentation of 
+pre-processor statements.  Extra spacing after the pre-processor keyword is 
+fine.
+
+
+		#if defined (DEBUG)
+
+		#define TRACE(TEXT) LogText(#TEXT);
+
+
+		#if 		defined(WINDOWS)
+
+		#define 		TRACE_BUFFER 2000
+
+		#else
+
+		#define 		TRACE_BUFFER 500
+
+		#endif	/* WINDOWS */
+
+
+		#else
+
+		#define TRACE(TEXT)
+
+		#endif /* DEBUG */
+
+		\
+
+
+\section{4.	Names}
+
+
+In new Andrew code, external names are prefixed with "a" or "A" to 
+distinguish them from other software packages.  File names are strictly 
+lower case except for extensions.
+
+		awidget.C  awidget.H  astring.C aslot.C
+
+Class names have capitalized words.
+
+		AString  ASlotInt ASlotFile \
+
+
+Method names are often capitalized.  Member variable names begin with lower 
+case and may have upper case words within.
+
+
+\{The following set of rules was adopted by one team in a project course at 
+CMU.  It may be useful for new code, but has not been followed at all in 
+developing Andrew.\}
+
+
+\subsection{4.1	Constants & Inline Functions}
+
+
+Capitalize the names of constants.  Inline functions should resemble other 
+subroutine declarations and should be used like other function calls.  Only 
+inline those functions that are very simple, say about one statement long 
+and using at most three variables.  \
+
+
+
+Constants
+
+		const	float	PI = 3.14;
+
+		const 	char	PLUS = '+';
+
+		const 	char 	*NAME = "Myname";
+
+Inline Functions
+
+		inline	int	Abs(int x) \{return ((a)<0?-(a):(a));\}
+
+		inline 	long	GetDotX(struct dotlist *pair) \{return (pair->x);\}
+
+
+
+Typedefs
+
+
+Use upper case for name.
+
+
+		(1) 	typedef  char*  STRING_P;
+
+		(2) 	typedef struct tagPoint \{
+
+  			int x;
+
+ 			int y;
+
+			\} \
+
+
+
+\subsection{4.2	Classes & Class Libraries}
+
+
+Conventional Name for Classes and a prefix for Class Libraries.  \
+
+
+Just a meaningful item name for class members which are private.
+
+
+		(1)	Classes
+
+		\
+
+
+			class Employee;
+
+			class Manager;
+
+			class Salesperson;
+
+
+		(2) 	Class Libraries
+
+	\
+
+
+			class whoDatabase;
+
+			class whoDatalock;
+
+			class whoTransaction;
+
+
+
+\subsection{4.3	Class Instances}
+
+
+Use prefix "the" for the primary instances of the class within the scope 
+and the prefix "a" or  "an" for temporary instances in functions.  For 
+multiple instances, use descriptive prefix like "first", "second" and 
+include the class name.  Within  the scope of a method for a specific class 
+use the keyword \bold{this} to refer to object.
+
+
+		Desktop	theDesktop;
+
+		Cursor		theCursor;
+
+		\
+
+
+		Window	aWindow = theDesktop.getFirstWindow();
+
+
+
+\subsection{4.4	Function Names}
+
+
+Begin with a verb followed by a noun to indicate what they do and what they 
+ do it to.
+
+
+		void	ResetCounter();
+
+		void	ReleaseLock(lock& theLock);
+
+		Window* CreateWindow();
+
+
+Likewise for class member functions even though it is natural that the 
+member function usually acts on the class instance.
+
+
+		class Counter \{
+
+		public:
+
+			void ResetCounter();
+
+			void IncrementCounter();
+
+			void DecrementCounter();
+
+		\}
+
+
+General Guidelines: Verbs can be abbreviated as follows:
+
+		get	-	read  /* get_input, for example */
+
+ 		set	-	set
+
+		del	-	delete
+
+		val	-	validate
+
+		upd	-	update
+
+		ins	-	insert
+
+		cnv	-	convert
+
+		fnd	-	find
+
+		con	-	construct
+
+		des	-	destruct
+
+		is	-	query
+
+		upl	-	upload
+
+		mat	-	matching
+
+		mer	-	merging
+
+
+\subsection{4.5	Function Members as Data Wrappers}
+
+
+When class function members serve only to access private data to simulate 
+data items that are not kept as data in order to save space, omit the verb 
+prefixes and just use the noun.
+
+
+		class Rectangle \{
+
+		int	Left;
+
+		int	Top;
+
+		int	Right;
+
+		int	Bottom;
+
+		\
+
+
+		public:
+
+			//...
+
+			int Height()
+
+				\{return Bottom - Top;\}
+
+			int Width()
+
+				\{return Right - Left;\}
+
+
+
+\section{5.	Expressions}
+
+
+\subsection{5.1	Wrap Expressions}
+
+
+Split expression at an operator with a low precedence and place the 
+operator on the new line.  Indent the continuation line two tab spaces.  \
+
+
+
+		EqualRects = Rect1.Top == Rect2.Top
+
+				&& Rect1.Left == Rect2.Left
+
+				&& Rect1.Bottom == Rect2.Bottom
+
+				&& Rect1.Right == Rect2.Right;
+
+
+Likewise for expressions in \bold{if}, \bold{while} and \bold{for} 
+statements.
+
+
+\section{6.	Statements}
+
+
+Start each statement on a separate line.
+
+
+Avoid using commas between statements.  In particular, it is preferable to 
+use braces than a comma to have several operations after a condition:
+
+
+		if (twilight)
+
+			lights = TRUE, hour = 6;	//AVOID THIS
+
+	USE THIS:
+
+		if (twilight) \{
+
+			lights = TRUE;
+
+			hour = 6;
+
+		\}
+
+
+
+Avoid \bold{goto}.
+
+
+In some cases there is one set of processing for errors and yet errors can 
+be detected at several places and at varying levels of indentation.  Often 
+the clearest way to describe this is to put the processing inside a char* 
+function which returns "" if there are no errors and an error message 
+otherwise.  Sometimes, however, it is reasonable to place a single label 
+after the normal return from the function and use goto from each error 
+point to get to it.
+
+
+
+\section{7.	Compound Statements}
+
+
+For long bodies, follow the trailing brace with a comment;  usually the 
+condition at the beginning of the body is sufficient.
+
+
+\subsection{7.1	Else-If Instances}
+
+
+When a statement contains an \bold{else} followed by an \bold{if}, consider 
+them as one and place the \bold{if} on the same line as the \bold{else}.
+
+
+	e.g.	#define BONUS_AMT 1000
+
+		#define MIN_SALES 5000
+
+		#define STORE_RECORD 20000
+
+
+		if(SalesValue > STORE_RECORD)
+
+			promote(anEmployee,SALES_MANAGER);
+
+		else if (SalesValue > MIN_SALES)
+
+			AddBonus(anEmployee,BONUS_AMT);
+
+		else if (SalesValue < MIN_SALES)
+
+			TerminateContract(anEmployee);
+
+
+\subsection{7.2	Do-While Statement}
+
+
+Place the while-condition on the same line as the closing brace of the do 
+statement.  Indent the body of the entire do-while statement with  respect 
+to the preceding and following statements.
+
+	\
+
+
+		i=0;
+
+		do \{
+
+			/* do stuff */
+
+		\} while ( /* conditions */);
+
+		return i;
+
+
+
+For an empty loop body, write \{\} instead of a semi-colon.
+
+
+\subsection{7.3	Switch Statement}
+
+
+Put a \bold{break} statement after every case, even the last.  If you 
+intentionally omit the break, put a comment
+
+	// DROP THRU
+
+
+The\bold{ default:} case should be last.
+
+
+Indent case statements to the same depth as the \bold{switch} control 
+statement, and indent the body of the case from the case statement.
+
+	\
+
+
+	e.g.	switch (command) \{
+
+		case COM_OPEN_FILE:
+
+			pCurrentFile = OpenFile();
+
+		case COM_SAVEAS:
+
+			pCurrentFile = NewName();
+
+			// DROP THRU
+
+		case COM_SAVE:
+
+			SaveFile(pCurrentFile);
+
+			break;
+
+		\}
+
+		\
+
+
+If the body of a succession of cases is less than one line, each body can 
+be placed on one line.  Use two spaces after the colon and semicolons.
+
+
+		switch(colorcode) \{
+
+		case REDCODE:  color = "red";  break;
+
+		case GREENCODE:  color = "green";  break;
+
+		case BLUECODE:  color = "blue";  break;
+
+		\}
+
+
+		switch(timezone) \{
+
+		case EST_TIMEZONE:
+
+			scheduleOperation(op, time -5);  break;
+
+		case EDT_TIMEZONE:
+
+		case CST_TIMEZONE:
+
+			scheduleOperation(op, time -6);  break;
+
+		case CDT_TIMEZONE:
+
+		case MST_TIMEZONE:
+
+			scheduleOperation(op, time -7);  break;
+
+		case MDT_TIMEZONE:
+
+		case PST_TIMEZONE:
+
+			scheduleOperation(op, time -8);  break;
+
+		case PDT_TIMEZONE:
+
+			scheduleOperation(op, time -9);  break;
+
+		\}
+
+
+If a case can be best described with declarations put the right brace after 
+the colon and the left brace before the break.
+
+
+		switch(state) \{
+
+		case Initial:
+
+			i = 0;
+
+			state = AwaitColon;
+
+			break;
+
+		case AwaitColon:  \{
+
+			int nextch;
+
+			if (c == ':') \{
+
+				while ((nextch=getc()) == ' ') \{\}
+
+				state = AwaitB;
+
+			\}
+
+			\} break;
+
+		case AwaitB:
+
+			...
+
+			break;
+
+		\}
+
+
+
+\section{8.	Function Definitions}
+
+ \
+
+
+Leave a blank line between function definitions.
+
+
+Write an explanatory comment before each function.  Use /* ... */ with both 
+slash-star and star-slash at the beginning of a line at the beginning of a 
+line.
+
+
+The function name deserves to begin a line.  The storage class and type 
+should be on the previous line and indented one unit.  The left brace for 
+the function should follow the right parenthesis at the end of the 
+parameter list.
+
+
+		/* func(a, b)
+
+			Multiples a and b to compute forblash ...
+
+			Returns fumblegum
+
+		*/
+
+			static double
+
+		func(int a, double b) \{
+
+			double frogger;
+
+			frogger =  a*b;
+
+			if (a + 5 > frogger)
+
+				b = cos(b);
+
+			return b * frogger;
+
+		\}
+
+
+\section{9.	Classes}
+
+
+\subsection{9.1	Laying out a Class Definition}
+
+
+Place the public members first, followed by the protected members,  then 
+followed by the private members.
+
+	\
+
+
+	e.g.	class Complex \{
+
+		public:
+
+			complex();
+
+			complex(double Real, double Imaginary);
+
+
+		private:
+
+			double Real;
+
+			double Imaginary;
+
+		\};
+
+		\
+
+
+
+\subsection{9.2	Friend Functions}
+
+
+Avoid friend functions.  They sidestep good data encapsulation practice.
+
+\begindata{bp,537789048}
+Version 2
+n 0
+\enddata{bp,537789048}
+\view{bpv,537789048,1,0,0}
+\smaller{Copyright Carnegie Mellon University 1996.  All rights reserved.
+
+
+$Disclaimer: 
+# Permission to use, copy, modify, and distribute this software and its 
+# documentation for any purpose and without fee is hereby granted, provided 
+# that the above copyright notice appear in all copies and that both that 
+# copyright notice and this permission notice appear in supporting 
+# documentation, and that the name of IBM not be used in advertising or 
+# publicity pertaining to distribution of the software without specific, 
+# written prior permission. 
+#                         
+# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# 
+#  $}
+
+\enddata{text,537746808}

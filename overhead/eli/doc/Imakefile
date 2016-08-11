@@ -1,0 +1,12 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+DOCFILES = libcalls.idx libcalls.pgr procs.doc programs.pgr regexp.doc types.pgr
+HELPFILES =  eli.help 
+
+NormalHelpRule()
+InstallDocs(${HELPFILES}, ${DESTDIR}/help)
+InstallDocs(${DOCFILES}, ${DESTDIR}/doc/MAIL)
+InstallHelpAlias(eli, embeddedlispinterpreter)

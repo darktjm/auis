@@ -1,0 +1,104 @@
+\begindata{text,538510824}
+\textdsversion{12}
+\template{help}
+\chapter{\center{ctext: an editing package for C}}
+
+
+\section{What ctext is \
+
+
+}
+\leftindent{Ctext is a "source view"; an editing package used by EZ when 
+editing C code.  See the  \helptopic{srctext}  help file for general 
+information pertaining to all source views.
+
+}
+\section{Starting ctext}
+
+
+\leftindent{At the Typescript prompt, type "ez file.c" or "ez file.h" and 
+press Enter.  Use of a .c or .h extension tells EZ to load the ctext 
+editing package, according to specifications in the global initialization 
+file for EZ, $ANDREWDIR/lib/global.ezinit.
+
+
+If you create your own .ezinit file, you can override the global.ezinit 
+file or add other file extensions that will load the ctext package.  You 
+can also set various parameters of ctext, which are listed below in the 
+section "Customizing ctext in your .ezinit file."  For details about 
+initialization files, see the \helptopic{initfiles} help file.
+
+}
+\section{Special keys
+
+}
+\leftindent{See "Special keys" in the  \helptopic{srctext}  help file.
+
+}
+\section{Pop-up menu meanings}
+
+
+\leftindent{See "Pop-up menu meanings" in the  \helptopic{srctext}  help 
+file.
+
+}
+\bold{\bigger{Customizing ctext in your preferences file}}
+
+
+\leftindent{See "Customizing source views in your preferences file" in the 
+ \helptopic{srctext}  help file.
+
+}
+\section{Customizing ctext in your .ezinit file}
+
+
+\leftindent{There are several parameters controlling ctext's behavior which 
+you can set in your own .ezinit file.  They are listed in bold with the 
+default setting in italic:  \
+
+
+
+\leftindent{\bold{brace-indent \italic{0}}
+
+Controls indentation of braces at the start of a line.
+
+
+\bold{switch-label-undent \italic{4}}
+
+Controls negative indent of switch labels.
+
+
+\bold{switch-level-indent \italic{8}}
+
+Controls indentation of statements within a switch.
+
+
+\bold{outdent-preproc \italic{1}}
+
+If zero, preprocessor lines will be indented with the code.  By default, 
+they will be outdented to the left margin.
+
+}
+See the  \helptopic{srctext}  help file for more ezinit options.
+
+}
+\section{Related Tools}
+
+
+\leftindent{Move your mouse cursor to one of the following names and click 
+your left mouse button to see the help file for:
+
+
+\leftindent{\helptopic{srctext}
+
+\helptopic{ez}
+
+}}
+\begindata{bp,539034296}
+Version 2
+n 0
+\enddata{bp,539034296}
+\view{bpv,539034296,22,0,0}
+(c) Copyright IBM Corp.  (This work is unpublished).  All rights reserved.
+
+\enddata{text,538510824}

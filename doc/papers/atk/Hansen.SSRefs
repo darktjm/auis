@@ -1,0 +1,4984 @@
+\begindata{text,539063560}
+\textdsversion{12}
+\template{default}
+\define{symbol
+menu:[Font~1,Symbol~84]
+attr:[FontFamily symbol Int 0]}
+\define{symbola
+menu:[Font,SymbolA~33]
+attr:[FontFamily symbola Int 0]}
+\define{global
+}
+\define{paragraph
+menu:[Title~3,Paragraph~23]
+attr:[Flags KeepPriorNL Int Set]
+attr:[FontFace Italic Int Set]}
+\define{example
+menu:[Region~4,Example~12]
+attr:[LeftMargin LeftMargin Inch 32768]
+attr:[Justification LeftJustified Point 0]
+attr:[Flags NoFill Int Set]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]}
+\define{ness
+menu:[Font~1,Ness~23]
+attr:[FontFamily AndySans Int 0]}
+\define{footnote
+
+attr:[Flags OverBar Int Set]
+attr:[FontSize PreviousFontSize Point -2]}
+\define{concat
+menu:[Font~1,Concat~22]
+attr:[Script PreviousScriptMovement Point 6]
+attr:[FontSize PreviousFontSize Point 4]}
+\define{sans
+menu:[Font~1,Sans]
+attr:[FontFamily AndySans Int 0]}
+\define{examplefont
+menu:[Font~1,ExampleFont]
+attr:[FontFace Italic Int Set]}
+\define{variable
+menu:[Font~1,Variable]
+attr:[FontFace Italic Int Set]}
+\define{fudge
+menu:[Justify~2,Fudge]
+attr:[Script PreviousScriptMovement Point 4]}
+\define{wideline
+menu:[Justify~2,WideLine]
+attr:[Spacing ConstantSpacing Point 0]
+attr:[Spread ConstantSpacing Point 5]}
+\define{funcdesc
+menu:[Justify~2,Funcdesc]
+attr:[LeftMargin LeftMargin Cm 249692]
+attr:[Indent LeftMargin Cm -249692]}
+\define{iconfont
+menu:[Font~1,IconFont]
+attr:[FontFamily AndySans Int 0]}
+\define{definition
+menu:[Region~4,Definition~85]
+attr:[LeftMargin LeftMargin Cm 138717]
+attr:[RightMargin RightMargin Cm 138717]
+attr:[FontSize PreviousFontSize Point -2]}
+\define{realsmall
+menu:[Font~1,RealSmall~88]
+attr:[Script PreviousScriptMovement Point -4]
+attr:[FontSize PreviousFontSize Point -4]}
+\formatnote{.de OC
+
+.br
+
+.ne 3
+
+..
+
+.cs C 18
+
+\flushright{\smaller{30 November 1991}}}
+
+\begindata{raster,538469688}
+2 0 21992 21992 0 0 294 447
+bits 538469688 294 447
+zw |
+zw |
+zw |
+zw |
+zw |
+s04zi |
+s04zi |
+s04zi |
+s06zi |
+s06zi |
+s06zi |
+s07zi |
+s0780zh |
+s07c0zh |
+s07e0zh |
+s0ff0zh |
+s0ff0zh |
+s0ff8zh |
+s0ff8zh |
+s0ffczh |
+s0ffczh |
+s1ffezh |
+s1fGzh |
+s1fGzh |
+s1fG80zg |
+s1fGc0zg |
+s1fGc0zg |
+s1fGe0zg |
+s1fGe0zg |
+s1fGf0zg |
+s1fGf0zg |
+s1fGf8zg |
+s1fGf8zg |
+s1fGfczg |
+s1fGfczg |
+s1fGfezg |
+s1fGfezg |
+s1fHzg |
+s1fHzg |
+s1fH80z |
+s1fH80z |
+s1fHc0z |
+s1fHc0z |
+s1fHe0z |
+s1fHe0z |
+s1fHf0z |
+s1fHf0z |
+s0fHf0z |
+s0fHf8z |
+s0fHf8z |
+s0fHfcz |
+s0fHfcz |
+s0fHfcz |
+s07Hfez |
+s07Hfez |
+s07Hfez |
+s07Iz |
+s07Iz |
+s07I80y |
+s03I80y |
+s03I80y |
+s03Ic0y |
+s03Ic0y |
+s01Ie0y |
+s01Ie0y |
+s01If0y |
+s01If0y |
+tIf8y |
+tIf8y |
+tIfcy |
+tIfey |
+t7fHfey |
+t7fIy |
+t3fI80x |
+t3fI80x |
+t1fIc0x |
+t1fIe0x |
+t0fIe0x |
+t0fIf0x |
+t07If0x |
+t07If8x |
+t03Ifcx |
+t01Ifex |
+t01Ifex |
+uJx |
+u7fI80w |
+u3fIc0w |
+u3fIe0w |
+u1fIf0w |
+u0fIf8w |
+u07Ifcw |
+u03Ifew |
+u01J80v |
+vJc0v |
+v7fIe0v |
+v3fIf8v |
+v1fIfcv |
+v07Jv |
+v03J80u |
+v01Je0u |
+w7fIf0u |
+w3fIf8u |
+w1fIfeu |
+w0fJ80t |
+w03Je0t |
+w01Jf0t |
+x7fIfct |
+x1fJt |
+x07Jc0s |
+x01Jf0s |
+y7fIfcs |
+y1fJs |
+y07Jc0r |
+y01Jf0r |
+z3fIfcr |
+z0fJr |
+z03Jc0q |
+zgJf8q |
+zg3fJq |
+zg0fJe0n10g |
+zg03Jfcn10g |
+zhK80m30g |
+zh1fJf0me0g |
+zh03Jfel3fc0g |
+zi7fJc0j1fG80	g |
+zi07Jfci1fGfe	h |
+zjKc0g1fHfch |
+zj1fOf0h |
+zj01Oc0h |
+zk07Ni |
+zl1fLfci |
+zk07Mf0i |
+zj03Nc0i |
+zjOj |
+zi0fNfcj |
+ziOf0j |
+zh0fOc0j |
+zhPk |
+zg0fOfck |
+zgPf0k |
+z0fPc0k |
+zPfel |
+y0fPf0l |
+yQm |
+x0fPf8m |
+xQ80m |
+w0fPf8n |
+wQ80n |
+v0fPf8o |
+vQ80o |
+u0fPf8p |
+uQ80p |
+t0fPf8q |
+s01Q80q |
+s3fPf8r |
+r03Q80r |
+r3fPf8s |
+q03Q80s |
+q3fPf8t |
+p03Q80t |
+p7fPf8u |
+o07Q80u |
+oQf8v |
+n0fQ80v |
+n7fPf8w |
+m07Q80w |
+m7fPf8x |
+l07Q80x |
+l7fPf8y |
+k07Q80y |
+kQf8z |
+j1fQ80z |
+i0fQf8zg |
+gc03fR80zg |
+g7fRf8zh |
+g1fR80zh |
+g0fQf8zi |
+g07Q80zi |
+g03Pf0zj |
+hPzk |
+h7fNf0zk |
+h1fMfezl |
+h07Mc0zl |
+iLfczm |
+i0fLc0zl |
+jLf8zl |
+j0fKfezl |
+kL80zk |
+k0fKe0zk |
+lKf8zk |
+l0fJfezk |
+m7fJ80zj |
+m07Je0zj |
+n7fIf8zj |
+n03Ifezj |
+o1fI80zi |
+o07Ie0zi |
+p7fHf8zi |
+p0fHfezi |
+p01I80zh |
+q3fHe0zh |
+q07Hf8zh |
+q01Hfezh |
+r3fH80zg |
+r0fHe0zg |
+r03Hf8zg |
+sHfezg |
+s3fH80z |
+s1fHe0z |
+s07Hf8z |
+s03Hfez |
+tI80y |
+t7fHe0y |
+t1fHf8y |
+t07Hfey |
+t03I80x |
+uIc0x |
+u3fHe0x |
+u1fHf8x |
+u07Hfcx |
+u03Hfex |
+u01I80w |
+vIc0w |
+v7fHe0w |
+v3fHf0w |
+v1fHf8w |
+v0fHfcw |
+v07Hfew |
+v03Iw |
+v01I80v |
+wIc0v |
+w7fHe0v |
+w3fHf0v |
+w1fHf8v |
+w1fHfcv |
+w0fHfev |
+w07Iv |
+w03I80u |
+w01Ic0u |
+w01Ie0u |
+xIf0u |
+x7fHf8u |
+x3fHf8u |
+x1fHfcu |
+x1fHfeu |
+x0fIu |
+x07Iu |
+x03I80t |
+x01Ic0t |
+x01Ie0t |
+yIe0t |
+y7fHf0t |
+y3fHf0t |
+y1fHf8t |
+y1fHf8t |
+y0fHfct |
+y07Hfct |
+y03Hfet |
+y03It |
+y01It |
+y01I80s |
+zI80s |
+zIc0s |
+z7fHc0s |
+z7fHe0s |
+z3fHf0s |
+z3fHf0s |
+z3fHf8s |
+z1fHf8s |
+z1fHfcs |
+z1fHfcs |
+z0fHfcs |
+z0fHfes |
+z0fHfes |
+z07Is |
+z07Is |
+z07Is |
+z03Is |
+z03I80r |
+z03I80r |
+z03I80r |
+z01Ic0r |
+z01Ic0r |
+z01Ic0r |
+z01Ic0r |
+zgIe0r |
+zgIe0r |
+zgIe0r |
+zgIf0r |
+zg7fHf0r |
+zg7fHf0r |
+zg7fHf0r |
+zg7fHf8r |
+zg3fHf8r |
+zg3fHf8r |
+zg3fHf8r |
+zg3fHf8r |
+zg1fHfcr |
+zg1fHfcr |
+zg1fHfcr |
+zg1fHfcr |
+zg0fHfer |
+zg0fHfer |
+zg0fHfer |
+zg0fHfer |
+zg07Ir |
+zg07Ir |
+zg07Ir |
+zg07Ir |
+zg03I80q |
+zg03I80q |
+zg03I80q |
+zg03I80q |
+zg01Ic0q |
+zg01Ic0q |
+zg01Ic0q |
+zg01Ic0q |
+zhIe0q |
+zhIe0q |
+zhIe0q |
+zhIe0q |
+zh7fHf0q |
+zh7fHf0q |
+zh7fHf0q |
+zh7fHf0q |
+zh3fHf8q |
+zh3fHf8q |
+zh3fHf8q |
+zh3fHf8q |
+zh1fHfcq |
+zh1fHfcq |
+zh1fHfcq |
+zh1fHfcq |
+zh0fHfeq |
+zh0fHfeq |
+zh0fHfeq |
+i60x0fHfeq |
+i60g0fJcfGfe03	Gfel07Iq |
+if0g0fJcfGfe03	Gfel07Iq |
+if0g0ff80fc07f	c3Gf0gGf0l07I	q |
+h01f0g0fe00fc0	1fc0Gc0g3fc0l	07Iq |
+h01f8g0f800fc0	07c07f80g3fm03	I80p |
+h03f8g0fg0fc0	03c03fh7cm03I	80p |
+h03f8g0fg0fc0	03c03fhf8m03I	80p |
+h03fcg0eg0fc0	01c03fg01f0m03	I80p |
+h07fcg0eg0fc0	01c03fg03e0m01	Ic0p |
+h07feg0cg0fc0	gc03fg07c0m01	Ic0p |
+h0ffeg0cg0fc0	gc03fg0f80m01	Ic0p |
+h0fbeg0cg0fc0	gc03fg1fn01Ic0	p |
+h1f9fi0fc0h3f	g3eoIe0p |
+h1f9fi0fc0h3f	g7coIe0p |
+h!1fi0fc0h3fg	f8oIe0p |
+h3f0f80h0fc0h	3f01f0oIe0p |
+h3e0f80h0fc0h	3f03e0o7fHf0p |
+h7e0fc0h0fc0h	3f07c0o7fHf0p |
+h7c07c0h0fc0h	3f0f80o7fHf0p |
+hfc07c0h0fc0h	3f1fp7fHf0p |
+hf807e0h0fc0h	3fGp3fHf8p |
+hf803e0h0fc0h	3fGp3fHf8p |
+g01f803e0h0fc0	h3fGc0o3fHf8p |
+g01f003f0h0fc0	h3fGe0o3fHf8p |
+g03f001f0h0fc0	h3fGf0o1fHf8p |
+g03e001f8h0fc0	h3fGf8o1fHfcp |
+g07e0gf8h0fc0	h3fe7fco1fHfc	p |
+g07e0gf8h0fc0	h3fc3feo1fHfc	p |
+g07c0gfch0fc0	h3f81Go0fHfcp |
+g0fc0g7ch0fc0	h3fgG80n0fHfc	p |
+g0fHfch0fc0h3f	g7fc0n0fHfep |
+g1fHfeh0fc0h3f	g3fe0n0fHfep |
+g1f80g3eh0fc0	h3fg1ff0n07Hfe	p |
+g3fh3fh0fc0h3f	g0ff8n07Hfep |
+g3fh1fh0fc0h3f	g07fcn07Ip |
+g3eh1fh0fc0h3f	g03fen07Ip |
+g7eh1f80g0fc0	h3fg01Gn03Ip |
+g7ch0f80g0fc0	h3fhG80m03Ip |
+gfch0fc0g0fc0	h3fh7fc0m03Ip |
+gf8h0fc0g0fc0	h3fh3fe0m03I80	o |
+01f8h07e0g0fc0	h3fh1ff0m01I80	o |
+01f8h07e0g1fe0	h7f80g0ff8m01	I80o |
+03f0h07f0g3ff0	hGc0g0ffcm01I	80o |
+07f8h0ff8gGfc	g03Gf0g1fGm01	Ic0o |
+3fGhH03Hg0fGfe	gHe0mIc0o |
+3fGhH03Hg0fGfe	gHe0mIc0o |
+zjIc0o |
+zjIe0o |
+zj7fHe0o |
+zj7fHe0o |
+zj7fHe0o |
+zj7fHf0o |
+zj3fHf0o |
+zj3fHf0o |
+zj3fHf0o |
+zj3fHf8o |
+zj1fHf8o |
+zj1fHf8o |
+zj1fHf8o |
+zj1fHfco |
+zj0fHfco |
+zj0fHfco |
+zj0fHfco |
+zj0fHfeo |
+zj07Hfej80j |
+zj07Hfej80j |
+zj07Ii0180j |
+zj07Ii0180j |
+zj03Ii0380j |
+zj03Ii0780j |
+zj03Ii0f80j |
+zj03I80h1f80j |
+zj01I80h3f80j |
+zj01I80h7fk |
+zj01I80hGk |
+zj01I80g01Gk |
+zkI80g03Gk |
+zkIc0g07fek |
+zkIc0g0ffek |
+zkIc0g1ffck |
+zk7fHe0g3ff8k |
+zk7fHe0g7ff0k |
+zk7fHe0gGe0k |
+zk7fHf001Ge0k |
+zk3fHf803Gc0k |
+zk3fHf807G80k |
+zk1fHfc0fGl |
+zk1fI3ffel |
+zk0fJfel |
+zk0fJfcl |
+zk07Jf8l |
+zk07Jf0l |
+zk03Je0l |
+zk01Je0l |
+zlJc0l |
+zl7fI80l |
+zl3fIm |
+zl1fHfem |
+zl0fHfcm |
+zl07Hf8m |
+zl03Hf0m |
+zmHe0m |
+zm3fG80m |
+zm07fen |
+zw |
+zw |
+zw |
+zw |
+zw |
+zw |
+\enddata{raster, 538469688}
+\view{rasterview,538469688,22,299,0}\flushright{
+}
+
+\majorheading{Subsequence References:
+
+First-Class Values for 
+Substrings\footnote{\
+\begindata{fnote,539297112}
+\textdsversion{12}
+\enddata{fnote,539297112}
+\view{fnotev,539297112,23,0,0}Copyright ACM, 1992.  Published in 
+\formatnote{\\fI}ACM Trans. Programming Languages and Systems, 
+14\formatnote{\\fR} (4), Oct., 1992, pp. 471-489. }\
+
+
+}
+\leftindent{\leftindent{\leftindent{\leftindent{\underline{ 
+                                        }\
+
+
+\bigger{Wilfred J. Hansen}
+
+\smaller{ATK Consortium
+
+School of Computer Science
+
+Carnegie-Mellon University
+
+\underline{Pittsburgh, PA 15213               }}\
+
+
+}}}}
+
+
+\indent{\bold{Abstract.}   Arrays of characters are a basic data type in 
+many programming languages, but strings and substrings are seldom accorded 
+first-class status as parameters and return values.  Such status would 
+enable a routine that calls a search function to readily access context on 
+both sides of a return value.  To enfranchise substrings, this paper 
+describes a new data type for substrings as a special case of one for 
+general subsequences.  The key idea is that values are not sequences or 
+references to positions in sequences, but rather references to 
+subsequences.  Primitive operations on the data type are constants, 
+concatenation, and four new functions--\variable{base}, \variable{start}, 
+\variable{next}, and \variable{extent}--which map subsequence references to 
+subsequence references.
+
+
+This paper informally presents the data type, demonstrates its convenience 
+for defining search functions, and shows how it can be concisely 
+implemented.  Examples are given in \ness{Ness}, a language incorporating 
+the new data type which is implemented as part of the Andrew Toolkit.
+
+
+\bold{Keywords:} strings, substrings, sequences, subsequences, programming 
+language design, string searching, document processing, Andrew Toolkit, 
+ATK, \ness{Ness}}\leftindent{\leftindent{
+
+}}\
+\begindata{bp,539261736}
+\enddata{bp,539261736}
+\view{bpv,539261736,24,0,0}
+
+Text and string operations are increasingly important as word processing 
+becomes one of the most common computer applications, especially for 
+non-technical people.  Despite the importance of strings, programming 
+languages have offered no innovations in string data types or operations 
+since the introduction of pattern matching and \variable{substr} which 
+happened at least as early as COMIT [Yngve, 1963] and PL/I [IBM, 1965], 
+respectively.  The most recent innovations are in control structures;  in 
+particular, Icon [Griswold, 1990]  has introduced goal-directed evaluation. 
+ This integrates string scanning with the rest of the language, whereas 
+pattern matching is a sub-facility in earlier languages like COMIT and 
+SNOBOL4 [Griswold, 1971].
+
+
+In some languages strings and string expressions are \italic{first-class} 
+values in that they are eligible to appear in all contexts that permit any 
+other expression, including assignment, function parameter, and return 
+value.  Substrings, however, do not have first class status.  To represent 
+one usually requires multiple assignments and multiple variables with the 
+concomitant increase in complexity and potential for errors.  Records, 
+structs, or other composite values can sometimes be utilized, but this 
+still requires the programmer to be aware of the details.
+
+
+First-class values are especially important in the applicative programming 
+style, which eschews side effects and thus has little room for values of 
+other classes.  Although applicative programming has sprung from a desire 
+to prove properties of programs, it can also play a role in making it 
+possible for more people to program.  [Hughes, 1989]
+
+
+This paper defines and demonstrates \italic{subsequence references}, a 
+first-class data type for subsequences in general and substrings in 
+particular.  In this data type, each value is a reference to a subsequence 
+of a base sequence, so each single value represents an entire subsequence. 
+ The presentation in this paper is informal;  for a formal definition of 
+the data type, see [Hansen, 1989a].  \
+
+
+
+Subsequence references are but one of several models of string values:
+
+
+\italic{Atomic.  }In the atomic model of strings each string value is a 
+distinct object with no accessible constituents.  Operations and string 
+functions return values that are effectively new strings with no relation 
+to other existing strings.  Given the right implementation, atomic strings 
+can certainly be first-class,  however, they are not always simple to use. 
+ Problems arise for parsing and searching operations because the result of 
+a search must report not only the string which matched, but also its 
+position.  For instance, a calling routine may need to test punctuation 
+adjacent to a returned value.
+
+
+Although there are no major languages with a pure atomic model of strings, 
+the possibility has been demonstrated by Eli [Glickstein, 1990].  In this 
+Lisp-like language, search functions return a list of three strings whose 
+concatenation will recreate a value equivalent to the original subject 
+string.  The middle element of the list satisfies the search specification.
+
+
+Starting no later than XPL [McKeeman, 1970], implementations of functions 
+for atomic string values have not actually copied strings to produce new 
+values.  Instead each return value is a reference to a substring of one of 
+the argument strings, which thus serves as a base for the value.  This 
+technique is also employed for the implementation described below, with the 
+difference that the new data type offers functions for accessing elements 
+of the base string outside the referenced subsstring.
+
+
+\italic{Indexed.}  In the indexed model a string value is a pointer to a 
+string or an integer index to an element of a string (usually the latter is 
+an atomic string).  Such values can easily be first-class since integers 
+and pointers are themselves first-class, but substrings are not first class 
+because two values are required to refer to an arbitrary substring.  When a 
+programmer takes a shortcut to utilize one variable as a basis for locating 
+two or more substrings, there is a potential for off-by one errors. 
+ Programmer effort is also increased when forced to choose between the 
+atomic and indexed models.  The formal complexity of the language is 
+increased by having recourse to a domain--integers or pointers--outside the 
+domain of strings.
+
+
+\wideline{C is one well-known example of a language with indices 
+implemented as pointers;  a string value is a pointer to a string or a tail 
+of a string.  To refer to a subsequence in C a composite value is required. 
+ For instance a token scanner might utilize the type \sans{StringPiece}:
+
+}\example{\formatnote{.ne 7}
+
+\sans{\wideline{typedef struct string \{char *str; int len;\} StringPiece;
+
+}StringPiece token(StringPiece s)  \{
+
+	... compute \italic{position} and \italic{length} \
+
+
+	s.str = position;
+
+	s.len = length;
+
+	return s;
+
+}}\wideline{\example{\sans{\}}}\wideline{
+
+}}Here assignments to both s.str and s.len are required where only one 
+value, the substring, is being manipulated.  Moreover, there is no general 
+way for a program to determine how many active \sans{StringPiece} values 
+refer to any given base string, so it may be impossible to do general 
+storage management, as discussed  below in section 5.
+
+
+Integer indices to strings are found in many languages, including PL/I and 
+Fortran.  These are not entirely equivalent to pointers when a string is 
+copied: integer indices into the original will refer to the same positions 
+in both copy and original, while pointers will refer only to a position in 
+one string or the other.
+
+
+\formatnote{.rn OC qC
+
+.de OC
+
+.br
+
+..}
+
+\wideline{\paragraph{Icon.}  Icon provides a special operator, 
+\iconfont{?}, for pattern scanning.  The expression
+
+		\iconfont{s ? operations}
+
+first makes string value \iconfont{s} be the value of the global variable 
+\iconfont{&subject} and then executes the \iconfont{operations}.  The 
+current position in the subject is given by another global variable, 
+\iconfont{&pos}, which initially has the position before the first 
+character.  Each of the string operations  \iconfont{upto}, 
+\iconfont{many}, \iconfont{find}, \iconfont{any}, \iconfont{match}, and 
+\iconfont{bal} examines \iconfont{&subject} starting at \iconfont{&pos} and 
+returns the integer index of the position just beyond a successful match. 
+ Extracting a matched substring as a new atomic value is done by two other 
+functions, \iconfont{tab} and \iconfont{move}.  These two functions (and 
+only these two) have the side effect of advancing \iconfont{&pos}.  Thus it 
+is common to write expressions such as
+
+\iconfont{\leftindent{t := tab(many(letters))}}
+
+}wherein the position function \iconfont{many} computes the position after 
+an initial substring composed of letters and the \iconfont{tab} operator 
+first advances \iconfont{&pos} across the substring and then returns a copy 
+of that substring so it can be assigned to \iconfont{t}.  \
+
+
+\formatnote{.rn qC OC
+
+}
+Icon functions can generate a sequence of values, for example, 
+\iconfont{many(letters)} generates the positions of each run of letters in 
+the subject.  Icon's goal-directed evaluation mechanism initiates 
+backtracking in appropriate contexts, which consumes successive values 
+until one satisfies the search.  For instance, \iconfont{s ? \{ 
+tab(many(letters)) & ="()" \}} determines if \iconfont{s} contains a run of 
+letters followed by \iconfont{()};  backtracking tries each value of 
+\iconfont{many(letters)} in turn until one is found followed by 
+\iconfont{()} or no more can be found.
+
+
+Not only does Icon have the complexity of offering both the atomic and 
+indexed models of string values, but there are separate sets of functions 
+for each.  There is a potential for confusion between \iconfont{tab} and 
+\iconfont{move}, which return atomic string values, and \iconfont{many}, 
+\iconfont{upto}, and the other functions which return indices.  Indeed, it 
+would be interesting to know if omission of required \iconfont{tab} and 
+\iconfont{move} operations is a common error in Icon programs.
+
+
+\italic{Subsequence references.}  Each subsequence reference value 
+incorporates both a subsequence value and the position of that value within 
+its base.  When given first-class status by a programming language, such 
+are ideal to return from parsing or other searching/scanning operations. 
+ As discussion of the various Algorithms below will show, it is common to 
+utilize a single variable both for its value and its position.  In all 
+cases, other string models would require additional variables and 
+assignment statements.
+
+
+Although internally more complex than integers, subsequence references 
+simplify programming by reducing the required number of concepts.  Atomic 
+values and indices are subsumed by the single model and there is no need 
+for recourse to a domain outside of subsequences.  Moreover, subsequences 
+largely eliminate the need for separate data types for character and string 
+values, both of which can be represented as references to appropriate 
+subsequences.
+
+
+Subsequences can be viewed as a generalization of Icon's \iconfont{&pos} 
+and \iconfont{&subject};  however subsequences can appear in any context, 
+not just within string scanning.  Moreover, subsequence references can be 
+used in iterations requiring scanning two strings in parallel.  For 
+example, an interpreter for a pattern matching language would need to 
+advance simultaneously across one sequence representing the subject and 
+another representing the pattern.
+
+
+The subsequence reference data type has been implemented in two languages: 
+ \ness{Ness} [Hansen, 1989b;  Hansen, 1990] and cT [CDEC, 1989].  Both were 
+originally implemented under the Andrew Toolkit (ATK) [Morris, 1986; Palay, 
+1988], although cT has recently been re-implemented.  The capability range 
+of ATK is illustrated by this paper: a single file with various embedded 
+objects created using ATK's ez text editor.  Examples below are given in 
+\ness{Ness}, the implementation of which permits typographic styling and 
+embedded objects in program text and constants;  the program fragments 
+below were compiled and executed with the styles as shown.
+
+
+
+\formatnote{.ne 4}
+
+\heading{1. A Data Type for Subsequences}
+
+
+To define the subsequence reference data type we assume an arbitrary set of 
+elements--for instance the set of all characters in all fonts and 
+sizes--and define these terms:\indent{
+
+
+A \italic{sequence} is a finite, ordered collection of elements from the 
+arbitrary set.  Before each element and after the last is a 
+"\italic{position}".
+
+
+A \italic{subsequence reference} or \italic{subseq} is a triple [\bold{b}, 
+\bold{l}, \bold{r}] where \bold{b} is a sequence and \bold{l} and \bold{r} 
+are positions in \bold{b}.
+
+}
+The subseq [\bold{b}, \bold{l}, \bold{r}] is said to \italic{refer} to the 
+elements of \bold{b} between the two positions \bold{l} and \bold{r}.  If 
+\bold{l} and \bold{r} are the same, the subseq is said to be 
+\italic{empty}.  Note that empty sequences are not all equivalent;  they 
+may differ as to their locations within their bases.  The elements in a 
+sequence are imagined to be in a horizontal line with earlier elements to 
+the "left" of later elements.
+
+
+Figure 1 shows three subseq values, \variable{m}, \variable{s}, and 
+\variable{p}, defined on the base sequence "\bold{'Twas brillig and the 
+slithy toves}" and referring respectively to "\bold{s bril}", an empty 
+subsequence, and  "\bold{toves}".
+
+
+\formatnote{.ne 1.6i
+
+'PB  432 50
+
+'if  \\n(zT  \\\{\\
+
+\\!%!
+
+\\!%		Figure 1 for \
+
+
+\\!%		First-Class Values for Strings
+
+\\!%		WJHansen,  November, 1991
+
+\\!%
+
+\\!%	Image displays in a rectangle of size linewidth x insetheight
+
+\\!%	Coordinate resolution is the PostScript point
+
+\\!%	Example string is centered
+
+\\!%	Dots in background are temporary aids to alignment of identifier 
+strings and arrows
+
+\\!
+
+\\!
+
+\\!    432 troffadjust 50 neg translate
+
+\\!
+
+\\!/initialize \{
+
+\\!	/xfont 	/Times-Bold findfont 14 scalefont 	def	% font for example 
+string
+
+\\!	/idfont	/Times-Italic findfont 12 scalefont	def	% font for identifiers
+
+\\!	\
+
+
+\\!	/linewidth 	6 72 mul	def	% width of inset	6 inches
+
+\\!	/insetheight	50	def		% height of inset	50 pts
+
+\\!	\
+
+
+\\!	/extrawidth 	3 	def	% extra points between each char of example
+
+\\!	/examplestring  (<'Twas brillig and the slithy toves>) def
+
+\\!	\
+
+
+\\!	/px  	8 array 	def		% coordinates of gaps between string pieces
+
+\\!	/markerlength	13	def	% length of markers
+
+\\!\} def
+
+\\!% set origin for the main example string
+
+\\!/mainstring \{
+
+\\!	xfont setfont
+
+\\!	/ox  % the x origin for example string
+
+\\!		% compute total width added by ashow
+
+\\!		examplestring length extrawidth mul extrawidth sub
+
+\\!		%compute ox
+
+\\!		examplestring stringwidth pop    add 	% total width
+
+\\!		2 div  linewidth 2 div exch sub	% x origin
+
+\\!	def
+
+\\!	\
+
+
+\\!	% now we display the main string and save locations
+
+\\!	% of the pieces in px
+
+\\!	ox oy moveto
+
+\\!	extrawidth 0    (<)  	ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[0]
+
+\\!	extrawidth 0    ('Twa)	ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[1]
+
+\\!	extrawidth 0    (s bril)	ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[2]
+
+\\!	extrawidth 0    (l)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[3]
+
+\\!	extrawidth 0    (ig and t)	ashow  currentpoint pop  extrawidth 2 div 
+sub   % x[4]
+
+\\!	extrawidth 0    (h)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[5]
+
+\\!	extrawidth 0    (e slithy )	ashow  currentpoint pop  extrawidth 2 div 
+sub   % x[6]
+
+\\!	extrawidth 0    (toves)	ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[7]
+
+\\!	extrawidth 0    (>)		ashow
+
+\\!	px astore pop
+
+\\!\} def
+
+\\!
+
+\\!%		stack on entry has x0 x1 (the ends of the marker)  y0 y1 (head and 
+tail)
+
+\\!/marker \{
+
+\\!	/y1 exch def
+
+\\!	/y0 exch def
+
+\\!	/x1 exch def
+
+\\!	/x0 exch def
+
+\\!
+
+\\!	.48 setlinewidth
+
+\\!	1 setlinecap
+
+\\!	newpath
+
+\\!	x0 y0 moveto
+
+\\!	x0 y1 lineto	% draw vertical
+
+\\!
+
+\\!	x0 x1 ne  \{
+
+\\!		x1 y0 moveto
+
+\\!		x1 y1 lineto		% the other vertical
+
+\\!		y1 y0 sub 2 div y0 add dup    % y coord for horizontal
+
+\\!		x0 exch moveto
+
+\\!		x1 exch lineto		% draw the horizontal
+
+\\!	\} if
+
+\\!
+
+\\!	% draw half arrow heads
+
+\\!	y1 y0 sub dup .2 mul  	/dy exch def
+
+\\!	abs .115 mul 		/dx exch def
+
+\\!	x0 y0 moveto    dx neg dy rlineto
+
+\\!	x1 y0 moveto    dx dy rlineto
+
+\\!	\
+
+
+\\!	stroke
+
+\\!\} def
+
+\\!
+
+\\!/topmarkers \{
+
+\\!	px 1 get  px 2 get
+
+\\!	oy 12 add  dup markerlength add \
+
+
+\\!	marker		% m
+
+\\!	px 4 get  px 4 get
+
+\\!	oy 12 add  dup markerlength add
+
+\\!	marker		% n
+
+\\!	px 6 get  px 7 get
+
+\\!	oy 12 add  dup markerlength add
+
+\\!	marker		%p
+
+\\!\} def
+
+\\!
+
+\\!%		stack has (x,y) of arrowhead and string
+
+\\!/toplabel \{
+
+\\!	/thestring exch def
+
+\\!	/y0 exch def
+
+\\!	/x0 exch def
+
+\\!
+
+\\!	/delta markerlength 1.414 div def
+
+\\!	/x1 x0 delta sub def
+
+\\!	/y1 y0 delta add def
+
+\\!	/x2 x0 def
+
+\\!	/y2 y0 markerlength add def
+
+\\!	/x3 x1 def
+
+\\!	/y3 y1 markerlength add def
+
+\\!
+
+\\!	idfont setfont
+
+\\!	% the label  (to left of x3,y3)
+
+\\!	x3 thestring stringwidth pop sub 3 sub    y3  2 sub   moveto
+
+\\!	thestring show
+
+\\!
+
+\\!	% the arrow
+
+\\!	newpath
+
+\\!	x0 y0 moveto
+
+\\!	x1 y1 x2 y2 x3 y3 curveto
+
+\\!
+
+\\!	% the arrowhead
+
+\\!	gsave \
+
+
+\\!	x0 y0 translate
+
+\\!	43 rotate
+
+\\!	markerlength dup    .3 mul  /dy exch def     .1725 mul /dx exch def
+
+\\!	dx neg dy moveto
+
+\\!	0 0 lineto
+
+\\!	dx dy  lineto
+
+\\!	.24 setlinewidth
+
+\\!	1 setlinecap
+
+\\!	1 setlinejoin
+
+\\!	stroke
+
+\\!	grestore
+
+\\!\} def
+
+\\!
+
+\\!/topids \{
+
+\\!	% idy is y coord of arrowhead
+
+\\!	/idy oy 12 add  markerlength 2 div add 4 add def
+
+\\!
+
+\\!	px 1 get  px 2 get  add  2 div    	idy  (m)  toplabel
+
+\\!	px 4 get 4 sub  		idy  (s)  toplabel
+
+\\!	px 6 get px 7 get  add   2 div  	idy  (p)  toplabel
+
+\\!\} def
+
+\\!
+
+\\!
+
+\\!%  Now do it!!! \
+
+
+\\!
+
+\\!gsave
+
+\\!
+
+\\!\{
+
+\\!	initialize
+
+\\!	/oy  % the y origin
+
+\\!		5		% 5 pts from bottom to leave room for descenders
+
+\\!	def
+
+\\!	mainstring
+
+\\!	topmarkers
+
+\\!	topids
+
+\\!
+
+\\!\} stopped  \{
+
+\\!	showpage
+
+\\!	grestore
+
+\\!	handleerror
+
+\\! 	gsave
+
+\\!\} if
+
+\\!
+
+\\! % showpage
+
+\\!  grestore
+
+\\!\\\}
+
+'PE 432 50}
+
+
+\indent{\bold{Figure 1. Three subseq values on a base sequence.}  The base 
+sequence is shown between < and >.  The end positions of subseq value are 
+shown as arrows pointing at positions, i. e., between elements of the base.}
+
+
+The most basic operators defined for subseq values are \variable{start}, 
+\variable{base}, \variable{next}, and \variable{extent} as illustrated in 
+Figure 2 and defined thusly:
+
+
+\indent{\bold{start(x)}  -  Returns the empty subseq at the beginning of 
+its argument.  Specifically the value is on the same base as \variable{x} 
+and has both positions the same as the leftmost of the two positions in 
+\variable{x}.
+
+
+\bold{base(x)}  -  Returns a subseq for the entire base of x. 
+  Specifically, the return value is on the same base as \variable{x} and 
+has the two positions at opposite ends of that base.
+
+}
+\formatnote{.ne 4.4
+
+'PB  432 290
+
+'if  \\n(zT  \\\{\\
+
+\\!%!
+
+\\!%		Figure 2 for \
+
+
+\\!%		First-class Values for Strings
+
+\\!%		WJHansen,  November, 1991
+
+\\!%
+
+\\!%	Image displays in a rectangle of size linewidth x insetheight
+
+\\!%	Coordinate resolution is the PostScript point
+
+\\!%	Example string is centered
+
+\\!%	Dots in background are temporary aids to alignment of identifier 
+strings and arrows
+
+\\!
+
+\\!
+
+\\!    432 troffadjust 290 neg translate
+
+\\!
+
+\\!/initialize \{
+
+\\!	/xfont 	/Times-Bold findfont 14 scalefont 	def	% font for example 
+string
+
+\\!	/idfont	/Times-Italic findfont 12 scalefont	def	% font for identifiers
+
+\\!	\
+
+
+\\!	/linewidth 	6 72 mul	def	% width of inset	6 inches
+
+\\!	/insetheight	4.1 72 mul 	def	% height of inset	4.1 inches
+
+\\!	\
+
+
+\\!	/extrawidth 	3 	def	% extra points between each char of example
+
+\\!	/examplestring  (<'Twas brillig and the slithy toves>) def
+
+\\!	\
+
+
+\\!	/px  	8 array 	def		% coordinates of gaps between string pieces
+
+\\!	/markerlength	13	def	% length of markers
+
+\\!\} def
+
+\\!% set origin for the main example string
+
+\\!/mainstring \{
+
+\\!	xfont setfont
+
+\\!	/ox  % the x origin for example string
+
+\\!		% compute total width added by ashow
+
+\\!		examplestring length extrawidth mul extrawidth sub
+
+\\!		%compute ox
+
+\\!		examplestring stringwidth pop    add 	% total width
+
+\\!		2 div  linewidth 2 div exch sub	% x origin
+
+\\!	def
+
+\\!	\
+
+
+\\!	% now we display the main string and save locations
+
+\\!	% of the pieces in px
+
+\\!	ox oy moveto
+
+\\!	extrawidth 0    (<)  	ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[0]
+
+\\!	extrawidth 0    ('Twa)	ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[1]
+
+\\!	extrawidth 0    (s bril)	ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[2]
+
+\\!	extrawidth 0    (l)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[3]
+
+\\!	extrawidth 0    (ig and t)	ashow  currentpoint pop  extrawidth 2 div 
+sub   % x[4]
+
+\\!	extrawidth 0    (h)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[5]
+
+\\!	extrawidth 0    (e slithy )	ashow  currentpoint pop  extrawidth 2 div 
+sub   % x[6]
+
+\\!	extrawidth 0    (toves)	ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[7]
+
+\\!	extrawidth 0    (>)		ashow
+
+\\!	px astore pop
+
+\\!\} def
+
+\\!
+
+\\!%		stack on entry has x0 x1 (the ends of the marker)  y0 y1 (head and 
+tail)
+
+\\!/marker \{
+
+\\!	/y1 exch def
+
+\\!	/y0 exch def
+
+\\!	/x1 exch def
+
+\\!	/x0 exch def
+
+\\!
+
+\\!	.48 setlinewidth
+
+\\!	1 setlinecap
+
+\\!	newpath
+
+\\!	x0 y0 moveto
+
+\\!	x0 y1 lineto	% draw vertical
+
+\\!
+
+\\!	x0 x1 ne  \{
+
+\\!		x1 y0 moveto
+
+\\!		x1 y1 lineto		% the other vertical
+
+\\!		y1 y0 sub 2 div y0 add dup    % y coord for horizontal
+
+\\!		x0 exch moveto
+
+\\!		x1 exch lineto		% draw the horizontal
+
+\\!	\} if
+
+\\!
+
+\\!	% draw half arrow heads
+
+\\!	y1 y0 sub dup .2 mul  	/dy exch def
+
+\\!	abs .115 mul 		/dx exch def
+
+\\!	x0 y0 moveto    dx neg dy rlineto
+
+\\!	x1 y0 moveto    dx dy rlineto
+
+\\!	\
+
+
+\\!	stroke
+
+\\!\} def
+
+\\!
+
+\\!/topmarkers \{
+
+\\!	px 1 get  px 2 get
+
+\\!	oy 12 add  dup markerlength add \
+
+
+\\!	marker		% m
+
+\\!	px 4 get  px 4 get
+
+\\!	oy 12 add  dup markerlength add
+
+\\!	marker		% n
+
+\\!	px 6 get  px 7 get
+
+\\!	oy 12 add  dup markerlength add
+
+\\!	marker		%p
+
+\\!\} def
+
+\\!
+
+\\!/bottommarkers \{
+
+\\!	px 1 get  px 1 get
+
+\\!	oy 4 sub  dup markerlength sub
+
+\\!	marker		% start(m)
+
+\\!	px 2 get  px 3 get
+
+\\!	oy 4 sub  dup markerlength sub
+
+\\!	marker		% next(m)
+
+\\!	px 4 get  px 4 get
+
+\\!	oy 4 sub  dup markerlength sub
+
+\\!	marker		% start(n)
+
+\\!	px 4 get  px 5 get
+
+\\!	oy 4 sub  markerlength sub 4 sub dup markerlength sub
+
+\\!	marker		%next(n)
+
+\\!	px 6 get  px 6 get
+
+\\!	oy 4 sub  dup markerlength sub
+
+\\!	marker		% start(p)
+
+\\!	px 7 get  px 7 get
+
+\\!	oy 4 sub  dup markerlength sub
+
+\\!	marker		% next(p)
+
+\\!	px 0 get  px 7 get
+
+\\!	oy 4 sub  markerlength 1.7 mul sub 5 sub dup markerlength sub
+
+\\!	marker		%base(all)
+
+\\!\} def
+
+\\!
+
+\\!%		stack has (x,y) of arrowhead and string
+
+\\!/toplabel \{
+
+\\!	/thestring exch def
+
+\\!	/y0 exch def
+
+\\!	/x0 exch def
+
+\\!
+
+\\!	/delta markerlength 1.414 div def
+
+\\!	/x1 x0 delta sub def
+
+\\!	/y1 y0 delta add def
+
+\\!	/x2 x0 def
+
+\\!	/y2 y0 markerlength add def
+
+\\!	/x3 x1 def
+
+\\!	/y3 y1 markerlength add def
+
+\\!
+
+\\!	idfont setfont
+
+\\!	% the label  (to left of x3,y3)
+
+\\!	x3 thestring stringwidth pop sub 3 sub    y3  2 sub   moveto
+
+\\!	thestring show
+
+\\!
+
+\\!	% the arrow
+
+\\!	newpath
+
+\\!	x0 y0 moveto
+
+\\!	x1 y1 x2 y2 x3 y3 curveto
+
+\\!
+
+\\!	% the arrowhead
+
+\\!	gsave \
+
+
+\\!	x0 y0 translate
+
+\\!	43 rotate
+
+\\!	markerlength dup    .3 mul  /dy exch def     .1725 mul /dx exch def
+
+\\!	dx neg dy moveto
+
+\\!	0 0 lineto
+
+\\!	dx dy  lineto
+
+\\!	.24 setlinewidth
+
+\\!	1 setlinecap
+
+\\!	1 setlinejoin
+
+\\!	stroke
+
+\\!	grestore
+
+\\!\} def
+
+\\!
+
+\\!
+
+\\!%		stack has (x,y) of arrowhead,  (x,y) of arrow tail,  and  string
+
+\\!/bottomlabel \{
+
+\\!	/thestring exch def
+
+\\!	/y3 exch def
+
+\\!	/x3 exch def
+
+\\!	/y0 exch def
+
+\\!	/x0 exch def
+
+\\!
+
+\\!	/x1 x3  def
+
+\\!	/y1 y0 x0 x3 sub sub def
+
+\\!	/x2 x0 def
+
+\\!	/y2 y3 x0 x3 sub add def
+
+\\!
+
+\\!	idfont setfont
+
+\\!	% the label  (to left of x3,y3)
+
+\\!	x3 thestring stringwidth pop sub 2 sub    y3 2 sub    moveto
+
+\\!	thestring show
+
+\\!
+
+\\!	% the arrow
+
+\\!	newpath
+
+\\!	x0 y0 moveto
+
+\\!	x1 y1 x2 y2 x3 y3 curveto
+
+\\!
+
+\\!	% the arrowhead
+
+\\!	gsave \
+
+
+\\!	x0 y0 translate
+
+\\!	-43 rotate
+
+\\!	markerlength dup    .3 mul neg  /dy exch def     .1725 mul /dx exch def
+
+\\!	dx neg dy moveto
+
+\\!	0 0 lineto
+
+\\!	dx dy  lineto
+
+\\!	.24 setlinewidth
+
+\\!	1 setlinecap
+
+\\!	1 setlinejoin
+
+\\!	stroke
+
+\\!	grestore
+
+\\!\} def
+
+\\!
+
+\\!
+
+\\!/topids \{
+
+\\!	% idy is y coord of arrowhead
+
+\\!	/idy oy 12 add  markerlength 2 div add 4 add def
+
+\\!
+
+\\!	px 1 get  px 2 get  add  2 div    	idy  (m)  toplabel
+
+\\!	px 4 get 4 sub  		idy  (s)  toplabel
+
+\\!	px 6 get px 7 get  add   2 div  	idy  (p)  toplabel
+
+\\!\} def
+
+\\!
+
+\\!/bottomids \{
+
+\\!	/marky   oy 4 sub markerlength .7 mul  sub  def
+
+\\!	/moveleft \{29 sub\} def
+
+\\!
+
+\\!	 % start()  row
+
+\\!	/idy oy  62  sub def
+
+\\!	px 1 get dup  4 sub  exch  moveleft   marky exch  idy \
+
+
+\\!		(start(m))  bottomlabel
+
+\\!	px 4 get dup  4 sub  exch  moveleft  px 5 get sub  px 4 get add   marky 
+exch  idy \
+
+
+\\!		(start(s))  bottomlabel
+
+\\!	px 6 get dup  4 sub  exch  moveleft   marky exch  idy \
+
+
+\\!		(start(p))  bottomlabel
+
+\\!
+
+\\!	% next() row
+
+\\!	/idy oy  77  sub def
+
+\\!	px 2 get dup  4 sub  exch  moveleft  10 sub  marky exch  idy \
+
+
+\\!		(next(m))  bottomlabel
+
+\\!	px 4 get dup  4 sub  exch  moveleft   \
+
+
+\\!		marky markerlength sub 5 sub exch  idy \
+
+
+\\!		(next(s))  bottomlabel
+
+\\!	px 7 get dup  4 sub  exch  moveleft 20 sub   marky exch  idy \
+
+
+\\!		(next(p))  bottomlabel
+
+\\!
+
+\\!	% base() row
+
+\\!	/idy oy  92  sub def
+
+\\!	/marky  oy 4 sub  markerlength 2.3 mul sub 8 sub  def
+
+\\!	px 2 get dup   exch  moveleft   marky exch  idy \
+
+
+\\!		(base(m))  bottomlabel
+
+\\!	px 5 get dup  4 sub  exch  moveleft  marky  exch  idy \
+
+
+\\!		(base(s))  bottomlabel
+
+\\!	px 7 get  10 sub dup  exch moveleft   marky exch  idy \
+
+
+\\!		(base(p))  bottomlabel
+
+\\!\} def
+
+\\!
+
+\\!/extentmarkers \{
+
+\\!	px 1 get  px 7 get
+
+\\!	oy 4 sub  dup markerlength sub
+
+\\!	marker		% extent(m,p)
+
+\\!	px 1 get  px 4 get
+
+\\!	oy 4 sub markerlength sub 4 sub  dup markerlength sub
+
+\\!	marker		% extent(m,n)
+
+\\!	px 2 get  dup
+
+\\!	oy 4 sub markerlength 4 add 2 mul sub  dup markerlength sub
+
+\\!	marker		% extent(n,m)
+
+\\!	px 4 get  dup
+
+\\!	oy 4 sub markerlength 4 add 2 mul sub  dup markerlength sub
+
+\\!	marker		% extent(p,n)
+
+\\!\} def
+
+\\!
+
+\\!/extentids \{
+
+\\!	/idy oy  65  sub def
+
+\\!
+
+\\!	/marky   oy 8 sub markerlength 1.7 mul  sub  def
+
+\\!	px 2 get  markerlength sub  dup   markerlength sub   marky exch  idy 
+ 17 add \
+
+
+\\!		(extent(m, s))  bottomlabel
+
+\\!
+
+\\!	/marky   oy 12 sub markerlength 2.7 mul  sub  def
+
+\\!	px 4 get dup  4 sub  exch  markerlength sub  marky exch  idy \
+
+
+\\!		(extent(p, s))  bottomlabel
+
+\\!
+
+\\!	/marky   oy 4 sub markerlength .7 mul  sub  def
+
+\\!	px 7 get  30 sub dup   exch  markerlength sub   marky exch  idy  32 add
+
+\\!		(extent(m, p))  bottomlabel
+
+\\!
+
+\\!	/marky   oy 12 sub markerlength 2.7 mul  sub  def
+
+\\!	px 2 get dup  4 sub  exch  markerlength sub   marky exch  idy \
+
+
+\\!		(extent(p, m))  bottomlabel
+
+\\!\} def
+
+\\!
+
+\\!%  Now do it!!! \
+
+
+\\!
+
+\\!gsave
+
+\\!
+
+\\!\{
+
+\\!	% From an image we see that the top half is 2.0 inches and the bottom 
+is 1.7
+
+\\!	% We want .4 inches between
+
+\\!	% Set the baseline for the top at 3.4 inches and for the bottom at 1.0
+
+\\!
+
+\\!	initialize
+
+\\!	/oy  % the y origin
+
+\\!		3.4 72 mul   %  (was  insetheight .82 mul )
+
+\\!	def
+
+\\!	mainstring
+
+\\!	topmarkers
+
+\\!	topids
+
+\\!	bottommarkers
+
+\\!	bottomids
+
+\\!	/oy  % the y origin
+
+\\!		1.0 72 mul   %  (was  insetheight .31 mul )
+
+\\!	def
+
+\\!	mainstring
+
+\\!	topmarkers
+
+\\!	topids
+
+\\!	extentmarkers
+
+\\!	extentids
+
+\\!
+
+\\!\} stopped  \{
+
+\\!	showpage
+
+\\!	grestore
+
+\\!	handleerror
+
+\\! 	gsave
+
+\\!\} if
+
+\\!
+
+\\! % showpage
+
+\\!  grestore
+
+\\!\\\}
+
+'PE 432 290}
+
+
+\indent{\bold{Figure 2.  Four primitive functions.}  The subseq values 
+below the base show the result of applying the primitive functions to 
+\variable{m}, \variable{s}, and \variable{p}.  Values for 
+\examplefont{extent(s, m)} and \examplefont{extent(s, p)} are given in the 
+text.}
+
+
+In the Figure, \examplefont{start(m)} is the empty subseq between \bold{a} 
+and \bold{s}; and the values of \examplefont{base(m)}, 
+\examplefont{base(p)}, and \examplefont{base(s)} are each the entire 
+sequence between \examplefont{<} and \examplefont{>}.  To get an empty 
+subseq at the beginning of \variable{x}'s base sequence, we can write 
+ \examplefont{start(base(x))}.   The opposite composition, 
+\examplefont{base(start(x))}, returns exactly the same value as 
+\examplefont{base(x)} because \variable{x} and \examplefont{start(x)} share 
+the same base.
+
+
+\indent{\bold{next(x)}  -  This function returns a subseq for the element 
+following \variable{x}.  Specifically, the base of the result is the same 
+as that of \variable{x}, one position is at the rightmost position of x, 
+and the other position is one element further to the right in the base.  If 
+the argument \variable{x} extends all the way to the end of its base 
+string, then \examplefont{next(x)} returns an empty subseq for the position 
+at the end of the base.
+
+}
+\examplefont{Next(m)} and \examplefont{next(s)} in the figure are both 
+single elements, while \examplefont{next(p)} is empty.  The element just 
+after the beginning of \variable{x} is \examplefont{next(start(x))}, while 
+the empty subseq at the end of \variable{x} is 
+\examplefont{start(next(x))}.  \examplefont{Next(base(x))} is the empty 
+subseq at the end of \examplefont{base(x)}.
+
+
+\indent{\bold{extent(x, y)}  - In general, returns a subseq for everything 
+from the beginning of \variable{x} to the end of \variable{y}. 
+ Specifically, when \variable{x} and \variable{y} are on the same base, the 
+result subseq is also on that base and has one position at the end of 
+\variable{start(next(y))};  the other position is either 
+\examplefont{start(x)} or \variable{start(next(y))}, whichever is further 
+left in the base.  If \variable{x} and \variable{y} are on different bases, 
+the result is an empty subseq on a unique empty base.
+
+}
+One non-empty result in Figure 2 is \examplefont{extent(s, p)} which 
+extends from \variable{s} to the end of the base; conversely, 
+\examplefont{extent(s, m)} gives an empty subseq at the same position as 
+\examplefont{extent(p,m)}.  All of the base before \variable{m} is 
+\examplefont{extent(base(m), start(m))} and all of the base after 
+\variable{m} is \examplefont{extent(next(m), base(m))}; observe that the 
+result for both is shorter than \examplefont{base(m)} even though it is one 
+of the arguments.
+
+
+To create new base values it suffices in this paper to provide constants 
+and concatenation:
+
+
+\indent{\bold{"}...\bold{"} - (where ... is a sequence of elements): a 
+subseq constant.  The value produced refers to a base sequence composed of 
+the sequence of elements and has the two positions at the opposite ends of 
+the base.  \
+
+
+
+\bold{x} \concat{\bold{~}} \bold{y} - Tilde denotes \bold{concatenation} 
+and generates a new base string composed of copies of the subsequences 
+referred to by \variable{x} and \variable{y}.  The value returned is a 
+reference to the new base string with positions at its opposite ends.}
+
+
+In  terms of Figure 2, \examplefont{m \concat{~} p} is a subseq whose base 
+is the new value "\bold{s briltoves}" and whose positions are at the 
+extremes of that base.
+
+
+\wideline{\formatnote{.rn OC qC
+
+.de OC
+
+.br
+
+..}
+
+In examples below, subseq variables are declared with the form:\example{ \
+
+
+\italic{subseq} m, p, s}
+
+}Function arguments and return values are subseq values by default. 
+ Assignment of subseq values assigns the reference and does not depend on 
+the contents of the base sequence of the source nor affect the base of the 
+destination.  Comparison, however, is best defined to compare the elements 
+referred to, rather than the subseq values.  With this definition, two 
+subseqs \variable{x} and \variable{y}, not both on empty bases, are on the 
+same base if \examplefont{base(x) = base(y)} and 
+\examplefont{extent(base(x), base(y)) = base(x)}.
+
+
+\wideline{Given a subseq value we can write simple loops to scan through a 
+base string.  If \variable{m} refers to a blank, we can advance it to point 
+to the nearest following non-blank with:
+
+\example{\italic{while} m = " " \italic{do} m := next(m) \italic{end while}}
+
+}Note that this loop will terminate with \italic{m} referring to either a 
+non-blank or to the empty subseq at the end of the base.  Of course, if 
+\italic{m} originally referred to a non-blank, it would remain unchanged. 
+ Denoting the initial value of \variable{m} as 
+\variable{m\subscript{\smaller{0}}}, the loop invariant is that 
+\examplefont{extent(m\subscript{\smaller{0}}, start(m))} is all blanks.
+
+\formatnote{.rn qC OC}
+
+
+\wideline{Suppose \variable{m} refers to a word, that is, consecutive 
+non-blank characters with adjacent blanks on both ends.  To find the next 
+word we must first skip the blanks following \variable{m} and then build a 
+subseq referring to everything prior to the next blank.  In \ness{Ness} 
+this is written as:
+
+}\formatnote{.ne 1.5i
+
+.rn OC qC
+
+.de OC
+
+.br
+
+..}
+
+\example{\italic{function} \bold{nextword}(m)
+
+\leftindent{\italic{while} next(m) = " " \italic{do} m := next(m) 
+\italic{end while}
+
+m := next(m)		-- first letter of word
+
+\italic{while} next(m) /= "" \italic{and} next(m) /= " " \italic{do
+
+	}-- another non-blank: include it in \italic{m}
+
+\leftindent{m := extent(m, next(m))}
+
+\italic{end while}
+
+\italic{return} m}
+
+}\wideline{\example{\italic{end function}}
+
+}\formatnote{.rn qC OC}
+
+The first \examplefont{\italic{while}} loop scans across all blanks after 
+\variable{m} and the second scans across all subsequent non-blanks to 
+accumulate the word.  The test \examplefont{next(m) /= ""} checks to see if 
+\variable{m} ends at the end of its base, in which case it is deemed to be 
+at the end of a word.  When there is no word, \examplefont{nextword} 
+returns an empty string.
+
+
+\wideline{Even this brief example can illustrate the first-class nature of 
+subseq values;  that is, that a subseq value returned by one function can 
+be directly passed as an argument to another.  For instance the statement
+
+}\example{\italic{if} m = "function" \italic{then} \
+
+
+	addToTable(nextword(m), functiontable) \
+
+
+}\wideline{\example{\italic{end if}}
+
+}will pass to \variable{addToTable} the exact word returned from 
+\examplefont{nextword} without recourse to extraneous code like global 
+variables, additional arguments, or side effects as would be required in C. 
+ A further advantage of subsequence reference values becomes apparent if 
+\italic{addToTable} must consider the context of the word in its base 
+string;  this would be impossible with atomic string values.
+
+
+The operators \variable{start} and \variable{next} are asymmetric with 
+respect to text order in that one moves from left-to-right and the other 
+returns the leftmost position in its argument, while the corresponding 
+operators for the reverse direction are non-primitive.  This asymmetry 
+reflects a decision to engineer the primitives for the most common order of 
+examining text.  Indeed, some implementations utilizing multiple encoding 
+widths for characters may impose a performance penalty for right-to-left 
+traversal.
+
+
+\heading{
+}\formatnote{.ne 3
+
+.rn OC qC
+
+.de OC
+
+.br
+
+..
+
+}\heading{2. Non-primitive Functions}
+
+
+With the primitive functions as a foundation we can write expressions for 
+interesting subsequences relative to a given value.  Commonly used 
+functions include those identified in Figure 3 and defined in Table 1.
+
+\formatnote{\variable{
+Finish} is analogous to \variable{start} and also produces an empty subseq, 
+but at the other end of its argument.  Functions \variable{front}, 
+\variable{first}, \variable{last}, and \variable{previous} all produce 
+subseqs for single elements analogously with \variable{next}. 
+ \examplefont{Rest(x)} returns a subseq one element shorter than 
+\variable{x}.
+
+
+.rn qC OC
+
+.ne 2.15i}
+
+\formatnote{'PB  432 117
+
+'if  \\n(zT  \\\{\\
+
+\\!%!
+
+\\! %!
+
+\\!%		Figure 3 for \
+
+
+\\!%		First-class Values for Strings
+
+\\!%		WJHansen,  November, 1991
+
+\\! %
+
+\\! %	Image displays in a rectangle of size linewidth x insetheight
+
+\\! %	Coordinate resolution is the PostScript point
+
+\\! %	Example string is centered
+
+\\! %	Dots in background are temporary aids to alignment of identifier 
+strings and arrows
+
+\\! \
+
+
+\\! \
+
+
+\\!    432 troffadjust 117 neg translate
+
+\\! \
+
+
+\\! /initialize \{
+
+\\! 	/linewidth 	5  72  mul   def	% width of inset	5 inches
+
+\\! 	/insetheight   	1.94  72  mul   def	% height of inset	2.2 inches
+
+\\! \
+
+
+\\! 	/examplepoints 14 def			% pointsize for example text
+
+\\! 	/idpoints 12 def			% pointsize for labels
+
+\\! 	/markerheight   idpoints 1.1 mul  def	% height of marker vertical bars
+
+\\! 	/markersep  idpoints 3 div def		% vertical separation between markers
+
+\\! 	/linesep idpoints markersep add def	% separation of bottom marker rows
+
+\\! 	/halfline linesep 2 div def		% half a bottom marker rowheight
+
+\\! 	/extrawidth  3  def			% extra points between each char of example
+
+\\! \
+
+
+\\! 			% fonts for example string and id's
+
+\\! 	/xfont    /Times-Bold findfont examplepoints scalefont    def
+
+\\! 	/idfont    /Times-Italic findfont idpoints scalefont    def	\
+
+
+\\! 	\
+
+
+\\! 	/examplestring  (<xxxxxqqqqqqqqqqqqqqqqqqqqxxxx>) def
+
+\\! 		% this string is repeated in mainstring below
+
+\\! 	\
+
+
+\\! 	/px   7 array   def			% coordinates of gaps between string pieces
+
+\\! \} def
+
+\\! % set origin for the main example string
+
+\\! /mainstring \{
+
+\\! 	xfont setfont
+
+\\! 	/ox  20  def
+
+\\! 	\
+
+
+\\! 	% now we display the main string and save locations
+
+\\! 	% of the end of each piece in px
+
+\\! 	ox oy moveto
+
+\\! 	extrawidth 0    (<)  		ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[0]
+
+\\! 	extrawidth 0    (xxxx)		ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[1]
+
+\\! 	extrawidth 0    (x)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[2]
+
+\\! 	extrawidth 0    (q)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[3]
+
+\\! 	extrawidth 0    (qqqqqqqqqqqqqqqqqq) ashow  currentpoint pop 
+ extrawidth 2 div sub   % x[4]
+
+\\! 	extrawidth 0    (q)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[5]
+
+\\! 	extrawidth 0    (xxxxx)	ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[6]
+
+\\! 	extrawidth 0    (>)		ashow
+
+\\! 	px astore pop
+
+\\! \} def
+
+\\! \
+
+
+\\! %		stack on entry has x0 x1 (the ends of the marker)  y0 y1 (head and 
+tail)
+
+\\! /marker \{
+
+\\! 	/y1 exch def
+
+\\! 	/y0 exch def
+
+\\! 	/x1 exch def
+
+\\! 	/x0 exch def
+
+\\! \
+
+
+\\! 	.48 setlinewidth
+
+\\! 	1 setlinecap
+
+\\! 	newpath
+
+\\! 	x0 y0 moveto
+
+\\! 	x0 y1 lineto	% draw vertical
+
+\\! \
+
+
+\\! 	x0 x1 ne  \{
+
+\\! 		x1 y0 moveto
+
+\\! 		x1 y1 lineto		% the other vertical
+
+\\! 		y1 y0 sub 2 div y0 add dup    % y coord for horizontal
+
+\\! 		x0 exch moveto
+
+\\! 		x1 exch lineto		% draw the horizontal
+
+\\! 	\} if
+
+\\! \
+
+
+\\! 	% draw half arrow heads
+
+\\! 	y1 y0 sub dup .2 mul  	/dy exch def
+
+\\! 	abs .115 mul 		/dx exch def
+
+\\! 	x0 y0 moveto    dx neg dy rlineto
+
+\\! 	x1 y0 moveto    dx dy rlineto
+
+\\! 	\
+
+
+\\! 	stroke
+
+\\! \} def
+
+\\! \
+
+
+\\! /topmarkers \{
+
+\\! 	px 2 get  px 5 get   oy examplepoints add  dup markerheight add 
+ marker     % q
+
+\\! \} def
+
+\\! \
+
+
+\\! /bottommarkers \{
+
+\\! 			% first row
+
+\\! 	/ty oy markersep sub 1 sub def
+
+\\! 	px 1 get  px 2 get   ty  dup markerheight sub   marker 
+    %previous(q)
+
+\\! 	px 3 get  px 5 get   ty  dup markerheight sub   marker     % rest(q)
+
+\\! \
+
+
+\\! 			% second row
+
+\\! 	/ty ty  markerheight markersep add sub def
+
+\\! 	px 2 get  px 3 get   ty  dup markerheight sub   marker     % first(q), 
+front(q)
+
+\\! 	px 4 get  px 5 get   ty  dup markerheight sub   marker     % last(q)
+
+\\! \
+
+
+\\! 			%third row
+
+\\! 	/ty ty  markerheight markersep add sub def
+
+\\! 	px 5 get  px 5 get   ty  dup markerheight sub   marker     % finish(q)
+
+\\! \
+
+
+\\! \} def
+
+\\! \
+
+
+\\! %		stack has (x,y) of arrowhead and string
+
+\\! /toplabel \{
+
+\\! 	/thestring exch def
+
+\\! 	/y0 exch def
+
+\\! 	/x0 exch def
+
+\\! \
+
+
+\\! 	/delta markerheight 1.3 div def	% was 1.414	(i.e., sqrt(2))
+
+\\! 	/x1 x0 delta sub def
+
+\\! 	/y1 y0 delta add def
+
+\\! 	/x2 x0 def
+
+\\! 	/y2 y0 markerheight .7 mul add def
+
+\\! 	/x3 x1 def
+
+\\! 	/y3 y1 markerheight .7 mul add def
+
+\\! \
+
+
+\\! 	idfont setfont
+
+\\! 	% the label  (to left of x3,y3)
+
+\\! 	x3 thestring stringwidth pop sub 3 sub    y3  2 sub   moveto
+
+\\! 	thestring show
+
+\\! \
+
+
+\\! 	% the arrow
+
+\\! 	newpath
+
+\\! 	x0 y0 moveto
+
+\\! 	x1 y1 x2 y2 x3 y3 curveto
+
+\\! \
+
+
+\\! 	% the arrowhead
+
+\\! 	gsave \
+
+
+\\! 	x0 y0 translate
+
+\\! 	43 rotate
+
+\\! 	markerheight dup    .3 mul  /dy exch def     .1725 mul /dx exch def
+
+\\! 	dx neg dy moveto
+
+\\! 	0 0 lineto
+
+\\! 	dx dy  lineto
+
+\\! 	.24 setlinewidth
+
+\\! 	1 setlinecap
+
+\\! 	1 setlinejoin
+
+\\! 	stroke
+
+\\! 	grestore
+
+\\! \} def
+
+\\! \
+
+
+\\! /topids \{
+
+\\! 	% laby1 is y coord of arrowhead
+
+\\! 	/laby1 oy 13 add  markerheight 2 div add markersep add def
+
+\\! \
+
+
+\\! 	px 2 get  px 5 get  add  2 div	laby1  (q)  toplabel
+
+\\! \} def
+
+\\! \
+
+
+\\! \
+
+
+\\! %		stack has (x,y) of arrowhead,  (x,y) of arrow tail,  and  string
+
+\\! /bottomlabel \{
+
+\\! 	/thestring exch def
+
+\\! 	/y3 exch def
+
+\\! 	/x3 exch def
+
+\\! 	/y0 exch def
+
+\\! 	/x0 exch def
+
+\\! \
+
+
+\\! 	idfont setfont
+
+\\! 	% the label  (to left of x3,y3)
+
+\\! 	x3 thestring stringwidth pop sub 2 sub    y3  3 sub    moveto
+
+\\! 	thestring show
+
+\\!
+
+\\!	 y3 y0 sub abs 8 le \{	% if arrow too flat, use straight arrow
+
+\\! 		newpath
+
+\\! 		x0 y0 moveto  x3 y3 lineto
+
+\\!	 	/angle x3 x0 sub y0 y3 sub atan def
+
+\\!	 \}  \{	% else use curved arrow \
+
+
+\\! 		/x1 x3  def
+
+\\! 		/y1 y0 x0 x3 sub sub def
+
+\\! 		/x2 x0 def
+
+\\! 		/y2 y3 x0 x3 sub add def
+
+\\! \
+
+
+\\! 		% the arrow
+
+\\! 		newpath
+
+\\! 		x0 y0 moveto
+
+\\! 		x1 y1 x2 y2 x3 y3 curveto
+
+\\! 		/angle -43 def
+
+\\! 	\} ifelse
+
+\\!
+
+\\! 	% the arrowhead
+
+\\! 	gsave \
+
+
+\\! 	x0 y0 translate
+
+\\! 	angle rotate
+
+\\! 	markerheight dup    .3 mul neg  /dy exch def     .1725 mul /dx exch 
+def
+
+\\! 	dx neg dy moveto
+
+\\! 	0 0 lineto
+
+\\! 	dx dy  lineto
+
+\\! 	.24 setlinewidth
+
+\\! 	1 setlinecap
+
+\\! 	1 setlinejoin
+
+\\! 	stroke
+
+\\! 	grestore
+
+\\! \} def
+
+\\! \
+
+
+\\! %		stack has (x,y) of arrowhead,  (x,y) of arrow tail,  and  string
+
+\\! /bottomids \{
+
+\\! 	/bothx \{dup 4 sub exch markerheight sub\} def
+
+\\! \
+
+
+\\! % there are three rows of labels:   laby1, laby2, laby3, laby4
+
+\\! % The sections are organized by the y coord of the marker
+
+\\! \
+
+
+\\! 	/laby0 oy idpoints sub def
+
+\\! 	/laby1 laby0 linesep sub  def
+
+\\! 	/laby2 laby1 linesep sub  def
+
+\\! 	/laby3 laby2 linesep sub  def
+
+\\! \
+
+
+\\! 	/marky   oy 5 sub markerheight .7 mul  sub  def
+
+\\! 	px 5 get  px 3 get add 2 div  bothx      marky exch  laby1 \
+
+
+\\! 		(rest(q))  bottomlabel
+
+\\! 	/marky   marky  markerheight  4 add 2 mul sub  def
+
+\\! 	px 5 get bothx    marky exch  laby2 laby3 add 2 div
+
+\\! 		(finish(q))  bottomlabel
+
+\\! \
+
+
+\\! 	px 1 get   bothx   laby0 exch  laby0 laby1 add 2 div
+
+\\! 		(previous(q))  bottomlabel
+
+\\! 	px 2 get bothx     laby1 exch  laby2
+
+\\! 		(first(q), front(q))  bottomlabel
+
+\\! 	px 4 get bothx	laby1 exch  laby1  \
+
+
+\\! 		(last(q))  bottomlabel
+
+\\!
+
+\\! \} def
+
+\\! \
+
+
+\\! %  Now do it!!! \
+
+
+\\! \
+
+
+\\! gsave
+
+\\! \
+
+
+\\! \{
+
+\\! 	initialize
+
+\\! 	/oy  % the y origin
+
+\\! 		0.9  72   mul
+
+\\! 	def
+
+\\! 	mainstring
+
+\\! 	topmarkers
+
+\\! 	topids
+
+\\! 	bottommarkers
+
+\\! 	bottomids
+
+\\! \} stopped  \{
+
+\\! 	showpage
+
+\\! 	grestore
+
+\\! 	handleerror
+
+\\! \
+
+
+\\! 	gsave
+
+\\! \} if
+
+\\! \
+
+
+\\! % showpage
+
+\\! grestore
+
+\\! \\\}
+
+'PE 432 117}
+
+\indent{\bold{Figure 3.  Non-primitive functions.}  For the subtle 
+difference between \variable{first} and \variable{front}, see Table 1.}
+
+  \
+
+
+\formatnote{.ne 3.8i}
+
+\leftindent{\
+\begindata{table,539297288}
+\rows 34 0 0 0 49 50 33
+\cols 63 156 156
+'Function	'Definition	'Expression
+-	-	-
+\begindata{text,539528780}
+\textdsversion{12}
+\template{default}
+\italic{finish(x)} \
+
+
+\enddata{text,539528780}
+	| \begindata{text,539525460}
+\textdsversion{12}
+\template{default}
+\flushleft{the empty string at the position where \italic{x} ends}
+
+\enddata{text,539525460}
+	| \begindata{text,539063424}
+\textdsversion{12}
+\template{default}
+\italic{start(next(x))\
+}\enddata{text,539063424}
+
+\begindata{text,539666564}
+\textdsversion{12}
+\template{default}
+\italic{front(x)}
+
+\enddata{text,539666564}
+	| \begindata{text,539696684}
+\textdsversion{12}
+\template{default}
+\flushleft{the element which starts where \italic{x} starts (even if 
+\italic{x} is empty)\
+}\enddata{text,539696684}
+	| \begindata{text,539685140}
+\textdsversion{12}
+\template{default}
+\italic{next(start(x))\
+}\enddata{text,539685140}
+
+\begindata{text,539714364}
+\textdsversion{12}
+\template{default}
+\define{global
+}
+\italic{rest(x)\
+}\enddata{text,539714364}
+	| \begindata{text,539702604}
+\textdsversion{12}
+\template{default}
+\flushleft{all of \italic{x} past its first element (empty if \italic{x} is 
+empty)\
+}\enddata{text,539702604}
+	| \begindata{text,539731844}
+\textdsversion{12}
+\template{default}
+\italic{extent(next(front(x)), x)\
+}\enddata{text,539731844}
+
+\begindata{text,539760904}
+\textdsversion{12}
+\template{default}
+\italic{first(x)\
+}\enddata{text,539760904}
+	| \begindata{text,539749312}
+\textdsversion{12}
+\template{default}
+\flushleft{first element of \italic{x}, but empty if \italic{x} is empty}
+
+\enddata{text,539749312}
+	| \begindata{text,539778536}
+\textdsversion{12}
+\template{default}
+\italic{extent(x, start(rest(x)))\
+}\enddata{text,539778536}
+
+\begindata{text,539766800}
+\textdsversion{12}
+\template{default}
+\italic{last(x)\
+}\enddata{text,539766800}
+	| \begindata{text,539796024}
+\textdsversion{12}
+\template{default}
+\flushleft{the last element in \italic{x}, or \italic{x} itself, if empty\
+}\enddata{text,539796024}
+	| \begindata{text,539784288}
+\textdsversion{12}
+\template{default}
+\{see text\}\
+\enddata{text,539784288}
+
+\begindata{text,539813512}
+\textdsversion{12}
+\template{default}
+\italic{previous(x})\
+\enddata{text,539813512}
+	| \begindata{text,539842740}
+\textdsversion{12}
+\template{default}
+\flushleft{the element preceding \italic{x\
+}}\enddata{text,539842740}
+	| \begindata{text,539830980}
+\textdsversion{12}
+\template{default}
+\italic{last(extent(base(x), start(x)))\
+}\enddata{text,539830980}
+
+\enddata{table,539297288}
+\view{spread,539297288,25,0,0}
+\formatnote{.sp -1}
+
+}\indent{\bold{Table 1.  Non-Primitive Functions.}  The function named in 
+the first column and defined in the second can be implemented with the 
+expression given in the third.}
+
+
+Figure 4 illustrates further the non-primitive functions of Table 1.  Here 
+variable \variable{m} has the same properties as \variable{q} in Figure 3 
+and variables \variable{s} and \variable{p} show the results for empty and 
+one element values, respectively.  \variable{First} and \variable{front} 
+differ in their values only for the empty subseq \variable{s}; in this 
+case, \examplefont{first(s)} is \variable{s} itself and 
+\examplefont{front(s)} is the element \examplefont{next(s)}.
+
+
+The expressions for \examplefont{rest} and \examplefont{first} exploit the 
+definition of \examplefont{extent}.  When \variable{x} has one or more 
+elements, the value of \examplefont{next(front(x))} begins just after the 
+first element, so the expression for \examplefont{rest} produces a value 
+extending from just after that first element to the end of \variable{x}. 
+ When \variable{x} is empty, its end precedes the start of 
+\examplefont{next(front(x))}, so the result for \examplefont{rest} is the 
+empty subsequence at the end of \variable{x}, which is the same value as 
+\variable{x} itself, as per the definition of \variable{rest}.  The same 
+trick applies in the definition of \variable{first}, which gives the single 
+element preceding \examplefont{rest(x)} if \variable{x} is non-empty, but 
+otherwise \variable{x} itself.
+
+
+\formatnote{.ne 2.3i
+
+}\formatnote{'PB  432 130
+
+'if  \\n(zT  \\\{\\
+
+\\!%!
+
+\\! %!
+
+\\!%		Figure 4 for \
+
+
+\\!%		First-class Values for Strings
+
+\\!%		WJHansen,  November, 1991
+
+\\! %
+
+\\! %	Image displays in a rectangle of size linewidth x insetheight
+
+\\! %	Coordinate resolution is the PostScript point
+
+\\! %	Example string is centered
+
+\\! %	Dots in background are temporary aids to alignment of identifier 
+strings and arrows
+
+\\! \
+
+
+\\! \
+
+
+\\!    432 troffadjust 130 neg translate
+
+\\! \
+
+
+\\! /initialize \{
+
+\\! 	/linewidth 	5  72  mul   def	% width of inset	5 inches
+
+\\! 	/insetheight   	1.94  72  mul   def	% height of inset	2.2 inches
+
+\\! \
+
+
+\\! 	/examplepoints 14 def			% pointsize for example text
+
+\\! 	/idpoints 12 def			% pointsize for labels
+
+\\! 	/markerheight   idpoints 1.1 mul  def	% height of marker vertical bars
+
+\\! 	/markersep  idpoints 3 div def		% vertical separation between markers
+
+\\! 	/extrawidth  3.4  def			% extra points between each char of example
+
+\\! \
+
+
+\\! 			% fonts for example string and id's
+
+\\! 	/xfont    /Times-Bold findfont examplepoints scalefont    def
+
+\\! 	/idfont    /Times-Italic findfont idpoints scalefont    def	\
+
+
+\\! 	\
+
+
+\\! 	/examplestring  (<In winter, when the fields are white,>) def
+
+\\! 		% this string is repeated in mainstring below
+
+\\! 	\
+
+
+\\! 	/px   13 array   def			% coordinates of gaps between string pieces
+
+\\! \} def
+
+\\! % set origin for the main example string
+
+\\! /mainstring \{
+
+\\! 	xfont setfont
+
+\\! 	/ox  55  def
+
+\\! 	\
+
+
+\\! 	% now we display the main string and save locations
+
+\\! 	% of the pieces in px
+
+\\! 	ox oy moveto
+
+\\! 	extrawidth 0    (<)  		ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[0]
+
+\\! 	extrawidth 0    (In )		ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[1]
+
+\\! 	extrawidth 0    (w)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[2]
+
+\\! 	extrawidth 0    (i)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[3]
+
+\\! 	extrawidth 0    (nter, w)	ashow  currentpoint pop  extrawidth 2 div 
+sub   % x[4]
+
+\\! 	extrawidth 0    (h)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[5]
+
+\\! 	extrawidth 0    (en the fi)	ashow  currentpoint pop  extrawidth 2 div 
+sub   % x[6]
+
+\\! 	extrawidth 0    (e)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[7]
+
+\\! 	extrawidth 0    (l)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[8]
+
+\\! 	extrawidth 0    (ds are wh)	ashow  currentpoint pop  extrawidth 2 div 
+sub   % x[9]
+
+\\! 	extrawidth 0    (i)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[10]
+
+\\! 	extrawidth 0    (t)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[11]
+
+\\! 	extrawidth 0    (e,)		ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[12]
+
+\\! 	extrawidth 0    (>)		ashow
+
+\\! 	px astore pop
+
+\\! \} def
+
+\\! \
+
+
+\\! %		stack on entry has x0 x1 (the ends of the marker)  y0 y1 (head and 
+tail)
+
+\\! /marker \{
+
+\\! 	/y1 exch def
+
+\\! 	/y0 exch def
+
+\\! 	/x1 exch def
+
+\\! 	/x0 exch def
+
+\\! \
+
+
+\\! 	.48 setlinewidth
+
+\\! 	1 setlinecap
+
+\\! 	newpath
+
+\\! 	x0 y0 moveto
+
+\\! 	x0 y1 lineto	% draw vertical
+
+\\! \
+
+
+\\! 	x0 x1 ne  \{
+
+\\! 		x1 y0 moveto
+
+\\! 		x1 y1 lineto		% the other vertical
+
+\\! 		y1 y0 sub 2 div y0 add dup    % y coord for horizontal
+
+\\! 		x0 exch moveto
+
+\\! 		x1 exch lineto		% draw the horizontal
+
+\\! 	\} if
+
+\\! \
+
+
+\\! 	% draw half arrow heads
+
+\\! 	y1 y0 sub dup .2 mul  	/dy exch def
+
+\\! 	abs .115 mul 		/dx exch def
+
+\\! 	x0 y0 moveto    dx neg dy rlineto
+
+\\! 	x1 y0 moveto    dx dy rlineto
+
+\\! 	\
+
+
+\\! 	stroke
+
+\\! \} def
+
+\\! \
+
+
+\\! /topmarkers \{
+
+\\! 	px 2 get  px 5 get   oy examplepoints add  dup markerheight add 
+  marker     % m
+
+\\! 	px 7 get  px 7 get   oy examplepoints add  dup markerheight add 
+  marker     % s
+
+\\! 	px 10 get  px 11 get   oy examplepoints add  dup markerheight add 
+  marker     % p
+
+\\! \} def
+
+\\! \
+
+
+\\! /bottommarkers \{
+
+\\! 			% first row
+
+\\! 	/ty oy markersep sub 1 sub def
+
+\\! 	px 1 get  px 2 get   ty  dup markerheight sub   marker 
+    %previous(m)
+
+\\! 	px 3 get  px 5 get   ty  dup markerheight sub   marker     % rest(m)
+
+\\! 	px 6 get  px 7 get   ty  dup markerheight sub   marker     % 
+previous(s)
+
+\\! 	px 9 get  px 10 get   ty  dup markerheight sub   marker     % 
+previous(p)
+
+\\! \
+
+
+\\! 			% second row
+
+\\! 	/ty ty  markerheight markersep add sub def
+
+\\! 	px 2 get  px 3 get   ty  dup markerheight sub   marker     % first(m), 
+front(m)
+
+\\! 	px 4 get  px 5 get   ty  dup markerheight sub   marker     % last(m)
+
+\\! 	px 7 get  px 8 get   ty  dup markerheight sub   marker     % front(s)
+
+\\! 	px 11 get  px 11 get   ty  dup markerheight sub   marker %  finish(p), 
+rest(p)
+
+\\! \
+
+
+\\! 			%third row
+
+\\! 	/ty ty  markerheight markersep add sub def
+
+\\! 	px 5 get  px 5 get   ty  dup markerheight sub   marker     % finish(m)
+
+\\! \
+
+
+\\! 			%fourth row
+
+\\! 	/ty ty  markerheight markersep add sub def
+
+\\! 	px 7 get  px 7 get   ty  dup markerheight sub   marker     \
+
+
+\\!					% first(s), front(s), rest(s), finish(s)
+
+\\! 	px 10 get  px 11 get  ty dup markerheight sub  marker 
+%front(p),first(p),last(p)
+
+\\! \
+
+
+\\! \} def
+
+\\! \
+
+
+\\! %		stack has (x,y) of arrowhead and string
+
+\\! /toplabel \{
+
+\\! 	/thestring exch def
+
+\\! 	/y0 exch def
+
+\\! 	/x0 exch def
+
+\\! \
+
+
+\\! 	/delta markerheight 1.414 div def
+
+\\! 	/x1 x0 delta sub def
+
+\\! 	/y1 y0 delta add def
+
+\\! 	/x2 x0 def
+
+\\! 	/y2 y0 markerheight .7 mul add def
+
+\\! 	/x3 x1 def
+
+\\! 	/y3 y1 markerheight .7 mul add def
+
+\\! \
+
+
+\\! 	idfont setfont
+
+\\! 	% the label  (to left of x3,y3)
+
+\\! 	x3 thestring stringwidth pop sub 3 sub    y3  2 sub   moveto
+
+\\! 	thestring show
+
+\\! \
+
+
+\\! 	% the arrow
+
+\\! 	newpath
+
+\\! 	x0 y0 moveto
+
+\\! 	x1 y1 x2 y2 x3 y3 curveto
+
+\\! \
+
+
+\\! 	% the arrowhead
+
+\\! 	gsave \
+
+
+\\! 	x0 y0 translate
+
+\\! 	43 rotate
+
+\\! 	markerheight dup    .3 mul  /dy exch def     .1725 mul /dx exch def
+
+\\! 	dx neg dy moveto
+
+\\! 	0 0 lineto
+
+\\! 	dx dy  lineto
+
+\\! 	.24 setlinewidth
+
+\\! 	1 setlinecap
+
+\\! 	1 setlinejoin
+
+\\! 	stroke
+
+\\! 	grestore
+
+\\! \} def
+
+\\! \
+
+
+\\! /topids \{
+
+\\! 	% laby1 is y coord of arrowhead
+
+\\! 	/laby1 oy 12 add  markerheight 2 div add markersep add def
+
+\\! \
+
+
+\\! 	px 2 get  px 5 get  add  2 div	laby1  (m)  toplabel
+
+\\! 	px 7 get  4 sub	  		laby1  (s)  toplabel
+
+\\! 	px 10 get  4 sub			laby1  (p)  toplabel
+
+\\! \} def
+
+\\! \
+
+
+\\! \
+
+
+\\! %		stack has (x,y) of arrowhead,  (x,y) of arrow tail,  and  string
+
+\\! /bottomlabel \{
+
+\\! 	/thestring exch def
+
+\\! 	/y3 exch def
+
+\\! 	/x3 exch def
+
+\\! 	/y0 exch def
+
+\\! 	/x0 exch def
+
+\\! \
+
+
+\\! 	/x1 x3  def
+
+\\! 	/y1 y0 x0 x3 sub sub def
+
+\\! 	/x2 x0 def
+
+\\! 	/y2 y3 x0 x3 sub add def
+
+\\! \
+
+
+\\! 	idfont setfont
+
+\\! 	% the label  (to left of x3,y3)
+
+\\! 	x3 thestring stringwidth pop sub 2 sub    y3 2 sub    moveto
+
+\\! 	thestring show
+
+\\! \
+
+
+\\! 	% the arrow
+
+\\! 	newpath
+
+\\! 	x0 y0 moveto
+
+\\! 	x1 y1 x2 y2 x3 y3 curveto
+
+\\! \
+
+
+\\! 	% the arrowhead
+
+\\! 	gsave \
+
+
+\\! 	x0 y0 translate
+
+\\! 	-43 rotate
+
+\\! 	markerheight dup    .3 mul neg  /dy exch def     .1725 mul /dx exch 
+def
+
+\\! 	dx neg dy moveto
+
+\\! 	0 0 lineto
+
+\\! 	dx dy  lineto
+
+\\! 	.24 setlinewidth
+
+\\! 	1 setlinecap
+
+\\! 	1 setlinejoin
+
+\\! 	stroke
+
+\\! 	grestore
+
+\\! \} def
+
+\\! \
+
+
+\\! %		stack has (x,y) of arrowhead,  (x,y) of arrow tail,  and  string
+
+\\! /bottomids \{
+
+\\! 	/bothx \{dup 4 sub exch markerheight sub\} def
+
+\\! \
+
+
+\\! % there are three rows of labels:   laby1, laby2, laby3, laby4
+
+\\! % The sections are organized by the y coord of the marker
+
+\\! \
+
+
+\\! 	/linesep idpoints markersep add def
+
+\\! 	/halfline linesep 2 div def
+
+\\! 	/laby1 oy 32 sub def
+
+\\! 	/laby2 laby1 linesep sub 3 sub def
+
+\\! 	/laby3 laby2 linesep sub 3 sub def
+
+\\! 	/laby4 laby3 linesep sub 3 sub def
+
+\\! \
+
+
+\\! 			% first row of markers
+
+\\! 	/marky   oy 4 sub markerheight .7 mul  sub  def
+
+\\! 	px 1 get   bothx     		% now: x-head  x-tail
+
+\\! 		marky exch  laby1 		% now x-head y-head x-tail y-tail
+
+\\! 		(previous(m))  bottomlabel
+
+\\! 	px 4 get  10 sub  bothx      marky exch  laby1 \
+
+
+\\! 		(rest(m))  bottomlabel
+
+\\! 	px 6 get  bothx  marky  exch  laby1
+
+\\! 		(previous(s))  bottomlabel
+
+\\! 	px 9 get  bothx  marky  exch  laby1
+
+\\! 		(previous(p))  bottomlabel
+
+\\! \
+
+
+\\! 			% second row of markers
+
+\\! 	/marky   oy 4 sub markerheight 4 add sub markerheight .7 mul  sub  def
+
+\\! 	px 2 get bothx     marky exch  laby2
+
+\\! 		(first(m), front(m))  bottomlabel
+
+\\! 	px 4 get  bothx      marky exch  laby2 \
+
+
+\\! 		(last(m))  bottomlabel
+
+\\! 	px 7 get bothx	marky exch  laby2
+
+\\! 		(front(s))  bottomlabel
+
+\\! 	px 11 get bothx      marky exch  laby2
+
+\\! 		(rest(p), finish(p))  bottomlabel
+
+\\! \
+
+
+\\! 			% third row of markers
+
+\\! 	/marky   oy 4 sub markerheight 4 add 2 mul sub markerheight .7 mul 
+ sub  def
+
+\\! 	px 5 get bothx    marky exch  laby3
+
+\\! 		(finish(m))  bottomlabel
+
+\\! \
+
+
+\\! 			% fourth row of markers
+
+\\! 	/marky   oy 4 sub markerheight 4 add 3 mul sub markerheight .7 mul 
+ sub  def
+
+\\! 	px 7 get bothx   8 sub	 marky exch  laby4
+
+\\! 		(first(s), rest(s), last(s), finish(s))  bottomlabel
+
+\\! 	px 10 get bothx	marky exch  laby4 idpoints 1.175 mul add
+
+\\! 		(front(p),)  bottomlabel
+
+\\! 	     px 10 get (first(p), last(p)) stringwidth pop sub 2 sub   laby4 
+ moveto
+
+\\! 		(first(p), last(p)) show
+
+\\! \} def
+
+\\! \
+
+
+\\! %  Now do it!!! \
+
+
+\\! \
+
+
+\\! gsave
+
+\\! \
+
+
+\\! \{
+
+\\! 	initialize
+
+\\! 	/oy  % the y origin
+
+\\! 		1.25   72   mul
+
+\\! 	def
+
+\\! 	mainstring
+
+\\! 	topmarkers
+
+\\! 	topids
+
+\\! 	bottommarkers
+
+\\! 	bottomids
+
+\\! \} stopped  \{
+
+\\! 	showpage
+
+\\! 	grestore
+
+\\! 	handleerror
+
+\\! \
+
+
+\\! 	gsave
+
+\\! \} if
+
+\\! \
+
+
+\\! % showpage
+
+\\! grestore
+
+\\! \\\}
+
+'PE 432 130}
+
+
+\indent{\bold{Figure 4.  Examples of non-primitive functions. }}\
+
+
+
+\wideline{With the aid of \italic{rest} we can write an elegant, recursive 
+definition of \italic{last}:
+
+}\formatnote{.rn OC qC
+
+.ne 5
+
+.de OC
+
+.br
+
+..}
+
+\example{\italic{function} \bold{last}(x) \
+
+
+	\italic{if} rest(x) = "" \italic{then return} x
+
+	\italic{else return} last(rest(x)) \italic{end if}
+
+}\wideline{\example{\italic{end function}}
+
+}\formatnote{.rn qC OC}
+
+The \examplefont{then} case applies when \variable{x} is initially empty or 
+when the recursion has descended to the last element;  otherwise the 
+\examplefont{else} case recurs to compute the last element in the rest of 
+\variable{x}, which will be the same as the last element of \variable{x}. 
+ In practice, of course, \variable{last} is implemented more directly.
+
+
+
+\formatnote{.ne 4.2}
+
+\heading{3. Searching Strings}
+
+
+It is common in string algorithms to scan a string looking for a substring 
+satisfying some property described with a regular expression, a context 
+free grammar, or some more general scheme.  Such advanced pattern matching 
+is beyond the scope of this paper, but a few simple, Icon-like search 
+operations will serve as valuable examples and tools for the extended 
+example in the next section.
+
+
+The search operations below each have two arguments, a \italic{subject} and 
+a \italic{specification}.  By convention, the subject argument determines 
+the \italic{range} to be searched according to this rule:  If the subject 
+argument is non-empty, the range is the subject;  but if the subject is 
+empty, the range extends from the subject to the end of its base.  Since a 
+successful search always yields a non-empty subsequence, failure is 
+indicated by returning an empty subseq value, usually the one at the end of 
+the subject argument.  By these conventions, if the range is to extend from 
+the position given by empty subseq\variable{ p} to the end of its base, the 
+calling function can choose that the failure value be either \variable{p} 
+or \examplefont{finish(base(p))} by passing as the subject either 
+\variable{p} or \examplefont{extent(p, base(p))}, respectively.
+
+
+\wideline{In the descriptions below, when the second argument--the 
+specification--is \variable{obj}, the match must be an exact match, 
+element-for-element; but when it is \variable{set}, the string is treated 
+as a set.  A typical set value is "\bold{0123456789}" for the set of all 
+digits.  These functions are illustrated in Figure 5.
+
+}\leftindent{\wideline{\description{\examplefont{search(subj, obj)} - Scans 
+the range from left to right looking for an instance of \variable{obj} and 
+returns a subseq referring to the first such instance encountered.  If none 
+is found, the function returns \examplefont{finish(subj)}.
+
+\examplefont{\examplefont{match(subj, obj)}} - If the range has 
+\variable{obj} as its initial elements, a subseq for those elements is 
+returned; otherwise the function returns\examplefont{ finish(subj).}
+
+\examplefont{span(subj, set)} - Returns a subseq for 
+\examplefont{start(subj)} and all contiguous succeeding elements of the 
+range which are elements from \variable{set}.  If \examplefont{front(subj)} 
+is not in \variable{set}, the function returns \examplefont{start(subj)}.
+
+\examplefont{token(subj, set)} - Returns a subseq for the leftmost 
+contiguous subsequence in the range which is composed of elements from 
+\variable{set}.  If none is found, the function returns\examplefont{ 
+finish(subj)}.
+
+}}\description{\examplefont{trim(subj, set)} - Returns a subseq for all of 
+the range except for any trailing elements which are in \variable{set}.  If 
+all elements of the range are in \variable{set}, the value 
+\examplefont{start(subj)} is returned.
+
+}}
+\formatnote{.ne 1.9i
+
+}\formatnote{'PB  432 88
+
+'if  \\n(zT  \\\{\\
+
+\\!%!
+
+\\! %!
+
+\\!%		Figure 5 for \
+
+
+\\!%		First-class Values for Strings
+
+\\!%		WJHansen,  November, 1991
+
+\\! %
+
+\\! \
+
+
+\\!    432 troffadjust 88 neg translate
+
+\\! \
+
+
+\\! /initialize \{
+
+\\! 	/linewidth 	5  72  mul   def	% width of inset
+
+\\! 	/insetheight   	88   def	% height of inset
+
+\\! \
+
+
+\\! 	/examplepoints 14 def			% pointsize for example text
+
+\\! 	/idpoints 12 def			% pointsize for labels
+
+\\! 	/markerheight   idpoints 1.1 mul  def	% height of marker vertical bars
+
+\\! 	/markersep  idpoints 3 div def		% vertical separation between markers
+
+\\! 	/extrawidth  3.4  def			% extra points between each char of example
+
+\\! \
+
+
+\\! 			% fonts for example string and id's
+
+\\! 	/xfont    /Times-Bold findfont examplepoints scalefont    def
+
+\\! 	/idfont    /Times-Italic findfont idpoints scalefont    def	\
+
+
+\\! 	\
+
+
+\\! 	/examplestring  (<I'll sing this song for your delight.>) def
+
+\\! 		% this string is repeated in mainstring below
+
+\\! 	\
+
+
+\\! 	/px   10 array   def			% coordinates of gaps between string pieces
+
+\\! \} def
+
+\\! % set origin for the main example string
+
+\\! /mainstring \{
+
+\\! 	xfont setfont
+
+\\! 	/ox  55  def
+
+\\! 	\
+
+
+\\! 	% now we display the main string and save locations
+
+\\! 	% of the pieces in px
+
+\\! 	ox oy moveto
+
+\\! 	extrawidth 0    (<I'l)  		ashow  currentpoint pop  extrawidth 2 div 
+sub   % x[0]
+
+\\! 	extrawidth 0    (l s)		ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[1]
+
+\\! 	extrawidth 0    (i)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[2]
+
+\\! 	extrawidth 0    (ng)		ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[3]
+
+\\! 	extrawidth 0    ( this song)	ashow  currentpoint pop  extrawidth 2 div 
+sub   % x[4]
+
+\\! 	extrawidth 0    ( )		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[5]
+
+\\! 	extrawidth 0    (f)		ashow  currentpoint pop  extrawidth 2 div sub   % 
+x[6]
+
+\\! 	extrawidth 0    (o) 		ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[7]
+
+\\! 	extrawidth 0    (r your del)	ashow  currentpoint pop  extrawidth 2 div 
+sub   % x[8]
+
+\\! 	extrawidth 0    (ig)		ashow  currentpoint pop  extrawidth 2 div sub 
+  % x[9]
+
+\\! 	extrawidth 0    (ht.>)		ashow
+
+\\! 	px astore pop
+
+\\! \} def
+
+\\! \
+
+
+\\! %		stack on entry has x0 x1 (the ends of the marker)  y0 y1 (head and 
+tail)
+
+\\! /marker \{
+
+\\! 	/y1 exch def
+
+\\! 	/y0 exch def
+
+\\! 	/x1 exch def
+
+\\! 	/x0 exch def
+
+\\! \
+
+
+\\! 	.48 setlinewidth
+
+\\! 	1 setlinecap
+
+\\! 	newpath
+
+\\! 	x0 y0 moveto
+
+\\! 	x0 y1 lineto	% draw vertical
+
+\\! \
+
+
+\\! 	x0 x1 ne  \{
+
+\\! 		x1 y0 moveto
+
+\\! 		x1 y1 lineto		% the other vertical
+
+\\! 		y1 y0 sub 2 div y0 add dup    % y coord for horizontal
+
+\\! 		x0 exch moveto
+
+\\! 		x1 exch lineto		% draw the horizontal
+
+\\! 	\} if
+
+\\! \
+
+
+\\! 	% draw half arrow heads
+
+\\! 	y1 y0 sub dup .2 mul  	/dy exch def
+
+\\! 	abs .115 mul 		/dx exch def
+
+\\! 	x0 y0 moveto    dx neg dy rlineto
+
+\\! 	x1 y0 moveto    dx dy rlineto
+
+\\! 	\
+
+
+\\! 	stroke
+
+\\! \} def
+
+\\! \
+
+
+\\! /topmarkers \{
+
+\\! 	px 0 get  px 0 get   oy examplepoints add  dup markerheight add 
+  marker     % q
+
+\\! 	px 4 get  px 9 get   oy examplepoints add  dup markerheight add 
+  marker     % m
+
+\\! \} def
+
+\\! \
+
+
+\\! /bottommarkers \{
+
+\\! 			% first row
+
+\\! 	/ty oy markersep sub 1 sub def
+
+\\! 	px 0 get  px 1 get   ty  dup markerheight sub   marker     % span(q, 
+"le ss")
+
+\\! 	px 5 get  px 7 get   ty  dup markerheight sub   marker     % search(m, 
+"fo")
+
+\\! 	px 9 get  px 9 get   ty  dup markerheight sub   marker     % search(m, 
+"igh")
+
+\\! \
+
+
+\\! 			% second row
+
+\\! 	/ty ty  markerheight markersep add sub def
+
+\\! 	px 2 get  px 3 get   ty  dup markerheight sub   marker     % search(q, 
+"ng")
+
+\\! 	px 4 get  px 6 get   ty  dup markerheight sub   marker     % match(m, 
+" f")
+
+\\! 	px 8 get  px 9 get   ty  dup markerheight sub   marker     % token(m, 
+"ghi")
+
+\\! \
+
+
+\\! \} def
+
+\\! \
+
+
+\\! %		stack has (x,y) of arrowhead and string
+
+\\! /toplabel \{
+
+\\! 	/thestring exch def
+
+\\! 	/y0 exch def
+
+\\! 	/x0 exch def
+
+\\! \
+
+
+\\! 	/delta markerheight 1.414 div def
+
+\\! 	/x1 x0 delta sub def
+
+\\! 	/y1 y0 delta add def
+
+\\! 	/x2 x0 def
+
+\\! 	/y2 y0 markerheight .7 mul add def
+
+\\! 	/x3 x1 def
+
+\\! 	/y3 y1 markerheight .7 mul add def
+
+\\! \
+
+
+\\! 	idfont setfont
+
+\\! 	% the label  (to left of x3,y3)
+
+\\! 	x3 thestring stringwidth pop sub 3 sub    y3  2 sub   moveto
+
+\\! 	thestring show
+
+\\! \
+
+
+\\! 	% the arrow
+
+\\! 	newpath
+
+\\! 	x0 y0 moveto
+
+\\! 	x1 y1 x2 y2 x3 y3 curveto
+
+\\! \
+
+
+\\! 	% the arrowhead
+
+\\! 	gsave \
+
+
+\\! 	x0 y0 translate
+
+\\! 	43 rotate
+
+\\! 	markerheight dup    .3 mul  /dy exch def     .1725 mul /dx exch def
+
+\\! 	dx neg dy moveto
+
+\\! 	0 0 lineto
+
+\\! 	dx dy  lineto
+
+\\! 	.24 setlinewidth
+
+\\! 	1 setlinecap
+
+\\! 	1 setlinejoin
+
+\\! 	stroke
+
+\\! 	grestore
+
+\\! \} def
+
+\\! \
+
+
+\\! /topids \{
+
+\\! 	% laby1 is y coord of arrowhead
+
+\\! 	/laby1 oy 12 add  markerheight 2 div add markersep add def
+
+\\! \
+
+
+\\! 	px 0 get  4 sub	  		laby1  (q)  toplabel
+
+\\! 	px 4 get  px 9 get  add  2 div	laby1  (m)  toplabel
+
+\\! \} def
+
+\\! \
+
+
+\\! \
+
+
+\\! %		stack has (x,y) of arrowhead,  (x,y) of arrow tail,  and  string
+
+\\! /bottomlabel \{
+
+\\! 	/thestring exch def
+
+\\! 	/y3 exch def
+
+\\! 	/x3 exch def
+
+\\! 	/y0 exch def
+
+\\! 	/x0 exch def
+
+\\! \
+
+
+\\! 	/x1 x3  def
+
+\\! 	/y1 y0 x0 x3 sub sub def
+
+\\! 	/x2 x0 def
+
+\\! 	/y2 y3 x0 x3 sub add def
+
+\\! \
+
+
+\\! 	idfont setfont
+
+\\! 	% the label  (to left of x3,y3)
+
+\\! 	x3 thestring stringwidth pop sub 2 sub    y3  3 sub    moveto
+
+\\! 	thestring show
+
+\\!
+
+\\!	 y3 y0 sub abs 8 le \{	% if arrow too flat, use straight arrow
+
+\\! 		newpath
+
+\\! 		x0 y0 moveto  x3 y3 lineto
+
+\\!	 	/angle x3 x0 sub y0 y3 sub atan def
+
+\\!	 \}  \{	% else use curved arrow \
+
+
+\\! 		/x1 x3  def
+
+\\! 		/y1 y0 x0 x3 sub sub def
+
+\\! 		/x2 x0 def
+
+\\! 		/y2 y3 x0 x3 sub add def
+
+\\! \
+
+
+\\! 		% the arrow
+
+\\! 		newpath
+
+\\! 		x0 y0 moveto
+
+\\! 		x1 y1 x2 y2 x3 y3 curveto
+
+\\! 		/angle -43 def
+
+\\! 	\} ifelse
+
+\\!
+
+\\! 	% the arrowhead
+
+\\! 	gsave \
+
+
+\\! 	x0 y0 translate
+
+\\! 	angle rotate
+
+\\! 	markerheight dup    .3 mul neg  /dy exch def     .1725 mul /dx exch 
+def
+
+\\! 	dx neg dy moveto
+
+\\! 	0 0 lineto
+
+\\! 	dx dy  lineto
+
+\\! 	.24 setlinewidth
+
+\\! 	1 setlinecap
+
+\\! 	1 setlinejoin
+
+\\! 	stroke
+
+\\! 	grestore
+
+\\! \} def
+
+\\! \
+
+
+\\! %		stack has (x,y) of arrowhead,  (x,y) of arrow tail,  and  string
+
+\\! /bottomids \{
+
+\\! 	/bothx \{dup 4 sub exch markerheight sub\} def
+
+\\! \
+
+
+\\! % there are two rows of labels:   laby1, laby2
+
+\\! % The sections are organized by the y coord of the marker
+
+\\! \
+
+
+\\! 	/linesep idpoints markersep add def
+
+\\! 	/laby1 oy 14 sub def
+
+\\! 	/laby2 laby1 linesep sub 3 sub def
+
+\\! \
+
+
+\\! 			% first row of markers
+
+\\! 	/marky   oy 4 sub markerheight .7 mul  sub  def
+
+\\! 	px 0 get bothx     marky exch  laby1
+
+\\! 		(span(q, "le ss"))  bottomlabel
+
+\\! 	px 5 get  bothx  marky  exch  laby1
+
+\\! 		(search(m, "fo"))  bottomlabel
+
+\\! 	px 9 get bothx	marky exch  laby1
+
+\\! 		(search(m, "igh"))  bottomlabel
+
+\\! \
+
+
+\\! 			% second row of markers
+
+\\! 	/marky   oy 4 sub markerheight 4 add sub markerheight .7 mul  sub  def
+
+\\! 	px 2 get  bothx      marky exch  laby2 \
+
+
+\\! 		(search(q, "ng"))  bottomlabel
+
+\\! 	px 4 get  bothx      marky exch  laby2 \
+
+
+\\! 		(match(m, " f"))  bottomlabel
+
+\\! 	px 8 get  bothx  marky  exch  laby2
+
+\\! 		(token(m, "ghij"))  bottomlabel
+
+\\! \
+
+
+\\! \} def
+
+\\! \
+
+
+\\! %  Now do it!!! \
+
+
+\\! \
+
+
+\\! gsave
+
+\\! \
+
+
+\\! \{
+
+\\! 	initialize
+
+\\! 	/oy  38 def 	% the y origin
+
+\\! 	mainstring
+
+\\! 	topmarkers
+
+\\! 	topids
+
+\\! 	bottommarkers
+
+\\! 	bottomids
+
+\\! \} stopped  \{
+
+\\! 	showpage
+
+\\! 	grestore
+
+\\! 	handleerror
+
+\\! \
+
+
+\\! 	gsave
+
+\\! \} if
+
+\\! \
+
+
+\\! % showpage
+
+\\! grestore
+
+\\! \\\}
+
+'PE 432 88}
+
+
+\indent{\bold{Figure 5.  Examples of search functions.} Note that when 
+\variable{m} is the search subject, the value of \examplefont{token} does 
+not extend beyond \examplefont{finish(m)} and "\bold{igh}" is not found.}
+
+
+\wideline{With the search operations we can now rewrite 
+\examplefont{nextword} of Section 1 more briefly as}\formatnote{
+
+.rn OC qC
+
+.ne 4
+
+.de OC
+
+.br
+
+..
+
+}\example{\italic{function} \bold{nextword}(m)
+
+	m := finish(span(finish(m), " "))\leftindent{
+
+\italic{return} extent(m, start(search(m, " ")))}
+
+}\wideline{\example{\italic{end function}}\wideline{
+
+}\formatnote{.rn qC OC
+
+}If variable \variable{wordCharacters} gives a complete set of characters 
+allowed in words, \examplefont{nextword} could be simply
+
+\example{token(finish(m), wordCharacters)}
+
+}The three versions of \variable{nextword} differ in subtle respects.  The 
+\examplefont{token(...)} version returns a subseq for a word composed 
+solely of elements found in \variable{wordCharacters}, which might be just 
+the letters or even a smaller set; the other two define a "word" as any 
+non-empty sequence of characters between spaces.  The version in Section 1 
+will find every such word, but the \examplefont{span...search} version just 
+above will find the last word only if it is followed by a space.
+
+
+\wideline{To define the search functions in terms of the primitive 
+operations, we begin with a support function which searches a string 
+\variable{src} looking for an instance of a character \variable{c}.  If 
+found, a subseq for the instance is returned, otherwise the value returned 
+is an empty subseq at the end of \variable{src}:
+
+}\example{\formatnote{.ne 7
+
+}\italic{function} \bold{findchar}(src, c)
+
+\leftindent{\italic{while} src /= "" \italic{and} c /= first(src) 
+\italic{do\formatnote{\\&}}
+
+\leftindent{src := rest(src)}
+
+\italic{end while}
+
+\italic{return} first(src)}
+
+}\wideline{\example{\italic{end function}}
+
+}This function illustrates one form of loop;  at each cycle around the 
+while loop, \variable{src} is one character shorter by virtue of the call 
+on \examplefont{rest(src)}.  The loop ends if either \variable{src} becomes 
+empty or its first character matches \variable{c}.  The loop invariant is 
+that \variable{c} is not equal to any character in 
+\examplefont{extent(src\subscript{\smaller{0}}, start(src))}, where 
+\variable{src\subscript{\smaller{0}}} denotes the initial value of 
+\variable{src}.
+
+
+Algorithm 1 expresses \examplefont{span} in terms of \variable{findchar} 
+and the primitive operations.  The first \examplefont{if-then} sets 
+\variable{s} to be the range of the search as defined by the search 
+conventions.  The loop, as above, calls \examplefont{rest(s)} at each step 
+to shorten \variable{s} by one element.  As one example of multiple usage 
+of a subsequence reference, note that variable \examplefont{s} is utilized 
+for its first character with \examplefont{first(s)}, its position with 
+\examplefont{start(s)}, and its extent with \examplefont{rest(s)}.
+
+
+\example{\formatnote{.ne 13
+
+}\italic{function} \bold{span}(subj, set)
+
+	\italic{subseq} s	-- the search range
+
+	s := subj
+
+\wideline{	\italic{if} s = "" \italic{then}  s := extent(s, base(s)) 
+ \italic{end} \italic{if}
+
+}	\italic{while} findchar(set, first(s)) /= "" \italic{do}
+
+		s := rest(s)
+
+	\italic{end} \italic{while}
+
+	\italic{return} extent(subj, start(s))
+
+\italic{end} \italic{function}
+
+}
+\indent{\bold{Algorithm 1. Span.}  Returns a subseq for all elements 
+following \examplefont{start(subj)} which are in \variable{set}.  The loop 
+invariant is that all elements in \examplefont{extent(subj, start(s))} are 
+elements of \variable{set}.}
+
+
+Sometimes a loop advances through a string in steps longer than one 
+character at a time, as illustrated by the \examplefont{search} function in 
+Algorithm 2.  Each cycle of the \examplefont{while} loop calls 
+\variable{findchar} to find the first character of  \variable{obj} and then 
+calls \examplefont{match} to determine if all of \variable{obj} has been 
+found.  If so the appropriate value is returned, but if not, there is no 
+point to re-checking \examplefont{extent(s, f)}, so \variable{s} is set to 
+everything after \variable{f}.  If \variable{s} becomes empty, 
+\examplefont{findchar} returns an empty subseq and the loop exits via the 
+test of\examplefont{ f = ""}.
+
+\formatnote{
+Algorithm 2 again illustrates multiple usage of subsequence reference 
+values;  the contents of \italic{f} are tested and the positions of both 
+ends appear in expressions.  Since both \italic{f} and \italic{m} are on 
+the same base as \variable{s,}  the new value of \variable{s} can be set to 
+begin after \variable{f} and the value of \variable{m} can be returned, 
+each retaining its position in the original base string.
+
+
+.ne 18}
+
+\example{\italic{function} \bold{search}(subj, obj)
+
+	\italic{subseq} s	-- the search range
+
+	\italic{subseq} f	-- a location in subj of first(obj)
+
+\wideline{	\italic{subseq} m	-- the result of matching obj at f
+
+}	s := subj
+
+\wideline{\wideline{	\italic{if} s = "" \italic{then}  s := extent(s, 
+base(s))  \italic{end} \italic{if}}
+
+}	\italic{while} \italic{True} \italic{do}
+
+		f := findchar(s, first(obj))
+
+		\italic{if} f = "" \italic{then} \italic{return} finish(subj) \italic{end} 
+\italic{if} 	-- fail
+
+		m := match(start(f), obj)
+
+		\italic{if} m /= "" \italic{then} \italic{return} m \italic{end} 
+\italic{if} 		-- succeed
+
+		s := extent(finish(f), s)
+
+	\italic{end} \italic{while}
+
+\italic{end} \italic{function}
+
+}
+\indent{\bold{Algorithm 2. Search.}  Find the leftmost occurrence of 
+\variable{obj} in the search range.  An invariant of the loop is that a 
+substring matching \variable{obj} does not begin in 
+\examplefont{extent(subj, start(s))}.}
+
+
+In the \ness{Ness} implementation, search is implemented with a far faster 
+non-linear search [Sunday, 1990]. The details of \examplefont{match}, 
+\examplefont{token}, and \examplefont{trim} are left as exercises to the 
+reader.
+
+
+
+\heading{4. A practical string processing problem}
+
+
+A practical problem will further illustrate the subsequence reference data 
+type.  Some pre-ANSI C compilers allow a permissive syntax for preprocessor 
+statements which permits white space and extraneous text in some contexts. 
+ To convert old C source code to ANSI, a program is needed to squeeze out 
+the white space and add appropriate comment delimiters.  The reformatting 
+is done by a function \variable{NormalizeLine(line)} which returns a 
+possibly-modified copy of its argument.
+
+\formatnote{
+.rn OC qC
+
+.de OC
+
+.br
+
+..}
+
+\wideline{A line must be normalized if it has the form:
+
+	<WS> \sans{#} <WS> <\italic{key}> <WS> <\italic{text}> <WS> <newline>
+
+where <WS> is optional whitespace, <\italic{key}> is one of five words, and 
+<\italic{text}> is arbitrary text.   When  <\italic{key}> is  \sans{if}, 
+\sans{ifdef}, or \sans{ifndef} the output is
+
+	\sans{#} <\italic{key}> <space> <\italic{text}> <newline>
+
+but when <\italic{key}> is  \sans{else} or \sans{endif}  the output for 
+empty <\italic{text}> is
+
+	\sans{#} <\italic{key}> <newline>
+
+and for non-empty <text> is
+
+	\sans{#} <\italic{key}> <space> \bold{/*} <space> <\italic{text}> <space> 
+\bold{*/} <newline>
+
+}Note that the latter case must strip existing comment delimiters from 
+<text>.  If the input line does not have one of the expected forms, it is 
+returned unchanged.\wideline{\wideline{
+
+}\formatnote{.rn qC OC}}
+
+
+The essence of \variable{NormalizeLine} is to first locate <\italic{key}> 
+and <\italic{text}> in the input line and then--if the line is in one of 
+the above forms--build the output from those values.  For building the 
+output, the algorithm relies on a table giving the output for each of the 
+five key values.  Since Ness has neither arrays nor structures\formatnote{ 
+such tables are commonly represented in programs as strings where the key 
+is specially delimited so it can be found with a search.  Then associated 
+data is taken from subsequent fields.}  For \variable{NormalizeLine}, a 
+suitable table is
+
+
+\formatnote{.ne 7}\example{
+
+\italic{subseq} \bold{keytable}  :=  \
+
+
+	"<if>;#if\\n;#if ;\\n;"
+
+	~ "<ifdef>;#ifdef\\n;#ifdef ;\\n;"
+
+	~ "<ifndef>;#ifndef\\n;#ifndef ;\\n;"
+
+	~ "<endif>;#endif\\n;#endif /* ; */\\n;"
+
+	~ "<else>;#else\\n;#else /* ; */\\n;"
+
+}
+In this table, the key is surrounded in < > and followed by three fields 
+delimited with semi-colons.  The first field is returned if the input line 
+has only the # and keyword.  When <text> is non-empty, the return value is 
+that text bracketed with the second and third fields.
+
+
+Algorithm 3 utilizes \variable{keytable} to accomplish the task of building 
+the output.  The omitted portions of \examplefont{NormalizeLine} determine 
+that the line is a preprocessor statement, set \variable{k} to the keyword, 
+and set t to the text after the keyword.  The call on \variable{search} 
+then locates \variable{k} in \variable{keytable}.  The last three 
+statements utilize the fields following the key in \variable{keytable} to 
+build the appropriate return value.
+
+
+\formatnote{.ne 16}\example{
+
+\italic{function} \bold{nextfield}(f)		-- Return the field following field 
+\variable{f}
+
+	f := finish(next(f))			-- skip semicolon after \variable{f}
+
+	\italic{return} extent(f, start(search(f, ";")))
+
+\italic{end function}}
+
+
+\example{\italic{function} \bold{NormalizeLine}(line)
+
+	\italic{\{...set }k\italic{ to the keyword and }t\italic{ to the text 
+after }k...\italic{\}}
+
+	fix := search(keytable, "<" \concat{~} k \concat{~} ">")  -- find 
+\variable{k} in keytable
+
+	-- use \italic{fix} and \italic{t} to build the result
+
+	if t = "" then  return nextfield(fix)  end if
+
+	fix := nextfield(nextfield(fix))		-- skip to prefix field
+
+	\italic{return}  fix \concat{~} t \concat{~} nextfield(fix)
+
+\italic{end} \italic{function}}
+
+
+\indent{\bold{Algorithm 3.  Fragment of NormalizeLine function.}  This 
+fragment constructs the output line from the fields in \variable{keytable}.}
+
+
+The usage of function \examplefont{nextfield} in Algorithm 3 must be 
+emphasized.  Since its return value is an entire field, that value is 
+suitable for concatenation to construct the result as in the final 
+\examplefont{return} statement.  But since its value is a subsequence 
+reference, it can also serve as argument to a function (in this case, 
+itself) to locate and return the next following field, as in 
+\examplefont{nextfield(nextfield(fix))}.  In other languages, a composite 
+value would be required as with \sans{typedef StringPiece} in the 
+introduction, and even then the body of \variable{nextfield} would have a 
+number of additional assignment statements.
+
+
+The full \variable{NormalizeLine} function appears in Algorithm 4.  The 
+scanning portion of the algorithm tracks with variable \variable{t} the 
+current position of the scan within the line.  S\variable{kipwhite} 
+advances past spaces and tabs; it could easily be written in a language 
+with the index model of strings since it effectively returns a position. 
+ The algorithm begins by skipping whitespace, checking for a "\sans{#}", 
+and skipping more whitespace.  Next, \variable{k} is set to <\italic{key}> 
+by spanning subsequent letters and <\italic{key}> is sought in 
+\variable{keytable} with the result being assigned to \variable{fix}.  The 
+\examplefont{trim} expression gives \variable{t} a value extending from the 
+first non-whitespace character after <\italic{key}> to the last 
+non-whitespace character on the line.  The remainder follows Algorithm 3, 
+with the addition of code to remove redundant comment delimiters.
+
+
+\formatnote{.ne 26}
+
+	\example{-- Return the empty subseq following t and any adjacent white 
+space
+
+\italic{function} \bold{skipwhite}(t)
+
+	\italic{return} finish(span(finish(t), " \\t\\b"))
+
+\italic{end function}
+
+}
+\example{\italic{function} \bold{NormalizeLine}(line)
+
+	\italic{subseq} k, fix, t, u
+
+	t := skipwhite(start(line))
+
+	\italic{if} next(t) /= "#" \italic{then} \italic{return} line \italic{end} 
+\italic{if}
+
+	t := skipwhite(next(t))
+
+	k := span(t, \leftindent{"abcdefghijklmnopqrstuvwxyz"})	-- get 
+<\italic{key}>
+
+	fix := search(keytable, "<" \concat{~} k \concat{~} ">")
+
+	\italic{if} fix = "" \italic{then} \italic{return} line \italic{end} 
+\italic{if}
+
+	t := trim(extent(skipwhite(k), line),\wideline{ " \\t\\b\\n")
+
+}	-- build the result from 'fix' and 't'
+
+	if t = "" then  return nextfield(fix)  end if
+
+	fix := nextfield(nextfield(fix))		-- skip to prefix field
+
+	u := search(t, "*/")			-- check for comment delimiters
+
+	if u /= "" and previous(last(fix)) = "*"  then
+
+		if match(t, "/*") /= "" then  t := skipwhite(next(first(t)))  end if
+
+		t := trim(extent(t, start(u)), " ")
+
+	end if
+
+	\italic{return} fix \concat{~} t \concat{~} nextfield(fix)
+
+\italic{end} \italic{function}}
+
+
+\indent{\bold{Algorithm 4.  NormalizeLine.}}
+
+
+As experiments the author and one of the referees wrote versions of 
+NormalizeLine in C and Icon.  The code is considerably longer in C because 
+more variables are required to keep track of both ends of segments of the 
+input line and because of the C tradition of in-line loops for string 
+scanning.  The C code also has an egregious bug in that it returns memory 
+allocated in three different ways.  For an unchanged line the original 
+input is returned;  for a #else or #endif with no comment, a constant is 
+returned;  and otherwise newly allocated memory is returned.  Since the 
+calling routine cannot easily distinguish these cases, it will probably not 
+deallocate the allocated memory, leading to a core leak proportional to the 
+number of preprocessor statements.
+
+
+The Icon version was very elegant because it could take advantage of the 
+\iconfont{?} string scanning operator, backtracking, failure, and Icon's 
+\iconfont{table} and \iconfont{record} features.  By its nature, however, 
+the problem did not exploit Icon's goal-directed execution mechanism.  In 
+general, the string scanning operations were scattered in the program among 
+the operands to other functions.  Assignments could have reduced this 
+convolution, at some expense in elegance.
+
+
+
+\formatnote{.ne 1.2i}
+
+\heading{5. Implementation}
+
+
+Before considering implementation of subsequence references as part of a 
+programming language, we must consider whether it can be provided instead 
+as a library package.  This is problematical in C, and will be challenging 
+even in a language designed to support packages.
+
+
+\wideline{The biggest problem is management of string storage: to conserve 
+space, a base sequence can and should be deleted when no subseq refers to 
+it.  In a low-level language like C which does not provide storage 
+management, the string manager must keep track of all subseqs to manage 
+their space and that of the base sequences.  However, this may not be 
+possible.  Consider expressions where a string value returned from one 
+function is passed as argument to another, as in this fragment from 
+Algorithm 4:
+
+\example{extent(skipwhite(k), line)}
+
+}\variable{Skipwhite} allocates a subseq and returns either it or a pointer 
+to it.  If the latter, which routine deallocates the subseq memory and 
+when?  In either case, how can the base sequence memory be deallocated? 
+ The simplest option is to never free the memory occupied with subseqs and 
+base sequences, but this profligacy may lead to excessive paging or program 
+termination.  Subseqs and base strings constitute a non-circular structure 
+and can be managed with references counts instead of more general and 
+costly tools.  However, if subsequence references are implemented in a 
+higher level language with storage reorganization, such as Modula-3 
+[Cardelli, 1988], the more costly tools are likely to be used.
+
+
+When successfully implemented as a package, subsequence references must be 
+defined in terms of some more primitive notion of strings provided in the 
+language itself.  This means two separate string mechanisms with an 
+attendant loss in efficiency and increase in the number of concepts a 
+program reader may encounter.
+
+
+Finally, a string facility requires lexical support for string constants 
+and a primitive operation--preferably syntactic--for 
+concatenation.\footnote{\
+\begindata{fnote,539423208}
+\textdsversion{12}
+\define{variable
+menu:[Font~1,Variable]
+attr:[FontFace Italic Int Set]}
+Function notation is, of course, possible, but it is more awkward for 
+multiple concatenations as in the assignment to \variable{keytable} in 
+Algorithm 4.\
+\enddata{fnote,539423208}
+\view{fnotev,539423208,26,0,0}}  Few languages are flexible enough to be 
+extended in these directions.  Moreover, if strings are to support 
+typographic styles and embedded objects there is the further requirement 
+that the program development support system also support editing of 
+programs containing such constants.  Thus program editing must move closer 
+to word processing and programs can begin to have typographic styles 
+themselves.
+
+
+Given the deficiencies of a library implementation, it is reasonable to 
+assume that we are implementing subsequence references as the native tool 
+for strings in a high level programming language.  Although this paper has 
+not claimed interest in efficiency, it turns out that subsequence 
+references can be implemented without undue overhead.  Should the data type 
+become widely used, appropriate compiler optimizations or tailored hardware 
+will ensure acceptable execution speed.
+
+
+Central to an implementation are data structure definitions for subseq 
+values and base strings.  Additional data structures are needed for 
+typographic styles and embedded objects if they are to be supported by the 
+implementation.  The \ness{Ness} implementation relies on the Andrew 
+ToolKit (ATK) data structures, so little new data structure design was 
+necessary.
+
+
+In ATK, base strings are stored as a physical sequence of characters in a 
+space larger than the string itself.  The unused space is retained as a gap 
+within the base at the position of the most recent modification (since ATK 
+and \ness{Ness} allow modification of base sequences) [Hansen, 1987].  If 
+consecutive modifications tend to happen at nearby locations, the overhead 
+of copying characters to make changes is imperceptible.
+
+
+One alternative to physically sequential storage is a list of characters. 
+ Insertions and deletions are far faster, but space requirements mushroom 
+and performance degrades with increased paging as the list gets fragmented 
+among many pages.  Experience has demonstrated that sequential text storage 
+reduces paging sufficiently to offset the cost of copying strings when 
+changes are made.  Of course there are numerous intermediate data structure 
+designs with linked lists of elements each having a physically sequential 
+block of text.  We have not tried this approach because the physically 
+sequential approach has been satisfactory.
+
+
+\wideline{Section 1 noted that the implementation of subsequence references 
+is similar to many string packages, dating back at least as early as 
+[McKeeman, 1970].  In that work only a position and length were recorded 
+for each string, whereas the minimal implementation of an immutable subseq 
+is three words: a pointer to the base, and representations of the leftmost 
+and rightmost positions.  When the elements are stored consecutively, 
+integers suffice to indicate positions, so a subseq value can be described 
+in C as:
+
+}\sans{\example{struct subseq \{
+
+	struct basestring *b;		/* the base */
+
+	int l, r;				/* the leftmost and rightmost positions */
+
+}\wideline{\example{\};}}}\wideline{\example{ }\
+
+
+}A fourth word is required if the implementation chooses to implement 
+"reference counting" by linking together all subseqs on each base.  The 
+algorithms below assume that a \examplefont{struct basestring} has at least 
+the fields \variable{l} and \variable{r} to indicate its two end positions.
+
+
+Operations on subsequence references are most succinctly implemented by 
+modifying their argument, so, in an applicative environment, the code 
+compiled to pass a subseq as an argument copies its value.  Suppose these 
+values are struct subseqs as above with \variable{x} as the first argument 
+and \variable{y} the second.  Then the four primitive functions can be 
+compiled as if they were:
+
+
+\example{\formatnote{.rn OC qC
+
+.de OC
+
+.br
+
+..
+
+.ne 1.7i
+
+}\sans{start:	  x.r = x.l;
+
+
+base:	  x.l = x.b->l;   x.r = x.b->r;
+
+
+next:	  x.l = x.r;   if (x.r < x.b->r)  x.r++;
+
+
+extent:  if (x.b != y.b) *x = <UniqueEmptyString>;
+
+	  else \{x.r = y.r;   if (x.l > y.r)  x.l = y.r;\}
+
+}\formatnote{.rn qC OC
+
+}
+}
+In two places integer comparison determines the ordering of positions; 
+ this would have to be changed if base strings were not stored 
+consecutively.  Similarly, the ++ in \variable{next} must be modified if 
+elements occupy more than one byte.  Conceptually, these are the only 
+places in the implementation that require knowledge of the implementation 
+of base sequences.
+
+
+\wideline{For a simple assignment like
+
+\example{m := start(s)}
+
+}an optimizing compiler will copy \variable{s} into \variable{m} and then 
+set \sans{m.r= m.l}.  If we are compiling for the IBM RISC architecture, 
+the entire statement could take as few as three instructions: a 
+load-multiple and a store-multiple to transfer the subseq representation 
+and an additional store to \sans{m.r}.  For assignment of an expression 
+with more operators, the overhead of copying the initial value is 
+distributed among them all and is thus proportionately lower, so the 
+average number of instructions per primitive is low.
+
+
+
+\formatnote{.ne 5}
+
+\heading{6. Discussion}
+
+
+ASCII has sufficed for example strings above, but the implementation 
+described clearly permits more general sequences.  There is room here for 
+only brief mention of a few possibilities:
+
+
+\paragraph{Invariants.}  In writing invariants, it is often desirable to 
+express attributes of subsequences.  As shown in various of the examples 
+above, invariants can be succinctly expressed with subsequence expressions.
+
+
+\wideline{\italic{Integer indices.}  While subsequence references permit 
+ignorance of the indexed model of strings, it does not preclude it.  For 
+instance, the primitives are sufficient to implement \examplefont{nextn(s, 
+n)} as a function which applies \variable{next} a total of \variable{n} 
+times starting with the initial value \variable{s}.  Then the traditional 
+function \examplefont{substr(s, i, j)}--which returns the substring of 
+\variable{s} starting with the \variable{i}'th character and extending for 
+\variable{j} characters--is expressible as
+
+\example{extent(nextn(start(s), i), nextn(start(s), i+j)).}
+
+}By defining \variable{substr} in terms of \examplefont{next}, there is no 
+question that the indices refer to elements rather than byte positions in 
+an array.
+
+
+\italic{Arrays.}  With \variable{nextn} and a simple trick, sequences can 
+subsume one-dimensional arrays.  The trick is to address the array by a 
+reference to the empty element at its start.  Thus if \variable{A} is an 
+array, \variable{nextn(A, i)} returns the \variable{i}'th element of the 
+array.  A more elaborate language could offer bracketed subscripts as 
+syntactic sugar for array access.
+
+
+\italic{Formatted text.}  Operations such as applying and testing 
+typographic styles are conveniently defined with subsequence references 
+because a style naturally applies to a subsequence of the text.  In the 
+\ness{Ness} implementation, functions are provided to apply styles, remove 
+them, interrogate the style of text, and traverse the text in sections 
+delimited by style change boundaries.
+
+
+\italic{Embedded Objects and Multi-media.}  The contents of sequences need 
+not be restricted to characters.  Because Ness is implemented under ATK it 
+permits elements which are raster images, spreadsheets, and numerous other 
+objects.  As ATK is extended to provide objects for voice recordings, video 
+clips, and other multi-media components, these too will be potential 
+elements of Ness sequences.
+
+
+\italic{Mutability.}  Much literature has been devoted to applicative 
+versus imperative programming.  The subsequence data type has been 
+presented in a purely applicative form above, but a sequence modification 
+operator can easily be defined (and not quite so easily implemented). 
+ \examplefont{Replace(s, r)} modifies the base sequence of \variable{s} so 
+the portion that was referred to by\variable{ s} contains a copy of 
+\variable{r}.  Insertions and deletions are special cases of replacement. 
+ In some applications--for instance, text editors--where the base may have 
+numerous subseqs referring to its parts, such modification can be a useful 
+tool because the other subseqs remain attached to the base whereas if a new 
+base were constructed it would have no subseqs on it.  \variable{Replace} 
+is also useful when it can be employed to avoid creating new strings; the 
+overhead of copying strings is not too bad, but the overhead of allocating 
+memory and paging-in non-adjacent strings can be large.
+
+
+\italic{General sequences.}  Subsequence references can subsume Lisp lists 
+if subseq values can be objects embedded in sequences.  The car() function 
+would be re-interpreted to extract an embedded subseq as itself.
+
+
+\italic{Unbounded sequences.}  Potentially infinite sequences can be 
+defined with a function to generate successive elements.  The subsequence 
+data type is entirely adequate to deal with such sequences because only the 
+\examplefont{next} operator need access further along in the sequence--it 
+would call the generator if necessary.  The \examplefont{base} operator 
+would return a general sequence including a reference to the generator 
+function.
+
+
+
+Many syntactic, semantic, and implementation questions concerning 
+subsequence references are as yet unanswered.  However, by yielding a 
+first-class type for subsequences, the subsequence reference data type 
+holds promise of reducing program complexity and thus making it possible 
+for more people to exploit computers.
+
+
+
+\bold{Acknowledgments.}  Bruce Sherwood was a bountiful source of 
+enthusiasm and encouragement;  I am indebted to him, Judy Sherwood, David 
+Andersen and others at the Center for Design of Educational Computing, 
+Carnegie-Mellon University, who implemented and utilized subsequence 
+references as part of cT.  This work began with the support of the Science 
+and Engineering Research Council (Britain, grant number GR/D89028) and the 
+Department of Computer Science at the University of Glasgow, under the 
+stimulating direction of Malcolm Atkinson.  Support for the \ness{Ness} 
+implementation in ATK was provided by the IBM Corporation and the 
+Information Technology Center, Carnegie Mellon University under then 
+director Alfred Z. Spector.  Referee C patiently made numerous helpful 
+comments.
+
+
+
+\majorheading{References}
+
+
+\description{[Cardelli, 1988] Cardelli, Luca, J. Donahue, L. Glassman, M. 
+Jordan, B. Kalsow, G. Nelson, \italic{Modula-3 Report}, Research Report 31, 
+Digital Systems Research Center, (Palo Alto, CA, 1988).
+
+
+[CDEC, 1989] Center for Design of Educational Computing, CMU, \italic{The 
+\sans{cT}\superscript{tm} Programming Language}, Falcon Software 
+(Wentworth, NH, 1989).
+
+
+[Glickstein, 1990] R. Glickstein, "Lisp Primitives in ELI, the Embedded 
+Lisp Interpreter", available on X-windows distribution tape as 
+.../contrib/andrew/overhead/eli/doc/procs.doc, Information Technology 
+Center, Carnegie-Mellon Univ., 1990.
+
+
+[Griswold, 1971]  Griswold, R. E., J. F. Poage, and I. P. Polonsky, 
+\italic{The SNOBOL4 Programming Language}, Prentice-Hall (Englewood Cliffs, 
+1971).
+
+
+[Griswold, 1990] Griswold, R. E. and M. T. Griswold, \italic{The Icon 
+Programming Language}, 2nd Edition, Prentice-Hall (Englewood Cliffs, 1990).
+
+
+[Hansen, 1987]  Hansen, W. J., Data Structures in a Bit-Mapped Text-Editor, 
+\italic{Byte} (January, 1987), 183-190.
+
+
+[Hansen, 1989a] Wilfred J. Hansen, "The Computational Power of an Algebra 
+for Subsequences", CMU-ITC-083, Information Technology Center, 
+Carnegie-Mellon Univ., 1989.
+
+
+[Hansen, 1989b] Wilfred J. Hansen, "\ness{Ness} Language Reference Manual", 
+available on X-windows distribution tape as 
+.../contrib/andrew/atk/ness/doc/nessman.d, Information Technology Center, 
+Carnegie-Mellon Univ., 1989.
+
+
+[Hansen, 1990]  Hansen, Wilfred J., "Enhancing documents with embedded 
+programs: How \ness{Ness} extends insets in the Andrew ToolKit," 
+\italic{Proceedings of 1990 International Conference on Computer 
+Languages}, March 12-15, 1990, New Orleans, IEEE Computer Society Press 
+(Los Alamitos, CA, 1990), 23-32.
+
+
+[Hughes, 1989]  Hughes, J., "Why Functional Programming Matters," 
+\italic{Computer Journal 32}, 2 (1989).
+
+
+[IBM, 1965] IBM Corporation, PL/I Language Specifications, C28-6571-0, IBM 
+Corp., Data Processing Division, (White Plains, NY, 1965).
+
+
+[McKeeman, 1970]  McKeeman, W. M.,  J. J. Horning, and D. B. Wortman, 
+\italic{A Compiler Generator,}  Prentice-Hall, Inc. (Englewood Cliffs, 
+1970).
+
+
+[Morris, 1986]  Morris, J., M. Satyarayanan, M. H.Conner, J. H. Howard, D. 
+S. H. Rosenthal, and F. D. Smith.  "Andrew: A distributed Personal 
+Computing Environment,"  \italic{Comm. ACM}, V. 29, 3 (March, 1986), 
+184-201. \
+
+
+
+[Palay, 1988] Palay, A. J., W. J. Hansen, M. Sherman, M. Wadlow, T. 
+Neuendorffer, Z. Stern, M. Bader. and T. Peters, "The Andrew Toolkit - An 
+Overview",  \italic{Proceedings of the USENIX Winter Conference}, Dallas, 
+(February, 1988), 9-21.
+
+
+[Sunday, 1990] Sunday, D. M., "A Very Fast Substring Search Algorithm," 
+\italic{Comm. ACM 33}, 8 (Aug, 1990) 132-142.
+
+
+[Yngve, 1963]  Yngve, V. H., "COMIT,"  Comm. ACM 6, 10 (Mar, 1963) 83-84.
+
+}\
+\begindata{ness,539424248}
+\origin{01\\1 Mar 1991 at 16:01:26 EST\\wjh:  Fred Hansen\\00}
+\template{default}
+\define{global
+}
+\italic{marker} reserved := "\italic{ marker subseq boolean integer real 
+object void function end on extend mouse menu keys event return while do if 
+then else elif exit True False null and or not} "
+
+
+\italic{marker} alpha := "qwertyuiopasdfghjklzxcvbnm"
+
+	~ "QWERTYUIOPASDFGHJKLZXCVBNM"
+
+
+\italic{function} \bold{main}()
+
+	\italic{marker} s := currentselection(defaulttext)
+
+	\italic{marker} t := token(start(s), alpha)
+
+	\italic{while} t /= "" \italic{and} extent(t, s) /= "" \italic{do}
+
+		\italic{if} search(reserved, " " ~ t ~ " ") /= "" \italic{then}
+
+			addstyles(t, "\italic{italic}")
+
+		\italic{end} \italic{if}
+
+		t := token(finish(t), alpha)
+
+	\italic{end} \italic{while}
+
+\italic{end} \italic{function}
+
+\enddata{ness,539424248}
+\view{nessview,539424248,27,0,330}
+\enddata{text,539063560}

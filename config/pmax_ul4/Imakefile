@@ -1,0 +1,2 @@
+
+InstallShScript(getnms, $(DESTDIR)/etc)

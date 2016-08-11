@@ -1,0 +1,2438 @@
+\begindata{text,539845340}
+\textdsversion{12}
+\template{default}
+\define{global
+
+attr:[Indent LeftMargin Cm 0]}
+\define{footnote
+
+attr:[Flags OverBar Int Set]
+attr:[FontSize PreviousFontSize Point -2]}
+\define{up15
+menu:[Justify,Up15]
+attr:[Script PreviousScriptMovement Point -15]}
+\define{sans
+}
+\define{fullwidth
+menu:[Justify,Full Width]
+attr:[LeftMargin LeftMargin Cm -25431]
+attr:[RightMargin RightMargin Cm -27743]}
+\define{refs
+menu:[Justify~2,Refs]
+attr:[LeftMargin LeftMargin Cm 23117]
+attr:[Indent LeftMargin Cm -20807]
+attr:[Spacing InterlineSpacing Point -1]
+attr:[FontSize ConstantFontSize Point 9]}
+\define{body
+menu:[Justify~2,Body]
+attr:[LeftMargin LeftMargin Cm 0]
+attr:[Indent LeftMargin Cm 27743]
+attr:[Spread ConstantSpacing Point 2]
+attr:[FontSize ConstantFontSize Point 10]}
+\define{abstit
+menu:[Justify~2,AbsTit]
+attr:[Justification Centered Point 0]
+attr:[FontFace Bold Int Set]
+attr:[FontSize ConstantFontSize Point 11]}
+\define{tit
+menu:[Justify~2,Tit]
+attr:[FontFace Bold Int Set]
+attr:[FontSize ConstantFontSize Point 12]}
+\define{captit
+menu:[Justify~2,CapTit]
+attr:[FontFace Bold Int Set]
+attr:[FontFamily AndySans Int 0]
+attr:[FontSize ConstantFontSize Point 10]}
+\define{capmore
+menu:[Justify~2,CapMore]
+attr:[FontFamily AndySans Int 0]
+attr:[FontSize ConstantFontSize Point 10]}
+\define{helv
+}
+\begindata{raster,538821704}
+2 0 32768 32768 0 0 366 437
+bits 538821704 366 437
+r04zs |
+r04zs |
+r04zs |
+r06zs |
+r06zs |
+r06zs |
+r07zs |
+r0780zr |
+r07c0zr |
+r07e0zr |
+r0ff0zr |
+r0ff0zr |
+r0ff8zr |
+r0ff8zr |
+r0ffczr |
+r0ffczr |
+r1ffezr |
+r1fGzr |
+r1fGzr |
+r1fG80zq |
+r1fGc0zq |
+r1fGc0zq |
+r1fGe0zq |
+r1fGe0zq |
+r1fGf0zq |
+r1fGf0zq |
+r1fGf8zq |
+r1fGf8zq |
+r1fGfczq |
+r1fGfczq |
+r1fGfezq |
+r1fGfezq |
+r1fHzq |
+r1fHzq |
+r1fH80zp |
+r1fH80zp |
+r1fHc0zp |
+r1fHc0zp |
+r1fHe0zp |
+r1fHe0zp |
+r1fHf0zp |
+r1fHf0zp |
+r0fHf0zp |
+r0fHf8zp |
+r0fHf8zp |
+r0fHfczp |
+r0fHfczp |
+r0fHfczp |
+r07Hfezp |
+r07Hfezp |
+r07Hfezp |
+r07Izp |
+r07Izp |
+r07I80zo |
+r03I80zo |
+r03I80zo |
+r03Ic0zo |
+r03Ic0zo |
+r01Ie0zo |
+r01Ie0zo |
+r01If0zo |
+r01If0zo |
+sIf8zo |
+sIf8zo |
+sIfczo |
+sIfezo |
+s7fHfezo |
+s7fIzo |
+s3fI80zn |
+s3fI80zn |
+s1fIc0zn |
+s1fIe0zn |
+s0fIe0zn |
+s0fIf0zn |
+s07If0zn |
+s07If8zn |
+s03Ifczn |
+s01Ifezn |
+s01Ifezn |
+tJzn |
+t7fI80zm |
+t3fIc0zm |
+t3fIe0zm |
+t1fIf0zm |
+t0fIf8zm |
+t07Ifczm |
+t03Ifezm |
+t01J80zl |
+uJc0zl |
+u7fIe0zl |
+u3fIf8zl |
+u1fIfczl |
+u07Jzl |
+u03J80zk |
+u01Je0zk |
+v7fIf0zk |
+v3fIf8zk |
+v1fIfezk |
+v0fJ80zj |
+v03Je0zj |
+v01Jf0zj |
+w7fIfczj |
+w1fJzj |
+w07Jc0zi |
+w01Jf0zi |
+x7fIfczi |
+x1fJzi |
+x07Jc0zh |
+x01Jf0zh |
+y3fIfczh |
+y0fJzh |
+y03Jc0zg |
+zJf8zg |
+z3fJzg |
+z0fJe0n10q |
+z03Jfcn10q |
+zgK80m30q |
+zg1fJf0me0q |
+zg03Jfel3fc0q |
+zh7fJc0j1fG80	q |
+zh07Jfci1fGfe	r |
+ziKc0g1fHfcr |
+zi1fOf0r |
+zi01Oc0r |
+zj07Ns |
+zk1fLfcs |
+zj07Mf0s |
+zi03Nc0s |
+ziOt |
+zh0fNfct |
+zhOf0t |
+zg0fOc0t |
+zgPu |
+z0fOfcu |
+zPf0u |
+y0fPc0u |
+yPfev |
+x0fPf0v |
+xQw |
+w0fPf8w |
+wQ80w |
+v0fPf8x |
+vQ80x |
+u0fPf8y |
+uQ80y |
+t0fPf8z |
+tQ80z |
+s0fPf8zg |
+r01Q80zg |
+r3fPf8zh |
+q03Q80zh |
+q3fPf8zi |
+p03Q80zi |
+p3fPf8zj |
+o03Q80zj |
+o7fPf8zk |
+n07Q80zk |
+nQf8zl |
+m0fQ80zl |
+m7fPf8zm |
+l07Q80zm |
+l7fPf8zn |
+k07Q80zn |
+k7fPf8zo |
+j07Q80zo |
+jQf8zp |
+i1fQ80zp |
+h0fQf8zq |
+c03fR80zq |
+7fRf8zr |
+1fR80zr |
+0fQf8zs |
+07Q80zs |
+03Pf0zt |
+gPzu |
+g7fNf0zu |
+g1fMfezv |
+g07Mc0zv |
+hLfczw |
+h0fLc0zv |
+iLf8zv |
+i0fKfezv |
+jL80zu |
+j0fKe0zu |
+kKf8zu |
+k0fJfezu |
+l7fJ80zt |
+l07Je0zt |
+m7fIf8zt |
+m03Ifezt |
+n1fI80zs |
+n07Ie0zs |
+o7fHf8zs |
+o0fHfezs |
+o01I80zr |
+p3fHe0zr |
+p07Hf8zr |
+p01Hfezr |
+q3fH80zq |
+q0fHe0zq |
+q03Hf8zq |
+rHfezq |
+r3fH80zp |
+r1fHe0zp |
+r07Hf8zp |
+r03Hfezp |
+sI80zo |
+s7fHe0zo |
+s1fHf8zo |
+s07Hfezo |
+s03I80zn |
+tIc0zn |
+t3fHe0zn |
+t1fHf8zn |
+t07Hfczn |
+t03Hfezn |
+t01I80zm |
+uIc0zm |
+u7fHe0zm |
+u3fHf0zm |
+u1fHf8zm |
+u0fHfczm |
+u07Hfezm |
+u03Izm |
+u01I80zl |
+vIc0zl |
+v7fHe0zl |
+v3fHf0zl |
+v1fHf8zl |
+v1fHfczl |
+v0fHfezl |
+v07Izl |
+v03I80zk |
+v01Ic0zk |
+v01Ie0zk |
+wIf0zk |
+w7fHf8zk |
+w3fHf8zk |
+w1fHfczk |
+w1fHfezk |
+w0fIzk |
+w07Izk |
+w03I80zj |
+w01Ic0zj |
+w01Ie0zj |
+xIe0zj |
+x7fHf0zj |
+x3fHf0zj |
+x1fHf8zj |
+x1fHfczj |
+u7f80g0fHfcm10	v |
+u7f80g07Hfem30	v |
+u7f80g07Hfem70	v |
+uGc0g03Il01f0	v |
+uGc0g01I80kGf0	v |
+uGc0g01I80kGf0	v |
+t01Ge0hIc0kGf0	v |
+t01Ge0h7fHe0k	07f0v |
+t01Ge0h7fHe0k	07f0v |
+t03Gf0h3fHf0k	07f0v |
+t03Gf0h1fHf0k	07f0v |
+t03Gf0h1fHf8k	07f0v |
+t07Gf8h0fHfck	07f0v |
+t07Gf8h0fHfck	07f0v |
+t07Gf8h07Hfek	07f0v |
+t0fGfch03Gf7fe	k07f0v |
+t0fGfch03Gc7G	k07f0v |
+t0fGfch01G87e0	k07f0v |
+t1fGfeh01fe07	80k07f0v |
+t1fGfeif806l07	f0v |
+t1f8ffej04l07	f0v |
+t3f8fGq07f0v |
+t3f8fGq07f0v |
+t3f07Gq07f0v |
+t7f07G80p07f0	v |
+t7f07G80i20j01	G87f0h40s |
+t7e03G80i600f	f8h07Ge7f0hc0	70g01feg0fGf9	He03ffc |
+tfe03Gc0ie03f	feh1fGf7f0g01	c1f8g0fGc00fG	f9He03ffc |
+tfe03Gc0h03e0	Hh3fHf0g07c3fc	g3fGf00fGf9He0	3ffc |
+tfc01Gc0g01Ge1	H80g7f83Gf007	Gc7feg7f8ff801	Gc01ffcg07c0 |
+s01fc01Ge0g01	Ge3Hc0gGgGf007	Gc7fegfe03fcg	Gc00ff8g03c0 |
+s01fc01Ge0g01	Ge7Hc001feg7f	f007GcfG01fc01	fegGc00ff8g03
+ 80 |
+s01f8gGe0g01G	efHe003fcg3ff0	07GcfG03f8gGg	Ge007f8g0380 |
+s03f8gGf0h0fG	01Ge003f8g1ff0	g3fdf0f07f0g7f	g7fe007fcg0380 |
+s03f8gGf0h0ffc	g7ff007f8g1ff0	g3fde070fe0g3f	807fe007fcg07
+ g |
+s03f0g7ff0h0f	f8g3ff007f0g0f	f0g3ffc030fe0	g3f807ff003fc
+ g07g |
+s07f0g7ff8h0f	f0g1ff00ff0g0f	f0g3ff8031fc0	g1fc03ff003fe
+ g0fg |
+s07f0g7ff8h0f	e0g1ff00ff0g07	f0g3ff0011fc0	g1fc03ff003fe
+ g0eg |
+s07e0g3ff8h0f	e0g0ff01fe0g07	f0g3fe0g3f80g	0fe03ff001feg
+ 0eg |
+s0fe0g3ffch0f	e0g0ff01fe0g07	f0g3fe0g3f80g	0fe01ff801Gg1e
+ g |
+s0fe0g3ffch0f	e0g0ff01fe0g07	f0g3fc0g3fIe0	1ff801Gg1cg |
+s0fc0g1ffch0f	e0g0ff01fe0g07	f0g3fc0g7fIf0	1ff801Gg1cg |
+s1fc0g1ffeh0f	e0g0ff03fe0g07	f0g3fc0g7fIf0	0ff803G803cg |
+s1fc0g1ffeh0f	e0g0ff03fe0g07	f0g3fc0g7fIf0	0ffc03G8038g |
+s1f80g0ffeh0f	e0g0ff03fe0g07	f0g3fc0g7f80i	0ffc03G8038g |
+s3f80g0fGh0fe0	g0ff03fe0g07f0	g3fc0g7fj07fc	07Gc078g |
+s3f80g0fGh0fe0	g0ff03fe0g07f0	g3fc0g7fj07fe	07Gc070g |
+s3fJh0fe0g0ff0	3fe0g07f0g3fc0	g7fj07fe073fc0	70g |
+s7fJ80g0fe0g0f	f03fe0g07f0g3f	c0g7fj03fe0f3f	e0f0g |
+s7fJ80g0fe0g0f	f03fe0g07f0g3f	c0g7fj03G0e3f	!e0g |
+s7eh03G80g0fe0	g0ff03fe0g07f0	g3fc0g7fj03G0e	1f!e0g |
+sfeh03Gc0g0fe0	g0ff03fe0g07f0	g3fc0g7fj01G1e	1ff1e0g |
+sfeh03Gc0g0fe0	g0ff03fe0g07f0	g3fc0g7fj01G9c	1ff1c0g |
+sfch01Gc0g0fe0	g0ff03fe0g07f0	g3fc0g7fj01G9c	0ff1c0g |
+r01fch01Ge0g0f	e0g0ff03fe0g07	f0g3fc0g7fkGbc	0ffbc0g |
+r01fch01Ge0g0f	e0g0ff03fe0g07	f0g3fc0g3f80j	Gf80ffb80g |
+r01f8iGe0g0fe0	g0ff03ff0g07f0	g3fc0g3f80g07	e0gGf807fb80g |
+r03f8iGf0g0fe0	g0ff01ff0g0ff0	g3fc0g3f80g07	e0g7ff807G80g |
+r03f8iGf0g0fe0	g0ff01ff0g1ff0	g3fc0g1fc0g0f	e0g7ff007Gh |
+r03f0i7ff0g0f	e0g0ff00ff8g3f	f0g3fc0g1fc0g	0fc0g7ff003Gh |
+r07f0i7ff8g0f	e0g0ff00ffcg7f	f0g3fc0g1fe0g	1fc0g3ff003Gh |
+r07f0i7ff8g0f	e0g0ff007fegG	f0g3fc0g0fe0g	3f80g3fe003fe
+ h |
+r07e0i3ff8g0f	e0g0ff007G03G	f0g3fc0g0ff0g	7f80g3fe001fe
+ h |
+r0fe0i3ffcg0f	e0g0ff003Gc7G	f8g3fc0g07f8g	Gh1fe001feh |
+r0fe0i3ffcg0f	e0g0ff001Hf7G	c03fc0g03fc01	feh1fc001fch |
+r0fc0i1ffcg0f	e0g0ff001Hf7G	c03fc0g01G07fc	h1fc001fch |
+r1fe0i3ffeg1f	f0g1ff8gHe7Gc0	7fe0hHf8h0fc0	gfch |
+q01Gfeh07He1H	81H803fGc7c007	Gfeh3fGf0h0f80	gf8h |
+q01Gfeh07He1H	81H801fG87g07	Gfeh1fGc0h0f80	gf8h |
+q01Gfeh07He1H	81H8003fc06g07	Gfeh03feo |
+zn04w |
+zzl |
+zzl |
+zzl |
+zzl |
+zg1fHfczg |
+zg1fHfczg |
+zg1fHfczg |
+zg0fHfezg |
+zg0fHfezg |
+zg0fHfezg |
+zg0fHfezg |
+zg07Izg |
+zg07Izg |
+zg07Izg |
+zg07Izg |
+zg03I80z |
+zg03I80z |
+zg03I80z |
+zg03I80z |
+zg01Ic0z |
+zg01Ic0z |
+zg01Ic0z |
+zg01Ic0z |
+zhIe0z |
+zhIe0z |
+zhIe0z |
+zhIe0z |
+zh7fHf0z |
+zh7fHf0z |
+zh7fHf0z |
+zh7fHf0z |
+zh3fHf8z |
+zh3fHf8z |
+zh3fHf8z |
+zh3fHf8z |
+zh1fHf8z |
+zh1fHfcz |
+zh1fHfcz |
+zh1fHfcz |
+zh0fHfcz |
+zh0fHfcz |
+zh0fHfez |
+zh0fHfez |
+zh07Hfez |
+zh07Hfez |
+zh07Iz |
+zh07Iz |
+zh03Iz |
+zh03Iz |
+zh03Iz |
+zh03I80y |
+zh01I80y |
+zh01I80y |
+zh01I80y |
+zh01Ic0y |
+ziIc0y |
+ziIc0y |
+ziIc0y |
+ziIe0y |
+zi7fHe0y |
+zi7fHe0y |
+zi7fHe0y |
+zi7fHf0y |
+zi3fHf0y |
+zi3fHf0y |
+zi3fHf0y |
+zi3fHf8y |
+zi1fHf8y |
+zi1fHf8y |
+zi1fHf8y |
+zi1fHfcy |
+zi0fHfcy |
+zi0fHfcy |
+zi0fHfcy |
+zi0fHfey |
+zi07Hfej80t |
+zi07Hfej80t |
+zi07Ii0180t |
+zi07Ii0180t |
+zi03Ii0380t |
+zi03Ii0780t |
+zi03Ii0f80t |
+zi03I80h1f80t |
+zi01I80h3f80t |
+zi01I80h7fu |
+zi01I80hGu |
+zi01I80g01Gu |
+zjI80g03Gu |
+zjIc0g07feu |
+zjIc0g0ffeu |
+zjIc0g1ffcu |
+zj7fHe0g3ff8u |
+zj7fHe0g7ff0u |
+zj7fHe0gGe0u |
+zj7fHf001Ge0u |
+zj3fHf803Gc0u |
+zj3fHf807G80u |
+zj1fHfc0fGv |
+zj1fI3ffev |
+zj0fJfev |
+zj0fJfcv |
+zj07Jf8v |
+zj07Jf0v |
+zj03Je0v |
+zj01Je0v |
+zkJc0v |
+zk7fI80v |
+zk3fIw |
+zk1fHfew |
+zk0fHfcw |
+zk07Hf8w |
+zk03Hf0w |
+zlHe0w |
+zl3fG80w |
+zl07fex |
+zzl |
+\enddata{raster, 538821704}
+\view{rasterview,538821704,47,0,0}
+
+
+\formatnote{.sp -1.0i}
+
+\helv{\bold{\flushright{Andrew Consortium
+
+School of Computer Science
+
+Carnegie Mellon
+
+}}}
+\smaller{\flushright{June, 1993}}\majorheading{
+
+
+Andrew as a Multiparadigm Environment for Visual 
+Languages\footnote{\
+\begindata{fnote,539409112}
+\textdsversion{12}
+\enddata{fnote,539409112}
+\view{fnotev,539409112,48,0,0}(C) 1993 IEEE. Reprinted with permission, 
+from Proceedings 1993 IEEE Symposium on Visual Languages, August 24-27, 
+1993, Bergen, Norway, pp. 256-260.
+
+
+Permission to copy without fee all or part of this material is granted 
+provided that the copies are not made or distributed for direct commercial 
+advantage, the IEEE copyright notice and the title of the publication and 
+its date appear, and notice is given that copying is by permission of the 
+Institute of Electrical and Electronics Engineers.  To copy otherwise, or 
+to republish, requires a fee and specific permission.}}
+
+
+\leftindent{\leftindent{\leftindent{\leftindent{Wilfred J. Hansen
+
+Director, Andrew Consortium}}}}
+
+
+
+\abstit{Abstract}
+
+
+\italic{Despite numerous innovations in visual languages, relatively little 
+effort has been devoted to integrating visual languages with each other and 
+with textual languages so each can be used for those purposes for which it 
+is best suited.  This paper advances a model for multiparadigm language 
+environments which utilizes text in two roles, visual program organization 
+and compiler input.  The paper further shows that the Andrew User Interface 
+System is a convenient framework for building language systems on this 
+model.  The approach is exemplified with a visual language for 
+specification of string patterns. }\
+
+
+
+
+In 1991, Glinert, Blattner, and Frerking noted that "the hope is to develop 
+'general purpose' \italic{visual languages} which combine textual and 
+graphical elements." [4]  The result should be a multiparadigm language 
+environment [5; 18].  Indeed, Borges [2] had already reported one such 
+effort, although limited to a specific set of visual components.  In such 
+an environment, "visual sublanguages" are employed where appropriate; for 
+instance, decision tables for logic, query-by-example for data base access, 
+modification diagrams for data structure operations, and branching trees to 
+specify keystroke sequences.  By working within a common environment, the 
+effort to produce each individual sublanguage is reduced and the value is 
+multiplied by synergy with other sublanguages. \
+
+
+
+The present paper suggests an open systems model wherein multiple visual 
+components can be combined to produce both general and special purpose 
+languages.  Text streams serve two key roles in organizing the environment. 
+ In one role, text organizes the visual components of the program for human 
+perusal; in the other, a text collects the rendering of the visual images 
+for sequential input to a compiler.  The paper goes on to show that the 
+Andrew User Interface System is an ideal vehicle for the environment 
+because it offers strong support for text and especially because of its 
+architecture for recursive embedding of objects.  This architecture 
+provides that objects of arbitrary variety may be nested to arbitrary 
+depth;  for instance, an equation in a drawing in a table in a text.
+
+
+\tit{1. Requirements}
+
+
+A multiparadigm language environment for visual sublanguages must support 
+not only graphical interaction but also file storage, printing, 
+compilation, and execution.  Since multiple sublanguages are to be 
+supported, the environment must provide for \italic{management and 
+integration of images from multiple classes}.  It may be adequate to 
+display each sublanguage element in a separate window, but this runs the 
+risk of chaotic imagery among which it is difficult to discern the 
+relationships among program fragments [10].  Instead, the author should 
+have the power to organize the program fragments for perusal by the reader. 
+ The organization itself, together with commentary, aids the reader in 
+comprehending the program.  Of course, organizing the program is an extra 
+effort and responsibility for the author, but the result is more 
+maintainable.
+
+
+Some languages may be expressible with text and a few lines or icons; 
+ others may require intricate diagrams and colors.  The graphical component 
+of the environment must support both and must \italic{provide for creating, 
+revising, viewing and storing} the images.  For interactive graphics, 
+experience has shown that the environment should be built on an 
+\italic{object oriented} programming environment.  In some cases, it may be 
+desirable for the user to view the text generated to represent the 
+image--for instance to learn how to program the most simple tasks more 
+quickly than by drawing pictures.  In other cases, the text would be 
+meaningless.  To provide this option, the environment should permit 
+\italic{multiple views of objects}. \
+
+
+
+Some sublanguages such as declarations and flow charts may translate 
+readily to code in some traditional programming language; others like data 
+base queries may require the services of a specialized interpreter.  Some 
+may generate little code and others enormous quantities.  The multiparadigm 
+environment must support a range of \italic{code generation options} and 
+must support a scheme to \italic{coordinate execution} of the various 
+components. \
+
+
+
+\tit{2. Model}
+
+
+The above requirements can be met by a model comprised of two streams of 
+general text, one for the author/reader and a second for compiler input. 
+ The second of these may be pure ASCII, but the first must support 
+embedding of objects.  \
+
+
+
+The author/reader text organizes the program within the framework of the 
+text of a programming language;  either a traditional language or a new 
+one.  Visual sublanguage components of the program are instantiated as 
+objects embedded within this text stream.  Ideally, the object environment 
+supports recursive embedding of objects so that sublanguage components may 
+themselves contain text written in either the base language or still other 
+sublanguages.
+
+
+For presentation to a compiler, a processor scans the author/reader text 
+and generates a second text by requesting each embedded object to render 
+itself as text for compilation.  The result is compiled and executed by 
+standard methods or within some suitable debugging environment.
+
+
+The ability of objects to render thmeselves as text may have other 
+advantages.  In some cases, the textual form may be considerably more 
+compact than the picture.  By permitting the user to review the textual 
+form generated for a sublanguage object, the system can offer the user the 
+opportunity to learn how to create programs more quickly. In developing new 
+sublanguages, it will be convenient to debug them if their intermediate 
+output is in text.  Moreover, text is machine independent so the resulting 
+systems will be more portable. \
+
+
+
+Objects may adopt different strategies in rendering executable text.  The 
+simplest sublanguages will generate text directly in the base language. 
+ More complex sublanguages can generate a load module defining the 
+appropriate function;  in this case the textual representation need be 
+little more than a call on the function.  In other cases, the implementor 
+may choose to add a library or augment the base language itself. \
+
+
+
+Text is attractive for the author/reader component because it is a natural 
+vehicle for descriptive commentary and because there are many existing 
+tools like editors and cross reference generators.  Nonetheless, substrates 
+other than text can also be accomodated in the model.  For instance, rather 
+than a linear text, the overall program could be displayed as a picture 
+containing textual commentary and a graph linking the various program 
+objects [13].  Such organizations are interesting experiments in 
+themselves, so the recursive embedding environment should support embedding 
+of objects in substrates other than text. \
+
+
+
+Support of the model requires an object-oriented environment wherein 
+objects can be embedded in text and recursively within one another.  The 
+environment must provide mechanisms so sections in various sublanguages can 
+share screen space, user input devices, data stream, the printed page, and 
+cut/copy/paste operations.  Within such an environment there will be a 
+superclass of objects that serve to store expressions in sublanguages. 
+ This superclass specifies two methods which must be implemented by 
+subclasses: \
+
+
+
+\indent{\bold{RenderToText}(object) -- The object returns a text which can 
+be compiled in the base language to implement the function described 
+visually. \
+
+
+\bold{RenderDeclarations}(object) -- The object returns a table of all 
+external variables it declares. }\
+
+
+
+Based on the RenderDeclarations, the superclass implements an additional 
+method called RenderEnvironment which merges the tables from an object and 
+all surrounding objects, thus producing a list of all accessible variables. 
+ Neither this nor RenderDeclarations are usually needed during compilation. 
+ However, these routines are available for semantic checks while creating 
+the visual image. \
+
+
+
+Corresponding to classes storing sublanguage expressions are other classes 
+responsible for providing the visible view of these objects.  These are 
+primarily ordinary graphical objects, but need one additional method to 
+control the form of the image: \
+
+
+
+\indent{\bold{SetImageMode}(object, mode) -- causes the object to display 
+itself according to the specified mode:  icon, visual image, or rendered 
+text. }\
+
+
+
+\tit{3. Andrew satisfies the model}
+
+
+The only system available at this writing that meets the requirements above 
+is the Andrew Toolkit (ATK) component of the Andrew User Interface System 
+[15; 1; 17].  In particular, Andrew fully supports recursive embedding of 
+objects and permits text to be embellished with all the usual typographic 
+styles.  When an object is embedded, it retains its interactive interface 
+and can continue to be edited.  Consider Figure 1 where various objects are 
+embedded in a spreadsheet which is itself in a text. \
+
+
+
+Many other graphical user interface systems offer excellent support for 
+graphical operations but do not support recursive embedding of images; for 
+instance, Garnet [12], Interviews [11],  MacApp, and NeXTStep.  Systems in 
+development by Taligent and Microsoft may offer such support, but are not 
+yet available. \
+
+
+
+The ATK mechanisms for recursive embedding of objects are described in more 
+detail in [7].  In addition to a graphical toolkit, Andrew offers complete 
+applications such as a help system, sophisticated mail management, 
+programmable system interface, extension language, and editors for text, 
+rasters, drawings, table/spreadsheets, fonts, preferences and so on. \
+
+
+
+A quick review will demonstrate that a multiparadigm language environment 
+for visual sublanguages based on Andrew meets the requirements italicized 
+in section 1: \
+
+
+\indent{
+\italic{Object oriented:}  ATK is based on a set of conventions for C code 
+that constitute an object oriented system.  In 1993, moreover, we are 
+converting to the C++ object model.  ATK is an open system in which it is 
+possible to incorporate new objects because appropriate tools are provided 
+and because the source code is available so existing objects can be 
+adapted.  Installation of new object classes does not require relinking the 
+entire system because dynamic linking is supported. \
+
+
+\italic{Management and integration of images from multiple classes:} 
+ Objects can be organized in text or in one of several other substrates 
+supported by ATK. \
+
+
+
+\italic{Provide for creating, revising, viewing and storing} objects:  All 
+of these are inherent in the ATK object design. \
+
+
+
+\italic{Multiple views of objects:}  ATK pioneered the separation of data 
+from view;  it has always supported multiple views of objects. \
+
+
+
+\italic{Code generation options:}  Because ATK supports full formated text, 
+there is no difficulty generating any desired text. \
+
+
+
+\italic{Coordinate execution:} Execution of a single text means a single 
+compilation and execution.  For those cases where the sublanguage object 
+generates a separate executable, it can be generated into a directory from 
+which dynamically loaded objects are fetched and will thus be available 
+during execution. }\
+
+
+
+In addition to these mandatory characteristics, ATK has a number of other 
+relevant characteristics, many of which will aid in support of visual 
+sublanguages.  These include a change propagation mechanism, window system 
+independence, widget sets, and provision for input of gestures.  ATK's Ness 
+extension language [6] can serve as a base language into which to embed 
+sublanguage objects.  Implementation of Ness required development of 
+parsing tools which have themselves become part of ATK.  Among these are 
+the \italic{tlex} token scanner [9] which is linked to an an augmented 
+\italic{Bison} parser generator [3] to create an integrated system where 
+tokens need be specified only once.  A symbol table object, \italic{sym}, 
+provides for the needs of languages with or without nested scopes.
+
+
+As befits a user interface system, there are already a number of visual 
+elements in programming with the Andrew User Interface System.  Indeed, the 
+system has already served as the basis for at least one visual programming 
+system [16].  Other simple examples include the ADEW interface builder 
+[14], automatic transformation of key and mouse sequences into macros in 
+the Ness language, arbitrary styles and embedded objects in comments in C 
+programs and in both comments and strings in Ness programs. \
+
+
+
+Implementation of the model for multiparadigm languages is done in Andrew 
+by building on the existing object hierarchy.  The two principal classes 
+are \italic{dataobject} and \italic{view}.  Data objects manage data state 
+information and provide methods for transfer between memory and a data 
+stream.  Views access information from data objects, display it on the 
+screen, and provide the user interface operations for modifying it. \
+
+
+
+\italic{Text} and \italic{textv} are subclasses of dataobject and view, 
+respectively, and provide for general styled text with embedded objects. 
+ To implement sublanguages the classes \italic{sublang} and 
+\italic{sublangv} are defined as subclasses of text and textv.  Each 
+individual sublanguage is then implemented as subclasses of sublang and 
+sublangv.  Of these, sublang defines the RenderXxx methods which are then 
+overriden by the sublanguage implementation.  The text in a sublang object 
+will usually be empty until RenderToText has been called.  Thereafter, the 
+text contents are accessed via the methods of the text superclass. The 
+symbol table object, \italic{sym}, is used for implementing the tables of 
+declared variables required for RenderDeclarations and RenderEnvironment. \
+
+
+
+In addition to text, ATK offers several other substrates which could be 
+used to organize sublanguage components.  \italic{Layout} provides for 
+scattering objects in a rectangle.  \italic{Figure} does the same and 
+allows the rectangle to be decorated with arbitrary drawing.  \italic{Table} 
+permits rectangular arrays of objects.  The \italic{page} object provides 
+for switching among an arbitrary set of images.  Since all of these support 
+recursive embedding, a program could be, for instance, a page object 
+containing a sequence of figures. \
+
+
+
+\tit{4. Example: Pattern Specification}
+
+
+To illustrate Andrew as a multiparadigm language environment, we created an 
+object that extends the Ness language with a visual object for specifying 
+regular expression patterns.  See Figures 2 and 3.  Coding of the 
+demonstration took about one day.  In addition to using text for the base 
+language and the rendered value, the object uses the \italic{figure} inset 
+to display the actual image.  The bulk of the coding effort was to write a 
+parser of regular expressions which generates the appropriate figure 
+objects.  With this as a basis, user interactions change the string and the 
+changes are reflected in the image for feedback to the user. \
+
+
+
+String processing often specify a sequence of patterns and for each a 
+resulting transformation of the input or sequence of operations.  In a 
+typical if-then-else language the patterns become dispersed among the 
+various predicates so it is not easy to read them for similarities.  The 
+actions are dispersed among the -then- and -else- clauses so they also 
+cannot be readily compared.  The appropriate layout is instead a two column 
+table with predicates in the left column and actions in the right.  In 
+Andrew, pattern-action tables can be implemented as a subclass of the 
+\italic{table} inset.  Because recursive embedding is fully supported, the 
+predicate cells can be filled with either text or the pattern object above. 
+ Moreover, rendering of the patter-action table into code can combine the 
+patterns to achieve a more optimum scanner.  Figure 4 shows how the 
+resulting visual sublanguage appears for a portion of a program to 
+normalize C preprocessor conditional statements.  (The first row of the 
+table specifies the subject of the comparison.)  For an if-then-else 
+version of this program, see [8].
+
+
+\tit{Summary}
+
+
+This paper has described a multiparadigm language environment model for 
+integrating visual languages to create a more general language.  The model 
+employs text for organizing the visual images and also as the target for 
+rendering sublanguage elements into executable form.  That this model is 
+viable has been demonstrated by showing that the Andrew User Interface 
+System well supports the model and further by displaying two sublanguages 
+implemented within Andrew.  Use of Andrew as a basis for experiments in 
+visual languages can free researchers from reinventing graphics toolkits so 
+they can concentrate on progress in the human aspects.
+
+
+\bold{Acknowledgements:}  Brad Myers made helpful comments and Andrew 
+Plotkin coded the regular expression sublanguage object.  I am grateful for 
+their help.
+
+
+
+\subsection{References}
+
+\description{
+[1]  Borenstein, Nathaniel S., \italic{Multimedia Applications Development 
+with the Andrew Toolkit}, Prentice Hall, 1990.
+
+
+[2]  Borges, Jose A. and R. E. Johnson, Multiparadigm Visual Programming 
+Languages, \italic{Proc. 1990 IEEE Workshop on Visual Languages}, Oct 4-6, 
+1990, Skokie, IL, IEEE Computer Society Press (Los Alamitos, CA, 1990), 
+233-240.
+
+
+[3]  Donnelly, C. and R. Stallman, \italic{BISON: The YACC-compatible 
+Parser Generator}, Free Software Foundation, (Cambridge, 1992).
+
+
+[4] Glinert, Ephraim P., Meera M. Blattner, Christopher J. Frerking, 
+ Visual Tools and Languages: Directions for the '90s, \italic{Proc. 1991 
+IEEE Workshop on Visual Languages}, IEEE Computer Society Press (Los 
+Alamitos, CA, 1991), 89-95. \
+
+
+
+[5]  Hailpern, B., Multiparadigm Languages and Environments,  \italic{IEEE 
+Software}, 3(1), Jan. 1986, 6-9.
+
+
+[6]  Hansen, Wilfred J., Enhancing documents with embedded programs: How 
+Ness extends insets in the Andrew Toolkit, \italic{Proceedings of IEEE 
+Computer Society 1990 International Conference on Computer Languages}, 
+March, 1990, New Orleans, IEEE Computer Society Press (Los Alamitos, CA) 
+ 23-32.
+
+
+[7]  Hansen, W. J., A model for recursive embedding of widgets based on 
+experience with the Andrew Toolkit,  Andrew Consortium, Carnegie Mellon 
+Univ., May, 1992.
+
+
+[8]  Hansen, W. J., Subsequence References: First Class Values for 
+Substrings, \italic{ ACM Trans. Prog. Lang. and Sys. 14}, 4, Oct. 1992.
+
+
+[9]  Gentlex - a generator of lexical analyzers for parser input,  Andrew 
+Consortium, Carnegie Mellon Univ., January, 1993.
+
+
+[10] Clayton Lewis and Gary M. Olson, "Can Principles of Cognition Lower 
+the Barriers to Programming?"  Report on an informal workshop, University 
+of Colorado, July, 1986.
+
+
+[11]  Linton, M. A., J. M. Vlissides, P. R. Calder, Composing user 
+interfaces with interviews, \italic{IEEE Computer} 22(2), February, 1989, 
+8-22.
+
+
+[12]  Myers, B. A. and B. Vander Zanden, Environment for rapidly creating 
+interactive design tools, \italic{The Visual Computer} V. 8(2), Springer 
+Verlag, (Feb, 1992) 94-116.
+
+
+[13]  Meyers, S., S. P. Reiss, A system for multiparadigm development of 
+software systems, \italic{Proc. of the 6th International Workshop on 
+Software Specification and Design}, Como, Italy; 25-26 Oct. 1991; IEEE 
+Comput. Soc. Press (Los Alamitos, CA, 1991) 202-9.
+
+
+[14] Neuendorffer, Thomas P., ADEW: The Andrew Development Environment 
+Workbench: An Overview,  presented at the X Conference, Boston, MA, 1989.
+
+
+[15]  Palay, Andrew J., Wilfred J. Hansen, et al., The Andrew Toolkit - An 
+Overview,  presented at the Usenix Conference, Dallas, TX, January, 1988.
+
+
+[16]  Rogers, G., The GRClass visual programming system, \italic{Proc. of 
+the 1990 IEEE Workshop on Visual Languages}, Skokie, IL, 4-6 Oct. 1990, 
+IEEE Comput. Soc. Press, (Los Alamitos, CA, 1990) 48-53.
+
+
+[17]  Sherman, Mark, D. Anderson, W. J. Hansen, T. P. Neuendorffer, A. J. 
+Palay, Z. Stern, "Allocation of User-Interface Resources in the Andrew 
+Toolkit,", \italic{Proceedings of the International Conference on 
+Multimedia Information Systems}, (Singapore) McGraw-Hill, January, 1991.
+
+
+[18] Zave, P., A compositional approach to multiparadigm programming, 
+\italic{IEEE Software} 6(5), (Sept, 1989), 15-25.
+
+\begindata{bp,538469688}
+\enddata{bp,538469688}
+\view{bpv,538469688,49,0,0}}
+\begindata{raster,539409288}
+2 0 68266 68266 0 0 484 603
+bits 539409288 484 603
+zzzg |
+zzzg |
+7fZZHfeKfeOc0	g |
+40zzh01k01o40	g |
+40zzx40g |
+40zzh01k01o40	g |
+40zzx40g |
+40zzh01k01o40	g |
+40zzx40g |
+40zzh01k01o40	g |
+40zzx40g |
+40zzh01k01o40	g |
+40zzx40g |
+40o1ffclf060g	01Gf8g1cj01e0	q01k01o40g |
+40o078fl70f0g	01cf38g1cke0zm	40g |
+40o078780k70f0	g018f18g1cke0	q01k01o40g |
+40o078780k!70	g010f08me0zm40	g |
+40o078780k7030	g010f08me0q01	k01o40g |
+40o07!87c07c0f	03e070607cg0f	01de3c1f079e07	d8e078zl40g |
+40o07878ee0cc	3987!7060ccg0f	gG1c3b83bf0ef8	e1ccp01k01o40
+ g |
+40o078f1c71c4	39ce3870c1c4g	0fge71c71c3c7	1c70e1cezl40g |
+40o07fc1c71c0	71ce387081c0g	0fge01c71c387	1c70e38ep01k01
+ o40g |
+40o07800871f0	7084387001f0g	0fge01c21c387	1c70e38ezl40g |
+40o078001f0f8	70gf870gf8g0f	ge01c07c3871c	70e3fep01k01o
+ 40g |
+40o07800e707c	70073870g7cg0f	ge01c39c3870e	60e380zl40g |
+40o07801c703e	700e3870g3eg0f	ge01c71c38707	c0e380p01k01o
+ 40g |
+40o07801c710e	780e3870010eg	0fge01c71c387	0cge3c0zl40g |
+40o07801cf10e	3c4e7870010eg	0fge01c73c387	1cge1e2p01k01
+ o40g |
+40o07801ff98c	3f8ffc70018cg	0fge01c7fe387	1ff0e1fczl40g |
+40o1fe00e31f8	0f0718f801f8g	3fc1f03e38c7cf	9ff9f078p01k01
+ o40g |
+40zn0ff8zn40g |
+40zn1838r01k01	o40g |
+40zn!18zn40g |
+40zn1c30r01k01	o40g |
+40zn0fe0zn40g |
+40zzh01k01o40	g |
+40zzx40g |
+40zzh01k01o40	g |
+40zzx40g |
+40zzh01k01o40	g |
+7fZZXc0g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04s3cy40g |
+40zj04s66y40g |
+40zj04s66y40g |
+40zj04sc3y40g |
+40zj040718ke3	kc3y40g |
+41G9806l030180	o0ch040318k63	kc3y40g |
+4199b806l0703	80o0ch040311c0	02i621038ic3y	40g |
+411898l800301	80m02j04033220	02i661044ic3y	40g |
+40!18k01800301	80m06j0401a220	j34g44ic3y40g |
+401819861ai03	e3c3718780i!1e	19!8f0c660d04	01a4100601Gg34
+ 208201Ggc3y40	g |
+40181bce26i01	8643b98cc0i!33	3bc6191cef1304	01c41002i3860
+ 82i66y40g |
+40181cc632i01	8663199840i60	619cc6198c7319	0401c4100601G
+ g38208201Gg66	y40g |
+40!18c638i0180	e3199fc0i6061	98c6038c631c04	01841004i3060
+ 82i3cy40g |
+40!18c61ci0183	631998j606198	c60d8c630e04g	041004j4082zi
+ 40g |
+40!18c60ei0186	631998j606198	c6198c630704g	02200cjc044zi
+ 40g |
+40!18c626i0186	631998j606198	c6198c631304g	022208ja244zi
+ 40g |
+40!18c632i01d7	e3318cc0i!3318	c75f8c631904g	01c208jc238zi
+ 40g |
+40!3cef2cje332	e3c780i!1e3ce3	8cdef39604h04	18j04zj40g |
+40zj04i10zo40	g |
+40zj04ib0zo40	g |
+40zj04i60zo40	g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+40k0180h30i06	h60l0384zs40g |
+40k0380h70i06	h60l0684zs40g |
+40k0180h30k08	m!04zs40g |
+40k0180h30k18	m0c04zs40g |
+40d1ef38f1b1e1	80g01!f0d1e366	373e61e19834h	0f1f04l0czl40
+ g |
+413336319bb321	80g0331993337	6e7b98e333bc4c	h198c04l1czl40
+ g |
+4196162309c331	80g0633099603	8631986619cc64	h30cc04l3czl40
+ g |
+41c7f323f98071	80g0633f9c603	06319866198c70	h30cc04l0czl40
+ g |
+40e603630181b1	80g0633ge60306	319866198c38h	30cc040718j0c
+ zl40g |
+40760143018331	80g0633g760306	319866198c1ch	30cc040318j0c
+ zl40g |
+413601c3018331	80g0633013603	06319866198c4c	h30cc04031101
+ i0czl40g |
+419330819983f1	80g0331999333	063b1d63318c64	h198c04033303
+ i0czl40g |
+4161e080f3c19b	c0g01f8f161e7	8f3e0ef1e3ce58	h0f1e0401a505
+ i0czl40g |
+40t30o0401a101	g7fc00czl40g |
+40t30o0401c101	i0czl40g |
+40t30o0401c101	g7fc01ezl40g |
+40t78o04018101	i3fzl40g |
+40zj04g!01zp40	g |
+40zj04g!01zp40	g |
+40zj04g0111zp	40g |
+40zj04g039380	zo40g |
+40zj04h20zp40	g |
+41fej1e1ch03G	8018i0fk03c004	zs40g |
+40e7j0e1ch0339	8018i07k018004	zs40g |
+40e380i0e1ch02	388018i07k0184	04zs40g |
+40e380i0e0ci38	k07k018c04zs40	g |
+40e39f0f8f9f0e	18f8h383bbcf8	e707f70fj019f	04zs40g |
+40e733999db38e	3198h381d9d9c	7f9ce71d80i01	8c04zs40g |
+40fe339cb9b38e	01c8h381c1d9c	739ce73980i01	8c04zs40g |
+40e0079e38078e	01e0h38!1c3c73	9ce73f80i018c	04zs40g |
+40e01b8f381b8e	gf0h38!1cdc73	9cc738j018c04	zs40g |
+40e03387b8338e	g78h381c1d9c73	8f0738j018c04	zs40g |
+40e03393b8338e	0138h381c1d9c	738c0738j018c	040718j0718k03
+ 8cx40g |
+40e03f999dbf8e	0198h381c1dfc	739fc71d98i01	8e840318j0318
+ k018cx40g |
+41f01ddf0f1ddf	01f0h7c!3eeefb	dfG8f18i03c704	03108010h0310
+ 8008g80100188	4008g80t40g |
+40u1c70m040330	8010h03308018	g801001984008	0180t40g |
+40u1830m0401a0	j01a0g28h10gd0	h0280t40g |
+40u1c60m0401a1	g300ff801a1g08	018010gd08018	g80t40g |
+40u0fc0m0401c3	g10h01c3g08g81	Gge18008g80t40	g |
+40zj0401c1g30	0ff801c1g0801	8010ge08018g80	t40g |
+40zj040183g20	h0183g0801g10	gc18010g80t40	g |
+40zj04g02g20i	02g0801g10g01	g10g80t40g |
+40zj04g06g60i	063f8803g10g03	g33f880t40g |
+40zj04g051040	i05g0882i0288	20g80t40g |
+40k60w0384g06	1040i06g1c82i	03082001c0t40	g |
+40k60w0684h20	c0k0106j1060v	40g |
+40i10t40j!04i	80l04k40v40g |
+40i30tc0j0c04	h0580l2cj02c0	v40g |
+40!f0cc7c7863	3068i0fj3479f0	i0f1f04h03m18	j0180v40g |
+41!99de30c8e7	7898i19j4cccc0	i198c04zs40g |
+43030ce630cc63	98c8i1980i6584	c0i30cc04zs40	g |
+43030cc6301c63	18e0i0380i71fc	c0i30cc04zs40	g |
+43030cc6306c63	1870i0d80i3980	c0i30cc04zs40	g |
+43030cc630cc63	1838i1980i1d80	c0i30cc04zs40	g |
+43030cc630cc63	1898i1980i4d80	c0i30cc04zs40	g |
+419998c63afc63	18c8i1f80i64cc	e8i198c04zs40	g |
+40f0f1e71c66f7	9cb0i0cc0i5878	70i0f1e04zs40	g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+40k60l6018gc0	h60geci04zs40	g |
+40k60le01801c0	he001aci04zs40	g |
+40j08m60hc0h60	01j04zs40g |
+40j18m60hc0h60	03j04zs40g |
+40f0f9ce1e3e61	e19834g39ce66	1878ccg03e1e7	cc660f0d04zs40
+ g |
+419998c63218e3	33bc4cg198c6f	38ccdeg066333	1cef199304zs40
+ g |
+430b18c6331866	19cc64g189873	1980e6g0c6613	0c73309904zs40
+ g |
+43fb18c6071866	198c70g0d9863	1980c6g0c67f3	0c633f9c04zs40
+ g |
+430318c61b1866	198c38g0dd863	1980c6g0c6603	0c63300e04zs40
+ g |
+430318c6331866	198c1cg075063	1980c6g0c6603	0c63300704zs40
+ g |
+430318c6331866	198c4cg077063	1980c6g0c6603	0c63301304zs40
+ g |
+419998ee3f1d63	318c64g022063	18ccc6g066333	0c63199904zs40
+ g |
+40f0f877198ef1	e3ce58g0220f3	bc79e7g03f1e7	9ef38f1604zs40
+ g |
+40g18zh04zs40	g |
+40g18zh04zs40	g |
+40g18zh04zs40	g |
+40g3czh04zs40	g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+40zj04zs40g |
+4006j03k0eg18	jc0i60g04zs40	g |
+400ej07k1ag38	jc0ie0g04zs40	g |
+4086j03k100218	h08k60g04zs40	g |
+4186j03k300618	h18k60g04zs40	g |
+43e660f03ce3c3	39!c3403c7c0f	9983c03e6c!c3	307c61e004zs40
+ g |
+4186f19818c643	18c664c0663006	1bc66018edc647	7998633004zs40
+ g |
+41873308188663	18cc2640c33006	1ccc201870c663	9988661004zs40
+ g |
+418633f80c80e3	18cfe7gc33006	18cfe01860c0e3	198867f004zs40
+ g |
+418633g0d8363	18cc0380c33006	18ccg1860c363	199866g04zs40
+ g |
+418633g050663	18cc01c0c33006	18ccg1860c663	18f066g04zs40
+ g |
+418633g070663	18cc04c0c33006	18ccg1860c663	188066g04zs40
+ g |
+41d631980207e3	1dc66640663007	58c6601d60c7e3	18f8633304zs40
+ g |
+40ef38f0020337	8ee3c5803c7803	bce3c00ef1e337	9cfef1e304zs40
+ g |
+40z0106h04zs40	g |
+40z0182h0bZSa0	g |
+40z01c4h08zs20	g |
+40zgf8h0bZSa0	g |
+40zj0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+41e0j18p60m0a	zsa0g |
+40c0j38p60m0a	zsa0g |
+40c2j18n10o0a	zsa0g |
+40c6j18n30o0a	zsa0g |
+40cf80h1e1868	f0i!f0cc7c7863	3068if0cc0azs	a0g |
+40c6i32189998	h01!99de30c8e7	7898h0191de0a	zsa0g |
+40c6i3318cb0c	h!030ce630cc63	98c8h0198e60a	g1fGfch1fGfch
+ 1fGfch1fGfcta0	g |
+40c6i0718e30c	h!030cc6301c63	18e0i38c60ag20	0302h200302h20
+ 0302h200302ta0	g |
+40c6i1b18730c	h!030cc6306c63	1870id8c60ag20	0702h200702h20
+ 0702h200702ta0	g |
+40c6i33183b0c	h!030cc630cc63	1838h0198c60a	g200f02h200f02
+ h200f02h200f02	ta0g |
+40c6i33189b0c	h!030cc630cc63	1898h0198c60a	g200302h200302
+ h200302h200302	ta0g |
+40c740h3f18c9	98h019998c63a	fc6318c8h01f8	c60ag200302h20
+ 0302h200302h20	0302ta0g |
+41e380h19bcb0	f0if0f1e71c66	f79cb0icde70a	g200302h200302
+ h200302h200302	ta0g |
+40zj0ag200302	h200302h200302	h200302ta0g |
+40zj0ag200302	h200302h200302	h200302ta0g |
+40zj0ag200302	h200302h200302	h200302ta0g |
+40zj0ag200301	Hc00301Hc00301	Hc00302ta0g |
+40zj0ag200302	h200302h200302	h200302ta0g |
+40zj0ag200782	h200782h200782	h200782ta0g |
+40zj0ag200fc2	h200fc2h200fc2	h200fc2ta0g |
+40zj0ag20g02h	20g02h20g02h20	g02ta0g |
+40zj0ag20g02h	20g02h20g02h20	g02ta0g |
+40h30i06k30i18	kc0g0ag20g02h	20g02h20g02h20	g02ta0g |
+40h30i06k70i18	j01c0g0ag20g02	h20g02h20g02h	20g02ta0g |
+40l80k30n10c0	g0ag20g02h20g	02h20g02h20g02	ta0g |
+40k0180k30n30	c0g0ag20g02h20	g02h20g02h20g	02ta0g |
+40f0cc3198c1e3	e61e1980g0d33	078e7398cc1fh	7ccc1e0ag1ff7
+ fch1ff7fch1ff7	fch1fGfcta0g |
+4191de73bde321	8e333bc0g1337	8cc66339de66h	30de330ah08j08
+ j08za0g |
+4198e631ce6331	86619cc0g1939	98662618e662h	30e6610ah08j08
+ j08za0g |
+4038c6318c6071	866198c0g1c31	98636618c662h	30c67f0ah08j08
+ j08za0g |
+40d8c6318c61b1	866198c0g0e31	98637618c666h	30c6600ah08j08
+ j08za0g |
+4198c6318c6331	866198c0g0731	9861d418c63ch	30c6600ah08j08
+ j08za0g |
+4198c6318c6331	866198c0g1331	9861dc18c620h	30c6600ah08j08
+ j08za0g |
+41f8c6318c63f1	d63318c0g1931	8cc08818c63eh	3ac6330ah08j08
+ j08za0g |
+40cde77bdef198	ef1e3ce0g1679	c780883de73f80	g1de71e0ah08j
+ 08j08za0g |
+40x4180j0ah08	j08j08za0g |
+40x6080j0ah08	j08j08za0g |
+40x71k0ah08j08	j08za0g |
+40x3ek0ah08j08	j08za0g |
+40zj0ah08j08j	08za0g |
+40zj0ah08j08j	08za0g |
+40zj0ah08j08j	08za0g |
+40zj0ah08j08j	08za0g |
+40zj0ah08j08j	08za0g |
+4180g3180c6k38	g03kc0i60g0ah	08j08j08za0g |
+4380g3381c6k68	g07kc0ie0g0ah	08j08j08za0g |
+4180g0180c0k40	g43i08k60g0ag	1ff7fch1ff7fc	h1ff7fcya0g |
+4180g0180c0kc0	gc3i18k60g0ag	200302h200782	h200f82ya0g |
+41b9ce3187c633	07c0gf1f001f3	3078g3e6c!c330	7c61e00ag2007
+ 02h200fc2h2019	c2ya0g |
+41dcc6718cce77	99800198c0gc3	78ccg18edc647	799863300ag20
+ 0f02h2019c2h20	10c2ya0g |
+418cc63198c639	9880030cc0gc3	9984g1870c663	998866100ag20
+ 0302h2010c2h20	gc2ya0g |
+418cc63198c631	9880030cc0gc3	19fcg1860c0e3	198867f00ag20
+ 0302h20gc2h20	0182ya0g |
+418cc63198c631	9980030cc0gc3	1980g1860c363	199866g0ag2003
+ 02h20gc2h2007	02ya0g |
+418cc63198c631	8fg030cc0gc319	80g1860c66318	f066g0ag200302
+ h200182h200782	ya0g |
+418cc63198c631	88g030cc0gc319	80g1860c66318	8066g0ag200302
+ h200182h2001c2	ya0g |
+4198ee318cc631	8f800198c0geb	18ccg1d60c7e3	18f863330ag20
+ 0302h200302h20	gc2ya0g |
+4170777bc7ef79	cfe0gf1e0g779c	78g0ef1e3379c	fef1e30ag2003
+ 01Hc00601Hc0g	c2ya0g |
+40l1060r0106h	0ag200302h200c	42h20gc2ya0g |
+40l1820r0182h	0ag200782h201f	c2h201982ya0g |
+40l1c40r01c4h	0ag200fc2h201f	c2h201f02ya0g |
+40l0f80sf8h0a	g20g02h20g02h	20g02ya0g |
+40zj0ag20g02h	20g02h20g02ya0	g |
+40zj0ag20g02h	20g02h20g02ya0	g |
+40zj0ag20g02h	20g02h20g02ya0	g |
+40zj0ag20g02h	20g02h20g02ya0	g |
+40zj0ag20g02h	20g02h20g02ya0	g |
+41G30h3180j30	l18l0ag1ff7fc	h1ff7fch1fGfc	ya0g |
+40c330h7380j70	l18l0ah08j08zk	a0g |
+40c1i3180i0430	s0ah08j08zka0	g |
+40c0i3180i0c30	s0ah08j08zka0	g |
+40c031983c319e	60h1f33078d8f	i1868if0cc0ah	08j08zka0g |
+40c273bc64318c	60h0c378cdd99	80h3898h0191de	0ah08j08zka0g |
+40fe31cc66318e	40h0c39984e30	80h18c8h0198e6	0ah08j08zka0g |
+40c2318c0e3186	40h0c319fcc3f	80h18e0i38c60a	h08j08zka0g |
+40c0318c363186	c0h0c31980c30	i1870id8c60ah	08j08zka0g |
+40c0318c663183	80h0c31980c30	i1838h0198c60a	h08j08zka0g |
+40c0318c663183	80h0c31980c30	i1898h0198c60a	h08j08zka0g |
+40c0318c7e3181	80h0eb18ccc19	80h18c8h01f8c6	0ah08j08zka0g |
+41e07bce337bc1	i0779c79e0fi3c	b0icde70ah08j	08zka0g |
+40k03x0ah08j08	zka0g |
+40k02x0ah08j08	zka0g |
+40k1ex0ah08j08	zka0g |
+40k1cx0ah08j08	zka0g |
+40zj0ah08j08zk	a0g |
+40zj0ah08j08zk	a0g |
+40zj0ah08j08zk	a0g |
+40zj0ag1ff7fc	h1ff7fczja0g |
+40zj0ag200302	h200f82zja0g |
+4180h0cm0180p	038ag200702h20	19c2zja0g |
+4180h1cm0180p	068ag200f02h20	10c2zja0g |
+40i0ck10g20q04	0ag200302h20g	c2zja0g |
+40i0ck30g60q0c	0ag200302h2001	82zja0g |
+418cc61b8c3c66	3078cc7c78f987	8660m0f1f0ag20	0302h200702zj
+ a0g |
+439def3dcc66ef	78cdde30c8638c	cef0m198c0ag20	0302h200782zj
+ a0g |
+418e7318ccc273	9984e630cc6198	6730m30cc0ag20	0302h2001c2zj
+ a0g |
+418c6318ccfe63	19fcc6301c6198	6630m30cc0ag20	0302h20gc2zja0
+ g |
+418c6318ccc063	1980c6306c6198	6630m30cc0ag20	0301Hc0gc2zja0
+ g |
+418c6318ccc063	1980c630cc6198	6630m30cc0ag20	0302h20gc2zja0
+ g |
+418c6318ccc063	1980c630cc6198	6630m30cc0ag20	0782h201982zj
+ a0g |
+418c631d8c6663	18ccc63afc758c	c630m198c0ag20	0fc2h201f02zj
+ a0g |
+43def79f1e3cf7	bc79e71c663bc7	8f38m0f1e0ag20	g02h20g02zja0
+ g |
+40h18zg0ag20g	02h20g02zja0g |
+40h18zg0ag20g	02h20g02zja0g |
+40h18zg0ag20g	02h20g02zja0g |
+40h3czg0ag20g	02h20g02zja0g |
+40zj0ag20g02h	20g02zja0g |
+40zj0ag1ff7fc	h1fGfczja0g |
+40zj0ah08zpa0	g |
+40zj0ah08zpa0	g |
+40zj0ah08zpa0	g |
+41fej18c0h3ff0	06i03k30h0ah08	zpa0g |
+40c7j38e0h3330	06i07k30h0ah08	zpa0g |
+40c3j1820h2310	j03n0ah08zpa0	g |
+40c3j1840h03k	03n0ah08zpa0g |
+40c31e0d!1e18	0340g!03661e19	83e30fhe70d31	983e0ah08zpa0
+ g |
+40c63213333218	04c0g03076e32	3bccc31980g63	1373bccc0ah08
+ zpa0g |
+40fc3319603318	0640g!0386331c	cc433080g6319	31ccc40ah08zp
+ a0g |
+40c0071c600718	07h!03060718cc	433f80g631c31	8cc40ah08zpa0
+ g |
+40c01b0e601b18	0380g!03061b18	ccc330h630e31	8ccc0ah08zpa0
+ g |
+40c03307603318	01c0g!03063318	c78330h630731	8c780ah08zpa0
+ g |
+40c03313603318	04c0g!03063318	c40330h631331	8c400ah08zpa0
+ g |
+40c03f19333f18	0640g!03063f18	c7c31980g7719	318c7c0ah08zp
+ a0g |
+41e019961e19bc	0580g07878f19	bce7f78fh3b96	7bce7f0ah08zp
+ a0g |
+40t0830m830ah	08zpa0g |
+40t0c10mc10ah	08zpa0g |
+40t0e20me20ah	08zpa0g |
+40t07c0m7c0ag	1ff7fczoa0g |
+40zj0ag200302	zoa0g |
+40zj0ag200702	zoa0g |
+40zj0ag200f02	zoa0g |
+40zj0ag200302	zoa0g |
+40zj0ag200302	zoa0g |
+4006n0cgc0j0e	h631803h0ag20	0302zoa0g |
+400en1c01c0j1a	h671803h0ag20	0302zoa0g |
+4086n0cgc0h10	g10h03g40h0ag	200302zoa0g |
+4186n0cgc0h30	g30h03gc0h0ag	200302zoa0g |
+43e660f0g69b8	d8!f07c34cc!1e	7cg7c783c6319	f30f0d0ag2003
+ 02zoa0g |
+4186f198g9bdd	d99990cc4cde!33	30g30c866e338	c719930ag2003
+ 02zoa0g |
+41873308gc98c	e309998c64e6!61	30g30ccc06318	c330990ag2007
+ 82zoa0g |
+418633f8ge18c	c3f8398c70c6!7f	30g301cc06318	c33f9c0ag200f
+ c2zoa0g |
+418633h718cc3	gd98c38c6!6030	g306cc06318c3	300e0ag20g02zo
+ a0g |
+418633h398cc3	01998c1cc6!60	30g30ccc06318	c330070ag20g02
+ zoa0g |
+418633h998cc3	01998c4cc6!60	30g30ccc06318	c330130ag20g02
+ zoa0g |
+41d63198gc9d8	c199f8cc64c6!33	3ag30fc666318	eb19990ag20g02
+ zoa0g |
+40ef38f0gb1f1	e0f0cc7e59e7!1e	1cg78663cf7bc	778f160ag20g02
+ zoa0g |
+40j0180x0ag20	g02zoa0g |
+40j0180x0ag1f	Gfczoa0g |
+40j0180x0azsa0	g |
+40j03c0x0azsa0	g |
+40zj0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+40g38g60i0180	c0h180cp0azsa0	g |
+40g68ge0i0381	c0h380cp0azsa0	g |
+40g400860h4001	80c0h18i20m0a	zsa0g |
+40gc01860hc001	80c0h18i60m0a	zsa0g |
+40f1f03e660f01	f1e1b8c3c01e1b	8c!3cf8m0azsa0	g |
+4198c0186f1980	c321dcc660331d	dc!6660m0azsa0	g |
+430cc018733080	c3318ccc206198	ccc2c060m0azs	a0g |
+430cc018633f80	c0718ccfe06198	ccfec060m0azs	a0g |
+430cc0186330g	c1b18cccg6198	cc!c060m0azsa0	g |
+430cc0186330g	c3318cccg6198	cc!c060m0azsa0	g |
+430cc0186330g	c3318cccg6198	cc!c060m0azsa0	g |
+4198c01d631980	ebf198c6603319	8c!667580l0azs	a0g |
+40f1e00ef38fg	719971e3c01e17	0c!3c3980l0azs	a0g |
+40s0cp0azsa0g |
+40s0cp0azsa0g |
+40s38p0azsa0g |
+40s30p0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+7fZJf2zsa0g |
+40zj0azsa0g |
+40zj0azsa0g |
+4fZJeazsa0g |
+48zj2azsa0g |
+4bG!ee40t7fKaa	zsa0g |
+4bHefeee660g02	6e!6226!66e6ee	6626Laazsa0g |
+4bGfe!ee44i6e	40g46444666e6	!407fKaazsa0g |
+4bGe404u3fKaa	zsa0g |
+4bGfeeec4j04h	4042!40i7fKaa	zsa0g |
+4bIeee622g222e	6eeefeG"ee6266	Laazsa0g |
+4bHefee64i046e	eeHfeeee6!04L	aazsa0g |
+4beffe4240l27	!7fecj7fKaazs	a0g |
+4bGfeeee4k06I	feeci7fKaazsa0	g |
+4bIfee6!22!26	6fJfeee!66Laa	zsa0g |
+4bHfeeee4i026e	efIeee44640Laa	zsa0g |
+4bf7Ge4l0667H	ee40i7fKaazsa0	g |
+4bH!eek6fefH!ee	40hLaazsa0g |
+4bI!ee!62666e	Kfeee!66Laazs	a0g |
+4bHfeeee404g06	6eJ!fee6!46Laa	zsa0g |
+4b!effe40kJfc	64i7fKaazsa0g |
+4bIee60h02efK	fee0g06Laazsa0	g |
+4bIfeeee666ef	Mee666fLaazsa0	g |
+4bI!ee64466fM	ee666fLaazsa0	g |
+4bIe4i03Lfec0	g07Laazsa0g |
+4bIfec04006ef	Me0g6fLaazsa0	g |
+4bJ"eeNee6eMaa	zsa0g |
+4bIfe"eeNeec6	Maazsa0g |
+4befHce40g26N	40g7fLaazsa0g |
+4bIef!eeOe406	Maazsa0g |
+4bUfeefMaazsa0	g |
+4bKefOee6fMaa	zsa0g |
+4aJfe66Oc003M	aazsa0g |
+4bJfePe00fMaa	zsa0g |
+4bUeeefMaazsa0	g |
+4bUee6fMaazsa0	g |
+4bJefH43Lfeg0f	Maazsa0g |
+4bLfe86Lfec00f	Maazsa0g |
+4bLfe66Me67fM	aazsa0g |
+4bLecg7fKfee0	7fMaazsa0g |
+4bKfeh0fKfeg1f	Maazsa0g |
+4bKfeh0fKfeg3f	Maazsa0g |
+4bKfee0022fKfe	e27fMaar20za0	g |
+4bKeeh07Kfee0	7fMabLbfPfeKfe	Oa0g |
+4bfeJi01Kfcg1f	Ma8zs20g |
+4bJfec0iKfeg3f	MabLbfPfeKfeO	a0g |
+4bJfee6200223	Kfe667fMa4r20	z40g |
+4bJfe44iKfe40	7fMa4l40p01k01	o40g |
+4bJe0j7fJe0g1f	Ma4r20z40g |
+4bJe0j7fJe0g3f	Ma4l40p01k01o	40g |
+4bJee!22g20Kee	627fMa4r20z40	g |
+4bIfee4j7fJec	207fMa4l40p01	k01o40g |
+4bfeHe4k0fIfe	40g1fMa4hc0k60	i2003k03oc0i40	g |
+4bIeek2fIfee0	g3fMa4g07c0i40	03e0j1fi01g1f	i01j07c0i40g |
+4bIfee6"22627f	Jee223fMa4g07	c0j03e0i201fk	1fn07c0i40g |
+4bIee40j6fJee	g0fMa4hc0i40g	60j03i01g03i01	kc0i40g |
+4bHfel07Ge676	24h0fMa4hc0k60	i2003k03oc0i40	g |
+4bG!fee4k0fG"ee	e0g0fMa4hc0i40	g60j03i01g03i	01kc0i40g |
+4bIee6662!0226	6fGeeHee202fM	a4hc0k60i2003	k03oc0i40g |
+4bG!fee66660i	4efee6"eeg0fM	a4hc0i40g60j03	i01g03i01kc0i
+ 40g |
+4bf660n04k07M	a4hc0k60i2003	k03oc0i40g |
+4b!ee46406fec	j4ec006e6e4g07	Ma4hc0i40g60j	03i01g03i01kc0
+ i40g |
+4bGfeeeefGfee2	!22666ee66eef	ee6207Ma4hc0k	60i2003k03oc0
+ i40g |
+4b"ee6eGfee6!04	g66606e!eeg03	Ma4hc0i40g60j	03i01g03i01kc0
+ i40g |
+4a40i2fG40pMa4	hc0k60i2003k03	oc0i40g |
+4aee64h6fGeee4	g60i6e40hMa4l	40p01k01o40g |
+4b!ee!666fHfe	eee2!2226eee6	2022Ma4r20z40	g |
+4a!eec40426ef	Gefee60h046ee6	40gMa4l40p01k	01o40g |
+48m06e0n3fLa4	r20z40g |
+4a44i02h6ee8k	40h3fLa4l40p01	k01o40g |
+4aeee6662627e6	66Gee!2620226e	ee62023fLa4r20	z40g |
+4aee66!4047e0	046ee0g64h666e	24g2fLa5/55/5555	40g |
+48j01r07La4r20	z40g |
+48j03c0n40h07	La4l40p01k01o	40g |
+4ae666622227fe	22!62!66622266	eee62027La4r20	z40g |
+4a6644h07eeg40	6044i466e40g07	La4l40p01k01o	40g |
+48kf8rLa4r20z	40g |
+48kGe402c0k04	iLa4l40p01k01	o40g |
+4a66#22Ie6"20	22626ee62202L	a4r20z40g |
+4a64jHfec0j04	6ee4h7fKa4hc0	i4001e0j0f80h	01g0180h01j0f
+ e0i40g |
+48k7fGfcp1fKa4	g07c0j07f0i20	1fc0j0380m0fe0	i40g |
+48k7fGf4m40h0f	Ka4g07c0i4006	18j30c0h01g07	80h01j0cj40g |
+4a6622!20227f	Gee6222"02066e	ee62202fKa4hc0	k18i2030c0j0d
+ 80m0cj40g |
+4a42j26eeec40	k6ee640g0fKa4	hc0i40g38j0180	h01g1980h01j0f
+ c0i40g |
+48x07Ka4hc0k70	i2007k1980m0f	e0i40g |
+48t04i07Ka4hc0	i40ge0j0780h01	g3180h01j0c70	i40g |
+4a666222h2666	26!2220g!226e	e662g07Ka4hc0	j01c0i2001c0j
+ 6180n30i40g |
+4a64k04m06e660	g02Ka4hc0i4003	80kc0h01g7fc0	h01k30i40g |
+48y7fJa4hc0j07	j2030c0j7fc0m	0c30i40g |
+48y7fJa4hc0i40	06k31c0h01g01	80h01j0c70i40	g |
+4ae6!22g!2022	20g22!02!2226	eee6g027fJa4h	c0j07f8i201f80
+ j0180m0fe0i40	g |
+4a44s026e66h0f	Ja4hc0i4007f8	j0fi01g0180h01	j07c0i40g |
+48y07Ja4r20z40	g |
+48y07Ja4l40p01	k01o40g |
+4ae626!22$0220	$22!6620g07Ja4	r20z40g |
+4a64t0424h07J	a4l40p01k01o40	g |
+48y01Ja4r20z40	g |
+48zJa4l40p01k	01o40g |
+4ae6622220h"20	%22!6662hJa2/aa/aaaa	80g |
+4ae404s0464i7f	Ia4l40p01k01o	40g |
+48z3fIa4r20z40	g |
+4a40y3fIa4l40	p01k01o40g |
+4aee6622!62"02	&22!266020027f	Ia4r20z40g |
+4ae644g04m40j	0440h2fIa4l40	p01k01o40g |
+48z0fIa4r20z40	g |
+48z0fIa4l40p01	k01o40g |
+4aeee666!26!22	202262"222662	22!6620g2fIa4	hc0j01f0i200f
+ j!03c0l030fe0	i40g |
+4ae464#40i!04	i40h40h07Ia4g	07c0i4003f8j1f	c0h011f07e0h01
+ i1f0fe0i40g |
+48z03Ia4g07c0	j0618i2018c0i	1f0660l1f0cj40	g |
+4840y03Ia4hc0	i400618j30i01	030c30h01i030c	j40g |
+4aeee6ee"6662	2226!22202226	66"2660g03Ia4	hc0k30i2030j03
+ 0c30l030fc0i40	g |
+4aee66e6466404	i40i4644h0640	hIa4hc0i40ge0	j37i01030c30h
+ 01i030fe0i40g |
+48zg7fHa4hc0k	f0i203f80i030c	30l030c70i40g |
+4804z7fHa4hc0	i40g38j30c0h01	030c30h01i03g	30i40g |
+4a!eee666e6!66	2226!222022!6e	!62!66hIa4hc0	k18i2030c0i03
+ 0c30l03g30i40	g |
+4a!ee64444046	40l06e4440424	40h7fHa4hc0i40	0618j30c0h0103
+ 0c30h01i030c30	i40g |
+48zg1fHa4hc0j	0638i2038c0i03	0660l030c70i40	g |
+4a6e44y0fHa4h	c0i4003f0j1f80	h010307e0h01i	030fe0i40g |
+4b"ee#66!2262	!226266e666!26	2260g2fHa4hc0	j01e0i200fj!03
+ c0l0307c0i40g |
+4a!eee6466664	24k!04!4640j0f	Ha4l40p01k01o	40g |
+48zg07Ha4r20z	40g |
+4ae64640x07Ha4	l40p01k01o40g |
+4b"ee!66"6222	!262022266e!66	!2220g07Ha4r20	z40g |
+4a!eee6646664	40l06666424j07	Ha4l40p01k01o	40g |
+4a40zgHa4r20z	40g |
+4aeee460yHa5/55/5555	40g |
+4bG!eee6!6626	2022!62!22#66	!22iHa4r20z40	g |
+4b"ee"44i04i64	6e4e6240jHa4l	40p01k01o40g |
+4ae4zg3fGa4r20	z40g |
+4a!eec0r40l3f	Ga4l40p01k01o	40g |
+4bGefee66"6222	0226"2226!eee6	666220h7fGa4r	20z40g |
+4bfe!eee6"04k	400666eee64440	i3fGa4l40p01k	01o40g |
+4b6c40z0fGa4r	20z40g |
+4b!eee4r04l0f	Ga4hc0i40g30j	6078h010f03c0	h01i0f8fe0i40
+ g |
+4bG!fee666!26	20!222622"666e	ee!66e620g2fG	a4g07c0k70i23
+ e0fci3f87e0l1f	cfe0i40g |
+4bG!ee64!40i!04	g244440466e!66	44h07Ga4g07c0	i40gf0i03e0cc
+ h0130c660h01i	30ccj40g |
+4bf640z03Ga4h	c0j01b0i206186	jcc30l30ccj40	g |
+4bGeee4u02i07	Ga4hc0i400330	j6186h!01cc30	h01i018fc0i40
+ g |
+4bH!ee6e6662#22	02!6662"266eee	62g03Ga4hc0j03	30i206186i038c
+ 30l070fe0i40g |
+4bGfeeee646!04	k4644j6eeee4h	Ga4hc0i400630	j6186h01070c30
+ h01i078c70i40	g |
+4bGe4zgGa4hc0	j0c30i206186i	0e0c30l01c030	i40g |
+4bGeeec04t046e	40hGa4hc0i400f	f8j6186h011c0c	30h01jc030i40
+ g |
+4bH!fe"e620"22	2666ee62"026e	feee2022Ga4hc0	j0ff8i206186i
+ 380c30l30cc30	i40g |
+4bH!ee6e6640j	0426ee40i0e!ee	40gGa4hc0i40g	30j60cch013006
+ 60h01i31cc70i	40g |
+4bGfe40z7fa4h	c0k30i2060fci	3fc7e0l1f8fe0	i40g |
+4bGfeee44n046c	k66e4h7fa4hc0	i40g30j6078h01	3fc3c0h01i0f07
+ c0i40g |
+4bI!eee666#22	626ffee6!20g26	6feee2027fa4r	20z40g |
+4bGfe"eee644k	0eee64j6eeee4	g7fa4l40p01k01	o40g |
+4bf6ec24p40o1f	a4r20z40g |
+4bGfeeee644m07	ee40j06c4h1fa4	l40p01k01o40g |
+4bI#ee6202"22	2fGee6220h2eee	e2g3fa4r20z40	g |
+4bHfe"eee4k4e	fee604i06ee60	g2fa4l40p01k01	o40g |
+4bGfe7e40n07ec	o0fa2/aa/aaaa	80g |
+4bHefee6e!40k	0fGe4k!40g0fa4	l40p01k01o40g |
+4bJfeeee62622	2022626fGfeee	e660g26eee620	2fa4r20z40g |
+4bJ!eee6j646f	G"ee40h66e4g0f	a4l40p01k01o40	g |
+4bI6e60m0fGfe	4404l07a4r20z	40g |
+4bH!feeee620k	7fHfeeee0k0fa4	l40p01k01o40g |
+4bKfeee666202	26e6Kfe62026e	62222fa4r20z40	g |
+4bI!ef!ee40h04	467fJeee0g6440	g0fa4l40p01k01	o40g |
+4bG!fec6f6m3f	Jfek07a4hc0j07	f0i2061fci0f8f	e0l3fc3c0i40g |
+4bIef!ee40k7f	Jfee0j0fa4g07	c0i4007f0i03e1	fch011fcfe0h01
+ i3fc7e0i40g |
+4bKfeee66!22!62	7fKfe62e62620	2fa4g07c0j06j	23e180i30ccnc6
+ 60i40g |
+4bJef!ee40h!04	7fKfec064h0fa4	hc0i4006k6180	h0130cci01i01
+ 8c30i40g |
+4bHe4676640l0f	Kfcj07a4hc0j07	e0i2061f8i018f	c0l030c30i40g |
+4bGfeeefe!eel	3fLe0i0fa4hc0	i4007f0j61fch	01070fe0h01i03
+ 0c30i40g |
+4bKfeee622202	!227fLfe6e6662	2fa4hc0j0638i	20618ei078c70
+ l060c30i40g |
+4bHfe"eee4k6f	Lfeee64g2fa4h	c0i40g18j6006	h!01c030h01i06
+ 0c30i40g |
+4bGfe4e6040m07	Lfei0fa4hc0k18	i206006jc030l	!0c30i40g |
+4bH!eeec60l07	Mee40g0fa4hc0	i400618j6186h	0130cc30h01i!0c
+ 30i40g |
+4bIfe!eee626!20	g022fNeee67fa4	hc0j0638i2061	8ei31cc70l1806
+ 60i40g |
+4bHfe!ee6e40k	06Mfeee467fa4	hc0i4007f0j61	fch011f8fe0h01
+ i1807e0i40g |
+4bGfe64p7fLfe	60g3fa4hc0j03	e0i2060f8i0f07	c0l1803c0i40g |
+4bHee40o2fMfe	e47fa4l40p01k	01o40g |
+4bHfe!ee6e6222	20h!226fNfeGa4	r20z40g |
+4bHfe!e6e4m06	NeeGa4l40p01k	01o40g |
+4bHe4q2fMefGa4	r20z40g |
+4bHeeq6fOa4l40	p01k01o40g |
+4bHfeeee66622	20i0220266fOa4	r20z40g |
+4bHeee6646040	l066fOa5/55/5555	40g |
+4bHc0q07Oa4r20	z40g |
+4bHee40p07Oa4	l40p01k01o40g |
+4bIeee6662220	h20!02626fOa4	r20z40g |
+4bHfeeee644m04	6fOa4l40p01k01	o40g |
+4bHfcr7fNa4r20	z40g |
+4bHfeee40pOa4	l40p01k01o40g |
+4bIfeeee6!2202	h20!262fOa4r20	z40g |
+4bI!eee4n46Oa4	hc0i4001e0i01	e018h013f83c0	h01h0c0f03c0i
+ 40g |
+4bHfec2q2fNa4	g07c0j03f8i27	f0f8i3f87f0k7c	3f87f0i40g |
+4bIee64p6fNa4	g07c0i400318i	0618f8h013006	30h01h7c30c630
+ i40g |
+4bIfeeee66622	"2002226266Oa4	hc0j06j20!18i	300cl0cgccj40
+ g |
+4bIfe!ee44m04	6fNa4hc0i4006	k3818h013f0ci	01h0c01ccj40g |
+4bIec20p07Na4	hc0j06e0i2070	18i3f8dc0k0c03	8dc0i40g |
+4bIfeeee4o6fN	a4hc0i4007f0j	e018h0131cfe0	h01h0c070fe0i
+ 40g |
+4bKee6e6222!02	!2622267fNa4h	c0j0618i21c018	jcc30k0c0e0c30
+ i40g |
+4bJ!eee404i40	i6fNa4hc0i4006	18i038018h01g	cc30h01h0c1c0c
+ 30i40g |
+4bIfee640o07N	a4hc0j0618i27	g18i30cc30k0c	380c30i40g |
+4bJefeeo0fNa4	hc0i400718i06	g18h0131ce30h	01h0c300e30i40
+ g |
+4bKfee6!26!22	62"227fNa4hc0	j03f0i27f818i	3f87e0k0c3fc7
+ e0i40g |
+4bK!ee!40h04i	6fNa4hc0i4001	e0i07f818h011f	03c0h01h0c3fc3
+ c0i40g |
+4bJfe60o0fNa4	r20z40g |
+4bJfeeee4n2fN	a4l40p01k01o40	g |
+4bL!ee!622662	"227fNa4r20z40	g |
+4bKfeeee66424	g40i6fNa4l40p	01k01o40g |
+4bKe640n0fNa4	r20z40g |
+4bKfeeee0m0fN	a4l40p01k01o40	g |
+4bMeee6"66!22	202fNa2/aa/aaaa	80g |
+4bKfe!ee6e6640	44i0fNa4l40p01	k01o40g |
+4bJfe7404n07N	a4r20z40g |
+4bKee!6e4640k	07Na4l40p01k01	o40g |
+4bKfeHfeee!66	!62022fNa4r20	z40g |
+4bK!eefe!eee4	6644h0fNa4l40	p01k01o40g |
+4bK!60624240k	03Na4r20z40g |
+4bJfee6eeHec04	!6e42g07Na4l40	p01k01o40g |
+4bKfeI!feI!ef	Na4hc0j07f8i21	e078i0fg60k3c	!03c0i40g |
+4bKeeefHeeefI	feefNa4g07c0i	4007f8i07f0fc	h011f80e0h01h
+ fe1f07e0i40g |
+4bJfe4007HeeK	e7Na4g07c0k18	i2619cei39c1e0	kc31f0660i40g |
+4bKee6fWa4hc0	i40g30j1986h01	30c360h01h!03	0c30i40g |
+4bKfeXa4hc0k60	i203986i30c660	k07030c30i40g |
+4bKeeefWa4hc0	i40g60j70cch01	198660h01h0e03	0c30i40g |
+4bKg0fWa4hc0k	c0i20e0fci1f8c	60k1c030c30i40	g |
+4bJfee47fWa4h	c0i40gc0i01c1	ceh0139d860h01	h38030c30i40g |
+4bKeeXa4hc0j01	80i238186i30df	f0k70030c30i40	g |
+4bKeeeffeH!ef	Ra4hc0i400180	i070186h0130df	f0h01he0030c30
+ i40g |
+4bJfem04efPa4	hc0j03j2601ce	i39c060kc00306	60i40g |
+4bKe0m04Pa4hc0	i4003j07f8fch	011f8060h01hG	0307e0i40g |
+4bKee6626"2022	!627fOa4hc0j03	j27f878i0fg60	kG!03c0i40g |
+4bKe4n2fOa4l40	p01k01o40g |
+4aJefpOa4r20z	40g |
+48zj24l40p01k	01o40g |
+4fZJe4r20z40g |
+40zj04l40p01k	01o40g |
+40zj04r20z40g |
+7fZZXc0g |
+zzzg |
+zzzg |
+zzzg |
+zzzg |
+zzzg |
+\enddata{raster, 539409288}
+\view{rasterview,539409288,50,0,0}
+
+\captit{Figure 1. Recursively embedded insets.}
+
+
+\bold{
+}\smaller{for p := each \
+
+
+\begindata{raster,539409464}
+2 0 36305 36305 0 0 880 211
+bits 539409464 880 211
+/22/22/22/22/22/22-22 |
+/88/88/88/88/88/88-88 |
+/22/22/22/22/22/22-22 |
+88g08/88/88/88/88/88/88*88 |
+23Ge2/22/22/22/22/22/22*22 |
+8bGe8/88/88/88/88/88/88*88 |
+230862/22/22/22/22/22/22*22 |
+8b0868/88/88/88/88/88/88*88 |
+230862/22/22/22/22/22/22*22 |
+8b0868/88/88/88/88/88/88*88 |
+230862/22/22/22/22/22/22*22 |
+8bGe8/88/88/88/88/88/88*88 |
+230862/22/22/22/22/22/22*22 |
+8b0868/88/88/88/88/88/88*88 |
+230862/22/22/22/22/22/22*22 |
+8b0868/88/88/88/88/88/88*88 |
+230862/22/22/22/22/22/22*22 |
+8bGe8/88/88/88/88/88/88*88 |
+23Ge2/22/22/22/22/22/22*22 |
+88g08/88/88/88/88/88/88*88 |
+/22/22/22/22/22/22-22 |
+/88/88/88/88/88/88-88 |
+/22/22/22/22/22/22-22 |
+zzzzzp |
+!2280zzzzzm |
+h80zzzzzm |
+!8880zzzzzm |
+h80zzzzzm |
+!2280zzzzzm |
+h80zzzzzm |
+!8880zzzzzm |
+h80zzzzzm |
+!2280zzzzzm |
+h80zzzzzm |
+!8880zzzzzm |
+h80zzzzzm |
+!2280zzzzzm |
+!8880zzzzzm |
+!2280zzzzzm |
+!8880zzzzzm |
+!2280zzzzzm |
+!8880zzzzzm |
+!2280zzzzzm |
+!8880zzzzzm |
+!2280zzzzzm |
+!8880zzzzzm |
+!2280zzzzzm |
+!8880zzzm0fGe0	zw |
+!2280zzzl7ff0	g1ffczv |
+!8880zzzk7f80	i03fczu |
+!2280zzzj1f80	k03f0zt |
+!8880zzzi01e0	m0f80zs |
+!2280zzzi3eo7c	zs |
+!8880zzzh03c0	o03c0zr |
+!2280zzzh1cq30	zr |
+!8880zzzh60q0e	zr |
+H80zzzg0380q01	c0zq |
+g0180zzzg1cs30	zq |
+g0180zzzge0s0e	zq |
+g0180zzz03t01	80zp |
+g0180zzz0cu70	zp |
+g0180zzz70u0e	zp |
+g0180zzy0180u	0180zo |
+g0180zzy0ew70	zo |
+g0180zzy30w0c	zo |
+g0180zzyc0w03	zo |
+g0180zzx03yc0	zn |
+g0180zzx0cy30	zn |
+g0180zzx30y08	zn |
+g0180zzxc0y06	zn |
+g0180zzw01z01	80zm |
+g0180zzw06zg40	zm |
+g0180zzw08zg30	zm |
+g0180zzw30zg0c	zm |
+g0180zzw40zg02	zm |
+g0180zzv0180zg	0180zl |
+g0180zzv02zi40	zl |
+g0180zzv04zi20	zl |
+g0180zzv18zi18	zl |
+g0180zzv20zi04	zl |
+g0180zzv40zi02	zl |
+g0180zzv80zi01	zl |
+g0180zzu03zk80	zk |
+g0180zzu04zk40	zk |
+g0180zzu08o0f	Gc01007fep20x	07l |
+g0180zzu10o0c	30c038018380o	10x0180k |
+g0180zzu10o08	304038018180o	10yc0k |
+g0180zzu20n01	0830402c0180c0	o08w08gc0k |
+g0180z1fIfezp	20n018030g4c01	80c0o08w0cgc0	k |
+g0180x01Ge0i01	Gc0zn40n014030	g460180c0o04w	0agc0k |
+g0180w03fem3f	c0zm40n012030	gc6018180o04w	09gc0k |
+g0180w7co3fzm	80n011030g8601	82p04w088040k |
+g0180v0f80pf8	zl80m1fG0830g	8301G1fGf0m02	v7ff840607fG80
+ h |
+g0180u01f0q07	c0zk80m600110	3001830181c0g	0cm02v80088020
+ h40h |
+g0180u3es3ezk	80l0180016030	01G0180c0g03m	02v800bg18h40
+ h |
+g0180t03c0s01	e0zj80l06g0180	30!01818060hc0	l02u01g0cg20h
+ 20h |
+g0180t3cu1ezj	80l38g01g3003	01818060h38l02	u01g08g60h10h |
+g0180s03c0u01	e0zi80lc0i3002	01818060h06l02	u02i40h10h |
+g0180s1cw1czi	40k03j3002gc1	80c0h0180k02u	02ic0h08h |
+g0180se0w0380	zh40k0cj3006g	c183c0i60k02u	04ic0h08h |
+g0180r07y78zh	20k70jfc1f83f7	Gj1ck04u08ic0	h04h |
+g0180r38y06zh	20j0180s03k04	u08ic0h02h |
+g0180rc0y0180	zg10j06uc0j08	u10ic0h02h |
+g0180q01j07c0	j01iGf1f0j40zg	10j38u38j10u10	ic0h01h |
+g0180q02j06k03	80hc07030j40zg	08jc0u06j20u20	h0180i80g |
+g0180q02j06k03	80h80e030j40zg	04i03v0180i20	u40h07j80g |
+g0180q01j06k02	c0h80c030j40zg	04i0cw60i40u40	m40g |
+g0180q0140g40	g06k04c0h01c0	30j80m08s06i70	w1ci40p20j80m
+ 40g |
+g0180re0g60g06	03e0g03fc0460	h038030j80m0c	s06h0180w03i80
+ p30j80m20g |
+g0180r58g58g!06	70g03!0c60h03	g30i03n0as0580	g06yc0g01q2ci
+ 01n10g |
+g0180r44g44g!06	30g02180860h07	g30i1cn09s0440	g18y30g02q22i
+ 01n10g |
+g0180gQc3Gc2g	06g30h380830h	06g30g1fPf8Sfc	3fGe0y0fSe1Ife
+ n0fG |
+g0180i07Hl44g	44g06gf0h7018	30h0eg30pHe9h	03feo0440g30y
+ 18q01Ga2i01n10	g |
+g0180lGc0j48g	48g0603b0Ge060	1ff03ff81cg30	n03Gh0ai01f8n
+ 0480g08y20q7e	g24i01n10g |
+g0180m3fGf0h50	g50g!0630he010	18h18g30l07Gfc	i0aj07fcm05h04
+ y40pG80g28j80	m20g |
+g0180o0fh60g60	g060c30hc03018	h38g30l78k0ck	03Gl06h03x0180
+ n01Gi30j80m20	g |
+g0180pfeg40g40	g060c30g01c020	18h300830k7f80	k08mfck04i80w
+ 02o7ej20j40m40	g |
+g0180p01fej06	0c70g0184200c	h700830j3f80t	03e0n60w04n0f
+ 80o40m80g |
+g0180q01f0i06	0fb0g030c600c	he01830i07c0v	1en10w18nf0p20
+ m80g |
+g0180r0f80h06	0718g03fdf83f	hGf830if8w01e0	m08w20m0fq20l
+ 01h |
+g0180s7ch06q30	h1fy1em06w40l	01f0q10l01h |
+g0180s03c0g06	q30g01e0y01e0	l01v0180l1er08	l02h |
+g0180t38g06q30	g0ezg1emc0u02	l01e0r08l04h |
+g0180t07g07c0	o01f0g70zg01e0	l20i791ff8g40	gfc9ffei04l0e
+ s04l04h |
+g0180uf0s0780	zh1cl10h018f06	0ege003878606	i18l70s04l08h |
+g0180u0f80rf8	zi0380k0ch!03	!06ge007018602	i20k0380s02l08
+ h |
+g0180v78q0fzk	70k02g01030106	03gb00cg8602i	40k1ct02g08j10
+ h |
+g0180v07qf0zk	0ek0180018301	060301300cg86	i0180ke0t01g0c
+ j20h |
+g0180wf0o07zl	0180k40014380	060301!18g06i	02k03u01g0aj20
+ h |
+g0180w0fo78zm	60k200121e0!06	03!18g0608h04	k0cv8009gc0h40
+ h |
+g0180xf8m0f80	zm18k18011078	060e02!18g0608	h18k30v800880
+ c0h40h |
+g0180x07c0k01	f0zn06k07G083e	07f8020c18g07	f83fGe0kc0v7f
+ f840g7fG80h |
+g0180y3ck1ezo	0180k01100f06	g060c18g0608m	03x0880l |
+g0180y03f8i1f	e0zp60k012003	86g07fc18g0608	m0cx09m |
+g0180z07feg7f	e0zq18k014001	86g040618g06n	30x0am |
+g0180zg01G80zr	06k01820186g0c	060cg06nc0x0c	m |
+g0180zzv0180j	01020186g0806	0cg8601l03y08	m |
+g0180zzw60k!03	06g0803070106	01l0czm |
+g0180zzw18k03	c606g18!03c706	03l30zgc0k |
+g0180zzw06k02	781f807e0fc0fc	1fGl40zge0k |
+g0180zzw0180y	0180zg20k |
+g0180zzx60y06	zn |
+g0180zzx10y18	zn |
+g0180zzx0cy60	zn |
+g0180zzx03x01	80zn |
+g0180zzyc0w06	zo |
+g0180zzy20w08	zo |
+g0180zzy18w30	zo |
+g0180zzy06wc0	zo |
+g0180zzy01v03	zp |
+g0180zzzc0u04	zp |
+g0180zzz30u18	zp |
+g0180zzz0cu60	zp |
+g0180zzz02u80	zp |
+g0180zzz0180s	03zq |
+g0180zzzg60s0c	zq |
+g0180zzzg10s30	zq |
+g0180zzzg0cs40	zq |
+g0180zzzg03r01	80zq |
+g0180zzzhc0q06	zr |
+g0180zzzh20q18	zr |
+g0180zzzh18q60	zr |
+g0180zzzh06p01	80zr |
+g0180zzzh0180	o06zs |
+g0180zzzi60o18	zs |
+g0180zzzi18o60	zs |
+g0180zzzi07n01	80zs |
+g0180zzzjc0m06	zt |
+g0180zzzj38m38	zt |
+g0180zzzj07mc0	zt |
+g0180zzzkc0k03	zu |
+g0180zzzk38k3c	zu |
+g0180zzzk0780	i03c0zu |
+g0180zzzl78i3c	zv |
+g0180zzzl07c0	g0fc0zv |
+g0180zzzm3f03	f0zw |
+g0180zzznfczx |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+g0180zzzzzm |
+H80zzzzzm |
+!2280zzzzzm |
+!8880zzzzzm |
+!2280zzzzzm |
+h80zzzzzm |
+!8880zzzzzm |
+h80zzzzzm |
+!2280zzzzzm |
+h80zzzzzm |
+!8880zzzzzm |
+\enddata{raster, 539409464}
+\view{rasterview,539409464,51,0,0}
+in readfile("data") do
+
+	replace(start(p), " ")
+
+	for s := each (TAB)|(SPACE) in p do \
+
+
+		replace(s, "") \
+
+
+	end for
+
+end for \bold{\
+
+
+
+}\captit{Figure 2.  A visual sublanguage in use.}\capmore{  The image is 
+integral to the program.}
+
+
+\begindata{bp,539262024}
+\enddata{bp,539262024}
+\view{bpv,539262024,52,0,0}
+
+for p := each \
+
+
+\begindata{raster,539409640}
+2 0 68266 68266 0 0 314 23
+bits 539409640 314 23
+/88/88&8880 |
+/22/22&22g |
+#88zu80 |
+"2220zt02g |
+80h08zu80 |
+g0e80g2780i03	h3ff79010208f	fc0c07f820c103	c07f806003e07f
+ e4!10260c!02g |
+801fc0086780i	03h3ff7985461	8ffc0c07fc30c3	0ff07fc0600ff8
+ 7fe61854630c03	g80 |
+g3060gc6j0780	h318c7cc3gc01e	060e18c61c3860	e0f0!1c60030c
+ 7cc18c0182g |
+80!2008c6j0780	h618c10c3gc01e	!0618c6!18!60	f0180c60030c10
+ c18c01!80 |
+g6db001860fc0	g7f0cc0hc1867d	86gc033!060ccc	1cg60619838g60
+ 01867d818c60c2	g |
+804c9009861ce0	g7f0cc0g018186	5586gc03306!0c	cc0f8060e19830
+ g60018655818c	60c080 |
+g431001861860	g031860g030186	1186gc06187fc	0ccc03e07fc30c
+ 30g7fc1861181	8cgc2g |
+8042100986ge0	g061860g070186	0186gc06187fe	0cccg707f830c
+ 30g7fc1860180	ccgc080 |
+1fHc1860fe3fe	0c1fe1G060186	0186gc07f8607	0cccg386003fc
+ 30g6001860180	6cgc2g |
+82202209861c63	fe183ff1G0c01	860186gc0Gc603	0cccg186007fe
+ 38g6001860180	ccgc080 |
+02202201861860	g"30g18018601	86g!c0c6030ccc	!1860!06180c60
+ 018601818cgc2	g |
+83603609861860	g60!30g300186	0186g!c0c6070c	cc1c3860!06!1c
+ 60018601818cg	c080 |
+01c01c01861cf0	g7f6018g3ff186	0186gc18067fe	0ccc0ff0600c03
+ 0ff87fe1860181	8c60c2g |
+80h09860f30g7f	6018g3ff18601	86gc18067fc0c	cc07e0600c!03
+ e07fe18601818c	60c080 |
+"2220c6n018cg	c3k18c6n030cg	c18c2182g |
+#88c6n018cgc3	k18c6n030cgc1	8c21!80 |
+#2267a2&2227ba	2263a2#2232e3	'22263a22632e	6322g |
+#88af'888f9888	a8$88a8c9'888c	9888ae8c8a8880 |
+\enddata{raster, 539409640}
+\view{rasterview,539409640,53,0,0}
+in readfile("data") do
+
+	replace(start(p), " ")
+
+	for s := each (TAB)|(SPACE) in p do \
+
+
+		replace(s, "") \
+
+
+	end for
+
+end for \
+
+
+}
+\captit{Figure 3.  Text form of a visual sublanguage.}\capmore{  A click on 
+the title bar of the regular expression sublanguage in Figure 2 has caused 
+it to display the textual representation shown here.}
+
+
+
+\begindata{raster,539409816}
+2 0 45059 45059 0 0 1309 256
+bits 539409816 1309 256
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+t0fHfczq01Hf8	zs03Izzzt |
+s0ff0h03fczpfe	h07f0zq03fciG	zzzs |
+r03f0j03e0zn1f	j0f80zpfckfczzzr |
+r3cl1ezm01e0k	70zo0fl03c0zzzq |
+q01c0l01e0zl0e	l0ezo70m38zzzq |
+q1en1ezl70l01	c0zm0780m0780	zzzp |
+qe0n01c0zj0380	m38zm38o70zzzp |
+p07p38zj0cn06	zl01c0o0ezzzp |
+p38p07zj30n01	c0zk0ep01c0zzzo |
+o01c0qc0zic0o	30zk70q30zzzo |
+o06r38zh03p0c	zj0180q0ezx03	3008830380cczj |
+o18r06zh0cp03	zj06r0180zw03	3008830580cczj |
+o60r0180zg30q	c0zi18s60zw03	3008800cgcch01	i02w |
+n0180s40zgc0q	30zi60s18zw03	3008800cgcch03	i06w |
+n02t20z01r10zi	80s08zw022008	800cg88h07i0e	w |
+n04kf80cg1fk10	p0880n01j0fb0	g7cj08p3038p01	k3e03g07c0j04
+ zy7fe33f80i0f	!e1e3dfc0v |
+n08kc00cg03k10	p0880n02j0c30	g0cj08p3058p02	k3003hc0j04zt
+ 06j7fe70cj6306	30c18618v |
+n08kc0040203k	08p0880n02j0c	10080cj04qc0p	02k3001g80c0j
+ 02s02i04v0380	i11030ci01c304	1863060ev |
+n08kc0!0603k08	p0880n02j0c!18	0cj04qc0p02k30	018180c0j02s06
+ i0cwe0i11030c	i07030c187206	0380u |
+n04g08ic0060e	03k10k40i8008	80n03g04h0c18	380cj08j20i20
+ hc0p01g01i3001	8380c0j04k10i	20i0ei1cs0ff8	7fc038i11030c
+ i1c030ff83406	ge0u |
+n06g0cic0021f	c3k10k60ic07f	e0n038006h0c08	7f0cj08j30i30
+ g33f8p01800180	h30g87f0c0j04	k18i30i1f!c3c7	bf80v0eiGc30c
+ i70030cg1806g	38u |
+n05g0bic00306	03k60k58ib07f	e0n02c00580g!0c	180cj10j2ci28
+ g70c0p01600140	h30gc180c0j08	k16i2cic60c61	830c30v03iGc3
+ 0cic0030cg1c06	g0cu |
+n04800880hc003	0603k80k44i88	11o02200440g!0c	180cj60j22i24
+ g30c0p01100120	h30gc180c0j30	k11i22h038608	30c60c1cr0ff8
+ 7fc00ei22030c	i70030cg3606g	38u |
+1fMfc7ff840hc0	010603h01Nc3I	84110fNfe1ffc	20g0c04180ch7f
+ Le1Ie2g30c003	P0fG10h30g4180	c0h7fMf0Ie1h0e	061830e40c07h
+ 07If0o38i2203	0ci1c030eg6706	ge0u |
+h03Gf0i048008	80hc0018603o07	Gc4i8811j01Gc0	h02200440g0c06
+ 180cnGe2i24g30	c0k7ffci011001	20h30g6180c0n	01Gf1i22h3806
+ 1ff0680c01c0u	e0i22030ci0703	070843060380u |
+j0fe0h05g09ic0	018603n03f8g48	i90Gc0k3fh0240	0480g0c06180c
+ m1fg24i28g30c0	l03f8h01200140	h30g6180c0nfe	g12i24he00618
+ g300cg70t0380	i22030ci01c327	f0c1864ev |
+k1fc0g05g0aic0	g8603m01fch50	ia0Gc0lfcg0280	05h0c02180cl07
+ e0g28i28g30c0	m07f0g01400140	h30g2180c0m7f	h14i28g018006
+ 18g380cg18t06	j22079ej61c1e1	e3c398v |
+l3f8006g0cic0	gc603mfei60ic0	22m03f003g06h	0c03180ck01f8
+ h30i30g30c0n0f	e001800180h30	g3180c0l3f80h	18i30he00618g
+ 6c0cg70zzn |
+m7f04g08ic0gc6	03l7fj40i8022	n0fc2g04h0c03	180ck7ei20i20
+ g30c0o1fc1g01	i30g3180c0k0f	c0i10i20h3806	1cgce0c01c0zzn |
+nf8kc0g4603k07	80o22o3ej0c01	180cj0780o30c0	p3ek30g1180c0
+ j01f0q0e060e10	860c07zzo |
+n07kc0g6643k78	p22o01c0i0c01	990cj38p30c0p	01e0j30g1990c0
+ j1er03864fe183	0c9czzo |
+oe0jc0g6383j03	80p22p38i0c01	8e0ci01c0p79e0	q1cj30g18e0c0
+ je0sc383c3c787	30zzo |
+o1ejc0h03j3czh	06i0ch0ci0ezj	0380i30ic0i0f	zzzo |
+o01c0ic0h03i01	c0zh0180h0ch0c	i30zk70i30ic0	i70zzzo |
+p30ic0h03i06zj	60h0ch0cic0zk	0ci30ic0h0180	zzzo |
+p0cif8h1fi18zj	18h0f80g7ch03	zl03i3eh07c0h	06zzzp |
+p0380oe0zj06n	0czme0o38zzzp |
+q60n03zk0180m	30zm18oc0zzzp |
+q18n0czl60mc0	zm06n03zzzq |
+q07n70zl1cl03	zn01c0m1czzzq |
+rf0l0780zl0380	k1czo3cme0zzzq |
+r0el38zn70ke0	zo0380k07zzzr |
+r01e0j01c0zn0e	j07zq78k78zzzr |
+s1cj0ezo01c0i	38zq07j0380zzzr |
+s0380if0zp38h	01c0zrf0i3czzzs |
+t7ch1fzq0780g	3ezs0fh07c0zzzs |
+t03f80fe0zr7c	0fc0ztfe03f8zzzt |
+u07f0zs03f0zu	01fczzzu |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+t1fHf8zs0fHf8	zzzzzo |
+s1fe0h07f8zq0f	f0h07fczzzzzn |
+r07e0j07c0zo03	f0j03e0zzzzzm |
+r78l3czo3cl1e	zzzzzm |
+q0380l03c0zm01	c0l01c0zzzzzl |
+q3cn3czm1en3c	zzzv660110i01	860766z |
+p01c0n0380zk01	e0n0380zzzu66	0110i07860b66	z |
+p0ep70zk0ep70	zzzu660110i01	801866z |
+p70p0ezk70p0e	zzzu660110i01	801866z |
+o0380p0180zi01	80p01c0zzzt44	0110i01801844	z |
+o0cr70zi06r38	zzzu0ffc1e0ce0	1d867fzg |
+o30r0czi18r06	zzzqc0i0ffc63	1df0738e18zg |
+oc0r03zi60r01	80zzzp70i0220	418e38618618zg |
+n03t80zg0180s	40zzzp1ci0220	c18c18c18618zg |
+n04t40zg02t20	zzzl01G0ff807	i0220G8c18c186	18zg |
+n08j01f018g3e	k20p11p04kf80c	g1fk10u0c3038	zzr01c0h1ff8c0
+ 0c18c18618zg |
+n10j018018g06	k20p11p08kc00c	g03k10u3c3058	zzs60h1ff8c00c
+ 18c18618zg |
+n10j0180080406	k10p11p08kc004	0203k08u0cgc0	zzn01G0ff801c0
+ h0440c00c18c1	8618zg |
+n10j0180!0c06	k10p11p08kc0!06	03k08u0cgc0zzr	07i0440e00c18
+ c18618zg |
+n08g10h01800c	1c06k20k80h01	g11p04g08ic006	0e03k10k40i80
+ k0cgc0zzr1ci04	40708c18638618	zg |
+n0cg18h018004	3f86k20kc0h01	80Gc0o06g0cic0	021fc3k10k60i
+ c0hf067gec33f8	zzr70i04407f0c	187f8618zg |
+n0ag16h018006	0c06kc0kb0h01	60Gc0o05g0bic0	030603k60k50i
+ b0g0318ef839c	70c0zzrc0i0440	!1e3c19cf3czg |
+n09g11h018006	0c06j01l88h01	1022p04800880	hc0030603k80k
+ 48i88g020c71c3	0c30c0zzzzk |
+3fMf8Gf080g01	80020c06h03N87	I08221fOfc7ff8	40hc0010603h01
+ Nc7I84g060c60	c60c30c0g1fIe0	zzzy |
+h07Ge0i09g11h	0180030c06o0f	G88h011022j03	Gf0i04800880h
+ c0018603o07Gc8	i88g07fc60c60c	30c0zzzzk |
+j1fc0h0ag12h01	80030c06n07f0	g90h0121G80k0f	e0h05g09ic001
+ 8603n03f8g50i	90g06g60c60c30	c0zzzzk |
+k3f80g0ag14h01	80010c06m03f8	ha0h0141G80l1f	c0g05g0aic0g86
+ 03m01fch50ia0	g06g60c60c30c0	zzzzk |
+l7fg0cg18h0180	018c06l01fcic0	h018044n3f8006	g0cic0gc603mfe
+ i60ic0g06g60c6	0c30c0zzzzk |
+mfe08g10h0180	018c06lfej80h	01g44o7e04g08	ic0gc603l7fj40
+ i80g07g60c60c	30c0zzzzk |
+m01f0j0180g8c	06k0fp44o01f0	kc0g4603k0f80	p038460c31c30
+ c0zzzzk |
+n0ej0180gcc86	kf0p44p0fkc0g	6643k70q03f860	c3fc30c0zzzzk |
+n01c0i0180gc7	06j07q44qe0jc0	g6383j0380rf0	f1e0ce79e0zzzzk |
+o3ci0180h06j78	zi1ejc0h03j3c	zzzzzj |
+o0380h0180h06	i0380zi01c0ic0	h03i01c0zzzzzj |
+p60h0180h06i0c	zk30ic0h03i06	zzzzzk |
+p18h01f0h3ei30	zk0cif8h1fi18	zzzzzk |
+p07o01c0zk0380	oe0zzzzzk |
+qc0n06zm60n03	zzzzzl |
+q30n18zm18n0c	zzzzzl |
+q0ene0zm07n70	zzzzzl |
+q01e0l0fzof0l	0780zzzzzl |
+r1cl70zo0el38	zzzzzm |
+r03c0j0380zo01	c0j03c0zzzzzm |
+s38j1czq38j1c	zzzzzn |
+s07i01e0zq0780	ie0zzzzzn |
+tf8h3ezs7ch1f	zzzzzo |
+t07f01fc0zs03	f80fe0zzzzzo |
+u0fe0zu07f0zzzzzp |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+t07HfezrHfczw	03Izzzp |
+s07f8h01fezp7f	h03f8zu03fciG	zzzo |
+r01f8j01f0zn0f	80i07c0zt7ckfc	zzzn |
+r1el0fznf0k38	zs0780k03c0zzzm |
+re0mf0zl07l07	zs78m38zzzm |
+q0fn0fzl38me0	zq0780m0780zzzl |
+q70oe0zj01c0m	1czq38o70zzzl |
+p0380o1czj06n	03zp01c0o0ezzzl |
+p1cp0380zi18o	e0zo0ep01c0zzzk |
+pe0q60zi60o18	zo30q30zzzk |
+o03r1czh0180o	06zoc0q0ezzzk |
+o0cr03zh06p01	80zm03r0180zt	33g88g06j0183	800cc0pcch3802
+ g |
+o30sc0zg18q60	zm1cs60zt33g88	g1ej0183800cc0	pcch3802g |
+oc0s20zg60q18	zm60s18zt33g88	g06j0119300cc0	h10i20iccg0193
+ 02g |
+n01t10zg80q08	zm80s04zt33g88	g06j031d700cc0	h30i60iccg01d7
+ 06g |
+n02k7c06g0f80	j08p0440o80i07	d8g3ej04r60s01	k1f018003e0j02
+ zt22g88g06j!03	800880h70ie0i	88h3806g |
+n04k6006g0180	j08p0440n01j06	18g06j04q01e0	s01k180180g60
+ j02zu07fe0f06	0f81e0g021d70	jfe!1e3dfck01	d704g |
+n04k6002!0180	j04p0440n01j06	080406j02r60s	01k18g804060j
+ 02s02i04s60i07	fe3186118630g	061930i063063	0c186180j0193
+ 0cg |
+n04k60!030180	j04p0440n01j06	!0c06j02r60s01	k18g!c060j02s
+ 06i0cs38i0110	20c6308418g06	0380i1c304186	3060e0k380cg |
+n02g04i600307	0180j08k20i40	0440n018002h06	0c1c06j04j10i
+ 10i60s01g01i18	gc1c060j02k10	i20i0ei1cs0ei	011060c6380c18
+ g040380i7030c1	87206038k3808	g |
+n03g06i60010f	e180j08k30i60	3ff0n01c003h06	043f86j04j18i
+ 18hf060f81eq01	800180h18g43f8	60j04k18i30i1f	!c3c7bf80oG87
+ fc0380h01107f	c61c0ff8g0cj01	c030G8340600e	l18g |
+n02800580h6001	830180j30k2ci	583ff0n016002	c0g!060c06j08
+ j16i14g031861	1863q01600140	h18g60c060j08	k16i2cic60c61
+ 830c30se0h0ffc	60061f0ch0cj07	g30c001806003	80k18g |
+n02400440h6001	830180j40k22i	440880n011002	20g!060c06j30
+ j11i12g020c63	084180p011001	20h18g60c060j	30k11i22h0386
+ 0830c60c1cs30	h0ffc6006078c	h08j0cg30c001	c060gc0k10g |
+0fMfe3ffc20h60	g830180hNe1Ic2	0887O0ffe10g06	020c06h3fLf0I
+ f1g060c6380c1	8003P0fG10h18	g20c060h3fMf0	Ie1h0e061830e4
+ 0c07h07Ie0hG87	fcge0h02206006	01cch18j07g30	c003!600380k30
+ g |
+h01Gf8i024004	40h60gc30180n	03Ge2i440880j	Ge0h01100220g
+ 06030c06n7ff1	i12g07fc61c0G	80k7ffei011001	20h18g30c060n
+ 01Gf1i22h3806	1ff0680c01c0q	0380h02207006	gceh18j01c030
+ e00670600el30	g |
+j07f0h02800480	h60gc30180m01	fcg24i487fe0k	1f80g01200240
+ g06030c06m0f80	12i14g06g61f0	c0m01f8h012001	40h18g30c060n
+ feg12i24he006	18g300cg70q0e	i0220384620c7	08g10k70307084
+ 306038l20g |
+k0fe0g028005i	60g430180mfeh	28i507fe0l7eg	01400280g0601
+ 0c06l03f0g14i	14g06g6078c0n	07f0g01400140	h18g10c060m3f
+ h14i28g018006	18g380cg18q38	i02203f863187	f0g30k1c327f0c
+ 1864e0l60g |
+l1fc003g06i60	g630180l7fi30	i6011m01f80180	03h06018c06lfc
+ h18i18g06g601c	c0o0fe0018001	80h18g18c060l	1fc0h18i30he0
+ 0618g6c0cg70q	60i0220!0f3e01	e0g30k061c!1e	3c3980l60g |
+m3f82g04i60g63	0180k3f80i20i	4011n07e1g02h	06018c06k3fi10
+ i10g07g600ce0	p1fc1g01i18g18	c060k0fe0i10i	20h38061cgce0c
+ 01c0zi60p02mc0	g |
+n7ck60g230180	j03c0o11o1fj06	g8c06j03c0o03	84620c7080p3e
+ k18g08c060j01	f0q0e060e1086	0c07zj60p07mc0	g |
+n0380j60g3321	80j3cp11pe0i06	gcc86j1cp03f8	63187fq01e0j18
+ g0cc860j1er03	864fe1830c9czj	40p0f80l80g |
+o70j60g31c180	i01c0p11p1ci06	gc706je0qf0f3	e01er1cj18g0c
+ 7060je0sc383c3	c78730zjc0p1f	c0k0180g |
+o0fj60h0180i1e	zh03i06h06i07	zn03c0i18i60i	0fzzu1dc0n |
+pe0i60h0180ie0	zic0h06h06i18	zo30i18i60i70	zzzk |
+p18i60h0180h03	zj30h06h06i60	zo0ci18i60h01	80zzzk |
+p06i7ch0f80h0c	zj0ch07c0g3eh	0180zo03i1fh03	e0h06zzzl |
+p01c0o70zj03n	06zqe0o38zzzl |
+q30n0180zkc0m	18zq18oc0zzzl |
+q0cn06zl30m60	zq06n03zzzm |
+q0380m38zl0el	0180zq01c0m0c	zzzm |
+r78l03c0zl01c0	k0ezs3cmf0zzzm |
+r07l1czn38k70	zs0380k07zzzn |
+sf0ke0zn07j03	80zt78k78zzzn |
+s0ej07zpe0i1c	zu07j0380zzzn |
+s01c0i78zp1ci	e0zvf0i3czzzo |
+t3eh0f80zp03c0	g1fzw0f80g07c0	zzzo |
+t01fc07f0zr3e	07e0zx7f03f8zzzp |
+u03f8zs01f8zz	fczzzq |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+zzzzzzzzj |
+\enddata{raster, 539409816}
+\view{rasterview,539409816,54,0,0}
+
+\captit{Figure 4.  Recursive embedding of language constructs.}\capmore{ 
+ In this mockup, a table specifies the normalization of a C preprocessor 
+line to remove extraneous blanks and add comment delimiters.  When the 
+pattern before the arrow is detected, the line is replaced with the text 
+after the arrow, substituting appropriately for <text>.  (Five lines of the 
+table have been elided.)}
+
+\enddata{text,539845340}

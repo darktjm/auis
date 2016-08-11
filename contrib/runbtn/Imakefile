@@ -1,0 +1,21 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1989 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+OBJS = runbutton.o rbttnv.o
+HFILES = runbutton.H rbttnv.H
+
+DependTarget()
+NormalObjectRule()
+NormalATKRule()
+NormalHelpRule()
+LIBS =  $(UTILLIB)
+
+DynamicMultiObject(runbutton, runbuttonview,$(OBJS), $(LIBS),,)
+InstallDynamicObject(runbutton,runbuttonview,$(FULLATKDLIBDIR))
+
+OptionalATKLibrary(runbtn, $(OBJS), $(LIBS), ,)
+InstallOptionalATKLibrary(runbtn, $(DESTDIR)/lib/atk)
+
+InstallClassFiles($(HFILES))
+InstallDocs(runbutton.help,${DESTDIR}/help)

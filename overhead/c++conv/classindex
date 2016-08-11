@@ -1,0 +1,49 @@
+#!/bin/csh -f
+set andrewdir=`andrewdirs andrewdir`
+
+while (1)
+set name = $<
+if "$name" == "" then
+	exit 0
+endif
+if "$name:e" != "ch" then
+	continue
+endif
+set foo = $name:h
+if "$foo" == "" then
+	set foo = "."
+endif
+class -I$foo   $argv:q -I${andrewdir}lib/c++conv/oldchfiles -s -D -N $name
+set foo = $name:t
+set foo = $foo:r
+sed -e '/returns:/d\
+/args:/d\
+ /defined by:/d\
+/index:/d\
+/declared by:/d\
+/^$/d\
+s/Package:/Class:/g\
+s/[ 	][ 	]*//g' $foo.desc|awk 'BEGIN {\
+    FS=":";\
+}\
+\
+$1 != last {\
+    if ($1=="Class" || $1=="Package") {\
+	keep=$0;\
+	continue;\
+   } else {\
+    	print $0;\
+	if ($1=="Declaredin") {\
+		print keep;\
+	}\
+   }\
+    last = $1;\
+    continue;\
+}\
+\
+$1 == last {\
+    print $2;\
+}'|tr , \\012
+/bin/rm -f $foo.desc
+end
+end

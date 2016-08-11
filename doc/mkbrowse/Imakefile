@@ -1,0 +1,18 @@
+NormalObjectRule()
+NormalATKRule()
+FlexOrLexFileRule(refs)
+NormalLexRule()
+
+CPPProgramTarget(mkbrowse, browse.o refs.o, $(UTILLIB), $(LEXLIB))
+InstallProgram(mkbrowse, $(DESTDIR)/bin)
+DependTarget()
+classes.org: mkbrowse
+	$(RM) ,classes.org classes.org
+	(cd $(DESTDIR)/include/atk; cat *.H)|./mkbrowse>,classes.org
+	$(MV) ,classes.org classes.org
+clean::
+	$(RM) classes.org ,classes.org
+
+InstallDocs(mkbrowse.help, ${DESTDIR}/help)
+InstallFile(classes.org, ${INSTMANFLAGS}, ${DESTDIR}/doc/PROGRAMMER)
+InstallHelpAlias(mkbrowse, hierarchy class-hierarchy classes)

@@ -1,0 +1,12 @@
+OBJS = main.o parse.o misc.o STFunctions.o
+
+NormalObjectRule()
+NormalHelpRule()
+
+ProgramTarget(scribetext, main.o parse.o misc.o STFunctions.o, ${UTILLIB}, )
+
+InstallProgram(scribetext, $(DESTDIR)/bin)
+InstallFile(scribe.trans, $(INSTINCFLAGS), $(DESTDIR)/lib)
+InstallDocs(scribetxt.help, $(DESTDIR)/help)
+
+DependTarget()

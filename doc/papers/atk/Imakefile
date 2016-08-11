@@ -1,0 +1,70 @@
+
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+#define IHaveSubdirs
+
+SUBDIRS =  conf.1992  conf.1993
+
+MkdirTarget($(DESTDIR)/doc/atkpapers)
+ 
+DOCS = BIBLIOGRAPHY \
+Boren.CACM \
+Boren.CSCW \
+Boren.Cf.tar.Z \
+Boren.IFIP \
+Boren.IJMMS \
+Boren.USENIX \
+Cattey.Writing \
+Cattey.turnin \
+Glied.ez-src.d \
+Glied.mail.d \
+Glied.ez-wp.d \
+Glied.mkmost.d \
+Hans.Cf.tar.Z \
+Hansen.1stcls \
+Hansen.Algebra \
+Hansen.CAL87 \
+Hansen.CHI94 \
+Hansen.DStruc \
+Hansen.Formal \
+Hansen.ICCL \
+Hansen.MLE \
+Hansen.RdWr \
+Hansen.RdWr.f1 \
+Hansen.RdWr.f2 \
+Hansen.SSRefs \
+Hansen.VL94 \
+Hansen.VL94.Z \
+Morris.MkTk \
+Neuen.ADEW \
+Neuen.EUUG \
+Neuen.EUUG.Ap \
+Palay.Over \
+Palay.Ovf.ps.Z \
+Rosen.EXPRES \
+Sherman.Alloc \
+Sherm.HypTxt \
+Sherm.StylSys \
+ShermHTf.tar.Z
+
+InstallDocs(${DOCS}, $(DESTDIR)/doc/atkpapers)

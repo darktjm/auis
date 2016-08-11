@@ -1,0 +1,2008 @@
+@application#SetFork#
+void#
+#dof#boolean dof#
+@application#GetFork#
+boolean#
+@application#SetName#
+void#
+#str#char *str#
+@application#GetName#
+char *#
+@application#SetForceLoad#
+void#
+#f#boolean f#
+@application#GetForceLoad#
+boolean#
+@application#SetErrorProc#
+void#
+#p#procedure p#
+@application#GetErrorProc#
+procedure#
+@application#SetErrorRock#
+void#
+#r#pointer r#
+@application#GetErrorRock#
+pointer#
+@application#SetMajorVersion#
+void#
+#mv#long mv#
+@application#GetMajorVersion#
+long#
+@application#SetMinorVersion#
+void#
+#mv#long mv#
+@application#GetMinorVersion#
+long#
+@application#SetPrintVersionFlag#
+void#
+#TorF#boolean TorF#
+@application#GetPrintVersionFlag#
+boolean#
+@apt#AreaTitlesAnchor#
+char ***#
+#area#int area#
+@apt#AreaTitlesCount#
+long#
+#area#int area#
+@apt#AreaTitle#
+char *#
+#area#int area#
+@apt#AreaTitles#
+char *#
+#area#int area#
+#i#int i#
+@apt#AreaTitleFontName#
+char *#
+#area#int area#
+@apt#AreaLegendsAnchor#
+char ***#
+#area#int area#
+@apt#AreaLegendsCount#
+long#
+#area#int area#
+@apt#AreaLegend#
+char *#
+#area#int area#
+@apt#AreaLegends#
+char *#
+#area#int area#
+#i#int i#
+@apt#AreaLegendFontName#
+char *#
+#area#int area#
+@aptv#IconFont#
+struct fontdesc *#
+@aptv#CursorFont#
+struct fontdesc *#
+@aptv#PrintStream#
+struct aptv_print_stream *#
+@aptv#Bounds#
+struct rectangle *#
+@aptv#BodyBounds#
+struct rectangle *#
+@aptv#BodyLeft#
+long#
+@aptv#BodyTop#
+long#
+@aptv#BodyWidth#
+long#
+@aptv#BodyHeight#
+long#
+@aptv#BodyCenter#
+long#
+@aptv#BodyRight#
+long#
+@aptv#BodyMiddle#
+long#
+@aptv#BodyBottom#
+long#
+@aptv#BypassUpdate#
+char#
+@arbiter#GetFirst#
+struct cel *#
+@arbiterview#GetCurrentCelview#
+struct celview *#
+@arbiterview#GetCopyMode#
+boolean#
+@arbiterview#SetCopyMode#
+void#
+#bool#boolean bool#
+@arbiterview#GetCelMode#
+boolean#
+@arbiterview#SetCelMode#
+void#
+#bool#boolean bool#
+@atom#Name#
+char *#
+@atomlist#TraversalStart#
+struct atoms *#
+@atomlist#TraversalNext#
+struct atoms *#
+#loc#struct atoms *loc#
+@atomlist#TraversalAtom#
+struct atom *#
+#loc#struct atoms *loc#
+@atomlist#First#
+struct atom *#
+@atomlist#Mark#
+struct atoms *#
+@atomlist#Bletch#
+void#
+#a#struct bleah *a#
+#b#struct bar *b#
+#c#int c#
+@atom#Name#
+char *#
+@buffer#GetData#
+struct dataobject *#
+@buffer#GetName#
+char *#
+@buffer#GetFilename#
+char *#
+@buffer#GetCkpFilename#
+char *#
+@buffer#GetWriteVersion#
+long#
+@buffer#GetCkpVersion#
+long#
+@buffer#GetCkpClock#
+long#
+@buffer#GetCkpLatency#
+long#
+@buffer#GetScratch#
+boolean#
+@buffer#GetMadeBackup#
+boolean#
+@buffer#SetMadeBackup#
+void#
+#value#boolean value#
+@buffer#GetLastTouchDate#
+long#
+@buffer#GetDefaultViewname#
+char *#
+@buffer#GetReadOnly#
+boolean#
+@buffer#GetIsModified#
+boolean#
+@buffer#GetIsRawFile#
+boolean#
+@bush#Tree#
+struct tree *#
+@bush#TreeRoot#
+struct tree_node *#
+@bush#RootPathName#
+char *#
+@bush#GivenRootPathName#
+char *#
+@bush#Dir#
+struct Dir_ *#
+#tn#tree_type_node tn#
+@bush#DirMode#
+struct entry_mode #
+#tn#tree_type_node tn#
+@bush#DirPath#
+char *#
+#tn#tree_type_node tn#
+@bush#DirName#
+char *#
+#tn#tree_type_node tn#
+@bush#DirSortMode#
+int#
+#tn#tree_type_node tn#
+@bush#DirDetail#
+int#
+#tn#tree_type_node tn#
+@bush#DirTimeStamp#
+time_t#
+#tn#tree_type_node tn#
+@bush#RootDirPath#
+char *#
+@bush#DirEntries#
+struct Dir_Entries *#
+#tn#tree_type_node tn#
+@bush#DirEntriesCount#
+int#
+#tn#tree_type_node tn#
+@bush#DirEntryPtr#
+struct Dir_Entry **#
+#tn#tree_type_node tn#
+@bush#DirEntry#
+struct Dir_Entry *#
+#tn#tree_type_node tn#
+#i#int i#
+@bush#DirEntryMode#
+struct entry_mode #
+#tn#tree_type_node tn#
+#i#int i#
+@bush#DirEntryPos#
+int#
+#tn#tree_type_node tn#
+#i#int i#
+@bush#DirEntryName#
+char *#
+#tn#tree_type_node tn#
+#i#int i#
+@bush#DirEntryLinkName#
+char *#
+#tn#tree_type_node tn#
+#i#int i#
+@bush#DirEntryType#
+struct entry_kind#
+#tn#tree_type_node tn#
+#i#int i#
+@bush#DirEntryOwner#
+char *#
+#tn#tree_type_node tn#
+#i#int i#
+@bush#DirEntryNLinks#
+int#
+#tn#tree_type_node tn#
+#i#int i#
+@bush#DirEntryTimeStamp#
+time_t#
+#tn#tree_type_node tn#
+#i#int i#
+@bush#DirEntrySize#
+size_t#
+#tn#tree_type_node tn#
+#i#int i#
+@bush#DirEntryPerms#
+unsigned int#
+#tn#tree_type_node tn#
+#i#int i#
+@bush#DirEntryParent#
+tree_type_node#
+#tn#tree_type_node tn#
+#i#int i#
+@bush#DirEntryInstance#
+tree_type_node #
+#tn#tree_type_node tn#
+#i#int i#
+@bush#DirEntryParentDir#
+struct Dir_ *#
+#tn#tree_type_node tn#
+#i#int i#
+@bush#RootDir#
+struct Dir_ *#
+@bush#Parent#
+tree_type_node#
+#tn#tree_type_node tn#
+@bush#Child#
+tree_type_node#
+#tn#tree_type_node tn#
+@bush#Left#
+tree_type_node#
+#tn#tree_type_node tn#
+@bush#Right#
+tree_type_node#
+#tn#tree_type_node tn#
+@bush#ParentDir#
+struct Dir_ *#
+#tn#tree_type_node tn#
+@bush#ChildDir#
+struct Dir_ *#
+#tn#tree_type_node tn#
+@bush#LeftDir#
+struct Dir_ *#
+#tn#tree_type_node tn#
+@bush#RightDir#
+struct Dir_ *#
+#tn#tree_type_node tn#
+@butter#GetText#
+char *#
+@butter#GetHitFunction#
+procedure#
+@butter#GetButtonFont#
+struct fontdesc *#
+@butter#GetRockPtr#
+char *#
+@butter#GetRockInt#
+long#
+@buttonV#SetButtonType#
+void#
+#TYPE#short TYPE#
+@buttonV#GetButtonType#
+short#
+@buttonV#SetFixedCount#
+void#
+#VAL#short VAL#
+@buttonV#GetFixedCount#
+short#
+@buttonV#SetFourway#
+void#
+#VAL#boolean VAL#
+@buttonV#GetFourway#
+boolean#
+@buttonV#SetFixedColumns#
+void#
+#VAL#long VAL#
+@buttonV#GetFixedColumns#
+long#
+@calc#Value#
+double#
+@cel#GetRefName#
+char *#
+@cel#GetViewName#
+char *#
+@cel#GetObjectName#
+char *#
+@cel#GetRefAtom#
+struct atom *#
+@cel#GetViewAtom#
+struct atom *#
+@cel#GetObjectAtom#
+struct atom *#
+@cel#GetLinkName#
+char *#
+@cel#GetLinkAtom#
+struct atom *#
+@cel#GetApplication#
+boolean#
+@cel#GetScript#
+struct text *#
+@cel#SetVisible#
+void#
+@cel#SetInvisible#
+void#
+@cel#Visible#
+boolean#
+@cel#SetNoSave#
+void#
+#val#boolean val#
+@cel#SetDefaultStream#
+void#
+#S#char *S#
+@cel#SetInitFile#
+void#
+#S#char *S#
+@cel#SetWriteChild#
+void#
+#TF#boolean TF#
+@cel#GetDefaultStream#
+char *#
+@cel#GetInitFile#
+char *#
+@cel#GetWriteChild#
+boolean#
+@cel#GetReadCount#
+long#
+@cel#GetNextChain#
+struct cel *#
+@cel#GetArbiter#
+struct arbiter *#
+@cel#SetArbiter#
+void#
+#AA#struct arbiter *AA#
+@celview#GetTrueChild#
+struct view *#
+@celview#GetApplication#
+struct view *#
+@celview#GetRemoteArb#
+struct arbiterview *#
+@celview#SetRemoteArb#
+void#
+#Arb#struct arbiterview *Arb#
+@celview#GetCel#
+struct cel *#
+@celview#GetAppFlag#
+boolean#
+@celview#SetAppFlag#
+void#
+#VAL#boolean VAL#
+@chart#ItemAnchor#
+struct chart_item *#
+@chart#ItemCount#
+long#
+@chart#ItemValueGreatest#
+long#
+@chart#ItemValueLeast#
+long#
+@chart#ItemValueRangeHigh#
+long#
+@chart#ItemValueRangeInterval#
+long#
+@chart#ItemValueRangeLow#
+long#
+@chart#ItemValueSpan#
+long#
+@chart#ItemFontName#
+char *#
+@chart#NextItem#
+struct chart_item *#
+#item#struct chart_item *item#
+@chartobj#PixelsPerUnit#
+float#
+@chartobj#PixelsPerInterval#
+float#
+@chartobj#Items#
+struct chart_item_shadow	 *#
+@chartobj#ItemBounds#
+struct rectangle *#
+#shadow#struct chart_item_shadow *shadow#
+@chartobj#ItemLeft#
+long#
+#shadow#struct chart_item_shadow * shadow#
+@chartobj#ItemTop#
+long#
+#shadow#struct chart_item_shadow * shadow#
+@chartobj#ItemWidth#
+long#
+#shadow#struct chart_item_shadow * shadow#
+@chartobj#ItemHeight#
+long#
+#shadow#struct chart_item_shadow * shadow#
+@chartobj#ItemCenter#
+long#
+#shadow#struct chart_item_shadow * shadow#
+@chartobj#ItemMiddle#
+long#
+#shadow#struct chart_item_shadow * shadow#
+@chartobj#ItemRight#
+long#
+#shadow#struct chart_item_shadow * shadow#
+@chartobj#ItemBottom#
+long#
+#shadow#struct chart_item_shadow * shadow#
+@chartobj#ItemX#
+short#
+#shadow#struct chart_item_shadow * shadow#
+@chartobj#ItemY#
+short#
+#shadow#struct chart_item_shadow * shadow#
+@chartobj#ItemDatum#
+long#
+#shadow#struct chart_item_shadow * shadow#
+@chartobj#NextItem#
+struct chart_item_shadow *#
+#shadow#struct chart_item_shadow * shadow#
+@chartobj#ChartBounds#
+struct rectangle *#
+@chartobj#ChartLeft#
+long#
+@chartobj#ChartTop#
+long#
+@chartobj#ChartWidth#
+long#
+@chartobj#ChartHeight#
+long#
+@chartobj#ChartCenter#
+long#
+@chartobj#ChartRight#
+long#
+@chartobj#ChartMiddle#
+long#
+@chartobj#ChartBottom#
+long#
+@chartobj#ChartBaseLine#
+long#
+@chartobj#ChartBaseline#
+long#
+@chartobj#CurrentItem#
+struct chart_item *#
+@checkv#GetTmpVal#
+long#
+@chlist#GetItemList#
+struct listitem *#
+@chlist#GetNumItems#
+int#
+@chlist#GetNumRegions#
+int#
+@contentv#SetSourceView#
+void#
+#vw#struct textview *vw#
+@cursor#IsPosted#
+boolean#
+@cursor#IsWindowCursor#
+boolean#
+@cursor#IsProcessCursor#
+boolean#
+@dataobject#UniqueID#
+long#
+@dataobject#GetWriteID#
+long#
+@dataobject#SetWriteID#
+void#
+#newValue#long newValue#
+@dataobject#GetID#
+long#
+@dataobject#SetID#
+void#
+#newValue#long newValue#
+@dialog#GetStyle#
+int#
+@dialog#GetText#
+struct text *#
+@dialog#GetButtons#
+struct sbutton *#
+@dialog#GetHitFunc#
+procedure#
+@dialog#GetPrefs#
+struct sbutton_prefs *#
+@dialogv#GetTextView#
+struct textview *#
+@dialogv#GetButtonsView#
+struct sbuttonv *#
+@dialogv#GetTextData#
+struct text *#
+@dialogv#GetButtonsData#
+struct sbutton *#
+@dialogv#GetExtraMenus#
+struct menulist *#
+@dialogv#GetExtraKeys#
+struct keystate *#
+@dired#SetLongMode#
+void#
+#on#boolean on#
+@dired#GetLongMode#
+boolean#
+@dired#SetDotFiles#
+void#
+#on#boolean on#
+@dired#GetDotFiles#
+boolean#
+@enode#GetEvent#
+struct eventnode *#
+@entertext#buflen#
+long#
+@entertext#GetString#
+char *#
+@etextview#SetClearOnRIF#
+void#
+#val#boolean val#
+@etextview#SetResetOnLIF#
+void#
+#val#boolean val#
+@etextview#SetValueview#
+void#
+#val#struct valueview *val#
+@fnote#GetLoc#
+long#
+@fnote#SetLoc#
+void#
+#newValue#long newValue#
+@fnote#GetOwnLoc#
+long#
+@fnote#SetOwnLoc#
+void#
+#newValue#long newValue#
+@fnote#GetParenttxt#
+struct text *#
+@fnote#GetEnv#
+struct environment *#
+@fnote#SetEnv#
+void#
+#newValue#struct environment *newValue#
+@fnotev#SetDisplayStr#
+void#
+#S#char *S#
+@fnotev#GetParentTextview#
+struct textview *#
+@fnotev#GetParentText#
+struct text *#
+@fontdesc#SetCharValid#
+void#
+#c#char c#
+@fontdesc#ClearCharValid#
+void#
+#c#char c#
+@fontdesc#CharValid#
+boolean#
+#c#char c#
+@frame#GetView#
+struct view *#
+@frame#GetChildView#
+struct view *#
+@frame#GetBuffer#
+struct buffer *#
+@frame#GetCommandEnable#
+boolean#
+@frame#GetTitle#
+char *#
+@frame#GetQuitWindowFlag#
+boolean#
+@frame#SetQuitWindowFlag#
+void#
+#VAL#boolean VAL#
+@GetRecV#GetTmpVal#
+struct GetRecV_recpair *#
+@glist#First#
+char *#
+@glist#Last#
+char *#
+@glist#Size#
+long#
+@gob#GetFirstOb#
+struct oblist *#
+@gob#GetNextOb#
+struct oblist *#
+#pair#struct oblist *pair#
+@graphic#GetLogicalWidth#
+long#
+@graphic#GetLogicalHeight#
+long#
+@graphic#GetLogicalLeft#
+long#
+@graphic#GetLogicalTop#
+long#
+@graphic#GetVisualWidth#
+long#
+@graphic#GetVisualHeight#
+long#
+@graphic#GetVisualLeft#
+long#
+@graphic#GetVisualTop#
+long#
+@graphic#GetEnclosedWidth#
+long#
+@graphic#GetEnclosedHeight#
+long#
+@graphic#GetEnclosedLeft#
+long#
+@graphic#GetEnclosedTop#
+long#
+@hash#SetHash#
+void#
+#fn#procedure fn#
+@keystate#GetObject#
+struct basicobject *#
+@label#GetFlags#
+int#
+@labelview#GetHitProc#
+procedure#
+@layout#GetFirstComponent#
+struct component *#
+@layoutview#Selection#
+struct component *#
+@layoutview#Hitmode#
+enum hitmode_enum#
+@layoutview#Createmode#
+enum createmode_enum#
+@layoutview#ApplyGranularity#
+long#
+#v#long v#
+@lex#SetScope#
+void#
+#scope#long scope#
+@lex#GetScope#
+long#
+@lex#SetConstScope#
+void#
+#scope#long scope#
+@lex#GetConstScope#
+long#
+@lex#GetGrammarScope#
+toksym_scopeType#
+@lex#GetSource#
+struct text *#
+@lexdef#GetGrammarScope#
+toksym_scopeType#
+@lexdef#GetPrototype#
+struct toksym *#
+@link#GetLink#
+char *#
+@link#GetPos#
+long#
+@link#GetLen#
+long#
+@link#LabelSetP#
+int#
+@list#Enqueue#
+void#
+#data#char *data#
+@list#Dequeue#
+char *#
+@list#Push#
+void#
+#data#char *data#
+@list#Pop#
+char *#
+@list#Size#
+long#
+@list#First#
+char *#
+@list#Last#
+char *#
+@list#Start#
+struct list_Entry *#
+@list#Advance#
+struct list_Entry *#
+@list#Data#
+char *#
+@lookz#GetVisibility#
+boolean#
+@lookz#GetCanClose#
+boolean#
+@lookz#GetTextObject#
+struct text *#
+@lookzview#GetEmbedded#
+boolean#
+@lpair#GetObjSize#
+int#
+#i#int i#
+@lprrulerview#SetValueChangeProc#
+void#
+#proc#procedure proc#
+#rock#long rock#
+@mark#GetObject#
+struct basicobject *#
+@mark#GetPos#
+long#
+@mark#GetLength#
+long#
+@mark#GetEndPos#
+long#
+@mark#IncludeBeginning#
+char#
+@mark#IncludeEnding#
+char#
+@mark#GetModified#
+char#
+@mark#ObjectFree#
+char#
+@mark#GetNext#
+struct mark *#
+@mark#SetObject#
+void#
+#obj#struct basicobject *obj#
+@mark#SetPos#
+void#
+#position#long position#
+@mark#SetLength#
+void#
+#len#long len#
+@mark#SetModified#
+void#
+#val#char val#
+@mark#SetObjectFree#
+void#
+#v#char v#
+@mark#SetNext#
+void#
+#n#struct mark *n#
+@mentertext#buflen#
+long#
+@mentertext#GetString#
+char *#
+@mentertext#GetStringArray#
+char **#
+@mentertext#GetArraySize#
+long#
+@mentertext#GetSrcString#
+char *#
+@menulist#GetMask#
+long#
+@menulist#ItemIsEnabled#
+boolean#
+#item#struct itemlist *item#
+@metextview#SetClearOnRIF#
+void#
+#val#boolean val#
+@metextview#SetResetOnLIF#
+void#
+#val#boolean val#
+@metextview#SetValueview#
+void#
+#val#struct valueview *val#
+@month#GetMonth#
+int#
+@month#GetYear#
+int#
+@ness#SetName#
+void#
+#n#unsigned char *n#
+@ness#GetName#
+unsigned char *#
+@ness#SetArbiter#
+void#
+#v#struct arbiterview *v#
+@ness#GetArbiter#
+struct arbiterview *#
+@ness#SetDefaultText#
+void#
+#t#struct textview *t#
+@ness#GetDefaultText#
+struct textview *#
+@ness#SupplyMarkerArg#
+void#
+#a#struct nessmark *a#
+@ness#GetNext#
+struct ness *#
+@ness#GetLex#
+struct lex *#
+@ness#GetErrors#
+struct errornode *#
+@ness#HasWarning#
+boolean#
+@ness#NeedsDialogBox#
+boolean#
+@ness#SetNeedsDialogBox#
+void#
+#v#boolean v#
+@nessmark#GetText#
+struct simpletext *#
+@nessmark#DetachFromText#
+void#
+@nessmark#simpletext_RemoveMark#
+void#
+#self#nessmark_GetText(self)#
+#self#MISSING_ARGUMENT_TYPE self#
+@nessmark#AttachToText#
+void#
+#text#struct simpletext *text#
+@nessmark#InitFrom#
+void#
+#src#struct nessmark *src#
+@nesssym#NGetName#
+unsigned char *#
+@nesssym#NGetScope#
+nesssym_scopeType#
+@nessview#SetSubject#
+void#
+#textview#struct textview *textview#
+@nestedmark#GetLength#
+long#
+@nestedmark#GetParent#
+struct nestedmark *#
+@page#GetPostMenus#
+boolean#
+@page#SetPostMenus#
+void#
+#foo#boolean foo#
+@page#GetFirstObject#
+struct dataobject *#
+@page#GetNowPlaying#
+struct dataobject *#
+@page#GetFirstSwitchee#
+struct page_switchee *#
+@page#GetNowPlayingSwitchee#
+struct page_switchee *#
+@palette#GetLocation#
+enum palette_location #
+@palette#GetChild#
+struct view *#
+@panel#SetHandler#
+void#
+#proc#void (*proc)()#
+#gt#char *gt#
+@panel#SetHighlightStyle#
+void#
+#s#struct style *s#
+@panel#SetCursorFont#
+void#
+#cf#struct fontdesc *cf#
+@panel#SetCursorIcon#
+void#
+#c#char c#
+@panel#CurrentHighlight#
+struct panel_Entry *#
+@panel#EntryRoot#
+struct panel_Entry *#
+@panel#EntryNext#
+struct panel_Entry *#
+#pe#struct panel_Entry *pe#
+@panel#EntryTag#
+struct panel_Entry *#
+#pe#struct panel_Entry *pe#
+@path#GetPath#
+char *#
+@pianoV#GetTmpVal#
+long#
+@pixelimage#GetHeight#
+long#
+@pixelimage#GetWidth#
+long#
+@pixelimage#GetRowWidth#
+long#
+@pixelimage#GetBitsPtr#
+unsigned char *#
+@pixelimage#SetBitsPtr#
+void#
+#ptr#unsigned char *ptr#
+@pixelimage#SetRO#
+void#
+#v#boolean v#
+@pixelimage#GetRO#
+boolean#
+@pixelimage#GetResized#
+boolean#
+@pixelimage#GetChanged#
+struct rectangle *#
+@pushbutton#GetText#
+char *#
+@pushbutton#GetStyle#
+int#
+@pushbutton#GetButtonFont#
+struct fontdesc *#
+@pushbuttonview#HitButton#
+void#
+@raster#Clear#
+void#
+@raster#GetWidth#
+long#
+@raster#GetHeight#
+long#
+@raster#GetPix#
+struct rasterimage *#
+@rasterview#GetScale#
+long#
+@rasterimage#SetWriteID#
+void#
+#wid#long wid#
+@rasterimage#GetWriteID#
+long#
+@rasterimage#SetObjectID#
+void#
+#obid#long obid#
+@rasterimage#GetObjectID#
+long#
+@rasterimage#MarkPermanent#
+long#
+@rasterimage#GetFileName#
+char *#
+@rasterimage#GetFilePath#
+char *#
+@region#GetRegionData#
+struct _XRegion *#
+@rofftext#SetInputFiles#
+void#
+#files#char **files#
+@rofftext#SetInitialPos#
+void#
+#n#long n#
+@sbutton#GetRock#
+long#
+#ind#int ind#
+@sbutton#GetLit#
+boolean#
+#ind#int ind#
+@sbutton#GetLabel#
+char *#
+#ind#int ind#
+@sbutton#GetPrefs#
+struct sbutton_prefs *#
+#ind#int ind#
+@sbutton#GetTrigger#
+struct atom *#
+#ind#int ind#
+@sbutton#GetSingleActivationFlag#
+boolean#
+@sbutton#GetButtons#
+struct sbutton_info *#
+@sbutton#GetRows#
+int#
+@sbutton#GetCols#
+int#
+@sbutton#GetSizePolicy#
+enum sbutton_sizepolicy#
+@sbutton#GetResizeRock#
+long#
+@sbutton#GetResizeFunc#
+procedure#
+@sbutton#GetHitFunc#
+procedure#
+@sbutton#GetHitFuncRock#
+long#
+@sbutton#GetCount#
+int#
+@sbutton#GetDefaultPrefs#
+struct sbutton_prefs *#
+@sbutton#GetMattePrefs#
+struct sbutton_prefs *#
+@sbuttonv#GetVBorder#
+int#
+@sbuttonv#GetHBorder#
+int#
+@sbuttonv#GetVSpacing#
+int#
+@sbuttonv#GetHSpacing#
+int#
+@sbuttonv#ButtonData#
+struct sbutton *#
+@sbuttonv#LastButton#
+int#
+@sbuttonv#Litp#
+boolean#
+#ind#int ind#
+@sbuttonv#GetDoTriggers#
+boolean#
+@sliderV#GetTmpVal#
+long#
+@simpletext#GetFence#
+long#
+@simpletext#SetFence#
+void#
+#pos#long pos#
+@simpletext#ClearFence#
+void#
+@simpletext#GetFenceMark#
+struct mark *#
+@simpletext#GetObjectInsertionFlag#
+boolean#
+@simpletext#SetObjectInsertionFlag#
+void#
+#flag#boolean flag#
+@stringV#GetUseAlt#
+boolean#
+@stringV#SetUseAlt#
+void#
+#val#boolean val#
+@strinput#IsLinked#
+boolean#
+@stringtbl#NStrings#
+short#
+@stringtbl#IthString#
+char *#
+#i#short i#
+@stringtbl#NumAcc#
+short#
+@strtblview#SetItemHitProc#
+void#
+#proc#procedure proc#
+#rock#long rock#
+@strtblview#GetItemHitProc#
+procedure#
+@strtblview#GetItemHitRock#
+long#
+@style#ClearNewFontFaces#
+void#
+@style#AddNewFontFace#
+void#
+#newface#long newface#
+@style#ClearOldFontFaces#
+void#
+@style#RemoveOldFontFace#
+void#
+#oldface#long oldface#
+@style#GetAddedFontFaces#
+long#
+@style#GetRemovedFontFaces#
+long#
+@style#IsAllAddedFontFace#
+boolean#
+#testface#long testface#
+@style#IsAllRemovedFontFace#
+boolean#
+#testface#long testface#
+@style#IsAnyAddedFontFace#
+boolean#
+#testface#long testface#
+@style#IsAnyRemovedFontFace#
+boolean#
+#testface#long testface#
+@style#SetCounterScope#
+void#
+#newscope#enum style_Scope newscope#
+@style#GetCounterScope#
+enum style_Scope#
+@style#SetCounterPosition#
+void#
+#newpos#enum style_Position newpos#
+@style#GetCounterPosition#
+enum style_Position#
+@style#SetCounterInitialValue#
+void#
+#newval#long newval#
+@style#GetCounterInitialValue#
+long #
+@style#SetJustification#
+void#
+#just#enum style_Justification just#
+@style#GetJustification#
+enum style_Justification#
+@style#AddFlag#
+void#
+#flag#long flag#
+@style#RemoveFlag#
+void#
+#flag#long flag#
+@style#UseOldFlag#
+void#
+#flag#long flag#
+@style#TestAddFlag#
+boolean#
+#flag#long flag#
+@style#TestRemoveFlag#
+boolean#
+#flag#long flag#
+@style#TestUseOldFlag#
+boolean#
+#flag#long flag#
+@style#AddHinge#
+void#
+@style#RemoveHinge#
+void#
+@style#UseOldHinge#
+void#
+@style#IsHingeAdded#
+boolean#
+@style#IsHingeRemoved#
+boolean#
+@style#IsHingeUnchange#
+boolean#
+@style#AddNewPage#
+void#
+@style#RemoveNewPage#
+void#
+@style#UseOldNewPage#
+void#
+@style#IsNewPageAdded#
+boolean#
+@style#IsNewPageRemoved#
+boolean#
+@style#IsNewPageUnchange#
+boolean#
+@style#AddHidden#
+void#
+@style#RemoveHidden#
+void#
+@style#UseOldHidden#
+void#
+@style#IsHiddenAdded#
+boolean#
+@style#IsHiddenRemoved#
+boolean#
+@style#IsHiddenUnchange#
+boolean#
+@style#AddUnderline#
+void#
+@style#RemoveUnderline#
+void#
+@style#UseOldUnderline#
+void#
+@style#IsUnderlineAdded#
+boolean#
+@style#IsUnderlineRemoved#
+boolean#
+@style#IsUnderlineUnchange#
+boolean#
+@style#AddPassThru#
+void#
+@style#RemovePassThru#
+void#
+@style#UseOldPassThru#
+void#
+@style#IsPassThruAdded#
+boolean#
+@style#IsPassThruRemoved#
+boolean#
+@style#IsPassThruUnchange#
+boolean#
+@style#AddContinueIndent#
+void#
+@style#RemoveContinueIndent#
+void#
+@style#UseOldContinueIndent#
+void#
+@style#IsContinueIndentAdded#
+boolean#
+@style#IsContinueIndentRemoved#
+boolean#
+@style#IsContinueIndentUnchange#
+boolean#
+@style#AddChangeBar#
+void#
+@style#RemoveChangeBar#
+void#
+@style#UseOldChangeBar#
+void#
+@style#IsChangeBarAdded#
+boolean#
+@style#IsChangeBarRemoved#
+boolean#
+@style#IsChangeBarUnchange#
+boolean#
+@style#AddOverBar#
+void#
+@style#RemoveOverBar#
+void#
+@style#UseOldOverBar#
+void#
+@style#IsOverBarAdded#
+boolean#
+@style#IsOverBarRemoved#
+boolean#
+@style#IsOverBarUnchange#
+boolean#
+@style#AddReadOnly#
+void#
+@style#RemoveReadOnly#
+void#
+@style#UseOldReadOnly#
+void#
+@style#IsReadOnlyAdded#
+boolean#
+@style#IsReadOnlyRemoved#
+boolean#
+@style#IsReadOnlyUnchange#
+boolean#
+@style#AddNoWrap#
+void#
+@style#RemoveNoWrap#
+void#
+@style#UseOldNoWrap#
+void#
+@style#IsNoWrapAdded#
+boolean#
+@style#IsNoWrapRemoved#
+boolean#
+@style#IsNoWrapUnchange#
+boolean#
+@style#AddNoFill#
+void#
+@style#RemoveNoFill#
+void#
+@style#UseOldNoFill#
+void#
+@style#IsNoFillAdded#
+boolean#
+@style#IsNoFillRemoved#
+boolean#
+@style#IsNoFillUnchange#
+boolean#
+@style#AddKeepPriorNL#
+void#
+@style#RemoveKeepPriorNL#
+void#
+@style#UseOldKeepPriorNL#
+void#
+@style#IsKeepPriorNLAdded#
+boolean#
+@style#IsKeepPriorNLRemoved#
+boolean#
+@style#IsKeepPriorNLUnchange#
+boolean#
+@style#AddKeepNextNL#
+void#
+@style#RemoveKeepNextNL#
+void#
+@style#UseOldKeepNextNL#
+void#
+@style#IsKeepNextNLAdded#
+boolean#
+@style#IsKeepNextNLRemoved#
+boolean#
+@style#IsKeepNextNLUnchange#
+boolean#
+@style#AddTabsCharacters#
+void#
+@style#RemoveTabsCharacters#
+void#
+@style#UseOldTabsCharacters#
+void#
+@style#IsTabsCharactersAdded#
+boolean#
+@style#IsTabsCharactersRemoved#
+boolean#
+@style#IsTabsCharactersUnchange#
+boolean#
+@suite#CurrentItem#
+struct suite_item *#
+@suite#ItemCount#
+int#
+@suite#ItemAnchor#
+long#
+#item#suite_type_item item#
+@suite#ItemDataObject#
+struct dataobject *#
+#item#suite_type_item item#
+@suite#ItemViewObject#
+struct view *#
+#item#suite_type_item item#
+@suite#ItemExposed#
+boolean#
+#item#suite_type_item item#
+@suite#SetExceptionHandler#
+procedure#
+#handler#procedure handler#
+@suite#ExceptionCode#
+long#
+@suite#ExceptionItem#
+suite_type_item#
+@suite#FirstVisible#
+suite_type_item#
+@suite#LastVisible#
+suite_type_item#
+@suite#SetFirstVisible#
+void#
+#item#suite_type_item item#
+@suite#SetLastVisible#
+void#
+#item#suite_type_item item#
+@sym#GetName#
+unsigned char *#
+@sym#GetScope#
+long#
+@sym#SetScope#
+void#
+#newScope#long newScope#
+@table#Name#
+char *#
+@table#NumberOfRows#
+short#
+@table#NumberOfColumns#
+short#
+@table#RowHeight#
+short#
+#r#short r#
+@table#ColumnWidth#
+short#
+#c#short c#
+@table#GetCell#
+struct cell *#
+#r#short r#
+#c#short c#
+@table#ColorAbove#
+char#
+#r#short r#
+#c#short c#
+@table#ColorToLeft#
+char#
+#r#short r#
+#c#short c#
+@table#SetAboveColor#
+char#
+#r#short r#
+#c#short c#
+#color#char color#
+@table#SetLeftColor#
+void#
+#r#short r#
+#c#short c#
+#color#char color#
+@table#IsJoinedAbove#
+boolean#
+#r#short r#
+#c#short c#
+@table#IsJoinedToLeft#
+boolean#
+#r#short r#
+#c#short c#
+@table#IsJoinedToAnother#
+boolean#
+#r#short r#
+#c#short c#
+@table#StampEverything#
+void#
+@table#CurrentTimestamp#
+int#
+@table#EverythingTimestamp#
+int#
+@table#CellsTimestamp#
+int#
+@table#EdgesTimestamp#
+int#
+@table#WriteTimestamp#
+int#
+@tabrulerview#SetValueChangeProc#
+void#
+#proc#procedure proc#
+#rock#long rock#
+@text#SetExportEnvironments#
+void#
+#val#boolean val#
+@text#GetExportEnvironments#
+boolean#
+@text#GetStyleSheet#
+struct stylesheet *#
+@text#SetWriteAsText#
+void#
+#TorF#boolean TorF#
+@text#GetWriteAsText#
+boolean#
+@text#SetCopyAsText#
+void#
+#TorF#boolean TorF#
+@text#GetCopyAsText#
+boolean#
+@text#GetWriteStyle#
+enum textwritestyle#
+@text#SetWriteStyle#
+void#
+#style#enum textwritestyle style#
+@textview#GetEditor#
+int#
+@textview#GetVIMode#
+int#
+@textview#EncodePosition#
+long#
+#pos#long pos#
+@textview#DecodePosition#
+long#
+#pos#long pos#
+@thumbV#GetTmpVal#
+long#
+@toksym#TGetName#
+unsigned char *#
+@toksym#TGetScope#
+toksym_scopeType#
+@toksym#GetLoc#
+long#
+@toksym#GetLen#
+long#
+@tree#RootNode#
+struct tree_node *#
+@tree#NodeName#
+char *#
+#node#struct tree_node *node#
+@tree#NodeCaption#
+char *#
+#node#struct tree_node * node#
+@tree#NodeTitle#
+char *#
+#node#struct tree_node * node#
+@tree#NodeDatum#
+long#
+#node#struct tree_node * node#
+@tree#ParentNode#
+struct tree_node *#
+#node#struct tree_node * node#
+@tree#ChildNode#
+struct tree_node *#
+#node#struct tree_node * node#
+@tree#LeftNode#
+struct tree_node *#
+#node#struct tree_node * node#
+@tree#RightNode#
+struct tree_node *#
+#node#struct tree_node * node#
+@tree#SetNotificationCode#
+void#
+#code#char code#
+@tree#NotificationCode#
+char#
+@tree#SetNotificationNode#
+void#
+#node#struct tree_node *node#
+@tree#NotificationNode#
+struct tree_node *#
+@tree23int#GetData#
+long#
+@type#GetSuper#
+struct type *#
+@type#GetOps#
+operation *#
+@type#SetSuper#
+void#
+#val#struct type *val#
+@type#GetLast#
+struct type *#
+@type#GetPrev#
+struct type *#
+@type#SetLast#
+void#
+#val#struct type *val#
+@type#SetPrev#
+void#
+#val#struct type *val#
+@type#GetSize#
+short#
+@type#SetSize#
+void#
+#val#short val#
+@type#GetAlign#
+short#
+@type#SetAlign#
+void#
+#val#short val#
+@type#GetReadLevel#
+short#
+@type#GetWriteLevel#
+short#
+@type#SetReadLevel#
+void#
+#val#short val#
+@type#SetWriteLevel#
+void#
+#val#short val#
+@type#GetOffset#
+long#
+@type#GetVal#
+long#
+@type#GetMacro#
+char *#
+@type#GetIndex#
+long#
+@type#SetOffset#
+void#
+#newval#long newval#
+@type#SetVal#
+void#
+#newval#long newval#
+@type#SetMacro#
+void#
+#newval#char *newval#
+@type#SetIndex#
+void#
+#newval#long newval#
+@updatelist#UpdatesPending#
+boolean#
+@value#SetValue#
+void#
+#rock#long rock#
+@value#SetArraySize#
+void#
+#rock#long rock#
+@value#SetString#
+void#
+#rock#char *rock#
+@value#SetStringArray#
+void#
+#rock#char **rock#
+@value#GetValue#
+long#
+@value#GetArraySize#
+long#
+@value#GetString#
+char *#
+@value#GetStringArray#
+char **#
+@value#SetNotify#
+void#
+#val#boolean val#
+@value#GetUpdateCount#
+long#
+@valueview#Xval#
+long#
+@valueview#Yval#
+long#
+@valueview#Width#
+long#
+@valueview#Height#
+long#
+@valueview#Value#
+struct value *#
+@vector#SetDestroyRoutine#
+procedure#
+#routine#procedure routine#
+@vector#SetSortRoutine#
+procedure#
+#routine#procedure routine#
+@vector#Item#
+long#
+#i#int i#
+@vector#Count#
+long#
+@vector#SetIncrement#
+long#
+#inc#long inc#
+@view#MoveToPt#
+void#
+#Pt#struct point * Pt#
+@view#MoveTo#
+void#
+#NewX#long NewX#
+#NewY#long NewY#
+@view#Move#
+void#
+#DeltaX#long DeltaX#
+#DeltaY#long DeltaY#
+@view#GetCurrentPt#
+void#
+#Pt#struct point * Pt#
+@view#DrawLineToPt#
+void#
+#LineEnd#struct point * LineEnd#
+@view#DrawLineTo#
+void#
+#XEnd#long XEnd#
+#YEnd#long YEnd#
+@view#DrawLine#
+void#
+#DeltaX#long DeltaX#
+#DeltaY#long DeltaY#
+@view#DrawString#
+void#
+#Text#char * Text#
+#Operation#short Operation#
+@view#DrawText#
+void#
+#Text#char * Text#
+#TextLength#long TextLength#
+#Operation#short Operation#
+@view#SetSpaceShim#
+void#
+#Amount#short Amount#
+@view#GetSpaceShim#
+short#
+@view#SetFont#
+void#
+#ChosenFont#struct fontdesc * ChosenFont#
+@view#GetFont#
+struct fontdesc *#
+@view#DrawRect#
+void#
+#Rect#struct rectangle * Rect#
+@view#DrawRectSize#
+void#
+#x#long x#
+#y#long y#
+#width#long width#
+#height#long height#
+@view#DrawPolygon#
+void#
+#PointArray#struct point * PointArray#
+#PointCount#short PointCount#
+@view#DrawTrapezoid#
+void#
+#topX#long topX#
+#topY#long topY#
+#topWidth#long topWidth#
+#bottomX#long bottomX#
+#bottomY#long bottomY#
+#bottomWidth#long bottomWidth#
+@view#DrawPath#
+void#
+#PointArray#struct point * PointArray#
+#PointCount#short PointCount#
+@view#DrawOval#
+void#
+#Rect#struct rectangle * Rect#
+@view#DrawOvalSize#
+void#
+#x#long x#
+#y#long y#
+#width#long width#
+#height#long height#
+@view#DrawArc#
+void#
+#EnclRect#struct rectangle * EnclRect#
+#StartAngle#short StartAngle#
+#OffsetAngle#short OffsetAngle#
+@view#DrawArcSize#
+void#
+#x#long x#
+#y#long y#
+#width#long width#
+#height#long height#
+#StartAngle#short StartAngle#
+#OffsetAngle#short OffsetAngle#
+@view#DrawRRect#
+void#
+#OuterBox#struct rectangle * OuterBox#
+#InnerBox#struct rectangle * InnerBox#
+@view#DrawRRectSize#
+void#
+#x#long x#
+#y#long y#
+#width#long width#
+#height#long height#
+#cornerWidth#long cornerWidth#
+#cornerHeight#long cornerHeight#
+@view#DrawRgn#
+void#
+#Rgn#struct region * Rgn#
+@view#FillRect#
+void#
+#Rect#struct rectangle * Rect#
+#Tile#struct graphic * Tile#
+@view#FillRectSize#
+void#
+#x#long x#
+#y#long y#
+#width#long width#
+#height#long height#
+#Tile#struct graphic * Tile#
+@view#FillTrapezoid#
+void#
+#topX#long topX#
+#topY#long topY#
+#topWidth#long topWidth#
+#bottomX#long bottomX#
+#bottomY#long bottomY#
+#bottomWidth#long bottomWidth#
+#Tile#struct graphic * Tile#
+@view#FillPolygon#
+void#
+#PointArray#struct point * PointArray#
+#PointCount#short PointCount#
+#Tile#struct graphic * Tile#
+@view#FillOval#
+void#
+#Rect#struct rectangle * Rect#
+#Tile#struct graphic * Tile#
+@view#FillOvalSize#
+void#
+#x#long x#
+#y#long y#
+#width#long width#
+#height#long height#
+#Tile#struct graphic * Tile#
+@view#FillArc#
+void#
+#EnclRect#struct rectangle * EnclRect#
+#StartAngle#short StartAngle#
+#OffsetAngle#short OffsetAngle#
+#Tile#struct graphic * Tile#
+@view#FillArcSize#
+void#
+#x#long x#
+#y#long y#
+#width#long width#
+#height#long height#
+#StartAngle#short StartAngle#
+#OffsetAngle#short OffsetAngle#
+#Tile#struct graphic * Tile#
+@view#FillRRect#
+void#
+#OuterBox#struct rectangle * OuterBox#
+#InnerBox#struct rectangle * InnerBox#
+#Tile#struct graphic * Tile#
+@view#FillRRectSize#
+void#
+#x#long x#
+#y#long y#
+#width#long width#
+#height#long height#
+#cornerWidth#long cornerWidth#
+#cornerHeight#long cornerHeight#
+#Tile#struct graphic * Tile#
+@view#FillRgn#
+void#
+#Rgn#struct region * Rgn#
+#Tile#struct graphic * Tile#
+@view#EraseRect#
+void#
+#Rect#struct rectangle * Rect#
+@view#EraseRectSize#
+void#
+#x#long x#
+#y#long y#
+#width#long width#
+#height#long height#
+@view#EraseVisualRect#
+void#
+@view#BitBlt#
+void#
+#SrcRect#struct rectangle * SrcRect#
+#DestGraphic#struct graphic * DestGraphic#
+#DstOrigin#struct point * DstOrigin#
+#ClipRectList#struct rectangle * ClipRectList#
+@view#BitBltSize#
+void#
+#srcX#long srcX#
+#srcY#long srcY#
+#dstX#long dstX#
+#dstY#long dstY#
+#Width#long Width#
+#Height#long Height#
+#DstGraphic#struct graphic * DstGraphic#
+#clipX#long clipX#
+#clipY#long clipY#
+#clipWidth#long clipWidth#
+#clipHeight#long clipHeight#
+@view#SetBitAtLoc#
+void#
+#XPos#long XPos#
+#YPos#long YPos#
+#NewValue#boolean NewValue#
+@view#WritePixImage#
+void#
+#DestX#long DestX#
+#DestY#long DestY#
+#SrcPixels#struct pixelimage * SrcPixels#
+#SrcX#long SrcX#
+#SrcY#long SrcY#
+#width#long width#
+#height#long height#
+@view#ReadPixImage#
+void#
+#SrcX#long SrcX#
+#SrcY#long SrcY#
+#DestPixels#struct pixelimage * DestPixels#
+#DestX#long DestX#
+#DestY#long DestY#
+#width#long width#
+#height#long height#
+@view#InsertGraphic#
+void#
+#EnclosingGraphic#struct graphic * EnclosingGraphic#
+#EnclosedRectangle#struct rectangle * EnclosedRectangle#
+@view#InsertGraphicSize#
+void#
+#EnclosingGraphic#struct graphic * EnclosingGraphic#
+#xOriginInParent#long xOriginInParent#
+#yOriginInParent#long yOriginInParent#
+#width#long width#
+#height#long height#
+@view#InsertGraphicRegion#
+void#
+#EnclosingGraphic#struct graphic * EnclosingGraphic#
+#regions#struct region * regions#
+@view#SetVisualRegion#
+void#
+#region#struct region * region#
+@view#GetVisualRegion#
+struct region *#
+#retRegion#struct region * retRegion#
+@view#MoveLogicalOrigin#
+void#
+#DeltaX#long DeltaX#
+#DeltaY#long DeltaY#
+@view#SetLogicalOrigin#
+void#
+#NewX#long NewX#
+#NewY#long NewY#
+@view#SetLogicalOriginPt#
+void#
+#Pt#struct point * Pt#
+@view#GetLogicalBounds#
+void#
+#Rect#struct rectangle * Rect#
+@view#GetLogicalRight#
+long#
+@view#GetLogicalBottom#
+long#
+@view#GetEnclosedBounds#
+void#
+#Rect#struct rectangle * Rect#
+@view#GetEnclosedRight#
+long#
+@view#GetEnclosedBottom#
+long#
+@view#GetVisualBounds#
+void#
+#Rect#struct rectangle * Rect#
+@view#GetVisualRight#
+long#
+@view#GetVisualBottom#
+long#
+@view#SetClippingRegion#
+void#
+#region#struct region * region#
+@view#GetClippingRegion#
+struct region *#
+#retRegion#struct region * retRegion#
+@view#SetClippingRect#
+void#
+#AdditionalRect#struct rectangle * AdditionalRect#
+@view#SetClippingRectSize#
+void#
+#x#long x#
+#y#long y#
+#w#long w#
+#h#long h#
+@view#ClearClippingRect#
+void#
+@view#GetClippingRect#
+void#
+#Rect#struct rectangle * Rect#
+@view#SetLineWidth#
+void#
+#NewLineWidth#short NewLineWidth#
+@view#GetLineWidth#
+short#
+@view#SetLineDash#
+void#
+#dashPattern#char * dashPattern#
+#dashOffset#int dashOffset#
+#dashType#short dashType#
+@view#GetLineDash#
+void#
+#dashPattern#char * * dashPattern#
+#dashOffset#int * dashOffset#
+#dashType#short * dashType#
+@view#SetLineCap#
+void#
+#NewLineCap#short NewLineCap#
+@view#GetLineCap#
+short#
+@view#SetLineJoin#
+void#
+#NewLineJoin#short NewLineJoin#
+@view#GetLineJoin#
+short#
+@view#SetTransferMode#
+void#
+#NewTransferMode#short NewTransferMode#
+@view#GetTransferMode#
+short#
+@view#RestoreGraphicsState#
+void#
+@view#FlushGraphics#
+void#
+@view#WhitePattern#
+struct graphic *#
+@view#BlackPattern#
+struct graphic *#
+@view#GrayPattern#
+struct graphic *#
+#IntensityNum#short IntensityNum#
+#IntensityDenom#short IntensityDenom#
+@view#SetForegroundColor#
+void#
+#colorName#char * colorName#
+#red#long red#
+#green#long green#
+#blue#long blue#
+@view#GetForegroundColor#
+void#
+#colorName#char * * colorName#
+#red#long * red#
+#green#long * green#
+#blue#long * blue#
+@view#SetBackgroundColor#
+void#
+#colorName#char * colorName#
+#red#long red#
+#green#long green#
+#blue#long blue#
+@view#GetBackgroundColor#
+void#
+#colorName#char * * colorName#
+#red#long * red#
+#green#long * green#
+#blue#long * blue#
+@view#SetFGColor#
+void#
+#red#double red#
+#green#double green#
+#blue#double blue#
+@view#GetFGColor#
+void#
+#red#double * red#
+#green#double * green#
+#blue#double * blue#
+@view#SetBGColor#
+void#
+#red#double red#
+#green#double green#
+#blue#double blue#
+@view#GetBGColor#
+void#
+#red#double * red#
+#green#double * green#
+#blue#double * blue#
+@view#GetHorizontalResolution#
+long#
+@view#GetVerticalResolution#
+long#
+@view#DisplayClass#
+long#
+@view#GetLogicalWidth#
+long#
+@view#GetLogicalHeight#
+long#
+@view#GetLogicalLeft#
+long#
+@view#GetLogicalTop#
+long#
+@view#GetVisualWidth#
+long#
+@view#GetVisualHeight#
+long#
+@view#GetVisualLeft#
+long#
+@view#GetVisualTop#
+long#
+@view#GetEnclosedWidth#
+long#
+@view#GetEnclosedHeight#
+long#
+@view#GetEnclosedLeft#
+long#
+@view#GetEnclosedTop#
+long#
+@view#GetIM#
+struct im *#
+@view#GetDrawable#
+struct graphic *#
+@view#EnclosedXToLocalX#
+long #
+#xvalue#long xvalue#
+@view#EnclosedYToLocalY#
+long #
+#yvalue#long yvalue#
+@view#GetDataObject#
+struct dataobject *#
+@xgraphic#Valid#
+boolean#
+@xgraphic#XWindow#
+Drawable#
+@xgraphic#XDisplay#
+Display *#
+@xgraphic#XScreen#
+int#
+@xgraphic#XGC#
+GC#
+@xgraphic#XFillGC#
+GC#

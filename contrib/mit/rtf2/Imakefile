@@ -1,0 +1,14 @@
+OBJS = main.o parse.o misc.o R2Functions.o
+
+NormalObjectRule()
+NormalHelpRule()
+
+
+ProgramTarget(rtf2, main.o parse.o misc.o R2Functions.o input.o, ${UTILLIB}, )
+
+
+InstallProgram(rtf2, $(DESTDIR)/bin)
+InstallFile(rtf2.trans, $(INSTINCFLAGS), $(DESTDIR)/lib)
+InstallDocs(rtf2.help, $(DESTDIR)/help)
+
+DependTarget()

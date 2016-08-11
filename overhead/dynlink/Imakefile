@@ -1,0 +1,2 @@
+SUBDIRS= common $(SYS_DYNDIR)
+#define IHaveSubdirs 1

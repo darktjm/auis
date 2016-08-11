@@ -1,0 +1,1147 @@
+/* ********************************************************************** *\ 
+ *         Copyright IBM Corporation 1988,1995 - All Rights Reserved      * 
+ *        For full copyright information see:'andrew/config/COPYRITE'     * 
+\* ********************************************************************** */ 
+
+/* $Disclaimer: 
+Permission to use, copy, modify, and distribute this software and its 
+documentation for any purpose and without fee is hereby granted, provided 
+that the above copyright notice appear in all copies and that both that 
+copyright notice and this permission notice appear in supporting 
+documentation, and that the name of IBM not be used in advertising or 
+publicity pertaining to distribution of the software without specific, 
+written prior permission. 
+                        
+THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+ $ */ 
+
+/* ***************************************************************** *\ 
+ * andrew.rls - macro (rules) for Imakefiles 
+ * 
+ * $Header: /afs/cs.cmu.edu/project/atk-src-C++/config/RCS/andrew.rls,v 2.274 1996/11/12 19:17:03 az28 Exp $
+\* ***************************************************************** */ 
+#ifndef LexStaticFile
+#define LexStaticFile lex.yy.c
+#endif
+#ifndef LexStaticReplaceFile
+#define LexStaticReplaceFile lex.yy._c
+#endif
+
+#define PassMakeVars() $(MFLAGS)
+
+#define RegisterLibraries(file,dirsymbol,basedir,libs,dest) @@\
+install.time:: file		@@\
+	$(INSTALL) $(INSTINCFLAGS)  file  dest/file @@\
+file::	Imakefile 		@@\
+	@$(RM) ,file 						@@\
+	@echo Register library list for file libraries whose path depends on dirsymbol  	@@\
+	@echo dirsymbol>,file 					@@\
+	@sh -c 'for i in libs; do 				\ @@\
+	echo $$i|sed -e s\;basedir\[/\]\*\;\;g >> ,file; done;' @@\
+	@$(RM) file @@\
+	@$(MV) ,file file @@\
+clean::	@@\
+	$(RM) file ,file
+
+#define RegisterLibPackage(file,dirsymbol,prefix,postfix,libs,dest) @@\
+install.time:: file		@@\
+	$(INSTALL) $(INSTINCFLAGS)  file  dest/file @@\
+file::	Imakefile 		@@\
+	@$(RM) ,file					@@\
+	@echo Build library list for file libraries whose path depends on dirsymbol	@@\
+	@echo dirsymbol>,file	 			@@\
+	@sh -c 'for i in libs; do 			\ @@\
+	echo prefix$${i}postfix | sed -e "s- --g" >> ,file; done;' @@\
+	@$(RM) file @@\
+	@$(MV) ,file file @@\
+clean::	@@\
+	$(RM) file ,file
+
+
+#ifndef DYNPOSTEXTRA
+#define DYNPOSTEXTRA , dobj extraclasses , libs , syslibs
+#endif
+
+#ifndef DynamicObjectObjs
+#define DynamicObjectObjs(x) $(DYNMAIN).o x
+#endif
+
+#ifndef DynamicPreLinkCommand
+#define DynamicPreLinkCommand(dobj,extraclasses,objs,libs,syslibs)
+#endif
+#ifndef DynamicLinkCommand
+#define DynamicLinkCommand(dobj,extraclasses,objs,libs,syslibs) $(DYNLINKPROG) PreDynFlags(dobj,extraclasses,objs,libs,syslibs)  -o $(ATKDYNPREFIXM)dobj.$(ATKTMPDYNEXTM) DynamicObjectObjs(objs) libs  $(LOCALDYNLIBS) $(LOCALSTDLIBS) $(ATKDYNLIBS) $(ATKSTDLIBS) syslibs PostDynFlags(dobj,extraclasses,objs,libs,syslibs) $(DYNLDFLAGS) $(DYNMATHLIB) ; 
+#endif
+#ifndef DynamicPostLinkCommand
+#define DynamicPostLinkCommand(dobj,extraclasses,objs,libs,syslibs) $(DYNPOSTPROCESS) dobj.$(ATKTMPDYNEXTM) $(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM) DYNPOSTEXTRA
+#endif
+
+#ifndef PreDynFlags
+#define PreDynFlags(dobj,extraclasses,objs,libs,syslibs)  $(PREDYNFLAGS) $(CFLAGS)
+#endif
+
+#ifndef PostDynFlags
+#define PostDynFlags(dobj,extraclasses,objs,libs,syslibs) $(POSTDYNFLAGS)
+#endif
+
+
+#ifdef HAVE_DYNAMIC_LOADING
+/* defines ATKExportsLibrary  InstallATKExportsLibrary
+  DynamicMultiObject  DynamicMultiObjectTarget
+  DynamicObject  InstallDynamicObject  InstallDynamicObjectClass */
+
+
+#ifndef ATKExportsLibrary
+#define ATKExportsLibrary(dobj,objs,libs,syslibs,extraargs)
+#endif
+
+#ifndef InstallATKExportsLibrary
+#define InstallATKExportsLibrary(dobj,dest)
+#endif
+
+#ifndef DynamicMultiObjectTarget
+#define	DynamicMultiObjectTarget(dobj, extraclasses, objs, libs, syslibs)		@@\
+all:: $(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM)							@@\
+$(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM): objs libs					@@\
+	$(RM) $(DYNMAIN).C;$(MKDYNMAIN) dobj extraclasses>$(DYNMAIN).C; \@@\
+	$(CPPC) $(CFLAGS) -c $(DYNMAIN).C; \@@\
+	DynamicPreLinkCommand(dobj,extraclasses,objs,libs,syslibs) \@@\
+	DynamicLinkCommand(dobj,extraclasses,objs,libs,syslibs) \@@\
+	$(RM) $(DYNMAIN).C $(DYNMAIN).o ;@@\
+	DynamicPostLinkCommand(dobj,extraclasses,objs,libs,syslibs)  @@\
+	@sh -c 'for i in extraclasses +++;  do  \				@@\
+		case $$i in +++) ;; *) (echo "Making local link for "$$i; \			@@\
+		$(RM) $(ATKDYNPREFIXM)$$i.$(ATKDYNEXTM); \			@@\
+		$(LN) $(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM) $(ATKDYNPREFIXM)$$i.$(ATKDYNEXTM)) esac; \	@@\
+		done; \ @@\
+		exit 0'  
+#endif
+	
+#define DynamicMultiObject(dobj,extraclasses,objs,libs,syslibs,extraargs)@@\
+all:: $(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM) dobj.rf dobj.lt  @@\
+$(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM): objs dobj.rf dobj.lt libs	@@\
+	ExecuteFromBASEDIR(genstatl -D extraclasses -L libs syslibs -e dobj -m objs -i Imakefile.dyn  $(GENSTATL_EXTRA) extraargs)	@@\
+	$(IMAKE_DYNCMD) -DTOPDIR=$(TOP);$(MAKE) PassMakeVars() -f Makefile.dyn	@@\
+RefsAndLibFileTarget(dobj,objs,libs,syslibs) @@\
+clean::	@@\
+	$(RM) Makefile.dyn Imakefile.dyn $(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM) $(ATKDYNPREFIXM)dobj.$(ATKTMPDYNEXTM) @@\
+ATKExportsLibrary(dobj,objs,libs,syslibs,extraargs)
+		
+#define DynamicObject(dobj,libs,syslibs,extraargs)@@\
+all:: $(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM)  dobj.rf dobj.lt @@\
+$(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM): dobj.o dobj.rf  dobj.lt libs	@@\
+	ExecuteFromBASEDIR(genstatl -D -L libs  syslibs -e dobj -m dobj.o  -i Imakefile.dyn  $(GENSTATL_EXTRA) extraargs)	@@\
+	$(IMAKE_DYNCMD) -DTOPDIR=$(TOP);$(MAKE) PassMakeVars() -f Makefile.dyn	@@\
+RefsAndLibFileTarget(dobj,dobj.o,libs,syslibs) @@\
+clean::	@@\
+	$(RM) Makefile.dyn Imakefile.dyn $(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM) $(ATKDYNPREFIXM)dobj.$(ATKTMPDYNEXTM) @@\
+ATKExportsLibrary(dobj,dobj.o,libs,syslibs,extraargs)
+		
+#ifndef InstallDynamicObject
+#define InstallDynamicObject(dobj, extraclasses, dest) @@\
+install.time:: $(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM) dobj.rf dobj.lt @@\
+	@sh -c 'for i in extraclasses +++;  do  \				@@\
+		case $$i in +++) ;; *) (echo "Making link for "$$i; \			@@\
+		$(RM) dest/$(ATKDYNPREFIXM)$$i.$(ATKDYNEXTM); \	@@\
+		$(LN) $(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM) dest/$(ATKDYNPREFIXM)$$i.$(ATKDYNEXTM); \ @@\
+		$(RM) $(ATKDYNPREFIXM)$$i.$(ATKDYNEXTM); \			@@\
+		$(LN) $(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM) $(ATKDYNPREFIXM)$$i.$(ATKDYNEXTM)) esac; \	@@\
+		done; \ @@\
+		exit 0' @@\
+	InstallFile($(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM), $(INSTDOFLAGS), dest) @@\
+	InstallFile(dobj.rf, $(INSTDOFLAGS), dest) @@\
+	InstallFile(dobj.lt, $(INSTDOFLAGS), dest) @@\
+InstallATKExportsLibrary(dobj,dest)
+#endif
+
+#ifndef InstallDynamicObjectClass
+#define InstallDynamicObjectClass(dobj,dest) @@\
+InstallFile($(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM), $(INSTDOFLAGS), dest) @@\
+InstallFile(dobj.rf, $(INSTDOFLAGS), dest) @@\
+InstallFile(dobj.lt, $(INSTDOFLAGS), dest) @@\
+InstallATKExportsLibrary(dobj,dest)
+#endif
+
+#else  /* not HAVE_DYNAMIC_LOADING */
+
+#undef DynamicMultiObjectTarget
+#undef InstallDynamicObject
+#undef InstallDynamicObjectClass
+#undef DynamicObject
+#undef DynamicMultiObject
+
+#define	DynamicMultiObjectTarget(dobj, extraclasses, objs, libs, syslibs)  @@\
+	ATKLibrary(dobj,objs,libs,syslibs,extraargs)
+#define DynamicObject(dobj, libs, syslibs, extraargs)   @@\
+	ATKLibrary(dobj,,libs,syslibs,extraargs)
+#define DynamicMultiObject(dobj,extraclasses,objs,libs,syslibs,extraargs) @@\
+	ATKLibrary(dobj,objs,libs,syslibs,extraargs)
+#define InstallDynamicObject(dobj, extraclasses, dest) @@\
+	InstallATKLibrary(dobj, dest)
+#define InstallDynamicObjectClass(dobj,dest) @@\
+	InstallATKLibrary(dobj, dest)
+
+#endif  /* HAVE_DYNAMIC_LOADING */
+
+
+#define InstallClassProgram(file, dest)	 @@\
+	InstallProgram(file, dest)
+#define ClassProgramTarget(name, objs, libs, syslibs)  @@\
+	ProgramTarget(name, objs, libs, syslibs)
+#define ClassTestProgramTarget(name, objs, libs, syslibs)   @@\
+	TestProgramTarget(name, objs, libs, syslibs)
+
+
+#ifndef HAVE_DYNAMIC_INTERLINKING
+
+#ifndef DynamicObjectWithExports
+#define DynamicObjectWithExports(dobj,libs,syslibs,extraargs)  @@\
+	ATKLibrary(dobj,dobj.o,libs,syslibs,extraargs)
+#endif
+
+#ifndef DynamicMultiObjectWithExports
+#define DynamicMultiObjectWithExports(dobj,extraclassess,objs,libs,syslibs,extraargs)  @@\
+	ATKLibrary(dobj,objs,libs,syslibs,extraargs)
+#endif
+
+#ifndef InstallDynamicObjectWithExports
+#define InstallDynamicObjectWithExports(dobj,extraclasses,dest)  @@\
+	InstallATKLibrary(dobj,dest)
+#endif
+
+#ifndef InstallDynamicObjectClassWithExports
+#define InstallDynamicObjectClassWithExports(dobj,dest)  @@\
+	InstallATKLibrary(dobj, dest)
+#endif
+
+#else  /* HAVE_DYNAMIC_INTERLINKING */
+
+#ifndef DynamicObjectWithExports
+#define DynamicObjectWithExports(dobj,libs,syslibs,extraargs)  @@\
+	DynamicObject(dobj,libs,syslibs,extraargs) @@\
+ATKExportsLibrary(dobj,dobj.o,libs,syslibs,extraargs)
+#endif
+
+#ifndef DynamicMultiObjectWithExports
+#define DynamicMultiObjectWithExports(dobj,extraclasses,objs,libs,syslibs,extraargs)   @@\
+	DynamicMultiObject(dobj,extraclasses,objs,libs,syslibs,extraargs)
+#endif
+
+#ifndef InstallDynamicObjectWithExports
+#define InstallDynamicObjectWithExports(dobj,extraclasses,dest)  @@\
+	InstallDynamicObject(dobj,extraclasses,dest) @@\
+InstallATKExportsTarget(install.time,dobj,dest)
+#endif
+ 
+#ifndef InstallDynamicObjectClassWithExports
+#define InstallDynamicObjectClassWithExports(dobj,dest) @@\
+InstallFile($(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM), $(INSTDOFLAGS), dest) @@\
+InstallFile(dobj.rf, $(INSTDOFLAGS), dest) @@\
+InstallFile(dobj.lt, $(INSTDOFLAGS), dest) @@\
+InstallATKExportsTarget(install.time,dobj,dest) @@\
+InstallATKExportsLibrary(dobj,dest)
+#endif
+
+#endif  /* HAVE_DYNAMIC_INTERLINKING */
+ 
+
+#define CC_RULE $(CC) -c $(CFLAGS) $*.c
+#define CPPC_RULE $(CPPC) $(CPPFLAGS) -c $*.C
+
+#if (defined(AIX) || defined(hpux) || defined(_IBMR2))
+#define RANLIBHERE /* nothing */
+#define RANLIBRULE(dest) ) done)
+#else
+#define RANLIBHERE $(RANLIB) $@
+#define RANLIBRULE(dest) $(RANLIB) dest/$$i); done)
+#endif
+/* moved the next two to imake.tmpl */
+#define NormalObjectRule()
+#define NormalATKRule()	
+
+#define NormalHelpRule()					@@\
+install.alias:: doc do.alias					@@\
+	@sh -c 'if [ -f ,help.alias ]; then  \			@@\
+		$(ADDALIASES) ,help.alias \			@@\
+		$(DESTDIR)/help/help.aliases;\			@@\
+		fi; \						@@\
+	exit 0'							@@\
+								@@\
+do.alias::							@@\
+	@$(RM) ,help.alias
+
+#define	NormalYaccRule()					@@\
+all:: $(SHARED)							@@\
+.y.o:								@@\
+	$(YACC) -d -b y $*.y						@@\
+	$(RM) $*.c						@@\
+	$(MV) y.tab.c $*.c					@@\
+	CC_RULE							@@\
+	$(RM) $*.c 
+
+#define	CppYaccRule()						@@\
+all:: $(SHARED)							@@\
+.y.o:								@@\
+	$(YACC) -d -b y $*.y						@@\
+	$(RM) $*.C						@@\
+	$(MV) y.tab.c $*.C					@@\
+	CPPC_RULE						@@\
+	$(RM) $*.C 
+
+#define	NormalAsmPPRule()					@@\
+.spp.o:								@@\
+	$(RM) $@ ,$*.s ,$*.c					@@\
+	$(CP) $*.spp ,$*.c					@@\
+	$(ASMPP_CC) $(CFLAGS)  ,$*.c > ,$*.s			@@\
+	$(AS) $(AS_FLAGS) -o $*.o ,$*.s				@@\
+	$(RM) ,$*.c ,$*.s 
+
+
+#ifdef FLEX_ENV
+#define FlexOrLexFileRule(file)					@@\
+clean::								@@\
+	$(RM) file.l file.c					@@\
+file.l: file.flex						@@\
+	$(RM) file.l file.c					@@\
+	$(LN) file.flex file.l
+#else
+#define FlexOrLexFileRule(file)					@@\
+clean::								@@\
+	$(RM) file.l file.c					@@\
+file.l: file.lex						@@\
+	$(RM) file.l file.c					@@\
+	$(LN) file.lex file.l
+#endif
+
+#define	NormalLexRule()						@@\
+all:: $(SHARED)							@@\
+.l.o:								@@\
+	$(LEX) $*.l						@@\
+	$(RM) $*.c						@@\
+	$(MV) LexStaticFile $*.c				@@\
+	CC_RULE							@@\
+	$(RM) $*.c 
+
+#define	CppLexRule()						@@\
+all:: $(SHARED)							@@\
+.l.o:								@@\
+	$(LEX) $*.l						@@\
+	$(RM) $*.C						@@\
+	$(MV) LexStaticFile $*.C				@@\
+	CPPC_RULE						@@\
+	$(RM) $*.C LexStaticFile 
+
+#define	NormalScribeRule()					@@\
+.mss.PS: ; $(SCRIBE) $*.mss 
+
+
+/* 
+ *================================================== 
+ * Either not quite standard but related rules or 
+ * standard rules which did not seem to be used 
+ *================================================== 
+ */ 
+
+#define	NormalAsmRule()						@@\
+.s.o:								@@\
+	$(RM) $@						@@\
+	$(AS) -o $*.o $*.s 
+
+
+#define	Parser(classname,bisonargs)		@@\
+all:: $(SHARED)	@@\
+depend:: classname.H classname.C @@\
+classname.H classname.C: classname.gra	$(MKPARSERCLASS) @@\
+	$(RM) classname.tab.c classname.tab.h	@@\
+	ExecuteFromBASEDIR(bison bisonargs -b classname -k  classname.gra)	@@\
+	$(RM) classname.C classname.H	@@\
+	$(MKPARSERCLASS) classname	@@\
+	$(RM) classname.tab.c classname.tab.h	@@\
+classname.o: classname.C	@@\
+clean::		@@\
+	$(RM) classname.C classname.H
+
+#define	CParser(classname,bisonargs)		@@\
+all:: $(SHARED)	@@\
+depend:: classname.h classname.c	@@\
+classname.h classname.c: classname.gra $(MKPARSER) @@\
+	$(RM) classname.tab.c classname.tab.h	@@\
+	ExecuteFromBASEDIR(bison bisonargs -d -b classname -k  classname.gra)	@@\
+	$(RM) classname.c classname.h	@@\
+	$(MKPARSER) classname	@@\
+	$(RM) classname.tab.c classname.tab.h	@@\
+classname.o: classname.c classname.h	@@\
+clean::		@@\
+	$(RM) classname.h classname.c
+
+#define YaccWithHeader(file)					@@\
+all:: $(SHARED)							@@\
+file.c file.h: file.y						@@\
+	$(YACC) -d -b file file.y				@@\
+	$(RM) file.c file.h					@@\
+	$(MV) file.tab.c file.c					@@\
+	$(MV) file.tab.h file.h					@@\
+								@@\
+file.o: file.c							@@\
+	$(RM) file.o						@@\
+	CC_RULE							@@\
+								@@\
+depend:: file.h file.c						@@\
+tidy::  ; $(RM) file.c						@@\
+clean::	; $(RM) file.h 
+
+#define CppYaccWithHeader(file)					@@\
+all:: $(SHARED)							@@\
+file.C file.h: file.y						@@\
+	$(YACC) -d -b file file.y				@@\
+	$(RM) file.C file.h					@@\
+	$(MV) file.tab.c file.C					@@\
+	$(MV) file.tab.h file.h					@@\
+								@@\
+file.o: file.C							@@\
+	$(RM) file.o						@@\
+	CPPC_RULE						@@\
+								@@\
+depend:: file.h file.C						@@\
+tidy::  ; $(RM) file.C						@@\
+clean::	; $(RM) file.h 
+
+#define	YaccWithReplacement(file, string)			@@\
+all:: $(SHARED)							@@\
+file.c file.h: file.y						@@\
+	$(YACC) -d -b file file.y				@@\
+	$(RM) file.c file.h					@@\
+	$(SED) -e '/yy/s//string/g' file.tab.c > file.c		@@\
+	$(RM) file.tab.c					@@\
+	$(MV) file.tab.h file.h					@@\
+								@@\
+file.o: file.c							@@\
+	$(RM) file.o						@@\
+	CC_RULE							@@\
+								@@\
+depend:: file.h file.c						@@\
+tidy::  ; $(RM) file.c						@@\
+clean::	; $(RM) file.h 
+
+#define	CppYaccWithReplacement(file, string)			@@\
+all:: $(SHARED)							@@\
+file.C file.h: file.y						@@\
+	$(YACC) -d -b file file.y				@@\
+	$(RM) file.C file.h					@@\
+	$(SED) -e '/yy/s//string/g' file.tab.c > file.C		@@\
+	$(RM) file.tab.c					@@\
+	$(MV) file.tab.h file.h					@@\
+								@@\
+file.o: file.C							@@\
+	$(RM) file.o						@@\
+	CPPC_RULE						@@\
+								@@\
+depend:: file.h file.C						@@\
+tidy::  ; $(RM) file.C						@@\
+clean::	; $(RM) file.h 
+
+#define	LexWithReplacement(file, string)			@@\
+all:: $(SHARED)							@@\
+file.o: file.l							@@\
+	$(LEX) $*.l						@@\
+	$(RM) $*.c						@@\
+	$(SED) -e '/yy/s//string/g' LexStaticFile > LexStaticReplaceFile @@\
+	$(RM) LexStaticFile					@@\
+	$(MV) LexStaticReplaceFile file.c			@@\
+	CC_RULE							@@\
+								@@\
+tidy:: ; $(RM) file.c 
+
+#define	CppLexWithReplacement(file, string)			@@\
+all:: $(SHARED)							@@\
+file.o: file.l							@@\
+	$(LEX) $*.l						@@\
+	$(RM) $*.C						@@\
+	$(SED) -e '/yy/s//string/g' LexStaticFile > LexStaticReplaceFile @@\
+	$(RM) LexStaticFile						@@\
+	$(MV) LexStaticReplaceFile file.C				@@\
+	CPPC_RULE						@@\
+								@@\
+tidy:: ; $(RM) file.C 
+
+#define NCYaccWithHeader(yfile)					@@\
+y.tab.c y.tab.h: yfile						@@\
+	$(RM) y.tab.c y.tab.h					@@\
+	$(YACC) -d -b y yfile					@@\
+								@@\
+depend:: y.tab.h 
+
+#define NCLex(lfile)						@@\
+LexStaticFile: lfile						@@\
+	$(RM) LexStaticFile					@@\
+	$(LEX) lfile 
+
+#define CppAndFilter(file, lyfile, incfiles, filter)		@@\
+file: lyfile incfiles						@@\
+	$(RM) ,file file						@@\
+	$(CPP) lyfile | filter > ,file				@@\
+	$(MV) ,file file
+
+#define AppendFiles(target, sources)				@@\
+target: sources							@@\
+	$(RM) ,target target						@@\
+	cat sources > ,target					@@\
+	$(MV) ,target target
+
+#define TestingOnlyTestingRule(libs, syslibs)			@@\
+.SUFFIXES: .test						@@\
+.c.test:							@@\
+	$(RM) $@						@@\
+	$(LINKPREFIX) $(CC) $(TESTING_CFLAGS) -o $*.test $*.c libs syslibs	@@\
+	$(RM) $*.o						@@\
+tidy:: ; $(RM) *.test 
+
+#define CPPTestingOnlyTestingRule(libs, syslibs)			@@\
+.SUFFIXES: .test						@@\
+.c.test:							@@\
+	$(RM) $@						@@\
+	$(LINKPREFIX) $(CPPC) $(TESTING_CFLAGS) -o $*.test $*.c libs syslibs	@@\
+	$(RM) $*.o						@@\
+tidy:: ; $(RM) *.test 
+
+/* 
+ *================================================== 
+ * Basic rules for compilation (and cleanup) 
+ *================================================== 
+ */ 
+
+#define LibraryTarget(library, objs)				@@\
+all:: library							@@\
+library: objs							@@\
+	$(RM) $@						@@\
+	$(AR) $@ objs						@@\
+	RANLIBHERE
+
+#define RefsAndLibFileTarget(name,objs,libs,syslibs) @@\
+name.lt:: libs	@@\
+	$(RM) ,name.lt name.lt @@\
+	$(BASEDIR)/etc/fixpaths -d $(STDPACKAGEDIRS) $(LOCALPACKAGEDIRS) - -v ANDREWDIR=$(BASEDIR) AFSBASEDIR=$(AFSBASEDIR) JPEGLIBDIR=$(JPEGLIBDIR) TIFFLIBDIR=$(TIFFLIBDIR) XLIBDIR=$(XLIBDIR) - libs syslibs>,name.lt	@@\
+	mv ,name.lt name.lt @@\
+name.rf:: objs @@\
+	$(RM) ,name.rf name.rf @@\
+	$(GENREFS)  $(CPPINCLUDES) $(ALL_INCLUDES) objs>,name.rf @@\
+	mv ,name.rf name.rf @@\
+clean::	@@\
+	$(RM) name.lt name.rf ,name.lt ,name.rf
+
+#define ATKLibraryTarget(name,objs,libs,syslibs)			@@\
+all:: Concat(lib,name.$(ATKLIBEXTM))   name.lt name.rf			@@\
+Concat(lib,name.$(ATKLIBEXTM)):  objs name.lt name.rf  libs                             @@\
+	$(BASEDIR)/etc/mkatklib $(ATKLIBFLAGS) name $(BASEDIR) "$(LINKPREFIX)" objs libs $(LOCALLIBLIBS) $(LOCALSTDLIBS) $(ATKLIBLIBS) $(ATKSTDLIBS) syslibs $(ATKLIBLDARGS) @@\
+RefsAndLibFileTarget(name,objs,libs,syslibs) @@\
+clean:: @@\
+	$(RM) Concat(lib,name.$(ATKLIBEXTM)) name.exp
+ 
+
+#define TestProgramTarget(program, objs, libs, syslibs)	@@\
+test:: Concat(program,$(EXEEXT))				@@\
+Concat(program,$(EXEEXT)): objs libs				@@\
+	$(RM) $@						@@\
+	$(LINKPREFIX) $(CC) $(CFLAGS) -o $@ objs libs syslibs $(LDFLAGS) $(EXEMATHLIB) @@\
+clean:: ; $(RM) Concat(program,$(EXEEXT))
+ 
+#define CPPTestProgramTarget(program, objs, libs, syslibs)	@@\
+test:: Concat(program,$(EXEEXT))				@@\
+Concat(program,$(EXEEXT)): objs libs				@@\
+	$(RM) $@						@@\
+	$(LINKPREFIX) $(CPPC) $(CPPFLAGS) $(CFLAGS) -o $@ objs libs syslibs $(CPPLDFLAGS) $(EXEMATHLIB)	@@\
+clean:: ; $(RM) Concat(program,$(EXEEXT))
+  
+  
+#define ProgramTarget(program, objs, libs, syslibs)		@@\
+all:: Concat(program,$(EXEEXT))				@@\
+Concat(program,$(EXEEXT)): objs libs				@@\
+	$(RM) $@						@@\
+	$(LINKPREFIX) $(CC)  $(CFLAGS) -o $@ objs libs syslibs $(LDFLAGS) $(EXEMATHLIB)	@@\
+clean:: ; $(RM) Concat(program,$(EXEEXT))
+  
+#define CPPProgramTarget(program, objs, libs, syslibs)		@@\
+all:: Concat(program,$(EXEEXT))				@@\
+Concat(program,$(EXEEXT)): objs libs				@@\
+	$(RM) $@						@@\
+	$(LINKPREFIX) $(CPPC) $(CPPFLAGS) $(CFLAGS) -o $@ objs libs syslibs $(CPPLDFLAGS) $(EXEMATHLIB)	@@\
+clean:: ; $(RM) Concat(program,$(EXEEXT))
+  
+#define CPPDynProgramTarget(program, objs, libs, syslibs)		@@\
+all:: Concat(program,$(EXEEXT))					@@\
+Concat(program,$(EXEEXT)): objs libs $(DYNEXELIBS)			@@\
+	$(RM) $@						@@\
+	$(AEXELINK) $(LINKPREFIX) $(CPPC) $(CPPDYNFLAGS) $(CFLAGS) -o $@ objs libs $(DYNEXELIBS) syslibs  $(DYNPROGLDFLAGS) $(EXEMATHLIB)	@@\
+clean:: ; $(RM) Concat(program,$(EXEEXT))
+  
+#define RunappWithLibrary(runappname,locallib,extraargs) @@\
+all:: Concat(runappname,$(EXEEXT)) @@\
+  forceit::	@@\
+	$(RM) forceit @@\
+	touch forceit @@\
+Concat(runappname,$(EXEEXT)): forceit locallib.rf locallib.lt Concat(lib,locallib.$(ATKLIBEXTM)) @@\
+	ExecuteFromBASEDIR(genstatl -i Imakefile.run -e runappname $(GENSTATL_EXTRA) extraargs -c @locallib) @@\
+	$(IMAKE_RUNAPPCMD) -DTOPDIR=$(TOP);make -f Makefile.run;touch forceit @@\
+  clean::  @@\
+	$(RM) Concat(runappname,$(EXEEXT)) Makefile.run Imakefile.run statl.o runapp.o statl.C runapp.C forceit
+  
+#define Runapp(runappname,extraargs)@@\
+all:: Concat(runappname,$(EXEEXT)) @@\
+  forceit::	@@\
+	$(RM) forceit @@\
+	touch forceit @@\
+Concat(runappname,$(EXEEXT)): forceit @@\
+	ExecuteFromBASEDIR(genstatl -i Imakefile.run -e runappname $(GENSTATL_EXTRA) extraargs) @@\
+	$(IMAKE_RUNAPPCMD) -DTOPDIR=$(TOP);make -f Makefile.run;touch forceit	@@\
+  clean::  @@\
+	$(RM) Concat(runappname,$(EXEEXT)) Makefile.run Imakefile.run statl.o runapp.o statl.C runapp.C forceit
+
+#define ATKTestProgram(programname, objs, libs, syslibs, extraargs)@@\
+test:: programname$(EXEEXT) @@\
+forceit::	@@\
+	$(RM) forceit @@\
+	touch forceit @@\
+programname$(EXEEXT): forceit objs libs @@\
+	ExecuteFromBASEDIR(genstatl -i Imakefile.run -e programname -m objs -a -E -L libs syslibs -c environ $(GENSTATL_EXTRA) extraargs) @@\
+	$(IMAKE_RUNAPPCMD) -DTOPDIR=$(TOP);$(MAKE) PassMakeVars() -f Makefile.run  ;touch forceit	@@\
+clean::  @@\
+	$(RM) programname$(EXEEXT) Makefile.run Imakefile.run statl.o runapp.o statl.C runapp.C forceit
+
+
+#define ATKLibrary(libname,objs,libs,syslibs,extraargs)@@\
+  all::  Concat(lib,libname.$(ATKLIBEXTM))  libname.rf libname.lt @@\
+  Concat(lib,libname.$(ATKLIBEXTM)): objs libname.rf libname.lt libs	@@\
+	ExecuteFromBASEDIR(genstatl -L libs syslibs -e libname -m objs -i Imakefile.lib $(GENSTATL_EXTRA) extraargs)	@@\
+	$(IMAKE_LIBCMD) -DTOPDIR=$(TOP);make -f Makefile.lib	@@\
+  RefsAndLibFileTarget(libname,objs,libs,syslibs) @@\
+  clean::	@@\
+	$(RM) Makefile.lib Imakefile.lib Concat(lib,libname.$(ATKLIBEXTM))
+	
+#ifndef OptionalATKLibrary
+#define OptionalATKLibrary(libname,objs,libs,syslibs,extraargs)
+/* the OptionalATKLibrary function has been absorbed into DynamicObject rules */
+/* @@\
+all::   $(Concat(lib,libname)) libname.rf libname.lt @@\
+$(Concat(libname,XXX)): objs libname.rf libname.lt libs	@@\
+	ExecuteFromBASEDIR(genstatl -L libs syslibs -e libname -m objs -i Imakefile.lib  $(GENSTATL_EXTRA) extraargs)	@@\
+	$(IMAKE_LIBCMD) -DTOPDIR=$(TOP);$(MAKE) PassMakeVars() -f Makefile.lib	@@\
+RefsAndLibFileTarget(libname,objs,libs,syslibs) @@\
+clean::	@@\
+	$(RM) Makefile.lib Imakefile.lib Concat(lib,libname.$(ATKLIBEXTM))
+*/
+#endif
+
+#define	CleanTarget(files)					@@\
+clean:: ; $(RM) files
+
+#define MkdirTarget(dirs)					@@\
+install.time:: makedirs						@@\
+	@echo -n ''						@@\
+install.doc:: makedirs						@@\
+	@echo -n ''						@@\
+makedirs::							@@\
+	@echo "Checking Destination Directories...."		@@\
+	@sh -c 'for i in dirs;  do  \				@@\
+		if [ -f $$i ]; then  \				@@\
+			echo Mkdir: $$i is a FILE; \		@@\
+			exit 1; \				@@\
+		elif [ ! -d $$i ]; then  \			@@\
+			echo Making directory $$i; \		@@\
+			mkdir $$i;\				@@\
+		fi; \						@@\
+	done; \							@@\
+	exit 0'
+
+#define	TagsTarget()						@@\
+tags::								@@\
+	$(TAGS) -w *.C *.H					@@\
+	$(TAGS) -xw *.C *.H > TAGS
+
+#define	DependTarget(dependencies)				@@\
+depend:: dependencies
+
+
+/*==================================================*\
+ * ATK compilation rules 
+\*==================================================*/ 
+
+#if SY_OS2
+PATHSEP=\;
+#else
+PATHSEP=:
+#endif
+
+/* For OS/2:  Note that   CLASSPATH will not work.  We may be able to set BEGINLIBPATH.
+ */
+#ifndef SetClassPath
+#define SetClassPath(x)  CLASSPATH=x; export CLASSPATH
+#endif
+
+#ifndef SetLibPath
+#define SetLibPath(x) true
+#endif
+
+#ifndef DestdirEnv
+#define DestdirEnv() SetLibPath($(DESTDIR)/lib$(PATHSEP)$(DESTDIR)/lib/atk); \ @@\
+	 SetClassPath($(FULLATKDLIBDIR)$(LOCALCLASSPATH))
+#endif
+
+#ifndef BasedirEnv
+#define BasedirEnv() SetLibPath($(BASEDIR)/lib$(PATHSEP)$(BASEDIR)/lib/atk); \ @@\
+	 SetClassPath($(BASEDIR)$(ATKDLIBDIRM)$(LOCALCLASSPATH))
+#endif
+
+#define ExecuteFromDESTDIR(cmd)	 (ANDREWDIR=$(DESTDIR); export ANDREWDIR; \		@@\
+	 DestdirEnv(); \ @@\
+	 PATH=$(DESTDIR)/bin$(PATHSEP)$${PATH}; export PATH; \		@@\
+	 cmd)
+
+#define ExecuteFromBASEDIR(cmd)	 (ANDREWDIR=$(BASEDIR); export ANDREWDIR; \		@@\
+	 BasedirEnv(); \	@@\
+	 PATH=$(BASEDIR)/bin$(PATHSEP)$${PATH}; export PATH; \		@@\
+	 cmd)
+
+/*************************************************** 
+ *	Export: 
+ *		FontRule() 
+ *		DeclareFont() 
+ *		NSDeclareFont() 
+ *************************************************** 
+ *	Variables: 
+ *		AIX 
+ *		FONTS_TO_BDF_ENV 
+ *		FONTS_TO_PCF_ENV 
+ *		NO_FONTS_ENV 
+ *		OPENWINDOWS_ENV 
+ *		SCOunix 
+ *		WM_ENV 
+ *		X11_ENV 
+ *		i386 
+ *************************************************** 
+ *	.SUFFIXES: .bdf .fb 
+ ***************************************************/ 
+
+#ifdef X11_ENV
+FONTEXT = snf
+#ifdef FONTS_TO_BDF_ENV
+FONTEXT = bdf
+#else 
+#if (defined(AIX) && ! defined(i386))		/* RT AIX 221 (RS_AIX31 ?) */ 
+FONTEXT = rtx 
+#else 
+#ifdef FONTS_TO_PCF_ENV 
+FONTEXT = pcf 
+#endif 
+#endif 
+#endif 
+#endif 
+
+#ifdef FONTS_TO_BDF_ENV 
+#define XFCRULE $(MV) /tmp/$*.bdf $*.bdf 
+#else 
+#ifdef SCOunix 
+#define XFCRULE $(XFC) /tmp/$*.bdf				@@\
+	$(MV) /tmp/$*.snf $*.snf				@@\
+	$(RM) /tmp/$*.bdf 
+#else 
+#define XFCRULE $(XFC) /tmp/$*.bdf >$*.$(FONTEXT)		@@\
+	$(RM) /tmp/$*.bdf 
+#endif 
+#endif 
+
+#ifdef OPENWINDOWS_ENV 
+#define OWFONTRULE						@@\
+.bdf.fb:							@@\
+	$(CONVERTFONT) -n `egrep '^FONT '  $*.bdf | \		@@\
+	sed -e 's/FONT //'` -o $* -f 200 $*.bdf 
+
+#define OWDECLAREFONT(fontname)					@@\
+all:: fontname.fb 
+
+#else 
+#define OWFONTRULE 
+#define OWDECLAREFONT(fontname) 
+#endif 
+
+#define XFontRule()						@@\
+.bdf.$(FONTEXT):						@@\
+	$(XFC) $*.bdf > $*.$(FONTEXT)				@@\
+	OWFONTRULE 
+
+#define WMFontRule() 
+
+#ifdef OPENWINDOWS_ENV 
+#define InstallOWFont(fontname)					@@\
+install.time:: fontname.fb					@@\
+	$(INSTALL) $(INSTINCFLAGS) fontname.fb \		@@\
+	$(DESTDIR)/FONTDEST_OPENWIN/fontname.fb 
+#else 
+#define InstallOWFont(fontname) 
+#endif 
+#define InstallXFont(fontname)					@@\
+install.time:: fontname.$(FONTEXT)				@@\
+	$(INSTALL) $(INSTINCFLAGS) fontname.$(FONTEXT) \	@@\
+	$(DESTDIR)/FONTDEST_X/fontname.$(FONTEXT)		@@\
+	InstallOWFont(fontname) 
+#define InstallWMFont(fontname)
+
+
+#ifdef NO_FONTS_ENV 
+#define FontRule() 
+#define DeclareFont() 
+#define NSDeclareFont() 
+#else 
+#ifdef X11_ENV	/* <============================================> */ 
+#define FontRule()				XFontRule() 
+#define InstallFont(fontname)		InstallXFont(fontname) 
+#define DeclareFont(fontname)					@@\
+all:: fontname.$(FONTEXT)					@@\
+	OWDECLAREFONT(fontname)					@@\
+InstallFont(fontname) 
+#define NSDeclareFont(fontname)		DeclareFont(fontname) 
+#endif		/* <============================================> */ 
+#endif	/* NO_FONTS_ENV */ 
+
+/* 
+ *================================================== 
+ * Installation rules 
+ *================================================== 
+ * Exported rules: 
+ *	InstallBasename() 
+ *	InstallByPattern() 
+ *	InstallClassFiles() 
+ *	InstallClassProgram() 
+ *	InstallDocs() 
+ *	InstallExampleClassFiles() 
+ *	InstallFile() 
+ *	InstallFileToFile() 
+ *	InstallFiles() 
+ *	InstallHardLink() 
+ *	InstallHelpAlias() 
+ *	InstallLibraries() 
+ *	InstallLibrary() 
+ *	InstallLink() 
+ *	InstallMultiple() 
+ *	InstallMultipleByExtension() 
+ *	InstallProgram() 
+ *	InstallPrograms() 
+ *	InstallProgramsRW() 
+ *	InstallRO() 
+ *================================================== 
+ */ 
+
+
+
+#define ForceInstallFiles(files, mode, dest)				@@\
+install.time::								@@\
+	@(case '$(MFLAGS)' in *[i]*) set +e;; esac; \			@@\
+	for i in files; do \						@@\
+		(set -x; $(INSTALL) mode $$i dest/$$i); done) 
+
+
+#define InstallFiles(files, mode, dest)					@@\
+install.time:: files							@@\
+	@(case '$(MFLAGS)' in *[i]*) set +e;; esac; \			@@\
+	for i in $?; do \						@@\
+		(set -x; $(INSTALL) mode $$i dest/$$i); done) 
+
+#define InstallDocFiles(files, mode, dest)					@@\
+install.doc:: files							@@\
+	@(case '$(MFLAGS)' in *[i]*) set +e;; esac; \			@@\
+	for i in $?; do \						@@\
+		(set -x; $(INSTALL) mode $$i dest/$$i); done) 
+
+#define InstallLibraries(libs, dest)					@@\
+install.time:: libs							@@\
+	@(case '$(MFLAGS)' in *[i]*) set +e;; esac; \			@@\
+	for i in $?; do \						@@\
+		(set -x; \						@@\
+		$(INSTALL) $(INSTLIBFLAGS) $$i dest/$$i ;\		@@\
+		RANLIBRULE(dest) 
+
+#define InstallFileToFile(file, mode, destfile)				@@\
+install.time:: file							@@\
+	$(INSTALL) mode file destfile 
+
+#define InstallFWDE(files, mode, dest, ex1, ex2)			@@\
+install.time:: files							@@\
+	@(case '$(MFLAGS)' in *[i]*) set +e;; esac; \			@@\
+	a=`echo ex1 | tr -d "	"`; \					@@\
+	b=`echo ex2 | tr -d "	"`; \					@@\
+	for i in $?; do \						@@\
+		(c=`basename $$i .$$a`.$$b; \				@@\
+		set -x; \						@@\
+		$(INSTALL) mode $$c dest/$$c ) done ) 
+
+#define InstallBasename(files, mode, dest, ex1, ex2)			@@\
+install.time:: files							@@\
+	@(case '$(MFLAGS)' in *[i]*) set +e;; esac; \			@@\
+	a=`echo ex1 | tr -d "	"`; \					@@\
+	b=`echo ex2 | tr -d "	"`; \					@@\
+	for i in $?; do \						@@\
+		(c=`basename $$i .$$a`.$$b; \				@@\
+		set -x; \						@@\
+		$(INSTALL) mode $$i dest/$$c ) done) 
+
+#ifdef SCOunix 
+#define InstallCshScript(file, dest)				        @@\
+install.time:: file						        @@\
+	$(RM) /tmp/,file					        @@\
+	/bin/echo \: "\n/bin/csh -f -s csh \$$* << '==EOF=='\nshift" >
+/tmp/,file	@@\
+	cat file >> /tmp/,file						@@\
+	/bin/echo "==EOF==" >> /tmp/,file				@@\
+	$(INSTALL) $(INSTAPROGFLAGS) /tmp/,file dest			@@\
+	$(RM) /tmp/,file 
+
+#define InstallShScript(file, dest)					@@\
+install.time:: file							@@\
+	$(RM) /tmp/file							@@\
+	/bin/echo \: > /tmp/,file					@@\
+	cat file >> /tmp/,file						@@\
+	$(INSTALL) $(INSTAPROGFLAGS) /tmp/,file dest			@@\
+	$(RM) /tmp/,file 
+#else /* SCOunix */ 
+#define InstallShScript(file, dest)					@@\
+InstallFileToFile(file, $(INSTPROGFLAGS), dest) 
+
+#define InstallCshScript(file, dest)					@@\
+InstallFileToFile(file, $(INSTPROGFLAGS), dest) 
+#endif /* SCOunix */ 
+
+
+
+#define InstallClassFiles(Hlist)						@@\
+InstallFiles(Hlist, $(INSTINCFLAGS), $(DESTDIR)/include/atk) 
+
+#define InstallExampleClassFiles(Hlist, dest)			@@\
+InstallFiles(Hlist Imakefile, $(INSTINCFLAGS), dest)			@@\
+InstallFWDE(Hlist, $(INSTINCFLAGS), dest,H,C)				@@\
+
+#define InstallPrograms(files, dest)					@@\
+InstallFiles(files, $(INSTPROGFLAGS), dest) 
+
+#define InstallRO(files, dest)						@@\
+InstallFiles(files, $(INSTINCFLAGS), dest) 
+
+#define InstallProgramsRW(files, dest)					@@\
+InstallFiles(files, $(INSTPROGRWFLAGS), dest) 
+
+
+#define	InstallHardLink(file, link)					@@\
+install.time:: file							@@\
+	$(RM) link							@@\
+	ln file link 
+
+#define InstallHelpAlias(file, aliases)					@@\
+do.alias::								@@\
+	@(case '$(MFLAGS)' in *[i]*) set +e;; esac; \			@@\
+	PWD=`pwd`; for i in aliases; do \				@@\
+	(set -x; echo "$$i	"Stringize(file)"	!$$PWD" >> ,help.alias) done) 
+
+#ifndef InstallRunappAPP
+#define InstallRunappAPP(app) InstallLink(runapp, ${DESTDIR}/bin/app)
+#endif
+
+#define	InstallLink(file, link)						@@\
+install.time::								@@\
+	$(RM) link							@@\
+	$(LN) file link 
+
+#define InstallFile(file, flags, dest)					@@\
+InstallFiles(file, flags, dest) 
+
+#define InstallLibrary(file, dest)					@@\
+InstallLibraries(file, dest) 
+
+#ifndef InstallATKExportsTarget
+#define InstallATKExportsTarget(target,name,dest) 
+#endif
+
+#ifndef InstallATKLibrary
+#define InstallATKLibrary(name, dest)			@@\
+InstallLibraries(Concat(lib,name.$(ATKLIBEXTM)), dest)				@@\
+InstallFiles(name.lt name.rf, $(INSTLIBFLAGS) , dest)  @@\
+InstallATKExportsTarget(install.time,name,dest)
+#endif
+
+#ifndef InstallOptionalATKLibrary
+#define InstallOptionalATKLibrary(name, dest)	
+/* incorporated in InstallDynamic... rules */
+/*
+	@@\
+$(Concat(OptionalLib,name)):: $(Concat(lib,name))  @@\
+	$(INSTALL) $(INSTLIBFLAGS) Concat(lib,name.$(ATKLIBEXTM)) dest/Concat(lib,name.$(ATKLIBEXTM))				@@\
+$(Concat(OptionalLib,name)):: name.rf	@@\
+	$(INSTALL) $(INSTLIBFLAGS) name.rf dest/name.rf @@\
+$(Concat(OptionalLib,name)):: name.lt  @@\
+	$(INSTALL) $(INSTLIBFLAGS) name.lt dest/name.lt @@\
+InstallATKExportsTarget($(Concat(OptionalLib,name)),name,dest)
+*/
+#endif
+
+#define InstallMultiple(list, flags, dest)				@@\
+InstallFiles(list, flags, dest) 
+
+#define InstallByPattern(pattern, flags, dest)				@@\
+InstallFiles(pattern, flags, dest) 
+
+#define InstallDocs(files, dest)					@@\
+InstallDocFiles(files, $(INSTINCFLAGS), dest) 
+
+#define InstallProgram(file, dest)					@@\
+InstallPrograms(Concat(file,$(EXEEXT)), dest) 
+
+#define InstallMultipleByExtension(extension, flags, dest)		@@\
+InstallFiles(*.extension, flags, dest) 
+
+
+/* ***************************************************************** *\
+ * Internal (to template) rules 
+\* ***************************************************************** */ 
+
+#ifdef HAVE_DYNAMIC_LOADING
+#define DynamicObjectCleanTarget() @@\
+clean::	@@\
+	$(RM) *.$(ATKDYNEXTM)
+#else
+#define DynamicObjectCleanTarget()
+#define DynamicObjectTidyTarget()
+#endif
+
+#define	GenericCleanTarget()					@@\
+tidy::								@@\
+	$(RM) "#"* ,* *~ *.CKP *.BAK *.bas errs core		@@\
+	$(RM) *.ln *.o  tags TAGS make.log	@@\
+clean::								@@\
+	$(RM)  *.a *.$(ATKLIBEXTM) *.snf *.pcf *.fb	@@\
+	$(RM) *.exp install.time install.doc @@\
+	DynamicObjectCleanTarget()
+
+#define	MakefileTarget()					@@\
+Makefile:: Imakefile \						@@\
+	$(IRULESRC)/andyenv.h \					@@\
+	$(IRULESRC)/imake.tmpl \				@@\
+	$(IRULESRC)/andrew.rls \				@@\
+	$(IRULESRC)/allsys.h \					@@\
+	$(IRULESRC)/allsys.mcr \				@@\
+	$(IRULESRC)/site.rls \					@@\
+	$(IRULESRC)/site.h \					@@\
+	$(IRULESRC)/site.mcr \					@@\
+	$(IRULESRC)/$(MACROFILE) \				@@\
+	$(IRULESRC)/$(SYSTEM_H_FILE)				@@\
+		$(IMAKE_CMD) -DTOPDIR=$(TOP) ; \			@@\
+		touch .depends; \				@@\
+		cat .depends >>Makefile 
+
+#ifndef FAILEXIT
+#define FAILEXIT true
+#endif
+
+#define SubdirTarget(dirs, mktag, string)				@@\
+mktag::								@@\
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \		@@\
+	for i in dirs; do \					@@\
+	    (cd $$i; echo string "(`pwd`)"; \			@@\
+		$(MAKE) PassMakeVars() DESTDIR=$(DESTDIR) mktag || exit 1 ) || exit 1; done)
+
+/************************************************************* 
+NOTE: The following uses of SubdirTarget() have no spaces between the 
+arguments because the HP version of imake does some weird expansion 
+of the space into a tab, which causes the target tag to be tabbed 
+and, thus, unrecognized by make. 
+**************************************************************/ 
+
+#define MakeSubdirs(dirs)					@@\
+SubdirTarget(dirs,All,"making") 
+
+#define DependMakeSubdirs(dirs)			@@\
+SubdirTarget(dirs,dependAll,"depend/making") 
+
+#define InstallSubdirs(dirs)					@@\
+SubdirTarget(dirs,Install,"installing") 
+
+#define InstallDocSubdirs(dirs)				@@\
+SubdirTarget(dirs,Doc,"installing docs") 
+
+#define InstallAliasSubdirs(dirs)				@@\
+SubdirTarget(dirs,Aliases,"installing aliases") 
+
+#define DependInstallSubdirs(dirs)			@@\
+SubdirTarget(dirs,dependInstall,"building (dependInstall)") 
+
+#define CleanSubdirs(dirs)					@@\
+SubdirTarget(dirs,Clean,"cleaning") 
+
+#define TidySubdirs(dirs)					@@\
+SubdirTarget(dirs,Tidy,"tidying") 
+
+#define TagSubdirs(dirs)					@@\
+tags::								@@\
+	@case '$(MFLAGS)' in *[ik]*) set +e;; esac; \		@@\
+	for i in dirs; do \					@@\
+	    (cd $$i; echo "tagging (`pwd`)"; \			@@\
+		$(MAKE) PassMakeVars() TAGS='$(TAGS)' tags; FAILEXIT); FAILEXIT;\		@@\
+	done 
+
+/* Andrew8 behavior
+	`make World' at any level will make Makefiles in subdirs and
+		then depend and install in self and World in subdirs
+	`make Makefiles' will make Makefile and then make subMakefiles
+	`make subMakefiles' will build a Makefile in each subdirectory
+		and then make subMakefiles in each subdirectory
+*/
+
+#define WorldInstallSubdirs(dirs)						@@\
+World:: 											@@\
+	@case '$(MFLAGS)' in *[ik]*) set +e;; esac; \			@@\
+	for i in dirs; do \									@@\
+		echo "Making sub Makefiles (`pwd`/$$i)"; \			@@\
+		$(MAKE) PassMakeVars() subdirMakefile  \		@@\
+			NEWTOP=../  MAKE_SUBDIR=$$i || exit 1; \	@@\
+	done 											@@\
+SubdirTarget(dirs,World,"building (World)") 				@@\
+												@@\
+Makefiles:: subMakefiles								@@\
+subMakefiles::										@@\
+	@case '$(MFLAGS)' in *[ik]*) set +e;; esac; \			@@\
+	for i in dirs; do \									@@\
+		echo "Making Makefiles (`pwd`/$$i)"; \			@@\
+		$(MAKE) PassMakeVars() subdirMakefile  \		@@\
+			NEWTOP=../  MAKE_SUBDIR=$$i || exit 1; \	@@\
+		(cd $$i; $(MAKE) PassMakeVars() \				@@\
+						subMakefiles || exit 3); \		@@\
+	done 											@@\
+subdirMakefile:										@@\
+	cd $(MAKE_SUBDIR); \							@@\
+	$(DOTDOTIMAKE_CMD) -DTOPDIR=../$(TOP) ; \	@@\
+	touch .depends;  \								@@\
+	cat .depends >>Makefile
+
+#define MakefileSubdirs(dirs)
+#define SubMakefileSubdirs(dirs)
+
+
+/* special rule for top-level Imakefile
+	In each subdirectory it does dependInstall and then Clean
+*/
+#define Cramped()						@@\
+dependInstallCramped:: depend					@@\
+	make DESTDIR=$(DESTDIR) install				@@\
+	echo building ${SUBDIRS}				@@\
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \		@@\
+	for i in $(SUBDIRS); do \				@@\
+	(cd $$i; echo "building (dependInstall)" "(`pwd`)"; \	@@\
+	$(MAKE) PassMakeVars() DESTDIR=$(DESTDIR) dependInstall Clean;FAILEXIT ); FAILEXIT; done)
+
+#ifdef SITE_ENV
+#include <site.rls> 
+#endif /* SITE_ENV */ 

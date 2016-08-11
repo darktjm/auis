@@ -1,0 +1,336 @@
+
+					9 February, 1995
+
+	The "Gofig" PostScript for Printing Go Diagrams
+
+
+Fred Hansen				Copyright 1995, Carnegie Mellon University
+
+
+The Postscript  below includes definition of the "gofig" dictionary.  This document describes teh capabilities of that dictionary.  In practice, C++ code generates the other lines of PostScript needed to
+	Establish the coordinate system.
+	Draw the coordinates (1...19 and A...T), if desired.
+	Draw grid lines and edge lines.
+	Call the hoshi and stone functions listed below, as appropriate.
+
+These are the functions provided:
+
+	x y wst		Draw a white stone
+	x y bst		Draw a black stone
+	x y note wstn	White stone with a note
+	x y note bstn	Black ditto
+	x y note spotn	Empty spot with a note
+	x y hoshi	Draw a hoshi point
+
+Where 'x' and 'y' are coordinates of a board intersection.  They range from 0 to n-1, where n is the number of lines.  (There may be different numbers of lines in each direction.  The routines don't know and don't care.)  The origin is at the upper left, unlike PostScript where it is at the lower left.
+
+And where 'note' is a string.  As usual in PostScript, strings are delimited at start and end with '(' and ')' respectively.  Some strings are treated specially:
+
+	(%)	draw a diagonal cross
+	(+)	draw an orthogonal cross
+	(#)	draw a square
+	(@)	draw a circle 
+	(^)	draw a triangle
+	(-)	draw a dash
+
+The gofig dictionary defines a number of parameters that could be adjusted.  Here are their definitions in PostScript notation.  The units of parameters are given as D for dimension and C for color.  All dimensions are specified with 1.0 meaning the distance between rows or columns.  (Since the rows are wider apart, the stones are actually ellipses.)
+
+% basic parameters
+/Black {0 0 0 setrgbcolor} def		% color for Black stones: C
+/White {1 1 1 setrgbcolor} def		% color for white stones: C
+/BoardColor {1 1 1 setrgbcolor} def  	% color for board: C
+%/BoardColor {.94 .90 .55 setrgbcolor} def   % for color printer (burlywood1): C
+/linethick .04 def				% linethickness: D
+/noteaura .15 def				% erase lines this close to letters: D
+/letht .53 def					% height of letters and digits: D
+/notew .84 def					% width of multidigit numbers: D
+/bsradius  .5 def				% black stone radius: D
+
+% Parameters that are currently derived, but needn't be
+/bscolor /Black load def			% black stone color: C
+/bsnotecolor  /White load def			% color of notes on black stones: C
+/wscolor /White load def			% white stone color: C
+/wsedgecolor  /Black load def		% color of white stone edge: C
+/wsnotecolor  /Black load def			% color of notes on white stones: C
+/wsthick  linethick 5 mul 4 div def		% white stone edge thickness: D
+/wsradius bsradius wsthick 2 div sub def   	%white stone radius: D
+/symradius wsradius .7 mul def		% radius of symbols: D
+/linecolor /Black load def			% color of lines on board: C
+/edgethick linethick 1.5 mul def		% thickness of edge lines: D
+/hoshicolor /linecolor load def			% color of hoshi dot: C
+/hoshiradius  linethick 3 mul def		% radius of hoshi dot: D
+/boardnotecolor /Black load def		% color of notes on empty: C
+/notethick linethick 2 mul def			% thickness of lines in symbols: D
+
+The font used for notes on stones is given just before the definition of onedigitfont.
+
+
+==========================================
+
+/godict 60 dict def     % currently using 55
+godict begin
+
+% basic parameters
+/Black {0 0 0 setrgbcolor} def
+/White {1 1 1 setrgbcolor} def
+/BoardColor {1 1 1 setrgbcolor} def  
+%/BoardColor {.94 .90 .55 setrgbcolor} def    % for color printer (burlywood1)
+/linethick .04 def	% linethickness
+
+%derived parameters
+/bscolor /Black load def			% black stone color
+/bsnotecolor  /White load def			% color of notes on black stones
+/bsradius  .5 def				% black stone radius
+
+/wscolor /White load def			% white stone color
+/wsedgecolor  /Black load def		% color of whiteestone edge
+/wsnotecolor  /Black load def			% color of notes on white stones
+/wsthick  linethick 5 mul 4 div def		% white stone edge thickness
+/wsradius bsradius wsthick 2 div sub def   	%white stone radius
+
+/linecolor /Black load def			% color of lines on board
+% /linethick   defined above
+/edgethick linethick 1.5 mul def		% thickness of edge lines
+
+/hoshicolor /linecolor load def			% color of hoshi dot
+/hoshiradius  linethick 3 mul def		% radius of hoshi dot
+
+/boardnotecolor /Black load def
+/notethick linethick 2 mul def			% thickness of lines in symbols
+/noteaura .15 def				% erase lines closer to letters than this
+/symradius wsradius .7 mul def		% radius of symbols
+/letht .53 def					% height of letters and digits
+/notew .84 def					% width of multidigit numbers
+/corner  2 sqrt 2 div symradius mul def	% x&y coords of end of diagonal cross
+/trix 3 sqrt 2 div symradius mul def		% x for triangle bottom corners
+
+/strbounds {		% start with string on stack.  leave  llx urx ury lly
+	gsave 
+	newpath 0 0 moveto 
+	false charpath flattenpath pathbbox  % llx lly urx ury
+	3 -1 roll				% llx urx ury lly
+	grestore
+} def
+
+% define fonts for notes in stones	
+	/Helvetica  findfont  setfont
+% onedigitfont is scaled so height of (8) is letht
+	(8) strbounds sub  /dy exch def   pop pop
+ /onedigitfont
+	currentfont  letht dy div dup neg [ 1 0 0 1 0 0 ] scale
+	makefont  def
+% twodigitfont is same height but scaled to fit (88) in notew width
+	(88) strbounds   pop pop    exch sub  /dx exch def
+/twodigitfont  onedigitfont  [ notew dx div   0 0  1 0 0 ]  makefont  def
+	(111) strbounds  pop pop    exch sub  /dx exch def
+/threedigitfont   onedigitfont  [ notew dx div   0 0  1 0 0 ]  makefont  def
+
+(%) {			% draw a diagonal cross
+	moveto  corner neg dup rmoveto 
+	corner 2 mul 
+	dup dup rlineto 
+	dup neg  0 rmoveto 
+	dup neg rlineto
+} def
+
+(+) {			% draw an orthogonal cross
+	moveto  symradius neg 0 rmoveto  symradius 2 mul  0 rlineto
+	symradius neg dup rmoveto 0 symradius 2 mul rlineto
+	
+} def
+
+(#) {			% draw a square
+	moveto  corner dup rmoveto
+	corner 2 mul   
+	dup neg 0 rlineto  dup 0 exch neg rlineto 
+	0 rlineto closepath
+} def
+
+(@) {			% draw a circle 
+	symradius notethick 2 div sub    0 360 arc
+} def
+
+(^) {			% draw a triangle
+	moveto  0  symradius neg  rmoveto  
+	trix  symradius 1.5 mul  rlineto 
+	trix -2 mul  0  rlineto 
+	closepath
+} def
+
+(-) {			% draw a dash
+	moveto  symradius neg 0  rmoveto  
+	symradius 2 mul  0  rlineto 
+} def
+
+/dxdy {		% compute dx and dy to center the string on stack
+	strbounds
+	add 2 div neg /dy exch def
+	add 2 div neg /dx exch def
+} def
+
+/showcentered {  % shows its arg string centered at current point 
+	dup dxdy dx dy rmoveto show		
+} def
+
+/noteparams {    % compute offset to center string on a point
+			% stack : n       
+			% results: set sproc, dx and dy;  choose and set font
+	/n exch def
+	godict n known {
+		% special symbol
+		/proc godict n get def
+	}{
+		% text : get offsets from pathbbox
+		/proc 0 def
+		[ onedigitfont onedigitfont twodigitfont threedigitfont ]
+			n length {get} stopped {onedigitfont} if setfont
+		n dxdy
+	} ifelse
+} def
+
+
+/note {		% draw annotation    stack: x y note
+		% notes are:  integer  letter  @  +  %  #  ^
+		% color must have been set
+	/n exch def 
+	newpath		% at center of spot
+	/proc load  0 ne {
+		% special symbol
+		0 setlinecap
+		notethick setlinewidth
+		proc  stroke     % perform function for special symbol
+	}{
+		% text
+		 moveto  dx dy rmoveto
+		n show
+	} ifelse
+} def
+
+/wst {		% white stone     stack: x y
+	2 copy
+	wscolor
+	newpath wsradius 0 360 arc fill
+	wsthick setlinewidth
+	wsedgecolor
+	newpath wsradius 0 360 arc stroke
+} def
+
+/bst {		% black stone    stack: x y
+	bscolor
+	newpath bsradius 0 360 arc fill
+} def
+
+/wstn {	% white stone with note    stack: x y note
+	3 copy noteparams
+	wst
+	wsnotecolor
+	note
+} def
+
+/bstn {		% black stone with note    stack: x y note
+	3 copy  noteparams
+	bst
+	bsnotecolor
+	note
+} def
+
+/hoshi {	% draw hoshi dot    stack: x y
+	hoshicolor
+	newpath hoshiradius 0 360 arc fill
+} def
+
+
+/spotn {	% note on empty spot   stack: x y note
+		% stroke with wide stroke and then scale to size to fill
+	/n exch def
+	2 copy		% x y  x y 
+	% figure out what part of grid to hide
+	n noteparams
+	gsave
+	newpath  translate   0 0
+	/proc load 0 ne {
+		proc  strokepath   % outline the symbol
+	}{
+		moveto dx dy rmoveto
+		n false charpath
+	} ifelse
+	noteaura setlinewidth	
+	1 setlinejoin
+	1 setlinecap
+	currentflat 3 mul setflat
+	BoardColor  
+	stroke		% stroke line edges with BoardColor
+	0 0 noteaura 2 mul 0 360 arc  	fill    % and fill an interior circle
+	grestore
+
+	boardnotecolor  n  note
+} def
+
+end	% stop defining godict
+
+/godict godict def
+
+72 72 translate
+
+
+godict begin
+
+9  		% height in rows
+20   		% printcolwidth
+dup 31 mul 29 div neg % computed row spacing
+dtransform round exch round exch idtransform scale
+0 exch neg translate
+
+% indices
+	/Times-Roman  findfont [.6 0 0 -.6 0 0 ] makefont setfont
+	/xxoff (19) stringwidth pop .7 mul .6 add def
+	/yxoff newpath  0 0 moveto
+		(X) false charpath flattenpath pathbbox  % llx lly urx ury
+		exch pop exch sub .7 mul exch pop  .6 add def 
+	xxoff 2 mul yxoff 2 mul translate 
+	/inxlet (ABCDEFGHJKLMNOPQRSTUVWXYZ) def
+	0 1 8 { %draw top/bottom indices 		 %% dobj->width - 1
+		dup dup  newpath 
+		inxlet exch 1 getinterval /let exch def
+		yxoff neg moveto let showcentered
+		yxoff 8 add moveto let showcentered  %% dobj->height - 1
+	} for
+	0 1 8 { % draw side indices			 %% dobj->height - 1
+		dup dup newpath
+		9 exch sub inxlet cvs /let exch def
+		xxoff neg exch moveto let showcentered
+		xxoff 8 add exch moveto let showcentered  %% dobj->width - 1
+	} for
+
+%draw non-edge grid lines
+2 setlinecap  linecolor  linethick  setlinewidth
+1 1 7  {  %draw horizontals
+	dup newpath 0 exch moveto 8.5 exch lineto stroke  % or -.5 ... .5 
+} for
+1 1 8  {  %draw verticals
+	dup newpath 0 moveto 8 lineto stroke  % or -.5 ... .5
+} for
+
+% do edges
+edgethick setlinewidth
+newpath 0 0 moveto 8.5 0 lineto  stroke % top
+newpath 0 0 moveto 0 8 lineto  stroke % left edge
+newpath 0 8 moveto 8.5 8 lineto stroke  %bottom
+
+% hoshi  (at an artificial postion)
+1 5 hoshi
+
+% stones
+0 1 (^) spotn 2 1 (#) spotn 1 0 (@) spotn 3 0 (%) spotn 8 1 (+) spotn
+4 0 bst  5 0 (^) wstn   6 0 (1) bstn 7 0 wst
+2 1 bst   3 1 wst  4 1 bst 5 1 (a) spotn 6 1 (w) spotn 7 1 (h) spotn
+1 2 bst  2 2 wst 3 2 wst  4 2 bst  5 2 wst  7 2 wst
+0 3 bst  1 3 (@) bstn  2 3 (#) bstn  3 3 (%) bstn  4 3 (+) bstn   5 3 wst 6 3 wst 7 3 bst
+0 4 (@) wstn 1 4 (#) wstn 2 4 (%) wstn 3 4 bst 5 4 (29) bstn 
+		6 4 (37) wstn 7 4 (100) wstn 8 4 wst 
+2 5 wst 3 5 bst 4 5 bst 5 5 bst 6 5 bst 7 5 bst 8 5 bst
+0 6 (a) bstn  1 6 (w) bstn 2 6 (f) wstn 3 6 (g) bstn 4 6 wst 5 6 wst  6 6 wst  7 6 wst  8 6 wst 
+0 7 bst 1 7 bst 2 7 (218) wstn  3 7 bst 4 7 wst 5 7 (B) spotn  6 7 bst 7 7 (C) spotn 8 7 wst
+2 8 wst 3 8 bst 4 8 wst 5 8 (A) spotn 6 8 bst 7 8 bst 8 8 (D) spotn
+
+end	% stop using godict

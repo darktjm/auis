@@ -1,0 +1,23 @@
+/* ********************************************************************** *\
+ *  Copyright (c) AT&T Bell Laboratories 1990  - All Rights Reserved      *
+\* ********************************************************************** */
+
+NormalATKRule()
+NormalObjectRule()
+NormalHelpRule()
+DependTarget()
+
+OBJS = alink.o alinkview.o
+
+IHFILES =alink.H \
+	alinkview.H
+
+LIBS =  ${UTILLIB}
+DynamicMultiObject(alink,alinkview,$(OBJS),$(LIBS),,)
+InstallDynamicObject(alink,alinkview,$(FULLATKDLIBDIR))
+
+OptionalATKLibrary(alink, ${OBJS}, ${LIBS},)
+InstallOptionalATKLibrary(alink, ${DESTDIR}/lib/atk)
+InstallClassFiles($(IHFILES))
+InstallDocs(alink.help, ${DESTDIR}/help)
+InstallDocs(alink.pr, ${DESTDIR}/lib/prs)

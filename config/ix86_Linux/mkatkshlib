@@ -1,0 +1,22 @@
+#!/bin/csh -f
+set name = $1
+shift
+set basedir = $1
+shift
+set linkprefix = "$1"
+shift
+echo "making lib"$name.so
+rm -f lib$name.so shr.o
+set list = ()
+foreach ename ($argv:q)
+	if ("$ename:e" == "o") then 
+		set list = ($ename $list)
+	endif
+end
+echo "Creating shared object."
+$linkprefix gcc -shared -o lib$name.so $*
+if ($status != 0) then
+	echo Could not create shared library: lib$name.so
+	exit -1
+endif
+exit 0

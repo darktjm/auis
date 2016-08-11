@@ -1,0 +1,9 @@
+
+
+DEVDOCS = ATKinC++.ez AndrewCoding.ez AndrewProgramming.ez \
+	BuildAndTest.ez C++Conversion.ez CodeAppearance.ez \
+	Porting.ez protosys.h
+ADMINDOCS = INSTALL.ez ImakeMacros.ez ImakeVars.ez
+
+InstallDocs(${DEVDOCS}, ${DESTDIR}/doc/DEVELOPER)
+InstallDocs(${ADMINDOCS}, ${DESTDIR}/doc/ADMINISTRATOR)

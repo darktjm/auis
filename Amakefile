@@ -1,0 +1,118 @@
+/* ***********************************************************************
+Copyright IBM Corporation 1988, 1991 - All Rights Reserved
+Copyright Carnegie Mellon University 1991, 1996  - All Rights Reserved
+*********************************************************************** */
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+
+#define	IHaveSubdirs
+
+#ifdef	AMS_ENV
+AMS = ams atkams
+#endif /* AMS_ENV */
+
+#ifdef X11_ENV
+MKFONTDIR = xmkfontd
+#endif /* X11_ENV */
+
+#ifdef CONTRIB_ENV
+CONTRIB = contrib
+#endif /* CONTRIB_ENV */
+
+#ifdef MK_HELP
+HELP = helpindex
+#endif /* MK_HELP */
+
+#ifdef SITE_ENV
+SITE = site
+#endif /* SITE_ENV */
+
+#ifdef WWW_ENV
+WWW = WWW
+#endif
+
+#if defined(MEGARUNAPP_ENV)
+MEGA = megarunapp
+#endif
+
+DIRS = $(DESTDIR)  \
+	$(DESTDIR)/bin \
+	$(DESTDIR)/config \
+	$(DESTDIR)/etc \
+	$(DESTDIR)/include \
+	$(DESTDIR)/lib \
+	$(DESTDIR)/lib/prs \
+	$(DESTDIR)/doc \
+	$(DESTDIR)/doc/ADMINISTRATOR \
+	$(DESTDIR)/doc/DEVELOPER \
+	$(DESTDIR)/doc/PROGRAMMER \
+	$(DESTDIR)/doc/MAIL \
+	$(DESTDIR)/help 
+
+SUBDIRS = ossupport inst config overhead atk $(AMS) $(WWW) $(CONTRIB) $(SITE) $(MEGA) $(MKFONTDIR) $(HELP) doc
+
+depend::
+	@echo 'Checking that BASEDIR is not the location of the source files.'
+	@sh -c '(if [ "$(BASEDIR)" = "`pwd`" ]; then \
+		echo "%% BASEDIR must be different from the location of the source files."; \
+		echo "%% Currently, they are both $(BASEDIR) ."; \
+		echo "%% This must be fixed before proceeding with installation."; \
+		echo "%% (You may wish to move the source files to $(BASEDIR)/src .)"; \
+		exit 1; \
+	fi; exit 0)'
+	@echo 'Checking that DEFAULT_ANDREWDIR_ENV is defined.'
+#ifndef DEFAULT_ANDREWDIR_ENV
+	@sh -c '(echo "%% DEFAULT_ANDREWDIR_ENV must be"; \
+		echo "%% #defined to the execution directory;  it is not defined."; \
+		echo "%% This must be fixed before proceeding with installation."; \
+		exit 1)'
+#endif
+
+World::
+	@echo
+	@echo AUIS_SHORT_COPYRIGHT
+	@cat <DISCLAIMER
+	date
+	/* the actual build happens with the builtin rule for "World" */
+
+/* define dependInstallCramped which does dependInstall 
+	and then Clean to each subdir */
+Cramped()
+
+MkdirTarget($(DIRS))
+
+#ifdef X11_ENV
+DEST_X = $(DESTDIR)/FONTDEST_X
+MkdirTarget($(DEST_X))
+#endif
+
+#ifdef OPENWINDOWS_ENV
+DEST_OPENWIN = $(DESTDIR)/FONTDEST_OPENWIN
+MkdirTarget($(DEST_OPENWIN))
+#endif
+
+ IMAKE_CMD = $(IMAKE) -f Amakefile -Timake.tmpl -I. -I$(IRULESRC) -s Makefile
+Makefile::Amakefile
+	$(IMAKE_CMD) -DTOPDIR=$(TOP) ; \
+	touch .depends; \
+	cat .depends >>Makefile

@@ -1,0 +1,25 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+OBJS = lt.o ltapp.o ltv.o sched.o schedapp.o schedv.o
+HFILES = lt.H ltapp.H ltv.H sched.H schedapp.H schedv.H
+	
+
+NormalObjectRule()
+NormalATKRule()
+DependTarget()
+
+DynamicMultiObject(lt,ltapp ltv,lt.o ltapp.o ltv.o,,,)
+InstallDynamicObject(lt, ltapp ltv, $(FULLATKDLIBDIR))
+
+DynamicMultiObject(sched,schedapp schedv,sched.o schedapp.o schedv.o,,,)
+InstallDynamicObject(sched, schedapp schedv, $(FULLATKDLIBDIR))
+
+OptionalATKLibrary(ziputil, $(OBJS), ,,)
+InstallOptionalATKLibrary(ziputil, $(DESTDIR)/lib/atk)
+
+InstallClassFiles($(HFILES))
+InstallLink(runapp, ${DESTDIR}/bin/sched)
+InstallLink(runapp, ${DESTDIR}/bin/lt)
+InstallFile(itcCR.scd,${INSTINCFLAGS},${DESTDIR}/lib/zip)

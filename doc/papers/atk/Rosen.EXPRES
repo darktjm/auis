@@ -1,0 +1,940 @@
+\begindata{text,538387828}
+\textdsversion{12}
+\template{default}
+\center{\bold{\bigger{Some Comments on Using ODA
+
+}}
+Jonathan Rosenberg(*)
+
+Mark Sherman(**)
+
+Ann Marks(**)
+
+Jaap Akkerhuis(***)
+
+}
+(*) Bell Communications Research, 445 South  Street, Room 2D-292, 
+Morristown, NJ 07962-1910
+
+(**) Information Technology Center, Carnegie Mellon University, 4910 Forbes 
+Ave., Pittsburgh, PA 15213
+
+(***) Mt. Xinu, Suite 312, 2560 Ninth Street, Berkeley, CA 94710
+
+
+\quotation{This excerpt is from an upcoming book, "Multi-media Document 
+Translation: ODA and the EXPRES Project", published by Springer-Verlag, 
+Inc. Used with permission.
+
+
+This work was performed while the authors were at Carnegie Mellon 
+University. The work was supported in part by a joint project of Carnegie 
+Mellon University and the IBM Corporation and in part by the National 
+Science Foundation under contract ASC-8617695. The views and conclusions 
+contained in this document are those of the authors and should not be 
+interpreted as representing the official policies of the IBM Corporation, 
+the National Science Foundation, Carnegie Mellon University, Bell 
+Communications Research or Mt. Xinu.
+
+}
+\bold{Keywords}: ODA, Multimedia document interchange, Format translation
+
+
+\bold{Biographies}:
+
+
+Jonathan Rosenberg is a District Manager in the Multimedia Communications 
+Research Division at Bellcore (Bell Communications Research). He received 
+his BS degree from the University of Maryland in 1977 and his PhD in 
+Computer Science from Carnegie Mellon University in 1983. His research 
+interests center around multimedia systems in general, and particularly 
+multimedia document architectures.
+
+
+Mark Sherman is a Research Computer Scientist in the Information Technology 
+Center at Carnegie Mellon University. He received his SB degrees from the 
+Massachusetts Institute of Technology in 1977 and his PhD in Computer 
+Science from Carnegie Mellon University in 1983. His primary interest is 
+the application of graphical user interfaces to new application domains. \
+
+
+
+Ann Marks is a System Scientist in the Information Technology Center at 
+Carnegie Mellon University. She received her BS (1976), MEng (1977) and PhD 
+(1980) degrees in Electrical Engineering from Cornell University. Her 
+research interests are focused on the distribution  of continuous-time 
+media in distributed computer systems.
+
+
+Jaap Akkerhuis is a systems developer with Mt. Xinu. He graduated from the 
+Hogere Technische School with the Ing degree in 1975. His work involves the 
+integration of document production systems with new environments.
+
+
+\bold{\center{\bigger{Abstract}}}
+
+
+We discuss the needs of the EXPRES project for multimedia document format 
+interchange. We discuss alternatives to our choice of ODA as an 
+intermediate representation and our experiences using ODA for document 
+interchange.
+
+
+\bold{\bigger{I. Introduction: The EXPRES Project
+
+}}
+
+The US National Science Foundation (NSF) receives approximately 37,000 
+proposals for research funding annually [NSF]. Ten copies of each proposal 
+are submitted, each consisting of an average of 50 pages that frequently 
+contains not just text, but images and graphics. Over half of these 
+proposals -- those that pass an internal review -- are evaluated by six to 
+eight reviewers. Responses from the reviewers are mailed back to the NSF. 
+Over 18.5 million pieces of paper every year are manipulated by the NSF 
+through this complex process. The costs in time, material and personnel 
+resources are significant. \
+
+
+
+In addition, the NSF was aware of the difficulty involved in preparing and 
+submitting a proposal. It is common for a proposal to be the joint effort 
+of a number of researchers who are not co-located. The lack of physical 
+proximity makes collaboration difficult, especially if several individuals 
+author the proposal. The problem is exacerbated in the (common) case that 
+the researchers are using several different document processing systems. 
+The typical scenario for putting together a proposal under these 
+circumstances involves the cutting and pasting of paper documents. Not only 
+is this process time consuming and prone to error, but it makes the 
+production of intermediate versions of the proposal for review difficult.
+
+
+The NSF decided to attack the compound document interchange problem in the 
+context of the NSF proposal process. In June 1986, the National Science 
+Foundation solicited proposals for the Experimental Research in Electronic 
+Submission (EXPRES) project. EXPRES was to focus on the electronic 
+submission and processing of proposals to NSF, as well as to improve the 
+ability of the nation's research community to interchange multi-media 
+documents.
+
+
+The awardees would be expected to perform the following activities:
+
+
+- install and demonstrate prototype proposal submission systems at several 
+sites, including the NSF,
+
+
+- demonstrate the exchange of multi-media documents among several diverse 
+systems,
+
+
+- participate in standards activities relating to multi-media document 
+interchange,
+
+
+ - generate the specifications necessary for other systems to interoperate 
+ with the EXPRES systems.
+
+
+In addition, the NSF hoped that the prototype efforts would evolve into a 
+seamless system allowing the interchange of multi-media documents among 
+heterogeneous environments.
+
+
+In September of 1986, the NSF made equal three-year awards to the 
+Information Technology Center (ITC) at Carnegie Mellon University (CMU), 
+and to the Center for Information Technology Integration (CITI) at the 
+University of Michigan (UM). This paper discusses some of the common 
+activities of these grantees.
+
+
+\bigger{\bold{II. User Needs: Proposal Submission}}
+
+
+In choosing the NSF proposal development, submission and review process as 
+the vehicle for experimentation, the NSF was hoping to:
+
+
+1) improve the ability of scientific researchers to interchange 
+ multi-media documents among diverse systems (and, in particular, with 
+NSF), and
+
+
+2) investigate the requirements of a system that would allow the  proposal 
+process to be performed electronically.
+
+
+The NSF proposal process embodies many of the aspects of scientific 
+document interchange: geographically dispersed community, heterogeneous 
+environments and the need for multi-media documents. Thus, if the EXPRES 
+participants could actually demonstrate an electronic proposal process, it 
+would have addressed many of the important issues for scientific document 
+interchange.
+
+
+There are many issues that must be addressed to improve the ability of 
+researchers to interchange multi-media electronic documents. The tasks 
+include improved network infra-structure, improved mail transport protocols 
+for large multi-media documents, better multi-media editors and effective 
+methods for interchanging multi-media documents among diverse systems. The 
+effective transmission of proposals to the NSF is even more problematical, 
+because of the enormous volume of electronic information arriving at a 
+single location. Solving this task would also require a system for 
+administering the proposals. The administration system would be responsible 
+for extracting bookkeeping information from proposals; tracking the status 
+of a proposal from submittal, to reviewers, back to the NSF and final 
+response; and preparing regular summary reports on the proposals received.
+
+
+This is obviously an enormous agenda for a three year project. As the 
+participants investigated the tasks, one issue emerged as the key technical 
+issue on which EXPRES should focus: the problem of effective interchange of 
+multi-media documents among diverse systems. Although the other issues were 
+obviously important, and far from solved, other capable efforts were 
+underway attacking those problems; document interchange appeared to be 
+relatively unexplored.
+
+
+\bold{\bigger{III. Basic Problem:  Multi-media Document Interchange
+
+}}
+The proposal submission process, like the scientific collaboration process, 
+involves many different hardware and software tools. Therefore, any attempt 
+to automate these processes must account for broad heterogeneity. Devising 
+an interchange scheme that accounts only for a fixed set of multi-media 
+document formats (for example, the formats in use at CMU and UM) fails to 
+address a critical requirement: the ability of a new document system to 
+participate in free interchange among existing systems.
+
+
+The obvious technique of performing direct translations between each pair 
+of systems is impractical, because the addition of a new system would 
+require the construction of new translators for all of the existing 
+systems. In order to attack this problem efficiently, the EXPRES project 
+used a standard representation that documents are translated to and from 
+for each system. This technique requires no modifications to the existing 
+set of translators for the entry of a new system.
+
+
+\bold{III.1 Choice of an Intermediate Representation}
+
+
+The choice of intermediate representation was an important issue because 
+the efficacy of our work would be partially dependent on the suitability of 
+the representation. In addition, because we were planning for success, we 
+wanted it to be as easy as possible for others to continue along the path 
+we had started.
+
+
+For these reasons, the EXPRES participants formulated a set of requirements 
+for the intermediate representation. We determined that the representation 
+must:
+
+
+- support several media, including multi-font structured text and raster 
+ graphics,
+
+
+- be extensible for additional media,
+
+
+- specify the structure of a document as well as its formatting,
+
+
+- be publicly available.
+
+
+The requirement that the representation support multi-media documents is 
+obvious given the goals of the EXPRES project. Furthermore, we felt it 
+important that our work not restrict future support for additional media in 
+any way. We, thus, demanded that the representation be extensible, allowing 
+the addition of new media types without doing violence to existing parts of 
+the representation.
+
+
+We observed that authors insist on the ability to edit both the 
+organization of a document and its appearance. This requirement led to the 
+necessity that the representation have support for both structure and 
+formatting information.
+
+
+Lastly, because EXPRES was designed specifically to improve the ability of 
+researchers to interchange documents, we were concerned with the long-term 
+effects of our decisions. This meant that the software we used and created 
+had to be publicly available. Not only did we require that our intermediate 
+representation be publicly available, but we favored representations that 
+we felt had a good chance of becoming a standard (either de facto or de 
+jure).
+
+
+\bold{III.2 Candidates for an Intermediate Representation}
+
+
+The EXPRES participants spent several months investigating potential 
+intermediate representations. Because designing a new format was outlawed 
+by our requirements, we considered only existing or evolving formats. The 
+serious contenders emerged quickly: the Standard Generalized Markup 
+Language (SGML), Digital Document Interchange Format (DDIF), Document 
+Content Architecture (DCA), Rich Text Format (RTF) and the Office Document 
+Architecture (ODA).
+
+
+SGML [ISO 8879]  is an international standard intended for the flexible 
+markup of documents. In other words, SGML is designed principally to allow 
+humans to annotate documents. These annotations may serve many purposes, 
+but in particular are frequently used to delineate the structure of a 
+document.
+
+
+The problem with SGML, from our point of view, was that it has no 
+formatting or document organization semantics. Specifically, the SGML 
+standard defines a syntax that may be used to perform document markup, but 
+it attaches no meaning to any use of the syntax. The power of SGML is in 
+its freedom from meaning -- this allows the designer to define his own 
+semantics.
+
+
+Although we had ruled out defining our own semantics, there was work 
+proceeding on defining an SGML semantics for documents by the American 
+Association of Publishers [AAP]. Unfortunately, this standard did not 
+include any provisions for formatting information and so was insufficient. 
+There is now an effort underway to define a rich logical and layout 
+semantics for SGML, known as the Document Style and Semantics Specification 
+Language (DSSSL) [ISO 10179]. Our latest information is that the final 
+results of this work will not be available for several years yet.
+
+
+DCA [IBM] was intended as a common document format for IBM word processors. 
+We were able to eliminate quickly DCA as a viable candidate for several 
+reasons. It has no support for non-text media and it does not support the 
+kind of structure we required. In addition, although there was a defining 
+document for DCA, in practice it appeared that DCA was actually defined by 
+particular implementations. This allowed for multiple, inconsistent uses of 
+the standard and was unacceptable for our purposes.
+
+
+The problem of different interpretations of a standard by different 
+implementations was shared by another candidate for our intermediate 
+format: Rich Text Format (RTF) [Andrews]. RTF was developed by a group of 
+companies led by Microsoft as a standard for encoding formatted text and 
+graphics to allow the transfer of documents between DOS applications and 
+Apple Macintosh applications. RTF provides a rather rich set of structuring 
+and formatting capabilities and seemed ideal for EXPRES. Unfortunately, 
+like DCA, RTF was problematic in that each implementation used its own 
+subset of the standard. This would have limited severely the utility of our 
+efforts and so we reluctantly abandoned RTF.
+
+
+In designing DDIF [DEC], DEC began with an early version ODA. Because of 
+this, DDIF bears a strong resemblance to ODA although DDIF has diverged 
+significantly over the years. In many ways, DDIF appeared to be the ideal 
+candidate for the EXPRES project. DDIF has the strengths of ODA but, in 
+addition, has much richer facilities for supporting a wide range of media. 
+Unfortunately, at the time we began this work, the details of DDIF were not 
+publicly available. Furthermore, DEC could not provide us with an expected 
+date for the availability of DDIF. It was not at all clear that DDIF would 
+be made public before the project ended; this made the standard 
+inappropriate for our purposes.
+
+
+We determined that ODA met our needs to a large extent: it supported 
+multi-media documents, it could be extended for additional media, it 
+contained a rich set of structuring facilities for both organization and 
+formatting and it was about to become an international standard.
+
+
+\bigger{\bold{IV. Document Interchange Goals}}
+
+
+The primary technical goal of EXPRES was to demonstrate the feasibility of 
+interchanging processable multi-media documents among diverse systems. We 
+determined to do this by building translators for several document 
+production systems. Each translator would translate from a particular 
+document format to ODA or from ODA to the document format. These programs 
+would then be used to interchange multi-media documents.
+
+
+To keep the task manageable, the EXPRES participants decided to implement 
+translations for just two media: multi-font structured text and raster 
+images. ODA, and many document processing systems, also support structured 
+graphics. Although this is a popular and useful medium, we felt that the 
+implementation of two distinct media (text and rasters) would be sufficient 
+to demonstrate multi-media capabilities.
+
+
+When considering candidate document production systems and formats on which 
+to base translators, we formulated several criteria. We were primarily 
+concerned that the document format allow for the media types we had 
+targeted and provide a rich set of structuring facilities. In addition, the 
+format had to be well-defined and available to the EXPRES participants. 
+Finally, the document system had to run in a hardware and software 
+environment with which some of the EXPRES participants were familiar.
+
+
+The Andrew system [Palay] at the ITC provided a natural candidate and the 
+ITC EXPRES participants wrote translators between ODA and the Andrew 
+format. In addition, the group at the ITC acquired a troff expert about 
+halfway through the project and so we also built a translator from ODA to 
+troff [Ossanna]. The CITI EXPRES participants were working with the Diamond 
+system [Thomas] and implemented a pair of translators between the Diamond 
+format and ODA. McDonnell Douglas Corporation is a heavy user of the 
+Interleaf document processing system [Morris] and so the group at MDC built 
+translators between ODA and the Interleaf ASCII document format.
+
+
+In order to implement a set of cooperating translators, we found it 
+necessary to agree on a document model and to impose a set of conventions 
+on the use of the intermediate representation. The determination of a 
+viable document model and the specification of the conventions was an 
+important goal of EXPRES. We hoped that these specifications would be a 
+useful long-term result of the project.
+
+
+It occurred to the EXPRES participants at an early stage that it would be 
+useful for all implementers to share a common tool kit for manipulating 
+documents represented in ODA. For this reason, the ITC group undertook the 
+design, specification, implementation and distribution of a portable tool 
+kit: CMU ODA Tool Kit. We expended a significant amount of effort in the 
+construction of this tool kit in the hopes that it, like the document model 
+and conventions, would prove to be a piece of work that had utility beyond 
+the life of the project.
+
+
+\bold{\bigger{V. Document Translation Using ODA}}
+
+
+Our translations between ODA and native formats were based on a specific 
+document model we developed for the EXPRES project [Rosenberg]. There are 
+many features that could be incorporated into a document model given the 
+plethora of features in contemporary systems. We narrowed the scope of 
+document models to a subset of features found in the ODA model, based in 
+part on the document application profile published by the National 
+Institute of Standards and Technology (NIST) [NIST]. \
+
+
+
+One might ask why we needed to define a document model beyond that provided 
+by ODA. The ODA model certainly provides a general document model with a 
+large numbers of features and options. We found, however, that the ODA 
+model had some deficiencies for EXPRES purposes:
+
+
+- Many word processing systems have much more editing structure in a 
+document than ODA provides, especially in their style systems. Researchers 
+and reviewers edit the documents as they are interchanged among the 
+authors, then to the NSF program manager, to the reviewers, back to the NSF 
+and back to the proposer. Therefore, it is important that the editing 
+structure of the document be preserved.
+
+
+- ODA does not provide the same set of primitive descriptions of data as 
+many other systems. Research proposals contain more than text, structured 
+graphics and raster graphics. They include, but are not limited to, tables 
+of numbers (which include spreadsheets of budget data), chemical 
+structures, equations and circuit designs.
+
+
+- ODA is highly redundant in that several features can be used for 
+representing similar features. Our goal is to exchange proposals 
+effectively, not investigate nuances of ODA implementation or application. 
+Therefore, we had little need for multiple ways of representing the same 
+feature.
+
+
+The natural consequence of the first two deficiencies is that many 
+translators from native formats to ODA will attempt to save their extra-ODA 
+information using particular structures and encodings of ODA objects. We 
+wanted to minimize any extra-ODA information by careful selection of our 
+document model.
+
+
+The third deficiency is asymmetric. When generating ODA format, a 
+translator could minimize the third deficiency by picking one of the 
+possible representations in ODA. However, if a translator from ODA format 
+to a native format has no a priori knowledge about the generator of the ODA 
+file, the translator could not assume that any particular conventions were 
+followed. Thus, the translator would have to deduce the particular way that 
+ODA was used to encode features that have multiple representations.
+
+
+To assist document interchange in EXPRES, we created a document model, such 
+as used by multi-media document editors like Andrew and Diamond. We then 
+suggested a way to use ODA, along with the NIST document application 
+profile, to represent this model. Our intention was to permit easy recovery 
+of information. \
+
+
+
+\bigger{\bold{VI. EXPRES Demonstrations}}
+
+
+The translators constructed by the EXPRES participants were demonstrated 
+several times to hundreds of people at several venues. The first public 
+demonstration was at the ACM Conference on Document Processing Systems held 
+in Santa Fe, New Mexico during December 5-9, 1988. The same demonstration, 
+with minor variations to be described, was repeated at the Workshop on 
+Compound Document Interchange Using ODA sponsored by IBM and the National 
+Science Foundation, held June 1-2, 1989 at the IBM Almaden Research Center 
+in San Jose, California. This demonstration was seen by an estimated 25 
+people. Finally, the translators were put through their paces at several of 
+the regular monthly demonstrations given at the Information Technology 
+Center. The audiences at the monthly demonstrations were primarily 
+upper-level managers from around the world.
+
+
+The demonstration given in Santa Fe was run on three workstations connected 
+by a local Ethernet. The workstations and associated operating and document 
+systems are listed in table 1.
+
+\typewriter{\leftindent{--------------------------------------------------
+
+Workstation	OS		Document System(s)
+
+
+IBM RT-PC	AOS 4.3		X11, WM, Andrew, troff
+
+		(BSD Unix-like)
+
+
+Sun 3/50	Sun 2.0		Suntools, Diamond
+
+		(BSD Unix-like)
+
+
+DEC		VMS 4.7		Interleaf
+
+Vaxstation 2000
+
+--------------------------------------------------
+
+}} \center{Table 1. Demonstration Systems}
+
+
+
+The demonstration consisted of taking a document created in Andrew and 
+translating the document so that it was editable on the other document 
+systems. In each case, after the document was translated into the new 
+document format, the document was edited to demonstrate its processability. 
+
+
+The demonstration consisted of the following steps:
+
+
+1 The Andrew document (on the RT) was translated into ODIF.
+
+
+2 The ODIF representation was translated into troff format (on the RT), run 
+through troff and displayed on the screen.
+
+
+3 The ODIF representation was transferred to the Sun and Vax machines using 
+FTP.
+
+
+4 On the Sun, the ODIF representation was translated into Diamond. Both 
+text and rasters were edited with the Diamond editor.
+
+
+5 The Diamond document was translated to ODIF and the ODIF representation 
+was transferred to the RT. This representation was then translated to 
+Andrew format and edited.
+
+
+6 On the Vax, the ODIF representation from step 3 was translated into the 
+Interleaf ASCII format. The Interleaf document was edited in a similar 
+fashion to the Diamond document.
+
+
+A demonstration similar to this one was given at the workshop held in San 
+Jose, with one major addition. Some people from the Technical University of 
+Berlin (TUB) were present and were demonstrating the ISOTEXT multi-media 
+system [Bormann]. The people from TUB volunteered to take the ODA 
+translation of the original Andrew document and attempt to read it into 
+their editor, which accepted ODIF datastreams. Several minor changes had to 
+be made to the ODIF stream produced by our translator to eliminate the use 
+of font definitions. Once this was done, the ISOTEXT system was able to 
+import the document, display it and edit it. ISOTEXT was unable to process 
+the raster information since the EXPRES translators assumed 72 pixel per 
+inch resolution while the ISOTEXT system tried to to deduce the raster size 
+from ODA information.
+
+
+The demonstrations at the Information Technology Center were similar to the 
+one in Sante Fe, except that troff was run on a NeXT machine, generating 
+PostScript that was displayed on the screen. \
+
+
+
+Peoples' reactions to the demonstrations varied widely. Some thought that 
+we had accomplished our goals of interchanging processable, multi-media 
+documents among diverse systems. More discriminating observers saw minor 
+differences in the documents and thought that we had shown the basic 
+concept through prototype-quality systems, but were not up to 
+production-quality format translation. Others, who insisted on perfect 
+image fidelity, believed the demonstrations to be failures, since the 
+documents did not look the same on all systems: there were visible 
+differences caused by changes in (soft) line breaks, (soft) page breaks and 
+font substitutions. We take the intermediate position, that the 
+demonstrations show the approach to be viable, though the translators we 
+built were only prototypes. This position is elaborated in the next 
+section, where we analyze, in detail, our experiences with document 
+interchange.
+
+
+
+\bold{\bigger{VII. Retrospective on the Use of Office Document Architecture
+
+}}
+Our choice of the Office Document Architecture (ODA) standard as the 
+intermediate representation for our translations had a profound effect on 
+our work. The use of ODA influenced our conventions, the fidelity we were 
+able to attain and the tools we chose to build. This section looks 
+critically at ODA from three points of view: as a standard for document 
+interchange, as an intermediate representation used by the EXPRES 
+translators and as a specification to be implemented (in the CMU ODA Tool 
+Kit).
+
+
+\bold{VII.1 The Standard}
+
+
+ODA suffers from many of the maladies common to international standards, 
+which are hampered in their design by the need to satisfy many 
+constituencies. The members of the standards committees and working groups 
+are typically employees of corporations involved in the computer or 
+telecommunications fields. These people represent the interests of their 
+employers, as well as attempting to do technical justice to the standards. 
+Unfortunately, technical judgments often yield to politics. This not 
+infrequently leads to a standard that appears to be a hodge-podge of 
+features without strong guiding principles. (One might argue that this is 
+exactly the purpose of an international standard -- to allow interoperation 
+among as many parties as possible. This is certainly true. We believe, 
+however, that this end would be served better by evaluating issues on 
+technical and economic merit, as far as possible.) It is our opinion that 
+ODA suffers from these blemishes as much as any other international 
+standard.
+
+
+International standards are also plagued by the desire to be in alignment 
+with other related or identical standards. A standard is aligned with 
+another standard when the standards are identical except for stylistic 
+differences. The need for alignment is sometimes the result of another 
+organization wishing to have its own version of a standard. This is the 
+case with the Open Document Architecture, which is the CCITT version of 
+ODA. The resolution of alignment conflicts is a difficult and 
+time-consuming process and can result in apparently arbitrary changes in an 
+evolving standard.
+
+
+ODA is also quite large and complex, with many intertwining pieces and some 
+inconsistencies. This makes learning the standard a difficult undertaking; 
+it took the ITC EXPRES participants almost two months of full-time study to 
+get a solid grasp on the basics of the standard. In fact, there are parts 
+of the standard we were never able to grasp fully. For example, we never 
+managed to construct a convincing model for the entire layout process; this 
+led us to surmise that ODA was incomplete in this regard, a fact that 
+others have also concluded.
+
+
+Another symptom of design by committee is the appearance of inconsistencies 
+in a standard. ODA, for example, has a set of rules for determining the 
+value of an attribute at any place in the document. The basic set of rules 
+are straightforward and intuitive. Unfortunately, there are annoying 
+exceptions to these rules, which are rather messy to understand and 
+implement.
+
+
+It is our belief that the complexity and inconsistency of ODA are the 
+result of the standardization process and not inherent in a standard for 
+multi-media document interchange. We posit that a carefully designed 
+document architecture model and a well chosen set of orthogonal principles 
+could produce a smaller, but just as capable, standard.
+
+
+Furthermore, ODA is missing many of the media that we believe are essential 
+for effective scientific document interchange: tables (spreadsheets) and 
+equations, in particular. In all fairness, these are being defined as we 
+write this, although due to the standards process, they will not appear for 
+years.
+
+
+Of course, we realize that the best technical path is not always possible 
+in the standards world. And although we have been critical of ODA, it was, 
+in fact, the only viable candidate at the time we chose our intermediate 
+representation. The situation has not changed much since then, except for 
+the appearance of DDIF as a DEC product and the effort to define DSSSL as a 
+document architecture using SGML. Had we the choice to make at this point, 
+we would have to give serious consideration to DDIF and DSSSL as contenders 
+for ODA. ODA still has the advantage, however, in being an international 
+standard and in having widespread acceptance in Europe.
+
+
+In summary, despite its shortcomings, we do not regret our choice of ODA. 
+In the next section, we discuss our evaluation of ODA specifically in 
+regards to the EXPRES document model and translation conventions.
+
+
+\bold{VII.2 Use as an Intermediate Representation}
+
+
+One of the nicest aspects of ODA from the EXPRES point of view was the ODA 
+model for logical and layout structures. We found the separation of the two 
+structures to be a useful feature, since this allows a document to express 
+as little or as much as it wants about its organization (logical structure) 
+or its formatting (layout structure).
+
+
+The ODA logical structure is simple, but should be sufficient for the 
+organization of most documents. Our one criticism is that there is no 
+method for decorating the logical structure of a document with 
+application-specific information. For example, an application might wish to 
+use ODA documents in a hypertext system. An obvious way to do this is to 
+annotate some nodes of the document with pointers to other nodes or 
+documents in the system. Unfortunately, the lack of decoration ability in 
+ODA means there is no clean way to accomplish this.
+
+
+Unlike the logical structure, ODA's layout structure is rather complex. 
+Despite this, we found the model to be rich in functionality and well 
+thought out. In fact, one of the selling points of ODA for us was that it 
+had a complete layout model as part of the standard. All in all, the layout 
+structure in ODA served the EXPRES project well.
+
+
+The ODA style system, on the other hand, was not quite as desirable for our 
+use. The style system in ODA appears to have been designed to aid in the 
+factoring of the document representation, presumably to save space and 
+processing time. The paucity of ODA's style system caused us problems when 
+attempting to preserve the style information in our other document formats. 
+These other formats were used by document processing systems and, thus, had 
+style systems oriented towards human editing. In particular, the rules ODA 
+specified for definition and application of styles did not match well with 
+the kind of flexibility one desires when editing.
+
+
+Another problem we had with ODA's style system was actually caused by the 
+rules for determining the default values of attributes. Some attributes in 
+ODA are composed of parameters. For example, the attribute "border" has a 
+value comprising the four parameters "leading edge", "trailing edge", 
+"left-hand edge" and "right-hand edge". When determining a default value 
+for a particular use of the "border" attribute, a default value will be 
+found for each of the parameters. This means that there is no way to 
+construct a style using "border" that has the following semantics wherever 
+it is applied: change the "left-hand edge" parameter to a specified value, 
+but use the current values for the other parameters.
+
+
+The ability to construct style definitions with fine control over document 
+features is an important part of the style system of some document 
+processing systems. The EXPRES conventions go to great lengths to preserve 
+as much of the fine-grained information as possible, but much of it is lost 
+anyway.
+
+
+There are advantages to the ODA restriction that content may appear only at 
+the leaves of a document. These advantages include the ease of adding a new 
+content architecture, the separation of the document and content 
+architecture definitions and the simplification of the layout process. 
+Unfortunately, the ability to nest content is a powerful part of some 
+document formats (Andrew and Interleaf, for example), and any instances of 
+this nesting structure is lost during translation.
+
+
+Looking back at the entire translation experience, our biggest complaints 
+with ODA for use as an intermediate representation are its complexity and 
+its style system. Our attempts to preserve style information, which 
+embodies the editing information that we believe essential to effective 
+interchange, were stymied time and again by the ODA style system.
+
+
+\bold{VII.3 Implementation}
+
+
+We expended a great deal of effort in our construction of the CMU ODA Tool 
+Kit. For the most part, the implementation was tedious, but not difficult. 
+The tedium was caused, almost solely, by the necessity of implementing the 
+semantics of 159 distinct attributes. We did, however, run into two 
+problems: the implementation of the attribute value defaulting rules and 
+the implementation of code to read and write ODIF. \
+
+
+
+\underline{VII.3.1 Implementing the Defaulting Rules}
+
+
+There is a basic rule set specified in ODA for determining the value of an 
+attribute at a particular component. These rules specify the order in which 
+the document is searched, beginning at the component, and proceeding to 
+higher structural levels. The search continues until a value is found for 
+the attribute, or if none is found, then the ODA standard itself defines a 
+value. The basic rules are straightforward and easy to implement.
+
+
+Unfortunately, these basic rules do not apply directly to the determination 
+of the default value for several attributes. In particular, presentation 
+attributes, attributes for content portions, the "content information" 
+attribute and the "content generator" attribute, each have distinct sets of 
+defaulting rules. These defaulting rules are taken from a subset of the 
+basic rules. Unfortunately, these rules are difficult to understand and 
+messy to implement.
+
+
+
+\underline{VII.3.2 Reading and Writing ODIF}
+
+
+Undoubtedly, the part of ODA that gave us the most implementation headaches 
+was the ODIF datastream. The ODIF representation suffers from several 
+problems, including the fact that it is defined using ASN.1. ASN.1 is an 
+international standard defining an abstract syntax for representing data. 
+ASN.1 also defines a binary encoding for this syntax so that data may be 
+exchanged in a machine-independent manner.
+
+
+Unfortunately, the 8-bit encoding specified for ASN.1 is unreadable by 
+humans and this causes two difficulties: it is extremely tedious to 
+hand-simulate the parse of an ASN.1 datastream, and it is impractical to 
+create test ASN.1 datastreams of any size. There is an alternate 
+representation for an ODA datastream, known as ODL, which is represented in 
+human-readable form using SGML. Unfortunately, the Document Application 
+Profile we were using specified the use of ODIF.
+
+
+We would have been happier had ASN.1 defined an alternate interchange 
+representation that was human readable. It would be a simple matter to 
+specify such a representation and to specify transformations between this 
+representation and the binary encoding.
+
+
+\bigger{\bold{VIII. Summary}}
+
+
+In the two years that we have been investigating the use of ODA as an 
+interchange medium, we have learned some of the advantages and 
+disadvantages of performing multi-media document interchange using an 
+intermediate representation. In a research environment, we found that ODA 
+provided a rich enough description for a document, but only when coupled 
+with a high-level document model. We also believe that achieving 
+high-quality imaging fidelity for a processable document is difficult. The 
+fine typographic control and sophisticated graphics are difficult to 
+translate among systems that have different, even if similar, capabilities.
+
+
+Our investigations were inconclusive in a number of areas. The translators 
+we implemented are prototypes and have only been used for demonstrations. 
+We do not, therefore, know whether multi-media document interchange will be 
+effective in a work environment. The utility of such interchange can be 
+determined only by people using document systems and translators in 
+realistic situations, over extended periods of time.
+
+
+Our interchange work was limited to text and raster graphics. Although we 
+did not implement translations for structured graphics, at first glance, it 
+appears that translating between ODA's structured graphics format and other 
+such formats may be difficult. This is because structured graphics 
+typically demand a high level of imaging fidelity and the precise semantics 
+of common graphics operations have subtle, but important, differences.
+
+
+Our investigations into interchanging style sheet information were also 
+inconclusive. Although we were able to exchange some of the style sheet 
+structure and information, we found many features of style systems that 
+could not be captured.
+
+
+Another area that we did not examine carefully was the relationship between 
+ODA and SGML. Although an SGML-based interchange format for ODA is defined 
+(ODL), we did not investigate whether that could be exploited in an 
+effective way by current SGML-based systems.
+
+
+The EXPRES effort showed the potential of ODA for use in document 
+interchange, but more experience is needed to fully evaluate the 
+applicability of ODA for multi-media document interchange.
+
+
+\bold{\bigger{References}}
+
+
+[AAP] American Association of Publishers, Standard for Electronic 
+Manuscript Preparation and Markup. Electronic Manuscript Series, Washington 
+D.C., 1986.
+
+
+[Andrews] Nancy Andrews, Rich Text Format Standard Makes Transferring Text 
+Easier, Microsoft Systems Journal, March 1987, p 63-67.
+
+
+[Bormann] U. Bormann, C. Bormann and C. Bathe, "ISOTEXT -- A WYSIWYG 
+Editing and Formatting System for ODA and SGML Documents," Proceedings of 
+the 5th Annual ESPRIT Conference, North-Holland, 1988.
+
+
+[DEC] Digital Equipment Corporation, Special Issue on CDA, Digital 
+Technical Journal, Vol. 2, No. 1., 1990.
+
+
+[IBM] International Business Machines, Document Content Architecture: 
+Revisable-Form-Text Reference, 1983.
+
+
+[ISO 8613] International Standards Organization, Information processing -- 
+Text and Office Systems -- Office Document Architecture (ODA), 1988.
+
+
+[ISO 8824] International Standards Organization, Information processing -- 
+Open Systems Interconnection -- Specification of Abstract Syntax Notation 
+One (ASN.1), 1987.
+
+
+[ISO 8825]	 International Standards Organization, Information processing -- 
+Open Systems Interconnection -- Specification of basic encoding rules for 
+Abstract Syntax Notation One (ASN.1), 1986.
+
+
+[ISO 8879] International Standards Organization, Information processing -- 
+Text and Office Systems -- Standard Generalized Markup Language (SGML), 
+1986.
+
+
+[ISO 10179] International Standards Organization, Information processing -- 
+Text composition -- Document style, semantics and specification language, 
+1989.
+
+
+[Morris] Robert A. Morris, Is What You See Enough to Get?: a Description of 
+the Interleaf Publishing System, PROTEXTII: Proceedings of the Second 
+International Conference on Text Processing Systems, October 1985, p. 
+56-81.
+
+
+[NIST] National Institute for Standards and Technology, Stable 
+Implementation Agreements for Open Systems Interconnection Protocols, 
+Version 2, Edition 3, 1989, chapter 16.
+
+
+[NSF] National Science Foundation, EXPRES Project, Solicitation for 
+Research Groups.
+
+
+[Ossanna] J. F. Ossanna, NROFF/TROFF User's Manual, AT&T Bell Laboratories, 
+Murray Hill, New Jersey, January 1979.
+
+
+[Palay] Andrew J. Palay, Wilfred J. Hansen, Mark Sherman, Maria G. Wadlow, 
+Thomas P. Neuendorffer, Zalman Stern, Miles Bader and Thom Peters, "The 
+Andrew Toolkit -- An Overview," Proceedings of the USENIX Winter 
+Conference, Feb. 1988, p. 9-21.
+
+
+[Rosenberg] Jonathan Rosenberg, Mark Sherman, Ann Marks and Jaap Akkerhuis, 
+Multi-media document translation: ODA and the EXPRES project, 
+Springer-Verlag (New York, New York) 1991.
+
+
+[Thomas] Robert H. Thomas, Harry C. Forsdick, Terrence R. Crowley, Richard 
+W. Schaaf, Raymond S. Tomlinson and Virginia M. Travers, "Diamond: A 
+Multimedia Message System Built on a Distributed Architecture," IEEE 
+Computer, Vol. 18, No. 12, December 1985, p. 65-78.
+
+\enddata{text,538387828}

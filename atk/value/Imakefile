@@ -1,0 +1,115 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1989 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+OBJS = GetRecV.o \
+	bargraphV.o \
+	buttonV.o \
+	checkv.o \
+	clicklistV.o \
+	controlV.o \
+	enterstrV.o \
+	entertext.o \
+	etextview.o \
+	fourwayV.o \
+	mbuttonv.o \
+	menterstrV.o \
+	mentertext.o \
+	metextview.o \
+	onoffV.o \
+	pianoV.o \
+	sliderV.o \
+	sliderstrV.o \
+	stringV.o \
+	thumbV.o \
+	thumbstrV.o \
+	updateq.o \
+	value.o \
+	valueview.o
+
+HFILES = GetRecV.H \
+	bargraphV.H \
+	buttonV.H \
+	checkv.H \
+	clicklistV.H \
+	controlV.H \
+	enterstrV.H \
+	entertext.H \
+	etextview.H \
+	fourwayV.H \
+	mbuttonv.H \
+	menterstrV.H \
+	mentertext.H \
+	metextview.H \
+	onoffV.H \
+	pianoV.H \
+	sliderV.H \
+	sliderstrV.H \
+	stringV.H \
+	thumbV.H \
+	thumbstrV.H \
+	updateq.H \
+	value.H \
+	valueview.H
+EXTRACLASSES = GetRecV \
+	bargraphV \
+	buttonV \
+	checkv \
+	clicklistV \
+	controlV \
+	enterstrV \
+	entertext \
+	etextview \
+	fourwayV \
+	mbuttonv \
+	menterstrV \
+	mentertext \
+	metextview \
+	onoffV \
+	pianoV \
+	sliderV \
+	sliderstrV \
+	stringV \
+	thumbV \
+	thumbstrV \
+	updateq \
+	valueview
+LIBS = 
+DependTarget()
+NormalObjectRule()
+NormalATKRule()
+
+DynamicMultiObjectWithExports(value,$(EXTRACLASSES),$(OBJS),$(LIBS),,)
+InstallDynamicObjectWithExports(value,$(EXTRACLASSES),$(FULLATKDLIBDIR))
+
+InstallClassFiles($(HFILES))
+
+FontRule()
+DeclareFont(values25)
+
+NormalHelpRule()
+InstallDocs(valproc.help, ${DESTDIR}/help)
+InstallHelpAlias(valproc, valueproc valueprocs)

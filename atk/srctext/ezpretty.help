@@ -1,0 +1,119 @@
+\begindata{hlptext,538427136}
+\textdsversion{12}
+\template{help}
+\chapter{ezpretty: Pretty-Printer for source code
+
+}
+\section{What ezpretty is
+
+}\leftindent{
+Ezpretty will reindent and style a program using the same guidelines as 
+\bold{ez}, and print it.  It will optionally add line numbers and 
+"do-bars".
+
+}
+\section{Quick reference
+
+}\leftindent{
+To pretty-print a source code file, invoke the following command:
+
+
+\leftindent{\typewriter{ezpretty} [-h] [-\italic{\{other options\}}] [-e 
+\italic{ezprint_options}] \typewriter{\italic{filename}}
+
+}
+\italic{\{other options\}} include the following:
+
+\description{\typewriter{ I}	don't indent code
+
+\typewriter{ C}	don't indent comments
+
+\typewriter{ S}	don't use styles
+
+\typewriter{ W}	don't word-wrap long lines
+
+\typewriter{ b}	add "do-bars"
+
+\typewriter{ n}	add line numbers
+
+}
+\italic{ezprint_options} are described in the  \helptopic{ezprint}  help 
+file.
+
+
+By default,
+
+\description{  * both code and comments will be reindented,
+
+  * styles will be added to comments, keywords, function names, labels, 
+preprocessor lines, ...
+
+  * long lines will be wrapped, rather than truncated.
+
+  * "do-bars" and line numbers will NOT be printed.
+
+}}
+\section{Examples
+
+}
+\leftindent{\typewriter{\bold{ezpretty myprog.C
+
+}}This will print the C++ program \italic{myprog.C} with all code and 
+comments indented, and all keywords, member functions, etc styled 
+appropriately.
+
+
+\typewriter{\bold{ezpretty -bn -e -preview qckpffft.plmp
+
+}}This will display the PL/MP program \italic{qckpffft.plmp} in a preview 
+window, with "do-bars" and line numbers.
+
+}
+\section{Warnings
+
+}\leftindent{
+The so-called "do-bars" don't strictly match \typewriter{DO} and 
+\typewriter{END} keywords (nor braces, in C).  They are simply inserted 
+into the leading whitespace of every line at increments of "level-indent" 
+spaces.  ("level-indent" varies by language, and is tailorable; see the 
+ \helptopic{srctext}  help).
+
+
+\bold{Warning to hackers:}  Ezpretty is a simple perl program that sets an 
+undocumented environment variable which causes the source views to make 
+changes in dataobjects they load.  DON'T try to set the variable yourself 
+in a user shell, because doing so may cause ez to insert things in your 
+source code that won't compile.  As long as you access the feature via the 
+ezpretty command, your source code is perfectly safe, so just forget you 
+ever read this.
+
+}
+\section{Advice
+
+}\leftindent{
+Save a tree, and don't use ezpretty.
+
+Do code reviews online.  Try \helptopic{review}.
+
+Make sure you like what you see with the  \typewriter{\underline{-e 
+-preview}}  option, before you squander natural resources.
+
+}
+\section{Related tools}  
+
+
+\leftindent{Move your mouse cursor to one of the following names and click 
+your left mouse button to see the help file for:
+
+
+\leftindent{\helptopic{ezprint}
+
+\helptopic{srctext}
+
+}}
+\begindata{bp,539635200}
+\enddata{bp,539635200}
+\view{bpv,539635200,0,0,0}
+(c) Copyright IBM Corp.  (This work is unpublished).  All rights reserved.
+
+\enddata{hlptext,538427136}

@@ -1,0 +1,69 @@
+/*  Imakefile for AUIS web browser
+	10 Dec 1995
+     Include htmltext and friends (Kemmetmueller)
+	14 December 1995
+*/
+/* DEFINES=-DPRINTXXX=0 */
+HTMLOBJS =\
+	urlbutton.o urlbuttonview.o htmltext.o htmltextview.o \
+	htmlenv.o attlist.o hidden.o hiddenview.o htmlform.o \
+	hr.o hrv.o ez2htmlapp.o htmlimagev.o fixup.o htablev.o
+HTMLCLASSES = \
+	urlbutton urlbuttonview htmltextview htmlenv attlist \
+	hidden hiddenview hr hrv htmlform ez2htmlapp htmlimagev htablev
+HTML_HFILES = \
+	urlbutton.H urlbuttonview.H htmltext.H htmltextview.H \
+	htmlenv.H attlist.H hidden.H hiddenview.H \
+	hr.H hrv.H ez2htmlapp.H htmlform.H htmlimagev.H htablev.H
+HELPFILES = \
+	htmltext.help ez2html.help urlbutton.help 
+
+#ifdef WWW_ENV
+WEBOBJS =\
+	web.o webview.o weblink.o weblinkview.o\
+	webcom.o wbuttonv.o webapp.o webserver.o 
+WEBCLASSES = \
+	web webview weblink weblinkview\
+	webcom wbuttonv webapp  
+WEB_HFILES = \
+	web.H webview.H weblink.H weblinkview.H \
+	webcom.H wbuttonv.H webapp.H  
+#endif
+
+#if 1
+/* GSARGS =-r . */
+#else
+TESTDIR=../banjo
+GSARGS =-r . -r $(TESTDIR)/lib/atk
+LOCALINCLUDES=-I$(TESTDIR)/include/atk
+DESTDIR = $(TESTDIR)
+CDEBUGFLAGS = -g
+#endif
+
+NormalObjectRule()
+NormalATKRule()
+NormalHelpRule()
+
+OptionalATKLibrary(htmltext, $(WEBOBJS) $(HTMLOBJS),$(UTILLIB) ,,$(GSARGS))
+InstallOptionalATKLibrary(htmltext, $(DESTDIR)/lib/atk)
+
+DynamicMultiObject(htmltext, $(WEBCLASSES)  $(HTMLCLASSES), $(WEBOBJS) $(HTMLOBJS),$(UTILLIB) ,,$(GSARGS))
+InstallDynamicObject(htmltext, $(WEBCLASSES) $(HTMLCLASSES), $(FULLATKDLIBDIR))
+
+
+InstallClassFiles($(WEB_HFILES) $(HTML_HFILES))
+InstallFile(Warning.gif, $(INSTINCFLAGS), $(DESTDIR)/etc)
+InstallFile(html.tpl, ${INSTINCFLAGS}, ${DESTDIR}/lib/tpls)
+InstallCshScript(mkurlbutton.csh, ${DESTDIR}/bin/mkurlbutton)
+InstallDocs($(HELPFILES),${DESTDIR}/help)
+InstallHelpAlias(urlbutton, mkurlbutton url)
+InstallHelpAlias(htmltext, html)
+InstallLink(runapp,${DESTDIR}/bin/ez2html)
+#ifdef WWW_ENV
+InstallLink(runapp,${DESTDIR}/bin/web)
+#endif
+
+#if 0
+/* Build a runapp that includes libweb and libbutactions*/
+RunappWithLibrary(runapp,web,-r . -r $(TESTDIR)/lib/atk -c ezapp butactions)
+#endif

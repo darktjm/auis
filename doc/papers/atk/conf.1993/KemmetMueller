@@ -1,0 +1,1088 @@
+\begindata{text,6457856}
+\textdsversion{12}
+\template{default}
+\center{\bold{\bigger{\bigger{Compressing text using ``compress''
+
+}}}}
+
+
+\flushright{Robert S. Kemmetmueller
+
+IBM Rochester
+
+rskm@rchland.vnet.ibm.com
+
+}
+
+\heading{Intro}
+
+
+Compress is an inset that is designed to temporarily "hide" a portion of 
+text in a small box.
+
+
+\heading{Warning/Notice}
+
+
+The version of compress described in this document is a major redesign of 
+the one presently available in the toolkit (as of this writing).
+
+
+\heading{Purpose}
+
+
+The initial intent of compress is to "hide" a nesting level in one's code, 
+so that a more high-level outline (the overall structure) of the code can 
+be seen more easily.  It eliminates the need for things like "indentation 
+bars", by providing a more efficient and visually pleasing way for a 
+programmer to "ignore the details", so to speak.
+
+
+Because of its implementation, it could also prove useful for other tasks, 
+such as eliminating portions of text from a global query/replace operation, 
+among other things.  Any time someone doesn't care about and doesn't wish 
+to see a certain portion of text in most circumstances, compress might 
+prove useful.
+
+
+\heading{Visual Appearance}
+
+
+Before:
+
+\begindata{raster,6457984}
+2 0 65536 65536 0 0 536 478
+bits 6457984 536 478
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+g4ah81i1005g80	h20m01g0802g04	40g2401g010240	202880zn |
+g4ch81i100880	i20m01h02g0440	g2001g0102g20	3080zn |
+g94070d1agb0e1	a308812c30c5f3	ge02c32220b0e	1a3012cf381eb0
+ c04962461a048c	f051zo |
+g80089326gc912	64908132492644	8110324a220c91	264813244408c9
+ 20499289260492	4001zo |
+01ha244010a14	48908242822c48	g10428a6410a1	4488!2484090a
+ 20921711440920	4002zo |
+02g0f22440112	245f20824467c8	8601e045f2a811	2245f024488811
+ 17c092253e4409	188004zo |
+02g1144880114	28902082441408	8102204502a811	4289g24490811
+ 14g9224a08809	048004zo |
+04g224c980224	49912104891451	11044089133022	44991048911022
+ 24412448a29812	45g08zo |
+04g1d34680223	868e210488e391	8e03a088e22022	3868e04898e032
+ 238124489c6812	398008zo |
+o22zzw |
+o22zzw |
+j03f8i14zzw |
+zzzm |
+zzzm |
+zzzm |
+m380380j1czzr |
+m380380j1czzr |
+m380380j1czzr |
+m380380j1czzr |
+k3e07b87b8007	781e03dc1ezzq |
+h!03807f0ff8G	8007fc7f87fc7f	01h01zzm |
+i0180738e78e7	80079c73873c73	82i80zzl |
+i0180079c39c3	80071ce1ce1ce1	82i80zzl |
+07bbcf0f801f9c	39c380071ce1ce	1cG845c39dc40	zzl |
+03366319803b9c	39c380071ce1ce	1cG8432448840	zzl |
+01a6631980739c	39c380071ce1ce	1ce004227ca840	zzl |
+01e6631980738e	78e780071c7387	3c73842240a840	zzl |
+gc66319807f8f	f8G80071c7f87	fc7f8422445040	zzl |
+gc3!cfc03b87b8	7b80071c1e03dc	1e0273385080zzl |
+v02i80zzl |
+v01h01zzm |
+o3ff0zzv |
+o3ff0zzv |
+zzzm |
+zzzm |
+zzzm |
+h0180zzzi |
+i80g10zzzg |
+i80g10zzzg |
+05c3878eg7d70	e770zzx |
+03244891g10c9	1221zzx |
+0224489fg2889	f2a0zzx |
+02244890h8902	a0zzx |
+02244891h8911	41zzx |
+0733874eg01cc	e141zzx |
+n02zzx |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+g40zzzk |
+g80zzzk |
+g80zzzk |
+g80zzzk |
+01zzzl |
+g80zzzk |
+g80zzzk |
+g80zzzk |
+g80zzzk |
+g40zzzk |
+zzzm |
+zzzm |
+zzzm |
+h81!c00ezzzg |
+ga002g401001f1	Gcee780zzu |
+ga002g8010g88	8a244880zzu |
+03f38f8d1c7c01	09244890zzv |
+01410413222001	09c78890zzv |
+014104217e2001	114448a380zzu |
+07e20822!4002	12085121zzv |
+02820822444002	22289123zzv |
+028f9e1d38f007	c7G0e1czzv |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+l20g01c08008h	70i08jc180h18	g2408h40zs |
+m0102010ai80h	08k4080h08g42	04g1420zs |
+m0102010ai80h	08k4080h08g42	04g1420zs |
+j!5ce2e3e7c20a	38b801f66b871f	38397003c3c780	5c3878e081022e
+ 1410zs |
+j22202191!02g	0864g82264888	0844c8g244880	32448910810219
+ g1020zr |
+j22202111!02g	0844g822448!08	448801e4488022	4489f0810111g
+ 10zs |
+j22202111!02g	0844g822448!08	44880224488022	4489g810111g10
+ zs |
+j222021111202	g0844g822448!88	44880224488022	44891081g91g10
+ 20zr |
+j3c78fb98e781	g3ee601e1de67	073e39cc01d3a7	40733874e042g
+ b980!20zr |
+j20j01y42g40g	2040zr |
+j20k80x24i40zs |
+j70k3fZH80zs |
+zzzm |
+zzzm |
+l20g01c080m06	i60c0l08l08zo |
+m0102010am02i	2040j018ee4g14	j04zo |
+m0102010am02i	2040j02!44g14	j04zo |
+j!5ce2e3e7c20a	g0170e770170e	1e3801e1e3cb8e	1c38g0192822e
+ 14g02e1cee2zo |
+j22202191!02i	c912200c912244	g122444112244	f8g610219h0192
+ 244204zn |
+j22202111!02i	89f2a00891227c	gf224441f1c38	g01828111h0113
+ e542zo |
+j22202111!02i	8902a008912240	01122444100204	f802628111h01
+ 120542zo |
+j222021111202	i891140089122	44011224441122	44h944091g2001
+ 12228204zn |
+j3c78fb98e781	h01cce1401cce	1d38ge9d3af0e	1c38h6ee0b980
+ 200399c28404zn |
+j20j01zg40g40	i0408zn |
+j20k80zl08zo |
+j70k3fZH80zs |
+zzzm |
+zzzm |
+l20g01c080g01	80hc0g0ege040	i060cm80m0381	h20z |
+m0102010ah80h	40g10g20g02h02	04k18ee400140	h10h!80g0810z |
+m0102010ah80h	40g10g20g02h02	04k2444400140	h10h!80g0810z |
+j!5ce2e3e7c20a	hb0e3c3c00e3e	g21c1c7c0!1e3c	b8e1c380g1928
+ 22e140g0e3e78	b9f087071f08z |
+j22202191!02i	c91024401110g	204222g012244	4112244f800610
+ 2190h11100440	808108880810y |
+j22202111!02i	89f1e4401110g	2041c2g0f2244	41f1c380g1828
+ 1110h0e103c40	808107!08z |
+j22202111!02i	890224401110g	204022g112244	41g204f802628
+ 1110h01104440	8081g8808z |
+j222021111202	i891224401110	g204222201122	4441122440g09
+ 44091002g!1144	40888108!8810	y |
+j3c78fb98e781	h01dce1d3a00e	3cgfdf1c1c00e	9d3af0e1c380g
+ 06ee0b9802g!0e	3af073f7c707!10	y |
+j20j01zj04g04	o1020y |
+j20k80zu20z |
+j70k3fZKf8zp |
+zzzm |
+zzzm |
+j0c0fg1080h20	zzu |
+k18g2080h10zzu |
+k18g2080h10zzu |
+j3c7eg408b873b	88zzu |
+j0c18g40864891	08zzu |
+j0c18g40844f95	08zzu |
+j0c18g40844815	08zzu |
+j0c18g4004488a	08zzu |
+j3f7eg208e670a	10zzu |
+m20i10zzu |
+m10i20zzu |
+zzzm |
+zzzm |
+zzzm |
+ne0g04h3810g01	80x80l60c0n06	j0e04h21h08g |
+m01j20402002g	80ia7771f33be	ce70h0408i80i	10i2040hcfdf87
+ i02h80g02h!20	800284g |
+m01j20402002g	80ia221089908	6488h0408i80i	10i2040h648902
+ i02h80g02h!20	800284g |
+m03eb8b9c5c7c	f841!c78e2e5c	g!a28899086488	g078f9f1ce971
+ f38b87403e3801	e1e3c01eg6489	02g170e1e3801	f1c002!1c7c20
+ 45c282g |
+m010444043220	40422208911020	g02a28f150854	80h4408225488
+ 808648801044g	12244001g5489	02g0c912244g82	20020422!2043
+ 200204 |
+m010444042220	4041c2089f1020	g02a7c9150854	99f003c4083e54
+ 88808448801044	gf224400fg5489	02g0891227cg82	2002041c!2022
+ 2002g |
+m010444042220	!402208901020	g03644893084c	88g0444082054
+ 88808448801044	0112244011g4c	89122008912240	g8220020402!20
+ 222002g |
+m01044404!2240	42222891102040	01444893084c88	g044448a254!88
+ 84488011440112	244011g4cd912	2008912244g8a	200204!22g1220
+ 0204 |
+m03c78f1f731c	f021c1c74e3c78	40014efcf93ee4	70g03a3871cd6
+ f073ee67800e38	ge9d3a00e80e4	73f7e01cce1d38	g71c00fdf!1c20
+ 1730!04 |
+n04k20k80s80i	80zj08g0408 |
+n04k10y80i80zl	08g |
+n0eq03ZZJf0g |
+zzzm |
+zzzm |
+jc40ezzzg |
+ga0h4010zzzg |
+ga0h8010zzzg |
+03f3970d1c7czzzg |
+014448930820zzzg |
+014fc8a10820zzzg |
+07e810a21040zzzg |
+028891221040zzzg |
+0287399d7cf0zzzg |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+j04a0h011848g	20g010204i4080	0408g11h60g04	g0611h90080a20
+ zm |
+j04c0i2008g20	g010204i408004	08g11h80g04g08	11h80080c20zm |
+j0940618602f0	bc0c587112340b	0c03868d18683c	e07ac303edc59e
+ 073c7ac301233c	1440zm |
+j08g9249024090	126489124c0c92	04499324981110	23248132264808
+ 902324812490g	40zm |
+j100104510481	1020850a248818	a2g5122451012	10242882642848
+ 10a02428824810	g80zm |
+j20gcfbe048120	1889122488117c	079122f9102220	445f0244489011
+ 20445f02462001	zn |
+j20g2820048120	048a1445101140	08a24482202420	445002!489021
+ 20445002412001	zn |
+j400228a20902	40451224c93032	4411264c8a6044	40889104889120
+ 22408891049140	02zn |
+j4001c71c0902	603911c348d02c	380e9a3471a063	80c88e04871130
+ 1c40c88e048e60	02zn |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+j0c0fg10k01c0	n0e04k0eh40zs |
+k18g20l40k40g	!02h20i02h20g	20zq |
+k18g20i10h40h	02h40g!02h20g	80g02h20g40zq |
+j3c7eg45c39dc0	08eef046638004	g38f9e2e7c2!1c	7cg477782331c
+ 10g40zq |
+j0c18g43244880	04440842244008	g444011!020422	20g2220421122
+ 10g40zq |
+j0c18g4227ca9f	0244784227c010	g3840f1!02041c	20f81223c2113e
+ 10g80zq |
+j0c18g42240a80	0428884224g08	g044111!020402	20g2144421120
+ 10g40zq |
+j0c18g422445g	08388842244004	g444511022204	!22g41c4421122
+ 10g40zq |
+j3f7eg273385g	!1075f9d38002	g!38ebc1cfdf!1c	g8083afce9c20
+ g40zq |
+m20zk20g40zq |
+m10zk40g20zq |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+n4ah8102g03h20	g309008zsa2q |
+n4ch8102g04h20	g408008zsc2q |
+n94070d1a0f38	1f6e2cf039e123	3czr0144q |
+n800893260444	09913240448124	90zs04q |
+m01ha244048413	21424085024810	zs08q |
+m02g0f22440888	12224480890246	21f8zr10q |
+m02g1144880908	12424481090241	20zs10q |
+m04g224c981110	24448901120491	40zs20q |
+m04g1d346818e0	24388980e2048e	60zs20q |
+zzzm |
+zi3fZOf0s |
+zi20zo10s |
+zi20zo10s |
+zi20zo10s |
+zi20zo10s |
+zi20zo10s |
+zi20zo10s |
+zi20j20zj10s |
+zi20j20gfezh10	s |
+zi20j21c102zh	10s |
+zi20j26610230	61z10s |
+zi20j3c11fe18	e1z10s |
+zi20j3011g0522	z10s |
+zi20j3011g0722	z10s |
+zi20j2010c103	32z10s |
+zi20l3fg1cz10	s |
+zi20zo10s |
+zi20zo10s |
+zi20zo10s |
+zi20zo10s |
+zi20kJ80y10s |
+zi20i01Gh08g80	y10s |
+zi20i01i08g80	y10s |
+zi20i01i08g80	y10s |
+zi20i01i08g80	y10s |
+zi20i01i08g80	y10s |
+zi20i01i08g80	y10s |
+zi20i01i08g80	y10s |
+zi20j80h08g80	y10s |
+zi20j80h08g80	y10s |
+zi20j80h08g80	y10s |
+zi20j80h082080	y10s |
+zi20j80h082040	y10s |
+zi20j40h082040	y10s |
+zi20j40h082040	y10s |
+zi20j80h082040	y10s |
+zi20j80h082040	y10s |
+zi20j80h082040	y10s |
+zi20j87Hf82040	y10s |
+zi20jf8h0fGc0	y10s |
+zi20m0820z10s |
+zi20m0840z10s |
+zi20n40z10s |
+zi20n40z10s |
+zi20n40z10s |
+zi20n40z10s |
+zi20n40z10s |
+zi20n40z10s |
+zi20n40z10s |
+zi20n40z10s |
+zi20n40z10s |
+zi20n40z10s |
+zi20n40z10s |
+zi20n40z10s |
+zi20n40z10s |
+zi20n40z10s |
+zi20n40g7fx10	s |
+zi20n40g80JjK	k10s |
+zi20n40g80i01	i01j01k10s |
+zi20n40g80h18	01i01i3001k10	s |
+zi20n40g80h10	01i01i2001k10	s |
+zi20n40g80h10	01i01i2001k10	s |
+zi20n40g80h10	01i01i2001k10	s |
+zi20n40g80h10	01h03g80h4001	8010i10s |
+zi20n40g80h10	01i!80h40g8010	i10s |
+zi20n!4080h10	01ic080h40g80	08i10s |
+zi20n!4080h10	01i2080hc0g80	08i10s |
+zi20n702080h10	03If880h80g80	07i10s |
+zi20n0e3080h10	1di1880h80gf0	01e0h10s |
+zi20n019080h10	01if080h807f9f	G8060g10s |
+zi20o7880h1001	h01!80h80g80g	e0c6g10s |
+zi20o0c80h1001	h03g80h80g80g	f006!10s |
+zi20n01f080h08	01h06g80h80g80	0380063010s |
+zi20n07g80h08	01j80h80g8002	i10s |
+zi20p80h0801j	80g01h8002i10	s |
+zi20p80h0801j	80g01h800ei10	s |
+zi20p81Hf80fj	80g01h80j10s |
+zi20pfeh0ff0j	80g01h80j10s |
+zi20y80g01h80	j10s |
+zi20yK80j10s |
+zi20zg01c0l10	s |
+zi20s01m0180l	10s |
+zi20zg0180l10	s |
+zi20n03e080h20	u10s |
+zi20n02g80h20	g02s10s |
+zi20n02g80g08	208f82s10s |
+zi20n020fe0g08	208c02s10s |
+zi20n03f08317	0e210422s10s |
+zi20o108e9878	21021fe0r10s |
+zi20o10889808	211902s10s |
+zi20o10eb9008	200702s10s |
+zi20n07e00e90	0630g02s10s |
+zi20q90i03e0r	10s |
+zi20zo10s |
+zi3fZOf0s |
+zzzm |
+zzzm |
+zzzm |
+zg0381zzj |
+t01i10h!80g08	zzh |
+q10h01i10h!80	g08zzh |
+m05c39dc008b8	73bbe0g0e3e78	b9f087071fzzh |
+m032448800464	88a107c0111004	408081088808zzg |
+m0227ca9f0244	f841h0e103c40	80810708zzh |
+m02240a800444	80a107c0011044	408081g88zzh |
+m022445g084489	1110g!11444088	8108!88zzg |
+m073385g10e673	18e0g!0e3af073	f7c70708zzg |
+zk10zzg |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+r7020zzs |
+n02h!10g01zzr |
+n02h!10g01zzr |
+m01c7cf173e10	e0e3e0g2e1cee	zzm |
+m0222g88!1021	1107c019224420	zzl |
+m01c20788!1020	e1h113e54zzm |
+n220888!102011	07c0112054zzm |
+m022228881110	211110g112228	20zzl |
+m01c1c75e0e7e	f8!e0g399c2820	zzl |
+z40zzl |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+l01e0j094070k	80g40h08g10h!04	!8020g44g0240	202880zj |
+j10h60h02g09!80	k80g40h08j04g	80g20g44g02g20	3080zj |
+j08h60h04g1283	e34896c0388bc2	22b0c5b03ce025	8618be0bc12cf3
+ 81eb0c048cf051	zk |
+j08g7861f3c004	g100124c89920	44890222c92648	1110264924c809
+ 013244408c9204	924001zk |
+j08gcc63966004	g200248913220	851102650a2c88	12104850458811
+ 0242484090a209	204002zk |
+j04gfc61e7e008	g4002489127c0	891202a917c9f0	2220488cf91012
+ 02448881117c09	188004zk |
+j08gc06076g04	g400251222401	0a2202a91409g	24204882811012
+ 02449081114009	048004zk |
+j08gcc63366004	g800493264441	12640332245110	444091228a2024
+ 04891102224412	45g08zk |
+j08g79f9e3c004	g80048d1a4380	e1a602222390e0	6380911c723026
+ 04898e03223812	398008zk |
+j08k04i02zzr |
+j10k02i22zzr |
+t1czzr |
+zzzm |
+zzzm |
+o0180j0cl0702	zzi |
+p80g10h04i20g	!01h10zzg |
+p80g10h04i20g	!01h10zzg |
+m05c3878eg7c70	e1c4c0g1c7cf1	73e1!0e3ezzg |
+m03244891g1089	12250f80222008	81010211!10zz |
+m0224489fg2871	f3e6h1c207881	01020e10zzg |
+m02244890h0902	050f8002208881	01020110zzg |
+m02244891h8912	2480g!22888111	02!1110zz |
+m0733874eh70e1	cc60g!1c75e0e7	ef8e0e10zz |
+zl20zz |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+n0e031eh08h18	04p06j70n0380	g10zg |
+n06g06h10h0804	gcfdf87g070ei	02j10o80g08g08	y |
+n06g06h10h0804	g648902g0912i	02g04h10h40i20	h80g08g10y |
+m07becf061eg20	e1c38984g6489	02g0810g3870e2	60023bbc1198e0
+ 8b873b8011dde0	8cc704g10y |
+m0317630633g21	12244a043e5489	02g0448804489	12800111021089
+ 11064891g0888	10844884g10y |
+m035663063fg20	e3e7cc04g5489	02g0e9dg38f9f3	07c0911e1089f2
+ 044f953e0488f0	844f84g20y |
+m03d6630630g20	12040a043e4c89	12201122g0481	0280010a221089
+ 01044815g0851	10844804g10y |
+m01e6630633g21	122449h4cd912	2011a3g448912	40020e22108910
+ 84488ag107110	844884g10y |
+m01aeefdf9eg10	e1c398c4ge473	f7e00e5c803870	e630!041d7e74
+ e04e670ag!20eb	f3a708g10y |
+s10zq08g10y |
+s08zq10g08y |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+r20h02i20zzm |
+r20h02i20zzm |
+q1c7c7001!c7g	1c7c70zzl |
+q222088022208	8022208840zzk |
+q3e208003e208	g3e2080zzl |
+q!2080!0208g!20	80zzl |
+q!228802222880	!228840zzk |
+q!1c7001c1c7g	!1c7040zzk |
+zg80zzk |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+t40zzr |
+zzzm |
+zzzm |
+t40zzr |
+q1020!40zzr |
+t80zzr |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+t40zzr |
+zzzm |
+zzzm |
+t40zzr |
+q1020!40zzr |
+t80zzr |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+m01zzy |
+n80zzx |
+n80zzx |
+n80zzx |
+n40zzx |
+n80zzx |
+n80zzx |
+n80zzx |
+n80zzx |
+m01zzy |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+j10zzzh |
+j08zzzh |
+j08zzzh |
+j08zzzh |
+j04zzzh |
+j08zzzh |
+j08zzzh |
+j08zzzh |
+j08zzzh |
+j10zzzh |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+01zzzl |
+g80zzzk |
+g80zzzk |
+g80zzzk |
+g40zzzk |
+g80zzzk |
+g80zzzk |
+g80zzzk |
+g80zzzk |
+01zzzl |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+04zzzl |
+04zzzl |
+0ezzzl |
+1fzzzl |
+2e80zzzk |
+zzzm |
+\enddata{raster, 6457984}
+\view{rasterview,6457984,38,0,0}
+
+After:
+
+\begindata{raster,6482944}
+2 0 68266 68266 0 0 536 244
+bits 6482944 536 244
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+g4ah81i1005g80	h20m01g0802g04	40g2401g010240	202880zn |
+g4ch81i100880	i20m01h02g0440	g2001g0102g20	3080zn |
+g94070d1agb0e1	a308812c30c5f3	ge02c32220b0e	1a3012cf381eb0
+ c04962461a048c	f051zo |
+g80089326gc912	64908132492644	8110324a220c91	264813244408c9
+ 20499289260492	4001zo |
+01ha244010a14	48908242822c48	g10428a6410a1	4488!2484090a
+ 20921711440920	4002zo |
+02g0f22440112	245f20824467c8	8601e045f2a811	2245f024488811
+ 17c092253e4409	188004zo |
+02g1144880114	28902082441408	8102204502a811	4289g24490811
+ 14g9224a08809	048004zo |
+04g224c980224	49912104891451	11044089133022	44991048911022
+ 24412448a29812	45g08zo |
+04g1d34680223	868e210488e391	8e03a088e22022	3868e04898e032
+ 238124489c6812	398008zo |
+o22zzw |
+o22zzw |
+j03f8i14zzw |
+zzzm |
+zzzm |
+zzzm |
+m380380j1czzr |
+m380380j1czzr |
+m380380j1czzr |
+m380380j1czzr |
+k3e07b87b8007	781e03dc1ezzq |
+h!03807f0ff8G	8007fc7f87fc7f	01h01zzm |
+i0180738e78e7	80079c73873c73	82i80zzl |
+i0180079c39c3	80071ce1ce1ce1	82i80zzl |
+07bbcf0f801f9c	39c380071ce1ce	1cG845c39dc40	zzl |
+03366319803b9c	39c380071ce1ce	1cG8432448840	zzl |
+01a6631980739c	39c380071ce1ce	1ce004227ca840	zzl |
+01e6631980738e	78e780071c7387	3c73842240a840	zzl |
+gc66319807f8f	f8G80071c7f87	fc7f8422445040	zzl |
+gc3!cfc03b87b8	7b80071c1e03dc	1e0273385080zzl |
+v02i80zzl |
+v01h01zzm |
+o3ff0zzv |
+o3ff0zzv |
+zzzm |
+zzzm |
+zzzm |
+h0180zzzi |
+i80g10zzzg |
+i80g10zzzg |
+05c3878eg7d70	e770zzx |
+03244891g10c9	1221zzx |
+0224489fg2889	f2a0zzx |
+02244890h8902	a0zzx |
+02244891h8911	41zzx |
+0733874eg01cc	e141zzx |
+n02zzx |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+g40zzzk |
+g80zzzk |
+g80zzzk |
+g80zzzk |
+01zzzl |
+g80zzzk |
+g80zzzk |
+g80zzzk |
+g80zzzk |
+g40zzzk |
+zzzm |
+zzzm |
+zzzm |
+h81!c00ezzzg |
+ga002g401001f1	Gcee780zzu |
+ga002g8010g88	8a244880zzu |
+03f38f8d1c7c01	09244890zzv |
+01410413222001	09c78890zzv |
+014104217e2001	114448a380zzu |
+07e20822!4002	12085121zzv |
+02820822444002	22289123zzv |
+028f9e1d38f007	c7G0e1czzv |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+j3fQ80zzp |
+j20q80zzp |
+j23e0l0850h80	zzp |
+j22m0840h80zzp |
+j22gc73b2ca631	8c68558c6080zzp |
+j23c128a4b2c9	4a529856529080	zzp |
+j202108a4a28f	319e88545e6080	zzp |
+j202108a4a288	08508854501080	zzp |
+j222128a4b289	4a529854529080	zzp |
+j21c0c724ac86	318c68544c6080	zzp |
+j20i20m80zzp |
+j20i20m80zzp |
+j3fQ80zzp |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+jc40ezzzg |
+ga0h4010zzzg |
+ga0h8010zzzg |
+03f3970d1c7czzzg |
+014448930820zzzg |
+014fc8a10820zzzg |
+07e810a21040zzzg |
+028891221040zzzg |
+0287399d7cf0zzzg |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+j04a0h011848g	20g010204i4080	0408g11h60g04	g0611h90080a20
+ zm |
+j04c0i2008g20	g010204i408004	08g11h80g04g08	11h80080c20zm |
+j0940618602f0	bc0c587112340b	0c03868d18683c	e07ac303edc59e
+ 073c7ac301233c	1440zm |
+j08g9249024090	126489124c0c92	04499324981110	23248132264808
+ 902324812490g	40zm |
+j100104510481	1020850a248818	a2g5122451012	10242882642848
+ 10a02428824810	g80zm |
+j20gcfbe048120	1889122488117c	079122f9102220	445f0244489011
+ 20445f02462001	zn |
+j20g2820048120	048a1445101140	08a24482202420	445002!489021
+ 20445002412001	zn |
+j400228a20902	40451224c93032	4411264c8a6044	40889104889120
+ 22408891049140	02zn |
+j4001c71c0902	603911c348d02c	380e9a3471a063	80c88e04871130
+ 1c40c88e048e60	02zn |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+j0c0fg10k01c0	n0e04k0eh40zs |
+k18g20l40k40g	!02h20i02h20g	20zq |
+k18g20i10h40h	02h40g!02h20g	80g02h20g40zq |
+j3c7eg45c39dc0	08eef046638004	g38f9e2e7c2!1c	7cg477782331c
+ 10g40zq |
+j0c18g43244880	04440842244008	g444011!020422	20g2220421122
+ 10g40zq |
+j0c18g4227ca9f	0244784227c010	g3840f1!02041c	20f81223c2113e
+ 10g80zq |
+j0c18g42240a80	0428884224g08	g044111!020402	20g2144421120
+ 10g40zq |
+j0c18g422445g	08388842244004	g444511022204	!22g41c4421122
+ 10g40zq |
+j3f7eg273385g	!1075f9d38002	g!38ebc1cfdf!1c	g8083afce9c20
+ g40zq |
+m20zk20g40zq |
+m10zk40g20zq |
+zzzm |
+zzzm |
+m03Qf8zzm |
+m02q08zzm |
+m021cm85h08zzm |
+m0222m84h08zzm |
+m!020c73b2ca63	18c68558c608zzm |
+m020c128a4b2c	94a52985652908	zzm |
+m!02108a4a28f3	19e88545e608zzm |
+m!02108a4a2880	850885450108zzm |
+m0222128a4b28	94a52985452908	zzm |
+m021c0c724ac8	6318c68544c608	zzm |
+m02i02m08zzm |
+m02i02m08zzm |
+m03Qf8zzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+l01e0j094070k	80g40h08g10h!04	!8020g44g0240	202880zj |
+j10h60h02g09!80	k80g40h08j04g	80g20g44g02g20	3080zj |
+j08h60h04g1283	e34896c0388bc2	22b0c5b03ce025	8618be0bc12cf3
+ 81eb0c048cf051	zk |
+j08g7861f3c004	g100124c89920	44890222c92648	1110264924c809
+ 013244408c9204	924001zk |
+j08gcc63966004	g200248913220	851102650a2c88	12104850458811
+ 0242484090a209	204002zk |
+j04gfc61e7e008	g4002489127c0	891202a917c9f0	2220488cf91012
+ 02448881117c09	188004zk |
+j08gc06076g04	g400251222401	0a2202a91409g	24204882811012
+ 02449081114009	048004zk |
+j08gcc63366004	g800493264441	12640332245110	444091228a2024
+ 04891102224412	45g08zk |
+j08g79f9e3c004	g80048d1a4380	e1a602222390e0	6380911c723026
+ 04898e03223812	398008zk |
+j08k04i02zzr |
+j10k02i22zzr |
+t1czzr |
+zzzm |
+m03Qf8zzm |
+m02q08zzm |
+m021cm85h08zzm |
+m0222m84h08zzm |
+m02200c73b2ca	6318c68558c608	zzm |
+m022c128a4b2c	94a52985652908	zzm |
+m0232108a4a28	f319e88545e608	zzm |
+m0222108a4a28	80850885450108	zzm |
+m0222128a4b28	94a52985452908	zzm |
+m021c0c724ac8	6318c68544c608	zzm |
+m02i02m08zzm |
+m02i02m08zzm |
+m03Qf8zzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+j10zzzh |
+j08zzzh |
+j08zzzh |
+j08zzzh |
+j04zzzh |
+j08zzzh |
+j08zzzh |
+j08zzzh |
+j08zzzh |
+j10zzzh |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+01zzzl |
+g80zzzk |
+g80zzzk |
+g80zzzk |
+g40zzzk |
+g80zzzk |
+g80zzzk |
+g80zzzk |
+g80zzzk |
+01zzzl |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+04zzzl |
+04zzzl |
+0ezzzl |
+1fzzzl |
+2e80zzzk |
+zzzm |
+zzzm |
+zzzm |
+zzzm |
+\enddata{raster, 6482944}
+\view{rasterview,6482944,39,0,0}
+
+\heading{Usage Overview}
+
+
+When a region is compressed, the text in that region does not appear in the 
+window.  Instead of the text, a box is drawn instead, containing the words 
+"n compressed lines".  This box is an inset, and the text inside it is no 
+longer a part of the parent text object.
+
+
+A compress box can be "decompressed" by left-clicking inside it. 
+ Decompressing it restores the contents to the parent document, and removes 
+the visible box from it.
+
+
+\heading{Implementation Details}
+
+
+Compress' box inset is made up of a compress dataobject (a subclass of 
+text) paired with a compressv viewobject (a subclass of view).  compressv, 
+rather than \italic{drawing} the text, displays the "\italic{n} compressed 
+lines" message with a box around it.
+
+
+When text is compressed, it is removed from the parent document and placed 
+into the compress dataobject.  The compress dataobject is placed in the 
+parent document and has a compressv associated with it in order to be 
+visible to the user.
+
+
+When its box inset is decompressed, compress copies its contents back into 
+the parent document and destroys itself.  The inset's position is 
+determined in much the same manner as are footnotes; all the environments 
+in the parent document are enumerated through to find which one is 
+associated with the compress box in question.
+
+
+\subheading{\italic{Line Number Trickery}}
+
+
+Compress only functions 100% properly when the parent document is a text 
+object that is "compress aware".  Currently, this only includes srctext and 
+its subclasses (cpptext, m3text, etc).  The reason for the restriction is 
+dependence on proper line number counts.  (In source code, if a compiler 
+says the error is on line 150, you want Esc-n 150 to GET you there).
+
+
+But, if 12 lines were compressed into a box, 11 newline characters will be 
+\italic{missing} from the parent document.  For this reason, "compress 
+aware" text subclasses override the \typewriter{text_GetPosForLine()} and 
+\typewriter{text_GetLineForPos()} methods, to properly compensate for this.
+
+
+The compress dataobject itself also does this, in order to properly handle 
+compress insets nested \italic{inside} it.
+
+
+\heading{Interface/Use}
+
+
+For use by macros or directly by users, compress provides several proctable 
+entries:  \smaller{("lines" would be more accurately termed "paragraphs" in 
+the context of a text object)}.
+
+
+\leftindent{\bold{\italic{compressv-compress-lines}}
+
+This will take as input a range of lines, and "compress" them into a box. 
+ Any boxes already within that range, or immediately adjacent to the new 
+box, will be combined with it to form a single box.
+
+
+\bold{\italic{compressv-decompress-lines}}
+
+This will take as input a range of lines, and decompress them out of the 
+box they may be in.  Even if the range is enclosed within a box, only the 
+specified range will be decompressed, keeping the remainder of the box's 
+contents still compressed, splitting it into \italic{two} boxes if 
+necessary.
+
+
+In the above two procs, "take as input" means the proctable entries will 
+first look for a parameter being passed to them as a rock value.  If none 
+was passed, they will look for a selected region and extend it to encompass 
+complete paragraphs.  If no region was selected, they will prompt the user 
+for a range of lines.  In any case, a single value is acceptable and is 
+taken to mean the operation is to be done to \italic{that} line alone.  If 
+\italic{two} numbers are specified, they are taken as a range, and the 
+numbers can be delimited by any non-digit characters.
+
+}
+The source views (srctext and its subclasses) provide their own interface 
+to compress, through the following proctable entries:
+
+
+\leftindent{\bold{\italic{srctextview-compress}}
+
+This is a specialized for dealing with source code.  If no region is 
+explicitly selected, this proc will determine the indentation level of the 
+current line.  It will then move forward and backward through the file, 
+encompassing all lines indented as far or farther than the current line, 
+until it encounters lines \italic{outdented} from it.  It will compress the 
+resultant region into a box.
+
+
+\bold{\italic{srctextview-compress-all}}
+
+This is identical to srctextview-compress, but rather than compressing the 
+single indented area in which the cursor lies, it will compress ALL regions 
+in the entire file that are indented as far or farther than the current 
+line.
+
+
+The source views' compress functions allow nesting of compress boxes, so 
+that the user can later "peel away" compress boxes to view more detail as 
+desired.  Unlike the general-use compress functions described earlier, the 
+whole point of these is to save screen space.  Therefore, the source views' 
+compress-all function will not bother compressing regions of less than 3 
+lines.
+
+}
+For general use by both macros and the source views, compress also provides 
+the following proctable entries:
+
+
+\leftindent{\bold{\italic{compressv-compress-region}}
+
+This is mostly for use by macros, for purposes the author didn't foresee. 
+ It compresses the selected region.  Period.  It doesn't try to encompass 
+entire lines, or combine adjacent boxes.  It allows compress boxes to be 
+nested.
+
+
+\bold{\italic{compressv-decompress-all}}
+
+This will decompress all the boxes in the document.  If boxes were nested 
+inside each other, this will only decompress the outermost "layer" of them. 
+ Repeated calls to this function will eventually remove all compress boxes.
+
+}
+\heading{Output}
+
+
+The compress dataobject inherits nearly all of the text object's methods, 
+with the exception of GetLineForPos() and GetPosForLine() as noted above. 
+ Because of this, compress insets are written to the output file like any 
+other inset.  The text inside the compress box is preserved, and the 
+existence of the compress box is remembered.
+
+
+This is not desirable for source code, because compilers don't appreciate 
+datastreams in any form.  But, since the source views are "compress aware", 
+srctext's \typewriter{Write()} method includes a special check for insets 
+that are compress boxes.  When it encounters these, it writes their 
+contents out as a \italic{srctext} object, rather than a text object.  A 
+srctext object written to a file does not save any style or datastream 
+information, and converts insets to a format that's more acceptable to 
+compilers than a datastream would be.  Since the compress inset's contents 
+are written in this same format, the resultant file holds no record of the 
+compress box ever having been there.
+
+
+\heading{Tailoring Appearance}
+
+
+The visual appearance of the compress boxes are user-tailorable through the 
+following preferences:
+
+
+\bold{*.CompressBoxFont:} \italic{andysans8}
+
+This preference determines the font to be used in the boxes that represent 
+compressed regions of code.
+
+
+\bold{*.CompressBoxForegroundColor:} \italic{black}
+
+This preference sets the color of the string "\italic{n} compressed lines" 
+that appears in boxes of compressed code.
+
+
+\bold{*.CompressBoxBackgroundColor:} \italic{white}
+
+Specifying this preference will replace the border drawn around compress 
+boxes with a solid rectangle of the specified color.
+
+
+\heading{Future Possibilities}
+
+
+The text object itself could be made "compress aware" by modifying its 
+\typewriter{GetLineForPos()} and \typewriter{GetPosForLine()} methods to 
+detect compress insets and take their internal line counts into 
+consideration.
+
+
+Different compressv viewobjects could have different appearances, which 
+could denote the \italic{reason} the region was compressed.
+
+
+A macro could be written to compress regions of C code that were surrounded 
+by preprocessor directives such as \typewriter{\italic{#if}} or 
+\typewriter{\italic{#else}}.  Given the previous enhancement, different 
+compile-time conditions could be color-coded, letting the programmer know 
+at a glance whether the compressed code was worth decompressing to look at 
+or not.\
+\enddata{text,6457856}

@@ -1,0 +1,78 @@
+\begindata{text,538267956}
+\textdsversion{12}
+\template{help}
+\define{global
+}
+\chapter{Relativize: Linking for Shared Libraries
+
+}
+\section{What Relativize is
+
+}\leftindent{
+Relativize is a program which assists in linking executables and shared 
+libraries in such a manner that the libraries the executable uses can be 
+moved withouth breaking the program.  (Assuming LIBPATH, LD_LIBRARY_PATH, 
+or an equivalent is set appropriately.)
+
+}
+\section{Using Relativize
+
+}\leftindent{
+Typically relativize is invoked automatically when compiling.  The simplest 
+invocation of  would be something like:
+
+
+relativize --- program [arguments]
+
+
+This would execute program converting any pathnames ending in /lib<name>.a 
+to -Ldir -lname. (Using only one -Ldir per distinct directory.)
+
+
+The arguments before the --- indicate individual libraries or directories 
+for which the transformation should not be done.  (For example if there is 
+a name conflict this may be necessary to get two different libfoo.a 
+libraries from different directories.)  An argument ending in a / is taken 
+to be a directory for which -L conversion should be supressed.  A full path 
+name suppresses the conversion for that file only.  A name like libfoo.a 
+supresses the conversion of any pathname ending in /libfoo.a.
+
+}
+\section{A more complex example}\leftindent{
+
+
+\example{relativize libfoo.a --- echo /libbar.a /usr/lib/libfoo.a}
+
+
+}\leftindent{In this example the command actually executed would be:
+
+
+\example{echo -L/ -lbar /usr/lib/libfoo.a}
+
+
+The example below would do the same thing, but would also suppress the 
+conversion of any other libraries in /usr/lib.
+
+
+\example{relativize /usr/lib/ --- echo /libbar.a /usr/lib/libfoo.a}
+
+}
+\section{Quick reference
+
+}\leftindent{
+relativize [directories and libraries] --- program [arguments]
+
+}
+\section{Program Author}
+
+\leftindent{\leftindent{
+}Rob Ryan
+
+}
+\section{Recent changes to Genstatl
+
+}\leftindent{
+Initial Release (June, 1993)}
+
+
+\enddata{text,538267956}

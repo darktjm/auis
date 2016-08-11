@@ -1,0 +1,14 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+GDEV = ../gdev
+RECOG = ../recognition
+LIBS = $(GDEV)/libgdev.a $(RECOG)/librecog.a
+LOCALINCLUDE = -I$(GDEV) -I$(RECOG)
+OBJS =  mrecord.o region.o
+XLIB = -L${XLIBDIR} -lX11
+
+ProgramTarget(mrecord, $(OBJS), $(LIBS),${XLIB} -lm)
+InstallProgram(mrecord,$(BASEDIR)/bin)

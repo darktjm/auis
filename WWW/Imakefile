@@ -1,0 +1,219 @@
+/* Imakefile for WWW
+
+	use normal WWW BUILD command
+	then install 'www' into DESTDIR/bin/ATKWWW
+
+	need to parse output of BUILD to find out 
+		where the result went, (if anywhere)
+
+*/
+
+awww: 
+	ANDREWDIR=$(DESTDIR) ./BUILD library
+	ANDREWDIR=$(DESTDIR) ./BUILD linemode
+	rm -f ,nlog
+	- ./BUILD nothing > ,nlog
+	- rm -f awww
+	ln -s LineMode/`awk '/machine/{print $$(NF)}' < ,nlog`/www awww
+	rm -f ,nlog
+
+InstallProgram(awww, $(DESTDIR)/etc)
+
+
+/* these cleaning rules are from Makefile.cern 
+		need '?'s to avoid being comments !
+*/
+
+clean::
+	rm -f *[~#] */?*[~#] */?*/?*[~#]
+	rm -f *.o */?*.o */?*/?*.o
+	rm -f *.old */?*.old */?*/?*.old
+
+clobber: clean
+	rm -f Library/[a-z0-9]*/libwww.a
+	rm -f LineMode/[a-z0-9]*/www*
+	rm -f Daemon/[a-z0-9]*/httpd*
+	rm -f Daemon/[a-z0-9]*/htimage
+	rm -f Daemon/[a-z0-9]*/htadm
+	rm -f Daemon/[a-z0-9]*/cgiparse
+	rm -f Daemon/[a-z0-9]*/cgiutils
+
+
+
+
+/* dependencies done by hand */
+
+awww: Library/Implementation/HTAABrow.c
+awww: Library/Implementation/HTAABrow.h
+awww: Library/Implementation/HTAABrow.html
+awww: Library/Implementation/HTAAUtil.c
+awww: Library/Implementation/HTAAUtil.h
+awww: Library/Implementation/HTAAUtil.html
+awww: Library/Implementation/HTAccess.c
+awww: Library/Implementation/HTAccess.h
+awww: Library/Implementation/HTAccess.html
+awww: Library/Implementation/HTAlert.c
+awww: Library/Implementation/HTAlert.c.ori
+awww: Library/Implementation/HTAlert.h
+awww: Library/Implementation/HTAlert.html
+awww: Library/Implementation/HTAnchor.c
+awww: Library/Implementation/HTAnchor.h
+awww: Library/Implementation/HTAnchor.html
+awww: Library/Implementation/HTAssoc.c
+awww: Library/Implementation/HTAssoc.h
+awww: Library/Implementation/HTAssoc.html
+awww: Library/Implementation/HTAtom.c
+awww: Library/Implementation/HTAtom.h
+awww: Library/Implementation/HTAtom.html
+awww: Library/Implementation/HTBTree.c
+awww: Library/Implementation/HTBTree.h
+awww: Library/Implementation/HTBTree.html
+awww: Library/Implementation/HTChunk.c
+awww: Library/Implementation/HTChunk.h
+awww: Library/Implementation/HTChunk.html
+awww: Library/Implementation/HTDescpt.c
+awww: Library/Implementation/HTDescpt.h
+awww: Library/Implementation/HTDescpt.html
+awww: Library/Implementation/HTDirBrw.c
+awww: Library/Implementation/HTDirBrw.h
+awww: Library/Implementation/HTDirBrw.html
+awww: Library/Implementation/HTEPtoCl.c
+awww: Library/Implementation/HTEPtoCl.h
+awww: Library/Implementation/HTEPtoCl.html
+awww: Library/Implementation/HTErrMsg.c
+awww: Library/Implementation/HTError.c
+awww: Library/Implementation/HTError.h
+awww: Library/Implementation/HTError.html
+awww: Library/Implementation/HTEscape.c
+awww: Library/Implementation/HTEscape.h
+awww: Library/Implementation/HTEscape.html
+awww: Library/Implementation/HTEvent.c
+awww: Library/Implementation/HTEvent.h
+awww: Library/Implementation/HTEvent.html
+awww: Library/Implementation/HTFTP.c
+awww: Library/Implementation/HTFTP.h
+awww: Library/Implementation/HTFTP.html
+awww: Library/Implementation/HTFWrite.c
+awww: Library/Implementation/HTFWrite.h
+awww: Library/Implementation/HTFWrite.html
+awww: Library/Implementation/HTFile.c
+awww: Library/Implementation/HTFile.h
+awww: Library/Implementation/HTFile.html
+awww: Library/Implementation/HTFormat.c
+awww: Library/Implementation/HTFormat.h
+awww: Library/Implementation/HTFormat.html
+awww: Library/Implementation/HTGopher.c
+awww: Library/Implementation/HTGopher.h
+awww: Library/Implementation/HTGopher.html
+awww: Library/Implementation/HTGuess.c
+awww: Library/Implementation/HTGuess.h
+awww: Library/Implementation/HTGuess.html
+awww: Library/Implementation/HTHist.c
+awww: Library/Implementation/HTHist.h
+awww: Library/Implementation/HTHist.html
+awww: Library/Implementation/HTIcons.c
+awww: Library/Implementation/HTIcons.h
+awww: Library/Implementation/HTIcons.html
+awww: Library/Implementation/HTInit.c
+awww: Library/Implementation/HTInit.c.ori
+awww: Library/Implementation/HTInit.h
+awww: Library/Implementation/HTInit.html
+awww: Library/Implementation/HTList.c
+awww: Library/Implementation/HTList.h
+awww: Library/Implementation/HTList.html
+awww: Library/Implementation/HTMIME.c
+awww: Library/Implementation/HTMIME.h
+awww: Library/Implementation/HTMIME.html
+awww: Library/Implementation/HTML.c
+awww: Library/Implementation/HTML.h
+awww: Library/Implementation/HTML.html
+awww: Library/Implementation/HTMLDTD.html
+awww: Library/Implementation/HTMLGen.c
+awww: Library/Implementation/HTMLGen.h
+awww: Library/Implementation/HTMLGen.html
+awww: Library/Implementation/HTMLPDTD.c
+awww: Library/Implementation/HTMLPDTD.h
+awww: Library/Implementation/HTMLPDTD.html
+awww: Library/Implementation/HTMulti.c
+awww: Library/Implementation/HTMulti.h
+awww: Library/Implementation/HTMulti.html
+awww: Library/Implementation/HTNews.c
+awww: Library/Implementation/HTNews.h
+awww: Library/Implementation/HTNews.html
+awww: Library/Implementation/HTParse.c
+awww: Library/Implementation/HTParse.h
+awww: Library/Implementation/HTParse.html
+awww: Library/Implementation/HTPlain.c
+awww: Library/Implementation/HTPlain.h
+awww: Library/Implementation/HTPlain.html
+awww: Library/Implementation/HTRules.c
+awww: Library/Implementation/HTRules.h
+awww: Library/Implementation/HTRules.html
+awww: Library/Implementation/HTStream.h
+awww: Library/Implementation/HTStream.html
+awww: Library/Implementation/HTString.c
+awww: Library/Implementation/HTString.h
+awww: Library/Implementation/HTString.html
+awww: Library/Implementation/HTStyle.c
+awww: Library/Implementation/HTStyle.h
+awww: Library/Implementation/HTStyle.html
+awww: Library/Implementation/HTTCP.c
+awww: Library/Implementation/HTTCP.h
+awww: Library/Implementation/HTTCP.html
+awww: Library/Implementation/HTTP.c
+awww: Library/Implementation/HTTP.h
+awww: Library/Implementation/HTTP.html
+awww: Library/Implementation/HTTeXGen.c
+awww: Library/Implementation/HTTeXGen.h
+awww: Library/Implementation/HTTeXGen.html
+awww: Library/Implementation/HTTee.c
+awww: Library/Implementation/HTTee.h
+awww: Library/Implementation/HTTee.html
+awww: Library/Implementation/HTTelnet.c
+awww: Library/Implementation/HTTelnet.h
+awww: Library/Implementation/HTTelnet.html
+awww: Library/Implementation/HTThread.c
+awww: Library/Implementation/HTThread.h
+awww: Library/Implementation/HTThread.html
+awww: Library/Implementation/HTUU.c
+awww: Library/Implementation/HTUU.h
+awww: Library/Implementation/HTUU.html
+awww: Library/Implementation/HTUtils.h
+awww: Library/Implementation/HTUtils.html
+awww: Library/Implementation/HTWAIS.c
+awww: Library/Implementation/HTWAIS.h
+awww: Library/Implementation/HTWAIS.html
+awww: Library/Implementation/HTWSRC.c
+awww: Library/Implementation/HTWSRC.h
+awww: Library/Implementation/HTWSRC.html
+awww: Library/Implementation/HTWriter.c
+awww: Library/Implementation/HTWriter.h
+awww: Library/Implementation/HTWriter.html
+awww: Library/Implementation/HTXParse.c
+awww: Library/Implementation/HTXParse.h
+awww: Library/Implementation/HTXParse.html
+awww: Library/Implementation/HText.h
+awww: Library/Implementation/HText.html
+awww: Library/Implementation/HTomime.c
+awww: Library/Implementation/HTomime.h
+awww: Library/Implementation/SGML.c
+awww: Library/Implementation/SGML.h
+awww: Library/Implementation/SGML.html
+awww: Library/Implementation/WWWLib.h
+awww: Library/Implementation/WWWLib.html
+awww: Library/Implementation/tcp.h
+awww: Library/Implementation/tcp.html
+
+awww: LineMode/Implementation/DefaultStyles.c
+awww: LineMode/Implementation/DefaultStyles.c.classic
+awww: LineMode/Implementation/DefaultStyles.c.modern
+awww: LineMode/Implementation/GridStyle.c
+awww: LineMode/Implementation/GridStyle.h
+awww: LineMode/Implementation/GridStyle.html
+awww: LineMode/Implementation/GridText.c
+awww: LineMode/Implementation/GridText.h
+awww: LineMode/Implementation/GridText.html
+awww: LineMode/Implementation/HTBrowse.c
+awww: LineMode/Implementation/HTBrowse.h
+awww: LineMode/Implementation/HTBrowse.html
+awww: LineMode/Implementation/HTFont.h

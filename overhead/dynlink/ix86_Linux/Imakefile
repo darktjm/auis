@@ -1,0 +1,17 @@
+NormalObjectRule()
+DependTarget()
+LOCALINCLUDES=-I../common
+#ifdef BINARY_DISTRIBUTION
+LOCALNORELS=/usr/lib/libstdc++.a
+STDCPPLIB=/usr/lib/libstdc++.a
+#endif
+
+CPPProgramTarget(adynlink, ATKOLinkI.o doloadi.o doload.o , ../common/libATKOLink.a ../common/libATKLink.a $(UTILLIB), $(STDCPPLIB))
+
+CPPProgramTarget(aexelink,  ATKELinkI.o,  ../common/libATKELink.a ../common/libATKLink.a $(UTILLIB), $(STDCPPLIB))
+
+InstallProgram(adynlink, $(DESTDIR)/etc)
+InstallProgram(aexelink, $(DESTDIR)/etc)
+LibraryTarget(libATKDynLoad.a, doloadi.o doload.o)
+InstallLibrary(libATKDynLoad.a, $(DESTDIR)/lib)
+InstallCshScript(alibexp.csh,$(DESTDIR)/etc/alibexp)

@@ -1,0 +1,70 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+
+OBJS = zip.o zipd000.o zipdf00.o zipdf01.o zipdi00.o zipds00.o zipds01.o zipds02.o zipedit.o zipoarc.o zipoarrow.o zipobject.o zipocapt.o zipocirc.o zipoelli.o zipofcapt.o zipoimbed.o zipoline.o zipopath.o zipoplin.o zipopolygon.o ziporang.o ziporect.o ziposymbol.o zipotrap.o zipprint.o zipstatus.o zipv000.o zipve00.o zipve01.o zipve02.o zipve03.o zipvf00.o zipvi00.o zipview.o zipvp00.o zipvp01.o zipvp02.o zipvp03.o zipvr00.o zipvs00.o
+
+HFILES = zip.H zipedit.H zipoarc.H zipoarrow.H zipobject.H zipocapt.H zipocirc.H zipoelli.H zipofcapt.H zipoimbed.H zipoline.H zipopath.H zipoplin.H zipopolygon.H ziporang.H ziporect.H ziposymbol.H zipotrap.H zipprint.H zipstatus.H zipview.H
+
+INCFILES = zip.h \
+	zipedit.h \
+	zipefc00.h \
+	zipefn00.h \
+	zipfig.h \
+	zipiff00.h \
+	zipifm00.h \
+	zipimage.h \
+	zippane.h \
+	zipprint.h \
+	zipstrm.h
+
+LIBS =  $(UTILLIB)  
+
+NormalObjectRule()
+NormalATKRule()
+
+EXTRACLASSES = zipedit zipoarc zipoarrow zipobject zipocapt zipocirc zipoelli zipofcapt zipoimbed zipoline zipopath zipoplin zipopolygon ziporang ziporect ziposymbol zipotrap zipprint zipstatus zipview
+
+
+DynamicMultiObjectWithExports(zip, $(EXTRACLASSES), $(OBJS), $(LIBS), $(DYNMATHLIB),)
+InstallDynamicObjectWithExports(zip, $(EXTRACLASSES), $(FULLATKDLIBDIR))
+
+InstallClassFiles($(HFILES))
+
+InstallMultiple(${INCFILES}, ${INSTINCFLAGS}, ${DESTDIR}/include/atk)
+
+InstallLink(runapp, ${DESTDIR}/bin/zip)
+
+FontRule()
+NSDeclareFont(zipdot20)
+NSDeclareFont(zipicn20)
+NSDeclareFont(zipshd16)
+NSDeclareFont(ziptop10)
+
+DependTarget()
+
+InstallDocs(ZipPG.doc,${DESTDIR}/doc/PROGRAMMER)

@@ -1,0 +1,484 @@
+\begindata{text,538683564}
+\textdsversion{12}
+\template{default}
+\define{ness
+}
+\define{footnote
+
+attr:[Flags OverBar Int Set]
+attr:[FontSize PreviousFontSize Point -2]}
+\define{italics
+}
+
+
+
+\flushright{ \
+
+
+}
+\center{\bold{\bigger{Building Hypertext on a Multimedia Toolkit:
+
+An Overview of Andrew Toolkit Hypermedia Facilities}}
+
+
+Mark 
+Sherman\footnote{\
+\begindata{fnote,538643448}
+\textdsversion{12}
+\enddata{fnote,538643448}
+\view{fnotev,538643448,25,0,0}This work was performed as a joint project of 
+Carnegie Mellon University and the IBM Corporation. Some of the work was 
+supported by the National Science Foundation under contract ASC-8617695. 
+The views and conclusions in this document are those of the authors and 
+should not be interpreted as representing the official policies of the IBM 
+Corporation, the National Science Foundation or Carnegie Mellon University.}
+
+Wilfred J. Hansen
+
+Michael McInerny
+
+Tom Neuendorffer
+
+}
+
+\center{Information Technology Center
+
+Carnegie Mellon University
+
+4910 Forbes Avenue
+
+Pittsburgh, PA 15213
+
+USA
+
+
+phone: +1-412-268-6727
+
+fax: +1-412-268-6787
+
+email: mss+@andrew.cmu.edu
+
+}
+
+
+\indent{\bold{Abstract:}  This paper discusses the construction and 
+application of several hypermedia facilities within the Andrew Toolkit 
+(ATK) and its applications. As a general-purpose, multimedia, 
+application-development system, ATK permits many kinds of links, references 
+and other connections to be made within pieces of content and between 
+pieces of content, regardless of the content's medium. We argue that 
+starting with a multimedia architecture renders trivial the construction of 
+all forms of hypermedia.  Four specific hypermedia facilities implemented 
+with ATK are discussed: an integrated web and indexing system (Help), a 
+simple multimedia link facility (Link), a cross reference (Textref) 
+capability, and a link-supporting embedded object language (Ness).  As a 
+toolkit, ATK is used to build other applications which inherit ATK's 
+hypermedia facilities. Therefore we consider briefly the way that 
+hypermedia facilities are used in conventional applications, such as mail 
+systems.
+
+}
+\indent{\bold{Keywords:} Hypermedia, Implementation, Multimedia}
+
+\begindata{bp,538342696}
+\enddata{bp,538342696}
+\view{bpv,538342696,22,0,0}
+
+\section{Introduction}
+
+
+Considerable effort has been devoted to cataloging dozens of different 
+forms of links for hypertext [Meyrowitz, 1989].  Unfortunately, if one sets 
+out to build a system incorporating each as a special case, the 
+implementation effort becomes unwieldy before the benefits become apparent. 
+ In this paper we argue that it is preferable to begin by building a 
+general-purpose multimedia architecture;  it is then trivial to build a 
+variety of link types.
+
+
+The Andrew Toolkit (ATK) [ITC, 1990; Palay, 1988] is a multimedia 
+application development system with which system builders can create 
+applications quickly. Its applications are in daily use by thousands of 
+people on the CMU campus, other universities, and several industrial 
+research laboratories. ATK is widely available on the MIT X Window System 
+distribution.  In its current release, the system provides support for many 
+media, including multifont text, raster images, structured graphics, 
+animations, spreadsheets, equations, and audio.  The system also provides 
+facilities for composing and connecting media, such as screen layout 
+objects, buttons, sliders, knobs, and linking facilities of various kinds. 
+ The linking facilities provide the same service as hypertext links.
+
+
+The Andrew Toolkit has three features that distinguish it from hypertext 
+systems. First, ATK is a true multimedia architecture. The presence of 
+media other than simple text is commonplace. Second, ATK is a toolkit for 
+building other applications. Thus, it is not a hypertext system per se. 
+Instead, ATK allows any application built with it to use linking 
+facilities. Third, link facilities are optional. Even in the absence of 
+linking facilities, ATK is a fully operational multimedia authoring system, 
+so both developers and users can ignore gratuitous linking facilities. 
+ People may choose other hypertext systems precisely because of their 
+linking facilities, but people choose ATK for its editing and application 
+construction capabilities, and, as an added attraction, they can utilize 
+linking facilities as well.  Therefore, ATK provides one of the few test 
+beds for measuring the usefulness of linking empirically.  In this paper, 
+we provide some preliminary statistics of one particular use of an ATK 
+application.
+
+
+
+\section{Multimedia Facilities}
+
+
+The primary composition mechanism in the Andrew Toolkit is inset nesting, 
+as can be observed in figure 1, which shows the screen of IBM RT running 
+three ATK applications under the X Window System.  The upper-left displays 
+\bold{console}, a system monitoring application; beneath it is 
+\bold{typescript}, a shell interface; and to the right of both is the 
+generic object editor, in this case editing a spreadsheet object.  Within 
+the latter, the left-side cells have been connected together to hold a 
+multifont text object which in turn contains a raster image.  The 
+right-side cells have been grouped in three sections holding a collection 
+of equations, an animation, and another spreadsheet object.  \
+
+
+
+The nesting of one object in another, such as a raster in the text in the 
+spreadsheet, can continue as deeply as desired.  This nesting is the 
+central feature of ATK and is implemented as a set of protocols by which a 
+surrounding object can completely control the environment perceived by a 
+surrounded object.  In general terms, the protocols provide that events 
+propagate inward so the surrounding object can determine, for instance, 
+whether or not an inner object receives mouse hits.  \
+
+
+
+The generic object editor does not understand the details of any object. 
+ If no object type is specified, a multifont text object will be used by 
+default--many casual users rely on this default and believe the object 
+editor to be a word processing system.  Since the object editor works on 
+any object, the same program can be used to manipulate any medium, and thus 
+forms the basis of a multimedia application.
+
+
+On top of these basic facilities, one can build many different, user-level 
+linking paradigms, such as those described in the next section.
+
+
+
+\section{Hypermedia Facilities}
+
+
+In this section, we discuss four kinds of linking facilities that have been 
+implemented in ATK: an integrated web, simple links, cross references in 
+text, and fully programmable links.
+
+
+\subsection{Webs (Help)}
+
+
+The concept of webs was made popular by Intermedia [Meyrowitz, 1986]. Webs 
+define a collection of documents connected by references.  In ATK, the 
+impetus for developing a web subsystem was to support the Help system, 
+which organizes and cross references help from many sources, including 
+locally written help files and Unix manual pages.  Figure 2 shows the Help 
+program running.  The main area of the window--on the left--displays one of 
+the files of help information.  The top two panes in the right column 
+display available information, with general help on top, just above help 
+for commonly used programs.  Both panes represent precompiled collections 
+of references and act as starting points within a web.  One can dynamically 
+put together a collection of references, as shown in the bottom-most pane 
+in the right column.  Here we show the authors' attempts to learn how to 
+make screen snapshots for this paper.  As various help information is 
+found, bookmarks in specific documents may be added so that we can move 
+from document to document quickly to collate the necessary information. 
+ Users can add or remove the panes in the right-hand column as desired.
+
+
+The precompiled lists provide starting points within a web; users navigate 
+from document to document through the use of marked links.  In figure 3, we 
+see another help document with a link marked.  When the link is followed, 
+the new document is displayed in the main part of the help window.  The 
+system uses auxiliary files to map link-names with help documents. 
+ Different auxiliary files can be used to provide different mappings.  For 
+example, the mapping files (web) used by ATK developers contain references 
+to local, obscure system programs while the mapping files (web) used by the 
+main campus provide information on stable, released systems.  Thus, the use 
+of new auxiliary files allows one to create webs of information for any 
+application, not just help files.  Although users may supplement the 
+mapping file to extend the web, they may not replace the web with one of 
+their own.
+
+
+\subsection{Simple Links (Link)} 
+\footnote{\
+\begindata{texttag,538623192}
+\textdsversion{12}
+Simple Links\
+\enddata{texttag,538623192}
+\view{texttagv,538623192,23,0,0}}
+
+
+The most common form of linking is a reference from one document to 
+another. The special object (inspired by NoteCards [Halasz, 1987]) that 
+contains a reference is called a \italic{link}.  When followed, the link 
+causes the reference to be displayed in a new window employing the generic 
+object editor.
+
+
+Figure 4 shows a simple document with three links in it.  One link is 
+contained in the spreadsheet, another in the text and the third is within 
+the drawing.  As an ATK object, a link can be placed anywhere other objects 
+may be placed.  The link is followed by clicking the left mouse button on 
+the link symbol.  As a separate entity, the link object has no global 
+knowledge about the containing document or further links in referenced 
+documents.  Therefore, there is no way to get global information about the 
+web in which the link is embedded.
+
+
+The destination of a link is a filename.  Since our site uses a wide area 
+network distributed file system [Howard, 1988], links can refer to 
+documents that exist across the country as easily as documents on the local 
+workstation.  However, moving a set of linked documents is non-trivial, 
+since absolute pathnames are encoded in the document.
+
+
+\subsection{Cross References (Textref)}
+
+
+While simple links provide a reference from one point in a document to 
+another file (but not within the document), cross references are used to 
+provide references from within a document to another point in the same 
+document. Traditionally, in printed text a cross reference appears as a 
+label, similar to a footnote, at the target, with an indication of the 
+target page and label at the source of the cross reference.
+
+
+ATK provides support for the traditional use of cross references, but, in 
+addition, allows the user to interact with a reference when the document is 
+on the screen.  Users define \italic{tags} that denote destinations and 
+\italic{references} that denote links. Clicking the left mouse button on a 
+reference will make the target (tag) visible and move the text caret to the 
+target.  In figure 5, we show a document with its tags and references 
+exposed so that the names are visible. Normally, only icons indicating tags 
+or references would be visible.
+
+
+While cross references work only in text, this is not a serious limitation. 
+Since our text object can embed other objects arbitrarily, one simply 
+places references adjacent to non-text objects in a text object to 
+reference other media.
+
+
+\subsection{Programmed Links (Ness)}
+
+
+The most sophisticated linking facilities in the Andrew Toolkit are 
+provided by the embedded object language Ness [Hansen, 1990].  This is 
+essentially an advanced Hypertalk-like language [Atkinson, 1987], where the 
+elements are laid out utilizing the ADEW application builder [Neuendorffer, 
+1990].  The language can be used to extend objects in documents or to build 
+entire applications, such as the quotation browser shown in figure 6.  The 
+main portion of the application's window is devoted to a scrollable 
+document containing a number of quotations about birth.  Across the bottom 
+of the window are buttons which perform various operations including simple 
+movements within the document, such as moving to the next or previous 
+quotation.  Thus these buttons are similar to the Next and Previous buttons 
+often found in Hypercard applications.  But the document is a normal text 
+object and has all the behaviors that users have come to expect from text; 
+ they can scroll with the scrollbar and conduct normal text searches.
+
+
+Within each entry, a mouse click on a reference in a "CF:" line scrolls the 
+text to display the referenced message.  For example, figure 7 shows the 
+text scrolled to the appropriate reference after a click on "Macbeth."
+
+
+The linking performed by the embedded language is simple and quite general. 
+If desired, one can use the full facility of an object-oriented, multimedia 
+manipulation language.  For example, one can move within a document, move 
+to another document, move to multiple documents in multiple windows, and 
+search and link based on media type and content.  With a full programming 
+language, many tricks are possible;  the births cross referencing is 
+constructed with a routine in Ness which checks each mouse click to see if 
+it is in a line beginning with "CF:".  \
+
+
+
+\subsection{Documents with a Variety of Link Types}
+
+
+The linking facilities we have discussed are not mutually exclusive.  For 
+example, a document within the Help system can provide simple links to 
+other documents.  The link facility itself is documented this way.  Figure 
+8 shows the Help system in the top window displaying the documentation for 
+the link object, which contains a link to supplemental materials which have 
+been brought up in the bottom window.  Another example is shown in figure 
+9, which shows a database of hypermedia and hypertext articles.  There are 
+programmed links that connect together pieces of information, supplemented 
+by simple links that point to other collections of information.
+
+
+
+\section{Hypermedia Applications}
+
+
+All applications built with the Andrew Toolkit can utilize the above link 
+facilities.  To get a feeling for how these features are used, we consider 
+briefly two applications that are in general use: the Help system and the 
+Messages system.
+
+
+As used on the CMU campus, the Help system [Langston 1988; Ogura, 1989] 
+provides help on all aspects of the computing environment, not just the 
+Andrew system or programs on high-function workstations.  Because users 
+requesting help from low-function workstations (IBM PCs and Macintoshes) 
+and terminals would not have access to the multimedia features of the 
+Andrew Toolkit, the generally available help documentation does not contain 
+multimedia information.  The exceptions are documentation used only by the 
+developers, such as the link documentation illustrated in figure 8.  Of the 
+approximately 200 documentation files written by our organization, there 
+are over 3000 cross references and over 600 mappings between cross 
+references and documentation files.  Since these files occupy about 1.8 
+megabytes of space, there is a reference for every 300 characters, or about 
+5 lines of documentation.  In addition, the system automatically links 
+together general documentation and Unix manual pages.  The Help system was 
+designed, and the documentation was written, with links in mind, so the 
+prevalence of references is not surprising.
+
+
+However, the message system built atop ATK [Borenstein, 1988] had no a 
+priori design for hypertext information.  Indeed, the overwhelming majority 
+of the 2400 bulletin boards it offers are generated by non-ATK sources, and 
+hence do not exploit any multimedia or linking facilities.  Fortunately, 
+the private bulletin board used by our organization of 30 researchers 
+consists of posts made almost entirely by an ATK program.  Because members 
+of our organization have both the knowledge of how to use the linking 
+features of ATK and access to ATK-based message creation programs, we have 
+an opportunity to examine the prevalence of linking.
+
+
+Over the last two months, 369 messages were posted on our private bulletin 
+board.  Of those posted, 290 messages had some multimedia feature in them. 
+ The most popular feature was multifont text--258 or 88% of the multimedia 
+messages used only that feature.  However, of the 32 multimedia messages 
+that used more than multifont text, 22 contained some linking feature. 
+ While not an overwhelming endorsement of hypertext or hypermedia, a 6% 
+casual usage rate indicates some appreciation for linking.
+
+
+
+\section{Conclusions}
+
+
+The Andrew Toolkit effort began not as a hypertext effort, but as a general 
+architecture for multimedia documents and applications.  The design was 
+intended to provide for incorporation of a variety of sorts of applications 
+within documents or within each other.  We have shown in this paper, 
+however, that the resulting system is an excellent medium for hypertext and 
+hypermedia, providing many forms of links with very little implementation 
+effort for any one.  Several linking styles have already been utilized in 
+ATK applications.  Web-based linking was chosen for an application--the 
+Help system--which  contains a lot of slowly changing information organized 
+ahead of time.  Simple links and cross references are used for casual 
+references, as might appear on a bulletin board, while computed links are 
+used for database-like applications.  There does not appear to be a 
+universal choice for a linking mechanism, and, even within the Andrew 
+Toolkit, other choices are possible.  For example, a group at Olivetti has 
+independently developed a hypermedia system on top of the Andrew Toolkit 
+[Olivetti, undated].  We believe that our investigations indicate that one 
+should not concentrate one's efforts on a single linking system or on 
+trying to extend a simple hypertext system into a hypermedia system. A 
+better path is to investigate different linking mechanisms within a 
+general-purpose multimedia system.  By this path, we may find the best ways 
+that linking can be used and add linking as another tool in our arsenal for 
+organizing information.
+
+
+
+\section{References}
+
+\description{
+
+[Atkinson, 1987] 	Atkinson, B., \italic{HyperCard}, Version 1.0.1, M0556 / 
+690-5181-A, Apple Computer (Cupertino, CA, 1987).
+
+
+[Borenstein, 1988]	Borenstein, Nathaniel, Craig Everhart, Jonathan 
+Rosenberg, Adam Stoller, "A Multi-media Message System for Andrew", 
+\italic{Proceedings of the USENIX Winter Conference}, Dallas, (February, 
+1988), 9-21.
+
+
+[Halasz, 1987]		Halasz, Frank G., "Reflections on Notecards: Seven Issues 
+for the Next Generation of Hypermedia Systems," \italic{Hypertext '87 
+Proceedings,} Nov. 13-15, 1987, Chapel Hill, NC, pp. 345-365.
+
+
+[Hansen, 1990]  	Hansen, Wilfred J., "Enhancing documents with embedded 
+programs: How \ness{Ness} extends insets in the Andrew Toolkit," 
+\italic{Proceedings of 1990 International Conference on Computer 
+Languages}, March 12-15, 1990, New Orleans, IEEE Computer Society Press 
+(Los Alamitos, CA, 1990), 23-32.
+
+
+[Howard, 1988]	Howard, John. H., "An Overview of yhe Andrew File System," 
+\italic{Proceedings of the USENIX Winter Conference}, Dallas, (February, 
+1988).
+
+
+[ITC, 1990]		\italic{Andrew Toolkit Programmer's Manual}, Information 
+Technology Center, Carnegie Mellon University, Pittsburgh, PA. 15213, USA, 
+January 1990.
+
+
+[Langston, 1988]	Langston, Diane, "Background and Initial Problems for the 
+Andrew Help System," \italics{Proceedings of the 35th ITCC,} Society for 
+Technical Communications, 1988, p. ATA-47--ATA-50.
+
+
+[Meyrowitz, 1986]	Meyrowitz, N., "Intermedia: The Architecture and 
+Construction of an Object-Oriented Hypermedia System and Applications 
+Framework", \italic{OOPSLA '89 Proceedings}, Portland, OR, 1986.
+
+
+[Meyrowitz, 1989]	Meyrowitz, N., "Hypertext--Does it Reduce Cholesterol, 
+too?", presented at Hypertext '89,  Pittsburgh, PA, November, 1989, IRIS 
+Technical Report 89-9, Brown University (Providence, RI, 1989).
+
+
+[Neuendorffer, 1990]	Neuendorffer, Thomas P., "The Andrew Development 
+Environment Workbench: An Overview",  \italic{The Andrew Project}, 
+Technical Report, Information Technology Center, Carnegie Mellon 
+University, 4910 Forbes Ave., Pittsburgh, PA. 15213, 1990.
+
+
+[Ogura, 1989]		Ogura, Ayami, Jennifer Robertson, "Designing Hypermedia Help 
+Systems: Problems and Issues", \italic{Conference Proceedings, 
+\italic{SIG}}\italic{DOC 89}, Pittsburgh, PA, November 8-10, 1989, p. 5-12.
+
+
+[Olivetti, undated]		"Hypermedia Help System", Olivetti Internal Memo, 
+Olivetti Pisa Research Center, undated.
+
+
+[Palay, 1988]	Palay, A. J., W. J. Hansen, M. Sherman, M. Wadlow, T. 
+Neuendorffer, Z. Stern, M. Bader, and T. Peters, "The Andrew Toolkit - An 
+Overview",  \italic{Proceedings of the USENIX Winter Conference}, Dallas, 
+(February, 1988), 9-21.
+
+}\
+\begindata{bp,538620520}
+\enddata{bp,538620520}
+\view{bpv,538620520,24,0,0}
+
+\indexi{Help: at least 3078 cross references, 196 files, \
+
+
+615 mappings
+
+7 multimedia refs in help files
+
+}
+Inserted fig. 5:  example of cross references.\
+\enddata{text,538683564}

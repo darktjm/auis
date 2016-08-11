@@ -1,0 +1,2 @@
+#! /bin/sh
+find . -name "*.o" -exec /bin/nm -Rhp  '{}' \;  |  awk '/ T / {print ($0);}'

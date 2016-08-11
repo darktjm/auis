@@ -1,0 +1,325 @@
+\begindata{text,539888216}
+\textdsversion{12}
+\template{default}
+\define{symbola
+menu:[Font~1,SymbolA~86]
+attr:[FontFamily symbola Int 0]}
+\define{global
+
+attr:[LeftMargin LeftMargin Cm 0]
+attr:[Indent LeftMargin Cm 0]
+attr:[Spacing InterlineSpacing Point -1]
+attr:[FontSize ConstantFontSize Point 10]}
+\define{section
+menu:[Title~3,Section~21]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]
+attr:[FontFace Bold Int Set]
+attr:[FontFamily AndySans Int 0]
+attr:[FontSize ConstantFontSize Point 9]}
+\define{indent
+menu:[Region~4,Indent~20]
+attr:[LeftMargin LeftMargin Cm 36989]
+attr:[RightMargin RightMargin Cm 34678]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]}
+\define{description
+menu:[Region~4,Description~11]
+attr:[LeftMargin LeftMargin Cm 41615]
+attr:[Indent LeftMargin Cm -39303]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]}
+\define{majorheading
+menu:[Title~3,MajorHeading~10]
+attr:[Justification Centered Point 0]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]
+attr:[FontFace Bold Int Set]
+attr:[FontFamily AndySans Int 0]
+attr:[FontSize ConstantFontSize Point 18]}
+\define{leftindent
+menu:[Region~4,LeftIndent~21]
+attr:[LeftMargin LeftMargin Cm 43926]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]}
+\define{footnote
+
+attr:[Flags OverBar Int Set]
+attr:[FontSize PreviousFontSize Point -2]}
+\define{up15
+menu:[Justify,Up15]
+attr:[Script PreviousScriptMovement Point -15]}
+\define{sans
+menu:[Font,Sans]
+attr:[FontFamily AndySans Int 0]}
+\define{fullwidth
+menu:[Justify,Full Width]
+attr:[LeftMargin LeftMargin Cm -25431]
+attr:[RightMargin RightMargin Cm -27743]}
+\define{realsmall
+menu:[Font~1,RealSmall~88]
+attr:[Script PreviousScriptMovement Point -4]
+attr:[FontSize PreviousFontSize Point -4]}
+\define{definition
+menu:[Region~4,Definition~85]
+attr:[LeftMargin LeftMargin Cm 138717]
+attr:[RightMargin RightMargin Cm 138717]
+attr:[FontSize PreviousFontSize Point -2]}
+\define{bib
+menu:[Region~4,Bib]
+attr:[LeftMargin LeftMargin Cm 0]
+attr:[Spread ConstantSpacing Point 6]}
+\define{author
+menu:[Title~3,Author]
+attr:[Justification Centered Point 0]
+attr:[Spread ConstantSpacing Point 10]
+attr:[FontFace Italic Int Set]
+attr:[FontSize ConstantFontSize Point 12]}
+\formatnote{.rm BT
+
+.ds CT
+
+.nr IN 0
+
+.nr GT 0.8c
+
+.nr LL 8.5c
+
+.de OC
+
+.br
+
+.ne 3.1v
+
+..
+
+.de cw
+
+.FO
+
+.ch cw
+
+..
+
+.nr PO 72p
+
+.RS \
+
+
+.ll 6.5i}
+
+\majorheading{Introduction to User Interface Systems
+
+for HCI Developers and Researchers}
+
+
+\author{Wilfred J. Hansen
+
+}\bigger{\center{Director, Andrew Consortium, School of Computer Science \
+
+
+Carnegie Mellon University;  5000 Forbes Ave.;  Pittsburgh, PA 15213
+
+Tel: +1 (412) 268-6788    \italic{E-mail: wjh+@cmu.edu}}}
+
+
+\formatnote{.ll 8.5c
+
+.2C
+
+.wh -2i cw}
+
+\section{ABSTRACT} \
+
+
+\italic{User interface systems} (UIS) combine essential applications for 
+compound documents with a toolkit for building new applications that 
+inter-operate with the others.  The essential applications--word 
+processing, drawing editor, spread sheet, equation editor, image editor, 
+electronic mail management, and so on--all support embedding of objects to 
+create compound documents and can themselves all be embedded as objects in 
+compound documents.  When building new applications, the user draws the 
+screen image with the drawing editor and selects components from among the 
+applications or the objects in the toolkit.  The earliest and most complete 
+system at this time is the Andrew User Interface System, which will be used 
+for examples during the tutorial.
+
+
+User Interface Systems challenge HCI workers to develop interface 
+conventions that stretch harmoniously across the wide spectrum of 
+applications.  However, these same systems aid HCI work by simplifying 
+construction of experimental interfaces and providing tools for evaluation 
+of user behavior across multiple diverse applications.
+
+
+\bold{\section{KEYWORDS:}}  user interface system, compound documents, word 
+processing, electronic mail, graphical user interface toolkit, application 
+builders, user interface management system, text editing, Andrew User 
+Interface System, AUIS, Andrew Toolkit, ATK, evaluation of user behavior, 
+standards for interactive interfaces, object linking and embedding, OLE.
+
+
+\section{INTRODUCTION} \
+
+
+A \italic{user interface system} (UIS) is an integrated environment for 
+interactive computing which provides key applications, a component toolkit, 
+and an application building environment for constructing new applications 
+which cooperate with all others.  In times past, the data stream shared by 
+applications was ASCII text; in a UIS the data stream is that of 
+\italic{compound documents,} that is, documents with typographic formatting 
+and embedded objects.  Indeed, most applications can embed others and can 
+themselves be embedded, so there is \italic{recursive embedding} of 
+objects.  The most common applications/embeddable-objects are word 
+processing, drawing editor, image editor, spread sheet, equation editor, 
+and electronic mail management. \
+
+
+
+As in typical graphical user interface toolkits, a UIS includes a 
+collection of objects suitable for constructing new applications: buttons, 
+labels, sliders, dials, and so on.  In addition, the UIS provides an 
+application building environment to aid construction of new applications by 
+assembling components.  The system is extensible because created objects 
+and applications can serve as components of still newer applications. 
+ Moreover, the UIS architectures permit new applications to 
+\italic{inter-operate} with each other and existing applications.  This 
+means that new and old objects can share data streams, access to an 
+extension language, universal cut/copy/paste, and printing of the resulting 
+images. \
+
+
+
+\section{AVAILABLE SYSTEMS} \
+
+
+The first attempt to create a comprehensive user interface system was the 
+Andrew User Interface System[10, 2].  Developed in C for Unix at Carnegie 
+Mellon University, the system has now been converted to the C++ 
+object-oriented language.  Based on ideas from Andrew and Interviews[5], an 
+X Consortium committee is defining the Fresco system[4].  Commercial 
+systems are just beginning to be introduced and include OLE[6] from 
+Microsoft and OpenDoc[8] from the Component Integration Laboratory.  The 
+latter three systems do not actually offer key applications;  the 
+expectation is that vendors will offer them once the framework is in place. 
+ OpenDoc is even more focused in that it does not even define a graphic 
+layer; applications in OpenDoc adopt whatever graphics layer is 
+appropriate.
+
+
+As an example of a user interface system, the Andrew User Interface System 
+(AUIS) offers several stand-alone applications:  word processing, shell 
+interface, help browser, and a MIME compatible mail and bulletin board 
+reader, writer, and manager.  Among the objects available as both 
+applications and embeddable objects are images, drawings, spreadsheets, 
+equations, and simple animations.  There is a collection of small widget 
+objects and a dozen other interesting objects that are not usually used as 
+stand-alone editors.  Extensibility is supported with a template generator 
+for coding objects, an application builder[7], and an extension language 
+[3]. \
+
+
+
+\section{HCI CHALLENGES AND OPPORTUNITIES} \
+
+
+Since a UIS defines a community of inter-operating applications and 
+objects, the user can be expected to interact with many of them, often 
+simultaneously.  The HCI worker is challenged to develop habitable 
+interfaces for each application.  More challenging, however, is to develop 
+interfaces that are harmonious between applications so that behavior 
+learned in one application will be useful--or at least harmless--in 
+another.  The Macintosh environment[1] and Motif[9] both offer guidelines 
+for user interfaces, but there is significant room for improvement. \
+
+
+
+In a good UIS, user interface actions are encapsulated into objects.  Thus 
+the HCI practitioner has a unique opportunity to explore alternate 
+interfaces to multiple applications by just changing a single object.  This 
+can be exploited during development or as an independent variable in an 
+experiment. \
+
+
+
+Once an interface has been constructed, the HCI scientist must measure how 
+humans react to it and interact with it.  Typically, users are videotaped 
+to record their gross behavior and the software logs each input 
+interaction.  Logging is facilitated by the UIS in those architectures 
+where all inputs are initially fielded by a central routine which 
+distributes them to the appropriate object.  The UIS can also be utilized 
+to quickly create applications which present questionnaires to gather 
+user's subjective reactions. \
+
+
+
+\section{SOFTWARE INTERFACES} \
+
+
+In evaluating user interface systems, there are several programmer 
+interfaces to look for.  These permit sharing of resources between an 
+object and the substrate in which it is embedded [11, 12].  Among the 
+resources to share are screen space, user input devices, file data streams, 
+memory, execution time, printed page, and access to the extension language. 
+
+
+\formatnote{.ne 1.2i}
+
+\section{REFERENCES}
+
+\bib{[1] Apple Computer, \italic{Macintosh Human Interface Guidelines}, 
+Apple technical library, Addison-Wesley, Reading, Mass, 1992.
+
+[2]  Borenstein, Nathaniel S., \italic{Multimedia Applications Development 
+with the Andrew Toolkit}, Prentice Hall, 1990. \
+
+
+[3]  Hansen, Wilfred J., Enhancing documents with embedded programs: How 
+Ness extends insets in the Andrew Toolkit, \italic{Proceedings of IEEE 
+Computer Society 1990 International Conference on Computer Languages}, 
+(March, 1990, New Orleans), IEEE Computer Society Press, Los Alamitos, CA, 
+1990, pp. 23-32. \
+
+
+[4] Linton, M. and C. Price, Building Distributed User Interfaces with 
+Fresco, \italic{Proceedings of the 7th X Technical Conference}, (January, 
+1993, Boston, Massachusetts), X Consortium, Boston, MA, 1993, pp. 77-87. \
+
+
+[5] Linton, M. A., J. M. Vlissides, P. R. Calder, Composing user interfaces 
+with interviews, \italic{IEEE Computer} 22(2), February, 1989, 8-22. \
+
+
+[6] Microsoft Corp., \italic{Object Linking and Embedding (OLE)}, Part No. 
+098-31727, Microsoft Corp., Redmond, WA, 1992.
+
+[7] Neuendorffer, Thomas,  "ADEW: A Multimedia Interface Builder for 
+Andrew", \italic{ Proceedings Multi-Media Communications, Applications and 
+Technology Workshop}, (Sydney, Australia, 1-2 July, 1991) ftp: 
+emsworth.andrew.cmu.edu: papers/\{atk,ps\}/Neuendorffer.ADEW, 1991. \
+
+
+[8] OpenDoc Design Team, \italic{OpenDoc Technical Summary}, Apple 
+Computer, ftp:cil.org:/pub/opendoc-interest/OD-tech-summary.RTF, October, 
+1993.
+
+[9] Open Software Foundation, \italic{OSF/MOTIF Style Guide}, Prentice 
+Hall, Englewood Cliffs, NJ, 1990.
+
+[10] Andrew J. Palay, Wilfred J. Hansen, et al., The Andrew Toolkit - An 
+Overview, Usenix Conference, Dallas, TX, January, 1988. \
+
+
+[11] Palay, Andrew J., Towards an "Operating System" for User Interface 
+Components, in \italic{Multimedia Interface Design} ed. Meera M. Blattner 
+and Roger B. Dannenberg, ACM Press, New York, 1992. \
+
+
+[12]  Sherman, Mark, D. Anderson, W. J. Hansen, T. P. Neuendorffer, A. J. 
+ Palay, Z. Stern, "Allocation of User-Interface Resources in the Andrew 
+Toolkit,", \italic{Proceedings of the International Conference on 
+Multimedia Information Systems} (Singapore, January, 1991), McGraw-Hill, 
+New York, 1991. \
+
+
+}\enddata{text,539888216}

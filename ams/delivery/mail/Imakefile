@@ -1,0 +1,18 @@
+/* 
+	Copyright IBM Corporation 1988,1991 - All Rights Reserved
+	Copyright Carnegie Mellon, 1996
+	For full copyright information see: `<andrew tree>/config/COPYRITE'
+*/
+
+LIBS	=	${UTILLIB} \
+		${BASEDIR}/lib/liberrors.a
+
+ProgramTarget(mail, mail.o, ${LIBS}, ${BSDLIB})
+
+#ifdef RUN_AMDS_ENV
+install.time::
+	@echo ' '
+	@echo 'Mail has been built but not installed.'
+	@echo 'Install mail manually when the system build has completed successfully.'
+	@echo ' '
+#endif /* RUN_AMDS_ENV */

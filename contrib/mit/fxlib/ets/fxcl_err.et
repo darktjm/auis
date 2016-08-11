@@ -1,0 +1,22 @@
+######################################################################
+# File Exchange client library error table
+#
+# $Author: sa3e $
+# $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/ets/RCS/fxcl_err.et,v $
+# $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/ets/RCS/fxcl_err.et,v 1.2 1994/01/31 22:18:16 sa3e Stab74 $
+#
+# Copyright 1989, 1990 by the Massachusetts Institute of Technology.
+#
+# For copying and distribution information, please see the file
+# <mitcopyright.h>.
+######################################################################
+
+error_table	fxcl
+
+error_code	ERR_FXCL_HOSTS,
+		"No file exchange hosts found"
+
+error_code	ERR_FXCL_READ,
+		"Could not read paper information"
+
+end

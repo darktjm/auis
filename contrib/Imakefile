@@ -1,0 +1,124 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+
+#define IHaveSubdirs
+
+#ifdef MK_CALC
+CALC = calc
+#endif
+
+#ifdef MK_CHAMP
+CHAMP = champ
+#endif
+
+#if defined(MK_NESS) || defined(MK_AUTHORING)
+RUNBTN = runbtn
+#endif
+
+#ifdef MK_ZIP
+ZIP = zip
+#endif
+
+#ifdef AMS_DELIVERY_ENV
+POBB = pobbconf
+#endif
+
+#ifdef AMS_ENV
+#ifdef MK_EATMAIL
+EATMAIL = eatmail
+#endif
+#ifdef MK_BATMAIL
+BATMAIL = batmail
+#endif
+#endif /* AMS_ENV */
+
+#if !defined(SGI_4D_ENV) && !SY_OS2
+TM = tm
+#endif
+
+#if defined(sys_sun4_41) || defined(sys_sun3_41)
+ALINK = alink
+#endif
+
+#ifdef MK_DEMOS
+DEMOS = demos
+#endif
+
+#ifdef MK_GTEXT
+GESTURES = gestures
+#endif
+
+#ifdef MK_WPEDIT
+WPEDIT = wpedit
+#endif
+
+#ifdef MK_TIME
+TIME = time
+#endif
+
+/* test for obsolete  ..._ENV vars for compatbility */
+#if defined(MK_MIT) || defined(MK_SCRIBETEXT) || defined(MK_RTF) \
+		|| defined(RTF_ENV) || defined(SCRIBETEXT_ENV) 		
+MIT = mit
+#endif
+
+#ifdef MK_BDFFONT
+BDFFONT = bdffont
+#endif
+
+#ifdef MK_CONTRIB_HTML
+CONTRIB_HTML = html
+#endif
+
+#ifdef MK_GOFIG
+GOFIG = gofig
+#endif
+
+#ifdef MK_VUI
+VUI = vui
+#endif
+
+#ifdef MK_PREVIEW
+PREVIEW = preview
+#endif
+
+SUBDIRS = $(ALINK) $(BATMAIL) $(BDFFONT) $(CALC) \
+	$(CHAMP) $(CONTRIB_HTML) $(DEMOS) \
+	$(EATMAIL) $(GESTURES) $(GOFIG) $(MIT) \
+	$(PREVIEW) $(RUNBTN) $(TIME) $(TM) $(VUI) \
+	$(WPEDIT) $(ZIP)
+
+EXTRASUBDIRS = ${POBB}
+
+CONTRIBLIBS =  alink bdffont calc champ circlepi clock \
+	gnucompat gofig gtext html lt note preview runbutton sched \
+	termulator timeoday vutils wpeditapp zip
+
+RegisterLibPackage(contrib,ANDREWDIR, \
+		lib/atk/lib,.$(ATKLIBEXTM),  \
+		$(CONTRIBLIBS),$(DESTDIR)/lib/packages)

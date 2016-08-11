@@ -1,0 +1,1159 @@
+\begindata{text,538833080}
+\textdsversion{12}
+\template{default}
+
+
+\bold{\bigger{Allocation of User-Interface Resources in the Andrew Toolkit}}
+
+
+Mark Sherman
+
+David Anderson
+
+Wilfred J. Hansen
+
+Thomas P. Neuendorffer
+
+Andrew J. Palay
+
+Zalman Stern
+
+
+Information Technology Center
+
+Carnegie Mellon University
+
+4910 Forbes Avenue
+
+Pittsburgh, PA 15213
+
+email: mss+@andrew.cmu.edu
+
+phone: +1-412-268-6727
+
+fax: +1-412-268-6787
+
+
+
+\bold{Abstract}
+
+
+User-interface toolkits are frequently used to compose more primitive 
+user-interface components together to form applications. Typically, this 
+composition is only concerned with the allocation of screen space and the 
+routing of events. We have found that a more sophisticated treatment of 
+composition centers around the use of seamlessly embedded (or nestable), 
+high-level user-interface components, called insets. We have implemented 
+our ideas in the Andrew Toolkit, a multimedia application development 
+system, which includes a suite of cooperating insets for editing text, 
+equations, drawings, animations, etc. While providing a more comprehensive 
+framework for composition, embedding of user-interface components requires 
+the negotiation for and allocation of many resources, not just screen space 
+and events. In this paper, we describe the Andrew Toolkit and its inset 
+model. Since the model is based on resource allocation, we discuss the 
+classes of resources that an inset uses, explain how resources are 
+allocated among insets, and describe some concerns we have had while 
+implementing and working with this inset model.
+
+
+\bold{Overview}
+
+
+The near-universal introduction of window-oriented user interfaces to 
+personal computers and workstations led to a growing interest in the design 
+and implementation of window-based applications. As applications were 
+developed, it became clear that implementing a full range of user 
+interactions was expensive and time consuming. To address those problems, 
+toolkits that assist programmers have been invented. These toolkits intend 
+to provide the user-interface processing that is common to window-based 
+applications. Unfortunately, many of the toolkits have two severe 
+limitations. First, they focus on a very narrow set of concerns, usually 
+screen allocation and raw event distribution. Second, they usually do not 
+provide a comprehensive mechanism for composing pieces of an application so 
+that the resource sharing can be managed among cooperating system 
+components, especially for nested components.
+
+
+When designing the Andrew Toolkit [1], we isolated a large collection of 
+user-interface resources that must be managed, and developed a general 
+architecture for composing objects that allows the user-interface resources 
+to be allocated effectively. In this paper, we provide a brief overview of 
+the Andrew Toolkit and describe its primary composition mechanism: the 
+embedded inset. We then explain the resources manipulated by embedded 
+insets and how insets negotiate among themselves for resource allocation.
+
+
+\bold{Introduction to the Andrew Toolkit}
+
+
+The Andrew Toolkit is a multimedia development system that allows 
+application developers to build working systems with a minimum of effort. 
+The current release of applications based on the Andrew Toolkit are in 
+daily use by thousands of users on the Carnegie Mellon University campus, 
+as well as other academic and industrial locations.
+
+
+A wide collection of insets are available for the Andrew Toolkit. The 
+latest public release on the X Window System X.V11R4 distribution supports 
+multifont text, raster graphics, structured graphics, animations, 
+mathematical equations, spreadsheets, calendars, hypertext, trees 
+(networks), a variety of programming language specific editors, calculators 
+and a collection of buttons, knobs and sliders. Locally, we have also 
+created audio insets and we know of at least one site that has created 
+video insets.
+
+
+Our architecture is different from many tool kits, such as the X tool kit 
+[2], Interviews [3], Serpent [4] and MacApp [5]. Many of these toolkits 
+function as a thin layer on top of the underlying system. They view the 
+underlying system as providing the primary service abstractions, such as a 
+drawing model, and focus on moving a virtual connection from the underlying 
+system to the medium. The primary function of the toolkit is to mediate the 
+ownership of the virtual connection among tool kit objects. For the Andrew 
+Toolkit, we focused on providing our own set of service abstractions and on 
+how embedded insets would communicate among themselves, not necessarily 
+with the underlying window system.
+
+
+The composition feature that meets these goals is the embedded inset. We 
+discuss the general principles of embedding insets in the next section.
+
+
+\bold{Insets}
+
+
+An inset provides the implementation of a user interface and a storage 
+model for an inset. For example, the raster inset provides a user interface 
+for manipulating rasters, such as for selecting and inverting a rectangle 
+of pixels. The raster inset also implements procedures for storing pixels 
+in a file, such as a MacPaint format file.
+
+
+Within the Andrew Toolkit, an inset is implemented by a pair of objects, 
+called a \italic{dataobject} and a \italic{view}. A dataobject holds the 
+information associated with a medium. For example, the values of the pixels 
+in a raster are held in the dataobject. A dataobject must be able to write 
+the state of an inset into a file and to read the state from a file. When 
+insets are composed, the containing dataobject is also responsible for 
+negotiating the reading and writing of embedded dataobjects. For example, 
+if some text contains a raster, the text dataobject is responsible for 
+ensuring that the raster dataobject is informed to store itself in a file.
+
+
+A view is responsible for displaying the state of an inset and handling any 
+user interactions. Specifically, a view is responsible for defining the 
+appropriate menu items, keyboard interpretation, mouse semantics, selection 
+indication, cursor feedback and graphical display of the inset's 
+dataobject. For example, a raster view could provide a menu option for 
+scaling a raster, define the key press "U" as "undo the last raster 
+operation", interpret a mouse-button press, a mouse drag and a mouse-button 
+release as a way to indicate that part of a raster should be inverted, use 
+a rectangle to surround target pixels of a raster operation, change the 
+cursor to a hand when panning a raster and paint the pixels in a window at 
+a designated location.
+
+
+Views are organized in a hierarchy. Each view is associated with a 
+rectangular region on the screen. A top most (root) view is associated with 
+an entire window. Children views must reside within their parents 
+rectangles. There are no nesting or overlapping restrictions among sibling 
+views. Collectively, the views in a window form a view tree.
+
+
+An example of an Andrew Toolkit window illustrates these concepts. Figure 1 
+shows a window that contains a spreadsheet with scroll bars on the sides 
+and a message line at the bottom of the window. The top row of the 
+spreadsheet contains a text inset. Inside some left cells of the 
+spreadsheet is some more text. Inside the text is a calculator. On the 
+right side of the spreadsheet, there are some equations, an animation and 
+some spreadsheet cells.
+
+
+Several kinds of insets are shown. There is a spreadsheet inset, two text 
+insets, a calculator inset, an animation inset and an equation inset. In 
+addition, some user interface processing is provided by some auxiliary 
+views that have no associated dataobjects: the scroll bars, the frame, and 
+the window. The top of the view tree is the window, which interacts with 
+the X window system (and is called an \italic{interaction manager}). 
+(Because a window has no persistent state, it has no dataobject and is not 
+an inset.) The only child of the interaction manager is the frame view, 
+that is used to write messages at the bottom of the window. In this case, 
+ the interaction manager allocates the entire window to the frame view. The 
+frame view, in turn, allocates the bottom of its space to a text object 
+that will hold any messages to the user. The top part of the space is 
+allocated to an arbitrary child, which here is the scroll bar view. The 
+scroll bar view in turn keeps the space for the scroll bars and allocates 
+the rest of the space for its child, which is the spreadsheet. The 
+spreadsheet has a number of children, and allocates space on a cell-by-cell 
+basis. The view tree for this window is shown in Figure 2.
+
+
+The view hierarchy is used to control allocation for most resources. The 
+fundamental principle is:
+
+
+Parents control all resources of their children
+
+
+Communication among embedded insets is provided by two types of functions: 
+a child may ask a parent for resources, and a parent may notify a child of 
+resource allocation. There is no requirement that a parent ever allocate 
+resources to a child, that a parent limit the allocated resources to the 
+child's request or that a child ask for a resource. In figure 1, for 
+example, a key press that is received by the interaction manager could be 
+passed first to the message line view, then to the scroll bar view, then to 
+the spreadsheet view, and so on down the view tree. If the scroll bar 
+wanted to implement some key press as the equivalent of a mouse hit, then 
+the key press would not be passed down once it reached the scroll bar view, 
+but be processed there instead. As the parent of the spreadsheet view, the 
+scrollbar view has complete control over which keystrokes will be seen by 
+the spreadsheet view.
+
+
+We organized our design into a grouping of resources by area. For each 
+resource, we started with the parental-control model as the primary 
+criterion for designing resource negotiation between a parent and child 
+inset. In practice, we found that we had to make compromises and 
+short-circuits in the general paradigm to allocate better some resources 
+and to improve the efficiency of the resulting system. Therefore, we 
+organize the detailed discussion of the resources in the Andrew Toolkit 
+along two dimensions. First we group together collections of related 
+resources. For each resource, we give a description of that resource and 
+how the general design rule would be provided. We then discuss the 
+optimizations we made in our implementation of that resource, and as 
+appropriate, conclude with some retrospective on our optimizations.
+
+
+
+\bold{Graphic Resources}
+
+
+One of the most visible sets of resources to be negotiated are graphic 
+resources, since they are directly visible to the user. We considered four 
+resources that define the visual appearance of insets.
+
+
+\italic{Screen Allocation}
+
+
+Like other toolkits, the Andrew Toolkit provides a mechanism for allocating 
+screen space among elements of the user display. In particular, the Andrew 
+Toolkit allows insets to negotiate and allocate screen space. A child makes 
+a request of the parent for some particular amount of space and the parent 
+grants it or rejects it. Obviously, the parent may grant only as much space 
+as it controls.
+
+
+We implemented two optimizations when implementing the screen-allocation 
+protocol. First, the parent provides an indication of space resources and 
+possible restrictions. For example, the parent may inform the child that 
+the parent controls 200 pixels of horizontal space and 100 pixels of 
+vertical space, and that the child may take as much horizontal space as 
+desired but only 5 pixel of vertical space. This allows the child to make 
+certain assumptions about the viability of certain requests and make 
+strategic decisions about viewing data (such as whether to provide a scroll 
+bar). The second optimization is that the parent-to-child granting is done 
+through a data structure, not a procedure call. Each view contains a data 
+structure that defines the available screen space for that view. A parent 
+allocates space for the child by changing that data structure directly. In 
+principle, the child needs that data only when drawing on the screen, at 
+which point the child may examine the necessary fields. The optimization 
+saves a procedure call, but does so at the cost of eliminating an explicit 
+notification to the child when the request has been granted or denied. 
+Therefore, the optimization also prevents the child from caching or 
+encoding its screen size information outside of the view data structure.
+
+
+\italic{Screen Updates}
+
+
+Recall that views provide an ephemeral display service, while dataobjects 
+maintain the state of the displayed information. When some interaction 
+occurs, a piece of the state may change in the dataobject. Views are 
+notified of changes in dataobjects they are viewing (by a mechanism which 
+is outside the scope of this paper). As the data are changed, the display 
+of the data needs to be changed. The decision of when to make an update to 
+a displayed view is a negotiated one, just like allocation of screen space.
+
+
+When a view wishes to make a change in its display, it sends a request to 
+its parent, asking for unrestricted permission to draw. As necessary, a 
+parent then informs the child that it may draw. A a straightforward 
+implementation of the protocol would have the parent immediately grant any 
+request of the child and updates to be drawn immediately. This has several 
+performance problems.
+
+
+Instead, our procedural interface for screen updates allows both children 
+and parents to designate the areas of the view to be updated. We found this 
+helpful since the updating of a screen could be affected by events outside 
+of the view's control, such as clipped or closed windows, and overlapping 
+siblings. Further, we have found that screen-update scheduling is best done 
+globally, since no intermediate parent has enough information to grant 
+immediately a child's request. Instead, a child's request is processed by 
+information known locally by the parent (such as an overlapping sibling) 
+and passed to the next parent in the view hierarchy. Once the request 
+reaches the top, the root view can interact with the window manager and 
+grant the necessary authority back down the tree for updating the screen.
+
+
+\italic{Cursor}
+
+
+One way that a view provides feedback to the user is by the cursor shape. 
+For example, when a drawing tool is selected in a graphics editor, the 
+cursor may change to reflect that tool. But cursor could have a different 
+meaning as it is moved elsewhere, such as over a scroll bar. Therefore, the 
+views must negotiate cursor appearance. In general, a child would ask the 
+parent to provide a cursor, and the parent would grant or deny that 
+request.
+
+
+In practice, an isolated parent usually lacks enough information for 
+coordinating cursor requests. Thus in the Andrew Toolkit, children ask 
+their parents to provide a certain cursor shape for a rectangle in the 
+view, and the parent coordinates among requests of all children.
+
+
+Therefore, our implementation deviates slightly from our general protocol. 
+First, we provide no explicit confirmation or denial of a cursor request. 
+If a view wants a cursor, it requests the cursor, and when finished with 
+the cursor, the view may ask for the cursor definition to be retracted. We 
+assume that all requests will be fulfilled unless physically impossible 
+(such as a parent or an overlapping sibling requesting a different cursor). 
+Second, we provided global cursor control for special situations. In 
+particular, we found times when an operation was about to take place that 
+would require a long amount of time. We wanted a clock cursor to be shown 
+until the operation was completed. The clock cursor cannot be local to the 
+view -- if the cursor were local to the view, then moving it to another 
+view would change the cursor from a clock to some other shape, and the user 
+would believe that the lengthy operation was over. In fact, the view that 
+posted the clock cursor has blocked the application (and hence, any views) 
+from performing operations. Therefore, we provided two additional sets of 
+calls: one set to post or retract a cursor global to the window in which 
+the view is contained, the other set to post or retract a cursor global to 
+all windows belonging to the process in which the view is contained. The 
+choice of posting to a window or a process depends on how an application is 
+using multiple windows and processes. It is interesting to note, that 
+although the mechanism allows for any cursor to be posted for any reason, 
+we have seen this facility used only for the special case of a global 
+"wait" cursor.
+
+
+\italic{User Focus}
+
+
+A user is usually focused on a specific piece of information in a window, 
+such as a word being entered in a text object. The focus usually has a 
+visual representation. For example, a text editor may display a blinking 
+line where characters are being inserted. Where a single kind of object is 
+used, like a text editor, the user interface can unilaterally decide how 
+and when to indicate current focus of attention.
+
+
+In the Andrew Toolkit, several inserts are interacting and thus no inset's 
+view can monopolize the focus of the user's attention. Ignoring for the 
+moment how a user chooses the focus of attention, once that choice is made, 
+the appropriate view should indicate the focus, and the view which had the 
+focus should relinquish it. Therefore, the Andrew Toolkit provides a 
+protocol for focus control.
+
+
+A straightforward implementation of the design paradigm would be to have a 
+child ask the parent when it wanted to user focus and to have the parent 
+grant or deny the request. Unfortunately, such an implementation ignores a 
+symmetry in allocating user focus: whenever one view receives the input 
+focus, another view has lost it. Therefore, the results of the negotiation 
+over the user focus have to be communicated to more than a inset who is 
+requesting it -- the yielding inset must also be informed. This implies 
+dual sets of protocols, and coordination by some common ancestor in the 
+view tree.
+
+
+In our implementation, we found that three procedural interfaces provided 
+an appropriate interface. The child may still ask the parent for the focus, 
+but the child may receive one of two calls: that the child is receiving the 
+focus or that the child is losing the focus. Since two disjoint activities 
+were being performed in these two circumstances, we found that a single 
+procedure simply became a test of which direction the focus was being 
+allocated followed by two different calls. We eliminated the extra test by 
+simply making the appropriate call directly.
+
+
+\bold{User Input Resources}
+
+
+User input resources describe the primitive semantics and allocation of 
+gestures made by users interacting with the systems. Because different 
+insets implement different interpretations of user gestures, it is 
+essential that the gesture be delivered to an appropriate inset and with 
+the correct interpretation. We have three kinds of user input resources 
+that are negotiated by embedded insets.
+
+
+\italic{Keyboard Mappings}
+
+
+Keyboards are one of the most common input devices. However, the 
+interpretation of key presses and releases varies a great deal among 
+systems. Most text systems interpret key presses as requests to place a 
+character into a document. When multiple keys are pressed simultaneously, 
+many systems interpret the character as a command, such as control and H 
+meaning "erase backwards". In the Andrew Toolkit, different insets 
+interpret key presses in different ways. Therefore, there needs to be some 
+kind of allocation of key presses and their interpretation.
+
+
+According to our basic model, key presses should be presented to the view 
+at the top of the hierarchy. At its discretion, the top-most view would 
+pass the key presses down to a child view (probably towards the view that 
+has the user focus). The key press would make its way down the tree until 
+some view decided that it should process it, ending the communication. This 
+a lot of processing for a key press, especially for a text object that is 
+nested in a view tree.
+
+
+A first cut at optimizing the algorithm would be for children to negotiate 
+previously with parents about key press allocations. When the negotiation 
+was complete, all key presses would be immediately diverted to the view 
+that held the key press resource. Unfortunately, there are times when 
+higher views may want to process key presses to provide a uniform 
+interface. In our first attempt at optimization, a view that received an 
+unwanted key press would have to return the key press to its parent for 
+processing. This is inefficient in two ways. First, time is spent passing 
+the key press from view to view. Second, there is redundant processing 
+required in many views. For example, every view needs to be able to process 
+unwanted key presses in the same way (pass to parent).
+
+
+The approach we took was to provide a table of logical key sequences that 
+itself is negotiated among insets. The table is essentially a list of 
+strings and operations. When a particular string is entered from the 
+keyboard (actually, by any key event generator), the associated operation 
+is carried out. A view asks its parent to use a particular table for 
+processing its key sequences. Typically, a parent will take a child's 
+table, merge it with the table desired by the parent and pass the resulting 
+table up the tree. For example, an embedded text object will provide some 
+definitions for text manipulation while the containing frame object will 
+add keystroke commands needed for file manipulation. When the top of the 
+tree is reached, there is a table for all views that describes what 
+operation should be performed in each view for each key sequence. All of 
+the event specific negotiation has been eliminated.
+
+
+\italic{Mouse Actions}
+
+
+Pointing devices, usually mice, are ubiquitous in window systems. But like 
+key presses, the interpretation of mouse actions is different for each 
+inset. Therefore, there needs to be some kind of allocation of mouse 
+actions. Unlike keyboard processing, it is not feasible to have each inset 
+describe how it would like a mouse action handled. In the case of key 
+presses, there are many different keys that can be pressed and thus 
+different insets would use different keys. Therefore, it is rational to 
+allow the space of possible key strokes to be partitioned among insets. But 
+there are a few number of possible mouse actions, and therefore there is 
+little partitioning available. Therefore, our  general model is followed: 
+when a mouse action occurs, it is given to the top-most view. If the 
+top-most view does not want to process the mouse action, it is passed down 
+to a child. This continues until some descendent processes the mouse 
+action.
+
+
+Performing the tree walk for each mouse action can be expensive, especially 
+with a button-down, drag, button-up sequence. Typically, one wants very 
+good feedback as the mouse is being dragged, since the user is typically 
+making a selection of some sort. To improve efficiency, we provide one 
+optimization. The view that decides to handle a mouse action may request a 
+short cut to itself for the next mouse action. As long as the view requests 
+the optimization (and the mouse remains pressed), all mouse actions will go 
+directly to that view, by-passing the entire tree. When the view 
+relinquishes the optimization (or the mouse-up event is found), the mouse 
+actions start being processed from the top of the tree. We have found this 
+optimization works well when a view grabs the mouse when a button does 
+down, keeps the mouse while it is being dragged, and relinquishes it when 
+the button goes back up.
+
+
+\italic{Menu Definitions}
+
+
+Two-level menus are used by many systems as a way to provide users with a 
+collection of operations. So too, the Andrew Toolkit abstracts a two-level 
+menu facility for use by insets. However, the use of menus must still be 
+allocated among insets. Different insets desire to post different kinds of 
+menus: a text inset wants choices that affect text formatting while a 
+spreadsheet inset provides column manipulation commands.
+
+
+The simplest approach would be to let each view specify the menus it wants. 
+The parent would grant or deny this request, and the user would see the 
+selected menus.
+
+
+Unfortunately, the simple approach does not work well. It is reasonable for 
+menus of many views to be present at once, not just the menus of one inset. 
+For example, an embedded text view will want to provide menu items for 
+formatting and the containing frame view will want to provide menu items 
+for file manipulation.
+
+
+Therefore, we provide a resource merging function, similar to key press 
+interpretation. With the merging semantics added, our basic model works 
+reasonable well. Each child view requests its parent to use a certain 
+collection of menus. Parents have the ability to keep the child's menus, 
+ignore them or edit them. Parents typically augment the request with 
+choices of their own and pass the request up the tree. For example, the 
+frame view provides an interface to file manipulation commands. When a 
+subordinate view requests that certain menus be used, the frame view will 
+add its menu items for reading, writing and printing a file, before passing 
+the request further up the tree. Because there is little that can be done 
+if a menu request is denied, there is no confirmation provided to the child 
+view.
+
+
+Data Resources
+
+
+Recall that insets are composed of both views and dataobjects. Although 
+resource negotiation is performed within the view tree,  the resource to be 
+allocated is appropriately the concern of dataobjects. Hence, the Andrew 
+Toolkit also has several data resources. We discuss two of them here.
+
+
+\italic{Stable (File) Representation}
+
+
+While an application is running, the state of the data are retained in 
+dataobjects. Between invocations of an application, the data must reside in 
+a stable representation, usually in a file. Part of the negotiation among 
+insets is how to save a stable representation.
+
+
+The negotiation for saving a dataobject's state is relatively 
+uncomplicated. Each parent inset is responsible for writing out its own 
+data representation and for requesting that each child write out its 
+representation. Each dataobject's state is tagged with a unique 
+identification for reference purposes; the unique identification is 
+generated by the parent. The definition of the file format for every object 
+specifies a header and trailer that marks the dataobject's state. 
+Naturally, a dataobject must guarantee that it does not generate a byte 
+sequence that looks like one of these markers as part of its state. \
+
+
+
+The only complicated part of a saving a dataobject's state is shared data. 
+Although not discussed in this article, it is possible for a dataobject to 
+be shared by more than one view or even by another dataobject. Part of the 
+negotiation for writing the state of a dataobject ensures that each object 
+is written exactly once.
+
+
+Using these constraints, it is easy for dataobject to coordinate their 
+saving of information. In its implementation, our representation for 
+dataobjects is more complex than stated here, but the complexities are 
+introduced for reasons that are orthogonal to resource allocation and 
+negotiation. The interested reader is referred to other descriptions of the 
+file representation [6].
+
+
+\italic{File State}
+
+
+Most applications manipulate files. In addition to contents, files have 
+state that may be changed form within an application. Some examples include 
+whether the file is writable, the name of the file and the location of the 
+file.
+
+
+An insert may wish to discover or change some of this information. For 
+example, an inset may disable certain user interactions if the underlying 
+file has no write permissions. Because an inset may be embedded, it has no 
+direct knowledge of the file from which it came. Therefore, it makes a 
+request of its parent to obtain the information. Similarly, attempts to 
+change some aspect of a file are made of the parent.
+
+
+In practice, we found very little negotiation over file state occurred 
+between a parent and child. The necessary information was found and 
+manipulated only the by farthest ancestor that performed the file 
+operations. Therefore, we bypassed the child-parent communication and 
+implemented the procedures that manipulate this resource outside of the 
+usual inset mechanisms.
+
+
+\bold{Service Resources}
+
+
+The last class of resources we wish to discuss are service resources. A 
+service is a facility that provides a high-level function, such as a dialog 
+box, a timer interaction or a spelling checker. Because the service could 
+be provided by an inset to other insets, we provide a mechanism by which 
+services themselves can be negotiated.
+
+
+Following our paradigm, we provide two sets of operations: posting a 
+handler and getting a handler. When an inset wishes to make some service 
+available, it will post a handler for that service to its parent. The 
+parent may choose to modify the service by adding some functionality of its 
+own, reject the service or pass it higher in the tree. When an inset wants 
+a service, it requests a handler for that service. The parent has the 
+choice of answering the request directly (possibly with a "no available 
+service" answer), or passing the request up the tree.
+
+
+In practice, we have found only special applications of the service 
+resources, primarily for dialog management and file handling. We have tried 
+a variety of mechanisms for implementing generic service (and information) 
+negotiation using handlers, contexts and attribute lists. So far, none of 
+our mechanisms has generalized in a useful way. We believe that service 
+resources will becoming more important over time, and are actively 
+investigating appropriate mechanisms and design strategies.
+
+
+\bold{Summary}
+
+
+In this paper, we have enumerated some user-interface resources that are 
+specified and manipulated by the Andrew Toolkit, as well as describe some 
+implementation implications. We showed that the design of user-interface 
+toolkits needs to concern itself with a very large range of resources and 
+that careful specification is needed in order to provide efficient 
+implementation of resource allocation. By its existence, the Andrew Toolkit 
+has shown that at least one set of implementation compromises can be made 
+that leads to a versatile system with acceptable performance.
+
+
+\bold{References}
+
+
+[1]	Andrew J. Palay, Wilfred J. Hansen, Michael L. Kazar, Mark Sherman, 
+Maria G. Wadlow, Thomas P. Neuendorffer, Zalman Stern, Miles Bader and Thom 
+Peters, "The Andrew Toolkit: An Overview", \italic{The Andrew Project}, 
+Technical Report, Information Technology Center, CMU, Pittsburgh, PA, p. 
+11-24.
+
+
+[2]	"J. McCormack and P. Asente, "An Overview of the X Toolkit", Proc. ACM 
+SIGGraph Symp. on User-Interface Software, ACM, New York, 1988, p. 46-55.
+
+
+[3] Mark A. Linton, John M. Vlissides and Paul R. Calder, "Composing User 
+Interfaces with Interviews," IEEE Computer, Vol. 22, No. 2, February 1989, 
+p. 8-22.
+
+
+[4]	\italic{Serpent Overview}, Software Engineering Institute Technical 
+Report CMU/SEI-89-UG-2, Carnegie Mellon University, Pittsburgh, PA, August 
+1989.
+
+
+[5]	"K. Schumucker, "Object-Oriented Programming for the Macintosh,", 
+Hayden Book Company, Hasbrouck Heights, NJ, 1986.
+
+
+[6]	\italic{Andrew Toolkit Programmers Manual}, Information Technology 
+Center, Carnegie Mellon University, Pittsburgh, PA., January 1990.
+
+
+\begindata{bp,538305608}
+\enddata{bp,538305608}
+\view{bpv,538305608,14,0,0}
+
+\begindata{cel,538641368}
+\V 2
+\begindata{table,538641512}
+\rows 39 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+-	-	-	-	-
+| \begindata{text,538816592}
+\textdsversion{12}
+\template{default}
+\center{\bold{\bigger{\bigger{Pascal's Triangle\
+}}}}\enddata{text,538816592}
+	= 	= 	= 	= 	| 
+-	-	-	-	-
+| \begindata{text,539344244}
+\textdsversion{12}
+\define{bold
+}
+This table contains several descriptions of \bold{Pascal's Triangle}.  It 
+contains a set of equations which defines the values of the triangle.  It 
+also contains an animation showing the building of the triangle.  Finally 
+there is an implementation of Pascal's Triangle using the spreadsheet 
+facilities of the table object.
+
+\begindata{calc, 538641752}
+TopTitleFontName AndySans22b
+BottomLegendFontName Andy20i
+Value 
+\enddata{calc, 538641752}
+\view{calcv,538641752,15,0,0}
+In order to run the animation, click into the cell and choose the 
+\bold{animate} item from the menus. \
+\enddata{text,539344244}
+	= 	| \begindata{eq,538642552}
+{ lpile d_eqstyle { v sub { 0 , j } = v sub { i , 0 } = 0 } { v sub { 1 , 1 } = 1 } { v sub { i , j } = v sub { i - 1 , j } + v sub { i , j - 1 } } } \enddata{eq,538642552}
+	= 	= 	| 
+=	=	=	=	=
+| 	= 	| 	= 	= 	| 
+=	=	=	=	=
+| 	= 	| 	= 	= 	| 
+=	=	=	=	=
+| 	= 	| 	= 	= 	| 
+=	=	=	=	=
+| 	= 	| 	= 	= 	| 
+=	=	-	-	-
+| 	= 	| \begindata{fad,539253800}
+$C 30
+$T 30
+$L andy12
+$P 0,0,20000,256
+$F
+$B 10,10 30,30
+$S 18,24
+1
+$F
+$B 10,10 30,30
+$S 18,24
+1
+$V 30,20 35,20
+$V 35,20 31,16
+$V 35,20 31,24
+$V 20,30 20,35
+$V 20,35 16,31
+$V 20,35 24,31
+$F
+$B 10,10 30,30
+$S 18,24
+1
+$V 30,20 50,20
+$V 50,20 46,16
+$V 50,20 46,24
+$V 20,30 20,50
+$V 20,50 16,46
+$V 20,50 24,46
+$B 50,10 70,30
+$B 10,50 30,70
+$F
+$B 10,10 30,30
+$S 18,24
+1
+$V 30,20 50,20
+$V 50,20 50,20
+$V 50,20 50,20
+$V 20,30 20,50
+$V 20,50 20,50
+$V 20,50 20,50
+$B 50,10 70,30
+$B 10,50 30,70
+$S 18,64
+1
+$S 58,24
+1
+$F
+$B 10,10 30,30
+$S 18,24
+1
+$V 30,20 50,20
+$V 50,20 50,20
+$V 50,20 50,20
+$V 20,30 20,50
+$V 20,50 20,50
+$V 20,50 20,50
+$B 50,10 70,30
+$B 10,50 30,70
+$S 18,64
+1
+$S 58,24
+1
+$V 70,20 75,20
+$V 75,20 71,16
+$V 75,20 71,24
+$V 20,70 20,75
+$V 20,75 16,71
+$V 20,75 24,71
+$V 30,60 35,60
+$V 35,60 31,56
+$V 35,60 31,64
+$V 60,30 60,35
+$V 60,35 56,31
+$V 60,35 64,31
+$F
+$B 10,10 30,30
+$S 18,24
+1
+$V 30,20 50,20
+$V 50,20 50,20
+$V 50,20 50,20
+$V 20,30 20,50
+$V 20,50 20,50
+$V 20,50 20,50
+$B 50,10 70,30
+$B 10,50 30,70
+$S 18,64
+1
+$S 58,24
+1
+$V 70,20 90,20
+$V 90,20 86,16
+$V 90,20 86,24
+$V 20,70 20,90
+$V 20,90 16,86
+$V 20,90 24,86
+$V 30,60 50,60
+$V 50,60 46,56
+$V 50,60 46,64
+$V 60,30 60,50
+$V 60,50 56,46
+$V 60,50 64,46
+$B 90,10 110,30
+$B 10,90 30,110
+$B 50,50 70,70
+$F
+$B 10,10 30,30
+$S 18,24
+1
+$V 30,20 50,20
+$V 50,20 50,20
+$V 50,20 50,20
+$V 20,30 20,50
+$V 20,50 20,50
+$V 20,50 20,50
+$B 50,10 70,30
+$B 10,50 30,70
+$S 18,64
+1
+$S 58,24
+1
+$V 70,20 90,20
+$V 90,20 90,20
+$V 90,20 90,20
+$V 20,70 20,90
+$V 20,90 20,90
+$V 20,90 20,90
+$V 30,60 50,60
+$V 50,60 50,60
+$V 50,60 50,60
+$V 60,30 60,50
+$V 60,50 60,50
+$V 60,50 60,50
+$B 90,10 110,30
+$B 10,90 30,110
+$B 50,50 70,70
+$S 98,24
+1
+$S 18,104
+1
+$S 58,64
+2
+$F
+$B 10,10 30,30
+$S 18,24
+1
+$V 30,20 50,20
+$V 50,20 50,20
+$V 50,20 50,20
+$V 20,30 20,50
+$V 20,50 20,50
+$V 20,50 20,50
+$B 50,10 70,30
+$B 10,50 30,70
+$S 18,64
+1
+$S 58,24
+1
+$V 70,20 90,20
+$V 90,20 90,20
+$V 90,20 90,20
+$V 20,70 20,90
+$V 20,90 20,90
+$V 20,90 20,90
+$V 30,60 50,60
+$V 50,60 50,60
+$V 50,60 50,60
+$V 60,30 60,50
+$V 60,50 60,50
+$V 60,50 60,50
+$B 90,10 110,30
+$B 10,90 30,110
+$B 50,50 70,70
+$S 98,24
+1
+$S 18,104
+1
+$S 58,64
+2
+$V 110,20 115,20
+$V 115,20 111,16
+$V 115,20 111,24
+$V 20,110 20,115
+$V 20,115 16,111
+$V 20,115 24,111
+$V 30,100 35,100
+$V 35,100 31,96
+$V 35,100 31,104
+$V 100,30 100,35
+$V 100,35 96,31
+$V 100,35 104,31
+$V 60,70 60,75
+$V 60,75 56,71
+$V 60,75 64,71
+$V 70,60 75,60
+$V 75,60 71,56
+$V 75,60 71,64
+$F
+$B 10,10 30,30
+$S 18,24
+1
+$V 30,20 50,20
+$V 50,20 50,20
+$V 50,20 50,20
+$V 20,30 20,50
+$V 20,50 20,50
+$V 20,50 20,50
+$B 50,10 70,30
+$B 10,50 30,70
+$S 18,64
+1
+$S 58,24
+1
+$V 70,20 90,20
+$V 90,20 90,20
+$V 90,20 90,20
+$V 20,70 20,90
+$V 20,90 20,90
+$V 20,90 20,90
+$V 30,60 50,60
+$V 50,60 50,60
+$V 50,60 50,60
+$V 60,30 60,50
+$V 60,50 60,50
+$V 60,50 60,50
+$B 90,10 110,30
+$B 10,90 30,110
+$B 50,50 70,70
+$S 98,24
+1
+$S 18,104
+1
+$S 58,64
+2
+$V 110,20 130,20
+$V 130,20 126,16
+$V 130,20 126,24
+$V 20,110 20,130
+$V 20,130 16,126
+$V 20,130 24,126
+$V 30,100 50,100
+$V 50,100 46,96
+$V 50,100 46,104
+$V 100,30 100,50
+$V 100,50 96,46
+$V 100,50 104,46
+$V 60,70 60,90
+$V 60,90 56,86
+$V 60,90 64,86
+$V 70,60 90,60
+$V 90,60 86,56
+$V 90,60 86,64
+$B 10,130 30,150
+$B 130,10 150,30
+$B 50,90 70,110
+$B 90,50 110,70
+$F
+$B 10,10 30,30
+$S 18,24
+1
+$V 30,20 50,20
+$V 50,20 50,20
+$V 50,20 50,20
+$V 20,30 20,50
+$V 20,50 20,50
+$V 20,50 20,50
+$B 50,10 70,30
+$B 10,50 30,70
+$S 18,64
+1
+$S 58,24
+1
+$V 70,20 90,20
+$V 90,20 90,20
+$V 90,20 90,20
+$V 20,70 20,90
+$V 20,90 20,90
+$V 20,90 20,90
+$V 30,60 50,60
+$V 50,60 50,60
+$V 50,60 50,60
+$V 60,30 60,50
+$V 60,50 60,50
+$V 60,50 60,50
+$B 90,10 110,30
+$B 10,90 30,110
+$B 50,50 70,70
+$S 98,24
+1
+$S 18,104
+1
+$S 58,64
+2
+$V 110,20 130,20
+$V 130,20 130,20
+$V 130,20 130,20
+$V 20,110 20,130
+$V 20,130 20,130
+$V 20,130 20,130
+$V 30,100 50,100
+$V 50,100 50,100
+$V 50,100 50,100
+$V 100,30 100,50
+$V 100,50 100,50
+$V 100,50 100,50
+$V 60,70 60,90
+$V 60,90 60,90
+$V 60,90 60,90
+$V 70,60 90,60
+$V 90,60 90,60
+$V 90,60 90,60
+$B 10,130 30,150
+$B 130,10 150,30
+$B 50,90 70,110
+$B 90,50 110,70
+$S 18,144
+1
+$S 138,24
+1
+$S 58,104
+3
+$S 98,64
+3
+$$
+\enddata{fad,539253800}
+	= 	= 	| 
+=	=	=	=	=
+| 	= 	| 	= 	= 	| 
+=	=	=	=	=
+| 	= 	| 	= 	= 	| 
+=	=	=	=	=
+| 	= 	| 	= 	= 	| 
+=	=	=	=	=
+| 	= 	| 	= 	= 	| 
+=	=	=	=	=
+| 	= 	| 	= 	= 	| 
+=	=	=	=	=
+| 	= 	| 	= 	= 	| 
+=	=	=	=	=
+| 	= 	| 	= 	= 	| 
+=	=	-	-	-
+| 	= 	| 1	=[r,c-1]	=[r,c-1]	| 
+=	=
+| 	= 	| =[r-1,c]	=[r,c-1]+[r-1,c]	=[r,c-1]+[r-1,c]	| 
+=	=
+| 	= 	| =[r-1,c]	=[r,c-1]+[r-1,c]	=[r,c-1]+[r-1,c]	| 
+=	=
+| 	= 	| =[r-1,c]	=[r,c-1]+[r-1,c]	=[r,c-1]+[r-1,c]	| 
+=	=
+| 	= 	| =[r-1,c]	=[r,c-1]+[r-1,c]	=[r,c-1]+[r-1,c]	| 
+-	-	-	-	-
+\enddata{table,538641512}
+1 538641512 0 0 0 0 
+>OBJ< table
+>VIEW< spread
+>REF< table
+\enddata{cel,538641368}
+\view{celview,538641368,16,0,744}
+
+Figure 1.  Spreadsheet with embedded objects.
+
+
+\begindata{zip,539585304}
+%ViewWidth 669
+%ViewHeight 457
+*D;-1000,1400
+N8.5X11
+>-1000,1400
+*G;-478,1331
+>441,1054
+*G;-431,969
+>410,708
+*G;-426,591
+>426,335
+*G;-415,197
+>431,-127
+*G;-1677,-282
+>-1155,-452
+*G;-1043,-260
+>-495,-447
+*G;-1043,-553
+>-484,-745
+*G;-356,-255
+>420,-436
+*G;585,-239
+>1230,-447
+*G;1320,-244
+>1885,-436
+*A;-44,1239
+TWindow
+MCM
+*A;-53,809
+TMessage Frame
+MCM
+*A;-15,447
+TScroll
+MCM
+*A;-37,21
+TSpreadsheet
+MCM
+*A;-1443,-367
+TText
+MCM
+*A;-809,-372
+TText
+MCM
+*A;-798,-670
+TCalculator
+MCM
+*A;883,-346
+TAnimation
+MCM
+*A;1586,-340
+TSpreadsheet
+MCM
+*C;-26,1054
+>-26,974
+*C;-15,713
+>-15,596
+*C;-5,340
+>-10,202
+*C;-10,-117
+>-15,-250
+*C;-351,-127
+>-1432,-271
+*C;-244,-133
+>-660,-260
+*C;106,-117
+>830,-234
+*C;388,-122
+>1608,-244
+*C;-761,-441
+>-766,-559
+*A;-25,1150
+T(Interaction Manager)
+MCM
+*G;-595,326
+>-1144,595
+*A;-894,453
+TText
+MCM
+*C;-204,715
+>-869,600
+*A;-19,-351
+TEquation
+MCM
+
+\enddata{zip,539585304}
+\view{zipview,539585304,20,691,459}
+
+
+Figure 2. View tree for Figure 1.\
+\enddata{text,538833080}

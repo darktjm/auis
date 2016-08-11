@@ -1,0 +1,746 @@
+\begindata{text,537746808}
+\textdsversion{12}
+\template{default}
+\majorheading{\bigger{\bigger{\bigger{\bigger{Converting ATK Code to C++ \
+
+
+}}}}
+\bigger{Andrew User Interface System}
+
+V\bigger{ersion 8   (October 1996)
+
+}}
+
+
+\bold{\indent{\indent{\indent{\indent{Andrew Consortium
+
+School of Computer Science
+
+Carnegie Mellon University
+
+5000 Forbes Avenue
+
+Pittsburgh, PA 15213-3891
+
+USA}}}}
+
+}
+\indent{Phone:			\bold{(412) 268-6710}
+
+Fax:			\bold{(412) 268-5576}
+
+Web:			\bold{http://www.cs.cmu.edu/~AUIS}
+
+Demo:			\bold{finger @atk.cs.cmu.edu}
+
+Archives:		\bold{ftp.andrew.cmu.edu:  /pub/AUIS}
+
+Bugs:			\bold{\bold{info-andrew-bugs@andrew.cmu.edu
+
+}}Info & Subscriptions:	\bold{info-andrew-request@andrew.cmu.edu}}
+
+
+
+\indent{\indent{
+
+
+In the documentation, the source directory will be referred to as 
+\typewriter{$/} and the destination as \typewriter{$ANDREWDIR/}.
+
+}}
+\indent{\indent{If you are reading an all-ASCII version of this file, the 
+version in Andrew format is in the distribution at:}}
+
+
+\center{\typewriter{$ANDREWDIR}}\typewriter{\center{\typewriter{/}}doc/DEVEL\
+OPER/Conversion.ez}\smaller{
+
+
+
+
+
+
+
+
+
+\smaller{\bigger{Copyright 1996 Carnegie Mellon University.  All rights 
+reserved. Please see further copyrights and disclaimer at the end of this 
+file.}}}
+
+\begindata{bp,537787000}
+Version 2
+n 0
+\enddata{bp,537787000}
+\view{bpv,537787000,0,0,0}
+\chapter{
+\smaller{Introduction}}
+
+
+In 1994-1995, the AUIS source code was converted to C++.  Accordingly, 
+those with code in the original extended C will have to convert as well. 
+ As part of the conversion process, the Andrew Consortium staff has created 
+conversion tools which render the process relatively straightforward, if 
+not painless.  \
+
+
+
+Fortunately, C++ is close enough to the original AUIS code that conversion 
+can be done by local textual manipulation without extensive type analysis. 
+ The conversion tools have been written in the Ness language, a notation 
+well suited to text manipulation.  This does, however, mean that to do a 
+conversion you must already have a working AUIS environment.  However, if 
+you don't, you may have little code to convert.
+
+
+The conversion tools, C++Index, C++Proto, and C++Conv, are in the 
+distribution in directory \typewriter{$/overhead/c++conv};  if 
+CPPCONVERTER_ENV has been defined for the build, they are installed in 
+\typewriter{$ANDREWDIR/bin}, with a corresponding .help file in the help 
+directory.   Documentation of the genstatl processor is distributed in 
+\typewriter{$/overhead/genstatl/genstatl.help} and installed into the hrlp 
+directory. An overall description of the conversion process is in 
+\typewriter{$/overhead/c++conv/atk-C++.help}.
+
+
+For an example of converted code, see the null inset which resides in the 
+source tree at \
+
+
+
+	\typewriter{$/atk/createinset/null/*}
+
+
+and is installed into
+
+
+	\typewriter{$ANDREWDIR/lib/null/ }.
+
+
+A companion document, in file \typewriter{ATKinC++.ez}, describes how to 
+write ATK objects using C++ from scratch.  However, it is still easier to 
+begin with createinset, which now generates C++ code.
+
+
+Most sites with code to convert have existing installed AUIS systems. 
+ These can be used as the platform for doing the conversion (as we have 
+done at CMU).  In this case you will have two destination directories, the 
+old and a new one, for the converted objects.  The new destination 
+directory must contain a config directory with contents taken from the C++ 
+release.  The site.h and site.mcr files can be the same as for your 
+existing installation, except that site.mcr must have a DESTDIR value 
+referring to the new directory and a CPPC value giving the location of a 
+C++ compiler.  If using g++, the version should be 2.7.0.  (2.7.2 for 
+Solaris or AIX 3.2, or AIX 4.1)
+
+
+If you have code to convert, but no existing AUIS, you can first install 
+the C++ version of AUIS and use it as the platform for the installation. 
+ In this case, the destination directory for the system build can also be 
+the destination directory for the converted code.
+
+
+In either case, the conversion scripts use nessrun, so that program must be 
+on your path and ANDREWDIR must be set if you need it to run nessrun.
+
+
+
+\heading{\bigger{1.	Steps in Conversion}}
+
+
+o  Run C++Index over the topmost directory to build an index telling 
+C++Conv the names of all classes (both full and keyname) and what methods 
+the classes have.  See C++Index.help.  Typically, you change directory to 
+the root of all your classes and give the command
+
+	C++Index . > classinfo
+
+
+o Ensure that the old files are writable:
+
+	chmod +w *
+
+
+o  Run C++Proto to add function parameter prototype information to function 
+declarations in existing .h files.  (Note: few source directories in 
+typical AUIS code have .h files, so this step may be unnecessary.  Do not 
+worry about .ch files here, they are converted in the next step.)  An 
+alternative is to wait until after conversion of .c files to .C files in 
+C++.  These will have function prototypes collected together where they can 
+be copied for the .h file.  This is more accurate because all functions 
+will be prototyped.  See C++Proto.help.
+
+
+A typical command would be
+
+	C++Proto *.h *.c --- .../classinfo
+
+where .../classinfo is the file that was created with C++Index. The .h 
+files will be renamed to .h.orig and the converted files will become the 
+new .h files.  \{Note: Prototypes are created in ANSI C format.  These 
+files will not compile with most older C compilers which do not accept 
+prototypes.  We are studying alternatives to make the system compatible 
+with non-ANSI compilers.\}
+
+
+o  Run C++Conv to convert all .c files to .C files.  Usually a sufficient 
+command line is
+
+	C++Conv *.c --- .../classinfo >&conv.log
+
+Where once again .../classinfo should be replaced with the name of the file 
+generated by C++Index.
+
+
+C++Conv is robust in its treatment of files that are not valid C code. I 
+have used it for yacc files and tlex files, both of which have C code mixed 
+in among non-C syntax.  In both cases the C code portions were correctly 
+converted to C++.
+
+
+o  Hide or delete the unconverted files.  It is probably best to create a 
+subdirectory and move the obsolete files to it:
+
+	mkdir obsolete
+
+	mv *.c *.ch *.orig obsolete
+
+
+o  Fixing missing types and warnings discovered during conversion:
+
+	grep WARN conv.log
+
+	grep MISSING *.C *.H
+
+These types were not needed in  C, but are needed in C++, which is more 
+finicky.  (Just how finicky, you will find out later.)
+
+
+o Correct idiosyncratic conversions.  C++Conv inserts some declarations in 
+.C files between the first function and the preceding comment;  usually the 
+comment should be moved to after those lines.  Another converter trick is 
+to insert a #ifdef...#endif pair with nothing between them.  The pair 
+should be deleted.
+
+
+o  Correct Imakefile.  For details, see 
+./doc/atkprogramming/ImakeMacros.ez; especially the rules for 
+ATKLibraryTarget, InstallATKLibrary, RunappWithLibrary, and 
+Runapp\leftindent{.\bold{
+
+}
+Remove DOBJS list.  (It is not needed, though it won't hurt.)
+
+
+List in the OBJS list all .o files which are to be included in the library 
+generated from this directory.
+
+
+List .H files in HFILES list.
+
+
+Be sure the rules include:
+
+	NormalObjectRule()
+
+	NormalATKRule()
+
+
+Add or revise a rule that creates the library.  The library name is created 
+from the first argument;  "myclass" creates "libmyclass.a"  The fourth 
+argument may include -lm and 	other system libraries:
+
+	ATKLibraryTarget(myclass, $(OBJS), $(LIBS),  \\
+
+			 $(BSDLIB))
+
+
+Add or revise installation rules:
+
+	InstallATKLibrary(myclass, $(DESTDIR)/lib/atk)
+
+	InstallClassFiles($(HFILES))
+
+
+To build an executable from this object, add a rule like
+
+	RunappWithLibrary(ez,myclass,sub,-r .)
+
+(There must not be spaces around the commas.)  Your new object can be 
+loaded into text in the resulting ez via ESC-TAB.  If your object has an 
+object derived from \italic{application}, you can build an executable for 
+your application:
+
+	RunappWithLibrary(myclass, myclass, sub, -r .)}
+
+
+o Run genmake to create the Makefile.  The usual genmake program suffices, 
+but must be given as its argument the name of the destination directory for 
+Andrew compilations.  This directory should already contain appropriate 
+versions of site.mcr and site.h in addition to the config directory 
+contents created by installing Andrew.  If the destination directory is 
+/usr/andrew, the command is
+
+	genmake /usr/andrew
+
+
+o Compile the code.  The command is simply
+
+	make >& make.log
+
+The mechanical part of the conversion is now complete and you have C++ 
+code.  However, given the usual C programming styles, this code almost 
+certainly has compilation errors and warnings.
+
+
+o  Fix compilation errors.  Most error messages are picayune complaints 
+about type mismatches.  These can be fixed by adding casts, but most should 
+be fixed in more substantive fashions.  See below for notes on "popular" 
+messages.
+
+
+o  Repeat previous step until you get the list of undefined symbols from 
+the link.  Now fix the undefined symbols and continue to repeat the 
+previous step until you get no error messages or warnings.  A section below 
+shows some of the common reasons for undefined symbols.
+
+
+o  For testing you need to build an executable.  This can be done with the 
+Imakefile rule RunappWithLibrary.  See the Appendix.  This rule creates a 
+subdirectory (called "sub" in the example), runs genstatl to build an 
+Imakefile in the subdirectory, and then runs make in the subdirectory to 
+build the executable.  This target is not made by default;  instead you 
+must explicitly name the target of the rule.  For the example above:
+
+	make myclass
+
+or
+
+	make ez
+
+(Whatever is the first argument to RunappWithLibrary.)
+
+
+o  Often the code now works.  Give the command \
+
+
+	runapp myclassapp arguments...
+
+(or whatever you have called the program.)  Sometimes further debugging is 
+needed.  See below for some gdb hints.
+
+
+
+\heading{\bigger{2.	"Popular" Syntax Errors after Conversion}}
+
+
+This section is a collection of typical corrections that had to be made to 
+adapt the converted C code to successfully pass through the C++ compilation 
+and link steps.
+
+
+________________
+
+null.C:227: argument list for `Write' does not match any in class
+
+The return type of an override function must be the same as the return type 
+of the base method.  In this case the override in null.H specified that the 
+fourth argument to Write was \italic{long}, where as the correct type was 
+\italic{int}.
+
+
+________________
+
+All #defines, macromethods, and macros should be checked.  The converter 
+manages to get simple ones converted to inline functions, but it mangles 
+more complex ones.
+
+
+________________
+
+Ness formerly had a collection of .h files in addition to the .ch files for 
+classes.  During the conversion a type dependency loop made it a little 
+tricky to get things the way I wanted them.  (This had been resolved in the 
+old code by having one type declaration in a completely inappropriate 
+file.)  My interim solution was to create ness.Hn combining all the former 
+.h files and the converted .H files for both ness and nesssym.
+
+
+I think the right solution will be to have three files:
+
+	nesstypes.h - declarations of types needed in header files
+
+	ness.H - public declarations
+
+	globals.h - declarations of data structures used within Ness
+
+With these,
+
+	ness.H will import nesstypes.h
+
+	clients will import ness.H
+
+	internal Ness modules will import both ness.H and globals.h
+
+
+________________
+
+In ness.c, the local variable "name" was converted to "::name" because 
+there is a member variable "name" in ness.H.  This is a deficiency of the 
+converter;  the spurious "::" must be removed manually from names that 
+match member variable names.  (The alternative would have been a much more 
+complex converter.)
+
+
+________________
+
+The C program nodeclss.c conforms to C++ syntax.  However, it would not 
+link with the ProgramTarget() Imakefile macro when called by the name 
+nodeclss.C, so the name remains unchanged.
+
+
+________________
+
+\italic{nessview.C:669: parse error before `,'}
+
+	char * buffer; \
+
+
+	...  next line is 668
+
+	buffer[2] = 'a';     /* gives parse error on next line */
+
+This appears to be a compiler bug.  The spurious message occurs when a 
+local variable name, in this case "buffer", is also the name of a class. 
+ The solution is to use the alternate form instead of the square brackets:
+
+	*(buffer+2) = 'a';
+
+Of course, it is better to avoid variable names that match class names.
+
+
+________________
+
+\italic{nevent.C:316: warning: ANSI C++ forbids implicit conversion from 
+`void *' in assignment}
+
+This message usually results from a call to malloc without a cast as in
+
+	s = malloc( ... )
+
+The correction is to add the cast:
+
+	s = (char *)malloc( ... )
+
+
+________________
+
+\italic{nessview.C:712: bad argument 9 for function `static 
+message::AskForStringCompleted (class dataobject::view*, int, char *, char 
+*, char *, int, class keystate*, auto enum message_CompletionCode(*)(char 
+*,long int ,char *,int ), auto void (*)(char *,long int ,auto void (*)(long 
+int ,enum message_HelpItem,char *,char *),long int ), long int, int)' (type 
+was struct helpRock*)}
+
+
+In this variety of error message, counting of the arguments starts with 0 
+as the first.  In this case the offense was in the parameter supplied 
+corresponding to the last "long int".  The solution was to add a cast, 
+(long), in front of the actual argument.  Annoyingly, only one such error 
+is detected on each compilation.  This same line previously gave me errors 
+for several other arguments on earlier compilations.
+
+
+________________
+
+\italic{compile.C:196: bad argument 2 for function `static parse::Create 
+(struct parse_tables*, class parse::lexan*, auto int (*)(int ,void **,void 
+**,void *), void *, auto void (*)(class parse*,int ,char *))' (type was 
+<unknown type>)}
+
+
+When the compiler complains of passing  the wrong type to a function, one 
+solution is to grab the correct type from the error message and paste it as 
+a cast in front of the argument.  For functions passed as values, this 
+usually does not work exactly right.  For functions in the base AUIS code, 
+there are typedefs for all paremeters that expect functions.  In this case:
+
+	typedef int (*parse_actionfptr)(int tact, void **tval, \
+
+
+				void **vsp, void *rock);
+
+As a result the offending code can be written by adding (parse_actionfptr):
+
+		Idle->parser = parse::Create(
+
+			&parse_description,
+
+			Idle->tlex,
+
+			(parse_actionfptr)reduceActions,
+
+			NULL,		/* set rock later */
+
+			errorfromparse); \
+
+
+
+________________
+
+\italic{call.C:1196: type `object' is not a base type for type `callnode'}
+
+The function being called was declared as
+
+	void refAddress(class nessmark  *m, unsigned int op, \
+
+
+			struct object *address);
+
+and the call was
+
+			refAddress(getcurfuncmark(), 'C', cnode);
+
+The use of struct object was an attempt to allow refAddress to have any 
+object as its argument, though there never was a class called object.  The 
+correct usage would be to declare the parameter as (void *) and then put a 
+cast in front of each value passed to that argument.  The error message 
+refers to the fact that an object can be passed to a parameter declared 
+with its type or any type from which it is derived.
+
+
+In this case I discovered that all calls to refAddress had callnodes as the 
+third argument, so I changed the parameter declaration (in three places, 
+sigh).
+
+
+________________
+
+\italic{interp.C:1357: warning: assignment of integer from pointer lacks a 
+cast}
+
+	long *t; ...  *t = NULL;
+
+This was just plain wrong.  Changed to *t = 0L;
+
+
+________________
+
+\italic{nevent.C:211: warning: implicit declaration of function 
+`BackSlashReduce'}
+
+This means the function is in another file and you omitted the declaration 
+from the header file.
+
+
+________________
+
+	char *c;  . . .  c = NULL;
+
+This generates a message.  It is preferable to write
+
+	. . . c = '\\0';
+
+
+
+________________
+
+\italic{nevent.C:319: cannot lookup method in incomplete type `basicobject'}
+
+	(NSP->p.v)->GetTypeName()
+
+I had declared NSP to be  (union stackelement *) and the p.v field was of 
+type basicobject.  The correction was to change the declaration of p.v to
+
+	ATK *v;
+
+
+________________
+
+\italic{ness.tlx:163: type `environment' is not a base type for type 
+`nestedmark'
+
+ness.tlx:166: type `environment' is not a base type for type `nestedmark'}
+
+Consider this code (from ness.tlx, but similarly elsewhere):
+
+		class environment *env;
+
+		...
+
+		while (env != NULL && (env->type != environment_Style \
+
+
+				|| env->data.style == NULL))
+
+			env = (env)->GetParent();
+
+The problem is that GetInnerMost and GetParent are defined to return 
+(struct nested mark *), which cannot be assigned to env.  On the other 
+hand, the data and type fields are defined in class environment.  The 
+problem is how to declare and env and where to put casts.  This is a 
+problem in C++ for which a solution is being worked on.  For the present 
+problem, I defined an inline function to solve the problem:
+
+		static inline class environment *
+
+	EnvGetParent(class environment *env) \{
+
+		return (class environment *)(env)->GetParent();
+
+	\}
+
+But note that this function is called as \
+
+
+	EnvGetParent(env)
+
+instead of (env)->GetParent() \{\{I don't think I really like infix 
+notation for operands other than for arithmetic expression.  Sigh.\}\}
+
+
+________________
+
+\italic{nessview.C: In function `void  helpProc (char *, struct helpRock*, 
+auto int (*)(), long int)':
+
+nessview.C:633: too many arguments to function}
+
+helpProc is called from the message completion code and is passed a 
+function as its third argument.  In the original code, helpProc declared 
+that argument as (procedure).  But the message completion code is passing a 
+function of type message_workfptr.  The solution was to change the 
+declaration of helpProc.
+
+
+
+\heading{\bigger{3.	Typical Sources of Undefined Symbols from the Linker}}
+
+
+After compilation and type errors are eliminated, many undefined symbols 
+usually appear during the link.  This section shows a few of these and 
+illustrates how they were resolved.
+
+
+________________
+
+One common source of undefined symbols is a type mismatch between a 
+prototyped declaration and the actual function definition (for example int 
+vs long...).  The function will be defined but will not have the same name 
+as the function described by the header file prototype and thus used by 
+callers in other compilations.
+
+
+The following were undefined in Ness because  the declarations in ness.Hn 
+differed from the implementations:
+
+	.predpush__Fili
+
+	.genop__FUi
+
+	.genbranch__FUil
+
+	.genarith__FUiP8exprnodeT1
+
+	.callCheat__FUiPUcP4ness
+
+	.neventInfo__FUiPUcP4ness
+
+	.refSysGlob__FP8nessmarkUiUs
+
+	.refAddress__FP8nessmarkUiP8callnode
+
+
+________________
+
+	.acos
+
+	.asin
+
+	.atan
+
+	.cos
+
+	.cosh
+
+Fixed by adding -lm in syslibs (fourth) argument to ATKLibraryTarget()
+
+
+________________
+
+	.pioctl
+
+Fixed by adding $(AFSSYSLIB) to LIBS list.
+
+
+________________
+
+	.ktc_ListTokens
+
+	.ktc_GetToken
+
+Fixed by adding $(PRSLIB) to LIBS list.
+
+
+
+________________
+
+	.Locate__3symPcPT0lPi
+
+	.FindAll__3symPclPFP3syml_ll
+
+	.FindArb__11arbiterviewP4view
+
+	.GetNamedView__11arbiterviewP4viewPc
+
+	ATKregistry__7arbiter
+
+	ObservedChanged__3celP10observablel
+
+	Read__7arbiterP4FILEl
+
+
+These all indicated that libraries were missing from the LIBS list.  To 
+determine which library, note the part of the name following "__".  First 
+is an integer giving the number of letters in the class name, then comes 
+the class name (sym, arbiterview, cel, or arbiter).  The libraries to add 
+to LIBS are the ones that define those classes.
+
+
+______________
+
+One common bug is observable when a class overrides a method in the base 
+class.  It can happen that calls to the method on objects in the derived 
+class will invoke the method in the base class instead of the overriding 
+method.  This usually occurs because the function prototype for the 
+overriding function does not match the prototype for the method in the base 
+class.
+
+\begindata{bp,537792104}
+Version 2
+n 0
+\enddata{bp,537792104}
+\view{bpv,537792104,1,0,0}
+\smaller{Copyright Carnegie Mellon University 1996.  All rights reserved.
+
+
+$Disclaimer: 
+# Permission to use, copy, modify, and distribute this software and its 
+# documentation for any purpose and without fee is hereby granted, provided 
+# that the above copyright notice appear in all copies and that both that 
+# copyright notice and this permission notice appear in supporting 
+# documentation, and that the name of IBM not be used in advertising or 
+# publicity pertaining to distribution of the software without specific, 
+# written prior permission. 
+#                         
+# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# 
+#  $}
+
+\enddata{text,537746808}

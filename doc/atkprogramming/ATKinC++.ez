@@ -1,0 +1,1488 @@
+\begindata{text,537746792}
+\textdsversion{12}
+\template{default}
+\define{function
+}
+\majorheading{\bigger{\bigger{\bigger{\bigger{Coding ATK Objects in C++ \
+
+
+}}}}
+\bigger{Andrew User Interface System}
+
+V\bigger{ersion 8   (October 1996)
+
+}}
+
+
+\bold{\indent{\indent{\indent{\indent{Andrew Consortium
+
+School of Computer Science
+
+Carnegie Mellon University
+
+5000 Forbes Avenue
+
+Pittsburgh, PA 15213-3891
+
+USA}}}}
+
+}
+\indent{Phone:			\bold{(412) 268-6710}
+
+Fax:			\bold{(412) 268-5576}
+
+Web:			\bold{http://www.cs.cmu.edu/~AUIS}
+
+Demo:			\bold{finger @atk.cs.cmu.edu}
+
+Archives:		\bold{ftp.andrew.cmu.edu:  /pub/AUIS}
+
+Bugs:			\bold{\bold{info-andrew-bugs@andrew.cmu.edu
+
+}}Info & Subscriptions:	\bold{info-andrew-request@andrew.cmu.edu}}
+
+
+
+\indent{\indent{
+
+
+In the documentation, the source directory will be referred to as 
+\typewriter{$/} and the destination as \typewriter{$ANDREWDIR/}.
+
+}}
+\indent{\indent{If you are reading an all-ASCII version of this file, the 
+version in Andrew format is in the distribution at:}}
+
+
+\center{\typewriter{$ANDREWDIR}}\typewriter{\center{\typewriter{/}}doc/DEVEL\
+OPER/ATKinC++.ez}\smaller{
+
+
+
+
+
+
+
+
+
+
+\smaller{\bigger{Copyright 1996 Carnegie Mellon University.  All rights 
+reserved. Please see further copyrights and disclaimer at the end of this 
+file.}}}
+
+\begindata{bp,537815592}
+Version 2
+n 0
+\enddata{bp,537815592}
+\view{bpv,537815592,0,0,0}
+
+\bold{\bigger{\bigger{1.	}}}\bold{\bigger{\bigger{Introduction}}}
+
+
+During 1993, the Andrew Consortium converted the source code of the Andrew 
+User Interface System from C to C++.  The old C code is written with a few 
+conventions and a pre-processor for the header files;  this combination is 
+sometimes called the"Class-C" language.  In this document you will find a 
+sequence of notes describing how to code objects in C++ from the point of 
+view of someone familiar with writing objects in Class-C.
+
+
+As in Class-C, objects in C++ are described in two files, a header file 
+with extension .H and a code file with extension .C.  Unlike Class-C, a .H 
+and .C pair may declare multiple objects and their implementations.
+
+
+In both Class-C and C++, the declaration of a class is something like that 
+of a struct that includes function declarations as well as data elements. 
+ C++ nomenclature tends to exploit this appearance verbally.  In 
+particular, the functions defined for a class are called "members" of the 
+class.
+
+
+In Class-C, as in earlier object-oriented systems, a class may be a 
+subclass of another, meaning that the new class has all the attributes of 
+the old and some additional ones.  This is confusing because a subclass has 
+a superset of the attributes of its superclass.  In C++, the terminology is 
+more meaningful.  The original class is called the \italic{base} class and 
+the new, extended one is called the \italic{derived} class.  In Class-C, 
+classes can be derived from nothing, in which case their parent is a sort 
+of pseudo-class called basicobject.  In C++ as used for ATK, all ATK 
+objects are derived from the base class ATK.
+
+
+Both Class-C and C++ declare classes in a syntax reminiscent of struct 
+declarations:
+
+
+	class \italic{classname} ... \{
+
+		\italic{functions and data for the class}
+
+	\};
+
+
+In Class-C, the functions and data are categorized into sections by labels. 
+ Methods are in the section labeled "methods:", class procedures under 
+"classprocedures:", data fields under "data:", and so on.  In C++, the 
+various sorts of functions can be intermixed;  they are distinguished by 
+additional prefix attributes.  In particular, the attribute "static" has 
+yet another meaning:  static member functions are defined for the class as 
+a whole rather than applying to an object.  That is, static member 
+functions play the same role as class procedures in Class-C.  Finally, 
+methods can be overridden in a "derived class" in C++ only if they have the 
+attribute "virtual", at least in the base class.
+
+
+One of the nice tricks of Class-C is to do object creation and type 
+checking at run time based on the textual name of an object.  Thus, for 
+instance, ez can insert a new object given just its name.  In adapting C++ 
+to this capability, one additional mechanism was introduced, the 
+\italic{registry}.  Both .H and .C files must have a few standard lines to 
+record objects in the registry.  The conventions for ATK objects are 
+described and declared in the base class header ATK.H, which can be 
+referred to for details.  An annotated copy is included below.
+
+
+This document is organized according to the sections of a Class-C class 
+declaration.  For each section, code fragments are given showing how the 
+code would appear in Class-C and in C++.
+
+
+Examples are taken from the code for the null inset found in the source in \
+
+
+/afs/cs/project/atk/src/V6/atk/createinset/null/null.c and \
+
+
+/afs/cs/project/atk/src/C++/atk/createinset/null/null.C.  The comments "/* 
+Class-C */" and "// C++" identify which version each code fragment is for. 
+ These comments are not needed in actual code.
+
+
+
+\heading{\bigger{\bigger{2.	File Structure}}}
+
+
+Each .H header file contains conditional compilation statements so it is 
+only included once.  null.H is bracketed thus:
+
+
+	#ifndef _null_H_			// C++
+
+	#define _null_H_
+
+	 . . .
+
+	class null ... \{
+
+		. . .
+
+	\};
+
+	#endif /* _null_H_ */
+
+
+.C files have the same structure as .c files in Class-C:  #includes, 
+#defines, variables, and finally function declarations.  The first #include 
+should be for andrewos.h.  There should be includes for each class whose 
+type or methods are used (dataobject.H below) and also for any classes 
+implemented by this .C file (null.H below).
+
+
+The most important difference is the addition of an ATKdefineRegistry line 
+in C++.  This defines a data area used in registering this class with the 
+ATK runtime system.  The arguments are the name of the class, the name of 
+the base class, and the name of the class initialization function.
+
+
+Thus null.C has this structure:
+
+
+	#include <andrewos.h>			// C++
+
+	#include <dataobject.H>
+
+	#include <null.H>
+
+	\italic{. . . other defines and variable declarations . . .
+
+	. . . prototypes for functions not declared in header file . . .}
+
+	ATKdefineRegistry(null, dataobject, null::InitializeClass);
+
+	\italic{. . . function declarations . . .}
+
+
+
+\heading{\bigger{\bigger{3.	Class Declaration}}}
+
+
+In Class-C, a class declaration is put in a .ch file and class names may be 
+followed by a file name in brackets.  The class syntax in null.ch is:
+
+
+	class null : dataobject [dataobj]		/* Class-C */
+
+	\{
+
+		 . . .
+
+	\};
+
+
+In C++, header files have the extension .H.  There must appear a #include 
+for the header file of the base class and bracketed filenames are not 
+allowed.  Moreover, the keyword "public" appears twice.  If the class had 
+no superclass in Class-C, its base class in C++ is ATK;  this name would 
+appear where "dataobject" does below.  Each ATK class must declare the 
+method ATKregistry, exactly as shown in this example from null.H:
+
+
+	#include <dataobject.H>			//  C++
+
+	class null : public  dataobject \
+
+
+	\{
+
+	public:
+
+		virtual ATKregistryEntry *ATKregistry();
+
+		 . . . \italic{member declarations} . . .
+
+	\};
+
+
+In both Class-C and C++, the member declarations are items as describe in 
+subsequent sections.
+
+
+When a program uses a class in Class-C, it includes the .eh or .ih file by 
+the file name.  \
+
+
+	#include <nullv.ih>				/* Class-C */
+
+In C++, the .H file is included in all .C files that refer to or define the 
+class.  Moreover, the full name is the same as the file name.  Thus to use 
+nullview in a C++ source file we would write
+
+	#include <nullview.H>    			// C++
+
+
+Variables referring to objects in Class-C are simply structs:
+
+
+	register struct null *dobj;			/* Class-C */
+
+	register struct nullview *dview, *dview2;
+
+
+However, in C++ the type can be written as either (class classname *) or 
+just (classname *).  Here are the declarations corresponding to the Class-C 
+example.
+
+	class null *dobj;					// C++
+
+	class nullview *dview, *dview2;
+
+These could also be written:
+
+	null *dobj;						// C++
+
+	nullview *dview, *dview2;
+
+(The "register" attribute could have been included in C++.)
+
+
+Prototypes are required for ALL functions to be called from C++ but which 
+have been compiled with a C (not C++) compiler.  In the header file 
+containing these prototypes, they are collected in a block and surrounded 
+with:
+
+	extern "C" \{
+
+		void examplefunction(long x, long y, boolean b, nessview *nv);
+
+		 . . . \italic{more prototypes} . . .
+
+	\}
+
+
+
+\heading{\bigger{\bigger{4.	Methods}}}
+
+
+Methods are functions that apply to objects of the class.  In Class-C they 
+are declared in the "methods:" section:
+
+
+    methods:						/* Class-C */
+
+	AddDot(long x, long y);
+
+		/* add a pair to list of dots */
+
+	CountDots() returns long;
+
+		/* return number of dots in list */
+
+
+In C++, methods are declared with the keyword "virtual".  This essentially 
+means they can be overriden by derived classes.  In addition, the type 
+returned is not assumed to be void and is prefixed rather than added after 
+the keyword "returns" as in Class-C.  Otherwise method declarations in C++ 
+are the same as in Class-C.
+
+
+	virtual void AddDot(long x, long y);	// C++
+
+		/* add a pair to list of dots */
+
+	virtual long CountDots();
+
+		/* return number of dots in list */
+
+
+The Class-C code in a .c file declares a method with a specially named 
+function to implement the method; the first argument is "self" by 
+convention:
+
+
+		void						/* Class-C */
+
+	null__AddDot(self, x, y)
+
+		register struct null *self;
+
+		long x, y;
+
+	\{
+
+		 . . .
+
+	\}
+
+
+In C++ implementations in .C files, the method is named with double colon 
+instead of double underline and there is no declared first argument:
+
+
+		void						// C++
+
+	null::AddDot(long  x , long  y) \{
+
+		 . . .
+
+	\}
+
+
+Within the code for a method implementation, the variable \italic{this} 
+refers to the object against which this method has been called. 
+ \italic{This} derives its special status from the syntax for calling the 
+method which presupposes that the object pointer not only points at data 
+fields, but also at the available methods.  Thus if dobj is a (class null 
+*) value, the AddDot method is applied to dobj with the syntax:
+
+	(dobj)->AddDot(10, 12)
+
+Within this invocation of AddDot, the value of \italic{this} will be the 
+value from \italic{dobj}.
+
+
+Putting the above together, consider the following line from null__AddDot 
+in null.c:
+
+	d->next = null_GetFirstDot(self);		/* Class-C */
+
+In the C++ version in null.C, this line appears as
+
+	d->next = (this)->GetFirstDot();		// C++
+
+where \italic{self} has been converted to \italic{this} and the pointer 
+syntax is used to call the method on the object.
+
+
+Values of type (class xxx *) can be passed as ordinary arguments.  In some 
+Class-C code, a first argument was declared to be \italic{self}, even 
+though the function was not a method.  In this case the name has not been 
+changed to \italic{this}.  The data fields of a class object can be 
+accessed by ordinary pointer dereferencing;  this applies to inherited data 
+fields as well.  For instance, view and all classes derived from view have 
+a field \italic{dataobject} which was accessed thusly in nullv.c:
+
+
+	class nullview  *self = . . .
+
+	struct null *dobj = 			  /* Class-C */
+
+		(struct null*) self->header.view.dataobject;
+
+
+Because data value \italic{dataobject} inherits, the same assignment in can 
+be accessed as in this fragment from nullview.C:
+
+
+	class nullview  *self = . . . 		// C++
+
+		class null *dobj  = (class null *)self->dataobject;
+
+
+Note that a cast is still required.
+
+
+
+\heading{\bigger{\bigger{5.	Overrides}}}
+
+
+A derived class is declared in a Class-C .ch file in the "overrides:" 
+section:
+
+
+	overrides:								/* Class-C */
+
+		Read(FILE *file, long id) returns long;
+
+
+In C++, overriding methods are declared like any other methods.  They do 
+not need the keyword \italic{virtual} because the overriden class must 
+already have been declared virtual in the base class:
+
+
+	long Read(FILE *file, long id);				// C++
+
+
+The syntax of declaring the override function in the C++ file differs from 
+the syntax in Class-C in exactly the same ways that the implementations of 
+methods does.  In null.c we find:
+
+
+		long									/* Class-C */
+
+	null__Read(self, file, id)
+
+		register struct null  *self;
+
+		register FILE  *file;
+
+		register long  id;
+
+	\{
+
+		 . . .
+
+	\}
+
+	\
+
+
+The parallel code in null.C is:
+
+	\
+
+
+		long									// C++
+
+	null::Read(register FILE   *file, register long   id) \{
+
+		 . . .
+
+	\}
+
+
+
+\heading{\bigger{\bigger{6.	Class Procedures}}}
+
+
+Class-C has provision for functions that are not methods, but are closely 
+associated with a class.  For instance, a SetDebug operation might turn on 
+debugging for all instances of a class.  In Class-C, such a function is 
+declared in the "classprocedures:" section and returns void by default:
+
+	classprocedures:						/* Class-C */
+
+		SetDebug(boolean d);	\
+
+
+In C++, the declaration is marked with the keyword "static":
+
+	static void SetDebug(boolean d);			// C++
+
+These are called "static member functions."
+
+
+In Class-C, the name of a classprocedure as it appears in a function call 
+is the combination of the name of the class, and underline, and the name of 
+the classprocedure:
+
+	null_SetDebug(TRUE);				/* Class-C */
+
+In C++, the double colon qualifier is used instead:
+
+	null::SetDebug(TRUE);				// C++
+
+
+Class procedures in Class-C are declared with an additional leading 
+argument for which no purpose has ever been found (other than making the 
+system work):
+
+
+		void 	\
+
+
+	null__SetDebug(ClassID, d)			/* Class-C */
+
+		struct classhdr *ClassID;
+
+		boolean d;
+
+	\{
+
+		debug = d;
+
+	\}
+
+
+Static member functions in C++ do not need the dummy first argument, but 
+must begin their code with the special macro "ATKinit":
+
+		void \
+
+
+	null::SetDebug(boolean  d)  \{			// C++
+
+		ATKinit;
+
+		debug = d;
+
+	\}
+
+
+The first time (and only then) that ATKinit is encountered during 
+execution, it will call the function named as the third argument to 
+ATKdefineRegistry.  The converter makes this the InitializeClass function, 
+as shown above and described below.
+
+
+In Class-C, classprocedures are not inherited by subclasses, but in C++ 
+static member functions do inherit to derived classes.
+
+
+
+\heading{\bigger{\bigger{7.	InitializeObject/FinalizeObject}}}
+
+
+Class-C defines two special names for functions to be called during 
+creation and destruction of objects:  InitializeObject is automatically 
+called after creation of an object with the \italic{New} procedure for the 
+class.  When the \italic{Destroy} method is called on the object, the 
+function FinalizeObject is called just before releasing the object's 
+memory.  In C++, these functions are called constructors and destructors 
+and have special syntax.
+
+
+The declarations in Class-C are part of the classprocedures section of the 
+class declaration:
+
+	InitializeObject(struct null *self) returns boolean;	/* Class-C */
+
+	FinalizeObject(struct null *self);
+
+In C++, they appear as
+
+	null();							// C++   constructor
+
+	virtual ~null();						// C++   destructor
+
+
+As in Class-C, creation of an object in C++ invokes the constructor for all 
+base classes and destroying the object invokes the destructor for the same 
+classes.  Creation appears like a function call in Class-C, but as a 
+special syntax in C++:
+
+	dobj = null_New();					/* Class-C */
+
+	dobj = new class null;					// C++, calls constructor
+
+Similarly, objects are deallocated with a function call in Class-C and a 
+special operator in C++:
+
+	null_Destroy(dobj);					/* Class-C */
+
+	delete dobj;  // WRONG.  see CAVEAT	// C++, calls destructor
+
+
+CAVEAT: Dataobjects and views in ATK are derived from class \italic{traced.} 
+ Such objects MUST not be deleted with the delete construct and ordinary 
+C++ destructors.  Instead they must be released with the Destroy method 
+defined by class traced.  Thus the line above must be
+
+	(dobj)->Destroy();
+
+
+
+Here are the implementations of InitializeClass and FinalizeClass in 
+Class-C:
+
+
+	boolean
+
+null__InitializeObject(ClassID, self)			/* Class-C */
+
+	struct classhdr *ClassID;
+
+	register struct null  *self;
+
+\{
+
+	self->dots = NULL;
+
+	return TRUE;
+
+\}
+
+	void \
+
+
+null__FinalizeObject(ClassID, self)			/* Class-C */
+
+	struct classhdr *ClassID;
+
+	register struct null  *self;
+
+\{
+
+	null_ClearDots(self);	/* deallocate subordinate structs */
+
+\}
+
+
+The corresponding function declarations in C++ are what you might expect, 
+if you've memorized and comprehended everything so far.
+
+
+	null::null()  \{						// C++
+
+		ATKinit;
+
+		this->dots = NULL;
+
+		THROWONFAILURE( TRUE);  /* succeed */
+
+	\}
+
+
+	null::~null()  \{						// C++
+
+		ATKinit;
+
+		(this)->ClearDots();
+
+	\}
+
+
+(ATKinit is not necessary in destructors, even though it is inserted by the 
+converter.  It can be removed.)
+
+
+Note that neither constructor nor destructor has a return type, not even 
+\italic{void}; indeed, it is an error to specify a return type for a 
+constructor or destructor.  While InitializeObject returns a boolean 
+indicating success or failure in Class-C, in C++ the only ways for a 
+constructor to indicate failure portably is to use exceptions, or set a 
+flag in the object indicating the failure.  (However exceptions are not 
+implemented widely yet.)  ATK.H provides a macro called THROWONFAILURE 
+which for now simply prints an error message if it's argument is not true. 
+ On a system with a compiler which supports exceptions it THROWONFAILURE 
+may be modified to throw an exception when the constructor for an ATK 
+object fails.
+
+
+
+\heading{\bigger{\bigger{8.	InitializeClass}}}
+
+
+Class-C has an advantage over C++ in that initialization for classes is 
+provided.  In other words, a Class-C program can have code which is 
+executed when the class is started up;  this code can perform arbitrary 
+computation to initialize variables.  In C++ this functionality is emulated 
+with the ATKinit macro.
+
+
+Class initialization is specified in a Class-C .ch file with \
+
+
+	InitializeClass() returns boolean;			/* Class-C */
+
+This is converted to a a static member function in C++:
+
+	static boolean InitializeClass();			// C++
+
+(The return value is ignored at present.)
+
+
+Like all classprocedures, InitializeClass has a dummy argument in Class-C:
+
+
+		boolean						/* Class-C */
+
+	ness__InitializeClass(ClassID)
+
+		struct classhdr *ClassID;
+
+	\{
+
+		struct proctable_Entry *pe;
+
+		pe = proctable_DefineProc("null-set-debug", setdebug,
+
+				class_Load("view"), "null", "Turn on debugging");
+
+		return (pe != NULL);
+
+	\}
+
+
+In C++, an InitializeClass function is the only static member function 
+which does not need ATKinit:
+
+
+		boolean						// C++
+
+	ness::InitializeClass() \{
+
+		struct proctable_Entry *pe;
+
+		pe = proctable::DefineProc("null-set-debug", (proctable_fptr)setdebug,
+
+			ATK::LoadClass("view"), "null", "Turn on debugging for null");
+
+		return (pe != NULL);
+
+	\}
+
+
+In both systems, the InitializeClass function shown here adds an entry to 
+the proctable, thus making a function available for key binding, menu 
+binding, or call from Ness.
+
+
+
+\heading{\bigger{\bigger{9.	Macro Methods and Macros}}}
+
+
+To take advantage of the C preprocessor and to provide no-overhead 
+functions, Class-C offers macromethods and macros as preprocessed versions 
+of methods and classprocedures, respectively.  In particular, macromethods 
+have self as their first argument.
+
+
+	macromethods:						/* Class-C */
+
+		GetFirstDot() (self->dots)
+
+		GetNextDot(struct dotlist *pair) ((pair)->next)
+
+	macros:
+
+		AccessionNumber() (null_accnum++)
+
+
+(where null_accnum is declared earlier in the .ch file, before the class 
+declaration begins.)
+
+
+The corresponding feature of C++ is inline functions.  These are declared 
+like other functions, but with the keyword \italic{inline}.
+
+
+	inline struct dotlist  *GetFirstDot() \{ 		// C++
+
+			return (this->dots); \}
+
+	inline struct dotlist *GetNextDot(struct dotlist *pair) \{ \
+
+
+			return (pair->next); \}
+
+	static long accnum; \
+
+
+	inline long AccessionNumber() \{ \
+
+
+			return (null::accnum++);\}
+
+
+In C++, the global variable "accnum" \italic{can} be declared within the 
+class by making it static (and therefore having only one instance shared 
+among all objects).  Note that name qualification is used in referring to 
+accnum.  It might be tempting to omit accnum's declaration, but inline 
+functions cannot refer to variables that are not declared at the point of 
+definition of the function.  Some .C file must have a "defining instance" 
+declaration of accnum:
+
+	long null::acnum = 0;			// C++	\
+
+
+
+The converter is clever enough to convert macromethods used to access the 
+data elements of Class-C objects, but other macromethods and most macros 
+should be checked carefully to see if the converted function bears any 
+relationship to its intended usage.
+
+
+
+\heading{\bigger{\bigger{10.	Data}}}
+
+
+Data elements in class objects are declared exactly the same in Class-C and 
+C++.  The only difference is the "data:" section header in Class-C.
+
+
+	data:								/* Class-C */
+
+		struct dotlist *dots;
+
+
+		struct dotlist *dots;				// C++
+
+
+\heading{\bigger{\bigger{11.	Code}}}
+
+
+Previous sections have covered most aspects of coding ATK in C++:
+
+
+	declaration of pointers to objects:	class null *dobj
+
+	reference to data in objects:		dobj->dots
+
+	calling methods on objects:			(dobj)->AddDot(10,15)
+
+	calling classprocedures:			null::SetDebug(TRUE)
+
+	refer to affected object in method:	this
+
+	creating an object:				new class null
+
+	terminating a traced object:		(dobj)->Destroy()
+
+	terminating other objects:			delete dobj
+
+
+It remains to consider how the functions provided by the Class-C runtime 
+system are emulated in C++.  All ATK objects are derived from the base 
+class ATK, which prvides a few functions of occasional utility:
+
+\leftindent{
+\description{\bold{object->GetTypeName()} returns a (const char *) 
+representing the name of the registry's class.
+
+
+\bold{object->ATKregistry()} returns a (struct ATKregistryEntry *) pointing 
+to the registry entry for the class to which the object belongs.
+
+
+\bold{object->IsType(x)} returns TRUE if x represents a base class from 
+which the object's class is derived.  \italic{x} can be any of an object, a 
+character string containing a class name, or a (struct ATKregistryEntry *) 
+for a class.
+
+}}
+The ATK class provides a few static member functions (classprocedures) 
+which provide other services:
+
+\description{
+\leftindent{\bold{ATK::IsTypeByName(char *x, char *y)} returns TRUE if y is 
+a base class from which x is derived.
+
+
+\bold{ATK::NewFromObject(ATK *x)} returns a new object of the same type as 
+x.  The return value will need to be cast appropriately.
+
+
+\bold{ATK::NewObject(char *x)} returns a new object of the named type.  The 
+return value will need to be cast appropriately.
+
+
+\bold{ATK::LoadClass(char *x)} returns the (struct ATKregistryEntry *) for 
+the named class, unless the class is not loaded and cannot be loaded.
+
+
+\bold{ATK::IsLoaded(char *x)} returns TRUE if the named class is known to 
+the run-time system.}}
+
+
+The structure ATKregistryEntry is the equivalent to the "struct classinfo" 
+in the Class-C run-time system.   NEVER EVER look inside this structure, if 
+you need information out of it which is not made available any other way 
+tell us, and we'll consider making it available somehow.  Currently the 
+ATKregistryEntry has two methods:
+
+
+\description{\leftindent{\bold{registry->GetTypeName()} returns a (const 
+char *) representing the name of the registry's class.
+
+
+\bold{registry->IsType(x)} returns TRUE if x represents a base class from 
+which the registry's class is derived.  \italic{x} can be any of an object, 
+a character string containing a class name, or a (struct ATKregistryEntry 
+*) for a class.}}
+
+
+The class ATK is roughly equivalent to the "struct basicobject" in the 
+class-C run-time system.  (NOTE:  there is no relationship between the 
+ATKregistryEntry structure and the class ATK.  Casting an ATK * to a 
+classinfo * or vice versa will NOT work.)
+
+
+
+\heading{\bigger{\bigger{12.	Class-C Functions Summary}}}
+
+\function{
+class_Init: obsolete.}
+
+\function{class_SetClassPath:  not yet supported.}
+
+\function{class_GetClassPath:  not yet supported.}
+
+\function{class_SetDebugLevel:  not yet supported.}
+
+\function{class_GetDebugLevel:  not yet supported.}
+
+
+\function{class_GetVersion:  not supported.}
+
+\function{class_Load:  ATK::LoadClass is the equivalent.}
+
+\function{class_LoadByKey:  name keys are not supported, see ATK::LoadClass.
+
+}\function{class_IsLoaded:  see ATK::IsLoaded.}
+
+\function{class_NewObject:  ATK::NewObject.}
+
+\function{class_IsType:  testobject->IsType(typeobject).}
+
+\function{class_IsTypeByName: ATK::IsTypeByName.}
+
+
+class_GetType:  object->ATKregistry()
+
+class_GetTypeName:  object->GetTypeName()
+
+
+\function{class_GetEText}: obsolete
+
+\function{class_GetTextBase}: obsolete
+
+\function{class_GetTextLength}: obsolete
+
+\begindata{bp,537831384}
+Version 2
+n 0
+\enddata{bp,537831384}
+\view{bpv,537831384,1,0,0}
+
+\bold{\bigger{\bigger{13.	Appendix:	Coding ATK for C++ Programmers}}}
+
+
+C++ is a considerably larger language than Class-C and the reader is 
+encouraged to explore it and use facets other than those described above. 
+ The C++ programmer should adhere to these rules in order to build objects 
+that will cooperate in the ATK environment:
+
+
+\indent{1. The object should be derived from class ATK.  (With multiple 
+inheritance, at least one base should derive from ATK.)
+
+}
+\indent{2. As the first method in a class declaration, include the line
+
+		virtual ATKregistryEntry *ATKregistry();
+
+}
+\indent{3. At the outer level of the .C file put an ATKdefineRegistry line 
+like:
+
+		ATKdefineRegistry(null, dataobject, null::InitializeClass);
+
+}
+\indent{4. In each static member function include as the first line the 
+macro call:
+
+		ATKinit;
+
+}
+\indent{5. Constructors should fail (as for lack of memory) with
+
+		THROWONFAILURE( FALSE);
+
+}
+\indent{6. Do not use 'delete' on objects in classes derived from 
+\italic{traced.}
+
+		(obj)->Destroy()
+
+}
+\indent{7. Similarly, avoid automatic allocation of an object from a 
+\italic{traced} class because \italic{delete} is applied to the object when 
+the scope closes.
+
+}\
+\begindata{bp,537833400}
+Version 2
+n 0
+\enddata{bp,537833400}
+\view{bpv,537833400,2,0,0}
+
+
+//   ATK.H  -  header file for the ATK base class
+
+// \
+
+
+//	This version is adapted from the one installed.
+
+//   ===========================================
+
+
+#ifndef _ATK_H
+
+#define _ATK_H
+
+
+// NULL
+
+#ifndef NULL
+
+#define NULL 0
+
+#endif
+
+
+// boolean
+
+typedef int boolean;
+
+#ifndef TRUE
+
+#define TRUE 1
+
+#define FALSE 0
+
+#endif
+
+
+// macro used internally
+
+#define THROWONFAILURE(x) do \{ if(!(x)) ATK::ATKConstructorFailure(); \} 
+while (0)
+
+
+
+/* ATK Registry
+
+ *
+
+ * Each ATK class is entered in ATK's runtime registry
+
+ * with three pieces of code, two to define a data area and \
+
+
+ * another to perform the registration at run-time.  \
+
+
+ *
+
+ * 1. The data area is created with the ATKdefineRegistry macro.
+
+ * It expands to a variable declaration and should probably
+
+ * appear immediately after the include files in a class's implementation.
+
+ * It's use looks like this (example):
+
+ *
+
+ *    ATKdefineRegistry(textview, view, initf);
+
+ *
+
+ * The arguments are: the classname, the superclassname, and a function \
+
+
+ * to call to initialize the class.  If no class initialization is required 
+NULL
+
+ * can be used for the 3rd argument.  The prototype for the initialization \
+
+
+ * function should be (boolean ()).  Note that the initialization function \
+
+
+ * need not be a member of the class.
+
+ *
+
+ * ((For multiple inheritence, ATKdefineRegistry2(class, supclass1, 
+supclass2)
+
+ * can be defined, and so on.  We will defer defining these until
+
+ * someone actually asks for them.  In any case, the extra classes
+
+ * must themselves be subclasses of ATK, otherwise the runtime system
+
+ * is not interested in them, and they may be safely omitted.))
+
+ *
+
+ * 2. When ATKdefineRegistry appears in a .C file, a corresponding \
+
+
+ * declaration must appear in the .H header file.  It looks like:
+
+ *
+
+ *	ATKregistryEntry *ATKregistry();
+
+ *
+
+ * 3. The executable code is created with the ATKregister macro.
+
+ * It will automatically register this class and all superclasses.
+
+ * Use it as follows:
+
+ *
+
+ *     ATKregister(textview);
+
+ *
+
+ * At present, all necessary calls on ATKregister are included in the
+
+ * statl.C file which is generated by genstatl.  It is thus unnecessary to
+
+ * code this explicitly.  (Note:  A class does NOT register itself.)
+
+ *
+
+ */
+
+typedef boolean (*ATKinitfptr)();
+
+#define ATKdefineRegistry(me,sup, initf) \\
+
+  static ATK *me ## _new_() \{ return new class me; \};\\
+
+  extern ATKregistryEntry sup ## _ATKregistry_;\\
+
+  ATKregistryEntry me ## _ATKregistry_ = \\
+
+      \{#me, me ## _new_, initf, \{&sup ## _ATKregistry_ \}\};\\
+
+ATKregistryEntry *me ## ::ATKregistry() \{ return &me ## _ATKregistry_; \}\\
+
+static ATKinitfptr *ATKinited_= &(me ## _ATKregistry_.initfunc);
+
+
+#define ATKregister(classname) \\
+
+  extern ATKregistryEntry classname ## _ATKregistry_;\\
+
+  ATK::RegisterClass(&classname ## _ATKregistry_);
+
+
+
+/* ATKinit
+
+ *
+
+ * Use the ATKinit macro at the start of each constructor,
+
+ * and at the start of each classprocedure implementation.
+
+ * It checks if the class has been initialized, and if not
+
+ * calls the function InitializeClass.
+
+ *
+
+ * If an implementation spans many files, the programmer must
+
+ * code the initialization explicitly.  Or make
+
+ * InitializeClass and atk_inited class members...
+
+ * XXX hmm... what if a base class has an atk_inited,
+
+ * XXX but the subclass forgets to declare another?
+
+ */
+
+#define ATKinit \{if (ATKinited_ && *ATKinited_) \{boolean 
+(*initfunc)()=(*ATKinited_); (*ATKinited_)=NULL; ATKinited_=NULL; 
+initfunc();  \}\}
+
+
+/*
+
+ * The ATK class is the root of entire ATK class hierarchy.
+
+ * Only subclasses of ATK may be registered with the runtime system.
+
+ */
+
+#define ATKmaxRegistryParents 2
+
+class ATK;
+
+
+struct ATKregistryEntry \{
+
+    const char *ClassName;
+
+    ATK *(*New)();
+
+    ATKinitfptr initfunc;
+
+    ATKregistryEntry *parents[ATKmaxRegistryParents];
+
+    ATKregistryEntry *next;
+
+    const char *GetTypeName() \{ return ClassName; \}
+
+    IsType(ATK *typeobject);
+
+    IsType(ATKregistryEntry *typeobject);
+
+\};
+
+
+
+class ATK \{
+
+  public:
+
+    // RegisterClass (classent)
+
+    // This function is generally not used by ATK programmers.  The
+
+    // ATKregister macro expands to a call to this function.
+
+    static void RegisterClass(ATKregistryEntry *classent);
+
+
+    // ATKregistry
+
+    // All subclasses of ATK must provide their own registry entry.
+
+    // The ATKregister macro defines this member function, but the ATK
+
+    // programmer must nonetheless declare it in his class.
+
+    virtual ATKregistryEntry *ATKregistry();
+
+
+    // IsType(...)
+
+    // IsType returns true if "this" is a subclass of the given
+
+    // registry, classname or other ATK object.
+
+    virtual boolean IsType(const ATKregistryEntry *classent);
+
+    virtual boolean IsType(const char *classname) \{ \
+
+
+	return IsType(FindRegistryEntryByName(classname)); \};
+
+    virtual boolean IsType(ATK *typeobject) \{
+
+	return IsType(typeobject->ATKregistry()); \};
+
+
+    // CheckType(super, const, sub)
+
+    // CheckType is the same as IsType but it takes ATKregistryEntrys
+
+    static const boolean CheckTypes(const ATKregistryEntry *super, \
+
+
+			const ATKregistryEntry *sub);
+
+
+    static inline const boolean IsTypeByName(const char *super, const char 
+*sub) \{
+
+		return CheckTypes(super, sub); \}
+
+    static const boolean CheckTypes(const char *super, const char *sub);
+
+    inline ATK *NewFromObject() \{ return ATKregistry()->New(); \}
+
+    \
+
+
+    // GetTypeName returns a string representing the classname
+
+    // of any given ATK object.
+
+    virtual const char *GetTypeName() \{ return ATKregistry()->ClassName; 
+\};
+
+
+    // The NewObject function can create an instance of any ATK class
+
+    // that has been registered with the ATK runtime system (with 
+ATKregister).
+
+    static ATK *NewObject(const char *classname);
+
+
+    static ATKregistryEntry *DynamicLoad(const char *classname);
+
+    static ATKregistryEntry *LoadClass(const char *classname);
+
+    \
+
+
+    static boolean IsLoaded(const char *classname) \{ \
+
+
+	return FindRegistryEntryByName(classname)!=NULL;\}
+
+
+    static ATKregistryEntry *FindRegistryEntryByName(const char *classname);
+
+
+    static void ATKConstructorFailure();
+
+\};
+
+
+inline boolean ATKregistryEntry::IsType(ATK *typeobject) \{ \
+
+
+	return ATK::CheckTypes(this, typeobject->ATKregistry()); \}
+
+
+inline boolean ATKregistryEntry::IsType(ATKregistryEntry *typeobject) \{ \
+
+
+	return ATK::CheckTypes(this, typeobject); \}
+
+
+#endif /* _ATK_H */
+
+\begindata{bp,537833816}
+Version 2
+n 0
+\enddata{bp,537833816}
+\view{bpv,537833816,3,0,0}
+
+
+#ifndef _null_H_
+
+#define _null_H_
+
+
+/* null.H */
+
+
+/* status values for NotifyObservers */
+
+#define null_DATACHANGED 1
+
+
+struct dotlist \{
+
+	long x, y;
+
+	struct dotlist *next;
+
+\};
+
+
+#include <dataobject.H>
+
+class null : public  dataobject \{
+
+public:
+
+	virtual ATKregistryEntry *ATKregistry();
+
+
+	long Read(FILE *file, long id);
+
+	long Write(FILE *file, long id, int level);
+
+
+	virtual void AddDot(long x, long y);
+
+		/* add a pair to list of dots */
+
+	virtual void ClearDots();
+
+		/* remove all dots from list */
+
+
+	inline struct dotlist  * GetFirstDot() \{ return (this->dots); \}
+
+	inline struct dotlist *GetNextDot(struct dotlist *pair) \{ \
+
+
+			return (pair->next); \}
+
+	inline long GetDotX(struct dotlist *pair) \{ return (pair->x); \}
+
+	inline long GetDotY(struct dotlist *pair) \{ return (pair->y); \}
+
+	\
+
+
+	static boolean InitializeClass();
+
+	null();
+
+	virtual ~null();
+
+
+	struct dotlist *dots;
+
+\};
+
+#endif /* _null_H_ */
+
+\begindata{bp,537834056}
+Version 2
+n 0
+\enddata{bp,537834056}
+\view{bpv,537834056,4,0,0}
+\smaller{Copyright Carnegie Mellon University 1996.  All rights reserved.
+
+
+$Disclaimer: 
+# Permission to use, copy, modify, and distribute this software and its 
+# documentation for any purpose and without fee is hereby granted, provided 
+# that the above copyright notice appear in all copies and that both that 
+# copyright notice and this permission notice appear in supporting 
+# documentation, and that the name of IBM not be used in advertising or 
+# publicity pertaining to distribution of the software without specific, 
+# written prior permission. 
+#                         
+# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# 
+#  $}
+
+\enddata{text,537746792}

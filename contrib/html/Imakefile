@@ -1,0 +1,26 @@
+#define IHaveSubdirs
+
+SUBDIRS=doc lib #standalone
+
+OBJS = htmlview.o html.o version.o
+
+IHFILES	=	htmlview.H \
+			html.H
+
+NormalObjectRule()
+NormalATKRule()
+
+DynamicMultiObject(html,htmlview,$(OBJS),,,)
+InstallClassFiles($(IHFILES))
+InstallDynamicObject(html,htmlview,$(FULLATKDLIBDIR))
+
+OptionalATKLibrary(html, $(OBJS), $(LIBS),,)
+InstallOptionalATKLibrary(html, $(DESTDIR)/lib/atk)
+
+#ifdef HTML_STANDALONE_ENV
+InstallDocs(ChangeLog,standalone/auis-html)
+#endif
+
+DependTarget()
+
+

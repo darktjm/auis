@@ -1,0 +1,48 @@
+/* 
+ * Imakefile for the FX (file exchange) fxtest program
+ *
+ * $Author: rr2b $
+ * $Id$
+ *
+ *
+ * Copyright 1989, 1990 by the Massachusetts Institute of Technology.
+ *
+ * For copying and distribution information, please see the file
+ * <mitcopyright.h>.
+ *
+ */
+
+/**/# Client-server protocol, error tables kept in separate directories
+PROTDIR=../protocol
+ETSDIR=../ets
+
+/* RS/6000 should use RPC from libc */
+#if !defined(_IBMR2)
+RPCINC=-I../rpc3.9/usr/include
+#endif
+RPCLIB=-L../rpc3.9/usr/lib -lfxrpc
+
+KRBLIBS = -lkrb -ldes
+
+SSLIBS = -lss
+
+/**/# Define KERBEROS for Kerberos support
+DEFKRB = -DKERBEROS
+
+INCLUDES = ${RPCINC} -I../include
+LIBS = -L../lib -lacl ${KRBLIBS} ${SSLIBS} -lcom_err ${RPCLIB} ${HESLIBS}
+DEFINES=${DEFKRB} ${INCLUDES}
+
+FXTESTOBJS = \
+	${ETSDIR}/fxserver_err.o \
+	${ETSDIR}/rpc_err.o \
+	${PROTDIR}/fx_prot_xdr.o \
+	${PROTDIR}/fx_prot_clnt.o \
+	commands.o \
+	fxtest.o
+
+FXTESTSRCS = \
+	fxtest.c
+
+cmd_table(commands)
+build_program(fxtest,${FXTESTOBJS},,${LIBS})

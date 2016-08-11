@@ -1,0 +1,60 @@
+/* contrib/bdffont - font editor utilizing the raster object */
+/*
+	Copyright Carnegie Mellon University 1991, 1992 - All rights reserved
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+OBJS=bdffont.o bdffontv.o
+/* DOBJS = bdffont.do bdffontv.do */
+IHFILES = bdffont.H bdffontv.H
+
+BDFHELP = bdffont
+BDFHELPALIASES = bdf fonted fonteditor fontedit editfont
+
+LOCALINCLUDES = -I../include/atk
+
+LIBS =  $(UTILLIB)
+
+NormalObjectRule()
+NormalATKRule()
+
+DynamicMultiObject(bdffont,bdffontv,bdffont.o bdffontv.o,$(LIBS),,)
+InstallDynamicObject(bdffont,bdffontv,$(FULLATKDLIBDIR))
+
+InstallClassFiles($(IHFILES))
+InstallDocs($(BDFHELP).help, $(DESTDIR)/help)
+InstallHelpAlias($(BDFHELP), $(BDFHELPALIASES))
+InstallLink(runapp, ${DESTDIR}/bin/bdffont)
+
+BASELIBS = ${BASEDIR}/lib/atk/libparser.a ${BASEDIR}/lib/atk/libtlex.a ${BASEDIR}/lib/atk/libtext.a \
+	${BASEDIR}/lib/atk/libsupviews.a \
+	${BASEDIR}/lib/atk/libsupport.a \
+	${BASEDIR}/lib/atk/libbasics.a \
+	${BASEDIR}/lib/liberrors.a \
+	${MALLOCLIB}  \
+	${RESOLVER_LIB}  \
+	${UTILLIB}
+
+SYSLIBS = -L$(DESTDIR)/lib -L$(DESTDIR)/libatk
+
+TestProgramTarget(bdftest, bdftest.o bdffont.o,  \
+		${BASELIBS},   ${SYSLIBS} ${BSDLIB})
+

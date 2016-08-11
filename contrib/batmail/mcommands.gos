@@ -1,0 +1,13 @@
+The following commands work in the mail-sending buffer:
+
+--key--	    --description--
+^X^S	    Send the message
+^X^N	    Send the message without validating addresses
+^X^C        Abort sending this message
+ESC-$	    Correct spelling of current word.
+^X^Y, ^Xi   Insert the body of the last message read here
+^X^B	    Toggle whether a bcc is sent to you (The initial state is the
+	    value of your bat-send-bcc variable)
+ESC-r	    Validate the destination addresses, without sending
+^Xb	    Scroll the message body backwards
+^Xv	    Scroll the message body forwards

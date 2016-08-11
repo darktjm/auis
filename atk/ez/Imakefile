@@ -1,0 +1,60 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+
+OBJS = ezapp.o
+HFILES = ezapp.H
+LIBS = $(BASEDIR)/lib/libutil.a 
+
+NormalObjectRule()
+NormalATKRule()
+
+ATKLibrary(ez, ${OBJS}, $(LIBS),,)
+InstallATKLibrary(ez, $(DESTDIR)/lib/atk)
+
+InstallClassFiles($(HFILES))
+
+#ifdef CMU_ENV
+InstallFileToFile(ezinit.cmu, ${INSTINCFLAGS}, ${DESTDIR}/lib/global.ezinit)
+#else
+InstallFileToFile(ezinit, ${INSTINCFLAGS}, ${DESTDIR}/lib/global.ezinit)
+#endif
+
+DependTarget()
+
+NormalHelpRule()
+InstallDocs(ez.help ezcomm.help ezext.help ezkeys.help ezstyle.help eztroff.help ezps.help ezproc.help, ${DESTDIR}/help)
+InstallDocs(ez.pr, $(DESTDIR)/lib/prs)
+InstallHelpAlias(ezcomm, ez-command ez-comm ezcommand)
+InstallHelpAlias(ezext,  ez-extension ez-extensions extensions extension ez-ext)
+InstallHelpAlias(ezkeys, ez-keys ez-keystrokes ez-bindings keybindings keybinding)
+InstallHelpAlias(ezstyle, ez-styles styles style plainer plainest)
+InstallHelpAlias(eztroff, ez-troff formatnote duplex)
+InstallHelpAlias(ezps, ez-ps ez-postscript)
+InstallHelpAlias(ezproc, ezprocs ez-procs ez-proc)
+
+InstallRunappAPP(ez)

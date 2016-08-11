@@ -1,0 +1,72 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+
+IHFILES		=	butter.H \
+			butterview.H \
+			champ.H \
+			chimp.H \
+			chimpview.H \
+			chomp.H \
+			chompview.H \
+			enode.H \
+			enodeview.H \
+			month.H \
+			monthview.H 
+
+CHUMPOBJS	= 	chump.o match.o read.o
+
+CHAMPOBJS	= 	champ.o match.o read.o
+
+LIBS		=	${UTILLIB} 
+
+OBJS		=	butter.o butterview.o champ.o match.o read.o chimp.o \
+			chimpview.o chomp.o chompview.o \
+			enode.o enodeview.o \
+			month.o monthview.o
+
+NormalObjectRule()
+NormalATKRule()
+EXTRACLASSES=butter butterview chimp chimpview chomp chompview enode enodeview month monthview
+DynamicMultiObject(champ,$(EXTRACLASSES), $(OBJS),   ${LIBS}, ${NETLIBS} ${BSDLIB},)
+InstallDynamicObject(champ,$(EXTRACLASSES), $(FULLATKDLIBDIR))
+
+OptionalATKLibrary(champ, $(OBJS),  ${LIBS}, ${NETLIBS} ${BSDLIB},)
+InstallOptionalATKLibrary(champ, $(DESTDIR)/lib/atk)
+CPPProgramTarget(chump, ${CHUMPOBJS}, ${LIBS}, ${NETLIBS} ${BSDLIB})
+
+InstallProgram(chump, ${DESTDIR}/bin)
+InstallClassFiles($(IHFILES))
+
+DependTarget()
+
+NormalHelpRule()
+InstallDocs(champ.help chimp.help evnts.help calndrs.help chump.help, ${DESTDIR}/help)
+InstallDocs(champ.pr, ${DESTDIR}/lib/prs)
+InstallHelpAlias(champ, chomp month months)
+InstallHelpAlias(evnts, champ-events-file champfile)
+InstallHelpAlias(calndrs, champ-calendars hebrewcalendar)

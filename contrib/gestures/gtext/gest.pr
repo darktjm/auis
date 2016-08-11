@@ -1,0 +1,10 @@
+#~group Gestures
+
+#~type filename
+#~views filename filechoices
+#~help
+Specifies a file to read the gesture classification data for
+the Gestures based textview.  Defaults to $ANDREWDIR/lib/gestures/gest.cl
+#~endhelp
+GestureFile:
+

@@ -1,0 +1,130 @@
+\begindata{text,538672688}
+\textdsversion{12}
+\template{default}
+Andrew Consortium
+
+
+\center{\bigger{\bigger{Andrew Technical Conference \
+
+
+}}
+June 26, 1992 \
+
+
+Carnegie Mellon University
+
+Pittsburgh, PA.  \
+
+
+}
+[Filenames in brackets are the location of the on-line version of the 
+paper]
+
+
+
+9:00 - 10:30
+
+
+Future directions for ATK
+
+Wilfred J. Hansen, Carnegie Mellon  [Hansen]
+
+wjh+@cmu.edu
+
+
+Using ATK for OnLine Help and Documentation
+
+Mike Denny, Bell South
+
+404-529-8935   fax: 404-524-2726
+
+
+Andrew & MIME:  How Messages 8.5 Accomodates the New Mail Format Standard \
+
+
+Nathaniel Borenstein, Bellcore   [Borenstein]
+
+nsb@thumper.bellcore.com
+
+
+10:45 - 12:15
+
+
+Drag & Drop Extensions for the Andrew Toolkit
+
+Todd A. Inglett, IBM Rochester  [Inglett]
+
+tinglett@rchland.vnet.ibm.com
+
+
+A guided tour of contrib/mit
+
+Bill Cattey, MIT  [Cattey]
+
+ wdc@Athena.MIT.EDU
+
+
+Vee is Object-Oriented -- Not!
+
+Dean Rubine, Carnegie Mellon  [Rubine]
+
+dandb+@andrew.cmu.edu
+
+
+
+2:00 - 3:30
+
+
+Design of an ATK Joint Editing Dataobject
+
+Michael Kedem, University of Ottawa  [Kedem]
+
+michael@shamin.genie.uottawa.ca
+
+
+An interactive browser for electronic journals based on MIME
+
+Brian Capouch, Saint Joseph's College  [Capouch]
+
+brianc@zeta.saintjoe.edu
+
+
+An Example of Design Recovery: ATK
+
+Richard Orgass, Industrial Technology Center, Pittsburgh  [Orgass.ps]
+
+Joe Newcomer and Dave Anderson, Information Technology Center
+
+do12+@andrew.cmu.edu
+
+
+3:45 - 4:45
+
+
+The Remote Andrew Demo System -- Supporting Thousands of One-Time Users
+
+David B. Anderson, Carnegie Mellon  [Anderson.abs]
+
+dba+@andrew.cmu.edu
+
+
+Making a CDrom version of Andrew
+
+Susan Straub, Gary Keim, Fred Hansen  [CDROM]
+
+susan+@andrew.cmu.edu
+
+
+
+Paper in proceedings, but not presented:
+
+
+SuperLibrary. A full-text electronic document access and retrieval system 
+based on ATK/AMS
+
+E. Gonzalez Juarros   [Gonzalez]
+
+CEC / JRC / EI;  Ispra, Italy
+
+e-mail: e_gonzalez_juarros@jrc.it\
+\enddata{text,538672688}

@@ -1,0 +1,8 @@
+NormalObjectRule()
+NormalATKRule()
+FlexOrLexFileRule(refs)
+NormalLexRule()
+
+CPPProgramTarget(grefs, grefs.o refs.o, pathopen.o $(UTILLIB), $(LEXLIB))
+InstallProgram(grefs, $(DESTDIR)/etc)
+DependTarget()

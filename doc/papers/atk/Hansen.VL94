@@ -1,0 +1,4522 @@
+\begindata{text,538702508}
+\textdsversion{12}
+\template{default}
+\define{global
+
+attr:[FontSize ConstantFontSize Point 12]}
+\define{section
+menu:[Title~3,Section~21]
+attr:[Justification LeftJustified Point 0]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]
+attr:[FontFace Bold Int Set]
+attr:[FontSize ConstantFontSize Point 12]}
+\define{subsection
+menu:[Title~3,Subsection~22]
+attr:[Justification LeftJustified Point 0]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]
+attr:[FontFace Bold Int Set]
+attr:[FontSize ConstantFontSize Point 11]}
+\define{indent
+menu:[Region~4,Indent~20]
+attr:[LeftMargin LeftMargin Cm 83230]
+attr:[RightMargin RightMargin Cm 83230]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]}
+\define{display
+menu:[Region~4,Display~14]
+attr:[LeftMargin LeftMargin Cm 87854]
+attr:[RightMargin RightMargin Cm 85542]
+attr:[Justification LeftJustified Point 0]
+attr:[Flags NoFill Int Set]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]}
+\define{example
+menu:[Region~4,Example~12]
+attr:[LeftMargin LeftMargin Cm 85542]
+attr:[RightMargin RightMargin Cm 0]
+attr:[Justification LeftJustified Point 0]
+attr:[Flags NoFill Int Set]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]
+attr:[FontFace FixedFace Int Set]
+attr:[FontFamily AndyType Int 0]}
+\define{description
+menu:[Region~4,Description~11]
+attr:[LeftMargin LeftMargin Cm 131779]
+attr:[Indent LeftMargin Cm -83230]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]}
+\define{quotation
+menu:[Region~4,Quotation~10]
+attr:[LeftMargin LeftMargin Cm 85542]
+attr:[RightMargin RightMargin Cm 83230]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]
+attr:[FontFace Italic Int Set]}
+\define{heading
+menu:[Title~3,Heading~11]
+attr:[LeftMargin LeftMargin Cm 0]
+attr:[Justification LeftJustified Point 0]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]
+attr:[FontFace Bold Int Set]}
+\define{majorheading
+menu:[Title~3,MajorHeading~10]
+attr:[Justification Centered Point 0]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]
+attr:[FontFace Bold Int Set]
+attr:[FontSize ConstantFontSize Point 14]}
+\define{leftindent
+menu:[Region~4,LeftIndent~21]
+attr:[LeftMargin LeftMargin Cm 83230]
+attr:[Flags KeepPriorNL Int Set]
+attr:[Flags KeepNextNL Int Set]}
+\define{footnote
+}
+\define{onesmaller
+menu:[Font~1,One smaller]
+attr:[FontSize PreviousFontSize Point -1]}
+\define{realsmall
+menu:[Font~1,RealSmall~88]
+attr:[Script PreviousScriptMovement Point -4]
+attr:[FontSize PreviousFontSize Point -4]}
+\define{definition
+menu:[Region~4,Definition~85]
+attr:[LeftMargin LeftMargin Cm 138717]
+attr:[RightMargin RightMargin Cm 138717]
+attr:[FontSize PreviousFontSize Point -2]}
+\define{helv
+}
+\formatnote{\
+\begindata{raster,539432264}
+2 0 32768 32768 0 0 366 437
+bits 539432264 366 437
+r04zs |
+r04zs |
+r04zs |
+r06zs |
+r06zs |
+r06zs |
+r07zs |
+r0780zr |
+r07c0zr |
+r07e0zr |
+r0ff0zr |
+r0ff0zr |
+r0ff8zr |
+r0ff8zr |
+r0ffczr |
+r0ffczr |
+r1ffezr |
+r1fGzr |
+r1fGzr |
+r1fG80zq |
+r1fGc0zq |
+r1fGc0zq |
+r1fGe0zq |
+r1fGe0zq |
+r1fGf0zq |
+r1fGf0zq |
+r1fGf8zq |
+r1fGf8zq |
+r1fGfczq |
+r1fGfczq |
+r1fGfezq |
+r1fGfezq |
+r1fHzq |
+r1fHzq |
+r1fH80zp |
+r1fH80zp |
+r1fHc0zp |
+r1fHc0zp |
+r1fHe0zp |
+r1fHe0zp |
+r1fHf0zp |
+r1fHf0zp |
+r0fHf0zp |
+r0fHf8zp |
+r0fHf8zp |
+r0fHfczp |
+r0fHfczp |
+r0fHfczp |
+r07Hfezp |
+r07Hfezp |
+r07Hfezp |
+r07Izp |
+r07Izp |
+r07I80zo |
+r03I80zo |
+r03I80zo |
+r03Ic0zo |
+r03Ic0zo |
+r01Ie0zo |
+r01Ie0zo |
+r01If0zo |
+r01If0zo |
+sIf8zo |
+sIf8zo |
+sIfczo |
+sIfezo |
+s7fHfezo |
+s7fIzo |
+s3fI80zn |
+s3fI80zn |
+s1fIc0zn |
+s1fIe0zn |
+s0fIe0zn |
+s0fIf0zn |
+s07If0zn |
+s07If8zn |
+s03Ifczn |
+s01Ifezn |
+s01Ifezn |
+tJzn |
+t7fI80zm |
+t3fIc0zm |
+t3fIe0zm |
+t1fIf0zm |
+t0fIf8zm |
+t07Ifczm |
+t03Ifezm |
+t01J80zl |
+uJc0zl |
+u7fIe0zl |
+u3fIf8zl |
+u1fIfczl |
+u07Jzl |
+u03J80zk |
+u01Je0zk |
+v7fIf0zk |
+v3fIf8zk |
+v1fIfezk |
+v0fJ80zj |
+v03Je0zj |
+v01Jf0zj |
+w7fIfczj |
+w1fJzj |
+w07Jc0zi |
+w01Jf0zi |
+x7fIfczi |
+x1fJzi |
+x07Jc0zh |
+x01Jf0zh |
+y3fIfczh |
+y0fJzh |
+y03Jc0zg |
+zJf8zg |
+z3fJzg |
+z0fJe0n10q |
+z03Jfcn10q |
+zgK80m30q |
+zg1fJf0me0q |
+zg03Jfel3fc0q |
+zh7fJc0j1fG80	q |
+zh07Jfci1fGfe	r |
+ziKc0g1fHfcr |
+zi1fOf0r |
+zi01Oc0r |
+zj07Ns |
+zk1fLfcs |
+zj07Mf0s |
+zi03Nc0s |
+ziOt |
+zh0fNfct |
+zhOf0t |
+zg0fOc0t |
+zgPu |
+z0fOfcu |
+zPf0u |
+y0fPc0u |
+yPfev |
+x0fPf0v |
+xQw |
+w0fPf8w |
+wQ80w |
+v0fPf8x |
+vQ80x |
+u0fPf8y |
+uQ80y |
+t0fPf8z |
+tQ80z |
+s0fPf8zg |
+r01Q80zg |
+r3fPf8zh |
+q03Q80zh |
+q3fPf8zi |
+p03Q80zi |
+p3fPf8zj |
+o03Q80zj |
+o7fPf8zk |
+n07Q80zk |
+nQf8zl |
+m0fQ80zl |
+m7fPf8zm |
+l07Q80zm |
+l7fPf8zn |
+k07Q80zn |
+k7fPf8zo |
+j07Q80zo |
+jQf8zp |
+i1fQ80zp |
+h0fQf8zq |
+c03fR80zq |
+7fRf8zr |
+1fR80zr |
+0fQf8zs |
+07Q80zs |
+03Pf0zt |
+gPzu |
+g7fNf0zu |
+g1fMfezv |
+g07Mc0zv |
+hLfczw |
+h0fLc0zv |
+iLf8zv |
+i0fKfezv |
+jL80zu |
+j0fKe0zu |
+kKf8zu |
+k0fJfezu |
+l7fJ80zt |
+l07Je0zt |
+m7fIf8zt |
+m03Ifezt |
+n1fI80zs |
+n07Ie0zs |
+o7fHf8zs |
+o0fHfezs |
+o01I80zr |
+p3fHe0zr |
+p07Hf8zr |
+p01Hfezr |
+q3fH80zq |
+q0fHe0zq |
+q03Hf8zq |
+rHfezq |
+r3fH80zp |
+r1fHe0zp |
+r07Hf8zp |
+r03Hfezp |
+sI80zo |
+s7fHe0zo |
+s1fHf8zo |
+s07Hfezo |
+s03I80zn |
+tIc0zn |
+t3fHe0zn |
+t1fHf8zn |
+t07Hfczn |
+t03Hfezn |
+t01I80zm |
+uIc0zm |
+u7fHe0zm |
+u3fHf0zm |
+u1fHf8zm |
+u0fHfczm |
+u07Hfezm |
+u03Izm |
+u01I80zl |
+vIc0zl |
+v7fHe0zl |
+v3fHf0zl |
+v1fHf8zl |
+v1fHfczl |
+v0fHfezl |
+v07Izl |
+v03I80zk |
+v01Ic0zk |
+v01Ie0zk |
+wIf0zk |
+w7fHf8zk |
+w3fHf8zk |
+w1fHfczk |
+w1fHfezk |
+w0fIzk |
+w07Izk |
+w03I80zj |
+w01Ic0zj |
+w01Ie0zj |
+xIe0zj |
+x7fHf0zj |
+x3fHf0zj |
+x1fHf8zj |
+x1fHfczj |
+u7f80g0fHfcm10	v |
+u7f80g07Hfem30	v |
+u7f80g07Hfem70	v |
+uGc0g03Il01f0	v |
+uGc0g01I80kGf0	v |
+uGc0g01I80kGf0	v |
+t01Ge0hIc0kGf0	v |
+t01Ge0h7fHe0k	07f0v |
+t01Ge0h7fHe0k	07f0v |
+t03Gf0h3fHf0k	07f0v |
+t03Gf0h1fHf0k	07f0v |
+t03Gf0h1fHf8k	07f0v |
+t07Gf8h0fHfck	07f0v |
+t07Gf8h0fHfck	07f0v |
+t07Gf8h07Hfek	07f0v |
+t0fGfch03Gf7fe	k07f0v |
+t0fGfch03Gc7G	k07f0v |
+t0fGfch01G87e0	k07f0v |
+t1fGfeh01fe07	80k07f0v |
+t1fGfeif806l07	f0v |
+t1f8ffej04l07	f0v |
+t3f8fGq07f0v |
+t3f8fGq07f0v |
+t3f07Gq07f0v |
+t7f07G80p07f0	v |
+t7f07G80i20j01	G87f0h40s |
+t7e03G80i600f	f8h07Ge7f0hc0	70g01feg0fGf9	He03ffc |
+tfe03Gc0ie03f	feh1fGf7f0g01	c1f8g0fGc00fG	f9He03ffc |
+tfe03Gc0h03e0	Hh3fHf0g07c3fc	g3fGf00fGf9He0	3ffc |
+tfc01Gc0g01Ge1	H80g7f83Gf007	Gc7feg7f8ff801	Gc01ffcg07c0 |
+s01fc01Ge0g01	Ge3Hc0gGgGf007	Gc7fegfe03fcg	Gc00ff8g03c0 |
+s01fc01Ge0g01	Ge7Hc001feg7f	f007GcfG01fc01	fegGc00ff8g03
+ 80 |
+s01f8gGe0g01G	efHe003fcg3ff0	07GcfG03f8gGg	Ge007f8g0380 |
+s03f8gGf0h0fG	01Ge003f8g1ff0	g3fdf0f07f0g7f	g7fe007fcg0380 |
+s03f8gGf0h0ffc	g7ff007f8g1ff0	g3fde070fe0g3f	807fe007fcg07
+ g |
+s03f0g7ff0h0f	f8g3ff007f0g0f	f0g3ffc030fe0	g3f807ff003fc
+ g07g |
+s07f0g7ff8h0f	f0g1ff00ff0g0f	f0g3ff8031fc0	g1fc03ff003fe
+ g0fg |
+s07f0g7ff8h0f	e0g1ff00ff0g07	f0g3ff0011fc0	g1fc03ff003fe
+ g0eg |
+s07e0g3ff8h0f	e0g0ff01fe0g07	f0g3fe0g3f80g	0fe03ff001feg
+ 0eg |
+s0fe0g3ffch0f	e0g0ff01fe0g07	f0g3fe0g3f80g	0fe01ff801Gg1e
+ g |
+s0fe0g3ffch0f	e0g0ff01fe0g07	f0g3fc0g3fIe0	1ff801Gg1cg |
+s0fc0g1ffch0f	e0g0ff01fe0g07	f0g3fc0g7fIf0	1ff801Gg1cg |
+s1fc0g1ffeh0f	e0g0ff03fe0g07	f0g3fc0g7fIf0	0ff803G803cg |
+s1fc0g1ffeh0f	e0g0ff03fe0g07	f0g3fc0g7fIf0	0ffc03G8038g |
+s1f80g0ffeh0f	e0g0ff03fe0g07	f0g3fc0g7f80i	0ffc03G8038g |
+s3f80g0fGh0fe0	g0ff03fe0g07f0	g3fc0g7fj07fc	07Gc078g |
+s3f80g0fGh0fe0	g0ff03fe0g07f0	g3fc0g7fj07fe	07Gc070g |
+s3fJh0fe0g0ff0	3fe0g07f0g3fc0	g7fj07fe073fc0	70g |
+s7fJ80g0fe0g0f	f03fe0g07f0g3f	c0g7fj03fe0f3f	e0f0g |
+s7fJ80g0fe0g0f	f03fe0g07f0g3f	c0g7fj03G0e3f	!e0g |
+s7eh03G80g0fe0	g0ff03fe0g07f0	g3fc0g7fj03G0e	1f!e0g |
+sfeh03Gc0g0fe0	g0ff03fe0g07f0	g3fc0g7fj01G1e	1ff1e0g |
+sfeh03Gc0g0fe0	g0ff03fe0g07f0	g3fc0g7fj01G9c	1ff1c0g |
+sfch01Gc0g0fe0	g0ff03fe0g07f0	g3fc0g7fj01G9c	0ff1c0g |
+r01fch01Ge0g0f	e0g0ff03fe0g07	f0g3fc0g7fkGbc	0ffbc0g |
+r01fch01Ge0g0f	e0g0ff03fe0g07	f0g3fc0g3f80j	Gf80ffb80g |
+r01f8iGe0g0fe0	g0ff03ff0g07f0	g3fc0g3f80g07	e0gGf807fb80g |
+r03f8iGf0g0fe0	g0ff01ff0g0ff0	g3fc0g3f80g07	e0g7ff807G80g |
+r03f8iGf0g0fe0	g0ff01ff0g1ff0	g3fc0g1fc0g0f	e0g7ff007Gh |
+r03f0i7ff0g0f	e0g0ff00ff8g3f	f0g3fc0g1fc0g	0fc0g7ff003Gh |
+r07f0i7ff8g0f	e0g0ff00ffcg7f	f0g3fc0g1fe0g	1fc0g3ff003Gh |
+r07f0i7ff8g0f	e0g0ff007fegG	f0g3fc0g0fe0g	3f80g3fe003fe
+ h |
+r07e0i3ff8g0f	e0g0ff007G03G	f0g3fc0g0ff0g	7f80g3fe001fe
+ h |
+r0fe0i3ffcg0f	e0g0ff003Gc7G	f8g3fc0g07f8g	Gh1fe001feh |
+r0fe0i3ffcg0f	e0g0ff001Hf7G	c03fc0g03fc01	feh1fc001fch |
+r0fc0i1ffcg0f	e0g0ff001Hf7G	c03fc0g01G07fc	h1fc001fch |
+r1fe0i3ffeg1f	f0g1ff8gHe7Gc0	7fe0hHf8h0fc0	gfch |
+q01Gfeh07He1H	81H803fGc7c007	Gfeh3fGf0h0f80	gf8h |
+q01Gfeh07He1H	81H801fG87g07	Gfeh1fGc0h0f80	gf8h |
+q01Gfeh07He1H	81H8003fc06g07	Gfeh03feo |
+zn04w |
+zzl |
+zzl |
+zzl |
+zzl |
+zg1fHfczg |
+zg1fHfczg |
+zg1fHfczg |
+zg0fHfezg |
+zg0fHfezg |
+zg0fHfezg |
+zg0fHfezg |
+zg07Izg |
+zg07Izg |
+zg07Izg |
+zg07Izg |
+zg03I80z |
+zg03I80z |
+zg03I80z |
+zg03I80z |
+zg01Ic0z |
+zg01Ic0z |
+zg01Ic0z |
+zg01Ic0z |
+zhIe0z |
+zhIe0z |
+zhIe0z |
+zhIe0z |
+zh7fHf0z |
+zh7fHf0z |
+zh7fHf0z |
+zh7fHf0z |
+zh3fHf8z |
+zh3fHf8z |
+zh3fHf8z |
+zh3fHf8z |
+zh1fHf8z |
+zh1fHfcz |
+zh1fHfcz |
+zh1fHfcz |
+zh0fHfcz |
+zh0fHfcz |
+zh0fHfez |
+zh0fHfez |
+zh07Hfez |
+zh07Hfez |
+zh07Iz |
+zh07Iz |
+zh03Iz |
+zh03Iz |
+zh03Iz |
+zh03I80y |
+zh01I80y |
+zh01I80y |
+zh01I80y |
+zh01Ic0y |
+ziIc0y |
+ziIc0y |
+ziIc0y |
+ziIe0y |
+zi7fHe0y |
+zi7fHe0y |
+zi7fHe0y |
+zi7fHf0y |
+zi3fHf0y |
+zi3fHf0y |
+zi3fHf0y |
+zi3fHf8y |
+zi1fHf8y |
+zi1fHf8y |
+zi1fHf8y |
+zi1fHfcy |
+zi0fHfcy |
+zi0fHfcy |
+zi0fHfcy |
+zi0fHfey |
+zi07Hfej80t |
+zi07Hfej80t |
+zi07Ii0180t |
+zi07Ii0180t |
+zi03Ii0380t |
+zi03Ii0780t |
+zi03Ii0f80t |
+zi03I80h1f80t |
+zi01I80h3f80t |
+zi01I80h7fu |
+zi01I80hGu |
+zi01I80g01Gu |
+zjI80g03Gu |
+zjIc0g07feu |
+zjIc0g0ffeu |
+zjIc0g1ffcu |
+zj7fHe0g3ff8u |
+zj7fHe0g7ff0u |
+zj7fHe0gGe0u |
+zj7fHf001Ge0u |
+zj3fHf803Gc0u |
+zj3fHf807G80u |
+zj1fHfc0fGv |
+zj1fI3ffev |
+zj0fJfev |
+zj0fJfcv |
+zj07Jf8v |
+zj07Jf0v |
+zj03Je0v |
+zj01Je0v |
+zkJc0v |
+zk7fI80v |
+zk3fIw |
+zk1fHfew |
+zk0fHfcw |
+zk07Hf8w |
+zk03Hf0w |
+zlHe0w |
+zl3fG80w |
+zl07fex |
+zzl |
+\enddata{raster, 539432264}
+\view{rasterview,539432264,85,0,0}
+
+
+\formatnote{.sp -1.0i}
+
+\helv{\bold{\flushright{Andrew Consortium
+
+School of Computer Science
+
+Carnegie Mellon
+
+}}}
+\smaller{\flushright{August, 1994}}\majorheading{
+
+
+}
+
+}\majorheading{The 1994 Visual Languages 
+Comparison}\footnote{\
+\begindata{fnote,541255704}
+\textdsversion{12}
+\enddata{fnote,541255704}
+\view{fnotev,541255704,87,0,0}(C) 1994 IEEE. Reprinted with permission, 
+from Proceedings 1994 IEEE Symposium on Visual Languages, IEEE Computer 
+Society Press, Los Alamitos, CA, October 4-7, 1994. St. Louis, Missouri, to 
+appear.
+
+
+Permission to copy without fee all or part of this material is granted 
+provided that the copies are not made or distributed for direct commercial 
+advantage, the IEEE copyright notice and the title of the publication and 
+its date appear, and notice is given that copying is by permission of the 
+Institute of Electrical and Electronics Engineers.  To copy otherwise, or 
+to republish, requires a fee and specific permission.}
+
+
+\indent{Moderator: Wilfred J. Hansen, Director, Andrew Consortium, School 
+of Computer Science, Carnegie Mellon University, Pittsburgh, PA 15213-3891
+
+}
+\indent{Panelists: Brigham Bell, USWest;  Greg A. McKaskle, National 
+Instruments; Garth Smedley, Prograph;  Dan Kimura, Washington University; 
+Joerg Poswig, Universitaet Dortmund}
+
+
+\formatnote{
+}\bigger{\onesmaller{\center{\bold{Abstract}}}}\italic{\bold{\bigger{\
+\onesmaller{
+
+}}}
+Diverse visual languages have been proposed, implemented, and published; 
+ but each is demonstrated on problems chosen by its authors.  To make a 
+fair comparison, the 1994 Visual Languages Comparison project proposed a 
+set of three problems and solicited solutions to these problems in various 
+visual languages.  Submissions arrived for one graphic rewriting 
+system--ChemTrains--and four data flow languages--LabVIEW, Prograph, Show 
+and Tell, and VisaVis.}
+
+
+
+Visual programming has been a fruitful and provocative area of research 
+with many diverse languages proposed and implemented.  Since some of these 
+are proposed for general programming, it is fair to ask how well they can 
+be used for typical programming problems.  To explore this issue a 
+committee chose three problems and invited authors of visual languages to 
+solve those problems in their languages.
+
+\formatnote{
+}Submissions were received from ChemTrains, which is a graphic rewriting 
+system, and four data flow languages:  LabVIEW, Prograph, Show and Tell, 
+and VisaVis.  All submissions included solutions to the first problem;  the 
+other problems were more complex and received fewer solutions.
+
+
+\section{1. Prime number generator}
+
+\formatnote{
+}The first problem was intended to test computation and iteration over a 
+set of data:
+
+
+\quotation{Write a program to compute the number of primes in the first k 
+integers, where k is a value elicited from the user at run-time.}
+
+
+The canonical solution to this problem is the Sieve of Erastothenes, which 
+starts with a list of integers and crosses out those which are multiples of 
+primes.  After crossing out multiples of the \italic{i}\superscript{th} 
+prime, the \italic{i+1}\superscript{th} prime is the next larger undeleted 
+entry.  This scheme requires no division and is usually faster than 
+algorithms with division, but only the ChemTrains and LabVIEW solutions 
+used this approach.
+
+
+\subsection{1.1 ChemTrains  -  Brigham Bell}
+
+\formatnote{
+}ChemTrains is a visual production system (or rule-based) language, in 
+which both the rules and the arena on which they operate are defined using 
+pictures. These pictures are composed from four kinds of objects--text, 
+boxes, ovals, and freehand sketches--interconnected by unidirectional or 
+bidirectional links.  Each rule consists of a pattern picture and a result 
+picture.
+
+\formatnote{
+}For execution, the pattern picture in each successive rules is checked 
+against the arena.  When the pattern picture matches a portion of the 
+arena, that portion is modified as indicated by the differences between the 
+pattern and the rule's result picture.  The only attributes that are 
+matched are objects, connections, and containment; no other geometric 
+constraints--such as adjacency--are considered.  For a further description 
+of ChemTrains design and its rationale refer to [Bell, 1992a; Bell, 1993].
+
+\formatnote{
+}The ChemTrains prime number program requires eight rules: skip-non-prime, 
+delete-non-prime, increment-multiple, increment-prime-finder, cleanup, 
+condense, start-prime-filtering, make-integer-list.  The first four filter 
+out the non-prime numbers from an ordered list of integers.  The next two 
+remove extraneous image elements and condense the prime numbers into a 
+sequence.  \
+
+
+\formatnote{
+}The final two rules start up the process by making a list of integers to a 
+specified length and inserting three  pointers to reach this initial 
+diagram:
+
+\begindata{raster,539406808}
+2 0 68266 68266 0 0 475 85
+bits 539406808 475 85
+1fHf807Hfe01I	807fHe01fHf807	Hfe01I807fHe0	1fHf807Hfe01I
+ 807fHe01fHf807	Hfeg |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	g!02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	g!02g |
+100eg0804h0201	i8040h2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04638e02g |
+1011g080408g02	0107h8043e0g20	1008g08043eg02	0103h8043e0g20
+ 1070g08041cg02	01020eg804081	g201020e00804	925202g |
+1011g080418g02	010880g80!40g	201018g080420	g020104h804020
+ g201088g080422	g02010611g8041	83g2010611008	04f25202g |
+1011g080408g02	01g80g804080g	201028g080420	g020108h804020
+ g201088g080422	g02010211g8040	81g2010201008	04825202g |
+1011g080408g02	!01h8041c0g20	1048g08043cg02	010fh80!40g20
+ 1070g080422g02	010211g804081	g2010!20080492	5202g |
+1011g080408g02	0102h804020g20	1088g080402g02	010880g80!40g
+ 201088g08041e	g02010211g8040	81g2010204008	04624e02g |
+1011g080408g02	0104h804020g20	10fcg080402g02	010880g804080
+ g201088g080402	g02010211g8040	81g2010208008	04h02g |
+100eg080408g02	0108h804220g20	1008g080422g02	010880g804080
+ g201088g08!04	g02010211g8040	81g201021g0804	h02g |
+10h080408g0201	0f80g8041c0g20	1008g08041cg02	0107h804080g20
+ 1070g080418g02	01020eg804081	g201021f00804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201g	10g8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201g	28g8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201g	54g8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201g	aag8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h02!01	55g8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h020102	aa!8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h020105	55408040h2010	h0804h0201i80	40h2010h0804h
+ 0201i8040h2010	h0804h02g |
+10h0804h02010f	abe08040h2010	h0804h0201i80	40h2010h0804h
+ 0201i8040h2010	h0804h02g |
+10h0804h02!01	55g8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h02!01	abg8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h02!01	55g8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h02!01	abg8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h02!01	55g8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h02!01	abg8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h02!01	55g8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h02!01	Gg8040h2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+10h0844h0211i	8440h2110h0844	h0211i8440h21	10h0844h0211i
+ 8440h2110h0844	h02g |
+10h0824h0209i	8240h2090h0824	h0209i8240h20	90h0824h0209i
+ 8240h2090h0824	h02g |
+10h0814h0205i	8140h2050h0814	h0205i8140h20	50h0814h0205i
+ 8140h2050h0814	h02g |
+10h0ffch03GiG	c0h3ff0h0ffch	03GiGc0h3ff0h	0ffch03GiGc0h
+ 3ff0h0ffch02g |
+10h080ch0203i	80c0h2030h080c	h0203i80c0h20	30h080ch0203i
+ 80c0h2030h080c	h02g |
+10h0814h0205i	8140h2050h0814	h0205i8140h20	50h0814h0205i
+ 8140h2050h0814	h02g |
+10h0864h0219g	10g8640h2190h	0864h0219i8640	h2190h0864h02
+ 19i8640h2190h	0864h02g |
+10h0804h0201g	28g8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201g	44g8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201g	aag8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h02"01	g8040h2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+10h0804h020102	aa!8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h020104	g408040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h02010f	abe08040h2010	h0804h0201i80	40h2010h0804h
+ 0201i8040h2010	h0804h02g |
+10h0804h02"01	g8040h2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+10h0804h02!01	abg8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h02"01	g8040h2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+10h0804h02!01	abg8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h02"01	g8040h2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+10h0804h02!01	abg8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h02"01	g8040h2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+10h0804h02!01	Gg8040h2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+1001g0804h0201	i8040h2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+1002800804h02	01i8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+1004400804h02	01i8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+1008200804h02	01i8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+"100804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+1020!0804h0201	i8040h2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+1040040804h02	01i8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10f01e0804h02	01i8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+"100804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+"100804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+"100804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+"100804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+"100804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+"100804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+"100804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+101ff00804h02	01i8040h2010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+1fHf807Hfe01I	807fHe01fHf807	Hfe01I807fHe0	1fHf807Hfe01I
+ 807fHe01fHf807	Hfeg |
+\enddata{raster, 539406808}
+\view{rasterview,539406808,55,0,0}
+
+Pointer  P ("Prime", 
+\begindata{raster,539407064}
+2 0 68266 68266 0 0 13 16
+bits 539407064 13 16
+02g |
+05g |
+0a80 |
+1540 |
+2aa0 |
+5550 |
+aaa8 |
+f578 |
+2aa0 |
+3560 |
+2aa0 |
+3560 |
+2aa0 |
+3560 |
+2aa0 |
+3fe0 |
+\enddata{raster, 539407064}
+\view{rasterview,539407064,56,0,0}) points to a currently known prime 
+number whose multiples are used to delete non-prime numbers.  \
+
+
+Pointer M ("Marker", 
+\begindata{raster,539407240}
+2 0 68266 68266 0 0 14 17
+bits 539407240 14 17
+h |
+02g |
+05g |
+0880 |
+1540 |
+!20 |
+5550 |
+8008 |
+f57c |
+!20 |
+3560 |
+!20 |
+3560 |
+!20 |
+3560 |
+!20 |
+3fe0 |
+\enddata{raster, 539407240}
+\view{rasterview,539407240,57,0,0}) travels between the P pointer and the 
+end of the list, deleting multiples of P's integer.  \
+
+
+Pointer X ("indeX", 
+\begindata{raster,539407464}
+2 0 68266 68266 0 0 14 16
+bits 539407464 14 16
+02g |
+05g |
+0880 |
+1040 |
+!20 |
+4010 |
+8008 |
+e03c |
+!20 |
+!20 |
+!20 |
+!20 |
+!20 |
+!20 |
+!20 |
+3fe0 |
+\enddata{raster, 539407464}
+\view{rasterview,539407464,58,0,0}), marches upward from zero while M is 
+advancing;  when X reaches P, M has reached a multiple of P.
+
+\formatnote{
+}Increment-prime-finder moves M and X each to the right by one cell:
+
+\begindata{raster,539407688}
+2 0 68266 68266 0 0 454 150
+bits 539407688 454 150
+o01ZZLfc |
+o01zzl04 |
+o01zzl04 |
+o01zzl04 |
+o01zzl04 |
+o01zzl04 |
+03e006g0620i01	04l02h04i62g04	zo04 |
+021002g0620i01	m02l80g04zo04 |
+0212221c05238b	30e0010c587173	8b30e2c701e2ec	598701c62c3c71
+ 70zm04 |
+0212!2205244c	c9120104648984	4cc91322011304	66488082324489
+ 80zm04 |
+03e2!2204a3c8	89100104448104	48891222011204	44488082224489
+ zn04 |
+0282223e04a448	89f00104448107	c889f222011204	444f80822244f9
+ zn04 |
+02422220046448	89g0104448104	08890222011204	4448g82224481
+ zn04 |
+02226222046448	89100104448904	48891222011204	44488082224489
+ zn04 |
+0211a21c0423c8	88e20104447103	!88e22181e204	4447g82223c71
+ zn04 |
+o01n01zw04 |
+o01n01zw04 |
+o01zzl04 |
+o01zzl04 |
+o01zzl04 |
+o01zzl04 |
+o01ZZLfc |
+zzw |
+zzw |
+zzw |
+zzw |
+zzw |
+zzw |
+zzw |
+zzw |
+o3fg0c18i07e1	8006z01f8ie180	3f0cg30l |
+o31800c18i0630	g06z018ci6180	3180g30l |
+o318f1e!3c7ef8	0633878f199f9e	w018c!78cc63c0	319c3c78ccfcf0
+ i |
+o31998c186670	ec06318cc6199c	33w018c"cc6180	318c6630cce198
+ i |
+o3f0f8c186660	cc07e18c061998	33w01f8ccc0cc	61803f0c6030cc
+ c198i |
+o30198c187e60	cc06018c061998	3fw01e0fc78cc	6180300c6030cc
+ c1f8i |
+o30198c18!60cc	06018c06199830	w01b0c00ccc61	80300c6030ccc1
+ 80i |
+o30198c186660	cc06018cc61b98	33w0198!ccdc61	80300c6630dcc1
+ 98i |
+o300f870e3c60	cc060187838f98	1ew018c!787c60	e0300c3c1c7cc0
+ f0i |
+zzw |
+zzw |
+zzw |
+zzw |
+zzw |
+zzw |
+ZZVfc |
+80zo0180zj04 |
+80zo0180zj04 |
+80zo0180zj04 |
+80zo0180zj04 |
+80zo0180zj04 |
+80zo0180zj04 |
+80zo0180zj04 |
+80g01I8007Hfe	j1fHf8gIc0l01	80zj04 |
+80g01i8004h02	j10h08g80h40l	0180g07Hfeg1f	Hf8j7fHe001I80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8104h02	j10h081080h40	l0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i80c4h02	j1001g!0880h40	l0180g04h0204	10h08j40h2041
+ i80g04 |
+80g01i8034h02	j100280080680	h40l0180g04h02	0310h08j40h20
+ 31i80g04 |
+80g01iGfch02j	1004400fG80h40	l0180g04h02gd0	h08j40h200dg10
+ g80g04 |
+80g01i801ch02	j100aa0080180	h40l0180g04h03	Gf0h08j40h3fG
+ g28g80g04 |
+80g01i8064h02	j"10080680h40	l0180g04h02g70	h08j40h2007g44
+ g80g04 |
+80g01i8184h02	j102aa8081880	h40l0180g04h02	0190h08j40h20
+ 19gaag80g04 |
+80g01i8004h02	j10400408g80h	40l0180g04h02	0610h08j40h20
+ 61!01g80g04 |
+80g01i8004h02	j10fabe08g80h	40l0180g04h02	g10h08j40h2001
+ 02aa!80g04 |
+80g01i8004h02	j"1008g80h40l	0180g04h02g10	h08j40h200104
+ g4080g04 |
+80g01i8004h02	j101ab008g80h	40l0180g04h02	g10h08j40h2001
+ 0fabe080g04 |
+80g01i8004h02	j"1008g80h40l	0180g04h02g10	h08j40h20"01g
+ 80g04 |
+80g01i8004h02	j101ab008g80h	40l0180g04h02	g10h08j40h20!01
+ abg80g04 |
+80g01i8004h02	j"1008g80h40l	0180g04h02g10	h08j40h20"01g
+ 80g04 |
+80g01i8004h02	j101ab008g80h	40l0180g04h02	g10h08j40h20!01
+ abg80g04 |
+80g01i8004h02	j"1008g80h40l	0180g04h02g10	h08j40h20"01g
+ 80g04 |
+80g01i8004h02	j101ff008g80h	40l0180g04h02	g10h08j40h20!01
+ abg80g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h20"01g
+ 80g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h20!01G
+ g80g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01g10g8004	h02j10h08g80h	40l0180g04h02	g10h08j40h2001
+ i80g04 |
+80g01g28g8004	h02j10h08g80h	40l0180g04h02	g1001g08j40h20
+ 01i80g04 |
+80g01g44g8004	h02j10h08g80h	40l0180g04h02	g10028008j40h
+ 2001i80g04 |
+80g01g82g8004	h02j10h08g80h	40l0180g04h02	g10044008j40h
+ 2001i80g04 |
+80g"01g8004h02	j10h08g80h40l	0180g04h02g10	082008j40h2001
+ i80g04 |
+80g0102g!8004	h02j10h08g80h	40l0180g04h02	g"1008j40h2001
+ i80g04 |
+80g0104g408004	h02j10h08g80h	40l0180g04h02	g1020!08j40h20
+ 01i80g04 |
+80g010f01e080	04h02j10h08g80	h40l0180g04h02	g10400408j40h
+ 2001i80g04 |
+80g"01g8004h02	j10h08g80h40l	0180g04h02g10	f01e08j40h2001
+ i80g04 |
+80g"01g8004h02	j10h08g80h40l	0180g04h02g"10	08j40h2001i80
+ g04 |
+80g"01g8004h02	j10h08g80h40l	0180g04h02g"10	08j40h2001i80
+ g04 |
+80g"01g8004h02	j10h08g80h40l	0180g04h02g"10	08j40h2001i80
+ g04 |
+80g"01g8004h02	j10h08g80h40l	0180g04h02g"10	08j40h2001i80
+ g04 |
+80g"01g8004h02	j10h08g80h40l	0180g04h02g"10	08j40h2001i80
+ g04 |
+80g"01g8004h02	j10h08g80h40l	0180g04h02g"10	08j40h2001i80
+ g04 |
+80g!01Gg8004h	02j10h08g80h40	l0180g04h02g"10	08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	1ff008j40h2001
+ i80g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01i8004h02	j10h08g80h40l	0180g04h02g10	h08j40h2001i80
+ g04 |
+80g01I8007Hfe	j1fHf8gIc0l01	80g04h02g10h08	j40h2001i80g04 |
+80zo0180g07Hfe	g1fHf8j7fHe001	I80g04 |
+80zo0180zj04 |
+80zo0180zj04 |
+80zo0180zj04 |
+80zo0180zj04 |
+80zo0180zj04 |
+80zo0180zj04 |
+80zo0180zj04 |
+80zo0180zj04 |
+80zo0180zj04 |
+ZZVfc |
+zzw |
+\enddata{raster, 539407688}
+\view{rasterview,539407688,59,0,0}
+
+Eventually, pointer X, 
+\begindata{raster,539407912}
+2 0 68266 68266 0 0 14 16
+bits 539407912 14 16
+02g |
+05g |
+0880 |
+1040 |
+!20 |
+4010 |
+8008 |
+e03c |
+!20 |
+!20 |
+!20 |
+!20 |
+!20 |
+!20 |
+!20 |
+3fe0 |
+\enddata{raster, 539407912}
+\view{rasterview,539407912,60,0,0}, will arrive at the same cell as P, 
+\begindata{raster,539408088}
+2 0 68266 68266 0 0 13 16
+bits 539408088 13 16
+02g |
+05g |
+0a80 |
+1540 |
+2aa0 |
+5550 |
+aaa8 |
+f578 |
+2aa0 |
+3560 |
+2aa0 |
+3560 |
+2aa0 |
+3560 |
+2aa0 |
+3fe0 |
+\enddata{raster, 539408088}
+\view{rasterview,539408088,61,0,0}.  Then because of rule order, the second 
+rule, delete-non-prime, will fire:
+
+\begindata{raster,539408312}
+2 0 68266 68266 0 0 450 147
+bits 539408312 450 147
+o01ZZLc0 |
+o01zzl40 |
+o01zzl40 |
+o01zzl40 |
+o01zzl40 |
+o01zzl40 |
+03e006g0620i01	g803001l02zu40 |
+021002g0620i01	g801001zzh40 |
+0212221c05238b	30e001078e10e3	870161c580f176	2cc380zr40 |
+0212!2205244c	c912010891!11	08819226408982	332440zr40 |
+03e2!2204a3c8	8910010891!11	08811224408902	222440zr40 |
+0282223e04a448	89f001089f11f1	0f811224408902	2227c0zr40 |
+02422220046448	89g0108901101	08011224408902	2224zs40 |
+02226222046448	8910010891!11	08811224408902	222440zr40 |
+0211a21c0423c8	88e201078e10e0	c70111c440f102	222380zr40 |
+o01o80zv40 |
+o01o80zv40 |
+o01zzl40 |
+o01zzl40 |
+o01zzl40 |
+o01zzl40 |
+o01ZZLc0 |
+zzw |
+zzw |
+zzw |
+zzw |
+zzw |
+zzw |
+zzw |
+zzw |
+o3fg0c18i07e1	8006z01f8ie180	3f0cg30l |
+o31800c18i0630	g06z018ci6180	3180g30l |
+o318f1e!3c7ef8	0633878f199f9e	w018c!78cc63c0	319c3c78ccfcf0
+ i |
+o31998c186670	ec06318cc6199c	33w018c"cc6180	318c6630cce198
+ i |
+o3f0f8c186660	cc07e18c061998	33w01f8ccc0cc	61803f0c6030cc
+ c198i |
+o30198c187e60	cc06018c061998	3fw01e0fc78cc	6180300c6030cc
+ c1f8i |
+o30198c18!60cc	06018c06199830	w01b0c00ccc61	80300c6030ccc1
+ 80i |
+o30198c186660	cc06018cc61b98	33w0198!ccdc61	80300c6630dcc1
+ 98i |
+o300f870e3c60	cc060187838f98	1ew018c!787c60	e0300c3c1c7cc0
+ f0i |
+zzw |
+zzw |
+zzw |
+zzw |
+zzw |
+zzw |
+ZZVc0 |
+80zo0180zj40 |
+80zo0180zj40 |
+80zo0180zj40 |
+80zo0180zj40 |
+80zo0180zj40 |
+80zo0180zj40 |
+80zo0180zj40 |
+80zo0180zj40 |
+80zo0180zj40 |
+80i7fHe0hIc0v	0180k03Ih0fHfc	h3fHf0i40 |
+80i40h20h80h40	h7fHe0p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i400eg20h80	h40h40h20p0180	k02g7001h08h04	h20h10i40 |
+80i4011g20h80	h40h40h20p0180	k02g8801h08h04	h20h10i40 |
+80i4011g20h80	h40h40h20p0180	k02g8801h08h04	h20h10i40 |
+80i4011g20h80	h40h401cg20p01	80k02g8801h08	h04h2011g10i40 |
+80i4011g20h80	h40h4012g20p01	80k02g8801h08	h04h200ag10i40 |
+80i4011g20h80	h40h4024g20p01	80k02g8801h08	h04h2004g10i40 |
+80i4011g20h80	h40h4024g20p01	80k02g8801h08	h04h2004g10i40 |
+80i400eg20h80	h40h4048g20p01	80k02g7001h08	h04h200ag10i40 |
+80i40h20h80h40	h4048g20p0180	k02h01h08h04h	2011g10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h8008	g40h40h20p0180	k02h01h08g4004	h20h10i40 |
+80i40h20h8014	g40h40h20p0180	k02h01h08ga004	h20h10i40 |
+80i40h20h802a	g40h40h20p0180	k02h01h080150	04h20h10i40 |
+80i40h20h8055	g40h40h20p0180	k02h01h0802a8	04h20h10i40 |
+80i40h20h80aa	8040h40h20p01	80k02h01h0805	5404h20h10i40 |
+80i40h20h8155	!40h40h20p0180	k02h01h080aaa	04h20h10i40 |
+80i40h20h82aa	a040h40h20p01	80k02h01h0815	5504h20h10i40 |
+80i40h20h87d5	f040h40h20p01	80k02h01h083e	af84h20h10i40 |
+80i40h20h80aa	8040h40h20p01	80k02h01h0805	5404h20h10i40 |
+80i40h20h80d5	8040h40h20p01	80k02h01h0806	ac04h20h10i40 |
+80i40h20h80aa	8040h40h20p01	80k02h01h0805	5404h20h10i40 |
+80i40h20h80d5	8040h40h20p01	80k02h01h0806	ac04h20h10i40 |
+80i40h20h80aa	8040h40h20p01	80k02h01h0805	5404h20h10i40 |
+80i40h20h80d5	8040h40h20p01	80k02h01h0806	ac04h20h10i40 |
+80i40h20h80aa	8040h40h20p01	80k02h01h0805	5404h20h10i40 |
+80i40h20h80G80	40h40h20p0180	k02h01h0807fc	04h20h10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h2002	g10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h2005	g10i40 |
+80i40h20h80h40	h4002g20p0180	k02h01h08h04h	20088010i40 |
+80i40h20h80h40	h4005g20p0180	k02h01h08h04h	20154010i40 |
+80i40h20h80h40	h40088020p0180	k02h01h08h04h	"2010i40 |
+80i40h20h80h40	h40154020p0180	k02h01h08h04h	20555010i40 |
+80i40h20h80h40	h40"20p0180k02	h01h08h04h2080	0810i40 |
+80i40h20h80h40	h40555020p0180	k02h01h08h04h	21f57c10i40 |
+80i40h20h80h40	h40800820p0180	k02h01h08h04h	"2010i40 |
+80i40h20h80h40	h41f57c20p0180	k02h01h08h04h	20356010i40 |
+80i40h20h80h40	h40"20p0180k02	h01h08h04h"20	10i40 |
+80i40h20h80h40	h40356020p0180	k02h01h08h04h	20356010i40 |
+80i40h20h80h40	h40"20p0180k02	h01h08h04h"20	10i40 |
+80i40h20h80h40	h40356020p0180	k02h01h08h04h	20356010i40 |
+80i40h20h80h40	h40"20p0180k02	h01h08h04h"20	10i40 |
+80i40h20h80h40	h40356020p0180	k02h01h08h04h	203fe010i40 |
+80i40h20h80h40	h40"20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h403fe020p0180	k02h01h08h04h	20h10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	g1001h08h04h20	h10i40 |
+80i40h20h80h40	h40h20p0180k02	g2801h08h04h20	h10i40 |
+80i40h20h8004	g40h40h20p0180	k02g4401h08h04	h20h10i40 |
+80i40h20h800a	g40h40h20p0180	k02g8201h08h04	h20h10i40 |
+80i40h20h8011	g40h40h20p0180	k02"01h08h04h	20h10i40 |
+80i40h20h8020	8040h40h20p01	80k!02g81h08h	04h20h10i40 |
+80i40h20h80"40	h40h20p0180k02	04g41h08h04h20	h10i40 |
+80i40h20h!8020	40h40h20p0180	k020f01e1h08h	04h20h10i40 |
+80i40h20h81g10	40h40h20p0180	k02"01h08h04h	20h10i40 |
+80i40h20h83c0	7840h40h20p01	80k02"01h08h04	h20h10i40 |
+80i40h20h80"40	h40h20p0180k02	"01h08h04h20h	10i40 |
+80i40h20h80"40	h40h20p0180k02	"01h08h04h20h	10i40 |
+80i40h20h80"40	h40h20p0180k02	"01h08h04h20h	10i40 |
+80i40h20h80"40	h40h20p0180k02	"01h08h04h20h	10i40 |
+80i40h20h80"40	h40h20p0180k02	"01h08h04h20h	10i40 |
+80i40h20h80"40	h40h20p0180k02	01G01h08h04h20	h10i40 |
+80i40h20h80"40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h807f	c040h40h20p01	80k02h01h08h04	h20h10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i40h20h80h40	h40h20p0180k02	h01h08h04h20h	10i40 |
+80i7fHe0hIc0h	40h20p0180k03	Ih0fHfch3fHf0	i40 |
+80u7fHe0p0180	zj40 |
+80zo0180zj40 |
+80zo0180zj40 |
+80zo0180zj40 |
+80zo0180zj40 |
+80zo0180zj40 |
+ZZVc0 |
+\enddata{raster, 539408312}
+\view{rasterview,539408312,62,0,0}
+
+The italicized \italic{n} is a ChemTrains "variable"; it will match any 
+object, in this case an integer.   Delete-non-prime moves X to zero and 
+changes the integer over M to an "x".  Subsequently, M and X will resume 
+marching to the right under rule increment-prime-finder.
+
+\formatnote{
+}The third rule, increment-multiple, fires when pointer M has reached the 
+end of the list:
+
+\begindata{raster,539408536}
+2 0 68266 68266 0 0 457 155
+bits 539408536 457 155
+o01ZZM80 |
+o01zzm80 |
+o01zzm80 |
+o01zzm80 |
+o01zzm80 |
+o01q204008zs80 |
+03e006g0620i01	04l02i244008zs	80 |
+021002g0620i01	m02i24g08zs80 |
+0212221c05238b	30e0010c587173	8b30e2c7016621	2f4b88f0zr80 |
+0212!2205244c	c9120104648984	4cc91322019921	244cc998zr80 |
+03e2!2204a3c8	89100104448104	48891222011121	24484908zr80 |
+0282223e04a448	89f00104448107	c889f222011121	244849f8zr80 |
+02422220046448	89g0104448104	08890222011121	244849zs80 |
+02226222046448	89100104448904	48891222011121	244849zs80 |
+0211a21c0423c8	88e20104447103	!88e221811133	244cc998zr80 |
+o01n01111d234b	88f0zr80 |
+o01r08zt80 |
+o01r08zt80 |
+o01zzm80 |
+o01zzm80 |
+o01zzm80 |
+o01ZZM80 |
+zzx |
+zzx |
+zzx |
+zzx |
+zzx |
+zzx |
+zzx |
+zzx |
+o3fg0c18i07e1	8006x03f0h01c3	g7e18g60o |
+o31800c18i0630	g06x0318ic3g63	h60o |
+o318f1e!3c7ef8	0633878f199f9e	u0318f0f198c7	80633878f199f9
+ e0l |
+o31998c186670	ec06318cc6199c	33u0319!9998c3	g6318cc6199c3
+ 30l |
+o3f0f8c186660	cc07e18c061998	33u03f1998198	c3g7e18c06199
+ 8330l |
+o30198c187e60	cc06018c061998	3fu03c1f8f198	c3g6018c06199
+ 83f0l |
+o30198c18!60cc	06018c06199830	u0361801998c3	g6018c0619983
+ m |
+o30198c186660	cc06018cc61b98	33u0331!99b8c3	g6018cc61b983
+ 30l |
+o300f870e3c60	cc060187838f98	1eu0318!f0f8c1	c060187838f981
+ e0l |
+zzx |
+zzx |
+zzx |
+zzx |
+zzx |
+zzx |
+ZZW80 |
+80zm30zn80 |
+80zm30zn80 |
+80zm30zn80 |
+80zm30zn80 |
+80zm30zn80 |
+80zm30zn80 |
+80zm30zn80 |
+8007Hfei07Hfe	g1fHf8q30gIc0	iIc003Ih07Hfe	g1fHf8g80 |
+8004h02i04h02	g10h08g01I8007	Hfeg30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+80040eg02i04h	02g10h08g01i80	04h02g30g81c0	g40i80h4002h01
+ h04h02g10g0408	g80 |
+800411g02i04h	02g10h08g01i80	04g0102g30g82	20g40i80h4002
+ h01h04h02g10g	0408g80 |
+800411g02i04h	02g10h08g01i80	04g0102g30g82	20g40i80h4002
+ h01h04h02g10c7	1c08g80 |
+800411g02i04h	02g10h08g01i80	0431c702g30g82	20g40i80h4002
+ h01h04h02g1124	a408g80 |
+800411g02i04h	02g10h08g01i80	04492902g30g82	20g40i80h4002
+ h01h04h02g11e4	a408g80 |
+800411g02i04h	02g10h08g01i80	04792902g30g82	20g40i80h4002
+ h01h04h02g1104	a408g80 |
+800411g02i04h	02g10h08g01i80	04412902g30g82	20g40i80h4002
+ h01h04h02g1124	a408g80 |
+80040eg02i04h	02g10h08g01i80	04492902g30g81	c0g40i80h4002
+ h01h04h02g10c4	9c08g80 |
+8004h02i04h02	g10h08g01i8004	312702g30g80h	40i80h4002h01
+ h04h02g10h08g	80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04g20	02g10h08g01i80	04h02g30g80h40	i80h4002g2001
+ h04h02g10h08g	80 |
+8004h02i04g50	02g10h08g01i80	04h02g30g80h40	i80h4002g5001
+ h04h02g10h08g	80 |
+8004h02i04ga8	02g10h08g01i80	04h02g30g80h40	i80h4002ga801
+ h04h02g10h08g	80 |
+8004h02i040154	02g10h08g01i80	04h02g30g80h40	i80h4002015401
+ h04h02g10h08g	80 |
+8004h02i0402aa	02g10h08g01i80	04h02g30g80h40	i80h40!02aa01
+ h04h02g10h08g	80 |
+8004h02i040555	02g10h08g01i80	04h02g30g80h40	i80h4002055501
+ h04h02g10h08g	80 |
+8004h02i040aaa	82g10h08g01i80	04h02g30g80h40	i80h40020aaa81
+ h04h02g10h08g	80 |
+8004h02i041f57	c2g10h08g01i80	04h02g30g80h40	i80h40021f57c1
+ h04h02g10h08g	80 |
+8004h02i0402aa	02g10h08g01i80	04h02g30g80h40	i80h40!02aa01
+ h04h02g10h08g	80 |
+8004h02i040356	02g10h08g01i80	04h02g30g80h40	i80h4002035601
+ h04h02g10h08g	80 |
+8004h02i0402aa	02g10h08g01i80	04h02g30g80h40	i80h40!02aa01
+ h04h02g10h08g	80 |
+8004h02i040356	02g10h08g01i80	04h02g30g80h40	i80h4002035601
+ h04h02g10h08g	80 |
+8004h02i0402aa	02g10h08g01i80	04h02g30g80h40	i80h40!02aa01
+ h04h02g10h08g	80 |
+8004h02i040356	02g10h08g01i80	04h02g30g80h40	i80h4002035601
+ h04h02g10h08g	80 |
+8004h02i0402aa	02g10h08g01i80	04h02g30g80h40	i80h40!02aa01
+ h04h02g10h08g	80 |
+8004h02i0403fe	02g10h08g01i80	04h02g30g80h40	i80h400203fe01
+ h04h02g10h08g	80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	0410h08g01i80	04h02g30g80h40	i80h4082h01h04
+ h020410h08g80 |
+8004h02i04h02	0310h08g01i81	04h02g30g80h40	i80h4062h01h04
+ h020310h08g80 |
+8004h02i04h02	gd0h08g01i80c4	h02g30g80h40i	80h401ah01h04
+ h02gd0h08g80 |
+8004h02i04h03	Gf0h08g01i8034	h02g30g80h40i	80h7ffeh01h04
+ h03Gf0h08g80 |
+8004h02i04h02	g70h08g01iGfc	h02g30g80h40i	80h400eh01h04
+ h02g70h08g80 |
+8004h02i04h02	0190h08g01i80	1ch02g30g80h40	i80h4032g2001
+ h04h020190h08	g80 |
+8004h02i04h02	0610h08g01i80	64h02g30g80h40	i80h40c2g5001
+ h04h020610h08	g80 |
+8004h02i04h02	g10h08g01i8184	h02g30g80h40i	80h4002g8801h
+ 04h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002015401
+ h04h02g10h08g	80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h40"0201h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002055501
+ h04h02g10h08g	80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h400208g81h
+ 04h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h40021f57c1
+ h04h02g10h08g	80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h40"0201h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002035601
+ h04h02g10h08g	80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h40"0201h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002035601
+ h04h02g10h08g	80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h40"0201h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002035601
+ h04h02g10h08g	80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h40"0201h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h400203fe01
+ h04h02g10h08g	80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g80h40i	80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01i8004	h02g30g8008g40	i80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01g08g	8004h02g30g80	14g40i80h4002
+ h01h04h02g10h	08g80 |
+8004h02i04h02	g10h08g01g14g	8004h02g30g80	22g40i80h4002
+ h01h04h02g10h	08g80 |
+8004h02i04h02	g10h08g01g22g	8004h02g30g80	41g40i80h4002
+ h01h04h02g10h	08g80 |
+8004h02i04h02	g10h08g01g55g	8004h02g30g"80	40i80h4002h01
+ h04h02g10h08g	80 |
+8004h02i04h02	g10h08g01g"80	04h02g30g81g!40	i80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g!015540	8004h02g30g82	g2040i80h4002
+ h01h04h02g10h	08g80 |
+8004h02i04h02	g10h08g0102g20	8004h02g30g87	80f040i80h4002
+ h01h04h02g10h	08g80 |
+8004h02i04h02	g10h08g0107d5	f08004h02g30g	"8040i80h4002
+ h01h04h02g10h	08g80 |
+8004h02i04h02	g10h08g01g"80	04h02g30g"8040	i80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01gd5!80	04h02g30g"8040	i80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01g"80	04h02g30g"8040	i80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01gd5!80	04h02g30g"8040	i80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01g"80	04h02g30g"8040	i80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01gd5!80	04h02g30g"8040	i80h4002h01h04
+ h02g10h08g80 |
+8004h02i04h02	g10h08g01g"80	04h02g30g80G80	40i80h4002h01
+ h04h02g10h08g	80 |
+8004h02i04h02	g10h08g01gG!80	04h02g30g80h40	i80h4002h01h04
+ h02g10h08g80 |
+8004h02g01g04	h02g10h08g01i	8004h02g30g80	h40i80h4002h01
+ h04h02g10h08g	80 |
+8004h02g028004	h02g10h08g01i	8004h02g30g80	h40i80h4002h01
+ h04h02g10h08g	80 |
+8007Hfeg044007	Hfeg1fHf8g01i	8004h02g30gIc0	iIc003Ih07Hfe
+ g1fHf8g80 |
+80k0820p01I80	07Hfeg30zn80 |
+80k!10z30zn80 |
+80k2008z30zn80 |
+80k4004z30zn80 |
+80kf01ez30zn80 |
+80k!10z30zn80 |
+80k!10z30zn80 |
+80k!10z30zn80 |
+80k!10z30zn80 |
+80k!10z30zn80 |
+80k!10z30zn80 |
+80k!10z30zn80 |
+80k1ff0z30zn80 |
+80zm30zn80 |
+80zm30zn80 |
+80zm30zn80 |
+ZZW80 |
+\enddata{raster, 539408536}
+\view{rasterview,539408536,63,0,0}
+
+It moves P to the right, moves M to join P and moves X from wherever it is 
+back to the zero cell.  Usually the result will leave P pointing at a cell 
+with an "x" instead of an integer, so the next rule to fire will be 
+skip-non-prime which moves P and M to the right together until they are at 
+the next cell with an integer.  By construction, this is the next prime.
+
+\formatnote{
+}At one point in the execution, the multiples of two have been deleted and 
+the integer 9 is just about to be deleted as a multiple of three:
+
+\begindata{raster,539408712}
+2 0 68266 68266 0 0 474 90
+bits 539408712 474 90
+zzz |
+zzz |
+1fHf807Hfe01I	807fHe01fHf807	Hfe01I807fHe0	1fHf807Hfe01I
+ 807fHe01fHf807	Hfeg |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	g!02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	g!02g |
+100eg0804h0201	i8040h2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04638e02g |
+1011g080408g02	0107h8043e0g20	10h08043eg0201	i8043e0g2010h
+ 08041cg0201i80	4081g2010h0804	925202g |
+1011g080418g02	010880g80!40g	2010h080420g02	01i804020g2010
+ h080422g0201i	804183g2010h08	04f25202g |
+1011g080408g02	01g80g804080g	2010h080420g02	01i804020g2010
+ h080422g0201i	804081g2010h08	04825202g |
+1011g080408g02	!01h8041c0g20	10088008043cg	0201g88g80!40
+ g201008800804	22g0201g88g80	4081g20100880	0804925202g |
+1011g080408g02	0102h804020g20	1005g080402g02	01g50g80!40g20
+ 1005g08041eg02	01g50g804081g	201005g080462	4e02g |
+1011g080408g02	0104h804020g20	1002g080402g02	01g20g804080g
+ 201002g080402	g0201g20g8040	81g201002g0804	h02g |
+100eg080408g02	0108h804220g20	1002g080422g02	01g20g804080g
+ 201002g08!04g	0201g20g804081	g201002g0804h	02g |
+10h080408g0201	0f80g8041c0g20	1005g08041cg02	01g50g804080g
+ 201005g080418	g0201g50g8040	81g201005g0804	h02g |
+10h0804h0201i	8040h20100880	0804h0201g88g	8040h20100880
+ 0804h0201g88g	8040h20100880	0804h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	804004g2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+10h0804h0201i	80400ag2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+10h0804h0201i	804015g2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+10h0804h0201i	80402a802010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	804055402010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	8040aaa02010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	804155502010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	8043eaf82010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	804055402010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	80406ac02010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	804055402010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	80406ac02010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	804055402010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	80406ac02010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	804055402010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	80407fc02010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0844h0211i	8440h2110h0844	h0211i8440h21	10h0844h0211i
+ 8440h2110h0844	h02g |
+10h0824h0209i	8240h2090h0824	h0209i8240h20	90h0824h0209i
+ 8240h2090h0824	h02g |
+10h0814h0205i	8140h2050h0814	h0205i8140h20	50h0814g400205
+ i8140h2050h08	14h02g |
+10h0ffch03GiG	c0h3ff0h0ffch	03GiGc0h3ff0h	0ffcga003GiGc0
+ h3ff0h0ffch02	g |
+10h080ch0203i	80c0h2030h080c	h0203i80c0h20	30h080c011002
+ 03i80c0h2030h	080ch02g |
+10h0814h0205i	8140h2050h0814	h0205i8140h20	50h081402a802
+ 05i8140h2050h	0814h02g |
+10h0864h0219i	8640h2190h0864	h0219i8640h21	90h0864!040219
+ i8640h2190h08	64h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h08040aaa02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804100102
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h08043eaf82
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h08"040201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h080406ac02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h08"040201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h080406ac02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h08"040201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h080406ac02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h08"040201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h080407fc02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	804004g2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+10h0804h0201i	80400ag2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+10h0804h0201i	804011g2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+10h0804h0201i	804020802010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	80"402010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	804080!2010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+10h0804h0201i	8041g102010h08	04h0201i8040h	2010h0804h0201
+ i8040h2010h08	04h02g |
+10h0804h0201i	8043c0782010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	80"402010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	80"402010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	80"402010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	80"402010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	80"402010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	80"402010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	80"402010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	80407fc02010h	0804h0201i8040	h2010h0804h02
+ 01i8040h2010h	0804h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+1fHf807Hfe01I	807fHe01fHf807	Hfe01I807fHe0	1fHf807Hfe01I
+ 807fHe01fHf807	Hfeg |
+zzz |
+zzz |
+zzz |
+\enddata{raster, 539408712}
+\view{rasterview,539408712,64,0,0}
+
+Eventually, this final state is reached:
+
+\begindata{raster,539408888}
+2 0 68266 68266 0 0 474 88
+bits 539408888 474 88
+zzz |
+zzz |
+zzz |
+1fHf807Hfe01I	807fHe01fHf807	Hfe01I807fHe0	1fHf807Hfe01I
+ 807fHe01fHf807	Hfeg |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+100eg0804h0201	i8040h2010f8g	08043eg020102	04g8040g102010
+ h0804h0201i80	40h2010h0804h	02g |
+1011g080408g02	0107h8043e0g20	1080g080402g02	01060cg8040g10
+ 2010h0804h0201	i8040h2010h08	04h02g |
+1011g080418g02	010880g80!40g	201080g080402	g02010204g8043
+ 1c702010h0804	h0201i8040h20	10h0804h02g |
+1011g080408g02	01g80g804080g	2010f0g08!04g	02010204g8044
+ 9290201088g08	0422g02010880	g804220g201088	g080422g02g |
+1011g080408g02	!01h8041c0g20	1008g08!04g02	010204g804792
+ 90201050g0804	14g020105h8041	40g201050g0804	14g02g |
+1011g080408g02	0102h804020g20	1008g080408g02	010204g804412
+ 90201020g0804	08g020102h8040	80g201020g0804	08g02g |
+1011g080408g02	0104h804020g20	1088g080408g02	010204g804492
+ 90201020g0804	08g020102h8040	80g201020g0804	08g02g |
+100eg080408g02	0108h804220g20	1070g080408g02	010204g804312
+ 70201050g0804	14g020105h8041	40g201050g0804	14g02g |
+10h080408g0201	0f80g8041c0g20	10h0804h0201i	8040h201088g08
+ 0422g02010880	g804220g201088	g080422g02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0844h0211i	8440h2110h0844	h0211i8440h21	10h0844h0211i
+ 8440h2110h0844	h02g |
+10h0824h0209i	8240h2090h0824	h0209i8240h20	90h0824h0209i
+ 8240h2090h0824	h02g |
+10h0814h0205i	8140h2050h0814	h0205i8140h20	50h0814h0205i
+ 8140h2050h0814	h02g |
+10h0ffch03GiG	c0h3ff0h0ffch	03GiGc0h3ff0h	0ffch03GiGc0h
+ 3ff0h0ffch02g |
+10h080ch0203i	80c0h2030h080c	h0203i80c0h20	30h080ch0203i
+ 80c0h2030h080c	h02g |
+10h0814h0205i	8140h2050h0814	h0205i8140h20	50h0814h0205i
+ 8140h2050h0814	h02g |
+10h0864h0219i	8640h2190h0864	h0219i8640h21	90h0864h0219i
+ 8640h2190h0864	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+10h0804h0201i	8040h2010h0804	h0201i8040h20	10h0804h0201i
+ 8040h2010h0804	h02g |
+1fHf807Hfe01I	807fHe01fHf807	Hfe01I807fHe0	1fHf807Hfe01I
+ 807fHe01fHf807	Hfeg |
+\enddata{raster, 539408888}
+\view{rasterview,539408888,65,0,0}
+
+with all the primes shoved to the left by the condense rule.
+
+\formatnote{
+}One advantage of this solution is that it produces a graphical--and 
+potentially educational--simulation of the Sieve of Erastothenes.  The 
+solution illustrates the importance of rule order;  for instance, 
+"increment-prime-finder" must follow "delete-non-prime" or the program will 
+not delete non-prime numbers.
+
+
+\subsection{1.2  LabVIEW  -  Greg A. McKaskle}
+
+
+LabVIEW is a data flow language with a large library of predefined 
+functions and interaction images.  Each data flow diagram has an associated 
+front panel--a graphic representation which can accept input from the user 
+and provide imagery as feedback.  See [Daley, 1992], [Jagadeesh, 1993], 
+[Kodosky, 1991].
+
+\formatnote{
+}The front panel shown for the primes problem, Figure 1a, shows SampleSize 
+as a user set-able parameter and NumberOfPrimes as a computed value.  These 
+are displayed with standard widgets supplied with LabVIEW.  The 
+corresponding block diagram, Figure 1b, stretches from input of SampleSize 
+on the left to output of Primes and NumberOfPrimes on the right.  The left 
+side of the diagram initializes a Boolean array to contain two false values 
+(for 0 and 1) and SampleSize-minus-2 true values.  Then a FOR loop is 
+executed N times with SampleSize supplied as the value for N; if the 
+\italic{i}\superscript{th} element is false, the number isn't prime and the 
+box with the dark grey border is not executed.  If the 
+\italic{i}\superscript{th} element is true, it is prime; so all multiples 
+of \italic{i}, starting at twice \italic{i}, are set to false by the 
+computation within the innermost box.
+
+\formatnote{
+}Arithmetic operations are shown in triangular blocks and array operations 
+in rectangles with suggestive pictures.  From left to right, these 
+rectangles have the semantics of:
+
+\leftindent{generate an array of like values (twice)
+
+concatenate two arrays
+
+select the \italic{i}\superscript{th} element of an array
+
+store a value at a location in an array}
+
+\formatnote{
+}The rightmost operator rectangle invokes an operation defined with another 
+data flow diagram.  It selects from an array of integers those 
+corresponding to the true values in the Boolean array.  The associated 
+front panel is the lower half of Figure 1a:  it displays a sequence of 
+white or black disks for the Boolean values and a sequence of integers 
+giving the primes.
+
+
+\subsection{1.3 Prograph  -  Garth Smedley}
+
+\formatnote{
+}Prograph is a visual object-oriented data-flow language. Classes, 
+attributes, and methods are created and modified through direct 
+manipulation of icons on the screen. Prograph has an integrated development 
+environment with an editor, interpreter, debugger and compiler. The 
+interpreter supports creating, editing and browsing code, even  while it is 
+executing. Prograph  offers class libraries, one of which implements the 
+Macintosh graphical user interface. [Cox, 1989]
+
+\formatnote{
+}The prime number computation takes advantage of Prograph's built-in list 
+handling.  In these first two panes,
+
+\begindata{raster,539446664}
+2 0 68266 68266 0 0 200 198
+bits 539446664 200 198
+ZK |
+80zi01 |
+80zi01 |
+80zi01 |
+80iGfex01 |
+80h018889gc00c	gecg0ch30n01 |
+80h01!1101c01c	0180g0cq01 |
+80h012223gc30c	03ccf87c0f8db3	fe1e1ck01 |
+80h014445gc30c	018c!cc0cce"33	32k01 |
+80h018889gc00c	018c!cc0ccc"33	38k01 |
+80h01!11gc00c	018c!cc0ccc!33	3f1ck01 |
+80h012223gc00c	018c!cc0ccc!33	300ek01 |
+80h014445gc30c	018c!cc0ccc!33	3126k01 |
+80h018889gc30c	018ccc7c0f8c!33	1e1ck01 |
+80iGfem0cp01 |
+80r0cp01 |
+80zi01 |
+80zi01 |
+ZK |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80i3fWfcg01 |
+80i/22!2224g01 |
+80i24/44!44g01 |
+80i28/88888cg	01 |
+80i31/111114g	01 |
+80i32/22222cg	01 |
+80i1c/444478g	01 |
+80i07We0g01 |
+80v0el01 |
+80v11l01 |
+80v11l01 |
+80v11l01 |
+80v0el01 |
+80v04l01 |
+80v04l01 |
+80v04l01 |
+80v04l01 |
+80o0c03k04l01 |
+80o18f180j04l	01 |
+80o3198c0j04l	01 |
+80o3018c0j04g	88j01 |
+80ifck!30c0j04	g90j01 |
+80i18k3060c0j	08ga0j01 |
+80i30k30!c0j08	gc0j01 |
+80i78k19f980j	08ga0j01 |
+80i0ck0c03k08	g90j01 |
+80iccr08g88j01 |
+80i78r08l01 |
+80n3fIc0i08l01 |
+80p70k08l01 |
+80p88k08l01 |
+80g01Hfek88k08	l01 |
+80i38l88k08l01 |
+80i44l70k08l01 |
+80i44l20k08l01 |
+80i44l20k08l01 |
+80i38l20k08l01 |
+80i08l20k08l01 |
+80i08l20k08l01 |
+80i08r08l01 |
+80i04r08l01 |
+80i04r10l01 |
+80i04i0c!8006	20j10l01 |
+80i02i04g8008	20j10l01 |
+80i02i059dc19c	25c64170g10l01 |
+80i02i04a08248	!292a48g10l01 |
+80i01i04988248	31292a48g10l01 |
+80i01i04848248	!291448g10l01 |
+80j80h04b84188	25261448g10l01 |
+80v10l01 |
+80v10l01 |
+80v10l01 |
+80h48!40q10l01 |
+80h"40q10l01 |
+80c671d9cce6i	01m10l01 |
+8121!4a4249q10	l01 |
+8107!4a4e4fh0e	5b7631c0j10l01 |
+8129!4a5248h09	61494ak10l01 |
+80c749c9ce26h	0941497980j10	l01 |
+80m094149!40j	10l01 |
+80m0e41493380	j20l01 |
+80j08h08n20l01 |
+80j04h08n20l01 |
+80j04k04k20l01 |
+80j04k04k20l01 |
+80j02k04k20l01 |
+80j02k04k20l01 |
+80j0380j0ek20	l01 |
+80j0440j11k20	l01 |
+80j0920j2480j	70l01 |
+80jf39fJce7fJ	8ffck01 |
+80i013390jce40	j8802k01 |
+80i03c09fJ027f	J8ff2k01 |
+80i042190j8640	j700ak01 |
+80i0ff39fJce7f	Kcak01 |
+80i11+44462ak	01 |
+80i11!8880m08	888a2ak01 |
+80i"1110m0111	122ak01 |
+80i11!2220m02	!222ak01 |
+80i11!4441j24	!200444462ak01 |
+80i11!8881j"20	08888a2ak01 |
+80i"1113ad2063	38ece673011112	2ak01 |
+80i11!22213120	90a525212482!22	2ak01 |
+80i11!44412120	83a525!278444	462ak01 |
+80i11!88812120	94a52529240888	8a2ak01 |
+80i"1110a0e063	a4e4e713011112	2ck01 |
+80i11!2220g20	k02!2228k01 |
+80i11!4440gc0	k04444630k01 |
+80i11+888a20k	01 |
+80i0fSc0k01 |
+80j2720j9c80q	01 |
+80j2610j9840q	01 |
+80j2408j9020q	01 |
+80j2730j9cc0q	01 |
+80j2720j9c80q	01 |
+80j1240j49r01 |
+80j0880j22r01 |
+80j07k1cr01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p04r01 |
+80p0403!200180	01l01 |
+80p0401g2002n	01 |
+80p0401677067	0e5b7631c0i01 |
+80p0401282092	0961494aj01 |
+80p0401262092	0941497980i01 |
+80p0401212092	094149!40i01 |
+80p04012e1062	0e41493380i01 |
+80p04j08m01 |
+80p04j08m01 |
+80p04r01 |
+80p04r01 |
+80p0er01 |
+80p11r01 |
+80p11r01 |
+80p11r01 |
+80p0er01 |
+80i07We0g01 |
+80i1e/222278g	01 |
+80i34/44444cg	01 |
+80i38/88888cg	01 |
+80i31/111114g	01 |
+80i/22!2224g01 |
+80i24/44!44g01 |
+80i3fWfcg01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+80zi01 |
+ZK |
+\enddata{raster, 539446664}
+\view{rasterview,539446664,66,207,0}\formatnote{ 
+ }\
+\begindata{raster,539446840}
+2 0 68266 68266 0 0 203 179
+bits 539446840 203 179
+ZKe0 |
+80zj20 |
+80zj20 |
+80zj20 |
+80iGfey20 |
+80h012889gc00c	0180k6606g30k	20 |
+80h01311901c0	1c0180k6006g30	k20 |
+80h012229gc30c	03cdb301c3c7c3	e63e3c78f0j20 |
+80h012449gc30c	018e330324#66	463198j20 |
+80h012889gc00c	018c33!03e6"66	3e3198j20 |
+80h013119gc00c	018c330306$66	31f8j20 |
+80h012229gc00c	018c330306$66	3180j20 |
+80h012449gc30c	018c330326$66	3188j20 |
+80h012889gc30c	gcc1f01c3e663	e6!3e18f0j20 |
+80iGfek03s20 |
+80p23s20 |
+80p1es20 |
+80zj20 |
+ZKe0 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80j1fWfeg20 |
+80j/11!1112g20 |
+80j12/22!22g20 |
+80j14/444446g	20 |
+80j18/88888ag	20 |
+80j19/111116g	20 |
+80j0e/22223cg	20 |
+80j03Wf0g20 |
+80ne0j0el0ei20 |
+80m0110j11l11	i20 |
+80m0110j11l11	i20 |
+80m0110j11l11	i20 |
+80ne0j0el0ei20 |
+80na0j04l04i20 |
+80m0120j04l08	i20 |
+80m0220j04l08	i20 |
+80m0410j04l08	i20 |
+80m0810q08i20 |
+80m3008q10i20 |
+80m4008q10i20 |
+80m8008h3202g	1880j100440g20 |
+80l01g04h1002	g2080j100480g	20 |
+80i09!0802g04	h167706709719	05c0g1005h20 |
+80i"0804g02h12	820920!a4a920	g2006h20 |
+80g18ce3b399c	c0g02h12620920	c4a4a920g2005	h20 |
+80g2429494849	20g02h!120920	!a45120g200480	g20 |
+80g20e9!49c9e0	g01h12e1062094	985120g200440	g20 |
+80g2529494a49	h01q40i20 |
+80g18e9!39c4c0	g01q40i20 |
+80o80p40i20 |
+80o80p40i20 |
+80k10i40p80i20 |
+80k20i40h04m80	i20 |
+80k40i40p80i20 |
+80k80i20g396d	d8c7k80i20 |
+80j01j20g2585	2528j01j20 |
+80j06j10g2505	25e6j01j20 |
+80j08j10g2505	2501j01j20 |
+80j10j10g3905	24cej01j20 |
+80j20j08g20m01	j20 |
+80j40j08g20m02	j20 |
+80j80j04j80j02	j20 |
+80i03k04j80j02	j20 |
+80i04k04j80j02	j20 |
+80i08k02j80j04	j20 |
+80i10k07i01c0	j04j20 |
+80i20k0880h02	20j04j20 |
+80i40k0880h02	20j04j20 |
+80h0380k0880h	0220j08j20 |
+80h0440k07i01	c0j08j20 |
+80h0440iOfch08	j20 |
+80h0440h0114'44	62h08j20 |
+80h0380h011880	ma2h10j20 |
+800fJc00111m01	22h10j20 |
+8011"44462001	12m0222h10j20 |
+801580h0aa001	1440084120i84	62h10j20 |
+801510h02a001	1880084020i80	a2h10j20 |
+801520h02a001	110639c3706587	19c122h20j20 |
+801540g0f06a0	0112014a412096	04a48222h20j20 |
+80158003198aa0	0114474a412094	04a48462h20j20 |
+801511c30182a0	0118894a412094	04a480a2h20j20 |
+8015206fc302a0	01110739c11064	04984122h40j20 |
+801541e3!06a0	0112m0222h40j	20 |
+801583630c0aa0	011440l0462h40	j20 |
+801511e01f82a0	0118'88a2h40j	20 |
+801520h02a0gO	fch80j20 |
+801540h06a0k03	80l80j20 |
+8011"888a20k04	40l80j20 |
+800fJc0k0440l	80j20 |
+80h0380m0440k	01k20 |
+80h0440m0380k	01k20 |
+80h0440m01l01	k20 |
+80h0440m01l01	k20 |
+80h03fen80k01	k20 |
+80i81Gfel80k02	k20 |
+80i40g01Gfej80	k02k20 |
+80i40i01Gfeh80	k02k20 |
+80i20k01Gfe80	k02k20 |
+80i10m01Gfej04	k20 |
+80i10n4001Gfe	h04k20 |
+80i08n40h01G80	0ek20 |
+80i04n40i0440	11k20 |
+80i04n40i0440	11k20 |
+80i02n40i0440	11k20 |
+80i01n20i0380	0ek20 |
+80i01n20h01If9	Gf0h20 |
+80j80m20h02"88	8eGe8h20 |
+80j40m20h0311	g0116aaa8h20 |
+80j40m20h0222	g02267fc8h20 |
+80j20m10h0244	400446g08h20 |
+80j10m10h0288	80088egc8h20 |
+80j10m10h0311	0601160188h20 |
+80j08m10h0222	0302260308h20 |
+80j04m10h0244	4184466608h20 |
+80j04m10h0288	83088e3c08h20 |
+80j02m08h0311	0601161808h20 |
+80j02m08h0222	g0226g08h20 |
+80j01m08h0244	400446g08h20 |
+80k80l08h03Gc0	0ffeg08h20 |
+80k80l08h02i06	g08h20 |
+80k40l08h01If9	Gf0h20 |
+80k20l04q20 |
+80k20l04q20 |
+80k10l04q20 |
+80k08l04q20 |
+80k08l04q20 |
+80k04l02q20 |
+80k02l02q20 |
+80k02l02q20 |
+80k01l02q20 |
+80l80k02q20 |
+80l80k02q20 |
+80l40k01q20 |
+80l20k01q20 |
+80l20k01q20 |
+80l10k01q20 |
+80l08k01q20 |
+80l08l80p20 |
+80l04l80p20 |
+80l02l80p20 |
+80l07k01c0p20 |
+80l0880j0220p	20 |
+80l0880j0220p	20 |
+80l0880j0220p	20 |
+80l07k01c0p20 |
+80hWfcj20 |
+80g03c4/444fj	20 |
+80g06/88888980	i20 |
+80g07/11!1180	i20 |
+80g06/22!2280	i20 |
+80g04/44!4480	i20 |
+80g04/88!8880	i20 |
+80g07X80i20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+80zj20 |
+ZKe0 |
+\enddata{raster, 539446840}
+\view{rasterview,539446840,67,0,0}
+
+
+"try candidate" has three inputs, the second of which is a list.  The call 
+on "try candidate" in the first pane shows that it is iterated, with the 
+left output being supplied as the left input and the list recycling in the 
+middle.  The comparison of candidate+2 with \sansserif{\smaller{K}} 
+determines when to terminate the loop.  \
+
+
+\formatnote{
+}The call on "add it or not" determines whether to add the candidate to the 
+list.  This function is implemented with two panes, called "cases":
+
+\begindata{raster,539447016}
+2 0 68266 68266 0 0 215 188
+bits 539447016 215 188
+ZLfe |
+80zk02 |
+80zk02 |
+80zk02 |
+80h1fGc0z02 |
+80h2511201803	c0g"0630j03m02 |
+80h2623203804	60g!06g30j03m	02 |
+80h24452018!60	3c!3e06780f1b	07c3c780l02 |
+80h24892018!60	46!660630199c	066663m02 |
+80h25112018gc0	3e!6606301998	066663m02 |
+80h2623201801	80"6606301998	066663m02 |
+80h2445201803	g"660630199806	6663m02 |
+80h2489201866	g"660630199806	6663m02 |
+80h2511201867	e0"3e06180f18	0663c180l02 |
+80h1fGc0z02 |
+80zk02 |
+80zk02 |
+80zk02 |
+ZLfe |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80i01ZGe2 |
+80i01/11$1122 |
+80i01/22%22 |
+80i01/44$4462 |
+80i01/88$88a2 |
+80i0191/11#11	62 |
+80je2/22"2223	c2 |
+80j3fZ02 |
+80k1cr0380k02 |
+80k22r0440k02 |
+80k22r0440k02 |
+80k22r0440k02 |
+80k1cr0380k02 |
+80k1cr03l02 |
+80k1br06l02 |
+80k28c0q0al02 |
+80k2820q12l02 |
+80l18q24l02 |
+80l06x02 |
+80l01x02 |
+80h024202hc0w	02 |
+80h"02h30o3202	g1880i02 |
+8006338ece6730	g08o1002g2080	i02 |
+80090a!521248	g06o1677067097	1905c002 |
+80083a!527278	g0180n12820920	!a4a92002 |
+80094a!529240	h40n12620920c4	a4a92002 |
+80063a!4e7130	h30m0192120920	!a4512002 |
+80n0cm0212e106	209498512002 |
+80n02m04n02 |
+80j!10h0180l08	n02 |
+80j2010i60l10	n02 |
+80j2010i10l20	n02 |
+80j4020i0clc0	n02 |
+80j4020i03k01	h04l02 |
+80j8020j80j02	o02 |
+80j8020j60j04	g396dd8c7j02 |
+80i01g20j18j08	g25852528j02 |
+80i01g20j04j10	g250525e6j02 |
+80i02g20j03j20	g25052501j02 |
+80i02g20kc0ic0	g390524cej02 |
+80i04g20k20h01	h20m02 |
+80i04g20k18h02	h20m02 |
+80i08g20k06h04	h02m02 |
+80i08g20k01h08	h02m02 |
+80i10g20lc0g10	h02m02 |
+80i10g20l20g20	h02m02 |
+80i20g40l18gc0	h04m02 |
+80i20g40l0601	i04m02 |
+80i40n0102i04	m02 |
+80i40oc4i08m02 |
+80i80o38i08m02 |
+80i80o18i08m02 |
+80h01p26i08m02 |
+80h01025ce32c	lc180h10m02 |
+80h!025294b0k	01g40h10m02 |
+80h!025297a0k	02g30h10m02 |
+80h0402529420	k04g0ch20m02 |
+80h0401dce320	k08g02h20m02 |
+80h08g1080l10	g0180g20m02 |
+80h08g1080l20	h60g20m02 |
+80h10oc0h10g40	m02 |
+80h10n01i0cg40	m02 |
+80h20n02i03g40	m02 |
+80h4002h04j04	j!80m02 |
+80h4002h04j08	j6080m02 |
+80h80038c971c	j10j1880m02 |
+80h80025294a4	j60j0480m02 |
+80g01g025294a4	j80j03n02 |
+80g01g025294a4	i01k01c0m02 |
+80g02g038c749c	i02k0120m02 |
+80g02n04k0218	m02 |
+80g04n08k0206	m02 |
+80g04i80j10k02	01m02 |
+80g08h01k60k02	gc0l02 |
+80g08h01k80k04	g30l02 |
+80g10h01j01l04	g08l02 |
+80g10h01j02l04	g06l02 |
+80g20h01j04l08	g0180k02 |
+80g20h0380h1c	0el08h40k02 |
+80g40h0440h30	03l1ch38k02 |
+80ge0h0920h36	dbl22h44k02 |
+80G1fHf39fHf6	dbfck22h44k02 |
+810110h3390h30	0302k22h44k02 |
+83G1fHc09fHfc	0ff2k1ch38k02 |
+84ge0h2190j0a	iMfci02 |
+8fJf39fJcfG80	01&4446i02 |
+91(444630g4001	88l0ai02 |
+91"88j08888a30	g400110l12i02 |
+91!1110j!1112	30g400122l22i	02 |
+91!2220j"2230	g400144gc6g06	h46i02 |
+91"44g10g0c04	4446318c400188	gc6g06h0ai02 |
+91"88i1208888a	30d840011039ef	38e7807c12i02 |
+91!1110e5b763	02!1112307040	01220cc60db6df	7022i02 |
+91!2220961494	84"2230704001	443cc63d86c060	46i02 |
+91"4494149788	04444630d84001	886cc66db6c060	0ai02 |
+91"88941494g08	888a318c400110	3c633ce6c06012	i02 |
+91!1110e41493	08!111230g4001	22l22i02 |
+91!222080i"22	30g4001fel7ei	02 |
+91"4480i044446	30g4001m02i02 |
+91(888a30g40g	Mfci02 |
+8fPcfG80j0380	l02 |
+80j2720q0440l	02 |
+80j2610q0440l	02 |
+80j2408q0440l	02 |
+80j2730q0380l	02 |
+80j2720q02m02 |
+80j1240q04m02 |
+80j0880q08m02 |
+80j07r10m02 |
+80w20m02 |
+80w40m02 |
+80w80m02 |
+80v01n02 |
+80v01n02 |
+80v02n02 |
+80v04n02 |
+80v08n02 |
+80v10n02 |
+80v20n02 |
+80v40n02 |
+80v80n02 |
+80u01o02 |
+80u02o02 |
+80u02o02 |
+80u04o02 |
+80u08o02 |
+80u10o02 |
+80u20o02 |
+80u40o02 |
+80u80o02 |
+80t01p02 |
+80t02p02 |
+80t07p02 |
+80t0880o02 |
+80t0880o02 |
+80t0880o02 |
+80t07p02 |
+80k03Wf0g02 |
+80k0f/11113cg	02 |
+80k1a/222226g	02 |
+80k1c/444446g	02 |
+80k18/88888ag	02 |
+80k/11!1112g02 |
+80k12/22!22g02 |
+80k1fWfeg02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+80zk02 |
+ZLfe |
+\enddata{raster, 539447016}
+\view{rasterview,539447016,68,0,0}\formatnote{ 
+ }\
+\begindata{raster,539447192}
+2 0 68266 68266 0 0 178 104
+bits 539447192 178 104
+ZHc0 |
+80zg40 |
+80zg40 |
+80zg40 |
+80g03Gf8w40 |
+80g04a2240780	78h!c0c6k60i40 |
+80g04c46408c0	8ch!c006k60i40 |
+80g0488a4gcc0c	0787c7c0cf01e3	60f878f0i40 |
+80g049124gcc0c	08!ccc0c60333	80!cc60i40 |
+80g04a2240180	1807!ccc0c603	33g!cc60i40 |
+80g04c46403g30	0c!ccc0c60333	g!cc60i40 |
+80g0488a406g60	0c!ccc0c60333	g!cc60i40 |
+80g049124!0cc0	0c!ccc0c60333	g!cc60i40 |
+80g04a2240fcc	fc07!c7c0c301	e3gcc7830i40 |
+80g03Gf8w40 |
+80zg40 |
+80zg40 |
+80zg40 |
+ZHc0 |
+80zg40 |
+80zg40 |
+80zg40 |
+80zg40 |
+80zg40 |
+80zg40 |
+80zg40 |
+80zg40 |
+80zg40 |
+80zg40 |
+80zg40 |
+80Xf0h40 |
+80/88!8890h40 |
+8091/111110h40 |
+80a2/222230h40 |
+80c4/444450h40 |
+80c8/8888b0h40 |
+8071/1111e0h40 |
+801fW80h40 |
+80ke0m1cm40 |
+80j0110m22m40 |
+80j0110m22m40 |
+80j0110m22m40 |
+80ke0m1cm40 |
+80s10m40 |
+80s20m40 |
+80s40m40 |
+80s80m40 |
+80r01n40 |
+80r02n40 |
+80r04n40 |
+80i012101l08n	40 |
+80i"01l1006!40	0310i40 |
+80g0319c76733	98k1002g400410	i40 |
+80g0485!290924	k2002cee0ce12	e320b840 |
+80g041d!29393c	k400250412414	94952440 |
+80g04a5!294920	k80024c412418	94952440 |
+80g031d!273898	j01g0242412414	948a2440 |
+80q02g025c20c4	12930a2440 |
+80q04o40 |
+80q08o40 |
+80q10o40 |
+80q20o40 |
+80q20o40 |
+80q40i80k40 |
+80q80o40 |
+80p01h072dbb18	e0i40 |
+80p02h04b0a4a5	j40 |
+80p04h04a0a4bc	c0i40 |
+80p08h04a0a4a0	20i40 |
+80p10h0720a499	c0i40 |
+80p20h04m40 |
+80p40h04m40 |
+80p80p40 |
+80p80p40 |
+80o01q40 |
+80o02q40 |
+80o04q40 |
+80o08q40 |
+80o10q40 |
+80o20q40 |
+80o40q40 |
+80o80q40 |
+80n01r40 |
+80n0380q40 |
+80n0440q40 |
+80n0440q40 |
+80n0440q40 |
+80n0380q40 |
+80Wfci40 |
+83c4/444fi40 |
+86/88888980h40 |
+87/11!1180h40 |
+86/22!2280h40 |
+84/44!4480h40 |
+84/88!8880h40 |
+87X80h40 |
+80zg40 |
+80zg40 |
+80zg40 |
+80zg40 |
+80zg40 |
+80zg40 |
+80zg40 |
+ZHc0 |
+\enddata{raster, 539447192}
+\view{rasterview,539447192,69,0,125}
+
+
+The first of these iterates through the list of known primes with predicate 
+"prime?" calling it once for each element of the list as indicated by 
+"...".  When the list is exhausted, the case attaches the candidate to the 
+list of known primes.  If the predicate fails, the \sansserif{\bold{x}} in 
+the square--called a "next case control"--terminates the first case and 
+initiates the second, which discards the candidate.  The "prime?" block
+
+\begindata{raster,539447368}
+2 0 68266 68266 0 0 276 201
+bits 539447368 276 201
+ZTf0 |
+80zs10 |
+80zs10 |
+80zs10 |
+80n7fGzi10 |
+80n9444806006	h06h03c0s10 |
+80n988c80e00e	k0460s10 |
+80n9114806186	01f1b67fc3c060	s10 |
+80n9224806186	0199c6!6660c0	s10 |
+80n9444806006	019986!666180	s10 |
+80n988c806006	0199866667e180	s10 |
+80n9114806006	019986!66u10 |
+80n9224806186	019986!662180	s10 |
+80n9444806186	01f1866663c180	s10 |
+80n7fGi0180x10 |
+80s0180x10 |
+80zs10 |
+80zs10 |
+ZTf0 |
+80zs10 |
+80zs10 |
+80zs10 |
+80zs10 |
+80zs10 |
+80zs10 |
+80zs10 |
+80zs10 |
+80l07X80m10 |
+80l04/44!4480	m10 |
+80l04/88!8880	m10 |
+80l05/11!1180	m10 |
+80l06/22!2280	m10 |
+80l06/44444580	m10 |
+80l03/88888fn	10 |
+80mWfcn10 |
+80n01c0k0380j	38q10 |
+80n0220k0440j	44q10 |
+80n0220k0440j	44q10 |
+80n0220k0440j	44q10 |
+80n01c0k0380j	38q10 |
+80o80l80j70q10 |
+80o80l40j88q10 |
+80o40l20i0308	q10 |
+80o40p0c08q10 |
+80o40p1008q10 |
+80z6004q10 |
+80y018004g01h	04g80j10 |
+80y06g04g01h04	01k10 |
+80l024202k25ce	32c0g08g04g09	2789ce3380j10 |
+80l"02k25294b	h30g02g15!5524	49k10 |
+80j06338ece67	30j25297ahc0g	02g1d755d2449	k10 |
+80j090a!521248	j252942g01h02	g1145512449k10 |
+80j083a!527278	j1dce32g06h02	g0d354d2431k10 |
+80j094a!529240	j0108h18h01q10 |
+80j063a!4e7130	j0108g0460h01	q10 |
+80w0280h01q10 |
+80w03i01q10 |
+80o10m0480i80	3202g1880k10 |
+80o10j20h!40i	801002g2080k10 |
+80o08j20h4020	i801677067097	1905c0h10 |
+80o08j38c971c0	10i8012820920	!a4a920h10 |
+80o08j25294a40	10i8012620920	c4a4a920h10 |
+80o08j25294a40	08i40!120920!a4	5120h10 |
+80o08j25294a40	04i4012e10620	94985120h10 |
+80o04j38c749c0	02i40p10 |
+80o04n01i40p10 |
+80o04o80h20p10 |
+80o04k18i40h20	p10 |
+80o04k20i20h20	p10 |
+80o04kc0i10h20	g04n10 |
+80o02j03j08h10	p10 |
+80o02j0cj04h10	396dd8c7l10 |
+80o02j10j02h10	25852528l10 |
+80o02j60j02h10	250525e6l10 |
+80o02i0180j01	h0825052501l10 |
+80o02i02l80g08	390524cel10 |
+80o01i0cl40g08	20o10 |
+80o01i30l20g08	20o10 |
+80o01ic0l10g04	p10 |
+80o01h01m08g04	p10 |
+80o01h06m04g04	p10 |
+80p80g18m02g04	p10 |
+80p80g20m01g02	p10 |
+80p80gc0n8002	p10 |
+80o01c007n01c0	07p10 |
+80o02200880m02	200880o10 |
+80o02200880m02	200880o10 |
+80o02200880m02	200880o10 |
+80o01c007n01c0	07p10 |
+80n0fJc0lIfcG	f8m10 |
+80n14#4460k01	"44477ff4m10 |
+80n1888h08a0k	018880g8b5554	m10 |
+80n1110h1120k	0111g01133fe4	m10 |
+80n1222h2220k	0122200223g04	m10 |
+80n1444h4460k	0144400447g64	m10 |
+80n1888183008	a0k018880c08b	gc4m10 |
+80n1110h1120k	01110181130184	m10 |
+80n12227efc22	20k0122230223	3304m10 |
+80n1444h4460k	01444184471e04	m10 |
+80n1888183008	a0k018880c08b	0c04m10 |
+80n1110h1120k	0111g0113g04m	10 |
+80n1222h2220k	0122200223g04	m10 |
+80n1ffeh7fe0k	01Ge007Gg04m10 |
+80n10j20k01i03	g04m10 |
+80n0fJc0lIfcG	f8m10 |
+80o01c0g70z10 |
+80o0220g88z10 |
+80o0220g88z10 |
+80o0220g88z10 |
+80o01c0g70z10 |
+80p80g0f80y10 |
+80p80h78y10 |
+80p80h0780x10 |
+80p80i7cx10 |
+80p80i03c0w10 |
+80p80j3ew10 |
+80p80j01e0v10 |
+80p80j0110v10 |
+80o01k0110v10 |
+80o01k0110v10 |
+80o01le0v10 |
+80o01j07Hf87f	t10 |
+80o01nG80s10 |
+80o01m01c1c0s	10 |
+80o01m0380e0s	10 |
+80o01m07g70s10 |
+80o01k01e00601	b0s10 |
+80o01k03300603	30s10 |
+80o01k0330!06	30s10 |
+80o01k033006cc	30s10 |
+80o01k03300678	30s10 |
+80o01k033006!30	s10 |
+80o01k01e007g	70s10 |
+80o01m0380e0s	10 |
+80o01m01c1c0s	10 |
+80o01nG80s10 |
+80o02n7ft10 |
+80o02zi10 |
+80o02zi10 |
+80o02zi10 |
+80o02zi10 |
+80o02i0118i80	20g2007p10 |
+80o02j20j20h08	80o10 |
+80o02i0370b33b	19b8e658670880	o10 |
+80o02i0120c4a4	84a52960280880	o10 |
+80o02i012087a4	9ca52f40260880	o10 |
+80o02i01208424	a4a52840210880	o10 |
+80o02i01208324	9ca4e6402e07p	10 |
+80o02zi10 |
+80o02zi10 |
+80o02zi10 |
+80o02zi10 |
+80o02zi10 |
+80o04i0120i02	4202g20p10 |
+80o04i0120i"02	r10 |
+80o04i03b8ce06	338ece673067p	10 |
+80o04i01252909	0a!52124828p10 |
+80o04i0125e908	3a!52727826p10 |
+80o04i0125!09	4a!52924021p10 |
+80o04ja4c9063a	!4e71302ep10 |
+80o04zi10 |
+80o04zi10 |
+80o04zi10 |
+80o04zi10 |
+80o04zi10 |
+80o04k40g20u10 |
+80o04k40w10 |
+80o04i038ce1cb	6ec6t10 |
+80o04i0252412c	!29t10 |
+80o04i02524128	292ft10 |
+80o04i02524128	2928t10 |
+80o08i024c21c8	2926t10 |
+80o08k01w10 |
+80o08k01w10 |
+80o08zi10 |
+80o08zi10 |
+80o08zi10 |
+80o08zi10 |
+80o08zi10 |
+80o08zi10 |
+80o1czi10 |
+80o22zi10 |
+80o22zi10 |
+80o22zi10 |
+80o1czi10 |
+80j1fW80p10 |
+80j78/8889e0p	10 |
+80jd1/111130p	10 |
+80je2/222230p	10 |
+80jc4/444450p	10 |
+80j/88!8890p10 |
+80j91/111110p	10 |
+80jXf0p10 |
+80zs10 |
+80zs10 |
+80zs10 |
+80zs10 |
+80zs10 |
+80zs10 |
+80zs10 |
+ZTf0 |
+\enddata{raster, 539447368}
+\view{rasterview,539447368,70,0,0}
+determines whether the candidate is divisible by a known prime.  The check 
+in the square terminates the graph--succeeding--if the current list element 
+exceeds the upper bound.  The octagon terminates with failure if the 
+division produces a remainder of zero.
+
+
+\subsection{1.4 Show and Tell (STL)  -  Takayuki Dan Kimura}
+
+\formatnote{
+}Show and Tell (STL) is a data flowgraph language with the distinction that 
+arbitrary images can be utilized as function names;  in Figure 2, these 
+images are handwritten names.  The upper left window shows the STL drawing 
+panel and the lower right the list of objects used in this solution.  The 
+output (3 5 7 11) is in the middle bottom window.
+
+\formatnote{
+}The notation is this:\leftindent{
+
+Empty box = variable
+
+Thick box = formal parameters
+
+Dotted box = predicate
+
+Double box = iteration control
+
+Pair of open triangles = iterate value
+
+Meshed rectangle = element by element}
+
+\formatnote{
+}The "Prime" panel is the main program, which finds the primes in the first 
+five odd integers.  On the left "3,5,7.." is invoked to create the list 3, 
+5, 7, 9, 11.  This list serves as the initial value through the paired open 
+triangles on the upper-line through the iteration box;  the entire list, as 
+modified by "Sieve" is the value on this line and serves as input to the 
+next iteration.  At each cycle, the first element of the current upper-line 
+list is extracted with "top".  When there are no more elements, "top" will 
+fail and the iteration in "Prime" terminates.  Otherwise, the first element 
+is a prime and is appended to the output list in the lower left.  That same 
+first element and the current upper-line list are passed as parameters to 
+"Sieve" which produces a new list omitting the first element and its 
+multiples.
+
+\formatnote{
+}In the other cases of paired open triangles--in "3,5,7..." and "mod"--a 
+single value is passed in, modified, and passed on to the next iteration. 
+ The list output from "3,5,7..." is via the meshed rectangle port at the 
+bottom, which assembles the values from successive iterations in which the 
+predicate (>0) succeeds.  "Mod" repeatedly subtracts its second (rightmost) 
+parameter from the iterating first parameter;  the output is the last value 
+before the predicate (<=0) fails.
+
+\formatnote{
+}The upper line through "Sieve" is through meshed rectangles, so each 
+element of the list value is processed in a separate iteration.  If the 
+predicate (>0) succeeds, the current iteration value is appended to the 
+output list under construction.  "Top" is an inefficient version of what 
+should be a primitive to find the first element of a sequence.  Its first 
+iteration succeeds because the first element from the list is greater than 
+zero;  subsequent iterations fail because the input element is not equal to 
+the element from the previous iteration.
+
+
+\subsection{1.5  VisaVis  -  Joerg Poswig}
+
+\formatnote{
+}VisaVis is a data-flow language with second order functions as a special 
+focus.  Such a function takes a function and a collection of data as 
+arguments and applies the function to the data in some manner.  Users can 
+define their own second order functions in the language.
+
+\formatnote{
+}The algorithm for primes is shown in Figure 3 and is in four parts, one in 
+each quadrant.  In the upper left, VisaVis's "interval" operator generates 
+a list of the integers from 2 to k and this list is processed through the 
+"primes" operator.   The latter is in the upper right quadrant and is a 
+recursive function which  terminates when the list is empty.  Otherwise the 
+first element is taken to be the next prime number and is merged with the 
+results of the subsequent computations.  The rest of the sequence and the 
+first element become the two parameters of "sift", the output of which 
+serves as input for the next recursive call (circle 3).   The final step is 
+"Merge", another VisaVis operator, which attaches the prime from the 
+current iteration to the list from the recursive call.
+
+\formatnote{
+}The "sift" process is in the lower left quadrant where the built-in second 
+order function "FilterWithArg" applies the function "ModEqualNot" to the 
+list and the current prime.  "ModEqualNot" in the lower right returns True 
+if the current list element is not divisible by the current prime.
+
+\formatnote{
+}The relation of the parts of the program are not clear in Figure 3, but 
+can be made clear with the VisaVis "hierarchy tool", a simulated three 
+dimensional image which depicts the nesting of program parts and the data 
+values in transit.  For an illustration of the animation of execution, see 
+[Poswig, 1993].
+
+\formatnote{
+}In addition to the solution in Figure 3, which uses division, a solution 
+was constructed with the hierarchy tool that employed a true sieve using 
+addition instead of division.  This solution proved slower, however, 
+possibly due to simulation overheads.
+
+\formatnote{
+}\section{2. Checkbook}
+
+\formatnote{
+}The second problem aimed at traditional business computing requirements 
+and especially the need for long term storage of information in files:
+
+
+\quotation{Write a simple program for checkbook accounting.   It should 
+accept user input for deposits and withdrawals to the account.  Withdrawal 
+information should include check number, date, payable to, reason, and 
+amount.  Deposit information should include date, reason/origin, and 
+amount.  Design a GUI with user interaction in a suitable layout that 
+allows entry of the data and selection of the actions in any reasonable 
+sequence.  The program should maintain a list of all transactions and allow 
+it to be reviewed.}
+
+\formatnote{
+}The two commercial vendors--LabVIEW and Prograph--presented solutions to 
+this problem, but space limitations prevent displaying them here.  Both 
+vendors took advantage of their special strengths.
+
+\formatnote{
+}LabVIEW's solution features realistic and colorful forms for check 
+register, withdrawal, and deposit.  These are front panels to data flow 
+diagrams implementing the algorithms.  When idle, the algorithm polls for 
+input every quarter second.
+
+\formatnote{
+}In Prograph the interface editor was used to create screen interfaces for 
+checks, deposits, and the transaction list shown in Figure 4.  The 
+algorithm is implemented with the aid of a simple class hierarchy:  The 
+Transaction class is an abstract class with two subclasses, Check and 
+Deposit. The Account class has attributes for the current balance and a 
+list of Transactions. Methods in the Account class add transactions to the 
+list and update the balance.  Each window in the application is a subclass 
+of Prograph's Window class, while the transaction list is an instance of 
+class Grid, from Prograph's class library.
+
+
+\section{3. Rolling wagon wheel}
+
+\formatnote{
+}Since visual languages are inherently graphical, it seemed appropriate to 
+determine if they could perform a computation whose primary purpose was 
+animation of a graphical image:
+
+
+\quotation{Write a program to display a simulation of a spoked wagon wheel 
+rolling down a ramp whose slope can be varied  by the user. }\
+
+
+\formatnote{
+}The trivial ChemTrains program for the rolling wheel has only two rules: 
+ an initial diagram with the wheel at the top and a final diagram with it 
+at the bottom.  ChemTrains automatically animates motion between two 
+states. In fact, however, a more elaborate solution was created which 
+divides the ramp into a series of sections and has a rule that moves the 
+wheel from one section to the next.
+
+\formatnote{
+}LabVIEW programs draw pictures by appending drawing codes together and 
+providing a control that can render them on the front panel.  The codes are 
+2D primitives--circles, lines, bitmaps, and so on--and are appended by 
+wiring together icons with appropriate parameters for diameter, color, etc. 
+ The draw wheel program encapsulates these drawing commands into a module 
+that appends the drawing commands for a parameterized wheel.  Similarly, 
+other icons draw the ramp, calculate the effect that gravity has on the 
+wheel position, and update the wheel rotation for a given wheel position. 
+ See Figure 5, which is a black/white rendering of the colorful original. 
+ The associated data flow diagram does the kinematics to accelerate the 
+wheel due to gravity.
+
+\formatnote{
+}In Prograph the wheel was programmed by creating classes for the ramp 
+window and the wheel.  Attributes in these classes include the height of 
+the ramp, the position of the wheel, and the orientation of the spokes 
+(diagonal or orthogonal).  Methods of the ramp class provide for drawing or 
+dragging the ramp and for animating the wheel, while the wheel class has 
+methods for drawing the wheel and for drawing its spokes.  Movement down 
+the slope is at constant speed.
+
+
+\section{4. Observations}
+
+\formatnote{
+}Various statistics were elicited from the submitters and are summarized in 
+Tables 1 and 2.   For comparison the sieve was coded in C in under half an 
+hour.  Execution on a DECstation 5000/20 required 3.6 milliseconds to find 
+the 168 primes among the first thousand integers.  The complete program 
+required 53 operators, but only 13 of them would be required in a visual 
+version. (In the statistics, loops and conditionals are not counted as 
+operators.)  Thus the C version is comparable in number of operators to the 
+visual versions.  The heart of the routine is
+
+
+\leftindent{/* find primes in 2...k \
+
+
+    s is an array of booleans, initially TRUE
+
+*/
+
+p = 2;  lim = sqrt(k);
+
+while (p < lim) \{
+
+	for (i = p+p; i <= k; i += p)
+
+		/* delete multiple of p */
+
+		s[i] = FALSE;;
+
+  	/* assert: for j in  2 <= j <= p**2
+
+		s[j] is true iff j is prime */
+
+	while ( ! s[++p])
+
+		\{\}  /* find next prime */
+
+\}}
+
+
+Since arrays are such a vital component of the sieve approach, it is 
+interesting that C is better suited to dealing with arrays than many visual 
+languages.  The latter tend instead to deal with higher-level (and more 
+generally useful) constructs such as sets and lists.
+
+\formatnote{
+}More than one observer has noted that the various visual programs are not 
+easy to read, despite the alleged advantages of visual expression.  This is 
+a problem with visual languages;  there is not yet enough shared learning 
+about what computational icons mean.  After all, most of us went through 
+high school algebra which taught the meaning of expressions like 
+ax\superscript{2}+c and C programmers have learned to understand compound 
+operations like
+
+	while ( ! s[p++]) \{\}
+
+\formatnote{
+}The most interesting aspect of the various flow diagram solutions are the 
+conventions for iteration.  Most have some notion that a line going in one 
+side is connected from the output from the previous iteration at the 
+opposite side of the box.  In three of the systems a predicate determines 
+whether the iteration continues.  VisaVis utilizes recursion and second 
+order functions instead of iteration.  ChemTrains has only one loop, the 
+one in the central execution driver;  it is conceivable that an extension 
+to ChemTrains would have multiple rule sets through which looping would be 
+independent;  this might reduce the importance of rule order.
+
+\formatnote{
+}Most of the solutions exploited one or more built-in facilities of the 
+particular programming system.  For instance, \description{\
+
+
+
+LabVIEW and Prograph's solutions used existing graphical elements to create 
+visually attractive interfaces.
+
+LabVIEW's prime program utilizes built-in array access and display 
+operators.
+
+Prograph's prime solution utilizes built-in list handling.
+
+In all the prime programs, storage management was simpler than in the C 
+version.
+
+Prograph's check book is based on its Grid class.
+
+VisaVis' Primes utilized the FilterWithArg 2nd order function.
+
+ChemTrains could have solved the wheel problem trivially because ChemTrains 
+automatically animates motion between states.
+
+}
+\formatnote{
+}It may be that built-in facilities are a major advantage of visual 
+programming systems;  since programs these days need to have graphical 
+components, visual systems can integrate these in a program more readily 
+than can a textual-only language system.  It is interesting to speculate 
+that the advantages of visual systems may not be in the programming itself, 
+but rather in more convenient integration of programming, testing, and 
+using the result.
+
+
+\bold{Acknowledgements:}  The moderator is grateful for the aid of the 
+committee for the 1994 Visual Languages Comparison: Kris Blom,  NASA, JPL; 
+Ron Dolin, Univ. Calif., Santa Barbara; Joe Pfeiffer, New Mexico State 
+Univ.;  Catalin Roman, Washington Univ.; Ephraim Glinert, RPI.  Brigham 
+Bell's early enthusiasm was crucial.
+
+
+
+\center{\bigger{\onesmaller{\bold{References}}}}
+
+\onesmaller{
+[Bell, 1992a]  Bell, B., \italic{Using Programming Walkthroughs to Design a 
+Visual Language}, Ph.D. Dissertation, Technical Report CU-CS-581-92, 
+University of Colorado,  January 1992.
+
+
+[Bell, 1993]  Bell, B. & Lewis, C.,  "ChemTrains: A Language for Creating 
+Behaving Pictures," \italic{Proceedings of the IEEE Symposium on Visual 
+Languages,} August 1993.
+
+
+[Cox, 1989]  Cox, P.T.; Giles, F.R.; Pietrzykowski, T., "Prograph: a step 
+towards liberating programming from textual conditioning",\italic{ Proc. 
+1989 IEEE Workshop on Visual Programming}, Rome (Oct, 1989), 150-156.
+
+
+[Daley, 1992]  P. Daley, "Automated Monitoring of a Soil Vapor Remediation 
+System," \italic{Scientific Computing & Automation}, May 1992.
+
+
+[Jagadeesh, 1993]  J. Jagadeesh & Y. Wang, "LabVIEW" Product Review, 
+\italic{Computer}, February 1993.
+
+
+[Kodosky, 1991]  J. Kodosky, J. MacCrisken, & G. Rymar, "Visual Programming 
+Using Structured Data Flow," \italic{Proceedings of the IEEE Workshop on 
+Visual Languages}, October 1991.
+
+
+[Poswig, 1993]  J. Poswig, G. Vrankar & C. Moraga, "Interactive animation 
+of visual program execution," \italic{IEEE Symposium on Visual Languages}, 
+1993, 180-187.
+
+
+[Poswig, 1994]  J. Poswig, G. Vrankar & C. Moraga, "VisaVis - A higher 
+order functional visual programming language", \italic{Journal on Visual 
+Languages and Computing 5}, (1994), 83-111.}
+
+\begindata{bp,539408968}
+\enddata{bp,539408968}
+\view{bpv,539408968,71,0,0}
+\sansserif{\
+\begindata{table,539447544}
+\cols 91 51 53 53 68 46
+ 	"ChemTrains	"LabVIEW	"Prograph	"Show and Tell	"VisaVis
+	-	-	-	-	-
+'Components	"8	"2	"5	"5	"4
+'Pixels/100,000	"6.0	"2.9	"2.3	"4.9	"1.5
+'Operators	"n.a.	"14	"8	"10	"13
+	-	-	-	-	-
+Creation time, expert	"2 hrs	"1 hr	"10 min	"2 hrs	"15 min
+Creation time, tyro	 	"2-3 hrs	"15-20 min	 	"25 min
+	-	-	-	-	-
+Storage space	"4K	"124K	"20K	"12K	"19 K
+'Time (primes<1000)	 	"0.034 *	"0.23 #	 	"80 &
+\enddata{table,539447544}
+\view{spread,539447544,72,0,0}
+}\sansserif{\bold{Table 1. Data for Primes problem. } Component - a 
+connected graph or a rule.  For the primes program, ChemTrains and LabVIEWs 
+reuse a single window to show successive components, Prograph utilizes one 
+window per component, and both Show and Tell and VisaVis manage to display 
+all components simultaneously.  Operator - an icon in the graph, not 
+counting loop control.  Times for tyros are crude estimates by the 
+panelists.  Empty cells are values not reported.
+
+
+*  seconds on a Mac IIfx.  An improved algorithm takes .019 seconds.
+
+#  seconds on a Quadra 700 ( 25 MHz, 68040).
+
+&  seconds estimated for PC 486/33MH.  Observed time was 3 sec for primes 
+in 1...100.  Another solution in VisaVis using addition instead of division 
+took 9 sec for  primes up to 100.}
+
+\sansserif{\
+\begindata{table,539452280}
+\cols 96 46 11 41 11 55 13 48 10 40
+ 	^Checkbook	= 	= 	 	^Wagon Wheel	= 	= 	= 	= 
+	-	-	-		-	-	-	-	-
+ 	"LabVIEW	 	"Prograph	 	"ChemTrains	 	"LabVIEW	 	"Prograph
+	-		-		-		-		-
+'Components	"3	 	"24 *	 	"2	 	"8	 	"5 *
+'Pixels/100,000	"3.4	 	"30.3	 	 	 	"12.2	 	"19.4
+	-	-	-	-	-	-	-	-	-
+Creation time, expert	"2.5 hrs	 	"4 hrs	 	"0.5 hrs	 	"15 hrs	 	"2 hrs
+Creation time, tyro	"3-4 hrs	 	"6-8 hrs	 	 	 	"~ 40 hrs	 	"4-6 hrs
+	-	-	-	-	-	-	-	-	-
+Storage space	"111K	 	"39K	 	"3K	 	"400K	 	"36K
+\enddata{table,539452280}
+\view{spread,539452280,73,0,0}
+}\sansserif{\bold{Table 2. Data for Checkbook and Wagon wheel problems.}
+
+
+*The checkbook program has 8 classes with a total of 24 methods. The wagon 
+wheel program has 2 classes with a total of 5 methods. Each method has one 
+or more graphs. }\
+
+
+
+\begindata{bp,540799016}
+\enddata{bp,540799016}
+\view{bpv,540799016,74,0,0}
+\bold{\sansserif{
+\begindata{raster,540799064}
+2 0 49152 49152 0 0 864 580
+bits 540799064 864 580
+ZZZZZN |
+80v3fZZZZP |
+80v3fZZZZP |
+80v3ezzr0f80zu	07 |
+80v3ezzr0f80zu	07 |
+80v3ezzr0f80zu	07 |
+80k!04o3eadGd5	ad6b5ad6b5ad6b	5ad6b5ad6b5ad6	b5ad6b5ad6b5ac
+ j0ad6b5ad6b5a	d6b5ad6b5ad6b5	ad6b5ad6b5ad6b	5ad67ff56f80zu
+ 07 |
+80l08o3e01zi03	e06630zh40g0f	80zu07 |
+80k0a1048!88l	3eb5g96b5ad6b	5ad6b5ad6b5ad6	b5ad6b5ad6b5ad
+ 6b5ad6b603g60	300b5ad6b5ad6b	5ad6b5ad6b5ad6	b5ad6b5ad6b5ad
+ 6b5b4125af80v	801008v07 |
+80k02a4444844	l3e011280zg!03	e678zh45200f80	v804110v07 |
+80l8450!44l3e	a9g95ad6b5ad6	b5ad6b5ad6b5ad	6b5ad6b5ad6b5a
+ d6b5aa03066630	0ad6b5ad6b5ad6	b5ad6b5ad6b5ad	6b5ad6b5ad6b5a
+ d541a54f80v81	2208v07 |
+80k08g8084m3e	012480zg03c666	30zh49200f80v	421110v07 |
+80l08444088l3e	5901956b5ad6b5	ad6b5ad6b5ad6b	5ad6b5ad6b5ad6
+ b5ad6c03066630	0ab5ad6b5ad6b5	ad6b5ad6b5ad6b	5ad6b5ad6b5ad6
+ b65f25af80u!01	1008v07 |
+80l04100854l3e	012880zg030666	30zh40a00f80v	8102w07 |
+80v3eb50296ad	6b5ad6b5ad6b5a	d6b5ad6b5ad6b5	ad6b5ad6b5aa03
+ 0666300b56b5ad	6b5ad6b5ad6b5a	d6b5ad6b5ad6b5	ad6b5ad544256f
+ 80v022118v07 |
+80v3e017f80zg	03e3e618zh5fe0	0f80u015092w07 |
+80v3ea9g15b5ad	6b5ad6b5ad6b5a	d6b5ad6b5ad6b5	ad6b5ad6b4j0a
+ dad6b5ad6b5ad6	b5ad6b5ad6b5ad	6b5ad6b5ad6b5a	4005af80zu07 |
+80v3ezzr0f80zu	07 |
+ad#dddfQfezzr	0f80zu07 |
+80v3ezzr0f80zu	07 |
+J80r3fZZSb6-ee	ef7fZ |
+c0h1f80r3em01	zzj0f80m40zm07 |
+c0h1f80r3em01	zzj0f80m40zm07 |
+c004g1f80r3em	01zzj0f80m40zm	07 |
+c00eg1f80r3em	01zzj0f80m40zm	07 |
+c00eg1f80r3em	01zzj0f80m40zm	07 |
+c01fg1f80r3em	01zzj0f80m40zm	07 |
+c017g1f80r3em	01zzj0f80m40zm	07 |
+c033801f80r3e	m01zzj0f80m40	zm07 |
+c023801f80r3e	m01zzj0f80m40	zm07 |
+c061c01f80r3e	m01zzj0f80m40	zm07 |
+c041c01f80r3e	m01zzj0f80m40	zm07 |
+!c0e01f80r3em	01zzj0f80m40zm	07 |
+c0Ge01f80r3em	01zzj0f80m40zm	07 |
+c180701f80r3e	m01zzj0f80m40	zm07 |
+c180701f80r3e	m01zzj0f80m40	zm07 |
+c3g381f80r3em	01zzj0f80m40zm	07 |
+c7g3c1f80r3em	01zzj0f80m40zm	07 |
+cf80G1f80r3em	01zzj0f80m40zm	07 |
+c0h1f80r3em01	zzj0f80m40zm07 |
+c0h1f80r3em01	zzj0f80m40zm07 |
+c0h1f80r3eg07	f8j01zzj0f80m	40zm07 |
+J80r3eg1c0cj01	zzj0f80m40zm07 |
+c0h1f80r3eg70	04j01zzj0f80m	40zm07 |
+c0h1f80r3e01c0	02j01zzj0f80m	40zm07 |
+c0h1f80r3e01g	02j01zzj0f80m	40zm07 |
+c001e01f80r3e	01g02j01zzj0f	80m40zm07 |
+c001101f80r3e	01g02j01zzj0f	80m40zm07 |
+c002101f80r3e	01g01j01zzj0f	8008l40zm07 |
+c003201f80r3e	01g01j01zzj0f	803cl40zm07 |
+c004e01f80r3e	01g03j01zzj0f	8060l40zm07 |
+c004401f80r3e	01g02i01c1zzj	0f80c0j1fg40zm	07 |
+c008401f80r3e	01g06i0161zzj	0f!80j318040zm	07 |
+c008801f80r3e	01g0ci0121zzj	0f81k608040zm	07 |
+c010801f80r3e	01g18i0211zzj	0f83k408040zm	07 |
+c011g1f80r3e01	g30i0211zzj0f	82k608040zm07 |
+c021g1f80r3e01	g60i0211zzj0f	86j0c738040zm	07 |
+c022g1f80r3e!01	80i0211zzj0f84	g10h085eg40zm	07 |
+c03cg1f80r3e01	07g03h0231zzj	0f84g10g011840	g40zm07 |
+c038g1f80r3e01	3ch02e703e1zzj	0f84g1007c110	40g40zm07 |
+c030g1f80r3e01	60h03298201zzj	0f86h0c811040	g40zm07 |
+c020g1f80r3e01	i02308201zzj0f	8380g18811040	g40zm07 |
+c0h1f80r3e01i	02108201zzj0f	80c0g11813040	g40zm07 |
+c0h1f80r3e01g	030104108201zzj	0f8060g210120	40g40zm07 |
+J80r3e01g0e01	04108201zzj0f	80301823012077	g40zm07 |
+c0h1f80r3e!01	180104108101zzj	0f801018460140	18g40zm07 |
+c0h1f80r3e!01	100304108101zzj	0f8008105c0140	h40zm07 |
+c0h1f80r3e01g	b0020410!81zzj	0f8008205001c0	h40zm07 |
+c0h1f80r3e01g	a002041080d1zzj	0f800820404180	h40zm07 |
+c0h1f80r3e01g	a0020c308031zzj	0f80082073c0i	40zm07 |
+c0h1f80r3e01g	c00208208001zzj	0f8008200ej40	zm07 |
+c3c0g1f80r3e01	g400608218001	zzj0f800c20k40	zm07 |
+c1c0g1f80r3e01	g4004i01zzj0f	800420k40zm07 |
+c130g1f80r3e01	gc004i01zzj0f	800420k40zm07 |
+c00cg1f80r3eh	c0j01zzj0f800c	l40zm07 |
+c003g1f80r3em	01zzj0f8008l40	zm07 |
+c0gc01f80r3em	01zzj0f8018l40	zm07 |
+c0g301f80r3em	01zzj0f8010l40	zm07 |
+c0g0c1f80r3em	01zzj0f8460l40	zm07 |
+c0h1f80r3em01	zzj0f87c0l40zm	07 |
+c0h1f80r3em01	zzj0f80m40zm07 |
+c0h1f80r3em01	zzj0f80m40zm07 |
+c0h1f80r3em01	zzj0f80m40zm07 |
+c0h1f80r3em01	zzj0f80m40zm07 |
+c0h1f80r3em01	zzj0f80m40zm07 |
+c0h1f80r3fNzzj	0fNc0zm07 |
+J80r3ezzr0f80	zu07 |
+c0h1f80r3ezzr	0f80zu07 |
+c0h1f80r3ezzr	0f80zu07 |
+c0h1f80r3ezzr	0f80zu07 |
+c0h1f80r3ezzr	0f80zu07 |
+c0h1f80r3ezzr	0f80p0fSf8p07 |
+c3Gfc1f80r3ezzr	0f80p0fSf8p07 |
+c2g041f80r3ezzr	0f80p0fSf8p07 |
+c2g041f80r3ezzr	0f80p0es38p07 |
+c2g041f80r3ezzr	0f80p0es38p07 |
+c2g041f80r3ew	07Wfev0f80p0e	s38p07 |
+c2g041f80r3ew	07Wfev0f80p0e	3fQfe38p07 |
+c2g041f80r3ew	07Wfev0f80p0e	20q0238p07 |
+c2g041f80r3ew	07w0ev0f80p0e	20q0238p07 |
+c2g041f80r3ew	07w0ev0f80p0e	20q0238p07 |
+c2g041f80r3ew	07w0ev0f80p0e	20q0238p07 |
+c3Gfc1f80r3ew	071fV8ev0f80p	0e20q0238p07 |
+c0h1f80r3ew07	10v8ev0f80p0e	20q0238p07 |
+c0h1f80r3ew07	10v8ev0f80i07	Ie0h0e20q0238	h01Ifei07 |
+c0h1f80r3ew07	10v8ev0f80i07	Ie0h0e20q0238	h01Ifei07 |
+c0h1f80r3ew07	10v8ev0f80i06	i60h0e20q0238	h0180h06i07 |
+c0h1f80r3ew07	10v8ev0f80i06	i60g03fe20q02	3fe0g0180h06i
+ 07 |
+J80r3ew0710v8e	v0f80i06i60g02	1e2007Hf0m023c	20g0180h06i07 |
+c0h1f80r3ew07	10v8ev0f80i06	i60g021e2004h	10m023c20g0180
+ h06i07 |
+c0h1f80r3ew07	10v8ev0f80i06	i60g03fe2004h	10m023fe0g0180
+ h06i07 |
+c0h1f80r3ew07	10v8ev0f80i06	i60g021e2004h	10m023c20g0180
+ h06i07 |
+cfGfe1f80r3ew	0710v8ev0f80i	06i60g021e2004	h10m023c20g01
+ 80h06i07 |
+cfGfe1f80r3ew	0710v8ev0f80i	06i60g021e2c04	h10m023c200301
+ 80h06i07 |
+ccg061f80r3ew	0710v8ev0f80i	06i60g03fe3e04	h10m023fe00781
+ 80h06i07 |
+ccg061f80r3em	07Ifek0710v8e	v0f80i06i60g02	1e3f84h10m023c
+ 2007e180h06i07 |
+ccGe61f80r3em	04i02k0710v8e	v0f80i06i60g02	1e3fe4h10m023c
+ 2007f980h06i07 |
+cc80261f80r3e	m04i02k0710n1f	Kh8ev0f80i06i	7fJfch1fR80h06
+ i07 |
+cc80261f80r3e	m04i02k0710n10	j01h8ejJ80m0f	80i06i60g03fe
+ 3fe4h10m023fe0	07f980h06i07 |
+cc80261f80r3e	m04i02k0710n10	j01h8ej80i80m	0f80i06i60g02
+ 1e3f84h10m023c	2007e180h06i07 |
+cc80261f80r3e	m04i02k0710n10	j01h8ej80i80m	0f80i06i60g02
+ 1e2e04h10m023c	20038180h06i07 |
+cc80261f80r3e	m04i02k0710n10	j01h8ej80i80m	0f80i06i60g02
+ 1e2c04h10m023c	20030180h06i07 |
+ccGe61f80r3em	04i02k0710n10	j01h8ej80i80m	0f80i06i60g03
+ fe2004h10m023f	e0g0180h06i07 |
+ccg061f80r3em	04i02k0710g03	Ic0h10j01h8ej	80i80m0f80i06
+ i60g021e2004h	10m023c20g0180	h06i07 |
+ccg061f80r3em	04i02k0710g02	i40h10j01h8ej	80i80m0f80i06
+ i60g021e2004h	10m023c20g0180	h06i07 |
+cfGfe1f80r3em	04i02k0710g02	i40h10j01h8ej	80i80m0f80i06
+ i60g021e2004h	10m023c20g0180	h06i07 |
+cfGfe1f80r3em	04i02k0710g02	i40h10j01h8ej	80i80m0f80i06
+ i60g03fe2004h	10m023fe0g0180	h06i07 |
+c0h1f80r3em04	i02j020710g02	i40h10j01h8e80	i80i80m0f80i06
+ i60g03fe2007H	f0m023c20g01I	fei07 |
+c0h1f80r3em04	i02j030710g02	i40h10j01h8ec0	g01!80i80m0f80
+ i06i60h0e20g01	o023c20g01Ife	i07 |
+c0h1f80r3em04	i02j0287100602	i40g3010j01h8e	a0g03c080i80m
+ 0f80i06i60h0e	20g01o023fe0o	07 |
+J80r3em04i02j	0247100f02i40	g7810j01h8e90	g03f080i80m0f
+ 80i07Ie0h0e20	g01o0238p07 |
+c0h1f80r3em04	i02j0227100fc2	i40g7e10j01h8e	88g03fc80i80m
+ 0f80i07Ie0h0e	20g01o0238p07 |
+c0h1f80r3em04	h1802j0217100f	f2i40g7f90j01	M80i80m0f80p0e
+ 20g01o0238p07 |
+c0h1f80r3em04	g0cf803Nfei7f	Hf0j01h8e88g03	fc80i80m0f80p
+ 0e20g01o0238p	07 |
+c0h1f80r3em04	f0780802j0247	100ff2i40g7f90	02i01h8e90g03
+ f080i80m0f80p	0e20g01o0238p	07 |
+c0h1f80r3em04	90401802j0287	100fc2i40g7e10	07i01h8ea0g01
+ c080i80m0f80p	0e20g01o0238p	07 |
+c3Gfc1f80r3em	0410401002j03	07100702i40g38	100ch7801h8ec0
+ g01!80i80m0f80	p0e20g01o0238	p07 |
+c2!041f80r3em	0470c01002j02	07100602i40g30	1018h4801h8e80
+ i80i80m0f80p0e	20g01o0238p07 |
+c2!041f80r3em	04e0201002k07	10g02i40h!10g	037801h8ej80i
+ 80m0f80p0e20g	0fc0n0238p07 |
+c2!041f80r3em	0430!20aak0710	g02i40h!10200a	7001h8ej80i80
+ m0f80p0e20g3f	f0n0238p07 |
+c3fc041f80r3e	m0410!20aak07	10g02i40h!1023	ca4001h8ej80i
+ 80m0f80p0e20g	3fe0n0238p07 |
+c2g041f80r3em	0410202482k07	10g02i40h101c	028e4001h8ej80
+ i80m0f80p0e20	g3fe0n0238p07 |
+c2g041f80r3em	0410a46402k07	10g02i40h1006	258c7801h8ej80
+ i80m0f80p0e20	g1fc0n0238p07 |
+c2g041f80r3em	04!e40402k0710	g02i40h100227	0c2001h8ejJ80
+ m0f80p0e20g0f	80n0238p07 |
+c2g041f80r3em	"04g02k0710g02	i40h1002464cg	01h8ev0f80p0e
+ 20g0f80n0238p	07 |
+c2g041f80r3em	!04h02k0710g02	i40h100247c0g	01h8ev0f80p0e
+ 20g07o0238p07 |
+c3Gfc1f80r3em	04i02k0710g03	Ic0h100340h01	h8ev0f80p0e20
+ g07o0238p07 |
+c0h1f80r3em04	i02k0710i20j10	0340h01h8ev0f	80p0e20g03o02
+ 38p07 |
+c0h1f80r3em04	i02k0710i20j10	02i01h8ev0f80	p0e2007Ifeh2a
+ "aa8238p07 |
+c0h1f80r3em07	Ifek0710i20j10	16i01h8ev0f80	p0e2004i02h40
+ i4238p07 |
+c0h1f80r3eo30	m0710i20j101c	i01h8ev0f80p0e	2004i02l0238p
+ 07 |
+c0h1f80r3eo70	m0710i20j10j01	h8ev0f80p0e20	04i02h40i4238
+ p07 |
+J80r3eo70m0710	i20j10j01h8ev	0f80p0e2004i02	l0238p07 |
+c0h1f80r3eof8	m0710i20j10j01	h8ev0f80p0e20	04i02h40i4238
+ p07 |
+c0h1f80r3eof8	m0710i20j10j01	h8ev0f80p0e20	04i02l0238p07 |
+c027fe1f80r3e	n01fcm0710i20	j10j01h8ev0f80	p0e2004i02h40
+ g3f804238p07 |
+c024021f80r3e	n03fem0710i20	j10j01h8ev0f80	p0e2004i02j61
+ c00238p07 |
+c024221f80r3e	n03fem0710i20	j1fKh8ev0f80p	0e2004i02h43e0
+ cce04238p07 |
+c024421f80r3e	ofcm0710i20m60	j8ev0f80p0e20	04i22gc002709e
+ 600238p07 |
+c024821f80r3e	o10m0710i20me0	j8ev0f80p0e20	04i2201e04338
+ 9e604238p07 |
+c025021f80r3e	o10m0710i20me0	j8ev0f80p0e20	04i2201f8039c
+ 9a600238p07 |
+c026021f80r3e	o10m0710i20l01	f0j8ev0f80p0e	2004i2201fe41
+ cc9a604238p07 |
+c027fe1f80r3e	o10m0710i20l01	f0j8ev0f80p0e	2004i23Hc19c9a
+ 600238p07 |
+c028g1f80r3eo	10m0710i20l03	f8j8ev0f80p0e	2004h01e201fe
+ 41bc9a604238p	07 |
+c030g1f80r3eo	10m0710i20l07	fcj8ev0f80p0e	20041670f12201
+ f802789e600238	p07 |
+c020g1f80r3eo	10m0710i20l07	fcj8ev0f80p0e	20041f50d922g
+ e043f0cce04238	p07 |
+c7e0g1f80r3eo	10m0710i20l01	f8j8ev0f80p0e	200419d18a22g
+ c003e0e1e00238	p07 |
+c8b8g1f80r3eo	10m0710i20m20	j8ev0f80p0e20	0411910a22h40
+ g7fc04238p07 |
+c924g1f80r3eo	10m0710i20m20	j8ev0f80p0e20	0411910a22j3f
+ 800238p07 |
+ca24g1f80r3eo	10m0710h01f8m	20j8ev0f80p0e	2004!111be2h40
+ i4238p07 |
+c424g1f80r3eo	10m0710h07fem	20j8ev0f80p0e	2004!11f022l02
+ 38p07 |
+c038g1f80r3eo	10m0710h07fcm	20j8ev0f80p0e	20041118g02h40
+ i4238p07 |
+c0h1f80r3eo10	m0710h07fcm20	j8ev0f80p0e20	0401h02l0238p
+ 07 |
+c0h1f80r3eo10	m0710h03f8m20	j8ev0f80p0e20	04i02h40i4238
+ p07 |
+J80r3em07Ifek	0710h01f0m20j	8ev0f80p0e2004	i02l0238p07 |
+c0h1f80r3em04	i02k0710h01f0	m20j8ev0f80p0e	2004i02h40i42
+ 38p07 |
+c0h1f80r3em04	i02k0710ie0m20	j8ev0f80p0e20	07Ifeh2a"aa82
+ 38p07 |
+c0h1f80r3em04	i02k0710ie0m20	j8ev0f80p0e20	i18m0238p07 |
+c0h1f80r3em04	i02k0710i60m20	j8ev0f80p0e20	i38m0238p07 |
+c7Gc01f80r3em	04i02k0710g05	5575!55k20j8e	v0f80p0e20i38
+ m0238p07 |
+c4g401f80r3em	04i02k0710q20	j8ev0f80p0e20	i7cm0238p07 |
+c4g401f80r3em	04i02k0710g04	i01k20j8ej7fM	e0i0f80p0e20i
+ 7cm0238p07 |
+c4g481f80r3em	04g1f8002k0710	q20j8ej40m20i	0f80p0e20ifem
+ 0238p07 |
+c401fc1f80r3e	m04g10g02k0710	g04i01i03Ic0h	8ej400fKg20i0f
+ 80p0e20h01Gm02	38p07 |
+c4g4e1f80r3em	04g10g02k0710	o02i40h8ej4008	j01g20i0f80p0e
+ 20h01Gm0238p07 |
+c41fG1f80r3em	04g1fg02k0710	g04i01i02i40h	8ff8i400bfbGg
+ 3ffdg20i0f80p	0e20i7em0238p	07 |
+c4g4e1f80r3em	04h8002k0710o	02i40h8ff8i40	0a08i01g20i0f
+ 80p0e20i08m02	38p07 |
+c4Gfc1f80r3em	04h8002k0710g	04i01i02i40h8f	08i400a0bGg3f
+ fdg20i0f80p0e	20i08m0238p07 |
+c4g481f80r3em	04h8002k0710o	02i40h8f08i40	0a08i01g20i0f
+ 80p0e20i08m02	38p07 |
+c4g401f80r3em	04g108002k0710	g04i01h0602i40	h8f08i400a0bG
+ g3ffdg20i0f80	p0e20i08m0238	p07 |
+c4g401f80r3em	04g0fg02k0710	n0f02i40h8ff8	i400a08i01g20
+ i0f80p0e20i08	m0238p07 |
+c7Gc01f80r3em	04i02k0710g04	i01h0fc2i40h8f	08hc0400bfbGg
+ 3ffdg20i0f80p	0e20i08m0238p	07 |
+c0h1f80r3em04	i02k0710n0ff2	i40h8f08g01e0	4008j01g20i0f
+ 80p0e3fQfe38p	07 |
+c0h1f80r3em04	i02k0710g04h3c	01Ifei40h8f08	g01f8400fKg20
+ i0f80p0ej08n38	p07 |
+c0h1f80r3em04	i02k0710j22i0f	f2i40h8ff8g01	fe4008j01g20i
+ 0f80p0ej08n38	p07 |
+c0h1f80r3em04	i02k0710g0420	g6201h0fc2i7f	Mc008j01g20i0f
+ 80p0ej08n38p07 |
+J80r3em04i02k	0710h203c42i07	02i40h8f08g01	fe4008j01g20i
+ 0f80p0fSf8p07 |
+80v3em04i02k07	10g042c624601	h0602i40h8f08	g01f84008j01g
+ 20i0f80p0fSf8	p07 |
+80v3em04i02k07	10h784244j02i	40h8ff8he04008	j01g20i0f80p0f
+ Sf8p07 |
+83Ifch0fe0n3e	m04i02k0710g04	e0427801i02i40	h8f08hc04008j
+ 01g20i0f80u08	y07 |
+82i04h!10n3em	07Ifek0710h20	4260j02i40h8f	08i4008j01g20
+ i0f80u08y07 |
+82i04g0fHc0m3e	w0710g04204640	01i02i40h8f08	i4008j01g20i0f
+ 80u08y07 |
+82i04g18h60m3e	w0710h204440j	02i40h8ff8i40	08j01g20i0f80
+ u08y07 |
+82i04g0fHc0m3e	w0710g04207cc0	01i02i40h8f08	i4008j01g20i0f
+ 80u08y07 |
+82i04g04h80m3e	w0710h201880j	02i40h8ff8i40	08j01g20i0f80
+ u08y07 |
+82i04g04h80m3e	w0710g0436g80	01i02i40h8ej40	08j01g20i0f80
+ u08y07 |
+82i04g04!4480	m3ew0710h1cg80	j02i40h8ej4008	j01g20i0f80u08
+ y07 |
+82i04g04!8880	m3ew0710g04g01	8001i03Ic0h8e	j4008j01g20i0f
+ 80u08y07 |
+82i04g04!8880	m3ew0710v8ej40	08j01g20i0f80	u08y07 |
+820fc0g04g04!88	80m3ew0710g04	i01p8ej4008j01	g20i0f80u08y07 |
+823840g04g04!88	80m3ew0710v8e	j4008j01g20i0f	80u08y07 |
+822040g04g04!88	80m3ew0710g05	#55p8ej4008j01	g20i0f80u08y07 |
+822060g04g04!88	80m3ew0710v8e	j400fKg20i0f80	u08y07 |
+822060g04g04!88	80m3ew0710v8e	j40m20i0f80u08	y07 |
+822040g34g04!88	80m3ew0710v8e	j40m20i0f80u08	y07 |
+8220c0g7cg04!88	80m3ew0710v8e	j7fMe0i0f80u08	y07 |
+822180g4cg04!88	80m3ew0710v8e	v0f80u08y07 |
+822606g5cg04!88	80m3ew0710v8e	v0f80s07If0w07 |
+823cg7e74g04!88	80m3ew0710v8e	v0f80s07If0w07 |
+8220g5a44g04!88	80m3ew0710v8e	v0f80s06i30w07 |
+8220e24a44g04	!8880m3ew0710	v8ev0f80s06i30	w07 |
+8222864a24g04	!8880m3ew0710	v8ev0f80s06i30	w07 |
+8223844a3cg04	!8880m3ew0710	v8ev0f80s06i30	w07 |
+822304da1cg04	!8880m3ew0710	v8ev0f80s06i30	w07 |
+8221049204g04	!8880m3ew0710	v8ev0f80s06i30	w07 |
+822304g04g04!88	80m3ew0710v8e	v0f80s06i30w07 |
+82i04g04!8880	m3ew0710v8ev0f	80s06i30w07 |
+82i04g04!4480	m3ew071fV8ev0f	80s06i30w07 |
+82i04g04h80m3e	w07w0ev0f80s06	i30w07 |
+82i04g04h80m3e	w07w0ev0f80s06	i30w07 |
+83Ifcg07H80m3e	w07w0ev0f80s06	i30w07 |
+80v3ew07Wfev0f	80s06i30w07 |
+80v3ew07Wfev0f	80s06i30w07 |
+80v3ew07Wfev0f	80s06i30w07 |
+80v3ezzr0f80s	06i30w07 |
+adVdezzr0f80s	06i30w07 |
+Wfezzr0f80s06	i30w07 |
+Wfezzr0f80s06	i30w07 |
+Wfezzr0f80s06	i30w07 |
+Wfezzr0f80s06	i30w07 |
+Wfezzr0f80s06	i30w07 |
+Wfezzr0f80s06	i30w07 |
+Wfezzr0f80s07	If0w07 |
+Wfezzr0f80s07	If0w07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+Wfezzr0f80zu07 |
+ZZZQ80zu07 |
+ZZZQadZUfb |
+ZZZZZN |
+ZZZZZN |
+fezx07ZZZN |
+fezx0380zo07G	db6db6db6db6db	6db6db6db6db6d	b6db6db6db6db6
+ db6db6db6db6db	6db6db6db6db6d	bf |
+fezx0780zo0380	zu1f |
+fezx0780zo0780	zu1f |
+fezx07zp0780zu	1f |
+few01g2010w07	80zo07zv1f |
+few01g8220w03	80s801008s0380	u01402210v1f |
+few01024410w07	80s804110s0780	u01y1f |
+fex842220w0780	s812208s0780u	02016230v1f |
+few!022010w07	80s421110s0780	u010204w1f |
+few010204x07s	!011008s0780v	444220v1f |
+fex044230w0780	s8022t07v0302	2010v1f |
+few02a124x0380	s031110s0380w	2420v1f |
+fezx0780r0150	4108s0780u0204	4210v1f |
+fezx0780zo0780	u014284w1f |
+fezx0780zo0780	zu1f |
+fezx07zp07zv1f |
+feb7/77ZGfb80	zo0780zu1f |
+fem01zp07ZPf7	80zu1f |
+fem01zp0780m40	zg07ZVef |
+fem01zp0780m40	zg07n40zm1f |
+fem01zp03n40zg	0780m40zm1f |
+fem01zp0780m40	zg0380m40zm0f |
+fem01zp0780m40	zg0780m40zm1f |
+fem01zp0780m40	zg0780m40zm1f |
+fem01zp0380m40	zg0780m40zm1f |
+fem01zp0780m40	zg07n40zm1f |
+fem01zp0780m40	zg0380m40zm0f |
+fem01zp07n40zg	0780m40zm1f |
+fem01zp0780m40	zg0780m40zm1f |
+fem01zp0380m40	zg0780m40zm1f |
+fem01zp0780m40	zg07n40zm1f |
+fem01zp0780m40	zg0380m40zm1f |
+fem01zp0780m40	zg0780m40zm0f |
+fem01zp07n40zg	0780m40zm1f |
+fem01zp0780m40	zg0780m40zm1f |
+fem01zp0380m40	zg0780m40zm1f |
+fem01zp0780m40	zg07n40zm1f |
+fem01zp0780m40	zg0780m40zm1f |
+fem01zp0780m40	zg0380m40zm1f |
+fem01zp07n40zg	0780m40zm1f |
+fem01zp0780m40	zg0780m40zm1f |
+fem01zp0780m40	zg0780m40zm0f |
+fem01zp0780m40	zg07n40zm1f |
+fem01zp07n40zg	0780l!40zm1f |
+fem01zp0780m40	zg0780l!40zm1f |
+fem01zp0780m40	zg0780l!40zm1f |
+fem01zp07k0fh	40zg07m!40zm1f |
+fem01zp0780j31	80g40zg0780l!40	j7fIe0x1f |
+fem01zp0780j20	40g40zg0780l!40	j7fIe0x1f |
+fem01zp07k!40	g40zg07m!40j60	i60x1f |
+fek30g01zp0780	i01c040g40zg07	80l!40j60i60x	1f |
+fekd0g01zp0780	20h01!40g40zg	0780l!40j60i60	x1f |
+fei0c1f90g01zp	07g20g3fg8040	g40zg07m!40j60	i60x1f |
+fe07800378g10	g01zp078020g61	!8040g40zg0780	k07!40j60i60x
+ 1f |
+fe0cc003c0g10	g01zp078021gc0	608040g40l07I	80p0780k0de040
+ j60i60x1f |
+fe084006h10g01	zp07g27g802080	c0g40l04i80p07	l08!40j60i60x
+ 1f |
+feg4004h20g01	zp07803cg8020	8180g40l04i80	p078010e0f003
+ f808!40j60i60	x1f |
+feg4004h20g01	zp0780e001g20	81h40l04i80p07	80133090030c18
+ !40j60i60x1f |
+feg6004h20g01	zp0703a001g20	86h40l04i80p07	g161190060410
+ !40j60i60x1f |
+fegc00eh40g01	zp07802001g20	bch40l04i80p07	801c1308!0420
+ !40j60i60x1f |
+fe03800ah40g01	zp07802001g20	e0h40l04i80p07	801812!080420
+ !40j60i60x1f |
+fe0fg01h40g01	zp07g2001g41i	40l04i80p07g18	16!080420!40j
+ 60i60x1f |
+fe0d8001h40g01	zp07802001g41	i40l04i80p0780	181408100420!40
+ j60i60x1f |
+fegc00180g80g	19zp07802001g	c1i40l04i80p07	80181c08100420
+ !40j60i60x1f |
+feg40g80g8011	09zp07g200180	81i40l04i80p07	g101808100420
+ !40j60i60x1f |
+feg40g80g8011	89zp078020g80	81i40l04i80p07	80101808100c3f
+ c040j60i60x1f |
+feg40g80018011	81zp078020gc3	01i40l04i80p07	80101808!18g!40
+ j60i60x1f |
+feg40g8001g10	01i7fVp07g20g	3a02i40l04i80	p07g1018080e70
+ g!40j60i60x1f |
+feg20g800104g	01i7fVp078020	g0c02i40l04i80	p078010180803
+ c0h40j60i60x1f |
+feg20g800104g	01i7fVp078020	h02i40l04i80p	0780101808j40
+ j60i60x1f |
+feg6008820204	g01i70u07p07g	2060g06i40l04	i80p07g!100cj
+ 40j60i60x1f |
+fe19800f82g04	g01i70u07p0780	30c0g04i40l04	i80p0780g10k40
+ j7fIe0x1f |
+fe0702g06i01i	70u07p07801fh	04i40l04i80p07	80m40j7fIe0x1f |
+feg02g04i01i71	Uc7p07j04i40l	04i80p07n40l80	z1f |
+feg02k01i71u47	p0780i04i40l04	i80p0780m40l80	z1f |
+feg04k01i71u47	p0780i0ci40l07	I80p0780m40l80	z1f |
+fem01i71u47p07	n40n10r07n40l	80z1f |
+fem01i71u47p07	80m40n10r0780	m40l80z1f |
+fem01i71u47p07	80m40n10r0780	m40l80z1f |
+fem01i71u47p07	n40n10r07n40l	80z1f |
+fem01i71u47p07	80m40n10r0780	m40l80z1f |
+Oi71u47p0780m	40n10r0780m40	l80z1f |
+feq71u47p077f	Mc0n10r07n40l	80z1f |
+feq71u47p0780	v10r07Nc0l80z	1f |
+feq71u47p0780	v10r0780t80z1f |
+feq71u47p07v03	G80q07u80z1f |
+feq71u47p0780	u0111r0780t80	z1f |
+feq71n03Jh47p	0780v92r0780t	80z1f |
+feq71n02i01h47	p07w54r07u80z	1f |
+feq71n02i01h47	p0780v38r0780	t80z1f |
+feq71n02i01h47	p0780v10r0780	o01Uf8o1f |
+feq71n02i01h47	p07w10r07p01U	f8o1f |
+feq71n02i01h47	p0780q0fOf8m07	80o01Uf8o1f |
+fei01Ji71n02i	01h47h01Ifci07	80q0fOf8m0780	o01c0i80p38o1f |
+fei01Ji71n02i	01h47h01i04i07	r0fOf8m07p01c0	i80p38o1f |
+fei0180h03i71	h07Hf8h02i01h	47h01i04i0780	q0ej10j38m0780
+ o01c0i80p38o1f |
+fei0180h03i71	h04h08h02i01h	47h01i04i0780	q0ej10j38m0780
+ o01c7Sfe38o1f |
+fei0180h03i71	h04h08h02h0f81	h47h01i04i07r	0ej10j38m07p01
+ c4h07e0o0238o	1f |
+fei0180h03h20	71h04h08h02h19	81h4740g01i04	i0780q0e3fMfe
+ 38m0780o01c4h	1ff8o0238o1f |
+fei0180h03h30	71g0c04h08g06	02h1181h476003	01i04i0780q0e
+ 20i10i0238m07	80o01c4h1ff0o	0238o1f |
+fei0180h03h28	71g1e04h08g0f	02h1981h475007	81i04i07r0e20
+ ifci0238m07p01	c4h1ff0o0238o	1f |
+fei0180h03h24	71g1f84h08g0f	c2h1981h474807	e1i04i0780q0e
+ 20h03Gi0238m07	80o01c4h0fe0o	0238o1f |
+fei0180h03h22	71g1fe4h08g0f	f207fe0981h47	4407f9i04i0780
+ q0e20h03fei02	38m0780o01c4h	07c0o0238o1f |
+fei0180h03Lfc	h0fHfe04020981	Li04i07r0e20h	03fei0238m07p
+ 01c4h07c0o0238	o1f |
+fei0180h03h22	71g1fe4h08g0f	f207fe0981h47	4407f9i04i0780
+ q0e20h01fci02	38m0780o01c4h	0380o0238o1f |
+fei0180h03h24	71g1f84h08g0f	c207fe0981h47	4807e1i04i0780
+ q0e20if8i0238	m0780o01c4h03	80o0238o1f |
+fei0180h03h28	71g0e04h08g07	02h0981h475003	81i04i07r0e20
+ if8i0238m07p01	c4h0180o0238o	1f |
+fei0180h03h30	71g0c04h08g06	02h0981h476003	01i04i0780q0e
+ 20i70i0238m07	80o01c4g3fIe0	m0238o1f |
+fei0180h03h20	71h04h08h02h09	81h4740g01i04	i0780j7fHf8i0e
+ 20i70i0238m07	80o01c4g20i20	m0238o1f |
+fei0180h03i71	h04h08h02h0f81	h47h01i04i07k	7fHf8i0e20i30
+ i0238m07j0fIe0	g01c4g20i20m02	38h7fIf0h1f |
+fei0180h03i71	h04h08h02h0f81	h47h01i04i0780	j60h18i0e20g07
+ Ie0g0238m0780	i0fIe0g01c4g20	i20m0238h7fIf0	h1f |
+fei0180h03i71	h04h08h02i01h	47h01i04i0780	j60h18h03fe20
+ g04i20g0238m07	80i0ci60g01c4	g20i20h07He0g	0238h60i30h1f |
+fei0180h03i71	h04h08h02i01h	47h01i04i07k60	h18h021e20g04
+ i20g0238m07j0c	i60g01c4g20i20	h04h20g0238h60	i30h1f |
+fei0180h03i71	h04h08h02i01h	47h01i04i0780	j60h18h021e20
+ g04i20g0238m07	80i0ci60g01c4	g20i20h04h20g	0238h60i30h1f |
+fei0180h03i71	h07Hf8h02i01h	47h01i04i0780	j60h18h021e20
+ g04i20g0238m07	80i0ci60g01c4	g20i20h04h20g	0238h60i30h1f |
+fei01Ji71j80i	02i01h47h01i04	i07k60h18h03fe	20g04i20g0238
+ m07j0ci60g01c4	g20i20h04h20g	0238h60i30h1f |
+fei01Ji71j80i	02i01h47h01i04	i0780j60h18h02	1e200c04i20g02
+ 38m0780i0ci60	g81c4g20i20h04	h20g023ah60i30	h1f |
+feq71j80i02i01	h47h01Ifci0780	j60h18h021e20	1e04i20g0238m
+ 0780i0ci60gc1	c46020i20g0c04	h20g023bgc060	i30h1f |
+feq71j80i02i01	h47p07k60h18h	021e201f84i20	g0238m07j0ci60
+ ga1c4f020i20g	1e04h20g023a81	e060i30h1f |
+feq71j80i02i01	h47p0780j60h18	h03fe201fe4i20	g0238m0780i0c
+ i60g91c4fc200f	Gg20g1f84h20g	023a41f860i30	h1f |
+feq71j80i02i01	h47p0780j60h1f	Lfci20g0238m07	80i0ci60g89c4
+ G201003g20g1f	e4h20g023a21fe	60i30h1f |
+feq71j80i03Jh	47p07k60h18h02	1e201fe4i20g02	38m07j0ci7fJe0
+ 0fGg3fHfch3fK	e0i30h1f |
+feq71j80p47p07	80j60h18h021e	201f84i20g0238	m0780i0ci60g89
+ c4G200fGg20g1f	e4h20g023a21fe	60i30h1f |
+feq71j80p47p07	80j60h18h03fe	200e04i20g0238	m0780i0ci60g91
+ c4fc20i20g1f84	h20g023a41f860	i30h1f |
+feq71j80p47p07	k60h18h021e20	0c04i20g0238m	07j0ci60ga1c4
+ 7020i20g0e04h	20g023a80e060	i30h1f |
+feq71j80p47p07	80j60h18h021e	20g04i20g0238	m0780i0ci60gc1
+ c46020i20g0c04	h20g023bgc060	i30h1f |
+feq71i07e0p47	p0780j60h18h02	1e20g04i20g02	38m0780i0ci60
+ g81c4g20i20h04	h20g023ah60i30	h1f |
+feq71i1ff8p47	p07k60h18h03fe	20g04i20g0238	m07j0ci60g01c4
+ g20i20h04h20g	0238h60i30h1f |
+feq71i1ff0p47	p0780j60h18h02	1e20g04i20g02	38m0780i0ci60
+ g01c4g20i20h04	h20g0238h60i30	h1f |
+feq71i1ff0p47	p0780j60h18h02	1e20g04i20g02	38m0780i0ci60
+ g01c4g20i20h07	He0g0238h60i30	h1f |
+feq71i0fe0p47	p07k60h18h03fe	20g04i20g0238	m07j0ci60g01c4
+ g20i20j80h0238	h60i30h1f |
+feq71i07c0p47	p0780j60h18i0e	20g04i20g0238	m0780i0ci60g01
+ c4g20i20j80h02	38h60i30h1f |
+feq71i07c0p47	p0780j60h18i0e	20g04i20g0238	m0780i0ci60g01
+ c4g20i20j80h02	38h60i30h1f |
+feq71i0380p47	p07k60h18i0e20	g07Ie0g0238m07	j0fIe0g01c4g20
+ i20j80h0238h60	i30h1f |
+feq71i0380p47	p0780j7fHf8i0e	20i10i0238m07	80i0fIe0g01c4
+ g20i20j80h0238	h7fIf0h1f |
+feq71i0180jJc0	g47p0780j7fHf8	i0e20i10i0238	m0780o01c4g3f
+ Ie0j80h0238h7f	If0h1f |
+feq71g02#aa80	h80i40g47p07r	0e20i10i0238m	07p01c4p80h02
+ 38o1f |
+feq71g04m80i40	g47p0780q0e20	i10i0238m0780	o01c4p80h0238
+ o1f |
+feq71l80h80i40	g47p0780q0e20	i10i0238m0780	o01c4p80h0238
+ o1f |
+feq71g04m80i40	g47p07r0e20i10	i0238m07p01c4	p80h0238o1f |
+feq71l80h80i40	g47p0780q0e20	i10i0238m0780	o01c4p80h0238
+ o1f |
+feq71g04m80i40	g47p0780q0e20	i10i0238m0780	o01c4p80h0238
+ o1f |
+feq71jfeg80h80	i40g47p07r0e20	i10i0238m07p01	c4p80h0238o1f |
+feq71g04g0187	j80ge0g40g47p	0780q0e20i10i	0238m0780o01c4
+ p80h0238o1f |
+feq71h0f8333!80	h800110g40g47	p0780q0e20i10	i0238m0780o01
+ c4o07e0h0238o	1f |
+feq71g0409c279	80i800210g40g	47p07r0e20i10	i0238m07p01c4
+ o1ff8h0238o1f |
+feq71h0ce279!80	h80g10g40g47p	0780q0e20i10i	0238m0780o01c4
+ o1ff0h0238o1f |
+feq71g040e7269	80i80g20g40g47	p0780q0e20i10	i0238m0780o01
+ c4o1ff0h0238o	1f |
+feq71h073269!80	h80g40g40g47p	07r0e20i10i02	38m07p01c4o0f
+ e0h0238o1f |
+feq71g04067269	80i80g80g40g47	p0780q0e20i10	i0238m0780o01
+ c4o07c0h0238o	1f |
+feq71h06f269!80	h8001h40g47p07	80q0e3fMfe38m	0780o01c4o07c0
+ h0238o1f |
+feq71g0409e279	80i8003f0g40g	47p07r0ej10j38	m07p01c4o0380
+ h0238o1f |
+feq71h0fc333!80	h80i40g47p0780	q0ej10j38m0780	o01c4o0380h02
+ 38o1f |
+feq71g040f8387	80i80i40g47p07	80q0ej10j38m07	80o01c4g1fIf0
+ i0180h0238o1f |
+feq71i01Gg80h	80i40g47p07r0f	Of8m07p01c4g10	i10h#aa800238
+ o1f |
+feq71g04hfej80	i40g47p0780q0f	Of8m0780o01c4	g10i10l400238
+ o1f |
+feq71l80h80i40	g47p0780q0fOf8	m0780o01c4g10	i10h80j0238o1f |
+feq71g04m80i40	g47p07w10r07p	01c4g10i10l40	0238o1f |
+feq71l80h80i40	g47p0780u03G80	q0780o01c4g10	i10h80j0238o1f |
+feq71g04m80i40	g47p0780u0111	r0780o01c4g10	i10l400238o1f |
+feq71l80h80i40	g47p07w92r07p	01c4g10i10h80	j0238o1f |
+feq71g04m80i40	g47p0780v54r07	80o01c4g10g30	g10jf8g400238
+ o1f |
+feq71g02#aa80	h80i40g47p0780	v38r0780o01c4	g10g48g10h8001
+ 98h0238o1f |
+feq71o80g80g40	g47p07w10r07p	01c4g10g84g10	0180g0338g4002
+ 38o1f |
+feq71oJc0g47p	0780v10r0780o	01c4g10g84g10	03c0800678h02
+ 38o1f |
+feq71q80i47p07	80vfcr0780o01	c4g10g84g1003	f0g0cf0g400238
+ o1f |
+feq71q80i47p07	v03Gr07p01c4g	10g84g1003fc80	09e0h0238o1f |
+feq71q80i47p07	80u03fer0780o	01c4g10g84g3f	H800ce0g400238
+ o1f |
+feq71q80i47p07	80u03fer0780o	01c4g10g48g10	03fc800e70h02
+ 38o1f |
+feq71p07e0i47	p07v01fcr07p01	c4g10g30g1003	f0g0738g400238
+ o1f |
+feq71p1ff8i47	p0780vf8r0780	o01c4g10i1001	c0800398h0238
+ o1f |
+feq71p1ff0i47	p0780vf8r0780	o01c4g10i1001	80g0ffcg400238
+ o1f |
+feq71p1ff0i47	p07w70r07p01c4	g10i10h80080c	h0238o1f |
+feq71p0fe0i47	p0780v70r0780	o01c4g10i10i0f	fcg400238o1f |
+feq71p07c0i47	p0780v30r0780	o01c4g10i10h80	0ffch0238o1f |
+feq71p07c0i47	p07v1fHf8p07p	01c4g10i10l40	0238o1f |
+feq71p0380i47	p0780u10h08p07	80o01c4g10i10	h80j0238o1f |
+feq71p0380i47	p0780u10h08p07	80o01c4g10i10	l400238o1f |
+feq71p0180i47	p07v10h08h05"55	40i07p01c4g10	i10h80j0238o1f |
+feq71oJc0g47p	0780m01If0i10	h08l20i0780o01	c4g10i10l4002
+ 38o1f |
+feq71o80i40g47	p0780m01If0i10	h08h04m0780o01	c4g10i10h80j02
+ 38o1f |
+feq71o80i40g47	p07n0180h30i10	h08l20i07p01c4	g10i10h#554002
+ 38o1f |
+feq71o80i40g47	p0780m0180h30	i10h08h04m0780	o01c4g10i10m02
+ 38o1f |
+feq71o80i40g47	p0780m0180h30	i10h08l20i0780	o01c4g1fIf0m02
+ 38o1f |
+feq71o80i40g47	p07n0180h30i10	h08h04g07f0j07	p01c4s0238o1f |
+feq71o80i40g47	p0780m0180h30	10h10h08g0ch0c	3820i0780o01c4
+ s0238o1f |
+fei07Jf0h71o80	i40g47i3fHfei	0780m0180h3070	h10h08g1e047c
+ 199cj0780o01c4	s0238o1f |
+fei04j10h71h07	Hfei80i40g47i	20h02i07n0180	h30f8h10h08g1f
+ 804e13cc20i07	p01c4s0238o1f |
+fei04j10h71h04	h02i80i40g47i	20h02i0780m01	80h33f8h10h08
+ g1fe46713ccj07	80o01c4s0238o	1f |
+fei04j10h71h04	h02i80i40g47i	20h02i0780m01	80h3ff8h10h0f
+ Hfc73934c20i07	80o01c4s0238o	1f |
+fei04j10h71h04	h02i8003e0g40	g47i20h02i07n	0180h3fIf0h08
+ g1fe439934cj07	p01c7Sfe38o1f |
+fei04j10h71h04	h02i800260g40	g47i20h02i0780	m0180h3ff8h10
+ h08g1f8033934c	20i0780o01c0t	38o1f |
+fei04j10g2071	h04h02i800260	g40g4740g6020	h02i0780m0180
+ h33f8h10h08g0e	0437934cj0780	o01c0t38o1f |
+fei04j10g3071	g0c04h02g01!80	0260g40g4760g	f020h02i07n01
+ 80h30f0h10h08	g0cg4f13cc20i	07p01c0t38o1f |
+fei04g07e0g10	g2871g1e04h02	g03c0803e7eg40	g4750gfc20h02
+ i0780m0180h30	70h10h08h047e	199cj0780o01U	f8o1f |
+fei04h40g10g24	71g1f84h02g03	f0802006g40g47	48gG20h02i0780
+ m0180h30i10h08	i7c1c3c20i0780	o01Uf8o1f |
+fei04h80g10g22	71g1fe4h02g03	fc803e7eg7fKe0	h02i07n0180h30
+ i10h08h04g0ff8	j07p01Uf8o1f |
+fei04g0180g3f	Kfch03I803e7e	g40g4742gG20h	02i0780m0180h
+ 30i10h08j07f0	20i0780zu1f |
+fei04h40g10g22	71g1fe4h02g03	fc800260g40g47	44gfc20h02i07
+ 80m0180h30i10	h08h04m0780zu	1f |
+fei04h20g10g24	71g1f84h02g03	f0800260g40g47	48g7020h02i07
+ n0180h30i10h08	l20i07zv1f |
+fei04h20g10g28	71g0e04h02g01	c08003e0g40g47	50g6020h02i07
+ 80m0180h30i10	h08h04m0780zu	1f |
+fei04g0440g10	g3071g0c04h02	g01!8003e0g40	g4760h20h02i07
+ 80m0180h30i10	h08l20i0780zu	1f |
+fei04g0380g10	g2071h04h02i80	i40g4740h20h02	i07n0180h30i10
+ h08h04m07zv1f |
+fei04j10h71h04	h02i80i40g47i	20h02i0780m01	If0i10h08h02"aa
+ a0i0780zu1f |
+fei04j10h71h04	h02i80i40g47i	20h02i0780m01	If0i1fHf8p0780
+ zu1f |
+fei04j10h71h04	h02i80i40g47i	20h02i07zp07zv	1f |
+fei04j10h71h04	h02i80i40g47i	20h02i0780zo07	80zu1f |
+fei04j10h71h04	h02i80i40g47i	20h02i0780zo07	80zu1f |
+fei04j10h71h04	h02i80i40g47i	3fHfei07zp07zv	1f |
+fei07Jf0h71h07	Hfei80i40g47p	0780zo0780zu1f |
+feq71j40j80i40	g47p0780zo0780	zu1f |
+feq71j40j80i40	g47p07zp07zv1f |
+feq71j40j80i40	g47p0780zo0780	zu1f |
+feq71j40jJc0g	47p0780zo0780	zu1f |
+feq71j40p47p07	zp07zv1f |
+feq71j40p47p07	80zo0780zu1f |
+feq71j40p47p07	80zo0780zu1f |
+feq71j40p47p07	zp07zv1f |
+feq71j40p47p07	80zo0780zu1f |
+feq71j40p47p07	80zo0780zu1f |
+feq71j40p47p07	zp07zv1f |
+feq71j40p47p07	80zo0780zu1f |
+feq71j40p47p07	80zo0780zu1f |
+feq71j40p47p07	zp07zv1f |
+feq71j40p47p07	80zo0780zu1f |
+feq71j40p47p07	80zo0780zu1f |
+feq71j40p47p07	zp07zv1f |
+feq71j40p47p07	80zo0780zu1f |
+feq71j40p47p07	80zo0780zu1f |
+feq71j40p47p07	zp07zv1f |
+feq71Uc7p0780	zo0780zu1f |
+feq70j40p07p07	80zo0780zu1f |
+feq70j40p07p07	zp07zv1f |
+feq70j40p07p07	80zo0780zu1f |
+feq7fVp0780zo	0780zu1f |
+feq7fVp07zp07	zv1f |
+feq7fVp0780zo	0780zu1f |
+feuHe0z07ZPfb	80zu1f |
+feu88c8a0z07ZZZM	ef |
+feu88c8a0z07ZZZN |
+feu88c8a0z07ZZZN |
+feu88c8a0z07b6	db6db6db6db6db	6db6db6db6db6d	b6db6db6db6db6
+ db6edb6db6db6d	b6df6db6db6db6	db6db6db6db6db	6db6db6db6db6d
+ b6db6db6db6db6	db6db6db6db6db	6db6dbG |
+feuHe0z07c0zh	1ezzh01G |
+fev40zg03c0zh	1ezzh01G |
+fev40zg07c0zh	1ezzh01G |
+feu03f0zg07c0	zh1czzh01G |
+feu0ffczg0780	o04g21p1ex10g	10h0410w01G |
+feu0ff8zg07c0	zh1ezi0820w01	G |
+feu0ff8zg07c0	m01028844610a	14n1ex2a0a21!0a	1090w01G |
+feu07f0zg07c0	m020804802210	21n1cx10201410	200840w01G |
+feu03e0zg07c0	m!048848410211	n1ex2205242212	1020w01G |
+feu03e0zg0780	m010844042021	02n1ex!111012	2108x01G |
+feu01c0zg07c0	m014440880212	21n1cx011014g	110840w01G |
+feu01c0zg07c0	n400844412110	n1ex22022021g	1020w01G |
+fevc0zg07c0m02	858428220a12n	1ex1415121416	g20w01G |
+fet3fIc0y0780	zh1czzh01G |
+fet3fIc0y07c0	zh1ezzh01G |
+fet30ic0y07c0	zh1ezzh01G |
+fet30ic0y0780	zh1czzh01G |
+fet30ic0y07ZI	efZZHfeG |
+fet30ic0y07c0	z08g1fZOf8r01	G |
+fet30ic0y0780	z08g1fjc0i30i	0ci03jc0i30i08	r01G |
+fet30ic0y07c0	z08g0fjc0i30i	0ci03jc0i30i08	sG |
+fet30ic0y07c0	z08g1fjc0i30i	0ci03jc0i30i08	r01G |
+fet30ic0y0780	z08g1fjc0i30i	0ci03jc0i30i08	r01G |
+fet30ic0y07c0	z08g1djc0i30i	0ci03jc0i30i08	r01G |
+fet30ic0y07c0	z08g0fjc0i30i	0ci03jc0i30i08	r01G |
+fet30ic0y07c0	fcgfcgfcg!10g	Gp08g1fjc0i30	i0ci03jc0i30i
+ 08sG |
+fet30ic0y0780	08g80g04g!30g	81p08g1fjc0i30	i0ci03jc0i30i
+ 08r01G |
+fet30ic0y07c0	10g80g08g!10g	81p08g1fjc0i30	i0ci03jc0i30i
+ 08r01G |
+fet30ic0y07c0	30gf8g08g!10g	81p08g1djc0i30	i0ci03jc0i30i
+ 08r01G |
+fet30ic0y0780	08g04g10g!10g	81p08g0fjc0i30	i0ci03jc0i303f
+ h08r01G |
+fet30ic0y07c0	04g04g10g!10g	81p08g1fjc0i30	i0ci03jc0i30e1
+ h08r01G |
+fet30ic0y07c0	04g04g20g!10g	81p08g1fjc0h02	30i0ci03jc0i30
+ 81h08sG |
+fet30ic0y0780	88g84g20g!10g	81p08g1fjc0h02	30i0ci0304ic2
+ e0h308180g08r	01G |
+fet30ic0y07c0	70g78g20g!10g	Gp08g1fjc0h02	30hf00ch3c030e
+ ic3a0h308180g	08r01G |
+fet30ic0y07c0	z08g1djc0h0230	h880ch220318h	f0c230h3081hc8
+ r01G |
+fet30ic0y07c0	z08g1fh06gc0h	02308001880c20	g620330h90c210
+ g0c3083g01e8r	01G |
+fet30ic0y0780	z08g0fg033egc0	h1e3080f1080c	203c420320g06
+ f0c220600e3086	g0128r01G |
+fet3fIc0y07c0	z08g1f3c1e02g	c1670f1230b189	180c2c62460320
+ 4014e0c620g2a	3098180168r01	G |
+fet3fIc0y07c0	z08g1f241006g	c1f50d9231e109	100c7842440320
+ 479480c440026a	30f001f9c8r01	G |
+fezx0780z08g1f	041004gc19d18	a2338109e00ce0	42780338051c80
+ c4c882ee308001	6908r01G |
+fezx07c0z08g1d	1c3004gc11910	a2308109800c20	4260030c4b18f0
+ c589a368308389	2908sG |
+fezx07c0z08g1f	380804gc11910	a2308119g0c20	464003044e1840
+ c707236c308a19	2888r01G |
+fezx0780z08g1f	0c!082ac1!11be	308111g0c2044	4003048c98gc4
+ 062367b08e1128	e8r01G |
+fezx07c0z08g1f	04!082ac1111f	023081f3g0c20	7cc003048f80g
+ c40622f3308c13	!68r01G |
+fezx07c0z08g1d	04080920c11180	g308062g0c2018	80030680hc406
+ 22103084124808	r01G |
+fezx07c0z08g1f	042919gc010h30	d802g0c36g8003	0680hc4042210
+ 308c10g08r01G |
+fezx0780z08g1f	!3901gc0i3070	02g0c1cg800304	ic40440g30i08
+ r01G |
+fezx07c0z08g1d	!01hc0i30g06g	0cg0180032cicc	i30i08r01G |
+fezx07c0z08g1f	01ic0i30i0ci03	38ic8i30i08r01	G |
+fezx0780z08g1f	jc0i30i0ci03j	c0i30i08r01G |
+fezx07c0z08g1d	jc0i30i0ci03j	c0i30i08r01G |
+fezx07c0z08g1f	ZOf8r01G |
+fezx0780z08g1e	zzh01G |
+fezx07ZIfczzh	01G |
+fezx07c0z08g1e	zzh01G |
+fezx07c0z08g1e	zzh01G |
+fezx0780z08g1c	zzh01G |
+fezx07c0z08g1e	zzh01G |
+fezx07c0z08g1e	zzh01G |
+fezx0780z08g1c	zzh01G |
+fezx07c0z08g1e	zzh01G |
+fezx07c0z08g1e	zzh01G |
+fezx0780z08g1c	zzh01G |
+fezx07c0z08g1e	zzh01G |
+fezx07c0z08g1e	zzh01G |
+fezx07c0z08g1c	zzh01G |
+fezx0780z08g1e	zzh01G |
+fezx07c0z08g1e	zzh01G |
+feb7ZWfbZIefZZH	feG |
+\enddata{raster, 540799064}
+\view{rasterview,540799064,75,0,0}
+
+Figure 2. Show and Tell  primes}}
+
+\bold{
+}\
+\begindata{raster,540799240}
+2 0 68266 68266 0 0 483 237
+bits 540799240 483 237
+ZZZc0 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+bfZIf8p0fZJ60 |
+80zj078ch1801	f0g0180zk60 |
+bfZIf80c4ch18	0198g01800fZJ	60 |
+80zj0c0f!8719	8198f0f198zk60 |
+bfZIf8!0c!cc9b	01"99b00fZJ60 |
+80zj!0c!cc1e01	f1!99e0zk60 |
+bfZIf8!0ccfcc	1c01"99c00fZJ	60 |
+80zj!0ccc0c1e	01"99e0zk60 |
+bfZIf80c4ccc4c	9b01"99b00fZJ	60 |
+80zj078cc78719	81!f0f198zk60 |
+bfZIf8p0fZJ60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+ZZZe0 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+8001e006j0760	h03e0p03e0hc3	800fc0j1ehccc0	h3c018330if807
+ n60 |
+8001b006j0760	h0330p0330hc1	8003k33h!c0h36	018030icc03n60 |
+800199cf38i07	e7h03338e3ce7	80l03339b1cf1	9c030ej307ce3
+ dde0h3339e778	icce339e38ek60 |
+800198666ci07	ed80g03e6c361	b6c0l03e0db06	d9b6031bj3071
+ b6ccc0h336db3	30if8330db6db	k60 |
+800199e67ci06	ed80g03c7cf39	b6c0l!03db1ed9	be031bj3061f6
+ ccc0h337db330	iccf33db61fk60 |
+8001b36660i06	ed80g03661b0d	b6c0l0306db36	d9b0031bj3361
+ 86ccc0h3661b3	30icdb36db6d8	k60 |
+8001e1e338i06	67h03338f78e6	c0l!03cf1ef19c	030ej1e60e3cc
+ 60h3c39e318if8	f33db38ek60 |
+80zk03zs60 |
+80zk0ezs60 |
+80zzy60 |
+8007ZZVf8g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l040c	08g60 |
+8004g20g08h10	i08q08q80k01l	02l041208g60 |
+8004f8221c09c1	g10i08e030o08	q80ge38e381c71	l02g038e38e071
+ c42108g60 |
+80041046221223	g10i09!10o08q	80011451442289	l02g045145108a
+ 244088g60 |
+80042042221225	g10i0903132d20	m08q80g105144	2289l02h414510
+ 8a248048g60 |
+800470822221e9	g10i08e090b120	m08q80g209144	2289l02h824510
+ 8a25e1e8g60 |
+8004088222202f	8010i081393a1	20m08q80g4111	442289l02g0104
+ 45108a242108g	60 |
+80048902224041	g10i091494a120	m08q80g821144	2289l02g020845
+ 108a242108g60 |
+800471021c4181	g10i08e393a0e0	m08q8001f7ce38	9c71l02g07df38
+ e271c42108g60 |
+8004l10i08i20	m08q80k01l02l	043f08g60 |
+8004l10i08ic0	m08q80k01l02l	04g08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l07G	f8g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004g20g08h10	i08q08q80k01l	02l04g08g60 |
+8004f8223e09c1	g10h0108e0g10	n0823671008m80	k01h073e7038e2
+ g010e7ce071c4	g08g60 |
+80041046201223	g10h030910g10	n0821289008m80	k01h08a0884512
+ g031141108a24	g08g60 |
+800420423c1225	g10h0109032c17	1d2b338c60i08	5128399cc0l80
+ k01h08bc884512	g!0179108a24g	08g60 |
+800470820221e9	g10h0109gb014	a12c0a5290i08	5127104920l80
+ k01h0782884512	g010205108a24	g08g60 |
+8004088202202f	8010h010903a0	1499283a50f0i	08f92091c9e0l
+ 80k01i82884512	g010405108a24	g08g60 |
+80048902224041	g10h010914a014	85284a5280i08	89289249m80k01
+ h0122884512g01	0845108a24g08	g60 |
+800471021c4181	g10h0108e3a014	b8e83a4c60i08	892709c4c0l80
+ k01h061c7138e2	g011f38e271c4	g08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l07G	f8g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l043f	08g60 |
+8004l10i08q08	q80k01l02l0421	08g60 |
+8004l10i08q08	q80k01l02l0421	08g60 |
+8004l10i08q08	q80k01l02l0421	08g60 |
+8004l10i08q08	q80k01l02l05e1	e8g60 |
+8004l10i08q08	q80k01l02l0480	48g60 |
+8004l10i08q08	q80k01l02l0440	88g60 |
+8004l10i08q08	q80k01l02l0421	08g60 |
+8004l10i08q08	q80k01l02l0412	08g60 |
+8004l10i08q08	q80k01l02l040c	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8004l10i08q08	q80k01l02l04g	08g60 |
+8007ZZVf8g60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80x07Nfej1fNf8	w60 |
+80x18n0180i60	n06w60 |
+80x10o80i40n02	w60 |
+80x20o40i80n01	w60 |
+80x20o40i80n01	w60 |
+80x20g3ej63h40	i80g03c6h0ch01	w60 |
+80x20g33j03h40	i80g0626h0ch01	w60 |
+80x20g331e3e1e	1c6780g40i80g	0607!c38cc0g01	w60 |
+80x20g#333263	h40i80g!06!66	4d80g01w60 |
+80x20g#333863	h40i80g!06!66	0fh01w60 |
+80x20g333f!33	1c63h40i80g!06	67e60eh01w60 |
+80x20g3330!33	0e63h40i80g!06	66060fh01w60 |
+80x20g3331!33	2663h40i80g06	2666264d80g01	w60 |
+80x20g3e1e3e1e	1c6180g40i80g	03c663c38cc0g	01w60 |
+80x20i30k40i80	n01w60 |
+80x20i30k40i80	n01w60 |
+80x20o40i80n01	w60 |
+80x10o80i40n02	w60 |
+80x18n0180i60	n06w60 |
+80x07Nfej1fNf8	w60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+80zzy60 |
+ZZZe0 |
+7fZZYe0 |
+\enddata{raster, 540799240}
+\view{rasterview,540799240,76,0,0}
+
+\sansserif{\bold{Figure 4. Prograph check register}
+
+\bold{
+Figure 1a. LabVIEW primes, \
+
+
+front panel}
+
+\formatnote{\bold{
+Figure 1b. LabVIEW primes, block diagram}
+
+
+}\bold{Figure 3. VisaVis  primes}
+
+\formatnote{
+}\bold{Figure 5. LabVIEW wagon wheel, front panel}
+
+}\enddata{text,538702508}

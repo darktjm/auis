@@ -1,0 +1,881 @@
+\begindata{text,539102988}
+\textdsversion{12}
+\template{default}
+\define{global
+}
+\define{footnote
+
+attr:[Flags OverBar Int Set]
+attr:[FontSize PreviousFontSize Point -2]}
+\majorheading{\underline{
+
+
+Summary of 1993 
+
+
+info-andrew Survey}
+
+\bold{
+}}\flushright{Compiled by Susan Straub
+
+June 23, 1993
+
+}\majorheading{\bold{
+Type of Establishment}
+
+}
+\bold{\bigger{	Of the respondents, four are from research companies, nine 
+are from universities, seven are from corporations, and one is a personal 
+system used at home by a husband and wife.  Please note that these results 
+are merely representative of Andrew usage.  We know of numerous 
+sites--including consortium members--from whom no response arrived.
+
+}}
+
+\begindata{chart, 538365432}
+TopTitleFontName AndySans16b
+BottomLegendFontName Andy8
+ChartType Pie
+Item Name(Corporate);Value(7);Position(1);
+Item Name(Research);Value(4);Position(2);
+Item Name(Education);Value(9);Position(3);
+Item Name(Personal);Value(1);Position(4);
+\enddata{chart, 538365432}
+\view{chartv,538365432,42,0,0}
+\begindata{image,538713420}
+format: gif
+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
+\enddata{image, 538713420}
+\view{imagev,538713420,43,0,0}
+
+\begindata{bp,538618584}
+\enddata{bp,538618584}
+\view{bpv,538618584,44,0,0}
+\bold{\bigger{\majorheading{Number of Users}
+
+
+	The number of users at each site ranged from one to more than a thousand, 
+with small sites being the more general rule.  Of course, the majority of 
+users are in large sites.
+
+}}
+\typewriter{\
+\begindata{chart, 538618920}
+LeftTitle # of Sites
+TopTitle 
+TopTitleFontName AndySans16b
+RightTitle 
+BottomTitle # of Users
+BottomLegendFontName Andy8
+ChartType Histogram
+Item Name(1);Value(4);Position(1);
+Item Name(2-10);Value(7);Position(2);
+Item Name(10-100);Value(4);Position(3);
+Item Name(100-1000);Value(2);Position(4);
+Item Name(>1000);Value(2);Position(5);
+\enddata{chart, 538618920}
+\view{chartv,538618920,45,495,0}
+}\
+\begindata{image,538697276}
+format: gif
+R0lGODdh9AE0AfcAAP///wAAAL6+vk1NTfzgiZ21zQAA/wD//6ioqAAAMwAAZgAAmQAAzAAz
+AAAzMwAzZgAzmQAzzAAz/wBmAABmMwBmZgBmmQBmzABm/wCZAACZMwCZZgCZmQCZzACZ/wDM
+AADMMwDMZgDMmQDMzADM/wD/AAD/MwD/ZgD/mQD/zDMAADMAMzMAZjMAmTMAzDMA/zMzADMz
+MzMzZjMzmTMzzDMz/zNmADNmMzNmZjNmmTNmzDNm/zOZADOZMzOZZjOZmTOZzDOZ/zPMADPM
+MzPMZjPMmTPMzDPM/zP/ADP/MzP/ZjP/mTP/zDP//2YAAGYAM2YAZmYAmWYAzGYA/2YzAGYz
+M2YzZmYzmWYzzGYz/2ZmAGZmM2ZmZmZmmWZmzGZm/2aZAGaZM2aZZmaZmWaZzGaZ/2bMAGbM
+M2bMZmbMmWbMzGbM/2b/AGb/M2b/Zmb/mWb/zGb//5kAAJkAM5kAZpkAmZkAzJkA/5kzAJkz
+M5kzZpkzmZkzzJkz/5lmAJlmM5lmZplmmZlmzJlm/5mZAJmZM5mZZpmZmZmZzJmZ/5nMAJnM
+M5nMZpnMmZnMzJnM/5n/AJn/M5n/Zpn/mZn/zJn//8wAAMwAM8wAZswAmcwAzMwA/8wzAMwz
+M8wzZswzmcwzzMwz/8xmAMxmM8xmZsxmmcxmzMxm/8yZAMyZM8yZZsyZmcyZzMyZ/8zMAMzM
+M8zMZszMmczMzMzM/8z/AMz/M8z/Zsz/mcz/zMz///8AAP8AM/8AZv8Amf8AzP8A//8zAP8z
+M/8zZv8zmf8zzP8z//9mAP9mM/9mZv9mmf9mzP9m//+ZAP+ZM/+ZZv+Zmf+ZzP+Z///MAP/M
+M//MZv/Mmf/MzP/M////AP//M///Zv//mf//zAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAA9AE0AQAI/gABCBxIsKDBgwgTKlzIsKHD
+hxAjSpxIsaLFixgzatzIsaPHjyBDihxJsqTJkyhTqlzJsqXLlzBjypxJs6bNmzhz6tzJs6fP
+n0CDCh1KtKjRo0iTKl3KtKnTp1CjSp1KtarVq1izJgzAtavXr2DDih1LtqzZs2jTql3Ltq3b
+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
+rMq6rMzarM76rNAardI6rdRardZ6rTEaEAA7
+\enddata{image, 538697276}
+\view{imagev,538697276,46,0,0}
+
+\typewriter{\bigger{\bold{# of Sites		# of Users
+
+
+4				1
+
+7				2-10
+
+4				10-100
+
+2				100-1000
+
+3				> 1000}}}
+
+
+
+
+
+
+
+
+\begindata{bp,538635624}
+\enddata{bp,538635624}
+\view{bpv,538635624,47,0,0}
+\majorheading{\bold{Hardware Types}}
+
+
+	\bold{\bigger{Most sites (eleven) reported running Andrew on more than one 
+different hardware platform, with one running on eight. 
+
+}}
+\begindata{chart, 538635928}
+TopTitleFontName AndySans16b
+BottomLegendFontName Andy8
+ChartType Pie
+Item Name(Sun);Value(14);Position(1);
+Item Name(IBM);Value(9);Position(2);
+Item Name(DEC);Value(7);Position(3);
+Item Name(HP);Value(4);Position(4);
+\enddata{chart, 538635928}
+\view{chartv,538635928,48,0,0}
+
+\begindata{image,538610948}
+format: gif
+R0lGODdhNAE3AfcAAP///wAAAL6+vk1NTfzgiZ21zQAA/wD//6ioqAAAMwAAZgAAmQAAzAAz
+AAAzMwAzZgAzmQAzzAAz/wBmAABmMwBmZgBmmQBmzABm/wCZAACZMwCZZgCZmQCZzACZ/wDM
+AADMMwDMZgDMmQDMzADM/wD/AAD/MwD/ZgD/mQD/zDMAADMAMzMAZjMAmTMAzDMA/zMzADMz
+MzMzZjMzmTMzzDMz/zNmADNmMzNmZjNmmTNmzDNm/zOZADOZMzOZZjOZmTOZzDOZ/zPMADPM
+MzPMZjPMmTPMzDPM/zP/ADP/MzP/ZjP/mTP/zDP//2YAAGYAM2YAZmYAmWYAzGYA/2YzAGYz
+M2YzZmYzmWYzzGYz/2ZmAGZmM2ZmZmZmmWZmzGZm/2aZAGaZM2aZZmaZmWaZzGaZ/2bMAGbM
+M2bMZmbMmWbMzGbM/2b/AGb/M2b/Zmb/mWb/zGb//5kAAJkAM5kAZpkAmZkAzJkA/5kzAJkz
+M5kzZpkzmZkzzJkz/5lmAJlmM5lmZplmmZlmzJlm/5mZAJmZM5mZZpmZmZmZzJmZ/5nMAJnM
+M5nMZpnMmZnMzJnM/5n/AJn/M5n/Zpn/mZn/zJn//8wAAMwAM8wAZswAmcwAzMwA/8wzAMwz
+M8wzZswzmcwzzMwz/8xmAMxmM8xmZsxmmcxmzMxm/8yZAMyZM8yZZsyZmcyZzMyZ/8zMAMzM
+M8zMZszMmczMzMzM/8z/AMz/M8z/Zsz/mcz/zMz///8AAP8AM/8AZv8Amf8AzP8A//8zAP8z
+M/8zZv8zmf8zzP8z//9mAP9mM/9mZv9mmf9mzP9m//+ZAP+ZM/+ZZv+Zmf+ZzP+Z///MAP/M
+M//MZv/Mmf/MzP/M////AP//M///Zv//mf//zAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAANAE3AQAI/gABCBxIsKDBgwgTKlzIsKHD
+hxAjSpxIsaLFixgzatzIsaPHjyBDihxJsqTJkyhTqlzJsqXLlzBjypxJs6bNmzhz6tzJs6fP
+n0CDCh1KtKjRo0iTKl3KtKnTp1CjSp1KtarVq1izMgzAtavXr2DDih1LtqzZs2jTql3Ltq3b
+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
+j/iYj/q4j/zYj/74jwDZLQEBADs=
+\enddata{image, 538610948}
+\view{imagev,538610948,49,0,0}
+\bold{\bigger{\typewriter{\leftindent{# of 	
+
+sites	System Type
+
+
+14		Sun 
+
+9		IBM
+
+7		DEC
+
+4		HP}
+
+}
+	Others platforms listed include Solbourne, SGI, i486PC.
+
+}}\
+\begindata{bp,538637912}
+\enddata{bp,538637912}
+\view{bpv,538637912,50,0,0}
+\bigger{\bold{\majorheading{
+Uses of AUIS}
+
+
+	AUIS is being used for mail management at all but one of the sites and 
+document production at all but four.  Just below half (nine) use it for 
+project development.
+
+
+
+
+\begindata{chart, 538638232}
+TopTitleFontName AndySans16b
+BottomLegendFontName Andy8
+ChartType Histogram
+Item Name(Mail Management);Value(18);Position(1);
+Item Name(Document Production);Value(15);Position(2);
+Item Name(Project Development);Value(7);Position(3);
+\enddata{chart, 538638232}
+\view{chartv,538638232,51,493,0}
+\begindata{image,538924168}
+format: gif
+R0lGODdh8wE4AfcAAP///wAAAL6+vk1NTfzgiZ21zQAA/wD//6ioqAAAMwAAZgAAmQAAzAAz
+AAAzMwAzZgAzmQAzzAAz/wBmAABmMwBmZgBmmQBmzABm/wCZAACZMwCZZgCZmQCZzACZ/wDM
+AADMMwDMZgDMmQDMzADM/wD/AAD/MwD/ZgD/mQD/zDMAADMAMzMAZjMAmTMAzDMA/zMzADMz
+MzMzZjMzmTMzzDMz/zNmADNmMzNmZjNmmTNmzDNm/zOZADOZMzOZZjOZmTOZzDOZ/zPMADPM
+MzPMZjPMmTPMzDPM/zP/ADP/MzP/ZjP/mTP/zDP//2YAAGYAM2YAZmYAmWYAzGYA/2YzAGYz
+M2YzZmYzmWYzzGYz/2ZmAGZmM2ZmZmZmmWZmzGZm/2aZAGaZM2aZZmaZmWaZzGaZ/2bMAGbM
+M2bMZmbMmWbMzGbM/2b/AGb/M2b/Zmb/mWb/zGb//5kAAJkAM5kAZpkAmZkAzJkA/5kzAJkz
+M5kzZpkzmZkzzJkz/5lmAJlmM5lmZplmmZlmzJlm/5mZAJmZM5mZZpmZmZmZzJmZ/5nMAJnM
+M5nMZpnMmZnMzJnM/5n/AJn/M5n/Zpn/mZn/zJn//8wAAMwAM8wAZswAmcwAzMwA/8wzAMwz
+M8wzZswzmcwzzMwz/8xmAMxmM8xmZsxmmcxmzMxm/8yZAMyZM8yZZsyZmcyZzMyZ/8zMAMzM
+M8zMZszMmczMzMzM/8z/AMz/M8z/Zsz/mcz/zMz///8AAP8AM/8AZv8Amf8AzP8A//8zAP8z
+M/8zZv8zmf8zzP8z//9mAP9mM/9mZv9mmf9mzP9m//+ZAP+ZM/+ZZv+Zmf+ZzP+Z///MAP/M
+M//MZv/Mmf/MzP/M////AP//M///Zv//mf//zAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAA8wE4AQAI/gABCBxIsKDBgwgTKlzIsKHD
+hxAjSpxIsaLFixgzatzIsaPHjyBDihxJsqTJkyhTqlzJsqXLlzBjypxJs6bNmzhz6tzJs6fP
+n0CDCh1KtKjRo0iTKl3KtKnTp1CjSp1KtarVq1izat3KtavXr2DDih1LtqzZs2jTql3Ltq3b
+t3Dj9gxAt67du3jz6t3Lt6/fv4ADCx5MuLDhw4gTK17MuLHjx5DrdqQrt7LlywYpZwyAubPn
+ypxb9iUYWmBpAKdTk149UHVr1qZho5btOvbr27Zzz8a9W3ft3sB/C6dNnPdw48V9Jw++/Lhy
+5NCfS2cenfp059azY3d9WmL3iN8//osfHzV8Q/MP0ZNfz96o+oThJZvWXPB9+/v4d9rPfLA0
+Z//85SfggHOBt9B/vOlG4IIMxrSfbP319t2DDVZooUcUKkhaaADWd+GHII6UIXDJTRjiiShq
+NGJ8Hmo4Yoowxrhif3bNx2KMOOao0IwXvajjjw3yaJGPQBYpoJAVEWnkkuwhSZGSTEb5mZMT
+QSnllZZR6R2WXC6opYFdhonflxBZKeaZZ5GZHppsiqemQ2a2KadXb543551y1clQnHj2WZWe
+B/opqFqA7jjooWYVCh+ijIqlKEJ8NiopUY9GOOmlWVUaII2Rderpp4BhmiWYQ8IH6qmooioq
+aKQmaWqq/rDG2tiqebb65Kuy5qrrYLTGpWmLnO4q7LB69QrXrxBuSOyyzBr7FrIJKsvstLs6
+6xa0GrZG7ba5WtsWtqjdJS235ILqLVvgolfuuuaeS6itVeLK7ryzuptWuvLSqy9i9t4L75aQ
+7iswv/2m+e/B4Q6sMK8FJ4rwmgEvLPFfDTtcJkbqTqwxXxWXhW/EG4dcY8djfRysyCKTXPLD
+cOaLssYqO8qynSC/vHHMYZmcmc0p4/yVzvXxHLLPP8+8p8tCD0w0nUYHWnPSCi/dFdDjQq20
+1FtRra3VC2OdddOGPs21vl5rpbWNYwtcdqZgLyp22uyujdXZCcNNttxW0W23/tp4/9k2pEjv
+zW3ffl/cY+CCU0s4VXonPu/iUzXu+LqQSyX55ORWXt7flp6MueKaP3X556CH3tTopDdr+umc
+b7pz6qWvrhTqsA8rO1Nk+jdyslvXvuztS31Jn3oZ+/478EnlHi3vaBsvbN3OVwuk8mh7Hr3i
+19uuXXPcV7dd99eBv733wLYMuOvZNp99rNCvD2uR1Jeffvvuq1p/t9Mj3CGJ/Pd+v/3/e1/+
+DNe5hBUwaAEEYAJPBb/Wya9qC4wM/SL4mAYS0FVvo+CsNPgpC0KsVBnkoGImKMIRDvCDGLRe
+CUe4Qsh40HwgVGELD0PCGRbmhTSL4etsyEIeLgaH/kc7XAh9GJgaEjFUJ4RhCnd4xBs2kWA/
+ot0TQzVFwwDRaTpEYBUFY8Qt5uWKYcsiBL3IMTJyMYk5XKIWzTgaNiIxig5kXhfd+B86jgaN
+QRSj/+yIlzm6EYxu06P6+FgjQu4FkOcTpB/ZuEgzIvKA8RqiHRtJxkeiL5IyJCQlvWjJBwIs
+k3zc5BY7KUcUrtGQkkHlF/GIRTWO0ZCirCIpl6c/VYrLluJiZRhduUdVxnKKs5yfKV+pSVzu
+TkdShKUx5QPHC95KknT85ROD2b9aLlOaTaSmmYpnTGweUZsYQ1wol0kfZMaRlt4kYjp9CE4h
+gnKS5IxUk86pPmKOk5zt/lRkPNfJw3zycpCo5KcN/fnMd0Zzn7oM5D8FOkOGtpCgmGSiLR26
+Qoh+UqK+RGgzh3nRU2YUnwlN5EL3qVFzOjOiHg1oSXOUzGKCdKNKLChGVfpSk3LUmt1cKY5a
+es9rhhSSHbUnPGvKUnpWk6IlRKoILYpTXCqVg0w9aS9p6lOYplGmKVUmUXdqVG46Vacy6qo4
+h1pVm8YUpUI96FbDKtWmThSsMOIpWbv500sGdapaLWtR28pXkq41rmKF5h/hmiK5qlWvXOXr
+TZ+qQcZSMKqL9Sti2brYyOKTsCgy7GD/WtjAGnSzkwWsYs+KV5eGtrN9VRZQAZpXulo1j0HD
+/o2JBMtIzJ4ofvtDp2Rda9arwia3rI1nHX36PfIZN3zHHR9yl6vc7BxVpMAC7lF369S6ejI3
+0vXqWzmbWf3J1q7B7Slv9xpZ1YLXsRFE7wIhS9rwzrW6r20lVtMK2vEmtrLtVW8C9RtA9vq2
+tOKFb29hO18Av3ei1i1lfqmL4PjussDuPax9KZtfy17TtiHSbG25e1vPzrS1AiZvhRd8WQ5n
+2MNZNe2ERYvf/0a4viG+74hdzN//1fh+/iUwfTd82u6OlsYM9mWC0WnhnJoYRBp2JIaRjOId
+K/nIH0pyJZcc5SYbWMIxpjCNi/xVKF9Iypyk8pet/GIerxi1Ldbx/pVh3OAByxetazZzllk8
+YzWX+ck97vCP7Xzj+vXZfTl+c5zxfGYfp1nQd56yly0E5lGKmdFdzWWiw7zoCjValo+2NJn/
+vD5OZy/QD3ayovN84j0j2tPXQ3X0QK3QFAe4zSLeMokvXOkgbTrIVLXvpYGJa1het9VwnrSj
+S4zYXU+z15r8NXSDrWrnNdt4z/bdeZd9V2Fjmti6vjW2u1xsbdP629k2dagHPWojd1vcwCY3
+pcEdY2NnE9mhVPZq+7rt7Z770OO2Nq/rLWQFT3vW5g54u70tcHuHG9/p1vex+R1Qef8byAwH
+MayfO28uG5zbB6/zqeF94H4TueIAx7jI/ifu7m9yPJoOT/nGI67igaOb2gp/N8vj7W+V5zva
+tcM57HSeuofbPOE8J13QPzd0zPm85itn98VJTvCRf/TedZa0bmfe8YYj/ePC1O7TC+5xYYI8
+62PF8tK7TnGfH1PdEt/6eB8128/KeexWx/rP+af1XDs97l43e7Tqnna7M93UzJTjydlM9pKr
+c/CMnPs2w054vxe+6XDvu6+vnnc+I57QLkc4zIs+Oc47zvOJO7rck851x+O97HOf9+XLnXmN
+33z16864rCGudLX/XfOqp7rYH//y3Nfe9JMfvfCBDvthQ332ltd944NfecpvvvjXPj6fLW77
+6p/e8OyEPjAV/h9O2mI+8sl2/uK9z3rw03z4qCf93SUffvSP3+3ftz7z049+35ee/edvfv3P
+q/2FS//U1Ad8LXd7rkd8yvd2vId7/HeA8Xd9kCd/A5iABfh8DFh+Eoh8BrSAv4d/k8R9edR2
+HxaBAph/9Fd52cV4CDiCHSh+OQSCrlZ1HIhyLPiBEiVqsbd+7ad/Jrh3KNiAMfhHHohFLmiD
+xnd/OViC6Rd4U7eBIjh/2NdP/ZdNQThSFXiDBIiBOyJcxRKFUuh+yPOFm2FUYIg84DKGwFOG
+Zig7aJiGprOGbKg5bviGkBOHJ9EdJmKHqYchPHF2IjEhSgiAtiFPffiHD+eH5aSA/hOoeYJY
+h7oDXcOziNVGE9IFEm1HIfYBiX24fw80iYCoSO6UiDLxiBmIIBuiLaMYLjZiihyyinVkirOh
+GYQoiazBTLAYG6nUiK/IitH1iqk4H7y4G7BIGbqYizMBIKQoH6voikrIHRxyG7V4isHYir5I
+jBk4GWK4EghCirZIItnIHM+4jajYjM34i9I4jjqhGsYIjseojqgIjDs0jekYjuzojsZoji8x
+Mt/YjeToIqshjq/hj/U4j+v4jJhIhybRjbqojdt4jMLojA1pi6kUiHUjITrIEuj4j7Pojrn4
+kBoJIfujjQPZIiBJkQ6yiwsZkcmCjsgIjBEZj/u4kSOJ/oSKSCkSCZAiyY7xOJLcAY7YVZHY
+2I8Y6YwaqZAd4oIfSZH+mJEuiYkddZREuYlAGZUXyZPr+Is9KZMTyJQiUpMLeZP7mJMsSY9c
+aZX2iBNFGZQhKZZkyY+/hZZpOY46qYl62JZd+ZKVKJFXqY/UWJVp2ZHW2HuhiJfCqJBD6YvD
+Y5jy2I5wCY8OqR+BR4u6w5eMGYh4SBuiOIyX2YucqBKVqZnT2I6gWT2u6BtwWYsESZl5CYkG
+mTdyeI3dZ5aueRWx2Jp7eI6xSZt9s5q46TUvopW76TM+4pu/GTNEIpzDWTFQYpzHaS/vt5xn
+qCLK6ZyrcogYo4XWeZ1W1CPYH7md3PlD0vmd4Bme4jme5Fme5nme6Jme6rme7Kk5AQEAOw==
+\enddata{image, 538924168}
+\view{imagev,538924168,52,0,0}
+
+
+
+
+
+
+\begindata{bp,538639976}
+\enddata{bp,538639976}
+\view{bpv,538639976,53,0,0}
+\majorheading{Number of Programmers}
+
+
+	One of the strong points of Andrew has been its advantages as a system for 
+developing applications, so we anticipated that there would be many "AUIS 
+programmers" reported.  However, small sites generally use AUIS for its 
+applications and have at most one AUIS programmer:  five sites had none at 
+all and eight sites had only one.  Five of the larger sites claimed two to 
+ten programmers and only one site had more than ten.  
+
+
+
+\begindata{chart, 538640312}
+TopTitleFontName AndySans16b
+BottomLegendFontName Andy8
+ChartType Pie
+Item Name(0);Value(5);Position(1);
+Item Name(1);Value(8);Position(4);
+Item Name(2-10);Value(5);Position(5);
+Item Name(>10);Value(1);Position(4);
+\enddata{chart, 538640312}
+\view{chartv,538640312,54,0,0}
+\begindata{image,538706728}
+format: gif
+R0lGODdhNgE2AfcAAP///wAAAL6+vk1NTfzgiZ21zQAA/wD//6ioqAAAMwAAZgAAmQAAzAAz
+AAAzMwAzZgAzmQAzzAAz/wBmAABmMwBmZgBmmQBmzABm/wCZAACZMwCZZgCZmQCZzACZ/wDM
+AADMMwDMZgDMmQDMzADM/wD/AAD/MwD/ZgD/mQD/zDMAADMAMzMAZjMAmTMAzDMA/zMzADMz
+MzMzZjMzmTMzzDMz/zNmADNmMzNmZjNmmTNmzDNm/zOZADOZMzOZZjOZmTOZzDOZ/zPMADPM
+MzPMZjPMmTPMzDPM/zP/ADP/MzP/ZjP/mTP/zDP//2YAAGYAM2YAZmYAmWYAzGYA/2YzAGYz
+M2YzZmYzmWYzzGYz/2ZmAGZmM2ZmZmZmmWZmzGZm/2aZAGaZM2aZZmaZmWaZzGaZ/2bMAGbM
+M2bMZmbMmWbMzGbM/2b/AGb/M2b/Zmb/mWb/zGb//5kAAJkAM5kAZpkAmZkAzJkA/5kzAJkz
+M5kzZpkzmZkzzJkz/5lmAJlmM5lmZplmmZlmzJlm/5mZAJmZM5mZZpmZmZmZzJmZ/5nMAJnM
+M5nMZpnMmZnMzJnM/5n/AJn/M5n/Zpn/mZn/zJn//8wAAMwAM8wAZswAmcwAzMwA/8wzAMwz
+M8wzZswzmcwzzMwz/8xmAMxmM8xmZsxmmcxmzMxm/8yZAMyZM8yZZsyZmcyZzMyZ/8zMAMzM
+M8zMZszMmczMzMzM/8z/AMz/M8z/Zsz/mcz/zMz///8AAP8AM/8AZv8Amf8AzP8A//8zAP8z
+M/8zZv8zmf8zzP8z//9mAP9mM/9mZv9mmf9mzP9m//+ZAP+ZM/+ZZv+Zmf+ZzP+Z///MAP/M
+M//MZv/Mmf/MzP/M////AP//M///Zv//mf//zAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAANgE2AQAI/gABCBxIsKDBgwgTKlzIsKHD
+hxAjSpxIsaLFixgzatzIsaPHjyBDihxJsqTJkyhTqlzJsqXLlzBjypxJs6bNmzhz6tzJs6fP
+n0CDCh1KtKjRo0iTKvUYoKnTp1CjSp1KtarVq1izat3KtavXr2DDig3wsenSs2hjmt1INq3b
+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
+jdRYjdZ4jdiYjdq4jdzYjd74jeAYGAEBADs=
+\enddata{image, 538706728}
+\view{imagev,538706728,55,0,0}
+
+
+\begindata{bp,538642216}
+\enddata{bp,538642216}
+\view{bpv,538642216,56,0,0}
+
+\majorheading{Other Information}
+
+
+	Sites reported varied sorts of projects under development, many of which 
+have appeared or will appear in the contrib section of the distribution. 
+ About a third of respondents--seven of the eight reporting project 
+development--expressed an interest in sharing their efforts with other 
+sites.  
+
+
+
+\majorheading{AFS}
+
+
+	Only six sites have AFS and of these, all but one have at least a hundred 
+AUIS users.  
+
+
+
+\majorheading{Why AUIS?}
+
+
+	When asked why they use AUIS, eight respondents indicated the price (free) 
+was a factor.  Seven users mentioned that the AMS/AMDS interface played a 
+part in their decision, while AFS integration was an important factor for 
+two sites.  
+
+
+	Comments, both serious and humorous, are reproduced below for your perusal 
+and enjoyment.  We received one survey from a user who doesn't even use 
+AUIS but wanted to say Hi!  A copy of the survey is appended to the end of 
+this document.  
+
+\begindata{bp,538642264}
+\enddata{bp,538642264}
+\view{bpv,538642264,57,0,0}
+}}\heading{\bigger{\bigger{Why are you using AUIS?  
+
+}}}\bigger{\bold{
+}}\quotation{"Long established habit..."
+
+
+"I persuaded people -- the mail reader is one of the best interfaces around 
+(although still not as good as it should be)."
+
+
+"Cheap.  We are happy campers (but SGI and HP support could be beefed up). 
+" 
+
+
+"Because of its interface with AFS."
+
+
+"Availability, cost, features in that order.  Source code availability it 
+not an issue for me, I am running the binaries from the CD-ROM distribution 
+which I obtained via FTP.  No other alternative was available freely.  If I 
+had to spend money to obtain a release, I would tend to purchase a 
+commercial text processor such as Island Write or FrameMaker and use the 
+mail reading tools provided by DEC on my workstation.  While quite nice, I 
+do not think the Andrew text processing tools are easy enough to setup and 
+use nor are they WYSIWYG enough to be worth paying more then a few hundred 
+dollars for."
+
+
+"AMDS integration with AFS."
+
+
+"It's a very nice multimedia mail system.  It's also free. "
+
+
+"I've been using it since the days of hark, and find Messages to be 
+perferable to other UMAs. My site is afraid of any UMA more advanced than 
+/usr/ucb/mail, and won't let others run ATK at all."
+
+
+"unique user interface on different platforms" 
+
+
+"it's free, and it's good. the alternatives here seem to be vi, berkeley 
+mail, and rn."
+
+
+"I had been writing a multi-media editor myself.  I abandoned it for EZ. I 
+saw the beauty of the AUIS architecture, but was NEVER able to get others 
+to accept it.  (It wasn't a Standard.)"
+
+
+"We wanted to produce a hypermedia collaborative-authoring system, using 
+public domain software, and Andrew was the only UIS that we found that 
+could edit multimedia documents."
+
+
+"It's free!  And I used it at CMU and liked it (of course :-). Plus, 
+messages is the best mail tool I've found so far."
+
+
+"The purpose of our project is to improve the communication between staff 
+members and students. A bulletin board is an excellent medium for 
+communication. We considered some other Unix-based bboards, but the lack of 
+interfaces on different platforms was our main objection (try convincing a 
+Mac user to use a vt100 interface to read/post on the bboard). We seriously 
+looked at Gopher (WAIS), but we decided against it because of the lack of 
+simple interactive communication (you cannot 'post' information).
+
+AMS pros:
+
++ interfaces for X11, vt100, PC, Mac
+
++ integration of bboard and mail
+
++ server is Unix-host
+
++ ATK objects in mail
+
++ MIME
+
+
+AMS cons:
+
+- very large if you 'just' want a bboard
+
+- setup and maintenance of bboard is not trivial
+
+- Mac/PC are not part of the distribution. Finally I came in contact with 
+someone from special-projects who provided the sources. Mac/PC servers are 
+not ready to run 'out of the box'. It took some adapting to get it to work. 
+Without the Mac/PC clients Andrew wouldn't be of interest to us.
+
+- Inability of Mac/PC clients to handle ATK objects makes the use of ATK 
+objects less interesting (simple support for Raster, Text and Table objects 
+would be nice).
+
+- FLAMES programming is a crime.
+
+- Linking to bboards at other sites is only possible with AFS. With Gopher 
+you can link to any Gopher server.
+
+- AMS cannot handle netnews without duplicating the news tree. No interface 
+to NNTP is the most heard complaint here."
+
+
+"I am using AUIS in order to keep costs down.  I am extremely pleased with 
+the ez editor.  No, there were no alternatives anywhere close to this price 
+range (free!). "
+
+
+"Cheap, versatile, good net support"
+
+
+"It is free of charges, source code available (can be modified), runs on 
+variety of machines"
+
+
+"Messages is the only mail system that scales well enough for our site.  An 
+equivalent mail system cannot be purchased.  Ez is an excellent programming 
+editor, although it is lacking documentation.  We have locally extended ez 
+to handle many IBM internal languages.  This is difficult with most other 
+editors."
+
+}\
+\begindata{bp,538642312}
+\enddata{bp,538642312}
+\view{bpv,538642312,58,0,0}\formatnote{
+\heading{\bigger{\bigger{Other Comments 
+
+}}}
+}\quotation{"I hope that the Andrew effort can continue to be periodically 
+made available in binary form to the general public, not just consortium 
+members.  While I might be able to find the money to join the consortium 
+and get future releases it is doubtful."
+
+
+"Our focus for ``AUIS'' is almost strictly for mail-related stuff.  ATK is 
+viewed as resource-expensive given that a typical configuration here is for 
+several people to share a given workstation using X terminals.  Thus, 
+either VUI or BatMail is used as an AMS interface by most folks, who mostly 
+then don't understand why they can't just use MH or UCB mail or whatever, 
+since they don't see the glories of Messages."
+
+
+"Please make any Motif behavior such that it can be disabled."
+
+
+"AUIS has pioneered many fine issues in User Interface Toolkit and 
+multi-media application development.  It is now competing with commercial 
+products which are eating away at AUIS's universe one niche at a time. 
+ These commercial products do one thing well, and are supported by staffs 
+of 10's or 100's of people.  AUIS's ability to be visible at all in this 
+context sould be recognized for the impressive achievement that it is. In 
+order to continue to compete, the various subsystems must be more robust, 
+and lose the flavor of "some student's term project".
+
+
+"Considering that Andrew is free, I think you've done a very good job. 
+Though I think it would be nice to have some clearer programmer's 
+documentation (my first few months with Andrew were very difficult!), and 
+also better support for printing such as floating keeps, two-column output, 
+and setting the page size (it's very difficult to produce professional 
+documents without them)"
+
+
+"More cons than pros, but the pros weight more. We keep using AIUS."
+
+
+"I really wish that there was an individual membership in the Andrew 
+Consortium.  The cost should be ~$100 and should allow the individual 
+access to the latest sources and non-voting rights.  "
+
+
+"Would be good if distribution included info on AFS, including vendors"
+
+
+"A lot of bugs exist, one has to read the code to understand it, 'no short 
+term plans' for completing programmer's documentation, limited reusability 
+due to class-compiler constraints, very "poor man" object oriented 
+enviroment (concerning inheritance of features), not portable to 
+PC/MS-DOS/MS-Windows world."
+
+
+"There's little need for Andrew here, especially since we're selling our 
+own mail product.  I tried building it a couple of times over the past 
+several months but couldn't get it to run properly (i.e., without crashing 
+X) on my Iris Indigo running Irix 4.0.5F."
+
+}
+\begindata{bp,538642360}
+\enddata{bp,538642360}
+\view{bpv,538642360,59,0,0}
+
+\heading{\bigger{\bigger{What subject areas are you working on?}}}
+
+
+\quotation{"History, Social Science data management"
+
+
+"We are developing the MUCH system (Many Using & Creating Hypermedia), 
+which we are trying to use to create several books on subjects such as 
+Software Reuse & Groupware and Hypermedia."
+
+
+"Porting ATK!"
+
+
+"I modified the printing system to read the font map from a file instead of 
+compiling it in."
+
+
+"Esprit Project 5402 FODATEC: Feasibility Of ODA For Technical Documents - 
+ODA based document editor."
+
+
+"I  develop and fix bugs in the base toolkit, often conflicting with the 
+work of CMU :-).  We do this to maximize our response for internal 
+customers and other ATK developers."
+
+
+}\
+\begindata{bp,538642408}
+\enddata{bp,538642408}
+\view{bpv,538642408,60,0,0}
+\heading{\bigger{\bigger{What applications/insets have you developed?
+
+}}}
+\quotation{"GAHM, SNAPS, some utility classes"
+
+
+"None. Although I look forward to learning."
+
+
+"Tree based structure editors for generic logical and generic layout
+
+structures for ODA DAP FOD26 documents."
+
+
+"Most everything I have developed is now part of the distribution.  Other 
+projects in  include a comprehensive calendar system that coexists with 
+IBM's OfficeVision, an issues tracking database, a document review tool, 
+and many source edit views for ez."
+
+
+"We have contributed the following to AUIS over the years: NEOS 
+applications for classroom-oriented file exchange of EZ docs; Postscript, 
+header/footer, annotation, and troff insets; Document translators: rtf2 and 
+2rtf; Tab Support; Full-function dialog box support."
+
+
+}\
+\begindata{bp,538642536}
+\enddata{bp,538642536}
+\view{bpv,538642536,61,0,0}
+
+\bigger{\bigger{\bold{1993 Surv}\bold{\bold{ey} of AUIS Sites}
+
+}}
+Number of machines at site running AUIS:  
+
+                1?   2-10?   10-100?   100-1000?    over 1000?
+
+Number of AUIS users at site:
+
+                1?   2-10?   10-100?   100-1000?    over 1000?
+
+Number of AUIS programmers at site:
+
+                1?   2-10?   10-100?   100-1000?    over 1000?
+
+Does your site have AFS:
+
+What system type(s) do you run AUIS on:  
+
+What are you using AUIS for:
+
+        Mail
+
+        Document production
+
+        Project development
+
+        Other uses
+
+Which AUIS applications/insets do you most commonly use?
+
+Why are you using AUIS?  Did your site consider alternatives?
+
+Other comments:
+
+
+Please answer the following if you are doing development work using AUIS.
+
+What subject areas are you working on?
+
+What applications/insets have you developed?
+
+Are you interested in sharing code and/or information with other AUIS 
+sites?
+
+\enddata{text,539102988}

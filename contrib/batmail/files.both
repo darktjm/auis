@@ -1,0 +1,22 @@
+The following files can be placed in your home directory:
+
+--filename--	--effect--
+.headers	Inserted at the end of your headers in outgoing mail.
+.signature	Inserted at the end of the body of outgoing mail.
+.folderaliases	Each line contains an alias, and a normal AMS folder
+		name, separated by whitespace.  You then refer to each
+		such folder, and sub-folders of it, using the alias.
+		For instance, the line:
+		    comp    netnews.comp
+		allows you to refer to "netnews.comp.sys.amiga" as
+		"comp.sys.amiga".  You can use the alias anyplace you
+		use a folder name, including in the To: and CC: fields
+		of outgoing messages.  Aliases later in the file take
+		precedence, so if alias two folders, one of which is a
+		ancestor of the other, you should put the longer one
+		last.  E.g.:
+		    nn	    netnews
+		    comp    netnews.comp
+
+Both .headers & .signatures are inserted AFTER the
+bat-init-message-hook (if any) is executed.

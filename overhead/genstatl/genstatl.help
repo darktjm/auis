@@ -1,0 +1,197 @@
+\begindata{text,538939368}
+\textdsversion{12}
+\template{help}
+\chapter{Genstatl: Generating a Statically Linked Runapp
+
+}
+\section{What Genstatl is
+
+}\leftindent{
+Genstatl is a program which assists in the the creation of application 
+executables.  Most ATK applications use the same executable called runapp, 
+and do different things based on the name it is invoked by.  (e.g. ez, 
+raster, etc...)  Many classes are left out of the default runapp since 
+there are so many of them, and it isn't clear which will be used.  Genstatl 
+allows you to create a new executable with a specified set of classes.
+
+}
+\section{Using Genstatl
+
+}\leftindent{
+The simplest invocation of genstatl would be something like:
+
+
+\example{genstatl -d bush.dir -e bush}
+
+
+This would create a directory called bush.dir and place two files there, 
+Imakefile and statl.C.  These files contain the information needed to 
+create the executable called bush.  To create the executable you would 
+type:
+
+
+\example{cd bush.dir
+
+genmake
+
+make}
+
+
+The resulting executable bush will have the bare minimum set of 
+functionality to support the application.  Often however, more than the 
+minimum is desired.  For example if you double click on a raster or image 
+file with the newly created bush application it will report that it cannot 
+load the requested object.  (Since neither raster nor image are needed just 
+to run bush.)  To overcome this difficulty the -f and -c flags can be used 
+to specify additional classes to be loaded.  (See the Quick reference 
+section.)
+
+
+To see a list of the applications installed type:
+
+
+ls $ANDREWDIR/include/atk/*app.H $ANDREWDIR/include/atk/*a.H \
+
+
+
+(you may need to replace $ANDREWDIR with the location where AUIS has been 
+installed on your system, sometimes /usr/andrew or /usr/local)
+
+}
+\section{A more complex example}
+
+
+\leftindent{The command below will generate a bush executable which also 
+supports viewing rasters and images.
+
+
+\example{genstatl -d bush.dir -e bush -c rasterview @image}
+
+
+The flag -c introduces a list of additional libraries and classes which 
+should be provided.  The @ sign in front of image indicates that the 
+library named image should be used.  (To see a list of the available 
+libraries see $ANDREWDIR/lib/atk.)  Typically to make any given inset 
+available you can use <inset-name>view or <inset-name>v as the class to the 
+-c flag.  (Where <inset-name> should be replaced by the name of the inset.)
+
+
+
+}
+\section{Quick reference
+
+}\leftindent{
+genstatl [flags, see below]
+
+
+note: text in <> should be replaced with the appropriate
+
+filename or word, text in quotes should be replaced with an
+
+appropriate string surrounded by quotes.
+
+
+        -a
+
+Supresses loading <executable-name>app into the application.
+
+(not needed with -L)
+
+
+        -d <directory>
+
+Specifies the directory where the Imakefile and/or statl.C file will be 
+created.
+
+The directory is created if necessary.
+
+
+        -e <executable/library-name>
+
+Sets the name of the application or library to be created.
+
+
+        -i <imakefile-name>
+
+Sets the name of the imakefile to be created.
+
+
+        -L [<libraries...>]
+
+Sepcifies that a library is to be built, [<libraries...>] lists additional
+
+libraries to link this library against.
+
+
+        -l <library-order-file>
+
+Selects an alternate library ordering file.
+
+
+        -m foo1.o foo2.o etc...
+
+Selects alternate object files for main() in an application,
+
+or for inclusion in the library.
+
+
+        -n
+
+Supresses reading library information from
+
+/src/c++dest/lib/atk.
+
+
+        -o
+
+Specifies the directory where the object files given with -m will be found.
+
+
+        -r <dir1> [<dir2> ...]
+
+Reads library information from additional directories.
+
+
+        -c <class1> [<class2> ...]
+
+Selects the classes to be loaded into the application or library.
+
+The class <executable-name>app is loaded by default when creating
+
+an application.
+
+
+        -f <class-list-file>
+
+Reads the specified file and selects the classes to be loaded into
+
+the application or library. A single - may be used to indicate stdin. 
+(once)
+
+
+}
+\section{Program Author}
+
+\leftindent{\leftindent{
+}Rob Ryan
+
+}
+\section{Recent changes to Genstatl
+
+}\leftindent{
+Initial Release (February, 1993)
+
+}	C++ Conversion (June, 1993)
+
+
+\section{Related tools}  \
+
+
+
+\leftindent{Move your mouse cursor to one of the following names and click 
+your left mouse button to see the help file for:
+
+
+}\leftindent{\helptopic{runapp}
+
+}\enddata{text,538939368}

@@ -1,0 +1,222 @@
+\begindata{text,539142796}
+\textdsversion{12}
+\template{default}
+\define{footnote
+
+attr:[Flags OverBar Int Set]
+attr:[FontSize PreviousFontSize Point -2]}
+
+
+
+\chapter{
+
+The Alexandria Information Habitat: \
+
+
+Supporting Long-term Information Management}
+
+
+\leftindent{Michael L. 
+Horowitz\footnote{\
+\begindata{fnote,538660232}
+\textdsversion{12}
+\enddata{fnote,538660232}
+\view{fnotev,538660232,12,0,0}Author's present address:  Clarit Corp., 319 
+s. Craig, Pittsburgh}
+
+Alexandria Project
+
+Information Technology Center
+
+Carnegie Mellon
+
+}
+
+\indent{
+Abstract: It is now possible to provide on-line access to exceptionally 
+large amounts of information.  Users, however, do not have the proper tools 
+for managing their information over long periods of time.  We must provide 
+mechanisms that permit users to organize and manipulate information in ways 
+that far exceed simply providing access.  Otherwise, users will spend too 
+much time and effort searching for relevant information and maintaining 
+implicit organizations and interrelationships separate from the information 
+itself.}
+
+
+Currently, every information source provides its own, fixed data 
+organization and searching mechanism, usually enabling equal access to all 
+data.  Professionals, however, do not require equal access; they often need 
+to locate information they had already seen previously, or related 
+information.  For such a user, it is crucial to allow him to create his own 
+information organization, one closer to his cognitive view.
+
+
+Certain professionals, such as researchers, lawyers, and librarians, also 
+create new information having well-defined structures.  Thus, the tools 
+present in a computing environment for managing information must go beyond 
+indexing and querying.  The user must be given the ability to define 
+organizations and to create information having those organizations.  In 
+addition, users must be able to transform information organized one way 
+into other organizations.  Finally, users must be able to interact 
+naturally with the information they just organized; thus, it must be 
+possible for users to develop mini-applications tuned to new organizations 
+easily.
+
+
+The Information Habitat, being developed by the Alexandria Project at 
+Carnegie Mellon University, provides an environment in which users can 
+manage their information by taking advantage of such tools.  The Habitat 
+provides applications that allow users to create new organizations, to 
+incorporate existing information within those organizations, and to define 
+mini-applications for information of those organizations.  Of course, the 
+Habitat provides standard tools for indexing and querying collections of 
+documents.  Finally, other useful management tools (such as background 
+processing and authorization support) will also be provided.
+
+\majorheading{\underline{\bold{\
+\begindata{bp,538348280}
+\enddata{bp,538348280}
+\view{bpv,538348280,14,0,0}
+}}}\bigger{\bigger{\majorheading{\underline{\bold{
+
+The Alexandria Project}}}
+
+
+
+\bold{\italic{\center{Personal, long-term management and sharing \
+
+
+of large amounts of on-line data}}}
+
+
+
+\center{\bold{Michael Horowitz
+
+Maria Wadlow
+
+Ann Marks
+
+Todd Jonker}}
+
+\bold{\center{
+
+
+mlk@cs.cmu.edu}}
+
+
+======================================================
+
+
+\center{\underline{\bigger{\bold{Current Solutions}}}}\bold{
+
+
+\underline{
+}\underline{File System}
+
+\indent{
+- Single organization
+
+- Poor search support
+
+- Ad hoc interrelationships}
+
+\underline{
+
+Hypertext}
+
+\indent{
+- No support for abstractions
+
+- Interrelate multiple databases}
+
+\underline{
+
+Databases}
+
+\indent{
+- All applications look the same}\indent{
+
+}}
+======================================================
+
+
+\center{\bold{\underline{\bigger{Application Construction}}}}
+
+
+
+\bold{\underline{Layout}}
+
+\leftindent{\bold{- Simple (lines, boxes, text)
+
+- Widgets (button, toggle, text entry)
+
+- Interactors: common organizations}}
+
+
+
+\bold{\underline{Interpretation}}
+
+\leftindent{\bold{- Transformations}}
+
+
+
+\bold{\underline{To / From Database}}
+
+
+
+\underline{\bold{Behavior}}
+
+\leftindent{\bold{- Reaction to Events}}
+
+
+======================================================
+
+
+\center{\bold{\underline{Event  Actions}}}
+
+
+\indent{\bold{- Follow Link
+
+- Execute Query
+
+- Apply Index
+
+- Create New Information
+
+- Cut/Copy/Paste
+
+- Save Changes
+
+- Publish
+
+- More/Less Detail (zoom/pan)
+
+- Different View
+
+- Execute Agent
+
+}}
+======================================================
+
+
+\center{\bold{\bigger{\underline{Interacters}}}}
+
+
+\leftindent{\bold{- Lists
+
+- Forms
+
+- Tables
+
+- Hierarchies
+
+- Graphs
+
+- Links
+
+- Charts
+
+- "Multi-media"}}
+
+}}
+\enddata{text,539142796}

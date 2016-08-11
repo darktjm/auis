@@ -1,0 +1,3 @@
+
+InstallShScript(getnms, $(DESTDIR)/etc)
+InstallFileToFile(mkatkshlib, $(INSTPROGFLAGS), $(DESTDIR)/etc)

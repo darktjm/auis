@@ -1,0 +1,361 @@
+\begindata{text,7617152}
+\textdsversion{12}
+\template{default}
+\chapter{
+
+Progress Report on the 
+
+Andrew User Interface System}
+
+
+\leftindent{Wilfred J. Hansen
+
+Director, Andrew Consortium
+
+Carnegie Mellon University}
+
+
+
+\indent{\italic{This note reviews our work of 1992-1993 and describes the 
+decisions at the 1993 Annual Meeting as to the work for the upcoming year. 
+ }}
+
+
+It has been a productive year for the consortium.  Several new editors have 
+been added, a user's guide produced, and much of the system converted to 
+C++.  A few extracts from The Andrew View will help describe the work.
+
+
+\heading{Volume 1, number 4, December 1992:}
+
+
+In December, 1993, the X Consortium will release the R6 version of X.  As 
+part of the X distribution, we release version Andrew version 6.0.x (for a 
+small value of x).  Release 6.0.x will be the same as 5.2.x;  that is, it 
+will be version 5.2.0 with a few patches to correct core dumps and other 
+egregious errors.  At that time, the permissions statement on the sources 
+will be changed to the normal X permissions, allowing general exploitation 
+of the code.
+
+
+Throughout the year, we will continue to enhance Andrew and release 
+improvements to members.  Patch releases correcting errors in 5.2.0 will be 
+called 5.2.1, 5.2.2, and so on.  However, releases to members with major 
+enhancements will be labelled 6.1.0 and higher.  These enhancements will 
+not be included in the 6.0.x released to the X distribution.  
+
+
+The full set of changes is described in a document entitled "Andrew User 
+Interface System: New and Revised Features in Version 5.2.0."  Here are the 
+highlights.
+
+
+\bold{Launchapp} - Displays a menu of AUIS applications and serves as an 
+alternative to the shell for initiating applications.  Give the command 
+`launchapp`;  there is no help file;  just click on the buttons.   (Here at 
+the School of Computer Science, the commands `atk` and `auis` also run 
+launchapp.  Sites can choose their own aliases.)   
+
+
+\bold{Prefed} - An editor for the preferences file.  It displays existing 
+preferences and offers graphical options to change them;  help is available 
+on each preference.  For help on the entire application, give the command 
+`help prefed`.
+
+
+\bold{Figure} - Drawing editor;  faster and more reliable than zip, though 
+it lacks zip's capability for multiple levels of detail.  `help figure`
+
+
+\bold{Image} - Supplements the existing raster inset by providing for 
+multibit pixels  and thus color and grey-scale images.  Unlike raster, 
+however, editing operations are not supported.  A variety of image storage 
+formats are supported such as jpeg, and gif.  `help image`
+
+
+\bold{Keyboard-macro-to-ness-macro conversion} - With this facility users 
+can define new key stroke and menu operations dynamically.  Macros are 
+created with the usual keyboard macro \{ ^X-( ... ^X-) \} and then 
+converted to Ness, after which they can be edited as Ness code.  `help 
+macros`
+
+
+\bold{The ATK copyright} notice and disclaimer are now displayed in various 
+key files such as the top level Imakefile and the README.  It is displayed 
+on starting up programs that use frame.  
+
+
+\bold{Class hierarchy browsing} - A graphical representation of the class 
+hierarchy can be created and viewed.  The system installation process 
+installs a tree of the standard Andrew classes into 
+$ANDREWDIR/doc/atk/classes.org.  You can create trees for other class 
+hierarchies: `help mkbrowse`
+
+
+\bold{Click boxes in help} - All .help files have been converted to use the 
+new 'Help Topic' font for references.  They will appear surrounded with 
+dotted boxes and can be simply clicked on to traverse to the referenced 
+text.
+
+
+\bold{Raster editing} - When editing a raster you can now select the 
+"Toolset" menu item;  a separate window will appear with a menu of raster 
+operations.  In addition, there is an option in the main raster menu to 
+overlay an arbitrary inset, such as text, on top of a raster.  After 
+editing the overlay to a desired image, its bits can be "frozen" to become 
+part of the raster image.  Thereafter, they can be edited just like any 
+other part of the raster.
+
+
+\bold{Srctext} - Andrew has always had a diverse collection of tools for 
+editing files particular formats: ctext for C code, mtext for Modula code, 
+and so on.  These have now been superseded with a more generalized 
+mechanism provided by IBM Rochester.  The superclass "srctext" provides 
+general source text editing mechanisms which are supplemented by subclasses 
+to provide editors for even more source languages than before.  General 
+help is available via `help srctext`.  Languages supported include: 
+assembly language, C++, C, Modula-3, Modula-2, and raw ATK data stream.
+
+
+\bold{Bdffont} - Numerous bug fixes and cleaning up.  The font editor now 
+works on all bdf format fonts we have been able to find.
+
+
+\bold{MIME format} - MIME support has been augmented. There is now better 
+support for message bodies of type multipart/digest.  And message bodies 
+may contain items of type image/gif, image/pbm, image/ppm, image/pgm, and 
+image/jpeg.  There was a bug in the delivery system that kept MIME messages 
+from netnews; this has been fixed.  MIME documentation has been added to 
+`help messages`
+
+
+\bold{Ness} - Version 1.7 has the functions ReadRawFile, WriteRawFile, 
+QueueAnswer, QueueCancellation, WriteObject, and a collection of functions 
+which emulate REXX functions.
+
+
+\bold{Parsing} - A new set of tools has been introduced for token analysis 
+and parsing.  They are in the source tree as the atk/syntax subtree. 
+ Facilities include a version of the bison parser (from the Free Software 
+Foundation), a parse object which uses tables generated by bison, a symbol 
+table, a lexeme scanner and an associated lexeme description processor. 
+ These new tools are objects in the Andrew sense so it is easy to 
+incorporate multiple instances in a single application.  Moreover, many 
+lexemes are understood from the bison grammar and need not be described 
+redundantly to the lexeme processor.
+
+
+\bold{Posixification} - Many files were "Posixified", mostly by Todd 
+Inglett.  This meant converting to use posix defined libraries; in 
+particular, strchr() and strrchr() are now used instead of index() and 
+rindex().  The other things done relate to signal handling, particularly 
+the return type, and to return values from wait.  Also some prototypes were 
+added under ifdef POSIX (related to signal handler functions), some, if not 
+all of these have been expanded to test POSIX and __STDC__ separately, 
+since under AIX we compile with POSIX compliance, but old style C.  In this 
+process various additional corrections from IBM Rochester were incorporated 
+into the sources.
+
+
+
+\heading{Volume 2, number 1, April, 1993}
+
+
+Version 5.2.1 has been made available to members.  Version 5.2.2 with the 
+generator for stand-alone applications can be made available if you really 
+want to try it.
+
+
+We have completed a User's Guide to the Andrew System.  The User's Guide 
+offers, for the first time, a comprehensive description of how to use the 
+Andrew applications and insets.  Chapters cover ez, help, typescript, 
+messages, console, raster, figure, table, and many other facets of the 
+system.  The manual will be bundled with the CDrom and will be available 
+separately for $15.
+
+
+\heading{Volume 2, number 2, June, 1993}
+
+
+I'm pleased to report that I will be presenting a paper at the IEEE 1993 
+Symposium on Visual Languages in Bergen, Norway.  It is entitled: Andrew as 
+a Multiparadigm Environment for Visual Languages.
+
+
+Individual releases of AUIS - From the earliest days of the Consortium, 
+individuals have asked for memberships.  It has never been practical to 
+offer individual memberships, but we have now developed a new distribution 
+license for individuals.  This will be presented at the Annual Meeting (24 
+June).  If approved, individuals will be able to get a copy of the latest 
+sources for a nominal distribution charge.  Licensing restrictions will 
+accompany the distribution and limit the software to that one individual.
+
+
+
+\heading{Annual Meeting Reports}
+
+
+The annual meeting began with a review of last year's meeting where we 
+decided to:
+
+	improve documentation
+
+	implement a drawing editor
+
+	write a report on conversion to C++
+
+Each of these tasks was accomplished or exceeded!
+
+
+In addition to incorporating proffered documentation, Andy Plotkin wrote a 
+new User's Guide.  
+
+
+Andy also wrote 'figure', a new drawing editor.
+
+
+With technical input from Todd Inglett and Rob Ryan, I wrote the C++ 
+report, reluctantly concluding that we could convert.  In a series of 
+conversations and email messages I found no support for remaining with C 
+despite the fact that we will accomplish little else this year.  So the 
+conversion began and has reached the stage where it is clearly successful. 
+ The new system was demonstrated.  It could be argued that the 
+demonstration was boring in that the converted system behaves exactly like 
+the old;  we prefer to argue that a conversion should indeed be exactly the 
+same. The remainder of the year will be spent cleaning up, porting to more 
+platforms, enhancing installability, and implementing dynamic loading--at 
+least for platforms with shared libraries.
+
+
+We also discussed at the meeting the introduction of a three-dimensional 
+membership fee structure to replace the present system based strictly on 
+level of membership.  The new structure would distinguish the size of the 
+organization, the level of membership, and whether the organization was 
+intended to turn a profit.  No specific proposal was presented;  these 
+changes will not take place until membership years beginning in 1994.
+
+
+
+\heading{Annual Meeting Priorities for the year ahead}
+
+
+Discussion at the annual meeting, 24 June, 1993, was lively and established 
+valuable priorities for the year ahead.  Here are the notes on the 
+priorities.  We plan to do all priority 1 items and most of the 2's and 
+3's.
+
+
+\bold{1st Priority - Robustness}
+
+	Ease of use
+
+	No crashes
+
+	No installation problems
+
+
+\bold{Platforms to be supported with C++ release}
+
+
+1.  RS/6000,  HP/PA,  PMAX Ultrix
+
+2.  Solaris 2,  Alpha,  Telmat
+
+3.  Pmax/Mach, Sun4/Mach,  SGI
+
+4.  Linux,  Win32/WinNt
+
+
+No support for non-ANSI C++ compilers
+
+	require function prototypes
+
+
+Investigate g++ dynamic loader
+
+
+
+\bold{Widgets / Application Builder}
+
+
+Priority 2 - Regularize the widget suite
+
+		(MIT views this as priority 3)
+
+
+	clean up API
+
+	clean up U/I
+
+	improve consistency and documentation
+
+	collect information at one access point
+
+
+	provide an index to programmer documentation
+
+
+Priority 2 - Design application builder
+
+Priority 4 - Implement Application builder
+
+	construction environment
+
+	property editor
+
+	generalized wrapper approach
+
+
+\bold{Printing   (Priority 3  (MIT: 2))}
+
+
+	eliminate Troff
+
+	direct to PostScript
+
+	make everything print
+
+	clarify size negotiation
+
+	multi-page insets
+
+	multi-column text
+
+	flow text around insets
+
+	rotation    90 degree ?
+
+
+use gv;  move preview to contrib
+
+
+
+\bold{Mail}  
+
+
+No clear consensus on an overall mail strategy was reached, though there 
+was consensus that there is a big market.
+
+
+	priority 2  -  IMAP for CMU
+
+	priority 3 - make ezmail and macmail available
+
+			try to get batmail out
+
+	priority 4 - convert AMS to be a front end for 
+
+			various mail management archive formats
+
+
+consider making a distribution which is only AMS
+
+
+consider binary distributions of AUIS
+
+
+
+With these priorities, we will have enough to do in the coming year.  It is 
+our expectation that AUIS will be an increasingly attractive package, 
+especially for end users, but also for C++ programmers.\
+\enddata{text,7617152}

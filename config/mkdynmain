@@ -1,0 +1,64 @@
+#!/bin/csh -f
+# Copyright 1994 Carnegie Mellon University All rights reserved.
+#  $Disclaimer: 
+# Permission to use, copy, modify, and distribute this software and its 
+# documentation for any purpose and without fee is hereby granted, provided 
+# that the above copyright notice appear in all copies and that both that 
+# copyright notice and this permission notice appear in supporting 
+# documentation, and that the name of IBM not be used in advertising or 
+# publicity pertaining to distribution of the software without specific, 
+# written prior permission. 
+#                         
+# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# 
+#  $
+# Output a file defining a main function which registers each
+# of the named classes.
+# usage: mkdynmain class1 class2 etc....
+
+echo "#include <andrewos.h>"
+echo "#include <ATK.H>"
+
+if "$argv[1]" == "-ctor" then
+	shift
+	if "$argv[1]" == "-main" then	
+		shift
+		echo "int main() { ; }"
+	endif
+	echo "class ATKRegisterClass { public:"
+	echo "inline ATKRegisterClass(ATKregistryEntry *reg) {"
+	echo "	ATK::RegisterClass(reg); }"
+	echo "inline ~ATKRegisterClass() { ; }"
+	echo "};"
+	foreach name ($argv)
+		echo "extern ATKregistryEntry ${name}_ATKregistry_;"
+		echo "static ATKRegisterClass ${name}$$_(&${name}_ATKregistry_);"
+	end
+else
+if "$argv[1]" == "-" then
+	shift
+	set main = $argv[1]
+	shift
+else
+	set main = main
+endif
+
+foreach name ($argv)
+echo "extern ATKregistryEntry ${name}_ATKregistry_;"
+end
+
+echo 'extern "C" '"int $main(int argc, char **argv) {"
+foreach name($argv)
+echo "ATKregister($name);"
+end
+
+echo "return 0;"
+echo "}"
+endif

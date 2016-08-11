@@ -1,0 +1,57 @@
+\begindata{text,18195040}
+\textdsversion{12}
+\template{help}
+\define{keyword
+}
+\chapter{C++Index: Create a Class Index file
+
+}
+\section{What C++Index is
+
+}\leftindent{
+\italic{C++Index} searches a directory for ATK class header files (.ch files), 
+and produces a class index file. The index file can then be used by 
+\italic{C++Conv}. See the help file on \italic{C++Conv}.
+
+}
+\section{Starting C++Index
+
+}\leftindent{
+\typewriter{C++Index \italic{directories...}}}\typewriter{\italic{
+
+}}
+\leftindent{\italic{directories...} should be a list of one or more 
+directories. \italic{C++Index} will find all the .ch files in any of those 
+directories, or any subdirectories of them (at any depth). It will then 
+produce, on standard output, a class index file describing all of them. You 
+should capture this output in a file and use it as an argument to 
+\italic{C++Conv}.
+
+}
+\section{Details
+
+}
+\leftindent{\italic{C++Index} is a stupid shell script that finds all the .ch 
+files and pipes them into \italic{classindex}. \italic{classindex} reads a 
+list of .ch filenames from standard in, and produces the class index file 
+output. \italic{classindex} calls \italic{class}. Therefore, when you run 
+\italic{C++Index}, both \italic{classindex} and \italic{class} should be in 
+your path.
+
+
+A class index file lists, for each class:
+
+	the name of the class
+
+	what .ch file the class was declared in
+
+	the class's parent and all ancestor classes
+
+	the names of all methods and classprocedures
+
+
+You can concatenate several class index files (using \italic{cat}); the result 
+will be a legitimate class index file.
+
+
+}\enddata{text,18195040}

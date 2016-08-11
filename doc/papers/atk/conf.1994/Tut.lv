@@ -1,0 +1,7842 @@
+\begindata{text,538298760}
+\textdsversion{12}
+\template{/afs/cs/user/wjh/tpls/slides.tpl}
+\define{global
+
+attr:[FontSize ConstantFontSize Point 24]}
+\define{red
+menu:[Color,Red]
+attr:['color' 'Red']}
+
+
+\begindata{raster,537876120}
+2 0 68266 68266 0 0 183 218
+bits 537876120 183 218
+zi |
+zi |
+l10v |
+l10v |
+l18v |
+l3cv |
+l3ev |
+l3ev |
+l3fv |
+l3fv |
+l3f80u |
+l3fc0u |
+l3fc0u |
+l3fe0u |
+l3fe0u |
+l3ff0u |
+l3ff0u |
+l3ff8u |
+l3ff8u |
+l3ffcu |
+l3ffcu |
+l3ffcu |
+l3ffeu |
+l3ffeu |
+l1fGu |
+l1fGu |
+l1fGu |
+l1fG80t |
+l1fG80t |
+l0fGc0t |
+l0fGc0t |
+l0fGe0t |
+l0fGe0t |
+l07Gf0t |
+l07Gf8t |
+l03Gf8t |
+l03Gfct |
+l01Gfct |
+l01Gfet |
+mHt |
+m7fG80s |
+m7fGc0s |
+m3fGe0s |
+m1fGf0s |
+m0fGf8s |
+m07Gfes |
+m01Hs |
+nHc0r |
+n7fGe0r |
+n3fGf8r |
+n0fGfcr |
+n03Hr |
+oHc0q |
+o3fGf0q |
+o0fGfcq |
+o03Hq |
+pHe0p |
+p3fGfcp |
+p0fH80i40k |
+p01Hf0h0780k |
+q1fGfeg03Gl |
+q03Jfcl |
+r1fIf0l |
+r1fIc0l |
+q0fJm |
+qJfcm |
+p0fJf0m |
+pKc0m |
+o0fKn |
+oKf0n |
+n0fK80n |
+nKf8o |
+m0fK80o |
+mKf8p |
+l0fK80p |
+k01Kf8q |
+k1fK80q |
+j01Kf8r |
+j1fK80r |
+i03Kf8s |
+i1fK80s |
+h01Kf8t |
+h1fK80t |
+g03Kf8u |
+87L80u |
+3fKf8v |
+1fK80v |
+0fJf0w |
+03Jx |
+gIe0x |
+g0fHfex |
+hI80w |
+h0fHe0w |
+i7fGf8w |
+i07Gfew |
+j3fG80v |
+j07Ge0v |
+kGf8v |
+k1ffev |
+k07G80u |
+k01Ge0u |
+l7ff8u |
+l1ffeu |
+l0fG80t |
+l03Ge0t |
+l01Gf8t |
+m7ffct |
+m1ffet |
+m0fG80s |
+m07Gc0s |
+m03Ge0s |
+m01Gf0s |
+nGf8s |
+n7ffcs |
+n3ffes |
+n3fGs |
+n1fG80r |
+n0fGc0r |
+n07Ge0r |
+n03Ge0r |
+n03Gf0r |
+n01Gf8r |
+oGfcr |
+o7ffcr |
+o3ffer |
+m07803ffer |
+m07801fGi04n |
+m0f800fG80hfc	n |
+m0fc00fG80hfc	n |
+m0fc007Gc0h1c	n |
+m1fc003Gc0h1c	n |
+m1fe003Ge0h1c	n |
+m1fe001Gf0h1c	n |
+m3fe001f9f0h1c	n |
+m3ff0gf180h1c	n |
+m3bf0k1cn |
+m7bf0k1cn |
+m71f8k1cn |
+m71f8g043eg1f	dcg84gf03feffc	7e |
+mf1f8g1cGg7ffc	019e07fc3feffc	7e |
+me0fcgfdG80f0	fc1f9f0f1e0f83	e018 |
+me0fcgHc1e07c	1fbf1e!0fc1e0	18 |
+l01e0fcg3e07c1	e03c07b13c0787	c1e010 |
+l01c07eg3c03c3	c03c07e1380387	c1f030 |
+l01c07eg3c03c3	c01c07c07803c7	c0f030 |
+l03c07eg3c03c3	c01c07807fGc3	e0f020 |
+l03803fg3c03c7	c01c07807fGc3	e1f860 |
+l03803fg3c03c7	c01c078078g03	e1f860 |
+l07803fg3c03c7	c01c078070g01	f1f840 |
+l07H803c03c7c0	1c078070g01f3	7cc0 |
+l07g1f803c03c7	c01c078070g01	f33cc0 |
+l0fg1f803c03c7	c01c078070hfa	3c80 |
+l0eg0fc03c03c7	c01c078070hfe	3f80 |
+l0eg0fc03c03c7	c01c07807801c0	fe1f80 |
+l1eg0fc03c03c3	c03c07803803c0	7c1fg |
+l1cg07e03c03c3	e07c07803c0380	7c1fg |
+l1cg07e03c03c1	f1fc07803c0780	7c0fg |
+l3cg07e03c03c0	Gdf87801e0fg38	0eg |
+l3cg07f03c03e0	Gdf87c00ffeg38	0eg |
+lGg1ffcG8ff83f	901ff003f8g38	0eg |
+zi |
+zi |
+zi |
+p03Ge0p |
+p03Gf0p |
+p03Gf0p |
+p01Gf0p |
+p01Gf0p |
+p01Gf8p |
+p01Gf8p |
+qGf8p |
+qGf8p |
+qGfcp |
+qGfcp |
+q7ffcp |
+q7ffcp |
+q7ffep |
+q7ffep |
+q3ffep |
+q3ffep |
+q3ffep |
+q3fGp |
+q1fGp |
+q1fGp |
+q1fGp |
+q1fGp |
+q0fG80o |
+q0fG80o |
+q0fG80o |
+q0fG80o |
+q07Gc0o |
+q07Gc0o |
+q07Gc0o |
+q07Gc0o |
+q03Ge0o |
+q03Ge0o |
+q03Ge0o |
+q03Ge0o |
+q01Gf0g08m |
+q01Gf0g08m |
+q01Gf0g18m |
+q01Gf0g38m |
+rGf8g78m |
+rGf8gf0m |
+rGf801f0m |
+rGf803f0m |
+r7ffc07e0m |
+r7ffc0fc0m |
+r7ffe1f80m |
+r3ffe3fn |
+r3fHn |
+r1fGfen |
+r1fGfcn |
+r0fGf8n |
+r07Gf0n |
+r03Ge0n |
+r01Gc0n |
+s7f80n |
+\enddata{raster, 537876120}
+\view{rasterview,537876120,7,0,0}\majorheading{
+
+}\majorheading{Options for \
+
+
+Compound Document Systems}
+
+
+
+\author{Wilfred J. Hansen
+
+
+Director, Andrew Consortium
+
+School of Computer Science
+
+Carnegie Mellon University
+
+
+wjh+@cmu.edu}
+
+
+
+
+
+
+\begindata{bp,537862824}
+\enddata{bp,537862824}
+\view{bpv,537862824,8,0,8}
+
+
+\slidehead{Outline}
+
+
+
+\bold{I.  Introduction}
+
+
+	A. What is a compound document?
+
+	B. Survey of Existing Systems
+
+
+\bold{II. Typical operations for compound documents}
+
+
+	A.  AUIS
+
+	B.  Ness
+
+	C.  OLE
+
+	D.  OpenDoc
+
+	E.  Fresco
+
+	F.  NextStep
+
+
+
+
+
+\begindata{bp,537872440}
+\enddata{bp,537872440}
+\view{bpv,537872440,9,0,0}
+
+
+\chapter{A. What is a Compound Document System  (CDS)}
+
+
+
+Compound document has
+
+
+	Typographic styles
+
+		fonts, colors
+
+		margins, justification
+
+		line spacing, superscript / subscript
+
+	Embedded insets
+
+		pictures
+
+		tables
+
+		equations
+
+
+CDS is
+
+	a user environment where \
+
+
+		compound documents supplant ASCII
+
+		\italic{\red{compound documents supplant ASCII}}
+
+		\bold{\blue{compound documents supplant ASCII}}
+
+
+CDS has applications and embeddable objects
+
+
+Much more than a UIMS or a word processor
+
+
+\begindata{bp,538173016}
+\enddata{bp,538173016}
+\view{bpv,538173016,10,0,0}
+
+\slidehead{
+
+Compound Documents, Universally}
+
+
+
+
+
+
+\bold{Imagine  } system error messages in color
+
+
+\bold{Imagine  } cut/paste between any two windows
+
+
+\bold{Imagine}   a program source code with drawings
+
+	comments
+
+	string constants
+
+	flow-of-control by diagram
+
+
+\bold{Imagine }  no "markup" languages for documents
+
+
+
+
+
+\begindata{bp,538178344}
+\enddata{bp,538178344}
+\view{bpv,538178344,11,0,0}
+
+\slidehead{Inter-operation Between Applications}
+
+
+CDS is almost an operating system above the window level
+
+
+Provides for sharing system resources \
+
+
+	between objects
+
+
+Provides a common data stream definition
+
+	"lingua franca" for information transfer
+
+
+
+Insets share physical devices
+
+	graphics operations
+
+	screen space
+
+	user input devices
+
+	file store
+
+	printed page
+
+
+Insets share conceptual devices
+
+	data stream
+
+	cut/copy/paste/drag/drop
+
+	extension language
+
+	application builder
+
+	linkability
+
+	resources
+
+\begindata{bp,538178392}
+\enddata{bp,538178392}
+\view{bpv,538178392,12,0,0}
+
+\slidehead{Interfaces to a compound document}
+
+
+\begindata{figure,538178440}
+$origin 0 0
+$printscale 1.000000 1.000000
+#none
+\begindata{figogrp,539363240}
+\figattr{
+}
+$ 0 154 106 3395 2895
+$endatt
+\enddata{figogrp,539363240}
+\begindata{figoplin,24238592}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 2 0 0
+$ 1584 936
+$ 0 576
+$endatt
+\enddata{figoplin,24238592}
+\begindata{figoplin,24238080}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 2 0 0
+$ 2088 1152
+$ 0 504
+$endatt
+\enddata{figoplin,24238080}
+\begindata{figospli,24237568}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 5 0 0
+$ 1584 936
+$ 67 87
+$ 232 105
+$ 452 106
+$ 504 216
+$endatt
+\enddata{figospli,24237568}
+\begindata{figospli,24237568}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 5 0 0
+$ 1584 1510
+$ 70 80
+$ 268 74
+$ 429 74
+$ 502 141
+$endatt
+\enddata{figospli,24237568}
+\begindata{figoplin,19132672}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 2136 1488
+$ 227 25
+$endatt
+\enddata{figoplin,19132672}
+\begindata{figotext,20816128}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 2550 1513
+$ -16 16
+Print=000
+$endatt
+\enddata{figotext,20816128}
+\begindata{figoplin,20816640}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 2739 1513
+$ 148 8
+$endatt
+\enddata{figoplin,20816640}
+\begindata{figoplin,20808192}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 2769 1440
+$ 125 88
+$ 0 140
+$endatt
+\enddata{figoplin,20808192}
+\begindata{figorrec,20856832}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 248 114
+$ 893 702
+$endatt
+\enddata{figorrec,20856832}
+\begindata{figotext,20819456}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1191 1057
+$ 43 -118
+Display=012=000
+$endatt
+\enddata{figotext,20819456}
+\begindata{figoplin,20858624}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 1440 1296
+$ -216 -144
+$endatt
+\enddata{figoplin,20858624}
+\begindata{figoplin,20859136}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 936 1008
+$ -216 -144
+$endatt
+\enddata{figoplin,20859136}
+\begindata{figoplin,20859648}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 744 912
+$ -24 -48
+$ 24 -48
+$endatt
+\enddata{figoplin,20859648}
+\begindata{figogrp,20818432}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 1671 1297 225 201
+$endatt
+\enddata{figogrp,20818432}
+\begindata{figorect,20817408}
+\figattr{
+shade:3
+color:blue
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1675 1301
+$ 216 192
+$endatt
+\enddata{figorect,20817408}
+\begindata{figoell,20817920}
+\figattr{
+shade:4
+color:red
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1699 1349
+$ 72 96
+$endatt
+\enddata{figoell,20817920}
+\begindata{figorrec,20818432}
+\figattr{
+shade:5
+color:green
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1723 1397
+$ 144 72
+$endatt
+\enddata{figorrec,20818432}
+#end
+\begindata{figoplin,20936960}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 5 0 0
+$ 1525 440
+$ 504 0
+$ 432 144
+$ -72 144
+$ 0 0
+$endatt
+\enddata{figoplin,20936960}
+\begindata{figoell,20937216}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 2150 438
+$ 144 216
+$endatt
+\enddata{figoell,20937216}
+\begindata{figoell,20937984}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 2171 494
+$ 44 52
+$endatt
+\enddata{figoell,20937984}
+\begindata{figogrp,20947712}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 2233 485 53 61
+$endatt
+\enddata{figogrp,20947712}
+\begindata{figoell,20937984}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 2237 489
+$ 44 52
+$endatt
+\enddata{figoell,20937984}
+#end
+\begindata{figogrp,20948224}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 1531 456 39 53
+$endatt
+\enddata{figogrp,20948224}
+\begindata{figorect,20938496}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1535 460
+$ 30 44
+$endatt
+\enddata{figorect,20938496}
+#end
+\begindata{figogrp,20948224}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 1584 454 39 53
+$endatt
+\enddata{figogrp,20948224}
+\begindata{figorect,20938496}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1588 458
+$ 30 44
+$endatt
+\enddata{figorect,20938496}
+#end
+\begindata{figogrp,20948224}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 1506 524 39 53
+$endatt
+\enddata{figogrp,20948224}
+\begindata{figorect,20938496}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1510 528
+$ 30 44
+$endatt
+\enddata{figorect,20938496}
+#end
+\begindata{figogrp,20948224}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 1561 524 39 53
+$endatt
+\enddata{figogrp,20948224}
+\begindata{figorect,20938496}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1565 528
+$ 30 44
+$endatt
+\enddata{figorect,20938496}
+#end
+\begindata{figogrp,20948224}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 1631 456 39 53
+$endatt
+\enddata{figogrp,20948224}
+\begindata{figorect,20938496}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1635 460
+$ 30 44
+$endatt
+\enddata{figorect,20938496}
+#end
+\begindata{figogrp,20948224}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 1620 524 39 53
+$endatt
+\enddata{figogrp,20948224}
+\begindata{figorect,20938496}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1624 528
+$ 30 44
+$endatt
+\enddata{figorect,20938496}
+#end
+\begindata{figogrp,20948224}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 1685 452 39 53
+$endatt
+\enddata{figogrp,20948224}
+\begindata{figorect,20938496}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1689 456
+$ 30 44
+$endatt
+\enddata{figorect,20938496}
+#end
+\begindata{figogrp,20948224}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 1737 451 39 53
+$endatt
+\enddata{figogrp,20948224}
+\begindata{figorect,20938496}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1741 455
+$ 30 44
+$endatt
+\enddata{figorect,20938496}
+#end
+\begindata{figogrp,20948224}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 1728 526 39 53
+$endatt
+\enddata{figogrp,20948224}
+\begindata{figorect,20938496}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1732 530
+$ 30 44
+$endatt
+\enddata{figorect,20938496}
+#end
+\begindata{figogrp,20948224}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 1824 454 39 53
+$endatt
+\enddata{figogrp,20948224}
+\begindata{figorect,20938496}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1828 458
+$ 30 44
+$endatt
+\enddata{figorect,20938496}
+#end
+\begindata{figogrp,20948224}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 1888 508 39 53
+$endatt
+\enddata{figogrp,20948224}
+\begindata{figorect,20938496}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1892 512
+$ 30 44
+$endatt
+\enddata{figorect,20938496}
+#end
+\begindata{figoplin,20978688}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 1830 952
+$ 22 59
+$ 67 15
+$endatt
+\enddata{figoplin,20978688}
+\begindata{figotext,20978176}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1953 837
+$ 0 0
+Input=000
+$endatt
+\enddata{figotext,20978176}
+\begindata{figoplin,20978432}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 1 0
+$ 1886 904
+$ -33 100
+$endatt
+\enddata{figoplin,20978432}
+\begindata{figoplin,20977664}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 1849 609
+$ 67 170
+$ 277 7
+$endatt
+\enddata{figoplin,20977664}
+\begindata{figotext,21006592}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 2448 985
+$ 0 0
+File=000
+$endatt
+\enddata{figotext,21006592}
+\begindata{figoplin,21006848}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 2769 753
+$ -222 162
+$endatt
+\enddata{figoplin,21006848}
+\begindata{figoplin,21007360}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 2311 1078
+$ -155 103
+$endatt
+\enddata{figoplin,21007360}
+\begindata{figoplin,21007872}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 2193 1107
+$ -74 81
+$ 37 96
+$endatt
+\enddata{figoplin,21007872}
+\begindata{figoplin,21021696}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 2702 841
+$ 82 -96
+$ -44 -81
+$endatt
+\enddata{figoplin,21021696}
+\begindata{figoplin,21024000}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 1491 1476
+$ -155 60
+$endatt
+\enddata{figoplin,21024000}
+\begindata{figoplin,21024512}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 1056 1617
+$ -104 44
+$endatt
+\enddata{figoplin,21024512}
+\begindata{figoplin,21045504}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 960 1595
+$ -15 73
+$ 29 81
+$endatt
+\enddata{figoplin,21045504}
+\begindata{figoplin,21046016}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 960 1668
+$ 59 15
+$endatt
+\enddata{figoplin,21046016}
+\begindata{figoplin,21046784}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 930 1801
+$ 140 -51
+$endatt
+\enddata{figoplin,21046784}
+\begindata{figoplin,21047296}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 1351 1632
+$ 162 -67
+$endatt
+\enddata{figoplin,21047296}
+\begindata{figoplin,21047808}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 1410 1558
+$ 96 7
+$ 52 81
+$endatt
+\enddata{figoplin,21047808}
+\begindata{figogrp,21050368}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 2964 1290 585 657
+$endatt
+\enddata{figogrp,21050368}
+\begindata{figorect,20809472}
+\figattr{
+shade:0
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 3040 1366
+$ 504 576
+$endatt
+\enddata{figorect,20809472}
+\begindata{figoplin,20809984}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 2 0 0
+$ 3472 1294
+$ 72 72
+$endatt
+\enddata{figoplin,20809984}
+\begindata{figoplin,20810496}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 2 0 0
+$ 2968 1294
+$ 72 72
+$endatt
+\enddata{figoplin,20810496}
+\begindata{figoplin,20811008}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 2 0 0
+$ 2968 1870
+$ 72 72
+$endatt
+\enddata{figoplin,20811008}
+\begindata{figoplin,20808960}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 3 0 0
+$ 3472 1294
+$ -504 0
+$ -504 576
+$endatt
+\enddata{figoplin,20808960}
+\begindata{figoplin,20808448}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 2 0 0
+$ 3496 1318
+$ -504 0
+$endatt
+\enddata{figoplin,20808448}
+\begindata{figoplin,20807680}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 2 0 0
+$ 2992 1318
+$ 0 576
+$endatt
+\enddata{figoplin,20807680}
+\begindata{figoplin,20753920}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 2 0 0
+$ 3520 1342
+$ -504 0
+$endatt
+\enddata{figoplin,20753920}
+\begindata{figoplin,19136000}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 2 0 0
+$ 3016 1342
+$ 0 576
+$endatt
+\enddata{figoplin,19136000}
+\begindata{figorect,20817408}
+\figattr{
+shade:3
+color:blue
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 3112 1654
+$ 216 192
+$endatt
+\enddata{figorect,20817408}
+\begindata{figoell,20817920}
+\figattr{
+shade:4
+color:red
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 3136 1702
+$ 72 96
+$endatt
+\enddata{figoell,20817920}
+\begindata{figorrec,20818432}
+\figattr{
+shade:5
+color:green
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 3160 1750
+$ 144 72
+$endatt
+\enddata{figorrec,20818432}
+#end
+\begindata{figotext,21051648}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1823 1147
+$ 0 0
+DOC=000
+$endatt
+\enddata{figotext,21051648}
+\begindata{figotext,21051904}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1477 2081
+$ 0 0
+Script=000
+$endatt
+\enddata{figotext,21051904}
+\begindata{figoplin,21052416}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 1654 1683
+$ -163 310
+$endatt
+\enddata{figoplin,21052416}
+\begindata{figogrp,21070336}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 2846 349 497 619
+$endatt
+\enddata{figogrp,21070336}
+\begindata{figogrp,21022720}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 2848 818 484 150
+$endatt
+\enddata{figogrp,21022720}
+\begindata{figoell,20967936}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 2856 826
+$ 467 133
+$endatt
+\enddata{figoell,20967936}
+#end
+\begindata{figogrp,20979456}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 2846 349 497 150
+$endatt
+\enddata{figogrp,20979456}
+\begindata{figoell,20967936}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 2854 357
+$ 480 133
+$endatt
+\enddata{figoell,20967936}
+#end
+\begindata{figoplin,21005568}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 2854 439
+$ 0 454
+$endatt
+\enddata{figoplin,21005568}
+\begindata{figoplin,21006080}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 3330 428
+$ 0 461
+$endatt
+\enddata{figoplin,21006080}
+\begindata{figorect,21022208}
+\figattr{
+shade:0
+color:white
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 2873 805
+$ 443 66
+$endatt
+\enddata{figorect,21022208}
+#end
+\begindata{figorrec,21070592}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1897 2112
+$ 1145 797
+$endatt
+\enddata{figorrec,21070592}
+\begindata{figotext,21071360}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 2156 1868
+$ 0 0
+App=040Build=000
+$endatt
+\enddata{figotext,21071360}
+\begindata{figoplin,21071616}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 2134 2067
+$ -45 -96
+$endatt
+\enddata{figoplin,21071616}
+\begindata{figoplin,21072128}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 1964 1779
+$ -74 -147
+$endatt
+\enddata{figoplin,21072128}
+\begindata{figorect,539356664}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 1990 2222
+$ 301 357
+$endatt
+\enddata{figorect,539356664}
+\begindata{figorect,539357336}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 2435 2216
+$ 488 588
+$endatt
+\enddata{figorect,539357336}
+\begindata{figogrp,539358664}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 0 2592 2271 78 66
+$endatt
+\enddata{figogrp,539358664}
+\begindata{figorect,539357976}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 2596 2275
+$ 69 57
+$endatt
+\enddata{figorect,539357976}
+#end
+\begindata{figogrp,539358664}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 0 2736 2271 78 66
+$endatt
+\enddata{figogrp,539358664}
+\begindata{figorect,539357976}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 2740 2275
+$ 69 57
+$endatt
+\enddata{figorect,539357976}
+#end
+\begindata{figogrp,539358664}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 0 2736 2415 78 66
+$endatt
+\enddata{figogrp,539358664}
+\begindata{figorect,539357976}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 2740 2419
+$ 69 57
+$endatt
+\enddata{figorect,539357976}
+#end
+\begindata{figogrp,539358664}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 0 2592 2415 78 66
+$endatt
+\enddata{figogrp,539358664}
+\begindata{figorect,539357976}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 2596 2419
+$ 69 57
+$endatt
+\enddata{figorect,539357976}
+#end
+\begindata{figogrp,539358664}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 0 2448 2271 78 66
+$endatt
+\enddata{figogrp,539358664}
+\begindata{figorect,539357976}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 2452 2275
+$ 69 57
+$endatt
+\enddata{figorect,539357976}
+#end
+\begindata{figogrp,539358664}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 0 2448 2415 78 66
+$endatt
+\enddata{figogrp,539358664}
+\begindata{figorect,539357976}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 2452 2419
+$ 69 57
+$endatt
+\enddata{figorect,539357976}
+#end
+\begindata{figoplin,539367768}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 8 0 0
+$ 2520 2664
+$ 72 -72
+$ 144 0
+$ 144 -72
+$ 216 -72
+$ 216 0
+$ 288 -72
+$ 288 0
+$endatt
+\enddata{figoplin,539367768}
+\begindata{figoplin,539368248}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 2 0 0
+$ 2016 2376
+$ 144 0
+$endatt
+\enddata{figoplin,539368248}
+\begindata{figoplin,539529400}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 2 0 0
+$ 2016 2448
+$ 144 0
+$endatt
+\enddata{figoplin,539529400}
+\begindata{figoplin,539530120}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$$ 0 2 0 0
+$ 2016 2520
+$ 216 0
+$endatt
+\enddata{figoplin,539530120}
+\begindata{figorect,20935424}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 308 220
+$ 456 528
+$endatt
+\enddata{figorect,20935424}
+\begindata{figogrp,539536888}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 368 463 225 201
+$endatt
+\enddata{figogrp,539536888}
+\begindata{figogrp,20935936}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 368 463 225 201
+$endatt
+\enddata{figogrp,20935936}
+\begindata{figorect,20817408}
+\figattr{
+shade:3
+color:blue
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 372 467
+$ 216 192
+$endatt
+\enddata{figorect,20817408}
+\begindata{figoell,20817920}
+\figattr{
+shade:4
+color:red
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 396 515
+$ 72 96
+$endatt
+\enddata{figoell,20817920}
+\begindata{figorrec,20818432}
+\figattr{
+shade:5
+color:green
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 420 563
+$ 144 72
+$endatt
+\enddata{figorrec,20818432}
+#end
+#end
+\begindata{figorect,21023232}
+\figattr{
+shade:1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 162 1557
+$ 701 414
+$endatt
+\enddata{figorect,21023232}
+\begindata{figogrp,539537512}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 374 1665 225 201
+$endatt
+\enddata{figogrp,539537512}
+\begindata{figogrp,20818432}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 374 1665 225 201
+$endatt
+\enddata{figogrp,20818432}
+\begindata{figorect,20817408}
+\figattr{
+shade:3
+color:blue
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 378 1669
+$ 216 192
+$endatt
+\enddata{figorect,20817408}
+\begindata{figoell,20817920}
+\figattr{
+shade:4
+color:red
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 402 1717
+$ 72 96
+$endatt
+\enddata{figoell,20817920}
+\begindata{figorrec,20818432}
+\figattr{
+shade:5
+color:green
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 426 1765
+$ 144 72
+$endatt
+\enddata{figorrec,20818432}
+#end
+#end
+\begindata{figoplin,21052160}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 1 5 0 0
+$ 1492 2791
+$ -371 201
+$ -677 -90
+$ -495 -470
+$ -77 -415
+$endatt
+\enddata{figoplin,21052160}
+\begindata{figoplin,21069824}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 1410 2178
+$ -74 133
+$endatt
+\enddata{figoplin,21069824}
+\begindata{figoplin,539538184}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 968 2529
+$ 263 0
+$endatt
+\enddata{figoplin,539538184}
+\begindata{figoplin,539539000}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 993 2616
+$ 231 0
+$endatt
+\enddata{figoplin,539539000}
+\begindata{figoplin,539539800}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 999 2679
+$ 250 -6
+$endatt
+\enddata{figoplin,539539800}
+\begindata{figoplin,539540600}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 968 2735
+$ 169 0
+$endatt
+\enddata{figoplin,539540600}
+\begindata{figotext,21230592}
+\figattr{
+shade:1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 1080 1440
+$ 0 0
+Drag=012Cut=012Paste=012Drop=000
+$endatt
+\enddata{figotext,21230592}
+#end
+\enddata{figure,538178440}
+\view{figview,538178440,13,0,608}
+
+"Display" is both screen space and graphics operations
+
+"File" is data stream,  link name space, and resources
+
+\begindata{bp,538273976}
+\enddata{bp,538273976}
+\view{bpv,538273976,14,0,0}
+\slidehead{Linking, some definitions}
+
+Two objects may jointly occupy  	\sansserif{file}   or  	\sansserif{window}
+
+\begindata{figure,538274024}
+$origin 0 0
+$printscale 1.000000 1.000000
+#none
+\begindata{figogrp,539189144}
+\figattr{
+}
+$ 0 11 242 4101 4109
+$endatt
+\enddata{figogrp,539189144}
+\begindata{figogrp,538949016}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 0 2673 939 1027 391
+$endatt
+\enddata{figogrp,538949016}
+\begindata{figogrp,539148104}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 0 2673 951 385 379
+$endatt
+\enddata{figogrp,539148104}
+\begindata{figoell,539168600}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 2690 1325
+$ 363 -63
+$endatt
+\enddata{figoell,539168600}
+\begindata{figorect,539147432}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 2677 999
+$ 376 301
+$endatt
+\enddata{figorect,539147432}
+\begindata{figoell,539167992}
+\figattr{
+shade:0
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 2690 955
+$ 363 69
+$endatt
+\enddata{figoell,539167992}
+#end
+\begindata{figogrp,539148104}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 0 3315 939 385 379
+$endatt
+\enddata{figogrp,539148104}
+\begindata{figoell,539168600}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 3332 1313
+$ 363 -63
+$endatt
+\enddata{figoell,539168600}
+\begindata{figorect,539147432}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 3319 987
+$ 376 301
+$endatt
+\enddata{figorect,539147432}
+\begindata{figoell,539167992}
+\figattr{
+shade:0
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 3332 943
+$ 363 69
+$endatt
+\enddata{figoell,539167992}
+#end
+\begindata{figorect,539199016}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 2738 1072
+$ 263 188
+$endatt
+\enddata{figorect,539199016}
+\begindata{figorect,539199672}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 3414 1110
+$ 119 106
+$endatt
+\enddata{figorect,539199672}
+\begindata{figorect,539200328}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 2788 1122
+$ 31 38
+$endatt
+\enddata{figorect,539200328}
+\begindata{figoplin,539200984}
+\figattr{
+shade:6
+color:red
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 2835 1139
+$ 529 15
+$endatt
+\enddata{figoplin,539200984}
+\begindata{figoplin,539201784}
+\figattr{
+shade:-1
+color:red
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 3293 1110
+$ 88 47
+$ -4 70
+$endatt
+\enddata{figoplin,539201784}
+#end
+\begindata{figoplin,538949016}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 2397 450
+$ 0 3895
+$endatt
+\enddata{figoplin,538949016}
+\begindata{figoplin,538949864}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 569 2397
+$ 3525 0
+$endatt
+\enddata{figoplin,538949864}
+\begindata{figotext,538950664}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 1340 325
+$ 0 0
+share=040file=000
+$endatt
+\enddata{figotext,538950664}
+\begindata{figotext,539141416}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 3005 306
+$ 0 0
+two=040files=000
+$endatt
+\enddata{figotext,539141416}
+\begindata{figotext,539141928}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:1
+}
+$ 47 1103
+$ 72 23
+share=012window=000
+$endatt
+\enddata{figotext,539141928}
+\begindata{figotext,539142552}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:1
+}
+$ 62 2998
+$ 0 0
+two=040=012windows=000
+$endatt
+\enddata{figotext,539142552}
+\begindata{figotext,539143208}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontstyle:1
+fontfamily:andysans
+textpos:1
+}
+$ 899 759
+$ 101 7
+Embedded=000
+$endatt
+\enddata{figotext,539143208}
+\begindata{figorect,539167208}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 563 451
+$ 3544 3895
+$endatt
+\enddata{figorect,539167208}
+\begindata{figotext,539169624}
+\figattr{
+shade:3
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontstyle:1
+fontfamily:andysans
+textpos:0
+}
+$ 3180 2592
+$ 0 0
+Linked=000
+$endatt
+\enddata{figotext,539169624}
+\begindata{figotext,539159896}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontstyle:1
+fontfamily:andysans
+textpos:1
+}
+$ 2642 766
+$ 132 31
+Transcluded=000
+$endatt
+\enddata{figotext,539159896}
+\begindata{figoplin,539205048}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 3308 1807
+$ -48 66
+$ 27 68
+$endatt
+\enddata{figoplin,539205048}
+\begindata{figospli,539204264}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 4 0 0
+$ 3474 1245
+$ -6 409
+$ -62 565
+$ -195 617
+$endatt
+\enddata{figospli,539204264}
+\begindata{figotext,539187688}
+\figattr{
+shade:-1
+color:black
+linewidth:4
+rrectcorner:10
+fontsize:18
+fontstyle:1
+fontfamily:andysans
+textpos:0
+}
+$ 1414 2648
+$ 0 0
+Exploded=000
+$endatt
+\enddata{figotext,539187688}
+\begindata{figorrec,539146792}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:1
+fontfamily:andy
+textpos:1
+}
+$ 2566 3424
+$ 1428 789
+$endatt
+\enddata{figorrec,539146792}
+\begindata{figotext,539154504}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontfamily:andy
+textpos:1
+}
+$ 2766 3605
+$ 0 0
+text=012more=040text=000
+$endatt
+\enddata{figotext,539154504}
+\begindata{figotext,539159368}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontfamily:andy
+textpos:1
+}
+$ 2766 3924
+$ 0 0
+additional=040text=000
+$endatt
+\enddata{figotext,539159368}
+\begindata{figogrp,539148104}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 0 958 2892 385 379
+$endatt
+\enddata{figogrp,539148104}
+\begindata{figoell,539168600}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 975 3266
+$ 363 -63
+$endatt
+\enddata{figoell,539168600}
+\begindata{figorect,539147432}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 962 2940
+$ 376 301
+$endatt
+\enddata{figorect,539147432}
+\begindata{figoell,539167992}
+\figattr{
+shade:0
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 975 2896
+$ 363 69
+$endatt
+\enddata{figoell,539167992}
+#end
+\begindata{figorect,539195720}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 1056 3009
+$ 257 219
+$endatt
+\enddata{figorect,539195720}
+\begindata{figorect,539196296}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 1094 3071
+$ 125 82
+$endatt
+\enddata{figorect,539196296}
+\begindata{figoplin,539198376}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 1571 3528
+$ 33 87
+$ 80 7
+$endatt
+\enddata{figoplin,539198376}
+\begindata{figorrec,539146792}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:1
+fontfamily:andy
+textpos:1
+}
+$ 786 3448
+$ 1428 789
+$endatt
+\enddata{figorrec,539146792}
+\begindata{figotext,539154504}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontfamily:andy
+textpos:1
+}
+$ 986 3629
+$ 0 0
+text=012more=040text=000
+$endatt
+\enddata{figotext,539154504}
+\begindata{figospli,539157896}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontfamily:andy
+textpos:1
+}
+$$ 0 4 0 0
+$ 1024 3905
+$ 113 -88
+$ 225 -13
+$ 369 -69
+$endatt
+\enddata{figospli,539157896}
+\begindata{figotext,539159368}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontfamily:andy
+textpos:1
+}
+$ 980 4011
+$ 0 0
+additional=040text=000
+$endatt
+\enddata{figotext,539159368}
+\begindata{figogrp,539148104}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 0 979 908 385 379
+$endatt
+\enddata{figogrp,539148104}
+\begindata{figoell,539168600}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 996 1282
+$ 363 -63
+$endatt
+\enddata{figoell,539168600}
+\begindata{figorect,539147432}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 983 956
+$ 376 301
+$endatt
+\enddata{figorect,539147432}
+\begindata{figoell,539167992}
+\figattr{
+shade:0
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 996 912
+$ 363 69
+$endatt
+\enddata{figoell,539167992}
+#end
+\begindata{figorect,539195720}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 1076 1026
+$ 257 219
+$endatt
+\enddata{figorect,539195720}
+\begindata{figorect,539196296}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 1114 1088
+$ 125 82
+$endatt
+\enddata{figorect,539196296}
+\begindata{figorrec,539146792}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:1
+fontfamily:andy
+textpos:1
+}
+$ 806 1465
+$ 1428 789
+$endatt
+\enddata{figorrec,539146792}
+\begindata{figotext,539154504}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontfamily:andy
+textpos:1
+}
+$ 1006 1646
+$ 0 0
+text=012more=040text=000
+$endatt
+\enddata{figotext,539154504}
+\begindata{figospli,539157896}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontfamily:andy
+textpos:1
+}
+$$ 0 4 0 0
+$ 1044 1922
+$ 113 -88
+$ 225 -13
+$ 369 -69
+$endatt
+\enddata{figospli,539157896}
+\begindata{figotext,539159368}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontfamily:andy
+textpos:1
+}
+$ 1000 2028
+$ 0 0
+additional=040text=000
+$endatt
+\enddata{figotext,539159368}
+\begindata{figorrec,539146792}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:1
+fontfamily:andy
+textpos:1
+}
+$ 2625 1476
+$ 1428 789
+$endatt
+\enddata{figorrec,539146792}
+\begindata{figotext,539154504}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontfamily:andy
+textpos:1
+}
+$ 2825 1657
+$ 0 0
+text=012more=040text=000
+$endatt
+\enddata{figotext,539154504}
+\begindata{figospli,539157896}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontfamily:andy
+textpos:1
+}
+$$ 0 4 0 0
+$ 2863 1933
+$ 113 -88
+$ 225 -13
+$ 369 -69
+$endatt
+\enddata{figospli,539157896}
+\begindata{figotext,539159368}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontfamily:andy
+textpos:1
+}
+$ 2819 2039
+$ 0 0
+additional=040text=000
+$endatt
+\enddata{figotext,539159368}
+\begindata{figorrec,539188280}
+\figattr{
+shade:0
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 1352 3668
+$ 958 620
+$endatt
+\enddata{figorrec,539188280}
+\begindata{figospli,539188968}
+\figattr{
+shade:-1
+color:black
+linewidth:4
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 4 0 0
+$ 1402 4132
+$ 275 -295
+$ 582 -44
+$ 870 -238
+$endatt
+\enddata{figospli,539188968}
+\begindata{figospli,539190472}
+\figattr{
+shade:-1
+color:red
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 4 0 0
+$ 1139 3855
+$ 33 61
+$ 119 86
+$ 313 86
+$endatt
+\enddata{figospli,539190472}
+\begindata{figoplin,539191160}
+\figattr{
+shade:-1
+color:red
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 1388 3911
+$ 73 30
+$ 0 55
+$endatt
+\enddata{figoplin,539191160}
+\begindata{figorect,539253656}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 2767 3775
+$ 50 50
+$endatt
+\enddata{figorect,539253656}
+\begindata{figogrp,538949016}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 0 2702 2859 1027 391
+$endatt
+\enddata{figogrp,538949016}
+\begindata{figogrp,539148104}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 0 2702 2871 385 379
+$endatt
+\enddata{figogrp,539148104}
+\begindata{figoell,539168600}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 2719 3245
+$ 363 -63
+$endatt
+\enddata{figoell,539168600}
+\begindata{figorect,539147432}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 2706 2919
+$ 376 301
+$endatt
+\enddata{figorect,539147432}
+\begindata{figoell,539167992}
+\figattr{
+shade:0
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 2719 2875
+$ 363 69
+$endatt
+\enddata{figoell,539167992}
+#end
+\begindata{figogrp,539148104}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 0 3344 2859 385 379
+$endatt
+\enddata{figogrp,539148104}
+\begindata{figoell,539168600}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 3361 3233
+$ 363 -63
+$endatt
+\enddata{figoell,539168600}
+\begindata{figorect,539147432}
+\figattr{
+shade:3
+color:cyan
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 3348 2907
+$ 376 301
+$endatt
+\enddata{figorect,539147432}
+\begindata{figoell,539167992}
+\figattr{
+shade:0
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 3361 2863
+$ 363 69
+$endatt
+\enddata{figoell,539167992}
+#end
+\begindata{figorect,539199016}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 2767 2992
+$ 263 188
+$endatt
+\enddata{figorect,539199016}
+\begindata{figorect,539199672}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 3443 3030
+$ 119 106
+$endatt
+\enddata{figorect,539199672}
+\begindata{figorect,539200328}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 2817 3042
+$ 31 38
+$endatt
+\enddata{figorect,539200328}
+\begindata{figoplin,539200984}
+\figattr{
+shade:6
+color:red
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 2864 3059
+$ 529 15
+$endatt
+\enddata{figoplin,539200984}
+\begindata{figoplin,539201784}
+\figattr{
+shade:-1
+color:red
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 3322 3030
+$ 88 47
+$ -4 70
+$endatt
+\enddata{figoplin,539201784}
+#end
+\begindata{figospli,539196872}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 4 0 0
+$ 1252 3124
+$ 256 6
+$ 365 181
+$ 355 466
+$endatt
+\enddata{figospli,539196872}
+\begindata{figoplin,539198376}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 1 1
+$ 1203 1429
+$ -51 115
+$ -103 3
+$endatt
+\enddata{figoplin,539198376}
+\begindata{figoplin,539170920}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 1152 1270
+$ 0 260
+$endatt
+\enddata{figoplin,539170920}
+\begindata{figospli,539171352}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 6 0 0
+$ 1264 1114
+$ 301 31
+$ 426 182
+$ 438 495
+$ 351 670
+$ 226 732
+$endatt
+\enddata{figospli,539171352}
+\begindata{figoplin,537912008}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 1508 1753
+$ -37 93
+$ 38 119
+$endatt
+\enddata{figoplin,537912008}
+\begindata{figogrp,539184520}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:1
+}
+$ 0 2817 1308 120 291
+$endatt
+\enddata{figogrp,539184520}
+\begindata{figoplin,539198376}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 1 1
+$ 2928 1475
+$ -51 115
+$ -103 3
+$endatt
+\enddata{figoplin,539198376}
+\begindata{figoplin,539170920}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 2877 1316
+$ 0 260
+$endatt
+\enddata{figoplin,539170920}
+#end
+\begindata{figogrp,539188360}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:1
+}
+$ 0 1089 3242 120 291
+$endatt
+\enddata{figogrp,539188360}
+\begindata{figoplin,539198376}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 1 1
+$ 1200 3409
+$ -51 115
+$ -103 3
+$endatt
+\enddata{figoplin,539198376}
+\begindata{figoplin,539170920}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 1149 3250
+$ 0 260
+$endatt
+\enddata{figoplin,539170920}
+#end
+\begindata{figogrp,539188360}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:1
+}
+$ 0 2810 3219 120 291
+$endatt
+\enddata{figogrp,539188360}
+\begindata{figoplin,539198376}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 1 1
+$ 2921 3386
+$ -51 115
+$ -103 3
+$endatt
+\enddata{figoplin,539198376}
+\begindata{figoplin,539170920}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 2870 3227
+$ 0 260
+$endatt
+\enddata{figoplin,539170920}
+#end
+\begindata{figospli,539191416}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 4 0 0
+$ 1233 3130
+$ 207 131
+$ 200 351
+$ 25 689
+$endatt
+\enddata{figospli,539191416}
+\begindata{figoplin,539194216}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 1239 3731
+$ 13 88
+$ 82 31
+$endatt
+\enddata{figoplin,539194216}
+\begindata{figoplin,539170920}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 3499 3166
+$ 0 684
+$endatt
+\enddata{figoplin,539170920}
+\begindata{figorrec,539249896}
+\figattr{
+shade:0
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontfamily:andy
+textpos:1
+}
+$ 3349 3904
+$ 676 407
+$endatt
+\enddata{figorrec,539249896}
+\begindata{figospli,539157896}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontfamily:andy
+textpos:1
+}
+$$ 0 4 1 1
+$ 3888 4043
+$ -167 150
+$ -271 19
+$ -444 103
+$endatt
+\enddata{figospli,539157896}
+\begindata{figoplin,539254952}
+\figattr{
+shade:-1
+color:red
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 3405 3981
+$ 46 71
+$ -34 78
+$endatt
+\enddata{figoplin,539254952}
+\begindata{figoplin,539254232}
+\figattr{
+shade:-1
+color:red
+linewidth:1
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 2836 3800
+$ 607 249
+$endatt
+\enddata{figoplin,539254232}
+\begindata{figogrp,539442040}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$ 0 3436 3731 120 132
+$endatt
+\enddata{figogrp,539442040}
+\begindata{figoplin,539198376}
+\figattr{
+shade:-1
+color:blue
+linewidth:2
+rrectcorner:10
+fontsize:18
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 1 1
+$ 3547 3739
+$ -51 115
+$ -103 3
+$endatt
+\enddata{figoplin,539198376}
+#end
+#end
+\enddata{figure,538274024}
+\view{figview,538274024,15,679,707}
+
+\begindata{bp,538499400}
+\enddata{bp,538499400}
+\view{bpv,538499400,16,0,0}
+
+
+
+
+\slidehead{Compound Programs}
+
+
+Extension language must process compound text values
+
+
+May have styles and insets in program
+
+	comments
+
+	string constants
+
+
+Multi-paradigm programming
+
+	incorporate sub-program as embedded image
+
+
+
+\smaller{\leftindent{\bigger{\italic{for} p := \italic{each} \
+
+
+\superscript{\superscript{	
+\begindata{raster,538499448}
+2 0 79277 79277 0 0 344 62
+bits 538499448 344 62
+zzi |
+7ffczzg |
+7ffczzg |
+610czzg |
+610czzg |
+610czzg |
+610cxJfcx |
+610cv0fM80v |
+7ffcu1fH80i07	H80u |
+610ct03Gf8mGfe	u |
+610ct7ff0oGf0	t |
+610cs0ffep03G	80s |
+610cr01Gc0q1f	fcs |
+610cr1ff8sGc0	r |
+7ffcq01Gt07fc	r |
+7ffcq3ff0u7fc0	q |
+r01Gv07f8q |
+r1ff0w7fq |
+q01Gx0ff0p |
+q07f0x01fcp |
+q0fz1cp |
+q38z06p |
+q70j1fk04h03G	c7c0i07p |
+qe3g03h18k0eh	0301!c0i03n60	g |
+qc3800380g18k	0eh020380c0i03	n70g |
+qc3c003c0g18k	0bh0203gc0i03	n78g |
+qe3600360g18k	13i07gc0i06n6c	g |
+q73300330g180f	80g0ff01180h0e	gc0i0en66g |
+q3f180318g1819	c0g0c303180h0c	gc0i3cn63g |
+03Q0fG0cg!18c0	g08602180h1cg	c0g7fPe1G |
+03Q0fG0cg18gc0	he020c0h18gc0	g7fPe1G |
+i1fGfck031803	18g1803c0g01c0	60c0h38gc0oIe3	g |
+j03Hj03300330	g180ec3G81807f	c0Ge070gc0m03	Hh66g |
+k07Hfch036003	60g!18c0g0380	4060h60gc0l1f	Hi6cg |
+l03Hf8g03c003	c0g1830c0g03g	c060he0gc0k01	Gfej78g |
+n07Gf003800380	g1830c0g07g80	60hc020c0j01G	f0k70g |
+o0fGe3g03h1831	c0g06108030g01	c020c0jHl60g |
+p1fGc0i183ec0	g0c318030g0380	60c0i1fGo |
+q3ffei181c60g	0ff7e0fcg03Ge0	c0h03G80o |
+r7ff0h18qc0h7f	f0p |
+r07Gh18qc0g07	feq |
+s1fe0g18qc0g3f	c0q |
+s03fcg1fp07c0	01fcr |
+t3fc0s1fe0r |
+t07fer03Gs |
+uGe0q3ff0s |
+u03fcp03fet |
+v3fc0o1fe0t |
+v07fcn01Gu |
+w7fe0m3ff0u |
+w07Gl07Gv |
+x3ff0k7fe0v |
+x01Ge0i7ffcw |
+y1fGf801Hc0w |
+z3fIc0x |
+zg0fGz |
+zzi |
+zzi |
+zzi |
+zzi |
+zzi |
+zzi |
+\enddata{raster, 538499448}
+\view{rasterview,538499448,17,0,0}}}
+
+\italic{in} readfile("data") \italic{do}
+
+	. . .
+
+\italic{end} \italic{for} }\
+
+
+
+}}
+\begindata{bp,538499624}
+\enddata{bp,538499624}
+\view{bpv,538499624,18,0,0}
+
+\chapter{B. Gross Comparison of Typical Systems}
+
+
+
+		Low level components
+
+
+		Toolkits
+
+
+		Compound Document Systems
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begindata{bp,538502440}
+\enddata{bp,538502440}
+\view{bpv,538502440,19,0,0}
+
+\slidehead{Low Level Component Sources}
+
+
+Object Management Group
+
+	Gathered industry committee
+
+	Common Object Request Broker Architecture
+
+			(CORBA)
+
+		how objects can interconnect
+
+			even across net
+
+		implementations by various vendors
+
+	IDL - Interface Description Language
+
+
+Describe methods of objects in IDL
+
+Objects are then accessible from multiple languages \
+
+
+		(including Fortran)
+
+
+
+CIL - Component Integration Laboratory
+
+	(ftp://cil.org/pub)
+
+	offers SOM, Bento, OpenDoc, OpenScript
+
+		see below
+
+
+COSE
+
+
+
+
+\begindata{bp,538502488}
+\enddata{bp,538502488}
+\view{bpv,538502488,20,0,0}
+\slidehead{
+Interconnection tools}
+
+
+
+SOM - Structured Object Manager  ($)
+
+	describe interface in IDL
+
+	preprocessor produces declarations and stubs
+
+			for multiple languages
+
+	three levels of interconnection
+
+		same process
+
+		same processor	(Workstation DSOM)
+
+		across net			(Workplace DSOM)
+
+
+	no overheads for unused remote connections
+
+		same-process calls are just function calls
+
+
+
+Xerox Parc
+
+	(ftp://parcftp.parc.xerox.com/pub/ilu/ilu.html)
+
+	ILU - Inter-Language Unification
+
+	similar to SOM, but free \
+
+
+	safe subset of IDL
+
+
+
+
+\begindata{bp,538502536}
+\enddata{bp,538502536}
+\view{bpv,538502536,21,0,0}
+\slidehead{
+Storage tools}
+
+
+Bento - Data stream format for compound documents
+
+	(from CIL)
+
+
+
+Flat file of objects
+
+
+
+Component index is at end of file
+
+	for each value:
+
+		object id,  offset, length
+
+	value may be a link
+
+		to another component
+
+		to another file
+
+
+Can access links without parsing objects
+
+Can access links despite missing editors
+
+
+
+
+
+
+\begindata{bp,538502584}
+\enddata{bp,538502584}
+\view{bpv,538502584,22,0,0}
+
+\slidehead{
+Defining Attributes}
+
+
+\underline{\bold{Toolkits}} offer
+
+	graphics library
+
+	look and feel
+
+	widgets
+
+	screen printing
+
+
+
+\underline{\bold{Compound Document Systems}} offer
+
+
+	everything of a toolkit \
+
+
+
+		PLUS
+
+
+	compound document architecture
+
+		document printing
+
+		document data stream
+
+		(two have just a markup language)
+
+
+	applications
+
+		may be provided
+
+		may be available in the market
+
+
+\begindata{bp,538502632}
+\enddata{bp,538502632}
+\view{bpv,538502632,23,0,0}
+
+
+\slidehead{Toolkits}
+
+
+
+All have
+
+	graphics, look&feel, widgets
+
+
+All lack
+
+	scripting
+
+	compound document architecture
+
+	document printing and data stream
+
+
+Currently popular
+
+
+	\underline{System		Popular with
+
+}
+	Motif		big shops (old IBM)
+
+	tk/tcl    		hackers; includes scripting language
+
+	SUIT		university teaching
+
+	Galaxy		financial houses
+
+	tae+		NASA and government
+
+					(not Taligent's TAE)
+
+
+
+\begindata{bp,538502680}
+\enddata{bp,538502680}
+\view{bpv,538502680,24,0,0}\slidehead{
+
+Toolkits comparison}
+
+\begindata{table,538502728}
+\cols 121 23 68 71 61 53 46
+ 	 	App	Plat	Screen	 	 
+ 	 	Builder	'    form	Print	Open	Cost
+	-	-	-	-	-	-
+Motif	|  	avail	Unix &	 	 	'$	| 
+SmallTalk	|  	yes*	Unix &	 	yes	'$$	| 
+MacApp	|  	 	all ?	 	yes	'$	| 
+tk/tcl	|  	yes+	Unix	 	yes	free	| 
+SUIT	|  	yes	all	 	yes	'$ *	| 
+XVT	|  	yes	all	yes	 	'$$	| 
+OpenInt'face	|  	yes	all	yes	 	'$$	| 
+Galaxy	|  	yes	all *	yes	 	'$$	| 
+Garnet	|  	yes	Lisp	yes	yes	free	| 
+tae+	|  	yes	Unix	yes	yes-	'$	| 
+	-	-	-	-	-	-
+\enddata{table,538502728}
+\view{spread,538502728,25,0,0}
+
+yes*   	- SmallTalk IS a language
+
+all*    	- Galaxy includes operating system independence
+
+yes+   	- tcl scripting has multi-process capabilities
+
+
+
+
+
+
+
+
+\begindata{bp,538503960}
+\enddata{bp,538503960}
+\view{bpv,538503960,26,0,0}
+\slidehead{
+Compound Document Systems}
+
+
+All these systems have \
+
+
+	graphics,  look and feel,  widgets
+
+	screen printing
+
+	compound document architecture\smaller{
+
+\begindata{table,538504184}
+\cols 73 14 60 44 56 44 70 64 58 46
+ 	 	 	App	Script	'Doc	Data	Plat	 	 
+ 	 	Apps	'build	'    ing	' print	'stream	'form	Open	Cost
+	-	-	-	-	-	-	-	-	-
+Mosaic	|  	one	 	 	yes	markup	Unix	yes	'free*	| 
+COSE	|  	market	yes	 	 	markup	Unix	yes	'$	| 
+NextStep	|  	market	yes	tcl	yes	yes	Unix	yes	'$	| 
+Fresco	|  	not yet	 	tcl	 	 	Unix	yes	free	| 
+OLE	| '*	yes	yes	'?	 	links	Win	API	'$	| 
+OpenDoc	| '*	market	'?	'yes	 	yes	all	yes	'$	| 
+Taligent	|  	market	yes	yes	 	yes	all	'?	'$$	| 
+Aster*x	|  	yes	yes	Elf	yes	yes	Unix	 	'$$	| 
+Interleaf	|  	yes	yes	Lisp	yes	yes	Unix+?	 	 	| 
+AUIS	|  	yes	yes	Ness	yes	yes	Unix	yes	free **	| 
+	-	-	-	-	-	-	-	-	-
+\enddata{table,538504184}
+\view{spread,538504184,27,0,0}
+}
+OpenDoc * - no graphics, widgets, or look and feel
+
+OLE * - assumes Windows graphics;  but not required
+
+free * - Distribution limitations
+
+free ** - You can join the Andrew Consortium
+
+
+\begindata{bp,538509048}
+\enddata{bp,538509048}
+\view{bpv,538509048,28,0,0}
+
+\slidehead{Mosaic}
+
+
+Viewer for World Wide Web
+
+	vast information resource
+
+	absolute hardware addressing
+
+
+
+Documents are composed in ASCII with markup
+
+Markup in HTML
+
+	HyperText Markup Language
+
+	(SGML)
+
+Editors developing separately from viewers !
+
+	(AUIS has an HTML editor)
+
+
+
+Not yet perceived or organized as an IUE
+
+
+\blue{(AUIS is developing a WWW viewer)
+
+}
+
+
+
+
+
+\begindata{bp,538509096}
+\enddata{bp,538509096}
+\view{bpv,538509096,29,0,0}
+
+\chapter{II. Coding Typical Operations
+
+}
+
+
+\bold{\underline{Coding Environment}}
+
+
+	object model
+
+
+\bold{\underline{File Storage}}
+
+
+	file operations
+
+	data stream format
+
+\bold{\underline{
+Communication with embedded objects}}
+
+
+	creating and embedding an object
+
+	sharing keyboard and mouse
+
+
+Notation
+
+	instead of ClassName::MethodName
+
+	variable->MethodName
+
+	where 'variable' will suggest its class name
+
+
+
+\begindata{bp,538509144}
+\enddata{bp,538509144}
+\view{bpv,538509144,30,0,0}
+
+\chapter{
+A. Coding Typical Operations in AUIS}
+
+
+
+
+\slidehead{Coding Environment}
+
+
+
+An object is a struct \
+
+
+Operations are methods (functions)
+
+
+
+All objects in one process
+
+Can open windows on multiple screens
+
+
+
+
+Dynamic loading
+
+
+
+
+
+
+\begindata{bp,538509656}
+\enddata{bp,538509656}
+\view{bpv,538509656,31,0,0}
+
+\slidehead{Dataobjects and Views}
+
+
+
+Protocols are defined by methods on super classes
+
+	dataobject - retains data; file storage
+
+	view - display image;  user interface
+
+
+Most visible objects are a combination
+
+	dataobject and view
+
+
+
+Views are linked in a tree
+
+	parent has pointers to its children
+
+
+\{* There should be a way to enumerate subviews\}
+
+
+Communication between parent and child
+
+
+	protocol events - parent calls view methods on child
+
+	protocol requests - child calls view methods on parents
+
+
+
+Child operates as if in a window
+
+Parent controls child's environment
+
+
+\begindata{bp,538509704}
+\enddata{bp,538509704}
+\view{bpv,538509704,32,0,0}
+
+\slidehead{File Storage}
+
+
+
+Object is in memory or on disk
+
+	no caching
+
+
+\{*Rely on paging\}
+
+
+Dataobject has methods Read and Write
+
+
+	parent calls same methods on child data objects
+
+
+
+
+Embedded object in data stream:
+
+
+	\\begindata\{figure,234678\}
+
+	. . .
+
+	\\enddata\{figure,234678\}
+
+
+Data stream is ASCII and lines are less than 80 bytes
+
+	mailable
+
+
+
+\begindata{bp,538509752}
+\enddata{bp,538509752}
+\view{bpv,538509752,33,0,0}
+
+\slidehead{Creating and embedding an object}
+
+
+The set of object classes is the contents of the directories on the user's 
+CLASSPATH environment variable.
+
+
+	dataobject *dobj;	/* parent dataobject */
+
+	view *parent;		/* parent view  */
+
+
+	char *classname; 	/* class name of desired object */
+
+	dataobject *cdobj; 	/* dataobject for child */
+
+	view *child;		/* view for child */
+
+
+New dataobject for a child
+
+	cdobj = ATK::NewObject(classname);
+
+	dobj->somefieldorother = cdobj;	/* remember child */
+
+
+Corresponding view
+
+	child = ATK::NewObject(cdobj->ViewName());
+
+	parent->someotherfield = child;	/* remember child */
+
+	child->SetDataObject(cdobj);	/* tell view about data */
+
+	child->LinkTree(parent);		/* hook view to tree */
+
+	rectangle_SetRectSize(&childRect, x, y, \
+
+
+			dWidth, dHeight);
+
+	child->InsertView(parent, &childRect);
+
+
+\begindata{bp,538509800}
+\enddata{bp,538509800}
+\view{bpv,538509800,34,0,0}
+
+\slidehead{Pointers among Objects}
+
+
+\begindata{figure,538509848}
+$origin 0 0
+$printscale 1.000000 1.000000
+#none
+\begindata{figogrp,1075237232}
+\figattr{
+}
+$ 0 333 349 3181 1379
+$endatt
+\enddata{figogrp,1075237232}
+\begindata{figorrec,1074779880}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:20
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 527 357
+$ 703 425
+$endatt
+\enddata{figorrec,1074779880}
+\begindata{figorrec,1075228880}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:20
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 1036 1170
+$ 649 430
+$endatt
+\enddata{figorrec,1075228880}
+\begindata{figorrec,1075228064}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:20
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 2370 406
+$ 831 564
+$endatt
+\enddata{figorrec,1075228064}
+\begindata{figorrec,1075227368}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:20
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 2656 1240
+$ 849 479
+$endatt
+\enddata{figorrec,1075227368}
+\begindata{figotext,1075250528}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 1169 1291
+$ 0 0
+Child=012Dobj=000
+$endatt
+\enddata{figotext,1075250528}
+\begindata{figotext,1075212632}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 2886 1394
+$ 0 0
+Child=012View=000
+$endatt
+\enddata{figotext,1075212632}
+\begindata{figogrp,1075210336}
+\figattr{
+shade:8
+color:blue
+linewidth:2
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 1219 497 133 147
+$endatt
+\enddata{figogrp,1075210336}
+\begindata{figogrp,1075210624}
+\figattr{
+shade:8
+color:blue
+linewidth:2
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 1219 497 133 147
+$endatt
+\enddata{figogrp,1075210624}
+\begindata{figoplin,1075159304}
+\figattr{
+shade:8
+color:blue
+linewidth:2
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 1 3 0 0
+$ 1338 635
+$ -111 -68
+$ 5 -130
+$endatt
+\enddata{figoplin,1075159304}
+#end
+#end
+\begindata{figogrp,1075210336}
+\figattr{
+shade:8
+color:blue
+linewidth:2
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 1670 1325 133 147
+$endatt
+\enddata{figogrp,1075210336}
+\begindata{figogrp,1075210624}
+\figattr{
+shade:8
+color:blue
+linewidth:2
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 1670 1325 133 147
+$endatt
+\enddata{figogrp,1075210624}
+\begindata{figoplin,1075159304}
+\figattr{
+shade:8
+color:blue
+linewidth:2
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 1 3 0 0
+$ 1789 1463
+$ -111 -68
+$ 5 -130
+$endatt
+\enddata{figoplin,1075159304}
+#end
+#end
+\begindata{figospli,1075240504}
+\figattr{
+shade:8
+color:blue
+linewidth:1
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 2 0 0
+$ 1346 569
+$ 994 0
+$endatt
+\enddata{figospli,1075240504}
+\begindata{figoplin,1075239400}
+\figattr{
+shade:8
+color:blue
+linewidth:1
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 1 3 0 0
+$ 1357 1049
+$ -68 112
+$ -130 -4
+$endatt
+\enddata{figoplin,1075239400}
+\begindata{figoplin,1075239400}
+\figattr{
+shade:8
+color:blue
+linewidth:1
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 1 3 0 0
+$ 3012 1131
+$ -68 112
+$ -130 -4
+$endatt
+\enddata{figoplin,1075239400}
+\begindata{figoplin,1075270648}
+\figattr{
+shade:8
+color:blue
+linewidth:1
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 1 3 0 0
+$ 879 781
+$ 68 118
+$ -68 118
+$endatt
+\enddata{figoplin,1075270648}
+\begindata{figoplin,1075270648}
+\figattr{
+shade:8
+color:blue
+linewidth:1
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 1 3 0 0
+$ 2638 973
+$ 68 118
+$ -68 118
+$endatt
+\enddata{figoplin,1075270648}
+\begindata{figospli,1075236792}
+\figattr{
+shade:8
+color:blue
+linewidth:1
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 4 0 0
+$ 891 915
+$ 42 127
+$ 176 188
+$ 218 261
+$endatt
+\enddata{figospli,1075236792}
+\begindata{figospli,1075269472}
+\figattr{
+shade:8
+color:blue
+linewidth:1
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 4 0 0
+$ 1079 770
+$ 79 97
+$ 206 169
+$ 224 272
+$endatt
+\enddata{figospli,1075269472}
+\begindata{figospli,1075268664}
+\figattr{
+shade:8
+color:blue
+linewidth:1
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 4 0 0
+$ 2637 1097
+$ 36 79
+$ 115 109
+$ 133 152
+$endatt
+\enddata{figospli,1075268664}
+\begindata{figospli,1075268056}
+\figattr{
+shade:8
+color:blue
+linewidth:1
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 4 0 0
+$ 2867 970
+$ 19 54
+$ 85 103
+$ 97 157
+$endatt
+\enddata{figospli,1075268056}
+\begindata{figospli,1075233800}
+\figattr{
+shade:8
+color:blue
+linewidth:1
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 2 0 0
+$ 2661 1455
+$ -861 -43
+$endatt
+\enddata{figospli,1075233800}
+\begindata{figotext,1075233360}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 1369 490
+$ 0 0
+SetDataObject=000
+$endatt
+\enddata{figotext,1075233360}
+\begindata{figotext,1075233056}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 333 1067
+$ 0 0
+LinkTree=000
+$endatt
+\enddata{figotext,1075233056}
+\begindata{figotext,19761576}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 657 464
+$ 0 0
+Parent=012Dobj=000
+$endatt
+\enddata{figotext,19761576}
+\begindata{figotext,19201260}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:20
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 2466 513
+$ 0 0
+Parent=012View=000
+$endatt
+\enddata{figotext,19201260}
+#end
+\enddata{figure,538509848}
+\view{figview,538509848,35,0,306}
+
+In addition, each object contains a list of its "observers"
+
+
+One observer of each data object is its view
+
+
+There may be multiple views of any given data object
+
+
+\begindata{bp,538537560}
+\enddata{bp,538537560}
+\view{bpv,538537560,36,0,0}
+
+
+
+\slidehead{Sharing mouse}
+
+
+
+Every view overrides the Hit method
+
+
+Interaction manager get mouse hit from display
+
+	calls Hit method of top level view
+
+	\
+
+
+Each view may pass the Hit to one of its children:
+
+
+	someobject::Hit(int action, int x, int y, int nclicks)  \{
+
+		if (hit-goes-to-child)
+
+			child->Hit(action, x, y, nclicks);
+
+		else \{
+
+			process-hit-for-parent;
+
+		\}
+
+	\}
+
+
+
+
+
+
+\begindata{bp,538537608}
+\enddata{bp,538537608}
+\view{bpv,538537608,37,0,0}
+
+\slidehead{Sharing keyboard and menus}
+
+
+"Input focus"
+
+	View to which keys will go first
+
+	Lowest view which has menus up
+
+
+Input focus is directed to a view with \
+
+
+	view->WantInputFocus(view)
+
+	recurs up tree
+
+
+View learns it has input focus via
+
+	ReceiveInputFocus
+
+	called from interaction manager
+
+
+ReceiveInputFocus establishes menus and keys
+
+	PostMenus,  PostKeyState
+
+	recur up the view tree
+
+
+Each view may override PostMenus and PostKeystate
+
+	to add its menus and keys
+
+	with higher or lower priority
+
+
+Multiple key sequences \
+
+
+	keystate is traversed in parallel
+
+		for all parents who have posted keystate
+
+
+\{* Better to add a method specifying menus and keys\}
+
+\{* Need notification if descendant has a focus change\}
+
+
+
+\begindata{bp,538537656}
+\enddata{bp,538537656}
+\view{bpv,538537656,38,0,0}
+\chapter{
+
+B.  Ness - a higher level language}
+
+
+
+C and C++ have disadvantages
+
+
+	long winded
+
+	too much redundant specification
+
+	error prone
+
+
+Much of the detail can be eliminated with a high level language
+
+
+
+Ness is an example
+
+
+Ness is the AUIS extension language
+
+
+
+
+
+
+
+
+\begindata{bp,538537704}
+\enddata{bp,538537704}
+\view{bpv,538537704,39,0,0}
+
+\slidehead{Ness}
+
+
+simple control structures
+
+	if, while, functions
+
+
+simple data types
+
+	boolean, integer, real, object
+
+
+-- move n discs on a to b using c
+
+function movedisc(integer n, subseq a, subseq b, subseq c)
+
+	if n > 0 then
+
+		movedisc(n-1, a, c, b)
+
+		printline("move disc from " ~ a  ~ " to " ~ b)
+
+		movedisc(n-1, c, b, a)
+
+	end if
+
+end function
+
+
+
+one higher level data type
+
+	subseq
+
+	corresponds to compound text
+
+	can extend to arrays, structs, lists, trees, tables
+
+
+Not object oriented
+
+	(thus not completely suitable for compound docs)
+
+
+\begindata{bp,538537752}
+\enddata{bp,538537752}
+\view{bpv,538537752,40,0,0}
+
+
+\bold{Coding environment}
+
+	can call methods on objects in C
+
+	(but not in C++)
+
+
+
+\bold{File Storage}
+
+	as in AUIS
+
+
+
+\bold{Creating object}
+
+
+	object obj := new(class(classname))
+
+	replaceWithObject(textlocation, obj, "")
+
+
+
+\bold{Sharing keyboard and mouse}
+
+	there is a name space of objects
+
+
+		extend "object name"
+
+			on keys "^Xa"
+
+				...	-- respond to control-X-a
+
+			end keys
+
+		end extend
+
+
+\begindata{bp,538537800}
+\enddata{bp,538537800}
+\view{bpv,538537800,41,0,0}
+
+\chapter{C.  OLE}
+
+
+
+\bold{\underline{O}}bject \bold{\underline{L}}inking and 
+\bold{\underline{E}}mbedding
+
+
+
+Microsoft
+
+
+\leftindent{Microsoft, \italic{OLE 2 Programmer's Reference, V. 1 Working 
+with Windows Objects},  Microsoft Press, Redmond, WA, 1994 (917 pp.)}
+
+
+
+Mediates cooperation between applications
+
+		from independent vendors
+
+
+The implementation of an"object" is typically an application
+
+
+
+No graphics specified
+
+	Windows graphics is implicit
+
+
+
+
+
+\begindata{bp,538537848}
+\enddata{bp,538537848}
+\view{bpv,538537848,42,0,0}
+
+
+\section{\underline{Coding Environment}}
+
+
+
+Poorman's multiple inheritance
+
+
+
+Allows coding in C and C++
+
+	Will use C++ in examples
+
+
+
+Functions return error codes
+
+	 store computed results into ref-pointer arguments
+
+	(Ugh)
+
+
+
+Implementations are dynamically loaded as DLLs
+
+
+
+
+
+
+
+\begindata{bp,538537896}
+\enddata{bp,538537896}
+\view{bpv,538537896,43,0,0}
+
+\slidehead{Interfaces}
+
+
+No pointers to objects
+
+
+Pointers are to "interfaces" to objects
+
+	Interface is a collection of methods
+
+	Object may have multiple interfaces
+
+
+\begindata{figure,538537944}
+$origin 0 0
+$printscale 1.000000 1.000000
+#none
+\begindata{figogrp,21113088}
+\figattr{
+}
+$ 0 72 46 2580 1010
+$endatt
+\enddata{figogrp,21113088}
+\begindata{figorrec,21053696}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$ 626 441
+$ 982 606
+$endatt
+\enddata{figorrec,21053696}
+\begindata{figotext,21054464}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$ 479 886
+$ 30 18
+Object=000
+$endatt
+\enddata{figotext,21054464}
+\begindata{figoplin,21054720}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$$ 0 2 0 0
+$ 494 878
+$ 66 -1
+$endatt
+\enddata{figoplin,21054720}
+\begindata{figogrp,21055744}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$ 0 940 556 171 164
+$endatt
+\enddata{figogrp,21055744}
+\begindata{figoell,21055232}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$ 944 560
+$ 162 155
+$endatt
+\enddata{figoell,21055232}
+#end
+\begindata{figogrp,21055744}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$ 0 1230 723 171 164
+$endatt
+\enddata{figogrp,21055744}
+\begindata{figoell,21055232}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$ 1234 727
+$ 162 155
+$endatt
+\enddata{figoell,21055232}
+#end
+\begindata{figogrp,21055744}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$ 0 820 787 171 164
+$endatt
+\enddata{figogrp,21055744}
+\begindata{figoell,21055232}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$ 824 791
+$ 162 155
+$endatt
+\enddata{figoell,21055232}
+#end
+\begindata{figospli,21095424}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$$ 0 5 0 0
+$ 1283 729
+$ -73 -406
+$ -288 -605
+$ -498 -505
+$ -494 -328
+$endatt
+\enddata{figospli,21095424}
+\begindata{figospli,21095680}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$$ 0 5 0 0
+$ 1014 560
+$ 11 -192
+$ -85 -325
+$ -214 -285
+$ -229 -155
+$endatt
+\enddata{figospli,21095680}
+\begindata{figospli,21095936}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$$ 0 5 0 0
+$ 837 818
+$ -322 -284
+$ -336 -491
+$ -152 -535
+$ -41 -406
+$endatt
+\enddata{figospli,21095936}
+\begindata{figoplin,21096448}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$$ 0 3 0 0
+$ 730 368
+$ 66 55
+$ 84 -19
+$endatt
+\enddata{figoplin,21096448}
+\begindata{figogrp,21055744}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$ 0 1942 373 171 164
+$endatt
+\enddata{figogrp,21055744}
+\begindata{figoell,21055232}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$ 1946 377
+$ 162 155
+$endatt
+\enddata{figoell,21055232}
+#end
+\begindata{figotext,21111552}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 2073 852
+$ 0 0
+interface=000
+$endatt
+\enddata{figotext,21111552}
+\begindata{figoplin,21094656}
+\figattr{
+shade:4
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 2 0 0
+$ 1953 851
+$ 102 3
+$endatt
+\enddata{figoplin,21094656}
+\begindata{figogrp,21055744}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$ 0 1757 756 171 164
+$endatt
+\enddata{figogrp,21055744}
+\begindata{figoell,21055232}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$ 1761 760
+$ 162 155
+$endatt
+\enddata{figoell,21055232}
+#end
+\begindata{figogrp,21055744}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$ 0 2481 388 171 164
+$endatt
+\enddata{figogrp,21055744}
+\begindata{figoell,21055232}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$ 2485 392
+$ 162 155
+$endatt
+\enddata{figoell,21055232}
+#end
+\begindata{figospli,21114112}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$$ 0 4 0 0
+$ 2485 430
+$ -630 -309
+$ -1297 -375
+$ -1578 -380
+$endatt
+\enddata{figospli,21114112}
+\begindata{figospli,21111296}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:20
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:2
+}
+$$ 0 5 0 0
+$ 1976 406
+$ -473 -233
+$ -847 -336
+$ -1212 -307
+$ -1182 18
+$endatt
+\enddata{figospli,21111296}
+#end
+\enddata{figure,538537944}
+\view{figview,538537944,44,662,184}
+
+Each interface is three words
+
+	Pointer to methods (virtual table)
+
+	Pointer to the object
+
+	Reference count
+
+
+Typical interfaces have about a dozen methods
+
+	not extensible;  need to add new interfaces
+
+
+Implementations of methods do not inherit
+
+\begindata{bp,538559176}
+\enddata{bp,538559176}
+\view{bpv,538559176,45,0,0}
+
+\slidehead{Finding an Interface}
+
+
+
+All interfaces support IUnknown::QueryInterface
+
+
+Given\italic{ ifc}, an interface to an object, \
+
+
+		find its IMessageFilter interface
+
+
+	HRESULT hrErr;
+
+	IMessageFilter FAR *mf_ifc;	// result
+
+
+	hrErr = ifc->QueryInterface(IID_IMessageFilter,
+
+			(LPVOID FAR *)&mf_ifc);
+
+	switch(hrErr) \{ case ...
+
+	\
+
+
+
+IUnknown also does reference counting
+
+
+After the above, must later call
+
+	mf_ifc->Release();
+
+to decrement reference count
+
+
+
+(Programmer writes QueryInterface for new objects, so
+
+	some interfaces may be inaccessible from others)
+
+
+\begindata{bp,538559224}
+\enddata{bp,538559224}
+\view{bpv,538559224,46,0,0}
+
+\slidehead{File Storage}
+
+
+IStorage is internal representation of file space
+
+
+IStream provides a stream interface to IStorage
+
+
+
+Writing an embedded object
+
+
+		OleSave(child, childstore, TRUE)
+
+
+	writes the CLSID and then the data for the object
+
+
+
+Reading embedded objects
+
+
+		store->EnumElements(...)
+
+
+	produces iterator over immediately embedded objects
+
+
+
+Considerable effort is devoted to caching to conserve memory
+
+
+Objects can sometimes be drawn by parent \
+
+
+	without invoking child application
+
+	graphic meta-file format for drawing
+
+\begindata{bp,538559272}
+\enddata{bp,538559272}
+\view{bpv,538559272,47,0,0}
+
+\slidehead{Interfaces between container and child}
+
+
+\begindata{figure,538559320}
+$origin 0 0
+$printscale 1.000000 1.000000
+#none
+\begindata{figogrp,18673920}
+\figattr{
+}
+$ 0 247 172 3352 3681
+$endatt
+\enddata{figogrp,18673920}
+\begindata{figorrec,18508544}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 251 554
+$ 930 583
+$endatt
+\enddata{figorrec,18508544}
+\begindata{figorrec,18509056}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 989 1765
+$ 1100 590
+$endatt
+\enddata{figorrec,18509056}
+\begindata{figorrec,18509568}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+}
+$ 2001 3123
+$ 1137 562
+$endatt
+\enddata{figorrec,18509568}
+\begindata{figotext,18551296}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 398 761
+$ 0 0
+top=040level=012container=000
+$endatt
+\enddata{figotext,18551296}
+\begindata{figotext,18551808}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1507 2013
+$ -11 45
+intermediate=012container=000
+$endatt
+\enddata{figotext,18551808}
+\begindata{figotext,18552064}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 2525 3315
+$ 0 0
+active=012object=000
+$endatt
+\enddata{figotext,18552064}
+\begindata{figogrp,18552832}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 409 1250 186 165
+$endatt
+\enddata{figogrp,18552832}
+\begindata{figoell,18552320}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 413 1254
+$ 177 156
+$endatt
+\enddata{figoell,18552320}
+#end
+\begindata{figogrp,18552832}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 1395 900 186 165
+$endatt
+\enddata{figogrp,18552832}
+\begindata{figoell,18552320}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 1399 904
+$ 177 156
+$endatt
+\enddata{figoell,18552320}
+#end
+\begindata{figogrp,18552832}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 2643 2827 186 165
+$endatt
+\enddata{figogrp,18552832}
+\begindata{figoell,18552320}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 2647 2831
+$ 177 156
+$endatt
+\enddata{figoell,18552320}
+#end
+\begindata{figoplin,18553344}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 2 0 0
+$ 2739 3005
+$ 0 126
+$endatt
+\enddata{figoplin,18553344}
+\begindata{figoplin,18598400}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 2 0 0
+$ 509 1137
+$ 0 118
+$endatt
+\enddata{figoplin,18598400}
+\begindata{figoplin,18599424}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 2 0 0
+$ 1181 982
+$ 229 -7
+$endatt
+\enddata{figoplin,18599424}
+\begindata{figospli,18604032}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 4 0 0
+$ 2045 3375
+$ -458 -37
+$ -746 -288
+$ -783 -598
+$endatt
+\enddata{figospli,18604032}
+\begindata{figospli,18605312}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 4 0 0
+$ 1934 2089
+$ 473 74
+$ 761 388
+$ 805 746
+$endatt
+\enddata{figospli,18605312}
+\begindata{figospli,18605568}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 4 0 0
+$ 1062 1898
+$ -361 -37
+$ -553 -207
+$ -575 -414
+$endatt
+\enddata{figospli,18605568}
+\begindata{figospli,18606080}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 4 0 0
+$ 893 1048
+$ 686 119
+$ 923 267
+$ 974 370
+$endatt
+\enddata{figospli,18606080}
+\begindata{figospli,18606592}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 5 0 0
+$ 1079 555
+$ 450 -341
+$ 2118 -157
+$ 2509 1150
+$ 2413 2960
+$endatt
+\enddata{figospli,18606592}
+\begindata{figospli,18606336}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 5 0 0
+$ 2990 3212
+$ 59 -820
+$ -170 -1528
+$ -709 -2023
+$ -1418 -2208
+$endatt
+\enddata{figospli,18606336}
+\begindata{figospli,18606848}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 6 0 0
+$ 3057 3294
+$ 170 -1094
+$ 221 -1847
+$ -74 -2526
+$ -997 -2645
+$ -1411 -2630
+$endatt
+\enddata{figospli,18606848}
+\begindata{figogrp,18630912}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 2673 2721 122 110
+$endatt
+\enddata{figogrp,18630912}
+\begindata{figoplin,18617600}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 1 3 0 0
+$ 2790 2732
+$ -63 94
+$ -113 -7
+$endatt
+\enddata{figoplin,18617600}
+#end
+\begindata{figogrp,18631936}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 443 1407 97 96
+$endatt
+\enddata{figogrp,18631936}
+\begindata{figoplin,18616832}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 1 3 0 0
+$ 447 1493
+$ 41 -82
+$ 88 5
+$endatt
+\enddata{figoplin,18616832}
+#end
+\begindata{figogrp,18641664}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 1576 956 97 97
+$endatt
+\enddata{figogrp,18641664}
+\begindata{figoplin,18617856}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 1 3 0 0
+$ 1668 1048
+$ -88 -41
+$ 0 -88
+$endatt
+\enddata{figoplin,18617856}
+#end
+\begindata{figotext,18619392}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1026 1342
+$ 0 0
+IOleInPlaceSite=000
+$endatt
+\enddata{figotext,18619392}
+\begindata{figotext,18364416}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 1691 2917
+$ 0 0
+IOleInPlaceObject=000
+$endatt
+\enddata{figotext,18364416}
+\begindata{figogrp,18552832}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 1155 2550 186 165
+$endatt
+\enddata{figogrp,18552832}
+\begindata{figoell,18552320}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 1159 2554
+$ 177 156
+$endatt
+\enddata{figoell,18552320}
+#end
+\begindata{figoplin,18554624}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 2 0 0
+$ 1247 2348
+$ 0 192
+$endatt
+\enddata{figoplin,18554624}
+\begindata{figogrp,18631936}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 1207 2707 97 96
+$endatt
+\enddata{figogrp,18631936}
+\begindata{figoplin,18616832}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 1 3 0 0
+$ 1211 2793
+$ 41 -82
+$ 88 5
+$endatt
+\enddata{figoplin,18616832}
+#end
+\begindata{figotext,18619392}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 745 2637
+$ 0 0
+IOleInPlaceSite=000
+$endatt
+\enddata{figotext,18619392}
+\begindata{figogrp,18629376}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 1825 1401 98 105
+$endatt
+\enddata{figogrp,18629376}
+\begindata{figoplin,18617856}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 1 3 0 0
+$ 1918 1405
+$ -44 96
+$ -89 0
+$endatt
+\enddata{figoplin,18617856}
+#end
+\begindata{figogrp,18552832}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 1777 1499 186 165
+$endatt
+\enddata{figogrp,18552832}
+\begindata{figoell,18552320}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 1781 1503
+$ 177 156
+$endatt
+\enddata{figoell,18552320}
+#end
+\begindata{figoplin,18597888}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 2 0 0
+$ 1874 1661
+$ 0 118
+$endatt
+\enddata{figoplin,18597888}
+\begindata{figotext,18364416}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 799 1601
+$ 0 0
+IOleInPlaceObject=000
+$endatt
+\enddata{figotext,18364416}
+\begindata{figotext,18674688}
+\figattr{
+shade:5
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 2192 3781
+$ 0 0
+IOleInPlaceActiveObject=000
+$endatt
+\enddata{figotext,18674688}
+\begindata{figotext,18675200}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 1454 480
+$ 0 0
+IOleInPlaceFrame=000
+$endatt
+\enddata{figotext,18675200}
+\begindata{figotext,18674944}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:14
+fontfamily:andysans
+textpos:1
+}
+$ 1454 835
+$ 0 0
+IOleInplaceUIWindow=000
+$endatt
+\enddata{figotext,18674944}
+\begindata{figogrp,18552832}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 1403 590 186 165
+$endatt
+\enddata{figogrp,18552832}
+\begindata{figoell,18552320}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 1407 594
+$ 177 156
+$endatt
+\enddata{figoell,18552320}
+#end
+\begindata{figoplin,18598912}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 2 0 0
+$ 1183 663
+$ 222 0
+$endatt
+\enddata{figoplin,18598912}
+\begindata{figogrp,18641664}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 1575 623 97 97
+$endatt
+\enddata{figogrp,18641664}
+\begindata{figoplin,18617856}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 1 3 0 0
+$ 1667 715
+$ -88 -41
+$ 0 -88
+$endatt
+\enddata{figoplin,18617856}
+#end
+\begindata{figogrp,18552832}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 3380 3566 186 165
+$endatt
+\enddata{figogrp,18552832}
+\begindata{figoell,18552320}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 3384 3570
+$ 177 156
+$endatt
+\enddata{figoell,18552320}
+#end
+\begindata{figoplin,18607360}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 0 2 0 0
+$ 3381 3655
+$ -251 0
+$endatt
+\enddata{figoplin,18607360}
+\begindata{figogrp,18629376}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 0 3433 3463 98 105
+$endatt
+\enddata{figogrp,18629376}
+\begindata{figoplin,18617856}
+\figattr{
+shade:8
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$$ 1 3 0 0
+$ 3526 3467
+$ -44 96
+$ -89 0
+$endatt
+\enddata{figoplin,18617856}
+#end
+#end
+\enddata{figure,538559320}
+\view{figview,538559320,48,0,683}
+\begindata{bp,538607336}
+\enddata{bp,538607336}
+\view{bpv,538607336,49,0,0}
+\slidehead{
+Creating a new object}
+
+
+
+Registration database file
+
+	set of eligible objects
+
+	file REG.DAT in the Windows subdirectory
+
+
+Every object class has a (world) unique ClassID
+
+
+
+parentstore->CreateStorage(name, accessmode, 0, 0,
+
+			&childstore);
+
+OleCreate(classid, IID_OleObject, OLERENDER_DRAW,
+
+		pFormatEtc, site, childstore, &child);
+
+
+	// ask child how big it wants to be
+
+child->GetExtent(DVASPECT_CONTENT,  &childsize);
+
+
+	// place child in window
+
+//set positionRect and clipRect from childsize
+
+child->QueryInterface(IID_IOLEINPLACEOBJECT, \
+
+
+			(LPVOID FAR *)&ipchild);
+
+ipchild->SetObjectRects(positionRect, clipRect);
+
+
+\{* Not clear how to have multiple views of an object\}
+
+
+\begindata{bp,538607384}
+\enddata{bp,538607384}
+\view{bpv,538607384,50,0,0}
+
+\slidehead{Sharing keyboard and mouse}
+
+
+
+Uses Windows message queue
+
+Messages may go only to active object and the application
+
+Object handles first and then passes to application
+
+
+
+There are translation tables
+
+	for menu and keys
+
+
+These call "verbs" in the object via
+
+	IOleObject::DoVerb
+
+
+
+
+
+
+
+
+
+
+
+\begindata{bp,538607432}
+\enddata{bp,538607432}
+\view{bpv,538607432,51,0,0}
+
+\slidehead{Observations}
+
+
+Ole does little for the programmer \
+
+
+	other than specify a (large) number of rules
+
+
+Defines its own object model
+
+	language independence
+
+	non-CORBA
+
+
+Defines data translation service, drag/drop, undo.
+
+
+Awkward everywhere
+
+
+	many function levels and interfaces
+
+	all functions return error status which must be tested
+
+	uses streams instead of relying on paging
+
+	documentation defines functions in terms of the
+
+		menu items they implement
+
+	much redundant specification
+
+		A->B and B->A
+
+
+Tools alleviate the pain
+
+
+	Microsoft foundation classes
+
+	Visual Basic
+
+	Visual C++
+
+
+\begindata{bp,538607480}
+\enddata{bp,538607480}
+\view{bpv,538607480,52,0,0}
+
+
+\chapter{D.  OpenDoc}
+
+
+
+Developed by Apple
+
+Offered by CIL
+
+
+\leftindent{OpenDoc Design Team, \italic{OpenDoc Class Reference}, Version 
+1.0, March 23, 1994, (478 pp.)
+
+ftp://cil.org/pub/opendoc-interest/OD-Class-Reference.ps }\
+
+
+
+Runtime environment for compound documents
+
+
+
+Lacks
+
+	Graphic Model / Operations
+
+
+
+Claimed to be easy to port to
+
+	\{* Perhaps easier than OLE, \
+
+
+		but that's not saying a lot\}
+
+	some elements specifically designed for OLE
+
+		menus
+
+
+
+
+\begindata{bp,538607528}
+\enddata{bp,538607528}
+\view{bpv,538607528,53,0,0}
+
+\slidehead{
+Coding Environment}
+
+
+
+Defined as C++ Classes
+
+
+(All names begin 'XMP'.   Elided below.)
+
+
+Implementors create new classes \
+
+
+	derived from OpenDoc classes
+
+	especially Part
+
+
+
+Porting to a platform means
+
+	implement a number of classes
+
+	about 20% new or revised code
+
+
+
+Objects are reference counted
+
+
+Objects may be persistent
+
+	their 'fSU' field points to their StorageUnit
+
+
+
+
+\begindata{bp,538607576}
+\enddata{bp,538607576}
+\view{bpv,538607576,54,0,0}
+\slidehead{
+
+Coding Amenities}
+
+
+
+Thread safe capabilities
+
+	the Arbitrator class manages \
+
+
+			ownership of tokens (called "foci")
+
+
+
+Plan to use SOM
+
+	multi-lingual
+
+	cross-platform
+
+
+
+
+Exceptions are used for errors
+
+	plan to tranverse across SOM connections
+
+
+
+
+
+
+
+\begindata{bp,538607624}
+\enddata{bp,538607624}
+\view{bpv,538607624,55,0,0}
+
+\slidehead{File Storage}
+
+
+Abstractions of usual file system
+
+
+StorageSystem  "="  device
+
+
+Container  "="  directory
+
+
+Document - a collection of Drafts
+
+
+Draft  "="  file  \
+
+
+	one or more StorageUnits
+
+
+Storage Unit
+
+	collection of named properties
+
+	each property has a collection of typed values
+
+	each value is an uninterpreted stream of bytes
+
+
+Physical storage in Bento boxes
+
+
+
+
+
+
+
+\begindata{bp,538607672}
+\enddata{bp,538607672}
+\view{bpv,538607672,56,0,0}
+
+\slidehead{Display Classes}
+
+
+Canvas - A drawing surface.  \
+
+
+	Best thought of as offscreen.
+
+	No drawing operations or graphics model
+
+
+Shape - general object for describing geometric shape
+
+	can be platform specific
+
+
+Transform - general object for describing coordinate transform
+
+	can be platform specific
+
+
+
+Part - object of some kind
+
+	object implementors derive from Part
+
+	is persistent
+
+	provides for embedding subobjects
+
+
+Frame - instantiation of a part in its parent
+
+	implementation is part of OpenDoc
+
+
+Facet - instantiation of a frame on the screen
+
+	draws to a canvas
+
+	parent may give it a private canvas
+
+	parent copies Facet's canvas to \
+
+
+		parent's Facet's canvas
+
+\begindata{bp,538607720}
+\enddata{bp,538607720}
+\view{bpv,538607720,57,0,0}
+
+\slidehead{Creating and Embedding an Object}
+
+
+
+	Part parentpart;  	// part wherein child is created
+
+	Frame parentFrame;	// a display frame of parentpart
+
+
+					// get Draft from StorageUnit:
+
+	Draft draft = parentpart->fSU->GetDraft();  \
+
+
+
+Create new part and give it a storage unit
+
+
+	Part newpart = draft->CreatePart(type); \
+
+
+	StorageUnit newstorageunit =
+
+			 draft->CreateStorageUnit();
+
+	newpart->InitPart(newstorageunit);
+
+
+Create a shape the part will have
+
+
+	Shape frameShape = Shape();	// create shape object
+
+	frameShape->SetRectangle(rect);  // rectangular shape
+
+
+
+
+
+\begindata{bp,538607768}
+\enddata{bp,538607768}
+\view{bpv,538607768,58,0,0}
+
+\slidehead{CreateEmbeddedFrame}
+
+
+
+newframe = parentpart->CreateEmbeddedFrame(
+
+		parentFrame,
+
+		frameShape,
+
+		externalTransform,  //  coordinate transform
+
+		newpart,
+
+		viewType, 		// ... \
+
+
+		presentation,	//  ...
+
+		frameGroupID,	//  ...
+
+		FALSE)		// T iff floats above contents
+
+
+
+CreateEmbeddedFrame asks its Draft to create the Frame:
+
+	newframe = draft->CreateFrame(parentFrame,
+
+		frameShape,  newpart,  frameGroup,  FALSE)
+
+
+
+The frame is added to the new part:
+
+	newpart->AddDisplayFrame(newframe);
+
+
+
+
+\begindata{bp,538607816}
+\enddata{bp,538607816}
+\view{bpv,538607816,59,0,0}
+
+\slidehead{Iterators}
+
+
+Common protocol for iterating over sets of objects
+
+
+Iteration is an object
+
+
+Methods:  First,  Next,  IsNotComplete
+
+
+
+	XXXelement e;
+
+	iter = XXXIterator(\{source of set\});
+
+	for (e = iter->First(); \
+
+
+			iter->IsNotComplete(); \
+
+
+			e = iter->Next())
+
+		\{process element e\}
+
+
+
+(Could have used C++ templates)
+
+
+
+
+
+
+\begindata{bp,538607864}
+\enddata{bp,538607864}
+\view{bpv,538607864,60,0,0}
+
+\slidehead{Facets for the new object}
+
+
+
+
+For each display frame, df,  of parent part:
+
+
+	Facet f;	// for each facet of df
+
+	iter = FrameFacetIterator(df);
+
+	for (f = iter->First();  iter->IsNotComplete();
+
+			f = iter->Next())
+
+		newfacet = parentfacet->CreateEmbeddedFacet(
+
+			newframe,  		// to be displayed in facet
+
+			clipShape,
+
+			externalTransform, \
+
+
+			NULL,			// a sibling
+
+			0);				// z relative to sibling
+
+
+
+
+
+
+
+
+\begindata{bp,538607912}
+\enddata{bp,538607912}
+\view{bpv,538607912,61,0,0}
+
+\slidehead{Sharing keyboard and mouse}
+
+
+
+OpenDoc uses Apple Events
+
+
+Arbitrator - keeps track of ownership of "foci"
+
+	e.g., keyboard focus, selection focus, menubar focus
+
+	also used for thread safety
+
+
+When a part recieves or loses a focus, it learns via a call to \
+
+
+	part->FocusAcquired(
+
+		focus,		// which focus
+
+		ownerFrame)	// which display frame
+
+	part->FocusLost(
+
+		focus,		// which focus
+
+		ownerFrame)	// which display frame
+
+
+Mouse movement with the button UP is called from dispatcher
+
+	Part::  MouseEnter,  MouseLeave,  MouseWithin
+
+		(facet,	where)	// Facet, Point
+
+
+General event handling
+
+	part->HandleEvent(event, frame, facet)
+
+
+
+\begindata{bp,538607960}
+\enddata{bp,538607960}
+\view{bpv,538607960,62,0,0}
+
+\slidehead{Other interesting concepts}
+
+
+Undo  -  maintains Undo stack and Redo stack
+
+
+Data conversion - TranslationService records translators
+
+
+Drag/Drop
+
+
+Menu bar is composite from shell and active parts
+
+
+Compatibility with OLE 2.0 is envisioned
+
+
+Everything has a thread safe option
+
+	Can use foci managed by arbitrator
+
+
+Printing can be done by drawing to a "non-dynamic" canvas
+
+	prints screen sized object, not document
+
+
+
+
+
+
+
+
+
+
+\begindata{bp,538608008}
+\enddata{bp,538608008}
+\view{bpv,538608008,63,0,0}
+
+
+\chapter{E.  Fresco}
+
+
+
+Committee of X Consortium
+
+
+	Mark Linton, Chairman
+
+
+
+An X toolkit in C++
+
+
+	preliminary version on XV11R6 tape
+
+	some concepts from Interviews and AUIS
+
+
+
+Only the lowest layers are defined (as of Feb. 1994)
+
+
+
+
+
+
+
+
+
+\begindata{bp,538608056}
+\enddata{bp,538608056}
+\view{bpv,538608056,64,0,0}
+\bold{\slidehead{
+
+Coding Environment}}
+
+
+
+Objects are C++ objects
+
+
+
+Interfaces are defined in CORBA IDL
+
+
+Ad hoc converter produces the C++ declarations
+
+
+	Plan to support cross address space calls
+
+
+
+
+Thread safe
+
+
+
+
+
+
+
+
+
+\begindata{bp,538608104}
+\enddata{bp,538608104}
+\view{bpv,538608104,65,0,0}
+
+\slidehead{File Storage}
+
+
+Not defined yet
+
+
+Plan to support multiple data stream formats
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begindata{bp,538608152}
+\enddata{bp,538608152}
+\view{bpv,538608152,66,0,0}
+
+
+\slidehead{Creating and embedding an object}
+
+
+
+Views are similar to AUIS views
+
+
+There is not yet support for connecting views to data objects
+
+
+
+An object is created with a C++ constructor
+
+
+
+New child is attached to parent with
+
+
+	parent->prepend_viewer(child, ...)
+
+
+or \
+
+
+
+	parent->append_viewer(child, ...)
+
+
+
+
+
+
+\begindata{bp,538608200}
+\enddata{bp,538608200}
+\view{bpv,538608200,67,0,0}
+
+\slidehead{Initiation of screen drawing}
+
+
+
+Almost all drawing operations are into offscreen areas
+
+	The entire window is updated at once \
+
+
+	by copying from the offscreen area
+
+
+	This avoids flicker
+
+
+
+"Traversal" objects specify \
+
+
+	"painter"
+
+	screen allocation
+
+	clipping
+
+	coordinate translation
+
+
+		GlyphTraversal t;
+
+		...
+
+		glyph->draw(t);
+
+
+	draws the child according to the given traversal
+
+
+Glyph::draw is usually called only by Fresco
+
+	during screen update
+
+
+\begindata{bp,538608248}
+\enddata{bp,538608248}
+\view{bpv,538608248,68,0,0}
+
+
+\slidehead{Sharing mouse and keyboard}
+
+
+
+Mouse events are handled by overriding a method
+
+	as in AUIS
+
+
+
+Keyboard is handled by ownership of the "focus object"
+
+	focus object has key translations in it
+
+
+Ask for focus:
+
+
+		focus = request_focus(requestor, ...)
+
+
+	Passes up view tree as in AUIS
+
+	If focus granted, the focus object is returned, \
+
+
+			otherwise NULL
+
+
+Focus transfer function
+
+	receive_focus
+
+	lose_focus
+
+
+Receive_focus sets up key translations
+
+
+Each object has a list of objects to be notified if it gets focus
+
+
+\begindata{bp,538608296}
+\enddata{bp,538608296}
+\view{bpv,538608296,69,0,0}
+
+
+\chapter{F.  NextStep}
+
+
+Originally developed by Next, Inc.
+
+
+Now in use by Sun Microsystems, HP, ...
+
+
+\leftindent{\italic{NeXTstep Concepts}, Next Computer (Redwood City, CA, 
+1990)  619 pp.}
+
+
+
+Application kit serves as basis for most applications
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begindata{bp,538608344}
+\enddata{bp,538608344}
+\view{bpv,538608344,70,0,8}
+
+
+\slidehead{Coding environment}
+
+
+Objective C
+
+
+		obj->f(x, y)
+
+	is written as
+
+		[obj f: x : y]
+
+
+
+Display PostScript
+
+
+Mach \
+
+
+
+
+Utilizes exceptions
+
+
+
+Standard malloc, no reference counting standard
+
+
+
+
+
+\begindata{bp,538608392}
+\enddata{bp,538608392}
+\view{bpv,538608392,71,0,0}
+
+\slidehead{
+File storage}
+
+
+
+Text object writes to a stream
+
+	not directly to file
+
+
+Text is stored in RTF form
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begindata{bp,538608440}
+\enddata{bp,538608440}
+\view{bpv,538608440,72,0,0}
+
+
+\slidehead{Creation of embedded object}
+
+
+
+
+No embedded objects
+
+
+
+Embedding is simulated by putting
+
+	both text and images on a substrate
+
+
+\{* True embedding is better for processing text\}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begindata{bp,538608488}
+\enddata{bp,538608488}
+\view{bpv,538608488,73,0,0}
+
+
+\slidehead{Sharing keyboard and mouse}
+
+
+
+Events
+
+
+
+Event arrives at an object through a call to \
+
+
+	method with same name as event
+
+
+
+
+To accept mouse hits
+
+	methods override hitTest: and return True
+
+
+System scans list of objects at hit point to find the lowest
+
+	for which hitTest: is True
+
+
+\{* parent does not control delivery of mouse to child\}
+
+
+
+Clicking in an object stores it as value of FirstResponder
+
+
+Keys go to object which is value of FirstResponder
+
+
+\begindata{bp,538608536}
+\enddata{bp,538608536}
+\view{bpv,538608536,74,0,0}
+
+
+\slidehead{Summary}\chapter{
+
+}
+\bold{\italic{Compound Document System}}
+
+
+	compound Documents supplant ASCII
+
+	recursive embedding of objects
+
+	includes wordprocessor, drawing editor, objects
+
+	application builder
+
+
+
+\bold{\italic{Options for CDSs}}
+
+
+	AUIS
+
+	OLE \
+
+
+	OpenDoc
+
+	NextStep
+
+	Fresco
+
+
+
+
+
+
+
+\begindata{bp,538608584}
+\enddata{bp,538608584}
+\view{bpv,538608584,75,0,0}
+
+\slidehead{Recommendations}
+
+
+Depends on level of distribution
+
+
+
+personal system without compound text
+
+
+	tk/tcl
+
+
+
+departmental or corporate tool
+
+
+	AUIS
+
+
+
+platform independence
+
+
+	Galaxy
+
+
+
+product
+
+
+	OpenDoc
+
+
+\begindata{bp,538608632}
+\enddata{bp,538608632}
+\view{bpv,538608632,76,0,0}
+
+
+\slidehead{Challenges}
+
+
+
+Define higher level languages \
+
+
+	to avoid drudgery of coding
+
+
+
+Define "smart" pointer setting functions
+
+	so redundant pointers are managed automatically
+
+
+
+Define standards and systems so\bold{\bigger{
+
+
+	compound documents can supplant ASCII}}
+
+
+\enddata{text,538298760}

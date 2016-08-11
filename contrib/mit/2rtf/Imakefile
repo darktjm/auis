@@ -1,0 +1,13 @@
+OBJS = main.o parse.o misc.o 2RFunctions.o
+
+NormalObjectRule()
+NormalHelpRule()
+
+
+ProgramTarget(2rtf, main.o parse.o misc.o 2RFunctions.o input.o, ${UTILLIB}, )
+
+InstallProgram(2rtf, $(DESTDIR)/bin)
+InstallFile(2rtf.trans, $(INSTINCFLAGS), $(DESTDIR)/lib)
+InstallDocs(2rtf.help, $(DESTDIR)/help)
+
+DependTarget()

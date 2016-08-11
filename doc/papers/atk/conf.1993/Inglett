@@ -1,0 +1,2353 @@
+\begindata{text,537946368}
+\textdsversion{12}
+\template{default}
+\define{footnote
+
+attr:[Flags OverBar Int Set]
+attr:[FontSize PreviousFontSize Point -2]}
+\define{maintitle
+menu:[Title~3,MainTitle]
+attr:[Justification Centered Point 0]
+attr:[FontFace Bold Int Set]
+attr:[FontSize PreviousFontSize Point 10]}
+\define{mainsubtitle
+menu:[Title~3,MainSubTitle]
+attr:[Justification Centered Point 0]
+attr:[FontSize PreviousFontSize Point 4]}
+\define{abstracttitle
+menu:[Title~3,AbstractTitle]
+attr:[Justification Centered Point 0]
+attr:[FontFace Bold Int Set]}
+\define{abstract
+menu:[Region~4,Abstract]
+attr:[LeftMargin LeftMargin Cm 166461]
+attr:[RightMargin RightMargin Cm 164149]}
+\maintitle{
+
+
+
+
+Smart Styles
+
+}\mainsubtitle{Text Styles with a Controller
+
+}
+
+\center{Todd A. Inglett
+
+IBM Rochester
+
+\begindata{writestamp,537878272}
+Datastream version: 1
+%o %A, %Y
+andysans12
+736535342
+\enddata{writestamp,537878272}
+\view{writestampview,537878272,0,0,0}
+
+
+
+\abstracttitle{ABSTRACT
+
+}}
+\abstract{A new interface is described which extends the usefulness of 
+styles in ATK text.  With smart styles, a style no longer simply reflects 
+display attributes, but instead can react to changes in the text it 
+surrounds.  This provides a new mechanism for extending the functionality 
+of text.  The paper defines the new \italic{stylecontroller} interface, 
+describes how it was incorporated into the toolkit, and outlines future 
+projects based on this design.
+
+}
+
+
+
+\chapter{Introduction
+
+}
+The ability to display formatted text with nested styles is perhaps one of 
+the Andrew Toolkit (ATK) \italic{text} object's most valuable features. 
+ This paper describes an enhancement to the toolkit that transforms these 
+styles from passive display attributes to active controllers that can react 
+to changes in the text.  These controllers can provide new function to text 
+with a small amount of programming effort and the added benefit that the 
+new function is decentralized from the text object.
+
+
+The new interface has been dubbed ``Smart Styles'' indicating that the 
+styles now have intelligence even though this term is not entirely accurate 
+from an ATK programmer's point of view.  This paper first gives an 
+orientation of what a smart style can do.  A brief discussion of the 
+implementation of ATK text follows for users and programmers not familiar 
+with the internal details of ATK text.  Next, smart styles are defined in 
+detail followed by an example.  Finally, an explanation of how smart styles 
+were integrated into ATK, a discussion of alternative implementations and 
+future projects are described.
+
+
+
+\chapter{Smart Styles
+
+}
+A smart style is defined as a style with a \italic{controller}.  The 
+controller is an ATK class whose instances can react to changes in text 
+wrapped with that style.  The controller can only react to changes in the 
+text--it cannot intercept mouse hits, draw graphics, define menus, or 
+perform other higher level functions associated with an inset.  It does 
+have convenient access to the text object which it can freely modify.
+
+
+Here are some example uses of smart styles.  Each example represents a 
+style that can be wrapped around text making that text active.
+
+
+\description{1.	Autonumbering/autobullet text.  Bullets/numbers are 
+inserted automatically when the user inserts newlines.
+
+
+2.	Autonumbering headings.  Wrapping a new heading causes all other related 
+headings to renumber.
+
+
+3.	Automarkup style.  Newly inserted text is wrapped with a changebar 
+style, and deleted text is wrapped with a strikethrough style.  This smart 
+style would be used as the global style.
+
+
+4.	Restricted text such as uppercase only, lowercase only, valid filenames 
+only, valid dates only, fixed number of characters, etc.  This is mainly 
+useful from a programming perspective.  These fields can be used to create 
+a form from a text document without subclassing text.
+
+
+5.	Readonly text.  Useful for prompts or label fields in a form.
+
+
+6.	Cited text.  The text content is extracted from another source. 
+ Bibliography entries could be implemented this way.  Text can be excerpted 
+from a glossary such that changes to the glossary will update all 
+references.
+
+
+7.	References within and to other documents.  The style could change the 
+text content to ``See page XX'' or ``Figure XX on page YY.''  This would 
+require named marks.
+
+
+8.	Writestamps.  The text is replaced by the current time, date, username, 
+etc.
+
+
+9.	A special comment style that flows C comments in ctext.
+
+
+10.	Flashing text.
+
+
+}The controller is associated which a style through a modified \bold{lookz} 
+(the Edit Styles window).  If these styles are defined within a template, 
+novice users need not even be aware that stylecontrollers exist--they will 
+only observe that some styles are ``smarter'' than others.
+
+
+
+\chapter{Brief Overview of ATK Text
+
+}
+In order to discuss the definition and implementation of smart styles we 
+give a brief review of ATKs \italic{text}, \italic{textview} and related 
+classes to understand how smart styles fit into the picture.  Programmers 
+who routinely work with \italic{text}, \italic{environment} and 
+\italic{style} may skip this section.
+
+
+An ATK \italic{text} object contains the raw text that is to be displayed 
+along with information that indicates how the text is to be formatted on 
+the display.  A related \italic{textview} queries the text and formatting 
+information to actually draw the text in a window.  The text formatting 
+information is organized into a tree of \italic{environment} objects.  An 
+environment object records a position and length of a particular region of 
+text along with a reference to a \italic{style} object.  Environment 
+objects are arranged into a tree because styled regions of text can be 
+nested.
+
+
+As mentioned each node in the environment tree contains a reference to a 
+\italic{style} object.  A style object has a human readable name and 
+contains font, color, margin and tab information.  A typical style might 
+have the name ``bold'' and it contains an attribute that indicates that the 
+font should be changed to bold.  This style information is separate from 
+environments because it is common for many environments to share the same 
+style.  For example, there may be 100 environments in a text that have 
+references to the bold style.
+
+
+\begindata{figure,538140672}
+$origin 0 0
+$printscale 1.000000 1.000000
+#none
+\begindata{figogrp,539059968}
+\figattr{
+}
+$ 0 61 76 3127 1921
+$endatt
+\enddata{figogrp,539059968}
+\begindata{figogrp,538926592}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 0 159 625 1252 844
+$endatt
+\enddata{figogrp,538926592}
+\begindata{figorect,538823168}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 255 629
+$ 969 177
+$endatt
+\enddata{figorect,538823168}
+\begindata{figorect,538823936}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 163 972
+$ 222 177
+$endatt
+\enddata{figorect,538823936}
+\begindata{figotext,538761472}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 265 1060
+$ 0 0
+fox=000
+$endatt
+\enddata{figotext,538761472}
+\begindata{figorect,538882048}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 676 972
+$ 715 177
+$endatt
+\enddata{figorect,538882048}
+\begindata{figotext,538882560}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 980 1072
+$ 0 0
+jumped=040over...=000
+$endatt
+\enddata{figotext,538882560}
+\begindata{figorect,538883584}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 627 1289
+$ 333 175
+$endatt
+\enddata{figorect,538883584}
+\begindata{figorect,538883584}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1073 1289
+$ 333 175
+$endatt
+\enddata{figorect,538883584}
+\begindata{figotext,538884608}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 790 1382
+$ 0 0
+over=000
+$endatt
+\enddata{figotext,538884608}
+\begindata{figotext,538884864}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1220 1382
+$ 0 0
+dog=000
+$endatt
+\enddata{figotext,538884864}
+\begindata{figoplin,538885120}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 736 806
+$ -465 165
+$endatt
+\enddata{figoplin,538885120}
+\begindata{figoplin,538885632}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 736 806
+$ 263 159
+$endatt
+\enddata{figoplin,538885632}
+\begindata{figoplin,538923008}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 1021 1148
+$ -241 140
+$endatt
+\enddata{figoplin,538923008}
+\begindata{figoplin,538923520}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 1024 1145
+$ 202 143
+$endatt
+\enddata{figoplin,538923520}
+\begindata{figotext,538823680}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:2
+fontfamily:andysans
+textpos:0
+}
+$ 720 718
+$ 0 0
+The=040quick=040brown...=000
+$endatt
+\enddata{figotext,538823680}
+#end
+\begindata{figogrp,539014912}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:12
+fontstyle:1
+fontfamily:andysans
+textpos:0
+}
+$ 0 136 1606 1313 122
+$endatt
+\enddata{figogrp,539014912}
+\begindata{figotext,539013120}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:1
+fontfamily:andysans
+textpos:0
+}
+$ 768 1672
+$ 0 0
+environments=000
+$endatt
+\enddata{figotext,539013120}
+\begindata{figoplin,539013632}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:12
+fontstyle:1
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 1152 1686
+$ 288 0
+$ 288 -72
+$endatt
+\enddata{figoplin,539013632}
+\begindata{figoplin,539014400}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:12
+fontstyle:1
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 360 1686
+$ -216 0
+$ -216 -72
+$endatt
+\enddata{figoplin,539014400}
+#end
+\begindata{figogrp,539015424}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:12
+fontstyle:1
+fontfamily:andysans
+textpos:0
+}
+$ 0 61 76 2994 349
+$endatt
+\enddata{figogrp,539015424}
+\begindata{figogrp,538760448}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:20
+fontstyle:1
+fontfamily:andy
+textpos:1
+}
+$ 0 96 176 2882 170
+$endatt
+\enddata{figogrp,538760448}
+\begindata{figotext,538624768}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andy
+textpos:1
+}
+$ 96 266
+$ -48 -28
+The=040quick=040brown=000
+$endatt
+\enddata{figotext,538624768}
+\begindata{figotext,538625280}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:2
+fontfamily:andy
+textpos:1
+}
+$ 1037 266
+$ 0 0
+fox=000
+$endatt
+\enddata{figotext,538625280}
+\begindata{figotext,538625792}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:20
+fontstyle:0
+fontfamily:andy
+textpos:1
+}
+$ 1245 256
+$ 0 0
+jumped=000
+$endatt
+\enddata{figotext,538625792}
+\begindata{figotext,538626560}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:20
+fontstyle:1
+fontfamily:andy
+textpos:1
+}
+$ 1794 261
+$ 0 0
+over=000
+$endatt
+\enddata{figotext,538626560}
+\begindata{figotext,538627072}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:20
+fontstyle:0
+fontfamily:andy
+textpos:1
+}
+$ 2142 256
+$ 0 0
+the=040lazy=000
+$endatt
+\enddata{figotext,538627072}
+\begindata{figotext,538627328}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:20
+fontstyle:1
+fontfamily:andy
+textpos:1
+}
+$ 2682 256
+$ 0 0
+dog.=000
+$endatt
+\enddata{figotext,538627328}
+#end
+\begindata{figorect,538760960}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:20
+fontstyle:1
+fontfamily:andy
+textpos:1
+}
+$ 1008 144
+$ 216 216
+$endatt
+\enddata{figorect,538760960}
+\begindata{figorect,538761728}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:20
+fontstyle:1
+fontfamily:andy
+textpos:1
+}
+$ 1771 144
+$ 356 215
+$endatt
+\enddata{figorect,538761728}
+\begindata{figorect,538763008}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:20
+fontstyle:1
+fontfamily:andy
+textpos:1
+}
+$ 2672 150
+$ 306 212
+$endatt
+\enddata{figorect,538763008}
+\begindata{figorect,538762240}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:20
+fontstyle:1
+fontfamily:andy
+textpos:1
+}
+$ 1749 112
+$ 1263 277
+$endatt
+\enddata{figorect,538762240}
+\begindata{figorect,538820864}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:20
+fontstyle:1
+fontfamily:andy
+textpos:1
+}
+$ 65 80
+$ 2985 340
+$endatt
+\enddata{figorect,538820864}
+#end
+\begindata{figorect,539015936}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1980 468
+$ 504 216
+$endatt
+\enddata{figorect,539015936}
+\begindata{figorect,539015936}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1980 756
+$ 504 216
+$endatt
+\enddata{figorect,539015936}
+\begindata{figorect,539015936}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1980 1044
+$ 504 216
+$endatt
+\enddata{figorect,539015936}
+\begindata{figorect,539015936}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 1980 1332
+$ 504 216
+$endatt
+\enddata{figorect,539015936}
+\begindata{figotext,539050752}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 2232 576
+$ 0 0
+global=000
+$endatt
+\enddata{figotext,539050752}
+\begindata{figotext,539051008}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 2232 864
+$ 0 0
+bigger=000
+$endatt
+\enddata{figotext,539051008}
+\begindata{figotext,539051264}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 2232 1152
+$ 0 0
+italic=000
+$endatt
+\enddata{figotext,539051264}
+\begindata{figotext,539051520}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$ 2232 1440
+$ 0 0
+bold=000
+$endatt
+\enddata{figotext,539051520}
+\begindata{figoplin,539051776}
+\figattr{
+shade:-1
+color:black
+linewidth:0
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 1224 720
+$ 758 -143
+$endatt
+\enddata{figoplin,539051776}
+\begindata{figoplin,539052288}
+\figattr{
+shade:-1
+color:black
+linewidth:0
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 1386 1069
+$ 596 -205
+$endatt
+\enddata{figoplin,539052288}
+\begindata{figoplin,539052800}
+\figattr{
+shade:-1
+color:black
+linewidth:0
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 386 1069
+$ 190 133
+$ 1595 101
+$endatt
+\enddata{figoplin,539052800}
+\begindata{figoplin,539053312}
+\figattr{
+shade:-1
+color:black
+linewidth:0
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 2 0 0
+$ 1405 1386
+$ 573 52
+$endatt
+\enddata{figoplin,539053312}
+\begindata{figoplin,539053824}
+\figattr{
+shade:-1
+color:black
+linewidth:0
+rrectcorner:10
+fontsize:10
+fontstyle:0
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 962 1398
+$ 133 121
+$ 1016 42
+$endatt
+\enddata{figoplin,539053824}
+\begindata{figogrp,539060992}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:12
+fontstyle:1
+fontfamily:andysans
+textpos:0
+}
+$ 0 1950 1608 581 130
+$endatt
+\enddata{figogrp,539060992}
+\begindata{figotext,539058688}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:12
+fontstyle:1
+fontfamily:andysans
+textpos:0
+}
+$ 2232 1674
+$ 0 0
+styles=000
+$endatt
+\enddata{figotext,539058688}
+\begindata{figoplin,539058944}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:12
+fontstyle:1
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 2398 1680
+$ 124 0
+$ 124 -64
+$endatt
+\enddata{figoplin,539058944}
+\begindata{figoplin,539060480}
+\figattr{
+shade:-1
+color:black
+linewidth:2
+rrectcorner:10
+fontsize:12
+fontstyle:1
+fontfamily:andysans
+textpos:0
+}
+$$ 0 3 0 0
+$ 2063 1680
+$ -105 0
+$ -105 -64
+$endatt
+\enddata{figoplin,539060480}
+#end
+\begindata{figotext,539108096}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:16
+fontstyle:0
+fontfamily:andysans
+textpos:1
+}
+$ 100 1917
+$ 0 0
+Figure=0401:=040=040Text,=040Environment=040and=040Style=040Objects=000
+$endatt
+\enddata{figotext,539108096}
+#end
+\enddata{figure,538140672}
+\view{figview,538140672,1,688,327}
+Figure 1 shows a text object, environments and styles.  The boxes around 
+the sample text represent environments.  These same environment are also 
+shown in a tree form to the left.  Note that the environments do not 
+physically contain copies of the text but instead maintain positions and 
+lengths of the referenced text.  Each environment refers to a style object, 
+and more than one environment may refer to the same style (see \bold{bold} 
+in the figure).
+
+
+The \italic{textview} implementation displays the text by consulting the 
+text and the associated environment tree.  When textview draws the text, it 
+gets the style information for each segment of text from the environment 
+tree and draws it accordingly.
+
+
+
+\chapter{Definition of a Smart Style}
+
+
+A \italic{smart style} is a style with a controller.  We define an 
+additional attribute for a style:  the name of a controller class for the 
+style.  Each time a new environment is created, the associated style is 
+queried for a controller name.  If the style has a controller name, an 
+instance of that controller class is created by name and associated with 
+the environment.  The controller must be a subclass of the 
+\italic{stylecontroller} class.  Thus, there is an instance of a 
+stylecontroller for each \italic{environment} using the smart style.   
+
+
+The stylecontroller class has this definition:
+
+
+\example{class stylecontroller[stylecon] \{
+
+   methods:
+
+     NewEnvironment();
+
+     TextDeleted(long pos, long len);
+
+     TextInserted(struct mark *new_text);
+
+     TextPreDeleted(struct mark *deleted_text);
+
+     TextRead(struct mark *new_text);
+
+     TextReadFile();
+
+     TextReplaced(struct mark *replaced_text);
+
+
+     TextChanged(enum environment_change reason, long pos, long len);
+
+
+   macromethods:
+
+     GetText() ((self)->textobj)
+
+     GetEnvironment() ((self)->envobj)
+
+     GetStyle() ((self)->envobj->data.style)
+
+
+     SetText(struct text *txt) ((self)->textobj=(txt))
+
+     SetEnvironment(struct environment *env) ((self)->envobj=(env))
+
+\};
+
+}
+A smart style's controller is written by subclassing the stylecontroller 
+class, overriding the \italic{NewEnvironment}, \italic{TextInserted}, 
+\italic{TextRead}, \italic{TextReadFile}, \italic{TextReplaced}, 
+\italic{TextPreDeleted} and \italic{TextDeleted} methods as appropriate.  A 
+``smartstyle'' class does not exist in this implementation.  We only use 
+the term ``smart style'' to refer to a style that has a stylecontroller 
+name as an attribute.
+
+
+An instance of a stylecontroller is associated with an 
+\italic{environment}.  Whenever the text within that environment is 
+modified, the \italic{TextChanged} method of the stylecontroller is called. 
+ The \italic{TextChanged} method determines what text changed and calls one 
+of the other more specific methods.
+
+
+Thus, to create a smart style one must subclass stylecontroller creating a 
+class X which overrides the above methods and define the controller 
+attribute of a style with the name ``X.''  An instance of X will be created 
+for each environment styled in the text and the methods will be called 
+appropriately when the text changes.  Those methods can react to changes to 
+make the style ``smart.''
+
+
+
+\section{Stylecontroller Methods
+
+}
+The following methods may be overridden in stylecontroller to give a 
+controller its intelligence.  Most of the default implementations of the 
+methods other than \italic{TextChanged} are either empty or simulate a text 
+insertion operation.  This is actually useful, because many smart styles 
+are often only interested in certain events such as text inserted but not 
+text deleted.  Note that \italic{TextChanged} has an implementation which 
+calls the other methods.  Only very sophisticated controllers override the 
+TextChanged method.
+
+
+\subsection{NewEnvironment()
+
+}The NewEnvironment method is called when a new environment is wrapped 
+around existing text, such as when a user selects some text and applies a 
+style.  The smart style can immediately reformat the text if it so desires. 
+ This method is called just after the stylecontroller instance has been 
+created and initialized.  InitializeObject is not always satisfactory 
+because it is called \italic{before} a text and an environment have been 
+associated with the controller.  This method is called \italic{after} the 
+text and environment are established.  The default NewEnvironment method 
+simply relays the request to the TextInserted method to simulate text being 
+inserted into this new environment.
+
+
+\subsection{TextChanged(enum environment_change reason, long pos, long len)
+
+}This method is called whenever a text change occurs within an environment. 
+ The position and length of the change may span a greater region than the 
+environment, and the change may be recursive (e.g. a smart style may react 
+to an insertion by performing another insertion which would in turn call 
+the TextChanged method).  Its implementation clips the position and length 
+to the current environment, eliminates bogus calls, and avoids recursive 
+changes.  \italic{This method is normally not overridden.}
+
+
+\subsection{TextDeleted(long pos, long len)
+
+}This method is called after text has been deleted.  The position indicates 
+where the text was deleted and the length indicates how many characters 
+have been deleted.  This may be a subset of the environment wrapping the 
+text.  The default TextDeleted method is empty.
+
+
+\subsection{TextInserted(struct mark *new_text)
+
+}This method is called after text has been inserted.  This is not called 
+for \bold{Insert File} or \bold{Paste} operations (see TextRead).  The mark 
+indicates where the text was inserted.  This mark may be a subset of the 
+environment wrapping the text.  The default TextInserted method is empty.
+
+
+\subsection{TextPreDeleted(struct mark *deleted_text)
+
+}This method is called \italic{just before} text is to be deleted.  The 
+mark indicates where the text will be deleted.  This mark may be a subset 
+of the environment wrapping the text.  The default TextPreDeleted method is 
+empty.
+
+
+\subsection{TextRead(struct mark *new_text)
+
+}This method is called after text has been inserted by being read from a 
+file.  The implementation of ATKs text makes \bold{Insert File} and 
+\bold{Paste} operations appear to be read from a file.  The mark indicates 
+where the text was inserted.  This mark may be a subset of the environment 
+wrapping the text.  The default TextRead method simply relays the request 
+to the TextInserted method.
+
+
+\subsection{TextReadFile()
+
+}This method is called after the entire text has been replaced by the 
+contents of a new file.  This occurs after the file is initially read, or 
+after a switch file.  It may be used to distinguish a file read from a 
+paste or insert file, however it is only useful for a controller on the 
+global style.  The default TextReadFile method is empty.
+
+
+\subsection{TextReplaced(struct mark *replaced_text)
+
+}This method is called after text has been replaced.  The mark indicates 
+where the text was replaced.  This mark may be a subset of the environment 
+wrapping the text.  The default TextReplaced method simply relays the 
+request to the TextInserted method.
+
+
+The macromethods \bold{GetText}, \bold{GetEnvironment} and \bold{GetStyle} 
+may be used to quickly retrieve the associated text, environment and style 
+objects.
+
+
+
+\section{The Notification Protocol
+
+}
+The \italic{TextChanged} method is called via a notification protocol in 
+which stylecontrollers are informed of changes to text wrapped by their 
+environments.  The TextChanged method is called whenever text in the 
+environment controlled by a stylecontroller is changed.  Since environments 
+can be nested, a protocol is needed to define the order in which 
+stylecontrollers are informed of a change.  A stylecontroller can modify 
+the text generating additional notifications.
+
+
+A modification to the text can change (insert, delete or replace) many 
+characters in a single operation.  This change may span many environments. 
+ Each environment that contains text altered by the change must be 
+notified.
+
+
+The protocol starts with the innermost such environments.  The 
+\italic{TextChanged} method is called for each of these environments. 
+ Next, the parent of each of these innermost environments are notified, and 
+so on.  The mark is ``clipped'' to fit the environment of the 
+stylecontroller since the actual change may span many environments, and the 
+appropriate method (TextInserted, TextDeleted, etc) is called.  If that 
+method chooses to modify the text, the notification protocol is performed 
+again from start to finish for that modification, after which the 
+interrupted notification is allowed to continue.  Marks are placed in the 
+text to track positions since recursive changes can reposition text.
+
+
+It should be fairly obvious that if a stylecontroller chooses to modify its 
+own text, its own methods might be called informing it of the change.  This 
+is prevented in the default \italic{TextChanged} method by marking the 
+stylecontroller as ``busy.''  Thus a change resulting from the 
+stylecontroller's own actions (even if indirect via a nested smart style) 
+is ignored.
+
+
+
+\chapter{An Example Smart Style
+
+}
+As an example, consider a style that forces all text that it wraps to be 
+UPPERCASE.  Applications might use styles such as this when presenting some 
+kind of text \italic{form} to the user.  The smart style can help the user 
+enter correct information.  Similar styles might require that a valid date, 
+pathname, username, product name, etc, appear in a particular region of 
+text.  A field smart style could provide auto-overstriking in an area of a 
+fixed width, autoextending the field if desired.  This example is probably 
+not too useful for everyday documents, but it serves as a trivial example 
+of how a smart style works.
+
+
+First, an \italic{upcasestyle} subclass of \italic{stylecontroller} must be 
+created:
+
+
+\example{class upcasestyle [ucsty]: stylecontroller[stylecon] \{
+
+    overrides:
+
+      TextInserted(struct mark *new_text);
+
+\};
+
+}
+This class only needs to override the TextInserted method because the 
+NewEnvironment, TextRead, TextReplaced, etc, methods all call TextInserted 
+by default.  This class doesn't care \italic{how} the text got inserted--it 
+only needs to know \italic{what} got inserted so that it can force that 
+text to uppercase.  The implementation is simple:
+
+
+\example{void upcasestyle__TextInserted(self, new_text)
+
+struct upcasestyle *self;
+
+struct mark *new_text;
+
+\{
+
+    long i;
+
+    char ch;
+
+    struct text *txt = upcasestyle_GetText(self);
+
+
+    for (i=mark_GetPos(new_text); i<mark_GetEndPos(new_text); i++) \{
+
+	  ch = text_GetChar(txt, i);
+
+	  if (islower(ch)) \{
+
+	    ch = toupper(ch);
+
+	    text_ReplaceCharacters(txt, i, 1, &ch, 1);
+
+	  \}
+
+    \}
+
+\}
+
+}
+The implementation simply scans the characters that are newly inserted 
+using the text_GetChar method to fetch these characters.  If a lowercase 
+character is found, it is made uppercase and replaced in the text.  This 
+occurs before the window is updated so the user will never see the 
+lowercase letter.
+
+
+This method changes the text object, so the text_ReplaceCharacters method 
+will generate another call to TextChanged (not overridden here). 
+ Fortunately, this controller object is ``busy'' so a recursive call to 
+TextInserted will \italic{not} occur.
+
+
+It would be wise for this implementation to use \italic{marks} instead of 
+an index \italic{i} to track scanning progress through the text.  This is 
+necessary because it is possible that the uppercase style is nested within 
+other smart styles.  If those other smart styles insert or delete text as a 
+result of this style uppercasing characters, this style's implementation 
+will be confused because the index will be incorrect.  This is left as an 
+exercise for the reader.
+
+
+Smarter styles may need to override TextRead, NewEnvironment or 
+TextReplaced to distinguish between different ways text can be inserted 
+into a text.  A really smart style may need to intercept changes that it is 
+making itself.  If so, it must override TextChanged to intercept all 
+events.
+
+
+The style object supports an interface to get and set arbitrary string 
+attributes.  Stylecontrollers are free to query any additional attributes 
+to allow user customization.  For example, the upcasestyle controller could 
+be made more generic.  It could query a ``casetype'' attribute to decide 
+whether to upper or lowercase the text.  This attribute can be queried with 
+the following code:
+
+
+\example{attr = style_GetAttribute(casestyle_GetStyle(self), "casetype");
+
+}
+This provides a way to define multiple styles with different attributes. 
+ They can appear as very different styles to the end user (e.g. uppercase 
+vs. lowercase).  There is currently no way to associate attributes such as 
+these on a per-environment basis.
+
+
+
+\chapter{Integrating Smart Styles into ATK
+
+}
+Smart styles were easily incorporated into the existing toolkit.  The 
+\italic{stylecontroller} class is currently a toplevel class, although it 
+should perhaps be some subclass of \italic{observable}.  All that was 
+needed to integrate stylecontroller into the toolkit was some mechanism to 
+call the stylecontroller TextChanged method each time text is changed in 
+that stylecontroller's environment.
+
+
+This was accomplished by adding a new method to environment:
+
+
+\example{RegionModified(enum environment_change reason, long pos, long len)
+
+}
+This method is called on any environment in the tree by the text object 
+whenever a change is made to the text.  For example, the implementation of 
+text_AlwaysInsertCharacters calls RegionModified with a reason of 
+environment_InsertChange on the global environment.  There are eight such 
+method calls in the new implementation of text.
+
+
+This RegionModified method implements the notification protocol (see the 
+\bold{Notification Protocol} section above).  Starting with the innermost 
+environment, it walks up the environment tree looking for environments with 
+stylecontrollers.  A reference to a stylecontroller is a new data field in 
+an environment.  If an environment's stylecontroller is non-NULL, 
+RegionModified calls the TextChanged method of that stylecontroller.
+
+
+The implementation of stylecontroller requires that a text object be 
+associated with an environment.  ATK previously associated environments 
+with text, but not vice-versa.  The environments would only track positions 
+and lengths and had no way to access the text object.  To overcome this 
+problem, a new classprocedure was added to environment:
+
+
+\example{GetTextRootEnvironment(struct text *txt)
+
+}
+This classprocedure is analogous to \italic{GetRootEnvironment} and is used 
+to create a new environment tree.  Each environment thenceforth is created 
+as a child of an existing environment.  GetTextRootEnvironment associates 
+the text object \italic{txt} with the new environment tree.  As new child 
+environments are created, this text object is ``inherited'' to all new 
+environments.  Thus, each environment has access to the text object.  This 
+change was made to be totally backward compatible with existing ATK 
+applications.  The new text implementation uses this new classprocedure to 
+create the global environment.
+
+
+The environment \italic{WrapStyle} method has been modified to support 
+smart styles.  When an environment is created this way, the WrapStyle 
+method queries the ``stylecontroller'' attribute of the style.  If a 
+stylecontroller exists, it is created by name and a reference is saved in 
+the environment.  From now on this environment is ``smart.''  Another new 
+environment method \italic{ReplaceStyle} is provided so that a new style 
+can be replaced in an existing environment.
+
+
+Unfortunately, the implementation of environment is now aware of text. 
+ This means that the environment code must be moved to ./atk/text from 
+./atk/support in the source tree to treat the new dependency.
+
+
+Performance is always an issue and it is not completely clear what impact 
+smart styles may have on the performance of text.  The most important 
+measurement is how these modifications to ATK affect performance of text 
+that does \italic{not} contain embedded smart styles.  The only additional 
+work performed by the new text implementation is to perform notification 
+protocol via a new environment method call.  This protocol descends the 
+environment tree with each change to the text.  However, each change to the 
+text also triggers the environment \italic{Update} method.  This Update 
+method also descends the environment tree, although from the top down.  So 
+at least we know that performance is still of the same magnitude of the 
+previous implementation.  Perhaps performance can be improved by merging 
+the environment Update and RegionModified methods.
+
+
+
+\chapter{Alternative Implementations
+
+}
+A very natural alternative approach is to create a \italic{smartstyle} 
+subclass of \italic{style}.  Developers of smart styles would subclass 
+\italic{smartstyle} to provide function.  However, experience has shown 
+that a typical smart style implementation is only interested in a single 
+environment--not all environments using the style.  Allowing only one 
+instance of the smartstyle for an entire text object would make the 
+smartstyle responsible for all the bookkeeping of the environments using 
+the smartstyle in a text object.  Allowing multiple text objects to share 
+the style compounds the problem.  Bookkeeping functions could be provided 
+in the smartstyle class and inherited.
+
+
+Another approach is to create a \italic{smartenvironment} subclass of 
+\italic{environment}.  This comes from the observation that there is 
+usually a one-to-one relationship between environments and stylecontroller 
+objects.  They could be merged into the same object.  A new RegionChanged 
+method would be added to environment replacing the TextChanged method in 
+stylecontroller.  The default RegionChanged method would do nothing (dumb 
+styles) and smartenvironment would override it.  This technique would 
+prohibit the implementation of multiple stylecontrollers per style.
+
+
+
+\chapter{Smart Styles vs. Insets and Subclassing Text
+
+}
+Obvious questions are ``why not use an inset?'' and ``why not subclass 
+text?''  This section attempts to explain why smart styles are sometimes 
+more appropriate than insets or subclassing text.
+
+
+The inset interface is complex.  Dataobject and view classes must be 
+created and many protocols must be followed so that the inset may be 
+properly contained inside other insets.  An inset can respond to mouse 
+hits, keyboard input and may draw arbitrary graphics in its rectangle. 
+ However, it is limited to a rectangle.   Also, an inset currently has no 
+way to inherit attributes of the object in which it is embedded unless it 
+resorts to hacks.
+
+
+Text can be made ``smart'' by subclassing.  For example, a subclass of text 
+called \italic{autonumtext} could support automatically numbered lists.  It 
+would probably be implemented using special environments that wrap the 
+autonumber sections of the text.  Subclassing textview gives additional 
+access to intercept mouse hits and keyboard input, and additional graphics 
+could be displayed.
+
+
+The smart stylecontroller interface is simple.  Whenever text is modified 
+in a region governed by a smart style, the controller is informed via a 
+method call.  The controller can react to the change often by modifying or 
+reformatting the text in some manner.  A smart style cannot respond to 
+mouse hits, keyboard input (other than indirectly), and it cannot draw 
+arbitrary graphics.  The text controlled by a smart style is part of a 
+larger text object.  Therefore the text flows properly through the document 
+and inherits style attributes of surrounding text.
+
+
+An inset can certainly contain text, but as noted above it cannot readily 
+inherit attributes of the text in which it is embedded.  For example, an 
+inset cannot easily inherit the point size of the font of the text 
+surrounding the inset.  If the inset contains much text it cannot wrap into 
+a paragraph in the surrounding text.  Even if it stands alone as a 
+rectangle, that rectangle does not scroll well inside other text.  A search 
+operation on the surrounding text will fail to search the text contained in 
+the inset.
+
+
+Subclassing text to provide ``smart text'' also has its drawbacks.  The 
+chief drawback is that such additions are useful only to users of the new 
+``smart'' text, or to further ``smarter'' subclasses.  One cannot easily 
+extend an existing application without somehow coaxing it to use the new 
+smart text subclass.  This may not seem difficult--indeed standard ATK 
+applications allow dataobjects/views to be associated with standard file 
+extensions.  However, it is not easy to add additional function to two 
+different lines of descent in the text class hierarchy.  For example, how 
+can an automatic comment flowing style be added to both ctext and ltext? 
+ It must be added to srctext (parent of both) which is not easy for a user 
+of the 
+toolkit.\footnote{\
+\begindata{fnote,538215424}
+\textdsversion{12}
+This might be trivial for the srctext author.  Everyone doesn't have full 
+access to change srctext, though.\
+\enddata{fnote,538215424}
+\view{fnotev,538215424,4,0,0}}  One of smart style's greatest advantages is 
+that implementations of such styles are decentralized.  Users (both real 
+users and applications) that wish to use a smart style can pick and choose 
+between the styles themselves, rather than between text subclasses. 
+ Existing or new text subclasses can share implementations of the 
+stylecontrollers.
+
+
+
+\chapter{Future Work
+
+}
+The current stylecontroller interface is only the tip of the iceberg. 
+ There are plenty of additional projects that can greatly extend the 
+usability and effectiveness of smart styles.
+
+
+\description{1.	The \italic{lookz} interface (Edit Styles window) should be 
+modified to provide a convenient way for users to define a stylecontroller 
+for a given style.  A list of known stylecontrollers could be displayed, 
+but the mechanism must allow for arbitrary user-written stylecontrollers.
+
+
+2.	There is no reason multiple stylecontrollers cannot be associated with a 
+single style.  This would be done by modifying environment_WrapStyle to 
+interpret the ``stylecontroller'' attribute as a blank separated list of 
+controllers.  The order in which these controllers are called must be 
+defined by a modified notification protocol.
+
+
+3.	A stylecontroller currently has no access to a view.  However, there are 
+times when a human interface to the style is desirable.  For example, an 
+automatic bullet list style may need a ``redo bullets'' command. 
+ Stylecontroller could offer a new method that would be overridden by 
+subclasses:
+
+
+\example{Command(char *cmd, struct view *promptview);
+
+}
+	A \italic{textview-style-command} proc could prompt for a command, locate 
+the current environment and call the stylecontroller's Command method.  The 
+view is used by the command for additional prompting and error messages. 
+ Additional stylecontroller methods could provide a mechanism to query for 
+valid commands so textview could offer command completion.
+
+
+4.	Stylecontroller could provide methods to return attributes queried by 
+the style.  These would be overridden by subclasses of stylecontroller:
+
+
+\example{GetFirstAttributeName()
+
+GetNextAttributeName()
+
+}
+	The lookz interface could provide a list of known attribute names once a 
+controller is defined for a style.  For example, a flashing style might use 
+a ``flashcolor'' attribute.  Lookz would find this additional attribute and 
+provide a convenient mechanism for the user to change the attribute's 
+value.
+
+
+5.	A smart style can currently query additional ``user defined'' attributes 
+from the style object.  These can be considered \italic{shared} attributes 
+because all instances of a stylecontroller sharing the same style have the 
+same attributes.  However, it would also be useful to have per-environment 
+(unshared) attributes.  These attributes must somehow be written to the 
+datastream in a relatively backward compatible manner.  Some interface such 
+as the Command interface in #3 must be offered to allow the user to change 
+these per-environment attributes.
+
+
+6.	Stylecontroller could provide an interface to support specialized 
+printing of text.  For example, a reference smart style that points to a 
+figure in a document might substitute its text with a hypertext button 
+while being viewed, but show the words ``see figure 12 on page 39'' when 
+being printed.
+
+
+7.	Stylecontroller could provide an method that would be called each time a 
+new environment is wrapped around any text it controls.
+
+
+8.	Each stylecontroller is currently created by name.  Performance could be 
+improved by caching the classinfo for the particular stylecontroller in the 
+style object.  The stylecontroller can be created more quickly via the 
+classinfo pointer.
+
+
+9.	Ness implementations of stylecontrollers may be desirable.
+
+}
+\begindata{bp,538243136}
+\enddata{bp,538243136}
+\view{bpv,538243136,5,0,0}
+\chapter{Appendix:  Example Stylecontrollers
+
+}
+The \bold{bulletstyle} subclass of stylecontroller is a primitive automatic 
+bullet style.  Whenever a single newline is inserted a bullet character 
+will be placed before the newline.  Particular attention is paid to 
+convince the current dot position to move \italic{after} the bullet 
+character (remember the stylecontroller does not have access to the 
+view(s)).
+
+
+\subsection{bulltsty.ch:
+
+}
+\example{class bulletstyle [bulltsty]: stylecontroller[stylecon] \{
+
+    overrides:
+
+      TextInserted(struct mark *new_text);
+
+    classprocedures:
+
+      InitializeObject(struct bulletstyle *self) returns boolean;
+
+      FinalizeObject(struct bulletstyle *self);
+
+    data:
+
+      struct mark *bullet_loc;
+
+\};
+
+}
+\subsection{bulltsty.c:
+
+}
+\example{#include <text.ih>
+
+#include <stylecon.ih>
+
+#include <style.ih>
+
+#include <stylesht.ih>
+
+#include <envrment.ih>
+
+#include <mark.ih>
+
+#include <im.ih>
+
+#include <bulltsty.eh>
+
+#include <ctype.h>
+
+
+boolean \bold{bulletstyle__InitializeObject}(classID, self)
+
+struct classheader *classID;
+
+struct bulletstyle *self;
+
+\{
+
+    self->bullet_loc = NULL;
+
+    return TRUE;
+
+\}
+
+
+void \bold{bulletstyle__FinalizeObject}(classID, self)
+
+struct classheader *classID;
+
+struct bulletstyle *self;
+
+\{ /* do nothing */ \}
+
+
+static void \bold{InsertBullet}(self)
+
+struct bulletstyle *self;
+
+\{
+
+    struct text *txt = bulletstyle_GetText(self);
+
+    struct stylesheet *txtstylesheet;
+
+    struct style *symstyle;
+
+    struct environment *symenv;
+
+
+    text_InsertCharacters(txt, mark_GetPos(self->bullet_loc),
+
+					   "\\n7\\t", 3);
+
+\italic{    /* Now wrap the symbol style around the bullet. */
+
+}    txtstylesheet = text_GetStyleSheet(txt);
+
+    if (txtstylesheet == NULL) return;
+
+    symstyle = stylesheet_Find(txtstylesheet, "symbola");
+
+    if (symstyle == NULL) return;
+
+    symenv = environment_WrapStyle(
+
+				bulletstyle_GetEnvironment(self),
+
+				mark_GetPos(self->bullet_loc)-2,
+
+				1, symstyle);
+
+    if (symenv) \{
+
+		environment_SetStyle(symenv, FALSE, FALSE);
+
+    \}
+
+    text_DeleteCharacters(txt,
+
+			 mark_GetPos(self->bullet_loc), 1);
+
+    text_NotifyObservers(txt, 0);
+
+    text_RemoveMark(txt, self->bullet_loc);
+
+    self->bullet_loc = NULL;
+
+\}
+
+
+void \bold{bulletstyle__TextInserted}(self, new_text)
+
+struct bulletstyle *self;
+
+struct mark *new_text;
+
+\{
+
+    long relpos;
+
+    struct environment *env = bulletstyle_GetEnvironment(self);
+
+    struct text *txt = bulletstyle_GetText(self);
+
+
+
+    if (mark_GetLength(new_text) == 1 &&
+
+	text_GetChar(txt, mark_GetPos(new_text)) == '\\n') \{
+
+\italic{	/* Hackery:  to get the dot position in all textviews to
+
+	 * update correctly, we cannot insert the characters here.
+
+	 * This is because textview_SelfInsertCmd (the usual
+
+	 * caller) will reset the dot position to an absolute
+
+	 * location *after* this code executes!  We schedule an
+
+	 * event to do the work after things settle down.
+
+	 */
+
+}	self->bullet_loc = text_CreateMark(txt,
+
+					mark_GetPos(new_text),
+
+					mark_GetLength(new_text));
+
+	im_EnqueueEvent(InsertBullet, self, 0);
+
+    \}
+
+\}
+
+}\
+\begindata{bp,538243264}
+\enddata{bp,538243264}
+\view{bpv,538243264,6,0,0}
+The \bold{markupstyle} subclass of stylecontroller is a primitive automatic 
+text markup style.  It is intended for use as the global style of a 
+document.  When text is inserted in the document, the markupstyle 
+controller will automatically wrap a \italic{changebar} style around the 
+inserted characters.  When text is deleted it will put the characters back 
+and wrap them with a \italic{deleted} style which has an attribute that 
+draws a strike through.  This perhaps would be better implemented as a 
+subclass of text, but the example serves to show how deleted text can be 
+managed.  Note that this example should probably store deleted text in a 
+text object rather than in a char buffer.
+
+
+\subsection{mrkupsty.ch:
+
+}
+\example{class markupstyle [mrkupsty]: stylecontroller[stylecon] \{
+
+    overrides:
+
+      TextRead(struct mark *new_text);
+
+      TextReadFile();
+
+      TextInserted(struct mark *new_text);
+
+      TextPreDeleted(struct mark *deleted_text);
+
+      TextDeleted(long pos, long len);
+
+    classprocedures:
+
+      InitializeObject(struct markupstyle *self) returns boolean;
+
+      FinalizeObject(struct markupstyle *self);
+
+    data:
+
+      char *deltext;	\italic{/* Should be a text object! */}
+
+      boolean fileread;	\italic{/* TRUE after file has been read. */}
+
+\};
+
+}
+\subsection{mrkupsty.c:
+
+}
+\example{#include <text.ih>
+
+#include <style.ih>
+
+#include <stylesht.ih>
+
+#include <stylecon.ih>
+
+#include <envrment.ih>
+
+#include <mark.ih>
+
+#include <im.ih>
+
+#include <mrkupsty.eh>
+
+
+#define CHANGEBAR_STYLENAME "changebar"
+
+#define DELETED_STYLENAME "deleted"
+
+
+boolean \bold{markupstyle__InitializeObject}(classID, self)
+
+struct classheader *classID;
+
+struct markupstyle *self;
+
+\{
+
+    self->deltext = NULL;
+
+    self->fileread = FALSE;
+
+    return TRUE;
+
+\}
+
+
+void \bold{markupstyle__FinalizeObject}(classID, self)
+
+struct classheader *classID;
+
+struct markupstyle *self;
+
+\{
+
+\}
+
+
+void \bold{markupstyle__TextInserted}(self, new_text)
+
+struct markupstyle *self;
+
+struct mark *new_text;
+
+\{
+
+    long i;
+
+    char ch;
+
+    struct environment *myenv, *searchenv, *nextenv, *cbenv;
+
+    struct stylesheet *txtstylesheet;
+
+    struct style *cbstyle;
+
+    struct text *txt = markupstyle_GetText(self);
+
+    char *stylename;
+
+
+    myenv = markupstyle_GetEnvironment(self);
+
+    if (myenv == NULL) return;
+
+\italic{    /* First, see if the change is already wrapped
+
+	* with a changebar style at pos.
+
+	*/
+
+}    for (searchenv = environment_GetInnerMost(myenv,
+
+                       mark_GetPos(new_text));
+
+	 searchenv != NULL && searchenv != myenv;
+
+	 searchenv = nextenv) \{
+
+	if (searchenv->type == environment_Style &&
+
+	    searchenv->data.style) \{
+
+	    stylename = style_GetName(searchenv->data.style);
+
+	    if (stylename) \{
+
+		if (strcmp(stylename, CHANGEBAR_STYLENAME) == 0)
+
+		    return;	\italic{/* already got one. */}
+
+	    \}
+
+	\}
+
+	nextenv = environment_GetEnclosing(searchenv,
+
+	                                   mark_GetPos(new_text));
+
+	if (nextenv == searchenv)
+
+	    break;	\italic{/* not getting anywhere... */}
+
+    \}
+
+\italic{    /* Wrap the change with a changebar style. */
+
+}    txtstylesheet = text_GetStyleSheet(txt);
+
+    if (txtstylesheet == NULL) return;
+
+    cbstyle = stylesheet_Find(txtstylesheet, CHANGEBAR_STYLENAME);
+
+    if (cbstyle == NULL) return;
+
+    cbenv = environment_WrapStyle(myenv, mark_GetPos(new_text),
+
+                         mark_GetLength(new_text), cbstyle);
+
+    if (cbenv) \{
+
+        environment_SetStyle(cbenv, FALSE, FALSE);
+
+        text_RegionModified(markupstyle_GetText(self),
+
+                            mark_GetPos(new_text),
+
+                            mark_GetLength(new_text));
+
+    \}
+
+\}
+
+
+
+void \bold{markupstyle__TextReadFile}(self)
+
+struct markupstyle *self;
+
+\{
+
+    self->fileread = TRUE;
+
+\}
+
+
+void \bold{markupstyle__TextRead}(self, new_text)
+
+struct markupstyle *self;
+
+struct mark *new_text;
+
+\{
+
+\italic{    /* Distinguish paste & insert file vs. an actual read. */
+
+}    if (self->fileread)
+
+		markupstyle_TextInserted(self, new_text);
+
+\}
+
+
+\italic{/*
+
+ * Text as pos for len chars has been deleted.
+
+ * We are not given a mark because the text is already gone.
+
+ * Fortunately, we saved the text (see TextPreDeleted below).
+
+ */
+
+}void \bold{markupstyle__TextDeleted}(self, pos, len)
+
+struct markupstyle *self;
+
+long pos;
+
+long len;
+
+\{
+
+    struct stylesheet *txtstylesheet;
+
+    struct style *delstyle;
+
+    struct environment *myenv, *searchenv, *nextenv, *delenv;
+
+    char *stylename;
+
+    struct text *txt = markupstyle_GetText(self);
+
+
+    if (self->deltext) \{
+
+	myenv = markupstyle_GetEnvironment(self);
+
+	if (myenv == NULL) return;
+
+\italic{	/* Put the text back. */
+
+}	text_AlwaysInsertCharacters(txt, pos, self->deltext, len);
+
+	free(self->deltext);
+
+	self->deltext = NULL;
+
+\italic{     /* First, see if the change is already wrapped with a
+
+      * changebar style at pos.
+
+      */
+
+}	for (searchenv = environment_GetInnerMost(myenv, pos);
+
+	     searchenv != NULL && searchenv != myenv;
+
+	     searchenv = nextenv) \{
+
+	    if (searchenv->type == environment_Style &&
+
+             searchenv->data.style) \{
+
+		    stylename = style_GetName(searchenv->data.style);
+
+		    if (stylename &&
+
+                 strcmp(stylename, DELETED_STYLENAME) == 0) \{
+
+\italic{		        /* Already got one. */
+
+}		        return;
+
+		    \}
+
+	    \}
+
+	    nextenv = environment_GetEnclosing(searchenv, pos);
+
+	    if (nextenv == searchenv)
+
+		break;	\italic{/* not getting anywhere... */}
+
+	\}
+
+\italic{	/* Wrap it with the deleted style. */
+
+}	txtstylesheet = text_GetStyleSheet(txt);
+
+	if (txtstylesheet == NULL) return;
+
+	delstyle = stylesheet_Find(txtstylesheet, DELETED_STYLENAME);
+
+	if (delstyle == NULL) return;
+
+	delenv = environment_WrapStyle(myenv, pos, len, delstyle);
+
+	if (delenv) \{
+
+	    environment_SetStyle(delenv, FALSE, FALSE);
+
+	    text_RegionModified(markupstyle_GetText(self), pos, len);
+
+	\}
+
+    \}
+
+\}
+
+
+\italic{/*
+
+ * This is called just before the given marked text is deleted.
+
+ * We stash it away so that we can reinsert it again in TextDeleted
+
+ * (above) wrapped with a deleted style.
+
+ *
+
+ * BUG:  we should stash the text in a text object.
+
+ */
+
+}void \bold{markupstyle__TextPreDeleted}(self, deleted_text)
+
+struct markupstyle *self;
+
+struct mark *deleted_text;
+
+\{
+
+    long i;
+
+    struct text *txt = markupstyle_GetText(self);
+
+
+    if (self->deltext)
+
+	  free(self->deltext);
+
+    self->deltext = malloc(mark_GetLength(deleted_text));
+
+    if (self->deltext == NULL)
+
+	  return;
+
+    for (i = 0; i < mark_GetLength(deleted_text); i++)
+
+	  self->deltext[i] = text_GetChar(txt,
+
+                                 mark_GetPos(deleted_text)+i);
+
+\}
+
+}\
+\begindata{bp,538243392}
+\enddata{bp,538243392}
+\view{bpv,538243392,7,0,0}
+The \bold{flashstyle} subclass of stylecontroller demonstrates how a smart 
+style can access and modify the style object.  It's implementation is 
+trivial.  A recurring event is scheduled at which time it toggles the 
+``color'' attribute of the style between the default color and the 
+``flashcolor'' attribute.  Note that a single event toggles the color in 
+all flashing environments.  This is wasteful because many environments 
+commonly share the same style.
+
+
+\subsection{flashsty.ch:
+
+}
+\example{class flashstyle [flashsty] : stylecontroller[stylecon] \{
+
+    classprocedures:
+
+      InitializeClass() returns boolean;
+
+      InitializeObject(struct flashstyle *self) returns boolean;
+
+      FinalizeObject(struct flashstyle *self);
+
+    data:
+
+      struct flashstyle *next;
+
+\};
+
+}
+\subsection{flashsty.c:
+
+}
+\example{#include <style.ih>
+
+#include <stylecon.ih>
+
+#include <envrment.ih>
+
+#include <event.ih>
+
+#include <im.ih>
+
+#include <text.ih>
+
+#include <flashsty.eh>
+
+
+#define DEFAULT_FLASH_COLOR "red"
+
+#define FLASH_INTERVAL event_MSECtoTU(300)
+
+
+static struct flashstyle *instance_list = NULL;
+
+static boolean flashed = FALSE;
+
+
+boolean \bold{flashstyle__InitializeObject}(classID, self)
+
+struct classheader *classID;
+
+struct flashstyle *self;
+
+\{
+
+    self->next = instance_list;
+
+    instance_list = self;
+
+    return TRUE;
+
+\}
+
+
+void \bold{flashstyle__FinalizeObject}(classID, self)
+
+struct classheader *classID;
+
+struct flashstyle *self;
+
+\{
+
+    struct flashstyle *prev, *cur;
+
+\italic{    /* Remove self from the instance_list. */
+
+}    if (self == instance_list)
+
+	  instance_list = self->next;
+
+    else \{
+
+	  prev = instance_list;
+
+	  for (cur = instance_list->next; cur != NULL; prev=cur, cur=cur->next) \{
+
+	    if (self == cur) \{
+
+		  prev->next = cur->next;
+
+		  break;
+
+	    \}
+
+	  \}
+
+    \}
+
+\}
+
+
+static void \bold{do_flash}(rock)
+
+void *rock;	\italic{/* unused */}
+
+\{
+
+    struct flashstyle *fs;
+
+    struct style *sty;
+
+    struct text *txt, *last_text;
+
+    struct environment *env;
+
+    char *flash_color;
+
+
+\italic{    /* Iterate over all instances and change their colors */
+
+}    last_text = NULL;
+
+    for (fs = instance_list; fs != NULL; fs=fs->next) \{
+
+	  sty = flashstyle_GetStyle(fs);
+
+	  txt = flashstyle_GetText(fs);
+
+	  env = flashstyle_GetEnvironment(fs);
+
+	  if (sty == NULL || txt == NULL || env == NULL)
+
+	    continue;	/* an incomplete style. */
+
+	  if (flashed)
+
+	    style_RemoveAttribute(sty, "color");
+
+	  else \{
+
+	    flash_color = style_GetAttribute(sty, "flashcolor");
+
+	    style_AddAttribute(sty, "color",
+
+	        flash_color ? flash_color : DEFAULT_FLASH_COLOR);
+
+	  \}
+
+	  text_RegionModified(txt, environment_Eval(env),
+
+                           environment_GetLength(env));
+
+	  if (last_text && last_text != txt)
+
+	    text_NotifyObservers(last_text, observable_OBJECTCHANGED);
+
+	  last_text = txt;
+
+    \}
+
+    if (last_text)
+
+	  text_NotifyObservers(last_text, observable_OBJECTCHANGED);
+
+    flashed = !flashed;
+
+
+\italic{    /* Schedule another event. */
+
+}    im_EnqueueEvent(do_flash, NULL, FLASH_INTERVAL);
+
+\}
+
+
+boolean \bold{flashstyle__InitializeClass}(classID)
+
+struct classheader *classID;
+
+\{
+
+    im_EnqueueEvent(do_flash, NULL, FLASH_INTERVAL);
+
+    return TRUE;
+
+\}
+
+}\enddata{text,537946368}

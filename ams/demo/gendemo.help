@@ -1,0 +1,155 @@
+\begindata{text,537977592}
+\textdsversion{12}
+\template{help}
+\define{global
+}
+\chapter{Gendemo: A Program that Generates an AMS Demonstration Folder
+
+}
+\section{What gendemo is
+
+}\leftindent{
+Gendemo is a shell script that will create a new \helptopic{AMS} folder 
+that is designed to serve as an introductory demonstration of the Andrew 
+Message System.
+
+}
+\section{Starting gendemo
+
+}\leftindent{
+Gendemo is typically installed in $ANDREWDIR/etc.  It generally takes only 
+one argument, the name of a directory that will hold your demo folder.  As 
+with all AMS folders, this needs to be in a tree somewhere under a 
+directory with a name starting with ".MESSAGES".  Thus, to create it as a 
+top-level mail folder named "amsdemo", for example, you could simply type:
+
+
+\programexample{$ANDREWDIR/etc/gendemo ~/.MESSAGES/amsdemo
+
+}
+For this to work, the directory ~/.MESSAGES must already exist.  The 
+subdirectory "amsdemo"  itself does not need to already exist, but if it 
+does already exist, \italic{all of its previous contents will be destroyed}.
+
+
+When you run gendemo, it will ask you for confirmation before it overwrites 
+any existing contents of the directory you have specified; simply answer 
+"y" to overwrite the directory.  \
+
+
+
+Gendemo has a single option, "-force", which can be used to suppress the 
+confirmation question and simply go right ahead with destroying the old 
+contents of the directory:
+
+
+\programexample{$ANDREWDIR/etc/gendemo -force ~/.MESSAGES/amsdemo
+
+}
+From the Imakefile:
+
+
+\italic{HOW TO CREATE AN AMS DEMONSTRATION FOLDER
+
+
+This Imakefile will automatically create an AMS demonstration folder and 
+store it in $\{DESTDIR\}/.MESSAGES/demo.  To read it, you will need to add 
+the directory defined by $\{DESTDIR\}/.MESSAGES to your mspath preference. 
+(Otherwise, you can type in its FULL path name to read it with "Read By 
+Name" or ^X^V in Messages.)
+
+
+Alternatively, you can also easily create a demo folder somewhere else. 
+Using the "gendemo" script, found in this directory, type "gendemo 
+folder-name"  where "folder-name" is the name of a creatable message 
+folder.  For example, if  you've run an AMS application, you will have a 
+.MESSAGES subdirectory in  your home directory, and can type "gendemo 
+~/.MESSAGES/amsdemo".   Be warned that if the directory you named already 
+existed, it will be destroyed  and so will any subdirectories it had!!!
+
+
+Also, if you want the folder subscription announcement demo to work, you 
+should  make sure that the folder announcement referenced in d14.heads 
+refers  to a real bboard/folder.  You should do this BEFORE running 
+gendemo, or else  after you do it you should run gendemo again.}
+
+
+}\section{Warnings
+
+}\leftindent{
+If you create a demo folder that is not in a folder tree that is included 
+in your "*.mspath" preference, the AMS programs will not be able to find it 
+by its short name (e.g. "amsdemo"), and will only be able to identify the 
+folder if you type its full path name.
+
+}
+\section{Program Author}
+
+\leftindent{
+Nathaniel S. Borenstein}
+
+
+\section{Related tools}  \
+
+
+
+\leftindent{Select (highlight) one of the italicized names and choose "Show 
+Help on Selected Word" from the pop-up menu to see the help file for:
+
+
+\italic{\helptopic{cui}
+
+\helptopic{ams}
+
+\helptopic{messages}
+
+\helptopic{preferences}}		(includes a description of the \italic{mspath} 
+preference)}
+
+
+\begindata{bp,538034504}
+Version 2
+n 0
+\enddata{bp,538034504}
+\view{bpv,538034504,1,0,0}
+Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
+
+\smaller{\smaller{$Disclaimer: 
+
+Permission to use, copy, modify, and distribute this software and its 
+
+documentation for any purpose and without fee is hereby granted, provided 
+
+that the above copyright notice appear in all copies and that both that 
+
+copyright notice and this permission notice appear in supporting 
+
+documentation, and that the name of IBM not be used in advertising or 
+
+publicity pertaining to distribution of the software without specific, 
+
+written prior permission. 
+
+                        
+
+THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+
+TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+
+HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+
+DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+
+DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+
+OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+
+WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+
+
+ $
+
+}}\enddata{text,537977592}

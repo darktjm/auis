@@ -1,0 +1,24 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+OBJS = calc.o calcv.o
+LIBS = 
+IHFILES		=	calc.H calcv.H
+
+NormalObjectRule()
+NormalATKRule()
+DependTarget()
+
+DynamicMultiObject(calc,calcv,$(OBJS),$(LIBS),,)
+InstallDynamicObject(calc,calcv,$(FULLATKDLIBDIR))
+
+OptionalATKLibrary(calc, $(OBJS), $(LIBS),,)
+InstallOptionalATKLibrary(calc, $(DESTDIR)/lib/atk)
+InstallClassFiles($(IHFILES))
+
+NormalHelpRule()
+InstallDocs(calc.help calproc.help, ${DESTDIR}/help)
+InstallHelpAlias(calc, calculator)
+InstallHelpAlias(calproc, calcproc calcprocs)
+

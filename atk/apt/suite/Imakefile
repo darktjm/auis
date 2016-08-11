@@ -1,0 +1,47 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+OBJS = suite.o suitecv.o suiteev.o suitetapp.o suitex1app.o vector.o
+HFILES = suite.H suitecv.H suiteev.H suitetapp.H suitex1app.H vector.H
+LIBS = 
+
+NormalObjectRule()
+NormalATKRule()
+DependTarget()
+
+EXTRACLASSES=suitecv suiteev suitetapp suitex1app vector
+DynamicMultiObjectWithExports(suite,$(EXTRACLASSES),$(OBJS),$(LIBS),,)
+InstallDynamicObjectWithExports(suite,$(EXTRACLASSES),$(FULLATKDLIBDIR))
+
+InstallClassFiles($(HFILES))
+NormalHelpRule()
+InstallDocs(steproc.help, ${DESTDIR}/help)
+InstallHelpAlias(steproc, suiteproc suiteprocs suite)
+InstallDocs(SuitePG.doc ,${DESTDIR}/doc/PROGRAMMER)
+InstallDocs(suite.pr, ${DESTDIR}/lib/prs)
+
+

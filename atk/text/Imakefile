@@ -1,0 +1,170 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+OBJS = be1be2.o \
+	be1be2app.o \
+	bp.o \
+	bpv.o \
+	cltextview.o \
+	content.o \
+	drawtxtv.o \
+	fnote.o \
+	fnotev.o \
+	pcompch.o \
+	readscr.o \
+	search.o \
+	simpletext.o \
+	tabs.o \
+	text.o \
+	textref.o \
+	textrefv.o \
+	texttag.o \
+	texttagv.o \
+	texttroff.o \
+	textview.o \
+	tindex.o \
+	tpllist.o \
+	txtvcmds.o \
+	txtvcmod.o \
+	txtvcmsc.o \
+	txtvcmv.o \
+	txtvcsrch.o \
+	txtvcsty.o \
+	txtvps.o \
+	headrtv.o header.o 
+
+HFILES = be1be2.H \
+	be1be2app.H \
+	bp.H \
+	bpv.H \
+	cltextview.H \
+	content.H \
+	fnote.H \
+	fnotev.H \
+	pcompch.H \
+	readscr.H \
+	search.H \
+	simpletext.H \
+	tabs.H \
+	text.H \
+	textref.H \
+	textrefv.H \
+	texttag.H \
+	texttagv.H \
+	texttroff.H \
+	textview.H \
+	tindex.H \
+	headrtv.H header.H txtvinfo.h
+
+LIBS = $(BASEDIR)/lib/libutil.a
+
+NormalObjectRule()
+NormalATKRule()
+
+ATKLibrary(text, $(OBJS), $(LIBS),  $(BSDLIB),)
+InstallATKLibrary(text, $(DESTDIR)/lib/atk)
+
+MkdirTarget(${DESTDIR}/lib/tmac)
+MkdirTarget(${DESTDIR}/lib/compchar)
+
+InstallClassFiles($(HFILES))
+InstallDocs(pcompch.pr, ${DESTDIR}/lib/prs)
+
+CPPProgramTarget(indexpro, indexpro.o, ${UTILLIB}, ${BSDLIB})
+InstallProgram(indexpro, $(DESTDIR)/bin)
+
+InstallShScript(ezpostprocess, $(DESTDIR)/bin/ezpostprocess)
+
+InstallFile(tmac.atk, $(INSTINCFLAGS), $(DESTDIR)/lib/tmac)
+InstallFile(tmac.psatk, $(INSTINCFLAGS), $(DESTDIR)/lib/tmac)
+InstallFile(tmac.arf, $(INSTINCFLAGS), $(DESTDIR)/lib/tmac)
+InstallFile(tmac.acc,$(INSTINCFLAGS),$(DESTDIR)/lib/tmac)
+InstallFile(comps,$(INSTINCFLAGS),$(DESTDIR)/lib/compchar)
+InstallFile(txtstvec.h, ${INSTINCFLAGS}, ${DESTDIR}/include/atk)
+
+DependTarget()
+
+#define IHaveSubdirs
+
+SUBDIRS = tpls
+
+NormalHelpRule()
+InstallDocs(content.help,${DESTDIR}/help)
+InstallHelpAlias(content,contents)
+InstallHelpAlias(content,ezcontents)
+InstallHelpAlias(content,ez-content)
+InstallHelpAlias(content,ez-contents)
+InstallDocs(tmplts.help,${DESTDIR}/help)
+InstallHelpAlias(tmplts,template)
+InstallHelpAlias(tmplts,templates)
+InstallHelpAlias(tmplts,ez-templates)
+InstallDocs(text.help,${DESTDIR}/help)
+InstallHelpAlias(text,texts)
+InstallDocs(select.help,${DESTDIR}/help)
+InstallHelpAlias(select,selecting)
+InstallHelpAlias(select,selection)
+InstallHelpAlias(select,selection-tutorial)
+InstallDocs(qryrplc.help,${DESTDIR}/help)
+InstallHelpAlias(qryrplc, query-replace)
+InstallDocs(txtproc.help,${DESTDIR}/help)
+InstallHelpAlias(txtproc,textproc)
+InstallDocs(fnote.help,${DESTDIR}/help)
+InstallHelpAlias(fnote,endnote)
+InstallHelpAlias(fnote,endnotes)
+InstallHelpAlias(fnote,ez-footnotes)
+InstallHelpAlias(fnote,footnote)
+InstallHelpAlias(fnote,footnotes)
+InstallDocs(tindex.help,${DESTDIR}/help)
+InstallHelpAlias(tindex,ez-index)
+InstallHelpAlias(tindex,ez.index)
+InstallHelpAlias(tindex,index)
+InstallHelpAlias(tindex,indices)
+InstallDocs(crossrf.help,${DESTDIR}/help)
+InstallHelpAlias(crossrf,crossrefs)
+InstallHelpAlias(crossrf,crossreferences)
+InstallHelpAlias(crossrf,ez-cross)
+InstallHelpAlias(crossrf,ez-crossreferences)
+InstallHelpAlias(crossrf,ez-ref)
+InstallHelpAlias(crossrf,ez-refs)
+InstallDocs(vi.help,${DESTDIR}/help)
+InstallDocs(headertxt.help,${DESTDIR}/help)
+InstallHelpAlias(headertxt, header footer headers footers)
+
+
+InstallDocs(bp.doc,${DESTDIR}/doc/PROGRAMMER)
+InstallDocs(bpv.doc,${DESTDIR}/doc/PROGRAMMER)
+
+InstallDocs(search.doc,${DESTDIR}/doc/PROGRAMMER)
+InstallDocs(smpltext.doc,${DESTDIR}/doc/PROGRAMMER)
+InstallDocs(tabs.doc,${DESTDIR}/doc/PROGRAMMER)
+
+InstallDocs(textv.doc,${DESTDIR}/doc/PROGRAMMER)
+InstallDocs(txtstvec.doc,${DESTDIR}/doc/PROGRAMMER)
+
+InstallDocs(header.doc, $(DESTDIR)/doc/PROGRAMMER)
+InstallLink(runapp, $(DESTDIR)/bin/be1be2)
+InstallRunappAPP(be1be2)

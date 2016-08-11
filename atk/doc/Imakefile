@@ -1,0 +1,19 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+HELPS = atk.help color.help geomtry.help insets.help procs.help prog.help tour.help
+TOPDOCS =  Readme.doc class.doc datastrm.doc insets.doc intro.doc install.doc doclaunch insets.d mailsys.d progtools.d pinsets.d texttools.d
+
+NormalHelpRule()
+InstallDocs(${HELPS}, ${DESTDIR}/help)
+InstallHelpAlias(prog, programming atkprogramming)
+InstallHelpAlias(atk, be2 toolkit andrewtoolkit andrew-toolkit baseeditor be1)
+InstallHelpAlias(color, colors)
+InstallHelpAlias(insets, inset)
+InstallHelpAlias(geomtry, geometry)
+InstallHelpAlias(tour, andrewtour andrew andrew-tour)
+
+InstallDocs(${TOPDOCS}, ${DESTDIR}/doc/PROGRAMMER)
+

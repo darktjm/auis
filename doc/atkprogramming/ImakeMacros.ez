@@ -1,0 +1,1930 @@
+\begindata{text,538280520}
+\textdsversion{12}
+\template{default}
+\define{comment
+
+attr:[FontFace Italic Int Set]
+attr:[FontFace FixedFace Int Clear]
+attr:[FontFamily Andy Int 0]
+attr:[FontSize PreviousFontSize Point 2]}
+\define{function
+
+attr:[FontFace Bold Int Set]}
+\define{fieldheader
+}
+\define{fieldcontent
+}
+\define{fixedfieldcontent
+}
+\majorheading{\bigger{\bigger{\bigger{\bigger{Imakefile Macros \
+
+
+}}}}
+\bigger{Andrew User Interface System}
+
+V\bigger{ersion 8   (September 1996)
+
+}}
+
+
+\bold{\indent{\indent{\indent{\indent{Andrew Consortium
+
+School of Computer Science
+
+Carnegie Mellon University
+
+5000 Forbes Avenue
+
+Pittsburgh, PA 15213-3891
+
+USA}}}}
+
+}
+\indent{Phone:			\bold{(412) 268-6710}
+
+Fax:			\bold{(412) 268-5576}
+
+Web:			\bold{http://www.cs.cmu.edu/~AUIS}
+
+Demo:			\bold{finger @atk.cs.cmu.edu}
+
+Archives:		\bold{ftp.andrew.cmu.edu:  /pub/AUIS}
+
+Bugs:			\bold{\bold{info-andrew-bugs@andrew.cmu.edu
+
+}}Info & Subscriptions:	\bold{info-andrew-request@andrew.cmu.edu}}
+
+
+
+\indent{\indent{
+
+
+In the documentation, the source directory will be referred to as 
+\typewriter{$/} and the destination as \typewriter{$ANDREWDIR/}.
+
+}}
+\indent{\indent{If you are reading an all-ASCII version of this file, the 
+version in Andrew format is in the distribution at:}}
+
+
+\typewriter{\center{\typewriter{$ANDREWDIR/doc/ADMINISTRATOR/ImakeMacros}}.e\
+z}\smaller{
+
+
+
+
+
+
+
+
+
+\smaller{\bigger{Copyright 1988, 1996 Carnegie Mellon University and IBM. 
+ All rights reserved. Please see further copyrights and disclaimer at the 
+end of this file.}}}
+
+\smaller{\
+\begindata{bp,538471704}
+Version 2
+n 0
+\enddata{bp,538471704}
+\view{bpv,538471704,0,0,0}}
+
+\bold{\bigger{\bigger{\bold{\bigger{\smaller{Introduction}}}}}}
+
+
+In building Unix software, a Makefile in each directory directs the 
+compilation and installation of code from that directory.  In Andrew, the 
+Makefile is generated from a file called
+
+
+	\bold{Imakefile}
+
+
+in the same directory;  the program `imake` does the generation.  Imake can 
+be invoked with all the right arguments for ATK via the 'genmake' command.
+
+
+Among the information in the Imakefile can be calls on macros which are 
+expanded to produce the Makefile.  This document describes the macros 
+available in Andrew.
+
+
+A typical Imakefile for an object called 'thisfeature' will have entries 
+like these:
+
+
+\example{OBJS = thisfeature.o a.o b.o c.o \
+
+
+HFILES = a.H b.H c.H
+
+
+DynamicMultiObject(thisfeature, , $(OBJS), , , )
+
+InstallDynamicObject(thisfeature,,$\{DESTDIR\}/lib/atk)
+
+
+InstallClassFiles($(HFILES))
+
+
+NormalHelpRule()
+
+InstallDocs(thisfeature.help, $(DESTDIR)/help)
+
+InstallHelpAlias(thisfeature, other terms users might think of)
+
+InstallDocs(thisfeature.pr, $(DESTDIR)/lib/prs)}
+
+
+The DynamicMultiObject macro does the actual construction of the 
+dynamically loadable file.  If the file implements additional dynamically 
+loadable classes--for instance thisfeature, thisa, and thisb--name the 
+additional classes in the second arguments:
+
+
+\leftindent{DynamicMultiObject(thisfeature, thisa thisb, $(OBJS), , , )
+
+InstallDynamicObject(thisfeature, thisa thisb, $\{DESTDIR\}/lib/atk)}
+
+
+To make a library so other objects can link to yours, use:
+
+
+\leftindent{ATKLibrary(thisfeature, $(OBJS), $(LIBS), $(SYSLIBS), 
+ $(GENSTATLARGS))
+
+InstallATKLibrary(thisfeature, $(DESTDIR)/lib/atk)
+
+}
+The fourth argument to DynamicMultiObject and the third argument to 
+ATKLibrary are 'libs', a list of ATK non-dynamic libraries that need to be 
+linked against. One library which is often listed here is $\{UTILLIB\}; 
+ ATK dynamic objects and their libraries need not be listed because they 
+are determined automatically (by `genstatl').  The argument after the 
+'libs' argument is the 'syslibs' argument;  it can be used for system 
+libraries like -lm.  Libraries listed in libs must specify path names. 
+ Dependencies are registered on those names such that when a make is done 
+for thisfeature, it will be remade even if the only change was to one of 
+the listed names.
+
+
+If you have intermediate files which should be discarded by 'make clean', 
+include a rule like:
+
+
+\leftindent{CleanTarget(uselessIntermediateFile)}
+
+
+If you have files which should be built before computing dependencies:
+
+
+\leftindent{DependTarget(fileBuiltBeforeComputingDepends)}
+
+
+If you are looking at this document in\italic{ ez}, the menu option called 
+Page/Table Of Contents will bring up another window.  Clicking on an entry 
+there will scroll this document to the specified section.
+
+\begindata{bp,538473912}
+Version 2
+n 0
+\enddata{bp,538473912}
+\view{bpv,538473912,1,0,0}
+\chapter{
+1.  Notes}
+
+
+\section{1.1 What to Build}
+
+
+Once a source file--.c, .C, .gra, .l, or whatever--has been compiled into a 
+.o file, there are several options for combining it with other executables:
+
+
+\leftindent{plain-library - collection of non-ATK code
+
+ATK-library - collection of code derived from ATK
+
+ATK-dynamic-inset - loadable ATK inset
+
+Runapp - Executable ATK program}
+
+
+Creating these involves running a program called `genstatl,' the function 
+of which is to scan a piece of code and a collection of libraries and make 
+sure that all ATK-libraries needed to execute the piece of code are 
+incorporated into the resulting output.
+
+
+\subsection{Plain-Library}
+
+
+A plain-library is constructed with the rule
+
+
+\leftindent{LibraryTarget(libname, objs)}
+
+
+where the second argument is the list of .o files to be in the library. 
+ Their sources can be written in C or C++, but should NOT include C++ 
+objects derived from class ATK.
+
+
+When a plain library is included in a link, any module that is referenced 
+gets copied into that link.  This means there can be multiple copies of a 
+.o file and, worse, multiple copies of global variables.  (However, modules 
+in libc are specially processed so there are no multiple copies and only 
+one instance of each global variable.)
+
+ \
+
+
+\subsection{ATK-Library}
+
+
+An ATK-library is constructed via the rule
+
+
+\leftindent{ATKLibrary(atklibname, objs, libs, syslibs, genstatl arguments)}
+
+
+On some platforms, an ATK-library is dynamically loaded, so the rule for 
+constructing it has to access all the libraries that it depends on for 
+execution.  Non-ATK libraries are listed in the libs and syslibs arguments 
+while other ATK-libraries are accessed via genstatl.  To link against your 
+own ATK-libraries, your would list their directories with -r flags among 
+the genstatl arguments.
+
+
+\subsection{ATK-Dynamic-Inset}
+
+
+An ATK-dynamic-inset is created with the rule
+
+
+\leftindent{DynamicMultiObject(name, extra classes, objs, libs, syslibs, 
+genstatl arguments)}
+
+
+Each ATK-dynamic-inset implements a stand-alone facility such as a new 
+command or an entire new inset class.  Existing runapps can load an 
+ATK-dynamic-inset at run-time, but can only utilize it via methods defined 
+in a base class that is already part of the runapp.  For instance, since 
+`dataobject' is in a runapp, methods in an ATK-dynamic-inset derived from 
+`dataobject's methods can by called by the runapp.
+
+
+The genstatl arguments may refer to other ATK-libraries needed by the 
+ATK-dynamic-inset, but these must be part of the runapp which loads the 
+ATK-dynamic-inset.
+
+
+\subsection{Runapp}
+
+
+A runapp is created with the rule
+
+
+\leftindent{RunappWithLibrary(runappname, localATKlib, genstatl arguments)
+
+}
+A runapp is an executable program created from an ATK-library.  Any non-ATK 
+libraries needed to execute the program are already incorporated in the 
+localATKlib.  Any needed ATK-libraries or ATK-dynamic-insets are 
+incorporated via genstatl.
+
+
+\section{
+1.2  Notes on Writing Imakefiles}
+
+
+Use /* and */ to delimit comments.
+
+
+Macro calls use '(' and ')' to delimit the list of arguments -- not '\{' 
+and '\}'.
+
+
+Make variables can be referenced with either '$()' or '$\{\}' .
+
+
+If a\bold{ list} is required as an argument, the elements of the list are 
+separated with spaces.
+
+
+Avoid spaces between arguments.  There are some macros which behave badly 
+when one of their arguments has a space before it on some architectures.
+
+
+Imakefiles MUST end with a newline.
+
+
+In general directories should depend only on the already installed portions 
+of directories previously compiled.  (References to atk/foo/a.o in an 
+Imakefile in directory atk/bar may fail, though this rule is relaxed for 
+subsets of the system which are to be combined into one library.)  No 
+directory immediately under the top level, atk, ams, or overhead should 
+"peek" into directories previously compiled;  if a previously compiled or 
+processed file is needed it should be accessed from DESTDIR.
+
+
+
+\section{1.3 Notation and Conventions}
+
+
+All arguments need not be present - but the commas must be there, and the 
+arguments which are to be filled in should be in the correct place with 
+respect to the commas.  The syslibs can include library path search 
+specifications using -L <lib-path> interspersed with the -l<x> notation 
+ (see ld.1).  \
+
+
+
+An "ATK library" is one created with the ATKLibrary rule and usually 
+contains objects derived from class ATK.  On many platforms, ATK libraries 
+are dynamically loadable or shared or both.  ATK libraries are referred to 
+by their root name because their file name is not always lib\italic{root}.a.
+
+
+\subsection{Common Arguments}
+
+
+\fieldcontent{\bold{name} - name of a file to be installed.  It should be 9 
+or fewer lower-case letters.
+
+
+\bold{extra classes} - list of additional classes to be included
+
+
+\bold{objs} - list of object (.o) files for the extra classes
+
+
+\bold{libname} - name of an archive library to be created or installed. 
+ The name should include a leading \italic{lib} and the trailing \italic{.a} 
+extension.
+
+
+\bold{libs} - space separated list of required non-ATK libraries.  These 
+libraries have names of the form lib\italic{name}.a.  If a program 
+#includes <util.h>, the libs list should contain $\{UTILLIB\};  usually 
+this is enough.  The file $ANDREWDIR/lib/genstatl/liborder shows a correct 
+ordering of the non-ATK libraries; it should be safe to copy that list 
+starting with the first you use (but omit -lbsd.)  \
+
+
+
+\bold{syslibs} - a list of libraries for which dependencies should not be 
+checked. (E.g. $(BSDLIB), $(MATHLIB), aka -lbsd and -lm.)  The syslibs can 
+include library path search specifications using -L <lib-path> interspersed 
+with filenames and the -l<x> notation  (see `help ld`).  \
+
+
+
+\bold{atklibname} - root name for an ATK library.  The actual name is 
+system dependent and will be based on the given root.  On some platforms, 
+if the root name is R, the library name will be libR.a.  On many platforms, 
+ATK libraries are dynamically loadable or shared or both.
+
+
+\bold{genstatl arguments} - additional arguments to be supplied to 
+genstatl.  See section 2.4 and `help genstatl`.  Often none are needed.
+
+
+\bold{file} - a file to be installed
+
+
+\bold{files} - a space-separated list of files to be installed
+
+
+\bold{flags} - one of the flags listed above in Section 1.1
+
+
+\bold{destdir} - the destination directory (no filename, no trailing 
+slash).  Destination directories usually begin with $\{DESTDIR\}/ and 
+continue with one of bin, include, include/atk, lib, lib/atk, help.  (If 
+only a single file is being installed, it is usually acceptable that the 
+destdir value include a trailing filename in order to install the file 
+under a name different than its current name.)
+
+
+\bold{runappname} - If the value is XXX, there are also source files named 
+XXXapp.C and XXXapp.H.
+
+
+}Many of the installation rules expect one argument to consist of command 
+line flags for the installation program.  These flags are currently defined:
+
+\fieldcontent{
+library - readable by all, writeable by installer and group}
+
+\fixedfieldcontent{    INSTLIBFLAGS = -c -m 0664}
+
+\fieldcontent{program - executable, not writeable}
+
+\fixedfieldcontent{    INSTPROGFLAGS = -c -m 0555}
+
+\fieldcontent{program - executable by all; writeable by installer}
+
+\fixedfieldcontent{    INSTPROGRWFLAGS = -c -m 0755}
+
+\fieldcontent{include file - readonly}
+
+\fixedfieldcontent{    INSTINCFLAGS = -c -m 0444}
+
+\fieldcontent{manual or document - readonly}
+
+\fixedfieldcontent{    INSTMANFLAGS = -c -m 0444}
+
+\fieldcontent{application (dynamically loaded) - readonly}
+
+\fixedfieldcontent{    INSTAPPFLAGS = -c -m 0444}
+
+\fieldcontent{dynamic object - readonly}
+
+\fixedfieldcontent{    INSTDOFLAGS = -c -m 0444}
+
+\fieldcontent{"set uid" executable }\
+
+
+\fixedfieldcontent{    INSTUIDFLAGS = -c -m 4755}
+
+
+
+\section{1.4 New File Extensions} \
+
+
+
+Two additional extensions--.rf and .lt--are used during the build process 
+when making ATK libraries.  \bold{.rf} files list the classes defined and 
+referenced by a library. \bold{.lt} files list the libraries needed by the 
+library so genstatl can include them when linking the final executable.
+
+\begindata{bp,538481544}
+Version 2
+n 0
+\enddata{bp,538481544}
+\view{bpv,538481544,2,0,0}
+
+\chapter{2.  Building Things}
+
+
+\section{2.1	Default Compilation Rules}
+
+
+The macro in this section needs to be included in Imakefiles to introduce 
+default rules for processing help files. \
+
+
+
+\subsection{NormalHelpRule()}
+
+\fieldcontent{Declares the rule for adding the help aliases to the 
+installed $(DESTDIR)/help/help.aliases file.  Include this macro if the 
+Imakefile also has an InstallHelpAlias() rule.
+
+
+}\section{
+2.2 Linking and Building Objects}
+
+
+\subsection{DynamicObject(name, libs, syslibs, genstatl arguments)}
+
+\fieldcontent{\bold{name} - name of dynamic object file (without 
+extension).  There must be a \italic{name}.o file in the current directory. 
+ (Or a .C file to build it from.)
+
+
+See section 1.5 for the other arguments.}
+
+
+\fieldheader{Note:}
+
+\fieldcontent{All arguments need not be present - but the commas must be 
+there, and the arguments which are to be filled in should be in the correct 
+place with respect to the commas.}
+
+
+\fieldheader{Use:}
+
+\fieldcontent{This rule produces a dynamic object on systems which support 
+it.  \italic{Name} is the name of the class to be placed in the dynamic 
+object.  The dynamic object produced will be called 
+$(ATKDYNPREFIXM)\italic{name}.$(ATKDYNEXTM) and will include the file 
+\italic{name}.o.    (ATKDYNPREFIXM and ATKDYNEXTM vary depending on the 
+platform.)
+
+
+DynamicMultiObject is similar, but supports multiple classes in a single 
+dynamic object file, or a single class spread over multiple object files.}
+
+
+\subsection{DynamicMultiObject(name, extra classes, objs, libs, syslibs, 
+genstatl arguments)}
+
+
+\fieldcontent{\bold{name} - final name for resulting dynamic object 
+(without extension).
+
+
+See section 1.5 for the other argument definitions.}
+
+
+\fieldheader{Use:}
+
+\fieldcontent{This rule produces a dynamic object on systems which support 
+it.  The object produced will be called 
+$(ATKDYNPREFIXM)\italic{name}.$(ATKDYNEXT).  (ATKDYNPREFIX and ATKDYNEXTM 
+vary depending on the platform.)}
+
+\section{
+
+2.3 Linking and Building Libraries}
+
+
+\subsection{ATKLibrary(atklibname, objs, libs, syslibs, genstatl arguments) 
+}\fieldcontent{
+
+\bold{atklibname} - root name for an ATK library.  The actual file name 
+will be lib\italic{atklibname}.$(ATKLIBEXTM) .  On platforms without shared 
+libraries ATKLIBEXTM is almost always just the letter 'a'.  On many 
+platforms, ATK libraries can be built as shared libraries and will be such 
+by default.  On these platforms ATKLIBEXTM varies widely.  (Common names 
+being .a, .so, and .sl.)
+
+
+See section 1.5 for the other argument definitions.}
+
+
+\fieldheader{Use:}
+
+\fieldcontent{The target for making an ATK library, computing the 
+dependencies on other ATK libraries automatically.  The listed libs and 
+syslibs are stored in a separate file (\italic{name}.lt) for use in future 
+link operations;  all these libraries are incorporated into a link whenever 
+atklibname is included.}
+
+
+
+\subsection{LibraryTarget(libname, objs)}
+
+\fieldcontent{Declares the rule for constructing library \italic{libname} 
+from the listed object files. The library will depend on the listed 
+objects, so that it will be remade when any of them change.}
+
+
+\fieldheader{Note:}
+
+\fieldcontent{LibraryTarget must not be used for libraries containing ATK 
+classes.}
+
+
+\section{
+2.4 Building Programs and Applications}
+
+
+One problem in building a program is to specify all the libraries it needs 
+to be linked against.  Since ordering these libraries in Andrew is not 
+simple, it is automated with the program `genstatl`.  Genstatl is executed 
+as part of several rules and arguments to it can be specified in the macro 
+call.
+
+\fieldcontent{
+}The most commonly used genstatl arguments are -r, -c, and 
+-f:\fieldcontent{
+
+
+\bold{-r dir} Genstatl normally reads ATK libraries from what will be 
+ANDREWDIR/lib/atk.  The -r switch specifies an additional directory to 
+scan.  To use a library created in the current directory, use
+
+
+	-r .
+
+
+with the trailing dot.
+
+
+\bold{-c class class ...}  Genstatl will include in the generated 
+executable only those classes mentioned in \italic{runappname}app and any 
+classes it invokes, directly or indirectly.  To incorporate other 
+classes--for instance ones available for embedded insets--mention those 
+classes after -c.  If you want all the classes from some ATK library, use 
+an at-sign (@) followed by the root of the library name.  (That is, for all 
+classes from ATK library with root name example, use "-c @example".)
+
+
+\bold{-f class-list-file}   Same as -c, except the list of classes is taken 
+from the named file.
+
+
+\bold{-a  } Supresses loading <executable-name>app into the application.
+
+(not needed with -L)
+
+
+\bold{-m foo1.o foo2.o etc...}  Selects alternate object files for main() 
+in an application, or for inclusion in the library.
+
+}
+
+\subsection{Runapp(runappname, genstatl arguments)}
+
+
+\fieldcontent{\bold{runappname} - name of executable to create.  This 
+should correspond to  an application class with classname 
+\italic{runappname}app or be just \underline{runapp}.    (If the -m flag is 
+provided in the genstatl arguments to overrride the standard main() 
+function then the name can be whatever is desired.)
+
+
+\bold{genstatl arguments} - see the introduction to this section.  Usually 
+no extra arguments are needed.
+
+
+}\fieldheader{Use:}\fieldcontent{
+
+Declares a rule for producing an executable named \italic{runappname}. 
+ (Almost the same as RunappWithLibrary, but no library is loaded.)
+
+
+Programs created with Runapp can be installed with the InstallProgram rule.}
+
+
+
+\subsection{RunappWithLibrary(runappname, localATKlib, genstatl arguments)}
+
+
+\leftindent{(Put no spaces around commas in an argument list!)}
+
+
+\fieldcontent{\bold{runappname} - name of executable to create.  This 
+should be "runapp" or the prefix before "app" in a class name 
+\italic{runappname}app, which must be a class derived from 
+\bold{application}.    (If the -m flag is provided in the genstatl 
+arguments to overrride the standard main() function then the name can be 
+whatever is desired.)
+
+
+localATKlib - name of a ATK library that may contain 
+\italic{runappname}app.o.  This library can be in the current directory or 
+a relatively addressed directory in the build tree;  that is, it need not 
+be installed yet.
+
+
+\bold{genstatl arguments} - see the introduction to this section.  Usually 
+-r is needed and should refer to the directory containing \italic{locallib}.
+
+
+}\fieldheader{Use:}\fieldcontent{
+
+Declares a rule for producing an executable named \italic{runappname}. 
+ This rule is primarily suited for use in producing test programs, not 
+programs which will be installed.
+
+
+The constructed program will call ATKregister for each class that gets 
+referenced from \bold{runappname} and \bold{locallib}, so all classes will 
+be registered.
+
+
+Programs created with RunappWithLibrary can be installed with the 
+InstallProgram rule.}
+
+
+
+\bold{Program Rules}
+
+
+The following rules build programs.  As long as they use no ATK libraries, 
+this is fine;  using ATK libraries means that the correct libraries and 
+order have to be selected.  It is preferable instead to use a Runapp rule 
+above.
+
+
+
+\subsection{ProgramTarget(program, objs, libs, syslibs)}
+
+
+\fieldcontent{\bold{program} - name to be used for binary executable file
+
+
+See section 1.5 for the other arguments.}
+
+
+\fieldheader{Use:}\fieldcontent{
+
+Declares a rule for producing the named program from the listed object 
+files and libraries. Do not use if ANY of \italic{objs}, \italic{libs}, or 
+\italic{syslibs} is in C++;  use CPPProgramTarget instead.}
+
+
+
+\subsection{CPPProgramTarget(program, objs, libs, syslibs)}
+
+
+\fieldcontent{Produces the named program from C++ source by linking the 
+object files and libraries listed.  The dependencies for program will 
+include the \italic{objs} and the \italic{libs}, but not the 
+\italic{syslibs}.  This rule must be used for any program which contains 
+ANY C++ code  (either in it's own object files or in libraries.)}
+
+
+\section{
+2.5 Building Test Programs}
+
+
+\subsection{ATKTestProgram(programname, objs, libs, syslibs, genstatl 
+arguments)}
+
+
+\fieldcontent{\bold{programname} - name of executable to create.  The 
+function main() should be defined in one of the objs. \
+
+
+
+See section 1.5 for the other argument definitions.
+
+
+}\fieldheader{Use:}\fieldcontent{
+
+Declares a rule for producing an executable named \italic{programname 
+}whenever `make test` is run.  It is assumed that at least one of the 
+\italic{objs} is in C++.  All needed ATK libraries are determined 
+automatically.
+
+
+During initialization, main() should call doStaticLoads(), with no 
+arguments.}
+
+
+
+The rules below, like the ...ProgramTarget rules just above, can be 
+difficult to use in getting the list of libraries right.  ATKTestProgram 
+can be used instead.
+
+
+
+\subsection{CPPTestProgramTarget(program, objs, libs, syslibs)}
+
+\fieldcontent{Same as the CPPProgramTarget, except it will only compile the 
+program when `make test` is run.}
+
+
+\subsection{TestProgramTarget(program, objs, libs, syslibs)}\fieldcontent{
+
+Same as ProgramTarget, except the program is only built when the make 
+command specifies the target 'test'.}
+
+
+\subsection{CPPTestingOnlyTestingRule(libs, syslibs)}
+
+\fieldcontent{Declares a general rule so that `make foo.test` will compile 
+C++ code in foo.C and link it with the given libraries to produce binary 
+object 'foo.test'.  It is assumed that foo.C has a main() function which is 
+compiled only if TESTINGONLYTESTING is defined;  this variable is defined 
+during compilation by this rule.}
+
+
+\subsection{TestingOnlyTestingRule(libs, syslibs)}
+
+\fieldcontent{Similar to CPPTestingOnlyTestingRule, but for C code with 
+extension .c instead of C++ code.}
+
+
+
+\section{2.6 Lex and Parse Rules}
+
+
+\subsection{Parser(classname, bisonargs)}
+
+\fieldcontent{Produces a class in \italic{classname}.C and 
+\italic{classname}.H from the yacc file \italic{classname}.y.  The 
+\italic{bisonargs} are passed to bison, the most commonly used flag will 
+probably be -d.  This rule should be used in place of CppYacc* rules.}
+
+
+\subsection{CppLexRule()}
+
+\fieldcontent{Inserts the general rule for creating a .o file from a lex 
+file (.l) with C++ code in it.}
+
+
+\subsection{CppLexWithReplacement(file, string)}
+
+\fieldcontent{Same as CppLexRule, except that occurrences of \italic{yy} in 
+the resulting .C file are replaced with \italic{string}.}
+
+
+\subsection{CParser(name, bisonargs)}
+
+\fieldcontent{Produces \italic{name}.[cho] files implementing the parser 
+defined by \italic{name}.gra.  \italic{bisonargs} is a list of arguments to 
+be passed to the Andrew version of bison to produce the name.[ch] files. 
+ See the help file for mkparser.}
+
+
+\subsection{FlexOrLexFileRule(file)}
+
+\fieldcontent{Declares \italic{file} to be the base name of a lex file. 
+ This is used for those files which need separate versions for flex and the 
+standard unix lex programs.}
+
+
+\subsection{LexWithReplacement(file, string)}
+
+
+\fieldcontent{\bold{file }- base name of lex source file, where the full 
+name is \italic{file}.l, using the usual lex extension.
+
+
+\bold{string} - character string to replace "yy" in variable names}
+
+
+\fieldheader{Use:}
+
+\fieldcontent{Declares the rule for processing \italic{file}.l with lex to 
+produce \italic{file}.c and then processing the file with sed to replace 
+occurrences of \italic{yy} in \italic{file}.c file with \italic{string}. 
+ (This is used so that more than one lex produced .c file can be linked 
+into the same program.  All the lex variables and functions are prefixed 
+with \italic{yy}. )  The string \italic{yy} should of course be avoided in 
+situations where it should not be replaced with string.
+
+}
+\subsection{NCLex(lfile)}
+
+
+\fieldcontent{\bold{lfile} - lex file (with extension .l)
+
+}
+\fieldheader{Use:}
+
+\fieldcontent{(NC = Not Compiled.)  Declares the rule for a simple lex 
+invocation on \italic{lfile}.  (Leaving the resulting C file as lex.yy.c.)}
+
+
+\subsection{NormalLexRule()}
+
+\fieldcontent{Declares the rule for producing a .o file from a lex 
+description file with extension .l.}
+
+
+\subsection{NormalYaccRule()}
+
+\fieldcontent{Avoid this rule.  Use Parser or CParser instead.}
+
+
+
+\section{2.7 Font Rules}
+
+
+\subsection{FontRule()}
+
+\fieldcontent{Includes in Makefile the rule for making a server format font 
+from a bdf font.}
+
+
+\subsection{DeclareFont(fontname)}
+
+
+\fieldcontent{\bold{fontname} - name of font file (sans extension)}
+
+
+\fieldheader{Use:}\fieldcontent{
+
+Ensures that the named font will be built by the \italic{all} target, and 
+installed by the \italic{install}, \italic{Install}, and 
+\italic{dependInstall} targets.  The Imakefile must also include FontRule().
+
+}\
+\begindata{bp,538502856}
+Version 2
+n 0
+\enddata{bp,538502856}
+\view{bpv,538502856,3,0,0}
+
+\chapter{3.  Installation Rules}
+
+
+\section{3.1 Installation from ATK/C++ code}
+
+
+\subsection{InstallClassFiles(Hlist)}
+
+
+\fieldcontent{\bold{Hlist} - list of .H files to be installed}
+
+
+\fieldheader{Use:}
+
+\fieldcontent{Installs the .H files listed in \italic{Hlist} into 
+$(DESTDIR)/include/atk/.}
+
+
+\subsection{InstallATKLibrary(\bold{atklibname}, destdir)}
+
+\fieldcontent{Installs the ATK library with root name atklibname into 
+destdir.  (Also installs name.lt and name.rf, which are produced by the 
+genrefs processor, which is run as part of the rules for ATKLibrary and 
+Dynamic[Multi]Object.)  name.lt contains a list of the libraries needed 
+when this library is used.   name.rf lists the classes defined or used in 
+the library.\{ATK libraries MUST be installed with this rule not with 
+InstallLibrary().\} }\
+
+
+
+\subsection{InstallDynamicObject(file, extra classes, destdir)}
+
+\fieldcontent{On systems where dynamic loading is supported this will 
+install into \italic{destdir} the dynamic object 
+$(ATKDYNPREFIXM)\italic{file}.$(ATKDYNEXTM), and make links for the 
+\italic{extra classes} listed to 
+$(ATKDYNPREFIXM)\italic{file}.$(ATKDYNEXTM).  (Each of those links has the 
+form: $(ATKDYNPREFIXM)class.$(ATKDYNEXTM))}
+
+
+\subsection{InstallDynamicObjectClass(file, destdir)}
+
+\fieldcontent{On systems where dynamic loading is supported this will 
+install a dynamic object which has a single class.}
+
+
+\subsection{InstallRunappAPP(runappname)}
+
+\fieldcontent{Establishes a link in the binaries directory from 
+\italic{runappname} to runapp.  When \italic{runappname} is given as a 
+command, runapp will execute and load the application 
+\italic{runappname}app.}
+
+
+
+\section{3.2 Installation from C Code}
+
+
+\subsection{InstallProgram(file, destdir)}
+
+
+\fieldcontent{See section 1.5 for the argument definitions.}
+
+
+\fieldheader{Use:}
+
+\fieldcontent{Installs the program binary \italic{file} into 
+\italic{destdir} with modes read-only and executable.}
+
+
+\subsection{InstallProgramsRW(files, destdir)}
+
+
+\fieldcontent{See section 1.5 for the argument definitions.}
+
+
+\fieldheader{Use:}
+
+\fieldcontent{Installs the program binaries listed in \italic{filelist} 
+into \italic{destdir} with modes read-write and executable.
+
+}
+\subsection{InstallLibrary(libname, destdir)}
+
+
+\fieldcontent{\bold{libname}\fieldcontent{ -} the full name of the library 
+archive file (with extension).  Usually libraries have names like 
+lib\italic{xxx}.a.
+
+}
+\fieldcontent{See section 1.5 for the other argument definition.}
+
+
+\fieldheader{Use:}
+
+\fieldcontent{For installing library archive files.  \italic{Do not use 
+InstallLibrary to install libraries built with ATKLibrary.}}
+
+
+\subsection{InstallLibraries(libs, destdir)}
+
+\fieldcontent{Installs the libraries listed in \italic{libs} into 
+\italic{destdir}.}
+
+
+\subsection{InstallPrograms(files, destdir)}
+
+\fieldcontent{Installs the programs listed in \italic{files} into 
+\italic{destdir}.}
+
+
+
+\section{3.3 Other Installation Rules}
+
+
+\subsection{MkdirTarget(dirs)}
+
+
+\fieldcontent{\bold{dirs} - list of directories to be created.  Must be in 
+proper order of creation.}
+
+
+\fieldheader{Use:}
+
+\fieldcontent{Ensures that the named directories exist before installing 
+files into them.  Creates the directory and any necessary parent 
+directories.}
+
+
+\subsection{InstallDocs(files, destdir)}
+
+
+\fieldcontent{\bold{files} - list of documentation files to be installed. 
+ Each file name in the list has its extension;  the usual extensions are 
+.doc and .help for the doc and help directories, respectively.
+
+
+See section 1.5 for \bold{destdir}.}
+
+
+\fieldheader{Use:}
+
+\fieldcontent{Installs the listed \italic{files} into \italic{destdir}. 
+ Use this for installing documentation (docs, help files, man pages, etc) 
+because it allows documentation to be managed separately from executables. 
+ That is, the make target "Docs" will install everything mentioned in 
+InstallDocs rules.}
+
+
+\subsection{InstallHelpAlias(file, aliases)}
+
+
+\fieldcontent{\bold{file} - name of help file without its extension (which 
+should be .help)
+
+
+aliases - space separated list of aliases for the file}
+
+
+\fieldheader{Use:}
+
+\fieldcontent{Installs the listed aliases in the data base so they will all 
+refer to the named help file.}
+
+
+\subsection{InstallXFont(fontname)}
+
+\fieldcontent{Installs \italic{fontname}.$(FONTEXT) into 
+$(DESTDIR)/$(FONTDESTX)}
+
+
+\subsection{InstallShScript(file, destdir)}
+
+\fieldcontent{Installs the sh script \italic{file} into \italic{destdir}.}
+
+
+\subsection{InstallCshScript(file, destdir)}
+
+\fieldcontent{Installs the csh script \italic{file} as \italic{destdir/file}.
+
+}
+
+\section{3.4 Little-Used Installation Rules}
+
+
+\subsection{InstallFile(file, flags, destdir)}
+
+\fieldcontent{Installs \italic{file} with mode \italic{flags} into 
+directory \italic{destdir}.  This is very flexible; it could be used for 
+installing an include file, a shell-script, a program, a help file, etc. 
+ For each of these examples, however, there are specific rules that should 
+be used instead.}
+
+
+\subsection{InstallFiles(files, mode, destdir)}
+
+\fieldcontent{Installs the listed \italic{files} with mode \italic{mode} 
+into \italic{destdir}.  This rule is not invoked by the make target "Docs".}
+
+\subsection{
+InstallDocFiles(files, mode, destdir)}
+
+\fieldcontent{Installs the listed \italic{files} with mode \italic{mode} 
+into \italic{destdir}.  Unlike InstallFiles, this rule is invoked by all 
+installation make targets.}
+
+
+\subsection{InstallLink(file, link)}
+
+
+\fieldcontent{\bold{file} - name of actual existing file (may include path)
+
+
+\bold{link} - name of link to be created (may include path)}
+
+
+\fieldheader{Use:}
+
+\fieldcontent{Installs \italic{link} as a symbolic link to \italic{file}.
+
+
+}\fieldheader{Note:}\fieldcontent{
+
+Replaced by the RunappAPP() rule.}
+
+
+\subsection{InstallExampleClassFiles(Hlist, destdir)}
+
+
+\fieldcontent{\bold{Hlist} - list of .H files to be installed
+
+
+See section 1.5 for the other argument definitions.}
+
+
+\fieldheader{Use:}
+
+\fieldcontent{Installs the .H files listed and the .C files of the same 
+name into \italic{destdir}.}
+
+
+\subsection{InstallFileToFile(file, flags, destfile)}
+
+
+\fieldcontent{See section 1.5 for the argument definitions.}
+
+
+\fieldheader{Use:}\fieldcontent{
+
+Installs \italic{file} with mode \italic{flags} as \italic{destfile}.  Must 
+be used if you want to install a particular file with a different name than 
+it already has.
+
+}
+\subsection{InstallMultiple(files, flags, destdir)}
+
+
+\fieldcontent{See section 1.5 for the argument definitions.}
+
+
+\fieldheader{Use:}
+
+\fieldcontent{For installing multiple files all in the same directory and 
+all having the same mode flags.
+
+}
+\subsection{ForceInstallFiles(files, mode, destdir)}
+
+\fieldcontent{Forces the listed files to be installed whenever a make 
+install, Install, or dependInstall is executed.}
+
+
+\subsection{InstallBasename(files, mode, destdir, ex1, ex2)}
+
+\fieldcontent{Installs the listed \italic{files} with mode \italic{mode}, 
+in \italic{destdir}, with extension \italic{ex2} in place of \italic{ex1}.}
+
+
+\begindata{bp,538520808}
+Version 2
+n 0
+\enddata{bp,538520808}
+\view{bpv,538520808,4,0,0}
+\chapter{
+4.  Cleanup and Dependency Generating Rules}
+
+
+\subsection{CleanTarget(files)}
+
+
+\fieldcontent{\bold{files} - list of files}
+
+
+\fieldheader{Use:}
+
+\fieldcontent{The listed files will be removed when a make command 
+specifies either of the targets 'clean' or 'Clean'.
+
+
+}\subsection{DependTarget(dependencies)}
+
+
+\fieldcontent{\bold{dependencies} - space separated list of Make 
+dependencies to take care of before generating the dependency information 
+and appending it to the Makefile}
+
+
+\fieldheader{Use:}\fieldcontent{
+
+Lists extra files for the 'depend' target to depend on; these files will be 
+created before actually computing the dependencies.  This might be needed, 
+for example, if a preprocessing step produces a .C file.}
+
+
+\begindata{bp,538522776}
+Version 2
+n 0
+\enddata{bp,538522776}
+\view{bpv,538522776,5,0,0}
+\chapter{
+5.  Less Often Used Rules}
+
+
+\subsection{NormalAsmRule()}
+
+\fieldcontent{Declares the rule for producing a .o file from a .s file. 
+ The .s file must be assembler source code for the current platform.}
+
+
+\subsection{NormalAsmPPRule()}
+
+\fieldcontent{Declares the rule for producing a .o file from a .spp file 
+after preprocessing that file with cpp.}
+
+
+\subsection{CppAndFilter(file, lyfile, incfiles, 
+filter)}\fixedfieldcontent{
+
+}
+\fieldcontent{\bold{file} - target filename (with extension)
+
+
+\bold{lyfile} - a lex or yacc file to be processed with cpp
+
+
+\bold{incfiles} - list of include files mentioned by lyfile
+
+
+\bold{filter} - process to run cpp output through before storing as file
+
+}
+\fieldheader{Use:}
+
+\fieldcontent{Target \italic{file} is a generated C file.  \italic{lyfile} 
+is the output of Yacc or Lex; namely, y.tab.c or lex.yy.c .he rule produces 
+file from \italic{lyfile} and \italic{incfiles} by processing it through 
+CPP and the specified \italic{filter}.  (The \italic{file} make target is 
+made dependent on the \italic{lyfile} and the \italic{incfiles}; it is 
+assumed the \italic{lyfile} #includes the \italic{incfiles}.) }\
+
+
+
+\subsection{AppendFiles(target, sources)}\fixedfieldcontent{
+
+}
+\fieldcontent{\bold{target} - file to create (with extension, if any)
+
+
+\bold{sources} - files to concatenate into target
+
+}
+\fieldheader{Use:}
+
+\fieldcontent{\italic{Target} is any filename and \italic{sources} is a 
+list of filenames.  This rule simply concatenates the \italic{sources} to 
+produce the \italic{target}.}
+
+
+\subsection{TagsTarget()}
+
+\fieldcontent{Declares the rule for executing tags.  (Note that this isn't 
+used by the Consortium staff and currently only attempts to run tags on .C 
+and .H files.)}
+
+
+\subsection{RegisterLibraries(file, dirsymbol, basedir, libs, destdir)}
+
+\fieldcontent{Creates a library location translation file named 
+\italic{file} and installs it in \italic{destdir}.
+
+The library will be expected at runtime at the location given by the 
+environment variable \italic{dirsymbol} (for instance, ANDREWDIR). 
+ \italic{Libs} is a list of the full pathnames of libraries that will be in 
+the directory referenced by dirsymbol.  The value \italic{basedir} will be 
+stripped from the beginning of each element of \italic{libs}. 
+ (\italic{Destdir} is usually $ANDREWDIR/lib/packages.)
+
+
+There is no harm in registering libraries that are not installed.}
+
+
+\subsection{RegisterLibPackage(file,dirsymbol,prefix,postfix,libs,destdir)}
+
+\fieldcontent{Similar to RegisterLibraries, but the file contents are 
+generated differently.  The list \italic{libs} is just a space separated 
+list of root names like "basics support text".  Each element of the list 
+has the strings \italic{prefix} (and \italic{postfix}) prepended (and 
+postpended) to the value before storing it in \italic{file}.  For ATK 
+libraries, the postfix should be a period followed by $\{ATKLIBEXTM\};  the 
+prefix may be something like "lib/atk/lib", where the second "lib" is the 
+beginning of the library name.}
+
+
+\subsection{ExecuteFromBASEDIR(cmd)}
+
+\fieldcontent{Executes the string \italic{cmd} in a Bourne shell (/bin/sh) 
+with the environment variables ANDREWDIR, CLASSPATH, and PATH set 
+appropriately for executing already installed parts of ATK from the 
+directory where ATK was/is being installed.  If you utilize the Andrew 
+environment to create an application in some destination tree other than 
+that used for Andrew, and if your build process must execute Andrew code 
+from that other destination tree, use ExecuteFromDESTDIR.
+
+}
+\subsection{ExecuteFromDESTDIR(cmd)}
+
+\fieldcontent{Executes the string \italic{cmd} in a Bourne shell with the 
+environment variables ANDREWDIR, CLASSPATH, and PATH set appropriately for 
+executing already installed parts of ATK from the destination directory 
+(DESTDIR).  Most Imakefiles should use ExecuteFromBASEDIR instead of 
+ExecuteFromDESTDIR.  You would use ExecuteFromDESTDIR only if DESTDIR will 
+be set to a destination tree other than the one usually used for Andrew, 
+and the program to be executed is in that DESTDIR/bin.  The situation could 
+arise if you are building an application using the Andrew environment, but 
+installing it somewhere other than Andrew.}
+
+
+\subsection{DynamicMultiObjectWithExports(name, extra classes, objs, libs, 
+syslibs, genstatl arguments)}
+
+\fieldcontent{Like DynamicMultiObject except that other dynamic objects and 
+executables can link against this dynamic object so that they can call 
+functions it defines.  This will not be available on all platforms, you 
+should allow for a library to be used when HAVE_DYNAMIC_INTERLINKING is not 
+defined.}
+
+
+\subsection{DynamicObjectWithExports(name, libs, syslibs, genstatl 
+arguments)}
+
+\fieldcontent{Like DynamicMultiObjectWithExports for the case where a 
+single class is being included in the dynamic object and it's code is 
+\italic{name}.C.}
+
+
+\subsection{InstallDynamicObjectWithExports(file, extraclasses, destdir)}
+
+\fieldcontent{Like InstallDynamicObject, but for use with a dynamic object 
+created by Dynamic\{Multi,\}ObjectWithExports.}
+
+\begindata{bp,538532136}
+Version 2
+n 0
+\enddata{bp,538532136}
+\view{bpv,538532136,6,0,0}\chapter{
+
+6.  Internal or Discouraged Rules
+
+}
+\section{6.1 General Internal Rules}
+
+
+These rules are incorporated automatically.
+
+
+\subsection{GenericCleanTarget()}
+
+\fieldcontent{Removes junk files and files commonly produced during a build 
+when a make clean is issued.  Removes junk files when make tidy is issued.}
+
+
+\subsection{MakefileTarget()}
+
+\fieldcontent{Declares the rule to recreate the Makefile in the current 
+directory.  The Makefile depends on the Imakefile, andyenv.h, imake.tmpl, 
+andrew.rls, allsys.h, allsys.mcr, site.rls, site.h, site.mcr, and the 
+system.h and system.mcr files.}
+
+
+
+\section{6.2 Subdirs Internal Rules}
+
+\smaller{
+These rules are not normally used in Imakefiles, #defining IHAVESUBDIRS and 
+setting the SUBDIRS make variable will cause the subdirs listed in SUBDIRS 
+to be processed appropriately.}
+
+
+\subsection{MakeSubdirs(dirs)}
+
+\fieldcontent{Declares the rules which trigger the production of Makefiles 
+in the listed directories.}
+
+
+\subsection{DependMakeSubdirs(dirs)}
+
+\fieldcontent{Lists subdirectories to be processed when doing a make 
+dependAll.  }\
+
+
+
+\subsection{InstallSubdirs(dirs)}
+
+\fieldcontent{Lists directories to be processed when executing a make 
+Install or make dependInstall.}
+
+
+\subsection{InstallDocSubdirs(dirs)}
+
+\fieldcontent{Lists the directories to be processed when executing make Doc.
+
+}
+\subsection{InstallAliasSubdirs(dirs)}
+
+\fieldcontent{Lists directories to process when executing a make Aliases.}
+
+
+\subsection{DependInstallSubdirs(dirs)}
+
+\fieldcontent{Lists subdirectories to be processed when doing a make 
+dependInstall. }\
+
+
+
+\subsection{WorldInstallSubdirs(dirs)}
+
+\fieldcontent{
+}\subsection{CleanSubdirs(dirs)}
+
+\fieldcontent{dirs lists sub directories which should be cleaned when make 
+Clean is run.}
+
+
+\subsection{TidySubdirs(dirs)}
+
+\fieldcontent{Lists directories to process when executing the tidy target.}
+
+
+\subsection{TagSubdirs(dirs)}
+
+\fieldcontent{Declares the rule for executing tags in the listed 
+subdirectories.}
+
+
+\subsection{MakeMakeSubdirs(dirs)}
+
+\fieldcontent{Declares the rule for the Makefiles target.}
+
+
+\subsection{MakefileSubdirs(dirs)}
+
+\fieldcontent{Includes MakeMakeSubdirs, also declares the rule for the 
+subdirMakefiles target.  The subdirMakefiles target is the target actually 
+used to make the Makefile in a subdirectory.}
+
+
+
+\section{6.3  More Rules Internal or Discouraged
+
+}
+\subsection{ATKLibraryTarget(\bold{atklibname}, objs, libs, syslibs)}
+
+\fieldcontent{The target for making an ATK library without any automatic 
+dependency generation.}
+
+
+\subsection{ATKExportsLibrary(\bold{atklibname}, objs, libs, syslibs, 
+genstatl arguments)}
+
+\fieldcontent{Used internally to produce normal ATK libraries corresponding 
+to dynamic objects on some systems.}
+
+
+\subsection{CC_RULE}
+
+\fieldcontent{(No arguments and no parentheses after the name.)}
+
+\fieldcontent{Declares a rule which will compile a .c file to a .o file, 
+possibly compiling more than one version for systems which need separate 
+pic versions for dynamic loading or shared libraries.}
+
+
+\subsection{CPPC_RULE}\subsection{
+
+}\fieldcontent{(No arguments and no parentheses after the name.)}
+
+\fieldcontent{Declares a rule which will compile a .C file to a .o file, 
+possibly compiling more than one version for systems which need separate 
+pic versions for dynamic loading or shared libraries.}
+
+
+\subsection{CPPDynProgramTarget(program, objs, libs, syslibs)}
+
+\fieldcontent{Like CPPProgramTarget but for C++ programs which will be 
+using dynamic loading.  (This should not normally be used;  see the Runapp 
+and RunappWithLibrary rules instead.)}
+
+\subsection{
+}\subsection{CPPDynTestProgramTarget(program, objs, libs, syslibs)}
+
+\fieldcontent{Like CPPDynProgramTarget, except it will only compile the 
+program when `make test` is run.  (It is often preferable to derive a class 
+from application and  the Runapp or RunappWithLibrary rules instead.)}
+
+
+\subsection{CppYaccRule()}
+
+\fieldcontent{The rule for creating a .o file from  a yacc file with C++ 
+code in it.}
+
+
+\subsection{CppYaccWithHeader(file)}
+
+\fieldcontent{Same as the CppYaccRule except a matching header file with 
+the tokens #defined is created.}
+
+
+\subsection{CppYaccWithReplacement(file, string)}
+
+\fieldcontent{Same as CppYaccWithHeader except any occurrences of yy in the 
+resulting .C file are replaced with string.}
+
+
+\subsection{ClassProgramTarget(name, objs, libs, syslibs)}
+
+\fieldcontent{Same as ProgramTarget.}
+
+
+\subsection{ClassTestProgramTarget(name, objs, libs, syslibs)}
+
+\fieldcontent{Same as TestProgramTarget.}
+
+
+\subsection{Cramped()}
+
+\fieldcontent{Declares the 'Cramped' target used in the toplevel Makefile. 
+ This rule provides for cleaning the build directories after they have been 
+installed.}
+
+
+\subsection{DynamicLinkCommand(dobj, extraclasses, objs, libs, syslibs)}
+
+\fieldcontent{Used internally when linking a dynamic object, this rule 
+performs whatever linking and/or object file massaging is necessary to 
+produce a dynamically loadable object in $(ATKDYNPREFIXM)dobj.$(ATKDYNEXTM).
+
+}
+\subsection{DynamicPostLinkCommand(dobj, extraclasses, objs, libs, syslibs)}
+
+\subsection{DynamicPreLinkCommand(dobj, extraclasses, objs, libs, syslibs)}
+
+\fieldcontent{Used internally, these macros bracket the DynamicLinkCommand 
+and can perform any pre or post processing needed.}
+
+
+\subsection{DynamicMultiObjectTarget(dobj, extraclasses, objs, libs, 
+syslibs)}
+
+\fieldcontent{Internal.  Used to build a dynamic object for a class named 
+dobj.  The objs should define the dobj class as well as those classes 
+listed in extraclasses.  libs and syslibs should be any libraries needed by 
+the code in the object files.  Normally this is not used, instead use 
+DynamicMultiObject.}
+
+
+\subsection{DynamicObjectTarget(dobj, extraclasses, libs, syslibs) }\
+
+
+\fieldcontent{Internal.  Like DynamicMultiObjectTarget but for the case 
+where all the classes are defined in dobj.C.}
+
+
+\subsection{FAILEXIT true}
+
+\fieldcontent{Used internally to ensure that loops will be terminated if an 
+error occurs.  Some ports may define it to be test $$? -eq 0 || exit 1 or 
+equivalent.}
+
+
+\subsection{InstallATKExportsLibrary(dobj, dest)}
+
+\fieldcontent{Used internally to install a normal ATK library corresponding 
+to a dynamic object on some systems.}
+
+
+\subsection{InstallATKExportsTarget(target, name, dest)}
+
+\fieldcontent{Used internally on some systems to install a list of symbols 
+exported by a dynamic object or library.}
+
+
+\subsection{InstallClassProgram(file, dest)}
+
+\fieldcontent{Currently identical to InstallProgram.  (It may be different 
+on some platforms when dynamic loading is implemented, or it may be 
+obsoleted and a new rule introduced.)}
+
+
+\subsection{InstallFont(fontname)}
+
+\fieldcontent{Installs the font \italic{fontname} into the appropriate font 
+directory.  (Based on whether WM_ENV, or OPENWIN_ENV are defined.)}
+
+
+\subsection{InstallByPattern(pattern, flags, destdir)}
+
+
+\fieldcontent{\bold{pattern} - a simple regular expression pattern
+
+}
+\fieldcontent{Installs all files from the current directory whose names 
+match the \italic{pattern} into \italic{destdir} with the mode 
+\italic{flags}.
+
+
+Unfortunately, this is not a very good macro as there is no way to do the 
+actual installation based upon time-stamp information.  So if used, it 
+means that all the files that match that pattern will be installed every 
+time the directory is compiled - whether or not they have changed since the 
+last time they were installed.}
+
+
+\subsection{InstallMultipleByExtension(extension, flags, destdir)}
+
+
+\fieldcontent{\bold{extension} - a list of extensions to look for (without 
+'.'; i.e. 'help' for '*.help')
+
+
+Useful for installing things like documentation or fonts. Unfortunately it 
+is not possible to do the installations based on time-stamp information, so 
+every installation will reinstall these files.}
+
+
+\subsection{InstallRO(files, destdir)}
+
+\fieldcontent{Installs the files listed in \italic{files} into 
+\italic{destdir} with read-only permission.}
+
+
+\subsection{InstallFWDE(files, mode, dest, ex1, ex2)}
+
+\fieldcontent{Install the .ex2 files corresponding to the .ex1 files listed.
+
+}
+\subsection{InstallHardLink(file, link)}
+
+\fieldcontent{Installs \italic{link} as a hard link to the file 
+\italic{file}.}
+
+\subsection{
+InstallOptionalATKLibrary(...)}
+
+\fieldcontent{Obsolete.  Generates nothing.
+
+}
+\subsection{InstallOWFont(fontname)}
+
+\fieldcontent{Installs fontname.fb into $(DESTDIR)/$(FONTDESTOPENWIN). 
+ This is used only if OPENWIN_ENV is defined.}
+
+
+\subsection{InstallWMFont(fontname)}
+
+\fieldcontent{Installs fontname.fwm into $(DESTDIR)/$(FONTDESTWM).}
+
+
+\subsection{NormalATKRule()
+
+NormalObjectRule()}
+
+\fieldcontent{Obsolete.  They generate nothing.}
+
+
+\subsection{OptionalATKLibrary(...)}
+
+\fieldcontent{Obsolete.  Generates nothing.}
+
+
+\subsection{OWDECLAREFONT(fontname)}
+
+\fieldcontent{Under OPENWINDOWS_ENV declares that fontname.fb should be 
+built from .bdf files when the all target is invoked.}
+
+\subsection{OWFONTRULE}
+
+\fieldcontent{Under OPENWINDOWS_ENV declares the rule for producing a .fb 
+file from a .bdf file.
+
+}
+\fieldcontent{Used internally only.  OWDECLAREFONT and OWFONTRULE may or 
+may not work.  (They're only used if OPENWINDOWS_ENV is defined which would 
+only ever be done on Suns.)}
+
+
+\subsection{PostDynFlags(dobj, extraclasses, objs, libs, syslibs)}
+
+\subsection{PreDynFlags(dobj, extraclasses, objs, libs, syslibs)}
+
+\fieldcontent{Used internally in the DynamicLinkCommand rule to insert 
+extra arguments before or after the main body of the link line for a 
+dynamic object.}
+
+
+\subsection{RANLIBHERE}
+
+\fieldcontent{Generated internally.  Empty on systems which do not need 
+libraries to be ranlib'ed, otherwise expands to the command to be used to 
+ranlib the library a rule is producing.}
+
+
+\subsection{RANLIBRULE(dest)}
+
+\fieldcontent{Generated internally.  Empty on systems which do not need 
+libraries to be ranlib'ed, otherwise expands to the command to be used in 
+the InstallLibraries rule to ranlib the installed version of a library.}
+
+
+\subsection{RefsAndLibFileTarget(name, objs, libs, syslibs)}
+
+\fieldcontent{Used internally to trigger the creation of the name.rf and 
+name.lt files used to track what classes are needed or defined and what 
+libraries are needed respectively.}
+
+
+\subsection{SubdirTarget(dirs, mktag, string)}
+
+\fieldcontent{This rule is used internally to declare the rules for 
+processing subdirectories in various ways.  It should not usually be used 
+in Imakefiles.}
+
+
+\subsection{SharedObjects()}
+
+\fieldcontent{Empty as we don't yet support shared libraries on any 
+platforms which require special compilation of such libraries. Referenced 
+in imake.tmpl but not needed.  (I don't think it ever was actually used.)}
+
+
+\subsection{WMFontRule()}
+
+\fieldcontent{Used internally, obsolete since it depends on fdb fonts. 
+ Only used when WM_ENV is defined.}
+
+
+\subsection{XFCRULE}
+
+\fieldcontent{The command to execute to produce a server (.snf, .pcf, 
+etc...) version of a font from a .bdf file.}
+
+
+\subsection{XFontRule()}
+
+\fieldcontent{Declares the rule to produce a server version of a font from 
+a .bdf file.}
+
+\begindata{bp,538551960}
+Version 2
+n 0
+\enddata{bp,538551960}
+\view{bpv,538551960,7,0,0}
+
+\section{\bigger{7.  Variables that May be Used in Imakefiles}}
+
+
+(Also see the file \typewriter{ImakeVars} for further information.)
+
+
+\bold{DESTDIR}		[Default: $(BASEDIR)] \
+
+
+\bold{
+}\indent{\fieldcontent{DESTDIR specifies where the results of a build are 
+installed.  It is always be identical to BASEDIR for system builds. 
+ DESTDIR may be set to other values \bold{only} in the course of local 
+Andrew-based development. \
+
+
+
+The usual use of DESTDIR is in installation rules.  E.g.,
+
+
+	InstallDocs(myinfo.help yours.help, $(DESTDIR)/help)
+
+ \
+
+
+In building local software, DESTDIR can be set either in the Imakefile or 
+with the make command itself:
+
+
+\leftindent{make DESTDIR=../andy} \
+
+
+}}
+\bold{BASEDIR}		\fieldcontent{[Default: DEFAULT_ANDREWDIR_ENV] }\
+
+
+
+\fieldcontent{\indent{Typical Imakefiles will refer to BASEDIR only if they 
+use ExecuteFromBaseDir.  In particular, files should be installed into 
+subdirectories of DESTDIR.
+
+
+BASEDIR specifies a root directory of a tree containing files installed by 
+an Andrew system build.  During the build itself, BASEDIR is the same as 
+DESTDIR:  the build is installing into DESTDIR and is executing tools 
+installed in BASEDIR by early steps of the installation.  BASEDIR will have 
+several subdirectories, including: \italic{bin}, \italic{include}, 
+\italic{lib}, \italic{etc}, \italic{doc,} and \italic{help}.
+
+
+The default value, DEFAULT_ANDREWDIR_ENV, is set in config/allsys.h to 
+/usr/andrew and is often overridden in the site.h file.
+
+
+The value for DEFAULT_ANDREWDIR_ENV is the path via which users, by 
+default, will execute the Andrew software.  That is, BASEDIR and DESTDIR 
+may point to one tree for the build, but the software will be moved 
+elsewhere for actual use.  That "elsewhere" must be the value of 
+ DEFAULT_ANDREWDIR_ENV (and BASEDIR must be set explicitly in the site.h 
+file.)
+
+
+BASEDIR must be different from the root of your copy of the source tree. 
+ In general, when you start an Andrew build, BASEDIR will point to an empty 
+directory.}}\indent{
+
+}\bold{
+CDEBUGFLAGS}	[Default: empty] \
+
+
+\bold{
+}\indent{\fieldcontent{CDEBUGFLAGS are passed to the C compiler when 
+compiling programs.  The most often used value is -g to compile with 
+debugging values.  On some platforms, the default value is not empty, but 
+is set to use optimization.}
+
+}
+\bold{XBASEDIR}		[Default: /] \
+
+
+
+\fieldcontent{XBASEDIR points to the root of your installed X tree. X 
+include files are assumed to be in $(XBASEDIR)/usr/include/X11. Xlib and 
+bdftosnf are also found in this tree. If your compiler cannot handle paths 
+like ``//usr/include/X11'' (with the double slash), you may wish to 
+redefine this as the null string.}
+
+\indent{
+}\bold{XINCDIR}	[Default: $(XBASEDIR)/usr/include] \
+
+
+
+\fieldcontent{Points to the X includes directory.}
+
+
+\bold{XLIBDIR}		[Default: $(XBASEDIR)/usr/lib] \
+
+
+
+\fieldcontent{Points to the X lib directory.}
+
+\bold{
+XBINDIR	}	[Default: /usr/bin/X11]
+
+
+\fieldcontent{XBINDIR points to the location of the X bin directory under 
+the XBASEDIR.  Do not include XBASEDIR in your definition of 
+XBINDIR}\description{
+
+
+\bold{XUTILDIR}	[Default: /usr/bin/X11]
+
+
+}\fieldcontent{As is the case with XBINDIR, XUTILDIR also points to the 
+location of the X bin directory under the XBASEDIR.  Do not include 
+XBASEDIR in your definition of XUTILDIR
+
+}
+\bold{XMKFONTDIR}	\fieldcontent{[Default: $(XBASEDIR)/$(XBINDIR)/mkfontdir] 
+}
+
+\begindata{bp,538557528}
+Version 2
+n 0
+\enddata{bp,538557528}
+\view{bpv,538557528,8,0,0}
+
+\smaller{Copyright 1988, 1996 Carnegie Mellon University and IBM.  All 
+rights reserved.
+
+
+$Disclaimer: 
+# Permission to use, copy, modify, and distribute this software and its 
+# documentation for any purpose and without fee is hereby granted, provided 
+# that the above copyright notice appear in all copies and that both that 
+# copyright notice and this permission notice appear in supporting 
+# documentation, and that the name of IBM not be used in advertising or 
+# publicity pertaining to distribution of the software without specific, 
+# written prior permission. 
+#                         
+# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# 
+#  $}
+
+
+\enddata{text,538280520}

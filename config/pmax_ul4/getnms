@@ -1,0 +1,3 @@
+#! /bin/sh
+find . -name "*.o" -exec /bin/nm -A -oen '{}' \; | awk -F '|' '/Symbols/ {split($1, fl, " ");}; substr($1,1,1) != "." && /Proc/ {split ($1, fc, " "); print (fl[3], fc[1])}'
+

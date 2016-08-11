@@ -1,0 +1,8477 @@
+\begindata{text,537746728}
+\textdsversion{12}
+\template{help}
+\define{global
+}
+\define{footnote
+
+attr:[Flags OverBar Int Set]
+attr:[FontSize PreviousFontSize Point -2]}
+\define{index
+menu:[Title~3,Index~91]
+attr:[FontFace Italic Int Set]}
+\define{indexi
+menu:[Title~3,InvisibleIndex~92]
+attr:[Script PreviousScriptMovement Point -2]
+attr:[FontFace Italic Int Set]}
+\define{literal
+}
+\majorheading{\bigger{\bigger{Andrew FAQ (Frequently Asked 
+Questions)\bigger{\bigger{\bigger{\bigger{ 
+}}}}}}\bigger{\bigger{\bigger{\bigger{
+
+
+
+
+}}}}
+\bigger{Andrew User Interface System}
+
+V\bigger{ersion 8   (September 1996)
+
+}}
+
+
+\bold{\indent{\indent{\indent{\indent{Andrew Consortium
+
+School of Computer Science
+
+Carnegie Mellon University
+
+5000 Forbes Avenue
+
+Pittsburgh, PA 15213-3891
+
+USA}}}}
+
+}
+\indent{Phone:			\bold{(412) 268-6710}
+
+Fax:			\bold{(412) 268-5576}
+
+Web:			\bold{http://www.cs.cmu.edu/~AUIS}
+
+Demo:			\bold{finger @atk.cs.cmu.edu}
+
+Archives:		\bold{ftp.andrew.cmu.edu:  /pub/AUIS}
+
+Bugs:			\bold{\bold{info-andrew-bugs@andrew.cmu.edu
+
+}}Info & Subscriptions:	\bold{info-andrew-request@andrew.cmu.edu}}
+
+
+
+\indent{\indent{
+
+In the documentation, the source directory will be referred to as 
+\typewriter{$/} and the destination as \typewriter{$ANDREWDIR/}.
+
+}}
+\indent{\indent{If you are reading an all-ASCII version of this file, the 
+version in Andrew format is in the distribution at:}}
+
+
+\typewriter{\center{\typewriter{$ANDREWDIR/}}doc/ADMINISTRATOR/FAQ.ez}\
+\typewriter{
+
+}\smaller{
+
+
+
+
+
+
+
+
+\smaller{\bigger{Copyright 1996 Carnegie Mellon University.  All rights 
+reserved. Please see further copyrights and disclaimer at the end of this 
+file.}}}
+
+\begindata{bp,537864712}
+Version 2
+n 0
+\enddata{bp,537864712}
+\view{bpv,537864712,0,0,0}
+
+
+
+\bold{\bigger{\center{\bigger{\italic{Welcome to the ANDREW USER INTERFACE 
+SYSTEM !}}}
+
+
+}
+
+}The \italic{\bold{Andrew User Interface System}} is commonly referred to 
+by its initials, "AUIS", or by its nickname, "Andrew".  It is a suite of 
+software applications.
+
+
+The \bold{\italic{Andrew Frequently Asked Questions (FAQ)} }volume contains 
+questions and answers from users worldwide.
+
+
+The FAQ has been created by compiling various information on common 
+problems that Andrew users and programmers encounter. It does not in any 
+way represent a comprehensive set of instructions for using the system. In 
+fact, many of the items included will be either too general to help you, or 
+too specific for you to care.  In these cases, please refer to Andrew 
+documentation on a particular topic included in your destination directory 
+where Andrew is installed.
+
+
+Sections in the FAQ on "General Information" and "Common Problems Building 
+Andrew" were compiled by Andrew Consortium staff members.  The section on 
+"Common Problems Using Andrew" has been extracted from a larger FAQ for 
+Carnegie Mellon University, where Andrew is used extensively.
+
+
+When reading through the FAQ, you will see various reference symbols.  File 
+and pathnames beginning with $/ are references to files in the Andrew 
+sources; names of installed files in the destination directory begin with 
+$ANDREWDIR.  All patches assume you are in the top-level source directory, 
+that is, the directory with sub-directories /atk, /ams, /atkams, /config, 
+/overhead, and so on.
+
+\description{\
+\begindata{bp,537867960}
+Version 2
+n 0
+\enddata{bp,537867960}
+\view{bpv,537867960,1,0,0}
+\bigger{\bigger{\center{\bold{FAQ - T}}\bold{ABLE OF CONTENTS}}}
+
+
+\bigger{\bold{General Information}}
+
+
+\bold{G1.}  What is Andrew?
+
+\bold{G2. } What is the Andrew Remote Demo Service?
+
+\bold{G3.}  \leftindent{To which platforms has Andrew been ported?}
+
+\bold{G4}. \leftindent{ How do I obtain the latest release}?
+
+\bold{G5. }\indent{What is the Andrew Consortium and what benefits do the 
+members receive?}
+
+\bold{G6.} \indent{Will there be restrictions on distributing non-source 
+applications that are developed?}
+
+\bold{G7.}  \indent{What are the restrictions on non-members who develop 
+using the X Consortium distribution?
+
+}\bold{G8.}  \indent{What books have been written for Andrew and where can 
+I obtain them?}
+
+\bold{G9. }\indent{What other sources of printed and taped information are 
+available on Andrew?}
+
+
+\bigger{\bold{Building and Ru}\bold{nning Andrew}}
+
+
+\italic{Building the System}
+
+
+\bold{B1. } \leftindent{Why doesn't my macro expand in site.mcr?}
+
+\bold{B2.} \leftindent{ Why does the distribution as made available on 
+MIT's X.V11R5 tape install files as links instead of actual files? }\
+
+
+\bold{B3.}  \leftindent{Which configuration variables are most commonly 
+used? }\
+
+
+\bold{B4.} \leftindent{ Should I modify the Imakefile or the Makefile?}
+
+\bold{B5}.  \indent{Some parts of the ./contrib section will not build 
+under Linux.  Are patches forthcoming? \
+
+
+}\bold{B6.  }\indent{Why do I get a "multiplication overflow" error when 
+printing German umlauts in large fonts? }\
+
+
+\bold{B7.}  \leftindent{How do I determine where a particular function is 
+in Andrew? }\
+
+
+\bold{B8.}  \leftindent{Is there one place I can look to find information 
+about all AUIS-related documents?
+
+}\bold{B9.} \leftindent{When I try to run an Andrew application, I get the 
+following error:  ld.so: libclass.so.1: not found.  What should I do?}
+
+\bold{B10. } \leftindent{In overhead/class/pp I can't make the class 
+executable, because the symbol yywrap is undefined.}
+
+
+\italic{Binary Distributions}
+
+
+\bold{D1. } What binary distributions are available?  \
+
+
+\bold{D2.}  How do I get help regarding these binary distributions?
+
+
+\italic{Messages/Mail}
+
+
+\bold{M1. } \leftindent{How can I instruct "messages" to use 
+/usr/spool/mail for mail drop?}
+
+\bold{M2.	}\indent{When using UCB sendmail, are aliases in /usr/lib/aliases 
+case-sensitive?}  \
+
+
+\bold{M3}.  Why wasn't queuemail installed automatically?
+
+\bold{M4.}  \leftindent{How can I avoid word-wrapping when sending a 
+message?  }\
+
+
+
+\italic{Andrew and AFS }\
+
+
+
+\bold{A1. }\indent{Why do I get errors when building Ultrix 4.2 against AFS 
+3.1 libraries?}
+
+\bold{A2. }\indent{Do I need to have AFS to run the Andrew Message System 
+(AMS)?}\bold{
+
+A\leftindent{3.}}\leftindent{  What is AFS and how can I get more 
+informati}on?  \
+
+
+
+\italic{Printing}
+
+\bold{
+P1.}  \leftindent{How can I print Andrew documents?}
+
+\bold{P2.}  \leftindent{Ezprint outputs rasters in PostScript.  Can I print 
+those rasters?}
+
+\bold{P3.}  \leftindent{How can I adjust for other printer page sizes?}
+
+
+\italic{Applications}
+
+
+\bold{L1.}  \leftindent{How can I fix the error message in my console about 
+<getstats/gvm> Cannot open /dev/kmem? }\
+
+
+\bold{L2.}  \leftindent{I get the following error in my console: 
+ <appname>X error BadValue, integer parameter out of range ...  How can I 
+fix this?  }\
+
+
+\bold{L3}.\leftindent{  Why can't the help program find any help files}?
+
+
+\bold{L4}.\leftindent{  Some applications cannot be found.}
+
+
+\italic{Fonts}
+
+
+\bold{F1}\bold{.}  I'm not getting the right fonts\bold{.
+
+F2}\bold{.}  When using my NCD X terminal, I get the wrong fonts.
+
+\bold{F3.} \indent{When I run Andrew applications on a remote X server, I 
+get the wrong fonts or cursors.}
+
+\bold{\subsection{F4.} }}Why am I getting an "a" cursor instead of an arrow 
+cursor in my ez text 		window?  \description{\
+
+
+
+\italic{Auxiliary Software}
+
+
+\bold{S1. } \leftindent{How can I get other useful software?}
+
+\bold{S2.}  \leftindent{How can I use PostScript fonts other than those 
+defined in /usr/andrew/X11fonts both in displayed and printed documents? }\
+
+
+\bold{S3.}  \leftindent{How do I use the spell checker function in ez?  }\
+
+
+\bold{S4.}  \leftindent{How do I debug Andrew applications?  }\
+
+
+\bold{S5}.  Why can't ez find ispell when I know it's installed? \
+
+
+\bold{S6.}  \leftindent{Is there any way to adopt the sendmail program to 
+PGP?} \
+
+
+
+
+\bigger{\bold{Using Andrew}}
+
+\italic{
+Customizing your Account
+
+}
+\bold{C1.}	How can I customize my Andrew account?
+
+\bold{C2.}	What about the strange errors/symbols I get after editing my 
+.cshrc or .login or .plan or .Xresources file?
+
+
+\italic{Playing with ATK Things}
+
+
+\bold{T1.}	How do I customize an ATK program?
+
+\bold{T2.	}\indent{How do I change the behavior, fonts, and so on in ATK 
+windows and menus?}
+
+\bold{T3.	}Can I get windows in colors other than black and white?
+
+\bold{T4.	}How do I add styles to ATK documents?
+
+\bold{T5.	}How do I add tables of contents and footnotes to ATK documents?
+
+\bold{T6.	}How do I adjust line spacing and margins in ATK documents?
+
+\bold{T7.	}What keystroke commands work in ATK programs?
+
+\bold{T8.	}How do I work with multiple ez windows or multiple buffers?
+
+\bold{T9.}\indent{\bold{	}How do I remove ATK formatting from an ATK 
+document, to turn it into plain text?}
+
+\bold{T10.	}How can I write my own console layout?
+
+\bold{T11.	}What is a help search path?
+
+
+\italic{Mail and Bboards
+
+}
+\bold{R1.	}How do I set options for \italic{messages}?
+
+\italic{
+}\italic{Strange File Formats
+
+
+}\bold{X1.	}\indent{How do I convert rasters, bitmaps, or images from on 
+type to another?
+
+}
+\italic{Working with Graphics and Images
+
+
+}\bold{W1.	}What drawing and painting programs are available on Andrew?
+
+
+\italic{Fancy Key Bindings}
+
+
+\bold{K1.	}How can I execute an arbitrary expression?
+
+\bold{K2.	}What is the "proctable"?
+
+\bold{K3.	}How can I execute an arbitrary proctable function?
+
+\bold{K4.	}How can I get file name completion in typescript?
+
+\bold{K5.	}Can I perform incremental search as in gnuemacs?
+
+\bold{K6.	}\indent{How can I convert paragraphs that have hard newlines 
+within them to ATK paragraphs with newlines only at the ends?}
+
+
+\italic{Programming in Ness and C}
+
+
+\bold{N1.	}\indent{Is there a way to bind a keystroke or menu to a simple 
+combination of other operations?}
+
+\bold{N2.	}How can I create the C code for a new inset?
+
+\begindata{bp,537888504}
+Version 2
+n 0
+\enddata{bp,537888504}
+\view{bpv,537888504,2,0,14}}
+\section{\center{\bigger{FAQ  ANSWERS}}
+
+
+General Information}
+
+
+\bold{G1.  What is Andrew?}\indent{
+
+
+\bold{The Andrew User Interface System \italic{(AUIS or Andrew)}} is an 
+integrated set of tools that allow you to create, use, and mail documents 
+and applications containing typographically-formatted text and embedded 
+objects. The system has three principal components:
+
+
+\indent{The \bold{Andrew User Environment} (\bold{\italic{AUE}}) is an 
+integrated set of applications beginning with a 'generic object' editor 
+(\italic{ez}), a help system, a system monitoring tool (\italic{console}), 
+an editor-based shell interface (\italic{typescript}), and support for 
+printing multi-media documents. \
+
+
+
+The \bold{Andrew Toolkit} (\bold{\italic{ATK}}) is a portable 
+user-interface toolkit.  It provides a dynamically-loadable, 
+object-oriented environment wherein objects can be embedded in one another. 
+Thus, one could edit text that contains not only fonts and styles, but also 
+embedded raster images, spreadsheets, drawing editors, equations, simple 
+animations, etc. These embedded objects could themselves contain other 
+objects, including text. ATK is an open system so programmers can create 
+new objects that can be embedded as easily as those system-defined objects. 
+
+
+The \bold{Andrew Message System} (\bold{\italic{AMS}}) provides a 
+multi-media interface to mail and bulletin boards.  AMS supports several 
+mail management strategies and implements many advanced  features including 
+authentication, return receipts, automatic sorting of mail, vote collection 
+and tabulation, enclosures, audit trails of related messages, and 
+subscription management. It also provides a variety of interfaces that 
+support ttys and low-function personal computers in addition to the 
+high-function workstations.}
+
+}
+\bold{G2.  What is the Andrew Remote Demo Service?  }\
+
+
+
+\leftindent{The Remote Andrew Demo service will allow you to run Andrew 
+software from a remote "server" with a minimum of overhead -- you don't 
+even need to have the software installed at your site. \
+
+
+
+All you need is a machine on the Internet which runs the X11 window system, 
+release 4 or later (although release 3 may suffice in a few cases).  A 
+simple "finger" command will get you started.  You'll be able to compose 
+multimedia documents, navigate through the interactive Andrew Tour, and use 
+the Andrew Message System to browse through CMU's three thousand bulletin 
+boards and newsgroups.
+
+}
+\leftindent{If you have any difficulty with the Remote Demo Service, please 
+send mail to <rdemo@andrew.cmu.edu> .}
+
+
+\bold{G3.  To which platforms has Andrew been ported?}
+
+
+The (intended) available machine types are:
+
+
+\formatnote{\leftindent{Machine Type		Operating System		<machine>
+
+
+IBM RS/6000		AIX 3.2			rs_aix32
+
+IBM PS/2 M70/80		AIX 1.2			ps_aix12 \
+
+
+Sun 3				SunOS 3.5			sun3_35
+
+Sun 3				SunOS 4.0			sun3_4
+
+Sun 3				SunOS 4.1			sun3_41
+
+Sun 4				SunOS 4.0			sun4_40
+
+Sun 4				SunOS 4.1			sun4_41
+
+Sun 4				SunOS 4.1-Mach		sun4_mach
+
+Sun				Solaris 2.0			sun4_51
+
+DEC Vax			Ultrix 3.0			vax_3
+
+DEC Vax			BSD (4.3)			vax_43
+
+HP 300			HP UX				hp300
+
+HP 900			HP UX				hp800
+
+386/486			Linux				i386_Linux
+
+386/486			NetBSD			i386_bsd
+
+386/486			BSDI/386		i386_bsdi (new, untested)
+
+Macintosh II			MacMach			mac2_51
+
+Apollo				DomainOS			apollo68k
+
+DEC MIPS			Ultrix 3.0			pmax_3
+
+DEC MIPS			Ultrix 4.1			pmax_41
+
+DEC MIPS			Ultrix 4.2			pmax_42
+
+DEC MIPS			Ultrix 4.2-Mach	pmax_mach
+
+SGI				IRIX 4.0			sgi_4d
+
+SCO				SCO				sco_i386
+
+}}\indent{
+}\bold{G4.  How do I obtain the latest release?}
+
+
+\indent{The latest private release of the system, Andrew8 in C++, is a 
+members-only release and can be obtained by joining the Andrew Consortium. 
+   Contact Wilfred Hansen, Director of the Consortium, via telephone at 
+(412) 268-6710 or via email at <\italic{wjh@cmu.edu}>.  \
+
+
+
+Anyone can obtain a free (binary only) release of Andrew7.5 in C++ from our 
+web or ftp sites and use it;  however, no one is allowed to sell them or to 
+sell media containing them.  We are prepared to negotiate licenses for 
+organizations wishing to bundle Andrew with their products.  A license for 
+non-commercial use of the sources is also available.
+
+
+The free public release of the system, including source and binary 
+versions, is Andrew6.3 in C.
+
+
+The various versions of Andrew can be found via the Andrew Consortium's web 
+page at \italic{http://www.cs.cmu.edu}  or from our archive site via 
+anonymous ftp from the Internet host ftp.andrew.cmu.edu (IP address: 
+128.2.232.154) in pub/AUIS.  Due to its size, the compressed tar'd tree is 
+split into 6 files, auis\{1,2,3,4\}, contrib and doc in the 
+pub/AUIS/dist-6.3.1/ directory.    You should gzip and tar -xvf each file 
+individually.   If you already have release 6.3 installed, you may wish to 
+apply the patch found in pub/AUIS/patches/official to your current 
+installation.  The README in that directory provides instructions. \
+
+
+
+This distribution is also available via anonymous ftp from the Internet 
+host ftp.x.org (IP address:  198.112.44.100).  The sources are located in 
+the contrib/libraries/andrew tree.  }\
+
+
+
+\bold{G5. \indent{What is the Andrew Consortium and what benefits do its 
+members receive?}}
+
+
+\indent{The principal activity of the Andrew Consortium is to maintain the 
+central sources for AUIS.  Improvements and enhancments from many 
+organizations are gathered together for redistribution, frequently to 
+members and to others via the X Consortium distribution channel.  The 
+Consortium also promotes usage of the Andrew system.  It organizes an 
+annual technical meeting, publishes a newsletter, maintains the info-andrew 
+mailing list, and supports a World Wide Web page on the Internet.
+
+
+A variety of levels of Consortium membership are available, ranging from 
+nominally- to fully-supportive. They are: Participating, Full, 
+Contributing, and Associate.  Programming support and consultation are 
+available to Participating and Full members.  The source code for Andrew8 
+in C++ is made available at all membership levels.
+
+
+Organizations and individuals are invited to become members of the 
+Consortium. For more information, contact Consoritum director Wilfred 
+Hansen via telephone at (412) 268-6710 or via email at 
+<\italic{wjh@cmu.edu}>. \
+
+
+}
+\bold{G6. \indent{Will there be restrictions on distributing non-source 
+applications that may be developed?} } \
+
+
+
+\indent{There are two flavors of release: 1) the "current" software 
+distributed on a timely basis to members; and 2) the occasional release via 
+the X Consortium.  The latter is virtually unrestricted and anyone can 
+distribute applications based on it to anyone.  The current software 
+release, however, is subject to some license restrictions;  Participating, 
+Contributing and Full members can distribute applications based on the 
+current software.  Associate members can build applications on the current 
+software and release them internally and to other Consortium members of any 
+class.}
+
+
+\bold{G7.  \indent{What are the restrictions on non-members who develop 
+using the X Consortium distribution?}}
+
+
+\indent{The only restrictions are that they cannot use the names of IBM, 
+CMU, and other contributors in their advertising, and they cannot sue any 
+contributors.  Otherwise they can create and sell software based on the X 
+release.
+
+
+One advantage of Associate membership in the Andrew Consortium, an 
+alternative, is to get access to the current software so that when your new 
+application is ready it can be released on top of the latest ATK rather 
+than on top of an old one.}
+
+
+\bold{G8.  \indent{What books have been written about Andrew and where can 
+I obtain them?}}
+
+\indent{
+Nathaniel S. Borenstein's composition entitled \italic{Multimedia 
+Applications Development with the Andrew Toolkit }(Prentice-Hall, 1989) 
+unfortunately is now "out of print".
+
+
+Please contact the Andrew Consortium via email 
+<\italic{info-andrew-request@andrew.cmu.edu}> for further details.
+
+}
+\bold{G9. \indent{What other sources of printed and taped information are 
+available on Andrew?}}
+
+\indent{
+}\indent{The Andrew Consortium sells a manual called \italic{User's Guide 
+to the Andrew User Interface System } for US$25 per copy.
+
+
+}\indent{The Consortium also offers a number of items which will help you 
+to learn about and better use the Andrew system.  These include: a 
+collection of \italic{Selected Technical Papers on Andrew}, recent 
+\italic{Conference Proceedings}, printed \italic{ProgrammingDocumentation}, 
+ and tapes containing the Andrew source and binary distributions.
+
+
+Please send email to <\italic{info-andrew-request@andrew.cmu.edu}> for 
+further details.}
+
+
+______________________________
+
+\section{Building  and Running Andrew}
+
+
+\bold{\bigger{Building the System}}
+
+
+\subsection{B1.  Why doesn't my macro expand in site.mcr?}
+
+
+\leftindent{You probably used a tab in your site.mcr file instead of 
+spaces.  Tabs are not allowed before macro declarations in the site.mcr. 
+ Although the error is not reported as such, the macro is not expanded 
+properly, and thus, is not noticed by imake.  Use spaces. } \
+
+
+
+\subsection{B2. Why does the distribution, as made available on MIT's 
+X.V11R5 tape, install files as links instead of actual files?  This fails 
+in two directories:  overhead/class/lib and xmkfontd.  \
+
+
+}
+\leftindent{The distribution defaults to install links instead of files. 
+ To change this, #undef LINKINSTALL_ENV in your site.h file.   If you want 
+to build using LINKINSTALL_ENV, you will have to change the following two 
+files: \
+
+
+
+overhead/class/lib/Imakefile:\indent{
+
+
+29,32d28
+
+< #ifdef LIBDL_ENV
+
+< install.time:: libclass.a
+
+< 	$(INSTALL) $(INSTLIBFLAGS) libclass.a $(DESTDIR)/lib
+
+< #else /* LIBDL_ENV */
+
+34d29
+
+< #endif /* LIBDL_ENV */
+
+
+}xmkfontd/Imakefile:
+
+\indent{
+18c18
+
+< 	$(INSTALL)  $\{INSTLIBFLAGS\} non-andrew.fonts.alias 
+ $\{DESTDIR\}/X11fonts/fonts.alias	\
+
+
+---
+
+> InstallFileToFile(non-andrew.fonts.alias, $\{INSTLIBFLAGS\}, 
+$\{DESTDIR\}/X11fonts/fonts.alias)
+
+}}
+\subsection{B3.  Which configuration variables are used most often? \
+
+
+}
+\leftindent{AFS30_ENV
+
+AFS31_ENV \
+
+
+AMS_DELIVERY_ENV \
+
+
+WHITEPAGES_ENV \
+
+
+SNAP_ENV \
+
+
+ANDREW_MALLOC_ENV
+
+DEBUG_MALLOC_ENV
+
+MK_BASIC_UTILS
+
+MK_AUTHORING \
+
+
+MK_AUX_UTILS \
+
+
+MK_AUX_INSETS
+
+MK_EXAMPLES \
+
+
+RUN_AMDS_ENV
+
+ANDREW_PRINTING_ENV
+
+LINKINSTALL_ENV
+
+CONTRIB_ENV \
+
+
+PRE_X11R4_ENV \
+
+
+DPS_ENV \
+
+
+DEFAULT_ANDREWDIR_ENV \
+
+
+BUILDANDREWINSTALL_ENV \
+
+
+ISO80_FONTS_ENV	\
+
+
+FONTS_TO_PCF_ENV
+
+
+CDEBUGFLAGS = -g
+
+MAKEDODEBUG = -g
+
+AFSBASEDIR = /usr/local
+
+XMKFONTDIR = /usr/local/bin/mkfontdir
+
+XFC = /usr/local/bin/bdftosnf
+
+XLIBDIR = /usr/local/lib
+
+XINCDIR = /usr/local/include
+
+RESOLVLIB = $\{AFSBASEDIR\}/lib/res/libresolv.a
+
+RESINC = -I$(AFSBASEDIR)/include/res
+
+INCLUDES =  -I$\{BASEDIR\}/include -I$(BASEDIR)/include/atk $(RESINC) 
+-I$(AFSBASEDIR)/include -I$\{XINCDIR\}
+
+
+}\subsection{B4.  Should I modify the Imakefile or the Makefile?  }\
+
+
+\leftindent{
+Changes should never be made to the Makefile. All changes should be made to 
+Imakefile; type "make Makefile" to regenerate that one file, or "make 
+Makefiles" to regenerate the Makefiles in all subdirectories, recursively.
+
+
+"make clean" and "make Clean" do not delete the Makefile, so a subsequent 
+"make Makefile" says it is up-to-date, i.e., comparing its own timestamp 
+against itself. Beware: once you remove the Makefile from a directory, you 
+can't say "make Makefile" there again.  You can, however, rename Makefile 
+to another name and say "make Makefile -f newname". }\
+
+
+
+\subsection{B5.  Some parts of the ./contrib section will not build under 
+Linux.  Are patches forthcoming? \
+
+
+}\indent{  \
+
+
+The ./contrib/gestures and ./contrib/tm directories do not build under 
+Linux as of Release 6.2.  \
+
+
+  \
+
+
+Also, there are problems building the ./contrib/mit/rtf2 and 
+./contrib/mit/2rtf directories.  A patch was applied to remedy the problem, 
+although it has not been fully tested.
+
+
+}\bold{B6.  Why do I get a "multiplication overflow" error when printing 
+German umlauts in large fonts? \
+
+
+}\indent{
+When printing German umlauts in large fonts on Linux systems (and possibly 
+other systems), groff may encounter a "multiplication overflow" error. 
+   This may be avoided by replacing some umlaut entries in 
+$ANDREWDIR/lib/compchar/comps with those below.  \
+
+
+
+NOTE:  The last item on each line is given here as an octal code;  it must 
+be entered into the 'comps' file as the corresponding code (not as shown 
+below).  With the standard Andrew key binding, this can be done by typing 
+control-X, control-Q, and then the three digits.
+
+
+a: 228   \\344
+
+A: 196  \\304 \
+
+
+O: 214   \\326
+
+o: 246   \\366 \
+
+
+U: 220   \\334
+
+u: 252   \\374
+
+SS 223   \\337
+
+Ss 223   \\337
+
+
+A user has contributed a working german .Xmodmap file, which is available 
+from the README.ez.wp file. It is available from our ftp server, 
+ftp.andrew.cmu.edu, in pub/AUIS/bin-dist/linux/auis63L3-wp.tgz.  \
+
+
+
+}\subheading{\bold{B7.}  \indent{How do I determine where a particular 
+function is in Andrew? }\
+
+
+}\indent{
+Before building Andrew, set the following environment variable in your 
+site.h file:  \
+
+
+
+	#define FUNCTION_LOC_ENV 1
+
+
+This causes the creation of the file  $DESTDIR/doc/atk/FuncLoc that lists 
+all functions, their source location and the library in which they can be 
+found.  Since all information about a particular function is located on the 
+same line, use "grep" to find the function you want to track down.  This 
+feature is available in Andrew7.3 and higher.
+
+
+NOTE:  After changing your site.h file, you must rerun:
+
+
+ imake -I. -I./config -Timake.tmpl -s Makefile -DTOPDIR=. \
+
+
+
+to regenerate the top-level Makefile. \
+
+
+}
+\bold{\bold{B8.}  \leftindent{Is there one place I can look to find 
+information about all AUIS-related documents? }\
+
+
+}\subheading{
+}\leftindent{A document launcher, named "doclaunch", is located in 
+$ANDREWDIR/doc.  The launcher contains links to  documentation on the 
+Andrew system under the subheadings of "programming tools", "mail system", 
+"insets", "programmer insets" and "text tools". }\indent{ Under each of 
+these topics, you will find additional links to related documents 
+throughout the distribution.
+
+}\subheading{
+\bold{B9.}  \leftindent{When I try to run an Andrew application, I get the 
+following error:  ld.so: libclass.so.1: not found.  What should I do? } \
+
+
+
+}\leftindent{This problem occurs on systems that employ the "shared 
+library" facility, typically SUNOS.  You may need to set LD_LIBRARY_PATH. 
+ Issue the following command before bringing up any Andrew application: \
+
+
+
+setenv LD_LIBRARY_PATH 
+$\{ANDREWDIR\}/lib:$\{XLIBDIR\}:/usr/lib:/lib:/usr/ccs/lib
+
+
+This will ensure that all the shared libraries needed for Andrew can be 
+found.  \
+
+
+}
+\bold{B10. \leftindent{ In overhead/class/pp I can't make the class 
+executable, because the symbol yywrap is undefined.}}\leftindent{
+
+
+The problem is that this line should end with -ll \
+
+
+(/usr/lib/libl.a has the definition of yywrap).  It may be that "hpux" is 
+not defined on your platform.  \
+
+
+
+Suggested Fix to the Version 6.3.1 file 
+$SRCDIR/overhead/class/pp/Imakefile:  \
+
+
+
+replace the line that now reads
+
+}\leftindent{	#if defined(hpux) && !defined(FLEX_ENV)
+
+with a line reading:
+
+	#ifndef FLEX_ENV}\subheading{
+
+
+\bigger{Binary Distributions}}\heading{
+
+}\indent{  \
+
+
+}\subheading{D1.  What binary distributions are available?  \
+
+
+}
+\indent{\italic{Andrew7.5} \italic{in C++ }is available free of charge and 
+can be used on these platforms:
+
+
+\indent{\italic{rs_aix325}		\bold{IBM RS/6000 (AIX 3.2.5)}
+
+\italic{pa1.1-hpux90}		\bold{Hewlett-Packard 720 (HPUX 9.0)}
+
+\italic{pmax_ultrix43}		\bold{DECstation 3100 PMAX (Ultrix}\bold{\bold{ 
+ 4.3)
+
+}}}\indent{\italic{sparc_sunos413}	\indent{\bold{SUN Sparcstation  (SunOS 
+4.1.3}}})
+
+\indent{\italic{sparc_sunos54}	\indent{	\bold{SUN Sparcstation (Solaris 2.4)
+
+}}}\indent{\italic{ix86_linux}	\indent{	\bold{Intel x86 (Linux: Redhat & 
+Slackware)}}}\indent{
+
+}
+}	The system i\indent{s installed by loading up to six "packages," the 
+first of which must be
+
+
+	\bold{w} - the word processing package \
+
+
+
+With this package alone, the binary should work. It is not necessary to 
+load everything onto your system, but if you choose to, you may then also 
+install any of these additional packages at your site:
+
+
+	\bold{h} - \indent{\indent{'help' browser, help documents, and source code 
+editors for: assembler c c++ help-files idl lisp modula-2 modula-3 pascal 
+perl rexx}}
+
+	\bold{i  }-  \indent{\indent{major insets: figure, image, raster, table; 
+the ness scripting language and the ADEW developer's tool}}
+
+	\bold{m} - \indent{mail and bulletin board reader, write, and manager}
+
+	\bold{d }- \indent{programmer documentation}
+
+	\bold{a }- \indent{everything not included in the above}
+
+
+To obtain the Andrew7.5 binaries, users with web browsers should view the 
+consortium's World Wide Web page at \italic{http://www.cs.cmu.edu/~AUIS}; 
+ those without web access can retrieve the binaries via anonymous 
+\italic{ftp} at \italic{ftp.andrew.cmu.edu:pub/AUIS/bin-dist}.
+
+
+Binary distributions for Andrew6.3 are available in 
+ \italic{pub/AUIS/bin-dist/bin-dist.6.3} on \italic{ftp.andrew.cmu.edu}. 
+  The distributions are available for these platforms: \
+
+
+
+	\bold{hp700_80}		Hewlett-Packard 720 (HPUX 8.05)
+
+	\bold{rs_aix32}		IBM RS/6000 (AIX 3.2)
+
+	\bold{pmax_ul4}		DECstation 3100 PMAX  (Ultrix  4.2)
+
+	\bold{sun4_41}		SUN Sparcstation  (SunOS 4.1.3)
+
+	\bold{sun4_51}		SUN Sparcstation (Solaris 2.x)
+
+	\bold{linux}		Linux (Slackware 2.1)
+
+	\
+
+
+Andrew6.3 binaries are available for the entire system, or in part, as 
+follows:
+
+
+\bold{	wp} - basic word-processor
+
+	\bold{doc} - documentation only
+
+	\bold{src} - files for source code developers
+
+	\bold{mail} - \indent{multimedia messages interface} and mail handling
+
+	\bold{full} \indent{- all of the above, plus more.
+
+}
+}\subheading{D2.  How do I get help regarding these binary distributions?  \
+
+
+  \
+
+
+}\indent{For help with problems when using the sunsite.unc.edu Linux 
+distribution, see FAQ item L3.  "Why can't the help program find any help 
+file?". \
+
+
+  \
+
+
+A common problem with the sunsite distribution is that the cursor is only a 
+little white dot on some boxes.  This might be an X server or possibly a 
+ limitation on the size of the cursor.  If it is a size limit, try picking 
+up afonts.tar.Z by anonymous ftp from atk.itc.cmu.edu.  Instructions for 
+using them are: \
+
+
+
+    1.  Make a directory where you will place the fonts.  \
+
+
+    2.  From that directory, run "ftp atk.itc.cmu.edu".  When asked for 
+your login name, respond with "anonymous".  When asked for your password, 
+respond with your ordinary user-id.
+
+    3.  Place ftp into binary file transfer mode with the command "binary".
+
+}\indent{    4.  Run the ftp command "get afonts.tar.Z".  Depending on the 
+speed of the connection, this can take anywhere from a few seconds to a few 
+minutes.
+
+} \leftindent{  	     5.  End ftp with "quit".
+
+   6.  Extract the font files from afonts.tar.Z with the command 
+"uncompress < afonts.tar.Z | tar xf -".
+
+    6a. [If you are running a version of X11 earlier than release 4, you 
+may need to compile the bdf-style font files with "bdftosnf", then run 
+"mkfontdir".  Consult your local documentation.]
+
+   7.  Place the current directory in your font path with the command "xset 
+fp+ /directory/name/here/".  Be sure to include the trailing /.
+
+}
+
+\section{Messages/Mail}
+
+
+\subsection{M1.  How can I instruct \italic{messages} to use 
+/usr/spool/mail for mail drop?
+
+}
+\leftindent{Although the following lines are in /usr/andrew/etc/AndrewSetup:
+
+
+\leftindent{AMS_NonAMSDelivery: yes
+
+AMS_MailBoxPrefix: /usr/spool/mail
+
+}
+messages says, "/usr/user/Mailbox" could not be properly read and delivered 
+(0 success, 0 failure)". \quotation{\
+
+
+}
+You should create a file $HOME/.mailrc and put in this line:
+
+
+\leftindent{unset hold}
+
+
+WARNING:  Once you start reading mail with \italic{messages}, your incoming 
+mail will be stored within directories maintained by \italic{messages}.  It 
+is possible to return to other mail handling systems, but it may not be 
+easy.
+
+
+}\subsection{M2.  When using UCB sendmail,  are aliases in /usr/lib/aliases 
+case-sensitive?  }\leftindent{\
+
+
+}
+\leftindent{If you build your UCB sendmail with the ``DBM'' option set, 
+aliases in /usr/lib/aliases are case-sensitive; if you build it without 
+that option, they are case-insensitive. For purposes of validating user 
+names, AMS assumes that aliases in /usr/lib/aliases are case-insensitive. 
+This might mean that a name that validates OK with AMS might be rejected by 
+UCB sendmail, if that sendmail uses DBM to do its alias lookup.}
+
+
+\subsection{M3.  Why isn't queuemail installed automatically? } \
+
+
+
+\indent{Queuemail wants to be installed setuid-daemon, and the Andrew 
+installation mechanism assumes that it can't do that.  The installation is 
+omitted, albeit silently, and must be done by hand.  \
+
+
+
+}\bold{M4.  How can I avoid word-wrapping when sending a message? 
+ }\indent{
+
+
+There are two ways to shut off word-wrapping when sending a message: \
+
+
+
+1.  Highlight the text to be sent and set the "Region" to be "literal" 
+ (literal is an option under the "Region" menu). \
+
+
+
+2.  If using a MIME-compatible mailer, add a "mailobj" using Esc-tab and 
+use the content type: application/octet-stream.  \
+
+
+}
+
+\section{Andrew and AFS}
+
+
+\subsection{A1.  \indent{Why do I get errors when building Ultrix 4.2 
+against AFS 3.1 libraries? }\
+
+
+}
+\leftindent{You need to define AFS_ULTRIX in your site.h file.  \
+
+
+}
+\subsection{A2.  Do I need to have AFS to run the Andrew Message System 
+(AMS)?
+
+}
+\leftindent{No, but having AFS gives you better functionality.   \
+
+
+
+Public bboards and mail are no problem, but AMS is not smart enough about 
+UNIX groups to do private bboards correctly.
+
+
+}\bold{A3.}\bold{  \leftindent{What is AFS and how can I get more 
+information?}  }\
+
+
+
+\leftindent{AFS is a distributed file system available from Transarc 
+Corporation. For more information, please send email to 
+<\italic{afs-sales+@transarc.com>} or snail mail to:  \
+
+
+
+Transarc Corporation
+
+The Gulf Tower
+
+707 Grant Street
+
+Pittsburgh, PA  15219
+
+tel: 412 338 4400 }\
+
+
+
+
+\section{Printing}
+
+
+\subsection{P1. How can I print Andrew documents?}
+
+\leftindent{
+Printing requires two steps: text formatting and driving the printer.  ATK 
+utilizes troff for text formatting.  That is adequate for printing 
+documents with styled texts, but some insets such as rasters and zip 
+require that the printer be driven with PostScript.
+
+
+Print processing is controlled via the FormatCommand and PrintCommand 
+options, which can be specified in site.h during the system build, in the 
+global preferences at $ANDREWDIR/lib/global.prf, or in the user's 
+~/preferences file.  \
+
+
+
+The most general defaults are:
+
+\leftindent{*.FormatCommand: eqn -Tpsc /tmp/%s.n  | troff -Tpsc - |
+
+*.PrintCommand: lpr -n
+
+}
+The -Tpsc flags specify that the troff output is ultimately intended for a 
+PostScript printer.  If you do not have one, this value must be set to 
+whatever is appropriate for your printer.  ATK documents containing only 
+styled text can be printed via most versions of troff and most print 
+drivers.
+
+
+To print ATK documents via PostScript printers, you have three options:
+
+	troff - psroff
+
+	ditroff - psdit
+
+	groff
+
+
+These differ in cost and the difficulty of installation.  See FAQ item Q8 
+for hints on acquiring these packages.
+
+
+\italic{troff - psroff}
+
+Standard Unix systems are often delivered with an old troff which generates 
+output for the "CAT" typesetter.  This troff can be used to print ATK 
+documents by sending the output through the psroff processor, available 
+freely on the Internet.  (See the psroff documentation.)
+
+
+\italic{ditroff - psdit}
+
+This is the route we use at CMU.  \italic{ditroff} is the device 
+independent troff which comes with the Documenters Work Bench portion of 
+Unix System V.  \italic{psdit} is part of the "Transcript" package 
+available from Adobe software.  Both ditroff and Transcript cost money. 
+ Adjust the FormatCommand to utilize the ditroff version of troff (it is 
+usually called \italic{troff}).  The PrintCommand should usually use the -n 
+switch and the lpr daemon will run psdit.
+
+
+Ditroff is part of the Documenter's WorkBench (DWB) under development by 
+AT&T.  Universities can get source code, but others may have to get 
+binaries.  The AT&T manager for DWB is Peter Nelson, 908 582 6078.
+
+}\italic{
+}\leftindent{\italic{groff }\
+
+
+This package is free from the Free Software Foundation, the gnu people. 
+ The only hitch is that to build \italic{groff} you must first build 
+\italic{g++} and to build \italic{g++} you must first build \italic{gcc}. 
+ We have compiled groff without any problems with g++-1.39.1. g++ also 
+compiled gpic, geqn, gtbl.   \
+
+
+
+Groff includes gtroff to do text formatting and grops to generate 
+PostScript.  To To use both, have this specification:
+
+	*.formatcommand:      groff -pte -E /tmp/%s.n |
+
+	*.PrintCommand: lpr -v
+
+
+Note:  The -pte switches tell it to run gpic, gtbl, and geqn before running 
+gtroff.  The output of gtroff is automatically piped into grops, which 
+generates the PostScript.  (This assumes that /usr/gnu/bin (or wherever 
+groff is installed) is on one's path.)
+
+
+The drawback of this simple approach is that the ATK preview option will no 
+longer work.  To retain the preview command, one can use specifications 
+something like this:
+
+	*.FormatCommand: \
+
+
+	*.PreviewCommand: groff -pteZ -TX100 /tmp/%s.n | preview -f -o %s
+
+	*.PrintCo}mmand: groff -pte -E /tmp/%s.n | lpr -v
+
+
+\indent{(You may want to use X75 if your display is closer to 75 dpi that 
+100dpi.)
+
+}
+\subsection{P2.  Ezprint outputs rasters in PostScript.  Can I print these 
+rasters?}
+
+
+\leftindent{If you just want to print one raster from an Andrew document, 
+you can extract the raster from the troff output with a raw text editor and 
+print it directly.  You may have to add the line
+
+	}20 20 translate\leftindent{
+
+to get it out of the bottom corner.  You may also have to add an initial 
+line containing only \
+
+
+	}%!\leftindent{
+
+
+If you haven't got a postscript printer, the raster image can still be 
+massaged with the pbm package.  pbm understands the Andrew format or you 
+can use the output of \
+
+
+	}ezprint -t <file>\leftindent{
+
+which will include the raster encoded in PostScript / hex form.}
+
+
+\subsection{P3. How can I adjust for other printer page sizes?}
+
+
+\leftindent{Page size for all AUIS printing can be adjusted by modifying 
+the file $ANDREWDIR/lib/tmac/tmac.atk.  Just after the copyright notice, 
+ insert these lines (without leading whitespace)
+
+	.ll 20c
+
+	.pl 30c
+
+
+These set a line length of 20 centimeters and a page length of 30 
+centimeters.
+
+
+You can also adjust the default header and footer margins by changing the 
+values assigned to HM and FM a few lines later.
+
+
+If you want to change paper size for just one user, that user can copy 
+tmac.atk into a private file, say /usr/you/tmac/tmac.atk.  To utilize this 
+file, the user's preferences file should include a line like:
+
+
+	*.tmacfile:/usr/you/tmac/tmac.atk}
+
+
+
+\section{Applications}
+
+
+\subsection{L1.  How can I fix the error message in my console about 
+<getstats/gvm> Cannot open /dev/kmem?
+
+}
+\leftindent{You may see the following error message: \
+
+
+
+\indent{|>> console:<getstats/gvm> Cannot open /dev/kmem - will not monitor 
+Disk and GVMStats <<| \
+
+
+console: ->> Try 'Restart Stats' Menu <<}
+
+
+If you get this message, your ``getstats'' program (installed from 
+atk/console/stats/common) wasn't installed with sufficient privilege to be 
+able to open /dev/kmem. This happens because your /dev/kmem is protected 
+against global reading, but you didn't do an Andrew installation from an 
+account with enough privilege to install ``getstats'' set-uid or set-gid. 
+One possibility is that you are running AFS, but you didn't turn the AFS 
+flag on during the compilation. In order for console to monitor information 
+available only through /dev/kmem, you'll have to do the following: \
+
+
+
+\leftindent{cd ..../atk/console/stats/common
+
+su admin (or su root)
+
+chmod 4555 getstats}
+
+
+The Andrew distribution does not include any consoles specifically tailored 
+to a non-AMDS, non-AFS environment.}
+
+
+\subsection{L2.  I get the following error in my console:  <appname>X error 
+BadValue, integer parameter out of range ...  How can I fix this?  \
+
+
+}
+\leftindent{Some users do not remember to run mkfontdir in the 
+$\{DESTDIR\}/X11fonts directory after the dependInstall operation is 
+complete. If you do not do so, you will see an error message similar to the 
+following: \
+
+
+
+\indent{<appname>X error BadValue, integer parameter out of range ...}
+
+
+Running Andrew on HP-UX, you may see problems with the fonts. A possible 
+solution for the font problem is to change the bodyfont font preference in 
+your preferences file to some font that is in the X default font path. \
+
+
+
+Some formulation of the bdf files causes either convertfont or the window 
+system to miscount the position of the glyphs in the font. This means that 
+the window system doesn't believe that you have glyphs for lower-case 
+characters. \
+
+
+
+The distributed Andrew fonts are tailored for about 80 pixels to the inch. 
+By default these are not used, since for workstations with other 
+resolutions it is generally best to utilize the X fonts instead. See the 
+discussion of ISO80_FONTS_ENV above.}
+
+
+\subsection{L3.  Why can't the help program find any help files?}
+
+
+\italic{Using a tree built from source: }\
+
+
+
+\leftindent{If help files cannot be found or the alias database is missing, 
+the following "make" operations from the root of the object tree may help:
+
+
+\leftindent{\smaller{\typewriter{make dependInstall SUBDIRS='helpindex'
+
+}}}
+These operations can be repeated as desired.
+
+
+}\italic{Using a Release 5.2.1 binary distribution or running off the 
+CDROM: \
+
+
+}\leftindent{
+If you are running from the CDROM or are using the binary distribution 
+available from the Andrew ftp server, ftp.andrew.cmu.edu, the solution is 
+different.  The problem with help may have resulted because the tree was 
+moved to a different location than where help is trying to find 
+$ANDREWDIR/lib/help.index.  The indices map a help topic to a filename for 
+the associated help file.  Since we provide binaries now, people are free 
+to place the distribution anywhere, and this invalidates the filenames 
+recorded in the indices.
+
+
+There are two ways to solve the problem:
+
+
+1) create an AndrewSetup file (/etc/AndrewSetup) and add this line:
+
+
+\typewriter{\smaller{\indent{HelpIndexDir: $ANDREWDIR/lib/help.index}}}
+
+
+Replace "$ANDREWDIR" above with the actual value for ANDREWDIR.
+
+
+2) Use the INDEXER script from the top-level SCRIPTS directory to
+
+rebuild the indices.  You would execute the INDEXER this way:
+
+
+\smaller{\typewriter{\indent{% INDEXER -D $ANDREWDIR/lib/help.index}}}
+
+
+You can use the INDEXER to build alternate sets of help indices.
+
+If you don't re-build the indices "in place", then you'll still
+
+need to add a HelpIndexDir line to your AndrewSetup file.
+
+}
+\italic{Using a Release 6.1 Binary Distribution for Linux: }\
+
+
+
+\indent{A binary distribution of AUIS 6.1 is available in 
+ftp:/pub/Linux/X11/andrew on sunsite.unc.edu.  One of the known problems 
+with this distribution is that the help application will not work if you do 
+not also install andrew61.prog.tar.gz, which is where the help.index 
+directory is located.    \
+
+
+}
+
+\subsection{L4.  Some applications cannot be found.}
+
+
+\indent{The environment variable CLASSPATH must either not be set or must 
+include $ANDREWDIR/lib/atk.  (Netscape requires a different CLASSPATH.) }  \
+
+
+
+\section{Fonts}
+
+
+\subsection{F1.  I'm not getting the right fonts.
+
+}
+\indent{When building Andrew from sources, fonts are not being installed 
+properly.  There is a bug in the file ./xmkfontd/Imakefile that erroneously 
+removes the $ANDREWDIR/X11fonts/fonts.alias file without re-installing it. 
+An informal patch follows.
+
+
+***  ./xmkfontd/Imakefile 	Wed Jun 10 16:48:34 1992
+
+--- ./xmkfontd/Imakefile.new	Wed Jun 10 16:17:12 1992
+
+***************
+
+*** 15,21 ****
+
+  	$\{RM\} $\{DESTDIR\}/X11fonts/fonts.alias
+
+  	$\{XMKFONTDIR\} $(DESTDIR)/X11fonts
+
+  #ifdef ISO80_FONTS_ENV
+
+! InstallFileToFile(non-andrew.fonts.alias, $\{INSTLIBFLAGS\}, 
+$\{DESTDIR\}/X11fonts/fonts.alias)
+
+  #else  /* ISO80_FONTS_ENV */
+
+  #ifdef SCOunix
+
+  #ifdef FONTS_TO_PCF_ENV
+
+--- 15,22 ----
+
+  	$\{RM\} $\{DESTDIR\}/X11fonts/fonts.alias
+
+  	$\{XMKFONTDIR\} $(DESTDIR)/X11fonts
+
+  #ifdef ISO80_FONTS_ENV
+
+! install.time::
+
+! 	$(INSTALL) $\{INSTLIBFLAGS\} non-andrew.fonts.alias 
+$\{DESTDIR\}/X11fonts/fonts.alias
+
+  #else  /* ISO80_FONTS_ENV */
+
+  #ifdef SCOunix
+
+  #ifdef FONTS_TO_PCF_ENV}
+
+
+\subsection{F2. When using my NCD X terminal, sometimes text gets rendered 
+in a scrambled way.}
+
+
+\indent{The problem is fixed in the latest release of the NCD servers.  The 
+problem exists in NCD 2.2.0 and does not exist in release 2.4.x. \
+
+
+}
+\subsection{F3. When I run Andrew applications on a remote X server, I get 
+the wrong fonts or cursors.}\bold{
+
+}\indent{\bold{
+}    ATK applications attempt to set the X font path correctly, to pick up 
+all the special fonts used for cursors and whatnot. However, if the X 
+server and the ATK application are running on different machines, this may 
+get confused. If so, you will have to set the font path yourself.
+
+
+    The most important fonts are: \italic{icon12} (for cursors), 
+\italic{shape10} and \italic{xshape10} (for grey shading). The basic Andrew 
+text fonts have names starting with \italic{tim}, \italic{hel}, and 
+\italic{sym} (Times, Helvetica, and Symbol). Other significant fonts are 
+\italic{con10} and \italic{con12} (used by Console), \italic{msgs10} and 
+\italic{msgs14} (used by Messages). \
+
+
+
+    These are often installed in $ANDREWDIR/X11fonts, but may also be in 
+/usr/local/fonts or elsewhere, depending on how your site is configured. 
+The filenames to look for will be the same as the font names, except that 
+\italic{icon12} may be called \italic{icn16x16}. Most likely these files 
+will have \italic{.pcf} extensions, but they may be installed as 
+\italic{.bdf} or some other format appropriate to your X server.
+
+
+    The directory on the server machine which contains those font files 
+should be added to the X font path. Use the command:
+
+\typewriter{\smaller{\indent{xset fp+ /directory/name/here/}}}
+
+Be sure to include the / at the end. \
+
+
+
+    Once this is done, Andrew applications should run properly on that X 
+server. The only possible remaining difficulty is that if you are using the 
+"CacheShades" preference, the X server will have cached invalid grey-shades 
+from the original (invalid) font path. Type:
+
+\typewriter{\smaller{\indent{xprop -remove ATK_SHADES -root}}}
+
+to clear them out; they will be stored correctly once ATK runs with the 
+proper font path.
+
+
+    If you are absolutely unable to find the proper fonts, the critical 
+ones can be downloaded from our FTP site. Type
+
+\typewriter{\smaller{\indent{finger font-help@atk.itc.cmu.edu}}}
+
+for instructions.
+
+}
+\bold{\subsection{F4.} Why am I getting an "a" cursor instead of an arrow 
+cursor in my ez text window? } \
+
+
+
+The 'a' cursor shows when you do not have /usr/andrew/X11fonts in your
+
+font path. In the older version this was the default. In any case adding
+
+the Andrew fonts in your path with
+
+
+	xset +fp /usr/andrew/X11fonts
+
+
+should be all you need. Replace /usr/andrew with wherever your AUIS is
+
+actually installed.
+
+
+Check 'help fonts'.  The gist of it is that your X server must have the
+
+Andrew fonts in the font path.  They are generally added automatically,
+
+potential causes of them not being added include:
+
+
+A preference like:
+
+				AddFontPath: no
+
+
+The X server is not on the same machine as the ez process.  (e.g.
+
+running ez remotely, or displaying to an X terminal)  If you are using
+
+an X terminal you will have to arrange to somehow make the fonts from
+
+/usr/local/andrew/X11fonts available to the X terminal.  This might
+
+involve a need to translate them to a different format.  (Note that the
+
+bdf versions of the fonts can be obtained via ftp, see finger
+
+font-help@atk.cs.cmu.edu.)
+
+
+The X server doesn't understand the font format andrew uses.  (That
+
+should not be the case here, Andrew uses the standard PCF format.)
+
+
+Okay, here's a couple of more things to try:
+
+
+A) the command `xset q` will print the status of x, including the \
+
+
+current font path.  Check to see that ALL dirs listed exist.
+
+
+B) the command `ls -l /usr/local/andrew/X11fonts/fonts*` will show the
+
+sizes of the font control files.  make sure they are not zero.  open
+
+the files and see if they have font names and references to font
+
+files.
+
+
+C) If you are using an X-terminal instead of the system console, there
+
+may be some magic required to download the fonts to the terminal.
+
+Check your terminal documentation.
+
+
+D) It is conceivable that your system cannot use cursors greater than
+
+16x16.  In that case, you need the icn16x16 fontset to replace icon12.
+
+I have incorporated the .bdf version of this file below;  you will
+
+need to run the x utility used to convert that to whatever form of
+
+fonts is used on your system.  (for instance, bdftopcf or bdftosnf).
+
+
+It is probably not a good idea to make every thing in
+
+/usr/local/andrew have the permissions 755, but it should not hurt
+
+your font problem.
+
+
+--------------
+
+inc16x16.bdf
+
+______________________________
+
+STARTFONT 2.1
+
+COMMENT Created by fdbbdf
+
+FONT icon12
+
+SIZE 12 78 78
+
+FONTBOUNDINGBOX 125 185 -29 -146
+
+STARTPROPERTIES 4
+
+Ownership "  "
+
+FONT_ASCENT 39
+
+FONT_DESCENT 146
+
+DEFAULT_CHAR 32
+
+ENDPROPERTIES
+
+CHARS 93
+
+STARTCHAR sp
+
+ENCODING -1 32
+
+SWIDTH 0 0
+
+DWIDTH 9 0
+
+BBX 0 0 0 0
+
+BITMAP
+
+ENDCHAR
+
+STARTCHAR !
+
+ENCODING -1 33
+
+SWIDTH 0 0
+
+DWIDTH 12 0
+
+BBX 12 11 0 0
+
+BITMAP
+
+00e0
+
+01b0
+
+0390
+
+06f0
+
+0c60
+
+18c0
+
+3180
+
+6300
+
+4600
+
+6c00
+
+7800
+
+ENDCHAR
+
+STARTCHAR #
+
+ENCODING -1 35
+
+SWIDTH 0 0
+
+DWIDTH 5 0
+
+BBX 4 4 1 -5
+
+BITMAP
+
+c000
+
+c000
+
+7000
+
+3000
+
+ENDCHAR
+
+STARTCHAR $
+
+ENCODING -1 36
+
+SWIDTH 0 0
+
+DWIDTH 5 0
+
+BBX 4 4 1 0
+
+BITMAP
+
+3000
+
+3000
+
+e000
+
+c000
+
+ENDCHAR
+
+STARTCHAR %
+
+ENCODING -1 37
+
+SWIDTH 0 0
+
+DWIDTH -5 0
+
+BBX 4 4 -4 0
+
+BITMAP
+
+c000
+
+e000
+
+3000
+
+3000
+
+ENDCHAR
+
+STARTCHAR &
+
+ENCODING -1 38
+
+SWIDTH 0 0
+
+DWIDTH -5 0
+
+BBX 4 4 -4 -5
+
+BITMAP
+
+3000
+
+7000
+
+c000
+
+c000
+
+ENDCHAR
+
+STARTCHAR '
+
+ENCODING -1 39
+
+SWIDTH 0 0
+
+DWIDTH 11 0
+
+BBX 12 12 -5 -7
+
+BITMAP
+
+0600
+
+0700
+
+0300
+
+0700
+
+7f00
+
+ffb0
+
+dff0
+
+0fe0
+
+0e00
+
+0c00
+
+0e00
+
+0600
+
+ENDCHAR
+
+STARTCHAR (
+
+ENCODING -1 40
+
+SWIDTH 0 0
+
+DWIDTH 9 0
+
+BBX 11 14 -10 -8
+
+BITMAP
+
+0060
+
+0060
+
+0060
+
+0c60
+
+0660
+
+0360
+
+ffe0
+
+ffe0
+
+0360
+
+0660
+
+0c60
+
+0060
+
+0060
+
+0060
+
+ENDCHAR
+
+STARTCHAR )
+
+ENCODING -1 41
+
+SWIDTH 0 0
+
+DWIDTH 12 0
+
+BBX 11 14 0 -8
+
+BITMAP
+
+c000
+
+c000
+
+c000
+
+c600
+
+cc00
+
+d800
+
+ffe0
+
+ffe0
+
+d800
+
+cc00
+
+c600
+
+c000
+
+c000
+
+c000
+
+ENDCHAR
+
+STARTCHAR *
+
+ENCODING -1 42
+
+SWIDTH 0 0
+
+DWIDTH 14 0
+
+BBX 15 14 -6 -8
+
+BITMAP
+
+07f8
+
+07f8
+
+0600
+
+067c
+
+0652
+
+0652
+
+0652
+
+067c
+
+0650
+
+0650
+
+0650
+
+0650
+
+fe50
+
+fe00
+
+ENDCHAR
+
+STARTCHAR +
+
+ENCODING -1 43
+
+SWIDTH 0 0
+
+DWIDTH 13 0
+
+BBX 11 14 0 -8
+
+BITMAP
+
+ffc0
+
+ffc0
+
+c000
+
+cf80
+
+ca40
+
+ca40
+
+ca40
+
+cf80
+
+ca00
+
+ca00
+
+ca00
+
+ca00
+
+f5c0
+
+ffc0
+
+ENDCHAR
+
+STARTCHAR ,
+
+ENCODING -1 44
+
+SWIDTH 0 0
+
+DWIDTH 24 0
+
+BBX 23 13 -11 -5
+
+BITMAP
+
+00740000
+
+00fe0000
+
+01830000
+
+01010000
+
+036d8000
+
+02648000
+
+02188000
+
+02108000
+
+fffffe00
+
+11011000
+
+11011000
+
+1b01b000
+
+0e00e000
+
+ENDCHAR
+
+STARTCHAR -
+
+ENCODING -1 45
+
+SWIDTH 0 0
+
+DWIDTH 20 0
+
+BBX 19 14 -9 -7
+
+BITMAP
+
+ffffe000
+
+ffffe000
+
+c0006000
+
+c0006000
+
+ffffe000
+
+c4446000
+
+c4446000
+
+c4446000
+
+c4446000
+
+c4446000
+
+fffc6000
+
+c0046000
+
+ffffe000
+
+ffffe000
+
+ENDCHAR
+
+STARTCHAR /
+
+ENCODING -1 47
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 7 12 -3 -1
+
+BITMAP
+
+1000
+
+1000
+
+1000
+
+1000
+
+1000
+
+1000
+
+9200
+
+5400
+
+2800
+
+2800
+
+1000
+
+1000
+
+ENDCHAR
+
+STARTCHAR 0
+
+ENCODING -1 48
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 29 30 0 -30
+
+BITMAP
+
+00000000
+
+00000000
+
+00000000
+
+00000000
+
+01c1c000
+
+03e3e000
+
+07f7f000
+
+07fff000
+
+03f7e000
+
+01f7c000
+
+0ef7b800
+
+1f777c00
+
+3fb6fe00
+
+3fc9fe00
+
+3ffffe00
+
+1e6b3c00
+
+09ebc800
+
+1febfc00
+
+1fc9fc00
+
+1fc5fc00
+
+0f84f800
+
+07027000
+
+00020000
+
+00010000
+
+00010000
+
+00000000
+
+00000000
+
+00000000
+
+00000000
+
+00000000
+
+ENDCHAR
+
+STARTCHAR 1
+
+ENCODING -1 49
+
+SWIDTH 0 0
+
+DWIDTH 11 0
+
+BBX 19 19 -9 -10
+
+BITMAP
+
+ffffe000
+
+80002000
+
+80002000
+
+b9996000
+
+80002000
+
+80002000
+
+d6aca000
+
+80002000
+
+80002000
+
+da66e000
+
+80002000
+
+80002000
+
+daeda000
+
+80002000
+
+80002000
+
+b6d4a000
+
+80002000
+
+80002000
+
+ffffe000
+
+ENDCHAR
+
+STARTCHAR 2
+
+ENCODING -1 50
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 43 40 0 -40
+
+BITMAP
+
+000000000000
+
+000000000000
+
+000000000000
+
+3ffffff00000
+
+200000080000
+
+100000040000
+
+080000020000
+
+040000010000
+
+020000008000
+
+010000004000
+
+008000802000
+
+004001401000
+
+002000e00800
+
+001000180400
+
+002800060200
+
+004400018100
+
+00820000c080
+
+00610000c040
+
+00108000c020
+
+00087fffffe0
+
+00040004c000
+
+00020004c000
+
+00010004c000
+
+0000fff4c000
+
+00000008c000
+
+00000000c000
+
+00000000c000
+
+00000000c000
+
+00000000c000
+
+00000000c000
+
+00000000c000
+
+000000004000
+
+000000004000
+
+000000004000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+ENDCHAR
+
+STARTCHAR 3
+
+ENCODING -1 51
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 44 56 0 -56
+
+BITMAP
+
+003e00000000
+
+007e00000000
+
+00ff00000000
+
+00ff00000000
+
+01ff80000000
+
+01ff80000000
+
+01ff80000000
+
+01ff80000000
+
+01ff803e0000
+
+01ff803f0000
+
+01ff007f8000
+
+01ff007f8000
+
+00ff00ffc000
+
+00fe00ffc000
+
+00fe00ffc000
+
+00fe00ffc000
+
+00fe00ffc000
+
+00fe00ffc000
+
+00fe007fc000
+
+00fe007fc000
+
+00fc007f8000
+
+00fc003f8000
+
+0078003f8000
+
+0000003f8000
+
+0000003f8000
+
+0000003f8000
+
+0000003f8000
+
+0000003f8000
+
+0000001f8000
+
+0000001f8000
+
+0000000f0000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+00ff0c018000
+
+00808a028000
+
+008049048000
+
+008049048000
+
+008048888000
+
+008088888000
+
+00ff08508000
+
+008008208000
+
+008008008000
+
+008008008000
+
+008008008000
+
+008008008000
+
+008008008000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+ENDCHAR
+
+STARTCHAR 4
+
+ENCODING -1 52
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 14 15 0 -5
+
+BITMAP
+
+1ffc
+
+1004
+
+ffe4
+
+8024
+
+8024
+
+9f24
+
+8024
+
+8024
+
+9f24
+
+8024
+
+8024
+
+9f3c
+
+8020
+
+8020
+
+ffe0
+
+ENDCHAR
+
+STARTCHAR 5
+
+ENCODING -1 53
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 39 42 0 -42
+
+BITMAP
+
+000003fe0000
+
+02001c01c000
+
+040060002000
+
+080080001000
+
+3c0100001000
+
+f60600000800
+
+770800000400
+
+3f0800000400
+
+1f9000fe0200
+
+1fa003010200
+
+1fc00c008200
+
+1f8010784200
+
+1f0020844200
+
+0f0041022200
+
+0f00821a2200
+
+0f00842a2200
+
+078084222200
+
+0780841c4200
+
+07c084004400
+
+03f086008400
+
+03fc81010400
+
+01ff80c20800
+
+00ffc03c1000
+
+007fe0002000
+
+003ff8004000
+
+000fff038000
+
+0007ffffc000
+
+0000ffffc000
+
+000000ffe000
+
+0000003fe000
+
+0000000fe000
+
+00000007f000
+
+00000001f800
+
+00000000fc00
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+ENDCHAR
+
+STARTCHAR 6
+
+ENCODING -1 54
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 43 45 0 -45
+
+BITMAP
+
+03c000229800
+
+07e000153e00
+
+0ff0078e6300
+
+0ff00fc68180
+
+0ff018238440
+
+0ff0181bbf40
+
+07e0080ff1a0
+
+03c003e7e1c0
+
+000007f3bc60
+
+00001c1f8e20
+
+0000300fc720
+
+000020f77300
+
+000003c61980
+
+00000e0c0cc0
+
+0000181c0660
+
+000010180300
+
+000020380100
+
+000000300180
+
+0000007000c0
+
+000000e00040
+
+000000c00000
+
+000000c00000
+
+000001c00000
+
+000001800000
+
+000001800000
+
+000003000000
+
+000003000000
+
+000007000000
+
+000006000000
+
+000006000000
+
+00000e000000
+
+00000c000000
+
+00000c000000
+
+00000c000000
+
+000018000000
+
+000018000000
+
+000018000000
+
+000038000000
+
+000030000000
+
+082030001f80
+
+2088380ff0e0
+
+82007efc0000
+
+082381c00000
+
+208c00000000
+
+821000000000
+
+ENDCHAR
+
+STARTCHAR 7
+
+ENCODING -1 55
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 47 47 0 -47
+
+BITMAP
+
+00000c600000
+
+000012900000
+
+095489225520
+
+055501015540
+
+23de26c8f788
+
+13de4924f790
+
+0ddd9d737760
+
+3edbe54fb6f8
+
+0f5786c3d5e0
+
+3fafe6cfebf8
+
+006006c00c00
+
+3f9c038073f8
+
+0f5e8102f5e0
+
+3ede4d64f6f8
+
+0dce5394e760
+
+13c149250790
+
+23c881022788
+
+05475d75c540
+
+09403ef80520
+
+420277dc8084
+
+a605638d40ca
+
+8be477dc4fa2
+
+48f23ef89e24
+
+371fdd77f1d8
+
+48f23ef89e24
+
+8be477dc4fa2
+
+a605638d40ca
+
+420277dc8084
+
+09403ef80520
+
+05475d75c540
+
+23c881022788
+
+13c149250790
+
+0dce5394e760
+
+3ede4d64f6f8
+
+0f5e8102f5e0
+
+3f9c038073f8
+
+006006c00c00
+
+3fafe6cfebf8
+
+0f5786c3d5e0
+
+3edbe54fb6f8
+
+0ddd9d737760
+
+13de4924f790
+
+23de26c8f788
+
+055501015540
+
+095489225520
+
+000012900000
+
+00000c600000
+
+ENDCHAR
+
+STARTCHAR 8
+
+ENCODING -1 56
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 36 38 0 -38
+
+BITMAP
+
+000003ff0000
+
+00001ffe0000
+
+00003ffc0000
+
+00007ffc0000
+
+0000fff00000
+
+00013fc00000
+
+00038f000000
+
+007d40000000
+
+00fd60000000
+
+01fd50000000
+
+03f948000000
+
+0ff928000000
+
+07f224000000
+
+03e222000000
+
+000222000000
+
+000421000000
+
+000821000000
+
+001020800000
+
+001020400000
+
+0fa020600000
+
+1fc0201e0000
+
+3fe0203f0000
+
+7ff0207f8000
+
+7ff020ffc000
+
+7ff0f8ffc000
+
+7ff1fcffc000
+
+3fe3feffc000
+
+1fc3fe7f8000
+
+0f83fe3f0000
+
+0003fe1e0000
+
+0003fe000000
+
+0001fc000000
+
+0000f8000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+ENDCHAR
+
+STARTCHAR 9
+
+ENCODING -1 57
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 40 38 0 -38
+
+BITMAP
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+0001fe000000
+
+000601800000
+
+000800700000
+
+0010000c0000
+
+002000020000
+
+004000018000
+
+004000004000
+
+00400001a000
+
+008400005000
+
+008a00062800
+
+009200098000
+
+009100104000
+
+0090c0200000
+
+00482e400000
+
+004829400000
+
+002418c00000
+
+001208400000
+
+001208200000
+
+001208100000
+
+1c1208080000
+
+222208040000
+
+49c408020000
+
+40081ffc0000
+
+23f028000000
+
+240068000000
+
+3c00e8000000
+
+380148000000
+
+380008000000
+
+3c0008000000
+
+0e0018000000
+
+020038000000
+
+0000f8000000
+
+ENDCHAR
+
+STARTCHAR :
+
+ENCODING -1 58
+
+SWIDTH 0 0
+
+DWIDTH 6 0
+
+BBX 13 7 -6 -4
+
+BITMAP
+
+1040
+
+3060
+
+7ff0
+
+fff8
+
+7ff0
+
+3060
+
+1040
+
+ENDCHAR
+
+STARTCHAR ;
+
+ENCODING -1 59
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 13 13 -6 -7
+
+BITMAP
+
+0200
+
+0200
+
+0200
+
+0200
+
+0200
+
+0000
+
+f8f8
+
+0000
+
+0200
+
+0200
+
+0200
+
+0200
+
+0200
+
+ENDCHAR
+
+STARTCHAR <
+
+ENCODING -1 60
+
+SWIDTH 0 0
+
+DWIDTH 14 0
+
+BBX 16 16 -2 -15
+
+BITMAP
+
+5000
+
+a800
+
+6d40
+
+9500
+
+6a40
+
+9480
+
+6b00
+
+9da0
+
+7690
+
+8b5a
+
+55ab
+
+02d6
+
+016d
+
+00ba
+
+0054
+
+0028
+
+ENDCHAR
+
+STARTCHAR =
+
+ENCODING -1 61
+
+SWIDTH 0 0
+
+DWIDTH 14 0
+
+BBX 16 15 -2 -14
+
+BITMAP
+
+a000
+
+7400
+
+9280
+
+6ac0
+
+9580
+
+6900
+
+9480
+
+6240
+
+8968
+
+74a5
+
+2254
+
+0129
+
+0092
+
+0044
+
+0028
+
+ENDCHAR
+
+STARTCHAR >
+
+ENCODING -1 62
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 21 21 -10 -11
+
+BITMAP
+
+02aa0000
+
+04a90000
+
+0d558000
+
+1b76c000
+
+328a6000
+
+65753000
+
+9a8a8800
+
+35756000
+
+ca8a9800
+
+35556000
+
+d5255800
+
+35556000
+
+ca8a9800
+
+35756000
+
+9a8ac800
+
+65753000
+
+328a6000
+
+1b76c000
+
+0d558000
+
+04a90000
+
+02aa0000
+
+ENDCHAR
+
+STARTCHAR ?
+
+ENCODING -1 63
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 21 21 -10 -11
+
+BITMAP
+
+01540000
+
+0b568000
+
+12aa4000
+
+24892000
+
+4d759000
+
+1a8ac000
+
+65753000
+
+ca8a9800
+
+35756000
+
+caaa9800
+
+2adaa000
+
+caaa9800
+
+35756000
+
+ca8a9800
+
+65753000
+
+1a8ac000
+
+4d759000
+
+24892000
+
+12aa4000
+
+0b568000
+
+01540000
+
+ENDCHAR
+
+STARTCHAR @
+
+ENCODING -1 64
+
+SWIDTH 0 0
+
+DWIDTH 13 0
+
+BBX 11 11 1 -2
+
+BITMAP
+
+1f00
+
+75c0
+
+4040
+
+df60
+
+9f20
+
+df60
+
+9f20
+
+df60
+
+4040
+
+75c0
+
+1f00
+
+ENDCHAR
+
+STARTCHAR A
+
+ENCODING -1 65
+
+SWIDTH 0 0
+
+DWIDTH 41 0
+
+BBX 38 39 0 -6
+
+BITMAP
+
+0001c0000000
+
+0000e0000000
+
+000060000000
+
+000020000000
+
+001ffffc0000
+
+007ffffc0000
+
+00fffffc0000
+
+00fffffc0000
+
+00fc00000000
+
+00f800000000
+
+f8f800007c00
+
+f8fc00007c00
+
+f8fffffc7c00
+
+f8fffffc7c00
+
+f87ffffc7c00
+
+f81ffffc7000
+
+f80000006000
+
+f80000006000
+
+f80000006000
+
+f83ffff07000
+
+f87ffff87c00
+
+f87ffff87c00
+
+f8fffffc7c00
+
+f8fffffc7c00
+
+f8fcfcfc7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f80000007c00
+
+f80000007c00
+
+f80000007c00
+
+fffffffffc00
+
+fffffffffc00
+
+fffffffffc00
+
+7ffffffff800
+
+3ffffffff000
+
+ENDCHAR
+
+STARTCHAR B
+
+ENCODING -1 66
+
+SWIDTH 0 0
+
+DWIDTH 98 0
+
+BBX 96 146 0 -146
+
+BITMAP
+
+000000000000000000000000
+
+000000000000000000000000
+
+000000000000000000000000
+
+000000000000000000000000
+
+000000000000000000000000
+
+000000000000000000000000
+
+000000000000000000000000
+
+000000000000000000000000
+
+000000000000000000000000
+
+000000000000000000000000
+
+000000000000000000000000
+
+000000000000000000000000
+
+000000000000000000000000
+
+0000000000da800000000000
+
+000000000a01500000000000
+
+000000005400040000000000
+
+0000000096800ba000000000
+
+000000022c0019d400000000
+
+00000004c0000bba00000000
+
+0000001454000817c0000000
+
+00000060a00005aaa0000000
+
+000001c5800006fd88000000
+
+000002028210066af2000000
+
+000002d7d5a4f5cbbd800000
+
+000008e57decbceca5800000
+
+000027add503b4b798000000
+
+000004befda02baca0180000
+
+00004fa7f3707b1680000000
+
+00008e7effe0e6d900040000
+
+0000d417ddf003a000020000
+
+00011a19be94d80000000000
+
+00013c1393d8a00000018000
+
+00036c03fefb800000018000
+
+0000de0777b400000000c000
+
+00048c0aa000000000042000
+
+0008480540000000000a2000
+
+000a40000000000000051000
+
+001080000000000000028800
+
+003480000000000000014c00
+
+00250000000000000000c200
+
+000500000000000000008200
+
+00220000000000000000e100
+
+00200000000000000000f900
+
+002400000000000000007d00
+
+00040000000000000000ec80
+
+00500000000000000000de40
+
+00480000000000000001fa40
+
+00080000000000000006fa40
+
+00a80000000000000007dbc0
+
+00f800000000000000068040
+
+00d000000000000000187b60
+
+00f0000000000000001e3a60
+
+00000000000000000039dc30
+
+004000000000000000155560
+
+0140000000000000001a7d30
+
+00400000000000000027e170
+
+00c0000000000000000e9f70
+
+018000000000000000086d20
+
+02000000000000000003f440
+
+01000000000000000001e9c0
+
+05000000000000000000f640
+
+02000000000000000000de40
+
+000000000000000000001fc0
+
+020000000000000000000f80
+
+040000000001002a048005c0
+
+020000001005a555db76dfc0
+
+00000000aa5fedb7ffffffc0
+
+0400000255afffffffffffc0
+
+02000015835ffff3faffffc0
+
+0200002a8000ffe5fdffffc0
+
+0000003500017fe3ffffff80
+
+0b0000aa801fbfe2ffffff80
+
+1000018501ff7fc1ffff7f80
+
+004000721fffffc0fbe16f00
+
+2e20000c3effff01f9e77f00
+
+3f000002fcfffe00b9c7ff00
+
+1e080001f373fe00fc0aff00
+
+3f840000c7e3fc00ffb4ff00
+
+3640000003c3f8007f07ff00
+
+004400010007f000ffffff00
+
+24580000001fe0007fffff00
+
+12280000007fe000a7ebbf00
+
+10780000293fc00076d7df00
+
+11300000056f80006fffff00
+
+00d000000be500003ed47f00
+
+08700000060000001836cf80
+
+08180000000000003c3b7f80
+
+04000000000004003605bf80
+
+0200000000000c001e00ff80
+
+010200000000380027016f80
+
+00040000000030001f003f80
+
+010200000000e0000f02bf80
+
+008000000000e0001b801f80
+
+004408000000e0000cc15d80
+
+000000000001f0001fc03f80
+
+002000000007ff80f5e05f80
+
+001e0000001ffffffffb7f00
+
+00000400003f1fffeb1eff00
+
+00000000003f8fffe48fef00
+
+00000000003e03f8034ffb00
+
+00040100007e000201a7ff80
+
+0002000000f8000100b3ee80
+
+0000400001f000020041df80
+
+0005004001c000000000fe80
+
+00008000028000000000fe80
+
+00018000010000000000a700
+
+000040080000004a4000ef00
+
+00008000000007ffe8002f00
+
+0001000000001fffff00ee00
+
+0001400000007c000b100e00
+
+000080000001f0001340fe00
+
+00008000000340000570ac00
+
+00000000000780000ffdfe00
+
+0000801000068000036cfa00
+
+00008000000e340018d7bc00
+
+000000080016880015aaf800
+
+00008000000db40011efe800
+
+000080200807a0000afaf000
+
+00008000100140000d6da800
+
+0000800808000000049ff000
+
+0000800004000000067f7000
+
+0000c000100000000364e000
+
+0000200004000000021f8000
+
+0000300014000000011fc000
+
+00003000000000000107c000
+
+000008000000000000048000
+
+00000c00800000000019c000
+
+000004020000000000098000
+
+00000700c0000000000f8000
+
+000001e080200000000f0000
+
+0000001f80000000011c0000
+
+00000007c020000000b00000
+
+000000003c00000005500000
+
+000000001ea0000002e00000
+
+000000000350000009600000
+
+0000000000e4000003800000
+
+00000000007f00000e000000
+
+00000000003f80001c000000
+
+00000000003fc000d8000000
+
+00000000000fe000f8000000
+
+000000000007f801f0000000
+
+000000000001fc0fe0000000
+
+0000000000007edfc0000000
+
+0000000000001fff80000000
+
+00000000000007fe00000000
+
+00000000000001f000000000
+
+ENDCHAR
+
+STARTCHAR C
+
+ENCODING -1 67
+
+SWIDTH 0 0
+
+DWIDTH 6 0
+
+BBX 11 11 -5 -6
+
+BITMAP
+
+1f00
+
+3f80
+
+7fc0
+
+ffe0
+
+ffe0
+
+ffe0
+
+ffe0
+
+ffe0
+
+7fc0
+
+3f80
+
+1f00
+
+ENDCHAR
+
+STARTCHAR D
+
+ENCODING -1 68
+
+SWIDTH 0 0
+
+DWIDTH 7 0
+
+BBX 15 16 -7 -1
+
+BITMAP
+
+1830
+
+1c70
+
+1ef0
+
+1bb0
+
+1930
+
+1830
+
+1830
+
+1830
+
+f83e
+
+783c
+
+3838
+
+1c70
+
+0ee0
+
+07c0
+
+0380
+
+0100
+
+ENDCHAR
+
+STARTCHAR E
+
+ENCODING -1 69
+
+SWIDTH 0 0
+
+DWIDTH 8 0
+
+BBX 16 6 -12 -3
+
+BITMAP
+
+0180
+
+03c0
+
+ffff
+
+ffff
+
+03c0
+
+0180
+
+ENDCHAR
+
+STARTCHAR F
+
+ENCODING -1 70
+
+SWIDTH 0 0
+
+DWIDTH 63 0
+
+BBX 62 40 0 -1
+
+BITMAP
+
+00000001fffffff8
+
+00000003fffffffc
+
+000000038000001c
+
+000000030000000c
+
+7fffffff0000000c
+
+ffffffff0000000c
+
+e00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+c00000000000000c
+
+fffffffffffffffc
+
+fffffffffffffffc
+
+ENDCHAR
+
+STARTCHAR G
+
+ENCODING -1 71
+
+SWIDTH 0 0
+
+DWIDTH 5 0
+
+BBX 3 11 -1 -6
+
+BITMAP
+
+e000
+
+e000
+
+e000
+
+e000
+
+e000
+
+e000
+
+e000
+
+e000
+
+e000
+
+e000
+
+e000
+
+ENDCHAR
+
+STARTCHAR H
+
+ENCODING -1 72
+
+SWIDTH 0 0
+
+DWIDTH 8 0
+
+BBX 15 15 -7 -8
+
+BITMAP
+
+0640
+
+1e70
+
+3e78
+
+7e78
+
+7e70
+
+fe66
+
+fe4e
+
+3e18
+
+fffe
+
+fffe
+
+7ffc
+
+7ffc
+
+3ff8
+
+1ef0
+
+06c0
+
+ENDCHAR
+
+STARTCHAR I
+
+ENCODING -1 73
+
+SWIDTH 0 0
+
+DWIDTH 5 0
+
+BBX 6 11 -3 -6
+
+BITMAP
+
+8000
+
+c000
+
+e000
+
+f000
+
+f800
+
+fc00
+
+f800
+
+f000
+
+e000
+
+c000
+
+8000
+
+ENDCHAR
+
+STARTCHAR J
+
+ENCODING -1 74
+
+SWIDTH 0 0
+
+DWIDTH 7 0
+
+BBX 7 13 -3 -7
+
+BITMAP
+
+1000
+
+3800
+
+7c00
+
+fe00
+
+3800
+
+3800
+
+3800
+
+3800
+
+3800
+
+fe00
+
+7c00
+
+3800
+
+1000
+
+ENDCHAR
+
+STARTCHAR K
+
+ENCODING -1 75
+
+SWIDTH 0 0
+
+DWIDTH 41 0
+
+BBX 39 48 0 -15
+
+BITMAP
+
+001ffffc0000
+
+007ffffc0000
+
+00fffffc0000
+
+00fffffc0000
+
+00fffffc0000
+
+00fc00000000
+
+00f800000000
+
+00f800000000
+
+00fc00000000
+
+00fffffc0000
+
+00fffffc0000
+
+f8fffffc7c00
+
+f87ffffc7c00
+
+f81ffffc7c00
+
+f80000007c00
+
+f80000007c00
+
+f80000007c00
+
+f81fffe07c00
+
+f87ffff87c00
+
+f8fffffc7c00
+
+f8fffffc7c00
+
+f8fcfcfc7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f8f8787c7c00
+
+f80000007c00
+
+f80000007c00
+
+fc000000fc00
+
+fffffffffc00
+
+7ffffffff800
+
+7ffffffff800
+
+3ffffffff000
+
+0fffffffc000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+000000000000
+
+ENDCHAR
+
+STARTCHAR L
+
+ENCODING -1 76
+
+SWIDTH 0 0
+
+DWIDTH 10 0
+
+BBX 19 19 -9 -10
+
+BITMAP
+
+03680000
+
+0b6c0000
+
+1b6d0000
+
+1b6d8000
+
+5b6d8000
+
+5b6dc000
+
+da6de000
+
+d26da000
+
+d26da000
+
+d26da000
+
+926d2000
+
+926d2000
+
+926d2000
+
+12690000
+
+12490000
+
+12490000
+
+12490000
+
+02480000
+
+02480000
+
+ENDCHAR
+
+STARTCHAR M
+
+ENCODING -1 77
+
+SWIDTH 0 0
+
+DWIDTH 4 0
+
+BBX 16 11 -15 -6
+
+BITMAP
+
+0060
+
+0070
+
+0078
+
+003c
+
+fffe
+
+ffff
+
+fffe
+
+003c
+
+0078
+
+0070
+
+0060
+
+ENDCHAR
+
+STARTCHAR N
+
+ENCODING -1 78
+
+SWIDTH 0 0
+
+DWIDTH 9 0
+
+BBX 31 23 -15 -12
+
+BITMAP
+
+00038000
+
+00038000
+
+00038000
+
+00038000
+
+00038000
+
+01038100
+
+01838300
+
+01c38700
+
+01e38f00
+
+fff39ffe
+
+fffbbffe
+
+fffffffe
+
+fffbbffe
+
+fff39ffe
+
+01e38f00
+
+01c38700
+
+01838300
+
+01038100
+
+00038000
+
+00038000
+
+00038000
+
+00038000
+
+00038000
+
+ENDCHAR
+
+STARTCHAR O
+
+ENCODING -1 79
+
+SWIDTH 0 0
+
+DWIDTH 9 0
+
+BBX 23 31 -11 -16
+
+BITMAP
+
+007c0000
+
+007c0000
+
+007c0000
+
+007c0000
+
+007c0000
+
+007c0000
+
+007c0000
+
+07ffc000
+
+03ff8000
+
+01ff0000
+
+00fe0000
+
+007c0000
+
+00380000
+
+00100000
+
+fffffe00
+
+fffffe00
+
+fffffe00
+
+00100000
+
+00380000
+
+007c0000
+
+00fe0000
+
+01ff0000
+
+03ff8000
+
+07ffc000
+
+007c0000
+
+007c0000
+
+007c0000
+
+007c0000
+
+007c0000
+
+007c0000
+
+007c0000
+
+ENDCHAR
+
+STARTCHAR P
+
+ENCODING -1 80
+
+SWIDTH 0 0
+
+DWIDTH 8 0
+
+BBX 29 14 -14 -7
+
+BITMAP
+
+01fffc00
+
+01fffc00
+
+00000000
+
+00020000
+
+00020000
+
+00020000
+
+00020000
+
+00124000
+
+000a8000
+
+00070000
+
+00020000
+
+00000000
+
+fff8fff8
+
+fff8fff8
+
+ENDCHAR
+
+STARTCHAR Q
+
+ENCODING -1 81
+
+SWIDTH 0 0
+
+DWIDTH 34 0
+
+BBX 50 52 -24 -26
+
+BITMAP
+
+0000040800000000
+
+00c18a1460c00000
+
+003a712397000000
+
+001c30c30e000000
+
+000c18c60c000000
+
+000618c618000000
+
+800618c618004000
+
+40030ccc30008000
+
+60030ccc30018000
+
+50018ccc60028000
+
+280187f860050000
+
+2400ffffc0090000
+
+2601ffffe0190000
+
+1383fffff0720000
+
+1107fffff8220000
+
+1307fffff8320000
+
+1603fffff01a0000
+
+160cffffcc1a0000
+
+0c1f3fff3e0c0000
+
+0c0fcffcfc0c0000
+
+0c33f3f3f30c0000
+
+0c3cfccfcf0c0000
+
+0c3f3f3f3f0c0000
+
+0c0fccccfc0c0000
+
+0c33f3f3f30c0000
+
+0c3ccccccf0c0000
+
+0c3f3f3f3f0c0000
+
+0c3ccccccf0c0000
+
+0c33f3f3f30c0000
+
+0c2fccccfd0c0000
+
+0c1f3f3f3e0c0000
+
+0c1cfccfce0c0000
+
+0e13f3f3f21c0000
+
+0a0fcffcfc140000
+
+0b0f3fff3c340000
+
+0b04ffffc8340000
+
+0981ffffe0640000
+
+08c0ffffc0c40000
+
+10e03fff01c20000
+
+11900ffc02620000
+
+130801e004320000
+
+120600c018120000
+
+240180c060090000
+
+280060c180050000
+
+23f81ffe07f10000
+
+5ffffffffffe8000
+
+801fc0c0fe004000
+
+0003f0c3f0000000
+
+0000780780000000
+
+00000f3c00000000
+
+000003f000000000
+
+000000c000000000
+
+ENDCHAR
+
+STARTCHAR R
+
+ENCODING -1 82
+
+SWIDTH 0 0
+
+DWIDTH 19 0
+
+BBX 16 11 0 -6
+
+BITMAP
+
+0600
+
+0e00
+
+1e00
+
+3c00
+
+7fff
+
+ffff
+
+7fff
+
+3c00
+
+1e00
+
+0e00
+
+0600
+
+ENDCHAR
+
+STARTCHAR S
+
+ENCODING -1 83
+
+SWIDTH 0 0
+
+DWIDTH 17 0
+
+BBX 20 32 -7 -21
+
+BITMAP
+
+00200000
+
+00200000
+
+00300000
+
+004c0000
+
+01820000
+
+02190000
+
+04840000
+
+01420000
+
+02920000
+
+01610000
+
+0a048000
+
+00e24000
+
+08120000
+
+12480000
+
+25010000
+
+08558000
+
+09084000
+
+12430000
+
+20228000
+
+25490000
+
+08828000
+
+114e4000
+
+26212000
+
+58888000
+
+a1099000
+
+22704000
+
+5469b000
+
+8864c000
+
+00600000
+
+00600000
+
+00600000
+
+00600000
+
+ENDCHAR
+
+STARTCHAR T
+
+ENCODING -1 84
+
+SWIDTH 0 0
+
+DWIDTH 7 0
+
+BBX 33 22 -17 -12
+
+BITMAP
+
+3f0000000000
+
+7b0000000000
+
+890030000000
+
+993ffff00000
+
+75e78f1e0000
+
+1bac8cf10000
+
+3fb8f73e8000
+
+36cfc3298000
+
+1b884cf98000
+
+1e5078d98000
+
+0d7fcf898000
+
+09d08f180000
+
+0850ff080000
+
+3ffff1040000
+
+404447c20000
+
+88c7fa290000
+
+ff3912190000
+
+c0091c090000
+
+000900090000
+
+001e000e8000
+
+000000018000
+
+000000010000
+
+ENDCHAR
+
+STARTCHAR U
+
+ENCODING -1 85
+
+SWIDTH 0 0
+
+DWIDTH 7 0
+
+BBX 15 16 -7 -16
+
+BITMAP
+
+0100
+
+0380
+
+07c0
+
+0ee0
+
+1c70
+
+3838
+
+701c
+
+f83e
+
+1830
+
+1830
+
+1830
+
+1930
+
+1bb0
+
+1ef0
+
+1c70
+
+1830
+
+ENDCHAR
+
+STARTCHAR V
+
+ENCODING -1 86
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 39 41 0 -41
+
+BITMAP
+
+000000040000
+
+0000040c0000
+
+0000060c0000
+
+0000071c0000
+
+0000079c0000
+
+000003dc0000
+
+000001fc0000
+
+000000ec0000
+
+000000740000
+
+0000003f0000
+
+0000007f8000
+
+00000079c000
+
+000000ffe000
+
+000000fff000
+
+000000fff000
+
+000000fff000
+
+000000ffe000
+
+000000ffc000
+
+001fffff0000
+
+007fffff0000
+
+00ffffff8000
+
+01ffffffc000
+
+03ffffffc000
+
+07ffffffc000
+
+cfffffffc000
+
+ffffffffc000
+
+fff7ffffc000
+
+fffbffff8000
+
+ffffffff0000
+
+7ffffffe0000
+
+1ffbfffc0000
+
+1ffffff40000
+
+1ff7ff7c0000
+
+dfe0003c0000
+
+efc0005f0000
+
+ffe0006f0000
+
+ff7000778000
+
+c07800738000
+
+c03c0039c000
+
+e01f001de000
+
+f00f801ef000
+
+ENDCHAR
+
+STARTCHAR W
+
+ENCODING -1 87
+
+SWIDTH 0 0
+
+DWIDTH 9 0
+
+BBX 36 29 -17 -10
+
+BITMAP
+
+000060000000
+
+0001f8000000
+
+00039c000000
+
+000606000000
+
+000606000000
+
+000c03000000
+
+001801800000
+
+001801800000
+
+003000c00000
+
+006000600000
+
+006000600000
+
+00c000300000
+
+018000180000
+
+018000180000
+
+0300000c0000
+
+060000060000
+
+060000060000
+
+0c8265f30000
+
+188294418000
+
+188294418000
+
+30449440c000
+
+6054f4406000
+
+606c94406000
+
+604494406000
+
+c00000003000
+
+c00000003000
+
+600000006000
+
+3fffffffc000
+
+1fffffff8000
+
+ENDCHAR
+
+STARTCHAR X
+
+ENCODING -1 88
+
+SWIDTH 0 0
+
+DWIDTH 9 0
+
+BBX 5 5 -2 -3
+
+BITMAP
+
+8800
+
+5000
+
+2000
+
+5000
+
+8800
+
+ENDCHAR
+
+STARTCHAR Y
+
+ENCODING -1 89
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 29 30 0 -30
+
+BITMAP
+
+00000000
+
+00000000
+
+00000000
+
+00000700
+
+00000f80
+
+00001f80
+
+00003f80
+
+00003f80
+
+00007f00
+
+0000fe00
+
+0000fc00
+
+0001f800
+
+0003f000
+
+0003e000
+
+0007c000
+
+000f8000
+
+000f0000
+
+001c0000
+
+00380600
+
+00700f00
+
+00e00f00
+
+01c00600
+
+03800000
+
+07000000
+
+0e000000
+
+7c000000
+
+38000000
+
+18000000
+
+08000000
+
+00000000
+
+ENDCHAR
+
+STARTCHAR Z
+
+ENCODING -1 90
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 39 39 0 -39
+
+BITMAP
+
+078000000000
+
+0fc000000000
+
+0fe000380000
+
+1fe0007e0000
+
+1fe000ef0000
+
+3fd000ff8000
+
+3fb800fdc000
+
+7f7800fd0000
+
+7ef8007d0000
+
+fdf7c07d8000
+
+fbeff03e8000
+
+fbdffc3e0000
+
+fbbfff1f0000
+
+fb7fffdf0000
+
+fb7ffb7f8000
+
+fafffeff8000
+
+faffdb6fc000
+
+fafff7dfc000
+
+faffdb6fe000
+
+faffbefbe000
+
+faffdb6fe000
+
+7bfff7dfe000
+
+3bfffb6fe000
+
+1fffffffe000
+
+1ffffb6fc000
+
+07fff7df4000
+
+0ffffb7e8000
+
+1ffffeff0000
+
+3ffffff60000
+
+3ffffff80000
+
+00ffffe00000
+
+01ffff000000
+
+03fffe000000
+
+07ffe1000000
+
+000020800000
+
+000020400000
+
+000038300000
+
+00005c5c0000
+
+000000000000
+
+ENDCHAR
+
+STARTCHAR [
+
+ENCODING -1 91
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 11 6 -5 -1
+
+BITMAP
+
+0e00
+
+3f80
+
+71c0
+
+e0e0
+
+c060
+
+c060
+
+ENDCHAR
+
+STARTCHAR \\
+
+ENCODING -1 92
+
+SWIDTH 0 0
+
+DWIDTH 7 0
+
+BBX 6 11 0 -1
+
+BITMAP
+
+8000
+
+8000
+
+4000
+
+4000
+
+2000
+
+2000
+
+1000
+
+1000
+
+0800
+
+0800
+
+0400
+
+ENDCHAR
+
+STARTCHAR ]
+
+ENCODING -1 93
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 11 5 -5 -6
+
+BITMAP
+
+c060
+
+e0e0
+
+71c0
+
+3f80
+
+0e00
+
+ENDCHAR
+
+STARTCHAR ^
+
+ENCODING -1 94
+
+SWIDTH 0 0
+
+DWIDTH 8 0
+
+BBX 7 11 0 -1
+
+BITMAP
+
+1000
+
+1000
+
+3800
+
+5400
+
+9200
+
+1000
+
+1000
+
+1000
+
+1000
+
+1000
+
+1000
+
+ENDCHAR
+
+STARTCHAR _
+
+ENCODING -1 95
+
+SWIDTH 0 0
+
+DWIDTH 9 0
+
+BBX 8 2 0 -2
+
+BITMAP
+
+ff00
+
+ff00
+
+ENDCHAR
+
+STARTCHAR `
+
+ENCODING -1 96
+
+SWIDTH 0 0
+
+DWIDTH 3 0
+
+BBX 26 15 0 -5
+
+BITMAP
+
+00000000
+
+00000000
+
+00000080
+
+00000140
+
+00000080
+
+00000000
+
+703803c0
+
+58100700
+
+5c101e00
+
+27fffc00
+
+07fff800
+
+03fff000
+
+01ffc000
+
+00ff8000
+
+003e0000
+
+ENDCHAR
+
+STARTCHAR a
+
+ENCODING -1 97
+
+SWIDTH 0 0
+
+DWIDTH 13 0
+
+BBX 13 13 0 -13
+
+BITMAP
+
+8000
+
+e000
+
+fe00
+
+fc00
+
+f000
+
+f800
+
+dc00
+
+8f00
+
+87c0
+
+03f8
+
+01f0
+
+00e0
+
+0040
+
+ENDCHAR
+
+STARTCHAR b
+
+ENCODING -1 98
+
+SWIDTH 0 0
+
+DWIDTH 8 0
+
+BBX 15 23 0 -17
+
+BITMAP
+
+0380
+
+07c0
+
+06c0
+
+8c62
+
+7c7c
+
+0c60
+
+1830
+
+9832
+
+783c
+
+1830
+
+1830
+
+8c62
+
+7c7c
+
+0c60
+
+06c0
+
+07c0
+
+0380
+
+07c0
+
+07c0
+
+0540
+
+0ba0
+
+1010
+
+2008
+
+ENDCHAR
+
+STARTCHAR c
+
+ENCODING -1 99
+
+SWIDTH 0 0
+
+DWIDTH 1 0
+
+BBX 42 42 -4 -42
+
+BITMAP
+
+000000000000
+
+000000000000
+
+000000000000
+
+004000000000
+
+016000000000
+
+016000000000
+
+00f000000000
+
+03f800000000
+
+07fc00000000
+
+0dfe00000000
+
+1ffe00000000
+
+3fff00000000
+
+3fff00000000
+
+3fff00000000
+
+1fff00000000
+
+0fff00000000
+
+01ff80000000
+
+01ffe0001c00
+
+01fffc003e00
+
+01fffe007f00
+
+01ffff007300
+
+01ffffc06100
+
+01ffffe06000
+
+01fffff07000
+
+00fffff83000
+
+00fffffc3800
+
+007fbdfc3800
+
+007ffefe1c00
+
+003f7f7e1c00
+
+003fffff0e00
+
+001f7fff0e00
+
+000fffff0700
+
+000effff0700
+
+000effff0700
+
+000effff0700
+
+000e7fff8700
+
+000e7fff8700
+
+000e3fffcf00
+
+000e1ffffe00
+
+001c1ffffe00
+
+003cfffefc00
+
+0039fffc7800
+
+ENDCHAR
+
+STARTCHAR d
+
+ENCODING -1 100
+
+SWIDTH 0 0
+
+DWIDTH 7 0
+
+BBX 21 15 -10 -4
+
+BITMAP
+
+e0000000
+
+a0000000
+
+a4104000
+
+ae38e000
+
+bb6db000
+
+b1c71800
+
+a0820800
+
+a0000800
+
+ae38e800
+
+ae38e800
+
+ae38e800
+
+ae38e800
+
+a0000800
+
+a0000800
+
+fffff800
+
+ENDCHAR
+
+STARTCHAR e
+
+ENCODING -1 101
+
+SWIDTH 0 0
+
+DWIDTH 7 0
+
+BBX 21 26 -10 -4
+
+BITMAP
+
+001c0000
+
+003e0000
+
+007e0000
+
+003c0000
+
+1c180000
+
+3e000000
+
+7e000000
+
+3c000000
+
+18000000
+
+00000000
+
+00000000
+
+e0000000
+
+a0000000
+
+a4104000
+
+ae38e000
+
+bb6db000
+
+b1c71800
+
+a0820800
+
+a0000800
+
+ae38e800
+
+aa28a800
+
+aa28a800
+
+ae38e800
+
+a0000800
+
+a0000800
+
+fffff800
+
+ENDCHAR
+
+STARTCHAR f
+
+ENCODING -1 102
+
+SWIDTH 0 0
+
+DWIDTH 8 0
+
+BBX 29 14 -29 -9
+
+BITMAP
+
+001ff000
+
+00fff800
+
+fff00c00
+
+ff83fff0
+
+6003fff8
+
+70000018
+
+3001fff8
+
+3801fff0
+
+18000c00
+
+1801fc00
+
+1fc1f800
+
+1fe06000
+
+007fe000
+
+003fc000
+
+ENDCHAR
+
+STARTCHAR g
+
+ENCODING -1 103
+
+SWIDTH 0 0
+
+DWIDTH 8 0
+
+BBX 15 15 -7 -8
+
+BITMAP
+
+0fe0
+
+3938
+
+610c
+
+4104
+
+c106
+
+8102
+
+8002
+
+fc7e
+
+8002
+
+8102
+
+c106
+
+4104
+
+610c
+
+3938
+
+0fe0
+
+ENDCHAR
+
+STARTCHAR h
+
+ENCODING -1 104
+
+SWIDTH 0 0
+
+DWIDTH 9 0
+
+BBX 16 16 -7 -9
+
+BITMAP
+
+0380
+
+0380
+
+0380
+
+0380
+
+0fe0
+
+07c0
+
+0380
+
+fffe
+
+fffe
+
+0380
+
+07c0
+
+0fe0
+
+0380
+
+0380
+
+0380
+
+0380
+
+ENDCHAR
+
+STARTCHAR i
+
+ENCODING -1 105
+
+SWIDTH 0 0
+
+DWIDTH 10 0
+
+BBX 14 20 -7 -11
+
+BITMAP
+
+fffc
+
+fffc
+
+c00c
+
+c00c
+
+c00c
+
+c00c
+
+c00c
+
+c00c
+
+c30c
+
+fffc
+
+fffc
+
+c00c
+
+c00c
+
+c00c
+
+c00c
+
+c00c
+
+c00c
+
+c00c
+
+fffc
+
+fffc
+
+ENDCHAR
+
+STARTCHAR j
+
+ENCODING -1 106
+
+SWIDTH 0 0
+
+DWIDTH 9 0
+
+BBX 8 16 0 -5
+
+BITMAP
+
+ff00
+
+ff00
+
+c300
+
+c300
+
+c300
+
+c300
+
+c300
+
+c300
+
+c300
+
+c300
+
+c300
+
+c300
+
+c300
+
+c300
+
+ff00
+
+ff00
+
+ENDCHAR
+
+STARTCHAR k
+
+ENCODING -1 107
+
+SWIDTH 0 0
+
+DWIDTH 3 0
+
+BBX 2 16 0 -5
+
+BITMAP
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+ENDCHAR
+
+STARTCHAR l
+
+ENCODING -1 108
+
+SWIDTH 0 0
+
+DWIDTH 5 0
+
+BBX 13 13 -12 -1
+
+BITMAP
+
+0018
+
+0018
+
+0018
+
+0018
+
+0018
+
+0018
+
+0018
+
+0018
+
+0018
+
+0018
+
+0018
+
+fff8
+
+fff8
+
+ENDCHAR
+
+STARTCHAR m
+
+ENCODING -1 109
+
+SWIDTH 0 0
+
+DWIDTH 8 0
+
+BBX 13 15 -6 -8
+
+BITMAP
+
+fff8
+
+fff8
+
+c218
+
+c218
+
+c218
+
+c218
+
+c218
+
+fff8
+
+c218
+
+c218
+
+c218
+
+c218
+
+c218
+
+fff8
+
+fff8
+
+ENDCHAR
+
+STARTCHAR n
+
+ENCODING -1 110
+
+SWIDTH 0 0
+
+DWIDTH 10 0
+
+BBX 22 19 -11 -9
+
+BITMAP
+
+00600000
+
+1e33c000
+
+31b46000
+
+42781000
+
+50002800
+
+a0202800
+
+81111400
+
+a3030400
+
+85269400
+
+af278400
+
+80701400
+
+80f80400
+
+a0001400
+
+86318400
+
+433f2800
+
+53f70800
+
+20e21000
+
+1c006000
+
+03ff8000
+
+ENDCHAR
+
+STARTCHAR o
+
+ENCODING -1 111
+
+SWIDTH 0 0
+
+DWIDTH 10 0
+
+BBX 16 15 -8 -8
+
+BITMAP
+
+0180
+
+07e0
+
+1818
+
+2004
+
+4002
+
+4c32
+
+8c31
+
+8181
+
+8181
+
+8001
+
+4002
+
+4422
+
+23c4
+
+1818
+
+07e0
+
+ENDCHAR
+
+STARTCHAR p
+
+ENCODING -1 112
+
+SWIDTH 0 0
+
+DWIDTH 7 0
+
+BBX 17 26 -10 -26
+
+BITMAP
+
+07ff8000
+
+08890000
+
+11120000
+
+11120000
+
+22240000
+
+22240000
+
+22240000
+
+44480000
+
+44480000
+
+44480000
+
+44480000
+
+44480000
+
+40080000
+
+fffc0000
+
+fffc0000
+
+fffc0000
+
+fffc0000
+
+fffc0000
+
+fffc0000
+
+03000000
+
+03000000
+
+03000000
+
+03000000
+
+03000000
+
+03000000
+
+03000000
+
+ENDCHAR
+
+STARTCHAR q
+
+ENCODING -1 113
+
+SWIDTH 0 0
+
+DWIDTH 9 0
+
+BBX 8 8 0 -1
+
+BITMAP
+
+7600
+
+7a00
+
+9900
+
+9900
+
+9900
+
+9900
+
+5e00
+
+6e00
+
+ENDCHAR
+
+STARTCHAR r
+
+ENCODING -1 114
+
+SWIDTH 0 0
+
+DWIDTH 0 0
+
+BBX 38 41 0 -41
+
+BITMAP
+
+000000000000
+
+000000000000
+
+000000000000
+
+000e60000000
+
+000f80000000
+
+000800000000
+
+000800000000
+
+000c00000000
+
+000c00000000
+
+000c00000000
+
+000c00000000
+
+000e00000000
+
+000d00000000
+
+000c80000000
+
+001480000000
+
+003440000000
+
+003440000000
+
+006420000000
+
+00a420000000
+
+00a410000000
+
+00a608000000
+
+012204000000
+
+012202000000
+
+012201000000
+
+022200800000
+
+022200400000
+
+022200200000
+
+042200100000
+
+042300080000
+
+041100040000
+
+041100020000
+
+040900010000
+
+040900008000
+
+040500004000
+
+0405000ff000
+
+03e503f00000
+
+003ffc000000
+
+000100000000
+
+01fffffc0000
+
+00fffff00000
+
+007fffc00000
+
+ENDCHAR
+
+STARTCHAR s
+
+ENCODING -1 115
+
+SWIDTH 0 0
+
+DWIDTH 4 0
+
+BBX 21 12 -16 -6
+
+BITMAP
+
+00000000
+
+7801f000
+
+fc07c000
+
+860f0000
+
+ff3c0000
+
+7bf00000
+
+00e00000
+
+7bf00000
+
+ff3c0000
+
+860f0000
+
+fc07c000
+
+7801f000
+
+ENDCHAR
+
+STARTCHAR t
+
+ENCODING -1 116
+
+SWIDTH 0 0
+
+DWIDTH 8 0
+
+BBX 14 16 2 -10
+
+BITMAP
+
+0018
+
+003c
+
+0038
+
+2828
+
+2a20
+
+aa40
+
+aa40
+
+ffc0
+
+ff80
+
+ff80
+
+db00
+
+7e00
+
+1800
+
+2400
+
+4200
+
+8400
+
+ENDCHAR
+
+STARTCHAR u
+
+ENCODING -1 117
+
+SWIDTH 0 0
+
+DWIDTH 9 0
+
+BBX 13 13 0 -13
+
+BITMAP
+
+fff8
+
+fff8
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+c000
+
+ENDCHAR
+
+STARTCHAR v
+
+ENCODING -1 118
+
+SWIDTH 0 0
+
+DWIDTH 9 0
+
+BBX 16 16 -7 -9
+
+BITMAP
+
+0180
+
+0180
+
+0180
+
+0180
+
+0990
+
+0db0
+
+ffff
+
+ffff
+
+ffff
+
+0db0
+
+0990
+
+0180
+
+0180
+
+0180
+
+0180
+
+0000
+
+ENDCHAR
+
+STARTCHAR w
+
+ENCODING -1 119
+
+SWIDTH 0 0
+
+DWIDTH 7 0
+
+BBX 15 16 -7 -9
+
+BITMAP
+
+0100
+
+0280
+
+0440
+
+0b20
+
+13d0
+
+20e8
+
+4064
+
+81c2
+
+4384
+
+2608
+
+1710
+
+0ba0
+
+0440
+
+0380
+
+0380
+
+0380
+
+ENDCHAR
+
+STARTCHAR x
+
+ENCODING -1 120
+
+SWIDTH 0 0
+
+DWIDTH 7 0
+
+BBX 15 15 -7 -8
+
+BITMAP
+
+8002
+
+4004
+
+2008
+
+1010
+
+0820
+
+0440
+
+0280
+
+0100
+
+0280
+
+0440
+
+0820
+
+1010
+
+2008
+
+4004
+
+8002
+
+ENDCHAR
+
+STARTCHAR y
+
+ENCODING -1 121
+
+SWIDTH 0 0
+
+DWIDTH 8 0
+
+BBX 32 37 1 -30
+
+BITMAP
+
+00000000
+
+00000000
+
+00000007
+
+00000003
+
+00000005
+
+00f83e08
+
+01044110
+
+020280a0
+
+04010040
+
+08010020
+
+10000010
+
+10000010
+
+10000010
+
+10000010
+
+10000010
+
+10000010
+
+10000010
+
+08000020
+
+08000020
+
+08000020
+
+04000040
+
+04040040
+
+02080080
+
+02100080
+
+01200100
+
+01400100
+
+00800200
+
+01400400
+
+02200800
+
+04101000
+
+08082000
+
+70044000
+
+10028000
+
+10010000
+
+00000000
+
+00000000
+
+00000000
+
+ENDCHAR
+
+STARTCHAR z
+
+ENCODING -1 122
+
+SWIDTH 0 0
+
+DWIDTH 16 0
+
+BBX 12 15 4 -8
+
+BITMAP
+
+00c0
+
+01e0
+
+0110
+
+0080
+
+0080
+
+0040
+
+0f40
+
+3fc0
+
+7fc0
+
+8f80
+
+0200
+
+0200
+
+0200
+
+0200
+
+0700
+
+ENDCHAR
+
+STARTCHAR \{
+
+ENCODING -1 123
+
+SWIDTH 0 0
+
+DWIDTH 6 0
+
+BBX 5 11 0 -1
+
+BITMAP
+
+2000
+
+2000
+
+2000
+
+2000
+
+2000
+
+2000
+
+2000
+
+a800
+
+7000
+
+2000
+
+2000
+
+ENDCHAR
+
+STARTCHAR |
+
+ENCODING -1 124
+
+SWIDTH 0 0
+
+DWIDTH 9 0
+
+BBX 7 5 -3 -5
+
+BITMAP
+
+1000
+
+3800
+
+7c00
+
+fe00
+
+ee00
+
+ENDCHAR
+
+STARTCHAR \}
+
+ENCODING -1 125
+
+SWIDTH 0 0
+
+DWIDTH 9 0
+
+BBX 8 5 0 2
+
+BITMAP
+
+0800
+
+0400
+
+ff00
+
+0400
+
+0800
+
+ENDCHAR
+
+STARTCHAR ~
+
+ENCODING -1 126
+
+SWIDTH 0 0
+
+DWIDTH 9 0
+
+BBX 8 5 0 2
+
+BITMAP
+
+1000
+
+2000
+
+ff00
+
+2000
+
+1000
+
+ENDCHAR
+
+ENDFONT
+
+
+\section{Auxiliary Software}
+
+
+\subsection{S1.  How can I get other useful software?}
+
+
+\leftindent{Enormous quantities of software are available for free from the 
+Internet.  Many of the programs are also available via electronic mail. 
+ Subsequent paragraphs list some software that may be of value as an 
+adjunct to the Andrew User Interface System.
+
+}
+\bold{archie - archive locator}
+
+\leftindent{A major source of information about the location of software on 
+the network is 'archie'.  Send mail to: \
+
+
+	\italic{archie@archie.rutgers.edu}
+
+
+In the body of the message include line(s) of the form:
+
+	\typewriter{\smaller{prog   name}}
+
+where name is the name of the software you would like to find out about.  \
+
+
+
+For more information, the body can contain the line:
+
+	\typewriter{\smaller{help}}
+
+
+The listing returned from a 'prog' request will list ftp sites containing 
+information with the name you gave.  A site with a name ending in .com, 
+.edu, or .gov will be in the United States and will be the best place to 
+try.
+
+}
+\bold{ftp - file transfer package}
+
+\leftindent{To retrieve information via ftp over the Internet, give the 
+command: \
+
+
+	\typewriter{\smaller{ftp <site name>}}
+
+
+The response will ask for your login;  reply:
+
+	\typewriter{\smaller{anonymous}}
+
+the response will ask for your email address;  type it in.  Now you can 
+give the help command to see the commands, such as \typewriter{\smaller{ls, 
+dir, cd, lcd, pwd,}} and \smaller{\typewriter{get}}.
+
+}
+\bold{on the ATK cd-rom}
+
+\leftindent{Some useful non-Andrew software is included in the Andrew 
+CD-rom.  For details see subsequent paragraphs.
+
+	binaries only:  X11 for RS6000, Sun 4, Dec Pmax, and HP700
+
+	binaries and source:  metamail imake makedepend patch
+
+	source only: ispell, psroff, pbmplus
+
+}
+\bold{X Windows System:  X11, imake, makedepend, patch}
+
+\leftindent{Screen management and graphics software
+
+Binaries on cdrom in <system>/X11/...
+
+Bdf fonts  on cdrom in  src/util/bdffonts
+
+imake, makedepend, and patch
+
+	source on cdrom in src/util/...
+
+	objects on cdrom in <system>/util/...
+
+ftp: ftp.x.org and numerous other sites (see archie)
+
+newsgroup: comp.windows.x \
+
+
+mail address:
+
+	\italic{The X Consortium
+
+	One Memorial Drive
+
+	PO Box 546
+
+	Cambridge, MA  02142-0004
+
+	tel: (617) 374-1000
+
+}}
+\bold{metamail}
+
+Converter for implementing MIME multi-media internet standard.
+
+	source: $ATKSRC/overhead/mail/metamail
+
+
+The MIME FAQ is available from:
+
+ 	ftp://ics.uci.edu/mh/contrib/multimedia/mime-faq.txt.gz
+
+
+If you want to obtain a copy of the metamail software, please get it from:
+
+	ftp://thumper.bellcore.com/pub/nsb/mm2.7.tar.Z
+
+There are lots of other metamail-related goodies there, too.
+
+
+If you want a copy of the MIME standard itself, you can find it in the \
+
+
+Internet standards documents RFC 1521 and RFC 1522
+
+
+If you don't know how to find Internet RFC's, you can ftp them from:
+
+	nis.nsf.net, nisc.jvnc.net, venera.isi.edu, wuarchive.wustl.edu, \
+
+
+	src.doc.ic.ac.uk, ftp.concert.net, ftp.nisc.sri.com, and nic.ddn.mil.
+
+
+MIME-WWW testing is available on the web at
+
+	URL http://www-dsed.llnl.gov/documents/WWWtest.html
+
+
+For MIME and metamail discussions you might also consult the mailing list:
+
+	info-mime[-request]@cs.utk.edu.
+
+which is also available as the comp.mail.mime newsgroup.
+
+
+	contact: Nathaniel Borenstein
+
+	email:\italic{ nsb@nsb.fv.com}
+
+
+\bold{pbmplus}
+
+	Portable bit map conversion and transformation software
+
+	version in cdrom:/src/util/pbmplus is from   10 December 1991
+
+\indent{\indent{contact: Jef Poskanzer
+
+email:\italic{ jef@well.sf.ca.us}
+
+}}
+\bold{psroff}
+
+	Software augmenting troff and providing printer drivers.
+
+	on cdrom: src/util/psroff  is version 3.0 patch level 07
+
+\indent{\indent{contact:  Chris Lewis
+
+email: \italic{psroff-request@ferret.ocunix.on.ca}
+
+}}
+\bold{ispell}  \
+
+
+	version on cdrom in src/util/ispell is 2.0.02
+
+		updated with a bigger dictionary
+
+	new version 3.0.09 is available (technically a beta version).
+
+	As of Jan 1994, it can be FTP'd from ftp.cs.ucla.edu, in /pub/ispell. \
+
+
+	a version called 4.0 is available from GNU (see below), but it is
+
+	actually less featured than 3.0.09. (See FAQ item S3.)
+
+\indent{\indent{contact: Geoff Kuenning
+
+email:  \italic{geoff@ITcorp.com}
+
+}}
+\bold{GNU software: groff, g++, gcc, gdb, gnuemacs, ... }\leftindent{\
+
+
+Free software, eventually replacing Un*x
+
+\indent{Free Software Foundation, Inc.
+
+675 Massachusetts Avenue
+
+Cambridge, MA  02139
+
+USA
+
+tel:  617-876-3296
+
+}	email:\italic{ gnu@prep.ai.mit.edu}
+
+	ftp: prep.ai.mit.edu
+
+	see pub/gnu/GNUinfo/FTP
+
+	and pub/gnu/etc/DISTRIB
+
+	}\
+
+
+\bold{transcript (psdit)}
+
+	\indent{	\italic{\indent{Adobe
+
+1585 Charleston Road
+
+P.O. Box 7900
+
+Mountain View, CA 94039-7900
+
+tel: 1-800-833-6687}
+
+}}
+\bold{Documenter's WorkBench}
+
+	AT&T / NCR Computer Division
+
+	tel: 1-800-225-5627
+
+\indent{\indent{\italic{contact: Gary Wagner
+
+tel: 513 445 1475
+
+}}}
+\bold{RTF Specification}
+
+	To receive the most up-to-date copy of the RTF specification,  contact:
+
+
+	\italic{\indent{Microsoft Corporation
+
+Department: RTF
+
+16011 NE 36th Way
+
+Box 97017
+
+Redmond, WA 98073-9717
+
+}}
+\subsection{S2.  How can I use PostScript fonts other than those defined in 
+/usr/andrew/X11fonts both in displayed and printed documents?}
+
+\indent{
+There are two aspects to this problem: screen display and print display.
+
+
+Screen Display}: \
+
+
+
+\indent{To have your own fonts used by ATK applications for displaying text 
+you must first create those fonts and place them in a directory, possibly 
+set up a fonts.alias file, run mkfontdir to get a fonts.dir file, and 
+finally add that directory to your X fontpath.  Also, you'll have to 
+specify in your preferences file the fontname:}\leftindent{
+
+
+ez.bodyfont: myfont12
+
+
+}	Print Display: \
+
+
+
+\leftindent{To get these fonts to print you have to create the appropriate 
+troff device-specific font description files (see /usr/lib/font/devpsc for 
+the Postscript fonts).  Furthermore, you'd have to alter the ATK-to-troff 
+text translator (../andrew/atk/text/txtroff.c) to recognize your new font 
+family and to make the appropriate mapping from your fontname to the troff 
+fontname.  Currently, the only fonts used for printing are Times, 
+Helvetica, and Courier.}
+
+\bold{\bold{
+}}\subsection{S3.  How do I use the spell checker function in ez?  }\
+
+
+
+\leftindent{If \italic{ispell}, the spelling checker used by \italic{ez}, 
+is not available at your site or is not along your path, ez will not be 
+able to perform this function.  \italic{ispell} is widely available (e.g. 
+via anonymous FTP from uunet.uu.net). All an installer has to do to get 
+\italic{ez} spell checking to work is to install ispell somewhere along the 
+user's path. The following .atkinit line will then be useful:
+
+
+\leftindent{\typewriter{\smaller{addmenu "spell-check-document" 
+"Search/Spell~1,Check Spelling~30" textview}}
+
+
+}Try to find either\italic{ ispell} version 2.0.02 or the newer version 
+3.0.09. (As of Jan 1994, 3.0.09 could be FTP'd from ftp.cs.ucla.edu, in 
+/pub/ispell.) \italic{ ispell} version 4.0 (the version released by the 
+Free Software Foundation (FSF)) is missing a few features.  If you use the 
+standard distribution of \italic{ispell 4.0}, \italic{ez} will not be able 
+to add words to your private dictionary, or accept words for the rest of 
+the session. \
+
+
+
+If you wish to use \italic{ispell 4.0} anyway, the following patch will add 
+the required functionality. (Use this only on \italic{ispell 4.0}, not any 
+other version.) If you recompile \italic{ispell 4.0} with this patch, 
+Andrew will use it and work correctly. The patched\italic{ ispell} must, of 
+course, be earlier than any other version of \italic{ispell} in your shell 
+path.
+
+
+-------------------------------------
+
+\smaller{\leftindent{\smaller{*** ../ispell-4.0/screen.c	Mon May 31 
+19:45:29 1993
+
+--- screen.c	Tue Jan 11 14:50:25 1994
+
+***************
+
+*** 845,850 ****
+
+--- 845,862 ----
+
+        if (verbose && len == 0)
+
+  	continue;
+
+  \
+
+
++       if (buf[0] == '*' || buf[0] == '@')
+
++         \{
+
++ 	  /* allow * and @ commands, which are
+
++ 	   used by the ATK spellchecker */
+
++ 	  (void) p_enter(buf + 1, 1, buf[0] == '*'); \
+
+
++ 	  if (verbose) \
+
+
++ 	    (void) printf ("ok\\n"); \
+
+
++ 	  else \
+
+
++ 	    (void) printf ("*\\n"); \
+
+
++ 	  continue; \
+
+
++         \}
+
++ \
+
+
+        if (good (buf, strlen (buf), 0))
+
+  	\{
+
+  	  /* used to print + if rootword */
+
+}}}-------------------------------------
+
+This patch has been submitted to the FSF.
+
+}
+\subsection{S4.  How do I debug Andrew applications?  }\
+
+
+
+\leftindent{In order to debug Andrew applications you will need to have gdb 
+version 3.5 or greater from the Free Software Foundation.    See FAQ item} 
+Q11 for the group's contact information.
+
+
+\leftindent{To compile the system such that symbol tables exist add these 
+two lines to your site.mcr:
+
+
+       \typewriter{\smaller{ CDEBUGFLAGS = -g
+
+     MAKEDODEBUG = -g
+
+}}
+To debug the raster application, first load the statically-linked portion 
+of the ATK run-time system, called runapp, into gdb. It is important that 
+the above make.1 macros are set to include the -g switch so that the symbol 
+table is created. It is no use attempting to use gdb if the system has not 
+been built with the -g switch.
+
+
+% \bold{gdb runapp}
+
+GDB, Copyright (C) 1987 Free Software Foundation, Inc.
+
+There is ABSOLUTELY NO WARRANTY for GDB; type "info warranty" for details.
+
+GDB is free software and you are welcome to distribute copies of it
+
+ under certain conditions; type "info copying" to see the conditions.
+
+Reading symbol data from runapp...
+
+done.
+
+Type "help" for a list of commands.
+
+(gdb) \bold{run -d ezapp foo.ras -d}
+
+Starting program: runapp -d ezapp foo.ras -d
+
+Starting ez (Version 7.0, ATK 15.0); please wait...
+
+ raster: text = 0x10046594  data = 0x10049280  entry = 0x100498a8
+
+ rasterview: text = 0x1004f820  data = 0x1005cc60  entry = 0x1005f8d8
+
+ rasterimage: text = 0x1006701c  data = 0x100675d0  entry = 0x10067810
+
+ pixelimage: text = 0x1006e758  data = 0x100703bc  entry = 0x1007068c
+
+
+To load the symbol table for the \bold{raster} dynamic object you would use 
+this command on a Sun or a DECstation 
+3100\footnote{\
+\begindata{fnote,537938184}
+\textdsversion{12}
+the distributed version of gdb does not yet support ATK applications on the 
+DS3100, but will do so in the very near future (1/15/91)\
+\enddata{fnote,537938184}
+\view{fnotev,537938184,3,0,0}}:
+
+(gdb)\bold{ add-file raster.dog 0x10046594}
+
+
+and on an RT:
+
+(gdb) \bold{set-rel 0x10046594}
+
+(gdb) \bold{add-file raster.dog}
+
+
+Note that the addresses passed to these gdb commands come from the text 
+address that runapp outputs when the -d switch is used (the second -d 
+switch prevents runapp from forking itself to become an orphaned process). 
+To determine which module to load in the fashion described above, compare 
+the various text addresses with the address at which the program failed. 
+For example, if the program died at address 0x1004a520 you would find that 
+address between what was reported as the start of the text segments for 
+raster and rasterview. Since the raster module was loaded first, we can 
+conclude that the failure was somewhere in the raster module.}
+
+
+\subsection{S5.  Why can't ez find ispell when I know it's installed? }\
+
+
+
+\indent{\italic{ispell} must be on your path in order for \italic{ez} to 
+find it.  \
+
+
+}
+\bold{S6\bold{.   \leftindent{Is the}}}\bold{\leftindent{re any way to 
+adopt the sendmail program to PGP?} }\
+
+
+
+\indent{PGP (Pretty Good Privacy) is a program that gives your electronic 
+mail something that it otherwise doesn't have: privacy. It does this by 
+encrypting your mail so that nobody but the intended person can read it. 
+When encrypted, the message looks like a meaningless jumble of random 
+characters. PGP has proven itself quite capable of resisting even the most 
+sophisticated forms of analysis aimed at reading the encrypted text.  The 
+FAQ on PGP is available via ftp on ftp.prairienet.org in 
+/pub/providers/pgp/pgpfaq.txt.  \
+
+
+
+}\leftindent{PGP may be used with Andrew by adopting the sendmail program 
+to it.  The following code comes to you with no support whatsoever...it has 
+not been fully tested.
+
+
+For viewing mail, use the following mailcap entries:
+
+	application/x-pgp; decode-pgp %s ; needsterminal
+
+	application/pgp; decode-pgp %s ; needsterminal
+
+
+Where the "decode-pgp" program looks something like this:
+
+	#!/bin/csh -f
+
+	set viewprog=more
+
+	if ($#argv > 1) then
+
+    		set viewprog=metamail
+
+	endif
+
+	set prog="pgp"
+
+	set infile=$1
+
+	pgp $1 -o /tmp/outputfile.$$ |& tee /tmp/shotputfile.$$
+
+	set PS=`grep "^Good signature from user " /tmp/shotputfile.$$ | sed -e
+
+	's%^Good signature from user "\\(.*\\)".$%\\1%'`
+
+	setenv PGP_SIGNATURE "$PS"
+
+
+	$viewprog /tmp/outputfile.$$
+
+	rm /tmp/*putfile.$$
+
+
+Note that the above is only directly useful when people send encrypted
+
+mail with the right content-type.  If they don't, however, the following
+
+.messagesinit or .sendmessageinit entry might help:
+
+
+	addmenu messages-different-content-type "Custom~99,Application/x-pgp~52"
+
+	messages messages inherit "application/x-pgp"
+
+
+For composing pgp mail, use the X-Encrypt-For header.  First, set
+
+the following in the AndrewSetup file:
+
+	Oldsendmailprogram: /home/nsb/bin/encrypt-to
+
+
+Then, use special menus such as the following, configured from
+
+.messagesinit and/or .sendmessageinit (all one line):
+
+
+	addmenu sendmessage-compound-operation "Request-Encryption~41,For
+
+	Carlyn~60" sendmessage sendmessage inherit "sendmessage-add-header
+
+	X-Encrypt-For: lowery"
+
+
+and here is the encrypt-to program:
+
+
+	#!/bin/csh -f
+
+
+	# I really shouldn't do any encryption at all if there's no X-Encrypt-For \
+
+
+	# header, but that's not a big deal.
+
+
+	set prog="xterm -e pgp"
+
+	# set prog="pgp"
+
+
+	cat > /tmp/infile.$$.raw
+
+	/home/nsb/bin/rencap "application/pgp; format=mime" > /tmp/infile.$$ <
+
+	/tmp/infile.$$.raw
+
+	set encfor=`grep X-Encrypt-For /tmp/infile.$$`
+
+	if ("$encfor" == "") then
+
+   		 cp /tmp/infile.$$.raw /tmp/infile.$$
+
+	else
+
+ 	   shift encfor
+
+ 	   set sender=`whoami`
+
+	    $prog -esa /tmp/infile.$$.raw $encfor $sender -u $sender
+
+	    cat /tmp/infile.$$.raw.as* >> /tmp/infile.$$
+
+	endif
+
+	/usr/lib/sendmail -t  < /tmp/infile.$$
+
+	rm /tmp/infile.$$* \
+
+
+
+And here's the C source for my "rencap" program:
+
+	#include <stdio.h>
+
+	#include <ctype.h>
+
+
+	#define DISP_PASSTHRU 1
+
+	#define DISP_PUSHDOWN 2
+
+
+	extern char *malloc(), *realloc();
+
+
+	main(argc, argv)
+
+	int argc;
+
+	char **argv;
+
+	\{
+
+	    char Buf[2000], *PushDown = NULL;
+
+	    int SawSomething=0, Disposition=DISP_PASSTHRU, PushDownAlloced;
+
+  	  char *ct = NULL;
+
+
+  	  if (argc > 1) \{
+
+		ct = "application/pgp; format=mime";
+
+  	  \}
+
+ 	   PushDownAlloced = 2000;
+
+  	  PushDown = malloc(PushDownAlloced+1);
+
+   	 if (!PushDown) exit(-1);
+
+ 	   *PushDown = NULL;
+
+  	  while (fgets(Buf, sizeof(Buf), stdin) != NULL) \{
+
+		if (Buf[0] == '\\n') break;
+
+		if (SawSomething && isspace(Buf[0])) \{
+
+		    /* Leave Disposition as it was */
+
+		\} else \{
+
+		    if (!strncmp(Buf, "Content-", 8) || !strncmp(Buf, "content-", 8)) \{
+
+			Disposition = DISP_PUSHDOWN;
+
+		    \} else \{
+
+			Disposition= DISP_PASSTHRU;
+
+		    \}
+
+		\}
+
+		SawSomething=1;
+
+		if (Disposition == DISP_PASSTHRU) \{
+
+		    fputs(Buf, stdout);
+
+		\} else \{
+
+		    if ((strlen(PushDown) + strlen(Buf)) > PushDownAlloced) \{
+
+			PushDownAlloced += 2000;
+
+			PushDown = realloc(PushDown, PushDownAlloced);
+
+			if (!PushDown) exit(-1);
+
+		    \}
+
+		    strcat(PushDown, Buf);
+
+		\}
+
+	    \}
+
+ 	   fprintf(stdout, "Content-type: %s\\n\\n", ct ? ct : "message/rfc822");
+
+	    if (!ct) \{
+
+		fputs(PushDown, stdout);
+
+		fputs("\\n", stdout);
+
+		free(PushDown);
+
+		while (fgets(Buf, sizeof(Buf), stdin) != NULL) \{
+
+		    fputs(Buf, stdout);
+
+		\}
+
+	    \}
+
+	    exit(0);
+
+	\}
+
+
+When using the Andrew Message Delivery System (AMDS) in conjunction with 
+the Andrew Message System,  the "encrypt-to" and "Oldsendmail" solutions 
+will not necessarily work. Try this encryption facility based on these 
+.*init additions:
+
+
+\literal{\typewriter{\smaller{addmenu filter-filter-region "File,Textview 
+Filter~91" textview filter noinherit
+
+addmenu sendmessage-add-header "Custom~99,Application/x-pgp~52" sendmessage 
+sendmessage inherit "Content-Type: application/x-pgp"
+
+}}}
+Compose the message, choose "Application/x-pgp" from the "Custom" header, 
+select the body of the message, choose "Textview Filter" from the "File" 
+menu and enter the command "pgp-to recipient":
+
+
+\literal{\typewriter{\smaller{#!/bin/sh
+
+
+cat > /tmp/infile.$$.raw
+
+xterm -e pgp -seat /tmp/infile.$$.raw $\{1+"$@"\}
+
+cat /tmp/infile.$$.raw.asc
+
+rm /tmp/infile.$$*
+
+}}}
+An alternative is to put this all together into a single custom menu, using 
+the -compound features.
+
+
+addmenu sendmessage-compound-operation "Encrypt~41,For nsb~99"
+
+sendmessage sendmessage inherit "sendmessage-bodies-textview-compound
+
+untyped-bodies-textview-compound textview-beginning-of-text;
+
+sendmessage-bodies-textview-compound untyped-bodies-textview-compound
+
+textview-ctrl-at; sendmessage-bodies-textview-compound
+
+untyped-bodies-textview-compound textview-end-of-text;
+
+sendmessage-bodies-textview-compound untyped-bodies-textview-compound
+
+textview-select-region; sendmessage-bodies-textview-compound
+
+untyped-bodies-textview-compound
+
+untyped-filter-filter-region-thru-command filter-pgp nsb yes;
+
+sendmessage-add-header Content-type: application/x-pgp"
+
+
+Here's the "filter-pgp" script:
+
+
+	#!/bin/csh -f
+
+
+	if ($#argv > 1) then
+
+		set prog="xterm -e pgp"
+
+	else
+
+		set prog="pgp"
+
+	endif
+
+
+	# The following eliminates the long lines, but also the inter-paragraph 
+lines
+
+	#cat > /tmp/rawfile.$$
+
+	#ezview -p /tmp/rawfile.$$ > /tmp/infile.$$
+
+	cat > /tmp/infile.$$
+
+
+	set recip="$1"
+
+	set sender=`whoami`
+
+	$prog -esa /tmp/infile.$$ $recip $sender -u $sender
+
+	cat /tmp/infile.$$.asc
+
+	rm /tmp/infile.$$* /tmp/rawfile.$$}
+
+
+
+_________________
+
+\bigger{\bold{\section{\smaller{Using Andrew}}}}
+
+
+This section has been extracted from a larger FAQ file maintained at 
+Carnegie Mellon University.  Its permission information reads:
+
+
+\italic{\indent{Everything in this file is public domain. You can copy it, 
+mail it to people, put bits of it in other files, print it out in 500-point 
+type and staple it to the walls, whatever you want -- I'm happy to give you 
+the opportunity, and I couldn't do a thing about it if I wanted to. Thanks 
+to the multiple people who provided me with questions and 
+answers.}}\smaller{
+
+}
+\italic{Customizing your Account}\section{
+
+}
+\bold{C1. \bold{How }}\bold{can I customize my Andrew account?
+
+}
+\leftindent{For info on your preferences file:
+
+
+\typewriter{	help preferences}   (or \typewriter{help prefs})\typewriter{
+
+}}
+\bold{C2.}\bold{ \bold{I }}\bold{edited my .cshrc, but now I get strange 
+errors when I start \italic{typescript}}, or\bold{
+
+I edited my .login, but now I get strange errors when I log in}, or\bold{
+
+I edited my .plan, but now I get strange symbols when I \italic{finger} 
+myself}, or\bold{
+
+I edited my .Xresources, but now I get strange errors when I start X}, 
+or\bold{
+
+I edited this file, but now I get strange errors....
+
+}
+\leftindent{If you use \italic{ez} to edit your .plan, .login, .logout, 
+preferences, .cshrc, .Xresources, .Xclients, .Xmodmap, .signature, or any 
+file like that: you \italic{must} get rid of any styles you put in. You 
+can't have sections of bold, or typewriter, or italics, or different text 
+sizes, or indentation. (Not even in your .plan file or .signature, although 
+that would be nice.) Use "Plainest" on the whole file if you have to.
+
+}
+\italic{Playing with ATK Things}\section{
+
+}
+\bold{T1.	How do I customize an ATK program?
+
+
+}\leftindent{See the help file on it. The ATK help files are more friendly 
+than average; lots of examples, no words over two syllables, etc.
+
+}
+\bold{T2.	How do I change the behavior, fonts, and so on in ATK windows and 
+menus?
+
+
+}\leftindent{Most of these are controlled by preferences:
+
+\typewriter{	help preferences
+
+	help menubar
+
+}The lines described in these help files go in your \italic{preferences} 
+file. For example, \
+
+
+\typewriter{	*.Thumbscroll: yes
+
+}will cause the text in any ATK window to swoop up and down when you wiggle 
+the scroll bar.
+
+\typewriter{	typescript.Thumbscroll: yes
+
+}will cause that to happen only in \italic{typescript} windows.
+
+
+A major exception is the appearance of the pop-up menus you get when you 
+press and hold the middle button. These are controlled by X resources (when 
+you are running X.)
+
+\typewriter{	help cmenu
+
+}The resources described in this help file go in your \italic{.Xresources} 
+file. \
+
+
+\typewriter{	*TitleFont: andysans22b
+
+}will cause your menu card titles to be printed in a 22-point bold 
+sans-serif font. \
+
+
+\typewriter{	help*TitleFont: andysans22b
+
+}will cause that to happen only in \italic{help} windows.
+
+(Notice the format of an \italic{.Xresources} entry is different from a 
+\italic{preferences} entry.)
+
+}
+\bold{T3.	I have a color display.  Can I get windows in colors other than 
+black and white?
+
+}
+\leftindent{Yes, set the colors in your preference file with lines like 
+this:
+
+
+\leftindent{# darker blue on lighter tan.  tan good.  (blue not really dark 
+enough)
+
+ez.foregroundcolor: #003ea2
+
+ez.backgroundcolor: wheat
+
+}
+For colors you can run \italic{xcolorpick} or edit the file 
+/usr/lib/X11/rgb.txt.   Color names are recognized by X only if they are in 
+rgb.txt.
+
+If you want colors just for one execution of a program, you can set them on 
+the command line:
+
+	typescript -fg black -bg burlywood
+
+
+Here's a technique for setting color preferences based on the value of the 
+environment variable ISCOLOR, which you can set in your .login file as 
+follows:  \
+
+
+
+\leftindent{set TTY = `tty`
+
+if ($TTY == /dev/console || \\
+
+	$TTY == /dev/hft/0 || \\
+
+	$TTY == /dev/ttyaed || \\
+
+	$TTY == /dev/ttyapa16 || \\
+
+	$TTY == /dev/ttyap16 || \\
+
+	$TTY == /dev/tty8514 || \\
+
+	$TTY == /dev/pty/ttyse || \\
+
+	$TTY == /dev/ttymono) then
+
+	set consolelogin = 1
+
+	echo -n "Color display? [y/n]: "
+
+	set answer = $<
+
+	if ($answer" =~ [Yy]*) then
+
+		setenv ISCOLOR 1
+
+		echo "color console login"
+
+	else
+
+		echo "console login"
+
+	endif
+
+	unset answer
+
+endif}
+
+
+You can then reference this variable in your preferences file: \
+
+
+
+\leftindent{?E=ISCOLOR=1:ez.backgroundcolor: antiquewhite1
+
+?E=ISCOLOR=1:console.backgroundcolor: cornsilk
+
+?E=ISCOLOR=1:typescript.backgroundcolor: cornsilk3
+
+?E=ISCOLOR=1:help.backgroundcolor: cornsilk3
+
+?E=ISCOLOR=1:messages.backgroundcolor: cornsilk2
+
+?E=ISCOLOR=1:bush.backgroundcolor: #e5d7c6
+
+}}
+\bold{T4.  \bold{How }}\bold{do I add styles to ATK documents?
+
+
+}\typewriter{\leftindent{	help ez-styles
+
+}}
+\bold{T5.	How do I add tables of contents and footnotes to ATK documents?
+
+
+}\typewriter{\leftindent{	help ez-contents
+
+	help ez-footnotes
+
+}}
+\bold{T6. \bold{H}}\bold{ow do I adjust line spacing and margins in ATK 
+documents?
+
+
+}\leftindent{\typewriter{	help ez
+
+
+}and scroll down to "Formatting text: line spacing and margins".
+
+}
+\bold{T7. }\bold{What keystroke commands work in ATK programs?
+
+
+}\leftindent{\typewriter{	help ez-keys
+
+
+}Notice that most gnu-emacs keys work in ATK programs. \
+
+
+}
+\bold{T8. \bold{How}}\bold{ do I work with multiple ez windows or multiple 
+buffers?
+
+
+}\typewriter{\leftindent{	help ez-buffers
+
+}}
+\bold{T9. \bold{Ho}}\bold{w do I remove ATK formatting from an ATK 
+document, to turn it into plain text?
+
+
+}\leftindent{The easy way is to edit it with \italic{ez}, select 
+(highlight) the entire document, and select "Plainest". \
+
+
+This will not work if the document has pagebreaks, footnotes, or insets 
+(such as embedded rasters.)
+
+If you don't want to start up \italic{ez}, you can use \italic{ez2ascii}:
+
+\typewriter{	ez2ascii filename
+
+}
+Another alternative is to type
+
+\typewriter{	rtfm -f filename
+
+}This produces output with terminal formatting. It will look ok in an 
+xterm, and underlining and boldface will show up correctly. However, it 
+will fail nastily in a typescript, or if you put the output in a file and 
+edit it. \
+
+
+
+For more info, see
+
+\typewriter{	help ez2ascii
+
+	help rtfm
+
+}}
+\bold{T10. \bold{H}}\bold{ow can I write my own \italic{console} layout?
+
+
+}\leftindent{\typewriter{	help lacc
+
+
+}The publically-available console layouts are in /usr/local/lib/consoles. 
+If you want to write your own, it's best to start with one of these and 
+modify it.
+
+
+Once you've written your console layout file, add this line to your 
+preferences:
+
+\typewriter{	console.default: consolefilename
+
+}where consolefile is a full pathname (no ~'s), for example
+
+/afs/andrew/usr99/userid/layoutfile
+
+}
+\bold{T11. \bold{What}}\bold{ is a help search path?
+
+
+}\leftindent{Look at
+
+\typewriter{	help preferences
+
+}and scroll down to "Help preferences." (Redundant, aren't I? And 
+repetitive.)
+
+The default help search path includes the help directories for all the 
+standard Andrew programs, and everything in /usr/contributed. To add, for 
+example, the help directory for the Computer Club's programs, you would add 
+this line to your preferences:
+
+\typewriter{	help.searchpath: /afs/andrew.cmu.edu/usr0/cl0x/man
+
+}If you have more than one directory in this line, they should be separated 
+by colons, not spaces.
+
+
+The search path is read in when you start \italic{help}. If help is already 
+running, you can add a directory to the search path by choosing "Add Search 
+Directory" from the menu. This change is only temporary and will go away 
+when you quit help. To permanently add a directory, you have to put it in 
+your preferences.
+
+}\smaller{\smaller{\bigger{
+}}}\italic{Mail and Bboards}\section{
+
+}\bold{
+R1.  How do I set options for \italic{messages}?
+
+
+}\leftindent{Select "Set Options" on the "Other" menu card. This will bring 
+up a long list of options where the message titles usually are, and 
+explanations and switches where the message bodies usually are. You can 
+scroll through either list, and click on the switches to change things. 
+(Some of these changes take effect immediately; for others, you have to 
+quit and restart \italic{messages}.) \
+
+
+There are a few, more obscure, options that you can set in your preferences 
+file. Type
+
+\typewriter{	help preferences
+
+}and scroll down to "Andrew Messages System preferences". }\
+
+
+
+\italic{Strange File Formats}\section{
+
+}
+\bold{X1. \bold{Ho}}\bold{w do I convert rasters, bitmaps, or images from 
+one type to another?
+
+
+}\leftindent{To convert old-style ATK rasters (.ras) to new-style ATK 
+rasters (.raster) or vice-versa,
+
+\typewriter{	help convertraster
+
+}\italic{convertraster} claims to be able to convert MacPaint files that 
+you have ftp'd to Andrew. This may not be reliable.
+
+To convert other image types, including X bitmaps, MacPaint files, and 
+GIFs, \
+
+
+\typewriter{	help pbm
+
+	help pnm}
+
+and also see the help files on all the little programs they mention.
+
+
+Some notes:
+
+	PBM, PPM, and PGM are special image file formats which are designed to be 
+"intermediate" conversion formats. That is, you can convert anything to 
+these formats, and then convert it to anything else.
+
+	PBM ("portable bitmap") is for simple black-and-white images like those 
+produced by MacPaint or \italic{bitmap}. PGM ("portable greymap") is for 
+images with shades of grey, and PPM ("portable pixmap") is for full-color 
+images. PNM ("portable any-map") is not a file format; a program called 
+"pnm-something" can handle PBM, PPM, or PGM files.
+
+	PBM, PGM, and PPM can be interconverted with the appropriate programs 
+(\italic{ppmtopgm, pgmtopbm}.) Both of these lose information, of course: 
+ppmtopgm reduces the color image to shades of grey, and pgmtopbm changes 
+shades to grey to black-and-white (although it will simulate grey by mixing 
+black and white dots.)
+
+	Also, a PGM file can be used whenever a PPM file is expected (ie, as input 
+to \italic{ppm-something}), and a PBM file can be used whenever either of 
+the other two formats is expected. This is reasonable, since a bitmap is 
+just a greyscale image with only two shades of grey, and a greyscale image 
+is just a color image with only grey colors.
+
+	All the conversion programs (except convertraster) work as filters. See 
+the examples below.
+
+	There are two programs, \italic{atobm} and \italic{bmtoa}, which convert X 
+bitmaps to and from ASCII files. There are no help files on them.
+
+	The MacPaint to RLE program, \italic{painttorle}, is not reliable for 
+large (full-screen) MacPaint files.
+
+	PostScript files are designed only to be printed, so they're hard to 
+convert to any other format. If you want to do that, you should view the 
+file with \italic{dxpsview} and then take a window dump of the 
+\italic{dxpsview} window (which produces an XWD file), and then convert 
+that.
+
+
+To convert an X bitmap to a PBM file, use
+
+\typewriter{	cat file.bm | xbmtopbm > file.pbm
+
+
+}To convert a PBM file to an X bitmap file, use
+
+\typewriter{	cat file.pbm | pbmtoxbm > file.bm
+
+}
+To convert a GIF to PostScript, use
+
+\typewriter{	cat file.gif | giftoppm | ppmtops > file.ps}
+
+
+}\section{\smaller{\bigger{
+}}}\italic{Working with Graphics and Images
+
+}
+\bold{W1. \bold{W}}\bold{hat drawing and painting programs are available on 
+Andrew?
+
+
+}\leftindent{(Drawing programs are the ones like MacDraw, that let you put 
+down geometric objects and then move them around, change their sizes, and 
+so on. Painting programs, like MacPaint, let you splot paint down on a 
+raster, possibly in geometric shapes, and edit it pixel by pixel.)
+
+There are the ATK versions, \italic{zip} (drawing) and \italic{raster} 
+(painting). \italic{zip} is slow and somewhat buggy, and nobody uses it. 
+\italic{raster} is very primitive, and nobody uses it. However, they have 
+the advantage of letting you put zip-drawings or rasters into ATK documents 
+along with text.
+
+\typewriter{	help zip
+
+	help raster}}\section{
+
+
+
+}\italic{Fancy Key Bindings}
+
+
+Some packages commonly used by developers are not normally bound to keys in 
+order to simplify the user interface.  If you want to bind them, add the 
+given line to your ~/.atkinit file or to apply the binding just to 
+application \italic{xxx}, add the line to ~/.\italic{xxx}init.
+
+	\typewriter{help initfiles}
+
+
+\bold{K1. }\bold{How can I execute an arbitrary expression?
+
+}
+\leftindent{	\typewriter{help ness
+
+}
+and read
+
+
+	\typewriter{$ANDREWDIR/doc/atk/ness/nesshack.doc
+
+}
+The normal binding of this function is ESC-ESC, though some people find 
+this too easy to type by mistake (and Ness does take a couple of seconds to 
+load the first time it is called).  To get the ESC-ESC binding add to your 
+.atkinit the line:
+
+	\typewriter{addkey ness-dostmt  \\e\\e  view  }\
+
+
+}
+\bold{K2. \bold{W}}\bold{hat is the "proctable"?
+
+}
+\leftindent{\typewriter{	help procs
+
+}
+Menu entries and key sequences are not bound directly to functions in C 
+code.  Instead they are bound to routines made available by the C code for 
+the various insets.  For instance, the operation on text usually bound to 
+ESC-b, which moves the cursor backward by one word, is the proctable 
+function \italic{textview-backward-word}.  When such a function is called 
+from Ness, however, the dashes are written as underscores: 
+\italic{textview_backward_word}.  \
+
+
+
+How can I find out what is in the proctable?
+
+	\typewriter{help deskey}
+
+The deskey package offers several proctable functions which can be bound to 
+keys or menu entries.  My own usage is given by these lines in my 
+~/.atkinit:
+
+	\typewriter{addkey deskey-describe-bound-keys ^XK im
+
+	addkey deskey-describe-proctable ^XP im}
+
+Then control-X-shift-K opens another window showing all the current key 
+bindings and control-X-shift-P opens a window showing all functions 
+currently in the proctable.  More functions are added to the list as more 
+insets are loaded in.
+
+}
+\bold{K3. \bold{H}}\bold{ow can I execute an arbitrary proctable function?
+
+}
+\leftindent{	\typewriter{help metax
+
+}
+The metax package offers two operations to bind to keys.  They prompt for a 
+function to execute and provide name completion by examining the proctable 
+for function names.  To bind ESC-x to the operation that calls a function 
+without passing an argument add this line to .atkinit:
+
+	\typewriter{addkey metax "\\ex" view metax}
+
+}
+\bold{K4. \bold{H}}\bold{ow can I get file name completion in typescript?}
+
+\leftindent{
+If you are typing a file name to ez, you can get file name completion with 
+space and question mark.  The same functionality is available in the 
+typescript window, but it is better to bind it to other keys.  The 
+following in your .atkinit:
+
+	addkey fcomp-complete-filename "\\t" typescript
+
+	addkey fcomp-possible-completions "\\e\\t" typescript
+
+will bind TAB so it completes the currently entered file name as far as it 
+can and will bind ESC-TAB so it offers a list of all possible completions 
+(as a list in the typescript).
+
+}
+\bold{K5. \bold{C}}\bold{an I perform incremental search as in gnuemacs?
+
+
+}\leftindent{\bold{		}\typewriter{help search}\bold{
+
+}\typewriter{	help gsearch
+
+
+}Yes, three different alternative search packages are available.  Dynamic 
+search is described in the help file for search and a gnu-emacs clone is 
+described in the gsearch helpfile.  (Unfortunately, when you ask for help 
+on 'search', you get the gsearch helpfile;  you have to select 
+\italic{twice} the menu option Show More Documentation.)  \
+
+
+
+A simplified incremental search package with no documentation can be bound 
+with
+
+	addkey incsearch-forward ^S textview
+
+	addkey incsearch-backward ^R textview
+
+Note that incsearch-forward MUST be bound to ^S or it will do backward 
+searches.
+
+}
+\bold{K6. \bold{How can I convert paragraphs that have hard newlines within 
+them to }}\bold{ATK paragraphs with newlines only at the ends?
+
+}
+\leftindent{	read $ANDREWDIR/lib/ness/format.n
+
+To convert text in messages or DOS files to ATK format, you need to wrap 
+the lines.  This can be done with a query replace changing newlines to 
+spaces, but this is not always satisfactory because multiple spaces are 
+needed after sentence ending punctuation.  When you have a binding for 
+ness-dostmt you can use a Ness function.  Select the text to be wrapped, 
+type ESC-ESC or your binding for ness-dostmt, and then answer the prompt 
+with \
+
+
+	\typewriter{format_wrap()}
+
+The selected text will be wrapped appropriately.
+
+}
+\smaller{\bigger{\smaller{
+}}}\italic{Programming in Ness and C}\smaller{
+
+}\bold{
+N1. \bold{Is}}\bold{ there a way to bind a keystroke or menu to a simple 
+combination of other operations?
+
+}
+\leftindent{You could write a "package" following the model of incremental 
+search, but it's lots easier just to write a short Ness function.  \
+
+
+	\typewriter{help ness}
+
+A simple approach is to create a directory ~/nesslib and put in it the 
+files--say f.n and g.n--with the Ness functions.  Then in your .atkinit or 
+other .XXXinit file, add the lines
+
+	load ness
+
+	call ness-load /usr/you/nesslib/f.n
+
+	call ness-load /usr/you/nesslib/g.n
+
+Substitute the full path to your nesslib directory.  Do the "load ness" 
+line only once.
+
+
+\bold{Example 1:}  Provide a menu operation to start up a typescript. 
+ (This was written for a user whose window manager and typescripts died 
+often;  if any window was left the user could start a typescript.)  The 
+Ness code is:
+
+
+\leftindent{extend "view:frame"
+
+	on menu "File,Typescript~85"
+
+		system("typescript"	-- launch typescript
+
+				-- and don't wait:
+
+			~ " >/dev/null </dev/null  2>&1 &")
+
+	end menu
+
+end extend
+
+}
+\bold{Example 2:} Add to messages a menu option "FollowUp-To" which sets up 
+a reply to the sender of the current message, excerpts the body of the 
+message into the reply, and warps the mouse to the sendmessage window. 
+ This code was the subject of a "call ness-load" in ~/.messagesinit.
+
+
+\indent{extend "view:messwind"
+
+	on menu "This Message,Followup-To"
+
+		messages_reply_to_sender(currentwindow)
+
+		messages_sendmessage_compound(currentwindow,
+
+			"sendmessage-excerpt-body;"
+
+			~ "sendmessage-focus-on-body")
+
+		frame_next_window(currentwindow)
+
+		textview_end_of_text(currentinputfocus)
+
+	end menu
+
+end extend
+
+}}
+\bold{N2.	 \bold{How}}\bold{ can I create the C code for a new inset?
+
+}
+\leftindent{	\typewriter{help createinset
+
+}
+This program creates a directory and puts seven files in it which 
+constitute a working, though not useful, inset.  You need only modify the 
+appropriate portions to make an inset which does what you want}.
+
+\begindata{bp,537970184}
+Version 2
+n 0
+\enddata{bp,537970184}
+\view{bpv,537970184,4,0,0}
+\smaller{Copyright 1996 Carnegie Mellon University.  All rights reserved.
+
+
+$Disclaimer: 
+# Permission to use, copy, modify, and distribute this software and its 
+# documentation for any purpose and without fee is hereby granted, provided 
+# that the above copyright notice appear in all copies and that both that 
+# copyright notice and this permission notice appear in supporting 
+# documentation, and that the name of IBM not be used in advertising or 
+# publicity pertaining to distribution of the software without specific, 
+# written prior permission. 
+#                         
+# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# 
+#  $
+
+}
+\enddata{text,537746728}

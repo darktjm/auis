@@ -1,0 +1,124 @@
+\begindata{text,539006808}
+\textdsversion{12}
+\template{default}
+\define{global
+}
+This directory contains several examples of Andrew Toolkit programming.
+
+
+The remaining subdirectories, ``ex1'' through ``ex19,'' contain a 
+ programmed sequence of tutorial examples in increasing order of 
+complexity.  Each example builds on the previous one.
+
+
+Additional documention is available for selected examples.  See the 
+individual files or use the link inset below to go to the documents.  \
+
+
+
+\begindata{link,539560456}
+4
+$ANDREWDIR/doc/atk/examples/ex1.doc
+0
+0
+V
+\begindata{link,539560456}
+Datastream version: 2
+ex1
+2
+
+black
+white
+\enddata{link,539560456}
+\enddata{link,539560456}
+\view{linkview,539560456,11,0,0}ex1.doc - how to create a class an 
+application program
+
+\begindata{link,539561512}
+4
+$ANDREWDIR/doc/atk/examples/ex2.doc
+0
+0
+V
+\begindata{link,539561512}
+Datastream version: 2
+ex2
+2
+
+black
+white
+\enddata{link,539561512}
+\enddata{link,539561512}
+\view{linkview,539561512,12,0,0}ex2.doc - example showing how to respond to 
+mouse hits
+
+\begindata{link,539561928}
+4
+$ANDREWDIR/doc/atk/examples/ex3.doc
+0
+0
+V
+\begindata{link,539561928}
+Datastream version: 2
+ex3
+2
+
+black
+white
+\enddata{link,539561928}
+\enddata{link,539561928}
+\view{linkview,539561928,13,0,0}ex3.doc - example showing how to respond to 
+mouse dragging
+
+\begindata{link,539562440}
+4
+$ANDREWDIR/doc/atk/examples/ex4.doc
+0
+0
+V
+\begindata{link,539562440}
+Datastream version: 2
+ex4
+2
+
+black
+white
+\enddata{link,539562440}
+\enddata{link,539562440}
+\view{linkview,539562440,14,0,0}ex4.doc - example of keyboard input
+
+
+
+Directory ``<src>/contrib/atkbook'' is a tree of examples from Nathaniel 
+Borenstein's book, \italic{Multimedia Application Development with the 
+Andrew Toolkit}.
+
+
+\begindata{bp,539562856}
+Version 2
+n 0
+\enddata{bp,539562856}
+\view{bpv,539562856,15,0,0}
+Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
+
+\smaller{\smaller{$Disclaimer: 
+# Permission to use, copy, modify, and distribute this software and its 
+# documentation for any purpose and without fee is hereby granted, provided 
+# that the above copyright notice appear in all copies and that both that 
+# copyright notice and this permission notice appear in supporting 
+# documentation, and that the name of IBM not be used in advertising or 
+# publicity pertaining to distribution of the software without specific, 
+# written prior permission. 
+#                         
+# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# 
+#  $
+
+}}\enddata{text,539006808}

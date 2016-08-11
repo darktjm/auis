@@ -1,0 +1,1259 @@
+\begindata{text,537746808}
+\textdsversion{12}
+\template{default}
+\define{comment
+}
+
+
+\majorheading{\bigger{\bigger{\bigger{\bigger{Writing Portable ANSI C and 
+C++ for AUIS
+
+}}}}
+\bigger{Andrew User Interface System}
+
+V\bigger{ersion 8   (October 1996)
+
+}}
+
+
+\bold{\indent{\indent{\indent{\indent{Andrew Consortium
+
+School of Computer Science
+
+Carnegie Mellon University
+
+5000 Forbes Avenue
+
+Pittsburgh, PA 15213-3891
+
+USA}}}}
+
+}
+\indent{Phone:			\bold{(412) 268-6710}
+
+Fax:			\bold{(412) 268-5576}
+
+Web:			\bold{http://www.cs.cmu.edu/~AUIS}
+
+Demo:			\bold{finger @atk.cs.cmu.edu}
+
+Archives:		\bold{ftp.andrew.cmu.edu:  /pub/AUIS}
+
+Bugs:			\bold{\bold{info-andrew-bugs@andrew.cmu.edu
+
+}}Info & Subscriptions:	\bold{info-andrew-request@andrew.cmu.edu}}
+
+
+
+\indent{\indent{
+
+
+In the documentation, the source directory will be referred to as 
+\typewriter{$/} and the destination as \typewriter{$ANDREWDIR/}.
+
+}}
+\indent{\indent{If you are reading an all-ASCII version of this file, the 
+version in Andrew format is in the distribution at:}}
+
+
+\center{\typewriter{$ANDREWDIR}}\typewriter{\center{\typewriter{/}}doc/DEVEL\
+OPER/AndrewCoding.ez}\smaller{
+
+
+
+
+
+
+
+
+\smaller{\bigger{Copyright 1996 Carnegie Mellon University.  All rights 
+reserved. Please see further copyrights and disclaimer at the end of this 
+file.}}}
+
+\begindata{bp,537811816}
+Version 2
+n 0
+\enddata{bp,537811816}
+\view{bpv,537811816,0,0,0}
+
+\bold{\bigger{1.	Introduction}}
+
+
+The comments in this file reflect hard-earned knowledge about how to write 
+code for the \italic{Andrew User Interface System}\italic{ (Andrew)} which 
+will be portable to a wide variety of systems.  Please read it carefully. 
+ Some of the facilities defined here are needed in only a few programs, but 
+please review those sections to know what to watch out for.
+
+
+
+\section{2.	File Skeletons }\
+
+
+
+The following skeletons give the structure of typical Andrew source files. 
+ For a typical Imakefile, see ImakeMacros.ez
+
+
+====================================
+
+.H skeleton
+
+====================================
+
+ATK_INTER
+
+#ifndef _\italic{classname}_H_
+
+#define _\italic{classname_}H_
+
+/*
+
+		\italic{classname}.H - \italic{short description of class}
+
+
+ 	\italic{Copyright Carnegie Mellon, 1996} - All Rights Reserved
+
+	For full copyright information see: \italic{andrew/config/COPYRITE} \
+
+
+	$Disclaimer: 
+# Permission to use, copy, modify, and distribute this software and its 
+# documentation for any purpose and without fee is hereby granted, provided 
+# that the above copyright notice appear in all copies and that both that 
+# copyright notice and this permission notice appear in supporting 
+# documentation, and that the name of IBM not be used in advertising or 
+# publicity pertaining to distribution of the software without specific, 
+# written prior permission. 
+#                         
+# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# 
+#  $
+
+*/
+
+
+/* \
+
+
+	\italic{description of class
+
+	data stream description}
+
+	\italic{usage notes}
+
+*/
+
+
+\italic{type declarations}
+
+
+#include <\italic{baseclassname}.H>
+
+class \italic{classname} : public \italic{baseclassname} \{
+
+public:
+
+	virtual ATKregistryEntry *ATKregistry();
+
+	static boolean InitializeClass();	// omit if unneeded\italic{
+
+	classname}();			//constructor
+
+	virtual \italic{~\italic{classname}}(); 	//destructor\italic{
+
+}
+	\italic{method declarations
+
+
+	data member declarations}
+
+\};
+
+#endif  /* _\italic{classname}_H_ */
+
+====================================
+
+end of .h skeleton
+
+====================================
+
+
+
+====================================
+
+.C file skeleton
+
+====================================
+
+/* \
+
+
+	\italic{classname}.C\italic{ - brief description of class}
+
+
+	\italic{Copyright Carnegie Mellon, 1996} - All Rights Reserved
+
+	For full copyright information see: \italic{andrew/config/COPYRITE}
+
+
+	$Disclaimer: 
+# Permission to use, copy, modify, and distribute this software and its 
+# documentation for any purpose and without fee is hereby granted, provided 
+# that the above copyright notice appear in all copies and that both that 
+# copyright notice and this permission notice appear in supporting 
+# documentation, and that the name of IBM not be used in advertising or 
+# publicity pertaining to distribution of the software without specific, 
+# written prior permission. 
+#                         
+# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# 
+#  $
+
+*/
+
+
+/* 	\
+
+
+	\italic{description of algorithms}
+
+*/
+
+ \
+
+
+#include <andrewos.h>
+
+ATK_IMPL("\italic{classname}.H")
+
+
+#include <\italic{classname}.H>
+
+#include <\italic{other}.H> 	// ...
+
+
+ATKdefineRegistry(null, \italic{baseclassname}, 
+\italic{classname}::InitializeClass);
+
+
+// If no class initialization, use
+
+//	ATKdefineRegistryNoInit(\italic{classname}, \italic{baseclassname});
+
+\italic{
+all global declarations
+
+
+classname}::InitializeClass() \{		// omit if unneeded
+
+	\italic{initialization done once when class is loaded}
+
+	THROWONFAILURE( TRUE);
+
+\}\italic{
+
+\italic{
+}classname}::\italic{\italic{classname}}()  \{\italic{			//constructor}
+
+	ATKinit;
+
+	\italic{initialize datamembers of }this
+
+	THROWONFAILURE( TRUE);
+
+\}
+
+\italic{
+\italic{classname}::\italic{~\italic{classname}}}()  \{\italic{	
+	//destructor}
+
+	\italic{deallocate anything refered to by this object}
+
+\}
+
+\italic{
+all function declarations (with main() last, if there is one)}
+
+
+
+\bold{/////  Delete the spaces after the dollar signs}
+
+#ifndef NORCSID
+
+#define NORCSID
+
+	static char rcsid[]="$ Header: $";
+
+#endif
+
+/*
+
+ *    $ Log: $
+
+ */
+
+====================================
+
+end of .C file skeleton
+
+====================================
+
+
+
+\section{3.	Coding ATK  Objects in C++}
+
+
+Only a few rules need to be followed to create objects which can 
+participate fully in the ATK environment.  They follow;  for examples, see 
+the document \typewriter{ATKinC++.}
+
+
+1. #include <andrewos.h> must be present at the beginning of EVERY C or C++ 
+source file.
+
+
+2. The .H header file defining class cccc must start with
+
+	ATK_INTER
+
+and one of the .C source files defining methods of that class must include 
+the line
+
+	ATK_IMPL("cccc.H")
+
+immediately after the #include <andrewos.h>.  These lines should not begin 
+or end with white space and nothing should follow the string given above 
+except a newline.
+
+
+3. Each object should be derived from class ATK.  Multiple inheritance 
+should be avoided since the older code stores pointers as long or void*. 
+ If multiple inheritance is your only option, the object is an ATK object 
+only if at least one base derives from ATK.
+
+
+4. As the first method in a class declaration, include the line
+
+		virtual ATKregistryEntry *ATKregistry();
+
+
+5. At the outer level of the .C file put an ATKdefineRegistry line like:
+
+		ATKdefineRegistry(null, baseclassname, objectname::InitializeClass);
+
+where InitializeClass is a static member function which performs one-time 
+initialization when the class is first utilized.
+
+
+6. In each static member function include as the first line the macro call:
+
+		ATKinit;
+
+this will check a flag and call InitializeClass once.
+
+
+7. Constructors should fail (as for lack of memory) with
+
+		THROWONFAILURE(FALSE);
+
+or succeed with
+
+		THROWONFAILURE(TRUE);
+
+
+8. Do not use 'delete' on objects in classes derived from \italic{traced.} 
+ Instead use
+
+		(obj)->Destroy()
+
+In general, avoid automatic allocation of an object from a \italic{traced} 
+class.  If you pass that pointer as a parameter, the recipient may keep a 
+pointer to it by calling Reference(),  which will fail when the object is 
+automatically deallocated as the scope closes.
+
+
+
+\section{4.	Portable Use of the C Pre-Processor}
+
+
+Most source and all Imakefiles are processed by cpp before being compiled 
+or used by make.  There are two types of C pre-processors in use, K&R (old 
+style, traditional), and K&R 2 (ansi).  While the basic functions are the 
+same the details of pragmas, argument substitution in macros, macros 
+substitution, token pasting, and processing of sections excluded by 
+conditionals are all slightly different.
+
+
+\subsection{4.1	Compiler and System Type #ifs}
+
+
+There should NEVER be an #ifdef in a C or C++ source file based on the 
+compiler.  #ifdefs based on the system type should be used only where 
+absolutely necessary.
+
+
+\subsection{4.2	Concat
+
+
+}With traditonal cpp's the construct a/**/b would yield the single token 
+ab.  In an ANSI preprocessor a/**/b will result in a b. (note the space 
+between a and b.)  ANSI cpp's provides a concatenation operator, ##.  It's 
+usage is:  a##b.  To provide portability,  Concat and Concat3 are defined 
+in andrewos.h.  Usage of these macros is as follows: Concat(a,b), 
+Concat3(a,b,c).  These macros are also available in Imakefiles. Note that 
+constructs like:  Concat(Concat(a,b),c) will NOT work as one might expect. 
+ Also, in ANSI-cpp, a space before or after a component to be concatenated 
+will be ignored; with a traditional cpp the spaces will appear in the 
+output.  Thus care must be taken not to put spaces at the beginnings or 
+ends of the arguments to the Concat macros.
+
+
+\subsection{4.3	Strings and Character Constants in Macros
+
+
+}With a traditional cpp, macro argument names occurring in strings would be 
+replaced with the argument's text.  ANSI cpps will not modify the contents 
+of a string or character constant in a macro.  Instead they provide a 
+"stringization" operator, #. It's usage is: #a.  (To yield the string "a".)
+
+ \
+
+
+The header file andrewos.h provides the macro Stringize(x), which will 
+ yield "x" under either type of preprocessor.  Note that the Stringize 
+macro may insert whitespace before or after the string, use Stringize only 
+where these spaces can be tolerated.  (Constructs like: 
+ Concat(a,Stringize(b))  fail on some platforms.)
+
+
+\subsection{4.4	Macro Substitution
+
+
+}ANSI requires the preprocessor to append a space after the expansion of 
+any macro.  Thus constructs like /foo/bar where foo is #define'd yield 
+results which are sometimes less than satisfactory.  (namely /foo /bar in a 
+Makefile)  This should be avoided in Imakefiles by using the Concat macros 
+described above, or avoiding the use of the cpp macro altogether.  (Often a 
+\italic{make} variable will serve just as well.)
+
+
+\subsection{4.5	Macro Arguments
+
+
+}The arument list for a macro must NOT be split over several lines with 
+backslashed newlines.
+
+
+\subsection{4.6	Conditionally Excluded Text (e.g. #if 0)
+
+
+}Text excluded from compilation by a #if 0 or other conditional construct 
+must not include mismatched single quotes, nor any quoted string including 
+a literal newline.  (Note that the ` character has no significance to the 
+preprocessor, it may be used with impunity.)  Generally non-syntactically 
+correct C/C++ or Imakefile sections should be placed in a comment.
+
+
+\subsection{4.7	Comments}
+
+
+In C++ source or header files // or /* */ comments may be used.  In C 
+source or header files and in Imakefiles /* */ comments should be used. 
+ Make-style comments should generally not be used in Imakefiles, if they 
+are, the macro XCOMM should be used in place of the #.
+
+
+\subsection{4.8	Trigraphs}
+
+
+ANSI preproessors are required to convert certain 3 character sequences to 
+a single character.  (For using C with hardware or character sets which 
+lack some of the characters common in C and C++.)  The trigraphs all begin 
+with ?? and continue with one of  (  )  <  >  /  !  '  -  =  These 
+character sequences should not be used in code intended for the AUIS 
+distribution.  (If they cannot be avoided the ?s can be escaped as \\?. 
+ However when this is done, the line should be #ifdef'ed on __STDC__, with 
+a non-escaped version used in the case that __STDC__ is not defined.)
+
+
+\subsection{4.9	Pragmas
+
+
+}Pragmas must be used only in compiler specific source files.  Compilers 
+and preprocessors which don't recognize a pragma may treat it as a fatal 
+error, even if the section is excluded by a preprocessor conditional.
+
+
+
+\bigger{\smaller{\section{5.	General}
+
+}}
+If code uses none of the special features of C++, it should be written in 
+the common subset of features of ANSI C and C++.   (The notes below should 
+cover most if not all of the restrictions to obtain compatible behavior for 
+a C and C++ compiler.)
+
+
+G++ will be the baseline compiler, additional testing will be done with 
+AT&T's CFront (preferably both versions 2.0 and 3.0), and IBM's xlC++.
+
+\subsection{
+5.1	System Header Files
+
+
+}Currently a common failing among C++ implementations is the lack of proper 
+header files including prototypes for all the system functions.  Such 
+failings should be resolved by porters of AUIS with logic in the 
+appropriate system.h file. (#ifdefed for the compiler if necessary, though 
+it may be better to make each OS/compiler combination a "system".)  If a 
+problem cannot be resolved by modifying the system.h file it is strongly 
+suggested that a complaint be lodged with the appropriate vendor, and 
+actions taken within the compilation environment to work around the 
+problem.  The Andrew Consortium will not support such work arounds.
+
+
+\subsection{5.2	Multiple Inheritence, Nested Types, Exceptions, Templates
+
+
+}The base toolkit should avoid the "younger" features of C++, including: 
+multiple inheritance, nested types, exceptions and templates.  Multiple 
+inheritence must also be avoided for now because it is incompatible with 
+the ATK run-time system until such time as RTTI is widely available.
+
+
+While these features should be avoided, every effort should be made to 
+avoid coding practices which will break in their presence.  For example 
+casting a function pointer which has an argument of type class textview *, 
+to a similar function which has class ATK * for that argument will probably 
+work as long as there is no MI involved, but will probably break if there 
+is.  In general if the types of two function pointers don't match exactly 
+don't make a cast to get around it.  Cast the individual arguments at the 
+point of call or within the function pointed to.  Functions for triggers, 
+and proctable functions currently violate this rule.
+
+
+\subsection{5.3	Temporaries
+
+
+}Care should be taken to avoid reliance on the lifetime of temporaries. 
+ (g++ is probably the most restrictive compiler in this regard, so if it 
+works with g++ it will probably still be OK when the real standard comes 
+out.)
+
+
+
+\section{6.	Declarations}
+
+
+\subsection{6.1	Prototypes
+
+
+}Functions must be declared with a correct prototype before they are called.
+
+\subsection{
+6.2	Functions with No Arguments}
+
+
+In C++ the declaration \
+
+
+		foo(); \
+
+
+indicates that foo takes no arguments, while in C this indicates that foo 
+takes any arguments.  (Extra error detection is available in an ANSI C++ 
+compiler by writing
+
+		foo(void) ;
+
+however, the intent is clearer with the () form.)
+
+ \
+
+
+\subsection{6.3	Type Scopes}
+
+
+Types defined in an inner scope may hide any identifiers (not just 
+types...) with the same name defined in an outer scope.  This\subsection{ 
+}is part of the motivation for the section below about identifiers.
+
+
+\subsection{6.4	Identifiers}
+
+
+Identifiers should be unique even between functions, variables and types. 
+ For example if there is a function foo(), there shouldn't be an enum foo, 
+nor a struct foo, nor variable foo.   If there is a typedef int foobar, 
+there shouldn't be any other type, function nor variable called foobar. 
+ The only exceptions to these rules are made for system supplied functions 
+like stat, where there is a function and a structure by the same name.
+
+
+A name must not be used both as a structure tag and as the name of a 
+different type.
+
+
+\subsection{6.5	Type Declarations and Definitions}
+
+
+Type definitions should NOT be nested.  Thus constructs of the following 
+form should be avoided:
+
+
+	struct M \{
+
+		struct L \{ int eek; \} a;
+
+	\} b;
+
+
+Instead all types should be defined at the top-level or within the 
+declarations for local variables of a function.  (This is due to C++ scope 
+rules for nested types.)  All types should be declared or defined before 
+being used.  The following is an example of what NOT to do:
+
+
+	struct A \{
+
+		struct B *f;  // f is a pointer to an A::B structure, \
+
+
+				// not to the structure defined below */
+
+	\};
+
+	struct B \{
+
+		int a;
+
+	\};
+
+
+Instead DO:
+
+	struct B;
+
+	struct A \{
+
+		struct B *f;   // f is a pointer to the ::B structure, \
+
+
+				// the structure defined below \
+
+
+	\};
+
+	struct B \{
+
+		int a;
+
+	\};
+
+
+\subsection{6.6	Reserved Words
+
+
+}The following reserved words cannot be used as identifiers:
+
+
+\indent{asm, catch, class, delete, friend, inline, new, operator, private, 
+protected, public, template, try, this, virtual, throw, auto, break, case, 
+char, continue, default, do, double, else, enum, extern, float, for, goto, 
+if, int, long, register, return, short, sizeof, static, struct, switch, 
+typedef, union, unsigned, void, while, volatile, const, mutable, wchar_t}
+
+
+\subsection{6.7	One Definition Rule
+
+
+}Global data must be defined exactly once.  There must be one .C file 
+containing a declaration and initialization.  For instance,
+
+	int globalintegervariable = 0;
+
+(placed outside a function declaration).
+
+
+\subsection{6.8	Global const Data
+
+
+}Globals consts must be declared explicitly static or extern.  The default 
+linkage for const data differs between C++ and C.
+
+
+\subsection{6.9	String and Array Initialization
+
+
+}Extra characters may not be present in strings initializing explicitly 
+sized character arrays.  (This includes the NUL character implicit at the 
+end of every string.)  Also, it is an error for too many initializers to be 
+present when an array of a specified size is being initialized.
+
+
+
+\section{7.	Constants and Expressions}
+
+
+\subsection{7.1	String Constants}
+
+
+In ANSI C and C++ string constants are read-only.  Attempts to modify a 
+string constant will probably result in a segmentation violation.  For 
+example:
+
+
+	char *ptr="BLAH";
+
+	int main() \{
+
+		*ptr='\\0';  /* This will likely coredump in ANSI C or in C++. */
+
+	\}
+
+
+Extra characters may not be present in strings initializing explicitly 
+sized character arrays.  (This includes the NULL character implicit at the 
+end of every string.)
+
+
+\subsection{7.2	Character Constants
+
+
+}In C++ the type of a character constant is char, in C it is int. 
+ (Generally this probably won't be a problem.) sizeof('a') is sizeof(int) 
+in C, but sizeof(char) in C++, such a construct should be avoided.
+
+
+\subsection{7.3	NULL}
+
+
+NULL should only be used in pointer contexts.  In particular constructs 
+like *c=NULL where c is a char * should be changed to *c='\\0'.
+
+
+The system may define NULL as 0, or ((void *)0), or 0L, but NULL will 
+always be usable in testing pointers to protect against NULL dereferences.
+
+
+\subsection{7.4	sizeof and Enumerated Types}
+
+
+If N is an element of an enum, as in \
+
+
+	enum e \{ N \};
+
+then in C we find that sizeof(N)==sizeof(int),  but in C++, 
+sizeof(N)==sizeof(e), which may not equal sizeof(int).
+
+
+\subsection{7.5	Space Ownership}
+
+
+Accounting for the space is a niggling, yet vital, task in C++ coding.  In 
+general, the function or suite of functions that allocate space with malloc 
+is responsible for later freeing the space.  For instance, space allocated 
+in a constructor should be deallocated in the corresponding destructor.
+
+
+An important special case is strings.  When function 'Caller' passes a 
+string as an argument to function 'Callee', the Caller remains responsible 
+for the string.  If Callee wants to retain a pointer to the string, it must 
+make a copy.  To aid in this, there is a function to clone a string: \
+
+
+	#include <util.h>
+
+	...
+
+	NewString(char *)
+
+The resulting module must be linked against $(UTILLIB).
+
+
+
+\section{8.	Statements}
+
+
+\subsection{8.1	Assignment of void * values
+
+
+}A void * value may not be directly assigned to a non-void * lvalue.  (for 
+example the return value from malloc MUST be cast appropriately.)
+
+
+\subsection{8.2	goto Statements
+
+
+}Jumps (with goto) must not jump past variable initialization.
+
+
+\subsection{8.3	Enumerated Types
+
+
+}Enumerated types may be assigned to integers but not vice-versa.
+
+
+Enumerated types may be compared only for equality (and not equal).
+
+
+The type of an enumeration identifier in C is int, in C++ it is the type of 
+the enumeration.  Only the enumeration tags may be assigned to an enum. 
+ Enumeration tags can only be used in case statements, assignments and 
+tests for equality of two enums (of the same type.)
+
+
+\subsection{8.4	Library Functions
+
+
+}ANSI standard C and Posix library functions may be used.  ANSI and Posix 
+functions may have to be emulated on non-Posix systems, such emulation will 
+be provided by whoever ports or maintains AUIS.
+
+
+'raise' should not be used, use the Posix 'kill' function instead.
+
+
+'remove' should not be used, use the Posix 'unlink' function instead.
+
+
+\paragraph{bcopy, bzero, index, rindex
+
+strchr, strrchr, memset, memcpy, memmove}
+
+bcopy should be converted to memmove in existing code.  In new code memcpy 
+should be used for non-overlapping regions and memmove for possibly 
+overlapping regions.  Watch for the order of arguments! The arguments to 
+mem* functions are dest, src, length, whereas  bcopy uses src, dest, length.
+
+
+	bzero -> memset
+
+	index -> strchr
+
+	rindex -> strrchr
+
+
+Additional BSD functions supporting sockets, select, and TCP/IP may also be 
+used.
+
+
+The select function is not defined by any standard.  The incompatibilities 
+currently known are:
+
+	fd_set *s vs int *s for the read, write and exception masks.
+
+	timeval may or may not be updated for the time spent in select.
+
+
+
+\section{9.	Portability Macros}
+
+
+The following preprocessor macros are defined. The first six are standard 
+convenience macros.  The rest are seldom needed.
+
+
+boolean					(defaults to short)
+
+TRUE						(defaults to 1)
+
+FALSE					(defaults to 0)
+
+These provide the boolean data type which is otherwise missing from C.  (In 
+C++, there is now the bool type.  Until this is universal in all C++ 
+compilers, the Andrew version should continue to be used.)
+
+
+MIN(x,y) 					(defaults to ((x<y)?(x):(y)))
+
+Simply returns the minimum of two arguments.  Provided for systems which 
+don't provide it or place it in a strange location.
+
+
+MAX(x,y)					(defaults to ((x>y)?(x):(y)))
+
+Simply returns the maximum of two arguments.  Provided for systems which 
+don't provide it or place it in a strange location.
+
+
+ABS(a)					(defaults to ((a)<0?-(a):(a)))
+
+Simply returns the absolute value of the argument.  Provided for systems 
+which don't provide it or place it in a strange location.
+
+
+
+NEWPGRP() 				(defaults to setpgid(0,0))
+
+When a program forks off another process, the child often is disconnected 
+from its parent's process group so that signals generated by the child 
+aren't received by the parent.  On BSD-derived platforms, a process can 
+make itself the process group leader by issuing the following system call:
+
+	setpgrp(0, getpid());
+
+while on sysv derived platforms (including all POSIX systems we have 
+encountered), it is done this way:
+
+	setpgrp();
+
+Now there is a macro called NEWPGRP() that is to be used for this purpose. 
+ The macro is defined in the system.h platform-dependent config file. \
+
+
+
+KILLPG(pgid,  signal)  (defaults to kill(-(pgid), signal)
+
+This macro is used to send a signal to all the processes in a process 
+group.  (It should be used in place of killpg, and should be defined as 
+killpg(pgid, signal) for BSD systems.)
+
+
+GETPGRP() 				(defaults to getpgrp())
+
+This macro is used to get the process group of the current process.  (It 
+should be used in place of getpgrp() for POSIX systems and getpgrp(0) for 
+BSD systems, and should be defined as getpgrp(0) for BSD systems.)
+
+
+
+SIGSET_TYPE 			(defaults to sigset_t)
+
+The type used for signal masks with POSIX  sig*set functions, or with BSD 
+sigblock and friends.  For POSIX systems this should be sigset_t, for BSD 
+it should be int.
+
+
+SIGNAL_RETURN_TYPE	(defaults to void, as per POSIX)
+
+The return type for signal handler functions.
+
+
+SIGVECHANDLERFUNC(x) 	(defaults to x)
+
+This macro is used when assigning to the handler function in a sigvec 
+structure, it will cast the function appropriately in cases where the 
+prototype in the sigvec structure is incorrect.  This macro should be made 
+obsolete, and new macros introduced to provide a sigaction emulation on 
+non-POSIX systems.
+
+
+SIGACTIONHANDLERFUNC(x) 	(defaults to x)
+
+This macro is used when assigning to the handler function in a sigaction 
+structure, it will cast the function appropriately in cases where the 
+prototype in the sigaction structure is incorrect.  This macro should be 
+made obsolete, and new macros introduced to provide a sigaction emulation 
+on non-POSIX systems.
+
+
+
+WAIT_STATUS_TYPE 		(defaults to int, as per POSIX)
+
+The data type used to store the returned status from wait, waitpid, etc...
+
+
+WAIT_EXIT_STATUS(x) 	(defaults to WEXITSTATUS(x), as per POSIX)
+
+The macro to extract the exit status from an object of type 
+WAIT_STATUS_TYPE.
+
+
+
+DIRENT_TYPE 			(defaults to struct dirent, as per POSIX)
+
+The structure used to store directory entries.
+
+
+DIRENT_NAMELEN(d) 		(defaults to ((d)->d_namlen) as per POSIX)
+
+A macro to return the length of the name in a directory entry.
+
+To open a directory and read it's entries:
+
+
+\example{#include <andrewos.h>
+
+
+char *dirName;
+
+DIR *dir;
+
+DIRENT_TYPE *dirEnt;
+
+
+if(dir = opendir(dirName)) \{
+
+	while (dirEnt = readdir(Dir)) \
+
+
+		printf("%s\\t%d\\n", dirEnt->d_name, DIRENT_NAMELEN(dirEnt));
+
+\}
+
+}
+SCANDIRCOMPFUNC(x) 	(defaults to x)
+
+This macro is used in the compare function argument to scandir, on some 
+systems the prototype of the comparison function argument is incorrect, 
+this macro will cast it appropriately.
+
+
+SCANDIRSELFUNC(x) 		(defaults to x)
+
+This macro is used in the selection function argument to scandir, on some 
+systems the prototype of the selection function is incorrect, this macro 
+will cast it appropriately.
+
+
+SCANDIRSELARG_TYPE	const DIRENT_TYPE
+
+The base type of the argument to the scandir function.
+
+
+
+QSORTFUNC(x) 			(defaults to x)
+
+This macro is used in the function argument to qsort, on some systems the 
+prototype of the comparison function argument is incorrect, this macro will 
+cast it appropriately.
+
+
+
+FDTABLESIZE()		(defaults to sysconf(_SC_OPEN_MAX))
+
+This macro is used to find the maximum number of open filedescriptors a 
+process may have.  (It should be used in place of getdtablesize, and should 
+be defined as getdtablesize() for BSD systems.)
+
+
+
+RANDOM()				(defaults to random())
+
+SRANDOM(x)			(defauts to srandom(x))
+
+INITSTATE(x,y,z)			(defaults to initstate(x,y,z)\comment{)
+
+The random function specified by ANSI and POSIX is very weak,  many 
+platforms have random so we default to it.  The RANDOM  macro should return 
+a uniformly distributed sequence of random  numbers (in the range 0 to 
+2^31-1 preferably). SRANDOM and  INITSTATE should initialize the random 
+number generator using  the first argument as a seed.  The buffer given in 
+the INITSTATE  macro may be used by the random number generator.
+
+}
+
+FILE_HAS_IO(f)  			(defaults to ((f)->_cnt))
+
+Given a single FILE * argument this macro should be non-zero if there is 
+buffered input available.  The default is compatible with traditional stdio 
+implementations.
+
+
+FILE_NEEDS_FLUSH(f)		(defaults to ((f)->_base))
+
+Returns non-zero if the indicated FILE * has data which has not been 
+written yet.  The default is compatible with traditional stdio 
+implementations.
+
+
+
+\section{10.	osi_ -- Operating System Independent operations}
+
+
+The osi_* identifiers below may be macros, functions, or types.
+
+
+osi_readlink(PATH,BUF,SIZE) 	\
+
+
+Returns in BUF the text of the symbolic link indicated by PATH.  (Upto SIZE 
+bytes.)  -1 will be returned on failure.  The count of characters placed in 
+the buffer will be return on success.
+
+
+osi_ExclusiveLockNoBlock(fid)  \
+
+
+Locks the file indicated by file descriptor fidg.  If another process has 
+already locked the file the return value will be -1.  0 will be returned 
+upon success.
+
+
+osi_UnLock(fid)
+
+Unlocks a previously locked file indicated by the file descriptor fid.
+
+
+osi_O_READLOCK
+
+The flags to be given when calling open on a file which will be locked for 
+reading.
+
+
+osi_F_READLOCK
+
+The flags to be given when called fopen on a file which will be locked for 
+reading.
+
+
+osi_vfork()
+
+Generally when forking a new process osi_vfork() should be used to be as 
+memory-efficient as possible.  stdio functions should NOT be used in the 
+child before execing, or after a failed exec. (The child should exit using 
+_exit.)
+
+
+osi_setjmp, osi_longjmp
+
+Used wherever setjmp or longjmp would be used, it handles any special 
+actions which need to be done for the current system.
+
+
+struct osi_Times \{unsigned long int Secs; unsigned long int USecs;\};
+
+The time structure filled in by osi_GetTimes.
+
+
+osi_GetTimes(&foo)
+
+Fills in the osi_Times structure foo with the current time since 00:00:00 
+ GMT,  January 1, 1970.
+
+
+osi_GetSecs()
+
+Returns the seconds since 00:00:00  GMT, January 1, 1970.
+
+
+osi_SetZone()
+
+Calling this function ensures that osi_ZoneNames, osi_SecondsWest, and 
+osi_IsEverDaylight are set appropriately.
+
+
+osi_ZoneNames
+
+Returns a pointer to an array of two char *'s giving the normal timezone 
+name, and the name when daylight savings is in effect.
+
+
+osi_SecondsWest
+
+The difference in seconds between GMT and local standard time.
+
+
+osi_IsEverDaylight
+
+Non-zero when daylight savings adjustment should be applied.
+
+
+
+\subsection{10.1	Compilation Environment}
+
+
+These preprocessor variables are sometimes used to distinguish code 
+intended for different compilers.  \italic{They should not be used in new 
+code.}
+
+
+ANSI_COMPILER  (defaults to 1 if __STDC__ or __cplusplus or c_plusplus are 
+defined)
+
+This flag will be made obsolete when the portions of the system currently 
+written in traditional C are ported to ANSI C/C++.  Currently it is used to 
+choose code compatible with an ANSI compiler when it is available.  (And to 
+take special steps to compile ANSI code with a non-ansi compiler.)
+
+
+ANSI_CPP	(defaults to 1 if __STDC__ is defined)
+
+Even if an ANSI C/C++ compiler is available the pre-processor may still be 
+a traditonal pre-ANSI version.  ANSI_CPP will be defined only if the 
+preprocessor accepts ANSI constructs for stringization and token 
+concatenation.
+
+
+ANSI_IMAKECPP			(defaults to 1 if __STDC__ is defined)
+
+This will be defined if and only if the C preprocessor used by imake is 
+based on ANSI C as opposed to K&R1.
+
+
+HAVE_ANSI_LIBC			(defaults to 1)
+
+This should be defined only if the libc on your system has all ANSI 
+specified functions and include files.
+
+
+POSIX_ENV				(defaults to 1)
+
+If the system is based on POSIX then this should be defined, otherwise it 
+should be undefined in the system.h file.
+
+
+\subsection{10.2	Directory Locations}
+
+
+MANDIR 					(defaults to /usr/man)
+
+The base directory of the manpage tree.
+
+
+TMACMANFILE 			(defaults to /usr/lib/tmac/tmac.an)
+
+The tmac file to use for parsing man pages.
+
+
+TMACPREFIX				(defaults to /usr/lib/tmac/tmac.)
+
+The pathname prefix indicating where tmac files should be found and what 
+prefix they use.
+
+\begindata{bp,537828296}
+Version 2
+n 0
+\enddata{bp,537828296}
+\view{bpv,537828296,1,0,0}
+\smaller{Copyright Carnegie Mellon University 1996.  All rights reserved.
+
+
+$Disclaimer: 
+# Permission to use, copy, modify, and distribute this software and its 
+# documentation for any purpose and without fee is hereby granted, provided 
+# that the above copyright notice appear in all copies and that both that 
+# copyright notice and this permission notice appear in supporting 
+# documentation, and that the name of IBM not be used in advertising or 
+# publicity pertaining to distribution of the software without specific, 
+# written prior permission. 
+#                         
+# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# 
+#  $}
+
+\enddata{text,537746808}

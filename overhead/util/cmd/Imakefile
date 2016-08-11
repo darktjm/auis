@@ -1,0 +1,25 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+DependTarget()
+NormalObjectRule()
+
+DEFINES=-DAFSBASEDIR=\"$(AFSBASEDIR)\"
+
+#ifdef WHITEPAGES_ENV
+
+ProgramTarget(newbt, newbt.o, $(UTILLIB),${NETLIBS} ${BSDLIB})
+InstallProgram(newbt, $(DESTDIR)/etc)
+#endif /* WHITEPAGES_ENV */
+
+ProgramTarget(pref, pref.o, $(UTILLIB),${NETLIBS} ${BSDLIB})
+InstallProgram(pref, $(DESTDIR)/bin)
+
+CPPProgramTarget(andrewdirs, paths.o, $(UTILLIB), $(NETLIBS) $(BSDLIB))
+InstallProgram(andrewdirs, $(DESTDIR)/bin)
+
+NormalHelpRule()
+InstallDocs(adirs.help, ${DESTDIR}/help)
+InstallHelpAlias(adirs, andrewdirs)

@@ -1,0 +1,10 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+#define IHaveSubdirs
+
+SUBDIRS =  /* type, with the move to c++ we loose the class access system */ objects nesslib demos  doc
+
+MkdirTarget(${DESTDIR}/lib/ness  ${DESTDIR}/lib/ness/demos)
+InstallDocs(ness.pr, ${DESTDIR}/lib/prs)

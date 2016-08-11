@@ -1,0 +1,35 @@
+/* cparser 
+		AUIS parser
+*/
+
+NormalObjectRule()
+
+OBJS=cparser.o
+LibraryTarget(libcparser.a, $(OBJS))
+
+MkdirTarget($(DESTDIR)/doc/syntax)
+InstallLibrary(libcparser.a, $(DESTDIR)/lib)
+InstallShScript(mkparser, $(DESTDIR)/bin)
+InstallFile(cparser.h, $(INSTINCFLAGS), $(DESTDIR)/include)
+InstallDocs(parser.doc, $(DESTDIR)/doc/PROGRAMMER)
+
+
+/* Building and executing 'testparse' gives a rudimentary sanity check */
+/* the following affects only foo.c (built from foo.y) */
+foo.h foo.c: foo.y
+	ExecuteFromBASEDIR(bison -k foo.y)
+	./mkparser foo
+testparse.o: foo.h
+ClassTestProgramTarget(testparse, testparse.o foo.o cparser.o,  , )
+DependTarget(foo.h)
+
+CleanTarget(foo.c foo.h foo.act *.tab.*)
+
+distribution: clean
+	rm -f Imakefile Makefile RCS cp.tmp
+	sed -e '/andrewos/d' cparser.c > cp.tmp
+	rm -f cparser.c
+	mv cp.tmp cparser.c
+	mv Makefile.dist Makefile
+	ez2ascii parser.doc > parser.asc
+	rm -f parser.doc

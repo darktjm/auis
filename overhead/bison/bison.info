@@ -1,0 +1,139 @@
+This is Info file bison.info, produced by Makeinfo-1.55 from the input
+file bison.texinfo.
+
+   This file documents the Bison parser generator.
+
+   Copyright (C) 1988, 89, 90, 91, 92, 93, 1995 Free Software
+Foundation, Inc.  Modified (1993, 94, 1995) from bison-1.20...1.24 by
+Wilfred J. Hansen (wjh+@cmu.edu), Andrew Consortium, Carnegie Mellon
+University
+
+   CARNEGIE MELLON UNIVERSITY DISCLAIMS ALL WARRANTIES WITH REGARD TO
+THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS. IN NO EVENT SHALL CARNEGIE MELLON UNIVERSITY BE LIABLE FOR ANY
+SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
+RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF
+CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
+CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+   Permission is granted to make and distribute verbatim copies of this
+manual provided the copyright notice and this permission notice are
+preserved on all copies.
+
+   Permission is granted to copy and distribute modified versions of
+this manual under the conditions for verbatim copying, provided also
+that the sections entitled "GNU General Public License" and "Conditions
+for Using Bison" are included exactly as in the original, and provided
+that the entire resulting derived work is distributed under the terms
+of a permission notice identical to this one.
+
+   Permission is granted to copy and distribute translations of this
+manual into another language, under the above conditions for modified
+versions, except that the sections entitled "GNU General Public
+License", "Conditions for Using Bison" and this permission notice may be
+included in translations approved by the Free Software Foundation
+instead of in the original English.
+
+
+Indirect:
+bison.info-1: 1777
+bison.info-2: 51533
+bison.info-3: 99263
+bison.info-4: 148903
+bison.info-5: 195222
+
+Tag Table:
+(Indirect)
+Node: Top1777
+Node: Introduction9010
+Node: Conditions11099
+Node: Copying12565
+Node: Concepts31718
+Node: Language and Grammar32751
+Node: Grammar in Bison37767
+Node: Semantic Values39703
+Node: Semantic Actions41804
+Node: Bison Parser42987
+Node: Stages45297
+Node: Grammar Layout46580
+Node: Examples47837
+Node: RPN Calc48972
+Node: Rpcalc Decls49946
+Node: Rpcalc Rules51533
+Node: Rpcalc Input53333
+Node: Rpcalc Line54794
+Node: Rpcalc Expr55909
+Node: Rpcalc Lexer57854
+Node: Rpcalc Main60413
+Node: Rpcalc Error60791
+Node: Rpcalc Gen61796
+Node: Rpcalc Compile62944
+Node: Infix Calc63819
+Node: Simple Error Recovery66526
+Node: Multi-function Calc68413
+Node: Mfcalc Decl69980
+Node: Mfcalc Rules72003
+Node: Mfcalc Symtab73383
+Node: Exercises79557
+Node: Grammar File80063
+Node: Grammar Outline80831
+Node: C Declarations81565
+Node: Bison Declarations82145
+Node: Grammar Rules82557
+Node: C Code83017
+Node: Symbols83947
+Node: Rules89006
+Node: Recursion90679
+Node: Semantics92390
+Node: Value Type93487
+Node: Multiple Types94159
+Node: Actions95175
+Node: Action Types97960
+Node: Mid-Rule Actions99263
+Node: Declarations104832
+Node: Token Decl106185
+Node: Precedence Decl108372
+Node: Union Decl109923
+Node: Type Decl110767
+Node: Expect Decl111674
+Node: Start Decl113220
+Node: Pure Decl113598
+Node: Decl Summary114912
+Node: Multiple Parsers116695
+Node: Interface118189
+Node: Parser Function119061
+Node: Lexical119896
+Node: Calling Convention121302
+Node: Token Values122643
+Node: Token Positions123791
+Node: Pure Calling124683
+Node: Error Reporting127433
+Node: Action Features129558
+Node: Algorithm133209
+Node: Look-Ahead135502
+Node: Shift/Reduce137634
+Node: Precedence140545
+Node: Why Precedence141196
+Node: Using Precedence143051
+Node: Precedence Examples144019
+Node: How Precedence144720
+Node: Contextual Precedence145869
+Node: Parser States147660
+Node: Reduce/Reduce148903
+Node: Mystery Conflicts152464
+Node: Stack Overflow155850
+Node: Error Recovery157223
+Node: Context Dependency162359
+Node: Semantic Tokens163207
+Node: Lexical Tie-ins166224
+Node: Tie-in Recovery167772
+Node: Debugging169944
+Node: Invocation173295
+Node: Bison Options173958
+Node: Option Cross Key179878
+Node: VMS Invocation180760
+Node: Table of Symbols181544
+Node: Glossary188960
+Node: Index195222
+
+End Tag Table

@@ -1,0 +1,28 @@
+#!/bin/sh
+# addAlias adds new aliases to alias file(first arg) if they are unique
+# 2nd parm is class name and other parmeters are aliases for class name
+#set -x
+
+originalAliasFile="$1"
+#copy file to temp if it exists
+tempAliasFile="${TMPDIR:-/tmp}/tmpdllAl"
+if [ -e $orignalAliasFile ]; then
+	cp $originalAliasFile $tempAliasFile
+fi
+
+shift
+# trunc name to 8 chars.
+className="`echo $1 | cut -c1-8`"
+shift
+#loop through classes and append them to temp
+for i in $*; do
+	echo "$i $className"
+done >> $tempAliasFile
+
+#remove duplicates
+awk '{x[$0] = $0} END {for(i in x) {print x[i]}}' $tempAliasFile > $originalAliasFile
+#install new aliasFile
+rm $tempAliasFile
+
+
+

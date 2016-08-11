@@ -1,0 +1,68 @@
+\begindata{figure,7159520}
+$origin 0 0
+$printscale 1.000000 1.000000
+#none 0
+\begindata{figogrp,7455760}
+\figattr{
+}
+$ 0 -11 -9 133 133
+$endatt
+\enddata{figogrp,7455760}
+\begindata{figorect,6900056}
+attrs: 8 1 10 beige 12 0 andy 0 8 0 5 0
+$ -7 -5
+$ 122 120
+$# 4 155 157 -6 -7
+$# 8 2141 1861 -12 -6
+$endatt
+\enddata{figorect,6900056}
+\begindata{figogrp,7513872}
+attrs: 8 1 10 beige 12 0 andy 0 8 0 5 0
+$ 0 1 1 121 123
+$endatt
+\enddata{figogrp,7513872}
+\begindata{figoplin,6830752}
+attrs: 8 1 10 cyan 10 0 andysans 0 8 0 5 0
+$$ 1 6 0 0
+$ 5 119
+$ 0 -114
+$ 112 -114
+$ 102 -105
+$ 10 -105
+$ 10 -10
+$# 4 145 1388 0 0
+$# 5 145 555 0 0
+$# 6 680 555 0 0
+$# 7 632 624 0 0
+$# 8 194 624 0 0
+$# 9 194 1319 0 0
+$endatt
+\enddata{figoplin,6830752}
+\begindata{figoplin,6882928}
+attrs: 8 1 10 blue 10 0 andysans 0 8 0 5 0
+$$ 1 6 0 0
+$ 117 5
+$ 0 114
+$ -112 114
+$ -102 104
+$ -10 104
+$ -10 9
+$# 4 680 555 0 0
+$# 5 680 1388 0 0
+$# 6 145 1388 0 0
+$# 7 194 1319 0 0
+$# 8 632 1319 0 0
+$# 9 632 624 0 0
+$endatt
+\enddata{figoplin,6882928}
+\begindata{figorect,6795240}
+attrs: 8 1 10 beige 10 0 andysans 0 8 0 5 0
+$ 15 14
+$ 92 95
+$# 4 194 624 0 0
+$# 8 632 1319 0 0
+$endatt
+\enddata{figorect,6795240}
+#end
+#end
+\enddata{figure,7159520}

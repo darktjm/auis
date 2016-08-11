@@ -1,0 +1,69 @@
+\begindata{text,5275648}
+\textdsversion{12}
+\template{default}
+
+\majorheading{The ELAR Programming Language:
+
+From Large to Little}
+
+\center{
+Todd V. Jonker
+
+\italic{tjonker@cs.cmu.edu}
+
+}
+
+\center{\bigger{\italic{Abstract}}}
+
+
+When designing a toolkit for application construction, a central issue 
+involves the choice of an underlying programming language for 
+implementation and extension.  On one hand, the implementor needs a 
+powerful, complete language to construct the application.  On the other 
+hand, the user needs a simple, intuitive command language with ``just 
+enough power'' to describe useful modifications and extensions to the 
+application.  Furthermore, each application may require a different 
+``little language''.  But it is clear that all of these languages hold much 
+in common, even though the users and uses of each may be quite different. 
+ The toolkit designer, then, has the daunting task of providing a language 
+that can wear many masks.
+
+
+The Alexandria Information Habitat supports the construction of multiple 
+applications in a uniform framework.  As part of this Habitat, we have 
+designed ELAR, a new programming language intended to bridge the gap 
+between ``large'' application languages and ``little'' command languages. 
+ ELAR is a modular object-oriented programming language that provides many 
+modern features, including static type-checking, multiple inheritance, and 
+parametric polymorphism.  But it also provides easy adaptation to alternate 
+syntaxes, allowing the construction of command languages without requiring 
+new compilers or interpretors.
+
+
+We first discuss ELAR as a programming language, focussing on its unique 
+and powerful type system. The concepts of type checking, data abstraction, 
+inheritance, generics, and type conformance have been used in programming 
+language designs to facilitate the related tasks of creating and 
+maintaining applications.  ELAR integrates all of these features into a 
+coherent whole. Most importantly, it enforces the separation of interface 
+and implementation by distinguishing the type of a value from its 
+representation.  ELAR supports this concept by allowing assertions that one 
+type satisfies another, external to any particular representation.  Thus 
+ELAR treats types as flexible, abstract concepts, while allowing complete 
+compile-time type verification.
+
+
+In addition, ELAR provides other useful programming mechanisms.  Objects 
+may be given user-defined dynamic attributes, and may be involved in 
+multi-way relationships.  Abstract storage management allows easy access to 
+persistent objects over multiple databases.  Control is provided via a 
+system unifying exceptions and continuations.
+
+
+We then discuss ELAR as a command language.  ELAR provides support for 
+``little languages'' through the use of \italic{syntactic abstraction}, 
+facilitated by the ODO Abstract Parsing System.  We will briefly review the 
+uses and benefits of syntactic abstraction, and then describe Odo and its 
+use in the ELAR implementation.  Finally, we show how syntactic abstraction 
+is used to build command languages for presentation to the user.
+\enddata{text,5275648}

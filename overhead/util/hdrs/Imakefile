@@ -1,0 +1,57 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+
+#ifdef WHITEPAGES_ENV
+InstallMultiple(bt.h btint.h btwp.h wp.h, $(INSTINCFLAGS), $(DESTDIR)/include)
+#endif /* WHITEPAGES_ENV */
+
+
+InstallMultiple(apioctl.h fdplumb.h fdplumbi.h profile.h svcconf.h tokens.h truth.h util.h unscribe.h ansitext.h mathaux.h units.h, $(INSTINCFLAGS), $(DESTDIR)/include)
+
+
+/*
+ * Make a small program to generate the andrdir.h file.
+ */
+DEFINES=-DXLIBDIR_VAL=\"$(XLIBDIR)\"  \
+	-DADIRDIR_VAL=\"DEFAULT_ANDREWDIR_ENV\"  \
+	-DLOCDIR_VAL=\"DEFAULT_LOCALDIR_ENV\"
+
+ProgramTarget(genhdr, genhdr.o, ,)
+
+/* This mess gets around the portability problems associated with ``string-ize''ing
+   the DEFAULT_ANDREWDIR_ENV variable within a C program, given the
+   vagaries of the various C preprocessors. */
+
+all::	andrdir.h
+andrdir.h:	$(DESTDIR)/include/system.h ./genhdr$(EXEEXT)
+	-rm -f andrdir.h1
+	./genhdr$(EXEEXT) > andrdir.h1
+	-rm -f andrdir.h
+	mv andrdir.h1 andrdir.h
+
+InstallFile(andrdir.h, $(INSTINCFLAGS), $(DESTDIR)/include)

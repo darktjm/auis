@@ -1,0 +1,230 @@
+\begindata{text,537691672}
+\textdsversion{12}
+\template{default}
+\define{global
+}
+\majorheading{ADEW
+
+The Andrew Application Builder
+
+}
+\italic{\center{Tom Neuendorffer
+
+}}
+The Andrew Development Environment Workbench (ADEW) was the first generally 
+available applicaion builder under X11 and has many unique features. It 
+consists of several components including an object generator
+
+\center{\
+\begindata{link,538453928}
+Datastream version: 3
+$(ANDREWDIR)/lib/arbiters/Arb
+0
+0
+\begindata{link,538453928}
+Datastream version: 2
+Arbcon Controller
+2
+
+black
+white
+\enddata{link,538453928}
+\enddata{link,538453928}
+\view{linkview,538453928,18,0,0}}
+
+that allows the placement of any ATK object into the cut-buffer, where it 
+can then be placed into an application. All of the standard ATK insets are 
+available, including a series of buttons and switches, that have a variety 
+of attributes that can be set from the Arbcon.
+
+
+\center{\
+\begindata{link,538456216}
+Datastream version: 3
+$(ANDREWDIR)/lib/arbiters/vallist
+0
+0
+\begindata{link,538456216}
+Datastream version: 2
+Buttons and Switches
+2
+
+black
+white
+\enddata{link,538456216}
+\enddata{link,538456216}
+\view{linkview,538456216,19,0,0}
+
+}After the application has been prototyped, another program can be used to 
+automatically create a new inset that has pointers to allow of the 
+sub-insets embedded in the prototype, and call back procedures for all of 
+the buttons and switches. Some examples include a calculator,
+
+
+\center{\
+\begindata{link,538456824}
+Datastream version: 3
+$(ANDREWDIR)/lib/arbiters/calc.lset
+0
+0
+\begindata{link,538456824}
+Datastream version: 2
+Calculator
+2
+
+black
+white
+\enddata{link,538456824}
+\enddata{link,538456824}
+\view{linkview,538456824,20,0,0}
+\smaller{[when the calculator appears, you must press the ``C'' button 
+first]}
+
+
+}A prototype help system,
+
+\center{\
+\begindata{link,538457576}
+Datastream version: 3
+$(ANDREWDIR)/lib/arbiters/helparb
+0
+0
+\begindata{link,538457576}
+Datastream version: 2
+Help
+2
+
+black
+white
+\enddata{link,538457576}
+\enddata{link,538457576}
+\view{linkview,538457576,21,0,0}
+\smaller{[when the help window appears, you must press the ``HELP'' button 
+first]}}
+
+
+And the first electronic piano to have been posted in electronic mail. \
+
+
+
+\center{\
+\begindata{link,538458264}
+Datastream version: 3
+$(ANDREWDIR)/lib/arbiters/piano.lst
+0
+0
+\begindata{link,538458264}
+Datastream version: 2
+Piano
+2
+
+black
+white
+\enddata{link,538458264}
+\enddata{link,538458264}
+\view{linkview,538458264,22,0,0} \smaller{[Sorry, it won't play over the 
+net]}
+
+}
+For more information, please see the overview and tutorial documents.
+
+
+\center{\
+\begindata{link,538459144}
+Datastream version: 3
+/afs/cs/misc/atk/@sys/alpha/doc/atk/adew/Overview.doc
+0
+0
+\begindata{link,538459144}
+Datastream version: 2
+Overview
+2
+
+black
+white
+\enddata{link,538459144}
+\enddata{link,538459144}
+\view{linkview,538459144,23,0,0} 
+\begindata{link,538459672}
+Datastream version: 3
+/afs/cs/misc/atk/@sys/alpha/doc/atk/adew/Tutorial.doc
+0
+0
+\begindata{link,538459672}
+Datastream version: 2
+Tutorial
+2
+
+black
+white
+\enddata{link,538459672}
+\enddata{link,538459672}
+\view{linkview,538459672,24,0,0}
+
+
+}For detailed information, consult the reference manual.
+
+
+\center{\
+\begindata{link,538460296}
+Datastream version: 3
+/afs/cs/misc/atk/@sys/alpha/doc/atk/adew/RefMan.doc
+0
+0
+\begindata{link,538460296}
+Datastream version: 2
+Reference Manual
+2
+
+black
+white
+\enddata{link,538460296}
+\enddata{link,538460296}
+\view{linkview,538460296,25,0,0}}
+
+\begindata{bp,538460760}
+Version 2
+n 0
+\enddata{bp,538460760}
+\view{bpv,538460760,26,0,0}
+Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
+
+\smaller{\smaller{$Disclaimer: 
+
+Permission to use, copy, modify, and distribute this software and its 
+
+documentation for any purpose and without fee is hereby granted, provided 
+
+that the above copyright notice appear in all copies and that both that 
+
+copyright notice and this permission notice appear in supporting 
+
+documentation, and that the name of IBM not be used in advertising or 
+
+publicity pertaining to distribution of the software without specific, 
+
+written prior permission. 
+
+                        
+
+THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+
+TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+
+HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+
+DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+
+DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+
+OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+
+WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+
+
+ $
+
+}}\enddata{text,537691672}

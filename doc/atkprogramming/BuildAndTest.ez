@@ -1,0 +1,420 @@
+\begindata{text,537746808}
+\textdsversion{12}
+\template{default}
+\define{fieldcontent
+}
+\majorheading{\bigger{\bigger{\bigger{\bigger{Building and Testing
+
+Andrew Objects and Applications \
+
+
+}}}}
+\bigger{Andrew User Interface System}
+
+V\bigger{ersion 8   (October 1996)
+
+}}
+
+
+\bold{\indent{\indent{\indent{\indent{Andrew Consortium
+
+School of Computer Science
+
+Carnegie Mellon University
+
+5000 Forbes Avenue
+
+Pittsburgh, PA 15213-3891
+
+USA}}}}
+
+}
+\indent{Phone:			\bold{(412) 268-6710}
+
+Fax:			\bold{(412) 268-5576}
+
+Web:			\bold{http://www.cs.cmu.edu/~AUIS}
+
+Demo:			\bold{finger @atk.cs.cmu.edu}
+
+Archives:		\bold{ftp.andrew.cmu.edu:  /pub/AUIS}
+
+Bugs:			\bold{\bold{info-andrew-bugs@andrew.cmu.edu
+
+}}Info & Subscriptions:	\bold{info-andrew-request@andrew.cmu.edu}}
+
+
+
+\indent{\indent{
+
+
+In the documentation, the source directory will be referred to as 
+\typewriter{$/} and the destination as \typewriter{$ANDREWDIR/}.
+
+}}
+\indent{\indent{If you are reading an all-ASCII version of this file, the 
+version in Andrew format is in the distribution at:}}
+
+
+\center{\typewriter{$ANDREWDIR}}\typewriter{\center{\typewriter{/}}doc/DEVEL\
+OPER/BuildAndTest.ez\smaller{
+
+}}\smaller{
+
+
+
+
+
+
+\smaller{\bigger{Copyright 1996 Carnegie Mellon University.  All rights 
+reserved. Please see further copyrights and disclaimer at the end of this 
+file.}}}
+
+\begindata{bp,537790120}
+Version 2
+n 0
+\enddata{bp,537790120}
+\view{bpv,537790120,0,0,0}
+
+\bold{\bigger{\bigger{1.	Introduction
+
+}}}
+Suppose you are creating a new object called "xwidgetx".   Create a 
+directory. This directory needs at least an Imakefile file.  It will have 
+as many subdirectories as you like.  You are installing some xwidgetx 
+specific files in $ANDREWDIRE/etc/xwiudgetx.  Sample file:
+
+
+
+\bold{\bigger{\bigger{\bigger{\bigger{\smaller{\smaller{\smaller{1.1	
+Imakefile}}}}}}}}
+
+
+============================
+
+#define IHaveSubdirs
+
+SUBDIRS =  docs data view util
+
+MkdirTarget($\{DESTDIR\}/etc/xwidgetx)
+
+============================
+
+
+
+\bold{\bigger{\bigger{2.	Build Process Overview}}}
+
+
+Be sure that your environment defines the variable ANDREWDIR having the as 
+its value the root of the tree of installed Andrew files.
+
+
+Give the commands
+
+
+	\typewriter{genmake}
+
+	\typewriter{make Install}
+
+
+The 'genamke' creates a (machine-dependent) Makefile from the local 
+Imakefile.  Then 'make Install'  builds Makefiles in all subordinate 
+directories, does all compilations and installs the resulting objects into 
+whatever destination tree is specified in your site.h file as 
+DEFAULT_ANDREWDIR_ENV.
+
+
+See \typewriter{\typewriter{ImakeMacros.e}z} for details on what you can 
+put in an Imakefile.
+
+
+See \typewriter{AndrewCoding.ez} for coding rules and techniques for 
+platform independence.
+
+\section{
+
+\bigger{3.	Makefile Targets}
+
+}
+A constructed Makefile will define the following targets:
+
+
+\typewriter{depend}
+
+
+\fieldcontent{Generates dependency information for the Makefile in the 
+current directory.}
+
+
+\typewriter{all}\sansserif{
+
+}
+\fieldcontent{Builds all non-testing programs, libraries, object files and 
+other generated files in the current directory.  If no target is specified 
+on the `make` command line, this target will be built.}
+
+
+\typewriter{install}\sansserif{
+
+}
+\fieldcontent{If needed, builds everything that would be built by 'all' and 
+then installs executables, documentation, and other files in the current 
+directory.}
+
+
+\typewriter{doc}\sansserif{
+
+}
+\fieldcontent{Builds and/or installs all the documentation in the current 
+directory.
+
+}
+\typewriter{clean
+
+}
+\fieldcontent{Removes from the current directory all files generated during 
+a build.  (Except the Makefile.)}
+
+\subsection{
+}\typewriter{tidy
+
+}
+\fieldcontent{Removes all non-installed files from the current directory. 
+ (e.g. .o files, and other files which are produced during the build but 
+not needed later.)}
+
+\subsection{
+}\typewriter{aliases}
+
+
+\fieldcontent{Installs the help aliases in the current directory.}
+
+
+\typewriter{Makefile
+
+}
+\fieldcontent{Rebuilds the makefile in the current directory from the 
+Imakefile.  If the dependencies have already been built, they are copied to 
+the file .depends and appended to the newly generated Makefile.}
+
+
+\typewriter{system
+
+}
+\fieldcontent{An alias for Install.}
+
+
+\typewriter{world
+
+}
+\fieldcontent{An alias for depend followed by install.}
+
+
+\typewriter{tags
+
+}
+\fieldcontent{Executes `tags` on all .C and .H files in the current 
+directory and all subordinate directories listed in the make variables 
+SUBDIRS and EXTRASUBDIRS.  (Rarely used, may not even work.)}
+
+
+\typewriter{install.time
+
+install.doc
+
+}
+\fieldcontent{Used to control the installation of executables, libraries, 
+etc.  as well as documentation.  This is not normally used explicitly by 
+users.}
+
+
+\typewriter{do.alias
+
+}
+\fieldcontent{Used internally to construct the helpaliases.}
+
+
+The following are defined if '#define IHAVESUBDIRS' occurs in the 
+Imakefile.  In this case there must also be a Makefile line defining the 
+variable SUBDIRS to be a list of the subordinate directories.  (In our 
+local source tree, the directory must also contain a file called 'subdirs' 
+containing a list of the subdirectories, one per line.)  These are 
+recursive commands in that they process all subdirectories, all 
+subsubdirectories, and so on.  Some commands also process the 
+subdirectories listed in the make variable EXTRASUBDIRS.
+
+
+\typewriter{listdirs
+
+}
+\fieldcontent{Prints the SUBDIRS value.}
+
+
+\typewriter{dependAll
+
+}
+\fieldcontent{Executes make depend all in the current directory and the 
+subdirectories listed in the SUBDIRS and EXTRASUBDIRS variables.}
+
+
+\typewriter{All
+
+}
+\fieldcontent{Executes make all in the current directory and the 
+subdirectories listed in the SUBDIRS and EXTRASUBDIRS variables.}
+
+
+\typewriter{Doc
+
+}
+\fieldcontent{Builds and/or installs all the documentation in the current 
+directory and the subdirectories listed in the SUBDIRS variable.}
+
+
+\typewriter{Aliases
+
+}
+\fieldcontent{Installs the help aliases in the current directory and the 
+subdirectories listed in the SUBDIRS variable.}
+
+
+\typewriter{Install
+
+}
+\fieldcontent{Installs executables, documentation, and other files from the 
+current directory and from the subdirectories listed in the SUBDIRS 
+variable.}
+
+
+\typewriter{dependInstall
+
+}
+\fieldcontent{Executes `make depend install` in the current directory and 
+the subdirectories listed in the SUBDIRS variable.}
+
+
+\typewriter{Makefiles
+
+}
+\fieldcontent{Executes a make Makefile  in the current directory and the 
+subdirectories listed in the SUBDIRS and EXTRASUBDIRS variables.}
+
+
+\typewriter{World
+
+}
+\fieldcontent{Executes a make world in the current directory and the 
+subdirectories listed in the SUBDIRS variable.  (At the top-level of the 
+AUIS distribution this will first execute `make Makefiles` and then `make 
+dependInstall`.)}
+
+
+\typewriter{Clean
+
+}
+\fieldcontent{Executes a make clean in the current directory and the 
+subdirectories listed in the SUBDIRS and EXTRASUBDIRS variables.}
+
+
+\typewriter{Tidy
+
+}
+\fieldcontent{Executes a make tidy in the current directory and the 
+subdirectories listed in the SUBDIRS and EXTRASUBDIRS variables.}
+
+
+\typewriter{subdirMakefiles
+
+}
+\fieldcontent{Executes `make Makefiles` in the subdirectory specified by 
+the MAKE_SUBDIR make variable.  Sample usage: \
+
+
+	make subdirMakefiles MAKE_SUBDIR=directoryname}
+
+
+\begindata{bp,537802984}
+Version 2
+n 0
+\enddata{bp,537802984}
+\view{bpv,537802984,1,0,0}
+
+----------------------------
+
+"packages"
+
+
+	add documentation of library registration
+
+		register them in a "package" install in lib/packages
+
+	add documentation of non-ATK library ordering
+
+			overhead/genstatl/liborder
+
+	\
+
+
+list of libraries  to include in runapp:
+
+	libs.all
+
+	generated from atk/pkgs.mcr
+
+
+list of libraries to register
+
+	lib/packages/...
+
+	includes a "defaults" file with some purpose or another`
+
+	used to make the installation indepemdent of where it is installed
+
+		even if they have been relocated to another destination location.  \
+
+
+
+config/Imakefile registers X, AFS, and non-ATK libraries.  atk and contrib 
+register their own libraries.  There is no harm if a non-existant library 
+is registered.
+
+
+genstatl uses $ANDREWDIR/lib/atk/*.\{rf,lt\} to order ATK-libraries
+
+
+
+typical build problems
+
+
+using gdb
+
+\begindata{bp,537803224}
+Version 2
+n 0
+\enddata{bp,537803224}
+\view{bpv,537803224,2,0,0}
+\smaller{Copyright Carnegie Mellon University 1996.  All rights reserved.
+
+
+$Disclaimer: 
+# Permission to use, copy, modify, and distribute this software and its 
+# documentation for any purpose and without fee is hereby granted, provided 
+# that the above copyright notice appear in all copies and that both that 
+# copyright notice and this permission notice appear in supporting 
+# documentation, and that the name of IBM not be used in advertising or 
+# publicity pertaining to distribution of the software without specific, 
+# written prior permission. 
+#                         
+# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+# 
+#  $}
+
+
+\enddata{text,537746808}

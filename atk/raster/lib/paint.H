@@ -1,0 +1,75 @@
+ATK_INTER
+#ifndef _paint_H_
+#define _paint_H_
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+// Permission to use, copy, modify, and distribute this software and its 
+// documentation for any purpose and without fee is hereby granted, provided 
+// that the above copyright notice appear in all copies and that both that 
+// copyright notice and this permission notice appear in supporting 
+// documentation, and that the name of IBM not be used in advertising or 
+// publicity pertaining to distribution of the software without specific, 
+// written prior permission. 
+//                         
+// THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+// TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+// MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+// HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+// DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+// DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+// OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+// WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+// 
+//  $
+*/
+
+
+ 
+
+/*  paint.H
+
+	paint package
+
+	Routines for reading and writing rasters in the Macpaint format
+
+ */
+
+#include <pixelimage.H>
+
+#define  paint_PROGRAMMERVERSION    1
+
+#define BUFBITS (1<<17)
+
+#include <ATK.H>
+class paint : public ATK   {
+public:
+	virtual ATKregistryEntry *ATKregistry();
+
+
+
+
+	static void WriteRow(FILE *file, unsigned char *byteaddr, long nbits);
+		/* write to 'file' the Macpaint representation of the
+			 'nbits' bits starting at location 'byteaddr' */
+
+	static long ReadRow(FILE *file,  unsigned char *row,  long length)  ;
+		/* Reads from 'file' the encoding of bytes to fill in 'row'.
+		    Row will be truncated or padded (with WHITE)
+		    to exactly 'length' bytes. */
+
+	static long ReadImage(FILE *file, class pixelimage *pix)  ;
+		/* Read a raster image from 'file' and put it in 'pix'
+			return error code, as defined in dataobj.ih */
+
+	static void WriteImage(FILE *file, class pixelimage *pix, struct rectangle *sub);
+		/* Write the subraster 'sub' image to 'file' from 'pix' */
+
+};
+
+
+#endif /* _paint_H_ */
