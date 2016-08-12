@@ -287,7 +287,15 @@ extern int GR_SEND();
   However, we also want to be able to run the Vice binaries on a non-Vice system
   without a kernel panic, so we include a run-time check. */
 
-extern "C" int AMS_ViceIsRunning;  /* Must be initialized by calling CheckAMSConfiguration, in libmail */
+#ifndef exC
+#ifdef __cplusplus
+#define exC "C"
+#else
+#define exC
+#endif
+#endif
+
+extern exC int AMS_ViceIsRunning;  /* Must be initialized by calling CheckAMSConfiguration, in libmail */
 
 
 #define UNUSEDATTRNAME "***UNUSED***"
