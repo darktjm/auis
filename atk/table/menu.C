@@ -66,7 +66,7 @@ void m_drawedges(register class spread  * V, char  ch);
 void m_eraseedges(register class spread  * V, char  ch);
 void m_format (register class spread  * V, char     ch);
 void m_precision (register class spread  * V, char     ch);
-static objecttest(register class spread  *V, char  *name, char  *desiredname);
+static int objecttest(register class spread  *V, char  *name, char  *desiredname);
 void m_imbed (register class spread  * V, char     ch);
 void m_resetheights (register class spread  * V, char     ch);
 void m_lock (register class spread  * V, char     ch);
@@ -97,7 +97,7 @@ static char *newext(char  *filename			/* "mumble.y" or something */, char  *exte
     static char newname[257];
     char *safefn;
 
-    safefn = (filename == NULL ? "" : filename);
+    safefn = (filename == NULL ? (char *)"" : filename);
     strncpy(newname, safefn, (sizeof newname) - 1);
     newname[(sizeof newname) - 1] = '\0';
     for (cp = newname, suffixp = NULL; *cp; cp++)
@@ -376,7 +376,7 @@ void m_precision (register class spread  * V, char     ch)
 	(MyTable(V))->SetPrecision ( (param >= 0 ? param : 0), &(V->selection));
 }
 
-static objecttest(register class spread  *V, char  *name, char  *desiredname)
+static int objecttest(register class spread  *V, char  *name, char  *desiredname)
 {
     if(ATK::LoadClass(name) == NULL){
         char foo[640];

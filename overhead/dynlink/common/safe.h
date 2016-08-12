@@ -73,7 +73,7 @@ static void safe_free(char *thing)
     return ;
 }
 
-static safe_read(struct doload_environment *e, char *thing, long size)
+static int safe_read(struct doload_environment *e, char *thing, long size)
 {	
     if ((unsigned)read(e->fd, thing, (int)size) < size)
 	doload_punt(e, "incomplete load file");
@@ -92,7 +92,7 @@ static void safe_write(struct doload_environment *e, int fd, char *thing, long s
     return;
 }
 
-static safe_lseek(struct doload_environment *e, long offset, int how)
+static int safe_lseek(struct doload_environment *e, long offset, int how)
 {	
     if (lseek(e->fd, offset, how) == -1)
 	doload_punt(e, "seek failed");

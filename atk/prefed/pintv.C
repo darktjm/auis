@@ -1056,7 +1056,7 @@ static boolean AddInstances(struct prefdesc  *pd, struct addrock  *rock)
 	(sb)->AddRecipient( atom::Intern(changeatomstr), self, (observable_fptr)changecondition, (long)pd);
 	PushView(pt, pos, "sbuttonv", (class dataobject *)sb);
 	pos++;
-	pos=AddVal(pt, pos, "Conditional", pd->cond?pd->cond:"Always", TRUE);
+	pos=AddVal(pt, pos, "Conditional", pd->cond?pd->cond:(char *)"Always", TRUE);
 
 
 	if(pd->val) {
@@ -1071,7 +1071,7 @@ static boolean AddInstances(struct prefdesc  *pd, struct addrock  *rock)
 	    PushStyle(pt, pos, sizeof(editors)-2, bold);
 	    pos+=sizeof(editors) /* - 1  REMOVE -1 WHEN doing views */;
 	    (pt)->AlwaysInsertCharacters( pos, " to ", 4);
-	    val=pd->val?pd->val:"<None>";
+	    val=pd->val?pd->val:(char *)"<None>";
 	    len=strlen(val);
 	    (pt)->AlwaysInsertCharacters( pos+4, val, len);
 

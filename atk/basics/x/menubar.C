@@ -896,7 +896,7 @@ static Bool eventp(Display  *dpy, XEvent  *event, char  *args)
 	    return  (((XMotionEvent *) event)->window == mb->mbi->client || menu); /**/
 	    
 	case LeaveNotify:
-	    return  (Bool)menu || ((XAnyEvent *)event)->window==mb->mbi->client;
+	    return  (Bool)!!menu || ((XAnyEvent *)event)->window==mb->mbi->client;
 
 	case KeyPress:
 	    return True;

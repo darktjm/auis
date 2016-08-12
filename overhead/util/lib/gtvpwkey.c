@@ -44,8 +44,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <wp.h>
 #endif /* WHITEPAGES_ENV */
 
-extern int errno;
-
 #ifdef WHITEPAGES_ENV
 static char *EMPTYFIELD = "";
 

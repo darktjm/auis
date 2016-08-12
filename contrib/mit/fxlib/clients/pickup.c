@@ -52,7 +52,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
 
 /*** Global variables ***/
 long do_dump();
-extern int verbose, errno;
+extern int verbose;
 int kbytes = 0;
 
 /*

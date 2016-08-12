@@ -49,7 +49,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <wp.h>
 #include <btwp.h>
 #endif /* WHITEPAGES_ENV   */
-extern int errno;
 
 /*
 To enumerate all the prime keys in the database, use wp_Generate(PKPtr).  Give this procedure a pointer to a null Prime Key and it will allocate the first PrimeKey and return it.  Give it back that PrimeKey and it will deallocate it, find the next one, and return the next one.  If there's no next one, it will return wperr_NoError and yet set your pointer to NULL.

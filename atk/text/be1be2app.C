@@ -40,6 +40,7 @@ ATK_IMPL("be1be2app.H")
 #include <be1be2.H>
 #include <text.H>
 #include <be1be2app.H>
+#include <string.h>
 
 /*
  * Obtain list of input files
@@ -109,7 +110,7 @@ static void Convert(char  *fileName)
 
     fp = fopen(fileName, "r");
     if (fp == NULL) {
-        fprintf(stderr, "%s: Cannot open %s (%s)\n", progName, fileName, sys_errlist[errno]);
+        fprintf(stderr, "%s: Cannot open %s (%s)\n", progName, fileName, strerror(errno));
         return;
     }
 
@@ -138,7 +139,7 @@ static void Convert(char  *fileName)
 
     fp = fopen(outName, "w");
     if (fp == NULL) {
-        fprintf(stderr, "%s: Could not open output file %s (%s)\n", progName, outName, sys_errlist[errno]);
+        fprintf(stderr, "%s: Could not open output file %s (%s)\n", progName, outName, strerror(errno));
         (textp)->Destroy();
         return;
     }
@@ -146,7 +147,7 @@ static void Convert(char  *fileName)
     if ((textp)->Write( fp, 1, 1) < 0) {
         fclose(fp);
         unlink(outName);
-        fprintf(stderr, "%s: Error writing output file %s (%s)\n", progName, outName, sys_errlist[errno]);
+        fprintf(stderr, "%s: Error writing output file %s (%s)\n", progName, outName, strerror(errno));
         (textp)->Destroy();
         return;
     }

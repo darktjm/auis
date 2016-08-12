@@ -37,6 +37,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp
 
 #include "defs.h"
 #include <ctype.h>
+#include <string.h>
 #include <andrewos.h> /* sys/types.h */
 struct timeb
 {
@@ -668,15 +669,7 @@ char *
 errmsg(code)
 int code;
 {
-	extern int sys_nerr;
-	extern char *sys_errlist[];
-	static char ebuf[6+5+1];
-
-	if (code > sys_nerr) {
-		(void) sprintf(ebuf, "Error %d", code);
-		return ebuf;
-	} else
-		return sys_errlist[code];
+	return strerror(code);
 }
 
 /*

@@ -21,8 +21,8 @@
  * 
  *  $
  */
-#include <new.h>
 #include <mflex.H>
+#include <new>
 
 class oflex : public mflex {
   protected:

@@ -189,7 +189,8 @@ static void ProcessColors(Display *dpy) {
 		if(k.r==PPM_GETR(newcolors[i].color) && k.g==PPM_GETG(newcolors[i].color) && k.b==PPM_GETB(newcolors[i].color)) break;
 	    }
 	    if(i>=upperbound) {
-		XFreeColors(dpy, DefaultColormap(dpy, DefaultScreen(dpy)), &*iter4, 1, 0);
+		unsigned long c = *iter4;
+		XFreeColors(dpy, DefaultColormap(dpy, DefaultScreen(dpy)), &c, 1, 0);
 		allocated.Remove(k);
 		notify=TRUE;
 	    }

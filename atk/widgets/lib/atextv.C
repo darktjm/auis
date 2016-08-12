@@ -211,7 +211,7 @@ START_ATEXTV_CALLBACK_METHOD(DataViewMethod) {
     
     AFORMULA_BEGIN;
     AShadow *asb=GetBorder();
-    if((boolean)asb) {
+    if((boolean)(long)asb) {
         if((boolean)dself->scrolled) asb->UseBorder(0);
         else asb->UseBorder(AShadow_Plain);
     }
@@ -271,7 +271,7 @@ START_ATEXTV_CALLBACK_METHOD(BorderMethod) {
     GetLogicalBounds(&bounds);
     AShadow *asb=GetBorder();
     AFORMULA_BEGIN;
-    if((boolean)asb) {
+    if((boolean)(long)asb) {
         if((boolean)dself->scrolled) if(asb) asb->UseBorder(0);
         else if(asb) asb->UseBorder(AShadow_Plain);
     }

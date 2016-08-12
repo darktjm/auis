@@ -42,6 +42,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp
 #include <tcpconn.h>
 #include <respcode.h>
 #include <nntpxmit.h>
+#include <errno.h>
 
 #define	TRUE	1
 #define	FALSE	0
@@ -53,7 +54,6 @@ char	*sfgets();
 char	*rfgets();
 
 extern char	*progname;
-extern	int	errno;
 extern	char	*pname;
 extern	char	*errmsg();
 extern  char	retmsg[];

@@ -70,7 +70,7 @@ ATK_IMPL("pshbttnv.H")
 #define DBG(x) ;
 #endif
 
-#define NO_MSG "Push Me"
+#define NO_MSG (char *)"Push Me"
 
 #define PROMPTFONT "andysans12b"
 #define FONT "andysans"

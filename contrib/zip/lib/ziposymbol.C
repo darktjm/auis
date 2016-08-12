@@ -75,11 +75,8 @@ END-SPECIFICATION  ************************************************************/
 #include <sys/stat.h>
 #include <ctype.h>
 #include <errno.h>
+#include <string.h>
 
-#ifndef M_UNIX
-extern int				  sys_nerr;
-#endif
-extern char				 *sys_errlist[];
 static char				 *symbol_library_path = NULL;
 
 static struct symbol_set	         *symbol_sets = NULL;
@@ -1001,7 +998,7 @@ long Open_Symbol_Set_File( class ziposymbol		  *self, struct symbol_set		  *set 
     { DEBUG(Open ERROR);
     status = zip_failure;
     sprintf( buffer, "ERROR Accessing '%s/%s': %s",
-	     set->set_path, set->set_name, sys_errlist[errno] ); 
+	     set->set_path, set->set_name, strerror(errno) );
     (self->view_object)->Announce(  buffer );
     }
   OUT(Open_Symbol_Set_File);

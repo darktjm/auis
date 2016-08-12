@@ -40,6 +40,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/muse
 #include <stdio.h>
 #include <signal.h>
 #include <errno.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/file.h>
 #include <sys/time.h>
@@ -66,11 +67,6 @@ typedef struct fdinfo {
     struct timeval tv;
     char buf[BUFSIZE];
 } fdinfo;
-
-/* from OS: */
-extern int errno;
-extern int sys_nerr;
-extern char *sys_errlist[];
 
 /* global storage buffers */
 static mufbuf current, new;
@@ -130,7 +126,7 @@ static void unix_fatal(msg)
 
     gettimeofday(&tv, 0);
     fprintf(stderr, "%s: %s %s", msg,
-	    (errno < sys_nerr ? sys_errlist[errno] : "unknown error"),
+	    strerror(errno),
 	    ctime(&tv.tv_sec));
     exit(1);
 }

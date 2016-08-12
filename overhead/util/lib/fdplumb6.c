@@ -53,9 +53,11 @@ char *name;
     DIR *d;
 
     d = opendir(name);
+#if 0 /* non-portable, not worth porting */
     if (d) {
 	RegisterOpenFile(d->dd_fd, name, FDLEAK_OPENCODE_OPENDIR);
     }
+#endif
     return(d);
 }
 
@@ -63,7 +65,9 @@ char *name;
 void dbg_closedir(d)
 DIR *d;
 {
+#if 0 /* non-portable, not worth porting */
     RegisterCloseFile(d->dd_fd);
+#endif
     closedir(d);
 }
 

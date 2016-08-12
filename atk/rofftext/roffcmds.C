@@ -198,7 +198,7 @@ rm_cmd(class rofftext  *self, Trickle  t, boolean  br,
 		if (value) {
 			DEBUG(1, (stderr, "renaming string (%s)  ", arg));
 			v = (self->Macros)->Rename(arg, argv[2]);
-			v += (int)(self->Commands)->Rename(arg, argv[2])
+			v += (int)(long)(self->Commands)->Rename(arg, argv[2])
 			DEBUG(1,  (stderr, "%s\n", 
 					(v ? "succeeded" : "FAILED ***")));
 			return;
@@ -224,7 +224,7 @@ rm_cmd(class rofftext  *self, Trickle  t, boolean  br,
 		if (value) {
 			DEBUG(1, (stderr, "removing string (%s)", arg));
 			v = (self->Macros)->Delete(arg);
-			v += (int)(self->Commands)->Delete(arg);
+			v += (int)(long)(self->Commands)->Delete(arg);
 			free(value);
 			DEBUG(1, (stderr, "%s\n",
 					(v ? "succeeded" : "FAILED ***")));
@@ -354,7 +354,7 @@ void de_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
     self->v_CopyMode = TRUE;
     self->CurrentDiversion->SnarfOutput = b;
 
-    Scan(self,t,((argc<3)?".":end));
+    Scan(self,t,((argc<3)?(char *)".":end));
 
     self->CurrentDiversion->SnarfOutput = NULL;
     self->v_CopyMode = FALSE;
@@ -402,7 +402,7 @@ void am_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
     self->v_CopyMode = TRUE;
     self->CurrentDiversion->SnarfOutput = b;
 
-    Scan(self,t,((argc<3)?".":end));
+    Scan(self,t,((argc<3)?(char *)".":end));
 
     self->CurrentDiversion->SnarfOutput = NULL;
     self->v_CopyMode = FALSE;
@@ -1322,7 +1322,7 @@ void ig_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
     self->v_CopyMode = TRUE;
     self->CurrentDiversion->SnarfOutput = b;
 
-    Scan(self,t,((argc<2)?".":end));
+    Scan(self,t,((argc<2)?(char *)".":end));
 
     self->CurrentDiversion->SnarfOutput = NULL;
     self->v_CopyMode = FALSE;

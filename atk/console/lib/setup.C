@@ -61,7 +61,8 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/li
 #include <sys/stat.h>
 #include <signal.h>
 #include <ctype.h>
-#include <sys/errno.h>
+#include <string.h>
+#include <errno.h>
 #ifndef hp9000s300
 #endif /* hp9000s300 */
 #include <sitevars.h>
@@ -2149,7 +2150,7 @@ void WriteMonsterLog(class consoleClass  *self, char  *rock)
 
 	if ((fp = fopen(LogFileName, "w")) == NULL) {
 	    sprintf(Question, "Root can't write %s [%s]; try again: ", LogFileName,
-		    errno>0 && errno<=sys_nerr ? sys_errlist[errno] : "unknown error" );
+		    strerror(errno));
 	    /*    continue;*/
 	    exit(-1);
 	}

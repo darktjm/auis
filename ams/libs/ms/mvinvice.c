@@ -33,8 +33,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RC
 #include <errno.h>
 #include <andrewos.h> /* sys/file.h */
 
-extern int errno;
-
 RenameEvenInVice(ThisFileName, NewFileName)
 char   *ThisFileName,
        *NewFileName;

@@ -224,7 +224,7 @@ PUBLIC char *HTPutScript;
 PUBLIC char *HTSearchScript;
 #endif /* DECC */
 #else /* not VMS */
-PRIVATE FILE *	     output = stdout;
+PRIVATE FILE *	     output = NULL;
 #endif /* not VMS */ 
 
 /* ------------------------------------------------------------------------- */
@@ -426,7 +426,7 @@ PRIVATE void Reference_List ARGS1(BOOL, titles)
 		    (char *)(title ? title : address));
 	    free(address);
 	}
-	fflush(stdout);
+	fflush(output);
     }
 }      
 
@@ -1245,9 +1245,7 @@ int main ARGS2(int, argc, char **, argv)
     arc.locale=0; arc.encoding=0; arc.i_encoding=0; doinull();
 #endif
 
-#ifdef VMS
     output = stdout;
-#endif /* VMS */
 	
     request =  HTRequest_new();
 

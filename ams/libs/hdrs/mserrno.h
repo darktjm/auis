@@ -52,8 +52,6 @@
 
 #include <errno.h>
 
-extern int errno;
-
 #ifndef NODECLAREMSERRCODE
 extern long mserrcode;
 #endif /* NODECLAREMSERRCODE */

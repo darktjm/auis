@@ -88,8 +88,6 @@ static char sccsid[] = "@(#)clnt_tcp.c 1.37 87/10/05 Copyr 1984 Sun Micro";
 
 #define MCALL_MSG_SIZE 24
 
-extern int errno;
-
 static int	readtcp();
 static int	writetcp();
 

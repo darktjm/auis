@@ -39,9 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/
 #include <util.h>
 #include <errno.h>
 
-extern int errno;
-
-
 struct eventnode *RootEventNode = NULL;
 
 #ifndef NORCSID

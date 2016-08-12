@@ -35,6 +35,7 @@ BEGINCPLUSPLUSPROTOS
 #define PLUMBFDLEAKS
 #include <stdio.h>
 #include <fcntl.h>
+#include <sys/socket.h>
 
 #define open dbg_open
 extern int dbg_open(char  *path, int  flags , int  mode);
@@ -49,34 +50,34 @@ extern int dbg_close(int  fd);
 extern int dbg_fclose(FILE  *fp);
 
 #define vclose dbg_vclose
-extern dbg_vclose(int  fd);
+extern int dbg_vclose(int  fd);
 
 #define vfclose dbg_vfclose
-extern dbg_vfclose(FILE  *fp);
+extern int dbg_vfclose(FILE  *fp);
 
 #define popen dbg_popen
 extern FILE *dbg_popen(char  *path , char  *type);
 
 #define pclose dbg_pclose
-extern dbg_pclose(FILE  *fp);
+extern int dbg_pclose(FILE  *fp);
 
 #define topen dbg_topen
 extern FILE *dbg_topen(char  *path , char  *argv[] , char  *mode, int  *pgrp);
 
 #define tclose dbg_tclose
-extern dbg_tclose(FILE  *fp, int  seconds , int  *timedout);
+extern int dbg_tclose(FILE  *fp, int  seconds , int  *timedout);
 
 #define t2open dbg_t2open
-extern dbg_t2open(char  *name , char  *argv[], FILE  **r , FILE  **w);
+extern int dbg_t2open(char  *name , char  *argv[], FILE  **r , FILE  **w);
 
 #define t2close dbg_t2close
-extern dbg_t2close(FILE  *fp, int  seconds , int  *timedout);
+extern int dbg_t2close(FILE  *fp, int  seconds , int  *timedout);
 
 #define qopen dbg_qopen
 extern FILE *dbg_qopen(char  *path , char  *argv[] , char  *mode);
 
 #define qclose dbg_qclose
-extern dbg_qclose(FILE  *fp);
+extern int dbg_qclose(FILE  *fp);
 
 #define creat dbg_creat
 extern int dbg_creat(char  *path, int  mode);

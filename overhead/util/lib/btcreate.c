@@ -46,7 +46,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #ifdef WHITEPAGES_ENV /* avoid makedepend "errors" */
 #include <btint.h>
 #endif /* WHITEPAGES_ENV  */
-extern int errno;
 
 static int Debugging;
 

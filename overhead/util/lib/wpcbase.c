@@ -52,7 +52,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #endif /* WHITEPAGES_ENV   */
 #include <svcconf.h>
 
-extern int errno;
 
 /* Compatibility routines for non-cellular use */
 struct wp_CD *ThisCellDir = NULL;

@@ -82,7 +82,7 @@ public:
       virtual char* ap_Shorten(char *fname)  ;
       virtual int fwriteallchars(char *s, int len, FILE *fp)  ;
       virtual long MSErrCode()  ;
-      virtual int vdown(int errno)  ;
+      virtual int vdown(int Errno)  ;
       virtual void CUI_BuildNickName(char *shortname, char *longname);
       virtual int CUI_CheckMailboxes(char *forwhat)  ;
       virtual long CUI_CloneMessage(int cuid, char *DirName, int code)  ;

@@ -46,8 +46,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/wputi
 #include <pwd.h>
 #include <svcconf.h>
 
-extern int errno;
-
 #include <bt.h>
 #include <wp.h>
 

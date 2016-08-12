@@ -48,6 +48,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RC
 #include <sys/stat.h>
 #include <andrewos.h>                  /* sys/file.h */
 #include <system.h>
+#include <string.h>
 
 #ifdef sys_vax_11
 #define void int                       /* What a grubby hack -- vaxes should
@@ -247,7 +248,7 @@ char           *MailboxFile;
             if (EliErr_UnixErr(st)) {
                 errbuf_remaining = EliErrBufLim - strlen(EliErrBuf);
                 strcat(EliErrBuf, " {");
-                strncat(EliErrBuf, sys_errlist[EliErr_UnixErr(st)], errbuf_remaining - 16);
+                strncat(EliErrBuf, strerror(EliErr_UnixErr(st)), errbuf_remaining - 16);
                 strcat(EliErrBuf, "}");
             }
             if (EliErr_BadSexpP(st)) {

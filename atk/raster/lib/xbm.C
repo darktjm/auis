@@ -102,11 +102,11 @@ ATKdefineRegistry(xbm, ATK, NULL);
 #endif
 #if !defined(vax)
 #endif
-static NextInt (FILE  *fstream);
+static int NextInt (FILE  *fstream);
 static void initHexTable();
 
 
-static NextInt (FILE  *fstream)
+static int NextInt (FILE  *fstream)
     {
     int	ch;
     int	value = 0;

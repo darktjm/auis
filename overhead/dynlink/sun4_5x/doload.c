@@ -43,7 +43,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynli
 char doload_extension[] = ".do";
 
 int doload_trace=0;		/* nonzero if debugging */
-extern int errno;
 
 static int dummyfunc(int argc, char **argv) {
 }

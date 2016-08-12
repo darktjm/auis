@@ -35,7 +35,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/s
 ATK_IMPL("simpletext.H")
 
 #include <sys/stat.h>
-#include <sys/errno.h>
+#include <errno.h>
 #include <attribs.h>
 
 #include <dataobject.H>
@@ -44,8 +44,6 @@ ATK_IMPL("simpletext.H")
 #include <mark.H>
 
 #include <simpletext.H>
-
-extern int errno;
 
 #define INITIALSTRINGSIZE 100
 #define ADDITIONALSIZE 50

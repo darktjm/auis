@@ -41,11 +41,11 @@ SYS_CONFDIR = ix86_Linux
 #include <allsys.mcr>
 
 OSSUPPORT= ossupport
-        XLIBDIR = /usr/X386/lib
+        XLIBDIR = /usr/lib
         XINCDIR = /usr/include
-        XFC = /usr/bin/X11/bdftopcf
-        XBINDIR = /usr/bin/X11
-        XUTILDIR = /usr/bin/X11
+        XFC = /usr/bin/bdftopcf
+        XBINDIR = /usr/bin
+        XUTILDIR = /usr/bin
 	XMKFONTDIR = $(XUTILDIR)/mkfontdir
 /* Now for the system-dependent information. */
   
@@ -80,6 +80,9 @@ ATKLIBFLAGS = -s
 PICFLAG=
 ECOMPFLAGS=
 
+/* jpeg & tiff are too old; use included versions */
+/* also, libutil seems to be getting picked up somewhere else */
+NORELS=libjpeg.a libtiff.a libutil.a
 LINKPREFIX = $(BASEDIR)/etc/relativize $(LOCALNORELS) $(NORELS) ---
 
         SYS_LIBRARIES = $(DESTDIR)/lib/libatkos.a

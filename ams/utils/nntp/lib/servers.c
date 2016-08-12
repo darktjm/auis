@@ -42,7 +42,6 @@ extern FILE *ser_rd_fp;
 extern FILE *ser_wr_fp;
 int server_socket;
 extern char *progname;
-extern int errno;
 
 /*
  * server_create  Set ourselves up to be an NNTP server

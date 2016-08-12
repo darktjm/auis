@@ -23,6 +23,7 @@ static char rcsid_util_c[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contr
 
 #include <fxserver.h>
 #include <ctype.h>
+#include <string.h>
 #include <sys/file.h>
 #include <syslog.h>
 
@@ -246,12 +247,9 @@ fatal(s, a, b, c, d, e)
     char *s;
     int a, b, c, d, e;
 {
-    extern char *sys_errlist[];
-    extern int errno;
-    
     printf("fxserver: fatal error - ");
     printf(s, a, b, c, d, e);
-    printf("\n  Last system error = %s\n", sys_errlist[errno]);
+    printf("\n  Last system error = %s\n", strerror(errno));
     exit(1);
 }
 

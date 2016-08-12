@@ -1175,8 +1175,8 @@ brancher: {
 		if ((left)->GetText() != (right)->GetText())
 			(left)->MakeConst("");	/* EmptyText IS UNIQUE */
 		else {
-			register start = (left)->GetPos();
-			register end = (right)->GetPos() 
+			register int start = (left)->GetPos();
+			register int end = (right)->GetPos() 
 				+ (right)->GetLength();
 			if (end < start)
 				start = end;
@@ -1778,7 +1778,7 @@ brancher: {
 					&&  (sstpl=(s)->GetTemplateName()) 
 						!= NULL
 					&&  *sstpl != '\0')
-				    ? sstpl : "default",      FALSE);
+				    ? sstpl : (char *)"default",      FALSE);
 		}
 
 		if (pos == 0  &&  len == (t)->GetLength()) 

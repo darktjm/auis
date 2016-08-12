@@ -126,8 +126,8 @@ heximage::ReadRow(register FILE  *file		/* where to get bytes from */, unsigned 
 	register unsigned char *tbl = (unsigned char *)unhex;
 
 	while (n--) {
-		register c = getc(file);
-		register c2 = getc(file);
+		register int c = getc(file);
+		register int c2 = getc(file);
 		if (c == EOF ||  c2 == EOF) return -1;
 		*where++ = (*(tbl+c)<<4) | *(tbl+c2);
 	}

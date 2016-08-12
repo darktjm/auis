@@ -380,7 +380,6 @@ static int OpenForPlay(class alinkview  *self, char  *device )
     int audio_fd;
     long gain;
     boolean earphones;
-    extern int errno;
 
     audio_fd = open(AUDIO_DEV, O_WRONLY | O_NDELAY);
     if (audio_fd < 0) {
@@ -452,7 +451,6 @@ static int OpenForRecord(class alinkview  *self, char  *device )
 #ifdef sun
     int audio_fd;
     long gain;
-    extern int errno;
 
     audio_fd = open(AUDIO_DEV, O_RDONLY | O_NDELAY);
     if (audio_fd < 0) {

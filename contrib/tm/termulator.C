@@ -79,9 +79,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/tm/RCS
 #define CBREAK O_CBREAK
 #endif
 
-extern int errno;
-extern char *sys_errlst[];
-
 /* ---------------------------------------------------------------- */
 
 #define scrPos(self,x,y) \

@@ -34,7 +34,7 @@ ATK_IMPL("colormapv.H")
 #include <message.H>
 #include <lpair.H>
 #include <suite.H>
-#include <slider.H>
+#include <slider.H>k
 #include <sliderV.H>
 #include <color.H>
 #include <colorv.H>

@@ -60,7 +60,6 @@ static void dodtors() {
 char doload_extension[] = ".do";
 
 int doload_trace=0;		/* nonzero if debugging */
-extern int errno;
 
 /* doload: Load a dynamic object.
  *

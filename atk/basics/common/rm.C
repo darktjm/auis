@@ -45,12 +45,12 @@ static int debug_rm = 0;
 
 struct resourceTree_s
 {
-  class namespace * data;
-  class namespace * children;
+  class Namespace * data;
+  class Namespace * children;
 };
 
 struct resourceTree_s * resourceTree;
-class namespace * converters;
+class Namespace * converters;
 
 
 /****************************************************************/
@@ -64,7 +64,7 @@ void Plist( class atomlist  * list );
 #endif
 int FindResource( class atomlist  * name, struct atoms  * namecar, class atomlist  * class_c, struct atoms  * classcar, struct resourceTree_s  ** tree );
 int FindManyResources( struct resourceList  * resources, class atomlist  * name, struct atoms  * namecar, class atomlist  * class_c, struct atoms  * classcar, struct resourceTree_s  ** tree );
-int Convertp( class namespace  * toconverters, class namespace  * namespace, int  index );
+int Convertp( class Namespace  * toconverters, class Namespace  * Namespace, int  index );
 short TryConversion( struct resourceTree_s  * tree, class atom  * type, long  * data );
 static struct  resourceTree_s * FindNodeCreate( class atomlist  * path, struct resourceTree_s  * tree );
 void PostResourceAt( struct resourceTree_s  * root, class atomlist  * path, long  data, class atom  * type );
@@ -291,10 +291,10 @@ int FindManyResources( struct resourceList  * resources, class atomlist  * name,
 
 
 
-boolean Convertp( class namespace  * toconverters, class namespace  * namespace, int  index )
+boolean Convertp( class Namespace  * toconverters, class Namespace  * Namespace, int  index )
                {
   return !(toconverters)->Boundp( 
-			   (namespace)->NameAt(index),
+			   (Namespace)->NameAt(index),
 			   NULL );
 }
 
@@ -302,7 +302,7 @@ boolean Convertp( class namespace  * toconverters, class namespace  * namespace,
 short TryConversion( struct resourceTree_s  * tree, class atom  * type, long  * data )
                {
   int fromtype;
-  class namespace * toconverters;
+  class Namespace * toconverters;
   rm_fptr converter;
   short gotgooddata = FALSE;
 
@@ -329,8 +329,8 @@ boolean rm::InitializeClass( )
      {
   resourceTree = (struct resourceTree_s *)malloc(sizeof( struct resourceTree_s ));
   resourceTree->data = NULL;
-  resourceTree->children = new namespace;
-  converters = new namespace;
+  resourceTree->children = new Namespace;
+  converters = new Namespace;
   return TRUE;
 }
 
@@ -338,11 +338,11 @@ void rm::PostConverter( class atom  * from, class atom  * to, rm_fptr  converter
                     {
 	ATKinit;
 
-  class namespace * toconverters;
+  class Namespace * toconverters;
 
   if (!(converters)->Boundp(  to, (long *) &toconverters ))
     {
-      toconverters = new namespace;
+      toconverters = new Namespace;
       (converters)->SetValue(  to, (long) toconverters );
     }
 
@@ -363,7 +363,7 @@ static struct  resourceTree_s * FindNodeCreate( class atomlist  * path, struct r
 	  struct resourceTree_s * newTree;
 	  newTree = (struct resourceTree_s *)malloc(sizeof( struct resourceTree_s ));
 	  newTree->data = NULL;
-	  newTree->children = new namespace;
+	  newTree->children = new Namespace;
 	  (tree->children)->SetValue( 
 			     (path)->TraversalAtom(car),
 			     (long) newTree );
@@ -382,7 +382,7 @@ void PostResourceAt( struct resourceTree_s  * root, class atomlist  * path, long
   if (tree->data != NULL)
     (tree->data )->Clear( );
   else
-    tree->data = new namespace;
+    tree->data = new Namespace;
   (tree->data)->SetValue(  type, data );
 }
 

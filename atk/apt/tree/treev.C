@@ -743,7 +743,7 @@ void Initialize_Graphics( register class treev	      *self )
 	}
 	else (TreeCursor)->SetStandard(  TreeCursorByte );
       }
-    fontdesc::ExplodeFontName( (NodeFontName) ? NodeFontName : "andysans10b",
+    fontdesc::ExplodeFontName( (NodeFontName) ? NodeFontName : (char *)"andysans10b",
 				font_family, sizeof(font_family), &font_type, &font_size );
     NodeFont = fontdesc::Create( font_family, font_type, font_size );
     (Tree)->Apply(  ROOTNODE, (tree_applyfptr)Name_Sizing, (char *)self, NULL );

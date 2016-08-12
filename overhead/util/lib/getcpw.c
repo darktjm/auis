@@ -46,8 +46,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <svcconf.h>
 
 
-extern int errno;
-
 #ifdef WHITEPAGES_ENV
 int cpw_error;
 #endif /* WHITEPAGES_ENV */

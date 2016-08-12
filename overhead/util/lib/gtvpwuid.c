@@ -47,8 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #ifndef NULL
 #define NULL 0
 #endif
-extern int errno;
-
 #ifdef WHITEPAGES_ENV
 struct passwd *getvpwuid(vuid)
 int vuid;

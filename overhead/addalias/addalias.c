@@ -49,7 +49,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/addal
 #define LINESALLOCSTEP	200
 
 char *prog;
-extern int errno;
 
 err(f,a,b)
 char *f,*a,*b;

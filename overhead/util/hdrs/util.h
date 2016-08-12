@@ -128,7 +128,7 @@ extern char *LocalDir(char *suffix);
 extern char *XLibDir(char *suffix);
 
 
-extern ReadConfigureLine(FILE  *fp, char  *text, int  maxTextLength, char  **program, int  *programLength, char  **key, int  *keyLength, char  **value, int  *valueLength, char  **condition, int  *conditionLength);   /* Reads a line from a file in
+extern int ReadConfigureLine(FILE  *fp, char  *text, int  maxTextLength, char  **program, int  *programLength, char  **key, int  *keyLength, char  **value, int  *valueLength, char  **condition, int  *conditionLength);   /* Reads a line from a file in
                                         * configure file format - returns one
                                         * of the above values */
 extern struct configurelist *ReadConfigureFile(char  *fileName);       /* reads a configure
@@ -138,19 +138,19 @@ extern char *GetConfig(struct configurelist  *header, char  *key, int  usedefaul
                                         * key for a given configurelist */
 extern char *GetConfiguration(char  *key);    /* returns the value for a key in the
                                         * AndrewSetup file */
-extern FreeConfigureList(register struct configurelist  *cList);   /* frees a configure list */
+extern int FreeConfigureList(register struct configurelist  *cList);   /* frees a configure list */
 
 extern void addstringprofile(char *str);
 extern char *getprofile (char  *var );
 extern char     *getprofilestring();
-extern getprofileint (char    *var , int DefaultValue);
-extern getprofileswitch (char    *var , boolean DefaultValue);
-extern profileentryexists (char    *var , boolean DefaultValue);
+extern int getprofileint (char    *var , int DefaultValue);
+extern int getprofileswitch (char    *var , boolean DefaultValue);
+extern int profileentryexists (char    *var , boolean DefaultValue);
 extern char *GetProfileFileName();
 extern char *GetFirstProfileFileName();
-extern refreshprofile();
+extern int refreshprofile();
 
-extern setprofilestring(char  *prog , char  *pref , char  *val);
+extern int setprofilestring(char  *prog , char  *pref , char  *val);
 
 extern void findfileinpath(char *buffer, char *path, char *fname);
 
@@ -349,17 +349,6 @@ extern void SetInitialArgs(int  argc , char  **argv , char  **envp);      /* Set
 extern void SetProcTitle(char  *str, ...);        /* SetProcTitle(str, a1, a2, a3, a4,
                                         * a5)--like printf into the process
                                         * title. */
-
-extern void            Verbose_SetUp(FILE            *stream, char            *prefix, int             *threshold, unsigned int *mask);       /* Verbose_SetUp(FILE *stream, char
-                                        * *prefix, int *threshold, int *mask)
-                                        * -- Initialize the "Verbose" call
-                                        * (see /usr/andy/doc/verbose.d) */
-extern int             Verbose(FILE *stream, ...);             /* Verbose([FILE *stream], [int level],
-                                        * [unsigned int bits], char *fmt,
-                                        * datum1, datum2, ..., datumN) -- like
-                                        * printf for "debugging"-type
-                                        * messages.  See
-                                        * /usr/andy/doc/verbose.d */
 
 extern unsigned long getaddr ();	       /* Return our internet address as a 
 				        * long in network byte order.  

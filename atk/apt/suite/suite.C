@@ -2347,7 +2347,7 @@ static void
 ValidateItem( register class suite  *self, register struct suite_item  *item )
     {
   if(!item || !Items || 
-      (Items && ((Items)->Subscript((unsigned int)item)) == -1))
+      (Items && ((Items)->Subscript((unsigned int)(unsigned long)item)) == -1))
     HandleException(self,item,suite_NonExistentItem);
 }
 
@@ -2456,7 +2456,7 @@ DrawRect(class suite  *self, struct rectangle  *Rect, int  border_size, class co
       delete re2;
   }
   else {
-      register i = border_size;
+      register int i = border_size;
       while(i > 0) {
 	  DrawRectSize(self, rectangle_Left(Rect), rectangle_Top(Rect), rectangle_Width(Rect), rectangle_Height(Rect));
 	  DecrementRect(Rect, 1);
@@ -2511,8 +2511,8 @@ AllocColorFromPref( class suite  *self, class color  *color, char  *prefName , c
     *color = prefVal;
 }
 
-#define DEFAULT_FOREGROUND "black"
-#define DEFAULT_BACKGROUND "white"
+#define DEFAULT_FOREGROUND (char *)"black"
+#define DEFAULT_BACKGROUND (char *)"white"
 
 static void
 AllocateColors( class suite  *self )

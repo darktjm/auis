@@ -84,8 +84,6 @@ typedef struct alias_set {
 
 #define DEFAULTALIASFILE "/.AMS_aliases"
 
-extern int errno;
-
 extern alias_set_t ReadAliases(/* FILE *aliasfile */);
 
 extern alias_t FindAlias(/* char *name, alias_set_t aliases */);

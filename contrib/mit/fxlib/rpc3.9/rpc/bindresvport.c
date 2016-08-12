@@ -78,7 +78,6 @@ bindresvport(sd, sin)
 	int res;
 	static short port;
 	struct sockaddr_in myaddr;
-	extern int errno;
 	int i;
 
 #define STARTPORT 600

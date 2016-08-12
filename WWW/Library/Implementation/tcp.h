@@ -825,11 +825,6 @@ Regular BSD unix versions
 #define FNDELAY         O_NDELAY
 #endif
 
-#if !defined(NeXT) && !defined(BSD4_4) && !defined(NetBSD)
-extern char *sys_errlist[];
-extern int sys_nerr;
-#endif
-
 #endif /* unix *//*
 
    
@@ -902,7 +897,6 @@ typedef struct sockaddr_in SockA;  /* See netinet/in.h */
   
  */
 #ifndef ERRNO_DONE
-extern int errno;
 #define socerrno errno
 #endif/*
 

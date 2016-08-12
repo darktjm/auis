@@ -50,8 +50,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/
 
 #include <mailconf.h>
 
-extern int errno;
-
 /* MAIL SYSTEM CONFIGURATION */
 /* The variables in here are configured in several different ways.  In modifying this file, you must take note of the possibilities and the applicable rules.
 

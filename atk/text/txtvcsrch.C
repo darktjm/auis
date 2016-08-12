@@ -391,9 +391,9 @@ void textview_QueryReplaceCmd(class textview  *self)
 		}
 		/* Otherwise, fall through to the default */
 	    default:
-		message::DisplayString(self, 0, expertReplace ?
+		message::DisplayString(self, 0, (char *)(expertReplace ?
 				      "One of ' ', '.', 'n', 'r', '!', 'q' '-' ',' '='" :
-				      "One of ' ', '.', 'n', '!', 'q' '-' ',' '='");
+				      "One of ' ', '.', 'n', '!', 'q' '-' ',' '='"));
 		im::ForceUpdate();
 		break;
 	}

@@ -36,8 +36,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <andrewos.h>
 #include <errno.h>
 
-extern int errno;
-
 /* 
  * osi_readlink is the portability layer equivelent of readlink.  On 
  * systems without symbolic links, it always returns -1 and sets errno 

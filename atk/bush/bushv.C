@@ -210,7 +210,7 @@ static class menulist		   *bushv_menulist = NULL;
 #define NotifyTreeObservers(self) (TREE)->NotifyObservers(0)
 
 #define	AllocNameSpace(s,t)	    apts::CaptureString(s,t)
-#define	Announce(msg_string)	    (self)->Announce(msg_string)
+#define	Announce(msg_string)	    (self)->Announce((char *)(msg_string))
 #define ClearMessageLine()	    if(!message::Asking(self)) Announce("")
 
 #define	edit_code		    1
@@ -1266,7 +1266,7 @@ IssueError( register class bushv  *self, register char  *what , register char  *
 
   IN(IssueError);
   if(errno > 0 && errno <= sys_nerr) 
-    sprintf(msg,"ERROR %s '%s': %s", what, where, sys_errlist[errno] );
+    sprintf(msg,"ERROR %s '%s': %s", what, where, strerror(errno) );
   else if(errno != 0)
     sprintf(msg,"ERROR %s '%s': (Invalid System Error-code '%d')", what, where, errno );
   else
@@ -2443,7 +2443,7 @@ bushv_SaveFile( class bushv	 *self )
         Announce("File not found; could not create. Attempt to write to a directory.");
         break;
        default:
-        sprintf(message, "Could not save file: %s.",sys_errlist[errno]);
+        sprintf(message, "Could not save file: %s.",strerror(errno));
         Announce(message);
     }
     return_value = -1;
@@ -2503,7 +2503,7 @@ bushv_WriteFile( class bushv	 *self )
         Announce("File not found; could not create. Attempt to write to a directory.");
         break;
       default:
-        sprintf(message, "Could not save file: %s.",sys_errlist[errno]);
+        sprintf(message, "Could not save file: %s.",strerror(errno));
         Announce(message);
     }
     return_value = -1;

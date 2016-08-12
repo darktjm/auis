@@ -511,7 +511,7 @@ char *prefval::IndexValueString(int  which)
 	case prefval_String:
 	    return this->values[which].v.sval;
 	case prefval_Boolean:
-	    return this->values[which].v.bval?"Yes":"No";
+	    return (char *)(this->values[which].v.bval?"Yes":"No");
 	case prefval_Integer:
 	    sprintf(buf, "%d", this->values[which].v.ival);
 	    return buf;

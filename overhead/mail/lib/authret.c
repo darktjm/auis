@@ -47,8 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/
 #include <svcconf.h>
 #include <mail.h>
 
-extern int errno;
-
 
 int GetAuthInfo(FName, pBuff)
 char *FName, **pBuff;

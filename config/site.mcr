@@ -86,9 +86,9 @@ The values shown here are the defaults. */
 */
 #ifdef RESOLVER_ENV
 /* if in a separate library: */
-/*    RESOLVLIB =  -lresolv  */
+    RESOLVLIB =  -lresolv
 /* if in /lib/libc.a: */
-       RESOLVLIB =
+/*     RESOLVLIB = */
 #endif /* RESOLVER_ENV */
 
 

@@ -148,7 +148,7 @@ static long adjust(struct doload_environment *e, long tw, struct relocation_info
 	printf("  %s", format);
     if (IS_RP_EXTERN( rp )) {
 	register struct nlist *sp = e->symtab + rp->r_symbolnum;
-	char *np = ((sp->n_un.n_strx)
+	const char *np = ((sp->n_un.n_strx)
 		 ? (e->stringtab + sp->n_un.n_strx) :  "<<noname>>");
 	if (e->mode == List) {
 	    if (tw)
@@ -198,7 +198,7 @@ static long adjust(struct doload_environment *e, long tw, struct relocation_info
 	    case N_ABS:
 		if ((tw & 0xf00f0000) == 0xa0080000) {
 		    register int i = (tw >> 20) & 0xFF;
-		    char *np = (i < globalcount)
+		    const char *np = (i < globalcount)
 			     ? globals[i].entryname : "**INDEX TOO LARGE**";
 		    if (e->mode == List)
 			printf("  >>%s<<", np);
@@ -290,14 +290,14 @@ static long FindFixupAddr(struct doload_environment *e, const char *name) {
     return (long)s->list;
 }
 
-static long NewFixup(struct doload_environment *e, char *name, long value) {
+static long NewFixup(struct doload_environment *e, const char *name, long value) {
     struct setfixup *s=FindFixup(e, name);
     if(e) {
 	if(s==NULL) {
 	    s=(struct setfixup *)safe_malloc(e, sizeof(struct setfixup));
 	    s->next=e->firstfixup;
 	    e->firstfixup=s;
-	    s->name=name;
+	    s->name=(char *)name; /* I guess this better be safe */
 	    s->list=(long *)safe_malloc(e, sizeof(long)*2);
 	    s->list[0]=0;
 	    s->list[1]=0;
@@ -319,7 +319,7 @@ static void doload_preset(struct doload_environment *e)
     sbound = (struct nlist *)((char *)e->symtab+ e->header.a_syms);
 	
     for (sp=e->symtab; sp < sbound; sp++) {
-	char *np = ((sp->n_un.n_strx)
+	const char *np = ((sp->n_un.n_strx)
 		 ? (e->stringtab + sp->n_un.n_strx) : "<<noname>>" ) ;
 
 	if (e->mode == List) {
@@ -405,7 +405,7 @@ static void doload_preset(struct doload_environment *e)
     }
     for(sp=e->symtab;sp<sbound;sp++) {
 	void *sym;
-	char *np = ((sp->n_un.n_strx)
+	const char *np = ((sp->n_un.n_strx)
 		    ? (e->stringtab + sp->n_un.n_strx) : "<<noname>>" ) ;
 	 switch(SYM_TYPE(sp)&~N_EXT) {
 	     case N_SETA:
@@ -440,8 +440,8 @@ static void doload_preset(struct doload_environment *e)
 
 static char registrystr[]="_ATKregistry_";
 
-static int Exportable(char *np) {
-    char *p;
+static int Exportable(const char *np) {
+    const char *p;
     int len=strlen(np);
     if(len>=sizeof(registrystr)) {
 	p=np+len-sizeof(registrystr)+1;
@@ -467,7 +467,7 @@ static int LoadDependencies(struct doload_environment *e, int debug) {
     sbound = (struct nlist *)((char *)e->symtab + e->header.a_syms);
 
     for (sp=e->symtab; sp < sbound; sp++) {
-	char *np = ((sp->n_un.n_strx)
+	const char *np = ((sp->n_un.n_strx)
 		    ? (e->stringtab + sp->n_un.n_strx) : "<<noname>>" ) ;
 	if(SYM_TYPE(sp)==N_UNDF && Exportable(np)==2 && ! find_global(np)) {
 	    char buf[MAXPATHLEN];

@@ -232,7 +232,7 @@ char *dialog::GetForeground()
     char *fg, *bg;
     graphic::GetDefaultColors(&fg, &bg);
     if(this->prefs->colors[sbutton_FOREGROUND]) return this->prefs->colors[sbutton_FOREGROUND];
-    else return fg?fg:"black";
+    else return fg?fg:(char *)"black";
 }
 
 char *dialog::GetBackground()
@@ -240,5 +240,5 @@ char *dialog::GetBackground()
     char *fg, *bg;
     graphic::GetDefaultColors(&fg, &bg);
     if(this->prefs->colors[sbutton_BACKGROUND]) return this->prefs->colors[sbutton_BACKGROUND];
-    else return bg?bg:"white";
+    else return bg?bg:(char *)"white";
 }

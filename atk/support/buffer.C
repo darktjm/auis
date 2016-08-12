@@ -53,7 +53,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RC
 #include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("buffer.H")
 #include <andyenv.h>
-#include <sys/errno.h>
+#include <errno.h>
 
 #include <sys/stat.h>
 
@@ -76,8 +76,6 @@ ATK_IMPL("buffer.H")
 #endif
 
 #include <util.h>
-
-extern int errno;
 
 static class bufferlist *allBuffers;
 static char *backupExtension = NULL;

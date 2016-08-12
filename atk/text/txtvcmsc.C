@@ -282,7 +282,7 @@ void textview_WriteFootnotes(register class textview  *self)
 
 void textview_ToggleLineDisplay(textview *self, char *arg)
 {
-    if ((int) arg < 256) {
+    if ((int)(long) arg < 256) {
 	/* No argument...toggle. */
 	self->LineNumberDisplay(!self->show_para_display);
     } else {

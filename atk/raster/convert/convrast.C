@@ -362,7 +362,7 @@ ParseSwitches(int argc, char **argv)
 OpenInputFile()
 {
 	FILE *infile;
-	register c;
+	register int c;
 
 	if ( ! *inname)  
 		infile = stdin;

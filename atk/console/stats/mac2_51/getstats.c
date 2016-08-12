@@ -305,7 +305,6 @@ char *buf;
 int cnt;
 {
     register int n;
-    extern int errno;
 
     (void) lseek(fi, (long)(bno * DEV_BSIZE), 0);
 #ifndef sun

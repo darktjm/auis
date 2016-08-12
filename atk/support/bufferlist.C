@@ -36,7 +36,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RC
 #include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("bufferlist.H")
 
-#include <sys/errno.h>
+#include <errno.h>
 #include <sys/stat.h>
 
 #include <observable.H>
@@ -61,7 +61,6 @@ struct listentry {
     struct listentry *next;
 };
 
-extern int errno;
 static char defaultobjectname[64] = DEFAULTOBJECT;
 
 

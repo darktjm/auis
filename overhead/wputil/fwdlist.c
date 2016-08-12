@@ -72,8 +72,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/wputi
 #define ENTRYKIND "EK"
 #define HOMEDIR "HD"
 
-extern int errno;
-
 #ifndef DONTRETRYTEMPFAILURES
 static struct tempfail {
   char *name, *home;

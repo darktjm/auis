@@ -53,7 +53,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <afs/cellconfig.h>
 #endif /* AFS_ENV */
 
-extern int errno;
 
 #define INITIALAUTHS	5
 struct CellAuth *myAuth = NULL;

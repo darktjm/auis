@@ -904,9 +904,9 @@ void textview_ToggleExposeStyles(class textview  *self)
 void textview_ToggleColorStyles(class textview  *self)
 {
     self->showColorStyles = ! self->showColorStyles;
-    message::DisplayString(self, 0, self->showColorStyles ?
+    message::DisplayString(self, 0, (char *)(self->showColorStyles ?
 			   "Color styles will be displayed." :
-			   "Color styles will be ignored.");
+			   "Color styles will be ignored."));
     self->force = TRUE;
     (self)->WantUpdate( self);
 }

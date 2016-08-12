@@ -1560,6 +1560,7 @@ int *AMSDel, *AMSNameSep;
 }
 
 static int local_RewriteAddress();	/* forward declaration */
+static int CheckGlobalAlias(char *name, int *code, char *Domain);
 
 static int AddrRewrite(Addr, ErrCode, Domain, recdepth, SideBuf, SideBufLen, upAddr)
 PARSED_ADDRESS *Addr, *upAddr;
@@ -2069,6 +2070,8 @@ char *Domain, *SideBuf;
     }
 }
 
+static int ExternalForcingCode(char *ExtAddress, int codein);
+
 static int local_RewriteAddress(old, new, newsize, ErrCode, Domain, recDepth, upAddr)
 char *old, *new, *Domain;
 int newsize, *ErrCode, recDepth;
@@ -2121,6 +2124,8 @@ int newsize, *ErrCode;
 static int MSV_LastFileTime = -1;
 static char MSV_LastFileName[MAXPATHLEN+1];
 static PARSED_ADDRESS *InListHead = NULL;
+static int ReplaceNthListElement(PARSED_ADDRESS *BigList, PARSED_ADDRESS *ShortList, int *which);
+static int UnparseNthElement(PARSED_ADDRESS *AddrList, int which, char *Buf, int size, int StripComments);
 
 MS_ValidateAndReplaceChunk(FileName, inaddr, outaddr, outaddrsize, which, outcode)
 char *FileName, *inaddr; /* IN */

@@ -66,7 +66,7 @@ typedef boolean (*ATKinitfptr)();
   extern ATKregistryEntry sup ## _ATKregistry_;\
   ATKregistryEntry me ## _ATKregistry_ = \
       {#me, me ## _new_, initf, {&sup ## _ATKregistry_ }};\
-ATKregistryEntry *me ## ::ATKregistry() { return &me ## _ATKregistry_; }\
+ATKregistryEntry *me ::ATKregistry() { return &me ## _ATKregistry_; }\
 static ATKinitfptr *ATKinited_= &(me ## _ATKregistry_.initfunc);
 
 #define ATKdefineRegistryNoInit(me, sup) \
@@ -74,7 +74,7 @@ static ATKinitfptr *ATKinited_= &(me ## _ATKregistry_.initfunc);
   extern ATKregistryEntry sup ## _ATKregistry_;\
   ATKregistryEntry me ## _ATKregistry_ = \
 {#me, me ## _new_, NULL, {&sup ## _ATKregistry_ }};\
-ATKregistryEntry *me ## ::ATKregistry() { return &me ## _ATKregistry_; }
+ATKregistryEntry *me ::ATKregistry() { return &me ## _ATKregistry_; }
 
 /*
  * Use the ATKregister macro to register a class.

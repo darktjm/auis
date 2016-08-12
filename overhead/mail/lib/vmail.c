@@ -64,8 +64,6 @@ typedef int bool;
 enum lockcodes { LOCK_OK, LOCK_FAILED_OK,
 			LOCK_FAILED_ERROR, LOCK_FAILED_TEMP_ERROR };
 
-extern int errno;
-
 static FILE *msgfile = NULL;	/* Descriptor of open msg file: NULL if unopen */
 static char msgfilename[MAXPATHLEN+1];
 
@@ -179,6 +177,8 @@ static int CheckDirInAFS(dir, proc)
     }
 }
 
+static int CreateAndInitFile(char *mailbox, char *returnpath, char *four, char *auth, char *pgmname);
+
 int VM_SetTiming(param)
 int param;
 {

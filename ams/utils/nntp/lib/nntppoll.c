@@ -60,7 +60,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp
 #include <conf.h>
 #include <respcode.h>
 
-extern int errno;
 extern char *arpadate();
 
 char *DSTS = "<world,usa,pgh,net>";

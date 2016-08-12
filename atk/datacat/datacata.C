@@ -35,6 +35,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/datacat/RC
 #include <andrewos.h>
 ATK_IMPL("datacata.H")
 #include <sys/param.h> /* For MAXPATHLEN. */
+#include <errno.h>
 
 /*
 *	datacat - A program for concatening ez documents
@@ -53,8 +54,6 @@ ATK_IMPL("datacata.H")
 #include <im.H> /* for im_GetDir and im_ChangeDir */
 /* output options */
 
-
-extern int errno;
 
 static char *progname;
 #define checkandprint(A) if(A) {(this)->PrintVersionNumber();A = FALSE;};

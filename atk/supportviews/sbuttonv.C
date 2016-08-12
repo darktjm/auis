@@ -48,7 +48,7 @@ ATK_IMPL("sbuttonv.H")
 #include "sbutton.H"
 #include "sbuttonv.H"
 
-#define NO_MSG "Push Me"
+#define NO_MSG (char *)"Push Me"
 
 #define PROMPTFONT "andysans12b"
 #define FONT "andysans"
@@ -105,8 +105,8 @@ static void InitFGBG(class view  *self, struct sbutton_prefs  *prefs, double  *f
 
     graphic::GetDefaultColors(&deffg, &defbg);
 
-    if(bgcolor==NULL) bgcolor=defbg?defbg:"white";
-    if(fgcolor==NULL) fgcolor=deffg?deffg:"black";
+    if(bgcolor==NULL) bgcolor=defbg?defbg:(char *)"white";
+    if(fgcolor==NULL) fgcolor=deffg?deffg:(char *)"black";
 
     /* This is necessary for consistent results on monochrome machines, the color setting functions try to pick a stipple on monochrome screens and they determine which stipple to use based on the fg (or bg for setfg) color in effect */ 
     (self)->SetBackgroundColor( bgcolor, 0, 0, 0);

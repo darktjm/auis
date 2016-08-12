@@ -148,7 +148,7 @@ void strinput::SetInput(char  *string)
     (this)->SetPrompt( this->prompt);
 
     (this->textobj)->InsertCharacters( (this->textobj)->GetLength(), 
-			   (string ? string : ""), 
+			   (string ? string : (char *)""), 
 			   (string ? strlen(string) : 0));
     /* Now to change the view, iff it's linked into the viewTree */
     (this->textv)->SetDotPosition( (this->textobj)->GetLength());

@@ -34,8 +34,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RC
 #include <panel.h>
 #include <errno.h>
 
-extern int errno;
-
 char *ProgramPrefix = "PC";
 
 /*

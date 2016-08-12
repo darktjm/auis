@@ -107,6 +107,8 @@ char *Dir; int Recurse, Depth;
     return 0;
 }
 
+static int RealEpoch(char *dirname, char *date64, int depth, int Persist, int Recurse);
+
 MS_Epoch(dirname, date64)
 char *dirname;
 char *date64;
@@ -157,6 +159,8 @@ char *date64;
     }
     return(mserrcode = ErrExit);
 }
+
+static DeleteThrough(char *dirname, char *date64, int anyKids);
 
 static int RealEpoch(dirname, date64, depth, Persist, Recurse)
 char *dirname;

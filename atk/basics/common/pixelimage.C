@@ -53,7 +53,7 @@ ATK_IMPL("pixelimage.H")
 #define WHITEHALFWORD  ((WHITEBYTE <<8) | WHITEBYTE)
 #define BLACKHALFWORD  ((BLACKBYTE <<8) | BLACKBYTE)
 
-static bitmask[8] = {0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01};
+static int bitmask[8] = {0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01};
 
 /* pixelimage__ClipRange(ClassID, tstart, tlength, start, length)
   'Start' . . . 'start'+'length' denotes a range of integer values.  

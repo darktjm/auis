@@ -174,21 +174,7 @@ extern	long lseek();
 #define	WriteOK(fd, buf, size)	(write(fd, (char *)buf, size) == size)
 #endif
 
-#if defined(__MACH__) || defined(THINK_C)
-extern	void *malloc(size_t size);
-extern	void *realloc(void *ptr, size_t size);
-#else /* !__MACH__ && !THINK_C */
-#if defined(MSDOS)
-#include <malloc.h>
-#else /* !MSDOS */
-#if defined(_IBMR2)
 #include <stdlib.h>
-#else /* !_IBMR2 */
-extern	char *malloc();
-extern	char *realloc();
-#endif /* _IBMR2 */
-#endif /* !MSDOS */
-#endif /* !__MACH__ */
 
 /*
  * dblparam_t is the type that a double precision

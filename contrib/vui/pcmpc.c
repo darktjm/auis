@@ -160,8 +160,6 @@ char *s1, *s2;
 }
 
 
-extern int errno;
-
 int writeall(fd, Buf, NBytes)
 int fd;
 char *Buf;

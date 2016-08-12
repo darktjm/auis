@@ -346,8 +346,6 @@ char *buf;
 int cnt;
 {
 #ifndef SOLARIS
-    extern int errno;
-
     (void) lseek(fi, (long)(bno * DEV_BSIZE), 0);
     if (read(fi, buf, (unsigned) cnt) < 0)
 	{

@@ -151,7 +151,9 @@ These two routines are just like tryvicequeues_ext except that they implement tw
 #include "mailconf.h"
 #include "qmail.h"
 
-extern int errno;
+static int create(char *name, FILE **f, char *filekind, int mode);
+static int tryclose(FILE *f, char *name);
+
 extern char *UnixError(), *arpadate();
 
 typedef unsigned char bool;

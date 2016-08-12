@@ -275,7 +275,7 @@ static void HandleClick(class printopts *self, class environment *env)
     rec = (&(self->oplist[ix]));
     if (rec->op->type == A_boolean) {
 	boolean newval = (rec->answer[0]!='Y');
-	SetNewValue(self, rec, newval ? "Yes" : "No");
+	SetNewValue(self, rec, (char *)(newval ? "Yes" : "No"));
     }
     else if (rec->op->type == A_string) {
 	char msgbuf[256];
@@ -558,10 +558,10 @@ static void LoadInitValue(class printopts *self, int onum)
     value = self->opview->GetPrintOption(rec->op->name);
 
     if (rec->op->type == A_boolean) {
-	str = value ? "Yes" : "No";
+	str = (char *)(value ? "Yes" : "No");
     }
     else if (rec->op->type == A_string || rec->op->type == A_file) {
-	str = value ? (char *)value : "";
+	str = value ? (char *)value : (char *)"";
     }
     else if (rec->op->type == A_int) {
 	static char numbuf[12];

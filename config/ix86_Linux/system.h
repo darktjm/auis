@@ -39,6 +39,8 @@ All #includes should be prsent exactly as they are in this file, unless otherwis
 #define ANSI_CPP 1
 #undef ANSI_IMAKECPP
 
+#define STDC_HEADERS 1
+
 /* presite.h should be used to select a compiler if the system.h file has support for multiple compilers. */
 #include <presite.h>
 
@@ -100,15 +102,14 @@ InstallFileToFile(hp700_90/mkatkshlib, $(INSTPROGFLAGS), $(DESTDIR)/etc)
  These macros should be used to delimit any sequence of data types or function prototypes for
  C functions or datastructures.*/
 #include <atkproto.h>
-extern int sys_nerr;
-extern char *sys_errlist[];
+#include <errno.h>
 
 #undef ATK_INTER
 #undef ATK_IMPLPRAG
 #undef ATK_IMPL
-#define ATK_INTER #pragma interface
-#define ATK_IMPLPRAG #pragma implementation
-#define ATK_IMPL(x) ATK_IMPLPRAG x
+#define ATK_INTER /* obsolescent */
+#define ATK_IMPLPRAG /* obsolescent */
+#define ATK_IMPL(x)
 
 /* The following list of #includes may be modified as necessary to bring in the required
  types, macros and functions. */
@@ -568,8 +569,11 @@ ENDCPLUSPLUSPROTOS
 #define USE_VARARGS
 #define ANSI_COMPILER 1
 
+/* where is this from? */
+#if 0
 #ifdef __cplusplus
 #include <new.h>
+#endif
 #endif
 #undef NULL
 #define NULL 0

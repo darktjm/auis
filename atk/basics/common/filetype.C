@@ -39,7 +39,7 @@ ATK_IMPL("filetype.H")
 #include <util.h>
 
 #include <sys/param.h>
-#include <sys/errno.h>
+#include <errno.h>
 #include <sys/stat.h>
 #include <ctype.h>
 #include <pwd.h>
@@ -59,8 +59,6 @@ static struct mapEntry {
     struct attributes *newAttributes;
     struct attributes *existingAttributes;
 } *allEntries = NULL, defaultMapping = {NULL, NULL, NULL, NULL, NULL};
-
-extern int errno;
 
 /* These next statics are fairly bogus. */
 static char lastFilename[MAXPATHLEN];

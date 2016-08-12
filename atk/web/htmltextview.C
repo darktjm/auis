@@ -1066,7 +1066,7 @@ view *htmltextview::Hit(enum view_MouseAction action, long x, long y, long numbe
 	  (rootenv)->GetInnerMost(hitpos);
 	if (env) {
 	    while (env != rootenv) {
-		char *p= (env->type==environment_Style) 
+		const char *p= (env->type==environment_Style) 
 		  ? (env->environment::data.style)
 		  ->GetName() 
 		  : "";

@@ -119,7 +119,6 @@ union {
 
 int updatestat();
 static stat_is_init = 0;
-extern int errno;
 
 #ifndef FSCALE
 #define FSCALE (1 << 8)

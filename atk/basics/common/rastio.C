@@ -199,7 +199,7 @@ rastio::ReadRow(register FILE  *file		/* where to get them from */, register uns
 			RepeatAndDigit};	/* have seen repeat code and its first
 					following digit */
 	enum stateCode InputState;	/* current state */
-	register c;		/* the current input character */
+	register int c;		/* the current input character */
 	register long repeatcount = 0;	/* current repeat value */
 	register long hexval;	/* current hex value */
 	long pendinghex = 0;		/* the first of a pair of hex characters */

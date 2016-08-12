@@ -64,6 +64,7 @@ extern char *inet_ntoa();
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <pwd.h>
+#include <string.h>
 #include <arpa/telnet.h>
 #include <sys/ioctl.h>
 #include <util.h>
@@ -108,11 +109,10 @@ typedef unsigned char KEY[SNAP_KEYLEN];
 #define TRUE	1
 #define SERVICES_FILE "/etc/guardian.svc"
 
-extern int errno, sys_nerr;
 extern int SNAP_debugmask;
 static int SNAP_serv_port;
 extern struct passwd *getpwnam();
-extern char *crypt(), *sys_errlist[];
+extern char *crypt();
 extern long time();
 extern double getla();
 
@@ -1246,12 +1246,7 @@ char *id, *msg;
 int err;
 {   char unknown[20];
 
-if (err <= sys_nerr)
-    ReportError(level, id, msg, sys_errlist[err]);
-else {
-    sprintf(unknown, "%d", err);
-    ReportError(level, id, msg, unknown);
-}
+    ReportError(level, id, msg, strerror(err));
     exit(1);
 }
 
@@ -1260,12 +1255,7 @@ char *msg;
 {
     char unknown[20];
 
-    if (errno <= sys_nerr)
-	errprintf(GuardianName, ERR_CRITICAL, NIL, NIL, msg, sys_errlist[errno]);
-    else {
-	sprintf(unknown, "%d", errno);
-	errprintf(GuardianName, ERR_CRITICAL, NIL, NIL, msg, unknown);
-    }
+    errprintf(GuardianName, ERR_CRITICAL, NIL, NIL, msg, strerror(errno));
 }
 
 static ReportNumError(level, id, msg, n)
@@ -2184,15 +2174,7 @@ int anerr;
 char *errno_to_text(anerr)
 int anerr;
 {
-    static char buf[30];
-    if((anerr<=0)||
-	(anerr>sys_nerr)) {
-	if(anerr==0)return "no_sys_error";
-	sprintf(buf,"serr%d",anerr);
-	return buf;
-    }
-    else
-	return sys_errlist[anerr];
+    return strerror(anerr);
 }
 
 static int fuseki(name, password, len, type, servername,key,to,from,errbuf,versinfo,servfd)

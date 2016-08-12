@@ -133,7 +133,7 @@ extern void SetMyFrameTitle(class sendmessage  *sm, char *tit);
 extern void PrepareBodyForSignature(class sendmessage  *self);
 extern int EnvViewCt(class environment  *env);
 extern int WriteOneFile(class sendmessage  *sendmessage, char  *ViceFileName, Boolean  OnVice , Boolean  MayOverwrite , int  Version , Boolean  TrustDelivery , Boolean  UseMultipartFormat, int  *EightBitText);
-extern delete_sendmsg_win(class im  *im, class sendmessage  *self);
+extern int delete_sendmsg_win(class im  *im, class sendmessage  *self);
 
 void sendmessage_SetButtonFont(class sendmessage  *self, class fontdesc  *font)
 {
@@ -346,10 +346,10 @@ sendmessage::sendmessage()
     } else THROWONFAILURE( FALSE);
 
 
-    (bs)->SetLabel( SM_BLIND, amsutil::GetOptBit(EXP_KEEPBLIND) ? "Will Keep Copy" : "Won't Keep Copy");
-    (bs)->SetLabel( SM_CLEAR,  amsutil::GetOptBit(EXP_CLEARAFTER) ?  "Will Clear" : "Won't Clear");
-    (bs)->SetLabel( SM_SIGN, amsutil::GetOptBit(EXP_SIGNMAIL) ?  "Will Sign" : "Won't Sign");
-    (bs)->SetLabel( SM_HIDE, amsutil::GetOptBit(EXP_HIDEAFTER) ? "Will Hide" : "Won't Hide");
+    (bs)->SetLabel( SM_BLIND, (char *)(amsutil::GetOptBit(EXP_KEEPBLIND) ? "Will Keep Copy" : "Won't Keep Copy"));
+    (bs)->SetLabel( SM_CLEAR,  (char *)(amsutil::GetOptBit(EXP_CLEARAFTER) ?  "Will Clear" : "Won't Clear"));
+    (bs)->SetLabel( SM_SIGN, (char *)(amsutil::GetOptBit(EXP_SIGNMAIL) ?  "Will Sign" : "Won't Sign"));
+    (bs)->SetLabel( SM_HIDE, (char *)(amsutil::GetOptBit(EXP_HIDEAFTER) ? "Will Hide" : "Won't Hide"));
     (bs)->SetLabel( SM_RESET, "Reset");
     (bs)->GetHitFunc()=HandleButton;
     (bs)->GetHitFuncRock()=(long)this;
@@ -504,7 +504,7 @@ sendmessage::Hit(enum view_MouseAction  action, long  x , long  y , long  Number
 
 void BSSM_FakeBug(class sendmessage  *sm, char  *txt)
 {
-    (ams::GetAMS())->ReportError( txt ? txt : "One of my bits is missing!  Call an ambulance!", ERR_CRITICAL, FALSE, 0);
+    (ams::GetAMS())->ReportError( txt ? txt : (char *)"One of my bits is missing!  Call an ambulance!", ERR_CRITICAL, FALSE, 0);
 }
 
 int ComposeBugReport(class sendmessage  *sm)
@@ -659,7 +659,7 @@ int Deliver(class sendmessage  *sendmessage, int  formathandlingcode)
 
 	nkids = (sendmessage->BodyText->rootEnvironment)->NumberOfChildren();
 	/* Note that we will recalculate this value after inserting the signature file */
-	fnamepattern = (nkids > 0) ? ".sig.fmt" : ".sig";
+	fnamepattern = (char *)((nkids > 0) ? ".sig.fmt" : ".sig");
 	sprintf(fname,"%s/%s",home,fnamepattern);
 	fp = fopen(fname, "r");
 	if (!fp) {
@@ -730,7 +730,7 @@ int Deliver(class sendmessage  *sendmessage, int  formathandlingcode)
 #ifdef CMU_ENV
 	    ans = 4;		/* Always trust the delivery system */
 #else
-	    ExternalQVec[4] = (SendingWithAMSDel ? "Trust the delivery system to remove it as needed" : NULL);
+	    ExternalQVec[4] = (char *)(SendingWithAMSDel ? "Trust the delivery system to remove it as needed" : NULL);
 	    ans = (ams::GetAMS())->ChooseFromList( ExternalQVec, 1);
 #endif
 	}
@@ -1378,7 +1378,7 @@ int FileIntoFolder(class sendmessage  *sm, char  *name)
     if (name && *name != '?') {
 	strcpy(ShortName, name);
     } else {
-	if (ams::GetFolderName("Save draft in what folder? ", ShortName, sizeof(ShortName), name ? ++name : "", FALSE)) return(-1);
+	if (ams::GetFolderName("Save draft in what folder? ", ShortName, sizeof(ShortName), name ? ++name : (char *)"", FALSE)) return(-1);
     }
     ams::WaitCursor(TRUE);
     if ((ams::GetAMS())->CUI_DisambiguateDir( ShortName, &FullName)) {
@@ -1411,10 +1411,10 @@ int FileIntoFolder(class sendmessage  *sm, char  *name)
 void sendmessage::CheckButtons()
 {
     class sbutton *bs=(this->buttons)->ButtonData();
-    (bs)->SetLabel( SM_CLEAR, amsutil::GetOptBit(EXP_CLEARAFTER) ? "Will Clear" : "Won't Clear");
-    (bs)->SetLabel( SM_SIGN, amsutil::GetOptBit(EXP_SIGNMAIL) ? "Will Sign" : "Won't Sign");
-    (bs)->SetLabel( SM_HIDE,  amsutil::GetOptBit(EXP_HIDEAFTER) ? "Will Hide" : "Won't Hide");
-    (bs)->SetLabel( SM_BLIND, amsutil::GetOptBit(EXP_KEEPBLIND) ? "Will Keep Copy" : "Won't Keep Copy");
+    (bs)->SetLabel( SM_CLEAR, (char *)(amsutil::GetOptBit(EXP_CLEARAFTER) ? "Will Clear" : "Won't Clear"));
+    (bs)->SetLabel( SM_SIGN, (char *)(amsutil::GetOptBit(EXP_SIGNMAIL) ? "Will Sign" : "Won't Sign"));
+    (bs)->SetLabel( SM_HIDE,  (char *)(amsutil::GetOptBit(EXP_HIDEAFTER) ? "Will Hide" : "Won't Hide"));
+    (bs)->SetLabel( SM_BLIND, (char *)(amsutil::GetOptBit(EXP_KEEPBLIND) ? "Will Keep Copy" : "Won't Keep Copy"));
 }
 
 

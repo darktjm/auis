@@ -57,8 +57,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #endif /* #ifdef AFS_ENV */
 #include <svcconf.h>
 
-extern int errno;
-
 int wp_Debugging = 0;
 
 /* Logging definitions */

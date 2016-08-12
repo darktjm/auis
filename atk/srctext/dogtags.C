@@ -138,7 +138,7 @@ static char *dogtagSubstitution(text *self, long dtpos, long dtlen)
 		strncpy(subst+11,info+20,4); subst[15]='\0';
 	    }
 	} else if (firstletter=='m') { /* mon or mon0 */
-	    char *mon;
+	    const char *mon;
 	    boolean mon0=((self)->GetChar( dtpos+3)=='0');
 	    switch (*(info+4)) {
 		case 'A':

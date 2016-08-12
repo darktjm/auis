@@ -1,6 +1,6 @@
 LOCALINCLUDES = -I..
 
-#if defined(hpux) && HP_OS >= 80
+#if (defined(hpux) && HP_OS >= 80) || defined(linux)
 TERMLIB = -lcurses
 #else
 TERMLIB = -ltermcap

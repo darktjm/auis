@@ -33,10 +33,9 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
 #include <rpc/rpc.h>
 #include <sys/dir.h>
 #include "dir.h"
+#include <stdlib.h>
+#include <string.h>
 
-extern int errno;
-extern char *malloc();
-extern char *strcpy();
 
 readdir_res *
 readdir_1(dirname)

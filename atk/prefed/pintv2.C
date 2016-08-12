@@ -36,6 +36,7 @@
 
 #include <pintv.h>
 #include <util.h>
+#include <errno.h>
 
 #define TEXT(tv) ((class text *)(tv)->GetDataObject())
 #define PREFS(pv) ((class prefs *)(pv)->GetDataObject())
@@ -88,7 +89,6 @@ class event *pintv_GetReportEvent(long  rock)
     return im::EnqueueEvent((event_fptr)ReportErrors, (char *)rock, 0);
 }
 
-extern int errno;
 static void KeepOldCopy(class pintv  *self, long  curtime)
 {
     class prefs *prefs=(class prefs *)(self)->GetDataObject();

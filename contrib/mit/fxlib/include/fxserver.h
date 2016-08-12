@@ -217,12 +217,6 @@ extern struct _servers *servers;
 #endif /* MULTI */
 
 /*
- * "errno" variable.
- */
-
-extern int errno;
-
-/*
  * Random internal definitions.
  */
 

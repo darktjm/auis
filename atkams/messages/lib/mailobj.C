@@ -559,7 +559,7 @@ long mailobj::Read(FILE  *file, long  id)
 	    strcpy(Descrip, LineBuf+20);
 	}
     }
-    ctp = Ctype[0] ? Ctype : "text/plain";
+    ctp = Ctype[0] ? Ctype : (char *)"text/plain";
     while (*ctp && isspace(*ctp)) ++ctp;
     if (Descrip[0]) {
 	sprintf(LineBuf, "%s ('%s' format)", Descrip, ctp);

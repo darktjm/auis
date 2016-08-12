@@ -54,6 +54,8 @@ struct dcnode {
 };
 
 
+static int NoteRecentDirUse(struct MS_Directory *Dir);
+
 int             CheckOpenMSDirectory(Dir, Code)
 struct MS_Directory *Dir;
 int             Code;
@@ -227,6 +229,12 @@ struct MergeList {
     int             num, size;
     struct MergeEntry *merges;
 };
+
+static int      AlreadyMergingChain(int chain,struct MergeList *m);
+static int      NeedToMerge(int chain, int snapshotNum, struct MergeList *m);
+static int      ConstructHashList(struct MS_Message *Msg, struct HashList *h);
+static int      AddMerge(int chain, int snapshotNum, struct MergeList *m);
+static int      AnythingMatches(unsigned long midHash, unsigned long repHash, struct HashList *h);
 
 int             SetChainField(Msg, Dir, PlanningHeadWrite)
 struct MS_Message *Msg;
@@ -459,6 +467,8 @@ struct MergeList *m;
     return (result);
 }
 
+static int      AddHash(unsigned long   hash, struct HashList *h);
+
 /* Returns TRUE on success, FALSE on failure */
 static int      ConstructHashList(Msg, h)
 struct MS_Message *Msg;
@@ -688,6 +698,7 @@ char           *FullName;
     return (dc->Dir);
 }
 
+static int      EnsureNotInCache(struct MS_Directory *Dir);
 
 AddToDirCache(Dir, ReplaceIfExists)
 struct MS_Directory *Dir;

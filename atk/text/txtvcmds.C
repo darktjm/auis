@@ -82,7 +82,7 @@ void textview_NOOPCmd (register class textview  *self)
  * and is used or forward/backward word operations
  */
 
-charType(register char  c)
+int charType(register char  c)
 	{
 
 	if (isspace(c))

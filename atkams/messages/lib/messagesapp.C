@@ -237,7 +237,7 @@ boolean messagesapp::ParseArgs(int  argc, char  **argv)
     }
     this->RetainedArg[this->RetainedArgc] = NULL;
     this->AddHeaderList[HeadersToAdd] = NULL;
-    im::SetProgramName(this->SendOnly ? "sendmessage" : "messages");
-    (this)->SetName( this->SendOnly ? "sendmessage" : "messages");
+    im::SetProgramName((char *)(this->SendOnly ? "sendmessage" : "messages"));
+    (this)->SetName( (char *)(this->SendOnly ? "sendmessage" : "messages"));
     return(TRUE);
 }

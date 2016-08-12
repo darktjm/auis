@@ -622,7 +622,7 @@ long ams::MSErrCode()
     return(0);
 }
 
-int ams::vdown(int  errno)
+int ams::vdown(int  Errno)
 {
     ReportMissing("vdown");
     return(0);

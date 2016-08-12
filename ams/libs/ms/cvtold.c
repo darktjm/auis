@@ -40,8 +40,8 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RC
 #include <stdio.h>
 #include <ctype.h>
 #include <parseadd.h>
+#include <errno.h>
 
-extern int errno;
 extern char home[];
 
 /*
@@ -184,6 +184,8 @@ static int CheckMailrcHold()
 #define TRUE 1
 #define buffsize 1024
 #define MAXTRIES 25
+
+static int IsNewFrom(char *line);
 
 int ConvertIncomingMail(MailSpoolFile, MailDir, FilesReadIn)
 char *MailSpoolFile, *MailDir;

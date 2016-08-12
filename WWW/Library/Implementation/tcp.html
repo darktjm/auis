@@ -874,11 +874,6 @@ These are a default unix where not already defined specifically.
 #define FNDELAY		O_NDELAY
 #endif
 
-#if !defined(NeXT) &amp;&amp; !defined(BSD4_4) &amp;&amp; !defined(NetBSD)
-extern char *sys_errlist[];
-extern int sys_nerr;
-#endif
-
 #endif /* unix */
 </PRE>
 

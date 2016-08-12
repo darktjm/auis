@@ -30,7 +30,6 @@
 
 #include <util.h>
 
-extern int errno;
 char *AndrewDirStr=NULL;
 char *XLibDirStr=NULL;
 char *AFSBaseDirStr=NULL;
@@ -412,7 +411,7 @@ static long ProcessReferences(FILE *fp)
 static char *FixSeg(char *arg)
 {
     char *p;
-    p=strchr(arg, ' ');
+    p=(char *)strchr(arg, ' ');
     if(p==NULL) return arg+strlen(arg);
     *p='\0';
     return p+1;
@@ -498,7 +497,7 @@ static char *TranslatePath(const char *q)
 	if(v) strcpy(filebuf, v);
 	else strcpy(filebuf, q);
     }
-    p=strchr(q, '/');
+    p=(char *)strchr(q, '/');
     if(p==NULL) return filebuf;
     else strcat(filebuf,p);
     return filebuf;

@@ -56,7 +56,6 @@ void (*fx_open_error_hook)() = fx_open_perror;
 #endif
 
 char *fx_sync_host = NULL;  /* host known as sync site */
-extern int errno;
 
 /*
  * fx_open(s, codep) -- connect to file exchange named s.

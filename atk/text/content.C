@@ -68,17 +68,17 @@ static char *indexnames[] = {
 
 ATKdefineRegistry(content, text, NULL);
 
-static findinlist(char  **lst ,int  cnt,char  *str);
+static int findinlist(char  **lst ,int  cnt,char  *str);
 static int appendlist(char  **lst,int  cnt,char  *ostr,int  TEST);
 static char *chapnote(int  *ip);
 static struct content_chapentry *findcp(class content  *self,long  pos,long  len);
 static struct content_chapentry *findremcp(class content  *self,long  pos);
 static struct content_chapentry *findindexcp(class content  *self,long  pos,long  len);
 static long StoI(class content  *self,long  *ppos,int  *lev,class text  *src);
-static denumber(class content  *self,struct content_chapentry  *cp);
+static int denumber(class content  *self,struct content_chapentry  *cp);
 static boolean skipnewlines(class text  *d,long  *pos,long  *len);
 static boolean skipchapnumber(class text  *d,long  *pos,long  *len,boolean  update);
-static number(class content  *self,char  *string,struct content_chapentry  *cp);
+static int number(class content  *self,char  *string,struct content_chapentry  *cp);
 static void doindent(class content  *self);
 static void unindent(class content  *self);
 static struct content_chapentry *newentry(class content  *self,struct content_chapentry  *next,boolean  addmark);
@@ -89,7 +89,7 @@ static void freeentrys(class content  *self);
 static void clear(class content  *self);
 static boolean ns(class content  *self,class text  *text,long  pos,class environment  *env);
 static void initcontentstylenames(void);
-static indexstyle(register char  *name);
+static int indexstyle(register char  *name);
 static struct content_chapentry *addindexentry(class content  *self,long  pos,long  len,struct content_chapentry  **base);
 static struct content_chapentry *insertentry(class content  *self,long  pos,long  len,struct content_chapentry  **base);
 static void NoteStyle(class content  *self,long  pos,long  len,class style  *style);
@@ -100,7 +100,7 @@ static void mod(class content  *self,struct content_chapentry  **base,boolean  n
 static void update(class content  *self);
 
 
-static findinlist(char  **lst ,int  cnt,char  *str)
+static int findinlist(char  **lst ,int  cnt,char  *str)
 {
     int i;
     for(i = 0; i < cnt; i++,lst++){
@@ -224,7 +224,7 @@ static long StoI(class content  *self,long  *ppos,int  *lev,class text  *src)
 return StoI(this,&pos,lev,(class text *)this);
 }
     
-static denumber(class content  *self,struct content_chapentry  *cp)
+static int denumber(class content  *self,struct content_chapentry  *cp)
 {
     long pos,len,opos,olen;
     opos = pos = (cp->rem)->GetPos();
@@ -327,7 +327,7 @@ struct content_chapentry *content::CopyEntry(long  pos,long  len,char  *buf,long
     if(!this->isindented) ::doindent(this);   
     (this->srctext)->NotifyObservers(0);
 }
-static number(class content  *self,char  *string,struct content_chapentry  *cp)
+static int number(class content  *self,char  *string,struct content_chapentry  *cp)
 {
     char c;
     long pos,npos,end;
@@ -640,7 +640,7 @@ int content::StyleNameContentLevel(register char  *name)
     }
     return 0;
 }
-static indexstyle(register char  *name)
+static int indexstyle(register char  *name)
 {
     register char **sp;
     register int which = 0;

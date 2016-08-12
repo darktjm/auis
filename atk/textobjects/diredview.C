@@ -35,6 +35,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textobject
 ATK_IMPL("diredview.H")
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <string.h>
 
 #include <im.H>
 #include <view.H>
@@ -144,7 +145,7 @@ static void ptproc_Refresh(class diredview  *self, long  rock)
             sprintf(buf, "No directory specified.\n");
         else
             sprintf(buf, "Could not read: %s (%s)\n",
-              dir, sys_errlist[errno]);
+              dir, strerror(errno));
         message::DisplayString(self, 0, buf);
     }
     WAITOFF();
@@ -272,7 +273,7 @@ static void ptproc_Zoom(class diredview  *self, long  rock)
     WAITON();
 
     if (stat(fname, &stbuf) < 0) {
-        sprintf(buf, "Could not stat: %s (%s)\n", fname, sys_errlist[errno]);
+        sprintf(buf, "Could not stat: %s (%s)\n", fname, strerror(errno));
         WAITOFF();
         message::DisplayString(self, 0, buf);
         return;
@@ -285,7 +286,7 @@ static void ptproc_Zoom(class diredview  *self, long  rock)
             message_DisplayString(self, 0, buf);
             im_ForceUpdate();
             if (dired_SetDir(dired, fname) < 0)
-                sprintf(buf, "Could not read: %s (%s)\n", fname, sys_errlist[errno]);
+                sprintf(buf, "Could not read: %s (%s)\n", fname, strerror(errno));
             else
                 strcpy(buf, "Done.\n");
             message_DisplayString(self, 0, buf);
@@ -325,7 +326,7 @@ static int DeleteProc(char  *filename, class diredview  *self)
         im::ForceUpdate();
         WAITON();
         if (unlink(GetFullName(self, filename)) < 0) {
-            sprintf(buf, "Cannot delete: %s (%s)\n", filename, sys_errlist[errno]);
+            sprintf(buf, "Cannot delete: %s (%s)\n", filename, strerror(errno));
             WAITOFF();
             message::DisplayString(self, 0, buf);
             return FALSE;
@@ -372,7 +373,7 @@ static int RenameProc(char  *filename, class diredview  *self)
         /* Have to copy the full name since it's a static buffer */
         strcpy(buf, GetFullName(self, filename));
         if (rename(buf, GetFullName(self, ans)) < 0) {
-            sprintf(buf, "Cannot rename: %s (%s)\n", filename, sys_errlist[errno]);
+            sprintf(buf, "Cannot rename: %s (%s)\n", filename, strerror(errno));
             WAITOFF();
             message::DisplayString(self, 0, buf);
             return FALSE;

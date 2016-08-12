@@ -19,11 +19,10 @@ static char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/s
 
 #include <stdio.h>
 #include <errno.h>
+#include <string.h>
 #include <andrewos.h> /* sys/types.h sys/time.h sys/file.h */
 #include <sys/ioctl.h>
 #include <termios.h>
-
-extern char *sys_errlist[];
 
 main()
 {
@@ -34,11 +33,11 @@ main()
     FILE *SubChannelFile;
     
     if (! GetPtyandName(&SubChannel, &tempfd, ptyname, sizeof(ptyname)))  {
-        printf("getconsole: Incomplete error monitoring: Can't open pty %s %s\n", ptyname, sys_errlist[errno]);
+        printf("getconsole: Incomplete error monitoring: Can't open pty %s %s\n", ptyname, strerror(errno));
 	exit(1);
     }
     if (ioctl (tempfd, TIOCCONS, (char *) &ON) < 0) {
-	printf("getconsole: Incomplete error monitoring: ioctl (TIOCCONS) failed (%s)\n", sys_errlist[errno]);
+	printf("getconsole: Incomplete error monitoring: ioctl (TIOCCONS) failed (%s)\n", strerror(errno));
 	exit(1);
     }
     SubChannelFile = fdopen(SubChannel, "r");
@@ -52,7 +51,7 @@ main()
     }
     else {
 	printf("getconsole: error reading console output: %s\n",
-	       sys_errlist[errno]);
+	       strerror(errno));
     }
     exit(1);
 }

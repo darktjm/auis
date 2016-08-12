@@ -36,8 +36,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/
 #include <ctype.h>
 
 
-extern int errno;
-
 static int MonthLengths[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 /* fake */ #ifndef NORCSID

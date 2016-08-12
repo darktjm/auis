@@ -71,8 +71,6 @@ Closing notes
 static char topline[] = "----------------------------------------------------------------------\n";
 static char sepline[] = "------------------------------\n";
 
-extern int errno;
-
 /* filename for error messages.  Since errprintf only does this in conjunction with console, this is really ignored. */
 static char *Log = NULL;
 

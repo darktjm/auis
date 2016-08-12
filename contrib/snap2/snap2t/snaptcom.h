@@ -62,7 +62,6 @@ char *SNAP_Ptr();
 #endif /* DEBUG */
 #define PTR(x) SNAP_Ptr(sizeof((x)),(char *)(x))
 
-extern int errno;
 #ifndef EXTERN
 #define EXTERN extern
 #endif /* EXTERN */

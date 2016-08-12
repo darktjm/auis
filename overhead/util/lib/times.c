@@ -35,7 +35,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
 #include <errno.h>
 #include <andrewos.h>
-extern int errno;
 
 #ifndef HAS_GETTIMEOFDAY
 /* OS independence for times. */

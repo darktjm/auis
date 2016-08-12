@@ -148,7 +148,7 @@ static void printindex(class view  *self, char *usepsstr)
     boolean useps;
     int pmode;
 
-    pmode = (int)usepsstr;
+    pmode = (int)(long)usepsstr;
     if (pmode >= 0 && pmode < 256) {
 #ifdef PSPRINTING_ENV
 	useps = TRUE;
@@ -170,7 +170,7 @@ static void previewindex(class view  *self, char *usepsstr)
     boolean useps;
     int pmode;
 
-    pmode = (int)usepsstr;
+    pmode = (int)(long)usepsstr;
     if (pmode >= 0 && pmode < 256) {
 #ifdef PSPRINTING_ENV
 	useps = TRUE;

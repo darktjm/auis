@@ -66,8 +66,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/dlis
 
 #define WHITESPACE "\b\f\n\r\t\v "
 
-extern int errno;
-
 #define USAGE "[-d][-v][-a aliasfile][-u username] [infile [outfile]]"
 
 struct processed_arguments {

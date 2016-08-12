@@ -62,7 +62,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <errno.h>
 #include <util.h>
 
-extern int errno;
 extern char ProgramName[];
 extern char *GetProfileFileName();
 extern char *GetFirstProfileFileName();
@@ -251,7 +250,6 @@ main(argc, argv)
 char **argv;
 {
     int x;
-    extern int errno;
 
     printf("Setting preference %s.%s: %s\n", argv[1], argv[2], argv[3]);
     x = setprofilestring(argv[1], argv[2], argv[3]);

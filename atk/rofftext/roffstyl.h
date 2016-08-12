@@ -34,11 +34,11 @@
 extern int BeginStyle(class rofftext  *self,char  *st);
 extern void EndStyle(class rofftext  *self,int  ID);
 extern int  InitText();
-extern WriteText(struct rofftext  *self);
+extern int WriteText(struct rofftext  *self);
 /* MISSING DEFINITION TextPut() */
 extern int  TextPut();
-extern ChangeStyle(struct rofftext  *self,int  id,char  *st);
-extern CloseStyle(struct rofftext  *self);
-extern CloseAllStyles(struct rofftext  *self);
+extern int ChangeStyle(struct rofftext  *self,int  id,char  *st);
+extern int CloseStyle(struct rofftext  *self);
+extern int CloseAllStyles(struct rofftext  *self);
 
  

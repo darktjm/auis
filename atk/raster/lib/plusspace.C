@@ -211,7 +211,7 @@ GetPrintableNibblePair(register FILE  *fp)
 plusspace::ReadRow(register FILE  *file		/* where to get them from */, register unsigned char *row	/* where to put bytes */, register long  length	/* how many bytes in row must be filled */)
 				{
 	register int sofar;		/* length unpacked so far */
-	register curr;		/* current char from in stream */
+	register int curr;		/* current char from in stream */
 
 	sofar = 0;
 	while (sofar < length)	{
@@ -231,7 +231,7 @@ plusspace::ReadRow(register FILE  *file		/* where to get them from */, register 
 		}
 		else {
 			/* next char repeats (257-curr) times */
-			register repchar = ~GetPrintableNibblePair(file);
+			register int repchar = ~GetPrintableNibblePair(file);
 			curr = 257 - curr;
 			if (curr > length - sofar) {
 				/* ERROR: code gives line longer than length

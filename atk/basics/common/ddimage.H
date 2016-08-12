@@ -132,7 +132,7 @@ class ddimage {
     ~ddimage();
     ddimage &operator=(iddimage *);
     ddimage &operator=(const ddimage &);
-    ddimage &ddimage::operator=(image *i);
+    ddimage &operator=(image *i);
     inline void Release(boolean delayok=TRUE) {
 	di->Release(delayok);
     }

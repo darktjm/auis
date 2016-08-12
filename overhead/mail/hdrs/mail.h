@@ -46,7 +46,7 @@ extern char *UnixSysExits(int	 exitNumber);	/* Pass it a sysexits value and it r
 /* From vmail.c: */
 extern char VM_text[];	/* loaded with readable message for all vmail ops */
 extern int VM_errordetail;	/* loaded with a more specific error code from vmail ops */
-extern VM_open(char  *User , char  *Mailbox , char  *ReturnPath , char  *For , char  *Authenticated , char  *PgmName);	/* pass User, Mailbox, ReturnPath, For, and Auth (all char*) */
+extern int VM_open(char  *User , char  *Mailbox , char  *ReturnPath , char  *For , char  *Authenticated , char  *PgmName);	/* pass User, Mailbox, ReturnPath, For, and Auth (all char*) */
 extern int VM_write(char  *s, int  n);	/* pass addr of characters and number of chars */
 extern int VM_printf(char  *fmt,/*  void * a0, void * a1, void * a2, void * a3, void * a4, void * a5, void * a6, void * a7, void * a8, void  * a9 */ ...);	/* pass format string and parameters */
 extern int VM_close();	/* no parameters necessary */

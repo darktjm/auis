@@ -49,7 +49,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/eatmai
 #if !POSIX_ENV
 extern int getopt(), open(), close(), write();
 #endif
-extern int errno;
 extern char *getenv(), *getprofile();
 extern char *ctime();
 

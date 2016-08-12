@@ -492,7 +492,7 @@ int folders::WriteFormattedBodyFile(char  *fname , char  *captbuf)
 void folders_ConsiderResettingDescription(class folders  *ci, int  code, Boolean  FirstTime)
 {
     char Label[256], MessageText[256];
-    char *PluralString;
+    const char *PluralString;
 
     PluralString = (ci->MainDirCacheCount == 1) ? "" : "s";
     switch(code) {

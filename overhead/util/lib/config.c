@@ -43,7 +43,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <andrdir.h>
 
 char ProgramName[100];
-extern int errno;
 
 #define MAXCONFIGSIZE 2000
 

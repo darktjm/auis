@@ -441,12 +441,12 @@ urgent(char *fmt, ...) {
 static void getAmsErrInfo(buf)
 char *buf;
 {
-    extern char **unix_sys_errlist,
+    extern char
         *ms_errlist[],
         *ms_errcauselist[],
         *ms_errvialist[],
 	*rpc_errlist[];
-    extern int  unix_sys_nerr,
+    extern int
 	ms_nerr,
 	ms_nerrcause,
 	ms_nerrvia,
@@ -476,12 +476,8 @@ char *buf;
 	if(errnum<EMSBASE){
 	    if(vdown(errnum))
 		strcpy(buf,"Connection timed out");
-	    else{
-		if(unix_sys_errlist[errnum])
-		    strcpy(buf,unix_sys_errlist[errnum]);
-		else
-		    sprintf(buf,"Unknown error %d",errnum);
-	    }
+	    else
+		strcpy(buf,strerror(errnum));
 	}else{
 	    if(ms_errlist[errnum-EMSBASE])
 		strcpy(buf,ms_errlist[errnum-EMSBASE]);

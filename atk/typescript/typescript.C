@@ -73,6 +73,8 @@ ATK_IMPL("typescript.H")
 #include <sys/ptem.h>
 #endif
 
+#include <termios.h>
+
 #include <signal.h>
 
 #if defined(POSIX_ENV)  && (!defined(sun) || defined(SOLARIS))
@@ -725,7 +727,7 @@ TypescriptDoReturnCommand (register class typescript  *tv,register long  endpos)
     register class text *d;
     int maxpos, vfp;
     fd_set wfds;
-    register stpos, len;
+    register int stpos, len;
     static struct timeval t = { 0, 0};
 
     if(tv->SubChannel < 0) {
@@ -852,7 +854,7 @@ TypescriptZapCommand(register class typescript  *tv)
 {
     register class text *d;
     int maxpos;
-    register stpos;
+    register int stpos;
 #ifdef SENDRAW
     if(tv->readOnlyLen == 0) {
 	write(tv->SubChannel,"\025",1);
@@ -1072,7 +1074,7 @@ static char *
 ReadDirName(class typescript  *self, FILE  *f, char  *buf, int  *bufsiz)
 {
     register char *cp;
-    register c;
+    register int c;
     register int i = *bufsiz;
     for(cp = buf; --i && FILE_HAS_IO(f) > 0; cp++) {
 	if((c = getc(f)) == EOF) {
@@ -1102,7 +1104,7 @@ ReadFromProcess(FILE  *f, register class typescript  *td)
     char buf[4000];
     register char *bp = buf;
     register long dotpos, vfp;
-    register c = getc(f), i = 3999;
+    register int c = getc(f), i = 3999;
     int reframe = 0;
     char *input;
     int cpos;
@@ -1563,7 +1565,7 @@ typescript::typescript()
 
 	UserMenuProc = proctable::DefineProc("Read-User-Menus", (proctable_fptr)typescript_HandleMenus, &typescript_ATKregistry_ , NULL, "Handle user supplied menus"); 
 	while(fgets(nbuf, sizeof nbuf, df)) {
-	    register pos = strlen(nbuf) - 1;
+	    register int pos = strlen(nbuf) - 1;
 	    if(pos > 0) {
 		if(nbuf[pos-1] == '\\')
 		    nbuf[pos-1] = '\0';

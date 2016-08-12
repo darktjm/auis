@@ -1568,7 +1568,7 @@ static char *spaces="        ";
   if(col>oldcol){\
     (self)->DeleteCharacters(oldpos,pos-oldpos);\
     pos=oldpos;\
-    if (PPMANGLING && oldcol==0) { int count=(col-oldcol)/self->levelIndent; while (count--) { if (BLANKCOL1) (self)->JustInsertCharacters(pos++, " ",1); (self)->JustInsertCharacters(pos++, DOBARS?"|"/*246*/:" ",1); (self)->JustInsertCharacters(pos, spaces,self->levelIndent-1-BLANKCOL1); pos+= self->levelIndent-1-BLANKCOL1; oldcol+=self->levelIndent; } } else /*RSKprettyprint*/ \
+    if (PPMANGLING && oldcol==0) { int count=(col-oldcol)/self->levelIndent; while (count--) { if (BLANKCOL1) (self)->JustInsertCharacters(pos++, " ",1); (self)->JustInsertCharacters(pos++, (char *)(DOBARS?"|"/*246*/:" "),1); (self)->JustInsertCharacters(pos, spaces,self->levelIndent-1-BLANKCOL1); pos+= self->levelIndent-1-BLANKCOL1; oldcol+=self->levelIndent; } } else /*RSKprettyprint*/ \
     if(self->useTabs){\
       int nc;\
       while(col>=(nc=(oldcol+8)&~7)){\

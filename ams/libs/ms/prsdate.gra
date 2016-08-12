@@ -268,6 +268,13 @@ struct stable strings[] =
   { 0, 0, 0 }
 };
 
+static check(struct parser *parser, int date);
+static constrain(struct parser *parser, int con, int date, int past, int repeat);
+static int setrep (struct dtm *dtm, int rep);
+static int new_dtm(struct parser *parser, int current);
+static incr (int ndtm, int days);
+static incryear (int ndtm, int years);
+static incrmonth (int ndtm, int months);
 %}
 %%
 
@@ -779,6 +786,8 @@ struct tm *tmp;
 }
 */
 
+static time_def (struct tm *tm, struct tm *currtm);
+
 #define MAXSTRLEN 150
 static int locallexer ();
 struct parser *prsdate_New();
@@ -890,6 +899,9 @@ static int lead0;
  *  It gives more lookahead than yacc can support.
  */
 
+static int nextlex (YYSTYPE *pyylval);
+static int peeper (int n);
+
 static int locallexer (lexerrock, pyylval)
 struct parser *lexerrock;
 YYSTYPE *pyylval;
@@ -910,6 +922,8 @@ YYSTYPE *pyylval;
   return parser_TranslateTokenNumber(lexerrock, ctoken);
 }
 
+static int prelex(void);
+
 static int nextlex (pyylval)
 YYSTYPE *pyylval;
 { register int token;
@@ -925,7 +939,7 @@ YYSTYPE *pyylval;
   return (token);
 }
 
-static peeper (n)
+static int peeper (n)
 int n;
 { register int i;
   if (peepb != 0)
@@ -961,6 +975,7 @@ int n;
  */
 
 static int wasabb;			/* tabfind indicates abbrev. */
+static int tabfind (char *text, struct stable *table);
 
 static int prelex()
 {
@@ -1144,6 +1159,9 @@ struct stable *table;
   return (find);
 }
 
+static int month(struct parser *parser, struct dtm *dtm, int mon, int past);
+static int weekday (struct dtm *dtm, int wkday, int past);
+static int mday (struct dtm *dtm, int day, int past);
 /* check: check that a date is valid. each of the constraint processing
  *   routines is called in turn and if any of them do anything then the
  *   date is invalid.
@@ -1356,7 +1374,7 @@ int past;
 
 /* setrep: sets the representation of the date in a dtm structure. */
 
-static setrep (dtm, rep)
+static int setrep (dtm, rep)
 struct dtm *dtm;
 int rep;
 { if (dtm->repn == rep)
@@ -1375,7 +1393,7 @@ int rep;
 
 /* yearsize: returns nuber of days in year. */
 
-yearsize (year)
+int yearsize (year)
 int year;
 { return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0) ? 366 : 365);
 }

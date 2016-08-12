@@ -85,7 +85,6 @@ typedef unsigned int bool;
 
 #define NIL	0
 
-extern int errno;
 #include <mailconf.h>
 #include <mail.h>
 

@@ -23,7 +23,9 @@
  // ATKDynImpl: the system specific code to adapt the link line for a dynamic object.
 
 #include <ATKOLinkI.H>
-#include <fstream.h>
+#include <iostream>
+
+using namespace std;
 
 #include <ATKDoLoad.H>
 

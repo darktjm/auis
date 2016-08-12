@@ -232,7 +232,7 @@ static void CBResetFunc (AWidget *self,
 		case htmlform_InText:
 			// set text to atts->VALUE
 			attx = atts->GetAttribute("value");
-			cval = (attx) ? attx->value : "";
+			cval = (attx) ? attx->value : (char *)"";
 
 			ttxt = (text *)
                           wgt->GetATK(slot_source, class_text);
@@ -380,7 +380,7 @@ htmlform::AddInputNode(attlist *atts) {
 		w->Set(slot_rows, 1L);			// rows
 		SetInt(w, slot_columns, atts, "size", 20);
 		attx = atts->GetAttribute("value");
-		cval = (attx) ? attx->value : "";
+		cval = (attx) ? attx->value : (char *)"";
 		if (*cval) {
 			// put initial value into widget text
 			wtext = (text *)
@@ -413,7 +413,7 @@ htmlform::AddInputNode(attlist *atts) {
 		w = AWidget::NewWidget("Password");
 		SetInt(w, slot_columns, atts, "size", 20);
 		attx = atts->GetAttribute("value");
-		cval = (attx) ? attx->value : "";
+		cval = (attx) ? attx->value : (char *)"";
 		if (*cval) {
 			// put initial value into widget text
 			wtext = (text *)
@@ -445,7 +445,7 @@ htmlform::AddInputNode(attlist *atts) {
 	case htmlform_InSubmit:
 		w = AWidget::NewWidget("PushButton");
 		attx = atts->GetAttribute("value");
-		cval = (attx) ? attx->value : "Submit";
+		cval = (attx) ? attx->value : (char *)"Submit";
 		w->Set(slot_text, cval);
 		w->Set(slot_activateCallback, &CBSubmission);
 		break;
@@ -453,7 +453,7 @@ htmlform::AddInputNode(attlist *atts) {
 	case htmlform_InReset:
 		w = AWidget::NewWidget("PushButton");
 		attx = atts->GetAttribute("value");
-		cval = (attx) ? attx->value : "Reset";
+		cval = (attx) ? attx->value : (char *)"Reset";
 		w->Set(slot_text, cval);
 		w->Set(slot_activateCallback, &CBReset);
 		break;

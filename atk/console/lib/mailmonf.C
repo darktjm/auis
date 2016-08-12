@@ -237,7 +237,7 @@ void CheckMail(class consoleClass  *self, int  requested)
     }
     if (iserror) {
         value = -1;
-	sprintf(ErrTxt, "console: Mail checking terminated (%s)", sys_errlist[errno]);
+	sprintf(ErrTxt, "console: Mail checking terminated (%s)", strerror(errno));
         ReportInternalError(self, ErrTxt);
         DoMailChecking = FALSE;
     }
@@ -261,7 +261,7 @@ void CheckDirectories(class consoleClass  *self)
                            Numbers[i].Value);
             if (Numbers[i].Value < 0) {
                 if (!IsViceError(errno)) {
-		    sprintf(ErrTxt, "console: Monitoring of %s terminated (%s)", Numbers[i].RawText, sys_errlist[errno]);
+		    sprintf(ErrTxt, "console: Monitoring of %s terminated (%s)", Numbers[i].RawText, strerror(errno));
                     ReportInternalError(self, ErrTxt);
                     free(Numbers[i].RawText);
                     Numbers[i].RawText = Nullity;
@@ -296,7 +296,7 @@ int CheckPrint(class consoleClass  *self)
             PrintDirModTime = 0;
             return(-1);
 	}
-	sprintf(ErrTxt, "console:  Printing monitor terminated (%s)", sys_errlist[errno]);
+	sprintf(ErrTxt, "console:  Printing monitor terminated (%s)", strerror(errno));
         return AbortPrintChecking(self, ErrTxt);
     }
     if ((dirstatbuf.st_mode & S_IFMT) != S_IFDIR) {
@@ -306,7 +306,7 @@ int CheckPrint(class consoleClass  *self)
         return 0;
     }
     if ((dp = opendir(PrintDirName)) == NULL) {
-	sprintf(ErrTxt, "console: Printing monitor terminated on opendir (%s)", sys_errlist[errno]);
+	sprintf(ErrTxt, "console: Printing monitor terminated on opendir (%s)", strerror(errno));
         return AbortPrintChecking(self, ErrTxt);
     }
     PrintDirModTime = dirstatbuf.st_atime;
@@ -364,7 +364,7 @@ void CheckOutgoingMail(class consoleClass  *self)
             return;
         }
         /* BOGUS -- this should get put back when outgoing directories are universal */
-        /* 	ReportInternalError(self, sprintf(ErrTxt, "console: terminated monitoring of outgoing mail (%s)", sys_errlist[errno])); */
+        /* 	ReportInternalError(self, sprintf(ErrTxt, "console: terminated monitoring of outgoing mail (%s)", strerror(errno))); */
         OutgoingDir[0] = '\0';
         return;
     }
@@ -375,7 +375,7 @@ void CheckOutgoingMail(class consoleClass  *self)
         return;
     }
     if ((dp = opendir(OutgoingDir)) == NULL) {
-	sprintf(ErrTxt, "console: Printing monitor terminated on opendir (%s)", sys_errlist[errno]);
+	sprintf(ErrTxt, "console: Printing monitor terminated on opendir (%s)", strerror(errno));
         ReportInternalError(self, ErrTxt);
         return;
     }
@@ -389,7 +389,7 @@ void CheckOutgoingMail(class consoleClass  *self)
             strcpy(NewPart, dirent->d_name);
             if (stat(FullName, &statbuf) == -1) {
                 if (errno != ENOENT){
-		    sprintf(ErrTxt, "console: Cannot stat outgoing mail file %s (%s)", dirent->d_name, sys_errlist[errno]);
+		    sprintf(ErrTxt, "console: Cannot stat outgoing mail file %s (%s)", dirent->d_name, strerror(errno));
                     ReportInternalError(self, ErrTxt);
                 }
                 continue;

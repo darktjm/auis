@@ -35,7 +35,6 @@
 #include <net/if.h>
 #include <sys/ioctl.h>
 #include <netinet/in.h>
-extern int errno;
 #include <errno.h>
 
 #ifndef er_ucall

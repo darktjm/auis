@@ -53,8 +53,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/purg
 #include <mailconf.h>
 #include <mail.h>
 
-extern int errno;
-
 #if !POSIX_ENV
 extern char *malloc(), *realloc();
 #endif

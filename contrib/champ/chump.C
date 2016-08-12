@@ -35,8 +35,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/
 #include <champ.h>
 #include <ctype.h>
 
-extern int errno;
-
 static char *Weekdays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
 #ifndef NORCSID

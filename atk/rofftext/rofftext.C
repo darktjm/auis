@@ -87,7 +87,7 @@ void Set_BOL(class rofftext  *self);
 void DestroyContext(IC  c);
 static Trickle topen(class rofftext  *self,char  *filename,FILE  *f,char  *s);
 static void tclose(class rofftext  *self,Trickle  t);
-static g(class rofftext  *self,Trickle  t);
+static int g(class rofftext  *self,Trickle  t);
 void ung(class rofftext  *self,int  c,Trickle  t);
 void tpush(class rofftext  *self,Trickle  t,char  *filename,FILE  *f,char  *s,boolean  push,int  argc,char  *argv[]);
 static void munch(class rofftext  *self,Trickle  t);

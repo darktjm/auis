@@ -489,7 +489,7 @@ static void ColorProc(class sbttnav  *self, long  param)
     }
     oldcolor = sbutton::GetForeground(prefs);
     
-    if (message::AskForString(self,50,"Enter new foreground color for button: ", oldcolor?oldcolor:"black", buf1, sizeof(buf1)) >= 0) {
+    if (message::AskForString(self,50,(char *)"Enter new foreground color for button: ", oldcolor?oldcolor:(char *)"black", buf1, sizeof(buf1)) >= 0) {
 	char buf3[1024];
 	if(buf1[0]=='\0') {
 	    sbutton::GetForeground(prefs)=NULL;
@@ -508,7 +508,7 @@ static void ColorProc(class sbttnav  *self, long  param)
 
     oldcolor = sbutton::GetBackground(prefs);
 
-    if (message::AskForString(self,50,"Enter new background color for button: ", oldcolor?oldcolor:"white", buf2, sizeof(buf2)) >= 0) {
+    if (message::AskForString(self,50,(char *)"Enter new background color for button: ", oldcolor?oldcolor:(char *)"white", buf2, sizeof(buf2)) >= 0) {
 	char buf3[1024];
 	if(buf2[0]=='\0') {
 	    sbutton::GetBackground(prefs) = NULL;
@@ -549,7 +549,7 @@ static void AddButtonProc(class sbttnav  *self, long  rock)
 {
     char buf[1024];
     class sbutton *b=(self)->ButtonData();
-    if (message::AskForString(self,50,"Enter label for new button: ", NULL, buf, sizeof(buf)) >= 0) {
+    if (message::AskForString(self,50,(char *)"Enter label for new button: ", NULL, buf, sizeof(buf)) >= 0) {
 	(b)->SetLabel( b->count, buf);
     }
     message::DisplayString(self, 0, "Added new button.");
@@ -559,7 +559,7 @@ static void SetRowsProc(class sbttnav  *self, long  rock)
 {
     char buf[1024];
     class sbutton *b=(self)->ButtonData();
-    if (message::AskForString(self,50,"Rows: ", NULL, buf, sizeof(buf)) >= 0) {
+    if (message::AskForString(self,50,(char *)"Rows: ", NULL, buf, sizeof(buf)) >= 0) {
 	int i=atoi(buf);
 	if(i<=0) {
 	    message::DisplayString(self, 50, "The number of rows should be a number greater than zero.");
@@ -573,7 +573,7 @@ static void SetColsProc(class sbttnav  *self, long  rock)
 {
     char buf[1024];
     class sbutton *b=(self)->ButtonData();
-    if (message::AskForString(self,50,"Columns: ", NULL, buf, sizeof(buf)) >= 0) {
+    if (message::AskForString(self,50,(char *)"Columns: ", NULL, buf, sizeof(buf)) >= 0) {
 	int i=atoi(buf);
 	if(i<=0) {
 	    message::DisplayString(self, 50, "The number of columns should be a number greater than zero.");
@@ -587,7 +587,7 @@ static void NewGroupProc(class sbttnav  *self, long  rock)
 {
     char buf[1024];
     class sbutton *b=(self)->ButtonData();
-    if (message::AskForString(self,50,"Name for new button group: ", NULL, buf, sizeof(buf)) >= 0) {
+    if (message::AskForString(self,50,(char *)"Name for new button group: ", NULL, buf, sizeof(buf)) >= 0) {
 	struct sbutton_prefs *new_c;
 	new_c=sbutton::DuplicatePrefs((b)->GetDefaultPrefs(), buf);
 	new_c->refcount=1;
@@ -615,7 +615,7 @@ static void RenameProc(class sbttnav  *self, long  rock)
 	message::DisplayString(self, 50, "Bad group name given.");
 	return;
     }
-    if (message::AskForString(self,50,"New name for button group: ", NULL, buf, sizeof(buf)) >= 0) {
+    if (message::AskForString(self,50,(char *)"New name for button group: ", NULL, buf, sizeof(buf)) >= 0) {
 	if(LookupGroup(self, buf)!=NULL) {
 	    message::DisplayString(self, 75, "That name is already in use.");
 	    return;
@@ -703,7 +703,7 @@ static void ShadowColorProc(class sbttnav  *self, long  param)
     }
     oldcolor = sbutton::GetTopShadow(prefs);    
     
-    if (message::AskForString(self,50,"Enter new top shadow color for button: ", NULL, buf1, sizeof(buf1)) >= 0) {
+    if (message::AskForString(self,50,(char *)"Enter new top shadow color for button: ", NULL, buf1, sizeof(buf1)) >= 0) {
 	char buf3[1024];
 	if(buf1[0]=='\0') {
 	    sbutton::GetTopShadow(prefs)=NULL;
@@ -726,7 +726,7 @@ static void ShadowColorProc(class sbttnav  *self, long  param)
 
     oldcolor = sbutton::GetBottomShadow(prefs);
 
-    if (message::AskForString(self,50,"Enter new bottom shadow color for button: ", NULL, buf2, sizeof(buf2)) >= 0) {
+    if (message::AskForString(self,50,(char *)"Enter new bottom shadow color for button: ", NULL, buf2, sizeof(buf2)) >= 0) {
 	char buf3[1024];
 	if(buf2[0]=='\0') {
 	    sbutton::GetBottomShadow(prefs) = NULL;
@@ -749,7 +749,7 @@ static void ShadowColorProc(class sbttnav  *self, long  param)
     
     oldcolor = sbutton::GetTop(prefs);
 
-    if (message::AskForString(self,50,"Enter new top color for button: ", oldcolor?oldcolor:"White", buf2, sizeof(buf2)) >= 0) {
+    if (message::AskForString(self,50,(char *)"Enter new top color for button: ", oldcolor?oldcolor:(char *)"White", buf2, sizeof(buf2)) >= 0) {
 	char buf3[1024];
 	if(buf2[0]=='\0') {
 	    sbutton::GetTop(prefs)=NULL;
@@ -786,7 +786,7 @@ static void DepthProc(class sbttnav  *self, long  param)
 	}
     }
     char buf1[MAXPATHLEN];
-    if (message::AskForString(self,50,"Enter new depth for buttons: ", NULL, buf1, sizeof(buf1)) >= 0) {
+    if (message::AskForString(self,50,(char *)"Enter new depth for buttons: ", NULL, buf1, sizeof(buf1)) >= 0) {
 	if(prefs) prefs->bdepth=atoi(buf1);
 	(b)->SetModified();
 	(b)->SetChangeFlag( sbutton_ALLCHANGED|sbutton_SIZECHANGED);
@@ -815,7 +815,7 @@ static void LabelColorProc(class sbttnav  *self, long  param)
     }
     oldcolor = sbutton::GetLabelFG(prefs);
     
-    if (message::AskForString(self,50,"Enter new foreground color for button label: ", oldcolor?oldcolor:"black", buf1, sizeof(buf1)) >= 0) {
+    if (message::AskForString(self,50,(char *)"Enter new foreground color for button label: ", oldcolor?oldcolor:(char *)"black", buf1, sizeof(buf1)) >= 0) {
 	char buf3[1024];
 	if(buf1[0]=='\0') {
 	    sbutton::GetLabelFG(prefs)=NULL;
@@ -840,7 +840,7 @@ static void LabelColorProc(class sbttnav  *self, long  param)
 
     oldcolor = sbutton::GetLabelBG(prefs);
 
-    if (message::AskForString(self,50,"Enter new background color for button label: ", oldcolor?oldcolor:"white", buf2, sizeof(buf2)) >= 0) {
+    if (message::AskForString(self,50,(char *)"Enter new background color for button label: ", oldcolor?oldcolor:(char *)"white", buf2, sizeof(buf2)) >= 0) {
 	char buf3[1024];
 	if(buf2[0]=='\0') {
 	    sbutton::GetLabelBG(prefs)=NULL;

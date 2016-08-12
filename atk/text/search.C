@@ -95,7 +95,7 @@ static long TryMatch (class simpletext  *d, long  pos, unsigned char **s , int l
 static long TryMatchStr (unsigned char *str, long  pos, long length, unsigned char **s , int loop);
 
 
-search::GetMatchLength ()
+int search::GetMatchLength ()
 {
     return MatchLength;
 }

@@ -157,13 +157,13 @@ pushbutton__WriteDataPart(class pushbutton  *self, FILE  *fp)
 */
   char buf[100], *encfont;
 
-  WriteLine(fp, self->text ? self->text : "");
+  WriteLine(fp, self->text ? self->text : (char *)"");
   sprintf(buf,"%d", self->style); /* *BUG* how do we tell a defaulted 
 				     style from a set style? */
   WriteLine(fp, buf);
 
   encfont = self->myfontdesc ? EncodeFont(self) : NULL;
-  WriteLine(fp, encfont ? encfont : "");
+  WriteLine(fp, encfont ? encfont : (char *)"");
   if (encfont) {
     free(encfont);
     encfont = NULL;

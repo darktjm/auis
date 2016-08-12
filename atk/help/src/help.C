@@ -1701,8 +1701,8 @@ ToggleProgramListSize(register class help * self, long  rock)
 
 	im::SetProcessCursor((class cursor *) NULL);
     }
-    (self->listLab)->SetText( (self->expandedList) ?
-		  "Full Program List" : "Programs");
+    (self->listLab)->SetText( (char *)((self->expandedList) ?
+		  "Full Program List" : "Programs"));
     SetupMenus(self->info);
     message::DisplayString(self, 0, "Done.");
 }
@@ -1729,8 +1729,8 @@ RestorePanel(register class help  *self)
     (self->listScroll)->SetView( self->oldpanel);
     self->oldpanel = (class panel *)NULL;
 
-    (self->listLab)->SetText( (self->expandedList) ?
-		  "Full Program List" : "Programs");
+    (self->listLab)->SetText( (char *)((self->expandedList) ?
+		  "Full Program List" : "Programs"));
     SetupMenus(self->info);
 }
 

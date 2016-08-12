@@ -64,8 +64,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/delivery/t
 #include <parseadd.h>
 #include <wp.h>
 
-extern int errno;
-
 #include <trymail.h>
 #include <wkstr.h>
 

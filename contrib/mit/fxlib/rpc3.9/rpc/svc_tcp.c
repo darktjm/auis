@@ -75,7 +75,6 @@ static char sccsid[] = "@(#)svc_tcp.c 1.21 87/08/11 Copyr 1984 Sun Micro";
 #include <sys/time.h>
 #include <errno.h>
 extern bool_t abort();
-extern errno;
 
 /*
  * Ops vector for TCP/IP based rpc service handle

@@ -300,7 +300,7 @@ bush::InitTree( register char		 *root_path )
   AllocNameSpace(nodeName,&rootDir->name);
   free(nodeName);
   if(stat(RootPath,&stats) < 0) {
-      printf("bush: error '%s' encountered while scanning '%s'.\n", sys_errlist[errno]);
+      printf("bush: error '%s' encountered while scanning '%s'.\n", strerror(errno));
       return;
   }
   else {

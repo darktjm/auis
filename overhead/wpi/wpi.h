@@ -84,8 +84,6 @@ typedef enum WP_validate_p {	/* result of validation */
   uncool
 } validate_t;
 
-extern int errno;		/* gak!  why isn't there a header for this? */
-
 extern int WPI_error_code;	/* error code (if any) from last WPI op */
 extern char WPI_error_msg[];	/* error msg (if any) from last WPI op */
 

@@ -111,9 +111,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/
 #ifndef _IBMR2
 extern char *malloc();
 #endif /* _IBMR2 */
-extern int sys_nerr;
-extern char *sys_errlist[];
-extern int errno;
 
 #define min(xx1,xx2) (((xx1)<(xx2))?(xx1):(xx2))
 #define max(xx1,xx2) (((xx1)>(xx2))?(xx1):(xx2))
@@ -621,11 +618,7 @@ void print_errno(dfile,anerr)
 FILE *dfile;
 int anerr;
 {
-    if((anerr<0)||
-        (anerr>sys_nerr))
-        fprintf(dfile,"unknown error %d",anerr);
-    else
-        fprintf(dfile,"%s",sys_errlist[anerr]);
+    fputs(strerror(anerr), dfile);
 }
 
 /*

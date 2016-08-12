@@ -83,7 +83,7 @@ void
 WriteClass(FILE  *fout, struct line  *hdr)
 		{
 	struct line *elt;
-	char *procname = (hdr->u.h.Ccode)  ? GenSym()  : "NULL";
+	char *procname = (hdr->u.h.Ccode)  ? GenSym()  : (char *)"NULL";
 
 	/* output identification */
 	if (hdr->u.h.tokennumber >0 && 

@@ -283,7 +283,7 @@ void writePS( class imagev  *self, FILE  *fp, int  *wpts , int  *hpts, int  topl
    else {      /* all other formats */
        byte *rleline;
        unsigned long outbytes = 0;
-       char *defname = colorps ? "imageRleCImage" : "imageRleGImage";
+       const char *defname = colorps ? "imageRleCImage" : "imageRleGImage";
 
     /* imake sure 'colorimage' is defined IF we're gonna use it */
        if (colorps /*&& !rle */) {
@@ -298,8 +298,8 @@ void writePS( class imagev  *self, FILE  *fp, int  *wpts , int  *hpts, int  topl
        if (rle) {   /* write colormap and rle-colormapped image funct */
 	   psColorMap(fp, colorps, nc, rmap, gmap, bmap);
 	   if (toplevel == imagev_REGISTERED_POSTSCRIPT) {
-	       print::PSRegisterDef(defname, "0");
-	       print::PSRegisterHeader(defname, (print_header_fptr)psRleCmapImage, (void *)colorps);
+	       print::PSRegisterDef((char *)defname, "0");
+	       print::PSRegisterHeader((char *)defname, (print_header_fptr)psRleCmapImage, (void *)colorps);
 	   }
 	   else
 	       psRleCmapImage(fp, colorps);
@@ -590,7 +590,7 @@ static void psColorMap(FILE  *fp, int  color , int  nc, byte  *rmap , byte  *gma
 /**********************************************/
 static void psRleCmapImage(FILE  *fp, int color)
 {
-  char *defname = color ? "imageRleCImage" : "imageRleGImage";
+  const char *defname = color ? "imageRleCImage" : "imageRleGImage";
   /* spits out code that defines the 'rlecmapimage' or 'rlegmapimage' operator */
 
   fprintf(fp,"%% procedure expects to have 'w h bits matrix' on stack\n");

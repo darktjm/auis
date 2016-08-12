@@ -56,7 +56,7 @@ static int DefaultHash(char  *key);
 static int safestrcmp(char  *a ,char  *b);
 static int FindEgg(struct egg  *egg,char  *key);
 static boolean EnumProc(struct egg  *e, struct enumerate  *rock);
-static PrintAll(struct egg  *egg,int  nothing);
+static int PrintAll(struct egg  *egg,int  nothing);
 
 
 static int DefaultHash(char  *key)
@@ -289,7 +289,7 @@ void ghash::Clear()
 }
 
 
-static PrintAll(struct egg  *egg,int  nothing)
+static int PrintAll(struct egg  *egg,int  nothing)
 {
     printf("Egg (%s) contains (%s)\n",egg->key,egg->value);
     return FALSE;

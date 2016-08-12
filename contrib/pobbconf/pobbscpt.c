@@ -46,7 +46,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/pobbco
 #include <mailconf.h>
 #include <mail.h>
 #include <pobbconf.h>
-extern int errno;
 #define NULL 0
 
 #define LINELENGTH 4000

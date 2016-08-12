@@ -161,7 +161,7 @@ class AVarSet : public  dataobject
 	    // Fetches the resources for the given widget name.
     
     virtual ASlot &Baptize(ASlot &v, 
-			   ASlot_NameParam name=NULL,
+			   ASlot_NameParam name=(const atom *)NULL,
 			   boolean fromresource=FALSE);
 	    // v is a member of this object
 	    // Baptize gives v a name and adds it to LocalSlots

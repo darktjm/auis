@@ -54,7 +54,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
 char *full_name();
 long do_dump();
 int kbytes = 0;			/* disk space used */
-extern int verbose, errno;
+extern int verbose;
 
 /*
  * collect_arg checks to see if the current argument indicates

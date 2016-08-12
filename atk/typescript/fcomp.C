@@ -299,7 +299,7 @@ void PossibleCompletions(register class typescript  *ts, long  key)
     else {
 	if(pathname[pathlen-1] == '/') rock.refusedot = TRUE;
     }
-    completion::FileHelp((*pathname) ? pathname : "./", 0, (message_workfptr)GatherStats, (long) &rock);
+    completion::FileHelp((*pathname) ? pathname : (char *)"./", 0, (message_workfptr)GatherStats, (long) &rock);
 
     if(rock.errorcnt || rock.itemcnt == 0) {
 	message::DisplayString(ts, 0, "[No Match]");
@@ -334,7 +334,7 @@ void PossibleCompletions(register class typescript  *ts, long  key)
 	cookie.maxwidthinpix = 0;
 	cookie.report = (char**) calloc(rock.itemcnt, sizeof(char*));
 
-	completion::FileHelp((*pathname) ? pathname : "./", 0, (message_workfptr)MakeReport, (long)&cookie);
+	completion::FileHelp((*pathname) ? pathname : (char *)"./", 0, (message_workfptr)MakeReport, (long)&cookie);
 
 	cookie.colwidth = rock.maxitemlen + COLSPACE;
 	cookie.columns = windowwidth / (cookie.maxwidthinpix + charwidth);

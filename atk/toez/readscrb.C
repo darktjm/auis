@@ -408,7 +408,7 @@ CollectWord(int  *len )
 	{
 	static char word[102];
 	register char c, *wx = word;
-	register cnt = 100;
+	register int cnt = 100;
 	SaveWhiteSpace();
 	c = nextch;
 	while (cnt-- && CharType[c]) {
@@ -423,7 +423,7 @@ CollectWord(int  *len )
 	static int
 IsReserved (register char *word ) 
 	{
-	register inx;
+	register int inx;
 
 	if (*word >='a' && *word <= 'z') {
 		inx = ResInx[(unsigned char)(*word - 'a')] - 1;
@@ -449,7 +449,7 @@ ScribeDelimiter(char *tc)
 	static char
 		left[]  = "{[(<\"`'",	/* at end, null is paired to blank*/
 		right[] = "}])>\"'' ";
-	register endc;
+	register int endc;
 	register char *pc = left;
 	SaveWhiteSpace();
 	*tc = nextch;
@@ -660,7 +660,7 @@ DoText()
 			c = getnextch();
 			break;
 		case ' ': 
-			{register nsp = 0;
+			{register int nsp = 0;
 				do {
 					nsp++;
 					ouch(c);
@@ -1098,7 +1098,7 @@ CloseEnvt( char c, char *word)
 		currMap[endsp]->len = DocPos - currMap[endsp]->pos;
 		C1[0] = scribeEnd[endsp];
 		Error2("Missing '%s' detected by %s", C1,
-				(c == 'z' ? "end of file" : "@end"));
+				(char *)(c == 'z' ? "end of file" : "@end"));
 		endsp--;
 	}
 	endsp = 0;
@@ -1188,7 +1188,7 @@ ProcessLine(boolean  NextIsNewline)
 				punct ["] space* => punct ["] space
 				non-punct space space* => non-punct space* 
 				An additional space will occur from \n */
-		register havespace = outp-cx-1;
+		register int havespace = outp-cx-1;
 		if ((*cx=='"' || *cx==')') && cx>buf) cx--;
 		if (*cx=='.'||*cx=='!'||*cx==';'||*cx==':'||*cx=='?') {
 			if (havespace<1) pout(' ');

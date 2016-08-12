@@ -54,9 +54,9 @@ ATKdefineRegistry(style, ATK, NULL);
 #ifndef NORCSID
 #endif
 static long CVDots(register long  amt, enum style_Unit  unit);
-static int style_freeattributes(long  procdata, class namespace  * curnamespace, int  indexvalue );
-static int style_copyattributes(long  procdata, class namespace  * curnamespace, int  indexvalue );
-static int style_writeAdditionalAttribute(FILE  *fileptr, class namespace  * curnamespace, int  indexvalue );
+static int style_freeattributes(long  procdata, class Namespace  * curnamespace, int  indexvalue );
+static int style_copyattributes(long  procdata, class Namespace  * curnamespace, int  indexvalue );
+static int style_writeAdditionalAttribute(FILE  *fileptr, class Namespace  * curnamespace, int  indexvalue );
 static long ReadDevice(class style  *self , FILE  *fp );
 
 
@@ -80,7 +80,7 @@ static long CVDots(register long  amt, enum style_Unit  unit)
     return 0;
 }
 
-static int style_freeattributes(long  procdata, class namespace  * curnamespace, int  indexvalue )
+static int style_freeattributes(long  procdata, class Namespace  * curnamespace, int  indexvalue )
 {
     char * tmpValue;
     if ((curnamespace)->BoundpAt(indexvalue)) {
@@ -398,7 +398,7 @@ void style::Reset()
     }
 }
 
-static int style_copyattributes(long  procdata, class namespace  * curnamespace, int  indexvalue )
+static int style_copyattributes(long  procdata, class Namespace  * curnamespace, int  indexvalue )
 {
     char * tmpValue;
     char * tmpAttributeName;
@@ -973,7 +973,7 @@ void style::AddAttribute(char  * NewAttributeName, char  * NewAttributeValue )
 	(void) strcpy(tmpValue,NewAttributeValue);
     }
     else tmpValue = NULL;
-    if (!this->AdditionalAttributes) this->AdditionalAttributes = new namespace;
+    if (!this->AdditionalAttributes) this->AdditionalAttributes = new Namespace;
     if(this->AdditionalAttributes)    (this->AdditionalAttributes)->SetValue(tmpAtom, (long) tmpValue);
 }
 
@@ -1045,7 +1045,7 @@ long style::ReadMenu(FILE  *fp)
 
 /* Datastream I/O: attribute fields */
 
-static int style_writeAdditionalAttribute(FILE  *fileptr, class namespace  * curnamespace, int  indexvalue )
+static int style_writeAdditionalAttribute(FILE  *fileptr, class Namespace  * curnamespace, int  indexvalue )
 {
     char * tmpValue;
     char * tmpAttributeName;

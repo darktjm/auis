@@ -93,9 +93,9 @@ ATKdefineRegistry(xfontdesc, fontdesc, xfontdesc::InitializeClass);
 static struct FontSummary *GetFontSummary(class xfontdesc  *self);
 static void AddStyleModifiers(char  *string, int  styles);
 static char *GetNthDash(char  *p, int  cnt);
-static boolean XExplodeFontName(char  *fontName, char  *familyName, long  bufSize, long  *fontStyle, long  *fontSize);
-static struct bestfont *ClosestFonts(char  **possibleNames, int  numNames, char  *desiredFamily, int  desiredSize, int  desiredStyle, int  *numBest, boolean  andyName);
-static XFontStruct *GetClosestFont(class xgraphic  *graphic, char  *matchStr, char  *desiredName, int  desiredSize, int  desiredStyle, boolean  andyName, char  *substitute);
+static boolean XExplodeFontName(const char  *fontName, char  *familyName, long  bufSize, long  *fontStyle, long  *fontSize);
+static struct bestfont *ClosestFonts(const char  **possibleNames, int  numNames, const char *desiredFamily, int  desiredSize, int  desiredStyle, int  *numBest, boolean  andyName);
+static XFontStruct *GetClosestFont(class xgraphic  *graphic, const char *matchStr, const char *desiredName, int  desiredSize, int  desiredStyle, boolean  andyName, char *substitute);
 static XFontStruct * xfontdesc_LoadXFont(class xfontdesc  * self, class xgraphic  *graphic);
 static class xgraphic * GetAnyOldGraphic();
 static class xgraphic * EnsureGraphic( class xgraphic  *graphic );
@@ -238,7 +238,7 @@ struct bestfont {
 
 #define MAXBEST 3
 
-static char *GetNthDash(char  *p, int  cnt)
+static const char *GetNthDash(const char  *p, int  cnt)
 {
     while (*p != '\0') {
 	if (*p == '-') {
@@ -252,10 +252,10 @@ static char *GetNthDash(char  *p, int  cnt)
     return p;
 }
 
-static boolean XExplodeFontName(char  *fontName, char  *familyName, long  bufSize, long  *fontStyle, long  *fontSize)
+static boolean XExplodeFontName(const char  *fontName, char  *familyName, long  bufSize, long  *fontStyle, long  *fontSize)
 {
-    char *p;
-    char *end;
+    const char *p;
+    const char *end;
     int style = 0;
     int size = 0;
     int length;
@@ -339,7 +339,7 @@ static boolean XExplodeFontName(char  *fontName, char  *familyName, long  bufSiz
  * This routine depends on fontdesc_ExplodeFont name to the names in the list
  * into their size and style.
  */
-static struct bestfont *ClosestFonts(char  **possibleNames, int  numNames, char  *desiredFamily, int  desiredSize, int  desiredStyle, int  *numBest, boolean  andyName)
+static struct bestfont *ClosestFonts(const char  **possibleNames, int  numNames, const char  *desiredFamily, int  desiredSize, int  desiredStyle, int  *numBest, boolean  andyName)
                             {
 
     int index;
@@ -361,7 +361,7 @@ static struct bestfont *ClosestFonts(char  **possibleNames, int  numNames, char 
         static char numBitsSet[16] = {0, 1, 1, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2};
 
 	if (andyName) {
-	    fontdesc::ExplodeFontName(possibleNames[index], familyName, sizeof(familyName), &style, &size);
+	    fontdesc::ExplodeFontName((char *)possibleNames[index], familyName, sizeof(familyName), &style, &size);
 	}
 	else {
 	    XExplodeFontName(possibleNames[index], familyName, sizeof(familyName), &style, &size);
@@ -413,7 +413,7 @@ static struct bestfont *ClosestFonts(char  **possibleNames, int  numNames, char 
 
 #define MAXNAMES 50
 
-static XFontStruct *GetClosestFont(class xgraphic  *graphic, char  *matchStr, char  *desiredName, int  desiredSize, int  desiredStyle, boolean  andyName, char  *substitute)
+static XFontStruct *GetClosestFont(class xgraphic  *graphic, const char *matchStr, const char *desiredName, int  desiredSize, int  desiredStyle, boolean  andyName, char *substitute)
 {
     char **fontNames = NULL;
     int numNames;
@@ -424,7 +424,7 @@ static XFontStruct *GetClosestFont(class xgraphic  *graphic, char  *matchStr, ch
     fontNames = XListFonts((graphic)->XDisplay(), matchStr, MAXNAMES, &numNames);
 
     if (numNames > 0) {
-	bestFonts = ClosestFonts(fontNames, numNames, desiredName, desiredSize, desiredStyle, &numBest, andyName);
+	bestFonts = ClosestFonts((const char **)fontNames, numNames, desiredName, desiredSize, desiredStyle, &numBest, andyName);
 
 	while (numBest > 0 && font == NULL) {
 	    font = XLoadQueryFont((graphic)->XDisplay(), fontNames[bestFonts->index]);
@@ -464,7 +464,7 @@ xfontdesc_LoadXFont(class xfontdesc  * self, class xgraphic  *graphic)
     char substitute[MAXPATHLEN];
     struct fcache *oldMDFD = MDFD;
     char xstyleName[MAXPATHLEN];
-    char *xfamily;
+    const char *xfamily;
     static char *charset = 0;
 
     substitute[0] = '\0';
@@ -502,10 +502,10 @@ xfontdesc_LoadXFont(class xfontdesc  * self, class xgraphic  *graphic)
 
     /* Then try X naming convention. */
     if (font == NULL) {
-        char *andyfamily;
-        char *weight;
-        char *slant;
-        char *spacing;
+        const char *andyfamily;
+        const char *weight;
+        const char *slant;
+        const char *spacing;
 	static int UseXLFDNames = -1;
 
 	if (UseXLFDNames == -1)

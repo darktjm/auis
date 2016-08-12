@@ -569,6 +569,9 @@ int             Mode;
     return (0);
 }
 
+static int      CheckHintDroppingPermission(char           *Dirname);
+static int      CheckMarksInProgress(struct MS_Directory *Dir, int            *pQuietly);
+
 int             OpenMSDirectory(Dir, Code)
 struct MS_Directory *Dir;
 int             Code;
@@ -1066,6 +1069,8 @@ int            *lockfd;
     }
 }
 
+static int      CheckPathForMUFHints(char *PathElt, int DoAll);
+
 MS_TakeHints(DoAll, ProtFailures)
 int             DoAll;
 int            *ProtFailures;
@@ -1087,6 +1092,9 @@ int            *ProtFailures;
     }
     return (0);
 }
+
+static int      ClearUpdates(char           *PathElt);
+static int      CheckForMUFHints(char *MUFDir, int DoAll, char *PathElt);
 
 static int      CheckPathForMUFHints(PathElt, DoAll)
 char           *PathElt;
@@ -1584,6 +1592,8 @@ char           *cell, *NameBuf;
     }
 }
 
+static int      SetProgressMark(char *dirname, Boolean TurnOnMark, Boolean Quietly);
+
 int             MarkInProgress(dirname)
 char           *dirname;
 {
@@ -1675,6 +1685,10 @@ Orphans = {
 Missing = {
     "missing", 0, 0, 0, 0
 };
+
+static int AddToCheckList(char           *name, struct CheckList *CheckList);
+static int FreeCheckLists(void);
+static int      CheckCheckLists(struct MS_Directory *Dir, int Quiet, int alien);
 
 int             HandleMarksInProgress(Dir, Quiet)
 struct MS_Directory *Dir;
@@ -1768,7 +1782,9 @@ struct CheckList *CheckList;
     return (0);
 }
 
-static          FreeCheckLists()
+static int FreeCheckList(struct CheckList *CheckList);
+
+static int FreeCheckLists()
 {
     FreeCheckList(&Orphans);
     FreeCheckList(&Missing);
@@ -1776,7 +1792,7 @@ static          FreeCheckLists()
     FreeCheckList(&FilesToCheck);
 }
 
-static          FreeCheckList(CheckList)
+static int FreeCheckList(CheckList)
 struct CheckList *CheckList;
 {
     int             i;

@@ -35,7 +35,7 @@ ATKdefineRegistry(unknown, text, NULL);
 
 char *unknown::GetRealClass()
 {
-    return this->realclass?this->realclass:"unknown";
+    return this->realclass?this->realclass:(char *)"unknown";
 }
 
 void unknown::SetRealClass(char  *rclass)

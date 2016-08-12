@@ -44,8 +44,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <svcconf.h>
 #include <util.h>
 
-extern int errno;
-
 #ifdef WHITEPAGES_ENV
 int getvuid()
 {/* Return the Vice UID of the current process, or -1 with errno set */

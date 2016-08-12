@@ -210,7 +210,7 @@ static print_sigAlrm()
 static char hexchars[]="0123456789abcdef";
 static class atom *A_printer, *A_tofile, *A_psfile;
 
-static mystrtol16(char *p, char **pp)
+static int mystrtol16(char *p, char **pp)
 {
     long result=0;
     char *h;
@@ -483,7 +483,7 @@ int print::ProcessView(class view  *v, int  print, int  dofork ,
 	case print_PRINTPOSTSCRIPT:
 	default:
 	    /* Print Command */
-	    pp = (print == print_PRINTPOSTSCRIPT)? "pscprintcommand" : "printcommand";
+	    pp = (char *)((print == print_PRINTPOSTSCRIPT)? "pscprintcommand" : "printcommand");
 	    q = (char *) environ::GetProfile(pp);
 	    if (!q) {
 		pp =  (print == print_PRINTPOSTSCRIPT) ? print_pscprintcommand : print_printcommand ;

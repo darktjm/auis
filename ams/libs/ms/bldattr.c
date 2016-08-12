@@ -35,6 +35,8 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RC
 #include <hdrparse.h>
 #include <netinet/in.h>  /* for htonl, etc. */
 
+static int BuildHashVals(struct MS_Message *Msg);
+
 BuildAttributesField(msg)
 struct MS_Message *msg;
 {

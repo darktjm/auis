@@ -53,7 +53,6 @@ ATK_IMPL("runadewapp.H")
 
 static char **Gargv;
 static int Gargc;
-extern int errno;
 
 
 ATKdefineRegistry(runadewapp, application, runadewapp::InitializeClass);

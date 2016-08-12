@@ -503,7 +503,7 @@ class style : public ATK {
     long AddMiscFlags;      /* Hinge, Pagebreak, Hidden, ... */
     long OutMiscFlags;
 
-    class namespace *AdditionalAttributes;
+    class Namespace *AdditionalAttributes;
 };
 
 #endif /* _style_H_ */

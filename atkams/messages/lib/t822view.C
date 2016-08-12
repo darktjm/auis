@@ -157,7 +157,6 @@ void t822view::ShowHelp(char  *text)
     char *SurrogateHelpFile, *s;
     char ErrMsg[500+MAXPATHLEN];
     class environment *et;
-    extern int errno;
     class text *t = Text(this);
     class im *im;
 

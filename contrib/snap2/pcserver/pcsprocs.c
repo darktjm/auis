@@ -70,7 +70,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/
 #define NOFOLD	0
 #define FOLD	1
 
-extern int errno;
 extern int PCS_debuglevel;
 
 #if !SY_AIX12

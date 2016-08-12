@@ -44,8 +44,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/
 #include <ctype.h>
 #include <errno.h>
 
-extern int errno;
-
 
 /* Private structure to retain information about each domain asked for. */
 static struct AMSConfig {

@@ -29,11 +29,11 @@ static atom_def aaction_error("error");;
 
 class aaction : public ATK {
     unsigned long refs;
-    virtual ~aaction();
     friend class ATK; // shuts up a bogus g++ warning:
     // warning: `class aaction' only defines a private destructor and has no friends
     // well, DUH. 
   public:
+    virtual ~aaction();
     inline aaction() : refs(1) {
     }
     virtual ATKregistryEntry *ATKregistry();
@@ -170,12 +170,13 @@ ATK_CLASS(target);
 /* An AACTION_FUNC is a function suitable to be the
 		procedure body of an aaction object  
 */
+/* note: methodprefix is assumed to be C++ class prefix, e.g. class:: */
 #define AACTION_FUNC_GENERAL(name,target,reglinkage,funclinkage,methodprefix,objarg,method) \
 	typedef target Concat(name,Target); \
 	reglinkage  ATK_def \
 		&Concat(name,TargetClass) = Concat(class_,target); \
 	typedef Concat3(target,method,Act) Concat(name,TargetAct); \
-funclinkage void Concat(methodprefix,name)(objarg \
+funclinkage void methodprefix name(objarg \
 		const avalueflex &aux, const avalueflex &in, avalueflex &out) 
 
 #define AACTION_FUNC_INTERNAL(arg) arg,

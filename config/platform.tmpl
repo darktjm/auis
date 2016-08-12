@@ -34,7 +34,8 @@ XCOMM  The following comes from the macro file
 XCOMM 
 #undef OBSOLETE
 
-#if defined(i386) && defined(linux)
+/* #if defined(i386) && defined(linux) */
+#if defined(linux)
 #include <ix86_Linux/system.mcr>
 #define MacroIncludeFile ix86_Linux/system.mcr
 #endif /* Linux */

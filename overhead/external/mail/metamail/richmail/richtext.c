@@ -172,6 +172,8 @@ char **argv;
 
 #endif
 
+static int lc2strcmp(char *, char *);
+
 richtext_main(argc, argv)
 int argc;
 char **argv;

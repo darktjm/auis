@@ -93,8 +93,8 @@ va_dcl
     int type;
     char ControlString[CONTROLMAX], *typestr;
     int numfields, ret;
-    static FILE *fp=stderr;
-    
+    static FILE *fp=NULL;
+
     va_start(ap);
     application = va_arg(ap, char *);
     type = va_arg(ap, int);
@@ -115,6 +115,8 @@ va_dcl
     } else {
 	typestr = "debug";
     }
+    if(!fp)
+	fp = stderr;
     fprintf(fp, formatstr, typestr, 
 	(numfields > 1) ? ":" : "",
 	application ? application : "",
@@ -202,14 +204,14 @@ int safefprintf(FILE *fp, ...)
 static char formatstr[]="<%s%s%s%s%s%s%s>";
 
 int
-errprintf(char *application, ...)
+errprintf(const char *application, ...)
 {
     va_list ap;
     char *log, *id, *format;
     int type;
     char ControlString[CONTROLMAX], *typestr;
     int numfields, ret;
-    static FILE *fp=stderr;
+    static FILE *fp=NULL;
     
     va_start(ap, application);
     type = va_arg(ap, int);
@@ -230,6 +232,8 @@ errprintf(char *application, ...)
     } else {
 	typestr = "debug";
     }
+    if(!fp)
+	fp = stderr;
     fprintf(fp, formatstr, typestr, 
 	(numfields > 1) ? ":" : "",
 	application ? application : "",

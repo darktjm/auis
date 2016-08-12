@@ -32,8 +32,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/co
 #include "test1.h"
 #include "test2.h"
 
-extern int sys_nerr, errno;
-
 main()
 {
 	printf("Before initiating error table:\n\n");

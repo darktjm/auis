@@ -116,7 +116,7 @@ void CheckErrorsIn(FILE  *ErrorsIn, char *selfl)
 	
     if (errno != EWOULDBLOCK && errno != EAGAIN)  {
 	if (errno != 0)  {
-	    RestartErrorMonitoring(self, sys_errlist[errno]);
+	    RestartErrorMonitoring(self, strerror(errno));
 	}
 #if !SY_AIX221 && !defined(M_UNIX) && !defined(__hpux)
 #ifdef RCH_ENV

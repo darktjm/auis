@@ -52,6 +52,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/
 
 #include <andrewos.h> /* sys/types.h sys/time.h */
 #include <stdio.h>
+#include <string.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
 #include <netinet/in.h>
@@ -264,14 +265,11 @@ panics (s)
 char *s;
 {
     char msg[100];
-    extern int errno;
-    extern int sys_nerr;
-    extern char *sys_errlist[];
 
     strcpy (msg, s);
     if (errno <= sys_nerr) {
 	strcat (msg, ": ");
-	strcat (msg, sys_errlist[errno]);
+	strcat (msg, strerror(errno));
     }
     else
 	strcat (msg, ": invalid error number");

@@ -685,7 +685,7 @@ static void HandlePref(class prefs  *self, struct prefline  *line, int  *order)
    if(!line->type || self->readingdefaults) (self->prefsp)->Enumerate((list_efptr)FindDesc, (char *)&otherrock);
     if(otherrock.pd==NULL) {
 	if(line->shadow) fprintf(stderr, "prefs WARNING: no match found for shadow preference %s.%s\n", app, name);
-	desc=NewPrefDesc(self, line->type?line->type:"String");
+	desc=NewPrefDesc(self, line->type?line->type:(char *)"String");
 	desc->helppos=line->helppos;
 	if(line->expert>=0) desc->expert=line->expert;
 	if(line->vl && (line->vl)->Size()>0) desc->defviews=CopyViewList(line->vl);
@@ -1355,7 +1355,7 @@ void prefs::UpdateOneInText(struct prefdesc  *pd)
 {
     char *nval=(pd->obj)->FullPreferenceString();
     int len;
-    nval=nval?nval:"";
+    nval=nval?nval:(char *)"";
     len=strlen(nval);
     if(pd->pm==NULL) {
 	long pos=(this)->GetLength();

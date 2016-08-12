@@ -5,7 +5,7 @@ RICHOBJS = richlex.o richset.o usascii.o iso2022.o
 NormalObjectRule()
 NormalATKRule()
 
-#if defined(hpux) && HP_OS >= 80
+#if (defined(hpux) && HP_OS >= 80) || defined(linux)
 TERMLIB = -lcurses
 #else
 #ifndef SOLARIS

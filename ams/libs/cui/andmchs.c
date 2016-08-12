@@ -62,8 +62,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/cui/R
 #endif /* AFS_ENV */
 
 extern int (*CUI_GenericClientSignalHandler)();
-char **unix_sys_errlist = sys_errlist;
-int unix_sys_nerr = 0; /* initialized below */
 
 extern long CUI_LastCallFinished;
 extern int CUI_SnapIsRunning;
@@ -106,7 +104,6 @@ int *len, *type, IsRecon;
 	exit(-1); /* not reached */
     }
     InitializeClientSignals();
-    unix_sys_nerr = sys_nerr;
 #ifdef SYS_NAME
     CUI_SetMachineType(SYS_NAME); /* from sys.h */
 #endif /* SYS_NAME */

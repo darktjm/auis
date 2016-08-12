@@ -149,7 +149,7 @@ static void ConfirmDefaultAnswer(class frame  *self);
 static void Cancel(class frame  *self);
 static void retractCursors(class frame  *self);
 static void TidyUp(class frame  *self);
-static isDialogChild(class frame  *self, class view  *v);
+static int isDialogChild(class frame  *self, class view  *v);
 static void delete_window_request(class im  *im, class frame  *self);
 static void ReturnInterface(class frame  *rock, int  ind, long  brock);
 static class view *PrepareForStringInput(class frame  *self,char  *prompt,int  bufferSize /* Is actual sizeof buffer including NUL. */,boolean  CompButtons);
@@ -1594,7 +1594,7 @@ TidyUp(class frame  *self)
     self->hasDialogMessage = 0;
     self->PotentialChoice = 0;
 }
-static isDialogChild(class frame  *self, class view  *v)
+static int isDialogChild(class frame  *self, class view  *v)
 {
     while(v->parent != NULL && v->parent != (class view *) self) 
 	v = v->parent;

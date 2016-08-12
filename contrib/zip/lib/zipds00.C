@@ -78,8 +78,6 @@ END-SPECIFICATION  ************************************************************/
 #include <sys/stat.h>
 #include <util.h>
 
-extern int			      errno;
-
 #define  zip_default_path	      "/usr/andrew/lib/zip"
 #define  zip_default_path_alternate   "/usr/local/lib/zip"
 

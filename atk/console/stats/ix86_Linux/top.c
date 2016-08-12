@@ -54,6 +54,9 @@ struct save_hist {
   int utime;
   int stime;
 };
+#ifndef NR_TASKS /* dynamic in Linux now, could be millions */
+#define NR_TASKS 4096 /* but probably no need to support that */
+#endif
 struct save_hist new_save_hist[NR_TASKS];
 
 

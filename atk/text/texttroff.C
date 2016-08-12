@@ -254,7 +254,7 @@ static void handlemac(FILE  *f,char  *s);
 static void OutputInitialTroff(register FILE  *f, class view *vw, boolean  toplevel, class environment  *cenv);
 static int FlushBars(FILE  *f);
 static void FlushLineSpacing(int  cs, int  hitchars, boolean  needbreak);
-static findinlist(char  **lst ,int  cnt,char  *str);
+static int findinlist(char  **lst ,int  cnt,char  *str);
 static int appendlist(char  **lst,int  cnt,char  *ostr,int  TEST);
 static int lookup(char  *s);
 static void endspecialformating();
@@ -263,7 +263,7 @@ static void deletechapnumbers(char  *buf);
 static void insert(char  *src,char  *c);
 static void quote(char  *buf,char  c,int  len);
 static void outputendnote();
-static handlespecialformating(class text  *d,class environment  *env,long  pos,long  len);
+static int handlespecialformating(class text  *d,class environment  *env,long  pos,long  len);
 #if 0
 class text *texttroff__CompileNotes(struct classheader  *classID,class text  *txt);
 static class text *CompileNotes(class text  *srctext,  class environment  *env, long  startpos, int  topLevel		/* top level call is slightly different */);
@@ -307,7 +307,7 @@ static void PutNewlineIfNeeded()
 
 static void ComputeTroffFont(register char  *name, register long  FaceCodemodifier , long  FontSize)
 {
-    register family, mod,specfamily;
+    register int family, mod,specfamily;
 
     symbola = 0;
     for (family = 0; fonttable[family].fontname; family++) {
@@ -876,8 +876,8 @@ static char defaultlist[] =
 /*    "majorheading,heading,subheading,chapter,section,subsection,paragraph,function" */
 "chapter,section,subsection,paragraph"
 ;
-static formatnote;
-static findinlist(char  **lst ,int  cnt,char  *str)
+static int formatnote;
+static int findinlist(char  **lst ,int  cnt,char  *str)
 {
     int i;
     for(i = 0; i < cnt; i++,lst++){
@@ -985,7 +985,7 @@ static void outputendnote()
 {
     fprintf(troffFile,"%d ",endnotes++);
 }
-static handlespecialformating(class text  *d,class environment  *env,long  pos,long  len)
+static int handlespecialformating(class text  *d,class environment  *env,long  pos,long  len)
 {
     class style *st;
     struct content_chapentry *centry;

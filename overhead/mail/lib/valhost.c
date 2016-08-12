@@ -51,8 +51,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/
 extern int h_errno;
 #endif /* RESOLVER_ENV */
 
-extern int errno;
-
 #ifdef RESOLVER_ENV
 typedef union {
 	HEADER qb1;

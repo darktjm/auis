@@ -246,7 +246,7 @@ int InitErrorMonitoring(class consoleClass  *self, boolean  FirstTime)
 #endif /* TIOCNOTTY */
 
     if (! GetPtyandName(&SubChannel, &tempfd, ptyname, sizeof(ptyname)))  {
-        sprintf(ErrTxt, "console: Incomplete error monitoring: Can't open pty %s %s", ptyname, sys_errlist[errno]);
+        sprintf(ErrTxt, "console: Incomplete error monitoring: Can't open pty %s %s", ptyname, strerror(errno));
         ReportInternalError(self, ErrTxt);
 	return(-1);
     }

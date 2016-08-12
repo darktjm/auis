@@ -48,8 +48,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/
 #include <arpa/nameser.h>
 #include <resolv.h>
 
-extern int errno;
-
 static int oneTry(dom, sfx, class, type, answer, anslen)
 char *dom, *sfx;		/* domain name and suffix */
 int class, type;		/* class and type of query */

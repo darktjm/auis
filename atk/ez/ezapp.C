@@ -437,7 +437,7 @@ boolean ezapp::ParseArgs(int  argc,char  **argv)
 	    }else{
 		boolean mustHaveWindow= (maxInitWindows-->0);
 		addFile(this, *argv,
-			(procNewWindow ? procNewWindow : (mustHaveWindow ? "" : NULL)),
+			(procNewWindow ? procNewWindow : (mustHaveWindow ? (char *)"" : NULL)),
 			pendingReadOnly, pendingInitLine);
 		procNewWindow=NULL;
 		pendingReadOnly=FALSE;
@@ -562,7 +562,7 @@ boolean ezapp::Start()
 	char *defFile;
 
 	if ((defFile = environ::GetProfile("DefaultStartUpFile")) != NULL && *defFile != '\0')  {
-	    addFile(this, defFile, procForDefaultWindow?procForDefaultWindow:"", FALSE, 0);
+	    addFile(this, defFile, procForDefaultWindow?procForDefaultWindow:(char *)"", FALSE, 0);
 	} else if (environ::GetProfileSwitch("DefaultIsScratchBuffer", TRUE)) {
 	    /* Create a scratch buffer instead. */
 	    this->bufferp = buffer::Create("Scratch", NULL, NULL, NULL);

@@ -105,7 +105,7 @@ PUBLIC CONST char * HTErrnoString ARGS1(int, errornumber)
 	    vaxc$errno);
     return buf;
 #else
-    return (errornumber < sys_nerr ? sys_errlist[errornumber]:"Unknown error");
+    return strerror(errornumber);
 #endif
 #endif
 }

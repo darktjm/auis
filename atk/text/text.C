@@ -68,8 +68,8 @@ ATK_IMPL("text.H")
 #define MAX_QP_CHARS 76 /* The Quoted-Printable encoding REQUIRES that encoded lines be no more than 76 characters long */
 #define LAST_QP_CHAR (MAX_QP_CHARS - 1)
 
-static stylesIncludeBeginning = text_UNSET;
-static stylesIncludeEnd = text_UNSET;
+static int stylesIncludeBeginning = text_UNSET;
+static int stylesIncludeEnd = text_UNSET;
 
 /* Place holder character for viewrefs */
 /* All viewrefs contain this char, but the presence of this */

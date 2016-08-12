@@ -56,7 +56,7 @@ dataobject::dataobject()
     THROWONFAILURE( TRUE);
 }
 
-static boolean FreeProps(long rock, class namespace *self, int x)
+static boolean FreeProps(long rock, class Namespace *self, int x)
 {
     char *val=(char *)self->ValueAt(x);
     free(val);
@@ -229,7 +229,7 @@ void dataobject::Put( class atom  * property, class atom  * type, long  value )
     newprop->type = type;
     newprop->data = value;
     if (this->properties == NULL)
-	this->properties = new namespace;
+	this->properties = new Namespace;
     else {
 	if(this->properties->Boundp(property, (long *)&oldprop)) {
 	    if(oldprop) free(oldprop);
@@ -260,7 +260,7 @@ short dataobject::Get( class atom  * property, class atom  **type, long  * value
     return FALSE;
 }
 
-dataobject::ListCurrentViews(class view  **array,int  size)
+int dataobject::ListCurrentViews(class view  **array,int  size)
 { 
     /* fills in the array (of size 'size') with a list of views
           observing this dataobj.

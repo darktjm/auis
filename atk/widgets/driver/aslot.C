@@ -646,7 +646,7 @@ ASlotInt::ReadValue(const char *src) {
 	return TRUE;
 }
 
-ASlotInt::EatAvalue(const avalue *v) {
+int ASlotInt::EatAvalue(const avalue *v) {
 	if (v->Type() == avalue::integer)  *this = (long)v;
 	else if (v->Type() == avalue::real) *this = (int)v->Real();
 	else return ASlot::EatAvalue(v);
@@ -683,7 +683,7 @@ ASlotReal::ReadValue(const char *src) {
 	return TRUE;
 }
 
-ASlotReal::EatAvalue(const avalue *v) {
+int ASlotReal::EatAvalue(const avalue *v) {
 	if (v->Type() == avalue::integer)  *this = (long)v+0.0;
 	else if (v->Type() == avalue::real) *this = v->Real();
 	else return ASlot::EatAvalue(v);
@@ -926,7 +926,7 @@ ASlotPtr::WriteValue(AString *dest) const {
 		((ATK *)this)->GetTypeName(), val.integer);
 }
 
-ASlotPtr::EatAvalue(const avalue *v) {
+int ASlotPtr::EatAvalue(const avalue *v) {
 	if (v->Type() == avalue::voidptr)  *this = v->VoidPtr();
 	else if (v->Type() == avalue::atkatom) 
 		return EatATK(v->ATKObject());
@@ -934,7 +934,7 @@ ASlotPtr::EatAvalue(const avalue *v) {
 	return TRUE;
 }
 
-ASlotPtr::EatATK(const ATK *obj) {
+int ASlotPtr::EatATK(const ATK *obj) {
 	if (((ATK *)obj)->IsType(aactionreg)) {
 		//
 		// call function rather than saving ptr to it ???
@@ -981,7 +981,7 @@ ASlotATK::operator figure *() const {
     return ASlotFigure();		// return default value
 }
 
-ASlotATK::EatAvalue(const avalue *v) {
+int ASlotATK::EatAvalue(const avalue *v) {
 	if (v->Type() == avalue::atkatom) 
 		return EatATK(v->ATKObject());
 	else return ASlot::EatAvalue(v);
@@ -1443,7 +1443,7 @@ boolean ASlotBool::ReadValue(const char *src) {
 }
 
 boolean ASlotBool::EatAvalue(const avalue *v) {
-	if (v->Type() == avalue::integer)  *this = (int)v;
+	if (v->Type() == avalue::integer)  *this = (int)(long)v;
 	else if (v->Type() == avalue::real) *this = (int)v->Real();
 	else return ASlot::EatAvalue(v);
 	return TRUE;

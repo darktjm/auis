@@ -79,7 +79,7 @@ public:
     long id;
     long writeID;
     long modified;
-    class namespace * properties;
+    class Namespace * properties;
 };
 
 #define dataobject_UNDEFINEDID -1

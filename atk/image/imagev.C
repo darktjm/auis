@@ -1138,7 +1138,7 @@ ScaleToFit( class imagev  *self )
     (self)->WantUpdate(self);
 }
 
-extern writePS(class imagev *v, FILE *tmpFile, int *wpts, int *hpts, int toplevel);
+extern int writePS(class imagev *v, FILE *tmpFile, int *wpts, int *hpts, int toplevel);
 
 void
 imagev::Print( FILE  *f, char  *process, char  *final, int  toplevel )

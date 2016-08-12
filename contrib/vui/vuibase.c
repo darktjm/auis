@@ -43,6 +43,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RC
 #include <vuimenus.h>
 #include <keycodes.h>
 #include <fcntl.h>
+#include <string.h>
 #include <vuidebug.h>
 
 
@@ -1949,7 +1950,6 @@ char *arg;
 }
 
 extern char *ms_errlist[],*rpc_errlist[];
-extern char *sys_errlist[];
 extern int ms_nerr, rpc_nerr, sys_nerr;
 #ifdef DEBUG
 extern char *ms_errcauselist[],*ms_errvialist[];
@@ -2059,12 +2059,8 @@ int error_level, decode;
         if (errnum < EMSBASE) {
             if (errnum==ETIMEDOUT)
                 sprintf(ErrorText, "%s - Connection timed out \n(in ", text);
-              else {
-                if (sys_errlist[errnum])
-                 sprintf(ErrorText, "%s - %s \n(in ", text, sys_errlist[errnum]);
-                else
-                 sprintf(ErrorText, "%s - Unknown error %d \n(in ", text, errnum);
-            }
+              else
+                sprintf(ErrorText, "%s - %s \n(in ", text, strerror(errnum));
         }
         else {
             if (ms_errlist[errnum - EMSBASE]) {

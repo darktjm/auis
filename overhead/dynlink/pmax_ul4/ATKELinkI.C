@@ -24,7 +24,10 @@
 #include <andrewos.h>
 #include <util.h>
 #include <ATKELinkI.H>
-#include <fstream.h>
+#include <iostream>
+#include <fstream>
+
+using namespace std;
 
 #include <doload.h>
 

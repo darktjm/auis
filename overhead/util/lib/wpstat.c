@@ -49,7 +49,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <wp.h>
 #include <btwp.h>
 #endif /* WHITEPAGES_ENV   */
-extern int errno;
 
 /* gives static English text interpreting an error code value */
 char *wp_ErrorString(codevalue)

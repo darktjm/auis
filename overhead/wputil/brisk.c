@@ -54,8 +54,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/wputi
 #include <resolv.h>
 #endif /* tst_NDBM */
 
-extern int errno;
-
 static int Debugging = 0;
 
 /* Globals set on the command line */

@@ -10,7 +10,7 @@ static char *dofix_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhea
 	Author:  John H Howard - April 9, 1987
  */
 #include <andrewos.h>
-#include <fstream.h>
+#include <fstream>
 
 #include <ATKSymTab.H>
 
@@ -156,7 +156,7 @@ static void FixRelocation(struct doload_environment *e,struct relocation_info *r
 
     if ( IS_RP_EXTERN( rp ) ) {
 	register struct nlist *sp = e->symtab + rp->r_symbolnum;
-	char *np = ((sp->n_un.n_strx) ? ( e->stringtab + sp->n_un.n_strx )
+	const char *np = ((sp->n_un.n_strx) ? ( e->stringtab + sp->n_un.n_strx )
 		    : "<<noname>>" ) ;
 	if (SYM_TYPE(sp) == N_UNDF  ) {
 #if 0
@@ -253,7 +253,7 @@ static void FixSets(struct doload_environment *e) {
     sbound = (struct nlist *)((char *)sp + e->header.a_syms);
 
     for (; sp < sbound; sp++) {
-	char *np = ((sp->n_un.n_strx)
+	const char *np = ((sp->n_un.n_strx)
 		    ? (e->stringtab + sp->n_un.n_strx) : "<<noname>>" ) ;
 	/* for now we assume that the constructors for any shared libraries will be run by the main executable...
 	 later we should figure out how to tell if a given absolute symbol refers to a location
@@ -272,8 +272,8 @@ static void FixSets(struct doload_environment *e) {
 
 static char registrystr[]="_ATKregistry_";
 
-static int Exportable(char *np) {
-    char *p;
+static int Exportable(const char *np) {
+    const char *p;
     int len=strlen(np);
     if(len>=sizeof(registrystr)) {
 	p=np+len-sizeof(registrystr)+1;
@@ -317,7 +317,7 @@ static int FixIt(int inFD, int outFD, char *EntryPointName)
 	sp = e->symtab;
 	sbound = (struct nlist *)((char *)sp + e->header.a_syms);
 	for(;sp<sbound;sp++) {
-	    char *np = ((sp->n_un.n_strx) ? ( e->stringtab + sp->n_un.n_strx )
+	    const char *np = ((sp->n_un.n_strx) ? ( e->stringtab + sp->n_un.n_strx )
 			: "<<noname>>" ) ;
 #if 0
 	    if(SYM_TYPE(sp)==N_UNDF && np[0]=='A' && strncmp(np, "ATKLD_",6)==0) {

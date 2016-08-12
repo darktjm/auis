@@ -46,8 +46,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/
 #include <mailconf.h>
 #include <mail.h>
 
-extern int errno;
-
 static struct CellAuth *AMSHome = NULL;
 static int AMSHomeVal = -1;
 char AMSHome_errmsg[1500];

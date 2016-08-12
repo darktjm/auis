@@ -63,7 +63,7 @@ NOSNAPLIBS	=	${BASEDIR}/lib/libcui.a ${BASEDIR}/lib/libcuin.a \
 
 NormalObjectRule()
 
-#if defined(sys_rt_aix221) || (defined(hpux) && (HP_OS >= 80))
+#if defined(sys_rt_aix221) || (defined(hpux) && (HP_OS >= 80)) || defined(linux)
 CURSESLIBS = -lcurses
 #else
 CURSESLIBS = -lcurses  -ltermcap

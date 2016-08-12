@@ -42,7 +42,9 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynli
 #include <andrewos.h>
 #include <stdio.h> /* For NULL in absence of stddef.h */
 #include <ATKSymTab.H>
-#include <fstream.h>
+#include <fstream>
+
+using namespace std;
 
 static char *ComputeOutputFileName (char *InputFileName, char *extension)
 {

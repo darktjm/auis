@@ -786,10 +786,10 @@ void            sendmessage::PostMenus(class menulist  *menulist)
     (this->myheadmenulist)->SetMask( newmask);
     if (menulist != this->mymenulist) {
         if (menulist)
-            (this->mymenulist)->ChainAfterML( menulist, (int)menulist);
+            (this->mymenulist)->ChainAfterML( menulist, (int)(long)menulist);
     }
     if (((this)->GetIM())->GetInputFocus() == (class view *) this->HeadTextview) {
-        (this->mymenulist)->ChainAfterML( this->myheadmenulist, (int)(this->myheadmenulist));
+        (this->mymenulist)->ChainAfterML( this->myheadmenulist, (int)(long)(this->myheadmenulist));
     }
     (this)->view::PostMenus( this->mymenulist);
 }
@@ -947,7 +947,7 @@ void            UserWantsAHeader(class sendmessage  *self, char            *head
             strcpy(newheader, head);
         }
         else {
-            if (message::AskForString(hv, 50, "Enter the name of the header you want to add: ", head ? ++head : "", newheader, sizeof(newheader)) < 0)
+            if (message::AskForString(hv, 50, "Enter the name of the header you want to add: ", head ? ++head : (char *)"", newheader, sizeof(newheader)) < 0)
                 return;
         }
         if (newheader[0] == '\0')

@@ -27,6 +27,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/launchapp/
 #include <andrewos.h>
 ATK_IMPL("launchapp.H")
 #include <stdio.h>
+#include <string.h>
 #include <sys/param.h>
 #include <sys/time.h>
 #include <signal.h>
@@ -188,7 +189,7 @@ static void Do(char  *name, class frame  *frame, long  index, char  **args)
 	}
 	else {
 	    sprintf(msgbuf, "Error starting %s (%s)",
-		    name, sys_errlist[errno]);
+		    name, strerror(errno));
 	    message::DisplayString(frame, 100, msgbuf);
 	}
 	(frame)->WantInputFocus( frame);

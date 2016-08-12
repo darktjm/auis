@@ -67,6 +67,8 @@ extern char     Me[], *MyPrettyAddress, home[], MyMailDomain[];
 #define PARSESTACK 0
 #define NESTSTACK 1
 
+static int      ConvertDropoffCode(int             code);
+
 int             RejectMessage(Msg, Text, RejectionsTo, RejectCC)
 struct MS_Message *Msg;
 char           *Text, *RejectionsTo, *RejectCC;

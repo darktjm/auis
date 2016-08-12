@@ -46,7 +46,6 @@ static char *nntpserv_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/
 #include <pwd.h>
 #include <conf.h>
 
-extern int errno;
 extern char *arpadate();
 
 char tmpdir[MAXPATHLEN+1];

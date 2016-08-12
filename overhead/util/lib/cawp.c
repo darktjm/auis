@@ -49,8 +49,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <wp.h>
 #endif /* WHITEPAGES_ENV */
 
-extern int errno;
-
 
 #ifdef AFS_ENV
 static int idxID = -1;

@@ -421,13 +421,13 @@ static void AddSetupItem(class folders  *ci, char  *longname , char  *shortname,
     if (!ci->VeryNarrow && showingnewstuff) {
 	switch(substatus) {
 	    case AMS_SHOWALLSUBSCRIBED:
-		comm = HasNew ? " (Show-All Subscribed) " : " (Show-All Subscribed; Empty) ";
+		comm = (char *)(HasNew ? " (Show-All Subscribed) " : " (Show-All Subscribed; Empty) ");
 		break;
 	    case AMS_ASKSUBSCRIBED:
-		comm = HasNew ? " (Ask-Subscribed; Has New) " : " (Ask-Subscribed; No New) ";
+		comm = (char *)(HasNew ? " (Ask-Subscribed; Has New) " : " (Ask-Subscribed; No New) ");
 		break;
 	    default:
-		comm = HasNew ? " (Has New Messages) " : " (Nothing New) ";
+		comm = (char *)(HasNew ? " (Has New Messages) " : " (Nothing New) ");
 		break;
 	}
     } else {

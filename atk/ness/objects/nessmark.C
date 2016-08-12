@@ -359,8 +359,8 @@ ENTER(nessmark::Extent);
 	if ((this)->GetText() != (tail)->GetText())
 		(this)->Set( nessmark_EmptyText, 0, 0);
 	else {
-		register start = (this)->GetPos();
-		register end = (tail)->GetPos() 
+		register int start = (this)->GetPos();
+		register int end = (tail)->GetPos() 
 				+ (tail)->GetLength();
 		if (end < start)
 			start = end;
@@ -414,7 +414,7 @@ ENTER(nessmark::Replace);
 	boolean
 nessmark::Equal(register class nessmark  *comparand) {
 
-	register i, iend, j;
+	register int i, iend, j;
 	register class simpletext *itext, *jtext;
 
 	if ((this)->GetLength() 

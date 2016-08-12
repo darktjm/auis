@@ -602,7 +602,7 @@ void enterfuns () {
     enterfun("today", (double  (*)())today, 0);
     enterfun("sum", (double  (*)())fsum, -1);
     enterfun("count", (double  (*)())fcount, -1);
-    enterfun("max", (double  (*)())fmax, -1);
-    enterfun("min", (double  (*)())fmin, -1);
+    enterfun("max", (double  (*)())(double  (*)(double, double))fmax, -1);
+    enterfun("min", (double  (*)())(double  (*)(double, double))fmin, -1);
     enterfun("vlookup", (double  (*)())vlookup, -1);
 }

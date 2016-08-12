@@ -75,8 +75,8 @@ static char *nntpxmit_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/
 #include <header.h>
 #include <respcode.h>
 #include <nntpxmit.h>
+#include <errno.h>
 
-extern	int	errno;
 extern	char	*errmsg();
 char    *progname = "nntpxmit";
 char	*USAGE = "USAGE: nntpxmit file [user [orgname]]";

@@ -99,7 +99,7 @@ struct overlay *next;
 ATKdefineRegistry(celview, view, celview::InitializeClass);
 #ifndef NORCSID
 #endif
-static void scaleoverlay(class celview  *self,struct overlay  *ov,struct rectangle  *or);
+static void scaleoverlay(class celview  *self,struct overlay  *ov,struct rectangle  *Or);
 static class view *PopOverlay(class celview  *self,class view  *v);
 static void UpdateCursors(class celview  *self);
 static void UpdateDrawing(class celview  *self);
@@ -123,23 +123,23 @@ static void GetParameters(class celview  *self);
 static void PostParameters(class celview  *self);
 
 
-static void scaleoverlay(class celview  *self,struct overlay  *ov,struct rectangle  *or)
+static void scaleoverlay(class celview  *self,struct overlay  *ov,struct rectangle  *Or)
 {
     struct rectangle *nr = &(self->enclosingRect);
     struct rectangle *sr = &(ov->rect);
 /*     if(ov->flags & celview_COVERCHILD) {
-	*sr = *or;
+	*sr = *Or;
 	return;
     } */
-    if(or->width > 5 && or->height > 5 && nr->width > 5 && nr->height > 5)
+    if(Or->width > 5 && Or->height > 5 && nr->width > 5 && nr->height > 5)
     {
-	if(or->height != nr->height){
-	    sr->top = (sr->top * nr->height) / or->height;
-	    sr->height = (sr->height * nr->height) / or->height;
+	if(Or->height != nr->height){
+	    sr->top = (sr->top * nr->height) / Or->height;
+	    sr->height = (sr->height * nr->height) / Or->height;
 	}
-	if(or->width != nr->width){
-	    sr->left = (sr->left * nr->width) / or->width;
-	    sr->width = (sr->width * nr->width) / or->width;
+	if(Or->width != nr->width){
+	    sr->left = (sr->left * nr->width) / Or->width;
+	    sr->width = (sr->width * nr->width) / Or->width;
 	}
     }
 }

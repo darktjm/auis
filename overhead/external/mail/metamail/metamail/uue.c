@@ -1,4 +1,6 @@
+#define getline new_getline
 #include <stdio.h>
+#undef getline
 
 /*
  * hack to metamail to decode uuencoded bodyparts
@@ -30,7 +32,7 @@ FILE *outfp;
 }
 
 
-getline (buf, size, fp)
+static getline (buf, size, fp)
 char *buf;
 int size;
 FILE *fp;

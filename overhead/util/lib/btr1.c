@@ -47,8 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <btint.h>
 #endif /* WHITEPAGES_ENV   */
 
-extern int errno;
-
 extern int br_Debugging;
 
 /* Advance the cursor to the next key-value pair.

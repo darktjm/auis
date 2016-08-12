@@ -53,6 +53,7 @@ Generic install command.  Options are:
 #include <sys/time.h>
 #include <pwd.h>
 #include <errno.h>
+#include <string.h>
 #include <sys/stat.h>
 #if defined(mips) && ! defined(sgi)
 #include <sys/exec.h>
@@ -88,12 +89,7 @@ struct stat istat, ostat;
 
 char *ErrorString(aerrno)
     int aerrno; {
-    static char tbuffer[100];
-    if (aerrno < 0 || aerrno >= sys_nerr) {
-	sprintf(tbuffer, "undefined error code %d", aerrno);
-	return tbuffer;
-    }
-    return (char *)sys_errlist[aerrno];
+    return strerror(aerrno);
 }
 
 stripName(aname)

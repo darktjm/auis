@@ -93,7 +93,7 @@ int errprintf(va_alist);
 #else
 #include <stdarg.h>
 int safefprintf(FILE *fp, ...);
-int errprintf(char *application, ...);
+int errprintf(const char *application, ...);
 #endif
 ENDCPLUSPLUSPROTOS
 

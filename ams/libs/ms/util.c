@@ -58,6 +58,8 @@ static char OFFICIALMARKER[] = "$official";
 #define MARKERINIT '$'
 /* MARKERINIT is the first char in the xxxMARKER values */
 
+static int CheckLabel(int i);
+
 InitializeSearchPaths() {
     char   *s, *t, ErrorText[256], MailRoot[1+MAXPATHLEN];
     int whichpath, NeedMailDir;

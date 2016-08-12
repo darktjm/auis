@@ -47,6 +47,8 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RC
 extern char  home[], Me[], *PersonalMailCollectionCommand, *GetPersonalMailbox(), *getprofile(), *getenv();
 extern int CompareFileTimeStructs(), homeUsesAMSDelivery;
 
+static ReallyTruly_ProcessNewMessages(char *SourceDir, int *NumGood, int *NumBad, int *NumLocks, char *ParseSpecFile, int *resultcode, int *FirstError, int *NumInProgress, char *EliErrBuf, int EliErrBufLim);
+
 /* The following two are to allow us to get decent reporting data from the postman daemon even when it gets a quit signal. */
 int MS_DataCollectionHackInProgress = 0;
 int MS_UnreportedCollections = 0;

@@ -96,8 +96,8 @@ static void putRGBContigYCbCrClump(register byte  *cp, register u_char  *pp, int
 static void putcontig8bitYCbCrtile(register byte  *cp, register u_char  *pp, register RGBvalue  *Map, u_long  w , u_long  h, int  fromskew , int  toskew);
 static tileContigRoutine pickTileContigCase(RGBvalue * Map);
 static tileSeparateRoutine pickTileSeparateCase(RGBvalue * Map);
-static gtTileSeparate(TIFF  *tif, u_char *raster, RGBvalue *Map, u_long h, u_long w, int bpp);
-static gtTileContig(TIFF  *tif, u_char *raster, RGBvalue *Map, u_long h, u_long w, int bpp);
+static int gtTileSeparate(TIFF  *tif, u_char *raster, RGBvalue *Map, u_long h, u_long w, int bpp);
+static int gtTileContig(TIFF  *tif, u_char *raster, RGBvalue *Map, u_long h, u_long w, int bpp);
 
 int
 tif::Load( char  *fullname, FILE  *fp )
@@ -487,7 +487,7 @@ setorientation(TIFF  *tif, u_long  h)
  * or
  *	SamplesPerPixel == 1
  */	
-static
+static int
 gtTileContig(TIFF  *tif, u_char *raster, RGBvalue *Map, u_long h, u_long w, int bpp)
 					{
 	u_long col, row, y;
@@ -543,7 +543,7 @@ gtTileContig(TIFF  *tif, u_char *raster, RGBvalue *Map, u_long h, u_long w, int 
  *	 PlanarConfiguration separated
  * We assume that all such images are RGB.
  */	
-static
+static int
 gtTileSeparate(TIFF  *tif, u_char *raster, RGBvalue *Map, u_long h, u_long w, int bpp)
 					{
 	u_long col, row, y;

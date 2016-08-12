@@ -36,6 +36,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/co
 
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/file.h>
 #include <string.h>
 #include <sys/param.h>
@@ -61,9 +62,6 @@ char buffer[BUFSIZ];
 char *table_name = (char *)NULL;
 FILE *hfile, *cfile;
 
-
-extern char *malloc();
-extern int errno;
 
 /* lex stuff */
 extern FILE *yyin;

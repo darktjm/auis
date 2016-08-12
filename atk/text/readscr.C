@@ -92,13 +92,13 @@ ATKdefineRegistry(readscr, ATK, NULL);
 #ifdef hpux
 #endif /* hpux */
 static void goshdarn(char  *errmsg);
-static textfix(class text  *d, int  len);
+static int textfix(class text  *d, int  len);
 static void linefix(class text  *d);
-static scribefix(class text  *d);
-static longscribe(class text  *d, char  *shortcommand);
-static shortscribe(class text  *d, char  *shortcommand);
-static startenv(int  delim, class style  *tempstyle);
-static finishenv();
+static int scribefix(class text  *d);
+static int longscribe(class text  *d, char  *shortcommand);
+static int shortscribe(class text  *d, char  *shortcommand);
+static int startenv(int  delim, class style  *tempstyle);
+static int finishenv();
 
 
 static void goshdarn(char  *errmsg)
@@ -140,7 +140,7 @@ class text *readscr::Begin(class text  *d, int  pos , int  len , int  purge , ch
     return(d);
 }
 
-readscr::PrintFile(char  *filename , class textview  *tv, class text  *d, char  *Version, int  TrashWhenDone)
+int readscr::PrintFile(char  *filename , class textview  *tv, class text  *d, char  *Version, int  TrashWhenDone)
 {
     int fd;
     struct stat statbuf;
@@ -168,7 +168,7 @@ readscr::PrintFile(char  *filename , class textview  *tv, class text  *d, char  
 
 
 /* ** textfix - reads chars in and handles them appropriately ** */
-static textfix(class text  *d, int  len)
+static int textfix(class text  *d, int  len)
 {
     register int i, tmp;
 
@@ -295,7 +295,7 @@ static void linefix(class text  *d)
 }
 
 /* ** scribefix - deal with @commands ** */
-static scribefix(class text  *d)
+static int scribefix(class text  *d)
 {
     register int i, next, lowernext;
     char shortcommand[STRINGSIZE], realstring[STRINGSIZE];
@@ -349,7 +349,7 @@ static scribefix(class text  *d)
 }
 
 /* ** longscribe - deal with @begin and @end scribe environments ** */
-static longscribe(class text  *d, char  *shortcommand)
+static int longscribe(class text  *d, char  *shortcommand)
 {
     register int i;
     class style *tempstyle;
@@ -456,7 +456,7 @@ static longscribe(class text  *d, char  *shortcommand)
 
 
 /* ** shortscribe - deal with all other environments ** */
-static shortscribe(class text  *d, char  *shortcommand)
+static int shortscribe(class text  *d, char  *shortcommand)
 {
     class style *tempstyle;
     int delim;
@@ -490,7 +490,7 @@ static shortscribe(class text  *d, char  *shortcommand)
 }
 
 /* ** startenv - add an environment to the stack ** */
-static startenv(int  delim, class style  *tempstyle)
+static int startenv(int  delim, class style  *tempstyle)
 {
     int rpos;
 
@@ -513,7 +513,7 @@ static startenv(int  delim, class style  *tempstyle)
 }
 
 /* ** finishenv - remove an environment from the stack ** */
-static finishenv()
+static int finishenv()
 {
     int length;
 

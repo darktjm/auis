@@ -40,8 +40,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include "bt.h"
 #endif /* WHITEPAGES_ENV   */
 
-extern int errno;
-
 static int Debugging = 0;
 
 static char *NewFile;

@@ -65,7 +65,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/wputi
 #endif /* AMS_ENV */
 /* #include <mail.h> */
 #include <bt.h>
-extern int errno;
 
 
 #include <wp.h>

@@ -592,7 +592,7 @@ SetWMProperties(class xim  *self, boolean  nameChanged , boolean  iconic)
     int lengthName = 0;
     int lengthTitle = 0;
     int lengthWMName;
-    char *name = xim2programname(self);
+    const char *name = xim2programname(self);
     char *title = (self)->GetTitle();
     int clen = 0;
     char *c = NULL;
@@ -625,8 +625,8 @@ SetWMProperties(class xim  *self, boolean  nameChanged , boolean  iconic)
     if(nameChanged) {
 	XClassHint programClass;
 
-	programClass.res_name = name;
-	programClass.res_class = "atk";
+	programClass.res_name = (char *)name;
+	programClass.res_class = (char *)"atk";
 	XSetClassHint(display, window, &programClass);
     }
 
@@ -1620,7 +1620,7 @@ boolean xim::CreateWindow(char  *host)
 	} else {
 	    newWindow = XCreateSimpleWindow(xDisplay, RootWindow(xDisplay, DefaultScreen(xDisplay)), (int)left, (int)top, preferedWidth, preferedHeight, 2, BlackPixel(xDisplay, DefaultScreen(xDisplay)), WhitePixel(xDisplay, DefaultScreen(xDisplay)));
 	    mb_InitWindows(this->mbi, newWindow);
-	    this->menu=this->startupmenu=MakeStartupMenu(this->mbi, xim2programname(this));
+	    this->menu=this->startupmenu=MakeStartupMenu(this->mbi, (char *)xim2programname(this));
 	}
     } else {
 	newWindow = XCreateSimpleWindow(xDisplay, RootWindow(xDisplay, DefaultScreen(xDisplay)), (int)left, (int)top, preferedWidth, preferedHeight, 2, BlackPixel(xDisplay, DefaultScreen(xDisplay)), WhitePixel(xDisplay, DefaultScreen(xDisplay)));
@@ -1770,7 +1770,7 @@ DoCreateTransientWindow(class xim  *self , class im  *iother, int  override, int
 	    DoTransientGeometry(self, override, other, &left, &top, &width, &height, &sizehints, &zoomhints);
 	    newWindow = XCreateSimpleWindow(xDisplay, RootWindow(xDisplay, DefaultScreen(xDisplay)), left, top, width, height, 2, BlackPixel(xDisplay, DefaultScreen(xDisplay)), WhitePixel(xDisplay, DefaultScreen(xDisplay)));
 	    mb_InitWindows(self->mbi, newWindow);
-	    self->menu=self->startupmenu=MakeStartupMenu(self->mbi, xim2programname(self));
+	    self->menu=self->startupmenu=MakeStartupMenu(self->mbi, (char *)xim2programname(self));
 	}
     } else {
 	DoTransientGeometry(self, override && !self->override_redirect, other, &left, &top, &width, &height, &sizehints, &zoomhints);
@@ -2315,8 +2315,8 @@ updateMenus(class xim  *self, class menulist  *ml)
 	} else strcpy(morestr, "More...");
 
 	if(self->menubaron) self->menu = cache->region->menus 
-	      = mb_Create(self->mbi, messitem::Replace(xim2programname(self)), morestr, (char *)self , (menubar_menufptr)QMenuChoice);
-	if(self->cmenuson) self->cmenu = cache->region->cmenus = cmenu_Create(xim2display(self), xim2window(self), xim2programname(self), (cmenu_FreeFunction)FreeSelectionData);
+	      = mb_Create(self->mbi, messitem::Replace((char *)xim2programname(self)), morestr, (char *)self , (menubar_menufptr)QMenuChoice);
+	if(self->cmenuson) self->cmenu = cache->region->cmenus = cmenu_Create(xim2display(self), xim2window(self), (char *)xim2programname(self), (cmenu_FreeFunction)FreeSelectionData);
 
 	if ((self->menubaron && self->menu == NULL) || (self->cmenuson && self->cmenu == NULL))
 	    fprintf(stderr, "xim: Couldn't allocate menus\n");

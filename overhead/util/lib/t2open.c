@@ -39,7 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <signal.h>
 #include <setjmp.h>
 #include <errno.h>
-extern int errno;
 static int *popen_pid = NULL;
 static int dtablesize = -1;
 

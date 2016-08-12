@@ -23,7 +23,9 @@
 // ATKDynLink: the machine independent part of constructing a link line for dynamic objects.
 
 #include <ATKOLinkI.H>
-#include <iostream.h>
+#include <iostream>
+
+using namespace std;
 
 void ATKOLink::ProcessArgument(char *arg) {
     InsertArguments(arg);

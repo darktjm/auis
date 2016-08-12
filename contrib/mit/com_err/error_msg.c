@@ -37,6 +37,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/co
 #endif
 
 #include <stdio.h>
+#include <string.h>
 #include "error_table.h"
 #include "mitcopyright.h"
 #include "internal.h"
@@ -59,12 +60,8 @@ long	code;
 
     offset = code & ((1<<ERRCODE_RANGE)-1);
     table_num = code - offset;
-    if (!table_num) {
-	if (offset < sys_nerr)
-	    return(sys_errlist[offset]);
-	else
-	    goto oops;
-    }
+    if (!table_num)
+	return strerror(offset);
     for (et = _et_list; et; et = et->next) {
 	if (et->table->base == table_num) {
 	    /* This is the right table */

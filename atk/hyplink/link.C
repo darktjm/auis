@@ -172,7 +172,7 @@ link::Write(FILE  *fp, long  id, int  level) {
 		  	(this)->GetTypeName(), uniqueid, 
 		  	DS_VERSION);
 		WriteLine(fp, (this)->GetRawLink() ? 
-				(this)->GetRawLink() : "");
+				(this)->GetRawLink() : (char *)"");
 		fprintf(fp, "%d\n", (this)->GetPos());
 		fprintf(fp, "%d\n", (this)->GetLen());
 		fprintf(fp, "%c\n", 

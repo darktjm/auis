@@ -218,7 +218,7 @@ void genreturn(struct exprnode  *exp);
 boolean genExit(class nesssym  *parmlist , class nesssym  *locallist);
 void startfunc(class nesssym  *fname, Texpr  functype);
 void finishfunc(class nesssym  *fname, class nesssym  *parmlist, 
-		class nesssym  *locallist, boolean export);
+		class nesssym  *locallist, boolean Export);
 void abortfunc();
 void genchkforward();
 class nesssym * appendlists(register class nesssym  *list1 , register class nesssym  *list2);
@@ -741,7 +741,7 @@ startfunc(class nesssym  *fname, Texpr  functype) {
 	
 	void
 finishfunc(class nesssym  *fname, class nesssym  *parmlist, 
-		class nesssym  *locallist, boolean export) {
+		class nesssym  *locallist, boolean Export) {
 	long lastloc, lastlen, srclen, srcloc;
 	int i;
 	class nesssym *p;
@@ -791,7 +791,7 @@ finishfunc(class nesssym  *fname, class nesssym  *parmlist,
 					srcloc, srclen);
 		genLinkGlobal(fname);
 	}
-	if(export) ness_ExportFunction(curComp->ness, fname, func);
+	if(Export) ness_ExportFunction(curComp->ness, fname, func);
 }
 
 	void

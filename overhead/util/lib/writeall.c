@@ -34,9 +34,9 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 	writeall.c -- Do write, resuming if interrupted
 */
 
- 
 
-extern int errno;
+#include <errno.h>
+#include <unistd.h>
 
 int writeall(fd, Buf, NBytes)
 int fd;

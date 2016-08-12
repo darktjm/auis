@@ -49,9 +49,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <btwp.h>
 #endif /* WHITEPAGES_ENV   */
 
-#if !POSIX_ENV
-extern int errno;
-#endif
+
 
 /* Compatibility routines for non-cellular use */
 extern struct wp_CD *ThisCellDir;

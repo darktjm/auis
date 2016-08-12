@@ -738,7 +738,7 @@ void ReadRaster(class rasterview  *self, class raster  *ras, char  *filename)
     /* need to use FindFile XXX */
     long readresult = dataobject_OBJECTCREATIONFAILED;
     FILE *f;
-    register c;
+    register int c;
 
     f = fopen(filename, "r");
     if (f == NULL) {
@@ -1054,7 +1054,7 @@ static void ReplaceCommand (class rasterview  *self)
     FILE *pasteFile;
     static char hdr[] = "\\begindata{raster,";
     char *hx = hdr;
-    register c;
+    register int c;
 
     pasteFile = ((self)->GetIM())->FromCutBuffer();
 
@@ -1388,7 +1388,7 @@ static void ScaleReplaceCommand(class rasterview  *self)
     FILE *pasteFile;
     static char hdr[] = "\\begindata{raster,";
     char *hx = hdr;
-    register c;
+    register int c;
 
     if (ras == NULL || (pix = (ras)->GetPix()) == NULL) return;
 

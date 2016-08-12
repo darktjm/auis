@@ -18,5 +18,5 @@
 #define AMS_REPLY_GRIPE	(-12347)
 #define AMS_REPLY_POST  (-12348)
 
-#define syserr(msg,fn) error("%s %s: %s",msg,fn,sys_errlist[errno])
+#define syserr(msg,fn) error("%s %s: %s",msg,fn,strerror(errno))
 

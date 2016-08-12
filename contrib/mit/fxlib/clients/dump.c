@@ -72,7 +72,6 @@ do_dump(fxp, criterion, flags, string)
      int flags;
      char *string;
 {
-  extern int errno;
   long code;
   Paperlist_res *plist;
   int count, i;

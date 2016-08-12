@@ -1197,7 +1197,7 @@ HitShrink(class labelview  *shrink, register enum view_MouseAction   action, reg
 ChooseShrinkIcon(register class lookzview  *self)
 	{
 	((class label *)(self->shrinkicon)->GetDataObject())->SetText( 
-			(self->HasInputFocus) ? "-" : ",");
+			(char *)((self->HasInputFocus) ? "-" : ","));
 }
 
 /* LL - generate a horizontal or vertical pair of views 

@@ -143,7 +143,7 @@ static void helpProc(char  *partial,struct helpRock  *myrock,message_workfptr  H
 
 static char *GetProcName(struct proctable_Entry  *pe)
 {
-    return proctable::GetName(pe)?proctable::GetName(pe):"";
+    return proctable::GetName(pe)?proctable::GetName(pe):(char *)"";
 }
 
 static boolean myCompletionWork(struct proctable_Entry  *pe, struct result  *data)

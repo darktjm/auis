@@ -209,7 +209,7 @@ static long incsearchf(ATK *tva, long  key)
 	searchString = search::GetQuotedSearchString(unquotedString, NULL, 0);
     }
 	    
-    while (dosearch(tv, txt, mark, (searchString != NULL) ? searchString : "", key == 'S'-64, TRUE, TRUE, NULL))
+    while (dosearch(tv, txt, mark, (searchString != NULL) ? searchString : (char *)"", key == 'S'-64, TRUE, TRUE, NULL))
         ;
     
     if (searchString != NULL) {

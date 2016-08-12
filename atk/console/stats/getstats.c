@@ -577,8 +577,6 @@ daddr_t bno;
 char *buf;
 int cnt;
 {
-    extern int errno;
-
     (void) lseek(fi, (long)(bno * DEV_BSIZE), 0);
 #ifndef sun
     if (read(fi, buf, cnt) != cnt)

@@ -65,7 +65,7 @@ static void k_exit(register class spread  * V, char  ch);
 void AddRows(register class spread  * V, int  after , int  count);
 void AddCols(register class spread  * V, int  after , int  count);
 static int k_CheckSelection (register class spread  * V);
-static k_ReadFormula (register class spread  * V, char  *startstring);
+static int k_ReadFormula (register class spread  * V, char  *startstring);
 static void k_enterchar(register class spread  * V, char  ch);
 static void k_backspace(register class spread  * V, char  ch);
 static void k_tab(register class spread  * V, char  ch);
@@ -226,7 +226,7 @@ static int k_CheckSelection (register class spread  * V)
 
 /* Read new formula for cell */
 
-static k_ReadFormula (register class spread  * V, char  *startstring)
+static int k_ReadFormula (register class spread  * V, char  *startstring)
 {
     char   keybuff[1000];
     struct cell * cell;

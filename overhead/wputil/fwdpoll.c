@@ -76,8 +76,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/wputi
 #define FORWARD "Fwd"
 #define HOMEDIR "HD"
 
-extern int errno;
-
 #ifndef DONTRETRYTEMPFAILURES
 static struct tempfail {
   char *name, *home, *fwd;

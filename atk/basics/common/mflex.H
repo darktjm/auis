@@ -138,7 +138,7 @@ public:
 
 #define DEFINE_MFLEX_SORTER(name,mflexclass,type,comp) \
 extern "C" { \
-static Concat(name,_comp)(const void *ve1, const void *ve2) { \
+static int Concat(name,_comp)(const void *ve1, const void *ve2) { \
 type e1=(*(type *)ve1), e2=(*(type *)ve2); \
 return comp; \
 } \
@@ -159,7 +159,7 @@ class name : public mflex { \
 	return *(type *)&(*(mflex *)this)[i]; \
     } \
     inline const type &operator[](size_t i) const { \
-	return *(type *)&(*(mflex *)this)[i]; \
+	return *(const type *)&(*(mflex *)this)[i]; \
     } \
     inline type *Insert(size_t i, size_t len=1) { \
 	return (type *)mflex::Insert(i,len); \

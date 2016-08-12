@@ -31,7 +31,7 @@
 const int ATKArgv::End=-1;
 const int ATKArgv::CountArguments=-1;
 
-ATKArgv::CountArgs(char **args) {
+int ATKArgv::CountArgs(char **args) {
     int count=0;
     if(args==NULL) return 0;
     while(*args) {

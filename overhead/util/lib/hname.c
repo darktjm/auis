@@ -43,8 +43,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <system.h>
 #include <util.h>
 
-extern int errno;
-
 int GetHostDomainName(buf, buflen)
 char *buf; int buflen;
 {/* Returns like gethostname(); optionally appends the result of getdomainname(). */

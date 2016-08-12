@@ -53,8 +53,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
 #define	MAXSIZE		200
 
-extern int errno;
-
 /*
   * GetCurrentWSCell
   *

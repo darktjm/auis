@@ -43,12 +43,10 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
 #include <andrewos.h>
 #include <errno.h>
-extern int errno;
 #include <stdio.h>
 #include <sys/stat.h>
 #include <signal.h>
 /* #include <sys.h> DMT commented out */
-extern int errno;
 
 static int DoCall(Action, OldP)
 int Action, *OldP;

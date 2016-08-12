@@ -51,7 +51,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
 #include <andyenv.h>
 #include <errno.h>
-extern int errno;
 #include <stdio.h>
 #include <ctype.h>
 #include <andrewos.h>		/* sys/types.h */
@@ -65,8 +64,6 @@ extern int errno;
 #include <afs/venus.h>
 #include <afs/errors.h>
 #endif /* AFS_ENV */
-
-extern int errno;
 
 #define ALLSIGS	    0xffffffff
 

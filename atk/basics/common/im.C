@@ -152,7 +152,7 @@ static struct im_GlobalDataType * gData = &im_GlobalData;
 ATKdefineRegistry(im, view, im::InitializeClass);
 static void InitGlobalStructure();
 static char *charToPrintable(long  c);
-static void WriteLogEntry (class im  *self, unsigned char code, char  *str);
+static void WriteLogEntry (class im  *self, unsigned char code, const char  *str);
 static void WriteLogXY (class im  *self, unsigned char code, long  x , long  y);
 static struct action * newAction();
 static struct action * cloneAction(register struct action  *a);
@@ -185,7 +185,7 @@ static void HandleArgumentProcessing(class im  *self, long  key);
 static void RecordProc(class im  *im, struct proctable_Entry  *procTableEntry, long  rock, ATK   *object, struct action  *keys);
 static class im *HandleProc(class im  *self, struct proctable_Entry  *procTableEntry, ATK   *object, long  rock, struct action  *keys);
 static boolean getMenuEntry(class menulist  *ml, char  *cname , char  *name, struct proctable_Entry  **pPE, ATK   **pObj, long  *pRock);
-static char * getMenuEntryName(class menulist  *ml, struct proctable_Entry  *procTableEntry, ATK   *object, long  rock);
+static const char * getMenuEntryName(class menulist  *ml, struct proctable_Entry  *procTableEntry, ATK   *object, long  rock);
 static void GenericConfig(class im  *self, long  rock , long  customrock, class im  *parent, int  *x , int  *y, unsigned int  *w , unsigned int  *h);
 static void  set_logical_wd(char  *dir ,	char  *newdir);
 static char *get_logical_wd(char  *dir);
@@ -316,7 +316,7 @@ static char *charToPrintable(long  c)
 static time_t LogStart;	/* time log started */
 
 	void
-WriteLogEntry (class im  *self, unsigned char code, char  *str)
+WriteLogEntry (class im  *self, unsigned char code, const char  *str)
 			{
 	time_t now = time(0);
 	if (now - LogStart > 600) {
@@ -1240,11 +1240,11 @@ getMenuEntry(class menulist  *ml, char  *cname , char  *name, struct proctable_E
 
 
 /* used for logging menu hits */
-	static char *
+	static const char *
 getMenuEntryName(class menulist  *ml, struct proctable_Entry  *procTableEntry, ATK   *object, long  rock)
 	 		   	{
 	class menulist *tml;
-	char *entryname;
+	const char *entryname;
 	struct proctable_Entry *tpe;
 	long trock;
 
@@ -1258,7 +1258,7 @@ getMenuEntryName(class menulist  *ml, struct proctable_Entry  *procTableEntry, A
 	menulist_RewindML(ml);
 	if (ml->object == object)
 		while (entryname == NULL 
-			&& (ml)->NextME( &entryname, 
+			&& (ml)->NextME( (char **)&entryname, 
 				&trock, &tpe)) 
 			if (trock != rock  ||  tpe != procTableEntry)
 				entryname = NULL;

@@ -40,9 +40,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynli
 #include <sys/ldr.h>
 #include <stddef.h> /* For NULL and the like. */
 #include <errno.h>
-
-extern int			    errno, sys_nerr;
-extern char			   *sys_errlist[];
+#include <string.h>
 
 /* This should be removed, but the machine independent code declares
  * doload_Extension external expecting it to be defined in the machdep
@@ -168,20 +166,15 @@ char *path;			/* Pathname of package being loaded */
 
 	printf("While attempting to load %s:\n", path);
 
-	if(errno > 0 && errno <= sys_nerr) 
-	    printf("Error on load syscall: '%s'\n", sys_errlist[errno]);
-	else
-	    printf("Unknown error on load syscall: errno = '%d'\n", errno);
+	printf("Error on load syscall: '%s'\n", strerror(errno));
 	pid=fork();
 	if(pid==0) {
 	    load_errs[0] = "execerror";
 	    load_errs[1] = path;
 	    if (lqrc = loadquery(L_GETMESSAGES, &load_errs[2], sizeof(load_errs) - 2 * sizeof(load_errs[0])) == 0)
 		execvp("/etc/execerror", load_errs);
-	    else if(errno > 0 && errno <= sys_nerr) 
-		printf("Loadquery returned '%d': '%s'\n", lqrc, sys_errlist[errno]);
 	    else
-		printf("Loadquery returned '%d', errno = '%d'\n", lqrc, errno);
+		printf("Loadquery returned '%d': '%s'\n", lqrc, strerror(errno));
 	} else if(pid<0) {
 	    perror("doload fork");
 	}

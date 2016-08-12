@@ -2076,7 +2076,7 @@ ness_ProcHookFunc(ATK *, const avalueflex &aux,
 	fname[MAXNAMLEN]='\0';
 	for (under = fname; *under; under++) 
 			if (*under == '-') *under='_';
-	static id=im::GetWriteID();
+	static int id=im::GetWriteID();
 	static struct libusenode *libuseList=NULL;  // list of libs used 
 	if (libnode->useid != id) {
 		// append to list of libs used by ness now being compiled

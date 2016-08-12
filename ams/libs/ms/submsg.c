@@ -40,13 +40,14 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RC
 #include <mailconf.h>
 #include <parseadd.h>
 #include <mail.h>
+#include <errno.h>
+#include <stdio.h>
 
-extern FILE    *fopen();
 extern char     MAILLOGSTATFILE[], MyMailDomain[];
 
 
 extern char     Me[], *MyPrettyAddress, *BCCto, home[], *NextAddress();
-extern int      BCCFlag, IsLoggingMailStats, myvuid, errno, MS_DeliveryType;
+extern int      BCCFlag, IsLoggingMailStats, myvuid, MS_DeliveryType;
 
 static char     ThisHost[150] = "";
 

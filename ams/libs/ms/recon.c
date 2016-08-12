@@ -191,6 +191,8 @@ struct mergelist *m;
         free(m->entries);
 }
 
+static int      MergeList_GrowIfNecessary(struct mergelist *mlist);
+
 static int      MergeList_Add(m, chain, num)
 struct mergelist *m;
 int             chain, num;
@@ -751,6 +753,8 @@ long            time;
     return UTIME(filename, &tvp);
 }
 
+static int      SetChains(struct msglist *mlist);
+
 MS_ReconstructDirectory(DirName, NumGood, NumBad, TrustTimeStamp)
 char           *DirName;
 int            *NumGood, *NumBad, TrustTimeStamp;
@@ -1279,6 +1283,8 @@ int            *NumGood, *NumBad, TrustTimeStamp;
     }
     return (0);
 }
+
+static int      SetChain(struct msglist *mlist, int mnum, int maxchainval);
 
 /* Returns the maxchainval */
 

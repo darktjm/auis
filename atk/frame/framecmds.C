@@ -79,9 +79,8 @@ ATK_IMPL("framecmds.H")
 #include <sys/param.h>
 #include <signal.h> /* needed for hp - sometimes included in sys/param.h */
 #include <sys/stat.h>
-#include <sys/errno.h>
+#include <errno.h>
 
-extern int errno;
 static class keymap *framecmdsKeymap, *framecmdsDefaultKeymap;
 static class menulist *framecmdsMenus;
 static class menulist *framecmdsDefaultMenus;
@@ -1591,7 +1590,7 @@ void frame_PrintCmd(class frame  *self, char *usepsstr)
     boolean useps;
     int pmode, res;
 
-    pmode = (int)usepsstr;
+    pmode = (int)(long)usepsstr;
     if (pmode >= 0 && pmode < 256) {
 #ifdef PSPRINTING_ENV
 	useps = TRUE;
@@ -1634,7 +1633,7 @@ void frame_PreviewCmd(class frame  *self, char *usepsstr)
     boolean useps;
     int pmode, res;
 
-    pmode = (int)usepsstr;
+    pmode = (int)(long)usepsstr;
     if (pmode >= 0 && pmode < 256) {
 #ifdef PSPRINTING_ENV
 	useps = TRUE;

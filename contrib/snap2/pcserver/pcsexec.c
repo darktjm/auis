@@ -71,8 +71,6 @@ char *MyEnvironment[10];
 char *malloc ();
 #endif
 
-extern int errno;
-
 SetEnvironment ()
 {
     struct passwd *p;

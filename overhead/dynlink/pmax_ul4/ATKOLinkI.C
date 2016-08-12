@@ -23,10 +23,13 @@
  // ATKDynImpl: the system specific code to adapt the link line for a dynamic object.
 
 #include <ATKOLinkI.H>
-#include <fstream.h>
+#include <iostream>
+#include <fstream>
 
 #include <doload.h>
 #include <util.h>
+
+using namespace std;
 
 ATKOLinkI::ATKOLinkI() {
     skipobject=FALSE;

@@ -23,7 +23,10 @@
  // ATKDynImpl: the system specific code to adapt the link line for a dynamic object.
 
 #include <ATKELinkI.H>
-#include <fstream.h>
+#include <iostream>
+#include <fstream>
+
+using namespace std;
 
 #include <doload.h>
 
@@ -63,7 +66,7 @@ void ATKELinkI::ProcessArgument(char *arg) {
 	char *q=strrchr(buf, '/');
 	if(q==NULL) q=buf;
 	else q++;
-	strcpy(q, q+3);
+	memmove(q, q+3, strlen(q + 3) + 1);
     } else {
 	return;
     }

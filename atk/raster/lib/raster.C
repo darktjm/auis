@@ -528,7 +528,7 @@ raster::Read(register FILE   *file, long   id			/* !0 if data stream, 0 if direc
 	long version, width, height;
 	register long row, W;
 	register unsigned char *byteaddr;
-	register nbytesfromfile;
+	register int nbytesfromfile;
 	long options, xscale, yscale, xoffset, yoffset, subwidth, subheight;
 	char keyword[6];
 	long objectid;	/* id read for the incoming pixel image */

@@ -54,7 +54,7 @@ ATKdefineRegistry(hash, ATK, hash::InitializeClass);
 #endif
 static int DefaultHash(char  *key);
 static int FindEgg(struct egg  *egg,char  *key);
-static PrintAll(struct egg  *egg,int  nothing);
+static int PrintAll(struct egg  *egg,int  nothing);
 
 
 static int DefaultHash(char  *key)
@@ -206,7 +206,7 @@ void hash::Clear(hash_freefptr valFree)
 }
 
 
-static PrintAll(struct egg  *egg,int  nothing)
+static int PrintAll(struct egg  *egg,int  nothing)
 {
     printf("Egg (%s) contains (%s)\n",egg->key,egg->value);
     return FALSE;

@@ -85,12 +85,12 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/delivery/q
 #include <mail.h>
 #include <dropoff.h>
 #include <errprntf.h>
+#include <stdlib.h>
 
 /* Program name for error messages */
 static char Qname[] = "QUEUEMAIL";
 
-extern int errno;
-extern char *malloc(), *realloc(), *UnixError(), *mktemp();
+extern char *UnixError(), *mktemp();
 extern char Dropoff_ErrMsg[];
 
 typedef unsigned char bool;

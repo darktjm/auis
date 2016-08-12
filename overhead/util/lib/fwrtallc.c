@@ -39,8 +39,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
  
 
 #include <stdio.h>
-
-extern int errno;
+#include <errno.h>
 
 int fwriteallchars(Thing, NItems, stream)
 char *Thing;

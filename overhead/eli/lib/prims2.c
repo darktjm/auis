@@ -32,7 +32,8 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/l
 
 #include <andrewos.h>
 #include  <prmtives.h>
-#include <sys/errno.h>
+#include <errno.h>
+#include <string.h>
 
 void            Prim_SETQ(st, arglist, resbuf)
 EliState_t     *st;
@@ -2050,7 +2051,7 @@ EliSexp_t *resbuf;
             return;
         if (unixerr) {
             if (!(strtmp =
-                   EliStringTable_FindOrMake(st, sys_errlist[unixerr])))
+                   EliStringTable_FindOrMake(st, strerror(unixerr))))
                 return;
             if (!(tmp = EliSexp_GetNew(st)))
                 return;

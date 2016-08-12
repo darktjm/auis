@@ -76,7 +76,6 @@ ATK_IMPL("ezprintapp.H")
 #define PRINT 1
 #define TROFF 2
 
-extern int errno;
 static boolean quiet;
 #ifdef PageOffsetOpt
 
@@ -615,7 +614,7 @@ printit:  ;
     return TRUE;
 }
 
-ezprintapp::Run()
+int ezprintapp::Run()
 {   /* we are already done */
     return 0;
 }

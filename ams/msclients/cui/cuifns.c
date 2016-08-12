@@ -39,6 +39,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/msclients/
 #include <errprntf.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 #include <sys/param.h>
 #define CUI_SOURCE_CUIFNS_C
 #include <cuimach.h>
@@ -53,13 +54,11 @@ extern char *LogFileName;
 char *GetLine();
 
 extern char *StripWhiteEnds();
-extern char **unix_sys_errlist,
-	   *ms_errlist[],
+extern char *ms_errlist[],
 	   *ms_errcauselist[],
 	   *ms_errvialist[],
 	   *rpc_errlist[];
-extern int  unix_sys_nerr,
-	    ms_nerr,
+extern int  ms_nerr,
 	    ms_nerrcause,
 	    ms_nerrvia,
 	    rpc_nerr;
@@ -183,7 +182,7 @@ Boolean Decode;
     }
 
     if (errnum < 0 || errnum >= (EMSBASE + ms_nerr)
-	    || (errnum < EMSBASE && errnum > unix_sys_nerr && !vdown(errnum))
+	    || (errnum < EMSBASE && errnum > sys_nerr && !vdown(errnum))
        ) {
 	errprintf2("cui", ERR_WARNING, NIL, NIL, "errnum %d out of range", errnum);
 	errnum = EMSUNKNOWN;
@@ -200,10 +199,7 @@ Boolean Decode;
 	if (vdown(errnum))
 	      sprintf(ErrorText, "%s - Connection timed out (in ", text);
 	  else {
-	    if (unix_sys_errlist[errnum])
-	      sprintf(ErrorText, "%s - %s (in ", text, unix_sys_errlist[errnum]);
-	     else
-	      sprintf(ErrorText, "%s - Unknown error %d (in ", text, errnum);
+	      sprintf(ErrorText, "%s - %s (in ", text, strerror(errnum));
 	}
     }
     else {

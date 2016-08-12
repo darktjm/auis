@@ -32,7 +32,6 @@ static char system_c_rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overh
 #ifdef hpux
 #include <stdlib.h>
 #include <errno.h>
-extern int errno;
 int os_system(cmd)
 char *cmd;
 {

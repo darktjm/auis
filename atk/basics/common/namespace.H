@@ -48,13 +48,12 @@ struct namespace_entry
 
 #include <ATK.H>
 
-#define namespace nmspace
-	typedef boolean (*namespace_efptr)(long data, class namespace *self, int x);
-class namespace : public ATK  {
+	typedef boolean (*namespace_efptr)(long data, class Namespace *self, int x);
+class Namespace : public ATK  {
 public:
 	virtual ATKregistryEntry *ATKregistry();
-	namespace();
-	virtual ~namespace();
+	Namespace();
+	virtual ~Namespace();
 
   virtual int Enumerate( namespace_efptr proc, long data )  ;
 

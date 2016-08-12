@@ -794,7 +794,7 @@ StyleToCodes(style *sty) {
 	static char *
 CodesToTags(char *codes, char *stylename, boolean starttag,
 			long *pmode) {
-	char *codex, *codeend, *taggle;
+	const char *codex, *codeend, *taggle;
 	int delta;
 	char atkattr[300], *styleAttr = "";
 	static char tag[300], *tagx;
@@ -3291,7 +3291,7 @@ dowrite(htmltext *self, FILE *file, htmlenv *parenv,
 
 			// output <br><br>, <br>, or <p>, depending on nlflags
 			// the first two cases ignore ParaIndent
-			char *nltag;
+			const char *nltag;
 			if (nlflags & WNL_Literal)
 				// in literal mode, newlines act like <br>
 				nltag = (nnls) ? "\n" : "";
@@ -3371,7 +3371,7 @@ get_next_dingbat(htmlenv *list_env, htmlenv *last_dingbat,
 			GetNextChild(NULL, pos);
 
 	while (next_env && pos < list_start+list_length) {
-		char *styname = (next_env->type==environment_Style)
+		const char *styname = (next_env->type==environment_Style)
 			? (next_env->environment::data.style)->
 					GetName() : "";
 		if (strcmp(styname, "dingbat") == 0)
@@ -3410,7 +3410,7 @@ get_prev_dingbat(htmlenv *list_env, htmlenv *last_dingbat,
 				GetPreviousChild(NULL, pos);
 
 	while (prev_env && pos >= list_start) {
-		char *styname = (prev_env->type==environment_Style)
+		const char *styname = (prev_env->type==environment_Style)
 				? (prev_env->environment::data.style)->
 						GetName() : "";
 		if (strcmp(styname, "dingbat") == 0)

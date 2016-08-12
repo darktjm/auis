@@ -47,8 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <btint.h>
 #endif /* WHITEPAGES_ENV   */
 
-extern int errno;
-
 int br_Debugging = 0;
 
 int btr_SetDebugging(level)

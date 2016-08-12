@@ -67,7 +67,6 @@ jmp_buf env;
 static int OnePassOnly = 0;
 
 extern int vfclose();
-extern int errno;
 
 main(argc,argv)
 int argc;

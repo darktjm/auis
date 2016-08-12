@@ -52,8 +52,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/genst
 #include <sys/time.h>
 #include <sys/resource.h>
 
-extern int errno;
-
 #ifndef RUNAPP
 #define RUNAPP "runapp"
 #endif /* RUNAPP */

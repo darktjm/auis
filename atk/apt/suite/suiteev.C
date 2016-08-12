@@ -2268,7 +2268,7 @@ suiteev::MaxStringSize( long  *width , long  *height )
   register struct suite_item *item = NULL;
   register long maxWidth = 0, maxHeight = 0;
   int XWidth = 0, YWidth = 0;
-  register numLines = 0;
+  register int numLines = 0;
 
   IN(::MaxStringSize);
   while(item = ITEM(i++))

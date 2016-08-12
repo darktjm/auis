@@ -50,7 +50,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <wp.h>
 #include <btwp.h>
 #endif /* WHITEPAGES_ENV   */
-extern int errno;
 
 extern int wp_Debugging;
 

@@ -429,7 +429,8 @@ int captions::DeleteVisibleMessage(Boolean  Delete)
 void captions::AlterDeletedIcon(int  pos, Boolean  Delete)
 {
     char c;
-    char *newicon, ErrorText[256];
+    const char *newicon;
+    char ErrorText[256];
 
     c = (this->CaptText)->GetChar( ++pos);
     switch(c) {
@@ -455,7 +456,7 @@ void captions::AlterDeletedIcon(int  pos, Boolean  Delete)
 	    (ams::GetAMS())->ReportError( ErrorText, ERR_WARNING, FALSE, 0);
 	    break;
     }
-    (this->CaptText)->AlwaysInsertCharacters( pos++, newicon, 1);
+    (this->CaptText)->AlwaysInsertCharacters( pos++, (char *)newicon, 1);
     (this->CaptText)->AlwaysDeleteCharacters( pos, 1);
 }
 
@@ -501,7 +502,7 @@ int captions::FindCUIDByDocLocation(int  *position , int  *len, class environmen
 
 void captions::ToggleMark(struct CaptionCache  *hc,int  linestart)
 {
-    (this->CaptText)->AlwaysInsertCharacters( linestart+1, hc->IsMarked ? " " : SICON_MARK, 1);
+    (this->CaptText)->AlwaysInsertCharacters( linestart+1, (char *)(hc->IsMarked ? " " : SICON_MARK), 1);
     (this->CaptText)->AlwaysDeleteCharacters( linestart, 1);
     this->MarkCount += hc->IsMarked ? -1 : 1;
     hc->IsMarked = hc->IsMarked ? 0 : 1;
@@ -597,7 +598,8 @@ void captions::MarkVisibleMessageStateofSeeing(Boolean  HasSeen)
 {
     int c, pos;
     class text *d;
-    char *newicon, ErrorText[256];
+    const char *newicon;
+    char ErrorText[256];
 
     d = this->CaptText;
     pos = this->HighlightStartPos + 1;
@@ -625,7 +627,7 @@ void captions::MarkVisibleMessageStateofSeeing(Boolean  HasSeen)
 	    (ams::GetAMS())->ReportError( ErrorText, ERR_WARNING, FALSE, 0);
 	    break;
     }
-    (d)->AlwaysInsertCharacters( pos++, newicon, 1);
+    (d)->AlwaysInsertCharacters( pos++, (char *)newicon, 1);
     (d)->AlwaysDeleteCharacters( pos, 1);
     (this)->WantUpdate( this);
     (this)->PostMenus( NULL);

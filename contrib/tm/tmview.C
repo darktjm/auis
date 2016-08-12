@@ -84,10 +84,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/tm/RCS
 #define CBREAK 0
 #endif /* hpux */
 
-extern int errno;
-extern char *sys_errlist[];
-
-
 class keymap *tmviewKeymap=NULL;
 class menulist *tmviewMenus=NULL;
 struct proctable_Entry *rawKeyPE=NULL;
@@ -173,7 +169,7 @@ static void trackTermulator(class tmview  *self)
     if(tm->errstr!=NULL && self->hasInputFocus){
 	char buf[100];
 	if(tm->errno!=0){
-	    sprintf(buf,"%s: %s",tm->errstr,sys_errlist[tm->errno]);
+	    sprintf(buf,"%s: %s",tm->errstr,strerror(tm->errno));
 	    message::DisplayString(self,0,buf);
 	}else
 	    message::DisplayString(self,0,tm->errstr);

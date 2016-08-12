@@ -59,7 +59,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #endif /* AFS_ENV */
 
 #define NIL 0
-extern int errno;
 
 
 #ifdef AFS_ENV

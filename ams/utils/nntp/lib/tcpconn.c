@@ -37,8 +37,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp
 #include <netdb.h>
 #include <andyenv.h>
 #include "tcpconn.h"
-
-extern int	errno;
+#include <errno.h>
 
 #ifdef RESOLVER_ENV
 extern int h_errno;

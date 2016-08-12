@@ -33,7 +33,6 @@
 #ifndef __STDC__
 #define const
 #endif
-extern int errno;
 struct error_table {
     char const * const * msgs;
     long base;

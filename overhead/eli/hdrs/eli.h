@@ -85,4 +85,3 @@
 #define D(x)
 #endif                                 /* DEBUG */
 
-extern int errno;

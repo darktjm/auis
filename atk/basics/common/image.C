@@ -85,7 +85,6 @@ ATK_IMPL("image.H")
 #include <math.h>
 #include <ahash.H>
 
-extern int errno;
 #define MAXFILELINE 255
 #define DEFAULT_SAVE_QUALITY (75)
 
@@ -274,12 +273,12 @@ static void  newRGBMapData( RGBMap  *rgb, unsigned int size );
 static  void make_gamma( double  gamma, int  gammamap[256] );
 static void  setupNormalizationArray( unsigned int min , unsigned int max, byte  *array );
 static unsigned int * buildZoomIndex( unsigned int width, unsigned int zoom, unsigned int *rwidth );
-static  sortRGB(unsigned short  *p1 , unsigned short  *p2);
-static  sortRBG(unsigned short  *p1 , unsigned short  *p2);
-static  sortGRB(unsigned short  *p1 , unsigned short  *p2);
-static  sortGBR(unsigned short  *p1 , unsigned short  *p2);
-static  sortBRG(unsigned short  *p1 , unsigned short  *p2);
-static  sortBGR(unsigned short  *p1 , unsigned short  *p2);
+static int sortRGB(unsigned short  *p1 , unsigned short  *p2);
+static int sortRBG(unsigned short  *p1 , unsigned short  *p2);
+static int sortGRB(unsigned short  *p1 , unsigned short  *p2);
+static int sortGBR(unsigned short  *p1 , unsigned short  *p2);
+static int sortBRG(unsigned short  *p1 , unsigned short  *p2);
+static int sortBGR(unsigned short  *p1 , unsigned short  *p2);
 static  void insertColorArea(unsigned long  *pixel_counts, struct color_area  **rlargest , struct color_area  **rsmallest , struct color_area  *area);
 static unsigned int  tone_scale_adjust(unsigned int val);
 static void  LeftToRight(int  *curr, int  *next, int   width);
@@ -1446,7 +1445,7 @@ struct color_area {
 
 /* predicate functions for qsort */
 
-static 
+static int
 sortRGB(unsigned short  *p1 , unsigned short  *p2)
 { unsigned int red1, green1, blue1, red2, green2, blue2;
 
@@ -1473,7 +1472,7 @@ sortRGB(unsigned short  *p1 , unsigned short  *p2)
     return(1);
 }
 
-static 
+static int
 sortRBG(unsigned short  *p1 , unsigned short  *p2)
 { unsigned int red1, green1, blue1, red2, green2, blue2;
 
@@ -1500,7 +1499,7 @@ sortRBG(unsigned short  *p1 , unsigned short  *p2)
     return(1);
 }
 
-static 
+static int
 sortGRB(unsigned short  *p1 , unsigned short  *p2)
 { unsigned int red1, green1, blue1, red2, green2, blue2;
 
@@ -1527,7 +1526,7 @@ sortGRB(unsigned short  *p1 , unsigned short  *p2)
     return(1);
 }
 
-static 
+static int
 sortGBR(unsigned short  *p1 , unsigned short  *p2)
 { unsigned int red1, green1, blue1, red2, green2, blue2;
 
@@ -1554,7 +1553,7 @@ sortGBR(unsigned short  *p1 , unsigned short  *p2)
     return(1);
 }
 
-static 
+static int
 sortBRG(unsigned short  *p1 , unsigned short  *p2)
 { unsigned int red1, green1, blue1, red2, green2, blue2;
 
@@ -1581,7 +1580,7 @@ sortBRG(unsigned short  *p1 , unsigned short  *p2)
     return(1);
 }
 
-static 
+static int
 sortBGR(unsigned short  *p1 , unsigned short  *p2)
 { unsigned int red1, green1, blue1, red2, green2, blue2;
 

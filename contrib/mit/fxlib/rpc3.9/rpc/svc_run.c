@@ -75,7 +75,6 @@ svc_run()
 #else
       int readfds;
 #endif /* def FD_SETSIZE */
-	extern int errno;
 
 	for (;;) {
 #ifdef FD_SETSIZE

@@ -103,7 +103,7 @@ WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES.
 #endif
 
 #ifdef SYSV
-#if !(defined(AIX) && defined(OFF_MAX))
+#if !(defined(AIX) && defined(OFF_MAX)) && !defined(linux)
 #define killpg(a, b) kill(-(a), (b))
 #endif
 #define bcopy(a, b, c) memcpy(b, a, c)

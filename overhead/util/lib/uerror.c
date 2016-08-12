@@ -38,6 +38,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
  
 
 #include <andrewos.h>
+#include <string.h>
 #include <errno.h>
 #ifdef AFS_ENV
 #include <afs/param.h>
@@ -69,13 +70,13 @@ int	errorNumber;
 #define	Vice_Errlist_Size	(sizeof(vice_errlist) / sizeof(vice_errlist[0]))
 #endif /* AFS_ENV */
 
-    if (errorNumber < sys_nerr && errorNumber > 0) return sys_errlist[errorNumber];
 #ifdef AFS_ENV
     if (errorNumber >= VICE_SPECIAL_ERRORS
 	 && errorNumber < (VICE_SPECIAL_ERRORS + Vice_Errlist_Size))
 	if (vice_errlist[errorNumber - VICE_SPECIAL_ERRORS] != NULL)
 	    return vice_errlist[errorNumber - VICE_SPECIAL_ERRORS];
 #endif /* AFS_ENV */
+    return strerror(errorNumber);
     sprintf(ErrBuff, "Error number %d", errorNumber);
     return ErrBuff;
 }

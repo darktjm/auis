@@ -804,7 +804,7 @@ chartv_Save_Command( register class chartv      *self )
         }
         else
         { DEBUG(File Open Failed);
-        sprintf( msg, "Unable to Open '%s' (%s)", file_name, sys_errlist[errno] );
+        sprintf( msg, "Unable to Open '%s' (%s)", file_name, strerror(errno) );
         (self)->Announce(  msg );
         (Chart)->SetChartAttribute(  chart_FileName( NULL ) );
         }

@@ -62,25 +62,25 @@ static int EndNew = 0;
 ATKdefineRegistry(rectlist, ATK, NULL);
 static void Intersect(int  oldnum , int  newnum  )
 {
-    int ob, ot, ol, or, nb, nt, nl, nr, ib, it;
+    int ob, ot, ol, Or, nb, nt, nl, nr, ib, it;
     
     ob = OldList[oldnum].bottom;
     ot = OldList[oldnum].top;
     ol = OldList[oldnum].left;
-    or = OldList[oldnum].right;
+    Or = OldList[oldnum].right;
     nb = NewList[newnum].bottom;
     nt = NewList[newnum].top;
     nl = NewList[newnum].left;
     nr = NewList[newnum].right;
 
-    if (nb <= ot || nt >= ob || nr <= ol || nl >= or) return;
+    if (nb <= ot || nt >= ob || nr <= ol || nl >= Or) return;
     if (nb <= ob)  {
 	OldList[oldnum].top = nb;
 	if (nt <= ot)  {
 	    it = ot;
 	}
 	else  {
-	    rectlist::AddOldRectangle(nt, ot, ol, or);
+	    rectlist::AddOldRectangle(nt, ot, ol, Or);
 	    it = nt;
 	}
 	NewList[newnum].bottom = it;
@@ -104,11 +104,11 @@ static void Intersect(int  oldnum , int  newnum  )
     else if (nl > ol)  {
 	rectlist::AddOldRectangle(ib, it, ol, nl);
     }
-    if (nr < or)  {
-	rectlist::AddOldRectangle(ib, it, nr, or);
+    if (nr < Or)  {
+	rectlist::AddOldRectangle(ib, it, nr, Or);
     }
-    else if (nr > or)  {
-	rectlist::AddNewRectangle(ib, it, or, nr, SCANAGAIN);
+    else if (nr > Or)  {
+	rectlist::AddNewRectangle(ib, it, Or, nr, SCANAGAIN);
     }
 }
 

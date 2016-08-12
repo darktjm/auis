@@ -21,7 +21,7 @@
 */
 
 #include <ATKSymTab.H>
-#include <fstream.h>
+#include <fstream>
 
 const int ATKSymList::BumpSize=100;
 const int ATKSymTab::HashSize=401;

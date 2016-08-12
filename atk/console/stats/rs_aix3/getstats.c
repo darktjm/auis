@@ -71,9 +71,6 @@
 
 #include <getstats.h>
 
-extern int errno, sys_nerr;
-extern char *sys_errlist[];
-
 #define sendval(text) {printf text ;fflush(stdout);}
 
 /* vmker struct is kernelstruct (undocumented) */
@@ -276,7 +273,6 @@ void getkmemdata(char *buf,	    /* buffer for kernel data*/
 
 #if SY_AIX4 /* rs_aix41 */
 /* get info from the process table */
-extern int errno;
 void getprocdata(struct procdata *procs)
 {
   static struct procsinfo *procinfo = NULL;

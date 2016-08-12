@@ -205,7 +205,7 @@ static void convert(FILE *inf, FILE *outf)
 {
 	register char firstletter = *sourcename;
 	while (TRUE) {
-		register c = getc(inf);
+		register int c = getc(inf);
 		if (c == EOF) return;
 		if (c == firstletter) {
 			/* found first letter, check for rest of source name */

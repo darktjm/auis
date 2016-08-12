@@ -53,7 +53,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
 /*** Global variables ***/
 long do_purge();
 char *full_name();
-extern int errno;
 
 /*
  * compar -- compares two papers, used by qsort

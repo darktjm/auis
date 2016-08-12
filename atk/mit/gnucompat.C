@@ -711,7 +711,7 @@ do_insert(class textview  *self,char  *t, boolean  nl_flag)
 	return;
     }
     /* Check to see if we are interactive or not... njw*/
-    if (!t || (int) t < 256 /* Sigh */) {
+    if (!t || (int)(long) t < 256 /* Sigh */) {
 	/* This is a bit of overkill, using completedString...
 	 * But at some point, it might be nice to have either
 	 * completion or help...

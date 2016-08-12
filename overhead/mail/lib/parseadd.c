@@ -143,6 +143,8 @@ static char *UP_NextPos, *UP_EndOfLastAddress, *UP_Prefix, *UP_EndOfHeader;
 static int UP_PrefixLength, UP_BytesLeft, UP_MaxLineLength, UP_LineLength, UP_HowMany;
 static int UP_HeaderLength;
 
+static int StartUnparse(PARSED_ADDRESS *AddrList, int Mode);
+
 /*
    Unparse an address list to a buffer in external
    ASCII format. The addresses are always written according to
@@ -205,6 +207,8 @@ int UnparseAddressList(AddrList,	/* The address list to unparse */
     return result;
 }
 
+static int UnparseAddress(PARSED_ADDRESS *Addr, int Mode, bool Last, bool NewLine);
+
 static int StartUnparse(AddrList, Mode)
     PARSED_ADDRESS *AddrList;
     int Mode;
@@ -240,6 +244,8 @@ static int StartUnparse(AddrList, Mode)
     return PA_OK;
 }
 
+static int UnparseSimpleAddress(PARSED_ADDRESS *Addr, int Mode, bool Last, bool NewLine);
+static int UnparseGroupAddress(PARSED_ADDRESS *Addr, int Mode, bool Last);
 static int UnparseAddress(Addr, Mode, Last, NewLine)
     PARSED_ADDRESS *Addr;
     int Mode;
@@ -255,6 +261,8 @@ static int UnparseAddress(Addr, Mode, Last, NewLine)
 /*
    Task: get this address into the buffer as nicely as possible
 */
+
+static int Fold(bool NewLine);
 
 static int UnparseSimpleAddress(Addr, Mode, Last, NewLine)
     PARSED_ADDRESS *Addr;
@@ -286,6 +294,8 @@ static int UnparseSimpleAddress(Addr, Mode, Last, NewLine)
     return PA_OK;
 }
 
+static int PrintRoutePhrase(char *Phrase, int Mode);
+
 static int UnparseGroupAddress(Addr, Mode, Last)
     PARSED_ADDRESS *Addr;
     int Mode;
@@ -374,6 +384,9 @@ static bool SafeCopy(s)
 	} else\
 	    return PA_TOO_LONG
 
+static int PrintWith0Hosts(PARSED_ADDRESS *Addr, int Mode);
+static int PrintWith1Host(PARSED_ADDRESS *Addr, int Mode);
+static int PrintWithManyHosts(PARSED_ADDRESS *Addr, int Mode, int Nhosts);
 PrintSimpleAddress(Addr, Mode)
     register PARSED_ADDRESS *Addr;
     int Mode;
@@ -413,6 +426,8 @@ PrintSimpleAddress(Addr, Mode)
     return PA_OK;
 }
 
+static int PrintLocalPart(char *Part, int Mode);
+
 static PrintWith0Hosts(Addr, Mode)
     register PARSED_ADDRESS *Addr;
     int Mode;

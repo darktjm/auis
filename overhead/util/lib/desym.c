@@ -37,8 +37,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <errno.h>
 #include <truth.h> /* itc.h -> truth.h DMT */
 
-extern int errno;
-
 int DeSymLink(inp, outp, newRoots)
 char *inp, *outp; int newRoots;
 {/* Rewrite the file path ``inp'' in the buffer pointed to by ``outp'' by following any symbolic links in ``inp''.  If newRoots is false, don't follow symbolic links whose values start with ``/''; if newRoots is true, go ahead and follow them.  Return 0 for all-OK, non-0 for failure.  If the error code is -1, the value of errno will be relevant. */

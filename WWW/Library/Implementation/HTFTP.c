@@ -426,6 +426,7 @@ PRIVATE int HTStrpMonth ARGS1(char *, month)
 }
 
 
+#include <time.h>
 /*								HTStrpTime()
 **
 **	Converts a date string from 'ls -l' to a time_t number

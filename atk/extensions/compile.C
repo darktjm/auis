@@ -109,7 +109,7 @@ static struct errorList *MakeErrorList(class buffer  *errorBuffer);
 static void compile_NextError(class view  *view, int  key);
 static void compile_PreviousError(class view  *view, int  key);
 static boolean FrameFinder(class frame  *frame, struct finderInfo  *info);
-static ViewEqual(class frame  *frame, class view  *view);
+static int ViewEqual(class frame  *frame, class view  *view);
 static class frame *FindByView(class view  *view);
 static class view *PutInAnotherWindow(class view  *view, class buffer  *b, int  forceWindow);
 static class view *PopToMark(class mark  *mark, int  useWindowFlag, class textview  *textview);
@@ -890,7 +890,7 @@ static boolean FrameFinder(class frame  *frame, struct finderInfo  *info)
     return FALSE;
 }
 
-static ViewEqual(class frame  *frame, class view  *view)
+static int ViewEqual(class frame  *frame, class view  *view)
         {
 
 #if 1

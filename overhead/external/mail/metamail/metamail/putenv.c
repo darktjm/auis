@@ -16,13 +16,14 @@ License along with the GNU C Library; see the file COPYING.LIB.  If
 not, write to the Free Software Foundation, Inc., 675 Mass Ave,
 Cambridge, MA 02139, USA.  */
 
+#undef _DEFAULT_SOURCE
+
 #include <config.h>
 #include <sys/types.h>
 #include <errno.h>
 #ifdef STDC_HEADERS
 #include <stdlib.h>
 #else
-extern int errno;
 #endif
 
 #if defined(STDC_HEADERS) || defined(USG) || defined(SYSV)

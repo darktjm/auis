@@ -44,8 +44,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
 extern char *getenv();
 
-extern int errno;
-
 static char home[MAXPATHLEN]="";
 
 char *gethome(name)

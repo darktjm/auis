@@ -51,10 +51,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/
 extern FILE *fopen();
 #include "errprntf.h"
 
-#if !POSIX_ENV
-extern int errno;
-#endif
-
 typedef int bool;
 #ifndef TRUE
 #define FALSE	0
@@ -94,6 +90,8 @@ static void warning(format, a0, a1, a2, a3, a4)
 #endif
 }
 
+
+static int Format(char *to, char *from, int len);
 
 static bool GetMyName()
 {

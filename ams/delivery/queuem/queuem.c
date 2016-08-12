@@ -182,8 +182,6 @@
 /* Program name for error messages */
 static char Qname[] = "QUEUEMAIL";
 
-extern int errno;
-
 extern char *arpadate();
 extern char Qmail_ErrMsg[];
 extern int tok_GetStr();

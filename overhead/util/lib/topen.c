@@ -38,7 +38,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <signal.h>
 #include <errno.h>
 #include <setjmp.h>
-extern int errno;
 #define	tst(a,b)	(*mode == 'r'? (b) : (a))
 #define	RDR	0
 #define	WTR	1
@@ -121,7 +120,6 @@ int seconds, *timedout;
     register f, r;
     int status;
     SIGSET_TYPE omask, nmask;
-    extern int errno;
     struct itimerval val;
 #ifdef __STDC__
     SignalReturnType (*old)(int);

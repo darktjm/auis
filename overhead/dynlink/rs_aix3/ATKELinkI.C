@@ -22,8 +22,11 @@
 
  // ATKDynImpl: the system specific code to adapt the link line for a dynamic object.
 
-#include <fstream.h>
+#include <iostream>
+#include <fstream>
 #include <ATKELinkI.H>
+
+using namespace std;
 
 ATKELinkI::ATKELinkI() {
     ast=new ATKSymTab;

@@ -48,7 +48,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <util.h>
 #include <svcconf.h>
 
-extern int errno;
 
 /* The name of a file guaranteed to be in AFS */
 char *ViceFile = "*";

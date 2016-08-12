@@ -151,8 +151,6 @@ extern char *UnixError();
 
 #include <dropoff.h>
 
-extern int errno;
-
 typedef unsigned char bool;
 
 #define FALSE	0

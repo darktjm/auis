@@ -127,7 +127,7 @@ void IsViceRunning()
 
 extern void CheckMariner(FILE  *ActiveVenus, char *self);
 
-extern "C" make_socket(int  port);
+extern "C" int make_socket(int  port);
 
 void InitializeMariner(class consoleClass  *self)
     {

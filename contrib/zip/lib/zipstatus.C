@@ -114,6 +114,7 @@ END-SPECIFICATION  ************************************************************/
 
 #include <andrewos.h>
 #include <errno.h>
+#include <string.h>
 #include "zipefn00.h"
 #include "zip.H"
 #include "zipview.H"
@@ -122,9 +123,6 @@ END-SPECIFICATION  ************************************************************/
 /*LIBS: libapt.a
 */
 
-
-extern int			  sys_nerr;
-extern char			 *sys_errlist[];
 
 static char			 *zip_status_messages[] =
 					  {
@@ -400,12 +398,8 @@ Format_Message( register class zipstatus	      *self, register int			       faci
   if ( status >= zip_lowest_status_value  &&  status <= zip_highest_status_value )
     sprintf( msg, "%s: %s", facility_name, zip_status_messages[status] );
   else
-  if ( status >= zip_system_status_value_boundary  &&
-      (status - zip_system_status_value_boundary) <= sys_nerr )
     sprintf( msg, "%s (System Msg): %s", facility_name,
-	     sys_errlist[status - zip_system_status_value_boundary] );
-  else
-    sprintf( msg, "%s: <<< Un-Tabularized Status Value: %d >>>", facility_name, status );
+	     strerror(status - zip_system_status_value_boundary) );
 
   return msg;
   }
@@ -474,14 +468,9 @@ Format_Figure_Status_Message ( register class zipstatus		  *self, register zip_t
 	 facility_name, figure->zip_figure_name,
 	 zip_status_messages[status] );
     else
-    if ( status >= zip_system_status_value_boundary  &&
-	 (status - zip_system_status_value_boundary) <= sys_nerr )
       sprintf( msg, "%s (Figure '%s') (System Msg): %s",
 	 facility_name, figure->zip_figure_name,
-	 sys_errlist[status - zip_system_status_value_boundary] );
-      else
-      sprintf( msg, "%s (Figure '%s'): <<< Un-Tabularized Status Value: %d >>>",
-	 facility_name, figure->zip_figure_name, status );
+	 strerror(status - zip_system_status_value_boundary) );
 ===*/
   return msg;
   }
@@ -525,14 +514,9 @@ Format_Image_Status_Message ( register class zipstatus		  *self, register zip_ty
 	 facility_name, image->zip_image_name,
 	 zip_status_messages[status] );
     else
-    if ( status >= zip_system_status_value_boundary  &&
-	 (status - zip_system_status_value_boundary) <= sys_nerr )
       sprintf( msg, "%s (Image '%s') (System Msg): %s",
 	 facility_name, image->zip_image_name,
-	 sys_errlist[status - zip_system_status_value_boundary] );
-      else
-      sprintf( msg, "%s (Image '%s'): <<< Un-Tabularized Status Value: %d >>>",
-	 facility_name, image->zip_image_name, status ); 
+	 strerror(status - zip_system_status_value_boundary) );
 ===*/
   return msg;
   }
@@ -577,14 +561,9 @@ Format_Pane_Status_Message ( register class zipstatus		  *self, register zip_typ
 	 facility_name, pane->zip_pane_name,
 	 zip_status_messages[status] );
     else
-    if ( status >= zip_system_status_value_boundary  &&
-	 (status - zip_system_status_value_boundary) <= sys_nerr )
       sprintf( msg, "%s (Pane '%s') (System Msg): %s",
 	 facility_name, pane->zip_pane_name,
-	 sys_errlist[status - zip_system_status_value_boundary] );
-      else
-      sprintf( msg, "%s (Pane '%s'): <<< Un-Tabularized Status Value: %d >>>",
-	 facility_name, pane->zip_pane_name, status );
+	 strerror(status - zip_system_status_value_boundary) );
 ===*/
  return msg;
   }
@@ -629,14 +608,9 @@ Format_Stream_Status_Message( register class zipstatus		  *self, register zip_ty
 	 facility_name, stream->zip_stream_name,
 	 zip_status_messages[status] );
     else
-    if ( status >= zip_system_status_value_boundary  &&
-	 (status - zip_system_status_value_boundary) <= sys_nerr )
       sprintf( msg, "%s (Stream '%s') (System Msg): %s",
 	 facility_name, stream->zip_stream_name,
-	 sys_errlist[status - zip_system_status_value_boundary] );
-      else
-      sprintf( msg, "%s (Stream '%s'): <<< Un-Tabularized Status Value: %d >>>",
-	 facility_name, stream->zip_stream_name, status );
+	 strerror(status - zip_system_status_value_boundary) );
   OUT(Format_Stream_Status_Message);
 ===*/
   return msg;

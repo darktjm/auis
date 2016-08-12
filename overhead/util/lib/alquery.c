@@ -73,7 +73,6 @@ extern char *CopyString();
 #include <andrewos.h>		/* sys/time.h */
 #include <svcconf.h>
 #include <errno.h>
-extern int errno;
 #ifdef AFS30_ENV
 #include <netinet/in.h>
 #include <afs/venus.h>

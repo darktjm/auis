@@ -965,7 +965,7 @@ boolean genExit(class nesssym  *parmlist , class nesssym  *locallist);
 void startfunc(class nesssym  *fname, Texpr  functype);
 void genreturn(struct exprnode  *exp);
 void finishfunc(class nesssym  *fname , class nesssym  *parmlist , 
-		class nesssym  *locallist, boolean export);
+		class nesssym  *locallist, boolean Export);
 void genchkforward();	/* check that FORWARDs are satisfied */
 void abortfunc();	/* exit scope if in a func */
 class nesssym * appendlists(register class nesssym  *list1 , 

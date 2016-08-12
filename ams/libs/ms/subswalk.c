@@ -43,6 +43,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RC
 	not statting files that start with "+") */
 
 
+static int RealSubsTreeWalk(FILE *outfile, char *dirname, int rootlen);
 
 SubsTreeWalk(outfile, dirname)
 FILE *outfile;

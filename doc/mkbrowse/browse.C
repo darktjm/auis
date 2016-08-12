@@ -43,7 +43,7 @@ static int NextToken()
 {
     int ret;
     if(done) return -1;
-    if(feof(yyin)) {
+    if(yyin && feof(yyin)) { /* 1st time around yyin not yet initialized */
 	done=1;
 	return -1;
     }

@@ -32,6 +32,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/message
 
 #include <andrewos.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/signal.h>
 #include <sys/param.h>
 #include <sys/stat.h>
@@ -112,7 +113,7 @@ char * DescribeProt(int  ProtCode);
 void SnarfCommandOutputToFP(char  *cmd, FILE  *fp);
 
 extern "C" {
-    extern pioctl(char *path, int id, struct ViceIoctl *vi_struct, int follow); 
+    extern int pioctl(char *path, int id, struct ViceIoctl *vi_struct, int follow); 
 } /* prototype of vice pioctl function */
 
 extern char   *CUI_ClientVersion;
@@ -120,19 +121,19 @@ extern char CUI_MailDomain[], *CUI_WhoIAm;
 
 extern int CUI_SnapIsRunning, CUI_LastCallFinished;
 
-extern char **unix_sys_errlist,
+extern char
 	*ms_errlist[], 
 	*ms_errcauselist[], 
 	*ms_errvialist[], 
 	*rpc_errlist[];
 
-extern int unix_sys_nerr, 
+extern int
 	ms_nerr, 
 	ms_nerrcause, 
 	ms_nerrvia, 
 	rpc_nerr;
 
-static Messages_Global_Error_Count = 0;
+static int Messages_Global_Error_Count = 0;
 
 /* This stuff is here mostly to satisfy various linkers */
 
@@ -528,7 +529,7 @@ static void DescribeLink(FILE  *fp, char  *name)
 	} else if (errno == EACCES) {
 	    fputs(" is unreadable.\n", fp);
 	} else {
-	    fprintf(fp, " causes lstat to fail (%s).\n", unix_sys_errlist[errno]);
+	    fprintf(fp, " causes lstat to fail (%s).\n", strerror(errno));
 	}
 	return;
     }
@@ -538,7 +539,7 @@ static void DescribeLink(FILE  *fp, char  *name)
 	fputs(" is a symbolic link ", fp);
 	len = readlink(name, Buffer, sizeof(Buffer));
 	if (len < 0) {
-	    fprintf(fp, "but the readlink call failed (%s).\n", unix_sys_errlist[errno]);
+	    fprintf(fp, "but the readlink call failed (%s).\n", strerror(errno));
 	} else {
 	    Buffer[len] = '\0';  /* I can't believe the lstat implementors didn't do this... */
 	    fprintf(fp, "to the file %s.\n", Buffer);
@@ -570,7 +571,7 @@ static int SnarfFile(FILE  *fp, char  *fname)
 	return 1;
     }
     if (stat(Buf, &stbuf)) {
-	fprintf(fp, "Could not stat file %s (%s).\n", Buf, unix_sys_errlist[errno]);
+	fprintf(fp, "Could not stat file %s (%s).\n", Buf, strerror(errno));
 	return 1;
     }
     if ((stbuf.st_mode & S_IFMT) != S_IFREG) {
@@ -581,7 +582,7 @@ static int SnarfFile(FILE  *fp, char  *fname)
     rfp = fopen(Buf, "r");
     if (!rfp) {
 	if (errno == 0) errno = ENOMEM;
-	fprintf(fp, "Could not open file %s (%s).\n", Buf, unix_sys_errlist[errno]);
+	fprintf(fp, "Could not open file %s (%s).\n", Buf, strerror(errno));
 	return 1;
     }	
     fprintf(fp, "File: %s\n", Buf);
@@ -755,7 +756,7 @@ void RealReportError(char  *text, int  level, int  Decode)
 	}
 	else {
 	    if (errnum < 0 || errnum >= (EMSBASE + ms_nerr)
-		    || (errnum < EMSBASE && errnum > unix_sys_nerr)) {
+		    || (errnum < EMSBASE && errnum > sys_nerr)) {
 		errprintf(im::GetProgramName(), ERR_WARNING, 0, 0, "errnum %d out of range", errnum);
 		errnum = EMSUNKNOWN;
 	    }
@@ -768,12 +769,7 @@ void RealReportError(char  *text, int  level, int  Decode)
 		errvia = EVIA_UNKNOWN;
 	    }
 	    if (errnum < EMSBASE) {
-		if (unix_sys_errlist[errnum]) {
-		    sprintf(ErrorText, "Error: %s (in ", unix_sys_errlist[errnum]);
-		}
-		else {
-		    sprintf(ErrorText, "Unknown error %d (in ", errnum);
-		}
+		    sprintf(ErrorText, "Error: %s (in ", strerror(errnum));
 	    }
 	    else {
 		if (ms_errlist[errnum - EMSBASE]) {
@@ -806,7 +802,7 @@ void RealReportError(char  *text, int  level, int  Decode)
     } else {
 	errnum = errno;
 	if (errnum != 0) {
-	    sprintf(ErrorText, "Error %d (%s) *may* have been encountered internally.", errno, unix_sys_errlist[errno]);
+	    sprintf(ErrorText, "Error %d (%s) *may* have been encountered internally.", errno, strerror(errno));
 	}
     }
 
@@ -888,7 +884,7 @@ restart:
 	}
     }
     if (fmask & FMASK_QUIT) {
-	QVec[ct] = (fmask & FMASK_CONT) ? "Quit the program" : "Quit the program (cannot continue)";
+	QVec[ct] = (char *)((fmask & FMASK_CONT) ? "Quit the program" : "Quit the program (cannot continue)");
 	Codes[ct++] = FMASK_QUIT;
     }
     /* This one should remain last if you add other things */

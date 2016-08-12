@@ -39,7 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/
 #include <sys/param.h>
 #include <netdb.h>
 #include <demonlog.h>
-extern int errno;
 extern char *inet_ntoa();
 
 #define NIL 0
@@ -159,7 +158,6 @@ int brg1,brg2,brg3,brg4,brg5,brg6,brg7,brg8,brg9,brg10;
 int crg1,crg2,crg3,crg4,crg5,crg6,crg7,crg8,crg9,crg10;
 {
     long now;
-    extern int errno;
     static	long lognum=0;	    /*monitonicly increasing for each log line*/
     if(deal_name[0]==0)return;
     if(deal_file==0)deal_file=fopen(deal_name,"a");

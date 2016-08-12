@@ -54,8 +54,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/reau
 
 static char myname[] = "reauth";
 
-extern int errno;
-
 /*
 	reauth time who password [dirWithAuths]
 */

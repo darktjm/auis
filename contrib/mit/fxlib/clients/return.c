@@ -80,7 +80,6 @@ do_return(fxp, criterion, flags, arg)
      int flags;
      char *arg;
 {
-  extern int errno;
   long code;
   Paperlist_res *plist;
   int count, i;

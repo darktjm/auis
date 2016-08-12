@@ -35,7 +35,7 @@ extern int table_DefaultPrecision;
 /* table.ch - table data object definition and interface */
 
 #define table_VERSION 1
-#define SafeFromNull(s) (((s) != NULL) ? (s) : "(null)")
+#define SafeFromNull(s) (((s) != NULL) ? (s) : (char *)"(null)")
 
 /* information about an entire row or column */
 

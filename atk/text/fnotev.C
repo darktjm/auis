@@ -68,7 +68,7 @@ struct impair {
     struct impair *next;
 };
 static struct impair *list;
-static endnotes = FALSE;
+static int endnotes = FALSE;
 
 ATKdefineRegistry(fnotev, view, fnotev::InitializeClass);
 #ifndef NORCSID

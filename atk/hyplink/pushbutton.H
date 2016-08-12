@@ -103,7 +103,7 @@ public:
   
 
     inline char * GetText() { return (this->text); }
-    inline char * GetSafeText() { return this->text?this->text:"Push Me"; }
+    inline char * GetSafeText() { return this->text?this->text:(char *)"Push Me"; }
     inline int GetStyle() { return (this->style); }
     inline class fontdesc * GetButtonFont() { return (this->myfontdesc); }
   
