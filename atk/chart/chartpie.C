@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chartpie.C,v 1.6 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chartpie.C,v 1.6 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 /**  SPECIFICATION -- External Facility Suite  *********************************
@@ -60,7 +62,6 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
-#include <andrewos.h>
 ATK_IMPL("chartpie.H")
 #include <math.h>
 #include "graphic.H"

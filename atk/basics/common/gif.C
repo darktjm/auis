@@ -62,19 +62,20 @@
   CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ****/
 
+#include <andrewos.h>
+
 #ifndef __SABER__
-static char *KLJCopyright = "Copyright 1989, 1990 Kirk L. Johnson";
+static UNUSED const char KLJCopyright[] = "Copyright 1989, 1990 Kirk L. Johnson";
 #endif
 #define _KLJ_COPYRIGHT_
 #endif
 
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/gif.C,v 3.6 1996/02/22 17:45:12 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/gif.C,v 3.6 1996/02/22 17:45:12 robr Stab74 $";
 #endif
 
 
-#include <andrewos.h>
 ATK_IMPL("gif.H")
 #include <image.H>
 #include <gif.H>

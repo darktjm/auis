@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/rxp/RCS/regexp.c,v 2.8 1993/02/08 21:40:34 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/rxp/RCS/regexp.c,v 2.8 1993/02/08 21:40:34 rr2b Stab74 $";
 #endif
 
 /*
@@ -232,7 +234,6 @@ char           *exp;
     register char  *longest;
     register int    len;
     int             flags;
-    extern char    *malloc();
     if (exp == NULL)
 	FAIL("NULL argument");
 
@@ -737,7 +738,6 @@ register regexp *prog;
 register char  *string;
 {
     register char  *s;
-    extern char    *strchr();
 
     /* Be paranoid... */
     if (prog == NULL || string == NULL) {
@@ -837,7 +837,6 @@ char           *prog;
 {
     register char  *scan;	/* Current node. */
     char           *next;	/* Next node. */
-    extern char    *strchr();
 
     scan = prog;
 #ifdef DEBUG

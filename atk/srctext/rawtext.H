@@ -32,12 +32,12 @@ public:
 
 
   
-     boolean InsertCharacters(long pos, char *str, long len)  ; /*RSK92overstrike*/
+     boolean InsertCharacters(long pos, const char *str, long len)  ; /*RSK92overstrike*/
      void SetAttributes(struct attributes *atts);
      long Write(FILE *file, long writeID, int level)  ;
 
   
-    virtual boolean JustInsertCharacters(long pos,char *str,long len)  ; /*RSK92overstrike*/
+    virtual boolean JustInsertCharacters(long pos,const char *str,long len)  ; /*RSK92overstrike*/
     virtual void OverstrikeAChar(long pos); /*RSK92overstrike*/
 
   

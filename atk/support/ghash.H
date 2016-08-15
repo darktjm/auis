@@ -44,7 +44,7 @@ ATK_INTER
 	typedef void (*ghash_freevalfptr)(char *value);
 	typedef void (*ghash_freekeyfptr)(char *key);
 	typedef char *(*ghash_copyvalfptr)(char *value);
-	typedef char *(*ghash_copykeyfptr)(char *key);
+	typedef char *(*ghash_copykeyfptr)(const char *key);
 	typedef int (*ghash_comparekeyfptr)(char *key1, char *key2);
 	typedef int (*ghash_hashfptr)(char *key);
 

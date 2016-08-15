@@ -25,16 +25,17 @@
  *  $
 */
 
+#include <andrewos.h>		/* sys/time.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/t2open.c,v 2.31 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/t2open.c,v 2.31 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
  
 
-
-#include <andrewos.h>		/* sys/time.h */
+#include <util.h>
 #include <stdio.h>
 #include <signal.h>
 #include <setjmp.h>
@@ -50,9 +51,7 @@ static SignalReturnType (*oldfunc)(int);
 static SignalReturnType (*oldfunc)();
 #endif
 
-int t2open(name, argv, r, w)
-char *name, *argv[];
-FILE **r, **w;
+int t2open(const char *name, char * const argv[], FILE **r, FILE **w)
 {
 #ifndef HAVE_FORK
     printf("t2open in libutil not implemented on this platform.\n");
@@ -124,9 +123,7 @@ lclalarm()
     longjmp(env, 1);
 }
 
-int t2close(ptr, seconds, timedout)
-    FILE *ptr;
-    int seconds, *timedout;
+int t2close(FILE *ptr, int seconds, int *timedout)
 {
 #ifndef HAVE_FORK
     printf("t2close in libutil not implemented on this platform.\n");

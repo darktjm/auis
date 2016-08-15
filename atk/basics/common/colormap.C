@@ -97,7 +97,7 @@ colormap::ChangeColor( class color  *c )
 }
 
 class color *
-colormap::LookupColor( char  *name, unsigned int r , unsigned int g , unsigned int b, boolean  needpixel )
+colormap::LookupColor( const char  *name, unsigned int r , unsigned int g , unsigned int b, boolean  needpixel )
 {
     return NULL;
 }

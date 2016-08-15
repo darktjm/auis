@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/time.h sys/file.h sys/types.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/im.C,v 3.43 1996/09/03 19:03:55 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/im.C,v 3.43 1996/09/03 19:03:55 robr Exp $";
 #endif
 
 
@@ -37,7 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/com
 Figure out how to handle handlers and information requests.
 Figure out some way to handle levels of user.  Macros should probably not be an novice level facility. */
 
-#include <andrewos.h> /* sys/time.h sys/file.h sys/types.h */
 ATK_IMPL("im.H")
 #include <signal.h>
 #include <ctype.h>
@@ -187,7 +188,7 @@ static class im *HandleProc(class im  *self, struct proctable_Entry  *procTableE
 static boolean getMenuEntry(class menulist  *ml, char  *cname , char  *name, struct proctable_Entry  **pPE, ATK   **pObj, long  *pRock);
 static const char * getMenuEntryName(class menulist  *ml, struct proctable_Entry  *procTableEntry, ATK   *object, long  rock);
 static void GenericConfig(class im  *self, long  rock , long  customrock, class im  *parent, int  *x , int  *y, unsigned int  *w , unsigned int  *h);
-static void  set_logical_wd(char  *dir ,	char  *newdir);
+static void  set_logical_wd(char  *dir ,	const char  *newdir);
 static char *get_logical_wd(char  *dir);
 static SIGNAL_RETURN_TYPE InternalSignal (int asigno);
 static void ProcessInputQueue();
@@ -907,7 +908,7 @@ void im::plumber(FILE  * reportFile )
 #endif /* #if defined(ANDREW_MALLOC_ENV) && defined(DEBUG_MALLOC_ENV) */
 }
 
-void im::SetDefaultServerHost(char  *value  )
+void im::SetDefaultServerHost(const char  *value  )
 {
 	ATKinit;
 
@@ -1890,7 +1891,7 @@ void im::SetView(class view  *topLevel)
 	if (!this->bbarv && this->im_kind == im_NORMAL &&
 	    environ::GetProfileSwitch("ButtonBar", FALSE)) {
 	    // Init the buttonbar now.
-	    char *bbar_name = environ::GetProfile("ButtonBarContainer");
+	    const char *bbar_name = environ::GetProfile("ButtonBarContainer");
 	    viewholderv *vh = NULL;
 
 	    if (bbar_name)
@@ -2096,7 +2097,7 @@ static boolean initializeWorkingDirectory = TRUE;
  *  physical path, which maybe confusing.
  */
 static void 
-set_logical_wd(char  *dir ,	char  *newdir)
+set_logical_wd(char  *dir ,	const char  *newdir)
 {
 #ifdef DOS_STYLE_PATHNAMES
     if (*newdir != '/' && *(newdir+1) != ':')
@@ -2144,7 +2145,7 @@ static char *get_logical_wd(char  *dir)
 
 
 	long 
-im::ChangeDirectory(char  *dirName)
+im::ChangeDirectory(const char  *dirName)
 		{
 	ATKinit;
 
@@ -3274,7 +3275,7 @@ static boolean copyOnSelect = FALSE;
 boolean im::InitializeClass()
     {
 
-    char *envString;
+    const char *envString;
     boolean NotFound = TRUE;
     struct wsinfo *windowsys;
     char *wsName;
@@ -3476,7 +3477,7 @@ void im::UpdateCursors()
 
 
 
-void im::SetTitle(char  *title)
+void im::SetTitle(const char  *title)
         {
     char *slash;
 /* Hack to display OS/2 file names with backslashes */
@@ -3501,11 +3502,11 @@ char *im::GetTitle()
     return this->title;
 }
 
-void im::SetProgramName(char  *name)
+void im::SetProgramName(const char  *name)
         {
 	ATKinit;
 
-    char *shudder;
+    const char *shudder;
     if (initialProgramName != NULL)  {
 	free(initialProgramName);
 	initialProgramName = NULL;
@@ -3519,7 +3520,7 @@ void im::SetProgramName(char  *name)
 	/* the following 3 lines are gross and awful because app.c also checks this
 		preference option and because this may override a SetGeometrySpec
 		deliberatly set by the program.  */
-	shudder = (char *)environ::GetProfile("Geometry");
+	shudder = environ::GetProfile("Geometry");
 	if (shudder != NULL)
 	    im::SetGeometrySpec(shudder);
     }
@@ -3578,7 +3579,7 @@ void im::GetPreferedDimensions(long  *top , long  *left , long  *width , long  *
 /* We really ought to tell the window manager about this change in preferences.
     This should be a method instead of a class procedure. */
 	void 
-im::SetGeometrySpec(char  *value)
+im::SetGeometrySpec(const char  *value)
 		{
 	ATKinit;
 
@@ -3845,7 +3846,7 @@ void im::SuspendRecording()
     recordingSuspensionLevel++;
 }
 
-void im::RecordAnswer(char  *answer)
+void im::RecordAnswer(const char  *answer)
 {
 	ATKinit;
 

@@ -37,7 +37,7 @@ hwargapp::~hwargapp()
 {
 }
 
-boolean hwargapp::ParseArgs(int  argc, char  **argv)
+boolean hwargapp::ParseArgs(int  argc, const char  **argv)
 {
     if (argc > 1) this->whattosay = argv[1];
     return(TRUE);

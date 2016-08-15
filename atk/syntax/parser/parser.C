@@ -23,12 +23,13 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/syntax/parser/RCS/parser.C,v 1.9 1995/06/20 15:52:49 wjh Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/syntax/parser/RCS/parser.C,v 1.9 1995/06/20 15:52:49 wjh Stab74 $";
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("parser.H")
 
 #include <ctype.h>

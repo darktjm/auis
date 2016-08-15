@@ -183,8 +183,8 @@ public:
     virtual void ClearCursors(class cursor * C);
     virtual void ClearCursorList();
     virtual void UpdateCursors();
-    virtual void SetTitle(char *titleString);
-    virtual char * GetTitle()  ;
+    virtual void SetTitle(const char *titleString);
+    virtual char * GetTitle()  ; /* ugh... xim needs write perms */
     virtual FILE * FromCutBuffer()  ;
     virtual FILE * ToCutBuffer()  ;
     virtual void CloseFromCutBuffer(FILE *readFile);
@@ -296,7 +296,7 @@ public:
     static void AddZombieHandler(int pid, im_zombiefptr function, long functionData);
     static void RemoveZombieHandler(int pid);
     static void SignalHandler(long signalNumber, im_signalfptr proc, char *procdata);
-    static long ChangeDirectory(char *dirName)  ;
+    static long ChangeDirectory(const char *dirName)  ;
     static char * GetDirectory(char *outputString)  ;
     static void KeyboardExit();
     static long KeyboardLevel()  ;
@@ -308,7 +308,7 @@ public:
     static void SetProcessCursor(class cursor *cursor) ;
     static class cursor * GetProcessCursor()  ;
     static long GetWriteID()  ;
-    static void SetProgramName(char *nameString);
+    static void SetProgramName(const char *nameString);
     static char * GetProgramName()  ;
     static void SetGlobalInit(class init *init);
     static class init * GetGlobalInit()  ;
@@ -334,8 +334,8 @@ public:
     static void plumber(FILE * reportFile);
 
     static void RedrawChangedWindows();
-    static void SetDefaultServerHost(char *name);
-    static void SetGeometrySpec(char *value);
+    static void SetDefaultServerHost(const char *name);
+    static void SetGeometrySpec(const char *value);
     static void CancelMacro();
     static long DefaultConfigureRock(long pos)  ;
     static im_configurefptr DefaultConfigureFunction(im_configurefptr func)  ;
@@ -344,7 +344,7 @@ public:
     static struct action * GetMacro()  ;
     static void SetMacro(struct action *NewRecord);
     static void SuspendRecording();
-    static void RecordAnswer(char *answer);
+    static void RecordAnswer(const char *answer);
     static boolean AnswerWasCancel()  ;
     static void RecordCancellation();
     static char * GetAnswer()  ;

@@ -25,16 +25,17 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/vmmon.C,v 1.5 1996/07/10 18:18:22 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/vmmon.C,v 1.5 1996/07/10 18:18:22 robr Exp $";
 #endif
 
 
  
 
 
-#include <andrewos.h>
 #include <im.H>
 #include <consoleClass.H>
 #include <console.h>

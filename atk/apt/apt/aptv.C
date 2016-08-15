@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/apt/RCS/aptv.C,v 1.13 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/apt/RCS/aptv.C,v 1.13 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 /**  SPECIFICATION -- External Facility Suite  *********************************
@@ -79,7 +81,6 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
-#include <andrewos.h>
 ATK_IMPL("aptv.H")
 #include <graphic.H>
 #include <fontdesc.H>

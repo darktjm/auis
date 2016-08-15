@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/types.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/paint.C,v 1.3 1994/12/13 20:35:03 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/paint.C,v 1.3 1994/12/13 20:35:03 rr2b Stab74 $";
 #endif
 
 
@@ -42,7 +44,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib
 
  */
 
-#include <andrewos.h> /* sys/types.h */
 ATK_IMPL("paint.H")
 #include <stdio.h>
 #include <netinet/in.h>

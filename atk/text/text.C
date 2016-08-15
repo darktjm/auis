@@ -26,16 +26,17 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/text.C,v 3.31 1996/11/15 20:42:21 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/text.C,v 3.31 1996/11/15 20:42:21 wjh Exp $";
 #endif
 
 
  
 
 
-#include <andrewos.h>
 ATK_IMPL("text.H")
 #include <ctype.h>
 
@@ -933,7 +934,7 @@ haveback:
 }
 
 
-long text::AlwaysInsertFile(FILE  *file, char  *filename, long  position)
+long text::AlwaysInsertFile(FILE  *file, const char  *filename, long  position)
 {
     char *objectName;
     long objectID;
@@ -1014,7 +1015,7 @@ long text::AlwaysInsertFile(FILE  *file, char  *filename, long  position)
 }
 
 
-long text::InsertFile(FILE  *file, char  *filename, long  position)
+long text::InsertFile(FILE  *file, const char  *filename, long  position)
 {
     if ((this)->GetReadOnly() || position < (this)->GetFence())
         return 0;

@@ -21,8 +21,10 @@
 // WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 // 
 //  $ */
+#include <andrewos.h> /* sys/time.h strings.h */
+
 #ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/rofftext.C,v 1.11 1995/07/17 21:08:55 wjh Stab74 $ ";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/rofftext.C,v 1.11 1995/07/17 21:08:55 wjh Stab74 $ ";
 #endif
 
 /* rofftext
@@ -34,7 +36,6 @@ static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext
  */
 
 
-#include <andrewos.h> /* sys/time.h strings.h */
 ATK_IMPL("rofftext.H")
 #include <ctype.h>
 #include <text.H>
@@ -89,7 +90,7 @@ static Trickle topen(class rofftext  *self,char  *filename,FILE  *f,char  *s);
 static void tclose(class rofftext  *self,Trickle  t);
 static int g(class rofftext  *self,Trickle  t);
 void ung(class rofftext  *self,int  c,Trickle  t);
-void tpush(class rofftext  *self,Trickle  t,char  *filename,FILE  *f,char  *s,boolean  push,int  argc,char  *argv[]);
+void tpush(class rofftext  *self,Trickle  t,const char  *filename,FILE  *f,char  *s,boolean  push,int  argc,char  *argv[]);
 static void munch(class rofftext  *self,Trickle  t);
 static void special(class rofftext  *self,Trickle  t);
 static void setfont(class rofftext  *self,Trickle  t);
@@ -369,7 +370,7 @@ void ung(class rofftext  *self,int  c,Trickle  t)
  * f is TRUE if we should pop the macro stack on EOF or end-of-string
  */
 
-void tpush(class rofftext  *self,Trickle  t,char  *filename,FILE  *f,char  *s,boolean  push,int  argc,char  *argv[])
+void tpush(class rofftext  *self,Trickle  t,const char  *filename,FILE  *f,char  *s,boolean  push,int  argc,char  *argv[])
 {
     struct _trickle *temp = (struct _trickle *)malloc(sizeof(struct _trickle));
     static char fn[512] = "/usr/man/";
@@ -1627,7 +1628,7 @@ static boolean istroff(FILE  *fp )
 long rofftext::Read(FILE  *file,long  id)
 {
     cmdfptr cmd;
-    char **begin,**ptr;
+    const char * const *begin,* const *ptr;
 
     if (file == NULL) {
         if ((this->filename != NULL) && (strcmp(this->filename,"-")==0))
@@ -1768,7 +1769,7 @@ long rofftext::Write(FILE  *file, long  writeID, int  level)
 
 
 
-long rofftext::ReadRoffIntoText(class text  *t,FILE  *fp,long  pos,char  **resources)
+long rofftext::ReadRoffIntoText(class text  *t,FILE  *fp,long  pos,const char  * const *resources)
 {
 	ATKinit;
 

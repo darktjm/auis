@@ -25,16 +25,17 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/drawfreq.C,v 1.5 1994/10/19 18:02:54 Zarf Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/drawfreq.C,v 1.5 1994/10/19 18:02:54 Zarf Stab74 $";
 #endif
 
 
  
 
 
-#include <andrewos.h>
 #include <consoleClass.H>
 #include <fontdesc.H>
 #include <graphic.H>

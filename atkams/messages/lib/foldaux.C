@@ -25,15 +25,16 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/foldaux.C,v 1.7 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/foldaux.C,v 1.7 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h>
 #include <sys/param.h>
 #include <errprntf.h>
 
@@ -91,7 +92,7 @@ static void QAddToDoc(class text  *d, int  *pos, char  *text, int  tlen , class 
 void folders_ConsiderResettingDescription(class folders  *ci, int  code, Boolean  FirstTime);
 
 extern void folders_DoClick(class folders  *folders, boolean  IsLeftClick , boolean  IgnorePosition);
-extern int folders_SetupList(class folders  *ci, int  code, char  *thingstoread[]);
+extern int folders_SetupList(class folders  *ci, int  code, const char  *thingstoread[]);
 extern void folders_ClearFolders(class folders  *ci);
 extern void folders_ExposeCap(class folders  *self);
 
@@ -234,7 +235,7 @@ void folders::Reconfigure(int  listcode)
     ams::WaitCursor(FALSE);
 }
 
-void folders::UpdateMsgs(int  mailonly, char  *thingstoread[], boolean  ShowHelp) 
+void folders::UpdateMsgs(int  mailonly, const char  *thingstoread[], boolean  ShowHelp) 
 {
     if (ShowHelp) {
 	if (this->mycaps) {

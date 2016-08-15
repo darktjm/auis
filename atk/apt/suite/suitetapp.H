@@ -13,7 +13,7 @@ public:
 
   
     boolean Start()				     ;
-    boolean ParseArgs( int argc, char **argv )	     ;
+    boolean ParseArgs( int argc, const char **argv )	     ;
   };
 
 #endif /* _suitetapp_H_ */

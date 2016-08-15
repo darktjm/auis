@@ -25,15 +25,16 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ez/RCS/ezapp.C,v 3.8 1996/03/12 17:56:55 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ez/RCS/ezapp.C,v 3.8 1996/03/12 17:56:55 robr Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("ezapp.H")
 
 #include <sys/errno.h>
@@ -78,7 +79,7 @@ static boolean CkpMessage(class view  *applicationView , class view  *targetView
 static void Checkpoint(long  dummyData);
 static void SetBufferCkpLatency(class frame  *frame, long  key);
 static void Startup(class frame  *frame);
-static void addFile(class ezapp *self, char *name, char *newWinProc, boolean ro, int initline);
+static void addFile(class ezapp *self, const char *name, char *newWinProc, boolean ro, int initline);
 static void makeErrorBuf(class ezapp  *self);
 static void GotoLine(class text  *text, class textview  *view, int  line);
 
@@ -266,7 +267,7 @@ bufferDirectory(class buffer  *buffer, char  *dir			/* Output: At least MAXPATHL
     }
 }
 
-extern int frame_VisitNamedFile(class frame *f, char *file, boolean b1, boolean b2);
+extern int frame_VisitNamedFile(class frame *f, const char *file, boolean b1, boolean b2);
 
 /* Not static so it can be used from eza.c */
 static int VisitFilePrompting(class frame  *self, char  *prompt, boolean  newWindow, boolean  rawMode)
@@ -344,7 +345,7 @@ static void Startup(class frame  *frame)
 	message::DisplayString(frame, 0, "New file.");
 }
 
-static void addFile(class ezapp *self, char *name, char *newWinProc, boolean ro, int initline)
+static void addFile(class ezapp *self, const char *name, char *newWinProc, boolean ro, int initline)
 {
     /* Its a file right? */
     struct ezapp_fileList *fileEntry=
@@ -360,7 +361,7 @@ static void addFile(class ezapp *self, char *name, char *newWinProc, boolean ro,
     self->fileLink=(&(fileEntry->next));
 }
 
-boolean ezapp::ParseArgs(int  argc,char  **argv)
+boolean ezapp::ParseArgs(int  argc,const char  **argv)
 {
     int maxInitWindows;
     char *procNewWindow = NULL;
@@ -369,7 +370,7 @@ boolean ezapp::ParseArgs(int  argc,char  **argv)
     boolean pendingTitle=FALSE;
     int pendingInitLine=0;
 
-    char *name=(this)->GetName();
+    const char *name=(this)->GetName();
 
     if(!(this)->application::ParseArgs(argc,argv))
 	return FALSE;
@@ -415,7 +416,7 @@ boolean ezapp::ParseArgs(int  argc,char  **argv)
 		case 'w': /* New window. */
 		    procNewWindow = ""; /* empty string sufficient to be non-null */
 		    if ((*argv)[2]==':' && (*argv)[3]!='\0') { /* specified a proc to be called in the new window, copy for posterity */
-			char *parg= &((*argv)[3]);
+			const char *parg= &((*argv)[3]);
 			procNewWindow= (char *)malloc(strlen(parg)+1); /* this will get freed when the proc has been called */
 			strcpy(procNewWindow, parg);
 		    }
@@ -559,7 +560,7 @@ boolean ezapp::Start()
 
     buffer::SetDefaultObject(this->defaultObject);
     if(this->files==NULL)  {
-	char *defFile;
+	const char *defFile;
 
 	if ((defFile = environ::GetProfile("DefaultStartUpFile")) != NULL && *defFile != '\0')  {
 	    addFile(this, defFile, procForDefaultWindow?procForDefaultWindow:(char *)"", FALSE, 0);

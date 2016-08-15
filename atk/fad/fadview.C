@@ -25,15 +25,16 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/time.h sys/types.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/fad/RCS/fadview.C,v 1.9 1994/12/13 20:35:03 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/fad/RCS/fadview.C,v 1.9 1994/12/13 20:35:03 rr2b Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h> /* sys/time.h sys/types.h */
 ATK_IMPL("fadview.H")
 #include <sys/stat.h>
 
@@ -1169,7 +1170,8 @@ static void ReadIcons(FILE  *f,class fadview  *self)
 }
 int fadview::geticons(char  *s)
 {
-    char bb[512],samp[512],*cp,*andrewdir;
+    char bb[512],samp[512],*cp;
+    const char *andrewdir;
     FILE *ff;
     class fad *cpic = findpic(this);
     andrewdir = environ::AndrewDir(NULL);

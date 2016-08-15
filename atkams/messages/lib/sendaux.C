@@ -42,15 +42,16 @@ SOFTWARE.
  *  $
 */
 
+#include <andrewos.h>                  /* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/sendaux.C,v 1.11 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/sendaux.C,v 1.11 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
                                  
 
-#include <andrewos.h>                  /* sys/file.h */
 #include <stdio.h>
 #include <sys/param.h>
 #include <util.h>
@@ -586,7 +587,7 @@ static struct bind_Description smheadbindings[] = {
 static char DraftFileNameBuf[MAXPATHLEN+1];
 static void GetDraftDefaultName()
 {
-    char *name;
+    const char *name;
 
     if (DraftFileNameBuf[0] != '\0')
 	return;	/* already got it */
@@ -797,7 +798,7 @@ void            sendmessage::PostMenus(class menulist  *menulist)
 void InitStylesAndFonts(class sendmessage  *sendmessage)
 {
     int             fontsize = environ::GetProfileInt("messages.fontsize", 12);
-    char           *fontname = amsutil::GetDefaultFontName();
+    const char     *fontname = amsutil::GetDefaultFontName();
 
     sendmessage->DefaultStyle = new style;
     (sendmessage->DefaultStyle)->SetFontFamily( fontname);

@@ -21,8 +21,10 @@
  * 
  *  $
 \* ********************************************************************** */
+#include <andrewos.h>	/* for bzero() */
+
 #ifndef NORCSID
-static char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/gen.C,v 1.11 1995/12/07 16:41:27 robr Stab74 $";
+static UNUSED const char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/gen.C,v 1.11 1995/12/07 16:41:27 robr Stab74 $";
 #endif
 
 /* 
@@ -147,7 +149,6 @@ static char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/obje
  * Initial creation by WJHansen
  * 
 */
-#include <andrewos.h>	/* for bzero() */
 #include <ctype.h>
 
 #include <text.H>

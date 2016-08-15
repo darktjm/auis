@@ -33,9 +33,9 @@
 	Definitions for cell-based services.
 \* ************************************************************ */
 
-extern char *ThisDomain;
+extern const char *ThisDomain;
 extern int ThisDomainLen;
-extern char *ViceFile;
+extern const char *ViceFile;
 
 extern int AMS_ViceIsRunning;
 
@@ -46,6 +46,6 @@ extern int AMS_UseWP;
 extern int AMS_OnAIX;
 extern int AMS_LocalMailSystemExists, AMS_DefaultToAFSCellMail, AMS_ThisDomainAuthFromWS;
 
-extern char *CellCommonPrefix, *CellCommonRWSuffix, *CellCommonSuffix,
+extern const char *CellCommonPrefix, *CellCommonRWSuffix, *CellCommonSuffix,
 	*CellCommonWPDirSuffix;
-extern char *WorkstationCell, *WorkstationName;
+extern const char *WorkstationCell, *WorkstationName;

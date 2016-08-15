@@ -52,11 +52,11 @@ extern void cmenu_Destroy(struct cmenu *menu);
 extern int cmenu_AddPane(struct cmenu *menu, char *paneTitle,
                          int panePriority, int flags);
 extern int cmenu_DeletePane(struct cmenu *menu, char *paneTitle, int priority);
-extern int cmenu_AddSelection(struct cmenu *menu, char *paneTitle,
-               int panePriority, char *selectionLabel, int selectionPriority,
+extern int cmenu_AddSelection(struct cmenu *menu, const char *paneTitle,
+               int panePriority, const char *selectionLabel, int selectionPriority,
                long selectionData, int flags, char *keys);
-extern int cmenu_DeleteSelection(struct cmenu *menu, char *paneTitle,
-               int panePriority, char *slectionLabel, int selectionPriority,
+extern int cmenu_DeleteSelection(struct cmenu *menu, const char *paneTitle,
+               int panePriority, const char *slectionLabel, int selectionPriority,
                int flags);
 extern int cmenu_Activate(struct cmenu *menu, XButtonEvent *menuEvent,
                long *data, int backgroundType, long backgroundValue);

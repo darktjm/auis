@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/flex.C,v 1.7 1996/01/31 19:37:39 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/flex.C,v 1.7 1996/01/31 19:37:39 robr Stab74 $";
 #endif
 
 /* flex.c		
@@ -94,7 +96,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/com
  * Revision 1.0  94/08/16  13:10:48  wjh
  */
 
-#include <andrewos.h>
 ATK_IMPL("flex.H")
 #include <flex.H>
 

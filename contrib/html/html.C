@@ -579,7 +579,7 @@ html_StyleToVariables(class style * style)
 /* ------------------------------------------------------------------------ */
 
 void
-html::ChangeTitle(char * name)
+html::ChangeTitle(const char * name)
 {
     class buffer* buf = buffer::FindBufferByData(this);
     if (this->title)  {

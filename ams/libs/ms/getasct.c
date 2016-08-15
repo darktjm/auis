@@ -2,7 +2,9 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
-static char *getasct_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/getasct.c,v 2.4 1991/09/12 15:43:41 bobg Stab74 $";
+#include <andrewos.h>
+
+static UNUSED const char getasct_rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/getasct.c,v 2.4 1991/09/12 15:43:41 bobg Stab74 $";
 
 /*
 $Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/getasct.c,v 2.4 1991/09/12 15:43:41 bobg Stab74 $

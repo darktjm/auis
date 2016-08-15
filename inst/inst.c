@@ -25,14 +25,14 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/inst/RCS/inst.c,v 1.14 1996/09/03 19:31:30 robr Exp $";
-#endif
-
 /* I think we can do this now that the Imakefile passes -I../config and -I../config/$(SYS_CONFDIR) to the compiler. -rr2b 6/95*/
 
 #include <andrewos.h>
+#ifndef NORCSID
+#define NORCSID
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/inst/RCS/inst.c,v 1.14 1996/09/03 19:31:30 robr Exp $";
+#endif
+
 /* ALSO utimes and strip the file
 
 Generic install command.  Options are:
@@ -87,23 +87,23 @@ Generic install command.  Options are:
 struct stat istat, ostat;
 
 
-char *ErrorString(aerrno)
+static char *ErrorString(aerrno)
     int aerrno; {
     return strerror(aerrno);
 }
 
-stripName(aname)
+static int stripName(aname)
     char *aname;
     {if ((char*) rindex(aname, '.') == NULL) return 1;
     else return 0;
     }
 
-atoo(astr)
+static int atoo(astr)
     register char *astr;
     {register long value;
     register char tc;
     value = 0;
-    while (tc = *astr++)
+    while ((tc = *astr++))
 	{value <<= 3;
 	value += tc-'0';
 	}
@@ -174,7 +174,7 @@ static int quickStrip (afd, asize, fileName)
     return 0;
     }
 
-main (argc, argv)
+int main (argc, argv)
     int argc;
     char **argv;
     {int setOwner, setMode, setGroup, ifd, ofd;
@@ -205,6 +205,7 @@ main (argc, argv)
     setMode = 0;
     group = 0;
     setGroup = 0;
+    mode = 0775;
 
     for(i=1; i<argc; i++)
 	{tp = argv[i];

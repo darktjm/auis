@@ -26,16 +26,17 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/mailconf.c,v 2.60 1994/04/25 14:42:51 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/mailconf.c,v 2.60 1994/04/25 14:42:51 rr2b Stab74 $";
 #endif
 
 /*
 	mailconf.c -- Mail system configuration parameters and data structures.
 */
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
 #include <andyenv.h>
 #include <stdio.h>
 #include <sys/param.h>

@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/msghandler.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/msghandler.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 
@@ -36,7 +38,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/com
 /* Complete bogosity. */
 
 
-#include <andrewos.h>
 ATK_IMPL("msghandler.H")
 #include <msghandler.H>
 
@@ -46,27 +47,27 @@ ATKdefineRegistry(msghandler, ATK, NULL);
 #endif
 
 
-int msghandler::DisplayString(int  priority, char  *string)
+int msghandler::DisplayString(int  priority, const char  *string)
             {
     return -1;
 }
 
-int msghandler::AskForString(int  priority, char  *prompt , char  *defaultString , char  *buffer, int  bufferSize)
+int msghandler::AskForString(int  priority, const char  *prompt , const char  *defaultString , char  *buffer, int  bufferSize)
                 {
     return -1;
 }
 
-int msghandler::AskForPasswd(int  priority, char  *prompt , char  *defaultString , char  *buffer, int  bufferSize)
+int msghandler::AskForPasswd(int  priority, const char  *prompt , const char  *defaultString , char  *buffer, int  bufferSize)
                 {
     return (this)->AskForString(priority,prompt,defaultString,buffer,bufferSize);
 }
 
-int msghandler::AskForStringCompleted(int  priority, char  *prompt , char  *defaultString , char  *buffer, int  bufferSize, class keystate  *keystate, message_completionfptr  completionProc , message_helpfptr  helpProc, long  functionData, int  flags)
+int msghandler::AskForStringCompleted(int  priority, const char  *prompt , const char  *defaultString , char  *buffer, int  bufferSize, class keystate  *keystate, message_completionfptr  completionProc , message_helpfptr  helpProc, long  functionData, int  flags)
                                 {
     return -1;
 }
 
-int msghandler::MultipleChoiceQuestion(int  priority, char  *prompt, long  defaultChoice, long  *result, char  **choices, char  *abbrevKeys)
+int msghandler::MultipleChoiceQuestion(int  priority, const char  *prompt, long  defaultChoice, long  *result, const char  * const *choices, const char  *abbrevKeys)
                             {
     return -1;
 }
@@ -80,7 +81,7 @@ int msghandler::GetCurrentString(char  *buffer, int  bufferSize)
     return -1;
 }
 
-int msghandler::InsertCharacters(int  pos, char  *string, int  len)
+int msghandler::InsertCharacters(int  pos, const char  *string, int  len)
                 {
     return -1;
 }

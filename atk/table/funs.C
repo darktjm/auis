@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/time.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/funs.C,v 1.7 1996/09/03 19:17:27 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/funs.C,v 1.7 1996/09/03 19:17:27 robr Exp $";
 #endif
 
 
@@ -38,7 +40,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/
 /*
  * %%%% the need to undefine _C_func appears to be a bug in AIX...pgc
  */
-#include <andrewos.h> /* sys/time.h */
 #if SY_AIX221
 #ifdef _C_func
 #undef _C_func

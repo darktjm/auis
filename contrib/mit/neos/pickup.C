@@ -305,7 +305,7 @@ boolean pickup::InitializeClass()
     return TRUE;
 }
 
-void pickup::SetTitle(char  *title)
+void pickup::SetTitle(const char  *title)
 /* Set the text of the title bar. If course-in-title is TRUE, then add the name
    of the course into the text */
 {

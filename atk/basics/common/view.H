@@ -293,9 +293,9 @@ public:
     inline void DrawLine(long DeltaX, long DeltaY)
 		{ DRAW(DrawLine((DeltaX), (DeltaY))); }
 
-    inline void DrawString(char *Text, short Operation)
+    inline void DrawString(const char *Text, short Operation)
 		{ DRAW(DrawString((Text), (Operation))); }
-    inline void DrawText(char *Text, long TextLength, short Operation)
+    inline void DrawText(const char *Text, long TextLength, short Operation)
 		{ DRAW(DrawText((Text), (TextLength), (Operation))); }
     inline void SetSpaceShim(short Amount) { DRAW(SetSpaceShim((Amount))); }
     inline short GetSpaceShim() { return DRAW(GetSpaceShim()); }
@@ -446,13 +446,13 @@ public:
 		{ DRAW(GetPatternOrigin((xpos), (ypos))); }
     inline void SetForegroundColor(color *c) { DRAW(SetForegroundColor(c)); }
     inline void SetBackgroundColor(color *c) { DRAW(SetBackgroundColor(c)); }
-    inline void SetForegroundColor(char *colorName, long r, long g, long b)
+    inline void SetForegroundColor(const char *colorName, long r, long g, long b)
 		{ DRAW(SetForegroundColor((colorName), (r), (g), (b))); }
-    inline void GetForegroundColor(char **name, long*retr,long*retg,long*retb)
+    inline void GetForegroundColor(const char **name, long*retr,long*retg,long*retb)
 		{ DRAW(GetForegroundColor((name), (retr), (retg), (retb))); }
-    inline void SetBackgroundColor(char *colorName, long r, long g, long b)
+    inline void SetBackgroundColor(const char *colorName, long r, long g, long b)
 		{ DRAW(SetBackgroundColor((colorName), (r),(g),(b))); }
-    inline void GetBackgroundColor(char **name, long*retr,long*retg,long*retb)
+    inline void GetBackgroundColor(const char **name, long*retr,long*retg,long*retb)
 		{ DRAW(GetBackgroundColor((name), (retr), (retg), (retb))); }
 
     inline void SetFGColorCell(color *color)

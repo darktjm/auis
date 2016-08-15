@@ -25,13 +25,14 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/tpllist.C,v 3.6 1996/06/12 19:16:15 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/tpllist.C,v 3.6 1996/06/12 19:16:15 wjh Exp $";
 #endif
 
 
-#include <andrewos.h>
 #include <text.H>
 
 #include <environ.H>
@@ -162,7 +163,8 @@ long text::ReadTemplate(char  *templateName, boolean  inserttemplatetext)
     class stylesheet *templateptr = NULL;
     struct templatelist *tlPtr;
     class style *styleptr;
-    char filename[MAXPATHLEN+1], string[1000], *tpath;
+    char filename[MAXPATHLEN+1], string[1000];
+    const char *tpath;
     boolean overrideTemplate = TRUE;
 
     if ((tlPtr = text_FindTemplateByName(templateName)) != NULL && (templateptr = tlPtr->sSheet) != NULL)   {

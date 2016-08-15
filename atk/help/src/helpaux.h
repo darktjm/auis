@@ -8,7 +8,7 @@ extern boolean help_class_inited;
 #undef ATKinit
 #define ATKinit if(!help_class_inited) InitializeClass()
 extern void  AddHistoryItem (register class help  *self, int  marcp			/* is this a bookmark? */, int  flash			/* should we expose the history panel? */);
-extern int  help_GetHelpOn(register class help  *self, char  *aname	/* what topic */, long  isnew	/* is this a new topic? */, int  ahistory	/* show in history log under what name?
+extern int  help_GetHelpOn(register class help  *self, const char  *aname	/* what topic */, long  isnew	/* is this a new topic? */, int  ahistory	/* show in history log under what name?
 		   help_HIST_NOADD - none at all,
 		   help_HIST_NAME - aname,
 		   help_HIST_TAIL - tail of the found filename

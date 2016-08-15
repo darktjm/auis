@@ -24,10 +24,11 @@ $Disclaimer:
 
    srctextview, a view for editing source code. */
 
-static char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/srctextview.C,v 2.3 1995/02/23 23:30:08 rr2b Stab74 $";
-
 #include <andrewos.h>
+
+static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
+static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/srctextview.C,v 2.3 1995/02/23 23:30:08 rr2b Stab74 $";
+
 #include <ctype.h>
 
 #include <im.H>

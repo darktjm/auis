@@ -26,10 +26,11 @@
 */
 
 
-#ifndef NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xcolormap.C,v 3.27 1996/08/27 22:00:55 robr Exp $";
-#endif
 #include <andrewos.h>
+
+#ifndef NORCSID
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xcolormap.C,v 3.27 1996/08/27 22:00:55 robr Exp $";
+#endif
 ATK_IMPL("xcolormap.H")
 #include <X11/X.h>
 #include <X11/Xlib.h>
@@ -626,10 +627,10 @@ static void ForkManager(xcolormap *self) {
     }
     retry:
     char *prog="acolorman";
-    char *aprog=environ::AndrewDir("/bin/acolorman");
-    char *colors=environ::GetProfile("ColorManagerQuota");
+    const char *aprog=environ::AndrewDir("/bin/acolorman");
+    const char *colors=environ::GetProfile("ColorManagerQuota");
     char *dpystr=XDisplayString(self->display);
-    char *argv[6], **pa=argv;
+    const char *argv[6], **pa=argv;
     *(pa++)="acolorman";
     if(colors) {
         *(pa++)="-n";
@@ -642,8 +643,8 @@ static void ForkManager(xcolormap *self) {
     *(pa++)=NULL;
     self->managerpid=osi_vfork();
     if(self->managerpid==0) {
-	execvp(prog, argv);
-	execvp(aprog, argv);
+	execvp(prog, (char * const *)argv);
+	execvp(aprog, (char * const *)argv);
 	_exit(-1);
     } else if(self->managerpid>0) {
         im::AddZombieHandler(self->managerpid, dumbzombie, (long)self);

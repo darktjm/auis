@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/suite/RCS/vector.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/suite/RCS/vector.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 /**  SPECIFICATION -- External Facility Suite  *********************************
@@ -64,7 +66,6 @@ HISTORY
 END-SPECIFICATION  ************************************************************/
 
 
-#include <andrewos.h>
 ATK_IMPL("vector.H")
 #include <stdio.h>
 

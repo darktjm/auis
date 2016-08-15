@@ -25,15 +25,16 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/messagesapp.C,v 1.6 1994/08/15 02:19:08 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/messagesapp.C,v 1.6 1994/08/15 02:19:08 rr2b Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h>
 #include <textview.H>
 #include <sys/param.h>
 #include <stdio.h>
@@ -128,18 +129,19 @@ boolean messagesapp::Start()
     (ams::GetAMS())->CUI_SetClientVersion( DeliveryVersion);
 
     if (this->SendOnly) {
-	char TmpToHeader[1000];
+	char TmpToHeader[1000], *t = TmpToHeader;
 
 	TmpToHeader[0] = '\0';
 	for (i=0; i<this->RetainedArgc; ++i) {
-	    char *s = amsutil::StripWhiteEnds(this->RetainedArg[i]);
-	    strcat(TmpToHeader, s);
-	    if (*(s+strlen(s)-1) != ',') {
-		strcat(TmpToHeader, ", ");
-	    } else {
-		strcat(TmpToHeader, " ");
-	    }
+	    int slen;
+	    const char *s = amsutil::StripWhiteEnds(this->RetainedArg[i], &slen);
+	    memcpy(t, s, slen);
+	    t += slen;
+	    if (s[slen - 1] != ',')
+		*t++ = ',';
+	    *t++ = ' ';
 	}
+	*t = 0;
 	if (this->MailSourceFile[0]) {
 	    (sm)->ReadFromFile( this->MailSourceFile, FALSE);
 	} else {
@@ -170,7 +172,7 @@ boolean messagesapp::Start()
     return(TRUE);
 }
  
-boolean messagesapp::ParseArgs(int  argc, char  **argv)  
+boolean messagesapp::ParseArgs(int  argc, const char  **argv)  
 {
     int HeadersToAdd = 0;
     (this)->application::ParseArgs( argc, argv);

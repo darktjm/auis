@@ -50,12 +50,12 @@ public:
 	static boolean InitializeClass();
 
 	static int CheckIndex(class view *v)  ;
-	static int SetIndex(char *anindex)  ;
-	static int SetupHelp(struct cache *c, char *aname, int strip)  ;
+	static int SetIndex(const char *anindex)  ;
+	static int SetupHelp(struct cache *c, const char *aname, int strip)  ;
 	static struct helpDir * GetHelpDirs()  ;
-	static void AddSearchDir(char *dirname);
-	static void ReadAliasesFile(char *aname);
-	static char * MapAlias(char *name)  ;
+	static void AddSearchDir(const char *dirname);
+	static void ReadAliasesFile(const char *aname);
+	static const char * MapAlias(const char *name)  ;
 	static void Enumerate(index_efptr proc, char *self);
 	static void EnumerateAll(helpdb_efptr proc, char *rock);
 	static void PrintSearchDirs();

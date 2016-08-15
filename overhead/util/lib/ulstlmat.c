@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <util.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/ulstlmat.c,v 2.7 1992/12/15 21:10:49 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/ulstlmat.c,v 2.7 1992/12/15 21:10:49 rr2b Stab74 $";
 #endif
 
 /*
@@ -37,8 +39,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
  
 
-int ULstlmatch (big,small)
-char *small, *big;
+int ULstlmatch (const char *big,const char *small)
 {
 /*  stlmatch  --  match leftmost part of string
  *
@@ -49,7 +50,8 @@ char *small, *big;
  *  Returns 1 iff initial characters of big match small exactly, ignoring alphabetic case.
  *  else 0.
  */
-    register char *s, *b, sc, bc;
+    register const char *s, *b;
+    register char sc, bc;
     s = small;
     b = big;
     do {

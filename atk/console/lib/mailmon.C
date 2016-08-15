@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/types.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/mailmon.C,v 1.5 1996/09/03 19:10:59 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/mailmon.C,v 1.5 1996/09/03 19:10:59 robr Exp $";
 #endif
 
 
@@ -40,7 +42,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/li
   *****************************************************************
  */
 
-#include <andrewos.h> /* sys/types.h */
 #include <andyenv.h>
 
 #include <consoleClass.H>
@@ -133,7 +134,7 @@ void SetMailEnv()
 
 void InitMail(class consoleClass  *self)
 {
-    char *s;
+    const char *s;
 
     mydbg(("entering: InitMail\n"));
     LastMailMod = 0;
@@ -156,9 +157,9 @@ void InitMail(class consoleClass  *self)
     }
     else {
         strcpy(OutgoingDir, envmail);
-        s = (char *) strrchr(OutgoingDir, '/');
-        if (s) {
-            strcpy(++s, ".Outgoing");
+        char *t = strrchr(OutgoingDir, '/');
+        if (t) {
+            strcpy(++t, ".Outgoing");
 	}
 	else {
             OutgoingDir[0] = '\0';
@@ -184,18 +185,19 @@ int PrintDirModTime;
 void SetPrintEnv()
 {
     char *buff = 0;
+    const char *pdir = NULL;
     int needsFreed = FALSE;
 
     mydbg(("entering: SetPrintEnv\n"));
 
 #ifndef hpux /* **JG Temporary hack: the semantics for PRINTDIR
     on system V does not include the printer name LPDEST */
-    buff = getenv ("PRINTDIR");
+    pdir = getenv ("PRINTDIR");
 #endif /* hpux see also matching `}s' below */
 
-    if (!buff || !*buff) {
-	buff = environ::GetProfile("print.printdir");
-	if (!buff || !*buff) {
+    if (!pdir || !*pdir) {
+	pdir = environ::GetProfile("print.printdir");
+	if (!pdir || !*pdir) {
 	    if (UseNonAndrewPrint) {
 #ifdef hpux 
                 char *printer_name;
@@ -229,16 +231,17 @@ void SetPrintEnv()
 		buff = (char *)malloc(MAXPATHLEN);
 		sprintf (buff, "%s/%s", MyHomeDir, _SITE_PRINTDIR);
 	    }
+	    pdir = buff;
 	}
     }
-    PrintDirName = (char *)malloc(strlen(buff) + 1);
-    strcpy(PrintDirName, buff);
+    PrintDirName = (char *)malloc(strlen(pdir) + 1);
+    strcpy(PrintDirName, pdir);
     if (needsFreed) free(buff);
 }
 
 void InitPrint(class consoleClass  *self)
     {
-    char *s;
+    const char *s;
 
     mydbg(("entering: InitPrint\n"));
     if (!DidInitPrinting) {
@@ -318,7 +321,7 @@ int NewMsgs(FILE  *mf)
     int LastLineBlank, inhead = 0, newCount;
     boolean EOMChar = FALSE; /* Do I have to check for a specific charater */
     int EndOfMsg = '\003'; /* If so, default to ^C but accept alternates */
-    char *s;
+    const char *s;
 
     mydbg(("entering: NewMsgs\n"));
     

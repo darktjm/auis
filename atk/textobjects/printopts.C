@@ -25,14 +25,15 @@
  *  $
 */
 
+#include <andrewos.h> /* strings.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textobjects/RCS/printopts.C,v 1.17 1995/02/03 21:40:07 Zarf Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textobjects/RCS/printopts.C,v 1.17 1995/02/03 21:40:07 Zarf Stab74 $";
 #endif
 
-extern char ProgramName[];	/* blechhh -- used by Print and Preview commands to guess a filename for printing. Not really necessary, but nice to have around. */
+// extern "C" char ProgramName[];	/* blechhh -- used by Print and Preview commands to guess a filename for printing. Not really necessary, but nice to have around. */
 
-#include <andrewos.h> /* strings.h */
 ATK_IMPL("printopts.H")
 
 #include <rect.h>

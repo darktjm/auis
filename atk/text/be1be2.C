@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/be1be2.C,v 3.5 1995/06/26 15:53:15 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/be1be2.C,v 3.5 1995/06/26 15:53:15 rr2b Stab74 $";
 #endif
 
 /*
@@ -35,7 +37,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/b
  */
 
 
-#include <andrewos.h>
 ATK_IMPL("be1be2.H")
 #include <ctype.h>
 

@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nessrunapp.C,v 1.6 1995/03/01 19:34:03 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nessrunapp.C,v 1.6 1995/03/01 19:34:03 rr2b Stab74 $";
 #endif
  
 
@@ -134,7 +136,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objec
  */
 
 
-#include <andrewos.h>
 ATK_IMPL("nessrunapp.H")
 #include <sys/param.h>
 
@@ -204,7 +205,7 @@ dumpall() {
 
 
 	boolean 
-nessrunapp::ParseArgs(int  argc, char  **argv) {
+nessrunapp::ParseArgs(int  argc, const char  **argv) {
 	class nessmark *arg, *args, *blank;
 
 	if(!(this)->application::ParseArgs( argc, argv))
@@ -266,7 +267,7 @@ nessrunapp::ParseArgs(int  argc, char  **argv) {
 	boolean
 nessrunapp::Start() {
 	char fullName[MAXPATHLEN+1];
-	char *fname;
+	const char *fname;
 
 	fname = path::UnfoldFileName(this->inputfile, fullName, 0);
 	if ((this->theNess)->ReadNamedFile( fname) 

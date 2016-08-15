@@ -25,16 +25,16 @@
 //  $
 */
 
+#include <andrewos.h>
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/nestedmark.C,v 3.6 1996/05/28 18:51:06 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/nestedmark.C,v 3.6 1996/05/28 18:51:06 robr Stab74 $";
 #endif
 
 
  
 
 
-#include <andrewos.h>
 ATK_IMPL("nestedmark.H")
 #include <nestedmark.H>
 #include <tree23int.H>

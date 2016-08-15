@@ -299,6 +299,7 @@ struct tableentry extable[] = {
     { EXTABLE, 0x1e, 12, 2496 },
     { EXTABLE, 0x1f, 12, 2560 },
     };
+#endif
 
 #include <g3.H>
 #include <sys/types.h>

@@ -25,12 +25,12 @@
  *  $
 */
 
+#include <ecommon.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/ecommon.c,v 2.11 1994/04/04 16:30:30 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/ecommon.c,v 2.11 1994/04/04 16:30:30 rr2b Stab74 $";
 #endif
-
-#include <ecommon.h>
 
 /*
  * calls the appropriate version of decr_refcount based upon the type of the

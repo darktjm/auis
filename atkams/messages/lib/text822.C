@@ -25,12 +25,13 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/text822.C,v 1.16 1996/08/27 22:19:24 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/text822.C,v 1.16 1996/08/27 22:19:24 robr Exp $";
 #endif
 
-#include <andrewos.h>
 #include <util.h>
 
 #include <text822.H>
@@ -52,7 +53,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/message
 
 static char *EmptyMsgString = "<empty message>";
 static class style *FixedStyle, *BoldStyle, *FormatStyle, *TinyStyle, *GlobalStyle;
-static char *myfontname = NULL;
+static const char *myfontname = NULL;
 static int myfontsize, UsingFootNote, PrintMinorHeaders;
  
 
@@ -1316,18 +1317,19 @@ static int ForceMetamail(char  *ctype)
 
     if (!ForceTypes) {
 	int ct=1;
-	char *s, *RawForces = environ::GetProfile("messages.forcemetamail");
+	char *s, *r;
+	const char *RawForces = environ::GetProfile("messages.forcemetamail");
 	if (!RawForces) RawForces = "";
-	for (s=RawForces; *s; ++s) {
+	r = strdup(RawForces);
+	if(!r)
+	    return 0;
+	for (s=r; *s; ++s) {
 	    if (*s == ',') {
 		++ct;
 	    } else if (isupper(*s)) {
 		*s = tolower(*s);
 	    }
 	}
-	s = (char *)malloc(1+strlen(RawForces));
-	if (!s) return(0);
-	strcpy(s, RawForces);
 	ForceTypes = (char **) malloc((1+ct) * sizeof(char *));
 	if (!ForceTypes) return(0);
 	ct = 0;

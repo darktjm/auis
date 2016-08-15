@@ -10,11 +10,12 @@ BEGINCPLUSPLUSPROTOS
 
 /* utils.c */
 char *StripWhiteEnds(char *string);
+const char *SkipWhiteEnds(const char *string, int *rlen);
 void bone(char *buf, int len);
 void ReduceWhiteSpace(char *string);
 char *multrindex(char *s, char *t);
 int BuildNickName(char *FullName, char *NickName);
-int lc2strncmp(char *s1, char *s2, int len);
+int lc2strncmp(const char *s1, const char *s2, int len);
 void LowerStringInPlace(char *string, int len);
 char *NextAddress(char *add);
 char *cvEng(int foo, int Capitalized, int MaxToSpellOut);

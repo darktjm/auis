@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/framemessage.C,v 3.8 1996/03/13 16:57:17 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/framemessage.C,v 3.8 1996/03/13 16:57:17 robr Stab74 $";
 #endif
 
 
@@ -37,7 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/
  * Provides functions for frame's message line.
   */
 
-#include <andrewos.h>
 ATK_IMPL("framemessage.H")
 
 #include <im.H>
@@ -75,10 +76,10 @@ ATKdefineRegistry(framemessage, msghandler, framemessage::InitializeClass);
 #endif
 static void EraseDisplayedMessage(class framemessage  *self);
 static void QueueErasure(class framemessage  *self, long  length /* Length of text to erase. */);
-static void BuildPrompt(class framemessage  *self, char  *prompt, char  *defaultString);
+static void BuildPrompt(class framemessage  *self, const char  *prompt, const char  *defaultString);
 static void Process(class framemessage  *self, char  *buffer, int  bufferSize);
 #ifdef THISCODEWORKS
-static char *KludgePrompt(char  *prompt, long  defaultChoice, char  *choices[], char  *abbrevKeys);
+static char *KludgePrompt(const char  *prompt, long  defaultChoice, const char  * const choices[], const char  *abbrevKeys);
 #endif /* THISCODEWORKS */
 void CancelNoExit(class framemessage  *self);
 
@@ -181,7 +182,7 @@ static void QueueErasure(class framemessage  *self, long  length /* Length of te
 			       event_SECtoTU(messageTimeout));
 }
 
-int framemessage::DisplayString(int  priority, char  *string)
+int framemessage::DisplayString(int  priority, const char  *string)
 {
 
     int len = strlen(string);
@@ -225,7 +226,7 @@ int framemessage::DisplayString(int  priority, char  *string)
 /* Really does everything common to all "AskFor..." calls.
  * Should either be renamed, or broken into two routines. 
  */
-static void BuildPrompt(class framemessage  *self, char  *prompt, char  *defaultString)
+static void BuildPrompt(class framemessage  *self, const char  *prompt, const char  *defaultString)
             {
 
     int len;
@@ -263,7 +264,7 @@ static void Process(class framemessage  *self, char  *bufout, int  bufoutSize)
     }
 }
 
-int framemessage::AskForString(int  priority, char  *prompt , char  *defaultString , char  *bufout, int  bufoutSize /* Is actual sizeof bufout including NUL. */)
+int framemessage::AskForString(int  priority, const char  *prompt , const char  *defaultString , char  *bufout, int  bufoutSize /* Is actual sizeof bufout including NUL. */)
                 {
     char *qanswer=NULL;
     struct owatch_data *checkit=NULL;
@@ -307,7 +308,7 @@ int framemessage::AskForString(int  priority, char  *prompt , char  *defaultStri
     return 0;
 }
 
-int framemessage::AskForPasswd(int  priority, char  *prompt , char  *defaultString , char  *bufout, int  bufoutSize /* Is actual sizeof bufout including NUL. */)
+int framemessage::AskForPasswd(int  priority, const char  *prompt , const char  *defaultString , char  *bufout, int  bufoutSize /* Is actual sizeof bufout including NUL. */)
                 {
     static class style *passwdStyle = NULL;
     struct owatch_data *checkit=NULL;
@@ -357,7 +358,7 @@ int framemessage::AskForPasswd(int  priority, char  *prompt , char  *defaultStri
 }
 
 /* Hairy function... */
-int framemessage::AskForStringCompleted(int  priority, char  *prompt , char  *defaultString , char  *bufout, int  bufoutSize /* Is actual sizeof bufout including NUL. */, class keystate  *keystatep, message_completionfptr completionProc, message_helpfptr helpProc, long  completionData, int  flags)
+int framemessage::AskForStringCompleted(int  priority, const char  *prompt , const char  *defaultString , char  *bufout, int  bufoutSize /* Is actual sizeof bufout including NUL. */, class keystate  *keystatep, message_completionfptr completionProc, message_helpfptr helpProc, long  completionData, int  flags)
                                     {
 
 /* The order things happen in this routine is very important. */
@@ -439,7 +440,7 @@ int framemessage::AskForStringCompleted(int  priority, char  *prompt , char  *de
 }
 #ifdef THISCODEWORKS
 /* This routine kludges together a linear prompt for a multiple choice question. */
-static char *KludgePrompt(char  *prompt, long  defaultChoice, char  *choices[], char  *abbrevKeys)
+static char *KludgePrompt(const char  *prompt, long  defaultChoice, const char  *choices[], const char  *abbrevKeys)
                 {
 
     int i;
@@ -505,7 +506,7 @@ static char *KludgePrompt(char  *prompt, long  defaultChoice, char  *choices[], 
 }
 #endif /* THISCODEWORKS */
 
-int framemessage::MultipleChoiceQuestion(int  priority, char  *prompt, long  defaultChoice, long  *result, char  **choices, char  *abbrevKeys)
+int framemessage::MultipleChoiceQuestion(int  priority, const char  *prompt, long  defaultChoice, long  *result, const char  * const *choices, const char  *abbrevKeys)
                             {
     struct owatch_data *checkit=NULL;
 #ifdef THISCODEWORKS /* This is saracastic I assume (i.e. really should be #if 0). */
@@ -612,7 +613,7 @@ int framemessage::GetCurrentString(char  *bufout, int  bufoutSize /* Is actual s
     return (this->messageView)->GetDotPosition() - pos;
 }
 
-int framemessage::InsertCharacters(int  pos, char  *string, int  len)
+int framemessage::InsertCharacters(int  pos, const char  *string, int  len)
                 {
     if (!(this)->Asking()){
 	if(this->companion) 

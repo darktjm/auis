@@ -25,16 +25,17 @@
  *  $
 */
 
+#include <andrewos.h>	/* index */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/config.c,v 2.24 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/config.c,v 2.24 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
  
 
 #include <stdio.h>
-#include <andrewos.h>	/* index */
 #include <andyenv.h>	/* LOCAL_ANDREW_SETUP_ENV */
 #include <system.h>	/* LOCAL_ANDREW_SETUP_ENV */
 #include <ctype.h>
@@ -46,7 +47,7 @@ char ProgramName[100];
 
 #define MAXCONFIGSIZE 2000
 
-char *conf_ConfigNames[] =  {
+const char *conf_ConfigNames[conf_NumConfigNames + 1] =  {
     "/AndrewSetup",
     "/etc/AndrewSetup",
 #ifdef LOCAL_ANDREW_SETUP_ENV
@@ -68,18 +69,7 @@ getconfiguration -- read information from configuration file /AndrewSetup.
 */
 
 
-ReadConfigureLine(fp, text, maxTextLength, program, programLength, key, keyLength, value, valueLength, condition, conditionLength)
-FILE *fp;
-char *text;
-int maxTextLength;
-char **program;
-int *programLength;
-char **key;
-int *keyLength;
-char **value;
-int *valueLength;
-char **condition;
-int *conditionLength;
+int ReadConfigureLine(FILE *fp, char *text, int maxTextLength, const char **program, int *programLength, const char **key, int *keyLength, const char **value, int *valueLength, const char **condition, int *conditionLength)
 {
     char *keybeg;
     char *keyend;
@@ -179,10 +169,11 @@ int *conditionLength;
 		} else {
 		    if (thisHost == NULL)  {
 			thisHost = (char *) malloc(256);
-			if (thisHost != NULL) GetHostDomainName(thisHost, 256);
+			if (thisHost == NULL) return CONFIG_FALSECONDITION;
+			GetHostDomainName(thisHost, 256);
 		    }
 
-		    if (thisHost == NULL || (!matchIt || !FoldedEQn(d, thisHost, p-d+1)) && (matchIt || FoldedEQn(d, thisHost, p-d+1)))  {
+		    if ((!matchIt || !FoldedEQn(d, thisHost, p-d+1)) && (matchIt || FoldedEQn(d, thisHost, p-d+1)))  {
 			return CONFIG_FALSECONDITION;
 		    }
 		}
@@ -298,8 +289,7 @@ int *conditionLength;
     }
 }
 
-struct configurelist *ReadConfigureFile(fileName)
-    char *fileName;
+struct configurelist *ReadConfigureFile(const char *fileName)
 {
     FILE *fp;
 
@@ -307,9 +297,9 @@ struct configurelist *ReadConfigureFile(fileName)
     fp = fopen(fileName, "r");
     if (fp) {
 	char mybuf[MAXCONFIGSIZE];
-	char *key;
-	char *program;
-	char *value;
+	const char *key;
+	const char *program;
+	const char *value;
 	int keyLength;
 	int programLength;
 	int valueLength;
@@ -361,12 +351,11 @@ struct configurelist *ReadConfigureFile(fileName)
 /* Same as ReadConfigureFile, except read a single line from the given string.
  * Always returns a single structure, or NULL.
  */
-struct configurelist *ReadStringConfig(str)
-char *str;
+struct configurelist *ReadStringConfig(char *str)
 {
-    char *key;
-    char *program;
-    char *value;
+    const char *key;
+    const char *program;
+    const char *value;
     int keyLength;
     int programLength;
     int valueLength;
@@ -402,20 +391,17 @@ char *str;
 }
 
 
-char *GetConfig(header, key, usedefault)
-    struct configurelist *header;
-    char *key;
-    int usedefault;
+const char *GetConfig(const struct configurelist *header, const char *key, int usedefault)
 {
-    struct configurelist *p;
-    char *t;
-    char *testName;
+    const struct configurelist *p;
+    const char *t;
+    const char *testName;
     char pName[500];
 
     if (header == NULL || key == NULL || *key == '\0')
         return NULL;
     
-    t = (char *) index(key, '.');
+    t = strchr(key, '.');
 
     if (t != NULL)  {
 	strncpy(pName, key, t - key);
@@ -438,8 +424,7 @@ char *GetConfig(header, key, usedefault)
     return NULL;
 }
 
-char *GetConfiguration(key)
-char *key;
+const char *GetConfiguration(const char *key)
 {
     static int inited = 0;
     static struct configurelist *setupHead = NULL;
@@ -464,8 +449,7 @@ char *key;
     return GetConfig(setupHead, key, 1);
 }
 
-FreeConfigureList(cList)
-    register struct configurelist *cList;
+void FreeConfigureList(struct configurelist *cList)
 {
     register struct configurelist *t;
 
@@ -485,9 +469,7 @@ FreeConfigureList(cList)
 /* This is the main routine used to test the routine above */
 
 #ifdef TESTINGONLYTESTING
-main(argc, argv)
-int argc;
-char **argv;
+int main(int argc, char **argv)
 {
     int i;
     char *val;

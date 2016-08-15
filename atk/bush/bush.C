@@ -24,9 +24,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/bush/RCS/bush.C,v 1.21 1996/09/03 19:05:56 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/bush/RCS/bush.C,v 1.21 1996/09/03 19:05:56 robr Exp $";
 #endif
 
 /**  SPECIFICATION -- External Facility Suite  *********************************
@@ -64,7 +66,6 @@ struct map_item {
   char	*ucell;
 };
 
-#include <andrewos.h>
 ATK_IMPL("bush.H")
 
 #include <pwd.h>
@@ -159,7 +160,7 @@ NodeFilter(SCANDIRSELARG_TYPE *dir )
 }
 
 class bush *
-bush::Create( char			 *init_dir )
+bush::Create( const char			 *init_dir )
     {
   register class bush  *self = NULL;
 

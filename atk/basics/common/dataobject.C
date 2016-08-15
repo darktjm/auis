@@ -25,16 +25,17 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/dataobject.C,v 3.6 1996/05/08 17:03:43 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/dataobject.C,v 3.6 1996/05/08 17:03:43 wjh Exp $";
 #endif
 
 
  
 
 
-#include <andrewos.h>
 ATK_IMPL("dataobject.H")
 #include <dataobject.H>
 #include <attribs.h>

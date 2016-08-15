@@ -48,8 +48,8 @@ public:
 	virtual void SetFileMenus(boolean on);
 	virtual boolean ReadShMenus(char *filename)  ;
     
-	inline void SetTitle(char *t) { (this->title=(t)); }
-        inline char  * GetTitle() { return (this->title); }
+	inline void SetTitle(const char *t) { (this->title=(t)); }
+        inline const char  * GetTitle() { return (this->title); }
     
 	
 	static boolean InitializeClass();
@@ -64,7 +64,8 @@ public:
         class keystate *keystate;
 	class menulist *menus, *shmenus;
 	class mark *curpos;
-	char *cwd, *title;
+	char *cwd;
+	const char *title;
 	int height,width;
 };
 

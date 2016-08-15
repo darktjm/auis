@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/toez/RCS/toezapp.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/toez/RCS/toezapp.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 
@@ -58,7 +60,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/toez/RCS/t
  *	If no output file is given, stdout is assumed.
  */
 
-#include <andrewos.h>
 ATK_IMPL("toezapp.H")
 #include <stdio.h>
 #include <toezapp.H>
@@ -70,7 +71,7 @@ ATKdefineRegistry(toezapp, application, NULL);
 #ifndef NORCSID
 #endif
 static void show_usage(class toezapp  *self);
-static void InsistOn(char  *arg , char  *assumed);
+static void InsistOn(const char  *arg , const char  *assumed);
 static void AnalyzeInput(class toezapp  *self);
 static void OpenOutputFile(class toezapp  *self);
 static void frofftext(class toezapp  *self);
@@ -122,7 +123,7 @@ show_usage(class toezapp  *self)
 }
 
 	static void
-InsistOn(char  *arg , char  *assumed)
+InsistOn(const char  *arg , const char  *assumed)
 	{
 	if (strcmp(arg+1, assumed) != 0)
 		fprintf(stderr, "Assuming -%s instead of \"%s\"\n", assumed, arg);
@@ -130,7 +131,7 @@ InsistOn(char  *arg , char  *assumed)
 
 
 	boolean 
-toezapp::ParseArgs(int  argc,char  **argv)
+toezapp::ParseArgs(int  argc,const char  **argv)
 			{
 	char temp2[128];
 
@@ -154,7 +155,7 @@ toezapp::ParseArgs(int  argc,char  **argv)
 	while(*++argv != NULL && **argv == '-') {
 		boolean stop = FALSE;
 		switch((*argv)[1]){
-				char *temp;
+				const char *temp;
 			case 's':
 				InsistOn(*argv, "scribe");			
 				this->inputtype = "scribe";
@@ -292,15 +293,16 @@ frofftext(class toezapp  *self)
 	{
 	class rofftext *r;
 	class text *t;
+	char **ti;
 
 	if(!(self)->application::Start()) return;
 
 	r = new rofftext;
 	if (r == NULL) return;
 
-	r->inputfiles = (char **)malloc(2 * sizeof(char *));
-	r->inputfiles[0] = NULL;
-	r->inputfiles[1] = NULL;
+	r->inputfiles = ti = (char **)malloc(2 * sizeof(char *));
+	ti[0] = NULL;
+	ti[1] = NULL;
 	r->filename = self->inputfile;
 
 	if (self->BeCompletelyBogus) {

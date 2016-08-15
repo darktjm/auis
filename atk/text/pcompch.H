@@ -53,7 +53,7 @@ public:
 	
     static void ATKToASCII(class text *text,long pos, long len, pcompch_asciifptr func, long rock);
     static void ASCIIToATK(class text *text,long pos, long len, pcompch_atkfptr func, long rock);
-    static boolean ReadCompositesFile(char *file)  ;
+    static boolean ReadCompositesFile(const char *file)  ;
     static void ClearComposites();
     static void DeleteComposite(char key,char *exts);
     static long EnumerateComposites(char key, pcompch_ecfptr func,long rock)  ;

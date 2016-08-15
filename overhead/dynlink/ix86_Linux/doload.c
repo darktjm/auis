@@ -21,9 +21,11 @@
 */
 
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynlink/ix86_Linux/RCS/doload.c,v 1.2 1996/08/27 21:50:45 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynlink/ix86_Linux/RCS/doload.c,v 1.2 1996/08/27 21:50:45 robr Exp $";
 #endif
 
 
@@ -31,7 +33,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynli
  *	doload.c - dynamic loader for SunOS 4.1.3
  */
 
-#include <andrewos.h>
 #include <errno.h>
 #include <dlfcn.h>
 

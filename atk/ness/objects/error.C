@@ -21,9 +21,11 @@
  * 
  *  $
 \* ********************************************************************** */
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/error.C,v 1.7 1994/04/16 21:48:41 rr2b Stab74 $";
+static UNUSED const char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/error.C,v 1.7 1994/04/16 21:48:41 rr2b Stab74 $";
 #endif
 
 /* error.c
@@ -154,7 +156,6 @@ MapRunError(ness)
 		newly generated for each occurrence)
 */
 
-#include <andrewos.h>
 #include <parser.H>
 #include <tlex.H>
 

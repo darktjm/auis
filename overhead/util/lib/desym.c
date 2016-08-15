@@ -25,20 +25,21 @@
  *  $
 */
 
+#include <andrewos.h>	/* file, time, strings */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/desym.c,v 1.10 1995/03/18 17:30:54 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/desym.c,v 1.10 1995/03/18 17:30:54 rr2b Stab74 $";
 #endif
 
 
 #include <andyenv.h>
 #include <sys/param.h>
-#include <andrewos.h>	/* file, time, strings */
 #include <errno.h>
 #include <truth.h> /* itc.h -> truth.h DMT */
+#include <util.h>
 
-int DeSymLink(inp, outp, newRoots)
-char *inp, *outp; int newRoots;
+int DeSymLink(const char *inp, char *outp, int newRoots)
 {/* Rewrite the file path ``inp'' in the buffer pointed to by ``outp'' by following any symbolic links in ``inp''.  If newRoots is false, don't follow symbolic links whose values start with ``/''; if newRoots is true, go ahead and follow them.  Return 0 for all-OK, non-0 for failure.  If the error code is -1, the value of errno will be relevant. */
     char Buf1[MAXPATHLEN+1], Buf2[MAXPATHLEN+1];
     char *This, *Next;
@@ -89,7 +90,7 @@ char *inp, *outp; int newRoots;
 
 #ifdef TESTINGONLYTESTING
 #include <stdio.h>
-main(argc, argv) int argc; char **argv; {
+int main(int argc, char **argv) {
     char Out[1000];
     int Full, AC, RC;
     static char Usage[] = "[-f] file file ...";

@@ -66,8 +66,8 @@ class simpletext: public dataobject {
 
     /* Operations for text */
     virtual void Clear();
-    virtual boolean InsertCharacters(long pos, char *str, long len);  /* FALSE if read-only */
-    virtual void AlwaysInsertCharacters(long position, char *string, long size);
+    virtual boolean InsertCharacters(long pos, const char *str, long len);  /* FALSE if read-only */
+    virtual void AlwaysInsertCharacters(long position, const char *string, long size);
     virtual void AddInCharacter(long pos, char c);   /* Does not modify marks */
     virtual boolean DeleteCharacters(long pos, long len);  /* FALSE if read-only */
     virtual void AlwaysDeleteCharacters(long position, long size);

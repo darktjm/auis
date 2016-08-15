@@ -25,27 +25,23 @@
  *  $
 */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <andrdir.h>
+#include <util.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/andrwdir.c,v 2.9 1992/12/15 21:08:11 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/andrwdir.c,v 2.9 1992/12/15 21:08:11 rr2b Stab74 $";
 #endif
 
 /* andydir.c */
 
-#include <stdio.h>
-#include <andrdir.h>
-
-#ifndef _IBMR2
-extern char *malloc();
-#endif /* _IBMR2 */
-
-extern char *getenv();
-
 /* Return a string with the current value for ANDREWDIR imbedded in it. */
-char *AndrewDir(str)
-    char *str;
+const char *AndrewDir(const char *str)
 {
-    char *p = NULL;
+    const char *p = NULL;
     int addLen;
     static int andyLen = 0;
     static int bufSize = -1;
@@ -59,7 +55,7 @@ char *AndrewDir(str)
     }
 
     if (bufSize == -1) {
-        if (((p = getenv("ANDREWDIR")) == NULL || *p == '\0' ) && ((p = (char *) GetConfiguration("AndrewDir")) == NULL || *p == '\0'))  {
+        if (((p = getenv("ANDREWDIR")) == NULL || *p == '\0' ) && ((p = GetConfiguration("AndrewDir")) == NULL || *p == '\0'))  {
 /*	    p = "/usr/andrew"; */
 	    p = QUOTED_DEFAULT_ANDREWDIR_ENV;
 	}

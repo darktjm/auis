@@ -25,37 +25,36 @@
  *  $
 */
 
+#include <stdio.h>
+#include <util.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/getmyhom.c,v 1.7 1992/12/15 21:09:01 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/getmyhom.c,v 1.7 1992/12/15 21:09:01 rr2b Stab74 $";
 #endif
 
 
  
 
-#include <stdio.h>
-#include <util.h>
-
 #ifndef NULL
 #define NULL 0
 #endif
 
-static char myhome[100]="";
+static char *myhome = NULL;
 
-char *getMyHome()
+const char *getMyHome()
 /* Like gethome(NULL): a less general version that gets only my own home directory, not anybody's.  Will fail if the environment variable isn't set. */
 {
-    char *h;
+    const char *h;
 
     if (myhome[0] == '\0') {
-	extern char *getenv();
 	h = getenv("HOME");
-	if (h != NULL) strncpy(myhome, h, sizeof(myhome));
+	if (h != NULL) myhome = strdup(h);
     }
-    return (myhome[0] == '\0' ? NULL : myhome);
+    return (myhome);
 }
 #ifdef TESTINGONLYTESTING
-main()
+int main(void)
 {
     printf("getMyHome() returns ``%s''.\n", getMyHome());
 }

@@ -77,7 +77,7 @@ public:
       virtual int ChooseFromList(char **QVec, int defans)  ;
       virtual void ReportError(char *text, int level, int Decode, long mserrcode);
       virtual void ReportSuccess(char *text);
-      virtual int TildeResolve(char *in, char *out)  ;
+      virtual int TildeResolve(const char *in, char *out)  ;
       virtual int OnlyMail()  ;
       virtual char* ap_Shorten(char *fname)  ;
       virtual int fwriteallchars(char *s, int len, FILE *fp)  ;
@@ -110,7 +110,7 @@ public:
       virtual long CUI_OnSameHost()  ;
       virtual long CUI_PrefetchMessage(int cuid, int ReallyNext)  ;
       virtual long CUI_PrintBodyFromCUIDWithFlags(int cuid, int flags, char *printer)  ;
-      virtual void CUI_PrintUpdates(char *dname, char *nickname);
+      virtual void CUI_PrintUpdates(const char *dname, const char *nickname);
       virtual long CUI_ProcessMessageAttributes(int cuid, char *snapshot)  ;
       virtual long CUI_PurgeDeletions(char *dirname)  ;
       virtual long CUI_PurgeMarkedDirectories(boolean ask, boolean OfferQuit)  ;

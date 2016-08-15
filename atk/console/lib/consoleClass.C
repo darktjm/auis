@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/consoleClass.C,v 1.9 1996/08/19 18:48:56 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/consoleClass.C,v 1.9 1996/08/19 18:48:56 robr Exp $";
 #endif
 
 
@@ -46,7 +48,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/li
  */
 
 
-#include <andrewos.h>
 ATK_IMPL("consoleClass.H")
 #include <consoleClass.H>
 #include <menulist.H>
@@ -249,7 +250,7 @@ void SetLogFont(class text  *textObj)
     static class style *globalStyle = NULL;
 
     if (globalStyle == NULL){
-	char *s = NULL;
+	const char *s = NULL;
 	if (PromptFont == NULL){
 	    s = environ::GetProfile("bodyfont");
 	    if (!s || !*s) s = PromptFontName;

@@ -25,16 +25,18 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/apt/RCS/apt.C,v 1.6 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/apt/RCS/apt.C,v 1.6 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 /* $Header $ */
 /* $Source $ */
 
 #ifndef lint
-static char *rcsidapt = "$Header $";
+static UNUSED const char *rcsidapt = "$Header $";
 #endif
 
 /*
@@ -139,7 +141,6 @@ HISTORY
    08/30/89	Removed include of andrewos.h because that is in apt.h. (GW Keim)
 
 END-SPECIFICATION  ************************************************************/
-#include <andrewos.h>
 ATK_IMPL("apt.H")
 #include <dataobject.H>
 #include <apt.H>

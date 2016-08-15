@@ -25,15 +25,16 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/bufferlist.C,v 3.9 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/bufferlist.C,v 3.9 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("bufferlist.H")
 
 #include <errno.h>
@@ -135,7 +136,7 @@ void bufferlist::RemoveBuffer(class buffer  *buffer)
     }
 }
 
-class buffer *bufferlist::CreateBuffer(char  *bufferName , char  *filename , char  *objectName, class dataobject  *data)
+class buffer *bufferlist::CreateBuffer(const char  *bufferName , const char  *filename , const char  *objectName, class dataobject  *data)
             {
     char realName[MAXPATHLEN];
     class buffer *thisBuffer;
@@ -205,7 +206,7 @@ class buffer *bufferlist::Enumerate(bufferlist_efptr mapFunction, long  function
     return NULL;
 }
 
-class buffer *bufferlist::FindBufferByFile(char  *filename)
+class buffer *bufferlist::FindBufferByFile(const char  *filename)
         {
     char realName[MAXPATHLEN];
     char *bufferFilename;
@@ -239,7 +240,7 @@ class buffer *bufferlist::FindBufferByData(class dataobject  *bufferData)
 
 /* Changed Bufferlist */
 
-class buffer *bufferlist::FindBufferByName(char  *name)
+class buffer *bufferlist::FindBufferByName(const char  *name)
         {
     char *bufferName;
     struct listentry *traverse;
@@ -259,7 +260,7 @@ class buffer *bufferlist::FindBufferByName(char  *name)
  * object because it has the FILE *. Perhaps this is all bogus...
  */
 
-class buffer *bufferlist::GetBufferOnFile(char  *filename, long  flags)
+class buffer *bufferlist::GetBufferOnFile(const char  *filename, long  flags)
 {
     char realName[MAXPATHLEN];
     class buffer *thisBuffer;
@@ -268,7 +269,8 @@ class buffer *bufferlist::GetBufferOnFile(char  *filename, long  flags)
     long objectID;
     long version;
     boolean readOnly;
-    char bufferName[100], *objectName;
+    char bufferName[100];
+    const char *objectName;
     FILE *thisFile;
     struct attributes *attributes, *tempAttribute, readOnlyAttribute, rawModeAttribute;
 
@@ -287,15 +289,20 @@ class buffer *bufferlist::GetBufferOnFile(char  *filename, long  flags)
     if (fileIsDir && ((flags & buffer_RawMode) == 0)) {
 	struct attributes attr;
 	class dataobject *dobj;
+	char *tfilename = NULL;
 	/* Force filename to not end in '/' before visiting directories unless only a '/'. */
 	/* Do this so there aren't two different buffers on the same dir */
 	/* with different names; one with slash, one without */
 #ifdef DOS_STYLE_PATHNAMES
-	if (strlen(filename) > 1 && filename[strlen(filename) - 1] == '/' && filename[strlen(filename) - 2] != ':')
+	if (strlen(filename) > 1 && filename[strlen(filename) - 1] == '/' && filename[strlen(filename) - 2] != ':') {
 #else
-	if (strlen(filename) > 1 && filename[strlen(filename) - 1] == '/')
+	if (strlen(filename) > 1 && filename[strlen(filename) - 1] == '/') {
 #endif
-	    filename[strlen(filename) - 1] = '\0';
+	    tfilename = strdup(filename);
+	    /* tjm - not sure how to respond to errors, so ignore */
+	    filename = tfilename;
+	    tfilename[strlen(tfilename) - 1] = '\0';
+	}
 	if(!(objectName = environ::GetProfile("DirectoryEditor")))
 	    objectName = "dired";
 	/* Use existing dired buffer and dired if exists */
@@ -308,8 +315,11 @@ class buffer *bufferlist::GetBufferOnFile(char  *filename, long  flags)
 		thisBuffer = NULL;
 	} else {
 	    /* Create a new dired and dired buffer */
-	    if ((flags & buffer_MustExist) && ! fileExists)
+	    if ((flags & buffer_MustExist) && ! fileExists) {
+		if(tfilename)
+		    free(tfilename);
 		return NULL;
+	    }
 	    dobj = (class dataobject *) ATK::NewObject(objectName);
 	    if (dobj == NULL)
 		thisBuffer = NULL;
@@ -318,14 +328,18 @@ class buffer *bufferlist::GetBufferOnFile(char  *filename, long  flags)
 	}
 	if (thisBuffer == NULL) {
 	    errno = EISDIR;
+	    if(tfilename)
+		free(tfilename);
 	    return NULL;
 	}
 	/* Tell it which dir to use */
 	attr.key = "dir";
-	attr.value.string = filename;
+	attr.value.string = (char *)filename;
 	attr.next = NULL;
 	(dobj)->SetAttributes( &attr);
 	(thisBuffer)->SetFilename(filename);
+	if(tfilename)
+	    free(tfilename);
     } else {
 
 	if ((flags & buffer_MustExist) && ! fileExists) {
@@ -340,34 +354,32 @@ class buffer *bufferlist::GetBufferOnFile(char  *filename, long  flags)
 
 	if ((thisFile = fopen(filename, "rb")) == NULL) {
 	    if (access(filename, W_OK) < 0) {
-		char *slash;
+		const char *slash;
+		char *tf;
 		if (errno != ENOENT)
 		    return NULL;
 		slash = strrchr(filename, '/');
 		if (slash == NULL)
 		    return NULL;
+		tf = strdup(filename);
+		if(!tf)
+		    return NULL;
 #ifdef DOS_STYLE_PATHNAMES
 		/* If only the drive letter is left, we don't want to take the trailing slash away. Admittedly, this is not very attractive to implement. */
-		char tmpchar = '\0';
-		if (*(slash-1) == ':') {
-		    tmpchar = *(slash+1);
-		    *(slash+1) = '\0';
-		}
-		else *slash = '\0';
-		if (access(filename, W_OK) < 0) {
-		    if (tmpchar != '\0') *(slash+1) = tmpchar;
-		    else *slash = '/';
+		if (*(slash-1) == ':')
+		    tf[(int)(slash - filename)+1] = '\0';
+		else tf[(int)(slash - filename)] = '\0';
+		if (access(tf, W_OK) < 0) {
+		    free(tf);
 		    return NULL;
 		}
-		if (tmpchar != '\0') *(slash+1) = tmpchar;
-		else *slash = '/';
 #else
-		*slash = '\0';
-		if (access(filename, W_OK) < 0) {
-		    *slash = '/'; return NULL;
+		tf[(int)(slash-filename)] = '\0';
+		if (access(tf, W_OK) < 0) {
+		    free(tf); return NULL;
 		}
-		*slash = '/';
 #endif
+		free(tf);
 	    }
 	}
 
@@ -446,9 +458,9 @@ void bufferlist::GetUniqueBufferName(char  *proposedName, char  *bufferName, int
     return;
 }
 
-void bufferlist::GuessBufferName (char  *filename , char  *bufferName, int  nameSize)
+void bufferlist::GuessBufferName (const char  *filename , char  *bufferName, int  nameSize)
             {
-    char *slash;
+    const char *slash;
     char newBufferName[MAXPATHLEN];
 
     slash = strrchr(filename, '/');
@@ -472,7 +484,7 @@ void bufferlist::GuessBufferName (char  *filename , char  *bufferName, int  name
 }
 
 
-void bufferlist::SetDefaultObject(char  *objectname)
+void bufferlist::SetDefaultObject(const char  *objectname)
 {
     if (objectname != NULL)
         strncpy(defaultobjectname,objectname, sizeof(defaultobjectname));

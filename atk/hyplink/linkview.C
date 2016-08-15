@@ -26,12 +26,13 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/hyplink/RCS/linkview.C,v 1.11 1996/07/06 03:31:10 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/hyplink/RCS/linkview.C,v 1.11 1996/07/06 03:31:10 wjh Exp $";
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("linkview.H")
 #include <sys/param.h>	/* for MAXPATHLEN */
 #include <linkview.H>
@@ -428,7 +429,7 @@ WarpLink(class linkview  *self, class observable  *triggerer, long  rock) {
   class buffer *buffer;
   class view *view;
   class im *im;
-  char *filename;
+  const char *filename;
   class link *b = (class link *)(self)->GetDataObject();
 
   filename = (b)->GetResolvedLink(self);

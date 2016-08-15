@@ -25,38 +25,51 @@
  *  $
 */
 
+#include <andyenv.h>
+#include <system.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/getla.c,v 2.21 1996/02/14 16:14:30 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/getla.c,v 2.21 1996/02/14 16:14:30 robr Stab74 $";
 #endif
 
 
  
 
-#include <andyenv.h>
-#include <system.h>
 #include <fdplumb.h>
 #include <sys/ioctl.h>
 #include <sys/param.h>
 #include <nlist.h>
 
+#include <util.h>
+
 #if defined(ultrix) && defined(mips)
 #include <sys/fixpoint.h>
 #endif
 
-#if defined(NeXT) || SY_OS2 || defined(sys_ix86_Linux)
+#if defined(NeXT) || SY_OS2
 #define NOGETLA
 #endif
 
 #ifdef NOGETLA 
-double getla(index)
-int index;
+double getla(int index)
 {
     return (double) 0.0;
 }
-getla_ShutDown()
+void getla_ShutDown()
 {
 }
+#elif defined(sys_ix86_Linux)
+double getla(int index)
+{
+    double lav[3];
+    getloadavg(lav, 3);
+    return index < 3 ? lav[index] : 0.0;
+}
+void getla_ShutDown()
+{
+}
+
 #else
 
 static struct nlist Nl[] =
@@ -72,8 +85,7 @@ static struct nlist Nl[] =
 
 static int kmem = -1, fpastate = -1, fpacount = 0;
 
-double getla(index)
-int index;
+double getla(int index)
 {
 #ifdef sun
     long avenrun[3];	/* For any kind of sun */

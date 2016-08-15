@@ -25,14 +25,15 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char ibmid[] = 
+static UNUSED const char ibmid[] = 
  "(c) Copyright IBM Corp.  (This work is unpublished).  All rights reserved.";
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/ez2htmlapp.C,v 1.12 1996/11/23 17:00:56 fred Exp $";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/ez2htmlapp.C,v 1.12 1996/11/23 17:00:56 fred Exp $";
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("ez2htmlapp.H")
 
 #include <sys/stat.h>
@@ -60,7 +61,7 @@ ATK_IMPL("ez2htmlapp.H")
 #include <ez2htmlapp.H>
 
 static int insetctr = 0;
-static char *helptop_subst = NULL;
+static const char *helptop_subst = NULL;
 static boolean use_plaintext_tag = FALSE;
 
 enum style_actions { 
@@ -140,7 +141,7 @@ ez2htmlapp::~ez2htmlapp()  {
 */
 	void 
 ez2htmlapp::ReadInitFile() {
-	char *oldName=GetName();
+	const char *oldName=GetName();
 	SetName("ez");
 	application::ReadInitFile();
 	SetName(oldName);
@@ -172,7 +173,7 @@ ShowUsage(ez2htmlapp *self) {
 }
 
 	boolean 
-ez2htmlapp::ParseArgs(int argc, char *argv[]) {
+ez2htmlapp::ParseArgs(int argc, const char *argv[]) {
 	char outFileArg[MAXPATHLEN+1];
 	char wrapperFileArg[MAXPATHLEN+1];
 	struct stat statBuf;
@@ -219,7 +220,7 @@ ez2htmlapp::ParseArgs(int argc, char *argv[]) {
 				MAXPATHLEN);
 			break;
 		case 'g': {		// gifDir
-			char *trel = ((*argv)[2]) ? (*argv)+2
+			const char *trel = ((*argv)[2]) ? (*argv)+2
 					: (--argc, *++argv);
 			int len = strlen(trel);
 			gifDir = (char *)malloc(len+2);
@@ -228,7 +229,7 @@ ez2htmlapp::ParseArgs(int argc, char *argv[]) {
 				strcat(gifDir+len, "/");
 			} break;
 		case 'u': {		// gifURL
-			char *trel = ((*argv)[2]) ? (*argv)+2
+			const char *trel = ((*argv)[2]) ? (*argv)+2
 					: (--argc, *++argv);
 			int len = strlen(trel);
 			gifURL = (char *)malloc(len+2);

@@ -135,21 +135,21 @@ ATKdefineRegistry(xim, im, xim::InitializeClass);
 
 static void ForceLocUpdate(class xim  *self);
 static int mystrcmp(char  **x,char  **y);
-static char **SetupMenuChoices(char  *menulistname,int  *count);
+static char **SetupMenuChoices(const char  *menulistname,int  *count);
 static void FreeMenuChoices(char  **list,int  count);
-static int CheckMenuChoice(char  **list,int  count,char  *choice);
+static int CheckMenuChoice(const char  * const *list,int  count,const char  *choice);
 static struct cardorder *SetupCardOrder(char  *prefname);
-static int GetCardPriority(struct cardorder  *co, char  *card, int  def);
+static int GetCardPriority(struct cardorder  *co, const char  *card, int  def);
 static void FreeCardOrder(struct cardorder  *co);
 static void SetWMProperties(class xim  *self, boolean  nameChanged , boolean  iconic);
 static int XErrorsToConsole(Display  * DisplayPtr, XErrorEvent  * ErrorBlock );
 extern "C" void xim_EstablishConsole(char  * xhost, char *progname );
 static class xcolormap ** ColormapForDisplay( Display  *display );
 static void InitDefaultColormap( class xim  *self );
-static Display *SetupDisplay(class xim  *self, char  *host);
+static Display *SetupDisplay(class xim  *self, const char  *host);
 static void DoGeometry(class xim  *self, long  *left, long  *top ,XSizeHints  **sizehintsp , XSizeHints  **zoomhintsp);
 static void DoTransientGeometry(class xim  *self , boolean  override, class xim  *other, int  *left , int  *top , unsigned int  *width , unsigned int  *height, XSizeHints  **sizehintsp , XSizeHints  **zoomhintsp);
-static void SetForegroundBackground(class xim  *self, char  **foregroundColor , char  **backgroundColor, class xcolor  **foreground , class xcolor  **background);
+static void SetForegroundBackground(class xim  *self, const char  **foregroundColor , const char  **backgroundColor, class xcolor  **foreground , class xcolor  **background);
 static struct menubar *MakeStartupMenu(struct mbinit  *mbi, char  *progname);
 static void FreeSelectionData(struct seldata  *seldata);
 static boolean DoCreateTransientWindow(class xim  *self , class im  *iother, int  override, int flags=im_TRANSIENTMENUS, im_configurefptr cfp=NULL, long crock=0);
@@ -180,7 +180,7 @@ static void SendButtonUp(struct mouseStatus  *mfacts, long  x , long  y);
 static void HandleExposeFromMenubar(XEvent  *ee,class xim  *im);
 static void HandleWindowEvent(Display  *display);
 static void xim_ActivateMenubar(class xim  *xim, long  rock);
-static char *mygetdefaults(Display  *dpy, char  *pname);
+static const char *mygetdefaults(Display  *dpy, char  *pname);
 static long *CalculateIncrementList(char  *str, long  finalIncr, long  *listCount);
 static void updateGlobalCursors(class xim  *self);
 static void SetPNMask(Display  *display, Window  window);
@@ -374,11 +374,12 @@ static int mystrcmp(char  **x,char  **y)
       '\'s.  '"'s and '\' must be escaped with a '\'.  Escaping any other character has no effect.
       Items are comma separated.
       */    
-static char **SetupMenuChoices(char  *menulistname,int  *count)
+static char **SetupMenuChoices(const char  *menulistname,int  *count)
 {
     int maxchoices=8;
     char **list;
-    char *pref=environ::GetProfile(menulistname), *p;
+    const char *pref=environ::GetProfile(menulistname);
+    char *p;
     char buf[1024];
     boolean lookingforquote=FALSE;
     boolean havebackslash=FALSE;
@@ -454,7 +455,7 @@ static void FreeMenuChoices(char  **list,int  count)
     free(list);
 }
 
-static int CheckMenuChoice(char  **list,int  count,char  *choice)
+static int CheckMenuChoice(const char  * const *list,int  count,const char  *choice)
 {
     int i;
     
@@ -501,7 +502,7 @@ static struct cardorder *SetupCardOrder(char  *prefname)
     return result;
 }
 
-static int GetCardPriority(struct cardorder  *co, char  *card, int  def)
+static int GetCardPriority(struct cardorder  *co, const char  *card, int  def)
 {
     int i=CheckMenuChoice(co->list, co->count, card);
     if(i<0) return def;
@@ -536,7 +537,7 @@ void xim::AddAndrewFontPath(Display  * DisplayPtr /* display for font path */)
 	ATKinit;
 
     char fontPath[256];	    /* Place where new font path will be built */
-    char *andrewDir;	    /* Returned value of ANDREWDIR */
+    const char *andrewDir;	    /* Returned value of ANDREWDIR */
     char **fontPathList;   /* Return list of directories */
     int numPaths;	    /* Number of returned directories */
     int	i;		    /* Index into font path list */
@@ -988,7 +989,7 @@ InitDefaultColormap( class xim  *self )
 }
 
 /* SetupDisplay: sets up  state ATK needs on a new X server returns NULL if the display cannot be opened. */
-static Display *SetupDisplay(class xim  *self, char  *host)
+static Display *SetupDisplay(class xim  *self, const char  *host)
 {
     int i, Xfileno;
     struct mouseStatus *tmouse;
@@ -1013,8 +1014,8 @@ static Display *SetupDisplay(class xim  *self, char  *host)
     strcpy(xhost, host);
     if (strchr(xhost, ':') == 0) 
 	strcat(xhost, ":0");
-    for (host = xhost; *host; host++)
-	if (isupper(*host)) *host = tolower(*host);
+    for (char *s = xhost; *s; s++)
+	if (isupper(*s)) *s = tolower(*s);
 
     /* XXX probably ought to canonicalize the hostname to the "official" name  */
 
@@ -1531,7 +1532,7 @@ static void DoTransientGeometry(class xim  *self , boolean  override, class xim 
     *zoomhintsp=(&zoomhints);
 }
 
-static void SetForegroundBackground(class xim  *self, char  **foregroundColor , char  **backgroundColor, class xcolor  **foreground , class xcolor  **background)
+static void SetForegroundBackground(class xim  *self, const char  **foregroundColor , const char  **backgroundColor, class xcolor  **foreground , class xcolor  **background)
 {
     long status;
     graphic::GetDefaultColors(foregroundColor, backgroundColor);
@@ -1567,7 +1568,7 @@ static void SetForegroundBackground(class xim  *self, char  **foregroundColor , 
 static struct menubar *MakeStartupMenu(struct mbinit  *mbi, char  *progname)
 {
     char buf[256];
-    static char *Quit=messitem::Replace("Quit");
+    static const char *Quit=messitem::Replace("Quit");
     struct menubar *mb;
     strncpy(buf, messitem::Replace(progname), sizeof(buf)-1);
     strncat(buf, " ", sizeof(buf)-1-strlen(buf));
@@ -1593,8 +1594,8 @@ boolean xim::CreateWindow(char  *host)
     XSizeHints *sizehints, *zoomhints;
     long left, top;
     
-    char *foregroundColor;
-    char *backgroundColor;
+    const char *foregroundColor;
+    const char *backgroundColor;
     class xcolor *foreground, *background;
 
     /* see if we have installed the error handler yet  and performed special mappings */
@@ -1712,8 +1713,8 @@ DoCreateTransientWindow(class xim  *self , class im  *iother, int  override, int
     XSetWindowAttributes windowAttributes;
     XSizeHints *sizehints, *zoomhints;
     int left, top;
-    char *foregroundColor;
-    char *backgroundColor;
+    const char *foregroundColor;
+    const char *backgroundColor;
     class xcolor *foreground, *background;
     class colormap **cmap;
     unsigned int width, height;
@@ -1994,7 +1995,8 @@ InstallMenus(class xim  *self, class menulist  *menulist)
 	long panePriority;
 	char selectionString[500];
 	long selectionPriority;
-	char *paneTitle, *pt;
+	const char *paneTitle;
+	const char *pt;
 	struct seldata *selectionData;
 
 	ExplodeMenuString(item->string, 
@@ -2262,7 +2264,8 @@ updateMenus(class xim  *self, class menulist  *ml)
     struct cacheregion *destroy = NULL;
     struct mlcacheNode *cache;
     boolean redrawflag=FALSE;
-    char morestr[100], *ms=NULL;
+    char morestr[100];
+    const char *ms=NULL;
     
     if (ml == NULL) {
 	/* It may be in the cache(??), so we don't free it. */
@@ -3929,12 +3932,12 @@ static void xim_ActivateMenubar(class xim  *xim, long  rock)
     if(xim->menubaron) mb_KeyboardActivate(xim->menu);
 }
 
-static char *mygetdefaults(Display  *dpy, char  *pname)
+static const char *mygetdefaults(Display  *dpy, char  *pname)
 {
     return environ::GetProfile(pname);
 }
 
-static long *CalculateIncrementList(char  *str, long  finalIncr, long  *listCount)
+static long *CalculateIncrementList(const char  *str, long  finalIncr, long  *listCount)
 {
     long incrList[1000];
     long count = 0;
@@ -3974,7 +3977,7 @@ static long *CalculateIncrementList(char  *str, long  finalIncr, long  *listCoun
 
 	boolean 
 xim::InitializeClass() {
-	char *str;
+	const char *str;
 	long LeftIncrement;
 	long TopIncrement;
 
@@ -4232,9 +4235,9 @@ static void updateGlobalCursors(class xim  *self)
 
 }
 
-void xim::SetTitle(char  *title)
+void xim::SetTitle(const char  *title)
 {
-    char *oldtitle=(this)->GetTitle();
+    const char *oldtitle=(this)->GetTitle();
     if(oldtitle && title && !strcmp(oldtitle, title)) return;
     
     (this)->im::SetTitle( title);
@@ -5660,8 +5663,8 @@ boolean xim::CreateOffscreenWindow(class im  *o, int  width , int  height)
     Display *xDisplay;
     Pixmap newPixmap;
     class xim *other=(class xim *)o;
-    char *foregroundColor;
-    char *backgroundColor;
+    const char *foregroundColor;
+    const char *backgroundColor;
     class xcolor *foreground, *background;
     class colormap **cmap;
 

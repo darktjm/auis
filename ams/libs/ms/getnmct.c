@@ -25,13 +25,14 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/getnmct.c,v 2.9 1992/12/15 21:19:11 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/getnmct.c,v 2.9 1992/12/15 21:19:11 rr2b Stab74 $";
 #endif
 
 #include <ms.h>
-#include <andrewos.h>
 #include <sys/stat.h>
 
 MS_GetNewMessageCount(FullDirName, numnew, numtotal, LastOldDate, InsistOnFetch)

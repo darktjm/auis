@@ -22,9 +22,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/controllers/RCS/pcontrol.C,v 1.6 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/controllers/RCS/pcontrol.C,v 1.6 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 /* ********************************************************************** *\
@@ -34,7 +36,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/controller
 
  
 /* user code ends here for HeaderInfo */
-#include <andrewos.h>
 ATK_IMPL("pcontrol.H")
 
 #include <proctable.H>

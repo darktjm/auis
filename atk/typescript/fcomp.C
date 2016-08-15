@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/typescript/RCS/fcomp.C,v 1.7 1996/10/29 21:44:20 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/typescript/RCS/fcomp.C,v 1.7 1996/10/29 21:44:20 robr Exp $";
 #endif
 
 /* fcomp.c -- typescript package to perform filename completion
@@ -35,7 +37,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/typescript
   * August 1988
   */
 
-#include <andrewos.h>
 ATK_IMPL("fcomp.H")
 #include <ctype.h>
 

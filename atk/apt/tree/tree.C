@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/tree/RCS/tree.C,v 1.5 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/tree/RCS/tree.C,v 1.5 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 /**  SPECIFICATION -- External Facility Suite  *********************************
@@ -66,7 +68,6 @@ END-SPECIFICATION  ************************************************************/
 
 
 
-#include <andrewos.h>
 ATK_IMPL("tree.H")
 #include <tree.H>
 #include <ctype.h>

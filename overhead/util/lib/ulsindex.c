@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <util.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/ulsindex.c,v 2.7 1992/12/15 21:10:49 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/ulsindex.c,v 2.7 1992/12/15 21:10:49 rr2b Stab74 $";
 #endif
 
 /*
@@ -37,8 +39,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
  
 
-char *ULsindex(big, small)
-char *big, *small;
+char *ULsindex(const char *big, const char *small)
 /*  ULsindex  --  find index of one string within another, ignoring alphabetic case.
  *
  *  Usage:  p = ULsindex (big,small)
@@ -50,8 +51,8 @@ char *big, *small;
  *
  */
 {
-    register char *bp, *bp1, *sp, bc, sc;
-    register char c = *small;
+    register const char *bp, *bp1, *sp;
+    register char bc, sc, c = *small;
 
     if (c==0) return(0);
     if (c <= 'Z') if (c >= 'A') c += ('a' - 'A');
@@ -62,7 +63,7 @@ char *big, *small;
 	    bp1 = bp;
 	    do {
 		sc = *++sp; if (sc == '\0') {
-		    return(bp);
+		    return(char *)(bp);
 		}
 		if (sc <= 'Z') if (sc >= 'A') sc += ('a' - 'A');
 		bc = *++bp1; if (bc <= 'Z') if (bc >= 'A') bc += ('a' - 'A');

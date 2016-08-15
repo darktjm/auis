@@ -39,7 +39,7 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
     
-	 boolean ParseArgs(int argc,char **argv)  ;
+	 boolean ParseArgs(int argc,const char **argv)  ;
          boolean Start()  ;
          int Run()  ;
     
@@ -48,10 +48,10 @@ public:
     
         char *macrofile;
         boolean RoffType;
-        char *outputfile;
-        char *inputfile;
-        char **inputfiles;
-        char **argv;
+        const char *outputfile;
+        const char *inputfile;
+        const char **inputfiles;
+        const char **argv;
         int argc;
         boolean HelpMode;
         boolean BeCompletelyBogus;

@@ -47,7 +47,7 @@ public:
        int ChooseFromList(char **QVec, int defans)  ;
        void ReportError(char *text, int level, int Decode, long mserrcode);
        void ReportSuccess(char *text);
-       int TildeResolve(char *in, char *out)  ;
+       int TildeResolve(const char *in, char *out)  ;
        int OnlyMail()  ;
        char* ap_Shorten(char *fname)  ;
        int fwriteallchars(char *s, int len, FILE *fp)  ;
@@ -80,7 +80,7 @@ public:
        long CUI_OnSameHost()  ;
        long CUI_PrefetchMessage(int cuid, int ReallyNext)  ;
        long CUI_PrintBodyFromCUIDWithFlags(int cuid, int flags, char *printer)  ;
-       void CUI_PrintUpdates(char *dname, char *nickname);
+       void CUI_PrintUpdates(const char *dname, const char *nickname);
        long CUI_ProcessMessageAttributes(int cuid, char *snapshot)  ;
        long CUI_PurgeDeletions(char *dirname)  ;
        long CUI_PurgeMarkedDirectories(boolean ask, boolean OfferQuit)  ;

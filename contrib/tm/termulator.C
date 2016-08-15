@@ -1461,7 +1461,7 @@ long termulator::Write(FILE  *fp,long  writeID,int  level)
 }
 
 /* this routine in effect puts the bold cooked-mode characters at the end of the document */
-void termulator::AlwaysInsertCharacters(long  pos,char  *buf,long  len)
+void termulator::AlwaysInsertCharacters(long  pos,const char  *buf,long  len)
 {
     long fence;
 

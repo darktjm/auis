@@ -93,7 +93,7 @@ public:
     virtual void SimulateClick(boolean IsLeftClick);
     virtual void FindNextFolder(int *which, int *skipped);
     virtual void Reconfigure(int listcode);
-    virtual void UpdateMsgs(int code, char *thingstoread[], boolean ShowHelp);
+    virtual void UpdateMsgs(int code, const char *thingstoread[], boolean ShowHelp);
     virtual void NextFolder(boolean ShowFirst);
     virtual void SetCaptions(class captions *c);
     virtual void SetVeryNarrow(boolean isnarrow);

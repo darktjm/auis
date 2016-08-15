@@ -25,12 +25,13 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/bpv.C,v 3.7 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/bpv.C,v 3.7 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("bpv.H")
 #include <view.H>
 #include <fontdesc.H>

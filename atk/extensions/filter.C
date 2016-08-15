@@ -23,9 +23,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/filter.C,v 3.6 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/filter.C,v 3.6 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 /* ********************************************************************** *\
@@ -39,7 +41,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions
  */
 
 
-#include <andrewos.h>
 ATK_IMPL("filter.H")
 #include <filter.H>
 
@@ -115,7 +116,7 @@ static void commandFinished(int  pid,struct filterdata  *fd, WAIT_STATUS_TYPE  *
 static void filterf(class textview  *tv,char  *command,short  method)
 {
     static int count=0,pid;
-    char *argvbuf[100],**argv;
+    const char *argvbuf[100],**argv;
     char buf[100];
     struct filterdata *fd=(struct filterdata *)malloc(sizeof(struct filterdata));
 
@@ -206,7 +207,7 @@ static void filterf(class textview  *tv,char  *command,short  method)
 		write(2,"\n",1);
 	    }
 #endif /* 0 */
-	    execvp(*argv,argv);
+	    execvp(*argv,(char **)argv);
 	    exit(0);
 	    break;
 	case -1:

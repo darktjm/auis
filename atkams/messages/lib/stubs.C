@@ -25,12 +25,13 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/stubs.C,v 1.15 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/stubs.C,v 1.15 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
-#include <andrewos.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/signal.h>
@@ -92,10 +93,10 @@ void SetProgramVersion();
 static int SendBug(char  *text , char  *moretext, int  code);
 static int PrepareAutoBugFile(char  *text , char  *moretext , int  code, char  *FileName);
 void WriteOutUserEnvironment(FILE  *fp, Boolean  IsAboutMessages);
-static void DescribeLink(FILE  *fp, char  *name);
-static int SnarfFile(FILE  *fp, char  *fname);
+static void DescribeLink(FILE  *fp, const char  *name);
+static int SnarfFile(FILE  *fp, const char  *fname);
 static void ReportOptionState(FILE  *fp);
-int TildeResolve(char  *old , char  *new_c);
+int TildeResolve(const char  *old , char  *new_c);
 void ReportError(char  *text, int  level, int  Decode);
 void RealReportError(char  *text, int  level, int  Decode);
 void ReportFailure(char  *text , char  *moretext, int  fmask);
@@ -170,7 +171,7 @@ static class view *GetIM() {
 #else
     if(im::GetLastUsed()) return (class view *)im::GetLastUsed();
     if(errim==NULL) {
-	char *errgeom=environ::GetProfile("ErrorDialogGeometry");
+	const char *errgeom=environ::GetProfile("ErrorDialogGeometry");
 	if(errgeom==NULL) errgeom="400x300+1+1";
 	im::SetGeometrySpec(errgeom);
 	errim=im::Create(NULL);
@@ -379,21 +380,7 @@ static char *SepLine = "\n\n----------------------------------------\n\n";
 
 void WriteOutUserEnvironment(FILE  *fp, Boolean  IsAboutMessages)
 {
-    char *adir, *ldir;
-/* The following array parallels that in andrew/overhead/util/lib/config.c, and is not referenced globally due to glitches in dynamic loading (cfe, 12 Jul 1989). */
-    static char *local_ConfigNames[] = {
-	"/AndrewSetup",
-	"/etc/AndrewSetup",
-#ifdef LOCAL_ANDREW_SETUP_ENV
-	LOCAL_ANDREW_SETUP_ENV ,
-#endif /* LOCAL_ANDREW_SETUP_ENV */
-	"/usr/vice/etc/AndrewSetup",
-/* Include a name based on DEFAULT_ANDREWDIR_ENV */
-	QUOTED_DEFAULT_ANDREWDIR_ANDREWSETUP,
-	"/usr/andrew/etc/AndrewSetup",
-	NULL
-};
-    extern int conf_ConfigUsed, conf_ConfigErrno;
+    const char *adir, *ldir;
     struct CellAuth *ca;
     int i, RC;
     time_t t;
@@ -464,7 +451,7 @@ void WriteOutUserEnvironment(FILE  *fp, Boolean  IsAboutMessages)
     }
     DescribeLink(fp, "/usr/andrew");
     DescribeLink(fp, "/usr/andy");
-    ldir = (char *)LocalDir(NULL);
+    ldir = LocalDir(NULL);
     fprintf(fp, "This program is configured with LOCALDIR %s\n", ldir ? ldir : "<NULL>");
     if (ldir && strcmp(ldir, "/usr/local")) {
 	DescribeLink(fp, ldir);
@@ -472,12 +459,12 @@ void WriteOutUserEnvironment(FILE  *fp, Boolean  IsAboutMessages)
     DescribeLink(fp, "/usr/local");
     fputs(SepLine, fp);
 
-    for (i=0; local_ConfigNames[i] != NULL; ++i) {
-	if (SnarfFile(fp, local_ConfigNames[i]) == 0) break;
+    for (i=0; conf_ConfigNames[i] != NULL; ++i) {
+	if (SnarfFile(fp, conf_ConfigNames[i]) == 0) break;
     }
     if (conf_ConfigUsed >= 0) {
-	if (conf_ConfigUsed < ((sizeof(local_ConfigNames) / sizeof(local_ConfigNames[0]))-1)) {
-	    fprintf(fp, "The AndrewSetup file used may have been [%d] %s\n", conf_ConfigUsed, local_ConfigNames[conf_ConfigUsed]);
+	if (conf_ConfigUsed < conf_NumConfigNames) {
+	    fprintf(fp, "The AndrewSetup file used may have been [%d] %s\n", conf_ConfigUsed, conf_ConfigNames[conf_ConfigUsed]);
 	} else {
 	    fprintf(fp, "Probably no AndrewSetup file was found; last index %d, errno %d\n", conf_ConfigUsed, conf_ConfigErrno);
 	}
@@ -516,7 +503,7 @@ void WriteOutUserEnvironment(FILE  *fp, Boolean  IsAboutMessages)
     }
 }
 
-static void DescribeLink(FILE  *fp, char  *name)
+static void DescribeLink(FILE  *fp, const char  *name)
 {
     struct stat stbuf;
     char Buffer[1+MAXPATHLEN];
@@ -555,7 +542,7 @@ static void DescribeLink(FILE  *fp, char  *name)
     }
 }
 
-static int SnarfFile(FILE  *fp, char  *fname)
+static int SnarfFile(FILE  *fp, const char  *fname)
 {
     struct stat stbuf;
     char LineBuf[1000], Buf[1+MAXPATHLEN];
@@ -679,19 +666,22 @@ message server.  Having it exist twice is wasteful in standalone messages
 (messagesn), but we don't want it to have to compile as part of the cui on
 PC's, either. */
 
-int TildeResolve(char  *old , char  *new_c)
+int TildeResolve(const char  *old , char  *new_c)
 {
 	static char *MyHomeDir = NULL, *udir;
 	struct passwd *pw;
 	char *t, user[100]; /* User names should be < 100 chars ? */
+	int olen;
 
 	debug(1, ("TildeResolve %s\n", old));
-	old = amsutil::StripWhiteEnds(old);
+	
+	old = amsutil::StripWhiteEnds(old, &olen);
 	if (*old != '~') {
-	    strcpy(new_c, old);
+	    strncpy(new_c, old, olen);
+	    new_c[olen] = 0;
 	} else {
 	    *new_c = '\0';
-	    if (*++old == '/' || ! *old) {
+	    if (*++old == '/' || ! --olen) {
 		if (!MyHomeDir) {
 		    pw = getcpwnam((ams::GetAMS())->CUI_WhoIAm(), (ams::GetAMS())->CUI_MailDomain());
 		    if (!pw) return(-1);
@@ -699,20 +689,20 @@ int TildeResolve(char  *old , char  *new_c)
 		    if (!MyHomeDir) return(-2);
 		    strcpy(MyHomeDir, pw->pw_dir);
 		}
-		if (*old) {
-		    sprintf(new_c, "%s/%s", MyHomeDir, ++old);
+		if (olen) {
+		    sprintf(new_c, "%s/%.*s", MyHomeDir, --olen, ++old);
 		} else {
 		    strcpy(new_c, MyHomeDir);
 		}
 	    } else {
-		for (t=user; *old && *old != '/'; ++old, ++t) {
+		for (t=user; olen && *old != '/'; ++old, --olen, ++t) {
 		    *t = *old;
 		}
 		*t = '\0';
-		if (*old) ++old;
+		if (olen){ ++old; --olen; }
 		udir = FindUserDir(user, (ams::GetAMS())->CUI_MailDomain());
 		if (udir == (char *) 0 || udir == (char *) -1) return(-3);
-		sprintf(new_c, "%s/%s", udir, old);
+		sprintf(new_c, "%s/%.*s", udir, olen, old);
 	    }
 	}
 	return(0);

@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/suite/RCS/suiteev.C,v 1.11 1996/03/18 23:10:42 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/suite/RCS/suiteev.C,v 1.11 1996/03/18 23:10:42 robr Stab74 $";
 #endif
 
 
@@ -58,7 +60,6 @@ END-SPECIFICATION  ************************************************************/
 
 
 
-#include <andrewos.h>
 ATK_IMPL("suiteev.H")
 #include <ctype.h>
 #include <graphic.H>

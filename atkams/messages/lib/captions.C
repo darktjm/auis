@@ -25,15 +25,16 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/captions.C,v 1.11 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/captions.C,v 1.11 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h> /* sys/file.h */
 #include <textview.H>
 #include <cui.h>
 #include <fdphack.h>
@@ -360,7 +361,7 @@ char * captions::GetInterface(char  *interfaceName)
 class view *captions::GetApplicationLayer()
     {
     long scrollpos=scroll_LEFT;
-    char *pos=environ::GetProfile("ScrollbarPosition");
+    const char *pos=environ::GetProfile("ScrollbarPosition");
     class scroll *s;
     this->hasApplicationLayer = TRUE;
 
@@ -1446,7 +1447,7 @@ captions::captions()
 {
 	ATKinit;
 
-    char *fontname;
+    const char *fontname;
     int fontsize, mailfontbloat = (amsutil::GetOptBit(EXP_WHITESPACE)) ? 2 : 0;
 
     rawText=FALSE;

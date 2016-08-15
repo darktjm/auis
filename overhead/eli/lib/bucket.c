@@ -25,12 +25,13 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/bucket.c,v 2.8 1993/06/30 21:59:00 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/bucket.c,v 2.8 1993/06/30 21:59:00 rr2b Stab74 $";
 #endif
 
-#include <andrewos.h>
 #include  <bucket.h>
 
 /* Initialize a bucket */

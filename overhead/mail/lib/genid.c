@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/time.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/genid.c,v 2.21 1993/10/07 17:46:41 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/genid.c,v 2.21 1993/10/07 17:46:41 rr2b Stab74 $";
 #endif
 
 /*
@@ -50,7 +52,6 @@ Includes old routines from
 
 #include <mailconf.h>
 #include <ctype.h>
-#include <andrewos.h> /* sys/time.h */
 #include <netinet/in.h>	/* Get the definition for ntohl. */
 
 static char Basis[65] =

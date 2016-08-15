@@ -25,15 +25,16 @@
  *  $
 */
 
+#include <andrewos.h>		/* sys/time.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/topen.c,v 2.26 1994/10/10 19:35:00 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/topen.c,v 2.26 1994/10/10 19:35:00 rr2b Stab74 $";
 #endif
 
 
- 
+#include <util.h> 
 
-#include <andrewos.h>		/* sys/time.h */
 #include <stdio.h>
 #include <signal.h>
 #include <errno.h>
@@ -61,12 +62,10 @@ static SignalReturnType (*oldfunc)();
 #endif
 
 
-FILE *topen(name, argv, mode, pgrp)
-char *name, *argv[], *mode;
-int *pgrp;
+FILE *topen(const char *name, char * const argv[], const char *mode, int *pgrp)
 {
     int p[2];
-    register myside, hisside;
+    register int myside, hisside;
 
     if (popen_pid == NULL) {
 	dtablesize = FDTABLESIZE();
@@ -83,7 +82,7 @@ int *pgrp;
     myside = tst(p[WTR], p[RDR]);
     hisside = tst(p[RDR], p[WTR]);
     if((*pgrp = osi_vfork()) == 0) {
-	int pid, fd;
+	int fd;
 	/* myside and hisside reverse roles in child */
 	sigchild();
 	NEWPGRP();
@@ -113,11 +112,9 @@ lclalarm()
     longjmp(env, 1);
 }
 
-int tclose(ptr, seconds, timedout)
-FILE *ptr;
-int seconds, *timedout;
+int tclose(FILE *ptr, int seconds, int *timedout)
 {
-    register f, r;
+    register int f, r;
     int status;
     SIGSET_TYPE omask, nmask;
     struct itimerval val;
@@ -184,22 +181,14 @@ int seconds, *timedout;
     return status;
 }
 
-FILE *qopen(name, argv, mode)
-char *name, *argv[], *mode;
+FILE *qopen(const char *name, char * const argv[], const char *mode)
 {
     int dummy;
 
     return topen(name, argv, mode, &dummy);
 }
 
-int qclose(ptr)
-FILE *ptr;
+int qclose(FILE *ptr)
 {
     return tclose(ptr, 0, 0);
-}
-
-int getpidfromfp(ptr)
-FILE *ptr;
-{
-    return(popen_pid[fileno(ptr)]);
 }

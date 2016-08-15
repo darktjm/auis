@@ -78,8 +78,8 @@ class text: public  simpletext {
     virtual class style * GetGlobalStyle()  ;
     virtual long ReadTemplate(char *templateName, boolean inserttemplatetext)  ;
     virtual class viewref * FindViewreference(long pos, long len)  ;
-    virtual long AlwaysInsertFile(FILE * file,char *filename, long position)  ;
-    virtual long InsertFile(FILE * file,char *filename, long position)  ;
+    virtual long AlwaysInsertFile(FILE * file,const char *filename, long position)  ;
+    virtual long InsertFile(FILE * file,const char *filename, long position)  ;
     virtual void ClearCompletely();
     virtual class environment * EnumerateEnvironments(long pos,long len,text_eefptr callBack,long rock)  ;
     virtual void SetBaseTemplateName(char *name);

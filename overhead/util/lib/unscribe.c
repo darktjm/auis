@@ -24,9 +24,11 @@
  *  $
 */
 
+#include <andrewos.h> /* strings.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/unscribe.c,v 1.13 1996/06/24 15:12:06 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/unscribe.c,v 1.13 1996/06/24 15:12:06 wjh Exp $";
 #endif
 
 /*
@@ -42,7 +44,6 @@ version of the datastream interpretation.
 */
 
 #include <stdio.h>
-#include <andrewos.h> /* strings.h */
 #include <ctype.h>
 #include <util.h>
 #include <unscribe.h>
@@ -94,14 +95,15 @@ version of the datastream interpretation.
 #define PLAIN_SAME INDENT_NOCHANGE, 0, JUSTIFY_NOCHANGE
 
 /* This macro exists to avoid a function call on every character */
-#define ADDCHAR(State, fp, chr) \
+#define ADDCHAR(State, fp, chr) do {\
     if ((State)->lmargin + SLEN(&(State)->linefrag) \
 	+ (State)->specials > (State)->rmargin) \
 		WriteCount += WriteFrag((State), (fp), (chr)); \
     else { \
 	if (SLEN(&(State)->linefrag) == 0) StartFrag(State); \
 	SCHAPP(&(State)->linefrag, (chr)); \
-    }
+    } \
+} while(0)
 
 
 struct StateVector {
@@ -117,8 +119,8 @@ struct StateVector {
 };
 
 struct styletable {
-    char *name;
-    long hash;
+    const char *name;
+    long hash; /* initialized by Init */
     struct StateVector vec;
 } Styles[] =
 {
@@ -171,16 +173,16 @@ struct styletable {
 
 /* Inset table - how to treat insets  */
 
-static void DummyInit(), gofigInit();
-static char *(DummyRcvr()), *(gofigRcvr());
+static void DummyInit(struct ScribeState *state), gofigInit(struct ScribeState *state);
+static const char *DummyRcvr(struct ScribeState *state, char ch), *gofigRcvr(struct ScribeState *state, char ch);
 
 struct InsetS {
-	char *dobjname;
-	void (*dobjinit)();
-	char *((*dobjrcvr)());
+	const char *dobjname;
+	void (*dobjinit)(struct ScribeState *);
+	const char *((*dobjrcvr)(struct ScribeState *, char));
 };
 
-struct InsetS InsetTable[] = {
+static const struct InsetS InsetTable[] = {
 	{"gofig", gofigInit, gofigRcvr},
 	{NULL, DummyInit, DummyRcvr}
 };
@@ -204,7 +206,7 @@ struct InsetS InsetTable[] = {
 
 /* append a string to a struct USString */
 #define SAPPEND(sptr, text)  \
-	{register char c, *tp = (text); while (c = *(tp)++) SCHAPP((sptr), c);}
+	{register char c; const char *tp = (text); while ((c = *(tp)++)) SCHAPP((sptr), c);}
 
 /* SCHAPP appends a character to a struct USString */
 #define SCHAPP(sptr, ch) {  \
@@ -216,16 +218,14 @@ struct InsetS InsetTable[] = {
 /*  append a character to a struct USString
 */
 	static void
-schappend(sptr, ch)
-	struct USString *sptr;
-	char ch;
+schappend(struct USString *sptr, char ch)
 {
 	if ( ! sptr->s) {
-		sptr->s = (char *)malloc(sptr->avail += 100);
+		sptr->s = malloc(sptr->avail += 100);
 		sptr->used = 0;
 	}
 	else if (sptr->used >= sptr->avail) 
-		sptr->s = (char *)realloc(sptr->s, sptr->avail += 200);
+		sptr->s = realloc(sptr->s, sptr->avail += 200);
 	if ( ! sptr->s) {   /* alloc failed */
 		SINIT(sptr);   /* BOGUS xxx */
 		fprintf(stderr, "malloc failed in unscribe.c\n");
@@ -239,11 +239,10 @@ schappend(sptr, ch)
 	or -1 if there's no match. 
 */
 	static int 
-usVersion(val)
-	char *val;
+usVersion(const char *val)
 {
     int numVal;
-    char *Src;
+    const char *Src;
 
     while (*val != '\0' && strchr(" \t\r\n", *val) != NULL) ++val;
     if (ULstrcmp(val, "Yes") == 0) {
@@ -266,15 +265,14 @@ usVersion(val)
 }
 
 	static long
-hash(str)
-	char *str;
+hash(const char *str)
 {
     unsigned long h = 0;
     unsigned long g;
 
     for ( ; *str; str++) {
 	h = (h << 4) + *str;
-	if (g = h & 0xf0000000) {
+	if ((g = h & 0xf0000000)) {
 	    h = h ^ (g >> 24);
 	    h = h ^ g;
 	}
@@ -282,11 +280,10 @@ hash(str)
     return h;
 }
 
-	static struct styletable *
-findstyle(str)
-	char *str;
+	static const struct styletable *
+findstyle(const char *str)
 {
-    struct styletable *stp;
+    const struct styletable *stp;
     long strhash;
 
     strhash = hash(str);
@@ -311,17 +308,14 @@ left brace '{' after \enddata. */
 
 /* initialize dummy rcvr */
 	static void
-DummyInit(state) 
-	struct ScribeState *state;
+DummyInit(struct ScribeState *state)
 {
 	state->rcvrstate = RcvrInitial;
 }
 
 /* dummy rcvr - just discard chars (and keep track of nesting) */
-	static char *
-DummyRcvr(state, ch)
-	struct ScribeState *state;
-	char ch;
+	static const char *
+DummyRcvr(struct ScribeState *state, char ch)
 {
 	switch(state->rcvrstate) {
 	case RcvrInitial:
@@ -392,11 +386,9 @@ struct gofigS {
 		either Xat or Oat, depending on what color stone is needed.
 		The entry is a character if 126 or less, and is 128+i
 		for the integer i. */
-}
+};
 
-gofigAppendMark(str, entry)
-	struct USString *str;
-	int entry;
+static void gofigAppendMark(struct USString *str, int entry)
 {
 	if (entry & 0x80) {
 		char buf[5];
@@ -409,9 +401,8 @@ gofigAppendMark(str, entry)
 
 /* free up storage malloc'ed for this data object scan
 */
-	static char *
-gofigFree(state)
-	struct ScribeState *state;
+	static void
+gofigFree(struct ScribeState *state)
 {
 	struct gofigS *gd = (struct gofigS *)state->objdata;
 	SFREE(&gd->Oat);
@@ -422,8 +413,7 @@ gofigFree(state)
 /* enter error state
 */
 	static char *
-gofigError(state)
-	struct ScribeState *state;
+gofigError(struct ScribeState *state)
 {
 	state->rcvrstate = RcvrError;
 	SCLEAR(&state->tempbuf);
@@ -431,8 +421,7 @@ gofigError(state)
 }
 
 	static void
-gofigInit(state) 
-	struct ScribeState *state;
+gofigInit(struct ScribeState *state)
 {
 	struct gofigS *gd = (struct gofigS *)malloc(sizeof (struct gofigS));
 	SINIT(&gd->Xat);
@@ -443,10 +432,8 @@ gofigInit(state)
 	state->rcvrstate = RcvrInitial;
 }
 
-	static char *
-gofigRcvr(state, ch)
-	struct ScribeState *state;
-	char ch;
+	static const char *
+gofigRcvr(struct ScribeState *state, char ch)
 {
 	int v, w, h, p, e,   r, c, inx;
 	char piece, mark;
@@ -622,9 +609,7 @@ gofigRcvr(state, ch)
 	calls.  This variable will be initialized with the UnScribeInit call.
  */
 	int 
-UnScribeInit(fieldvalue, refstate)
-	char *fieldvalue;
-	struct ScribeState **refstate;
+UnScribeInit(const char *fieldvalue, struct ScribeState **refstate)
 {
    
     int Vers;
@@ -685,8 +670,7 @@ UnScribeInit(fieldvalue, refstate)
 
 
 	static void
-StartFrag(State)
-	struct ScribeState *State;
+StartFrag(struct ScribeState *State)
 {
 #ifdef SPECIALFACES
     int oldfaces;
@@ -722,10 +706,7 @@ StartFrag(State)
 
 
 	static int
-WriteFrag(State, fPtr, Chr)
-	struct ScribeState *State;
-	FILE *fPtr;
-	char Chr;
+WriteFrag(struct ScribeState *State, FILE *fPtr, char Chr)
 {
     int	NumWritten = 1;	/* at least a NewLine */
     char *tail, *frag;
@@ -839,11 +820,9 @@ WriteFrag(State, fPtr, Chr)
 
 
 	static int
-HandleKeyword(State, fPtr)
-	struct ScribeState *State;
-	FILE *fPtr;
+HandleKeyword(struct ScribeState *State, FILE *fPtr)
 {
-    struct styletable *style;
+    const struct styletable *style;
     short index = -1;
     struct StateVector *vec;
     int WriteCount = 0;
@@ -935,9 +914,7 @@ HandleKeyword(State, fPtr)
 }
 
 static int
-HandleClose(State, fPtr)
-struct ScribeState *State;
-FILE *fPtr;
+HandleClose(struct ScribeState *State, FILE *fPtr)
 {
     struct StateVector *temp;
     int WriteCount = 0;
@@ -992,18 +969,14 @@ FILE *fPtr;
 	procedure.
 */
 	int 
-UnScribe(code, refstate, text, textlen, fileptr)
-	int code, textlen;
-	struct ScribeState **refstate;
-	char *text;
-	FILE *fileptr;
+UnScribe(int code, struct ScribeState **refstate, const char *text, int textlen, FILE *fileptr)
 {
    
     register int Char;
     struct ScribeState *MyState;
     int	ReadCount;
     int WriteCount;
-    char *Src;
+    const char *Src;
 
     MyState = *refstate;
     ReadCount = textlen;
@@ -1249,10 +1222,11 @@ case v10StateBSview:
 
 		/* xxx utilize dataobject from cache */
 
-		char *c, *d;
+		char *_c;
+		const char *c, *d;
 		
-		for (c = STEXT(&MyState->tempbuf); *c && *c != ','; c++) {}
-		*c = '\0';
+		for (_c = STEXT(&MyState->tempbuf); *_c && *_c != ','; _c++) {}
+		*_c = '\0';
 		c = STEXT(&MyState->tempbuf);
 		if (!strcmp(c, "bpv")) {
 			ADDCHAR(MyState, fileptr, '\f');
@@ -1351,7 +1325,7 @@ case v10StateBeginData:
 	*/
 	if (Char == '}') {
 		char *s = STEXT(&MyState->tempbuf);	/* dobj class */
-		struct InsetS *insetentry = InsetTable;
+		const struct InsetS *insetentry = InsetTable;
 		while (insetentry->dobjname != NULL 
 				&& strcmp(s, insetentry->dobjname) != 0)
 			insetentry++;
@@ -1381,7 +1355,7 @@ case v10StateDataObj: {
 		MyState->keyword has text of integer under which
 		to store the returned string.
 	*/
-		char *s = MyState->dobjrcvr(MyState, Char);
+		const char *s = MyState->dobjrcvr(MyState, Char);
 		int prefix = SLEN(&MyState->linefrag);
 
 		if ( ! s) break;
@@ -1407,7 +1381,7 @@ case v10StateDataObj: {
 				ADDCHAR(MyState, fileptr, *s); 
 			s++; 
 		}
-		free(s);
+		/* free(s); */ /* BAD IDEA (middle of string; may not be malloc'd */
 		break;
 	} break;
 
@@ -1431,10 +1405,7 @@ default:
 /* Unbuffer data from an UnScribe sequence.  Return just like fflush(). 
 */
 	int 
-UnScribeFlush(code, refstate, fileptr)
-	int code;
-	struct ScribeState **refstate;
-	FILE *fileptr;
+UnScribeFlush(int code, struct ScribeState **refstate, 	FILE *fileptr)
 {
     int Res = 0;
 
@@ -1466,9 +1437,7 @@ UnScribeFlush(code, refstate, fileptr)
 /* Close off the UnScribeInit state without needing a valid file to send to. 
 */
 	int 
-UnScribeAbort(code, refstate)
-	int code;
-	struct ScribeState **refstate;
+UnScribeAbort(int code, struct ScribeState **refstate)
 {
 
     if (refstate != NULL) {
@@ -1494,13 +1463,10 @@ UnScribeAbort(code, refstate)
 /* return the number of characters written, or negative error value 
 */
 	int 
-PrintMaybeFoldQuotingFormatting(fp, text, format, len, DoFold)
-	FILE *fp;
-	char *text, *format;
-	int len, DoFold;
+PrintMaybeFoldQuotingFormatting(FILE *fp, const char *text, const char *format, int len, int DoFold)
 { 
     int whichformat;
-    register char *s;
+    register const char *s;
     int numWritten, WasNL, Buffered, Column, CurrentLineMax;
     char *newNL, oldC, BreakCode;
     char LineBuf[2*MAXLONGLINE + 10], *LBP;
@@ -1607,10 +1573,7 @@ PrintMaybeFoldQuotingFormatting(fp, text, format, len, DoFold)
 /* return the number of characters written, or negative error value 
 */
 	int 
-PrintQuotingFormatting(fp, text, format, len)
-	FILE *fp;
-	char *text, *format;
-	int len;
+PrintQuotingFormatting(FILE *fp, const char *text, const char *format, int len)
 { 
     return PrintMaybeFoldQuotingFormatting(fp, text, format, len, 0);
 }
@@ -1619,9 +1582,7 @@ PrintQuotingFormatting(fp, text, format, len)
 
 #ifdef TESTINGONLYTESTING
 	int
-main(argc, argv)
-	int argc;
-	char *argv[];
+main(int argc, char *argv[])
 {
   int version, err, outcode;
   char buf[500];

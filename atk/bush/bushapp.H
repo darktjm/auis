@@ -67,7 +67,7 @@ public:
     
 	virtual ~bushapp();
   
-     boolean ParseArgs( int argc, char **argv )  ;
+     boolean ParseArgs( int argc, const char **argv )  ;
      boolean Start()  ;
   
     class im	    *imp;
@@ -75,7 +75,7 @@ public:
     class bush	    *bushp;
     class bushv    *bushview;
     int		     argc;
-    char	   **argv;
+    const char	   **argv;
     int		     debug;
 };
 

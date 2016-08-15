@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>		/* strings.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/newstr.c,v 2.9 1993/02/12 21:23:32 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/newstr.c,v 2.9 1993/02/12 21:23:32 rr2b Stab74 $";
 #endif
 
 /*
@@ -35,12 +37,9 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 */
 
 
- 
+#include <util.h> 
 
-#include <andrewos.h>		/* strings.h */
-
-char *NewString(srcptr)
-char *srcptr;
+char *NewString(const char *srcptr)
 {
     /* Allocate a buffer long enough to hold the argument string, copy the string to that buffer, and return the pointer to the new buffer. */
     char *NewP;

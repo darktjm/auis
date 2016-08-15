@@ -25,15 +25,16 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/runadewapp.C,v 1.5 1994/12/06 21:54:28 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/runadewapp.C,v 1.5 1994/12/06 21:54:28 rr2b Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("runadewapp.H")
 
 #include <andyenv.h>
@@ -51,7 +52,7 @@ ATK_IMPL("runadewapp.H")
 #include <runadewapp.H>
 
 
-static char **Gargv;
+static const char **Gargv;
 static int Gargc;
 
 
@@ -59,8 +60,8 @@ ATKdefineRegistry(runadewapp, application, runadewapp::InitializeClass);
 #ifndef NORCSID
 #endif
 static void StartupError( char  *string);
-static void addFile(class runadewapp  *self,char  *name,boolean  newWin,boolean  ro);
-static char *getarg(char  **argv,int  *argc);
+static void addFile(class runadewapp  *self,const char  *name,boolean  newWin,boolean  ro);
+static const char *getarg(const char  **argv,int  *argc);
 
 
 runadewapp::runadewapp()
@@ -91,7 +92,7 @@ static void StartupError( char  *string)
 }
 
 
-static void addFile(class runadewapp  *self,char  *name,boolean  newWin,boolean  ro)
+static void addFile(class runadewapp  *self,const char  *name,boolean  newWin,boolean  ro)
 {
     struct runadewapp_fileList *fileEntry=
       (struct runadewapp_fileList *) malloc(sizeof(struct runadewapp_fileList));
@@ -103,10 +104,10 @@ static void addFile(class runadewapp  *self,char  *name,boolean  newWin,boolean 
     *self->fileLink=fileEntry;
     self->fileLink=(&(fileEntry->next));
 }
-static char *getarg(char  **argv,int  *argc)
+static const char *getarg(const char  **argv,int  *argc)
 {
     int cnt;
-    char *opt;
+    const char *opt;
     if(argv[0][2] == '\0'){
 	opt = argv[1];
 	cnt = 2;
@@ -119,7 +120,7 @@ static char *getarg(char  **argv,int  *argc)
     *argc -= cnt;
     return opt;
 }
-boolean runadewapp::ParseArgs(int  argc,char  **argv)
+boolean runadewapp::ParseArgs(int  argc,const char  **argv)
 {
     int maxInitWindows=environ::GetProfileInt("MaxInitWindows", 2);
     boolean useNewWindow = FALSE;
@@ -253,7 +254,7 @@ boolean runadewapp::InitializeClass()
     Gargc = 0;
     return TRUE;
 }
-char **runadewapp::GetArguments(int  *argc)
+const char **runadewapp::GetArguments(int  *argc)
 {
 	ATKinit;
 

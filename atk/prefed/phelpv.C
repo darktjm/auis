@@ -22,11 +22,12 @@
 
 /* $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/phelpv.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $ */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
-static char *rcsid_phelpv_c = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/phelpv.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char *rcsid_phelpv_c = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/phelpv.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif 
 
-#include <andrewos.h>
 ATK_IMPL("phelpv.H")
 
 

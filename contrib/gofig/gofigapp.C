@@ -106,7 +106,7 @@ show_usage(gofigapp  *self)
 
 
 	boolean 
-gofigapp::ParseArgs(int  argc, char  **argv)
+gofigapp::ParseArgs(int  argc, const char  **argv)
 			{
 	char *name;
 

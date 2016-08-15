@@ -61,8 +61,8 @@ public:
     
 	virtual class view * EnumerateViews(buffer_evfptr mapFunction, long functionData)  ; /* ??? */
         virtual void SetData(class dataobject *data);
-        virtual void SetName(char *name);
-        virtual void SetFilename(char *fileName);
+        virtual void SetName(const char *name);
+        virtual void SetFilename(const char *fileName);
         virtual void SetWriteVersion(long version);
         virtual void SetCkpVersion(long version);
         virtual void SetCkpClock(long clock);
@@ -71,7 +71,7 @@ public:
         virtual class view * GetView(class view **inputFocus, class view **targetView, char *ViewName)  ;
         virtual boolean Visible()  ;
         virtual void RemoveView(class view *unusedView);
-        virtual int ReadFile(char *filename)  ;
+        virtual int ReadFile(const char *filename)  ;
         virtual int WriteToFile(char *filename, long flags)  ;
         /* Disk file date may differ from GetTouchDate if file is modified externally. */
         virtual long GetFileDate()  ;
@@ -102,7 +102,7 @@ public:
         inline boolean GetIsRawFile() { return (this->isRawFile); }
     
 	static class buffer * Enumerate(bufferlist_efptr mapFunction, long functionData)  ;
-	static class buffer * Create(char *bufferName, char *fileName, char *objetName, class dataobject *data)  ;
+	static class buffer * Create(const char *bufferName, const char *fileName, const char *objetName, class dataobject *data)  ;
 	static class bufferlist * GetGlobalBufferList()  ;
 
         
@@ -110,19 +110,19 @@ public:
 
 	
 /* Lookup functions */
-        static class buffer * FindBufferByName(char *bufferName)  ;
-        static class buffer * FindBufferByFile(char *filename)  ;
+        static class buffer * FindBufferByName(const char *bufferName)  ;
+        static class buffer * FindBufferByFile(const char *filename)  ;
         static class buffer * FindBufferByData(class dataobject *data)  ;
 
 /* File functions. */
-        static class buffer * GetBufferOnFile(char *filename, long flags)  ;
+        static class buffer * GetBufferOnFile(const char *filename, long flags)  ;
         static void GuessBufferName( char *filename, char *bufferName, int nameSize);
         static void GetUniqueBufferName(char *proposedBufferName, char *bufferName, int nameSize);
         
 	virtual ~buffer();
         
 	buffer();
-        static void SetDefaultObject(char *objectname);
+        static void SetDefaultObject(const char *objectname);
 
     
         class dataobject *bufferData; /* The dataobject associated with this buffer. Can't be NULL.*/

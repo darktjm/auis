@@ -25,16 +25,17 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/buttonV.C,v 1.7 1995/05/04 14:54:09 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/buttonV.C,v 1.7 1995/05/04 14:54:09 rr2b Stab74 $";
 #endif
 
 
  
 
 
-#include <andrewos.h>
 ATK_IMPL("buttonV.H")
 #include <buttonV.H>
 #include <fontdesc.H>

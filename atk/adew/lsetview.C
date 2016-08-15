@@ -25,16 +25,17 @@
 //  $
 */
 
+#include <andrewos.h> /* strings.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/lsetview.C,v 1.8 1994/12/06 21:54:28 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/lsetview.C,v 1.8 1994/12/06 21:54:28 rr2b Stab74 $";
 #endif
 
 
  
 
 
-#include <andrewos.h> /* strings.h */
 ATK_IMPL("lsetview.H")
 #include <lsetview.H>
 #include <lset.H>
@@ -406,7 +407,7 @@ int lsetview_ReadView(class lsetview  *self)
     fclose(thisFile);
     return 0;
 }
-void lsetview::ReadFile(FILE  *thisFile,char  *iname)
+void lsetview::ReadFile(FILE  *thisFile,const char  *iname)
 {
     long objectID;
     char *objectName;

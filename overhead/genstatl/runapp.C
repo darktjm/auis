@@ -288,7 +288,7 @@ main(int  argc,char  **argv)
  
       /* From now on, it's assumed that applications will print their own error messages */
 
-    if((app)->ParseArgs(argc,argv)){
+    if((app)->ParseArgs(argc,(const char **)argv)){
 	if((app)->GetPrintVersionFlag() == TRUE){
 	    (app)->PrintVersionNumber();
 	}

@@ -25,13 +25,14 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/menubar.C,v 3.11 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/menubar.C,v 3.11 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
-#include <andrewos.h>
 #include <stdio.h>
 #include <X11/Xos.h>
 #include <X11/X.h>
@@ -107,11 +108,11 @@ static int getdefaultbool(Display  *dpy, char  *pname, int  def);
 static int CountGroups(struct tmenu  *lm);
 static void ClearMenu(struct menubar  *mb,struct tmenu  *m);
 static void DestroyMenu(struct menubar  *mb,struct tmenu  *m);
-static struct tmenu *FindMenu(struct menubar  *mb,char  *title);
-static struct titem *FindItem(struct tmenu  *t,char  *name);
+static struct tmenu *FindMenu(struct menubar  *mb,const char *title);
+static struct titem *FindItem(struct tmenu  *t,const char  *name);
 static void UpdateGeometry(struct menubar  *mb);
-static struct tmenu *CreateMenu(struct menubar  *mb,char  *title,int  prio);
-static struct titem *AddItem(struct menubar  *mb,struct tmenu  *t,char  *item,int  prio,int  submenu,char  *data);
+static struct tmenu *CreateMenu(struct menubar  *mb,const char *title,int  prio);
+static struct titem *AddItem(struct menubar  *mb,struct tmenu  *t,const char *item,int  prio,int  submenu,char  *data);
 static int mcomp(struct tmenu  **a,struct tmenu  **b);
 static void SelectRegion(struct menubar  *mb,Window  win,struct gcs  *gcs,int  x,int  y,int  w,int  h);
 static void UnSelectRegion(struct menubar  *mb, Window  win, struct gcs  *gcs, int  x , int  y , int  w , int  h);
@@ -248,7 +249,7 @@ static void DestroyMenu(struct menubar  *mb,struct tmenu  *m)
 }
 
 /* FindMenu: return a pointer to the menu card named by title or NULL if no such card exists. */
-static struct tmenu *FindMenu(struct menubar  *mb,char  *title)
+static struct tmenu *FindMenu(struct menubar  *mb,const char *title)
 {
     struct tmenu **t=mb->menus;
     int i;
@@ -259,7 +260,7 @@ static struct tmenu *FindMenu(struct menubar  *mb,char  *title)
 }
 
 /* FindItem: return a pointer to the menu item named by name or NULL if no such item exists. */
-static struct titem *FindItem(struct tmenu  *t,char  *name)
+static struct titem *FindItem(struct tmenu  *t,const char  *name)
 {
     struct titem *w=t->items;
     while(w && strcmp(w->name,name)) w=w->next;
@@ -276,7 +277,7 @@ static void UpdateGeometry(struct menubar  *mb)
 }
 
 /* CreateMenu: internal function to create a menu card, with a given name and priority. */
-static struct tmenu *CreateMenu(struct menubar  *mb,char  *title,int  prio)
+static struct tmenu *CreateMenu(struct menubar  *mb,const char *title,int  prio)
 {
     struct tmenu *t=(struct tmenu *)malloc(sizeof(struct tmenu));
     if(!t) return NULL;
@@ -307,7 +308,7 @@ static struct tmenu *CreateMenu(struct menubar  *mb,char  *title,int  prio)
 }
 
 /* AddItem: an internal routine which adds an item to a menu card given a pointer to the menu card, doesn't do much sanity checking of the input as that should be done elsewhere. */
-static struct titem *AddItem(struct menubar  *mb,struct tmenu  *t,char  *item,int  prio,int  submenu,char  *data)
+static struct titem *AddItem(struct menubar  *mb,struct tmenu  *t,const char *item,int  prio,int  submenu,char  *data)
 {
     struct titem *i;
     struct titem *w=t->items;
@@ -365,7 +366,7 @@ static struct titem *AddItem(struct menubar  *mb,struct tmenu  *t,char  *item,in
     return i;
 }
 
-void mb_SetKeys(struct menubar  *mb, char  *title, char  *item, char  *keys)
+void mb_SetKeys(struct menubar  *mb, const char *title, const char *item, char  *keys)
 {
     struct tmenu *t=FindMenu(mb, title);
     struct titem *i=t?FindItem(t, item):NULL;
@@ -384,7 +385,7 @@ void mb_SetKeys(struct menubar  *mb, char  *title, char  *item, char  *keys)
     
 
 /* mb_AddSelection: add a new menu choice.  title is the name of the menu card it should appear on, tprio is the priority of this menu card or -1 if it shouldn't be modified.  item is the name of the menu itemm iprio is the priority of the item or -1 if it's priority shouldn't be modified, submenu indicates whether or not this item is another menu which will cascade off the top-level menu card when activated, data is to be supplied to the menubar's function when this item is choosen or a pointer to the menu card if this is a submenu. */
-void mb_AddSelection(struct menubar  *mb,char  *title ,int  tprio,char  *item,int  iprio,int  submenu,char  *data)
+void mb_AddSelection(struct menubar  *mb,const char *title ,int  tprio,const char *item,int  iprio,int  submenu,char  *data)
 {
      struct tmenu *t=FindMenu(mb,title);
 
@@ -408,7 +409,7 @@ void mb_AddSelection(struct menubar  *mb,char  *title ,int  tprio,char  *item,in
 }
 
 /* mb_SetItemStatus: indicate whether or not a menu item is active. */
-void mb_SetItemStatus(struct menubar  *mb,char  *title,char  *item,int  status)
+void mb_SetItemStatus(struct menubar  *mb,const char *title,const char *item,int  status)
 {
     struct tmenu *m;
     struct titem *t;
@@ -426,7 +427,7 @@ void mb_SetItemStatus(struct menubar  *mb,char  *title,char  *item,int  status)
 
 
 /* mb_DeleteSelection: remove item from the card named title, returning the data associated with the item. */
-void mb_DeleteSelection(struct menubar  *mb,char  *title,char  *item)
+void mb_DeleteSelection(struct menubar  *mb,const char *title,const char *item)
 {
     struct tmenu *t=FindMenu(mb,title);
     register struct titem *n,*n2;
@@ -1891,7 +1892,7 @@ void mb_Destroy(struct menubar  *mb)
 }
 
 /* mb_Create: Construct a new menubar with a given maintitle, moretitle and item function.  The function func will be called as func(mb, itemdata, mbdata) when a menu item is choosen. */
-struct menubar *mb_Create(struct mbinit  *mbi, char  *maintitle , char  *moretitle, char  *data, menubar_menufptr func)
+struct menubar *mb_Create(struct mbinit  *mbi, const char  *maintitle , const char  *moretitle, char  *data, menubar_menufptr func)
 {
     struct menubar *mb=(struct menubar *)malloc(sizeof(struct menubar));
     

@@ -1,10 +1,3 @@
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/external/image/tiff/RCS/mkspans.c,v 1.4 1992/12/16 17:04:55 rr2b Stab74 $";
-#endif
-
-
 #include "tiffcompat.h"
 
 

@@ -22,6 +22,7 @@
 #define IN_ATKOS_LIB 1
 #include <system.h>
 #include <relativize.H>
+#include <atkos.h>
  
 static int lastwasout=0;
 void ATKUseExportsFiles(char *arg, char *dot, char *slash) {

@@ -42,7 +42,7 @@ class application : public ATK  {
 public:
 	virtual ATKregistryEntry *ATKregistry();
 
-        virtual boolean ParseArgs(int argc,char **argv)  ;
+        virtual boolean ParseArgs(int argc,const char **argv)  ;
         virtual void ReadInitFile();
         virtual boolean Start()  ;
         virtual int Run()  ;
@@ -54,8 +54,8 @@ public:
         inline void SetFork(boolean torf) { (this->fork=(torf)); }
         inline boolean GetFork() { return (this->fork); }
 
-        inline void SetName(char *str) { (this->name=(str)); }
-        inline char * GetName() { return (this->name); }
+        inline void SetName(const char *str) { (this->name=(str)); }
+        inline const char * GetName() { return (this->name); }
 
         inline void SetForceLoad(boolean f) { ((this)->forceload=(f)); }
         inline boolean GetForceLoad() { return ((this)->forceload); }
@@ -75,13 +75,13 @@ public:
 	inline char **GetInitialArgv() { return init_argv; }
 
     
-        static void DeleteArgs(char **argv, int num);
+        static void DeleteArgs(const char **argv, int num);
         static char * GetATKVersion()  ;
         static application *GetStartupApplication();
 
 	/* The following functions operate on the startup application. */
 	static char **AppSessionCheckpoint();
-	static char *AppGetName();
+	static const char *AppGetName();
 	static void AppSetName(char *s);
 	static char **AppGetInitialArgv();
 
@@ -91,17 +91,17 @@ public:
     
         boolean fork;
         boolean forceload,readInitFile;
-        char *name;
+        const char *name;
 	init_fptr errorProc;
         long errorRock;
-        char *fgcolor, *bgcolor;
-        char *geometry;
+        const char *fgcolor, *bgcolor;
+        const char *geometry;
         long majorversion, minorversion;
 	boolean printversioninfo;
 	boolean iconic;
 	char **init_argv;	// Initial command line (NULL terminated argv)
 private:
-	void SaveInitArgv(int argc, char **argv);
+	void SaveInitArgv(int argc, const char **argv);
 };
 
 #endif /* _application_H_ */

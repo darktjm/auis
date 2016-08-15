@@ -20,11 +20,12 @@
 //  $
  */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
-static char *pintv_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/pintv.C,v 1.11 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char *pintv_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/pintv.C,v 1.11 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif /* NORCSID */
 
-#include <andrewos.h>
 ATK_IMPL("pintv.H")
 
 

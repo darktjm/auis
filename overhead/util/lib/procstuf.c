@@ -25,37 +25,36 @@
  *  $
 */
 
+#include <andrewos.h>		/* sys/time.h index rindex */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/procstuf.c,v 2.18 1996/09/03 18:55:19 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/procstuf.c,v 2.18 1996/09/03 18:55:19 robr Exp $";
 #endif
 
 
  
 
 /* convenient stuff for dealing with subprocesses */
-
-#include <andrewos.h>		/* sys/time.h index rindex */
+#include <util.h>
 #include <ctype.h>
 #include <truth.h>
 
-extern char *getenv();
-
 /* trash second arg */
-char *argvtostr(argv,buf,len)
-char **argv;
-char *buf;
-int len;
+char *argvtostr(const char * const *argv,char *buf,int len)
 {
     if(argv!=NULL && *argv){
-	char **p=argv;
+	const char * const *p=argv;
+	int skip = 0;
 
-	if(strcmp(p[0],"/bin/sh")==0 && strcmp(p[1],"-c")==0 && strcmp(p[2],"exec ")==0)
-	    *(p+=3)+=5; /* skip over the "sh -c exec " */
+	if(strcmp(p[0],"/bin/sh")==0 && strcmp(p[1],"-c")==0 && strcmp(p[2],"exec ")==0) {
+	    p += 3;
+	    skip = 5;
+	}
 
 	if(strlen(*p)+1>len)
 	    return NULL;
-	strcpy(buf,*p++);
+	strcpy(buf,(*p++) + skip);
 
 	while(*p!=NULL){
 	    if(strlen(*p)+2>len)
@@ -69,10 +68,9 @@ int len;
     return buf;
 }
 
-contains(str,set)
-char *str,*set;
+static int contains(const char *str,const char *set)
 {
-    char *p,*q;
+    const char *p,*q;
 
     for(p=str; *p!='\0'; p++)
 	for(q=set; *q!='\0'; q++)
@@ -86,18 +84,15 @@ char *str,*set;
 #define SHCHARS "$;'\"`<>*?|()"
 
 /* trashes first two args */
-char **strtoargv(str,argv,len)
-char *str;
-char **argv;
-int len;
+const char **strtoargv(char *str,const char **argv,int len)
 {
-    char **p=argv;
+    const char **p=argv;
     char *s;
-    char *shell=getenv("SHELL");
+    const char *shell=getenv("SHELL");
     short csh=FALSE;
 
     if(shell!=NULL){
-	char *leaf=strrchr(shell,'/');
+	const char *leaf=strrchr(shell,'/');
 	if(leaf==NULL)
 	    leaf=shell;
 	else
@@ -140,14 +135,7 @@ int len;
 }
 
 /* trash second arg */
-char *statustostr(status,buf,len)
-#if defined(M_UNIX) || POSIX_ENV
-int *status;
-#else /* hpux */
-union wait *status;
-#endif /* hpux */
-char *buf;
-int len;
+char *statustostr(WAIT_STATUS_TYPE *status,char *buf,int len)
 {
 #if !defined(POSIX_ENV) && defined(M_UNIX)
     sprintf(buf,"status = %d.",*status);

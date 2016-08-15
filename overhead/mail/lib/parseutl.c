@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/parseutl.c,v 2.8 1992/12/15 21:04:17 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/parseutl.c,v 2.8 1992/12/15 21:04:17 rr2b Stab74 $";
 #endif
 
 /*
@@ -39,10 +41,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/
 #include "parseadd.h"
 
 #define NIL	0
-
-#ifndef _IBMR2
-extern char *malloc();
-#endif /* _IBMR2 */
 
 NoStorage(proc)
     char *proc;

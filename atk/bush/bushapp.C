@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/bush/RCS/bushapp.C,v 1.6 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/bush/RCS/bushapp.C,v 1.6 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 /**  SPECIFICATION -- External Facility Suite  *********************************
@@ -66,7 +68,6 @@ HISTORY
 END-SPECIFICATION  ************************************************************/
 
 
-#include <andrewos.h>
 ATK_IMPL("bushapp.H")
 #include <im.H>
 #include <frame.H>
@@ -130,10 +131,10 @@ bushapp::~bushapp( )
 }
 
 boolean
-bushapp::ParseArgs( register int		     argc, register char		   **argv )
+bushapp::ParseArgs( register int		     argc, register const char		   **argv )
       {
   class bushapp *self = this;
-  char **args = argv;
+  const char **args = argv;
 
   if(!(this)->application::ParseArgs(argc,argv))
     return(FALSE);
@@ -150,7 +151,7 @@ boolean
 bushapp::Start( )
   {
   class bushapp *self = this;
-  register char		    *startDir = NULL;
+  register const char		    *startDir = NULL;
 	
   if(this->argc > 1) startDir = this->argv[1];
   if(!((this)->application::Start()) ||

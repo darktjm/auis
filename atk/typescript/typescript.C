@@ -25,15 +25,16 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/time.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/typescript/RCS/typescript.C,v 1.30 1996/02/09 19:37:26 susan Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/typescript/RCS/typescript.C,v 1.30 1996/02/09 19:37:26 susan Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h> /* sys/types.h sys/time.h */
 ATK_IMPL("typescript.H")
 
 #include <text.H>
@@ -137,10 +138,10 @@ static char io_buffer[4096];
 #define TEXTOBJ(A) A->dataobject
 #define ISPIPESCRIPT(self) (self->pipescript)
 
-static char *DefaultArgList[] = { 0, 0 };
+static const char *DefaultArgList[] = { 0, 0 };
 /* #define SENDRAW 1 */
 
-static char **myarglist = NULL;
+static const char **myarglist = NULL;
 static boolean Pipescript = FALSE;
 static class style *staticBoldStyle = NULL;
 static class keymap *ssmap;
@@ -219,7 +220,7 @@ static void GrabLastCommand (register class typescript  *tv);
 static void GrabNextCommand (register class typescript    *tv);
 static void GrabCurrentCommand(class typescript  *tv );
 static void ExecuteCurrentCommand(class typescript  *tv );
-static void  SetTitle(class typescript  *self, char  *titleLine);
+static void  SetTitle(class typescript  *self, const char  *titleLine);
 static char *  ReadDirName(class typescript  *self, FILE  *f, char  *buf, int  *bufsiz);
 static void ReadFromProcess(FILE  *f, register class typescript  *td);
 static void ClearTypescriptText(class typescript  *tv);
@@ -350,7 +351,8 @@ static void
 typescript_SetPrinterCmd(class typescript  *self)
 {
     class msghandler *messageLine = (class msghandler *) (self)->WantHandler( "message");
-    char *currentPrinter, *defaultPrinter, answer[256], prompt[sizeof("Current printer is . Set printer to []: ") + 128];
+    char answer[256], prompt[sizeof("Current printer is . Set printer to []: ") + 128];
+    const char *currentPrinter, *defaultPrinter;
 
     if(messageLine == NULL)
         return;
@@ -428,7 +430,7 @@ static void
 AnounceDeath(class typescript  *self)
 {
     char buf[512];
-    char *shell = environ::Get("SHELL");
+    const char *shell = environ::Get("SHELL");
 
     if(shell == NULL) 
 	shell = "/bin/csh";
@@ -480,7 +482,7 @@ typescript_RuboutCmd(register class typescript  *self)
 }
 
 class typescript *
-typescript::Create(char  **arglist, FILE  *diskf, boolean  filemenu)
+typescript::Create(const char  **arglist, FILE  *diskf, boolean  filemenu)
 {
 	ATKinit;
 
@@ -1008,7 +1010,7 @@ ExecuteCurrentCommand(class typescript  *tv )
 }
 
 static void 
-SetTitle(class typescript  *self, char  *titleLine)
+SetTitle(class typescript  *self, const char  *titleLine)
 {
 
 #define WMTITLELEN 70 /* Can you say "Magic hack?" */
@@ -1035,7 +1037,7 @@ SetTitle(class typescript  *self, char  *titleLine)
     }
 		
     if(titleLine) {
-	char *home = environ::Get("HOME");
+	const char *home = environ::Get("HOME");
 
 	if(home) {
 	    int hlen = strlen(home);
@@ -1047,7 +1049,7 @@ SetTitle(class typescript  *self, char  *titleLine)
 	}		    
 	len = strlen(titleLine);
 	if(len > maxLen) {
-	    char *partialName;
+	    const char *partialName;
 
 	    maxLen -= sizeof("---") - 1;
 	    partialName = strchr(titleLine + (len - maxLen), '/');
@@ -1319,7 +1321,7 @@ typescript::typescript()
 	ATKinit;
 
     int pid;
-    char **arglist = NULL;
+    const char **arglist = NULL;
 #if POSIX_ENV || defined(SGI_4D_ENV)
     int pgrp = getpgrp();
 #else
@@ -1333,7 +1335,7 @@ typescript::typescript()
     char bodyFont[100];
     long fontSize= 10;
     long fontStyle= fontdesc_Fixed;
-    char *font;
+    const char *font;
     if ((defaultStyle= GetDefaultStyle()) == NULL) {
 	defaultStyle= new style;
 	defaultStyle->SetName("default");
@@ -1385,7 +1387,7 @@ typescript::typescript()
 	myarglist = NULL;
     }
     else {
-	char *shell = environ::Get("SHELL");
+	const char *shell = environ::Get("SHELL");
 
 	if (shell)
 	    DefaultArgList[0] = shell;
@@ -1533,7 +1535,7 @@ typescript::typescript()
         environ::Put("TERM", "wm");
         environ::Delete("TERMCAP");
 	ResetTTY(0);
-	execvp(this->progname, arglist);
+	execvp(this->progname, (char **)arglist);
 	{   
 	    char buf[200];
 
@@ -2186,7 +2188,7 @@ typescript::SetDataObject(class dataobject  *obj)
 }
 
 void 
-typescript::SetTitle(char  *title)
+typescript::SetTitle(const char  *title)
 {
     if(this->title != NULL)
 	free(this->title);
@@ -2199,7 +2201,7 @@ typescript::SetTitle(char  *title)
 	this->title = NULL;
 }
 
-char *
+const char *
 typescript::GetTitle()
 {
     return this->title;

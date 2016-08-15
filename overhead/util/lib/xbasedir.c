@@ -29,9 +29,11 @@
  *  $
 */
 
+#include <util.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/xbasedir.c,v 1.5 1996/06/14 21:08:40 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/xbasedir.c,v 1.5 1996/06/14 21:08:40 wjh Exp $";
 #endif
 
 /* andydir.c */
@@ -41,10 +43,9 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
 
 /* Return a string with the current value for XLIBDIR imbedded in it. */
-char *XLibDir(str)
-char *str;
+const char *XLibDir(const char *str)
 {
-    char *p = NULL;
+    const char *p = NULL;
     int addLen;
     static int andyLen = 0;
     static int bufSize = -1;

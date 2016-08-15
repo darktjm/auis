@@ -22,7 +22,7 @@
 
 #include <andrewos.h>
 
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/aformula.C,v 1.20 1996/11/15 16:39:05 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/aformula.C,v 1.20 1996/11/15 16:39:05 robr Exp $";
 
 ATK_IMPL("aformula.H")
 #include <aformula.H>

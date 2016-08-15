@@ -72,14 +72,15 @@
   CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ****/
 
+#include <andrewos.h>
+
 #ifndef __SABER__
-static char *TGNCopyright = "Copyright (C) 1991 Tim Northrup";
+static UNUSED const char TGNCopyright[] = "Copyright (C) 1991 Tim Northrup";
 #endif
 #define _TGN_COPYRIGHT_
 #endif
 
 
-#include <andrewos.h>
 ATK_IMPL("pcx.H")
 #include <stdio.h>
 #include <image.H>

@@ -25,16 +25,18 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/apt/RCS/apts.C,v 1.6 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/apt/RCS/apts.C,v 1.6 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 /* $Header $ */
 /* $Source $ */
 
 #ifndef lint
-static char *rcsidapts_c = "$Header $";
+static UNUSED const char *rcsidapts_c = "$Header $";
 #endif
 
 /*
@@ -101,7 +103,6 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
-#include <andrewos.h>
 ATK_IMPL("apts.H")
 #include  "apt.H"
 #include  "apts.H"
@@ -188,7 +189,7 @@ apts::StripString( register char			  *string )
   }
 
 long
-apts::CaptureString( register char			  *source , register char			  **target )
+apts::CaptureString( register const char			  *source , register char			  **target )
       {
   register char			 *cursor;
   register long			  status = ok;

@@ -218,11 +218,11 @@ public:
 
     
 	virtual ~rofftext();
-    static long ReadRoffIntoText(class text *t, FILE *fp, long pos, char **resources)  ;
+    static long ReadRoffIntoText(class text *t, FILE *fp, long pos, const char * const *resources)  ;
 
     virtual void SetText(class text *t); /* must be used before any styles started */
 
-    inline void SetInputFiles(char **files) { ((this)->inputfiles = files); }
+    inline void SetInputFiles(const char * const *files) { ((this)->inputfiles = files); }
     inline void SetInitialPos(long n) { ((this)->pos = n); }
 
      long Read(FILE *file, long id)  ;
@@ -309,14 +309,14 @@ public:
     long pos;
     int styleID;
 
-    char *macrofile;
-    char **inputfiles;
+    const char *macrofile;
+    const char * const *inputfiles;
 
     boolean HelpMode;
     boolean BeCompletelyBogus;
 
     class glist *EndMacros;
-    char *filename;
+    const char *filename;
     boolean PrintWarnings;
     class text *textm;  /* text to use for actually inserting chars and etc */
 };

@@ -23,9 +23,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/compile.C,v 3.7 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/compile.C,v 3.7 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 /* ********************************************************************** *\
@@ -39,7 +41,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions
  * compilation package for be2 based editor.
  */
 
-#include <andrewos.h>
 ATK_IMPL("compile.H")
 
 #include <ctype.h>
@@ -982,7 +983,7 @@ boolean compile::InitializeClass()
     {
 
     struct ATKregistryEntry  *textviewType = ATK::LoadClass("textview");
-    char *command;
+    const char *command;
 
     proctable::DefineProc("compile-build", (proctable_fptr) compile_Build, textviewType, NULL, "Start a compilation.");
     proctable::DefineProc("compile-kill-build", (proctable_fptr) compile_KillBuild, textviewType, NULL, "Terminate a compilation.");

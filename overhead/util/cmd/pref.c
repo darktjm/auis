@@ -25,15 +25,16 @@
  *  $
 */
 
+#include <andrewos.h> 
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/cmd/RCS/pref.c,v 2.9 1994/06/09 21:18:04 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/cmd/RCS/pref.c,v 2.9 1994/06/09 21:18:04 rr2b Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h> 
 #include <stdio.h>
 #include <util.h>
 
@@ -47,23 +48,22 @@ char ProgramName[100]="pf";
 #define DIE(str) (fprintf(stderr,str),exit(-1))
 #define USAGE "Usage: pref [-p programname] [-sbi] preferencename [default|value]\n"
 
-boolean atob(str)
-char *str;
+static boolean atob(const char *str)
 {
     int i;
-    static struct keys {
-	char   *name;
+    static const struct keys {
+	const char   *name;
 	boolean value;
     } keys[] = {
-	"true",	    TRUE,
-	"false",    FALSE,
-	"on",	    TRUE,
-	"off",	    FALSE,
-	"yes",	    TRUE,
-	"no",	    FALSE,
-	"1",	    TRUE,
-	"0",	    FALSE,
-	NULL,	    FALSE
+	{"true",	    TRUE},
+	{"false",    FALSE},
+	{"on",	    TRUE},
+	{"off",	    FALSE},
+	{"yes",	    TRUE},
+	{"no",	    FALSE},
+	{"1",	    TRUE},
+	{"0",	    FALSE},
+	{NULL,	    FALSE}
     };
 
     for(i=0;keys[i].name!=NULL;i++)
@@ -73,9 +73,7 @@ char *str;
     return FALSE;
 }
 
-main(argc,argv)
-int argc;
-char **argv;
+int main(int argc,char **argv) /* modifies argument strings */
 {
     char *name,*def = NULL;
     boolean boolVal=FALSE, intVal=FALSE, set=FALSE;
@@ -128,7 +126,7 @@ char **argv;
     else if(intVal)
 	printf("%d\n",getprofileint(name,(def==NULL ? 0 : atoi(def))));
     else{
-	char *s=getprofile(name);
+	const char *s=getprofile(name);
 	if(s==NULL && def==NULL)
 	    exit(1);
 	puts(s==NULL ? def : s);

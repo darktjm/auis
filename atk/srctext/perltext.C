@@ -23,10 +23,11 @@ $Disclaimer:
 
    perltext, an object for editing perl code. */
 
-static char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/perltext.C,v 2.1 1995/02/07 17:37:27 rr2b Stab74 $";
-
 #include <andrewos.h>
+
+static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
+static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/perltext.C,v 2.1 1995/02/07 17:37:27 rr2b Stab74 $";
+
 #include <stylesheet.H>
 #include <style.H>
 #include <fontdesc.H>

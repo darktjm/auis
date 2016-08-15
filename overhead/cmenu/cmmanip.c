@@ -25,35 +25,18 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/cmenu/RCS/cmmanip.c,v 2.11 1993/08/27 19:30:42 gk5g Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/cmenu/RCS/cmmanip.c,v 2.11 1993/08/27 19:30:42 gk5g Stab74 $";
 #endif
 
-#include <andrewos.h>
 #include <X11/Xlib.h>
 #include <cmintern.h>
 #include <scache.h>
 
 /* Need to handle movement of worm item in this code... */
-
-/* Should be in the C library damn it. */
-static char *CopyString(string)
-    char *string;
-{
-
-    char *tempString;
-
-    if (string == NULL)  {
-	tempString = (char *) malloc(1);
-	*tempString = '\0';
-    }
-    else  {
-	tempString = (char *) malloc(strlen(string) + 1);
-	strcpy(tempString, string);
-    }
-    return(tempString);
-}
 
 struct pane *PaneNumToPtr(menu, paneNum)
     struct cmenu *menu;
@@ -261,9 +244,9 @@ int cmenu_DeletePane(menu, paneTitle, panePriority)
 
 int cmenu_AddSelection(menu, paneTitle, panePriority, selectionLabel, priority, selectionData, flags, keys)
     struct cmenu *menu;
-    char *paneTitle;
+    const char *paneTitle;
     int panePriority;
-    char *selectionLabel;
+    const char *selectionLabel;
     int priority;
     long selectionData;
     int flags;
@@ -376,9 +359,9 @@ static void RecomputeMaxSelectionWidth(pane)
 
 int cmenu_DeleteSelection(menu, paneTitle, panePriority, selectionLabel, priority, flags)
     struct cmenu *menu;
-    char *paneTitle;
+    const char *paneTitle;
     int panePriority;
-    char *selectionLabel;
+    const char *selectionLabel;
     int priority;
     int flags;
 {

@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/cawp.c,v 1.13 1993/02/12 21:23:32 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/cawp.c,v 1.13 1993/02/12 21:23:32 rr2b Stab74 $";
 #endif
 
 /* ************************************************************ *\
@@ -40,7 +42,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
 #include <andyenv.h>
 #include <stdio.h>
-#include <andrewos.h>
 #include <errno.h>
 #include <pwd.h>
 #include <util.h>
@@ -54,8 +55,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 static int idxID = -1;
 static int idxN, idxHD, idxNI;
 
-static wp_ErrorCode GetWP(ca)
-struct CellAuth *ca;
+static wp_ErrorCode GetWP(struct CellAuth *ca)
 {/* Fill in White Pages values and return any errors encountered. */
 #ifdef AFS_ENV
     wp_ErrorCode wpErr;
@@ -150,8 +150,7 @@ struct CellAuth *ca;
 }
 #endif /* AFS_ENV */
 
-void FillInCell(cellAuth)
-struct CellAuth *cellAuth;
+void FillInCell(struct CellAuth *cellAuth)
 {/* Fill in the accounting (WP/passwd) values for the given cell pointer; an error (or success) code is left in cellAuth->WpError. */
 #ifdef AFS_ENV
     wp_ErrorCode wpErr;

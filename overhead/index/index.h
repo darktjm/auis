@@ -122,7 +122,7 @@ extern struct indexBucket *index_CGet(struct Index  *ai, register char  *akey);
 extern struct hashList *index_NewHL();
 extern struct indexComponent *index_FindID(register struct indexBucket  *ab, register struct recordID  *arid);
 extern FILE *index_HashOpen(register struct Index  *ai, register long  ahash, register long  awrite);
-extern struct Index *index_Open(register char  *apath);
+extern struct Index *index_Open(register const char  *apath);
 extern void index_Close(struct Index *ai);
 extern struct recordSet *index_GetPrimarySet(register struct Index  *ai, register char  *akey);
 extern struct recordSet *index_GetAnySet(register struct Index  *ai, register char  *akey);

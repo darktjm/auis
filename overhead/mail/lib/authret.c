@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/types.h strings.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/authret.c,v 2.16 1994/06/09 18:17:42 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/authret.c,v 2.16 1994/06/09 18:17:42 rr2b Stab74 $";
 #endif
 
 /* ************************************************************ *\
@@ -35,7 +37,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/
 	Handy functions to build authentication and return-path information.
 \* ************************************************************ */
 
-#include <andrewos.h> /* sys/types.h strings.h sys/file.h */
 #include <andyenv.h>
 #include <stdio.h>
 #include <pwd.h>

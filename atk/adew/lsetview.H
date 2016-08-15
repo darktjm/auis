@@ -61,7 +61,7 @@ public:
      void InitChildren();
      boolean CanView(char *TypeName)  ;
 
-    virtual void ReadFile(FILE *thisFile,char *iname);
+    virtual void ReadFile(FILE *thisFile,const char *iname);
     virtual boolean Unsplit(class lsetview *who)  ;
 
     

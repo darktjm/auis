@@ -30,7 +30,7 @@ int CUI_MarkAsUnseen(int  cuid);
 int CUI_NameReplyFile(int  cuid, int  code, char    *FileName);
 int CUI_PrefetchMessage(int  cuid , int  ReallyNext);
 int CUI_PrintBodyFromCUIDWithFlags(int  cuid, int  flags, char  *printer);
-int CUI_PrintUpdates(char  *dname , char  *nickname);
+int CUI_PrintUpdates(const char  *dname , const char  *nickname);
 int CUI_ProcessMessageAttributes(int  cuid, char  *Snapshot);
 int CUI_PurgeDeletions(char   *arg);
 int CUI_PurgeMarkedDirectories(Boolean  Ask , Boolean  OfferQuit);

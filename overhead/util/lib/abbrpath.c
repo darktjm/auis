@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/abbrpath.c,v 1.11 1995/03/18 17:30:48 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/abbrpath.c,v 1.11 1995/03/18 17:30:48 rr2b Stab74 $";
 #endif
 
 
@@ -42,25 +44,24 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 	ap_ShortenAlsoTo(pathname, otherID, otherHD, maxlen) does it all.
       */
 
-#include <andrewos.h>
 #include <stdio.h>
 #include <sys/param.h>
 #include <ctype.h>
 #include <util.h>
 
 static int homeLen = -1;
-static char myHome[150] = "";
+static char *myHome = NULL;
 
-static void initMyHome()
+static void initMyHome(void)
 {
-    char *cp;
+    const char *cp;
     if (homeLen == -1) {
 	cp = getMyHome();  /* only use home to shorten if it's 2 chars or more */
 	if (cp != NULL && cp[0] != '\0' && cp[1] != '\0') {
-	    strncpy(myHome, cp, sizeof(myHome));	
-	    homeLen = strlen(myHome);
+	    myHome = strdup(cp);
+	    homeLen = strlen(cp);
 	} else {
-	    myHome[0] = '\0';
+	    myHome = strdup("");
 	    homeLen = 0;
 	}
     }
@@ -68,8 +69,7 @@ static void initMyHome()
 
 static char shortenRes[MAXPATHLEN+1] = "";
 
-char *ap_Shorten(pathname)
-char *pathname;
+const char *ap_Shorten(const char *pathname)
 {/* Shorten it if we can. */
     initMyHome();
     if (homeLen > 0) {
@@ -82,11 +82,10 @@ char *pathname;
 	    }
 	}
     }
-    return pathname;
+    return (char *)pathname;
 }
 
-char *ap_ShortenAlso(pathname, auxI, auxH)
-char *pathname, *auxI, *auxH;
+const char *ap_ShortenAlso(const char *pathname, const char *auxI, const char *auxH)
 {/* Shorten it if we can. */
     int auxHLen, auxAbbr;
 
@@ -131,44 +130,38 @@ char *pathname, *auxI, *auxH;
 	    }
 	}
     }
-    return pathname;
+    return (char *)pathname;
 }
 
-static char pfx[] = "---";
+static const char pfx[] = "---";
 
-char *ap_ShortenTo(pathname, maxLen)
-char *pathname; int maxLen;
+const char *ap_ShortenTo(const char *pathname, int maxLen)
 {/* Shorten it if we can. */
-    char *res, *cp; int len;
-    auto char toshortRes[MAXPATHLEN+1];
+    const char *res, *cp; int len;
 
     res = ap_Shorten(pathname);
     len = strlen(res);
     if (len <= maxLen) return res;
     cp = strchr(&res[len - maxLen + sizeof(pfx)-2], '/');
     if (cp != NULL) {
-	strcpy(toshortRes, pfx);
-	strcat(toshortRes, ++cp);
-	strcpy(shortenRes, toshortRes);	/* to static storage once it's complete */
+	strcpy(shortenRes, pfx);
+	memmove(shortenRes + sizeof(pfx), cp + 1, strlen(cp));
 	return shortenRes;
     }
     return NULL;	/* Have to give up--can't shorten to spec. */
 }
 
-char *ap_ShortenAlsoTo(pathname, auxI, auxH, maxLen)
-char *pathname, *auxI, *auxH; int maxLen;
+const char *ap_ShortenAlsoTo(const char *pathname, const char *auxI, const char *auxH, int maxLen)
 {/* Shorten it if we can. */
-    char *res, *cp; int len;
-    auto char toshortRes[MAXPATHLEN+1];
+    const char *res, *cp; int len;
 
     res = ap_ShortenAlso(pathname, auxI, auxH);
     len = strlen(res);
     if (len <= maxLen) return res;
     cp = strchr(&res[len - maxLen + sizeof(pfx)-2], '/');
     if (cp != NULL) {
-	strcpy(toshortRes, pfx);
-	strcat(toshortRes, ++cp);
-	strcpy(shortenRes, toshortRes);	/* to static storage once it's complete */
+	strcpy(shortenRes, pfx);
+	memmove(shortenRes + sizeof(pfx), cp + 1, strlen(cp));
 	return shortenRes;
     }
     return NULL;	/* Have to give up--can't shorten to spec. */
@@ -176,7 +169,7 @@ char *pathname, *auxI, *auxH; int maxLen;
 
 #ifdef TESTINGONLYTESTING
 #include <stdio.h>
-main()
+int main(void)
 {
     char a[300];
     char *cp; int maxLen;

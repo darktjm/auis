@@ -22,9 +22,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/vutils.C,v 1.5 1994/08/24 16:27:47 Zarf Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/vutils.C,v 1.5 1994/08/24 16:27:47 Zarf Stab74 $";
 #endif
 
 
@@ -50,8 +52,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/vu
  * warranty.
  *************************************************/
 
-
-#include <andrewos.h>
 
 #include <ctype.h>
 
@@ -103,7 +103,7 @@ static void helpDeath (int  pid, class view  *self, WAIT_STATUS_TYPE  *status)
 
 static void forkhelpproc (class view  *self, long  key)
 {
-    char *helpname = environ::AndrewDir("/bin/help");
+    const char *helpname = environ::AndrewDir("/bin/help");
     int pid, fd;
 
     switch (pid = osi_vfork()) {

@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/roffutil.C,v 1.7 1995/07/17 21:08:55 wjh Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/roffutil.C,v 1.7 1995/07/17 21:08:55 wjh Stab74 $";
 #endif
 
 
@@ -35,7 +37,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/R
  *
  */
 
-#include <andrewos.h>
 #include <glist.H>
 #include <rofftext.H>
 #include <roffstyl.h>

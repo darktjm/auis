@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/matte.C,v 3.23 1996/11/12 21:19:00 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/matte.C,v 3.23 1996/11/12 21:19:00 wjh Exp $";
 #endif
 
 
@@ -43,7 +45,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportvie
 #define matte_ChangeHeight 2
 
 
-#include <andrewos.h>
 ATK_IMPL("matte.H")
 #include <bind.H>
 #include <view.H>
@@ -425,7 +426,7 @@ char *matte::WantInformation(char *name) {
         // is responsible for freeing the style object.
         if(ref) {
             style *result=new style;
-            char *font;
+            const char *font;
             char bodyFont[256];
             long fontStyle, fontSize;
             if ((font = environ::GetProfile("bodyfont")) == NULL || ! fontdesc::ExplodeFontName(font, bodyFont, sizeof(bodyFont), &fontStyle, &fontSize)) {

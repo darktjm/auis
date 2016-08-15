@@ -68,8 +68,9 @@ BEGIN(LINECOMMENT);
 [A-Za-z_][0-9A-Za-z_]*		return(refs_Name);
 .				return(refs_Other);
 %%
+#include <andrewos.h>
 #ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/doc/mkbrowse/RCS/refs.flex,v 1.1 1994/06/07 17:41:19 rr2b Stab74 $";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/doc/mkbrowse/RCS/refs.flex,v 1.1 1994/06/07 17:41:19 rr2b Stab74 $";
 #endif
 
 

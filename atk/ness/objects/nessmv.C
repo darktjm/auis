@@ -23,13 +23,14 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nessmv.C,v 1.6 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nessmv.C,v 1.6 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 
-#include <andrewos.h>
 ATK_IMPL("nessmv.H")
 
 #include <menulist.H>

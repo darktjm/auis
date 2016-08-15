@@ -40,7 +40,7 @@ public:
 
 
 
-	 boolean ParseArgs(int argc, char **argv)  ;
+	 boolean ParseArgs(int argc, const char **argv)  ;
 	 boolean Start()  ;
 	 int Run()  ;
 
@@ -52,9 +52,9 @@ public:
 
 
 
-	char *inputfile;
-	char *outputfile;
-	char *inputtype;
+	const char *inputfile;
+	const char *outputfile;
+	const char *inputtype;
 	FILE *inf;
 	FILE *outf;
 

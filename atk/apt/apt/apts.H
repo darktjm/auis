@@ -75,7 +75,7 @@ public:
   static long CompareStrings( char *s1, char *s2 )			 ;
   static long SubstringIndex( char *pattern, char *string )		 ;
   static char * StripString( char *string)				 ;
-  static long CaptureString( char *source, char **target )		 ;
+  static long CaptureString( const char *source, char **target )		 ;
 
   static void HourMinuteSecond( long *hour, long *minute, long *second );
   static void HourOfDay( char *hour );

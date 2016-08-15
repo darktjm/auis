@@ -20,15 +20,16 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/recsearch.C,v 1.5 1994/12/13 20:35:03 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/recsearch.C,v 1.5 1994/12/13 20:35:03 rr2b Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("recsearch.H")
 
 #include <im.H>

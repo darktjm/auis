@@ -25,16 +25,16 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/txtvcsty.C,v 3.6 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/txtvcsty.C,v 3.6 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
 
  
-
-#include <andrewos.h>
 
 #define AUXMODULE 1
 #include <textview.H>

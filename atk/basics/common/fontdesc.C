@@ -25,12 +25,13 @@
 //  $
  */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/fontdesc.C,v 3.5 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/fontdesc.C,v 3.5 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 
-#include <andrewos.h>
 ATK_IMPL("fontdesc.H")
 #include <graphic.H>
 #include <im.H>
@@ -78,7 +79,7 @@ struct font *fontdesc::GetRealFontDesc(class graphic  *graphic)
     return NULL;
 }
 
-long fontdesc::TextSize(class graphic  *graphic, char  *text, long  TextLength, long  *XWidth, long  *YWidth)
+long fontdesc::TextSize(class graphic  *graphic, const char  *text, long  TextLength, long  *XWidth, long  *YWidth)
 {
     /* Override Me */
     return 0;
@@ -109,7 +110,7 @@ short *fontdesc::HeightTable(class graphic  *graphic)
 
 }
 
-long fontdesc::StringSize(class graphic  *graphic,  char *string,register long  *XWidth,register long  *YWidth)
+long fontdesc::StringSize(class graphic  *graphic,  const char *string,register long  *XWidth,register long  *YWidth)
 {
     /* Override Me */
     return 0;
@@ -142,7 +143,7 @@ static class fontdesc *fontdesc_CreateUsingDescriptor(struct fontnamedesc  *Font
     return retVal;
 }
 
-class fontdesc *fontdesc::Create(char  *fontName, long  fontStyle, long  fontSize)
+class fontdesc *fontdesc::Create(const char  *fontName, long  fontStyle, long  fontSize)
 {
     char tempFontName[256], *s = tempFontName;
     do {    /* Fold lowercase */
@@ -229,9 +230,9 @@ fontdesc::~fontdesc()
  * know, it ought to have a local routine to parse the fontnames.
  */
 
-boolean fontdesc::ExplodeFontName(char  *fontName, char  *familyName, long  bufSize, long  *fontStyle, long  *fontSize)
+boolean fontdesc::ExplodeFontName(const char  *fontName, char  *familyName, long  bufSize, long  *fontStyle, long  *fontSize)
 {
-    char *endName;
+    const char *endName;
     int style = 0;
     int size = 0;
     int length;

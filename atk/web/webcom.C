@@ -25,7 +25,7 @@
 ATK_IMPL("webcom.H")
 
 #ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/webcom.C,v 1.26 1996/11/07 02:05:41 robr Exp $";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/webcom.C,v 1.26 1996/11/07 02:05:41 robr Exp $";
 #endif
 
 #include <environ.H>
@@ -898,14 +898,14 @@ webcom::GetURL()  {
 	return (this->url)->Name();
 }
 
-	char *
+	const char *
 webcom::GetTitle ()  {
 	    // xxx webcom::GetTitle
 	    return NULL;
 }
 
 	void 
-webcom::SetTitle (char  *title)  {
+webcom::SetTitle (const char  *title)  {
 	// xxx webcom::SetTitle
 }
 

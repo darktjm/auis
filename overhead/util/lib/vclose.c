@@ -25,14 +25,16 @@
  *  $
 */
 
+#include <andrewos.h>		/* sys/types.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/vclose.c,v 2.16 1994/01/30 15:55:11 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/vclose.c,v 2.16 1994/01/30 15:55:11 rr2b Stab74 $";
 #endif
 
 
  
-
+#include <util.h>
 
 /*
                 vclose.c -- routines that are specific to Vice file system.
@@ -53,7 +55,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <errno.h>
 #include <stdio.h>
 #include <ctype.h>
-#include <andrewos.h>		/* sys/types.h */
 #include <sys/ioctl.h>
 #include <sys/stat.h>
 #ifdef AFS_ENV
@@ -80,7 +81,7 @@ JumpNoVice() {
     longjmp(noVice, 1);
 }
 
-static CkVice()
+static CkVice(void)
 {
 #ifdef POSIX_ENV
     struct sigaction SOld, SNew;
@@ -123,8 +124,7 @@ static CkVice()
     HasCheckedVice = 1;
 }
 
-static DoIoctl(fd)
-int fd;
+static DoIoctl(int fd)
 {
     struct ViceIoctl dummy;
 
@@ -147,8 +147,7 @@ int ViceIsRunning() {
 #endif /* AFS_ENV */
 }
 
-int vclose(fd)
-int fd;
+int vclose(int fd)
 {
 #ifdef AFS_ENV
     SIGSET_TYPE newmask, oldmask;
@@ -180,8 +179,7 @@ int fd;
     return rc;
 }
 
-int vfclose(f)
-FILE *f;
+int vfclose(FILE *f)
 {
 #ifdef AFS_ENV
     SIGSET_TYPE oldmask, newmask;
@@ -218,8 +216,7 @@ FILE *f;
     return rc;
 }
 
-int vdown(err)
-int err;
+int vdown(int err)
 {
 /*	ETIMEDOUT:	Venus has timed out the connection to the file server
       ENXIO:	the Venus process handling the kernel device has terminated
@@ -252,8 +249,7 @@ probably it's left over from a previous Venus run
 		);
 }
 
-int IsOnVice(fd)
-int fd;
+int IsOnVice(int fd)
 {
     /* Return TRUE if we believe that the file open on the given file descriptor is in Vice, and FALSE otherwise.
 	*/
@@ -298,7 +294,7 @@ int fd;
 }
 
 #ifdef TESTINGONLYTESTING
-main()
+int main(void)
 {
     printf("Vdown(etimedout) is %d.\n", vdown(ETIMEDOUT));
 }

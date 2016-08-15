@@ -24,11 +24,11 @@
 
 #include <util.h>
 
-static char usage[]= "usage: andrewdirs [andrewdir] [xlibdir] [afsbasedir] [localdir] [andydir]\n";
+static const char usage[]= "usage: andrewdirs [andrewdir] [xlibdir] [afsbasedir] [localdir] [andydir]\n";
 int main(int argc, char **argv)
 {
     int i, len;
-    char *r=NULL;
+    const char *r=NULL;
     if(argc<2) {
 	fprintf(stderr, "andrewdirs: warning: no dirs requested!\n");
 	fprintf(stderr, usage);

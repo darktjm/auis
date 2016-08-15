@@ -25,14 +25,15 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/gethome.c,v 2.11 1996/05/13 17:47:12 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/gethome.c,v 2.11 1996/05/13 17:47:12 robr Exp $";
 #endif
 
 
  
-#include <andrewos.h>
 #include <pwd.h>
 #include <stdio.h>
 #include <errno.h>
@@ -42,18 +43,15 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #define NULL 0
 #endif
 
-extern char *getenv();
+static char *home = NULL;
 
-static char home[MAXPATHLEN]="";
-
-char *gethome(name)
-char *name;
+const char *gethome(const char *name)
 {
     struct passwd *pw=NULL;
-    char *h=NULL;
+    const char *h=NULL;
 
     if (name==NULL) {
-	if(home[0]!='\0')
+	if(home)
 	    return home;
 
 	h=getenv("HOME");
@@ -65,8 +63,7 @@ char *name;
 	    if (pw != NULL) h = pw->pw_dir;
 	}
 	if (h != NULL) {
-	    strncpy(home, h, sizeof(home));
-	    home[MAXPATHLEN-1]='\0';
+	    home = strdup(h);
 	}
     } else {
 	errno = 0;

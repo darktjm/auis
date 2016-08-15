@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/suite/RCS/suite.C,v 1.15 1996/03/18 23:10:42 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/suite/RCS/suite.C,v 1.15 1996/03/18 23:10:42 robr Stab74 $";
 #endif
 
 /**  SPECIFICATION -- External Facility Suite  *********************************
@@ -59,7 +61,6 @@ END-SPECIFICATION  ************************************************************/
 
 
 
-#include <andrewos.h>
 ATK_IMPL("suite.H")
 #include <graphic.H>
 #include <dataobject.H>
@@ -269,7 +270,7 @@ static void ValidateItem( register class suite  *self, register struct suite_ite
 static void  DrawRectSize(class suite	 *self, long  x , long  y , long  width , long  height);
 static void  DrawRect(class suite  *self, struct rectangle  *Rect, int  border_size, class color  *fg , class color  *bg);
 static void SetItems(register class suite	 *self, register char  *elts);
-static void AllocColorFromPref( class suite  *self, class color  *color, char  *prefName , char  *defaultColorName );
+static void AllocColorFromPref( class suite  *self, class color  *color, const char  *prefName , const char  *defaultColorName );
 static void AllocateColors( class suite  *self );
 
 
@@ -2502,9 +2503,9 @@ SetItems(register class suite	 *self, register char  *elts)
 }
 
 static void
-AllocColorFromPref( class suite  *self, class color  *color, char  *prefName , char  *defaultColorName )
+AllocColorFromPref( class suite  *self, class color  *color, const char  *prefName , const char  *defaultColorName )
                 {
-    char *prefVal;
+    const char *prefVal;
 
     if((prefVal = environ::GetProfile(prefName)) == NULL)
 	prefVal = defaultColorName;
@@ -2517,7 +2518,7 @@ AllocColorFromPref( class suite  *self, class color  *color, char  *prefName , c
 static void
 AllocateColors( class suite  *self )
     {
-    char *defaultFG = NULL, *defaultBG = NULL;
+    const char *defaultFG = NULL, *defaultBG = NULL;
 
     graphic::GetDefaultColors(&defaultFG, &defaultBG);
 

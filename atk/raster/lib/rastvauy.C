@@ -25,12 +25,12 @@
  *  $
 */
 
+#include <andrewos.h> /* strings.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/rastvauy.C,v 1.3 1995/01/20 21:23:10 Zarf Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/rastvauy.C,v 1.3 1995/01/20 21:23:10 Zarf Stab74 $";
 #endif
-
-#include <andrewos.h> /* strings.h */
 
 #define AUXMODULE 1
 #include <rasterview.H>

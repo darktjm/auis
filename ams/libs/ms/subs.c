@@ -25,12 +25,13 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/subs.c,v 2.41 1993/03/17 04:02:41 gk5g Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/subs.c,v 2.41 1993/03/17 04:02:41 gk5g Stab74 $";
 #endif
 
-#include <andrewos.h> /* sys/file.h */
 #include <ms.h>
 #include <mailconf.h>
 #include <stdio.h>
@@ -38,7 +39,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RC
 #include <ctype.h>
 #include <util.h>
 
-extern char *StripWhiteEnds(), *getprofile(), *convlongto64(), *fixDate();
+extern char *StripWhiteEnds(), *convlongto64(), *fixDate();
 extern char home[], MyMailDomain[];
 extern int NeedToTimeOut;
 

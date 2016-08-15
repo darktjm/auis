@@ -887,7 +887,7 @@ htmlform::GetAtt(int index, char *id)  {
 
 #ifndef NORCSID
 #define NORCSID
-	static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/htmlform.C,v 1.17 1996/11/07 19:26:38 robr Exp $";
+	UNUSED const static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/htmlform.C,v 1.17 1996/11/07 19:26:38 robr Exp $";
 #endif
 /*
  *    $Log: htmlform.C,v $

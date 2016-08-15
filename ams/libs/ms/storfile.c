@@ -25,14 +25,15 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/storfile.c,v 2.8 1993/07/02 23:01:53 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/storfile.c,v 2.8 1993/07/02 23:01:53 rr2b Stab74 $";
 #endif
 
 #include <stdio.h>
 #include <ms.h>
-#include <andrewos.h> /* sys/file.h */
 
 MS_StorePartialFile(FileName, startpos, len, mode, Truncate, WhatToStore)
 char *FileName, *WhatToStore;

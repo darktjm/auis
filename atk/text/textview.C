@@ -25,15 +25,16 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/textview.C,v 3.102 1996/11/05 17:45:23 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/textview.C,v 3.102 1996/11/05 17:45:23 robr Exp $";
 #endif
 
  
 
 
-#include <andrewos.h>
 ATK_IMPL("textview.H")
 #include <ctype.h>
 #include <scroll.H>
@@ -126,11 +127,11 @@ textview::textview()
 
     long fontSize = 12;
     char bodyFont[100];
-    char *font;
+    const char *font;
     long fontStyle = fontdesc_Plain;
     class style *defaultStyle;
     boolean justify;
-    char *editorPtr;
+    const char *editorPtr;
 
     password=FALSE;
     hitcallback=NULL;
@@ -1068,7 +1069,7 @@ void textviewInterface::Extreme(scroll_Direction dir) {
 class view *textview::GetApplicationLayer()
     {
     long scrollpos=scroll_LEFT;
-    char *pos=environ::GetProfile("ScrollbarPosition");
+    const char *pos=environ::GetProfile("ScrollbarPosition");
     /* The horizontal scrollbar preference is mainly for testing. */
     boolean hzscroll = environ::GetProfileSwitch("TextHorizontalScrollbar", FALSE);
     class scroll *s;
@@ -1436,7 +1437,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 
     /* Get current bg/fg colors if still undefined. */
     if (self->cur_bgcolor == NULL) {
-	char *s;
+	const char *s;
 	long r, g, b;
 	char buf[16];
 	self->GetBackgroundColor(&s, &r, &g, &b);
@@ -1447,7 +1448,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 	self->cur_bgcolor = NewString(s);
     }
     if (self->cur_fgcolor == NULL) {
-	char *s;
+	const char *s;
 	long r, g, b;
 	char buf[16];
 	self->GetForegroundColor(&s, &r, &g, &b);
@@ -1565,7 +1566,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 		     */
 		    static char oldbgcbuf[64];	/* jeez we need GC's! */
 		    static char oldfgcbuf[64];
-		    char *oldbgcolor, *oldfgcolor;
+		    const char *oldbgcolor, *oldfgcolor;
 		    long bcr, bcb, bcg, fcr, fcb, fcg;
 		    struct rectangle clipRect;
 
@@ -1770,7 +1771,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 		     */
 		    static char oldbgcbuf[64];	/* jeez we need GC's! */
 		    static char oldfgcbuf[64];
-		    char *oldbgcolor, *oldfgcolor;
+		    const char *oldbgcolor, *oldfgcolor;
 		    long bcr, bcb, bcg, fcr, fcb, fcg;
 		    struct rectangle clipRect;
 
@@ -1918,7 +1919,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 	if (self->show_para_display) {
 	    static char oldbgcbuf[64];	/* jeez we need GC's! */
 	    static char oldfgcbuf[64];
-	    char *oldbgcolor, *oldfgcolor;
+	    const char *oldbgcolor, *oldfgcolor;
 	    long bcr, bcb, bcg, fcr, fcb, fcg;
 	    struct rectangle clipRect;
 
@@ -2158,7 +2159,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 		tempSrcRect.height = tempSrcRect.height - 2 - ((self->hasApplicationLayer) ? self->by : self->eby);
 		if (self->three_d_display) {
 		    static char oldfgcbuf[64];
-		    char *oldfgcolor;
+		    const char *oldfgcolor;
 		    long fcr, fcb, fcg;
 		    self->GetForegroundColor(&oldfgcolor,&fcr,&fcb,&fcg);
 		    if (oldfgcolor != NULL) {
@@ -3754,7 +3755,7 @@ long textview::GetPrintOption(class atom *popt)
     if (popt==textview_printoptels[0].name) {
 	gotit = this->GetDataObject()->Get(popt, &A_printoption, &value);
 	if (!gotit) {
-	    char *str;
+	    const char *str;
 	    if (str = environ::Get("PrintContents")) {
 		value = !(*str == 'n' || *str == 'N');
 	    }
@@ -3766,7 +3767,7 @@ long textview::GetPrintOption(class atom *popt)
     else if (popt==textview_printoptels[1].name) {
 	gotit = this->GetDataObject()->Get(popt, &A_printoption, &value);
 	if (!gotit) {
-	    char *str;
+	    const char *str;
 	    if (str = environ::Get("PrintIndex")) {
 		value = !(*str == 'n' || *str == 'N');
 	    }
@@ -3778,7 +3779,7 @@ long textview::GetPrintOption(class atom *popt)
     else if (popt==textview_printoptels[2].name) {
 	gotit = this->GetDataObject()->Get(popt, &A_printoption, &value);
 	if (!gotit) {
-	    char *str;
+	    const char *str;
 	    if (str = environ::Get("Endnotes")) {
 		value = !(*str == 'n' || *str == 'N');
 	    }
@@ -3790,7 +3791,7 @@ long textview::GetPrintOption(class atom *popt)
     else if (popt==textview_printoptels[3].name) {
 	gotit = this->GetDataObject()->Get(popt, &A_printoption, &value);
 	if (!gotit) {
-	    char *str;
+	    const char *str;
 	    if (str = environ::Get("Duplex")) {
 		value = !(*str == 'n' || *str == 'N');
 	    }

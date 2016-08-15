@@ -23,7 +23,7 @@ class ez2htmlapp : public application {
   public:
     virtual ATKregistryEntry *ATKregistry();
 
-    boolean ParseArgs(int argc, char *argv[]);
+    boolean ParseArgs(int argc, const char *argv[]);
     boolean Start();
     int Run();
     void ReadInitFile();

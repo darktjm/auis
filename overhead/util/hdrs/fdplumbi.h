@@ -43,5 +43,8 @@ BEGINCPLUSPLUSPROTOS
 #define FDLEAK_OPENCODE_SOCKET 10
 #define FDLEAK_OPENCODE_OPENDIR 11
 
+void RegisterOpenFile(int fd, const char *path, int Code);
+void RegisterCloseFile(int fd);
+
 ENDCPLUSPLUSPROTOS
 

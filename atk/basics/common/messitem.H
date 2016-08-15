@@ -30,7 +30,7 @@ public:
 
     
       static struct messitemi * Exists( char *str )  ;
-      static char * Replace( char *str )  ;
+      static const char * Replace( const char *str )  ;
       static void InitMessFile();
 };
 

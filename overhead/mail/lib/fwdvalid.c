@@ -25,14 +25,15 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/fwdvalid.c,v 1.21 1994/06/09 18:17:42 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/fwdvalid.c,v 1.21 1994/06/09 18:17:42 rr2b Stab74 $";
 #endif
 
 /* fwdvalid.c: implement the ValidateAddr() routine that validates mail addresses. */
 
-#include <andrewos.h>
 #include <stdio.h>
 #include <andyenv.h>
 #include <ctype.h>

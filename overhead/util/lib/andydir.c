@@ -25,26 +25,22 @@
  *  $
 */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <util.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/andydir.c,v 1.7 1992/12/15 21:08:11 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/andydir.c,v 1.7 1992/12/15 21:08:11 rr2b Stab74 $";
 #endif
 
 /* andydir.c */
 
-#include <stdio.h>
-
-#ifndef _IBMR2
-extern char *malloc();
-#endif /* _IBMR2 */
-
-extern char *getenv();
-
 /* Return a string with the current value for ANDYDIR imbedded in it. */
-char *AndyDir(str)
-char *str;
+const char *AndyDir(const char *str)
 {
-    char *p = NULL;
+    const char *p = NULL;
     int addLen;
     static int andyLen = 0;
     static int bufSize = -1;
@@ -58,7 +54,7 @@ char *str;
     }
 
     if (bufSize == -1) {
-	if (((p = getenv("ANDYDIR")) == NULL || *p == '\0' ) && ((p = (char *) GetConfiguration("AndyDir")) == NULL || *p == '\0'))  {
+	if (((p = getenv("ANDYDIR")) == NULL || *p == '\0' ) && ((p = GetConfiguration("AndyDir")) == NULL || *p == '\0'))  {
 	    p = "/usr/andy";
 	}
 	andyLen = strlen(p);

@@ -25,53 +25,52 @@
  *  $
 */
 
+#include <andrewos.h>		/* <strings.h> */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/errhdlr.c,v 1.7 1993/05/19 23:46:56 gk5g Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/errhdlr.c,v 1.7 1993/05/19 23:46:56 gk5g Stab74 $";
 #endif
 
-#include <andrewos.h>		/* <strings.h> */
 #include <util.h>
 #include <errno.h>
 
 char EH_Error_Msg[EH_ERR_MSG_BUF_SIZE];
 EH_environment *_error_handler_env;
 
-char *emalloc(size)
-long size;
+void *emalloc(long size)
 {
   /* Returns a pointer to a hunk of memory of size. 
      Errors are signalled. */
-  char *tmp_ptr;
+  void *tmp_ptr;
 
-  EH_cond_error_on(!(tmp_ptr = (char *)malloc(size)),
+  EH_cond_error_on(!(tmp_ptr = malloc(size)),
 		   EH_ret_code(EH_module_system,ENOMEM),
 		   "Malloc failed");
   return(tmp_ptr);
 }
 
-char *erealloc(old, newsize)
-char *old;
-long newsize;
+void *erealloc(void *old, long newsize)
 {
   /* Returns a pointer to a hunk of memory of newsize, with
      the contents of old (trunc) copied into it. 
      Errors are signalled.  */
-  char *tmp_ptr;
+  void *tmp_ptr;
 
-  EH_cond_error_on(!(tmp_ptr = (char *)realloc(old, newsize)),
+  EH_cond_error_on(!(tmp_ptr = realloc(old, newsize)),
 		   EH_ret_code(EH_module_system,ENOMEM),
 		   "Realloc failed");
   return(tmp_ptr);
 }
 
 
-char *CopyString(old)
-char *old;
+char *CopyString(const char *old)
 {
   /* Returns a newly emalloc'd copy of the string.
      Errors from emalloc are passed up. */
-
-  return(strcpy(emalloc(strlen(old)+1), old));
+  char *tmp_ptr = emalloc(strlen(old)+1);
+  if(tmp_ptr)
+     strcpy(tmp_ptr, old);
+  return(tmp_ptr);
 }
 

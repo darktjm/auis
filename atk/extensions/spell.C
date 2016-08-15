@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/spell.C,v 3.7 1994/12/13 20:35:03 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/spell.C,v 3.7 1994/12/13 20:35:03 rr2b Stab74 $";
 #endif
 
 
@@ -38,7 +40,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions
  * Perhaps will clean up later...
  */
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("spell.H")
 
 #include <signal.h>

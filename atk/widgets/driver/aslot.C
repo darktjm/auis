@@ -24,7 +24,7 @@
 ATK_IMPL("aslot.H")
 
 #ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/aslot.C,v 1.33 1996/11/06 20:18:20 robr Exp $";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/aslot.C,v 1.33 1996/11/06 20:18:20 robr Exp $";
 #endif
 
 #include <util.h>
@@ -851,7 +851,7 @@ ASlotFile::ReadValue(const char *src) {
 			// unfold the name in the segment
 			// this resolves $, ~, and other features
 			char exppath[MAXPATHLEN];
-			char *expandedname =    // 'path' or 'exppath' 
+			const char *expandedname =    // 'path' or 'exppath' 
 				path::UnfoldFileName(path, exppath, 0);
 				// xxx last arg should be name of resourcefile
 

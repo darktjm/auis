@@ -22,11 +22,12 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
-static char cmuwm_rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/cmuwm.C,v 1.9 1996/10/20 20:37:30 wjh Exp $";
+static UNUSED const char cmuwm_rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/cmuwm.C,v 1.9 1996/10/20 20:37:30 wjh Exp $";
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("cmuwm.H")
 #include <image.H>
 #include <dataobject.H>

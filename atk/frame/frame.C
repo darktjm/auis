@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/frame.C,v 3.23 1996/10/29 22:11:58 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/frame.C,v 3.23 1996/10/29 22:11:58 robr Exp $";
 #endif
 
 
@@ -37,7 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/
  * Provides the toplevel view on a buffer and message line.
   */
 
-#include <andrewos.h>
 ATK_IMPL("frame.H")
 
 #ifndef MAX
@@ -127,9 +128,9 @@ ATKdefineRegistry(frame, lpair, frame::InitializeClass);
 #ifndef MAX
 #endif /* MAX */
 static void frame_setShade(class frame  *self, int  val			/* 0 - 200*/);
-static char * GetProfileString (char  *pref, char  *defalt);
+static const char * GetProfileString (char  *pref, char  *defalt);
 static void frame_CacheSettings(class frame  *self);
-static void drawButton(class frame  * self,struct rectangle  *rect,char  *text,boolean  pushed,boolean  borderonly,boolean  blit);
+static void drawButton(class frame  * self,struct rectangle  *rect,const char  *text,boolean  pushed,boolean  borderonly,boolean  blit);
 static int CalculateLineHeight(class frame  *self);
 static void handleNewData(class frame  *self);
 static void SetTitle(class frame  *self);
@@ -138,7 +139,7 @@ static boolean InRectangle(struct rectangle  *r, long  x , long  y);
 static void drawshadow(class frame  *self,struct rectangle  *r);
 static void DoUpdate(class frame  *self);
 static void SaveBits(class frame  *self);
-static int ButtonInteract(class frame  *self, char  **AnswerList, long  DefaultWildestAnswer , long  *WildestAnswer, int  flags);
+static int ButtonInteract(class frame  *self, const char  **AnswerList, long  DefaultWildestAnswer , long  *WildestAnswer, int  flags);
 static void PrepareMenus(class frame  *self);
 static void PurifyString(char  *s);
 static boolean RestoreBits(class frame  *self);
@@ -152,7 +153,7 @@ static void TidyUp(class frame  *self);
 static int isDialogChild(class frame  *self, class view  *v);
 static void delete_window_request(class im  *im, class frame  *self);
 static void ReturnInterface(class frame  *rock, int  ind, long  brock);
-static class view *PrepareForStringInput(class frame  *self,char  *prompt,int  bufferSize /* Is actual sizeof buffer including NUL. */,boolean  CompButtons);
+static class view *PrepareForStringInput(class frame  *self,const char  *prompt,int  bufferSize /* Is actual sizeof buffer including NUL. */,boolean  CompButtons);
 static void SingleLine(class frame  *self, long  key);
 static boolean FindBuffer(class frame  *f,class buffer  *b);
 
@@ -201,10 +202,10 @@ static void frame_setShade(class frame  *self, int  val			/* 0 - 200*/)
 #define BWFGCOLOR "black"
 #define BWBGCOLOR "white"
 
-static char *
+static const char *
 GetProfileString (char  *pref, char  *defalt)
           {
-  char *p = environ::GetProfile (pref);
+  const char *p = environ::GetProfile (pref);
   if (p == NULL)
     return (defalt);
   else
@@ -213,7 +214,7 @@ GetProfileString (char  *pref, char  *defalt)
 
 static void frame_CacheSettings(class frame  *self)
 {
-    char *fgcolor, *bgcolor;
+    const char *fgcolor, *bgcolor;
     unsigned char fg_rgb[3], bg_rgb[3];
     self->mono = ((self )->DisplayClass() & graphic_Monochrome);
     if ( self->mono || environ::GetProfileSwitch("frame.MonochromeDialogBoxes", FALSE)) {
@@ -241,7 +242,7 @@ static void frame_CacheSettings(class frame  *self)
 			 &(background_color[2]));
     }
 }
-static void drawButton(class frame  * self,struct rectangle  *rect,char  *text,boolean  pushed,boolean  borderonly,boolean  blit)
+static void drawButton(class frame  * self,struct rectangle  *rect,const char  *text,boolean  pushed,boolean  borderonly,boolean  blit)
 {
 
     struct rectangle Rect2;
@@ -668,10 +669,10 @@ void frame::SetView(class view  *view)
 
 
 /* framecmds.C */
-	int frame_VisitNamedFile(class frame  *self, char  *filename, 
+	int frame_VisitNamedFile(class frame  *self, const char  *filename, 
 			boolean  newWindow, boolean  rawMode);
 	int 
-frame::VisitNamedFile(char  *filename, 
+frame::VisitNamedFile(const char  *filename, 
 			boolean  newWindow, boolean  rawMode) {
 	return frame_VisitNamedFile(this, filename, 
 			newWindow, rawMode);
@@ -872,7 +873,7 @@ void frame::RemoveHelp()
     }
 }
 
-void frame::SetTitle(char  *title)
+void frame::SetTitle(const char  *title)
         {
     if (this->title != NULL)
         free(this->title);
@@ -895,7 +896,7 @@ void frame::SetTitle(char  *title)
  */
 static void SetTitle(class frame  *self)
 {
-    static char *readonly_flag = NULL;
+    static const char *readonly_flag = NULL;
 
     if (!readonly_flag) {
 	/* first time this function has been called; we must read in the readonly_flag, or set it to the default. */
@@ -1190,7 +1191,7 @@ SaveBits(class frame  *self)
     /* A no-op for now */
 }
 
-static int ButtonInteract(class frame  *self, char  **AnswerList, long  DefaultWildestAnswer , long  *WildestAnswer, int  flags)
+static int ButtonInteract(class frame  *self, const char  **AnswerList, long  DefaultWildestAnswer , long  *WildestAnswer, int  flags)
 {
     int i;
     int answer;
@@ -1642,7 +1643,7 @@ static void delete_window_request(class im  *im, class frame  *self)
 
 void frame::LinkTree(class view  *parent)
 {
-    char *fgcolor;
+    const char *fgcolor;
     class im *oldim=(this)->GetIM();
     (this)->lpair::LinkTree( parent);
     if(oldim) {
@@ -1658,9 +1659,9 @@ void frame::LinkTree(class view  *parent)
 
 
 #define ERROR (-1)
-int frame::DisplayString(int  priority, char  *string)
+int frame::DisplayString(int  priority, const char  *string)
 {
-    char *mychoices[3];
+    const char *mychoices[3];
     long result,defaultChoice;
     defaultChoice = 1;
     mychoices[0] = string;
@@ -1678,9 +1679,9 @@ static void ReturnInterface(class frame  *rock, int  ind, long  brock)
 }
 
 
-static class view *PrepareForStringInput(class frame  *self,char  *prompt,int  bufferSize /* Is actual sizeof buffer including NUL. */,boolean  CompButtons)
+static class view *PrepareForStringInput(class frame  *self,const char  *prompt,int  bufferSize /* Is actual sizeof buffer including NUL. */,boolean  CompButtons)
 {
-    static char *ans[6];
+    static const char *ans[6];
     class view *focus;
     self->AwaitingFocus = 1;
     focus = ((self)->GetIM())->GetInputFocus();
@@ -1744,7 +1745,7 @@ static class view *PrepareForStringInput(class frame  *self,char  *prompt,int  b
    	    
     return focus;
 }
-int frame::AskForString(int  priority, char  *prompt , char  *defaultString , char  *bufout, int  bufferSize /* Is actual sizeof buffer including NUL. */)
+int frame::AskForString(int  priority, const char  *prompt , const char  *defaultString , char  *bufout, int  bufferSize /* Is actual sizeof buffer including NUL. */)
 {
     int i;
     class view *focus;
@@ -1774,7 +1775,7 @@ int frame::AskForString(int  priority, char  *prompt , char  *defaultString , ch
     
     return i;
 }
-int frame::AskForPasswd(int  priority, char  *prompt , char  *defaultString , char  *bufout, int  bufoutSize /* Is actual sizeof bufout including NUL. */)
+int frame::AskForPasswd(int  priority, const char  *prompt , const char  *defaultString , char  *bufout, int  bufoutSize /* Is actual sizeof bufout including NUL. */)
 {
     int i;
     class view *focus;
@@ -1805,7 +1806,7 @@ int frame::AskForPasswd(int  priority, char  *prompt , char  *defaultString , ch
 }
 
 
-int frame::AskForStringCompleted(int  priority, char  *prompt , char  *defaultString , char  *bufout, int  bufferSize, class keystate  *ks, message_completionfptr completionProc, message_helpfptr helpProc, long  completionData, int  flags)
+int frame::AskForStringCompleted(int  priority, const char  *prompt , const char  *defaultString , char  *bufout, int  bufferSize, class keystate  *ks, message_completionfptr completionProc, message_helpfptr helpProc, long  completionData, int  flags)
 {  
     int i=ERROR;
     class view *focus;
@@ -1842,9 +1843,9 @@ int frame::AskForStringCompleted(int  priority, char  *prompt , char  *defaultSt
     return i;
 }
 
-int frame::MultipleChoiceQuestion(int  priority, char  *prompt, long  defaultChoice, long  *result, char  **choices, char  *abbrevKeys)
+int frame::MultipleChoiceQuestion(int  priority, const char  *prompt, long  defaultChoice, long  *result, const char  * const *choices, const char  *abbrevKeys)
 {
-    char *mychoices[100];
+    const char *mychoices[100];
     int i;
     char *answer=im::GetAnswer();
     if(answer==NULL) {

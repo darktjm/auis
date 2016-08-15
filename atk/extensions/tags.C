@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/tags.C,v 3.5 1996/09/03 19:12:18 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/tags.C,v 3.5 1996/09/03 19:12:18 robr Exp $";
 #endif
 
 
@@ -42,7 +44,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions
    * Now does recursive edit -- give it an argument (^U) to AVOID recursive edit
 */
 
-#include <andrewos.h>
 ATK_IMPL("tags.H")
 
 #include <textview.H>
@@ -69,7 +70,7 @@ struct SearchPattern {
 
 
 #define TBUFNAM "Tags-Buffer"
-static char *TagsFile = NULL;
+static const char *TagsFile = NULL;
 
 
 struct finderInfo {
@@ -84,8 +85,8 @@ ATKdefineRegistry(tags, ATK, tags::InitializeClass);
 static boolean ViewEqual(class frame  *frame, class view  *view);
 static class frame *FindByView(class view  *view);
 static void checkFileName();
-static class buffer *tags_OpenBuffer(char  *filename);
-static class buffer *tags_OpenTagsBuffer(char  *name);
+static class buffer *tags_OpenBuffer(const char  *filename);
+static class buffer *tags_OpenTagsBuffer(const char  *name);
 void tags_finished(int  pid, class view  *view, long  *status);
 void tags_RebuildTagsFile(class view  *view, long  key);
 long nextField(class text  *doc, long  pos);
@@ -125,7 +126,7 @@ static void checkFileName()
 }
 
 
-static class buffer *tags_OpenBuffer(char  *filename)
+static class buffer *tags_OpenBuffer(const char  *filename)
 
 {
     class buffer *rbuffer;
@@ -143,7 +144,7 @@ static class buffer *tags_OpenBuffer(char  *filename)
 
 /* open a buffer on the tag file*/
 
-static class buffer *tags_OpenTagsBuffer(char  *name)
+static class buffer *tags_OpenTagsBuffer(const char  *name)
 
 {
     class buffer *tagsbuffer;

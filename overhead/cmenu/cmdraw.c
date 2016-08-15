@@ -25,12 +25,13 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/cmenu/RCS/cmdraw.c,v 2.15 1993/08/27 19:30:42 gk5g Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/cmenu/RCS/cmdraw.c,v 2.15 1993/08/27 19:30:42 gk5g Stab74 $";
 #endif
 
-#include <andrewos.h>
 #include <ctype.h>
 #include <X11/Xlib.h>
 #include <cmintern.h>

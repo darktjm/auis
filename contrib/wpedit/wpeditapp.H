@@ -52,7 +52,7 @@ public:
 	virtual ~wpeditapp();
 
      boolean Start()  ;
-     boolean ParseArgs(int argc, char **argv)  ;
+     boolean ParseArgs(int argc, const char **argv)  ;
 
     class chlist *admin, *user; /* the admin and user panes */
     class text *desc;		/* the description pane */

@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/drawtxtv.C,v 3.21 1996/11/05 17:45:23 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/drawtxtv.C,v 3.21 1996/11/05 17:45:23 robr Exp $";
 #endif
 
 
@@ -35,7 +37,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/d
 
 
 #define AUXMODULE 1
-#include <andrewos.h>
 #include <textview.H>
 
 #include <text.H>
@@ -972,7 +973,7 @@ static void DrawBackground(class textview  *self, struct lineitem  *tt, long  bx
         below = fontInfo->maxBelow;
         above = fontInfo->maxHeight - below;
 
-        char *oldcolor;
+        const char *oldcolor;
         long r, g, b;
 
         self->GetForegroundColor(&oldcolor, &r, &g, &b);
@@ -1109,7 +1110,7 @@ static void draw_linenum(textview *self, mark *line_mark, struct rectangle *area
 {
     struct fontdesc *fontID = self->para_font;
     char linebuf[10];
-    char *fontname;
+    const char *fontname;
     char ffamily[60];
     long fstyle, fsize;
     long pos = line_mark->GetPos();
@@ -1152,9 +1153,9 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
     int leftmost, leftmostchar;
     int currentBump;
     char *color = NULL, *bgcolor=NULL;
-    char *rcolor = NULL;
+    const char *rcolor = NULL;
     long c1, c2, c3;
-    char *rbgcolor = NULL;
+    const char *rbgcolor = NULL;
     long bc1, bc2, bc3;
     char cbuf[64];
     char cbgbuf[64];
@@ -1439,7 +1440,7 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
     if ( show_para_display && type == textview_FullLineRedraw) {
 	if (info->lineAbove + info->below <= ySize) {
 	    static char oldcbuf[64];
-	    char *oldcolor;
+	    const char *oldcolor;
 	    long cr, cb, cg;
 	    struct rectangle clearRect;
 	    struct rectangle drawRect, oldclipRect;

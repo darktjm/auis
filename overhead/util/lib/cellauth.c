@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/cellauth.c,v 2.25 1993/02/12 21:23:32 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/cellauth.c,v 2.25 1993/02/12 21:23:32 rr2b Stab74 $";
 #endif
 
 /* ************************************************************ *\
@@ -38,7 +40,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
  
 
-#include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <errno.h>
@@ -80,8 +81,7 @@ void EraseCellMemory()
 #endif /* AFS_ENV */
 }
 
-static void ClearSome(lowBd, upBd)
-int lowBd, upBd;
+static void ClearSome(int lowBd, int upBd)
 {/* Clears myAuth[ix] for ix in [lowBd, upBd). */
     int Ix;
     for (Ix = lowBd; Ix < upBd; ++Ix) {
@@ -98,7 +98,7 @@ int lowBd, upBd;
     }
 }
 
-static int GrowBasics()
+static int GrowBasics(void)
 {/* Grow the myAuth array.  Return 0 if OK, -1 if malloc failed us. */
     int newMax;
 
@@ -114,10 +114,9 @@ static int GrowBasics()
 }
 
 #ifdef AFS_ENV
-static int AnyNumber(someName, someKVNo, theNum)
-char *someName; int someKVNo, *theNum;
+static int AnyNumber(const char *someName, int someKVNo, int *theNum)
 {
-    char *cp;
+    const char *cp;
 
     if (/* someKVNo == 999 && */ strncmp(someName, "ViceID=", 7) == 0) {
 	for (cp = someName+7; *cp != '\0'; ++cp) {
@@ -158,7 +157,7 @@ char *someName; int someKVNo, *theNum;
     return 0;
 }
 
-static int GetCellBasics()
+static int GetCellBasics(void)
 {/* Build the basic dynamic array of cell information.  Return 0 if all is OK, else return a non-zero error code (positive for permanent failures, negative for temporary ones). */
     int cellIx, RC;
     struct ktc_principal serviceName, clientName;	/* service name for ticket */
@@ -291,8 +290,7 @@ int ca_UpdateCellAuths()
     return 0;
 }
 
-static int AddALocal(LocalName)
-char *LocalName;
+static int AddALocal(const char *LocalName)
 {/* Add the given name as a bit of local identity.  Return -1 on malloc failure or the myAuth index of the added structure. */
 
     if (localIx >= 0) return localIx;
@@ -322,9 +320,7 @@ char *LocalName;
     return localIx;
 }
 
-int FindCell(cellName, ppCellAuth)
-char *cellName;
-struct CellAuth **ppCellAuth;
+int FindCell(const char *cellName, struct CellAuth **ppCellAuth)
 {/* Return a pointer to our authentication for cell cellName, via ppCellAuth.
     Return 0 if it was found, or an error code (>0 for permanent, <0 for temporary).
 	  Return 1 if we don't have any authentication in that cell, or if there's no such cell.
@@ -372,8 +368,7 @@ struct CellAuth **ppCellAuth;
     return 1;
 }
 
-int FindAnyCell(ppCellAuth)
-struct CellAuth **ppCellAuth;
+int FindAnyCell(struct CellAuth **ppCellAuth)
 {/* Like FindCell, except that it returns a pointer to any authenticated cell, if there is one. */
 
 	CheckServiceConfiguration();
@@ -396,8 +391,7 @@ struct CellAuth **ppCellAuth;
 	}
 }
 
-int FindNextCell(ppCellAuth)
-struct CellAuth **ppCellAuth;
+int FindNextCell(struct CellAuth **ppCellAuth)
 {/* Like FindCell, except that it returns a pointer to the next authenticated cell, if there is one.  Start it by setting what's pointed to by ppCellAuth to NULL. */
 	CheckServiceConfiguration();
 #ifdef AFS_ENV
@@ -425,7 +419,7 @@ struct CellAuth **ppCellAuth;
 }
 
 #ifdef TESTINGONLYTESTING
-main ()
+int main (void)
 {
     struct CellAuth *ca;
     int RC, ix;

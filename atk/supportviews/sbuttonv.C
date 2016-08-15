@@ -25,13 +25,14 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/sbuttonv.C,v 3.8 1995/05/03 22:23:42 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/sbuttonv.C,v 3.8 1995/05/03 22:23:42 rr2b Stab74 $";
 #endif
 
 
-#include <andrewos.h>
 ATK_IMPL("sbuttonv.H")
 #include <stdio.h>
 
@@ -99,9 +100,9 @@ static void OutputLabel(FILE  *f, char  *l);
 static void InitFGBG(class view  *self, struct sbutton_prefs  *prefs, double  *fg , double  *bg)
 {
 
-    char *bgcolor=sbutton::GetBackground(prefs);
-    char *fgcolor=sbutton::GetForeground(prefs);
-    char *deffg, *defbg;
+    const char *bgcolor=sbutton::GetBackground(prefs);
+    const char *fgcolor=sbutton::GetForeground(prefs);
+    const char *deffg, *defbg;
 
     graphic::GetDefaultColors(&deffg, &defbg);
 

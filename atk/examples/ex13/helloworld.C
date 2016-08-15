@@ -24,12 +24,13 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/examples/ex13/RCS/helloworld.C,v 1.3 1996/12/19 20:23:39 fred Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/examples/ex13/RCS/helloworld.C,v 1.3 1996/12/19 20:23:39 fred Exp $";
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("helloworld.H")
 #include <stdio.h>
 

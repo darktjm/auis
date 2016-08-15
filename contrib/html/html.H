@@ -44,7 +44,7 @@ public:
     virtual char*  EnvStart(char* buf, class style *style, int* wantpar, int* br, int* newlines)  ;
     virtual char*  EnvEnd(char* buf, class style *style, int* par, int* br)  ;
 
-    virtual void ChangeTitle(char* name);
+    virtual void ChangeTitle(const char* name);
     virtual void ChangeIndexable(int flag);
 
     virtual void AddLink(long pos, long len, char* uri);
@@ -70,7 +70,7 @@ public:
 	virtual ~html();
 
   
-    inline char *  GetTitle() { return ((this)->title); }
+    inline const char *  GetTitle() { return ((this)->title); }
     inline int   GetIsIndex() { return ((this)->isindex); }
     inline void SetView(class htmlview *x) { ((this)->view = (x)); }
 

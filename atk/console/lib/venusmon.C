@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/venusmon.C,v 1.7 1996/09/03 19:10:25 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/venusmon.C,v 1.7 1996/09/03 19:10:25 robr Exp $";
 #endif
 
 
@@ -41,7 +43,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/li
  */
 
 #include <andyenv.h>
-#include <andrewos.h>
 
 #include <consoleClass.H>
 #include <im.H>
@@ -95,7 +96,7 @@ int IsViceError(int  n);
 
 void IsViceRunning()
 {
-    char *s;
+    const char *s;
     
     mydbg(("entering: IsViceRunning\n"));
     NonViceHost = (ViceIsRunning() != 0 ? FALSE : TRUE);

@@ -44,12 +44,13 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/image/RCS/ips.C,v 1.6 1995/12/08 22:18:21 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/image/RCS/ips.C,v 1.6 1995/12/08 22:18:21 robr Stab74 $";
 #endif
 
-#include <andrewos.h>
 #include <math.h>
 #include <image.H>
 #include <print.H>

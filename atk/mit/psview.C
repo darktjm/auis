@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>		/* for DPS_ENV */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/psview.C,v 1.6 1996/11/07 17:36:49 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/psview.C,v 1.6 1996/11/07 17:36:49 wjh Exp $";
 #endif
 
 
@@ -45,8 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/ps
     and losing the menus....
 
 */
-
-#include <andrewos.h>		/* for DPS_ENV */
 
 #include <stdio.h>
 #include <signal.h>

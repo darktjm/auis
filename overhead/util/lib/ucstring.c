@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <util.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/ucstring.c,v 1.4 1992/12/15 21:12:21 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/ucstring.c,v 1.4 1992/12/15 21:12:21 rr2b Stab74 $";
 #endif
 
 /*
@@ -49,10 +51,10 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
  * (4/4/91)
 */
 
-char *ucstring (d, s, n)
-  char *d;				/* dest string */
-  char *s;				/* source string */
-  int   n;				/* max transfer size */
+char *ucstring (
+  char *d,				/* dest string */
+  const char *s,			/* source string */
+  int   n)				/* max transfer size */
 {   char *original_d = d;
     char  c;
 

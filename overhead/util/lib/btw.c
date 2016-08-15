@@ -56,8 +56,8 @@ struct btStack {	/* For stack of file nodes going down tree */
 	struct btFile	*FP;
 };
 
-int btw_SetDebugging(level)
-int level;
+int 
+btw_SetDebugging (int level)
 { int OldLevel;
   OldLevel = Debugging;
   Debugging = level;
@@ -369,7 +369,8 @@ struct btFile *bF;
 
 /* Modifying the data structure.  These functions do not use cursors, because they must determine for  themselves (within a lock) how to modify the database. */
 
-static struct btStack *NewStackElt()
+static struct btStack *
+NewStackElt (void)
 {
     struct btStack *bS;
 
@@ -1312,10 +1313,8 @@ int *fdPtr;
     return bterr_NoError;
 }
 
-static int WhereToSplit(bC, Op, SizeDelta)
-struct btC *bC;
-enum OpKind Op;
-int SizeDelta;
+static int 
+WhereToSplit (struct btC *bC, enum OpKind Op, int SizeDelta)
 {/* Given that the node pointed to by bC needs to be split, and that the op will change the target size by SizeDelta, return a decent guess for the lower bound of the new right node. */
     int LB, UB, Mid, Size, TempSize, Trial;
     struct btFile *bF = bC->FP;

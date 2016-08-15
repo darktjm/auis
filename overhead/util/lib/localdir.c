@@ -25,29 +25,23 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/localdir.c,v 2.8 1992/12/15 21:10:10 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/localdir.c,v 2.8 1992/12/15 21:10:10 rr2b Stab74 $";
 #endif
-
-
- 
 
 #include <stdio.h>
 #include <andrdir.h>
+#include <util.h>
 
-#ifndef _IBMR2
-extern char *malloc();
-#endif /* _IBMR2 */
-
-extern char *getenv();
-
+ 
 
 /* Return a string with the current value for LOCALDIR imbedded in it. */
-char *LocalDir(str)
-char *str;
+const char *LocalDir(const char *str)
 {
-    char *p = NULL;
+    const char *p = NULL;
     int addLen;
     static int locyLen = 0;
     static int bufSize = -1;

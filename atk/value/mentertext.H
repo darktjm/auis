@@ -37,7 +37,7 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
 
-     boolean InsertCharacters(long pos, char *str, long len)  ;
+     boolean InsertCharacters(long pos, const char *str, long len)  ;
      boolean DeleteCharacters(long pos, long len)  ;
      char * ViewName()  ;
 

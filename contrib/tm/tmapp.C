@@ -61,7 +61,7 @@ tmapp::tmapp()
     THROWONFAILURE(  TRUE);
 }
 
-boolean tmapp::ParseArgs(int  argc,char  **argv)
+boolean tmapp::ParseArgs(int  argc,const char  **argv)
 {
     if(!(this)->application::ParseArgs(argc,argv))
 	return FALSE;

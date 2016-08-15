@@ -25,12 +25,12 @@
  *  $
 */
 
+#include <errstk.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/errstk.c,v 2.7 1992/12/15 21:01:25 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/errstk.c,v 2.7 1992/12/15 21:01:25 rr2b Stab74 $";
 #endif
-
-#include <errstk.h>
 
 static int eliTraceStk_Grow(s)
 eliTraceStack_t *s;

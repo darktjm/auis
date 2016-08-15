@@ -459,7 +459,7 @@ int amss::GetStringFromUser(char  *prompt , char  *buf, int  len , int  ispass)
     return(::GetStringFromUser(prompt, buf, len, ispass));
 }
 
-int amss::TildeResolve(char  *in , char  *out)
+int amss::TildeResolve(const char  *in , char  *out)
 {
     return(::TildeResolve(in, out));
 }

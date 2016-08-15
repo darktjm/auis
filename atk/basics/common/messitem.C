@@ -47,8 +47,8 @@ static struct messitemi *firstmess=NULL;
 
 ATKdefineRegistry(messitem, ATK, NULL);
 static struct messitemi *messitem_Create( char  *s1 , char  *s2, char  wh );
-static char *MapMessFile(char  *filename, long  *fileLength /* OUT */);
-static int ReadMessFile(char  *filename, boolean  executeImmediately);
+static char *MapMessFile(const char  *filename, long  *fileLength /* OUT */);
+static int ReadMessFile(const char  *filename, boolean  executeImmediately);
 
 
 static struct messitemi *messitem_Create( char  *s1 , char  *s2, char  wh )
@@ -90,7 +90,7 @@ struct messitemi *messitem::Exists(char  *str)
   return tmess;
 }
 
-char *messitem::Replace(char  *str)
+const char *messitem::Replace(const char  *str)
     {
   struct messitemi *mess = firstmess;
   if (str == NULL || *str == '\0') return str;
@@ -109,7 +109,7 @@ char *messitem::Replace(char  *str)
 	 mess = mess->next;
        else {
 	int displen = mess->newlen + strlen(str) - mess->oldlen;
-	char *s = str;
+	const char *s = str;
 	int i = 0;
 	while (i++ < mess->oldlen) s++;
 	if (mess->dispmess != NULL)
@@ -126,7 +126,7 @@ char *messitem::Replace(char  *str)
 	 if (len < mess->oldlen) 
 	   mess = mess->next;
 	 else {
-	   char *s = str+len;
+	   const char *s = str+len;
 	   int i = len - mess->oldlen;
 	   while (i-- > 0) s--;
 	   if (mess->oldmess && strncmp(mess->oldmess,s,mess->oldlen) != 0)
@@ -152,7 +152,7 @@ char *messitem::Replace(char  *str)
 #define INITIALSIZE 512
 
 /* Hacked routine to rea a "whole file" into memory. */
-static char *MapMessFile(char  *filename, long  *fileLength /* OUT */)
+static char *MapMessFile(const char  *filename, long  *fileLength /* OUT */)
         {
 
     int fd;
@@ -205,7 +205,7 @@ static char *MapMessFile(char  *filename, long  *fileLength /* OUT */)
 
 #define UnmapMessFile(mappedMemory) free(mappedMemory)
 
-static int ReadMessFile(char  *filename, boolean  executeImmediately)
+static int ReadMessFile(const char  *filename, boolean  executeImmediately)
 {
 
     char *buffer;
@@ -272,8 +272,8 @@ static boolean isMessFileLoaded = 0;
 void messitem::InitMessFile( )
     {
     if (isMessFileLoaded == 0) {
-	char *al=environ::Get("ANDREWLANGUAGE");
-	char *alf=environ::Get("ANDREWLANGUAGEFILE");
+	const char *al=environ::Get("ANDREWLANGUAGE");
+	const char *alf=environ::Get("ANDREWLANGUAGEFILE");
 	if(al==NULL) al=environ::GetProfile("AndrewLanguage");
 	if(alf==NULL) alf=environ::GetProfile("AndrewLanguageFile");
 	if(alf==NULL && al) {

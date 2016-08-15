@@ -26,7 +26,7 @@
 ATK_IMPL("weblink.H")
 
 #ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/weblink.C,v 1.2 1995/12/12 18:53:04 wjh Stab74 $";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/weblink.C,v 1.2 1995/12/12 18:53:04 wjh Stab74 $";
 #endif
 
 #include <text.H>
@@ -264,7 +264,7 @@ weblink::InitializeClass()  {
 	return TRUE;
 }
 
-	char *
+	const char *
 weblink::GetResolvedLink()  {
 	char *filename;
 

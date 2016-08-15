@@ -25,9 +25,11 @@
 //  $
 */
 
+#include  <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/tree/RCS/treev.C,v 1.11 1996/03/18 23:09:19 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/tree/RCS/treev.C,v 1.11 1996/03/18 23:09:19 robr Stab74 $";
 #endif
 
 /**  SPECIFICATION -- External Facility Suite  *********************************
@@ -95,7 +97,6 @@ END-SPECIFICATION  ************************************************************/
 
 
 
-#include  <andrewos.h>
 ATK_IMPL("treev.H")
 #include  <graphic.H>
 #include  <observable.H>
@@ -379,7 +380,7 @@ struct  node_shadow
 
 
 
-static char *treev_fg=NULL, *treev_bg=NULL;
+static const char *treev_fg=NULL, *treev_bg=NULL;
 static long treev_fgr, treev_fgg, treev_fgb;
 static long treev_bgr, treev_bgg, treev_bgb;
 

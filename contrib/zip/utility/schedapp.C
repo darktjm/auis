@@ -58,7 +58,7 @@ schedapp::schedapp( )
 }
 
 boolean
-schedapp::ParseArgs( register int  argc, register char **argv )
+schedapp::ParseArgs( register int  argc, register const char **argv )
 {
     IN(schedapp_ParseArgs);
     while ( *++argv )

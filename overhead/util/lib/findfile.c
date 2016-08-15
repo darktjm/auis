@@ -36,29 +36,33 @@
  * Returns: Full path name of the init file or NULL if not
  *          found.
  */
-void findfileinpath(char *retbuf, char *ifpath, char *fname)
+/* tjm: bugs:
+ *   doesn't allow spaces in paths (fixed)
+ *   doesn't skip empty elements correctly (fixed)
+ *   creates memory duplicate of ifpath for no good reason (fixed)
+ *     frees that copy from address in its middle (fixed, obviously)
+ *   copies out path elements into separate buffer (fixed)
+ *   copies result into unsized output buffer (not fixed)
+ */
+void findfileinpath(char *retbuf, const char *ifpath, const char *fname)
 {
-    char tmpbuf[256], *tp, *ip;
+    const char *tp, *ip;
 
-    tp = tmpbuf;
-    ip = NewString(ifpath);
+    tp = ifpath;
 
     do {
-	while((*ip == ' ') && (*ip == PATH_DELIMITER)) ip++;
-	while((*ip != ' ') && (*ip != PATH_DELIMITER) && (*ip != '\0'))
-	    *tp++ = *ip++;
-	*tp = '\0';
-	sprintf(retbuf, "%s%c%s", tmpbuf, DIR_SEPARATOR, fname);
+	while(/* (*tp == ' ') || */ (*tp == PATH_DELIMITER)) tp++;
+	ip = tp;
+	while(/* (*ip != ' ') && */ (*ip != PATH_DELIMITER) && (*ip != '\0'))
+	    ip++;
+	sprintf(retbuf, "%.*s%c%s", (int)(ip - tp), tp, DIR_SEPARATOR, fname);
 	if (!access(retbuf,R_OK)) {	/* file found */
-	    free(ip);
 	    return;
 	}
-	ip++;
-	tp = tmpbuf;
+	tp = ++ip;
    } while (*ip != '\0');
    /* If we got here, the file was not found */
    *retbuf = '\0';
-   free(ip);
    return;
 }
 

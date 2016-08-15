@@ -24,14 +24,15 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/examples/ex11/RCS/hwapp.C,v 1.5 1996/12/19 20:23:13 fred Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/examples/ex11/RCS/hwapp.C,v 1.5 1996/12/19 20:23:13 fred Exp $";
 #endif
 
 
 
-#include <andrewos.h>
 ATK_IMPL("hwapp.H")
 #include "hwapp.H"
 

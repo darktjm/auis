@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/msclients/nns/RCS/nns.c,v 2.16 1993/03/13 06:55:35 gk5g Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/msclients/nns/RCS/nns.c,v 2.16 1993/03/13 06:55:35 gk5g Stab74 $";
 #endif
 
 /* nns - The Netnews Snarfer
@@ -35,7 +37,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/msclients/
 ** This program is a !&@^#% messageserver client.
 */
 
-#include <andrewos.h>
 #include <big.h>
 #include <sys/stat.h>
 

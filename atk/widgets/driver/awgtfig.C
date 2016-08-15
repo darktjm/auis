@@ -20,9 +20,11 @@
  *  $
  */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/awgtfig.C,v 1.5 1996/05/07 20:36:04 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/awgtfig.C,v 1.5 1996/05/07 20:36:04 wjh Exp $";
 #endif
 
 /* awgtfig.C	
@@ -40,7 +42,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/dr
  * Copied from /afs/cs/misc/atk/@sys/alpha/lib/null
  */
 
-#include <andrewos.h>
 ATK_IMPL("awgtfig.H")
 
 #include <awgtfig.H>

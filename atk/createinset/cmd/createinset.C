@@ -26,9 +26,11 @@
  *  $
 */
 
+#include <andrewos.h>	/* sys/file sys/time */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/createinset/cmd/RCS/createinset.C,v 1.4 1994/08/16 17:42:38 wjh Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/createinset/cmd/RCS/createinset.C,v 1.4 1994/08/16 17:42:38 wjh Stab74 $";
 #endif
 
 /* createinset.c
@@ -125,7 +127,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/createinse
  *
 */
 
-#include <andrewos.h>	/* sys/file sys/time */
 #include <stdio.h>
 #ifndef MAXPATHLEN
 #include <sys/param.h>

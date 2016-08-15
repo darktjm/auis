@@ -66,7 +66,7 @@ public:
   virtual int ListHandouts()  ;
   virtual int ListGrade()  ;
   virtual int ListExchange()  ;
-  virtual void SetTitle(char *string);
+  virtual void SetTitle(const char *string);
   virtual void SetDisplay(boolean buttons, enum papers_Types windowtype);
   virtual void GradingListType(enum papers_Toggles type);
   virtual void SetDefault();

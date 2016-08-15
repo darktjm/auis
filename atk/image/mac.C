@@ -58,13 +58,14 @@
   CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 ****/
 
+#include <andrewos.h>
+
 #ifndef __SABER__
-static char *MRMCopyright = "Copyright 1990 Mark Majhor";
+static UNUSED const char MRMCopyright[] = "Copyright 1990 Mark Majhor";
 #endif
 #define _MRM_COPYRIGHT_
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("mac.H")
 #include <stdio.h>
 #include <math.h>

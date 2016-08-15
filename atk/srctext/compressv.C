@@ -24,10 +24,11 @@ $Disclaimer:
 
    compressv, a view to display a box where the hidden text lies. */
 
-static char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/compressv.C,v 2.0 1995/01/27 19:38:38 rr2b Stab74 $";
-
 #include <andrewos.h>
+
+static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
+static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/compressv.C,v 2.0 1995/01/27 19:38:38 rr2b Stab74 $";
+
 #include <view.H>
 #include <rect.h>
 #include <fontdesc.H>
@@ -46,7 +47,7 @@ static char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srct
 #include "compressv.H"
 
 static fontdesc *boxfont;
-static char *boxfgcolor=NULL, *boxbgcolor=NULL;
+static const char *boxfgcolor=NULL, *boxbgcolor=NULL;
 static int boxwidth=0;
 static keymap *c_Map;
 static menulist *c_Menus;
@@ -200,7 +201,7 @@ boolean compressv::InitializeClass()
 {
     char family[256];
     long style=0, size=8;    
-    char *fontname= environ::GetProfile("CompressBoxFont");
+    const char *fontname= environ::GetProfile("CompressBoxFont");
     boxwidth= environ::GetProfileInt("CompressBoxWidth", 0);
     boxfgcolor= environ::GetProfile("CompressBoxForegroundColor");
     boxbgcolor= environ::GetProfile("CompressBoxBackgroundColor");

@@ -25,14 +25,15 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/sbutton.C,v 3.6 1995/04/17 15:40:04 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/sbutton.C,v 3.6 1995/04/17 15:40:04 rr2b Stab74 $";
 #endif
 
 
  
-#include <andrewos.h>
 ATK_IMPL("sbutton.H")
 #include <stdio.h>
 #include <sys/param.h>
@@ -67,7 +68,7 @@ static char *EmptyString="";
 ATKdefineRegistry(sbutton, dataobject, sbutton::InitializeClass);
 #ifndef NORCSID
 #endif
-static char *Intern(char  *str);
+static const char *Intern(const char  *str);
 static void init(class sbutton  *self, int  i , int  j);
 static boolean SetupInitialState(class sbutton  *self);
 static void sbutton__WriteDataPart(class sbutton  *self, FILE  *fp);
@@ -92,13 +93,13 @@ static boolean triggerproc(class sbutton  *self, struct read_status  *rock, char
 static long dostuff(class sbutton  *self, FILE  *fp, struct read_status *rock, struct dataprocs  *procs);
 static long sbutton__ReadDataPart(class sbutton  *self, FILE  *fp, int  dsversion);
 static long sbutton_SanelyReturnReadError(class sbutton  *self, FILE  *fp, long  id, long  code);
-static void WriteLine(FILE  *f, char  *l);
+static void WriteLine(FILE  *f, const char  *l);
 static char *GlomStrings(char  *s , char  *t);
 static char *ReadLine(FILE  *f);
 static char *EncodeFont(class fontdesc  *font);
 
 
-static char *Intern(char  *str)
+static const char *Intern(const char  *str)
 {
     class atom *a;
     if(str==NULL) return NULL;
@@ -185,7 +186,7 @@ boolean sbutton::EnsureSize(int  ind)
 }
 
 
-char *colorprefs[sbutton_COLORS]={
+const char *colorprefs[sbutton_COLORS]={
     "background",
     "topshadow",
     "top", 
@@ -204,11 +205,12 @@ void sbutton::InitPrefs(struct sbutton_prefs  *prefs, char  *name)
 {
 	ATKinit;
 
-    char buf[1024], *font;
+    char buf[1024];
+    const char *font;
     long style, size;
     int i;
     for(i=0;i<sbutton_COLORS;i++) {
-	char *value;
+	const char *value;
 	strncpy(buf, name, sizeof(buf)-strlen(colorprefs[i])-1);
 	strcat(buf, colorprefs[i]);
 	value=environ::GetProfile(buf);
@@ -972,7 +974,7 @@ void sbutton::Swap(int  i1 , int  i2)
     (this)->NotifyObservers( observable_OBJECTCHANGED);
 }
 	
-void sbutton::SetLabel(int  ind, char  *txt)
+void sbutton::SetLabel(int  ind, const char  *txt)
 {
 /*
   Set the text label for this object.
@@ -1020,7 +1022,7 @@ int sbutton::Enumerate(sbutton_efptr func, long  rock)
     return -1;
 }
 
-static void WriteLine(FILE  *f, char  *l)
+static void WriteLine(FILE  *f, const char  *l)
 {
     /* 
       Output a single line onto the data stream, quoting

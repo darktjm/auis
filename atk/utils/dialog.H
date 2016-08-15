@@ -59,8 +59,8 @@ public:
 
 
     virtual void SetButtons(class sbutton *buttons);
-    virtual char * GetForeground()  ;
-    virtual char * GetBackground()  ;
+    virtual const char * GetForeground()  ;
+    virtual const char * GetBackground()  ;
     virtual void SetText(class text *text);
     
 

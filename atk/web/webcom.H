@@ -115,8 +115,8 @@ public:
 	virtual long  Size()  ;
 	virtual char * Error()  ;
 	virtual char * GetURL () ;
-	virtual char * GetTitle () ;
-	virtual void SetTitle (char *title);
+	virtual const char * GetTitle () ;
+	virtual void SetTitle (const char *title);
 	virtual FILE * Open(boolean readcontext)  ;
 	virtual void Close(FILE *f);
 	virtual class atom *  Type()  ;

@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nesssym.C,v 1.8 1996/05/17 20:53:12 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nesssym.C,v 1.8 1996/05/17 20:53:12 robr Exp $";
 #endif
 
 
@@ -127,7 +129,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objec
 
 
 
-#include <andrewos.h>
 #include <ness.H>
 #include <aaction.H>
 	

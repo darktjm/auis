@@ -25,12 +25,13 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/metax.C,v 3.5 1995/11/13 18:41:59 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/metax.C,v 3.5 1995/11/13 18:41:59 robr Stab74 $";
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("metax.H")
 
 #include <stdio.h>

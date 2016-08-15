@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/hname.c,v 1.13 1995/03/18 17:30:57 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/hname.c,v 1.13 1995/03/18 17:30:57 rr2b Stab74 $";
 #endif
 
 /*
@@ -37,18 +39,16 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
  
 
 #include <stdio.h>
-#include <andrewos.h>
 #include <errno.h>
 #include <andyenv.h>
 #include <system.h>
 #include <util.h>
 
-int GetHostDomainName(buf, buflen)
-char *buf; int buflen;
+int GetHostDomainName(char *buf, int buflen)
 {/* Returns like gethostname(); optionally appends the result of getdomainname(). */
     int Code;
     int hlen, dlen;
-    char *ptr, *DomSfx;
+    const char *DomSfx;
 #ifdef GETDOMAIN_ENV
     char Dom[400];
 #endif /* GETDOMAIN_ENV */

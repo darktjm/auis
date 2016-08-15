@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/abspath.c,v 2.10 1993/06/14 02:56:43 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/abspath.c,v 2.10 1993/06/14 02:56:43 rr2b Stab74 $";
 #endif
 
 /*
@@ -70,8 +72,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RC
 
 #define TRUE   1
 #define FALSE  0
-
-#include <andrewos.h>
 
 static char havecurwd = FALSE;
 static char curwd [1024];    /* remember the current working directory */

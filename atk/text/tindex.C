@@ -25,14 +25,15 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/tindex.C,v 3.11 1995/08/06 23:05:41 wjh Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/tindex.C,v 3.11 1995/08/06 23:05:41 wjh Stab74 $";
 #endif
 
 
  
-#include <andrewos.h>
 ATK_IMPL("tindex.H")
 #include <ctype.h>
 #include <util.h>

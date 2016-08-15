@@ -20,11 +20,11 @@
 //  $
 */
 
+#include <andrewos.h>
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/launchapp/RCS/launchapp.C,v 1.16 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/launchapp/RCS/launchapp.C,v 1.16 1995/11/07 20:17:10 robr Stab74 $";
 #endif
-#include <andrewos.h>
 ATK_IMPL("launchapp.H")
 #include <stdio.h>
 #include <string.h>
@@ -84,7 +84,7 @@ ATKdefineRegistry(launchapp, application, NULL);
 #endif /* USE_CLOCK */
 static class lpair *lpair_AddSplit(class lpair  *lp, class view  *v, enum lpair_side  side, enum lpair_dir  splitdir, enum lpair_type  splittype, 				    long  splitval, boolean  movable);
 static void ZombieHandler(int  pid, long  rock, int  *status);
-static void Do(char  *name, class frame  *frame, long  index, char  **args);
+static void Do(const char  *name, class frame  *frame, long  index, const char  **args);
 static char *Bin(char  *str);
 static void DoHelp(class launchapp  *self, class pushbutton  *b, long  rock);
 static void DoTour(class launchapp  *self, class pushbutton  *b, long  rock);
@@ -166,7 +166,7 @@ static void ZombieHandler(int  pid, long  rock, WAIT_STATUS_TYPE  *status)
     Buttons[rock].pid = 0;
 }
 
-static void Do(char  *name, class frame  *frame, long  index, char  **args)
+static void Do(const char  *name, class frame  *frame, long  index, const char  **args)
 {
     int forkval;
     char msgbuf[100];
@@ -177,7 +177,7 @@ static void Do(char  *name, class frame  *frame, long  index, char  **args)
 	return;
     }
     if ((forkval = osi_vfork()) == 0) {
-	execvp(*args, args);
+	execvp(*args, (char **)args);
     }
     else {
 	if (forkval > 0) {
@@ -200,7 +200,7 @@ static void Do(char  *name, class frame  *frame, long  index, char  **args)
 static char *Bin(char  *str)
 {
     static char buf[1024];
-    char *bin=environ::AndrewDir("/bin/");
+    const char *bin=environ::AndrewDir("/bin/");
     if(strlen(bin)>sizeof(buf)-strlen(str)-1) return str;
     strcpy(buf, bin);
     strcat(buf, str);
@@ -209,7 +209,7 @@ static char *Bin(char  *str)
 
 static void DoHelp(class launchapp  *self, class pushbutton  *b, long  rock)
 {
-    static char *args[] = {"help", "-d", "-new", NULL};
+    static const char *args[] = {"help", "-d", "-new", NULL};
 
     args[0]=Bin("help");
     
@@ -218,7 +218,7 @@ static void DoHelp(class launchapp  *self, class pushbutton  *b, long  rock)
 
 static void DoTour(class launchapp  *self, class pushbutton  *b, long  rock)
 {
-    char *args[4];
+    const char *args[4];
     args[0] = Bin("ez");
     args[1] = self->TourFile;
     args[2] = "-d";
@@ -228,7 +228,7 @@ static void DoTour(class launchapp  *self, class pushbutton  *b, long  rock)
 
 static void DoEz(class launchapp  *self, class pushbutton  *b, long  rock)
 {
-    char *args[4];
+    const char *args[4];
     args[0] = Bin("ez");
     args[1] = environ::AndrewDir("/help/ez.help");
     args[2] = "-d";
@@ -238,7 +238,7 @@ static void DoEz(class launchapp  *self, class pushbutton  *b, long  rock)
 
 static void DoConsole(class launchapp  *self, class pushbutton  *b, long  rock)
 {
-    static char *args[] = {"console", "-d", NULL};
+    static const char *args[] = {"console", "-d", NULL};
 
     args[0]=Bin("console");
     
@@ -247,7 +247,7 @@ static void DoConsole(class launchapp  *self, class pushbutton  *b, long  rock)
 
 static void DoMessages(class launchapp  *self, class pushbutton  *b, long  rock)
 {
-    static char *args[] = {"messages", "-d", NULL};
+    static const char *args[] = {"messages", "-d", NULL};
 
     args[0]=Bin("messages");
     Do("Messages", self->framep, rock, args);
@@ -255,7 +255,7 @@ static void DoMessages(class launchapp  *self, class pushbutton  *b, long  rock)
 
 static void DoTypescript(class launchapp  *self, class pushbutton  *b, long  rock)
 {
-    static char *args[] = {"typescript", "-d", NULL};
+    static const char *args[] = {"typescript", "-d", NULL};
 
     args[0]=Bin("typescript");
     Do("Typescript", self->framep, rock, args);
@@ -263,7 +263,7 @@ static void DoTypescript(class launchapp  *self, class pushbutton  *b, long  roc
 
 static void DoBush(class launchapp  *self, class pushbutton  *b, long  rock)
 {
-    static char *args[] = {"bush", "-d", NULL};
+    static const char *args[] = {"bush", "-d", NULL};
 
     args[0]=Bin("bush");
     Do("Bush", self->framep, rock, args);

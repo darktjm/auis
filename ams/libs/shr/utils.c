@@ -25,12 +25,13 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/shr/RCS/utils.c,v 2.10 1993/07/08 18:38:32 Zarf Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/shr/RCS/utils.c,v 2.10 1993/07/08 18:38:32 Zarf Stab74 $";
 #endif
 
-#include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <cui.h> /* Just for debugging, could as easily be ms.h */
@@ -63,6 +64,24 @@ char *string;
 	--len;
     }
     return(stripped);
+}
+
+/* same, but not modifying shit in place everywhere */
+const char *
+SkipWhiteEnds(const char *string, int *rlen)
+{
+    int len;
+
+    if (!string) return(string);
+    for (; *string && (*string == ' ' || *string == '\t' || *string == '\n'); ++string) {
+	;
+    }
+    len = strlen(string) - 1;
+    while (len>=0 && (string[len] == ' ' || string[len] == '\t' || string[len] == '\n')) {
+	--len;
+    }
+    *rlen = len;
+    return(string);
 }
 
 bone(buf, len)
@@ -163,9 +182,7 @@ char   *FullName,
 	to be all lower case, to a second string which is not, and
 	returns 0 if they are a case insensitive match */
 
-lc2strncmp(s1, s2, len)
-char *s1, *s2;
-int len;
+int lc2strncmp(const char *s1, const char *s2, int len)
 {
     while (len && *s1 && *s2 && (*s1 == *s2 || *s1 == tolower(*s2))) {
 	++s1; ++s2; --len;

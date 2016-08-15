@@ -23,10 +23,11 @@ $Disclaimer:
 
    hlptext, a text subclass with dogtags, for creating help files. */
 
-static char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/hlptext.C,v 2.0 1995/01/27 19:38:38 rr2b Stab74 $";
-
 #include <andrewos.h>
+
+static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
+static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/hlptext.C,v 2.0 1995/01/27 19:38:38 rr2b Stab74 $";
+
 #include "dogtags.h"
 #include "hlptext.H"
 

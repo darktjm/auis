@@ -25,13 +25,14 @@
  *  $
 */
 
+#include <andrewos.h>		/* sys/types.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/profile.c,v 2.21 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/profile.c,v 2.21 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
-#include <andrewos.h>		/* sys/types.h */
 #include <fdplumb.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -60,13 +61,10 @@ static char *firstProfileFileName = NULL;
  * the default list.  "savefname" flag added 12/13/91 by cn0h
  */
 static struct configurelist *
-openprofile(filename, defaultname, savefname)
-char *filename;
-char *defaultname;
-int savefname;
+openprofile(const char *filename, const char *defaultname, int savefname)
 {
-    char *pl=(char *) getenv(filename);
-    char *home=(char *) gethome(NULL);
+    char *pl=getenv(filename);
+    const char *home=(char *) gethome(NULL);
     char *sep;
 #ifdef DOS_STYLE_PATHNAMES
     char  sepchar = ';';
@@ -77,24 +75,26 @@ int savefname;
     struct configurelist *cl;
     char tmpFileName[MAXPATHLEN];
 
+    if(pl)
+	pl = strdup(pl);
     if(pl==NULL || *pl=='\0') {
 	/* Only check InitFilePath for Global profiles */
 	if (!strcmp(filename, "GLOBALPROFILES")) {
 	    /* Look for GLOBALPRFNAME in InitFilePath (if it exists), else use default */	
-	    char *initpath = GetConfiguration("InitFilePath");
+	    const char *initpath = GetConfiguration("InitFilePath");
 	    if (initpath != NULL && *initpath!='\0') {
-		pl = (char *)malloc(MAXPATHLEN);
-		findfileinpath(pl, initpath, GLOBALPRFNAME);
+		pl = malloc(MAXPATHLEN);
+		if(pl) findfileinpath((char *)pl, initpath, GLOBALPRFNAME);
 		if (pl == NULL || *pl == '\0')
-		    pl=defaultname;
+		    pl=strdup(defaultname);
 	    }
-	    else pl=defaultname;
+	    else pl=strdup(defaultname);
 	}
-	else pl=defaultname;
+	else pl=strdup(defaultname);
     }
 
     do{
-	char *name;
+	const char *name;
 	int namelen;
 
 	sep=(char *)index(pl,sepchar);
@@ -135,12 +135,13 @@ int savefname;
 	}
 
     } while(sep!=NULL);
+    free(pl);
 
     return NULL;
 
 }
 
-char *GetProfileFileName()
+const char *GetProfileFileName()
 {
     if (! inited)  {
 	profileHead = openprofile("PROFILES", DEFAULTPROFILES, 1);
@@ -151,7 +152,7 @@ char *GetProfileFileName()
     return profileFileName;
 }
 
-char *GetFirstProfileFileName()
+const char *GetFirstProfileFileName()
 {
     if (! inited)  {
 	profileHead = openprofile("PROFILES", DEFAULTPROFILES, 1);
@@ -162,7 +163,7 @@ char *GetFirstProfileFileName()
     return firstProfileFileName;
 }
 
-refreshprofile() {  /* Force rereading */
+void refreshprofile() {  /* Force rereading */
     if (profileHead != NULL)  {
 	FreeConfigureList(profileHead);
 	profileHead = NULL;
@@ -176,8 +177,7 @@ refreshprofile() {  /* Force rereading */
 
 /* Add a string to the front of the stringprofile list.
  */
-void addstringprofile(s)
-char *s;
+void addstringprofile(char *s)
 {
     struct configurelist *cl;
 
@@ -188,9 +188,9 @@ char *s;
     }
 }
 
-char *getprofile (var)
-char *var; {
-    char *retval;
+const char *getprofile (const char *var)
+{
+    const char *retval;
     if (! inited)  {
 	profileHead = openprofile("PROFILES", DEFAULTPROFILES, 1);
 	GloprofileHead = openprofile("GLOBALPROFILES", GLOBALPROFILE, 0);
@@ -217,22 +217,22 @@ char *var; {
     return (char *) GetConfig(GloprofileHead, var, 1) ;
 }
 
-getprofileswitch (var, DefaultValue)
-char   *var; {
-    char   *val;
+int getprofileswitch (const char *var, int DefaultValue)
+{
+    const char   *val;
     static struct keys {
-	char   *name;
+	const char   *name;
 	int     value;
     }                   keys[] = {
-	                    "true", 1,
-	                    "false", 0,
-	                    "on", 1,
-	                    "off", 0,
-	                    "yes", 1,
-	                    "no", 0,
-	                    "1", 1,
-	                    "0", 0,
-	                    0, 0
+	                    { "true", 1},
+	                    {"false", 0},
+	                    {"on", 1},
+	                    {"off", 0},
+	                    {"yes", 1},
+	                    {"no", 0},
+	                    {"1", 1},
+	                    {"0", 0},
+	                    {0, 0}
     };
     register struct keys   *p;
     if (var && (val = getprofile (var))) {
@@ -243,11 +243,11 @@ char   *var; {
     return DefaultValue;
 }
 
-getprofileint (var, DefaultValue)
-char   *var; {
-    register char  *val;
-    register    n = 0;
-    register    neg = 0;
+int getprofileint (const char *var, int DefaultValue)
+{
+    register const char  *val;
+    register    int n = 0;
+    register    int neg = 0;
 
     if (var == 0 || (val = getprofile(var)) == 0)  {
 	return DefaultValue;
@@ -255,21 +255,21 @@ char   *var; {
     while (*val) {
 	if (*val == '-')
 	    neg = ~neg;
-	else
-	    if (*val != ' ' && *val != '\t')
+	else {
+	    if (*val != ' ' && *val != '\t') {
 		if ('0' <= *val && *val <= '9')
 		    n = n * 10 + *val - '0';
 		else  {
 		    return DefaultValue;
 		}
+	    }
+	}
 	val++;
     }
     return neg ? -n : n;
 }
 
-profileentryexists(var, usedefault)
-    char *var;
-    int usedefault;
+int profileentryexists(const char *var, int usedefault)
 {
 
     if (! inited)  {

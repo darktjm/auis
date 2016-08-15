@@ -35,42 +35,62 @@ BEGINCPLUSPLUSPROTOS
 
 #include <andrewos.h>
 
-extern int fdplumb_SpillGuts();
+/* fdplumb*.c */
+extern int fdplumb_SpillGuts(void);
 extern int fdplumb_SpillGutsToFile(FILE *fp, int ExtraNewLines);
-extern int dbg_creat(char *path, int mode);
-extern int dbg_open(char *path, int flags, int mode);
-extern FILE *dbg_fopen(char *path, char *type);
+extern int dbg_creat(const char *path, int mode);
+extern int dbg_open(const char *path, int flags, int mode);
+extern FILE *dbg_fopen(const char *path, const char *type);
 extern int dbg_close(int fd);
 extern int dbg_fclose(FILE *fp);
 extern int dbg_dup(int oldfd);
 extern int dbg_dup2(int oldfd, int newfd);
 extern int dbg_pipe(int fdarr[2]);
 extern int dbg_socket(int af, int typ, int prot);
- 
-#ifdef POSIX_ENV
+int dbg_socketpair(int dom, int typ, int prot, int sv[]);
+int dbg_vclose(int fd);
+int dbg_vfclose(FILE *fp);
+FILE *dbg_popen(const char *path, const char *type);
+int dbg_pclose(FILE *fp);
+FILE *dbg_qopen(const char *path, char * const argv[], const char *mode);
+FILE *dbg_topen(const char *path, char * const argv[], const char *mode, int *pgrp);
+int dbg_qclose(FILE *fp);
+int dbg_tclose(FILE *fp, int seconds, int *timeout);
+int dbg_t2open(const char *name, char * const argv[], FILE **r, FILE **w);
+int dbg_t2close(FILE *fp, int seconds, int *timedout);
+#include <dirent.h>
+DIR *dbg_opendir(const char *name);
+void dbg_closedir(DIR *d);
+
+/* gtime.c */
 extern time_t gtime(struct tm *ct);
-#endif
-extern boolean IsOnVice(int fd);
-extern boolean ViceIsRunning();
-extern boolean fpacheck();
-extern FILE *qopen(char *name, char **argv, char *mode);
+
+/* fpacheck.c */
+extern boolean fpacheck(void);
+
+extern FILE *qopen(const char *name, char * const *argv, const char *mode);
+
+/* system.c */
 extern int os_system(const char *cmd);
+
+/* procstuf.c */
 extern char *statustostr(WAIT_STATUS_TYPE *status, char *buf, int len);
-extern char **strtoargv(char *command, char **argvbuf, int len);
-extern char *argvtostr(char **argv,char *buf,int len);
-extern int CheckServiceConfiguration();
+extern const char **strtoargv(char *command, const char **argvbuf, int len);
+extern char *argvtostr(const char * const *argv,char *buf,int len);
+
+extern int CheckServiceConfiguration(void);
 
 extern int GetPty(int *master, int *pty); /* opens up both ends of a pty */
 extern int GetPtyandName(int *master, int *pty, char *ptyname, int ptysize);
 #ifdef WHITEPAGES_ENV
 /* Compatibility routines */
-extern int getvuid();             /* returns ViceID or -1 (sets errno on error) */
+extern int getvuid(void);             /* returns ViceID or -1 (sets errno on error) */
 extern struct passwd *getvpwuid(int  vuid);     /* These work a lot like the non-V
                                         * versions */
 extern struct passwd *getvpwnam(char  *vnam);
-extern int setvpwent();
-extern int endvpwent();
-extern struct passwd *getvpwent();
+extern int setvpwent(void);
+extern int endvpwent(void);
+extern struct passwd *getvpwent(void);
 
 extern struct passwd *getcpwuid(int  vuid , char  *vcell);     /* Take TWO arguments: a uid/nam and a
                                         * Vice cell name. */
@@ -90,20 +110,38 @@ extern int      cpw_error;
 #define cpw_error errno
 #endif                                 /* WHITEPAGES_ENV */
 
-extern int     FoldTRT[256];
+/* foldedeq.c */
+extern const int     FoldTRT[256];
 
 extern boolean FoldedEQ(const char *a, const char *b);
 extern boolean FoldedEQn(const char *a, const char *b, int n);
 extern boolean FoldedWildEQ(const char *a, const char *b, boolean ignorecase);
-#define FOLDEDEQ(s1,s2) (FoldTRT[(s1)[0]]==FoldTRT[(s2)[0]] && FoldedEQ(s1,s2))
-#define FOLDEDEQN(s1,s2,n) (n <= 0 || (FoldTRT[(s1)[0]]==FoldTRT[(s2)[0]] && FoldedEQn(s1,s2,n)))
+#define FOLDEDEQ(s1,s2) (FoldTRT[(unsigned char)(s1)[0]]==FoldTRT[(unsigned char)(s2)[0]] && FoldedEQ(s1,s2))
+#define FOLDEDEQN(s1,s2,n) (n <= 0 || (FoldTRT[(unsigned char)(s1)[0]]==FoldTRT[(unsigned char)(s2)[0]] && FoldedEQn(s1,s2,n)))
 
 extern int lc_strcmp(const char *a, const char *b);
 extern int lc_strncmp(const char *a, const char *b, int n);
 
-extern char *gethome(char  *name);
-extern char *getMyHome();
+/* lcappend.c */
+void LCappend(char *s1, const char *s2);
 
+/* lcstring.c */
+char *lcstring(char *d, const char *s, int n);
+
+/* ucstring.c */
+char *ucstring(char *d, const char *s, int n);
+
+/* getla.c */
+extern double getla(int index);
+extern void getla_ShutDown(void);
+
+/* gethome.c */
+extern const char *gethome(const char  *name);
+
+/* getmyhom.c */
+extern const char *getMyHome(void);
+
+/* hname.c */
 extern int GetHostDomainName(char  *buf , int  buflen);	/* works like gethostname() but extends with getdomainname() if necessary. */
 
 struct configurelist {
@@ -113,6 +151,27 @@ struct configurelist {
     struct configurelist *next;
 };
 
+/* andrwdir.c */
+extern const char *AndrewDir(const char *suffix);
+
+/* andydir.c */
+extern const char *AndyDir(const char *suffix);
+
+/* localdir.c */
+extern const char *LocalDir(const char *suffix);
+
+/* xbasedir.c */
+extern const char *XLibDir(const char *suffix);
+
+/* config.c */
+extern char ProgramName[];
+#ifdef LOCAL_ANDREW_SETUP_ENV
+#define conf_NumConfigNames 6
+#else
+#define conf_NumConfigNames 5
+#endif
+extern const char *conf_ConfigNames[conf_NumConfigNames + 1];
+extern int conf_ConfigUsed, conf_ConfigErrno;
 #define CONFIG_EOF -1
 #define CONFIG_FOUNDENTRY 0
 #define CONFIG_BADENTRY 1
@@ -121,55 +180,63 @@ struct configurelist {
 #define CONFIG_EMPTYLINE 4
 #define CONFIG_NOKEY 5
 #define CONFIG_NOVALUE 6
-
-extern char *AndrewDir(char *suffix);
-extern char *AndyDir(char *suffix);
-extern char *LocalDir(char *suffix);
-extern char *XLibDir(char *suffix);
-
-
-extern int ReadConfigureLine(FILE  *fp, char  *text, int  maxTextLength, char  **program, int  *programLength, char  **key, int  *keyLength, char  **value, int  *valueLength, char  **condition, int  *conditionLength);   /* Reads a line from a file in
+extern int ReadConfigureLine(FILE  *fp, char  *text, int  maxTextLength, const char  **program, int  *programLength, const char  **key, int  *keyLength, const char  **value, int  *valueLength, const char  **condition, int  *conditionLength);   /* Reads a line from a file in
                                         * configure file format - returns one
                                         * of the above values */
-extern struct configurelist *ReadConfigureFile(char  *fileName);       /* reads a configure
+extern struct configurelist *ReadConfigureFile(const char  *fileName);       /* reads a configure
                                                          * file given by
                                                          * filename */
-extern char *GetConfig(struct configurelist  *header, char  *key, int  usedefault);           /* returns the value corresponding to a
+extern const char *GetConfig(const struct configurelist  *header, const char  *key, int  usedefault);           /* returns the value corresponding to a
                                         * key for a given configurelist */
-extern char *GetConfiguration(char  *key);    /* returns the value for a key in the
+extern const char *GetConfiguration(const char  *key);    /* returns the value for a key in the
                                         * AndrewSetup file */
-extern int FreeConfigureList(register struct configurelist  *cList);   /* frees a configure list */
+extern struct configurelist *ReadStringConfig(char *str);
+extern void FreeConfigureList(struct configurelist  *cList);   /* frees a configure list */
 
+/* profile.c */
 extern void addstringprofile(char *str);
-extern char *getprofile (char  *var );
-extern char     *getprofilestring();
-extern int getprofileint (char    *var , int DefaultValue);
-extern int getprofileswitch (char    *var , boolean DefaultValue);
-extern int profileentryexists (char    *var , boolean DefaultValue);
-extern char *GetProfileFileName();
-extern char *GetFirstProfileFileName();
-extern int refreshprofile();
+extern const char *getprofile (const char  *var );
+extern int getprofileint (const char    *var , int DefaultValue);
+extern int getprofileswitch (const char    *var , boolean DefaultValue);
+extern int profileentryexists (const char    *var , boolean DefaultValue);
+extern const char *GetProfileFileName(void);
+extern const char *GetFirstProfileFileName(void);
+extern void refreshprofile(void);
 
-extern int setprofilestring(char  *prog , char  *pref , char  *val);
+/* desym.c */
+extern int DeSymLink(const char *inp, char *outp, int newRoots);
 
-extern void findfileinpath(char *buffer, char *path, char *fname);
+/* setprof.c */
+extern int setprofilestring(const char  *prog , const char  *pref , const char  *val);
 
-extern char *ap_Shorten(char  *pathname);          /* ap_Shorten(path) tries to shorten
+/* findfile.c */
+extern void findfileinpath(char *buffer, const char *path, const char *fname);
+
+/* abbrpath.c */
+/* note: "const" pathname only applies if it isn't shorten's static buffer */
+extern const char *ap_Shorten(const char  *pathname);          /* ap_Shorten(path) tries to shorten
                                         * path using the current home dir */
-extern char *ap_ShortenAlso(char  *pathname , char  *auxI , char  *auxH);      /* (path, otherID, otherHD does the
+extern const char *ap_ShortenAlso(const char  *pathname , const char  *auxI , const char  *auxH);      /* (path, otherID, otherHD does the
                                         * same but with otherID/otherHD also. */
-extern char *ap_ShortenTo(char  *pathname , int  maxLen);        /* (pathname, maxlen) shortens to a
+extern const char *ap_ShortenTo(const char  *pathname , int  maxLen);        /* (pathname, maxlen) shortens to a
                                         * maximum length, abbreviating the
                                         * path prefix to hyphens. */
-extern char *ap_ShortenAlsoTo(char  *pathname , char  *auxI , char  *auxH , int  maxLen);    /* (pathname, otherID, otherHD, maxlen)
+extern const char *ap_ShortenAlsoTo(const char  *pathname , const char  *auxI , const char  *auxH , int  maxLen);    /* (pathname, otherID, otherHD, maxlen)
                                         * does both things. */
 
-extern int fwriteallchars(char  *Thing, int  NItems, FILE  *stream);      /* pass (text, num, stream) and it
+/* fselect.c */
+extern int fselect(int nfds, FILE **rfiles, FILE **wfiles, FILE **xfiles, struct timeval *timeout);
+
+/* fwrtallc.c */
+extern int fwriteallchars(const char  *Thing, int  NItems, FILE  *stream);      /* pass (text, num, stream) and it
                                         * retries fwrite on interruption */
-extern int writeall(int  fd, char  *Buf, int  NBytes);            /* pass (fd, buf, nbytes) and it
+
+/* writeall.c */
+extern int writeall(int  fd, const char  *Buf, int  NBytes);            /* pass (fd, buf, nbytes) and it
                                         * retries write on interruption */
 
-extern char *NiceTime(long int Time);            /* Converts long arg to printable time
+/* nicetime.c */
+extern const char *NiceTime(long int Time);            /* Converts long arg to printable time
                                         * string without newline */
 
 struct LinePromState {
@@ -177,16 +244,14 @@ struct LinePromState {
     char            InDefine, Promoting, SawBlankLine;
 };
 
+/* lineprom.c */
 extern int BE2LinePromoteInit(struct LinePromState  **refstate);
-
  /*
   * int BE2LinePromoteInit(refstate) struct LinePromState **refstate; Returns
   * < 0 for (malloc) failure, 0 for OK.  Initializes *refstate to point to
   * malloc'ed storage that will hold the LinePromote state.
   */
-
-extern int BE2LinePromote(char  *line , struct LinePromState  *state);
-
+extern int BE2LinePromote(const char  *line , struct LinePromState  *state);
  /*
   * int BE2LinePromote(line, state) char *Line; struct LinePromState *state;
   * Works only on BE2 Datastream messages* Returns 2 if this line (including
@@ -196,24 +261,23 @@ extern int BE2LinePromote(char  *line , struct LinePromState  *state);
   * ``demoted'' to the very tail end of the encapsulated message.  Returns < 0
   * on errors.
   */
-
 extern int BE2LinePromoteEnd(struct LinePromState  *state);
-
  /*
   * int BE2LinePromoteEnd(state) struct LinePromState *state; Cleans up the
   * malloc'ed storage and returns 0 if OK, non-zero on errors.
   */
 
-extern char *UnixSignal(int	 signalNumber);          /* Pass it a signal and it returns a
+/* usignal.h */
+extern const char *UnixSignal(int	 signalNumber);          /* Pass it a signal and it returns a
                                         * static string giving its name */
 
-extern int VenusFlush(char  *pname);          /* Hand it the name of a file to flush
+/* venusop.c */
+extern int VenusFlush(const char  *pname);          /* Hand it the name of a file to flush
                                         * from Venus cache */
-extern int VenusFlushCallback(char  *pname);  /* Hand it the name of a file for which
+extern int VenusFlushCallback(const char  *pname);  /* Hand it the name of a file for which
                                         * to flush the callback */
-extern int VenusFetch(char  *pname);          /* Hand it the name of a file to
+extern int VenusFetch(const char  *pname);          /* Hand it the name of a file to
                                         * pre-fetch into the Venus cache */
-
 /* Caveat: the CancelStore function is no longer implemented in in-kernel AFS (10/11/88) */
 extern int VenusCancelStore(int  fid);    /* Hand it a fid and Venus won't store
                                         * the file on its close */
@@ -242,9 +306,14 @@ struct CellAuth {
     int             IsLocal;           /* whether this auth is local or
                                         * AFS-based. */
 };
-extern void EraseCellMemory();     /* Makes us get a new array of auth
+
+/* cellauth.c */
+extern void EraseCellMemory(void);     /* Makes us get a new array of auth
                                         * descriptors next time. */
-extern int FindCell(char  *cellName, struct CellAuth  **ppCellAuth);            /* int FindCell(cellName, ppCellAuth)
+extern int ca_UpdateCellAuths(void);  /* int ca_UpdateCellAuths(void); Update the
+                                        * ExpireTime fields in our CellAuth
+                                        * structures. */
+extern int FindCell(const char  *cellName, struct CellAuth  **ppCellAuth);            /* int FindCell(cellName, ppCellAuth)
                                         * char *cellName; struct CellAuth
                                         * **ppCellAuth; Return a pointer to
                                         * our authentication for cell
@@ -256,15 +325,15 @@ extern int FindCell(char  *cellName, struct CellAuth  **ppCellAuth);            
                                         * cell, or if there's no such cell.
                                         * Return 2 if we're completely
                                         * unauthenticated. */
-
-/* MISSING DEFINITION FindHomeCell() */
-extern int       FindHomeCell();        /* int FindHomeCell(ppCellAuth) struct
+#if 0
+/* MISSING DEFINITION FindHomeCell(void) */
+extern int       FindHomeCell(void);        /* int FindHomeCell(ppCellAuth) struct
                                         * CellAuth **ppCellAuth; Like
                                         * FindCell, except that it returns a
                                         * pointer to the $HOME cell, if there
                                         * is one. Return 1 if there's no home
                                         * cell. */
-
+#endif
 extern int FindAnyCell(struct CellAuth  **ppCellAuth);         /* int FindAnyCell(ppCellAuth) struct
                                         * CellAuth **ppCellAuth; Like
                                         * FindCell, except that it returns a
@@ -276,15 +345,16 @@ extern int FindNextCell(struct CellAuth  **ppCellAuth);        /* int FindNextCe
                                         * authenticated cells.  Starts and
                                         * ends with *ppCellAuth == NULL. */
 
+/* cawp.c */
 extern void FillInCell(struct CellAuth  *cellAuth);          /* void FillInCell(cellAuth) struct
                                         * CellAuth *cellAuth; Fill in the
                                         * white pages values for the given
                                         * cell pointer; an error (or success)
                                         * code is left in cellAuth->WpError. */
-extern int ca_UpdateCellAuths();  /* int ca_UpdateCellAuths(); Update the
-                                        * ExpireTime fields in our CellAuth
-                                        * structures. */
 
+/* vclose.c */
+extern boolean IsOnVice(int fd);
+extern boolean ViceIsRunning(void);
 extern int vclose(int  fd);              /* Close a fileid and wait for it to
                                         * complete in Vice */
 extern int vfclose(FILE  *f);             /* fclose a FILE* and wait for it to
@@ -292,38 +362,47 @@ extern int vfclose(FILE  *f);             /* fclose a FILE* and wait for it to
 extern int vdown(int  err);               /* return TRUE iff the errno value
                                         * passed as argument says that Vice or
                                         * Venus was down */
+
+/* tfail.c */
 extern int tfail(int  errorNumber);               /* return TRUE iff the errno value
                                         * passed as arg is a temp failure */
 
-#ifdef FILE
-extern FILE *topen(char  *name , char  *argv[] , char  *mode, int  *pgrp);               /* like popen() but enable timeouts for
+/* topen.c */
+extern FILE *topen(const char  *name , char  * const argv[] , const char  *mode, int  *pgrp);               /* like popen(void) but enable timeouts for
                                         * the close */
-extern FILE *qopen(char  *name , char  *argv[] , char  *mode);               /* topen() with simplified calling
+extern FILE *qopen(const char  *name , char  * const argv[] , const char  *mode);               /* topen(void) with simplified calling
                                         * sequence */
 
-#endif                                 /* FILE */
-extern int tclose(FILE  *ptr, int  seconds , int  *timedout);              /* pclose() sensitive to subprocess
+extern int tclose(FILE  *ptr, int  seconds , int  *timedout);              /* pclose(void) sensitive to subprocess
                                         * timeouts */
-extern int qclose(FILE  *ptr);              /* tclose() with simplified calling
+extern int qclose(FILE  *ptr);              /* tclose(void) with simplified calling
                                         * sequence */
-extern int t2open(char  *name , char  *argv[], FILE  **r , FILE  **w);              /* topen() with both reading and
-                                        * writing of subprocesses */
-extern int t2close(FILE  *ptr, int  seconds , int  *timedout);             /* close the t2open() */
 
-extern char *ULsindex(char  *big , char  *small);            /* Searches for substring of arg1 that
+/* t2open.c */
+extern int t2open(const char  *name , char  * const argv[], FILE  **r , FILE  **w);              /* topen(void) with both reading and
+                                        * writing of subprocesses */
+extern int t2close(FILE  *ptr, int  seconds , int  *timedout);             /* close the t2open(void) */
+
+/* ulsindex.c */
+extern char *ULsindex(const char  *big , const char  *small);            /* Searches for substring of arg1 that
                                         * matches arg2, ignoring alpha case,
                                         * and returns a pointer to this
                                         * substr. If no match is found,
                                         * returns a 0. */
-extern int ULstrcmp(register char  *s1 , register char  *s2);            /* Compares two arg strings, ignoring
+
+/* ulstrcmp.c */
+extern int ULstrcmp(const char  *s1 , const char  *s2);            /* Compares two arg strings, ignoring
                                         * alpha case, like strcmp. */
-extern int ULstrncmp(char  *s1 ,char  *s2,int  n);	       /* Compares two arg strings, ignoring
+extern int ULstrncmp(const char  *s1 ,const char  *s2,int  n);	       /* Compares two arg strings, ignoring
                                         * alpha case, like strncmp. */
-extern int ULstlmatch (char  *big,char  *small );          /* Returns 1 iff initial characters of
+
+/* ulstlmat.c */
+extern int ULstlmatch (const char  *big,const char  *small );          /* Returns 1 iff initial characters of
                                         * arg1 match arg2, ignoring alpha
                                         * case, else 0. */
 
-extern char *NewString(char  *srcptr);           /* Return a dynamically-allocated copy
+/* newstr.o */
+extern char *NewString(const char  *srcptr);           /* Return a dynamically-allocated copy
                                         * of the single arg string, or 0 if
                                         * allocation fails. */
 #define FREESTRINGVAR(s)   \
@@ -334,32 +413,38 @@ extern char *NewString(char  *srcptr);           /* Return a dynamically-allocat
 extern void FreeString(char *srcptr);		/* Deallocate
                                         * string from NewString.  */
 
-extern char *UnixError(int	 errorNumber);           /* Pass it an errno value and it
+/* uerror.c */
+extern const char *UnixError(int	 errorNumber);           /* Pass it an errno value and it
                                         * returns a static (canned) string
                                         * describing the error */
 
+/* thiscell.c */
 extern int GetCurrentWSCell(char  *Buf, int    size);    /* (Buf, size) */
-extern int GetCellFromFileName(char  *FileName, char  *Buf, int    size); /* (Filename, Buf, size) */
+extern int GetCellFromFileName(const char  *FileName, char  *Buf, int    size); /* (Filename, Buf, size) */
 
+/* titles.c */
 extern void SetInitialArgs(int  argc , char  **argv , char  **envp);      /* SetInitialArgs(argc, argv,
                                         * envp|NULL)--pass proc title stuff
                                         * after copying everything wanted from
                                         * argv, and from envp, too, if that's
                                         * passed also. */
-extern void SetProcTitle(char  *str, ...);        /* SetProcTitle(str, a1, a2, a3, a4,
+extern void SetProcTitle(const char  *str, ...);        /* SetProcTitle(str, a1, a2, a3, a4,
                                         * a5)--like printf into the process
                                         * title. */
 
-extern unsigned long getaddr ();	       /* Return our internet address as a 
+/* getaddr.c */
+extern unsigned long getaddr (void);	       /* Return our internet address as a 
 				        * long in network byte order.  
 					* Returns zero if it can't find one. */
 
+/* encode.c */
 extern void output64chunk(int c1, int c2, int c3, int pads, FILE *fp);
-extern int hexchar(int c);
-extern int char64(int c);
+extern int hexchar(char c);
+extern int char64(char c);
 extern int from64(FILE *, FILE *);
 extern void to64(FILE *, FILE *);
 extern int fromqp(FILE *, FILE *);
+
 #define ORDINALIZE(i) \
   (((((i)%100)==11)||(((i)%100)==12)||(((i)%100)==13))?"th": \
    (((i)%10)==1)?"st": \
@@ -381,6 +466,7 @@ extern int fromqp(FILE *, FILE *);
 	  n); */
 
 
+/* errhdlr.c */
 #ifndef ERRHDLR_H
 #define ERRHDLR_H
 
@@ -443,8 +529,9 @@ extern EH_environment *_error_handler_env;
      These routines will signal errors, so be prepared to catch those errors.
 */
 
-extern char *emalloc(long  size);
-extern char *erealloc(char  *old, long  newsize);
+extern void *emalloc(long  size);
+extern void *erealloc(void  *old, long  newsize);
+extern char *CopyString(const char *old);
 
 /*
   Module definitions:
@@ -456,7 +543,19 @@ extern char *erealloc(char  *old, long  newsize);
 
 #endif /* ERRHDLR_H */
 
+/* tokpak.c */
+extern int tok_AddStr(char **pOut, int *pOutL, int *pOutM, const char *StrToAdd);
+extern int GetAndPackAllTokens_Prim(char **pWhere, int *pWhereLen, int *pWhereMax, int debug, const char *PrimCell);
+extern int GetAndPackAllTokens(char **pWhere, int *pWhereLen, int *pWhereMax, int debug);
 
+/* tokunpak.c */
+extern int unpacktokens(const char *tokens, char *ctoken, char *stoken, int debug, int set);
+extern int tok_GenAuths(char **pWhere, int *pWhereLen, unsigned long *begdP, unsigned long *expdP, int *vidP, const char *cell, const char *vname, int *primP, int *locP, int debug);
+extern int GenTokens(char **pWhere, int *pWhereLen, unsigned long *expdP, unsigned long *vidP, const char *cell, int *primP, int *locP, int debug);
+extern int UnpackAndSetTokens(char *Where, int WhereLen, int debug, int setPag);
+extern int ExtractCellID(char *Where, int WhereLen, const char *cellName, int debug);
+
+/* alquery.c */
 #ifdef AFS30_ENV
 /* Error codes for aq_XXX functions.  Actually, their negatives are returned. */
 #define ALQ_ERRNO 1
@@ -466,36 +565,36 @@ extern char *erealloc(char  *old, long  newsize);
 #define ALQ_SYSTEM_GROUP 5
 #define ALQ_EPRS_BASE 20
 
-extern int aq_GroupP(char  *group , char  *groupcell);
+extern int aq_GroupP(const char  *group , const char  *groupcell);
 /* Returns 1 if the name "group" is a groupname, 0 if not, <0 on errors. */
 
-extern int aq_GetGroupMembers(char  *group , char  *groupcell , char  **outBuf);  
+extern int aq_GetGroupMembers(const char  *group , const char  *groupcell , char  **outBuf);  
 /* Return the members of the given group as a newline-separated list in 
    outBuf, which is modified to point to a malloc'd string.  The return 
    value is 0 if all is OK and negative on errors: a return value of -1 
    means to look in errno. */
 
-extern int aq_UserInGroup(char  *user , char  *usercell , char  *group , char  *groupcell);
+extern int aq_UserInGroup(const char  *user , const char  *usercell , const char  *group , const char  *groupcell);
 /* Return whether the given user is in the given group in the given cell.  
    1 means YES, 0 means NO, negative numbers are error codes; 
    -1 means to look in errno. */
 
 
-extern long int aq_UserRightsToDir(char  *user , char  *usercell , char  *dir);
+extern long int aq_UserRightsToDir(const char  *user , const char  *usercell , const char  *dir);
 /* Return the access rights that the given user has to the given dir.  
    Negative numbers are error codes; -1 means to look in errno. */
 
-extern int aq_CheckUserAllRightsToDir(char  *user , char  *usercell , char  *dir , long int rights);
+extern int aq_CheckUserAllRightsToDir(const char  *user , const char *usercell , const char *dir , long int rights);
 /* Check whether the given user has all of a collection of rights to 
    the given directory.  Return 1 if YES, 0 if NO; negative numbers 
    are error codes, and -1 means to look in errno. */
 
-extern int aq_CheckUserAnyRightToDir(char  *user , char  *usercell , char  *dir , long int rights);
+extern int aq_CheckUserAnyRightToDir(const char *user , const char *usercell , const char *dir , long int rights);
 /* Check whether the given user has any of a collection of rights to the 
    given directory.  Return 1 if YES, 0 if NO; negative numbers are 
    error codes, and -1 means to look in errno. */
 
-extern char *aq_GetLastErrorMessage();
+extern const char *aq_GetLastErrorMessage(void);
 /* Returns the text string of the last error message.  Points to static 
    storage, do NOT free. */
 

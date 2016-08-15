@@ -25,16 +25,17 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/typescript/RCS/tscripta.C,v 1.7 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/typescript/RCS/tscripta.C,v 1.7 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
  
 
 
-#include <andrewos.h>
 ATK_IMPL("tscripta.H")
 #include <tscripta.H>
 #include <application.H>
@@ -49,9 +50,9 @@ ATK_IMPL("tscripta.H")
 
 ATKdefineRegistry(typescriptapp, application, NULL);
 
-boolean typescriptapp::ParseArgs(int argc, char **argv)
+boolean typescriptapp::ParseArgs(int argc, const char **argv)
 {
-    char *cwd = NULL;
+    const char *cwd = NULL;
 
     if(!(this)->application::ParseArgs(argc,argv))
 	return FALSE;
@@ -134,7 +135,7 @@ boolean typescriptapp::Start()
     class im *im;
     char nbuf[256];
     FILE *df = NULL;
-    char *home;
+    const char *home;
 
     if(!(this)->application::Start())
 	return FALSE;
@@ -154,7 +155,7 @@ boolean typescriptapp::Start()
 		df = fopen (nbuf, "r");
 	    }
 	    if (df == NULL)  {
-		char *fileName;
+		const char *fileName;
 
 		fileName = environ::AndrewDir("/lib/shmenu");
 		df = fopen (fileName, "r");

@@ -29,7 +29,7 @@
 ATK_IMPL("gentext.H")
 
 #ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/gentext.C,v 1.2 1996/10/13 23:13:41 wjh Exp $";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/gentext.C,v 1.2 1996/10/13 23:13:41 wjh Exp $";
 #endif
 
 #include <im.H>

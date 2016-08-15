@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/time.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/errormon.C,v 1.9 1996/02/09 19:37:26 susan Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/errormon.C,v 1.9 1996/02/09 19:37:26 susan Stab74 $";
 #endif
 
 
@@ -42,7 +44,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/li
  */
 
 
-#include <andrewos.h> /* sys/types.h sys/time.h sys/file.h */
 #include <im.H>
 #include <consoleClass.H>
 #include <environ.H>
@@ -199,9 +200,10 @@ int RealOpenConsoleSocket(class consoleClass *self)
     return 0;
 }
 
-static int IsRemoteDisplay( char *s )
+static int IsRemoteDisplay( const char *s )
 {
-    char buf[256], *c;
+    char buf[256];
+    const char *c;
 
     if (!s) return 0; /* no DISPLAY */
     if (*s == ':') return 0; /* R5 local is :X.X */

@@ -70,11 +70,12 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/gifwr.C,v 3.3 1994/03/12 21:12:28 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/gifwr.C,v 3.3 1994/03/12 21:12:28 rr2b Stab74 $";
 #endif
-#include <andrewos.h>
 #include <image.H>
 #define AUXMODULE 1
 #include <gif.H>

@@ -25,15 +25,16 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/testing/RCS/utest.c,v 2.8 1992/12/15 21:04:17 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/testing/RCS/utest.c,v 2.8 1992/12/15 21:04:17 rr2b Stab74 $";
 #endif
 
 #include <stdio.h>
 #include <signal.h>
 #include <system.h>
-#include <andrewos.h>
 #ifdef HAS_SYSEXITS
 #include <sysexits.h>
 #endif /* HAS_SYSEXITS */

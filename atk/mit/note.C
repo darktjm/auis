@@ -25,13 +25,13 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/note.C,v 1.3 1994/08/11 03:02:56 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/note.C,v 1.3 1994/08/11 03:02:56 rr2b Stab74 $";
 #endif
 
-
-#include <andrewos.h>
 
 #include <text.H>
 #include <sys/types.h>

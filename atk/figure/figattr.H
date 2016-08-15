@@ -143,9 +143,9 @@ class figattr : public  dataobject  {
       inline void SetColor(char *val)  { ((this)->SetColorVal( val), (this)->active |= ((unsigned long)1<<figattr_Color)); }
       inline char *GetColor(class figattr *def)  { return (((this))->IsActive( figattr_Color) ? ((this)->color) : ((def)->color)); }
 
-      inline void SetFontFamilyVal(char *val)  { (((this)->fontfamily ? (free((this)->fontfamily), 1) : 0), (this)->fontfamily = (char *)malloc(1+strlen(val)), strcpy((this)->fontfamily, (val))); }
+      inline void SetFontFamilyVal(const char *val)  { (((this)->fontfamily ? (free((this)->fontfamily), 1) : 0), (this)->fontfamily = (char *)malloc(1+strlen(val)), strcpy((this)->fontfamily, (val))); }
       inline char  * GetFontFamilyVal()  { return ((this)->fontfamily); }
-      inline void SetFontFamily(char *val)  { ((this)->SetFontFamilyVal( val), (this)->active |= ((unsigned long)1<<figattr_FontFamily)); }
+      inline void SetFontFamily(const char *val)  { ((this)->SetFontFamilyVal( val), (this)->active |= ((unsigned long)1<<figattr_FontFamily)); }
       inline char *GetFontFamily(class figattr *def)  { return (((this))->IsActive( figattr_FontFamily) ? ((this)->fontfamily) : ((def)->fontfamily)); }
 
       inline void SetFontSizeVal(long val)  { ((this)->fontsize = (val)); }

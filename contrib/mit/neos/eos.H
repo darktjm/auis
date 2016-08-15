@@ -77,7 +77,7 @@ public:
 
   virtual void SetBuffer(char *filename, long flags);
   virtual char * NameBuffer()  ;
-  virtual void SetTitle(char *string);
+  virtual void SetTitle(const char *string);
   virtual void SetCourse(char *name);
   virtual void SetFontDisplay();
   virtual void SetFontDefault();

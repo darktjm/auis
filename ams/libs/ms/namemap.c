@@ -25,14 +25,15 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/namemap.c,v 2.12 1993/03/10 20:14:02 gk5g Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/namemap.c,v 2.12 1993/03/10 20:14:02 gk5g Stab74 $";
 #endif
 
 #include <stdio.h>
 #include <ms.h>
-#include <andrewos.h> /* sys/file.h */
 #include <sys/stat.h>
 
 extern FILE *fopen();

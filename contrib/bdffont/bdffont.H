@@ -90,8 +90,8 @@ public:
 	 long Read(FILE *file, long id)  ;
 	 long Write(FILE *file, long writeid, int level)  ;
     
-	virtual void SetFontName(char *fn);
-	virtual void SetFontFamily(char *fn);
+	virtual void SetFontName(const char *fn);
+	virtual void SetFontFamily(const char *fn);
 	virtual void GetBoundingBox(long *w, long *h, long *x, long *y);
 	virtual void SetBoundingBox(long w, long h, long x, long y);
 	virtual void GetResolution(long *rx, long *ry);

@@ -23,10 +23,11 @@
  
    asmtext, an object for editing Assembly Language code. */
 
-static char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/asmtext.C,v 2.2 1995/02/09 21:48:34 susan Stab74 $";
-
 #include <andrewos.h>
+
+static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
+static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/asmtext.C,v 2.2 1995/02/09 21:48:34 susan Stab74 $";
+
 #include <attribs.h>
 #include <toolcnt.h>
 

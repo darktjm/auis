@@ -294,7 +294,7 @@ image::InitializeClass( )
 image::image( )
 {
     ATKinit;
-    char *saveformat;
+    const char *saveformat;
 
     (this)->Type() = 0;
     if(!(this->rgb = (RGBMap *) calloc(1, sizeof(RGBMap))) )

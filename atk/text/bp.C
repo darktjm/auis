@@ -6,11 +6,12 @@
 /* $ACIS:$ */
 /* $Source: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/bp.C,v $ */
 
+#include <andrewos.h>
+
 #ifndef lint
-static char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/bp.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/bp.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif /* lint */
 
-#include <andrewos.h>
 ATK_IMPL("bp.H")
 #include <bp.H>
 

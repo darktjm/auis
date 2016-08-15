@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/utils/RCS/dialogv.C,v 3.8 1995/05/04 17:19:53 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/utils/RCS/dialogv.C,v 3.8 1995/05/04 17:19:53 rr2b Stab74 $";
 #endif
 
 
@@ -37,7 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/utils/RCS/
 #endif /* lint */
 
 
-#include <andrewos.h>
 ATK_IMPL("dialogv.H")
 #include <environ.H>
 #include <fontdesc.H>
@@ -421,7 +422,7 @@ void dialogv::LinkTree(class view  *parent)
     }
 }
 
-class dialogv *dialogv::Create(char  **list, char  *font, int  style)
+class dialogv *dialogv::Create(const char  * const *list, const char  *font, int  style)
 {
 	ATKinit;
 

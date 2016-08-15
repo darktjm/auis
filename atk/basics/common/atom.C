@@ -25,16 +25,17 @@
 //  $
 */
 
+#include <andrewos.h> /* strings.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/atom.C,v 3.7 1996/04/01 15:29:17 wjh Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/atom.C,v 3.7 1996/04/01 15:29:17 wjh Stab74 $";
 #endif
 
 
  
 
 
-#include <andrewos.h> /* strings.h */
 ATK_IMPL("atom.H")
 #include <stdio.h>
 #include <atom.H>

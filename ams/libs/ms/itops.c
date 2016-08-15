@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/itops.c,v 2.5 1992/12/15 21:20:00 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/itops.c,v 2.5 1992/12/15 21:20:00 rr2b Stab74 $";
 #endif
 
 /* This routine converts a long integer to a string padded or truncated to an

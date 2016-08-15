@@ -25,12 +25,13 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/apndfile.c,v 2.14 1992/12/15 21:17:22 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/apndfile.c,v 2.14 1992/12/15 21:17:22 rr2b Stab74 $";
 #endif
 
-#include <andrewos.h>
 #include <ms.h>
 
 MS_AppendFileToFolder(FileName, FolderName)

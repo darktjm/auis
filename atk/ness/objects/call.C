@@ -26,13 +26,14 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/call.C,v 1.24 1996/04/02 16:55:38 wjh Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/call.C,v 1.24 1996/04/02 16:55:38 wjh Stab74 $";
 #endif
 
 
-#include <andrewos.h>
 #include <filetype.H>
 #include <environ.H>
 #include <proctable.H>
@@ -333,7 +334,7 @@ void callCompLib(struct libnode  *lnode);
 enum libstate callCheckLib(char *fun, struct funcnode  **fnode);
 struct errornode * callInitSubTree(class ness  *ness);
 struct errornode * callInitAll(class ness  *ness);
-long ReadTextFileStream(class text  *text, char *name, FILE  *f, boolean  objok);
+long ReadTextFileStream(class text  *text, const char *name, FILE  *f, boolean  objok);
 
 
 /* callInit(Gscope, idtok, proto)
@@ -1704,7 +1705,7 @@ callInitAll(class ness  *ness) {
 		the object is returned as the only element in the text
 */
 	long
-ReadTextFileStream(class text  *text, char *name, FILE  *f, boolean  objok) {
+ReadTextFileStream(class text  *text, const char *name, FILE  *f, boolean  objok) {
 	long objectID;
 	long val;
 	char *objectType;

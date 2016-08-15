@@ -32,8 +32,9 @@ ATK_INTER
 /* $Header $ */
 /* $Source $ */
 
+#include <application.H>
 #ifndef lint
-static char *rcsidchartapp_ch = "$Header $";
+static UNUSED const char rcsidchartapp_ch[] = "$Header $";
 #endif
 
 /*
@@ -89,7 +90,6 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
-#include <application.H>
 class chartapp: public  application 
   {
 public:
@@ -102,7 +102,7 @@ public:
 
   
     boolean Start()				     ;
-    boolean ParseArgs( int argc, char **argv )	     ;
+    boolean ParseArgs( int argc, const char **argv )	     ;
 
   
     char				    source[512];

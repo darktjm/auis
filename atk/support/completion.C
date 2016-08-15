@@ -23,9 +23,11 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/types.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/completion.C,v 3.8 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/completion.C,v 3.8 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 /* ********************************************************************** *\
@@ -35,7 +37,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RC
 
  
 
-#include <andrewos.h> /* sys/types.h */
 ATK_IMPL("completion.H")
 
 #include <filetype.H>
@@ -410,13 +411,13 @@ static enum keymap_Types FileHack(struct fileRock  *rock, long  key, ATK   **ent
     return keymap_Empty;
 }
 
- int completion::GetFilename(class view  *view, char  *prompt, char  *startPath, char  *buffer, long  bufsiz, boolean  directoryP, boolean  mustMatch)
+ int completion::GetFilename(class view  *view, const char  *prompt, const char  *startPath, char  *buffer, long  bufsiz, boolean  directoryP, boolean  mustMatch)
                                 {
 	ATKinit;
 
 
     struct fileRock fileRock;
-    char *initialString;
+    const char *initialString;
     int code;
     int len;
 

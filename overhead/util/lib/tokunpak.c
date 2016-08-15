@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>		/* sys/types.h sys/time.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/tokunpak.c,v 2.28 1995/03/18 17:31:56 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/tokunpak.c,v 2.28 1995/03/18 17:31:56 rr2b Stab74 $";
 #endif
 
 /*
@@ -38,7 +40,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
  
 
-#include <andrewos.h>		/* sys/types.h sys/time.h */
 #include <stdio.h>
 #include <netinet/in.h>
 #include <svcconf.h>
@@ -62,8 +63,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
 
 #ifdef AFS_ENV
-static int IsKTC(where)
-char *where;
+static int IsKTC(char *where)
 {/* Return TRUE if this is a packed KTC ticket or FALSE otherwise. */
     long int Dum0, Dum9, Dum10;
 
@@ -75,11 +75,7 @@ char *where;
     return (Dum0 == 0 && Dum9 == -1 && Dum10 == -1);
 }
 
-static int UnpackKTC(tokens, atok, aserv, acli, debug, pPrimFlag)
-char *tokens;
-struct ktc_token *atok;
-struct ktc_principal *aserv, *acli;
-int debug, *pPrimFlag;
+static int UnpackKTC(char *tokens, struct ktc_token *atok, struct ktc_principal *aserv, struct ktc_principal *acli, int debug, int pPrimFlag)
 {
     register char *p;
     long int Dum;
@@ -160,12 +156,11 @@ int debug, *pPrimFlag;
 }
 #endif /* AFS_ENV */
 
-int unpacktokens(tokens, ctoken, stoken, debug, set)
+int unpacktokens(const char *tokens, char *ctoken, char *stoken, int debug, int set)
 {    return 0; }
 
 #if defined(AMS_DELIVERY_ENV) || defined(AFS_ENV)
-int tok_GetStr(pRead, EndP, outStr, sizeOutStr)
-char **pRead, *EndP, *outStr; int sizeOutStr;
+int tok_GetStr(char **pRead, char *EndP, char *outStr, int sizeOutStr)
 {/* Get a null-terminated string from *pRead, putting it into outStr. */
     int CharsLeft;
     char *Out, *In;
@@ -181,15 +176,8 @@ char **pRead, *EndP, *outStr; int sizeOutStr;
 }
 #endif /* defined(AMS_DELIVERY_ENV) || defined(AFS_ENV) */
 
-static int GenAuths(pWhere, pWhereLen, srvP, cliP, tokP, begdP, expdP, vidP, cell, vname, primP, locP, debug)
 #ifdef AFS_ENV
-char **pWhere;
-int *pWhereLen;
-struct ktc_principal *srvP, *cliP; struct ktc_token *tokP;
-unsigned long int *begdP, *expdP; int *vidP;
-char *cell, *vname;
-int *primP, *locP;
-int debug;
+static int GenAuths(char **pWhere, int *pWhereLen, struct ktc_principal *srvP, struct ktc_principal *cliP, struct ktc_token *tokP, unsigned long *begdP, unsigned long *expdP, unsigned long *vidP, const char *cell, const char *vname, int *primP, int *locP, int debug)
 {/* Read the next authentication from the sequence of them that starts at *pWhere, and return it.  Return >0 if successful, =0 if all done, and <0 on any error.
     After a successful return, srvP, cliP, and tokP will be loaded with ktc info or ctokP and stokP will be loaded with tokens, begdP and expdP will have the beginning and ending times, vidP (if >= 0, else vname) and cell the authentication (where cell is of size at least MAXCELLCHARS), primP and locP the indication of whether the auth is ``primary'' and/or workstation-local.
 */
@@ -239,18 +227,10 @@ int debug;
     *locP = IsLocal;
     return 1;
 }
-#else /* AFS_ENV */
-{    return 0; }
 #endif /* AFS_ENV */
 
-int tok_GenAuths(pWhere, pWhereLen, begdP, expdP, vidP, cell, vname, primP, locP, debug)
+int tok_GenAuths(char **pWhere, int *pWhereLen, unsigned long *begdP, unsigned long *expdP, int *vidP, const char *cell, const char *vname, int *primP, int *locP, int debug)
 #ifdef AFS_ENV
-char **pWhere;
-int *pWhereLen;
-unsigned long int *begdP, *expdP; int *vidP;
-char *cell, *vname;
-int *primP, *locP;
-int debug;
 {/* exported: generate the information for clients, but not the ticket bits themselves. */
     struct ktc_principal Srv, xCli; struct ktc_token Token;
 
@@ -260,14 +240,8 @@ int debug;
 {    return 0; }
 #endif /* AFS_ENV */
 
-int GenTokens(pWhere, pWhereLen, expdP, vidP, cell, primP, locP, debug)
+int GenTokens(char **pWhere, int *pWhereLen, unsigned long *expdP, unsigned long *vidP, const char *cell, int *primP, int *locP, int debug)
 #ifdef AFS_ENV
-char **pWhere;
-int *pWhereLen;
-unsigned long int *expdP; int *vidP;
-char *cell;
-int *primP, *locP;
-int debug;
 {/* Read the next authentication from the sequence of them that starts at *pWhere, and return it.  Return >0 if successful, =0 if all done, and <0 on any error.
     After a successful return, ctokP and stokP will be loaded with tokens, expdP will have the expiration date, vidP and cell the authentication (where cell is of size at least MAXCELLCHARS), primP and locP the indication of whether the auth is ``primary'' and/or workstation-local.
 */
@@ -281,10 +255,8 @@ int debug;
 {    return 0; }
 #endif /* AFS_ENV */
 
-int UnpackAndSetTokens(Where, WhereLen, debug, setPag)
+int UnpackAndSetTokens(char *Where, int WhereLen, int debug, int setPag)
 #ifdef AFS_ENV
-char *Where;
-int WhereLen, debug, setPag;
 {/* Unpack the result of the given Where string, up to its length, and set those tokens in those cells. */
     struct ktc_principal Server, Client; struct ktc_token KToken;
     char *Read;
@@ -355,10 +327,8 @@ int WhereLen, debug, setPag;
 {    return 0; }
 #endif /* AFS_ENV */
 
-int ExtractCellID(Where, WhereLen, cellName, debug)
+int ExtractCellID(char *Where, int WhereLen, const char *cellName, int debug)
 #ifdef AFS_ENV
-char *Where, *cellName;
-int WhereLen, debug;
 {/* Unpack the tokens at Where (for WhereLen), looking for a token for cell cellName.  If one is found, return the ViceId for that cell. */
     char *Read, *SP;
     char StrCellName[1+MAXCELLCHARS+1];
@@ -413,7 +383,7 @@ int WhereLen, debug;
 #endif /* AFS_ENV */
 
 #ifdef TESTINGONLYTESTING
-main()
+int main(void)
 {
     char *BigPacket = NULL;
     int BigLen, BigMax, RC, ix;

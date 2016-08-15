@@ -25,15 +25,16 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/namechg.c,v 2.19 1993/03/10 20:14:02 gk5g Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/namechg.c,v 2.19 1993/03/10 20:14:02 gk5g Stab74 $";
 #endif
 
 #include <mailconf.h>
 #include <ms.h>
 #include <stdio.h>
-#include <andrewos.h>
 
 extern char home[], *fixDate();
 extern int NumSubsInUse;

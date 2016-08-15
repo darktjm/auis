@@ -25,13 +25,14 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/types.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/simpletext.C,v 3.12 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/simpletext.C,v 3.12 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
-#include <andrewos.h> /* sys/types.h */
 ATK_IMPL("simpletext.H")
 
 #include <sys/stat.h>
@@ -95,7 +96,7 @@ simpletext::simpletext()
     (this->fence)->SetStyle( TRUE, FALSE);
 
     if(DataStreamVersion == 0){
-	char *buf;
+	const char *buf;
 
 	if((buf = environ::GetConfiguration("BE2TextFormat")) !=  NULL && *buf != '\0')
 	    DataStreamVersion = atoi(buf);
@@ -428,7 +429,7 @@ void simpletext::Clear()
     this->length = 0;
 }
 
-boolean simpletext::InsertCharacters(long  pos, char  *str, long  len)
+boolean simpletext::InsertCharacters(long  pos, const char  *str, long  len)
 {
     if (pos >= (this)->GetFence()) {
         (this)->AlwaysInsertCharacters( pos, str, len);
@@ -438,10 +439,10 @@ boolean simpletext::InsertCharacters(long  pos, char  *str, long  len)
         return FALSE;
 }
 
-void simpletext::AlwaysInsertCharacters(long  pos, char  *str, long  len)
+void simpletext::AlwaysInsertCharacters(long  pos, const char  *str, long  len)
 {
     register long i;
-    register char *s;
+    register const char *s;
     register char *t;
 
     if (len == 0)

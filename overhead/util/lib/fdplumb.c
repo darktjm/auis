@@ -25,27 +25,29 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fdplumb.c,v 2.16 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fdplumb.c,v 2.16 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h>
 #include <stdio.h>
 #include <fdplumbi.h>
+#include <util.h>
+#include <sys/socket.h>
 
 static int HasInitializedFDPlumbing = 0;
-int fdplumb_LogAllFileAccesses = 0;
+static int fdplumb_LogAllFileAccesses = 0;
 static int NumberOfFileDescriptors = 0;
 static char **OpenedFileNames = NULL;
 static int *OpenCodes = NULL;
 
-char *
-DescribeOpenCode(code)
-int code;
+static const char *
+DescribeOpenCode(int code)
 {
     switch(code) {
 	case FDLEAK_OPENCODE_OPEN: return "open";
@@ -67,9 +69,7 @@ int fdplumb_SpillGuts() {
     return fdplumb_SpillGutsToFile(stderr, 0);
 }
 
-int fdplumb_SpillGutsToFile(fp, ExtraNewLines)
-FILE *fp;
-int ExtraNewLines;
+int fdplumb_SpillGutsToFile(FILE *fp, int ExtraNewLines)
 {
     int i, total = 0;
 
@@ -90,9 +90,7 @@ int ExtraNewLines;
     return total;
 }
 
-void RegisterOpenFile(fd, path, Code)
-int fd, Code;
-char *path;
+void RegisterOpenFile(int fd, const char *path, int Code)
 {
     int i;
 
@@ -124,8 +122,7 @@ char *path;
     }
 }
 
-void RegisterCloseFile(fd)
-int fd;
+void RegisterCloseFile(int fd)
 {
     if (!HasInitializedFDPlumbing) {
 	if (fdplumb_LogAllFileAccesses) fprintf(stderr, "<critical:fdplumb>Attempt to close fd %d before any opens!", fd);
@@ -138,10 +135,8 @@ int fd;
     }
 }
 	
-   
-int dbg_creat(path, mode)
-char *path;
-int mode;
+
+int dbg_creat(const char *path, int mode)
 {
     int fd;
 
@@ -150,9 +145,7 @@ int mode;
     return(fd);
 }
 
-int dbg_open(path, flags, mode)
-char *path;
-int flags, mode;
+int dbg_open(const char *path, int flags, int mode)
 {
     int fd;
 
@@ -162,8 +155,7 @@ int flags, mode;
 }
 
 FILE *
-dbg_fopen(path, type)
-char *path, *type;
+dbg_fopen(const char *path, const char *type)
 {
     FILE *fp;
 
@@ -172,22 +164,19 @@ char *path, *type;
     return(fp);
 }
 
-int dbg_close(fd)
-int fd;
+int dbg_close(int fd)
 {
     RegisterCloseFile(fd);
     return(close(fd));
 }
 
-int dbg_fclose(fp)
-FILE *fp;
+int dbg_fclose(FILE *fp)
 {
     RegisterCloseFile(fileno(fp));
     return(fclose(fp));
 }
 
-int dbg_dup(oldfd)
-int oldfd;
+int dbg_dup(int oldfd)
 {
     int newfd;
 

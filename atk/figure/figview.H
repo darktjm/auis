@@ -213,7 +213,7 @@ class figview  : public  view {
       class menulist *Menus;
       class keystate *Keystate;
       class keystate *BuildKeystate;
-      char *ForegroundColor, *BackgroundColor, *FigBackColor;
+      const char *ForegroundColor, *BackgroundColor, *FigBackColor;
 
       boolean OnScreen;		/* if not view_Removed */
       boolean embedded;		/* TRUE if no call to GetApplicationLayer */

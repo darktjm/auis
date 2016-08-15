@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>		/* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/setprof.c,v 2.21 1995/03/18 17:30:58 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/setprof.c,v 2.21 1995/03/18 17:30:58 rr2b Stab74 $";
 #endif
 
 
@@ -56,20 +58,14 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <system.h>
 #include <stdio.h>
 #include <ctype.h>
-#include <andrewos.h>		/* sys/file.h */
 #include <sys/param.h>
 #include <pwd.h>
 #include <errno.h>
 #include <util.h>
 
-extern char ProgramName[];
-extern char *GetProfileFileName();
-extern char *GetFirstProfileFileName();
-
 #define BIGPREF 2000
 
-setprofilestring(prog, pref, val) 
-char *prog, *pref, *val;
+int setprofilestring(const char *prog, const char *pref, const char *val) 
 {
     FILE *oldR;
     FILE *newR;
@@ -79,10 +75,10 @@ char *prog, *pref, *val;
 					    /* existing filenames */
     char finalProfileFileName[MAXPATHLEN];
     char LineBuf[BIGPREF];
-    char *program;
-    char *key;
-    char *condition;
-    char *profileFileName;
+    const char *program;
+    const char *key;
+    const char *condition;
+    const char *profileFileName;
     char k[BIGPREF];
     char pgm[BIGPREF]; 
     int MatchAllProgs;
@@ -246,8 +242,7 @@ Needs to compile with:
   cc -DTESTINGONLYTESTING setprof.c /usr/andrew/lib/libutil.a -o setprof 
 */
 char ProgramName[100] = "foobar";
-main(argc, argv)
-char **argv;
+int main(int argc, char **argv)
 {
     int x;
 

@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <util.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/lcappend.c,v 2.6 1992/12/15 21:10:10 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/lcappend.c,v 2.6 1992/12/15 21:10:10 rr2b Stab74 $";
 #endif
 
 
@@ -41,8 +43,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
 #include <ctype.h>
 
-LCappend(s1, s2)
-char *s1, *s2;
+void LCappend(char *s1, const char *s2)
 {
     char *e1;
 

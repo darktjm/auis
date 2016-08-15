@@ -76,17 +76,17 @@ class message : public ATK  {
 public:
 	virtual ATKregistryEntry *ATKregistry();
 
-        static int DisplayString(class view *view, int priority, char *string)  ;
-        static int AskForString(class view *view, int priority, char *prompt, char *defaultString, char *buffer, int bufferSize)  ;
-        static int AskForPasswd(class view *view, int priority, char *prompt, char *defaultString, char *buffer, int bufferSize)  ;
-        static int AskForStringCompleted(class view *view, int priority, char *prompt, char *defaultString, char *buffer, int bufferSize,
+        static int DisplayString(class view *view, int priority, const char *string)  ;
+        static int AskForString(class view *view, int priority, const char *prompt, const char *defaultString, char *buffer, int bufferSize)  ;
+        static int AskForPasswd(class view *view, int priority, const char *prompt, const char *defaultString, char *buffer, int bufferSize)  ;
+        static int AskForStringCompleted(class view *view, int priority, const char *prompt, const char *defaultString, char *buffer, int bufferSize,
                               class keystate *keystate, message_completionfptr completionProc, message_helpfptr helpProc, long functionData, int flags)  ;
-        static int MultipleChoiceQuestion(class view *view, int priority, char *prompt, long defaultChoice, long *result, char **choices, char *abbrevKeys)  ;
+        static int MultipleChoiceQuestion(class view *view, int priority, const char *prompt, long defaultChoice, long *result, const char * const *choices, const char *abbrevKeys)  ;
         static void CancelQuestion(class view *view);
 	static void Advice(class view *view, enum message_Preference pref);
 /* These next calls are only applicable during an AskFor... operation. */
         static int GetCurrentString(class view *view, char *buffer, int bufferSize)  ;
-        static int InsertCharacters(class view *view, int pos, char *string, int len)  ;
+        static int InsertCharacters(class view *view, int pos, const char *string, int len)  ;
         static int DeleteCharacters(class view *view, int pos, int len)  ;
         static int GetCursorPos(class view *view)  ;
         static int SetCursorPos(class view *view, int pos)  ;

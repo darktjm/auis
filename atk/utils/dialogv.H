@@ -49,7 +49,7 @@ public:
 	    long rock;
 	};
 
-    static class dialogv * Create(char **list, char *font, int style)  ;
+    static class dialogv * Create(const char * const *list, const char *font, int style)  ;
     
     
      void SetDataObject(class dataobject *dataobject);

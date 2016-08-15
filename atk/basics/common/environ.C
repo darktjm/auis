@@ -23,9 +23,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/environ.C,v 3.7 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/environ.C,v 3.7 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 /* ********************************************************************** *\
@@ -41,7 +43,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/com
 
 
 
-#include <andrewos.h>
 ATK_IMPL("environ.H")
 #include <environ.H>
 
@@ -55,7 +56,7 @@ static char *nullstring="";
 
 
 ATKdefineRegistry(environ, ATK, NULL);
-static boolean varcmp(register char  *variable, register char  *envEntry);
+static boolean varcmp(register const char  *variable, register const char  *envEntry);
 static char * strncpyMovePointer(char *dest, const char *src, const int numchars);
 
 static char *strncpyMovePointer(char *dest, const char *src, const int numchars)
@@ -69,7 +70,7 @@ static char *strncpyMovePointer(char *dest, const char *src, const int numchars)
 /* Quick and simple routine for checking if a environment entry is for a given
  * variable, probably faster than raw strlen and strncmp combinations.
  */
-static boolean varcmp(register char  *variable, register char  *envEntry)
+static boolean varcmp(register const char  *variable, register const char  *envEntry)
         {
 
     while (*variable != '\0' && *variable++ == *envEntry++)
@@ -77,21 +78,21 @@ static boolean varcmp(register char  *variable, register char  *envEntry)
     return (*variable == '\0' && (*envEntry == '=' || *envEntry == '\0'));
 }
 
-void environ::SetProgramName(char  *s)
+void environ::SetProgramName(const char  *s)
 {
     if(s==NULL) s=nullstring;
     strcpy(ProgramName,s);
 }
 
-void environ::PutPrinter(char *value)
+void environ::PutPrinter(const char *value)
 {
     environ::Put("LPDEST", value);
     environ::Put("PRINTER", value);
 }
 
-char *environ::GetPrinter()
+const char *environ::GetPrinter()
 {
-    char *result=environ::Get("LPDEST");
+    const char *result=environ::Get("LPDEST");
     if(result==NULL) result=environ::Get("PRINTER");
     return result;
 }
@@ -105,7 +106,7 @@ void environ::DeletePrinter()
 /* This function inherently leaks core under certain circumstances. This
  * shouldn't be a problem since it shouldn't be called too much.
  */
-void environ::Put(char    *variable , char    *value)
+void environ::Put(const char    *variable , const char    *value)
         {
 
 #undef environ
@@ -149,7 +150,7 @@ void environ::Put(char    *variable , char    *value)
 #define environ environclass
 }
 
-void environ::Delete(char	 *variable)
+void environ::Delete(const char	 *variable)
         {
 #undef environ
     extern char **environ;
@@ -162,49 +163,49 @@ void environ::Delete(char	 *variable)
 #define environ environclass
 }
 
-char *environ::Get(char  *variable)
+const char *environ::Get(const char  *variable)
         {
 
 
     return(getenv(variable));
 }
 
-char *environ::GetProfile(char  *preference)
+const char *environ::GetProfile(const char  *preference)
         {
 
     return getprofile(preference);
 }
 
-boolean environ::GetProfileSwitch(char  *preference, boolean  defaultValue)
+boolean environ::GetProfileSwitch(const char  *preference, boolean  defaultValue)
             {
 
     return getprofileswitch(preference, defaultValue);
 }
 
-long environ::GetProfileInt(char  *preference, long  defaultValue)
+long environ::GetProfileInt(const char  *preference, long  defaultValue)
             {
 
     return getprofileint(preference, defaultValue);
 }
 
-boolean environ::ProfileEntryExists(char  *preference, boolean  useDefault)
+boolean environ::ProfileEntryExists(const char  *preference, boolean  useDefault)
             {
     return profileentryexists(preference, (int) useDefault);
 }
 
-char *environ::GetConfiguration(char  *key)
+const char *environ::GetConfiguration(const char  *key)
         {
     return (char *) ::GetConfiguration(key);
 }
 
-char *environ::AndrewDir(char  *str)
+const char *environ::AndrewDir(const char  *str)
         {
-    return (char *) ::AndrewDir(str);
+    return ::AndrewDir(str);
 }
 
-char *environ::LocalDir(char  *str)
+const char *environ::LocalDir(const char  *str)
         {
-    return (char *) ::LocalDir(str);
+    return ::LocalDir(str);
 }
 
 struct configurelist *environ::ReadConfigureFile(char  *filename)
@@ -222,18 +223,18 @@ void environ::FreeConfigureList(struct configurelist  *cList)
     ::FreeConfigureList(cList);
 }
 
-char *environ::GetHome(char  *user)
+const char *environ::GetHome(const char  *user)
 {
     return gethome(user);
 }
 
 
-char *environ::GetFirstProfileFileName()
+const char *environ::GetFirstProfileFileName()
 {
     return ::GetFirstProfileFileName();
 }
 
-char *environ::GetProfileFileName()
+const char *environ::GetProfileFileName()
 {
     return ::GetProfileFileName();
 }
@@ -249,7 +250,8 @@ char *environ::GetProfileFileName()
 void environ::ExpandEnvVars(char *toString, const char *fromString, int maxsize)
 {
     char *dollar, *tx, *dx, *ex;
-    char envname[MAXPATHLEN+1], *envval;
+    char envname[MAXPATHLEN+1];
+    const char *envval;
     char endch;
     const char *fs = fromString;
     int strfull = FALSE;

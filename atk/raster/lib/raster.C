@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/raster.C,v 1.5 1996/10/18 19:43:38 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/raster.C,v 1.5 1996/10/18 19:43:38 wjh Exp $";
 #endif
 
 
@@ -47,7 +49,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib
 #define MAXFILELINE 255
 #define BUFBYTES	600	/* enough for 4792 bits */
 
-#include <andrewos.h>
 ATK_IMPL("raster.H")
 #include <stdio.h>
 #include <sys/param.h> /* Defines MAXPATHLEN among other things */

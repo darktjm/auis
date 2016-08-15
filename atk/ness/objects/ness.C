@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>	/* for strings.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/ness.C,v 1.11 1995/12/07 16:41:27 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/ness.C,v 1.11 1995/12/07 16:41:27 robr Stab74 $";
 #endif
 
 
@@ -153,7 +155,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objec
  * Copied from /usr/andrew/lib/dummy
  */
 
-#include <andrewos.h>	/* for strings.h */
 ATK_IMPL("ness.H")
 #include <ctype.h>
 #include <pwd.h>
@@ -207,7 +208,7 @@ ATKdefineRegistry(ness, text, ness::InitializeClass);
 static void releaseResources(class ness  *self);
 static struct errornode * execute(class ness  *self, char  *func);
 static char * ThisUser();
-static char * udate(class ness  *self, char *d, char *n);
+static char * udate(class ness  *self, const char *d, const char *n);
 static void ResetOrigin(class ness  *self);
 static void dostmt(class view  *parentview);
 static void procload(char *filename);
@@ -347,11 +348,10 @@ ThisUser() {
 	THIS VALUE IS FORGABLE.  Just edit the file with (say) ed.
 */
 	static char *
-udate(class ness  *self, char *d, char *n) {
+udate(class ness  *self, const char *d, const char *n) {
 
 	static char buf[356];
-	if (strlen(n) > 299) n[299] = '\0';
-	sprintf(buf, "%02d\\\\%s\\\\%s\\\\00", self->syntaxlevel, d, n); 
+	sprintf(buf, "%02d\\\\%s\\\\%.299s\\\\00", self->syntaxlevel, d, n); 
 	return buf;
 }
 
@@ -483,7 +483,7 @@ ness::SetDebug(boolean  d) {
 }
 
 	void 
-ness::SetFilename(char  *name) {
+ness::SetFilename(const char  *name) {
 	char buf[1024];
 	if(this->filename!=NULL) free(this->filename);
 	if(name) {
@@ -705,7 +705,7 @@ ness::SetReadOnly(boolean  readOnly) {
 	returns TRUE for a successful read and FALSE otherwise
 */
 	long
-ness::ReadNamedFile(char *name) {
+ness::ReadNamedFile(const char *name) {
 
 	long val;
 	FILE *inputfile;
@@ -964,7 +964,7 @@ procload(char *filename) {
 	 */
 
 	char fullName[MAXPATHLEN+1];
-	char *expandedname;
+	const char *expandedname;
 	FILE *inputfile;
 	class ness *tempNess;
 	int n;

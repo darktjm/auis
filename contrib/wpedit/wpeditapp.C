@@ -500,7 +500,7 @@ wpeditapp::~wpeditapp()
     return; /* Not really necessary, but class complains at its absence */
 }
 
-boolean wpeditapp::ParseArgs(int  argc, char  **argv)  
+boolean wpeditapp::ParseArgs(int  argc, const char  **argv)  
 {
     (this)->application::ParseArgs( argc, argv);
     ++argv;

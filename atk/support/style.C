@@ -25,16 +25,17 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/style.C,v 3.10 1996/09/05 15:19:37 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/style.C,v 3.10 1996/09/05 15:19:37 robr Exp $";
 #endif
 
 
  
 
 
-#include <andrewos.h>
 ATK_IMPL("style.H")
 #include <style.H>
 
@@ -765,7 +766,7 @@ void style::GetNewInterlineSpacing(enum style_SpacingValue  *RefBasis, long  *Re
     *RefUnit = this->NewInterlineSpacing.SpacingUnit;
 }
 
-void style::SetFontFamily(char  *NewFont)
+void style::SetFontFamily(const char  *NewFont)
 {
     if (this->FontFamily != NULL)
         free(this->FontFamily);

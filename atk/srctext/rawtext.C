@@ -23,11 +23,12 @@ $Disclaimer:
 
    rawtext, a style-less mode for ATK. */
 
-static char ibmid[] = "(c) Copyright IBM Corp.  1992-1995.  All rights reserved.";
-static char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/rawtext.C,v 2.0 1995/01/27 19:38:38 rr2b Stab74 $";
-
-
 #include <andrewos.h>
+
+static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1992-1995.  All rights reserved.";
+static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/rawtext.C,v 2.0 1995/01/27 19:38:38 rr2b Stab74 $";
+
+
 #include <environment.H>
 #include <environ.H>
 #include <attribs.h>
@@ -78,7 +79,7 @@ void rawtext::SetAttributes(struct attributes  *atts)
 }
 
 /*RSK92overstrike: this is a duplicate of the original simpletext_InsertCharacters; it's used by the TABOVER macro to ignore overstrike mode*/
-boolean rawtext::JustInsertCharacters(long  pos,char  *str,long  len)
+boolean rawtext::JustInsertCharacters(long  pos,const char  *str,long  len)
 {
     if (pos >= (this)->GetFence()) {
         (this)->AlwaysInsertCharacters( pos, str, len);
@@ -127,7 +128,7 @@ void rawtext::OverstrikeAChar(long  pos)
 }
 
 /*RSK91overstrike: override simpletext's normal character insertion*/
-boolean rawtext::InsertCharacters(long  pos, char  *str, long  len)
+boolean rawtext::InsertCharacters(long  pos, const char  *str, long  len)
 {
     if ((this)->IsInOverstrikeMode()) {
 	int i= 0;

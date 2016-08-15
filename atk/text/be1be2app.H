@@ -16,7 +16,7 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
 
-     boolean ParseArgs(int argc, char **argv)  ;
+     boolean ParseArgs(int argc, const char **argv)  ;
      boolean Run()  ;
 };
 

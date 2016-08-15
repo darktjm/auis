@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/readscr.C,v 3.2 1994/12/06 21:36:15 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/readscr.C,v 3.2 1994/12/06 21:36:15 rr2b Stab74 $";
 #endif
 
 
@@ -37,7 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/r
 		 a base editor II document ** */
 
 
-#include <andrewos.h> /* sys/file.h */
 ATK_IMPL("readscr.H")
 #include <stdio.h>
 #include <ctype.h>
@@ -111,7 +112,7 @@ readscr::readscr() /* stupid convention */
     THROWONFAILURE( TRUE);
 }
 
-class text *readscr::Begin(class text  *d, int  pos , int  len , int  purge , char  *version, int  GetTemplate)
+class text *readscr::Begin(class text  *d, int  pos , int  len , int  purge , const char  *version, int  GetTemplate)
 {
     if (GetTemplate && (d)->ReadTemplate( "scribe", 0)) {
 	goshdarn("Couldn't read template.");
@@ -140,7 +141,7 @@ class text *readscr::Begin(class text  *d, int  pos , int  len , int  purge , ch
     return(d);
 }
 
-int readscr::PrintFile(char  *filename , class textview  *tv, class text  *d, char  *Version, int  TrashWhenDone)
+int readscr::PrintFile(char  *filename , class textview  *tv, class text  *d, const char  *Version, int  TrashWhenDone)
 {
     int fd;
     struct stat statbuf;

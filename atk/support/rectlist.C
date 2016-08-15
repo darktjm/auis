@@ -25,16 +25,17 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/rectlist.C,v 3.7 1996/10/11 18:57:03 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/rectlist.C,v 3.7 1996/10/11 18:57:03 robr Exp $";
 #endif
 
 
  
 
 
-#include <andrewos.h>
 ATK_IMPL("rectlist.H")
 #include <rectlist.H>
 
@@ -189,9 +190,9 @@ void rectlist::InvertRectangles(class view  *vPtr, spotcolor *spots)
 	}
     }
 
-    char *obcolor=NULL;
+    const char *obcolor=NULL;
     long obc1, obc2, obc3;
-    char *ofcolor=NULL;
+    const char *ofcolor=NULL;
     long ofc1,ofc2,ofc3;
     boolean reset=FALSE;
     
@@ -224,7 +225,7 @@ void rectlist::InvertRectangles(class view  *vPtr, spotcolor *spots)
 		    }
 		    vPtr->SetBackgroundColor(&p->color);
 		    long p1, p2, p3;
-		    char *dummy;
+		    const char *dummy;
 		    vPtr->GetBackgroundColor(&dummy, &p1, &p2, &p3);
 		    if((p1!=obc1 || p2!=obc2 || p3!=obc3) && (p1!=ofc1 || p2!=ofc2 || p3!=ofc3)) {
 			vPtr->FillRect(&inter, NULL);
@@ -262,7 +263,7 @@ void rectlist::InvertRectangles(class view  *vPtr, spotcolor *spots)
 		    }
 		    vPtr->SetBackgroundColor(&p->color);
 		    long p1, p2, p3;
-		    char *dummy;
+		    const char *dummy;
 		    vPtr->GetBackgroundColor(&dummy, &p1, &p2, &p3);
 		    if((p1!=obc1 || p2!=obc2 || p3!=obc3) && (p1!=ofc1 || p2!=ofc2 || p3!=ofc3)) {
 			vPtr->FillRect(&inter, NULL);
@@ -307,7 +308,7 @@ void rectlist::InvertRectangles(class view  *vPtr, spotcolor *spots)
 		    }
 		    vPtr->SetForegroundColor(&p->bgcolor);
 		    long p1, p2, p3;
-		    char *dummy;
+		    const char *dummy;
 		    vPtr->GetForegroundColor(&dummy, &p1, &p2, &p3);
                     if((p1!=obc1 || p2!=obc2 || p3!=obc3) && (p1!=ofc1 || p2!=ofc2 || p3!=ofc3)) { vPtr->FillRect(&inter, NULL);
 		    }
@@ -344,7 +345,7 @@ void rectlist::InvertRectangles(class view  *vPtr, spotcolor *spots)
 		    }
 		    vPtr->SetForegroundColor(&p->bgcolor);
 		    long p1, p2, p3;
-		    char *dummy;
+		    const char *dummy;
 		    vPtr->GetForegroundColor(&dummy, &p1, &p2, &p3);
 		    if((p1!=obc1 || p2!=obc2 || p3!=obc3) && (p1!=ofc1 || p2!=ofc2 || p3!=ofc3)) {
 			vPtr->FillRect(&inter, NULL);

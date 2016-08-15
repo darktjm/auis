@@ -60,7 +60,7 @@ static void DrawOpen(class iconview  * self, enum view_UpdateType  type, long  a
 static void DrawClosed(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */);
 static void SlayChild(class iconview  * self);
 static void AdoptNewChild(class iconview  * self,class icon  * dobj);
-long string_width(char  * string, class fontdesc  * font, class graphic  * graphic);
+long string_width(const char  * string, class fontdesc  * font, class graphic  * graphic);
 #if 0
 void iconview__SetIconFontname (class iconview  * self,char  *name);
 #endif 
@@ -75,7 +75,7 @@ DrawOpen(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay,
     long tx, ty, tw, th; /* "T"itle coordinate space */
     struct FontSummary * titlesummary;
     short * titlefontwidths;
-    char * title;
+    const char * title;
     
     if (self->neednewsize) {
 	self->neednewsize = 0;
@@ -234,7 +234,7 @@ void AdoptNewChild(class iconview  * self,class icon  * dobj)
 }
 
 
-long string_width(char  * string, class fontdesc  * font, class graphic  * graphic)
+long string_width(const char  * string, class fontdesc  * font, class graphic  * graphic)
 {
     short * widthtable, totalwidth = 0;
     widthtable = (font)->WidthTable( graphic);
@@ -638,7 +638,7 @@ void iconview::RecSrchExpose(const struct rectangle &logical, struct rectangle &
       long handle_height;
       struct FontSummary * titlesummary;
       short * titlefontwidths;
-      char * title;
+      const char * title;
 
       if (this->child) {
 	  if (!this->isopen)

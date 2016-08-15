@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/toez/RCS/readscrb.C,v 1.4 1994/08/13 16:46:24 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/toez/RCS/readscrb.C,v 1.4 1994/08/13 16:46:24 rr2b Stab74 $";
 #endif
 
  
@@ -172,7 +174,6 @@ with passthru set.
 
 */
 
-#include <andrewos.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <text.H>

@@ -25,12 +25,13 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/time.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/cui/RCS/cuilib.c,v 2.62 1994/04/04 19:03:45 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/cui/RCS/cuilib.c,v 2.62 1994/04/04 19:03:45 rr2b Stab74 $";
 #endif
 
-#include <andrewos.h> /* sys/time.h sys/file.h */
 #include <cui.h>
 #include <errprntf.h>
 #include <stdio.h>
@@ -2071,13 +2072,13 @@ register char  *s;
 #define TIMELEN 10
 
 CUI_PrintUpdates(dname, nickname)
-char *dname, *nickname;
+const char *dname, *nickname;
 {
     return(CUI_PrintUpdatesWithFlags(dname, nickname, 0, (char *)NULL));
 }
 
 CUI_PrintUpdatesWithFlags(dname, nickname, flags, printer)
-char *dname, *nickname, *printer;
+const char *dname, *nickname, *printer;
 int flags;
 {
     long cuid, numbytes, totalbytes, status;

@@ -21,11 +21,12 @@
 
 /* $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/prefs.C,v 1.10 1994/11/30 20:42:06 rr2b Stab74 $ */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
-static char *rcsid_prefs_c = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/prefs.C,v 1.10 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char *rcsid_prefs_c = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/prefs.C,v 1.10 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif /* NORCSID */
 
-#include <andrewos.h>
 ATK_IMPL("prefs.H")
 #include <math.h>
 
@@ -145,10 +146,11 @@ static void ApplyHelpStyles(class prefs  *self)
 
 prefs::prefs()
 {
-    char *file;
+    const char *file;
     FILE *fp2;
     long err, errs=0;
-    char *files, filenamebuf[1025];
+    const char *files;
+    char filenamebuf[1025];
 
     this->selfmod=FALSE;
     this->llistsize=this->llistcnt=0;

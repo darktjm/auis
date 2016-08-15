@@ -138,7 +138,7 @@ static void ToggleDebugProc(class figview  *self, long  rock)
 static class menulist *EmbeddedMenus;
 static class keymap *EmbeddedKeymap;
 static boolean DefaultExpertMode = FALSE;
-static char *FigureBackgroundColor = NULL;
+static const char *FigureBackgroundColor = NULL;
 
 #define	ML_expertmode	    (1)
 #define	ML_nonexpertmode    (2)
@@ -308,10 +308,10 @@ figview::figview()
 	(this)->SetExpertMode( TRUE);
 
     graphic::GetDefaultColors(&this->ForegroundColor, &this->BackgroundColor);
-    static char *foreground=environ::GetProfile("FigureForegroundColor");
+    static const char *foreground=environ::GetProfile("FigureForegroundColor");
     if(foreground) this->ForegroundColor=atom::Intern(foreground)->Name();
     else if(this->ForegroundColor) this->ForegroundColor=atom::Intern(this->ForegroundColor)->Name();
-    static char *background=environ::GetProfile("FigureBackgroundColor");
+    static const char *background=environ::GetProfile("FigureBackgroundColor");
     if(background) this->BackgroundColor=atom::Intern(background)->Name();
     else if(this->BackgroundColor) this->BackgroundColor=atom::Intern(this->BackgroundColor)->Name();
     this->FigBackColor = FigureBackgroundColor;

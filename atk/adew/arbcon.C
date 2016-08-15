@@ -22,9 +22,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/arbcon.C,v 1.6 1995/11/15 23:13:23 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/arbcon.C,v 1.6 1995/11/15 23:13:23 robr Stab74 $";
 #endif
 
 /* ********************************************************************** *\
@@ -32,7 +34,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/a
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
 /* user code ends here for HeaderInfo */
-#include <andrewos.h>
 ATK_IMPL("arbcon.H")
 
 #include <proctable.H>
@@ -103,7 +104,7 @@ static int appendlist(char  **lst,int  cnt,char  *str,int  TEST);
 static void SetName(class celview  *cv,class arbiterview  *abv,char  *name);
 static long findstring(class text  *txt,char  *str);
 static void handleclicks(class arbcon  *self,class cltextview  *ct,long  *position, long  *numberOfClicks, enum view_MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type);
-static void NewWindow(char  *filename,int  bflags,boolean  AddArb);
+static void NewWindow(const char  *filename,int  bflags,boolean  AddArb);
 void arbcon_Create();
 static void addtypes(class cel  *cl);
 static boolean setupcel(class cel  *cl);
@@ -126,7 +127,7 @@ static void init(class arbcon  *self);
 static void showcels(class view  *v);
 static void arbchdir(class view  *v);
 static void createcon(class view  *v);
-static boolean dolistfile(class arbcon  *self,char  *s);
+static boolean dolistfile(class arbcon  *self,const char  *s);
 static boolean createGself(class arbcon  *self);
 static class arbcon *FindSelf(class view  *v);
 static void ArbLinkCelCallBack(class arbcon  *self,class value  *val,long  r1,long  r2);
@@ -352,7 +353,7 @@ static void handleclicks(class arbcon  *self,class cltextview  *ct,long  *positi
 	}
     }
 }
-static void NewWindow(char  *filename,int  bflags,boolean  AddArb)
+static void NewWindow(const char  *filename,int  bflags,boolean  AddArb)
 {
 
     class frame *newFrame;
@@ -983,7 +984,7 @@ static void newwin(class view  *v)
 }
 static void newlist(class view  *v)
 {
-    char *p;
+    const char *p;
     arbcon::SetCurrentArbiterview(NULL);
     if((p = environ::GetProfile("ValueFile"))!= NULL && (access(p,4) == 0))
 	NewWindow(p,0,FALSE);
@@ -1085,7 +1086,7 @@ static struct bind_Description arbconBindings[]={
     {"arbcon-show-cels",NULL,0,"Arbcon~0,Show Cels~21",0,0,(proctable_fptr)showcels,"Show cel names"},
     NULL
 };
-static boolean dolistfile(class arbcon  *self,char  *s)
+static boolean dolistfile(class arbcon  *self,const char  *s)
 {
     /* open file and append to list of objects */
     FILE *f;
@@ -1108,7 +1109,8 @@ static boolean dolistfile(class arbcon  *self,char  *s)
 static boolean createGself(class arbcon  *self)
 {   /* initialization code */
     FILE *f;
-    char *p,*m;
+    const char *p;
+    char *m;
     struct ATKregistryEntry  *viewtype = ATK::LoadClass("view");
     Gself = self;
     controlV::SetAutoInit(FALSE);
@@ -1127,7 +1129,7 @@ static boolean createGself(class arbcon  *self)
 	dolistfile(self,p);
     }
     if(environ::GetProfileSwitch("IgnoreDefaultViewList",FALSE) != TRUE){ 
-	char *dflist;
+	const char *dflist;
 	if((dflist = environ::GetConfiguration("AdewObViewList")) == NULL){
 	    if(dolistfile(self,VWLISTFILE))
 		dflist = NULL;

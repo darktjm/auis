@@ -49,18 +49,18 @@ public:
 	virtual ~datacata();
 
     
-       boolean ParseArgs(int argc,char **argv)  ;
+       boolean ParseArgs(int argc,const char **argv)  ;
        int Run()  ;
        void ReadInitFile();
 
     
       virtual void BeginRun();
       virtual void FinishRun();
-      virtual boolean AddFile(char *filename)  ;
+      virtual boolean AddFile(const char *filename)  ;
       virtual void SetIncludeLevel(int val);
       virtual void SetVerboseLevel(int val);
       virtual void SetCleanMode(boolean val);
-      virtual void SetOutputFile(char *filename);
+      virtual void SetOutputFile(const char *filename);
       virtual void SetLockAndDelete(boolean val);
 
     

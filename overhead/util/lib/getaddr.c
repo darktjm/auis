@@ -25,17 +25,18 @@
  *  $
 */
 
+#include <andrewos.h>		/* types.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/getaddr.c,v 2.9 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/getaddr.c,v 2.9 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
-
+#include <util.h>
  
 
 /* getaddr -- get our internet address */
 
-#include <andrewos.h>		/* types.h */
 #include <sys/socket.h>
 #include <net/if.h>
 #include <netinet/in.h>
@@ -55,7 +56,9 @@ unsigned long getaddr ()
     int     i, len;
     struct ifconf   ifc;
     struct ifreq    ifs[NIFS];
+#if SY_AIX4
     struct ifreq   *ifp;
+#endif
     struct sockaddr_in *a;
 
     s = socket(AF_INET, SOCK_DGRAM, 0);
@@ -100,9 +103,7 @@ unsigned long getaddr ()
 #ifdef TESTINGONLYTESTING
 #include <stdio.h>
 #include <arpa/inet.h>
-main(argc,argv)
-int argc;
-char *argv[];
+int main(int argc,char *argv[])
 {
   struct in_addr a;
 

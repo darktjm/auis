@@ -191,7 +191,7 @@ DHACK			(({WORD}\.+)|(\.+{WORD})|(\.\.+))
 .			return BADTOKEN;
 
 %%
-static char *parsel_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/parsel.flex,v 1.2 1996/03/11 19:22:49 robr Stab74 $";
+static UNUSED const char *parsel_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/parsel.flex,v 1.2 1996/03/11 19:22:49 robr Stab74 $";
 
 void SetNextLine(line)
     char *line;

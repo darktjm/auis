@@ -25,13 +25,14 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/path.C,v 3.9 1996/07/06 02:47:28 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/path.C,v 3.9 1996/07/06 02:47:28 wjh Exp $";
 #endif
 
 
-#include <andrewos.h>
 ATK_IMPL("path.H")
 
 #include <ctype.h>
@@ -75,17 +76,18 @@ static void  FoldName (register char  *p		);
 #else
 static void FoldName (register char  *p);
 #endif
-static long SetNewHome(char  *shortPathName, char  *name, char  *cell, char  *dir, long  dirlen);
-static void HandleCellTwiddle(char  *fromString, char  *toString);
-static void HandleRelativeFileName(char  *fromString, char  *toString, char  *basefile);
+static long SetNewHome(char  *shortPathName, const char  *name, const char  *cell, const char  *dir, long  dirlen);
+static void HandleCellTwiddle(const char  *fromString, char  *toString);
+static void HandleRelativeFileName(const char  *fromString, char  *toString, char  *basefile);
 int CompareFileNames(char  **a, char  **b);
 
 
 static char *
 strappend(char  *dest , char  *src)
 	{
-	strcpy(dest, src);
-	return dest+strlen(dest);
+	int len = strlen(src);
+	memmove(dest, src, len); /* allow overlapping src/dest */
+	return dest + len;
 }
 
 
@@ -571,7 +573,7 @@ static void FoldName (register char  *p			/* path to fold */)
 }
 #endif
 
-static long SetNewHome(char  *shortPathName, char  *name, char  *cell, char  *dir, long  dirlen)
+static long SetNewHome(char  *shortPathName, const char  *name, const char  *cell, const char  *dir, long  dirlen)
 {
     struct homestruct *newHome;
     long addedLen = 1;
@@ -634,7 +636,7 @@ char *path::TruncatePath(char  *frompath, char  *result, long  limit, boolean  t
     }
 
     if (! gotBaseInfo) {
-	char *homeDir = environ::GetHome(NULL);
+	const char *homeDir = environ::GetHome(NULL);
 	char shortName[10];
 
 	if (homeDir != NULL) {
@@ -812,9 +814,9 @@ boolean path::ModifyToParentDirectory(char  *p, boolean  isDirectory)
     return (len > 0);
 } /* path__ModifyToParentDirectory */
 
-static void HandleCellTwiddle(char  *fromString, char  *toString)
+static void HandleCellTwiddle(const char  *fromString, char  *toString)
 {
-    char *home=NULL;
+    const char *home=NULL;
     struct passwd *passwd;
     long p;
 
@@ -883,7 +885,7 @@ static void HandleCellTwiddle(char  *fromString, char  *toString)
      }
 }
 
-static void HandleRelativeFileName(char  *fromString, char  *toString, char  *basefile)
+static void HandleRelativeFileName(const char  *fromString, char  *toString, char  *basefile)
 {
     register char *slash;
     /* Use allDone instead of confusing combination of #if/#endif and if/else's */
@@ -949,9 +951,9 @@ static void HandleRelativeFileName(char  *fromString, char  *toString, char  *ba
     if the file name needs to be unfolded.
 */
 
-char *path::UnfoldFileName(char  *fromString, char  *toString, char  *basefile) 
+const char *path::UnfoldFileName(const char  *fromString, char  *toString, char  *basefile) 
 {
-    char *fs = fromString;
+    const char *fs = fromString;
     char tempstr[2*MAXPATHLEN+1];
     boolean uncName=FALSE;
 
@@ -1323,7 +1325,7 @@ char *path::GetTruncatedPath()
     return this->truncatedPath;
 } /* path__GetTruncatedPath */
 
-void path::FindFileInPath(char *retbuff, char *path, char *fname)
+void path::FindFileInPath(char *retbuff, const char *path, const char *fname)
 {
     findfileinpath(retbuff, path, fname);
 }

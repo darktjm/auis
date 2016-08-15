@@ -25,12 +25,13 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/application.C,v 3.12 1995/11/29 17:45:30 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/application.C,v 3.12 1995/11/29 17:45:30 robr Stab74 $";
 #endif
 
-#include <andrewos.h>
 #include <util.h>
 ATK_IMPL("application.H")
 
@@ -97,7 +98,7 @@ char **application::AppSessionCheckpoint()
 {
     return (startup_app) ? startup_app->SessionCheckpoint() : NULL;
 }
-char *application::AppGetName()
+const char *application::AppGetName()
 {
     return (startup_app) ? startup_app->GetName() : NULL;
 }
@@ -150,7 +151,7 @@ void application::PrintVersionNumber()
 /* Remember the initial command string.
  * The argument list is copied.
  */
-void application::SaveInitArgv(int argc, char **argv)
+void application::SaveInitArgv(int argc, const char **argv)
 {
     int i;
 
@@ -168,14 +169,14 @@ void application::SaveInitArgv(int argc, char **argv)
  * These 4 routines are the heart of the application interface
  */
 
-boolean application::ParseArgs(int  argc,char  **argv)
+boolean application::ParseArgs(int  argc,const char  **argv)
 {
-    char *host;
-    char *pref;
+    const char *host;
+    const char *pref;
 
     SaveInitArgv(argc, argv);
     if(this->name==NULL){
-	char *t=strrchr(*argv,'/');
+	const char *t=strrchr(*argv,'/');
 	if(t==NULL)
 	    this->name= *argv;
 	else
@@ -288,12 +289,15 @@ boolean application::ParseArgs(int  argc,char  **argv)
 void 
 application::ReadInitFile()
 {
-    char buffer[256], *andrewDir, *sitename,*name=this->name;
+    char buffer[256];
+    const char *andrewDir, *name=this->name;
+    const char *sitename;
     char *bufferp = buffer;
     class init *initp;
     boolean HadGlobalNameInit = FALSE;
     boolean siteinit = FALSE,sitegloinit = FALSE;
-    char *home, *localLib, *initfilepath;
+    const char *home;
+    const char *initfilepath, *localLib;
     char initfilename[128];
 
     if (!this->readInitFile) return;
@@ -347,7 +351,7 @@ application::ReadInitFile()
 	    if ((initp)->Load( buffer, this->errorProc, (long) this->errorRock, this->forceload) >= 0) {
 		HadGlobalNameInit = TRUE;
 		if(localLib = (char*) malloc(strlen(thisStr) + 1))
-		    strcpy(localLib, thisStr);
+		    strcpy((char *)localLib, thisStr);
 		else
 		    localLib = NULL;
 		break;
@@ -399,21 +403,17 @@ application::ReadInitFile()
 
 boolean application::Start()
 {
-    char *t;
+    const char *t;
 
     if(this->fgcolor==NULL)  {
 	t = environ::GetProfile("ForeGroundColor");
-	if (t != NULL)  {
-	    this->fgcolor = (char *) malloc(strlen(t) + 1);
-	    strcpy(this->fgcolor, t);
-	}
+	if (t != NULL)
+	    this->fgcolor = strdup(t);
     }
     if(this->bgcolor==NULL)  {
 	t = environ::GetProfile("BackGroundColor");
-	if (t != NULL)  {
-	    this->bgcolor = (char *) malloc(strlen(t) + 1);
-	    strcpy(this->bgcolor, t);
-	}
+	if (t != NULL)
+	    this->bgcolor = strdup(t);
     }
 
     graphic::SetDefaultColors(this->fgcolor,this->bgcolor);
@@ -475,7 +475,7 @@ boolean application::Fork()
  * Some utility routines
  */
 
-void application::DeleteArgs(char  **argv,int  num)
+void application::DeleteArgs(const char  **argv,int  num)
 {
     int i;
 
@@ -493,7 +493,8 @@ void application::DeleteArgs(char  **argv,int  num)
 char *application::GetATKVersion()
 {
     FILE *fp;
-    char *andrewDir, fname[1200], *s;
+    const char *andrewDir;
+    char fname[1200], *s;
     static char VerNo[40] = "ATK-No-Version-Number";
     static boolean HasChecked = FALSE;
 

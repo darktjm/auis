@@ -57,10 +57,10 @@ public:
 	virtual void SetLink(enum link_type code, char *link);
 	virtual void SetPos(long pos);
 	virtual void SetLen(long len);
-	virtual char * GetResolvedLink(view *viewer = NULL);
+	virtual const char * GetResolvedLink(view *viewer = NULL);
     
 	inline char  * GetRawLink() { return (this->rawlink); }
-	inline char * GetLink() 	/* compatibility with old code */
+	inline const char * GetLink() 	/* compatibility with old code */
 		{ return ((this)->GetResolvedLink()) ; }
 	inline long GetPos() { return (this->pos); }
 	inline long GetLen() { return (this->len); }

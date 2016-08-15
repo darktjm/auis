@@ -25,15 +25,15 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/time.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/timemon.C,v 1.3 1994/08/12 18:53:39 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/timemon.C,v 1.3 1994/08/12 18:53:39 rr2b Stab74 $";
 #endif
 
 
  
-
-#include <andrewos.h> /* sys/time.h sys/file.h */
 
 #include <consoleClass.H>
 #include <console.h>

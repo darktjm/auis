@@ -32,7 +32,7 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 	static boolean InitializeClass();
 
-	char * GetResolvedLink()  ;
+	const char * GetResolvedLink()  ;
 
 	static weblink *GetNewWebLink(char *url)  ;
 	static boolean isLinkString(char *s)  ; 

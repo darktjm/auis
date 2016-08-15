@@ -25,12 +25,12 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/hdrs/RCS/genhdr.c,v 1.8 1996/06/14 23:49:35 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/hdrs/RCS/genhdr.c,v 1.8 1996/06/14 23:49:35 wjh Exp $";
 #endif
-
-#include <andrewos.h>
 
 /**
  **
@@ -42,7 +42,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
  **
  **/
 int
-main()
+main(void)
 {
 	printf("/* andrdir.h - automatically generated */\n\n");
 	printf("#define QUOTED_DEFAULT_XLIBDIR_ENV \"%s\"\n", XLIBDIR_VAL);

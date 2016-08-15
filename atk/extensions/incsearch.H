@@ -9,11 +9,11 @@ ATK_INTER
 /* $ACIS:incrsearch.ch 1.2$ */
 /* $Source: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/incsearch.H,v $ */
 
-#ifndef lint
-static char *rcsidincsearch_H = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/incsearch.H,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif /* lint */
-
 #include <ATK.H>
+
+#ifndef lint
+static UNUSED const char *rcsidincsearch_H = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/incsearch.H,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
+#endif /* lint */
 
 class incsearch : public ATK  {
 public:

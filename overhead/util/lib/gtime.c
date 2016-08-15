@@ -25,10 +25,14 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/time.h sys/types.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/gtime.c,v 1.5 1992/12/15 21:10:10 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/gtime.c,v 1.5 1992/12/15 21:10:10 rr2b Stab74 $";
 #endif
+
+#include <util.h>
 
 /* gtime.c - inverse of localtime */
 /*   value is unpredictable for illegal input values */
@@ -36,9 +40,15 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
  
 
-#include <andrewos.h> /* sys/time.h sys/types.h */
+/* return inverse of local time */
 
-static int dmsize[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+#if defined(_POSIX_SOURCE) || defined(_IBMR2)
+time_t gtime(struct tm *ct)
+{
+    return (mktime(ct));
+}
+#else /* _POSIX_SOURCE */
+static const int dmsize[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 #define FEBRUARY_P(m) ((m)==1)
 /* Gregorian definition: */
@@ -46,17 +56,7 @@ static int dmsize[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 /* Used only in a relative sense */
 #define LEAPDAYS_SINCE(y) ( (y)/4 - (y)/100 + (y)/400 )
 
-/* return inverse of local time */
-
-#if defined(_POSIX_SOURCE) || defined(_IBMR2)
-time_t gtime(ct)
-register struct tm *ct;
-{
-    return (mktime(ct));
-}
-#else /* _POSIX_SOURCE */
-time_t gtime(ct)
-register struct tm *ct;
+time_t gtime(struct tm *ct)
 {
     time_t copyt;
     register int day;
@@ -94,7 +94,7 @@ register struct tm *ct;
 
 #ifdef TESTINGONLYTESTING
 #include <stdio.h>
-main()
+int main(void)
 {
   struct tm *ct;
   unsigned long int the_time, parsed_time;

@@ -24,10 +24,8 @@
 
 #include <stdio.h> /* needed so that we can declare Andrew_tmpfile. */
 
-#ifdef ATK_IN_RELATIVIZE
 extern void ATKUseExportsFiles(char *arg, char *dot, char *slash);
 extern void ATKMinimizeLibs(char *arg, char *dot, char *slash);
-#endif
 
 BEGINCPLUSPLUSPROTOS
 #ifdef NEED_SCANDIR

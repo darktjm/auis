@@ -42,8 +42,8 @@ public:
 	virtual class graphic * CvtCharToGraphic(class graphic *gr, char SpecialChar)  ;
 	virtual struct font * GetRealFontDesc(class graphic *gr)  ;
 
-	virtual long StringSize(class graphic *gr, char * string, long * XWidth, long * YWidth)  ;
-	virtual long TextSize(class graphic *gr, char * text, long TextLength, long *XWidth, long *YWidth)
+	virtual long StringSize(class graphic *gr, const char * string, long * XWidth, long * YWidth)  ;
+	virtual long TextSize(class graphic *gr, const char * text, long TextLength, long *XWidth, long *YWidth)
 		 ;
 	virtual short* WidthTable(class graphic *gr)   ; /* actually an array of short's */
 	virtual short * HeightTable(class graphic *gr)  ; /* actually an array of short's */

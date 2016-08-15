@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h> /* strings.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/stringtbl.C,v 3.4 1994/12/13 20:29:40 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/stringtbl.C,v 3.4 1994/12/13 20:29:40 rr2b Stab74 $";
 #endif
 
 
@@ -44,7 +46,6 @@ deferred:
 */
 
 
-#include <andrewos.h> /* strings.h */
 ATK_IMPL("stringtbl.H")
 
 #include <stringtbl.H>

@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/layout/RCS/layoutview.C,v 1.7 1996/10/17 14:59:53 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/layout/RCS/layoutview.C,v 1.7 1996/10/17 14:59:53 robr Exp $";
 #endif
 
 /* $ACIS$ */
@@ -40,7 +42,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/layout/RCS
 #define viewname(v) ((v) == NULL ? "<NO VIEW>" : (((v)->GetName())->First())->Name())
 
 
-#include <andrewos.h>
 ATK_IMPL("layoutview.H")
 #include <rect.h>
 #include <assert.h>

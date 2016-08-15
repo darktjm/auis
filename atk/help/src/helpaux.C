@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/RCS/helpaux.C,v 1.9 1995/02/17 21:00:41 Zarf Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/RCS/helpaux.C,v 1.9 1995/02/17 21:00:41 Zarf Stab74 $";
 #endif
 
 /* $ACIS$ */
@@ -37,7 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/R
 #define label gezornenplatz
 /* sys/types.h in AIX PS2 defines "struct label", causing a type name clash.
    Avoid this by temporarily redefining "label" to be something else in the preprocessor. */
-#include <andrewos.h> /* sys/types.h sys/file.h */
 #undef label
 
 /* BSD/RT is overflowing the cpp define table. */
@@ -157,7 +158,7 @@ void init_hlptextview(class hlptextview  *hv)
 /*
  * help__ method for adding a directory to the searchpath
  */
-void help::AddSearchDir(char  *dirName)
+void help::AddSearchDir(const char  *dirName)
 {
 	ATKinit;
 
@@ -177,7 +178,8 @@ help::help()
 {
 	ATKinit;
 
-    char pathName[MAXPATHLEN], *tmp = NULL, *colon = NULL;
+    char pathName[MAXPATHLEN];
+    const char *tmp = NULL, *colon = NULL;
     struct proctable_Entry *pe;
     struct self_help *id;
     class view *v;
@@ -205,10 +207,9 @@ help::help()
 	}
 	else {
 	    while(colon && (colon != '\0')) {
-		*colon = '\0';
 		help_tutorialDirs[i] = (char*) malloc(strlen(tmp) + 1);
-		strcpy(help_tutorialDirs[i],tmp);
-		*colon = ':';
+		memcpy(help_tutorialDirs[i],tmp,(int)(colon - tmp));
+		help_tutorialDirs[i][(int)(colon - tmp)] = 0;
 		tmp = colon + 1;
 		colon = strrchr(tmp,':');
 		i++;
@@ -508,7 +509,7 @@ help::~help()
 /*
  * help__ method interface for using an alias file
  */
-void help::SetAliasesFile(register char  *alias)
+void help::SetAliasesFile(register const char  *alias)
 {
 	ATKinit;
 
@@ -518,7 +519,7 @@ void help::SetAliasesFile(register char  *alias)
 /*
  * help__ method for adding a help index directory
  */
-void help::SetIndex(register char  *aindex)
+void help::SetIndex(register const char  *aindex)
 {
 	ATKinit;
 
@@ -534,7 +535,7 @@ void help::SetIndex(register char  *aindex)
  *	 0: if no help found for this topic
  *	 1: if successful
  */
-int help::HelpappGetHelpOn(char  *aname	/* what topic */, long  isnew	/* is this a new topic? */, int  ahistory	/* show in history log? 1-show aname 2-show tail of filename */, char  *errmsg	/* error to print if failure. "Error" if this is NULL */)
+int help::HelpappGetHelpOn(const char  *aname	/* what topic */, long  isnew	/* is this a new topic? */, int  ahistory	/* show in history log? 1-show aname 2-show tail of filename */, char  *errmsg	/* error to print if failure. "Error" if this is NULL */)
 {
 	ATKinit;
 
@@ -713,12 +714,14 @@ static int safesystem(char  *acmd)
 /*
  * classproc to handle getting help using a terminal-based interface
  */
-void help::GetHelpOnTerminal(register char  *akey		/* topic string */,register int  list		/* do help on topic, or just list files? */,register int  print		/* prompt for printing each helpfile? */)
+void help::GetHelpOnTerminal(register const char  *akey		/* topic string */,register int  list		/* do help on topic, or just list files? */,register int  print		/* prompt for printing each helpfile? */)
 {
 	ATKinit;
 
     FILE *tfile;
-    char *alias, *pager, *index, *tmp;
+    char *alias, *tmp;
+    const char *pager;
+    const char *index;
     char pathName[MAXPATHLEN], cmdLine[MAXPATHLEN];
     char hbuffer[HNSIZE], tbuffer[HNSIZE];
     long digitMode, digitValue, firstChar;
@@ -744,8 +747,9 @@ void help::GetHelpOnTerminal(register char  *akey		/* topic string */,register i
     }
 
     /* map helpKey */
-    strncpy(tbuffer, LowerCase(akey), HNSIZE);
+    strncpy(tbuffer, akey, HNSIZE);
     tbuffer[HNSIZE-1] = 0;
+    LowerCase(tbuffer);
 
     /* now see if it has an illegal, command running, alias */
     alias = (char *)helpdb::MapAlias(tbuffer);

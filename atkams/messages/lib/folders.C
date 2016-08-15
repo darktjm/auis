@@ -25,15 +25,16 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/folders.C,v 1.8 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/folders.C,v 1.8 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h> /* sys/file.h */
 #include <textview.H>
 #include <cui.h>
 #include <fdphack.h>
@@ -89,11 +90,11 @@ void folders_ClearFolders(class folders  *ci);
 void folders_DoClick(class folders  *folders, boolean  IsLeftClick , boolean  IgnorePosition);
 static void UpdateBEDirCachePositions(class folders  *ci, struct BEDirCache  *entry, int  addedlen);
 static void RemoveFromBEDirCache(class folders  *ci, char  *longname , char  *shortname);
-static int AddToBEDirCache(class folders  *ci, char  *longname , char  *shortname, int  substatus);
+static int AddToBEDirCache(class folders  *ci, const char  *longname , const char  *shortname, int  substatus);
 static int BEDC_AddComment(class folders  *ci, struct BEDirCache  *bdc, char  *comm, int  *addedlen);
 static void InsertFolderNameInText(class folders  *f, struct BEDirCache  *bdcent, char  *comm);
-static void AddSetupItem(class folders  *ci, char  *longname , char  *shortname, int  substatus , int  showingnewstuff , int  HasNew, boolean  *HasCleared);
-int folders_SetupList(class folders  *ci, int  code, char  *thingstoread[]);
+static void AddSetupItem(class folders  *ci, const char  *longname , const char  *shortname, int  substatus , int  showingnewstuff , int  HasNew, boolean  *HasCleared);
+int folders_SetupList(class folders  *ci, int  code, const char  *thingstoread[]);
 static void AlterSubStatus(class folders  *ci, char  *dir , int  status, char  *shortname);
 static void UnhighlightFolderName(class folders  *ci);
 static void HighlightSpecificFolderName(class folders  *ci, char  *name , char  *CommText, int  i);
@@ -336,7 +337,7 @@ static void RemoveFromBEDirCache(class folders  *ci, char  *longname , char  *sh
     }
 }
 
-static int AddToBEDirCache(class folders  *ci, char  *longname , char  *shortname, int  substatus)
+static int AddToBEDirCache(class folders  *ci, const char  *longname , const char  *shortname, int  substatus)
 {
     int i = ci->MainDirCacheCount, j;
 
@@ -398,7 +399,7 @@ static void InsertFolderNameInText(class folders  *f, struct BEDirCache  *bdcent
 }
 
 
-static void AddSetupItem(class folders  *ci, char  *longname , char  *shortname, int  substatus , int  showingnewstuff , int  HasNew, boolean  *HasCleared)
+static void AddSetupItem(class folders  *ci, const char  *longname , const char  *shortname, int  substatus , int  showingnewstuff , int  HasNew, boolean  *HasCleared)
 {
     struct BEDirCache *bdcent;
     char *comm;
@@ -437,7 +438,7 @@ static void AddSetupItem(class folders  *ci, char  *longname , char  *shortname,
 }
 
 
-int folders_SetupList(class folders  *ci, int  code, char  *thingstoread[])
+int folders_SetupList(class folders  *ci, int  code, const char  *thingstoread[])
 {
     char *whattofree;
     char PathElt[MAXPATHLEN+1], MapFile[MAXPATHLEN+1], RemoteMapFile[MAXPATHLEN+1], ErrorText[256], *s=NULL, *shortname, *longname, *nextline, *t;
@@ -1239,7 +1240,7 @@ static struct bind_Description folders_standardbindings [] = {
 
 static void InitKeyMenusStyles(class folders  *folders)
 {
-    char *fontname;
+    const char *fontname;
     int fontsize;
 
     folders->mykeys = keystate::Create(folders, folders_standardkeymap);

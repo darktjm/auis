@@ -21,16 +21,17 @@
  *  $
  */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/ashadow.C,v 1.18 1996/11/12 21:51:10 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/ashadow.C,v 1.18 1996/11/12 21:51:10 robr Exp $";
 #endif
 
 /* ashadow.C		
 	Draw borders around widgets
 */
 
-#include <andrewos.h>
 ATK_IMPL("ashadow.H")
 #include <ashadow.H>
 
@@ -118,10 +119,10 @@ color &AShadowColorBlock::operator[](AShadowColors type) {
     if(val) {
 	col[type]=val;
     } else {
-        static char whitename[]="white";
-        static char blackname[]="black";
-	char *sfgc=blackname;
-	char *sbgc=whitename;
+        static const char whitename[]="white";
+        static const char blackname[]="black";
+	const char *sfgc=blackname;
+	const char *sbgc=whitename;
         target->GetDrawable()->GetDefaultColors(&sfgc, &sbgc);
         if(sfgc==NULL) sfgc=blackname;
         if(sbgc==NULL) sbgc=whitename;

@@ -25,16 +25,17 @@
  *  $
 */
 
+#include <andrewos.h>                  /* sys/file.h sys/types.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/msdir.c,v 2.42 1993/07/02 23:01:53 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/msdir.c,v 2.42 1993/07/02 23:01:53 rr2b Stab74 $";
 #endif
 
 /*
   msdir.c -- Routines for manipulating message directory structures
       */
 
-#include <andrewos.h>                  /* sys/file.h sys/types.h */
 #include <ms.h>
 #include <hdrparse.h>
 #include <stdio.h>

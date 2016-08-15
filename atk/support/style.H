@@ -251,7 +251,7 @@ class style : public ATK {
     virtual void SetNewInterlineSpacing(enum style_SpacingValue Basis, long Operand, enum style_Unit Unit);
     virtual void GetNewInterlineSpacing(enum style_SpacingValue *RefBasis, long *RefOperand, enum style_Unit *RefUnit);
 
-    virtual void SetFontFamily(char *NewFont);
+    virtual void SetFontFamily(const char *NewFont);
     virtual void GetFontFamily(char *FontName, int bufsize);
 
     virtual void SetFontSize(enum style_FontSize Basis, long Operand);

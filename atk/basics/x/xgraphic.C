@@ -104,7 +104,7 @@ struct  xgraphic_UpdateBlock * xgraphic_FindUpdateBlock(Display  * WhichDisplay,
 static void InstallUpdateRegion(class xgraphic  * self );
 static void xgraphic_LocalSetTransferFunction(class xgraphic  * self, int  prevValue);
 static void  ReallySetFont(class xgraphic  *self);
-static void xgraphic_DrawChars(class xgraphic  * self,char  * Text,short  Operation ,short  StringMode,long  TextLength );
+static void xgraphic_DrawChars(class xgraphic  * self,const char  * Text,short  Operation ,short  StringMode,long  TextLength );
 static void SetUpPixImage(register class xgraphic  *self, register class pixelimage  *pixelimage);
 static unsigned int  bitsPerPixelAtDepth(Display       *disp, int            scrn, unsigned int depth);
 XImageInfo * imageToXImage( class xgraphic  *self, class image  *image, unsigned int private_cmap, unsigned int fit );
@@ -503,7 +503,7 @@ void xgraphic::SetFont(class fontdesc  * ChosenFont)
 #define xgraphic_NULLTERMINATED 0
 #define xgraphic_LENGTHGIVEN 1
 
-static void xgraphic_DrawChars(class xgraphic  * self,char  * Text,short  Operation ,short  StringMode,long  TextLength )
+static void xgraphic_DrawChars(class xgraphic  * self,const char  * Text,short  Operation ,short  StringMode,long  TextLength )
 {
 
     register XCharStruct *maxChar;
@@ -556,14 +556,14 @@ static void xgraphic_DrawChars(class xgraphic  * self,char  * Text,short  Operat
 	static XTextItem * tip = NULL;
 	static int NumAlloc = InitialWordGuess;
         int WdCnt;
-	char * WordStart;
+	const char * WordStart;
 	int i;
 	int CharCount;
 
 	if( tip == NULL )
 	    tip = (XTextItem *)
 			 malloc(NumAlloc * sizeof(XTextItem));
-	tip[0].chars = Text;
+	tip[0].chars = (char *)Text;
         tip[0].delta = 0;
 	tip[0].font = 0; /* use GC font */
 	WordStart = Text;
@@ -586,7 +586,7 @@ static void xgraphic_DrawChars(class xgraphic  * self,char  * Text,short  Operat
 			 realloc(tip, NumAlloc * sizeof(XTextItem));
 		}
 		/* Fill in next slot */
-		tip[WdCnt].chars = WordStart;
+		tip[WdCnt].chars = (char *)WordStart;
 		tip[WdCnt].delta = self->spaceShim;
 		tip[WdCnt].font = 0; /* use GC font */
 	    }
@@ -615,14 +615,14 @@ static void xgraphic_DrawChars(class xgraphic  * self,char  * Text,short  Operat
 
 }
 
-void xgraphic::DrawString(char  * Text, short  Operation )
+void xgraphic::DrawString(const char  * Text, short  Operation )
 {
 
     xgraphic_DrawChars(this,Text,Operation,xgraphic_NULLTERMINATED,0);
 }
 
 
-void xgraphic::DrawText(char  * Text, long  TextLength, short  Operation )
+void xgraphic::DrawText(const char  * Text, long  TextLength, short  Operation )
 {
 
     xgraphic_DrawChars(this,Text,Operation,xgraphic_LENGTHGIVEN,
@@ -2729,12 +2729,12 @@ static void SetStipple(class xgraphic  *self, long  index)
 	else XSetStipple((self)->XDisplay(),  (self)->XGC(), tile->localWindow);
     }
 }
-void xgraphic::SetForegroundColor(char *name, long r, long g, long b) {
+void xgraphic::SetForegroundColor(const char *name, long r, long g, long b) {
     graphic::SetForegroundColor(name, r, g,b);
 }
 
 
-void xgraphic::SetBackgroundColor(char *name, long r, long g, long b) {
+void xgraphic::SetBackgroundColor(const char *name, long r, long g, long b) {
     graphic::SetBackgroundColor(name, r, g,b);
 }
 

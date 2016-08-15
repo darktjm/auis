@@ -42,10 +42,6 @@
 #define FILTERBUFSIZ        256        /* Arbitrary */
 #define FILTERTIMEOUT       300        /* Real seconds before killing child */
 
-extern char    *getenv(), *getprofile();
-
-extern char    *AndrewDir();           /* from libutil.a */
-
 extern void     Prim_AND();            /* prmtives.c, line 1133 */
 extern void     Prim_APPEND();         /* prmtives.c, line 2064 */
 extern void     Prim_ASSOC();          /* prmtives.c, line 935 */

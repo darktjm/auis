@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/menulist.C,v 3.12 1995/07/14 18:52:45 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/menulist.C,v 3.12 1995/07/14 18:52:45 rr2b Stab74 $";
 #endif
 
 
@@ -36,7 +38,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/com
 /* menulist.c
  * Provides an abstraction for cooperative menu usage among views.
  */
-#include <andrewos.h>
 ATK_IMPL("menulist.H")
 
 #include <menulist.H>
@@ -211,7 +212,7 @@ static short mpitem_DoResolv(const char  *str)
 #define INITIALSIZE 512
 
 /* Hacked routine to rea a "whole file" into memory. */
-static char *MapMenuFile(char  *filename, long  *fileLength /* OUT */)
+static char *MapMenuFile(const char  *filename, long  *fileLength /* OUT */)
         {
 
     int fd;
@@ -264,7 +265,7 @@ static char *MapMenuFile(char  *filename, long  *fileLength /* OUT */)
 
 #define UnmapMenuFile(mappedMemory) free(mappedMemory)
 
-static int ReadMenuFile(char  *filename, boolean  executeImmediately)
+static int ReadMenuFile(const char  *filename, boolean  executeImmediately)
 {
 
     char *buffer;
@@ -347,8 +348,8 @@ static int ReadMenuFile(char  *filename, boolean  executeImmediately)
 
 void InitMenuFile()
 {
-    char *al=environ::Get("ANDREWLANGUAGE");
-    char *alf=environ::Get("ANDREWLANGUAGEMENUFILE");
+    const char *al=environ::Get("ANDREWLANGUAGE");
+    const char *alf=environ::Get("ANDREWLANGUAGEMENUFILE");
     if(alf==NULL) alf=environ::GetProfile("AndrewLanguageMenuFile");
     if(al==NULL) al=environ::GetProfile("AndrewLanguage");
     if(alf==NULL && al) {

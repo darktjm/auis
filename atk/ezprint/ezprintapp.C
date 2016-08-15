@@ -25,15 +25,16 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ezprint/RCS/ezprintapp.C,v 1.12 1995/04/27 01:40:24 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ezprint/RCS/ezprintapp.C,v 1.12 1995/04/27 01:40:24 rr2b Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h> /* sys/file.h */
 ATK_IMPL("ezprintapp.H")
 
 #include <sys/param.h> /* For MAXPATHLEN. */
@@ -95,7 +96,7 @@ ATKdefineRegistry(ezprintapp, application, ezprintapp::InitializeClass);
 static void usage(class ezprintapp  *self);
 
 
-static char *progname;
+static const char *progname;
 
 boolean ezprintapp::InitializeClass()
 {
@@ -150,13 +151,13 @@ static void usage(class ezprintapp  *self)
     exit(2);
 }
 
-boolean ezprintapp::ParseArgs (int  argc, char  **argv)
+boolean ezprintapp::ParseArgs (int  argc, const char  **argv)
 /* Since we are non-interactive, everything is done in this function so we
  can handle the args as they come */
 {
     register int i;
     int ix;
-    char *DocumentName, *c, *printargs, *outputfile;
+    const char *DocumentName, *c, *printargs, *outputfile;
     FILE *ofile,*f;
     boolean indexflag;
     class dataobject *d = NULL;
@@ -172,13 +173,13 @@ boolean ezprintapp::ParseArgs (int  argc, char  **argv)
 #endif
     int print_scale = 0; /* 0 means use default */
     boolean orient_landscape = FALSE;
-    char *papersize = NULL;
+    const char *papersize = NULL;
     int status;
     int LockAndDelete = 0; 
     class view *ff;
-    char *ScribeVersion = NULL;
-    char *printer = NULL;
-    char *currentfile;
+    const char *ScribeVersion = NULL;
+    const char *printer = NULL;
+    const char *currentfile;
     indexflag = FALSE;
     boolean docontents=FALSE;
     boolean enumcontents=FALSE;
@@ -198,7 +199,8 @@ boolean ezprintapp::ParseArgs (int  argc, char  **argv)
 
     for (i=1;i<argc;i++){
 	if (argv[i][0] == '-'){
-	    char *env,*val;
+	    const char *env,*val;
+	    char *enew = NULL;
 	    switch(argv[i][1]){
 		case 'q':
 		    quiet = TRUE;
@@ -219,13 +221,19 @@ boolean ezprintapp::ParseArgs (int  argc, char  **argv)
 			break;
 		    }
 		    if((val = strchr(env,'=')) != NULL){
-			*val++ = '\0';
-			if(*val == '\0'){
+			enew = strdup(env);
+			if(!enew)
+			    exit(1);
+			enew[(int)(val - env)] = 0;
+			env = enew;
+			if(*++val == '\0'){
 			    environ::Delete(env);
+			    free(enew);
 			    break;
 			}
 		    }
 		    environ::Put(env,val);
+		    if(enew) free(enew);
 		    break;
 		case 'E': /* enumerate */
 		    enumcontents=TRUE;
@@ -562,11 +570,15 @@ printit:  ;
 #endif
 	    {
 		if(DocumentName){
-		    for(c = DocumentName; *c != '\0'; c++){
-			if(*c == '/'  ) *c = '-';
-			else if((!isprint(*c)) || isspace(*c)) *c = '_';
+		    char *d = strdup(DocumentName), *s;
+		    if(!d)
+			exit(1);
+		    for(s = d; *s != '\0'; s++){
+			if(*s == '/'  ) *s = '-';
+			else if((!isprint(*s)) || isspace(*s)) *s = '_';
 		    }
-		    status = print::ProcessView(v, popt|mechanism, 0, DocumentName, printargs);
+		    status = print::ProcessView(v, popt|mechanism, 0, d, printargs);
+		    free(d);
 		}
 		else {
 		    status = print::ProcessView(v, popt|mechanism, 0, currentfile, printargs);

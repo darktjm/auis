@@ -25,12 +25,12 @@
 //  $
 */
 
+#include <andrewos.h>
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/print.C,v 3.22 1996/10/18 03:42:48 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/print.C,v 3.22 1996/10/18 03:42:48 wjh Exp $";
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("print.H")
 
 #include <ctype.h>
@@ -191,8 +191,8 @@ ATKdefineRegistry(print, ATK, print::InitializeClass);
 #if defined(hp9000s300) && HP_OS < 70
 static void print_sigAlrm();
 #endif /* hp9000s300 */
-static void insert(char  *src,char  *c);
-static char *shove(register char  *dest,register char  *search,register char  *src);
+static void insert(const char  *src,char  *c);
+static char *shove(register char  *dest,register const char  *search,register const char  *src);
 static void normalize(char  *s);
 static void SetPrinterType (char  *printertype, class view *v);
 static int ColorHash(char  *key);
@@ -223,17 +223,18 @@ static int mystrtol16(char *p, char **pp)
     return result;
 }
 
-static void insert(char  *src,char  *c)
+static void insert(const char  *src,char  *c)
 {   /* inserts string src into the begining of string c , assumes enough space */
-    char *p,*enddest;
+    const char *p;
+    char *q, *enddest;
     enddest = c + strlen(c);
-    p = enddest + strlen(src);
-    while(enddest >= c) *p-- = *enddest-- ;
+    q = enddest + strlen(src);
+    while(enddest >= c) *q-- = *enddest-- ;
     for(p = src; *p != '\0';p++)
 	*c++ = *p;
 }
 
-static char *shove(register char  *dest,register char  *search,register char  *src)
+static char *shove(register char  *dest,register const char  *search,register const char  *src)
 {   /* shove the string src into dest after the string search */
     int searchlen;
     searchlen = strlen(search);
@@ -271,7 +272,7 @@ GeneratePS(char *filename, class view  *v) {
 }
 
 int print::ProcessView(class view  *v, int  print, int  dofork ,
-		char  *DocumentName,char  *prarg) {
+		const char  *DocumentName,const char  *prarg) {
 	ATKinit;
 
     /*  Mostly Gosling Code from PrintDoc in BE 1's BasicIO.c */
@@ -280,7 +281,7 @@ int print::ProcessView(class view  *v, int  print, int  dofork ,
     char    tname[400],tmpname[400];
     static int  seq = 1;
     char   *p,*pp;
-    char   *q;
+    const char   *q;
     char    dname[400];
     char   *dnameptr;
     FILE   *outf;
@@ -299,10 +300,10 @@ int print::ProcessView(class view  *v, int  print, int  dofork ,
 	sprintf(dname, "%d", getpid());
     }
     else {
-	p = strrchr(DocumentName, '/');
-	p = (p == 0) ? DocumentName
-	    : p + 1;
-	strcpy(dname, p);
+	q = strrchr(DocumentName, '/');
+	q = (q == 0) ? DocumentName
+	    : q + 1;
+	strcpy(dname, q);
     }
     dnameptr = &dname[strlen(dname)];
     sprintf(tmpname, "/tmp/%s.n", dname);
@@ -419,13 +420,13 @@ int print::ProcessView(class view  *v, int  print, int  dofork ,
 		fflush(stderr);
 	    }
 	    else {
-		q = strrchr(PrintCommandFormat,'|');
-		if(q != NULL){
+		char *mq = strrchr(PrintCommandFormat,'|');
+		if(mq != NULL){
 		    if(print == print_INDEXTROFF){
-			strcpy(q,DIVERTPLAINTROFF);
+			strcpy(mq,DIVERTPLAINTROFF);
 		    }
 		    else {
-			insert(DIVERTPRINTTROFF,q);
+			insert(DIVERTPRINTTROFF,mq);
 		    }
 		}
 	    }
@@ -461,9 +462,9 @@ int print::ProcessView(class view  *v, int  print, int  dofork ,
 	    if (!q) {
 		q = tname;
 		if (dofork)
-		    sprintf(q,"%s;rm \"%s\"",print_previewcommand, tmpname);
+		    sprintf(tname,"%s;rm \"%s\"",print_previewcommand, tmpname);
 		else
-		    strcpy(q,print_previewcommand);
+		    strcpy(tname,print_previewcommand);
 	    }
 	    strcpy(p, q);
 	    break;
@@ -473,9 +474,9 @@ int print::ProcessView(class view  *v, int  print, int  dofork ,
 	    if (!q) {
 		q = tname;
 		if (dofork)
-		    sprintf(q,"%s;rm \"%s\"",print_pscpreviewcommand, tmpname);
+		    sprintf(tname,"%s;rm \"%s\"",print_pscpreviewcommand, tmpname);
 		else
-		    strcpy(q,print_pscpreviewcommand);
+		    strcpy(tname,print_pscpreviewcommand);
 	    }
 	    strcpy(p, q);
 	    break;
@@ -490,16 +491,16 @@ int print::ProcessView(class view  *v, int  print, int  dofork ,
 		if(prarg == NULL || *prarg == '\0'){
 		    q = tname;
 		    if(dofork)
-			sprintf(q,"%s;rm \"%s\"",pp,tmpname);
+			sprintf(tname,"%s;rm \"%s\"",pp,tmpname);
 		    else
-			strcpy(q,pp);
+			strcpy(tname,pp);
 		}
 		else {
 		    q = tname;
 		    if(dofork)
-			sprintf(q,"%s %s; rm \"%s\"",pp,prarg,tmpname);
+			sprintf(tname,"%s %s; rm \"%s\"",pp,prarg,tmpname);
 		    else
-			sprintf(q,"%s \"%s\"",pp,prarg,tmpname);
+			sprintf(tname,"%s \"%s\"",pp,prarg,tmpname);
 		}
 	    }
 	    strcpy(p, q);
@@ -596,7 +597,7 @@ static void SetPrinterType (char  *printertype, class view *v)
     char *cp;
     char currentprinter[100];
     char *SpoolPath = print_spoolpath;
-    char *str;
+    const char *str;
 
     cp = (char *) v->GetPrintOption(A_printer);
     strcpy(currentprinter, (cp) ? cp : print_spooldir);
@@ -691,7 +692,7 @@ char *print::GetPrintCmd(int  print)
 
 boolean print::InitializeClass()
 {
-    char *foo;
+    const char *foo;
     A_printer = atom::Intern("printer");
     A_psfile = atom::Intern("psfile");
     A_tofile = atom::Intern("tofile");

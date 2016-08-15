@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/ez2ascii.C,v 1.3 1993/06/04 16:21:31 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/ez2ascii.C,v 1.3 1993/06/04 16:21:31 rr2b Stab74 $";
 #endif
 
 
@@ -46,7 +48,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/ez
   * If no file is specified, stdin is read and output goes to stdout.
  */
 
-#include <andrewos.h>
 #include <stdio.h>
 #include <sys/file.h>
 

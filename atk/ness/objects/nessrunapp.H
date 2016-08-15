@@ -35,14 +35,14 @@ class nessrunapp : public  application {
 public:
 	virtual ATKregistryEntry *ATKregistry();
 
-	boolean ParseArgs(int argc, char **argv)  ;
+	boolean ParseArgs(int argc, const char **argv)  ;
 	boolean Start()  ;
 	int Run()  ;
 	
 	nessrunapp();
 	virtual ~nessrunapp();
 
-	char *inputfile;
+	const char *inputfile;
 	class ness *theNess;
 	boolean dump;
 };

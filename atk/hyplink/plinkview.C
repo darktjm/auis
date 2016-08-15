@@ -25,12 +25,13 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/hyplink/RCS/plinkview.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/hyplink/RCS/plinkview.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("plinkview.H")
 #include <sys/param.h>	/* for MAXPATHLEN */
 
@@ -219,7 +220,7 @@ static void NewWarpLink(class plinkview  *self, class observable  *triggerer, lo
     class buffer *buffer;
     class view *view;
     class im *im;
-    char *filename;
+    const char *filename;
     class plink *b = (class plink *)(self)->GetDataObject();
 
     filename = (b)->GetResolvedLink();

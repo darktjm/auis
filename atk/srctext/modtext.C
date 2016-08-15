@@ -23,10 +23,11 @@ $Disclaimer:
 
    modtext, an object for editing Modula-x code. */
 
-static char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/modtext.C,v 2.2 1995/02/09 21:56:46 susan Stab74 $";
-
 #include <andrewos.h>
+
+static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
+static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/modtext.C,v 2.2 1995/02/09 21:56:46 susan Stab74 $";
+
 #include <environment.H>
 #include <stylesheet.H>
 #include <style.H>

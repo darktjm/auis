@@ -45,8 +45,8 @@ struct scache_node {
 
 #if (defined(__STDC__) && !defined(ibm032)) || defined(__cplusplus)
 BEGINCPLUSPLUSPROTOS
-char *scache_Hold(char *str);
-void scache_Free(char *str);
+const char *scache_Hold(const char *str);
+void scache_Free(const char *str);
 void scache_Collect(void);
 ENDCPLUSPLUSPROTOS
 #else

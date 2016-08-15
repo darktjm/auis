@@ -38,7 +38,7 @@ public:
 	pipescriptapp();
 
 
-     boolean ParseArgs(int argc, char **argv)  ;
+     boolean ParseArgs(int argc, const char **argv)  ;
      boolean Start()  ;
 
     FILE *df;
@@ -47,8 +47,8 @@ public:
     int ShellMenu;
     int filemenu;
     char *Menu;
-    char *titleLine ;
-    char *font ;
+    const char *titleLine ;
+    const char *font ;
     char **argv;
 };
 

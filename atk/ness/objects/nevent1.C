@@ -25,12 +25,12 @@
  *  $
 */
 
+#include <andrewos.h>	/* for index() */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nevent1.C,v 1.10 1994/08/13 16:00:54 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nevent1.C,v 1.10 1994/08/13 16:00:54 rr2b Stab74 $";
 #endif
-
-#include <andrewos.h>	/* for index() */
 
 #include <im.H>
 #include <view.H>

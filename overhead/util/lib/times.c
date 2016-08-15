@@ -25,16 +25,18 @@
  *  $
 */
 
+/* tjm - no point in cleaning up; unused */
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/times.c,v 1.21 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/times.c,v 1.21 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
  
 
 #include <errno.h>
-#include <andrewos.h>
 
 #ifndef HAS_GETTIMEOFDAY
 /* OS independence for times. */

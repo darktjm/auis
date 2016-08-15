@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/stylesheet.C,v 3.6 1996/11/19 22:22:40 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/stylesheet.C,v 3.6 1996/11/19 22:22:40 robr Exp $";
 #endif
 
 
@@ -35,7 +37,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RC
 
 
 
-#include <andrewos.h>
 ATK_IMPL("stylesheet.H")
 #include <style.H>
 #include <menulist.H>

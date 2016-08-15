@@ -25,17 +25,17 @@
 //  $
 */
 
+#include <andrewos.h>
+
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/txtvcmds.C,v 3.7 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/txtvcmds.C,v 3.7 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
 
  
-
-#include <andrewos.h>
-
 
 #include <ctype.h>
 #define AUXMODULE 1
@@ -64,8 +64,8 @@ long lcNewLine;
 void textview_NOOPCmd (register class textview  *self);
 int charType(register char  c);
 static void CheckStylePreferences(class keymap  *newKeymap, class menulist  **normalMenus);
-static int TranslateKeySequence(char  *from, char  *to);
-static int parseBackslashed(char  **fromChars);
+static int TranslateKeySequence(const char  *from, char  *to);
+static int parseBackslashed(const char  **fromChars);
 static void adjustBindings(struct bind_Description  *bindings);
 class keymap *textview_InitEmacsKeyMap(struct textview_ATKregistry_   *classInfo, class menulist  **normalMenus);
 class keymap *textview_InitViCommandModeKeyMap(struct textview_ATKregistry_   *classInfo, class menulist  **Menus);
@@ -315,7 +315,7 @@ static void CheckStylePreferences(class keymap  *newKeymap, class menulist  **no
 
 /* These two procs ripped out of basics/common/init.c */
 /* Translate a key sequence that has ^A, \ddd, and \c conventions. */
-static int TranslateKeySequence(char  *from, char  *to)
+static int TranslateKeySequence(const char  *from, char  *to)
         {
     while (*from != '\0') {
         if (*from == '\\') {
@@ -340,11 +340,11 @@ static int TranslateKeySequence(char  *from, char  *to)
     return 0;
 }
 
-static int parseBackslashed(char  **fromChars)
+static int parseBackslashed(const char  **fromChars)
     {
 
     int returnChar;
-    char *from = *fromChars;
+    const char *from = *fromChars;
     static char *bsSource = "ebrnt";
     static char *bsDest = "\033\b\r\n\t";
 
@@ -387,7 +387,7 @@ static int parseBackslashed(char  **fromChars)
 static void adjustBindings(struct bind_Description  *bindings)
 {
     struct bind_Description *bd;
-    char *stylePrefixPref;
+    const char *stylePrefixPref;
     char stylePrefixStr[100];
 
     stylePrefixPref = environ::GetProfile("StyleCommandPrefix");

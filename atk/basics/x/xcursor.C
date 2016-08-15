@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xcursor.C,v 3.5 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xcursor.C,v 3.5 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
@@ -35,7 +37,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/R
 
 
 
-#include <andrewos.h>
 ATK_IMPL("xcursor.H")
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
@@ -60,8 +61,8 @@ static char CursorTable[] = {  'a',
 #include <xcursor.H>
 
 extern int cursordebug;
-static char *foreground=NULL;
-static char *background=NULL;
+static const char *foreground=NULL;
+static const char *background=NULL;
 static XColor forecolor;
 static XColor backcolor;
 static Display *colorDisplay = NULL;

@@ -25,14 +25,15 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/noteview.C,v 1.3 1994/08/11 03:02:54 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/noteview.C,v 1.3 1994/08/11 03:02:54 rr2b Stab74 $";
 #endif
 
 
 
-#include <andrewos.h>
 #include <fontdesc.H>
 #include "view.H"
 #include "textview.H"

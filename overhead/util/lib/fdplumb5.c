@@ -25,20 +25,19 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fdplumb5.c,v 2.7 1992/12/15 21:09:01 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fdplumb5.c,v 2.7 1992/12/15 21:09:01 rr2b Stab74 $";
 #endif
-
-
- 
 
 #include <stdio.h>
 #include <fdplumbi.h>
+#include <util.h>
 
-dbg_t2open(name, argv, r, w)
-char *name, *argv[];
-FILE **r, **w;
+
+int dbg_t2open(const char *name, char * const argv[], FILE **r, FILE **w)
 {
     int code;
 
@@ -51,9 +50,7 @@ FILE **r, **w;
 }
 
 
-dbg_t2close(fp, seconds, timedout)
-FILE *fp;
-int seconds, *timedout;
+int dbg_t2close(FILE *fp, int seconds, int *timedout)
 {
     RegisterCloseFile(fileno(fp));
     return(t2close(fp, seconds, timedout));

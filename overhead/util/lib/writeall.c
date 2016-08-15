@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <util.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/writeall.c,v 2.6 1992/12/15 21:11:36 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/writeall.c,v 2.6 1992/12/15 21:11:36 rr2b Stab74 $";
 #endif
 
 /*
@@ -38,10 +40,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <errno.h>
 #include <unistd.h>
 
-int writeall(fd, Buf, NBytes)
-int fd;
-char *Buf;
-int NBytes;
+int writeall(int fd, const char *Buf, int NBytes)
 {
     int Code, ToWrite;
 

@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/eval.C,v 1.3 1993/06/04 11:35:13 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/eval.C,v 1.3 1993/06/04 11:35:13 rr2b Stab74 $";
 #endif
 
 
@@ -36,7 +38,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/
 /* eval.c - parse and evaluate expressions in table */
 
 
-#include <andrewos.h>
 #include <stdio.h>
 #include <setjmp.h>
 #include <signal.h>

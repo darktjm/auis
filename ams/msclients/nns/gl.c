@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/msclients/nns/RCS/gl.c,v 2.15 1993/06/10 21:35:03 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/msclients/nns/RCS/gl.c,v 2.15 1993/06/10 21:35:03 rr2b Stab74 $";
 #endif
 
 /* Methods for the GroupList data type for the Netnews Snarfer

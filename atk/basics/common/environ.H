@@ -42,26 +42,26 @@ class environ : public ATK  {
 public:
 	virtual ATKregistryEntry *ATKregistry();
 
-	static void PutPrinter(char *value);
-	static char *GetPrinter();
+	static void PutPrinter(const char *value);
+	static const char *GetPrinter();
 	static void DeletePrinter();
-        static void Put(char *variable, char *value);
-        static void Delete(char *variable);
-        static char * Get(char *variable)  ;
-        static char * GetProfile(char *preference)  ;
-        static boolean GetProfileSwitch(char *preference, boolean defaultValue)  ;
-	static long GetProfileInt(char *preference, long defaultValue)  ;
-	static boolean ProfileEntryExists(char *preference, boolean useDefault)  ;
-	static char * GetConfiguration(char *key)  ;
-	static char * AndrewDir(char *str)  ;
-	static char * LocalDir(char *str)  ;
+        static void Put(const char *variable, const char *value);
+        static void Delete(const char *variable);
+        static const char * Get(const char *variable)  ;
+        static const char * GetProfile(const char *preference)  ;
+        static boolean GetProfileSwitch(const char *preference, boolean defaultValue)  ;
+	static long GetProfileInt(const char *preference, long defaultValue)  ;
+	static boolean ProfileEntryExists(const char *preference, boolean useDefault)  ;
+	static const char * GetConfiguration(const char *key)  ;
+	static const char * AndrewDir(const char *str)  ;
+	static const char * LocalDir(const char *str)  ;
 	static struct configurelist * ReadConfigureFile(char *filename)  ;
 	static char * GetConfig(struct configurelist *cList, char *key, boolean usedefault)  ;
 	static void FreeConfigureList(struct configurelist *cList);
-	static char * GetHome(char *user)  ;  /* pass in NULL for current user */
-	static void SetProgramName(char *string);	    /* for use by the GetProfile stuff */
-	static char * GetFirstProfileFileName()  ;
-	static char * GetProfileFileName()  ;
+	static const char * GetHome(const char *user)  ;  /* pass in NULL for current user */
+	static void SetProgramName(const char *string);	    /* for use by the GetProfile stuff */
+	static const char * GetFirstProfileFileName()  ;
+	static const char * GetProfileFileName()  ;
 	static void AddStringProfile(const char *str);  /* Add a preference to the running environment. */
 	static void ExpandEnvVars(char *to, const char *from, int maxsize);
 };

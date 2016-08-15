@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nodeclss.c,v 1.1 1993/07/28 17:46:12 gk5g Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nodeclss.c,v 1.1 1993/07/28 17:46:12 gk5g Stab74 $";
 #endif
 
 /* nodeclss.c 
@@ -72,7 +74,6 @@ corresponding output:
 
 */
 
-#include <andrewos.h>
 #include <ctype.h>
 
 char filestem[100];		/* stem of input filename */

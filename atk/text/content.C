@@ -25,15 +25,16 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/content.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/content.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h>
 ATK_IMPL("content.H")
 #include "ctype.h"
 #include <environment.H>
@@ -69,7 +70,7 @@ static char *indexnames[] = {
 ATKdefineRegistry(content, text, NULL);
 
 static int findinlist(char  **lst ,int  cnt,char  *str);
-static int appendlist(char  **lst,int  cnt,char  *ostr,int  TEST);
+static int appendlist(char  **lst,int  cnt,const char  *ostr,int  TEST);
 static char *chapnote(int  *ip);
 static struct content_chapentry *findcp(class content  *self,long  pos,long  len);
 static struct content_chapentry *findremcp(class content  *self,long  pos);
@@ -78,7 +79,7 @@ static long StoI(class content  *self,long  *ppos,int  *lev,class text  *src);
 static int denumber(class content  *self,struct content_chapentry  *cp);
 static boolean skipnewlines(class text  *d,long  *pos,long  *len);
 static boolean skipchapnumber(class text  *d,long  *pos,long  *len,boolean  update);
-static int number(class content  *self,char  *string,struct content_chapentry  *cp);
+static int number(class content  *self,const char  *string,struct content_chapentry  *cp);
 static void doindent(class content  *self);
 static void unindent(class content  *self);
 static struct content_chapentry *newentry(class content  *self,struct content_chapentry  *next,boolean  addmark);
@@ -111,7 +112,7 @@ static int findinlist(char  **lst ,int  cnt,char  *str)
     }
     return -1;
 }
-static int appendlist(char  **lst,int  cnt,char  *ostr,int  TEST)
+static int appendlist(char  **lst,int  cnt,const char  *ostr,int  TEST)
 {   /* BUG -- OVERFLOWS NOT DETECTED */
 
     char *str;
@@ -327,7 +328,7 @@ struct content_chapentry *content::CopyEntry(long  pos,long  len,char  *buf,long
     if(!this->isindented) ::doindent(this);   
     (this->srctext)->NotifyObservers(0);
 }
-static int number(class content  *self,char  *string,struct content_chapentry  *cp)
+static int number(class content  *self,const char  *string,struct content_chapentry  *cp)
 {
     char c;
     long pos,npos,end;
@@ -359,7 +360,7 @@ static int number(class content  *self,char  *string,struct content_chapentry  *
     return FALSE;
 
 }
- long content::Enumerate(long  opos,long  len,char  *start)
+ long content::Enumerate(long  opos,long  len,const char  *start)
 {   
     int tab[NUMLEV],lev[NUMLEV],i,pos,lastlev,curlev,initializing;
     long slen,maxlen;
@@ -815,7 +816,7 @@ void content::UpdateSource(long  pos,long  len)
 
 static void initcontentstylenames()
 {
-    char *p;
+    const char *p;
     contentstylenames[0] = NULL;
     if((p = environ::Get("ContentsList")) == NULL){
 	if((p = environ::GetProfile("ContentsList"))== NULL)

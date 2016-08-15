@@ -113,7 +113,7 @@ class print : public ATK  {
 	virtual ~print();
 
 	static int ProcessView(view *v, int print, int dofork, 
-		char *DocumentName, char *prarg)  ;
+		const char *DocumentName, const char *prarg)  ;
 
 	static char * GetPrintCmd(int print)  ;
 	static boolean LookUpColor(char *name, 
@@ -153,8 +153,8 @@ class print : public ATK  {
 		{ *width = papersize_w; *height = papersize_h; }
 	inline void SetFileName(char *fnm) { filename = NewString(fnm); }
 	inline char *GetFileName() { return filename; }
-	inline void SetTitle(char *tnm) { title = NewString(tnm); }
-	inline char *GetTitle() { return title; }
+	inline void SetTitle(const char *tnm) { title = NewString(tnm); }
+	inline const char *GetTitle() { return title; }
 
 	char *filename;
 	char *title;

@@ -25,15 +25,16 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/file.h sys/time.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/msclients/cui/RCS/cuifns.c,v 2.19 1994/08/30 16:21:54 Zarf Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/msclients/cui/RCS/cuifns.c,v 2.19 1994/08/30 16:21:54 Zarf Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h> /* sys/file.h sys/time.h */
 #include <cui.h>
 #include <hdrparse.h>
 #include <errprntf.h>

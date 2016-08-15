@@ -25,12 +25,13 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/hyplink/RCS/pshbttnv.C,v 1.22 1996/05/06 17:45:17 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/hyplink/RCS/pshbttnv.C,v 1.22 1996/05/06 17:45:17 robr Exp $";
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("pshbttnv.H")
 #include <sys/param.h>	/* for MAXPATHLEN */
 #include <stdio.h>

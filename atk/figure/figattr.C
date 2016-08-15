@@ -53,7 +53,7 @@ static char attribute_names[figattr_NumAttributes][20] = {
 
 ATKdefineRegistry(figattr, dataobject, NULL);
 
-static char *CopyString(char  *str);
+static char *CopyString(const char  *str);
 
 
 figattr::figattr()
@@ -195,7 +195,7 @@ void figattr::CopyData(class figattr  *src, unsigned long  mask)
     /* ##new */
 }
 
-static char *CopyString(char  *str)
+static char *CopyString(const char  *str)
 {
     char *tmp;
 

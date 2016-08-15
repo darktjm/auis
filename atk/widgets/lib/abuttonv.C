@@ -24,7 +24,7 @@
 ATK_IMPL("abuttonv.H")
 
 #ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/lib/RCS/abuttonv.C,v 1.41 1996/11/07 00:12:17 robr Exp $";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/lib/RCS/abuttonv.C,v 1.41 1996/11/07 00:12:17 robr Exp $";
 #endif
 
 #include <abuttonv.H>

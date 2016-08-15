@@ -25,13 +25,14 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textobjects/RCS/diredview.C,v 1.5 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textobjects/RCS/diredview.C,v 1.5 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
-#include <andrewos.h>
 ATK_IMPL("diredview.H")
 #include <sys/types.h>
 #include <sys/stat.h>

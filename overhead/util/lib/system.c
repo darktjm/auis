@@ -22,18 +22,18 @@
 
 /* $Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/system.c,v 1.3 1992/12/14 20:21:35 rr2b Stab74 $ */
 
-#ifndef NORCSID
-static char system_c_rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/system.c,v 1.3 1992/12/14 20:21:35 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
+#include <util.h>
+
+#ifndef NORCSID
+static UNUSED const char system_c_rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/system.c,v 1.3 1992/12/14 20:21:35 rr2b Stab74 $";
+#endif
 
 /* work around a bug in system where if the parent process catches sigchld system returns a bogus exit status. */
 #ifdef hpux
 #include <stdlib.h>
 #include <errno.h>
-int os_system(cmd)
-char *cmd;
+int os_system(const char *cmd)
 {
     int result;
     errno=0;
@@ -42,8 +42,7 @@ char *cmd;
     return result;
 }
 #else
-int os_system(cmd)
-char *cmd;
+int os_system(const char *cmd)
 {
     return system(cmd);
 }

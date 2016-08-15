@@ -25,12 +25,12 @@
  *  $
 */
 
+#include <errnode.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/errnode.c,v 2.8 1992/12/15 21:01:25 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/errnode.c,v 2.8 1992/12/15 21:01:25 rr2b Stab74 $";
 #endif
-
-#include <errnode.h>
 
 void            eliErr_Set(st, e, code, node, loc, unixerr)
 EliState_t     *st;

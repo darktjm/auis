@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/layout/RCS/fillerview.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/layout/RCS/fillerview.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 /* $ACIS$ */
@@ -48,7 +50,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/layout/RCS
 #define viewnamestring(v) ((v) == NULL ? "<NO VIEW>" : (((v)->GetName())->First())->Name())
 
 
-#include <andrewos.h>
 ATK_IMPL("fillerview.H")
 #include <assert.h>
 
@@ -122,8 +123,9 @@ static void
 initializeInsets()
 {
     char buff[81];
-    char *insetlist;
-    char *c, *d;
+    const char *insetlist;
+    const char *c;
+    char *d;
     int i;
 
     Insets = (char **)malloc(sizeof (char *));
@@ -200,7 +202,7 @@ fillerview::fillerview()
 static void
 InitializeGraphics(class fillerview  *self, struct graphicstuff  *gc)
 {
-    static char *wfontname = NULL;
+    static const char *wfontname = NULL;
     struct FontSummary *fs;
     int i;
     long w;

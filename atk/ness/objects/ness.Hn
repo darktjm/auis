@@ -687,9 +687,9 @@ public:
 	void SetAttributes(struct attributes *attributes);
 
 /* methods */
-	virtual long ReadNamedFile(char *name);
+	virtual long ReadNamedFile(const char *name);
 		/* read an object from file, checking that it is a ness */
-	virtual void SetFilename(char *n);
+	virtual void SetFilename(const char *n);
 	      /* sets the filename where the ness
 		script came from, and should be
 		saved to when operated on by the macro
@@ -863,7 +863,7 @@ enum libstate callCheckLib(char *fun, struct funcnode  **fnode);
 				/* load library and find function 'fun` */
 void callCompLib(struct libnode  *lnode);
 		/* compile ness from library and set libnode->status */
-long ReadTextFileStream(class text *text, char *name, FILE *f, boolean  objok);
+long ReadTextFileStream(class text *text, const char *name, FILE *f, boolean  objok);
 	/* checks filetype and whatnot 
 	returns dataobject_NOREADERROR or a dataobject error */
 

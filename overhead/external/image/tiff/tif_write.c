@@ -25,13 +25,6 @@
  */
 
 
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/external/image/tiff/RCS/tif_write.c,v 1.5 1992/12/16 17:14:58 rr2b Stab74 $";
-#endif
-
-
 /*
  * TIFF Library.
  *

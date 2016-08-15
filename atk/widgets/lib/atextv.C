@@ -24,7 +24,7 @@
 ATK_IMPL("atextv.H")
 
 #ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/lib/RCS/atextv.C,v 1.9 1996/11/12 00:27:20 robr Exp $";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/lib/RCS/atextv.C,v 1.9 1996/11/12 00:27:20 robr Exp $";
 #endif
 
 #include <atextv.H>

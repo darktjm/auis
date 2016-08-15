@@ -41,7 +41,7 @@ public:
     
 	virtual ~typescriptapp();
 
-     boolean ParseArgs(int argc, char **argv)  ;
+     boolean ParseArgs(int argc, const char **argv)  ;
      boolean Start()  ;
      void Stop();
     char **SessionCheckpoint();
@@ -50,10 +50,10 @@ public:
     class frame *framep;
     int ShellMenu;
     int filemenu;
-    char *Menu;
-    char *titleLine ;
-    char *font ;
-    char **argv;
+    const char *Menu;
+    const char *titleLine ;
+    const char *font ;
+    const char **argv;
  };
 
 

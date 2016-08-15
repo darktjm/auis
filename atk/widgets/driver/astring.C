@@ -24,9 +24,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/astring.C,v 1.9 1996/09/29 22:00:24 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/astring.C,v 1.9 1996/09/29 22:00:24 robr Exp $";
 #endif
 
 
@@ -72,7 +74,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/dr
  */
 
 
-#include <andrewos.h>
 ATK_IMPL("astring.H")
 #include <util.h>
 #include <search.H>

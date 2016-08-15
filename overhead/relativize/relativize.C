@@ -26,7 +26,7 @@
 #include <string.h>
 
 /* Define this function here so that this can be compiled before everything else. */
-char *NewString(char *str)
+static char *NewString(char *str)
 {
     char *result;
     if(str==NULL) return NULL;
@@ -45,7 +45,7 @@ struct dirlist {
     struct dirlist *next;
 } *dirs=NULL, **last=(&dirs);
 
-int AddToDontList(char *path)
+static int AddToDontList(char *path)
 {
     struct dontlist *s=dont;
     while(s) {
@@ -63,7 +63,7 @@ int AddToDontList(char *path)
     return 0;
 }
 
-boolean Dont(char *path)
+static boolean Dont(char *path)
 {
     struct dontlist *s=dont;
     while(s) {
@@ -84,7 +84,7 @@ boolean Dont(char *path)
     return FALSE;
 }	
 
-int AddToDirList(char *path)
+static int AddToDirList(char *path)
 {
     struct dirlist *s=dirs;
     while(s) {
@@ -106,7 +106,7 @@ char **newargv=NULL;
 int size=0;
 int newargc=0;
 
-void AddArg(char *arg)
+static void AddArg(char *arg)
 {
     if(newargc>=size) {
 	size+=10;
@@ -117,7 +117,7 @@ void AddArg(char *arg)
     newargc++;
 }
 
-char *libexts[]={
+const char *libexts[]={
     "a",
 #ifdef ATKLIBEXT
     ATKLIBEXT,
@@ -125,10 +125,10 @@ char *libexts[]={
     NULL
 };
 
-void ProcessArg(char *arg, char *p, char *q)
+static void ProcessArg(char *arg, char *p, char *q)
 {
     struct dirlist *s=dirs;
-    char **libext=libexts;
+    const char **libext=libexts;
     if(arg[0]=='-') {
 	if(arg[1]=='L') {
 	    if(AddToDirList(arg+2)) AddArg(arg);

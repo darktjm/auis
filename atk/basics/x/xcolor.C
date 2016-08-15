@@ -25,10 +25,11 @@
 //  $
 */
 
-#ifndef NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xcolor.C,v 3.10 1996/03/21 20:30:34 robr Stab74 $";
-#endif
 #include <andrewos.h>
+
+#ifndef NORCSID
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xcolor.C,v 3.10 1996/03/21 20:30:34 robr Stab74 $";
+#endif
 ATK_IMPL("xcolor.H")
 #include <X11/X.h>
 #include <X11/Xlib.h>

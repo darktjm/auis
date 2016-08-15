@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/parseadd.c,v 2.20 1994/10/03 19:42:43 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/parseadd.c,v 2.20 1994/10/03 19:42:43 rr2b Stab74 $";
 #endif
 
 /*
@@ -37,7 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/
 
 #include <stdio.h>
 #include <ctype.h>
-#include <andrewos.h>
 #include <parseadd.h>
 #include "parsey.h"
 

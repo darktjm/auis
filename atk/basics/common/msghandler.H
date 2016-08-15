@@ -47,15 +47,15 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
     
-        virtual int DisplayString(int priority, char *string)  ;
-        virtual int AskForString(int priority, char *prompt, char *defaultString, char *buffer, int bufferSize)  ;
-        virtual int AskForPasswd(int priority, char *prompt, char *defaultString, char *buffer, int bufferSize)  ;
-        virtual int AskForStringCompleted(int priority, char *prompt, char *defaultString, char *buffer, int bufferSize, class keystate *keystate, message_completionfptr completionProc, message_helpfptr helpProc, long functionData, int flags)  ;
-        virtual int MultipleChoiceQuestion(int priority, char *prompt, long defaultChoice, long *result, char **choices, char *abbrevKeys)  ;
+        virtual int DisplayString(int priority, const char *string)  ;
+        virtual int AskForString(int priority, const char *prompt, const char *defaultString, char *buffer, int bufferSize)  ;
+        virtual int AskForPasswd(int priority, const char *prompt, const char *defaultString, char *buffer, int bufferSize)  ;
+        virtual int AskForStringCompleted(int priority, const char *prompt, const char *defaultString, char *buffer, int bufferSize, class keystate *keystate, message_completionfptr completionProc, message_helpfptr helpProc, long functionData, int flags)  ;
+        virtual int MultipleChoiceQuestion(int priority, const char *prompt, long defaultChoice, long *result, const char * const *choices, const char *abbrevKeys)  ;
         virtual void CancelQuestion();
 /* These next calls are only applicable during an AskFor... operation. */
         virtual int GetCurrentString(char *buffer, int bufferSize)  ;
-        virtual int InsertCharacters(int pos, char *string, int len)  ;
+        virtual int InsertCharacters(int pos, const char *string, int len)  ;
         virtual int DeleteCharacters(int pos, int len)  ;
         virtual int GetCursorPos()  ;
         virtual int SetCursorPos(int pos)  ;

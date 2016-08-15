@@ -161,9 +161,9 @@ public:
 
     /* Allocates a new set of scrollbars, and sets the view and location */
     static class scroll * Create(class view *view, int location)  ;
-    static class scroll * CreateScroller(class ScrollInterface *s, class view *view, int location, char *scrollClass=NULL);
-    static class scroll * CreateScroller(class view *view, int location, char *scrollClass=NULL);
-    static class scroll *CreateCustomScroller(class view *view, int location, char *scrollClass=NULL);
+    static class scroll * CreateScroller(class ScrollInterface *s, class view *view, int location, const char *scrollClass=NULL);
+    static class scroll * CreateScroller(class view *view, int location, const char *scrollClass=NULL);
+    static class scroll *CreateCustomScroller(class view *view, int location, const char *scrollClass=NULL);
     
 	scroll();
     

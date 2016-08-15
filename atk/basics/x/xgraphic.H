@@ -65,8 +65,8 @@ public:
     virtual void DrawLineTo(long XEnd, long YEnd);
     virtual void DrawLine(long DeltaX, long DeltaY);
 
-    virtual void DrawString(char *Text, short Operation);
-    virtual void DrawText(char *Text, long TextLength, short Operation);
+    virtual void DrawString(const char *Text, short Operation);
+    virtual void DrawText(const char *Text, long TextLength, short Operation);
 
     virtual void SetFont(class fontdesc *ChosenFont);
 
@@ -130,8 +130,8 @@ public:
     virtual void SetForegroundColor(color *c);
     virtual void SetBackgroundColor(color *c);
     
-    virtual void SetForegroundColor(char *name, long r, long g, long b);
-    virtual void SetBackgroundColor(char *name, long r, long g, long b);
+    virtual void SetForegroundColor(const char *name, long r, long g, long b);
+    virtual void SetBackgroundColor(const char *name, long r, long g, long b);
     
     virtual long GetHorizontalResolution()  ;
     virtual long GetVerticalResolution()  ;

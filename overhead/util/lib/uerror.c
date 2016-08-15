@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/uerror.c,v 2.11 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/uerror.c,v 2.11 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 /*
@@ -35,9 +37,8 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 */
 
 
- 
+#include <util.h> 
 
-#include <andrewos.h>
 #include <string.h>
 #include <errno.h>
 #ifdef AFS_ENV
@@ -48,13 +49,11 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #define NULL (char *) 0
 #endif
 
-char *UnixError(errorNumber)
-int	errorNumber;
+const char *UnixError(int errorNumber)
 {
 /* Returns a pointer to a static buffer containing English text describing the same error condition that errorNumber describes (interpreted as a Unix error number).  The text has no newlines in it.  We contend that this is what ``perror'' should have been returning all along. */
-    static char ErrBuff[40];
 #ifdef AFS_ENV
-    static char *vice_errlist[] = {
+    static const char * const vice_errlist[] = {
 	/* 101: VSALVAGE */		"Volume needs salvage",
 	/* 102: VNOVNODE */		"Bad vnode number quoted",
 	/* 103: VNOVOL */		"Volume not attached, doesn't exist, not created, or not online",
@@ -77,6 +76,4 @@ int	errorNumber;
 	    return vice_errlist[errorNumber - VICE_SPECIAL_ERRORS];
 #endif /* AFS_ENV */
     return strerror(errorNumber);
-    sprintf(ErrBuff, "Error number %d", errorNumber);
-    return ErrBuff;
 }

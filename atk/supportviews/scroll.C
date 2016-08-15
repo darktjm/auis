@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/scroll.C,v 3.25 1996/10/10 19:11:39 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/scroll.C,v 3.25 1996/10/10 19:11:39 robr Exp $";
 #endif
 
 
@@ -37,7 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportvie
 
 
 
-#include <andrewos.h>
 ATK_IMPL("scroll.H")
 #include <scroll.H>
 
@@ -417,7 +418,7 @@ scroll::~scroll()
 }
 
 
-static class scroll *CreateBasicScroller(class view  *scrollee, int  location, char  *name)
+static class scroll *CreateBasicScroller(class view  *scrollee, int  location, const char  *name)
 
 {
 
@@ -457,7 +458,7 @@ void scroll::SetStandardRegions(int location) {
     }
 }
 
-class scroll *scroll::CreateScroller(class view  *scrollee, int  location, char  *name)
+class scroll *scroll::CreateScroller(class view  *scrollee, int  location, const char  *name)
 
 {
     ATKinit;
@@ -470,7 +471,7 @@ class scroll *scroll::CreateScroller(class view  *scrollee, int  location, char 
     return s;
 }
 
-class scroll *scroll::CreateScroller(class ScrollInterface *is, class view *scrollee, int location, char *name) {
+class scroll *scroll::CreateScroller(class ScrollInterface *is, class view *scrollee, int location, const char *name) {
     ATKinit;
     class scroll *s=CreateBasicScroller(scrollee, location, name);
     if(s) {
@@ -480,7 +481,7 @@ class scroll *scroll::CreateScroller(class ScrollInterface *is, class view *scro
     return s;
 }
 
-class scroll *scroll::CreateCustomScroller(class view *scrollee, int location, char *name) {
+class scroll *scroll::CreateCustomScroller(class view *scrollee, int location, const char *name) {
     ATKinit;
     class scroll *s=CreateBasicScroller(scrollee, location, name);
     if(s) s->custom=TRUE;

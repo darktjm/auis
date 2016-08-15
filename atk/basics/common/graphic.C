@@ -25,12 +25,13 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/graphic.C,v 3.10 1996/02/14 18:25:58 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/graphic.C,v 3.10 1996/02/14 18:25:58 robr Stab74 $";
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("graphic.H")
 #include <fontdesc.H>
 #include <region.H>
@@ -81,7 +82,7 @@ void graphic::DrawLine(long  DeltaX, long  DeltaY )
     point_OffsetPoint(&this->currentPoint,DeltaX,DeltaY);
 }
 
-void graphic::DrawString(char  * Text, short  Operation )
+void graphic::DrawString(const char  * Text, short  Operation )
 {
     static boolean printed = FALSE;
     if (! printed) {
@@ -90,7 +91,7 @@ void graphic::DrawString(char  * Text, short  Operation )
     }
 }
 
-void graphic::DrawText(char  * Text, long  TextLength, short  Operation)
+void graphic::DrawText(const char  * Text, long  TextLength, short  Operation)
 {
     static boolean printed = FALSE;
     if (! printed) {
@@ -990,7 +991,7 @@ class graphic * graphic::GrayPattern(short  IntensityNum , short  IntensityDenom
 static color fg="black";
 static color bg="white";
 
-void graphic::SetDefaultColors(char  *foreground, char  *background)
+void graphic::SetDefaultColors(const char  *foreground, const char  *background)
 {
 
     char *tempString;
@@ -1016,7 +1017,7 @@ void graphic::SetDefaultColors(char  *foreground, char  *background)
     if(backgroundColorName) bg=backgroundColorName;
 }
 
-void graphic::GetDefaultColors(char  **foreground, char  **background)
+void graphic::GetDefaultColors(const char  **foreground, const char  **background)
 {
 
     if (foreground != NULL)
@@ -1043,7 +1044,7 @@ void graphic::SetBackgroundColor(color *c )
     }
 }
     
-void graphic::SetForegroundColor(char  *colorName, long  red , long  green, long  blue )
+void graphic::SetForegroundColor(const char  *colorName, long  red , long  green, long  blue )
 {
     icolor *nw=colors.Alloc(colorName, red, green, blue);
     if(nw) {
@@ -1054,11 +1055,11 @@ void graphic::SetForegroundColor(char  *colorName, long  red , long  green, long
     }
 }
 
-void graphic::GetForegroundColor(char  **colorName, long  *red , long  *green, long  *blue )
+void graphic::GetForegroundColor(const char  **colorName, long  *red , long  *green, long  *blue )
 {
 
     if ( colorName && fore)
-	*colorName = (char *)fore->Name();
+	*colorName = (const char *)fore->Name();
     unsigned short r=0, g=0, b=0;
     if(fore) {
 	fore->HardwareRGB(*CurrentColormap(), r, g, b);
@@ -1068,7 +1069,7 @@ void graphic::GetForegroundColor(char  **colorName, long  *red , long  *green, l
     if (blue) *blue = b;
 }
 
-void graphic::SetBackgroundColor(char  *colorName, long  red , long  green, long  blue )
+void graphic::SetBackgroundColor(const char  *colorName, long  red , long  green, long  blue )
 {
     icolor *nw=colors.Alloc(colorName, red, green, blue);
     if(nw) {
@@ -1079,10 +1080,10 @@ void graphic::SetBackgroundColor(char  *colorName, long  red , long  green, long
     }
 }
 
-void graphic::GetBackgroundColor(char  **colorName, long  *red , long  *green, long  *blue )
+void graphic::GetBackgroundColor(const char  **colorName, long  *red , long  *green, long  *blue )
 {
     if ( colorName )
-	*colorName = (char *)back->Name();
+	*colorName = (const char *)back->Name();
     unsigned short r=0, g=0, b=0;
     if(back) {
 	back->HardwareRGB(*CurrentColormap(), r, g, b);

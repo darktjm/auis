@@ -25,16 +25,17 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/entertext.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/entertext.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 
  
 
 
-#include <andrewos.h>
 ATK_IMPL("entertext.H")
 #include <entertext.H>
 #include <stylesheet.H>
@@ -106,7 +107,7 @@ static void checkstyles(class entertext  *self)
 	(self)->SetGlobalStyle( self->Style);
     }
 }
-boolean entertext::InsertCharacters(long  pos, char  *str, long  len  )
+boolean entertext::InsertCharacters(long  pos, const char  *str, long  len  )
 {
     if(!(this)->text::InsertCharacters( pos, str, len)) return FALSE;
     checkstyles(this);

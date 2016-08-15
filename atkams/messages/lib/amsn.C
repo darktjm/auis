@@ -25,15 +25,16 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/amsn.C,v 1.6 1994/04/28 19:34:30 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/amsn.C,v 1.6 1994/04/28 19:34:30 rr2b Stab74 $";
 #endif
 
 /* Until I come up with a better scheme, new functions here have to be added to SIX files -- ams.ch, amss.ch, amsn.ch (all identical specs) and the corresponding c files */ 
 
 
-#include <andrewos.h>
 #include <ams.H>
 #include <im.H>
 #include <message.H>
@@ -217,7 +218,7 @@ long amsn::CUI_PrintBodyFromCUIDWithFlags(int  cuid , int  flags, char  *printer
     return(::CUI_PrintBodyFromCUIDWithFlags(cuid, flags, printer));
 }
 
-void amsn::CUI_PrintUpdates(char  *dname , char  *nickname)
+void amsn::CUI_PrintUpdates(const char  *dname , const char  *nickname)
 {
     ::CUI_PrintUpdates(dname, nickname);
 }
@@ -463,7 +464,7 @@ int amsn::GetStringFromUser(char  *prompt , char  *buf, int  len , int  ispass)
     return(::GetStringFromUser(prompt, buf, len, ispass));
 }
 
-int amsn::TildeResolve(char  *in , char  *out)
+int amsn::TildeResolve(const char  *in , char  *out)
 {
     return(::TildeResolve(in, out));
 }
@@ -473,7 +474,7 @@ int amsn::OnlyMail()
     return(AMS_OnlyMail);
 }
 
-char *amsn::ap_Shorten(char  *fname)
+const char *amsn::ap_Shorten(const char  *fname)
 {
     return(::ap_Shorten(fname));
 }

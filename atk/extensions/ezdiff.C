@@ -25,14 +25,15 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/ezdiff.C,v 3.18 1996/09/03 19:11:52 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/ezdiff.C,v 3.18 1996/09/03 19:11:52 robr Exp $";
 #endif
 
 
  
-#include <andrewos.h>
 ATK_IMPL("ezdiff.H")
 
 

@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/eq/RCS/draweqv.C,v 1.2 1993/05/06 15:38:51 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/eq/RCS/draweqv.C,v 1.2 1993/05/06 15:38:51 rr2b Stab74 $";
 #endif
 
 
@@ -42,7 +44,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/eq/RCS/dra
 
 
 #define AUXMODULE 1
-#include <andrewos.h>
 #include <eqview.H>
 
 #include <eq.H>

@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/RCS/helpapp.C,v 1.9 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/RCS/helpapp.C,v 1.9 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 /* $ACIS$ */
@@ -55,7 +57,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/R
 /*---------------------------------------------------------------------------*/
 
 #define label gezornenplatz
-#include <andrewos.h>
 ATK_IMPL("helpapp.H")
 #undef label
 
@@ -109,14 +110,14 @@ static struct sockaddr_in myaddr;
 static int helpSocket = -1;
 #endif
 
-char *help_helpKey="";	/* the topic */
+const char *help_helpKey="";	/* the topic */
 static int moreMode=FALSE;	/* use the termcap-based interface? */
 static int listMode=FALSE;	/* just list files? */
 static int print=FALSE;		/* in termcap-based mode, prompt for printing? */
 int help_newWindow=FALSE;	/* force a new help window? */
 static int noDefault=FALSE;	/* use a default file or not? */
-char *help_indexName=NULL;	/* alternative index file? */
-char *help_aliasName=NULL;	/* additional index file? */
+const char *help_indexName=NULL;	/* alternative index file? */
+const char *help_aliasName=NULL;	/* additional index file? */
 /* list of addition search directories */
 struct helpDir *helpsearchDirs=(struct helpDir *)NULL;
 static char *error = "Sorry; no help available on '%s'.";
@@ -130,7 +131,7 @@ class help *helpobj;		/* global help object for ncproc use */
 ATKdefineRegistry(helpapp, application, NULL);
 
 static void  show_usage(class helpapp  *self);
-static void AddPath(register char  *astr);
+static void AddPath(register const char  *astr);
 extern "C" int help_unique();
 extern "C" void helpapp_ncproc();
 extern int helpSocket;
@@ -166,10 +167,10 @@ show_usage(class helpapp  *self)
  * add a path to those to be searched
  */
 static void
-AddPath(register char  *astr)
+AddPath(register const char  *astr)
 {
     char tname[MAXPATHLEN];
-    register char *np;
+    register const char *np;
 
     DEBUG(("ha: IN addpath\n"));
     while(1) {
@@ -356,9 +357,9 @@ static void unique_help(class helpapp *self)
  * parse command line arguments
  */
 boolean 
-helpapp::ParseArgs(int  argc, char  **argv)
+helpapp::ParseArgs(int  argc, const char  **argv)
 {
-    char *helpPath;
+    const char *helpPath;
 
     DEBUG(("ha: IN parse args\n"));
 
@@ -436,7 +437,7 @@ helpapp::ParseArgs(int  argc, char  **argv)
 boolean 
 helpapp::Start()
 {
-    char *tp;
+    const char *tp;
     struct helpDir *thd, *nhd;
 
     DEBUG(("ha: IN start\n"));

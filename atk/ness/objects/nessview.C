@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nessview.C,v 1.11 1995/03/01 01:51:33 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nessview.C,v 1.11 1995/03/01 01:51:33 rr2b Stab74 $";
 #endif
 
 
@@ -108,7 +110,6 @@ log elided 6/92 -wjh
 */
 
 
-#include <andrewos.h>
 ATK_IMPL("nessview.H")
 
 #include <dataobject.H>
@@ -1147,7 +1148,7 @@ kludgefornathaniel:
 
 	boolean
 nessview::InitializeClass() {
-	char *dmf;
+	const char *dmf;
 	struct proctable_Entry *pe;
 	EmbeddedMenus = new menulist;
 	ApplicationMenus = new menulist;
@@ -1199,7 +1200,7 @@ nessview::nessview() {
 	(this)->SetView( this->SourceText);
 	{
 	    long scrollpos=scroll_LEFT;
-	    char *pos=environ::GetProfile("ScrollbarPosition");
+	    const char *pos=environ::GetProfile("ScrollbarPosition");
 	    /* The horizontal scrollbar preference is mainly for testing. */
 	    boolean hzscroll = environ::GetProfileSwitch("TextHorizontalScrollbar", FALSE);
 	    if(pos) {

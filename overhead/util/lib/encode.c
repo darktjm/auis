@@ -25,22 +25,23 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/encode.c,v 1.6 1995/03/18 17:30:55 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/encode.c,v 1.6 1995/03/18 17:30:55 rr2b Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <util.h>
 
-static char basis_64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+static const char basis_64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-to64(infile, outfile) 
-FILE *infile, *outfile;
+void to64(FILE *infile, FILE *outfile) 
 {
     int c1, c2, c3, ct=0;
     while ((c1 = getc(infile)) != EOF) {
@@ -65,8 +66,7 @@ FILE *infile, *outfile;
     fflush(outfile);
 }
 
-output64chunk(c1, c2, c3, pads, outfile)
-FILE *outfile;
+void output64chunk(int c1, int c2, int c3, int pads, FILE *outfile)
 {
     putc(basis_64[c1>>2], outfile);
     putc(basis_64[((c1 & 0x3)<< 4) | ((c2 & 0xF0) >> 4)], outfile);
@@ -81,21 +81,19 @@ FILE *outfile;
         putc(basis_64[c3 & 0x3F], outfile);
     }
 }
-static char basis_hex[] = "0123456789ABCDEF";
+static const char basis_hex[] = "0123456789ABCDEF";
 
-hexchar(c)
-char c;
+int hexchar(char c)
 {
     char *s;
     if (islower(c)) c = toupper(c);
-    s = (char *) strchr(basis_hex, c);
+    s = strchr(basis_hex, c);
     if (s) return(s-basis_hex);
     return(-1);
 }
 
 
-from64(infile, outfile)
-FILE *infile, *outfile;
+int from64(FILE *infile, FILE *outfile)
 {
     unsigned int c1, c2, c3, c4, total = 0;
 
@@ -129,18 +127,17 @@ FILE *infile, *outfile;
             }
 	}
     }
+    return total;
 }
 
-char64(c)
-char c;
+int char64(char c)
 {
     char *s = (char *) strchr(basis_64, c);
     if (s) return(s-basis_64);
     return(-1);
 }
 
-fromqp(infile, outfile)
-FILE *infile, *outfile;
+int fromqp(FILE *infile, FILE *outfile)
 {
     int c1, c2, total = 0;
 

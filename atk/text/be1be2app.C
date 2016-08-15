@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/be1be2app.C,v 3.5 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/be1be2app.C,v 3.5 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 /*
@@ -35,7 +37,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/b
  */
 
 
-#include <andrewos.h>
 ATK_IMPL("be1be2app.H")
 #include <be1be2.H>
 #include <text.H>
@@ -58,7 +59,7 @@ char *OutputName(char  *inputName);
 static void Convert(char  *fileName);
 
 
-boolean be1be2app::ParseArgs(int  argc, char  **argv)
+boolean be1be2app::ParseArgs(int  argc, const char  **argv)
 {
     int i;
 

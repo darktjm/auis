@@ -58,7 +58,7 @@ class srctext: public text {
     long GetLineForPos(long pos);
     long GetModified();
     long GetPosForLine(long line);
-    boolean InsertCharacters(long pos, char *str, long len); /*RSK91overstrike*/
+    boolean InsertCharacters(long pos, const char *str, long len); /*RSK91overstrike*/
     long Read(FILE *file, long id);
     long ReadSubString(long pos, FILE *file, boolean quoteCharacters);
     long ReadTemplate(char *templateName, boolean inserttemplatetext);
@@ -96,7 +96,7 @@ class srctext: public text {
     virtual void GetToken(long *pos, long *len);
     virtual long Indent(mark *range); /* override this if subclass does stuff to comments that are on lines with code (plxtext) */
     virtual boolean InString(long pos);
-    virtual boolean JustInsertCharacters(long pos,char *str,long len); /*RSK91overstrike*/
+    virtual boolean JustInsertCharacters(long pos,const char *str,long len); /*RSK91overstrike*/
     virtual boolean LinesTooLong(int maxlen);
     virtual int NextTabStop(int curcol);
     virtual boolean OutputSrcInset(FILE *file,long writeID,dataobject *inset);

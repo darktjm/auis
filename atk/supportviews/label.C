@@ -25,9 +25,14 @@
 //  $
 */
 
+/* sys/types.h in AIX PS2 defines "struct label", causing a type name clash.
+   Avoid this by temporarily redefining "label" to be something else in the preprocessor. */
+#define label gezornenplatz
+#include <andrewos.h> /* strings.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/label.C,v 3.3 1994/12/13 20:29:03 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/label.C,v 3.3 1994/12/13 20:29:03 rr2b Stab74 $";
 #endif
 
 
@@ -40,10 +45,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportvie
 
 */
 
-/* sys/types.h in AIX PS2 defines "struct label", causing a type name clash.
-   Avoid this by temporarily redefining "label" to be something else in the preprocessor. */
-#define label gezornenplatz
-#include <andrewos.h> /* strings.h */
 ATK_IMPL("label.H")
 #undef label
 

@@ -25,15 +25,16 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/icon.C,v 1.2 1993/05/30 14:47:01 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/icon.C,v 1.2 1993/05/30 14:47:01 rr2b Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h>
 #include "dataobject.H"
 #include "dictionary.H"
 #include "icon.H"
@@ -59,8 +60,7 @@ icon::icon()
     this->child = (class dataobject *)0;
     this->width = 200;
     this->height = 100;
-    this->title = (char *)malloc(1);
-    strcpy(this->title,"");
+    this->title = "";
     THROWONFAILURE( TRUE);
 }
 
@@ -102,14 +102,13 @@ icon::GetChild()
 }
 
 void
-icon::SetTitle(char  * title)
+icon::SetTitle(const char  * title)
 {
-    if ((this->title = (char *)malloc(strlen(title) + 1)) != 0)
-	strcpy(this->title, title);
+    this->title = strdup(title); /* leak */
     (this)->NotifyObservers( icon_TitleChanged);
 }   
 
-char *
+const char *
 icon::GetTitle()
 {
     return this->title;
@@ -120,7 +119,7 @@ long
 icon::Write(FILE  *file, long  writeID, int  level)
 {   
     int  haschild = 0;
-    char * title = this->title;
+    const char * title = this->title;
     if ((this)->GetWriteID() != writeID)  {
 	(this)->SetWriteID(writeID);
 	if (this->child != (class dataobject *)0)

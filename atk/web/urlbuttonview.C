@@ -76,7 +76,7 @@ void urlbuttonview::ReceiveInputFocus()
  */
 void urlbuttonview::StartBrowser(const char  *url)
 {
-    char *cmd = environ::GetProfile("WWWbrowser");
+    const char *cmd = environ::GetProfile("WWWbrowser");
     char buf[4096];
 
     if (cmd == NULL)

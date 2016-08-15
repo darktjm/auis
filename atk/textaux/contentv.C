@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textaux/RCS/contentv.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textaux/RCS/contentv.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 
@@ -38,7 +40,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textaux/RC
    Modified so that scrolls to main window put selection on top line.
  */
 
-#include <andrewos.h>
 ATK_IMPL("contentv.H")
 #include <ctype.h>
 #include <bind.H>
@@ -263,7 +264,7 @@ static void contentv_doprint(register class contentv  *self,char  *type)
     class content *ct;
     struct proctable_Entry *pr;
     proctable_fptr proc;
-    char *saveenv = NULL;
+    const char *saveenv = NULL;
 
     ct = Data(self);
     txt = ct->srctext;

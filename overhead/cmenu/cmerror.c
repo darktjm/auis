@@ -25,15 +25,17 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/cmenu/RCS/cmerror.c,v 2.8 1995/08/05 23:50:08 wjh Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/cmenu/RCS/cmerror.c,v 2.8 1995/08/05 23:50:08 wjh Stab74 $";
 #endif
+
+#include <cmerror.h>
 
 
  
-
-#include <cmerror.h>
 
 /*
  * _cmErrorCode - Global cmenu error code.

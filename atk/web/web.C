@@ -25,7 +25,7 @@
 ATK_IMPL("web.H")
 
 #ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/web.C,v 1.16 1996/11/16 22:13:30 robr Exp $";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/web.C,v 1.16 1996/11/16 22:13:30 robr Exp $";
 #endif
 
 #include <sys/time.h>

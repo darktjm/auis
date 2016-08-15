@@ -68,7 +68,7 @@ previewapp::previewapp()
     THROWONFAILURE( TRUE);
 }
 
-boolean previewapp::ParseArgs(int  argc,char  **argv)
+boolean previewapp::ParseArgs(int  argc,const char  **argv)
 {
     if(!(this)->application::ParseArgs(argc,argv))
 	return FALSE;

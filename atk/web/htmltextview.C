@@ -30,7 +30,7 @@ ATK_IMPL("htmltextview.H")
 #include <htmltextview.H>
 
 #ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/htmltextview.C,v 1.7 1996/09/04 18:06:08 robr Exp $";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/htmltextview.C,v 1.7 1996/09/04 18:06:08 robr Exp $";
 #endif
 
 #include <view.H>

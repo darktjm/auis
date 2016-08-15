@@ -26,12 +26,12 @@
 //  $
 */
 
+#include <andrewos.h>
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/hyplink/RCS/link.C,v 1.7 1996/07/06 03:29:26 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/hyplink/RCS/link.C,v 1.7 1996/07/06 03:29:26 wjh Exp $";
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("link.H")
 
 #include <stdio.h>
@@ -106,7 +106,7 @@ link::~link()
 	environment variable FOO.
 	Result is returned in a static buffer overwritten with each call.
 */
-	char *
+	const char *
 link::GetResolvedLink(view *viewer) {
 	static char filename[1 + MAXPATHLEN], *linkval;
 

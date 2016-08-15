@@ -25,13 +25,14 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/time.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/shrkdate.c,v 2.7 1992/12/15 21:21:37 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/shrkdate.c,v 2.7 1992/12/15 21:21:37 rr2b Stab74 $";
 #endif
 
 #include <ms.h>
-#include <andrewos.h> /* sys/time.h */
 
 
 char *months[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",

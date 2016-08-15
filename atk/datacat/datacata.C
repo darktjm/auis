@@ -25,14 +25,15 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/datacat/RCS/datacata.C,v 1.7 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/datacat/RCS/datacata.C,v 1.7 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 
  
-#include <andrewos.h>
 ATK_IMPL("datacata.H")
 #include <sys/param.h> /* For MAXPATHLEN. */
 #include <errno.h>
@@ -55,7 +56,7 @@ ATK_IMPL("datacata.H")
 /* output options */
 
 
-static char *progname;
+static const char *progname;
 #define checkandprint(A) if(A) {(this)->PrintVersionNumber();A = FALSE;};
 
 #define MAXIMUM_DEPTH (20)
@@ -245,7 +246,7 @@ static void doinsert(class datacata  *self, long  size , long  endskip, long  de
     im::ChangeDirectory(wdname);
 }
 
-boolean datacata::ParseArgs (int  argc, char  **argv)
+boolean datacata::ParseArgs (int  argc, const char  **argv)
 /*
  Since we are non-interactive, everything is done in this function so we
       can handle the args as they come.
@@ -380,7 +381,7 @@ void datacata::FinishRun()
 }
 
 /* returns flag of whether the file was read successfully */
-boolean datacata::AddFile(char  *filename /* NULL for stdin */)
+boolean datacata::AddFile(const char  *filename /* NULL for stdin */)
 {
     FILE *f;
     long clen;
@@ -511,7 +512,7 @@ void datacata::SetLockAndDelete(boolean  val)
     this->LockAndDelete = val;
 }
 
-void datacata::SetOutputFile(char  *filename /* NULL for stdout */)
+void datacata::SetOutputFile(const char  *filename /* NULL for stdout */)
 {
     if (this->ofilename)
 	free(this->ofilename);

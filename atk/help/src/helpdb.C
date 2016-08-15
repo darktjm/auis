@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/RCS/helpdb.C,v 1.9 1996/02/09 19:37:26 susan Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/RCS/helpdb.C,v 1.9 1996/02/09 19:37:26 susan Stab74 $";
 #endif
 
 /* $ACIS$ */
@@ -48,7 +50,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/R
 /*		matching algorithms.					     */
 /*---------------------------------------------------------------------------*/
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("helpdb.H")
 
 #include <andyenv.h>
@@ -135,21 +136,22 @@ static char *err_index2 = "Sorry; index cannot be found";
 
 ATKdefineRegistry(helpdb, ATK, helpdb::InitializeClass);
 
-static int  mysystem(register char  *acmd);
+static int  mysystem(register const char  *acmd);
 static int safeatoi(register char  *astring);
 static void EnumAllSplot(struct Index  *aindex, struct indexComponent  *ac, struct helpdb_EnumAllSplot  *rock);
-static void ParseBaseName(register char  *aname, register char  *abase);
+static void ParseBaseName(register const char  *aname, register char  *abase);
 static void ComputeMetric(register struct helpFile  *ah);
-static int Match(register char  *akey, register char  *afile, int  amatchName);
-static void NotifyError(register char  *aname);
+static int Match(register const char  *akey, register const char  *afile, int  amatchName);
+static void NotifyError(register const char  *aname);
 static char *LowerCase(register char  *astring);
-static struct helpFile *AddFilesFromDir(char  *dname, char  *aname, struct helpFile  *tmplist);
-static struct helpFile *SetupHelpAux(register char  *aname, int  strip			/* whether to strip changes files */);
+static struct helpFile *AddFilesFromDir(const char  *dname, const char  *aname, struct helpFile  *tmplist);
+static struct helpFile *SetupHelpAux(register const char  *aname, int  strip			/* whether to strip changes files */);
 
 
 boolean helpdb::InitializeClass()
 {
-    char pathName[MAXPATHLEN], *tmp;
+    char pathName[MAXPATHLEN];
+    const char *tmp;
 
 #ifdef DEBUGGING
     if ((char *)getenv("HELPDBDEBUG") != (char *) NULL)
@@ -181,7 +183,7 @@ boolean helpdb::InitializeClass()
 /*
  * Opens a given index file
  */
-int helpdb::SetIndex(char  *aindex)
+int helpdb::SetIndex(const char  *aindex)
 {
 	ATKinit;
 
@@ -229,7 +231,7 @@ int helpdb::CheckIndex(register class view  *v)
  * just like system(3) only closes fds 3..., and doesn't wait
  */
 static int 
-mysystem(register char  *acmd)
+mysystem(register const char  *acmd)
 {
     register long pid;
     if(strchr(acmd, '`')) {
@@ -271,7 +273,7 @@ static int safeatoi(register char  *astring)
 /*
  * returns alias matching a string.  simple.
  */
-char *helpdb::MapAlias(register char  *alias)
+const char *helpdb::MapAlias(register const char  *alias)
 {
 	ATKinit;
 
@@ -330,32 +332,35 @@ void helpdb::Enumerate(index_efptr proc, char  *ptr)
 }
 
 
-void helpdb::AddSearchDir(char  *dirName)
+void helpdb::AddSearchDir(const char  *dirName)
 {
 	ATKinit;
 
     struct helpDir *thd, *lhd;
-    char *lastchar, *firstchar;
+    const char *lastchar, *firstchar;
+    int dirlen;
 
     if(dirName && (*dirName != (char)0)) {
 	lastchar = dirName + strlen(dirName) - 1;
 	firstchar = dirName;
 
 	if(*lastchar ==	'/')	 /* remove trailing '/' */
-	    *lastchar = '\0';
+	    lastchar--;
 	while(firstchar && (*firstchar != (char)0) && isspace(*firstchar))	/* skip whitespace */
 	    firstchar++;
 	dirName = firstchar;
+	dirlen = (int)(lastchar - firstchar);
 
 	for(thd = firstHelpDirs, lhd = NULL; thd; lhd = thd, thd = thd->next)
-	    if(!strcmp(dirName, thd->dirName)) return;
+	    if(!strncmp(dirName, thd->dirName, dirlen)) return;
 
 	thd = (struct helpDir*) malloc(sizeof(struct helpDir));
 	thd->next = NULL;	    /* Add new one on end of linked list */
 	if (lhd) lhd->next = thd;
 	else firstHelpDirs = thd;
-	thd->dirName = (char *)malloc(1 + strlen(dirName));
-	strcpy(thd->dirName, dirName);
+	thd->dirName = (char *)malloc(dirlen + 1);
+	memcpy(thd->dirName, dirName, dirlen);
+	thd->dirName[dirlen] = 0;
     }
 }
 
@@ -376,7 +381,7 @@ void helpdb::PrintSearchDirs()
  * Construct a list of aliases to be checked in case the index call
  * misses.
  */
-void helpdb::ReadAliasesFile(char  *aname)
+void helpdb::ReadAliasesFile(const char  *aname)
 {
 	ATKinit;
 
@@ -477,9 +482,9 @@ void helpdb::ReadAliasesFile(char  *aname)
 /*
  * returns a string sans extension, if any
  */
-static void ParseBaseName(register char  *aname, register char  *abase)
+static void ParseBaseName(register const char  *aname, register char  *abase)
 {
-    register char *tp;
+    register const char *tp;
     
     tp = strrchr(aname, '.');
     if (tp) {
@@ -530,10 +535,11 @@ static void ComputeMetric(register struct helpFile  *ah)
 /*
  * Complex file matching mechanism
  */
-static int Match(register char  *akey, register char  *afile, int  amatchName)
+static int Match(register const char  *akey, register const char  *afile, int  amatchName)
 {
-    char *keyExt, *fileExt;
-    register char *tp;
+    const char *keyExt, *fileExt;
+    register const char *tp;
+    char *mtp;
     register long tc;
     long keyValue, fileValue;
     char keyBase[64], fileBase[64];
@@ -566,9 +572,9 @@ static int Match(register char  *akey, register char  *afile, int  amatchName)
     
     /* compute basenames */
     strcpy(keyBase, akey);
-    tp = strrchr(keyBase,'.');
-    if ((tp != NULL) && tp != keyBase)
-	*tp = '\0';
+    mtp = strrchr(keyBase,'.');
+    if ((mtp != NULL) && mtp != keyBase)
+	*mtp = '\0';
     
     if ((tp = strrchr(afile, '/')) != NULL)
         /* real path name */
@@ -576,8 +582,8 @@ static int Match(register char  *akey, register char  *afile, int  amatchName)
     else
 	strcpy(fileBase, afile);
     /* now prune a '.' from the end */
-    tp = strrchr(fileBase, '.');
-    if (tp && tp != fileBase) *tp = '\0';
+    mtp = strrchr(fileBase, '.');
+    if (mtp && mtp != fileBase) *mtp = '\0';
     
     /* finally ready to compare! */
     if(amatchName && strcmp(fileBase, keyBase)) return 0;
@@ -602,7 +608,7 @@ static int Match(register char  *akey, register char  *afile, int  amatchName)
  * returned and the cache isn't touched.  If the topic is a
  * command-running alias, run the command, and return 2
  */
-int helpdb::SetupHelp(register struct cache  *c, register char  *aname, int  strip			/* whether to strip changes files */)
+int helpdb::SetupHelp(register struct cache  *c, register const char  *aname, int  strip			/* whether to strip changes files */)
 {
 	ATKinit;
 
@@ -610,7 +616,7 @@ int helpdb::SetupHelp(register struct cache  *c, register char  *aname, int  str
     struct helpFile *al = NULL;
     struct helpFile *rl = NULL;
 
-    char *alias;
+    const char *alias;
 
     /* check for an alias */
     alias = helpdb::MapAlias(aname);
@@ -681,7 +687,7 @@ int helpdb::SetupHelp(register struct cache  *c, register char  *aname, int  str
  * find help on a topic.  Filename is Missing.name.number in MISSINGDIR
  * when help doesn't find an index hit.  Increments 'number' each subsequent miss.
  */
-static void NotifyError(register char  *aname)
+static void NotifyError(register const char  *aname)
 {
     /* tname is the full path to the "Miss" file, without the number
        	  appended
@@ -692,7 +698,7 @@ static void NotifyError(register char  *aname)
            from the last '/' to the last '.' to bname for matches.
     */
     char tname[MAXPATHLEN], dname[MAXPATHLEN], *bname, *lastdot;
-    register char *helpDir;
+    register const char *helpDir;
     int fd, sofar, found = 0;
     DIR *dd;
     DIRENT_TYPE *ent;
@@ -751,7 +757,7 @@ static char *LowerCase(register char  *astring)
  * Given a directory path "dname", adds all files in that directory
  * that match topic "aname" to the list "tmplist".
  */
-static struct helpFile *AddFilesFromDir(char  *dname, char  *aname, struct helpFile  *tmplist)
+static struct helpFile *AddFilesFromDir(const char  *dname, const char  *aname, struct helpFile  *tmplist)
 {
     struct helpFile *tf, *nf, **ef;
     DIR *tempdir;
@@ -813,7 +819,7 @@ static struct helpFile *AddFilesFromDir(char  *dname, char  *aname, struct helpF
  * If strip is non-zero, strips files with extensions CHANGE_EXT and TUTORIAL_EXT
  * from the returned list
  */
-static struct helpFile *SetupHelpAux(register char  *aname, int  strip			/* whether to strip changes files */)
+static struct helpFile *SetupHelpAux(register const char  *aname, int  strip			/* whether to strip changes files */)
 {
     register long i;
     register struct helpFile *t, *p, *n, **ef;
@@ -823,7 +829,7 @@ static struct helpFile *SetupHelpAux(register char  *aname, int  strip			/* whet
     char baseName[HNSIZE];
     char pathName[MAXPATHLEN];
     char unfolded[MAXPATHLEN];
-    char *usethis=NULL;
+    const char *usethis=NULL;
     long code;
     
     ParseBaseName(aname, baseName);

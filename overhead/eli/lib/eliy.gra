@@ -178,7 +178,7 @@ quote	:    SQUOTE
 	;
 
 %%
-static char *eliy_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/eliy.gra,v 1.3 1996/03/11 19:29:45 robr Stab74 $";
+static UNUSED const char eliy_rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/eliy.gra,v 1.3 1996/03/11 19:29:45 robr Stab74 $";
 void eliy_ErrorGuts(p, severity, sevname, msg)
 struct parser *p; int severity; char *sevname; char *msg;
 {

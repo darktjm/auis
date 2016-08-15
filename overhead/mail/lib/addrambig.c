@@ -22,11 +22,12 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/addrambig.c,v 1.3 1992/12/15 21:04:17 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/addrambig.c,v 1.3 1992/12/15 21:04:17 rr2b Stab74 $";
 #endif
-#include <andrewos.h>
 
 #ifdef WHITEPAGES_ENV
 #include <wp.h>

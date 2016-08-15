@@ -103,7 +103,7 @@ show_usage(class nullapp  *self)
 
 
 	boolean 
-nullapp::ParseArgs(int  argc, char  **argv)
+nullapp::ParseArgs(int  argc, const char  **argv)
 			{
 	char *name;
 

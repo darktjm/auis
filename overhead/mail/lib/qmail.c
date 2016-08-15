@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/time.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/qmail.c,v 2.31 1996/02/09 19:37:26 susan Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/qmail.c,v 2.31 1996/02/09 19:37:26 susan Stab74 $";
 #endif
 
 /*
@@ -140,7 +142,6 @@ These two routines are just like tryvicequeues_ext except that they implement tw
 
 */
 
-#include <andrewos.h> /* sys/time.h sys/file.h */
 #include <errno.h>
 #include <stdio.h>
 #include <sys/param.h>
@@ -153,8 +154,6 @@ These two routines are just like tryvicequeues_ext except that they implement tw
 
 static int create(char *name, FILE **f, char *filekind, int mode);
 static int tryclose(FILE *f, char *name);
-
-extern char *UnixError(), *arpadate();
 
 typedef unsigned char bool;
 

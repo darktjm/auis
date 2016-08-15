@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/physical.C,v 3.2 1993/07/29 20:15:08 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/physical.C,v 3.2 1993/07/29 20:15:08 rr2b Stab74 $";
 #endif
 
 
@@ -39,7 +41,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/com
  between the coordinate spaces of a graphic and wm "hardware" */
 
 
-#include <andrewos.h>
 #include <graphic.H>
 
 

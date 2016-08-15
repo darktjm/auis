@@ -95,9 +95,9 @@ public:
     virtual class graphic * CvtCharToGraphic(class graphic *gr, char SpecialChar)  ;
     virtual struct font * GetRealFontDesc(class graphic *gr)  ;
 
-    virtual long StringSize(class graphic *gr, char * string, long * XWidth, long * YWidth)  ;
+    virtual long StringSize(class graphic *gr, const char * string, long * XWidth, long * YWidth)  ;
     virtual long StringBoundingBox(class graphic *graphic, char *string, int *width, int *height)  ;
-    virtual long TextSize(class graphic *gr, char * text, long TextLength, long *XWidth, long *YWidth)
+    virtual long TextSize(class graphic *gr, const char * text, long TextLength, long *XWidth, long *YWidth)
 		 ;
     virtual short* WidthTable(class graphic *gr)   ; /* actually an array of short's */
     virtual short * HeightTable(class graphic *gr)  ; /* actually an array of short's */
@@ -108,9 +108,9 @@ public:
     inline void ClearCharValid(char c) { (this->charValid[((unsigned char)c) >> 3] &= ~(1 << (((unsigned char)c) & 7))); }
     inline boolean CharValid(char c) { return (this->charValid[((unsigned char)c) >> 3] & (1 << (((unsigned char)c) & 7))); }
 
-    static class fontdesc * Create(char * FontName, long FontStyle, long FontSize)  ;
+    static class fontdesc * Create(const char * FontName, long FontStyle, long FontSize)  ;
     static struct fontnamedesc * GetFontNameDesc(char * FontName)  ;
-    static boolean ExplodeFontName(char *fontName, char *familyName, long bufSize, long *fontStyle, long *fontSize)  ;
+    static boolean ExplodeFontName(const char *fontName, char *familyName, long bufSize, long *fontStyle, long *fontSize)  ;
     
 	fontdesc();
     

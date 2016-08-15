@@ -25,18 +25,20 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/getpty.c,v 1.15 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/getpty.c,v 1.15 1995/11/07 20:17:10 robr Stab74 $";
 #endif
+
+#include <util.h>
 
 /*
 This module contains the routine getpty.  It returns file descriptors
 for a pty. It takes two pointers to ints and returns the file decriptors.
 It returns TRUE if it succeeds.
 */
-
-#include <andrewos.h>
 
 #ifdef SGI_4D_ENV
 #include <sys/stat.h>

@@ -25,19 +25,19 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fdplumb4.c,v 2.7 1992/12/15 21:09:01 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fdplumb4.c,v 2.7 1992/12/15 21:09:01 rr2b Stab74 $";
 #endif
-
-
- 
 
 #include <stdio.h>
 #include <fdplumbi.h>
+#include <util.h>
+ 
 
-FILE *dbg_qopen(path, argv, mode)
-char *path, *argv[], *mode;
+FILE *dbg_qopen(const char *path, char * const argv[], const char *mode)
 {
     FILE *fp;
 
@@ -46,28 +46,22 @@ char *path, *argv[], *mode;
     return(fp);
 }
 
-FILE *dbg_topen(path, argv, mode, pgrp)
-char *path, *argv[], *mode;
-int *pgrp;
+FILE *dbg_topen(const char *path, char * const argv[], const char *mode, int *pgrp)
 {
     FILE *fp;
-    extern FILE *topen();
 
     fp = topen(path, argv, mode, pgrp);
     if (fp) RegisterOpenFile(fileno(fp), path, FDLEAK_OPENCODE_TOPEN);
     return(fp);
 }
 
-dbg_qclose(fp)
-FILE *fp;
+int dbg_qclose(FILE *fp)
 {
     RegisterCloseFile(fileno(fp));
     return(qclose(fp));
 }
 
-dbg_tclose(fp, seconds, timedout)
-FILE *fp;
-int seconds, *timedout;
+int dbg_tclose(FILE *fp, int seconds, int *timedout)
 {
     RegisterCloseFile(fileno(fp));
     return(tclose(fp, seconds, timedout));

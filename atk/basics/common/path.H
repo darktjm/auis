@@ -57,8 +57,8 @@ public:
     static void InputTruncatedPathCache(FILE *fp);
     static void OutputTruncatedPathCache(FILE *fp);
     static boolean ModifyToParentDirectory(char *filepath, boolean isDirectory)  ;
-    static char * UnfoldFileName(char *fromString, char *toString, char *baseName)  ;
-    static void FindFileInPath(char *retbuff, char *path, char *fname);
+    static const char * UnfoldFileName(const char *fromString, char *toString, char *baseName)  ;
+    static void FindFileInPath(char *retbuff, const char *path, const char *fname);
     static boolean RelativizePathname(char *buf, char *basepath, int maxup);
   
     virtual boolean Scan(boolean statEverything)  ;

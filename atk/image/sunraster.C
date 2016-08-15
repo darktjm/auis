@@ -52,13 +52,14 @@
  * USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#include <andrewos.h>
+
 #ifndef __SABER__
-static char *Copyright= "Copyright 1989, 1993 Jim Frost";
+static UNUSED const char Copyright[]= "Copyright 1989, 1993 Jim Frost";
 #endif
 #define _JIM_COPYRIGHT_
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("sunraster.H")
 #include <image.H>
 /*#include <sunraster.h>*/

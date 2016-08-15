@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/RCS/help.C,v 1.14 1995/02/02 20:35:54 Zarf Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/RCS/help.C,v 1.14 1995/02/02 20:35:54 Zarf Stab74 $";
 #endif
 
 /* $ACIS$ */
@@ -59,7 +61,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/R
 #define label gezornenplatz
 /* sys/types.h in AIX PS2 defines "struct label", causing a type name clash.
    Avoid this by temporarily redefining "label" to be something else in the preprocessor. */
-#include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("help.H")
 #undef label
 
@@ -208,7 +209,7 @@ static int  ShowFile(register class help  *self, register char  *afilename	/* th
 				   help_HIST_TAIL - tail of the found filename
 				   */);
 static char * FindEntryInDirs(char	 *dirs[], char	 *entry  , char	 *extension);
-int  help_GetHelpOn(register class help  *self, char  *aname	/* what topic */, long  isnew	/* is this a new topic? */, int  ahistory	/* show in history log under what name?
+int  help_GetHelpOn(register class help  *self, const char  *aname	/* what topic */, long  isnew	/* is this a new topic? */, int  ahistory	/* show in history log under what name?
 		   help_HIST_NOADD - none at all,
 		   help_HIST_NAME - aname,
 		   help_HIST_TAIL - tail of the found filename
@@ -246,7 +247,7 @@ static void  nono(register class help  *self);
 static char *
 AndyCopy(register char  *aproto , register char  *aresult)
 {
-    register char *tp;
+    register const char *tp;
 
     tp = environ::AndrewDir(aproto);
     strcpy(aresult, tp);
@@ -839,7 +840,7 @@ FindEntryInDirs(char	 *dirs[], char	 *entry  , char	 *extension)
 }
 */
 int 
-help_GetHelpOn(register class help  *self, char  *aname	/* what topic */, long  isnew	/* is this a new topic? */, int  ahistory	/* show in history log under what name?
+help_GetHelpOn(register class help  *self, const char  *aname	/* what topic */, long  isnew	/* is this a new topic? */, int  ahistory	/* show in history log under what name?
 		   help_HIST_NOADD - none at all,
 		   help_HIST_NAME - aname,
 		   help_HIST_TAIL - tail of the found filename
@@ -855,11 +856,13 @@ help_GetHelpOn(register class help  *self, char  *aname	/* what topic */, long  
     if (!helpdb::CheckIndex(c->view))
 	return -1;
 
-    LowerCase(aname);
-    MapParens(aname);
+    /* tjm - hopefully no callers expect these side effects */
+    char *an = strdup(aname);
+    LowerCase(an);
+    MapParens(an);
 
      if (isnew) {		/* if the first time through, setup c->all */
-	 code = helpdb::SetupHelp(c, aname, TRUE);
+	 code = helpdb::SetupHelp(c, an, TRUE);
 
 #ifdef DEBUGGING
 	if (code != 0) {
@@ -883,6 +886,8 @@ help_GetHelpOn(register class help  *self, char  *aname	/* what topic */, long  
 		c->flags |= MENU_SwitchChangesMenu;
 	}
     }
+    /* tjm - hopefully noone is holding on to a pointer to this */
+    free(an);
 
     im::SetProcessCursor(help_waitCursor);
 
@@ -1023,7 +1028,8 @@ Quit(register class help  *self)
 static void 
 SendComments(register class help  *self)
 {
-    char cmd[MAXPATHLEN], *prof;
+    char cmd[MAXPATHLEN];
+    const char *prof;
     
     message::DisplayString(self, 0, msg_comment);
     im::ForceUpdate();
@@ -1627,7 +1633,8 @@ ToggleProgramListSize(register class help * self, long  rock)
 	RestorePanel(self);
 
     if (!self->expandedList) { /* shrink it down */
-	char *tmp, pathName[MAXPATHLEN];
+	char pathName[MAXPATHLEN];
+	const char *tmp;
 
 	DEBUG(("shrinking "));
 	

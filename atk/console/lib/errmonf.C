@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/time.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/errmonf.C,v 1.9 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/errmonf.C,v 1.9 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
@@ -42,7 +44,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/li
  */
 
 
-#include <andrewos.h> /* sys/types.h sys/time.h sys/file.h */
 #include <im.H>
 #include <consoleClass.H>
 #include <menulist.H>

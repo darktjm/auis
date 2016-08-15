@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/newmail.c,v 2.20 1992/12/15 21:20:00 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/newmail.c,v 2.20 1992/12/15 21:20:00 rr2b Stab74 $";
 #endif
 
 /*
@@ -37,7 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RC
 #include <andyenv.h>
 #include <ms.h>
 #include <hdrparse.h>
-#include <andrewos.h>
 
 extern char    home[];
 extern struct MS_Directory *MyOpenDir;

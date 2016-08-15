@@ -25,14 +25,15 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/amsutil.C,v 1.2 1993/06/03 00:33:17 Zarf Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/amsutil.C,v 1.2 1993/06/03 00:33:17 Zarf Stab74 $";
 #endif
 
 #include <ctype.h>
 #include <stdio.h>
-#include <andrewos.h>
 #include <mailconf.h>
 
 #include <environ.H>
@@ -53,7 +54,7 @@ static char **KeyHeaders = NULL;
 ATKdefineRegistry(amsutil, ATK, amsutil::InitializeClass);
 #ifndef NORCSID
 #endif
-long hatol(char  *s);
+long hatol(const char  *s);
 void GetBinaryOptions();
 
 
@@ -127,7 +128,7 @@ char **amsutil::BreakDownResourcesIntoArray(char  *res)
     return(::BreakDownResourcesIntoArray(res));
 }
 
-int amsutil::lc2strncmp(char  *s1 , char  *s2, int  len)
+int amsutil::lc2strncmp(const char  *s1 , const char  *s2, int  len)
 {
 	ATKinit;
 
@@ -139,6 +140,13 @@ char *amsutil::StripWhiteEnds(char  *s)
 	ATKinit;
 
     return(::StripWhiteEnds(s));
+}
+
+const char *amsutil::StripWhiteEnds(const char *s, int *rlen)
+{
+	ATKinit;
+
+    return(::SkipWhiteEnds(s, rlen));
 }
 
 char *amsutil::cvEng(int  num , int  min , int  max)
@@ -203,7 +211,7 @@ char **amsutil::ParseKeyHeaders()
     return(KeyHeads);
 }
 
-long hatol(char  *s)
+long hatol(const char  *s)
 {
     long n;
     char c;
@@ -224,18 +232,20 @@ void GetBinaryOptions()
 {
     int i;
     char *s, *t, *u;
+    const char *o;
 
     for (i=0; i<=(EXP_MAXUSED/32); ++i) {
 	MyOpts.DefaultOpts[i] = 0; /* All defaults to zero */
     }
-    s = environ::GetProfile("messages.binaryoptions");
+    o = environ::GetProfile("messages.binaryoptions");
+    s = o ? strdup(o) : NULL;
     if (s) {
 	long dum, dum2;
 	int offset;
 
 	offset = 0;
 	while (s && offset <= (EXP_MAXUSED/32)) {
-	    /* This is a pain, but it is portable */
+	    /* This is a pain, but it is portable */ /* tjm -- not really */
 	    t = strchr(s, ',');
 	    if (t) *t++ = '\0';
 	    u = strchr(s, '/');
@@ -247,6 +257,7 @@ void GetBinaryOptions()
 	    s = t;
 	    ++offset;
 	}
+	free(s);
     } else { /* first time for everything ... */
 	char DumBuf[300];
 	int bigmenus;
@@ -268,14 +279,15 @@ void GetBinaryOptions()
 	    SETOPTBIT(MyOpts.Opts, EXP_FILEINTO, 1);
 	    SETOPTBIT(MyOpts.Opts, EXP_FILEINTOMENU, 1);
 	}
-	s = environ::GetProfile("messages.density");
-	if (s) {
-	    s = amsutil::StripWhiteEnds(s);
-	    if (*s == 'l' || *s == 'l') {
+	o = environ::GetProfile("messages.density");
+	if (o) {
+	    int olen;
+	    o = amsutil::StripWhiteEnds(o, &olen);
+	    if (*o == 'l' || *o == 'l') {
 		SETOPTBIT(MyOpts.Opts, EXP_WHITESPACE, 1);
-	    } else if (*s == 'm' || *s == 'M') {
+	    } else if (*o == 'm' || *o == 'M') {
 		SETOPTBIT(MyOpts.Opts, EXP_WHITESPACE, 1);
-	    } else if (*s != 'H' && *s != 'h') {
+	    } else if (*o != 'H' && *o != 'h') {
 		/* Ignoring the stupid obsolete density preference, shich should go away anyway */
 	    }
 	}
@@ -419,11 +431,11 @@ void amsutil::fdplumber_SpillGuts()
 #endif /* #ifdef PLUMBFDLEAKS */
 }
 
-char * amsutil::GetDefaultFontName()
+const char * amsutil::GetDefaultFontName()
 {
 	ATKinit;
 
-    static char *myfontname = NULL;
+    static const char *myfontname = NULL;
 
     if (!myfontname) {
 	myfontname = environ::GetProfile("fontfamily");
@@ -436,8 +448,8 @@ char * amsutil::GetDefaultFontName()
 	    if (t) {
 		strcpy(t, myfontname);
 		myfontname = t;
-		amsutil::ReduceWhiteSpace(myfontname);
-		for (t=myfontname; *t; ++t) {
+		amsutil::ReduceWhiteSpace(t);
+		for (; *t; ++t) {
 		    if (isupper(*t)) *t = tolower(*t);
 		}
 	    } else {

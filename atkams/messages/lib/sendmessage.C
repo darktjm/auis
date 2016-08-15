@@ -25,14 +25,15 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/sendmessage.C,v 1.9 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/sendmessage.C,v 1.9 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
 
-#include <andrewos.h> /* sys/file.h */
 #include <stdio.h>
 #include <sys/param.h>
 #include <util.h>
@@ -619,7 +620,7 @@ int Deliver(class sendmessage  *sendmessage, int  formathandlingcode)
     message::DisplayString(sendmessage, 10, "Message delivery in progress");
     if (MailFormatToUse == MAILFORMAT_UNDEFINED) {
 	int len;
-	char *fmt = environ::GetProfile("messages.mailsendingformat");
+	const char *fmt = environ::GetProfile("messages.mailsendingformat");
 	if (!fmt) fmt = environ::GetConfiguration("mailsendingformat");
 	if (!fmt) {
 	    MailFormatToUse = MAILFORMAT_ASK;
@@ -1276,7 +1277,8 @@ int ValidateHeader(class sendmessage  *sm, char  *lookfor, int  *externalct , in
 
 int sendmessage::Checkpoint()
 {
-    static char *VCKPFileName = NULL, *TCKPFileName = NULL, *s, *ckpfile;
+    static char *VCKPFileName = NULL, *TCKPFileName = NULL;
+    char *ckpfile; /* was static??? */
     char Msg[100+MAXPATHLEN], TmpFileName[1+MAXPATHLEN];
 
     if (this->HeadCheckpoint == (this->HeadText)->GetModified() && this->BodyCheckpoint == (this->BodyText)->GetModified()) {
@@ -1298,7 +1300,7 @@ int sendmessage::Checkpoint()
 	ckpfile = TCKPFileName;
     } else {
 	if (!VCKPFileName) {
-	    s = environ::GetProfile("messages.checkpointdir");
+	    const char *s = environ::GetProfile("messages.checkpointdir");
 	    if (!s) s = "~";
 	    (ams::GetAMS())->TildeResolve( s, TmpFileName);
 	    strcat(TmpFileName, "/");

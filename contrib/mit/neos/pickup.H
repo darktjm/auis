@@ -57,7 +57,7 @@ public:
 	virtual ~pickup();
 
   virtual void DoPickUp();
-  virtual void SetTitle(char *string);
+  virtual void SetTitle(const char *string);
 
   inline void SetParent(class eos *dad) { ((this)->daddy = dad);; }
   inline MISSING_RETURN_TYPE SetCourse(char *name) { return (strcpy((this)->course, name)); }

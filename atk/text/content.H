@@ -49,7 +49,7 @@ class content : public  text {
       virtual void reinit();
       virtual void SetSourceText(class text *txt);
       virtual void UpdateSource(long pos,long len);
-      virtual long Enumerate(long pos,long len,char *start);
+      virtual long Enumerate(long pos,long len,const char *start);
       virtual void Denumerate(long pos,long len);
       virtual long StringToInts(long pos,int *lev);
       virtual class mark * locate(long pos);

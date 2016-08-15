@@ -25,14 +25,15 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/sbttnav.C,v 3.4 1995/04/06 02:55:07 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/sbttnav.C,v 3.4 1995/04/06 02:55:07 rr2b Stab74 $";
 #endif
 
 
  
-#include <andrewos.h>
 ATK_IMPL("sbttnav.H")
 #include <sys/param.h>	/* for MAXPATHLEN */
 #include <stdio.h>
@@ -349,7 +350,7 @@ static void BDeleteProc(class sbttnav  *self, long  param)
     char buf[1024];
     class sbutton *b=(self)->ButtonData();
     int i=(self)->LastButton();
-    char *button=(b)->GetLabel( i);
+    const char *button=(b)->GetLabel( i);
 
     if(button==NULL) button="Push Me";
     (b)->Delete( i);
@@ -367,7 +368,7 @@ static void LabelProc(class sbttnav  *self, long  param)
 
     char buf[MAXPATHLEN];
     class sbutton *b = (self)->ButtonData();
-    char *oldtext;
+    const char *oldtext;
 
     oldtext = (b)->GetLabel( (self)->LastButton());
     if (message::AskForString(self,50,"Enter new label for button: ", oldtext, buf, sizeof(buf)) >= 0) {
@@ -476,7 +477,7 @@ static void ColorProc(class sbttnav  *self, long  param)
 
     char buf1[MAXPATHLEN], buf2[MAXPATHLEN];
     class sbutton *b = (self)->ButtonData();
-    char *oldcolor;
+    const char *oldcolor;
     struct sbutton_prefs *prefs=(b)->GetDefaultPrefs();
 
     if(param>255) {
@@ -489,7 +490,7 @@ static void ColorProc(class sbttnav  *self, long  param)
     }
     oldcolor = sbutton::GetForeground(prefs);
     
-    if (message::AskForString(self,50,(char *)"Enter new foreground color for button: ", oldcolor?oldcolor:(char *)"black", buf1, sizeof(buf1)) >= 0) {
+    if (message::AskForString(self,50,"Enter new foreground color for button: ", oldcolor?oldcolor:"black", buf1, sizeof(buf1)) >= 0) {
 	char buf3[1024];
 	if(buf1[0]=='\0') {
 	    sbutton::GetForeground(prefs)=NULL;
@@ -690,7 +691,7 @@ static void ShadowColorProc(class sbttnav  *self, long  param)
 
     char buf1[MAXPATHLEN], buf2[MAXPATHLEN];
     class sbutton *b = (self)->ButtonData();
-    char *oldcolor;
+    const char *oldcolor;
     struct sbutton_prefs *prefs=(b)->GetDefaultPrefs();
 
     if(param>255) {
@@ -802,7 +803,7 @@ static void LabelColorProc(class sbttnav  *self, long  param)
 
     char buf1[MAXPATHLEN], buf2[MAXPATHLEN];
     class sbutton *b = (self)->ButtonData();
-    char *oldcolor;
+    const char *oldcolor;
     struct sbutton_prefs *prefs=(b)->GetDefaultPrefs();
 
     if(param>255) {

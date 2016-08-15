@@ -25,15 +25,16 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/time.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/event.C,v 3.4 1994/12/13 20:35:03 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/event.C,v 3.4 1994/12/13 20:35:03 rr2b Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h> /* sys/time.h */
 ATK_IMPL("event.H")
 
 #include <event.H>

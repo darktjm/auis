@@ -25,30 +25,31 @@
  *  $
 */
 
+#include <andrewos.h>    /* types */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fdplumb6.c,v 2.11 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fdplumb6.c,v 2.11 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
  
 
 
-#include <andrewos.h>    /* types */
 #if defined(POSIX_ENV) || defined(M_UNIX)
 #include <dirent.h>
 #else
 #define dirent direct
 #endif
 #include <fdplumbi.h>
+#include <util.h>
 
 #if SY_OS2
 /* Reaching into the DIR struct is non-portable! */
 #define dd_fd dd_id
 #endif
 
-DIR *dbg_opendir(name)
-char *name;
+DIR *dbg_opendir(const char *name)
 {
     DIR *d;
 
@@ -62,8 +63,7 @@ char *name;
 }
 
 
-void dbg_closedir(d)
-DIR *d;
+void dbg_closedir(DIR *d)
 {
 #if 0 /* non-portable, not worth porting */
     RegisterCloseFile(d->dd_fd);

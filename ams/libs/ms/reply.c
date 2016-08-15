@@ -25,12 +25,13 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/reply.c,v 2.24 1993/07/02 22:44:37 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/reply.c,v 2.24 1993/07/02 22:44:37 rr2b Stab74 $";
 #endif
 
-#include <andrewos.h> /* sys/file.h */
 #include <stdio.h>
 #include <ctype.h>
 #include <ms.h>
@@ -39,7 +40,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RC
 #define ToLower(c) (isupper(c) ? tolower(c) : (c))
 
 extern FILE *fopen();
-extern char *RewriteSubject(), *getprofile(), *StripWhiteEnds();
+extern char *RewriteSubject(), *StripWhiteEnds();
 extern char MeInFull[];
 static char *ForwardString = "---------- Forwarded message begins here ----------\n\n";
 

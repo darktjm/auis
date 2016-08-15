@@ -93,8 +93,11 @@ char *ATK_aliases::FindAlias(const char *name) {
 	if(f->name && strcmp(f->name, name)==0) return f->alias;
 	f=f->next;
     }
-    strncpy(lowered, name, sizeof(lowered)-1);
-    lowered[255]='\0';
+    int len = strlen(name);
+    if(len > sizeof(lowered) - 1)
+	len = sizeof(lowered) - 1;
+    memmove(lowered, name, len); /* sometimes overlaps */
+    lowered[len] = 0;
     char *p=lowered;
     while(*p && *p!='.') {
 	if(isupper(*p)) *p=tolower(*p);
@@ -103,7 +106,7 @@ char *ATK_aliases::FindAlias(const char *name) {
     return lowered;
 }
 
-static void ReadAliasFile(char *path) {
+static void ReadAliasFile(const char *path) {
     FILE *fp;
     char mapping[512];
     if(path==NULL) return;
@@ -146,13 +149,13 @@ int &ATK::DynamicLoadTrace()
 struct ATKregistryEntry *(*ATKDynamicLoader)(const char *name, boolean trace)=ATK::DynamicLoad;
 
 static char dynpathopen_realpath[MAXPATHLEN+1];
-static int dynpathopen(char  *path, char  *fpath)
+static int dynpathopen(const char  *path, const char  *fpath)
 {
-    char *p=path;
+    const char *p=path;
     int fd=(-1);
     while (p && *p && fd<0) {
         int len;
-        char *q=strchr(p, ':');
+        const char *q=strchr(p, ':');
         if(q==NULL) len=strlen(p);
         else len = q-p;
         if(len+strlen(fpath)+2<MAXPATHLEN) {
@@ -193,7 +196,7 @@ ATKregistryEntry *ATK::DynamicLoad(const char *name, boolean atrace)
     char fullname[MAXPATHLEN];
     
 #if !SY_OS2
-    char *path=getenv("CLASSPATH");
+    const char *path=getenv("CLASSPATH");
     int fd=(-1);
     
     ATKDynamicLoader=ATK::DynamicLoad;

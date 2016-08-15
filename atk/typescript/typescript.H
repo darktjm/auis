@@ -59,14 +59,14 @@ public:
      void SetDataObject(class dataobject *dataObject);
 
 
-    virtual void SetTitle(char *title);
-    virtual char * GetTitle()  ;
+    virtual void SetTitle(const char *title);
+    virtual const char * GetTitle()  ;
     virtual void SetFrame(class frame *f);
     virtual class frame * GetFrame()  ;
 
     
 	typescript();
-    static class typescript * Create(char **arglist,FILE *diskf,boolean filemenu)  ;
+    static class typescript * Create(const char **arglist,FILE *diskf,boolean filemenu)  ;
     static class typescript * CreatePipescript(FILE *indiskf, FILE *outdiskf, boolean filemenu)  ;
     
 	static boolean InitializeClass();

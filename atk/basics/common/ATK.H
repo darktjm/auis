@@ -67,7 +67,7 @@ typedef boolean (*ATKinitfptr)();
   ATKregistryEntry me ## _ATKregistry_ = \
       {#me, me ## _new_, initf, {&sup ## _ATKregistry_ }};\
 ATKregistryEntry *me ::ATKregistry() { return &me ## _ATKregistry_; }\
-static ATKinitfptr *ATKinited_= &(me ## _ATKregistry_.initfunc);
+static UNUSED ATKinitfptr *ATKinited_= &(me ## _ATKregistry_.initfunc);
 
 #define ATKdefineRegistryNoInit(me, sup) \
   static ATK *me ## _new_() { return new me; };\

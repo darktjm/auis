@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/texttroff.C,v 3.12 1995/12/08 18:25:14 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/texttroff.C,v 3.12 1995/12/08 18:25:14 robr Stab74 $";
 #endif
 
 
@@ -50,7 +52,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/t
  * Passthru not handled (should set needNewLine )
  */
 
-#include <andrewos.h>
 ATK_IMPL("texttroff.H")
 #include <system.h>
 
@@ -250,12 +251,12 @@ static void ChangeJustification(enum style_Justification  old , enum style_Justi
 static void ChangeState();
 static void setdefaultstate();
 static void InitializeStyle();
-static void handlemac(FILE  *f,char  *s);
+static void handlemac(FILE  *f,const char  *s);
 static void OutputInitialTroff(register FILE  *f, class view *vw, boolean  toplevel, class environment  *cenv);
 static int FlushBars(FILE  *f);
 static void FlushLineSpacing(int  cs, int  hitchars, boolean  needbreak);
 static int findinlist(char  **lst ,int  cnt,char  *str);
-static int appendlist(char  **lst,int  cnt,char  *ostr,int  TEST);
+static int appendlist(char  **lst,int  cnt,const char  *ostr,int  TEST);
 static int lookup(char  *s);
 static void endspecialformating();
 static void deletenewlines(char  *buf);
@@ -559,7 +560,7 @@ static void InitializeStyle()
 {
     long fontSize = 12;
     char bodyFont[100];
-    char *font;
+    const char *font;
     long fontStyle = fontdesc_Plain;
     boolean justify;
 
@@ -588,7 +589,7 @@ static void InitializeStyle()
 /* OutputInitialTroff(f, cenv) */
 /* Generates the standard stuff at the beginning of the troff stream */
 /* The current environment is used to set font, font size, and adjust mode. */
-static void handlemac(FILE  *f,char  *s)
+static void handlemac(FILE  *f,const char  *s)
 {
     FILE *fi;
     register int c;
@@ -617,7 +618,7 @@ static void OutputInitialTroff(register FILE  *f, class view *vw, boolean  tople
      */
 
     if (toplevel) {
-	char *macfile;
+	const char *macfile;
 	/*
 	 * cleaning up
 	 * everything done here before will no be done in a macro file
@@ -888,7 +889,7 @@ static int findinlist(char  **lst ,int  cnt,char  *str)
     }
     return -1;
 }
-static int appendlist(char  **lst,int  cnt,char  *ostr,int  TEST)
+static int appendlist(char  **lst,int  cnt,const char  *ostr,int  TEST)
 {   /* BUG -- OVERFLOWS NOT DETECTED */
 
     char *str;
@@ -1153,11 +1154,12 @@ void texttroff::WriteSomeTroff(class view  *view, class dataobject  *dd, FILE  *
     register class text *d,*ttxt;
     register boolean quotespace; 
     class environment *cenv, *nenv;
-    char *list[64],*p,*val;	
+    char *list[64];
+    const char *p,*val;
     class style *IndexStyle;
     struct text_statevector safesv;
 #ifdef ENUMERATE
-    char *ChapNumber;
+    const char *ChapNumber;
     if(toplevel){
 	enumerate = view->GetPrintOption(A_enumcontents);
 	lastcentry = NULL;

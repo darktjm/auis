@@ -26,9 +26,12 @@
 //  $
 */
 
+#define label gezornenplatz
+#include <andrewos.h> /* strings.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/lookz/RCS/lookzview.C,v 1.17 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/lookz/RCS/lookzview.C,v 1.17 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
  
@@ -51,8 +54,6 @@ Deferred:
 	Menu options: Add Font, Rename Style, Cancel
 	Baseline separation and minimum and maximum shim size.
 */
-#define label gezornenplatz
-#include <andrewos.h> /* strings.h */
 ATK_IMPL("lookzview.H")
 #include <stdio.h>
 /* sys/types.h in AIX PS2 defines "struct label", causing a type name clash.

@@ -304,3 +304,8 @@ typedef int (*procedure)();
 #define	SY_U5x	(SY_U51 || SY_U52 || SY_U53)
 #define	SY_AIXx	(SY_AIX11 || SY_AIX12 || SY_AIX221 || SY_AIX3 || SY_AIX4)
 
+#ifdef __GNUC__
+#define UNUSED __attribute__((__unused__))
+#else
+#define UNUSED /* UNUSED */
+#endif

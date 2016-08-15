@@ -425,8 +425,8 @@ class textview : public  view {
       void *para_hit_rock;
       textview_drawCB para_draw_callback;
       void *para_draw_rock;
-      char *para_bgcolor;
-      char *para_fgcolor;
+      const char *para_bgcolor;
+      const char *para_fgcolor;
       unsigned char rows, columns;
       // hit callback is called as:
       // (*hitcallback)(text, textview, action, pos, view, x, y)

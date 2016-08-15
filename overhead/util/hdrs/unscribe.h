@@ -58,7 +58,7 @@ struct ScribeState {
     struct StateVector *vector;	/* Stack of style states kept as a linked list */
 
     /* fields for dataobject processing */
-    char *((*dobjrcvr)());	/* function to process characters */
+    const char *((*dobjrcvr)(struct ScribeState *, char));	/* function to process characters */
     long oid;  		/* object id from \begindata */
     short sawcomma;  	/* used in v10StateBeginData */
     int rcvrstate;  	/* secondary state maintained by rcvr */
@@ -66,7 +66,7 @@ struct ScribeState {
 
 };
 
-extern int UnScribeInit(char  *fieldvalue, struct ScribeState  **refstate);
+extern int UnScribeInit(const char  *fieldvalue, struct ScribeState  **refstate);
 		/* int UnScribeInit(fieldvalue, refstate)
 			char *fieldvalue;
 			struct ScribeState **refstate;
@@ -81,7 +81,7 @@ extern int UnScribeInit(char  *fieldvalue, struct ScribeState  **refstate);
 		error value of -2 means that a malloc failed.
 		*/
 
-extern int UnScribe(int  code , struct ScribeState  **refstate, char  *text, int  textlen, FILE  *fileptr);
+extern int UnScribe(int  code , struct ScribeState  **refstate, const char  *text, int  textlen, FILE  *fileptr);
 		/* int UnScribe(code, refstate, text, textlen, fileptr)
 			int code, textlen;
 			struct ScribeState **refstate;
@@ -112,7 +112,7 @@ extern int UnScribeAbort(int  code, struct ScribeState  **refstate);
 		an active stdio file to which to write buffered data.
 		Returns 0 for all OK, non-zero for (presumably ignorable) errors.
 		*/
-extern int PrintQuotingFormatting(FILE  *fp, char  *text , char  *format, int  len);
+extern int PrintQuotingFormatting(FILE  *fp, const char  *text , const char  *format, int  len);
 		/* extern int PrintQuotingFormatting(fp, text, format, len)
 			FILE *fp;
 			char *text, *format;
@@ -121,7 +121,7 @@ extern int PrintQuotingFormatting(FILE  *fp, char  *text , char  *format, int  l
 		you want it encoded in format FORMAT (e.g., ``yes'', ``2'', or ``10'').
 		Returns the number of characters written, or 0 or -1 for errors (like fwrite).
 		*/
-extern int PrintMaybeFoldQuotingFormatting(FILE  *fp, char  *text , char  *format, int  len , int  DoFold);
+extern int PrintMaybeFoldQuotingFormatting(FILE  *fp, const char  *text , const char  *format, int  len , int  DoFold);
 		/* extern int PrintMaybeFoldQuotingFormatting(fp, text, format, len, DoFold)
 			FILE *fp;
 			char *text, *format;

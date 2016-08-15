@@ -77,7 +77,7 @@ struct sbutton_prefs {
     int refcount;
     int style;
     class fontdesc *font;
-    char *colors[sbutton_COLORS];
+    const char *colors[sbutton_COLORS];
     char *name;
     int bdepth;
 };
@@ -93,7 +93,7 @@ struct sbutton_info {
 
 
 struct sbutton_list {
-    char *label;
+    const char *label;
     long rock;
     char *trigger;
     boolean lit;
@@ -145,7 +145,7 @@ public:
     virtual void Actuate(int ind);
     virtual void SetRock(int ind, long rock);
     virtual void SetLayout(int rows, int cols, enum sbutton_sizepolicy);
-    virtual void SetLabel(int ind,char *txt);
+    virtual void SetLabel(int ind,const char *txt);
     virtual void SetLit(int ind, boolean litp);
     virtual void SetPrefs(int ind, struct sbutton_prefs *prefs);
     virtual int Enumerate(sbutton_efptr func,long rock)  ;
@@ -161,17 +161,17 @@ public:
     static inline char *&GetName(struct sbutton_prefs *prefs) { return ((prefs)->name); }
     static inline int &GetStyle(struct sbutton_prefs *prefs) { return ((prefs)->style); }
     static inline struct fontdesc *&GetFont(struct sbutton_prefs *prefs) { return ((prefs)->font); }
-    static inline char *&GetColor(struct sbutton_prefs *prefs, int color) { return ((prefs)->colors[color]); }
-    static inline char *&GetLabelFG(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_LABELFG]); }
-    static inline char *&GetLabelBG(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_LABELBG]); }
-    static inline char *&GetInsensitiveLabelFG(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_INSENSITIVELABELFG]); }
-    static inline char *&GetInsensitiveLabelBG(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_INSENSITIVELABELBG]); }
-    static inline char *&GetBackground(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_BACKGROUND]); }
-    static inline char *&GetForeground(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_FOREGROUND]); }
-    static inline char *&GetTop(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_TOP]); }
-    static inline char *&GetInsensitiveTop(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_INSENSITIVETOP]); }
-    static inline char *&GetTopShadow(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_TOPSHADOW]); }
-    static inline char *&GetBottomShadow(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_BOTTOMSHADOW]); }
+    static inline const char *&GetColor(struct sbutton_prefs *prefs, int color) { return ((prefs)->colors[color]); }
+    static inline const char *&GetLabelFG(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_LABELFG]); }
+    static inline const char *&GetLabelBG(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_LABELBG]); }
+    static inline const char *&GetInsensitiveLabelFG(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_INSENSITIVELABELFG]); }
+    static inline const char *&GetInsensitiveLabelBG(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_INSENSITIVELABELBG]); }
+    static inline const char *&GetBackground(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_BACKGROUND]); }
+    static inline const char *&GetForeground(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_FOREGROUND]); }
+    static inline const char *&GetTop(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_TOP]); }
+    static inline const char *&GetInsensitiveTop(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_INSENSITIVETOP]); }
+    static inline const char *&GetTopShadow(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_TOPSHADOW]); }
+    static inline const char *&GetBottomShadow(struct sbutton_prefs *prefs) { return ((prefs)->colors[sbutton_BOTTOMSHADOW]); }
     static inline int &GetDepth(struct sbutton_prefs *prefs) { return ((prefs)->bdepth); }
     static inline int &GetRefCount(struct sbutton_prefs *prefs) { return ((prefs)->refcount); }
     

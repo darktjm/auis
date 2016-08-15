@@ -24,11 +24,12 @@ $Disclaimer:
 
    srctext, an object for editing source code. */
 
-static char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-
-static char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/srctext.C,v 2.5 1995/02/24 00:11:42 rr2b Stab74 $";
-
 #include <andrewos.h>
+
+static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
+
+static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/srctext.C,v 2.5 1995/02/24 00:11:42 rr2b Stab74 $";
+
 #include <ctype.h>
 
 #include <environment.H>
@@ -234,7 +235,7 @@ srctext::srctext()
 
     ::SetupStyles(this);
     { /*RSKprettyprint*/
-	char *envar=environ::Get("EZPRETTYPRINT");
+	const char *envar=environ::Get("EZPRETTYPRINT");
 	if (envar && strlen(envar)>0) {
 	    PrettyPrint= TRUE;
 	    strncpy(PrettyOptions, envar, 10);
@@ -265,7 +266,7 @@ void srctext::HashInsert(Dict *hashTable[], Dict *word)
     }
 }
 
-static void PutPrefStringIntoHashTable(Dict *hashTable[], char *st, int kind)
+static void PutPrefStringIntoHashTable(Dict *hashTable[], const char *st, int kind)
 {
     static char prefword[255];
     static Dict prefdict[]= {{prefword,0,0}};
@@ -288,7 +289,8 @@ static void PutPrefStringIntoHashTable(Dict *hashTable[], char *st, int kind)
 void srctext::BuildTable(char *classname, Dict *hashTable[], Dict wordlist[])
 {
     int i;
-    char profilename[256], *preflist;
+    char profilename[256];
+    const char *preflist;
     Dict *wordPtr;
 
     /* clear out the hash table */
@@ -1588,7 +1590,7 @@ static char *spaces="        ";
   }
 
 /*RSK91overstrike: this is a duplicate of the original simpletext_InsertCharacters; it's used by the TABOVER macro to ignore overstrike mode*/
-boolean srctext::JustInsertCharacters(long pos, char *str, long len)
+boolean srctext::JustInsertCharacters(long pos, const char *str, long len)
 {
     if (pos >= GetFence()) {
 	AlwaysInsertCharacters(pos, str, len);
@@ -1816,7 +1818,7 @@ void srctext::OverstrikeAChar(long pos)
 }
 
 /*RSK91overstrike: override simpletext's normal character insertion*/
-boolean srctext::InsertCharacters(long pos, char *str, long len)
+boolean srctext::InsertCharacters(long pos, const char *str, long len)
 {
     if (IsInOverstrikeMode()) {
 	int i= 0;

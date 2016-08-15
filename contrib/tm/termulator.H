@@ -63,7 +63,7 @@ public:
     
          void Clear();
          char * ViewName()  ;
-	 void AlwaysInsertCharacters(long pos,char *buf,long len);
+	 void AlwaysInsertCharacters(long pos,const char *buf,long len);
 	 long ReadSubString(long pos,FILE *file,boolean quoteCharacters)  ;
 	 long Read(FILE *file, long id)  ;
 	 long Write(FILE *file, long writeID, int level)  ;

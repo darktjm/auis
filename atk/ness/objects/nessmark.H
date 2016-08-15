@@ -50,7 +50,7 @@ public:
 
 	virtual void Set(class simpletext *text, long pos, long length);
 		/* sets the mark to the given pos and length in given text */
-	virtual void MakeConst(char * cx);
+	virtual void MakeConst(const char * cx);
 		/* sets the mark to refer to the constant */
 	virtual void Next();
 		/* modifies mark to point to the char after the former value */

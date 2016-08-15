@@ -24,7 +24,7 @@
 
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/ddimage.C,v 1.3 1996/01/31 19:36:36 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/ddimage.C,v 1.3 1996/01/31 19:36:36 robr Stab74 $";
 #endif
 
 ATK_IMPL("ddimage.H")

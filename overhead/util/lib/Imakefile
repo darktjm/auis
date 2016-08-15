@@ -54,7 +54,7 @@ OBJS = abbrpath.o alquery.o andrwdir.o \
 	foldedeq.o fpacheck.o fselect.o gtime.o \
 	fwrtallc.o getaddr.o gethome.o getla.o \
 	getmyhom.o getpty.o hname.o lcappend.o lineprom.o \
-	localdir.o newstr.o nicetime.o pause.o \
+	localdir.o newstr.o nicetime.o \
 	procstuf.o profile.o readlink.o svcconf.o \
 	setprof.o t2open.o tfail.o thiscell.o times.o \
 	titles.o tokpak.o tokunpak.o topen.o \
@@ -72,13 +72,13 @@ OBJS = abbrpath.o alquery.o andrwdir.o \
 	foldedeq.o fpacheck.o fselect.o gtime.o \
 	fwrtallc.o getaddr.o gethome.o getla.o \
 	getmyhom.o getpty.o hname.o lcappend.o lineprom.o \
-	localdir.o newstr.o nicetime.o pause.o \
+	localdir.o newstr.o nicetime.o \
 	procstuf.o profile.o readlink.o svcconf.o \
 	setprof.o t2open.o tfail.o thiscell.o times.o \
 	titles.o tokpak.o tokunpak.o topen.o \
 	uerror.o ulsindex.o ulstlmat.o ulstrcmp.o \
 	usignal.o vclose.o venusop.o /* verbose.o cannot be ported to ANSI C */ \
-	writeall.o ossup.o unscribe.o encode.o system.o xbasedir.o
+	writeall.o unscribe.o encode.o system.o xbasedir.o
 XCOMM  systypes.o
 #endif /* SCOunix */
 

@@ -25,15 +25,16 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/filetype.C,v 3.9 1996/03/12 17:59:38 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/filetype.C,v 3.9 1996/03/12 17:59:38 robr Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("filetype.H")
 #include <stdio.h>
 #include <util.h>
@@ -230,10 +231,10 @@ int filetype::DeleteEntry(register char  *extension)
  *    the next call to this routine. If this can't be guaranteed, the
  *    programmer must copy the attributes list.
  */
-char *filetype::Lookup(FILE  *file, register char  *filename, long  *objectID, struct attributes  **attributes)
+char *filetype::Lookup(FILE  *file, register const char  *filename, long  *objectID, struct attributes  **attributes)
 {
     register struct mapEntry *thisEntry;
-    register char *extension;
+    register const char *extension;
     static char objectName[100]; /* The place to put the name of the class that should be used to read this file. */
     char *targetObject = NULL; /* Holds potential value for objectName. */
     struct attributes *newAttributes = NULL; /* Only used if the file is in non-datastream format. */
@@ -246,7 +247,7 @@ char *filetype::Lookup(FILE  *file, register char  *filename, long  *objectID, s
  * This information may be overrriden by that in the file.
  */
     if (filename != NULL && filename[0] != '\0') {
-        register char *s;
+        register const char *s;
 	char prefix[256];
 	char *dotpos;
 
@@ -423,7 +424,7 @@ char *filetype::Lookup(FILE  *file, register char  *filename, long  *objectID, s
         return NULL;
 }
 
-void filetype::CanonicalizeFilename(char  *canonicalName , char  *name, int  maxSize)
+void filetype::CanonicalizeFilename(char  *canonicalName , const char  *name, int  maxSize)
 {
     char fullName[MAXPATHLEN];
     char *slash;

@@ -20,8 +20,10 @@
  * 
  *  $
 \* ********************************************************************** */
+#include <andrewos.h>
+
 #ifndef NORCSID
-static char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/ncompile.C,v 1.7 1995/02/27 02:30:48 rr2b Stab74 $";
+static UNUSED const char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/ncompile.C,v 1.7 1995/02/27 02:30:48 rr2b Stab74 $";
 #endif
 
 /* compile.c
@@ -54,7 +56,6 @@ static char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/obje
  *
  */
 
-#include <andrewos.h>
 #include <ctype.h>
 
 #include <im.H>

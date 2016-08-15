@@ -23,10 +23,11 @@ $Disclaimer:
 
    ltext, an object for editing Lisp code. */
 
-static char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/ltext.C,v 2.1 1995/02/07 17:37:27 rr2b Stab74 $";
-
 #include <andrewos.h>
+
+static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
+static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/ltext.C,v 2.1 1995/02/07 17:37:27 rr2b Stab74 $";
+
 #include <setjmp.h>
 #include <ctype.h>
 
@@ -87,8 +88,8 @@ void ltext::SetAttributes(struct attributes *atts)
 
 ltext::ltext()
 {
-    char *t, *t2, *s, *copy, *spref;
-    spref = environ::GetProfile("ltextindents");
+    char *t, *t2, *s, *copy;
+    const char *spref = environ::GetProfile("ltextindents");
     this->Indents = NULL;
 
     if (!spref) {

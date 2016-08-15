@@ -25,16 +25,17 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/frameview.C,v 3.12 1996/03/12 18:14:37 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/frameview.C,v 3.12 1996/03/12 18:14:37 robr Stab74 $";
 #endif
 
 
  
 
 
-#include <andrewos.h>
 ATK_IMPL("frameview.H")
 #include <im.H>
 #include <event.H>
@@ -223,7 +224,7 @@ void frameview::WantNewSize(class view  *req)
 
 void frameview::LinkTree(class view *parent)
 {
-    char *fgcolor, *bgcolor;
+    const char *fgcolor, *bgcolor;
 
     textview::LinkTree(parent);
     if (GetIM()) {

@@ -25,14 +25,15 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/utils/RCS/dialog.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/utils/RCS/dialog.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 
 
-#include <andrewos.h>
 ATK_IMPL("dialog.H")
 #include <stdio.h>
 #include <environ.H>
@@ -227,17 +228,17 @@ void dialog::SetButtons(class sbutton  *buttons)
     this->buttons=buttons;
 }
 
-char *dialog::GetForeground()
+const char *dialog::GetForeground()
 {
-    char *fg, *bg;
+    const char *fg, *bg;
     graphic::GetDefaultColors(&fg, &bg);
     if(this->prefs->colors[sbutton_FOREGROUND]) return this->prefs->colors[sbutton_FOREGROUND];
     else return fg?fg:(char *)"black";
 }
 
-char *dialog::GetBackground()
+const char *dialog::GetBackground()
 {
-    char *fg, *bg;
+    const char *fg, *bg;
     graphic::GetDefaultColors(&fg, &bg);
     if(this->prefs->colors[sbutton_BACKGROUND]) return this->prefs->colors[sbutton_BACKGROUND];
     else return bg?bg:(char *)"white";

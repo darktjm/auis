@@ -24,10 +24,11 @@
 // 
 //  $
 */
+#include <andrewos.h>
 
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/rofftextapp.C,v 1.6 1995/07/17 21:08:55 wjh Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/rofftextapp.C,v 1.6 1995/07/17 21:08:55 wjh Stab74 $";
 #endif
 
 
@@ -40,7 +41,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/R
 
 
 
-#include <andrewos.h>
 ATK_IMPL("rofftextapp.H")
 #include <rofftextapp.H>
 #include <text.H>
@@ -94,7 +94,7 @@ static void show_usage(class rofftextapp  *self)
 }
     
 
-boolean rofftextapp::ParseArgs(int  argc,char  **argv)
+boolean rofftextapp::ParseArgs(int  argc,const char  **argv)
 {
     char temp2[128], *andrewdir;
     boolean slash = FALSE;
@@ -118,7 +118,7 @@ boolean rofftextapp::ParseArgs(int  argc,char  **argv)
     while(*++argv!=NULL && **argv=='-') {
         boolean stop = FALSE;
         switch((*argv)[1]){
-                char *temp;
+                const char *temp;
 	    case 'x':
 		show_usage(this);
 		exit(0);
@@ -189,7 +189,7 @@ int rofftextapp::Run()
     class rofftext *r;
     class text *t;
     FILE *in,*out;
-    char **ptr1,**ptr2;
+    const char **ptr1,**ptr2;
     int size = sizeof(char *);
 
     if(!(this)->application::Start())
@@ -202,7 +202,7 @@ int rofftextapp::Run()
     /* be bogus and copy argv into new array, */
     /* saving last string in self->inputfile for __Read. */
 
-    this->inputfiles = (char **)malloc(this->argc * sizeof(char *));
+    this->inputfiles = (const char **)malloc(this->argc * sizeof(char *));
     for(ptr1 = this->argv,ptr2 = this->inputfiles;(ptr1 != NULL) && (*ptr1 != NULL);ptr1++) {
         if (*(ptr1+1)==NULL) {
             *ptr2 = NULL;

@@ -25,15 +25,17 @@
  *  $
 */
 
+#include <util.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/foldedeq.c,v 2.8 1994/10/26 15:57:14 Zarf Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/foldedeq.c,v 2.8 1994/10/26 15:57:14 Zarf Stab74 $";
 #endif
 
 
  
 
-int FoldTRT[256] = {
+const int FoldTRT[256] = {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
     21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, '!', '"', '#', '$', '%',
     '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4',
@@ -60,10 +62,10 @@ int FoldTRT[256] = {
   High bits are disregarded EXCEPT for character 128.
   */
 
-lc_strcmp(s1, s2)
-    register unsigned char *s1;
-    register unsigned char *s2;
+int lc_strcmp(const char *_s1, const char *_s2)
 {
+    const unsigned char *s1 = (const unsigned char *)_s1,
+	                *s2 = (const unsigned char *)_s2;
     while (*s1 && (FoldTRT[*s1] == FoldTRT[*s2])) {
 	++s1;
 	++s2;
@@ -72,10 +74,10 @@ lc_strcmp(s1, s2)
     return FoldTRT[*s1] - FoldTRT[*s2];
 }
 
-lc_strncmp(s1, s2, n)
-    register unsigned char *s1;
-    register unsigned char *s2;
+int lc_strncmp(const char *_s1, const char *_s2, int n)
 {
+    const unsigned char *s1 = (const unsigned char *)_s1,
+	                *s2 = (const unsigned char *)_s2;
     while (n && *s1 && (FoldTRT[*s1] == FoldTRT[*s2])) {
 	--n;
 	++s1;
@@ -85,17 +87,12 @@ lc_strncmp(s1, s2, n)
     return n == 0 ? 0 : FoldTRT[*s1] - FoldTRT[*s2];
 }
 
-FoldedEQ(s1, s2)
-    register unsigned char *s1;
-    register unsigned char *s2;
+int FoldedEQ(const char *s1, const char *s2)
 {
     return (lc_strcmp(s1, s2) == 0);
 }
 
-FoldedEQn(s1, s2, n)
-    register unsigned char *s1;
-    register unsigned char *s2;
-    register int n;
+int FoldedEQn(const char *s1, const char *s2, int n)
 {
     return (lc_strncmp(s1, s2, n) == 0);
 }
@@ -107,15 +104,9 @@ FoldedEQn(s1, s2, n)
 #define	False	0
 #define	True	1
 
-FoldedWildEQ(string, template, ignorecase)
-register unsigned char *string;
-register unsigned char *template;
-register int ignorecase;
+int FoldedWildEQ(const char *string, const char *template, int ignorecase)
 {
-    char *sp;	    /* R2 (string) Pointer into string */
-    char *tp;	    /* R3 (template) Pointer into template */
-    char *oldPtr;   /* R4 Old template pointer */
-    char *result;
+    const char *oldPtr;   /* R4 Old template pointer */
     int arbActive, escActive, mustInc, matched;
 
     template--;		/* Move filter back one, so can inc */
@@ -140,7 +131,7 @@ register int ignorecase;
 	    }
 	    else
 		escActive = False;
-	    if (!*template)		/* End of template, cannot stay there */
+	    if (!*template) {		/* End of template, cannot stay there */
 		if (arbActive || !*string)  /* Arb active or end of string */
 		    return True;		/* Return successful match */
 		else if	(!oldPtr)	    /* If no old ptr available */
@@ -150,12 +141,13 @@ register int ignorecase;
 		    template = oldPtr;		/* Reset template to old value */
 		    oldPtr = 0;			/* No more old value */
 		}
+	    }
 	}
 
 	if (!*string) return False;	    /* At end of string, with no match */
 
 	if (ignorecase)
-	    matched = (FoldTRT[*string] == FoldTRT[*template] || (*template == AnyChar && !escActive));
+	    matched = (FoldTRT[(unsigned char)*string] == FoldTRT[(unsigned char)*template] || (*template == AnyChar && !escActive));
 	else
 	    matched = (*string == *template || (*template == AnyChar && !escActive));
 

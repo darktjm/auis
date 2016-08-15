@@ -34,8 +34,8 @@ ATK_INTER
 
 struct ezapp_fileList {
     struct ezapp_fileList *next;
-    char *filename;
-    char *ObjectName;
+    const char *filename;
+    const char *ObjectName;
     char *newWindowProc;
     boolean readOnly;
     int	initLine;	/* new */
@@ -48,7 +48,7 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
     
-	 boolean ParseArgs(int argc, char **argv)  ;
+	 boolean ParseArgs(int argc, const char **argv)  ;
          void ReadInitFile();
 	 boolean Start()  ;
          int Run()  ;
@@ -62,14 +62,14 @@ public:
         boolean initFile;
         boolean haveBufferInWindow;
         boolean stdinput;
-        char *stdinputObject;
+        const char *stdinputObject;
 	boolean first_im;
         class im *imp;
         class frame *framep;
         class buffer *bufferp;
         class buffer *errorBuffer;
-	char *defaultObject;
-	char *ezTitle;
+	const char *defaultObject;
+	const char *ezTitle;
 };
 
 #endif /* _ezapp_H_ */

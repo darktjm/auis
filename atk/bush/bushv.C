@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/bush/RCS/bushv.C,v 1.18 1996/03/18 23:10:14 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/bush/RCS/bushv.C,v 1.18 1996/03/18 23:10:14 robr Stab74 $";
 #endif
 
 /**  SPECIFICATION -- External Facility Suite  *********************************
@@ -60,7 +62,6 @@ HISTORY
 END-SPECIFICATION  ******************************************************/
 
 
-#include <andrewos.h>
 ATK_IMPL("bushv.H")
 #include <sys/param.h>
 #include <sys/stat.h>
@@ -870,17 +871,18 @@ bushv::InitializeClass( )
 static void
 GetPreferredEditors( register class bushv  *self )
   {
+  const char *ctmp;
   register char *tmp = NULL, *colon = NULL;
   char *myCopy = NULL;
   register int i = 0;
 
   IN(GetPreferredEditors);
   environ::SetProgramName("bush");
-  if(((tmp = environ::GetProfile("editors")) ||
-      (tmp = environ::GetProfile("editor"))) && *tmp) {
-    AllocNameSpace(tmp,&myCopy);
-    if(colon = (char*)strchr(tmp = myCopy,':')) {
-      while((colon = (char*)strchr(tmp,':')) && (i < MAXEDITORS)) {
+  if(((ctmp = environ::GetProfile("editors")) ||
+      (ctmp = environ::GetProfile("editor"))) && *ctmp) {
+    AllocNameSpace(ctmp,&myCopy);
+    if(colon = strchr(tmp = myCopy,':')) {
+      while((colon = strchr(tmp,':')) && (i < MAXEDITORS)) {
         *colon = '\0';
 	if(tmp && (*tmp != '\0')) {
 	  EditorChoices[i] = NULL;
@@ -907,7 +909,7 @@ GetPreferredEditors( register class bushv  *self )
     NumEditorChoices = i+1;
     if(myCopy) free(myCopy);
   }
-  else if(!tmp || (i == 0)) {
+  else if(!ctmp || (i == 0)) {
     for( i = 0 ; default_editor_choices[i] && (i < MAXEDITORS); i++ ) {
       EditorChoices[i] = NULL;
       AllocNameSpace(default_editor_choices[i],&EditorChoices[i]);
@@ -932,9 +934,9 @@ GetPreferredEditors( register class bushv  *self )
 static void
 GetPreferredFonts( register class bushv	 *self )
   {
-  char *control_font;
-  char *tree_node_font;
-  char *listing_font;
+  const char *control_font;
+  const char *tree_node_font;
+  const char *listing_font;
   int size = 0;
 
   IN(GetPreferredFont);
@@ -2516,7 +2518,8 @@ bushv_WriteFile( class bushv	 *self )
 static int
 bushv_SetPrinter(class bushv	 *self)
   {
-  char		*currentPrinter, *defaultPrinter, answer[256];
+  char		 answer[256];
+  const char    *currentPrinter, *defaultPrinter;
   char		 prompt[sizeof("Current printer is . Set printer to []: ") + 128];
   int		 return_value = 0;
 

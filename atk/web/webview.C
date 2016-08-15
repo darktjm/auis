@@ -25,7 +25,7 @@
 ATK_IMPL("webview.H")
 
 #ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/webview.C,v 1.26 1996/11/07 23:54:55 robr Exp $";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/webview.C,v 1.26 1996/11/07 23:54:55 robr Exp $";
 #endif
 
 #include <im.H>
@@ -266,7 +266,7 @@ hlcallback(webview *self, class value *val, long  , long  ) {
 
 static	char * 
 gethotlist(char *buf) {
-	char *home;
+	const char *home;
 	home = environ::Get("HOME");
 	sprintf(buf, "%s/%s", home, HOTLIST);
 	return buf;
@@ -607,7 +607,7 @@ buffer *fwdbuf(buffer *, struct webapp_webhist  *wp) {
 webview::webview()
 {
 	ATKinit;
-	char *t;
+	const char *t;
 	this->bt = NULL;
 	this->bv = NULL;
 	this->subview = NULL;

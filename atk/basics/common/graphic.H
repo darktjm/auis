@@ -95,8 +95,8 @@ public:
     virtual void DrawLineTo(long XEnd, long YEnd);
     virtual void DrawLine(long DeltaX, long DeltaY);
 
-    virtual void DrawString(char * Text, short Operation);
-    virtual void DrawText(char * Text, long TextLength, short Operation);
+    virtual void DrawString(const char * Text, short Operation);
+    virtual void DrawText(const char * Text, long TextLength, short Operation);
     virtual void SetSpaceShim(short Amount);
     virtual short GetSpaceShim()  ;
     virtual void SetFont(class fontdesc * ChosenFont);
@@ -206,10 +206,10 @@ public:
     virtual void GetPatternOrigin(long *xpos, long *ypos);
 
     /* If colorName is NULL, use the RGB. */
-    virtual void SetForegroundColor(char *colorName, long red, long green, long blue);
-    virtual void GetForegroundColor(char **colorName, long *red, long *green, long *blue);
-    virtual void SetBackgroundColor(char *colorName, long red, long green, long blue);
-    virtual void GetBackgroundColor(char **colorName, long *red, long *green, long *blue);
+    virtual void SetForegroundColor(const char *colorName, long red, long green, long blue);
+    virtual void GetForegroundColor(const char **colorName, long *red, long *green, long *blue);
+    virtual void SetBackgroundColor(const char *colorName, long red, long green, long blue);
+    virtual void GetBackgroundColor(const char **colorName, long *red, long *green, long *blue);
     virtual void SetForegroundColor(color *c);
     virtual void SetBackgroundColor(color *c);
 
@@ -269,8 +269,8 @@ public:
 	return back;
     }
 
-    static void SetDefaultColors(char *foreground, char *background);
-    static void GetDefaultColors(char **foreground, char **background);
+    static void SetDefaultColors(const char *foreground, const char *background);
+    static void GetDefaultColors(const char **foreground, const char **background);
     static class graphic * CreateGraphic(class view *v)  ;
     
 	virtual ~graphic();

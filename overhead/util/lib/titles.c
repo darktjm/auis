@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <util.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/titles.c,v 1.8 1994/05/24 21:33:49 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/titles.c,v 1.8 1994/05/24 21:33:49 rr2b Stab74 $";
 #endif
 
 /* titles.c */
@@ -37,8 +39,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
 static char *BeginInitialArgv = NULL, *EndInitialArgv;
 
-void SetInitialArgs(argc, argv, envp)
-int argc; char **argv, **envp;
+void SetInitialArgs(int argc, char **argv, char **envp)
 {
     int Ix;
 
@@ -78,7 +79,7 @@ va_dcl
 #else
 #include <stdarg.h>
 
-void SetProcTitle(char *str, ...)
+void SetProcTitle(const char *str, ...)
 {/* Set the process title. */
     char *cp;
     char Title[1500];
@@ -86,7 +87,7 @@ void SetProcTitle(char *str, ...)
 
     va_start(ap, str);
     if (BeginInitialArgv == NULL) return;   /* must call SetInitialArgs first */
-    sprintf(Title, str, ap);
+    vsprintf(Title, str, ap);
     strncpy(BeginInitialArgv, Title, EndInitialArgv - BeginInitialArgv - 1);
     EndInitialArgv[-1] = '\0';
     cp = &BeginInitialArgv[strlen(BeginInitialArgv)];

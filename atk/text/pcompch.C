@@ -25,15 +25,16 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/file.h and string(s).h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/pcompch.C,v 3.4 1994/12/06 21:36:15 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/pcompch.C,v 3.4 1994/12/06 21:36:15 rr2b Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h> /* sys/file.h and string(s).h */
 ATK_IMPL("pcompch.H")
 
 #include <ctype.h>
@@ -397,7 +398,7 @@ static int lenorder(unsigned char *e1,unsigned char *e2)
 	
 
 /* pcompch_ReadCompositesFile: reads COMPFILE and places the composites defined in it into the composites table. */
-boolean pcompch::ReadCompositesFile(char  *compfile)
+boolean pcompch::ReadCompositesFile(const char  *compfile)
 {
 	ATKinit;
 
@@ -518,9 +519,9 @@ char *pcompch::CharacterToTroff( char ch,class environment  *env,class textview 
 
 boolean pcompch::InitializeClass()
 {
-    char *compfile=environ::GetProfile("compositesfile");
+    const char *compfile=environ::GetProfile("compositesfile");
     boolean override= environ::GetProfileSwitch("overridecomposites",FALSE);
-    char *libfile=environ::AndrewDir("/lib/compchar/comps");
+    const char *libfile=environ::AndrewDir("/lib/compchar/comps");
     int i;
 
     for(i=0;i<=MAXCHAR;i++) composites[i]=NULL;

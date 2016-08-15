@@ -25,15 +25,15 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xfontdesc.C,v 3.8 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xfontdesc.C,v 3.8 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 
  
-
-#include <andrewos.h>
 
 #include <sys/param.h> /* For MAXPATHLEN. */
 
@@ -114,7 +114,7 @@ static struct dlist def[]={
 
 static void FillDlist()
 {
-    char *p=environ::GetProfile("AndyFontsFudgeFactor");
+    const char *p=environ::GetProfile("AndyFontsFudgeFactor");
     if(p==NULL) {
 	dfirst=def;
 	return;
@@ -786,7 +786,7 @@ xfontdesc::GetRealFontDesc(class graphic  *graphic2)
 	else return (struct font *)fc->font;
 }
 
-long xfontdesc::TextSize(class graphic  *graphic2, char  * text, long  TextLength, long  * XWidth, long  * YWidth)
+long xfontdesc::TextSize(class graphic  *graphic2, const char  * text, long  TextLength, long  * XWidth, long  * YWidth)
                         {
     XFontStruct *font;
     register long retWidth = 0;
@@ -884,7 +884,7 @@ short *xfontdesc::HeightTable(class graphic  *graphic2)
 	return fontHeightTable;
 }
 
-long xfontdesc::StringSize(class graphic  *graphic2, register char * string,register long  * XWidth,register long  * YWidth)
+long xfontdesc::StringSize(class graphic  *graphic2, register const char * string,register long  * XWidth,register long  * YWidth)
                     {
 
     register XFontStruct  *font;

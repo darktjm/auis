@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/mantext.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/mantext.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 
@@ -35,7 +37,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/R
 
 
 
-#include <andrewos.h>
 ATK_IMPL("mantext.H")
 #include <mark.H>
 #include <rofftext.H>
@@ -64,12 +65,13 @@ long mantext::Read(FILE  *file, long  id )
 {
     long tmpRetValue;
     class rofftext *r = (class rofftext *)this;
+    char **t;
 
     /* copy the filename that was put into rofftext via SetAttributes */
     if (r->filename != NULL) strcpy(this->filename, r->filename);
-    r->inputfiles = (char **)malloc(2 * sizeof(char *));
-    r->inputfiles[0] = NULL;
-    r->inputfiles[1] = NULL;
+    r->inputfiles = t = (char **)malloc(2 * sizeof(char *));
+    t[0] = NULL;
+    t[1] = NULL;
     r->filename = NULL;
 
     r->macrofile = TMACMANFILE;

@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/addalias/RCS/addalias.c,v 1.9 1993/06/12 12:53:21 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/addalias/RCS/addalias.c,v 1.9 1993/06/12 12:53:21 rr2b Stab74 $";
 #endif
 
 
@@ -39,7 +41,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/addal
  * Lines starting with whitespace or '#' are ignored.
  */
 
-#include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <errno.h>

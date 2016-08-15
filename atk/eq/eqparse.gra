@@ -631,7 +631,7 @@ e_expr	: e_scr
 	;
 
 %%
-static char *parse_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/eq/RCS/eqparse.gra,v 1.12 1996/10/14 17:48:21 robr Exp $";
+static UNUSED const char parse_rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/eq/RCS/eqparse.gra,v 1.12 1996/10/14 17:48:21 robr Exp $";
 
  
  

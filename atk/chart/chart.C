@@ -25,13 +25,15 @@
  *  $
 */
 
+#include  <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chart.C,v 1.8 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chart.C,v 1.8 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 #ifndef lint
-static char *rcsidchart = "$Header $";
+static UNUSED const char rcsidchart[] = "$Header $";
 #endif
 
 /**  SPECIFICATION -- External Facility Suite  *********************************
@@ -68,7 +70,6 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
-#include  <andrewos.h>
 ATK_IMPL("chart.H")
 #include  <rect.h>
 #include  <dataobject.H>

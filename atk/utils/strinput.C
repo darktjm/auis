@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/utils/RCS/strinput.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/utils/RCS/strinput.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 
@@ -40,7 +42,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/utils/RCS/
  * String input dialogue box thingie.
 */
 
-#include <andrewos.h>
 ATK_IMPL("strinput.H")
 #include <stdio.h>
 

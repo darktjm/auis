@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/keyboard.C,v 1.5 1994/03/13 08:09:04 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/keyboard.C,v 1.5 1994/03/13 08:09:04 rr2b Stab74 $";
 #endif
 
 
@@ -37,7 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/
 
 
 
-#include <andrewos.h>
 #include <bind.H>
 #include <proctable.H>
 #include <keymap.H>

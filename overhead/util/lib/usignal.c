@@ -25,23 +25,23 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/usignal.c,v 2.12 1993/11/03 07:36:05 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/usignal.c,v 2.12 1993/11/03 07:36:05 rr2b Stab74 $";
 #endif
 
 /*
 	usignal.c -- Return a static string describing a signal value.
 */
 
-
+#include <util.h>
  
-#include <andrewos.h>
 #include <errno.h>
 #include <signal.h>
 
-char *UnixSignal(signalNumber)
-int	signalNumber;
+const char *UnixSignal(int signalNumber)
 {
 /* Returns a pointer to a static buffer containing English text describing the same signal condition that signalNumber describes (interpreted as a Unix signal number).  The text has no newlines in it.  We contend that this is what ``psignal'' should have been returning all along. */
     static char SigBuff[40];

@@ -15,8 +15,8 @@ public:
 
 
     readscr();
-	static class text * Begin(class text *t, int pos, int len, int purge, char *version, int GetTemplate)  ;
-    static int PrintFile(char *filename, class textview *tv, class text *t, char *version, int TrashWhenDone)  ;
+	static class text * Begin(class text *t, int pos, int len, int purge, const char *version, int GetTemplate)  ;
+    static int PrintFile(char *filename, class textview *tv, class text *t, const char *version, int TrashWhenDone)  ;
 
 };
 

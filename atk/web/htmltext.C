@@ -31,7 +31,7 @@ ATK_IMPL("htmltext.H")
 
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/htmltext.C,v 1.43 1996/11/23 17:00:56 fred Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/htmltext.C,v 1.43 1996/11/23 17:00:56 fred Exp $";
 #endif
 
 #include <util.h>
@@ -4024,7 +4024,7 @@ image *htmltext::GetImage(const char *file, attlist *atts) {
             if (!defaultImage) {
                 /* defaultImage is static,
                  1st time through it is NULL */
-                char *s = environ::GetProfile(
+                const char *s = environ::GetProfile(
                                               "defaultImage");
                 if (s) {
                     defaultImage = (char *)malloc

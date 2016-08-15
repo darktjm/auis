@@ -25,20 +25,19 @@
  *  $
 */
 
+#include <andrewos.h>		/* sys/time.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fselect.c,v 2.13 1994/01/30 05:37:19 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fselect.c,v 2.13 1994/01/30 05:37:19 rr2b Stab74 $";
 #endif
 
-#include <andrewos.h>		/* sys/time.h */
 #include <stdio.h>
+#include <util.h>
 
 static int NOFILES=(-1);
 
-int fselect(nfds, rfiles, wfiles, xfiles, timeout)
-int	nfds;
-FILE	**rfiles, **wfiles, **xfiles;
-struct timeval	*timeout;
+int fselect(int nfds, FILE **rfiles, FILE **wfiles, FILE **xfiles, struct timeval *timeout)
 {
     fd_set rmask, wmask, xmask;
     int ret=0;
@@ -52,11 +51,12 @@ struct timeval	*timeout;
     }
     for (i = nfds; --i >= 0;) {
 	register int fd;
-	if (rfiles && rfiles[i] != NULL && (fd = fileno(rfiles[i])) >= 0 && fd < NOFILES) 
+	if (rfiles && rfiles[i] != NULL && (fd = fileno(rfiles[i])) >= 0 && fd < NOFILES) {
 	    if (FILE_HAS_IO(rfiles[i]) > 0)
 		ret++;
 	    else
 		FD_SET(fd, &rmask);
+	}
 	if (wfiles && wfiles[i] != NULL && (fd = fileno(wfiles[i])) >= 0 && fd < NOFILES)
 	    FD_SET(fd, &wmask);
 	if (xfiles && xfiles[i] != NULL && (fd = fileno(xfiles[i])) >= 0 && fd < NOFILES)

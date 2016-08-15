@@ -25,7 +25,7 @@
 ATK_IMPL("weblinkview.H")
 
 #ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/weblinkview.C,v 1.1 1995/12/12 16:29:03 wjh Stab74 $";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/weblinkview.C,v 1.1 1995/12/12 16:29:03 wjh Stab74 $";
 #endif
 
 #include <sys/param.h>		/* for MAXPATHLEN */

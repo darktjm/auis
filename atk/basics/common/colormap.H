@@ -42,7 +42,7 @@ public:
   char * ViewName();
 
   virtual int SetColor(class color *color, boolean needpixel)  ;
-  virtual class color * LookupColor(char *name, unsigned int red, unsigned int green, unsigned int blue, boolean needpixel)  ;
+  virtual class color * LookupColor(const char *name, unsigned int red, unsigned int green, unsigned int blue, boolean needpixel)  ;
   virtual int LookupColorCell(class color *c)  ;
   virtual int Copy(class colormap *source)  ;
   virtual int Merge(class colormap *other)  ;

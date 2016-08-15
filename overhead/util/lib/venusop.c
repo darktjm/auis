@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/venusop.c,v 2.10 1992/12/15 21:11:36 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/venusop.c,v 2.10 1992/12/15 21:11:36 rr2b Stab74 $";
 #endif
 
 /*
@@ -45,7 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 	All routines return the result of the pioctl/ioctl and leave error codes in errno.
 */
 
-#include <andrewos.h>
 #include <errno.h>
 #include <stdio.h>
 #include <sys/ioctl.h>
@@ -55,8 +56,9 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <afs/venus.h>
 #endif /* AFS_ENV */
 
-int VenusFlush(pname)
-char *pname;
+#include <util.h>
+
+int VenusFlush(const char *pname)
 {
 #ifdef AFS_ENV
     if (ViceIsRunning()) {
@@ -69,8 +71,7 @@ char *pname;
 	return 0;
 }
 
-int VenusFlushCallback(pname)
-char *pname;
+int VenusFlushCallback(const char *pname)
 {
 #ifdef AFS_ENV
     if (ViceIsRunning()) {
@@ -83,8 +84,7 @@ char *pname;
 	return 0;
 }
 
-int VenusFetch(pname)
-char *pname;
+int VenusFetch(const char *pname)
 {
 #ifdef AFS_ENV
     if (ViceIsRunning()) {
@@ -97,8 +97,7 @@ char *pname;
 	return 0;
 }
 
-int VenusCancelStore(fid)
-int fid;
+int VenusCancelStore(int fid)
 {
 #ifdef AFS_ENV
     if (ViceIsRunning()) {

@@ -22,9 +22,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/gnucompat.C,v 1.5 1995/03/26 03:00:47 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/gnucompat.C,v 1.5 1995/03/26 03:00:47 rr2b Stab74 $";
 #endif
 
 
@@ -53,8 +55,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/gn
 /* GNU Emacs: */			
 
 /* Fill Paragraph:  Removes hard newlines within a paragraph */
-
-#include <andrewos.h>
 
 #include <ctype.h>
 

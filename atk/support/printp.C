@@ -25,13 +25,13 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/printp.C,v 1.18 1996/10/18 03:42:48 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/printp.C,v 1.18 1996/10/18 03:42:48 wjh Exp $";
 #endif
 
-
-#include <andrewos.h>
 
 #define AUXMODULE 1
 #include <print.H>
@@ -1698,7 +1698,8 @@ static char *SquishAFMFileName(char *orig)
 
 struct font_afm *print::GetPSFontAFM(char  *fontname)
 {
-    char *tpath, afmname[1024];
+    const char *tpath;
+    char afmname[1024];
     FILE *infl;
     struct font_afm *res;
     boolean ok;

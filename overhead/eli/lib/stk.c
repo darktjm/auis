@@ -25,12 +25,12 @@
  *  $
 */
 
+#include  <stk.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/stk.c,v 2.7 1992/12/15 21:02:39 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/stk.c,v 2.7 1992/12/15 21:02:39 rr2b Stab74 $";
 #endif
-
-#include  <stk.h>
 
 /* Initialize a stack.  S must point to an existing structure */
 

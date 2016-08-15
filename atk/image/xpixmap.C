@@ -57,13 +57,14 @@
  * USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#include <andrewos.h>
+
 #ifndef __SABER__
-static char *Copyright= "Copyright 1989, 1993 Jim Frost";
+static UNUSED const char Copyright[]= "Copyright 1989, 1993 Jim Frost";
 #endif
 #define _JIM_COPYRIGHT_
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("xpixmap.H")
 #include <X11/X.h>
 #include <X11/Xlib.h>
@@ -95,7 +96,8 @@ xpixmap::Load( char  *fullname, FILE  *fp )
   class xpixmap *self=this;
   char           buf[BUFSIZ];
   char           what[BUFSIZ];
-  char          *p, *hostp;
+  char          *p;
+  const char     *hostp;
   char          *imagetitle;
   unsigned int   value;
   unsigned int   w, h;    /* image dimensions */

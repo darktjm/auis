@@ -53,12 +53,12 @@ public:
     virtual void GetSize(long * w, long * h);
     virtual void SetChild(class dataobject * child);
     virtual class dataobject * GetChild()  ;
-    virtual void SetTitle(char * title);
-    virtual char * GetTitle()  ;
+    virtual void SetTitle(const char * title);
+    virtual const char * GetTitle()  ;
 
     class dataobject * child;
     long width, height;
-    char * title;
+    const char * title;
 };
 
 #endif /* _icon_H_ */

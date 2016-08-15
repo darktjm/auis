@@ -40,13 +40,13 @@ public:
 	messagesapp();
 
 
-     boolean ParseArgs(int argc, char **argv)  ;
+     boolean ParseArgs(int argc, const char **argv)  ;
      boolean Start()  ;
 
     int SendOnly, AppendBugInfo, MailOnly, ConsiderChanged, UsingSnap, RetainedArgc, SeparateWindows;
     char *AddHeaderList[MAXADDHEADS];
     char MailSourceFile[1+MAXPATHLEN];
-    char *RetainedArg[MAXARGS];
+    const char *RetainedArg[MAXARGS];
 };
 
 #endif /* _messagesapp_H_ */

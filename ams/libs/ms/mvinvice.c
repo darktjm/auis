@@ -25,13 +25,14 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/mvinvice.c,v 2.6 1992/12/15 21:20:00 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/mvinvice.c,v 2.6 1992/12/15 21:20:00 rr2b Stab74 $";
 #endif
 
 #include <errno.h>
-#include <andrewos.h> /* sys/file.h */
 
 RenameEvenInVice(ThisFileName, NewFileName)
 char   *ThisFileName,

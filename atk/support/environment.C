@@ -25,16 +25,17 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/environment.C,v 3.4 1996/09/05 15:22:07 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/environment.C,v 3.4 1996/09/05 15:22:07 robr Exp $";
 #endif
 
 
  
 
 
-#include <andrewos.h>
 ATK_IMPL("environment.H")
 #include <environment.H>
 #include <tree23int.H>

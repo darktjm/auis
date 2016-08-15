@@ -25,26 +25,26 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fdplumb2.c,v 2.7 1992/12/15 21:09:01 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fdplumb2.c,v 2.7 1992/12/15 21:09:01 rr2b Stab74 $";
 #endif
-
-
- 
 
 #include <stdio.h>
 #include <fdplumbi.h>
+#include <util.h>
 
-dbg_vclose(fd)
-int fd;
+ 
+
+int dbg_vclose(int fd)
 {
     RegisterCloseFile(fd);
     return(vclose(fd));
 }
 
-dbg_vfclose(fp)
-FILE *fp;
+int dbg_vfclose(FILE *fp)
 {
     RegisterCloseFile(fileno(fp));
     return(vfclose(fp));

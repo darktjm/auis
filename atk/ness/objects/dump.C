@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/dump.C,v 1.3 1993/12/16 20:38:01 wjh Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/dump.C,v 1.3 1993/12/16 20:38:01 wjh Stab74 $";
 #endif
 
 /* dump.c
@@ -86,7 +88,6 @@ log elided June 93   -wjh
  * 
 */
 
-#include <andrewos.h>
 #include <proctable.H>
 
 #include <nessmark.H>

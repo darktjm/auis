@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/sys/RCS/conftest.c,v 1.12 1995/11/07 19:43:11 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/sys/RCS/conftest.c,v 1.12 1995/11/07 19:43:11 robr Stab74 $";
 #endif
 
 /*
@@ -36,7 +38,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/sys/R
 */
 
 #include <stdio.h>
-#include <andrewos.h>
 
 /* ./conftest "$(RESOLVLIB)" */
 
@@ -58,11 +59,6 @@ int argc; char **argv;
 	      (SY_AIXx ? "AIX" :
 	       (SY_OS2 ? "OS/2" : "NO SYSTEM!")))) );
     }
-/* #ifdef NDBM_ENV
-/*    printf("I'm told that this system provides the NDBM package in its libc.a.\n");
-/*#else /* NDBM_ENV */
-/*    printf("I'm told that this system does not provide the NDBM package in its libc.a.\n");
-/*#endif /* NDBM_ENV */ 
 
     printf("conftest: Checking for problems in the allsys.h/system.h/site.h files.\n");
     OneProb = 0;

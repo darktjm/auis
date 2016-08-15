@@ -99,7 +99,7 @@ public:
 	virtual void PostCursor(struct rectangle *rec,class cursor *cursor) ;
 	virtual void ClearCursors(class cursor *C);
 	virtual void UpdateCursors();
-	virtual void SetTitle(char *titleString);
+	virtual void SetTitle(const char *titleString);
 	virtual FILE * FromCutBuffer()  ;
 	virtual FILE * OnlyFromCutBuffer();
 	virtual FILE * OnlyFromSelection();

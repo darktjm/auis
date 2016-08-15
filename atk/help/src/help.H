@@ -65,8 +65,8 @@ public:
  
     
  
-    static int HelpappGetHelpOn(char *name, long number, int addToHistory, char *errmsg)  ;
-    static void GetHelpOnTerminal(char *akey, int list, int print);
+    static int HelpappGetHelpOn(const char *name, long number, int addToHistory, char *errmsg)  ;
+    static void GetHelpOnTerminal(const char *akey, int list, int print);
     
 	help();
     
@@ -74,9 +74,9 @@ public:
 
     
 	virtual ~help();
-    static void SetIndex(char *indexName);
-    static void SetAliasesFile(char *aliasName);
-    static void AddSearchDir(char *dirName);
+    static void SetIndex(const char *indexName);
+    static void SetAliasesFile(const char *aliasName);
+    static void AddSearchDir(const char *dirName);
     static class view * GetInstance()  ;
 
  

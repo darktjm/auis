@@ -54,7 +54,7 @@ public:
 
     
         static void CompletionWork(char *string, struct result *data);
-        static int GetFilename(class view *view, char *prompt, char *startPath, char *buffer, long bufsiz, boolean directoryP, boolean mustMatch)  ;
+        static int GetFilename(class view *view, const char *prompt, const char *startPath, char *buffer, long bufsiz, boolean directoryP, boolean mustMatch)  ;
         static long FindCommon(char *string1, char *string2)  ;
         
 	static boolean InitializeClass();

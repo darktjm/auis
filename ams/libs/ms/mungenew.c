@@ -25,12 +25,13 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/mungenew.c,v 2.35 1995/02/07 18:18:18 Zarf Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/mungenew.c,v 2.35 1995/02/07 18:18:18 Zarf Stab74 $";
 #endif
 
-#include <andrewos.h> /* sys/file.h */
 #include <ms.h>
 #include <sys/stat.h>
 #include <mailconf.h>
@@ -44,7 +45,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RC
 
 #define MAILBOXFILECHUNK 1000
 
-extern char  home[], Me[], *PersonalMailCollectionCommand, *GetPersonalMailbox(), *getprofile(), *getenv();
+extern char  home[], Me[], *PersonalMailCollectionCommand, *GetPersonalMailbox();
 extern int CompareFileTimeStructs(), homeUsesAMSDelivery;
 
 static ReallyTruly_ProcessNewMessages(char *SourceDir, int *NumGood, int *NumBad, int *NumLocks, char *ParseSpecFile, int *resultcode, int *FirstError, int *NumInProgress, char *EliErrBuf, int EliErrBufLim);

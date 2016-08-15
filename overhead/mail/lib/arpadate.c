@@ -25,17 +25,17 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/time.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/arpadate.c,v 2.14 1992/12/15 21:03:27 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/arpadate.c,v 2.14 1992/12/15 21:03:27 rr2b Stab74 $";
 #endif
 
 /*
 		arpadate.c -- return current time in ARPAnet format
 */
 
-
-#include <andrewos.h> /* sys/time.h */
 
 char *arpadate()
 {

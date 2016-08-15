@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/celview.C,v 1.11 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/celview.C,v 1.11 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 
@@ -44,7 +46,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/c
 #define VALUE 10
 #define ChildMenus 1
 #define ClientMenus 2
-#include <andrewos.h>
 ATK_IMPL("celview.H")
 
 #include <ctype.h>

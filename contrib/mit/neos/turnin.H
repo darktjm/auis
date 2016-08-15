@@ -56,7 +56,7 @@ public:
   
 	virtual ~turnin();
 
-  virtual void SetTitle(char *string);
+  virtual void SetTitle(const char *string);
   virtual void GoForIt();
 
   inline void SetParent(class eos *dad) { ((this)->daddy = dad); }

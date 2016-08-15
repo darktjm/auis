@@ -30,7 +30,7 @@ ATK_IMPL("prefedapp.H")
 #include <environ.H>
 #include <filetype.H>
 
-static char *fakeargv[]=
+static const char *fakeargv[]=
 {
     "prefed",
     NULL,
@@ -48,7 +48,7 @@ prefedapp::prefedapp()
     THROWONFAILURE( TRUE);
 }
 
-boolean prefedapp::ParseArgs(int  argc, char  **argv)
+boolean prefedapp::ParseArgs(int  argc, const char  **argv)
 {
     boolean result=(this)->ezapp::ParseArgs( argc, argv);
     if(((class ezapp *)this)->files==NULL) {

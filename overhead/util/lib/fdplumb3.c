@@ -25,19 +25,20 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fdplumb3.c,v 2.7 1992/12/15 21:09:01 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fdplumb3.c,v 2.7 1992/12/15 21:09:01 rr2b Stab74 $";
 #endif
 
 
- 
-
 #include <stdio.h>
 #include <fdplumbi.h>
+#include <util.h>
+ 
 
-FILE *dbg_popen(path, type)
-char *path, *type;
+FILE *dbg_popen(const char *path, const char *type)
 {
     FILE *fp;
     extern FILE *popen();
@@ -47,8 +48,7 @@ char *path, *type;
     return(fp);
 }
 
-dbg_pclose(fp)
-FILE *fp;
+int dbg_pclose(FILE *fp)
 {
     RegisterCloseFile(fileno(fp));
     return(pclose(fp));

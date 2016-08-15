@@ -26,9 +26,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/interp.C,v 1.15 1996/08/19 18:15:51 wjh Exp $";
+static UNUSED const char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/interp.C,v 1.15 1996/08/19 18:15:51 wjh Exp $";
 #endif
 
 /* interp.c
@@ -177,7 +179,6 @@ static char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/obje
  * 
 */
 
-#include <andrewos.h>
 #include <sys/param.h> /* for MAXPATHLEN */
 #include <signal.h>
 #include <setjmp.h>
@@ -970,7 +971,7 @@ brancher: {
 		FILE *f;
 		char *s;
 		char fullName[MAXPATHLEN+1];
-		char *fname;
+		const char *fname;
 		long val;
 		unsigned char subop = *iar++;	/* a - ATK;   r - raw */
 

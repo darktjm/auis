@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>		/* strings.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/thiscell.c,v 2.14 1993/02/12 21:23:32 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/thiscell.c,v 2.14 1993/02/12 21:23:32 rr2b Stab74 $";
 #endif
 
 
@@ -36,7 +38,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <andyenv.h>
 #include <stdio.h>
 #include <ctype.h>
-#include <andrewos.h>		/* strings.h */
 #include <util.h>
 #include <svcconf.h>
 #include <errno.h>
@@ -75,11 +76,9 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
   *	Nothing interesting.
   */
 
-int GetCurrentWSCell(Buf, size) 
-char *Buf;
-int   size;
+int GetCurrentWSCell(char *Buf, int size) 
 {
-    char *CellName;
+    const char *CellName;
     long code;			/* Result of pioctl() call */
 #ifdef AFS_ENV
     struct ViceIoctl blob;		/* I/O control area for Venus communication */
@@ -143,12 +142,9 @@ int   size;
   *	Nothing interesting.
   */
 
-int GetCellFromFileName(FileName, Buf, size)
-char *FileName;
-char *Buf;
-int   size;
+int GetCellFromFileName(const char *FileName, char *Buf, int size)
 {
-    char *CellName;
+    const char *CellName;
     long code;			/* Result of pioctl() call */
 #ifdef AFS_ENV
     struct ViceIoctl blob;		/* I/O control area for Venus communication */

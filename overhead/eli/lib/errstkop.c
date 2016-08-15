@@ -25,12 +25,12 @@
  *  $
 */
 
+#include <errstkop.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/errstkop.c,v 2.8 1992/12/15 21:01:25 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/errstkop.c,v 2.8 1992/12/15 21:01:25 rr2b Stab74 $";
 #endif
-
-#include <errstkop.h>
 
 void            eliTraceStk_Purge(st, s)	/* Pop stuff off until empty */
 EliState_t     *st;

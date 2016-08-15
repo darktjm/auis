@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/framecmds.C,v 3.22 1996/05/13 17:16:37 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/framecmds.C,v 3.22 1996/05/13 17:16:37 robr Exp $";
 #endif
 
 
@@ -52,7 +54,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/
  * 
  */
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("framecmds.H")
 #include <util.h>
 
@@ -96,7 +97,7 @@ typedef void (*excursionfptr)(class frame *self);
 void frame_Exit(class frame  *self);
 static int LocalReadFile(class frame  *self, char  *fname, boolean  preserveBuffer);
 int frame_VisitFilePrompting(class frame  *self, char  *prompt, boolean  newWindow, boolean  rawMode);
-int frame_VisitNamedFile(class frame  *self, char  *filename, boolean  newWindow, boolean  rawMode);
+int frame_VisitNamedFile(class frame  *self, const char  *filename, boolean  newWindow, boolean  rawMode);
 int frame_WriteFile(class frame  *self);
 
 static SIGNAL_RETURN_TYPE SigHandler(int sig) {longjmp(trap, 1);}
@@ -1183,7 +1184,7 @@ long frame_DeleteThisBuffer(ATK *f, long rock)
     return 0;
 }
 
-static class buffer *LocalGetBufferOnFile(class frame  *self, char  *filename, int  flags)
+static class buffer *LocalGetBufferOnFile(class frame  *self, const char  *filename, int  flags)
 {
     class buffer *buffer;
     int localerrno;
@@ -1349,7 +1350,7 @@ int frame_VisitFilePrompting(class frame  *self, char  *prompt, boolean  newWind
     return frame_VisitNamedFile(self, filename, newWindow, rawMode);
 }
 
-int frame_VisitNamedFile(class frame  *self, char  *filename, boolean  newWindow, boolean  rawMode)
+int frame_VisitNamedFile(class frame  *self, const char  *filename, boolean  newWindow, boolean  rawMode)
                 {
     class buffer *buffer;
     long flags = 0;
@@ -1672,7 +1673,8 @@ void frame_PreviewCmd(class frame  *self, char *usepsstr)
 
 void frame_SetPrinter(class frame  *self)
 {
-    char *currentPrinter, *defaultPrinter, answer[256], prompt[sizeof("Current printer is . Set printer to []: ") + 128];
+    const char *currentPrinter, *defaultPrinter;
+    char answer[256], prompt[sizeof("Current printer is . Set printer to []: ") + 128];
 
     currentPrinter = environ::GetPrinter();
     defaultPrinter = environ::GetProfile("print.printer");

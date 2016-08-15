@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/time.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/cmd/RCS/decodeid.c,v 1.13 1994/06/09 21:18:04 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/cmd/RCS/decodeid.c,v 1.13 1994/06/09 21:18:04 rr2b Stab74 $";
 #endif
 
 #include <stdio.h>
@@ -42,7 +44,6 @@ extern char *inet_ntoa();
 #include <arpa/inet.h>
 #endif /* hpux */
 #include <netdb.h>
-#include <andrewos.h> /* sys/time.h */
 
 main(argc, argv)
 int argc;

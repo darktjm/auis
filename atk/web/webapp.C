@@ -25,7 +25,7 @@
 ATK_IMPL("webapp.H")
 
 #ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/webapp.C,v 1.10 1996/11/07 02:00:24 robr Exp $";
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/webapp.C,v 1.10 1996/11/07 02:00:24 robr Exp $";
 #endif
 
 #include <frame.H>
@@ -274,7 +274,7 @@ initframe(class frame  *f,   class im  *im)  {
 
 webapp::webapp()  {
 	ATKinit;
-	char *t = environ::GetProfile("WebHome");
+	const char *t = environ::GetProfile("WebHome");
 	strcpy(homeURL,  (t) ? t : DEFAULTHOME);
 	gself = this;
 	THROWONFAILURE( TRUE);
@@ -291,9 +291,9 @@ webapp::InitializeClass()  {
 }
 
 	boolean 
-webapp::ParseArgs(int  argc,  char  **argv)  {
+webapp::ParseArgs(int  argc,  const char  **argv)  {
 	boolean res;
-	char **avx = argv;
+	const char **avx = argv;
 
 	// need to pass switches to ezapp & application  -wjh
 	while (*++avx){

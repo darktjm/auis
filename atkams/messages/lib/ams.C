@@ -25,14 +25,15 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/ams.C,v 1.11 1994/08/15 03:52:52 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/ams.C,v 1.11 1994/08/15 03:52:52 rr2b Stab74 $";
 #endif
 
 /* Until I come up with a better scheme, new functions here have to be added to SIX files -- ams.ch, amss.ch, amsn.ch (all identical specs) and the corresponding c files */ 
 
-#include <andrewos.h>
 #include <sys/param.h>
 #include <util.h>
 #include <ctype.h>
@@ -303,7 +304,7 @@ long ams::CUI_PrintBodyFromCUIDWithFlags(int  cuid , int  flags, char  *printer 
     return(0);
 }
 
-void ams::CUI_PrintUpdates(char  *dname , char  *nickname)
+void ams::CUI_PrintUpdates(const char  *dname , const char  *nickname)
 {
     ReportMissing("CUI_PrintUpdates");
 }
@@ -592,7 +593,7 @@ int ams::GetStringFromUser(char  *prompt , char  *buf, int  len , int  ispass)
     return(0);
 }
 
-int ams::TildeResolve(char  *in , char  *out)
+int ams::TildeResolve(const char  *in , char  *out)
 {
     ReportMissing("TildeResolve");
     return(0);
@@ -1191,11 +1192,12 @@ static void HandleInitProblem(long  rock, char  *err)
 
 static class init *ReadInitFile(char  *fakeprogname , char  *realprogname)
 {
-    char buffer[256], buffer1[256], *andrewDir, *sitename;
+    char buffer[256], buffer1[256];
+    const char *andrewDir, *sitename;
     class init *initp;
     boolean HadGlobalNameInit = FALSE;
     boolean siteinit = FALSE, sitegloinit = FALSE;
-    char *home;
+    const char *home;
     class init *oldinit=im::GetGlobalInit();
     
     if(!fakeprogname) return NULL;
@@ -1270,7 +1272,8 @@ class frame *ams::InstallInNewWindow(class view  *v, char  *programname , char  
 {
     class frame *myframe;
     class im *myim;
-    char geompref[500], *geomspec;
+    char geompref[500];
+    const char *geomspec;
     class init *init;
     char *realprogname, *pname=im::GetProgramName();
 

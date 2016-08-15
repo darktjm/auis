@@ -26,9 +26,11 @@
  *  $
 */
 
+#include <andrewos.h>	/* for bzero() bcmp() */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nsearch.C,v 1.10 1995/04/05 01:48:15 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nsearch.C,v 1.10 1995/04/05 01:48:15 rr2b Stab74 $";
 #endif
 
 /* 
@@ -144,7 +146,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objec
  * 
 */
 
-#include <andrewos.h>	/* for bzero() bcmp() */
 #include <ctype.h>
 #include <dataobject.H>
 #include <text.H>

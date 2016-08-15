@@ -25,22 +25,22 @@
  *  $
 */
 
+#include <andrewos.h>		/* sys/time.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/nicetime.c,v 2.12 1992/12/15 21:10:10 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/nicetime.c,v 2.12 1992/12/15 21:10:10 rr2b Stab74 $";
 #endif
 
 
  
-
+#include <util.h>
 #include <stdio.h>
-#include <andrewos.h>		/* sys/time.h */
 
-char *NiceTime(Time)
-long int Time;
+const char *NiceTime(long int Time)
 {/* Like ctime, but do a more attractive job and don't end with a newline. */
     static char Res[50];
-    static char *Mon[] = {	"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    static const char * const Mon[] = {	"Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     struct tm *This;
 

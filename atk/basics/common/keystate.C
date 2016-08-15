@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/keystate.C,v 3.10 1996/05/17 23:29:44 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/keystate.C,v 3.10 1996/05/17 23:29:44 robr Exp $";
 #endif
 
 
@@ -37,7 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/com
 December, 1986 */
 
 
-#include <andrewos.h>
 ATK_IMPL("keystate.H")
 #include <proctable.H>
 #include <keymap.H>

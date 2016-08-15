@@ -140,11 +140,11 @@ static void AddDir(const char *path)
 }
 
 static void AddAllPackages() {
-    char *path=getenv("AUISPACKAGESPATH");
+    const char *path=getenv("AUISPACKAGESPATH");
     if(path==NULL) path=AndrewDir("/lib/packages");
 
     char buf[MAXPATHLEN+1];
-    char *p=path, *q=p;
+    const char *p=path, *q=p;
 
     while(q) {
 	q=strchr(p, PATHSEP);

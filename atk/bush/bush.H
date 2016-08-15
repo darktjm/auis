@@ -111,7 +111,7 @@ public:
 
   bush();
   virtual ~bush();
-	static class bush * Create(char *init_dir)  ;
+	static class bush * Create(const char *init_dir)  ;
 
     
 

@@ -354,7 +354,7 @@ eosapp::eosapp()
 }
 
 
-boolean eosapp::ParseArgs(int  argc, char  **argv)
+boolean eosapp::ParseArgs(int  argc, const char  **argv)
 {
     boolean waiting_for_course  = FALSE;
     char *t; /* temporary string */

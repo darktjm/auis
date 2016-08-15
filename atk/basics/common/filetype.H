@@ -55,10 +55,10 @@ class filetype : public ATK {
      *    the next call to this routine. If this can't be guaranteed, the
      *    programmer must copy the attributes list.
      */
-    static char *Lookup(FILE *file, char *filename, /* OUT parameter */ long *objectID,
+    static char *Lookup(FILE *file, const char *filename, /* OUT parameter */ long *objectID,
 			/* OUT parameter */ struct attributes **attributes);
 
-    static void CanonicalizeFilename(char *canonicalName, char *name, int maxSize);
+    static void CanonicalizeFilename(char *canonicalName, const char *name, int maxSize);
 };
 
 #endif /* _filetype_H_ */

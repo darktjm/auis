@@ -34,7 +34,7 @@ ATK_INTER
 
 struct runadewapp_fileList {
     struct runadewapp_fileList *next;
-    char *filename;
+    const char *filename;
     boolean newWindow;
     boolean readOnly;
 };
@@ -45,14 +45,14 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
     
-	 boolean ParseArgs(int argc, char **argv)  ;
+	 boolean ParseArgs(int argc, const char **argv)  ;
 	 boolean Start()  ;
     
         runadewapp();
 	
 	static boolean InitializeClass();
 
-        static char ** GetArguments(int *argc)  ;
+        static const char ** GetArguments(int *argc)  ;
     
         struct runadewapp_fileList *files,**fileLink;
         boolean initFile;
@@ -60,8 +60,8 @@ public:
         class im *im;
         class frame *framep;
         class buffer *buffer;
-	char *title, *cls,*func;
-	char *objectname;
+	const char *title, *cls,*func;
+	const char *objectname;
 	};
 
 #endif /* _runadewapp_H_ */

@@ -25,12 +25,12 @@
  *  $
 */
 
+#include  <cons.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/cons.c,v 2.7 1992/12/15 21:01:25 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/cons.c,v 2.7 1992/12/15 21:01:25 rr2b Stab74 $";
 #endif
-
-#include  <cons.h>
 
 /*
  * Returns the first cons cell in the free area.  If one does not exist, a

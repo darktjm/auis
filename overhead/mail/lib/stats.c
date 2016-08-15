@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/time.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/stats.c,v 2.23 1994/06/09 18:17:42 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/stats.c,v 2.23 1994/06/09 18:17:42 rr2b Stab74 $";
 #endif
 
 /*
@@ -40,7 +42,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/
 #endif
 #endif
 
-#include <andrewos.h> /* sys/types.h sys/time.h */
 #include <stdio.h>
 #include <errno.h>
 #include <netdb.h>

@@ -22,16 +22,17 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/headrtv.C,v 1.14 1995/11/07 20:17:10 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/headrtv.C,v 1.14 1995/11/07 20:17:10 robr Stab74 $";
 #endif
 
 /*         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
 
-#include <andrewos.h>
 ATK_IMPL("headrtv.H")
 #include <text.H>
 #include <textview.H>
@@ -62,7 +63,7 @@ ATK_IMPL("headrtv.H")
 #define BASEYEAR 1900
 
 static class keymap *newKeymap;
-static char **hvars=NULL;
+static const char **hvars=NULL;
 static int hvarcount=0;
 
 typedef char *strings[3];
@@ -294,15 +295,16 @@ static int findincommalist(char  *list,char  *sn)
 #define DEFAULTHEADERVARS 2
 static void InstallHeaderVariables()
 {
-    char *headervars, *p;
+    const char *headervars, *q;
+    char *p;
     int count=0,i;
 
     headervars = environ::GetProfile("headervars");
     if (headervars) {
-	p=headervars;
-	while(p && *p) {
+	q=headervars;
+	while(q && *q) {
 	    count++;
-	    p=strchr(p+1,',');
+	    q=strchr(q+1,',');
 	}
 	if(DEFAULTHEADERVARS+count>9) {
 	    fprintf(stderr,"Warning too many header variables maximum allowable is 10.\n");
@@ -311,13 +313,13 @@ static void InstallHeaderVariables()
 
 	p=(char *)malloc(strlen(headervars)+1);
 	if(!p) return;
-	strcpy(p,headervars);
+	strcpy((char *)p,headervars);
     } else {
 	p = (char *)malloc(1);
 	if (!p) return;
 	p[0] = '\0';
     }
-    hvars=(char **)malloc(sizeof(char *)*(DEFAULTHEADERVARS+count));
+    hvars=(const char **)malloc(sizeof(char *)*(DEFAULTHEADERVARS+count));
     if(!hvars) return;
     hvars[0]="chapter";
     hvars[1]="section";

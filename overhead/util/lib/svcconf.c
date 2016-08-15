@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>		/* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/svcconf.c,v 2.21 1995/03/18 17:30:59 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/svcconf.c,v 2.21 1995/03/18 17:30:59 rr2b Stab74 $";
 #endif
 
 /* ************************************************************ *\
@@ -41,7 +43,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 #include <andyenv.h>
 #include <stdio.h>
 #include <sys/param.h>
-#include <andrewos.h>		/* sys/file.h */
 #include <errno.h>
 #include <ctype.h>
 
@@ -50,12 +51,12 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
 
 
 /* The name of a file guaranteed to be in AFS */
-char *ViceFile = "*";
+const char *ViceFile = "*";
 
 /* Name of this domain and its length in characters */
-static char DefaultThisDomain[] = "^";
+static const char DefaultThisDomain[] = "^";
 
-char *ThisDomain = DefaultThisDomain;
+const char *ThisDomain = DefaultThisDomain;
 int ThisDomainLen = sizeof(DefaultThisDomain)-1;   /* Don't include '\0' */
 
 /* A run-time Boolean to tell us if we're not on Vice */
@@ -105,16 +106,16 @@ int AMS_ThisDomainAuthFromWS = 1;
 
 /* Cell features.  The conventional prefix and suffixes for the cell name to arrive at its common directory and that directory's contents. */
 /* The ``CellCommon...'' values are established conventionally, and should not be changed. */
-char *CellCommonPrefix = "/afs/";	/* ``Andrew File System'' */
-char *CellCommonRWSuffix = ".";	/* read-write mount point affix */
-char *CellCommonSuffix = "/service/";
-char *CellCommonWPDirSuffix = "wp";	/* /afs/CELLNAME/service/wp is the directory for reading; /afs/CELLNAME/rw/service/wp is the directory for writing. */
+const char *CellCommonPrefix = "/afs/";	/* ``Andrew File System'' */
+const char *CellCommonRWSuffix = ".";	/* read-write mount point affix */
+const char *CellCommonSuffix = "/service/";
+const char *CellCommonWPDirSuffix = "wp";	/* /afs/CELLNAME/service/wp is the directory for reading; /afs/CELLNAME/rw/service/wp is the directory for writing. */
 
-char *WorkstationCell = "*";	/* Fill these in at run-time. */
-char *WorkstationName = "*";
+const char *WorkstationCell = "*";	/* Fill these in at run-time. */
+const char *WorkstationName = "*";
 
-static struct ConfigStrings {
-    char *ConfigKey, **ConfigParm;
+static const struct ConfigStrings {
+    const char *ConfigKey, **ConfigParm;
 } ConfigStrings[] = {
     {"ThisDomain", &ThisDomain},
     {"WorkstationCell", &WorkstationCell},
@@ -126,8 +127,8 @@ static struct ConfigStrings {
     {NULL, NULL}
 };
 
-static struct ConfigBooleans {
-    char *ConfigKey;
+static const struct ConfigBooleans {
+    const char *ConfigKey;
     int *ConfigParm;
     int ReverseSense; /* Mostly for compatibility; reverses sense of boolean */
 } ConfigBooleans[] = {
@@ -143,8 +144,10 @@ static struct ConfigBooleans {
 
 
 int CheckServiceConfiguration() {
-    int i, val, ConfigErrno, LMSEwasSet, ThisDomainwasSet;
-    auto char Scratch[MAXPATHLEN], Scr2[MAXPATHLEN], *s;
+    int i, val, LMSEwasSet, ThisDomainwasSet;
+    int UNUSED ConfigErrno;
+    auto char Scratch[MAXPATHLEN], Scr2[MAXPATHLEN];
+    const char *s;
     static int AlreadyChecked = 0;
 
     if (AlreadyChecked) return 0;
@@ -227,7 +230,7 @@ int CheckServiceConfiguration() {
 	GetHostDomainName(Scratch, sizeof(Scratch));
 	s = malloc(1+strlen(Scratch));
 	if (!s) return(-1);
-	strcpy(s, Scratch);
+	strcpy((char *)s, Scratch);
 	WorkstationName = s;
     }
 /* Begin a collection of ``special hacks'' designed to discover pieces of the envrment. */
@@ -243,7 +246,7 @@ int CheckServiceConfiguration() {
 	else if (Scr2[0] != '\0') {
 	    s = malloc(1+strlen(Scr2));
 	    if (!s) return -1;
-	    strcpy(s, Scr2);
+	    strcpy((char *)s, Scr2);
 	    WorkstationCell = s;
 	}
     }

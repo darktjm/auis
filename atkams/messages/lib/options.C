@@ -25,15 +25,16 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/options.C,v 1.5 1994/08/11 03:05:07 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/options.C,v 1.5 1994/08/11 03:05:07 rr2b Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h>
 #include <textview.H>
 #include <stdio.h>
 #include <errprntf.h>
@@ -233,7 +234,8 @@ void IntegerHit(ATK * self, class value  *val, long  which , long  hisrock)
    
 void ButtonHit(ATK * self, class value  *val, long  which , long  hisrock)
 {
-    char Msg[1000], AnsBuf[5000], *pref, *defaultans = "bogus", *prompt = "bogus";
+    char Msg[1000], AnsBuf[5000], *pref, *prompt = "bogus";
+    const char *defaultans = "bogus";
     int parm, numans;
 
     if (hisrock == value_OBJECTDESTROYED) return;

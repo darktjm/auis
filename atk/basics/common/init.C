@@ -25,9 +25,11 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/init.C,v 3.13 1995/11/29 17:45:30 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/init.C,v 3.13 1995/11/29 17:45:30 robr Stab74 $";
 #endif
 
 
@@ -37,7 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/com
  * Read a user's init file to bind keys and menus.
   */
 
-#include <andrewos.h> /* sys/file.h */
 ATK_IMPL("init.H")
 #include <sys/file.h> /* MRT */
 
@@ -108,7 +109,7 @@ static struct keystateList *freeKeystates = NULL;
 static struct mlList *freeMenulists = NULL;
 
 /* Next three used for error handling. */
-static char *currentFile;
+static const char *currentFile;
 static int currentLine = 0;
 static init_fptr currentErrorProc = NULL;
 static long currentErrorRock;
@@ -131,8 +132,8 @@ static int TranslateKeySequence(char  *from, char  *to);
 static int parseBackslashed(char  **fromChars);
 static struct keys *GetKeyFromKeystate(class init  *self, class keystate  *keystate);
 static ATK  *CheckML(class menulist  *menulist, char  *class_c, boolean  inherit);
-static char *MapFile(char  *filename, long  *fileLength );
-static int ReadFile(class init  *init, char  *filename, boolean  executeImmediately);
+static char *MapFile(const char  *filename, long  *fileLength );
+static int ReadFile(class init  *init, const char  *filename, boolean  executeImmediately);
 static void ErrorMsg(char  *msg, ...);
 
 
@@ -561,7 +562,7 @@ static int IfSys (char  **args)
 static void Include(class init  *init, char  **args, boolean  forceLoad)
 {
     char fullName[MAXPATHLEN], tmpFullName[MAXPATHLEN];
-    char *file = GetToken(args);
+    const char *file = GetToken(args);
 
     /* Expand environment variables first */
     environ::ExpandEnvVars(tmpFullName, file, MAXPATHLEN);
@@ -572,7 +573,7 @@ static void Include(class init  *init, char  **args, boolean  forceLoad)
 #endif
 	) {
 	char *tmpfname = NewString(tmpFullName);
-	char *initfilepath = environ::GetConfiguration("InitFilePath");
+	const char *initfilepath = environ::GetConfiguration("InitFilePath");
 	if (initfilepath != NULL) {
 	    path::FindFileInPath(tmpFullName, initfilepath, tmpfname);
 	    if (tmpFullName == NULL || tmpFullName[0] == '\0')
@@ -891,7 +892,7 @@ class init *init::Duplicate()
 #define INITIALSIZE 512
 
 /* Hacked routine to rea a "whole file" into memory. */
-static char *MapFile(char  *filename, long  *fileLength /* OUT */)
+static char *MapFile(const char  *filename, long  *fileLength /* OUT */)
         {
 
     int fd;
@@ -947,7 +948,7 @@ static char *MapFile(char  *filename, long  *fileLength /* OUT */)
 
 #define UnmapFile(mappedMemory) free(mappedMemory)
 
-static int ReadFile(class init  *init, char  *filename, boolean  executeImmediately)
+static int ReadFile(class init  *init, const char  *filename, boolean  executeImmediately)
 {
 
     char *buffer;
@@ -961,7 +962,7 @@ static int ReadFile(class init  *init, char  *filename, boolean  executeImmediat
     if ((buffer = MapFile(filename, &length)) != NULL) {
 
         char *token, *p;
-        char *prevFile = currentFile;
+        const char *prevFile = currentFile;
         int prevLine = currentLine;
   
           currentFile = filename;

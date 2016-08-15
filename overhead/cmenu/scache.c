@@ -25,16 +25,18 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/cmenu/RCS/scache.c,v 1.8 1996/08/07 22:15:13 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/cmenu/RCS/scache.c,v 1.8 1996/08/07 22:15:13 robr Exp $";
 #endif
 
 
-/* This file (scache.c) and scache.h will implement a string cacheing mechanism so that even if menus are leaked they won't represent much of a drain... */
-
 #include <stdio.h>
 #include "scache.h"
+
+/* This file (scache.c) and scache.h will implement a string cacheing mechanism so that even if menus are leaked they won't represent much of a drain... */
 
 static struct scache_node scache[256];
 
@@ -47,8 +49,8 @@ void scache_Init()
     memset(scache,0, sizeof(scache));
 }
 
-char *scache_Hold(str)
-char *str;
+const char *scache_Hold(str)
+const char *str;
 {
     unsigned long len;
     unsigned long hash;
@@ -102,7 +104,7 @@ char *str;
 }
 
 void scache_Free(str)
-char *str;
+const char *str;
 {
     scache_REFCOUNT(str)--;
 }

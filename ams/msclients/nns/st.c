@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/msclients/nns/RCS/st.c,v 2.6 1992/12/15 21:22:34 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/msclients/nns/RCS/st.c,v 2.6 1992/12/15 21:22:34 rr2b Stab74 $";
 #endif
 
 /* Methods for the String Table data type for the Netnews Snarfer

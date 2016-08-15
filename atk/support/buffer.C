@@ -23,9 +23,11 @@
 //  $
 */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/buffer.C,v 3.9 1995/11/08 21:41:07 robr Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/buffer.C,v 3.9 1995/11/08 21:41:07 robr Stab74 $";
 #endif
 
 /* ********************************************************************** *\
@@ -50,7 +52,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RC
   site.h file.
 */
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("buffer.H")
 #include <andyenv.h>
 #include <errno.h>
@@ -188,7 +189,7 @@ buffer::~buffer()
 }
 
 /* Changed bufferlist */
-class buffer *buffer::Create(char  *bufferName , char  *filename , char  *objectName, class dataobject  *data)
+class buffer *buffer::Create(const char  *bufferName , const char  *filename , const char  *objectName, class dataobject  *data)
             {
 	ATKinit;
 
@@ -280,7 +281,7 @@ void buffer::SetData(class dataobject  *bufferData)
     (this)->NotifyObservers( 0);
 }
 
-void buffer::SetName(char  *bufferName)
+void buffer::SetName(const char  *bufferName)
         {
     if (this->bufferName != NULL)
         free(this->bufferName);
@@ -289,7 +290,7 @@ void buffer::SetName(char  *bufferName)
     (this)->NotifyObservers( 0);
 }
 
-void buffer::SetFilename(char  *filename)
+void buffer::SetFilename(const char  *filename)
         {
 
     char realName[MAXPATHLEN];
@@ -371,7 +372,7 @@ class view *buffer::EnumerateViews(buffer_evfptr  mapFunction, long  functionDat
 }
 
 /* Changed bufferlist */
-class buffer *buffer::FindBufferByFile(char  *filename)
+class buffer *buffer::FindBufferByFile(const char  *filename)
         {
 	ATKinit;
 
@@ -388,7 +389,7 @@ class buffer *buffer::FindBufferByData(class dataobject  *bufferData)
 
 /* Changed Bufferlist */
 
-class buffer *buffer::FindBufferByName(char  *bufferName)
+class buffer *buffer::FindBufferByName(const char  *bufferName)
         {
 	ATKinit;
 
@@ -402,7 +403,7 @@ class buffer *buffer::FindBufferByName(char  *bufferName)
  * if this call fails.
  */
 
-int buffer::ReadFile(char  *filename)
+int buffer::ReadFile(const char  *filename)
         {
     long objectID;
     int returnCode = 0;
@@ -461,7 +462,7 @@ int buffer::ReadFile(char  *filename)
 
 /* Changed bufferlist */
 
-class buffer *buffer::GetBufferOnFile(char  *filename, long  flags)
+class buffer *buffer::GetBufferOnFile(const char  *filename, long  flags)
 {
 	ATKinit;
 
@@ -828,7 +829,7 @@ long buffer::GetFileDate()
 
 boolean buffer::InitializeClass()
     {
-    char *s;
+    const char *s;
 
     if ((s = environ::GetProfile("BackupExtension")) != NULL) {
         backupExtension = (char *)malloc(strlen(s) + 1);
@@ -854,7 +855,7 @@ boolean buffer::InitializeClass()
 
 /* Changed BufferList */
 
-void buffer::SetDefaultObject(char  *objectname)
+void buffer::SetDefaultObject(const char  *objectname)
 {
 	ATKinit;
 

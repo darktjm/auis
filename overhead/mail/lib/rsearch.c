@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h> /* strings.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/rsearch.c,v 2.14 1993/06/02 15:28:09 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/rsearch.c,v 2.14 1993/06/02 15:28:09 rr2b Stab74 $";
 #endif
 
 /* cptres_search: search for a domain given a query type.
@@ -38,7 +40,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/
  * search for MX records for a domain name.
  */
 
-#include <andrewos.h> /* strings.h */
 #include <stdio.h>
 #ifdef RESOLVER_ENV
 #include <sys/param.h>

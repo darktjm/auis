@@ -56,14 +56,14 @@ public:
         virtual void SetCommandEnable(boolean enable);
         virtual class buffer * GetHelpBuffer()  ;
         virtual class buffer * SetHelpBuffer(class buffer *buf, boolean setInputFocus)  ;
-        virtual void SetTitle(char *title);
+        virtual void SetTitle(const char *title);
 	virtual void Advice(enum message_Preference pp);
-        virtual int DisplayString(int priority, char *string)  ;
-        virtual int AskForString(int priority, char *prompt, char *defaultString, char *buffer, int bufferSize)  ;
-        virtual int AskForPasswd(int priority, char *prompt, char *defaultString, char *buffer, int bufferSize)  ;
-        virtual int AskForStringCompleted(int priority, char *prompt, char *defaultString, char *buffer, int bufferSize, class keystate *keystate,
+        virtual int DisplayString(int priority, const char *string)  ;
+        virtual int AskForString(int priority, const char *prompt, const char *defaultString, char *buffer, int bufferSize)  ;
+        virtual int AskForPasswd(int priority, const char *prompt, const char *defaultString, char *buffer, int bufferSize)  ;
+        virtual int AskForStringCompleted(int priority, const char *prompt, const char *defaultString, char *buffer, int bufferSize, class keystate *keystate,
 					  message_completionfptr completionProc, message_helpfptr helpProc, long functionData, int flags)  ;
-	virtual int MultipleChoiceQuestion(int priority, char *prompt, long defaultChoice, long *result, char **choices, char *abbrevKeys)  ;
+	virtual int MultipleChoiceQuestion(int priority, const char *prompt, long defaultChoice, long *result, const char * const *choices, const char *abbrevKeys)  ;
 	virtual void RemoveHelp();
 	virtual void SetReturnFocus(class view *req);
 	virtual void ReturnFocus();
@@ -73,7 +73,7 @@ public:
         inline class view * GetChildView() { return ((this)->childView); }
         inline class buffer * GetBuffer() { return ((this)->buffer); }
         inline boolean GetCommandEnable() { return ((this)->commandEnable); }
-        inline char * GetTitle() { return ((this)->title); }
+        inline const char * GetTitle() { return ((this)->title); }
         inline boolean GetQuitWindowFlag() { return ((this)->QuitWindowOnly); }
         inline void SetQuitWindowFlag(boolean VAL) { (((this)->QuitWindowOnly) = VAL); }
 
@@ -106,7 +106,7 @@ public:
 	boolean RecSrchResume(struct SearchPattern *pat);
 	boolean RecSrchReplace(class dataobject *text, long pos, long len);
 
-	virtual int VisitNamedFile(char  *filename, 
+	virtual int VisitNamedFile(const char  *filename, 
 			boolean  newWindow, boolean  rawMode);
 
 	class frame *next;
@@ -133,7 +133,7 @@ public:
 	class menulist *mymenus;
 	class keystate *mykeystate;
 	enum message_Preference PositionalPreference;
-	char **MultipleAnswers;
+	const char **MultipleAnswers;
 	struct rectangle AnswerBox;
 	struct rectangle *HeightsOfAnswer;
 	struct rectangle mesrec,bufferrec;

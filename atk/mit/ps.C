@@ -25,14 +25,15 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/ps.C,v 1.3 1994/08/11 03:02:58 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/ps.C,v 1.3 1994/08/11 03:02:58 rr2b Stab74 $";
 #endif
 
 
 
-#include <andrewos.h>
 #include "dataobject.H"
 #include "dictionary.H"
 #include "ps.H"
@@ -143,7 +144,7 @@ ps::Write(FILE  *file, long  writeID, int  level)
 {   
     int  haschild = 0;
     long w, h, pw, ph;
-    char * title = (this)->GetTitle();
+    const char * title = (this)->GetTitle();
     class dataobject *childob = (this)->GetChild();
 
     if ((this)->GetWriteID() != writeID)  {

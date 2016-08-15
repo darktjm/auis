@@ -20,9 +20,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/spread.C,v 1.32 1996/11/08 20:34:09 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/spread.C,v 1.32 1996/11/08 20:34:09 wjh Exp $";
 #endif
 
 /* ********************************************************************** *\
@@ -31,7 +33,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/
  \* ********************************************************************** */
 
 
-#include <andrewos.h>
 ATK_IMPL("spread.H")
 #include <view.H>
 #include <im.H>
@@ -155,7 +156,7 @@ spread::spread()
 void InitializeGraphic(class spread  *V)
 {
     class fontdesc *tempFont;
-    char *wfontname = NULL;
+    const char *wfontname = NULL;
     struct FontSummary *fs;
 
     if (debug)

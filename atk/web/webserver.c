@@ -23,11 +23,11 @@
  *  $
  */
 
-#ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/webserver.c,v 1.3 1996/06/25 15:53:05 robr Exp $";
-#endif
-
 #include <andrewos.h>
+
+#ifndef NORCSID
+static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/webserver.c,v 1.3 1996/06/25 15:53:05 robr Exp $";
+#endif
 
 #include <sys/types.h>
 #include <sys/socket.h>

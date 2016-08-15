@@ -15,7 +15,7 @@ void SubscriptionChangeHook(char  *name , char  *nick, int  status, class messag
 void DirectoryChangeHook(char  *adddir , char  *deldir, class messages  *mess);
 void SetProgramVersion();
 void WriteOutUserEnvironment(FILE  *fp, Boolean  IsAboutMessages);
-int TildeResolve(char  *old , char  *new_c);
+int TildeResolve(const char  *old , char  *new_c);
 void ReportError(char  *text, int  level, int  Decode);
 void RealReportError(char  *text, int  level, int  Decode);
 void ReportFailure(char  *text , char  *moretext, int  fmask);

@@ -25,16 +25,17 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/rmvdir.c,v 2.15 1993/06/15 03:56:02 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/rmvdir.c,v 2.15 1993/06/15 03:56:02 rr2b Stab74 $";
 #endif
 
-#include <andrewos.h>
 #include <sys/stat.h>
 #include <ms.h>
 
-extern char *getprofile(), *StripWhiteEnds();
+extern char *StripWhiteEnds();
 
 long    MS_RemoveDirectory (DirName, MaxRemovals)
 char   *DirName;

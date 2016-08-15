@@ -25,15 +25,16 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/mentertext.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/mentertext.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 
  
 
-#include <andrewos.h>
 ATK_IMPL("mentertext.H")
 
 #include <stylesheet.H>
@@ -170,7 +171,7 @@ void mentertext::SetChars(char  *str,int  len)
     (this)->NotifyObservers(0);
 }
 
-boolean mentertext::InsertCharacters(long  pos, char  *str, long  len  )
+boolean mentertext::InsertCharacters(long  pos, const char  *str, long  len  )
 {
     if(Enclosed(this,pos)){
 /*

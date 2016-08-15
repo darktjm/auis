@@ -22,9 +22,11 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/panner.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/panner.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
 #endif
 
 /*
@@ -51,7 +53,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportvie
 */
 
 
-#include <andrewos.h>
 ATK_IMPL("panner.H")
 #include <panner.H>
 #include <view.H>

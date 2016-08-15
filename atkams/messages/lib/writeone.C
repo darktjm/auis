@@ -42,15 +42,16 @@ SOFTWARE.
  *  $
 */
 
+#include <andrewos.h>                  /* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/writeone.C,v 1.4 1993/06/26 16:03:28 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/writeone.C,v 1.4 1993/06/26 16:03:28 rr2b Stab74 $";
 #endif
 
 
                                  
 
-#include <andrewos.h>                  /* sys/file.h */
 #include <stdio.h>
 #include <amsutil.H>
 #include <sys/param.h>

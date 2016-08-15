@@ -46,16 +46,16 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
     
-         int DisplayString(int priority, char *string)  ;
-         int AskForString(int priority, char *prompt, char *defaultString, char *buffer, int bufferSize)  ;
-         int AskForPasswd(int priority, char *prompt, char *defaultString, char *buffer, int bufferSize)  ;
-         int AskForStringCompleted(int priority, char *prompt, char *defaultString, char *buffer, int bufferSize, class keystate *keystatep,
+         int DisplayString(int priority, const char *string)  ;
+         int AskForString(int priority, const char *prompt, const char *defaultString, char *buffer, int bufferSize)  ;
+         int AskForPasswd(int priority, const char *prompt, const char *defaultString, char *buffer, int bufferSize)  ;
+         int AskForStringCompleted(int priority, const char *prompt, const char *defaultString, char *buffer, int bufferSize, class keystate *keystatep,
 					  message_completionfptr completionProc, message_helpfptr helpProc, long functionData, int flags)  ;
-         int MultipleChoiceQuestion(int priority, char *prompt, long defaultChoice, long *result, char **choices, char *abbrevKeys)  ;
+         int MultipleChoiceQuestion(int priority, const char *prompt, long defaultChoice, long *result, const char * const *choices, const char *abbrevKeys)  ;
          void CancelQuestion();
 /* These next calls are only applicable during an AskFor... operation. */
          int GetCurrentString(char *buffer, int bufferSize)  ;
-         int InsertCharacters(int pos, char *string, int len)  ;
+         int InsertCharacters(int pos, const char *string, int len)  ;
          int DeleteCharacters(int pos, int len)  ;
          int GetCursorPos()  ;
          int SetCursorPos(int pos)  ;

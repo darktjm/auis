@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h>	/* strings.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/lineprom.c,v 2.7 1992/12/15 21:10:10 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/lineprom.c,v 2.7 1992/12/15 21:10:10 rr2b Stab74 $";
 #endif
 
 /*
@@ -38,15 +40,13 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/
  
 
 #include <stdio.h>
-#include <andrewos.h>	/* strings.h */
 #include <ctype.h>
 #include <util.h>
 #ifndef NULL
 #define NULL 0
 #endif
 
-int BE2LinePromoteInit(refstate)
-struct LinePromState **refstate;
+int BE2LinePromoteInit(struct LinePromState **refstate)
 {/*		Returns < 0 for (malloc) failure, 0 for OK.  Initializes *refstate
 		to point to malloc'ed storage that will hold the LinePromote state.
 */
@@ -62,8 +62,7 @@ struct LinePromState **refstate;
     return 0;
 }
 
-int BE2LinePromote(line, state)
-char *line; struct LinePromState *state;
+int BE2LinePromote(const char *line, struct LinePromState *state)
 {/*		*Works only on BE2 Datastream messages*
 		Returns 2 if this line (including the newline) should be
 		``promoted'' from the beginning of a message to the
@@ -73,7 +72,7 @@ char *line; struct LinePromState *state;
 		tail end of the encapsulated message.  Returns < 0
 		on errors.
 */
-    int LLen; char *CP;
+    int LLen; const char *CP;
 
     if (state->Promoting == 1) return 1;
     if (state->Promoting == 0) {

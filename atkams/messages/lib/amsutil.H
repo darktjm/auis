@@ -140,9 +140,10 @@ public:
       static void SetOptMaskBit(int opt, int val);
       static void BreakDownContentTypeField(char *override, char *fmttype, int fmttypelen, char *fmtvers, int fmtverslen, char *fmtresources, int fmtresourceslen);
       static char ** BreakDownResourcesIntoArray(char *fmtresources)  ;
-      static int lc2strncmp(char *s1, char *s2, int len)  ;
+      static int lc2strncmp(const char *s1, const char *s2, int len)  ;
       /* The above were what was needed for ezprinting (used by text822) */
       static char * StripWhiteEnds(char *s)  ;
+      static const char *StripWhiteEnds(const char *s, int *rlen);
       static char * cvEng(int num, int min, int max)  ;
       static char * convlongto64(long t, long pad)  ;
       static long conv64tolong(char *s64)  ;
@@ -156,7 +157,7 @@ public:
       static int debug_vfclose(FILE *fp)  ;
       static void fdplumber_SpillGutsToFile(FILE *fp, boolean doublenewlines);
       static void fdplumber_SpillGuts();
-      static char * GetDefaultFontName()  ;
+      static const char * GetDefaultFontName()  ;
       static int ChooseNewStatus(char *nickname, int GivenDefault, boolean ShowAllChoices)  ;
 };
 

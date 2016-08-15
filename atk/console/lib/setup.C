@@ -25,9 +25,11 @@
  *  $
 */
 
+#include <andrewos.h> /* sys/file.h */
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/setup.C,v 1.14 1996/09/03 19:08:27 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/setup.C,v 1.14 1996/09/03 19:08:27 robr Exp $";
 #endif
 
 
@@ -40,7 +42,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/li
  */
 
 
-#include <andrewos.h> /* sys/file.h */
 #include <consoleClass.H>
 #include <im.H>
 #include <view.H>
@@ -120,7 +121,7 @@ void ToggleDebugging (class consoleClass  *self, char  *rock);
 #else
 #endif
 static int LaccNameLookup(char  *string, char  **table);
-class fontdesc *SetupFont(char  *fontname);
+class fontdesc *SetupFont(const char  *fontname);
 static void CleanOldState(class consoleClass  *self);
 void KillInitExecProcesses(boolean  killPIDs);
 void SetConsoleLib();
@@ -547,7 +548,7 @@ static struct FuncStruct *FuncLookup(char  *string)
 }
 
 
-class fontdesc *SetupFont(char  *fontname)
+class fontdesc *SetupFont(const char  *fontname)
 {
     class fontdesc *font;
     char FontBuffer[50];
@@ -761,7 +762,7 @@ void KillInitExecProcesses(boolean  killPIDs)
 
 void SetConsoleLib()
 {
-    char *tmpbuf = NULL;
+    const char *tmpbuf = NULL;
     char *tmp = NULL;
     struct stat statBuf;
     mydbg(("Entering SetConsoleLib\n"));
@@ -1034,7 +1035,7 @@ boolean GetConsoleFileFromTypeIn(class consoleClass  *self, boolean  IsStartup)
 	SetStandardCursor(self, Cursor_Arrow);
 	PauseEnqueuedEvents = TRUE;
 	if (PromptFont == NULL) {
-	    char *s;
+	    const char *s;
 	    s = environ::GetProfile("bodyfont");
 	    if (!s || !*s) s = PromptFontName;
 	    PromptFont = SetupFont(s);
@@ -1555,7 +1556,7 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 	    case FLAG_PROMPTFONT:
 		strcpy(PromptFontName, GetNextToken(self, TRUE, pfd, &lineno, TRUE)); /* throwing this away now */
 		if (!IsStartup) {
-		    char *s;
+		    const char *s;
 		    s = environ::GetProfile("bodyfont");
 		    if (!s || !*s) s = PromptFontName;
 		    PromptFont = SetupFont(s);
@@ -1940,7 +1941,7 @@ void InitDisplay(class consoleClass  *self)
     PromptToWindow(self);
 
     if(PromptFont == NULL){
-	char *s;
+	const char *s;
 	s = environ::GetProfile("bodyfont");
 	if (!s || !*s) s = PromptFontName;
 	PromptFont = SetupFont(s);
@@ -1964,7 +1965,7 @@ void PostParseArgs(char  *name)
 	strcpy(ConFile, name);
     }
     else{
-	char *s;
+	const char *s;
 	s = environ::GetProfile("default");
 	if (!s || !*s) s = "Default";
 	strcpy(ConFile, s);

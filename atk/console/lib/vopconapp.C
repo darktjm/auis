@@ -79,7 +79,7 @@ vopconapp::~vopconapp( )
  */
 int ForceErrorMonitoring = FALSE;
 
-boolean vopconapp::ParseArgs(int  argc, char  **argv)
+boolean vopconapp::ParseArgs(int  argc, const char  **argv)
 {
     struct vopconapp  *self=this;
     if(!super_ParseArgs(self,argc,argv))

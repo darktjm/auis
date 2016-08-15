@@ -25,14 +25,15 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/view.C,v 3.30 1996/10/18 18:17:37 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/view.C,v 3.30 1996/10/18 18:17:37 wjh Exp $";
 #endif
 
 
 
-#include <andrewos.h>
 ATK_IMPL("view.H")
 
 #include <im.H>
@@ -425,7 +426,7 @@ void view::PostDefaultHandler(char  *handlerName, ATK   *handler)
 static void
 view_SetDefaultColors(class view  *self , class view  *parent)
   {
-    char *foregroundColor, *backgroundColor;
+    const char *foregroundColor, *backgroundColor;
     if ((self)->GetIM()) {
 	graphic::GetDefaultColors(&foregroundColor, &backgroundColor);
 	if (foregroundColor != NULL)
@@ -760,7 +761,7 @@ struct view_printoptlist *view::PrintOptions()
 /* remember, strings (and files) returned from this method are static and may be overwritten by the next call. */
 long view::GetPrintOption(class atom *popt)
 {
-    char *prname;
+    const char *prname;
     long value;
     short gotit;
     class dataobject *dobj = this->GetDataObject();

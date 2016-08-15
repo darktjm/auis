@@ -25,12 +25,13 @@
  *  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/txtvps.C,v 1.27 1996/05/23 14:01:56 robr Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/txtvps.C,v 1.27 1996/05/23 14:01:56 robr Exp $";
 #endif
 
-#include <andrewos.h>
 #include <ctype.h>
 #include <time.h>    
 
@@ -237,7 +238,7 @@ static void DefaultStyle(struct textps_style  *ts)
 
     {
 	long fontSize;
-	char *font = NULL;
+	const char *font = NULL;
 	long fontStyle;
 
 	if (environ::ProfileEntryExists("print.bodyfont", FALSE))

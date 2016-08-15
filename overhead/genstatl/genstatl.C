@@ -178,9 +178,9 @@ static int selectfile(DIRENT_TYPE *file)
 }
     
 
-static void AddLibDir(char *dir);
+static void AddLibDir(const char *dir);
 
-static int GetInfo(int argc, char **argv, boolean user)
+static int GetInfo(int argc, const char **argv, boolean user)
 {
     int i, j;
     char dbuf[MAXPATHLEN];
@@ -905,7 +905,7 @@ static void DumpLibs(FILE *ifp)
     }
 }
 
-static char *fakeargv[]={
+static const char *fakeargv[]={
     NULL,
     NULL
 };
@@ -938,14 +938,14 @@ static char *normalobjects[2]={
     NULL
 };
 
-static char **libdirs=NULL;
+static const char **libdirs=NULL;
 static int libdirsc=0;
 
-static void AddLibDir(char *dir) {
+static void AddLibDir(const char *dir) {
     libdirsc++;
     if(libdirs==NULL) {
-	libdirs=(char **)malloc(libdirsc*sizeof(char *));
-    } else libdirs=(char **)realloc(libdirs,libdirsc*sizeof(char *));
+	libdirs=(const char **)malloc(libdirsc*sizeof(char *));
+    } else libdirs=(const char **)realloc(libdirs,libdirsc*sizeof(char *));
     if(libdirs==NULL) {
 	fprintf(stderr, "Out of memory adding library directory.\n");
 	exit(-1);
@@ -959,7 +959,7 @@ static void MakeRunapp(FILE *ifp, char *odir, char **objects, int ocount, char *
 
     if(libdirs!=NULL) {
 	fprintf(ifp, "LOCAL_SHARED_LIB_PATH=\\\n");
-	char **p=libdirs;
+	const char **p=libdirs;
 	int i;
 	for(i=0;i<libdirsc;i++) {
 	    fprintf(ifp, "\tATK_SHARED_LIB_DIR(%s)%s\n", libdirs[i], i<libdirsc-1?" \\":"");
@@ -1037,7 +1037,7 @@ static void MakeLibrary(FILE *ifp, char *odir, char **objects, int ocount, char 
     
     if(libdirs!=NULL) {
 	fprintf(ifp, "LOCAL_SHARED_LIB_PATH=\\\n");
-	char **p=libdirs;
+	const char **p=libdirs;
 	int i;
 	for(i=0;i<libdirsc;i++) {
 	    fprintf(ifp, "\tATK_SHARED_LIB_DIR(%s)%s\n", libdirs[i], i<libdirsc-1?" \\":"");
@@ -1063,7 +1063,7 @@ static void MakeDynObj(FILE *ifp, char *odir, char **objects, int ocount, char *
     
     if(libdirs!=NULL) {
 	fprintf(ifp, "LOCAL_SHARED_LIB_PATH=\\\n");
-	char **p=libdirs;
+	const char **p=libdirs;
 	int i;
 	for(i=0;i<libdirsc;i++) {
 	    fprintf(ifp, "\tATK_SHARED_LIB_DIR(%s)%s\n", libdirs[i], i<libdirsc-1?" \\":"");
@@ -1237,7 +1237,7 @@ int main(int argc, char **argv)
 		    argv++;
 		    argc--;
 		    if(argc<=0) usage();
-		    args=GetInfo(argc, argv, TRUE);
+		    args=GetInfo(argc, (const char **)argv, TRUE);
 		    argc-=args;
 		    argv+=args;
 		    break;

@@ -25,12 +25,13 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/hyplink/RCS/pushbutton.C,v 1.5 1996/07/06 03:15:51 wjh Exp $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/hyplink/RCS/pushbutton.C,v 1.5 1996/07/06 03:15:51 wjh Exp $";
 #endif
 
-#include <andrewos.h>
 ATK_IMPL("pushbutton.H")
 #include <stdio.h>
 #include <sys/param.h>
@@ -97,25 +98,21 @@ pushbutton::pushbutton()
 
     this->style = environ::GetProfileInt("pushbuttonstyle", 2);
 
-    this->foreground_name = environ::GetProfile("foreground");
-    if(this->foreground_name) this->foreground_name=NewString(this->foreground_name);
-    if ((this->foreground_name == NULL) || (strcmp(this->foreground_name, "") == 0)) {
-	if (this->foreground_name != NULL) free(this->foreground_name);
+    const char *name = environ::GetProfile("foreground");
+    if ((name == NULL) || (strcmp(name, "") == 0)) {
 	this->foreground_name = NewString("black");
     } else {
-	this->foreground_name = NewString(this->foreground_name);
+	this->background_name = NewString(name);
     }
     this->foreground_color[0] = 0;
     this->foreground_color[1] = 0;
     this->foreground_color[2] = 0;
 
-    this->background_name = environ::GetProfile("background");
-    if(this->background_name) this->background_name=NewString(this->background_name);
-    if ((this->background_name == NULL) || (strcmp(this->background_name, "") == 0)) {
-	if (this->background_name != NULL) free(this->background_name);
+    name = environ::GetProfile("background");
+    if ((name == NULL) || (strcmp(name, "") == 0)) {
 	this->background_name = NewString("white");
     } else {
-	this->background_name = NewString(this->background_name);
+	this->background_name = NewString(name);
     }
     this->background_color[0] = 0;
     this->background_color[1] = 0;

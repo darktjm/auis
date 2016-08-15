@@ -1110,7 +1110,7 @@ long bdffont::Write(FILE  *file, long  id, int  level)
     return ((this)->GetID());
 } /* bdffont__Write */
 
-void bdffont::SetFontName(char  *fn)
+void bdffont::SetFontName(const char  *fn)
 {
     if (this->fontname) {
 	free(this->fontname);
@@ -1123,7 +1123,7 @@ void bdffont::SetFontName(char  *fn)
     }
 } /* bdffont__SetFontName */
 
-void bdffont::SetFontFamily(char  *fn)
+void bdffont::SetFontFamily(const char  *fn)
 {
     if (this->fontfamily) {
 	free(this->fontfamily);

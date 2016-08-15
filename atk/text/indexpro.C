@@ -25,13 +25,14 @@
 //  $
 */
 
+#include <andrewos.h>
+
 #ifndef NORCSID
 #define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/indexpro.C,v 3.5 1994/03/21 17:02:06 rr2b Stab74 $";
+static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/indexpro.C,v 3.5 1994/03/21 17:02:06 rr2b Stab74 $";
 #endif
 
 
-#include <andrewos.h>
 #define GAP 1
 #define BUFSIZE 5120
 #define NUMSIZE 512
