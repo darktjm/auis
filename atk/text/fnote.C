@@ -179,7 +179,7 @@ static boolean copy(class fnote  *self,class text  *text)
     if(tmptext){
 	len = (self->loc + (self->env)->GetLength() - 1 ) - self->ownloc;
 	if(donumber){
-	    sprintf(buf,"%d\t",self->notecount);
+	    sprintf(buf,"%ld\t",self->notecount);
 	    /* should probably superscript this number */
 	}
 	(tmptext)->InsertCharacters((tmptext)->GetLength(),buf,strlen(buf));

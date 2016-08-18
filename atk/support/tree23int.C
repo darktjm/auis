@@ -557,18 +557,18 @@ void tree23int::Dump(long  offset  )
 {
     register int i;
 
-    printf("%8x (%8x^): ",this,this->parent);
+    printf("%8p (%8p^): ",this,this->parent);
     if(this->leaf) {
-    	printf("(LEAF %x %x)\n",this->bump+offset, this->data);
+    	printf("(LEAF %lx %lx)\n",this->bump+offset, this->data);
 	return;
     }
-    printf("(INT (%d) %x)\n",this->nKids,this->bump+offset);
+    printf("(INT (%d) %lx)\n",this->nKids,this->bump+offset);
     i = 0;
     while (i<this->nKids)  {
 	(this->kid[i])->Dump(this->bump+offset);
 	i++;
     }
-    printf("End of %x\n",this);
+    printf("End of %p\n",this);
 }
 
 

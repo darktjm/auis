@@ -160,7 +160,7 @@ void InitializeGraphic(class spread  *V)
     struct FontSummary *fs;
 
     if (debug)
-	printf("InitializeGraphic(%x)\n", V);
+	printf("InitializeGraphic(%p)\n", V);
 
     if (!(V->GetDrawable())) {
 	printf("InitializeGraphic called without drawable.\n");
@@ -215,13 +215,13 @@ class view * spread_FindSubview (class spread  * V, register struct cell  * cell
 	    (vl->child)->LinkTree( vl->parent);
 	    (vl->child)->InsertViewSize(vl->parent, 0, 0, 0, 0);
 	    if (debug)
-		printf("FindSubview created %s at %x for %x\n", viewname, vl->child, vl->parent); 
+		printf("FindSubview created %s at %p for %p\n", viewname, vl->child, vl->parent); 
 	    vl->next = cell->interior.ImbeddedObject.views;
 	    cell->interior.ImbeddedObject.views = vl;
 	}
     }
     else if (debug)
-	printf("FindSubview< found %x for %x\n", vl->child, vl->parent);
+	printf("FindSubview< found %p for %p\n", vl->child, vl->parent);
     return vl->child;
 }
 
@@ -337,7 +337,7 @@ void ComputeRowSizes(register class spread  *V)
     class view *child;
 
     if (debug)
-	printf("ComputeRowSizes(%x) with standardHeight = %d\n", V, V->standardHeight);
+	printf("ComputeRowSizes(%p) with standardHeight = %ld\n", V, V->standardHeight);
 
     if (V->rowInfoCount != (T)->NumberOfRows() || V->rowInfo == NULL) {
 	if (V->rowInfo != NULL)
@@ -468,7 +468,7 @@ void spread::WantUpdate(class view  *requestor)
 {
 
     if (debug)
-	printf("spread__WantUpdate(%x,%x) requests = %d\n", this, requestor, updateRequests);
+	printf("spread__WantUpdate(%p,%p) requests = %d\n", this, requestor, updateRequests);
 
     if ((this != requestor || !(updateRequests++)) && parent != NULL)
 	(parent)->WantUpdate( requestor);
@@ -486,7 +486,7 @@ view_DSattributes spread::DesiredSize(long  width , long  height, enum view_DSpa
 
 
     if (debug)
-        printf("spread_DesiredSize(%x, %d, %d, %d, .. )\n", this, width, height, (int)pass);
+        printf("spread_DesiredSize(%p, %ld, %ld, %d, .. )\n", this, width, height, (int)pass);
 
     if (grayPix == NULL)
         InitializeGraphic(this);
@@ -511,7 +511,7 @@ void spread::WantNewSize(class view  *requestor)
     class table *T = MyTable(this);
 
     if (debug)
-	printf("spread_WantNewSize(%x, %x)\n", this, requestor);
+	printf("spread_WantNewSize(%p, %p)\n", this, requestor);
 
     (T)->StampEverything();
     sizescached=FALSE;
@@ -522,7 +522,7 @@ void spread::WantNewSize(class view  *requestor)
 void spread::Print(FILE  * f, char  *proc /* processor */, char  *format /* final format */, boolean  toplevel /* am I the top level view? */)
 {
     if (debug)
-	printf("spread_Print(%x, %x, %s, %s, %d)\n", this, f, proc, format, toplevel);
+	printf("spread_Print(%p, %p, %s, %s, %d)\n", this, f, proc, format, toplevel);
     putc('\n', f);
     WriteTroff(this, f, proc, format, toplevel);
 }
@@ -550,7 +550,7 @@ void spread::FullUpdate(enum view_UpdateType  how, long  left , long  top , long
 	spread_ComputeAnchorOffsets(this, NULL);
     }
     if (debug)
-	printf("spread_FullUpdate(%x, %d, %d, %d, %d, %d)\n", this, (int)how, left, top, width, height);
+	printf("spread_FullUpdate(%p, %d, %ld, %ld, %ld, %ld)\n", this, (int)how, left, top, width, height);
     if (how == view_PartialRedraw || how == view_LastPartialRedraw)
 	rectangle_SetRectSize(&cliprect, left, top, width, height);
     else
@@ -564,7 +564,7 @@ void spread::Update()
 {
     struct rectangle cliprect;
     if (debug)
-	printf("spread_Update(%x)\n", this);
+	printf("spread_Update(%p)\n", this);
     rectangle_SetRectSize(&cliprect, GetVisualLeft(), GetVisualTop(), GetVisualWidth(), GetVisualHeight());
     spread_PartialUpdate(this, view_FullRedraw, &cliprect);
 }
@@ -576,7 +576,7 @@ void spread::Update()
 class view * spread::Hit(enum view_MouseAction  action, long  x , long  y, long  numberOfClicks)
 {
     if (debug)
-	printf("spread_Hit(%x, %d, %ld, %ld, %ld)\n", this, (int) action, x, y, numberOfClicks);
+	printf("spread_Hit(%p, %d, %ld, %ld, %ld)\n", this, (int) action, x, y, numberOfClicks);
     return MouseHit(this, action, x, y, numberOfClicks);
 }
 
@@ -585,7 +585,7 @@ class view * spread::Hit(enum view_MouseAction  action, long  x , long  y, long 
 void spread::LoseInputFocus()
 {
     if (debug)
-	printf("spread_LoseInputFocus(%x)\n", this);
+	printf("spread_LoseInputFocus(%p)\n", this);
 
     if(hasInputFocus) {
 	hasInputFocus = 0;
@@ -599,7 +599,7 @@ void spread::LoseInputFocus()
 void spread::ReceiveInputFocus()
 {
     if (debug)
-	printf("spread_ReceiveInputFocus(%x)\n", this);
+	printf("spread_ReceiveInputFocus(%p)\n", this);
 
     if (!(hasInputFocus)) {
 	if (!spread_WantHighlight(this))
@@ -624,7 +624,7 @@ void spread::ReceiveInputFocus()
 class view *spread::GetApplicationLayer()
 {
     if (debug)
-	printf("spread_GetApplicationLayer(%x)\n", this);
+	printf("spread_GetApplicationLayer(%p)\n", this);
 
     return (class view *)scroll::Create(this, scroll_LEFT | scroll_TOP);
 }
@@ -640,7 +640,7 @@ static void ySetFrame(register class spread  * V, long  pos		/* pel within view 
     if (V->vOffset < 0)
 	V->vOffset = 0;
     if (debug)
-	printf ("ySetFrame(%x, %ld, %ld, %ld) = %ld\n", V, pos, coord, denom, V->vOffset);
+	printf ("ySetFrame(%p, %ld, %ld, %ld) = %ld\n", V, pos, coord, denom, V->vOffset);
     V->lastTime = -1;		/* for full update */
     (V)->WantUpdate( V);
 }
@@ -657,7 +657,7 @@ static void xSetFrame(register class spread  * V, long  pos		/* pel within view 
     if (V->hOffset < 0)
 	V->hOffset = 0;
     if (debug)
-	printf ("xSetFrame(%x, %ld, %ld, %ld) = %ld\n", V, pos, coord, denom, V->hOffset);
+	printf ("xSetFrame(%p, %ld, %ld, %ld) = %ld\n", V, pos, coord, denom, V->hOffset);
     V->lastTime = -1;
     (V)->WantUpdate( V);
 }
@@ -721,7 +721,7 @@ static long yWhatIsAt(register class spread  * V, long  coord, long  denom)
     long pos = (coord * (V)->GetLogicalHeight()) / denom + V->vOffset;
 
     if (debug)
-	printf ("yWhatIsAt(%x, %ld, %ld) = %ld\n", V, coord, denom, pos);
+	printf ("yWhatIsAt(%p, %ld, %ld) = %ld\n", V, coord, denom, pos);
     return pos;
 }
 
@@ -732,7 +732,7 @@ static long xWhatIsAt(register class spread  * V, long  coord, long  denom)
     long pos = (coord * (V)->GetLogicalWidth()) / denom + V->hOffset;
 
     if (debug)
-	printf ("xWhatIsAt(%x, %ld, %ld) = %ld\n", V, coord, denom, pos);
+	printf ("xWhatIsAt(%p, %ld, %ld) = %ld\n", V, coord, denom, pos);
     return pos;
 }
 
@@ -755,7 +755,7 @@ static struct scrollfns horizontalInterface = {
 char *spread::GetInterface(char  * type)
 {
     if (debug)
-	printf("spread_GetInterface(%x, %s)\n", this, type);
+	printf("spread_GetInterface(%p, %s)\n", this, type);
 
     if (strcmp(type, "scroll,vertical") == 0) {
 	return (char *)&verticalInterface;
@@ -781,7 +781,7 @@ static void DestroySubviews(register class spread  * V,class table  *T)
 		for (vl = cell->interior.ImbeddedObject.views, prevvl = NULL; vl != NULL; vl = nextvl) {
 		    if (vl->parent == V) {
 			if (debug)
-			    printf("destroying subview %x for %x\n", vl->child, cell->interior.ImbeddedObject.data);
+			    printf("destroying subview %p for %p\n", vl->child, cell->interior.ImbeddedObject.data);
 			nextvl = vl->next;
 			(vl->child)->UnlinkTree();
 			(vl->child)->Destroy();
@@ -819,7 +819,7 @@ void spread::LinkTree(class view  * parent)
     struct cell *cell;
 
     if (debug)
-	printf("spread_LinkTree(%x, %x)\n", this, parent);
+	printf("spread_LinkTree(%p, %p)\n", this, parent);
 
     view::LinkTree( parent);
     if (MyTable(this) == NULL)
@@ -850,7 +850,7 @@ void spread::UnlinkNotification(class view  *tree)
 void spread::ObservedChanged(class observable  *changed, long  status)
 {
     if (debug)
-	printf("spread_ObservedChanged(%x, %x, %ld)\n", this, changed, status);
+	printf("spread_ObservedChanged(%p, %p, %ld)\n", this, changed, status);
 
     if(status == 42 && !strcmp((changed)->GetTypeName(),"table")) {
 	DestroySubviews(this,(class table *)changed);

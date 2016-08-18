@@ -65,7 +65,7 @@ DescribeOpenCode(int code)
     }
 }
 
-int fdplumb_SpillGuts() {
+int fdplumb_SpillGuts(void) {
     return fdplumb_SpillGutsToFile(stderr, 0);
 }
 
@@ -185,8 +185,7 @@ int dbg_dup(int oldfd)
     return(newfd);
 }
 
-int dbg_dup2(oldfd, newfd)
-int oldfd, newfd;
+int dbg_dup2(int oldfd, int newfd)
 {
     int res;
 
@@ -196,8 +195,7 @@ int oldfd, newfd;
     return(res);
 }
 
-int dbg_pipe(fdarr)
-int fdarr[2];
+int dbg_pipe(int fdarr[2])
 {
     int res;
 
@@ -209,8 +207,7 @@ int fdarr[2];
     return(res);
 }
 
-int dbg_socket(af, typ, prot)
-int af, typ, prot;
+int dbg_socket(int af, int typ, int prot)
 {
     int fd;
 
@@ -221,8 +218,7 @@ int af, typ, prot;
 
 #if !SY_OS2
 #if !defined(hp9000s300) && !defined(M_UNIX)
-int dbg_socketpair(dom, typ, prot, sv)
-int dom, typ, prot, sv[2];
+int dbg_socketpair(int dom, int typ, int prot, int sv[2])
 {
     int res;
 

@@ -893,7 +893,7 @@ class aptv *self=this;
     }
     else
     {
-    fprintf( PrintFile, "%s%d %d translate  %% Portrait Orientation\n",
+    fprintf( PrintFile, "%s%d %ld translate  %% Portrait Orientation\n",
 	     PrintPrefix, 0, -Height(Outer) );
     if ( PrintTopLevel )
       fprintf( PrintFile, "%s%g %g translate  %% Centering\n",
@@ -1064,7 +1064,7 @@ aptv::PrintFilledRoundBox( register long		       left , register long		       to
 class aptv *self=this;
 
   fprintf( PrintFile,"%s/left %g def /top %g def /right %g def /bottom\
-	    %g def /shade %d def fillroundbox\n",
+	    %g def /shade %ld def fillroundbox\n",
 	    PrintPrefix, PRF(left), PRF(top),
 			 PRF(left) + (PRF(width) - 1), PRF(top) + (PRF(height) - 1), shade );
   }
@@ -1147,7 +1147,7 @@ class aptv *self=this;
     *style_name = 0;
     if ( style & fontdesc_Bold )    strcat( style_name, "b" );
     if ( style & fontdesc_Italic )  strcat( style_name, "i" );
-    fprintf( PrintFile, "%s %d %s%s  setfont\n", PrintPrefix, size, family, style_name );
+    fprintf( PrintFile, "%s %ld %s%s  setfont\n", PrintPrefix, size, family, style_name );
     }
   OUT(aptv_SetPrintFont);
   }

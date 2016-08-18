@@ -627,7 +627,7 @@ Control_Button_Hit( register class orgv		   *self, register class suite		   *sui
       case  node_border_code:	Node_Border_Command( self );	break;
       case  node_connector_code:Node_Connector_Command( self );	break;
       default:
-	sprintf( msg, "Unknown control-code (%d)",
+	sprintf( msg, "Unknown control-code (%ld)",
 		    (suite)->ItemAttribute(  item, suite_itemdatum ) );
 	(self)->Announce(  msg );
     } 

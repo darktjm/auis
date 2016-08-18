@@ -468,7 +468,7 @@ AString::VfileClose(FILE *f) {
 	const char *
 AString::itoa (long i) {
 	static char retbuf[50];
-	sprintf(retbuf, "%d", i);
+	sprintf(retbuf, "%ld", i);
 	return retbuf;
 }
 

@@ -1450,7 +1450,7 @@ static void DoTransientGeometry(class xim  *self , boolean  override, class xim 
 
     /* Tricky part: the other window may be a child of a window manager
       decorated window.  So we ignore x and y from XGetGeometry
-      and use XTranslateCoordinates to get it's location. */
+      and use XTranslateCoordinates to get its location. */
 
     if (override) { /* overrides are relative to parent */
 	ox = 0;
@@ -3113,7 +3113,7 @@ ButtonTimerFire(struct mouseStatus  *mfacts, long  now)
 			(mfacts->event)->Cancel();
 	}
 	if (mf) {
-		fprintf(mf, "TFire   @(%d,%d)   (%d)  now %d \n", 
+		fprintf(mf, "TFire   @(%ld,%ld)   (%ld)  now %ld \n", 
 			mfacts->xPending, mfacts->yPending, 
 			(long)mfacts->state, now);
 		fflush(mf);
@@ -3395,7 +3395,7 @@ HandleWindowEvent(Display  *display)
 		mouseY = buttonEvent->y - point_Y(&(self)->GetDrawable()->physicalOrigin);
 
 		if (mf) {
-			fprintf(mf, "Press  %d @(%d,%d)   [%d]   %d  (%d)\n", 
+			fprintf(mf, "Press  %d @(%d,%d)   [%ld]   %d  (%ld)\n", 
 				buttonEvent->button,
 				buttonEvent->x, buttonEvent->y, 
 				buttonEvent->time,
@@ -3488,7 +3488,7 @@ HandleWindowEvent(Display  *display)
 		self->last_buttonmask = motionEvent->state;
 		mfacts->xim=self;
 		if (mf) {
-			fprintf(mf, "Move  @(%d,%d)   [%d]   %d \n", 
+			fprintf(mf, "Move  @(%d,%d)   [%ld]   %d \n", 
 				motionEvent->x, motionEvent->y, 
 				motionEvent->time,
 				motionEvent->state);
@@ -3511,7 +3511,7 @@ HandleWindowEvent(Display  *display)
 			if (tempEvent.type == MotionNotify) {
 
 				if (mf) {
-					fprintf(mf, "Scan  @(%d,%d)  [%d]    %d   \n", 
+					fprintf(mf, "Scan  @(%d,%d)  [%ld]    %d   \n", 
 						motionEvent->x, motionEvent->y, 
 						motionEvent->time,
 						motionEvent->state);
@@ -3570,7 +3570,7 @@ HandleWindowEvent(Display  *display)
 		mouseY = buttonEvent->y;
 		mfacts->xim=self;
 		if (mf) {
-			fprintf(mf, "LetUp  %d @(%d,%d)   [%d]   %d  (%d)\n", 
+			fprintf(mf, "LetUp  %d @(%d,%d)   [%ld]   %d  (%ld)\n",
 				buttonEvent->button,
 				buttonEvent->x, buttonEvent->y, 
 				buttonEvent->time,
@@ -4026,7 +4026,7 @@ void xim::ClearCursors(class cursor  *Cc )
     if (im::IsPlaying()) return;
 
     if (cursordebug) 
-	printf("xim_ClearCursors: clearing cursor %X using window %X and X cursor %X\n", 
+	printf("xim_ClearCursors: clearing cursor %p using window %lX and X cursor %lX\n", 
 			C, C->Xw, C->Xc);
     if (C->Xw)
 	XDestroyWindow(C->Xd,C->Xw);
@@ -4055,7 +4055,7 @@ void xim::PostCursor(struct rectangle  *rec,class cursor  *reqC)
 
     /* We have an unused cursor, so let's post it */
     if (cursordebug) 
-	printf("xim_PostCursor: about to add new cursor on top %X (%c) for view %X\n",
+	printf("xim_PostCursor: about to add new cursor on top %p (%c) for view %p\n",
 			reqCursor, plainCur->fillChar, plainCur->view);
 
     /* First. make sure we have a window for the cursor to appear in */
@@ -4074,7 +4074,7 @@ void xim::PostCursor(struct rectangle  *rec,class cursor  *reqC)
 	}
 	reqCursor->Xw = XCreateWindow( xim2display(this),xim2window(this), /*x*/initialX,/*y*/initialY,/*width*/initialWidth,/*height*/initialHeight, /*border width*/0,/*depth*/0, /*class*/InputOnly, /*visual*/ DefaultVisual(xim2display(this),xim2screen(this)), /* valuemask*/ 0,NULL);
 	reqCursor->Xd = xim2display(this);
-	if (cursordebug) printf("xim_postcursor: creating window %X for cursor %X at left %d, top %d, width %d, height %d\n", reqCursor->Xw, reqCursor, initialX, initialY, initialWidth, initialHeight);
+	if (cursordebug) printf("xim_postcursor: creating window %lX for cursor %p at left %ld, top %ld, width %ld, height %ld\n", reqCursor->Xw, reqCursor, initialX, initialY, initialWidth, initialHeight);
     }
 
     /* Remove any cursors using the current input-only window */
@@ -4092,7 +4092,7 @@ void xim::PostCursor(struct rectangle  *rec,class cursor  *reqC)
 	physical_LogicalToGlobalRect((plainCur->view)->GetDrawable(), &vrec);
 	/* This is a hack because of no 0-sized windows -- something better should be done */
 	if (vrec.height>0 && vrec.width>0) {
-	    if (cursordebug) printf("xim_PostCursor: moving window %X for cursor %X to left %d, top %d, width %d, height %d\n", reqCursor->Xw, reqCursor, vrec.left, vrec.top, vrec.width, vrec.height);
+	    if (cursordebug) printf("xim_PostCursor: moving window %lX for cursor %p to left %ld, top %ld, width %ld, height %ld\n", reqCursor->Xw, reqCursor, vrec.left, vrec.top, vrec.width, vrec.height);
 	    XMoveResizeWindow(xim2display(this), reqCursor->Xw, vrec.left, vrec.top, vrec.width, vrec.height);
 	CheckError(this);
 	}
@@ -4102,7 +4102,7 @@ void xim::PostCursor(struct rectangle  *rec,class cursor  *reqC)
 
     /* If we have a popup, we stack the cursor windows below it. */
     if (plainCur->posted != imself) {
-	if (cursordebug) printf("xim_PostCursor: raising cursor window %X for cursor %X\n", reqCursor->Xw, reqCursor);
+	if (cursordebug) printf("xim_PostCursor: raising cursor window %lX for cursor %p\n", reqCursor->Xw, reqCursor);
 	if (this->popup_active) {
 	    changes.sibling = xim2window(this->popup_active);
 	    changes.stack_mode = Below;
@@ -4118,18 +4118,18 @@ void xim::PostCursor(struct rectangle  *rec,class cursor  *reqC)
 	CheckError(this);
 	     } else 
 		 XRaiseWindow(xim2display(this), this->globalCursorWindow);
-	     if (cursordebug) printf("xim_PostCursor: global cursors being used, so raising global cursors over %X(window %X)\n", reqCursor, reqCursor->Xw);
+	     if (cursordebug) printf("xim_PostCursor: global cursors being used, so raising global cursors over %p(window %lX)\n", reqCursor, reqCursor->Xw);
 	 }
     }
-    else if (cursordebug) printf("xim_PostCursor: cursor window %X for cursor %X already in order, not raising\n", reqCursor->Xw, reqCursor);
+    else if (cursordebug) printf("xim_PostCursor: cursor window %lX for cursor %p already in order, not raising\n", reqCursor->Xw, reqCursor);
 
     /* If everything is OK, map the window, but if the window region disappeared, remove the window and let other cursors show through */
     if (doMap) {
-	if (cursordebug) printf("xim_PostCursor: mapping cursor window %X for cursor %X\n",reqCursor->Xw, reqCursor);
+	if (cursordebug) printf("xim_PostCursor: mapping cursor window %lX for cursor %p\n",reqCursor->Xw, reqCursor);
 	XMapWindow(xim2display(this), reqCursor->Xw);
     }
     else {
-	if (cursordebug) printf("xim_PostCursor: unmapping cursor window %X for cursor %X\n",reqCursor->Xw, reqCursor);
+	if (cursordebug) printf("xim_PostCursor: unmapping cursor window %lX for cursor %p\n",reqCursor->Xw, reqCursor);
 	XUnmapWindow(xim2display(this), reqCursor->Xw);
     }
 
@@ -4210,7 +4210,7 @@ static void updateGlobalCursors(class xim  *self)
         tmp->Xd = 0;
 */
         XDefineCursor(xim2display(self), self->globalCursorWindow, self->globalCursor->Xc);
-        if (cursordebug) printf("(xim)updateGlobalCursor: raising global window %X for global cursor %X\n", self->globalCursorWindow, self->globalCursor->Xc);
+        if (cursordebug) printf("(xim)updateGlobalCursor: raising global window %lX for global cursor %lX\n", self->globalCursorWindow, self->globalCursor->Xc);
 	/* If we have a popup, we stack the global cursor window below it. */
 	if (self->popup_active) {
 	    XWindowChanges changes;
@@ -4227,7 +4227,7 @@ static void updateGlobalCursors(class xim  *self)
 
     /* See if all cursors punted but window remains. If yes, then get rid of overlaying global cursor window (which will inherit cursors from parent and possibly screw up everything */
     if ((self->globalCursor == NULL || self->globalCursor->Xc == 0) && self->globalCursorWindow) {
-        if (cursordebug) printf("(xim)updateGlobalCursors: unmapping global cursor window %X\n", self->globalCursorWindow);
+        if (cursordebug) printf("(xim)updateGlobalCursors: unmapping global cursor window %lX\n", self->globalCursorWindow);
 	XUnmapWindow(xim2display(self),self->globalCursorWindow);
     }
 
@@ -5909,7 +5909,7 @@ static void send_drop(Display  *dpy, Window  my_win , Window  dest_win, drop_t  
     
     /* Put a property on win in the proper format. */
     /* First, generate a unique name for it. */
-    sprintf(prop_name, "%s_%d_%d", DROP_PROTOCOL, my_win, unique_id++);
+    sprintf(prop_name, "%s_%ld_%ld", DROP_PROTOCOL, my_win, unique_id++);
     switch (drop_type) {
 	case drop_string:
 	    prop_type = XA_STRING;

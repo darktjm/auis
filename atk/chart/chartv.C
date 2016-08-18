@@ -410,7 +410,7 @@ long SetChartAttribute( register class chartv      *self, register long		       
       TitleViewObjectHandler = (class view (*)()) value;break;
 
     default:
-      fprintf( stderr, "ChartV: Unrecognized ChartAttribute (%d) -- Ignored\n", attribute );
+      fprintf( stderr, "ChartV: Unrecognized ChartAttribute (%ld) -- Ignored\n", attribute );
     }
 
   OUT(::SetChartAttribute);
@@ -783,7 +783,7 @@ chartv_Save_Command( register class chartv      *self )
     if ( stat( original_name, &st ) == 0 )
       { DEBUG(Existent File);
       while ( ! stat( backup_name, &st ) )
-        sprintf( backup_name, "%s.BACKUP.%d", file_name, serial++ );
+        sprintf( backup_name, "%s.BACKUP.%ld", file_name, serial++ );
       DEBUGst(Backup-name,backup_name);
       if ( rename( original_name, backup_name ) )
         { DEBUG(ReName Failure);

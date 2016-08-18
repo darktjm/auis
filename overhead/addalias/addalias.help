@@ -38,7 +38,7 @@ addalias local-alias-additions-file master-alias-file
 
 
 NOTE: the program 'addalias' is installed into $DESTDIR/etc not $DESTDIR/bin - 
-so you will probably have to use it's full path in order to execute it.
+so you will probably have to use its full path in order to execute it.
 
 
 }\section{Advice

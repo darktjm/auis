@@ -776,7 +776,7 @@ hit down to a child view first, after which it should attempt to get the files
 that were dropped with im_GetDroppedFiles.  If the child view called 
 im_GetDroppedFiles, there will be no files to get, i.e. im_GetDroppedFiles may 
 only be called once.  This allows the child view to ``take'' the files.  If 
-the child view does not handle file drops, it's hit method simply returns and 
+the child view does not handle file drops, its hit method simply returns and 
 the parent view gets the files.  This protocol gives the child view precedence 
 so that files may be dropped on individual insets.
 

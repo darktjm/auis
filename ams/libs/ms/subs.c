@@ -231,13 +231,13 @@ WriteSubs()
 	    if (SubsInUserOrder[i].sname[0] == '\0') {
 		sprintf(ErrTxt, "%s/%s/mail", home, MS_TREEROOT);
 		if (strcmp(ErrTxt, SubsInUserOrder[i].key) == 0) {
-		    fprintf(fp, "mail %s %d %s %d\n", "mail", ErrTxt, SubsInUserOrder[i].status, SubsInUserOrder[i].time64, SubsInUserOrder[i].filedate);
+		    fprintf(fp, "mail %s %d %s %ld\n", "mail", /* ErrTxt, */ SubsInUserOrder[i].status, SubsInUserOrder[i].time64, SubsInUserOrder[i].filedate); /* tjm - not sure what to delete */
 		    Recovered = 1;
 		} else Recovered = 0;
 		sprintf(ErrTxt, "Null subscription name for ``%s''--%s", ap_Shorten(SubsInUserOrder[i].key), Recovered ? "recovered as ``mail''" : "NOT RECORDED");
 		NonfatalBizarreError(ErrTxt);
 	    } else {
-		fprintf(fp, "%s %s %d %s %d\n", SubsInUserOrder[i].sname, SubsInUserOrder[i].key, SubsInUserOrder[i].status, SubsInUserOrder[i].time64, SubsInUserOrder[i].filedate);
+		fprintf(fp, "%s %s %d %s %ld\n", SubsInUserOrder[i].sname, SubsInUserOrder[i].key, SubsInUserOrder[i].status, SubsInUserOrder[i].time64, SubsInUserOrder[i].filedate);
 	    }
 	}
     }
@@ -574,7 +574,7 @@ CheckPathChanges() {
 
      sprintf(MP, "%s/%s", home, MS_TREEROOT);
      if (MS_RebuildOneSubscriptionMap(MP)) {
-     sprintf(MP, "Could not rebuild subscription map %s/%s/%s (%d, %d, %d)", ap_Shorten(home), MS_TREEROOT, AMS_SUBSCRIPTIONMAPFILE, AMS_ERRNO, AMS_ERRCAUSE, AMS_ERRVIA);
+     sprintf(MP, "Could not rebuild subscription map %s/%s/%s (%ld, %ld, %ld)", ap_Shorten(home), MS_TREEROOT, AMS_SUBSCRIPTIONMAPFILE, AMS_ERRNO, AMS_ERRCAUSE, AMS_ERRVIA);
      NonfatalBizarreError(MP);
      }
      MailPathChanged = TRUE;

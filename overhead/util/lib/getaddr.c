@@ -50,7 +50,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 #define NIFS		6
 
 /* Return our internet address as a long in network byte order.  Returns zero if it can't find one. */
-unsigned long getaddr ()
+unsigned long getaddr (void)
 {
     int     s;
     int     i, len;

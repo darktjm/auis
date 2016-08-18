@@ -87,8 +87,7 @@ It returns TRUE if it succeeds.
 #define OPEN_FLAGS O_RDWR
 #endif
 
-static char *GetPtyNumberString(num)
-int num;
+static char *GetPtyNumberString(int num)
 {
 static char ptyNum[10];
 
@@ -102,11 +101,7 @@ static char ptyNum[10];
     return ptyNum;
 }
 
-int GetPtyandName(masterFD, slaveFD,name,len)
-int *masterFD;
-int *slaveFD;
-char *name;
-int len;
+int GetPtyandName(int *masterFD, int *slaveFD,char *name,int len)
 {
 #if SY_AIXx
     /* AIX 3.1 lets us open a single device "/dev/ptc" which
@@ -205,9 +200,7 @@ int len;
 #endif /* SY_AIX31 */
 }
 
-int GetPty(masterFD, slaveFD)
-int *masterFD;
-int *slaveFD;
+int GetPty(int *masterFD, int *slaveFD)
 {
     return GetPtyandName(masterFD, slaveFD,NULL,0);
 }

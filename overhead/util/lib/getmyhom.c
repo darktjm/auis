@@ -42,7 +42,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 
 static char *myhome = NULL;
 
-const char *getMyHome()
+const char *getMyHome(void)
 /* Like gethome(NULL): a less general version that gets only my own home directory, not anybody's.  Will fail if the environment variable isn't set. */
 {
     const char *h;

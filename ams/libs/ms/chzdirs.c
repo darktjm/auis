@@ -54,6 +54,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #include <wp.h>
 #endif                                 /* WHITEPAGES_ENV */
 #include <mail.h>
+#include <msprotos.h>
 #include <dropoff.h>
 
 extern char    *DayArray[], *MonArray[];        /* Just the names of days and

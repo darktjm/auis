@@ -128,7 +128,7 @@ long dialog::Write(FILE  *fp, long  id, int  level)
 	/* New Write Operation */
 	(this)->SetWriteID( id);
 	
-	fprintf(fp, "\\begindata{%s,%d}\nDatastream version: %d\n",
+	fprintf(fp, "\\begindata{%s,%ld}\nDatastream version: %d\n",
 		(this)->GetTypeName(), 
 		uniqueid, dialog_DS_VERSION);
 
@@ -147,7 +147,7 @@ long dialog::Write(FILE  *fp, long  id, int  level)
 	} else {
 	    (this->buttons)->Write( fp, id, level+1);
 	}
-	fprintf(fp, "\\enddata{%s,%d}\n", (this)->GetTypeName(), uniqueid);
+	fprintf(fp, "\\enddata{%s,%ld}\n", (this)->GetTypeName(), uniqueid);
     }
     return(uniqueid);
 }
@@ -192,7 +192,7 @@ long dialog::Read(FILE  *fp, long  id)
     p=fgets(buf, sizeof(buf)-1, fp);
     if(!p) return SanelyReturnReadError(this, fp, id, dataobject_PREMATUREEOF);
     
-    if(sscanf(buf, "\\begindata{text,%d}", &textid )!=1)  SanelyReturnReadError(this, fp, id, dataobject_BADFORMAT);
+    if(sscanf(buf, "\\begindata{text,%ld}", &textid )!=1)  SanelyReturnReadError(this, fp, id, dataobject_BADFORMAT);
     
     if(this->textp) (this->textp)->Clear();
     else this->textp=new text;
@@ -207,7 +207,7 @@ long dialog::Read(FILE  *fp, long  id)
     p=fgets(buf, sizeof(buf)-1, fp);
     if(!p) return SanelyReturnReadError(this, fp, id, dataobject_PREMATUREEOF);
     
-    if(sscanf(buf, "\\begindata{sbutton,%d}", &textid )!=1)  return SanelyReturnReadError(this, fp, id, dataobject_BADFORMAT);
+    if(sscanf(buf, "\\begindata{sbutton,%ld}", &textid )!=1)  return SanelyReturnReadError(this, fp, id, dataobject_BADFORMAT);
 
     err=(this->buttons)->Read( fp, textid);
     

@@ -143,7 +143,7 @@ preferences help file for more information)}
 DialogStyle:\formatnote{ \bold{\italic{4}}}
 
 \leftindent{This integer preference specifies which "look" should be used for 
-the dialog box and it's buttons.  The default of 4 indicates "OSF/Motif" (TM) 
+the dialog box and its buttons.  The default of 4 indicates "OSF/Motif" (TM) 
 appearance.  The supported styles are:}
 
 \leftindent{\leftindent{1. Double Boxed.

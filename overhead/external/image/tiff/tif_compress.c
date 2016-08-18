@@ -31,54 +31,10 @@
  */
 #include "tiffioP.h"
 
-#if USE_PROTOTYPES
-extern	int TIFFInitDumpMode(TIFF*);
-#ifdef PACKBITS_SUPPORT
-extern	int TIFFInitPackBits(TIFF*);
-#endif
-#ifdef CCITT_SUPPORT
-extern	int TIFFInitCCITTRLE(TIFF*), TIFFInitCCITTRLEW(TIFF*);
-extern	int TIFFInitCCITTFax3(TIFF*), TIFFInitCCITTFax4(TIFF*);
-#endif
-#ifdef THUNDER_SUPPORT
-extern	int TIFFInitThunderScan(TIFF*);
-#endif
-#ifdef NEXT_SUPPORT
-extern	int TIFFInitNeXT(TIFF*);
-#endif
-#ifdef LZW_SUPPORT
-extern	int TIFFInitLZW(TIFF*);
-#endif
-#ifdef JPEG_SUPPORT
-extern	int TIFFInitJPEG(TIFF*);
-#endif
-#else
-extern	int TIFFInitDumpMode();
-#ifdef PACKBITS_SUPPORT
-extern	int TIFFInitPackBits();
-#endif
-#ifdef CCITT_SUPPORT
-extern	int TIFFInitCCITTRLE(), TIFFInitCCITTRLEW();
-extern	int TIFFInitCCITTFax3(), TIFFInitCCITTFax4();
-#endif
-#ifdef THUNDER_SUPPORT
-extern	int TIFFInitThunderScan();
-#endif
-#ifdef NEXT_SUPPORT
-extern	int TIFFInitNeXT();
-#endif
-#ifdef LZW_SUPPORT
-extern	int TIFFInitLZW();
-#endif
-#ifdef JPEG_SUPPORT
-extern	int TIFFInitJPEG();
-#endif
-#endif
-
 struct cscheme {
-	char*	name;
+	const char*	name;
 	int	scheme;
-	int	(*init)();
+	int	(*init)(TIFF *);
 };
 static const struct cscheme CompressionSchemes[] = {
     { "Null",		COMPRESSION_NONE,	TIFFInitDumpMode },
@@ -107,8 +63,7 @@ static const struct cscheme CompressionSchemes[] = {
 #define	NSCHEMES (sizeof (CompressionSchemes) / sizeof (CompressionSchemes[0]))
 
 static struct cscheme const *
-findScheme(scheme)
-	int scheme;
+findScheme(int scheme)
 {
 	register struct cscheme const *c;
 
@@ -119,9 +74,7 @@ findScheme(scheme)
 }
 
 static int
-TIFFNoEncode(tif, method)
-	TIFF *tif;
-	char *method;
+TIFFNoEncode(TIFF *tif, const char *method)
 {
 	struct cscheme const *c = findScheme(tif->tif_dir.td_compression);
 	TIFFError(tif->tif_name,
@@ -130,39 +83,25 @@ TIFFNoEncode(tif, method)
 }
 
 int
-TIFFNoRowEncode(tif, pp, cc, s)
-	TIFF *tif;
-	u_char *pp;
-	int cc;
-	u_int s;
+TIFFNoRowEncode(TIFF *tif, u_char *pp, int cc, u_int s)
 {
 	return (TIFFNoEncode(tif, "scanline"));
 }
 
 int
-TIFFNoStripEncode(tif, pp, cc, s)
-	TIFF *tif;
-	u_char *pp;
-	int cc;
-	u_int s;
+TIFFNoStripEncode(TIFF *tif, u_char *pp, int cc, u_int s)
 {
 	return (TIFFNoEncode(tif, "strip"));
 }
 
 int
-TIFFNoTileEncode(tif, pp, cc, s)
-	TIFF *tif;
-	u_char *pp;
-	int cc;
-	u_int s;
+TIFFNoTileEncode(TIFF *tif, u_char *pp, int cc, u_int s)
 {
 	return (TIFFNoEncode(tif, "tile"));
 }
 
-int
-TIFFNoDecode(tif, method)
-	TIFF *tif;
-	char *method;
+static int
+TIFFNoDecode(TIFF *tif, const char *method)
 {
 	struct cscheme const *c = findScheme(tif->tif_dir.td_compression);
 	TIFFError(tif->tif_name,
@@ -171,38 +110,25 @@ TIFFNoDecode(tif, method)
 }
 
 int
-TIFFNoRowDecode(tif, pp, cc, s)
-	TIFF *tif;
-	u_char *pp;
-	int cc;
-	u_int s;
+TIFFNoRowDecode(TIFF *tif, u_char *pp, int cc, u_int s)
 {
 	return (TIFFNoDecode(tif, "scanline"));
 }
 
 int
-TIFFNoStripDecode(tif, pp, cc, s)
-	TIFF *tif;
-	u_char *pp;
-	int cc;
-	u_int s;
+TIFFNoStripDecode(TIFF *tif, u_char *pp, int cc, u_int s)
 {
 	return (TIFFNoDecode(tif, "strip"));
 }
 
 int
-TIFFNoTileDecode(tif, pp, cc, s)
-	TIFF *tif;
-	u_char *pp;
-	int cc;
-	u_int s;
+TIFFNoTileDecode(TIFF *tif, u_char *pp, int cc, u_int s)
 {
 	return (TIFFNoDecode(tif, "tile"));
 }
 
-TIFFSetCompressionScheme(tif, scheme)
-	TIFF *tif;
-	int scheme;
+int
+TIFFSetCompressionScheme(TIFF *tif, int scheme)
 {
 	struct cscheme const *c = findScheme(scheme);
 

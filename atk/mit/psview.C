@@ -247,7 +247,7 @@ static void pixelsize(class psview  *self)
     char newxsize[75], newysize[75], request[150];
 
     /* ask for height */
-    sprintf(request, "Print height %ld  width %ld points.   New height [%d]", h, w, h);
+    sprintf(request, "Print height %ld  width %ld points.   New height [%ld]", h, w, h);
     AskOrCancel(self, request, newysize);
     if (*newysize) {
 	/* height specified.  parse it and set width request */
@@ -340,7 +340,7 @@ static void autobounds(class psview  *self, long  rock)
 	bbox_buf[i] = c;
     }
     bbox_buf[i] = '\0';
-    if (sscanf(bbox_buf, "%%%%BoundingBox: %d %d %d %d", &llx, &lly, &urx, &ury) != 4) {
+    if (sscanf(bbox_buf, "%%%%BoundingBox: %ld %ld %ld %ld", &llx, &lly, &urx, &ury) != 4) {
 	message::DisplayString(self, 50, "%%BoundingBox was incomplete");
 	return;
     }
@@ -471,8 +471,8 @@ psview::Print(register FILE    *file, register char	 *processor, register char	 
 	/*  Put macro to interface to postscript */
 	texttroff::BeginPS(file, width, height);
 	if ((width != 0) && (height != 0)) {
-	    fprintf(file,"\\!  newpath 0 0 moveto %d 0 lineto ", width);
-	    fprintf(file,"%d %d lineto 0 %d lineto closepath clip\n\n",
+	    fprintf(file,"\\!  newpath 0 0 moveto %ld 0 lineto ", width);
+	    fprintf(file,"%ld %ld lineto 0 %ld lineto closepath clip\n\n",
 		    width,height,height);
 	}
 
@@ -489,7 +489,7 @@ psview::Print(register FILE    *file, register char	 *processor, register char	 
     while ((c = (textobject)->GetChar( pos)) != EOF &&
 	    pos < textlength){
 	if (pos++ == 0) fprintf(file, "%s", prefix);
-	if (c == '\n') fprintf(file,"%c%s",c, prefix);
+	if (c == '\n') fprintf(file,"%c%s",(int)c, prefix);
 	else fputc(c, file);
     }
 
@@ -538,8 +538,8 @@ void psview::PrintPSRect(FILE *file, long logwidth, long logheight, struct recta
 
     if ((width != 0) && (height != 0)) {
 	/* throw in the clipping path, without clearing it. I think this is a bug, but it stays for reasons of backwards schmompatibility. */
-	fprintf(file, "newpath 0 0 moveto %d 0 lineto ", width);
-	fprintf(file, "%d %d lineto 0 %d lineto closepath clip\n\n",
+	fprintf(file, "newpath 0 0 moveto %ld 0 lineto ", width);
+	fprintf(file, "%ld %ld lineto 0 %ld lineto closepath clip\n\n",
 		width,height,height);
     }
 

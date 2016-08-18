@@ -1109,7 +1109,7 @@ void figoplin::WriteBody(FILE  *fp)
 
     fprintf(fp, "$$ %d %d %d %d\n", this->closed, this->numpts, this->fliph, this->flipv);
     for (ix=0; ix<this->numpts; ix++)
-	fprintf(fp, "$ %d %d\n", this->pts[ix].x, this->pts[ix].y);
+	fprintf(fp, "$ %ld %ld\n", this->pts[ix].x, this->pts[ix].y);
 }
 
 long figoplin::ReadBody(FILE  *fp, boolean  recompute)
@@ -1221,7 +1221,7 @@ void figoplin::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolea
 	x -= arrowparh.x;
 	y -= arrowparh.y;
     }
-    fprintf(file, "%s  %d %d moveto\n", prefix, x, y);
+    fprintf(file, "%s  %ld %ld moveto\n", prefix, x, y);
     for (ix=1; ix<nump; ix++) {
 	x = (v)->ToPrintPixX(pts[ix].x + xbase);
 	y = (v)->ToPrintPixY(pts[ix].y + ybase);
@@ -1229,7 +1229,7 @@ void figoplin::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolea
 	    x -= arrowpart.x;
 	    y -= arrowpart.y;
 	}
-	fprintf(file, "%s  %d %d lineto\n", prefix, x, y);
+	fprintf(file, "%s  %ld %ld lineto\n", prefix, x, y);
     }
 
     col = ((this)->GetVAttributes())->GetColor((this)->GetIVAttributes());
@@ -1251,7 +1251,7 @@ void figoplin::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolea
     lw = ((this)->GetVAttributes())->GetLineWidth((this)->GetIVAttributes());
     lw = (v)->ToPrintPixW(lw*figview_FigUPerPix);
     if (lw <= 0) lw = 0;
-    fprintf(file, "%s  %d setlinewidth\n", prefix, lw);
+    fprintf(file, "%s  %ld setlinewidth\n", prefix, lw);
     fprintf(file, "%s  %f %f %f setrgbcolor\n", prefix, rcol, gcol, bcol);
     /*fprintf(file, "%s  0 setgray\n", prefix);*/
     /* print dashes */

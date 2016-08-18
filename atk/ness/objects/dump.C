@@ -112,7 +112,7 @@ printstaddr(FILE  *f, union stackelement  *a, union stackelement  *NSP) {
 	if (a == NULL)
 		fprintf(f, "NULL    ");
 	else if (v < -100  || v > 1000)
-		fprintf(f, "0x%lx", a);
+		fprintf(f, "0x%p", a);
 	else 
 		fprintf (f, "NSP%-+5ld", v);
 }
@@ -126,7 +126,7 @@ dumpStack(FILE  *f, union stackelement  *NSP)  {
 	class simpletext *t;
 	long size;
 
-	fprintf(f, "Stack bounds: 0x%lx ... 0x%lx    NSP: 0x%lx\n",
+	fprintf(f, "Stack bounds: 0x%p ... 0x%p    NSP: 0x%p\n",
 		NSLowEnd, NSHiEnd, NSP);
 	fprintf(f, "FramePtr: ");
 	printstaddr(f, (union stackelement *)FramePtr, NSP);
@@ -135,7 +135,7 @@ dumpStack(FILE  *f, union stackelement  *NSP)  {
 		printstaddr(f, tsp, NSP);  
 		switch (tsp->l.hdr) {
 		    case (longHdr):
-			fprintf(f, ":  long   0x%lx  %d\n", tsp->l.v, tsp->l.v);
+			fprintf(f, ":  long   0x%lx  %ld\n", tsp->l.v, tsp->l.v);
 			size = sizeof(struct longstkelt);
 			break;
 		    case (funcHdr):
@@ -145,7 +145,7 @@ dumpStack(FILE  *f, union stackelement  *NSP)  {
 			size = sizeof(struct funcstkelt);
 			break;
 		    case (boolHdr):
-			fprintf(f, ":  bool   0x%lx  %d\n", tsp->b.v, tsp->b.v);
+			fprintf(f, ":  bool   0x%lx  %ld\n", tsp->b.v, tsp->b.v);
 			size = sizeof(struct boolstkelt);
 			break;
 		    case (dblHdr):
@@ -153,12 +153,12 @@ dumpStack(FILE  *f, union stackelement  *NSP)  {
 			size = sizeof(struct dblstkelt);
 			break;
 		    case (ptrHdr):
-			fprintf(f, ":  ptr    0x%lx  %d  (%s)\n", 
+			fprintf(f, ":  ptr    0x%p  (%s)\n", 
 					tsp->p.v, (tsp->p.v)->GetTypeName());
 			size = sizeof(struct ptrstkelt);
 			break;
 		    case (frameHdr):
-			fprintf(f, ":  frame  ret %d   prev ", 
+			fprintf(f, ":  frame  ret %p   prev ", 
 					tsp->f.returnaddress);
 			printstaddr(f, (union stackelement *)tsp->f.prevframe, NSP);
 			fputc('\n', f);
@@ -173,19 +173,19 @@ dumpStack(FILE  *f, union stackelement  *NSP)  {
 				NSP);
 			pos = (m)->GetPos();
 			len = (m)->GetLength();
-			fprintf(f, "  0x%lx[%d,%d]  ", t, pos, len);
+			fprintf(f, "  0x%p[%ld,%ld]  ", t, pos, len);
 			if (tsp >= NSP) {
 				fprintf(f, "\"");
 				for (i = 0; i < 20 && i < len; i++)
 					fputc((t)->GetUnsignedChar( pos+i), f);
 				fprintf(f, "%s", (i < len) ? "...\"\n" : "\"\n");
 			}
-			else fprintf(f, "(%d,%d)\n", pos, len);
+			else fprintf(f, "(%ld,%ld)\n", pos, len);
 			size = sizeof(struct seqstkelt);
 			break;
 		    default:
 			/* UNKNOWN stack element */
-			fprintf(f, ":  other  0x%lx  %d\n", 
+			fprintf(f, ":  other  0x%lx  %ld\n", 
 					tsp->l.hdr, tsp->l.hdr);
 			size = sizeof(long);
 			break;
@@ -465,7 +465,7 @@ PrintChar(class simpletext  *text, long  j, FILE  *f) {
 	register long ic = (text)->GetUnsignedChar(j);
 	if (ic < ' ') putc('^', f),  putc(ic+'@', f);
 	else if (ic < '\177') putc (ic, f);
-	else fprintf (f, "\\%03o", ic);
+	else fprintf (f, "\\%03lo", ic);
 }
 
 
@@ -491,7 +491,7 @@ dumpObjectCode(FILE  *file, long  offset) {
 		enum addrtype randcode;
 
 		if (sylcnt > 6)	/* newline after 10 syllables */
-			fprintf(file, "\n     %d:", i), sylcnt = 0;
+			fprintf(file, "\n     %ld:", i), sylcnt = 0;
 
 		op = (text)->GetUnsignedChar( i);
 		i++;
@@ -504,7 +504,7 @@ dumpObjectCode(FILE  *file, long  offset) {
 			randcode = none;
 		}
 		else {
-			fprintf(file, "   ERR'\\%o'", op);
+			fprintf(file, "   ERR'\\%lo'", op);
 			randcode = none;
 		}
 		sylcnt++;
@@ -513,7 +513,7 @@ dumpObjectCode(FILE  *file, long  offset) {
 		case none:
 			break;
 		case enter:
-			fprintf(file, " (#loc %d)", 
+			fprintf(file, " (#loc %ld)", 
 				(text)->GetUnsignedChar( i));
 			i++;
 			sylcnt += 3;
@@ -524,20 +524,20 @@ dumpObjectCode(FILE  *file, long  offset) {
 				((text)->GetUnsignedChar( i) << 8)
 				 + (text)->GetUnsignedChar( i+1)
 			);
-			fprintf(file, "->%d", (i-1) + offset);
+			fprintf(file, "->%ld", (i-1) + offset);
 			i += 2;
 			sylcnt = 100;	/* put newline */
 		}	break;
 		case call:  {
 			long index = ((text)->GetUnsignedChar( i)<<8)
 					+(text)->GetUnsignedChar( i+1);
-			fprintf(file, "->%d(@%d)", index,
+			fprintf(file, "->%ld(@%ld)", index,
 				(ness_Globals[index].e.s.v)->GetPos());
 			i += 2;
 			sylcnt++;
 		}	break;
 		case stack:
-			fprintf(file, " %d", (text)->GetUnsignedChar( i));
+			fprintf(file, " %ld", (text)->GetUnsignedChar( i));
 			i++;
 			sylcnt++;
 			break;
@@ -596,7 +596,7 @@ dumpObjectCode(FILE  *file, long  offset) {
 		case cheatcall:
 			PrintFromTbl(file, text, i++, cheatcallTbl); 
 			/* print number of args */
-			fprintf(file, "%d", (text)->GetUnsignedChar( i));
+			fprintf(file, "%ld", (text)->GetUnsignedChar( i));
 			i ++;
 			sylcnt++;
 			break;
@@ -615,7 +615,7 @@ dumpObjectCode(FILE  *file, long  offset) {
 dumpFuncDef(FILE  *file, class nesssym  *f) {
 	long offset = nesssym_NGetINode(f, funcnode)->SysGlobOffset;
 
-	fprintf(file, "%d:  Function %s", offset, (f)->NGetName());
+	fprintf(file, "%ld:  Function %s", offset, (f)->NGetName());
 	dumpObjectCode(file, offset);
 }
 
@@ -624,12 +624,12 @@ dumpEventDef(FILE  *file, class nesssym  *f) {
 	struct eventnode *enode = nesssym_NGetINode(f, eventnode);
 	long offset = enode->SysGlobOffset;
 	if (enode->enabled) {
-		fprintf(file, "%d:  %s Event (%s)", offset, 
+		fprintf(file, "%ld:  %s Event (%s)", offset, 
 			(enode->varsym)->NGetName(), enode->spec);
 		dumpObjectCode(file, offset);
 	}
 	else
-		fprintf(file, "%d:  disabled Event (%s)", offset, enode->spec);
+		fprintf(file, "%ld:  disabled Event (%s)", offset, enode->spec);
 }
 
 
@@ -643,7 +643,7 @@ dumpAttrList(FILE  *file, class nesssym  *symlist) {
 			dumpFuncDef(file, symlist);
 			break;
 		case flag_var | flag_globalvar:
-			fprintf(file, "%d: %s %s\n", 
+			fprintf(file, "%ld: %s %s\n", 
 				nesssym_NGetINode(symlist, vardefnode)->addr,
 				TypeName[symlist->type],
 				(symlist)->NGetName());

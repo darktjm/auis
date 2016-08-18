@@ -188,18 +188,18 @@ struct  xgraphic_UpdateBlock * xgraphic_FindUpdateBlock(Display  * WhichDisplay,
 {
     struct xgraphic_UpdateBlock * CurBlock;
 
-    if (regionDebug) printf("FindUpdateBlock: looking for display %X, window %X\n", WhichDisplay, WhichWindow);
+    if (regionDebug) printf("FindUpdateBlock: looking for display %p, window %lX\n", WhichDisplay, WhichWindow);
 
     for (CurBlock=updateBlockHeader;CurBlock;CurBlock=CurBlock->nextBlock){
         if ( (CurBlock->displayUsed == WhichDisplay) &&
 	     (CurBlock->windowUsed == WhichWindow)) {
-	    if (regionDebug) printf("FindUpdate: found old %X\n", CurBlock);
+	    if (regionDebug) printf("FindUpdate: found old %p\n", CurBlock);
 	    return CurBlock;
 	}
     }
     /* Not there, so add one */
     CurBlock = (struct xgraphic_UpdateBlock *) malloc(sizeof(struct xgraphic_UpdateBlock));
-    if (regionDebug) printf("FindUpdate: making new %X\n", CurBlock);
+    if (regionDebug) printf("FindUpdate: making new %p\n", CurBlock);
     CurBlock->nextBlock=updateBlockHeader;
     CurBlock->displayUsed = WhichDisplay;
     CurBlock->windowUsed = WhichWindow;
@@ -218,12 +218,12 @@ static void InstallUpdateRegion(class xgraphic  * self )
 {
     struct xgraphic_UpdateBlock * curBlock;
 
-    if (regionDebug) printf("InstallUpdateRegion: new region, cur glob ID %d\n", curUpdateRegionID);
+    if (regionDebug) printf("InstallUpdateRegion: new region, cur glob ID %ld\n", curUpdateRegionID);
     /* find out whether a real change has happened or just a false alarm */
     curBlock = xgraphic_FindUpdateBlock((self)->XDisplay(), (self)->XWindow());
     if (curBlock->RegionCounter == self->lastUpdateRegionIDUsed) {
 	/* False alarm, someone else bumped counter, nothing for this graphic (window/display) has changed, so update our counter to show that we really are current with the latest changes */
-	if (regionDebug) printf("InstallUpdateRegion: no change, curBlockID %d, graphic ID %d\n", curBlock->RegionCounter, self->lastUpdateRegionIDUsed);
+	if (regionDebug) printf("InstallUpdateRegion: no change, curBlockID %ld, graphic ID %ld\n", curBlock->RegionCounter, self->lastUpdateRegionIDUsed);
 	self->lastUpdateRegionIDUsed = curUpdateRegionID;
     }
     else {
@@ -238,14 +238,14 @@ void xgraphic::SetUpdateRegion(Region  Rgn,Display * whichDisplay,Drawable  whic
 
     struct xgraphic_UpdateBlock * curBlock;
 
-    if (regionDebug) printf("SetUpdateRegion: Rgn %X, whichDisplay %X, whichWindow %X\n", Rgn, whichDisplay, whichWindow);
+    if (regionDebug) printf("SetUpdateRegion: Rgn %p, whichDisplay %p, whichWindow %lX\n", Rgn, whichDisplay, whichWindow);
 
     curUpdateRegionID++;
     /* update list of regions and their use */
     curBlock = xgraphic_FindUpdateBlock(whichDisplay,whichWindow);
     curBlock->updateRegionInUse = Rgn;
     curBlock->RegionCounter = curUpdateRegionID;
-    if (regionDebug) printf("SetUpdateRegion: for block %X, setting counter %d, region %X\n", curBlock, curBlock->RegionCounter, curBlock->updateRegionInUse);
+    if (regionDebug) printf("SetUpdateRegion: for block %p, setting counter %ld, region %p\n", curBlock, curBlock->RegionCounter, curBlock->updateRegionInUse);
 }
 
 void xgraphic::FinalizeWindow(Display  *WhichDisplay, Drawable  WhichWindow)
@@ -2058,7 +2058,7 @@ void xgraphic_LocalSetClippingRect(class xgraphic  * self ,struct xgraphic_Updat
 
     
     if (regionDebug) {
-	printf("LocalSetClippingRect: entering with updateBlk %X\n",updateBlk);
+	printf("LocalSetClippingRect: entering with updateBlk %p\n",updateBlk);
     }
 
     /* First check to see if we have any kind of update region to contend with */
@@ -2110,12 +2110,12 @@ void xgraphic_LocalSetClippingRect(class xgraphic  * self ,struct xgraphic_Updat
 	(clipRegion)->OffsetRegion( physical_LogicalXToGlobalX(self, 0),
 			    physical_LogicalYToGlobalY(self, 0));
 
-	if (regionDebug) printf("LocalSetClip: finished with clip and visual: x %d, y %d, width %d, height %d\n", rectangle_Left(&Temp), rectangle_Top(&Temp), rectangle_Width(&Temp), rectangle_Bottom(&Temp));
+	if (regionDebug) printf("LocalSetClip: finished with clip and visual: x %ld, y %ld, width %ld, height %ld\n", rectangle_Left(&Temp), rectangle_Top(&Temp), rectangle_Width(&Temp), rectangle_Bottom(&Temp));
 
 
-	if (regionDebug) printf("LocalSetClip: Using block %X\n", updateBlk);
+	if (regionDebug) printf("LocalSetClip: Using block %p\n", updateBlk);
 
-	if (regionDebug) printf("localsetclip: region counter in update block %d, region %X\n", updateBlk->RegionCounter, updateBlk->updateRegionInUse);
+	if (regionDebug) printf("localsetclip: region counter in update block %ld, region %p\n", updateBlk->RegionCounter, updateBlk->updateRegionInUse);
 
 	if (updateBlk->updateRegionInUse) {
 	    /* Intersect it with the update region */
@@ -2497,11 +2497,11 @@ static void CacheShades(class xgraphic  *self)
 	y = ci->ascent;
 	/* Note: we could have an empty character, in which case, we simulate it with a 1 by 1 character. Too bad X doesn't allow 0 sized pixmaps */
 	if (!width) {
-	    fprintf(stderr,"xfontdesc_CvtCharToGraphic: 0 width character %d in %X\n", SpecialChar, self);
+	    fprintf(stderr,"xfontdesc_CvtCharToGraphic: 0 width character %ld in %p\n", SpecialChar, self);
 	    width++;
 	}
 	if (!height) {
-	    fprintf(stderr,"xfontdesc_CvtCharToGraphic: 0 height character %d in %X\n", SpecialChar, self);
+	    fprintf(stderr,"xfontdesc_CvtCharToGraphic: 0 height character %ld in %p\n", SpecialChar, self);
 	    height++;
 	}
 	newPixmap = XCreatePixmap(dpy, root, width, height, 1);
@@ -2524,7 +2524,7 @@ static void CacheShades(class xgraphic  *self)
 	RetValue->localGraphicContext = NULL;
 	RetValue->localFillGraphicContext = NULL;
 	self->gray_shades[SpecialChar] = RetValue;
-	sprintf(pb, "%d ", newPixmap);
+	sprintf(pb, "%ld ", newPixmap);
 	pb+=strlen(pb);
     }
     XChangeProperty(dpy, root, atk_shades, XA_STRING, 8, PropModeReplace, (unsigned char*)buf, strlen(buf));

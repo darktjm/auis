@@ -524,7 +524,7 @@ apt::WriteObject( register FILE			      *file, register long			       id , regis
 /*===    if ( level )===*/ /* not parent, use datastream */
       {
       DEBUG( Write To Datastream );
-      sprintf( bracket, "data{%s, %d}\n", (this )->GetTypeName( ),
+      sprintf( bracket, "data{%s, %ld}\n", (this )->GetTypeName( ),
 			  this->UniqueID( ) );
       fprintf( file, "\\begin%s", bracket );
       for ( i = 0; i < 4; i++ )

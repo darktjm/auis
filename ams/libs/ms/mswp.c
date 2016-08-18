@@ -840,7 +840,7 @@ static int RefreshAliasFile()
 		tempalias->nick = firstpart;
 		if (*s == '\0' || *s == '\n') {
 		    if (*s != '\0') *s++ = '\0';
-		    sprintf(ErrorText, "Unparsable alias line '%0.700s': ignored (length %d)", tempalias->nick, strlen(tempalias->nick));
+		    sprintf(ErrorText, "Unparsable alias line '%0.700s': ignored (length %ld)", tempalias->nick, strlen(tempalias->nick));
 		    NonfatalBizarreError(ErrorText);
 		    free(tempalias);
 		    continue;

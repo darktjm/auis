@@ -68,7 +68,7 @@ DialogButtonFont: andysans12b
 #~help
 
 This integer preference specifies which "look" should be used for the dialog 
-box and it's buttons.  The default of 4 indicates "OSF/Motif" (TM) appearance. 
+box and its buttons.  The default of 4 indicates "OSF/Motif" (TM) appearance. 
  The supported styles are:
 
 \leftindent{1. Double Boxed.

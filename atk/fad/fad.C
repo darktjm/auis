@@ -259,13 +259,13 @@ long fad::Write(FILE  *f,long  writeid ,int  level)
 		fprintf(f,"$F\n");
 		for(vv = ff->v; vv != NULL; vv = vv->v){
 		        if(vv->mode == BOXMODE)
-				fprintf(f,"$B %d,%d %d,%d\n",vv->p1->x,vv->p1->y,vv->p2->x,vv->p2->y);
+				fprintf(f,"$B %ld,%ld %ld,%ld\n",vv->p1->x,vv->p1->y,vv->p2->x,vv->p2->y);
 		        else if(vv->mode == ANIMATEMODE)
-				fprintf(f,"$A %d,%d %d,%d\n",vv->p1->x,vv->p1->y,vv->p2->x,vv->p2->y);
+				fprintf(f,"$A %ld,%ld %ld,%ld\n",vv->p1->x,vv->p1->y,vv->p2->x,vv->p2->y);
 			else if(vv->label == NULL)
-				fprintf(f,"$V %d,%d %d,%d\n",vv->p1->x,vv->p1->y,vv->p2->x,vv->p2->y);
+				fprintf(f,"$V %ld,%ld %ld,%ld\n",vv->p1->x,vv->p1->y,vv->p2->x,vv->p2->y);
 			else
-				fprintf(f,"$S %d,%d\n%s\n",vv->p1->x,vv->p1->y,vv->label);
+				fprintf(f,"$S %ld,%ld\n%s\n",vv->p1->x,vv->p1->y,vv->label);
 			}
 		}
 	fprintf(f,"$$\n");

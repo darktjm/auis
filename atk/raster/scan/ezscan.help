@@ -3928,7 +3928,7 @@ k8008s |
 }\section{Contrast range parameter examples:
 
 }\leftindent{
-Another propery of an image is it's contrast.  The contrast of an image is 
+Another propery of an image is its contrast.  The contrast of an image is 
 simply the range of intensity levels.  Most pictures use a broad range of gray 
 levels but in some cases the range of intensities is greatly compressed or 
 over expanded.  An example of an image with high contrast is a typewritten 

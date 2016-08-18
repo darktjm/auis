@@ -500,7 +500,7 @@ int print::ProcessView(class view  *v, int  print, int  dofork ,
 		    if(dofork)
 			sprintf(tname,"%s %s; rm \"%s\"",pp,prarg,tmpname);
 		    else
-			sprintf(tname,"%s \"%s\"",pp,prarg,tmpname);
+			sprintf(tname,"%s \"%s\"",pp,prarg);
 		}
 	    }
 	    strcpy(p, q);

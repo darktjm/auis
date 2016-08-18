@@ -278,7 +278,7 @@ register char **argv;
         if (!strcmp(opcode, "dir")) {
             code = fscanf(inputFile[fsPtr], "%s %s", path1, path2);
             if (code != 2) {
-                fprintf(stderr, "%s: input line %d: wrong number of parameters (%d should be 2) to dir operation\n", prog, code, lineNo[fsPtr]);
+                fprintf(stderr, "%s: input line %ld: wrong number of parameters (%ld should be 2) to dir operation\n", prog, code, lineNo[fsPtr]);
 		exit(1);
             } else 
 		BuildIndex(newIndex, path1, path2);
@@ -288,7 +288,7 @@ register char **argv;
         else if (!strcmp(opcode, "key")) {
             code = fscanf(inputFile[fsPtr], "%s %s", path1, path2);
             if (code != 2) {
-                fprintf(stderr, "%s: line %d: wrong number of parameters (%d should be 2) to key operation\n", prog, code, lineNo[fsPtr]);
+                fprintf(stderr, "%s: line %ld: wrong number of parameters (%ld should be 2) to key operation\n", prog, code, lineNo[fsPtr]);
 		exit(1);
             } else {
 		if (verbose)
@@ -302,12 +302,12 @@ register char **argv;
         else if (!strcmp(opcode, "include")) {
             code = fscanf(inputFile[fsPtr], "%s", path1);
             if (code != 1) {
-                fprintf(stderr, "%s: line %d: syntax error in include command\n", prog, lineNo[fsPtr]);
+                fprintf(stderr, "%s: line %ld: syntax error in include command\n", prog, lineNo[fsPtr]);
                 exit(1);
             }
             tfile = fopen(path1, "r");
             if (!tfile) {
-                fprintf(stderr, "%s: line %d: include file %s not found.\n", prog, lineNo[fsPtr], path1);
+                fprintf(stderr, "%s: line %ld: include file %s not found.\n", prog, lineNo[fsPtr], path1);
                 exit(1);
             }
             if (verbose)
@@ -316,7 +316,7 @@ register char **argv;
             lineNo[fsPtr] = 0;
         }
         else {
-            printf("%s: line %d -- unknown opcode in input file '%s'\n", prog, lineNo[fsPtr], opcode);
+            printf("%s: line %ld -- unknown opcode in input file '%s'\n", prog, lineNo[fsPtr], opcode);
             exit(1);
         }
     }

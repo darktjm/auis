@@ -199,7 +199,7 @@ typedef	struct {
 	TIFFDataType field_type;	/* type of associated data */
 	u_short	field_bit;		/* bit in fieldsset bit vector */
 	u_short	field_oktochange;	/* if true, can change while writing */
-	char	*field_name;		/* ASCII name */
+	const char *field_name;		/* ASCII name */
 } TIFFFieldInfo;
 
 #define	FIELD_IGNORE	((u_short)-1)	/* tags processed but ignored */
@@ -261,9 +261,9 @@ struct tiff {
 	int	(*tif_encodestrip)();	/* strip encoding routine */
 	int	(*tif_decodetile)();	/* tile decoding routine */
 	int	(*tif_encodetile)();	/* tile encoding routine */
-	int	(*tif_close)();		/* cleanup-on-close routine */
+	void	(*tif_close)();		/* cleanup-on-close routine */
 	int	(*tif_seek)();		/* position within a strip routine */
-	int	(*tif_cleanup)();	/* routine called to cleanup state */
+	void	(*tif_cleanup)();	/* routine called to cleanup state */
 	char	*tif_data;		/* compression scheme private data */
 /* input/output buffering */
 	int	tif_scanlinesize;	/* # of bytes in a scanline */
@@ -313,7 +313,7 @@ extern "C" {
 #endif
 extern	TIFFFieldInfo const *TIFFFindFieldInfo(u_short, TIFFDataType);
 extern	TIFFFieldInfo const *TIFFFieldWithTag(u_short);
-extern	int _TIFFgetfield(TIFFDirectory*, int, ...);
+extern	void _TIFFgetfield(TIFFDirectory*, int, ...);
 extern	int TIFFNoRowEncode(TIFF*, u_char*, int, u_int);
 extern	int TIFFNoStripEncode(TIFF*, u_char*, int, u_int);
 extern	int TIFFNoTileEncode(TIFF*, u_char*, int, u_int);
@@ -334,4 +334,48 @@ extern	int TIFFNoRowDecode();
 extern	int TIFFNoStripDecode();
 extern	int TIFFNoTileDecode();
 #endif
+#if USE_PROTOTYPES
+extern	int TIFFInitDumpMode(TIFF*);
+#ifdef PACKBITS_SUPPORT
+extern	int TIFFInitPackBits(TIFF*);
+#endif
+#ifdef CCITT_SUPPORT
+extern	int TIFFInitCCITTRLE(TIFF*), TIFFInitCCITTRLEW(TIFF*);
+extern	int TIFFInitCCITTFax3(TIFF*), TIFFInitCCITTFax4(TIFF*);
+#endif
+#ifdef THUNDER_SUPPORT
+extern	int TIFFInitThunderScan(TIFF*);
+#endif
+#ifdef NEXT_SUPPORT
+extern	int TIFFInitNeXT(TIFF*);
+#endif
+#ifdef LZW_SUPPORT
+extern	int TIFFInitLZW(TIFF*);
+#endif
+#ifdef JPEG_SUPPORT
+extern	int TIFFInitJPEG(TIFF*);
+#endif
+#else
+extern	int TIFFInitDumpMode();
+#ifdef PACKBITS_SUPPORT
+extern	int TIFFInitPackBits();
+#endif
+#ifdef CCITT_SUPPORT
+extern	int TIFFInitCCITTRLE(), TIFFInitCCITTRLEW();
+extern	int TIFFInitCCITTFax3(), TIFFInitCCITTFax4();
+#endif
+#ifdef THUNDER_SUPPORT
+extern	int TIFFInitThunderScan();
+#endif
+#ifdef NEXT_SUPPORT
+extern	int TIFFInitNeXT();
+#endif
+#ifdef LZW_SUPPORT
+extern	int TIFFInitLZW();
+#endif
+#ifdef JPEG_SUPPORT
+extern	int TIFFInitJPEG();
+#endif
+#endif
+
 #endif /* _TIFFIOP_ */

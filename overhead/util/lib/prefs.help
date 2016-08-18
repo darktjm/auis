@@ -669,7 +669,7 @@ buttons.)
 \bold{DialogStyle:}\formatnote{ \bold{\italic{4}}}
 
 \leftindent{This integer preference specifies which "look" should be used 
-for the dialog box and it's buttons.  The default of 4 indicates 
+for the dialog box and its buttons.  The default of 4 indicates 
 "OSF/Motif" (TM) appearance.  The supported styles are:}
 
 \leftindent{\leftindent{1. Double Boxed.
@@ -1115,7 +1115,7 @@ for all the components of the scroll bar.  The default of 4 indicates
 
 The only supported style is the "OSF/Motif" (TM) appearance. The other 
 styles may or may not work correctly and may effect the behavior of the 
-scroll bar as well as it's appearance.
+scroll bar as well as its appearance.
 
 
 The possible values for this preference are:}
@@ -1664,7 +1664,7 @@ message line.
 \bold{DynamicMessageLineSize: \italic{no}}
 
 \leftindent{Determines whether the message line will grow and shrink based 
-on it's contents.}
+on its contents.}
 
 
 \bold{MinimumMessageLines: \italic{1}}

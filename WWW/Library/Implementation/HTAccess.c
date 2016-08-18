@@ -30,6 +30,7 @@
 #endif
 
 /* Library include files */
+#include <time.h>
 #include "tcp.h"
 #include "HTUtils.h"
 #include "HTParse.h"

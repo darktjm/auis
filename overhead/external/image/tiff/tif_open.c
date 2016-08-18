@@ -30,6 +30,8 @@
 #include "tiffioP.h"
 #include "prototypes.h"
 
+#include <string.h>
+
 #if USE_PROTOTYPES
 extern	int TIFFDefaultDirectory(TIFF*);
 #else
@@ -88,7 +90,7 @@ static const int litTypeshift[13] = {
  * swapping state according to the file
  * contents and the machine architecture.
  */
-static
+static void
 DECLARE3(TIFFInitOrder, register TIFF*, tif, int, magic, int, bigendian)
 {
 	/* XXX how can we deduce this dynamically? */
@@ -107,7 +109,7 @@ DECLARE3(TIFFInitOrder, register TIFF*, tif, int, magic, int, bigendian)
 }
 
 static int
-DECLARE2(getMode, char*, mode, char*, module)
+DECLARE2(getMode, const char*, mode, const char*, module)
 {
 	int m = -1;
 
@@ -134,8 +136,7 @@ DECLARE2(getMode, char*, mode, char*, module)
  * Open a TIFF file for read/writing.
  */
 TIFF *
-TIFFOpen(name, mode)
-	char *name, *mode;
+TIFFOpen(const char *name, const char *mode)
 {
 	static char module[] = "TIFFOpen";
 	int m, fd;
@@ -155,9 +156,7 @@ TIFFOpen(name, mode)
  * Open a TIFF file descriptor for read/writing.
  */
 TIFF *
-TIFFFdOpen(fd, name, mode)
-	int fd;
-	char *name, *mode;
+TIFFFdOpen(int fd, const char *name, const char *mode)
 {
 	static char module[] = "TIFFFdOpen";
 	TIFF *tif;
@@ -171,7 +170,7 @@ TIFFFdOpen(fd, name, mode)
 		TIFFError(module, "%s: Out of memory (TIFF structure)", name);
 		goto bad2;
 	}
-	bzero((char *)tif, sizeof (*tif));
+	memset((char *)tif, 0, sizeof (*tif));
 	tif->tif_name = (char *)tif + sizeof (TIFF);
 	strcpy(tif->tif_name, name);
 	tif->tif_fd = fd;
@@ -290,8 +289,7 @@ bad2:
 	return ((TIFF *)0);
 }
 
-TIFFScanlineSize(tif)
-	TIFF *tif;
+int TIFFScanlineSize(TIFF *tif)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 	long scanline;
@@ -309,9 +307,8 @@ TIFFScanlineSize(tif)
 /*
  * Return open file's name.
  */
-char *
-TIFFFileName(tif)
-	TIFF *tif;
+const char *
+TIFFFileName(TIFF *tif)
 {
 	return (tif->tif_name);
 }
@@ -320,8 +317,7 @@ TIFFFileName(tif)
  * Return open file's I/O descriptor.
  */
 int
-TIFFFileno(tif)
-	TIFF *tif;
+TIFFFileno(TIFF *tif)
 {
 	return (tif->tif_fd);
 }
@@ -330,8 +326,7 @@ TIFFFileno(tif)
  * Return read/write mode.
  */
 int
-TIFFGetMode(tif)
-	TIFF *tif;
+TIFFGetMode(TIFF *tif)
 {
 	return (tif->tif_mode);
 }
@@ -341,8 +336,7 @@ TIFFGetMode(tif)
  * tiles; zero if organized as strips.
  */
 int
-TIFFIsTiled(tif)
-	TIFF *tif;
+TIFFIsTiled(TIFF *tif)
 {
 	return (isTiled(tif));
 }
@@ -351,8 +345,7 @@ TIFFIsTiled(tif)
  * Return current row being read/written.
  */
 long
-TIFFCurrentRow(tif)
-	TIFF *tif;
+TIFFCurrentRow(TIFF *tif)
 {
 	return (tif->tif_row);
 }
@@ -361,8 +354,7 @@ TIFFCurrentRow(tif)
  * Return index of the current directory.
  */
 int
-TIFFCurrentDirectory(tif)
-	TIFF *tif;
+TIFFCurrentDirectory(TIFF *tif)
 {
 	return (tif->tif_curdir);
 }
@@ -371,8 +363,7 @@ TIFFCurrentDirectory(tif)
  * Return current strip.
  */
 int
-TIFFCurrentStrip(tif)
-	TIFF *tif;
+TIFFCurrentStrip(TIFF *tif)
 {
 	return (tif->tif_curstrip);
 }
@@ -381,8 +372,7 @@ TIFFCurrentStrip(tif)
  * Return current tile.
  */
 int
-TIFFCurrentTile(tif)
-	TIFF *tif;
+TIFFCurrentTile(TIFF *tif)
 {
 	return (tif->tif_curtile);
 }

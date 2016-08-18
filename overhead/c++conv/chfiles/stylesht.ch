@@ -40,7 +40,7 @@ methods:
     FreeStyles();			/* clear out all styles in the stylesheet */
     Add(struct style *styleptr);	/* add a style to the stylesheet */
     Delete(struct style *styleptr);	/* delete a style from the stylesheet */
-    Find(char *name) returns struct style *;	/* find a style, given it's name */
+    Find(char *name) returns struct style *;	/* find a style, given its name */
     GetMenuList(procedure procname, struct classinfo *infotype) returns struct menulist *;
 					/* get a menulist for the styles */
     Read(FILE *fileptr, boolean template) returns long;

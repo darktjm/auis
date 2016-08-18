@@ -85,7 +85,7 @@ foo}:
 
 Note: for conclass to work, your CLASSPATH or ANDREWDIR must be set to use the 
 new ATK software, even if one is using the -r flag to convert new style back 
-to old style. This is because it needs to use the class index files to do it's 
+to old style. This is because it needs to use the class index files to do its 
 conversion.  For more details on this index and the class system, see the 
  \italic{\helptopic{class}  }documentation.
 

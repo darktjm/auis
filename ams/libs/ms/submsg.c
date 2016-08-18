@@ -389,7 +389,7 @@ char           *ClientProgram;         /* Passed in */
             if (BCCto) {
                 char            ErrorText[500];
 
-                sprintf(ErrorText, "Sending your BCC through the mail after error in direct insertion. (%d, %d, %d)", AMS_ERRNO, AMS_ERRCAUSE, AMS_ERRVIA);
+                sprintf(ErrorText, "Sending your BCC through the mail after error in direct insertion. (%ld, %ld, %ld)", AMS_ERRNO, AMS_ERRCAUSE, AMS_ERRVIA);
                 NonfatalBizarreError(ErrorText);
             }
             if (!SubmitVector) {

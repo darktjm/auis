@@ -456,7 +456,7 @@ long cpptext::CheckWord(long i, long end)
 	    start=endstr=SkipWhitespace(j+1,end);
 	    while((endstr<filelen) && (IsTokenChar(GetChar(endstr)))) ++endstr;
 	    if (endstr>start && ((c=GetChar(skipJunk(this,endstr,end)))==':' || c=='{' || c==';')) {
-		/* it's must be a real class decl if it's derived, or has a defn after it, or is just a decl */
+		/* it must be a real class decl if it's derived, or has a defn after it, or is just a decl */
 		WrapStyle(start,endstr-start, this->srctext::kindStyle[CLASS], TRUE,TRUE);
 		j=endstr-1;
 		::inClassDef=TRUE;

@@ -150,7 +150,7 @@ extern void parser_Error(/* struct parser *self, xint severity, char *msg */);
 extern	void parser_ErrorGuts(/* struct parser *self, int severity, char *severityname, char *msg */);
 		/* override this to provide error processing */
 
-extern struct parser *parser_GetCurrentparser();
+extern struct parser *parser_GetCurrentparser(void);
 		/* during parser_Parse, this returns the current parser object 
 		This can be used to call the Error method */ 
 
@@ -199,7 +199,7 @@ extern int parser_TransEscape(/* char *buf, int *plen */);
 		      \^^  \^_	      :  \036  \037
 		*/
 
-extern struct parser *parser_New();
+extern struct parser *parser_New(void);
 /* creates a new parser */
 extern void parser_Destroy(/* struct parser *self */);
 

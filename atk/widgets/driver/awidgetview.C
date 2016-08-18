@@ -65,8 +65,8 @@ ATK_CLASS(matte);
 
 static char  debug;      /* This debug switch is toggled with ESC-^D-D */
 #define DEBUG(s) {if (debug) {printf s ; fflush(stdout);}}
-#define ENTER(r) DEBUG(("Enter %s(0x%lx)\n", Stringize(r), this))
-#define LEAVE(r) DEBUG(("Leave %s(0x%lx)\n", Stringize(r), this))
+#define ENTER(r) DEBUG(("Enter %s(0x%p)\n", Stringize(r), this))
+#define LEAVE(r) DEBUG(("Leave %s(0x%p)\n", Stringize(r), this))
 
 	
 ATKdefineRegistry(AWidgetView, view,
@@ -292,7 +292,7 @@ UpdateBorder(AWidgetView *self, enum view_UpdateType type) {
 	void 
 AWidgetView::FullUpdate(enum view_UpdateType   type, 
 			long left, long top, long width, long height)  {
-	DEBUG(("FullUpdate(%d, %d, %d, %d, %d)\n", 
+	DEBUG(("FullUpdate(%d, %ld, %ld, %ld, %ld)\n", 
 			type, left, top, width, height));
 
 	if (border) UpdateBorder(this, type);
@@ -323,7 +323,7 @@ void AWidgetView::SetDataObject(class dataobject *d) {
 	class view *
 AWidgetView::Hit(enum view_MouseAction action, 
 			long x, long y, long num_clicks) {
-	DEBUG(("Hit at (%d, %d) type %d\n", x, y, action));
+	DEBUG(("Hit at (%ld, %ld) type %d\n", x, y, action));
 	AWidget *dobj = (class AWidget *)GetDataObject();
 	if (action == view_NoMouseEvent)
 		return (class view *)this;
@@ -517,7 +517,7 @@ AWidgetView::DesiredSize(long  /* width */, long  /* height */,
 	done:
 	*dWidth = ToPixX(dobj->desiredWidth);
 	*dHeight = ToPixY(dobj->desiredHeight);
-	DEBUG(("Leave DesiredSize: %d x %d\n", 
+	DEBUG(("Leave DesiredSize: %ld x %ld\n", 
 				*dWidth, *dHeight));
 	return view_Fixed;
 }
@@ -619,7 +619,7 @@ AWidgetView::Print(FILE   *file, char    *processor, char    *,
 		if (newline-p > 75) {
 			// xxx should break line up xxx
 		}
-		fprintf(file, "%s  %.*s\n", prefix, newline-p, p);
+		fprintf(file, "%s  %.*s\n", prefix, (int)(newline-p), p);
 		if ( ! *newline)  break;
 		p = newline + 1;
 	}
@@ -677,8 +677,8 @@ AWidgetView::PrintPSRect(FILE *file, long logwidth, long logheight,
 	// scale pwidth and pheight to logwidth and logheight
 	// xxx Should do something about visrectangle
 	fprintf(file, "%g %g scale\n", 
-			logwidth/(int)dobj->nominalPrintWidth,
-			logheight/(int)dobj->nominalPrintHeight);
+			logwidth/(double)dobj->nominalPrintWidth,
+			logheight/(double)dobj->nominalPrintHeight);
 	fprintf(file, "%s ", imagePS);
 	fprintf(file, "grestore\n");
 }
@@ -758,7 +758,7 @@ void AFormulaViewAct::WantUpdate(ADependerKey key) {
  * If they do this the widgetview's mouse hit functions will *NOT* see
  * any further hits.  (Existing mouse functions will continue to work
  * as before since the new behavior is only triggered if the
- * mouse function returns something in it's return value list.)
+ * mouse function returns something in its return value list.)
  * BUG
  *
  * Revision 1.28  1996/10/07  21:16:10  robr

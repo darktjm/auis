@@ -31,6 +31,8 @@
  */
 #include "tiffioP.h"
 #include "prototypes.h"
+#include <math.h>
+#include <string.h>
 
 /*
  * Like TIFFGetField, but return any default
@@ -40,10 +42,7 @@
  *	explcit values so that defaults exist only one
  *	place in the library -- in TIFFDefaultDirectory.
  */
-TIFFVGetFieldDefaulted(tif, tag, ap)
-	TIFF *tif;
-	int tag;
-	va_list ap;
+int TIFFVGetFieldDefaulted(TIFF *tif, int tag, va_list ap)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 	int i;
@@ -140,7 +139,7 @@ TIFFVGetFieldDefaulted(tif, tag, ap)
 				    floor(65535.*pow(i/(n-1.), 2.2) + .5);
 			for (i = 1; i < td->td_samplesperpixel; i++) {
 				tf[i] = (u_short *)malloc(n * sizeof (u_short));
-				bcopy(tf[0], tf[i], n * sizeof (u_short));
+				memcpy(tf[i], tf[0], n * sizeof (u_short));
 			}
 		}
 		for (i = 0; i < td->td_samplesperpixel; i++)
@@ -167,7 +166,7 @@ TIFFVGetFieldDefaulted(tif, tag, ap)
  * value if the tag is not present in the directory.
  */
 /*VARARGS2*/
-DECLARE2V(TIFFGetFieldDefaulted, TIFF*, tif, int, tag)
+int DECLARE2V(TIFFGetFieldDefaulted, TIFF*, tif, int, tag)
 {
 	int ok;
 	va_list ap;

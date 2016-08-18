@@ -39,6 +39,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 #include <sysexits.h>
 #endif /* HAS_SYSEXITS */
 #include <mail.h>
+#include <util.h>
 
 /* Test the UnixError, UnixSignal, and UnixSysExits routines. */
 main()

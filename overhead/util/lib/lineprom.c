@@ -140,8 +140,7 @@ and, in fact, that only the first \begindata should be promoted.  This could be 
     }
 }
 
-int BE2LinePromoteEnd(state)
-struct LinePromState *state;
+int BE2LinePromoteEnd(struct LinePromState *state)
 {/*		Cleans up the malloc'ed storage and returns 0 if OK,
 		non-zero on errors.
 */

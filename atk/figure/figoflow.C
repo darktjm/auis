@@ -178,7 +178,7 @@ void figoflow::Draw(class figview  *v)
     if (w > 16) {
 	v->MoveTo(x+16, y);
 	v->DrawLineTo(x+16, y+h);
-	sprintf(buf, "%d", this->order);
+	sprintf(buf, "%ld", this->order);
 	v->SetFont( ClassFontDesc);
 	v->MoveTo(x+4, y+4);
 	v->DrawString(buf, graphic_ATLEFT|graphic_ATTOP);

@@ -476,14 +476,14 @@ register long aHashSize;
     Purge(apath);		/* clear out old junk */
     mkdir(apath, 0755);
     strcpy(tbuffer, apath);
-    sprintf(sb, "/V%d.%d", aHashSize, INDEXVERSION);
+    sprintf(sb, "/V%ld.%d", aHashSize, INDEXVERSION);
     strcat(tbuffer, sb);
     tfile = fopen(tbuffer, "w+");
     if (tfile == (FILE*) 0) return INDEXNOENT;
     fclose(tfile);
     for(i=0;i<aHashSize;i++) {
 	strcpy(tbuffer, apath);
-	sprintf(sb, "/H%d", i);
+	sprintf(sb, "/H%ld", i);
 	strcat(tbuffer, sb);
 	tfile = fopen(tbuffer, "w+");
 	if (tfile == (FILE *) 0) return 1;

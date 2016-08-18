@@ -99,7 +99,7 @@ cmuwm::Load( char  *fullname, FILE  *fp ) {
 	    free(buf);
 	}
 	else {
-	    fprintf(stderr, "cmuwm: Read error (%d)\n", status);
+	    fprintf(stderr, "cmuwm: Read error (%ld)\n", status);
 	    fclose(f);
 	    return(-1);
 	}
@@ -160,7 +160,7 @@ cmuwm::WriteNative( FILE  *file, char  *filename ) {
 	}
 	if((status = (ras)->Write( f, (ras)->UniqueID(), -1)) != (ras)->UniqueID()) {
 	    if(file==NULL) fclose(f);
-	    fprintf(stderr, "raster: Write error (%d)\n", status);
+	    fprintf(stderr, "raster: Write error (%ld)\n", status);
 	    return(-1);
 	}
 	(ras)->Destroy();

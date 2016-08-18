@@ -35,6 +35,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #include <ms.h>
 #include <hdrparse.h>
 #include <stdio.h>
+#include <mail.h>
 
 extern char home[];
 

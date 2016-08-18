@@ -343,7 +343,7 @@ register long ahash;
     char tbuffer[20];
     strcpy(tpath, ai->pathName);
     strcat(tpath, "/");
-    sprintf(tbuffer, "H%d", ahash);
+    sprintf(tbuffer, "H%ld", ahash);
     strcat(tpath, tbuffer);
     return fopen(tpath, (awrite? "w+" : "r"));
 }
@@ -397,7 +397,7 @@ register const char *apath;
 		return (struct Index *) 0;
 	    }
 	    foundFlag = 1;
-	    code = sscanf(tde->d_name, "V%d.%d", &htSize, &version);
+	    code = sscanf(tde->d_name, "V%ld.%ld", &htSize, &version);
 	    if (code != 2) {
 		closedir(td);
 		return (struct Index *) 0;
@@ -495,13 +495,13 @@ register struct Index *ai;
     long j;
     for(i=0;i<ai->hashTableSize;i++) {
 	tb = index_CGetHash(ai, i);
-	if (!tb) printf("Failed to get bucket %d\n", i);
+	if (!tb) printf("Failed to get bucket %ld\n", i);
 	else {
-	    printf("Bucket %d next id %d\n", i, tb->nextID);
+	    printf("Bucket %ld next id %ld\n", i, tb->nextID);
 	    for(tc=tb->list;tc;tc=tc->next) {
 		printf(" Record named '%s' ", tc->name);
 		if (tc->primary) {
-		    printf("id %d.%d data '%s'\n", tc->id.word1, tc->id.word2, tc->data);
+		    printf("id %ld.%ld data '%s'\n", tc->id.word1, tc->id.word2, tc->data);
 		    printf("  hashes:");
 		    for(th=tc->hashes;th;th=th->next) {
 			for(j=0;j<th->nentries;j++) {
@@ -511,7 +511,7 @@ register struct Index *ai;
 		    printf("\n");
 		}
 		else {
-		    printf("refers to %d.%d\n", tc->id.word1, tc->id.word2);
+		    printf("refers to %ld.%ld\n", tc->id.word1, tc->id.word2);
 		}
 	    }
 	}

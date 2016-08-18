@@ -244,7 +244,7 @@ apts::HourOfDay( register char		   	  *hour )
   IN(apts_HourOfDay);
   apts::HourMinuteSecond( &hours, &minutes, &seconds );
   if ( hours == 0 )  hours = 12;
-  sprintf( hour, "%02d", hours );
+  sprintf( hour, "%02ld", hours );
   OUT(apts_HourOfDay);
   }
 
@@ -255,7 +255,7 @@ apts::MinuteOfHour( register char			  *minute )
 
   IN(apts_MinuteOfHour);
   apts::HourMinuteSecond( &hours, &minutes, &seconds );
-  sprintf( minute, "%02d", minutes );
+  sprintf( minute, "%02ld", minutes );
   OUT(apts_MinuteOfHour);
   }
 
@@ -266,7 +266,7 @@ apts::SecondOfMinute( register char			  *second )
 
   IN(apts_SecondOfMinute);
   apts::HourMinuteSecond( &hours, &minutes, &seconds );
-  sprintf( second, "%02d", seconds );
+  sprintf( second, "%02ld", seconds );
   OUT(apts_SecondOfMinute);
   }
 

@@ -128,13 +128,13 @@ int *numgood, *numbad, quiet, Purge;
 	 || CloseMSDir(Dir, MD_APPEND)
 	 || DropHint(DirName)) {
 
-	sprintf(ErrorText, "Scavenge failed for %s (%d, %d, %d)\n", DirName, AMS_ERRNO, AMS_ERRCAUSE, AMS_ERRVIA);
+	sprintf(ErrorText, "Scavenge failed for %s (%ld, %ld, %ld)\n", DirName, AMS_ERRNO, AMS_ERRCAUSE, AMS_ERRVIA);
 	NonfatalBizarreError(ErrorText);
 	++*numbad;
     } else {
 	++*numgood;
 	if (Purge && MS_PurgeDeletedMessages(DirName)) {
-	    sprintf(ErrorText, "Could not purge deletions in %s (%d, %d, %d)\n", DirName, AMS_ERRNO, AMS_ERRCAUSE, AMS_ERRVIA);
+	    sprintf(ErrorText, "Could not purge deletions in %s (%ld, %ld, %ld)\n", DirName, AMS_ERRNO, AMS_ERRCAUSE, AMS_ERRVIA);
 	    NonfatalBizarreError(ErrorText);
 	}
     }

@@ -122,7 +122,7 @@ static void clean_insert(class datacata  *self, FILE  *fp)
 			    }
 			    len = ((class text *)o)->GetLength();
 			    if (self->verbose)
-				fprintf(stderr, "Copying text object\n", len);
+				fprintf(stderr, "Copying text(%ld) object\n", len);
 			    (self->tx)->AlwaysCopyText( pos, (class text *)o, 0, len);
 			    if (self->ipros) doinsert(self, pos, 0, 0);
 			    tpos = (self->tx)->GetLength();
@@ -161,7 +161,7 @@ static void doinsert(class datacata  *self, long  size , long  endskip, long  de
     int charflag ;
 
     if (depth >= MAXIMUM_DEPTH) {
-	fprintf(stderr, "halting -- there appears to be a recursion of @include lines (depth %d reached)\n", depth);
+	fprintf(stderr, "halting -- there appears to be a recursion of @include lines (depth %ld reached)\n", depth);
 	return;
     }
 

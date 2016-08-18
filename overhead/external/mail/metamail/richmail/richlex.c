@@ -361,7 +361,7 @@ int nofill; /* Inside a nofill env we parse newlines differently */
 		newc = RGET(file);
 		if (newc == ')') {
 		    newc = RGET(file);	/* 4-byte ESC-$-)-? sequence */
-		    sprintf(token,ISO2022_CHARSET,newc);
+		    sprintf(token,ISO2022_CHARSET/* ,newc */);
 		} else {
 		    sprintf(token,ISO2022_GENERIC,newc);
 		}

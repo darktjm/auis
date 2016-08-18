@@ -247,7 +247,7 @@ void WriteCell (register class table  * T, FILE  *f, struct cell  * cell, char  
 	case table_TextCell:
 	    WriteString(cell->interior.TextCell.textstring, cp);
 	    if (debug)
-		printf("text string is %s\n", buff);
+		printf("text string is %s\n", *buff);
 	    break;
 	case table_ValCell:
 	    if (!isdigit(*cell->interior.ValCell.formula)) {

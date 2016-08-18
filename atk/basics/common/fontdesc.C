@@ -315,7 +315,7 @@ boolean fontdesc::ExplodeFontName(const char  *fontName, char  *familyName, long
 
 long fontdesc::StringBoundingBox(class graphic  *graphic, char  *string, int  *width, int  *height)
 {
-  int w, a, d, ascent, descent, junk;
+  long w, a, d, ascent, descent, junk;
   register short *fwt, *fht;
   register char *p;
   static struct fontdesc_charInfo ci;
@@ -324,7 +324,7 @@ long fontdesc::StringBoundingBox(class graphic  *graphic, char  *string, int  *w
   fht = (this)->HeightTable ( graphic);
   if (fwt == NULL || fht == NULL)
     return 0;
-  (this)->StringSize ( graphic, string, (long *) &w, (long *) &junk);
+  (this)->StringSize ( graphic, string, &w, &junk);
   for (p = string, a = 0, d = 0;  *p != (char) 0;  p += 1)
     {
       (this)->CharSummary ( graphic, *p, &ci);

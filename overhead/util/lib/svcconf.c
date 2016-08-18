@@ -143,7 +143,7 @@ static const struct ConfigBooleans {
 };
 
 
-int CheckServiceConfiguration() {
+int CheckServiceConfiguration(void) {
     int i, val, LMSEwasSet, ThisDomainwasSet;
     int UNUSED ConfigErrno;
     auto char Scratch[MAXPATHLEN], Scr2[MAXPATHLEN];

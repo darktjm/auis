@@ -395,7 +395,7 @@ static void ChangeState()
     /* Figure out what to do for each change in state vector */
     if (sv.CurLeftMargin != nsv.CurLeftMargin) {
         PutNewlineIfNeeded();
-        fprintf(troffFile, "'in %dp\n", NegOffset + nsv.CurLeftMargin);
+        fprintf(troffFile, "'in %ldp\n", NegOffset + nsv.CurLeftMargin);
 	changetabs = 1;
     }
 
@@ -414,7 +414,7 @@ static void ChangeState()
         /* fprintf(troffFile, "'ll %dp\n",  LineLength  - nsv.CurRightMargin); */
         /* Fix For Above */
 
-        fprintf(troffFile, "'ll \\n(.lu-(%dp)\n",
+        fprintf(troffFile, "'ll \\n(.lu-(%ldp)\n",
           nsv.CurRightMargin - sv.CurRightMargin);
     }
 
@@ -436,7 +436,7 @@ static void ChangeState()
 
     if (sv.CurScriptMovement != nsv.CurScriptMovement) {
         /* fprintf(stderr,"<%d>",nsv.CurScriptMovement); */
-        fprintf(troffFile, "\\v'%dp'", nsv.CurScriptMovement - cstatus);
+        fprintf(troffFile, "\\v'%ldp'", nsv.CurScriptMovement - cstatus);
 	needNewLine = 1;
         cstatus = nsv.CurScriptMovement;
     }
@@ -447,9 +447,9 @@ static void ChangeState()
     if (sv.CurIndentation != nsv.CurIndentation) {
         PutNewlineIfNeeded();
         if (nsv.CurIndentation < 0)
-            fprintf(troffFile, ".ti %dp\n", nsv.CurIndentation);
+            fprintf(troffFile, ".ti %ldp\n", nsv.CurIndentation);
         else
-	    fprintf(troffFile, ".ti +%dp\n", nsv.CurIndentation);
+	    fprintf(troffFile, ".ti +%ldp\n", nsv.CurIndentation);
 	changetabs = TRUE;
     }
 
@@ -517,9 +517,9 @@ static void ChangeState()
         ChangeFont();                               /* Set default font */
 	if (cSize != dSize) {
             if (needNewLine)
-                fprintf(troffFile, "\\s%d\\&", dSize);
+                fprintf(troffFile, "\\s%ld\\&", dSize);
             else
-                fprintf(troffFile, ".ps %d\n", dSize);	/* set point size */
+                fprintf(troffFile, ".ps %ld\n", dSize);	/* set point size */
 	    
 	    cSize = dSize;
 	}
@@ -653,11 +653,11 @@ static void OutputInitialTroff(register FILE  *f, class view *vw, boolean  tople
 	/* Adjust the lengths of the title lens and margins for */
         /* headers (w/o phony left space for outdenting) */
 
-	fprintf(f, ".nr LT %dp\n", LineLength - NegOffset);
+	fprintf(f, ".nr LT %ldp\n", LineLength - NegOffset);
 
 	/* Reset the left hand margin for the document */
 
-	fprintf(f,".nr PO %dp\n", PageOffset);
+	fprintf(f,".nr PO %ldp\n", PageOffset);
 
     }
 
@@ -672,7 +672,7 @@ static void OutputInitialTroff(register FILE  *f, class view *vw, boolean  tople
       sv.CurFontSize);              /* Sets dFont, dFace, dSize */
 
     ChangeFont();                   /* Set default font */
-    fprintf(f, ".nr PS %d\n", dSize);  /* Set point size */
+    fprintf(f, ".nr PS %ld\n", dSize);  /* Set point size */
     fprintf(f, ".ps \\n(PS\n");
     cSize = dSize;
 
@@ -686,7 +686,7 @@ static void OutputInitialTroff(register FILE  *f, class view *vw, boolean  tople
 	currentSpread = 0;
     }
 
-    fprintf(f, ".nr VS %dp\n", currentVS);        /* Set interline spacing and tabs */
+    fprintf(f, ".nr VS %ldp\n", currentVS);        /* Set interline spacing and tabs */
     fprintf(f, ".vs \\n(VSu\n");
     fprintf(f, ".nr EN %dn\n", tabscharspaces);
 
@@ -718,10 +718,10 @@ static void OutputInitialTroff(register FILE  *f, class view *vw, boolean  tople
 	fputs(".nr FS \\n(.s\n", f);
 	fprintf(f, ".RS\n");	/* init real defaults */
 	if (sv.CurLeftMargin != 0) {
-	    fprintf(troffFile, ".in %dp\n", NegOffset + sv.CurLeftMargin);
+	    fprintf(troffFile, ".in %ldp\n", NegOffset + sv.CurLeftMargin);
 	}
 	if (sv.CurRightMargin != 0) {
-	    fprintf(troffFile, ".ll \\n(.lu-(%dp)\n", sv.CurRightMargin);
+	    fprintf(troffFile, ".ll \\n(.lu-(%ldp)\n", sv.CurRightMargin);
 	}
 	if (sv.SpecialFlags & style_TabsCharacters) {
 #if 0
@@ -770,9 +770,9 @@ static void OutputInitialTroff(register FILE  *f, class view *vw, boolean  tople
 	    /*:RSKadd*/
 
 	    if (sv.CurIndentation < 0)
-		fprintf(troffFile, ".ti %dp\n", sv.CurIndentation);
+		fprintf(troffFile, ".ti %ldp\n", sv.CurIndentation);
 	    else if (sv.CurIndentation > 0)
-		fprintf(troffFile, ".ti +%dp\n", sv.CurIndentation);
+		fprintf(troffFile, ".ti +%ldp\n", sv.CurIndentation);
     }
 
     if (environ::GetProfileSwitch("hyphenate", 0))
@@ -819,14 +819,14 @@ static void FlushLineSpacing(int  cs, int  hitchars, boolean  needbreak)
     }
     if (cs == 1) {
 	if (currentSpread != 0) {
-	    fprintf(troffFile, ".sp %dp\n", currentSpread);
+	    fprintf(troffFile, ".sp %ldp\n", currentSpread);
 	}
     }
     else if (cs > 1) {
 	cs--;
 	if(hitchars == 0) /* space past trap */
 	    fprintf(troffFile, ".sv %d\n", cs);
-	else fprintf(troffFile, ".sp %dp\n", cs * (currentVS + currentSpread) + currentSpread);
+	else fprintf(troffFile, ".sp %ldp\n", cs * (currentVS + currentSpread) + currentSpread);
     }
     currentSpread = latestSpread;
 
@@ -852,12 +852,12 @@ static void FlushLineSpacing(int  cs, int  hitchars, boolean  needbreak)
 	    /*:RSKadd*/
 
 	    if (sv.CurIndentation < 0) 
-		fprintf(troffFile, "'ti %dp\n", sv.CurIndentation);
+		fprintf(troffFile, "'ti %ldp\n", sv.CurIndentation);
 	    else 
-		fprintf(troffFile, "'ti +%dp\n", sv.CurIndentation);
+		fprintf(troffFile, "'ti +%ldp\n", sv.CurIndentation);
     }
     if (latestVS != currentVS)  {
-	fprintf(troffFile, ".vs %d\n", latestVS);
+	fprintf(troffFile, ".vs %ld\n", latestVS);
 	currentVS = latestVS;
 	extraVS = 0;
     }
@@ -1094,11 +1094,11 @@ fflush(stdout); */
 		    pos++;
 		if(con != NULL && *sbuf != (d)->GetChar(pos) && (d)->Strncmp(pos,sbuf,strlen(sbuf)) != 0){
 		    fprintf(troffFile,".HE\n");
-		    if(printContents)fprintf(troffFile,".IC %d \"%s\" NO\n",n,bbf);
+		    if(printContents)fprintf(troffFile,".IC %ld \"%s\" NO\n",n,bbf);
 		}
 		else {
 		    fprintf(troffFile,".HE\n");
-		    if(printContents)fprintf(troffFile,".IC %d \"%s\" %s\n",n,bbf,sbuf);
+		    if(printContents)fprintf(troffFile,".IC %ld \"%s\" %s\n",n,bbf,sbuf);
 		    fprintf(troffFile,".iw %s \"%s\"\n",sbuf,bbf);
 		}
 	    }
@@ -1108,7 +1108,7 @@ fflush(stdout); */
 		    long n;
 		    if(centry != NULL) n = centry->space;
 		    else n = -1;
-		    fprintf(troffFile,".IC %d \"",n + 1);
+		    fprintf(troffFile,".IC %ld \"",n + 1);
 		    n = n *INDENTSPACE;
 		    while(n-- > 0) putc(' ',troffFile);
 		    fprintf(troffFile,"%s\" NO\n",sbuf);
@@ -1481,7 +1481,7 @@ void texttroff::WriteSomeTroff(class view  *view, class dataobject  *dd, FILE  *
                     if (c != ' ' && c != '\t') {
 			insideWord = 1;
 			if (extraVS != 0)  {
-			    fprintf(f, "\\x'-%dp'", extraVS);
+			    fprintf(f, "\\x'-%ldp'", extraVS);
 			    ln += 7;
 			}
                         ln += FlushBars(f);
@@ -1690,15 +1690,15 @@ void texttroff::EndDoc(FILE  *f)
 
 void texttroff::BeginPS(FILE  *f, long  width , long  height)
 {
-    fprintf(f, "'PB %d %d\n", width, height);
+    fprintf(f, "'PB %ld %ld\n", width, height);
     fprintf(f, "'if  \\n(zT  \\{\\\n");
-    fprintf(f, "\\!    %d troffadjust %d neg translate\n", width, height);
+    fprintf(f, "\\!    %ld troffadjust %ld neg translate\n", width, height);
 }
 
 void texttroff::EndPS(FILE  *f, long  width , long  height)
 {
     fprintf(f, "\\}\n");
-    fprintf(f, "'PE %d %d\n", width, height);
+    fprintf(f, "'PE %ld %ld\n", width, height);
 }
 
 boolean texttroff::InitializeClass()

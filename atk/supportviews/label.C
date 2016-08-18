@@ -98,7 +98,7 @@ label::Read( register FILE   *file, register long   id			/* !0 if data stream, 0
 	/* reads a label from -file-.  See file format in label.ch */
 	/* This routine reads the \enddata, if any. Its syntax is not checked */
 
-	fscanf(file, " %s %d %d ", fontfamily, &style, &size);
+	fscanf(file, " %s %ld %ld ", fontfamily, &style, &size);
 	(this)->SetFont( fontfamily, style, size);
 
 	*text = '\0';
@@ -131,11 +131,11 @@ label::Write( FILE   *file, long   writeID, int   level )
 	if (this->writeID != writeID) {
 		/* new instance of write, do it */
 		this->writeID = writeID;
-		sprintf(head, "data{%s, %d}\n", (this)->GetTypeName(), id);
+		sprintf(head, "data{%s, %ld}\n", (this)->GetTypeName(), id);
 		fprintf(file, "\\begin%s", head);
 
 		fontfamily = (this)->GetFont( &style, &size);
-		fprintf(file, " %s %d %d\n", fontfamily, style, size);
+		fprintf(file, " %s %ld %ld\n", fontfamily, style, size);
 	
 		fprintf(file, "%s\n", (this)->GetText());
 

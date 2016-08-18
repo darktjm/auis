@@ -36,6 +36,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #include <ctype.h>
 #include <ms.h>
 #include <hdrparse.h>
+#include <mail.h>
 
 #define ToLower(c) (isupper(c) ? tolower(c) : (c))
 

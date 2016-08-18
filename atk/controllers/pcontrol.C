@@ -208,7 +208,7 @@ static void kbCallBack(class pcontrol  *self,class value  *val,long  r1,long  r2
     for(i = 1; i < 13; i++){
 	if(masks[i] & w){
 	    v = i + 2 + (r1 * 12);
-	    sprintf(buf,"%d,%d,%f %s",(self->volume)->GetValue(),
+	    sprintf(buf,"%ld,%ld,%f %s",(self->volume)->GetValue(),
 		    getspeed(self),arr[v],
 		    names[i]);
 	    play(buf,Speed);
@@ -303,7 +303,7 @@ static void restCallBack(class pcontrol  *self,class value  *val,long  r1,long  
 {
 /* user code begins here for restCallBack */
     char buf[64];
-    sprintf(buf,"0,%d,0.0 rest",
+    sprintf(buf,"0,%ld,0.0 rest",
 	     getspeed(self));
 /*    play(buf, value_GetValue(self->speed)); */
     if((self->mode)->GetValue()){

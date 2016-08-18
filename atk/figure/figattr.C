@@ -217,18 +217,18 @@ long figattr::Write(FILE  *fp, long  writeid, int  level)
 	/* write out brief attr form */
 	
 	fprintf(fp, "attrs:");
-		fprintf(fp, " %d", this->shade);
-		fprintf(fp, " %d", this->linewidth);
-		fprintf(fp, " %d", this->rrectcorner);
+		fprintf(fp, " %ld", this->shade);
+		fprintf(fp, " %ld", this->linewidth);
+		fprintf(fp, " %ld", this->rrectcorner);
 		fprintf(fp, " %s", this->color);
-		fprintf(fp, " %d", this->fontsize);
-		fprintf(fp, " %d", this->fontstyle);
+		fprintf(fp, " %ld", this->fontsize);
+		fprintf(fp, " %ld", this->fontstyle);
 		fprintf(fp, " %s", this->fontfamily);
-		fprintf(fp, " %d", this->textpos);
-		fprintf(fp, " %d", this->arrowsize);
-		fprintf(fp, " %d", this->arrowpos);
-		fprintf(fp, " %d", this->arrow);
-		fprintf(fp, " %d", this->linestyle);
+		fprintf(fp, " %ld", this->textpos);
+		fprintf(fp, " %ld", this->arrowsize);
+		fprintf(fp, " %ld", this->arrowpos);
+		fprintf(fp, " %ld", this->arrow);
+		fprintf(fp, " %ld", this->linestyle);
 	fprintf(fp, "\n");
 	return 0;
     }
@@ -240,40 +240,40 @@ long figattr::Write(FILE  *fp, long  writeid, int  level)
 	    fprintf(fp, "%s:", attribute_names[ix]);
 	    switch (ix) {
 		case figattr_Shade:
-		    fprintf(fp, "%d", this->shade);
+		    fprintf(fp, "%ld", this->shade);
 		    break;
 		case figattr_LineWidth:
-		    fprintf(fp, "%d", this->linewidth);
+		    fprintf(fp, "%ld", this->linewidth);
 		    break;
 		case figattr_RRectCorner:
-		    fprintf(fp, "%d", this->rrectcorner);
+		    fprintf(fp, "%ld", this->rrectcorner);
 		    break;
 		case figattr_Color:
 		    fprintf(fp, "%s", this->color);
 		    break;
 		case figattr_FontSize:
-		    fprintf(fp, "%d", this->fontsize);
+		    fprintf(fp, "%ld", this->fontsize);
 		    break;
 		case figattr_FontStyle:
-		    fprintf(fp, "%d", this->fontstyle);
+		    fprintf(fp, "%ld", this->fontstyle);
 		    break;
 		case figattr_FontFamily:
 		    fprintf(fp, "%s", this->fontfamily);
 		    break;
 		case figattr_TextPos:
-		    fprintf(fp, "%d", this->textpos);
+		    fprintf(fp, "%ld", this->textpos);
 		    break;
 		case figattr_ArrowSize:
-		    fprintf(fp, "%d", this->arrowsize);
+		    fprintf(fp, "%ld", this->arrowsize);
 		    break;
 		case figattr_ArrowPos:
-		    fprintf(fp, "%d", this->arrowpos);
+		    fprintf(fp, "%ld", this->arrowpos);
 		    break;
 		case figattr_Arrow:
-		    fprintf(fp, "%d", this->arrow);
+		    fprintf(fp, "%ld", this->arrow);
 		    break;
 		case figattr_LineStyle:
-		    fprintf(fp, "%d", this->linestyle);
+		    fprintf(fp, "%ld", this->linestyle);
 		    break;
 		    /* ##new */
 		default:
@@ -307,9 +307,9 @@ long figattr::Read(FILE  *fp, long  id)
 		tarrow, tlinestyle;
 	char tcolor[256], tfontfamily[256];
 
-	n = sscanf(buf, "attrs: %d %d %d %s %d %d %s %d %d %d %d %d",
-		&tshade, &tlinewidth, &trrectcorner, &tcolor, &tfontsize, 
-		&tfontstyle, &tfontfamily, &ttextpos, &tarrowsize, &tarrowpos, 
+	n = sscanf(buf, "attrs: %ld %ld %ld %s %ld %ld %s %ld %ld %ld %ld %ld",
+		&tshade, &tlinewidth, &trrectcorner, tcolor, &tfontsize, 
+		&tfontstyle, tfontfamily, &ttextpos, &tarrowsize, &tarrowpos, 
 		&tarrow, &tlinestyle);
 	if (n != figattr_NumAttributes) 
 		return dataobject_PREMATUREEOF;
@@ -603,27 +603,27 @@ void figattr::PrintArrowHead(FILE *file, char *prefix, struct figattr_arrowhead 
 	default:
 	    /*(v)->FillPolygon(arrowtemp, 3, (v)->BlackPattern());*/
 	    for (ix=0; ix<3; ix++) {
-		fprintf(file, "%s %d %d %s\n", prefix, arrowhead->arrowtemp[ix].x, arrowhead->arrowtemp[ix].y, (ix) ? "lineto" : "moveto");
+		fprintf(file, "%s %ld %ld %s\n", prefix, arrowhead->arrowtemp[ix].x, arrowhead->arrowtemp[ix].y, (ix) ? "lineto" : "moveto");
 	    }
 	    fprintf(file, "%s closepath fill\n", prefix);
 	    break;
 	case figattr_EquTriangle:
 	      /*(v)->FillPolygon(arrowtemp, 3, (v)->BlackPattern());*/
 	    for (ix=0; ix<3; ix++) {
-		fprintf(file, "%s %d %d %s\n", prefix, arrowhead->arrowtemp[ix].x, arrowhead->arrowtemp[ix].y, (ix) ? "lineto" : "moveto");
+		fprintf(file, "%s %ld %ld %s\n", prefix, arrowhead->arrowtemp[ix].x, arrowhead->arrowtemp[ix].y, (ix) ? "lineto" : "moveto");
 	    }
 	    fprintf(file, "%s closepath fill\n", prefix);
 	    break;
 	case figattr_Square:
 	    /*(v)->FillPolygon(arrowtemp, 4, (v)->BlackPattern());*/
 	    for (ix=0; ix<4; ix++) {
-		fprintf(file, "%s %d %d %s\n", prefix, arrowhead->arrowtemp[ix].x, arrowhead->arrowtemp[ix].y, (ix) ? "lineto" : "moveto");
+		fprintf(file, "%s %ld %ld %s\n", prefix, arrowhead->arrowtemp[ix].x, arrowhead->arrowtemp[ix].y, (ix) ? "lineto" : "moveto");
 	    }
 	    fprintf(file, "%s closepath fill\n", prefix);
 	    break;
 	case figattr_Circle:
 	    /*(v)->FillOval(&rect, (v)->BlackPattern());*/
-	    fprintf(file, "%s %d %d %d 0 360 arc\n", prefix, arrowhead->arrowtemp[0].x, arrowhead->arrowtemp[0].y, arrowhead->arrowtemp[1].x);
+	    fprintf(file, "%s %ld %ld %ld 0 360 arc\n", prefix, arrowhead->arrowtemp[0].x, arrowhead->arrowtemp[0].y, arrowhead->arrowtemp[1].x);
 	    fprintf(file, "%s closepath fill\n", prefix);
 	    break;
     }

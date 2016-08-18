@@ -371,7 +371,7 @@ void figoins::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolean
     y--;
     w+=2;
     h+=2;
-    fprintf(file, "%s  %d %d moveto  %d %d lineto  %d %d lineto  %d %d lineto closepath\n", prefix, x, y,  x, y+h,  x+w, y+h,  x+w, y);
+    fprintf(file, "%s  %ld %ld moveto  %ld %ld lineto  %ld %ld lineto  %ld %ld lineto closepath\n", prefix, x, y,  x, y+h,  x+w, y+h,  x+w, y);
 
     fprintf(file, "%s  gsave\n", prefix);
     fprintf(file, "%s  1 setgray\n", prefix);

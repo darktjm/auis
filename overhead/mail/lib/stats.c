@@ -373,7 +373,7 @@ int Logstat(module, call, format, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9)
     /* Format system info */
     Format(ModuleName, module, LOGSTRLEN);
     sprintf(buffer,
-	    "%04d-%02d-%02d %02d:%02d:%02d.%02d %s %10d %6d %6d %s %5d %11d %s; ",
+	    "%04d-%02d-%02d %02d:%02d:%02d.%02ld %s %10d %6d %6d %s %5d %11d %s; ",
 	    now->tm_year+1900, now->tm_mon+1, now->tm_mday,
 	    now->tm_hour, now->tm_min, now->tm_sec, tp.USecs/10000,
 	    ProgName, TransactionNumber, getpid(), GETPGRP(),

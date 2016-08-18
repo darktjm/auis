@@ -41,7 +41,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 #include <truth.h>
 
 /* trash second arg */
-char *argvtostr(const char * const *argv,char *buf,int len)
+char *argvtostr(const char * const *argv,char *buf,unsigned int len)
 {
     if(argv!=NULL && *argv){
 	const char * const *p=argv;
@@ -138,32 +138,32 @@ const char **strtoargv(char *str,const char **argv,int len)
 char *statustostr(WAIT_STATUS_TYPE *status,char *buf,int len)
 {
 #if !defined(POSIX_ENV) && defined(M_UNIX)
-    sprintf(buf,"status = %d.",*status);
+    snprintf(buf,len,"status = %d.",*status);
     if(*status==0) return NULL;
 #else /* hpux */
 #if POSIX_ENV
     if(WIFSTOPPED(*status))
-	strcpy(buf,"stopped.");
+	strncpy(buf,"stopped.",len);
     else if (WIFSIGNALED(*status))
-	sprintf(buf,"killed by signal %d.",WTERMSIG(*status));
+	snprintf(buf,len,"killed by signal %d.",WTERMSIG(*status));
     else if (WIFEXITED(*status)) {
 	if (WEXITSTATUS(*status) == 0) {
-	    strcpy(buf, "exited.");
+	    strncpy(buf, "exited.",len);
 	    return NULL;
 	} else
-	sprintf(buf,"exited with exit status of %d.", WEXITSTATUS(*status));
+	snprintf(buf,len,"exited with exit status of %d.", WEXITSTATUS(*status));
     }
 #else
     if(WIFSTOPPED(*status))
-	strcpy(buf,"stopped.");
+	strncpy(buf,"stopped.",len);
     else if(status->w_termsig!=0){
-	sprintf(buf,"killed by signal %d",status->w_termsig);
+	snprintf(buf,"killed by signal %d",status->w_termsig);
 	if(status->w_coredump)
-	    strcat(buf," (core dumped).");
+	    strcat(buf," (core dumped)."); /* not worth trying to add len */
 	else
-	    strcat(buf,".");
+	    strcat(buf,"."); /* not worth trying to add len */
     }else if(status->w_retcode==0){
-	strcpy(buf,"exited.");
+	strncpy(buf,"exited.",len);
 	return NULL; /* successful */
     }else
 	sprintf(buf,"exited with exit status of %d.",status->w_retcode);

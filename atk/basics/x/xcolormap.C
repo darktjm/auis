@@ -152,7 +152,7 @@ static void NormalColorCube(xcolormap *xcmap) {
 		realcubesize=cubics[i];
 		break;
 	    }
-	if(realcubesize<0) fprintf(stderr, "xcolormap: bad ColorCubeSize preference:%d,\nshould be a cubic value. (n^3)\n", cubesize);
+	if(realcubesize<0) fprintf(stderr, "xcolormap: bad ColorCubeSize preference:%ld,\nshould be a cubic value. (n^3)\n", cubesize);
     }
 
     if(realcubesize<0) {
@@ -227,7 +227,7 @@ static void NormalColorCube(xcolormap *xcmap) {
     }
     leave:
     if(realcubesize!=cubesize) {
-	fprintf(stderr, "xcolormap: couldn't create %d color cube, using %d color cube.\n", cubesize, realcubesize);
+	fprintf(stderr, "xcolormap: couldn't create %ld color cube, using %ld color cube.\n", cubesize, realcubesize);
     }
 }
 
@@ -522,7 +522,7 @@ ddcolor *xcolormap::Alloc(const atom *name)
 	    return xc;
 	}
 	if(!ParseColor(this, name, r, g, b)) {
-	    fprintf(stderr, "xcolormap: bad color name %s.\n", name);
+	    fprintf(stderr, "xcolormap: bad color name %s.\n", (const char *)name);
 	    return NULL;
 	}
     }

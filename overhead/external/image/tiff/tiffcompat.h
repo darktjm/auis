@@ -86,16 +86,6 @@
 #endif
 
 /*
- * SVID workarounds for BSD bit
- * string manipulation routines.
- */
-#if defined(SYSV) || defined(THINK_C) || defined(applec) || defined(VMS)
-#define	bzero(dst,len)		memset((char *)dst, 0, len)
-#define	bcopy(src,dst,len)	memcpy((char *)dst, (char *)src, len)
-#define	bcmp(src, dst, len)	memcmp((char *)dst, (char *)src, len)
-#endif
-
-/*
  * The BSD typedefs are used throughout the library.
  * If your system doesn't have them in <sys/types.h>,
  * then define BSDTYPES in your Makefile.
@@ -106,6 +96,8 @@ typedef	unsigned short u_short;
 typedef	unsigned int u_int;
 typedef	unsigned long u_long;
 #endif
+
+#include <unistd.h>
 
 /*
  * Return an open file descriptor or -1.
@@ -165,7 +157,7 @@ extern	long lseek();
  * Default Read/Seek/Write definitions.
  */
 #ifndef ReadOK
-#define	ReadOK(fd, buf, size)	(read(fd, (char *)buf, size) == size)
+#define	ReadOK(fd, buf, size)	(read(fd, (char *)buf, size) == (long)(size))
 #endif
 #ifndef SeekOK
 #define	SeekOK(fd, off)	(lseek(fd, (long)off, L_SET) == (long)off)

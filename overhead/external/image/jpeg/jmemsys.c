@@ -105,19 +105,6 @@ select_file_name (char * fname)
 
 #else /* ! NO_MKTEMP */
 
-/* Note that mktemp() requires the initial filename to end in six X's */
-#ifndef TEMP_FILE_NAME		/* so can override from Makefile */
-#define TEMP_FILE_NAME  "%sJPG%dXXXXXX"
-#endif
-
-LOCAL void
-select_file_name (char * fname)
-{
-  next_file_num++;		/* advance counter */
-  sprintf(fname, TEMP_FILE_NAME, TEMP_DIRECTORY, next_file_num);
-  mktemp(fname);		/* make sure file name is unique */
-  /* mktemp replaces the trailing XXXXXX with a unique string of characters */
-}
 
 #endif /* NO_MKTEMP */
 
@@ -201,31 +188,17 @@ METHODDEF void
 close_backing_store (backing_store_ptr info)
 {
   fclose(info->temp_file);	/* close the file */
-  unlink(info->temp_name);	/* delete the file */
-/* If your system doesn't have unlink(), use remove() instead.
- * remove() is the ANSI-standard name for this function, but if
- * your system was ANSI you'd be using jmemansi.c, right?
- */
 }
 
 
 GLOBAL void
 jopen_backing_store (backing_store_ptr info, long total_bytes_needed)
 {
-  char tracemsg[TEMP_NAME_LENGTH+40];
-
-  select_file_name(info->temp_name);
-  if ((info->temp_file = fopen(info->temp_name, RW_BINARY)) == NULL) {
-    /* hack to get around ERREXIT's inability to handle string parameters */
-    sprintf(tracemsg, "Failed to create temporary file %s", info->temp_name);
-    ERREXIT(methods, tracemsg);
-  }
+  if ((info->temp_file = tmpfile()) == NULL)
+    ERREXIT(methods, "Failed to create temporary file");
   info->read_backing_store = read_backing_store;
   info->write_backing_store = write_backing_store;
   info->close_backing_store = close_backing_store;
-  /* hack to get around TRACEMS' inability to handle string parameters */
-  sprintf(tracemsg, "Using temp file %s", info->temp_name);
-  TRACEMS(methods, 1, tracemsg);
 }
 
 

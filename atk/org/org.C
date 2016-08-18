@@ -258,11 +258,11 @@ long Read_Body( register class org		      *self, register FILE			      *file )
     }
   if ( braces ) {
     status = failure;
-/*===*/printf("ORG: ERROR  %d Unbalanced Braces\n", braces);
+/*===*/printf("ORG: ERROR  %ld Unbalanced Braces\n", braces);
   }
   if ( brackets ) {
       status = failure;
-/*===*/printf("ORG: ERROR  %d Unbalanced Brackets\n", brackets);
+/*===*/printf("ORG: ERROR  %ld Unbalanced Brackets\n", brackets);
   }
 /*===*/
   OUT(Read_Body);
@@ -282,9 +282,9 @@ org::Write( register FILE			      *file, register long			       writeID, registe
   DEBUGdt(Local-ID,id);
   if ( this->writeID != writeID ) {
     this->writeID = writeID;
-    fprintf( file, "\\begindata{%s,%d}\n", (this )->GetTypeName( ), id );
+    fprintf( file, "\\begindata{%s,%ld}\n", (this )->GetTypeName( ), id );
     status = Write_Body( this, file );
-    fprintf( file, "\n\\enddata{%s,%d}\n", (this )->GetTypeName( ), id );
+    fprintf( file, "\n\\enddata{%s,%ld}\n", (this )->GetTypeName( ), id );
   }
   DEBUGdt(Status,status);
   OUT(org_Write);
@@ -303,13 +303,13 @@ long Write_Body( register class org  *self, register FILE  *file )
   IN(Write_Body);
   while ( node ) {
     if ( (level = (Tree)->NodeLevel(  node )) > current_level )
-	fprintf( file, "%*s{\n", 2 * level, "" );
+	fprintf( file, "%*s{\n", (int)(2 * level), "" );
     else 
 	if ( level < current_level )
 	    for ( ; current_level > level; current_level-- )
-		fprintf( file, "%*s}\n", 2 * current_level, "" );
+		fprintf( file, "%*s}\n", (int)(2 * current_level), "" );
     current_level = level;
-    fprintf( file, "%*s%s\n", 2 * level, "", (Tree)->NodeName(  node ) );
+    fprintf( file, "%*s%s\n", (int)(2 * level), "", (Tree)->NodeName(  node ) );
     if ( (textp = (class text *) (Tree)->NodeDatum( node)) && 
 	 (size = (textp)->GetLength()) > 0 ) {
 	long realSize = 0;
@@ -333,13 +333,13 @@ long Write_Body( register class org  *self, register FILE  *file )
 		unlink(fName);
 	    }	
 	}
-	fprintf( file, "%*s[%d\n%s]\n", 2 * level, "", realSize, description);
+	fprintf( file, "%*s[%ld\n%s]\n", (int)(2 * level), "", realSize, description);
 	free(description);
     }
     node = (Tree)->NextNode(  node );
   }
   for ( ; current_level > 1; current_level-- )
-    fprintf( file, "%*s}\n", 2 * current_level, "" );
+    fprintf( file, "%*s}\n", (int)(2 * current_level), "" );
   OUT(Write_Body);
   return(status);
 }

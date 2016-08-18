@@ -139,7 +139,7 @@ void application::PrintVersionNumber()
 	    break;
 	default:
 	    fprintf(stderr,
-		    "Starting %s (Version %d.%d, ATK %s); please wait...\n",
+		    "Starting %s (Version %ld.%ld, ATK %s); please wait...\n",
 		    (this)->GetName(),
 		    (this)->GetMajorVersion(),
 		    (this)->GetMinorVersion(),

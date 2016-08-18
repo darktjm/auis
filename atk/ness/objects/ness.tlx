@@ -191,7 +191,7 @@ tokenclass setSTRINGCON
 	if (styled) {
 		/* short styled string */
 		char buf[50];
-		sprintf(buf, "~%d", GenNum++);
+		sprintf(buf, "~%ld", GenNum++);
 		t = toksym::TLocate(buf, CURCOMP->proto, 
 			CURCOMP->ness->constScope, &isNew);
 		t->info.str = NULL;
@@ -303,7 +303,7 @@ seq	"//"
 	else {
 		char buf[15];
 		boolean isNew;
-		sprintf(buf, "/%d", GenNum++);
+		sprintf(buf, "/%ld", GenNum++);
 		t = toksym::TLocate(buf, CURCOMP->proto, 
 			CURCOMP->scopes[CURCOMP->scopex], &isNew);
 		t->info.str = NULL;

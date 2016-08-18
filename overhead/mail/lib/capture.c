@@ -65,7 +65,7 @@ char *Hdr;
     if (FD < 0) return;
     if (osi_ExclusiveLockNoBlock(FD) < 0) {close(FD); return;}
     if (lseek(FD, 0, 2) < 0) return;
-    sprintf(WrittenLine, "\n|%d|", time(0));
+    sprintf(WrittenLine, "\n|%ld|", time(0));
     sigLen = strlen(WrittenLine);
     WrittenLine[sigLen+1] = '|';
     if (BracketField(Hdr, "organize:", &begOrg, &endOrg, NULL) == 0) begOrg = endOrg = NULL;

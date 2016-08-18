@@ -873,7 +873,7 @@ void Ps_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 		    class mmtext *doc = (class mmtext *) self;
 		    (doc)->GetFilename( filename);
 	} else filename[0] = '\0';
-	sprintf(cmd, "$tail <%s +%d|head -%d|pic|troff|preview", filename,
+	sprintf(cmd, "$tail <%s +%ld|head -%ld|pic|troff|preview", filename,
 		self->picBegin,	t->t->LineNumber - self->picBegin+1);	/* include .PE */
 	(self->picButton)->SetLink( cmd);
 	return;

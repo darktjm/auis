@@ -188,7 +188,7 @@ class environment *chlistview::GetStyleInformation(struct text_statevector  *sv,
     if (chlistview_Debug) {
 	long len = (length == NULL) ? -1 : *length;
 
-	printf("pos: %d length: %d index: %d regionID: %d size: %d offset: %d\n", pos, len, index, regionID, size, offset);
+	printf("pos: %ld length: %ld index: %ld regionID: %ld size: %ld offset: %ld\n", pos, len, index, regionID, size, offset);
     }
 
     if (index >= 0 && regionID >= 0) {

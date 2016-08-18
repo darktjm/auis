@@ -726,11 +726,11 @@ class graphic *xfontdesc::CvtCharToGraphic(class graphic  *graphic2, char  Speci
 	y = ci->ascent;
 	/* Note: we could have an empty character, in which case, we simulate it with a 1 by 1 character. Too bad X doesn't allow 0 sized pixmaps */
 	if (!width) {
-	    fprintf(stderr,"xfontdesc_CvtCharToGraphic: 0 width character %d in %X\n", SpecialChar, this);
+	    fprintf(stderr,"xfontdesc_CvtCharToGraphic: 0 width character %d in %p\n", SpecialChar, this);
 	    width++;
 	}
 	if (!height) {
-	    fprintf(stderr,"xfontdesc_CvtCharToGraphic: 0 height character %d in %X\n", SpecialChar, this);
+	    fprintf(stderr,"xfontdesc_CvtCharToGraphic: 0 height character %d in %p\n", SpecialChar, this);
 	    height++;
 	}
 	newPixmap = XCreatePixmap((graphic)->XDisplay(), (graphic)->XWindow(), width, height, depth);

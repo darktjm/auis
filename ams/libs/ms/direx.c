@@ -55,7 +55,7 @@ char *mdir;
 	if (errno == ENOENT) {
 	    strcpy(ErrorText, "The 'Welcome to Andrew' mail file is missing, so you'll get no 'welcome' mail.");
 	} else {
-	    sprintf(ErrorText, "Could not give you the 'Welcome to Andrew' mail (%d, %d, %d)", AMS_ERRNO, AMS_ERRCAUSE, AMS_ERRVIA);
+	    sprintf(ErrorText, "Could not give you the 'Welcome to Andrew' mail (%ld, %ld, %ld)", AMS_ERRNO, AMS_ERRCAUSE, AMS_ERRVIA);
 	}
 	NonfatalBizarreError(ErrorText);
     }

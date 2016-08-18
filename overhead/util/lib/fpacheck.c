@@ -11,7 +11,7 @@
 static UNUSED const char rcsid[] = "$Header: ";
 #endif /* lint */
 
-int fpacheck()
+int fpacheck(void)
 {
     float f;
 

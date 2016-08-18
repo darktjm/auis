@@ -106,7 +106,7 @@ ErrorWithParm(register class tlex  *self, struct tlex_ErrorRecparm  *parm) {
 	int val;
 
 	if (parm->handler == NULL) {
-		fprintf(stderr, "tlex: error at or before position %d - %s\n",
+		fprintf(stderr, "tlex: error at or before position %ld - %s\n",
 			self->currpos, parm->msg);
 		return tlex_IGNORE;
 	}

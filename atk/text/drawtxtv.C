@@ -1132,7 +1132,7 @@ static void draw_linenum(textview *self, mark *line_mark, struct rectangle *area
 
     /* Draw the line number. */
     if (pos == 0 || Text(self)->GetChar(pos-1) == '\n') {
-	sprintf(linebuf, "%d", Text(self)->GetLineForPos(pos));
+	sprintf(linebuf, "%ld", Text(self)->GetLineForPos(pos));
 	self->MoveTo(rectangle_Right(area)-3, rectangle_Bottom(area));
 	self->DrawString(linebuf, graphic_ATBASELINE|graphic_ATRIGHT);
     }
@@ -1529,7 +1529,7 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
 		    /* The code to display an inset; size computed in */
                     /* AllocateLineItem during line layout */
 
-                    /* we no longer force the width of an inset to fit entirely in it's parent: -robr 10/20/96
+                    /* we no longer force the width of an inset to fit entirely in its parent: -robr 10/20/96
                      if (tt->vi_width > xSize)
                         tt->vi_width = xSize; */
 		    (tt->vi_view)->GetOrigin( tt->vi_width, tt->vi_height, &xoffset, &yoffset);

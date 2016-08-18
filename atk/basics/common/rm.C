@@ -121,7 +121,7 @@ int FindResource( class atomlist  * name, struct atoms  * namecar, class atomlis
 #if DEBUG_RM
 	  if (debug_rm)
 	    {
-	      printf("Found at name: %x ",namecar);
+	      printf("Found at name: %p ",namecar);
 	      Patom((name)->TraversalAtom(namecar));
 	      printf("\n");
 	    }
@@ -141,7 +141,7 @@ int FindResource( class atomlist  * name, struct atoms  * namecar, class atomlis
 #if DEBUG_RM
 	      if (debug_rm)
 		{
-		  printf("Found at class: %x ",classcar);
+		  printf("Found at class: %p ",classcar);
 		  Patom((class_c)->TraversalAtom(classcar));
 		  printf("\n");
 		}
@@ -156,7 +156,7 @@ int FindResource( class atomlist  * name, struct atoms  * namecar, class atomlis
 #if DEBUG_RM
 	      if (debug_rm)
 		{
-		  printf("discarded at name: %x ",namecar);
+		  printf("discarded at name: %p ",namecar);
 		  Patom((name)->TraversalAtom(namecar));
 		  printf("\n");
 		}
@@ -227,7 +227,7 @@ int FindManyResources( struct resourceList  * resources, class atomlist  * name,
 #if DEBUG_RM
 	  if (debug_rm)
 	    {
-	      printf("Found at name: %x ",namecar);
+	      printf("Found at name: %p ",namecar);
 	      Patom((name)->TraversalAtom(namecar));
 	      printf("\n");
 	    }
@@ -248,7 +248,7 @@ int FindManyResources( struct resourceList  * resources, class atomlist  * name,
 #if DEBUG_RM
 	      if (debug_rm)
 		{
-		  printf("Found at class: %x ",classcar);
+		  printf("Found at class: %p ",classcar);
 		  Patom((class_c)->TraversalAtom(classcar));
 		  printf("\n");
 		}
@@ -263,7 +263,7 @@ int FindManyResources( struct resourceList  * resources, class atomlist  * name,
 #if DEBUG_RM
 	      if (debug_rm)
 		{
-		  printf("discarded at name: %x ",namecar);
+		  printf("discarded at name: %p ",namecar);
 		  Patom((name)->TraversalAtom(namecar));
 		  printf("\n");
 		}
@@ -412,7 +412,7 @@ void rm::PostResource( class atomlist  * path, long  data, class atom  * type )
     {
       printf("Posting resource: ");
       Plist( path );
-      printf("\nType: %x ",type);
+      printf("\nType: %p ",type);
       Patom(type);
       putchar('\n');
     }
@@ -437,7 +437,7 @@ short rm::GetResource( class atomlist  * name, class atomlist  * class_c, class 
       Plist( name );
       printf("\nClass: ");
       Plist(class_c);
-      printf("\nType: %x ",type);
+      printf("\nType: %p ",type);
       Patom(type);
       printf("\n");
     }
@@ -450,7 +450,7 @@ short rm::GetResource( class atomlist  * name, class atomlist  * class_c, class 
   if (debug_rm)
     {
       if (x)
-	printf("Found such a resource %x\n", tree);
+	printf("Found such a resource %p\n", tree);
       else
 	printf("no such resource\n");
     }

@@ -2551,7 +2551,7 @@ char   *arg;
     debug(2,("Converted date %s to %s\n", date, date64));
 
     if (Interactive) {
-	sprintf(ErrorText, "Warning.  You are about to delete all messages in the folder \n\t%s\nand all its subfolders dated before\n\t%d/%d/%d %d:%02d.\n\nAre you sure you want to do this",
+	sprintf(ErrorText, "Warning.  You are about to delete all messages in the folder \n\t%s\nand all its subfolders dated before\n\t%d/%d/%d %d:%02d:%02d.\n\nAre you sure you want to do this",
 	    dname, month + 1, day, year,
 	    hour, min, sec);
 	if (!GetBooleanFromUser(ErrorText, FALSE)) {
@@ -2581,7 +2581,7 @@ char   *arg;
 	ReportError(ErrorText, ERR_WARNING, TRUE);
 	return(-1);
     }
-    debug(1, ("Day of week is %d; unix time is %d\n", wday, gtm));
+    debug(1, ("Day of week is %d; unix time is %ld\n", wday, gtm));
     moreprintf("%d/%d/%d %d:%02d:%02d\n",
 	    month + 1, day, year,
 	    hour, min, sec);

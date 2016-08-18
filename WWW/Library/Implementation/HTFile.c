@@ -332,7 +332,7 @@ PUBLIC char * HTLocalName ARGS1(CONST char *,name)
     HTUnEscape(path);	/* Interpret % signs */
 
     /*
-     * CERN httpd has it's own enhanced rule system which has already
+     * CERN httpd has its own enhanced rule system which has already
      * done the mappings, and the local filename ("physical address")
      * is stored in HTImServer.
      */

@@ -42,9 +42,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 #define NULL (char *)0
 #endif
 
-int main (argc,argv)
-int argc;
-char **argv;
+int main (int argc,const char **argv)
 {
   char retval[1000], *s;
 

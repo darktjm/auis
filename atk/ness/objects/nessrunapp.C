@@ -310,7 +310,7 @@ nessrunapp::Run() {
 
 	if (ness::PrintAllErrors("Compile") != 0)
 		return(1);
-	else fprintf (stderr, "Compiled in %d.%02d sec.\n",
+	else fprintf (stderr, "Compiled in %ld.%02ld sec.\n",
 			(t1-t0)/1000, (t1-t0)%1000/10);
 
 	forkit = (this)->GetFork();
@@ -324,7 +324,7 @@ nessrunapp::Run() {
 	if (result != NULL) 
 		ness::PrintAllErrors("Execution");
 	else if ( ! forkit)
-		fprintf (stderr, "Executed in %d.%02d sec.\n",
+		fprintf (stderr, "Executed in %ld.%02ld sec.\n",
 			(t1-t0)/1000, (t1-t0)%1000/10);
 
 	return ((result == NULL) ? 0 : 1);

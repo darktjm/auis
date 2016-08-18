@@ -467,7 +467,7 @@ osi_UnLock unlocks the file.
 
 /* handle (BSD) vfork for (AIX) which only knows fork
  osi_vfork should be the fastest available fork, on some systems
- the child created by osi_vfork will suspend it's parent until
+ the child created by osi_vfork will suspend its parent until
  an exec call and will share the address space of the parent until the exec. */
 #define	osi_vfork()			fork()
 

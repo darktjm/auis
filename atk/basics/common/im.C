@@ -330,14 +330,14 @@ WriteLogEntry (class im  *self, unsigned char code, const char  *str)
 	    if (str[0]=='\0' || str[1] == '\0') 
 		str = charToPrintable(*str);
 	}
-	fprintf(self->LogFile, "%d%c%s\n", now - LogStart, code, str);
+	fprintf(self->LogFile, "%d%c%s\n", (int)(now - LogStart), code, str);
 }
 
 	void
 WriteLogXY (class im  *self, unsigned char code, long  x , long  y)
 			{
 	if (self->LogFile == NULL) return;
-	fprintf(self->LogFile, "%d%c%d,%d\n", time(0) - LogStart, code, x>>4, y>>4);
+	fprintf(self->LogFile, "%d%c%ld,%ld\n", (int)(time(0) - LogStart), code, x>>4, y>>4);
 }
 
 
@@ -951,10 +951,10 @@ static void echoKey(class im  *self,long  key,int  pending)
 {
     if(self->keyEchoState==im_KeyEchoOff){
 	if(self->argState.argProvided) {
-	    sprintf(self->keyEcho,"%d ",self->argState.argument);
+	    sprintf(self->keyEcho,"%ld ",self->argState.argument);
 	}
 	else if (self->argState.argPending) {
-	    sprintf(self->keyEcho,"%d ",self->argState.tmpArgument);
+	    sprintf(self->keyEcho,"%ld ",self->argState.tmpArgument);
 	}
 	else {
 	    self->keyEcho[0]='\0';
@@ -1024,7 +1024,7 @@ static void HandleArgumentProcessing(class im  *self, long  key)
 	self->argState.argPending = TRUE;
 	self->argState.processCmd = allowCtrlUCmds;
 
-	sprintf(argbuf, "Arg: %d", newArg);
+	sprintf(argbuf, "Arg: %ld", newArg);
 	/* message_DisplayString(self, 0, buf); */
     }
     else if (self->argState.argPending && self->argState.cmdpos == 0 && key >= '0' && key <= '9') {
@@ -1039,7 +1039,7 @@ static void HandleArgumentProcessing(class im  *self, long  key)
 	}
 	self->argState.tmpArgument = newArg;
 
-	sprintf(argbuf, "Arg: %d", newArg);
+	sprintf(argbuf, "Arg: %ld", newArg);
 	message::DisplayString(self, 0, argbuf);
     }
     else if (self->argState.argPending) {
@@ -2807,21 +2807,21 @@ static void DumpActions(struct action  *a)
     while(a) {
 	switch(a->type) {
 	    case im_KeyboardEvent:
-		printf("key:'%c'\n",a->v.key);
+		printf("key:'%c'\n",(int)a->v.key);
 		break;
 	    case im_ProcEvent:
 		printf("proc %s\n",proctable::GetName(a->v.proc.procTableEntry));
-		printf("rock %d '%c'\n",a->v.proc.rock, a->v.proc.rock);
+		printf("rock %ld '%c'\n",a->v.proc.rock, (int)a->v.proc.rock);
 		break;
 	    case im_MenuEvent:
 		printf("menu proc %s\n",proctable::GetName(a->v.proc.procTableEntry));
-		printf("rock %d '%c'\n",a->v.proc.rock, a->v.proc.rock);
+		printf("rock %ld '%c'\n",a->v.proc.rock, (int)a->v.proc.rock);
 		break;
 	    case im_MouseEvent:
 		printf("mouse event!!\n");
 		break;
 	    case im_AnswerEvent:
-		printf("answer:%x\n",a->v.answer);
+		printf("answer:%p\n",a->v.answer);
 		printf("answer:'%s'\n",a->v.answer);
 		break;
 	    case im_SuspendEvent:
@@ -2940,7 +2940,7 @@ void im::DisplayArg()
 
     struct im_ArgState *as = (this)->GetArgState();
 
-    sprintf(buf, "Arg: %d", as->argument);
+    sprintf(buf, "Arg: %ld", as->argument);
     message::DisplayString(this, 0, buf);
 }
 

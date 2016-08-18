@@ -390,7 +390,7 @@ void rasterview_OverlayInsetProc(class rasterview  *self, char  *rock)
     (self->inset)->WantInputFocus( self->inset);
     (self)->NotifyObservers( 0); 
 
-    sprintf(buf, "Inserted %s inset at %d,%d (%d by %d)", iname, self->InsetBox.left, self->InsetBox.top, self->InsetBox.width, self->InsetBox.height);
+    sprintf(buf, "Inserted %s inset at %ld,%ld (%ld by %ld)", iname, self->InsetBox.left, self->InsetBox.top, self->InsetBox.width, self->InsetBox.height);
     message::DisplayString(self, 10, buf);
 }
 
@@ -445,7 +445,7 @@ void rasterview_ResizeInsetProc(class rasterview  *self, char  *rock)
     (self->inset)->InsertViewSize( self, self->InsetBox.left-self->Xoff, self->InsetBox.top-self->Yoff, self->InsetBox.width, self->InsetBox.height);
     self->InsetUpdateWanted = TRUE;
 
-    sprintf(buf, "Placed inset at %d,%d (%d by %d)", self->InsetBox.left, self->InsetBox.top, self->InsetBox.width, self->InsetBox.height);
+    sprintf(buf, "Placed inset at %ld,%ld (%ld by %ld)", self->InsetBox.left, self->InsetBox.top, self->InsetBox.width, self->InsetBox.height);
     message::DisplayString(self, 10, buf);
 
     (self)->WantUpdate( self);
@@ -466,14 +466,14 @@ void rasterview_ImprintInsetProc(class rasterview  *self, long  rock)
     class rasterimage *pix, *pix2;
     struct rectangle R;
 
-    DEBUG(("ImprintInsetProc: rock=%d", rock));
+    DEBUG(("ImprintInsetProc: rock=%ld", rock));
     if (rock<0 || rock>=16) {
 	if (self->toolset)
 	    rock = (self->toolset)->GetPasteMode();
 	else
 	    rock = pixelimage_COPY;
     }
-    DEBUG(("ImprintInsetProc: new rock=%d", rock));
+    DEBUG(("ImprintInsetProc: new rock=%ld", rock));
 
     if (!self->inset) return;
 

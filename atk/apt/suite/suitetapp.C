@@ -706,8 +706,8 @@ class view *
 Name_Choice( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
             {
   printf("Title Caption '%s' Item Caption '%s'\n",
-	    (suite)->SuiteAttribute( suite_titlecaption),
-	    (suite)->ItemAttribute( item, suite_itemcaption));
+	    (char *)(suite)->SuiteAttribute( suite_titlecaption),
+	    (char *)(suite)->ItemAttribute( item, suite_itemcaption));
   return(0);
 }
 
@@ -715,8 +715,8 @@ class view *
 RW_Hit_Handler( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
             {
   printf("Title Caption '%s'  Item Caption '%s'\n",
-	    (suite)->SuiteAttribute( suite_titlecaption),
-	    (suite)->ItemAttribute( item, suite_itemcaption));
+	    (char *)(suite)->SuiteAttribute( suite_titlecaption),
+	    (char *)(suite)->ItemAttribute( item, suite_itemcaption));
   return(0);
 }
 

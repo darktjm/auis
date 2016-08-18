@@ -1146,7 +1146,7 @@ static void SlurpWord(struct textps_slurp  *slurp)
 			    /*class style *strsty;*/
 			    clex->type = textps_lexer_CharArray;
 			    clex->str = (char *)malloc(12); /* this must be a non-empty string */
-			    sprintf(clex->str, "%d", wordpt->footnotenumber);
+			    sprintf(clex->str, "%ld", wordpt->footnotenumber);
 			    clex->sty = styx;
 			    clex->len = strlen(clex->str);
 			    InitLexer(slurp, clex);
@@ -1819,7 +1819,7 @@ static struct textps_line *LayoutOneLine(struct textps_slurp  *slurp, long  colu
 
 			fn = (class fnote *)(v->GetDataObject());
 			numbuf = (char *)malloc(20 * sizeof(char));
-			sprintf(numbuf, "%d", wd->footnotenumber);
+			sprintf(numbuf, "%ld", wd->footnotenumber);
 			if (!fstyle) {
 			    fstyle = new style;
 			    fstyle->SetName("footnotetag");
@@ -2540,7 +2540,7 @@ static void DumpLayout(struct textps_layout  *ly)
 	    if (buflen>998) buflen=998;
 	    strncpy(buf, tlin->letters+tlin->words[wx].start, buflen);
 	    buf[buflen] = '\0';
-	    printf("|%s| [%d], ", buf, tlin->words[wx].xpos);
+	    printf("|%s| [%ld], ", buf, tlin->words[wx].xpos);
 	}
 	printf("\n");
     }
@@ -3220,7 +3220,7 @@ static void insert_header_line(class text *t, char *str, long pagenum)
     while (cx) {
 	t->InsertCharacters(999999, str, (cx-str));
 	if (!inited) {
-	    sprintf(numbuf, "%d", pagenum);
+	    sprintf(numbuf, "%ld", pagenum);
 	    inited = TRUE;
 	}
 	t->InsertCharacters(99999, numbuf, strlen(numbuf));
@@ -3576,7 +3576,7 @@ static void PrintPSText(class textview *self, FILE *outfile, long width, long he
 	for (lub = lstat.locatags; lub; lub=lub->next) {
 	    if (lub->type == locatag_Content) {
 		contentstext->InsertCharacters(999999, lub->name, strlen(lub->name));
-		sprintf(buf, "\t%d\n", lub->pagenum);
+		sprintf(buf, "\t%ld\n", lub->pagenum);
 		contentstext->InsertCharacters(999999, buf, strlen(buf));
 	    }
 	}
@@ -3631,8 +3631,8 @@ static void PrintPSText(class textview *self, FILE *outfile, long width, long he
 	    if (!firstpage && blonk.head[header_HEADER].t->GetLength() > 2) {
 		struct textps_header *hx = &(blonk.head[header_HEADER]);
 		struct rectangle visrect;
-		fprintf(outfile, "gsave %d %d translate\n", textps_DefaultMargin, height-(36+36)); /* half-inch header zone, half-inch from top, at default left margin */
-		fprintf(outfile, "0 0 moveto %d 0 rlineto 0 %d rlineto %d 0 rlineto closepath clip newpath\n", width-2*textps_DefaultMargin, 36, -(width-2*textps_DefaultMargin));
+		fprintf(outfile, "gsave %d %ld translate\n", textps_DefaultMargin, height-(36+36)); /* half-inch header zone, half-inch from top, at default left margin */
+		fprintf(outfile, "0 0 moveto %ld 0 rlineto 0 %d rlineto %ld 0 rlineto closepath clip newpath\n", width-2*textps_DefaultMargin, 36, -(width-2*textps_DefaultMargin));
 		rectangle_SetRectSize(&visrect, 0, 36, width-2*textps_DefaultMargin, 36);
 		hx->tv->PrintPSRect(outfile, width-2*textps_DefaultMargin, 36, &visrect);
 		fprintf(outfile, "grestore\n");
@@ -3675,7 +3675,7 @@ static void PrintPSText(class textview *self, FILE *outfile, long width, long he
 		struct textps_header *hx = &(blonk.head[header_FOOTER]);
 		struct rectangle visrect;
 		fprintf(outfile, "gsave %d %d translate\n", textps_DefaultMargin, 36); /* half-inch header zone, half-inch from bottom, at default left margin */
-		fprintf(outfile, "0 0 moveto %d 0 rlineto 0 %d rlineto %d 0 rlineto closepath clip newpath\n", width-2*textps_DefaultMargin, 36, -(width-2*textps_DefaultMargin));
+		fprintf(outfile, "0 0 moveto %ld 0 rlineto 0 %d rlineto %ld 0 rlineto closepath clip newpath\n", width-2*textps_DefaultMargin, 36, -(width-2*textps_DefaultMargin));
 		rectangle_SetRectSize(&visrect, 0, 36, width-2*textps_DefaultMargin, 36);
 		hx->tv->PrintPSRect(outfile, width-2*textps_DefaultMargin, 36, &visrect);
 		fprintf(outfile, "grestore\n");

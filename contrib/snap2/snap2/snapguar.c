@@ -187,7 +187,7 @@ int (*authenticator)();
 
     /*
       * Next we construct the SNAP_AUTHENTICATE reply.
-      * It's body portion has the following format:
+      * Its body portion has the following format:
 *
 *	    SNAP_integer    returncode;
 *	    SNAP_bytestring server_na;

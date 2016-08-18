@@ -731,7 +731,7 @@ void captions::MakeCachedUpdates()
 	    (ams::GetAMS())->ReportSuccess( ErrorText);
 	    ams::CacheDelayedUpdate(this->FullName, UpdateDate);
 	} else {
-	    sprintf(ErrorText, "Could not set profile for %s (%s, %d, %d, %d)", this->ShortName, this->FullName, (ams::GetAMS())->AMS_ErrNo(), AMS_ERRCAUSE, AMS_ERRVIA);
+	    sprintf(ErrorText, "Could not set profile for %s (%s, %d, %ld, %ld)", this->ShortName, this->FullName, (ams::GetAMS())->AMS_ErrNo(), AMS_ERRCAUSE, AMS_ERRVIA);
 	    /* UGH!  Above line only works because we've defined mserrcode locally to be the right thing... */
 	    (ams::GetAMS())->ReportError( ErrorText, ERR_WARNING, TRUE, mserrcode);
 	}

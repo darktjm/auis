@@ -1760,7 +1760,7 @@ long rofftext::Write(FILE  *file, long  writeID, int  level)
 	    fprintf(file, "\\template{%s}\n", this->textm->styleSheet->templateName);
 	(this->textm->styleSheet)->Write( file);
 	(this)->WriteSubString( 0, this->length, file, TRUE);
-        fprintf(file, "\\enddata{%s,%d}\n", "text", this->textm->id);
+        fprintf(file, "\\enddata{%s,%ld}\n", "text", this->textm->id);
 
 	fflush(file);
     }

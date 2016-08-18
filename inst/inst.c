@@ -87,19 +87,17 @@ Generic install command.  Options are:
 struct stat istat, ostat;
 
 
-static char *ErrorString(aerrno)
-    int aerrno; {
+static char *ErrorString(int aerrno)
+{
     return strerror(aerrno);
 }
 
-static int stripName(aname)
-    char *aname;
+static int stripName(const char *aname)
     {if ((char*) rindex(aname, '.') == NULL) return 1;
     else return 0;
     }
 
-static int atoo(astr)
-    register char *astr;
+static int atoo(register const char *astr)
     {register long value;
     register char tc;
     value = 0;
@@ -110,10 +108,7 @@ static int atoo(astr)
     return value;
     }
 
-static int quickStrip (afd, asize, fileName)
-    int afd;
-    long asize;
-    char *fileName;
+static int quickStrip (int afd, long asize, char *fileName)
     {int n, bytesLeft;
 #if defined(ZMAGIC) && ! defined(sgi)
     struct exec buf;
@@ -127,7 +122,7 @@ static int quickStrip (afd, asize, fileName)
 #if defined(mips) && ! defined(sgi)
     if (n >= sizeof(*head) && !N_BADMAG(head->ex_o))
 #else
-    if (n >= sizeof(*head) && !N_BADMAG(*head))
+    if ((unsigned int)n >= sizeof(*head) && !N_BADMAG(*head))
 #endif /* mips */
 	{/* This code lifted from strip.c. */
 	bytesLeft = (long) head->a_text + head->a_data;
@@ -174,27 +169,25 @@ static int quickStrip (afd, asize, fileName)
     return 0;
     }
 
-int main (argc, argv)
-    int argc;
-    char **argv;
+int main (int argc, const char **argv)
     {int setOwner, setMode, setGroup, ifd, ofd;
     long mode, owner, group;
     struct passwd *tpw;
-    char *fnames[MAXFILES], *newNames[MAXFILES];
+    const char *fnames[MAXFILES], *newNames[MAXFILES];
     long rcode, code, newcode;
-    char *dname;
+    const char *dname;
     char pname[1024];
     char pnametmp[1024];
     char FirstChar;
     char IsFirst;
-    int pnamelen;
+    unsigned int pnamelen;
     static char diskBuffer[BUFSIZE];	/* must be static to avoid compiler bugs for large stuff */
     char myHostName[100];
     UTIME_TYPE tvp;
     int isDir;
     int strip;
     int fptr;
-    register char *tp;
+    register const char *tp;
     register long i;
 
     fptr = 0;

@@ -726,7 +726,7 @@ files and libraries. Do not use if ANY of \italic{objs}, \italic{libs}, or
 object files and libraries listed.  The dependencies for program will 
 include the \italic{objs} and the \italic{libs}, but not the 
 \italic{syslibs}.  This rule must be used for any program which contains 
-ANY C++ code  (either in it's own object files or in libraries.)}
+ANY C++ code  (either in its own object files or in libraries.)}
 
 
 \section{
@@ -1354,7 +1354,7 @@ defined.}
 arguments)}
 
 \fieldcontent{Like DynamicMultiObjectWithExports for the case where a 
-single class is being included in the dynamic object and it's code is 
+single class is being included in the dynamic object and its code is 
 \italic{name}.C.}
 
 

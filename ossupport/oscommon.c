@@ -157,8 +157,7 @@ struct qelem *elq;
 
 #include <fcntl.h>
 
-int Andrew_lockf(fd)
-int fd;
+int Andrew_lockf(int fd)
 {
     struct flock f_rec;
 
@@ -169,8 +168,8 @@ int fd;
     return((fcntl(fd, F_SETLK, &f_rec) !=-1)?0:-1);
 }
 
-int Andrew_unlockf(fd)
-int fd; {
+int Andrew_unlockf(int fd)
+{
     struct flock f_rec;
 
     f_rec.l_type = F_UNLCK;

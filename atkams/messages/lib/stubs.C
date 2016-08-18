@@ -562,7 +562,7 @@ static int SnarfFile(FILE  *fp, const char  *fname)
 	return 1;
     }
     if ((stbuf.st_mode & S_IFMT) != S_IFREG) {
-	fprintf(fp, "File %s is not a regular file, but has mode %#o.\n", stbuf.st_mode);
+	fprintf(fp, "File %s is not a regular file, but has mode %#o.\n", Buf, stbuf.st_mode);
 	return 1;
     }
     errno = 0;
@@ -583,7 +583,7 @@ static int SnarfFile(FILE  *fp, const char  *fname)
 #endif /* AFS_ENV */
     fprintf(fp, "Protection Mode (octal): %#o\nOn Vice: %s\nOwner: User # %d", stbuf.st_mode, OnVice ? "YES" : "NO", stbuf.st_uid);
     if (CellBuf[0] != '\0') fprintf(fp, ", AFS Cell %s", CellBuf);
-    fprintf(fp, "\nFile Size: %d\nLast Modified: %s", stbuf.st_size, ctime(&(stbuf.st_mtime)));
+    fprintf(fp, "\nFile Size: %ld\nLast Modified: %s", stbuf.st_size, ctime(&(stbuf.st_mtime)));
     fprintf(fp, "The file contents are enclosed by separating lines:%s", SepLine);
     while (fgets(LineBuf, sizeof(LineBuf), rfp)) {
 	fputs(LineBuf, fp);

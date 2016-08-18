@@ -1085,7 +1085,7 @@ static void dumpregfont_splot(char *nam, void *dat, void *rock) {
 
 static void dumpregdef_splot(char *nam, void *dat, void *rock) {
     FILE *frock=(FILE *)rock;
-    fprintf(frock, "/%s %s def\n", nam, dat);
+    fprintf(frock, "/%s %s def\n", nam, (const char *)dat);
 }
 
 static void dumpreghead_splot(char  *nam, void  *dat, void *rock) {

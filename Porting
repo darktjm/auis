@@ -252,7 +252,7 @@ Since C++ is relatively new it is often necessary to include C and/or
 C++ declarations in the system.h to correct problems in the system
 header files in /usr/include.  For example HP-UX comes with a bad
 prototype for select in sys/time.h.  To correct this problem the
-following fragments are present in it's system.h file:
+following fragments are present in its system.h file:
 
 #define select __hide_select
 #include <sys/time.h>
@@ -787,7 +787,7 @@ Like O_READLOCK, except for fopen.
 
 #define	osi_vfork()			fork()
 osi_vfork should be the fastest available fork, on some systems  the
-child created by osi_vfork will suspend it's parent until an exec call
+child created by osi_vfork will suspend its parent until an exec call
 and will share the address space of the parent until the exec.
 
 #define	osi_setjmp  setjmp
@@ -997,7 +997,7 @@ of non-class functions which should be included.  (Where name is the
 name of the library under construction.)  The symbols named in name.sym
 should be included regardless of name mangling.  For example a
 foo_Bar__Fv symbol might be the definition of the function foo_Bar() and
-should be included if name.sym has foo_Bar as one of it's entries.  You
+should be included if name.sym has foo_Bar as one of its entries.  You
 may need to give nm or whatever other program you use flags to indicate
 that it should NOT report demangled symbol names. For example the
 function foo_Bar(int) might be displayed as foo_Bar__Fi in mangled form,
@@ -1009,7 +1009,7 @@ If a separate
 4.5	Constructors and Destructors
 
 C++ classes can have special functions to be called to initialize an
-object before use and to clean it up prior to it's deletion or program
+object before use and to clean it up prior to its deletion or program
 exit.  Global and static objects must have the constructor called to
 initialize them before any function in the file containing them is
 executed.  Usually this is ensured by having the constructors for all
@@ -1127,7 +1127,7 @@ A shared library is similar to a dynamically loaded class in that the
 code is not actually included in the executable, and it may not even be
 loaded until needed.  Even when it is attached, the text portion of the
 library code is shared among  all the processes using the library while
-each process has it's own copy of the data segment.  On systems that
+each process has its own copy of the data segment.  On systems that
 support shared libraries (IBM RS/6000, HPUX, SunOS) the task of actually
 loading the code into the running process is greatly simplified as it is
 provided by a system call.  In more archaic OS's (BSD), the task of
@@ -1241,7 +1241,7 @@ debugging output should be generated.  It returns a point to a function
 returning int and taking an int and a char **.  (ie a pointer to a
 function with the prototype usually associated with main.)  
 
-When a dynamic object is loaded (attached to a running process), it's
+When a dynamic object is loaded (attached to a running process), its
 entrypoint is looked up and called.  This entrypoint is often called
 main.  The main function registers the classes which were  included in
 the object and causes any constructors for global and static C++ objects

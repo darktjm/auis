@@ -922,17 +922,17 @@ static void RedrawView(class figview  *self, boolean  recterased)
 	    /*figview_FillRect(self, &B, figview_WhitePattern(self)); */
 	}
 
-	DEBUG(("Drawing: %d...", self->redrawnum));
-	DEBUG(("[clip %d] ", clipnum));
+	DEBUG(("Drawing: %ld...", self->redrawnum));
+	DEBUG(("[clip %ld] ", clipnum));
 	for (jx=0; jx<self->redrawnum; jx++) {
 	    ix = self->redrawlist[jx].oref;
 	    if (clipnum != self->redrawlist[jx].clip) {
 		clipnum = self->redrawlist[jx].clip;
 		self->currentclipreg = self->clipreglist[clipnum];
 		(self)->SetClippingRegion( self->currentclipreg);
-		DEBUG(("[clip %d] ", clipnum));
+		DEBUG(("[clip %ld] ", clipnum));
 	    }
-	    DEBUG(("%d ", ix));
+	    DEBUG(("%ld ", ix));
 	    o = self->objs[ix].o;
 	    if ((o)->IsGroup()) {
 	    }
@@ -1116,7 +1116,7 @@ static void UpdateCache(class figview  *self, boolean  needfull )
 
 	    /* handle old one */
 	    if (self->objs[ix].o) {
-		DEBUG(("Cache: old %d\n", ix));
+		DEBUG(("Cache: old %ld\n", ix));
 		if (self->objs[ix].selected)
 		    self->numselected--;
 		if (self->objs[ix].drawnselected == 0) {
@@ -1134,7 +1134,7 @@ static void UpdateCache(class figview  *self, boolean  needfull )
 	    /* handle new one */
 	    if (fig->objs[ix].o) {
 		class figobj *o = fig->objs[ix].o;
-		DEBUG(("Cache: new %d\n", ix));
+		DEBUG(("Cache: new %ld\n", ix));
 		self->objs[ix].o = o;
 		self->objs[ix].selected = FALSE;
 		self->objs[ix].drawnselected = FALSE;
@@ -1171,7 +1171,7 @@ static void UpdateCache(class figview  *self, boolean  needfull )
 		self->objs[ix].timestamp = (o)->GetModified();
 	    }
 	    else {
-		DEBUG(("Cache: new NULL %d\n", ix));
+		DEBUG(("Cache: new NULL %ld\n", ix));
 		self->objs[ix].o = NULL;
 	    }
 	} /* end case self->objs[ix].o != fig->objs[ix].o */
@@ -1197,7 +1197,7 @@ static void UpdateCache(class figview  *self, boolean  needfull )
 	    }
 	    if (needup) {
 		class figobj *o = self->objs[ix].o;
-		DEBUG(("Cache: changed %d\n", ix));
+		DEBUG(("Cache: changed %ld\n", ix));
 
 		if (self->objs[ix].selected
 		    || (self->ShowFocusAttachments
@@ -2619,9 +2619,9 @@ static boolean PrintSplot(class figobj  *o, long  ref, class figure  *fig, struc
 	}
 
 	fprintf(lump->file, "%s  gsave newpath\n", lump->prefix);	
-	fprintf(lump->file, "%s  %d %d translate\n", lump->prefix, insetb.left, insetb.top);
-	fprintf(lump->file, "%s  0 0 moveto  %d 0 rlineto  0 %d rlineto  %d 0 rlineto closepath clip newpath\n", lump->prefix, insetb.width, insetb.height, -insetb.width);
-	fprintf(lump->file, "%s  1 -1 scale %d %d translate\n", lump->prefix, 0, -insetb.height);
+	fprintf(lump->file, "%s  %ld %ld translate\n", lump->prefix, insetb.left, insetb.top);
+	fprintf(lump->file, "%s  0 0 moveto  %ld 0 rlineto  0 %ld rlineto  %ld 0 rlineto closepath clip newpath\n", lump->prefix, insetb.width, insetb.height, -insetb.width);
+	fprintf(lump->file, "%s  1 -1 scale %d %ld translate\n", lump->prefix, 0, -insetb.height);
 	if (lump->processor==NULL) {
 	    struct rectangle visrect;
 	    visrect.left = 0;
@@ -2719,9 +2719,9 @@ void figview::Print(FILE  *file, char  *processor, char  *format, boolean  tople
 
     /* generate PostScript  */
     fprintf(file, "%s  %% ATK figure inset beginning\n", prefix);
-    fprintf(file, "%s  1 -1 scale  0 %d translate\n", prefix, -hpts);
-    fprintf(file, "%s  newpath 0 0 moveto 0 %d lineto %d %d lineto\n", prefix, hpts, wpts, hpts);
-    fprintf(file, "%s  %d 0 lineto clip newpath   %% clip to full (logical) area\n", prefix, wpts);
+    fprintf(file, "%s  1 -1 scale  0 %ld translate\n", prefix, -hpts);
+    fprintf(file, "%s  newpath 0 0 moveto 0 %ld lineto %ld %ld lineto\n", prefix, hpts, wpts, hpts);
+    fprintf(file, "%s  %ld 0 lineto clip newpath   %% clip to full (logical) area\n", prefix, wpts);
 
     lump.file = file;
     lump.prefix = prefix;
@@ -2741,7 +2741,7 @@ void figview::Print(FILE  *file, char  *processor, char  *format, boolean  tople
 #endif
 
     if (landscape) {
-	fprintf(file, "%s  90 rotate  0 %d translate   %% landscape printing\n", prefix, -wpts);
+	fprintf(file, "%s  90 rotate  0 %ld translate   %% landscape printing\n", prefix, -wpts);
     }
     fprintf(file, "%s  %g %g scale\n", prefix, fig->GetPrintScaleX(), fig->GetPrintScaleY());	
 
@@ -2794,9 +2794,9 @@ void figview::PrintPSRect(FILE *file, long logwidth, long logheight, struct rect
 
     /* generate PostScript  */
     fprintf(file, "%% ATK figure inset (PrintPSRect) beginning\n");
-    fprintf(file, "1 -1 scale  0 %d translate\n", -logheight); /* flip within logical rectangle */
-    fprintf(file, "newpath 0 0 moveto 0 %d lineto %d %d lineto\n", logheight, logwidth, logheight);
-    fprintf(file, "%d 0 lineto clip newpath   %% clip to full (logical) area\n", logwidth);
+    fprintf(file, "1 -1 scale  0 %ld translate\n", -logheight); /* flip within logical rectangle */
+    fprintf(file, "newpath 0 0 moveto 0 %ld lineto %ld %ld lineto\n", logheight, logwidth, logheight);
+    fprintf(file, "%ld 0 lineto clip newpath   %% clip to full (logical) area\n", logwidth);
 
     lump.file = file;
     lump.prefix = "";
@@ -2817,7 +2817,7 @@ void figview::PrintPSRect(FILE *file, long logwidth, long logheight, struct rect
 
     /* adjust rotation and scale */
     if (landscape) {
-	fprintf(file, "90 rotate  0 %d translate   %% landscape printing\n", -logwidth);
+	fprintf(file, "90 rotate  0 %ld translate   %% landscape printing\n", -logwidth);
     }
     fprintf(file, "%g %g scale\n", fig->GetPrintScaleX(), fig->GetPrintScaleY());	
 
@@ -2911,13 +2911,13 @@ void figview::PrintPSDoc(FILE *outfile, long pagew, long pageh)
 	for (posx=0; posx<wpts; posx+=areaw) {
 	    print::PSNewPage(print_UsualPageNumbering);
 	    /* posx,posy are print coords of upper left corner of this image section. Oop, except that posy should be (hpts-posy). */
-	    fprintf(outfile, "%d %d translate\n", marginw-posx, marginh+areah-(hpts-posy));
+	    fprintf(outfile, "%ld %ld translate\n", marginw-posx, marginh+areah-(hpts-posy));
 	    visrect.left = 0 + posx;
 	    visrect.top = hpts-posy;
 	    visrect.width = areaw;
 	    visrect.height = areah;
-	    fprintf(outfile, "%d %d moveto\n", visrect.left, visrect.top-visrect.height);
-	    fprintf(outfile, "%d 0 rlineto  0 %d rlineto  %d 0 rlineto  0 %d rlineto\n", visrect.width, visrect.height, -visrect.width, -visrect.height);
+	    fprintf(outfile, "%ld %ld moveto\n", visrect.left, visrect.top-visrect.height);
+	    fprintf(outfile, "%ld 0 rlineto  0 %ld rlineto  %ld 0 rlineto  0 %ld rlineto\n", visrect.width, visrect.height, -visrect.width, -visrect.height);
 	    fprintf(outfile, "closepath clip newpath\n");
 	    this->PrintPSRect(outfile, wpts, hpts, &visrect);
 	}

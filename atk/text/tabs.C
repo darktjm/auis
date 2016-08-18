@@ -80,7 +80,7 @@ tabs::OutputTroff(long  indent, FILE  *file)
     int i;
 
     if (indent < 0) {
-	fprintf(file, "'ta %dp", -indent);
+	fprintf(file, "'ta %ldp", -indent);
     }
     else{
 	fprintf(file, "'ta");
@@ -90,13 +90,13 @@ tabs::OutputTroff(long  indent, FILE  *file)
 	if (this->Positions[i] > indent)
 	    switch(this->Types[i]) {
 		case style_LeftAligned:
-		    fprintf(file, " %dp", this->Positions[i] - indent);
+		    fprintf(file, " %ldp", this->Positions[i] - indent);
 		    break;
 		case style_RightAligned:
-		    fprintf(file, " %dpR", this->Positions[i] - indent);
+		    fprintf(file, " %ldpR", this->Positions[i] - indent);
 		    break;
 		case style_CenteredOnTab:
-		    fprintf(file, " %dpC", this->Positions[i] - indent);
+		    fprintf(file, " %ldpC", this->Positions[i] - indent);
 		    break;
 		default:
 		    ; /* Ignoring all others for now... XXX */

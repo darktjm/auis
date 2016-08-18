@@ -773,7 +773,7 @@ key argument and the value is the childml menulist.
 
 
 \bold{Example.}  In the example for \italic{ChainBeforeML} above, if you did 
-not want the frame's quit to take precedence, then you would chain it's menu 
+not want the frame's quit to take precedence, then you would chain its menu 
 list after the interaction manager's menu list with a call to 
 \italic{menulist_ChainAfterML}. 
 

@@ -48,15 +48,14 @@ static int DebugFlag = 0;
 
 
 
-static void debugstate(/* struct parser_tables  *desc, int  state , int  pendtok , int  errorstate */);
-static void debugshift(/* struct parser_tables  *desc, int  tact */);
-static void debugreduce(/* struct parser_tables  *desc, int  rule , int  revealedstate , int  newstate */);
-static void debugflush(/* struct parser_tables  *desc, int  state */);
-static void debugnewline();
+static void debugstate(struct parser_tables  *desc, int  state , int  pendtok , int  errorstate);
+static void debugshift(struct parser_tables  *desc, int  tact);
+static void debugreduce(struct parser_tables  *desc, int  rule , int  revealedstate , int  newstate);
+static void debugflush(struct parser_tables  *desc, int  state);
+static void debugnewline(void);
 
 	int
-parser_SetDebug(value)
-	int value;
+parser_SetDebug(int value)
 {
 	int oldval = DebugFlag;
 	DebugFlag = value;
@@ -64,16 +63,12 @@ parser_SetDebug(value)
 }
 
 	struct parser *
-parser_GetCurrentparser() {
+parser_GetCurrentparser(void) {
 	return CurrentParser;
 }
 
 	void
-parser_ErrorGuts(self, severity, severityname, msg)
-	struct parser *self;
-	int severity;
-	char *severityname;
-	char *msg;
+parser_ErrorGuts(struct parser *self, int severity, char *severityname, char *msg)
 {
 	if(self->errorfunc) 
 		self->errorfunc(self, severity, severityname, msg);
@@ -85,8 +80,7 @@ parser_ErrorGuts(self, severity, severityname, msg)
 }
 
 	void 
-parser_Init(self)
-	struct parser *self;
+parser_Init(struct parser *self)
 {
 	self->tables = NULL;
 	self->rock = NULL;
@@ -107,20 +101,16 @@ parser_New() {
 }
 
 	void 
-parser_Destroy(self)
-	struct parser *self;
+parser_Destroy(struct parser *self)
 {
 	free(self);
 }
 
 	void 
-parser_Error(self, severity, msg)
-	struct parser *self;
-	int severity;
-	char *msg;
+parser_Error(struct parser *self, int severity, char *msg)
 {
 	int tsev = severity & (~parser_FREEMSG);
-	char *name;
+	const char *name;
 	if (tsev > self->maxSeverity)
 		self->maxSeverity = tsev;
 	self->nerrors++;

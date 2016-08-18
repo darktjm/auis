@@ -558,7 +558,7 @@ phist(char  *s, struct webapp_webhist  *wp) {
 	for(i = 0; i < wp->history.GetN(); i++) {
 		w = (class web *)(wp->history[i])->GetData();
 		wc = (w)->getwebcom();
-		printf("%c [%d] %s %s\n", (i == wp->hpos)?'>':' ', i,
+		printf("%c [%ld] %s %s\n", (i == wp->hpos)?'>':' ', i,
 		       (wc == NULL || wc->url==NULL || wc->url->Name()==NULL)? "NULL":(wc->url)->Name(),
 			(wc == NULL || wc->title == NULL || wc->title->Name()==NULL)
 				? "NULL":(wc->title)->Name());

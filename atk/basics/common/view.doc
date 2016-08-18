@@ -1924,7 +1924,7 @@ struct view *requestor;}
 \leftindent{
 \bold{Method Description.}  \italic{view_RetractViewCursors} retracts all 
 of the cursors associated with the view \italic{requestor} (but not with 
-it's children). 
+its children). 
 
 
 \bold{Usage.}  Parent views should call this routine on their children 

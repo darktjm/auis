@@ -325,7 +325,7 @@ void textview_WhatParagraphCmd (register class textview  *v)
 
     i = (d)->GetLineForPos( pos);
     
-    sprintf(temp,"Paragraph %d, position %d.", i, pos - d->GetBeginningOfLine(pos) + 1);
+    sprintf(temp,"Paragraph %d, position %ld.", i, pos - d->GetBeginningOfLine(pos) + 1);
     message::DisplayString(v, 0, temp);
 }
 

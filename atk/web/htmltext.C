@@ -245,7 +245,7 @@ chgCovertStylesToAttributes(htmltext *txt)  {
 			atts->MakeFromString(attstr);
 			parent->SetAttribs(atts);
 			// discard the original reference, the environment
-			// has it's own reference on the attributes now.
+			// has its own reference on the attributes now.
 			atts->Destroy();
 		} else
 		    printf("htmltext: covert styles found in incorrect location; discarded.\n");
@@ -697,7 +697,7 @@ AppendIndentCode(char **pcodex, char code, long val, enum style_Unit Unit) {
 	case style_Ems:  	val *= 12;  // BOGUS
 	case style_Lines:  	val *= 12;  // BOGUS
 	}
-	sprintf(*pcodex, "%c%d", code, val);
+	sprintf(*pcodex, "%c%ld", code, val);
 	(*pcodex) += strlen(*pcodex);
 }
 
@@ -2631,7 +2631,7 @@ write_inset(htmltext *txtobj, dataobject *inset, FILE *file,
 		char *last = dest+strlen(dest)-1;
 		if (*last == '"') last--;
 		fprintf(file, "<a href=\"%.*s\"%s>%s</a>",
-					last-dest+1, dest, extraargs,
+					(int)(last-dest+1), dest, extraargs,
 					lk->GetSafeText());
 		if (txtobj) ++pos;
 	}
@@ -3101,7 +3101,7 @@ dowrite(htmltext *self, FILE *file, htmlenv *parenv,
 		}
 		if (env && env->type != environment_Style) {
 			// unknown environment, skip it
-			fprintf(file, "\n[Document section of %s%d]",
+			fprintf(file, "\n[Document section of %s%ld]",
  				"unknown type skipped here.  Length = ",
 				len);
 			putnl(file);
@@ -3504,7 +3504,7 @@ htmltext::RenumberList(long pos, enum ListType ltype,
 		next_env_len= (next_env)->GetLength();
 
 		if (ltype == listtype_ORDERED){
-			sprintf(dingbat, "%ld.\t", dingbat_counter);
+			sprintf(dingbat, "%d.\t", dingbat_counter);
 			new_len= strlen(dingbat);
 		}
 		else if (ltype == listtype_UNORDERED){
@@ -3671,7 +3671,7 @@ char *htmltext::GetURL(long pos, long x, long  y) {
 	    e++;
 	    if (*e == monchar) monchar = '@';
 	}
-	sprintf(e, "%c%d,%d", monchar, x, y);
+	sprintf(e, "%c%ld,%ld", monchar, x, y);
     }
     return p;
 }
@@ -3951,7 +3951,7 @@ htmltext::GififyInset(long pos, htmlenv *env, char *giffile) {
 	if (access(giffile, F_OK) != 0)
 		return "*** Gif file did not get created";
 
-	sprintf(attrs, "WIDTH=%d, HEIGHT=%d", width, height);
+	sprintf(attrs, "WIDTH=%ld, HEIGHT=%ld", width, height);
 	return attrs;
 }
 

@@ -225,7 +225,7 @@ pushbutton::Write(FILE  *fp, long  id, int  level)
   if (id != (this)->GetWriteID()) {
     /* New Write Operation */
     (this)->SetWriteID( id);
-    fprintf(fp, "\\begindata{%s,%d}\nDatastream version: %d\n",
+    fprintf(fp, "\\begindata{%s,%ld}\nDatastream version: %d\n",
 	    (this)->GetTypeName(), 
 	    uniqueid, 
 #ifndef PL8
@@ -236,7 +236,7 @@ pushbutton::Write(FILE  *fp, long  id, int  level)
 );
     pushbutton__WriteDataPart(this, fp);
 
-    fprintf(fp, "\\enddata{%s,%d}\n", (this)->GetTypeName(), uniqueid);
+    fprintf(fp, "\\enddata{%s,%ld}\n", (this)->GetTypeName(), uniqueid);
   }
   return(uniqueid);
 }
@@ -691,7 +691,7 @@ EncodeFont(class pushbutton  *self)
   if (myfonttype & fontdesc_Italic) strcpy(type,"i");
   if (myfonttype & fontdesc_Fixed) strcpy(type,"f");
   if (buf = (char *)malloc(strlen(myfontname)+25)) {
-    sprintf(buf,"%s%d%s", myfontname, myfontsize, type);
+    sprintf(buf,"%s%ld%s", myfontname, myfontsize, type);
     return (buf);
   } else {
     return(NULL);

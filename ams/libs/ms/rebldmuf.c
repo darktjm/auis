@@ -216,21 +216,21 @@ long interval;
     static char DescBuf[30];
 
     if (interval < 60) {
-	sprintf(DescBuf, "%d seconds", interval);
+	sprintf(DescBuf, "%ld seconds", interval);
     } else {
 	interval /= 60;
 	if (interval < 60) {
-	    sprintf(DescBuf, "%d minutes", interval);
+	    sprintf(DescBuf, "%ld minutes", interval);
 	} else {
 	    interval /= 60;
 	    if (interval < 72) {
-		sprintf(DescBuf, "%d hours", interval);
+		sprintf(DescBuf, "%ld hours", interval);
 	    } else {
 		interval /= 24;
 		if (interval < 29) {
-		    sprintf(DescBuf, "%d days", interval);
+		    sprintf(DescBuf, "%ld days", interval);
 		} else {
-		    sprintf(DescBuf, "%d weeks", interval/7);
+		    sprintf(DescBuf, "%ld weeks", interval/7);
 		}
 	    }
 	}

@@ -640,7 +640,7 @@ void ATextv::LoseInputFocus() {
  * Revision 1.6  1996/10/29  00:03:18  robr
  * Fixed recsearch functions to always return a value.
  * Added casts on uses of ASlotBool in if statements.
- * Ensured that when the ATextv is destroyed it removes it's
+ * Ensured that when the ATextv is destroyed it removes its
  * observation status in the mousefocus and or source objects.
  * Initialized swidth, sheight,pass and forcelink with reasonable
  * initial values.

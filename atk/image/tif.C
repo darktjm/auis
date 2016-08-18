@@ -69,8 +69,8 @@ ATKdefineRegistry(tif, image, NULL);
 int LoadTIFF( class tif  *self, char  *fname, FILE  *f, int    nc );
 static int loadPalette(TIFF  *tif, long   w, long   h, int    photo, int    bps);
 static int loadColor(TIFF  *tif, long   w, long   h, int    photo, int    bps, int    nc);
-static void _TIFFerr(char  *module, char  *fmt, va_list  ap);
-static void _TIFFwarn(char  *module, char  *fmt, va_list  ap);
+static void _TIFFerr(const char  *module, const char  *fmt, va_list  ap);
+static void _TIFFwarn(const char  *module, const char  *fmt, va_list  ap);
 static int loadImage(TIFF  *tif, u_long  rwidth , u_long  rheight, byte  *raster, int  stop);
 static int checkcmap(int  n, u_short  *r , u_short  *g , u_short  *b);
 static int gt(TIFF  *tif, int  w , int  h, u_char  *raster);
@@ -243,7 +243,7 @@ static int loadColor(TIFF  *tif, long   w, long   h, int    photo, int    bps, i
 
 
 /*******************************************/
-static void _TIFFerr(char  *module, char  *fmt, va_list  ap)
+static void _TIFFerr(const char  *module, const char  *fmt, va_list  ap)
 {
   char buf[2048];
   char *cp = buf;
@@ -258,7 +258,7 @@ static void _TIFFerr(char  *module, char  *fmt, va_list  ap)
 }
 
 /*******************************************/
-static void _TIFFwarn(char  *module, char  *fmt, va_list  ap)
+static void _TIFFwarn(const char  *module, const char  *fmt, va_list  ap)
 {
   char buf[2048];
   char *cp = buf;

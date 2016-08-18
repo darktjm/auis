@@ -76,7 +76,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
   *	Nothing interesting.
   */
 
-int GetCurrentWSCell(char *Buf, int size) 
+int GetCurrentWSCell(char *Buf, unsigned int size) 
 {
     const char *CellName;
     long code;			/* Result of pioctl() call */
@@ -142,7 +142,7 @@ int GetCurrentWSCell(char *Buf, int size)
   *	Nothing interesting.
   */
 
-int GetCellFromFileName(const char *FileName, char *Buf, int size)
+int GetCellFromFileName(const char *FileName, char *Buf, unsigned int size)
 {
     const char *CellName;
     long code;			/* Result of pioctl() call */

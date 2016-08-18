@@ -240,7 +240,7 @@ to enter new values.
 All of the attribute panels have "<default>" options. If you are a novice 
 user, or only want to create simple documents, don't worry about them; 
 giving an object a <default> attribute will be the same as actually setting 
-attribute to it's default value. For the more devious uses of this option, 
+attribute to its default value. For the more devious uses of this option, 
 see the "Working with Groups of Objects" section of this document.
 
 

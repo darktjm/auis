@@ -391,7 +391,7 @@ sendmessage::~sendmessage()
     class lpair **lps=this->randomlpairs;
 
 
-    /* OK, OK, I give up... hack around lpair's desire to unlinktree it's children when it is finalized.... rr2b */
+    /* OK, OK, I give up... hack around lpair's desire to unlinktree its children when it is finalized.... rr2b */
     if(lps) while(*lps) {
 	(*lps)->SetNth( 0, NULL);
 	(*lps)->SetNth( 1, NULL);

@@ -229,7 +229,7 @@ long SetChartAttribute( register class chart		    *self, register long			     at
     case  chart_type:
       apts::CaptureString( (char *) value, &ChartType );		break;
     default:
-      fprintf( stderr, "Chart: Unrecognized ChartAttribute (%d) -- Ignored\n", attribute );
+      fprintf( stderr, "Chart: Unrecognized ChartAttribute (%ld) -- Ignored\n", attribute );
     }
   OUT(SetChartAttribute);
   return(status);
@@ -258,7 +258,7 @@ chart::ChartAttribute( register long		       attribute )
       value = (long) ChartType;				break;
     default:
       ExceptionCode = chart_UnknownChartAttribute;
-      fprintf( stderr, "Chart: Unrecognized ChartAttribute (%d) -- Ignored\n", attribute );
+      fprintf( stderr, "Chart: Unrecognized ChartAttribute (%ld) -- Ignored\n", attribute );
     }
   OUT(chart_ChartAttribute);
   return  value;
@@ -290,7 +290,7 @@ long SetItemAttribute( register class chart       *self, register struct chart_i
 /*===*/
       default:
         status = ExceptionCode = chart_UnknownItemAttribute;
-	fprintf( stderr, "Chart: Unknown Item Attribute (%d) -- Ignored\n", attribute );
+	fprintf( stderr, "Chart: Unknown Item Attribute (%ld) -- Ignored\n", attribute );
       }
     else  status = ExceptionCode = chart_NonExistentItem;
   OUT(SetItemAttribute);
@@ -318,7 +318,7 @@ chart::ItemAttribute( register struct chart_item  *item, register long		       a
 /*===*/
       default:
         ExceptionCode = chart_UnknownItemAttribute;
-	fprintf( stderr, "Chart: Unknown Item Attribute (%d) -- Ignored\n", attribute );
+	fprintf( stderr, "Chart: Unknown Item Attribute (%ld) -- Ignored\n", attribute );
       }
   OUT(chart_ItemAttribute);
   return  value;
@@ -439,13 +439,13 @@ void Parse_Item_Field( register class chart		      *self, register char			      
       if ( extract )  free( extract );
       if ( extract = Extract_Field_Value( self, fields, "Value" ) )
 	{
-	sscanf( extract, "%d", &value );
+	sscanf( extract, "%ld", &value );
 	SetItemValue( self, item, value );
         free( extract );
 	}
       if ( extract = Extract_Field_Value( self, fields, "Position" ) )
 	{
-	sscanf( extract, "%d", &value );
+	sscanf( extract, "%ld", &value );
 	ItemPosition(item) = value;
 	free( extract );
 	}
@@ -461,7 +461,7 @@ ValueString( register class chart		      *self, register struct chart_item	     
   register char			     *ptr = value;
 
   *value = 0;
-  sprintf( value, "%d", ItemValue(item) );
+  sprintf( value, "%ld", ItemValue(item) );
   return  ptr;
   }
 
@@ -492,7 +492,7 @@ void Writer( register class chart		      *self )
       {sprintf( content, "Value(%s);",	    ValueString(self,item) );
        strcat( contents, content );}
     if ( ItemPosition(item) )
-      {sprintf( content, "Position(%d);",   ItemPosition(item) );
+      {sprintf( content, "Position(%ld);",   ItemPosition(item) );
        strcat( contents, content );}
     (self)->WriteObjectField(  &field );
     item = NextItem(item);

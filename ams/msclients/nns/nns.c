@@ -421,7 +421,7 @@ int            *UnlinkP;
 	 */
 
 	if (WritePureFile(Msg, NewFileName, FALSE, 0644)) {
-	    printf("nns (0): WritePureFile failed on Mailbox file %s\n     destined for %s,\n      with Msg->OpenFD of %d (ms: %d, %d, %d)\n", GLEGetFilename(gle), NewFileName, Msg->OpenFD, AMS_ERRNO, AMS_ERRCAUSE, AMS_ERRVIA);
+	    printf("nns (0): WritePureFile failed on Mailbox file %s\n     destined for %s,\n      with Msg->OpenFD of %d (ms: %ld, %ld, %ld)\n", GLEGetFilename(gle), NewFileName, Msg->OpenFD, AMS_ERRNO, AMS_ERRCAUSE, AMS_ERRVIA);
 	    if (inCache) {
 		MCDelete(mc, GLEGetFilename(gle));      /* This is cool, since
 							 * GLIgnore will be
@@ -507,7 +507,7 @@ int             level;
 char           *string;
 {
     if (level <= Globals.Options.verbose)
-	fprintf(stderr, "nns (%d): %s (ms: %d, %d, %d)\n", level, string, AMS_ERRNO, AMS_ERRCAUSE, AMS_ERRVIA);
+	fprintf(stderr, "nns (%d): %s (ms: %ld, %ld, %ld)\n", level, string, AMS_ERRNO, AMS_ERRCAUSE, AMS_ERRVIA);
 }
 
 int             AddNetnewsWideReplyHeader(Msg)

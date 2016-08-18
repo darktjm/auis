@@ -131,7 +131,7 @@ typedef long operation;
 				 * funcs, etc. after last property is created
 				 */
 
-/* If a type is a class, it's info union will contain a pointer to a struct classInfo */
+/* If a type is a class, its info union will contain a pointer to a struct classInfo */
 
 struct classInfo {
 	sym_ScopeType scope;			/* scope where methods live */

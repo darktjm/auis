@@ -95,7 +95,7 @@ lprruler::Write( FILE   *file, long   writeID, int   level )
 	if (this->writeID != writeID) {
 		/* new instance of write, do it */
 		this->writeID = writeID;
-		sprintf(head, "data{%s, %d}\n", (this)->GetTypeName(), id);
+		sprintf(head, "data{%s, %ld}\n", (this)->GetTypeName(), id);
 		fprintf(file, "\\begin%s", head);
 
 		/* no contents */

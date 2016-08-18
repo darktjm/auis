@@ -62,7 +62,7 @@ static int localIx = -1;
 static int maxAuth = -1;
 static int numAuth = -1;
 
-void EraseCellMemory()
+void EraseCellMemory(void)
 {/* Erase all memory of cell authentications. */
 #ifdef AFS_ENV
 	int Ix;
@@ -209,7 +209,7 @@ static int GetCellBasics(void)
 }
 #endif /* AFS_ENV */
 
-int ca_UpdateCellAuths()
+int ca_UpdateCellAuths(void)
 {/* Update the CellAuth information.  In particular, update the expiration times for the authentications.  Return 0 if all is OK or non-zero on failures: positive numbers for permanent failures, negative ones for transient ones. */
 #ifdef AFS_ENV
     int RC, cellIx, Ix, AnyExp, theNumber;

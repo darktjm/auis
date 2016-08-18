@@ -263,7 +263,7 @@ AnalyzeInput(class toezapp  *self)
 	}
 	if (self->inputtype != NULL) {
 		fprintf(stderr, "Assuming -%s because of first character %c\n",
-			self->inputtype, c);
+			self->inputtype, (int)c);
 		return;
 	}
 
@@ -337,7 +337,7 @@ frofftext(class toezapp  *self)
 	static void
 errhandler(long  lineno, char  *msg)
 		{
-	fprintf(stderr, "line %d: %s\n", lineno, msg);
+	fprintf(stderr, "line %ld: %s\n", lineno, msg);
 }
 
 

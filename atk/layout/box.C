@@ -278,7 +278,7 @@ box::Read(FILE  * f			    /* input file */, long  id			    /* unique identifier 
     long rc;
 
     if (debug)
-	printf("box_Read(%d)\n", id);
+	printf("box_Read(%ld)\n", id);
 
     (this)->SetID( (this)->UniqueID());
     (this)->SetModified();
@@ -286,7 +286,7 @@ box::Read(FILE  * f			    /* input file */, long  id			    /* unique identifier 
     rc = readASCII(this, f, id);
     (this)->NotifyObservers( observable_OBJECTCHANGED);
     if (debug)
-	printf("box_Read rc = %d\n", rc);
+	printf("box_Read rc = %ld\n", rc);
 
     return rc;
 }
@@ -307,7 +307,7 @@ box::GetModified()
     }
 
     if (debug)
-	printf("box_GetModified = %d\n", rc);
+	printf("box_GetModified = %ld\n", rc);
 
     return rc;
 }

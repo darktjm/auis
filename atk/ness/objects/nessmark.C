@@ -114,8 +114,8 @@ ATK_IMPL("nessmark.H")
 
 static char  debug = FALSE;
 #define DEBUG(s) {if (debug) {printf s ; fflush(stdout);}}
-#define ENTER(r) DEBUG(("Enter %s(0x%lx)\n", Stringize(r), this))
-#define LEAVE(r) DEBUG(("Leave %s(0x%lx)\n", Stringize(r), this))
+#define ENTER(r) DEBUG(("Enter %s(0x%p)\n", Stringize(r), this))
+#define LEAVE(r) DEBUG(("Leave %s(0x%p)\n", Stringize(r), this))
 
 
 /* the following booleans are side arguments 
@@ -381,7 +381,7 @@ nessmark::Replace(register class nessmark  *replacement) {
 	register long srclen = (replacement)->GetLength();
 	boolean oldgliso;
 ENTER(nessmark::Replace);
-	DEBUG(("dest(%d,%d)   src(%d,%d)  destbaselen %d\n", 
+	DEBUG(("dest(%ld,%ld)   src(%ld,%ld)  destbaselen %ld\n", 
 		destpos, destlen, srcpos, srclen, (text)->GetLength()));
 
 	/* arrange so that styles that end at the beginning of the point of replacement, 
@@ -406,7 +406,7 @@ ENTER(nessmark::Replace);
 	(this)->SetLength( srclen);
 	(text)->NotifyObservers( 0);
 
-	DEBUG(("dest(%d,%d)   src(%d,%d)  finallen %d  destbaselen %d\n", 
+	DEBUG(("dest(%ld,%ld)   src(%ld,%ld)  finallen %ld  destbaselen %ld\n", 
 		destpos,  destlen,  srcpos,  srclen,  
 		(this)->GetLength(), 
 		(text)->GetLength()));

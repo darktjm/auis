@@ -524,7 +524,7 @@ unsigned long figogrp::UpdateVAttributes(class figattr  *attr, unsigned long  ma
 
 void figogrp::WriteBody(FILE  *fp)
 {
-    fprintf(fp, "$ %d %d %d %d %d\n", this->doconstraints, this->handlebox.left, this->handlebox.top, this->handlebox.width, this->handlebox.height);
+    fprintf(fp, "$ %d %ld %ld %ld %ld\n", this->doconstraints, this->handlebox.left, this->handlebox.top, this->handlebox.width, this->handlebox.height);
 }
 
 long figogrp::ReadBody(FILE  *fp, boolean  recompute)

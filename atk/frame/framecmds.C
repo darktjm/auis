@@ -872,7 +872,7 @@ static boolean BufferHelpWork(class buffer  *buffer, struct helpData  *helpData)
 
         sizeBuf[0] = '\0';
         if (ATK::IsTypeByName(className, "text"))
-            sprintf(sizeBuf, "%d",
+            sprintf(sizeBuf, "%ld",
               ((class text *) (buffer)->GetData())->GetLength());
 
         fileName = (buffer)->GetFilename();

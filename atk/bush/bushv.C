@@ -1358,7 +1358,7 @@ PerformDestroy( class bushv  *self )
 	    if(count == 0) break;
 	    if(count > 1)
 		if(count == 2) sprintf(msg, "Destroy Both Items ?");
-		else sprintf(msg, "Destroy All %d Items ?", count);
+		else sprintf(msg, "Destroy All %ld Items ?", count);
 	    else {
 		d_entry = (struct Dir_Entry*)
 		  (EntriesView)->ItemAttribute(selected[0], suite_itemdatum);
@@ -1505,7 +1505,7 @@ FormatEntriesItem( register class bushv *self, tree_type_node tn, int i, struct 
       if(Detail) {
 	  time_ptr = (char*) ctime((const time_t *) &DirEntryTimeStamp(tn,i));
       time_ptr[24] = '\0';
-      sprintf(entries_item,"%s %2d %8s %8d %24s %s%s%s",
+      sprintf(entries_item,"%s %2d %8s %8ld %24s %s%s%s",
 	      Format_Tags(DirEntryPerms(tn,i)),
 	      DirEntryNLinks(tn,i), DirEntryOwner(tn,i),
 	      DirEntrySize(tn,i), time_ptr, DirEntryName(tn,i),
@@ -1526,7 +1526,7 @@ FormatEntriesItem( register class bushv *self, tree_type_node tn, int i, struct 
       if(Detail) {
 	  time_ptr = (char*) ctime(&dirEntry->time_stamp);
 	  time_ptr[24] = '\0';
-	  sprintf(entries_item,"%s %2d %8s %8d %24s %s%s%s",
+	  sprintf(entries_item,"%s %2d %8s %8ld %24s %s%s%s",
 		  Format_Tags(dirEntry->permissions),
 		  dirEntry->nlinks,dirEntry->owner,
 		  dirEntry->size,time_ptr,dirEntry->name,
@@ -1711,7 +1711,7 @@ FormatEntriesInfo( class bushv  *self, tree_type_node  tn )
   if(tn) {
     if(DirEntries(tn)) count = DirEntriesCount(tn);
       for( i = 0; i < count; i++ ) total_bytes += DirEntrySize(tn,i);
-        sprintf(entries_info,"%d %s    %d %s    %s %s",count,
+        sprintf(entries_info,"%ld %s    %ld %s    %s %s",count,
 		 "Entries",total_bytes,"Bytes","Sorted by", sorts[SortMode]);
   }
   OUT(FormatEntriesInfo);
@@ -1909,7 +1909,7 @@ PopToEntries( class bushv *self )
 static long
 Passivator( class bushv	     *self, class suite	     *suite, struct suite_item  *item, unsigned	      datum )
 /*============================================================
-I set the item_data attribute, active, of the ControlView items to be the OR'ed sum of the Object-codes for which the particular item is active. If a button is active during both the nodes_object(1) and entries_object(2) then it's data field is set to (nodes_object + entries_Object) = 1 + 2 = 3. This is how I implemented automatic button "Passivation" in bush.  It has been proposed that this feature be incorporated into suite (3/29/89).
+I set the item_data attribute, active, of the ControlView items to be the OR'ed sum of the Object-codes for which the particular item is active. If a button is active during both the nodes_object(1) and entries_object(2) then its data field is set to (nodes_object + entries_Object) = 1 + 2 = 3. This is how I implemented automatic button "Passivation" in bush.  It has been proposed that this feature be incorporated into suite (3/29/89).
 =============================================================*/
         {
   struct item_data  *itemData = NULL; 

@@ -35,10 +35,7 @@
  * Compute which tile an (x,y,z,s) value is in.
  */
 u_int
-TIFFComputeTile(tif, x, y, s, z)
-	TIFF *tif;
-	u_long x, y, z;
-	u_int s;
+TIFFComputeTile(TIFF *tif, u_long x, u_long y, u_int s, u_long z)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 	u_long dx = td->td_tilewidth;
@@ -74,10 +71,7 @@ TIFFComputeTile(tif, x, y, s, z)
  * Check an (x,y,z,s) coordinate
  * against the image bounds.
  */
-TIFFCheckTile(tif, x, y, z, s)
-	TIFF *tif;
-	u_long x, y, z;
-	u_int s;
+int TIFFCheckTile(TIFF *tif, u_long x, u_long y, u_long z, u_int s)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 
@@ -109,8 +103,7 @@ TIFFCheckTile(tif, x, y, z, s)
  * Compute how many tiles are in an image.
  */
 u_int
-TIFFNumberOfTiles(tif)
-	TIFF *tif;
+TIFFNumberOfTiles(TIFF *tif)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 	u_long dx = td->td_tilewidth;
@@ -135,8 +128,7 @@ TIFFNumberOfTiles(tif)
  * Compute the # bytes in each row of a tile.
  */
 u_long
-TIFFTileRowSize(tif)
-	TIFF *tif;
+TIFFTileRowSize(TIFF *tif)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 	u_long rowsize;
@@ -153,9 +145,7 @@ TIFFTileRowSize(tif)
  * Compute the # bytes in a variable length, row-aligned tile.
  */
 u_long
-TIFFVTileSize(tif, nrows)
-	TIFF *tif;
-	u_long nrows;
+TIFFVTileSize(TIFF *tif, u_long nrows)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 	u_long tilesize;
@@ -192,8 +182,7 @@ TIFFVTileSize(tif, nrows)
  * Compute the # bytes in a row-aligned tile.
  */
 u_long
-TIFFTileSize(tif)
-	TIFF *tif;
+TIFFTileSize(TIFF *tif)
 {
 	return (TIFFVTileSize(tif, tif->tif_dir.td_tilelength));
 }

@@ -202,7 +202,7 @@ charthst::HitChart( register enum view_MouseAction       action, register long		
 	y_offset = 0;
         break;
       }
-    sprintf( value_string, "%s:  Value = %d", name, value );
+    sprintf( value_string, "%s:  Value = %ld", name, value );
     (this)->Announce(  value_string );
     }
   OUT(charthst_HitChart);

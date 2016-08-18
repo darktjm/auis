@@ -438,7 +438,7 @@ memory freed after the call to WriteOtherFormat.
 WriteOtherFormat should be implemented by derived classes if there is an 
 equivalent MIME type which could represent the data.  Otherwise the default 
 implementation which writes the inset as an application/andrew-inset should 
-be sufficient.  If WriteOtherFormat is implemented, it should start it's 
+be sufficient.  If WriteOtherFormat is implemented, it should start its 
 output with:
 
 
@@ -830,7 +830,7 @@ v->SetDataObject(testdata);
 
 
 Since \class{view} is a derived class of \class{traced} (indirectly) it 
-must be destroyed by calling it's \virtualmemberfunction{Destroy}() method:
+must be destroyed by calling its \virtualmemberfunction{Destroy}() method:
 
 v->Destroy();
 
@@ -873,7 +873,7 @@ set for it.    (See Change Notification and Screen Updates.)
 
 
 These methods are used to obtain a view which performs any services which 
-the view called thinks are appropriate for it's use in the context of an 
+the view called thinks are appropriate for its use in the context of an 
 application.  The most common such view is a scrollbar or other scrolling 
 device.
 
@@ -1969,7 +1969,7 @@ void} \class{view}::\memberfunction{FillArcSize}(\type{long}
 				\type{\class{graphic} *}\argument{Tile});
 
 
-An arc is drawn with it's center at (\argument{left}+\argument{width}/2, 
+An arc is drawn with its center at (\argument{left}+\argument{width}/2, 
 \argument{top}+\argument{height}/2), extending to potentially touch pixels 
 with x coordinates between \argument{left} and 
 \argument{left}+\argument{width}-1 inclusive, and y coordinates between 
@@ -2810,8 +2810,8 @@ from drawing and posting cursors.  In particular
 \virtualmemberfunction{Update} is called in response to a 
 \virtualmemberfunction{WantUpdate} call.  In turn a 
 \virtualmemberfunction{WantUpdate} call is usually made from the 
-\class{view}'s \virtualmemberfunction{ObservedChanged} method,  it's 
-\virtualmemberfunction{Hit} method, or it's 
+\class{view}'s \virtualmemberfunction{ObservedChanged} method,  its 
+\virtualmemberfunction{Hit} method, or its 
 \virtualmemberfunction{RecieveInputFocus}/\virtualmemberfunction{LoseInputFo\
 cus} methods.  However, a \virtualmemberfunction{WantUpdate} call may be 
 made anywhere at any time. When the underlying data in an inset is modified 
@@ -3224,7 +3224,7 @@ in the example above.
 
 
 Now everything is in place so that once a \classobject{helloworldview} has 
-the input focus it's bindings will be made available.  To acquire the 
+the input focus its bindings will be made available.  To acquire the 
  input focus a view must call \virtualmemberfunction{WantInputFocus}. 
  \virtualmemberfunction{WantInputFocus} must only be called in response to 
 a user's action.  For example, a click in the view should usually trigger a 
@@ -3705,7 +3705,7 @@ Installs the standard \classobject{ScrollRegion} objects for a given
 
 The \class{ScrollInterface} class provides the common abstraction used to 
 scroll any view.  There should be a derived class of \class{ScrollInterface} 
-for any class which wishes to provide it's own scrolling.
+for any class which wishes to provide its own scrolling.
 
 
 \type{void} 
@@ -3715,7 +3715,7 @@ for any class which wishes to provide it's own scrolling.
 
 Positions the view it controls so that the coordinate 
 (x*client_width/totalx,y*client_height/totaly) in the otal space of the 
-view is in the upper left corner of it's on-screen area.  If totalx or 
+view is in the upper left corner of its on-screen area.  If totalx or 
 totaly is zero that axis must be ignored, but any scrolling indicated for 
 the other axis should be performed.
 
@@ -3824,14 +3824,14 @@ In the future this document should be extended to cover deriving new
 The 
 \virtualmemberfunction{WantNewSize},\virtualmemberfunction{DesiredSize}, 
 and \virtualmemberfunction{GetOrigin} methods implement the protocols by 
-which a substrate and it's children negotiate the space to be allocated to 
+which a substrate and its children negotiate the space to be allocated to 
 the child, and where the child should be relative to some base-line.  (esp. 
 in text.)  \
 
 
 
 \virtualmemberfunction{GetOrigin} is called on a child by a susbtrate which 
-plans to include it's child in a horizontal or vertical list with text 
+plans to include its child in a horizontal or vertical list with text 
 and/or with other insets.  The purpose is to allow the child to request 
 that it be displayed above/below, left/right of the baseline (as defined 
 bby the substrate).  For example to place the label of a 
@@ -3907,7 +3907,7 @@ bit-wise 'or' of the following values:
 
 }
 \virtualmemberfunction{WantNewSize} is called by a child view when it needs 
-a new size.  Perhaps because it has more data to display, or because it's 
+a new size.  Perhaps because it has more data to display, or because its 
 font size or other parameters have changed.  The call 
 \virtualmemberfunction{WantNewSize}(\argument{this}) in a member function 
 is the typical means of invoking it.  This call will let the substrate know 
@@ -3925,7 +3925,7 @@ within itself.  \
 
 
 
-A substrate is responsible for connecting it's children to the view tree 
+A substrate is responsible for connecting its children to the view tree 
 (and thus the actual display device), and passing along various requests 
 such as FullUpdates, or WantExposures, or recursive searches.
 
@@ -4103,7 +4103,7 @@ method.
 \class{view}::\virtualmemberfunction{LinkTree}(\class{view} 
 *\argument{parent});
 
-This method is called to connect a child view with it's parent.  The first 
+This method is called to connect a child view with its parent.  The first 
 thing it should do is call the \virtualmemberfunction{LinkTree} method in 
 the immediate base class, e.g.:
 
@@ -4243,7 +4243,7 @@ default implementation simply passes the request up to the parent.
 \argument{requestor}'s \virtualmemberfunction{Update} method to be called 
 to update the screen image.  A typical call is something like: 
  \virtualmemberfunction{WantUpdate}(\constant{this}).  If a \class{view} 
- class needs more detailed control of when it's children are allowed to 
+ class needs more detailed control of when its children are allowed to 
 redraw a \virtualmemberfunction{WantUpdate} method can be implemented. 
  This implementation would record the \virtualmemberfunction{WantUpdate} 
 requests, and request updates for itself.  \virtualmemberfunction{Update} 
@@ -4278,7 +4278,7 @@ so it returns \constant{TRUE}, otherwise it returns \constant{FALSE}.
 \virtualmemberfunction{UnlinkNotification} will be called on the ancestors 
 of any view which is unlinked with \virtualmemberfunction{UnlinkTree}.  It 
 can be overridden if there is a need for the \classobject{view} to react 
-when it's a descendant is unlinked.  It is important that all 
+when its descendant is unlinked.  It is important that all 
 implementations of \virtualmemberfunction{UnlinkNotification} include a 
 call such as:
 
@@ -4896,7 +4896,7 @@ name may be present, or omitted.
 \type{void} \class{im}::\virtualmemberfunction{ClearArg}();
 
 Clears the argument state so that the next proctable function called will 
-perform it's action only once.
+perform its action only once.
 
 
 \type{boolean} \class{im}::\virtualmemberfunction{ArgProvided}();
@@ -4907,7 +4907,7 @@ Returns \constant{TRUE} if an argument has been provided, and
 
 \type{long} \class{im}::\virtualmemberfunction{Argument}();
 
-Returns the number of times a proctable function should perform it's 
+Returns the number of times a proctable function should perform its 
 action.  Unless overriden by a call to \virtualmemberfunction{ProvideArg} 
 or \virtualmemberfunction{BumpArg} this will be 1.
 
@@ -4915,7 +4915,7 @@ or \virtualmemberfunction{BumpArg} this will be 1.
 \type{void} \class{im}::\virtualmemberfunction{ProvideArg}(\type{long} 
 \argument{arg});
 
-Sets the number of times a proctable function should perform it's action.
+Sets the number of times a proctable function should perform its action.
 
 
 \type{void} \class{im}::\virtualmemberfunction{BumpArg}(\type{long} 
@@ -5186,7 +5186,7 @@ Beeps at 0...100 % of a user specified maximum volume.
 \type{\class{view} *}\class{im}::\virtualmemberfunction{GetInputFocus}();
 
 Returns the view within the window which will receive keyboard and menu 
-input.  (It's ancestors can receive the input too depending on how they 
+input.  (Its ancestors can receive the input too depending on how they 
 have been written.)
 
 
@@ -5198,7 +5198,7 @@ have been written.)
 \type{\keyword{unsigned} \keyword{int}  *}\argument{w} , 
 \type{\keyword{unsigned} \keyword{int}  *}\argument{h});
 
-This is the signature of a ConfigureFunction.  It's purpose is to fill in 
+This is the signature of a ConfigureFunction.  Its purpose is to fill in 
 *\argument{x}, *\argument{y}, *\argument{w}, and *\argument{h} with the 
 desired position and size of an override window or transient window.  The 
 values to be set are initialized with defaults based on the preferred size 
@@ -5314,7 +5314,7 @@ be granted.     (\virtualmemberfunction{MoveWindow} and
 \virtualmemberfunction{ResizeWindow} will also function without 
 interference from the window manager.)  The main difference between an 
 override window and a transient with \constant{im_OVERRIDEREDIRECT} set is 
-that the override window cannot extend beyond the bounds of it's parent 
+that the override window cannot extend beyond the bounds of its parent 
 while the override redirect window may.
 
 
@@ -5325,7 +5325,7 @@ static \type{boolean}
 
 Adds a handler to be called when data is available for reading on 
 \argument{file}.  If \constant{NUMFILE} (16) handlers are already installed 
-the new handler will only be installed if it's \argument{priority} is 
+the new handler will only be installed if its \argument{priority} is 
 greater (numerically) than one of the already installed handlers.  The 
 \argument{proc} will be called as (*\argument{proc})(\argument{file}, 
 \argument{procdata}).  \constant{TRUE} is returned if the handler has been 
@@ -5346,7 +5346,7 @@ static \type{boolean}
 
 Adds a handler to be called when data may be written to \argument{file}. 
  If \constant{NUMFILE} (16) handlers are already installed the new handler 
-will only be installed if it's \argument{priority} is greater (numerically) 
+will only be installed if its \argument{priority} is greater (numerically) 
 than one of the already installed handlers.  The \argument{proc} will be 
 called as (*\argument{proc})(\argument{file}, \argument{procdata}).
 
@@ -5527,7 +5527,7 @@ static \type{\class{im}
 *}\argument{other}, \type{int} \argument{width}, \type{int} 
 \argument{height});
 
-Creates an offscreen im for drawing, it will be created such that it's 
+Creates an offscreen im for drawing, it will be created such that its 
 contents can be copied to other \classobject{im}s on the same host as 
 \argument{other}.
 
@@ -5714,7 +5714,7 @@ Currently \class{frame}'s \virtualmemberfunction{WantHandler} method
 supports only the \argument{handler} "message", which is used to connect 
 the message functions to the message line \class{frame} provides.  If a 
 request for another \argument{handler} is made 
-\virtualmemberfunction{WantHandler} will pass the request to it's parent 
+\virtualmemberfunction{WantHandler} will pass the request to its parent 
 (typically an \classobject{im}), or return \constant{NULL 
 }\indent{\constant{ }}if it has no parent.\indent{  }If a 
 non-\constant{NULL} pointer is returned it will be a pointer to an object 
@@ -6472,7 +6472,7 @@ characters long.  If quoteCharacters is \constant{TRUE} any '\\', '\{',
 g}} \argument{pos}, \type{FILE *}\argument{file}, \type{boolean} 
 \argument{quoteCharacters});
 
-Reads the text object in \argument{file} and inserts it's contents at 
+Reads the text object in \argument{file} and inserts its contents at 
 \argument{pos}.  If quoteCharacters is \constant{TRUE} ATK datastream 
 conventions will be followed.  Otherwise the file will be inserted as plain 
 text.

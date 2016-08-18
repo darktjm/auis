@@ -20,6 +20,8 @@ WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES.
 
  ******************************************************* */
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <ctype.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -100,22 +102,14 @@ extern char **environ, *gets();
 #define CMDSIZE 1200 /* Maximum size of command to execute */
 
 #define LINE_BUF_SIZE       2000
-#ifndef MICROSOFT
-extern char *malloc();
-extern char *realloc();
-#endif
-extern char *getenv();
-extern char *index();
-extern char *rindex();
 char fileToDelete[MAX_FILE_NAME_SIZE];
 
 char *FindParam();
-extern FILE *popen();
-static char *nomem = "Out of memory!";
-static char *mmversion = MM_VERSTRING;
-static char *NoAskDefault = "text,text/plain,text/richtext";
-static char *QuietDefault = CATCOMMAND;
-static char *tmproot="";
+static const char nomem[] = "Out of memory!";
+static const char mmversion[] = MM_VERSTRING;
+static const char NoAskDefault[] = "text,text/plain,text/richtext";
+static const char QuietDefault[] = CATCOMMAND;
+static const char *tmproot="";
 
 struct MailcapEntry {
     char *contenttype;
@@ -151,7 +145,7 @@ int MightAskBeforeExecuting = 1,
     JustWriteFiles = 0,
     ProcessingErrors = 0;
 
-char *ContentType = NULL,
+const char *ContentType = NULL,
     *ContentEncoding = NULL,
     *MailerName = "unknown",
     *MailSubject = "Mail message",
@@ -188,14 +182,13 @@ struct NoAskItem {
 TryMailcapEntry(struct MailcapEntry mc, char *SquirrelFile);
 #endif
 
-void PrintHeader();
-void ConsumeRestOfPart();
-void ParseContentParameters();
+static int ExitWithError(const char *txt);
+static void RestoreTtyState(void);
+static void ProcessArguments(int argc, const char **argv);
+static int HandleMessage(const char *SquirrelFile, int nestingdepth);
+static void PauseForUser(void);
 
-sigtype cleanup();
-
-char *Cleanse(s) /* no leading or trailing space, all lower case */
-char *s;
+static char *Cleanse(char *s) /* no leading or trailing space, all lower case */
 {
     char *tmp, *news;
     
@@ -211,8 +204,7 @@ char *s;
     return(news);
 }
 
-char *UnquoteString(s)
-char *s;
+static char *UnquoteString(char *s)
 {
     char *ans, *t;
 
@@ -235,9 +227,8 @@ char *s;
     return(ans);
 }
 
-sigtype
-cleanup(signum) 
-int signum;
+static sigtype
+cleanup(int signum)
 {
     RestoreTtyState();
 #if defined(MSDOS) || defined(AMIGA)
@@ -255,8 +246,8 @@ struct nextfile {
     struct nextfile *next;
 } *FileQueue=NULL, *LastInQueue = NULL;
 
-void
-ResetGlobals() {
+static void
+ResetGlobals(void) {
     CParamsAlloced = 0;
     CParamsUsed = 0;
 
@@ -278,13 +269,12 @@ ResetGlobals() {
     JunkParameter = NULL;
 }
 
-void modpath(auxpath)
-char *auxpath;
+static void modpath(const char *auxpath)
 {
     if (auxpath && *auxpath) {
         static char *newpath = 0;
 	char *oldpath = newpath;
-        char *path = getenv("PATH");
+        const char *path = getenv("PATH");
 
 	if (!path) path = "";	/* give a default if no current path */
 	newpath = malloc(7 + strlen(path) + strlen(auxpath));
@@ -295,9 +285,7 @@ char *auxpath;
     }
 }
 
-main(argc, argv)
-int argc;
-char **argv;
+int main(int argc, const char **argv)
 {
     int retcode;
 
@@ -370,9 +358,8 @@ char **argv;
     exit(ProcessingErrors? -1 : retcode);
 }
 
-void
-QueueNextFile(fname)
-char *fname;
+static void
+QueueNextFile(const char *fname)
 {
     struct nextfile *tmp = (struct nextfile *) malloc(sizeof (struct nextfile));
     if (!tmp) ExitWithError(nomem);
@@ -387,10 +374,8 @@ char *fname;
     }
 }
 
-HandleMessage(SquirrelFile, nestingdepth)
-char *SquirrelFile;
+static int HandleMessage(const char *SquirrelFile, int nestingdepth)
 /* SquirrelFile, if non-NULL, is a place to save a recognized body instead of executing it. */
-int nestingdepth;
 {
     char *boundary;
     int FileWriteOnly = JustWriteFiles;
@@ -661,9 +646,7 @@ int nestingdepth;
     return(-1); /* Unrecognized, really */
 }
 
-ProcessArguments(argc, argv)
-int argc;
-char **argv;
+static void ProcessArguments(int argc, const char **argv)
 {
     int i, RunAsRootOK = 0;
     char *SourceFileName = NULL, *NoAskStr, *QuietStr;
@@ -1507,8 +1490,7 @@ struct MailcapEntry *mc;
     return(1);
 }
 
-ExitWithError(txt)
-char *txt;
+static int ExitWithError(const char *txt)
 {
     if (txt) fprintf(stderr, "metamail: %s\n", txt);
     exit(-1);
@@ -2396,7 +2378,7 @@ SaveTtyState() {
 #endif
 }
 
-RestoreTtyState() {
+static void RestoreTtyState(void) {
 #if !defined(AMIGA) && !defined(MSDOS)
 #ifdef SYSV
     if (HasSavedTtyState) {
@@ -2655,7 +2637,7 @@ char *s2;
 #endif
 }
 
-PauseForUser() {
+static void PauseForUser(void) {
 #if defined(MSDOS) || defined(AMIGA)
     char Buf[100];
 #endif

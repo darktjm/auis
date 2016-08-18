@@ -334,7 +334,7 @@ int SNAP_ClientInit ()
 
 
 /*
-  *  Terminate the SNAPs use of it's socket
+  *  Terminate the SNAPs use of its socket
       *
       * On unix a socket is closed with close() but on the mac the library
 	* that supplys socket() is different from the the runtime system close()
@@ -556,7 +556,7 @@ SNAP_CPARMS *connparms;
 
     /*
       * Now we will construct the authentication message.
-      * It's body portion has the following format:
+      * Its body portion has the following format:
   *
   *	    SNAP_string     servername;
   *	    SNAP_string     client_userid;
@@ -639,7 +639,7 @@ SNAP_CPARMS *connparms;
 
     /*
       * Next we construct the server's begin conversation message.
-      * It's body portion has the following format:
+      * Its body portion has the following format:
       *
       *	    SNAP_integer    suggested max fragment size;
       *	    SNAP_integer    client's receive window size;

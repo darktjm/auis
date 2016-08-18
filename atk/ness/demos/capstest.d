@@ -408,7 +408,7 @@ software systems, based upon IBM hardware then under development, to
 support C-MU's program to integrate computing into all of its educational 
 programs.  The total plan is aimed at nothing less than revolutionizing 
 university education and will probably last many years and take many 
-surprising turns.  It's ultimate success depends upon the energy and 
+surprising turns.  Its ultimate success depends upon the energy and 
 creative talents of the entire university, starting with the faculty some 
 of who have already discovered novel ways to use computers in their 
 research and teaching. \

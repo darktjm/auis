@@ -57,8 +57,8 @@ ATK_CLASS(AWgtFigView);
 
 static char  debug;      /* This debug switch is toggled with ESC-^D-D */
 #define DEBUG(s) {if (debug) {printf s ; fflush(stdout);}}
-#define ENTER(r) DEBUG(("Enter %s(0x%lx)\n", Stringize(r), this))
-#define LEAVE(r) DEBUG(("Leave %s(0x%lx)\n", Stringize(r), this))
+#define ENTER(r) DEBUG(("Enter %s(0x%p)\n", Stringize(r), this))
+#define LEAVE(r) DEBUG(("Leave %s(0x%p)\n", Stringize(r), this))
 
 
 #define LINELENGTH (260)
@@ -157,7 +157,7 @@ AWgtFigView::InitChildren() {
 
 void AWgtFigView::FullUpdate(enum view_UpdateType   type, 
 			long left, long top, long width, long height)  {
-	DEBUG(("FullUpdate(%d, %d, %d, %d, %d)\n", 
+	DEBUG(("FullUpdate(%d, %ld, %ld, %ld, %ld)\n", 
 					type, left, top, width, height));
 	AWgtFig *dobj = (class AWgtFig *)GetDataObject();
 	struct rectangle fullbounds, inner;

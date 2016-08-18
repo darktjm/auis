@@ -8,7 +8,7 @@
 *//*
 
    This module resisters all the plug & play software modules which will be used in the
-   program on client side (The server has it's own initialization module).
+   program on client side (The server has its own initialization module).
    
    The initialization consists of two phases: Setting up the MIME type conversions and
    defining the relation between a basic set of file suffixes and MIME types.  To override

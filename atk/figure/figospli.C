@@ -548,7 +548,7 @@ void figospli::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolea
     
     fprintf(file, "%s  2 setlinejoin\n", prefix);
     
-    fprintf(file, "%s  %d %d moveto\n", prefix, (v)->ToPrintPixX(xbase), (v)->ToPrintPixY(ybase));
+    fprintf(file, "%s  %ld %ld moveto\n", prefix, (v)->ToPrintPixX(xbase), (v)->ToPrintPixY(ybase));
 
     for (ix=0; ix<nump-1; ix++) {
 	cb = &(this->cubit[ix]);
@@ -558,7 +558,7 @@ void figospli::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolea
 	Qy = (long)(Py + (cb->yc + cb->yb)/3);
 	Rx = (long)((cb->xa + cb->xb + cb->xc + cb->xd));
 	Ry = (long)((cb->ya + cb->yb + cb->yc + cb->yd));
-	fprintf(file, "%s  %d %d %d %d %d %d curveto\n", prefix, (v)->ToPrintPixX(Px), (v)->ToPrintPixY(Py), (v)->ToPrintPixX(Qx), (v)->ToPrintPixY(Qy), (v)->ToPrintPixX(Rx), (v)->ToPrintPixY(Ry));
+	fprintf(file, "%s  %ld %ld %ld %ld %ld %ld curveto\n", prefix, (v)->ToPrintPixX(Px), (v)->ToPrintPixY(Py), (v)->ToPrintPixX(Qx), (v)->ToPrintPixY(Qy), (v)->ToPrintPixX(Rx), (v)->ToPrintPixY(Ry));
     }
 
     col = ((this)->GetVAttributes())->GetColor((this)->GetIVAttributes());
@@ -580,7 +580,7 @@ void figospli::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolea
     lw = ((this)->GetVAttributes())->GetLineWidth((this)->GetIVAttributes());
     lw = (v)->ToPrintPixW(lw*figview_FigUPerPix);
     if (lw <= 0) lw = 0;
-    fprintf(file, "%s  %d setlinewidth\n", prefix, lw);
+    fprintf(file, "%s  %ld setlinewidth\n", prefix, lw);
     fprintf(file, "%s  %f %f %f setrgbcolor\n", prefix, rcol, gcol, bcol);
     /*fprintf(file, "%s  0 setgray\n", prefix);*/
     /* print dashes */

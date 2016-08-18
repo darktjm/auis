@@ -95,7 +95,8 @@ int hexchar(char c)
 
 int from64(FILE *infile, FILE *outfile)
 {
-    unsigned int c1, c2, c3, c4, total = 0;
+    int c1, c2, c3, c4;
+    unsigned int total = 0;
 
     while ((c1 = getc(infile)) != EOF) {
 	if (isspace(c1)) continue;

@@ -252,7 +252,7 @@ nesssym::~nesssym() {
 		break;
 
 	default:
-		fprintf(stderr, "Illegal flag value in Ness compilation: %d\n",
+		fprintf(stderr, "Illegal flag value in Ness compilation: %ld\n",
 			this->flags);
 	}
 	nesssym_NSetInfo(this, long, 0L);   /* (sets node to NULL) */

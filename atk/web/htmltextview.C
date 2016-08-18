@@ -646,7 +646,7 @@ void setTargetLink(frame *frame, long param)
 		env= (htmlenv *)(env)->GetParent();
 	    }
 	    if (value)
-		printf("id = [%s]\n", i, value);
+		printf("id = %ld [%s]\n", i, value);
 	    else {
 		char newatts[128];
 		long len;  int rc;  

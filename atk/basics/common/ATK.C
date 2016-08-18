@@ -262,8 +262,8 @@ ATKregistryEntry *ATK::DynamicLoad(const char *name, boolean atrace)
     mainfunc=ATKDoLoad(fullname, trace||atrace);
     
 #else
-   /* OS/2 has it's own mechanism for finding dynamic objects.  We let it
-    * do it's thing, but because we don't have symlinks we must attempt an
+   /* OS/2 has its own mechanism for finding dynamic objects.  We let it
+    * do its thing, but because we don't have symlinks we must attempt an
     * alias if the initial load doesn't work.  It is assumed that the
     * initial load will usually work.
     */ 
@@ -385,7 +385,7 @@ void ATK::ATKConstructorFailure()
 
 /*
  * Register an entry with the runtime system.
- * We automatically register it's superclasses.
+ * We automatically register its superclasses.
  * If the classent's next field is non-null we know
  * that the class has already been registered.
  */

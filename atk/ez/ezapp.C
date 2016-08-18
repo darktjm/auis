@@ -198,7 +198,7 @@ static void Checkpoint(long  dummyData)
 	    if (MaxCkpSize != 0 && datalen > MaxCkpSize) {
 		char msg[4096];
 
-		sprintf(msg, "Checkpoint:  %s is too large to checkpoint (over %d bytes).  See the CheckpointMaxSize preference.\n",
+		sprintf(msg, "Checkpoint:  %s is too large to checkpoint (over %ld bytes).  See the CheckpointMaxSize preference.\n",
 			result.bufferp->GetName(), MaxCkpSize);
 		if (result.bufferp->Visible())
 		    result.bufferp->EnumerateViews((buffer_evfptr)CkpMessage, (long) msg);
@@ -241,7 +241,7 @@ static void SetBufferCkpLatency(class frame  *frame, long  key)
  * the code waits (latency + CkpLatency) * CkpInterval seconds before
  * considering checkpointing this buffer. 
  */
-    sprintf(answer, "%d", (CkpLatency - (bufout)->GetCkpLatency()) * CkpInterval);
+    sprintf(answer, "%ld", (CkpLatency - (bufout)->GetCkpLatency()) * CkpInterval);
     if (message::AskForString(frame, 0, "Minimum checkpoint time in seconds: ", answer, answer, sizeof(answer)) != -1) {
 
         long latencyIntervals = atoi(answer) / CkpInterval;

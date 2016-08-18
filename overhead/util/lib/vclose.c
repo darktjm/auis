@@ -138,7 +138,7 @@ static DoIoctl(int fd)
 }
 #endif /* AFS_ENV */
 
-int ViceIsRunning() {
+int ViceIsRunning(void) {
 #ifdef AFS_ENV
     if (!HasCheckedVice) CkVice();
     return ViceRuns;

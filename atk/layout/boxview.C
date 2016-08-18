@@ -173,7 +173,7 @@ boxview::DesiredSize(long  width				/* width being offered by parent */, long  h
     int tw = (this)->BoxWidth();
 
     if (boxview_debug)
-	printf("boxview_DesiredSize(, %d, %d, %d, .. )\n", width, height, (int)pass);
+	printf("boxview_DesiredSize(, %ld, %ld, %d, .. )\n", width, height, (int)pass);
 
     InitChild(this);
     if (this->child == NULL) {
@@ -268,7 +268,7 @@ boxview::FullUpdate(enum view_UpdateType  how		/* kind of update */, long  left 
     struct rectangle cliprect;		/* actual updated rectangle */
 
     if (boxview_debug)
-	printf("boxview_FullUpdate(%d, %d, %d, %d, %d)\n", (int)how, left, top, width, height);
+	printf("boxview_FullUpdate(%d, %ld, %ld, %ld, %ld)\n", (int)how, left, top, width, height);
 
     /* define rectangle actually being updated */
 
@@ -452,7 +452,7 @@ boxview::Print(FILE  *f			/* output file */, char  *processor		/* processor */, 
     int tw = (this)->BoxWidth();
 
     if (boxview_debug)
-	printf("boxview_Print(%x, %x, %s, %s, %d)\n", this, f, processor, finalFormat, toplevel);
+	printf("boxview_Print(%p, %p, %s, %s, %d)\n", this, f, processor, finalFormat, toplevel);
 
     /* set up  top-level stuff */
 
@@ -464,10 +464,10 @@ boxview::Print(FILE  *f			/* output file */, char  *processor		/* processor */, 
     InitChild(this);
 
     fprintf(f, ".sp -\\n(VSu\n");	/* move up one line */
-    fprintf(f, "\\D'l %dp 0'", (this)->GetLogicalWidth());  /* draw box */
-    fprintf(f, "\\D'l 0 %dp'", (this)->GetLogicalHeight());
-    fprintf(f, "\\D'l %dp 0'", -(this)->GetLogicalWidth());
-    fprintf(f, "\\D'l 0 %dp'", -(this)->GetLogicalHeight());
+    fprintf(f, "\\D'l %ldp 0'", (this)->GetLogicalWidth());  /* draw box */
+    fprintf(f, "\\D'l 0 %ldp'", (this)->GetLogicalHeight());
+    fprintf(f, "\\D'l %ldp 0'", -(this)->GetLogicalWidth());
+    fprintf(f, "\\D'l 0 %ldp'", -(this)->GetLogicalHeight());
     fprintf(f, "\n");			/* I think this moves back down a line */
 
     fprintf(f, ".sp %dp\n", tw);	/* vertical down to enclosed object */

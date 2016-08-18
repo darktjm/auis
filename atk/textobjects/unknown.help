@@ -26,9 +26,9 @@ will optionally allow you to save or view the original data.
 If a document containing unavailable insets is read in, it may not behave 
 properly.  But, with the unknown inset in place the application should not 
 crash because of an unavailable inset.  Saving a document read in when one 
-or more of it's insets were unavailable may result in the corruption of the 
+or more of its insets were unavailable may result in the corruption of the 
 document and the included data.  Manual intervention may be able to restore 
-the document to it's original form, but this is not guaranteed.  Documents 
+the document to its original form, but this is not guaranteed.  Documents 
 should generally only be edited with an installation of AUIS which has all 
 the insets needed.
 
@@ -111,7 +111,7 @@ only the outermpst pair bracketed by the begin/enddata for unknown.)  Then
 simply remove the begin/endata\{unknown,82728\}.  After removing these 
 lines simply run ez on the resulting file.  The ez program may crash 
 though, so it is advised that you use an ez which does not have any unsaved 
-changes in it's buffers.  This procedure will work as long as the object is 
+changes in its buffers.  This procedure will work as long as the object is 
 self contained and is not referred to by other insets and does not 
 reference other insets.  If there are such references the recovery process 
 is dependent on the specific inset, the best guide in these cases is the 

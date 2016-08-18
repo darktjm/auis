@@ -43,8 +43,8 @@ void rasterview_SetPixelBehindDisplayBox(class rasterview  *self, class rasterim
 extern boolean rasterview_debug;
 #define Debug(s) {printf s ; fflush(stdout);}
 #define DEBUG(s) {if (rasterview_debug) {printf s ; fflush(stdout);}}
-#define ENTER(r) DEBUG(("Enter %s(0x%lx)\n", Stringize(r), self))
-#define LEAVE(r) DEBUG(("Leave %s(0x%lx)\n", Stringize(r), self))
+#define ENTER(r) DEBUG(("Enter %s(0x%p)\n", Stringize(r), self))
+#define LEAVE(r) DEBUG(("Leave %s(0x%p)\n", Stringize(r), self))
 
 #define DisplayAndReturn(self, String) {message::DisplayString(self, 0, String); return;}
 

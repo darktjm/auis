@@ -141,7 +141,7 @@ openprofile(const char *filename, const char *defaultname, int savefname)
 
 }
 
-const char *GetProfileFileName()
+const char *GetProfileFileName(void)
 {
     if (! inited)  {
 	profileHead = openprofile("PROFILES", DEFAULTPROFILES, 1);
@@ -152,7 +152,7 @@ const char *GetProfileFileName()
     return profileFileName;
 }
 
-const char *GetFirstProfileFileName()
+const char *GetFirstProfileFileName(void)
 {
     if (! inited)  {
 	profileHead = openprofile("PROFILES", DEFAULTPROFILES, 1);
@@ -163,7 +163,7 @@ const char *GetFirstProfileFileName()
     return firstProfileFileName;
 }
 
-void refreshprofile() {  /* Force rereading */
+void refreshprofile(void) {  /* Force rereading */
     if (profileHead != NULL)  {
 	FreeConfigureList(profileHead);
 	profileHead = NULL;

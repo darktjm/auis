@@ -279,7 +279,7 @@ public:
  * Revision 1.2  1993/05/13  14:19:29  rr2b
  * Fixed size member of struct area to be a long instead of a short.
  *  Fixed char *((*)[]) types to be char ***.
- * Fixed a syntax error in the declaration of SetDataObject (also fixed it's argument type.)
+ * Fixed a syntax error in the declaration of SetDataObject (also fixed its argument type.)
  * Fixed short *height to be long *height in method aptv::BuildFont.
  * Fixed MISSING_ARGUMENT_TYPE in PrintObject, OpenPrintStream, Query,
  * QueryFileName, QueryDirectoryName and Announce methods.

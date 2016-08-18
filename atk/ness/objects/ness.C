@@ -351,7 +351,7 @@ ThisUser() {
 udate(class ness  *self, const char *d, const char *n) {
 
 	static char buf[356];
-	sprintf(buf, "%02d\\\\%s\\\\%.299s\\\\00", self->syntaxlevel, d, n); 
+	sprintf(buf, "%02ld\\\\%s\\\\%.299s\\\\00", self->syntaxlevel, d, n); 
 	return buf;
 }
 
@@ -519,7 +519,7 @@ ness::Write(FILE  *file, long  writeID, int  level) {
 		else
 			((class text *)this)->WriteSubString( 0, 
 				(this)->GetLength(), file, TRUE);
-		fprintf(file, "\\enddata{%s,%d}\n", (this)->GetTypeName(),
+		fprintf(file, "\\enddata{%s,%ld}\n", (this)->GetTypeName(),
 			(this)->GetID());
 		fflush(file);
 	}
@@ -608,7 +608,7 @@ ness::HandleKeyWord(long  pos, char  *keyword, FILE  *file) {
 		*bx = '\0';
 		while (c != EOF && (c = getc(file)) != '\n') {}
 		this->Origin = strcpy((char *)malloc(strlen(buf)+1), buf);
-		if (1 != sscanf(this->Origin, "%d", &this->syntaxlevel))
+		if (1 != sscanf(this->Origin, "%ld", &this->syntaxlevel))
 			this->syntaxlevel = UNSPECIFIEDSYNTAXLEVEL;
 		this->IsNowOriginator = FALSE;
 		return 0;
@@ -767,7 +767,7 @@ ness::EstablishViews(class view  *child) {
 					: (class view *)child);
 		(this)->SetArbiter( arbview);
 		if (debug)
-			printf("arbiterview at 0x%lx\n", arbview);
+			printf("arbiterview at 0x%p\n", arbview);
 	}
 
 
@@ -778,13 +778,13 @@ ness::EstablishViews(class view  *child) {
 		dt = arbiterview::GetNamedView(arbview, "defaulttext");
 		deftext = (class textview *)ProperPtr(dt, textviewClass);
 		if (dt != NULL)
-			DEBUG(("dt 0x%lx   deftext from dt 0x%lx\n", dt, deftext));
+			DEBUG(("dt 0x%p   deftext from dt 0x%p\n", dt, deftext));
 		if (deftext == NULL)
 			/* try for a child of the arbview itself. */
 			deftext = (class textview *)ProperPtr((ATK  *)arbview,
 					 textviewClass);
 		if (deftext != NULL)
-			DEBUG(("deftext from arbview 0x%lx\n", dt, deftext));
+			DEBUG(("deftext from arbview 0x%p\n", deftext));
 		if (deftext == NULL)
 		    /* still no default text. search upward from arb and then child */
 		    textchild = (class view *)arbview, textsecond = (class view *)child;
@@ -942,7 +942,7 @@ dostmt(class view  *parentview) {
 				message::DisplayString(parentview, 0, "Done");
 			break;
 		}
-		sprintf(prompt, "%s at %d.  Try again: ", success->msg+1,
+		sprintf(prompt, "%s at %ld.  Try again: ", success->msg+1,
 				(success->where)->GetPos() - strlen(prefix));
 		(tempNess)->ClearErrors();
 		tempNess->compiled = FALSE;
@@ -1169,7 +1169,7 @@ xferfromwarning(class ness  *self, long  *pLoc , class text  *t,
 	void
 ness::AddWarningText() {
 
-	char *name;
+	const char *name;
 	FILE *wtext;
 	class text *t;
 	long i, len, loc, previ;
@@ -1178,7 +1178,7 @@ ness::AddWarningText() {
 	(this)->SetReadOnly( TRUE);
 	if (this->hasWarningText) return;
 
-	name = (char *)environ::AndrewDir("/lib/ness/nesswarn.d");
+	name = environ::AndrewDir("/lib/ness/nesswarn.d");
 
 	wtext = fopen(name, "r");
 	if (wtext == NULL)
@@ -1328,7 +1328,7 @@ LineMsg(class ness  *ness, long  loc , long  len) {
 	}
 	if (loc >= endloc) {
 		/* bizarre:  should not happen */
-		sprintf(msg, "location %d (len %d)", loc, len);
+		sprintf(msg, "location %ld (len %ld)", loc, len);
 		return msg;
 	}
 
@@ -1347,7 +1347,7 @@ LineMsg(class ness  *ness, long  loc , long  len) {
 	prevhas = ness->hasWarningText;
 	prevline = lineno;
 
-	sprintf(msg, "line %d", lineno);
+	sprintf(msg, "line %ld", lineno);
 	return msg;
 }
 
@@ -1366,7 +1366,7 @@ ness::printerrors(FILE  *file) {
 		loc = (list->where)->GetPos();
 		len = (list->where)->GetLength();
 		if (list->execloc != 0)
-			fprintf(file, "(Code location: %d)\n", list->execloc);
+			fprintf(file, "(Code location: %ld)\n", list->execloc);
 		fprintf(file, "%s - %s\n   source text is:  ", 
 				LineMsg(this, loc, len), list->msg+1);
 		textend = (this)->GetLength();

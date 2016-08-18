@@ -92,9 +92,9 @@ long helloworld::Read(FILE  *file,long  id)
 
     if(fgets(buf,sizeof(buf),file)==NULL ||
        /* the %hd tells scanf that blackOnWhite is a short, not an int */
-       sscanf(buf,"%d %d %hd\n",&this->x,&this->y,&this->blackOnWhite)<3 ||
+       sscanf(buf,"%ld %ld %d\n",&this->x,&this->y,&this->blackOnWhite)<3 ||
        fgets(buf,sizeof(buf),file)==NULL ||
-       sscanf(buf,"\\begindata{%[^,],%d}\n",classNameBuf,&dobjObjId)<2)
+       sscanf(buf,"\\begindata{%[^,],%ld}\n",classNameBuf,&dobjObjId)<2)
 	retVal=dataobject_PREMATUREEOF;
     else{
 	if(strcmp(classNameBuf,(this->dobj)->GetTypeName())!=0){
@@ -125,11 +125,11 @@ long helloworld::Write(FILE  *file,long  writeId,int  level)
 {
     if(writeId!=(this)->GetWriteID()){ /* only write a given version once */
 	(this)->SetWriteID(writeId);
-	fprintf(file,"\\begindata{%s,%d}\n",
+	fprintf(file,"\\begindata{%s,%ld}\n",
 		(this)->GetTypeName(), (this)->UniqueID());
-	fprintf(file,"%d %d %d\n",this->x,this->y,this->blackOnWhite);
+	fprintf(file,"%ld %ld %d\n",this->x,this->y,this->blackOnWhite);
 	(this->dobj)->Write(file,writeId,level);
-	fprintf(file,"\\enddata{%s,%d}\n",
+	fprintf(file,"\\enddata{%s,%ld}\n",
 		(this)->GetTypeName(), (this)->UniqueID());
     }
 

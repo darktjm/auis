@@ -175,7 +175,7 @@ documents. \
 
 The begindata, enddata pair mark the extent of the data included in a 
 particular data object.  Use of the begindata, enddata pair indicate that 
-the data should be stored in memory, and the location of the data and it's 
+the data should be stored in memory, and the location of the data and its 
 \italic{dataname}, a canonical name used to refer to that data object, 
 should be stored and registered in a data registry.  \italic{Datatype} 
 refers to the type of data being stored (e.g. text, array, etc). \
@@ -187,7 +187,7 @@ refers to the type of data being stored (e.g. text, array, etc). \
 
 
 The view string is used to mark the place in the document where the view 
-should appear.  The definition of the data object (it's begindata, enddata 
+should appear.  The definition of the data object (its begindata, enddata 
 markers) and the view marker need not be adjacent, however a data object 
 definition must precede any view marker which refers to it.  Multiple view 
 markers may refer to a single data object.  \italic{Viewtype} refers to the 

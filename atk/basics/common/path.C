@@ -153,7 +153,7 @@ void path::InputTruncatedPathCache(FILE  *fp)
 
     fgets(lens, MAXPATHLEN, fp);
     while (strncmp(lens, "no", 2) != 0) {
-        sscanf(lens, "fullpathlen: %d shortpathlen: %d\n", &flen, &slen);
+        sscanf(lens, "fullpathlen: %ld shortpathlen: %ld\n", &flen, &slen);
         fgets(fpath, MAXPATHLEN, fp);
         fgets(spath, MAXPATHLEN, fp);
         fpath[flen] = '\0';
@@ -193,7 +193,7 @@ void path::OutputTruncatedPathCache(FILE  *fp)
     struct homestruct *aHome;
 
     for (aHome = homes; aHome != NULL; aHome = aHome->next) {
-        fprintf(fp, "fullpathlen: %d shortpathlen: %d\n", aHome->fullLength, aHome->shortLength);
+        fprintf(fp, "fullpathlen: %ld shortpathlen: %ld\n", aHome->fullLength, aHome->shortLength);
         fprintf(fp, "%s\n%s\n", aHome->fullPath, aHome->shortPath);
     }
     fprintf(fp, "no more home directories\n");

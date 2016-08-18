@@ -284,7 +284,7 @@ int depth, Persist, Recurse;
 	|| MS_PurgeDeletedMessages(dirname))
     {
 	if (depth > 0 || AMS_ERRNO != ENOENT) {
-	    sprintf(ErrorText, "Epoch on %s: [%d/%d] ", ap_Shorten(dirname), AMS_ERRCAUSE, AMS_ERRVIA);
+	    sprintf(ErrorText, "Epoch on %s: [%ld/%ld] ", ap_Shorten(dirname), AMS_ERRCAUSE, AMS_ERRVIA);
 	    if (vdown(AMS_ERRNO)) strcat(ErrorText, "(AFS down) ");
 	    strcat(ErrorText, UnixError(AMS_ERRNO));
 	    strcat(ErrorText, ";");

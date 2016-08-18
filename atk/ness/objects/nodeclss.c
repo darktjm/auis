@@ -217,7 +217,7 @@ main(int argc, char **argv) {
 
 	dot = strrchr(argv[1], '.');
 	if (dot)
-		sprintf(filestem, "%.*s", dot-argv[1], argv[1]);
+		sprintf(filestem, "%.*s", (int)(dot-argv[1]), argv[1]);
 	else
 		strcpy(filestem, argv[1]);
 

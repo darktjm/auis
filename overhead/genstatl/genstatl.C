@@ -290,7 +290,7 @@ void processMainFile(FILE *mainfp) {
 		struct hasht *s=all[i];
 		while(s) {
 		    if((s->needed) && (s->lib->reflevel>0))
-			fprintf(mainfp, "%s\n", s->classname, s->lib->reflevel);
+			fprintf(mainfp, "%s\n", s->classname /* , s->lib->reflevel */); /* tjm - FIXME: should reflevel be printed? */
 		    s=s->next;
 		}
 	    }
@@ -1088,7 +1088,7 @@ static void MakeDynObj(FILE *ifp, char *odir, char **objects, int ocount, char *
 static void AtLeastTwo(int argc, char **argv)
 {
     if(argc<2) {
-	fprintf(stderr, "genstatl: %s flag requires an argument.\n");
+	fprintf(stderr, "genstatl: %s flag requires an argument.\n", argv[0]);
 	usage();
 	exit(-1);
     };

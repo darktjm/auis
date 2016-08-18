@@ -1780,7 +1780,7 @@ LPATH before compiling Andrew.
 \subsection{4.3  Notes about Displaying on an Open Windows Server
 
 }
-Open Windows uses it's own font format.  To build the appropriate fonts, 
+Open Windows uses its own font format.  To build the appropriate fonts, 
  you will need to compile on a machine with Open Windows installed and with 
 OPENWINDOWS_ENV defined in your $/config/site.h file.  If you won't need 
 the normal X .bdf fonts you can then replace the contents of the 

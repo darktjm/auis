@@ -32,7 +32,7 @@
 #include "prototypes.h"
 
 static void
-DECLARE3(defaultHandler, char*, module, char*, fmt, va_list, ap)
+DECLARE3(defaultHandler, const char*, module, const char*, fmt, va_list, ap)
 {
 	if (module != NULL)
 		fprintf(stderr, "%s: ", module);
@@ -53,7 +53,7 @@ DECLARE1(TIFFSetWarningHandler, TIFFErrorHandler, handler)
 
 void
 #if USE_PROTOTYPES
-TIFFWarning(char *module, char *fmt, ...)
+TIFFWarning(const char *module, const char *fmt, ...)
 #else
 /*VARARGS2*/
 TIFFWarning(module, fmt, va_alist)

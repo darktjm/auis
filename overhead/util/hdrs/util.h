@@ -76,7 +76,7 @@ extern int os_system(const char *cmd);
 /* procstuf.c */
 extern char *statustostr(WAIT_STATUS_TYPE *status, char *buf, int len);
 extern const char **strtoargv(char *command, const char **argvbuf, int len);
-extern char *argvtostr(const char * const *argv,char *buf,int len);
+extern char *argvtostr(const char * const *argv,char *buf,unsigned int len);
 
 extern int CheckServiceConfiguration(void);
 
@@ -419,8 +419,8 @@ extern const char *UnixError(int	 errorNumber);           /* Pass it an errno va
                                         * describing the error */
 
 /* thiscell.c */
-extern int GetCurrentWSCell(char  *Buf, int    size);    /* (Buf, size) */
-extern int GetCellFromFileName(const char  *FileName, char  *Buf, int    size); /* (Filename, Buf, size) */
+extern int GetCurrentWSCell(char  *Buf, unsigned int    size);    /* (Buf, size) */
+extern int GetCellFromFileName(const char  *FileName, char  *Buf, unsigned int    size); /* (Filename, Buf, size) */
 
 /* titles.c */
 extern void SetInitialArgs(int  argc , char  **argv , char  **envp);      /* SetInitialArgs(argc, argv,

@@ -266,7 +266,7 @@ static int fbmin_image_test()
   }
 
   if (fbmin_img_aspect < 0.01 || fbmin_img_aspect > 100.0) {
-    fprintf (stderr, "Invalid aspect ratio %lg on input\n",
+    fprintf (stderr, "Invalid aspect ratio %d on input\n",
 	     fbmin_img_aspect);
     return FBMIN_ERR_BAD_SD;
   }

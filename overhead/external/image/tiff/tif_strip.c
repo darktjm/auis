@@ -35,10 +35,7 @@
  * Compute which strip a (row,sample) value is in.
  */
 u_int
-TIFFComputeStrip(tif, row, sample)
-	TIFF *tif;
-	u_long row;
-	u_int sample;
+TIFFComputeStrip(TIFF *tif, u_long row, u_int sample)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 	u_int strip;
@@ -60,8 +57,7 @@ TIFFComputeStrip(tif, row, sample)
  * Compute how many strips are in an image.
  */
 u_int
-TIFFNumberOfStrips(tif)
-	TIFF *tif;
+TIFFNumberOfStrips(TIFF *tif)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 
@@ -74,9 +70,7 @@ TIFFNumberOfStrips(tif)
  * Compute the # bytes in a variable height, row-aligned strip.
  */
 u_long
-TIFFVStripSize(tif, nrows)
-	TIFF *tif;
-	u_long nrows;
+TIFFVStripSize(TIFF *tif, u_long nrows)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 
@@ -110,8 +104,7 @@ TIFFVStripSize(tif, nrows)
  * Compute the # bytes in a (row-aligned) strip.
  */
 u_long
-TIFFStripSize(tif)
-	TIFF *tif;
+TIFFStripSize(TIFF *tif)
 {
 	return (TIFFVStripSize(tif, tif->tif_dir.td_rowsperstrip));
 }

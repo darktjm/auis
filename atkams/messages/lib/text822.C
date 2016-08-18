@@ -930,7 +930,7 @@ long text822::Write(FILE  *fp, long  writeID, int  level)
 	    fprintf(fp, "\\template{%s}\n", ((class text *) this)->styleSheet->templateName);
 	(((class text *) this)->styleSheet)->Write( fp);
 	(this)->WriteSubString( bodystart, (this)->GetLength() - bodystart, fp, TRUE);
-	fprintf(fp, "\\enddata{%s,%d}\n", (this)->GetTypeName(), this->id);
+	fprintf(fp, "\\enddata{%s,%ld}\n", (this)->GetTypeName(), this->id);
 	fflush(fp);
     }
     return this->id;

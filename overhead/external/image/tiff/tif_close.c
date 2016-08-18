@@ -28,16 +28,10 @@
  * TIFF Library.
  */
 #include "tiffioP.h"
-
-#if USE_PROTOTYPES
-extern	int TIFFFreeDirectory(TIFF*);
-#else
-extern	int TIFFFreeDirectory();
-#endif
+#include <unistd.h>
 
 void
-TIFFClose(tif)
-	TIFF *tif;
+TIFFClose(TIFF *tif)
 {
 	if (tif->tif_mode != O_RDONLY)
 		/*

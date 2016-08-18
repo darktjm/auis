@@ -347,7 +347,7 @@ void amsutil::BuildOptionPreference(char  *buf)
 
     *buf = '\0';
     for (whichbyte = 0; whichbyte <= (EXP_MAXUSED/32); ++whichbyte) {
-	sprintf(MyBuf, "0x%x/0x%x", MyOpts.PermOpts[whichbyte], MyOpts.OptMask[whichbyte]);
+	sprintf(MyBuf, "0x%lx/0x%lx", MyOpts.PermOpts[whichbyte], MyOpts.OptMask[whichbyte]);
 	if (*buf) strcat(buf, ", ");
 	strcat(buf, MyBuf);
     }

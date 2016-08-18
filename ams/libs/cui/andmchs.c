@@ -322,7 +322,7 @@ LogStart() {
     }
     if (MSLogFP) {
 	laststart = time(0) - inittime;
-	fprintf(MSLogFP, "%d\t%d\t", laststart - lastfinish, laststart);
+	fprintf(MSLogFP, "%ld\t%ld\t", laststart - lastfinish, laststart);
     }
 }
 
@@ -331,7 +331,7 @@ char *name;
 {
     if (MSLogFP) {
 	lastfinish = time(0) - inittime;
-	fprintf(MSLogFP, "%d\t%d\t%s\n", lastfinish, lastfinish - laststart, name);
+	fprintf(MSLogFP, "%ld\t%ld\t%s\n", lastfinish, lastfinish - laststart, name);
 	fflush(MSLogFP);
     }
 }

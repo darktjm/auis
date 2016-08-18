@@ -30,6 +30,9 @@ long    MS_UnlinkFile (char    *FileName);
 int MS_UpdateState();
 int MS_DomainHandlesFormatting(char  *domname , int  *codeP);
 
+char *newmid(void);
+char *DescribeTimeInterval(long interval);
+
 ENDCPLUSPLUSPROTOS
  
 #endif /* _msprotos_H_ */

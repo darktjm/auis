@@ -119,7 +119,7 @@ int WriteOneFile(class sendmessage  *sendmessage, char  *ViceFileName, Boolean  
 #endif
     if (UseMultipartFormat) {
 	int kids = EnvViewCt(sendmessage->BodyText->rootEnvironment);
-	fprintf(fp, "X-Andrew-Message-Size: %d+%d\n", (sendmessage->BodyText)->GetLength() - kids, kids);
+	fprintf(fp, "X-Andrew-Message-Size: %ld+%d\n", (sendmessage->BodyText)->GetLength() - kids, kids);
 	fprintf(fp, "MIME-Version: 1.0\n");
 	if (kids) {
 	    sprintf(boundary, "Alternative.Boundary.%s", (ams::GetAMS())->ams_genid( 1));
@@ -166,7 +166,7 @@ int WriteOneFile(class sendmessage  *sendmessage, char  *ViceFileName, Boolean  
 	int NeedsEncoding=0;
 	if (Version >= 10) {
 	    int kids = EnvViewCt(sendmessage->BodyText->rootEnvironment);
-	    fprintf(fp, "X-Andrew-Message-Size: %d+%d\n", (sendmessage->BodyText)->GetLength() - kids, kids);
+	    fprintf(fp, "X-Andrew-Message-Size: %ld+%d\n", (sendmessage->BodyText)->GetLength() - kids, kids);
 	    fprintf(fp, "Content-Type: X-BE2; %d\n", Version);
 	    fprintf(fp, "If-Type-Unsupported: %s\n", TrustDelivery ? "alter" : "send");
 	} else {

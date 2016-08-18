@@ -66,7 +66,7 @@ double getla(int index)
     getloadavg(lav, 3);
     return index < 3 ? lav[index] : 0.0;
 }
-void getla_ShutDown()
+void getla_ShutDown(void)
 {
 }
 

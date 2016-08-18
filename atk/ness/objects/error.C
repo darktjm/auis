@@ -138,7 +138,7 @@ MapRunError(ness)
  * Revision 1.19  91/12/03  22:36:59  gk5g
  * Patch submitted by Todd Inglett:
  * I found a nasty little bug in MapRunError() in atk/ness/objects/error.c. 
- * The errornode that was picked off the front of the list didn't have it's 
+ * The errornode that was picked off the front of the list didn't have its 
  * ``next'' field NULLed, so it remained dangling into errornode's that are 
  * free'd later in the routine.  I also moved the check for NULL before the 
  * errornode is dereferenced (just in case).

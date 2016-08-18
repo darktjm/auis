@@ -482,7 +482,7 @@ long cel::Read(FILE  *file, long  id)
 		    (newobject)->UnReference();
                     status = (newobject)->Read( file, objectid);
 		    if (status != dataobject_NOREADERROR) {
-			printf("ERROR reading %s, %d\n",objectname,status);
+			printf("ERROR reading %s, %ld\n",objectname,status);
 			return status;
 		    }
 		}
@@ -511,11 +511,11 @@ long cel::Read(FILE  *file, long  id)
     if (*cp == '\n') cp++;
     switch(version){
 	case 2:
-	    sscanf(cp,"%d %ld %d %d %d %d\n" ,&(this->application),
+	    sscanf(cp,"%d %ld %ld %ld %ld %d\n" ,&(this->application),
 		   &did,&textpending,&(this->desw), &(this->desh),&(this->mode));
 	    break;
 	default:
-	    sscanf(cp,"%d %ld %d %d %d\n" ,&(this->application),
+	    sscanf(cp,"%d %ld %ld %ld %ld\n" ,&(this->application),
 		   &did,&textpending,&(this->desw), &(this->desh));
     }
     while (*cp != '\n') cp++;
@@ -607,10 +607,10 @@ long cel::Write(FILE  *file ,long  writeid,int  level)
 #endif /* WOULDWORKBUT */
     if(level != -1){
 	if(this->linkname)
-	    fprintf(file,"%d %ld %d %d %d %d \n>OBJ< %s\n>VIEW< %s\n>REF< %s\n>LINK< %s\n" ,this->application,
+	    fprintf(file,"%d %ld %d %ld %ld %d \n>OBJ< %s\n>VIEW< %s\n>REF< %s\n>LINK< %s\n" ,this->application,
 		    did,(this->script != NULL),this->desw, this->desh,this->mode,(this->dataType)?this->dataType:"", (this->viewType)?this->viewType:"",(this->refname)?this->refname:"",(this->linkname)?this->linkname:"");
 	else 
-	    fprintf(file,"%d %ld %d %d %d %d \n>OBJ< %s\n>VIEW< %s\n>REF< %s\n" ,this->application,
+	    fprintf(file,"%d %ld %d %ld %ld %d \n>OBJ< %s\n>VIEW< %s\n>REF< %s\n" ,this->application,
 		    did,(this->script != NULL),this->desw, this->desh,this->mode,(this->dataType)?this->dataType:"", (this->viewType)?this->viewType:"",(this->refname)?this->refname:"");
 	if(this->script){
 	    (this->script)->Write(file,writeid,level+1);

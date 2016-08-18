@@ -143,7 +143,7 @@ AmenuLabel::AmenuLabel(const char *label, const char *f, const char *col, unsign
 
 AmenuLabel::AmenuLabel() {
     char buf[16];
-    sprintf(buf, "%lx\n", this);
+    sprintf(buf, "%p\n", this);
     astr=atom::Intern(buf);
     str=astr->Name();
     printf("str:%s\n", str);
@@ -481,9 +481,9 @@ ATKdefineRegistryNoInit(AmenuCard, dataobject);
 
 DEFINE_AACTION_FUNC_CLASS(democlass,AmenuCard);
 static void demofunc(AmenuCard *obj, const avalueflex &aux, const avalueflex &in, avalueflex &out) {
-    printf("obj:%x\n", obj);
-    printf("aux:%d\n",aux[0].Integer());
-    printf("in:%d\n",in[0].Integer());
+    printf("obj:%p\n", obj);
+    printf("aux:%ld\n",aux[0].Integer());
+    printf("in:%ld\n",in[0].Integer());
 }
 
 static democlass demo(demofunc,9L);

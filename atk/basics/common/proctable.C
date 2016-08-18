@@ -295,7 +295,7 @@ static struct proctable_Entry *LookupHash(const char  *name, int  hash)
 
 static long ActionInterface(ATK *obj, long rock) {
     if(rock>=0 && rock<=255) {
-	message::DisplayString(NULL, 0, "This function requires it's rock to be it's name.");
+	message::DisplayString(NULL, 0, "This function requires its rock to be its name.");
 	return 0; 
     }
     char *name=(char *)rock;

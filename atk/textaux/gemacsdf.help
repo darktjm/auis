@@ -914,9 +914,9 @@ current style:
 
                                    when you are between two styles)}}
 
-Note: In GNU Emacs, M-' is bound to 'abbrev-prefix-mark', an command dealing 
+Note: In GNU Emacs, M-' is bound to 'abbrev-prefix-mark', a command dealing
 with Emacs abbrevs; a rarely used dynamic macro package, whereas EZ uses it to 
-delineate it's formatting commands.
+delineate its formatting commands.
 
 
 \subheading{Special Commands

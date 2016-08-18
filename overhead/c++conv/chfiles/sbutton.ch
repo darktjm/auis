@@ -172,7 +172,7 @@ class sbutton: dataobject[dataobj] {
     GetMattePrefs() ((self)->matteprefs)
     GetMaxCount() ((self)->maxcount)
   data:
-    /* Resizefunc is called as resizefunc(self, resizerock) when the dimensions of the button box are insufficient for it's content. NOTE: this has nothing to do with it's physical dimensions on screen, only with how many rows and columns the buttons are broken up into. */
+    /* Resizefunc is called as resizefunc(self, resizerock) when the dimensions of the button box are insufficient for its content. NOTE: this has nothing to do with its physical dimensions on screen, only with how many rows and columns the buttons are broken up into. */
     procedure resizefunc;
     long resizerock;
     /* Hitfunc is called as hitfunc(self, hitfuncrock, buttonindex, buttonrock) called when a mouse button is released over an activated button. Button is the position of the button's information in the buttons array. */

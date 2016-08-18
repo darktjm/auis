@@ -148,7 +148,7 @@ static void babble(char            *name, struct rheader  *header)
   default:
     printf(" unknown-type");
   }
-  printf(" %dx%d", memToVal(header->width, 4), memToVal(header->height, 4));
+  printf(" %ldx%ld", memToVal(header->width, 4), memToVal(header->height, 4));
 
   switch (memToVal(header->depth, 4)) {
   case 1:

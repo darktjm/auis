@@ -222,7 +222,7 @@ unsigned int show_meminfo()
 	 &main_mem, &used_mem, &free_mem, &shared_mem, &buf_mem,
 	 &swap_mem, &used_swap, &free_swap);
 
-  sendval(("%d:%d\n", VM, (int) 100 - (((float) free_mem / main_mem) * 100)));
+  sendval(("%d:%d\n", VM, (int) (100 - (((float) free_mem / main_mem) * 100))));
   sendval(("%d:%d\n", PAGEREPLACABLE, buf_mem / 1024));
   sendval(("%d:%d\n", MEMACTIVE, used_mem / 1024));
   sendval(("%d:%d\n", MEMFREE, free_mem / 1024));

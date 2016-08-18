@@ -611,7 +611,7 @@ Palette_Hit( register class chartv	   *self, register class suite		   *suite, re
 	(self)->SaveCmd(  );
 	break;
       default:
-	sprintf( msg, "ChartV: ERROR -- Unknown control-code (%d)",
+	sprintf( msg, "ChartV: ERROR -- Unknown control-code (%ld)",
 		    (suite)->ItemAttribute(  item, suite_itemdatum ) );
 	(self)->Announce(  msg );
       } 

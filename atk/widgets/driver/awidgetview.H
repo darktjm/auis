@@ -136,7 +136,7 @@ class AFormulaViewAct : public AFormulaAct {
  * If they do this the widgetview's mouse hit functions will *NOT* see
  * any further hits.  (Existing mouse functions will continue to work
  * as before since the new behavior is only triggered if the
- * mouse function returns something in it's return value list.)
+ * mouse function returns something in its return value list.)
  * BUG
  *
  * Revision 1.15  1996/10/07  21:16:10  robr

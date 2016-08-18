@@ -61,8 +61,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 #endif /* #if SY_B4x */
 #endif
 
-int osi_GetTimes(blk)
-struct osi_Times *blk;
+int osi_GetTimes(struct osi_Times *blk)
 {
 #ifdef HAS_GETTIMEOFDAY
     struct timeval TV;

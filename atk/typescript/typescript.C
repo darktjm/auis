@@ -1641,7 +1641,7 @@ typescript::~typescript()
 {
 	ATKinit;
 
-  /* dataobject_Destroy(TEXTOBJ(ap)); */ /* the doc will destroy it's own marks */
+  /* dataobject_Destroy(TEXTOBJ(ap)); */ /* the doc will destroy its own marks */
     if(this->title)
 	free(this->title);
     if(this->cmdText)
@@ -1662,7 +1662,7 @@ typescript::ObservedChanged(class observable  *ov, long  value )
     /* after output has arrived, make sure view's dot is >= fence */
     if(ov == (class observable*) TEXT(this)) {
 	if(value == observable_OBJECTDESTROYED)
-	    /* the typescript can't do much without it's text */
+	    /* the typescript can't do much without its text */
 	    (this)->Destroy();
 	else {
 	    MaintainLastEnv(this);

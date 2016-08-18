@@ -693,7 +693,7 @@ indicating success or failure in Class-C, in C++ the only ways for a
 constructor to indicate failure portably is to use exceptions, or set a 
 flag in the object indicating the failure.  (However exceptions are not 
 implemented widely yet.)  ATK.H provides a macro called THROWONFAILURE 
-which for now simply prints an error message if it's argument is not true. 
+which for now simply prints an error message if its argument is not true. 
  On a system with a compiler which supports exceptions it THROWONFAILURE 
 may be modified to throw an exception when the constructor for an ATK 
 object fails.
@@ -1102,7 +1102,7 @@ while (0)
 
  * appear immediately after the include files in a class's implementation.
 
- * It's use looks like this (example):
+ * Its use looks like this (example):
 
  *
 

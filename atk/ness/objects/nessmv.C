@@ -331,7 +331,7 @@ static void ScriptAppend(class nessmv  *self, long  rock) {
     b=buffer::FindBufferByData(n);
 
     /* If we create the buffer here it will NOT
-      destroy it's data when it goes away. */
+      destroy its data when it goes away. */
     if(b==NULL) b=buffer::Create(GetName(n), (n)->GetFilename(), NULL, n);
 
     if(b==NULL) {
@@ -377,7 +377,7 @@ static void Append(class nessmv  *self, long  rock) {
 	n=n->next;
     }
 
-    /* If the buffer already exists we leave it's data destroying flag intact. */
+    /* If the buffer already exists we leave its data destroying flag intact. */
     b=buffer::FindBufferByFile(filename);
 
     if(n && !(b && (b)->GetData()==(class dataobject *)n)) {

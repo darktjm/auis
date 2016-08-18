@@ -433,7 +433,7 @@ GenAppend()  {
 	static void
 GenStmts()  {
 	char buf[100];
-	sprintf(buf, "GenTextQ%03d", nextN++);
+	sprintf(buf, "GenTextQ%03ld", nextN++);
 
 	/* build function to evaluate statements */
 	addConst(Decls, "function ");

@@ -497,7 +497,7 @@ void figorect::WriteBody(FILE  *fp)
 {
     (this)->figobj::WriteBody( fp);
 
-    fprintf(fp, "$ %d %d\n", this->w, this->h);
+    fprintf(fp, "$ %ld %ld\n", this->w, this->h);
 }
 
 long figorect::ReadBody(FILE  *fp, boolean  recompute)
@@ -555,7 +555,7 @@ void figorect::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolea
 	h = (v)->ToPrintPixH( -(this)->PosH());
     }
 
-    fprintf(file, "%s  %d %d moveto  %d %d lineto  %d %d lineto  %d %d lineto closepath\n", prefix, x, y,  x, y+h,  x+w, y+h,  x+w, y);
+    fprintf(file, "%s  %ld %ld moveto  %ld %ld lineto  %ld %ld lineto  %ld %ld lineto closepath\n", prefix, x, y,  x, y+h,  x+w, y+h,  x+w, y);
 
     col = ((this)->GetVAttributes())->GetColor( (this)->GetIVAttributes());
     print::LookUpColor(col, &rcol, &gcol, &bcol);
@@ -571,7 +571,7 @@ void figorect::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolea
     lw = ((this)->GetVAttributes())->GetLineWidth( (this)->GetIVAttributes());
     lw = (v)->ToPrintPixW( lw*figview_FigUPerPix);
     if (lw <= 0) lw = 0;
-    fprintf(file, "%s  %d setlinewidth\n", prefix, lw);
+    fprintf(file, "%s  %ld setlinewidth\n", prefix, lw);
     fprintf(file, "%s  %f %f %f setrgbcolor\n", prefix, rcol, gcol, bcol);
     /*fprintf(file, "%s  0 setgray\n", prefix);*/
     /* print dashes */

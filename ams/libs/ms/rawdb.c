@@ -519,7 +519,7 @@ int             Mode;
     if (strlen(Msg->RawBits) > Msg->HeadSize) {
         char            ErrorText[1000];
 
-        sprintf(ErrorText, "Warning!  Message amt read in is %d but should be at least %d, reading %s.", Msg->HeadSize, strlen(Msg->RawBits), ap_Shorten(File));
+        sprintf(ErrorText, "Warning!  Message amt read in is %d but should be at least %ld, reading %s.", Msg->HeadSize, strlen(Msg->RawBits), ap_Shorten(File));
         NonfatalBizarreError(ErrorText);
         Msg->HeadSize = strlen(Msg->RawBits);
     }
@@ -1301,7 +1301,7 @@ char           *PathElt;
         NewLine[0] = '\0';
     }
     else {
-        sprintf(NewLine, "%s %s %d\n", Dirname, TakenUpdates[whichupdate].date64, TakenUpdates[whichupdate].modtime);
+        sprintf(NewLine, "%s %s %ld\n", Dirname, TakenUpdates[whichupdate].date64, TakenUpdates[whichupdate].modtime);
     }
 
     PrevLine[0] = '\0';
@@ -1397,7 +1397,7 @@ char           *PathElt;
                     NewLine[0] = '\0';
                 }
                 else {
-                    sprintf(NewLine, "%s %s %d\n", Dirname, TakenUpdates[whichupdate].date64, TakenUpdates[whichupdate].modtime);
+                    sprintf(NewLine, "%s %s %ld\n", Dirname, TakenUpdates[whichupdate].date64, TakenUpdates[whichupdate].modtime);
                 }
             }
         }
@@ -1413,7 +1413,7 @@ char           *PathElt;
                 NewLine[0] = '\0';
             }
             else {
-                sprintf(NewLine, "%s %s %d\n", TakenUpdates[whichupdate].FullDirName, TakenUpdates[whichupdate].date64, TakenUpdates[whichupdate].modtime);
+                sprintf(NewLine, "%s %s %ld\n", TakenUpdates[whichupdate].FullDirName, TakenUpdates[whichupdate].date64, TakenUpdates[whichupdate].modtime);
             }
         }
     }

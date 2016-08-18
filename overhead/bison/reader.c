@@ -324,7 +324,7 @@ read_declarations ()
       else
 	{
 		char buff[100];
-		sprintf(buff, "unknown character: %s", printable_version(c)); 
+		sprintf(buff, "unknown character: %c", printable_version(c)); 
 		warn(buff);
 		skip_to_char('%');
 	}

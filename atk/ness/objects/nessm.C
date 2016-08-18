@@ -125,7 +125,7 @@ static int InsertProcCall(class ness  *n, long  pos, struct proctable_Entry  *pr
 	(n)->AlwaysInsertCharacters( pos+strlen(opstring), "\"", 1);
 	(n)->AlwaysInsertCharacters( pos, "\"", 1);
     } else {
-	sprintf(buf, "\"%d\"", rock);
+	sprintf(buf, "\"%ld\"", rock);
 	(n)->AlwaysReplaceCharacters( pos, 1, buf, strlen(buf));
     }
     return 0;
@@ -134,24 +134,24 @@ static int InsertProcCall(class ness  *n, long  pos, struct proctable_Entry  *pr
 
 static void DumpActions(struct action  *a) {
     while(a) {
-	printf("a:%x\n",a);
+	printf("a:%p\n",a);
 	switch(a->type) {
 	    case im_KeyboardEvent:
-		printf("key:'%c'\n",a->v.key);
+		printf("key:'%c'\n",(int)a->v.key);
 		break;
 	    case im_ProcEvent:
 		printf("proc %s\n",proctable::GetName(a->v.proc.procTableEntry));
-		printf("rock %d '%c'\n",a->v.proc.rock, a->v.proc.rock);
+		printf("rock %ld '%c'\n",a->v.proc.rock, (int)a->v.proc.rock);
 		break;
 	    case im_MenuEvent:
 		printf("menu proc %s\n",proctable::GetName(a->v.proc.procTableEntry));
-		printf("rock %d '%c'\n",a->v.proc.rock, a->v.proc.rock);
+		printf("rock %ld '%c'\n",a->v.proc.rock, (int)a->v.proc.rock);
 		break;
 	    case im_MouseEvent:
 		printf("mouse event!!\n");
 		break;
 	    case im_AnswerEvent:
-		printf("answer:%x\n",a->v.answer);
+		printf("answer:%p\n",a->v.answer);
 		printf("answer:'%s'\n",a->v.answer);
 		break;
 	    case im_SuspendEvent:
@@ -396,7 +396,7 @@ static void DoConv(class view  *self, long  rock) {
 	    case im_MouseEvent:
 		nlook=QueueAnswers(n, look, m);
 		lasttype=look->type;
-		sprintf(nbuf, "DoHit(currentwindow, %s, %d, %d)\n",mousehits(look->v.mouse.action), look->v.mouse.x, look->v.mouse.y);
+		sprintf(nbuf, "DoHit(currentwindow, %s, %ld, %ld)\n",mousehits(look->v.mouse.action), look->v.mouse.x, look->v.mouse.y);
 		lastpos=(m)->GetPos()-1;
 		(n)->AlwaysInsertCharacters( lastpos, nbuf, strlen(nbuf));
 		look=nlook;

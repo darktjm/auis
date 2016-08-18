@@ -384,7 +384,7 @@ void mb_SetKeys(struct menubar  *mb, const char *title, const char *item, char  
 }
     
 
-/* mb_AddSelection: add a new menu choice.  title is the name of the menu card it should appear on, tprio is the priority of this menu card or -1 if it shouldn't be modified.  item is the name of the menu itemm iprio is the priority of the item or -1 if it's priority shouldn't be modified, submenu indicates whether or not this item is another menu which will cascade off the top-level menu card when activated, data is to be supplied to the menubar's function when this item is choosen or a pointer to the menu card if this is a submenu. */
+/* mb_AddSelection: add a new menu choice.  title is the name of the menu card it should appear on, tprio is the priority of this menu card or -1 if it shouldn't be modified.  item is the name of the menu itemm iprio is the priority of the item or -1 if its priority shouldn't be modified, submenu indicates whether or not this item is another menu which will cascade off the top-level menu card when activated, data is to be supplied to the menubar's function when this item is choosen or a pointer to the menu card if this is a submenu. */
 void mb_AddSelection(struct menubar  *mb,const char *title ,int  tprio,const char *item,int  iprio,int  submenu,char  *data)
 {
      struct tmenu *t=FindMenu(mb,title);
@@ -987,7 +987,7 @@ static int WaitTillReady(struct menubar  *mb, XEvent  *event)
     else return 0;
 }
 
-/* SelectItem: highlight the itemth item on the menu card lm, also brings up any submenu and highlight's it's default item (usually the first) rot is used to decide which direction to go if the specified item is not active, -1 is up 1 is down. */
+/* SelectItem: highlight the itemth item on the menu card lm, also brings up any submenu and highlight's its default item (usually the first) rot is used to decide which direction to go if the specified item is not active, -1 is up 1 is down. */
 static void SelectItem(struct menubar  *mb, struct tmenu  *lm, int  item, int  rot)
 {
     int i=item;
@@ -1012,7 +1012,7 @@ static void SelectItem(struct menubar  *mb, struct tmenu  *lm, int  item, int  r
 }
 
 /* MoveDown: Select the next item down from the item currently selected on
-  menucard lm in menubar mb, if the new item is a submenu activate it and select it's default item. Return 1 if the search for the next item should start over from the first item else return 0 */
+  menucard lm in menubar mb, if the new item is a submenu activate it and select its default item. Return 1 if the search for the next item should start over from the first item else return 0 */
 static int MoveDown(struct menubar  *mb, struct tmenu  *lm)
 {
     int c;
@@ -1028,7 +1028,7 @@ static int MoveDown(struct menubar  *mb, struct tmenu  *lm)
 }
 
 /* MoveUp: Select the next item up from the item currently selected on
-  menucard lm in menubar mb, if the new item is a submenu activate it and select it's default item. Return 1 if the search for the next item should start over from the first item else return 0 */
+  menucard lm in menubar mb, if the new item is a submenu activate it and select its default item. Return 1 if the search for the next item should start over from the first item else return 0 */
 static int MoveUp(struct menubar  *mb, struct tmenu  *lm)
 {
     int c;
@@ -1350,7 +1350,7 @@ void mb_Activate(struct menubar  *mb, long  x, long  y)
     DoMenuLoop(mb, True);
 }
 
-/* mb_KeyboardActivate: activate menubar, bringing up the first menucard with it's first item selected, and start processing events. */
+/* mb_KeyboardActivate: activate menubar, bringing up the first menucard with its first item selected, and start processing events. */
 void mb_KeyboardActivate(struct menubar  *mb)
 {
     if(mb->lastvm>=0) BringUpMenu(mb, 0);
@@ -1426,7 +1426,7 @@ static XFontStruct *ReallyGetFont(Display  *dpy,char  *fontname)
     return f;
 }
 
-/* ReallyGetColor: get the color named color, if color is NULL or cannot be parsed by parse color use the color pointed to as a default and return the pixel value of the resulting color.  If color is non-null and can be parsed it's rgb values are filled into the color pointed to by desired and it's pixel value is returned. */
+/* ReallyGetColor: get the color named color, if color is NULL or cannot be parsed by parse color use the color pointed to as a default and return the pixel value of the resulting color.  If color is non-null and can be parsed its rgb values are filled into the color pointed to by desired and its pixel value is returned. */
 static unsigned long ReallyGetColor(Display  *dpy,char  *color,XColor  *desired)
 {
     XColor maybedesired;

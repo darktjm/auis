@@ -119,7 +119,7 @@ class icolormap : public icolormap_base {
 
 //  A ddcolor represents a particular color allocated in a particular colormap in the window system.
 // ddcolor objects must be allocated with new, and should usually be destroyed with Destroy.
-// If a colormap is being cleared or destroyed it will notify it's observers that the colormap
+// If a colormap is being cleared or destroyed it will notify its observers that the colormap
 // is being flushed and then it will call delete on all the ddcolors.
 class atom;
 class ddcolor {

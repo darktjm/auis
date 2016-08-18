@@ -270,7 +270,7 @@ long simpletext::Read(FILE  *file, long  id)
 
 	fstat(fileno(file), &buf);
 
-	/* Make sure the file is a regular file. If it isn't stat can't return any useful information about it's size. */
+	/* Make sure the file is a regular file. If it isn't stat can't return any useful information about its size. */
 
 	if ((buf.st_mode & S_IFMT) == S_IFREG) {
 	    long readlen;

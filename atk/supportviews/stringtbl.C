@@ -98,7 +98,7 @@ stringtbl::Read( register FILE   *file, register long   id			/* !0 if data strea
 	else ungetc(c, file);
 
 	(this)->Clear();
-	fscanf(file, " %x ", &highlight);
+	fscanf(file, " %lx ", &highlight);
 	while (TRUE) {
 		char s[MAXSTRINGENTRYLENGTH + 2], *nl;
 		if ((fgets(s, MAXSTRINGENTRYLENGTH + 2, file)) == 0) 
@@ -126,10 +126,10 @@ stringtbl::Write( FILE   *file, long   writeID, int   level )
 	if (this->writeID != writeID) {
 		/* new instance of write, do it */
 		this->writeID = writeID;
-		sprintf(head, "data{%s, %d}\n", (this)->GetTypeName(), id);
+		sprintf(head, "data{%s, %ld}\n", (this)->GetTypeName(), id);
 		fprintf(file, "\\begin%s", head);
 
-		fprintf(file, "%x\n", this->highlight);
+		fprintf(file, "%lx\n", this->highlight);
 		for (i = 0; i < this->used; i++)
 			fprintf(file, "%s\n", this->item[i]);
 

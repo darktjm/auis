@@ -2350,7 +2350,7 @@ NotifyAttr(resourceIdentifier, value)
 The rest of this confuses me greatly...  Is this applying to red, green or 
 blue?  It isn't following what my conception of red was...  What's this 
 about 'ForChildren'?  My notion was that setting a resource would find the 
-object it applied to and tell that object to update it's value for that 
+object it applied to and tell that object to update its value for that 
 resource.  More detail is needed on NotifyAttr and AttachChild.  (Though I 
 assume AttachChild is the obvious, just registering the child so automated 
 traversal works...)

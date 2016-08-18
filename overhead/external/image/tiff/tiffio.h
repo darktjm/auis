@@ -81,7 +81,7 @@ extern unsigned char TIFFNoBitRevTable[256];
 #include <stdio.h>
 #include <stdarg.h>
 
-typedef	void (*TIFFErrorHandler)(char* module, char* fmt, va_list ap);
+typedef	void (*TIFFErrorHandler)(const char* module, const char* fmt, va_list ap);
 
 #if defined(__cplusplus)
 extern "C" {
@@ -125,12 +125,12 @@ extern	int TIFFReadScanline(TIFF*, unsigned char*, unsigned, unsigned = 0);
 extern	int TIFFWriteScanline(TIFF*, unsigned char*, unsigned, unsigned = 0);
 extern	int TIFFReadRGBAImage(TIFF*, unsigned long, unsigned long, unsigned long*, int stop = 0);
 #else
-extern	TIFF* TIFFOpen(char*, char*);
-extern	TIFF* TIFFFdOpen(int, char*, char*);
-extern	char* TIFFFileName(TIFF*);
-extern	void TIFFError(char*, char*, ...);
+extern	TIFF* TIFFOpen(const char*, const char*);
+extern	TIFF* TIFFFdOpen(int, const char*, const char*);
+extern	const char* TIFFFileName(TIFF*);
+extern	void TIFFError(const char*, const char*, ...);
 extern	TIFFErrorHandler TIFFSetErrorHandler(TIFFErrorHandler handler);
-extern	void TIFFWarning(char*, char*, ...);
+extern	void TIFFWarning(const char*, const char*, ...);
 extern	TIFFErrorHandler TIFFSetWarningHandler(TIFFErrorHandler handler);
 extern	void TIFFPrintDirectory(TIFF*, FILE*, long);
 extern	int TIFFReadScanline(TIFF*, unsigned char*, unsigned, unsigned);
@@ -151,11 +151,28 @@ extern	int TIFFWriteEncodedStrip(TIFF*, unsigned, unsigned char*, unsigned);
 extern	int TIFFWriteRawStrip(TIFF*, unsigned, unsigned char*, unsigned);
 extern	int TIFFWriteEncodedTile(TIFF*, unsigned, unsigned char*, unsigned);
 extern	int TIFFWriteRawTile(TIFF*, unsigned, unsigned char*, unsigned);
-extern	int TIFFSwabShort(unsigned short *);
-extern	int TIFFSwabLong(unsigned long *);
-extern	int TIFFSwabArrayOfShort(unsigned short *, int);
-extern	int TIFFSwabArrayOfLong(unsigned long *, int);
-extern	int TIFFReverseBits(unsigned char *, int);
+extern	void TIFFSwabShort(unsigned short *);
+extern	void TIFFSwabLong(unsigned long *);
+extern	void TIFFSwabArrayOfShort(unsigned short *, int);
+extern	void TIFFSwabArrayOfLong(unsigned long *, int);
+extern	void TIFFReverseBits(unsigned char *, int);
+
+extern int TIFFInitCCITTFax3(TIFF *tif);
+extern void TIFFModeCCITTFax3(TIFF *tif, int isClassF);
+extern int TIFFInitCCITTFax4(TIFF *tif);
+extern int TIFFInitCCITTRLE(TIFF *tif);
+extern int TIFFInitCCITTRLEW(TIFF *tif);
+extern int TIFFInitLZW(TIFF *tif);
+extern int TIFFInitNeXT(TIFF *tif);
+extern int TIFFInitPackBits(TIFF *tif);
+extern int TIFFInitThunderScan(TIFF *tif);
+
+extern int TIFFFlushData1(TIFF *tif);
+extern void TIFFFreeDirectory(TIFF *tif);
+extern int TIFFDefaultDirectory(TIFF *tif);
+extern int TIFFSetDirectory(register TIFF *tif, int dirn);
+
+extern int TIFFSetCompressionScheme(TIFF *tif, int scheme);
 #if defined(__cplusplus)
 }
 #endif

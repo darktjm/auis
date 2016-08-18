@@ -388,7 +388,7 @@ view_DSattributes printopts::DesiredSize( long  width, long  height, enum view_D
 {
     *desiredWidth = 550;
     *desiredHeight = 322;
-    DEBUG(("Desired Size %d x %d\n", *desiredWidth, *desiredHeight));
+    DEBUG(("Desired Size %ld x %ld\n", *desiredWidth, *desiredHeight));
     return view_Fixed;
 }
 
@@ -566,7 +566,7 @@ static void LoadInitValue(class printopts *self, int onum)
     }
     else if (rec->op->type == A_int) {
 	static char numbuf[12];
-	sprintf(numbuf, "%d", value);
+	sprintf(numbuf, "%ld", value);
 	str = numbuf;
     }
     strlength = strlen(str);

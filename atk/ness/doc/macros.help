@@ -159,7 +159,7 @@ operation, or edit the script before it is modified for use as either a
 keybinding or menu option.  Once you choose how to install it you will be 
 asked for the specific binding (eg ^X^L, or Menu~20,This Item.)  After 
 installation you can visit the buffer containing the script and edit it, 
-possibly changing it's behavior or even it's binding.
+possibly changing its behavior or even its binding.
 
 
 }	

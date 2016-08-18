@@ -233,7 +233,7 @@ readASCII(class layout  *self, FILE  *f			    /* input file */, long  id			    /
 
 	    case '<': /* another component coming */
 		c = (self)->CreateComponent();
-		if (fscanf(f, "%d,%d,%d,%d", &left, &top, &width, &height) != 4) {
+		if (fscanf(f, "%ld,%ld,%ld,%ld", &left, &top, &width, &height) != 4) {
 		    objectto(f, "layout:  expected four numbers separated by commas");
 		    (self)->RemoveComponent( c);
 		    return dataobject_BADFORMAT;
@@ -263,7 +263,7 @@ readASCII(class layout  *self, FILE  *f			    /* input file */, long  id			    /
 		    };
 		}
 		if (debug)
-		    printf("Got <%ld,%ld,%ld,%ld,%c%c> havechild=%d\n", cLeft(c), cTop(c), cWidth(c), cHeight(c), (cVaries(c) ? 'V' : 'F'), havechild);
+		    printf("Got <%ld,%ld,%ld,%ld,%c> havechild=%d\n", cLeft(c), cTop(c), cWidth(c), cHeight(c), (cVaries(c) ? 'V' : 'F'), havechild);
 		if (fgetstring(f, "\n") != 0) {
 		    objectto(f, "layout:  trash after coordinates");
 		    (self)->RemoveComponent( c);
@@ -339,7 +339,7 @@ layout::Read(FILE  * f			    /* input file */, long  id			    /* unique identifi
     long rc;
 
     if (debug)
-	printf("layout_Read(%d)\n", id);
+	printf("layout_Read(%ld)\n", id);
 
     (this)->SetID( (this)->UniqueID());
     (this)->SetModified();
@@ -347,7 +347,7 @@ layout::Read(FILE  * f			    /* input file */, long  id			    /* unique identifi
     rc = readASCII(this, f, id);
     (this)->NotifyObservers( observable_OBJECTCHANGED);
     if (debug)
-	printf("layout_Read rc = %d\n", rc);
+	printf("layout_Read rc = %ld\n", rc);
 
     return rc;
 }
@@ -437,7 +437,7 @@ struct component *layout::CreateComponent()
 void layout::SetComponentSize(struct component  *c			/* component to change */, long  x	, long  y , long  w , long  h			/* new position and size */)
 {
     if (debug)
-	printf("layout_SetComponentSize(%s, %d, %d, %d, %d)\n", classname(cData(c)), x, y, w, y);
+	printf("layout_SetComponentSize(%s, %ld, %ld, %ld, %ld)\n", classname(cData(c)), x, y, w, y);
 
     if (cLeft(c) != x || cTop(c) != y || cWidth(c) != w || cHeight(c) != h) {
 	c->left = x;
@@ -469,7 +469,7 @@ long layout::GetModified()
     }
 
     if (debug)
-	printf("layout_GetModified = %d\n", rc);
+	printf("layout_GetModified = %ld\n", rc);
 
     return rc;
 }

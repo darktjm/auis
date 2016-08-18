@@ -1139,7 +1139,7 @@ long text::Write(FILE  *file, long  writeID, int  level)
                 fprintf(file, "\\template{%s}\n", this->styleSheet->templateName);
             (this->styleSheet)->Write( file);
             (this)->WriteSubString( 0, (this)->GetLength(), file, quoteCharacters);
-	    fprintf(file, "\\enddata{%s,%d}\n",
+	    fprintf(file, "\\enddata{%s,%ld}\n",
 		    (this->WriteAsText)?"text": (this)->GetTypeName(),
 		    this->id);
             fflush(file);

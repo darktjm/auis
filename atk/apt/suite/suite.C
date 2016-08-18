@@ -1664,7 +1664,7 @@ SetSuiteAttribute( register class suite  *self, register long  attribute , regis
       case suite_passiveitembackgroundcolor:
 	  suite_SetPassiveItemBGColor(self, (char*)value, 0, 0, 0);
 	  break;
-      default: fprintf( stderr, "Suite: Unknown Suite Attribute (%d)\n",attribute);
+      default: fprintf( stderr, "Suite: Unknown Suite Attribute (%ld)\n",attribute);
   }
   OUT(SetSuiteAttribute);
 }
@@ -1770,7 +1770,7 @@ ChangeSuiteAttribute( register class suite  *self, register long  attribute , re
 	case suite_titlehithandler:
 	case suite_datum:
 	    break;
-	default: fprintf(stderr,"Suite: Unknown Suite Attribute (%d)\n",attribute);
+	default: fprintf(stderr,"Suite: Unknown Suite Attribute (%ld)\n",attribute);
   }
   
   free(title_rect);
@@ -1843,7 +1843,7 @@ suite::SuiteAttribute( register long  attribute )
       case suite_rows:		    value = (long)Rows;			    break;    
       case suite_columns:		    value = (long)Columns;		    break;    
       default:
-	  fprintf(stderr,"Suite: Unknown Suite Attribute (%d)\n",attribute);
+	  fprintf(stderr,"Suite: Unknown Suite Attribute (%ld)\n",attribute);
 	  break;
   }
   return(value);
@@ -2085,7 +2085,7 @@ SetItemAttribute( register class suite  *self, register struct suite_item  *item
 		suite_SetItemBGColor(self, item, (char*)value, 0, 0, 0);
 		break;
 	default:
-		fprintf(stderr, "Suite: Unknown Item Attribute (%d)\n", attribute);
+		fprintf(stderr, "Suite: Unknown Item Attribute (%ld)\n", attribute);
 		break;
   }
 }
@@ -2154,7 +2154,7 @@ ChangeItemAttribute( register class suite  *self, register struct suite_item  *i
 	    (SetView)->ItemUpdate(item);
 	    break;
 	default:
-	    fprintf(stderr,"Suite: Unknown Item Attribute (%d)\n",attribute);
+	    fprintf(stderr,"Suite: Unknown Item Attribute (%ld)\n",attribute);
 	    break;
   }
   SetViewColors((class view *) self, &SuiteForeground, &SuiteBackground);
@@ -2219,7 +2219,7 @@ suite::ItemAttribute( register struct suite_item  *item, register long  attribut
 	case suite_itemcursorbyte:
 		value = (long) item->cursorbyte;	break;
 	default:
-		fprintf(stderr,"Suite: Unknown Item Attribute (%d)\n",attribute);
+		fprintf(stderr,"Suite: Unknown Item Attribute (%ld)\n",attribute);
 		break;
   }
   return(value);
@@ -2325,11 +2325,11 @@ DefaultExceptionHandler( register class suite  *self )
   long result;
   static char *continue_choice[2] = {"continue", 0};
 
-  sprintf(msg, "Suite: DefaultExceptionHandler:: exception code '%d' detected.",
+  sprintf(msg, "Suite: DefaultExceptionHandler:: exception code '%ld' detected.",
 	(self)->ExceptionCode() );
   message::MultipleChoiceQuestion(self, 100, msg, 0, &result, continue_choice, NULL);
   if(ExceptionItem) {
-    sprintf(msg, "Suite: DefaultExceptionHandler:: exception item caption '%s'.", (self)->ItemAttribute( ExceptionItem, suite_itemcaption));
+    sprintf(msg, "Suite: DefaultExceptionHandler:: exception item caption '%s'.", (char *)(self)->ItemAttribute( ExceptionItem, suite_itemcaption));
     message::MultipleChoiceQuestion(self, 100, msg, 0, &result, continue_choice, NULL);
   }
 }

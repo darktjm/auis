@@ -44,6 +44,7 @@ extern char *inet_ntoa();
 #include <arpa/inet.h>
 #endif /* hpux */
 #include <netdb.h>
+#include <util.h>
 
 main(argc, argv)
 int argc;
@@ -84,9 +85,9 @@ unsigned char **argv;
 	    if (Host != NULL) fputc(')', stdout);
 	    j=strlen((char *) cp);
 	    if (j <= 13) {
-		printf(", ctr (mod 64) of %d.\n", baz);
+		printf(", ctr (mod 64) of %ld.\n", baz);
 	    } else {
-		printf(", pid %d, ctr (mod 256) of %d.\n",
+		printf(", pid %ld, ctr (mod 256) of %ld.\n",
 		       (baz >> 16) & 0xFFFF, (baz >> 8) & 0xFF);
 	    }
 	}

@@ -72,7 +72,7 @@ long arbiter::Read(FILE  *file, long  id)
 {
     long result; /* set self as master so that as child cells are read, they will
 		   call declare read on self, thus the arbiter will find all
-		   of it's children */
+		   of its children */
     class arbiter *lastmaster;
     lastmaster = arbiter::SetMaster(this);
     (this)->SetArbiter(lastmaster);

@@ -127,7 +127,7 @@ void bpv::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width
 
     if (dobj->haspagenum) {
 	long wid, hgt;
-	sprintf(buf, "Next page number: %d", dobj->pagenum);
+	sprintf(buf, "Next page number: %ld", dobj->pagenum);
 	ClassFontDesc->StringSize(this->GetDrawable(), buf,
 					     &wid, &hgt);
 	enclosingRect.left = 30;
@@ -217,7 +217,7 @@ static void SetPageNumProc(class bpv  *self, long  val)
 
     strcpy(msgbuf, "Enter the number of the next page after this break:  ");
     if (dobj->haspagenum)
-	sprintf(buffer2, "%d", dobj->pagenum);
+	sprintf(buffer2, "%ld", dobj->pagenum);
     else
 	strcpy(buffer2, "");
     res = message::AskForString(self, 40, msgbuf, buffer2, buffer, 30); 
@@ -230,7 +230,7 @@ static void SetPageNumProc(class bpv  *self, long  val)
 
     dobj->SetPageNum(val);
     dobj->NotifyObservers( bp_DATACHANGED);
-    sprintf(msgbuf, "The next page after this break will be numbered %d.", val);
+    sprintf(msgbuf, "The next page after this break will be numbered %ld.", val);
     message::DisplayString(self, 10, msgbuf);
     RepostMenus(self, FALSE);
 }

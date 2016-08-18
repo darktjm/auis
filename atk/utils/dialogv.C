@@ -564,7 +564,7 @@ int dialogv::PostChoice(class im  *im, class view  *client, boolean  *cflag, int
     if(pos==0) pos=im_InMiddle|im_Centered;
     this->client=client;
     
-      /* Horrible hack to get desired size for the dialog box! We link the dialogview into the view tree of the client  and then after we have created the window unlink it so that it can be linked into the new im.  This is all because in order to get an appropriate size it really needs to be able to get at info about the actual display and it's fonts */
+      /* Horrible hack to get desired size for the dialog box! We link the dialogview into the view tree of the client  and then after we have created the window unlink it so that it can be linked into the new im.  This is all because in order to get an appropriate size it really needs to be able to get at info about the actual display and its fonts */
     (this)->LinkTree( client);
 
     /* Set the default configuration function temporarily so that the configuration function here will get called to determine the desired size for the window */

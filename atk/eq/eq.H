@@ -141,7 +141,7 @@ struct symbol {
 
 /*
  * An equation is (conceptually) an array of struct formula.
- * Each formula contains among other things a pointer to it's symbol.
+ * Each formula contains among other things a pointer to its symbol.
  */
 
 struct pos {

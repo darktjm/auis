@@ -195,7 +195,7 @@ class avalueflex : public avalueflex_base {
     
     // Returns the first avalue with the given name and type.  NULL is returned if no matching avalue is present.
     avalue *Find(const atom *name, const atom *type=NULL);
-    // Returns the first avalue with the given name and type.  NULL is returned if no matching avalue is present.  The returned avalue may not be modified.  This version is applied if called for a const avalueflex.  If the avalueflex contains a pointer to another that avalueflex will be searched as well at the point that it's pointer is encountered in the original.
+    // Returns the first avalue with the given name and type.  NULL is returned if no matching avalue is present.  The returned avalue may not be modified.  This version is applied if called for a const avalueflex.  If the avalueflex contains a pointer to another that avalueflex will be searched as well at the point that its pointer is encountered in the original.
     inline const avalue *Find(const atom *n, const atom *t=NULL) const {
 	avalueflex *huh=(avalueflex *)this;
 	avalue *huh2=huh->Find(n, t);

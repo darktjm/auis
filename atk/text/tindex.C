@@ -242,7 +242,7 @@ static void tindex_IndexTermCmd(register class view  *v)
     }
     else {
 	if(i == 1) sprintf(thisString,"one instance indexed");
-	else sprintf(thisString,"%d instances found",i);
+	else sprintf(thisString,"%ld instances found",i);
 	message::DisplayString(v,0,thisString);
 	if(v != (class view *)self) (Data(v))->reinit();
 	(d)->RegionModified(0,(d)->GetLength());
@@ -637,9 +637,9 @@ class text *tindex::BuildIndexText(struct textps_locatag *taglist)
 		kkx++;
 	    }
 	    if (rangebeg==rangeend)
-		sprintf(buf, "%s%d", (kx==ix)?",  ":", ", rangebeg);
+		sprintf(buf, "%s%ld", (kx==ix)?",  ":", ", rangebeg);
 	    else
-		sprintf(buf, "%s%d-%d", (kx==ix)?",  ":", ", rangebeg, rangeend);
+		sprintf(buf, "%s%ld-%ld", (kx==ix)?",  ":", ", rangebeg, rangeend);
 	    res->InsertCharacters(res->GetLength(), buf, strlen(buf));
 	    kx = kkx;
 	}

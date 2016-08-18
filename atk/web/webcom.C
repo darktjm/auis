@@ -1060,12 +1060,12 @@ webcom::Load(webcom_cbptr proc, void *rock)  {
         } else get="get";
         static int debug=-1;
         if(debug<0) debug=getenv("AW3CDEBUG")?1:0;
-        if(debug>0) fprintf(stdout, "%d %s %s %s %s %d %s %d %s\n", cnt, get, postfile?postfile:"", file, errfile, strlen(local_url), local_url, strlen(referer), referer);
-        if((fprintf(outf, "%d %s %s %s %s %d %s %d %s\n", cnt, get, postfile?postfile:"", file, errfile, strlen(local_url), local_url, strlen(referer), referer) == EOF) || (fflush(outf) == EOF)){
+        if(debug>0) fprintf(stdout, "%ld %s %s %s %s %ld %s %ld %s\n", cnt, get, postfile?postfile:"", file, errfile, strlen(local_url), local_url, strlen(referer), referer);
+        if((fprintf(outf, "%ld %s %s %s %s %ld %s %ld %s\n", cnt, get, postfile?postfile:"", file, errfile, strlen(local_url), local_url, strlen(referer), referer) == EOF) || (fflush(outf) == EOF)){
 		fprintf(stderr, "OUTPUT PIPE BROKEN - will restart\n");
 		setuppipes();
 		sleep(1);
-		if((fprintf(outf, "%d %s %s %s %s %d %s %d %s\n", cnt, get, postfile?postfile:"", file, errfile, strlen(local_url), local_url, strlen(referer), referer) == EOF) || (fflush(outf) == EOF)){	
+		if((fprintf(outf, "%ld %s %s %s %s %ld %s %ld %s\n", cnt, get, postfile?postfile:"", file, errfile, strlen(local_url), local_url, strlen(referer), referer) == EOF) || (fflush(outf) == EOF)){	
 			fprintf(stderr, "OUTPUT PIPE STILL BROKEN - GIVING UP\n");
 			return;
 		}

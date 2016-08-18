@@ -698,7 +698,7 @@ static void calc_location(class oscroll  *self)
                     self->desired.location &= ~(1<<i);
                 }
                 else {
-                    /* Otherwise allocate it's space. */
+                    /* Otherwise allocate its space. */
                     self->left += LeftChange[i] * REALBARWIDTH(self);
                     self->top += TopChange[i] * REALBARWIDTH(self);
                     self->width += WidthChange[i] * REALBARWIDTH(self);

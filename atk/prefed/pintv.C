@@ -1174,7 +1174,7 @@ static void ClearCPref(class pintv  *self)
     (ct)->AlwaysDeleteCharacters( 0, (ct)->GetLength());
 
     /* horrible hack... please forgive me. -rr2b
-     this convinces textview to remove most of it's marks
+     this convinces textview to remove most of its marks
      from the text, thus speeding up the text changes
      which are about to be done.
      */

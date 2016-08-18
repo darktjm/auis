@@ -138,7 +138,7 @@ int CheckDir(class consoleClass  *self, char  *Name, int  *LastModTime , int  La
 		}
 		else{
 		    *f = ' ';
-		    sprintf(ErrTxt, "console: '%s' is neither prefix nor suffix");
+		    sprintf(ErrTxt, "console: '%s' is neither prefix nor suffix", Name);
 		    ReportInternalError(self, ErrTxt);
 		    return(-1);
 		}
@@ -146,7 +146,7 @@ int CheckDir(class consoleClass  *self, char  *Name, int  *LastModTime , int  La
 	}
 	else{
 	    *f = ' ';
-	    sprintf(ErrTxt, "console: '%s' is invalid InitString specification");
+	    sprintf(ErrTxt, "console: '%s' is invalid InitString specification", Name);
 	    ReportInternalError(self, ErrTxt);
 	    return(-1);
 	    /* bogus string - contains either two * or the * is within the path */

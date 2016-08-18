@@ -387,7 +387,7 @@ helpapp::ParseArgs(int  argc, const char  **argv)
 	    switch((*argv)[1]){
 		case 'i':
 		    if (help_indexName != NULL) {
-			fprintf(stderr,"%s: only one index allowed\n",
+			fprintf(stderr,"%s: %s: only one index allowed\n",
 				(this)->GetName(),*argv);
 			exit(-1);
 		    }

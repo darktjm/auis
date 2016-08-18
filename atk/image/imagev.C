@@ -1184,7 +1184,7 @@ void imagev::PrintPSDoc(FILE *outfile, long pagew, long pageh)
 
     dopage = print::PSNewPage(print_UsualPageNumbering);
     if (dopage) {
-	fprintf(outfile, "%d %d moveto  %d %d lineto %d %d lineto\n %d %d lineto closepath clip newpath\n", margin, margin, pagew-margin, margin, pagew-margin, pageh-margin, margin, pageh-margin);
+	fprintf(outfile, "%d %d moveto  %ld %d lineto %ld %ld lineto\n %d %ld lineto closepath clip newpath\n", margin, margin, pagew-margin, margin, pagew-margin, pageh-margin, margin, pageh-margin);
 	fprintf(outfile, "%d %d translate\n", margin, margin);
 	writePS(this, outfile, &wpts, &hpts, imagev_REGISTERED_POSTSCRIPT);
     }

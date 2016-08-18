@@ -849,7 +849,7 @@ void figotext::WriteBody(FILE  *fp)
     (this)->figobj::WriteBody( fp);
 #define LINESIZE (70)
 
-    fprintf(fp, "$ %d %d\n", this->excessx, this->excessy);
+    fprintf(fp, "$ %ld %ld\n", this->excessx, this->excessy);
 
     count=0;
     for (ix=0; 1; ix++) {
@@ -990,21 +990,21 @@ void figotext::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolea
     fprintf(file, "%s  gsave\n", prefix);
     if (newstyle) {
 	ix = print::PSRegisterFont(fontname);
-	fprintf(file, "%s  %s%d %d scalefont setfont\n", prefix, print_PSFontNameID, ix, size);
+	fprintf(file, "%s  %s%d %ld scalefont setfont\n", prefix, print_PSFontNameID, ix, size);
     }
     else {
-	fprintf(file, "%s  /%s findfont %d scalefont setfont\n", prefix, fontname, size);
+	fprintf(file, "%s  /%s findfont %ld scalefont setfont\n", prefix, fontname, size);
     }
     fprintf(file, "%s  %g %g %g setrgbcolor\n", prefix, rcol, gcol, bcol);
     /*fprintf(file, "%s  0 setgray\n", prefix);*/
-    fprintf(file, "%s  %d %d translate 1 -1 scale\n", prefix, x, y);
+    fprintf(file, "%s  %ld %ld translate 1 -1 scale\n", prefix, x, y);
 
     fprintf(file, "%s  (", prefix);
     count = 0;
     for (ix=0; TRUE; ix++) {
 	ch = this->text[ix];
 	if (ch=='\0' || ch=='\n') {
-	    fprintf(file, ") %s %d moveto show\n", posmod, -count * (size+figotext_Leading));
+	    fprintf(file, ") %s %ld moveto show\n", posmod, -count * (size+figotext_Leading));
 	    if (ch=='\n') {
 		fprintf(file, "%s  (", prefix);
 		count++;

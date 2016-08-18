@@ -87,7 +87,7 @@ static void NoteHistory(class helpcon  *self)
     char buf[256];
     class text *txt =  self->historytext;
     if(*self->CurrentName == '\0') return;
-    sprintf(buf,"%s (%d,%d)\n",self->CurrentName,(self->bodyView)->GetDotPosition(), (self->bodyView)->GetDotLength());
+    sprintf(buf,"%s (%ld,%ld)\n",self->CurrentName,(self->bodyView)->GetDotPosition(), (self->bodyView)->GetDotLength());
     (txt)->AlwaysInsertCharacters( (txt)->GetLength(),buf,strlen(buf));
     (txt)->NotifyObservers(1);
 }

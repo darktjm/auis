@@ -497,7 +497,7 @@ void menulist::AddToML(char  *string, struct proctable_Entry  *menuProc, long  f
 		ExplodeMenuString(ml->newname, cname, sizeof(cname), NULL, iname, sizeof(iname), NULL);
 		SetPrio(cprio, scprio);
 		SetPrio(iprio, siprio);
-		sprintf(transbuf, "%s%s%s%s%s", cname, scprio, (cname[0]=='\0' && cprio < 1)?"":",", iname), siprio;
+		sprintf(transbuf, "%s%s%s%s%s", cname, scprio, (cname[0]=='\0' && cprio < 1)?"":",", iname, siprio);
 		string=transbuf;
 	    }
 	}

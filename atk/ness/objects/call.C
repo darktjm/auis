@@ -518,7 +518,7 @@ argtypeerror(long  n, Texpr  formal , Texpr  actual) {
 	char *msg = (char *)malloc(60);
 	if ((formal&0xf) == Tend) formal = Tunk;
 	if ((actual&0xf) == Tend) actual = Tunk;
-	sprintf(msg, "*argument %d should have type %s(%d), but is type %s(%d)", 
+	sprintf(msg, "*argument %ld should have type %s(%ld), but is type %s(%ld)", 
 			n, TypeName[formal&0xf], formal, TypeName[actual&0xf], actual);
 	return msg;
 }

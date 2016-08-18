@@ -420,8 +420,8 @@ void rasterview::SetScale(long  newscale)
 
 void rasterview_ZoomInCommand(class rasterview  *self, long  rock)
 {
-    DEBUG(("Scroll: (%d,%d)\n", self->Xscroll, self->Yscroll));
-    DEBUG(("Zoom In Scale: %d VS: (%d,%d,%d,%d)\n", self->Scale * 2,
+    DEBUG(("Scroll: (%ld,%ld)\n", self->Xscroll, self->Yscroll));
+    DEBUG(("Zoom In Scale: %ld VS: (%ld,%ld,%ld,%ld)\n", self->Scale * 2,
 	    rectangle_Left(&self->ViewSelection),
 	    rectangle_Top(&self->ViewSelection),
 	    rectangle_Width(&self->ViewSelection),
@@ -517,7 +517,7 @@ void rasterview_FinishMovingDisplayBox(class rasterview  *self, long  x , long  
 	SetTopRect(&self->DisplayBox,
 		   top - rectangle_Height(&self->DisplayBox) - 3*BORDER); }
 
-    DEBUG(("Moving Display Box to: (%d,%d,%d,%d)\n",
+    DEBUG(("Moving Display Box to: (%ld,%ld,%ld,%ld)\n",
 	    rectangle_Left(&self->DisplayBox),
 	    rectangle_Top(&self->DisplayBox),
 	    rectangle_Width(&self->DisplayBox),
@@ -549,7 +549,7 @@ static void HideDisplayBoxCommand(class rasterview  *self, long  rock)
 
 void rasterview_ZoomOutCommand(class rasterview  *self, long  rock)
 {
-    DEBUG(("Zoom Out Scale: %d\n", self->Scale / 2));
+    DEBUG(("Zoom Out Scale: %ld\n", self->Scale / 2));
     (self)->SetScale( self->Scale / 2);
 }
 
@@ -680,7 +680,7 @@ static void ModifyCommand(class rasterview  *self, long  rock)
 	AskOrCancel(self, "Gray level (1..15)[8]: ", inbuf);
 	/* If there is a value returned then if the value cannot be parsed then error. */
 	if (*inbuf) {
-	    if (sscanf(inbuf, "%d", &level) != 1)	
+	    if (sscanf(inbuf, "%ld", &level) != 1)	
 		DisplayAndReturn(self, "Value must be digits with no decimal point."); }
 	else level = 8;
 	(pix)->GraySubraster( &R, level); }
@@ -783,7 +783,7 @@ void ReadRaster(class rasterview  *self, class raster  *ras, char  *filename)
     }
     else {
 	char err[MAXPATHLEN + 50];
-	sprintf(err, "Error %d while reading file %s", readresult, filename);
+	sprintf(err, "Error %ld while reading file %s", readresult, filename);
 	message::DisplayString((class view *)self, 50, err); }
 }
 
@@ -1044,7 +1044,7 @@ static void CopyCommand(class rasterview  *self)
 
     if (self->ShowCoords) {
 	static char cb[40];
-	sprintf(cb, "Copied area %d by %d at (%d,%d)", rectangle_Width(&self->DesiredSelection), rectangle_Height(&self->DesiredSelection), rectangle_Left(&self->DesiredSelection), rectangle_Top(&self->DesiredSelection));
+	sprintf(cb, "Copied area %ld by %ld at (%ld,%ld)", rectangle_Width(&self->DesiredSelection), rectangle_Height(&self->DesiredSelection), rectangle_Left(&self->DesiredSelection), rectangle_Top(&self->DesiredSelection));
 	message::DisplayString(self, 10, cb);
     }
 }
@@ -1087,10 +1087,10 @@ boolean MatExtendPossible(class rasterview  *self)
 
     (self)->GetVisualBounds( &VB);
     InsetRect(&VB, BORDER, BORDER);
-    DEBUG(("Ext-P: Scroll: (%d,%d) Raster: (%d,%d)\n",
+    DEBUG(("Ext-P: Scroll: (%ld,%ld) Raster: (%ld,%ld)\n",
 	    self->Xscroll, self->Yscroll,
 	    (ras)->GetWidth(), (ras)->GetHeight()));
-    DEBUG(("       VS: (%d,%d,%d,%d) VB: (%d,%d,%d,%d)\n",
+    DEBUG(("       VS: (%ld,%ld,%ld,%ld) VB: (%ld,%ld,%ld,%ld)\n",
 	    rectangle_Left(&self->ViewSelection),
 	    rectangle_Top(&self->ViewSelection),
 	    rectangle_Width(&self->ViewSelection),
@@ -1184,7 +1184,7 @@ static void ExtendToMatCommand(class rasterview  *self)
     width = (w + ((vr > r) ? (vr - r) : 0) + ((l > 0) ? l : 0))/self->Scale;
     height = (h + ((vb > b) ? (vb - b) : 0) + ((t > 0) ? t : 0))/self->Scale;
 
-    DEBUG(("Visual: %d x %d\nCurrent Sides: (%d,%d,%d,%d)\nNew Size: %d x %d\n",
+    DEBUG(("Visual: %ld x %ld\nCurrent Sides: (%ld,%ld,%ld,%ld)\nNew Size: %ld x %ld\n",
 	    vr, vb,
 	    l/self->Scale, t/self->Scale, r/self->Scale, b/self->Scale,
 	    width, height));
@@ -1282,27 +1282,26 @@ static void ScaleCommand(class rasterview  *self)
 
     /* ask for scaling factor as a number of pixels or relative
 	to current size */
-    sprintf(request, "Change scale via relative size or absolute pixel [relative]: ",
-	     inbuf);
+    sprintf(request, "Change scale via relative size or absolute pixel [relative]: ");
     AskOrCancel(self, request, inbuf);
     sscanf(inbuf, "%[ar]", &c[0]);
     if (strcmp(c,"a")==0) {
 	/* Ask for absolute values */
-	sprintf(request, "New pixel width [%d]: ", w);
+	sprintf(request, "New pixel width [%ld]: ", w);
 	AskOrCancel(self, request, inbuf);
 	/* If there is a value returned then if the value cannot be parsed then error else calculate new height and default the new height correspondingly. Else default the new height and width to 1. */
 	if (*inbuf) {
-	    if (sscanf(inbuf, "%d", &NewW) != 1) {		
+	    if (sscanf(inbuf, "%ld", &NewW) != 1) {		
 		DisplayAndReturn(self, "Value must be digits with no decimal point."); }
 	    else NewH = (h * NewW)/w; }
 	else {
 	    NewW = w;
 	    NewH = h; }
-	sprintf(request, "New pixel height [%d]: ", NewH);
+	sprintf(request, "New pixel height [%ld]: ", NewH);
 
 	AskOrCancel(self, request, inbuf);
 	/* if there is a value returned and it cannot be parsed then error. */
-	if (*inbuf && sscanf(inbuf, "%d", &NewH) != 1)		
+	if (*inbuf && sscanf(inbuf, "%ld", &NewH) != 1)		
 	    DisplayAndReturn(self, "Value must be digits with no decimal point.");
 	if (! *inbuf) NewH = (h * NewW)/w;
     }
@@ -1329,11 +1328,11 @@ static void ScaleCommand(class rasterview  *self)
 	NewH = (long)(h * ScaleH);
     }
 
-    sprintf(request, "New pixel (width, height): (%d, %d)", NewW, NewH);
+    sprintf(request, "New pixel (width, height): (%ld, %ld)", NewW, NewH);
     message::DisplayString(self, 0, request);
 
     DEBUG(("Original is%s NULL\n", ((self->Original == NULL) ? "" : " not")));
-    DEBUG(("New Absolute: (%d,%d)\n", NewW, NewH));
+    DEBUG(("New Absolute: (%ld,%ld)\n", NewW, NewH));
 
     if (self->Original == NULL) {
 	self->Original = (class rasterimage *)(pix)->Clone();
@@ -1360,13 +1359,13 @@ static void ScaleCommand(class rasterview  *self)
 				  (long)(rectangle_Width(&self->DesiredSelection)*wscale),
 				  (long)(rectangle_Height(&self->DesiredSelection) * hscale));
 	    rectangle_IntersectRect(&sub, &sub, &original); }
-	DEBUG(("Original: (%d,%d,%d,%d)\n",
+	DEBUG(("Original: (%ld,%ld,%ld,%ld)\n",
 	       rectangle_Left(&original), rectangle_Top(&original),
 	       rectangle_Width(&original), rectangle_Height(&original)));
-	DEBUG(("Selection: (%d,%d,%d,%d)\n",
+	DEBUG(("Selection: (%ld,%ld,%ld,%ld)\n",
 	       rectangle_Left(&sub), rectangle_Top(&sub),
 	       rectangle_Width(&sub), rectangle_Height(&sub)));
-	DEBUG(("%s: 0x%x\n", (self->Original)->GetTypeName(), self->Original));
+	DEBUG(("%s: 0x%p\n", (self->Original)->GetTypeName(), self->Original));
 
 	(self->Original)->GetScaledSubraster( &sub, NewW, NewH, pix);
     }

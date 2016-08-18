@@ -334,7 +334,7 @@ ResizableMessageLine: yes
 
 #~help
 
-Determines whether the message line will grow and shrink based on it's 
+Determines whether the message line will grow and shrink based on its 
 contents.
 
 #~endhelp

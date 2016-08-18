@@ -129,7 +129,7 @@ static void WriteCell(struct printlump *lump, FILE *file, int cx, int cy, long x
 		visrect.top = hpos-spread_SPACING;
 		visrect.width = wpos-spread_SPACING;
 		visrect.height = hpos-spread_SPACING;
-		fprintf(file, "0 0 moveto  %d 0 rlineto  0 %d rlineto  %d 0 rlineto closepath clip newpath\n", visrect.width, visrect.height, -visrect.width);
+		fprintf(file, "0 0 moveto  %ld 0 rlineto  0 %ld rlineto  %ld 0 rlineto closepath clip newpath\n", visrect.width, visrect.height, -visrect.width);
 		vl->child->PrintPSRect(file, visrect.width, visrect.height, &visrect);
 		fprintf(file, "grestore\n");
 	    }
@@ -218,7 +218,7 @@ static void WriteCell(struct printlump *lump, FILE *file, int cx, int cy, long x
 		    fprintf(file, "%s%d %d scalefont setfont\n", print_PSFontNameID, lump->bodyfont, lump->fontsize);
 		}
 		sofar = 0.0;
-		/* Grossosity. We assume that the string is AGP-encoded, and therefore skip the lump->encoding step, even though this it's certainly 8859-encoded. This is so that we can put off writing print::DumpEncodedString and print::MeasureEncodedString procedures (right now, textview handles that magic itself, which is wrong.) */
+		/* Grossosity. We assume that the string is AGP-encoded, and therefore skip the lump->encoding step, even though it's certainly 8859-encoded. This is so that we can put off writing print::DumpEncodedString and print::MeasureEncodedString procedures (right now, textview handles that magic itself, which is wrong.) */
 		for (tmpstr = str; *tmpstr; tmpstr++) {
 		    thech = (*tmpstr);
 		    wix = ComputeCharWidth(thech, lump->afm, lump->fontsize);
@@ -232,7 +232,7 @@ static void WriteCell(struct printlump *lump, FILE *file, int cx, int cy, long x
 		}
 
 		if (clip) {
-		    fprintf(file, "gsave\n%d %d moveto  %d 0 rlineto  0 %d rlineto  %d 0 rlineto closepath clip newpath\n", xpos, ypos, wpos, -hpos, -wpos);
+		    fprintf(file, "gsave\n%ld %ld moveto  %ld 0 rlineto  0 %ld rlineto  %ld 0 rlineto closepath clip newpath\n", xpos, ypos, wpos, -hpos, -wpos);
 		}
 		switch (just) {
 		    case '\'':
@@ -246,7 +246,7 @@ static void WriteCell(struct printlump *lump, FILE *file, int cx, int cy, long x
 			wix = (double)xpos + ((double)wpos - sofar) / 2.0;
 			break;
 		}
-		fprintf(file, "%g %d moveto\n(", wix, ypos-lump->fontsize);
+		fprintf(file, "%g %ld moveto\n(", wix, ypos-lump->fontsize);
 		print::OutputPSString(file, str, -1);
 		fprintf(file, ") show\n");
 		if (clip)
@@ -351,12 +351,12 @@ static void WriteRect(FILE *file, class spread *self, int xstart, int ystart, in
 	    if (!joinleft) {
 		/* draw left edge */
 		if (tab->ColorToLeft(cy, cx) == BLACK)
-		    fprintf(file, "%d %d %d tabVL\n", -rowh, xpos, ypos);
+		    fprintf(file, "%ld %ld %ld tabVL\n", -rowh, xpos, ypos);
 	    }
 	    if (!jointop) {
 		/* draw top edge */
 		if (tab->ColorAbove(cy, cx) == BLACK)
-		    fprintf(file, "%d %d %d tabHL\n", colw, xpos, ypos);
+		    fprintf(file, "%ld %ld %ld tabHL\n", colw, xpos, ypos);
 	    }
 
 	    /* end of this cell */
@@ -365,7 +365,7 @@ static void WriteRect(FILE *file, class spread *self, int xstart, int ystart, in
 	}
 	/* check right edge of row */
 	if (tab->ColorToLeft(cy, cx) == BLACK && !tab->IsJoinedToLeft(cy, cx))
-	    fprintf(file, "%d %d %d tabVL\n", -rowh, xpos, ypos);
+	    fprintf(file, "%ld %ld %ld tabVL\n", -rowh, xpos, ypos);
 
 	/* end of this row */
 	ypos -= rowh;
@@ -379,7 +379,7 @@ static void WriteRect(FILE *file, class spread *self, int xstart, int ystart, in
 	colw = spread_Width(self, cx, cx+1);
 
 	if (tab->ColorAbove(cy, cx) == BLACK && !tab->IsJoinedAbove(cy, cx))
-	    fprintf(file, "%d %d %d tabHL\n", colw, xpos, ypos);
+	    fprintf(file, "%ld %ld %ld tabHL\n", colw, xpos, ypos);
 
 	/* end of this col */
 	xpos += colw;
@@ -441,9 +441,9 @@ void spread::PrintPSDoc(FILE *file, long pagew, long pageh)
 	    
 	    /* now xpos, ypos are the (positive) coords of cell (cx, cy) */
 	    print::PSNewPage(print_UsualPageNumbering);
-	    fprintf(file, "%d %d moveto  %d 0 rlineto 0 %d rlineto %d 0 rlineto closepath clip newpath\n", MARGIN, MARGIN, areaw, areah, -areaw);
-	    fprintf(file, "%d %d translate\n", MARGIN-xpos, MARGIN+areah+ypos);
-	    fprintf(file, "%d %d moveto  %d 0 rlineto 0 %d rlineto %d 0 rlineto closepath clip newpath\n", xpos, -ypos, xseg, -yseg, -xseg);
+	    fprintf(file, "%d %d moveto  %ld 0 rlineto 0 %ld rlineto %ld 0 rlineto closepath clip newpath\n", MARGIN, MARGIN, areaw, areah, -areaw);
+	    fprintf(file, "%ld %ld translate\n", MARGIN-xpos, MARGIN+areah+ypos);
+	    fprintf(file, "%ld %ld moveto  %ld 0 rlineto 0 %ld rlineto %ld 0 rlineto closepath clip newpath\n", xpos, -ypos, xseg, -yseg, -xseg);
 	    WriteRect(file, this, cx, cy, cxend-cx, cyend-cy);
 
 	    cx = cxend;
@@ -482,7 +482,7 @@ void spread::PrintPSRect(FILE *file, long logwidth, long logheight, struct recta
     tabsizeh = tab->NumberOfRows();
 
     fprintf(file, "%% AUIS table inset.\n");
-    fprintf(file, "%d %d translate\n", 0, logheight);
+    fprintf(file, "%d %ld translate\n", 0, logheight);
 
     for (cx=0, sofar=0;
 	 cx<tabsizew && sofar+(val=spread_Width(this, cx, cx+1)) <= visrect->left;

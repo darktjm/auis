@@ -92,10 +92,10 @@ char **argv;
 	ts = index_GetAnySet(idx, argv[3]);
 	printf("Printing individual records:\n");
 	for(i=0;i<ts->count;i++) {
-	    printf("Record %d.%d", ts->data[i].word1, ts->data[i].word2);
+	    printf("Record %ld.%ld", ts->data[i].word1, ts->data[i].word2);
 	    code = index_GetData(idx, &ts->data[i], buffer, sizeof(buffer));
 	    if (code) {
-		printf("...failed with code %d\n", code);
+		printf("...failed with code %ld\n", code);
 	    }
 	    else printf(" data='%s'\n", buffer);
 	}

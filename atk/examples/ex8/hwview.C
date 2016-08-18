@@ -160,7 +160,7 @@ void helloworldview::Update()
     if (this->newX != this->x || this->frameX != this->newFrameX || this->newY != this->y || this->frameY != this->newFrameY) {
 	if(this->x!=this->newX || this->y!=this->newY){
 	    static char buf[100];
-	    sprintf(buf,"Hello world at (%d,%d)",this->newX,this->newY);
+	    sprintf(buf,"Hello world at (%ld,%ld)",this->newX,this->newY);
 	    message::DisplayString(this,0,buf);
 	}	    
 

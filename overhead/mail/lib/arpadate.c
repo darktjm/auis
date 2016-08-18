@@ -87,7 +87,7 @@ char *arpadate()
     else
 	sprintf(ZoneComment, " (%s)", zone);
 
-    sprintf(time_out, "%s, %2d %s %4d %02d:%02d:%02d %c%02d%02d%s\n",
+    sprintf(time_out, "%s, %2d %s %4d %02d:%02d:%02d %c%02ld%02ld%s\n",
 	     days[now->tm_wday],
 	     now->tm_mday,
 	     months[now->tm_mon],

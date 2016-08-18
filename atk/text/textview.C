@@ -1442,7 +1442,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 	char buf[16];
 	self->GetBackgroundColor(&s, &r, &g, &b);
 	if (s == NULL) {
-	    sprintf(buf, "#%04x%04x%04x", r, g, b);
+	    sprintf(buf, "#%04lx%04lx%04lx", r, g, b);
 	    s = buf;
 	}
 	self->cur_bgcolor = NewString(s);
@@ -1453,7 +1453,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 	char buf[16];
 	self->GetForegroundColor(&s, &r, &g, &b);
 	if (s == NULL) {
-	    sprintf(buf, "#%04x%04x%04x", r, g, b);
+	    sprintf(buf, "#%04lx%04lx%04lx", r, g, b);
 	    s = buf;
 	}
 	self->cur_fgcolor = NewString(s);
@@ -3727,7 +3727,7 @@ static void hendzone(textview *self, int end, enum view_MouseAction action)
 
 ScrollInterface *textview::GetScrollInterface() {
     // sigh, backward compatibility hack.
-    // If a derived class has supplied it's own old style scrolling,
+    // If a derived class has supplied its own old style scrolling,
     // and not overridden this function, then this function should
     // return NULL so that scroll will know to do everything the
     // old way.

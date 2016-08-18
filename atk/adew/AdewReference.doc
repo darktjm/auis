@@ -489,7 +489,7 @@ may then be pasted into the desired application using the applications paste
 command.
 
 
-\subsection{1.2.3	Adding a child object with it's application layer
+\subsection{1.2.3	Adding a child object with its application layer
 
 }After clicking on the desired object, a click on the Application/Normal 
 switch will add this information to the cel in the cut buffer. The application 
@@ -677,7 +677,7 @@ are in the string array.}
 
 \bold{value_SetStrArrayAndSize}(self,char **rock,size)
 
-\leftindent{Sets both the string array and it's size w/ one call and producing 
+\leftindent{Sets both the string array and its size w/ one call and producing 
 only one call back.}
 
 
@@ -866,7 +866,7 @@ keyboard.
 
 \paragraph{3.1.7.4	stringv}
 
-The stringv normally displays the string portion of it's value object. Only if 
+The stringv normally displays the string portion of its value object. Only if 
 this is NULL is the  \italic{label} attribute is displayed. 
 
 
@@ -888,7 +888,7 @@ will be filled topdown, a 'B' indicates a bottom-up arrangement.
 
 }There attributes are specific to the controlv view, which will attempt to 
 load the specified \italic{class} and call \italic{class}-\italic{function} 
-from its proctable when it's button is clicked and released. If 
+from its proctable when its button is clicked and released. If 
 \italic{auto-init} is TRUE, it will attempt to call the function the first 
 time the view is displayed. This functionality was critical to earlier 
 versions of Adew, as it provided a link between a set of views and a 
@@ -2593,7 +2593,7 @@ will contain a paste option, and other objects (lset, text, etc.) may be
 copied from the arbcon and pasted in the page object. The \bold{Flip} menu is 
 persistent, so that even when a subobject is active on a page, the application 
 creator can paste in new objects, each of which will be added as a follow-on 
-to it's predecessor. 
+to its predecessor. 
 
 	As new objects are added, the page menu grows, to contain the logical names 
 of each of the subobjects that aren't currently being displayed. The user may 
@@ -2630,7 +2630,7 @@ page_ATBEGINING	The first object in the list
 
 page_SetPostMenus(self,val)
 
-}	The page object maintains a flag indicating whether or not it's view should 
+}	The page object maintains a flag indicating whether or not its view should 
 be posting the menus described above. For many applications, it may be 
 desirable to turn off the pages menus by calling 
 page_SetPostMenus(self,FALSE);
@@ -2883,7 +2883,7 @@ generate the makefile and compile and build the dynamic object.
 
 	Normally, the name of the class to generate is learned from an embedded 
 controller button embedded in the application. Createcon can also take this 
-information on it's command line. Applications without controller buttons, 
+information on its command line. Applications without controller buttons, 
 however,  can only be run as stand-alone applications using \bold{Runadew} 
 (see below).  Adew applications with control buttons can be included in other 
 objects, sent as mail message , etc. 
@@ -3097,7 +3097,7 @@ code here. See following methods.
 Returns the child object with the given name. This call may be useful for 
 getting a pointer to an embedded object. One of the problems of earlier 
 versions of Adew was that the embedded dataobjects could not be accessed until 
-it's corresponding view had been displayed on the screen. This restriction has 
+its corresponding view had been displayed on the screen. This restriction has 
 been eliminated for adew created insets. 
 
 
@@ -3208,7 +3208,7 @@ and the doswitch shellscript would look like
 
 }
 
-This shellscript will pass it's arguments on to runadew, which can the pass 
+This shellscript will pass its arguments on to runadew, which can the pass 
 them on to the controller class. It is possible for the application programmer 
 to edit this shell script to pass additional arguments to runadew, either for 
 passing on, or to change the application colors. See the runadew documentation 
@@ -3267,7 +3267,7 @@ shellscript created by createcon. See above for details.
 
 \italic{-S file
 
-}\indent{This is the atk file that runadew displays in it's window. Runadew 
+}\indent{This is the atk file that runadew displays in its window. Runadew 
 must be given this argument.
 
 }
@@ -3325,7 +3325,7 @@ parent and would provide a consistent way for creating its child which the
 Arbcon could control. When the arbcon is used to create a new object, it does 
 this by creating a cel, telling the cel what kind of inset it should contain, 
 and then writing the cel into the cut-buffer. The cel also provides the 
-conventions for naming it's child and storing the attributes for the value 
+conventions for naming its child and storing the attributes for the value 
 objects.
 
 
@@ -3372,7 +3372,7 @@ views created with the arbcon within an Adew application should have celviews.
 
 }\leftindent{This macro returns the  celview's immediate child, which may be 
 the true child, as returned above, or it may be the application layer 
-associated with the child (usually it's scrollbar), if these is one. }
+associated with the child (usually its scrollbar), if these is one. }
 
 
 \section{7.2	Dynamically changing valueview attributes 
@@ -3510,7 +3510,7 @@ dataobject.
 \bold{void cel_SetApplication(self,int app)
 
 }\leftindent{Can be set to cel_NORMAL, cel_APPLICATION to indicate if the 
-child should be displayed with it's application layer, (usually w/ one or more 
+child should be displayed with its application layer, (usually w/ one or more 
 scroll bars ).
 
 }
@@ -3582,7 +3582,7 @@ TRUE, the default name will be used if viewname is NULL, or can't be created.
 
 cel_SetInvisible(self) 
 
-}\leftindent{Attempts to make the cel and it's child visible/invisible. When 
+}\leftindent{Attempts to make the cel and its child visible/invisible. When 
 invisible, a cel requests to be shrunk to 0 size, and won't send updates to 
 child.
 
@@ -3702,16 +3702,16 @@ options for dealing with this hit.
 
 1. If, after dealing with the mouse hit, the controller wants the hit sent on 
 the child object, it can return NULL to signal the celview to continue 
-processing the hit normally, by passing it down to it's child.
+processing the hit normally, by passing it down to its child.
 
 
 2. If the controller wants to block the passing of the hit, it should return 
-the celview pointer that it received as it's first argument.
+the celview pointer that it received as its first argument.
 
 
 3. If the controller wants to pass the hit to the child itself, so it can 
 perform actions after the hit, it can have something like the following as 
-it's MouseProc.
+its MouseProc.
 
 
 struct view *\bold{MouseProc}(cv, action, x, y, numberofclicks, rock)
@@ -3841,7 +3841,7 @@ gets associated with a buffer inherits the buffers name.
 \bold{arbiterview_SetIgnoreUpdates(struct view *vw,boolean val);
 
 }\leftindent{Given any view (vw) , this procedure will inform the namespace, 
-and it's associated buffer, that changes to the state of the objects in the 
+and its associated buffer, that changes to the state of the objects in the 
 namespace do not indicate that the application should be checkpointed or saved 
 before the user exits. This gets around the peculiarity of running 
 applications from within a generic editor. See the Adew tutorial for more 

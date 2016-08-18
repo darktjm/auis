@@ -198,7 +198,7 @@ ps::Read(FILE  * file,long  id)
 
     (this)->SetID((this)->UniqueID());
 
-    fscanf(file,"%ld %ld %d %ld %ld", &x, &y, &haschild, &width, &height);
+    fscanf(file,"%ld %ld %ld %ld %ld", &x, &y, &haschild, &width, &height);
     (this)->SetSize( x, y);
     (this)->SetPixelWidth( width);
     (this)->SetPixelHeight( height);

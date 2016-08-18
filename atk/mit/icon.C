@@ -208,7 +208,7 @@ icon::Read(FILE  * file,long  id)
     this->child = (class dataobject *)0;
     (this)->SetID((this)->UniqueID());
 
-    fscanf(file,"%ld %ld %d", &x, &y, &haschild);
+    fscanf(file,"%ld %ld %ld", &x, &y, &haschild);
     this->width = x;
     this->height = y;
 

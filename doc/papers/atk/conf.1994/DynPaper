@@ -39,7 +39,7 @@ ATK.  The auto-loading feature was made possible in the C version by the
 implementation of macros which appeared to be normal function calls. These 
 macros arranged to load the requested code if necessary before actually 
 calling the function.  The code for a class which had not been statically 
-linked was thus loaded just before the first call to one of it's class 
+linked was thus loaded just before the first call to one of its class 
 procedures (static member functions in C++) , or just before the first 
 object of the class was created.  Unfortunately since the syntax for C++ 
 method calls and object creation are quite different from C, a macro 
@@ -47,7 +47,7 @@ approach is not possible unless the old C syntax is kept.  Our goals
 included keeping ATK C++ code as 'normal' looking to C++ programmers as 
 possible, so the macro approach was rejected.  A lower level approach 
 implemented at the level of the linker could also provide auto-loading. 
- The linker approach was rejected because it's implementation would 
+ The linker approach was rejected because its implementation would 
 generally require assembly language and would be dependent on details of 
 the particular OS and of the C++ compiler used!  \
 

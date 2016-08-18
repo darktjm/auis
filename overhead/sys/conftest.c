@@ -41,8 +41,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 
 /* ./conftest "$(RESOLVLIB)" */
 
-int main (argc, argv)
-int argc; char **argv;
+int main (int argc, const char **argv)
 {
     int Problem, OneProb;
 

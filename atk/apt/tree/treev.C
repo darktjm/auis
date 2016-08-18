@@ -629,7 +629,7 @@ void SetTreeAttribute( register class treev	      *self, register long		       a
     case  treev_cursorfontname:
       apts::CaptureString((char *) value, &TreeCursorFontName ); break;
     default:/*===*/
-	printf( "treev: Unrecognized Attribute (%d) (Ignored)\n", attribute );
+	printf( "treev: Unrecognized Attribute (%ld) (Ignored)\n", attribute );
     }
   OUT(SetTreeAttribute);
   }
@@ -671,7 +671,7 @@ treev::TreeAttribute( register long		       attribute )
     case  treev_cursorfontname:
       value = (long) TreeCursorFontName;    break;
     default:/*===*/
-      printf( "TreeView: Unrecognized Attribute (%d)\n", attribute );
+      printf( "TreeView: Unrecognized Attribute (%ld)\n", attribute );
     }
   OUT(treev_TreeAttribute);
   return  value;
@@ -2926,7 +2926,7 @@ void Dump_Trees( register class treev	      *self )
   node = ROOTNODE;
   while ( node )
     {
-    printf( "\n%*s%s",2*(Tree)->NodeLevel(node),"",
+    printf( "\n%*s%s",(int)(2*(Tree)->NodeLevel(node)),"",
 	    NodeCaptionName(node));
     node = NEXTNODE(node);
     }
@@ -2934,7 +2934,7 @@ void Dump_Trees( register class treev	      *self )
   node = ShadowRootNode;
   while ( node )
     {
-    printf( "\n%*s%s",2*(ShadowTree)->NodeLevel(node),"",
+    printf( "\n%*s%s",(int)(2*(ShadowTree)->NodeLevel(node)),"",
 	    NodeCaptionName(ShadowedNode(ShadowNodeDatum(node))));
     node = NextShadowNode(node);
     }

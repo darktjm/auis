@@ -179,7 +179,7 @@ char name[64], bits[64], *t;
 /* get width (in pixels) and height fields from top of bitmap file */
     for (i=0; i<2; i++) 
     {
-	if (fscanf(file," #define %s %d ", name, &value) == 2)
+	if (fscanf(file," #define %s %ld ", name, &value) == 2)
 	{
 
 	    if ((t = strrchr(name, '_')) == 0)
@@ -253,8 +253,8 @@ void xbm::WriteImage(register FILE  *file		, register class pixelimage  *pix, re
 
     /* Write out X Bitmap header, with the arbitrary title 'raster'.
       Note that no hot spot is defined. */
-    fprintf(file, "#define %s_width %d\n", title, width);
-    fprintf(file, "#define %s_height %d\n", title, height);
+    fprintf(file, "#define %s_width %ld\n", title, width);
+    fprintf(file, "#define %s_height %ld\n", title, height);
     fprintf(file, "static char %s_bits[] = {",title);
 
 

@@ -37,6 +37,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #include <netinet/in.h>
 #include <ms.h>
 #include <hdrparse.h>
+#include <mail.h>
 
 #define MS_RECONDIREXT (".r")
 #define PADSIZE 10                     /* BOGUS -- duplicates stuff in rawdb.c */

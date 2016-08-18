@@ -64,7 +64,7 @@ static char sccsid[] = "@(#)auth_unix.c 1.19 87/08/11 Copyr 1984 Sun Micro";
  *  
  * Copyright (C) 1984, Sun Microsystems, Inc. 
  *
- * The system is very weak.  The client uses no encryption for it's
+ * The system is very weak.  The client uses no encryption for its
  * credentials and only sends null verifiers.  The server sends backs
  * null verifiers or optionally a verifier that suggests a new short hand
  * for the credentials.

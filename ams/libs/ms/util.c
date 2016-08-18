@@ -230,7 +230,7 @@ InitializeSearchPaths() {
 	    }
 	}
 	if (mserrcode) {
-	    sprintf(ErrorText, "The mspath element %s is unknown (%d)", s, AMS_ERRNO);
+	    sprintf(ErrorText, "The mspath element %s is unknown (%ld)", s, AMS_ERRNO);
 	    NonfatalBizarreError(ErrorText);
 	    AMS_RETURN_ERRCODE(ENOENT, EIN_MSPATHCHECK, EVIA_INITSEARCHPATHS);
 	}

@@ -581,7 +581,7 @@ UnpackStyle(class lookzview  *self)
 		(st[(long)TNspacing])->ClearBits();
 		(style)->GetNewInterlineSpacing( &Basis, &Operand, &Unit);
 		if (Basis == style_ConstantSpacing && Unit == style_Points) {
-			sprintf(value, "%d", Operand);
+			sprintf(value, "%ld", Operand);
 			(st[(long)TNspacing])->SetBitOfEntry(
 					(st[(long)TNspacing])->AddString( 
 					value), 1); 
@@ -589,7 +589,7 @@ UnpackStyle(class lookzview  *self)
 		(st[(long)TNspread])->ClearBits();
 		(style)->GetNewInterparagraphSpacing( &Basis, &Operand, &Unit);
 		if (Basis == style_ConstantSpacing && Unit == style_Points) {
-			sprintf(value, "%d", Operand);
+			sprintf(value, "%ld", Operand);
 			(st[(long)TNspread])->SetBitOfEntry(
 					(st[(long)TNspread])->AddString( 
 					value), 1); 

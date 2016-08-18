@@ -2155,7 +2155,7 @@ struct mark *deleted_text;
 \enddata{bp,538243392}
 \view{bpv,538243392,7,0,0}
 The \bold{flashstyle} subclass of stylecontroller demonstrates how a smart 
-style can access and modify the style object.  It's implementation is 
+style can access and modify the style object.  Its implementation is 
 trivial.  A recurring event is scheduled at which time it toggles the 
 ``color'' attribute of the style between the default color and the 
 ``flashcolor'' attribute.  Note that a single event toggles the color in 

@@ -453,7 +453,7 @@ The routine \italic{ygetinfo} is analogous to \italic{xgetinfo}.
 
 
 The setframe routine gets called whenever scrolling occurs, and should set the 
-view in its frame so that it's position reflects the new position of the 
+view in its frame so that its position reflects the new position of the 
 scrollbar.  It tells \italic{view} to move its display (and remember, this 
 should all happen only in the particular axis which is being scrolled by this 
 routine) so that \italic{position}, in its own coordinate system (its 

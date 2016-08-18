@@ -915,7 +915,7 @@ printf("out of sprintf\n");
 		    (float) rl->data);
 	    break;
 	case LONG:
-	    sprintf(str,"[%s] <%s> (%d)",rl->type->name,atomlisttostring(rl->name),
+	    sprintf(str,"[%s] <%s> (%ld)",rl->type->name,atomlisttostring(rl->name),
 		    rl->data);
 	    break;
 	default:   
@@ -1361,7 +1361,7 @@ void celview::SetMenulist(class menulist  *ml)
 
 void celview::Repost()
 {
-    /* question, how to force child to repost it's menus and keystate 
+    /* question, how to force child to repost its menus and keystate 
        so that we can add ours?
         answer: If the child does not have the input focus, don't worry
       about it since the posting will happen when it gets it.

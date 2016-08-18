@@ -53,7 +53,7 @@ static int XErrorsToConsole(Display *DisplayPtr, XErrorEvent *ErrorBlock)
     Nerrors++;
     XGetErrorText(DisplayPtr, ErrorBlock->error_code, ErrMsg, sizeof(ErrMsg));
     if(ErrorBlock->error_code!=BadWindow || verbose) {
-	fprintf(stderr, "acolorman: X error %d-%s.  Will ignore operation %d:%d on resource ID %x.\n",
+	fprintf(stderr, "acolorman: X error %d-%s.  Will ignore operation %d:%d on resource ID %lx.\n",
 		ErrorBlock->error_code, ErrMsg, 
 		ErrorBlock->request_code, ErrorBlock->minor_code,
 		ErrorBlock->resourceid);

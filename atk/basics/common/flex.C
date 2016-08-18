@@ -242,7 +242,7 @@ flex &flex::operator=(const flex &src) {
 */
 char & flex::operator[]( size_t i )  /* throw(int) */ {
     if (i < 0 || i >= n || elts==NULL) /* throw(i) */ {
-	fprintf(stderr, "flex[0...%d] access to non-existent elt %d\n",
+	fprintf(stderr, "flex[0...%lu] access to non-existent elt %lu\n",
 		n, i);
 	return elts[gaploc];	/* UGHHH */
     }

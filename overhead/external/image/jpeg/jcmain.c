@@ -171,7 +171,7 @@ c_ui_method_selection (compress_info_ptr cinfo)
 
 static external_methods_ptr emethods; /* for access to free_all */
 
-GLOBAL void
+LOCAL void
 signal_catcher (int signum)
 {
   if (emethods != NULL) {

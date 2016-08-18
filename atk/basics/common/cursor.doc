@@ -109,7 +109,7 @@ Process cursors are set by the interaction manager with a call to
 \italic{im_SetWindowCursor}, and view cursors are posted with a call to 
 \italic{view_PostCursor}.  Cursor posts are time dependent, and the last post 
 made will always have precedence over previous posts.  However, reposting an 
-already posted cursor will not affect it's precedence. To give a reposted 
+already posted cursor will not affect its precedence. To give a reposted 
 cursor priority over other cursors, you  first call \italic{view_RetractCursor} 
  to take the cursor out completely, then repost it.  
 

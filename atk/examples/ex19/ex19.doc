@@ -200,7 +200,7 @@ Process cursors are set by the interaction manager with a call to
 \italic{im_SetWindowCursor}, and view cursors are posted with a call to 
 \italic{view_PostCursor}.  Cursor posts are time dependent, and the last post 
 made will always have precedence over previous posts.  However, reposting an 
-already posted cursor will not affect it's precedence. To give a reposted 
+already posted cursor will not affect its precedence. To give a reposted 
 cursor priority over other cursors, you  first call \italic{view_RetractCursor} 
  to take the cursor out completely, then repost it. 
  \indexi{Cursors++Retracting}
@@ -464,8 +464,8 @@ dragCursor is set to be a black octagon (Cursor_Octagon).
 \indexi{View cursors} \indexi{Cursors++View}
 
 
-The idlecursor is a \italic{view cursor} since it's shape changes depending 
-upon it's position in the window -- when it is in the helloworldview, it is a 
+The idlecursor is a \italic{view cursor} since its shape changes depending 
+upon its position in the window -- when it is in the helloworldview, it is a 
 cross, and when it is in the textview, it is an arrow.  On the other hand, the 
 placeCursor and the dragCursors are window cursors and override the view 
 cursor when in force. 

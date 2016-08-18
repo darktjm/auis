@@ -157,7 +157,7 @@ tree::SetTreeAttribute( register long		       attribute , register long		       
     break;
 
     default:/*===*/
-	printf( "Tree: ERROR -- Unrecognized Attribute '%d' (Ignored)\n", attribute );
+	printf( "Tree: ERROR -- Unrecognized Attribute '%ld' (Ignored)\n", attribute );
     }
   OUT(tree_SetTreeAttribute);
   return  status;
@@ -177,7 +177,7 @@ tree::TreeAttribute( register long		       attribute )
     break;
 
     default:/*===*/
-	printf( "Tree: ERROR -- Unrecognized Attribute '%d'\n", attribute );
+	printf( "Tree: ERROR -- Unrecognized Attribute '%ld'\n", attribute );
     }
   OUT(tree_TreeAttribute);
   return  value;
@@ -607,7 +607,7 @@ tree::NodeIndex( register tree_type_node      node )
 	break;
 	}
       strcpy( temp, string );
-      sprintf( string, "%d.%s", (this)->NodePosition(  parent ), temp );
+      sprintf( string, "%ld.%s", (this)->NodePosition(  parent ), temp );
       parent = ParentNode(parent);
       }
     if ( length = strlen( string ) )

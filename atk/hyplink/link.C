@@ -168,13 +168,13 @@ link::Write(FILE  *fp, long  id, int  level) {
 	} else
 #endif /* PL8 */
 	{	fprintf(fp, 
-		  	"\\begindata{%s,%d}\n%d\n",
+		  	"\\begindata{%s,%ld}\n%d\n",
 		  	(this)->GetTypeName(), uniqueid, 
 		  	DS_VERSION);
 		WriteLine(fp, (this)->GetRawLink() ? 
 				(this)->GetRawLink() : (char *)"");
-		fprintf(fp, "%d\n", (this)->GetPos());
-		fprintf(fp, "%d\n", (this)->GetLen());
+		fprintf(fp, "%ld\n", (this)->GetPos());
+		fprintf(fp, "%ld\n", (this)->GetLen());
 		fprintf(fp, "%c\n", 
 				(typecode == FileLink) ? 'F'
 				: (typecode == RelLink) ? 'R'
@@ -185,7 +185,7 @@ link::Write(FILE  *fp, long  id, int  level) {
 		(this)->pushbutton::Write( fp, id, level);
 	} 		/* if (self->new_ds == 0) */
 
-	fprintf(fp, "\\enddata{%s,%d}\n",
+	fprintf(fp, "\\enddata{%s,%ld}\n",
 		(this)->GetTypeName(), uniqueid);
 	(this)->SetWriteID( id);
 

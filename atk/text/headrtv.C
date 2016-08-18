@@ -359,7 +359,7 @@ static void PrintLine(struct textbuf *tbuf, char  *string)
 		    for(ix=hvarcount-1;ix>=0;ix--) {
 			ptr = string + pos;
 			if(*hvars[ix]==c && !strncmp(ptr,hvars[ix], strlen(hvars[ix]))) {
-			    sprintf(strbuf, "\\*(H%d\n", ix);
+			    sprintf(strbuf, "\\*(H%ld\n", ix);
 			    ensure_another(tbuf, strlen(strbuf));
 			    add_on(tbuf, strbuf);
 			    pos+=strlen(hvars[ix])-1;

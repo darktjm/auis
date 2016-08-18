@@ -25,11 +25,7 @@
 *  $
 */
 
-#ifdef linux
-DEFINES = -Dboolean=int -DNONANSI_INCLUDES -UINCLUDES_ARE_ANSI
-#else
 DEFINES = -Dboolean=int 
-#endif
 
 
 #if  !defined(ANSI_COMPILER) || defined(NONANSI_INCLUDES)

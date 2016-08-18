@@ -1332,7 +1332,7 @@ uniqueinscope(class nesssym * var, unsigned long  flags, long  tokoff) {
 		/* redefining a symbol already defined in this function */
 		char buf[12];
 		ReportError(":previously defined", tokoff);
-		sprintf(buf, "X:%d", junknum++);
+		sprintf(buf, "X:%ld", junknum++);
 		var = nesssym::NDefine(buf, var, 
 				curComp->scopes[curComp->scopex]); 
 	}

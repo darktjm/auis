@@ -152,7 +152,7 @@ entry = (void (*)())dlsym(status, "main");
     }
 #endif
     if (doload_trace > 0) {
-	fprintf(stderr, "doload: loaded %s from %s, entry: %lx\n",
+	fprintf(stderr, "doload: loaded %s from %s, entry: %p\n",
 		name, path, entry);
     }
 

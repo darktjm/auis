@@ -196,7 +196,7 @@ long value::Write(FILE  *file, long  writeID, int  level)
     if ((this)->GetWriteID() != writeID)  {
 	(this)->SetWriteID( writeID);
         fprintf(file, "\\begindata{%s,%ld}\n", (this)->GetTypeName(),(this)->GetID());
-	fprintf(file,">%d\n",(this)->GetValue());
+	fprintf(file,">%ld\n",(this)->GetValue());
         fprintf(file, "\\enddata{%s,%ld}\n",  (this)->GetTypeName(),(this)->GetID());
     }
 

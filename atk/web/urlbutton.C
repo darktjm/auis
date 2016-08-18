@@ -108,7 +108,7 @@ long urlbutton::Write(FILE  *fp, long  id, int  level)
 	/* New Write Operation */
 	SetWriteID(id);
 
-	fprintf(fp, "\\begindata{%s,%d}\n", tname, uniqueid);
+	fprintf(fp, "\\begindata{%s,%ld}\n", tname, uniqueid);
 
 	if (url) {
 	    /* We assume the URL won't be too long. */
@@ -118,7 +118,7 @@ long urlbutton::Write(FILE  *fp, long  id, int  level)
 	    /* We assume the label won't be too long. */
 	    fprintf(fp, "\\label:%s\n", lbl);
 	}
-	fprintf(fp, "\\enddata{%s,%d}\n", tname, uniqueid);
+	fprintf(fp, "\\enddata{%s,%ld}\n", tname, uniqueid);
     }
     return(uniqueid);
 }

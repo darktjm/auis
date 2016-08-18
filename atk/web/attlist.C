@@ -35,7 +35,7 @@ attlist::~attlist()
 boolean Print(char *attsneak, char *rock)
 {
     struct htmlatts *att= (struct htmlatts *)attsneak;
-    printf("[%x] name = [%s], value = [%s], quoted = [%d]\n", att, att->name, att->value, att->quoted);
+    printf("[%p] name = [%s], value = [%s], quoted = [%d]\n", att, att->name, att->value, att->quoted);
     return TRUE;
 }
 

@@ -179,7 +179,7 @@ static int isXWD(char       *name, FILE       *f, XWDHeader  *header)
    */
 
   if (memToVal(gh.file_version, 4) != XWD_VERSION) {
-      printf("version mismatch: %d, %d\n", memToVal(gh.file_version, 4), XWD_VERSION);
+      printf("version mismatch: %ld, %d\n", memToVal(gh.file_version, 4), XWD_VERSION);
     return(0);
   }
 

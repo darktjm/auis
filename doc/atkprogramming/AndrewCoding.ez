@@ -412,7 +412,7 @@ absolutely necessary.
 
 }With traditonal cpp's the construct a/**/b would yield the single token 
 ab.  In an ANSI preprocessor a/**/b will result in a b. (note the space 
-between a and b.)  ANSI cpp's provides a concatenation operator, ##.  It's 
+between a and b.)  ANSI cpp's provides a concatenation operator, ##.  Its 
 usage is:  a##b.  To provide portability,  Concat and Concat3 are defined 
 in andrewos.h.  Usage of these macros is as follows: Concat(a,b), 
 Concat3(a,b,c).  These macros are also available in Imakefiles. Note that 
@@ -429,7 +429,7 @@ ends of the arguments to the Concat macros.
 }With a traditional cpp, macro argument names occurring in strings would be 
 replaced with the argument's text.  ANSI cpps will not modify the contents 
 of a string or character constant in a macro.  Instead they provide a 
-"stringization" operator, #. It's usage is: #a.  (To yield the string "a".)
+"stringization" operator, #. Its usage is: #a.  (To yield the string "a".)
 
  \
 
@@ -986,7 +986,7 @@ DIRENT_NAMELEN(d) 		(defaults to ((d)->d_namlen) as per POSIX)
 
 A macro to return the length of the name in a directory entry.
 
-To open a directory and read it's entries:
+To open a directory and read its entries:
 
 
 \example{#include <andrewos.h>

@@ -1385,7 +1385,7 @@ void pushbuttonview::Print(register FILE   *file, char    *processor, char    *f
 
 	print::LookUpPSFont(fontname, &encoding, NULL, ffam, fsiz, fsty);
 
-	fprintf(file, "%s  /%s findfont %d scalefont setfont\n", prefix, fontname, fsiz);
+	fprintf(file, "%s  /%s findfont %ld scalefont setfont\n", prefix, fontname, fsiz);
 
 	fprintf(file, "%s  0 0 moveto (", prefix);	
 	print::OutputPSString(file, (dobj)->GetSafeText(), -1);
@@ -1449,9 +1449,9 @@ void pushbuttonview::PrintPSRect(FILE *outfile, long logwidth, long logheight, s
     print::LookUpPSFont(fontname, &encoding, NULL, ffam, fsiz, fsty);
     val = print::PSRegisterFont(fontname);
 
-    fprintf(outfile, "%s%d %d scalefont setfont\n", print_PSFontNameID, val, fsiz);
+    fprintf(outfile, "%s%d %ld scalefont setfont\n", print_PSFontNameID, val, fsiz);
 
-    fprintf(outfile, "%d %d moveto\n", logwidth/2, (logheight-fsiz)/2);	
+    fprintf(outfile, "%ld %ld moveto\n", logwidth/2, (logheight-fsiz)/2);	
     fprintf(outfile, "(");	
     print::OutputPSString(outfile, (dobj)->GetSafeText(), -1);
     fprintf(outfile, ")\n");

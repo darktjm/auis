@@ -1572,7 +1572,7 @@ PRIVATE BOOL get_listen_socket ARGS1(ftp_data_info *, data)
 **    	This function makes a login to a ftp-server. It takes the user name
 **	and passwd specified in ctrl->user and if that fails or an additional
 **	account is needed, the user is prompted. As it is difficult, when
-**	the server sends it's welcome message, we receive them all and choose
+**	the server sends its welcome message, we receive them all and choose
 **	the longest.
 **
 **	Returns -2 on ERROR, -1 on FAILURE, 0 on SUCCESS.

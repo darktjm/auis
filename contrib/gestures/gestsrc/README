@@ -113,7 +113,7 @@ recognition - this directory contains the basic functions that are used for
 	Z('C') printf("...stuff...");
   In this case, the printf will occur if -ZC in given on the command line of
   the program.  Each letter refers to a particular item of interest, and has
-  it's own verbosity level:  -ZCC will print more detail than -ZC.
+  its own verbosity level:  -ZCC will print more detail than -ZC.
 
       A quick grep reveals the following -Z options:
 

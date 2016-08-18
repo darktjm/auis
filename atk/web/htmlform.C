@@ -893,7 +893,7 @@ htmlform::GetAtt(int index, char *id)  {
  *    $Log: htmlform.C,v $
  * Revision 1.17  1996/11/07  19:26:38  robr
  * Implemented form imagemaps.
- * Fixed detection of when a text should have it's activatecallback set
+ * Fixed detection of when a text should have its activatecallback set
  * to submit the form.  (should be done when there is only one text)
  * Fixed hidden form field to be better hidden :-)
  * BUG

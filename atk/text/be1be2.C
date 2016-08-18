@@ -373,7 +373,7 @@ boolean ConvertStyle(class style  *self, long  attr , long  opcode , long  optyp
                 (self)->AddTabChange( style_AllClear, 0, style_RawDots);
 
                 StrPtr = (char *) opparm;
-                (long) sscanf(StrPtr, "%d", &TabCount);
+                (long) sscanf(StrPtr, "%ld", &TabCount);
                 for (i = 0; i < TabCount; i++) {
                     /* Skip leading white space */
                     while (*StrPtr == ' ') StrPtr++;
@@ -382,7 +382,7 @@ boolean ConvertStyle(class style  *self, long  attr , long  opcode , long  optyp
                     while (*StrPtr> '0' && *StrPtr < '9') StrPtr++;
                     if (!StrPtr) break;
                     /* Get the next tab stop */
-                    sscanf(StrPtr,"%d",&TabLoc);
+                    sscanf(StrPtr,"%ld",&TabLoc);
                     (self)->AddTabChange( style_LeftAligned, TabLoc, style_Points);
                 }
             }

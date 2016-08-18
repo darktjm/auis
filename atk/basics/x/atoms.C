@@ -76,11 +76,11 @@ static Atom *SetAtoms(Display  *dpy, char  *buf)
 	return NULL;
     }
     p=buf;
-    sprintf(p, "%d ", NUMATOMS);
+    sprintf(p, "%ld ", NUMATOMS);
     p+=strlen(p);
     for(i=0;i<NUMATOMS;i++) {
 	result[i]=XInternAtom(dpy, atomnames[i], FALSE);
-	sprintf(p, "%s %d ", atomnames[i], result[i]);
+	sprintf(p, "%s %ld ", atomnames[i], result[i]);
 	p+=strlen(p);
     }
     XChangeProperty(dpy, RootWindow(dpy, DefaultScreen(dpy)), xim_ATOMS, XA_STRING, 8, PropModeReplace, (unsigned char*)buf, strlen(buf));

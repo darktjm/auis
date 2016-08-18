@@ -237,7 +237,7 @@ neventStartEvent(class nesssym  *currobj, class nesssym  *e, class nesssym  *spe
 	cname = (char *)(newm)->ToC();
 	delete newm;		/* also destroys newt */
 
-	sprintf(buf, "\\ Event %d (%s)", nextevent++, cname);
+	sprintf(buf, "\\ Event %ld (%s)", nextevent++, cname);
 
 	if (currobj == NULL) 
 		ReportError(":'on' is not allowed outside an 'extend' block", -2);
@@ -781,7 +781,7 @@ PostMenuEvent(class ness  *ness, struct objnode  *onode, struct eventnode  *enod
 		}
 		else (onode->obj)->SetMenulist( onode->menulist);
 	}
-	sprintf(name, "%d", enode);
+	sprintf(name, "%ld", (long)enode);
 	enode->rock=(char *)malloc(strlen(name)+1);
 	if(enode->rock) {
 	    strcpy(enode->rock, name);
@@ -824,7 +824,7 @@ PostKeysEvent(class ness  *ness, struct objnode  *onode, struct eventnode  *enod
 		else (onode->obj)->SetKeymap( onode->keymap);
 	}
 
-	sprintf(name, "%d", enode);
+	sprintf(name, "%ld", (long)enode);
 	enode->rock=(char *)malloc(strlen(name)+1);
 	if(enode->rock) {
 	    strcpy(enode->rock, name);
@@ -1008,7 +1008,7 @@ unpostevents(class ness  *ness, class nesssym  *attr, boolean  debug) {
 					(attr)->ToC( ness, buf, sizeof(buf)-1))) 
 				== NULL) {
 		if (debug) {
-			printf("unpostevents could not find \"%s\" in arb at 0x%lx\n",
+			printf("unpostevents could not find \"%s\" in arb at 0x%p\n",
 				(attr)->ToC( ness, buf, sizeof(buf)-1),
 				(ness)->GetArbiter());
 		}

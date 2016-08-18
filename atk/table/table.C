@@ -569,7 +569,7 @@ long table::Write (FILE  * f, long  writeID, int  level)
 long table::Read (FILE  * f, long  id)
 {
     if (table_debug)
-	printf("table_Read(%s,, %d)\n", (this)->Name(), id);
+	printf("table_Read(%s,, %ld)\n", (this)->Name(), id);
 
     (this)->SetID( (this)->UniqueID());
     (this)->SetModified();
@@ -595,7 +595,7 @@ void table::WriteASCII (FILE  *f, Chunk  chunk)
 class table * table::ReadASCII (FILE  *f)
 {
     if (table_debug)
-	printf("table_ReadASCII(%s, , %d, %d)\n", (this)->Name());
+	printf("table_ReadASCII(%s)\n", (this)->Name());
 
     return ::ReadASCII(this, f);
 }
@@ -732,7 +732,7 @@ void DestroyCell(register class table  *T, struct cell  *oldcell)
 	    }
 	    while (vl = oldcell->interior.ImbeddedObject.views) {
 		if (table_debug)
-		    printf("**MISUSE** removing imbedded view ref by %x\n", vl);
+		    printf("**MISUSE** removing imbedded view ref by %p\n", vl);
 		    (vl->child)->UnlinkTree();
 		    (vl->child)->Destroy();
 		/* end of misuse */
@@ -1176,7 +1176,7 @@ long table::GetModified()
     }
 
     if (table_debug)
-	printf("table_GetModified = %d\n", rc);
+	printf("table_GetModified = %ld\n", rc);
 
     return rc;
 }

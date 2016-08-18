@@ -419,7 +419,7 @@ AddHistoryItem (register class help  *self, int  marcp			/* is this a bookmark? 
     } else {			/* a bookmark */
 	char tfname[HNSIZE + 11];
 
-	sprintf(tfname, "%s @ %d", c->histent, ent->top);
+	sprintf(tfname, "%s @ %ld", c->histent, ent->top);
 	/* now add the item */
 	c->lastHist = (c->hist)->Add( tfname, (char *)ent, TRUE);
     }

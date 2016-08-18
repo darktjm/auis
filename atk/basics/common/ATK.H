@@ -46,7 +46,7 @@ typedef boolean (*ATKinitfptr)();
  * Use the ATKdefineRegistry macro to enter a class into the runtime
  * registry.  It expands to a variable declaration and should probably
  * appear immediately after the include files in a class' implementation.
- * It's use looks like this (example):
+ * Its use looks like this (example):
  *
  *    ATKdefineRegistry(textview, view, initfunc);
  *

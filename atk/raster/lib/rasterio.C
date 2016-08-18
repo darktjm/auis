@@ -367,12 +367,12 @@ rasterio::ReadImage(register FILE  *file			/* where to get bits from */, registe
 				|| getc(file) != '}' || getc(file) != '\n') 
 		return dataobject_NOTBE2DATASTREAM;
 
-	fscanf(file, " %d ", &version);
+	fscanf(file, " %ld ", &version);
 	if (version < 2) 
 		return dataobject_BADFORMAT;
 
 	/* ignore all these features: */
-	fscanf(file, " %u %ld %ld %ld %ld %ld %ld",  
+	fscanf(file, " %lu %ld %ld %ld %ld %ld %ld",  
 		&options, &xscale, &yscale, &xoffset, 
 		&yoffset, &subwidth, &subheight);
 
@@ -385,7 +385,7 @@ rasterio::ReadImage(register FILE  *file			/* where to get bits from */, registe
 	if (strcmp(keyword, "bits") != 0)
 		return dataobject_BADFORMAT;
 
-	fscanf(file, " %d %d %d ", &objectid, &width, &height);
+	fscanf(file, " %ld %ld %ld ", &objectid, &width, &height);
 
 	if (width < 1 || height < 1 || width > 1000000 || height > 1000000) 
 		return dataobject_BADFORMAT;
@@ -408,7 +408,7 @@ rasterio::ReadImage(register FILE  *file			/* where to get bits from */, registe
 
 	while (! feof(file) && getc(file) != '\\') {};	/* scan for \enddata */
 	if (result == dataobject_NOREADERROR &&
-			fscanf(file, "enddata{raster,%d", &discardid) != 1
+			fscanf(file, "enddata{raster,%ld", &discardid) != 1
 				|| getc(file) != '}' || getc(file) != '\n') 
 		result = dataobject_MISSINGENDDATAMARKER;
 
@@ -433,11 +433,11 @@ rasterio::WriteImage(register FILE  *file		/* where to put bits  */, register cl
 	rectangle_GetRectSize(sub, &left, &top, &width, &height);
 
 	fprintf(file, "\\begindata{raster,%d}\n", id);
-	fprintf(file, "%ld %ld %ld %ld ", RASTERVERSION, 
+	fprintf(file, "%d %d %d %d ", RASTERVERSION, 
 			0, DEFAULTSCALE, DEFAULTSCALE);
-	fprintf(file, "%ld %ld %ld %ld\n",
+	fprintf(file, "%d %d %ld %ld\n",
 		 0, 0, width, height);	/* subraster */
-	fprintf(file, "bits %ld %ld %ld\n", id, width, height);
+	fprintf(file, "bits %d %ld %ld\n", id, width, height);
 
 	nbytestofile = (width+7)>>3;
 	bottom = top + height;

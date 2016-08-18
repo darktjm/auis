@@ -871,7 +871,7 @@ void srctext::CheckLineLengths(int maxlen, view *view)
 	    filename= pathname; /* just in case pathname has no slashes */
 	else ++filename; /* skip over that slash */
 	im::SetProcessCursor(NULL); /* get rid of confusing wait cursor */
-	sprintf(msg,"Warning: saving `%s' with lines exceeding %d characters.", filename, GetMaxLineLength());
+	sprintf(msg,"Warning: saving `%s' with lines exceeding %ld characters.", filename, GetMaxLineLength());
 	message::DisplayString(view, 65 /*probably a dialog box*/, msg);
     }
 }

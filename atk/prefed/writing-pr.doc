@@ -22,7 +22,7 @@ editing this preference.
 }
 [AppName]\bold{.}PrefName\bold{:} defaultvalue
 
-\indent{This gives the preference name, and it's default value.  If the 
+\indent{This gives the preference name, and its default value.  If the 
 default value cannot be discovered until runtime it should be left blank 
 and the help should describe how the default is computed.
 

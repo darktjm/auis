@@ -249,7 +249,7 @@ putchar(c);
                     /* Call the read routine for the object */
                     status = (newobject)->Read( file, objectid);
 		    if (status != dataobject_NOREADERROR){
-			printf("ERROR reading %s, %d\n",objectname,status);
+			printf("ERROR reading %s, %ld\n",objectname,status);
 			return status; 
 		    }
 		}
@@ -272,7 +272,7 @@ putchar(c);
 	    *buf++ = c;
 	}
     }
-    sscanf(cbuf,"%d %d %d %ld %ld %ld %d\n" ,&(this->type),&(this->pct),&(this->application),
+    sscanf(cbuf,"%d %d %d %ld %ld %ld %ld\n" ,&(this->type),&(this->pct),&(this->application),
 	 &did,&lid,&rid,&textpending);
     cp = strchr(cbuf,'\n'); cp++;
     cp = getline(cp,this->dataname);

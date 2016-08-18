@@ -593,7 +593,7 @@ int *IsDup;
     struct cuidnode *ctmp;
     struct CUIDirNode  *DNtmp;
 
-    debug(1,("GetCUID %s %s %d", amsid, dirname, IsDup));
+    debug(1,("GetCUID %s %s %p", amsid, dirname, IsDup));
     *IsDup = 0;
     hashval = HashAmsID(amsid);
     debug(4,("Hashed to %d\n", hashval));
@@ -695,7 +695,7 @@ char *printername;
 	ReportSuccess(ErrorText);
 	return(-1);
     } else if (AMS_ERRNO != EINVAL) {
-	sprintf(ErrorText, "Error: could not set printer", printername);
+	sprintf(ErrorText, "Error: could not set printer to %s", printername);
 	ReportError(ErrorText, ERR_WARNING, TRUE);
 	return(-1);
     }
@@ -1274,7 +1274,7 @@ char   *nmbuf;
 	if (userid == 0) userid = getuid();
 	if (procid == 0) procid = getpid();
 	ReportError("Message server could not generate temporary file name", ERR_WARNING, TRUE);
-	sprintf(nmbuf, "/tmp/AMS.%d", hostid ^ ((userid & 0xFF) << 24) | ((procid &0xFF) << 16) | (((ctr++) & 0xFF) << 8));
+	sprintf(nmbuf, "/tmp/AMS.%ld", hostid ^ ((userid & 0xFF) << 24) | ((procid &0xFF) << 16) | (((ctr++) & 0xFF) << 8));
     }
 }
 
@@ -2117,7 +2117,7 @@ int flags;
 	    cuid = GetCuid(AMS_ID(s), DirName, &IsDup);
 /* 	    sprintf(ErrorText, "Printing '%s'", AMS_CAPTION(s)); */
 /* The above line was simply too verbose to make PCMessages happy... */
-	    sprintf(ErrorText, "Printing %d", cuid);
+	    sprintf(ErrorText, "Printing %ld", cuid);
 	    ReportSuccess(ErrorText);
 	    if (CUI_PrintBodyFromCUIDWithFlags(cuid, flags, printer)) break;
 	    strncpy(newdate, AMS_DATE(s), AMS_DATESIZE);

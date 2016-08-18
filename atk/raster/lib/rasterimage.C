@@ -62,7 +62,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  *
 // Revision 1.2  1993/04/27  18:33:26  rr2b
 // Made Stabilize function more robust, move malloc out of
-// strcpy arguments, and cast it's return value appropriately.
+// strcpy arguments, and cast its return value appropriately.
 // Fixed signatures for rasterimage::RemoveObserver and AddObserver.
 // Added cast for return value of pixelimage::Clone.
 //

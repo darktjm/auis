@@ -33,8 +33,7 @@
 #include "tiffioP.h"
 #include "tif_fax3.h"
 
-TIFFInitCCITTRLE(tif)
-	TIFF *tif;
+int TIFFInitCCITTRLE(TIFF *tif)
 {
 	TIFFInitCCITTFax3(tif);		/* reuse G3 compression */
 	tif->tif_preencode = NULL;
@@ -53,8 +52,7 @@ TIFFInitCCITTRLE(tif)
 	return (1);
 }
 
-TIFFInitCCITTRLEW(tif)
-	TIFF *tif;
+int TIFFInitCCITTRLEW(TIFF *tif)
 {
 	TIFFInitCCITTFax3(tif);		/* reuse G3 compression */
 	tif->tif_preencode = NULL;

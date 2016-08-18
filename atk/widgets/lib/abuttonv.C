@@ -919,11 +919,11 @@ void AButtonv::PrintPSRect(FILE *outfile, long logwidth, long logheight, struct 
 	    foo=(afm->fontbbox_t/1000.0*fsiz);
 	}
 	diamond=(long)(foo*.8);
-	fprintf(outfile, "newpath %d %d moveto\n", logheight/2-diamond/2, logheight-diamond/2-(long)((foo-diamond)/2)-((long)(logheight-foo)));
-	fprintf(outfile, "%d %d rlineto\n", diamond/2, -diamond/2);
-	fprintf(outfile, "%d %d rlineto\n", diamond/2, diamond/2);
-	fprintf(outfile, "%d %d rlineto\n", -diamond/2, diamond/2);
-	fprintf(outfile, "%d %d rlineto\n", -diamond/2, -diamond/2);
+	fprintf(outfile, "newpath %ld %ld moveto\n", logheight/2-diamond/2, logheight-diamond/2-(long)((foo-diamond)/2)-((long)(logheight-foo)));
+	fprintf(outfile, "%ld %ld rlineto\n", diamond/2, -diamond/2);
+	fprintf(outfile, "%ld %ld rlineto\n", diamond/2, diamond/2);
+	fprintf(outfile, "%ld %ld rlineto\n", -diamond/2, diamond/2);
+	fprintf(outfile, "%ld %ld rlineto\n", -diamond/2, -diamond/2);
 	if(dobj->Set()) fprintf(outfile, "fill\n");
 	else fprintf(outfile, "stroke\n");
 	left=logheight+(long)dobj->spacing;
@@ -939,13 +939,13 @@ void AButtonv::PrintPSRect(FILE *outfile, long logwidth, long logheight, struct 
 	    visrect.width-=logheight;
 	}
 	fprintf(outfile, "gsave\n");
-	fprintf(outfile, "%d %d translate\n", logheight, 0);
-	fprintf(outfile, "0 0 moveto %d 0 rlineto 0 %d rlineto -%d 0 rlineto closepath clip newpath\n",  logwidth, logheight, logwidth);
+	fprintf(outfile, "%ld %d translate\n", logheight, 0);
+	fprintf(outfile, "0 0 moveto %ld 0 rlineto 0 %ld rlineto -%ld 0 rlineto closepath clip newpath\n",  logwidth, logheight, logwidth);
 	label->PrintPSRect(outfile, visrect.width, visrect.height, &visrect);
 	fprintf(outfile, "grestore\n");
     } else {
-	fprintf(outfile, "%s%d %d scalefont setfont\n", print_PSFontNameID, val, fsiz);
-	fprintf(outfile, "%d %d moveto\n", left, (logheight-(long)(afm->fontbbox_t/1000.0*fsiz*1.1667)));	
+	fprintf(outfile, "%s%d %ld scalefont setfont\n", print_PSFontNameID, val, fsiz);
+	fprintf(outfile, "%ld %ld moveto\n", left, (logheight-(long)(afm->fontbbox_t/1000.0*fsiz*1.1667)));	
 	fprintf(outfile, "(");	
 	print::OutputPSString(outfile, (char *)(dobj)->Text(), -1);
 	fprintf(outfile, ")\n");

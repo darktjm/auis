@@ -38,6 +38,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #include <mailconf.h>
 #include <errprntf.h>
 #include <hdrparse.h>
+#include <mail.h>
 
 #define DefaultDocumentFormat "2"
 #define PRINTPREFIX ".MS.ToPrint"

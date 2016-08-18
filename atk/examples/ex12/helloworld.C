@@ -60,7 +60,7 @@ long helloworld::Read(FILE  *file,long  id)
     if(fgets(buf,sizeof(buf),file)==NULL)
 	return dataobject_PREMATUREEOF;
     /* the %hd tells scanf that blackOnWhite is a short, not an int */
-    if(sscanf(buf,"%d %d %hd\n",&this->x,&this->y,&this->blackOnWhite)<3)
+    if(sscanf(buf,"%ld %ld %d\n",&this->x,&this->y,&this->blackOnWhite)<3)
 	return dataobject_BADFORMAT;
 
     if(fgets(buf,sizeof(buf),file)==NULL) /* read in the \enddata{...} */
@@ -73,10 +73,10 @@ long helloworld::Write(FILE  *file,long  writeId,int  level)
 {
     if(writeId!=(this)->GetWriteID()){ /* only write a given version once */
 	(this)->SetWriteID(writeId);
-	fprintf(file,"\\begindata{%s,%d}\n",
+	fprintf(file,"\\begindata{%s,%ld}\n",
 		(this)->GetTypeName(), (this)->UniqueID());
-	fprintf(file,"%d %d %d\n",this->x,this->y,this->blackOnWhite);
-	fprintf(file,"\\enddata{%s,%d}\n",
+	fprintf(file,"%ld %ld %d\n",this->x,this->y,this->blackOnWhite);
+	fprintf(file,"\\enddata{%s,%ld}\n",
 		(this)->GetTypeName(), (this)->UniqueID());
     }
 

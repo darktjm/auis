@@ -267,7 +267,7 @@ int main(int argc, char **argv)
 	if (passwd == 0) {
 		/* no passwd entry.  punt.  use uid.  */
 		static char x[20];
-		sprintf(x, "user id %d", uid);
+		sprintf(x, "user id %ld", uid);
 		username = x;
 	}
 	else username = (char *)strcpy(

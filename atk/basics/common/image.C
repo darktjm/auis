@@ -581,7 +581,7 @@ image::SendBeginData(FILE  *file, long  writeID, int  level)
 {
     long id = (this)->UniqueID();
     this->writeID = writeID;
-    fprintf(file, "\\begindata{image,%d}\n", id);
+    fprintf(file, "\\begindata{image,%ld}\n", id);
     if(ferror(file))
 	return(-1);
     else

@@ -205,8 +205,8 @@ void figoell::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolean
     else if (h==0)
 	h = 1;
 
-    fprintf(file, "%s  %d %d translate  %d %d scale  0 0 0.5 0 360 arc\n", prefix, x, y, w, h);
-    fprintf(file, "%s  1.0 %d div  1.0 %d div  scale\n", prefix, w, h);
+    fprintf(file, "%s  %ld %ld translate  %ld %ld scale  0 0 0.5 0 360 arc\n", prefix, x, y, w, h);
+    fprintf(file, "%s  1.0 %ld div  1.0 %ld div  scale\n", prefix, w, h);
 
     col = ((this)->GetVAttributes())->GetColor( (this)->GetIVAttributes());
     print::LookUpColor(col, &rcol, &gcol, &bcol);
@@ -222,7 +222,7 @@ void figoell::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolean
     lw = ((this)->GetVAttributes())->GetLineWidth( (this)->GetIVAttributes());
     lw = (v)->ToPrintPixW( lw*figview_FigUPerPix);
     if (lw <= 0) lw = 0;
-    fprintf(file, "%s  %d setlinewidth\n", prefix, lw);
+    fprintf(file, "%s  %ld setlinewidth\n", prefix, lw);
     fprintf(file, "%s  %f %f %f setrgbcolor\n", prefix, rcol, gcol, bcol);
     /*fprintf(file, "%s  0 setgray\n", prefix);*/
     /* print dashes */

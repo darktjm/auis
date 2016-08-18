@@ -569,7 +569,7 @@ void eos_Handouts(class eos  *self, class observable  *triggerer, long  rock)
     } else
         if (win->window->paperswin->IDoNotExist) {
             /* There was a handouts at one point but it was 'cancelled'
-	      * So, we need to expose the window and redo it's listing
+	      * So, we need to expose the window and redo its listing
              */
 	    ((win->window->paperswin)->GetIM())->ExposeWindow();
             (win->window->paperswin)->ListHandouts();

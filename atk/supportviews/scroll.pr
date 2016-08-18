@@ -89,7 +89,7 @@ appearance.
 
 The only supported style is the "OSF/Motif" (TM) appearance. The other styles 
 may or may not work correctly and may effect the behavior of the scroll bar as 
-well as it's appearance.
+well as its appearance.
 
 
 The possible values for this preference are:

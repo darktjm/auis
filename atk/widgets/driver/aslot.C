@@ -540,7 +540,7 @@ ASlot::DumpSlot(FILE *f) {
 	if (GetAssign())
 		fprintf(f, "\tHas an assignment function.\n");
 	if (GetFlags()) {
-		fprintf(f, "\tFlags  (0x%lx):", GetFlags());
+		fprintf(f, "\tFlags  (0x%x):", GetFlags());
 		if (GetFlags(ASlot::fromresources))
 			fprintf(f, "   fromresources");
 		if (GetFlags(ASlot::todatastream))
@@ -555,14 +555,14 @@ ASlot::DumpSlot(FILE *f) {
 				| ASlot::isowner 
 				| ASlot::isdefault)  );
 		if (morf)
-			fprintf(f, "  0xlx", morf);
+			fprintf(f, "  0x%x", morf);
 		fprintf(f, "\n");
 	}
 	if (GetSource())
 		fprintf(f, "\tSource: %s\n", GetSource());
 	fprintf(f, "\tValue is ");
 	if (IsType(ASlot::intslotreg))
-		fprintf(f, "int: %d\n", (long)*(ASlotInt *)this);
+		fprintf(f, "int: %ld\n", (long)*(ASlotInt *)this);
 	else if (IsType(ASlot::realslotreg))
 		fprintf(f, "real: %g\n", (double)*(ASlotReal *)this);
 	else if (IsType(ASlot::stringslotreg))
@@ -582,7 +582,7 @@ ASlot::DumpSlot(FILE *f) {
 	else if ( ! IsType(ASlot::ptrslotreg))   // neither ptr norATK
 		fprintf(f, "of unknown type\n");
 	else if ( ! IsType(ASlot::atkslotreg))   // is a ptr
-		fprintf(f, "a ptr: 0x%lx\n", (void *)*(ASlotPtr *)this);
+		fprintf(f, "a ptr: 0x%p\n", (void *)*(ASlotPtr *)this);
 	else if ( ! (ATK *)*(ASlotATK *)this)
 		fprintf(f, "ATK object: NULL\n");
 	else 

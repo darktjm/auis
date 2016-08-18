@@ -30,7 +30,7 @@ help.c and help.ch:
 	- A view subclass object with no associated dataobject
 	- main workhorse
 	- can have either an lpair or scrollbar as a top-level view linked
-	  to it's frame
+	  to its frame
 	- can create helpviews as "children".
 
   help.h:

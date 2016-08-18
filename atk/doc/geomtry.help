@@ -82,7 +82,7 @@ Gives you a window 400 pixels wide, and whatever the default height is
 \bold{typescript -geometry 400+500+50
 
 }Gives you a window 400 pixels wide and whatever the default height is 
-(generally 500 pixels).  It's top left corner is 500 pixels from the left side 
+(generally 500 pixels).  Its top left corner is 500 pixels from the left side 
 of your screen and 50 pixels from the top.
 
 

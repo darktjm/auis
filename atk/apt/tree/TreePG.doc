@@ -1886,7 +1886,7 @@ tree_NodeMoved
 tree_NodeDuplicated}}
 
 
-When then the Tree Data-object is told to Notify it's observers, the 
+When then the Tree Data-object is told to Notify its observers, the 
 appropriate visual updates will be effected.}
 
 

@@ -785,7 +785,7 @@ void GetStdConsoles(class menulist  *tempMenulist)
 		    sprintf(conlib[connum].path, "%s/%s.%s", libpaths[0], nm, copyOfEXTENSION);
 		    conlib[connum].confile = (char *) malloc(len2 + 1);
 		    strcpy(conlib[connum].confile, nm);
-		    mydbg(("conlib[%d]: %s\n", connum, conlib[connum].confile));
+		    mydbg(("conlib[%ld]: %s\n", connum, conlib[connum].confile));
 		    ++connum;
 		}
 	    }
@@ -907,7 +907,7 @@ void GetExtraConsoles(class menulist  *tempMenulist, char  *conpath, char  *card
 		    sprintf(conlib[connum].path, "%s/%s.%s", conpath, nm, copyOfEXTENSION);
 		    conlib[connum].confile = (char *) malloc(len2 + 1);
 		    strcpy(conlib[connum].confile, nm);
-		    mydbg(("conlib[%d]: %s\n", connum, conlib[connum].confile));
+		    mydbg(("conlib[%ld]: %s\n", connum, conlib[connum].confile));
 		    ++connum;
 		}
 	    }
@@ -1192,7 +1192,7 @@ void PrepareStdMenus(boolean  IsStartup, class menulist  **stdMenulist, struct A
     if (LocalLib >= 0) GetExtraConsoles(tempMenulist, libpaths[LocalLib], "Local Consoles");
     for (num = UserLib; num < libnum; ++num) {
 	char tmp[25];
-	sprintf(tmp, "CONSOLELIB-%d", num - UserLib + 1);
+	sprintf(tmp, "CONSOLELIB-%ld", num - UserLib + 1);
 	GetExtraConsoles(tempMenulist, libpaths[num], tmp);
     }
     *stdMenulist = tempMenulist;

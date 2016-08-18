@@ -1476,7 +1476,7 @@ filled, while the rightmost column shows the remaining Items at its top.
 
 
 \indent{The Container may be bordered; by default, the border is a 
-\sans{Rectangle}, whose line-size is one pixel.  It's  style may be specified 
+\sans{Rectangle}, whose line-size is one pixel.  Its  style may be specified 
 in various other fashions:
 
 \indent{
@@ -2140,7 +2140,7 @@ same as for the Left-button.
 \bold{\sans{suite_SortMode}}
 
 
-\indent{A Suite can be sorted in terms of it's Item Captions, Titles, or Datum 
+\indent{A Suite can be sorted in terms of its Item Captions, Titles, or Datum 
 attribute values.
 
 

@@ -248,10 +248,10 @@ class view * MouseHit (register class spread  * V, enum view_MouseAction  action
     if (CompareChunk(&extendedchunk, &(V->anchor)) == 0 && extendedchunk.LeftCol >= 0 && extendedchunk.TopRow >= 0 && extendedchunk.LeftCol <= extendedchunk.RightCol && extendedchunk.TopRow <= extendedchunk.BotRow && hitcell->celltype == table_ImbeddedObject) {
 	if ((child = spread_FindSubview(V, hitcell))) {
 	    if (debug)
-		printf("Passing hit at %d %d to child at %x\n", (child)->EnclosedXToLocalX( x), (child)->EnclosedYToLocalY( y), child);
+		printf("Passing hit at %ld %ld to child at %p\n", (child)->EnclosedXToLocalX( x), (child)->EnclosedYToLocalY( y), child);
 	    result = (child)->Hit( action, (child)->EnclosedXToLocalX( x), (child)->EnclosedYToLocalY( y), numberOfClicks);
 	    if (debug)
-		printf("Child hit returned %x\n", result);
+		printf("Child hit returned %p\n", result);
 	    return result;
 	}
     }
@@ -274,10 +274,10 @@ class view * MouseHit (register class spread  * V, enum view_MouseAction  action
 	if (chunk.TopRow >= 0 && chunk.LeftCol >= 0 && chunk.TopRow <= chunk.BotRow && chunk.LeftCol <= chunk.RightCol && hitcell->celltype == table_ImbeddedObject) {
 	    if ((child = spread_FindSubview(V, hitcell))) {
 		if (debug)
-		    printf("Passing hit at %d %d to child at %x\n", (child)->EnclosedXToLocalX( x), (child)->EnclosedYToLocalY( y), child);
+		    printf("Passing hit at %ld %ld to child at %p\n", (child)->EnclosedXToLocalX( x), (child)->EnclosedYToLocalY( y), child);
 		result = (child)->Hit( action, (child)->EnclosedXToLocalX( x), (child)->EnclosedYToLocalY( y), numberOfClicks);
 		if (debug)
-		    printf("Child hit returned %x\n", result);
+		    printf("Child hit returned %p\n", result);
 		return result;
 	    }
 	}
@@ -526,7 +526,7 @@ static void EnterCellName (register class spread  * V, Chunk  chunk)
     sprintf (buf, "[r%s,c%s]", rbuf, cbuf);
     i = message::GetCurrentString (V, keybuff, sizeof keybuff);
     if (debug)
-	printf("GetCurrentString returned %d and '%s' length %d", i, keybuff, strlen(keybuff));
+	printf("GetCurrentString returned %d and '%s' length %ld", i, keybuff, strlen(keybuff));
     i += strlen(keybuff);
     if (i > 0 && IsNotSeparator(keybuff[i - 1]))
 	message::InsertCharacters (V, i++, "+", 1);

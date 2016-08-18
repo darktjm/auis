@@ -167,7 +167,7 @@ class AFormula : public ADepender {
     }
     inline ADependerKey NewKey() {
 	if(keyid==32) {
-	    fprintf(stderr, "WARNING: AFormula %x exceeded limit of 32 partial formulas!\n");
+	    fprintf(stderr, "WARNING: AFormula %p exceeded limit of 32 partial formulas!\n", this);
 	}
 	return keyid<32?++keyid:0;
     }

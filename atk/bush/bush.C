@@ -301,7 +301,7 @@ bush::InitTree( register char		 *root_path )
   AllocNameSpace(nodeName,&rootDir->name);
   free(nodeName);
   if(stat(RootPath,&stats) < 0) {
-      printf("bush: error '%s' encountered while scanning '%s'.\n", strerror(errno));
+      printf("bush: error '%s' encountered while scanning '%s'.\n", strerror(errno), RootPath);
       return;
   }
   else {
@@ -751,20 +751,20 @@ bush::Write( register FILE		 *file, register long		  id, register int		  level )
   if(this->writeID != id) {
     this->writeID = id;
     if(level) {
-      fprintf(file,"\\begindata{%s,%d}\n",
+      fprintf(file,"\\begindata{%s,%ld}\n",
 	       (this)->GetTypeName(),
 	       (this)->UniqueID());
       fprintf(file,"%s",DIRPATH((this)->TreeRoot()));
-      fprintf(file,"\n\\enddata{%s,%d}\n",
+      fprintf(file,"\n\\enddata{%s,%ld}\n",
 	       (this)->GetTypeName(),
 	       (this)->UniqueID());
     }
     else {
-      fprintf(file,"\\begindata{%s,%d}\n",
+      fprintf(file,"\\begindata{%s,%ld}\n",
 	       (this)->GetTypeName(),
 	       (this)->UniqueID());
       fprintf(file,"\n%s\n",DIRPATH((this)->TreeRoot()));
-      fprintf(file,"\n\\enddata{%s,%d}\n",
+      fprintf(file,"\n\\enddata{%s,%ld}\n",
 	       (this)->GetTypeName(),
 	       (this)->UniqueID());
     }

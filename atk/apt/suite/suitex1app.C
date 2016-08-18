@@ -140,7 +140,7 @@ Flavor_Choice( class suitex1app  *self, register class suite  *suite, register s
 {
     char msg[100];
     if(action == view_LeftUp) {
-	sprintf(msg, "Chosen Flavor is %s.", (suite)->ItemAttribute( item, suite_itemcaption));
+	sprintf(msg, "Chosen Flavor is %s.", (char *)(suite)->ItemAttribute( item, suite_itemcaption));
 	message::DisplayString(suite, 0, msg);
     }
     return(NULL);

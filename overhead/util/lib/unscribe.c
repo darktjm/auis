@@ -167,7 +167,7 @@ struct styletable {
     { "inputoutput",	0, { 4, MAXLONGLINE, 0, 0, 0, 0,} },
     { "syntaxexample",	0, { 4, MAXLONGLINE, 0, 0, 0, 0,} },
     { "caption",    	0, { 0, 0, 0, 0, JUSTIFY_CENTER, 0,} },
-    { 0,   			0, { 0, 0, 0, 0, 0, 0,} }
+    { 0,   		0, { 0, 0, 0, 0, 0, 0,} }
 };
 
 

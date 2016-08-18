@@ -1444,12 +1444,12 @@ brancher: {
 		case ptrHdr:
 			if (NSP->p.v == NULL)
 				sprintf(buf, "NULL");
-			else  sprintf(buf, "0x%lx", NSP->p.v);
+			else  sprintf(buf, "0x%p", NSP->p.v);
 			break;
 		case funcHdr:
 			if (NSP->c.call == NULL)
 				sprintf(buf, "NULL function");
-			else  sprintf(buf, "function %s", NSP->c.call->Sym);
+			else  sprintf(buf, "function %s", (char *)NSP->c.call->Sym);
 			break;
 		case boolHdr:
 			if (NSP->b.v == TRUE) strcpy(buf, "True");
@@ -1457,7 +1457,7 @@ brancher: {
 			else sprintf(buf, "0x%lx", NSP->b.v);
 			break;
 		case longHdr:
-			sprintf(buf, "%d", NSP->l.v);
+			sprintf(buf, "%ld", NSP->l.v);
 			break;
 		case dblHdr: {
 			char *bx;			

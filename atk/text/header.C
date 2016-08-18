@@ -235,7 +235,7 @@ static long header_FencedWrite(class text  *textobj, FILE  *file, long  writeID,
 	pos = (textobj)->GetFence();
 	len = len - pos;
 	(textobj)->WriteSubString( pos, len, file, 1);
-	fprintf(file, "\\enddata{%s,%d}\n",
+	fprintf(file, "\\enddata{%s,%ld}\n",
 		(textobj->WriteAsText)?"text": (textobj)->GetTypeName(),
 		textobj->id);
 	fflush(file);

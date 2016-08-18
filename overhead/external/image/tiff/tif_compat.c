@@ -33,8 +33,7 @@
 #include <sys/stat.h>
 
 long
-TIFFGetFileSize(fd)
-	int fd;
+TIFFGetFileSize(int fd)
 {
 	struct stat sb;
 

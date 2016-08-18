@@ -139,7 +139,7 @@ void xcursor::Make(class xim  *im)
     long x, y;
     class xfontdesc * xfillFont = (class xfontdesc *) this->fillFont;
 
-    if (cursordebug) printf("xim_MakeXCursor: making cursor for %d in %X for %X\n", this->fillChar, xfillFont, this);
+    if (cursordebug) printf("xim_MakeXCursor: making cursor for %d in %p for %p\n", this->fillChar, xfillFont, this);
 
     if (this->valid && this->Xc != None && this->im == im) {
 	if(!this->changed) return; /* Already valid cursor */
@@ -177,11 +177,11 @@ void xcursor::Make(class xim  *im)
 	    x = -ci->lbearing + 1;
 	    y = ci->ascent + 1;
 	    if (width == 0) {
-		fprintf(stderr,"xim_MakeXCursor: pixmap of width 0 requested by %X\n", im);
+		fprintf(stderr,"xim_MakeXCursor: pixmap of width 0 requested by %p\n", im);
 		width++;
 	    }
 	    if (height == 0) {
-		fprintf(stderr,"xim_MakeXCursor: pixmap of height 0 requested by %X\n", im);
+		fprintf(stderr,"xim_MakeXCursor: pixmap of height 0 requested by %p\n", im);
 		height++;
 	    }
 

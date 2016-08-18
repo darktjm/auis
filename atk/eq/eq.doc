@@ -68,7 +68,7 @@ information.  Thus p1 + p2 elements of the array are in use and constitute the
 size of the equation, and the gap elements of the array are free.
 
 
-Each formula contains, among other things, a pointer to it's symbol.  Each 
+Each formula contains, among other things, a pointer to its symbol.  Each 
 symbol has a general type and a specific type.  This two-level description 
 makes certain formatting operations easier.
 

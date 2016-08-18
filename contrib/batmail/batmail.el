@@ -117,7 +117,7 @@ the destination")
 (defvar bat-cave (or (getenv "BATCAVE") 
 			(getenv "ANDREWDIR")
 			"/usr/andrew")
-  "*Place where batmail and all it's equipment live.")
+  "*Place where batmail and all its equipment live.")
 
 (defvar robin (or (getenv "ROBIN") "robin")
   "*The name of the robin process to run.")
@@ -348,7 +348,7 @@ arguments.  The original current buffer is restored afterwards."
 (put 'ignoring-read-only 'lisp-indent-hook 0)
 
 (defmacro ignoring-read-only (&rest body)
-  "Evaluates it's args while the current is writeable, restoring read-only
+  "Evaluates its args while the current is writeable, restoring read-only
 afterwards."
   (` (let ((bro buffer-read-only))
        (setq buffer-read-only nil)
@@ -551,7 +551,7 @@ nil instead of signalling an error if robin is dead."
 (defvar bat-old-captions-width 0)
 
 (defun bat-set-caption-width (w)
-  "Tell robin to adjust it's output for a window WIDTH columns wide."
+  "Tell robin to adjust its output for a window WIDTH columns wide."
   (when (/= w bat-old-captions-width)
     (bat-command "w" (- w (1+ bat-cuid-cols) 2) "\n")
     (setq bat-old-captions-width w)))

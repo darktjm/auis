@@ -31,6 +31,7 @@
  */
 #include "tiffioP.h"
 #include <stdio.h>
+#include <string.h>
 #include <assert.h>
 
 #if USE_PROTOTYPES
@@ -44,8 +45,7 @@ static	int PackBitsEncode(), PackBitsEncodeChunk();
 static	int PackBitsDecode();
 #endif
 
-TIFFInitPackBits(tif)
-	TIFF *tif;
+int TIFFInitPackBits(TIFF *tif)
 {
 	tif->tif_decoderow = PackBitsDecode;
 	tif->tif_decodestrip = PackBitsDecode;
@@ -58,8 +58,7 @@ TIFFInitPackBits(tif)
 }
 
 static int
-PackBitsPreEncode(tif)
-	TIFF *tif;
+PackBitsPreEncode(TIFF *tif)
 {
 	/*
 	 * Calculate the scanline/tile-width size in bytes.
@@ -67,7 +66,7 @@ PackBitsPreEncode(tif)
 	if (isTiled(tif))
 		tif->tif_data = (char *) TIFFTileRowSize(tif);
 	else
-		tif->tif_data = (char *) TIFFScanlineSize(tif);
+		tif->tif_data = (char *)(long) TIFFScanlineSize(tif);
 	return (1);
 }
 
@@ -79,13 +78,9 @@ PackBitsPreEncode(tif)
  * when it was encoded by strips.
  */
 static int
-PackBitsEncodeChunk(tif, bp, cc, s)
-	TIFF *tif;
-	u_char *bp;
-	int cc;
-	u_int s;
+PackBitsEncodeChunk(TIFF *tif, u_char *bp, int cc, u_int s)
 {
-	int rowsize = (int) tif->tif_data;
+	int rowsize = (int)(long) tif->tif_data;
 
 	assert(rowsize > 0);
 	while (cc > 0) {
@@ -101,11 +96,7 @@ PackBitsEncodeChunk(tif, bp, cc, s)
  * Encode a run of pixels.
  */
 static int
-PackBitsEncode(tif, bp, cc, s)
-	TIFF *tif;
-	u_char *bp;
-	register int cc;
-	u_int s;
+PackBitsEncode(TIFF *tif, u_char *bp, register int cc, u_int s)
 {
 	register char *op, *lastliteral;
 	register int n, b;
@@ -224,11 +215,7 @@ PackBitsEncode(tif, bp, cc, s)
 }
 
 static int
-PackBitsDecode(tif, op, occ, s)
-	TIFF *tif;
-	register u_char *op;
-	register int occ;
-	u_int s;
+PackBitsDecode(TIFF *tif, register u_char *op, register int occ, u_int s)
 {
 	register char *bp;
 	register int n, b;
@@ -252,7 +239,7 @@ PackBitsDecode(tif, op, occ, s)
 			for (b = *bp++; n-- > 0;)
 				*op++ = b;
 		} else {		/* copy next n+1 bytes literally */
-			bcopy(bp, op, ++n);
+			memcpy(op, bp, ++n);
 			op += n; occ -= n;
 			bp += n; cc -= n;
 		}

@@ -2085,7 +2085,7 @@ int FoundError;		/* used to keep track of multiple errors */
 	    /* we parenthesize the "self" token to
 	     * make things consistent between our own
 	     * and super class macros (i.e., a superclass
-	     * has it's self parenthesized)
+	     * has its self parenthesized)
              */
 
 	    if(isself)

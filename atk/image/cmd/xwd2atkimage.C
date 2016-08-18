@@ -98,7 +98,7 @@ int main(int  argc, char  **argv)
     if((self = new xwd)->Load( NULL, f) == 0) {
 	if(saveQuality > 0) {
 	     (self)->SetJPEGSaveQuality( saveQuality);
-	     fprintf(stderr, "saveQ: %d\n", saveQuality);
+	     fprintf(stderr, "saveQ: %ld\n", saveQuality);
 	}
 	if(saveformat)
 	    (self)->SetSaveFormatString( saveformat);

@@ -737,7 +737,7 @@ long figure::Write(FILE  *fp, long  writeid, int  level)
 	(this)->SetWriteID( writeid);
 
 	fprintf(fp, "\\begindata{%s,%ld}\n", (this)->GetTypeName(), (this)->GetID());
-	fprintf(fp, "$origin %d %d\n", this->originx, this->originy);
+	fprintf(fp, "$origin %ld %ld\n", this->originx, this->originy);
 	fprintf(fp, "$printscale %f %f\n", this->printscalex, this->printscaley);
 	/* this is to make future expansion easier. */
 	fprintf(fp, "#none %d\n", this->GetPrintLandscape()); 
@@ -766,7 +766,7 @@ void figure::WritePartial(FILE  *fp, long  writeid, int  level, long  *list, lon
     }
 
     fprintf(fp, "\\begindata{%s,%ld}\n", (this)->GetTypeName(), (this)->GetID());
-    fprintf(fp, "$origin %d %d\n", bbox.left-64, bbox.top-64);
+    fprintf(fp, "$origin %ld %ld\n", bbox.left-64, bbox.top-64);
     if (origin) {
 	origin->x = bbox.left-64;
 	origin->y = bbox.top-64;
@@ -802,7 +802,7 @@ long figure::Read(FILE  *fp, long  id)
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
 	return dataobject_PREMATUREEOF;
-    ix = sscanf(buf, "$origin %d %d", &val1, &val2);
+    ix = sscanf(buf, "$origin %ld %ld", &val1, &val2);
     if (ix!=2) return dataobject_BADFORMAT;
     this->originx = val1;
     this->originy = val2;
@@ -879,7 +879,7 @@ long figure::ReadPartial(FILE  *fp, long  id, long  focus, struct point  *origin
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
 	return dataobject_PREMATUREEOF;
-    ix = sscanf(buf, "$origin %d %d", &val1, &val2);
+    ix = sscanf(buf, "$origin %ld %ld", &val1, &val2);
     if (ix!=2) return dataobject_BADFORMAT;
     if (origin) {
 	origin->x = val1;

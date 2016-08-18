@@ -234,9 +234,9 @@ raster::Write(FILE  *file, long  writeID, int  level)
 (so it doesn't need to be put in the dictionary and retained forever) */
 
 		rectangle_GetRectSize(&this->subraster, &x, &y, &width, &height);
-		fprintf(file, "\\begindata{%s,%d}\n", name, id);
-		fprintf(file, "%ld %ld %ld %ld ", RASTERVERSION, 
-				this->options, this->xScale, this->yScale);
+		fprintf(file, "\\begindata{%s,%ld}\n", name, id);
+		fprintf(file, "%ld %ld %ld %ld ", (long)RASTERVERSION, 
+				(long)this->options, this->xScale, this->yScale);
 		if ((pix)->GetWriteID() == writeID) {
 			/* write a "refer" line */
 			fprintf(file, "%ld %ld %ld %ld\n",
@@ -250,7 +250,7 @@ raster::Write(FILE  *file, long  writeID, int  level)
 				path = ".";	/* must write something non-white */
 			fprintf(file, "%ld %ld %ld %ld\n",
 				 x, y, width, height);	/* subraster */
-			fprintf(file, "file %d %s %s \n", id, 
+			fprintf(file, "file %ld %s %s \n", id, 
 				(pix)->GetFileName(), path);
 
 			(pix)->SetWriteID( writeID);
@@ -263,7 +263,7 @@ raster::Write(FILE  *file, long  writeID, int  level)
 			short buf[400];
 			register long yend = y + height;
 
-			fprintf(file, "%ld %ld %ld %ld\n",
+			fprintf(file, "%d %d %ld %ld\n",
 				 0, 0, width, height);	/* subraster */
 			fprintf(file, "bits %ld %ld %ld\n", id, width, height);
 
@@ -295,7 +295,7 @@ raster::Write(FILE  *file, long  writeID, int  level)
 			(pix)->SetWriteID( writeID);
 			(pix)->SetObjectID( id);
 		}
-		fprintf(file, "\\enddata{%s, %d}\n", name, id);
+		fprintf(file, "\\enddata{%s, %ld}\n", name, id);
 	} /* end writeID != writeID */
 	return(id);
 }
@@ -322,8 +322,8 @@ raster::WriteSubRaster(register FILE  *file, long  objectid, struct rectangle  *
 	else R = this->subraster;
 	rectangle_GetRectSize(&R, &x, &y, &width, &height);
 
-	fprintf(file, "\\begindata{%s,%d}\n", name, objectid);
-	fprintf(file, "%ld %ld %ld %ld %ld %ld %ld %ld\n", RASTERVERSION, 
+	fprintf(file, "\\begindata{%s,%ld}\n", name, objectid);
+	fprintf(file, "%d %d %ld %ld %d %d %ld %ld\n", RASTERVERSION, 
 			this->options, this->xScale, this->yScale,
 			 0, 0, width, height);	/* subraster is the whole */
 	fprintf(file, "bits %ld %ld %ld\n", objectid, width, height);
@@ -333,7 +333,7 @@ raster::WriteSubRaster(register FILE  *file, long  objectid, struct rectangle  *
 		(pix)->GetRow( x, y+r, width, rowbits);
 		rasterio::WriteRow(file, (unsigned char *)rowbits, nbytestofile);
 	}
-	fprintf(file, "\\enddata{%s, %d}\n", name, objectid);
+	fprintf(file, "\\enddata{%s, %ld}\n", name, objectid);
 	return objectid;
 }
 
@@ -354,11 +354,11 @@ raster::WriteShare(register FILE  *file, struct rectangle  *sub)
 	rectangle_GetRectSize(&R, &x, &y, &width, &height);
 
 	fprintf(file, "\\begindata{%s, %d}\n", name, 0);
-	fprintf(file, "%ld %ld %ld %ld %ld %ld %ld\n", RASTERVERSION, 
+	fprintf(file, "%d %d %ld %ld %d %d %ld %ld\n", RASTERVERSION, 
 			this->options, this->xScale, this->yScale,
 			 0, 0, width, height);	/* subraster is the whole */
 
-	fprintf(file, "share %d 0x%lx \n", getpid(), pix);
+	fprintf(file, "share %d 0x%p \n", getpid(), pix);
 
 	fprintf(file, "\\enddata{%s, %d}\n", name, 0);
 }
@@ -451,7 +451,7 @@ ReadV1Raster(register class raster   *self, FILE   *file, long  id)
 
 	char s[MAXFILELINE + 2];
 
-	fscanf(file, " %u %ld %ld %ld %ld %ld %ld %hd",  
+	fscanf(file, " %lu %ld %ld %ld %ld %ld %ld %ld",  
 		&options, &compression, &expansion, &xoffset, 
 		&yoffset, &width, &height, &depth);
 
@@ -571,7 +571,7 @@ raster::Read(register FILE   *file, long   id			/* !0 if data stream, 0 if direc
 	/* it is a be2 version 2 raster image */
 
 	/* read the rest of the first line of header */
-	fscanf(file, " %u %ld %ld %ld %ld %ld %ld",  
+	fscanf(file, " %lu %ld %ld %ld %ld %ld %ld",  
 		&options, &xscale, &yscale, &xoffset, 
 		&yoffset, &subwidth, &subheight);
 
@@ -585,7 +585,7 @@ raster::Read(register FILE   *file, long   id			/* !0 if data stream, 0 if direc
 	switch (*keyword) {
 	case 'r':	{		/* "refer" type */
 		class rasterimage *addr;
-		fscanf(file, " %d ", &objectid);
+		fscanf(file, " %ld ", &objectid);
 
 		addr=NULL;/* XXX Lookup the objectid in a namespc.  set addr  */
 
@@ -599,7 +599,7 @@ raster::Read(register FILE   *file, long   id			/* !0 if data stream, 0 if direc
 	case 's':	{            /* "share" type */
 		long pid;
 		class rasterimage *addr;
-		fscanf(file, " %d %x ", &pid, &addr);
+		fscanf(file, " %ld %p ", &pid, &addr);
 		if (pid == getpid()  && strcmp((addr)->GetTypeName(), 
 						"rasterimage")==0) {
 			(this)->SetPix( pix=addr);
@@ -614,7 +614,7 @@ raster::Read(register FILE   *file, long   id			/* !0 if data stream, 0 if direc
 		if (pix == NULL)
 			(this)->SetPix( pix = new rasterimage);
 		(pix)->Defile();
-		fscanf(file, "%d %255s %1023s ", &objectid, filename, path);
+		fscanf(file, "%ld %255s %1023s ", &objectid, filename, path);
 		f2 = (pix)->FindFile( filename, path);
 		result = (this)->Read( f2, 0);
 
@@ -635,7 +635,7 @@ raster::Read(register FILE   *file, long   id			/* !0 if data stream, 0 if direc
 		}
 		/* fix this to not Defile ??? XXX */
 		if (pix) (pix)->Defile();
-		fscanf(file, " %d %d %d ", &objectid, &width, &height);
+		fscanf(file, " %ld %ld %ld ", &objectid, &width, &height);
 
 		if (width < 1 || height < 1 || width > 1000000 || height > 1000000) {
 			result = dataobject_BADFORMAT;

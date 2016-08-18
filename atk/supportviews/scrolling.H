@@ -60,16 +60,16 @@ class ScrollInterface {
     ScrollInterface();
     
     virtual void Absolute(long totalx, long x, long totaly, long y)=0;
- /* Instructs the client to draw it's data so that the given upper left corner(x/totalx*client_width,y/totaly*client_height) in the clients coordinate system is in the upper left of the view. */
+ /* Instructs the client to draw its data so that the given upper left corner(x/totalx*client_width,y/totaly*client_height) in the clients coordinate system is in the upper left of the view. */
 
     virtual void ScreenDelta(long dx, long dy)=0;
-   /* Instructs the client to draw it's data so that the data is shifted by dx,dy pixels from it's current position. */
+   /* Instructs the client to draw its data so that the data is shifted by dx,dy pixels from its current position. */
 
     virtual void Shift(scroll_Direction dir)=0;
-    /* Instructs the client to shift it's data by one unit in the indicated direction.  (The choice of unit is up to the client, text uses lines.) */
+    /* Instructs the client to shift its data by one unit in the indicated direction.  (The choice of unit is up to the client, text uses lines.) */
 
     virtual void Extreme(scroll_Direction dir)=0;
-    /* Instructs the client to display the data at the indicated edge of it's data. */
+    /* Instructs the client to display the data at the indicated edge of its data. */
 
     virtual void UpdateRegions(class scroll &scrollerview)=0;
     /* Update the ScrollRegions associated with this interface and the given scrollerview. */
@@ -108,7 +108,7 @@ enum scroll_RegionType {
 	scroll_Range,
 	scroll_Endzone,
 	scroll_Rectangle
-}; /* Each ScrollRegion can have it's extent computed in different ways based on it's usage.  The scroll_Range and scroll_Endzone types are implemented in ScrollRegion::ComputeRect.  RegionType scroll_Rectangle should be used by subclasses if they have their own means of computing where the region should appear.
+}; /* Each ScrollRegion can have its extent computed in different ways based on its usage.  The scroll_Range and scroll_Endzone types are implemented in ScrollRegion::ComputeRect.  RegionType scroll_Rectangle should be used by subclasses if they have their own means of computing where the region should appear.
 */
 
 typedef scroll_Direction scroll_Zone;

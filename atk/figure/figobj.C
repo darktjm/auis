@@ -537,7 +537,7 @@ static char buf[LINELENGTH+1];
 
 void figobj::WriteBody(FILE  *fp)
 {
-    fprintf(fp, "$ %d %d\n", (this)->PosX(), (this)->PosY());
+    fprintf(fp, "$ %ld %ld\n", (this)->PosX(), (this)->PosY());
 }
 
 long figobj::ReadBody(FILE  *fp, boolean  recompute)
@@ -573,7 +573,7 @@ long figobj::Write(FILE  *fp, long  writeid, int  level)
 	if (this->numpts && this->vas) {
 	    for (ix=0; ix<this->numpts; ix++) 
 		if (this->vas[ix].on) {
-		    fprintf(fp, "$# %d %d %d %d %d\n", ix, this->vas[ix].rposx, this->vas[ix].rposy, this->vas[ix].offx, this->vas[ix].offy);
+		    fprintf(fp, "$# %d %ld %ld %ld %ld\n", ix, this->vas[ix].rposx, this->vas[ix].rposy, this->vas[ix].offx, this->vas[ix].offy);
 		}
 	}
 	fprintf(fp, "$endatt\n");

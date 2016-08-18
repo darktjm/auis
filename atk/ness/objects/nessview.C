@@ -40,7 +40,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * BUG
  *
  * Revision 1.10  1994/12/10  04:44:48  rr2b
- * Fixed coredump when the scroll destructor tries to unlink it's child
+ * Fixed coredump when the scroll destructor tries to unlink its child
  * and finds it already destroyed.
  * BUG
  *
@@ -650,7 +650,7 @@ struct helpRock {
 					or used as a valid completion. */
 };
 
-/* Get a name for a ness, either uses it's Adew name, or the tail of it's filename, if any.  Otherwise returns NULL. */
+/* Get a name for a ness, either uses its Adew name, or the tail of its filename, if any.  Otherwise returns NULL. */
 	static char *
 GetName(class ness  *n) {
 	char *name=(char *)(n)->GetName(), *p;
@@ -823,7 +823,7 @@ ScriptAppend(class nessview  *self, long  rock) {
 	b=buffer::FindBufferByData(n);
 
 	/* If we create the buffer here it will NOT
-	  destroy it's data when it goes away. */
+	  destroy its data when it goes away. */
 	if(b==NULL) b=buffer::Create(GetName(n), (n)->GetFilename(), NULL, n);
 
 	if(b==NULL) {
@@ -877,7 +877,7 @@ Append(class nessview  *self, long  rock) {
 		}
 	} else n=NULL;
 	
-	/* If the buffer already exists we leave it's data destroying flag intact. */
+	/* If the buffer already exists we leave its data destroying flag intact. */
 	b=buffer::FindBufferByFile(filename);
 
 #if 0
@@ -1116,7 +1116,7 @@ kludgefornathaniel:
 	switch (choice) {
 	case 1:	/* Help - add warning text */
 		(dobj)->AddWarningText();
-		DEBUG(("Added warning.  Author button at %d\n", 
+		DEBUG(("Added warning.  Author button at %ld\n", 
 			dobj->AuthorButtonLoc));
 		(self->SourceText)->SetDotPosition( 0);
 		(self->SourceText)->FrameDot( 0);
@@ -1333,7 +1333,7 @@ LEAVE(nessview::PostMenus);
 
 	void
 nessview::PostKeyState(class keystate  *keystate) {
-DEBUG(("nessview_PostKeyState(0x%lx)  self has 0x%lx\n", keystate, this->Keystate));
+DEBUG(("nessview_PostKeyState(0x%p)  self has 0x%p\n", keystate, this->Keystate));
 	if (keystate != this->Keystate)
 		(this->Keystate)->AddBefore( keystate);
 	(this)->scroll::PostKeyState( this->Keystate);
@@ -1445,7 +1445,7 @@ nessview::Hit(enum view_MouseAction  action, long  x , long  y, long  numberOfCl
 
 		pos = (this->SourceText)->Locate( tvx, tvy, &temp);
 
-			DEBUG(("LeftDown at %d  x %d y %d (Scan Button at %d)\n", 
+			DEBUG(("LeftDown at %ld  x %ld y %ld (Scan Button at %ld)\n", 
 			pos, x, y, dobj->ScanButtonLoc));
 
 		if (pos == dobj->ScanButtonLoc
@@ -1469,7 +1469,7 @@ nessview::Hit(enum view_MouseAction  action, long  x , long  y, long  numberOfCl
 
 	if (action == view_LeftMovement) {
 		if (x - initialx > 5 || initialx - x > 5 || y - initialy > 5 || initialy - y > 5) {
-				DEBUG(("Move too far:  x %d  y %d    #clicks %d\n", 
+				DEBUG(("Move too far:  x %ld  y %ld    #clicks %ld\n", 
 				x, y, numberOfClicks));
 			this->ButtonPending = 0;
 			(this)->scroll::Hit( view_LeftDown, initialx, initialy, numberOfClicks);
@@ -1513,12 +1513,12 @@ nessview::Hit(enum view_MouseAction  action, long  x , long  y, long  numberOfCl
 	view_DSattributes
 nessview::DesiredSize(long  width, long  height, enum view_DSpass  pass, 
 		long  *desiredWidth, long  *desiredHeight)  {
-	DEBUG(("DesiredSize(...%d, %d, %d...)\n", width, height, pass));
+	DEBUG(("DesiredSize(...%ld, %ld, %d...)\n", width, height, pass));
 
 	*desiredWidth = 550;
 	*desiredHeight = 200;
 
-	DEBUG(("Leave DesiredSize: %d x %d\n", *desiredWidth, *desiredHeight));
+	DEBUG(("Leave DesiredSize: %ld x %ld\n", *desiredWidth, *desiredHeight));
 	return view_HeightFlexible | view_WidthFlexible;
 }
 
@@ -1537,7 +1537,7 @@ nessview::Print(FILE  *file, char  *processor, char *finalFormat,
 void
     nessview::ObservedChanged(register class observable  *ochanged, long  value) {
 	class ness *changed=(class ness *)ochanged;
-	DEBUG(("Observed changed (value=%d)\n", value));
+	DEBUG(("Observed changed (value=%ld)\n", value));
 	if (value == ness_NEWERROR)
 		/* display the error */
 		(this)->FirstError();

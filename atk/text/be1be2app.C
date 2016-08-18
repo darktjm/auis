@@ -121,7 +121,7 @@ static void Convert(char  *fileName)
 
     if ((textp)->ReadSubString( 0, fp, FALSE) <= 0) {
         (textp)->Destroy();
-        fprintf(stderr, "%s: Unable to read from %d\n", progName, fileName);
+        fprintf(stderr, "%s: Unable to read from %s\n", progName, fileName);
         return;
     }
 
@@ -169,7 +169,7 @@ boolean be1be2app::Run()
     int i;
 
     if (fileCount == 0) {
-        fprintf(stderr, "%s: No files specified\n");
+        fprintf(stderr, "%s: No files specified\n", progName);
         return TRUE;
     }
 
