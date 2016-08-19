@@ -112,10 +112,10 @@ static void Set_Constraints( register class zipedit	      *self, register zip_ty
 extern int zipedit_Handle_Font_Family_Selection( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction action, register long  x , register long y , register long clicks );
 extern int zipedit_Handle_Font_Height_Selection( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction action, register long x , register long              y , register long clicks );
 extern int zipedit_Handle_Font_Italic_Selection( register class zipedit  *self, register zip_type_pane pane, register enum view_MouseAction action , register long x , register long y , register long  clicks );
-extern zipedit_Handle_Font_Bold_Selection( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction action , register long x , register long  y , register long clicks );
-extern zipedit_Handle_Font_Sample_Selection( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction action , register long x , register long y , register long clicks );
+extern int zipedit_Handle_Font_Bold_Selection( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction action , register long x , register long  y , register long clicks );
+extern int zipedit_Handle_Font_Sample_Selection( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction action , register long x , register long y , register long clicks );
 extern int zipedit_Handle_Figure_Palette_Hit( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction action , register int x , register int  y , register int clicks );
-extern zipedit_Handle_Shade_Palette_Hit( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction  action , register long x , register long y , register long clicks );
+extern int zipedit_Handle_Shade_Palette_Hit( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction  action , register long x , register long y , register long clicks );
 
 int
 zipedit::Accept_Hit( register zip_type_pane	hit_pane, enum view_MouseAction   action , register long x , register long y , register long clicks )
@@ -1034,13 +1034,13 @@ void Show_Point( register class zipedit	      *self, register zip_type_pane	    
     (Objects(figure->zip_figure_type))->Object_Point(  figure, point, &X, &Y );
     name_figure = (Data)->Figure(  ZIP_current_x_point_text_name );
     (View)->Clear_Figure(  name_figure, AttributesPane );
-    sprintf( msg, "%d", X );
+    sprintf( msg, "%ld", X );
     (Data)->Set_Figure_Text(  name_figure, msg);
     (View)->Draw_Figure(  name_figure, AttributesPane );
 
     name_figure = (Data)->Figure(  ZIP_current_y_point_text_name );
     (View)->Clear_Figure(  name_figure, AttributesPane );
-    sprintf( msg, "%d", Y );
+    sprintf( msg, "%ld", Y );
     (Data)->Set_Figure_Text(  name_figure, msg);
     (View)->Draw_Figure(  name_figure, AttributesPane );
     }

@@ -93,5 +93,6 @@ LEXLIB = -lfl
 LEX = flex
 SHARED_LIB_PATH=-Wl,-R,DEFAULT_ANDREWDIR_ENV/lib/atk:$(DESTDIR)/lib/atk:$(BASEDIR)/lib/atk
 ATKLIBLDARGS=$(CPPSTDLIB) $(GCCLIB) $(SHARED_LIB_PATH)
+#define ConstructMFLAGS 1
 /* Get site-specific inclusions */
 #include <site.mcr>

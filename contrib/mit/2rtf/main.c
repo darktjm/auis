@@ -73,9 +73,14 @@ struct StyleStackStruct *Style=NULL;
 
 char *Filein, *Fileout;
 
-main(argc, argv)
-     int argc;
-     char *argv[];
+static char *GetInstruction();
+static FILE *FileProcess();
+static int ExecuteSpecial();
+static long int ParseText();
+static void usage(), CloseFiles(), MakeTable(), TempPrintList(), ParseMain(),
+     SetupEnvironment(), InitStateVector();
+
+int main(int argc, const char *argv[])
 /*
  *
  *  Handle command line arguments, and get pointers to the
@@ -86,12 +91,8 @@ main(argc, argv)
  */
 {
   char filein[TMP_SIZE], fileout[TMP_SIZE], filetrans[TMP_SIZE], 
-  fileerr[TMP_SIZE], *GetInstruction(), *getenv(), datestamp[TMP_SIZE];
-  FILE *FileProcess();
-  int ExecuteSpecial(), i, CommandErr=FALSE, OptionErr=FALSE;
-  long int ParseText();
-  void usage(), CloseFiles(), MakeTable(), TempPrintList(), ParseMain(),
-  SetupEnvironment(), InitStateVector();
+  fileerr[TMP_SIZE], datestamp[TMP_SIZE];
+  int i, CommandErr=FALSE, OptionErr=FALSE;
 
   /*  Get date and time into char *datestamp as quick as posssible */
 
@@ -123,7 +124,7 @@ main(argc, argv)
 	    strcpy(fileerr, argv[++i]);
 	  else
 	    {
-	      fprintf(stderr, "* Error:\n* Filename must follow -e option.\n", me);
+	      fprintf(stderr, "* Error:\n* Filename must follow -e option.\n");
 	      OptionErr=TRUE;
 	    }
 	}

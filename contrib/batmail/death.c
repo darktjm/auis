@@ -806,7 +806,7 @@ long ts;
 	putDelim(fp,string,length,methCode);
 
 	if(kts>=0)
-	    fprintf(fp," (%d)",kts);
+	    fprintf(fp," (%ld)",kts);
 
 	putc('\n',fp);
 

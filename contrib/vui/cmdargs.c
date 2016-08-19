@@ -63,10 +63,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RC
 #include <cmdargs.h>
 #include <vuidebug.h>
 
-#ifndef _IBMR2
-extern char *malloc();
-#endif /* _IBMR2 */
-
 char *GetArgument (i, arg, argc, argv)
 int *i, argc;
 char *arg, **argv;

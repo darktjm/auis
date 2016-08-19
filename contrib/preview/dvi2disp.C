@@ -108,7 +108,7 @@ static char *pregets (class preview  *self) {
    register    FILE * f = self->DviFileIn;
    register char *p;
    static   Preview_Line buf;
-   register    c;
+   register int c;
    if (self->peekc == 0 || isspace(c = self->peekc))
       while (isspace(c = getc(f)));
    p = buf;
@@ -134,8 +134,8 @@ static char *pregets (class preview  *self) {
 
 static Boolean SetPosition(register class preview  *self)
 {
-   register    cvx = self->LogicalX * self->DisplayResolution / self->InputResolution;
-   register    cvy = self->LogicalY * self->DisplayResolution / self->InputResolution;
+   register int cvx = self->LogicalX * self->DisplayResolution / self->InputResolution;
+   register int cvy = self->LogicalY * self->DisplayResolution / self->InputResolution;
    if (cvx+self->xoff < 0 || self->WindowWidth+self->cursize <= cvx+self->xoff 
 	|| cvy+self->yoff < 0 || self->WindowHeight+self->cursize <= cvy+self->yoff)
 	return(FALSE);
@@ -156,7 +156,7 @@ static Boolean SetPosition(register class preview  *self)
 
 static void UseFont(class preview  *self,int  f,int  s)
 {
-   register    h, l, m;
+   register int h, l, m;
    register struct preview_fontname  *p;
    int n;
 
@@ -459,9 +459,9 @@ struct trs
 static void ShowSpecial(class preview  *self)
 {
     register char  *s = pregets (self);
-    register    h,
-                l,
-                m;
+    register int h,
+                 l,
+                 m;
     register struct trs *p;
 /* 
     if (s[0] == 'u' && s[1] == 'l' && s[2] == 0) {
@@ -645,7 +645,7 @@ void preview::DviToDisplay()
 	       c = getc(f);
 	       DumpCharacter(this,c);
 	       if (this->debug)
-	           fprintf(stderr, "%d%c",  this->LogicalX, c);
+	           fprintf(stderr, "%ld%c",  this->LogicalX, c);
 	    }
 	 else  {
 	    if (this->debug)

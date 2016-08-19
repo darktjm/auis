@@ -30,7 +30,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/bdffon
 #include <andrewos.h>
 #include <environ.H>
 #include <bdffont.H>
-#include <parse.H>
 
 
 int main(int  argc, char  **argv)

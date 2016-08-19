@@ -32,22 +32,19 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/
 
 #include <andrewos.h>
 #include <pfio.h>
-#include <varargs.h>
+#include <stdarg.h>
 #include <pfioseg.h>
 
 /*
  * pack arguments for network transfer
  */
-void PFpack(va_alist)
-va_dcl
+void PFpack(PFM_pt o, ...)
 {
     va_list ap;
     register atype;
     register along;
     char *astr;
-    PFM_pt o;
-    va_start(ap);
-    o=va_arg(ap,PFM_pt);
+    va_start(ap, c);
     atype=va_arg(ap,int);  
     along=va_arg(ap,int);
     if(atype!=LS_alocop)

@@ -649,7 +649,7 @@ static void execStr(class tmview  *self,char  *str)
     submit(self);
 }
 
-boolean tmview::ReadShMenus(char  *filename)
+boolean tmview::ReadShMenus(const char  *filename)
 {
     FILE *fp;
     char buf[1000];

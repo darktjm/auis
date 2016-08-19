@@ -784,7 +784,7 @@ Background_Command( register class zipedit	      *self )
 	}
 	else
 	{
-	sprintf( msg, "ZipEdit ERROR: Failed to Set Background '%s', Status = %d", reply, status );
+	sprintf( msg, "ZipEdit ERROR: Failed to Set Background '%s', Status = %ld", reply, status );
 	(View)->Announce(  msg );
 	}
       }

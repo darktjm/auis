@@ -97,7 +97,7 @@ public:
   virtual long Set_Figure_Line_Color( zip_type_figure figure, double red, double green, double blue );
   virtual long Set_Figure_FillFG_Color( zip_type_figure figure, double red, double green, double blue );
   virtual long Set_Figure_FillBG_Color( zip_type_figure figure, double red, double green, double blue );
-  virtual long Set_Figure_Font( zip_type_figure figure, char *font_name );
+  virtual long Set_Figure_Font( zip_type_figure figure, const char *font_name );
   virtual long Set_Figure_Mode( zip_type_figure figure, long mode );
   virtual long Set_Figure_Point( zip_type_figure figure, int point, long x, long y );
   virtual long Adjust_Figure_Point_Suite( zip_type_figure figure, long x_delta, long y_delta );
@@ -177,7 +177,7 @@ public:
 
   virtual struct zip_color_values * Allocate_Color_Values();
   virtual struct zip_color * Allocate_Color();
-  virtual fontdesc *Define_Font( char *font_name, short *font_index );
+  virtual fontdesc *Define_Font( const char *font_name, short *font_index );
   virtual long Read_Figure( zip_type_figure figure );
   virtual long Write_Figure( zip_type_figure figure );
   virtual long Parse_Figure_Point( zip_type_figure figure, zip_type_point *x, zip_type_point *y );

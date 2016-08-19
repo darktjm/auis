@@ -41,7 +41,7 @@ ATKdefineRegistry(champ, ATK, NULL);
 #endif
 
 
-int champ::ReadDatesFromChampPath(char  *path)
+int champ::ReadDatesFromChampPath(const char  *path)
 {
     return(::ReadDatesFromChampPath(path));
 }

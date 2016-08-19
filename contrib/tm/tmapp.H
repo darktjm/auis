@@ -42,9 +42,9 @@ public:
         
 	tmapp();
     
-	char **args;
-        char *title;
-	char *menufile;
+	const char **args;
+        const char *title;
+	const char *menufile;
 	boolean fileMenus;
 	int rows,cols;
 };

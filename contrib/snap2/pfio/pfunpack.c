@@ -32,7 +32,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/
 
 #include <andrewos.h>
 #include <pfio.h>
-#include <varargs.h>
+#include <stdarg.h>
 #include <pfioseg.h>
 
 /*
@@ -55,16 +55,13 @@ register int size;
 /*
  * unpack a buffer transmited through the network
  */
-void PFunpack(va_alist)
-va_dcl
+void PFunpack(PFM_pt amsg, ...)
 {
     int atype;
     va_list ap;
-    PFM_pt amsg;
     char *astr_pt;
     long along;
-    va_start(ap);
-    amsg=va_arg(ap,PFM_pt);	/*message to read from*/
+    va_start(ap, amsg);
     /*unpack the arguments*/
     while(TRUE) {
 	atype=va_arg(ap,int);

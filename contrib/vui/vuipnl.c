@@ -112,6 +112,8 @@ PRIVATE Boolean DIR_LastPageFlag, DIR_AutoorMan;
 PRIVATE char *DIR_PageBuf = NIL, DIR_template[1+LINE_LENGTH] = { '\0' } ;
 PRIVATE struct dir_page_list *DIR_FirstPage = (struct dir_page_list *)NIL, *DIR_CurrentPage = (struct dir_page_list *)NIL;
 PANEL *dir_data;
+PRIVATE LoadOneDirPage (struct dir_page_list *this_page, int mailorbb, int suborall, char *matchstr, int *n_seen_p, struct dir_page_list **new_page_p);
+
 
 int DirPageUpKey (curfield, maxopts)
 int curfield, maxopts;
@@ -716,6 +718,7 @@ PRIVATE char MSG_template[81];
 PANEL *msg_data;
 PRIVATE long  *msg_msgno;
 extern PANEL mess_bp[];
+PRIVATE LoadOneMsgPage (char *DirName, long startnum, int *n_shown_p);
 
 typedef struct perpagemsgno {
     struct perpagemsgno *prev;

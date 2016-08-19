@@ -74,7 +74,7 @@ struct cleanup {
 
 struct genheader {
     print_header_fptr headproc;
-    void *rock;
+    const void *rock;
 };
 
 void printp_init();
@@ -1596,7 +1596,7 @@ void print::PSRegisterDef(char  *procname, char  *defstring)
 }
 
 void print::PSRegisterHeader(char *headname, 
-		print_header_fptr headproc, void *rock) {
+		print_header_fptr headproc, const void *rock) {
     struct genheader *tmp;
 
     print_EnsureClassInitialized();

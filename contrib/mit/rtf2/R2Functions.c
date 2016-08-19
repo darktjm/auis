@@ -935,7 +935,7 @@ int R2Hidden(command, numdel, tofind)
      {
         strcpy(inst, GetInstruction());
         if(strcmp(inst, "xe"))
-          sscanf(inst, "%c%s", ch, inst);
+          sscanf(inst, "%c%s", &ch, inst);
         if(!strcmp(inst, "xe"))
         {
           if(ch != '\\')

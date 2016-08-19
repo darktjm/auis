@@ -141,7 +141,6 @@ static char * Pixel( class ziposymbol	 *self, char *string, long *x , long *y, d
 
 ziposymbol::ziposymbol( )
       {
-  char				 *p;
   class ziposymbol *self=this;
 
   IN(ziposymbol_InitializeObject);
@@ -159,7 +158,7 @@ ziposymbol::ziposymbol( )
   LastNumber = 0;
   if ( symbol_library_path == NULL )
   {
-    p = environ::AndrewDir( "/lib/zip/symbols" );
+    const char *p = environ::AndrewDir( "/lib/zip/symbols" );
     if ( p && ( symbol_library_path = ( char * ) malloc( strlen( p ) + 1 )))
 	strcpy( symbol_library_path, p );
   }

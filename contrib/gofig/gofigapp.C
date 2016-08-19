@@ -139,7 +139,7 @@ gofigapp::ParseArgs(int  argc, const char  **argv)
 		was set to start debugging */
 
 	if ( ! (this)->GetFork())
-		printf("Args parsed.  dobj @ 0x%lx\n", this->dobj);
+		printf("Args parsed.  dobj @ 0x%p\n", this->dobj);
 
 	return TRUE;
 }
@@ -191,7 +191,7 @@ gofigapp::Start()
 		else val = dataobject_NOREADERROR;
 
 		if (val != dataobject_NOREADERROR) {
-			fprintf(stderr, "Input file is corrupted (%d): %s\n",
+			fprintf(stderr, "Input file is corrupted (%ld): %s\n",
 					 val, this->inputfile);
 			return FALSE;
 		}
@@ -234,7 +234,7 @@ gofigapp::Start()
 	(v)->WantInputFocus( v);
 
 	if ( ! (this)->GetFork())
-		printf("Focussed.  gofigv @ 0x%lx  im @ 0x%lx   frame @ 0x%lx\n", 
+		printf("Focussed.  gofigv @ 0x%p  im @ 0x%p   frame @ 0x%p\n", 
 				v, im, newfrm);
 
 	return TRUE;

@@ -390,7 +390,7 @@ static void DeclarePage(class preview  *self,preview_pagenumber     n, long   Fi
 /*     int RedrawRequested = FALSE;
  */
    if (self->debug)
-      fprintf(stderr, "DeclarePage %d at %d\n", n, FilePosition);
+      fprintf(stderr, "DeclarePage %d at %ld\n", n, FilePosition);
 
    /* finish the completion work for the last page */
 /*    if (self->LowestNonBlankPageIndex == self->NumberofPageTableEntries)
@@ -862,7 +862,7 @@ char *preview::GetInterface(char  *interfaceName)
     return NULL;
 }
 
-class preview *preview::Create(FILE  *f,char  *fname,char  *fbase,boolean  compleated,boolean  scale)
+class preview *preview::Create(FILE  *f,const char  *fname,const char  *fbase,boolean  compleated,boolean  scale)
 {
 class preview *self = new preview;
 self->DviFileComplete = compleated;

@@ -176,7 +176,7 @@ void
 zipview::Ensure_Fill_Attributes( register zip_type_figure		 figure )
       {
   double				red, green, blue;
-  char					*def_bg, *def_fg;
+  const char				*def_bg, *def_fg;
   class zipview *self=this;
 
   if ( (self )->DisplayClass( ) & graphic_Color )
@@ -195,7 +195,7 @@ zipview::Ensure_Fill_Attributes( register zip_type_figure		 figure )
 void
 zipview::Normalize_Fill_Attributes( )
     {
-  char					*def_bg, *def_fg;
+  const char				*def_bg, *def_fg;
   class zipview *self=this;
 
   if ( (self )->DisplayClass( ) & graphic_Color )
@@ -216,7 +216,7 @@ zipview::Ensure_Line_Attributes( register zip_type_figure		 figure )
   char					*pattern = NULL;
   int					offset;
   short					dashtype, value;
-  char					*def_bg, *def_fg;
+  const char				*def_bg, *def_fg;
   class zipview *self=this;
 
   if (( lwidth = (this->data_object)->Contextual_Figure_Line_Width(  figure )) > 0  ||
@@ -254,7 +254,7 @@ zipview::Ensure_Line_Attributes( register zip_type_figure		 figure )
 void
 zipview::Normalize_Line_Attributes( )
     {
-  char					*def_bg, *def_fg;
+  const char				*def_bg, *def_fg;
   class zipview *self=this;
 
   IN( zipview::Normalize_Line_Attributes )

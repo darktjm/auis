@@ -478,7 +478,7 @@ int RSize(command, transform, tofind)
    else
        State.CurFontSize -= 4;
 
-   fprintf(fout, "{\\fs%d ", State.CurFontSize);
+   fprintf(fout, "{\\fs%ld ", State.CurFontSize);
    ParseText(tofind, transform, PRINTTOFILE);
    fputs("}", fout);
 
@@ -509,7 +509,7 @@ int RScript(command, transform, tofind)
    else
        State.CurScriptMovement -= 6;
 
-   fprintf(fout, "{\\%s%d ", up ? "up" : "dn", State.CurScriptMovement);
+   fprintf(fout, "{\\%s%ld ", up ? "up" : "dn", State.CurScriptMovement);
    ParseText(tofind, transform, PRINTTOFILE);
    fputs("}", fout);
 
@@ -599,7 +599,7 @@ int RLeft(command, transform, tofind)
    State.CurLeftIndentation += 720;
    if(!paragraph)
        fputs("\\par", fout);
-   fprintf(fout, "\\li%d ", State.CurLeftIndentation);
+   fprintf(fout, "\\li%ld ", State.CurLeftIndentation);
    ParseText(tofind, transform, PRINTTOFILE);
 
    ch = (char) fgetc(fin);
@@ -614,7 +614,7 @@ int RLeft(command, transform, tofind)
    }
    else
        ungetc(ch, fin);
-   fprintf(fout, "\\par\\li%d ", oldmar);
+   fprintf(fout, "\\par\\li%ld ", oldmar);
 
    State.CurLeftIndentation = oldmar;
    return CONTINUE;
@@ -649,7 +649,7 @@ int RIndent(command, transform, tofind)
 
    if(!paragraph)
       fputs("\\par", fout);
-   fprintf(fout, "\\li%d\\ri%d ", State.CurLeftIndentation, State.CurRightIndentation);
+   fprintf(fout, "\\li%ld\\ri%ld ", State.CurLeftIndentation, State.CurRightIndentation);
 
    ParseText(tofind, transform, PRINTTOFILE);
 
@@ -665,7 +665,7 @@ int RIndent(command, transform, tofind)
    }
    else
        ungetc(ch, fin);
-   fprintf(fout, "\\par\\li%d\\ri%d ", left, right);
+   fprintf(fout, "\\par\\li%ld\\ri%ld ", left, right);
 
    State.CurLeftIndentation = left;
    State.CurRightIndentation = right;
@@ -917,16 +917,16 @@ int RStyleApply(tmp)
 	   case style_FontSizeAttr:
 	       save[k] = State.CurFontSize;
 	       State.CurFontSize += tmp->modify[k];
-	       fprintf(fout, "\\fs%d", State.CurFontSize);
+	       fprintf(fout, "\\fs%ld", State.CurFontSize);
 	       space = 1;
 	       break;
 	   case style_ScriptAttr:
 	       save[k] = State.CurScriptMovement;
 	       State.CurScriptMovement -= tmp->modify[k];
 	       if(State.CurScriptMovement > 0)
-		  fprintf(fout, "\\up%d", State.CurScriptMovement);
+		  fprintf(fout, "\\up%ld", State.CurScriptMovement);
 	       else
-		  fprintf(fout, "\\dn%d", - State.CurScriptMovement);
+		  fprintf(fout, "\\dn%ld", - State.CurScriptMovement);
 	       space = 1;
 	       break;
 	   case style_LeftMarginAttr:
@@ -994,7 +994,7 @@ int RStyleApply(tmp)
 	       State.CurScriptMovement = save[k];
 	       break;
 	   case style_LeftMarginAttr:
-               fprintf(fout, "\\li%d", State.CurLeftMargin);
+               fprintf(fout, "\\li%ld", State.CurLeftMargin);
                State.CurLeftMargin = save[k];
                if(!done)
                {
@@ -1014,7 +1014,7 @@ int RStyleApply(tmp)
 	       }
                break;
 	   case style_RightMarginAttr:
-               fprintf(fout, "\\ri%d", State.CurRightMargin);
+               fprintf(fout, "\\ri%ld", State.CurRightMargin);
                State.CurRightMargin = save[k];
                if(!done)
                {
@@ -1034,7 +1034,7 @@ int RStyleApply(tmp)
 	       }
                break;
 	   case style_IndentAttr:
-               fprintf(fout, "\\li%d\\ri%d", State.CurLeftIndentation, State.CurRightIndentation);
+               fprintf(fout, "\\li%ld\\ri%ld", State.CurLeftIndentation, State.CurRightIndentation);
                State.CurLeftIndentation = save[k];
 	       State.CurRightIndentation = save2[k];
 	       ch = (char) fgetc(fin);
@@ -1049,7 +1049,7 @@ int RStyleApply(tmp)
 	       }
 	       else
 		   ungetc(ch, fin);
-	       fprintf(fout, "\\par\\li%d\\ri%d ", State.CurLeftIndentation, State.CurRightIndentation);
+	       fprintf(fout, "\\par\\li%ld\\ri%ld ", State.CurLeftIndentation, State.CurRightIndentation);
                break;
 	   case style_None:
 	   default:
@@ -1059,7 +1059,7 @@ int RStyleApply(tmp)
    if(do_new)
       Newlines();
    if(done)
-       fprintf(fout, "\\par\\pard\\li%d\\ri%d ", State.CurLeftMargin, State.CurRightMargin);
+       fprintf(fout, "\\par\\pard\\li%ld\\ri%ld ", State.CurLeftMargin, State.CurRightMargin);
 }
 
 int RStyleConvert(p1, p2, p3, p4, tmp)
@@ -1508,7 +1508,7 @@ int RMajorHeading(command, transform, tofind)
    oldsize = State.CurFontSize;
    State.CurFontSize += 8;
 
-   fprintf(fout, "{\\fs%d\\qc ", State.CurFontSize);
+   fprintf(fout, "{\\fs%ld\\qc ", State.CurFontSize);
    ParseText(tofind, transform, PRINTTOFILE);
    fputs("}\n", fout);
 
@@ -1560,7 +1560,7 @@ int RChapter(command, transform, tofind)
    oldsize = State.CurFontSize;
    State.CurFontSize += 8;
 
-   fprintf(fout, "{\\fs%d\\b\\ql ", State.CurFontSize);
+   fprintf(fout, "{\\fs%ld\\b\\ql ", State.CurFontSize);
    ParseText(tofind, transform, PRINTTOFILE);
    fputs("}\n", fout);
 
@@ -1582,7 +1582,7 @@ int RSection(command, transform, tofind)
    oldsize = State.CurFontSize;
    State.CurFontSize += 4;
 
-   fprintf(fout, "{{\\v STYLE: section}\\fs%d\\b\\ql ", State.CurFontSize);
+   fprintf(fout, "{{\\v STYLE: section}\\fs%ld\\b\\ql ", State.CurFontSize);
    ParseText(tofind, transform, PRINTTOFILE);
    fputs("}\n", fout);
 

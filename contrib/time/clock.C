@@ -222,12 +222,12 @@ clock::Write(FILE  *fp, long  id, int  level)
   if (id != (this)->GetWriteID()) {
     /* New Write Operation */
     (this)->SetWriteID( id);
-    fprintf(fp, "\\begindata{%s,%d}\nDatastream version: %d\n",
+    fprintf(fp, "\\begindata{%s,%ld}\nDatastream version: %d\n",
 	    (this)->GetTypeName(), uniqueid, DS_VERSION);
 
     clock__WriteDataPart(this, fp);
 
-    fprintf(fp, "\\enddata{%s,%d}\n", (this)->GetTypeName(), uniqueid);
+    fprintf(fp, "\\enddata{%s,%ld}\n", (this)->GetTypeName(), uniqueid);
   }
   return(uniqueid);
 }
@@ -271,7 +271,7 @@ clock__ReadDataPart(class clock  *self, FILE  *fp)
   if ((buf = ReadLine(fp)) == NULL)
     return(dataobject_PREMATUREEOF);
   if (sscanf(buf, "border, %d, %d",
-	     &(self->options.border_shape),
+	     (int *)&(self->options.border_shape), /* enum, so safe cast to int */
 	     &(self->options.border_width)) < 2)
     return(dataobject_PREMATUREEOF);
   free(buf);

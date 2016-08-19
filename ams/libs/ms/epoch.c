@@ -41,6 +41,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #include <afs/param.h>
 #include <afs/venus.h>
 #endif /* AFS_ENV */
+#include <msprotos.h>
 
 static int dirCmp(s1, s2)
 char **s1, **s2;

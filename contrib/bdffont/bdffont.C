@@ -558,7 +558,7 @@ static long ReadIt(class bdffont *self, FILE *file) {
 		bdffont_ReadCharDefn.bby=atol(p);
 		break;
 	    case ATTRIBUTES:
-		sscanf(value, "%X", &bdffont_ReadCharDefn.attributes);
+		sscanf(value, "%lX", &bdffont_ReadCharDefn.attributes);
 		break;
 	    case BITMAP:
 		{
@@ -721,13 +721,13 @@ static void WriteCharacter(FILE  *file, struct bdffont_fontchar  *defn)
 	}
 
 	fprintf(file, "ENCODING %d\n", (unsigned) defn->encoding);
-	fprintf(file, "SWIDTH %d %d\n", defn->swx, defn->swy);
-	fprintf(file, "DWIDTH %d %d\n", defn->dwx, defn->dwy);
-	fprintf(file, "BBX %d %d %d %d\n",
+	fprintf(file, "SWIDTH %ld %ld\n", defn->swx, defn->swy);
+	fprintf(file, "DWIDTH %ld %ld\n", defn->dwx, defn->dwy);
+	fprintf(file, "BBX %ld %ld %ld %ld\n",
 		defn->bbw, defn->bbh, defn->bbx, defn->bby);
 
 	if (defn->attributes) {
-	    fprintf(file, "ATTRIBUTES %X\n", defn->attributes);
+	    fprintf(file, "ATTRIBUTES %lX\n", defn->attributes);
 	}
 
 	bm = defn->bitmap;
@@ -783,7 +783,7 @@ static long bdffont_AppendProperty(char  **props, long  length, char  *p, long  
     /* includes property label, space, value, and line-feed */
 
     *props = (char *) realloc(*props, newlength + 1); /* include NUL */
-    sprintf(*props + length, "%s %*d\n", p, bdfprop_INT_LEN, v);
+    sprintf(*props + length, "%s %*ld\n", p, bdfprop_INT_LEN, v);
 
     return (newlength);
 } /* bdffont_AppendProperty */
@@ -1043,7 +1043,7 @@ static long FilterPropertiesOut(class bdffont  *self, char  **props)
 			    + bdfprop_INT_LEN		/* just the number */
 			    + 2);			/* line-feed and NUL */
 	sprintf(*props + length,
-		"%s %*d\n",
+		"%s %*ld\n",
 		bdfprop_WEIGHT,
 		bdfprop_INT_LEN,
 		self->fontweight);
@@ -1087,18 +1087,18 @@ long bdffont::Write(FILE  *file, long  id, int  level)
     fprintf(file, "FONT %s\n",
 	     this->fontname ? this->fontname : bdffont_FONT_NAME);
 
-    fprintf(file, "SIZE %d %d %d\n", this->pointsize, this->resx, this->resy);
+    fprintf(file, "SIZE %ld %ld %ld\n", this->pointsize, this->resx, this->resy);
 
-    fprintf(file, "FONTBOUNDINGBOX %d %d %d %d\n",
+    fprintf(file, "FONTBOUNDINGBOX %ld %ld %ld %ld\n",
 	     this->bbw, this->bbh, this->bbx, this->bby);
 
-    fprintf(file, "STARTPROPERTIES %d\n", FilterPropertiesOut(this, &props));
+    fprintf(file, "STARTPROPERTIES %ld\n", FilterPropertiesOut(this, &props));
     fprintf(file, "%s", props);
     free(props);
     fprintf(file, "ENDPROPERTIES\n");
 
     if (this->activedefns > 0) {
-	fprintf(file, "CHARS %d\n", this->activedefns);
+	fprintf(file, "CHARS %ld\n", this->activedefns);
 
 	for (i = 0; i < this->defns_size; i++) {
 	    WriteCharacter(file, &this->defns[i]);

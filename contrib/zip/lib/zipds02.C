@@ -156,7 +156,7 @@ zip::Write_Figure( register struct zip_figure	      *figure )
     {
 /*===    pseudo_x = figure->zip_figure_image->zip_image_stream->zip_stream_pseudo_x_offset;
     pseudo_y = figure->zip_figure_image->zip_image_stream->zip_stream_pseudo_y_offset;===*/
-    fprintf( file, "*%c;%d,%d\n", ('A' - 1) + figure->zip_figure_type,
+    fprintf( file, "*%c;%ld,%ld\n", ('A' - 1) + figure->zip_figure_type,
 	   figure->zip_figure_point.zip_point_x - pseudo_x,
 	   figure->zip_figure_point.zip_point_y - pseudo_y );
     if ( figure->zip_figure_name )
@@ -243,7 +243,7 @@ zip::Write_Figure( register struct zip_figure	      *figure )
       if ( figure->zip_figure_mode.zip_figure_mode_middle ) *vertical = 'M';
       if ( figure->zip_figure_mode.zip_figure_mode_bottom ) *vertical = 'B';
       if ( figure->zip_figure_mode.zip_figure_mode_halo )   *halo = 'H';
-      fprintf( file, "M%s%s\n", horizontal, vertical, halo );
+      fprintf( file, "M%s%s%s\n", horizontal, vertical, halo );
       }
     if ( figure->zip_figure_points )
       {
@@ -255,12 +255,12 @@ zip::Write_Figure( register struct zip_figure	      *figure )
 		(figure->zip_figure_points->zip_points[0].zip_point_x),
 		(figure->zip_figure_points->zip_points[0].zip_point_y) );
 	else===*/
-	fprintf( file, ">%d,%d",
+	fprintf( file, ">%ld,%ld",
 		figure->zip_figure_points->zip_points[0].zip_point_x - pseudo_x,
 		figure->zip_figure_points->zip_points[0].zip_point_y - pseudo_y );
 /*=== End HACK of 5/8/87 ===*/
       for ( i = 1; i < figure->zip_figure_points->zip_points_count; i++ )
-        fprintf( file, ";%d,%d",
+        fprintf( file, ";%ld,%ld",
 		 figure->zip_figure_points->zip_points[i].zip_point_x - pseudo_x,
 		 figure->zip_figure_points->zip_points[i].zip_point_y - pseudo_y );
       fprintf( file, "\n" );

@@ -466,7 +466,7 @@ char *buf;
 	}
 
 	if(errnum<0 || errnum >=(EMSBASE+ms_nerr)
-	   ||(errnum<EMSBASE && errnum>unix_sys_nerr && !vdown(errnum)))
+	   ||(errnum<EMSBASE && errnum>sys_nerr && !vdown(errnum)))
 	    errnum=EMSUNKNOWN;
 	if(errcause<0 || errcause>=ms_nerrcause)
 	    errcause=EIN_UNKNOWN;

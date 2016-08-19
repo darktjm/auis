@@ -44,6 +44,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/eatmai
 #include <ctype.h>
 #include <parseadd.h>
 #include <pwd.h>
+#include <mail.h>
 /* for completeness */
 
 #if !POSIX_ENV
@@ -281,6 +282,7 @@ static int CheckMailrcHold()
 #define TRUE 1
 #define buffsize 1024
 #define MAXTRIES 25
+static int IsNewFrom(char *line);
 
 int ConvertIncomingMail(MailSpoolFile, MailDir, FilesReadIn)
 char *MailSpoolFile, *MailDir;

@@ -339,7 +339,7 @@ zip::Set_Figure_Shade( zip_type_figure figure, unsigned char shade )
 }
 
 long
-zip::Set_Figure_Font( register zip_type_figure	       figure, register char			      *name )
+zip::Set_Figure_Font( register zip_type_figure	       figure, register const char			      *name )
         {
   register long			     status = zip_ok;
   short				     font = 0;

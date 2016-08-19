@@ -61,7 +61,8 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/tm/RCS
 #endif /* hpux */
 
 #ifdef linux
-#include <bsd/sgtty.h>
+#undef M_UNIX
+#define M_UNIX 1
 #endif
 
 #ifdef SOLARIS
@@ -1007,7 +1008,7 @@ static int OFF=0;
 #endif /*M_UNIX */
 #endif /* defined(hpux) || defined(_IBMR2) || defined(NeXT) || defined(sys_pmax_ul4) */
 
-int termulator::StartProcess(char  **args)
+int termulator::StartProcess(const char  **args)
 {
     class termulator *self=this;
     int     pid/*,ppid=getpid()*/;

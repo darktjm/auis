@@ -775,7 +775,7 @@ void zipedit::Expose_Point( register zip_type_pane		   pane, register zip_type_f
   register class fontdesc		 *current_font = (View)->GetFont( );
 
   IN(zipedit::Expose_Point);
-  sprintf( points, "(%d,%D)", x, y );  /*=== optimize ===*/
+  sprintf( points, "(%ld,%ld)", x, y );  /*=== optimize ===*/
   (this->view_object)->SetTransferMode(  graphic_BLACK );
   (this->view_object)->MoveTo( (long) (((OriginX) + (x * (Flip) * (Multiplier) / (Divisor))) - 3), (long) (((OriginY) - (y * (Flop) * (Multiplier) / (Divisor))) - 3 ));
   (this->view_object)->DrawLineTo(  (long) (((OriginX) + (x * (Flip) * (Multiplier) / (Divisor))) + 3), (long) (((OriginY) - (y * (Flop) * (Multiplier) / (Divisor))) - 3 ));

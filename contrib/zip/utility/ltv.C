@@ -485,7 +485,7 @@ void Initialize( class ltv  *self )
     root_image = (Zip)->Image(  "ZIP_ROOT_IMAGE" );
     if ( status = (Zip)->Create_Inferior_Image(  &IMAGE, "Chains", StreamLocal, root_image ) )
     { DEBUG(ERROR -- Create Chains Image);
-/*===*/printf("ERROR -- Failed to create Chains Image (Status %d)\n",status );
+/*===*/printf("ERROR -- Failed to create Chains Image (Status %ld)\n",status );
     }
     }
     (RasterView)->SetDataObject( (class dataobject *) Raster );
@@ -1181,7 +1181,7 @@ Rename_Exception( class ltv  *self, char *facility, long  status  )
 	     *ptr = 0;
 	 while ( duplicate )
 	 {
-	     sprintf( chain_name, "%s[%d]", msg, number );
+	     sprintf( chain_name, "%s[%ld]", msg, number );
 	     DEBUGst(New Chain-name,chain_name);
 	     if ( (Zip)->Set_Figure_Name(  Figure, chain_name ) == zip_ok )
 		 duplicate = false;
@@ -1190,7 +1190,7 @@ Rename_Exception( class ltv  *self, char *facility, long  status  )
 	 sprintf( msg, "Duplicate Chain Name.  Re-named to '%s'", chain_name );
      }
      else
-	 sprintf( msg, "Rename-Exception  Facility = %s  Status = %d", facility, status );
+	 sprintf( msg, "Rename-Exception  Facility = %s  Status = %ld", facility, status );
      (ZipView)->Announce(  msg );
      (Zip)->Set_general_Exception_Handler(  (zip_generalexceptfptr) Exceptions );
      OUT(Exceptions);
@@ -1395,7 +1395,7 @@ Save_Command( class ltv *self )
     if ( (status = (Zip)->Write_Stream(  StreamLocal )) == zip_ok )
 	sprintf( msg, "Wrote File '%s'", StreamLocal->zip_stream_name );
     else
-	sprintf( msg, "Error Writing File '%s'  (%d)", StreamLocal->zip_stream_name, status );
+	sprintf( msg, "Error Writing File '%s'  (%ld)", StreamLocal->zip_stream_name, status );
     Modified = false;
     (ZipView)->Announce(  msg );
     OUT(Save_Command);
@@ -1423,7 +1423,7 @@ Print_Command( class ltv  *self )
 	sprintf( msg, "Printed File '%s'", StreamLocal->zip_stream_name );
     }
     else
-	sprintf( msg, "Error Printing File '%s'  (%d)", StreamLocal->zip_stream_name, status );
+	sprintf( msg, "Error Printing File '%s'  (%ld)", StreamLocal->zip_stream_name, status );
     (ZipView)->Announce(  msg );
     (ZipView )->Use_Normal_Pane_Cursors( );
     OUT(Print_Command);
@@ -1539,7 +1539,7 @@ Exceptions( class ltv *self, char *facility, long  status  )
     IN(Exceptions);
 /*===*/
     self = SELF;
-    sprintf( msg, "Exception  Status = %d  Facility = %s", status, facility );
+    sprintf( msg, "Exception  Status = %ld  Facility = %s", status, facility );
     (ZipView)->Announce(  msg );
     OUT(Exceptions);
     return  0;

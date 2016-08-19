@@ -50,8 +50,8 @@ class fontdesc;
 #define print_PSFontNameID ("tF")
 #define print_SymbolChar   32768
 
-typedef void (*print_cleanup_fptr)(void *rock);
-typedef void (*print_header_fptr)(FILE *outfile, void *rock);
+typedef void (*print_cleanup_fptr)(const void *rock);
+typedef void (*print_header_fptr)(FILE *outfile, const void *rock);
 
 struct afm_font_hashnode {
     char *name;
@@ -133,7 +133,7 @@ class print : public ATK  {
 	static int PSRegisterFont(char *fontname);
 	static void PSRegisterDef(char *procname, char *defstring);
 	static void PSRegisterHeader(char *headname, 
-		print_header_fptr headproc, void *rock);
+		print_header_fptr headproc, const void *rock);
 	static void PSRegisterCleanup(print_cleanup_fptr cleanproc,void *rock);
 	static boolean PSNewPage(int pagenum);
 

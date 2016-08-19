@@ -55,7 +55,7 @@ ATKdefineRegistry(runbutton, sbutton, runbutton::InitializeClass);
 
 #define UNDEF_LABEL "[Undefined]"
 
-char *runbutton::commandPath = 0;
+const char *runbutton::commandPath = 0;
 int runbutton::numPaths = 0;
 char **runbutton::runPath = 0;
 
@@ -129,18 +129,19 @@ static char *cleanpath(char  *p)
 boolean runbutton::InitializeClass()
 {
     char *p, *cmd;
+    const char *q;
     int i;
 
     runbutton::commandPath = environ::Get("RUNBUTTONPATH");
     /* Parse the runbutton::commandPath into the path array. */
     if (runbutton::commandPath) {
-	p = runbutton::commandPath;
+	q = runbutton::commandPath;
 	runbutton::numPaths = 1;
-	while (p != NULL && *p != '\0') {
-	    p = strchr(p, ':');
-	    if (p) {
+	while (q != NULL && *q != '\0') {
+	    q = strchr(q, ':');
+	    if (q) {
 		runbutton::numPaths++;
-		p++;	/* skip : */
+		q++;	/* skip : */
 	    }
 	}
         /* Now we know how many paths exist. */
@@ -385,7 +386,7 @@ long runbutton::Write(FILE  *fp, long  id, int  level)
 	/* New Write Operation */
 	SetWriteID(id);
 
-	fprintf(fp, "\\begindata{%s,%d}\n",
+	fprintf(fp, "\\begindata{%s,%ld}\n",
 		GetTypeName(), uniqueid);
 
 	if (cmd) {
@@ -410,7 +411,7 @@ long runbutton::Write(FILE  *fp, long  id, int  level)
 	    quotelabel = quote(lbl);
 	    fprintf(fp, "\\label:%s\n", quotelabel);
 	}
-	fprintf(fp, "\\enddata{%s,%d}\n", GetTypeName(), uniqueid);
+	fprintf(fp, "\\enddata{%s,%ld}\n", GetTypeName(), uniqueid);
     }
     return(uniqueid);
 }

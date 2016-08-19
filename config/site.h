@@ -86,9 +86,15 @@
 /* If you picked up contrib.tar.Z and you wish to build and install
 	almost all of it, then uncomment the following: */
 #define MK_CONTRIB 1  
+#define CONTRIB_ENV 1
+#define MK_CALC 1
+#define MK_CHAMP 1
 #define MK_SCRIBETEXT 1
 #define MK_RTF 1
 #define MK_VUI 1
+#define MK_ZIP 1
+#define MK_PREVIEW 1
+#define MK_HELP 1
 
 /* If you are programming in Andrew, you may want:
 	Examples: a set of program examples.

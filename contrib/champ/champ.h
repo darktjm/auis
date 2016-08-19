@@ -66,7 +66,7 @@ extern int FlagEventsMatchingDate(struct tm  *date);
 extern int matchdate(struct tm  *date, struct datespec  *spec);
 extern void IncrementDate(struct tm  *d);
 extern void TranslateTmToHebrew(struct tm  *date, struct hebrewdatespec  *hebdate);
-extern int ReadDatesFromChampPath(char  *champpath);
+extern int ReadDatesFromChampPath(const char  *champpath);
 extern struct eventnode *readdateintoeventnode(char  *Buf);
 
 #define CHAMPERR_NOERR 0

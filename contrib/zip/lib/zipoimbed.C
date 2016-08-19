@@ -470,7 +470,7 @@ zipoimbed::Print_Object( zip_type_figure figure, zip_type_pane pane )
   struct imbed			 *imbed = (struct imbed *) figure->zip_figure_datum.zip_figure_anchor;
 
   IN(zipoimbed::Print_Object);
-  fprintf( zipprint_Printing_File( this->print_object ), "%s %s\n%s %d %d %s\n",
+  fprintf( zipprint_Printing_File( this->print_object ), "%s %s\n%s %ld %ld %s\n",
 	   zipprint_Printing_Prefix( this->print_object ),
 	   "gsave   % Save Zip Environment Surrounding Imbedded Object",
 	   zipprint_Printing_Prefix( this->print_object ),

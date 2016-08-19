@@ -57,7 +57,7 @@ butter::butter()
 }
 
 void
-butter::SetText(char  *txt)
+butter::SetText(const char  *txt)
 {
     if (this->text) free(this->text);
     this->text = (char *)malloc(1+strlen(txt));

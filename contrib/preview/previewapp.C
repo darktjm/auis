@@ -48,8 +48,8 @@ ATK_IMPL("previewapp.H")
 #include <im.H>
 #include <signal.h>
 
-char *DviBaseName=NULL;
-char *DviFileName=NULL;
+const char *DviBaseName=NULL;
+const char *DviFileName=NULL;
 boolean DoScaling = TRUE;
 FILE *filein;
 boolean DviFileComplete;

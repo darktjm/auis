@@ -57,7 +57,7 @@ BATMAIL = batmail
 #endif
 #endif /* AMS_ENV */
 
-#if !defined(SGI_4D_ENV) && !SY_OS2
+#if !defined(SGI_4D_ENV) && !SY_OS2 && !defined(linux)
 TM = tm
 #endif
 

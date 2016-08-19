@@ -593,7 +593,7 @@ void Save_Button( class schedv	  *self, class suite  *suite, struct suite_item  
 	if ( (status = (Zip)->Write_Stream(  ScheduleStream )) == zip_ok )
 	    sprintf( msg, "Wrote File '%s'", ScheduleStream->zip_stream_name );
 	else
-	    sprintf( msg, "Error Writing File '%s'  (%d)", ScheduleStream->zip_stream_name, status );
+	    sprintf( msg, "Error Writing File '%s'  (%ld)", ScheduleStream->zip_stream_name, status );
 	Modified = false;
 	(ZipView)->Announce(  msg );
 	(ZipView )->Use_Normal_Pane_Cursors( );
@@ -626,7 +626,7 @@ void Print_Button( class schedv  *self, class suite  *suite, struct suite_item *
 	    sprintf( msg, "Printed File '%s'", ScheduleStream->zip_stream_name );
 	}
 	else
-	    sprintf( msg, "Error Printing File '%s'  (%d)", ScheduleStream->zip_stream_name, status );
+	    sprintf( msg, "Error Printing File '%s'  (%ld)", ScheduleStream->zip_stream_name, status );
 	(ZipView)->Announce(  msg );
 	(ZipView )->Use_Normal_Pane_Cursors( );
     }
@@ -689,7 +689,7 @@ Exceptions( class schedv *self, char *facility, long   status  )
     IN(Exceptions);
 /*===*/
     self = SELF;
-    sprintf( msg, "Exception  Status = %d  Facility = %s", status, facility );
+    sprintf( msg, "Exception  Status = %ld  Facility = %s", status, facility );
     (ZipView)->Announce(  msg );
     OUT(Exceptions);
     return  0;

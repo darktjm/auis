@@ -61,7 +61,7 @@ long month::Write(FILE  *fp, long  id, int  level)
 	(this)->SetWriteID( id);
 	clock = time(0);
 	thisdate = localtime(&clock);
-	fprintf(fp, "\\begindata{%s,%d}\n%d\n%d\n\\enddata{%s,%d}\n",
+	fprintf(fp, "\\begindata{%s,%ld}\n%d\n%d\n\\enddata{%s,%ld}\n",
 		(this)->GetTypeName(), (this)->UniqueID(),
 		this->mon - thisdate->tm_mon, this->year - thisdate->tm_year,
 		(this)->GetTypeName(), (this)->UniqueID());

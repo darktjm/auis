@@ -411,7 +411,7 @@ gofig::Read( register FILE *file, register long id ) {
 	len = strlen("\\enddata{gofig,");
 	if (result == dataobject_NOREADERROR &&
 			( strncmp( s, "\\enddata{gofig,", len ) != 0
-			  || sscanf(s+len, "%d}\n", &eid) != 1
+			  || sscanf(s+len, "%ld}\n", &eid) != 1
 			  || eid != sid
 			) ) 
 		result = dataobject_MISSINGENDDATAMARKER;
@@ -442,7 +442,7 @@ gofig::Write( FILE *file, long writeID, int level ) {
 	if (this->writeID != writeID) {
 		/* new instance of write, do it */
 		this->writeID = writeID;
-		sprintf( head, "data{%s, %d}\n", (this)->GetTypeName(), id );
+		sprintf( head, "data{%s, %ld}\n", (this)->GetTypeName(), id );
 		fprintf( file, "\\begin%s", head );
 
 		/* prune empty intersections */
@@ -455,7 +455,7 @@ gofig::Write( FILE *file, long writeID, int level ) {
 		}
 
 		/* output lines of data stream */
-		fprintf( file, " 1   %d %d   %d   %d\n",
+		fprintf( file, " 1   %d %d   %ld   %d\n",
 			width, height, printcolwidth, edges );
 		int i;
 		for (i = 0; i < nstones(); i++) {

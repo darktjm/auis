@@ -301,7 +301,7 @@ zip::Write( register FILE			      *file, register long			       id, register int
     this->writeID = id;
     if ( level )
       { DEBUG(Not Parent -- Write To Datastream);
-      fprintf( file, "\\begindata{%s,%d}\n",
+      fprintf( file, "\\begindata{%s,%ld}\n",
 		(this)->GetTypeName( ),
 		(this)->UniqueID( ) );
       Write_View_Info( this, file );
@@ -319,7 +319,7 @@ zip::Write( register FILE			      *file, register long			       id, register int
         status = zip_Enparse_Stream( this, STREAM );
 	}
       DEBUGdt(Status,status);
-      fprintf( file, "\n\\enddata{%s,%d}\n",
+      fprintf( file, "\n\\enddata{%s,%ld}\n",
 		(this )->GetTypeName( ),
 		(this)->UniqueID( ) );
       }
@@ -340,18 +340,18 @@ static
 void Write_View_Info( register class zip *self, register FILE *file )
 {
   if ( self->desired_view_width )
-    fprintf( file, "%%ViewWidth %d\n", self->desired_view_width );
+    fprintf( file, "%%ViewWidth %ld\n", self->desired_view_width );
   if ( self->desired_view_height )
-    fprintf( file, "%%ViewHeight %d\n", self->desired_view_height );
+    fprintf( file, "%%ViewHeight %ld\n", self->desired_view_height );
 }
 
 static
 void Write_Object_Info( register class zip *self, register FILE *file )
       {
   if ( self->object_width )
-    fprintf( file, "%%ObjectWidth %d\n", self->object_width );
+    fprintf( file, "%%ObjectWidth %ld\n", self->object_width );
   if ( self->object_height )
-    fprintf( file, "%%ObjectHeight %d\n", self->object_height );
+    fprintf( file, "%%ObjectHeight %ld\n", self->object_height );
   }
 
 void Write_PrintSize_Info( register class zip *self, register FILE *file )

@@ -44,7 +44,7 @@ struct eventnode *RootEventNode = NULL;
 #ifndef NORCSID
 #endif
 static void ResolveTildes(char    *in , char    *out);
-int ReadDatesFromChampPath(char  *champpath);
+int ReadDatesFromChampPath(const char  *champpath);
 static int ReadDatesFromFile(FILE  *fp);
 static int readgregoriandate(char  *db, struct gregoriandatespec  *ds);
 static int readhebrewdate(char  *db, struct hebrewdatespec  *ds);
@@ -87,7 +87,7 @@ static void ResolveTildes(char    *in , char    *out)
     sprintf(out, "%s/%s", p->pw_dir, in);
 }
 
-int ReadDatesFromChampPath(char  *champpath) 
+int ReadDatesFromChampPath(const char  *champpath) 
 {
     char *colon, FBuf[1+MAXPATHLEN];
     FILE *fp;
@@ -95,7 +95,7 @@ int ReadDatesFromChampPath(char  *champpath)
 
     if (!champpath) champpath = getprofile("champpath");
     if (!champpath) champpath = "~/events.champ:~/.events.champ";
-    pathbuf=champpath=NewString(champpath);
+    champpath=pathbuf=NewString(champpath);
     while(pathbuf) {
 	colon = strchr(pathbuf, ':');
 	if (colon) *colon++ = '\0';
@@ -109,7 +109,7 @@ int ReadDatesFromChampPath(char  *champpath)
 	ReadDatesFromFile(fp);
 	fclose(fp);
     }
-    if(champpath) free(champpath);
+    if(champpath) free((void *)champpath);
     return(0);
 }
 

@@ -86,7 +86,7 @@ BEGINCPLUSPLUSPROTOS
 #define ERR_WARNING 4
 #define ERR_MONITOR 6
 #define ERR_DEBUG 9
-#ifndef ANSI_COMPILER
+#ifndef __STDC__
 #include <varargs.h>
 int safefprintf(va_alist);
 int errprintf(va_alist);

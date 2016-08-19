@@ -82,7 +82,7 @@ public:
     virtual void DviToDisplay();
     virtual int ReadyToQuit()  ;
 
-    static class preview * Create(FILE *f,char *fname,char *fbase,boolean compleated,boolean scale)  ;
+    static class preview * Create(FILE *f,const char *fname,const char *fbase,boolean compleated,boolean scale)  ;
     
 	preview();
     

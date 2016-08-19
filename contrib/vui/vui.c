@@ -90,7 +90,6 @@ Boolean MSG_mailorbb;
 Boolean VUI_MSConnected = TRUE;
 Boolean exit_logout = FALSE;
 
-extern char *ProgramName;	/* From libutil.a(config.o) */
 char ProgramVersion[80];
 char RunningOnHost[81];
 extern char *ProgramPrefix;
@@ -139,7 +138,7 @@ char **argv;
 {
 int opt, last_opt = 0;
 Boolean reshow = TRUE, quit = FALSE, GotoFlag, show_motd = TRUE;
-    ProgramName = "vui";	/* From libutil. */
+    strcpy(ProgramName, "vui");	/* From libutil. */
 
     amsconfig(argc, argv, CUI_SnapIsRunning? "vuis": "vuin");
     Interactive=FALSE;

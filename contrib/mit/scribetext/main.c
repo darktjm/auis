@@ -108,7 +108,7 @@ main(argc, argv)
 	    strcpy(fileerr, argv[++i]);
 	  else
 	    {
-	      fprintf(stderr, "* Error:\n* Filename must follow -e option.\n", me);
+	      fprintf(stderr, "* Error:\n* Filename must follow -e option.\n");
 	      OptionErr=TRUE;
 	    }
 	}

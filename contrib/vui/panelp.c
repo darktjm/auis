@@ -111,7 +111,8 @@ PRIVATE FIELD *CursorDown(), *RightField(), *LeftField();
 PRIVATE FIELD *ReturnKey(), *IsrtToggle(), *DeleteChar();
 PRIVATE FIELD *homeCursor(), *Backspace(), *EndCursor();
 PRIVATE FIELD *EraseEOF(), *DataInput();
-FIELD *RedrawScreen(), *SuperHomeKey();
+PRIVATE FIELD *SuperHomeKey (FIELD *curfield);
+FIELD *RedrawScreen();
 
 PRIVATE KEYTAB StandardKeys[] = {
     KEYCODE_LEFT,	CursorLeft,       /* Left              */
@@ -256,6 +257,8 @@ FIELD *curfield;
  
     return (curfield->freturn);
 }
+
+PRIVATE int ShiftDown (FIELD *curfield);
 
 PRIVATE FIELD *ReturnKey (curfield)     /* Move down and to leftmost field */
 FIELD *curfield;
@@ -438,6 +441,8 @@ FIELD *curfield;
     return (curfield);
 }
 
+PRIVATE int HandleChar (FIELD *curfield, unsigned char chr, int advance);
+
 PRIVATE FIELD *Backspace (curfield)
 FIELD *curfield;
 {
@@ -532,6 +537,8 @@ FIELD *curfield;
 
     return (curfield);
 }
+
+PRIVATE int DeleteCurrentLine(FIELD *curfield);
 
 PRIVATE FIELD *EraseEOF (curfield)
 FIELD *curfield;

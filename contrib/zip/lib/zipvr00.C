@@ -245,9 +245,9 @@ zipprint_Write_Print_Datastream_Header( register class zipprint	          *self 
 	       PrintPrefix );
       }
       else
-      fprintf( PrintFile, "%s %d %d translate  %% Portrait Mode\n",
+      fprintf( PrintFile, "%s %d %ld translate  %% Portrait Mode\n",
 	       PrintPrefix, 0, -(H-17) );
-    fprintf( PrintFile, "%s /width %d def /height %d def  %% Set Clip Rectangle\n",
+    fprintf( PrintFile, "%s /width %ld def /height %ld def  %% Set Clip Rectangle\n",
 	     PrintPrefix, IW72, IH72 );
     fprintf( PrintFile, "%s newpath 0 0 moveto\n", PrintPrefix );
     fprintf( PrintFile, "%s 0 height lineto width height lineto\n", PrintPrefix );
@@ -446,7 +446,7 @@ void zipprint::Draw_Multi_Line( register int npoints , register int	x_origin , r
       fprintf( PrintFile, "\n" );
       i += count;
       }
-    if (remainder) fprintf( PrintFile,"%s %d zip_Poly_Line\n", PrintPrefix, remainder );
+    if (remainder) fprintf( PrintFile,"%s %ld zip_Poly_Line\n", PrintPrefix, remainder );
     }
   OUT(zipprint::Draw_Multi_Line);
   }

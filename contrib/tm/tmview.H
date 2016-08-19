@@ -46,7 +46,7 @@ public:
 	 void GetClickPosition(long pos,long noc,enum view_MouseAction action,long startLeft,long startRight,long *leftPosP,long *rightPosP);
     
 	virtual void SetFileMenus(boolean on);
-	virtual boolean ReadShMenus(char *filename)  ;
+	virtual boolean ReadShMenus(const char *filename)  ;
     
 	inline void SetTitle(const char *t) { (this->title=(t)); }
         inline const char  * GetTitle() { return (this->title); }

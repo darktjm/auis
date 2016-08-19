@@ -79,7 +79,7 @@ boolean tmapp::ParseArgs(int  argc,const char  **argv)
 
     while(*++argv!=NULL && **argv=='-')
 	switch((*argv)[1]){
-		char *temp;
+		const char *temp;
 	    case 't':
 		GETARGSTR(this->title);
 		break;
@@ -119,7 +119,7 @@ boolean tmapp::Start()
 	return FALSE;
 
     if(this->args==NULL){
-	static char *args[2];
+	static const char *args[2];
 	args[0]=environ::Get("SHELL");
 	if(args[0]==NULL)
 	    args[0]="/bin/csh";
@@ -128,7 +128,7 @@ boolean tmapp::Start()
     }
 
     {
-	char *p=strrchr(this->args[0],'/');
+	const char *p=strrchr(this->args[0],'/');
 	if(p==NULL)
 	    im::SetProgramName(this->args[0]);
 	else
@@ -159,8 +159,8 @@ boolean tmapp::Start()
     if(this->menufile!=NULL)
 	(tmv)->ReadShMenus(this->menufile);
     else{
-	char *menupref=environ::GetProfile("shmenu");
-	char *home=environ::Get("HOME");
+	const char *menupref=environ::GetProfile("shmenu");
+	const char *home=environ::Get("HOME");
 	char buf[500];
 
 	if(menupref!=NULL)
@@ -169,7 +169,7 @@ boolean tmapp::Start()
 		!(sprintf(buf,"%s/.shmenu",home),
 		  (tmv)->ReadShMenus(buf))){
 	    
-	    char *fileName;
+	    const char *fileName;
 	    
 	    fileName = environ::AndrewDir("/lib/shmenu");
 	    (tmv)->ReadShMenus(fileName);

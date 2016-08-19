@@ -250,7 +250,7 @@ static void bdffontv_SetZoomDeltaCmd(class bdffontv  *self, long  rock)
     char localbuffer[128], *bufp;
     long newdelta;
 
-    sprintf(msg, "New zoom in/out delta [%d]: ", self->zoomdelta);
+    sprintf(msg, "New zoom in/out delta [%ld]: ", self->zoomdelta);
 
     if (message::AskForString(self, 0, msg, "", localbuffer, sizeof(localbuffer) - 1) < 0)
     {
@@ -264,13 +264,13 @@ static void bdffontv_SetZoomDeltaCmd(class bdffontv  *self, long  rock)
     }
 
     if (*bufp != '\0') {
-	if (sscanf(localbuffer, "%d", &newdelta) != 1) {
+	if (sscanf(localbuffer, "%ld", &newdelta) != 1) {
 	    message::DisplayString(self, 0, "Value must be a number.");
 	    return;
 	}
 	self->zoomdelta = newdelta;
 
-	sprintf(msg, "New display delta set to %d.", self->zoomdelta);
+	sprintf(msg, "New display delta set to %ld.", self->zoomdelta);
 	message::DisplayString(self, 0, msg);
     }
     else {
@@ -293,7 +293,7 @@ static int AskFor1(class bdffontv  *self, long  *value, char  *prompt)
     char msg[128];
     char localbuffer[128], *bufp;
 
-    sprintf(msg, "%s [%d]: ", prompt, *value);
+    sprintf(msg, "%s [%ld]: ", prompt, *value);
 
     if (message::AskForString(self, 0, msg, "", localbuffer, sizeof(localbuffer) - 1) < 0)
     {
@@ -307,7 +307,7 @@ static int AskFor1(class bdffontv  *self, long  *value, char  *prompt)
     }
 
     if (*bufp != '\0') {
-	if (sscanf(localbuffer, "%d", value) != 1) {
+	if (sscanf(localbuffer, "%ld", value) != 1) {
 	    message::DisplayString(self, 0, "Value must be a number.");
 	    return (bdffontv_AskAborted);
 	}
@@ -503,14 +503,14 @@ static int bdffontv_SetResolutionCmd(class bdffontv  *self, class chlist  *l, en
 	    (fontinfo)->SetModified();
 
 	    chl = (class chlist *) (self->resV)->GetDataObject();
-	    sprintf(msg, "%s%d", bdffontv_ResolutionXLabel, x);
+	    sprintf(msg, "%s%ld", bdffontv_ResolutionXLabel, x);
 	    (chl)->ChangeItemByIndex( 0, msg);
 
-	    sprintf(msg, "%s%d", bdffontv_ResolutionYLabel, y);
+	    sprintf(msg, "%s%ld", bdffontv_ResolutionYLabel, y);
 	    (chl)->ChangeItemByIndex( 1, msg);
 
 	    sprintf(msg,
-		    "New X resolution = %d, new Y resolution = %d.", x, y);
+		    "New X resolution = %ld, new Y resolution = %ld.", x, y);
 	    message::DisplayString(self, 0, msg);
 	}
 	else {
@@ -538,10 +538,10 @@ static int bdffontv_SetPointSizeCmd(class bdffontv  *self, class chlist  *l, enu
 	    (fontinfo)->SetModified();
 
 	    chl = (class chlist *) (self->pthelpV)->GetDataObject();
-	    sprintf(msg, "%s%d", bdffontv_PointLabel, pts);
+	    sprintf(msg, "%s%ld", bdffontv_PointLabel, pts);
 	    (chl)->ChangeItemByIndex( 0, msg);
 
-	    sprintf(msg, "New point size = %d.", pts);
+	    sprintf(msg, "New point size = %ld.", pts);
 	    message::DisplayString(self, 0, msg);
 	}
 	else {
@@ -572,7 +572,7 @@ static int bdffontv_SetDefaultDeltaCmd(class bdffontv  *self, class chlist  *l, 
 	    (fontinfo)->SetModified();
 
 	    sprintf(msg,
-		    "New default X delta = %d, new default Y delta = %d.",
+		    "New default X delta = %ld, new default Y delta = %ld.",
 		    x, y);
 	    message::DisplayString(self, 0, msg);
 	}
@@ -604,7 +604,7 @@ static int bdffontv_SetDefaultOriginCmd(class bdffontv  *self, class chlist  *l,
 	    (fontinfo)->SetModified();
 
 	    sprintf(msg,
-		    "New default X origin = %d, new default Y origin = %d.",
+		    "New default X origin = %ld, new default Y origin = %ld.",
 		    x, y);
 	    message::DisplayString(self, 0, msg);
 	}
@@ -636,7 +636,7 @@ static int bdffontv_SetDefaultExtentCmd(class bdffontv  *self, class chlist  *l,
 	    (fontinfo)->SetModified();
 
 	    sprintf(msg,
-		    "New default width = %d, new default height = %d.",
+		    "New default width = %ld, new default height = %ld.",
 		    width, height);
 	    message::DisplayString(self, 0, msg);
 	}
@@ -783,13 +783,13 @@ static int bdffontv_SetDeltaCmd(class bdffontv  *self, class chlist  *l, enum vi
 	    self->charmodified |= bdffontv_CharDeltaMod;
 
 	    chl = (class chlist *) (self->charencodingV)->GetDataObject();
-	    sprintf(msg, "%s%d", bdffontv_DeltaXLabel, x);
+	    sprintf(msg, "%s%ld", bdffontv_DeltaXLabel, x);
 	    (chl)->ChangeItemByIndex( 2, msg);
 
-	    sprintf(msg, "%s%d", bdffontv_DeltaYLabel, y);
+	    sprintf(msg, "%s%ld", bdffontv_DeltaYLabel, y);
 	    (chl)->ChangeItemByIndex( 3, msg);
 
-	    sprintf(msg, "New X delta = %d, new Y delta = %d.", x, y);
+	    sprintf(msg, "New X delta = %ld, new Y delta = %ld.", x, y);
 	    message::DisplayString(self, 0, msg);
 	}
 	else {
@@ -819,13 +819,13 @@ static int bdffontv_SetOriginCmd(class bdffontv  *self, class chlist  *l, enum v
 	    self->charmodified |= bdffontv_CharOriginMod;
 
 	    chl = (class chlist *) (self->charextentV)->GetDataObject();
-	    sprintf(msg, "%s%d", bdffontv_OriginXLabel, x);
+	    sprintf(msg, "%s%ld", bdffontv_OriginXLabel, x);
 	    (chl)->ChangeItemByIndex( 0, msg);
 
-	    sprintf(msg, "%s%d", bdffontv_OriginYLabel, y);
+	    sprintf(msg, "%s%ld", bdffontv_OriginYLabel, y);
 	    (chl)->ChangeItemByIndex( 1, msg);
 
-	    sprintf(msg, "New X origin = %d, new Y origin = %d.", x, y);
+	    sprintf(msg, "New X origin = %ld, new Y origin = %ld.", x, y);
 	    message::DisplayString(self, 0, msg);
 	}
 	else {
@@ -855,15 +855,15 @@ static int bdffontv_SetExtentCmd(class bdffontv  *self, class chlist  *l, enum v
 	    self->charmodified |= bdffontv_CharExtentMod;
 
 	    chl = (class chlist *) (self->charextentV)->GetDataObject();
-	    sprintf(msg, "%s%d", bdffontv_WidthLabel, width);
+	    sprintf(msg, "%s%ld", bdffontv_WidthLabel, width);
 	    (chl)->ChangeItemByIndex( 2, msg);
 
-	    sprintf(msg, "%s%d", bdffontv_HeightLabel, height);
+	    sprintf(msg, "%s%ld", bdffontv_HeightLabel, height);
 	    (chl)->ChangeItemByIndex( 3, msg);
 
 	    (self->chareditV)->ResizeRaster( width, height);
 
-	    sprintf(msg, "New width = %d, new height = %d.", width, height);
+	    sprintf(msg, "New width = %ld, new height = %ld.", width, height);
 	    message::DisplayString(self, 0, msg);
 	}
 	else {
@@ -1060,15 +1060,15 @@ static void bdffontv_UpdateFontExtent(class bdffontv  *self, class bdffont  *fon
 
     (fontinfo)->GetBoundingBox( &w, &h, &x, &y);
     chl = (class chlist *) (self->fontoriginV)->GetDataObject();
-    sprintf(msg, "%s%d", bdffontv_OriginXLabel, x);
+    sprintf(msg, "%s%ld", bdffontv_OriginXLabel, x);
     (chl)->ChangeItemByIndex( 0, msg);
-    sprintf(msg, "%s%d", bdffontv_OriginYLabel, y);
+    sprintf(msg, "%s%ld", bdffontv_OriginYLabel, y);
     (chl)->ChangeItemByIndex( 1, msg);
 
     chl = (class chlist *) (self->fontextentV)->GetDataObject();
-    sprintf(msg, "%s%d", bdffontv_WidthLabel, w);
+    sprintf(msg, "%s%ld", bdffontv_WidthLabel, w);
     (chl)->ChangeItemByIndex( 0, msg);
-    sprintf(msg, "%s%d", bdffontv_HeightLabel, h);
+    sprintf(msg, "%s%ld", bdffontv_HeightLabel, h);
     (chl)->ChangeItemByIndex( 1, msg);
 } /* bdffontv_UpdateFontExtent */
 
@@ -1226,18 +1226,18 @@ void bdffontv::SelectCharacter(int  index)
 
 	bdffont_GetDWidth(&this->modinfo, &x, &y);
 	/* ... frasterv_SetDelta(self->chareditV, x, y); */
-	sprintf(msg, "%s%d", bdffontv_DeltaXLabel, x);
+	sprintf(msg, "%s%ld", bdffontv_DeltaXLabel, x);
 	(encodingl)->ChangeItemByIndex( 2, msg);
 
-	sprintf(msg, "%s%d", bdffontv_DeltaYLabel, y);
+	sprintf(msg, "%s%ld", bdffontv_DeltaYLabel, y);
 	(encodingl)->ChangeItemByIndex( 3, msg);
 
 	bdffont_GetOrigin(&this->modinfo, &x, &y);
 	/* ... frasterv_SetOrigin(self->chareditV, x, y); */
-	sprintf(msg, "%s%d", bdffontv_OriginXLabel, x);
+	sprintf(msg, "%s%ld", bdffontv_OriginXLabel, x);
 	(extentl)->ChangeItemByIndex( 0, msg);
 
-	sprintf(msg, "%s%d", bdffontv_OriginYLabel, y);
+	sprintf(msg, "%s%ld", bdffontv_OriginYLabel, y);
 	(extentl)->ChangeItemByIndex( 1, msg);
 
 	bdffont_GetExtent(&this->modinfo, &w, &h);
@@ -1263,10 +1263,10 @@ void bdffontv::SelectCharacter(int  index)
 	}
 	(this->chareditV)->SetScale( zoom);
 
-	sprintf(msg, "%s%d", bdffontv_WidthLabel, w);
+	sprintf(msg, "%s%ld", bdffontv_WidthLabel, w);
 	(extentl)->ChangeItemByIndex( 2, msg);
 
-	sprintf(msg, "%s%d", bdffontv_HeightLabel, h);
+	sprintf(msg, "%s%ld", bdffontv_HeightLabel, h);
 	(extentl)->ChangeItemByIndex( 3, msg);
 
 	(this->charmenuV)->HighlightItem( index);	
@@ -1351,14 +1351,14 @@ static void SetFontCharacteristics(class bdffontv  *self)
     (chl)->ChangeItemByIndex( 0, msg);
 
     chl = (class chlist *) (self->pthelpV)->GetDataObject();
-    sprintf(msg, "%s%d", bdffontv_PointLabel, (fontinfo)->GetPointSize());
+    sprintf(msg, "%s%ld", bdffontv_PointLabel, (fontinfo)->GetPointSize());
     (chl)->ChangeItemByIndex( 0, msg);
 
     (fontinfo)->GetResolution( &x, &y);
     chl = (class chlist *) (self->resV)->GetDataObject();
-    sprintf(msg, "%s%d", bdffontv_ResolutionXLabel, x);
+    sprintf(msg, "%s%ld", bdffontv_ResolutionXLabel, x);
     (chl)->ChangeItemByIndex( 0, msg);
-    sprintf(msg, "%s%d", bdffontv_ResolutionYLabel, y);
+    sprintf(msg, "%s%ld", bdffontv_ResolutionYLabel, y);
     (chl)->ChangeItemByIndex( 1, msg);
 
     bdffontv_UpdateFontExtent(self, fontinfo);

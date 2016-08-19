@@ -39,7 +39,7 @@ public:
       
 	butter();
     
-      virtual void SetText(char *txt);
+      virtual void SetText(const char *txt);
       virtual void SetHitFunction(butter_hitfptr HitFunction);
       virtual void SetButtonFont(class fontdesc *f);
       virtual void SetRocks(char *r1, int r2);

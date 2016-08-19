@@ -610,7 +610,7 @@ void Extract_Stream_Name( register class zip		      *self, register char			     
 
   IN(Extract_Stream_Name);
   DEBUGst(Name,name);
-  if ( (int)(start_ptr = (char *)(rindex( name, '/' ) + 1)) == 1 )
+  if ( (long)(start_ptr = (char *)(rindex( name, '/' ) + 1)) == 1 )
     start_ptr = name;
   DEBUGst(Start-ptr,start_ptr);
   end_ptr = name + strlen( name );
@@ -634,7 +634,7 @@ void Extract_Stream_File_Name( register class zip		      *self, register char			
 
   IN(Extract_Stream_File_Name);
   DEBUGst(Name,name);
-  if ( (int)(start_ptr = (char *)(rindex( name, '/' ) + 1)) == 1 )
+  if ( (long)(start_ptr = (char *)(rindex( name, '/' ) + 1)) == 1 )
     start_ptr = name;
   end_ptr = name + strlen( name );
   *file_name = (char *) malloc( (end_ptr - start_ptr) + 5 );
@@ -660,7 +660,7 @@ void Extract_Stream_File_Path( register class zip		      *self, register char			
   *path_name = (char *) malloc( 257 );
   *(*path_name) = '\0';
   start_ptr = name;
-  if ( (int)(end_ptr = (char *)(rindex( name, '/' ))) != 0 )
+  if ( (long)(end_ptr = (char *)(rindex( name, '/' ))) != 0 )
     {
     strncpy( *path_name, start_ptr, end_ptr - start_ptr );
     *((*path_name) + (end_ptr - start_ptr) ) = '\0';

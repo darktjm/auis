@@ -1024,7 +1024,7 @@ zipedit_Handle_Font_Height_Selection( register class zipedit	      *self, regist
 	FontHeight += 2;
 	else
 	FontHeight = 2;
-        sprintf( msg, "%2d", FontHeight );
+        sprintf( msg, "%2ld", FontHeight );
       (self->data_object)->Set_Figure_Text(  figure, msg);
       }
     else
@@ -1034,7 +1034,7 @@ zipedit_Handle_Font_Height_Selection( register class zipedit	      *self, regist
 	FontHeight -= 2;
 	else
 	FontHeight = 144;
-        sprintf( msg, "%2d", FontHeight );
+        sprintf( msg, "%2ld", FontHeight );
       (self->data_object)->Set_Figure_Text(  figure, msg);
       }
     (self->view_object)->Draw_Figure(  figure, pane );
@@ -1163,7 +1163,7 @@ void Set_Sample( register class zipedit	      *self, register zip_type_pane	    
 
   IN(Set_Sample);
   figure = (self->data_object)->Figure(  "font_catalog_sample" );
-  sprintf( msg, "%s%d%s%s",
+  sprintf( msg, "%s%ld%s%s",
 	 (FontFamily) ? "andysans" : "andy",
 	 FontHeight,
 	 (FontBold) ? "b" : "",

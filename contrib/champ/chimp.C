@@ -112,7 +112,7 @@ long chimp::Write(FILE  *fp, long  id, int  level)
 	/* New write operation */
 	(this)->SetWriteID( id);
 	if (level>0) {
-	    fprintf(fp, "\\begindata{%s,%d}\n", (this)->GetTypeName(), (this)->UniqueID());
+	    fprintf(fp, "\\begindata{%s,%ld}\n", (this)->GetTypeName(), (this)->UniqueID());
 	}
 	for (cm = this->comment; cm; cm = cm->next) {
 	    fprintf(fp, "%s", cm->line); /* newline already there */
@@ -122,7 +122,7 @@ long chimp::Write(FILE  *fp, long  id, int  level)
 	    WriteOutEvent(fp, (struct eventnode *)li[i].rock);
 	}
 	if (level > 0) {
-	    fprintf(fp, "\\enddata{%s,%d}\n", (this)->GetTypeName(), (this)->UniqueID());
+	    fprintf(fp, "\\enddata{%s,%ld}\n", (this)->GetTypeName(), (this)->UniqueID());
 	}
     }
     return((this)->UniqueID());

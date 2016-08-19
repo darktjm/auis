@@ -67,7 +67,7 @@ ATKdefineRegistry(timeoday, dataobject, timeoday::InitializeClass);
 #ifndef NORCSID
 #endif
 static void UpdateTime(class timeoday  *self);
-static void WriteLine(FILE  *f, char  *l);
+static void WriteLine(FILE  *f, const char  *l);
 static char * GlomStrings(char  *s , char  *t);
 static char * ReadLine(FILE  *f);
 static char * EncodeFont(class timeoday  *self);
@@ -276,11 +276,11 @@ timeoday::SetFormat(char  *format)
   if (format != NULL) {
       this->format = NewString(format);
   } else {
-      this->format = environ::GetProfile(prof_namebuf);
+      const char *format = environ::GetProfile(prof_namebuf);
       if (this->format == NULL) {
 	  this->format = NewString("");
       } else {
-	  this->format = NewString(this->format);
+	  this->format = NewString(format);
       }
   }
   if (strcmp(this->format, "")==0) {
@@ -312,7 +312,7 @@ timeoday::SetFormat(char  *format)
 boolean
 timeoday::InitializeDefaults()
 {
-  char *fontfamily;
+  const char *fontfamily;
   int fonttype, fontsize;
   char prof_namebuf[100];
 
@@ -402,12 +402,12 @@ timeoday::Write(FILE  *fp, long  id, int  level)
   if (id != (this)->GetWriteID()) {
     /* New Write Operation */
     (this)->SetWriteID( id);
-    fprintf(fp, "\\begindata{%s,%d}\nDatastream version: %d\n",
+    fprintf(fp, "\\begindata{%s,%ld}\nDatastream version: %d\n",
 	    (this)->GetTypeName(), uniqueid, DS_VERSION);
 
     (this)->WriteDataPart( fp);
 
-    fprintf(fp, "\\enddata{%s,%d}\n", (this)->GetTypeName(), uniqueid);
+    fprintf(fp, "\\enddata{%s,%ld}\n", (this)->GetTypeName(), uniqueid);
   }
   return(uniqueid);
 }
@@ -492,7 +492,7 @@ timeoday::SetFont(class fontdesc  *f)
 
 
 static void
-WriteLine(FILE  *f, char  *l)
+WriteLine(FILE  *f, const char  *l)
 {
 /* 
   Output a single line onto the data stream, quoting
@@ -645,7 +645,7 @@ EncodeFont(class timeoday  *self)
   if (myfonttype & fontdesc_Italic) strcpy(type,"i");
   if (myfonttype & fontdesc_Fixed) strcpy(type,"f");
   if (buf = (char *)malloc(strlen(myfontname)+25)) {
-    sprintf(buf,"%s%d%s", myfontname, myfontsize, type);
+    sprintf(buf,"%s%ld%s", myfontname, myfontsize, type);
     return (buf);
   } else {
     return(NULL);

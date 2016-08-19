@@ -12,7 +12,7 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
     
-      static int ReadDatesFromChampPath(char *path)  ;
+      static int ReadDatesFromChampPath(const char *path)  ;
       static void ClearAllFlaggedEvents();
       static int FlagEventsMatchingDate(struct tm *thisdate)  ;
       static void IterateFlaggedEvents(champ_ifefptr proc, long rock);

@@ -44,7 +44,7 @@ public:
 	gofigapp();
 	virtual ~gofigapp();
 
-	char *inputfile;
+	const char *inputfile;
 	class gofig *dobj;
 };
 

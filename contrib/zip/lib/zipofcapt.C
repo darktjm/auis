@@ -392,7 +392,7 @@ char font_style_name[5];
       strcat( font_style_name, "b" );
     if ( font_style & fontdesc_Italic )
       strcat( font_style_name, "i" );
-    sprintf( buffer, "%s%s%d", font_family, font_style_name, font_size );
+    sprintf( buffer, "%s%s%ld", font_family, font_style_name, font_size );
 }
     DEBUGst(Font-name,buffer);
     (self->data_object)->Set_Figure_Font(  figure, buffer );

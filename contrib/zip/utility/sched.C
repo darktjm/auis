@@ -77,7 +77,7 @@ sched::Create( register char *stream_name )
 	    if ( status = (self->zipp)->Open_Stream( &self->stream,
 						   self->stream_name, 0 ) )
 	    { DEBUG(Open Failure);
-	    printf( "Schedule: Unable to Open %s\n", self->stream );
+	    printf( "Schedule: Unable to Open %s\n", self->stream_name );
 	    }
 	    else  status = (self->zipp)->Read_Stream(  self->stream );
 	}

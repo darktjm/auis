@@ -160,7 +160,7 @@ Allocate_Pane_Object( register class zipview		  *self, register zip_type_pane		 
           {
   register int				  status = zip_ok;
   register zip_type_pane_chain		  pane_link, prior_link;
-  static				  pane_serial = 1;
+  static int				  pane_serial = 1;
   char					  pane_name[257];
 
   IN(Allocate_Pane_Object);

@@ -170,8 +170,8 @@ enhancements:
 
 static char  debug = FALSE;      /* This debug switch is toggled with ESC-^D-D */
 #define DEBUG(s) {if (debug) {printf s ; fflush(stdout);}}
-#define ENTER(r) DEBUG(("Enter %s(0x%lx)\n", Stringize(r), this))
-#define LEAVE(r) DEBUG(("Leave %s(0x%lx)\n", Stringize(r), this))
+#define ENTER(r) DEBUG(("Enter %s(0x%p)\n", Stringize(r), this))
+#define LEAVE(r) DEBUG(("Leave %s(0x%p)\n", Stringize(r), this))
 
 static long const pagew = 612, pageh = 792;	  /* 8.5*11 */
 	/* this paper size is used only as arguments to DesiredPrintSize, so it
@@ -1178,7 +1178,7 @@ ReplaceCommand(gofigview *self, int code) {
 	gofig *dobj = (gofig *)self->dataobject;
 	if (dobj == NULL) return;
 	FILE *inf;
-	register c;
+	register int c;
 	int id;
 
 	inf = ((self)->GetIM())->FromCutBuffer();
@@ -1335,7 +1335,7 @@ static struct bind_Description EmbeddedBindings[]={
 	boolean
 gofigview::InitializeClass() {
 	/* establish board color */
-	char *colorstr;
+	const char *colorstr;
 	colorstr = environ::GetProfile("BoardColor");
 	if (colorstr == NULL) colorstr = "#FFD29B";   /* 255, 210, 155 */
 	BoardColor = NewString(colorstr);
@@ -1494,7 +1494,7 @@ gofigview::LoseInputFocus() {
 	void 
 gofigview::FullUpdate(enum view_UpdateType   type, 
 		long   left , long   top , long   width , long   height) {
-	DEBUG(("FullUpdate(%d, %d, %d, %d, %d)\n", type, 
+	DEBUG(("FullUpdate(%d, %ld, %ld, %ld, %ld)\n", type, 
 		left, top, width, height));
 	if (type == view_Remove  
 			||  GetLogicalWidth() == 0 
@@ -1535,7 +1535,7 @@ gofigview::Hit(enum view_MouseAction   action,
 			long   x , long   y , long   num_clicks) {
 	gofig *dobj = (gofig *)dataobject;
 	boolean newselection = FALSE;
-	DEBUG(("Hit at (%d, %d) type %d\n", x, y, action));
+	DEBUG(("Hit at (%ld, %ld) type %d\n", x, y, action));
 	if (action == view_NoMouseEvent)
 		return (view *)this;
 	if (! OnScreen) return NULL;
@@ -1649,7 +1649,7 @@ gofigview::Hit(enum view_MouseAction   action,
 	view_DSattributes
 gofigview::DesiredSize(long  width, long  height, enum view_DSpass  pass, 
 			long  *desiredWidth, long  *desiredHeight) {
-	DEBUG(("DesiredSize(...%d, %d, %d...)\n", width, height, pass));
+	DEBUG(("DesiredSize(...%ld, %ld, %d...)\n", width, height, pass));
 	gofig *dobj = (gofig *)dataobject;
 	unsigned edges;
 	dobj->getedges( & edges );
@@ -1670,7 +1670,7 @@ gofigview::DesiredSize(long  width, long  height, enum view_DSpass  pass,
 	*desiredWidth = mytrunc( colwidth * (dobj->width + addinx));
 	*desiredHeight = mytrunc( colwidth * vres * (dobj->height + addinx)
 				/ (WTOHRATIO * hres) );
-	DEBUG(("Leave DesiredSize: %d x %d\n", 
+	DEBUG(("Leave DesiredSize: %ld x %ld\n", 
 			*desiredWidth, *desiredHeight));
 	return view_HeightFlexible | view_WidthFlexible;
 }
@@ -2140,7 +2140,7 @@ gofigview::PrintPSDoc(FILE *outfile, long pagew, long pageh) {
 	print::PSNewPage(1);
 
 	DesiredPrintSize(pagew, pageh, view_NoSet, &dw, &dh);
-	fprintf(outfile, "%d %d translate\n",  (pagew-dw)/2, (pageh-dh)/2);
+	fprintf(outfile, "%ld %ld translate\n",  (pagew-dw)/2, (pageh-dh)/2);
 
 	GeneratePostScript(outfile, (gofig *)dataobject, "", dw, dh);
 }
@@ -2170,7 +2170,7 @@ gofigview::Print(FILE *file, char *processor, char *finalFormat, boolean topLeve
 
 	if (topLevel) {
 		/* center image on page */
-		fprintf(file, "%s %d %d translate\n", prefix,
+		fprintf(file, "%s %ld %ld translate\n", prefix,
 			(pagew - wpts)/2, (pageh-hpts)/2);
 	}
 
@@ -2191,11 +2191,11 @@ gofigview::Print(FILE *file, char *processor, char *finalFormat, boolean topLeve
 	static void 
 printdata(gofigview *self, int code) {
 	gofig *dobj = (gofig *)self->dataobject;
-	printf("visacc:  %d  currow,col:  %d %d  sel: 0x%lx\n",
+	printf("visacc:  %d  currow,col:  %d %d  sel: 0x%p\n",
 		 self->visibleaccnum,	self->curspotrow, self->curspotcol,
 		selectedspot( self ));
-	printf("gofig data object at 0x%lx\n", dobj);
-	printf( "board is %dx%d  (printcolwidth: %d)  edges lrtb:%c%c%c%c\n",
+	printf("gofig data object at 0x%p\n", dobj);
+	printf( "board is %dx%d  (printcolwidth: %ld)  edges lrtb:%c%c%c%c\n",
 			dobj->width, dobj->height, dobj->printcolwidth, 
 			dobj->edges&LEFTedge?'|':'.',
 			dobj->edges&RIGHTedge?'|':'.', 
@@ -2205,11 +2205,11 @@ printdata(gofigview *self, int code) {
 	struct stone *s0 = &(*dobj)[0];
 	for (i = 0; i < dobj->nstones(); i++) {
 		struct stone *s = &(*dobj)[i];
-		printf( "	0x%lx  [%d]:  %c @ (%d,%d) ", 
+		printf( "	0x%p  [%ld]:  %c @ (%d,%d) ", 
 				s, s-s0, s->color, s->row, s->col );
 		if (s->note < 0) printf( "%c", -s->note ); 
 		else if (s->note > 0) printf( "%d", s->note );
- 		printf( "    accnum: %d\n", s->accnum );
+ 		printf( "    accnum: %ld\n", s->accnum );
 	}
 	fflush(stdout);
 }

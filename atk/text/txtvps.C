@@ -104,8 +104,8 @@ static void DeleteWordsFromFootThing(struct textps_simple_layout_state *stat, lo
 static void AddSpecialLineToLayout(struct textps_layout *dest, long lineflag, long lineheight, long colnum);
 static class style *MagicFootnoteStyle(struct textps_slurp *slurp);
 static void PrintPSText(class textview *self, FILE *outfile, long width, long height, long firstpagenum, boolean allowsubs);
-static void DeleteTextviewProc(void *rock);
-static void DeleteLayoutPlanProc(void *rock);
+static void DeleteTextviewProc(const void *rock);
+static void DeleteLayoutPlanProc(const void *rock);
 
 void textview_DestroyPrintingLayout(class textview  *txtv);
 void textview_DestroyPrintingLayoutPlan(class textview  *txtv);
@@ -1398,14 +1398,14 @@ static void FinalizeWordSlurper(struct textps_slurp  *slurp)
     free(slurp);
 }
 
-static void DeleteTextviewProc(void *rock)
+static void DeleteTextviewProc(const void *rock)
 {
     class textview *tv;
     tv = (class textview *)rock;
     tv->Destroy();
 }
 
-static void DeleteLayoutPlanProc(void *rock)
+static void DeleteLayoutPlanProc(const void *rock)
 {
     class textps_layout_plan *pl;
     pl = (class textps_layout_plan *)rock;

@@ -68,7 +68,7 @@ public:
 	 long Read(FILE *file, long id)  ;
 	 long Write(FILE *file, long writeID, int level)  ;
     
-        virtual int StartProcess(char **args)  ;
+        virtual int StartProcess(const char **args)  ;
 	virtual char * GrabPrevCmd(char *str)  ;
 	virtual char * GrabNextCmd(char *str)  ;
 	virtual boolean EnterCmd(char *string)  ;

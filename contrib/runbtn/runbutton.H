@@ -36,7 +36,7 @@ class runbutton : public  sbutton {
     void ExecuteNess(runbuttonview *rbv, char *cmd, int argc, char **argv);
     static void ChildDone(int pid, long rbvc, WAIT_STATUS_TYPE *status);	// zombie handler
 
-    static char *commandPath;
+    static const char *commandPath;
     static int numPaths;
     static char **runPath;
 };

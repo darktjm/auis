@@ -56,8 +56,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RC
 #define	BIGFILE_ROW	0
 #define	WHOIS_ROW	8
 
-extern char *AndrewDir(), *GetSUser(), *getenv(), *copy();
-
 extern char VUI_editor[], *StripWhiteEnds(), CUI_VersionString[]; 
 extern char ENT_filename[], VUI_printer[];
 extern char *VUI_HelpFile, VUI_bccto[], sep_line[];

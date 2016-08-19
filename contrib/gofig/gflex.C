@@ -96,8 +96,8 @@ makegap( gflex *f, int i, int len ) {
 		int newsize = /* itrunc */( 1.4*(f->n+f->gaplen) );
 		if (newsize < len+f->n) 
 			newsize = /* itrunc */( 1.2*(len+f->n) );
-		struct ELTTYPE *telts = 
-				(struct ELTTYPE *)malloc(newsize * esize);
+		ELTTYPE *telts = 
+				(ELTTYPE *)malloc(newsize * esize);
 		const int newgaplen = newsize - f->n;
 
 		/* not using realloc() because 
@@ -150,7 +150,7 @@ makegap( gflex *f, int i, int len ) {
 
 gflex::gflex() {
 	const int INITIALSIZE = 100;
-	elts = (struct ELTTYPE *)malloc( INITIALSIZE * sizeof(ELTTYPE) );
+	elts = (ELTTYPE *)malloc( INITIALSIZE * sizeof(ELTTYPE) );
 	gaplen = INITIALSIZE;
 	n = 0;
 	gaploc = 0;

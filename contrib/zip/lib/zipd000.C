@@ -353,7 +353,7 @@ zip::Contextual_Figure_FillBG_Color( register zip_type_figure	     figure, regis
 
 
 class fontdesc *
-zip::Define_Font( register char *font_name, register short             	  *font_index )
+zip::Define_Font( register const char *font_name, register short             	  *font_index )
         {
   register int			  loop_index;
   char				  family_name[257];
@@ -770,7 +770,7 @@ int symtab_add (register symtab_type  *symtab, register unsigned char *symbol, r
 
  /* allocate and initialize entry */
     entry = (symtab_entry_type *) palloc((pool_type *) symtab->pool, sizeof (symtab_entry_type));
-    if ((int) entry <= 0) {
+    if (!entry) {
 	return (-1);
     }
     entry->image = symbol;
