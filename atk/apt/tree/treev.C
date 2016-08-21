@@ -300,7 +300,8 @@ struct treev_instance
 #define  BlackTile		      (self->instance->black_tile)
 #define  DottedTile		      (self->instance->dotted_tile)
 
-#define  UpdateScrollbars	      {PendingUpdate=NULL;\
+// Why does this forget PendingUpdate?  Weird.
+#define  UpdateScrollbars	      {/* PendingUpdate=NULL; */\
 				       if(ViewLinked) (self)->WantUpdate(self);}
 
 typedef  struct node_shadow	     *node_shadow_type;
@@ -1096,7 +1097,10 @@ treev::Update( )
   IN(treev_Update);
   if ( ViewLinked && PendingUpdate )
     {
-    PendingUpdate( this );
+    /* probably don't want a loop on this.. */
+    treev_updatefptr pu = PendingUpdate;
+    PendingUpdate = NULL;
+    pu( this );
     }
   OUT(treev_Update);
   }

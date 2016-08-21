@@ -234,6 +234,9 @@ text::~text()
     }
     if (this->templateName != NULL)
         free(this->templateName);
+    while(this->nobjs > 0)
+	DelObj(this, this->objs[0]);
+    free(this->objs);
 }
 
 

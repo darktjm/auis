@@ -377,6 +377,7 @@ static void BindFunction(class init  *init, char  **args, boolean  forceLoad, en
 /* This next if statement handles the special case of a meu item deletion. */
     if (*function != '\0') {
 /* proctable_DefineProc does not allocate storage for its arguments... */
+/* neither does it free them, so this is a leak */
         tempString = (char *) malloc(strlen(function) + 1);
         strcpy(tempString, function);
         function = tempString;

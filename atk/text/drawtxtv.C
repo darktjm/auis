@@ -1167,26 +1167,14 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
     if(spots) *spots=NULL;
     
     if(type==textview_FullLineRedraw || type==textview_PartialLineRedraw || type==textview_MoveView) (this)->SetTransferMode( graphic_COPY);
+    memset(info, 0, sizeof(*info));
     rectangle_EmptyRect(&info->insetrect);
     info->xDim = xSize;
-    info->totalWidth = 0;
-    info->rubberSpaces = 0;
-    info->lineLength = 0;
     info->markLength = -1;
-    info->lineBelow = 0;
-    info->textBelow = 0;
-    info->lineAbove = 0;
-    info->continued = FALSE;
-    info->foundView = NULL;
     zapMe = -1;
     info->cursorY = y;
     info->endOfPara = TRUE;
-    info->lineIP = 0;
     pos = (currentLine)->GetPos();     /* The starting position */
-    info->sawTab = FALSE;
-    info->predrawnEnd = 0;
-    info->itemAtDot = NULL;
-    info->clp = NULL;
 
     /* Initialize the statevector since GenerateLineItems will assume it is initialized */
     text::InitStateVector(&info->sv);

@@ -461,7 +461,8 @@ frame::~frame()
     delete this->messageLine;
     delete this->dialogLine;
     delete this->octcursor;	
-    delete this->arrowcursor;	
+    delete this->arrowcursor;
+    delete this->mykeystate;
     if(this->menulist) delete this->menulist;
     if(this->defaultmenulist) delete this->defaultmenulist;
     if (this->title != NULL)

@@ -1,9 +1,7 @@
-- figure out why pref existence shrinks windows:
-    default is 500x500, but I had 1280x1024 in ~/.Xdefaults (which is
-    ignored when .preferences exists)
-- org: graphic update on delete and rename is broken (requires ctrl-L)
-  issue appears to be in observer of treev.C
-- whichdo doesn't recognize static objects
+- org/treev: unfolded expands to left & right, but doesn't shift left
+  side if needed (i.e., left is severely cut off) if lots of items,
+  and lots of blank space to right (similar for horizontal, but for some
+  reason it allows moving scrollbar into negative area)
 - scrolling fixes:
   - enable scroll wheel
   - continuous update when dragging bar

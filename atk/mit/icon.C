@@ -60,11 +60,15 @@ icon::icon()
     this->child = (class dataobject *)0;
     this->width = 200;
     this->height = 100;
-    this->title = "";
+    this->title = strdup("");
     THROWONFAILURE( TRUE);
 }
 
 
+icon::~icon()
+{
+    free(this->title);
+}
 
 
 void
@@ -104,7 +108,8 @@ icon::GetChild()
 void
 icon::SetTitle(const char  * title)
 {
-    this->title = strdup(title); /* leak */
+    free(this->title);
+    this->title = strdup(title);
     (this)->NotifyObservers( icon_TitleChanged);
 }   
 

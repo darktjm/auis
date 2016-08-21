@@ -147,7 +147,7 @@ long Read_Body( register class org		      *self, register FILE			      *file )
 				      description_increment = 32;
   char				      string[4096], *ptr, *end_ptr,
 				     *count_ptr, counter[32];
-  register char			     *description_ptr = NULL, *description;
+  register char			     *description;
   register tree_type_node	      parent = NULL, child = NULL, node;
   class text			     *textp = NULL;
 
@@ -202,11 +202,12 @@ long Read_Body( register class org		      *self, register FILE			      *file )
 	*count_ptr = 0;
 	count = atoi( counter );
 	DEBUGdt(Count,count);
-	description_ptr = description = (char *) malloc( count );
+	description = (char *) malloc( count );
 	fread(description, count, 1, file);
 	{
 	  FILE *f = tmpfile();
 	  fwrite(description, count, 1, f);
+	  free(description);
 	  fputc('\n', f);
 	  rewind(f);
 	        {
@@ -218,7 +219,6 @@ long Read_Body( register class org		      *self, register FILE			      *file )
 	  fclose(f);
 	}
 	(Tree)->SetNodeDatum(  node, (long) textp );
-	DEBUGst(Description, description);
 	continue;
       case ']':
 	if(ptr > string)

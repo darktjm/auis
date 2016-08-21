@@ -160,6 +160,7 @@ main(int  argc,char  **argv)
 	    exit(-1);
 	}
 	else {
+	    doStaticLoads();
 	    if(ATK::IsLoaded(*argv)) {
 		printf("%s is statically loaded.\n", *argv);
 	    }

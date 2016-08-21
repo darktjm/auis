@@ -126,6 +126,7 @@ tree::tree( )
   DEBUGst(RCSID,rcsid);
   RootNode = UnHookedNodes = NULL;
   TREEMODIFIED = false;
+  this->FreeNodeDatum = NULL;
   OUT(tree_InitializeObject);
   THROWONFAILURE( TRUE);
   }

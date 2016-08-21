@@ -41,6 +41,7 @@ public:
 
   
 	icon();
+	virtual ~icon();
   
 	static boolean InitializeClass();
 	static boolean atk_inited;
@@ -58,7 +59,7 @@ public:
 
     class dataobject * child;
     long width, height;
-    const char * title;
+    char * title;
 };
 
 #endif /* _icon_H_ */

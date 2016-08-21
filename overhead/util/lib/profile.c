@@ -63,7 +63,7 @@ static char *firstProfileFileName = NULL;
 static struct configurelist *
 openprofile(const char *filename, const char *defaultname, int savefname)
 {
-    char *pl=getenv(filename);
+    char *pl0, *pl=getenv(filename);
     const char *home=(char *) gethome(NULL);
     char *sep;
 #ifdef DOS_STYLE_PATHNAMES
@@ -92,6 +92,7 @@ openprofile(const char *filename, const char *defaultname, int savefname)
 	}
 	else pl=strdup(defaultname);
     }
+    pl0 = pl;
 
     do{
 	const char *name;
@@ -131,11 +132,12 @@ openprofile(const char *filename, const char *defaultname, int savefname)
 		profileFileName = (char *) malloc(strlen(tmpFileName) + 1);
 		strcpy(profileFileName, tmpFileName);
 	    }
+	    free(pl0);
 	    return cl;
 	}
 
     } while(sep!=NULL);
-    free(pl);
+    free(pl0);
 
     return NULL;
 

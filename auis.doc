@@ -667,7 +667,7 @@ white
 }\enddata{text,6846416}
 ]
       andrew.rls
-      [282
+      [305
 \begindata{text,6848624}
 \textdsversion{12}
 \begindata{link,6849360}
@@ -685,8 +685,10 @@ black
 white
 \enddata{link,6849360}
 \enddata{link,6849360}
-\view{linkview,6849360,10,0,0\
-}\enddata{text,6848624}
+\view{linkview,6849360,10,0,0}
+
+Standard Imake rules.\
+\enddata{text,6848624}
 ]
       andyenv.h
       [280

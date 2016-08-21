@@ -103,11 +103,9 @@ char *path;		/* Pathname of package being loaded */
  * Note that the loss of correct bp and len info is not to big a deal since
  * it is mostly just used for debugging.
  */
-    dummy = (char *) malloc(1);
-    if (dummy == NULL)
-        return NULL;
-    *bp = dummy;
-    *lenP = 1;
+/* Then again, these days, doindex (??) isn't even called, so this just leaks */
+    *bp = NULL;
+    *lenP = 0;
 
     status = dlopen(path, 1);
     if (status == 0) {
