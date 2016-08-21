@@ -3,11 +3,12 @@
     ignored when .preferences exists)
 - org: graphic update on delete and rename is broken (requires ctrl-L)
   issue appears to be in observer of treev.C
+- whichdo doesn't recognize static objects
 - scrolling fixes:
   - enable scroll wheel
   - continuous update when dragging bar
 - fix lack of updates when resizing windows
-- fix pseudo-tty allocation to use ptmx
+- fix pseudo-tty allocation to use ptmx (overhead/util/lib/getpty.c)
 - fix contrib/tm to use termios, etc.
 - tests all apps, all insets, all docs, etc.
   - squash any crashes
@@ -39,3 +40,5 @@ Long-term:
   - truetype font support
   - make index entries insets
   - make entire beast literate
+  - undo
+  - freedesktop.org integration
