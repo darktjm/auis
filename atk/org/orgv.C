@@ -408,6 +408,8 @@ orgv::orgv( )
   }
   if ( status == true ) { DEBUG(Created Suite);
     Description = new text;
+    Description->InsertCharacters(0, "Add a root node", 15);
+    Description->SetReadOnly(TRUE);
     DescriptionView = new textview;
     (DescriptionView)->SetDataObject(  Description );
     DescriptionViewScroll = (DescriptionView )->GetApplicationLayer( );
@@ -656,6 +658,8 @@ Add_Command( register class orgv  *self )
 	  (self)->Announce(  "" );
 	  (Tree)->SetNodeName(  node, apts::StripString( reply ) );
 	  (Tree)->NotifyObservers(  0 );
+	  if(node == Tree->RootNode())
+	      Prepare_Description( self, node );
 	  (Org )->SetModified( );
 	  if ( PaletteExposed )
 	      Activate( self );
@@ -674,11 +678,10 @@ Delete_Command( register class orgv  *self )
   register struct tree_node *current_node = (TreeView )->CurrentNode( );
   IN(Delete_Command);
   if ( current_node ) {
+      (DescriptionView)->SetDataObject(  Description );
       (Tree)->SetNotificationCode(  tree_NodeDestroyed );
       (Tree)->SetNotificationNode(  current_node );
       (Tree)->NotifyObservers(  0 );
-      if((Tree)->NodeDatum( current_node))
-	  ((class text *) Tree->NodeDatum( current_node))->Destroy();
       (Tree)->DestroyNode(  current_node );
       (Org )->SetModified( );
       if ( PaletteExposed  &&  (Tree)->NodeCount(  (Tree )->RootNode( ) ) == 0 ) {
@@ -968,9 +971,15 @@ void Prepare_Description( register class orgv  *self, register struct tree_node 
   IN(Prepare_Description);
   if ( DescriptionExposed ) {
     (self )->UseWaitCursor( );
-    if (( textp = (class text *) (Tree)->NodeDatum( node)) == NULL )
+    if (( textp = (class text *) (Tree)->NodeDatum( node)) == NULL ) {
 	(Tree)->SetNodeDatum(  node, (long) (textp = new text));
-    (DescriptionView)->SetDataObject( textp);
+	if(!Tree->RootNode()) { /* some sort of pseudo-node in empty tree */
+	    textp->InsertCharacters(0, "Add a root node", 15);
+	    textp->SetReadOnly(TRUE);
+	}
+    }
+    if(DescriptionView->GetDataObject() != textp)
+      (DescriptionView)->SetDataObject( textp);
     DescriptionLastModified = (textp )->GetModified( );
     (self )->UseNormalCursor( );
   }

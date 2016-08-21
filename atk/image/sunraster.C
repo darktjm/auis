@@ -279,18 +279,18 @@ sunraster::Load( char  *fullname, FILE  *fp )
   }
   switch (size = fread((byte*)&header, sizeof(struct rheader), 1, f)) {
       case -1:
-	  fclose(f);
+	  if(!fp) fclose(f);
 	  return(-1);
 
       case 1 /* sizeof(struct rheader) */:
 	  if (memToVal(header.magic, 4) != RMAGICNUMBER) {
-	      fclose(f);
+	      if(!fp) fclose(f);
 	      return(-1);
 	  }
 	  break;
 
       default:
-	  fclose(f);
+	  if(!fp) fclose(f);
 	  return(-1);
   }
 
@@ -415,7 +415,7 @@ sunraster::Load( char  *fullname, FILE  *fp )
 	sunread(f, &fillchar, fill, enc);
     }
   }
-  fclose(f);
+  if(!fp) fclose(f);
   return(0);
 }
 

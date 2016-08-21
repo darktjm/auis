@@ -187,7 +187,7 @@ faces::Load( char  *fullname, FILE  *fp )
   }
   if (!w || !h || !d) {
       if(!id || !ih || !id) {
-	  fclose(f);
+	  if(!fp) fclose(f);
 	  printf("couldn't get dimensions\n");
 	  return(-1);
       }
@@ -228,7 +228,7 @@ faces::Load( char  *fullname, FILE  *fp )
       *(dataptr++)= value;
     }
   }
-  fclose(f);
+  if(!fp) fclose(f);
   return(0);
 }
 

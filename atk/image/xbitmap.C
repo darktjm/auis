@@ -171,7 +171,7 @@ xbitmap::Load( char  *fullname, FILE  *fp)
 
   while (fgets((char *)line, MAX_SIZE, f)) {
       if (strlen(line) == MAX_SIZE-1) {
-	  fclose(f);
+	  if(!fp) fclose(f);
 	  return(-1);
       }
 
@@ -205,7 +205,7 @@ xbitmap::Load( char  *fullname, FILE  *fp)
   }
 
   if (!w || !h) {
-      fclose(f);
+      if(!fp) fclose(f);
       return(-1);
   }
   (this)->newBitImage( w, h);
@@ -227,7 +227,7 @@ xbitmap::Load( char  *fullname, FILE  *fp)
 	  for (x = 0; x < dlinelen; x++) {
 	      if ((value = nextInt(f)) < 0) {
 		  (this)->Reset();
-		  fclose(f);
+		  if(!fp) fclose(f);
 		  return(-1);
 	      }
 	      *(dataptr++) = value >> 8;
@@ -241,14 +241,14 @@ xbitmap::Load( char  *fullname, FILE  *fp)
       for (y = 0; y < h; y++)
 	  for (x = 0; x < linelen; x++) {
 	      if ((value = nextInt(f)) < 0) {
-		  fclose(f);
+		  if(!fp) fclose(f);
 		  return(-1);
 	      }
 	      *(dataptr++) = (byte) value;
 	  }
   }
 
-  fclose(f);
+  if(!fp) fclose(f);
   return(0);
 }
 

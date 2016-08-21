@@ -1,5 +1,7 @@
 addfiletype .c ctext
+addfiletype .C ctext
 addfiletype .h ctext
+addfiletype .H ctext
 addfiletype .eq eq
 addfiletype .fad fad
 addfiletype .raster raster

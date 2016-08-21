@@ -181,13 +181,13 @@ mcidas::Load( char  *fullname, FILE  *fp )
   switch (fread((byte *)&dir, sizeof(struct area_dir), 1, f)) {
       case -1:
 	  perror("mcidasLoad");
-	  fclose(f);
+	  if(!fp) fclose(f);
 	  return(-1);
 
       case 1:
 	  if(dir.type != 4) {
 	      if(dir.type != 67108864) {
-		  fclose(f);
+		  if(!fp) fclose(f);
 		  return(-1);
 	      } else {
 		  doswap = 1;
@@ -196,7 +196,7 @@ mcidas::Load( char  *fullname, FILE  *fp )
 	  break;
 
       default:
-	  fclose(f);
+	  if(!fp) fclose(f);
 	  return(-1);
   }
 
@@ -212,7 +212,7 @@ mcidas::Load( char  *fullname, FILE  *fp )
 
   /* skip the nav */
   if (fread((byte*) &nav, sizeof(struct navigation), 1, f) != 1) {
-      fclose(f);
+      if(!fp) fclose(f);
       return(-1);
   }
 
@@ -236,7 +236,7 @@ mcidas::Load( char  *fullname, FILE  *fp )
 
   fread((this)->Data(), sizeof(byte), dir.esiz * dir.lsiz, f);
 
-  fclose(f);
+  if(!fp) fclose(f);
   return(0);
 }
 

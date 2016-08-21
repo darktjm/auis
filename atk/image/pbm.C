@@ -230,7 +230,7 @@ pbm::Load( char  *fullname, FILE  *fp )
 
   pbm_type = isPBM(f, fullname, &width, &height, &maxval);
   if (pbm_type == NOTPBM) {
-    fclose(f);
+    if(!fp) fclose(f);
     return(-1);
   }
   switch (pbm_type) {
@@ -244,12 +244,12 @@ pbm::Load( char  *fullname, FILE  *fp )
 	      for (x = 0; x < width; x++) {
 		  do {
 		      if ((src = pbmReadChar(f)) < 0) {
-			  fclose(f);
+			  if(!fp) fclose(f);
 			  return(-1);
 		      }
 		      if (IntTable[src] == NOTINT) {
 			  printf("%s: Bad image data\n", fullname);
-			  fclose(f);
+			  if(!fp) fclose(f);
 			  return(-1);
 		      }
 		  } while (IntTable[src] < 0);
@@ -265,7 +265,7 @@ pbm::Load( char  *fullname, FILE  *fp )
 			  break;
 		      default:
 			  printf("%s:Bad image data\n", fullname);
-			  fclose(f);
+			  if(!fp) fclose(f);
 			  return(-1);
 		  }
 	      }
@@ -286,7 +286,7 @@ pbm::Load( char  *fullname, FILE  *fp )
 	      if (srcmask != 0x80) {
 		  srcmask = 0x80;
 		  if ((numread < numbytes) && ((src = fgetc(f)) == EOF)) {
-		      fclose(f);
+		      if(!fp) fclose(f);
 		      return(-1);
 		  }
 		  numread++;
@@ -301,7 +301,7 @@ pbm::Load( char  *fullname, FILE  *fp )
 		  if (! (srcmask >>= 1)) {
 		      srcmask = 0x80;
 		      if ((numread < numbytes) && ((src = fgetc(f)) == EOF)) {
-			  fclose(f);
+			  if(!fp) fclose(f);
 			  return(-1);
 		      }
 		      numread++;
@@ -318,7 +318,7 @@ pbm::Load( char  *fullname, FILE  *fp )
 	  srcmask = 0x80;
 	  destmask = 0x80;
 	  if ((src = fgetc(f)) == EOF) {
-	      fclose(f);
+	      if(!fp) fclose(f);
 	      return(-1);
 	  }
 	  numread = 1;
@@ -337,7 +337,7 @@ pbm::Load( char  *fullname, FILE  *fp )
 		  if (! (srcmask >>= 1)) {
 		      srcmask = 0x80;
 		      if ((numread < numbytes) && ((src= fgetc(f)) == EOF)) {
-			  fclose(f);
+			  if(!fp) fclose(f);
 			  return(-1);
 		      }
 		      numread++;
@@ -367,7 +367,7 @@ pbm::Load( char  *fullname, FILE  *fp )
 /* read in the image in a chunk
  */
 		  if(fread((this)->Data(), sizeof(byte), size, f) != size) {
-		      fclose(f);
+		      if(!fp) fclose(f);
 		      (this)->Reset();
 		      return(-1);
 		  }
@@ -381,7 +381,7 @@ pbm::Load( char  *fullname, FILE  *fp )
 	      case ITRUE:
 		  for (y = 0; y < size; y++) {
 		      if ((src = fgetc(f)) == EOF) {
-			  fclose(f);
+			  if(!fp) fclose(f);
 			  (this)->Reset();
 			  return(-1);
 		      }
@@ -411,7 +411,7 @@ pbm::Load( char  *fullname, FILE  *fp )
 	  size = height * width;
 	  for (y = 0; y < size; y++) {
 	      if ((src = pbmReadInt(f)) < 0) {
-		  fclose(f);
+		  if(!fp) fclose(f);
 		  return(-1);
 	      }
 	      else {
@@ -435,7 +435,7 @@ pbm::Load( char  *fullname, FILE  *fp )
 	  (this)->newTrueImage( width, height);
 	  size = height * width * 3;
 	  if (fread((this)->Data(), sizeof(byte), size, f) != size) {
-	      fclose(f);
+	      if(!fp) fclose(f);
 	      (this)->Reset();
 	      return(-1);
 	  }
@@ -454,7 +454,7 @@ pbm::Load( char  *fullname, FILE  *fp )
 		  ((grn = pbmReadInt(f)) == EOF) ||
 		  ((blu = pbmReadInt(f)) == EOF)) 
 	      {
-		  fclose(f);
+		  if(!fp) fclose(f);
 		  return(-1);
 	      }
 	      *(destptr++) = PM_SCALE(red, maxval, 0xff);
@@ -463,7 +463,7 @@ pbm::Load( char  *fullname, FILE  *fp )
 	  }
 	  break;
   }
-  fclose(f);
+  if(!fp) fclose(f);
   return(0);
 }
 

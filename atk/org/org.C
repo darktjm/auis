@@ -83,9 +83,8 @@ boolean Org_Debug = 0;
 #define debug Org_Debug
 
 ATKdefineRegistry(org, apt, NULL);
-static long Free_Elements( register char *self, register class tree  *tree, register tree_type_node  node, char *datum );
 static long Read_Body( register class org		      *self, register FILE			      *file );
-static long Write_Body( register class org  *self, register FILE  *file );
+static long Write_Body( register class org  *self, register FILE  *file, long writeID );
 static void Strip( register char  *string );
 
 
@@ -93,6 +92,14 @@ char *
 org::ViewName( )
   {
     return ( "orgv" );
+}
+
+static
+void FreeDatum( tree_type_node node, void *user)
+{
+  class org *self = (class org *)user;
+  if ( Tree->NodeDatum(  node ) )
+    delete (class text *)(Tree)->NodeDatum(  node );
 }
 
 org::org( )
@@ -106,26 +113,17 @@ org::org( )
     printf( "ORGVIEW: Unable to Create AptTree Object\n" );
     status = false;
   }
+  Tree->DestroyDatum(FreeDatum, this);
   OUT(org_InitializeObject);
   THROWONFAILURE((status));
-}
-
-static
-long Free_Elements( register char *self, register class tree  *tree, register tree_type_node  node, char *datum )
-      {
-  if ( (tree)->NodeDatum(  node ) )
-    free( (char *) ((tree)->NodeDatum(  node )) );
-  return(0);
 }
 
 org::~org( )
     {
   class org *self=this;
   IN(org_FinalizeObject );
-  if ( Tree ) {
-      (Tree)->Apply(  (Tree )->RootNode( ), Free_Elements, (char *) this, (char *) 0 );
+  if ( Tree )
       (Tree )->Destroy();
-  }
   OUT(org_FinalizeObject );
 }
 
@@ -170,12 +168,16 @@ long Read_Body( register class org		      *self, register FILE			      *file )
 	      { DEBUG(ERROR Creating RootNode);/*===*/  }
 	  }
 	}
-        break;
+        continue;
       case '{':
+	if(ptr > string)
+	    break;
 	braces++;
 	if ( child )  parent = child;
-        break;
+        continue;
       case '}':
+	if(ptr > string)
+	    break;
 	braces--;
 	if ( ptr > string ) {
 	  Strip( ptr = string );
@@ -189,8 +191,10 @@ long Read_Body( register class org		      *self, register FILE			      *file )
 	  child = parent;
 	  parent = (Tree)->ParentNode(  parent );
 	}
-        break;
+        continue;
       case '[':
+	if(ptr > string)
+	    break;
 	brackets++;
 	count_ptr = counter;
 	while ( (c = getc( file ))  &&  c != EOF  && c != '\n' )
@@ -198,64 +202,46 @@ long Read_Body( register class org		      *self, register FILE			      *file )
 	*count_ptr = 0;
 	count = atoi( counter );
 	DEBUGdt(Count,count);
-	description_size = 32;
-	description_length = 0;
-	description_ptr = description = (char *) malloc( description_size );
-	while ( (c = getc( file ))  &&  --count  &&  c != EOF ) {
-	  *description_ptr++ = c;
-	  description_length++;
-	  if ( description_length == (description_size-1) ) {
-	    *description_ptr = 0;
-	    DEBUGst(Description,(Tree)->NodeDatum(  node ));
-	    description_size += description_increment;
-	    description_ptr = description = (char *) realloc( description, description_size );
-	    description_ptr += description_length;
-	  }
-	}
-	*description_ptr = 0;
+	description_ptr = description = (char *) malloc( count );
+	fread(description, count, 1, file);
 	{
-	    char fName[MAXPATHLEN], seed[MAXPATHLEN];
-	    FILE *f;
-	    sprintf(seed, "/tmp/.%d.%d", getuid(), getpid());
-	    strcpy(fName, tmpnam(seed));
-	    if(f = fopen(fName, "w")) {
-		fputs(description, f);
-		fputc('\n', f);
-		fclose(f);
-		if(f = fopen(fName, "r")) {
+	  FILE *f = tmpfile();
+	  fwrite(description, count, 1, f);
+	  fputc('\n', f);
+	  rewind(f);
+	        {
 		    long objID;
-		    filetype::Lookup(f, fName, &objID, NULL);
+		    filetype::Lookup(f, NULL, &objID, NULL);
 		    textp = new text;
 		    (textp)->Read( f, objID);
-		    unlink(fName);
 		}
-		else fprintf(stderr, "org: couldn't open temp file for reading.\n");
-	    }
-	    else fprintf(stderr, "org: couldn't open temp file for writing.\n");
+	  fclose(f);
 	}
 	(Tree)->SetNodeDatum(  node, (long) textp );
 	DEBUGst(Description, description);
-	break;
+	continue;
       case ']':
+	if(ptr > string)
+	    break;
 	brackets--;
-	break;
-      case '\\':
-	while ( (c = getc( file )) != '\n'  &&  c != EOF ) ;
+	continue;
+      case '\\': /* no idea what old behavior was supposed to do */
+	if(ptr > string)
+	    break;
+	if ( (c = getc( file )) != '\n'  &&  c != EOF ) break;
 	done = true;
-	break;
+	continue;
       case EOF:
 	done = true;
-        break;
-      default:
-	if ( ptr < end_ptr ) {
+        continue;
+    }
+      if ( ptr < end_ptr ) {
 	  if ( (ptr > string)  ||  (c != ' '  &&  c != '\t') )
 	    {  *ptr++ = c;  *ptr = 0;  }
 	}
 	else
 	  { DEBUG(ERROR: exceeded string);/*===*/ }
-        break;
-      }
-    }
+  }
   if ( braces ) {
     status = failure;
 /*===*/printf("ORG: ERROR  %ld Unbalanced Braces\n", braces);
@@ -283,7 +269,7 @@ org::Write( register FILE			      *file, register long			       writeID, registe
   if ( this->writeID != writeID ) {
     this->writeID = writeID;
     fprintf( file, "\\begindata{%s,%ld}\n", (this )->GetTypeName( ), id );
-    status = Write_Body( this, file );
+    status = Write_Body( this, file, writeID );
     fprintf( file, "\n\\enddata{%s,%ld}\n", (this )->GetTypeName( ), id );
   }
   DEBUGdt(Status,status);
@@ -292,7 +278,7 @@ org::Write( register FILE			      *file, register long			       writeID, registe
 }
 
 static
-long Write_Body( register class org  *self, register FILE  *file )
+long Write_Body( register class org  *self, register FILE  *file, long writeID )
     {
   register long status = ok;
   register tree_type_node node = (Tree )->RootNode( );
@@ -309,20 +295,20 @@ long Write_Body( register class org  *self, register FILE  *file )
 	    for ( ; current_level > level; current_level-- )
 		fprintf( file, "%*s}\n", (int)(2 * current_level), "" );
     current_level = level;
-    fprintf( file, "%*s%s\n", (int)(2 * level), "", (Tree)->NodeName(  node ) );
+    const char *name = (Tree)->NodeName( node );
+    const char *bs = *name == '\\' || *name == '{' || *name == '[' ? "\\" : "";
+    fprintf( file, "%*s%s%s\n", (int)(2 * level), "", bs, name );
     if ( (textp = (class text *) (Tree)->NodeDatum( node)) && 
 	 (size = (textp)->GetLength()) > 0 ) {
 	long realSize = 0;
 	char *description;
-	char fName[MAXPATHLEN];
 	FILE *f;
-	strcpy(fName, tmpnam(NULL));
-	if(f = fopen(fName, "w")) {
-	    (textp)->Write( f, (textp)->UniqueID(), 1);
+	if(f = tmpfile()) {
+	    (textp)->Write( f, writeID, 1);
 	    fseek(f, 0, 2);
 	    realSize = ftell(f);
-	    fclose(f);
-	    if(f = fopen(fName, "r")) {
+	    rewind(f);
+	    {
 		if(description = (char*) malloc(realSize + 1)) {
 		    if(fread(description, realSize, 1, f) != 1) {
 			fprintf(stderr, "org: incomplete read on temp file\n");
@@ -330,8 +316,8 @@ long Write_Body( register class org  *self, register FILE  *file )
 		    }
 		    description[realSize] = (char)0;
 		}
-		unlink(fName);
-	    }	
+	    }
+	    fclose(f);
 	}
 	fprintf( file, "%*s[%ld\n%s]\n", (int)(2 * level), "", realSize, description);
 	free(description);
@@ -371,10 +357,11 @@ static
 void Strip( register char  *string )
   {
   register char *ptr = string;
+  int len;
 
   while ( *ptr == ' '  ||  *ptr == '\t' )  ptr++;
-  strcpy( string, ptr );
-  while ( *ptr )  ptr++;
-  ptr--;
-  while ( *ptr == ' '  ||  *ptr == '\t' ) *ptr-- = 0;
+  len = strlen(ptr);
+  memmove( string, ptr , len);
+  ptr = string + len - 1;
+  while ( *ptr == ' '  ||  *ptr == '\t' && ptr >= string ) *ptr-- = 0;
 }

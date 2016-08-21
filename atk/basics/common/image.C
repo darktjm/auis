@@ -424,55 +424,52 @@ image::GetImageData(FILE  *file)
 
     /* open temp files */
     tmpName1[0]=tmpName2[2]='\0';
-    tmpnam(tmpName1);
-    tmpnam(tmpName2);
-    if( (tmpFile1 = fopen(tmpName1, "w")) == NULL || 
-       (tmpFile2 = fopen(tmpName2, "w")) == NULL ) { /* Error */	
-	if(tmpFile1) {
+    if( (tmpFile1 = tmpfile()) == NULL || 
+       (tmpFile2 = tmpfile()) == NULL ) { /* Error */	
+	if(tmpFile1)
 	    fclose(tmpFile1);
-	    unlink(tmpName1);
-	}
-	fprintf(stderr, "image: couldn't open %s for writing.\n", tmpFile1 == NULL ? tmpName1 : tmpName2);
+	perror("image: couldn't open temporary file for writing.");
 	return(dataobject_OBJECTCREATIONFAILED);
     }
 
     /* Write image bytes to tmpFile1 */
     while(fgets(buf, sizeof(buf), file)) {
-	if(!strncmp(buf, "\\enddata", 8)) {
-	    fclose(tmpFile1);
+	if(!strncmp(buf, "\\enddata", 8))
 	    break;
+	if(fputs(buf, tmpFile1) < 0) {
+	    perror("image: error writing out image data");
+	    fclose(tmpFile1);
+	    fclose(tmpFile2);
+	    return(dataobject_OBJECTCREATIONFAILED);
 	}
-	fputs(buf, tmpFile1);
     }
-
-    /* open temp1 and decode base64 data into temp2 */
-    if(tmpFile1 = fopen(tmpName1, "r")) {
-	from64(tmpFile1, tmpFile2);
-	fclose(tmpFile1); unlink(tmpName1);
+    if(fflush(tmpFile1) || fseek(tmpFile1, 0L, SEEK_SET) < 0) {
+	perror("image: error writing out image data");
+	fclose(tmpFile1);
 	fclose(tmpFile2);
-    }
-    else {
-	fprintf(stderr, "image: couldn't open %s for reading.\n", tmpName1);
 	return(dataobject_OBJECTCREATIONFAILED);
     }
 
-    /* open temp2 and decompress/load file */
-    if(!(tmpFile2 = fopen(tmpName2, "r"))) {
-	fprintf(stderr, "image: couldn't open %s for reading.\n", tmpName2);
+    /* decode base64 data into temp2 */
+    from64(tmpFile1, tmpFile2);
+    fclose(tmpFile1);
+    if(fflush(tmpFile2) || fseek(tmpFile2, 0L, SEEK_SET) < 0) {
+	perror("image: error decoding image data");
+	fclose(tmpFile2);
 	return(dataobject_OBJECTCREATIONFAILED);
     }
-    else {
+
+    /* decompress/load file */
+    {
 	class image *savedimage;
 	if(!(savedimage = (class image *) ATK::NewObject(format))) {
 	    fclose(tmpFile2);
-	    unlink(tmpName2);
 	    fprintf(stderr, "image: couldn't get new object of type %s.\n", format);
 	    return(-1);
 	}
 	(savedimage)->Type() = (this)->Type();
 	if((savedimage)->Load( NULL, tmpFile2) < 0) {
 	    fclose(tmpFile2);
-	    unlink(tmpName2);
 	    (savedimage)->Destroy();
 	    fprintf(stderr, "image: couldn't load image of type %s.\n", format);
 	    return(-1);
@@ -484,7 +481,6 @@ image::GetImageData(FILE  *file)
 	(savedimage)->Destroy();
     }
     fclose(tmpFile2);
-    unlink(tmpName2);
     return(dataobject_NOREADERROR);
 }
 

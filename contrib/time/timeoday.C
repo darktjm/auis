@@ -277,7 +277,7 @@ timeoday::SetFormat(char  *format)
       this->format = NewString(format);
   } else {
       const char *format = environ::GetProfile(prof_namebuf);
-      if (this->format == NULL) {
+      if (format == NULL) {
 	  this->format = NewString("");
       } else {
 	  this->format = NewString(format);

@@ -306,7 +306,7 @@ fbm::Load( char  *fullname, FILE  *fp )
 
   if (fbmin_open_image(f) != FBMIN_SUCCESS) {  /* read image header */
     fbmin_close_file();
-    fclose(f);
+    if(!fp) fclose(f);
     return(-1);
   }
 
@@ -355,7 +355,7 @@ fbm::Load( char  *fullname, FILE  *fp )
     free(cm);
 
   fbmin_close_file();
-  fclose(f);
+  if(!fp) fclose(f);
   return(0);
 }
 

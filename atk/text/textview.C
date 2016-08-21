@@ -172,6 +172,7 @@ textview::textview()
 
 
     this->editor = EMACS;
+    this->viMode = COMMAND;
     this->keystate = this->emacsKeystate = keystate::Create(this, textviewEmacsKeymap);
     this->viCommandModeKeystate = keystate::Create(this, textviewViCommandModeKeymap);
     this->viInputModeKeystate = keystate::Create(this, textviewViInputModeKeymap);

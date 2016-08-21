@@ -133,7 +133,7 @@ static class list *DirIntoList(char  *dname, boolean  longMode , boolean  dotFil
             char buf[256];
             LongModeLine(dname, fi->fileName, buf);
             fi->dispName = (char *)malloc(strlen(buf) + 1);
-            strcat(fi->dispName, buf);
+            strcpy(fi->dispName, buf);
         } else {
             fi->dispName = (char *)malloc(strlen(fi->fileName) + 1);
             strcpy(fi->dispName, fi->fileName);

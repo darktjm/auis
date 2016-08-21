@@ -267,7 +267,7 @@ mac::Load( char  *fullname, FILE  *fp )
   }
   if (macin_open_image(f) != MACIN_SUCCESS) {  /* read image header */
     macin_close_file();
-    fclose(f);
+    if(!fp) fclose(f);
     return(-1);
   }
 
@@ -306,12 +306,12 @@ mac::Load( char  *fullname, FILE  *fp )
       }
   }
   if (scanLine < macin_img_height) {
-      fclose(f);
+      if(!fp) fclose(f);
       return -1;
   }
   macin_close_file();
 
-  fclose(f);
+  if(!fp) fclose(f);
   return(0);
 }
 

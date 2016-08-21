@@ -100,13 +100,13 @@ cmuwm::Load( char  *fullname, FILE  *fp ) {
 	}
 	else {
 	    fprintf(stderr, "cmuwm: Read error (%ld)\n", status);
-	    fclose(f);
+	    if(!fp) fclose(f);
 	    return(-1);
 	}
     }
     else {
 	fprintf(stderr, "objectName: %s\n", objectName);
-	fclose(f);
+	if(!fp) fclose(f);
 	return(-1);
     }
     if (fp == NULL) /* If fp is NULL, this means we opened filename and so must also close it. */

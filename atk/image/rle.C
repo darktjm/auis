@@ -422,7 +422,7 @@ rle::Load( char  *fullname, FILE  *fp )
   sv_globals.svfb_fd = rlefile;
   debug("rleLoad: About to call get_setup\n");
   if(rle_get_setup( &sv_globals )) {
-    fclose(rlefile);
+    if(!fp) fclose(rlefile);
     return(-1);	
   }
   
@@ -480,7 +480,7 @@ rle::Load( char  *fullname, FILE  *fp )
     {
     case 0:
       perror("rleLoad: no colour channels to display");
-      fclose(rlefile);
+      if(!fp) fclose(rlefile);
       return(-1);
     case 1:
       switch(sv_globals.sv_ncmap)
@@ -495,7 +495,7 @@ rle::Load( char  *fullname, FILE  *fp )
 	  ptype = SC_M;	/* single channel encoded colour with decoding map */
 	  break;
 	default:
-	  fclose(rlefile);
+	  if(!fp) fclose(rlefile);
 	  perror("rleLoad: Illegal number of maps for one colour channel");
 	  return(-1);
 	}
@@ -511,13 +511,13 @@ rle::Load( char  *fullname, FILE  *fp )
 	  break;
 	default:
 	  perror("rleLoad: Illegal number of maps for colour picture");
-	  fclose(rlefile);
+	  if(!fp) fclose(rlefile);
 	  return(-1);
 	}
       break;
     default:
       perror("rleLoad: Illegal number of colour channels");
-      fclose(rlefile);
+      if(!fp) fclose(rlefile);
       return(-1);
     }
   
@@ -614,8 +614,8 @@ rle::Load( char  *fullname, FILE  *fp )
 	}
   }
   (this)->RGBUsed() = ncol;
-  
-  fclose(rlefile);
+
+  if(!fp) fclose(rlefile);
   debug("finished\n");
   return(0);
 }

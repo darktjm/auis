@@ -699,7 +699,7 @@ g3::Load( char  *fullname, FILE  *fp )
 	maxlinelen = BITS_TO_BYTES(MAXCOLS);
 
 	if (!g3_ident(fd)) {
-	    fclose(fd);
+	    if(!fp) fclose(fd);
 	    return(-1);
 	}
 	g3_verb = verbose;
@@ -713,13 +713,13 @@ g3::Load( char  *fullname, FILE  *fp )
 #ifndef ALLOW_G3_ERRORS
 		if (col < 0) {
 		  (this)->Reset( );
-		  fclose(fd);
+		  if(!fp) fclose(fd);
 		  return(-1);
 		}
 #else
 		if (g3_error > MAX_ERRORS) {
 		  (this)->Reset( );
-		  fclose(fd);
+		  if(!fp) fclose(fd);
 		  return(-1);
 	      }		    
 #endif
@@ -730,7 +730,7 @@ g3::Load( char  *fullname, FILE  *fp )
 		currline += BITS_TO_BYTES(cols);
 		}
 
-	fclose(fd);
+	if(!fp) fclose(fd);
 	(this)->Width( ) = cols;
 	(this)->Height( ) = rows;
 	if (!(this)->Width( ) || !(this)->Height( )) { /* sanity check */

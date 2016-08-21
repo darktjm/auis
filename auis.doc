@@ -1,0 +1,3315 @@
+\begindata{org,6717600}
+  ${ANDREWDIR}
+  [499
+\begindata{text,6723744}
+\textdsversion{12}
+\template{default}
+\begindata{link,6727792}
+4
+${ANDREWDIR}
+0
+0
+V
+\begindata{link,6727792}
+Datastream version: 2
+${ANDREWDIR}
+2
+
+black
+white
+\enddata{link,6727792}
+\enddata{link,6727792}
+\view{linkview,6727792,0,0,0}
+
+Root of installation directory.  Some files may exist in \typewriter{/etc}, 
+and of course many dot files in the user's home directory:
+
+	\typewriter{.atkinit}
+
+	\typewriter{.<app>init}
+
+	\typewriter{.preferences}
+
+\enddata{text,6723744}
+]
+    {
+    bin
+    [311
+\begindata{text,6720080}
+\textdsversion{12}
+\begindata{link,6720704}
+4
+${ANDREWDIR}/bin
+0
+0
+V
+\begindata{link,6720704}
+Datastream version: 2
+bin
+2
+
+black
+white
+\enddata{link,6720704}
+\enddata{link,6720704}
+\view{linkview,6720704,1,0,0}
+
+Directory to add to $PATH for most functionality.\
+\enddata{text,6720080}
+]
+      {
+      2rtf
+      acolorman
+      andrewdirs
+      arb
+      atkatoms
+      audiocompose
+      audiosend
+      batmail
+      bdffont
+      [145
+\begindata{text,6722960}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{ezapp} on \bold{bdffont} object
+
+\enddata{text,6722960}
+]
+      be1be2
+      [165
+\begindata{text,6722704}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{be1be2app} ("static", from \typewriter{libtext.so})
+
+\enddata{text,6722704}
+]
+      bglisp
+      bison
+      bush
+      [122
+\begindata{text,6760608}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{bushapp}
+
+\enddata{text,6760608}
+]
+      chart
+      [123
+\begindata{text,6760288}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{chartapp}
+
+\enddata{text,6760288}
+]
+      chump
+      console
+      [125
+\begindata{text,6763712}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{consoleapp}
+
+\enddata{text,6763712}
+]
+      convertraster
+      createcon
+      createinset
+      cui
+      cuin
+      datacat
+      [125
+\begindata{text,6765600}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{datacatapp}
+
+\enddata{text,6765600}
+]
+      eatmail
+      eq
+      [140
+\begindata{text,6771696}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{ezapp} on \bold{eq} object
+
+\enddata{text,6771696}
+]
+      extcompose
+      ez
+      [120
+\begindata{text,6768144}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{ezapp}
+
+\enddata{text,6768144}
+]
+      ez2ascii
+      ez2html
+      [125
+\begindata{text,6767856}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{ez2htmlapp}
+
+\enddata{text,6767856}
+]
+      ez2ps
+      ezpostprocess
+      ezprint
+      [125
+\begindata{text,6771008}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{ezprintapp}
+
+\enddata{text,6771008}
+]
+      fad
+      [141
+\begindata{text,6770704}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{ezapp} on \bold{fad} object
+
+\enddata{text,6770704}
+]
+      fdbbdf
+      figure
+      [144
+\begindata{text,6774736}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{ezapp} on \bold{figure} object
+
+\enddata{text,6774736}
+]
+      genmake
+      genstatl
+      gentlex
+      getfilename
+      getstats
+      help
+      [122
+\begindata{text,6781248}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{helpapp}
+
+\enddata{text,6781248}
+]
+      image
+      [187
+\begindata{text,6776560}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{ezapp} on \bold{image} object ("static", from 
+\typewriter{libbasics.so})
+
+\enddata{text,6776560}
+]
+      indexpro
+      launch
+      [124
+\begindata{text,6779552}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{launchapp}
+
+\enddata{text,6779552}
+]
+      layout
+      [144
+\begindata{text,6779152}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{ezapp} on \bold{layout} object
+
+\enddata{text,6779152}
+]
+      lt
+      [120
+\begindata{text,6780832}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{ltapp}
+
+\enddata{text,6780832}
+]
+      mailserver
+      mailto
+      mailto-hebrew
+      messages
+      [126
+\begindata{text,6784192}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{messagesapp}
+
+\enddata{text,6784192}
+]
+      messagesn
+      metamail
+      metasend
+      mkbrowse
+      mkparser
+      mkparserclass
+      mkurlbutton
+      mmencode
+      nessrun
+      [125
+\begindata{text,6786032}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{nessrunapp}
+
+\enddata{text,6786032}
+]
+      org
+      [121
+\begindata{text,6787840}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{orgapp}
+
+\enddata{text,6787840}
+]
+      patch-metamail
+      pipescript
+      [128
+\begindata{text,6789456}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{pipescriptapp}
+
+\enddata{text,6789456}
+]
+      ppm2atkimage
+      pref
+      prefed
+      [124
+\begindata{text,6791072}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{prefedapp}
+
+\enddata{text,6791072}
+]
+      preview
+      [125
+\begindata{text,6790752}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{previewapp}
+
+\enddata{text,6790752}
+]
+      printscribe
+      raster
+      [144
+\begindata{text,6794352}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{ezapp} on \bold{raster} object
+
+\enddata{text,6794352}
+]
+      readmail
+      receiveASing
+      recover
+      richtext
+      richtoatk
+      robin
+      rofftext
+      [126
+\begindata{text,6801008}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{rofftextapp}
+
+\enddata{text,6801008}
+]
+      rtf2
+      runadew
+      [125
+\begindata{text,6797456}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{runadewapp}
+
+\enddata{text,6797456}
+]
+      runapp
+      [1814
+\begindata{text,6800336}
+\textdsversion{12}
+\template{default}
+Launcher for application objects.
+
+
+Unless otherwise specified, runs an application class with the program 
+name, sending it the program's arguments.   By default, the following are 
+attempted:
+
+  1. if program name is \bold{runapp}, acts as specified below
+
+  2. if program name \bold{whichdo}, acts as specified in \bold{whichdo} 
+entry
+
+  3. if program name with "app" appended names an \italic{application} 
+class, runs that
+
+  4. if program name names a \italic{dataobject} class, runs \bold{ezapp} 
+application on an empty document of that class
+
+  5. if program name with "a" appended names an \italic{application} class, 
+runs that
+
+If all 5 fail, the program exits with an error.
+
+
+When run as \bold{runapp}:
+
+\bold{runapp} [-npdD] \{-l \italic{class}\} \italic{appclass} 
+\italic{apparg}...
+
+
+Launches \italic{application} class \italic{appclass} with arguments 
+\italic{apparg}...  If appclass isn't an \italic{application}, but is a 
+\italic{dataobject}, runs \bold{ezapp} instead with arguments 
+\italic{apparg}... on a document of type \italic{appclass}.
+
+
+    -n = don't try running as a \italic{dataobject} using \bold{ezapp}
+
+    -p = prepend \bold{runapp}'s dir to class path (not implemented)
+
+    -d = trace dynamic loading (+1 for each arg present)
+
+    -l \italic{class} = class to preload before running; can be specified 
+multiple times
+
+    -D = don't search statically linked objects
+
+
+In C++, this loads class, creates new class object, sets program name, 
+calls ParseArgs method, calls PrintVersionNumber if present, reads the 
+app's init file, calls Start(), then calls Run() (whose return value is 
+runapp's return value), then calls Stop().  Not sure how ezapp gets the 
+dataclass arg passed in.\
+\enddata{text,6800336}
+]
+      sched
+      [123
+\begindata{text,6797136}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{schedapp}
+
+\enddata{text,6797136}
+]
+      scribetext
+      sendASing
+      sendmail
+      sendmessage
+      sendmessagen
+      sendnews
+      showaudio
+      showexternal
+      shownonascii
+      showpartial
+      showpicture
+      splitmail
+      sun2mime.csh
+      sun-audiof.csh
+      sys
+      table
+      [143
+\begindata{text,6805440}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{ezapp} on \bold{table} object
+
+\enddata{text,6805440}
+]
+      toez
+      [122
+\begindata{text,6805152}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{toezapp}
+
+\enddata{text,6805152}
+]
+      typescript
+      [128
+\begindata{text,6813520}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{typescriptapp}
+
+\enddata{text,6813520}
+]
+      vui
+      vuin
+      web
+      [121
+\begindata{text,6816528}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{webapp}
+
+\enddata{text,6816528}
+]
+      whichdo
+      [326
+\begindata{text,6818464}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link:  built-in alias
+
+
+\bold{whichdo} \italic{classname}
+
+
+Print object file name loaded for \italic{classname}.  Also attempts to 
+just load \italic{classname} (with load debug enabled), which for some 
+reason fails often.\
+\enddata{text,6818464}
+]
+      xwd2atkimage
+      zip
+      [141
+\begindata{text,6818064}
+\textdsversion{12}
+\template{default}
+\bold{runapp} link: \bold{ezapp} on \bold{zip} object
+
+\enddata{text,6818064}
+]
+      }
+    config
+    [361
+\begindata{text,6826848}
+\textdsversion{12}
+\begindata{link,6827280}
+4
+${ANDREWDIR}/config
+0
+0
+V
+\begindata{link,6827280}
+Datastream version: 2
+config
+2
+
+black
+white
+\enddata{link,6827280}
+\enddata{link,6827280}
+\view{linkview,6827280,2,0,0}
+
+Mainly include files for compile-time configuration information.  Also, 
+some copyright text.
+
+\enddata{text,6826848}
+]
+      {
+      aconcat.h
+      allsys.h
+      allsys.mcr
+      andrewos.h
+      andrew.rls
+      andyenv.h
+      COPYRITE
+      [398
+\begindata{text,6824016}
+\textdsversion{12}
+\begindata{link,6824752}
+4
+${ANDREWDIR}/config/COPYRITE
+0
+0
+V
+\begindata{link,6824752}
+Datastream version: 2
+COPYRITE
+2
+
+black
+white
+\enddata{link,6824752}
+\enddata{link,6824752}
+\view{linkview,6824752,3,0,0}
+
+IBM Copyright blurb and license (BSD advertising clause).  Refers to 
+additional copyright blurbs in this dir as well.
+
+
+\enddata{text,6824016}
+]
+      COPYRITE.att
+      [383
+\begindata{text,6826432}
+\textdsversion{12}
+\begindata{link,6832352}
+4
+${ANDREWDIR}/config/COPYRITE.att
+0
+0
+V
+\begindata{link,6832352}
+Datastream version: 2
+COPYRITE.att
+2
+
+black
+white
+\enddata{link,6832352}
+\enddata{link,6832352}
+\view{linkview,6832352,4,0,0}
+
+Half-assed AT&T copyright notice (copy of IBM with only one occurrence of 
+IBM replaced by AT&T)
+
+\enddata{text,6826432}
+]
+      COPYRITE.bls
+      [338
+\begindata{text,6828640}
+\textdsversion{12}
+\begindata{link,6829264}
+4
+${ANDREWDIR}/config/COPYRITE.bls
+0
+0
+V
+\begindata{link,6829264}
+Datastream version: 2
+COPYRITE.bls
+2
+
+black
+white
+\enddata{link,6829264}
+\enddata{link,6829264}
+\view{linkview,6829264,5,0,0}
+
+Copyright notice for BellSouth; same license as IBM\
+\enddata{text,6828640}
+]
+      COPYRITE.img
+      [375
+\begindata{text,6830736}
+\textdsversion{12}
+\begindata{link,6831392}
+4
+${ANDREWDIR}/config/COPYRITE.img
+0
+0
+V
+\begindata{link,6831392}
+Datastream version: 2
+COPYRITE.img
+2
+
+black
+white
+\enddata{link,6831392}
+\enddata{link,6831392}
+\view{linkview,6831392,6,0,0}
+
+Copyright notices from various image library component authors; pretty much 
+same as IBM
+
+\enddata{text,6830736}
+]
+      depend.csh
+      imake.tmpl
+      loginstall
+      platform.tmpl
+      presite.h
+      site.h
+      site.mcr
+      site.rls
+      system.h
+      system.mcr
+      }
+    COPYRITE
+    [295
+\begindata{text,6835024}
+\textdsversion{12}
+\begindata{link,6835632}
+4
+${ANDREWDIR}/COPYRITE
+0
+0
+V
+\begindata{link,6835632}
+Datastream version: 2
+COPYRITE
+2
+
+black
+white
+\enddata{link,6835632}
+\enddata{link,6835632}
+\view{linkview,6835632,7,0,0}
+
+Copy of config/COPYRITE
+
+\enddata{text,6835024}
+]
+    doc
+      [261
+\begindata{text,7843824}
+\textdsversion{12}
+\begindata{link,7916464}
+4
+${ANDREWDIR}/doc
+0
+0
+V
+\begindata{link,7916464}
+Datastream version: 2
+doc
+2
+
+black
+white
+\enddata{link,7916464}
+\enddata{link,7916464}
+\view{linkview,7916464,12,0,0\
+}\enddata{text,7843824}
+]
+      {
+      ADMINISTRATOR
+        {
+        FAQ.ez
+        global.atkinit
+        global.ezinit
+        global.prf
+        ImakeMacros.ez
+        ImakeVars.ez
+        INSTALL.ez
+        README.ez
+        README.samples
+        samples
+          {
+          bobg.atkinit
+          bobg.cshrc
+          bobg.ezinit
+          bobg.helpinit
+          bobg.messagesinit
+          bobg.preferences
+          bobg.sendmessageinit
+          bobg.typescriptinit
+          bobg.Xdefaults
+          ghoti.atkinit
+          ghoti.bushinit
+          ghoti.cshrc
+          ghoti.ezinit
+          ghoti.gdbinit
+          ghoti.login
+          ghoti.messagesinit
+          ghoti.pipescriptinit
+          ghoti.preferences
+          jhh.atkinit
+          jhh.cshrc
+          jhh.ezinit
+          jhh.login
+          jhh.messagesinit
+          jhh.preferences
+          jhh.sendmessageinit
+          jhh.Xclients
+          jz1j.atkinit
+          jz1j.consoleinit
+          jz1j.cshrc
+          jz1j.ezinit
+          jz1j.gdbinit
+          jz1j.messages-sendinit
+          jz1j.pipescriptinit
+          jz1j.preferences
+          jz1j.sendmessageinit
+          jz1j.typescriptinit
+          mcinerny.atkinit
+          mcinerny.cshrc
+          mcinerny.ezinit
+          mcinerny.login
+          mcinerny.messagesinit
+          mcinerny.preferences
+          }
+        }
+      SetUp
+      AtkTour
+        {
+        Adew
+        Birth
+        Class
+        Datastream
+        Dict
+        Dict.CKP
+        Focus
+        Insets
+        Layout
+        Media
+        Media.CKP
+        Menu
+        Ness
+        Text
+        Tour
+        Volume
+        }
+      CONTENTS.ez
+      [266
+\begindata{text,7843824}
+\textdsversion{12}
+\begindata{link,7916464}
+4
+${ANDREWDIR}
+0
+0
+V
+\begindata{link,7916464}
+Datastream version: 2
+${ANDREWDIR}
+2
+
+black
+white
+\enddata{link,7916464}
+\enddata{link,7916464}
+\view{linkview,7916464,12,0,0\
+}\enddata{text,7843824}
+]
+      DEVELOPER
+        {
+        AndrewCoding.ez
+        AndrewProgramming.ez
+        ATKinC++.ez
+        BuildAndTest.ez
+        C++Conversion.ez
+        CodeAppearance.ez
+        Porting.ez
+        protosys.h
+        }
+      inprogram/vui/help
+        {
+        dataentry.hlp
+        filedata.hlp
+        mainpanel.hlp
+        msgentry.hlp
+        multchoice.hlp
+        pcm0.hlp
+        pcm10.hlp
+        pcm11.hlp
+        pcm12.hlp
+        pcm13.hlp
+        pcm14.hlp
+        pcm15.hlp
+        pcm16.hlp
+        pcm17.hlp
+        pcm18.hlp
+        pcm19.hlp
+        pcm1.hlp
+        pcm20.hlp
+        pcm21.hlp
+        pcm22.hlp
+        pcm23.hlp
+        pcm24.hlp
+        pcm25.hlp
+        pcm26.hlp
+        pcm27.hlp
+        pcm28.hlp
+        pcm29.hlp
+        pcm2.hlp
+        pcm30.hlp
+        pcm31.hlp
+        pcm32.hlp
+        pcm33.hlp
+        pcm34.hlp
+        pcm35.hlp
+        pcm36.hlp
+        pcm37.hlp
+        pcm38.hlp
+        pcm39.hlp
+        pcm3.hlp
+        pcm40.hlp
+        pcm41.hlp
+        pcm42.hlp
+        pcm43.hlp
+        pcm44.hlp
+        pcm45.hlp
+        pcm46.hlp
+        pcm47.hlp
+        pcm48.hlp
+        pcm49.hlp
+        pcm4.hlp
+        pcm50.hlp
+        pcm51.hlp
+        pcm52.hlp
+        pcm53.hlp
+        pcm54.hlp
+        pcm55.hlp
+        pcm56.hlp
+        pcm57.hlp
+        pcm58.hlp
+        pcm59.hlp
+        pcm5.hlp
+        pcm60.hlp
+        pcm61.hlp
+        pcm62.hlp
+        pcm63.hlp
+        pcm64.hlp
+        pcm65.hlp
+        pcm66.hlp
+        pcm67.hlp
+        pcm68.hlp
+        pcm69.hlp
+        pcm6.hlp
+        pcm70.hlp
+        pcm71.hlp
+        pcm72.hlp
+        pcm73.hlp
+        pcm74.hlp
+        pcm75.hlp
+        pcm76.hlp
+        pcm77.hlp
+        pcm78.hlp
+        pcm79.hlp
+        pcm7.hlp
+        pcm80.hlp
+        pcm81.hlp
+        pcm82.hlp
+        pcm83.hlp
+        pcm84.hlp
+        pcm85.hlp
+        pcm86.hlp
+        pcm87.hlp
+        pcm88.hlp
+        pcm89.hlp
+        pcm8.hlp
+        pcm90.hlp
+        pcm91.hlp
+        pcm92.hlp
+        pcm93.hlp
+        pcm94.hlp
+        pcm9.hlp
+        subscriptn.hlp
+        }
+      MAIL
+        {
+        AMS.ovr
+        Bboards.ins
+        Bboards.ovr
+        CuiLib.pgr
+        Flames.pgr
+        Intrface.ins
+        libcalls.idx
+        libcalls.pgr
+        MsgSrvr.ovr
+        MsgSrvr.pgr
+        NonUnix.adm
+        NonUnix.ins
+        NonUnix.ovr
+        procs.doc
+        programs.pgr
+        regexp.doc
+        Spec.pgr
+        types.pgr
+        }
+      PROGRAMMER
+        {
+        AdewOverview.doc
+        AdewReference.doc
+        AdewTutorial.doc
+        app.doc
+        AptPG.doc
+        aslot.doc
+        astring.doc
+        atkvers.doc
+        atom.doc
+        atomlist.doc
+        attribs.doc
+        avarset.doc
+        awidget.doc
+        awidgetview.doc
+        basinit.doc
+        bind.doc
+        box.doc
+        bpair.doc
+        bp.doc
+        bpv.doc
+        buffer.doc
+        ChartPG.doc
+        class.doc
+        classes.org
+        complete.doc
+        console.doc
+        contentv.doc
+        controllers.doc
+        cursor.doc
+        dataobj.doc
+        datastrm.doc
+        deskey.doc
+        Developr.d
+        dict.doc
+        dired.doc
+        doclaunch
+        dsearch.doc
+        environ.doc
+        envrment.doc
+        eq.doc
+        eqv.doc
+        event.doc
+        example1.org
+        example2.org
+        example3.org
+        ezdiff.doc
+        fad.doc
+        figattr.doc
+        figobj.doc
+        figure.doc
+        figv.doc
+        FilesList
+        filetype.doc
+        filler.doc
+        filter.doc
+        fontdesc.doc
+        frame.doc
+        framemsg.doc
+        framev.doc
+        FunctionIndex
+        future.doc
+        glist.doc
+        graphic.doc
+        header.doc
+        Help.d
+        help-maint.doc
+        HowToPC.d
+        image.doc
+        imagev.doc
+        im.doc
+        init.doc
+        insets.d
+        insets.doc
+        intro.doc
+        isearch.doc
+        keymap.doc
+        keystate.doc
+        label.doc
+        labelv.doc
+        layout.doc
+        Link.d
+        list.doc
+        lpair.doc
+        lprruler.doc
+        lprrulv.doc
+        lwpstubs.doc
+        mailsys.d
+        mark.doc
+        matte.doc
+        menulist.doc
+        message.doc
+        msghndlr.doc
+        namespc.doc
+        nessauth.doc
+        nessfunc.doc
+        nesshack.doc
+        nessman.doc
+        nesstut.doc
+        nessuser.doc
+        nstdmark.doc
+        observe.doc
+        OrgPG.doc
+        oscroll.doc
+        palette.doc
+        panel.doc
+        PanelsNMenus.d
+        parser.doc
+        physical.doc
+        pinsets.d
+        pixelimg.doc
+        Prefs.d
+        print.doc
+        Procs.d
+        proctbl.doc
+        progtools.d
+        prsclass.doc
+        raster.doc
+        Readme.doc
+        rectlist.doc
+        region.doc
+        rexf.doc
+        rm.doc
+        rofftext.doc
+        runapp.doc
+        sample.cht
+        scroll.doc
+        search.doc
+        smpltext.doc
+        spell.doc
+        spread.doc
+        statload.doc
+        strtbl.doc
+        strtblv.doc
+        style.doc
+        stylesht.doc
+        SuitePG.doc
+        sym.doc
+        table.doc
+        tabs.doc
+        tags.doc
+        texttools.d
+        textv.doc
+        tlex.doc
+        tree23.doc
+        TreePG.doc
+        txtstvec.doc
+        updlist.doc
+        view.doc
+        viewref.doc
+        vopcon.doc
+        VuiInternals.d
+        WidgetUser.d
+        winsys.doc
+        writing-pr.doc
+        ZipPG.doc
+        }
+      syntax
+        {
+        bison.1
+        bison.info
+        bison.info-1
+        bison.info-2
+        bison.info-3
+        bison.info-4
+        bison.info-5
+        }
+      }
+    etc
+    [371
+\begindata{text,6888288}
+\textdsversion{12}
+\begindata{link,6889024}
+4
+${ANDREWDIR}/etc
+0
+0
+V
+\begindata{link,6889024}
+Datastream version: 2
+etc
+2
+
+black
+white
+\enddata{link,6889024}
+\enddata{link,6889024}
+\view{linkview,6889024,8,0,0}
+
+In old UNIX tradition, miscellaneous utilities that should be in an sbin 
+directory, plus a few config files.\
+\enddata{text,6888288}
+]
+      {
+      addalias
+      adynlink
+      aexelink
+      afmmangle
+      alibexp
+      amsdemo
+      ams_genid
+      arpadate
+      awww
+      bison.hairy
+      [111
+\begindata{text,6885552}
+\textdsversion{12}
+Bison config file: parser boilerplate code\
+\enddata{text,6885552}
+]
+      bison.simple
+      [111
+\begindata{text,6885248}
+\textdsversion{12}
+Bison config file: parser boilerplate code\
+\enddata{text,6885248}
+]
+      decode_id
+      fixpaths
+      gccmakedep
+      gen.awk
+      gendemo
+      genrefs
+      getnms
+      grefs
+      initscreen
+      [88
+\begindata{text,6887904}
+\textdsversion{12}
+batmail config file\
+\enddata{text,6887904}
+]
+      install
+      intro
+      [88
+\begindata{text,6891008}
+\textdsversion{12}
+batmail config file\
+\enddata{text,6891008}
+]
+      intro.small
+      [88
+\begindata{text,6890672}
+\textdsversion{12}
+batmail config file\
+\enddata{text,6890672}
+]
+      mailcap
+      mkatklib
+      mkatkshlib
+      mkdynmain
+      mkindex
+      nns
+      relativize
+      Warning.gif
+      }
+    examples
+      [271
+\begindata{text,7843824}
+\textdsversion{12}
+\begindata{link,7916464}
+4
+${ANDREWDIR}/examples
+0
+0
+V
+\begindata{link,7916464}
+Datastream version: 2
+examples
+2
+
+black
+white
+\enddata{link,7916464}
+\enddata{link,7916464}
+\view{linkview,7916464,12,0,0\
+}\enddata{text,7843824}
+]
+      {
+      doc
+        {
+        ex10.doc
+        ex11.doc
+        ex12.doc
+        ex13.doc
+        ex14.doc
+        ex15.doc
+        ex16.doc
+        ex17.doc
+        ex18.doc
+        ex19.doc
+        ex1.doc
+        ex2.doc
+        ex3.doc
+        ex4.doc
+        ex5.doc
+        ex6.doc
+        ex7.doc
+        ex8.doc
+        ex9.doc
+        examples.doc
+        }
+      ex1
+        {
+        helloworld
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex2
+        {
+        helloworld
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex3
+        {
+        helloworld
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex4
+        {
+        helloworld
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex5
+        {
+        helloworld
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex6
+        {
+        helloworld
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex7
+        {
+        helloworld
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex8
+        {
+        helloworld
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex9
+        {
+        helloworld
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex10
+        {
+        helloworld
+        helloworld.C
+        helloworld.H
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex11
+        {
+        helloworld
+        helloworld.C
+        helloworld.H
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex12
+        {
+        helloworld
+        helloworld.C
+        helloworld.H
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex13
+        {
+        helloworld
+        helloworld.C
+        helloworld.H
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex14
+        {
+        helloworld
+        hwapp.C
+        hwapp.H
+        Imakefile
+        }
+      ex15
+        {
+        helloworld
+        hwapp.C
+        hwapp.H
+        Imakefile
+        }
+      ex16
+        {
+        helloworld
+        helloworld.C
+        helloworld.H
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex17
+        {
+        helloworld
+        helloworld.C
+        helloworld.H
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex18
+        {
+        helloworld
+        helloworld.C
+        helloworld.H
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      ex19
+        {
+        helloworld
+        helloworld.C
+        helloworld.H
+        hwapp.C
+        hwapp.H
+        hwview.C
+        hwview.H
+        Imakefile
+        }
+      lib
+        {
+        ex10.lt
+        ex10.rf
+        ex11.lt
+        ex11.rf
+        ex12.lt
+        ex12.rf
+        ex13.lt
+        ex13.rf
+        ex14.lt
+        ex14.rf
+        ex15.lt
+        ex15.rf
+        ex16.lt
+        ex16.rf
+        ex17.lt
+        ex17.rf
+        ex18.lt
+        ex18.rf
+        ex19.lt
+        ex19.rf
+        ex1.lt
+        ex1.rf
+        ex2.lt
+        ex2.rf
+        ex3.lt
+        ex3.rf
+        ex4.lt
+        ex4.rf
+        ex5.lt
+        ex5.rf
+        ex6.lt
+        ex6.rf
+        ex7.lt
+        ex7.rf
+        ex8.lt
+        ex8.rf
+        ex9.lt
+        ex9.rf
+        libex10.so
+        libex11.so
+        libex12.so
+        libex13.so
+        libex14.so
+        libex15.so
+        libex16.so
+        libex17.so
+        libex18.so
+        libex19.so
+        libex1.so
+        libex2.so
+        libex3.so
+        libex4.so
+        libex5.so
+        libex6.so
+        libex7.so
+        libex8.so
+        libex9.so
+        }
+      }
+    help
+    [317
+\begindata{text,6927472}
+\textdsversion{12}
+\template{default}
+\begindata{link,6928272}
+4
+${ANDREWDIR}/help
+0
+0
+V
+\begindata{link,6928272}
+Datastream version: 2
+help
+2
+
+black
+white
+\enddata{link,6928272}
+\enddata{link,6928272}
+\view{linkview,6928272,9,0,0}
+
+Help text for \bold{help} command.
+
+\enddata{text,6927472}
+]
+      {
+      2rtf.help
+      adew.help
+      adirs.help
+      ams.help
+      asmtext.help
+      atk.help
+      audiocompose.help
+      audiosend.help
+      batmail.1
+      bboards.help
+      bdffont.help
+      bglisp.help
+      bshproc.help
+      buffer.help
+      bush.help
+      calc.help
+      calndrs.help
+      calproc.help
+      champ.help
+      chart.help
+      chimp.help
+      chtproc.help
+      chump.help
+      circpi.help
+      cjpeg.help
+      clock.help
+      cmenu.help
+      cnclass.help
+      cntproc.help
+      color.help
+      commands.gos
+      compile.help
+      comproc.help
+      console.help
+      content.help
+      convras.help
+      cpchar.help
+      cpptext.help
+      cres8et.help
+      crossrf.help
+      ctext.help
+      ctrproc.help
+      cuiclss.help
+      cuicust.help
+      cuiedit.help
+      cuifltr.help
+      cui.help
+      cuipref.help
+      cuiqr.help
+      cui.tutr
+      cuiwiz.help
+      cuixprt.help
+      cutbuf.help
+      datacat.help
+      desproc.help
+      dialogs.help
+      djpeg.help
+      dogtags.help
+      drdproc.help
+      dsrproc.help
+      eli.help
+      eq.help
+      ermproc.help
+      erprintf.help
+      evnts.help
+      extcompose.help
+      ez2ascii.help
+      ez2html.help
+      ez2ps.help
+      ezcomm.help
+      ezdiff.help
+      ezdproc.help
+      ezext.help
+      ez.help
+      ezkeys.help
+      ezpretty.help
+      ezprint.help
+      ezproc.help
+      ezps.help
+      ezstyle.help
+      eztroff.help
+      fad.help
+      fadproc.help
+      figure.help
+      files.both
+      flames.help
+      fnote.help
+      folders.help
+      fontprob.help
+      frmproc.help
+      ftrproc.help
+      gemacscp.help
+      gemacsdf.help
+      gendemo.help
+      genmake.help
+      genstatl.help
+      geomtry.help
+      getfilename.help
+      gofig.help
+      gsearch.help
+      gsrproc.help
+      hdmagic.help
+      headertxt.help
+      help.aliases
+      help.help
+      helpkys.help
+      hlpproc.help
+      hlptext.help
+      hooks.gnu
+      hooks.gos
+      htmltext.help
+      idltext.help
+      image.help
+      improc.help
+      initfls.help
+      inpproc.help
+      insets.help
+      isrproc.help
+      lacc.help
+      laccqr.help
+      layout.help
+      lgvproc.help
+      linkins.help
+      link.intro
+      lkzproc.help
+      lookz.help
+      lstproc.help
+      ltext.help
+      m3text.help
+      macros.help
+      mailcap.help
+      mail.help
+      mailto-hebrew.help
+      mailto.help
+      mcommands.gos
+      menubar.help
+      menus.help
+      metamail.help
+      metasend.help
+      metax.help
+      mime.help
+      mkbrowse.help
+      mmencode.help
+      motif.help
+      msalses.help
+      msgproc.help
+      msgs.help
+      msgskys.help
+      mtext.help
+      mttproc.help
+      ness.help
+      note.help
+      options.help
+      org.help
+      orgproc.help
+      oscroll.help
+      overview.gnu
+      panner.help
+      parse.help
+      patch-metamail.help
+      perltext.help
+      ppm2atk.help
+      prefed.help
+      prefs.help
+      prefs.tutr
+      preview.help
+      privbb.help
+      procs.help
+      prog.help
+      prvproc.help
+      pscript.help
+      pshbttn.help
+      psinset.help
+      ptext.help
+      qryrplc.help
+      raster.help
+      rasters.help
+      rawtext.help
+      relativiz.help
+      rexxtext.help
+      richtext.help
+      rofftxt.help
+      rstproc.help
+      rtf2.help
+      runapp.help
+      runbutton.help
+      sbutton.help
+      scribetxt.help
+      scroll.help
+      search.help
+      select.help
+      sendmsg.help
+      setup.help
+      showaudio.help
+      showexternal.help
+      shownonascii.help
+      showpartial.help
+      showpicture.help
+      spellck.help
+      splitmail.help
+      splproc.help
+      srctext.help
+      steproc.help
+      stlproc.help
+      subordr.help
+      sys.help
+      table.help
+      tags.help
+      tblproc.help
+      text.help
+      tgsproc.help
+      timeday.help
+      tindex.help
+      tmplts.help
+      toez.help
+      tour.help
+      tsckeys.help
+      tscript.help
+      txtproc.help
+      typproc.help
+      unknown.help
+      urlbutton.help
+      valproc.help
+      variables.gnu
+      variables.gos
+      vi.help
+      vopcon.help
+      vui.help
+      vui.tutr
+      wrtstmp.help
+      xwd2atk.help
+      zip.help
+      zipproc.help
+      }
+    include
+      [269
+\begindata{text,7843824}
+\textdsversion{12}
+\begindata{link,7916464}
+4
+${ANDREWDIR}/include
+0
+0
+V
+\begindata{link,7916464}
+Datastream version: 2
+include
+2
+
+black
+white
+\enddata{link,7916464}
+\enddata{link,7916464}
+\view{linkview,7916464,12,0,0\
+}\enddata{text,7843824}
+]
+      {
+      aconcat.h
+      allsys.h
+      ams
+        {
+        ams.h
+        amsvers.h
+        cui.h
+        cuimach.h
+        cuiprotos.h
+        cuivers.h
+        errlvls.h
+        hdrparse.h
+        mserrno.h
+        ms.h
+        msprotos.h
+        msshrprotos.h
+        msvers.h
+        snapams.h
+        }
+      andrdir.h
+      andrewos.h
+      andyenv.h
+      ansitext.h
+      apioctl.h
+      atk
+        {
+        aaction.H
+        abits.H
+        abutton.H
+        abuttonv.H
+        adew.h
+        aformula.H
+        ahash.H
+        alist.H
+        amenu.H
+        ams.H
+        amsn.H
+        amsutil.H
+        aoption.H
+        aoptionv.H
+        application.H
+        apt.H
+        apts.H
+        aptv.H
+        arbcon.H
+        arbiter.H
+        arbiterview.H
+        ashadow.H
+        aslot.H
+        asmtext.H
+        asmtextview.H
+        astring.H
+        atext.H
+        ATKdebug.H
+        ATK.H
+        atom.H
+        atomlist.H
+        atoms.h
+        attlist.H
+        attribs.h
+        avalue.H
+        avarset.H
+        awgtfig.H
+        awgtfigview.H
+        awidget.H
+        awidgetview.H
+        bargraphV.H
+        bdffont.H
+        bdffontv.H
+        be1be2app.H
+        be1be2.H
+        bind.H
+        box.H
+        boxview.H
+        bpair.H
+        bp.H
+        bpv.H
+        buffer.H
+        bufferlist.H
+        bushapp.H
+        bush.H
+        bushv.H
+        butter.H
+        butterview.H
+        buttonV.H
+        calccon.H
+        calc.H
+        calcv.H
+        captions.H
+        cel.H
+        celview.H
+        champ.H
+        chartapp.H
+        chartcsn.H
+        chartdot.H
+        chart.H
+        charthst.H
+        chartlin.H
+        chartobj.H
+        chartpie.H
+        chartstk.H
+        chartv.H
+        chartx1app.H
+        checkv.H
+        chimp.H
+        chimpview.H
+        chlist.H
+        chlistview.H
+        chomp.H
+        chompview.H
+        circlepi.H
+        circlepiview.H
+        clicklistV.H
+        clock.H
+        clockview.H
+        cltextview.H
+        cmuwm.H
+        color.H
+        colormapv.H
+        colorv.H
+        compchar.H
+        compile.H
+        completion.H
+        compress.H
+        compressv.H
+        config.h
+        consoleapp.H
+        consoleClass.H
+        content.H
+        contentv.H
+        controlV.H
+        cpptext.H
+        cpptextview.H
+        ctext.H
+        ctextview.H
+        cursor.H
+        datacata.H
+        dataobject.H
+        ddimage.H
+        deskey.H
+        dialog.H
+        dialogv.H
+        dictionary.H
+        dired.H
+        diredview.H
+        dispbox.h
+        ATKDoLoad.H
+        dynsearch.H
+        enode.H
+        enodeview.H
+        enterstrV.H
+        entertext.H
+        environ.H
+        environment.H
+        eq.H
+        eqview.H
+        etextview.H
+        event.H
+        except.H
+        ez2htmlapp.H
+        ezapp.H
+        ezdiff.H
+        ezprintapp.H
+        faces.H
+        fad.H
+        fadview.H
+        fbm.H
+        fcomp.H
+        figattr.H
+        figio.H
+        figobj.H
+        figoell.H
+        figoflow.H
+        figogrp.H
+        figoins.H
+        figoplin.H
+        figorect.H
+        figorrec.H
+        figospli.H
+        figotext.H
+        figtoolview.H
+        figure.H
+        figview.H
+        filetype.H
+        filler.H
+        fillerview.H
+        filter.H
+        flex.H
+        fnote.H
+        fnotev.H
+        folders.H
+        foldertreev.H
+        fontdesc.H
+        fontsample.H
+        fontsel.H
+        fontselview.H
+        fourwayV.H
+        framecmds.H
+        frame.H
+        framemessage.H
+        frameview.H
+        gbuf.H
+        gentext.H
+        gentlex.h
+        GetRecV.H
+        ghash.H
+        gif.H
+        glist.H
+        gnucompat.H
+        gofigapp.H
+        gofig.H
+        gofigview.H
+        graphic.H
+        gsearch.H
+        hash.H
+        header.H
+        headrtv.H
+        helpapp.H
+        helpcon.H
+        helpdb.H
+        help.H
+        helptextview.H
+        heximage.H
+        hidden.H
+        hiddenview.H
+        hlptext.H
+        hlptextview.H
+        hr.H
+        hrv.H
+        htablev.H
+        htmlenv.H
+        htmlform.H
+        htmlimagev.H
+        htmltext.H
+        htmltextview.H
+        icon.H
+        iconview.H
+        image.H
+        imagev.H
+        img.H
+        im.H
+        incsearch.H
+        init.H
+        jpeg.H
+        keymap.H
+        keystate.H
+        label.H
+        labelview.H
+        launchapp.H
+        layout.H
+        layoutview.H
+        link.H
+        linkview.H
+        list.H
+        logview.H
+        lookz.H
+        lookzview.H
+        lpair.H
+        lprruler.H
+        lprrulerview.H
+        lset.H
+        lsetview.H
+        ltapp.H
+        lt.H
+        ltv.H
+        m3text.H
+        m3textview.H
+        mac.H
+        mailobj.H
+        mailobjv.H
+        mantext.H
+        mark.H
+        matte.H
+        mbuttonv.H
+        mcidas.H
+        menterstrV.H
+        mentertext.H
+        menubar.h
+        menulist.H
+        message.H
+        messagesapp.H
+        messages.H
+        messitem.H
+        messwind.H
+        metax.H
+        metextview.H
+        mflex.H
+        mmtext.H
+        modtext.H
+        modtextview.H
+        month.H
+        monthview.H
+        msghandler.H
+        mtext.H
+        mtextview.H
+        namespace.H
+        nbutterv.H
+        ness.H
+        nessmark.H
+        nessm.H
+        nessmv.H
+        nessrunapp.H
+        nessview.H
+        nestedmark.H
+        note.H
+        noteview.H
+        observable.H
+        oflex.H
+        oldRF.H
+        onoffV.H
+        options.H
+        orgapp.H
+        org.H
+        orgv.H
+        oscroll.H
+        owatch.H
+        page.H
+        pagev.H
+        paint.H
+        palette.H
+        panel.H
+        panner.H
+        parser.H
+        path.H
+        pattern.h
+        pbm.H
+        pcompch.H
+        pcontrol.H
+        pcx.H
+        phelpv.H
+        phlumph.H
+        phlumphview.H
+        physical.h
+        pianoV.H
+        pintv.H
+        pixelimage.H
+        plink.H
+        plinkview.H
+        plusspace.H
+        point.h
+        popupwin.H
+        prefedapp.H
+        prefsbv.H
+        prefs.H
+        prefsv.H
+        prefval.H
+        previewapp.H
+        preview.H
+        print.H
+        printopts.H
+        proctable.H
+        pscripta.H
+        ps.H
+        pshbttnv.H
+        psview.H
+        pushbutton.H
+        pvalbv.H
+        pvalcv.H
+        pvalfv.H
+        pvalsbv.H
+        pvalslv.H
+        pvaltvc.H
+        pvaltvfc.H
+        pvaltvf.H
+        pvaltv.H
+        pvaltvl.H
+        raster.H
+        rasterimage.H
+        rasterio.H
+        rasterview.H
+        rastio.H
+        rastoolview.H
+        rastvaux.h
+        rawtext.H
+        rawtextview.H
+        rbttnv.H
+        readscr.H
+        recsearch.H
+        rect.h
+        rectlist.H
+        region.H
+        rm.H
+        roffcmds.h
+        roffstyl.h
+        rofftextapp.H
+        rofftext.h
+        rofftext.H
+        roffutil.h
+        runadewapp.H
+        runbutton.H
+        sbttnav.H
+        sbutton.H
+        sbuttonv.H
+        schedapp.H
+        sched.H
+        schedv.H
+        scpanner.H
+        scroll.H
+        scrolling.H
+        search.H
+        sendmessage.H
+        shared.h
+        simpletext.H
+        sizes.h
+        sliderstrV.H
+        sliderV.H
+        spell.H
+        spread.H
+        srctext.H
+        srctextview.H
+        ssliderv.H
+        strcache.H
+        stringtbl.H
+        stringV.H
+        strinput.H
+        strtblview.H
+        style.H
+        stylesheet.H
+        suitecv.H
+        suiteev.H
+        suite.H
+        suitetapp.H
+        suitex1app.H
+        sunraster.H
+        sym.H
+        t822view.H
+        table.H
+        tabrulerview.H
+        tabs.H
+        tags.H
+        text822.H
+        textflow.H
+        textflowview.H
+        text.H
+        textintv.H
+        textref.H
+        textrefv.H
+        texttag.H
+        texttagv.H
+        texttroff.H
+        textview.H
+        thumbstrV.H
+        thumbV.H
+        tif.H
+        timeoday.H
+        timeodayview.H
+        tindex.H
+        titextv.H
+        tlex.H
+        toezapp.H
+        toksym.H
+        traced.H
+        tree23int.H
+        tree.H
+        treev.H
+        tscripta.H
+        txtstvec.h
+        txtvinfo.h
+        typescript.H
+        typetext.H
+        updatelist.H
+        updateq.H
+        urlbutton.H
+        urlbuttonview.H
+        value.H
+        valueview.H
+        vector.H
+        view.H
+        viewholderv.H
+        viewref.H
+        vopconapp.H
+        vutils.H
+        wbuttonv.H
+        webapp.H
+        webcom.H
+        web.H
+        weblink.H
+        weblinkview.H
+        webview.H
+        wincelview.H
+        windowsystem.H
+        workproc.H
+        wrapv.H
+        writestamp.H
+        writestmpv.H
+        xbitmap.H
+        xbm.H
+        xcolor.H
+        xcolormap.H
+        xcursor.H
+        xddimage.H
+        xfontdesc.H
+        xgraphic.H
+        xim.H
+        xpixmap.H
+        xwd.H
+        xwdio.H
+        xws.H
+        zipedit.h
+        zipedit.H
+        zipefc00.h
+        zipefn00.h
+        zipfig.h
+        zip.h
+        zip.H
+        zipiff00.h
+        zipifm00.h
+        zipimage.h
+        zipoarc.H
+        zipoarrow.H
+        zipobject.H
+        zipocapt.H
+        zipocirc.H
+        zipoelli.H
+        zipofcapt.H
+        zipoimbed.H
+        zipoline.H
+        zipopath.H
+        zipoplin.H
+        zipopolygon.H
+        ziporang.H
+        ziporect.H
+        ziposymbol.H
+        zipotrap.H
+        zippane.h
+        zipprint.h
+        zipprint.H
+        zipstatus.H
+        zipstrm.h
+        zipview.H
+        }
+      atkos.h
+      atkproto.h
+      ckndbm.h
+      cmenu.h
+      cmerror.h
+      cparser.h
+      dropoff.h
+      eglbvars.h
+      elifns.h
+      eli.h
+      errprntf.h
+      etypes.h
+      fdplumb.h
+      fdplumbi.h
+      index.h
+      jconfig.h
+      jinclude.h
+      jpegdata.h
+      mailconf.h
+      mail.h
+      mathaux.h
+      parseadd.h
+      presite.h
+      profile.h
+      qmail.h
+      regexp.h
+      scache.h
+      shadows.h
+      site.h
+      svcconf.h
+      system.h
+      tiff.h
+      tiffio.h
+      tokens.h
+      truth.h
+      units.h
+      unscribe.h
+      util.h
+      zip
+      }
+    lib
+    [377
+\begindata{text,7032128}
+\textdsversion{12}
+\begindata{link,7032800}
+4
+${ANDREWDIR}/lib
+0
+0
+V
+\begindata{link,7032800}
+Datastream version: 2
+lib
+2
+
+black
+white
+\enddata{link,7032800}
+\enddata{link,7032800}
+\view{linkview,7032800,10,0,0}
+
+In old UNIX tradition, libraries, shared objects and a few config files 
+(that probably should be in share or etc)\
+\enddata{text,7032128}
+]
+      {
+      2rtf.trans
+      afm
+        {
+        BookmankDemi
+        BookmankLight
+        CAxnmankDemiIt
+        clmeskBoldItal
+        Courier
+        CourierkBold
+        Helvetica
+        HelveticakBold
+        HourierkObliqu
+        jbxjwinokBoldI
+        JkczCXvwdekDem
+        JvantGardekDem
+        LkczCXvwdekBoo
+        LvantGardekBoo
+        OxLMnerkBoldOb
+        PalatinokBold
+        PalatinokRoman
+        PpHetzxdLzelkl
+        PpHetzxurySchl
+        PpHlyoFDuySchl
+        PpHutAuIrySchl
+        SalatinokItali
+        Symbol
+        TimeskBold
+        TimeskItalic
+        TimeskRoman
+        VpAtpankLightI
+        wgxEvOncakBold
+        YzqveticakObli
+        ZapfDingbats
+        }
+      arbiters
+        {
+        Arb
+        calc.lset
+        calc.tbl
+        conpros.awk
+        helparb
+        instpros.awk
+        makefile.arb
+        piano.lst
+        piano.txt
+        vallist
+        viewlist
+        }
+      atk
+        {
+        AButton.lt
+        AButton.rf
+        atkaliases
+        apt.lt
+        apt.rf
+        arbiter.lt
+        arbiter.rf
+        atkutils.lt
+        atkutils.rf
+        awidget.lt
+        awidget.rf
+        basics.lt
+        basics.rf
+        bdffont.lt
+        bdffont.rf
+        bush.lt
+        bush.rf
+        calc.lt
+        calc.rf
+        champ.lt
+        champ.rf
+        chart.lt
+        chart.rf
+        circlepi.lt
+        circlepi.rf
+        clock.lt
+        clock.rf
+        compile.lt
+        compile.rf
+        consoleapp.lt
+        consoleapp.rf
+        datacata.lt
+        datacata.rf
+        deskey.lt
+        deskey.rf
+        dynsearch.lt
+        dynsearch.rf
+        eq.lt
+        eq.rf
+        ezdiff.lt
+        ezdiff.rf
+        ez.lt
+        ezprintapp.lt
+        ezprintapp.rf
+        ez.rf
+        fad.lt
+        fad.rf
+        figure.lt
+        figure.rf
+        filter.lt
+        filter.rf
+        frame.lt
+        frame.rf
+        gofig.lt
+        gofig.rf
+        gsearch.lt
+        gsearch.rf
+        help.lt
+        help.rf
+        htmltext.lt
+        htmltext.rf
+        imagev.lt
+        imagev.rf
+        incsearch.lt
+        incsearch.rf
+        launchapp.lt
+        launchapp.rf
+        layout.lt
+        layout.rf
+        libAButton.so
+        libAButtonv.so
+        libAList.so
+        libAListv.so
+        libamsn.so
+        libams.so
+        libamsutil.so
+        libAOptionCardv.so
+        libAOptionMenu.so
+        libAOptionMenuv.so
+        libapt.so
+        libapts.so
+        libaptv.so
+        libarbcon.so
+        libarbiter.so
+        libarbiterview.so
+        libasmtext.so
+        libasmtextview.so
+        libAText.so
+        libATextv.so
+        libatkutils.so
+        libattlist.so
+        libawidget.so
+        libbargraphV.so
+        libbasics.so
+        libbdffont.so
+        libbdffontv.so
+        libbox.so
+        libboxview.so
+        libbushapp.so
+        libbush.so
+        libbushv.so
+        libbutter.so
+        libbutterview.so
+        libbuttonV.so
+        libcalccon.so
+        libcalc.so
+        libcalcv.so
+        libcaptions.so
+        libcel.so
+        libcelview.so
+        libchamp.so
+        libchartapp.so
+        libchartcsn.so
+        libchartdot.so
+        libcharthst.so
+        libchartlin.so
+        libchartobj.so
+        libchartpie.so
+        libchart.so
+        libchartstk.so
+        libchartv.so
+        libchartx1app.so
+        libcheckv.so
+        libchimp.so
+        libchimpview.so
+        libchomp.so
+        libchompview.so
+        libcirclepi.so
+        libcirclepiview.so
+        libclicklistV.so
+        libclock.so
+        libclockview.so
+        libcmuwm.so
+        libcompile.so
+        libcompress.so
+        libcompressv.so
+        libconsoleapp.so
+        libconsoleClass.so
+        libcontrolV.so
+        libcpptext.so
+        libcpptextview.so
+        libctext.so
+        libctextview.so
+        libdatacata.so
+        libdeskey.so
+        libdynsearch.so
+        libenode.so
+        libenodeview.so
+        libenterstrV.so
+        libentertext.so
+        libeq.so
+        libeqview.so
+        libetextview.so
+        libez2htmlapp.so
+        libezdiff.so
+        libezprintapp.so
+        libez.so
+        libfaces.so
+        libfad.so
+        libfadview.so
+        libfbm.so
+        libfcomp.so
+        libfigure.so
+        libfiller.so
+        libfillerview.so
+        libfilter.so
+        libfolders.so
+        libfoldertreev.so
+        libfourwayV.so
+        libframe.so
+        libgentext.so
+        libGetRecV.so
+        libgnucompat.so
+        libgofigapp.so
+        libgofig.so
+        libgofigview.so
+        libgsearch.so
+        libhelpapp.so
+        libhelpcon.so
+        libhelpdb.so
+        libhelp.so
+        libheximage.so
+        libhidden.so
+        libhiddenview.so
+        libhlptext.so
+        libhlptextview.so
+        libhr.so
+        libhrv.so
+        libhtablev.so
+        libhtmlenv.so
+        libhtmlform.so
+        libhtmlimagev.so
+        libhtmltext.so
+        libhtmltextview.so
+        libicon.so
+        libiconview.so
+        libidltext.so
+        libidltextview.so
+        libimagev.so
+        libimg.so
+        libincsearch.so
+        liblaunchapp.so
+        liblayout.so
+        liblayoutview.so
+        liblink.so
+        liblinkview.so
+        liblogview.so
+        liblookz.so
+        liblookzview.so
+        liblset.so
+        liblsetview.so
+        libltapp.so
+        libltext.so
+        libltextview.so
+        liblt.so
+        libltv.so
+        libm3text.so
+        libm3textview.so
+        libmac.so
+        libmailobj.so
+        libmailobjv.so
+        libmantext.so
+        libmbuttonv.so
+        libmcidas.so
+        libmenterstrV.so
+        libmentertext.so
+        libmessagesapp.so
+        libmessages.so
+        libmesswind.so
+        libmetax.so
+        libmetextview.so
+        libmmtext.so
+        libmodtext.so
+        libmodtextview.so
+        libmonth.so
+        libmonthview.so
+        libmtext.so
+        libmtextview.so
+        libnbutterv.so
+        libnessmark.so
+        libnessm.so
+        libnessmv.so
+        libnessrunapp.so
+        libness.so
+        libnessview.so
+        libnote.so
+        libnoteview.so
+        liboldRF.so
+        libonoffV.so
+        liboptions.so
+        liborgapp.so
+        liborg.so
+        liborgv.so
+        libpage.so
+        libpagev.so
+        libpaint.so
+        libparser.so
+        libpbm.so
+        libpcontrol.so
+        libpcx.so
+        libperltext.so
+        libperltextview.so
+        libphelpv.so
+        libpianoV.so
+        libpintv.so
+        libpipescriptapp.so
+        libplink.so
+        libplinkview.so
+        libplusspace.so
+        libprefedapp.so
+        libprefsbv.so
+        libprefs.so
+        libprefsv.so
+        libprefval.so
+        libpreviewapp.so
+        libpreview.so
+        libps.so
+        libpsview.so
+        libptext.so
+        libptextview.so
+        libpushbutton.so
+        libpushbuttonview.so
+        libpvalbv.so
+        libpvalcv.so
+        libpvalfv.so
+        libpvalsbv.so
+        libpvalslv.so
+        libpvaltvc.so
+        libpvaltvfc.so
+        libpvaltvf.so
+        libpvaltvl.so
+        libpvaltv.so
+        librasterimage.so
+        librasterio.so
+        libraster.so
+        librasterview.so
+        librastoolview.so
+        librawtext.so
+        librawtextview.so
+        librecsearch.so
+        librexxtext.so
+        librexxtextview.so
+        librofftextapp.so
+        librofftext.so
+        librunadewapp.so
+        librunbutton.so
+        librunbuttonview.so
+        libs.all
+        libschedapp.so
+        libsched.so
+        libschedv.so
+        libsendmessage.so
+        libsliderstrV.so
+        libsliderV.so
+        libspell.so
+        libspread.so
+        libsrctext.so
+        libsrctextview.so
+        libssliderv.so
+        libstringV.so
+        libsuitecv.so
+        libsuiteev.so
+        libsuite.so
+        libsuitetapp.so
+        libsuitex1app.so
+        libsunraster.so
+        libsupport.so
+        libsupviews.so
+        libsym.so
+        libt822view.so
+        libtable.so
+        libtabrulerview.so
+        libtags.so
+        libtext822.so
+        libtextaux.so
+        libtextintv.so
+        libtextobjs.so
+        libtext.so
+        libthumbstrV.so
+        libthumbV.so
+        libtif.so
+        libtimeoday.so
+        libtimeodayview.so
+        libtitextv.so
+        libtlex.so
+        libtoezapp.so
+        libtoksym.so
+        libtree.so
+        libtreev.so
+        libtypescriptapp.so
+        libtypescript.so
+        libtypetext.so
+        libupdateq.so
+        liburlbutton.so
+        liburlbuttonview.so
+        libvalue.so
+        libvalueview.so
+        libvector.so
+        libvutils.so
+        libwbuttonv.so
+        libwebapp.so
+        libwebcom.so
+        libweblink.so
+        libweblinkview.so
+        libweb.so
+        libwebview.so
+        libwincelview.so
+        libwrapv.so
+        libwritestamp.so
+        libwritestampv.so
+        libxbitmap.so
+        libxbm.so
+        libxpixmap.so
+        libxwdio.so
+        libxwd.so
+        libzipedit.so
+        libzipoarc.so
+        libzipoarrow.so
+        libzipobject.so
+        libzipocapt.so
+        libzipocirc.so
+        libzipoelli.so
+        libzipofcapt.so
+        libzipoimbed.so
+        libzipoline.so
+        libzipopath.so
+        libzipoplin.so
+        libzipopolygon.so
+        libziporang.so
+        libziporect.so
+        libziposymbol.so
+        libzipotrap.so
+        libzipprint.so
+        libzip.so
+        libzipstatus.so
+        libzipview.so
+        link.lt
+        link.rf
+        lookz.lt
+        lookz.rf
+        lt.lt
+        lt.rf
+        messages.lt
+        messages.rf
+        metax.lt
+        metax.rf
+        ness.lt
+        ness.rf
+        note.lt
+        note.rf
+        org.lt
+        org.rf
+        parser.lt
+        parser.rf
+        pcontrol.lt
+        pcontrol.rf
+        prefs.lt
+        prefs.rf
+        preview.lt
+        preview.rf
+        raster.lt
+        raster.rf
+        recsearch.lt
+        recsearch.rf
+        rofftext.lt
+        rofftext.rf
+        runbutton.lt
+        runbutton.rf
+        sched.lt
+        sched.rf
+        spell.lt
+        spell.rf
+        srctext.lt
+        srctext.rf
+        suite.lt
+        suite.rf
+        support.lt
+        support.rf
+        supviews.lt
+        supviews.rf
+        sym.lt
+        sym.rf
+        table.lt
+        table.rf
+        tags.lt
+        tags.rf
+        textaux.lt
+        textaux.rf
+        text.lt
+        textobjs.lt
+        textobjs.rf
+        text.rf
+        timeoday.lt
+        timeoday.rf
+        tlex.lt
+        tlex.rf
+        toezapp.lt
+        toezapp.rf
+        tree.lt
+        tree.rf
+        typescript.lt
+        typescript.rf
+        value.lt
+        value.rf
+        atkvers.num
+        zip.lt
+        zip.rf
+        }
+      compchar
+        {
+        comps
+        }
+      consoles
+        {
+        busybox.con
+        default.con
+        fudgenut.con
+        muchvice.con
+        smallfry.con
+        tang.con
+        vicemore.con
+        }
+      el
+        {
+        batmail.el
+        prompt.el
+        }
+      eli
+        {
+        elilib.eli
+        flames.eli
+        ints.eli
+        lists.eli
+        mapcar.eli
+        misc.eli
+        strings.eli
+        }
+      flames
+        {
+        bbd.flames
+        flib.flames
+        msvc.flames
+        }
+      genstatl
+        {
+        liborder
+        runapp.C
+        }
+      global.ezinit
+      gnu.atkinit
+      gnu.prf
+      Hello
+      help.index
+        {
+        H0
+        H1
+        H10
+        H2
+        H3
+        H4
+        H5
+        H6
+        H7
+        H8
+        H9
+        V11.1
+        }
+      help.overviews
+      help.programs
+      libafs.a
+      libATKDynLoad.a
+      libATKLink.a
+      libatkos.a
+      libcmenu.a
+      libcparser.a
+      libcui.a
+      libcuin.a
+      libeli.a
+      liberrors.a
+      libindex.a
+      libjpeg.a
+      libmail.a
+      libmsshr.a
+      libmssrv.a
+      librxp.a
+      libshadows.a
+      libtiff.a
+      libutil.a
+      ml
+        {
+        batmail.ml
+        prompt.ml
+        }
+      ness
+        {
+        ctype.n
+        date.n
+        demos
+          {
+          badsub.n
+          bank.d
+          birth.db
+          calc.d
+          calcr.d
+          capstest.d
+          docbody.d
+          docheader.d
+          gendoc.n
+          happybday.d
+          happybday.n
+          letter.tpl
+          qrbody.d
+          qrheader.d
+          questionnaire.msg
+          startez.d
+          testness.n
+          volume.d
+          xmas.d
+          }
+        enum.n
+        fileconvert.n
+        format.n
+        fromrtf.n
+        funchdr.n
+        gnutranspose.n
+        italicize.n
+        mtmpl.n
+        nesswarn.d
+        octalimage.n
+        sort.n
+        swap.n
+        tokens.n
+        unscribe.n
+        vp2scribe.n
+        wc.n
+        xwipe.n
+        }
+      null
+        {
+        Imakefile
+        nullapp.C
+        nullapp.H
+        null.C
+        null.H
+        null.help
+        nullview.C
+        nullview.H
+        nullvt.C
+        }
+      packages
+        {
+        atk
+        atkams
+        atk/atk
+        atk/defaults
+        auis
+        contrib
+        defaults
+        x
+        }
+      prefs.def
+      prs
+        {
+        adew.pr
+        app.pr
+        bush.pr
+        champ.pr
+        compile.pr
+        console.pr
+        contents.pr
+        dialog.pr
+        eli.pr
+        ezdiff.pr
+        ez.pr
+        figure.pr
+        gofig.pr
+        help.pr
+        isearch.pr
+        layout.pr
+        link.pr
+        lookz.pr
+        matte.pr
+        messages.pr
+        ness.pr
+        oscroll.pr
+        pcompch.pr
+        prefed.pr
+        printing.pr
+        pshbttn.pr
+        raster.pr
+        sbutton.pr
+        scroll.pr
+        shadows.pr
+        spell.pr
+        suite.pr
+        table.pr
+        tags.pr
+        tscript.pr
+        xprefs.pr
+        zip.pr
+        }
+      rasters
+        {
+        car.raster
+        christy.raster
+        cube.raster
+        doug.raster
+        dragon.raster
+        face.raster
+        flag.raster
+        fred.raster
+        horse.raster
+        itclogo.raster
+        rtfm.raster
+        tree.raster
+        }
+      rtf2.trans
+      scribe.trans
+      shmenu
+      special.ezinit
+      templates
+      tmac
+        {
+        helpmac.an
+        tmac.acc
+        tmac.arf
+        tmac.atk
+        tmac.m
+        tmac.psatk
+        }
+      tpls
+        {
+        asm.tpl
+        be2guide.tpl
+        compile.tpl
+        contenttab.tpl
+        c.tpl
+        C.tpl
+        default.tpl
+        def.tpl
+        dialog.tpl
+        dired.tpl
+        help.tpl
+        hlp.tpl
+        html.tpl
+        h.tpl
+        H.tpl
+        i3.tpl
+        idl.tpl
+        index.tpl
+        letter.tpl
+        m3.tpl
+        mantext.tpl
+        man.tpl
+        memo.tpl
+        messages.tpl
+        mmtext.tpl
+        mod.tpl
+        prefhelp.tpl
+        prefs.tpl
+        printopt.tpl
+        rawtext.tpl
+        roff.tpl
+        scribe.tpl
+        symbol.tpl
+        template.tpl
+        typescript.tpl
+        }
+      widgets
+        {
+        Button.wgt
+        CheckButton.wgt
+        ImageMap.wgt
+        List.wgt
+        OptionCard.wgt
+        OptionMenu.wgt
+        Password.wgt
+        PopupList.wgt
+        PushButton.wgt
+        RadioButton.wgt
+        ScrollingList.wgt
+        TextResponse.wgt
+        Text.wgt
+        }
+      xicons
+        {
+        alogo.icon
+        con1.icon
+        con2.icon
+        con3.icon
+        ez.icon
+        help.icon
+        itc.icon
+        msgs.icon
+        pipe.icon
+        sendmsg.icon
+        tx.icon
+        xatk.icon
+        }
+      zip
+        {
+        itcCR.scd
+        samples
+          {
+          charts.zip
+          dragon.zip
+          features.zip
+          obfuscat.zip
+          states.zip
+          }
+        symbols
+          {
+          cmu
+          computer
+          daybooks
+          flowchrt
+          games
+          general
+          home
+          itc
+          math
+          months
+          organize
+          shields
+          stars
+          }
+        }
+      }
+    .MESSAGES
+      [273
+\begindata{text,7843824}
+\textdsversion{12}
+\begindata{link,7916464}
+4
+${ANDREWDIR}/.MESSAGES
+0
+0
+V
+\begindata{link,7916464}
+Datastream version: 2
+.MESSAGES
+2
+
+black
+white
+\enddata{link,7916464}
+\enddata{link,7916464}
+\view{linkview,7916464,12,0,0\
+}\enddata{text,7843824}
+]
+      {
+      .SubscriptionMap
+      }
+    README
+    [304
+\begindata{text,7135472}
+\textdsversion{12}
+\begindata{link,7136208}
+4
+${ANDREWDIR}/README
+0
+0
+V
+\begindata{link,7136208}
+Datastream version: 2
+README
+2
+
+black
+white
+\enddata{link,7136208}
+\enddata{link,7136208}
+\view{linkview,7136208,11,0,0}
+
+Plain-text version of doc/README.ez\
+\enddata{text,7135472}
+]
+    X11fonts
+      [271
+\begindata{text,7843824}
+\textdsversion{12}
+\begindata{link,7916464}
+4
+${ANDREWDIR}/X11fonts
+0
+0
+V
+\begindata{link,7916464}
+Datastream version: 2
+X11fonts
+2
+
+black
+white
+\enddata{link,7916464}
+\enddata{link,7916464}
+\view{linkview,7916464,12,0,0\
+}\enddata{text,7843824}
+]
+      {
+      amenu12.pcf
+      andyof12.pcf
+      apcrsr20.pcf
+      apofic20.pcf
+      aptcsr20.pcf
+      apticn20.pcf
+      bits1.pcf
+      blshft12.pcf
+      con10.pcf
+      con12.pcf
+      delta12.pcf
+      donz12.pcf
+      ex12.pcf
+      fig12.pcf
+      fonts.alias
+      fonts.dir
+      gofont10.pcf
+      heb6x13.pcf
+      heb8x13B.pcf
+      heb8x13.pcf
+      icon12.pcf
+      indice12.pcf
+      kalfnt12.pcf
+      mailft12.pcf
+      msgs10.pcf
+      msgs14.pcf
+      shape10.pcf
+      sym10.pcf
+      sym12b.pcf
+      sym12.pcf
+      sym8.pcf
+      symb10.pcf
+      symb12.pcf
+      symb16.pcf
+      symb22.pcf
+      symb8.pcf
+      symba10.pcf
+      symba12.pcf
+      symba16.pcf
+      symba22.pcf
+      symba8.pcf
+      table12.pcf
+      tri10.pcf
+      values25.pcf
+      xshape10.pcf
+      zipdot20.pcf
+      zipicn20.pcf
+      zipshd16.pcf
+      ziptop10.pcf
+      }
+    }
+
+\enddata{org,6717600}

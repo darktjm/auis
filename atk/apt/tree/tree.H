@@ -143,6 +143,7 @@ public:
 								 ;
   virtual struct tree_node * CreateLeftNode( char *name, long datum, struct tree_node *right ) 
 								 ;
+  virtual void DestroyDatum( void (*FreeNodeDatum)(tree_type_node node, void *user), void *user );
   virtual void DestroyNode( struct tree_node *node );
   virtual void DestroyNodeChildren( struct tree_node *node );
   virtual struct tree_node * NextNode( struct tree_node *node )				 ;
@@ -210,6 +211,8 @@ public:
   char				  traversal_order, tree_modified;
   char				  notification_code;
   struct tree_node		 *notification_node;
+  void (*FreeNodeDatum)(tree_type_node node, void *user);
+  void *fnd_user;
   };
 
 

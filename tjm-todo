@@ -1,0 +1,41 @@
+- figure out why pref existence shrinks windows:
+    default is 500x500, but I had 1280x1024 in ~/.Xdefaults (which is
+    ignored when .preferences exists)
+- org: graphic update on delete and rename is broken (requires ctrl-L)
+  issue appears to be in observer of treev.C
+- scrolling fixes:
+  - enable scroll wheel
+  - continuous update when dragging bar
+- fix lack of updates when resizing windows
+- fix pseudo-tty allocation to use ptmx
+- fix contrib/tm to use termios, etc.
+- tests all apps, all insets, all docs, etc.
+  - squash any crashes
+  - run valgrind on as much as possible
+  - fix example docs to document C++-style code
+  - find out purpose of every file installed in auis, and document
+- general cleanup:
+  - remove all warnings
+  - remove externs in c files
+  - remove type casts if possible
+  - constify pointers if possible
+  - remove any unsupportable code (i.e., old UNIX, DOS, OS/2)
+  - remove any functions which duplicate standard functions (e.g. strdup)
+- find out and possibly remove additional CMU/MIT-specific crap
+  - figure out what "AFS integration" means
+  - find out what AMS is/does and maybe drop it
+- build improvements
+  - make it possible to build w/o simultaneous install
+  - make it possible to use -k and -j
+  - don't always regenerate deps, and clean up dep generation
+  - maybe just switch to cmake
+
+Long-term:
+  - more image::WriteNative overrides (at least 1 full-color lossless)
+  - add support for png and/or imagemagick or some other wrapper library
+  - add code snippet inset for literate programming
+  - make LaTeX the default output format
+  - unicode support
+  - truetype font support
+  - make index entries insets
+  - make entire beast literate

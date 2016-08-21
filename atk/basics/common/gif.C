@@ -697,7 +697,7 @@ gif::Load( char  *fullname, FILE  *fp )
   if ((gifin_open_file(f) != GIFIN_SUCCESS) || /* read GIF header */
       (gifin_open_image() != GIFIN_SUCCESS)) {  /* read image header */
     gifin_close_file();
-    fclose(f);
+    if(!fp) fclose(f);
     fprintf(stderr, "Couldn't read GIF image.\n");
     return(-1);
   }
@@ -771,7 +771,7 @@ gif::Load( char  *fullname, FILE  *fp )
       }
   }
   gifin_close_file();
-  fclose(f);
+  if(!fp) fclose(f);
   return(0);
 }
 

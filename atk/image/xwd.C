@@ -534,7 +534,7 @@ xwd::Load( char  *fullname, FILE  *fp )
       }
   }
   if (! isXWD(fullname, f, &header)) {
-    fclose(f);
+    if(!fp) fclose(f);
     printf("image not an Xwd!\n");
     return(-1);
   }
@@ -589,7 +589,7 @@ xwd::Load( char  *fullname, FILE  *fp )
   switch (header.pixmap_format) {
   case XYBitmap:
     loadXYBitmap(this, fullname, f, header);
-    fclose(f);
+    if(!fp) fclose(f);
     return(0); /* we used to goof w/ the cmap but we gave up */
   case XYPixmap:
     loadXYPixmap(this, fullname, f, header);
@@ -598,7 +598,7 @@ xwd::Load( char  *fullname, FILE  *fp )
     loadZPixmap(this, fullname, f, header);
     break;
   }
-  fclose(f);
+  if(!fp) fclose(f);
 
   /* load the colormap.  we should probably use pixval instead of the color
    * number but the value seems pretty system-dependent and most colormaps

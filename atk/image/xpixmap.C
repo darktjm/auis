@@ -133,20 +133,20 @@ xpixmap::Load( char  *fullname, FILE  *fp )
   w= h= ncolors= 0;
   for (;;) {
     if (! fgets(buf, BUFSIZ - 1, f)) {
-      fclose(f);
+      if(!fp) fclose(f);
       return(-1);
     }
     if(*buf != '"')
 	continue;
     if (sscanf(buf, "\"%d %d %d %d\"", &w, &h, &ncolors, &cpp) != 4) {
-      fclose(f);
+      if(!fp) fclose(f);
       return(-1);
     }
     else break;
   }
 
   if (w <= 0 || h <= 0 || ncolors <= 0 || cpp <= 0) {
-    fclose(f);
+    if(!fp) fclose(f);
     return(-1);
   }
 
@@ -214,7 +214,7 @@ xpixmap::Load( char  *fullname, FILE  *fp )
 	if (!strncmp(*(ctable + a), buf, cpp))
 	  break;
       if (a == ncolors) { /* major uncool */
-	fclose(f);
+	if(!fp) fclose(f);
 	printf("%s: Pixel data doesn't match color data\n", fullname);
 	return(-1);
       }
@@ -226,7 +226,7 @@ xpixmap::Load( char  *fullname, FILE  *fp )
       return(-1);
     }
   }
-  fclose(f);
+  if(!fp) fclose(f);
   return(0);
 }
 

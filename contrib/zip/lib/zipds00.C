@@ -507,7 +507,8 @@ zip::Set_Stream_Source( register zip_type_stream	       stream, register char			
     DEBUGst(Stream Name,stream->zip_stream_name);
 /*=== deallocate any prior objects ===*/
     stream->zip_stream_image_anchor->zip_image_inferior = NULL;
-    sprintf( temp_name, "%s.zip", mktemp( "/tmp/ZIPxxxxxx" ) );
+    strcpy(temp_name, "/tmp/ZIPXXXXXX");
+    strcat(mktemp(temp_name), ".zip");
     if ( temp_file = fopen( temp_name, "w+" ) )
       { DEBUG(Open OK);
       if ( fwrite( source, 1, strlen( source ), temp_file ) )

@@ -168,12 +168,12 @@ pcx::Load( char  *fullname, FILE  *fp )
 
     /* Read .pcx header. */
     if (fread(pcxhd, sizeof(unsigned char), 128, f) != 128) {
-	fclose(f);
+	if(!fp) fclose(f);
 	return(-1);
     }
 
     if ((pcxhd[0] != PCX_MAGIC) || (pcxhd[1] > 5)) {
-	fclose(f);
+	if(!fp) fclose(f);
 	return(-1);
     }
 
@@ -195,7 +195,7 @@ pcx::Load( char  *fullname, FILE  *fp )
 
     /* Read compressed bitmap. */
     PCX_LoadImage( f, bytes_per_row, this, ymax );
-    fclose( f );
+    if(!fp) fclose( f );
     return(0);
 }
 

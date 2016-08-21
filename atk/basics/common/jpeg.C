@@ -306,21 +306,8 @@ static void JPEG_Error (const char  *msgtext)
 
 /*******************************************/
 int
-jpeg::Load( char  *fullname, FILE  *fp )
+jpeg::Load( char  *fname, FILE  *f )
 /*******************************************/
-{
-  FILE *f;
-  if((f = fp) == 0) {
-      if (! (f = fopen(fullname, "r"))) {
-	  fprintf(stderr, "Couldn't open gif file %s.\n", fullname);
-	  return(-1);
-      }
-  }
-  return(LoadJFIF(this, fullname, f));
-}
-
-/*******************************************/
-int LoadJFIF(class jpeg  *jpeg, char  *fname, FILE  *f)
 {
   int rtval;
   /* These three structs contain JPEG parameters and working data.
@@ -338,8 +325,10 @@ int LoadJFIF(class jpeg  *jpeg, char  *fname, FILE  *f)
   /* Set up the input file */
 
   if((cinfo.input_file = f) == NULL && fname &&
-       (cinfo.input_file = fopen(fname, "r")) == NULL)
+       (cinfo.input_file = fopen(fname, "r")) == NULL) {
+      fprintf(stderr, "Couldn't open jpeg file %s.\n", fname);
       return(-1);
+  }
   
   long filepos=ftell(cinfo.input_file);
   /* figure out the file size (for Informational Purposes Only) */
@@ -349,7 +338,7 @@ int LoadJFIF(class jpeg  *jpeg, char  *fname, FILE  *f)
 
   /* Set up longjmp for error recovery out of JPEG_Error */
   if(setjmp(jmpState)) {
-    fclose(cinfo.input_file);	/* close input file */
+    if(!f) fclose(cinfo.input_file);	/* close input file */
     return(-1);		/* no further cleanup needed */
   }
 
@@ -384,37 +373,37 @@ int LoadJFIF(class jpeg  *jpeg, char  *fname, FILE  *f)
   jpeg_decompress(&cinfo);
 
   if (pic24) {
-      (jpeg)->newTrueImage( cinfo.image_width, cinfo.image_height);
-      memmove((jpeg)->Data(), pic24, 3 * cinfo.image_width * cinfo.image_height);
+      (this)->newTrueImage( cinfo.image_width, cinfo.image_height);
+      memmove((this)->Data(), pic24, 3 * cinfo.image_width * cinfo.image_height);
       free(pic24);
   }
   else {
       unsigned int i, w = cinfo.image_width, h = cinfo.image_height;
 
       if(cinfo.out_color_space == CS_GRAYSCALE)
-	  (jpeg)->newGreyImage( w, h, cinfo.data_precision);
+	  (this)->newGreyImage( w, h, cinfo.data_precision);
       else
-	  (jpeg)->newRGBImage( w, h, cinfo.data_precision);
-      memmove((jpeg)->Data(), pic, w * h);
+	  (this)->newRGBImage( w, h, cinfo.data_precision);
+      memmove((this)->Data(), pic, w * h);
       if(cinfo.out_color_space == CS_GRAYSCALE) {
-	  (jpeg)->RGBUsed() = (jpeg)->RGBSize() = numColors = 256;
+	  (this)->RGBUsed() = (this)->RGBSize() = numColors = 256;
 	  for(i = 0; i < numColors-1; i++)
-	      (jpeg)->RedPixel( i) =
-		(jpeg)->GreenPixel( i) =
-		(jpeg)->BluePixel( i) = i << 8;
+	      (this)->RedPixel( i) =
+		(this)->GreenPixel( i) =
+		(this)->BluePixel( i) = i << 8;
       }
       else {
 	  for(i = 0; i < numColors; i++) {
-	      (jpeg)->RedPixel( i) = r[i] << 8;
-	      (jpeg)->GreenPixel( i) = g[i] << 8;
-	      (jpeg)->BluePixel( i) = b[i] << 8;
+	      (this)->RedPixel( i) = r[i] << 8;
+	      (this)->GreenPixel( i) = g[i] << 8;
+	      (this)->BluePixel( i) = b[i] << 8;
 	  }
-	  (jpeg)->RGBUsed() = (jpeg)->RGBSize() = numColors;
+	  (this)->RGBUsed() = (this)->RGBSize() = numColors;
       }
       free(pic);
   }
   /* Close input file */
-  fclose(cinfo.input_file);
+  if(!f) fclose(cinfo.input_file);
 
   /* Got it! */
   return 0;

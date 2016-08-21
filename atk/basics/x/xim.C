@@ -360,6 +360,11 @@ static long xWindowCtr = 0;
 #define LEFTBUTTON 1
 #define RIGHTBUTTON 3
 #define MENUBUTTON 2
+#define ZUPBUTTON 4 /* ^Z */
+#define ZDOWNBUTTON 5 /* ^Q = ESC-Z &/
+/* so what are 6 & 7? */
+#define ZLEFTBUTTON 8
+#define ZRIGHTBUTTON 9
 
 #define MENUBARHEIGHT(anXIMPtr) (anXIMPtr->menubaron?anXIMPtr->mbi->prefs->menubarheight:0)
 

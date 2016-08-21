@@ -368,15 +368,15 @@ static
 long Generate_Temp_File( register class zip		      *self, register FILE			      *file, register char			     **generated_file_name )
         {
   register long			      status = dataobject_NOREADERROR;
-  static char			     *temp_name_template = "/tmp/ZIPxxxxxx",
-				      temp_name[512];
+  static char			      temp_name[512];
   register FILE			     *temp_file;
   register long			      level = 0;
   char				      line[32000];
 
 
   IN(Generate_Temp_File);
-  sprintf( temp_name, "%s.zip", mktemp( temp_name_template ) );
+  strcpy(temp_name, "/tmp/ZIPXXXXXX");
+  strcat(mktemp(temp_name), ".zip");
   DEBUGst(Temp-Name,temp_name);
   *generated_file_name = temp_name;
   if ( (temp_file = fopen( temp_name, "w+" )) == NULL )

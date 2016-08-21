@@ -293,6 +293,12 @@ tree::CreateLeftNode( register char	    	      *name, register long		       datu
   return  node;
   }
 
+void tree::DestroyDatum( void (*FreeNodeDatum)(tree_type_node node, void *user), void *user )
+{
+    this->FreeNodeDatum = FreeNodeDatum;
+    this->fnd_user = user;
+}
+
 void
 tree::DestroyNode( register tree_type_node      node )
 {
@@ -324,6 +330,7 @@ tree::DestroyNode( register tree_type_node      node )
       { DEBUG(Adjust Right);
       LeftNode(RightNode(node)) = LeftNode(node);
       }
+    if (this->FreeNodeDatum) this->FreeNodeDatum(node, fnd_user);
     if ( NodeName(node) )	free( NodeName(node) );
     if ( NodeCaption(node) )	free( NodeCaption(node) );
     if ( NodeTitle(node) )	free( NodeTitle(node) );
