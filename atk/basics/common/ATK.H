@@ -41,7 +41,7 @@ typedef int boolean;
 #define FALSE 0
 #endif
 
-typedef boolean (*ATKinitfptr)();
+typedef boolean (*ATKinitfptr)(void);
 /*
  * Use the ATKdefineRegistry macro to enter a class into the runtime
  * registry.  It expands to a variable declaration and should probably
@@ -125,9 +125,9 @@ struct ATKregistryEntry {
 	    // Returns the name of the class.
 
     // Analogs of the IsType methods listed below for ATK.
-    const boolean IsType(const ATKregistryEntry *typeobject) const;
-    const boolean IsType(const char *classname) const;
-    const boolean IsType(const ATK *typeobject) const;
+    boolean IsType(const ATKregistryEntry *typeobject) const;
+    boolean IsType(const char *classname) const;
+    boolean IsType(const ATK *typeobject) const;
 };
 
 
@@ -155,13 +155,13 @@ class ATK {
     
     // IsType returns true if "this" is a subclass of the given
     // registry, classname or other ATK object.
-    inline const boolean IsType(const ATKregistryEntry *classent) const {
+    inline boolean IsType(const ATKregistryEntry *classent) const {
 	return ((ATK *)this)->ATKregistry()->IsType(classent);
     }
-    inline const boolean IsType(const char *classname) const {
+    inline boolean IsType(const char *classname) const {
 	return ((ATK *)this)->ATKregistry()->IsType(classname);
     }
-    inline const boolean IsType(const ATK *typeobject) const {
+    inline boolean IsType(const ATK *typeobject) const {
 	return ((ATK *)this)->ATKregistry()->IsType(typeobject);
     }
 
@@ -174,7 +174,7 @@ class ATK {
     
     
     // IsTypeByName returns true if sub is a subclass of super.
-    static const boolean IsTypeByName(const char *sub, const char *super);
+    static boolean IsTypeByName(const char *sub, const char *super);
 
     // GetTypeName returns a string representing the classname
     // of any given ATK object.

@@ -26,7 +26,7 @@
 */
 #ifndef	SYSTEM_H
 #define	SYSTEM_H
-#define DIRENT_ILLEGAL_ACCESS 1
+
 /* This first section contains definitions and includes which should be present for both
  C, C++ source files and for Imakefiles.
 All #includes should be prsent exactly as they are in this file, unless otherwise
