@@ -349,12 +349,12 @@ static long WhatIsAt(class captions  *ci, long  n, long  d)
     return(pos);
 }
 
-static struct scrollfns capScrollInterface = {(scroll_getinfofptr)GetInfo, (scroll_setframefptr)SetFrame, NULL, (scroll_whatfptr)WhatIsAt};
+static const struct scrollfns capScrollInterface = {(scroll_getinfofptr)GetInfo, (scroll_setframefptr)SetFrame, NULL, (scroll_whatfptr)WhatIsAt};
 
-char * captions::GetInterface(char  *interfaceName) 
+const void * captions::GetInterface(const char  *interfaceName)
 {
     if (strcmp(interfaceName, "scroll,vertical") == 0)
-        return (char *) &capScrollInterface;
+        return &capScrollInterface;
     return NULL;
 }
 
@@ -1462,7 +1462,7 @@ captions::captions()
 
     this->CaptText = new text;
     (this)->SetDataObject( this->CaptText);
-    this->textscrollinterface = (struct scrollfns *) (this)->messages::GetInterface( "scroll,vertical");
+    this->textscrollinterface = (const struct scrollfns *) (this)->messages::GetInterface( "scroll,vertical");
 
     this->ActiveCaptionStyle = new style;
     this->ActiveDeletedStyle = new style;

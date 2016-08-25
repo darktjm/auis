@@ -63,14 +63,14 @@ static long xwhat(class helloworldview  *hwv, long  cord , long  outof);
 static long ywhat(class helloworldview  *hwv, long  cord , long  outof);
  
 
-static struct scrollfns horizInterface = {
+static const struct scrollfns horizInterface = {
     (scroll_getinfofptr) xgetinfo,
     (scroll_setframefptr) xsetframe,
     (scroll_endzonefptr) NULL,
     (scroll_whatfptr) xwhat
 };
 
-static struct scrollfns vertInterface = {
+static const struct scrollfns vertInterface = {
     (scroll_getinfofptr) ygetinfo,
     (scroll_setframefptr) ysetframe,
     (scroll_endzonefptr) NULL,
@@ -496,12 +496,12 @@ static long ywhat(class helloworldview  *hwv, long  cord , long  outof)
 }
 
 
-char *helloworldview::GetInterface(char  *type)
+const void *helloworldview::GetInterface(const char  *type)
 {
     if (strcmp(type, "scroll,vertical") == 0)
-	return (char *) &vertInterface;
+	return &vertInterface;
     else if (strcmp(type, "scroll,horizontal") == 0)
-	return (char *) &horizInterface;
+	return &horizInterface;
     else
 	return NULL;
 }

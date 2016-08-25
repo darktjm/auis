@@ -102,11 +102,11 @@ void ssliderv::Endzone(int  end, enum view_MouseAction  action)
 {
 }
     
-static struct scrollfns scrollInterface = {(scroll_getinfofptr)getinfo, (scroll_setframefptr)setframe, (scroll_endzonefptr)endzone, (scroll_whatfptr)whatisat};
+static const struct scrollfns scrollInterface = {(scroll_getinfofptr)getinfo, (scroll_setframefptr)setframe, (scroll_endzonefptr)endzone, (scroll_whatfptr)whatisat};
 
-char *ssliderv::GetInterface(char  *name)
+const void *ssliderv::GetInterface(const char  *name)
 {
-    return (char *)&scrollInterface;
+    return &scrollInterface;
 }
 
 void ssliderv::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)

@@ -123,7 +123,7 @@ class atom *atom::InternRock(long  rock)
 {
 	ATKinit;
 
-    char temp[16];
+    char temp[20];
 
     sprintf(temp, "g0x%lx", rock); 
     return atom::Intern(temp);

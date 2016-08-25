@@ -88,7 +88,7 @@ class spread: public  view {
       void ReceiveInputFocus();
       void LoseInputFocus();
       class view * GetApplicationLayer()  ;
-      char * GetInterface(char *type)  ;
+      const void * GetInterface(const char *type)  ;
       void LinkTree(class view * parent);
       void ObservedChanged(class observable *changed, long status);
       void UnlinkNotification(class view *unlinkedTree);

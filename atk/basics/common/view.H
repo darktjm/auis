@@ -179,7 +179,7 @@ public:
 
     virtual ATK  *WantHandler(char *handlerName);
     virtual void PostDefaultHandler(char *handlerName, ATK  *handler);
-    virtual char *GetInterface(char *type);
+    virtual const void *GetInterface(const char *type);
     virtual char *WantInformation(char *key);
 
 

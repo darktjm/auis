@@ -88,6 +88,13 @@ ATKregistryEntry *me ::ATKregistry() { return &me ## _ATKregistry_; }
   ATK::RegisterClass(&classname ## _ATKregistry_);
 
 /*
+ * The build process generates a list of statically bound classes
+ * in statl.C (using genstatl), containing only one function to
+ * call to register all of the statically bound classes:
+ */
+extern void doStaticLoads(void);
+
+/*
  * Use the ATKinit macro at the start of each constructor,
  * and at the start of each classprocedure implementation.
  * It checks if the class has been initialized, and if not

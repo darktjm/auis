@@ -28,6 +28,9 @@
   - make it possible to use -k and -j
   - don't always regenerate deps, and clean up dep generation
   - maybe just switch to cmake
+- fix UniquiID() and friends:
+  - try not to renumber everything every modification; messes up svn diff
+  - try to limit to 32 bits to retain compatibility with older systems
 
 Long-term:
   - more image::WriteNative overrides (at least 1 full-color lossless)

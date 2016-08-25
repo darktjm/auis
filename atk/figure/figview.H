@@ -101,7 +101,7 @@ class figview  : public  view {
       void ObservedChanged(class observable *dobj, long status);
       void Print(FILE *file, char *processor, char *finalFormat, boolean toplevel);
       class view * GetApplicationLayer()  ;
-      char * GetInterface(char *interface_name)  ;
+      const void * GetInterface(const char *interface_name)  ;
       void PostMenus(class menulist *ml);
       void PostKeyState(class keystate *ks);
       void SetDataObject(class dataobject *dobj);

@@ -116,7 +116,7 @@ public:
    void ObservedChanged ( class observable *changed, long value );
    void Print( FILE *file, char *processor, char *finalFormat, boolean topLevel );
    class view * GetApplicationLayer();
-   char *GetInterface( char *interface_name );
+   const void *GetInterface( const char *interface_name );
    void PostMenus( class menulist *menulist );
    void PostKeyState( class keystate *keystatep );
 

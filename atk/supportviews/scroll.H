@@ -244,7 +244,7 @@ public:
     class ScrollRegion *regions[NUM_SCROLLREGIONS];
     boolean custom;
     boolean force_get_interface;
-    struct scrollfns *fns[scroll_TYPES];
+    const struct scrollfns *fns[scroll_TYPES];
     boolean customsi;
 };
   

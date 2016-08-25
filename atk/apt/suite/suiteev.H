@@ -82,7 +82,7 @@ public:
 
     
 	 void FullUpdate(enum view_UpdateType type,long left,long top,long width,long height);
-	 char* GetInterface(char *type)  ;
+	 const void* GetInterface(const char *type)  ;
 	 class view * Hit(enum view_MouseAction action,long x,long y,long numClicks)  ;
 	 void Update();
 	 void PostMenus(class menulist *menulistp);

@@ -442,14 +442,14 @@ class view *figview::GetApplicationLayer()
 
    
  
-static struct scrollfns	vertical_scroll_interface =
+static const struct scrollfns	vertical_scroll_interface =
 {(scroll_getinfofptr)y_getinfo, (scroll_setframefptr)y_setframe, NULL, (scroll_whatfptr)y_whatisat};
-static struct scrollfns	horizontal_scroll_interface =
+static const struct scrollfns	horizontal_scroll_interface =
 {(scroll_getinfofptr)x_getinfo, (scroll_setframefptr)x_setframe, NULL, (scroll_whatfptr)x_whatisat};
 
-char *figview::GetInterface(char  *interface_name)
+const void *figview::GetInterface(const char  *interface_name)
 {
-    struct scrollfns *interface;
+    const struct scrollfns *interface;
     
     if (strcmp(interface_name, "scroll,vertical") == 0)
 	interface = &vertical_scroll_interface;
@@ -457,7 +457,7 @@ char *figview::GetInterface(char  *interface_name)
 	interface = &horizontal_scroll_interface;
     else
 	interface = NULL;
-    return (char *)interface;
+    return interface;
 }
 
 static void x_getinfo(class figview  *self, struct range  *total , struct range  *seen , struct range  *dot)

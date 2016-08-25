@@ -30,15 +30,16 @@
 #endif
 #endif
 
+#include "pathopen.h"
 
 char pathopen_realpath[MAXPATHLEN+1];
-FILE *pathopen(char  *path, char  *fpath, char  *mode)
+FILE *pathopen(const char  *path, const char  *fpath, const char  *mode)
 {
-    char *p=path;
+    const char *p=path;
     FILE *fp=NULL;
     while (*p && fp==NULL) {
 	int len;
-	char *q=strchr(p, PATHSEP);
+	const char *q=strchr(p, PATHSEP);
 	if(q==NULL) len=strlen(p);
 	else len = q-p;
 	if(len+strlen(fpath)+2<MAXPATHLEN) {

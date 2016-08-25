@@ -124,7 +124,7 @@ ATKdefineRegistry(apts, ATK, NULL);
 
 
 long
-apts::CompareStrings( register char			  *s1 , register char			  *s2 )
+apts::CompareStrings( register const char			  *s1 , register const char			  *s2 )
       {
   register long			  result = 0;
   register unsigned char	  c1, c2;
@@ -146,10 +146,10 @@ apts::CompareStrings( register char			  *s1 , register char			  *s2 )
   }
 
 long
-apts::SubstringIndex( register char		  	  *pattern , register char		  	  *string )
+apts::SubstringIndex( register const char		  	  *pattern , register const char		  	  *string )
       {
   register long			  i, position = -1;
-  register char			 *origin = string;
+  register const char			 *origin = string;
 
   IN(apts_SubstringIndex);
   while ( *string  &&  position == -1 )

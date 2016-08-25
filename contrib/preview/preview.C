@@ -849,16 +849,16 @@ static void hsetframe(class preview  *self, long  position  , long  numerator , 
     self->xoff =  numerator -position;
     (self)->WantUpdate(self);
 }
-static struct scrollfns vscrollInterface = {(scroll_getinfofptr)vgetinfo, (scroll_setframefptr)vsetframe, NULL, (scroll_whatfptr)vwhatisat};
-static struct scrollfns hscrollInterface = {(scroll_getinfofptr)hgetinfo, (scroll_setframefptr)hsetframe, NULL, (scroll_whatfptr)hwhatisat};
+static const struct scrollfns vscrollInterface = {(scroll_getinfofptr)vgetinfo, (scroll_setframefptr)vsetframe, NULL, (scroll_whatfptr)vwhatisat};
+static const struct scrollfns hscrollInterface = {(scroll_getinfofptr)hgetinfo, (scroll_setframefptr)hsetframe, NULL, (scroll_whatfptr)hwhatisat};
 
-char *preview::GetInterface(char  *interfaceName)
+const void *preview::GetInterface(const char  *interfaceName)
         {
 
     if (strcmp(interfaceName, "scroll,vertical") == 0)
-        return (char *) &vscrollInterface;
+        return &vscrollInterface;
     if (strcmp(interfaceName, "scroll,horizontal") == 0)
-        return (char *) &hscrollInterface;
+        return &hscrollInterface;
     return NULL;
 }
 

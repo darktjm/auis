@@ -118,7 +118,7 @@ public:
      void PostKeyState(class keystate *keystate);
      void PostMenus(class menulist *ml);
      class view * Hit(enum view_MouseAction action, long x, long y, long nClicks)  ;
-     char * GetInterface(char *interfaceName)  ;
+     const void * GetInterface(const char *interfaceName)  ;
      void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
 
     
@@ -199,7 +199,7 @@ public:
     class style *UnderlinedIconicStyle; /* ditto, but underlined */
     class style *MailStyle; /* Bigger, better? */
     class style *FixedStyle; /* For fixed width display */
-    struct scrollfns *textscrollinterface;
+    const struct scrollfns *textscrollinterface;
     class cursor *mycursor;
     class keystate *privkeys;
     class menulist *privmenus;

@@ -1237,9 +1237,9 @@ rasterview::Gifify(char *filename, long *pmaxw, long *pmaxh,
 
    
  
-static struct scrollfns	vertical_scroll_interface =
+static const struct scrollfns	vertical_scroll_interface =
 		{(scroll_getinfofptr)y_getinfo, (scroll_setframefptr)y_setframe, NULL, (scroll_whatfptr)y_whatisat};
-static struct scrollfns	horizontal_scroll_interface =
+static const struct scrollfns	horizontal_scroll_interface =
 		{(scroll_getinfofptr)x_getinfo, (scroll_setframefptr)x_setframe, NULL, (scroll_whatfptr)x_whatisat};
 
 static void x_getinfo(register class rasterview   *self, register struct range   *total , register struct range   *seen , register struct range   *dot)
@@ -1398,9 +1398,9 @@ static void  y_setframe(register class rasterview  *self, int   position, long  
     DEBUG(("Scroll: (%ld,%ld)\n", self->Xscroll, self->Yscroll));
 }
 
-char * rasterview::GetInterface(register char   *interface_name)
+const void * rasterview::GetInterface(register const char   *interface_name)
 {
-    register struct scrollfns *interface;
+    register const struct scrollfns *interface;
     DEBUG(("GetInterface(%s)\n", interface_name));
     if (strcmp(interface_name, "scroll,vertical") == 0)
 	interface = &vertical_scroll_interface;
@@ -1408,7 +1408,7 @@ char * rasterview::GetInterface(register char   *interface_name)
 	interface = &horizontal_scroll_interface;
     else
 	interface = NULL;
-    return (char *)interface;
+    return interface;
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *\

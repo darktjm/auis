@@ -46,7 +46,7 @@ public:
      view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
      void GetOrigin(long width, long height, long *originX, long *originY);
 
-     char * GetInterface(char *name)  ;
+     const void * GetInterface(const char *name)  ;
      void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
 
 

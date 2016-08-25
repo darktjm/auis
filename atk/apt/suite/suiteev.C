@@ -254,8 +254,8 @@ static long MaxListSubStringWidth( class suiteev  *self, struct suite_item  *ite
 static void  DrawRectSize(class suiteev	 *self, long  x , long  y , long  width , long  height);
 static void  DrawRect(class suiteev  *self, struct suite_item  *item, struct rectangle  *Rect, boolean  lit);
 
-static struct scrollfns horizInterface = {(scroll_getinfofptr) getinfo, (scroll_setframefptr)xsetframe, (scroll_endzonefptr)endzone, (scroll_whatfptr)xwhatis };
-static struct scrollfns vertInterface =  {(scroll_getinfofptr)getinfo, (scroll_setframefptr)ysetframe, (scroll_endzonefptr)endzone, (scroll_whatfptr)ywhatis };
+static const struct scrollfns horizInterface = {(scroll_getinfofptr) getinfo, (scroll_setframefptr)xsetframe, (scroll_endzonefptr)endzone, (scroll_whatfptr)xwhatis };
+static const struct scrollfns vertInterface =  {(scroll_getinfofptr)getinfo, (scroll_setframefptr)ysetframe, (scroll_endzonefptr)endzone, (scroll_whatfptr)ywhatis };
 
  
 
@@ -583,15 +583,15 @@ suiteev::FullUpdate(register enum view_UpdateType  type, register long  left , r
     OUT(suiteev_FullUpdate);
 }
 
-char *
-suiteev::GetInterface(register char  *type)
+const void *
+suiteev::GetInterface(register const char  *type)
 {
     class suiteev *self=this;
     IN(suiteev_GetInterface);
     if(!strcmp(type, "scroll,vertical"))
-	return((char *) &vertInterface);
+	return(&vertInterface);
     else if(!strcmp(type, "scroll,horizontal"))
-	return((char *) &horizInterface);
+	return(&horizInterface);
     else
 	return(NULL);
 }

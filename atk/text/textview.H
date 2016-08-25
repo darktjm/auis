@@ -218,7 +218,7 @@ class textview : public  view {
       void LoseInputFocus();
       class view * GetApplicationLayer()  ;
       void DeleteApplicationLayer(class view *scrollbar);
-      char * GetInterface(char *interfaceName)  ;
+      const void * GetInterface(const char *interfaceName)  ;
       void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
       void WantNewSize(class view *requestor);
       void ObservedChanged (class observable *changed, long value);

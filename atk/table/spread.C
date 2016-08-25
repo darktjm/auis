@@ -738,29 +738,29 @@ static long xWhatIsAt(register class spread  * V, long  coord, long  denom)
 
 /* Define interface for use by scrollbar */
 
-static struct scrollfns verticalInterface = {
+static const struct scrollfns verticalInterface = {
     (scroll_getinfofptr)yGetInfo,
     (scroll_setframefptr)ySetFrame,
     NULL,
     (scroll_whatfptr)yWhatIsAt,
 };
 
-static struct scrollfns horizontalInterface = {
+static const struct scrollfns horizontalInterface = {
     (scroll_getinfofptr)xGetInfo,
     (scroll_setframefptr)xSetFrame,
     NULL,
     (scroll_whatfptr)xWhatIsAt,
 };
 
-char *spread::GetInterface(char  * type)
+const void *spread::GetInterface(const char  * type)
 {
     if (debug)
 	printf("spread_GetInterface(%p, %s)\n", this, type);
 
     if (strcmp(type, "scroll,vertical") == 0) {
-	return (char *)&verticalInterface;
+	return &verticalInterface;
     } else if (strcmp(type, "scroll,horizontal") == 0) {
-	return (char *)&horizontalInterface;
+	return &horizontalInterface;
     } else
 	return NULL;
 }

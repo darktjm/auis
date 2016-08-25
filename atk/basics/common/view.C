@@ -458,7 +458,7 @@ void view::InsertViewSize(class view  *parent,long  xOriginInParent ,long  yOrig
 }
 
 
-char *view::GetInterface(char  *type)
+const void *view::GetInterface(const char  *type)
         /* Note: This routine is a placeholder for a future function. It is needed now to get scrollbars to work. - William Lott. */
 {
     return NULL;

@@ -25,13 +25,10 @@
 #include <andrewos.h>
 #include <avalue.H>
 
-static atom_def aaction_error("error");;
+static atom_def aaction_error("error");
 
 class aaction : public ATK {
     unsigned long refs;
-    friend class ATK; // shuts up a bogus g++ warning:
-    // warning: `class aaction' only defines a private destructor and has no friends
-    // well, DUH. 
   public:
     virtual ~aaction();
     inline aaction() : refs(1) {

@@ -80,8 +80,7 @@ inline type &operator[](size_t i) { \
     } \
 inline type *Insert(size_t i, const type &o) { \
 void *res=mflex::Insert(i,1); \
-type *res2=new(res) type(o); \
-return (type *)res; \
+return new(res) type(o); \
 } \
 inline type *Insert(size_t i, const type *o) { \
 return Insert(i,*o); \
@@ -106,7 +105,7 @@ inline size_t Find( const type *o ) {return Find( *o );}; \
 	return (type *)oflex::GetBuf(i, len, gotlenp); \
     } \
 inline virtual void ConstructElement(void *src) { \
-type *res=new((void *)src) type(); } \
+new((void *)src) type(); } \
 inline virtual void DestroyElement(void *src) { \
 ((type *)src)->~type(); } \
 inline virtual void CopyElement(void *dest, void *src) { \
@@ -152,7 +151,7 @@ class Concat(name,_iter) { \
  \
     } \
     inline boolean done() { \
-	if(ci>=i+n || ci<0) return TRUE; \
+	if(ci>=i+n /* || ci<0 */) return TRUE; \
 	else return FALSE; \
     } \
 }
@@ -196,7 +195,7 @@ class Concat(name,_citer) { \
  \
     } \
     inline boolean done() { \
-	if(ci>=i+n || ci<0) return TRUE; \
+	if(ci>=i+n /* || ci<0 */) return TRUE; \
 	else return FALSE; \
     } \
 }

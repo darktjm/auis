@@ -71,7 +71,7 @@ public:
 	 void Print(FILE *file, char *processor, 
 			char *finalFormat, boolean topLevel);
 	 class view * GetApplicationLayer()  ;
-	 char *GetInterface(char *interface_name) 
+	 const void *GetInterface(const char *interface_name) 
 			 ;
 	 void WantUpdate(class view *requestor);
 	 void PostMenus(class menulist *ml);

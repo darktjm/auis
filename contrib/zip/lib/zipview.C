@@ -1704,14 +1704,14 @@ zipview::AskOrCancel( char  *request , char  *def , char  **answer)
 
 #include "scroll.H"
 
-static struct scrollfns vertical_scroll_interface = {
+static const struct scrollfns vertical_scroll_interface = {
     (scroll_getinfofptr) zipview_y_getinfo,
     (scroll_setframefptr) zipview_y_setframe,
     (scroll_endzonefptr) zipview_y_endzone,
     (scroll_whatfptr) zipview_y_whatisat
 };
 
-static struct scrollfns horizontal_scroll_interface = {
+static const struct scrollfns horizontal_scroll_interface = {
     (scroll_getinfofptr) zipview_x_getinfo,
     (scroll_setframefptr) zipview_x_setframe,
     (scroll_endzonefptr) zipview_x_endzone,
@@ -1744,10 +1744,10 @@ zipview::GetApplicationLayer( )
   }
 
 
-char *
-zipview::GetInterface( register char			      *interface_name )
+const void *
+zipview::GetInterface( register const char		      *interface_name )
       {
-  register struct scrollfns	     *interface = NULL;
+  register const struct scrollfns	     *interface = NULL;
 
   IN(zipview_GetInterface);
   if ( strcmp( interface_name, "scroll,vertical" ) == 0 )
@@ -1756,7 +1756,7 @@ zipview::GetInterface( register char			      *interface_name )
     if ( strcmp( interface_name, "scroll,horizontal" ) == 0 )
       interface = &horizontal_scroll_interface;
   OUT(zipview_GetInterface);
-  return (char *) interface;
+  return interface;
   }
 
 static void

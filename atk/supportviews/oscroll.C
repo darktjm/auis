@@ -459,7 +459,7 @@ long oscroll::GetEndToBarSpace()
 static void get_interface(class oscroll  *self, int  type)
 {
     if (self->force_get_interface || self->fns[type] == NULL) {
-        self->fns[type] = (struct scrollfns *)(self->scrollee)->GetInterface( InterfaceName[type]);
+        self->fns[type] = (const struct scrollfns *)(self->scrollee)->GetInterface( InterfaceName[type]);
 	self->force_get_interface = FALSE;
     }
 }

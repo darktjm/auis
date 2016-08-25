@@ -117,8 +117,8 @@ extern void textview_DestroyPrintingLayout(class textview  *txtv);
 extern void textview_DestroyPrintingLayoutPlan(class textview  *txtv);
 extern void textview_InitializePS();
 
-static struct scrollfns scrollInterface = {(scroll_getinfofptr)getinfo, (scroll_setframefptr)setframe, (scroll_endzonefptr)endzone, (scroll_whatfptr)whatisat};
-static struct scrollfns hscrollInterface = {(scroll_getinfofptr)hgetinfo,
+static const struct scrollfns scrollInterface = {(scroll_getinfofptr)getinfo, (scroll_setframefptr)setframe, (scroll_endzonefptr)endzone, (scroll_whatfptr)whatisat};
+static const struct scrollfns hscrollInterface = {(scroll_getinfofptr)hgetinfo,
   (scroll_setframefptr)hsetframe, (scroll_endzonefptr)hendzone, (scroll_whatfptr)hwhatisat};
 
 textview::textview()
@@ -3732,19 +3732,19 @@ ScrollInterface *textview::GetScrollInterface() {
     // and not overridden this function, then this function should
     // return NULL so that scroll will know to do everything the
     // old way.
-    void *v=GetInterface("scroll,vertical");
-    void *h=GetInterface("scroll,horizontal");
+    const void *v=GetInterface("scroll,vertical");
+    const void *h=GetInterface("scroll,horizontal");
     if(v!=&scrollInterface || h!=&hscrollInterface) return NULL;
     return new textviewInterface(this);
 }
 
-char *textview::GetInterface(char  *interfaceName)
+const void *textview::GetInterface(const char  *interfaceName)
         {
 
     if (strcmp(interfaceName, "scroll,vertical") == 0)
-        return (char *) &scrollInterface;
+        return &scrollInterface;
     else if (strcmp(interfaceName, "scroll,horizontal") == 0)
-	return (char *) &hscrollInterface;
+	return &hscrollInterface;
     return NULL;
 }
 

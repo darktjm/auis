@@ -72,8 +72,8 @@ public:
 
 
 
-  static long CompareStrings( char *s1, char *s2 )			 ;
-  static long SubstringIndex( char *pattern, char *string )		 ;
+  static long CompareStrings( const char *s1, const char *s2 )			 ;
+  static long SubstringIndex( const char *pattern, const char *string )		 ;
   static char * StripString( char *string)				 ;
   static long CaptureString( const char *source, char **target )		 ;
 

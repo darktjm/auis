@@ -76,7 +76,7 @@ public:
 /*     GetOrigin(long width, long height, long *originX, long *originY);
  */     void ReceiveInputFocus();
      void LoseInputFocus();
-     char * GetInterface(char *interfaceName)  ;
+     const void * GetInterface(const char *interfaceName)  ;
      void WantUpdate(class view *requestor);
 
     virtual void DviToDisplay();

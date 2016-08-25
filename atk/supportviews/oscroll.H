@@ -103,7 +103,7 @@ public:
     class view *scrollee;
     struct scrollstate current, desired;/* The state currently displayed and the state to display on the next update */
 
-    struct scrollfns *fns[scroll_TYPES];/* Pointers to the interface structures. */
+    const struct scrollfns *fns[scroll_TYPES];/* Pointers to the interface structures. */
 
     class updatelist *updatelistp;	/* The list of all decendents that want updates. */
 

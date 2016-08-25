@@ -176,7 +176,7 @@ public:
    class view * Hit( enum view_MouseAction action, long x, long y, long n)	 ;
    void Print( FILE *file, char *processor, char *finalFormat, boolean topLevel );
    class view * GetApplicationLayer()						 ;
-   char * GetInterface( char *interface_name )				 ;
+   const void * GetInterface( const char *interface_name )				 ;
 
    void LinkTree( class view *parent );
    void UnlinkTree();

@@ -107,8 +107,7 @@ char *path;		/* Pathname of package being loaded */
     *bp = NULL;
     *lenP = 0;
 
-    /* LAZY seems unsafe.  Also, why didn't it add global before? */
-    status = dlopen(path, RTLD_LAZY | RTLD_GLOBAL);
+    status = dlopen(path, RTLD_LAZY);
     if (status == 0) {
 	fprintf(stderr, "\ndoload: error loading %s from %s\n", name, path);
 	fprintf(stderr, "          errno %d\n", errno);

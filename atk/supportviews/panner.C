@@ -217,7 +217,7 @@ static void get_interface(class panner  *self, int  type /* scroll_VERT or scrol
 {
     self->force_get_interface = FALSE;
     if (self->fns[type] == NULL)
-        self->fns[type] = (struct scrollfns *)(self->scrollee)->GetInterface( InterfaceName[type]);
+        self->fns[type] = (const struct scrollfns *)(self->scrollee)->GetInterface( InterfaceName[type]);
 }
 
 static void getinfo(class panner  *self, int  type /* scroll_VERT or scroll_HORIZ */, struct range  *total , struct range  *seen , struct range  *dot)

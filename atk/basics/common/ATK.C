@@ -443,18 +443,18 @@ static boolean CheckTypes(const ATKregistryEntry *sub, const ATKregistryEntry *s
  * up the inheritence tree of registry entries.  If
  * we find classent, the answer is yes.
  */
-const boolean ATKregistryEntry::IsType(const ATK *typeobject)  const {
+boolean ATKregistryEntry::IsType(const ATK *typeobject)  const {
     return CheckTypes(this, ((ATK *)typeobject)->ATKregistry());
 }
-const boolean ATKregistryEntry::IsType(const ATKregistryEntry *typeregistry)  const {
+boolean ATKregistryEntry::IsType(const ATKregistryEntry *typeregistry)  const {
     return CheckTypes(this, typeregistry);
 }
-const boolean ATKregistryEntry::IsType(const char *t)  const {
+boolean ATKregistryEntry::IsType(const char *t)  const {
     return CheckTypes(this, FindRegistryEntryByName(t));
 }
 
 
-const boolean ATK::IsTypeByName(const char *sub, const char *super) {
+boolean ATK::IsTypeByName(const char *sub, const char *super) {
     ATKregistryEntry *subentry=FindRegistryEntryByName(sub);
     ATKregistryEntry *superentry=FindRegistryEntryByName(super);
     return CheckTypes(subentry, superentry);

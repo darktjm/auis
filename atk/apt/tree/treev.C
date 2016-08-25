@@ -1912,16 +1912,16 @@ treev::GetApplicationLayer( )
 				       
 				        
  
-static struct scrollfns		      vertical_scroll_interface =
+static const struct scrollfns		      vertical_scroll_interface =
 		{(scroll_getinfofptr) y_getinfo, (scroll_setframefptr)y_setframe, (scroll_endzonefptr)y_endzone, (scroll_whatfptr)y_whatisat };
-static struct scrollfns		      horizontal_scroll_interface =
+static const struct scrollfns		      horizontal_scroll_interface =
 		{ (scroll_getinfofptr)x_getinfo, (scroll_setframefptr)x_setframe, (scroll_endzonefptr)x_endzone, (scroll_whatfptr)x_whatisat };
 
-char *
-treev::GetInterface( register char		      *interface_name )
+const void *
+treev::GetInterface( register const char		      *interface_name )
 {
     class treev *self=this;
-  register struct scrollfns  *interface = NULL;
+  register const struct scrollfns  *interface = NULL;
 
   IN(treev_GetInterface);
   DEBUGst(Interface Name,interface_name);
@@ -1933,7 +1933,7 @@ treev::GetInterface( register char		      *interface_name )
 	  apts::CompareStrings( interface_name, "scroll,horizontal" ) == 0 )
       interface = &horizontal_scroll_interface;
   OUT(treev_GetInterface);
-  return  (char *)interface;
+  return  interface;
   }
 
 static void
