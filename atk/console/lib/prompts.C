@@ -95,7 +95,7 @@ void InitPstrings()
 
 void PromptToWindow(class consoleClass  *self)
 {
-    register short *fontWidth = (EventFont)->WidthTable( (self)->GetDrawable());
+    short *fontWidth = (EventFont)->WidthTable( (self)->GetDrawable());
     int width = (self)->GetLogicalWidth(), height = (self)->GetLogicalHeight();
 
     mydbg(("entering: PromptToWindow\n"));
@@ -123,7 +123,7 @@ void PromptToWindow(class consoleClass  *self)
 void GetStringFromWindow(class consoleClass  *self, long  maxSize)
 {
     int c;
-    register short   *fontWidth = (EventFont)->WidthTable( (self)->GetDrawable());
+    short   *fontWidth = (EventFont)->WidthTable( (self)->GetDrawable());
     char *tempString = Pstring4;
 
     mydbg(("entering: GetStringFromWindow\n"));
@@ -172,7 +172,7 @@ void GetStringFromWindow(class consoleClass  *self, long  maxSize)
 
 void RedrawPrompt(class consoleClass  *self)
 {
-    register short *fontWidth = (EventFont)->WidthTable( (self)->GetDrawable());
+    short *fontWidth = (EventFont)->WidthTable( (self)->GetDrawable());
     int width = (self)->GetLogicalWidth(), height = (self)->GetLogicalHeight();
 
     mydbg(("entering: RedrawPrompt\n"));

@@ -95,11 +95,11 @@ static VOID cacheFolderUpdate(/* char *folder, char *date */);
 static buildField(bufP,strP,c,wid,eolp)
 char		**bufP,
 		**strP;
-register char	c;
-register int	wid;
+char	c;
+int	wid;
 bool		eolp;
 {
-    register char   *output= *bufP,
+    char   *output= *bufP,
 		    *str= *strP;
 
     if(!eolp)

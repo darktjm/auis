@@ -68,13 +68,13 @@
  */
 enum auth_stat
 _svcauth_unix(rqst, msg)
-	register struct svc_req *rqst;
-	register struct rpc_msg *msg;
+	struct svc_req *rqst;
+	struct rpc_msg *msg;
 {
-	register enum auth_stat stat;
+	enum auth_stat stat;
 	XDR xdrs;
-	register struct authunix_parms *aup;
-	register long *buf;
+	struct authunix_parms *aup;
+	long *buf;
 	struct area {
 		struct authunix_parms area_aup;
 		char area_machname[MAX_MACHINE_NAME];
@@ -82,7 +82,7 @@ _svcauth_unix(rqst, msg)
 	} *area;
 	u_int auth_len;
 	int str_len, gid_len;
-	register int i;
+	int i;
 
 	area = (struct area *) rqst->rq_clntcred;
 	aup = &area->area_aup;

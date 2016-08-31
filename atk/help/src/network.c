@@ -80,7 +80,7 @@ char *ncproc_GetHelpOn=NULL;
 void 
 helpapp_ncproc ()
 {
-    register int ns;
+    int ns;
     struct sockaddr_in helpaddr;
     int addrlen;
     char buf[MAXPATHLEN+1];
@@ -127,7 +127,7 @@ helpapp_ncproc ()
 int 
 help_unique()
 {
-    register int i;
+    int i;
     char *wmHost = NULL, *dpyHost = NULL, displayHost[MAXHOSTNAMELEN], *colon;
     int runningLocally = 0;
     static FILE *tfile;

@@ -170,11 +170,11 @@ unscribe_end()
 }
 
 unscribe_filter(frombuf,fromSize)
-register char	*frombuf;
+char	*frombuf;
 long	fromSize;
 {
     int	    i;
-    register int   c=BOGUS;
+    int   c=BOGUS;
 
     while(fromSize-->0){
 	static char prevc=BOGUS;

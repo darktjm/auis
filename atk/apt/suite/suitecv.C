@@ -171,11 +171,11 @@ void
 suitecv::LoseInputFocus( )
 {
     class suitecv *self=this;
-    register class text *RWtext = (class text*) (this)->GetDataObject();
+    class text *RWtext = (class text*) (this)->GetDataObject();
     long len = 0;
-    register struct suite_item *item = ParentItem;
-    register class suite *suite = EV->parent;
-    register long i = 0;
+    struct suite_item *item = ParentItem;
+    class suite *suite = EV->parent;
+    long i = 0;
 
     (this)->textview::LoseInputFocus();
     (EV)->ItemNormalize(item);

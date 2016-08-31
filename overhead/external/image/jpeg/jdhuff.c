@@ -113,7 +113,7 @@ fill_bit_buffer (int nbits)
 {
   /* Attempt to load at least MIN_GET_BITS bits into get_buffer. */
   while (bits_left < MIN_GET_BITS) {
-    register int c = JGETC(dcinfo);
+    int c = JGETC(dcinfo);
     
     /* If it's 0xFF, check and discard stuffed zero byte */
     if (c == 0xFF) {
@@ -172,8 +172,8 @@ INLINE
 LOCAL int
 huff_DECODE (HUFF_TBL * htbl)
 {
-  register int l;
-  register INT32 code;
+  int l;
+  INT32 code;
   
   code = get_bit();
   l = 1;
@@ -326,10 +326,10 @@ static const short ZAG[DCTSIZE2+16] = {
 METHODDEF void
 huff_decode_mcu (decompress_info_ptr cinfo, JBLOCKROW *MCU_data)
 {
-  register int s, k, r;
+  int s, k, r;
   short blkn, ci;
-  register JBLOCKROW block;
-  register QUANT_TBL_PTR quanttbl;
+  JBLOCKROW block;
+  QUANT_TBL_PTR quanttbl;
   HUFF_TBL *dctbl;
   HUFF_TBL *actbl;
   jpeg_component_info * compptr;

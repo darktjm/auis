@@ -48,8 +48,8 @@ long lcDisplayEnvironment;
 long lcInsertEnvironment;
 long lcNewLine;
 
-void textview_NOOPCmd (register class textview  *self);
-int charType(register char  c);
+void textview_NOOPCmd (class textview  *self);
+int charType(char  c);
 static void CheckStylePreferences(class keymap  *newKeymap, class menulist  **normalMenus);
 static int TranslateKeySequence(const char  *from, char  *to);
 static int parseBackslashed(const char  **fromChars);
@@ -59,7 +59,7 @@ class keymap *textview_InitViCommandModeKeyMap(struct textview_ATKregistry_   *c
 class keymap *textview_InitViInputModeKeyMap(struct textview_ATKregistry_   *classInfo, class menulist  **Menus);
 
 
-void textview_NOOPCmd (register class textview  *self)
+void textview_NOOPCmd (class textview  *self)
 {
     /* Do nothing.  Used to rebind keys for no operation */
 }
@@ -69,7 +69,7 @@ void textview_NOOPCmd (register class textview  *self)
  * and is used or forward/backward word operations
  */
 
-int charType(register char  c)
+int charType(char  c)
 	{
 
 	if (isspace(c))
@@ -406,7 +406,7 @@ static void adjustBindings(struct bind_Description  *bindings)
 class keymap *textview_InitEmacsKeyMap(struct ATKregistryEntry  *classInfo, class menulist  **normalMenus)
 {
     class keymap *newKeymap = new keymap;
-    register long i;
+    long i;
     char str[2];
     struct proctable_Entry *si;
     
@@ -737,7 +737,7 @@ static struct bind_Description textviewViCommandModeBindings[]={
 class keymap *textview_InitViCommandModeKeyMap(struct ATKregistryEntry   *classInfo, class menulist  **Menus)
 {
     class keymap *newKeymap = new keymap;
-    register long i;
+    long i;
     char str[2];
     struct proctable_Entry *dig;
 
@@ -804,7 +804,7 @@ static struct bind_Description textviewViInputModeBindings[] = {
 class keymap *textview_InitViInputModeKeyMap(struct ATKregistryEntry   *classInfo, class menulist  **Menus)
 {
     class keymap *newKeymap = new keymap;
-    register long i;
+    long i;
     unsigned char str[2];
     struct proctable_Entry *si, *proc;
     

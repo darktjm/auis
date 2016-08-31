@@ -157,7 +157,7 @@ gflex::gflex() {
 gflex::~gflex() {
 
 #ifdef objectsinelts
-	register i;
+	int i;
 	for (i = 0; i < gaploc; i++)
 		delete elts[i];
 	for (i = gaploc+gaplen; i < n+gaplen; i++)

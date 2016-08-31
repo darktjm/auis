@@ -229,7 +229,7 @@ int getprofileswitch (const char *var, int DefaultValue)
 	                    {"0", 0},
 	                    {0, 0}
     };
-    register struct keys   *p;
+    struct keys   *p;
     if (var && (val = getprofile (var))) {
 	for (p = keys; p -> name; p++)
 	    if (FOLDEDEQ(p->name, val))
@@ -240,9 +240,9 @@ int getprofileswitch (const char *var, int DefaultValue)
 
 int getprofileint (const char *var, int DefaultValue)
 {
-    register const char  *val;
-    register    int n = 0;
-    register    int neg = 0;
+    const char  *val;
+       int n = 0;
+       int neg = 0;
 
     if (var == 0 || (val = getprofile(var)) == 0)  {
 	return DefaultValue;

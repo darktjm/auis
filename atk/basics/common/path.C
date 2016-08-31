@@ -65,9 +65,9 @@ static void FreeList(char  **list);
 static void FreeFilesAndDirs(class path  *self);
 static void SetPath(class path  *self, char  *filepath);
 #if 1
-static void  FoldName (register char  *p		);
+static void  FoldName (char  *p		);
 #else
-static void FoldName (register char  *p);
+static void FoldName (char  *p);
 #endif
 static long SetNewHome(char  *shortPathName, const char  *name, const char  *cell, const char  *dir, long  dirlen);
 static void HandleCellTwiddle(const char  *fromString, char  *toString);
@@ -347,7 +347,7 @@ static const char * const LastSeg[NSTATES][NTYPES]
 
 
 	static void 
-FoldName (register char  *p		/* path to fold */)
+FoldName (char  *p		/* path to fold */)
 	{
 	enum state CurrState, NextState;
 	char SavedY [MAXPATHLEN];
@@ -493,12 +493,12 @@ FoldName (register char  *p		/* path to fold */)
 
 */
 
-static void FoldName (register char  *p			/* path to fold */)
+static void FoldName (char  *p			/* path to fold */)
     {
     char   *pStart,		/* points to first char of a component */
 	   *pEnd;		/* points to first char following
 				   component */
-    register char *dest;
+    char *dest;
     int     len;
 
     if (p == NULL)
@@ -885,7 +885,7 @@ static void HandleCellTwiddle(const char  *fromString, char  *toString)
 
 static void HandleRelativeFileName(const char  *fromString, char  *toString, const char  *basefile)
 {
-    register char *slash;
+    char *slash;
     /* Use allDone instead of confusing combination of #if/#endif and if/else's */
     boolean allDone = FALSE;
 

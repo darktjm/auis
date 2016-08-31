@@ -75,10 +75,10 @@ static void PushFlipBegEnv(class environment  *te, boolean  value);
 static void PushFlipEndEnv(class environment  *te, boolean  value);
 static void SetBeginningDown(class textview  *self, class environment  *te, long  pos);
 static void SetEndingDown(class textview  *self, class environment  *te, long  pos);
-void textview_PlainerCmd(register class textview  *self, char  *type);
-void textview_PlainestCmd(register class textview  *self);
+void textview_PlainerCmd(class textview  *self, char  *type);
+void textview_PlainestCmd(class textview  *self);
 void textview_ExposeStyleEditor(class textview  *self);
-void textview_ShowStylesCmd(register class textview  *self);
+void textview_ShowStylesCmd(class textview  *self);
 void textview_ChangeTemplate(class textview  *self);
 void textview_ToggleExposeStyles(class textview  *self);
 void textview_ToggleColorStyles(class textview  *self);
@@ -646,7 +646,7 @@ void textview::RightInsertEnvironment()
 long textview_LookCmd(ATK *selfa, long c)
 {
     textview *self=(textview *)selfa;
-    register class text *d;
+    class text *d;
     class stylesheet *ss;
     class style *styleptr;
     const char *name;	
@@ -677,10 +677,10 @@ void textview::LookCmd(int look)
     textview_LookCmd(this, look);
 }
 
-void textview_PlainerCmd(register class textview  *self, char  *type)
+void textview_PlainerCmd(class textview  *self, char  *type)
 {
-    register class text *d;
-    register class environment *env;
+    class text *d;
+    class environment *env;
     int pos, len;
 
     if (ConfirmReadOnly(self))
@@ -722,9 +722,9 @@ void textview_PlainerCmd(register class textview  *self, char  *type)
     (d)->NotifyObservers( observable_OBJECTCHANGED);
 }
 
-void textview_PlainestCmd(register class textview  *self)
+void textview_PlainestCmd(class textview  *self)
 {
-    register class text *d;
+    class text *d;
     int pos, len;
 
     if (ConfirmReadOnly(self))
@@ -749,8 +749,8 @@ void textview_PlainestCmd(register class textview  *self)
 
 void textview_ExposeStyleEditor(class textview  *self)
 {
-    register int pos;
-    register class text *d;
+    int pos;
+    class text *d;
 
     if(textview_objecttest(self, "lookzview", "view") == FALSE)
         return;
@@ -782,10 +782,10 @@ void textview_ExposeStyleEditor(class textview  *self)
 
 #define SHOWSIZE 250
 
-void textview_ShowStylesCmd(register class textview  *self)
+void textview_ShowStylesCmd(class textview  *self)
 {
     char tbuf[SHOWSIZE];
-    register const char *tp;
+    const char *tp;
     class environment *te;
     class environment *de = NULL;
     class text *d;
@@ -855,7 +855,7 @@ void textview_ShowStylesCmd(register class textview  *self)
 void textview_ChangeTemplate(class textview  *self)
 {
     char tname[150];
-    register class text *d;
+    class text *d;
     int gf;
 
     if (ConfirmReadOnly(self))

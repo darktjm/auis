@@ -77,13 +77,13 @@ END-SPECIFICATION  ************************************************************/
 #define  Objects(i)		    ((self->objects)[i])
 
 
-static zip_type_figure Which_Figure( register class zipview		  *self, register zip_type_pixel		   x , register zip_type_pixel		   y, register zip_type_pane		   pane );
+static zip_type_figure Which_Figure( class zipview		  *self, zip_type_pixel		   x , zip_type_pixel		   y, zip_type_pane		   pane );
 
 
 long
-zipview::Display_Figure( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipview::Display_Figure( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register int				  status = zip_success;
+  int				  status = zip_success;
   class zipview *self=this;
 
   IN(zipview::Display_Figure);
@@ -103,9 +103,9 @@ zipview::Display_Figure( register zip_type_figure		   figure, register zip_type_
   }
 
 long
-zipview::Draw_Figure( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipview::Draw_Figure( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
   class zipview *self=this;
   IN(zipview::Draw_Figure);
   if ( figure  &&  pane  &&  figure->zip_figure_visibility != zip_figure_hidden  &&
@@ -127,9 +127,9 @@ zipview::Draw_Figure( register zip_type_figure		   figure, register zip_type_pan
   }
 
 long
-zipview::Clear_Figure( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipview::Clear_Figure( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
   class zipview *self=this;
   IN(zipview::Clear_Figure);
   if ( figure  &&  pane  &&  figure->zip_figure_visibility == zip_figure_exposed  &&
@@ -151,9 +151,9 @@ zipview::Clear_Figure( register zip_type_figure		   figure, register zip_type_pa
   }
 
 long
-zipview::Hide_Figure( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipview::Hide_Figure( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
   class zipview *self=this;
   IN(zipview::Hide_Figure);
   if ( figure &&
@@ -176,9 +176,9 @@ zipview::Hide_Figure( register zip_type_figure		   figure, register zip_type_pan
   }
 
 long
-zipview::Expose_Figure( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipview::Expose_Figure( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
   class zipview *self=this;  
   IN(zipview::Expose_Figure);
   if ( figure &&
@@ -201,11 +201,11 @@ zipview::Expose_Figure( register zip_type_figure		   figure, register zip_type_p
   }
 
 static zip_type_figure
-Which_Figure( register class zipview		  *self, register zip_type_pixel		   x , register zip_type_pixel		   y, register zip_type_pane		   pane )
+Which_Figure( class zipview		  *self, zip_type_pixel		   x , zip_type_pixel		   y, zip_type_pane		   pane )
         {
-  register zip_type_figure		  figure_ptr, figure = NULL;
-  register zip_type_image		  image;
-  register zip_type_stream		  stream = NULL;
+  zip_type_figure		  figure_ptr, figure = NULL;
+  zip_type_image		  image;
+  zip_type_stream		  stream = NULL;
 
   IN(Which_Figure);
   DEBUGst(Pane-name,pane->zip_pane_name);
@@ -245,10 +245,10 @@ Which_Figure( register class zipview		  *self, register zip_type_pixel		   x , r
   }
 
 zip_type_figure
-zipview::Which_Figure( register zip_type_pixel		   x , register zip_type_pixel		   y )
+zipview::Which_Figure( zip_type_pixel		   x , zip_type_pixel		   y )
       {
-  register zip_type_figure		  figure = NULL;
-  register zip_type_pane		  pane;
+  zip_type_figure		  figure = NULL;
+  zip_type_pane		  pane;
   class zipview *self=this;
   IN(zipview::Which_Figure);
   if ( pane = (self)->Which_Pane(  x, y ) )
@@ -261,9 +261,9 @@ zipview::Which_Figure( register zip_type_pixel		   x , register zip_type_pixel		
   }
 
 zip_type_figure
-zipview::Which_Pane_Figure( register zip_type_pixel		   x , register zip_type_pixel		   y, register zip_type_pane		   pane )
+zipview::Which_Pane_Figure( zip_type_pixel		   x , zip_type_pixel		   y, zip_type_pane		   pane )
         {
-  register zip_type_figure		  figure = NULL;
+  zip_type_figure		  figure = NULL;
   class zipview *self=this;
   IN(zipview::Which_Pane_Figure);
   DEBUGst(Pane-name,pane->zip_pane_name);
@@ -273,13 +273,13 @@ zipview::Which_Pane_Figure( register zip_type_pixel		   x , register zip_type_pi
   }
 
 zip_type_figure
-zipview::Within_Which_Figure( register long			       x , register long			       y )
+zipview::Within_Which_Figure( long			       x , long			       y )
       {
-  register zip_type_stream	      stream;
-  register zip_type_image	      image;
-  register zip_type_figure	      figure, figure_ptr = NULL;
-  register zip_type_pane	      pane;
-  register long			      distance, best_distance = 999999;
+  zip_type_stream	      stream;
+  zip_type_image	      image;
+  zip_type_figure	      figure, figure_ptr = NULL;
+  zip_type_pane	      pane;
+  long			      distance, best_distance = 999999;
   class zipview *self=this;
   IN(zipview::Within_Which_Figure);
   if ( (pane  = (self)->Which_Pane(  x, y ))  &&
@@ -316,9 +316,9 @@ zipview::Within_Which_Figure( register long			       x , register long			       
   }
 
 boolean
-zipview::Figure_Visible( register zip_type_figure		     figure, register zip_type_pane		     pane )
+zipview::Figure_Visible( zip_type_figure		     figure, zip_type_pane		     pane )
         {
-  register boolean			    status = FALSE;
+  boolean			    status = FALSE;
   class zipview *self=this;
   IN( zipview::Figure_Visible );
   if ( figure && pane )

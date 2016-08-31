@@ -97,17 +97,17 @@ static boolean debug=FALSE;
 /* write thickness data */
 
 static void WriteThickness(FILE  *f, const char  *tag, struct slice  * slice, int  first , int  last, int def);
-static void WriteAboveColor(register class table  * T, FILE  *f, int  r, int  first , int  last);
-void WriteCell (register class table  * T, FILE  *f, struct cell  * cell, char  **buff, int  level);
-void WriteASCII (register class table  * T, FILE  *f, Chunk  chunk, int  level);
+static void WriteAboveColor(class table  * T, FILE  *f, int  r, int  first , int  last);
+void WriteCell (class table  * T, FILE  *f, struct cell  * cell, char  **buff, int  level);
+void WriteASCII (class table  * T, FILE  *f, Chunk  chunk, int  level);
 static void refill(FILE  *f, char  buff[], char  **cpp, char  *cl);
 static void SkipRest(FILE  *f, char  buff[], char  **cpp, char  *cl);
 static int ReadSlice(FILE  *f, char  buff[], char  **cpp, char  *cl, struct slice  **sp);
 static int ReadLeftColor(class table  *T, FILE  *f, char  buff[], char  **cpp, char  *cl, int  r , int  c);
-static int ReadAboveColor(register class table  * T, FILE  *f, char  buff[], char  **cpp, char  *cl, int  r);
+static int ReadAboveColor(class table  * T, FILE  *f, char  buff[], char  **cpp, char  *cl, int  r);
 static void ReadString(FILE  *f, char  buff[], char  **cpp, char  *cl, char  **result);
-void ReadCell(register class table  *T, FILE  *f, char  *buff, char  **cpp, char  *cl, struct cell  *cell);
-class table * ReadASCII (register class table  * T, FILE  *f);
+void ReadCell(class table  *T, FILE  *f, char  *buff, char  **cpp, char  *cl, struct cell  *cell);
+class table * ReadASCII (class table  * T, FILE  *f);
 
 
 static void WriteThickness(FILE  *f, const char  *tag, struct slice  * slice, int  first , int  last, int def)
@@ -131,7 +131,7 @@ static void WriteThickness(FILE  *f, const char  *tag, struct slice  * slice, in
 
 /* write color information */
 
-static void WriteAboveColor(register class table  * T, FILE  *f, int  r, int  first , int  last)
+static void WriteAboveColor(class table  * T, FILE  *f, int  r, int  first , int  last)
 {
     int c, clast;
 
@@ -177,7 +177,7 @@ char *x=x2;\
 
 /* write contents of one cell */
 
-void WriteCell (register class table  * T, FILE  *f, struct cell  * cell, char  **buff, int  level)
+void WriteCell (class table  * T, FILE  *f, struct cell  * cell, char  **buff, int  level)
 {
     int size=1000, pos=0;
     char *cp;
@@ -270,7 +270,7 @@ void WriteCell (register class table  * T, FILE  *f, struct cell  * cell, char  
 
 /* write subrectangle */
 
-void WriteASCII (register class table  * T, FILE  *f, Chunk  chunk, int  level)
+void WriteASCII (class table  * T, FILE  *f, Chunk  chunk, int  level)
 {
     int r, c;
     int fr = max(0, chunk->TopRow);
@@ -445,7 +445,7 @@ static int ReadLeftColor(class table  *T, FILE  *f, char  buff[], char  **cpp, c
 
 /* read horizontal colors and return true if there were some */
 
-static int ReadAboveColor(register class table  * T, FILE  *f, char  buff[], char  **cpp, char  *cl, int  r)
+static int ReadAboveColor(class table  * T, FILE  *f, char  buff[], char  **cpp, char  *cl, int  r)
 {
     int c;
     int cmax;
@@ -548,7 +548,7 @@ static void ReadString(FILE  *f, char  buff[], char  **cpp, char  *cl, char  **r
 
 /* read a cell */
 
-void ReadCell(register class table  *T, FILE  *f, char  *buff, char  **cpp, char  *cl, struct cell  *cell)
+void ReadCell(class table  *T, FILE  *f, char  *buff, char  **cpp, char  *cl, struct cell  *cell)
 {
     char *cp = *cpp;
 
@@ -617,7 +617,7 @@ void ReadCell(register class table  *T, FILE  *f, char  *buff, char  **cpp, char
 
     else if (strncmp(cp, "\\begindata{", 11) == 0) {
 	char dataname[256];
-	register char *np;
+	char *np;
 	long uniqueID;
 
 	for (cp += 11, np = dataname; np < dataname + 255 && *cp != '\0' && *cp != ','; ) {
@@ -708,7 +708,7 @@ void ReadCell(register class table  *T, FILE  *f, char  *buff, char  **cpp, char
 
 /* read subrectangle */
 
-class table * ReadASCII (register class table  * T, FILE  *f)
+class table * ReadASCII (class table  * T, FILE  *f)
 {
     char buff[1000];
     char *cp;

@@ -83,13 +83,13 @@
 #undef class_StaticEntriesOnly
 
 
-int printdata(register class raster  *dobj);
+int printdata(class raster  *dobj);
 
 
-main(register int	   argc, register char   **argv)
+main(int	   argc, char   **argv)
 		{
-	register class raster *dobj;
-	register class rasterview *dview;
+	class raster *dobj;
+	class rasterview *dview;
 
 	class frame *frame;
 	FILE *f;
@@ -154,7 +154,7 @@ main(register int	   argc, register char   **argv)
 	im::KeyboardProcessor();		/* Do it */
 }
 
-int printdata(register class raster  *dobj)
+int printdata(class raster  *dobj)
 	{
 	printf ("%d x %d\n", (dobj)->GetWidth(), 
 			(dobj)->GetHeight());

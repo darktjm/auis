@@ -128,7 +128,7 @@ static class nessmark * copyTop(long  n);
 static void pushInt(long  n);
 static void pushBool(boolean  bv);
 static void Xpad(long  pos , long  len , long  pre , long  post, char  *c);
-static long NextWord(register class nessmark  *m, long  maxpos);
+static long NextWord(class nessmark  *m, long  maxpos);
 static long SqueezeSpaces(class nessmark  *m);
 static void InsertSpaces(class simpletext  *stxt, int pos, int n);
 static void SpreadSpaces(class nessmark  *m, long  desiredlen , long  actuallen , long  nsp);
@@ -259,7 +259,7 @@ Xpad(long  pos , long  len , long  pre , long  post, char  *c) {
 	return position of new word
 */
 	static long
-NextWord(register class nessmark  *m, long  maxpos) {
+NextWord(class nessmark  *m, long  maxpos) {
 	class simpletext *stxt = (m)->GetText();
 	long pos = (m)->GetPos() + (m)->GetLength();
 	long startword;
@@ -355,12 +355,12 @@ SpreadSpaces(class nessmark  *m, long  desiredlen , long  actuallen , long  nsp)
 
 	void
 DoRex(unsigned char op) {
-	register long len, slen, pos, t;
+	long len, slen, pos, t;
 	char c;
 	char *p, *q, *r;
 	class text *txt;
 	class simpletext *stxt, *stxt2;
-	register class nessmark *m, *m2;
+	class nessmark *m, *m2;
 	boolean oldgliso;
 
 	switch (op) {

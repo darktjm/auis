@@ -325,7 +325,7 @@ boolean environment::Remove(long  pos, long  length, enum environmenttype  type,
 void environment__Dump(class environment  *self, int  level)
         {
     class nestedmark *nself = (class nestedmark *) self;
-    register int i = level;
+    int i = level;
 
     while (i-- > 0)
 	printf("    ");

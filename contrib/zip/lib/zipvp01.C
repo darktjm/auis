@@ -74,10 +74,10 @@ END-SPECIFICATION  ************************************************************/
 
 
 long
-zipview::Set_Pane_Cursor( register zip_type_pane		   pane, register char				   icon, register const char				  *font_name )
+zipview::Set_Pane_Cursor( zip_type_pane		   pane, char				   icon, const char				  *font_name )
           {
-  register int				  status = zip_ok;
-  register class fontdesc		 *old_font;
+  int				  status = zip_ok;
+  class fontdesc		 *old_font;
   class zipview *self=this;
 
   IN(zipview_Set_Pane_Cursor);
@@ -128,7 +128,7 @@ long
 zipview::Use_Normal_Pane_Cursors( )
     {
   class zipview *self=this;
-  register zip_type_pane_chain	      pane_chain = PaneAnchor;
+  zip_type_pane_chain	      pane_chain = PaneAnchor;
 
   IN(zipview::Use_Normal_Pane_Cursors);
   ((self)->GetIM( ))->SetWindowCursor(  NULL );
@@ -144,13 +144,13 @@ zipview::Use_Normal_Pane_Cursors( )
   }
 
 long
-zipview::Use_Alternate_Pane_Cursors( register char			       icon, register char			      *font_name )
+zipview::Use_Alternate_Pane_Cursors( char			       icon, char			      *font_name )
         {
   class zipview *self=this;
-  register class fontdesc	     *font;
-  register zip_type_pane_chain	      pane_chain = PaneAnchor;
+  class fontdesc	     *font;
+  zip_type_pane_chain	      pane_chain = PaneAnchor;
   static  class cursor	    	     *glyph = NULL;
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
   IN(zipview::Use_Alternate_Pane_Cursors);
   if ( glyph == NULL )
@@ -168,7 +168,7 @@ zipview::Use_Alternate_Pane_Cursors( register char			       icon, register char	
   return zip_ok;
   }
 
-void zipview::Post_Pane_Cursor( register zip_type_pane	       pane, register class cursor	      *glyph )
+void zipview::Post_Pane_Cursor( zip_type_pane	       pane, class cursor	      *glyph )
         {
   struct  rectangle		      rectangle;
   class zipview *self=this;

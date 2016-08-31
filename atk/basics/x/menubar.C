@@ -421,7 +421,7 @@ void mb_SetItemStatus(struct menubar  *mb,const char *title,const char *item,int
 void mb_DeleteSelection(struct menubar  *mb,const char *title,const char *item)
 {
     struct tmenu *t=FindMenu(mb,title);
-    register struct titem *n,*n2;
+    struct titem *n,*n2;
     
     if(!t || !t->items || t==mb->moremenu) return;
     t->groupcount = 0;
@@ -586,7 +586,7 @@ void mb_RefitMenubar(struct menubar  *mb)
 }
 
 /* mb_RedrawMenubar: redraw the menubar, clear indicates to what extent it should be redrawn if it is mb_FullRedraw the entire area is erased and redrawn, if it is mb_Update only the title area is erased, if it is mb_Exposed it is assumed the contents of the menubar haven't changed but just need to be redrawn */
-void mb_RedrawMenubar(register struct menubar  *mb, int  clear)
+void mb_RedrawMenubar(struct menubar  *mb, int  clear)
 {
     int i, y= mb->mbi->prefs->menubarheight - 2*SHADOWWIDTH(mb) - TITLEDESCENT(mb);
     XGCValues gcv;

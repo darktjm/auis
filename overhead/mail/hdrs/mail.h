@@ -37,7 +37,7 @@ BEGINCPLUSPLUSPROTOS
 
 extern char *ams_genid(int  IsFileName);	/* Generates a world-unique identifier; Boolean parameter specifies whether or not to generate a long name */
 extern char *convlongto64(long  num, int  pad);	/* converts a long and padding to 6 bytes base 64 */
-extern unsigned long conv64tolong(register char  *xnum); /* reverses the above conversion, basically */
+extern unsigned long conv64tolong(char  *xnum); /* reverses the above conversion, basically */
 extern char *arpadate();	/* Returns pointer to current ASCII date string in RFC821 format */
 extern char *EX_Messages[];	/* Text messages for sysexits.h */
 extern int EX_Nerr;	/* Number of error messages in above table */

@@ -1973,7 +1973,7 @@ static void Observe(class xim  *self, class view  *obj)
 static void 
 InstallMenus(class xim  *self, class menulist  *menulist)
 {
-    register struct itemlist *item;
+    struct itemlist *item;
     struct headerlist *header;
     if (menulist == NULL) /* Should never happen, but... */
 	return;
@@ -2580,7 +2580,7 @@ xim::~xim()
 	m=m->next;
     }
     
-    register int i;
+    int i;
     Display *dpy=xim2display(this);
     class xim *im;
     class view *owner=im::GetSelectionOwner();
@@ -4166,8 +4166,8 @@ static void updateGlobalCursors(class xim  *self)
     if (XProcessCursor || XWindowCursor) {
 	/* First, make sure we have a global window */
 	if (!self->globalCursorWindow) {
-	    register long curGWindowWidth;
-	    register long curGWindowHeight;
+	    long curGWindowWidth;
+	    long curGWindowHeight;
 	    if (cursordebug) printf("(xim)updateGlobalCursors: make global window for global cursor\n");
 	    curGWindowWidth = (self)->GetLogicalWidth();
 	    curGWindowHeight = (self)->GetLogicalHeight();
@@ -5360,7 +5360,7 @@ static const struct copstype {const char *name; long op; char close;}
 	static void
 Unscribe(struct expandstring  *cb)
 	{
-	register char *cx, *tx;
+	char *cx, *tx;
 	char *brace;
 	boolean istext;
 	long wordlen, idnum;

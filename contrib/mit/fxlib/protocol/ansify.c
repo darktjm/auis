@@ -17,7 +17,7 @@ main(argc, argv)
      int argc;
      char *argv[];
 {
-  register int ch;
+  int ch;
   int ch2, ch3;
 
   while((ch=getc(stdin)) != EOF) {

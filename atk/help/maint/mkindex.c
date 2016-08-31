@@ -45,9 +45,9 @@ static int action = 1;
  * lowercases's a string.
  */
 static char *LowerCase(astring)
-register char *astring;
+char *astring;
 {
-    register char *tp = astring;
+    char *tp = astring;
 
     while (tp && *tp != (char)0)
 	if (isupper(*tp)) {
@@ -76,18 +76,18 @@ char *key, *path;
 
 static BuildIndex(aindex, srcDirName, targetDirName)
 char *srcDirName, *targetDirName;
-register struct Index *aindex;
+struct Index *aindex;
 {
-    register DIR *srcDir;
+    DIR *srcDir;
     DIRENT_TYPE *sde;
-    register char *tp, *tfp, *sfp;
+    char *tp, *tfp, *sfp;
     char srcPath[MAXPATHLEN];
     char targetPath[MAXPATHLEN];
     char keyBuffer[MAXPATHLEN / 4];
     char mandir = 0;
     static const char ManName[] = "man";
     struct stat tstat;
-    register long code;
+    long code;
     
     if (!(srcDir = opendir(srcDirName))) {
         fprintf(stderr, "%s: can't open %s; skipping.\n", prog, srcDirName);
@@ -159,7 +159,7 @@ void show_usage()
 
 main(argc, argv)
 int argc;
-register char **argv;
+char **argv;
 {
     struct Index *newIndex;
     long code, lineNo[FSSIZE];

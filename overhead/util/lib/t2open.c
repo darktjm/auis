@@ -122,7 +122,7 @@ int t2close(FILE *ptr, int seconds, int *timedout)
 #else
 	int status;
 	SIGSET_TYPE omask, nmask;
-    register int f, r;
+    int f, r;
     struct itimerval val;
 
 #ifdef __STDC__

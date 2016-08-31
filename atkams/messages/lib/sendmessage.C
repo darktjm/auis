@@ -870,7 +870,7 @@ int sendmessage::ReadFromFile(char  *SourceFile, Boolean  DeleteIt)
 
 int SetSendingDot(class textview  *v, class text  *d)
 {
-    register int pos, len, c, lastnewline = 0;
+    int pos, len, c, lastnewline = 0;
     Boolean FoundIt = FALSE, JustSawAColon = FALSE;
     int numcolons = 0;
 

@@ -762,7 +762,7 @@ void frame_Exit(class frame  *self)
 
 void frame_NewWindow(class frame  *self)
     {
-    register class buffer *buffer;
+    class buffer *buffer;
     class frame *newFrame;
     class im *window;
     int count;
@@ -906,7 +906,7 @@ void frame_OldBuffer(class frame  *self)
     {
 
     char bufferName[100], prompt[256];
-    register class buffer *buffer;
+    class buffer *buffer;
 
     if (*lastBuffer == '\0' || !buffer::FindBufferByName(lastBuffer)) {
         buffer = (self)->GetBuffer();   /* Any except current */
@@ -938,7 +938,7 @@ void frame_OldBuffer(class frame  *self)
 void frame_VisitBuffer(class frame  *self)
     {
     char bufferName[100], prompt[100 + sizeof("Visit buffer [] : ") - 1];
-    register class buffer *buffer;
+    class buffer *buffer;
 
     if (*lastBuffer == '\0' || !buffer::FindBufferByName(lastBuffer)) {
         buffer = (self)->GetBuffer();     /* Any except current */
@@ -1540,7 +1540,7 @@ void frame_SaveAll(class frame  *self, long  key)
     (void)saveTheWorld(self);
 }
 
-char *frame_pwd(register class frame  *self, long  key)
+char *frame_pwd(class frame  *self, long  key)
         {
 
     static char wd[MAXPATHLEN];

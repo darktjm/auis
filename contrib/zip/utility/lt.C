@@ -76,10 +76,10 @@ lt::lt( )
 }
 
 long
-lt::Read_Visuals( register char *foreground , register char *background )
+lt::Read_Visuals( char *foreground , char *background )
 {
-    register long			      status = 0;
-    register FILE			     *file;
+    long			      status = 0;
+    FILE			     *file;
     static const char			     source[] =
       "*G;-1000,1000\nLW0\n>1000,-1000";
 

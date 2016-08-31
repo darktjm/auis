@@ -106,7 +106,7 @@ colormap::ViewName( )
 void
 colormap::DestroyColor( class color  *c )
 {
-    register int i;
+    int i;
     for(i = 0; i < this->used; i++)
 	if(c == *(this->colors + i))
 	    break;
@@ -120,7 +120,7 @@ colormap::DestroyColor( class color  *c )
 int
 colormap::LookupColorCell( class color  *c )
 {
-    register int i;
+    int i;
     int returnIndex = -1;
 
     for(i = 0; i < (this)->Used(); i++)

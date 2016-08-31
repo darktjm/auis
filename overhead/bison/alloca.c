@@ -163,7 +163,7 @@ alloca (size)
      unsigned size;
 {
   auto char probe;		/* Probes stack depth: */
-  register char *depth = ADDRESS_FUNCTION (probe);
+  char *depth = ADDRESS_FUNCTION (probe);
 
 #if STACK_DIRECTION == 0
   if (STACK_DIR == 0)		/* Unknown growth direction.  */
@@ -174,7 +174,7 @@ alloca (size)
      was allocated from deeper in the stack than currently. */
 
   {
-    register header *hp;	/* Traverses linked list.  */
+    header *hp;	/* Traverses linked list.  */
 
 #ifdef emacs
     BLOCK_INPUT;
@@ -184,7 +184,7 @@ alloca (size)
       if ((STACK_DIR > 0 && hp->h.deep > depth)
 	  || (STACK_DIR < 0 && hp->h.deep < depth))
 	{
-	  register header *np = hp->h.next;
+	  header *np = hp->h.next;
 
 	  free ((pointer) hp);	/* Collect garbage.  */
 
@@ -206,7 +206,7 @@ alloca (size)
   /* Allocate combined header + user data storage.  */
 
   {
-    register pointer new = malloc (sizeof (header) + size);
+    pointer new = malloc (sizeof (header) + size);
     /* Address of header.  */
 
     ((header *) new)->h.next = last_alloca_header;

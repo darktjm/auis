@@ -42,8 +42,8 @@ int ULstlmatch (const char *big,const char *small)
  *  Returns 1 iff initial characters of big match small exactly, ignoring alphabetic case.
  *  else 0.
  */
-    register const char *s, *b;
-    register char sc, bc;
+    const char *s, *b;
+    char sc, bc;
     s = small;
     b = big;
     do {

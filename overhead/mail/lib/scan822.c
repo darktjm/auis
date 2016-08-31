@@ -114,7 +114,7 @@ char **Line, *LineEnd, *RsltBuf; int sizeRsltBuf;
     If the buffer size is exceeded, or there's a lexical error, return 0.
  */
     int CommentCount, Quoted;
-    register char *Scan = *Line;
+    char *Scan = *Line;
 
     tokPtr = RsltBuf; *tokPtr = '\0';
     tokCount = 0;

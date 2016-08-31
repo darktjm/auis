@@ -103,7 +103,7 @@ weblisten() {
 	char hostname[64];
 	struct hostent *hp;
 	char buf[2560], *cp;
-	register int i,  s,  ns,  len;
+	int i,  s,  ns,  len;
 	struct sockaddr_un saun,  fsaun;
 
 	/*
@@ -159,7 +159,7 @@ weblisten() {
 webclient(char  *buf, int  timeout, char  *rbuf, int  size)  {
 	char c, *eb;
 	FILE *fp, *ofp;
-	register int i,  s,  len, res, del;
+	int i,  s,  len, res, del;
 	struct sockaddr_un saun;
 	
 	/*

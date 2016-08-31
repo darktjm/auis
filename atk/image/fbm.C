@@ -292,7 +292,7 @@ int
 fbm::Load( const char  *fullname, FILE  *fp )
             { 
   FILE *f;
-  register int x, y, j, k, rowlen, plnlen;
+  int x, y, j, k, rowlen, plnlen;
   unsigned char *pixptr, *cm;
   extern int Scrn;
   unsigned char *r, *g, *b;

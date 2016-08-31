@@ -70,8 +70,8 @@ stylesheetInternal::~stylesheetInternal()
 
 void stylesheetInternal::FreeStyles()
 {
-    register int i;
-    register class style **styles;
+    int i;
+    class style **styles;
 
     if (this->nstyles==0)
 	return;
@@ -85,8 +85,8 @@ void stylesheetInternal::FreeStyles()
 
 static long FindStyle(class stylesheetInternal  *self, class style  *styleptr)
 {
-    register int i;
-    register class style **styles;
+    int i;
+    class style **styles;
     
     for (i = 0, styles = self->styles; i < self->nstyles; i++, styles++)
         if (*styles == styleptr)
@@ -113,7 +113,7 @@ void stylesheetInternal::Add(class style  *styleptr)
 
 void stylesheetInternal::Delete(class style  *styleptr)
 {
-    register int i;
+    int i;
 
     if ((i = FindStyle(this, styleptr)) != -1) {
 	delete styleptr;
@@ -125,8 +125,8 @@ void stylesheetInternal::Delete(class style  *styleptr)
 
 class style *stylesheetInternal::Find(const char  *name)
 {
-    register int i;
-    register class style **styles;
+    int i;
+    class style **styles;
     
     for (i = 0, styles = this->styles; i < this->nstyles; i++, styles++)
 	if (strcmp((*styles)->name, name) == 0)
@@ -139,8 +139,8 @@ class menulist *stylesheetInternal::GetMenuList(proctable_fptr procname, struct 
 {
     struct proctable_Entry *proc;
 
-    register int i;
-    register class style **styles;
+    int i;
+    class style **styles;
 
     if (!this->styleMenu)
         this->styleMenu = new menulist;
@@ -204,8 +204,8 @@ long stylesheetInternal::Read(FILE  *fp, boolean  template_c)
 
 void stylesheetInternal::Write(FILE  *fp)
 {
-    register int i;
-    register class style **styles;
+    int i;
+    class style **styles;
     
     for (i = 0, styles = this->styles; i < this->nstyles; i++, styles++)
 	if ((*styles)->template_c == 0)  {
@@ -292,7 +292,7 @@ DEFINE_MFLEX_CLASS(stylesheet_maplist,stylesheet_mapentry,10);
 void stylesheet::Copy(stylesheet *dest) {
     int i;
     boolean forcecopy=FALSE;
-    register class style **styles, *overridestyle;
+    class style **styles, *overridestyle;
     if(si==dest->si) {
 	// The dest is already using the same exact data.
 	return;

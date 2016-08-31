@@ -86,7 +86,7 @@ void filetype::FreeAttributes(struct attributes *attributes)
 
 static struct mapEntry *GetEntry(const char  *extension, const char  *dataName)
 {
-    register struct mapEntry *thisEntry;
+    struct mapEntry *thisEntry;
 
     if (strcmp(extension, "*") == 0) {
         thisEntry = &defaultMapping;
@@ -186,9 +186,9 @@ void filetype::AddExistingAttributes(const char  *extension , const char  *dataN
     thisEntry->existingAttributes = ParseAttributes(attributes); 
 }
 
-int filetype::DeleteEntry(register char  *extension)
+int filetype::DeleteEntry(char  *extension)
 {
-    register struct mapEntry *traverse, **previous;
+    struct mapEntry *traverse, **previous;
 
     if (strcmp(extension, "*")) {
         if (defaultMapping.dataName)
@@ -222,10 +222,10 @@ int filetype::DeleteEntry(register char  *extension)
  *    the next call to this routine. If this can't be guaranteed, the
  *    programmer must copy the attributes list.
  */
-char *filetype::Lookup(FILE  *file, register const char  *filename, long  *objectID, struct attributes  **attributes)
+char *filetype::Lookup(FILE  *file, const char  *filename, long  *objectID, struct attributes  **attributes)
 {
-    register struct mapEntry *thisEntry = &defaultMapping;
-    register const char *extension;
+    struct mapEntry *thisEntry = &defaultMapping;
+    const char *extension;
     static char objectName[100]; /* The place to put the name of the class that should be used to read this file. */
     const char *targetObject = NULL; /* Holds potential value for objectName. */
     struct attributes *newAttributes = NULL; /* Only used if the file is in non-datastream format. */
@@ -238,7 +238,7 @@ char *filetype::Lookup(FILE  *file, register const char  *filename, long  *objec
  * This information may be overrriden by that in the file.
  */
     if (filename != NULL && filename[0] != '\0') {
-        register const char *s;
+        const char *s;
 	char prefix[256];
 	char *dotpos;
 

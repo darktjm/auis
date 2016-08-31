@@ -726,7 +726,7 @@ char           *dPtr;
                                         * AMS_DATESIZE) at dPtr.  Return a
                                         * pointer to it. */
     int             X;
-    register char  *cp;
+    char  *cp;
 
     cp = dPtr;
     for (X = AMS_DATESIZE; X > 0; X--) {

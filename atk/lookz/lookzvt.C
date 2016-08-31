@@ -78,20 +78,20 @@
 
 #undef class_StaticEntriesOnly
 
-printdata(register class lookz  *dobj);
-static boolean PrintAStyle(class style  *s, register class lookzview  *v);
-boolean findDefine(register FILE  *f);
-main( register int	   argc, register char   **argv );
+printdata(class lookz  *dobj);
+static boolean PrintAStyle(class style  *s, class lookzview  *v);
+boolean findDefine(FILE  *f);
+main( int	   argc, char   **argv );
 
 
-printdata(register class lookz  *dobj)
+printdata(class lookz  *dobj)
 	{
 	printf("Image is %s\n", ((dobj)->GetVisibility() ? "visible" : "hidden"));
 	fflush(stdout);
 }
 
 static boolean
-PrintAStyle(class style  *s, register class lookzview  *v)
+PrintAStyle(class style  *s, class lookzview  *v)
 		{
 	printf("%s\n", (s)->GetMenuName()); fflush(stdout);
 	return FALSE;
@@ -99,10 +99,10 @@ PrintAStyle(class style  *s, register class lookzview  *v)
 
 /* findDefine - parse file looking for "\define{" */
 boolean
-findDefine(register FILE  *f)
+findDefine(FILE  *f)
 	{
-	register c;
-	register char *s;
+	c;
+	char *s;
 	while (TRUE) {
 		while ((c=getc(f)) != EOF  && c != '\\') 
 			{}
@@ -116,11 +116,11 @@ findDefine(register FILE  *f)
 	}
 }
 
-main( register int	   argc, register char   **argv )
+main( int	   argc, char   **argv )
 		{
-	register class lookz *dobj;
-	register class lookzview *dview;
-	register class stylesheet *ss;
+	class lookz *dobj;
+	class lookzview *dview;
+	class stylesheet *ss;
 
 	class frame *frame;
 	FILE *f;

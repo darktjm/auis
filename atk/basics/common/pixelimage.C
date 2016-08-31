@@ -58,15 +58,15 @@ static int bitmask[8] = {0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01};
 
 ATKdefineRegistry(pixelimage, observable, NULL);
 static boolean ClipChange(class pixelimage  *self, struct rectangle  *sub);
-static long GetRow(class pixelimage  *self, long  x , long  y , long  length, register unsigned char *dest);
-static long SetRow(class pixelimage  *self, long  x , long  y , long  length, register unsigned char *src);
-static long GetColumn(class pixelimage  *self, long  x , long  y , long  length, register unsigned char *dest);
-static long SetColumn(class pixelimage  *self, long  x , long  y , long  length, register unsigned char *src);
+static long GetRow(class pixelimage  *self, long  x , long  y , long  length, unsigned char *dest);
+static long SetRow(class pixelimage  *self, long  x , long  y , long  length, unsigned char *src);
+static long GetColumn(class pixelimage  *self, long  x , long  y , long  length, unsigned char *dest);
+static long SetColumn(class pixelimage  *self, long  x , long  y , long  length, unsigned char *src);
 
 
-void pixelimage::ClipRange(long  *tstart , long  *tlength, register long  start , register long  length)
+void pixelimage::ClipRange(long  *tstart , long  *tlength, long  start , long  length)
 {
-    register long s = *tstart, l = *tlength;
+    long s = *tstart, l = *tlength;
     if (s < start) l -= start - s,  s = start;
     if (l < 0)  l = 0;
     if (s > start+length) s = start+length, l = 0;
@@ -113,12 +113,12 @@ static boolean ClipChange(class pixelimage  *self, struct rectangle  *sub)
       assumes the arguments are valid
 */
 
-static long GetRow(class pixelimage  *self, long  x , long  y , long  length, register unsigned char *dest)
+static long GetRow(class pixelimage  *self, long  x , long  y , long  length, unsigned char *dest)
 {
-    register unsigned char *src;  /* where to fetch next source halfword */
-    register unsigned char *dend;  /* last dest halfword to fill */
-    register unsigned long v;	/* shift register to hold halfwords */
-    register long shift;		/* amount to shift v to the right */
+    unsigned char *src;  /* where to fetch next source halfword */
+    unsigned char *dend;  /* last dest halfword to fill */
+    unsigned long v;	/* shift register to hold halfwords */
+    long shift;		/* amount to shift v to the right */
 
     /* set 'dend' to addr of last byte to store */
     dend = dest + ((length-1)/8);
@@ -174,7 +174,7 @@ static long GetRow(class pixelimage  *self, long  x , long  y , long  length, re
       It will return 0 if y is outside the bounds of the image.
 	  If 'dest' is not on a halfword boundary, returns -1;
 */
-long pixelimage::GetRow(long  x , long  y , long  length, register unsigned short  *dest)
+long pixelimage::GetRow(long  x , long  y , long  length, unsigned short  *dest)
 {
     if (((unsigned long)dest)&1)
 	/* dest not aligned */
@@ -198,12 +198,12 @@ long pixelimage::GetRow(long  x , long  y , long  length, register unsigned shor
   Returns the number of bits stored.
 */
 
-static long SetRow(class pixelimage  *self, long  x , long  y , long  length, register unsigned char *src)
+static long SetRow(class pixelimage  *self, long  x , long  y , long  length, unsigned char *src)
 {
-    register unsigned char *dest;  /* where to store next halfword */
-    register unsigned char *send;  /* addr of halfword with last src bit */
-    register unsigned long v = 0;	/* shift register to hold halfwords */
-    register long shift;		/* amount to shift v to the right */
+    unsigned char *dest;  /* where to store next halfword */
+    unsigned char *send;  /* addr of halfword with last src bit */
+    unsigned long v = 0;	/* shift register to hold halfwords */
+    long shift;		/* amount to shift v to the right */
     long bitsleft;		/* number of bits used from *send */
 
     /* set 'send' to addr of the byte containing the last src bit */
@@ -272,7 +272,7 @@ static long SetRow(class pixelimage  *self, long  x , long  y , long  length, re
   If the src is not halfword aligned, returns -1;
 */
 
-long pixelimage::SetRow(long  x , long  y , long  length, register unsigned short  *src)
+long pixelimage::SetRow(long  x , long  y , long  length, unsigned short  *src)
 {
     struct rectangle R;
     if (((unsigned long)src) & 1)
@@ -296,14 +296,14 @@ long pixelimage::SetRow(long  x , long  y , long  length, register unsigned shor
   Return value: The number of bits stored in 'dest'.
 */
 
-static long GetColumn(class pixelimage  *self, long  x , long  y , long  length, register unsigned char *dest)
+static long GetColumn(class pixelimage  *self, long  x , long  y , long  length, unsigned char *dest)
 {
-    register unsigned char *src;		/* where to fetch next source byte */
-    register unsigned char *send;	/* stop just before fetching this */
-    register unsigned char v;	/* shift register to hold halfwords */
-    register unsigned char vbit;		/* which bit to set in v */
-    register unsigned char colbit;		/* which bit to examine from src */
-    register long W = self->RowWidth;
+    unsigned char *src;		/* where to fetch next source byte */
+    unsigned char *send;	/* stop just before fetching this */
+    unsigned char v;	/* shift register to hold halfwords */
+    unsigned char vbit;		/* which bit to set in v */
+    unsigned char colbit;		/* which bit to examine from src */
+    long W = self->RowWidth;
 
     src = self->bits + y * W + (x >> 3);	/* first byte */
     send = src + length * W;			/* after last byte */
@@ -349,7 +349,7 @@ static long GetColumn(class pixelimage  *self, long  x , long  y , long  length,
       If 'dest' is not on a halfword boundary, returns -1;
 */
 
-long pixelimage::GetColumn(long  x , long  y , long  length, register unsigned short  *dest)
+long pixelimage::GetColumn(long  x , long  y , long  length, unsigned short  *dest)
 {
     if (((unsigned long)dest)&1)
 	/* dest not aligned */
@@ -375,14 +375,14 @@ long pixelimage::GetColumn(long  x , long  y , long  length, register unsigned s
   Return value: The number of bits stored from 'src'.
 */
 
-static long SetColumn(class pixelimage  *self, long  x , long  y , long  length, register unsigned char *src)
+static long SetColumn(class pixelimage  *self, long  x , long  y , long  length, unsigned char *src)
 {
-    register unsigned char *dest;	/* byte to receive incoming bit */
-    register unsigned char vbit;	/* which bit to test in v */
-    register unsigned char colbit; 	/* which bit to change in *dest */
-    register unsigned char v = 0;	/* shift register to hold halfwords from src */
-    register long W = self->RowWidth;
-    register unsigned char *dend;	/* row after last row to receive a byte */
+    unsigned char *dest;	/* byte to receive incoming bit */
+    unsigned char vbit;	/* which bit to test in v */
+    unsigned char colbit; 	/* which bit to change in *dest */
+    unsigned char v = 0;	/* shift register to hold halfwords from src */
+    long W = self->RowWidth;
+    unsigned char *dend;	/* row after last row to receive a byte */
 
     dest = self->bits + y * W + (x/8);
     dend = dest + W * length;
@@ -420,7 +420,7 @@ static long SetColumn(class pixelimage  *self, long  x , long  y , long  length,
       If 'src' is not on a halfword boundary, returns -1;
 */
 
-long pixelimage::SetColumn(long  x , long  y , long  length, register unsigned short  *src)
+long pixelimage::SetColumn(long  x , long  y , long  length, unsigned short  *src)
 {
     struct rectangle R;
     if (((unsigned long)src) & 1)
@@ -454,9 +454,9 @@ long pixelimage::SetColumn(long  x , long  y , long  length, register unsigned s
 void pixelimage::PaintSubraster(struct rectangle  *sub, long  byte)
 {
     unsigned short buffer[BUFBYTES>>1];
-    register unsigned char *bx, *bend;
-    register long row, rowlimit;
-    register long x, width;
+    unsigned char *bx, *bend;
+    long row, rowlimit;
+    long x, width;
     if (this->ReadOnly || ClipChange(this, sub)) return;
 
     rowlimit = rectangle_Top(sub)+rectangle_Height(sub);
@@ -476,9 +476,9 @@ void pixelimage::PaintSubraster(struct rectangle  *sub, long  byte)
 void pixelimage::InvertSubraster(struct rectangle  *sub)
 {
     unsigned short buffer[BUFBYTES>>1];
-    register unsigned char *bx, *bend;
-    register long row, rowlimit;
-    register long x, width;
+    unsigned char *bx, *bend;
+    long row, rowlimit;
+    long x, width;
     if (this->ReadOnly || ClipChange(this, sub)) return;
 
     rowlimit = rectangle_Top(sub)+rectangle_Height(sub);
@@ -504,11 +504,11 @@ void pixelimage::GraySubraster(struct rectangle  *sub, long  level)
 {
     unsigned short line0[BUFBYTES>>1], line1[BUFBYTES>>1];
     unsigned char byte0, byte1;
-    register unsigned char *bx, *bend;
-    register long row;
+    unsigned char *bx, *bend;
+    long row;
     long rowlimit;
-    register long evenrowlimit;
-    register long x, width;
+    long evenrowlimit;
+    long x, width;
     long shift;
 
     if (this->ReadOnly || ClipChange(this, sub)) return;
@@ -549,7 +549,7 @@ void pixelimage::GraySubraster(struct rectangle  *sub, long  level)
 void pixelimage::MirrorLRSubraster(struct rectangle  *sub)
 {
     unsigned short bufferleft[BUFBYTES>>1], bufferright[BUFBYTES>>1];
-    register long colleft, colright;
+    long colleft, colright;
     long x, y, width, height;
     if (this->ReadOnly || ClipChange(this, sub)) return;
 
@@ -597,9 +597,9 @@ void pixelimage::MirrorUDSubraster(struct rectangle  *sub)
 */
 void pixelimage::GetRotatedSubraster(struct rectangle  *sub, class pixelimage  *target)
 {
-    register long col;
-    register long W;
-    register unsigned char *dest;
+    long col;
+    long W;
+    unsigned char *dest;
     long x, y, width, height;
 
     rectangle_GetRectSize(sub, &x, &y, &width, &height);
@@ -749,7 +749,7 @@ void pixelimage::BlitSubraster(long  x , long  y, class pixelimage  *source, str
     struct rectangle R;
     long width, height;
     long locy, subx, suby;
-    register long bx, bend;
+    long bx, bend;
     /* now we need two buffers that are halfword-aligned but accessible as char * arrays. Thus, a cheap hack. */
     unsigned short bitbuf[BUFBYTES>>1];
     unsigned short desbuf[BUFBYTES>>1];
@@ -1055,16 +1055,16 @@ class pixelimage *pixelimage::Clone()
 */
 void pixelimage::Clear()
 {
-    register unsigned char *rowx;
-    register long W = this->RowWidth;
+    unsigned char *rowx;
+    long W = this->RowWidth;
 
     if (this->bits == NULL)
 	return;
     if (this->ReadOnly) return;
     {
 	/* clear out the first row of bitarray */
-	register unsigned short *hwx = (unsigned short *)this->bits;
-	register unsigned short *hwend = hwx + (W>>1);
+	unsigned short *hwx = (unsigned short *)this->bits;
+	unsigned short *hwend = hwx + (W>>1);
 	while (hwx < hwend)
 	    *hwx++ = WHITEHALFWORD;
     }
@@ -1079,16 +1079,16 @@ void pixelimage::Clear()
 }
 
 
-long pixelimage::GetPixel(register long  x , register long  y)
+long pixelimage::GetPixel(long  x , long  y)
 {
-    register unsigned char *bytePtr = (this->bits) + (this->RowWidth*y) + (x >> 3);
+    unsigned char *bytePtr = (this->bits) + (this->RowWidth*y) + (x >> 3);
     return (*bytePtr & bitmask[x & 0x7]) ? 1 : 0;
 }
 
-void pixelimage::SetPixel(register long  x , register long  y , register long  pixelValue)
+void pixelimage::SetPixel(long  x , long  y , long  pixelValue)
 {
     struct rectangle R;
-    register unsigned char *bytePtr;
+    unsigned char *bytePtr;
     if (this->ReadOnly) return;
 
     rectangle_SetRectSize(&R, x, y, 1, 1);

@@ -94,7 +94,7 @@ char **av;
 		GDEVsets("Xgeometry", r);
 
 	if((r = fetcharg('#')) != NULL) {
-		register char *p = index(r, '#');
+		char *p = index(r, '#');
 		if(p != NULL) {
 			*p++ = '\0';
 			GDEVsets(r, p);
@@ -267,7 +267,7 @@ int
 ClassifyVector(y)
 Vector y;
 {
-	register sClassDope cd;
+	sClassDope cd;
 
 	cd = sClassify(fullclassifier, y);
 	if(cd == NULL) {
@@ -302,7 +302,7 @@ static int npeek = 0;
 
 Gpop()
 {
-	register int i, r;
+	int i, r;
 
 	if(npeek > 0) {
 		r = peek[0];
@@ -400,8 +400,8 @@ Unambiguous(fv)
 FV fv;
 {
 	Vector y;
-	register sClassDope cd;
-	register int retval = 0;
+	sClassDope cd;
+	int retval = 0;
 	static int count = 0;
 
 	if(doneclassifier == NULL)

@@ -196,7 +196,7 @@ get_server(string, size)
 char	*string;
 int	size;
 {
-	register char *cp;
+	char *cp;
 
 	if (fgets(string, size, ser_rd_fp) == NULL)
 		return (-1);

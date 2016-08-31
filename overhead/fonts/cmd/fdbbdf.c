@@ -127,8 +127,8 @@ char *s;
 	exit(1);
 }
 initlst(){
-	register struct st *lstp;
-	register char **c;
+	struct st *lstp;
+	char **c;
 	*comments = '\0';
 	for (c =names,lstp = lst; **c != '\0'; c++,lstp++){
 		lstp->s = *c;
@@ -142,7 +142,7 @@ int ed;
 FILE *fout;
 /* Writes out blank definitions for undefined characters */
 {
-    register int i;
+    int i;
     for(i = 0; i < ed; i++)  {
 	if (used[i] == 0){
 	    if(isprint(i + Coffset)) 
@@ -190,10 +190,10 @@ char *argv[];
 }
 
 char *lookup(s,i)
-register char *s;
+char *s;
 int *i;
 {
-	register struct st *lstp;
+	struct st *lstp;
 	for(lstp = lst; lstp != endlst; lstp++){
 		if((*(lstp->s) == *s) && (strncmp(lstp->s,s,lstp->len) == 0)){
 		 	*i = (lstp - lst);
@@ -201,8 +201,8 @@ int *i;
 		}
 	}
 	for(lstp = lst; lstp != endlst; lstp++){
-		register char *p = lstp->s;
-		register char *q = s;
+		char *p = lstp->s;
+		char *q = s;
 
 		while (*p != '\0' && *q != '\0' && ((isupper(*p) ? tolower(*p) : *p)) == ((isupper(*q) ? tolower(*q) : *q)))  {
 		    p++;
@@ -217,10 +217,10 @@ int *i;
 	return(NULL);
 }
 hexout(c,f)
-register char *c;
-register FILE *f;
+char *c;
+FILE *f;
 {
-	register int w = 0;
+	int w = 0;
 	while(*c != '\0'){
 	    if(*c == '\n')break;
 	    else if(maskflag) putc('0',f);
@@ -314,7 +314,7 @@ int count;
 	char buf[256],*ss;
 	int result,foundchar = 0;
 	char cc[256];
-	register int i;
+	int i;
 	fprintf(fout,"STARTFONT 2.1\nCOMMENT Created by fdbbdf\n");
 	
 	while((fgets(buf,256,fin)) != NULL){

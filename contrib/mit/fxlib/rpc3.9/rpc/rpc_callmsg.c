@@ -63,11 +63,11 @@
  */
 bool_t
 xdr_callmsg(xdrs, cmsg)
-	register XDR *xdrs;
-	register struct rpc_msg *cmsg;
+	XDR *xdrs;
+	struct rpc_msg *cmsg;
 {
-	register long *buf;
-	register struct opaque_auth *oa;
+	long *buf;
+	struct opaque_auth *oa;
 
 	if (xdrs->x_op == XDR_ENCODE) {
 		if (cmsg->rm_call.cb_cred.oa_length > MAX_AUTH_BYTES) {

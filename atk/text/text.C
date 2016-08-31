@@ -109,7 +109,7 @@ static boolean DiscardToEnddata(FILE  *file);
 static boolean HasBinaryChars(class text  *self  /* (Other than viewrefs) */);
 static void TryConversion(class text  *self);
 #endif /* CHECK_BE1 */
-static int StringMatch(register class text  *self, register long  pos, register const char  *c);
+static int StringMatch(class text  *self, long  pos, const char  *c);
 static boolean TestForNoTemplate(class style  *style);
 static void PutsRange(char  *p, FILE  *fp, char  *ep);
 static char *WriteOutBuf(FILE  *file,char  *outbuf,char  *outp,char  *lastblank);
@@ -543,7 +543,7 @@ void text::AlwaysReplaceCharacters(long  pos , long  len, const char  *repStr, l
 DoAddView(text *self, long pos, 
 			const char *viewtype, class dataobject *dataobject) {
 	class viewref *newviewref;
-	register environment *newenv;
+	environment *newenv;
 
 	AddObj(self, dataobject);
 	newviewref = viewref::Create(viewtype, dataobject);
@@ -844,7 +844,7 @@ long text::HandleCloseBrace(long  pos, FILE  *file)
 
 class environment *text::AlwaysAddStyle(long  pos , long  len, class style  *stylep)
 {
-    register class environment *newenv;
+    class environment *newenv;
 
     if ((newenv = (this->rootEnvironment)->WrapStyle( pos, len, stylep)) != NULL) {
 	setStyleFlags(newenv);
@@ -1072,7 +1072,7 @@ long text::Read(FILE  *file, long  id)
     return retval;
 }
 
-static int StringMatch(register class text  *self, register long  pos, register const char  *c)
+static int StringMatch(class text  *self, long  pos, const char  *c)
 {
     /* Tests if the text begins with the given string */
     while (*c != '\0') {
@@ -1215,7 +1215,7 @@ static char *WriteOutBuf(FILE  *file,char  *outbuf,char  *outp,char  *lastblank)
     class environment *curenv;
     class environment *newenv;
     class environment *parentenv;
-    register int lastblankset = FALSE;
+    int lastblankset = FALSE;
     long end;
     long i;
     long elen;
@@ -1798,7 +1798,7 @@ static void PlayTabs(struct text_statevector  *sv , struct text_statevector  *ol
 /* style to use, and plays that style over the state vector. */
 static void PlayStyle(struct text_statevector  *sv, class style  *styleptr)
 {
-    register long delta;
+    long delta;
     struct text_statevector oldvalues;
     char *color;
 
@@ -2041,7 +2041,7 @@ void text::ApplyEnvironmentsToStyle(environment *env, style *dest) {
     env->data.style->MergeInto(dest);
 }
 
-class viewref *text::FindViewreference(register long  pos , register long  len)
+class viewref *text::FindViewreference(long  pos , long  len)
 {
     while (len > 0) {
         long gotlen;

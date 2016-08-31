@@ -172,17 +172,17 @@ static const char			     * const areas[] =
 
 
 ATKdefineRegistry(apt, dataobject, apt::InitializeClass);
-static void Free_Vector( register char **vector );
-static long Assign_String( register class apt		      *self, register const char			      *prefix , register const char			      *desire , register const char			      *candidate , register const char			      *source , register char			      **target );
+static void Free_Vector( char **vector );
+static long Assign_String( class apt		      *self, const char			      *prefix , const char			      *desire , const char			      *candidate , const char			      *source , char			      **target );
 static long Assign_Strings( class apt *self, const char *prefix , const char *desire , const char *candidate , const char *source, char ***target, long *count );
-static void Write_Strings( register class apt		      *self, register FILE			      *file, register const char			      *name , register const char			      *prefix, register long			       count, register const char			      * const anchor[] );
-static void Parse_Field( register class apt		      *self, register const char			      *line, register struct apt_field	      *field );
+static void Write_Strings( class apt		      *self, FILE			      *file, const char			      *name , const char			      *prefix, long			       count, const char			      * const anchor[] );
+static void Parse_Field( class apt		      *self, const char			      *line, struct apt_field	      *field );
 
 
 static
-void Free_Vector( register char **vector )
+void Free_Vector( char **vector )
     {
-  register long			      i = 0;
+  long			      i = 0;
 
   IN(Free_Vector);
   if ( vector )
@@ -225,7 +225,7 @@ apt::~apt( )
 	ATKinit;
 	class apt *self=this;
 
-  register long			       i,j;
+  long			       i,j;
 
   IN(apt_FinalizeObject);
   for(i = 0; i < 4; i++) {
@@ -249,7 +249,7 @@ apt::~apt( )
   }
 
 void
-apt::SetAreaTitle( register const char			      *title, register long			       area )
+apt::SetAreaTitle( const char			      *title, long			       area )
         {
   const char				     *titles[2];
 	class apt *self=this;
@@ -262,9 +262,9 @@ apt::SetAreaTitle( register const char			      *title, register long			       ar
   }
 
 void
-apt::SetAreaSpreadTitle( register const char			     **titles, register long			       count , register long			       area , register long			       mode )
+apt::SetAreaSpreadTitle( const char			     **titles, long			       count , long			       area , long			       mode )
         {
-  register long			      i = 0;
+  long			      i = 0;
   
 	class apt *self=this;
   IN(apt_SetAreaSpreadTitle);
@@ -287,7 +287,7 @@ apt::SetAreaSpreadTitle( register const char			     **titles, register long			  
   }
 
 void
-apt::SetAreaTitleFontName( register const char			      *font_name, register long			       area )
+apt::SetAreaTitleFontName( const char			      *font_name, long			       area )
         {
 	class apt *self=this;
   IN(apt_SetAreaTitleFontName);
@@ -303,7 +303,7 @@ apt::SetAreaTitleFontName( register const char			      *font_name, register long
   }
 
 void
-apt::SetAreaLegend( register const char			      *legend, register long			       area )
+apt::SetAreaLegend( const char			      *legend, long			       area )
         {
   const char				     *legends[2];
 	class apt *self=this;
@@ -316,9 +316,9 @@ apt::SetAreaLegend( register const char			      *legend, register long			       
   }
 
 void
-apt::SetAreaSpreadLegend( register const char			     **legends, register long			       count , register long			       area , register long			       mode )
+apt::SetAreaSpreadLegend( const char			     **legends, long			       count , long			       area , long			       mode )
         {
-  register long			      i = 0;
+  long			      i = 0;
 
 	class apt *self=this;
   IN(apt_SetAreaSpreadLegend);
@@ -341,7 +341,7 @@ apt::SetAreaSpreadLegend( register const char			     **legends, register long			
   }
 
 void
-apt::SetAreaLegendFontName( register const char			      *font_name, register long			       area )
+apt::SetAreaLegendFontName( const char			      *font_name, long			       area )
         {
 	class apt *self=this;
   IN(apt_SetAreaLegendFontName);
@@ -360,7 +360,7 @@ apt::SetAreaLegendFontName( register const char			      *font_name, register lon
 struct apt_field *
 apt::ReadObjectField( )
     {
-  register struct apt_field	     *field = NULL;
+  struct apt_field	     *field = NULL;
 
 	class apt *self=this;
   IN(apt_ReadObjectField);
@@ -374,10 +374,10 @@ apt::ReadObjectField( )
   }
 
 long
-apt::ReadObject( register FILE			      *file, register long			       id, apt_readfptr reader )
+apt::ReadObject( FILE			      *file, long			       id, apt_readfptr reader )
           {
 	class apt *self=this;
-  register long			      i, j, found, status = dataobject_NOREADERROR;
+  long			      i, j, found, status = dataobject_NOREADERROR;
   char				      line[256 + 1];
 
   IN(apt_ReadObject);
@@ -440,10 +440,10 @@ apt::ReadObject( register FILE			      *file, register long			       id, apt_rea
   }
 
 static
-long Assign_String( register class apt		      *self, register const char			      *prefix , register const char			      *desire , register const char			      *candidate , register const char			      *source , register char			      **target )
+long Assign_String( class apt		      *self, const char			      *prefix , const char			      *desire , const char			      *candidate , const char			      *source , char			      **target )
       {
   char				      name[257];
-  register long			      status = 0;
+  long			      status = 0;
 
   IN(Assign_String);
   sprintf( name, "%s%s", prefix, desire );
@@ -461,10 +461,10 @@ long Assign_String( register class apt		      *self, register const char			     
   }
 
 static
-long Assign_Strings( register class apt		      *self, register const char			      *prefix , register const char			      *desire , register const char			      *candidate , register const char			      *source, register char			    ***target, register long			      *count )
+long Assign_Strings( class apt		      *self, const char			      *prefix , const char			      *desire , const char			      *candidate , const char			      *source, char			    ***target, long			      *count )
           {
   char				      name[257], **strings;
-  register long			      status = 0;
+  long			      status = 0;
 
   IN(Assign_Strings);
   sprintf( name, "%s%s", prefix, desire );
@@ -484,7 +484,7 @@ long Assign_Strings( register class apt		      *self, register const char			    
   }
 
 void
-apt::WriteObjectField( register struct apt_field	      *field )
+apt::WriteObjectField( struct apt_field	      *field )
       {
 	class apt *self=this;
   IN(apt_WriteObjectField);
@@ -493,10 +493,10 @@ apt::WriteObjectField( register struct apt_field	      *field )
   }
 
 void
-apt::WriteObject( register FILE			      *file, register long			       id , register long			       level, apt_writefptr writer)
+apt::WriteObject( FILE			      *file, long			       id , long			       level, apt_writefptr writer)
           {
   char				      bracket[256 + 2];
-  register long			      i;
+  long			      i;
 	class apt *self=this;
 
   IN(apt_WriteObject);
@@ -529,9 +529,9 @@ apt::WriteObject( register FILE			      *file, register long			       id , regis
   }
 
 static
-void Write_Strings( register class apt		      *self, register FILE			      *file, register const char			      *name , register const char			      *prefix, register long			       count, register const char			      * const *anchor )
+void Write_Strings( class apt		      *self, FILE			      *file, const char			      *name , const char			      *prefix, long			       count, const char			      * const *anchor )
             {
-  register long			      i;
+  long			      i;
 
   IN(Write_Strings);
   if ( anchor )
@@ -549,10 +549,10 @@ void Write_Strings( register class apt		      *self, register FILE			      *file
   }
 
 static
-void Parse_Field( register class apt		      *self, register const char			      *line, register struct apt_field	      *field )
+void Parse_Field( class apt		      *self, const char			      *line, struct apt_field	      *field )
         {
   char				      work[257];
-  register char			     *t = work;
+  char			     *t = work;
 
   IN(Parse_Field);
   DEBUGst(Given-Line,line);
@@ -572,12 +572,12 @@ void Parse_Field( register class apt		      *self, register const char			      *
 #define  max_field_content_items    50
 
 char **
-apt::ParseFieldContent( register const char			      *string )
+apt::ParseFieldContent( const char			      *string )
       {
-  register char			    **fields;
-  register const char		     *s = string, *s2;
+  char			    **fields;
+  const char		     *s = string, *s2;
   char *t;
-  register long			      i, length;
+  long			      i, length;
 	class apt *self=this;
 
   IN(apt_ParseFieldContent);
@@ -607,12 +607,12 @@ apt::ParseFieldContent( register const char			      *string )
   }
 
 struct apt_field_contents *
-apt::ParseFieldContents( register const char			      *string )
+apt::ParseFieldContents( const char			      *string )
       {
-  register char			    **content, **field;
-  register struct apt_field_contents *contents;
-  register char			     *s, *s2, *t;
-  register long			      i = 0, length = 0;
+  char			    **content, **field;
+  struct apt_field_contents *contents;
+  char			     *s, *s2, *t;
+  long			      i = 0, length = 0;
 	class apt *self=this;
 
   IN(apt_ParseFieldContents);

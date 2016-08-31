@@ -197,7 +197,7 @@ boolean cel::SetChildObject(class dataobject  *newobject,const char  *viewName)
 }
 long cel::GetModified()
 {
-    register long mod = (this)->dataobject::GetModified();
+    long mod = (this)->dataobject::GetModified();
     if(this->NoSave) return mod;
     if(this->dataObject)
 	mod += (this->dataObject)->GetModified();

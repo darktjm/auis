@@ -62,8 +62,8 @@ END-SPECIFICATION  ************************************************************/
 
 ATKdefineRegistry(zipocirc, zipobject, NULL);
 
-static long Draw( register class zipocirc		  *self, register zip_type_figure		   figure, register zip_type_pane		   pane, register long				   action );
-static void Compute_Handle_Positions( register class zipocirc		  *self, register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		  *X1 , register zip_type_pixel		  *X2 , register zip_type_pixel		  *X3 , register zip_type_pixel		  *Y1 , register zip_type_pixel		  *Y2 , register zip_type_pixel		  *Y3 );
+static long Draw( class zipocirc		  *self, zip_type_figure		   figure, zip_type_pane		   pane, long				   action );
+static void Compute_Handle_Positions( class zipocirc		  *self, zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		  *X1 , zip_type_pixel		  *X2 , zip_type_pixel		  *X3 , zip_type_pixel		  *Y1 , zip_type_pixel		  *Y2 , zip_type_pixel		  *Y3 );
 
 
 char
@@ -91,7 +91,7 @@ zipocirc::Object_Datastream_Code( )
   }
 
 long
-zipocirc::Show_Object_Properties( register zip_type_pane		   pane, register zip_type_figure		   figure )
+zipocirc::Show_Object_Properties( zip_type_pane		   pane, zip_type_figure		   figure )
         {
   (this->view_object)->Announce(  "Draw Circle from Center outward." );
   return  zip_ok;

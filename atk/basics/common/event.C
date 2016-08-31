@@ -62,7 +62,7 @@ event::~event()
 
 class event *event::Allocate()
     {
-    register class event *e;
+    class event *e;
 
     if (freeList == NULL)
 	e = (class event *) malloc(sizeof(class event));
@@ -81,8 +81,8 @@ void event::Deallocate(class event  *self)
 
 void event::Cancel()
     {
-    register class event *prev = NULL;
-    register class event *x;
+    class event *prev = NULL;
+    class event *x;
 
     for (x = timerQueue; x != NULL && this != x; x=x->next) 
 	prev=x;
@@ -96,7 +96,7 @@ void event::Cancel()
 
 class event *event::Enqueue(long  time, event_fptr proc, const void  *procdata)
                 {
-    register class event *e;
+    class event *e;
 
     e = new event;
     e->t = time;
@@ -109,7 +109,7 @@ class event *event::Enqueue(long  time, event_fptr proc, const void  *procdata)
 	timerQueue = e;
     }
     else {
-	register class event *prev = NULL,
+	class event *prev = NULL,
 			*x = timerQueue;
 
 	for (; x != NULL && time > x->t; prev=x, x=x->next) ;
@@ -148,14 +148,14 @@ void event::StartTimer()
     units are   microseconds >>6  (max of 64000 sec) */
 
     struct osi_Times tp;
-    register class event *e = timerQueue;
+    class event *e = timerQueue;
 
     osi_GetTimes(&tp);
     if (timerQueue) {
 	if (timeInited) {
 	    /* reduce every time by 'now' */
 
-	    register long oldNow, deltaSec;
+	    long oldNow, deltaSec;
 
 	    deltaSec = tp.Secs - currSec;
 	    currSec += deltaSec;
@@ -181,8 +181,8 @@ long event::HandleTimer(long  currentTime)
     time (or if it will be time within 10 msec).
     return time to wait before next event  */
 
-    register long twait;
-    register class event *e = timerQueue;
+    long twait;
+    class event *e = timerQueue;
 
     if (timerQueue == NULL)
 	return event_ENDOFTIME;
@@ -213,7 +213,7 @@ long event::Now()
     can be called at any time, the queue will be updated. */
 
     struct osi_Times tp;
-    register long deltaSec;
+    long deltaSec;
 
     if (! timeInited)
 	event::StartTimer(); 

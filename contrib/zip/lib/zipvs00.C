@@ -73,10 +73,10 @@ END-SPECIFICATION  ************************************************************/
 
 
 long
-zipview::Display_Stream( register zip_type_stream		   stream, register zip_type_pane		   pane )
+zipview::Display_Stream( zip_type_stream		   stream, zip_type_pane		   pane )
         {
   class zipview *self=this;
-  register int				  status = zip_success;
+  int				  status = zip_success;
 
   IN(zipview::Display_Stream);
   if ( pane  &&  stream )
@@ -98,10 +98,10 @@ zipview::Display_Stream( register zip_type_stream		   stream, register zip_type_
   }
 
 long
-zipview::Draw_Stream( register zip_type_stream		   stream, register zip_type_pane		   pane )
+zipview::Draw_Stream( zip_type_stream		   stream, zip_type_pane		   pane )
         {
   class zipview *self=this;
-  register int				  status = zip_success;
+  int				  status = zip_success;
 
   IN(zipview::Draw_Stream);
   if ( pane  &&  stream )
@@ -122,7 +122,7 @@ zipview::Draw_Stream( register zip_type_stream		   stream, register zip_type_pan
   }
 
 long
-zipview::Clear_Stream( register zip_type_stream		   stream, register zip_type_pane		   pane )
+zipview::Clear_Stream( zip_type_stream		   stream, zip_type_pane		   pane )
         {
 return zip_ok;/*===*/
   }
@@ -140,12 +140,12 @@ return zip_ok;/*===*/
   }
 
 zip_type_stream
-zipview::Which_Stream( register long	 x , register long  y )
+zipview::Which_Stream( long	 x , long  y )
 {
   class zipview *self=this;
-  register int				  status = zip_success;
-  register zip_type_stream		  stream = NULL;
-  register zip_type_pane		  pane;
+  int				  status = zip_success;
+  zip_type_stream		  stream = NULL;
+  zip_type_pane		  pane;
 
   IN(zip_Which_Stream);
   if ( (pane = (self)->Which_Pane(  x, y )) )
@@ -169,10 +169,10 @@ return zip_ok;/*===*/
   }
 
 boolean
-zipview::Stream_Visible( register zip_type_stream stream, register zip_type_pane		     pane )
+zipview::Stream_Visible( zip_type_stream stream, zip_type_pane		     pane )
         {
   class zipview *self=this;
-  register boolean			    status = FALSE;
+  boolean			    status = FALSE;
 
   IN( zipview::Stream_Visible );
   if ( stream && pane )

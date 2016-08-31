@@ -57,10 +57,10 @@ static char defaultIcon;
 
 
 ATKdefineRegistry(panel, textview, panel::InitializeClass);
-static void DestroyPanelList(register struct panel_Entry  *pe);
-static void DestroyKeyList(register struct key_Entry  *ke);
-static void ClearHighlight(register class panel  *self);
-static void SetupHighlight(register class panel  *self, struct panel_Entry  *entry);
+static void DestroyPanelList(struct panel_Entry  *pe);
+static void DestroyKeyList(struct key_Entry  *ke);
+static void ClearHighlight(class panel  *self);
+static void SetupHighlight(class panel  *self, struct panel_Entry  *entry);
 static void SelectAtPos(class panel  *self, long  pos);
 static void KeyDispatch(class panel  *self, long  rock);
 static void ProcNext(long  rock, class panel  *self, char  c);
@@ -68,29 +68,29 @@ static void ProcPrev(long  rock, class panel  *self, char  c);
 static void AddLabels( class panel		 *self );
 
 
-static void DestroyPanelList(register struct panel_Entry  *pe)
+static void DestroyPanelList(struct panel_Entry  *pe)
 {
     while (pe != NULL) {
-        register struct panel_Entry *ne;
+        struct panel_Entry *ne;
         ne = pe->next;
         free(pe);
         pe = ne;
     }
 }
 
-static void DestroyKeyList(register struct key_Entry  *ke)
+static void DestroyKeyList(struct key_Entry  *ke)
 {
     while (ke != NULL) {
-        register struct key_Entry *ne;
+        struct key_Entry *ne;
         ne = ke->next;
         free(ke);
         ke = ne;
     }
 }
 
-static void ClearHighlight(register class panel  *self)
+static void ClearHighlight(class panel  *self)
 {
-    register long pos, len;
+    long pos, len;
 
     if (self->highlightEnv == NULL)
         return;
@@ -105,7 +105,7 @@ static void ClearHighlight(register class panel  *self)
     self->highlightEntry = NULL;
 }
 
-static void SetupHighlight(register class panel  *self, struct panel_Entry  *entry)
+static void SetupHighlight(class panel  *self, struct panel_Entry  *entry)
 {
     self->highlightEnv =
       (self->textp)->AddStyle(
@@ -117,7 +117,7 @@ static void SetupHighlight(register class panel  *self, struct panel_Entry  *ent
 
 static void SelectAtPos(class panel  *self, long  pos)
 {
-    register struct panel_Entry *pe;
+    struct panel_Entry *pe;
 
     for (pe = self->panelList; pe != NULL; pe = pe->next)
         if (pos >= pe->pos && pos <= pe->pos + pe->len)
@@ -259,10 +259,10 @@ panel::~panel()
 
 struct panel_Entry *panel::Add(const char  *item, char  *tag, int  showNow			/* make new selection visible now? */)
 {
-    register struct panel_Entry *new_c;
-    register long len;
-    register long textlen;
-    register class text *text = NULL;
+    struct panel_Entry *new_c;
+    long len;
+    long textlen;
+    class text *text = NULL;
     char c = '\n';
 
     text = this->textp;
@@ -289,10 +289,10 @@ struct panel_Entry *panel::Add(const char  *item, char  *tag, int  showNow			/* 
     return new_c;
 }
 
-void panel::Remove(register struct panel_Entry  *entry)
+void panel::Remove(struct panel_Entry  *entry)
 {
-    register long len;
-    register struct panel_Entry *pe, **le;
+    long len;
+    struct panel_Entry *pe, **le;
 
     /* Find and unlink from list */
 
@@ -363,7 +363,7 @@ void panel::ClearSelection()
     (this)->WantUpdate( this);
 }
 
-void panel::MakeSelection(register struct panel_Entry  *entry)
+void panel::MakeSelection(struct panel_Entry  *entry)
 {
     ClearHighlight(this);
 
@@ -406,7 +406,7 @@ void panel::AssignKey(char  c, panel_keyfptr proc, long  rock)
 
 void panel::FullUpdate(enum view_UpdateType  type, long  x , long  y , long  w , long  h)
 {
-    register class graphic *graphic;
+    class graphic *graphic;
 
     graphic = (this)->GetDrawable();
     (this->cursor)->SetGlyph( this->iconFont, this->icon);
@@ -442,8 +442,8 @@ class view *panel::Hit(enum view_MouseAction  action, long  x , long  y , long  
 
 void panel::FreeAllTags()
 {
-    register struct panel_Entry *e;
-    register char *tag;
+    struct panel_Entry *e;
+    char *tag;
     
     if((e = (this)->EntryRoot()) != NULL) 
         for(;e != NULL;e = (this)->EntryNext(e))

@@ -55,7 +55,7 @@ eq::eq()
 {
 	ATKinit;
  
-    register struct formula *f = (struct formula *) malloc(SIZE*sizeof(struct formula));
+    struct formula *f = (struct formula *) malloc(SIZE*sizeof(struct formula));
 
     this->f = f;
     this->p1 = 0;
@@ -98,8 +98,8 @@ void eq::Insert(long  pos, struct formula  *f)
     }
 
     if (this->p1 != pos) {
-	register int i, gap = this->gap;
-	register struct formula *newf = this->f;
+	int i, gap = this->gap;
+	struct formula *newf = this->f;
 	for (i=this->p1-1; i>=pos; i--)
 	    newf[i+gap] = newf[i];
 	for (i=this->p1; i<pos; i++)
@@ -191,8 +191,8 @@ void eq::Delete(long  pos)
     } else if (pos == this->p1) {
 	this->p2 -= 1;
     } else {
-	register int i, gap = this->gap;
-	register struct formula *f = this->f;
+	int i, gap = this->gap;
+	struct formula *f = this->f;
 	for (i=this->p1-1; i>=pos; i--)
 	    f[i+gap] = f[i];
 	for (i=this->p1; i<pos; i++)
@@ -212,7 +212,7 @@ void eq::Delete(long  pos)
 long eq::DeleteCarefully(long  start , long  stop)
 {
     long was_zilch;
-    register int i, j;
+    int i, j;
     enum type type;
     struct formula *f;
 
@@ -247,7 +247,7 @@ long eq::DeleteCarefully(long  start , long  stop)
       && ((type=(this)->Access( start-1)->symbol->type)==BEGIN
       || type==ALIGN || type==EQSTYLE)   &&  was_zilch) {
 	/* find an enclosing group to delete */
-	register int i, b=start, e;
+	int i, b=start, e;
 	while ((this)->Access( --b)->symbol->type != BEGIN) ;
 	while (b!=0 && !(this)->Access( b)->has_hot_spot
 	  && (this)->Access( b-1)->symbol->type!=SCRIPT)
@@ -255,7 +255,7 @@ long eq::DeleteCarefully(long  start , long  stop)
 	if (b!=0) {
 	    e = (this)->FindEndGroup( b+1);
 	    for (i=b+1;  i<e;  i++) {
-		register struct formula *f = (this)->Access( i);
+		struct formula *f = (this)->Access( i);
 		if (f->symbol->type!=END && f->has_hot_spot
 		  && f->symbol != eq_zilch)
 		    break;
@@ -401,7 +401,7 @@ long eq::Size()
 /* Given an equation and a formula, return the next formula. */
 struct formula *eq::NextFormula(struct formula  *f)
 {
-    register int n, p1 = this->p1, gap = this->gap, p2 = this->p2;
+    int n, p1 = this->p1, gap = this->gap, p2 = this->p2;
 
     f += 1;
     n = f - this->f;
@@ -416,10 +416,10 @@ struct formula *eq::NextFormula(struct formula  *f)
 /* Convert to printable representation.  Returns length in bytes, including trailing null. */
 long eq::GetTokens(long  *startp , long  stop, char  *string, long  size)
 {
-    register char *s = string;
-    register int i, len;
+    char *s = string;
+    int i, len;
     for (i= *startp; i<stop; i++) {
-	register struct formula *f = (this)->Access( i);
+	struct formula *f = (this)->Access( i);
 	len = strlen(f->symbol->name) + 1;
 	if (len > size)
 	    break;
@@ -441,7 +441,7 @@ long eq::GetTokens(long  *startp , long  stop, char  *string, long  size)
 
 long eq::FindEndGroup(long  i)
 {
-    register int j, level = 0;
+    int j, level = 0;
     for (j=i; ; j++) {
 	switch ((this)->Access( j)->symbol->type) {
 	case BEGIN:
@@ -464,7 +464,7 @@ long eq::FindEndGroup(long  i)
 
 long eq::FindBeginGroup(long  i)
 {
-    register int j, level = 0;
+    int j, level = 0;
     for (j=i-1; ; j--) {
 	switch ((this)->Access( j)->symbol->type) {
 	case END:
@@ -487,7 +487,7 @@ long eq::FindBeginGroup(long  i)
 
 long eq::FindLeftSibling(long  i)
 {
-    register int j;
+    int j;
     if (i==0)
 	return -1;
     for (j=i-1; ; j--) {
@@ -502,7 +502,7 @@ long eq::FindLeftSibling(long  i)
 
 long eq::FindRightSibling(long  i)
 {
-    register int j;
+    int j;
     if (i==0)
 	return -1;
     for (j=(this)->FindEndGroup( i+1)+1; ; j++) {

@@ -1385,7 +1385,7 @@ int TrustTimeStamp;
 static char *ClosingParen(s)
 char *s;
 {
-    register int ctr = 0;
+    int ctr = 0;
 
     while (*s) {
 	switch (*s) {
@@ -2051,9 +2051,9 @@ char *OrigDirName;
 }
 
 char *copy (s)
-register char  *s;
+char  *s;
 {
-    register char  *new;
+    char  *new;
     if (!s || !*s)
 	return NIL;		/* Check for NIL and 0-length  */
     new = malloc(strlen(s) + 1);

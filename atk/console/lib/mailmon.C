@@ -338,8 +338,8 @@ int NewMsgs(FILE  *mf)
     
     while (!feof(mf)) {
 	char line[100];
-	register int c;
-	register char *cp = line;
+	int c;
+	char *cp = line;
 
 	/* read a line into our buffer */
 	while ((c = getc(mf)) != EOF && c != '\n') {

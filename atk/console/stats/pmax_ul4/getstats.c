@@ -153,7 +153,7 @@ union {
 GetGVMStats(UsersID)
 int UsersID;
 {
-    register int   i;
+    int   i;
     long  t;
     struct mapent *sp;
     lseek(MemoryFile, cpu_offsets[0], 0);
@@ -192,7 +192,7 @@ int UsersID;
     {
 	int myval = 0;
 	{
-	    register int   i;
+	    int   i;
 	    for (i = 1; i < DK_NDRIVE - 1; i++)
 		s.dk_xfer[0] += s.dk_xfer[i];
 	}
@@ -374,7 +374,7 @@ int cnt;
 char *mpath(file)
 char *file;
 {
-    register struct mtab *mp;
+    struct mtab *mp;
 
 
     if (eq(file, root)){

@@ -77,9 +77,9 @@ boolean Org_Debug = 0;
 #define debug Org_Debug
 
 ATKdefineRegistry(org, apt, NULL);
-static long Read_Body( register class org		      *self, register FILE			      *file );
-static long Write_Body( register class org  *self, register FILE  *file, long writeID );
-static void Strip( register char  *string );
+static long Read_Body( class org		      *self, FILE			      *file );
+static long Write_Body( class org  *self, FILE  *file, long writeID );
+static void Strip( char  *string );
 
 
 const char *
@@ -99,7 +99,7 @@ void FreeDatum( tree_type_node node, void *user)
 org::org( )
     {
   class org *self=this;
-  register boolean status = true;
+  boolean status = true;
 
   IN(org_InitializeObject);
   DEBUGst(RCSID,rcsid);
@@ -122,9 +122,9 @@ org::~org( )
 }
 
 long
-org::Read( register FILE  *file, register long  id )
+org::Read( FILE  *file, long  id )
       {
-  register long status;
+  long status;
 
   IN(org_Read);
   status = Read_Body( this, file );
@@ -133,15 +133,15 @@ org::Read( register FILE  *file, register long  id )
 }
 
 static
-long Read_Body( register class org		      *self, register FILE			      *file )
+long Read_Body( class org		      *self, FILE			      *file )
       {
-  register boolean		      done = false;
-  register long			      c, count, braces = 0, brackets = 0, status = ok,
+  boolean		      done = false;
+  long			      c, count, braces = 0, brackets = 0, status = ok,
 				      description_size, description_length,
 				      description_increment = 32;
   char				      string[4096], *ptr, *end_ptr;
-  register char			     *description;
-  register tree_type_node	      parent = NULL, child = NULL, node;
+  char			     *description;
+  tree_type_node	      parent = NULL, child = NULL, node;
   class text			     *textp = NULL;
 
   IN(Read_Body);
@@ -248,9 +248,9 @@ long Read_Body( register class org		      *self, register FILE			      *file )
   }
 
 long
-org::Write( register FILE			      *file, register long			       writeID, register int			       level )
+org::Write( FILE			      *file, long			       writeID, int			       level )
         {
-  register long			      status, id;
+  long			      status, id;
 
   IN(org_Write);
   DEBUGdt(Headerwriteid,this->writeID);
@@ -270,11 +270,11 @@ org::Write( register FILE			      *file, register long			       writeID, registe
 }
 
 static
-long Write_Body( register class org  *self, register FILE  *file, long writeID )
+long Write_Body( class org  *self, FILE  *file, long writeID )
     {
-  register long status = ok;
-  register tree_type_node node = (Tree )->RootNode( );
-  register long level, current_level = 1;
+  long status = ok;
+  tree_type_node node = (Tree )->RootNode( );
+  long level, current_level = 1;
   class text *textp;
   int size;
 
@@ -313,10 +313,10 @@ long Write_Body( register class org  *self, register FILE  *file, long writeID )
 }
 
 const char *
-org::NodeName( register struct tree_node  *node )
+org::NodeName( struct tree_node  *node )
     {
   class org *self=this;
-  register const char *name = NULL;
+  const char *name = NULL;
 
   IN(org_NodeName);
   if ( node )
@@ -336,9 +336,9 @@ org::SetDebug( boolean  state )
 }
 
 static
-void Strip( register char  *string )
+void Strip( char  *string )
   {
-  register char *ptr = string;
+  char *ptr = string;
   int len;
 
   while ( *ptr == ' '  ||  *ptr == '\t' )  ptr++;

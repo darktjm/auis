@@ -63,9 +63,9 @@ scandir(dirname, namelist, select, dcomp)
 	struct dirent *(*namelist[]);
 	int (*select)(), (*dcomp)();
 {
-	register struct dirent *d, *p, **names;
-	register int nitems;
-	register char *cp1, *cp2;
+	struct dirent *d, *p, **names;
+	int nitems;
+	char *cp1, *cp2;
 	struct stat stb;
 	long arraysz;
 	DIR *dirp;

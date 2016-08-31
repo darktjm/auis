@@ -52,7 +52,7 @@ char	*buf;
 int	size;
 {
     while(size-->0){
-	register char	c= *buf++;
+	char	c= *buf++;
 
 	switch(c){
 	    case '\n':

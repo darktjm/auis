@@ -99,15 +99,15 @@
 static long writeid = 1;
 
 
-int main(register int	   argc, register char   **argv);
-void printdata(register class nessmark  *m);
+int main(int	   argc, char   **argv);
+void printdata(class nessmark  *m);
 void replacetabs(class nessmark  *file);
 
 
 	int
-main(register int	   argc, register char   **argv) {
-	register class nessmark *m;
-	register class simpletext *t;
+main(int	   argc, char   **argv) {
+	class nessmark *m;
+	class simpletext *t;
 
 	printf("Start\n"); fflush(stdout);
 /*
@@ -147,7 +147,7 @@ so nessmarktest need not be recompiled when nessmark is*/
 }
 
 	void
-printdata(register class nessmark  *m) {
+printdata(class nessmark  *m) {
 	long loc, lend;
 	lend = ((class mark *)m)->GetEndPos();
 	if (lend > 31) lend = 31;

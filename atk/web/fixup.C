@@ -9,7 +9,7 @@
 #define TEXTVIEWREFCHAR ((unsigned char)255)
 #endif
 
-static void DestroyCell(register class table  *T, struct cell  *oldcell)
+static void DestroyCell(class table  *T, struct cell  *oldcell)
 {
     struct viewlist *vl;
 

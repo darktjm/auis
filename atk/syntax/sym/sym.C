@@ -133,8 +133,8 @@ void printdata(class sym  *self);
 static long
 hash(const char *name)
 {
-    register unsigned long val;
-    register unsigned const char *pos;
+    unsigned long val;
+    unsigned const char *pos;
 
     for (val = 0, pos=(unsigned const char *)name; *pos; ++pos)
 	val = ((val<<5) | (val>>27)) ^ *pos;
@@ -145,7 +145,7 @@ hash(const char *name)
 static class sym**
 lookup(const char *name, long  scope, boolean  *found)
 {
-    register class sym **s, **start = table+hash(name);
+    class sym **s, **start = table+hash(name);
 
     while (scope != SCOPE_NULL) {
 
@@ -172,7 +172,7 @@ lookup(const char *name, long  scope, boolean  *found)
 static class sym**
 lookupInScope(const char *name, long  scope, boolean  *found)
 {
-    register class sym **s;
+    class sym **s;
 
     if (name == NULL) {
 	*found = FALSE;
@@ -246,7 +246,7 @@ resizeArray(long  **a , long  from , long  to)
 static void
 removeScopeFromScopes(sym_ScopeType  scope)
 {
-    register long i;
+    long i;
  
     for (i = 0; i < maxScopes; ++i)
 	if (enclosingScope[i] == scope)
@@ -289,8 +289,8 @@ sym::DestroyScope(sym_ScopeType  scope)
 {
 	ATKinit;
 
-    register long i, s;
-    register class sym **pos;
+    long i, s;
+    class sym **pos;
 
     for (i = 0; i < *tableSize; ++i)
 	for (pos = &table[i]; *pos != NULL;) {
@@ -423,8 +423,8 @@ sym::FindAll(const char *name, sym_ScopeType  scope, sym_findfptr proc, long  ro
 {
 	ATKinit;
 
-    register long i, s;
-    register class sym **pos;
+    long i, s;
+    class sym **pos;
 
     for (i = 0; i < *tableSize; ++i)
 	for (pos = &table[i]; *pos != NULL;) {
@@ -447,8 +447,8 @@ sym::Enumerate(sym_ScopeType  scope, sym_findfptr proc, long  rock)
 {
 	ATKinit;
 
-    register long i, s;
-    register class sym **pos;
+    long i, s;
+    class sym **pos;
 
     for (i = 0; i < *tableSize; ++i)
 	for (pos = &table[i]; *pos != NULL;) {

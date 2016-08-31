@@ -114,8 +114,8 @@ static void doload_read(struct doload_environment *e)
 
 static int FixEntryPoint(struct doload_environment *e, char *EntryPointName)
 {
-    register struct nlist *sp;
-    register struct nlist *sbound;
+    struct nlist *sp;
+    struct nlist *sbound;
     if (EntryPointName == NULL || *EntryPointName == '\0')
 	return e->problems;
     sp = e->symtab;
@@ -150,11 +150,11 @@ static int FixEntryPoint(struct doload_environment *e, char *EntryPointName)
 
 static void FixRelocation(struct doload_environment *e,struct relocation_info *rp)
 {
-    register int i;
-    register int j;
+    int i;
+    int j;
 
     if ( IS_RP_EXTERN( rp ) ) {
-	register struct nlist *sp = e->symtab + rp->r_symbolnum;
+	struct nlist *sp = e->symtab + rp->r_symbolnum;
 	const char *np = ((sp->n_un.n_strx) ? ( e->stringtab + sp->n_un.n_strx )
 		    : "<<noname>>" ) ;
 	if (SYM_TYPE(sp) == N_UNDF  ) {
@@ -201,8 +201,8 @@ static void FixRelocation(struct doload_environment *e,struct relocation_info *r
 
 static void WriteNewSym(struct doload_environment *e, int outFD)
 {
-    register int i;
-    register char *newcp;
+    int i;
+    char *newcp;
     long newstringsize;
     char *newstrings = NULL;
 
@@ -220,8 +220,8 @@ static void WriteNewSym(struct doload_environment *e, int outFD)
     /* make a new string table */
 
     for (i = 0; i < e->newsymcount; i++) {
-	register char *oldcp ;
-	register int n ;
+	char *oldcp ;
+	int n ;
 
 	oldcp = e->stringtab + e->newsym[i].n_un.n_strx ;
 	n = strlen(oldcp) + 1;
@@ -245,8 +245,8 @@ static void WriteNewSym(struct doload_environment *e, int outFD)
 
 static void FixSets(struct doload_environment *e) {
 
-    register struct nlist *sp;
-    register struct nlist *sbound;
+    struct nlist *sp;
+    struct nlist *sbound;
 
     sp = e->symtab;
     sbound = (struct nlist *)((char *)sp + e->header.a_syms);
@@ -288,7 +288,7 @@ static int Exportable(const char *np) {
 static int FixIt(int inFD, int outFD, char *EntryPointName)
 {
     struct doload_environment E;
-    register struct doload_environment *e;
+    struct doload_environment *e;
     unsigned long n;	/* number of relocation items */
     struct relocation_info *rp;
 
@@ -310,8 +310,8 @@ static int FixIt(int inFD, int outFD, char *EntryPointName)
 
       if(1) {
 	int j;
-	register struct nlist *sp;
-	register struct nlist *sbound;
+	struct nlist *sp;
+	struct nlist *sbound;
 
 	sp = e->symtab;
 	sbound = (struct nlist *)((char *)sp + e->header.a_syms);
@@ -383,7 +383,7 @@ static int FixIt(int inFD, int outFD, char *EntryPointName)
 static char *ComputeOutputFileName (char *InputFileName, char *extension)
 {
     static char name[1024];
-    register char  *p, *q;
+    char  *p, *q;
     char   *ext;
 
  /* copy the input name and look for the last '.' */

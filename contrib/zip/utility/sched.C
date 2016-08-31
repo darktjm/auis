@@ -56,10 +56,10 @@ sched::Set_Debug( boolean mode )
 }
 
 class sched *
-sched::Create( register char *stream_name )
+sched::Create( char *stream_name )
 {
-    register class sched		     *self;
-    register long			      status;
+    class sched		     *self;
+    long			      status;
 
     IN(sched_Create);
     if ( self = new sched )
@@ -83,7 +83,7 @@ sched::Create( register char *stream_name )
 
 sched::sched( )
 {
-    register long			      status = false;
+    long			      status = false;
 
     IN(sched_InitializeObject);
     this->stream = NULL;

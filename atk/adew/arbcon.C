@@ -88,9 +88,9 @@ static class atom *atta[7];
 
 ATKdefineRegistry(arbcon, observable, arbcon::InitializeClass);
 static void DoCopy(class arbcon  *self,boolean  clear);
-static int mystrcmp(register const char  *s1,register const char  *s2);
+static int mystrcmp(const char  *s1,const char  *s2);
 static int findinlist(char  **lst ,int  cnt,char  *str);
-static char *parseobv(register const char  *str,register char  *buf);
+static char *parseobv(const char  *str,char  *buf);
 static void SetNotice(const char  *str);
 static int appendlist(char  **lst,int  cnt,char  *str,int  TEST);
 static void SetName(class celview  *cv,class arbiterview  *abv,const char  *name);
@@ -181,7 +181,7 @@ static void DoCopy(class arbcon  *self,boolean  clear)
 	}
     }
 }
-static int mystrcmp(register const char  *s1,register const char  *s2)
+static int mystrcmp(const char  *s1,const char  *s2)
 {
     if(s1 == NULL && s2 == NULL) return 0;
     if(s1 == NULL || s2 == NULL) return 1;
@@ -198,9 +198,9 @@ static int findinlist(char  **lst ,int  cnt,char  *str)
     }
     return -1;
 }
-static char *parseobv(register const char  *str,register char  *buf)
+static char *parseobv(const char  *str,char  *buf)
 {
-    register char *stop = NULL;
+    char *stop = NULL;
     while(*str){
 	*buf = *str++;
 	if(*buf == ' ') {
@@ -294,8 +294,8 @@ static void SetName(class celview  *cv,class arbiterview  *abv,const char  *name
 }
 static long findstring(class text  *txt,const char  *str)
 {   /* searches text for str by itself on a line */
-    register long i,ch,pos,len;
-    register const char *p;
+    long i,ch,pos,len;
+    const char *p;
     if(txt == NULL) return -2 ;
     len = (txt)->GetLength();
     p = str;pos = 0;

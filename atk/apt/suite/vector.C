@@ -77,7 +77,7 @@ ATK_IMPL("vector.H")
 
 
 ATKdefineRegistry(vector, ATK, NULL);
-static void ReallocData( register class vector    *self );
+static void ReallocData( class vector    *self );
 
 
 vector::vector( )
@@ -92,9 +92,9 @@ vector::vector( )
 }
 
 class vector *
-vector::Create( register long			      init_data_size , register long			      reallocfactor )
+vector::Create( long			      init_data_size , long			      reallocfactor )
     {
-  register class vector	    *self = NULL;
+  class vector	    *self = NULL;
 
   if(!(self = new vector)) {
     printf("vector: couldn't allocate new object.\n");
@@ -112,7 +112,7 @@ vector::Create( register long			      init_data_size , register long			      rea
 vector::~vector( )
     {
     class vector *self=this;
-  register long			 i = 0;
+  long			 i = 0;
 
   if(Data)
     if(Destroyer)
@@ -126,9 +126,9 @@ vector::~vector( )
 
 
 static void
-ReallocData( register class vector    *self )
+ReallocData( class vector    *self )
   {
-  register long		    i = 0;
+  long		    i = 0;
 
   DataSize *= ReallocFactor;
   if(!(Data = (long*) realloc(Data,sizeof(long) * (DataSize + 1)))) {
@@ -144,7 +144,7 @@ long
 vector::AddItem( long				  item )
     {
     class vector *self=this;
-  register long	 i = 0, insertOffset = 0, end = 0;
+  long	 i = 0, insertOffset = 0, end = 0;
 
   if(!DataSpaceAvailable) 
     ReallocData(this);
@@ -164,7 +164,7 @@ vector::AddItem( long				  item )
 }
 
 boolean
-vector::ItemExists( register long			  item )
+vector::ItemExists( long			  item )
 {
     
     class vector *self=this;
@@ -175,11 +175,11 @@ vector::ItemExists( register long			  item )
 }
 
 long
-vector::RemoveItem( register long		      item )
+vector::RemoveItem( long		      item )
 {
     
     class vector *self=this;
-  register long		     i = 0, removeOffset = 0;
+  long		     i = 0, removeOffset = 0;
 
   while(Data[i]) {
     if(Data[i] == item) {
@@ -201,7 +201,7 @@ long
 vector::Sort( )
   {
     class vector *self=this;
-  register long		    status = 0;
+  long		    status = 0;
 
   if(!Sorter) 
     status = vector_status_no_sort_routine;
@@ -211,10 +211,10 @@ vector::Sort( )
 }
 
 long
-vector::Subscript( register long			  item )
+vector::Subscript( long			  item )
     {
     class vector *self=this;
-  register long			 i = 0;
+  long			 i = 0;
 
   if(Data)
     while((i < DataUsed) && Data[i]) 
@@ -229,7 +229,7 @@ void
 vector::Apply(vector_applyfptr proc )
     {
     class vector *self=this;
-  register int		   i = 0, status = 0;
+  int		   i = 0, status = 0;
 
   if(Data && Data[0])
     for(i = 0 ; (i < DataUsed) && !status ; i++)

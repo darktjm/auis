@@ -1553,7 +1553,7 @@ static char *SqzAppend(Target, Start, End)
 char *Target, *Start, *End;
 {/* Copy chars in [Start..End) to Target, turning all strings of white space to single spaces */
 	int State;
-	register char *Tgt, *Src;
+	char *Tgt, *Src;
 
 	Tgt = Target;
 	State = -1;	/* -1 init, 0 last was space, 1 last wasn't space */
@@ -1929,7 +1929,7 @@ PARSED_ADDRESS *Addr;
 static int BackULcmp(p1, p2)
 char *p1, *p2;
 {/* Do like ULstrcmp, but look from the ends of the strings to the beginnings. */
-	register char *pe1, *pe2;
+	char *pe1, *pe2;
 	char c1, c2;
 
 	pe1 = p1 + strlen(p1) - 1;

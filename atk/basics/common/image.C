@@ -310,7 +310,7 @@ image::image( )
 
 void
 image::Duplicate( class image  *target )
-{ register unsigned int i;
+{ unsigned int i;
   int size = 0;
 
     (target)->Type() = (this)->Type();
@@ -843,7 +843,7 @@ image::Brighten( unsigned int percent )
  */
 static void
 make_gamma( double  gamma, int  gammamap[256] )
-{   register int i;
+{   int i;
 
     for (i = 0; i < 256; i++ ) {
 #ifdef BYTEBUG

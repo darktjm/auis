@@ -39,7 +39,7 @@ ATK_IMPL("page.H")
 
 
 ATKdefineRegistry(page, dataobject, NULL);
-static struct page_switchee *FindSwitchee(register class page  *self, register class dataobject  *d,register long  which);
+static struct page_switchee *FindSwitchee(class page  *self, class dataobject  *d,long  which);
 static boolean SetSwitchee(class page  *self,struct page_switchee  *sw);
 
 
@@ -60,10 +60,10 @@ page::~page()
 	free(sw->viewname);
     }
 }
-static struct page_switchee *FindSwitchee(register class page  *self, register class dataobject  *d,register long  which)
+static struct page_switchee *FindSwitchee(class page  *self, class dataobject  *d,long  which)
 {
-    register struct page_switchee *sw = NULL;
-    register struct page_switchee *Now = self->NowPlaying;
+    struct page_switchee *sw = NULL;
+    struct page_switchee *Now = self->NowPlaying;
     switch( which){
 	case page_CURRENT:
 	    sw = self->FirstSwitchee;

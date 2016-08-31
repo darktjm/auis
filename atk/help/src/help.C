@@ -173,16 +173,16 @@ int HELPDEBUG = 0;
  */
 
 ATKdefineRegistry(help, view, help::InitializeClass);
-static char * AndyCopy(register char  *aproto , register char  *aresult);
-static char * CopyString(register char  *as);
-static int  ScanLine(register FILE  *afile, char  *ae1 , char  *ae2);
+static char * AndyCopy(char  *aproto , char  *aresult);
+static char * CopyString(char  *as);
+static int  ScanLine(FILE  *afile, char  *ae1 , char  *ae2);
 static int safesystem(char  *acmd);
-static int  mysystem(register char  *acmd);
-char * LowerCase(register char  *astring);
+static int  mysystem(char  *acmd);
+char * LowerCase(char  *astring);
 static char * MapParens(char  *s);
 static char * sindex(char  *big , char  *small);
-void  AddHistoryItem (register class help  *self, int  marcp			/* is this a bookmark? */, int  flash			/* should we expose the history panel? */);
-static int  ShowFile(register class help  *self, register const char  *afilename	/* the file */, int  amoreFlag			/* put "(more)" in the titlebar?
+void  AddHistoryItem (class help  *self, int  marcp			/* is this a bookmark? */, int  flash			/* should we expose the history panel? */);
+static int  ShowFile(class help  *self, const char  *afilename	/* the file */, int  amoreFlag			/* put "(more)" in the titlebar?
 				   TRUE - yes, FALSE - no,
 				   help_USE_OLD_TITLE - use last setting */, int  hist			/* add this previous file to the history?
 				   help_HIST_NOADD - none at all,
@@ -190,45 +190,45 @@ static int  ShowFile(register class help  *self, register const char  *afilename
 				   help_HIST_TAIL - tail of the found filename
 				   */);
 static const char * FindEntryInDirs(const char	 * const dirs[], const char	 *entry  , const char	 *extension);
-int  help_GetHelpOn(register class help  *self, const char  *aname	/* what topic */, long  isnew	/* is this a new topic? */, int  ahistory	/* show in history log under what name?
+int  help_GetHelpOn(class help  *self, const char  *aname	/* what topic */, long  isnew	/* is this a new topic? */, int  ahistory	/* show in history log under what name?
 		   help_HIST_NOADD - none at all,
 		   help_HIST_NAME - aname,
 		   help_HIST_TAIL - tail of the found filename
 		   */, const char  *errmsg	/* error to print if failure. "Error" if this is NULL */);
-void  SetupMenus(register struct cache  *c);
-static void  SearchOverviews(register class help * self);
-static void  SearchPrograms(register class help * self);
-static void  TextviewProc(register class help * self, long  rock);
-static void  Quit(register class help  *self);
-static void  SendComments(register class help  *self);
-static void  ShowTutorial(register class help  *self);
-static void  ShowChanges(register class help  *self);
-void NextHelp(register class help  *self);
+void  SetupMenus(struct cache  *c);
+static void  SearchOverviews(class help * self);
+static void  SearchPrograms(class help * self);
+static void  TextviewProc(class help * self, long  rock);
+static void  Quit(class help  *self);
+static void  SendComments(class help  *self);
+static void  ShowTutorial(class help  *self);
+static void  ShowChanges(class help  *self);
+void NextHelp(class help  *self);
 void  HistoryHelp(class help  *self		/* callback rock */, struct history_entry  *ent	/* panelEntry rock */, class panel  *apanel		/* appropriate panel */);
-void  OverviewHelp(register class help  *self, register char  *name		/* which topic to request - panelEntry rock */, class panel  *apanel);
+void  OverviewHelp(class help  *self, char  *name		/* which topic to request - panelEntry rock */, class panel  *apanel);
 static boolean EnsurePanelListSize();
 void FreePanelListData();
 long SetupPanel(boolean  readpairs, const char  *fname, class panel  *panel		/* the panel to add entries to */, const char  * const *def);
-class view *SetupLpairs(register class help  *self);
-static void  TogglePanels(register class help  *self, long  rock);
-static void  ToggleOverviews(register class help  *self, long  rock);
-static void  TogglePrograms(register class help  *self, long  rock);
-static void  ToggleHistory(register class help  *self, long  rock);
+class view *SetupLpairs(class help  *self);
+static void  TogglePanels(class help  *self, long  rock);
+static void  ToggleOverviews(class help  *self, long  rock);
+static void  TogglePrograms(class help  *self, long  rock);
+static void  ToggleHistory(class help  *self, long  rock);
 static void  ExpanderAux(char  *dname);
 static int  panelCompare(char  **s1 , char  **s2);
 static void  SortAndMakePanel(class panel  *p);
 static char * AddToPanelList(char  *s);
 static void  Expander(struct Index  *aindex, struct indexComponent  *ac, class help  *self);
-void  ToggleProgramListSize(register class help * self, long  rock);
-static void  RestorePanel(register class help  *self);
-static void  FilterPanel(register class help  *self, long  rock);
-static void  nono(register class help  *self);
+void  ToggleProgramListSize(class help * self, long  rock);
+static void  RestorePanel(class help  *self);
+static void  FilterPanel(class help  *self, long  rock);
+static void  nono(class help  *self);
 
 
 static char *
-AndyCopy(register char  *aproto , register char  *aresult)
+AndyCopy(char  *aproto , char  *aresult)
 {
-    register const char *tp;
+    const char *tp;
 
     tp = environ::AndrewDir(aproto);
     strcpy(aresult, tp);
@@ -239,9 +239,9 @@ AndyCopy(register char  *aproto , register char  *aresult)
  * allocate new string
  */
 static char *
-CopyString(register char  *as)
+CopyString(char  *as)
 {
-    register char *tp;
+    char *tp;
     tp = (char*) malloc(strlen(as)+1);
     if (!tp)
 	return NULL;
@@ -253,11 +253,11 @@ CopyString(register char  *as)
  * parse comma terminated field followed by new-line terminated field
  */
 static int 
-ScanLine(register FILE  *afile, char  *ae1 , char  *ae2)
+ScanLine(FILE  *afile, char  *ae1 , char  *ae2)
 {
-    register int state;		/* 0->reading ae1, 1->reading ae2 */
-    register int tc;		/* char we're reading */
-    register char *tp;		/* points to string */
+    int state;		/* 0->reading ae1, 1->reading ae2 */
+    int tc;		/* char we're reading */
+    char *tp;		/* points to string */
 
     state = 0;
     tp = ae1;
@@ -294,9 +294,9 @@ static int safesystem(char  *acmd)
  * just like system(3) only closes fds 3..., and doesn't wait
  */
 static int 
-mysystem(register char  *acmd)
+mysystem(char  *acmd)
 {
-    register long pid;
+    long pid;
     if(strchr(acmd, '`')) {
 	fprintf(stderr, "help: command execution failed due to illegal character '`' in command.\n");
 	return -1;
@@ -318,9 +318,9 @@ mysystem(register char  *acmd)
  * lowercases's a string.
  */
 char *
-LowerCase(register char  *astring)
+LowerCase(char  *astring)
 {
-    register char *tp = astring;
+    char *tp = astring;
 
     while (tp && *tp != '\0')
 	if (isupper(*tp)) {
@@ -357,8 +357,8 @@ MapParens(char  *s)
 static char *
 sindex(char  *big , char  *small) 
 {
-    register char *bp, *bp1, *sp;
-    register char c = *small++;
+    char *bp, *bp1, *sp;
+    char c = *small++;
 
     if (c==0) return(0);
     for (bp=big;  *bp;  bp++)
@@ -374,10 +374,10 @@ sindex(char  *big , char  *small)
  * add an item to the history buffer
  */
 void 
-AddHistoryItem (register class help  *self, int  marcp			/* is this a bookmark? */, int  flash			/* should we expose the history panel? */)
+AddHistoryItem (class help  *self, int  marcp			/* is this a bookmark? */, int  flash			/* should we expose the history panel? */)
 {
     struct history_entry *ent;
-    register struct cache *c = self->info;
+    struct cache *c = self->info;
 
     DEBUG(("addhist\n"));
     if (c->histent == NULL || c->histent[0] == '\0')
@@ -430,7 +430,7 @@ AddHistoryItem (register class help  *self, int  marcp			/* is this a bookmark? 
  * help file.
  */
 static int 
-ShowFile(register class help  *self, register const char  *afilename	/* the file */, int  amoreFlag			/* put "(more)" in the titlebar?
+ShowFile(class help  *self, const char  *afilename	/* the file */, int  amoreFlag			/* put "(more)" in the titlebar?
 				   TRUE - yes, FALSE - no,
 				   help_USE_OLD_TITLE - use last setting */, int  hist			/* add this previous file to the history?
 				   help_HIST_NOADD - none at all,
@@ -438,7 +438,7 @@ ShowFile(register class help  *self, register const char  *afilename	/* the file
 				   help_HIST_TAIL - tail of the found filename
 				   */)
 {
-    register FILE *fd;
+    FILE *fd;
     long objectID;
     static const char *manfiles[] = MACFILES; /* entries may be modifed below */
     const char **manptr = manfiles;
@@ -824,13 +824,13 @@ FindEntryInDirs(const char	 * const dirs[], const char	 *entry  , const char	 *e
 }
 */
 int 
-help_GetHelpOn(register class help  *self, const char  *aname	/* what topic */, long  isnew	/* is this a new topic? */, int  ahistory	/* show in history log under what name?
+help_GetHelpOn(class help  *self, const char  *aname	/* what topic */, long  isnew	/* is this a new topic? */, int  ahistory	/* show in history log under what name?
 		   help_HIST_NOADD - none at all,
 		   help_HIST_NAME - aname,
 		   help_HIST_TAIL - tail of the found filename
 		   */, const char  *errmsg	/* error to print if failure. "Error" if this is NULL */)
 {
-    register struct cache *c = self->info;
+    struct cache *c = self->info;
     char tbuffer[MAXPATHLEN];
     char helpBuffer[HNSIZE + 200];
     int code = 1;
@@ -915,7 +915,7 @@ help_GetHelpOn(register class help  *self, const char  *aname	/* what topic */, 
  * setup the menumask based on internal flags
  */
 void 
-SetupMenus(register struct cache  *c)
+SetupMenus(struct cache  *c)
 {
     DEBUG(("IN setupmenus.."));
     (c->menus)->SetMask( c->flags);
@@ -928,7 +928,7 @@ SetupMenus(register struct cache  *c)
  * Do a search in the overview panel
  */
 static void 
-SearchOverviews(register class help * self)
+SearchOverviews(class help * self)
 {
     if (!self->showPanels)
 	TogglePanels(self, help_ALWAYS_TOGGLE);
@@ -942,7 +942,7 @@ SearchOverviews(register class help * self)
  * Do a search in the programs panel
  */
 static void 
-SearchPrograms(register class help * self)
+SearchPrograms(class help * self)
 {
     if (!self->showPanels)
 	TogglePanels(self, help_ALWAYS_TOGGLE);
@@ -960,7 +960,7 @@ SearchPrograms(register class help * self)
  */
 
 static void 
-TextviewProc(register class help * self, long  rock)
+TextviewProc(class help * self, long  rock)
 {
     switch(rock) {
       case help_SEARCH:
@@ -1000,7 +1000,7 @@ TextviewProc(register class help * self, long  rock)
  * quit help
  */
 static void 
-Quit(register class help  *self)
+Quit(class help  *self)
 {
     im::SetProcessCursor(help_waitCursor);
     im::KeyboardExit();
@@ -1010,7 +1010,7 @@ Quit(register class help  *self)
  * send gripes/kudos to the help maintainers
  */
 static void 
-SendComments(register class help  *self)
+SendComments(class help  *self)
 {
     char cmd[MAXPATHLEN];
     const char *prof;
@@ -1030,7 +1030,7 @@ SendComments(register class help  *self)
  * show a tutorial, if it exists
  */
 static void 
-ShowTutorial(register class help  *self)
+ShowTutorial(class help  *self)
 {
     static char tbuffer[MAXPATHLEN];
     const char *tmp = NULL;
@@ -1047,7 +1047,7 @@ ShowTutorial(register class help  *self)
  * show changes doc
  */
 static void 
-ShowChanges(register class help  *self)
+ShowChanges(class help  *self)
 {
     static char tbuffer[MAXPATHLEN];
     
@@ -1060,7 +1060,7 @@ ShowChanges(register class help  *self)
 /*
  * show next file in list
  */
-void NextHelp(register class help  *self)
+void NextHelp(class help  *self)
 {
     if (!(self->info->flags & MENU_SwitchMoreMenu)) {
 	return;
@@ -1132,7 +1132,7 @@ HistoryHelp(class help  *self		/* callback rock */, struct history_entry  *ent	/
  * show overview or a help file from the program list panel
  */
 void 
-OverviewHelp(register class help  *self, register char  *name		/* which topic to request - panelEntry rock */, class panel  *apanel)
+OverviewHelp(class help  *self, char  *name		/* which topic to request - panelEntry rock */, class panel  *apanel)
 {
     char buf[HNSIZE + HELP_MAX_ERR_LENGTH];
     
@@ -1205,9 +1205,9 @@ long
 SetupPanel(boolean  readpairs, const char  *fname, class panel  *panel		/* the panel to add entries to */, const char  * const *def)
 				{
 	const char * const *defptr;
-	register FILE *tfile;
+	FILE *tfile;
 	char elt1[HNSIZE], elt2[HNSIZE];
-	register long code;
+	long code;
 	char *tmp;
 	DIR *helpdir;
 	struct dirent *ent;
@@ -1280,7 +1280,7 @@ SetupPanel(boolean  readpairs, const char  *fname, class panel  *panel		/* the p
 /*
  * Setup the lpairs for the side panel(s)
  */
-class view *SetupLpairs(register class help  *self)
+class view *SetupLpairs(class help  *self)
 {
     long which = 0;
 
@@ -1342,7 +1342,7 @@ class view *SetupLpairs(register class help  *self)
  * turn side panels on and off
  */
 static void 
-TogglePanels(register class help  *self, long  rock)
+TogglePanels(class help  *self, long  rock)
 {
     if ((self->showPanels && (rock == help_SHOW_PANEL)) ||
 	(!self->showPanels && (rock == help_HIDE_PANEL)))
@@ -1388,7 +1388,7 @@ TogglePanels(register class help  *self, long  rock)
  * toggle overview panel on and off
  */
 static void 
-ToggleOverviews(register class help  *self, long  rock)
+ToggleOverviews(class help  *self, long  rock)
 {
     class view *v;
     boolean doUpdate = FALSE;
@@ -1424,7 +1424,7 @@ ToggleOverviews(register class help  *self, long  rock)
  * toggle program list panel on and off
  */
 static void 
-TogglePrograms(register class help  *self, long  rock)
+TogglePrograms(class help  *self, long  rock)
 {
     class view *v;
     boolean doUpdate = FALSE;
@@ -1461,7 +1461,7 @@ TogglePrograms(register class help  *self, long  rock)
  * toggle history panel on and off
  */
 static void 
-ToggleHistory(register class help  *self, long  rock)
+ToggleHistory(class help  *self, long  rock)
 {
     class view *v;
     boolean doUpdate = FALSE;
@@ -1538,7 +1538,7 @@ panelCompare(char  **s1 , char  **s2)
 static void 
 SortAndMakePanel(class panel  *p)
 {
-    register int i;
+    int i;
 
     DEBUG(("sort and make..."));
     DEBUG(("sort..."));
@@ -1601,7 +1601,7 @@ Expander(struct Index  *aindex, struct indexComponent  *ac, class help  *self)
  * toggle programs list size.  Like da name dun say.
  */
 void 
-ToggleProgramListSize(register class help * self, long  rock)
+ToggleProgramListSize(class help * self, long  rock)
 {
     struct helpDir *thd;
 
@@ -1704,7 +1704,7 @@ ToggleProgramListSize(register class help * self, long  rock)
  * restores the original program panel (unfiltered)
  */
 static void 
-RestorePanel(register class help  *self)
+RestorePanel(class help  *self)
 {
     if (!self->oldpanel) {
 	DEBUG(("already have old panel\n"));
@@ -1732,7 +1732,7 @@ RestorePanel(register class help  *self)
  * entries from the old panel specified by the user
  */
 static void 
-FilterPanel(register class help  *self, long  rock)
+FilterPanel(class help  *self, long  rock)
 {
     int code;
     char buf[255];
@@ -1807,7 +1807,7 @@ FilterPanel(register class help  *self, long  rock)
  * random key hit proc to chastise the user
  */
 static void 
-nono(register class help  *self)
+nono(class help  *self)
 {
     message::DisplayString(self, 0, err_readonly);
 }

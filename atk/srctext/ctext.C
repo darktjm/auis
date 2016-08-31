@@ -170,7 +170,7 @@ long ctext::MaybeBackwardSkipCppLines(long pos)
 long ctext::BackwardSkipJunk(long pos)
 {
     while (pos>=0) {
-	register int c=GetChar(pos--);
+	int c=GetChar(pos--);
 
 	switch(c) {
 	    case '/':

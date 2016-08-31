@@ -1088,7 +1088,7 @@ static mark *prev_pos=NULL;
 /* GetPosForLine "tricks" everyone who calls it by ALSO counting newlines inside compress objects */
 long srctext::GetPosForLine(long line)
 {
-    register long base_line=1, pos=0;
+    long base_line=1, pos=0;
     long len=GetLength(), mod=this->dataobject::modified;
 
     if (this==prev_self && mod==prev_mod && prev_pos && !(prev_pos)->ObjectFree()) {
@@ -1150,7 +1150,7 @@ long srctext::GetPosForLine(long line)
 /* GetLineForPos "tricks" everyone who calls it by ALSO counting newlines inside compress objects */
 long srctext::GetLineForPos(long pos)
 {
-    register long base_pos=0, line=1;
+    long base_pos=0, line=1;
     long mod=this->dataobject::modified;
     if (this==prev_self && mod==prev_mod && prev_pos && !(prev_pos)->ObjectFree()) {
 	long prvpos=(prev_pos)->GetPos();
@@ -1160,7 +1160,7 @@ long srctext::GetLineForPos(long pos)
 	    line= prev_line;
 	} else if (pos>(prvpos/2)) {
 	    /* save a lot of counting by going backward from the cache */
-	    register long neglines=0;
+	    long neglines=0;
 	    base_pos= prvpos;
 	    while (--base_pos >= pos)
 		COUNT_LINES(this,base_pos,neglines);
@@ -1413,7 +1413,7 @@ long srctext::BackwardCopyWord(long from, long to, char buf[])
 /* srctext_CurrentIndent returns the indentation of the current line */
 int srctext::CurrentIndent(long pos)
 {
-    register int ind=0;
+    int ind=0;
 
     pos= GetBeginningOfLine(pos);
     while (1)
@@ -1483,7 +1483,7 @@ int srctext::NextTabStop(int curcol)
 /* ExtendToOutdent modifies the pos and len parameters to appropriately point to the full indentation level that pos is inside of.  It returns TRUE if it thinks the region has a "significant" size (3 lines or more). */
 boolean srctext::ExtendToOutdent(int indent, long *pos, long *len)
 {
-    register long start=*pos, end=*pos, temp=GetBeginningOfLine(start);
+    long start=*pos, end=*pos, temp=GetBeginningOfLine(start);
     long lines=0, txtlen=GetLength();
     /* find beginning */
     do  {

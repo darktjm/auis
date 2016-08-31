@@ -76,7 +76,7 @@ static class view *makeview(class lsetview  *self,class lset  *ls);
 void lsetview_SetMode(class lsetview  *self,int  mode);
 static void initkids(class lsetview  *self,class lset  *ls);
 static void dolink(class lsetview  *self);
-static boolean objecttest(register class lsetview   *self,const char  *name,const char  *desiredname);
+static boolean objecttest(class lsetview   *self,const char  *name,const char  *desiredname);
 static void lsetview_PlaceApplication(class lsetview  *self);
 static void lsetview_PlaceCel(class lsetview  *self);
 static void lsetview_PlaceValue(class lsetview  *self);
@@ -238,7 +238,7 @@ class view *vw;
 
     return((class view *)this);
 }
-static boolean objecttest(register class lsetview   *self,const char  *name,const char  *desiredname)
+static boolean objecttest(class lsetview   *self,const char  *name,const char  *desiredname)
 {
     if(ATK::LoadClass(name) == NULL){
         char foo[640];

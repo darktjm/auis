@@ -122,7 +122,7 @@ ShiftLeft (str, n)
 char *str;
 int n;
 {
-    register int i, len;
+    int i, len;
 
     if (n == 0)
 	return;
@@ -137,7 +137,7 @@ int n;
 RemoveDoubleQuote (tok)
 char *tok;
 {
-    register int i;
+    int i;
     for (i=0; tok[i]; i++)
 	if (tok[i] == '\"')
 	    ShiftLeft (tok+i, 1);
@@ -165,7 +165,7 @@ Tokenize (cmd, cmdtokens, maxtokens)
 char *cmd, *cmdtokens[];
 int maxtokens;
 {
-    register int len, i, j;
+    int len, i, j;
     int (*NoSeparator)();
 
     len = strlen (cmd);
@@ -312,7 +312,7 @@ CleanUpOrphans ()
 TextOutput (str)
 char *str;
 {
-    register int i;
+    int i;
 
     for (i=0; str[i]; i++) {
 	if ((str[i] != ' ') && (isascii(str[i])) && (isprint (str[i])))

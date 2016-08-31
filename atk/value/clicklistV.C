@@ -92,8 +92,8 @@ static void handleclicks(class clicklistV  *self,class cltextview  *cv,long  *po
 #ifdef USEGETCOUNT
 static void getcount(char  **str,long  size)
 {
-    register char *c;
-    register long cnt = 0;
+    char *c;
+    long cnt = 0;
     for(c = *str; size > 0; size--){
 	while(*c) cnt += (long) *c++;
     }

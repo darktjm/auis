@@ -205,59 +205,59 @@ static class keymap		     *class_keymap;
 
 ATKdefineRegistry(zipview, view, zipview::InitializeClass);
 
-static void Initialize_Printing( register class zipview	      *self );
-static void DEBUG_Command( register class zipview	       *self );
-static void Edit_Command( register class zipview	       *self );
-static void Browse_Command( register class zipview      *self );
-static void Portrait_Command( register class zipview      *self );
-static void Landscape_Command( register class zipview        *self );
-static void Print_To_File_Command( register class zipview        *self );
-static void Set_Print_Size_Command(register class zipview      *self);
-static void Zoom_Pane( register class zipview	       *self, register int			        factor );
-static void Zoom_Normal_Command( register class zipview   *self );
-static void Zoom_In_Command( register class zipview      *self );
-static void Zoom_In5_Command( register class zipview      *self );
-static void Zoom_Out5_Command( register class zipview      *self );
-static void Zoom_Out_Command( register class zipview      *self );
-static void Normalize_Pane_Command( register class zipview	       *self );
-static void Refresh_Pane_Command( register class zipview	       *self );
-static void Pan_Pane( register class zipview	       *self, register int			        edge );
-static void Center_Pane_Command( register class zipview	       *self );
-static void Top_Pane_Command( register class zipview      *self );
-static void Bottom_Pane_Command( register class zipview      *self );
-static void Left_Pane_Command( register class zipview      *self );
-static void Right_Pane_Command( register class zipview      *self );
-static void Scale_Pane( register class zipview	       *self, register float		        scale );
-static void Scale_Normal_Command( register class zipview	       *self );
-static void Scale_Smaller_Command( register class zipview      *self );
-static void Scale_Smaller_10_Command( register class zipview      *self );
-static void Scale_Larger_Command( register class zipview      *self );
-static void Scale_Larger_10_Command( register class zipview      *self );
-static void Scale_Half_Command( register class zipview	       *self );
-static void Scale_Double_Command( register class zipview	       *self );
+static void Initialize_Printing( class zipview	      *self );
+static void DEBUG_Command( class zipview	       *self );
+static void Edit_Command( class zipview	       *self );
+static void Browse_Command( class zipview      *self );
+static void Portrait_Command( class zipview      *self );
+static void Landscape_Command( class zipview        *self );
+static void Print_To_File_Command( class zipview        *self );
+static void Set_Print_Size_Command(class zipview      *self);
+static void Zoom_Pane( class zipview	       *self, int			        factor );
+static void Zoom_Normal_Command( class zipview   *self );
+static void Zoom_In_Command( class zipview      *self );
+static void Zoom_In5_Command( class zipview      *self );
+static void Zoom_Out5_Command( class zipview      *self );
+static void Zoom_Out_Command( class zipview      *self );
+static void Normalize_Pane_Command( class zipview	       *self );
+static void Refresh_Pane_Command( class zipview	       *self );
+static void Pan_Pane( class zipview	       *self, int			        edge );
+static void Center_Pane_Command( class zipview	       *self );
+static void Top_Pane_Command( class zipview      *self );
+static void Bottom_Pane_Command( class zipview      *self );
+static void Left_Pane_Command( class zipview      *self );
+static void Right_Pane_Command( class zipview      *self );
+static void Scale_Pane( class zipview	       *self, float		        scale );
+static void Scale_Normal_Command( class zipview	       *self );
+static void Scale_Smaller_Command( class zipview      *self );
+static void Scale_Smaller_10_Command( class zipview      *self );
+static void Scale_Larger_Command( class zipview      *self );
+static void Scale_Larger_10_Command( class zipview      *self );
+static void Scale_Half_Command( class zipview	       *self );
+static void Scale_Double_Command( class zipview	       *self );
 static void Build_Menu();
-static void Pending_Hit( register class zipview	    *self );
-static void Pending_Redisplay( register class zipview	    *self );
-static void Pending_Redraw( register class zipview	    *self );
-static void Pending_Zoom( register class zipview	    *self );
-static void Pending_Scale( register class zipview	    *self );
-static void Pending_Pan( register class zipview	    *self );
-static void Pending_ReceiveInputFocus( register class zipview	    *self );
-static void Pending_LoseInputFocus( register class zipview	    *self );
-static void Pending_Edit( register class zipview	    *self );
-static void Pending_Browse( register class zipview	    *self );
-static void Highlight_View( register class zipview	      *self );
-static void Normalize_View( register class zipview	      *self );
-static void Prepare_Default_Pane( register class zipview	       *self );
-static int Prepare_Default_Stream( register class zipview	       *self );
-static void zipview_y_getinfo( register class zipview	      *self, register struct range		      *total , register struct range		      *seen , register struct range		      *dot );
-static long zipview_y_whatisat( register class zipview	      *self, register long			       coordinate , register long			       outof );
-static void  zipview_y_setframe( register class zipview	      *self, register int			       position, register long			       coordinate , register long			       outof );
-static void zipview_y_endzone( register class zipview	      *self, register int			       zone , register int			       action );
-static void zipview_x_getinfo( register class zipview	      *self, register struct range		      *total , register struct range		      *seen , register struct range		      *dot );
-static long zipview_x_whatisat( register class zipview	      *self, register long			       coordinate , register long			       outof );
-static void  zipview_x_setframe( register class zipview	      *self, register int			       position, register long			       coordinate , register long			       outof );
-static void zipview_x_endzone( register class zipview	      *self, register int			       zone , register int			       action );
+static void Pending_Hit( class zipview	    *self );
+static void Pending_Redisplay( class zipview	    *self );
+static void Pending_Redraw( class zipview	    *self );
+static void Pending_Zoom( class zipview	    *self );
+static void Pending_Scale( class zipview	    *self );
+static void Pending_Pan( class zipview	    *self );
+static void Pending_ReceiveInputFocus( class zipview	    *self );
+static void Pending_LoseInputFocus( class zipview	    *self );
+static void Pending_Edit( class zipview	    *self );
+static void Pending_Browse( class zipview	    *self );
+static void Highlight_View( class zipview	      *self );
+static void Normalize_View( class zipview	      *self );
+static void Prepare_Default_Pane( class zipview	       *self );
+static int Prepare_Default_Stream( class zipview	       *self );
+static void zipview_y_getinfo( class zipview	      *self, struct range		      *total , struct range		      *seen , struct range		      *dot );
+static long zipview_y_whatisat( class zipview	      *self, long			       coordinate , long			       outof );
+static void  zipview_y_setframe( class zipview	      *self, int			       position, long			       coordinate , long			       outof );
+static void zipview_y_endzone( class zipview	      *self, int			       zone , int			       action );
+static void zipview_x_getinfo( class zipview	      *self, struct range		      *total , struct range		      *seen , struct range		      *dot );
+static long zipview_x_whatisat( class zipview	      *self, long			       coordinate , long			       outof );
+static void  zipview_x_setframe( class zipview	      *self, int			       position, long			       coordinate , long			       outof );
+static void zipview_x_endzone( class zipview	      *self, int			       zone , int			       action );
 
 boolean 
 zipview::InitializeClass( )
@@ -316,9 +316,9 @@ zipview::~zipview( )
   }
 
 void
-zipview::PostKeyState( register class keystate	      *keystate )
+zipview::PostKeyState( class keystate	      *keystate )
       {
-  register class keystate	     *keys;
+  class keystate	     *keys;
   class zipview *self=this;
   IN(zipview_PostKeyState);
   if ( keystate != Keystate  &&  Editing  &&  Editor->keystate )
@@ -340,10 +340,10 @@ zipview::PostKeyState( register class keystate	      *keystate )
   }
 
 void
-zipview::PostMenus( register class menulist	      *menulist )
+zipview::PostMenus( class menulist	      *menulist )
       {
   class zipview *self=this;
-  register class menulist	     *menu = Menu;
+  class menulist	     *menu = Menu;
 
   IN(zipview_PostMenus);
   (menu )->ClearChain( );
@@ -363,9 +363,9 @@ zipview::PostMenus( register class menulist	      *menulist )
   }
 
 void
-zipview::SetDataObject( register class dataobject		       *data )
+zipview::SetDataObject( class dataobject		       *data )
       {
-  register int			       i;
+  int			       i;
   class zipview *self = this;
   IN(zipview_SetDataObject);
   Data = (class zip *) data;
@@ -388,10 +388,10 @@ zipview::SetDataObject( register class dataobject		       *data )
   }
 
 view_DSattributes
-zipview::DesiredSize( register long			       given_width , register long			       given_height,
-		      register enum view_DSpass	       pass, register long			      *desired_width , register long			      *desired_height )
+zipview::DesiredSize( long			       given_width , long			       given_height,
+		      enum view_DSpass	       pass, long			      *desired_width , long			      *desired_height )
           {
-  register view_DSattributes     result = view_WidthFlexible |
+  view_DSattributes     result = view_WidthFlexible |
 					       view_HeightFlexible;
   class zipview *self=this;
   IN(zipview_DesiredSize);
@@ -409,7 +409,7 @@ zipview::DesiredSize( register long			       given_width , register long			     
   }
 
 void
-zipview::ObservedChanged( register class observable	      *changed, register long			       value )
+zipview::ObservedChanged( class observable	      *changed, long			       value )
         {
   class zipview *self=this;
   IN(zipview_ObservedChanged);
@@ -423,7 +423,7 @@ zipview::ObservedChanged( register class observable	      *changed, register lon
   }
 
 void
-zipview::SetOptions( register int			        options )
+zipview::SetOptions( int			        options )
       {
   IN(zipview_SetOptions );
   DEBUGxt( Options, options);
@@ -478,7 +478,7 @@ zipview::LoseInputFocus( )
   }
 
 void
-zipview::WantUpdate( register class view		      *requestor )
+zipview::WantUpdate( class view		      *requestor )
       {
   IN(zipview_WantUpdate);
 /*===*/
@@ -488,7 +488,7 @@ zipview::WantUpdate( register class view		      *requestor )
   }
 
 void 
-zipview::FullUpdate( register enum view_UpdateType	       type, register long			       left , register long			       top , register long			       width , register long			       height )
+zipview::FullUpdate( enum view_UpdateType	       type, long			       left , long			       top , long			       width , long			       height )
         {
   class zipview *self=this;
   IN(zipview_FullUpdate);
@@ -551,11 +551,11 @@ zipview::Update( )
   }
 
 class view *
-zipview::Hit( register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks )
+zipview::Hit( enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
         {
-  register zip_type_pane	      pane;
-  register zip_type_figure	      figure;
-  register class view		     *view = NULL;
+  zip_type_pane	      pane;
+  zip_type_figure	      figure;
+  class view		     *view = NULL;
   class zipview *self=this;
 
   IN(zipview_Hit );
@@ -621,9 +621,9 @@ zipview::Hit( register enum view_MouseAction       action, register long			     
   }
 
 void
-zipview::Print( register FILE			      *file, register const char			      *processor, register const char			      *format, register boolean		       top_level )
+zipview::Print( FILE			      *file, const char			      *processor, const char			      *format, boolean		       top_level )
             {
-/*  register float		      inch_width, inch_height; */
+/*  float		      inch_width, inch_height; */
   class zipview *self=this;
 
   IN(zipview_Print);
@@ -663,9 +663,9 @@ zipview::Print( register FILE			      *file, register const char			      *proces
   }
 
 long
-zipview::Set_Print_Language( register const char				  *language )
+zipview::Set_Print_Language( const char				  *language )
       {
-  register long				  status;
+  long				  status;
   class zipview *self=this;
 
   IN(zipview_Set_Print_Language);
@@ -676,9 +676,9 @@ zipview::Set_Print_Language( register const char				  *language )
   }
 
 long
-zipview::Set_Print_Processor( register const char				  *processor )
+zipview::Set_Print_Processor( const char				  *processor )
       {
-  register long				  status;
+  long				  status;
   class zipview *self=this;
 
   IN(zipview_Set_Print_Processor);
@@ -689,9 +689,9 @@ zipview::Set_Print_Processor( register const char				  *processor )
   }
 
 long
-zipview::Set_Print_Level( register long				   level )
+zipview::Set_Print_Level( long				   level )
       {
-  register long				  status;
+  long				  status;
   class zipview *self=this;
 
   IN(zipview_Set_Print_Level);
@@ -702,9 +702,9 @@ zipview::Set_Print_Level( register long				   level )
   }
 
 long
-zipview::Set_Print_File( register FILE				  *file )
+zipview::Set_Print_File( FILE				  *file )
       {
-  register long				  status;
+  long				  status;
   class zipview *self=this;
 
   IN(zipview_Set_Print_File);
@@ -715,9 +715,9 @@ zipview::Set_Print_File( register FILE				  *file )
   }
 
 long
-zipview::Set_Print_Resolution( register long				   resolution )
+zipview::Set_Print_Resolution( long				   resolution )
       {
-  register long				  status;
+  long				  status;
   class zipview *self=this;
 
   IN(zipview_Set_Print_Resolution);
@@ -728,9 +728,9 @@ zipview::Set_Print_Resolution( register long				   resolution )
   }
 
 long
-zipview::Set_Print_Dimensions( register float			   inch_width , register float			   inch_height )
+zipview::Set_Print_Dimensions( float			   inch_width , float			   inch_height )
       {
-  register long				  status;
+  long				  status;
   class zipview *self=this;
 
   IN(zipview_Set_Print_Dimensions);
@@ -741,7 +741,7 @@ zipview::Set_Print_Dimensions( register float			   inch_width , register float		
   }
 
 long
-zipview::Set_Print_Coordinates( register zip_type_percent		   x_origin , register zip_type_percent		   y_origin , register zip_type_percent		   width , register zip_type_percent		   height )
+zipview::Set_Print_Coordinates( zip_type_percent		   x_origin , zip_type_percent		   y_origin , zip_type_percent		   width , zip_type_percent		   height )
       {
   int					  status = zip_success;
   class zipview *self=this;
@@ -754,7 +754,7 @@ zipview::Set_Print_Coordinates( register zip_type_percent		   x_origin , registe
   }
 
 long
-zipview::Set_Print_Orientation( register long				   orientation )
+zipview::Set_Print_Orientation( long				   orientation )
       {
   int					  status = zip_success;
   class zipview *self=this;
@@ -767,9 +767,9 @@ zipview::Set_Print_Orientation( register long				   orientation )
   }
 
 long
-zipview::Print_Figure( register zip_type_figure		 figure, register zip_type_pane		 pane )
+zipview::Print_Figure( zip_type_figure		 figure, zip_type_pane		 pane )
         {
-  register long			        status = zip_ok;
+  long			        status = zip_ok;
   class zipview *self=this;
 
   IN(zipview_Print_Figure);
@@ -780,9 +780,9 @@ zipview::Print_Figure( register zip_type_figure		 figure, register zip_type_pane
   }
 
 long
-zipview::Print_Image( register zip_type_image		 image, register zip_type_pane		 pane )
+zipview::Print_Image( zip_type_image		 image, zip_type_pane		 pane )
         {
-  register long			        status;
+  long			        status;
   class zipview *self=this;
 
   IN(zipview_Print_Image);
@@ -793,9 +793,9 @@ zipview::Print_Image( register zip_type_image		 image, register zip_type_pane		 
   }
 
 long
-zipview::Print_Stream( register zip_type_stream		 stream, register zip_type_pane		 pane )
+zipview::Print_Stream( zip_type_stream		 stream, zip_type_pane		 pane )
         {
-  register long			        status = zip_ok;
+  long			        status = zip_ok;
   class zipview *self=this;
 
   IN(zipview_Print_Stream);
@@ -806,9 +806,9 @@ zipview::Print_Stream( register zip_type_stream		 stream, register zip_type_pane
   }
 
 long
-zipview::Print_Pane( register zip_type_pane		 pane )
+zipview::Print_Pane( zip_type_pane		 pane )
       {
-  register long			        status;
+  long			        status;
   class zipview *self=this;
 
   IN(zipview_Print_Pane);
@@ -819,9 +819,9 @@ zipview::Print_Pane( register zip_type_pane		 pane )
   }
 
 static
-void Initialize_Printing( register class zipview	      *self )
+void Initialize_Printing( class zipview	      *self )
     {
-  register int			      i;
+  int			      i;
 
   IN(Initialize_Printing);
   if ( Printer == NULL )
@@ -846,7 +846,7 @@ zipview::Set_Debug( boolean  state )
   }
 
 static void
-DEBUG_Command( register class zipview	       *self )
+DEBUG_Command( class zipview	       *self )
     {
   IN(DEBUG_Command);
   debug = !debug;
@@ -859,7 +859,7 @@ DEBUG_Command( register class zipview	       *self )
   }
 
 static void
-Edit_Command( register class zipview	       *self )
+Edit_Command( class zipview	       *self )
     {
   IN(Edit_Command);
   Set_pending_edit;
@@ -868,7 +868,7 @@ Edit_Command( register class zipview	       *self )
   }
 
 static void
-Browse_Command( register class zipview      *self )
+Browse_Command( class zipview      *self )
     {
   IN(Browse_Command);
   Set_pending_browse;
@@ -877,7 +877,7 @@ Browse_Command( register class zipview      *self )
   }
 
 static void
-Portrait_Command( register class zipview      *self )
+Portrait_Command( class zipview      *self )
     {
   IN(Portrait_Command);
   (Menu)->SetMask(  ((Menu )->GetMask( ) & ~menu_landscape) | menu_portrait );
@@ -887,7 +887,7 @@ Portrait_Command( register class zipview      *self )
   }
 
 static void
-Landscape_Command( register class zipview        *self )
+Landscape_Command( class zipview        *self )
     {
   IN(Landscape_Command);
   (Menu)->SetMask(  ((Menu )->GetMask( ) & ~menu_portrait) | menu_landscape );
@@ -898,10 +898,10 @@ Landscape_Command( register class zipview        *self )
   }
 
 static void
-Print_To_File_Command( register class zipview        *self )
+Print_To_File_Command( class zipview        *self )
     {
   char			        *reply;
-  register FILE			*file;
+  FILE			*file;
   char				 msg[512];
 
   IN(Print_To_File_Command);
@@ -932,7 +932,7 @@ Print_To_File_Command( register class zipview        *self )
 /*===
 static void
 Page_First_Command( self )
-  register struct zipview     *self;
+  struct zipview     *self;
   {
   IN(Page_First_Command);
   if ( CurrentPage > 1 )
@@ -947,7 +947,7 @@ Page_First_Command( self )
 
 static void
 Page_Last_Command( self )
-  register struct zipview     *self;
+  struct zipview     *self;
   {
   char			      *page_image_name = "ZIP_PAGE_IMAGE_nnn";
 
@@ -967,10 +967,10 @@ Page_Last_Command( self )
 
 static void
 Page_Next_Command( self )
-  register struct zipview     *self;
+  struct zipview     *self;
   {
   char			      *page_image_name = "ZIP_PAGE_IMAGE_nnn";
-  register zip_type_image      image;
+  zip_type_image      image;
 
   IN(Page_Next_Command);
   sprintf( page_image_name, "ZIP_PAGE_IMAGE_%03d", ++CurrentPage );
@@ -991,7 +991,7 @@ Page_Next_Command( self )
 
 static void
 Page_Prior_Command( self )
-  register struct zipview     *self;
+  struct zipview     *self;
   {
   char			      *page_image_name = "ZIP_PAGE_IMAGE_nnn";
 
@@ -1010,7 +1010,7 @@ Page_Prior_Command( self )
 ===*/
 
 static void
-Set_Print_Size_Command(register class zipview      *self)
+Set_Print_Size_Command(class zipview      *self)
 {
     char request[150], *answer = NULL;
     char w[5], h[5];
@@ -1125,7 +1125,7 @@ Set_Print_Size_Command(register class zipview      *self)
 
 /*===*/static long ZOOM_LEVEL;
 static void
-Zoom_Pane( register class zipview	       *self, register int			        factor )
+Zoom_Pane( class zipview	       *self, int			        factor )
       {
   IN(::Zoom_Pane);
   Set_pending_zoom;
@@ -1138,23 +1138,23 @@ Zoom_Pane( register class zipview	       *self, register int			        factor )
   }
 
 static void
-Zoom_Normal_Command( register class zipview   *self )    {  ::Zoom_Pane( self, 0 );  }
+Zoom_Normal_Command( class zipview   *self )    {  ::Zoom_Pane( self, 0 );  }
 
 static void
-Zoom_In_Command( register class zipview      *self )    {  ::Zoom_Pane( self, 1 );  }
+Zoom_In_Command( class zipview      *self )    {  ::Zoom_Pane( self, 1 );  }
 
 static void
-Zoom_In5_Command( register class zipview      *self )    {  ::Zoom_Pane( self, 5 );  }
+Zoom_In5_Command( class zipview      *self )    {  ::Zoom_Pane( self, 5 );  }
 
 static void
-Zoom_Out5_Command( register class zipview      *self )    {  ::Zoom_Pane( self, -5 );  }
+Zoom_Out5_Command( class zipview      *self )    {  ::Zoom_Pane( self, -5 );  }
 
 static void
-Zoom_Out_Command( register class zipview      *self )    {  ::Zoom_Pane( self, -1 );  }
+Zoom_Out_Command( class zipview      *self )    {  ::Zoom_Pane( self, -1 );  }
 
 
 static void
-Normalize_Pane_Command( register class zipview	       *self )
+Normalize_Pane_Command( class zipview	       *self )
     {
   IN(Normalize_Pane_Command);
   (self)->Normalize_Pane(  Pane );
@@ -1164,7 +1164,7 @@ Normalize_Pane_Command( register class zipview	       *self )
   }
 
 static void
-Refresh_Pane_Command( register class zipview	       *self )
+Refresh_Pane_Command( class zipview	       *self )
     {
   IN(Refresh_Pane_Command);
   Set_pending_redisplay;
@@ -1173,7 +1173,7 @@ Refresh_Pane_Command( register class zipview	       *self )
   }
 
 static void
-Pan_Pane( register class zipview	       *self, register int			        edge )
+Pan_Pane( class zipview	       *self, int			        edge )
       {
   Edge = edge;
   Set_pending_pan;
@@ -1181,7 +1181,7 @@ Pan_Pane( register class zipview	       *self, register int			        edge )
   }
 
 static void
-Center_Pane_Command( register class zipview	       *self )
+Center_Pane_Command( class zipview	       *self )
     {
   IN(Center_Pane_Command);
   Pane->zip_pane_x_offset = 0;
@@ -1194,20 +1194,20 @@ Center_Pane_Command( register class zipview	       *self )
   }
 
 static void
-Top_Pane_Command( register class zipview      *self )    {  ::Pan_Pane( self, zipview_pane_top_edge );  }
+Top_Pane_Command( class zipview      *self )    {  ::Pan_Pane( self, zipview_pane_top_edge );  }
 
 static void
-Bottom_Pane_Command( register class zipview      *self )    {  ::Pan_Pane( self, zipview_pane_bottom_edge );  }
+Bottom_Pane_Command( class zipview      *self )    {  ::Pan_Pane( self, zipview_pane_bottom_edge );  }
 
 static void
-Left_Pane_Command( register class zipview      *self )    {  ::Pan_Pane( self, zipview_pane_left_edge );  }
+Left_Pane_Command( class zipview      *self )    {  ::Pan_Pane( self, zipview_pane_left_edge );  }
 
 static void
-Right_Pane_Command( register class zipview      *self )    {  ::Pan_Pane( self, zipview_pane_right_edge );  }
+Right_Pane_Command( class zipview      *self )    {  ::Pan_Pane( self, zipview_pane_right_edge );  }
 
 /*===*/static float SCALE;
 static void
-Scale_Pane( register class zipview	       *self, register float		        scale )
+Scale_Pane( class zipview	       *self, float		        scale )
       {
   IN(::Scale_Pane);
   DEBUGgt( Scale, scale);
@@ -1218,7 +1218,7 @@ Scale_Pane( register class zipview	       *self, register float		        scale )
   }
 
 static void
-Scale_Normal_Command( register class zipview	       *self )
+Scale_Normal_Command( class zipview	       *self )
     {
   Set_pending_scale;
   SCALE = 1.0;
@@ -1226,19 +1226,19 @@ Scale_Normal_Command( register class zipview	       *self )
   }
 
 static void
-Scale_Smaller_Command( register class zipview      *self )    {  ::Scale_Pane( self, -0.01 );  }
+Scale_Smaller_Command( class zipview      *self )    {  ::Scale_Pane( self, -0.01 );  }
 
 static void
-Scale_Smaller_10_Command( register class zipview      *self )    {  ::Scale_Pane( self, -0.1 );  }
+Scale_Smaller_10_Command( class zipview      *self )    {  ::Scale_Pane( self, -0.1 );  }
 
 static void
-Scale_Larger_Command( register class zipview      *self )    {  ::Scale_Pane( self, 0.01 );  }
+Scale_Larger_Command( class zipview      *self )    {  ::Scale_Pane( self, 0.01 );  }
 
 static void
-Scale_Larger_10_Command( register class zipview      *self )    {  ::Scale_Pane( self, 0.1 );  }
+Scale_Larger_10_Command( class zipview      *self )    {  ::Scale_Pane( self, 0.1 );  }
 
 static void
-Scale_Half_Command( register class zipview	       *self )
+Scale_Half_Command( class zipview	       *self )
     {
   IN(Scale_Half_Command);
   Set_pending_scale;
@@ -1248,7 +1248,7 @@ Scale_Half_Command( register class zipview	       *self )
   }
 
 static void
-Scale_Double_Command( register class zipview	       *self )
+Scale_Double_Command( class zipview	       *self )
     {
   IN(Scale_Double_Command);
   Set_pending_scale;
@@ -1335,7 +1335,7 @@ void Build_Menu()
   }
 
 static
-void Pending_Hit( register class zipview	    *self )
+void Pending_Hit( class zipview	    *self )
     {
   IN(Pending_Hit);
   Reset_pending_hit;
@@ -1358,7 +1358,7 @@ void Pending_Hit( register class zipview	    *self )
   }
 
 static
-void Pending_Redisplay( register class zipview	    *self )
+void Pending_Redisplay( class zipview	    *self )
     {
   IN(Pending_Redisplay);
   DEBUGxt(Action, Action);
@@ -1371,7 +1371,7 @@ void Pending_Redisplay( register class zipview	    *self )
   }
 
 static
-void Pending_Redraw( register class zipview	    *self )
+void Pending_Redraw( class zipview	    *self )
     {
   IN(Pending_Redraw);
   DEBUGxt(Action, Action);
@@ -1384,9 +1384,9 @@ void Pending_Redraw( register class zipview	    *self )
   }
 
 static
-void Pending_Zoom( register class zipview	    *self )
+void Pending_Zoom( class zipview	    *self )
     {
-  register zip_type_point	    x, y;
+  zip_type_point	    x, y;
 
   IN(Pending_Zoom);
   Reset_pending_zoom;
@@ -1400,9 +1400,9 @@ void Pending_Zoom( register class zipview	    *self )
   }
 
 static
-void Pending_Scale( register class zipview	    *self )
+void Pending_Scale( class zipview	    *self )
     {
-  register zip_type_point	    x, y;
+  zip_type_point	    x, y;
 
   IN(Pending_Scale);
   Reset_pending_scale;
@@ -1416,7 +1416,7 @@ void Pending_Scale( register class zipview	    *self )
   }
 
 static
-void Pending_Pan( register class zipview	    *self )
+void Pending_Pan( class zipview	    *self )
     {
   IN(Pending_Pan);
   Reset_pending_pan;
@@ -1427,7 +1427,7 @@ void Pending_Pan( register class zipview	    *self )
   }
 
 static
-void Pending_ReceiveInputFocus( register class zipview	    *self )
+void Pending_ReceiveInputFocus( class zipview	    *self )
     {
   IN(Pending_ReceiveInputFocus);
   Reset_pending_receiveinputfocus;
@@ -1437,7 +1437,7 @@ void Pending_ReceiveInputFocus( register class zipview	    *self )
   }
 
 static
-void Pending_LoseInputFocus( register class zipview	    *self )
+void Pending_LoseInputFocus( class zipview	    *self )
     {
   IN(Pending_LoseInputFocus);
   Reset_pending_loseinputfocus;
@@ -1446,9 +1446,9 @@ void Pending_LoseInputFocus( register class zipview	    *self )
   }
 
 static
-void Pending_Edit( register class zipview	    *self )
+void Pending_Edit( class zipview	    *self )
     {
-  register long			    i;
+  long			    i;
 
   IN(Pending_Edit);
   Reset_pending_edit;
@@ -1481,7 +1481,7 @@ void Pending_Edit( register class zipview	    *self )
   }
 
 static
-void Pending_Browse( register class zipview	    *self )
+void Pending_Browse( class zipview	    *self )
     {
   IN(Pending_Browse);
 Set_pending_browse;
@@ -1495,7 +1495,7 @@ Set_pending_browse;
   }
 
 static
-void Highlight_View( register class zipview	      *self )
+void Highlight_View( class zipview	      *self )
     {
   IN(Highlight_View);
   (self)->SetTransferMode(  graphic_BLACK );
@@ -1506,7 +1506,7 @@ void Highlight_View( register class zipview	      *self )
   }
 
 static
-void Normalize_View( register class zipview	      *self )
+void Normalize_View( class zipview	      *self )
     {
   IN(Normalize_View);
   (self)->SetTransferMode(  graphic_WHITE );
@@ -1517,9 +1517,9 @@ void Normalize_View( register class zipview	      *self )
   }
 
 static
-void Prepare_Default_Pane( register class zipview	       *self )
+void Prepare_Default_Pane( class zipview	       *self )
     {
-  register long			      status = zip_ok;
+  long			      status = zip_ok;
   char				      pane_name[257];
   static int			      pane_number = 1;
 
@@ -1547,9 +1547,9 @@ void Prepare_Default_Pane( register class zipview	       *self )
   }
 
 static int
-Prepare_Default_Stream( register class zipview	       *self )
+Prepare_Default_Stream( class zipview	       *self )
     {
-  register long			      status = zip_ok;
+  long			      status = zip_ok;
   char				      stream_name[257];
   static int			      stream_number = 1;
   const char			      source[] =
@@ -1589,9 +1589,9 @@ Prepare_Default_Stream( register class zipview	       *self )
   }
 
 long
-zipview::Query( register const char			       *query , register const char			       *default_response , register char			       **response )
+zipview::Query( const char			       *query , const char			       *default_response , char			       **response )
       {
-  register long			      status = zip_ok;
+  long			      status = zip_ok;
   static char			      buffer[512];
   class zipview *self=this;
 
@@ -1612,12 +1612,12 @@ zipview::Query( register const char			       *query , register const char			    
   }
 
 long
-zipview::Query_File_Name( register const char			      *query, register char			     **response )
+zipview::Query_File_Name( const char			      *query, char			     **response )
         {
-  register enum message_CompletionCode  result;
+  enum message_CompletionCode  result;
   static char			      path[257];
   static char			      buffer[513];
-  register long			      status = zip_ok;
+  long			      status = zip_ok;
   class zipview *self=this;
 
   IN(zipview_Query_File_Name);
@@ -1651,9 +1651,9 @@ zipview::Query_File_Name( register const char			      *query, register char			  
   }
 
 long
-zipview::Announce( register const char			       *message )
+zipview::Announce( const char			       *message )
       {
-  register long			      status = zip_ok;
+  long			      status = zip_ok;
 
   IN(zipview_Announce);
   if ( this->imPtr )
@@ -1671,7 +1671,7 @@ zipview::Announce( register const char			       *message )
 long
 zipview::AskOrCancel( const char  *request , const char  *def , char  **answer)
 {
-    register long		      status = zip_ok;
+    long		      status = zip_ok;
     static char			      buffer[512];
     class zipview *self=this;
 
@@ -1718,7 +1718,7 @@ static const struct scrollfns horizontal_scroll_interface = {
 class view *
 zipview::GetApplicationLayer( )
     {
-  register class scroll	     *view;
+  class scroll	     *view;
   class zipview *self=this;
 
   IN(zipview_GetApplicationLayer);
@@ -1740,9 +1740,9 @@ zipview::GetApplicationLayer( )
 
 
 const void *
-zipview::GetInterface( register const char		      *interface_name )
+zipview::GetInterface( const char		      *interface_name )
       {
-  register const struct scrollfns	     *interface = NULL;
+  const struct scrollfns	     *interface = NULL;
 
   IN(zipview_GetInterface);
   if ( strcmp( interface_name, "scroll,vertical" ) == 0 )
@@ -1755,9 +1755,9 @@ zipview::GetInterface( register const char		      *interface_name )
   }
 
 static void
-zipview_y_getinfo( register class zipview	      *self, register struct range		      *total , register struct range		      *seen , register struct range		      *dot )
+zipview_y_getinfo( class zipview	      *self, struct range		      *total , struct range		      *seen , struct range		      *dot )
       {
-  register long			      height, top, bottom, x;
+  long			      height, top, bottom, x;
 
   IN(zipview_y_getinfo);
   total->beg = total->end = dot->beg = dot->end = seen->beg = seen->end = 0;
@@ -1793,9 +1793,9 @@ zipview_y_getinfo( register class zipview	      *self, register struct range		  
 
 
 static long
-zipview_y_whatisat( register class zipview	      *self, register long			       coordinate , register long			       outof )
+zipview_y_whatisat( class zipview	      *self, long			       coordinate , long			       outof )
       {
-  register long			      value;
+  long			      value;
 
   IN(zipview_y_whatisat);
   DEBUGlt( Coordinate,coordinate);
@@ -1808,7 +1808,7 @@ zipview_y_whatisat( register class zipview	      *self, register long			       c
   }
 
 static void 
-zipview_y_setframe( register class zipview	      *self, register int			       position, register long			       coordinate , register long			       outof )
+zipview_y_setframe( class zipview	      *self, int			       position, long			       coordinate , long			       outof )
         {
   IN(zipview_y_setframe);
   DEBUGdt( Position, position );
@@ -1824,7 +1824,7 @@ zipview_y_setframe( register class zipview	      *self, register int			       po
 
 
 static void
-zipview_y_endzone( register class zipview	      *self, register int			       zone , register int			       action )
+zipview_y_endzone( class zipview	      *self, int			       zone , int			       action )
       {
   IN(zipview_y_endzone);
   DEBUGdt( Zone,zone);
@@ -1843,9 +1843,9 @@ zipview_y_endzone( register class zipview	      *self, register int			       zon
   }
 
 static void
-zipview_x_getinfo( register class zipview	      *self, register struct range		      *total , register struct range		      *seen , register struct range		      *dot )
+zipview_x_getinfo( class zipview	      *self, struct range		      *total , struct range		      *seen , struct range		      *dot )
       {
-  register long			      width, left, right, x;
+  long			      width, left, right, x;
 
   IN(zipview_x_getinfo);
   total->beg = total->end = dot->beg = dot->end = seen->beg = seen->end = 0;
@@ -1881,9 +1881,9 @@ zipview_x_getinfo( register class zipview	      *self, register struct range		  
 
 
 static long
-zipview_x_whatisat( register class zipview	      *self, register long			       coordinate , register long			       outof )
+zipview_x_whatisat( class zipview	      *self, long			       coordinate , long			       outof )
       {
-  register long			      value;
+  long			      value;
 
   IN(zipview_x_whatisat);
   DEBUGlt( Coordinate,coordinate);
@@ -1896,7 +1896,7 @@ zipview_x_whatisat( register class zipview	      *self, register long			       c
   }
 
 static void 
-zipview_x_setframe( register class zipview	      *self, register int			       position, register long			       coordinate , register long			       outof )
+zipview_x_setframe( class zipview	      *self, int			       position, long			       coordinate , long			       outof )
         {
   IN(zipview_x_setframe);
   DEBUGdt( Position, position );
@@ -1912,7 +1912,7 @@ zipview_x_setframe( register class zipview	      *self, register int			       po
 
 
 static void
-zipview_x_endzone( register class zipview	      *self, register int			       zone , register int			       action )
+zipview_x_endzone( class zipview	      *self, int			       zone , int			       action )
       {
   IN(zipview_x_endzone);
   DEBUGdt( Zone,zone);

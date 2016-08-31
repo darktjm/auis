@@ -99,7 +99,7 @@ void list::Append(class list  *dst , class list  *src)
 
 void list::InsertFront(char  *data)
 {
-    register struct list_Entry *p;
+    struct list_Entry *p;
 
     p = new_c();
     p->data = data;
@@ -110,7 +110,7 @@ void list::InsertFront(char  *data)
 
 void list::InsertEnd(char  *data)
 {
-    register struct list_Entry *p;
+    struct list_Entry *p;
 
     p = new_c();
     p->data = data;
@@ -140,7 +140,7 @@ boolean list::InsertUnique(char  *data)
 
 void list::InsertSorted(char  *data, list_greaterfptr  compare)
 {
-    register struct list_Entry *n, *p, **pp;
+    struct list_Entry *n, *p, **pp;
 
     n = new_c();
     n->data = data;
@@ -161,8 +161,8 @@ void list::InsertSorted(char  *data, list_greaterfptr  compare)
 
 char *list::RemoveFront()
 {
-    register struct list_Entry *p = this->head;
-    register char *data;
+    struct list_Entry *p = this->head;
+    char *data;
 
     if (this->size == 0)
 	return NULL;
@@ -183,7 +183,7 @@ char *list::RemoveFront()
 
 boolean list::Delete(char  *data)
 {
-    register struct list_Entry *p, **pp, *lp=NULL;
+    struct list_Entry *p, **pp, *lp=NULL;
 
     pp = &this->head;
     for (p = *pp; p != NULL && p->data != data; lp=p, p = *pp)
@@ -204,7 +204,7 @@ boolean list::Delete(char  *data)
 
 boolean list::Member(char  *data)
 {
-    register struct list_Entry *p;
+    struct list_Entry *p;
 
     for (p = this->head; p != NULL; p = p->next)
         if (p->data == data)
@@ -274,7 +274,7 @@ boolean list::Sort(list_greaterfptr  compare)
 
 char *list::Enumerate(list_efptr  proc, const char  *rock)
 {
-    register struct list_Entry *p;
+    struct list_Entry *p;
 
     for (p = this->head; p != NULL; p = p->next)
         if ((*proc)(p->data, (char *)rock) == FALSE)
@@ -285,7 +285,7 @@ char *list::Enumerate(list_efptr  proc, const char  *rock)
 
 void list::Clear()
 {
-    register struct list_Entry *p, *n;
+    struct list_Entry *p, *n;
 
     for (p = this->head; p != NULL; p = n) {
 	n = p->next;

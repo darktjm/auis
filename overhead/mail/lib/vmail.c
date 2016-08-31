@@ -88,7 +88,7 @@ int num; char *fmt, *p1, *p2, *p3, *p4, *p5, *p6;
 enum OnAFSCodes { ON_AFS, AFS_DOWN, NOT_ON_AFS, NOT_A_DIR, INACCESSIBLE };
 
 static enum OnAFSCodes dirinAFS(name)
-    register char *name;
+    char *name;
 {
     static struct stat buf;
     static int statres, fd;
@@ -411,7 +411,7 @@ static enum lockcodes lock(f, name)
 }
 
 static int WriteHeaders(f, fname, returnpath, four, auth, pgmname)
-    register FILE *f;
+    FILE *f;
     char *fname, *returnpath, *four, *auth, *pgmname;
 {
     int Res;
@@ -466,8 +466,8 @@ static int CreateAndInitFile(mailbox, returnpath, four, auth, pgmname)
     char *mailbox;
     char *returnpath, *four, *auth, *pgmname;
 {
-    register int n, f;
-    register bool gotfile;
+    int n, f;
+    bool gotfile;
     int PermTries = 0;	/* Count of permission failures */
     int firsterr;
     char NameExtra[100];
@@ -478,7 +478,7 @@ static int CreateAndInitFile(mailbox, returnpath, four, auth, pgmname)
     gotfile = FALSE;
     NameExtra[0] = '\0';
     for (n=0; !gotfile && n<MAX_MAIL_TRIES; ++n) {
-	register enum lockcodes value;
+	enum lockcodes value;
 
 	sprintf(msgfilename, "%s/%s%s", mailbox, ams_genid(1), NameExtra);
 	/* NOTE: open will fail if file exists */

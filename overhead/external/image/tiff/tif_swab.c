@@ -35,7 +35,7 @@
 #ifndef TIFFSwabShort
 void TIFFSwabShort(unsigned short *wp)
 {
-	register unsigned char *cp = (unsigned char *)wp;
+	unsigned char *cp = (unsigned char *)wp;
 	int t;
 
 	t = cp[1]; cp[1] = cp[0]; cp[0] = t;
@@ -45,7 +45,7 @@ void TIFFSwabShort(unsigned short *wp)
 #ifndef TIFFSwabLong
 void TIFFSwabLong(unsigned long *lp)
 {
-	register unsigned char *cp = (unsigned char *)lp;
+	unsigned char *cp = (unsigned char *)lp;
 	int t;
 
 	t = cp[3]; cp[3] = cp[0]; cp[0] = t;
@@ -54,10 +54,10 @@ void TIFFSwabLong(unsigned long *lp)
 #endif
 
 #ifndef TIFFSwabArrayOfShort
-void TIFFSwabArrayOfShort(unsigned short *wp, register int n)
+void TIFFSwabArrayOfShort(unsigned short *wp, int n)
 {
-	register unsigned char *cp;
-	register int t;
+	unsigned char *cp;
+	int t;
 
 	/* XXX unroll loop some */
 	while (n-- > 0) {
@@ -69,10 +69,10 @@ void TIFFSwabArrayOfShort(unsigned short *wp, register int n)
 #endif
 
 #ifndef TIFFSwabArrayOfLong
-void TIFFSwabArrayOfLong(register unsigned long *lp, register int n)
+void TIFFSwabArrayOfLong(unsigned long *lp, int n)
 {
-	register unsigned char *cp;
-	register int t;
+	unsigned char *cp;
+	int t;
 
 	/* XXX unroll loop some */
 	while (n-- > 0) {
@@ -170,7 +170,7 @@ unsigned char TIFFNoBitRevTable[256] = {
     0xf8, 0xf9, 0xfa, 0xfb, 0xfc, 0xfd, 0xfe, 0xff, 
 };
 
-void TIFFReverseBits(register unsigned char *cp, register int n)
+void TIFFReverseBits(unsigned char *cp, int n)
 {
 	for (; n > 8; n -= 8) {
 		cp[0] = TIFFBitRevTable[cp[0]];

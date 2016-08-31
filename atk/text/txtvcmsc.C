@@ -156,7 +156,7 @@ void textview_ToggleReadOnly(class textview  *self)
     (myText)->NotifyObservers( observable_OBJECTCHANGED); /* Handles updating of menus on read only transition. */
 }
 
-void textview_InsertPageBreak (register class textview  *self)
+void textview_InsertPageBreak (class textview  *self)
     {
     long pos;
     class text *d;
@@ -185,7 +185,7 @@ void textview_InsertPageBreak (register class textview  *self)
     }
 }
 
-void textview_NextPage (register class textview  *self)
+void textview_NextPage (class textview  *self)
     {
     long pos,len;
     class text *d;
@@ -204,14 +204,14 @@ void textview_NextPage (register class textview  *self)
 	pos++;
     }
 }
-long text_rindex(register class text  *txt,register long  pos,register char  c)
+long text_rindex(class text  *txt,long  pos,char  c)
 {
     for(;pos > 0;pos--){
 	if((txt)->GetChar(pos) == c) return pos;
     }
     return EOF;
 }
-void textview_LastPage (register class textview  *self)
+void textview_LastPage (class textview  *self)
     {
     long pos,cnt;
     class text *d;
@@ -232,7 +232,7 @@ void textview_LastPage (register class textview  *self)
     (self)->SetTopPosition(0);
 }
 
-void textview_InsertFootnote(register class textview  *self)
+void textview_InsertFootnote(class textview  *self)
     {
     long pos;
     class fnote *fn;
@@ -250,15 +250,15 @@ void textview_InsertFootnote(register class textview  *self)
     (Text(self))->NotifyObservers(observable_OBJECTCHANGED);
     (self)->SetDotPosition(pos + 1);
 }
-void textview_OpenFootnotes(register class textview  *self)
+void textview_OpenFootnotes(class textview  *self)
     {
     fnote::OpenAll(Text(self));
 }
-void textview_CloseFootnotes(register class textview  *self)
+void textview_CloseFootnotes(class textview  *self)
     {
     fnote::CloseAll(Text(self));
 }
-void textview_WriteFootnotes(register class textview  *self)
+void textview_WriteFootnotes(class textview  *self)
     {
     FILE *f;
     class text *tmpt;

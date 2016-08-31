@@ -78,11 +78,11 @@ END-SPECIFICATION  ************************************************************/
 
 
 long
-zip::Create_Figure( register zip_type_figure	      *figure, register const char			      *name, unsigned char type, register zip_type_image	       image, register zip_type_figure	       peer )
+zip::Create_Figure( zip_type_figure	      *figure, const char			      *name, unsigned char type, zip_type_image	       image, zip_type_figure	       peer )
             {
     class zip *self=this;
-  register long			      status = zip_ok;
-  register zip_type_figure	      peer_ptr = peer;
+  long			      status = zip_ok;
+  zip_type_figure	      peer_ptr = peer;
 
   IN(zip_Create_Figure);
   if ( image )
@@ -122,10 +122,10 @@ zip::Create_Figure( register zip_type_figure	      *figure, register const char	
   }
 
 long
-zip::Destroy_Figure( register zip_type_figure	       figure )
+zip::Destroy_Figure( zip_type_figure	       figure )
       {
     class zip *self=this;
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
   IN(zip_Destroy_Figure);
   if ( figure )
@@ -153,9 +153,9 @@ zip::Destroy_Figure( register zip_type_figure	       figure )
   }
 
 long
-zip::Hook_Figure( register zip_type_figure	       figure  , register zip_type_figure	       peer_figure )
+zip::Hook_Figure( zip_type_figure	       figure  , zip_type_figure	       peer_figure )
       {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
 
   IN(zip_Hook_Figure);
   if ( figure  &&  peer_figure )
@@ -180,10 +180,10 @@ zip::Hook_Figure( register zip_type_figure	       figure  , register zip_type_fi
   }
 
 long
-zip::Unhook_Figure( register zip_type_figure	       figure )
+zip::Unhook_Figure( zip_type_figure	       figure )
       {
-  register int			      status = zip_ok;
-  register zip_type_figure	      figure_ptr;
+  int			      status = zip_ok;
+  zip_type_figure	      figure_ptr;
 
   IN(zip_Unhook_Figure);
   if ( figure )
@@ -211,9 +211,9 @@ zip::Unhook_Figure( register zip_type_figure	       figure )
   }
 
 long
-zip::Set_Figure_Name( register zip_type_figure figure, register const char  *name )
+zip::Set_Figure_Name( zip_type_figure figure, const char  *name )
 {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
   zip_type_figure		      duplicate;
 
   IN(zip_Set_Figure_Name);
@@ -262,9 +262,9 @@ name, figure->zip_figure_image->zip_image_stream->zip_stream_name,duplicate->zip
   }
 
 long
-zip::Set_Figure_Text( register zip_type_figure figure, const char *text )
+zip::Set_Figure_Text( zip_type_figure figure, const char *text )
 {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
   IN(zip_Set_Figure_Text);
   if ( figure )
@@ -287,9 +287,9 @@ zip::Set_Figure_Text( register zip_type_figure figure, const char *text )
   }
 
 long
-zip::Set_Figure_Pattern( register zip_type_figure	       figure, register char			       pattern )
+zip::Set_Figure_Pattern( zip_type_figure	       figure, char			       pattern )
         {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
   IN(zip_Set_Figure_Pattern);
   if ( figure )
@@ -313,7 +313,7 @@ zip::Set_Figure_Pattern( register zip_type_figure	       figure, register char		
 long
 zip::Set_Figure_Shade( zip_type_figure figure, unsigned char shade )
 {
-  register long			      status = zip_ok;
+  long			      status = zip_ok;
 
   IN(zip_Set_Figure_Shade);
   if ( figure )
@@ -331,9 +331,9 @@ zip::Set_Figure_Shade( zip_type_figure figure, unsigned char shade )
 }
 
 long
-zip::Set_Figure_Font( register zip_type_figure	       figure, register const char			      *name )
+zip::Set_Figure_Font( zip_type_figure	       figure, const char			      *name )
         {
-  register long			     status = zip_ok;
+  long			     status = zip_ok;
   short				     font = 0;
 
   IN(zip_Set_Figure_Font);
@@ -359,9 +359,9 @@ zip::Set_Figure_Font( register zip_type_figure	       figure, register const cha
   }
 
 long
-zip::Set_Figure_Mode( register zip_type_figure	       figure, long mode )
+zip::Set_Figure_Mode( zip_type_figure	       figure, long mode )
       {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
   IN(zip_Set_Figure_Mode);
   if ( figure )
@@ -400,7 +400,7 @@ zip::Set_Figure_Mode( register zip_type_figure	       figure, long mode )
 long
 zip::Set_Figure_Line_Width( zip_type_figure figure, short width )
 {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
   IN(zip_Set_Figure_Line_Width);
   if ( figure )
@@ -418,9 +418,9 @@ zip::Set_Figure_Line_Width( zip_type_figure figure, short width )
   }
 
 long
-zip::Set_Figure_Line_Dash( register zip_type_figure		 figure, register const char				 *pattern, register int				 offset, register short			 type )
+zip::Set_Figure_Line_Dash( zip_type_figure		 figure, const char				 *pattern, int				 offset, short			 type )
             {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
       IN(zip_Set_Figure_Line_Dash);
       if ( figure )
@@ -443,9 +443,9 @@ zip::Set_Figure_Line_Dash( register zip_type_figure		 figure, register const cha
   }
 
 long
-zip::Set_Figure_Line_Cap( register zip_type_figure		 figure, register short			 cap )
+zip::Set_Figure_Line_Cap( zip_type_figure		 figure, short			 cap )
         {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
       IN(zip_Set_Figure_Line_Cap);
       if ( figure )
@@ -461,9 +461,9 @@ zip::Set_Figure_Line_Cap( register zip_type_figure		 figure, register short			 c
   }
 
 long
-zip::Set_Figure_Line_Join( register zip_type_figure		 figure, register short			 join )
+zip::Set_Figure_Line_Join( zip_type_figure		 figure, short			 join )
         {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
       IN(zip_Set_Figure_Line_Join);
       if ( figure )
@@ -479,9 +479,9 @@ zip::Set_Figure_Line_Join( register zip_type_figure		 figure, register short			 
   }
 
 long
-zip::Set_Figure_Line_Color( register zip_type_figure		 figure, register double			 red , register double			 green , register double			 blue )
+zip::Set_Figure_Line_Color( zip_type_figure		 figure, double			 red , double			 green , double			 blue )
         {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
      IN(zip_Set_Figure_Line_Color);
      if ( figure )
@@ -508,9 +508,9 @@ zip::Set_Figure_Line_Color( register zip_type_figure		 figure, register double		
   }
 
 long
-zip::Set_Figure_FillFG_Color( register zip_type_figure		 figure, register double			 red , register double			 green , register double			 blue )
+zip::Set_Figure_FillFG_Color( zip_type_figure		 figure, double			 red , double			 green , double			 blue )
         {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
      IN(zip_Set_Figure_FillFG_Color);
      if ( figure )
@@ -537,9 +537,9 @@ zip::Set_Figure_FillFG_Color( register zip_type_figure		 figure, register double
   }
 
 long
-zip::Set_Figure_FillBG_Color( register zip_type_figure		 figure, register double			 red , register double			 green , register double			 blue )
+zip::Set_Figure_FillBG_Color( zip_type_figure		 figure, double			 red , double			 green , double			 blue )
         {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
      IN(zip_Set_Figure_FillBG_Color);
      if ( figure )
@@ -566,9 +566,9 @@ zip::Set_Figure_FillBG_Color( register zip_type_figure		 figure, register double
   }
 
 long
-zip::Set_Figure_Point( register zip_type_figure  figure, int point, long x, long y )
+zip::Set_Figure_Point( zip_type_figure  figure, int point, long x, long y )
 {
-  register long			      status = zip_ok;
+  long			      status = zip_ok;
 
   IN(zip_Set_Figure_Point);
   if ( figure )
@@ -584,9 +584,9 @@ zip::Set_Figure_Point( register zip_type_figure  figure, int point, long x, long
   }
 
 long
-zip::Adjust_Figure_Point_Suite( register zip_type_figure figure, long x_delta, long y_delta )
+zip::Adjust_Figure_Point_Suite( zip_type_figure figure, long x_delta, long y_delta )
       {
-  register long			      status = zip_ok;
+  long			      status = zip_ok;
 
   IN(zip_Adjust_Figure_Point_Suite);
   if ( figure )
@@ -602,21 +602,21 @@ zip::Adjust_Figure_Point_Suite( register zip_type_figure figure, long x_delta, l
   }
 
 long
-zip::Change_Figure_Point( register zip_type_figure	       figure, register long			       old_x , register long			       old_y , register long			       new_x , register long			       new_y )
+zip::Change_Figure_Point( zip_type_figure	       figure, long			       old_x , long			       old_y , long			       new_x , long			       new_y )
         {
     SetStreamModified;
 return  zip_failure;/*===*/
   }
 
 long
-zip::Remove_Figure_Point( register zip_type_figure	       figure, register long			       old_x , register long			       old_y )
+zip::Remove_Figure_Point( zip_type_figure	       figure, long			       old_x , long			       old_y )
         {
     SetStreamModified;
 return  zip_failure;/*===*/
   }
 
 long
-zip::Add_Figure_Point( register zip_type_figure	       figure, register long			       new_x , register long			       new_y )
+zip::Add_Figure_Point( zip_type_figure	       figure, long			       new_x , long			       new_y )
         {
     SetStreamModified;
 return  zip_failure;/*===*/
@@ -624,10 +624,10 @@ return  zip_failure;/*===*/
 
 
 struct zip_figure *
-zip::Figure( register const char			      *name )
+zip::Figure( const char			      *name )
       {
   zip_type_figure		      figure = NULL;
-  register zip_type_stream_chain      stream_link = StreamAnchor;
+  zip_type_stream_chain      stream_link = StreamAnchor;
 
   IN(zip_Figure);
   while ( stream_link )
@@ -644,7 +644,7 @@ zip::Figure( register const char			      *name )
   }
 
 struct zip_figure *
-zip::Image_Figure( register struct zip_image	      *image, register const char			      *name )
+zip::Image_Figure( struct zip_image	      *image, const char			      *name )
         {
   zip_type_figure		      figure = NULL;
 
@@ -657,7 +657,7 @@ zip::Image_Figure( register struct zip_image	      *image, register const char		
   }
 
 struct zip_figure *
-zip::Stream_Figure( register struct zip_stream	      *stream, register const char			      *name )
+zip::Stream_Figure( struct zip_stream	      *stream, const char			      *name )
         {
   zip_type_figure		      figure = NULL;
 
@@ -670,9 +670,9 @@ zip::Stream_Figure( register struct zip_stream	      *stream, register const cha
   }
 
 int
-zip::Allocate_Figure_Points_Vector( register zip_type_point_pairs	      *anchor )
+zip::Allocate_Figure_Points_Vector( zip_type_point_pairs	      *anchor )
 {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
   IN(zip::Allocate_Figure_Points_Vector);
   if ( (*anchor = (zip_type_point_pairs)
@@ -687,9 +687,9 @@ zip::Allocate_Figure_Points_Vector( register zip_type_point_pairs	      *anchor 
 
 
 int
-zip::Enlarge_Figure_Points_Vector( register zip_type_point_pairs	      *anchor )
+zip::Enlarge_Figure_Points_Vector( zip_type_point_pairs	      *anchor )
 {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
   IN(zip::Enlarge_Figure_Points_Vector);
   if ( (*anchor = (zip_type_point_pairs)

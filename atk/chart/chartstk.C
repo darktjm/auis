@@ -120,7 +120,7 @@ chartstk::SetDebug( boolean			   state )
   }
 
 class view *
-chartstk::HitChart( register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks )
+chartstk::HitChart( enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
         {
 
   IN(chartstk_HitChart);

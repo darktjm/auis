@@ -58,8 +58,8 @@ static char *helptextview_getstartstring(class helptextview  *self,char  *buf)
       2. portions of the string following the last '/' are to be discarded.
       */
     /* assumes too much */
-    register char *bp;
-    register int i,len;
+    char *bp;
+    int i,len;
     class text *doc = Text(self);
     len = (doc)->GetLength();
     for(i = 0;i < len; i++) if((doc)->GetChar(i) == '`') break;

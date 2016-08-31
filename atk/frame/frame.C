@@ -668,12 +668,12 @@ frame::VisitNamedFile(const char  *filename,
 
 
 /* Create a frame suitable for use as a buffer window. */
-class frame *frame::Create(register class buffer  *buffer)
+class frame *frame::Create(class buffer  *buffer)
         {
 	ATKinit;
 
 
-    register class frame *tempFrame = new frame;
+    class frame *tempFrame = new frame;
 
     (tempFrame)->SetBuffer( buffer, TRUE);
     (tempFrame)->SetCommandEnable( TRUE);

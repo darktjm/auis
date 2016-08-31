@@ -84,7 +84,7 @@ class tree23int *tree23int::Delete()
 }
 long tree23int::Eval()
 {
-    register int i;
+    int i;
     class tree23int *self=this;
     for (i = 0; self != NULL; i+= self->bump, self =  self->parent);
     return i;
@@ -186,7 +186,7 @@ void tree23int::Filter(long  offset, class tree23int  *left, class tree23int  *r
 
 long tree23int::FindL(long  offset, long  key  )
 {
-    register int nKids;
+    int nKids;
     class tree23int *self=this;
     if(self->leaf ) return self->data;
     while (self != NULL)  {
@@ -205,8 +205,8 @@ long tree23int::FindL(long  offset, long  key  )
 
 long tree23int::FindR(long  offset, long  key  )
 {
-    register class tree23int *lastright;
-    register int lastrightx = 0;
+    class tree23int *lastright;
+    int lastrightx = 0;
     class tree23int *self=this;
     if(self->leaf ) return 0;
 
@@ -328,9 +328,9 @@ void tree23int::Update(long  pos, long  size  )
 
 void tree23int::Jam(class tree23int  *newnode  )
 {
-    register class tree23int *tp, *up;
+    class tree23int *tp, *up;
     class tree23int *nroot;
-    register int i;
+    int i;
     int slot, value;
 /*     called to jam a new leaf node under a parent (self)
  */
@@ -543,7 +543,7 @@ long tree23int::NumberOfLeaves()
 }
 void tree23int::Dump(long  offset  )
 {
-    register int i;
+    int i;
 
     printf("%8p (%8p^): ",this,this->parent);
     if(this->leaf) {

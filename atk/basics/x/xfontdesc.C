@@ -157,10 +157,10 @@ static int BestFudgeFactor(long vdpi)
 static struct FontSummary *GetFontSummary(class xfontdesc  *self)
     {
 
-     register struct FontSummary *tsp;
-     register XCharStruct *maxChar;
-     register XFontStruct *fontInfo;
-     register int i;
+     struct FontSummary *tsp;
+     XCharStruct *maxChar;
+     XFontStruct *fontInfo;
+     int i;
 
      tsp = &self->summary;	/* for quick reference */
      /* otherwise DescValid is set to true in LoadAndrewFont   
@@ -779,7 +779,7 @@ xfontdesc::GetRealFontDesc(class graphic  *graphic2)
 long xfontdesc::TextSize(class graphic  *graphic2, const char  * text, long  TextLength, long  * XWidth, long  * YWidth)
                         {
     XFontStruct *font;
-    register long retWidth = 0;
+    long retWidth = 0;
     class xgraphic *graphic=(class xgraphic *)graphic2;
 
     if((graphic = EnsureGraphic(graphic)) == NULL)
@@ -797,8 +797,8 @@ long xfontdesc::TextSize(class graphic  *graphic2, const char  * text, long  Tex
 	XXX the value should depend on which display we are on */
 short *xfontdesc::WidthTable(class graphic  *graphic2)
 		{
-	register XFontStruct *font;
-	register short * fontWidthTable;
+	XFontStruct *font;
+	short * fontWidthTable;
 	int i;
 	class xgraphic *graphic=(class xgraphic *)graphic2;
 
@@ -836,8 +836,8 @@ short *xfontdesc::WidthTable(class graphic  *graphic2)
 short *xfontdesc::HeightTable(class graphic  *graphic2)
 		{
 
-	register XFontStruct *font;
-	register short * fontHeightTable;
+	XFontStruct *font;
+	short * fontHeightTable;
 	int i;
 	class xgraphic *graphic=(class xgraphic *)graphic2;
 
@@ -874,11 +874,11 @@ short *xfontdesc::HeightTable(class graphic  *graphic2)
 	return fontHeightTable;
 }
 
-long xfontdesc::StringSize(class graphic  *graphic2, register const char * string,register long  * XWidth,register long  * YWidth)
+long xfontdesc::StringSize(class graphic  *graphic2, const char * string,long  * XWidth,long  * YWidth)
                     {
 
-    register XFontStruct  *font;
-    register long retWidth = 0;
+    XFontStruct  *font;
+    long retWidth = 0;
     class xgraphic *graphic=(class xgraphic *)graphic2;
 
     if((graphic = EnsureGraphic(graphic)) == NULL)
@@ -894,7 +894,7 @@ long xfontdesc::StringSize(class graphic  *graphic2, register const char * strin
 void xfontdesc::CharSummary(class graphic  * graphic2, char  LookUpChar, struct fontdesc_charInfo  *RetValue)
                 {
 
-	register XFontStruct *font;
+	XFontStruct *font;
 	class xgraphic *graphic=(class xgraphic *)graphic2;
     if (!RetValue) return;
     if((graphic = EnsureGraphic(graphic)) == NULL)
@@ -906,7 +906,7 @@ void xfontdesc::CharSummary(class graphic  * graphic2, char  LookUpChar, struct 
 	/* oh well, we have a 16 bit font and we are screwed.
 	   try to keep going by returning the same size for
 	   everything */
-	register XCharStruct * maxChar = &font->max_bounds;
+	XCharStruct * maxChar = &font->max_bounds;
 	RetValue->width = maxChar->rbearing-maxChar->lbearing;
 	RetValue->height = maxChar->ascent+maxChar->descent;
 	RetValue->xOriginOffset = -(maxChar->lbearing);
@@ -925,7 +925,7 @@ void xfontdesc::CharSummary(class graphic  * graphic2, char  LookUpChar, struct 
 	    RetValue->ySpacing = 0;
 		}
 	else {
-	    register XCharStruct * c = (font->per_char != NULL) 
+	    XCharStruct * c = (font->per_char != NULL) 
 			? &font->per_char[LookUpChar-font->min_char_or_byte2] 
 			: &(font->max_bounds);
 	    RetValue->width = c->rbearing- c->lbearing;

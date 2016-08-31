@@ -71,9 +71,9 @@ static void denumerate(class contentv  *self,long  value);
 static int check(class frame  *fr, struct contentv_cntr  *rock);
 static class frame *getframe(class view  *vw);
 static void destroy(class contentv  *self,long  value);
-static void contentv_MakeContents(register class textview  *self);
+static void contentv_MakeContents(class textview  *self);
 static boolean findframe(class frame  *fr,class buffer  *buf);
-static void contentv_doprint(register class contentv  *self,const char  *type);
+static void contentv_doprint(class contentv  *self,const char  *type);
 static void contentv_PreviewCmd(class contentv  *self);
 static void contentv_PrintCmd(class contentv  *self);
 
@@ -230,7 +230,7 @@ static void destroy(class contentv  *self,long  value)
 	}
     }
 }
-static void contentv_MakeContents(register class textview  *self)
+static void contentv_MakeContents(class textview  *self)
     {
     contentv::MakeWindow(Text(self));
 }
@@ -245,7 +245,7 @@ static boolean findframe(class frame  *fr,class buffer  *buf)
     if((fr)->GetBuffer() == buf) return TRUE;
     return FALSE;
 }
-static void contentv_doprint(register class contentv  *self,const char  *type)
+static void contentv_doprint(class contentv  *self,const char  *type)
 {
     class buffer *bu;
     class frame *fr;

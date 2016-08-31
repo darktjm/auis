@@ -62,7 +62,7 @@ double invcos2();
 FV
 FvAlloc()
 {
-	register FV fv;
+	FV fv;
 	
 	fv = allocate(1, struct fv);
 	fv->y = NewVector(NFEATURES);
@@ -79,9 +79,9 @@ FV fv;
 
 void
 FvInit(fv)
-register FV fv;
+FV fv;
 {
-	register int i;
+	int i;
 
 	fv->npoints = 0;
 	fv->initial_sin = fv->initial_cos = 0.0;
@@ -97,7 +97,7 @@ register FV fv;
 
 void
 FvAddPoint(fv, x, y, t)
-register FV fv; int x, y; long t;
+FV fv; int x, y; long t;
 {
 	double dx1, dy1, magsq1;
 	double th, absth, d;
@@ -177,7 +177,7 @@ register FV fv; int x, y; long t;
 
 Vector
 FvCalc(fv)
-register FV fv;
+FV fv;
 {
 	double bblen, selen, factor;
 

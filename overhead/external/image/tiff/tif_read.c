@@ -51,7 +51,7 @@ static	int TIFFCheckRead();
 #endif
 
 /*VARARGS3*/
-int TIFFReadScanline(register TIFF *tif, u_char *buf, u_int row, u_int sample)
+int TIFFReadScanline(TIFF *tif, u_char *buf, u_int row, u_int sample)
 {
 	int e;
 
@@ -72,9 +72,9 @@ int TIFFReadScanline(register TIFF *tif, u_char *buf, u_int row, u_int sample)
  */
 static int
 /*VARARGS2*/
-TIFFSeek(register TIFF *tif, u_int row, u_int sample)
+TIFFSeek(TIFF *tif, u_int row, u_int sample)
 {
-	register TIFFDirectory *td = &tif->tif_dir;
+	TIFFDirectory *td = &tif->tif_dir;
 	int strip;
 
 	if (row >= td->td_imagelength) {	/* out of range */
@@ -495,7 +495,7 @@ TIFFReadBufferSetup(TIFF *tif, char *bp, u_int size)
  * strip has just been read in.
  */
 static int
-TIFFStartStrip(register TIFF *tif, u_int strip)
+TIFFStartStrip(TIFF *tif, u_int strip)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 
@@ -511,7 +511,7 @@ TIFFStartStrip(register TIFF *tif, u_int strip)
  * tile has just been read in.
  */
 static int
-TIFFStartTile(register TIFF *tif, u_int tile)
+TIFFStartTile(TIFF *tif, u_int tile)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 

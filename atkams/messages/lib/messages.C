@@ -1376,7 +1376,7 @@ int countdots(char  *s)
 #endif
 
 void
-messages::ObservedChanged( register class observable  *changed, register long		       change )
+messages::ObservedChanged( class observable  *changed, long		       change )
 {
     (this)->textview::ObservedChanged(changed,change);
     switch(change) {

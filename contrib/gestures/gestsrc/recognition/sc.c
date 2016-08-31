@@ -60,7 +60,7 @@ double exp();
 sClassifier
 sNewClassifier()
 {
-	register sClassifier sc = allocate(1, struct sclassifier);
+	sClassifier sc = allocate(1, struct sclassifier);
 	sc->nfeatures = -1;
 	sc->nclasses = 0;
 	sc->classdope = allocate(MAXSCLASSES, sClassDope);
@@ -70,10 +70,10 @@ sNewClassifier()
 
 void
 sFreeClassifier(sc)
-register sClassifier sc;
+sClassifier sc;
 {
-	register int i;
-	register sClassDope scd;
+	int i;
+	sClassDope scd;
 
 	for(i = 0; i < sc->nclasses; i++) {
 		scd = sc->classdope[i];
@@ -92,11 +92,11 @@ register sClassifier sc;
 
 sClassDope
 sClassNameLookup(sc, classname)
-register sClassifier sc;
-register char *classname;
+sClassifier sc;
+char *classname;
 {
-	register int i;
-	register sClassDope scd;
+	int i;
+	sClassDope scd;
 	static sClassifier lastsc;
 	static sClassDope lastscd;
 
@@ -115,10 +115,10 @@ register char *classname;
 
 static sClassDope
 sAddClass(sc, classname)
-register sClassifier sc;
+sClassifier sc;
 char *classname;
 {
-	register sClassDope scd;
+	sClassDope scd;
 
 	sc->classdope[sc->nclasses] = scd = allocate(1, struct sclassdope);
 	scd->name = recog_scopy(classname);
@@ -131,12 +131,12 @@ char *classname;
 
 void
 sAddExample(sc, classname, y)
-register sClassifier sc;
+sClassifier sc;
 char *classname;
 Vector y;
 {
-	register sClassDope scd;
-	register int i, j;
+	sClassDope scd;
+	int i, j;
 	double nfv[50];
 	double nm1on, recipn;
 
@@ -182,16 +182,16 @@ Vector y;
 
 void
 sDoneAdding(sc)
-register sClassifier sc;
+sClassifier sc;
 {
-	register int i, j;
+	int i, j;
 	int c;
 	int ne, denom;
 	double oneoverdenom;
-	register Matrix s;
-	register Matrix avgcov;
+	Matrix s;
+	Matrix avgcov;
 	double det;
-	register sClassDope scd;
+	sClassDope scd;
 
 	if(sc->nclasses == 0) 
 		recog_error("sDoneAdding: No classes\n");
@@ -258,9 +258,9 @@ double *ap;
 double *dp;
 {
 	double disc[MAXSCLASSES];
-	register int i, maxclass;
+	int i, maxclass;
 	double denom;
-	register sClassDope scd;
+	sClassDope scd;
 	double d;
 
 	if(sc->w == NULL)
@@ -308,10 +308,10 @@ double *dp;
 
 double
 MahalanobisDistance(v, u, sigma)
-register Vector v, u;
-register Matrix sigma;
+Vector v, u;
+Matrix sigma;
 {
-	register i;
+	int i;
 	static Vector space;
 	double result;
 
@@ -326,7 +326,7 @@ register Matrix sigma;
 }
 
 FixClassifier(sc, avgcov)
-register sClassifier sc;
+sClassifier sc;
 Matrix avgcov;
 {
 	int i;
@@ -362,9 +362,9 @@ Matrix avgcov;
 }
 
 sDumpClassifier(sc)
-register sClassifier sc;
+sClassifier sc;
 {
-	register sClassIndex c;
+	sClassIndex c;
 
 	printf("\n----Classifier %x, %d features:-----\n", sc, sc->nfeatures);
 	printf("%d classes: ", sc->nclasses);
@@ -385,7 +385,7 @@ FILE *outfile;
 sClassifier sc;
 {
 	int i;
-	register sClassDope scd;
+	sClassDope scd;
 
 	fprintf(outfile, "%d classes\n", sc->nclasses);
 	for(i = 0; i < sc->nclasses; i++) {
@@ -407,8 +407,8 @@ sRead(infile)
 FILE *infile;
 {
 	int i, n;
-	register sClassifier sc;
-	register sClassDope scd;
+	sClassifier sc;
+	sClassDope scd;
 	char buf[100];
 
 	
@@ -437,10 +437,10 @@ FILE *infile;
 
 
 sDistances(sc, nclosest)
-register sClassifier sc;
+sClassifier sc;
 {
-	register Matrix d = NewMatrix(sc->nclasses, sc->nclasses);
-	register int i, j;
+	Matrix d = NewMatrix(sc->nclasses, sc->nclasses);
+	int i, j;
 	double min, max = 0;
 	int n, mi, mj;
 

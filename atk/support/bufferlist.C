@@ -423,7 +423,7 @@ class buffer *bufferlist::GetBufferOnFile(const char  *filename, long  flags)
 
 void bufferlist::GetUniqueBufferName(const char  *proposedName, char  *bufferName, int  nameSize)
 {
-    register int uniquefier, nameLength;
+    int uniquefier, nameLength;
 
     strcpy(bufferName, proposedName);
 

@@ -202,8 +202,8 @@ LOCAL void
 compress_byte (int c)
 /* Accept and compress one 8-bit byte */
 {
-  register hash_int i;
-  register hash_int disp;
+  hash_int i;
+  hash_int disp;
 
   if (first_byte) {		/* need to initialize waiting_code */
     waiting_code = c;
@@ -420,10 +420,10 @@ METHODDEF void
 put_pixel_rows (decompress_info_ptr cinfo, int num_rows,
 		JSAMPIMAGE pixel_data)
 {
-  register JSAMPROW ptr;
-  register long col;
-  register long width = cinfo->image_width;
-  register int row;
+  JSAMPROW ptr;
+  long col;
+  long width = cinfo->image_width;
+  int row;
   
   for (row = 0; row < num_rows; row++) {
     ptr = pixel_data[0][row];

@@ -99,18 +99,18 @@ ATKdefineRegistry(printopts, view, printopts::InitializeClass);
 static struct buttonList *printopts_MakeButton(struct buttonList  *blist, char  *text, observable_fptr function, class view  *object);
 static struct lplist *printopts_MakeLpair(struct lplist  *lpl);
 #endif /* POPTS_USE_SUITE */
-void doValueChange(register class printopts  *self, register class value  *observed, register long  rock, register long  rock2);
-void PrinterSet(register class printopts  *self, register long  rock);
-void printopts_Nop(register class printopts  *self, register long  rock);
-void ResetValues(register class printopts  *self);
+void doValueChange(class printopts  *self, class value  *observed, long  rock, long  rock2);
+void PrinterSet(class printopts  *self, long  rock);
+void printopts_Nop(class printopts  *self, long  rock);
+void ResetValues(class printopts  *self);
 #ifdef POPTS_USE_SUITE
-class view * Control(register class printopts  *self, register class suite  *suite, MISSING_ARGUMENT_TYPE item, register long  object, enum view_MouseAction  action, long  x , long  y , long  clicks);
+class view * Control(class printopts  *self, class suite  *suite, MISSING_ARGUMENT_TYPE item, long  object, enum view_MouseAction  action, long  x , long  y , long  clicks);
 #endif /* POPTS_USE_SUITE */
-void MenuDone(register class printopts  *self, register long  rock);
-void MenuCancel(register class printopts  *self, register long  rock);
-void ApplyValues(register class printopts  *self, register long  rock);
+void MenuDone(class printopts  *self, long  rock);
+void MenuCancel(class printopts  *self, long  rock);
+void ApplyValues(class printopts  *self, long  rock);
 void CreateWindow(class view  *vp, long  rock);
-void DestroyWindow( register class printopts  *self );
+void DestroyWindow( class printopts  *self );
 
 static int CheckType = 0L;
 static int NumberOfChecks;
@@ -400,13 +400,13 @@ printopts::~printopts()
 
     class bpair *checklist, *nextlist;
     class lpair *leftSide = (class lpair*) (this->image)->GetNth(0);
-    register int j;
+    int j;
 #ifndef POPTS_USE_SUITE
     struct buttonList *blist, *next_blist;
     struct lplist *lplist, *next_lplist;
 #endif /* POPTS_USE_SUITE */
-    register class checkv *v;
-    register class value *o;
+    class checkv *v;
+    class value *o;
 
     if(this->keys) delete this->keys;
     if(this->menus) delete this->menus;
@@ -496,7 +496,7 @@ void printopts::PostKeyState(class keystate  *ks)
 }
 
 void 
-printopts::FullUpdate(register enum view_UpdateType   type, register long   left , register long   top , register long   width , register long   height)
+printopts::FullUpdate(enum view_UpdateType   type, long   left , long   top , long   width , long   height)
 {
     struct rectangle r;
     this->OnScreen = (type != view_Remove);
@@ -506,9 +506,9 @@ printopts::FullUpdate(register enum view_UpdateType   type, register long   left
 
     /* Now that we are updating, the views exist, so we can set up those views */
     if (!this->ResourcesPosted) {
-	register int i;
-	register class checkv *v;
-	register class value *o;
+	int i;
+	class checkv *v;
+	class value *o;
 
 	/* Checklist */
 	ResetValues(this);
@@ -562,7 +562,7 @@ printopts::Update( )
 
 
 class view *
-printopts::Hit(register enum view_MouseAction   action, register long   x , register long   y , register long   num_clicks)
+printopts::Hit(enum view_MouseAction   action, long   x , long   y , long   num_clicks)
 {
     (this->image)->Hit( action, x-INSET_X, y-INSET_Y, num_clicks);
     (this)->WantInputFocus( this->printername);
@@ -579,32 +579,32 @@ printopts::DesiredSize( long  width, long  height, enum view_DSpass  pass,
 }
 
 void
-printopts::Print( register FILE    *file, register const char  	  *processor, register const char  	  *format, register boolean  	 level )
+printopts::Print( FILE    *file, const char  	  *processor, const char  	  *format, boolean  	 level )
 {
     /* never print anything */
 }
 
 
 void
-doValueChange(register class printopts  *self, register class value  *observed, register long  rock, register long  rock2)
+doValueChange(class printopts  *self, class value  *observed, long  rock, long  rock2)
 {
     self->values[rock] = (observed)->GetValue();
 }
 
 void
-PrinterSet(register class printopts  *self, register long  rock)
+PrinterSet(class printopts  *self, long  rock)
 {
     strcpy(self->pnamevalue, (self->printername)->GetInput( 80));
 }
 
 /* We use this to override newline self-insert. */
 void
-printopts_Nop(register class printopts  *self, register long  rock)
+printopts_Nop(class printopts  *self, long  rock)
 {
 }
 
 void
-ResetValues(register class printopts  *self)
+ResetValues(class printopts  *self)
 {
     int i;
     char *t;
@@ -645,7 +645,7 @@ ResetValues(register class printopts  *self)
 
 #ifdef POPTS_USE_SUITE
 class view *
-Control(register class printopts  *self, register class suite  *suite, MISSING_ARGUMENT_TYPE item, register long  object, enum view_MouseAction  action, long  x , long  y , long  clicks)
+Control(class printopts  *self, class suite  *suite, MISSING_ARGUMENT_TYPE item, long  object, enum view_MouseAction  action, long  x , long  y , long  clicks)
 {
     if ((action == view_LeftUp) || (action == view_RightUp)) {
 	if(item && (object == suite_ItemObject)) {
@@ -668,7 +668,7 @@ Control(register class printopts  *self, register class suite  *suite, MISSING_A
 #endif /* POPTS_USE_SUITE */
 
 void
-MenuDone(register class printopts  *self, register long  rock)
+MenuDone(class printopts  *self, long  rock)
 {
     ApplyValues(self, 0);
 
@@ -678,7 +678,7 @@ MenuDone(register class printopts  *self, register long  rock)
 }
 
 void
-MenuCancel(register class printopts  *self, register long  rock)
+MenuCancel(class printopts  *self, long  rock)
 {
     int i;
 
@@ -694,7 +694,7 @@ MenuCancel(register class printopts  *self, register long  rock)
 
 
 void
-ApplyValues(register class printopts  *self, register long  rock)
+ApplyValues(class printopts  *self, long  rock)
 {
     int i;
     for (i = 0; i < NumberOfChecks; i++) {
@@ -768,7 +768,7 @@ CreateWindow(class view  *vp, long  rock)
 }   
 
 void
-DestroyWindow( register class printopts  *self )
+DestroyWindow( class printopts  *self )
 {
     class im *pim=self->GetIM();
     if(pim) pim->SetView(NULL);
@@ -777,7 +777,7 @@ DestroyWindow( register class printopts  *self )
 }
 
 void
-printopts::LinkTree( register class view  *parent )
+printopts::LinkTree( class view  *parent )
 {
     (this)->view::LinkTree( parent);
     if(this->image)

@@ -116,7 +116,7 @@ static long backwardSkipJunk(perltext *self, long pos)
 {
     long startcomment;
     while (pos>0) {
-	register int c=(self)->GetChar(pos--);
+	int c=(self)->GetChar(pos--);
 	switch(c) {
 	    case '\n':
 		if ((startcomment=(self)->InCommentStart(pos+1)) > 0)

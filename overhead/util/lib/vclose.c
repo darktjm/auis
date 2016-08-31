@@ -145,7 +145,7 @@ int vclose(int fd)
     SIGSET_TYPE newmask, oldmask;
 #endif /* AFS_ENV */
 
-    register int rc;
+    int rc;
 
 #ifdef AFS_ENV
     DoIoctl(fd);
@@ -176,7 +176,7 @@ int vfclose(FILE *f)
 #ifdef AFS_ENV
     SIGSET_TYPE oldmask, newmask;
 #endif /* AFS_ENV */
-    register int rc;
+    int rc;
 
     /* Barf immediately on NULL arg */
     if (f == NULL) {
@@ -249,7 +249,7 @@ int IsOnVice(int fd)
     struct ViceIoctl dummy;
     auto char CellN[64];
     int Err;
-    register int rc;
+    int rc;
     SIGSET_TYPE oldmask, newmask;
 
     if (!HasCheckedVice) CkVice();

@@ -194,7 +194,7 @@ void proctable::Preload(const char *name) {
 struct proctable_Entry *proctable::Lookup(const char  *name)
 {
     ATKinit;
-    register int hash;
+    int hash;
     hash = HashName(name);
     proctable_Entry *result=LookupHash(name, hash);
     if(result==NULL && !guard) {
@@ -265,7 +265,7 @@ static int ModuleClear(struct proctable_Entry  *pe, const char  *module)
 /* Compute the hash function for this name. */
 static int HashName(const char  *name)
 	{
-	register int hash = 0;
+	int hash = 0;
 
 	while (*name != 0) {
 		hash = hash + isupper(*name)?tolower(*name):*name;

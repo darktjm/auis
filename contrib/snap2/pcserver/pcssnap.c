@@ -190,7 +190,7 @@ char *argv[];
 char *PCS_ExtractStringFromMsg(ip,dst)
 char *ip;
 char **dst;
-{register char *op=SNAP_ExtractStringFromMsg(ip,dst);
+{char *op=SNAP_ExtractStringFromMsg(ip,dst);
 if((*dst)==0) {
     *dst = "";
     fprintf(stderr,"pcserver extacted bogus string\n");

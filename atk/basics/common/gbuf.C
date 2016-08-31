@@ -30,14 +30,14 @@
 
 ATKdefineRegistry(gbuf, ATK, gbuf::InitializeClass);
 
-static void CheckHolds(register class gbuf  *self, register const char  *where);
+static void CheckHolds(class gbuf  *self, const char  *where);
 
 #ifdef TestingOnlyTesting
 void main();
 #endif
 
 
-static void CheckHolds(register class gbuf  *self, register const char  *where)
+static void CheckHolds(class gbuf  *self, const char  *where)
 {
     if (self->holds > 0)
 	fprintf(stderr, 
@@ -75,7 +75,7 @@ gbuf::~gbuf()
 	starting at pos and trying to extend for len
 	length actually gotten is returned in gotlen
 */
-char *gbuf::GetBuffer(register long  pos, register long  len, register long  *gotlen)
+char *gbuf::GetBuffer(long  pos, long  len, long  *gotlen)
 {
     this->holds++;
     *gotlen = this->curlen - pos;
@@ -85,7 +85,7 @@ char *gbuf::GetBuffer(register long  pos, register long  len, register long  *go
 /* gbuf__Insert(self, pos, txt, txtlen)
 	inserts txt (its length is txtlen) into self->buf at pos
 */
-void gbuf::Insert(register long  pos, register char  *txt, register long  txtlen)
+void gbuf::Insert(long  pos, char  *txt, long  txtlen)
 {
     char *tbuf = NULL;
 
@@ -135,7 +135,7 @@ void gbuf::Insert(register long  pos, register char  *txt, register long  txtlen
 /* gbuf__Delete(self, pos, len)
 	deletes the len characters starting at pos from self->buf
 */
-void gbuf::Delete(register long  pos, register long  len)
+void gbuf::Delete(long  pos, long  len)
 {
     CheckHolds(this, "Delete");
     if (len < 0) {
@@ -152,7 +152,7 @@ void gbuf::Delete(register long  pos, register long  len)
     if (pos+len > this->curlen)
 	len = this->curlen - pos;
     if (pos+len < this->curlen) {
-	register long tx = pos + len;
+	long tx = pos + len;
 	memmove(this->buf+pos, this->buf+tx, this->curlen - tx);
     }
     this->curlen -= len;
@@ -166,7 +166,7 @@ void gbuf::Delete(register long  pos, register long  len)
 	Usually gbuf_AppendChar is preferable 
 	Returns the character
 */
-char gbuf::AppendCharacter(register char  c)
+char gbuf::AppendCharacter(char  c)
 {
     char ct = c;
     (this)->Insert( this->curlen, &ct, 1);

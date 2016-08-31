@@ -35,7 +35,7 @@ char *buf;
 int len;
 int timeout;
 {
-  register int rc;
+  int rc;
   do {
     if(dowrite)
     	rc=write(fd,buf,len);	/*write what we can*/
@@ -91,7 +91,7 @@ char *news;
 
 void get_foreign_addr(fd,sin)
 int fd;
-register struct sockaddr_in *sin;
+struct sockaddr_in *sin;
 {
     int sin_len=sizeof(*sin);
     er_ucall(getpeername(fd,sin,&sin_len),("getpeername"));
@@ -112,7 +112,7 @@ int port;
 {
     struct sockaddr_in sin;
     int yes_reuse=1;
-    register int result;
+    int result;
     er_ucall((result=socket(AF_INET,SOCK_STREAM,0)),("socket"));
     er_ucall(setsockopt(result,SOL_SOCKET,SO_REUSEADDR,&yes_reuse,sizeof(yes_reuse)),("setsockopt"));
 
@@ -156,8 +156,8 @@ long get_netaddr(sock)
 }
 
 void get_local_addr(fd,sin)
-register int fd;
-register struct sockaddr_in *sin;
+int fd;
+struct sockaddr_in *sin;
 {
     int sock_len=sizeof(*sin);
     er_ucall(getsockname(fd,sin,&sock_len),("getsockname"));

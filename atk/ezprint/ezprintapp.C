@@ -146,7 +146,7 @@ boolean ezprintapp::ParseArgs (int  argc, const char  **argv)
 /* Since we are non-interactive, everything is done in this function so we
  can handle the args as they come */
 {
-    register int i;
+    int i;
     int ix;
     const char *DocumentName, *c, *printargs, *outputfile;
     FILE *ofile,*f;

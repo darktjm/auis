@@ -58,7 +58,7 @@ Greset()
 
 Gerase()	/* just redraws, assumes XOR */
 {
-	register int i;
+	int i;
 
 	GDEVsets("currentlinetype", "solid");
 	for(i = 0; i < nlines; i++)

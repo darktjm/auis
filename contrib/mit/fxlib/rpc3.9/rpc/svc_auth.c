@@ -66,8 +66,8 @@
  * 
  *	enum auth_stat
  *	flavorx_auth(rqst, msg)
- *		register struct svc_req *rqst; 
- *		register struct rpc_msg *msg;
+ *		struct svc_req *rqst; 
+ *		struct rpc_msg *msg;
  *
  */
 
@@ -105,10 +105,10 @@ static struct {
  */
 enum auth_stat
 _authenticate(rqst, msg)
-	register struct svc_req *rqst;
+	struct svc_req *rqst;
 	struct rpc_msg *msg;
 {
-	register int cred_flavor;
+	int cred_flavor;
 
 	rqst->rq_cred = msg->rm_call.cb_cred;
 	rqst->rq_xprt->xp_verf.oa_flavor = _null_auth.oa_flavor;

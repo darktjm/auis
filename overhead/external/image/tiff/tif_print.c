@@ -112,7 +112,7 @@ static const char *orientNames[] = {
 void
 TIFFPrintDirectory(TIFF *tif, FILE *fd, long flags)
 {
-	register TIFFDirectory *td;
+	TIFFDirectory *td;
 	const char *sep;
 	int i, j;
 	long n;

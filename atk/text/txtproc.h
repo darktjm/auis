@@ -23,7 +23,7 @@
 extern boolean ConfirmReadOnly(class textview *self);
 extern long textview_LookCmd(ATK *self, long c);
 extern void InitializeMod();
-extern int charType(register char  c);
+extern int charType(char  c);
 extern class keymap *textview_InitEmacsKeyMap();
 extern class keymap *textview_InitViInputModeKeyMap();
 extern class keymap *textview_InitViCommandModeKeyMap();

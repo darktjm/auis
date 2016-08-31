@@ -728,7 +728,7 @@ void ReadRaster(class rasterview  *self, class raster  *ras, char  *filename)
     /* need to use FindFile XXX */
     long readresult = dataobject_OBJECTCREATIONFAILED;
     FILE *f;
-    register int c;
+    int c;
 
     f = fopen(filename, "r");
     if (f == NULL) {
@@ -1044,7 +1044,7 @@ static void ReplaceCommand (class rasterview  *self)
     FILE *pasteFile;
     static const char hdr[] = "\\begindata{raster,";
     const char *hx = hdr;
-    register int c;
+    int c;
 
     pasteFile = ((self)->GetIM())->FromCutBuffer();
 
@@ -1377,7 +1377,7 @@ static void ScaleReplaceCommand(class rasterview  *self)
     FILE *pasteFile;
     static const char hdr[] = "\\begindata{raster,";
     const char *hx = hdr;
-    register int c;
+    int c;
 
     if (ras == NULL || (pix = (ras)->GetPix()) == NULL) return;
 
@@ -1393,7 +1393,7 @@ static void ScaleReplaceCommand(class rasterview  *self)
     if (*hx) 
 	message::DisplayString((class view *)self, 0, "No raster found in cut buffer");
     else {
-	register class raster *RasFromPaste = raster::Create(0,0);
+	class raster *RasFromPaste = raster::Create(0,0);
 	class rasterimage *NewPix;
 	struct rectangle R;
 	long x, y, w, h;
@@ -2036,7 +2036,7 @@ rasterview::~rasterview()
 
 class view * rasterview::GetApplicationLayer()
 {
-    register class scroll *view;
+    class scroll *view;
     view = scroll::CreateScroller(this, scroll_LEFT | scroll_BOTTOM, environ::GetProfile("RasterScrollClass"));
     this->embedded = FALSE;
     this->Shrunken = FALSE;

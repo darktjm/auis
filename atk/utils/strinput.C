@@ -169,7 +169,7 @@ void strinput::ReceiveInputFocus()
 }
 
 void
-strinput::LinkTree( register class view  *parent )
+strinput::LinkTree( class view  *parent )
 {
     (this)->view::LinkTree( parent);
     if(this->textv)

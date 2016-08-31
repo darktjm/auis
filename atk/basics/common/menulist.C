@@ -597,7 +597,7 @@ boolean menulist::NextME(char  **outString, long  *outData, struct proctable_Ent
 class menulist *menulist::NextBeforeMC()
     {
 
-    register class menulist *value;
+    class menulist *value;
 
     if (this->curChainBefore != NULL) {
         value = this->curChainBefore->menulist;
@@ -610,7 +610,7 @@ class menulist *menulist::NextBeforeMC()
 class menulist *menulist::NextAfterMC()
     {
 
-    register class menulist *value;
+    class menulist *value;
 
     if (this->curChainAfter != NULL) {
         value = this->curChainAfter->menulist;

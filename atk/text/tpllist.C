@@ -55,7 +55,7 @@ static void SetGlobalStyleInText(class text  *self);
 
 static struct templatelist *FindTemplate(class stylesheet  *ssptr)
     {
-    register struct templatelist *tPtr;
+    struct templatelist *tPtr;
     
     for (tPtr = tlHead; tPtr != NULL && tPtr->sSheet != ssptr; tPtr = tPtr->next)
         ;
@@ -77,7 +77,7 @@ static struct templatelist *text_AddTemplate(class stylesheet  *ssptr)
 
 static struct templatelist *text_FindTemplateByName(const char  *templateName)
     {
-    register struct templatelist *tPtr;
+    struct templatelist *tPtr;
     
     for (tPtr = tlHead; tPtr != NULL && strcmp(tPtr->sSheet->templateName, templateName) != 0; tPtr = tPtr->next)
         ;
@@ -86,9 +86,9 @@ static struct templatelist *text_FindTemplateByName(const char  *templateName)
 
 static void text_OverrideStyles(class stylesheet  *ssptr, class stylesheet  *templateptr)
         {
-    register int i;
+    int i;
     boolean forcecopy=FALSE;
-    register class style **styles, *overridestyle;
+    class style **styles, *overridestyle;
     if(ssptr->si==templateptr->si) {
 	// The document is already using the same exact template.
 	return;
@@ -243,8 +243,8 @@ long text::ReadTemplate(const char  *templateName, boolean  inserttemplatetext)
 	tlPtr->hasText = ((this)->GetLength() != 0);
 	fclose(fileptr);
 	if (overrideTemplate)  {
-	    register long i;
-	    register class style **styles;
+	    long i;
+	    class style **styles;
 
 	    (this->styleSheet)->SetTemplateName( templateptr->templateName);
 	    text_OverrideStyles(templateptr, this->styleSheet);

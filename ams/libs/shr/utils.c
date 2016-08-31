@@ -79,10 +79,10 @@ SkipWhiteEnds(const char *string, int *rlen)
 }
 
 bone(buf, len)
-register char *buf;
+char *buf;
 int len;
 {
-    register char *s;
+    char *s;
 
     s = buf + len -1;
     while (s >= buf) *s-- = '\377';

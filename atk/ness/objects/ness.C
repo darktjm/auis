@@ -787,7 +787,7 @@ ness::EstablishViews(class view  *child) {
 		textchild = (class view *)child, textsecond = NULL;
 	for ( ; deftext == NULL && textchild != NULL; 
 				textchild = textsecond, textsecond = NULL) {
-		register class view *v;
+		class view *v;
 		/* XXX BOGOSITY ALERT:  scan up tree for parent textview */
 		for (v = textchild; v != NULL; v = v->parent)  {
 			DEBUG(("parent is a %s\n",(v)->GetTypeName()));
@@ -1351,10 +1351,10 @@ LineMsg(class ness  *ness, long  loc , long  len) {
 	long
 ness::printerrors(FILE  *file) {
 
-	register struct errornode *list = (this)->GetErrors();
+	struct errornode *list = (this)->GetErrors();
 	long cnt = 0;
 	while (list != NULL) {
-		register long loc, len, tloc, textend, c;
+		long loc, len, tloc, textend, c;
 		cnt++;
 		loc = (list->where)->GetPos();
 		len = (list->where)->GetLength();

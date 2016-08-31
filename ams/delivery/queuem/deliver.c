@@ -152,7 +152,7 @@ static int getfile(name)
 
 static getstdin()
 {
-    register int fd, size;
+    int fd, size;
 
     inputfile = mktemp("/tmp/qmailXXXXXX");
     Debug(2, ("Temp file is \"%s\"\n", inputfile));
@@ -227,7 +227,7 @@ main(argc, argv)
 
 #ifdef DEBUG
     if (Debugging & 1) {
-	register int i;
+	int i;
 
 	fprintf(stderr, "Input file: %s\n",
 		(inputfile != NIL ? inputfile : "stdin"));
@@ -282,7 +282,7 @@ static void cleanup()
 static void mapdropoffrc(rc)
     int rc;
 {
-    register int severity, status;
+    int severity, status;
 
     if (rc == D_OK) exit(EX_OK);
 
@@ -318,7 +318,7 @@ static void mapdropoffrc(rc)
 
 static NonDaemonMain()
 {
-    register int rc, flags;
+    int rc, flags;
 
     /* Stick NIL at end of addresses */
     addresses[naddresses] = NIL;
@@ -342,9 +342,9 @@ static NonDaemonMain()
 
 static ProcessArguments(argc, argv)
     int argc;
-    register char *argv[];
+    char *argv[];
 {
-    register int i;
+    int i;
 
     addressesfollow = FALSE;
     stdingiven = FALSE;
@@ -360,7 +360,7 @@ static ProcessArguments(argc, argv)
 	if (addressesfollow || *argv[i] != '-')
 	    NewAddress(argv[i]);
 	else {
-	    register char *arg;
+	    char *arg;
 
 	    arg = argv[i];
 	    switch (*++arg) {
@@ -407,7 +407,7 @@ static ProcessArguments(argc, argv)
 /* Address processing */
 
 static NewAddress(addr)
-    register char *addr;
+    char *addr;
 {
     if (naddresses < maxaddresses) {
 	/* There's room for this room */
@@ -418,7 +418,7 @@ static NewAddress(addr)
     /* Need to allocate more room */
     if (addresses == addrstorage) {
 	/* Special case 1st time */
-	register int i;
+	int i;
 
 	addresses = (char **) calloc(maxaddresses+FASTADDRESSES, sizeof(char *));
 	if (addresses == NIL) nostorage("addresses");

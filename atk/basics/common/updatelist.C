@@ -58,8 +58,8 @@ void updatelist::AddTo(class view  *view)
         {
   /* modified to 1) add the view to the end of the list, and 2) remove earlier occurrence of the view from the list */
 
-    register struct updateitem *newui;
-    register struct updateitem *item, *last;
+    struct updateitem *newui;
+    struct updateitem *item, *last;
 
     /* if view appears on list already, remove it */
     for (item = this->updates, last = NULL;  item != NULL;  last = item, item = item->next)

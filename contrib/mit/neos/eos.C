@@ -103,14 +103,14 @@ struct helpRock {
 
 
 ATKdefineRegistry(eos, view, eos::InitializeClass);
-int ReadCourseList(register class eos  *self);
+int ReadCourseList(class eos  *self);
 enum message_CompletionCode CourseComplete(char  *partial, class eos  *self, char  *buffer, int  bufferSize);
 static void CourseHelp(char  *partial, class eos  *self, procedure  HelpWork, long  rock);
 static void SetCourse(class eos  *self, char  *rock);
 static boolean CheckCourse(class eos  *self);
-class papers *StartWindow(register class eos  *self, char  *string, char  *title, int  wdfactor , int  htfactor, boolean  wantframe);
-class turnin *StartTurninWindow(register class eos  *self);
-class pickup *StartPickupWindow(register class eos  *self);
+class papers *StartWindow(class eos  *self, char  *string, char  *title, int  wdfactor , int  htfactor, boolean  wantframe);
+class turnin *StartTurninWindow(class eos  *self);
+class pickup *StartPickupWindow(class eos  *self);
 struct windowlist *LookUpWindow(struct windowlist  *wlist, char  *course);
 void AddWindow(struct windowlist  **wlist, union windows  *window, char  *course);
 void eos_PickUp(class eos  *self, class observable  *triggerer, long  rock);
@@ -129,7 +129,7 @@ void eos_SetDisplay(class eos  *self);
 
 
 int
-ReadCourseList(register class eos  *self)
+ReadCourseList(class eos  *self)
 {
     /* Read the list of available courses */
     /* Returns non-zero if failure */
@@ -287,7 +287,7 @@ static boolean CheckCourse(class eos  *self)
     return TRUE;
 }
 
-class papers *StartWindow(register class eos  *self, char  *string, char  *title, int  wdfactor , int  htfactor, boolean  wantframe)
+class papers *StartWindow(class eos  *self, char  *string, char  *title, int  wdfactor , int  htfactor, boolean  wantframe)
 /* Creates a new 'paper' object on the screen.
    string = title box of window.
    the window is text + scroll + title [+ buttons] + frame
@@ -333,7 +333,7 @@ class papers *StartWindow(register class eos  *self, char  *string, char  *title
     return window;
 }
 
-class turnin *StartTurninWindow(register class eos  *self)
+class turnin *StartTurninWindow(class eos  *self)
 {
     long left, top, width, height;
     class im *im;
@@ -387,7 +387,7 @@ class turnin *StartTurninWindow(register class eos  *self)
     return window;
 }
 
-class pickup *StartPickupWindow(register class eos  *self)
+class pickup *StartPickupWindow(class eos  *self)
 {
     long left, top, width, height;
     class im *im;

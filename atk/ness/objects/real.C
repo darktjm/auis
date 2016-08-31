@@ -171,7 +171,7 @@ realOther(char  op, unsigned char *iar) {
 	union stackelement *NSP = NSPstore;
 	double x;
 	long l;
-	register struct dblstkelt *left ;
+	struct dblstkelt *left ;
 
 	/* check arguments */
 	switch (op) {

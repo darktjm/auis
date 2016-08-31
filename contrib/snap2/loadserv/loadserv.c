@@ -388,10 +388,10 @@ guard_entry_pt aloc_guard()
   return the length of the current input token
   */
 int toklen(astr)
-register char *astr;
+char *astr;
 {
-    register int result=0;
-    register char ch;
+    int result=0;
+    char ch;
     while(((ch= *astr++)>0x20)&&
 	   (ch < 0x7f))
 	result++;
@@ -697,8 +697,8 @@ NETADDR *from;
 stat_packet_t *astat;
 ACTOR_FUNC_PT rcv_func;
 {
-    register int i;
-    register guard_entry_pt scan;
+    int i;
+    guard_entry_pt scan;
     for(i=0,scan=gl.guard_table;i<gl.free_guard;i++,scan++)
 	if(memcmp(from,&scan->addr,sizeof(NETADDR))==0) {
 	    (*rcv_func)(scan,astat);
@@ -768,8 +768,8 @@ void lookup_guard_stat_port()
   */
 void run_actors()
 {
-    register int i;
-    register guard_entry_pt scan;
+    int i;
+    guard_entry_pt scan;
     if(not_yet(gl.time_wake))
 	return;
     /*any actor that runs will set this time down*/
@@ -789,7 +789,7 @@ void run_actors()
   for now just prints ip addresses
       */
 char *pr_netaddr(dst,aaddr)
-register char *dst;
+char *dst;
 NETADDR *aaddr;
 {
     unsigned long myaddr=aaddr->sin_addr.s_addr;
@@ -804,7 +804,7 @@ NETADDR *aaddr;
 /* print a delta time in seconds in human readable form
   */
 char *pr_delta_time(dst,atime)
-register char *dst;
+char *dst;
 long atime;
 {
     int days,hours,mins,secs;
@@ -834,7 +834,7 @@ long atime;
   print an ip address
   */
 char *pr_ipaddr(dst,an_ip)
-register char *dst;
+char *dst;
 unsigned long an_ip;
 {
     NETADDR as_net;
@@ -919,8 +919,8 @@ guard_entry_pt aguard;
 void print_guards_detailed(dfile)
 FILE *dfile;
 {
-    register int i;
-    register guard_entry_pt scan;
+    int i;
+    guard_entry_pt scan;
     if(gl.free_guard==0)
 	fprintf(dfile,"Server pool not defined\n");
     else
@@ -944,7 +944,7 @@ int anerr;
 void print_globals(dfile)
 FILE *dfile;
 {
-    register int i;
+    int i;
     char otbuf[OUTPUT_TOKEN_MAX];
     fprintf(dfile,"loadserv %d.%d internal table dump\n",VER_MAJ,VER_MIN);
     fprintf(dfile,"this loadserv stated at %s",ctime(&gl.time_started));
@@ -1001,7 +1001,7 @@ FILE *dfile;
   Give a short sweet description.
   */
 char *usr_print_guard(dst,aguard)
-register char *dst;
+char *dst;
 guard_entry_pt aguard;
 {
     /* we always know the name*/
@@ -1070,8 +1070,8 @@ int guard_pred(aguard,bguard)
 guard_entry_pt *aguard;
 guard_entry_pt *bguard;
 {
-    register int aval=guard_value(*aguard);
-    register int bval=guard_value(*bguard);
+    int aval=guard_value(*aguard);
+    int bval=guard_value(*bguard);
     if(aval<bval)return -1;
     if(aval>bval)return 1;
     return 0;
@@ -1083,9 +1083,9 @@ guard_entry_pt *bguard;
 void get_sorted_guards(some_guards)
 guard_entry_pt *some_guards;
 {
-    register int i;
-    register guard_entry_pt scan;
-    register guard_entry_pt *out_list;
+    int i;
+    guard_entry_pt scan;
+    guard_entry_pt *out_list;
     out_list=some_guards;
     /*build up the list*/
     for(i=0,scan=gl.guard_table;i<gl.free_guard;i++,scan++)
@@ -1101,7 +1101,7 @@ char *dst;
 guard_entry_pt guard_list[];
 int limit;
 {
-    register int i;
+    int i;
     limit=imin(limit,gl.free_guard);
     for(i=0;i<limit;i++) {
 	dst=usr_print_guard(dst,guard_list[i]);
@@ -1115,7 +1115,7 @@ int limit;
   Order them by how likely a user is to want to go there
   */
 char *print_ordered(dst,limit)
-register char *dst;
+char *dst;
 int limit;	/*maximum number of entries to print*/
 {
     guard_entry_pt sorted_list[NUM_GUARDS];
@@ -1135,7 +1135,7 @@ int limit;	/*maximum number of entries to print*/
   spill our guts to a fill return a short message about how it went
   */
 char *print_all_to_file(dst)
-register char *dst;
+char *dst;
 {
     FILE *outfile;
     unlink(INTERNAL_DUMP_LOCATION);
@@ -1179,8 +1179,8 @@ void wf_look_for_change(awatch)
       */
 void watch_files()
 {
-    register int i;
-    register watch_file_t_pt scan;
+    int i;
+    watch_file_t_pt scan;
     /*if not time yet, then nothing to do*/
     if(not_yet(gl.time_watch))
 	return;

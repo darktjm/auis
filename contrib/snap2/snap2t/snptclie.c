@@ -244,7 +244,7 @@ PRIVATE SwitchParms (cp, msgparms)
 struct ccb *cp;
 SNAP_CPARMS *msgparms;
 {
-    register int temp;
+    int temp;
 
     temp = cp->maxtime;
     cp->maxtime = msgparms->maxtime;

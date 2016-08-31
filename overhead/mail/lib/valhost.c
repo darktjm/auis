@@ -216,10 +216,10 @@ static char *host_addrs[2];
 
 static char *
 anychar(cp, match)
-register char *cp;
+char *cp;
 char *match;
 {
-    register char *mp, c;
+    char *mp, c;
 
     while (c = *cp) {
 	for (mp = match; *mp; mp++)
@@ -235,7 +235,7 @@ static struct hostent *
 nexthtent()
 {
     char *p;
-    register char *cp, **q;
+    char *cp, **q;
 
     if (hostf == NULL && (hostf = fopen(HOSTDB, "r" )) == NULL)
 	return (NULL);
@@ -287,10 +287,10 @@ static struct hostent *
 gettblbyname(name)
 char *name;
 {
-    register struct hostent *p;
-    register char **cp;
+    struct hostent *p;
+    char **cp;
     char lowname[128];
-    register char *lp = lowname;
+    char *lp = lowname;
 
     while (*name)
 	if (isupper(*name))

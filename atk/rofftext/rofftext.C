@@ -266,8 +266,8 @@ static void tclose(class rofftext  *self,Trickle  t)
 
 static int g(class rofftext  *self,Trickle  t)
 {
-    register int c = 0;
-    register struct _trickle *cur = t->t;
+    int c = 0;
+    struct _trickle *cur = t->t;
 
     switch (cur->type) {
         case trickle_File:
@@ -337,7 +337,7 @@ void ung(class rofftext  *self,int  c,Trickle  t)
 }
 #if 0
 {
-    register struct _trickle *cur = t->t;
+    struct _trickle *cur = t->t;
     switch (cur->type) {
         case trickle_File:
             ungetc(c,cur->u.f);
@@ -454,7 +454,7 @@ void tpush(class rofftext  *self,Trickle  t,const char  *filename,FILE  *f,const
 /* munch to end of line */
 static void munch(class rofftext  *self,Trickle  t)
 {
-    register int c;
+    int c;
 
     while ((c = g(self,t)) != '\n' && c != EOF);
     ung(self,'\n',t);
@@ -532,7 +532,7 @@ static void setbase(class rofftext  *self, int  inc	/* up: 1; down: -1 */)
 
 static void getwidth(class rofftext  *self,Trickle  t)
 {
-    register int c,delim = get(self,t); /*read until this */
+    int c,delim = get(self,t); /*read until this */
     int length = 0;
     char temp[16];
 
@@ -548,7 +548,7 @@ static void getwidth(class rofftext  *self,Trickle  t)
 /* get alpha characters up to white space */
 static void getsym(class rofftext  *self, Trickle  t, char  *str)
 {
-    register int c;
+    int c;
     while ((c = g(self,t)) != '\n' && c != EOF) {
 	if ((c >= 'a' && c <= 'z') ||
 	    (c >= 'A' && c <= 'Z') ||
@@ -564,7 +564,7 @@ static void getsym(class rofftext  *self, Trickle  t, char  *str)
 static void dohmove(class rofftext  *self,Trickle  t)
 {
     static BUF Buffer = NULL;
-    register int c,delim = get(self,t);
+    int c,delim = get(self,t);
     int result;
     int i = 0;
     char temp[500];
@@ -592,7 +592,7 @@ static void dohmove(class rofftext  *self,Trickle  t)
 static int munchmove(class rofftext  *self,Trickle  t)
 {
     static BUF Buffer = NULL;
-    register int c,delim = get(self,t);
+    int c,delim = get(self,t);
     int result;
 
     if (Buffer == NULL)
@@ -630,7 +630,7 @@ static void getname(class rofftext  *self,Trickle  t,char  *name)
 
 static int getsize(class rofftext  *self,Trickle  t)
 {
-    register int c,d;
+    int c,d;
 
     c = g(self,t);
     if ((c == '+') || (c == '-')) {
@@ -655,7 +655,7 @@ static int getsize(class rofftext  *self,Trickle  t)
 
 static const char *getregister(class rofftext  *self,Trickle  t)
 {
-    register int c;
+    int c;
     struct reg *r;
     int inc = 0;
     static char temp[32],*ptr;
@@ -791,8 +791,8 @@ void putstring(class rofftext  *self,const char *name,const char *value)
 
 void getarg(class rofftext  *self,Trickle  t,char  *buf,int  n,boolean  copymode)
 {
-    register int c;
-    register int count = 0;
+    int c;
+    int count = 0;
     boolean tmp = self->v_CopyMode;
 
     /* read leading whitespace */
@@ -927,8 +927,8 @@ void DoBreak(class rofftext  *self)
 
 int get(class rofftext  *self,Trickle  t)
 {
-    register int c;
-    register boolean translated = FALSE;
+    int c;
+    boolean translated = FALSE;
     char temp[4];
     self->v_BOL = self->v_NextBOL;
 
@@ -1414,7 +1414,7 @@ static void DoCommand(class rofftext  *self,Trickle  t,char  *name,boolean  br)
 
 void Scan(class rofftext  *self,Trickle  t,const char  *cmd)
 {
-    register int c;
+    int c;
     char temp[3],name[3],*ptr;
 
     DEBUG(1, (stderr, "Scan, cmd=%s\n", cmd));

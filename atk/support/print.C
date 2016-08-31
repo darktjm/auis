@@ -187,7 +187,7 @@ ATKdefineRegistry(print, ATK, print::InitializeClass);
 static void print_sigAlrm();
 #endif /* hp9000s300 */
 static void insert(const char  *src,char  *c);
-static char *shove(register char  *dest,register const char  *search,register const char  *src);
+static char *shove(char  *dest,const char  *search,const char  *src);
 static void normalize(char  *s);
 static void SetPrinterType (char  *printertype, class view *v);
 static int ColorHash(const char  *key);
@@ -229,7 +229,7 @@ static void insert(const char  *src,char  *c)
 	*c++ = *p;
 }
 
-static char *shove(register char  *dest,register const char  *search,register const char  *src)
+static char *shove(char  *dest,const char  *search,const char  *src)
 {   /* shove the string src into dest after the string search */
     int searchlen;
     searchlen = strlen(search);
@@ -245,7 +245,7 @@ static char *shove(register char  *dest,register const char  *search,register co
 
 static void normalize(char  *s)
 {
-    register char *c;
+    char *c;
     for(c = s + strlen(s) - 1; c >= s; c--){
 	if(!isalnum(*c)){
 	    insert("\\",c);

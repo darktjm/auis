@@ -48,7 +48,7 @@ extern int h_errno;
 */
 u_long
 name_to_address(host)
-register char	*host;
+char	*host;
 {
 	if (host == (char *)NULL)
 		return(FAIL);
@@ -63,7 +63,7 @@ register char	*host;
 	if (*host == '[' || isdigit(*host)) {
 		u_long	host_address;
 		char	namebuf[128];
-		register char	*cp = namebuf;
+		char	*cp = namebuf;
 
 		/*
 		** strip brackets [] or anything else we don't want.
@@ -139,7 +139,7 @@ struct in_addr	*host_address;
 u_short	port;
 int	protocol, proto_type;
 {
-	register int	skt;
+	int	skt;
 	struct sockaddr_in	sadr;
 
 	sadr.sin_family = (u_short)AF_INET;	/* Only internet for now */

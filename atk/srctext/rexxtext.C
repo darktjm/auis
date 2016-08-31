@@ -186,7 +186,7 @@ static long unstyledCommentStart(rexxtext *self, long pos)
 static long backwardSkipJunk(rexxtext *self, long pos, boolean skipNewLine)
 {
     while (pos>=0) {
-	register int c=(self)->GetChar(pos--);
+	int c=(self)->GetChar(pos--);
 
 	switch(c) {
 	    case '/':

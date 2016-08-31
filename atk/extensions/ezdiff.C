@@ -75,7 +75,7 @@ static void ezdiff_Start(class view  *v,long  dat);
 
 static class ezdiff *FindBufferDiff(class buffer  *b,int  *which)
 {
-    register class ezdiff *ep;
+    class ezdiff *ep;
     if(b == NULL) return NULL;
     for(ep = firstlink; ep != NULL ; ep = ep->next){
 	if(ep->buf[0] == b){
@@ -116,7 +116,7 @@ static char *getpair(char  *cp,int  *ip)
 static class mark *setmark (int  *ip,class text  *d,int  *pi  ,int  *ppos)
 {
     int spos, len;
-    register int i, pos;
+    int i, pos;
     len = (d)->GetLength();
     pos = *ppos;
     i= *pi;

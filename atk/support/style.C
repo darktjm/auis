@@ -42,14 +42,14 @@ ATK_IMPL("style.H")
 
 
 ATKdefineRegistry(style, ATK, NULL);
-static long CVDots(register long  amt, enum style_Unit  unit);
+static long CVDots(long  amt, enum style_Unit  unit);
 static int style_freeattributes(long  procdata, class Namespace  * curnamespace, int  indexvalue );
 static int style_copyattributes(long  procdata, class Namespace  * curnamespace, int  indexvalue );
 static int style_writeAdditionalAttribute(FILE  *fileptr, class Namespace  * curnamespace, int  indexvalue );
 static long ReadDevice(class style  *self , FILE  *fp );
 
 
-static long CVDots(register long  amt, enum style_Unit  unit)
+static long CVDots(long  amt, enum style_Unit  unit)
 {
     switch (unit) {
         case style_RawDots:
@@ -533,9 +533,9 @@ void style::MergeInto(class style  *dest) {
 
 void style::Copy(class style  *dest)
 {
-    register int i;
-    register char **counterstyle;
-    register struct tabentry *tabchange;
+    int i;
+    char **counterstyle;
+    struct tabentry *tabchange;
 
     (dest)->SetName( this->name);
     (dest)->SetMenuName( this->menuName);
@@ -768,7 +768,7 @@ void style::SetFontFamily(const char  *NewFont)
 
 void style::GetFontFamily(char  *FontName, int  bufsize)
 {
-    register char *s;
+    char *s;
 
     if (this->FontFamily == NULL) {
 	FontName[0] = '\0';
@@ -851,7 +851,7 @@ void style::GetCounterParent(char  *RetrievedParent)
 
 void style::ClearCounterStyles()
 {
-    register int i;
+    int i;
 
     if (this->CounterStyles != NULL) {
 	for (i = 0; i < this->NumCounterStyles; i++) free(this->CounterStyles[i]);
@@ -878,7 +878,7 @@ void style::AddCounterStyle(char  *NewStyle)
 
 void style::GetCounterStyles(long  *RefNumStyles, char  ***RefStyleStrings)
 {
-    register int i;
+    int i;
 
     *RefNumStyles = this->NumCounterStyles;
     *RefStyleStrings = (char **) malloc(this->NumCounterStyles * sizeof(char *));
@@ -937,7 +937,7 @@ void style::AddTabChange(enum style_TabAlignment  TabOp, long  Where, enum style
 
 void style::GetTabChangeList(long  *RefNumTabChanges, struct tabentry  ***RefTabChanges)
 {
-    register int i;
+    int i;
     struct tabentry **Newptr;
 
     if ((*RefNumTabChanges = this->NumTabChanges) == 0)
@@ -1070,7 +1070,7 @@ static int style_writeAdditionalAttribute(FILE  *fileptr, class Namespace  * cur
 
 void style::WriteAttr(FILE  *fp)
 {
-    register int i;
+    int i;
     long numtabchanges, operand;
 
     enum style_Unit unit;
@@ -1356,7 +1356,7 @@ void style::WriteAttr(FILE  *fp)
 
 long style::ReadAttr(FILE  *fp)
 {
-    register int j;
+    int j;
     int c, operand, basis,  newface;
     unsigned int flag;
 

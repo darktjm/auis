@@ -158,7 +158,7 @@ int readscr::PrintFile(char  *filename , class textview  *tv, class text  *d, co
 /* ** textfix - reads chars in and handles them appropriately ** */
 static int textfix(class text  *d, int  len)
 {
-    register int i, tmp;
+    int i, tmp;
 
     tmp = (d)->GetChar( (CurPos + Offset));
     while ((CurPos < len) /* && (tmp != -1) */) {
@@ -285,7 +285,7 @@ static void linefix(class text  *d)
 /* ** scribefix - deal with @commands ** */
 static int scribefix(class text  *d)
 {
-    register int i, next, lowernext;
+    int i, next, lowernext;
     char shortcommand[STRINGSIZE], realstring[STRINGSIZE];
 
     i = 0;
@@ -339,9 +339,9 @@ static int scribefix(class text  *d)
 /* ** longscribe - deal with @begin and @end scribe environments ** */
 static int longscribe(class text  *d, char  *shortcommand)
 {
-    register int i;
+    int i;
     class style *tempstyle;
-    register int next, delim, delim2;
+    int next, delim, delim2;
     char longcommand[STRINGSIZE], dstr[2], dstr2[2], sname[STRINGSIZE];
 
     i = 0;

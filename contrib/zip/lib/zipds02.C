@@ -124,24 +124,24 @@ END-SPECIFICATION  ************************************************************/
 #define	 Data			      (this)
 #define	 Objects(i)		    ((self->objects)[i])
 
-long zip_Enparse_Stream( register class zip		      *self, register struct zip_stream	      *stream );
-static int Write_Inferior_Image( register class zip		      *self, register zip_type_image	       image );
-static int Write_Image_Beginning( register class zip		      *self, register zip_type_image	       image );
-static int Write_Image_Ending( register class zip		      *self, register zip_type_image	       image );
+long zip_Enparse_Stream( class zip		      *self, struct zip_stream	      *stream );
+static int Write_Inferior_Image( class zip		      *self, zip_type_image	       image );
+static int Write_Image_Beginning( class zip		      *self, zip_type_image	       image );
+static int Write_Image_Ending( class zip		      *self, zip_type_image	       image );
 
 
 long
-zip::Write_Figure( register struct zip_figure	      *figure )
+zip::Write_Figure( struct zip_figure	      *figure )
       {
-  register int			     i, status = zip_ok;
-  register FILE			     *file =
+  int			     i, status = zip_ok;
+  FILE			     *file =
 	figure->zip_figure_image->zip_image_stream->zip_stream_file;
   static char			     horizontal[2] = "?",
 				     vertical[2]   = "?",
 				     halo[2]       = "?";
-  register int			     pseudo_x=0, pseudo_y=0;
-  register char			    *p;
-  register short		    c;
+  int			     pseudo_x=0, pseudo_y=0;
+  char			    *p;
+  short		    c;
 
   IN(zip::Write_Figure);
   if ( ! figure->zip_figure_state.zip_figure_state_deleted )
@@ -263,11 +263,11 @@ zip::Write_Figure( register struct zip_figure	      *figure )
   }
 
 long
-zip_Enparse_Stream( register class zip		      *self, register struct zip_stream	      *stream )
+zip_Enparse_Stream( class zip		      *self, struct zip_stream	      *stream )
       {
-  register int			      status = zip_ok;
-  register zip_type_image	      image = stream->zip_stream_image_anchor;
-  register zip_type_figure	      figure = image->zip_image_figure_anchor;
+  int			      status = zip_ok;
+  zip_type_image	      image = stream->zip_stream_image_anchor;
+  zip_type_figure	      figure = image->zip_image_figure_anchor;
   
   IN(zip_Enparse_Stream);
   if ( ! (image->zip_image_state.zip_image_state_deleted  ||
@@ -290,10 +290,10 @@ zip_Enparse_Stream( register class zip		      *self, register struct zip_stream	
   }
 
 static int
-Write_Inferior_Image( register class zip		      *self, register zip_type_image	       image )
+Write_Inferior_Image( class zip		      *self, zip_type_image	       image )
       {
-  register int			      status = zip_ok;
-  register zip_type_figure	      figure = image->zip_image_figure_anchor;
+  int			      status = zip_ok;
+  zip_type_figure	      figure = image->zip_image_figure_anchor;
   
   IN(Write_Inferior_Image);
   if ( ! image->zip_image_state.zip_image_state_deleted )
@@ -314,13 +314,13 @@ Write_Inferior_Image( register class zip		      *self, register zip_type_image	 
   }
 
 static int
-Write_Image_Beginning( register class zip		      *self, register zip_type_image	       image )
+Write_Image_Beginning( class zip		      *self, zip_type_image	       image )
       {
-  register FILE			     *file =
+  FILE			     *file =
 	image->zip_image_stream->zip_stream_file;
-  register int			      status = zip_ok, new_line = 0;
-  register short			c;
-  register char				*p;
+  int			      status = zip_ok, new_line = 0;
+  short			c;
+  char				*p;
 
   IN(Write_Image_Beginning);
   fprintf( file, "{" );
@@ -410,11 +410,11 @@ Write_Image_Beginning( register class zip		      *self, register zip_type_image	
   }
 
 static int
-Write_Image_Ending( register class zip		      *self, register zip_type_image	       image )
+Write_Image_Ending( class zip		      *self, zip_type_image	       image )
       {
-  register FILE			     *file =
+  FILE			     *file =
 	image->zip_image_stream->zip_stream_file;
-  register int			      status = zip_ok, new_line = 0;
+  int			      status = zip_ok, new_line = 0;
 
   IN(Write_Image_Ending);
   fprintf( file, "}" );

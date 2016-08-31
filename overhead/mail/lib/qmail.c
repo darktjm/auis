@@ -165,8 +165,8 @@ char Qmail_ErrMsg[2*MAXPATHLEN];
 #define MAXRETRIES  10
 
 static void quote(s, f)
-register char *s;
-register FILE *f;
+char *s;
+FILE *f;
 {
     fputc('|', f);
 
@@ -186,7 +186,7 @@ static int writesf(name, tolist, returnpath, auth, enq, forstr)
 char *name, *tolist[], *returnpath, *auth, *forstr; int enq;
 {
     FILE *f;
-    register int rc, i;
+    int rc, i;
 
     /* Try to open the shadow file */
     rc = create(name, &f, "shadow", 0400);
@@ -213,11 +213,11 @@ char *name, *tolist[], *returnpath, *auth, *forstr; int enq;
 
 static int writeqf(name, file, host)
 char *name;
-register int file;
+int file;
 char *host;
 {
     FILE *f;
-    register int rc, bufsize;
+    int rc, bufsize;
     struct stat buf;
     char buffer[8192];
 
@@ -244,7 +244,7 @@ char *host;
     bufsize = sizeof buffer;
 #endif /* #ifndef AIX */
     for (;;) {
-	register int n;
+	int n;
 
 	n = read(file, buffer, bufsize);
 	if (n < 0) {
@@ -271,7 +271,7 @@ static int writegf(name)
 char *name;
 {
     FILE *f;
-    register int rc;
+    int rc;
 
 /* create in mode 0600, not 0400, so POSIX-compliant readers can flock/lockf the file */
     rc = create(name, &f, "go", 0600);
@@ -285,7 +285,7 @@ char *returnpath, *auth, *forstr;
 {
     static bool virgin = TRUE;
     static char host[200];
-    register int i, rc;
+    int i, rc;
     bool rewind;
 
     /* Check parameters */
@@ -373,8 +373,8 @@ int file, enq, holduntil;
 char *returnpath, *auth, *forstr, *dirname, *pfx, *Cell;
 {
     int start, q, rc = 0;
-    register DIR *dirp = NIL;
-    register DIRENT_TYPE *dp;
+    DIR *dirp = NIL;
+    DIRENT_TYPE *dp;
     static char oldDirName[200] = {0377, '\0'}, oldPfx[30] = {0377, '\0'};
     static int oldDirMatch = -1;
     char ThisDir[MAXPATHLEN+1];
@@ -536,7 +536,7 @@ char *name, *filekind;
 FILE **f;
 int mode;
 {
-    register int fd;
+    int fd;
 
     fd = open(name, O_CREAT|O_WRONLY, mode);
     if (fd < 0)

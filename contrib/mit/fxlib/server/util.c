@@ -28,8 +28,8 @@ U */
 valid_course_name(s)
     char *s;
 {
-    register char *ptr;
-    register short cc=0;		/* character count */
+    char *ptr;
+    short cc=0;		/* character count */
 
     if (!*s || *s == '.')
 	return 0;
@@ -51,8 +51,8 @@ valid_course_name(s)
 valid_filename(s)
     char *s;
 {
-    register char *ptr;
-    register short cc=0;
+    char *ptr;
+    short cc=0;
 
     for (ptr=s; *ptr; ptr++, cc++)
 	if (*ptr == '/' || cc > 128)
@@ -97,7 +97,7 @@ is_god()
 contains_wildcard(paper)
     Paper *paper;
 {
-  register char *s;
+  char *s;
 
   /* Don't allow control characters, esp \001 which could be used
    * to fake database entries.  The error message being about

@@ -45,7 +45,7 @@ atomlist::atomlist()
 
 atomlist::~atomlist()
 {
-    register struct atoms *next;
+    struct atoms *next;
 
     while (this->atoms != NULL) {
 	next = this->atoms->next;
@@ -58,7 +58,7 @@ atomlist::~atomlist()
 class atomlist *atomlist::Copy(class atomlist  *oldlist)
 {
     class atomlist *newlist = new atomlist;
-    register struct atoms *atoms;
+    struct atoms *atoms;
 
     for (atoms = oldlist->atoms; atoms != NULL; atoms = atoms->next)
         (newlist)->Append( atoms->atom);
@@ -100,7 +100,7 @@ class atomlist *atomlist::StringToAtomlist(const char  *string)
 
 class atom *atomlist::Last()
 {
-    register struct atoms *atoms;
+    struct atoms *atoms;
 
     for (atoms = this->atoms; atoms != NULL && atoms->next != NULL; atoms = atoms->next)
         ;
@@ -111,7 +111,7 @@ class atom *atomlist::Last()
 
 short atomlist::Memberp(class atom  *key)
 {
-    register struct atoms *atoms;
+    struct atoms *atoms;
 
     for (atoms = this->atoms; atoms != NULL && atoms->atom != key; atoms = atoms->next)
         ;
@@ -131,7 +131,7 @@ void atomlist::DropFirst()
 
 void atomlist::Prepend(class atom  *atom)
 {
-    register struct atoms *atoms;
+    struct atoms *atoms;
 
     atoms = (struct atoms *) malloc(sizeof(struct atoms));
 
@@ -142,8 +142,8 @@ void atomlist::Prepend(class atom  *atom)
 
 void atomlist::Append(class atom  *atom)
 {
-    register struct atoms *new_c;
-    register struct atoms **last;
+    struct atoms *new_c;
+    struct atoms **last;
 
     new_c = (struct atoms *) malloc(sizeof(struct atoms));
     new_c->atom = atom;
@@ -158,8 +158,8 @@ void atomlist::Append(class atom  *atom)
 
 void atomlist::JoinToEnd(class atomlist  *otherlist)
 {
-    register struct atoms *otherAtoms;
-    register struct atoms **last;
+    struct atoms *otherAtoms;
+    struct atoms **last;
 
     for (last = &(this->atoms); *last != NULL; last = &((*last)->next))
         ;
@@ -174,9 +174,9 @@ void atomlist::JoinToEnd(class atomlist  *otherlist)
 
 void atomlist::JoinToBeginning(class atomlist  *otherlist)
 {
-    register struct atoms *otherAtoms;
-    register struct atoms **last;
-    register struct atoms *temp;
+    struct atoms *otherAtoms;
+    struct atoms **last;
+    struct atoms *temp;
 
     last = &(this->atoms);
 
@@ -191,7 +191,7 @@ void atomlist::JoinToBeginning(class atomlist  *otherlist)
 
 void atomlist::Cut(struct atoms  *mark)
 {
-    register struct atoms *next;
+    struct atoms *next;
 
     while (this->atoms != mark && this->atoms != NULL)  {
 	next = this->atoms->next;

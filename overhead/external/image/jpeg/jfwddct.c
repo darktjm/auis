@@ -160,7 +160,7 @@ j_fwd_dct (DCTBLOCK data)
   INT32 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
   INT32 tmp10, tmp11, tmp12, tmp13;
   INT32 z1, z2, z3, z4, z5;
-  register DCTELEM *dataptr;
+  DCTELEM *dataptr;
   int rowctr;
   SHIFT_TEMPS
 

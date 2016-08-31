@@ -61,12 +61,12 @@ static FILE *outf;	/* to avoid passing 'file' to two PutXxxx functions */
 
 	
 ATKdefineRegistry(paint, ATK, NULL);
-static void PutSame(register unsigned char byte, register long  count);
-static void PutDiffer(register unsigned char *start, register long  length);
+static void PutSame(unsigned char byte, long  count);
+static void PutDiffer(unsigned char *start, long  length);
 
 
 static void
-PutSame(register unsigned char byte, register long  count)
+PutSame(unsigned char byte, long  count)
 		{
 	while (count > 129) 
 		putc(257-129, outf), putc(byte, outf), count -= 129;
@@ -74,10 +74,10 @@ PutSame(register unsigned char byte, register long  count)
 }
 
 	static void
-PutDiffer(register unsigned char *start, register long  length)
+PutDiffer(unsigned char *start, long  length)
 		{
 	while (length > 0) {
-		register long tlength = (length>128) ? 128 : length;
+		long tlength = (length>128) ? 128 : length;
 		putc(tlength-1, outf);
 		while (tlength-- > 0)
 			putc((*start++), outf);
@@ -99,14 +99,14 @@ PutDiffer(register unsigned char *start, register long  length)
 		This code is virtually identical to that in plusspc.c.
 */
 	void
-paint::WriteRow(FILE  *file, register unsigned char *byteaddr, long  nbits)
+paint::WriteRow(FILE  *file, unsigned char *byteaddr, long  nbits)
 				{
-	register enum state {SameBytes, Differ, Differ1} CurSt;
-	register unsigned char thischar;	/* current input char */
-	register unsigned char prevchar;	/* previous char in differing string */
+	enum state {SameBytes, Differ, Differ1} CurSt;
+	unsigned char thischar;	/* current input char */
+	unsigned char prevchar;	/* previous char in differing string */
 	unsigned char *startstring;	/* start of a string of differing bytes */
-	register long samecount = 0;	/* count occurrences of samechar */
-	register long nbytes = (nbits+7)>>3;
+	long samecount = 0;	/* count occurrences of samechar */
+	long nbytes = (nbits+7)>>3;
 
 	outf = file;
 	CurSt = Differ;
@@ -169,17 +169,17 @@ paint::WriteRow(FILE  *file, register unsigned char *byteaddr, long  nbits)
 	returns status as in dataobj.H
 */
 	long
-paint::ReadRow(register FILE  *file			/* where to get bytes from */, register unsigned char *row		/* where to put them */, register long  length		/* how many bits in row must be filled */)
+paint::ReadRow(FILE  *file			/* where to get bytes from */, unsigned char *row		/* where to put them */, long  length		/* how many bits in row must be filled */)
 				{
-	register long sofar;		/* length unpacked so far */
+	long sofar;		/* length unpacked so far */
 	int retval = dataobject_NOREADERROR;	/* no error so far */
 
 	unsigned char savebyte = *(row+((length+7)>>3)-1);	/* save last byte */
 
 	sofar = 0;
 	while (sofar < length)	{
-		register int curr = getc(file);
-		register int databyte = 0;
+		int curr = getc(file);
+		int databyte = 0;
 		if (curr == EOF) {
 			retval = dataobject_PREMATUREEOF;
 			break;
@@ -218,8 +218,8 @@ paint::ReadRow(register FILE  *file			/* where to get bytes from */, register un
 
 	if (length & 0x7) {
 		/* fix the last byte if length is not a multiple of 8 bits */
-		register long mask = masks[length & 0x7];
-		register unsigned char *loc = row+((length+7)>>3)-1;
+		long mask = masks[length & 0x7];
+		unsigned char *loc = row+((length+7)>>3)-1;
 		*loc = (*loc & mask) | (savebyte & ~mask);
 	}
 	return retval;
@@ -235,8 +235,8 @@ paint::ReadRow(register FILE  *file			/* where to get bytes from */, register un
 	long
 paint::ReadImage(FILE  *file, class pixelimage  *pix)
 			{
-	register unsigned char *where;	/* where to store next row */
-	register long row;		/* count rows */
+	unsigned char *where;	/* where to store next row */
+	long row;		/* count rows */
 	long status = dataobject_NOREADERROR;
 
 	(pix)->Resize( PAINTWIDTH, PAINTHEIGHT);

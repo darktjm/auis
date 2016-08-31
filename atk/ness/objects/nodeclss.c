@@ -89,8 +89,8 @@ int main(int argc, char **argv);
 
 	static void 
 SkipComment() {
-	register c;
-	register boolean SawStar = FALSE;
+	int c;
+	boolean SawStar = FALSE;
 	putc('*', outf);
 	while ((c=getc(inf)) != EOF)  {
 		putc(c, outf);
@@ -102,7 +102,7 @@ SkipComment() {
 
 	static void
 SkipString(char  d	/* the close delimiter */) {
-	register c;
+	int c;
 	putc(d, outf);	/* open the string */
 	while ((c=getc(inf)) != d)  {
 		putc(c, outf);
@@ -126,8 +126,8 @@ PutToken()  {
 */
 	static boolean
 GetToken() {
-	register int c;
-	register char *cx;
+	int c;
+	char *cx;
 	while ((c = getc(inf)) != EOF)  {
 		if (isspace(c)) putc(c, outf);
 		else if (isalpha(c)) {

@@ -313,7 +313,7 @@ void pianoV::DrawNewValue( )
 class valueview * pianoV::DoHit( enum view_MouseAction  type,long  x,long  y,long  hits )
 {
     class value *tt = (this)->Value();
-    register int tmp,v,m;
+    int tmp,v,m;
     switch(type){
 	case view_LeftDown:
 	    v = (tt)->GetValue();

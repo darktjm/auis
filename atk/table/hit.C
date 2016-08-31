@@ -41,16 +41,16 @@
 
 static boolean debug=FALSE;
 
-static void movecoldown (register class spread  * V, int      x , int      y, Chunk  chunk);
-static void movecolmove (register class spread  * V, int      x  , int      y);
-static void movecolup (register class spread  * V, int      x  , int      y);
-static void movecolcancel (register class spread  * V);
-static void moverowdown (register class spread  * V, int      x  , int      y, Chunk  chunk);
-static void moverowmove (register class spread  * V, int      x , int      y);
-static void moverowup (register class spread  * V, int      x  , int      y);
-static void moverowcancel (register class spread  * V);
-static boolean IsNotSeparator (register char  ch);
-static void EnterCellName (register class spread  * V, Chunk  chunk);
+static void movecoldown (class spread  * V, int      x , int      y, Chunk  chunk);
+static void movecolmove (class spread  * V, int      x  , int      y);
+static void movecolup (class spread  * V, int      x  , int      y);
+static void movecolcancel (class spread  * V);
+static void moverowdown (class spread  * V, int      x  , int      y, Chunk  chunk);
+static void moverowmove (class spread  * V, int      x , int      y);
+static void moverowup (class spread  * V, int      x  , int      y);
+static void moverowcancel (class spread  * V);
+static boolean IsNotSeparator (char  ch);
+static void EnterCellName (class spread  * V, Chunk  chunk);
 
 boolean CompareChunk(Chunk  to, Chunk  from)
 {
@@ -85,7 +85,7 @@ void spread_ComputeAnchorOffsets(class spread *V, struct rectangle *rect) {
     }
 }
 
-void SetCurrentCell (register class spread  * V, register Chunk  chunk, boolean expose)
+void SetCurrentCell (class spread  * V, Chunk  chunk, boolean expose)
 {
     if (debug)
 	printf("SetCurrentCell(%d..%d, %d..%d)\n", chunk->LeftCol, chunk->RightCol, chunk->TopRow, chunk->BotRow);
@@ -112,7 +112,7 @@ void SetCurrentCell (register class spread  * V, register Chunk  chunk, boolean 
 }
 
 
-void extendCurrentCell(register class spread  * V, register Chunk  chunk)
+void extendCurrentCell(class spread  * V, Chunk  chunk)
 {
     int x0, x1, y0, y1, x2, y2, x3, y3;
 
@@ -184,13 +184,13 @@ void extendCurrentCell(register class spread  * V, register Chunk  chunk)
 
 /* Handle mouse hit */
 
-class view * MouseHit (register class spread  * V, enum view_MouseAction  action, long  x , long  y, long  numberOfClicks		/* how should i use this?? */)
+class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x , long  y, long  numberOfClicks		/* how should i use this?? */)
 {
     struct chunk chunk;
     struct cell * hitcell;
     struct chunk extendedchunk;
-    register int i;
-    register int xx, yy;
+    int i;
+    int xx, yy;
     class view * result;
     class view * child;
 
@@ -361,7 +361,7 @@ class view * MouseHit (register class spread  * V, enum view_MouseAction  action
 }
 
 
-static void movecoldown (register class spread  * V, int      x , int      y, Chunk  chunk)
+static void movecoldown (class spread  * V, int      x , int      y, Chunk  chunk)
 {
     int index;
 
@@ -382,7 +382,7 @@ static void movecoldown (register class spread  * V, int      x , int      y, Ch
     }
 }
 
-static void movecolmove (register class spread  * V, int      x  , int      y)
+static void movecolmove (class spread  * V, int      x  , int      y)
 {
     if (debug)
 	printf("movecolmove\n");
@@ -393,7 +393,7 @@ static void movecolmove (register class spread  * V, int      x  , int      y)
     spread_InvertRectangle (V, V->currentoffset, V->icy, V->icx - V->currentoffset, 2);
 }
 
-static void movecolup (register class spread  * V, int      x  , int      y)
+static void movecolup (class spread  * V, int      x  , int      y)
 {
     movecolcancel (V);
     (MyTable(V))->ChangeThickness ( COLS, V->currentslice,
@@ -401,7 +401,7 @@ static void movecolup (register class spread  * V, int      x  , int      y)
     (V->parent)->WantNewSize( V);
 }
 
-static void movecolcancel (register class spread  * V)
+static void movecolcancel (class spread  * V)
 {
     if (debug)
 	printf("movecolcancel\n");
@@ -410,7 +410,7 @@ static void movecolcancel (register class spread  * V)
     spread_InvertRectangle (V, V->currentoffset, V->icy, V->icx - V->currentoffset, 2);
 }
 
-static void moverowdown (register class spread  * V, int      x  , int      y, Chunk  chunk)
+static void moverowdown (class spread  * V, int      x  , int      y, Chunk  chunk)
 {
     int index;
 
@@ -433,7 +433,7 @@ static void moverowdown (register class spread  * V, int      x  , int      y, C
 }
 
 
-static void moverowmove (register class spread  * V, int      x , int      y)
+static void moverowmove (class spread  * V, int      x , int      y)
 {
     if (debug)
 	printf("moverowmove\n");
@@ -444,7 +444,7 @@ static void moverowmove (register class spread  * V, int      x , int      y)
     spread_InvertRectangle (V, V->icx, V->currentoffset, 2, V->icy - V->currentoffset);
 }
 
-static void moverowup (register class spread  * V, int      x  , int      y)
+static void moverowup (class spread  * V, int      x  , int      y)
 {
     if (debug)
 	printf("moverowup\n");
@@ -453,7 +453,7 @@ static void moverowup (register class spread  * V, int      x  , int      y)
     (V->parent)->WantNewSize( V);
 }
 
-static void moverowcancel (register class spread  * V)
+static void moverowcancel (class spread  * V)
 {
     if (debug)
 	printf("moverowcancel\n");
@@ -464,7 +464,7 @@ static void moverowcancel (register class spread  * V)
 
 /* Get the formula of a cell */
 
-void GetFormula (register class spread  * V, register Chunk  chunk, char  **keybuff)
+void GetFormula (class spread  * V, Chunk  chunk, char  **keybuff)
 {
     if (debug)
 	printf("GetFormula entered\n");
@@ -482,7 +482,7 @@ void GetFormula (register class spread  * V, register Chunk  chunk, char  **keyb
 
 /* true if character is not a separator */
 
-static boolean IsNotSeparator (register char  ch)
+static boolean IsNotSeparator (char  ch)
 {
     return (ch != '=' && ch != '+' && ch != '-' && ch != '*' && ch != '^' && ch != '/' && ch != ':' && ch != ',' && ch != '(' && ch != '[');
 }
@@ -491,7 +491,7 @@ static boolean IsNotSeparator (register char  ch)
 
 Note that this routine is useful only if bufferstatus = BUFFERHASINPUT
  */
-static void EnterCellName (register class spread  * V, Chunk  chunk)
+static void EnterCellName (class spread  * V, Chunk  chunk)
 {
     char buf[10], rbuf[5], cbuf[5];
     int i;
@@ -528,7 +528,7 @@ static void EnterCellName (register class spread  * V, Chunk  chunk)
 }
 
 
-void TellFormula (register class spread  * V)
+void TellFormula (class spread  * V)
 {
     char *keybuff;
 
@@ -545,7 +545,7 @@ void TellFormula (register class spread  * V)
 
 
 /* reset current working cell */
-void ResetCurrentCell (register class spread  * V)
+void ResetCurrentCell (class spread  * V)
 {
     struct chunk topleft;
 

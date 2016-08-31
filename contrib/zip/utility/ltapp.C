@@ -58,7 +58,7 @@ ltapp::ltapp( )
 }
 
 boolean
-ltapp::ParseArgs( register int  argc, register const char **argv )
+ltapp::ParseArgs( int  argc, const char **argv )
 {
     IN(ltapp_ParseArgs);
     (this)->application::ParseArgs(argc, argv);

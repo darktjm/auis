@@ -53,7 +53,7 @@ main(argc, argv)
     int argc;
     char *argv[];
 {
-    register int i, nrecps;
+    int i, nrecps;
 
     nrecps = 0;
     ignoredots = FALSE;
@@ -61,7 +61,7 @@ main(argc, argv)
     CheckAMSConfiguration();
     /* Process arguments */
     for (i=1; argv[i] != NIL; i++) {
-	register char *arg;
+	char *arg;
 
 	arg = argv[i];
 	switch (*arg) {
@@ -109,10 +109,10 @@ static deliver(argv, nrecps)
     int nrecps;
 {
     char **qargs;
-    register FILE *qmail;
-    register bool lookfordot;
-    register int i, q;
-    register int chk_date = 0;
+    FILE *qmail;
+    bool lookfordot;
+    int i, q;
+    int chk_date = 0;
 
     /* Get space for args */
     /* Allow space for arg[0], -i & NIL */
@@ -143,7 +143,7 @@ static deliver(argv, nrecps)
 
     lookfordot = FALSE;
     for (;;) {
-	register int c;
+	int c;
 
 	c = getchar();
 	switch (c) {
@@ -245,8 +245,8 @@ static postmaster(argv, problem)
     char *argv[], *problem;
 {
     static char *args[] = { "queuemail", "-i", NIL, NIL }; 
-    register FILE *fout;
-    register int i;
+    FILE *fout;
+    int i;
 
     args[2] = PostmasterTitle;
     fout = qopen(queuemail, args, "w");

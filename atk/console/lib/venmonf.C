@@ -189,7 +189,7 @@ void CheckMariner(FILE  *ActiveVenus, char  *rock)
 #ifdef AFS_ENV
     static char buf[MARINERBUFSIZE];
     static char *fillptr = buf;
-    register int c;
+    int c;
 
     mydbg(("entering: CheckMariner\n"));
     if(!NonViceHost){

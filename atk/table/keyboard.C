@@ -42,37 +42,37 @@
 
 static boolean debug=FALSE;
 
-void k_SetMessageState (register class spread  * V, int  newstate);
-void k_TellUser (register class spread  * V, const char    *s);
-boolean k_AskUser (register class spread  * V, const char  prompt[], const char  def[], char  buff[], int  n);
-boolean k_AreYouSure (register class spread  * V, const char  *why);
-boolean k_WantToDiscard (register class spread  * V);
+void k_SetMessageState (class spread  * V, int  newstate);
+void k_TellUser (class spread  * V, const char    *s);
+boolean k_AskUser (class spread  * V, const char  prompt[], const char  def[], char  buff[], int  n);
+boolean k_AreYouSure (class spread  * V, const char  *why);
+boolean k_WantToDiscard (class spread  * V);
 #ifdef NOTUSED
-static void k_exit(register class spread  * V, char  ch);
+static void k_exit(class spread  * V, char  ch);
 #endif /* NOTUSED */
-void AddRows(register class spread  * V, int  after , int  count);
-void AddCols(register class spread  * V, int  after , int  count);
-static int k_CheckSelection (register class spread  * V);
-static int k_ReadFormula (register class spread  * V, char  *startstring);
-static void k_enterchar(register class spread  * V, char  ch);
-static void k_backspace(register class spread  * V, char  ch);
-static void k_tab(register class spread  * V, char  ch);
-static void k_newline(register class spread  * V, char  ch);
-static void k_killbuff (register class spread  * V, char  ch);
-static void k_rightarrow (register class spread  * V, char  ch);
-static void k_leftarrow (register class spread  * V, char  ch);
-static void k_downarrow (register class spread  * V, char  ch);
-static void k_uparrow (register class spread  * V, char  ch);
-static void k_home (register class spread  * V, char  ch);
-static void k_endline (register class spread  * V, char  ch);
-static void k_top (register class spread  * V, char  ch);
-static void k_bottom (register class spread  * V, char  ch);
-static void k_debug (register class spread  * V, char  ch);
+void AddRows(class spread  * V, int  after , int  count);
+void AddCols(class spread  * V, int  after , int  count);
+static int k_CheckSelection (class spread  * V);
+static int k_ReadFormula (class spread  * V, char  *startstring);
+static void k_enterchar(class spread  * V, char  ch);
+static void k_backspace(class spread  * V, char  ch);
+static void k_tab(class spread  * V, char  ch);
+static void k_newline(class spread  * V, char  ch);
+static void k_killbuff (class spread  * V, char  ch);
+static void k_rightarrow (class spread  * V, char  ch);
+static void k_leftarrow (class spread  * V, char  ch);
+static void k_downarrow (class spread  * V, char  ch);
+static void k_uparrow (class spread  * V, char  ch);
+static void k_home (class spread  * V, char  ch);
+static void k_endline (class spread  * V, char  ch);
+static void k_top (class spread  * V, char  ch);
+static void k_bottom (class spread  * V, char  ch);
+static void k_debug (class spread  * V, char  ch);
 void k_DefineKeys (class keymap  * mainmap, struct ATKregistryEntry   *classinfo);
 static void k_togglereadonly(class spread *V, char ch);
 
 
-void k_SetMessageState (register class spread  * V, int  newstate)
+void k_SetMessageState (class spread  * V, int  newstate)
 {
     if (V->bufferstatus != BUFFEREMPTY) {
 	if (debug)
@@ -86,7 +86,7 @@ void k_SetMessageState (register class spread  * V, int  newstate)
 
 /* message to user */
 
-void k_TellUser (register class spread  * V, const char    *s)
+void k_TellUser (class spread  * V, const char    *s)
 {
     k_SetMessageState (V, BUFFERHASMESSAGE);
     message::DisplayString (V, 0, s);
@@ -94,7 +94,7 @@ void k_TellUser (register class spread  * V, const char    *s)
 
 /* ask for and read keyboard input */
 
-boolean k_AskUser (register class spread  * V, const char  prompt[], const char  def[], char  buff[], int  n)
+boolean k_AskUser (class spread  * V, const char  prompt[], const char  def[], char  buff[], int  n)
 {
     int notOK;
 
@@ -110,7 +110,7 @@ boolean k_AskUser (register class spread  * V, const char  prompt[], const char 
 
 /* Are you sure? */
 
-boolean k_AreYouSure (register class spread  * V, const char  *why)
+boolean k_AreYouSure (class spread  * V, const char  *why)
 {
     char buff[10];
 
@@ -121,7 +121,7 @@ boolean k_AreYouSure (register class spread  * V, const char  *why)
 
 /* Verify that user wants to discard changes */
 
-boolean k_WantToDiscard (register class spread  * V)
+boolean k_WantToDiscard (class spread  * V)
 {
     if ((MyTable(V))->WriteTimestamp() < (MyTable(V))->CellsTimestamp()
      || (MyTable(V))->WriteTimestamp() < (MyTable(V))->EdgesTimestamp())
@@ -130,7 +130,7 @@ boolean k_WantToDiscard (register class spread  * V)
 }
 
 #ifdef NOTUSED
-static void k_exit(register class spread  * V, char  ch)
+static void k_exit(class spread  * V, char  ch)
 {
     if (k_WantToDiscard (V))
 	exit (0);
@@ -138,7 +138,7 @@ static void k_exit(register class spread  * V, char  ch)
 #endif /* NOTUSED */
 /* add rows to table */
 
-void AddRows(register class spread  * V, int  after , int  count)
+void AddRows(class spread  * V, int  after , int  count)
 {
     if (after < 0) after = 0;
     (MyTable(V))->ChangeSize ( (MyTable(V))->NumberOfRows() + count, (MyTable(V))->NumberOfColumns());
@@ -162,7 +162,7 @@ void AddRows(register class spread  * V, int  after , int  count)
 
 /* add columns to table */
 
-void AddCols(register class spread  * V, int  after , int  count)
+void AddCols(class spread  * V, int  after , int  count)
 {
     if (after < 0) after = 0;
     (MyTable(V))->ChangeSize ( (MyTable(V))->NumberOfRows(), (MyTable(V))->NumberOfColumns() + count);
@@ -186,7 +186,7 @@ void AddCols(register class spread  * V, int  after , int  count)
 
 /* verify there is a selection to enter data into */
 
-static int k_CheckSelection (register class spread  * V)
+static int k_CheckSelection (class spread  * V)
 {
     struct chunk newselection;
 
@@ -214,7 +214,7 @@ static int k_CheckSelection (register class spread  * V)
 
 /* Read new formula for cell */
 
-static int k_ReadFormula (register class spread  * V, char  *startstring)
+static int k_ReadFormula (class spread  * V, char  *startstring)
 {
     char   keybuff[1000];
     struct cell * cell;
@@ -257,10 +257,10 @@ static int k_ReadFormula (register class spread  * V, char  *startstring)
     return 1;
 }
 
-static void k_enterchar(register class spread  * V, char  ch)
+static void k_enterchar(class spread  * V, char  ch)
 {
     char   *startstring=NULL;
-    register char *cp=NULL;
+    char *cp=NULL;
 
     if (ch != '$' && ch != '{') {
 	GetFormula (V, &(V->anchor), &startstring);
@@ -288,7 +288,7 @@ static void k_enterchar(register class spread  * V, char  ch)
       
 }
 
-static void k_backspace(register class spread  * V, char  ch)
+static void k_backspace(class spread  * V, char  ch)
 {
     char *keybuff=NULL;
 
@@ -297,7 +297,7 @@ static void k_backspace(register class spread  * V, char  ch)
     free(keybuff);
 }
 
-static void k_tab(register class spread  * V, char  ch)
+static void k_tab(class spread  * V, char  ch)
 {
     struct chunk newselection;
 
@@ -310,7 +310,7 @@ static void k_tab(register class spread  * V, char  ch)
     SetCurrentCell (V, &newselection);
 }
 
-static void k_newline(register class spread  * V, char  ch)
+static void k_newline(class spread  * V, char  ch)
 {
     struct chunk newselection;
 
@@ -324,12 +324,12 @@ static void k_newline(register class spread  * V, char  ch)
     SetCurrentCell (V, &newselection);
 }
 
-static void k_killbuff (register class spread  * V, char  ch)
+static void k_killbuff (class spread  * V, char  ch)
 {
     k_SetMessageState (V, BUFFEREMPTY);
 }
 
-static void k_rightarrow (register class spread  * V, char  ch)
+static void k_rightarrow (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
@@ -344,7 +344,7 @@ static void k_rightarrow (register class spread  * V, char  ch)
     SetCurrentCell (V, &chunk);
 }
 
-static void k_leftarrow (register class spread  * V, char  ch)
+static void k_leftarrow (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
@@ -359,7 +359,7 @@ static void k_leftarrow (register class spread  * V, char  ch)
     SetCurrentCell (V, &chunk);
 }
 
-static void k_downarrow (register class spread  * V, char  ch)
+static void k_downarrow (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
@@ -374,7 +374,7 @@ static void k_downarrow (register class spread  * V, char  ch)
     SetCurrentCell (V, &chunk);
 }
 
-static void k_uparrow (register class spread  * V, char  ch)
+static void k_uparrow (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
@@ -389,7 +389,7 @@ static void k_uparrow (register class spread  * V, char  ch)
     SetCurrentCell (V, &chunk);
 }
 
-static void k_home (register class spread  * V, char  ch)
+static void k_home (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
@@ -401,7 +401,7 @@ static void k_home (register class spread  * V, char  ch)
     SetCurrentCell (V, &chunk);
 }
 
-static void k_endline (register class spread  * V, char  ch)
+static void k_endline (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
@@ -413,7 +413,7 @@ static void k_endline (register class spread  * V, char  ch)
 	SetCurrentCell (V, &chunk);
 }
 
-static void k_top (register class spread  * V, char  ch)
+static void k_top (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
@@ -424,7 +424,7 @@ static void k_top (register class spread  * V, char  ch)
     SetCurrentCell (V, &chunk);
 }
 
-static void k_bottom (register class spread  * V, char  ch)
+static void k_bottom (class spread  * V, char  ch)
 {
     struct chunk chunk;
 
@@ -437,7 +437,7 @@ static void k_bottom (register class spread  * V, char  ch)
 
 /* toggle debug */
 
-static void k_debug (register class spread  * V, char  ch)
+static void k_debug (class spread  * V, char  ch)
 {
 
 /*

@@ -146,7 +146,7 @@ union {
 GetGVMStats(UsersID)
 int UsersID;
 {
-    register int   i;
+    int   i;
     long  t;
     struct mapent *sp;
     lseek(MemoryFile,(long) RawStatistics[X_CPTIME].n_value, 0);
@@ -198,7 +198,7 @@ int UsersID;
     {
 	int myval = 0;
 	{
-	    register int   i;
+	    int   i;
 	    for (i = 1; i < DK_NDRIVE - 1; i++)
 		s.dk_xfer[0] += s.dk_xfer[i];
 	}
@@ -345,8 +345,8 @@ int Init;
     int i = 0;
     struct stat statb;
     char tmpname[1024];
-    register FILE *mtabp;
-    register struct mntent *mnt;
+    FILE *mtabp;
+    struct mntent *mnt;
 
     sync();
     if ((mtabp = setmntent(MNTTAB, "r")) == NULL) {
@@ -397,7 +397,7 @@ char *mpath(file)
 char *file;
 {
     FILE *mntp;
-    register struct mntent *mnt;
+    struct mntent *mnt;
 
 
     if ((mntp = setmntent(MOUNTED, "r")) == 0) {

@@ -274,9 +274,9 @@ nullview in a C++ source file we would write
 Variables referring to objects in Class-C are simply structs:
 
 
-	register struct null *dobj;			/* Class-C */
+	struct null *dobj;			/* Class-C */
 
-	register struct nullview *dview, *dview2;
+	struct nullview *dview, *dview2;
 
 
 However, in C++ the type can be written as either (class classname *) or 
@@ -354,7 +354,7 @@ convention:
 
 	null__AddDot(self, x, y)
 
-		register struct null *self;
+		struct null *self;
 
 		long x, y;
 
@@ -462,11 +462,11 @@ methods does.  In null.c we find:
 
 	null__Read(self, file, id)
 
-		register struct null  *self;
+		struct null  *self;
 
-		register FILE  *file;
+		FILE  *file;
 
-		register long  id;
+		long  id;
 
 	\{
 
@@ -484,7 +484,7 @@ The parallel code in null.C is:
 
 		long									// C++
 
-	null::Read(register FILE   *file, register long   id) \{
+	null::Read(FILE   *file, long   id) \{
 
 		 . . .
 
@@ -632,7 +632,7 @@ null__InitializeObject(ClassID, self)			/* Class-C */
 
 	struct classhdr *ClassID;
 
-	register struct null  *self;
+	struct null  *self;
 
 \{
 
@@ -649,7 +649,7 @@ null__FinalizeObject(ClassID, self)			/* Class-C */
 
 	struct classhdr *ClassID;
 
-	register struct null  *self;
+	struct null  *self;
 
 \{
 

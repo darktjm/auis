@@ -319,7 +319,7 @@ static boolean callCheckProcTable(struct varnode  *varnode, struct exprnode *arg
 struct exprnode * callFunc(struct varnode * varnode, struct exprnode  *argtypes);
 void callUnknown(class nesssym  *sym);
 void callCheck (struct callnode  *call, unsigned char *iar, class ness  *ness);
-static union stackelement *startPush(register union stackelement  *NSP, 
+static union stackelement *startPush(union stackelement  *NSP, 
 		long  size, TType  hdr, long  v);
 void callCheat(unsigned char op, unsigned char *iar, class ness  *ness);
 static void recordFiles(char *dir, class nesssym  *proto);
@@ -525,9 +525,9 @@ argtypeerror(long  n, Texpr  formal , Texpr  actual) {
 builtincall(struct varnode  *fnode, struct exprnode  *argtypes) {
 	struct builtindef *b = nesssym_NGetINode(fnode->sym, builtindef);
 	unsigned char *defn;
-	register Texpr *type;
-	register long nargs;
-	register struct exprnode *targs;
+	Texpr *type;
+	long nargs;
+	struct exprnode *targs;
 	long loc, tloc, len;
 	boolean sendnargs;
 
@@ -581,7 +581,7 @@ builtincall(struct varnode  *fnode, struct exprnode  *argtypes) {
 	}
 	else {
 		/* check match of types in argtypes and type  */
-		register long argnum = nargs;
+		long argnum = nargs;
 		while (argtypes != NULL && *type != Tend) {
 			/* check a type */
 			if ((*type&0xf) != (argtypes->type&0xf))
@@ -606,7 +606,7 @@ builtincall(struct varnode  *fnode, struct exprnode  *argtypes) {
 	}
 	else {
 		/* does not meet the security test.  Pop the args and return 0 */
-		register long argnum;
+		long argnum;
 		for (argnum = nargs; argnum > 0; argnum--)
 			genop('y');
 		genop ('0');
@@ -1071,8 +1071,8 @@ XXX this function does not test the types of the values on the stack
 	void
 callCheck (struct callnode  *call, unsigned char *iar, class ness  *ness) {
 	class nesssym *func = call->Sym;	/* the nesssym for desired function */
-	register class nesssym *formals;
-	register long n;
+	class nesssym *formals;
+	long n;
 	struct funcnode *fnode;
 
 	if (func->flags != (flag_function | flag_ness))
@@ -1105,7 +1105,7 @@ callCheck (struct callnode  *call, unsigned char *iar, class ness  *ness) {
  */
 
 	static union stackelement *
-startPush(register union stackelement  *NSP, long  size, TType  hdr, long  v) {
+startPush(union stackelement  *NSP, long  size, TType  hdr, long  v) {
 	NSP = (union stackelement *)(((unsigned long)NSP) - size);
 	NSP->l.hdr = hdr;
 	NSP->l.v = v;
@@ -1132,7 +1132,7 @@ startPush(register union stackelement  *NSP, long  size, TType  hdr, long  v) {
 */
 	void
 callCfunc(struct callnode  *call, unsigned char *iar, class ness  *ness) {
-	register union stackelement *NSP = NSPstore;
+	union stackelement *NSP = NSPstore;
 	avalueflex arg;	/* arguments (from stack) */
 	avalueflex retval;	/* returned value (push to stack) */
 	boolean malloced[10];	/* T if arg[i] pts to malloced space */
@@ -1314,7 +1314,7 @@ callCfunc(struct callnode  *call, unsigned char *iar, class ness  *ness) {
 */
 	void
 callCheat(unsigned char op, unsigned char *iar, class ness  *ness) {
-	register union stackelement *NSP = NSPstore;
+	union stackelement *NSP = NSPstore;
 	switch (op) {
 
 	/* eventually the following ought to move to nevent.c */

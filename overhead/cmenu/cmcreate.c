@@ -561,7 +561,7 @@ error:
 struct cmenu *cmenu_Create(dpy, parent, def_env, freeFunction)
 Display *dpy;		/* Display structure pointer. */
 Window parent;		/* Window ID of the menu's parent window. */
-register const char *def_env;	/* X Defaults program environment name. */
+const char *def_env;	/* X Defaults program environment name. */
 void (*freeFunction)();
 {
 

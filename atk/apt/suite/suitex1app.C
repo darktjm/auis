@@ -33,7 +33,7 @@ ATK_IMPL("suitex1app.H")
 
 ATKdefineRegistry(suitex1app, application, NULL);
 
-class view * Flavor_Choice( class suitex1app  *self, register class suite  *suite, register struct suite_item  *item, int type, view_MouseAction action, long x, long y, long clicks );
+class view * Flavor_Choice( class suitex1app  *self, class suite  *suite, struct suite_item  *item, int type, view_MouseAction action, long x, long y, long clicks );
 
 static suite_Specification vanilla[] = {
     suite_ItemCaption( "   Vanilla" ),
@@ -131,7 +131,7 @@ suitex1app::Start( )
 }
 
 class view *
-Flavor_Choice( class suitex1app  *self, register class suite  *suite, register struct suite_item  *item, int  type, view_MouseAction action, long x, long y, long clicks )
+Flavor_Choice( class suitex1app  *self, class suite  *suite, struct suite_item  *item, int  type, view_MouseAction action, long x, long y, long clicks )
 {
     char msg[100];
     if(action == view_LeftUp) {

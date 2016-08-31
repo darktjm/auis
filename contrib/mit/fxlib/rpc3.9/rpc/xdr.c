@@ -150,7 +150,7 @@ xdr_u_int(xdrs, up)
  */
 bool_t
 xdr_long(xdrs, lp)
-	register XDR *xdrs;
+	XDR *xdrs;
 	long *lp;
 {
 
@@ -172,7 +172,7 @@ xdr_long(xdrs, lp)
  */
 bool_t
 xdr_u_long(xdrs, ulp)
-	register XDR *xdrs;
+	XDR *xdrs;
 	u_long *ulp;
 {
 
@@ -190,7 +190,7 @@ xdr_u_long(xdrs, ulp)
  */
 bool_t
 xdr_short(xdrs, sp)
-	register XDR *xdrs;
+	XDR *xdrs;
 	short *sp;
 {
 	long l;
@@ -219,7 +219,7 @@ xdr_short(xdrs, sp)
  */
 bool_t
 xdr_u_short(xdrs, usp)
-	register XDR *xdrs;
+	XDR *xdrs;
 	u_short *usp;
 {
 	u_long l;
@@ -285,7 +285,7 @@ xdr_u_char(xdrs, cp)
  */
 bool_t
 xdr_bool(xdrs, bp)
-	register XDR *xdrs;
+	XDR *xdrs;
 	bool_t *bp;
 {
 	long lb;
@@ -343,11 +343,11 @@ xdr_enum(xdrs, ep)
  */
 bool_t
 xdr_opaque(xdrs, cp, cnt)
-	register XDR *xdrs;
+	XDR *xdrs;
 	caddr_t cp;
-	register u_int cnt;
+	u_int cnt;
 {
-	register u_int rndup;
+	u_int rndup;
 	static crud[BYTES_PER_XDR_UNIT];
 
 	/*
@@ -395,13 +395,13 @@ xdr_opaque(xdrs, cp, cnt)
  */
 bool_t
 xdr_bytes(xdrs, cpp, sizep, maxsize)
-	register XDR *xdrs;
+	XDR *xdrs;
 	char **cpp;
-	register u_int *sizep;
+	u_int *sizep;
 	u_int maxsize;
 {
-	register char *sp = *cpp;  /* sp is the actual string pointer */
-	register u_int nodesize;
+	char *sp = *cpp;  /* sp is the actual string pointer */
+	u_int nodesize;
 
 	/*
 	 * first deal with the length since xdr bytes are counted
@@ -470,13 +470,13 @@ xdr_netobj(xdrs, np)
  */
 bool_t
 xdr_union(xdrs, dscmp, unp, choices, dfault)
-	register XDR *xdrs;
+	XDR *xdrs;
 	enum_t *dscmp;		/* enum to decide which arm to work on */
 	char *unp;		/* the union itself */
 	struct xdr_discrim *choices;	/* [value, xdr proc] for each arm */
 	xdrproc_t dfault;	/* default xdr routine */
 {
-	register enum_t dscm;
+	enum_t dscm;
 
 	/*
 	 * we deal with the discriminator;  it's an enum
@@ -519,11 +519,11 @@ xdr_union(xdrs, dscmp, unp, choices, dfault)
  */
 bool_t
 xdr_string(xdrs, cpp, maxsize)
-	register XDR *xdrs;
+	XDR *xdrs;
 	char **cpp;
 	u_int maxsize;
 {
-	register char *sp = *cpp;  /* sp is the actual string pointer */
+	char *sp = *cpp;  /* sp is the actual string pointer */
 	u_int size;
 	u_int nodesize;
 

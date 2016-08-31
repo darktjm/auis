@@ -98,7 +98,7 @@ orgapp::~orgapp(  )
       {}
 
 boolean
-orgapp::ParseArgs( register int			   argc, register const char			 **argv )
+orgapp::ParseArgs( int			   argc, const char			 **argv )
         {
   class orgapp *self=this;  
   IN(orgapp_ParseArgs);
@@ -127,7 +127,7 @@ boolean
 orgapp::Start(  )
     {
   class orgapp *self=this;
-  register FILE			 *file;
+  FILE			 *file;
   long				  id, status = true;
 
   (this)->application::Start(  );

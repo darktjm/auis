@@ -71,7 +71,7 @@ whose Quit menu was chosen will be destroyed.
 
 \example{struct frame *frame_Create(buffer)
 
-register struct buffer *buffer;} \
+struct buffer *buffer;} \
 
 
 

@@ -61,7 +61,7 @@ static struct AMSConfig {
 static struct AMSConfig *getThis(someDomain, pAlloc)
 char *someDomain; int *pAlloc;
 {/* Get, or allocate, a struct AMSConfig record corresponding to the given domain. */
-    register struct AMSConfig *acf;
+    struct AMSConfig *acf;
 
     for (acf = AMSConfigRoot; acf != NULL; acf = acf->Next) {
 	if (ULstrcmp(someDomain, acf->Domain) == 0) {
@@ -93,7 +93,7 @@ char *someDomain;
     char *MailQDir;
     struct CellAuth *ca;
     int fc, xl, alloced;
-    register struct AMSConfig *acf;
+    struct AMSConfig *acf;
 #ifdef AFS_ENV
     char DirCell[200];
 #endif /* AFS_ENV */
@@ -347,7 +347,7 @@ char *someDomain;
 #ifdef AMS_DELIVERY_ENV
     char *NameSepFile;
     int fc, xl, alloced; unsigned char TheChar;
-    register struct AMSConfig *acf;
+    struct AMSConfig *acf;
 #ifdef AFS_ENV
     char DirCell[200];
 #endif /* AFS_ENV */
@@ -412,7 +412,7 @@ char *someDomain;
 {/* Return how the given domain validates its local user names, giving a mask with a bit on for each method that is used.  Return a negative number if it can't tell. */
 #ifdef AMS_DELIVERY_ENV
     int alloced;
-    register struct AMSConfig *acf;
+    struct AMSConfig *acf;
 #endif /* AMS_DELIVERY_ENV */
     int fc;
 
@@ -447,7 +447,7 @@ char *someDomain;
 {/* Determine what the given domain uses as the name of the mailbox directory for users.  Return NULL if it can't tell, or the directory name (e.g. "Mailbox") if it can. */
 #ifdef AMS_DELIVERY_ENV
     int fc, alloced;
-    register struct AMSConfig *acf;
+    struct AMSConfig *acf;
 #endif /* AMS_DELIVERY_ENV */
 
     CheckAMSConfiguration();
@@ -474,7 +474,7 @@ char *someDomain;
 {/* Determine what the given domain uses as the username of the distinguished delivery agent.  Return NULL if it can't tell, or the username (e.g. "postman") if it can. */
 #ifdef AMS_DELIVERY_ENV
     int fc, alloced;
-    register struct AMSConfig *acf;
+    struct AMSConfig *acf;
 #endif /* AMS_DELIVERY_ENV */
 
     CheckAMSConfiguration();
@@ -501,7 +501,7 @@ char *someDomain;
 {/* Determine what the given domain uses as the submission address for WPI update requests.  Return NULL if it can't tell, or the address (e.g. "wpi+@foobar.baz") if it can. */
 #ifdef AMS_DELIVERY_ENV
     int fc, alloced;
-    register struct AMSConfig *acf;
+    struct AMSConfig *acf;
 #endif /* AMS_DELIVERY_ENV */
 
     CheckAMSConfiguration();
@@ -528,7 +528,7 @@ char *someDomain;
 {/* Determine whether the given domain accepts ATK-formatted mail.  Return <0 if it doesn't, >0 if it does, and 0 if it can't tell.  (In general, though, a site's running AMS Delivery implies that it does.) */
 #ifdef AMS_DELIVERY_ENV
     int fc, alloced;
-    register struct AMSConfig *acf;
+    struct AMSConfig *acf;
 #endif /* AMS_DELIVERY_ENV */
 
     CheckAMSConfiguration();
@@ -555,7 +555,7 @@ char *someDomain;
 {/* Determine whether the given domain thinks a!b is a remote address.  Return >0 if it does, <0 if it doesn't, and 0 if we can't tell. */
 #ifdef AMS_DELIVERY_ENV
     int fc, alloced;
-    register struct AMSConfig *acf;
+    struct AMSConfig *acf;
 #endif /* AMS_DELIVERY_ENV */
 
     CheckAMSConfiguration();
@@ -582,7 +582,7 @@ char *someDomain;
 {/* Determine whether the given domain supports a+ and a+b types of local addresses.  Return >0 if it does, <0 if it doesn't, and 0 if we can't tell. */
 #ifdef AMS_DELIVERY_ENV
     int fc, alloced;
-    register struct AMSConfig *acf;
+    struct AMSConfig *acf;
 #endif /* AMS_DELIVERY_ENV */
 
     CheckAMSConfiguration();
@@ -610,7 +610,7 @@ struct cell_msPath **valP;
 {/* Determine what the given domain uses as its default MS path.  Returns a value of 0 if nothing, <0 as an error code, or >0 with valP pointing at an array of (value) cell_msPath structures describing the site's default MS path. */
 #ifdef AMS_DELIVERY_ENV
     int fc, alloced;
-    register struct AMSConfig *acf;
+    struct AMSConfig *acf;
 #endif /* AMS_DELIVERY_ENV */
 
     CheckAMSConfiguration();

@@ -122,7 +122,7 @@ void writestr(FILE  *fi,FILE  *fo,char  *name);
 long createchfile(char  *src,char  *classn,char  *name);
 struct stf *makestf(char  *buf);
 char *getf(FILE  *f,char  *s,char  *buf,char  *s1,char  *s2);
-boolean keycmp(register char  *s1,register char  *s2);
+boolean keycmp(char  *s1,char  *s2);
 void setbro(struct stf  *s1,struct stf  *s2);
 static FILE *tryopen(char  *name,boolean  *renamed,char  **s1,char  **s2);
 boolean process(FILE  *oldf,char  *name);
@@ -243,7 +243,7 @@ struct stf *makestf(char  *buf)
 char *getf(FILE  *f,const char  *s,char  *buf,char  *s1,char  *s2)
 {
     static char ending[1024];
-    register char *c,*cp;
+    char *c,*cp;
     struct MapEntryStruct *mp;
     int s2len = 0;
     if(s2 != NULL) s2len = strlen(s2);
@@ -284,7 +284,7 @@ char *getf(FILE  *f,const char  *s,char  *buf,char  *s1,char  *s2)
     return(NULL);
 }
 
-boolean keycmp(register char  *s1,register char  *s2)
+boolean keycmp(char  *s1,char  *s2)
 {
     while(*s1++ == *s2){
 	if(*s2++ == '\n') return TRUE;
@@ -293,7 +293,7 @@ boolean keycmp(register char  *s1,register char  *s2)
 }
 void setbro(struct stf  *s1,struct stf  *s2)
 {
-    register struct stf *ss2,*ss1;
+    struct stf *ss2,*ss1;
     for(ss1 = s1 ; ss1 != NULL; ss1 = ss1->next){
 	for(ss2 = s2; ss2 != NULL ; ss2 = ss2->next){
 	    if(ss1->key != NULL && ss2->key != NULL &&
@@ -413,8 +413,8 @@ char *ps(char  *s)
 
 int main(int argc, char  *argv[])
 {
-    register char *c;
-    register int cc;
+    char *c;
+    int cc;
     char bb[256],cmd[5200],tmpfile[256],bv[256];
     char *awkprog,*src,*program,defaultawk[256],parentname[1024];
     boolean iname = FALSE;

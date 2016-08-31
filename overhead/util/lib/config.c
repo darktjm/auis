@@ -80,8 +80,8 @@ int ReadConfigureLine(FILE *fp, char *text, int maxTextLength, const char **prog
 	    /* Check for Machine Type / Host Name/ Environment variable  */
 
 	    if (text[1] == 'C' || text[1] == 'M' || text[1] == 'E')  {
-		register char *p;
-		register char *d;
+		char *p;
+		char *d;
 
 		p = &(text[2]);
 
@@ -442,7 +442,7 @@ const char *GetConfiguration(const char *key)
 
 void FreeConfigureList(struct configurelist *cList)
 {
-    register struct configurelist *t;
+    struct configurelist *t;
 
     while (cList != NULL)  {
 	t = cList;

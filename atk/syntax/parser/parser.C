@@ -291,8 +291,8 @@ parser::ParseNumber(const char  *buf, long  *plen , long  *intval, double  *dblv
 	long val;
 	int len;
 	char oldstate, currstate;
-	register int x;
-	register const char *bx;
+	int x;
+	const char *bx;
 	int success;
 
 	if (*buf == '\'') {
@@ -420,17 +420,17 @@ debugnewline() {
 
 	 int
 parser::Parse(parser_lexerfptr lexer, void *lexrock) {
-	register struct parser_tables *desc = this->tables;
-	register int x, tact;	/* temps */
+	struct parser_tables *desc = this->tables;
+	int x, tact;	/* temps */
 	void *pendval;		/* lookahead symbol value */
-	register short pendtok;	/* the look ahead token.  NOTOK if none */
-	register int tstate;	/* temporary for state value */
+	short pendtok;	/* the look ahead token.  NOTOK if none */
+	int tstate;	/* temporary for state value */
 	void *tval;		/* temporary for values */
 	int *StateStack;	/* states */
 	void *ValueStack;	/* values */
-	register int *ssp;	/* statestack pointer,
+	int *ssp;	/* statestack pointer,
 					pts to highest occupied location  */
-	register void *vsp;	/* value stack pointer,
+	void *vsp;	/* value stack pointer,
 					pts to highest occupied location  */
 	int nstelts;		/* number of elements in the 2 stacks */
 	int *ssend;		/* pts to highest loc in StateStack */

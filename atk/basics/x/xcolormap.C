@@ -432,7 +432,7 @@ xcolor *xcolormap::FindClosest(unsigned short r, unsigned short g, unsigned shor
     xcolor *tmp, *best;
     unsigned short R, G, B;
     Screen *s = DefaultScreenOfDisplay(XDisplay());
-    register int i = -1, nc = CellsOfScreen(s), bestDef = -1;
+    int i = -1, nc = CellsOfScreen(s), bestDef = -1;
     unsigned int diff = 0, bestDiff = ~0;
     XColor *defs=NULL;
 

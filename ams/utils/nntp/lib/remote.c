@@ -73,11 +73,11 @@ char	*cmd;
 ** Returns FAIL if something went wrong.
 */
 readreply(buf, size)
-register char	*buf;
+char	*buf;
 int	size;
 {
-	register char	*cp;
-	register int	len;
+	char	*cp;
+	int	len;
 
 /* make sure its invalid, unless we say otherwise*/
 	buf[0] = '\0';
@@ -125,7 +125,7 @@ converse(buf, size)
 char	*buf;
 int	size;
 {
-	register int	resp;
+	int	resp;
 	int code;
 
 	if (code = sendcmd(buf)) 
@@ -241,7 +241,7 @@ char	*buf;
 int	size;
 FILE	*fp;
 {
-	register char	*ret;
+	char	*ret;
 
 	if (setjmp(SFGstack)) {
 		alarm(0);			/* reset alarm clock */
@@ -267,8 +267,8 @@ char	*buf;
 int	size;
 FILE	*fp;
 {
-	register char	*cp = buf;
-	register int	len;
+	char	*cp = buf;
+	int	len;
 
 	*cp = '\0';
 	if (sfgets(buf, size, fp) == NULL)
@@ -297,10 +297,10 @@ FILE	*fp;
 ** and dot escaping). Return non-zero if something went wrong.
 */
 sendfile(fp)
-	register FILE *fp;
+	FILE *fp;
 {
-	register int	c;
-	register int	nl = TRUE;	/* assume we start on a new line */
+	int	c;
+	int	nl = TRUE;	/* assume we start on a new line */
 
 	if (test) {
 		fprintf(stderr,"Sendfile: (not) sending file\n");
@@ -364,7 +364,7 @@ static char *headers[] = {
 #define HEADER_LEN  100
 
 static void lc(h)
-    register char *h;
+    char *h;
 {
     for (; *h!='\0'; h++)
 	if (*h >= 'A' && *h <= 'Z')
@@ -372,10 +372,10 @@ static void lc(h)
 }
 
 static int goodheader(h)
-    register char *h;
+    char *h;
 {
     char buffer[HEADER_LEN];
-    register int i;
+    int i;
 
     /* Lower case it & compare */
     strcpy(buffer, h);
@@ -390,10 +390,10 @@ static int goodheader(h)
 /* Scan this header & echo it if put is TRUE. */
 
 static void readheader(fp, put)
-    register FILE *fp;
-    register int put;
+    FILE *fp;
+    int put;
 {
-    register int c;
+    int c;
 
     /* Header name & : have been read.  Skip leading spaces */
     for (c=fgetc(fp); c==' ' || c=='\t'; c=fgetc(fp)) ;
@@ -429,11 +429,11 @@ static void skipheader(fp)
 /* Send only recognized headers */
 
 static sendheaders(fp)
-    register FILE *fp;
+    FILE *fp;
 {
 
     for (;;) {
-	register int i, c, nl, done;
+	int i, c, nl, done;
 
 	/* Read next line into buffer */
 	nl = TRUE;

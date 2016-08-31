@@ -176,7 +176,7 @@ int DirMovement (curfield, maxopts,how)
 int curfield, maxopts;
 Boolean how;
     {
-    register int row;
+    int row;
     debug((2,"DirMovement %d\n",(int)how));
     row=N_DIR_FIELDS*DIR_CurrentRow;
     ShowString(dir_data[row].pdata, dir_data[row].prow,
@@ -526,7 +526,7 @@ char *current_dir;
     
 ShowDirData ()
 {
-    register int row;
+    int row;
     debug((1,"ShowDirData\n"));
     debug((1,"dir_data = %d, DIR_CurrentRow = %d\n", dir_data, DIR_CurrentRow));
     row=N_DIR_FIELDS*DIR_CurrentRow;
@@ -813,7 +813,7 @@ int MsgMovement (curfield, maxopts, how)
 int curfield, maxopts;
 Boolean how;
 {
-    register int row, i;
+    int row, i;
     debug((2,"MsgUpArrowKey\n"));
     row=N_MSG_FIELDS*MSG_CurrentRow;
     for (i=N_MSG_FIELDS; i; i--, row++) {
@@ -1065,7 +1065,7 @@ long startnum;
 
 ShowMsgData ()
 {
-    register int row, i;
+    int row, i;
     debug((1,"ShowMsgData\n"));
     ShowString(mess_bp[1].pdata, mess_bp[1].prow,
                mess_bp[1].pcol,  mess_bp[1].plen,
@@ -1111,7 +1111,7 @@ ReshowCurrentMsgLine (status, display, highlight)
 char *status;
 Boolean display, highlight;
 {
-    register int row;
+    int row;
     int maxlen;
     char *p;
 
@@ -1133,7 +1133,7 @@ GetCurrentMsgAttributes(buf, buflen)
 char *buf;
 int buflen;
 {
-    register int row;
+    int row;
     int maxlen;
     char *p;
 

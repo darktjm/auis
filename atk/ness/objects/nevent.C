@@ -967,7 +967,7 @@ postevents(class ness  *ness, class nesssym  *attr) {
 */
 	static void
 unpostevents(class ness  *ness, class nesssym  *attr, boolean  debug) {
-	register struct objnode *onode = nesssym_NGetINode(attr, objnode);
+	struct objnode *onode = nesssym_NGetINode(attr, objnode);
 	class nesssym *xattr;
 	boolean repost;
 	char buf[100];

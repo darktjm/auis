@@ -416,8 +416,8 @@ NETADDR *from;
 stat_packet_t *astat;
 ACTOR_FUNC_PT rcv_func;
 {
-    register int i;
-    register guard_entry_pt scan;
+    int i;
+    guard_entry_pt scan;
     for(i=0,scan=gl.guard_table;i<gl.free_guard;i++,scan++)
         if(memcmp(from,&scan->addr,sizeof(NETADDR))==0) {
             (*rcv_func)(scan,astat);
@@ -487,8 +487,8 @@ void lookup_guard_stat_port()
   */
 void run_actors()
 {
-    register int i;
-    register guard_entry_pt scan;
+    int i;
+    guard_entry_pt scan;
     if(not_yet(gl.time_wake))
         return;
     /*any actor that runs will lower this time wake up time*/
@@ -598,8 +598,8 @@ guard_entry_pt aguard;
 void print_guards_detailed(dfile)
 FILE *dfile;
 {
-    register int i;
-    register guard_entry_pt scan;
+    int i;
+    guard_entry_pt scan;
     if(gl.free_guard==0)
         fprintf(dfile,"Server pool not defined\n");
     else
@@ -623,7 +623,7 @@ int anerr;
 void print_globals(dfile)
 FILE *dfile;
 {
-    register int i;
+    int i;
     fprintf(dfile,"nametimeg %d.%d internal table dump\n",VER_MAJ,VER_MIN);
     fprintf(dfile,"this nametimeg stated at %s",ctime(&gl.time_started));
     fprintf(dfile,"we handled %d name requests\n",gl.number_of_ien116_real_names);
@@ -720,10 +720,10 @@ guard_entry_pt aguard;
 guard_entry_pt get_best_guard(namept)
 char *namept;
 {
-    register int i;
-    register guard_entry_pt scan;
+    int i;
+    guard_entry_pt scan;
     long best_value=MAX_INT;
-    register guard_entry_pt best_guard=NIL;
+    guard_entry_pt best_guard=NIL;
     char ch;
     int name_len;
     {char *s;
@@ -765,8 +765,8 @@ void init_pool(pool_name,num_ent)
 char *pool_name;
 int num_ent;
 {
-    register int i;
-    register guard_entry_pt aguard;
+    int i;
+    guard_entry_pt aguard;
     for(i=0;i<num_ent;i++) {
         aguard=aloc_guard();
         if(aguard==0L)return;
@@ -800,7 +800,7 @@ char *argv[];
 int lcstreq(s1,s2)
 char *s1;
 char *s2;
-{register int s1len=strlen(s1);
+{int s1len=strlen(s1);
  return ((s1len==strlen(s2))&&lcstrneq(s1,s2,s1len));
 }
 
@@ -808,11 +808,11 @@ char *s2;
   case insensitive string compare with length
       */
 int lcstrneq(s1,s2,len)
-register char *s1;
-register char *s2;
-register int len;
+char *s1;
+char *s2;
+int len;
 {
-    register char ch1,ch2;
+    char ch1,ch2;
     while (--len >=0) {
         ch1= *s1++;ch2 = *s2++;
         if(isupper(ch1))ch1=tolower(ch1);
@@ -846,7 +846,7 @@ char *inp;
 char *ioutname;
 {
     int dnamelen;		  /*length of name in dnamebuf (not incl null)*/
-    register char *outname=ioutname;
+    char *outname=ioutname;
     *outname=0;
     while (TRUE) {
         dnamelen= *inp++;
@@ -901,7 +901,7 @@ char *emit_string(inp,name)
 char *inp;
 char *name;
 {
-  register int n;
+  int n;
   if((n=dn_comp(name,inp,(MAX_INP-inp),gl.nh.dnptrs,gl.nh.lastdnptr))<0)
     domain_error(("dn_comp failed\n"));
   return inp+n;
@@ -957,7 +957,7 @@ char *dn_unpack_query(inp,rqtype,rclass)
 char *inp;
 int *rqtype;
 int *rclass;
-{   register int qclass,qtype;
+{   int qclass,qtype;
 #define SLURP16(xinto,xfrom) \
     {xinto=(((*xfrom++)&0xff)<<8); \
     xinto += ((*xfrom++)&0xff);}
@@ -1001,7 +1001,7 @@ char *alias_name;
 char *real_name;
 {
  long iaddr;
- register struct hostent *hp;
+ struct hostent *hp;
  if((!gl.testing)||((hp=gethostbyname(alias_name))==0))
    domain_error(("no hosts matched requested name\n"));
  bcopy(hp->h_addr,&iaddr,4);
@@ -1040,7 +1040,7 @@ void do_domain_lookup()
       /*parse the variable length question*/
       inp=gl.nh.io_buf+sizeof(HEADER);
 
-      {register int n;
+      {int n;
        if((n=dn_expand(gl.nh.io_buf,MAX_INP,inp,dnamebuf,MAXDNAME))<=0)
         domain_error(("can't expand name\n"));
        inp+=n;
@@ -1120,7 +1120,7 @@ int find_addr(namept,ans)
 char *namept;
 NETADDR *ans;
 {
-    register struct hostent *hp;
+    struct hostent *hp;
     guard_entry_pt best;
     if((best=get_best_guard(namept))!=NIL) {
         bcopy(&best->addr,ans,sizeof(NETADDR));

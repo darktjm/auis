@@ -86,7 +86,7 @@ adjust_criterion(p, s)
 compar(p1, p2)
      Paper **p1, **p2;
 {
-  register int ret;
+  int ret;
 
   ret = strcmp((*p1)->author, (*p2)->author);
   if (ret) return(ret);

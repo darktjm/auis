@@ -106,25 +106,25 @@ heximage::WriteRow(FILE  *file, unsigned char *byteaddr, long  nbits, boolean  i
 	returns 0 for success.  -1 for failure
 */
 	long
-heximage::ReadRow(register FILE  *file		/* where to get bytes from */, unsigned char *row	/* where to put them to */, long  length		/* how many bits in row must be filled */)
+heximage::ReadRow(FILE  *file		/* where to get bytes from */, unsigned char *row	/* where to put them to */, long  length		/* how many bits in row must be filled */)
 				{
 	long W = (length+7)>>3;/* number of bytes */
 	unsigned char savebyte = *(row+W-1);	/* save last byte */
-	register unsigned char *where = row;
-	register long n = W;
-	register unsigned char *tbl = (unsigned char *)unhex;
+	unsigned char *where = row;
+	long n = W;
+	unsigned char *tbl = (unsigned char *)unhex;
 
 	while (n--) {
-		register int c = getc(file);
-		register int c2 = getc(file);
+		int c = getc(file);
+		int c2 = getc(file);
 		if (c == EOF ||  c2 == EOF) return -1;
 		*where++ = (*(tbl+c)<<4) | *(tbl+c2);
 	}
 
 	if (length & 0x7) {
 		/* fix the last byte if length is not a multiple of 8 bits */
-		register unsigned long mask = masks[length & 0x7];
-		register unsigned char *loc = row+W-1;
+		unsigned long mask = masks[length & 0x7];
+		unsigned char *loc = row+W-1;
 		*loc = (*loc & mask) | (savebyte & ~mask);
 	}
 	return 0;
@@ -139,10 +139,10 @@ heximage::ReadRow(register FILE  *file		/* where to get bytes from */, unsigned 
 		return error code 
 */
 	long
-heximage::ReadImage(register FILE  *file		/* where to get bits from */, register class pixelimage  *pix/* where to put them */, long  width , long  height)
+heximage::ReadImage(FILE  *file		/* where to get bits from */, class pixelimage  *pix/* where to put them */, long  width , long  height)
 				{
-	register unsigned char *where;		/* where to store next row */
-	register long row, W;		/* count rows;  byte length of row */
+	unsigned char *where;		/* where to store next row */
+	long row, W;		/* count rows;  byte length of row */
 	
 	W = (width+7)>>3;
 
@@ -160,9 +160,9 @@ heximage::ReadImage(register FILE  *file		/* where to get bits from */, register
 	Write the raster image from 'pix' to 'file'
 */
 	void
-heximage::WriteImage(register FILE  *file		/* where to put bits  */, register class pixelimage  *pix	/* where to get them from */, struct rectangle  *sub)
+heximage::WriteImage(FILE  *file		/* where to put bits  */, class pixelimage  *pix	/* where to get them from */, struct rectangle  *sub)
 				{
-	register long row;
+	long row;
 	long top, left, width, height;
 	short buf[BUFBITS>>4];
 
@@ -209,7 +209,7 @@ static const char * const PStrailer[] = {
 	    make assumptions.  72 pixels/inch is close to the size on many large screens.
 */
 	void
-heximage::WritePostscript(register FILE  *file		/* where to put bits  */, register class pixelimage  *pix/* where to get them from */, register struct rectangle  *sub, double  xfrac , double  yfrac)
+heximage::WritePostscript(FILE  *file		/* where to put bits  */, class pixelimage  *pix/* where to get them from */, struct rectangle  *sub, double  xfrac , double  yfrac)
 					{
 	long row;
 	long left, top, width, height;

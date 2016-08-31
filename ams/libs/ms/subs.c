@@ -679,7 +679,7 @@ struct SubscriptionProfile **sub1, **sub2;
 int PreorderSubscriptionStrcmp(s, t)
 char *s, *t;
 {
-    register char sc, tc;
+    char sc, tc;
     if (!s || !t)
       return (0);
     for (;;) {
@@ -1097,7 +1097,7 @@ int pathelt;
 }
 
 ScoreMatch(pattern, string, matchct)
-register char *pattern, *string;
+char *pattern, *string;
 int *matchct;
 {
 /*     debug(256, ("Matching pattern %s against name %s\n", pattern, string)); */

@@ -122,8 +122,8 @@ struct chartpie_drawing
 
 
 ATKdefineRegistry(chartpie, chartobj, NULL);
-static void Show_Pie_Chart( register class chartpie	      *self, register long			       medium );
-static void Compute_Pie_Points( register class chartpie	      *self );
+static void Show_Pie_Chart( class chartpie	      *self, long			       medium );
+static void Compute_Pie_Points( class chartpie	      *self );
 
 
 chartpie::chartpie( )
@@ -155,14 +155,14 @@ chartpie::SetDebug( boolean			   state )
   }
 
 class view *
-chartpie::HitChart( register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks )
+chartpie::HitChart( enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
         {
   class chartpie *self=this;
   static long			      prior_x, prior_y, candidate;
-  register double		      radius = DrawingX - DrawingLeft,
+  double		      radius = DrawingX - DrawingLeft,
 				      hyp, x_delta, y_delta, delta = 0,
 				      start_angle = 0, end_angle, angle;
-  register class view		     *hit;
+  class view		     *hit;
 
   IN(chartpie_HitChart);
   hit = (class view *) this;
@@ -224,14 +224,14 @@ chartpie::PrintChart( )
   }
 
 static
-void Show_Pie_Chart( register class chartpie	      *self, register long			       medium )
+void Show_Pie_Chart( class chartpie	      *self, long			       medium )
       {
-  register long			      i;
+  long			      i;
   long				      height;
   char				      percent_string[257];
-  register struct chart_item	     *item;
-  register double		      degrees, current_degree = 0.0;
-  register class fontdesc	     *font;
+  struct chart_item	     *item;
+  double		      degrees, current_degree = 0.0;
+  class fontdesc	     *font;
 
   IN(Show_Pie_Chart);
   Compute_Pie_Points( self );
@@ -293,11 +293,11 @@ void Show_Pie_Chart( register class chartpie	      *self, register long			      
   }
 
 static
-void Compute_Pie_Points( register class chartpie	      *self )
+void Compute_Pie_Points( class chartpie	      *self )
     {
-  register long			      i, count = 0;
-  register struct chart_item	     *item;
-  register double		      sum = 0, radian,
+  long			      i, count = 0;
+  struct chart_item	     *item;
+  double		      sum = 0, radian,
 				      degrees, current_degree = 90.0, radius;
 
   IN(Compute_Pie_Points);

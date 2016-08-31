@@ -36,8 +36,8 @@
 void PFpack(PFM_pt o, ...)
 {
     va_list ap;
-    register atype;
-    register along;
+    int atype;
+    int along;
     char *astr;
     va_start(ap, c);
     atype=va_arg(ap,int);  

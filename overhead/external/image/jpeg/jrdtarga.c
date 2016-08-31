@@ -81,8 +81,8 @@ LOCAL int
 read_byte (compress_info_ptr cinfo)
 /* Read next byte from Targa file */
 {
-  register FILE *infile = cinfo->input_file;
-  register int c;
+  FILE *infile = cinfo->input_file;
+  int c;
 
   if ((c = getc(infile)) == EOF)
     ERREXIT(cinfo->emethods, "Premature EOF in Targa file");
@@ -116,8 +116,8 @@ LOCAL void
 read_non_rle_pixel (compress_info_ptr cinfo)
 /* Read one Targa pixel from the input file; no RLE expansion */
 {
-  register FILE * infile = cinfo->input_file;
-  register int i;
+  FILE * infile = cinfo->input_file;
+  int i;
 
   for (i = 0; i < pixel_size; i++) {
     tga_pixel[i] = (U_CHAR) getc(infile);
@@ -129,8 +129,8 @@ LOCAL void
 read_rle_pixel (compress_info_ptr cinfo)
 /* Read one Targa pixel from the input file, expanding RLE data as needed */
 {
-  register FILE * infile = cinfo->input_file;
-  register int i;
+  FILE * infile = cinfo->input_file;
+  int i;
 
   /* Duplicate previously read pixel? */
   if (dup_pixel_count > 0) {
@@ -167,8 +167,8 @@ METHODDEF void
 get_8bit_gray_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 /* This version is for reading 8-bit grayscale pixels */
 {
-  register JSAMPROW ptr0;
-  register long col;
+  JSAMPROW ptr0;
+  long col;
   
   ptr0 = pixel_row[0];
   for (col = cinfo->image_width; col > 0; col--) {
@@ -181,9 +181,9 @@ METHODDEF void
 get_8bit_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 /* This version is for reading 8-bit colormap indexes */
 {
-  register int t;
-  register JSAMPROW ptr0, ptr1, ptr2;
-  register long col;
+  int t;
+  JSAMPROW ptr0, ptr1, ptr2;
+  long col;
   
   ptr0 = pixel_row[0];
   ptr1 = pixel_row[1];
@@ -201,9 +201,9 @@ METHODDEF void
 get_16bit_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 /* This version is for reading 16-bit pixels */
 {
-  register int t;
-  register JSAMPROW ptr0, ptr1, ptr2;
-  register long col;
+  int t;
+  JSAMPROW ptr0, ptr1, ptr2;
+  long col;
   
   ptr0 = pixel_row[0];
   ptr1 = pixel_row[1];
@@ -228,8 +228,8 @@ METHODDEF void
 get_24bit_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 /* This version is for reading 24-bit pixels */
 {
-  register JSAMPROW ptr0, ptr1, ptr2;
-  register long col;
+  JSAMPROW ptr0, ptr1, ptr2;
+  long col;
   
   ptr0 = pixel_row[0];
   ptr1 = pixel_row[1];

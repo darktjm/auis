@@ -120,7 +120,7 @@ LOCAL int
 ReadByte (compress_info_ptr cinfo)
 /* Read next byte from GIF file */
 {
-  register FILE * infile = cinfo->input_file;
+  FILE * infile = cinfo->input_file;
   int c;
 
   if ((c = getc(infile)) == EOF)
@@ -190,7 +190,7 @@ GetCode (compress_info_ptr cinfo)
 /* Fetch the next code_size bits from the GIF data */
 /* We assume code_size is less than 16 */
 {
-  register INT32 accum;
+  INT32 accum;
   int offs, ret, count;
 
   if ( (cur_bit+code_size) > last_bit) {
@@ -245,7 +245,7 @@ LZWReadByte (compress_info_ptr cinfo)
 {
   static int oldcode;		/* previous LZW symbol */
   static int firstcode;		/* first byte of oldcode's expansion */
-  register int code;		/* current working code */
+  int code;		/* current working code */
   int incode;			/* saves actual input code */
 
   /* First time, just eat the expected Clear code(s) and return next code, */
@@ -498,9 +498,9 @@ input_init (compress_info_ptr cinfo)
 METHODDEF void
 get_input_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 {
-  register JSAMPROW ptr0, ptr1, ptr2;
-  register long col;
-  register int c;
+  JSAMPROW ptr0, ptr1, ptr2;
+  long col;
+  int c;
   
   ptr0 = pixel_row[0];
   ptr1 = pixel_row[1];
@@ -524,8 +524,8 @@ METHODDEF void
 load_interlaced_image (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 {
   JSAMPARRAY image_ptr;
-  register JSAMPROW sptr;
-  register long col;
+  JSAMPROW sptr;
+  long col;
   long row;
 
   /* Read the interlaced image into the big array we've created. */
@@ -562,9 +562,9 @@ METHODDEF void
 get_interlaced_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 {
   JSAMPARRAY image_ptr;
-  register JSAMPROW sptr, ptr0, ptr1, ptr2;
-  register long col;
-  register int c;
+  JSAMPROW sptr, ptr0, ptr1, ptr2;
+  long col;
+  int c;
   long irow;
 
   /* Figure out which row of interlaced image is needed, and access it. */

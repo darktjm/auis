@@ -368,7 +368,7 @@ unsigned char row, col, len, attr;
 
 ErrorBeep ()
     {
-    register int i;
+    int i;
     unsigned char save61;
 
     outp (0x43, 0xB6);
@@ -400,7 +400,7 @@ FIELD *curfield;
 ShowError(msg)
 PRMPT *msg;
     {
-    register int i;
+    int i;
 
     ShowMsg(msg);
     ErrorBeep();

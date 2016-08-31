@@ -126,8 +126,8 @@ public:
 
   virtual long SetTreeAttribute( long attribute_code, long attribute_value );
   virtual long TreeAttribute( long attribute_code )				 ;
-  virtual long TreeWidth( register tree_type_node      node)							 ;
-  virtual long TreeHeight( register tree_type_node      node)							 ;
+  virtual long TreeWidth( tree_type_node      node)							 ;
+  virtual long TreeHeight( tree_type_node      node)							 ;
   virtual void SetTreeModified( boolean state );
   virtual boolean TreeModified()						 ;
   virtual void SetDebug( boolean state );
@@ -197,7 +197,7 @@ public:
 
 
 
-  static class tree * Create(tree_Specification	         *specification, register class dataobject     *anchor );
+  static class tree * Create(tree_Specification	         *specification, class dataobject     *anchor );
   
 	tree();
   

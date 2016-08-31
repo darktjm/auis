@@ -99,8 +99,8 @@
  */
 bool_t
 xdr_pmaplist(xdrs, rp)
-	register XDR *xdrs;
-	register struct pmaplist **rp;
+	XDR *xdrs;
+	struct pmaplist **rp;
 {
 	/*
 	 * more_elements is pre-computed in case the direction is
@@ -108,8 +108,8 @@ xdr_pmaplist(xdrs, rp)
 	 * xdr_bool when the direction is XDR_DECODE.
 	 */
 	bool_t more_elements;
-	register int freeing = (xdrs->x_op == XDR_FREE);
-	register struct pmaplist **next;
+	int freeing = (xdrs->x_op == XDR_FREE);
+	struct pmaplist **next;
 
 	while (TRUE) {
 		more_elements = (bool_t)(*rp != NULL);

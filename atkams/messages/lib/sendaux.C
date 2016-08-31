@@ -387,7 +387,7 @@ void QuoteProperly(char            *str)
 {
     if (strchr(str, '"') || strchr(str, '\\') || strchr(str, ',')) {
         char            MyBuf[2000];
-        register char  *s, *t;
+        char  *s, *t;
 
         /* Needs quoting */
         MyBuf[0] = '"';

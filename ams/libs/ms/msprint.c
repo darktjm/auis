@@ -278,7 +278,7 @@ static RotBuf13(buf, ct)
 char *buf;
 int ct;
 {
-    register char *s = buf;
+    char *s = buf;
     while (*s) {
 	if ((*s >= 0x41 && *s <= 0x5a) || (*s >= 0x61 && *s <= 0x7a)) {
 	    *s = (((((*s -1 ) & 0X1F) + 13) % 26) + 1) | (*s & 0XE0);

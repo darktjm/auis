@@ -63,8 +63,8 @@ int TIFFInitNeXT(TIFF *tif)
 static int
 NeXTDecode(TIFF *tif, u_char *buf, int occ, u_int s)
 {
-	register u_char *bp, *op;
-	register int cc, n;
+	u_char *bp, *op;
+	int cc, n;
 	u_char *row;
 	int scanline;
 
@@ -108,7 +108,7 @@ NeXTDecode(TIFF *tif, u_char *buf, int occ, u_int s)
 			break;
 		}
 		default: {
-			register int npixels = 0, grey;
+			int npixels = 0, grey;
 			int imagewidth = tif->tif_dir.td_imagewidth;
 
 			/*

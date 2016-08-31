@@ -310,9 +310,9 @@ boolean \
 
 chartx1app__InitializeObject( classID, self )
 
-  register struct classheader	 *classID;
+  struct classheader	 *classID;
 
-  register struct chartx1app	 *self;
+  struct chartx1app	 *self;
 
   \{
 

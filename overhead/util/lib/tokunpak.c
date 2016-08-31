@@ -69,7 +69,7 @@ static int IsKTC(char *where)
 
 static int UnpackKTC(char *tokens, struct ktc_token *atok, struct ktc_principal *aserv, struct ktc_principal *acli, int debug, int pPrimFlag)
 {
-    register char *p;
+    char *p;
     long int Dum;
 
     p = tokens;

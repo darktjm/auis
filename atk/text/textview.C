@@ -1089,8 +1089,8 @@ void textview::DeleteApplicationLayer(class view  *scrollbar)
 
 static void EnsureSize(class textview  *self, long  lines)
         {
-    register int i, j;
-    register long nSize;
+    int i, j;
+    long nSize;
 
     if (lines < self->aLines) return;
     i = (lines > 10) ? (lines<<1) : lines + 2;
@@ -1313,10 +1313,10 @@ static void CopyLineInfo(class textview  *self, struct linedesc  *newline, struc
 
 static void DoUpdate(class textview  *self, boolean  reformat)
 {
-    register class mark *lob, *tob;
-    register struct linedesc *tl;
+    class mark *lob, *tob;
+    struct linedesc *tl;
     long lobChars;
-    register int line;
+    int line;
     int textLength = (Text(self))->GetLength();
     int curx, cury, height, force, cStart, cEnd, mStart, mLength, csx;
     int csy, csh, csb, cex, cey, ceh, ceb, ysleft, xs, ys, t,stopline,redrawline;
@@ -2599,10 +2599,10 @@ long textview::CollapseDot()
 
 void textview::GetClickPosition(long  position, long  numberOfClicks, enum view_MouseAction  action, long  startLeft, long  startRight, long  *leftPos, long  *rightPos)
                                 {
-    register int pos;
-    register int testType;
+    int pos;
+    int testType;
     class text *text = Text(this);
-    register int textLength = (text)->GetLength();
+    int textLength = (text)->GetLength();
     int extEnd;
 
     switch (numberOfClicks % 3)  {
@@ -2666,9 +2666,9 @@ void textview::GetClickPosition(long  position, long  numberOfClicks, enum view_
 
 boolean textview::Visible(long  pos)
         {
-    register class mark *lineMark;
-    register long len = this->displayLength;
-    register long endMark;
+    class mark *lineMark;
+    long len = this->displayLength;
+    long endMark;
     if (this->nLines <= 0 || pos < (this->top)->GetPos()) {
 	return FALSE;
     }
@@ -2688,9 +2688,9 @@ boolean textview::Visible(long  pos)
 
 long textview::Locate(long  x, long  y, class view  **foundView)
                 {
-    register long i;
-    register long textLength = (Text(this))->GetLength();
-    register long end = this->nLines;
+    long i;
+    long textLength = (Text(this))->GetLength();
+    long end = this->nLines;
     struct formattinginfo info;
     long pos;
     long by, bx, bxm;
@@ -2741,7 +2741,7 @@ static long CalculateBltToTop(class textview  *self, long  pos, long  *distMoved
     long textLength = (text)->GetLength();
     long vxs, vys, length;
     long height, tpos;
-    register int tp;
+    int tp;
     struct formattinginfo info;
 
     (self)->GetTextSize( &vxs, &vys);
@@ -2831,7 +2831,7 @@ static long BackSpace(class textview  *self, long  pos, long  units, enum textvi
     long totalHeight, height, accumHeight, numLines;
     long pseudoLines;
     long plines;
-    register int tp, px;
+    int tp, px;
     struct formattinginfo info;
     long ounits = units;
 
@@ -3049,7 +3049,7 @@ long textview::MoveForward(long  pos, long  units, enum textview_MovementUnits  
                         {
     class mark *tm;
     long vxs, vys;
-    register int i;
+    int i;
     struct formattinginfo info;
     long viewHeight;
     long textlen = (Text(this))->GetLength();
@@ -3448,10 +3448,10 @@ void textview::ExposeChild(class view *v)
 
 long textview::FindLineNumber(long  pos)
 {
-    register struct linedesc *tl = this->lines;    
-    register int i;
-    register long len = (Text(this))->GetLength();
-    register long endMark;
+    struct linedesc *tl = this->lines;    
+    int i;
+    long len = (Text(this))->GetLength();
+    long endMark;
     
     for (i = 0; i < this->nLines; i++, tl++)  {
 	if (pos >= (tl->data)->GetPos())  {
@@ -4012,7 +4012,7 @@ void textview::LoseSelectionOwnership()
     (this)->WantUpdate( this);
 }
 
-static int stringmatch(register class text  *d,register long  pos,register const char  *c)
+static int stringmatch(class text  *d,long  pos,const char  *c)
 {
     /* Tests if the text begins with the given string */
     while(*c != '\0') {
@@ -4025,7 +4025,7 @@ static int stringmatch(register class text  *d,register long  pos,register const
 static void DoCopySelection(class textview  *self, FILE  *cutFile, long  pos , long  len)
 {
     class text *d;
-    register long nextChange;
+    long nextChange;
     int UseDataStream;
 
     d = Text(self);

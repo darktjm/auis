@@ -929,7 +929,7 @@ void compPushScope(nesssym_scopeType  scope);  /* install a temporary scope */
 /* gen.C */
 
 void  deallocSysGlobs(TGlobRef  ind);
-long BackSlashReduce(register class text  *text);
+long BackSlashReduce(class text  *text);
 void fixRefSysGlob(class nessmark  *m, TCodeRef  loc, TGlobRef  val);
 void setcurfuncmark(class nessmark  *m);
 class nessmark * getcurfuncmark();
@@ -963,8 +963,8 @@ void finishfunc(class nesssym  *fname , class nesssym  *parmlist ,
 		class nesssym  *locallist, boolean Export);
 void genchkforward();	/* check that FORWARDs are satisfied */
 void abortfunc();	/* exit scope if in a func */
-class nesssym * appendlists(register class nesssym  *list1 , 
-		register class nesssym  *list2);
+class nesssym * appendlists(class nesssym  *list1 , 
+		class nesssym  *list2);
 
 struct exprnode * genarith(char op, struct exprnode  *left , 
 		struct exprnode  *right);
@@ -1057,7 +1057,7 @@ FETCHMARK(union stackelement *addr) {
 	inline class nessmark *
 PushMark(class nessmark *src) {
 	/* NSPushSpace(seqstkelt); */
-	register union stackelement *NSP = 
+	union stackelement *NSP = 
 		NSPstore=(union stackelement *)(((unsigned long)NSPstore) 
 		- sizeof(struct seqstkelt));
 	NSP->s.hdr = seqHdr;

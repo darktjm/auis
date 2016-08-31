@@ -850,9 +850,9 @@ struct formula *eqview::Draw(class eq  *eqptr, struct formula  *f, long  x , lon
 		(this)->SetFont( this_c->font);
 		(this)->MoveTo( x + this_c->posp.x, y + this_c->posp.y);
 		if (this_c->verticalExtend)  {
-		    register char *s = this_c->string;
-		    register long xPos = x + this_c->posp.x;
-		    register long yPos = y + this_c->posp.y;
+		    char *s = this_c->string;
+		    long xPos = x + this_c->posp.x;
+		    long yPos = y + this_c->posp.y;
 		    struct fontdesc_charInfo info;
 
 		    while (*s != '\0')  {
@@ -897,7 +897,7 @@ struct formula *eqview::Draw(class eq  *eqptr, struct formula  *f, long  x , lon
 
 long eqview::Find(class eq  *eqptr, long  mx , long  my , long  restrict)
 {
-    register int i;
+    int i;
     long n = (eqptr)->Size();
     int nearest_i = -1, nearest_distance = 1000000;
 
@@ -906,9 +906,9 @@ long eqview::Find(class eq  *eqptr, long  mx , long  my , long  restrict)
     while ((eqptr)->Access( restrict)->transparent);
 
     for (i=restrict+1; i<n; i++) {
-	register struct formula *f = (eqptr)->Access( i);
+	struct formula *f = (eqptr)->Access( i);
 	if (f->has_hot_spot) {
-	    register int
+	    int
 		dx = mx - f->hot.x,
 		dy = my - f->hot.y,
 		distance = ABS(dx) + ABS(dy) /*dx*dx + dy*dy*/;
@@ -935,9 +935,9 @@ static int min_x, min_y, max_x, max_y;
 
 static int eqview_Box(class eq  *eqptr, long  pos , long  start , long  stop , long  x , long  y)
 {
-    register int i;
+    int i;
     for (i=start; i<stop; i++) {
-	register struct formula *f = (eqptr)->Access( i);
+	struct formula *f = (eqptr)->Access( i);
 	switch (f->symbol->type) {
 	    case BEGIN:
 		i = eqview_Box(eqptr, pos, i+1, stop, x+f->posp.x, y+f->posp.y);
@@ -945,7 +945,7 @@ static int eqview_Box(class eq  *eqptr, long  pos , long  start , long  stop , l
 	    case SIMPLE:
 	    case EXTEND:
 		if (i >= pos) {
-		    register int xx = x+f->posp.x,  yy = y+f->posp.y;
+		    int xx = x+f->posp.x,  yy = y+f->posp.y;
 		    if (xx+f->min.x < min_x) min_x = xx+f->min.x;
 		    if (xx+f->max.x > max_x) max_x = xx+f->max.x;
 		    if (yy+f->min.y < min_y) min_y = yy+f->min.y;

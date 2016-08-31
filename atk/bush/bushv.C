@@ -289,51 +289,51 @@ static suite_Specification rename_it[] = {
     0 };
 
 ATKdefineRegistry(bushv, aptv, bushv::InitializeClass);
-static void PostCursor( register class bushv    *self, register int		    type );
-static long ResetSelectedState( register class bushv		 *self, register class suite		 *suite, register struct suite_item	 *item, register long		  datum );
-static class view * EntriesHitHandler( register class bushv		 *self, register class suite		 *suite, register struct suite_item	 *item, register long			  object, register enum view_MouseAction  action, register long			  x , register long			  y , register long			  numClicks );
-static void StartDirMove( register class bushv     *self, register tree_type_node    tn );
-static int FinishDirMove( register class bushv	     *self, register tree_type_node     tn );
-static class view * TreeHitHandler( register class bushv		     *self, register class treev		     *tree_view, register tree_type_node	      node, register long			      object, register enum view_MouseAction      action, register long			      x , register long			      y , register long			      numClicks );
-static class view * ControlHitHandler( register class bushv		     *self, register class suite		     *suite, register struct suite_item	     *item, register long			      object, register enum view_MouseAction      action, register long			      x , register long			      y , register long			      numClicks );
-static const char * FileSuffix( register const char    *file_name );
-static const char * FileType( register const char	     *file_name );
-long SortByName( register class bushv		 *self, register class suite		 *suite, register struct suite_item     *e1, register struct suite_item     *e2 );
-long SortBySuffix( register class bushv		 *self, register class suite		 *suite, register struct suite_item     *e1, register struct suite_item     *e2 );
-long SortBySize( register class bushv		 *self, register class suite		 *suite, register struct suite_item     *e1, register struct suite_item     *e2 );
-long SortByDate( register class bushv		 *self, register class suite		 *suite, register struct suite_item     *e1, register struct suite_item     *e2 );
-long SortByType( register class bushv		 *self, register class suite		 *suite, register struct suite_item     *e1, register struct suite_item     *e2 );
-static void GetPreferredEditors( register class bushv  *self );
-static void GetPreferredFonts( register class bushv	 *self );
-static void GetPreferences( register class bushv	 *self );
+static void PostCursor( class bushv    *self, int		    type );
+static long ResetSelectedState( class bushv		 *self, class suite		 *suite, struct suite_item	 *item, long		  datum );
+static class view * EntriesHitHandler( class bushv		 *self, class suite		 *suite, struct suite_item	 *item, long			  object, enum view_MouseAction  action, long			  x , long			  y , long			  numClicks );
+static void StartDirMove( class bushv     *self, tree_type_node    tn );
+static int FinishDirMove( class bushv	     *self, tree_type_node     tn );
+static class view * TreeHitHandler( class bushv		     *self, class treev		     *tree_view, tree_type_node	      node, long			      object, enum view_MouseAction      action, long			      x , long			      y , long			      numClicks );
+static class view * ControlHitHandler( class bushv		     *self, class suite		     *suite, struct suite_item	     *item, long			      object, enum view_MouseAction      action, long			      x , long			      y , long			      numClicks );
+static const char * FileSuffix( const char    *file_name );
+static const char * FileType( const char	     *file_name );
+long SortByName( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
+long SortBySuffix( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
+long SortBySize( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
+long SortByDate( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
+long SortByType( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
+static void GetPreferredEditors( class bushv  *self );
+static void GetPreferredFonts( class bushv	 *self );
+static void GetPreferences( class bushv	 *self );
 static void DoEdit( class bushv  *self, char  *path , char  *name  );
 static void PerformEdit( class bushv  *self );
 static void PerformPrint( class bushv	 *self );
 static void DoPrint( class bushv  *self, char  *path , char  *name  );
 static void PerformCreate( class bushv  *self );
-static void IssueError( register class bushv  *self, register const char  *what , register const char  *where, boolean  overlay );
-static int DoDestroy( register class bushv  *self, register tree_type_node  tn, register struct Dir_Entry  *Entry, int  overlay );
+static void IssueError( class bushv  *self, const char  *what , const char  *where, boolean  overlay );
+static int DoDestroy( class bushv  *self, tree_type_node  tn, struct Dir_Entry  *Entry, int  overlay );
 static void PerformDestroy( class bushv  *self );
 static void PerformExec( class bushv  *self );
 static void DoExecute( class bushv		 *self, tree_type_node	  tn , struct Dir_Entry	 *Entry  );
 static int PerformSystemAction( class bushv	 *self, const char		 *name, const char		 *argv[], char		 *msg );
 static char* Format_Tags( u_short	     tag );
-static char* FormatEntriesItem( register class bushv	 *self, tree_type_node	  tn, int			  i, struct Dir_Entry	 *dirEntry );
+static char* FormatEntriesItem( class bushv	 *self, tree_type_node	  tn, int			  i, struct Dir_Entry	 *dirEntry );
 static void ResetEntriesCaptions( class bushv  *self );
-static int HandleModifiedObject( register class bushv	     *self );
+static int HandleModifiedObject( class bushv	     *self );
 static void PerformExit( class bushv	 *self );
 static void SwitchDirectory( class bushv	     *self );
 static void SetEditor( class bushv	 *self );
 char * FormatEntriesInfo( class bushv  *self, tree_type_node  tn );
 static suite_sortfptr DetermineSortHandler( class bushv		 *self, tree_type_node	  tn );
-static void DoAutoRescan( register class bushv		  *self );
+static void DoAutoRescan( class bushv		  *self );
 static void PushToEntries( class bushv	       *self );
 static void PushToEntry( class bushv  *self );
 static int PopToNodes( class bushv	 *self );
 static int PopToEntries( class bushv	 *self );
 static long Passivator( class bushv	     *self, class suite	     *suite, struct suite_item  *item, unsigned	      datum );
 static void PassivateControls( class bushv     *self );
-static void Push( register class bushv	     *self );
+static void Push( class bushv	     *self );
 static void Pop( class bushv     *self );
 static void PerformPop( class bushv	 *self );
 static long ToggleCaptionDetail( class bushv		 *self, class suite		 *suite, struct suite_item	 *item, unsigned		  datum );
@@ -345,7 +345,7 @@ static void PerformRescan( class bushv  *self );
 static long ResetChildDirPaths( class bushv       *self, class tree	     *tree, tree_type_node      tn, long		      datum );
 static void PerformRename( class bushv  *self );
 static void ToggleDebug( class bushv     *self );
-static void HandleChangeDir( register class bushv    *self, register char		   *dirName );
+static void HandleChangeDir( class bushv    *self, char		   *dirName );
 static int  bushv_WriteToFile( class bushv   *self, char		 *filename );
 static int bushv_SaveFile( class bushv	 *self );
 static int bushv_WriteFile( class bushv	 *self );
@@ -424,7 +424,7 @@ treev_Specification tree_spec[] = {
 
 
 static void
-PostCursor( register class bushv    *self, register int		    type )
+PostCursor( class bushv    *self, int		    type )
     {
   struct rectangle	   r;
 
@@ -441,7 +441,7 @@ PostCursor( register class bushv    *self, register int		    type )
 */
 
 static long
-ResetSelectedState( register class bushv		 *self, register class suite		 *suite, register struct suite_item	 *item, register long		  datum )
+ResetSelectedState( class bushv		 *self, class suite		 *suite, struct suite_item	 *item, long		  datum )
 {
   struct Dir_Entry	*dirEntry = NULL;
   long int		 status = 0;
@@ -458,10 +458,10 @@ ResetSelectedState( register class bushv		 *self, register class suite		 *suite,
 }
 
 static class view *
-EntriesHitHandler( register class bushv		 *self, register class suite		 *suite, register struct suite_item	 *item, register long			  object, register enum view_MouseAction  action, register long			  x , register long			  y , register long			  numClicks )
+EntriesHitHandler( class bushv		 *self, class suite		 *suite, struct suite_item	 *item, long			  object, enum view_MouseAction  action, long			  x , long			  y , long			  numClicks )
             {
-  register struct Dir_Entry	*dirEntry = NULL;
-  register int			 numSelected = 0, count = 0, i = 0;
+  struct Dir_Entry	*dirEntry = NULL;
+  int			 numSelected = 0, count = 0, i = 0;
 
   IN(EntriesHitHandler);
   ClearMessageLine();
@@ -496,7 +496,7 @@ EntriesHitHandler( register class bushv		 *self, register class suite		 *suite, 
 }
 
 static void
-StartDirMove( register class bushv     *self, register tree_type_node    tn )
+StartDirMove( class bushv     *self, tree_type_node    tn )
     {
   IN(StartDirMove);
   if(tn) {
@@ -509,9 +509,9 @@ StartDirMove( register class bushv     *self, register tree_type_node    tn )
 }
 
 static int
-FinishDirMove( register class bushv	     *self, register tree_type_node     tn )
+FinishDirMove( class bushv	     *self, tree_type_node     tn )
     {
-  register int		     status = 0;
+  int		     status = 0;
   char			     finalLocation[MAXPATHLEN];
 
   IN(FinishDirMove);
@@ -565,10 +565,10 @@ FinishDirMove( register class bushv	     *self, register tree_type_node     tn )
 }
 
 static class view *
-TreeHitHandler( register class bushv *self, register class treev *tree_view, tree_type_node node, long object, register enum view_MouseAction action, register long x, register long y, register long	numClicks )
+TreeHitHandler( class bushv *self, class treev *tree_view, tree_type_node node, long object, enum view_MouseAction action, long x, long y, long	numClicks )
 {
-    register tree_type_node	     old_CurrNode = NULL;
-    register tree_type_node	     peer = NULL;
+    tree_type_node	     old_CurrNode = NULL;
+    tree_type_node	     peer = NULL;
     struct stat			     stats;
 
     IN(TreeHitHandler);
@@ -638,7 +638,7 @@ TreeHitHandler( register class bushv *self, register class treev *tree_view, tre
 }
 
 static class view *
-ControlHitHandler( register class bushv		     *self, register class suite		     *suite, register struct suite_item	     *item, register long			      object, register enum view_MouseAction      action, register long			      x , register long			      y , register long			      numClicks )
+ControlHitHandler( class bushv		     *self, class suite		     *suite, struct suite_item	     *item, long			      object, enum view_MouseAction      action, long			      x , long			      y , long			      numClicks )
             {
 
   IN(ControlHitHandler);
@@ -690,9 +690,9 @@ ControlHitHandler( register class bushv		     *self, register class suite		     
 }
 
 static const char *
-FileSuffix( register const char    *file_name )
+FileSuffix( const char    *file_name )
   {
-  register const char   *suffix;
+  const char   *suffix;
 
   if((suffix = strrchr(file_name,'.'))) suffix++;
   else suffix = file_name + strlen(file_name);
@@ -700,11 +700,11 @@ FileSuffix( register const char    *file_name )
 }
 
 static const char *
-FileType( register char *file_name )
+FileType( char *file_name )
   {
   static const char * const suffixes[] = {"BAK","CKP",0};
   const char * const *suffix_ptr;
-  register char	    *suffix;
+  char	    *suffix;
 
   suffix = strrchr(file_name,'.');
   if(!suffix) return(file_name + strlen(file_name));
@@ -721,10 +721,10 @@ FileType( register char *file_name )
 }
 
 long
-SortByName( register class bushv *self, register class suite *suite, register struct suite_item *e1, register struct suite_item *e2 )
+SortByName( class bushv *self, class suite *suite, struct suite_item *e1, struct suite_item *e2 )
       {
-  register struct Dir_Entry	*a = NULL, *b = NULL;
-  register long			 status = 0;
+  struct Dir_Entry	*a = NULL, *b = NULL;
+  long			 status = 0;
 
   if(!e1 || !e2) return(0);
   a = (struct Dir_Entry*)(suite)->ItemAttribute(e1,suite_itemdatum);
@@ -738,10 +738,10 @@ SortByName( register class bushv *self, register class suite *suite, register st
 }
 
 long int
-SortBySuffix( register class bushv		 *self, register class suite		 *suite, register struct suite_item     *e1, register struct suite_item     *e2 )
+SortBySuffix( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 )
       {
-  register struct Dir_Entry	*a = NULL, *b = NULL;
-  register long			 rc;
+  struct Dir_Entry	*a = NULL, *b = NULL;
+  long			 rc;
 
   if(!e1|| !e2) return(0);
   a = (struct Dir_Entry*)(suite)->ItemAttribute(e1,suite_itemdatum);
@@ -761,9 +761,9 @@ SortBySuffix( register class bushv		 *self, register class suite		 *suite, regis
 }
 
 long int
-SortBySize( register class bushv		 *self, register class suite		 *suite, register struct suite_item     *e1, register struct suite_item     *e2 )
+SortBySize( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 )
       {
-  register struct Dir_Entry	*a = NULL, *b = NULL;
+  struct Dir_Entry	*a = NULL, *b = NULL;
 
   if(!e1 || !e2) return(0);
   a = (struct Dir_Entry*)(suite)->ItemAttribute(e1,suite_itemdatum);
@@ -776,9 +776,9 @@ SortBySize( register class bushv		 *self, register class suite		 *suite, registe
 }
 
 long int
-SortByDate( register class bushv		 *self, register class suite		 *suite, register struct suite_item     *e1, register struct suite_item     *e2 )
+SortByDate( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 )
       {
-  register struct Dir_Entry	*a = NULL, *b = NULL;
+  struct Dir_Entry	*a = NULL, *b = NULL;
 
   if(!e1 || !e2) return(0);
   a = (struct Dir_Entry*)(suite)->ItemAttribute(e1,suite_itemdatum);
@@ -791,11 +791,11 @@ SortByDate( register class bushv		 *self, register class suite		 *suite, registe
 }
 
 long int
-SortByType( register class bushv		 *self, register class suite		 *suite, register struct suite_item     *e1, register struct suite_item     *e2 )
+SortByType( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 )
       {
-  register struct Dir_Entry	*a = NULL, *b = NULL;
+  struct Dir_Entry	*a = NULL, *b = NULL;
   char				 n1[MAXPATHLEN+1], n2[MAXPATHLEN+1];
-  register long			 rc;
+  long			 rc;
 
   if(!e1 || !e2) return(0);
   a = (struct Dir_Entry*)(suite)->ItemAttribute(e1,suite_itemdatum);
@@ -862,12 +862,12 @@ bushv::InitializeClass( )
 }
 
 static void
-GetPreferredEditors( register class bushv  *self )
+GetPreferredEditors( class bushv  *self )
   {
   const char *ctmp;
-  register char *tmp = NULL, *colon = NULL;
+  char *tmp = NULL, *colon = NULL;
   char *myCopy = NULL;
-  register int i = 0;
+  int i = 0;
 
   IN(GetPreferredEditors);
   environ::SetProgramName("bush");
@@ -925,7 +925,7 @@ GetPreferredEditors( register class bushv  *self )
 }
 
 static void
-GetPreferredFonts( register class bushv	 *self )
+GetPreferredFonts( class bushv	 *self )
   {
   const char *control_font;
   const char *tree_node_font;
@@ -950,7 +950,7 @@ GetPreferredFonts( register class bushv	 *self )
 }
 
 static void
-GetPreferences( register class bushv	 *self )
+GetPreferences( class bushv	 *self )
   {
   IN(GetPreferences);
   GetPreferredEditors(self);
@@ -1013,7 +1013,7 @@ bushv::~bushv( )
 }
 
 class bushv *
-bushv::Create( register char  object )
+bushv::Create( char  object )
     {
 	ATKinit;
 
@@ -1117,7 +1117,7 @@ DoEdit( class bushv  *self, char  *path , char  *name  )
 static void
 PerformEdit( class bushv  *self )
   {
-  register int i = 0;
+  int i = 0;
 
   IN(PerformEdit);
   PostCursor(self,Cursor_Wait);
@@ -1144,8 +1144,8 @@ PerformEdit( class bushv  *self )
 static void
 PerformPrint( class bushv	 *self )
   {
-  register int	 i = 0;
-  register FILE	*file = NULL;
+  int	 i = 0;
+  FILE	*file = NULL;
 
   IN(PerformPrint);
   PostCursor(self,Cursor_Wait);
@@ -1219,7 +1219,7 @@ void DoPrint( class bushv  *self, char  *path , char  *name  )
 static void
 PerformCreate( class bushv  *self )
   {
-  register int f = 0;
+  int f = 0;
   char *response = NULL;
 
   IN(PerformCreate);
@@ -1253,7 +1253,7 @@ PerformCreate( class bushv  *self )
 }
 
 static void
-IssueError( register class bushv  *self, register const char  *what , register const char  *where, boolean  overlay )
+IssueError( class bushv  *self, const char  *what , const char  *where, boolean  overlay )
       {
   long result = 0;
   static const char * const question[] = { "Continue", NULL };
@@ -1272,9 +1272,9 @@ IssueError( register class bushv  *self, register const char  *what , register c
 }
 
 static int
-DoDestroy( register class bushv  *self, register tree_type_node  tn, register struct Dir_Entry  *Entry, int  overlay )
+DoDestroy( class bushv  *self, tree_type_node  tn, struct Dir_Entry  *Entry, int  overlay )
         {
-  register int status = 0;
+  int status = 0;
 
   IN(DoDestroy);
   if(self && tn && Entry) {
@@ -1400,7 +1400,7 @@ PerformDestroy( class bushv  *self )
 static void
 PerformExec( class bushv  *self )
   {
-  register int i = 0;
+  int i = 0;
 
   IN(PerformExec);
 
@@ -1479,7 +1479,7 @@ Format_Tags( u_short	     tag )
 }
 
 static char*
-FormatEntriesItem( register class bushv *self, tree_type_node tn, int i, struct Dir_Entry *dirEntry )
+FormatEntriesItem( class bushv *self, tree_type_node tn, int i, struct Dir_Entry *dirEntry )
 {
   static char entries_item[257];
   char *entries_ptr = NULL, *time_ptr = NULL, trailer[5];
@@ -1534,7 +1534,7 @@ FormatEntriesItem( register class bushv *self, tree_type_node tn, int i, struct 
 static void
 ResetEntriesCaptions( class bushv  *self )
 {
-  register int i = 0, count = 0;
+  int i = 0, count = 0;
   struct suite_item *item = NULL;
 
   IN(ResetEntriesCaptions);
@@ -1550,7 +1550,7 @@ ResetEntriesCaptions( class bushv  *self )
 }
 
 static int
-HandleModifiedObject( register class bushv	     *self )
+HandleModifiedObject( class bushv	     *self )
   {
   int			     return_value = 0;
   long			     result = 0;
@@ -1696,7 +1696,7 @@ char *
 FormatEntriesInfo( class bushv  *self, tree_type_node  tn )
 {
   static char entries_info[257];
-  register long i = 0, total_bytes = 0, count = 0;
+  long i = 0, total_bytes = 0, count = 0;
 
   IN(FormatEntriesInfo);
   if(tn) {
@@ -1727,12 +1727,12 @@ DetermineSortHandler( class bushv *self, tree_type_node tn )
 }
 
 static void
-DoAutoRescan( register class bushv  *self )
+DoAutoRescan( class bushv  *self )
   {
-  register struct suite_item	**selected = NULL, *item = NULL;
-  register char			**names = NULL;
+  struct suite_item	**selected = NULL, *item = NULL;
+  char			**names = NULL;
   int				  count = 0;
-  register int			  i;
+  int			  i;
 
   IN(DoAutoRescan);
   if(environ::GetProfileSwitch("AutoRescan", FALSE)) {
@@ -1925,9 +1925,9 @@ PassivateControls( class bushv     *self )
 }
 
 static void
-Push( register class bushv	     *self )
+Push( class bushv	     *self )
   {
-  register tree_type_node    tn = NULL;
+  tree_type_node    tn = NULL;
   char			    *name = NULL;
 
   IN(Push);
@@ -2187,9 +2187,9 @@ PerformRename( class bushv  *self )
   int msg_status = 0, count = 0;
   char *response = NULL;
   char tmp_path[MAXPATHLEN],*tmp = NULL;
-  register struct suite_item **selected = NULL;
+  struct suite_item **selected = NULL;
   struct Dir_Entry *dirEntry = NULL;
-  register int i = 0;
+  int i = 0;
 
   IN(PerformRename);
   if(!CurrNode) return;
@@ -2288,7 +2288,7 @@ bushv::ReceiveInputFocus( )
 }
 
 static void
-HandleChangeDir( register class bushv    *self, register char		   *dirName )
+HandleChangeDir( class bushv    *self, char		   *dirName )
     {
   IN(HandleChangeDir);
   if(dirName && (*dirName != '\0'))

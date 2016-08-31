@@ -327,7 +327,7 @@ static void PrintRow(class spread  *V, FILE  *f, int  r, const char  *processor,
 
 void WriteTroff(class spread  * V, FILE  * f, const char  *processor, const char  *format, boolean toplevel)
 {
-    register class table *T = MyTable(V);
+    class table *T = MyTable(V);
     int r;
     static int saveno = 30;
 

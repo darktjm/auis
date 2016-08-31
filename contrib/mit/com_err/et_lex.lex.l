@@ -10,7 +10,7 @@ end		return END;
 
 [\t\n ]		;
 
-\"{PC}*\"	{ register char *p; yylval.dynstr = ds(yytext+1);
+\"{PC}*\"	{ char *p; yylval.dynstr = ds(yytext+1);
 		  if (p=rindex(yylval.dynstr, '"')) *p='\0';
 		  return QUOTED_STRING;
 		}

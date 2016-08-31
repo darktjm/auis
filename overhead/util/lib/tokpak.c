@@ -56,7 +56,7 @@
 #ifdef AFS_ENV
 static int PackKTC(struct ktc_principal *aserv, struct ktc_token *atok, struct ktc_principal *acli, char *where, int debug, int IsPrim)
 {
-    register char *p;
+    char *p;
     long int Dum;
 
 #ifdef DEBUG

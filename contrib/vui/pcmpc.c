@@ -107,11 +107,11 @@ char *s, c;
         (c) Copyright IBM Corporation, 1986
  */
 int ULstrcmp(s1, s2)
-register char *s1, *s2;
+char *s1, *s2;
 {
 /* case INSENSITIVE:  Compare strings:  s1>s2: >0  s1==s2: 0  s1<s2: <0 */
 
-    register char c1,c2;
+    char c1,c2;
 
     for(;;) {
 	c1 = *s1++; if (c1 <= 'Z') if (c1 >= 'A') c1 += 040;
@@ -124,11 +124,11 @@ register char *s1, *s2;
 
 int ULstrncmp(s1, s2,count)
 int count;
-register char *s1, *s2;
+char *s1, *s2;
 {
 /* case INSENSITIVE:  Compare strings:  s1>s2: >0  s1==s2: 0  s1<s2: <0 */
 
-    register char i,c1,c2;
+    char i,c1,c2;
 
     for(i=0;i<count;i++) {
 	c1 = *s1++; if (c1 <= 'Z') if (c1 >= 'A') c1 += 040;
@@ -340,7 +340,7 @@ unsigned long
 conv64tolong(xnum)
 char *xnum;
 {
-    register int digits;
+    int digits;
     unsigned long Answer = 0;
 
     digits = strlen(xnum);

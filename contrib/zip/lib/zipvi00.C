@@ -124,17 +124,17 @@ END-SPECIFICATION  ************************************************************/
 #define	 View			      (self)
 #define  Objects(i)		    ((self->objects)[i])
 
-static int Draw_Inferior_Image( register class zipview		  *self, register zip_type_image		   image, register zip_type_pane		   pane );
-static int Draw_Figure( register class zipview		  *self, register zip_type_figure		   figure, register zip_type_pane		   pane );
-static int Clear_Inferior_Image( register class zipview		  *self, register zip_type_image		   image, register zip_type_pane		   pane );
-static int Hide_Inferior_Image( register class zipview		  *self, register zip_type_image		   image, register zip_type_pane		   pane );
-static int Expose_Inferior_Image( register class zipview		  *self, register zip_type_image		   image, register zip_type_pane		   pane );
+static int Draw_Inferior_Image( class zipview		  *self, zip_type_image		   image, zip_type_pane		   pane );
+static int Draw_Figure( class zipview		  *self, zip_type_figure		   figure, zip_type_pane		   pane );
+static int Clear_Inferior_Image( class zipview		  *self, zip_type_image		   image, zip_type_pane		   pane );
+static int Hide_Inferior_Image( class zipview		  *self, zip_type_image		   image, zip_type_pane		   pane );
+static int Expose_Inferior_Image( class zipview		  *self, zip_type_image		   image, zip_type_pane		   pane );
 
 
 long
-zipview::Display_Image( register zip_type_image		   image, register zip_type_pane		   pane )
+zipview::Display_Image( zip_type_image		   image, zip_type_pane		   pane )
         {
-  register int				  status = zip_success;
+  int				  status = zip_success;
   class zipview *self=this;
 
   IN(zipview::Display_Image);
@@ -157,10 +157,10 @@ zipview::Display_Image( register zip_type_image		   image, register zip_type_pan
   }
 
 long
-zipview::Draw_Image( register zip_type_image		   image, register zip_type_pane		   pane )
+zipview::Draw_Image( zip_type_image		   image, zip_type_pane		   pane )
         {
-  register int				  status = zip_success;
-  register zip_type_figure		  figure_ptr;
+  int				  status = zip_success;
+  zip_type_figure		  figure_ptr;
   class zipview *self=this;
 
   IN(zipview::Draw_Image);
@@ -194,10 +194,10 @@ zipview::Draw_Image( register zip_type_image		   image, register zip_type_pane		
   }
 
 static int
-Draw_Inferior_Image( register class zipview		  *self, register zip_type_image		   image, register zip_type_pane		   pane )
+Draw_Inferior_Image( class zipview		  *self, zip_type_image		   image, zip_type_pane		   pane )
         {
-  register int				  status = zip_success;
-  register zip_type_figure		  figure_ptr;
+  int				  status = zip_success;
+  zip_type_figure		  figure_ptr;
 
   IN(Draw_Inferior_Image);
   if ( image->zip_image_visibility != zip_image_hidden )
@@ -219,9 +219,9 @@ Draw_Inferior_Image( register class zipview		  *self, register zip_type_image		 
   }
 
 static int
-Draw_Figure( register class zipview		  *self, register zip_type_figure		   figure, register zip_type_pane		   pane )
+Draw_Figure( class zipview		  *self, zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   if ( figure->zip_figure_visibility != zip_figure_hidden  &&
      !figure->zip_figure_state.zip_figure_state_deleted )
@@ -233,10 +233,10 @@ Draw_Figure( register class zipview		  *self, register zip_type_figure		   figur
   }
 
 long
-zipview::Clear_Image( register zip_type_image		   image, register zip_type_pane		   pane )
+zipview::Clear_Image( zip_type_image		   image, zip_type_pane		   pane )
         {
-  register int				  status = zip_success;
-  register zip_type_figure		  figure_ptr;
+  int				  status = zip_success;
+  zip_type_figure		  figure_ptr;
   class zipview *self=this;
 
   IN(zipview::Clear_Image);
@@ -269,10 +269,10 @@ zipview::Clear_Image( register zip_type_image		   image, register zip_type_pane	
   }
 
 static int
-Clear_Inferior_Image( register class zipview		  *self, register zip_type_image		   image, register zip_type_pane		   pane )
+Clear_Inferior_Image( class zipview		  *self, zip_type_image		   image, zip_type_pane		   pane )
         {
-  register int				  status = zip_success;
-  register zip_type_figure		  figure_ptr;
+  int				  status = zip_success;
+  zip_type_figure		  figure_ptr;
 
   IN(Clear_Inferior_Image);
   if ( image->zip_image_visibility == zip_image_exposed )
@@ -294,10 +294,10 @@ Clear_Inferior_Image( register class zipview		  *self, register zip_type_image		
   }
 
 long
-zipview::Hide_Image( register zip_type_image		   image, register zip_type_pane		   pane )
+zipview::Hide_Image( zip_type_image		   image, zip_type_pane		   pane )
         {
-  register int				  status = zip_success;
-  register zip_type_figure		  figure_ptr;
+  int				  status = zip_success;
+  zip_type_figure		  figure_ptr;
   class zipview *self=this;
 
   IN(zipview::Hide_Image);
@@ -322,10 +322,10 @@ zipview::Hide_Image( register zip_type_image		   image, register zip_type_pane		
   }
 
 static int
-Hide_Inferior_Image( register class zipview		  *self, register zip_type_image		   image, register zip_type_pane		   pane )
+Hide_Inferior_Image( class zipview		  *self, zip_type_image		   image, zip_type_pane		   pane )
         {
-  register int				  status = zip_success;
-  register zip_type_figure		  figure_ptr;
+  int				  status = zip_success;
+  zip_type_figure		  figure_ptr;
 
   IN(Hide_Inferior_Image);
   image->zip_image_visibility = zip_image_hidden;
@@ -344,10 +344,10 @@ Hide_Inferior_Image( register class zipview		  *self, register zip_type_image		 
   }
 
 long
-zipview::Expose_Image( register zip_type_image		   image, register zip_type_pane		   pane )
+zipview::Expose_Image( zip_type_image		   image, zip_type_pane		   pane )
         {
-  register int				  status = zip_success;
-  register zip_type_figure		  figure_ptr;
+  int				  status = zip_success;
+  zip_type_figure		  figure_ptr;
   class zipview *self=this;
 
   IN(zipview::Expose_Image);
@@ -372,10 +372,10 @@ zipview::Expose_Image( register zip_type_image		   image, register zip_type_pane
   }
 
 static int
-Expose_Inferior_Image( register class zipview		  *self, register zip_type_image		   image, register zip_type_pane		   pane )
+Expose_Inferior_Image( class zipview		  *self, zip_type_image		   image, zip_type_pane		   pane )
         {
-  register int				  status = zip_success;
-  register zip_type_figure		  figure_ptr;
+  int				  status = zip_success;
+  zip_type_figure		  figure_ptr;
 
   IN(Expose_Inferior_Image);
   image->zip_image_visibility = zip_image_exposed;
@@ -394,11 +394,11 @@ Expose_Inferior_Image( register class zipview		  *self, register zip_type_image	
   }
 
 zip_type_image
-zipview::Which_Image( register long				   x , register long				   y )
+zipview::Which_Image( long				   x , long				   y )
       {
-  register zip_type_image		  image = NULL;
-  register zip_type_figure		  figure;
-  register int				  status = zip_success;
+  zip_type_image		  image = NULL;
+  zip_type_figure		  figure;
+  int				  status = zip_success;
   class zipview *self=this;
 
   IN(zippview_Which_Image);
@@ -410,15 +410,15 @@ zipview::Which_Image( register long				   x , register long				   y )
   }
 
 zip_type_image
-Within_Which_Image( register class zipview		  *self, register long				   x , register long				   y )
+Within_Which_Image( class zipview		  *self, long				   x , long				   y )
       {
 return zip_ok;
   }
 
 boolean
-zipview::Image_Visible( register zip_type_image		     image, register zip_type_pane		     pane )
+zipview::Image_Visible( zip_type_image		     image, zip_type_pane		     pane )
         {
-  register boolean			    status = FALSE;
+  boolean			    status = FALSE;
   class zipview *self=this;
 
   IN( zipview::Image_Visible );

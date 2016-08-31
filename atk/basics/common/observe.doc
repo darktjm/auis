@@ -211,9 +211,9 @@ list of observers that is initialized to \smaller{NULL};
 
 \example{void observable_AddObserver(observed, observer)
 
-register struct observable *observed;
+struct observable *observed;
 
-register struct observable *observer;} 
+struct observable *observer;} 
 
 
 \leftindent{\bold{Method description.}  \italic{observable_AddObserver} adds 
@@ -262,7 +262,7 @@ budget_AddObserver (bdget, sprdsheet);
 
 \example{void observable_NotifyObservers(observed, status)
 
-register struct observable *observed;
+struct observable *observed;
 
 long status;} 
 
@@ -410,9 +410,9 @@ long status; \{
 
 \example{void observable_RemoveObserver(observed, observer)
 
-register struct observable *observed;
+struct observable *observed;
 
-register struct observable *observer;} 
+struct observable *observer;} 
 
 
 \leftindent{\bold{Method description.}  \italic{observable_RemoveObserver} 

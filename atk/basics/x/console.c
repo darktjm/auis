@@ -43,7 +43,7 @@ char *progname;
     int i;
     char tmpHostName[255];
     unsigned long hostaddr;
-    register int fd;
+    int fd;
     struct sockaddr_in sin;
     struct hostent *hostent;
 #ifdef USEGETSERV

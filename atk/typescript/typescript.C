@@ -187,43 +187,43 @@ static void typescript_PrintOptionsCmd(class typescript  *self);
 static void typescriptAddSearchMenu();
 static void typescriptAddFileMenu();
 static void AnounceDeath(class typescript  *self);
-static class environment * GetCommandEnv(register class typescript  *self, register long  pos, long  *start , long  *end);
-static void  typescript_RuboutCmd(register class typescript  *self);
+static class environment * GetCommandEnv(class typescript  *self, long  pos, long  *start , long  *end);
+static void  typescript_RuboutCmd(class typescript  *self);
 static void MaintainLastEnv(class typescript  *td );
 void SaveCommand(class typescript  *td);
-static void TypescriptLeftCommand(register class typescript  *tsv );
-static void  TypescriptEndOfLineCommand(register class typescript  *tsv );
+static void TypescriptLeftCommand(class typescript  *tsv );
+static void  TypescriptEndOfLineCommand(class typescript  *tsv );
 static void TypescriptEOTCommand(class typescript    *tv );
-static void TypescriptINTCommand(register class typescript  *tv );
-static void TypescriptSTOPCommand (register class typescript  *tv );
-static void TypescriptQUITCommand (register class typescript  *tv );
-static void SendSig (register class typescript  *tv , int sig);
-static void  TypescriptUnboundCommand(register class typescript  *tv );
-static void  smashReadOnlyBuf(register class typescript  *tv );
-static void TypescriptDoReturnCommand (register class typescript  *tv,register long  endpos);
-static void TypescriptReturnCommand (register class typescript  *tv );
+static void TypescriptINTCommand(class typescript  *tv );
+static void TypescriptSTOPCommand (class typescript  *tv );
+static void TypescriptQUITCommand (class typescript  *tv );
+static void SendSig (class typescript  *tv , int sig);
+static void  TypescriptUnboundCommand(class typescript  *tv );
+static void  smashReadOnlyBuf(class typescript  *tv );
+static void TypescriptDoReturnCommand (class typescript  *tv,long  endpos);
+static void TypescriptReturnCommand (class typescript  *tv );
 static void  TypescriptReturnAndPositionCommand(class typescript  *self, long  data);
 static void typescript_HandleMenus(class typescript  *self, long  data);
-static void TypescriptZapCommand(register class typescript  *tv);
-static void GrabCommandHere(register class typescript  *tv , long  where);
-static void GrabCommand(register class typescript    *tv, class text  *fromText, long  start, long  end);
-static void GrabLastCommand (register class typescript  *tv);
-static void GrabNextCommand (register class typescript    *tv);
+static void TypescriptZapCommand(class typescript  *tv);
+static void GrabCommandHere(class typescript  *tv , long  where);
+static void GrabCommand(class typescript    *tv, class text  *fromText, long  start, long  end);
+static void GrabLastCommand (class typescript  *tv);
+static void GrabNextCommand (class typescript    *tv);
 static void GrabCurrentCommand(class typescript  *tv );
 static void ExecuteCurrentCommand(class typescript  *tv );
 static void  SetTitle(class typescript  *self, const char  *titleLine);
 static char *  ReadDirName(class typescript  *self, FILE  *f, char  *buf, int  *bufsiz);
-static void ReadFromProcess(FILE  *f, register class typescript  *td);
+static void ReadFromProcess(FILE  *f, class typescript  *td);
 static void ClearTypescriptText(class typescript  *tv);
 static void ClearTypescript(class typescript  *tv);
 static void NoEchoCommand(class typescript  *tv);
 static void ResetTTY(int  fd	    /* file descriptor for the tty */);
 static void  MyCanOutHandler(FILE  *afile, class typescript  *ad );
-static void  typescript_handlereadonly(register class typescript  *self ,char  c);
-static void PositionDot(register class typescript  *self);
-static void  typescript_YankCmd(register class typescript  *self);
-static void  Typescript_SelfInsertCmd(register class typescript  *self, register long  a);
-static void  Typescript_DigitCmd(register class typescript  *self, long  a);
+static void  typescript_handlereadonly(class typescript  *self ,char  c);
+static void PositionDot(class typescript  *self);
+static void  typescript_YankCmd(class typescript  *self);
+static void  Typescript_SelfInsertCmd(class typescript  *self, long  a);
+static void  Typescript_DigitCmd(class typescript  *self, long  a);
 static void typescript_BackwardsRotatePasteCmd(class typescript  *self);
 static void typescript_RotatePasteCmd(class typescript  *self);
 void  typescript_NoTextviewKey(class typescript  *self, long  key);
@@ -440,9 +440,9 @@ AnounceDeath(class typescript  *self)
 }
 
 static class environment *
-GetCommandEnv(register class typescript  *self, register long  pos, long  *start , long  *end)
+GetCommandEnv(class typescript  *self, long  pos, long  *start , long  *end)
 {
-    register class environment *te;
+    class environment *te;
 
     te = MyEnvinfo(TEXT(self), pos);
     if((te->data.style != staticBoldStyle) && (pos > 0)) {
@@ -458,7 +458,7 @@ GetCommandEnv(register class typescript  *self, register long  pos, long  *start
 }
 
 static void 
-typescript_RuboutCmd(register class typescript  *self)
+typescript_RuboutCmd(class typescript  *self)
 {
     if(self->readOnlyLen != -1) {
 #ifdef SENDRAW
@@ -546,9 +546,9 @@ SaveCommand(class typescript  *td)
 }
 
 static void
-TypescriptLeftCommand(register class typescript  *tsv )
+TypescriptLeftCommand(class typescript  *tsv )
 {
-    register long pos;
+    long pos;
     long start,end;
 
     pos = (tsv)->GetDotPosition();
@@ -567,9 +567,9 @@ TypescriptLeftCommand(register class typescript  *tsv )
 }
 
 static void 
-TypescriptEndOfLineCommand(register class typescript  *tsv )
+TypescriptEndOfLineCommand(class typescript  *tsv )
 {
-    register long pos;
+    long pos;
     long start,end;
 
     pos = (tsv)->GetDotPosition();
@@ -622,13 +622,13 @@ TypescriptEOTCommand(class typescript    *tv )
 }
 
 static void
-TypescriptINTCommand(register class typescript  *tv )
+TypescriptINTCommand(class typescript  *tv )
 {
     SendSig(tv, SIGINT);
 }
 
 static void
-TypescriptSTOPCommand (register class typescript  *tv )
+TypescriptSTOPCommand (class typescript  *tv )
 {
 #if SY_AIX221
 /* %%%%%%  must changed if AIX supports the STOP signal */
@@ -643,13 +643,13 @@ TypescriptSTOPCommand (register class typescript  *tv )
 }
 
 static void
-TypescriptQUITCommand (register class typescript  *tv )
+TypescriptQUITCommand (class typescript  *tv )
 {
     SendSig(tv, SIGQUIT);
 }
 
 static void
-SendSig (register class typescript  *tv , int sig) 
+SendSig (class typescript  *tv , int sig) 
 {
 #ifdef USE_TERMIOS
 /* The non-SunOS POSIX pty is in cooked mode, so query the
@@ -700,27 +700,27 @@ SendSig (register class typescript  *tv , int sig)
 }
 
 static void 
-TypescriptUnboundCommand(register class typescript  *tv )
+TypescriptUnboundCommand(class typescript  *tv )
 {
 }
 
 static void 
-smashReadOnlyBuf(register class typescript  *tv )
+smashReadOnlyBuf(class typescript  *tv )
 {   /* Clear out the buf when no longer needed since it probably contains a password */
-    register char *c;
-    register int i = READONLYMAX;
+    char *c;
+    int i = READONLYMAX;
 
     for(c = tv->readOnlyBuf; i > 0; i-- )
 	*c++ = 'X';
 }
 
 static void
-TypescriptDoReturnCommand (register class typescript  *tv,register long  endpos)
+TypescriptDoReturnCommand (class typescript  *tv,long  endpos)
 {
-    register class text *d;
+    class text *d;
     int maxpos, vfp;
     fd_set wfds;
-    register int stpos, len;
+    int stpos, len;
     static struct timeval t = { 0, 0};
 
     if(tv->SubChannel < 0) {
@@ -816,7 +816,7 @@ TypescriptDoReturnCommand (register class typescript  *tv,register long  endpos)
 }
 
 static void
-TypescriptReturnCommand (register class typescript  *tv )
+TypescriptReturnCommand (class typescript  *tv )
 {
     TypescriptDoReturnCommand(tv, -1);
 }
@@ -843,11 +843,11 @@ typescript_HandleMenus(class typescript  *self, long  data)
 }
 
 static void
-TypescriptZapCommand(register class typescript  *tv)
+TypescriptZapCommand(class typescript  *tv)
 {
-    register class text *d;
+    class text *d;
     int maxpos;
-    register int stpos;
+    int stpos;
 #ifdef SENDRAW
     if(tv->readOnlyLen == 0) {
 	write(tv->SubChannel,"\025",1);
@@ -872,9 +872,9 @@ TypescriptZapCommand(register class typescript  *tv)
 }
 
 static void
-GrabCommandHere(register class typescript  *tv , long  where)
+GrabCommandHere(class typescript  *tv , long  where)
 {
-    register int i;
+    int i;
     long start, size,len;
     class environment *te;
 
@@ -902,7 +902,7 @@ GrabCommandHere(register class typescript  *tv , long  where)
 }
 
 static void
-GrabCommand(register class typescript    *tv, class text  *fromText, long  start, long  end)
+GrabCommand(class typescript    *tv, class text  *fromText, long  start, long  end)
 {
     long size, len, pos;
 
@@ -923,7 +923,7 @@ GrabCommand(register class typescript    *tv, class text  *fromText, long  start
 }
 
 static void
-GrabLastCommand (register class typescript  *tv)
+GrabLastCommand (class typescript  *tv)
 {
     long cmdEnd;
 
@@ -935,7 +935,7 @@ GrabLastCommand (register class typescript  *tv)
 }
 
 static void
-GrabNextCommand (register class typescript    *tv)
+GrabNextCommand (class typescript    *tv)
 {
     long cmdEnd;
 
@@ -950,11 +950,11 @@ GrabNextCommand (register class typescript    *tv)
 static void
 GrabCurrentCommand(class typescript  *tv )
 {
-    register int i;
-    register class text *d;
+    int i;
+    class text *d;
     class environment *te;
     int dlen;
-    register long lineBegin, lineEnd;
+    long lineBegin, lineEnd;
 
     d = TEXT(tv);
     dlen = (d)->GetLength();
@@ -1066,9 +1066,9 @@ SetTitle(class typescript  *self, const char  *titleLine)
 static char * 
 ReadDirName(class typescript  *self, FILE  *f, char  *buf, int  *bufsiz)
 {
-    register char *cp;
-    register int c;
-    register int i = *bufsiz;
+    char *cp;
+    int c;
+    int i = *bufsiz;
     for(cp = buf; --i && FILE_HAS_IO(f) > 0; cp++) {
 	if((c = getc(f)) == EOF) {
 	    im::RemoveFileHandler(f);
@@ -1092,12 +1092,12 @@ ReadDirName(class typescript  *self, FILE  *f, char  *buf, int  *bufsiz)
 }
 
 static void
-ReadFromProcess(FILE  *f, register class typescript  *td)
+ReadFromProcess(FILE  *f, class typescript  *td)
 {
     char buf[4000];
-    register char *bp = buf;
-    register long dotpos, vfp;
-    register int c = getc(f), i = 3999;
+    char *bp = buf;
+    long dotpos, vfp;
+    int c = getc(f), i = 3999;
     int reframe = 0;
     char *input;
     int cpos;
@@ -1558,7 +1558,7 @@ typescript::typescript()
 
 	UserMenuProc = proctable::DefineProc("Read-User-Menus", (proctable_fptr)typescript_HandleMenus, &typescript_ATKregistry_ , NULL, "Handle user supplied menus"); 
 	while(fgets(nbuf, sizeof nbuf, df)) {
-	    register int pos = strlen(nbuf) - 1;
+	    int pos = strlen(nbuf) - 1;
 	    if(pos > 0) {
 		if(nbuf[pos-1] == '\\')
 		    nbuf[pos-1] = '\0';
@@ -1595,9 +1595,9 @@ static void
 MyCanOutHandler(FILE  *afile, class typescript  *ad )
 {
     long start;
-    register class text *myd;
-    register long i, end;
-    register char *tp, tc;
+    class text *myd;
+    long i, end;
+    char *tp, tc;
     char buffer[COBSIZE];
 
     if(ad->SubChannel < 0) 
@@ -1648,7 +1648,7 @@ typescript::~typescript()
 void 
 typescript::ObservedChanged(class observable  *ov, long  value )
 {
-    register long fencepos;
+    long fencepos;
 
     /* after output has arrived, make sure view's dot is >= fence */
     if(ov == (class observable*) TEXT(this)) {
@@ -1700,7 +1700,7 @@ typescript::ReceiveInputFocus()
 }
 
 static void 
-typescript_handlereadonly(register class typescript  *self ,char  c)
+typescript_handlereadonly(class typescript  *self ,char  c)
 {   /* This will put characters in the read-only buffer without displaying them.
       Deals with the no-echo mode for entering passwords and the like. */
 #ifdef SENDRAW
@@ -1715,9 +1715,9 @@ typescript_handlereadonly(register class typescript  *self ,char  c)
 }
 
 static void
-PositionDot(register class typescript  *self)
+PositionDot(class typescript  *self)
 {    
-    register long dotpos,markpos;
+    long dotpos,markpos;
     class text *d = TEXT(self);
 
     if((dotpos = (self)->GetDotPosition()) < (markpos = (d)->GetFence())){
@@ -1739,14 +1739,14 @@ PositionDot(register class typescript  *self)
 }
 
 static void 
-typescript_YankCmd(register class typescript  *self)
+typescript_YankCmd(class typescript  *self)
 {    
     PositionDot(self);
     textview_YankCmd(self, 0);
 }
 
 static void 
-Typescript_SelfInsertCmd(register class typescript  *self, register long  a)
+Typescript_SelfInsertCmd(class typescript  *self, long  a)
 {
     PositionDot(self);
     if(self->readOnlyLen != -1)
@@ -1756,7 +1756,7 @@ Typescript_SelfInsertCmd(register class typescript  *self, register long  a)
 }
 
 static void 
-Typescript_DigitCmd(register class typescript  *self, long  a)
+Typescript_DigitCmd(class typescript  *self, long  a)
 {
     PositionDot(self);
     if(self->readOnlyLen != -1)
@@ -1847,7 +1847,7 @@ typescript::InitializeClass()
 {
     struct proctable_Entry *tempProc, *si, *dig;
     struct ATKregistryEntry  *classInfo = &typescript_ATKregistry_ ;
-    register long i;
+    long i;
     char str[2];
     maxSize = environ::GetProfileInt("maxsize", 10000);
     extraRoom = maxSize / 10;

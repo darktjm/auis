@@ -335,7 +335,7 @@ parsediagram(gofig *self, FILE *f) {
 
 */
 	long
-gofig::Read( register FILE *file, register long id ) {
+gofig::Read( FILE *file, long id ) {
 	long result = dataobject_BADFORMAT;
 	char s[MAXFILELINE + 2];
 	long len;

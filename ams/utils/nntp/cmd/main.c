@@ -69,7 +69,7 @@ char **argv;
 {
 	FILE *fp;
 	char lastbuf[MAXPATHLEN], *flag, *lasttm;
-	register char *cp;
+	char *cp;
 	int i, pid, FirstTime=1, sval, Debug=0;
 #ifdef UseVMail
 	int VMailInUse = 0;

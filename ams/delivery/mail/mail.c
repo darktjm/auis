@@ -85,8 +85,8 @@ static postmaster(argv)
     static const char sendmail[] = "/usr/lib/sendmail -oi postmaster";
     extern FILE *popen();
     extern pclose();
-    register FILE *fout;
-    register int i;
+    FILE *fout;
+    int i;
 
     fout = popen(sendmail, "w");
     if (fout == NULL)

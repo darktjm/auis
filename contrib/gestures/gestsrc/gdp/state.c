@@ -98,7 +98,7 @@ Element
 StNewObj(t)
 ObjectType t;
 {
-	register Object o = CreateObject(t);
+	Object o = CreateObject(t);
 	return AddElement(Objs, o);
 }
 
@@ -113,7 +113,7 @@ Element
 StCopyElement(e)
 Element e;
 {
-	register Object o = CopyObject(EtoO(e));
+	Object o = CopyObject(EtoO(e));
 	return AddElement(Objs, o);
 }
 
@@ -203,7 +203,7 @@ StReplaceObject(e, s)
 Element e;
 Object s;
 {
-	register Object d = EtoO(e);
+	Object d = EtoO(e);
 
 /*
 	printf("StReplaceObject: \nreplacing ("); DumpObject(d);
@@ -238,7 +238,7 @@ StEdit(e, oldo)
 Element e;
 Object *oldo;
 {
-	register Object o = CopyObject(EtoO(e));
+	Object o = CopyObject(EtoO(e));
 	if(oldo)
 		*oldo = EtoO(e);
 	/* printf("StEdit old=%x, copy=%x\n", EtoO(e), o); */

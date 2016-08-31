@@ -139,8 +139,8 @@ void
 chartlin::DrawChart( )
     {
   class chartlin *self=this;
-  register struct chart_item_shadow  *shadow = Items;
-  register short		      prior_x, prior_y;
+  struct chart_item_shadow  *shadow = Items;
+  short		      prior_x, prior_y;
 
   IN(chartlin_DrawChart);
   prior_x = 0;
@@ -164,10 +164,10 @@ void
 chartlin::PrintChart( )
     {
   class chartlin *self=this;
-  register long			      i, left, top, width,
+  long			      i, left, top, width,
 				      count = (Data)->ItemCount( ),
 				      excess, fudge;
-  register struct chart_item	     *chart_item = (Data )->ItemAnchor( );
+  struct chart_item	     *chart_item = (Data )->ItemAnchor( );
   struct point			      prior_point;
 
   IN(chartlin_PrintChart);

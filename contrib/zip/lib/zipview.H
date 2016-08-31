@@ -156,7 +156,7 @@ public:
   virtual long Redraw_Pane_Suite( zip_type_pane pane );
 
   virtual long Set_Pane_Coordinates( zip_type_pane  pane, long x_origin, long y_origin, long width, long height );
-  virtual long Set_Pane_Border( zip_type_pane  pane, char	*font_name, char pattern, register long thickness );
+  virtual long Set_Pane_Border( zip_type_pane  pane, char	*font_name, char pattern, long thickness );
   virtual long Set_Pane_Stream( zip_type_pane pane, zip_type_stream stream );
   virtual long Reset_Pane_Stream( zip_type_pane pane, zip_type_stream stream );
   virtual struct zip_stream * Pane_Stream( zip_type_pane pane );

@@ -61,8 +61,8 @@ static int deal_errors = 0;
 char *deal_fixfield(s)
 char *s;
 {
-    register char *w=s;
-    register char ch;
+    char *w=s;
+    char ch;
     while((ch=(*w))!=0) {
 	if(ch!=(ch&0x7f))ch='?';
 	if((ch==',')||(ch<' ')||(ch==0x7f))
@@ -100,7 +100,7 @@ static int deal_getpid()
 
 static long deal_gethostid()
 {
-    register struct hostent *me;
+    struct hostent *me;
     static long my_host_number=0;
     strcpy(deal_hostname,"totaly_unknown_host_running_deamonlog"); 
     if(gethostname(deal_hostname,sizeof(deal_hostname))!=0)return (deal_errors++,0);

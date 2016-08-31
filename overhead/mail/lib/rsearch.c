@@ -95,9 +95,9 @@ int anslen;		/* size of answer */
 }
 
 static char *myhostalias(name)		/* same as hostalias() in gethostnamadr.c, sigh */
-register char *name;
+char *name;
 {
-    register char *C1, *C2;
+    char *C1, *C2;
     FILE *fp;
     char *file, *getenv();
     char buf[BUFSIZ];
@@ -136,11 +136,11 @@ int class, type;		/* class and type of query */
 char *answer;		/* buffer to put answer */
 int anslen;		/* size of answer */
 {
-    register char *cp;
+    char *cp;
 #ifdef RES_DNSRCH
-    register char **domain;
+    char **domain;
 #endif /* RES_DNSRCH */
-    register HEADER *hp;
+    HEADER *hp;
     int n, NumDots;
 
 #ifdef CMUCS

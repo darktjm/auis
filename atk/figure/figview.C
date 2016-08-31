@@ -3171,7 +3171,7 @@ void figview::LinkTree( class view  *parent )
 {
     this->view::LinkTree( parent);
     if (parent && this->GetIM()) {
-	register int ix;
+	int ix;
 	class figobj *o;
 	for (ix = 0; ix < this->objs_size; ix++ ) {
 	    o = this->objs[ix].o;

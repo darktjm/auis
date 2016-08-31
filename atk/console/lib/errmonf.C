@@ -82,7 +82,7 @@ void CheckErrorsIn(FILE  *ErrorsIn, char *selfl)
     class consoleClass  *self=(class consoleClass *)selfl;
     static char buf[DEVCONSOLEBUFSIZE];
     static char *fillptr = buf;
-    register int c;
+    int c;
 
     mydbg(("entering: CheckErrorsIn\n"));
     errno = 0;

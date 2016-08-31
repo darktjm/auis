@@ -51,11 +51,11 @@ boolean dictionary::InitializeClass()
 
     return TRUE;
 }
-void dictionary::Insert(register class view  *view,char  *id ,char  *object)
+void dictionary::Insert(class view  *view,char  *id ,char  *object)
 {
 	ATKinit;
 
-    register struct dirtable *dd,*freeref;
+    struct dirtable *dd,*freeref;
     freeref = NULL;
     for(dd = table; dd < last; dd++){
         if(dd->view == view && dd->id == id) break;
@@ -85,11 +85,11 @@ void dictionary::Insert(register class view  *view,char  *id ,char  *object)
     dd->id = id;
     dd->object = object;
 }
-char *dictionary::LookUp(register class view  *view,char  *id)
+char *dictionary::LookUp(class view  *view,char  *id)
 {
 	ATKinit;
 
-    register struct dirtable *dd;
+    struct dirtable *dd;
     for(dd = table; dd < last; dd++)
         if(dd->view == view && dd->id == id) return(dd->object);
     return(NULL);
@@ -98,7 +98,7 @@ long dictionary::CountViews(char  *id)
 {
 	ATKinit;
 
-    register struct dirtable *dd;
+    struct dirtable *dd;
     long i = 0;
     for(dd = table; dd < last; dd++){
         if(dd->id == id && dd->view != NULL){
@@ -111,7 +111,7 @@ long dictionary::ListViews(char  *id,class view  **viewarray,long  len)
 {
 	ATKinit;
 
-    register struct dirtable *dd;
+    struct dirtable *dd;
     long i = 0;
     for(dd = table; dd < last; dd++){
         if(dd->id == id && dd->view != NULL ){
@@ -121,11 +121,11 @@ long dictionary::ListViews(char  *id,class view  **viewarray,long  len)
     }
     return i;
 }
-long dictionary::CountRefs(register class view  *view)
+long dictionary::CountRefs(class view  *view)
 {
 	ATKinit;
 
-    register struct dirtable *dd;
+    struct dirtable *dd;
     long i = 0;
     for(dd = table; dd < last; dd++){
         if(dd->view == view ){
@@ -134,11 +134,11 @@ long dictionary::CountRefs(register class view  *view)
     }
     return i;
 }
-long dictionary::ListRefs(register class view  *view,char  **refarray,long  len)
+long dictionary::ListRefs(class view  *view,char  **refarray,long  len)
 {
 	ATKinit;
 
-    register struct dirtable *dd;
+    struct dirtable *dd;
     long i = 0;
     for(dd = table; dd < last; dd++){
         if(dd->view == view){
@@ -149,11 +149,11 @@ long dictionary::ListRefs(register class view  *view,char  **refarray,long  len)
     return i;
 }
 
-void dictionary::Delete(register class view  *view,char  *id)
+void dictionary::Delete(class view  *view,char  *id)
 {
 	ATKinit;
 
-    register struct dirtable *dd;
+    struct dirtable *dd;
     for(dd = table; dd < last; dd++)
         if(dd->view == view && dd->id == id){
             DeleteEntry(dd);

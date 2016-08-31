@@ -71,14 +71,14 @@ static class textview *getrealview(class view  *v);
 static boolean skipnewlines(class text  *d,long  *pos,long  *len);
 static void printindex(class view  *self, char *usepsstr);
 static void previewindex(class view  *self, char *usepsstr);
-static void tindex_IndexTermCmd(register class view  *v);
-void tindex_ReadIndexFile(register class view  *v);
-void tindex_WriteIndexFile(register class view  *v);
+static void tindex_IndexTermCmd(class view  *v);
+void tindex_ReadIndexFile(class view  *v);
+void tindex_WriteIndexFile(class view  *v);
 static void tindex_FudgeFonts(class text  *txt,const char  *name , int  ftype);
-void tindex_MakeIndexPlain(register class view  *v);
-void tindex_MakeIndexItalic(register class view  *v);
-void tindex_HideInvIndex(register class view  *v);
-void tindex_ExposeInvIndex(register class view  *v);
+void tindex_MakeIndexPlain(class view  *v);
+void tindex_MakeIndexItalic(class view  *v);
+void tindex_HideInvIndex(class view  *v);
+void tindex_ExposeInvIndex(class view  *v);
 static boolean isindexenv(class content  *self,class text  *text,long  pos,class environment  *env);
 static void skipchapnumber(class text  *d,long  *pos,long  *len);
 static boolean writeindex(FILE  *f,class text  *text,long  pos,class environment  *env);
@@ -198,7 +198,7 @@ void tindex::PrintIndex(class view  *self, boolean useps)
 
 }
 
-void tindex::PreviewIndex(register class view  *self, boolean useps)
+void tindex::PreviewIndex(class view  *self, boolean useps)
 {
     ATKinit;
     boolean oldoption;
@@ -214,7 +214,7 @@ void tindex::PreviewIndex(register class view  *self, boolean useps)
     message::DisplayString(NULL,0,"Index preview window should appear soon.");
 }
 
-static void tindex_IndexTermCmd(register class view  *v)
+static void tindex_IndexTermCmd(class view  *v)
 {
     /* Prompt for an index term and call index_IndexTerm */
     char thisString[100];
@@ -242,7 +242,7 @@ static void tindex_IndexTermCmd(register class view  *v)
 	(d)->NotifyObservers(0);
     }
 }
-void tindex_ReadIndexFile(register class view  *v)
+void tindex_ReadIndexFile(class view  *v)
 {
     /* Prompt for an index term and call index_IndexTerm */
     FILE *f;
@@ -270,7 +270,7 @@ void tindex_ReadIndexFile(register class view  *v)
 	(d)->NotifyObservers(0);
     }
 }
-void tindex_WriteIndexFile(register class view  *v)
+void tindex_WriteIndexFile(class view  *v)
 {
     /* Prompt for an index term and call index_IndexTerm */
     FILE *f;
@@ -314,25 +314,25 @@ static void tindex_FudgeFonts(class text  *txt,const char  *name , int  ftype)
     (txt)->RegionModified(0,(txt)->GetLength());
     (txt)->NotifyObservers(0);
 }
-void tindex_MakeIndexPlain(register class view  *v)
+void tindex_MakeIndexPlain(class view  *v)
 {
     class textview *self;
     if((self = getrealview(v)) == NULL) return ;
     tindex_FudgeFonts(Text(self),"index",fontdesc_Plain);
 }
-void tindex_MakeIndexItalic(register class view  *v)
+void tindex_MakeIndexItalic(class view  *v)
 {
     class textview *self;
     if((self = getrealview(v)) == NULL) return ;
     tindex_FudgeFonts(Text(self),"index",fontdesc_Italic);
 }
-void tindex_HideInvIndex(register class view  *v)
+void tindex_HideInvIndex(class view  *v)
 {
     class textview *self;
     if((self = getrealview(v)) == NULL) return ;
     tindex_FudgeFonts(Text(self),"indexi", tindex_HIDDEN);
 }
-void tindex_ExposeInvIndex(register class view  *v)
+void tindex_ExposeInvIndex(class view  *v)
 {
     class textview *self;
     if((self = getrealview(v)) == NULL) return ;
@@ -342,8 +342,8 @@ void tindex_ExposeInvIndex(register class view  *v)
 /* returns 0 if not an index style, nonzero if it is */
 int tindex::StyleNameIndexLevel(const char *name)
 {
-    register const char * const *sp;
-    register int which = 0;
+    const char * const *sp;
+    int which = 0;
     if(name == NULL) return 0;
     for(sp = indexnames;which < indexnamecount && sp &&  *sp && **sp; sp++){
 	which++;
@@ -372,7 +372,7 @@ int tindex::IndexTerm(class text  *d,const char  *term,const char  **error)
     char *lastPattern = NULL;
     const char  *tp;
     int pos = 0, len,dlen,c;
-    register int j;
+    int j;
     class style *Style = NULL;
     class environment *te;
  

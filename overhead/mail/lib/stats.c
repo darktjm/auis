@@ -108,10 +108,10 @@ static bool GetMyName()
 }
 
 static Format(to, from, len)
-    register char *to, *from;
-    register int len;	/* Doesn't include '\0' */
+    char *to, *from;
+    int len;	/* Doesn't include '\0' */
 {
-    register int flen;
+    int flen;
 
     flen = strlen(from);
     if (flen >= len) {
@@ -148,10 +148,10 @@ static Format(to, from, len)
 
 static bool ChooseLogHost()
 {
-    register FILE *f;
+    FILE *f;
     char buffer[50];
-    register char *c;
-    register int nhosts, host;
+    char *c;
+    int nhosts, host;
 
     /* Open hosts file */
     f = fopen(HostsFile, "r");
@@ -210,9 +210,9 @@ static bool ChooseLogHost()
 
 static int OpenSocket()
 {
-    register int s;
+    int s;
 #ifdef NOTDEF
-    register struct servent *serv;
+    struct servent *serv;
 #endif /* NOTDEF */
 #ifndef hp9000s800 /* socket.h defines as extern u_long */
     extern long inet_addr();
@@ -353,9 +353,9 @@ int Logstat(module, call, format, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9)
     int save_errno;
     char ModuleName[LOGSTRLEN+1];
     struct osi_Times tp;
-    register struct tm *now;
+    struct tm *now;
     char buffer[1500];	/* Larger than datagram size */
-    register char *c;
+    char *c;
 
     if (StatFile < 0) return -1;
     save_errno = errno;

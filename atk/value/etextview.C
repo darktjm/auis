@@ -37,12 +37,12 @@ ATK_IMPL("etextview.H")
 #define Text(A) ((class entertext *)(A->dataobject))
 
 ATKdefineRegistry(etextview, textview, etextview::InitializeClass);
-void etextview_CancelCommand(register class etextview  *self );
-void etextview_ReturnCommand(register class etextview  *self );
-void etextview_ClearCommand(register class etextview  *self );
+void etextview_CancelCommand(class etextview  *self );
+void etextview_ReturnCommand(class etextview  *self );
+void etextview_ClearCommand(class etextview  *self );
 
 
-void etextview_CancelCommand(register class etextview  *self )
+void etextview_CancelCommand(class etextview  *self )
 {
     class entertext *txt = Text(self);
     if((txt)->Changed()){
@@ -52,14 +52,14 @@ void etextview_CancelCommand(register class etextview  *self )
 	(txt)->NotifyObservers(0);
     }
 }
-void etextview_ReturnCommand(register class etextview  *self )
+void etextview_ReturnCommand(class etextview  *self )
 {
     class entertext *txt = Text(self);
     (self)->SetDotPosition(0);
     (self)->SetDotLength(0);
     (txt)->updatebuf();
 }
-void etextview_ClearCommand(register class etextview  *self )
+void etextview_ClearCommand(class etextview  *self )
 {
     class entertext *txt = Text(self);
     (txt)->Clear();

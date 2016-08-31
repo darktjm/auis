@@ -139,7 +139,7 @@ void
 chartdot::DrawChart( )
     {
   class chartdot *self=this;
-  register struct chart_item_shadow  *shadow = Items;
+  struct chart_item_shadow  *shadow = Items;
 
   IN(chartdot_DrawChart);
   if ( DotFont == NULL )
@@ -159,11 +159,11 @@ void
 chartdot::PrintChart( )
     {
   class chartdot *self=this;
-  register long			      i, left, top, width,
+  long			      i, left, top, width,
 				      count = (Data )->ItemCount( );
-  register struct chart_item	     *chart_item = (Data )->ItemAnchor( );
-  register struct aptv_path	     *path;
-  register struct aptv_point	     *path_point;
+  struct chart_item	     *chart_item = (Data )->ItemAnchor( );
+  struct aptv_path	     *path;
+  struct aptv_point	     *path_point;
 
   IN(chartdot_PrintChart);
   path = (struct aptv_path *)

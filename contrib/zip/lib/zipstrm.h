@@ -250,11 +250,11 @@ typedef struct {
 				   entries */
 } symtab_type;
 
-int symtab_add (register symtab_type  *symtab, register unsigned char *symbol, register struct user_data  *data);
-int symtab_delete( register symtab_type  *symtab, register unsigned char *symbol );
-int symtab_create (register symtab_type  **symtab, register int  expected_size);
-void symtab_destroy( register symtab_type	          *symtab );
-int symtab_find (register symtab_type  *symtab, register unsigned char *symbol, register struct user_data  **data);
+int symtab_add (symtab_type  *symtab, unsigned char *symbol, struct user_data  *data);
+int symtab_delete( symtab_type  *symtab, unsigned char *symbol );
+int symtab_create (symtab_type  **symtab, int  expected_size);
+void symtab_destroy( symtab_type	          *symtab );
+int symtab_find (symtab_type  *symtab, unsigned char *symbol, struct user_data  **data);
 
 typedef  struct zip_stream			 *zip_type_stream;
 

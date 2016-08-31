@@ -186,10 +186,10 @@ nessmark::getMark() {
 }
 	 
 	void 
-nessmark::UpdateMarks(register long  pos, register long  size) {
+nessmark::UpdateMarks(long  pos, long  size) {
 
-	register class nessmark *mark;
-	register long endPos;
+	class nessmark *mark;
+	long endPos;
 
 	if (size > 0)  for (mark = this; mark != NULL; 
 				mark = (class nessmark *)
@@ -247,7 +247,7 @@ nessmark::UpdateMarks(register long  pos, register long  size) {
 				(mark)->SetPos( 
 						(mark)->GetPos() + size);
 			else  {
-				register long tsize = size;
+				long tsize = size;
 				if (pos <= (mark)->GetPos()) {
 					/* part of deletion is before mark */
 					tsize += (mark)->GetPos() - pos;
@@ -269,11 +269,11 @@ nessmark::UpdateMarks(register long  pos, register long  size) {
 
 
 	void 
-nessmark::SetText(register class simpletext  *text) {
+nessmark::SetText(class simpletext  *text) {
 
-	register long tl = (text)->GetLength(),
+	long tl = (text)->GetLength(),
 		pos = (this)->GetPos();
-	register class simpletext *oldtext;
+	class simpletext *oldtext;
 ENTER(nessmark::SetText);
 	if (pos > tl)    
 		(this)->SetPos( pos = tl);
@@ -295,7 +295,7 @@ LEAVE(nessmark::SetText);
 }
 
 	void 
-nessmark::Set(register class simpletext  *text, register long  pos , register long  len) {
+nessmark::Set(class simpletext  *text, long  pos , long  len) {
 
 ENTER(nessmark::Set);
 	if (len < 0)  {pos = pos + len;  len = -len;}
@@ -307,12 +307,12 @@ LEAVE(nessmark::Set);
 }
 
 	void 
-nessmark::MakeConst(register const char  *cx) {
+nessmark::MakeConst(const char  *cx) {
 	if (*cx == '\0')
 		(this)->Set( nessmark_EmptyText, 0, 0);
 	else {
-		register long len = strlen(cx);
-		register class simpletext *t = new simpletext;
+		long len = strlen(cx);
+		class simpletext *t = new simpletext;
 		(t)->InsertCharacters( 0, cx, len);
 		(t)->SetReadOnly( TRUE);
 		(this)->Set( t, 0, len);
@@ -324,8 +324,8 @@ nessmark::MakeConst(register const char  *cx) {
 	void 
 nessmark::Next() {
 
-	register class simpletext *t = (this)->GetText();
-	register long pos;
+	class simpletext *t = (this)->GetText();
+	long pos;
 	(this)->SetPos(  
 			pos = ((this)->GetPos()
 			   +  (this)->GetLength())   );
@@ -347,14 +347,14 @@ nessmark::Base() {
 }
 
 	void 
-nessmark::Extent(register class nessmark  *tail) {
+nessmark::Extent(class nessmark  *tail) {
 
 ENTER(nessmark::Extent);
 	if ((this)->GetText() != (tail)->GetText())
 		(this)->Set( nessmark_EmptyText, 0, 0);
 	else {
-		register int start = (this)->GetPos();
-		register int end = (tail)->GetPos() 
+		int start = (this)->GetPos();
+		int end = (tail)->GetPos() 
 				+ (tail)->GetLength();
 		if (end < start)
 			start = end;
@@ -365,13 +365,13 @@ LEAVE(nessmark::Extent);
 }
 
 	void 
-nessmark::Replace(register class nessmark  *replacement) {
+nessmark::Replace(class nessmark  *replacement) {
 
 	class text *text = (class text *)(this)->GetText();
-	register long destpos = (this)->GetPos();
-	register long destlen = (this)->GetLength();
-	register long srcpos = (replacement)->GetPos();
-	register long srclen = (replacement)->GetLength();
+	long destpos = (this)->GetPos();
+	long destlen = (this)->GetLength();
+	long srcpos = (replacement)->GetPos();
+	long srclen = (replacement)->GetLength();
 	boolean oldgliso;
 ENTER(nessmark::Replace);
 	DEBUG(("dest(%ld,%ld)   src(%ld,%ld)  destbaselen %ld\n", 
@@ -406,10 +406,10 @@ ENTER(nessmark::Replace);
 }
 
 	boolean
-nessmark::Equal(register class nessmark  *comparand) {
+nessmark::Equal(class nessmark  *comparand) {
 
-	register int i, iend, j;
-	register class simpletext *itext, *jtext;
+	int i, iend, j;
+	class simpletext *itext, *jtext;
 
 	if ((this)->GetLength() 
 				!= (comparand)->GetLength())
@@ -442,9 +442,9 @@ nessmark::Length() {
 	void
 nessmark::NextN(long  n) {
 
-	register class simpletext *t = (this)->GetText();
+	class simpletext *t = (this)->GetText();
 	long tlen = (t)->GetLength();
-	register long pos;
+	long pos;
 	if (n == 0) return;
 	if (n < 0) {
 		pos = (this)->GetPos()  +  n;
@@ -460,7 +460,7 @@ nessmark::NextN(long  n) {
 
 
 	void
-nessmark::SetFrom(register class nessmark  *src) {
+nessmark::SetFrom(class nessmark  *src) {
 
 	(this)->Set( (src)->GetText(), 
 			(src)->GetPos(), 
@@ -470,9 +470,9 @@ nessmark::SetFrom(register class nessmark  *src) {
 	char *
 nessmark::ToC() {
 
-	register class simpletext *t ;
-	register long loc, len;
-	register char *bx;
+	class simpletext *t ;
+	long loc, len;
+	char *bx;
 	char *buf;
 
 	t = (this)->GetText();

@@ -106,7 +106,7 @@ chartapp::~chartapp( )
       {}
 
 boolean
-chartapp::ParseArgs( register int			   argc, register const char			 **argv )
+chartapp::ParseArgs( int			   argc, const char			 **argv )
         {
   class chartapp *self=this;
   IN(chartapp_ParseArgs);
@@ -135,7 +135,7 @@ boolean
 chartapp::Start( )
     {
   class chartapp *self=this;
-  register FILE			 *file;
+  FILE			 *file;
   long				  id, status = true;
 
   (this )->application::Start( );

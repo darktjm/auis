@@ -44,8 +44,8 @@ char *ULsindex(const char *big, const char *small)
  *
  */
 {
-    register const char *bp, *bp1, *sp;
-    register char bc, sc, c = *small;
+    const char *bp, *bp1, *sp;
+    char bc, sc, c = *small;
 
     if (c==0) return(0);
     if (c <= 'Z') if (c >= 'A') c += ('a' - 'A');

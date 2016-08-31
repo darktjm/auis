@@ -73,7 +73,7 @@ callrpc(host, prognum, versnum, procnum, inproc, in, outproc, out)
 	xdrproc_t inproc, outproc;
 	char *in, *out;
 {
-	register struct callrpc_private *crp = callrpc_private;
+	struct callrpc_private *crp = callrpc_private;
 	struct sockaddr_in server_addr;
 	enum clnt_stat clnt_stat;
 	struct hostent *hp;

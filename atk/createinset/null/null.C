@@ -85,9 +85,9 @@ ATKdefineRegistry(null, dataobject, null::InitializeClass);
 void
 null::ClearDots()
 	{
-	register struct dotlist *d;
+	struct dotlist *d;
 	for (d = (this)->GetFirstDot();  d != NULL; )  {
-		register struct dotlist *t = (this)->GetNextDot( d);
+		struct dotlist *t = (this)->GetNextDot( d);
 		free(d);
 		d = t;
 	}
@@ -99,7 +99,7 @@ null::ClearDots()
 	void
 null::AddDot(long  x , long  y)
 		{
-	register struct dotlist *d;
+	struct dotlist *d;
 	d = (struct dotlist *)malloc(sizeof (struct dotlist));
 	d->next = (this)->GetFirstDot();
 	d->x = x;
@@ -149,7 +149,7 @@ null::InitializeClass()
 	Fails if syntax of headers is incorrect.
 */
 	long
-null::Read(register FILE   *file, register long   id)
+null::Read(FILE   *file, long   id)
 			{
 	long result = dataobject_BADFORMAT;
 	char s[MAXFILELINE + 2];
@@ -240,7 +240,7 @@ null::Write(FILE   *file, long   writeID, int   level)
 	long id = (this)->GetID();
 	if (this->writeID != writeID) {
 		/* new instance of write, do it */
-		register struct dotlist *d;
+		struct dotlist *d;
 		this->writeID = writeID;
 		sprintf(head, "data{%s, %d}\n", (this)->GetTypeName(), id);
 		fprintf(file, "\\begin%s", head);

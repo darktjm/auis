@@ -45,13 +45,13 @@
 
 #include <lookz.H>
 
-main( register int	   argc, register char   **argv );
-printdata(register class lookz  *st);
+main( int	   argc, char   **argv );
+printdata(class lookz  *st);
 
 
-main( register int	   argc, register char   **argv )
+main( int	   argc, char   **argv )
 		{
-	register class lookz *st, *st2;
+	class lookz *st, *st2;
 	FILE *f;
 
 	printf("Start\n"); fflush(stdout);
@@ -117,7 +117,7 @@ main( register int	   argc, register char   **argv )
 	printdata(st2);
 }
 
-printdata(register class lookz  *st)
+printdata(class lookz  *st)
 	{
 	printf("Image is %s\n", ((st)->GetVisibility() ? "visible" : "hidden"));
 	fflush(stdout);

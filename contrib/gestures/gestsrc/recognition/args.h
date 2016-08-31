@@ -80,7 +80,7 @@ char **argv;
 
 #define	ARGLOOP						\
 	while(--argc > 0 && **++argv == '-') {		\
-	    register char *p;				\
+	    char *p;				\
 	    for(p = *argv + 1; *p != '\0'; p++) {	\
 		switch(*p) {				\
 

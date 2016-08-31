@@ -198,13 +198,13 @@ static void ProcessLog(FILE *inf, FILE *outf)
 */
 static void convert(FILE *inf, FILE *outf)
 {
-	register char firstletter = *sourcename;
+	char firstletter = *sourcename;
 	while (TRUE) {
-		register int c = getc(inf);
+		int c = getc(inf);
 		if (c == EOF) return;
 		if (c == firstletter) {
 			/* found first letter, check for rest of source name */
-			register const char *test = sourcename, *tx = test;
+			const char *test = sourcename, *tx = test;
 			while (c == *tx) 
 				c = getc(inf), tx++;
 			/* c is first char that did not match */
@@ -213,7 +213,7 @@ static void convert(FILE *inf, FILE *outf)
 				/* there is something left, we failed to find sourcename */
 				/* output contains everything before the firs letter
 					tx points to first character that did not match */
-				register const char *ttx = test;
+				const char *ttx = test;
 				while (ttx < tx)
 					fputc(*ttx++, outf);
 			}
@@ -233,7 +233,7 @@ static void convert(FILE *inf, FILE *outf)
 				/* there is something left, we failed to find "null" */
 				/* output contains everything up to and including the "$"
 					tx points to first character that did not match */
-				register const char *ttx = test;
+				const char *ttx = test;
 				while (ttx < tx)
 					fputc(*ttx++, outf);
 			}

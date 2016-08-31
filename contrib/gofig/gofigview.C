@@ -190,10 +190,10 @@ static fontdesc *Font20;
 ATKdefineRegistry(gofigview, view, gofigview::InitializeClass);
 
 
-static int leftend(register gofigview *self);
-static int rightend(register gofigview *self);
-static int topend(register gofigview *self);
-static int bottomend(register gofigview *self);
+static int leftend(gofigview *self);
+static int rightend(gofigview *self);
+static int topend(gofigview *self);
+static int bottomend(gofigview *self);
 static void computeHoshi(int hoshi[4], boolean leftedge, boolean rightedge, 
 	int width);
 static void drawspot(gofigview *self, struct stone *s, boolean isclear);
@@ -222,7 +222,7 @@ static void printdata(gofigview *self, int code);
 static int inline mytrunc(double a) {return /* itrunc */( a );}
 
 	static inline void 
-setnextcolor(register gofigview *self, char color) {
+setnextcolor(gofigview *self, char color) {
 	switch(color) {
 	case 'B': self->nextcolor = 'W'; break;
 	case 'W': self->nextcolor = 'B'; break;
@@ -230,33 +230,33 @@ setnextcolor(register gofigview *self, char color) {
 }
 
 	static int
-leftend(register gofigview *self) {
+leftend(gofigview *self) {
 	unsigned edges;
-	register gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->dataobject;
 	dobj->getedges( &edges );
 	return self->xoff 
 		- ((edges&LEFTedge) ? self->linethickness/2 : self->radius);
 }
 	static int
-rightend(register gofigview *self) {
+rightend(gofigview *self) {
 	unsigned edges;
-	register gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->dataobject;
 	dobj->getedges( &edges );
 	return self->xoff + (dobj->width-1)*self->spotwidth 
 		+ ((edges&RIGHTedge) ? self->linethickness/2: self->radius);
 }
 	static int
-topend(register gofigview *self) {
+topend(gofigview *self) {
 	unsigned edges;
-	register gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->dataobject;
 	dobj->getedges( &edges );
 	return self->yoff 
 		- ((edges&TOPedge) ? self->linethickness/2 : self->radius);
 }
 	static int
-bottomend(register gofigview *self) {
+bottomend(gofigview *self) {
 	unsigned edges;
-	register gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->dataobject;
 	dobj->getedges( &edges );
 	return self->yoff + (dobj->height-1)*self->spotheight 
 		+ ((edges&BOTTOMedge) ? self->linethickness/2 : self->radius);
@@ -1173,7 +1173,7 @@ ReplaceCommand(gofigview *self, int code) {
 	gofig *dobj = (gofig *)self->dataobject;
 	if (dobj == NULL) return;
 	FILE *inf;
-	register int c;
+	int c;
 	int id;
 
 	inf = ((self)->GetIM())->FromCutBuffer();

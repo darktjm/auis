@@ -49,12 +49,12 @@ int_upsample (decompress_info_ptr cinfo, int which_component,
 	      JSAMPARRAY output_data)
 {
   jpeg_component_info * compptr = cinfo->cur_comp_info[which_component];
-  register JSAMPROW inptr, outptr;
-  register JSAMPLE invalue;
-  register short h_expand, h;
+  JSAMPROW inptr, outptr;
+  JSAMPLE invalue;
+  short h_expand, h;
   short v_expand, v;
   int inrow, outrow;
-  register long incol;
+  long incol;
 
 #ifdef DEBUG			/* for debugging pipeline controller */
   if (input_rows != compptr->v_samp_factor ||
@@ -101,10 +101,10 @@ h2v1_upsample (decompress_info_ptr cinfo, int which_component,
 	       JSAMPARRAY above, JSAMPARRAY input_data, JSAMPARRAY below,
 	       JSAMPARRAY output_data)
 {
-  register JSAMPROW inptr, outptr;
-  register int invalue;
+  JSAMPROW inptr, outptr;
+  int invalue;
   int inrow;
-  register long colctr;
+  long colctr;
 
 #ifdef DEBUG			/* for debugging pipeline controller */
   jpeg_component_info * compptr = cinfo->cur_comp_info[which_component];
@@ -156,14 +156,14 @@ h2v2_upsample (decompress_info_ptr cinfo, int which_component,
 	       JSAMPARRAY above, JSAMPARRAY input_data, JSAMPARRAY below,
 	       JSAMPARRAY output_data)
 {
-  register JSAMPROW inptr0, inptr1, outptr;
+  JSAMPROW inptr0, inptr1, outptr;
 #ifdef EIGHT_BIT_SAMPLES
-  register int thiscolsum, lastcolsum, nextcolsum;
+  int thiscolsum, lastcolsum, nextcolsum;
 #else
-  register INT32 thiscolsum, lastcolsum, nextcolsum;
+  INT32 thiscolsum, lastcolsum, nextcolsum;
 #endif
   int inrow, outrow, v;
-  register long colctr;
+  long colctr;
 
 #ifdef DEBUG			/* for debugging pipeline controller */
   jpeg_component_info * compptr = cinfo->cur_comp_info[which_component];

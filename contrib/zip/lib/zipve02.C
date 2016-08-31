@@ -79,51 +79,51 @@ END-SPECIFICATION  ************************************************************/
 
 
 
-int zipedit_Redisplay_Edit_Pane( register class zipedit		  *self, register zip_type_pane		   pane );
-int zipedit_Handle_Shade_Palette_Hit( register class zipedit		  *self, register zip_type_pane		   pane, register enum view_MouseAction	   action, register long				   x , register long				   y , register long				   clicks );
-static long Change_Shade( register class zipedit		  *self, register zip_type_pane		   pane, register zip_type_figure		   figure, register long				   shade );
-int zipedit_Handle_Figure_Palette_Hit( register class zipedit		  *self, register zip_type_pane		   pane, register enum view_MouseAction				   action , register int				   x , register int				   y , register int				   clicks );
-static int Figure_Palette_LBDT( register class zipedit		  *self, register zip_type_pane		   icon_pane, register int				   x , register int				   y , register int				   clicks );
-static int Create_Name_Palette( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette );
-static int Create_Font_Palette( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette );
-static int Create_Font_Icon( register class zipedit		  *self, register zip_type_pane		   containing_pane , register zip_type_pane		   pane , register zip_type_pane		  *palette, 		  register const char				  *source, register char				   cursor, register int				   x , register int				   y , register int				   width , register int				   height, const char *name );
-void zipedit_Expose_Font_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-long zipedit_Hide_Font_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-static int Create_Shade_Palette( register class zipedit		  *self, zip_type_pane containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette );
-void zipedit_Expose_Shade_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-void zipedit_Hide_Shade_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-static int Create_Figure_Palette( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette );
-void zipedit_Expose_Figure_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-void zipedit_Hide_Figure_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-static int Create_Figure_Icon( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   editing_pane, register zip_type_pane		  *palette, register long				   type, 		    register char				   icon, register const char				  *icon_font_name, register char				   cursor, register const char				  *cursor_font_name, 		    register long				   serial , register long				   count );
-static int Create_Attribute_Palette( register class zipedit		  *self, register zip_type_pane			   containing_pane, register zip_type_pane			   pane, register zip_type_pane			  *palette );
-static int Create_TL_Palette( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette );
-void zipedit_Expose_TL_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-void zipedit_Hide_TL_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-static int Create_TR_Palette( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette );
-void zipedit_Expose_TR_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-void zipedit_Hide_TR_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-static int Create_BL_Palette( register class zipedit		  *self, register zip_type_pane			   containing_pane, register zip_type_pane			   pane, register zip_type_pane			  *palette );
-void zipedit_Expose_BL_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-void zipedit_Hide_BL_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-static int Create_BR_Palette( register class zipedit		  *self, register zip_type_pane			   containing_pane, register zip_type_pane			   pane, register zip_type_pane			  *palette );
-void zipedit_Expose_BR_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-void zipedit_Hide_BR_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-static int Create_Palette_Surround( register class zipedit  *self, register zip_type_pane  pane, register zip_type_pane  *palette, const char *name, register int x_origin , register int   y_origin , register int width , register int height );
-int zipedit_Handle_Font_Family_Selection( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction  action, register long  x , register long  y , register long  clicks );
-int zipedit_Handle_Font_Height_Selection( register class zipedit	      *self, register zip_type_pane	       pane, register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks );
-int zipedit_Handle_Font_Italic_Selection( register class zipedit	      *self, register zip_type_pane	       pane, register int			       action , register long			       x , register long			       y , register long			       clicks );
-int zipedit_Handle_Font_Bold_Selection( register class zipedit	      *self, register zip_type_pane	       pane, register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks );
-int zipedit_Handle_Font_Sample_Selection( register class zipedit	      *self, register zip_type_pane	       pane, register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks );
-static void Set_Sample( register class zipedit	      *self, register zip_type_pane	       pane, register boolean		       draw_pane );
-static boolean Change_Figure_Font_And_Mode( register class zipedit		  *self, register zip_type_pane		   pane, register zip_type_figure		   figure, register long				   font , register long				   mode );
+int zipedit_Redisplay_Edit_Pane( class zipedit		  *self, zip_type_pane		   pane );
+int zipedit_Handle_Shade_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane, enum view_MouseAction	   action, long				   x , long				   y , long				   clicks );
+static long Change_Shade( class zipedit		  *self, zip_type_pane		   pane, zip_type_figure		   figure, long				   shade );
+int zipedit_Handle_Figure_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane, enum view_MouseAction				   action , int				   x , int				   y , int				   clicks );
+static int Figure_Palette_LBDT( class zipedit		  *self, zip_type_pane		   icon_pane, int				   x , int				   y , int				   clicks );
+static int Create_Name_Palette( class zipedit		  *self, zip_type_pane		   containing_pane, zip_type_pane		   pane, zip_type_pane		  *palette );
+static int Create_Font_Palette( class zipedit		  *self, zip_type_pane		   containing_pane, zip_type_pane		   pane, zip_type_pane		  *palette );
+static int Create_Font_Icon( class zipedit		  *self, zip_type_pane		   containing_pane , zip_type_pane		   pane , zip_type_pane		  *palette, 		  const char				  *source, char				   cursor, int				   x , int				   y , int				   width , int				   height, const char *name );
+void zipedit_Expose_Font_Palette( class zipedit		  *self, zip_type_pane		   pane );
+long zipedit_Hide_Font_Palette( class zipedit		  *self, zip_type_pane		   pane );
+static int Create_Shade_Palette( class zipedit		  *self, zip_type_pane containing_pane, zip_type_pane		   pane, zip_type_pane		  *palette );
+void zipedit_Expose_Shade_Palette( class zipedit		  *self, zip_type_pane		   pane );
+void zipedit_Hide_Shade_Palette( class zipedit		  *self, zip_type_pane		   pane );
+static int Create_Figure_Palette( class zipedit		  *self, zip_type_pane		   containing_pane, zip_type_pane		   pane, zip_type_pane		  *palette );
+void zipedit_Expose_Figure_Palette( class zipedit		  *self, zip_type_pane		   pane );
+void zipedit_Hide_Figure_Palette( class zipedit		  *self, zip_type_pane		   pane );
+static int Create_Figure_Icon( class zipedit		  *self, zip_type_pane		   containing_pane, zip_type_pane		   editing_pane, zip_type_pane		  *palette, long				   type, 		    char				   icon, const char				  *icon_font_name, char				   cursor, const char				  *cursor_font_name, 		    long				   serial , long				   count );
+static int Create_Attribute_Palette( class zipedit		  *self, zip_type_pane			   containing_pane, zip_type_pane			   pane, zip_type_pane			  *palette );
+static int Create_TL_Palette( class zipedit		  *self, zip_type_pane		   containing_pane, zip_type_pane		   pane, zip_type_pane		  *palette );
+void zipedit_Expose_TL_Palette( class zipedit		  *self, zip_type_pane		   pane );
+void zipedit_Hide_TL_Palette( class zipedit		  *self, zip_type_pane		   pane );
+static int Create_TR_Palette( class zipedit		  *self, zip_type_pane		   containing_pane, zip_type_pane		   pane, zip_type_pane		  *palette );
+void zipedit_Expose_TR_Palette( class zipedit		  *self, zip_type_pane		   pane );
+void zipedit_Hide_TR_Palette( class zipedit		  *self, zip_type_pane		   pane );
+static int Create_BL_Palette( class zipedit		  *self, zip_type_pane			   containing_pane, zip_type_pane			   pane, zip_type_pane			  *palette );
+void zipedit_Expose_BL_Palette( class zipedit		  *self, zip_type_pane		   pane );
+void zipedit_Hide_BL_Palette( class zipedit		  *self, zip_type_pane		   pane );
+static int Create_BR_Palette( class zipedit		  *self, zip_type_pane			   containing_pane, zip_type_pane			   pane, zip_type_pane			  *palette );
+void zipedit_Expose_BR_Palette( class zipedit		  *self, zip_type_pane		   pane );
+void zipedit_Hide_BR_Palette( class zipedit		  *self, zip_type_pane		   pane );
+static int Create_Palette_Surround( class zipedit  *self, zip_type_pane  pane, zip_type_pane  *palette, const char *name, int x_origin , int   y_origin , int width , int height );
+int zipedit_Handle_Font_Family_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction  action, long  x , long  y , long  clicks );
+int zipedit_Handle_Font_Height_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks );
+int zipedit_Handle_Font_Italic_Selection( class zipedit	      *self, zip_type_pane	       pane, int			       action , long			       x , long			       y , long			       clicks );
+int zipedit_Handle_Font_Bold_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks );
+int zipedit_Handle_Font_Sample_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks );
+static void Set_Sample( class zipedit	      *self, zip_type_pane	       pane, boolean		       draw_pane );
+static boolean Change_Figure_Font_And_Mode( class zipedit		  *self, zip_type_pane		   pane, zip_type_figure		   figure, long				   font , long				   mode );
 
-extern int zipedit_Prepare_Editing_Control( register class zipedit *self, register zip_type_pane pane );
+extern int zipedit_Prepare_Editing_Control( class zipedit *self, zip_type_pane pane );
 
 long
-zipedit::Set_Palettes( register zip_type_pane	       pane, register int			       palette_mode )
+zipedit::Set_Palettes( zip_type_pane	       pane, int			       palette_mode )
         {
-  register int			      status = zip_success;
+  int			      status = zip_success;
   class zipedit *self=this;
 
   IN(zipedit::Set_Palettes);
@@ -139,17 +139,17 @@ zipedit::Set_Palettes( register zip_type_pane	       pane, register int			      
   }
 
 long
-zipedit::Expose_Palettes( register zip_type_pane	       pane )
+zipedit::Expose_Palettes( zip_type_pane	       pane )
       {
   class zipedit *self=this;
-  register int			      status = zip_ok;
-  register char			     *client_data;
-  register class fontdesc	     *current_font =
+  int			      status = zip_ok;
+  char			     *client_data;
+  class fontdesc	     *current_font =
 					(this->view_object )->GetFont( );
-  register zip_type_pane	      container;
+  zip_type_pane	      container;
   static int			      container_number = 1;
   char				      container_full_name[257];
-  register long			      modified;
+  long			      modified;
 
   IN(zipedit::Expose_Palette);
   DEBUGst(Pane-name,pane->zip_pane_name);
@@ -250,9 +250,9 @@ zipedit::Expose_Palettes( register zip_type_pane	       pane )
   }
 
 long
-zipedit::Hide_Palettes( register zip_type_pane	       pane )
+zipedit::Hide_Palettes( zip_type_pane	       pane )
       {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
   class zipedit *self=this;
   IN(zipedit::Hide_Palettes);
   DEBUGst(Pane-name,pane->zip_pane_name);
@@ -284,7 +284,7 @@ zipedit::Hide_Palettes( register zip_type_pane	       pane )
   return status;
   }
 
-void zipedit::Align_Pane( register zip_type_pane		   pane )
+void zipedit::Align_Pane( zip_type_pane		   pane )
       {
 /*===
   char					 *p = NULL;
@@ -319,14 +319,14 @@ void zipedit::Align_Pane( register zip_type_pane		   pane )
   OUT(zipedit::Align_Pane);
   }
 
-extern void zipedit_Display_Background_Pane( register class zipedit        *self, register zip_type_pane            pane );
+extern void zipedit_Display_Background_Pane( class zipedit        *self, zip_type_pane            pane );
 extern void Show_Enclosure( class zipedit *self, zip_type_pane pane );
 
 int
-zipedit_Redisplay_Edit_Pane( register class zipedit		  *self, register zip_type_pane		   pane )
+zipedit_Redisplay_Edit_Pane( class zipedit		  *self, zip_type_pane		   pane )
       {
-  register int				  status = zip_ok;
-  register int				  pad_width = 100, pad_height = 100,
+  int				  status = zip_ok;
+  int				  pad_width = 100, pad_height = 100,
 					  pad_x_center = 50, pad_y_center = 50;
 
   IN(zipedit_Redisplay_Edit_Pane);
@@ -353,12 +353,12 @@ zipedit_Redisplay_Edit_Pane( register class zipedit		  *self, register zip_type_
 extern zip_type_figure zipedit_Next_Selected_Figure( class zipedit *self, zip_type_pane pane, zip_type_figure figure );
 
 int
-zipedit_Handle_Shade_Palette_Hit( register class zipedit		  *self, register zip_type_pane		   pane, register enum view_MouseAction	   action, register long				   x , register long				   y , register long				   clicks )
+zipedit_Handle_Shade_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane, enum view_MouseAction	   action, long				   x , long				   y , long				   clicks )
           {
-  register long				  status = zip_ok, shade = 0, changed = false;
-  register zip_type_figure		  figure, display, 
+  long				  status = zip_ok, shade = 0, changed = false;
+  zip_type_figure		  figure, display, 
 					  selector, transparent;
-  register char				 *ptr;
+  char				 *ptr;
 
   IN(zipedit_Handle_Shade_Palette_Hit);
   if ( action == view_LeftDown  &&
@@ -415,9 +415,9 @@ zipedit_Handle_Shade_Palette_Hit( register class zipedit		  *self, register zip_
   }
 
 static
-long Change_Shade( register class zipedit		  *self, register zip_type_pane		   pane, register zip_type_figure		   figure, register long				   shade )
+long Change_Shade( class zipedit		  *self, zip_type_pane		   pane, zip_type_figure		   figure, long				   shade )
           {
-  register long				  changed = false;
+  long				  changed = false;
 
   IN(Change_Shade);
   (self)->Normalize_Figure_Points(  figure, pane );
@@ -431,9 +431,9 @@ long Change_Shade( register class zipedit		  *self, register zip_type_pane		   p
   }
 
 int
-zipedit_Handle_Figure_Palette_Hit( register class zipedit		  *self, register zip_type_pane		   pane, register enum view_MouseAction				   action , register int				   x , register int				   y , register int				   clicks )
+zipedit_Handle_Figure_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane, enum view_MouseAction				   action , int				   x , int				   y , int				   clicks )
         {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
 
   IN(zipedit_Handle_Figure_Palette_Hit);
   switch ( action )
@@ -453,13 +453,13 @@ zipedit_Handle_Figure_Palette_Hit( register class zipedit		  *self, register zip
   }
 
 extern void zipedit_Cancel_Enclosure( class zipedit *self, zip_type_pane pane );
-extern void zipedit_Hide_Selection_Menu( register class zipedit          *self );
+extern void zipedit_Hide_Selection_Menu( class zipedit          *self );
 
 static int
-Figure_Palette_LBDT( register class zipedit		  *self, register zip_type_pane		   icon_pane, register int				   x , register int				   y , register int				   clicks )
+Figure_Palette_LBDT( class zipedit		  *self, zip_type_pane		   icon_pane, int				   x , int				   y , int				   clicks )
         {
-  register int				  status = zip_ok;
-  register zip_type_pane		  pane = EditingPane(icon_pane);
+  int				  status = zip_ok;
+  zip_type_pane		  pane = EditingPane(icon_pane);
 
   IN(Figure_Palette_LBDT);
   if ( icon_pane->zip_pane_client_data )
@@ -489,9 +489,9 @@ Figure_Palette_LBDT( register class zipedit		  *self, register zip_type_pane		  
   }
 
 static int
-Create_Name_Palette( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette )
+Create_Name_Palette( class zipedit		  *self, zip_type_pane		   containing_pane, zip_type_pane		   pane, zip_type_pane		  *palette )
           {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
   zip_type_stream			  stream;
   static const char			  source[] =
 "{ZIP_NAME_STREAM\n"
@@ -515,9 +515,9 @@ Create_Name_Palette( register class zipedit		  *self, register zip_type_pane		  
   }
 
 static int
-Create_Font_Palette( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette )
+Create_Font_Palette( class zipedit		  *self, zip_type_pane		   containing_pane, zip_type_pane		   pane, zip_type_pane		  *palette )
           {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
   static const char			  family[] =
 "{ZIP_FONT_FAMILY\n*A;0,0\nNfont_catalog_family\nMMC\nFandysans10\nTSerif\n}";
   static const char				  height[] =
@@ -557,10 +557,10 @@ Create_Font_Palette( register class zipedit		  *self, register zip_type_pane		  
   }
 
 static int
-Create_Font_Icon( register class zipedit		  *self, register zip_type_pane		   containing_pane , register zip_type_pane		   pane , register zip_type_pane		  *palette,
-		  register const char				  *source, register char				   cursor, register int				   x , register int				   y , register int				   width , register int				   height, const char *name )
+Create_Font_Icon( class zipedit		  *self, zip_type_pane		   containing_pane , zip_type_pane		   pane , zip_type_pane		  *palette,
+		  const char				  *source, char				   cursor, int				   x , int				   y , int				   width , int				   height, const char *name )
                 {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
   zip_type_stream			  stream;
 
   IN(Create_Font_Icon);
@@ -585,7 +585,7 @@ Create_Font_Icon( register class zipedit		  *self, register zip_type_pane		   co
   return status;
   }
 
-void zipedit_Expose_Font_Palette( register class zipedit		  *self, register zip_type_pane		   pane )
+void zipedit_Expose_Font_Palette( class zipedit		  *self, zip_type_pane		   pane )
       {
   IN(zipedit_Expose_Font_Palette);
   (self->view_object)->Display_Pane(  FontsPane );
@@ -597,7 +597,7 @@ void zipedit_Expose_Font_Palette( register class zipedit		  *self, register zip_
   OUT(zipedit_Expose_Font_Palette);
   }
 
-long zipedit_Hide_Font_Palette( register class zipedit		  *self, register zip_type_pane		   pane )
+long zipedit_Hide_Font_Palette( class zipedit		  *self, zip_type_pane		   pane )
       {
   IN(zipedit_Hide_Font_Palette);
   (self->view_object)->Remove_Pane(  FontsPane );
@@ -611,9 +611,9 @@ long zipedit_Hide_Font_Palette( register class zipedit		  *self, register zip_ty
   }
 
 static int
-Create_Shade_Palette( register class zipedit		  *self, zip_type_pane containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette )
+Create_Shade_Palette( class zipedit		  *self, zip_type_pane containing_pane, zip_type_pane		   pane, zip_type_pane		  *palette )
         {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
   zip_type_stream			  stream;
   static const char			  source[] =
 "{\n"
@@ -691,14 +691,14 @@ Create_Shade_Palette( register class zipedit		  *self, zip_type_pane containing_
   return status;
   }
 
-void zipedit_Expose_Shade_Palette( register class zipedit		  *self, register zip_type_pane		   pane )
+void zipedit_Expose_Shade_Palette( class zipedit		  *self, zip_type_pane		   pane )
       {
   IN(zipedit_Expose_Shade_Palette);
   (self->view_object)->Display_Pane(  ShadesPane );
   OUT(zipedit_Expose_Shade_Palette);
   }
 
-void zipedit_Hide_Shade_Palette( register class zipedit		  *self, register zip_type_pane		   pane )
+void zipedit_Hide_Shade_Palette( class zipedit		  *self, zip_type_pane		   pane )
       {
   IN(zipedit_Hide_Shade_Palette);
   (self->view_object)->Remove_Pane(  ShadesPane );
@@ -707,10 +707,10 @@ void zipedit_Hide_Shade_Palette( register class zipedit		  *self, register zip_t
 
 #define FigureIconPane(i)   PalettePanes->zip_pane_palette_vector[20+i]
 static int
-Create_Figure_Palette( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette )
+Create_Figure_Palette( class zipedit		  *self, zip_type_pane		   containing_pane, zip_type_pane		   pane, zip_type_pane		  *palette )
           {
-  register long				  status = zip_ok, i;
-  register long				  icon_count = 0,
+  long				  status = zip_ok, i;
+  long				  icon_count = 0,
 					  serial = 0;
 
   IN(Create_Figure_Palette);
@@ -745,9 +745,9 @@ Create_Figure_Palette( register class zipedit		  *self, register zip_type_pane		
   return status;
   }
 
-void zipedit_Expose_Figure_Palette( register class zipedit		  *self, register zip_type_pane		   pane )
+void zipedit_Expose_Figure_Palette( class zipedit		  *self, zip_type_pane		   pane )
       {
-  register long				  i;
+  long				  i;
 
   IN(zipedit_Expose_Figure_Palette);
   (self->view_object)->Display_Pane(  FiguresPane );
@@ -758,9 +758,9 @@ void zipedit_Expose_Figure_Palette( register class zipedit		  *self, register zi
   }
 
 
-void zipedit_Hide_Figure_Palette( register class zipedit		  *self, register zip_type_pane		   pane )
+void zipedit_Hide_Figure_Palette( class zipedit		  *self, zip_type_pane		   pane )
       {
-  register long				  i;
+  long				  i;
 
   IN(zipedit_Hide_Figure_Palette);
   (self->view_object)->Remove_Pane(  FiguresPane );
@@ -771,11 +771,11 @@ void zipedit_Hide_Figure_Palette( register class zipedit		  *self, register zip_
   }
 
 static int
-Create_Figure_Icon( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   editing_pane, register zip_type_pane		  *palette, register long				   type,
-		    register char				   icon, register const char				  *icon_font_name, register char				   cursor, register const char				  *cursor_font_name,
-		    register long				   serial , register long				   count )
+Create_Figure_Icon( class zipedit		  *self, zip_type_pane		   containing_pane, zip_type_pane		   editing_pane, zip_type_pane		  *palette, long				   type,
+		    char				   icon, const char				  *icon_font_name, char				   cursor, const char				  *cursor_font_name,
+		    long				   serial , long				   count )
                       {
-  register long				  status = zip_ok,
+  long				  status = zip_ok,
 					  percentage = 80/count;
   zip_type_stream			  stream;
   char					  source[257];
@@ -799,9 +799,9 @@ Create_Figure_Icon( register class zipedit		  *self, register zip_type_pane		   
   }
 
 static int
-Create_Attribute_Palette( register class zipedit		  *self, register zip_type_pane			   containing_pane, register zip_type_pane			   pane, register zip_type_pane			  *palette )
+Create_Attribute_Palette( class zipedit		  *self, zip_type_pane			   containing_pane, zip_type_pane			   pane, zip_type_pane			  *palette )
           {
-  register int					  status = zip_ok;
+  int					  status = zip_ok;
   zip_type_stream				  stream;
   static const char				  source[] =
 "{ZIP_ATTRIBUTES\n"
@@ -829,9 +829,9 @@ Create_Attribute_Palette( register class zipedit		  *self, register zip_type_pan
   }
 
 static int
-Create_TL_Palette( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette )
+Create_TL_Palette( class zipedit		  *self, zip_type_pane		   containing_pane, zip_type_pane		   pane, zip_type_pane		  *palette )
           {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
   zip_type_stream			  stream;
   static const char			  source[] =
 "{\n"
@@ -847,20 +847,20 @@ Create_TL_Palette( register class zipedit		  *self, register zip_type_pane		   c
   return status;
   }
 
-void zipedit_Expose_TL_Palette( register class zipedit		  *self, register zip_type_pane		   pane )
+void zipedit_Expose_TL_Palette( class zipedit		  *self, zip_type_pane		   pane )
       {
   (self->view_object)->Display_Pane(  TLPane );
   }
 
-void zipedit_Hide_TL_Palette( register class zipedit		  *self, register zip_type_pane		   pane )
+void zipedit_Hide_TL_Palette( class zipedit		  *self, zip_type_pane		   pane )
       {
   (self->view_object)->Remove_Pane(  TLPane );
   }
 
 static int
-Create_TR_Palette( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette )
+Create_TR_Palette( class zipedit		  *self, zip_type_pane		   containing_pane, zip_type_pane		   pane, zip_type_pane		  *palette )
           {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
   zip_type_stream			  stream;
   static const char			  source[] =
 "{\n"
@@ -876,20 +876,20 @@ Create_TR_Palette( register class zipedit		  *self, register zip_type_pane		   c
   return status;
   }
 
-void zipedit_Expose_TR_Palette( register class zipedit		  *self, register zip_type_pane		   pane )
+void zipedit_Expose_TR_Palette( class zipedit		  *self, zip_type_pane		   pane )
       {
   (self->view_object)->Display_Pane(  TRPane );
   }
 
-void zipedit_Hide_TR_Palette( register class zipedit		  *self, register zip_type_pane		   pane )
+void zipedit_Hide_TR_Palette( class zipedit		  *self, zip_type_pane		   pane )
       {
   (self->view_object)->Remove_Pane(  TRPane );
   }
 
 static int
-Create_BL_Palette( register class zipedit		  *self, register zip_type_pane			   containing_pane, register zip_type_pane			   pane, register zip_type_pane			  *palette )
+Create_BL_Palette( class zipedit		  *self, zip_type_pane			   containing_pane, zip_type_pane			   pane, zip_type_pane			  *palette )
           {
-  register int					  status = zip_ok;
+  int					  status = zip_ok;
   zip_type_stream				  stream;
   static const char				  source[] =
 "{\n"
@@ -905,20 +905,20 @@ Create_BL_Palette( register class zipedit		  *self, register zip_type_pane			   
   return status;
   }
 
-void zipedit_Expose_BL_Palette( register class zipedit		  *self, register zip_type_pane		   pane )
+void zipedit_Expose_BL_Palette( class zipedit		  *self, zip_type_pane		   pane )
       {
   (self->view_object)->Display_Pane(  BLPane );
   }
 
-void zipedit_Hide_BL_Palette( register class zipedit		  *self, register zip_type_pane		   pane )
+void zipedit_Hide_BL_Palette( class zipedit		  *self, zip_type_pane		   pane )
       {
   (self->view_object)->Remove_Pane(  BLPane );
   }
 
 static int
-Create_BR_Palette( register class zipedit		  *self, register zip_type_pane			   containing_pane, register zip_type_pane			   pane, register zip_type_pane			  *palette )
+Create_BR_Palette( class zipedit		  *self, zip_type_pane			   containing_pane, zip_type_pane			   pane, zip_type_pane			  *palette )
           {
-  register int					  status = zip_ok;
+  int					  status = zip_ok;
   zip_type_stream				  stream;
   static const char				  source[] =
 "{\n"
@@ -934,21 +934,21 @@ Create_BR_Palette( register class zipedit		  *self, register zip_type_pane			   
   return status;
   }
 
-void zipedit_Expose_BR_Palette( register class zipedit		  *self, register zip_type_pane		   pane )
+void zipedit_Expose_BR_Palette( class zipedit		  *self, zip_type_pane		   pane )
       {
   (self->view_object)->Display_Pane(  BRPane );
   }
 
-void zipedit_Hide_BR_Palette( register class zipedit		  *self, register zip_type_pane		   pane )
+void zipedit_Hide_BR_Palette( class zipedit		  *self, zip_type_pane		   pane )
       {
   (self->view_object)->Remove_Pane(  BRPane );
   }
 
 static int
-Create_Palette_Surround( register class zipedit		  *self, register zip_type_pane		   pane, register zip_type_pane		  *palette, const char *name,
-			    register int				   x_origin , register int				   y_origin , register int				   width , register int				   height )
+Create_Palette_Surround( class zipedit		  *self, zip_type_pane		   pane, zip_type_pane		  *palette, const char *name,
+			    int				   x_origin , int				   y_origin , int				   width , int				   height )
           {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
   zip_type_stream			  stream;
   static const char			  source[] =
 "{\n"
@@ -974,10 +974,10 @@ Create_Palette_Surround( register class zipedit		  *self, register zip_type_pane
   }
 
 int
-zipedit_Handle_Font_Family_Selection( register class zipedit	      *self, register zip_type_pane	       pane, register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks )
+zipedit_Handle_Font_Family_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
           {
-  register long			      status = zip_success;
-  register zip_type_figure	      figure;
+  long			      status = zip_success;
+  zip_type_figure	      figure;
 
   IN(zipedit_Handle_Font_Family_Selection);
   if ( action == view_LeftDown )
@@ -999,10 +999,10 @@ zipedit_Handle_Font_Family_Selection( register class zipedit	      *self, regist
   }
 
 int
-zipedit_Handle_Font_Height_Selection( register class zipedit	      *self, register zip_type_pane	       pane, register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks )
+zipedit_Handle_Font_Height_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
           {
-  register long			      status = zip_success;
-  register zip_type_figure	      figure;
+  long			      status = zip_success;
+  zip_type_figure	      figure;
   char				      msg[257];
 
   IN(zipedit_Handle_Font_Height_Selection);
@@ -1036,10 +1036,10 @@ zipedit_Handle_Font_Height_Selection( register class zipedit	      *self, regist
   }
 
 int
-zipedit_Handle_Font_Italic_Selection( register class zipedit *self, register zip_type_pane	       pane, register enum view_MouseAction action , register long x , register long y , register long clicks )
+zipedit_Handle_Font_Italic_Selection( class zipedit *self, zip_type_pane	       pane, enum view_MouseAction action , long x , long y , long clicks )
 {
-  register int			      status = zip_success;
-  register zip_type_figure	      figure;
+  int			      status = zip_success;
+  zip_type_figure	      figure;
 
   IN(zipedit_Handle_Font_Italic_Selection);
   if ( action == (int)view_LeftDown )
@@ -1056,10 +1056,10 @@ zipedit_Handle_Font_Italic_Selection( register class zipedit *self, register zip
   }
 
 int
-zipedit_Handle_Font_Bold_Selection( register class zipedit	      *self, register zip_type_pane	       pane, register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks )
+zipedit_Handle_Font_Bold_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
           {
-  register long			      status = zip_success;
-  register zip_type_figure	      figure;
+  long			      status = zip_success;
+  zip_type_figure	      figure;
 
   IN(zipedit_Handle_Font_Bold_Selection);
   if ( action == view_LeftDown )
@@ -1076,9 +1076,9 @@ zipedit_Handle_Font_Bold_Selection( register class zipedit	      *self, register
   }
 
 int
-zipedit_Handle_Font_Sample_Selection( register class zipedit	      *self, register zip_type_pane	       pane, register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks )
+zipedit_Handle_Font_Sample_Selection( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
           {
-  register long			      status = zip_ok, reshow = false;
+  long			      status = zip_ok, reshow = false;
 
   IN(zipedit_Handle_Font_Sample_Selection);
   if ( action == view_LeftDown )
@@ -1147,11 +1147,11 @@ zipedit_Handle_Font_Sample_Selection( register class zipedit	      *self, regist
   }
 
 static
-void Set_Sample( register class zipedit	      *self, register zip_type_pane	       pane, register boolean		       draw_pane )
+void Set_Sample( class zipedit	      *self, zip_type_pane	       pane, boolean		       draw_pane )
         {
-  register zip_type_figure	      figure;
+  zip_type_figure	      figure;
   char				      msg[257];
-  register long			      changed = false;
+  long			      changed = false;
 
   IN(Set_Sample);
   figure = (self->data_object)->Figure(  "font_catalog_sample" );
@@ -1180,9 +1180,9 @@ void Set_Sample( register class zipedit	      *self, register zip_type_pane	    
   }
 
 static
-boolean Change_Figure_Font_And_Mode( register class zipedit		  *self, register zip_type_pane		   pane, register zip_type_figure		   figure, register long				   font , register long				   mode )
+boolean Change_Figure_Font_And_Mode( class zipedit		  *self, zip_type_pane		   pane, zip_type_figure		   figure, long				   font , long				   mode )
           {
-  register boolean			  changed = false;
+  boolean			  changed = false;
 
   IN(Change_Figure_Font_And_Mode);
   (self)->Normalize_Figure_Points(  figure, pane );

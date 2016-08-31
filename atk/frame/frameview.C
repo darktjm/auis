@@ -364,7 +364,7 @@ static void CompletionMessage(class frameview  *self, enum message_CompletionCod
 
 void frameview::Return(long  key)
         {
-    register class framemessage *messageLine = this->messageLine;
+    class framemessage *messageLine = this->messageLine;
     int startpos, endpos;
 
     /* give feedback that Return was pressed   -wjh */
@@ -414,7 +414,7 @@ void frameview::Return(long  key)
 
 void frameview::Complete(long  key)
         {
-    register class framemessage *messageLine = this->messageLine;
+    class framemessage *messageLine = this->messageLine;
     enum message_CompletionCode code;
     int len, startpos, endpos;
 
@@ -512,7 +512,7 @@ static void HelpWork(struct helpRock  *helpRock, enum message_HelpItem  helpType
 
 void frameview::Help(long  key)
 {
-    register class framemessage *messageLine = this->messageLine;
+    class framemessage *messageLine = this->messageLine;
     class buffer *LastBuffer;
 
     /* For now, there is no help for frames without buffers. */
@@ -539,8 +539,8 @@ void frameview::Help(long  key)
             (*messageLine->helpProc)(messageLine->textBuffer, messageLine->completionData, (message_workfptr)HelpWork, (long)&helpRock);
 
 	    if (helpRock.insertPos == 0) {
-                register const char *s;
-		register int len;
+                const char *s;
+		int len;
                 static class style *boldStyle = NULL,
                    *ulineStyle = NULL, *fixedStyle = NULL;
 

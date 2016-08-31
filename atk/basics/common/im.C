@@ -147,19 +147,19 @@ static char *charToPrintable(long  c);
 static void WriteLogEntry (class im  *self, unsigned char code, const char  *str);
 static void WriteLogXY (class im  *self, unsigned char code, long  x , long  y);
 static struct action * newAction();
-static struct action * cloneAction(register struct action  *a);
-// static void stackAction(register struct action  **Q , register struct action  *a);
-static void enqAction(register struct action  **Q , register struct action  *a);
+static struct action * cloneAction(struct action  *a);
+// static void stackAction(struct action  **Q , struct action  *a);
+static void enqAction(struct action  **Q , struct action  *a);
 static void freeQlist (struct action  *Q);
 static void freeQelt(struct action  *Q);
 static void pruneActions(class im  *im);
-static struct action * keyAction(class im  *im, register long  k);
+static struct action * keyAction(class im  *im, long  k);
 static struct action * mouseAction(class im  *im, enum view_MouseAction  act, long  x, long  y, long  newButtonState);
 static struct action * menuAction(class im  *im, struct proctable_Entry  *procTableEntry, ATK   *object, long  rock);
 static struct action * macroAction(class im  *im, struct action  *macro, struct action  *nextaction, long  remainingrepetitions);
-static void userKey(register class im  *self, long  key);
-static void userMouse(register class im  *self, enum view_MouseAction  act, long  x, long  y, long  newButtonState);
-static void userMenu(register class im  *self, struct proctable_Entry  *procTableEntry, ATK   *object, long  rock);
+static void userKey(class im  *self, long  key);
+static void userMouse(class im  *self, enum view_MouseAction  act, long  x, long  y, long  newButtonState);
+static void userMenu(class im  *self, struct proctable_Entry  *procTableEntry, ATK   *object, long  rock);
 static struct action *ConsumeMacroEvent(struct action  *a);
 static struct action * GetNextInputEvent();
 static struct action * PeekInputEvent();
@@ -356,7 +356,7 @@ static struct action *PendingRelease = NULL;
 	struct action *
 newAction()
 {
-	register struct action *a;
+	struct action *a;
 	if (FreeQ == NULL) 
 		return (struct action *)malloc(sizeof(struct action));
 	a = FreeQ;
@@ -368,9 +368,9 @@ newAction()
 	allocate an empty action block 
 */
 	struct action *
-cloneAction(register struct action  *a)
+cloneAction(struct action  *a)
 	{
-	register struct action *new_c = newAction();
+	struct action *new_c = newAction();
 	if (a == NULL) return NULL;
 	*new_c = *a;
 	if(a->type==im_ProcEvent && a->v.proc.keys!=NULL) {
@@ -395,7 +395,7 @@ cloneAction(register struct action  *a)
 	put an action at the front of a queue
 */
 static	void
-stackAction(register struct action  **Q , register struct action  *a)
+stackAction(struct action  **Q , struct action  *a)
 	{
 	if (a == NULL) return;	/* the malloc failed */
 	a->next = *Q;
@@ -407,7 +407,7 @@ stackAction(register struct action  **Q , register struct action  *a)
 	put an action at the rear of a queue
 */
 static	void
-enqAction(register struct action  **Q , register struct action  *a)
+enqAction(struct action  **Q , struct action  *a)
 	{
 	if (a == NULL) return;	/* the malloc failed */
 	a->next = NULL;
@@ -459,7 +459,7 @@ void freeQelt(struct action  *Q)
 static	void
 pruneActions(class im  *im)
 	{
-	register struct action *a, *p, *n;
+	struct action *a, *p, *n;
 	for (p = NULL, a = InQ; a != NULL; a = n) {
 		n = a->next;
 		if (a->im == im) {
@@ -478,9 +478,9 @@ pruneActions(class im  *im)
 	allocate an action block for a keystroke
 */
 static	struct action *
-keyAction(class im  *im, register long  k)
+keyAction(class im  *im, long  k)
 		{
-	register struct action *a = newAction();
+	struct action *a = newAction();
 	if (a == NULL) return NULL;
 	a->type = im_KeyboardEvent;
 	a->im = im;
@@ -494,7 +494,7 @@ keyAction(class im  *im, register long  k)
 static	struct action *
 mouseAction(class im  *im, enum view_MouseAction  act, long  x, long  y, long  newButtonState)
 					{
-	register struct action *a = newAction();
+	struct action *a = newAction();
 	if (a == NULL) return NULL;
 	a->type = im_MouseEvent;
 	a->im = im;
@@ -511,7 +511,7 @@ mouseAction(class im  *im, enum view_MouseAction  act, long  x, long  y, long  n
 static	struct action *
 menuAction(class im  *im, struct proctable_Entry  *procTableEntry, ATK   *object, long  rock)
 	 		   	{
-	register struct action *a = newAction();
+	struct action *a = newAction();
 	if (a == NULL) return NULL;
 	a->type = im_MenuEvent;
 	a->im = im;
@@ -530,7 +530,7 @@ menuAction(class im  *im, struct proctable_Entry  *procTableEntry, ATK   *object
 static	struct action *
 macroAction(class im  *im, struct action  *macro, struct action  *nextaction, long  remainingrepetitions)
 				{
-	register struct action *a = newAction();
+	struct action *a = newAction();
 	if (a == NULL) return NULL;
 	a->type = im_MacroEvent;
 	a->im = im;
@@ -541,7 +541,7 @@ macroAction(class im  *im, struct action  *macro, struct action  *nextaction, lo
 }
 
 	static void
-userKey(register class im  *self, long  key)
+userKey(class im  *self, long  key)
 		{
 	struct action *a;
 	if (self->LogFile != NULL) {
@@ -556,7 +556,7 @@ userKey(register class im  *self, long  key)
 }
 
 	static void
-userMouse(register class im  *self, enum view_MouseAction  act, long  x, long  y, long  newButtonState)
+userMouse(class im  *self, enum view_MouseAction  act, long  x, long  y, long  newButtonState)
 	{
 	struct action *a;
 	if(self==NULL) return;
@@ -576,7 +576,7 @@ userMouse(register class im  *self, enum view_MouseAction  act, long  x, long  y
 }
 
 	static void
-userMenu(register class im  *self, struct proctable_Entry  *procTableEntry, ATK   *object, long  rock)
+userMenu(class im  *self, struct proctable_Entry  *procTableEntry, ATK   *object, long  rock)
 	 		   	{
 	struct action *a;
 	if (self->LogFile != NULL) 
@@ -774,11 +774,11 @@ static struct vfile *lastVFile;
 
 static struct vfile *GetUnUsedVfile()
 {
-    register int i;
+    int i;
     for (i = 0; i < NUMBEROFVFILES; i++)  {
 	if (! vFiles[i].used)  {
 	    if (vFiles[i].file == NULL)  {
-		register FILE *f;
+		FILE *f;
 
 		f = tmpfile();
 		if(f==NULL) continue;
@@ -797,7 +797,7 @@ static struct vfile *GetUnUsedVfile()
 
 static struct vfile *GetCorrespondingVFile(FILE  *f)
 {
-    register int i;
+    int i;
 
     for (i = 0; i < NUMBEROFVFILES; i++)  {
 	if (vFiles[i].used && vFiles[i].file == f)
@@ -884,7 +884,7 @@ void im::vfilecleanup()
 {
 	ATKinit;
 
-    register int i;
+    int i;
 
     for (i = 0; i < NUMBEROFVFILES; i++)  {
 	if (vFiles[i].file != NULL)  {
@@ -992,7 +992,7 @@ static void resetKeyEcho(class im  *self)
 }
 static boolean stillexists(class im  *self)
 	{
-    register class im *im = imList;
+    class im *im = imList;
     while (im != NULL)  {
 	if(im == self) return TRUE;
 	im = im->next;
@@ -1051,7 +1051,7 @@ static void HandleArgumentProcessing(class im  *self, long  key)
 
 static void RecordProc(class im  *im, struct proctable_Entry  *procTableEntry, long  rock, ATK   *object, struct action  *keys)
 {
-    register struct action *a = newAction();
+    struct action *a = newAction();
     if (a == NULL) return;
     if(keys!=NULL) a->type = im_ProcEvent;
     else a->type = im_MenuEvent;
@@ -1071,7 +1071,7 @@ static struct proctable_Entry *stopmacroproc=NULL;
 
 static class im *HandleProc(class im  *self, struct proctable_Entry  *procTableEntry, ATK   *object, long  rock, struct action  *keys)
 {
-    register long dest = destroycount;
+    long dest = destroycount;
     char errmsg[256];
 
     self->argState.argNext = FALSE;
@@ -1300,7 +1300,7 @@ im::Hit (enum view_MouseAction  action, long  x , long  y , long  clicks)
 class im *
 im::HandleMouse(enum view_MouseAction  action, long  x, long  y, long  newButtonState)
 					{
-	register long dest = destroycount;
+	long dest = destroycount;
 
 	if(RECORDING) {
 	    enqAction(&Record, mouseAction(this, action, x, y, newButtonState));
@@ -1315,7 +1315,7 @@ im::HandleMouse(enum view_MouseAction  action, long  x, long  y, long  newButton
 		if ((this->buttonState == im_AllUp 
 					&& newButtonState != im_AllUp)
 				|| this->mouseFocus == NULL)  {
-			register boolean closeHit;
+			boolean closeHit;
 
 			closeHit = (this->lastEvent == im_MouseEvent) 
 					&& (this->lastMouseDown == action) 
@@ -1657,8 +1657,8 @@ void im::ObservedChanged(class observable  *changedo, long  value)
 
 im::~im()
 {
-    register class im *im = imList;
-    register class im *prevIM = NULL;
+    class im *im = imList;
+    class im *prevIM = NULL;
     struct handler *next_handler;
 
     if(ownerIM==this && selectionOwner) {
@@ -1995,7 +1995,7 @@ DoCreate(char  *host, class im  *other, int  flag, int  width , int  height, int
     if (logdir) {
 	/* initialize logging of user actions */
 	char  name[200];
-	register class tm *tm;
+	class tm *tm;
 
 	LogStart = time (0) - 10000;
 	tm = localtime(&LogStart);
@@ -2144,7 +2144,7 @@ im::ChangeDirectory(const char  *dirName)
 		{
 	ATKinit;
 
-	register long code;
+	long code;
 
 	if ((code = chdir(dirName)) >= 0)  /* Successful */
 	{
@@ -2175,7 +2175,7 @@ void im::DeliverSignals()
     {
 	ATKinit;
 
-    register int i;
+    int i;
     anyDelivered = 0;
     for(i=1;i<NSIG;i++) {
 	if(sigDelivered[i]) {
@@ -2221,8 +2221,8 @@ boolean im::AddFileHandler (FILE  *file, im_filefptr  proc, char  *procdata, lon
                     {
 	ATKinit;
 
-    register long i;
-    register struct FILEHandlers  *p = globalFILEHandlers;
+    long i;
+    struct FILEHandlers  *p = globalFILEHandlers;
 
     for (i = 0; i < NFILEHandlers; i++, p++)  {
 	if (p->file == file) {
@@ -2256,7 +2256,7 @@ void im::RemoveFileHandler (FILE  *file)
         {
 	ATKinit;
 
-    register struct FILEHandlers *p = &globalFILEHandlers[NFILEHandlers];
+    struct FILEHandlers *p = &globalFILEHandlers[NFILEHandlers];
 
     while (--p >= globalFILEHandlers)  {
 	if (p->file == file) {
@@ -2271,8 +2271,8 @@ boolean im::AddCanOutHandler (FILE  *file, im_filefptr  proc, char  *procdata, l
                     {
 	ATKinit;
 
-    register long i;
-    register struct FILEHandlers  *p = CanOutHandlers;
+    long i;
+    struct FILEHandlers  *p = CanOutHandlers;
 
     for (i = 0; i < NCanOutHandlers; i++, p++)  {
 	if (p->file == file) {
@@ -2306,7 +2306,7 @@ void im::RemoveCanOutHandler (FILE  *file)
         {
 	ATKinit;
 
-    register struct FILEHandlers *p = &CanOutHandlers[NCanOutHandlers];
+    struct FILEHandlers *p = &CanOutHandlers[NCanOutHandlers];
 
     while (--p >= CanOutHandlers)  {
 	if (p->file == file) {
@@ -2853,7 +2853,7 @@ static void StopKeyboardMacro(class im  *self, long  key)
 
 static void PlayKeyboardMacro(class im  *self, long  key)
         {
-    register long count;
+    long count;
     
     count = (self)->Argument();
     (self)->ClearArg();
@@ -3371,9 +3371,9 @@ void im::PostCursor(struct rectangle  *rec,class cursor  *cursor)
 
 }
 
-void im::RetractCursor(register class cursor  *cursor)
+void im::RetractCursor(class cursor  *cursor)
 {
-    register class cursor *cp,*lastcp;
+    class cursor *cp,*lastcp;
     if(cursor == NULL || cursor->posted == NULL) return;
     for(cp= this->cursorlist,lastcp = NULL; cp != NULL;cp = cp->next){
 	if(cp == cursor){
@@ -3393,8 +3393,8 @@ void im::RetractCursor(register class cursor  *cursor)
 void im::RetractViewCursors(class view  *requestor)
 {
     /* clears cursors belonging to a view */
-    register class cursor *cp,*lastcp;
-    register int found = 0;
+    class cursor *cp,*lastcp;
+    int found = 0;
     for(cp= this->cursorlist,lastcp = NULL; cp != NULL;cp = cp->next){
 	if(cp->view == requestor) {
 	    found++;
@@ -3418,7 +3418,7 @@ void im::SetProcessCursor(class cursor  *cursor) /* set cursor to NULL to deacti
     {
 	ATKinit;
 
-    register class im *im;
+    class im *im;
     if(ProcessCursor == cursor){
 	if(cursor == NULL || !cursor->changed)  return;
 	cursor->changed = FALSE;
@@ -3455,7 +3455,7 @@ void im::SetWindowCursor(class cursor  *cursor) /* set cursor to NULL to deactiv
 
 void im::ClearCursorList()
     {
-    register class cursor *cp;
+    class cursor *cp;
 
     if (im::IsPlaying()) return;
 

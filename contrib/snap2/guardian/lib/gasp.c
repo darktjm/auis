@@ -78,8 +78,8 @@ int GASP_ServerInit(argc, argv, parms, client, fd, authenticated)
 {
     char key[SNAP_KEYLEN], host[512];
     int keyfd, code;
-    register struct servent *sv;
-    register struct hostent *ho;
+    struct servent *sv;
+    struct hostent *ho;
 
     /*
        Check on # arguments & process:
@@ -147,7 +147,7 @@ int GASP_Count(count)
 /* Return null-terminated string describing error */
 
 char *GASP_Error(errno)
-    register int errno;
+    int errno;
 {
     static char *errors[] = {
 	/*1*/	"(Unused)",

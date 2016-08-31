@@ -50,7 +50,7 @@ static const char *nullstring="";
 
 
 ATKdefineRegistry(environ, ATK, NULL);
-static boolean varcmp(register const char  *variable, register const char  *envEntry);
+static boolean varcmp(const char  *variable, const char  *envEntry);
 static char * strncpyMovePointer(char *dest, const char *src, const int numchars);
 
 static char *strncpyMovePointer(char *dest, const char *src, const int numchars)
@@ -64,7 +64,7 @@ static char *strncpyMovePointer(char *dest, const char *src, const int numchars)
 /* Quick and simple routine for checking if a environment entry is for a given
  * variable, probably faster than raw strlen and strncmp combinations.
  */
-static boolean varcmp(register const char  *variable, register const char  *envEntry)
+static boolean varcmp(const char  *variable, const char  *envEntry)
         {
 
     while (*variable != '\0' && *variable++ == *envEntry++)
@@ -113,7 +113,7 @@ void environ::Put(const char    *variable , const char    *value)
  */
     static char **lastEnviron = NULL; /* The last environment we allocated. */
     static int lastEnvironLength = 0; /* The maximum number of entries in lastEnviron. */
-    register char **p;
+    char **p;
 
     /* check for a NULL value so we can make it the expected null string */
     if(value==NULL) value=nullstring;
@@ -123,7 +123,7 @@ void environ::Put(const char    *variable , const char    *value)
     if (*p == NULL) {
         if (environ != lastEnviron || p - environ > lastEnvironLength) {
 
-	    register char **np;
+	    char **np;
 
 	    lastEnvironLength = (p - environ) + 12; /* 1 for new entry, 1 for NULL, and 10 for expansion. */
 	    if (lastEnviron != NULL)
@@ -148,7 +148,7 @@ void environ::Delete(const char	 *variable)
         {
 #undef environ
     extern char **environ;
-    register char **p;
+    char **p;
 
     for (p = environ; *p != NULL && !varcmp(variable, *p); p++)
 	;

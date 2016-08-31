@@ -273,7 +273,7 @@ void eos::SetTitle(char  *title)
 void eos_NewWindow(class eos  *self)
     {
     class eframe *new_c;
-    register class buffer *buffer;
+    class buffer *buffer;
     class im *window;
     new_c = new class eframe;
 

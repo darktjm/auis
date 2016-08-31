@@ -75,26 +75,26 @@ END-SPECIFICATION  ************************************************************/
 #include "zipprint.h"
 #include "zipprint.H"
 
-long Highlight_Pane_Points( register class zipedit		  *self, register zip_type_pane		   pane );
-long Normalize_Pane_Points( register class zipedit		  *self, register zip_type_pane		   pane );
-static int Delete_Inferior_Image( register class zipedit		  *self, register zip_type_image		   image, register zip_type_pane		   pane );
-static int Undelete_Inferior_Image( register class zipedit		  *self, register zip_type_image		   image, register zip_type_pane		   pane );
-int Highlight_Inferior_Image_Points( register class zipedit		  *self, register zip_type_image		   image, register zip_type_pane		   pane );
-static int Normalize_Inferior_Image_Points( register class zipedit		  *self, register zip_type_image		   image, register zip_type_pane		   pane );
-long Delete_Stream( register class zipedit		  *self, register zip_type_stream		   stream, register zip_type_pane		   pane );
-long Undelete_Stream( register class zipedit		  *self, register zip_type_stream		   stream, register zip_type_pane		   pane );
-long Highlight_Stream_Points( register class zipedit		  *self, register zip_type_stream		   stream, register zip_type_pane		   pane );
-long Normalize_Stream_Points( register class zipedit		  *self, register zip_type_stream		   stream, register zip_type_pane		   pane );
-long Hide_Stream_Points( register class zipedit		  *self, register zip_type_stream		   stream, register zip_type_pane		   pane );
-long Expose_Stream_Points( register class zipedit		  *self, register zip_type_stream		   stream, register zip_type_pane		   pane );
-static boolean Ratify_Highlighting( register class zipedit		  *self, register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y );
-static boolean Ratify_Normalizing( register class zipedit		  *self, register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y );
+long Highlight_Pane_Points( class zipedit		  *self, zip_type_pane		   pane );
+long Normalize_Pane_Points( class zipedit		  *self, zip_type_pane		   pane );
+static int Delete_Inferior_Image( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane );
+static int Undelete_Inferior_Image( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane );
+int Highlight_Inferior_Image_Points( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane );
+static int Normalize_Inferior_Image_Points( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane );
+long Delete_Stream( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
+long Undelete_Stream( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
+long Highlight_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
+long Normalize_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
+long Hide_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
+long Expose_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
+static boolean Ratify_Highlighting( class zipedit		  *self, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y );
+static boolean Ratify_Normalizing( class zipedit		  *self, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y );
 
 
 long
-zipedit::Set_Pane_Highlight_Icon( register zip_type_pane		   pane, register char				   icon )
+zipedit::Set_Pane_Highlight_Icon( zip_type_pane		   pane, char				   icon )
         {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipedit::Set_Pane_Highlight_Icon);
   if ( pane )
@@ -107,21 +107,21 @@ zipedit::Set_Pane_Highlight_Icon( register zip_type_pane		   pane, register char
   }
 
 long
-Highlight_Pane_Points( register class zipedit		  *self, register zip_type_pane		   pane )
+Highlight_Pane_Points( class zipedit		  *self, zip_type_pane		   pane )
       {
 return zip_ok;
   }
 
 long
-Normalize_Pane_Points( register class zipedit		  *self, register zip_type_pane		   pane )
+Normalize_Pane_Points( class zipedit		  *self, zip_type_pane		   pane )
       {
 return zip_ok;
   }
 
 long
-zipedit::Hide_Pane_Points( register zip_type_pane		   pane )
+zipedit::Hide_Pane_Points( zip_type_pane		   pane )
       {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipedit::Hide_Pane_Points);
   if ( pane )
@@ -140,9 +140,9 @@ zipedit::Hide_Pane_Points( register zip_type_pane		   pane )
   }
 
 long
-zipedit::Expose_Pane_Points( register zip_type_pane		   pane )
+zipedit::Expose_Pane_Points( zip_type_pane		   pane )
       {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipedit::Expose_Pane_Points);
   if ( pane )
@@ -161,9 +161,9 @@ zipedit::Expose_Pane_Points( register zip_type_pane		   pane )
   }
 
 long
-zipedit::Expose_Pane_Grid( register zip_type_pane		   pane )
+zipedit::Expose_Pane_Grid( zip_type_pane		   pane )
       {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipedit::Expose_Pane_Grid);
   if ( pane )
@@ -181,9 +181,9 @@ zipedit::Expose_Pane_Grid( register zip_type_pane		   pane )
   }
 
 long
-zipedit::Hide_Pane_Grid( register zip_type_pane		   pane )
+zipedit::Hide_Pane_Grid( zip_type_pane		   pane )
       {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipedit::Hide_Pane_Grid);
   if ( pane )
@@ -208,7 +208,7 @@ long
 zipedit::Constrain_Points( zip_type_pane  pane )
       {
   class zipedit *self=this;
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipedit::Constrain_Points);
   if ( pane )
@@ -229,7 +229,7 @@ long
 zipedit::Unconstrain_Points( zip_type_pane  pane )
       {
   class zipedit *self=this;
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipedit::Unconstrain_Points);
   if ( pane )
@@ -246,9 +246,9 @@ zipedit::Unconstrain_Points( zip_type_pane  pane )
 
 
 long
-zipedit::Halve_Pane_Grid( register zip_type_pane		   pane )
+zipedit::Halve_Pane_Grid( zip_type_pane		   pane )
       {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
   class zipedit *self=this;
   IN(zipedit::Halve_Pane_Grid);
   if ( pane )
@@ -269,9 +269,9 @@ zipedit::Halve_Pane_Grid( register zip_type_pane		   pane )
   }
 
 long
-zipedit::Double_Pane_Grid( register zip_type_pane		   pane )
+zipedit::Double_Pane_Grid( zip_type_pane		   pane )
       {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
   class zipedit *self=this;
 
   IN(zipedit::Double_Pane_Grid);
@@ -293,9 +293,9 @@ zipedit::Double_Pane_Grid( register zip_type_pane		   pane )
   }
 
 long
-zipedit::Expose_Pane_Coordinates( register zip_type_pane		   pane )
+zipedit::Expose_Pane_Coordinates( zip_type_pane		   pane )
       {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipedit::Expose_Pane_Coordinates);
   if ( pane )
@@ -315,9 +315,9 @@ zipedit::Expose_Pane_Coordinates( register zip_type_pane		   pane )
   }
 
 long
-zipedit::Hide_Pane_Coordinates( register zip_type_pane		   pane )
+zipedit::Hide_Pane_Coordinates( zip_type_pane		   pane )
       {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipedit::Hide_Pane_Coordinates);
   if ( pane )
@@ -336,9 +336,9 @@ zipedit::Hide_Pane_Coordinates( register zip_type_pane		   pane )
   }
 
 long
-zipedit::Delete_Figure( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipedit::Delete_Figure( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status= zip_ok;
+  long				  status= zip_ok;
   class zipedit *self=this;
 
   IN(zipedit::Delete_Figure);
@@ -364,9 +364,9 @@ zipedit::Delete_Figure( register zip_type_figure		   figure, register zip_type_p
   }
 
 long
-zipedit::Undelete_Figure( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipedit::Undelete_Figure( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-   register long				  status= zip_ok;
+   long				  status= zip_ok;
    class zipedit *self=this;
   IN(zipedit::Undelete_Figure);
   if ( figure )
@@ -386,10 +386,10 @@ zipedit::Undelete_Figure( register zip_type_figure		   figure, register zip_type
  }
 
 long
-zipedit::Which_Figure_Point( register zip_type_figure		   figure, register zip_type_pane		  pane, register long				   x , register long				   y )
+zipedit::Which_Figure_Point( zip_type_figure		   figure, zip_type_pane		  pane, long				   x , long				   y )
           {
-  register long				  point = 0;
-  register long				  status = zip_ok;
+  long				  point = 0;
+  long				  status = zip_ok;
   class zipedit *self=this;
 
   IN(zipedit::Which_Figure_Point);
@@ -406,9 +406,9 @@ zipedit::Which_Figure_Point( register zip_type_figure		   figure, register zip_t
   }
 
 long
-zipedit::Highlight_Figure_Points( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipedit::Highlight_Figure_Points( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
   class zipedit *self=this;
   IN(zipedit::Highlight_Figure_Points);
   if ( pane  &&  figure  &&  figure->zip_figure_visibility == zip_figure_exposed  &&
@@ -424,9 +424,9 @@ zipedit::Highlight_Figure_Points( register zip_type_figure		   figure, register 
   }
 
 long
-zipedit::Normalize_Figure_Points( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipedit::Normalize_Figure_Points( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
   class zipedit *self=this;
   IN(zipedit::Normalize_Figure_Points);
   if ( pane  &&  figure  &&  figure->zip_figure_visibility == zip_figure_exposed  &&
@@ -442,9 +442,9 @@ zipedit::Normalize_Figure_Points( register zip_type_figure		   figure, register 
   }
 
 long
-zipedit::Hide_Figure_Points( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipedit::Hide_Figure_Points( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipedit::Hide_Figure_Points);
   if ( pane  &&  figure  &&  figure->zip_figure_state.zip_figure_state_points_exposed )
@@ -459,9 +459,9 @@ zipedit::Hide_Figure_Points( register zip_type_figure		   figure, register zip_t
   }
 
 long
-zipedit::Expose_Figure_Points( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipedit::Expose_Figure_Points( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipedit::Expose_Figure_Points);
   if ( pane  &&  figure  &&  ! figure->zip_figure_state.zip_figure_state_points_exposed )
@@ -476,10 +476,10 @@ zipedit::Expose_Figure_Points( register zip_type_figure		   figure, register zip
   }
 
 long
-zipedit::Delete_Image( register zip_type_image		   image, register zip_type_pane		   pane )
+zipedit::Delete_Image( zip_type_image		   image, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
-  register zip_type_figure		  figure_ptr;
+  long				  status = zip_ok;
+  zip_type_figure		  figure_ptr;
   class zipedit *self=this;
   IN(zipedit::Delete_Image);
   if ( image )
@@ -504,10 +504,10 @@ zipedit::Delete_Image( register zip_type_image		   image, register zip_type_pane
   }
 
 static int
-Delete_Inferior_Image( register class zipedit		  *self, register zip_type_image		   image, register zip_type_pane		   pane )
+Delete_Inferior_Image( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
-  register zip_type_figure		  figure_ptr;
+  long				  status = zip_ok;
+  zip_type_figure		  figure_ptr;
 
   IN(Delete_Inferior_Image);
   image->zip_image_visibility = zip_image_hidden;
@@ -527,10 +527,10 @@ Delete_Inferior_Image( register class zipedit		  *self, register zip_type_image	
   }
 
 long
-zipedit::Undelete_Image( register zip_type_image		   image, register zip_type_pane		   pane )
+zipedit::Undelete_Image( zip_type_image		   image, zip_type_pane		   pane )
         {
-  register long						  status = zip_ok;
-  register zip_type_figure				  figure_ptr;
+  long						  status = zip_ok;
+  zip_type_figure				  figure_ptr;
   class zipedit *self=this;
 
   IN(zipedit::Undelete_Image);
@@ -556,10 +556,10 @@ zipedit::Undelete_Image( register zip_type_image		   image, register zip_type_pa
   }
 
 static int
-Undelete_Inferior_Image( register class zipedit		  *self, register zip_type_image		   image, register zip_type_pane		   pane )
+Undelete_Inferior_Image( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
-  register zip_type_figure		  figure_ptr;
+  long				  status = zip_ok;
+  zip_type_figure		  figure_ptr;
 
   IN(Undelete_Inferior_Image);
   image->zip_image_visibility = zip_image_exposed;
@@ -579,10 +579,10 @@ Undelete_Inferior_Image( register class zipedit		  *self, register zip_type_imag
   }
 
 long
-zipedit::Highlight_Image_Points( register zip_type_image		   image, register zip_type_pane		   pane )
+zipedit::Highlight_Image_Points( zip_type_image		   image, zip_type_pane		   pane )
         {
-  register zip_type_figure		  figure_ptr;
-  register long				  status = zip_ok;
+  zip_type_figure		  figure_ptr;
+  long				  status = zip_ok;
   class zipedit *self=this;
 
   IN(zipedit::Highlight_Image_Points);
@@ -605,10 +605,10 @@ zipedit::Highlight_Image_Points( register zip_type_image		   image, register zip
 
 
 int
-Highlight_Inferior_Image_Points( register class zipedit		  *self, register zip_type_image		   image, register zip_type_pane		   pane )
+Highlight_Inferior_Image_Points( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane )
         {
-  register zip_type_figure		  figure_ptr;
-  register long				  status = zip_ok;
+  zip_type_figure		  figure_ptr;
+  long				  status = zip_ok;
 
   IN(zip_Highlight_Inferior_Image_Points);
   if ( image->zip_image_visibility == zip_image_exposed )
@@ -630,10 +630,10 @@ Highlight_Inferior_Image_Points( register class zipedit		  *self, register zip_t
   }
 
 long
-zipedit::Normalize_Image_Points( register zip_type_image		   image, register zip_type_pane		   pane )
+zipedit::Normalize_Image_Points( zip_type_image		   image, zip_type_pane		   pane )
         {
-  register zip_type_figure		  figure_ptr;
-  register long				  status = zip_ok;
+  zip_type_figure		  figure_ptr;
+  long				  status = zip_ok;
   class zipedit *self=this;
 
   IN(zip_Normalize_Image_Points);
@@ -655,10 +655,10 @@ zipedit::Normalize_Image_Points( register zip_type_image		   image, register zip
   }
 
 static int
-Normalize_Inferior_Image_Points( register class zipedit		  *self, register zip_type_image		   image, register zip_type_pane		   pane )
+Normalize_Inferior_Image_Points( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane )
         {
-  register zip_type_figure		  figure_ptr;
-  register long				  status = zip_ok;
+  zip_type_figure		  figure_ptr;
+  long				  status = zip_ok;
 
   IN(Normalize_Inferior_Image_Points);
   if ( image->zip_image_visibility == zip_image_exposed )
@@ -680,10 +680,10 @@ Normalize_Inferior_Image_Points( register class zipedit		  *self, register zip_t
   }
 
 long
-zipedit::Hide_Image_Points( register zip_type_image		   image, register zip_type_pane		   pane )
+zipedit::Hide_Image_Points( zip_type_image		   image, zip_type_pane		   pane )
         {
-  register zip_type_figure		  figure_ptr;
-  register long				  status = zip_ok;
+  zip_type_figure		  figure_ptr;
+  long				  status = zip_ok;
   class zipedit *self=this;
 
   IN(zip_Hide_Image_Points);
@@ -703,10 +703,10 @@ zipedit::Hide_Image_Points( register zip_type_image		   image, register zip_type
   }
 
 long
-zipedit::Expose_Image_Points( register zip_type_image		   image, register zip_type_pane		   pane )
+zipedit::Expose_Image_Points( zip_type_image		   image, zip_type_pane		   pane )
         {
-  register zip_type_figure		  figure_ptr;
-  register long				  status = zip_ok;
+  zip_type_figure		  figure_ptr;
+  long				  status = zip_ok;
   class zipedit *self=this;
 
   IN(zip_Expose_Image_Points);
@@ -727,47 +727,47 @@ zipedit::Expose_Image_Points( register zip_type_image		   image, register zip_ty
 
 
 long
-Delete_Stream( register class zipedit		  *self, register zip_type_stream		   stream, register zip_type_pane		   pane )
+Delete_Stream( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
         {
 return zip_ok;
   }
 
 long
-Undelete_Stream( register class zipedit		  *self, register zip_type_stream		   stream, register zip_type_pane		   pane )
+Undelete_Stream( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
         {
 return zip_ok;
   }
 
 long
-Highlight_Stream_Points( register class zipedit		  *self, register zip_type_stream		   stream, register zip_type_pane		   pane )
+Highlight_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
         {
 return zip_ok;
   }
 
 long
-Normalize_Stream_Points( register class zipedit		  *self, register zip_type_stream		   stream, register zip_type_pane		   pane )
+Normalize_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
         {
 return zip_ok;
   }
 
 long
-Hide_Stream_Points( register class zipedit		  *self, register zip_type_stream		   stream, register zip_type_pane		   pane )
+Hide_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
         {
 return zip_ok;
   }
 
 long
-Expose_Stream_Points( register class zipedit		  *self, register zip_type_stream		   stream, register zip_type_pane		   pane )
+Expose_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
         {
 return zip_ok;
   }
 
-void zipedit::Expose_Point( register zip_type_pane		   pane, register zip_type_figure		   figure, register zip_type_pixel		   x , register zip_type_pixel		   y )
+void zipedit::Expose_Point( zip_type_pane		   pane, zip_type_figure		   figure, zip_type_pixel		   x , zip_type_pixel		   y )
 {
   class zipedit *self=this;
   char					  points[100];
   long					  xp, yp;
-  register class fontdesc		 *current_font = (View)->GetFont( );
+  class fontdesc		 *current_font = (View)->GetFont( );
 
   IN(zipedit::Expose_Point);
   sprintf( points, "(%ld,%ld)", x, y );  /*=== optimize ===*/
@@ -802,13 +802,13 @@ void zipedit::Expose_Point( register zip_type_pane		   pane, register zip_type_f
   }
 
 
-void zipedit::Hide_Point( register zip_type_pane		   pane, register zip_type_figure		   figure, register zip_type_pixel		   x , register zip_type_pixel		   y )
+void zipedit::Hide_Point( zip_type_pane		   pane, zip_type_figure		   figure, zip_type_pixel		   x , zip_type_pixel		   y )
           {
 /*=== needed ?  ===*/
   }
 
 long
-zipedit::Highlight_Handles( register zip_type_pane		   pane, register zip_type_pixel		   X1 , register zip_type_pixel		   X2 , register zip_type_pixel		   X3 , register zip_type_pixel		   Y1 , register zip_type_pixel		   Y2 , register zip_type_pixel		   Y3 )
+zipedit::Highlight_Handles( zip_type_pane		   pane, zip_type_pixel		   X1 , zip_type_pixel		   X2 , zip_type_pixel		   X3 , zip_type_pixel		   Y1 , zip_type_pixel		   Y2 , zip_type_pixel		   Y3 )
 {
   class zipedit *self=this;
   IN(zipedit::Highlight_Handles);
@@ -834,10 +834,10 @@ static struct highlights    *Highlights;
 static long		     highlights_count;
 
 static boolean
-Ratify_Highlighting( register class zipedit		  *self, register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y )
+Ratify_Highlighting( class zipedit		  *self, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y )
         {
-  register long				  i;
-  register boolean			  ratified = true;
+  long				  i;
+  boolean			  ratified = true;
 
   IN(Ratify_Highlighting);
   if ( x > 0  &&  y > 0 )
@@ -864,11 +864,11 @@ Ratify_Highlighting( register class zipedit		  *self, register zip_type_pane		  
   }
 
 static boolean
-Ratify_Normalizing( register class zipedit		  *self, register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y )
+Ratify_Normalizing( class zipedit		  *self, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y )
         {
-  register long				  i;
-  register boolean			  discard = true;
-  register boolean			  ratified = false;
+  long				  i;
+  boolean			  discard = true;
+  boolean			  ratified = false;
 
   IN(Ratify_Normalizing);
   if ( x > 0  &&  y > 0 )
@@ -901,7 +901,7 @@ Ratify_Normalizing( register class zipedit		  *self, register zip_type_pane		   
   }
 
 long
-zipedit::Highlight_Point( register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y )
+zipedit::Highlight_Point( zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y )
         {
   class zipedit *self=this;
   IN(zipedit_Highlight_Point);
@@ -930,7 +930,7 @@ zipedit::Highlight_Point( register zip_type_pane		   pane, register zip_type_pix
   }
 
 long
-zipedit::Highlight_Handle( register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y )
+zipedit::Highlight_Handle( zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y )
         {
   class zipedit *self=this;
   IN(zipedit_Highlight_Handle);
@@ -946,7 +946,7 @@ zipedit::Highlight_Handle( register zip_type_pane		   pane, register zip_type_pi
   }
 
 long
-zipedit::Normalize_Handles( register zip_type_pane		   pane, register zip_type_pixel		   X1 , register zip_type_pixel		   X2 , register zip_type_pixel		   X3 , register zip_type_pixel		   Y1 , register zip_type_pixel		   Y2 , register zip_type_pixel		   Y3 )
+zipedit::Normalize_Handles( zip_type_pane		   pane, zip_type_pixel		   X1 , zip_type_pixel		   X2 , zip_type_pixel		   X3 , zip_type_pixel		   Y1 , zip_type_pixel		   Y2 , zip_type_pixel		   Y3 )
 {
   class zipedit *self=this;
   IN(zipedit::Normalize_Handles);
@@ -965,7 +965,7 @@ zipedit::Normalize_Handles( register zip_type_pane		   pane, register zip_type_p
 
 
 long
-zipedit::Normalize_Point( register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y )
+zipedit::Normalize_Point( zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y )
 {
   class zipedit *self=this;
   IN(zipedit::Normalize_Point);
@@ -994,7 +994,7 @@ zipedit::Normalize_Point( register zip_type_pane		   pane, register zip_type_pix
 
 
 long
-zipedit::Normalize_Handle( register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y )
+zipedit::Normalize_Handle( zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y )
         {
   class zipedit *self=this;
   IN(zipedit::Highlight_Handle);

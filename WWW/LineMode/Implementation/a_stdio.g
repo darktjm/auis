@@ -100,7 +100,7 @@ int	doinull()	{	doienc(0); return 0; }
 int	doia2k()	{	doienc(1); return 0; }
 #define PRINT(par1,par2,cond)
 int	a_print(char *str, int _, FILE *fp)
-{	register int i; if(str==0) return 1;
+{	int i; if(str==0) return 1;
 	for(;*str!='\0' && _>0;++str,--_) {
 		if((i=(int)*str)<0) i=encode[i+128]; else /* for signed chars*/
 		if(i>127) i=encode[i-128]; /* for unsigned chars */
@@ -112,7 +112,7 @@ PRINT(int _,, *str!='\0')
 PRINT(int size, int nmemb, size*nmemb > 0)
 int	awrite(const void *str, int size, int nmemb, FILE *fp)
 {	
-	register int i, _=size*nmemb; if(str==0) return 0;
+	int i, _=size*nmemb; if(str==0) return 0;
 	for(;_ > 0;++str,--_) {
 		if((i=(int)*(char*)str)<0) i=encode[i+128]; 
 		else /* for signed chars */
@@ -123,14 +123,14 @@ int	awrite(const void *str, int size, int nmemb, FILE *fp)
 }
 int	aputc(char ch, FILE *fp)
 {
-	register int i;
+	int i;
 	if((i=(int)ch)<0) i=encode[i+128]; else /* for signed chars */
 	if(i>127) i=encode[i-128]; /* for unsigned chars */
 	if(fputc(i,fp)==EOF) return EOF;
 	return	ch;
 }
 char	*agets(char *str, int _, FILE *fp)
-{	char *pc=str;	register int i,j=0;
+{	char *pc=str;	int i,j=0;
 	if(fgets(str,_,fp)==0)	return 0;
 	for(;*str!='\0' && j<_;++j,++pc) {
 		if((i=(int)*pc)<0) *str++=i_encode[i+128];
@@ -150,7 +150,7 @@ int	anprint(char *str, int psize, FILE *fp)
 }
 /*void	a_translate(char *str, int _)
 {
-	for(register int i;*str!='\0' && _>0;++str,--_) {
+	for(int i;*str!='\0' && _>0;++str,--_) {
 		if((i=(int)*str)<0) i=encode[i+128]; else // for signed chars
 		if(i>127) i=encode[i-128]; // for unsigned chars
 		*str=i;

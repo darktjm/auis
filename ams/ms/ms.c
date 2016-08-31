@@ -252,7 +252,7 @@ char *proc;
 CallPacket *packet;
 int reason, cid;
 {
-    register int i;
+    int i;
 
     fprintf(stderr, "[MS]: Bad packet (%d): 0x", reason);
     for (i=0; i<CALL_PACKET_HEADER_LENGTH; i++)
@@ -281,7 +281,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_CreateNewMessageDirectory";
-    register char *ptr;
+    char *ptr;
     char *DirName, *BodyDirName;
     SNAP_integer Overwrite;
 
@@ -313,7 +313,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_AppendFileToFolder";
-    register char *ptr;
+    char *ptr;
     char *FileName, *FolderName;
 
     /* Unpack call arguments */
@@ -340,7 +340,7 @@ CallPacket *buffer;
 int len, type, cid, opcode;
 {
     static const char name[] = "MS_ProcessNewMessages";
-    register char *ptr;
+    char *ptr;
     char *SourceDir, *ParseSpecFile;
     int NumGood, NumBad, NumLocks, NumInProgress, resultcode, FirstError, buflim;
 
@@ -369,7 +369,7 @@ int len, type, cid, opcode;
 							buflim));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putint(ReturnPacketArgs(reply), (SNAP_integer) NumGood);
@@ -393,7 +393,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_ReconstructDirectory";
-    register char *ptr;
+    char *ptr;
     char *DirName;
     int NumGood, NumBad, TrustTimeStamp;
 
@@ -407,7 +407,7 @@ int len, type, cid;
 							  &NumGood, &NumBad, TrustTimeStamp));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putint(ReturnPacketArgs(reply), (SNAP_integer) NumGood);
@@ -425,7 +425,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_ScavengeDirectory";
-    register char *ptr;
+    char *ptr;
     char *DirName;
     int NumGood, NumBad, Recurse, Quiet, Purge;
 
@@ -441,7 +441,7 @@ int len, type, cid;
 							  &NumGood, &NumBad, Quiet, Purge));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putint(ReturnPacketArgs(reply), (SNAP_integer) NumGood);
@@ -459,7 +459,7 @@ CallPacket *buffer;
 int len, type, cid, IsOld;
 {    
     static const char name[] = "MS_RebuildMasterUpdate";
-    register char *ptr;
+    char *ptr;
     int NumFastGood, NumSlowGood, NumBad, NumAbsent, NumProbablyGood;
 
     /* Unpack args */
@@ -470,7 +470,7 @@ int len, type, cid, IsOld;
 							      &NumSlowGood, &NumBad, &NumAbsent, &NumProbablyGood));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putint(ReturnPacketArgs(reply), (SNAP_integer) NumFastGood);
@@ -506,7 +506,7 @@ int len, type, cid, IsOld;
 {
 
     static const char name[] = "MS_RebuildOneMasterUpdateFile";
-    register char *ptr;
+    char *ptr;
     int NumFastGood, NumSlowGood, NumBad, NumAbsent, NumProbablyGood;
     char *PathElt;
 
@@ -518,7 +518,7 @@ int len, type, cid, IsOld;
 		   (SNAP_integer) MS_RebuildOneMasterUpdateFile(PathElt, &NumFastGood, &NumSlowGood, &NumBad, &NumAbsent, &NumProbablyGood));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putint(ReturnPacketArgs(reply), (SNAP_integer) NumFastGood);
@@ -554,7 +554,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_NameChangedMapFile";
-    register char *ptr;
+    char *ptr;
     int NumChanged, NumUnavailable, NumMissingFolders, NumSlowpokes, NumFastFellas, MailOnly, ListAll;
 
     /* Unpack args */
@@ -566,7 +566,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_NameChangedMapFile(ResultBuffer, MailOnly, ListAll, &NumChanged, &NumUnavailable, &NumMissingFolders, &NumSlowpokes, &NumFastFellas));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
@@ -588,7 +588,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_HeadersSince";
-    register char *ptr;
+    char *ptr;
     char *FullDirName, *datefield;
     SNAP_integer MaxReturn, startbyte;
     int numbytes, bytesleft;
@@ -607,7 +607,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_HeadersSince(FullDirName, datefield, ResultBuffer, (int) MaxReturn, (int) startbyte, &numbytes, &bytesleft));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putbytes(ReturnPacketArgs(reply), ResultBuffer, numbytes);
@@ -630,7 +630,7 @@ CallPacket *buffer;
 int len, type, cid, GetPrinter;
 {
     static const char name[] = "MS_PrintMessage";
-    register char *ptr;
+    char *ptr;
     char *DirName, *id, *printer;
     SNAP_integer flags;
 
@@ -650,7 +650,7 @@ int len, type, cid, GetPrinter;
 		   (SNAP_integer) MS_PrintMessage(DirName, id, (int) flags, printer));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -680,7 +680,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_PrefetchMessage";
-    register char *ptr;
+    char *ptr;
     char *DirName, *id;
     SNAP_integer GetNext;
 
@@ -694,7 +694,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_PrefetchMessage(DirName, id, (int) GetNext));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -722,8 +722,8 @@ int len, type, cid;
 		   (SNAP_integer) MS_GetVersion(ResultBuffer, (int) lim));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, rlength;
-	register char *ptr;
+	int result, rlength;
+	char *ptr;
 
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
 	rlength = ptr - reply;
@@ -739,7 +739,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_DebugMode";
-    register char *ptr;
+    char *ptr;
     SNAP_integer level, snap, malloc;
 
     /* Unpack args */
@@ -754,7 +754,7 @@ int len, type, cid;
 					       (int) malloc));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -769,7 +769,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_NameSubscriptionMapFile";
-    register char *ptr;
+    char *ptr;
     char *Root;
 
     /* Unpack args */
@@ -783,7 +783,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_NameSubscriptionMapFile(Root, ResultBuffer));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
 	length = ptr - reply;
@@ -799,7 +799,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_MatchFolderName";
-    register char *ptr;
+    char *ptr;
     char *pat;
 
     /* Unpack args */
@@ -813,7 +813,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_MatchFolderName(pat, ResultBuffer));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
 	length = ptr - reply;
@@ -829,7 +829,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_CheckMissingFolder";
-    register char *ptr;
+    char *ptr;
     char *source;
 
     /* Unpack args */
@@ -843,7 +843,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_CheckMissingFolder(source, ResultBuffer));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
 	length = ptr - reply;
@@ -859,7 +859,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_DisambiguateFile";
-    register char *ptr;
+    char *ptr;
     char *source;
     SNAP_integer MustBeDir;
 
@@ -875,7 +875,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_DisambiguateFile(source, ResultBuffer, (int) MustBeDir));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
 	length = ptr - reply;
@@ -891,7 +891,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_GetPartialBody";
-    register char *ptr;
+    char *ptr;
     char *DirName, *id;
     SNAP_integer BufLim, offset;
     int remaining, ct;
@@ -913,7 +913,7 @@ int len, type, cid;
 						    &remaining, &ct));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putbytes(ReturnPacketArgs(reply), ResultBuffer, ct);
@@ -936,7 +936,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_GetConfigurationParameters";
-    register char *ptr;
+    char *ptr;
     SNAP_integer usedeliv, usesep, deltype;
 
     /* Unpack args */
@@ -950,7 +950,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_GetConfigurationParameters(ResultBuffer, len, &usedeliv, &usesep, &deltype));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
@@ -987,7 +987,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_GetVConfig(key,vers,buf));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putstr(ReturnPacketArgs(reply), buf);
@@ -1007,7 +1007,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_AndrewDir";
-    register char *ptr;
+    char *ptr;
 
     /* Unpack args */
     ptr = getint(CallPacketArgs(buffer), &len);
@@ -1020,7 +1020,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_AndrewDir(ResultBuffer, len));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
@@ -1042,7 +1042,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_GetPartialFile";
-    register char *ptr;
+    char *ptr;
     char *FileName;
     SNAP_integer BufLim, offset;
     int remaining, ct;
@@ -1062,7 +1062,7 @@ int len, type, cid;
 						    &remaining, &ct));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putbytes(ReturnPacketArgs(reply), ResultBuffer, ct);
@@ -1085,7 +1085,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_SetAssociatedTime";
-    register char *ptr;
+    char *ptr;
     char *FullName, *newvalue;
 
     /* Unpack args */
@@ -1097,7 +1097,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_SetAssociatedTime(FullName, newvalue));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -1112,7 +1112,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_GetAssociatedTime";
-    register char *ptr;
+    char *ptr;
     char *FullName;
     SNAP_integer lim;
 
@@ -1128,8 +1128,8 @@ int len, type, cid;
 		   (SNAP_integer) MS_GetAssociatedTime(FullName, ResultBuffer, (int) lim));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, rlength;
-	register char *ptr;
+	int result, rlength;
+	char *ptr;
 
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
 	rlength = ptr - reply;
@@ -1145,7 +1145,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_GetSearchPathEntry";
-    register char *ptr;
+    char *ptr;
     SNAP_integer which, lim;
 
     /* Get arguments */
@@ -1160,8 +1160,8 @@ int len, type, cid;
 		   (SNAP_integer) MS_GetSearchPathEntry((int) which, ResultBuffer, (int) lim));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, rlength;
-	register char *ptr;
+	int result, rlength;
+	char *ptr;
 
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
 	rlength = ptr - reply;
@@ -1177,7 +1177,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_SetSubscriptionEntry";
-    register char *ptr;
+    char *ptr;
     char *FullName, *NickName;
     SNAP_integer status;
 
@@ -1191,7 +1191,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_SetSubscriptionEntry(FullName, NickName, (int) status));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -1206,7 +1206,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_GetSubscriptionEntry";
-    register char *ptr;
+    char *ptr;
     char *FullName;
     int status;
 
@@ -1221,7 +1221,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_GetSubscriptionEntry(FullName, ResultBuffer, &status));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, rlength;
+	int result, rlength;
 
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
 	ptr = putint(ptr, (SNAP_integer) status);
@@ -1238,7 +1238,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_DomainHandlesFormatting";
-    register char *ptr;
+    char *ptr;
     char *DomName;
     int retVal;
 
@@ -1250,7 +1250,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_DomainHandlesFormatting(DomName, &retVal));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, rlength;
+	int result, rlength;
 
 	ptr = putint(ReturnPacketArgs(reply), (SNAP_integer) retVal);
 	rlength = ptr - reply;
@@ -1266,7 +1266,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_GetNextSubsEntry";
-    register char *ptr;
+    char *ptr;
     char *FullName, Results2[500];
     int status;
 
@@ -1282,7 +1282,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_GetNextSubsEntry(ResultBuffer, Results2, &status));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, rlength;
+	int result, rlength;
 
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
 	ptr = putstr(ptr, Results2);
@@ -1306,7 +1306,7 @@ int len, type, cid;
     /* Call MS routine SECOND on this one */
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketReturnValue(reply), (SNAP_integer) 0);
 	(void) putint(ReturnPacketLength(reply),
@@ -1333,7 +1333,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_OpenDebuggingPipescript((int) DoIt));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -1356,7 +1356,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_RebuildSubscriptionMaps());
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, rlength;
+	int result, rlength;
 
 	rlength = (SNAP_integer) RETURN_PACKET_HEADER_LENGTH;
 	(void) putint(ReturnPacketLength(reply), rlength);
@@ -1381,7 +1381,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_RebuildOneSubscriptionMap(PathElt));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, rlength;
+	int result, rlength;
 
 	rlength = (SNAP_integer) RETURN_PACKET_HEADER_LENGTH;
 	(void) putint(ReturnPacketLength(reply), rlength);
@@ -1396,7 +1396,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_NameReplyFile";
-    register char *ptr;
+    char *ptr;
     char *DirName, *id;
     SNAP_integer code;
 
@@ -1414,7 +1414,7 @@ int len, type, cid;
 						   ResultBuffer));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
@@ -1434,7 +1434,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_GenTempFileName";
-    register char *ptr;
+    char *ptr;
 
     /* Unpack args */
 
@@ -1446,7 +1446,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_GenTempFileName(ResultBuffer));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
@@ -1467,7 +1467,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_WriteAllMatchesToFile";
-    register char *ptr;
+    char *ptr;
     char *ambigname;
 
     /* Unpack args */
@@ -1481,7 +1481,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_WriteAllMatchesToFile(ambigname, ResultBuffer));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
@@ -1502,7 +1502,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_Epoch";
-    register char *ptr;
+    char *ptr;
     char *dirname, *date64;
 
     /* Get arguments */
@@ -1514,7 +1514,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_Epoch(dirname, date64));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -1529,7 +1529,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_AlterSnapshot";
-    register char *ptr;
+    char *ptr;
     char *dirname, *id, *NewSnapshot;
     int Code;
 
@@ -1544,7 +1544,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_AlterSnapshot(dirname, id, NewSnapshot, Code));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -1569,7 +1569,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_PurgeDeletedMessages(dirname));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -1584,7 +1584,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_GetSnapshot";
-    register char *ptr;
+    char *ptr;
     char *dirname, *id;
 
     /* Unpack args */
@@ -1599,7 +1599,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_GetSnapshot(dirname, id, ResultBuffer));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putbytes(ReturnPacketArgs(reply), ResultBuffer, AMS_SNAPSHOTSIZE);
@@ -1620,7 +1620,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_GetSnapshot";
-    register char *ptr;
+    char *ptr;
     char *dirname;
     int n;
 
@@ -1636,7 +1636,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_GetNthSnapshot(dirname, n, ResultBuffer));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putbytes(ReturnPacketArgs(reply), ResultBuffer, AMS_SNAPSHOTSIZE);
@@ -1657,7 +1657,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_GetHeaderContents";
-    register char *ptr;
+    char *ptr;
     char *dirname, *id, *HeaderName;
     SNAP_integer HeaderTypeNumber, lim;
 
@@ -1677,7 +1677,7 @@ int len, type, cid;
 						       HeaderTypeNumber, ResultBuffer, lim));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
@@ -1698,7 +1698,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_ValidateAndReplaceChunk";
-    register char *ptr;
+    char *ptr;
     char *FileName, *inaddr;
     SNAP_integer outaddrsize, which, outcode;
 
@@ -1716,7 +1716,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_ValidateAndReplaceChunk(FileName, inaddr, ResultBuffer, outaddrsize, which, &outcode));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putbytes(ReturnPacketArgs(reply), ResultBuffer, outaddrsize);
@@ -1738,7 +1738,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_HandlePreference";
-    register char *ptr;
+    char *ptr;
     char *prog, *pref, *InVal;
     SNAP_integer OutLim, opcode, defaulti, resulti;
 
@@ -1758,7 +1758,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_HandlePreference(prog, pref, InVal, ResultBuffer, OutLim, opcode, &resulti, defaulti));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
@@ -1780,7 +1780,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_WriteUnscribedBodyFile";
-    register char *ptr;
+    char *ptr;
     char *DirName, *id;
 
     /* Unpack args */
@@ -1795,7 +1795,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_WriteUnscribedBodyFile(DirName, id, ResultBuffer));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
@@ -1816,7 +1816,7 @@ CallPacket *buffer;
 int len, type, cid, opcode;
 {
     static const char name[] = "MS_SubmitMessage";
-    register char *ptr;
+    char *ptr;
     char *FileName, *ClientProgram;
     SNAP_integer DeliveryOptions, ErrMsgLimit;
 
@@ -1837,7 +1837,7 @@ int len, type, cid, opcode;
 		   (SNAP_integer) MS_SubmitMessage(FileName, DeliveryOptions, ResultBuffer, ErrMsgLimit, ClientProgram));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
 	length = ptr - reply;
@@ -1862,7 +1862,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_UpdateState());
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -1886,7 +1886,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_FastUpdateState());
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -1901,7 +1901,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_StorePartialFile";
-    register char *ptr;
+    char *ptr;
     char *FileName, *WhatToStore;
     SNAP_integer startpos, mylen, mode, Truncate;
 
@@ -1919,7 +1919,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_StorePartialFile(FileName, startpos, mylen, mode, Truncate, WhatToStore));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* No return args */
 
@@ -1939,7 +1939,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_InstallWelcomeMessage";
-    register char *ptr;
+    char *ptr;
     char *ParentName, *InitDir, *InitFile, *ShortName;
 
     /* Unpack args */
@@ -1953,7 +1953,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_InstallWelcomeMessage(ParentName, InitDir, InitFile, ShortName));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) (length = RETURN_PACKET_HEADER_LENGTH));
@@ -1969,7 +1969,7 @@ int len, type, cid;
 {
     static const char name[] = "MS_ReInitialize";
     int msresult;
-    register char *ptr;
+    char *ptr;
 
     /* Unpack args */
 
@@ -1978,7 +1978,7 @@ int len, type, cid;
     (void) putint(ReturnPacketReturnValue(reply),
 		   (SNAP_integer) msresult);
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 	ptr = putint(ReturnPacketArgs(reply),(SNAP_integer)AMS_MAJOR_VERSION);
 	ptr = putint(ptr, (SNAP_integer)AMS_MINOR_VERSION);
 	length = ptr - reply;
@@ -1997,7 +1997,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_RewriteHeaderline";
-    register char *ptr;
+    char *ptr;
     char *old;
     int errcode;
     SNAP_integer newsize;
@@ -2014,7 +2014,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_RewriteAddress(old, ResultBuffer, newsize, &errcode));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
 	ptr = putint(ptr, (SNAP_integer) errcode);
@@ -2031,7 +2031,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_FindMailbox";
-    register char *ptr;
+    char *ptr;
     int pathelt;
 
     /* Unpack args */
@@ -2045,7 +2045,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_FindMailbox(pathelt, ResultBuffer));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
@@ -2066,7 +2066,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_CloneMessage";
-    register char *ptr;
+    char *ptr;
     char *SourceDirName, *id, *DestDirName;
     int Code;
 
@@ -2081,7 +2081,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_CloneMessage(SourceDirName, id, DestDirName, Code));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -2096,7 +2096,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_MergeDirectories";
-    register char *ptr;
+    char *ptr;
     char *SourceDirName, *DestDirName;
 
     /* Get arguments */
@@ -2108,7 +2108,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_MergeDirectories(SourceDirName, DestDirName));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -2122,8 +2122,8 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_TakeHints";
-    register char *ptr;
-    register int length;
+    char *ptr;
+    int length;
     int DoAll, ProtFailures;
 
     /* Get arguments */
@@ -2133,7 +2133,7 @@ int len, type, cid;
     (void) putint(ReturnPacketReturnValue(reply),
 		   (SNAP_integer) MS_TakeHints(DoAll, &ProtFailures));
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	/* Pack return args */
 	ptr = putint(ReturnPacketArgs(reply), (SNAP_integer) ProtFailures);
@@ -2150,8 +2150,8 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_GetDirInfo";
-    register char *ptr;
-    register int length;
+    char *ptr;
+    int length;
     char *DirName;
     int ProtCode = -99, MsgCount = -99;
 
@@ -2162,7 +2162,7 @@ int len, type, cid;
     (void) putint(ReturnPacketReturnValue(reply),
 		   (SNAP_integer) MS_GetDirInfo(DirName, &ProtCode, &MsgCount));
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	/* Pack return args */
 	ptr = putint(ReturnPacketArgs(reply), (SNAP_integer) ProtCode);
@@ -2180,8 +2180,8 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_GetDirAttributes";
-    register char *ptr;
-    register int length;
+    char *ptr;
+    int length;
     char *DirName;
     char Attrs[1+(AMS_NUM_UATTRS*(1+AMS_ATTRNAMEMAX))];
     int AttrCt, SepChar, ShowEmpty;
@@ -2195,7 +2195,7 @@ int len, type, cid;
     (void) putint(ReturnPacketReturnValue(reply),
 		   (SNAP_integer) MS_GetDirAttributes(DirName, &AttrCt, Attrs, SepChar, ShowEmpty));
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	/* Pack return args */
 	ptr = putint(ReturnPacketArgs(reply), (SNAP_integer) AttrCt);
@@ -2213,8 +2213,8 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_ParseDate";
-    register char *ptr;
-    register int length;
+    char *ptr;
+    int length;
     char *indate;
     int year, month, day, hour, min, sec, wday, gtm;
 
@@ -2225,7 +2225,7 @@ int len, type, cid;
     (void) putint(ReturnPacketReturnValue(reply),
 		   (SNAP_integer) MS_ParseDate(indate, &year, &month, &day, &hour, &min, &sec, &wday, &gtm));
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	/* Pack return args */
 	ptr = putint(ReturnPacketArgs(reply), (SNAP_integer) year);
@@ -2249,8 +2249,8 @@ static void ms_do_i_have_mail(buffer, len, type, cid)
 int len, type, cid;
 {
     static const char name[] = "MS_DoIHaveMail";
-    register char *ptr;
-    register int length;
+    char *ptr;
+    int length;
     int count;
 
     /* Get arguments */
@@ -2259,7 +2259,7 @@ int len, type, cid;
     (void) putint(ReturnPacketReturnValue(reply),
 		   (SNAP_integer) MS_DoIHaveMail(&count));
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	/* Pack return args */
 	ptr = putint(ReturnPacketArgs(reply), (SNAP_integer) count);
@@ -2276,8 +2276,8 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_CheckAuthentication";
-    register char *ptr;
-    register int length;
+    char *ptr;
+    int length;
     int Authentication, rval;
 
     /* Get arguments */
@@ -2287,7 +2287,7 @@ int len, type, cid;
     (void) putint(ReturnPacketReturnValue(reply),
 		   (SNAP_integer) rval);
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	/* Pack return args */
 	ptr = putint(ReturnPacketArgs(reply), (SNAP_integer) Authentication);
@@ -2310,7 +2310,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_SetDeathKnell";
-    register int length;
+    int length;
     int dk;
 
     /* Get arguments */
@@ -2320,7 +2320,7 @@ int len, type, cid;
     (void) putint(ReturnPacketReturnValue(reply),
 		   (SNAP_integer) MS_SetDeathKnell(dk));
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	/* Pack return args */
 	length = CALL_PACKET_HEADER_LENGTH;
@@ -2336,8 +2336,8 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_GetNewMessageCount";
-    register char *ptr;
-    register int length;
+    char *ptr;
+    int length;
     char *FullDirName;
     int numnew, numtotal, InsistOnFetch;
 
@@ -2349,7 +2349,7 @@ int len, type, cid;
     (void) putint(ReturnPacketReturnValue(reply),
 		   (SNAP_integer) MS_GetNewMessageCount(FullDirName, &numnew, &numtotal, ResultBuffer, InsistOnFetch));
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	/* Pack return args */
 	ptr = putint(ReturnPacketArgs(reply), (SNAP_integer) numnew);
@@ -2368,7 +2368,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_RemoveDirectory";
-    register char *ptr;
+    char *ptr;
     char *DirName;
     int MaxRemovals;
 
@@ -2381,7 +2381,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_RemoveDirectory(DirName, MaxRemovals));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -2405,7 +2405,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_UnlinkFile(FileName));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -2420,7 +2420,7 @@ int len, type, cid;
 {
     static const char name[] = "MS_DeleteAttr";
     char *DirName, *AttrName;
-    register char *ptr;
+    char *ptr;
 
     /* Get arguments */
     ptr = getstr(CallPacketArgs(buffer), &DirName);
@@ -2431,7 +2431,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_DeleteAttr(DirName, AttrName));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -2447,7 +2447,7 @@ int len, type, cid;
     static const char name[] = "MS_AddAttribute";
     char *DirName, *AttrName;
     int AttNum;
-    register char *ptr;
+    char *ptr;
 
     /* Get arguments */
     ptr = getstr(CallPacketArgs(buffer), &DirName);
@@ -2458,7 +2458,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_AddAttribute(DirName, AttrName, &AttNum));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -2473,7 +2473,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_EditMessage";
-    register char *ptr;
+    char *ptr;
     char *dirname, *id, *NewBodyFile;
     int Reparse;
 
@@ -2488,7 +2488,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_EditMessage(dirname, id, NewBodyFile, Reparse));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result;
+	int result;
 
 	(void) putint(ReturnPacketLength(reply),
 		      (SNAP_integer) RETURN_PACKET_HEADER_LENGTH);
@@ -2503,7 +2503,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_ConvertOldMail";
-    register char *ptr;
+    char *ptr;
     int NumGood, NumBad;
 
     /* Unpack args */
@@ -2513,7 +2513,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_ConvertOldMail(&NumGood, &NumBad));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putint(ReturnPacketArgs(reply), (SNAP_integer) NumGood);
@@ -2531,7 +2531,7 @@ CallPacket *buffer;
 int len, type, cid;
 {
     static const char name[] = "MS_RenameDir";
-    register char *ptr;
+    char *ptr;
     char *OldName, *NewName;
 
     /* Unpack args */
@@ -2546,7 +2546,7 @@ int len, type, cid;
 		   (SNAP_integer) MS_RenameDir(OldName, NewName, ResultBuffer));
 
     if (type == SNAP_SENDWITHREPLY) {
-	register int result, length;
+	int result, length;
 
 	/* Pack return args */
 	ptr = putstr(ReturnPacketArgs(reply), ResultBuffer);
@@ -2567,8 +2567,8 @@ char *buffer;
 int len, type, cid;
 {
     static const char name[] = "Execute";
-    register void (*proc)();
-    register int i;
+    void (*proc)();
+    int i;
     SNAP_integer opcode;
 
     if (MSDebugging & 32) { /* Debugging SHOULD go to stdout -- nsb 5/16/86 */

@@ -45,7 +45,7 @@ fx_acl_list(fxp, aclname, ret)
      char *aclname;
      stringlist_res **ret;
 {
-  register stringlist node;
+  stringlist node;
 
   *ret = list_acl_1(&aclname, fxp->cl);
   if (!*ret) return(_fx_rpc_errno(fxp->cl));

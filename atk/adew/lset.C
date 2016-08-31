@@ -46,7 +46,7 @@ static class atom *a_vp,*a_name,*a_atomlist;
 ATKdefineRegistry(lset, dataobject, lset::InitializeClass);
 static void registerobject(class lset  *self);
 static class dataobject *getregisteredobject(class lset  *self);
-static char *getline(register char  *buf,register char  *c);
+static char *getline(char  *buf,char  *c);
 
 
 static void registerobject(class lset  *self)
@@ -135,7 +135,7 @@ void lset::InsertObject (const char  *name,const char  *viewname)
 
 long lset::GetModified()
 {
-    register long mod = (this)->dataobject::GetModified();
+    long mod = (this)->dataobject::GetModified();
     if(this->dobj)
 	mod += (this->dobj)->GetModified();
     if(this->left)
@@ -145,7 +145,7 @@ long lset::GetModified()
     return mod;
 }
 	
-static char *getline(register char  *buf,register char  *c)
+static char *getline(char  *buf,char  *c)
 {
 /* printf("Getting line from %s\n",buf); */
     if(buf == NULL || *buf == '\0'){

@@ -108,7 +108,7 @@ void eframe_SetDisplay(class eframe  *self)
 void eframe_NewWindow(class eframe  *self)
     {
     class eframe *new_c;
-    register class buffer *buffer;
+    class buffer *buffer;
     class im *window;
     new_c = new class eframe;
 

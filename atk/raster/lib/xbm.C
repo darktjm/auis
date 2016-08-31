@@ -222,7 +222,7 @@ char name[64], bits[64], *t;
    return dataobject_NOREADERROR;
 }
 
-void xbm::WriteImage(register FILE  *file		, register class pixelimage  *pix, register struct rectangle  *sub)
+void xbm::WriteImage(FILE  *file		, class pixelimage  *pix, struct rectangle  *sub)
 
 {
 

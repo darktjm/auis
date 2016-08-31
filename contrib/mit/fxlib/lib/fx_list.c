@@ -45,7 +45,7 @@ fx_list(fxp, p, ret)
      Paper *p;
      Paperlist_res **ret;
 {
-  register Paperlist node;
+  Paperlist node;
   Paper criterion;
   char new_owner[FX_UNAMSZ], new_author[FX_UNAMSZ];
 

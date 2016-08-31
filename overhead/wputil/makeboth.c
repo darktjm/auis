@@ -959,7 +959,7 @@ static void TestPWReads()
 static int Quote(SrcPtr, DestPtr, MaxChars)
     char *SrcPtr, *DestPtr;
 {
-    register char C;
+    char C;
 
     if (*SrcPtr == '\0') { *DestPtr++ = '+'; *DestPtr++ = ' '; *DestPtr++ = '\0';}
     else do {C = *SrcPtr++;
@@ -973,7 +973,7 @@ static int Quote(SrcPtr, DestPtr, MaxChars)
 static void DeQuote(SrcPtr, DestPtr)
     char *SrcPtr, *DestPtr;
 {
-    register char C;
+    char C;
     if (strcmp(SrcPtr, "+ ") == 0) {*DestPtr++ = '\0';}
     else do {C = *SrcPtr++;
 	  if (C == '+') {
@@ -1399,8 +1399,8 @@ char *nam; int NID;
 		'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
 		'u', 'v', 'w', 'x', 'y', 'z', '+', '=' };
 	static char OutBuf[PKLEN+1];
-	register int Temp, Ctr;
-	register char *Ptr;
+	int Temp, Ctr;
+	char *Ptr;
 
 #if (PKLEN != 8)
 Implementation of MakePrimeKey needs to change!

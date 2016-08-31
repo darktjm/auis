@@ -74,28 +74,28 @@ static  zip_type_figure		      figure;
 static  char			      msg[512];
 static  int			      position;
 
-long zip_Deparse_Stream( register class zip		      *self, register zip_type_stream	       stream_object );
-static int Substitute_Referenced_Stream( register class zip		      *self );
-static int Parse_Figure_Unit_Attributes( register class zip		      *self, register zip_type_figure	       figure );
-static int Parse_Stream_Figure( register class zip		      *self );
-static int Parse_Stream_Image_Beginning( register class zip		      *self );
-static int Parse_Stream_Image_Ending( register class zip		      *self );
-static int Parse_Image_Attributes( register class zip		      *self );
-static int Extract_Attribute( register class zip		      *self, register char			     **attribute_ptr );
-static char * Unique_Name( register char			      *name, register int			       seed );
+long zip_Deparse_Stream( class zip		      *self, zip_type_stream	       stream_object );
+static int Substitute_Referenced_Stream( class zip		      *self );
+static int Parse_Figure_Unit_Attributes( class zip		      *self, zip_type_figure	       figure );
+static int Parse_Stream_Figure( class zip		      *self );
+static int Parse_Stream_Image_Beginning( class zip		      *self );
+static int Parse_Stream_Image_Ending( class zip		      *self );
+static int Parse_Image_Attributes( class zip		      *self );
+static int Extract_Attribute( class zip		      *self, char			     **attribute_ptr );
+static char * Unique_Name( char			      *name, int			       seed );
 static int Parse_Stream_Integer();
 static double Parse_Stream_Real();
-static int Parse_Stream_Commentary( register class zip *self, register char c );
-static int Equivalent_Token( register class zip		      *self, register const char			      *token, register const char			      * const table[] );
-static long Parse_Presentation_Parameter( register class zip		      *self );
+static int Parse_Stream_Commentary( class zip *self, char c );
+static int Equivalent_Token( class zip		      *self, const char			      *token, const char			      * const table[] );
+static long Parse_Presentation_Parameter( class zip		      *self );
 static char NextChar();
-static char PriorChar( register char				      c );
+static char PriorChar( char				      c );
 
 
 long
-zip::Read_Figure( register zip_type_figure	       figure )
+zip::Read_Figure( zip_type_figure	       figure )
       {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
   IN(zip::Read_Figure);
   NextChar();
@@ -116,10 +116,10 @@ zip::Read_Figure( register zip_type_figure	       figure )
   }
 
 long
-zip_Deparse_Stream( register class zip		      *self, register zip_type_stream	       stream_object )
+zip_Deparse_Stream( class zip		      *self, zip_type_stream	       stream_object )
       {
-  register long			      status = zip_ok;
-  register char			      c;
+  long			      status = zip_ok;
+  char			      c;
 /*===debug=1;===*/
   IN(zip_Parse_Stream);
   figure = NULL;
@@ -187,9 +187,9 @@ extern int zip_Set_Stream_File_Name( class zip *self, zip_type_stream stream, co
 extern int zip_Open_Stream_File( class zip *self, zip_type_stream stream, long open_mode );
 
 static int
-Substitute_Referenced_Stream( register class zip		      *self )
+Substitute_Referenced_Stream( class zip		      *self )
     {
-  register long			      status;
+  long			      status;
   char				     *file_name;
 
   IN(Substitute_Referenced_Stream);
@@ -208,11 +208,11 @@ Substitute_Referenced_Stream( register class zip		      *self )
   }
 
 long
-zip::Parse_Figure_Point( register zip_type_figure figure, register zip_type_point *x , register zip_type_point *y )
+zip::Parse_Figure_Point( zip_type_figure figure, zip_type_point *x , zip_type_point *y )
 {
-  register int			      negative;
-  register int			      v;
-  register char			      c;
+  int			      negative;
+  int			      v;
+  char			      c;
 
   IN(zip::Parse_Figure_Point);
   c = NextChar();
@@ -258,11 +258,11 @@ zip::Parse_Figure_Point( register zip_type_figure figure, register zip_type_poin
   }
 
 long
-zip::Parse_Figure_Points( register zip_type_figure	       figure )
+zip::Parse_Figure_Points( zip_type_figure	       figure )
       {
-  register int			      i = 0;
-  register char			      c;
-  register long			      status = zip_ok;
+  int			      i = 0;
+  char			      c;
+  long			      status = zip_ok;
 
   IN(zip::Parse_Figure_Points);
   while ( Parse_Stream_Commentary( this, c = NextChar() ) ) ;
@@ -293,9 +293,9 @@ zip::Parse_Figure_Points( register zip_type_figure	       figure )
   }
 
 static int
-Parse_Figure_Unit_Attributes( register class zip		      *self, register zip_type_figure	       figure )
+Parse_Figure_Unit_Attributes( class zip		      *self, zip_type_figure	       figure )
       {
-  register char			      c;
+  char			      c;
 
   IN(Parse_Figure_Unit_Attributes);
   /* Skip over any obsolete syntactic elements */
@@ -307,15 +307,15 @@ Parse_Figure_Unit_Attributes( register class zip		      *self, register zip_type
   }
 
 long
-zip::Parse_Figure_Attributes( register zip_type_figure	       figure )
+zip::Parse_Figure_Attributes( zip_type_figure	       figure )
       {
-  register int			      end_of_attributes, offset, i = 0;
-  register long			      status = zip_ok;
-  register char			      c, first, second;
+  int			      end_of_attributes, offset, i = 0;
+  long			      status = zip_ok;
+  char			      c, first, second;
   unsigned char			      element = 1;
   char				     *attribute_ptr,  pattern[10];
-  register short			cap;
-  register double			red, green, blue;
+  short			cap;
+  double			red, green, blue;
 
   IN(zip::Parse_Figure_Attributes);
   end_of_attributes = false;
@@ -390,8 +390,8 @@ zip::Parse_Figure_Attributes( register zip_type_figure	       figure )
 	  if ( (status = (this)->Set_Figure_Name(  figure, attribute_ptr )) ==
 		    zip_duplicate_figure_name )
 	    {
-	    register int		  suffix = 0;
-	    register char		 *new_name = NULL;
+	    int		  suffix = 0;
+	    char		 *new_name = NULL;
 
 	    while( status == zip_duplicate_figure_name )
 	      {
@@ -495,10 +495,10 @@ zip::Parse_Figure_Attributes( register zip_type_figure	       figure )
   }
 
 static int
-Parse_Stream_Figure( register class zip		      *self )
+Parse_Stream_Figure( class zip		      *self )
     {
-  register long			      status;
-  register char			      c;
+  long			      status;
+  char			      c;
 
   IN(Parse_Stream_Figure);
   c = NextChar();
@@ -517,9 +517,9 @@ Parse_Stream_Figure( register class zip		      *self )
   }
 
 static int
-Parse_Stream_Image_Beginning( register class zip *self )
+Parse_Stream_Image_Beginning( class zip *self )
 {
-    register int			      status, page_count;
+    int			      status, page_count;
     char				     *ptr;
 
     IN(Parse_Stream_Image_Beginning);
@@ -530,8 +530,8 @@ Parse_Stream_Image_Beginning( register class zip *self )
 	    status = Parse_Image_Attributes( self );
 	    if ( status == zip_ok  &&  ptr )
 		if ( (status = (self)->Set_Image_Name(  Image, ptr )) == zip_duplicate_image_name ) {
-		    register int		  suffix = 0;
-		    register char		 *new_name = NULL;
+		    int		  suffix = 0;
+		    char		 *new_name = NULL;
 
 		    while( status == zip_duplicate_image_name ) {
 			status = (self)->Set_Image_Name(  Image, new_name =
@@ -558,9 +558,9 @@ Parse_Stream_Image_Beginning( register class zip *self )
 
 
 static int
-Parse_Stream_Image_Ending( register class zip		      *self )
+Parse_Stream_Image_Ending( class zip		      *self )
     {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
   char				     *attribute_ptr;
 
   IN(Parse_Stream_Image_Ending);
@@ -574,15 +574,15 @@ Parse_Stream_Image_Ending( register class zip		      *self )
   }
 
 static int
-Parse_Image_Attributes( register class zip		      *self )
+Parse_Image_Attributes( class zip		      *self )
     {
-  register short			cap;
-  register boolean		      end_of_attributes;
-  register int			      status = zip_ok, offset;
+  short			cap;
+  boolean		      end_of_attributes;
+  int			      status = zip_ok, offset;
   char				     *attribute_ptr, pattern[10];
-  register char			      c, element = 1;
-  register long			      i = 0;
-  register double			red, green, blue;
+  char			      c, element = 1;
+  long			      i = 0;
+  double			red, green, blue;
 
   IN(Parse_Image_Attributes);
   end_of_attributes = false;
@@ -712,10 +712,10 @@ Parse_Image_Attributes( register class zip		      *self )
   }
 
 static int
-Extract_Attribute( register class zip		      *self, register char			     **attribute_ptr )
+Extract_Attribute( class zip		      *self, char			     **attribute_ptr )
       {
-  register int			      status = zip_ok;
-  register char			     *counter, c;
+  int			      status = zip_ok;
+  char			     *counter, c;
   char				      buffer[zip_default_buffer_size + 1];
 
   IN(Extract_Attribute);
@@ -751,7 +751,7 @@ Extract_Attribute( register class zip		      *self, register char			     **attri
   }
 
 static char *
-Unique_Name( register char			      *name, register int			       seed )
+Unique_Name( char			      *name, int			       seed )
       {
   static char			      alternate[512];
 
@@ -762,8 +762,8 @@ Unique_Name( register char			      *name, register int			       seed )
 static int
 Parse_Stream_Integer()
   {
-  register long			      number = 0;
-  register char			      c;
+  long			      number = 0;
+  char			      c;
 
   while ( (c = NextChar())  &&  c >= '0'  &&  c <= '9' )
     number = number * 10 + (c - '0');
@@ -774,9 +774,9 @@ Parse_Stream_Integer()
 static double
 Parse_Stream_Real()
   {
-  register double		number = 0.0;
+  double		number = 0.0;
   char				value[10];
-  register char			c, *p = value;
+  char			c, *p = value;
 
   while ( (c = NextChar())  && (( c >= '0'  &&  c <= '9' ) || c == '.' ))
         *p++ = c;
@@ -787,9 +787,9 @@ Parse_Stream_Real()
   }
 
 static
-int Parse_Stream_Commentary( register class zip		      *self, register char			       c )
+int Parse_Stream_Commentary( class zip		      *self, char			       c )
       {
-  register int			      status = false;
+  int			      status = false;
 
   IN(Parse_Stream_Commentary);
   if ( c == '#'  ||  c == ' '  ||  c == '\t'  ||  c == '\n' )
@@ -803,9 +803,9 @@ int Parse_Stream_Commentary( register class zip		      *self, register char			  
   }
 
 static
-int Equivalent_Token( register class zip		      *self, register const char			      *token, register const char			      * const table[] )
+int Equivalent_Token( class zip		      *self, const char			      *token, const char			      * const table[] )
         {
-  register int			      result = 0;
+  int			      result = 0;
 
   IN(Equivalent_Token);
   DEBUGst( Token, token );
@@ -843,9 +843,9 @@ int Equivalent_Token( register class zip		      *self, register const char			   
 #define ZIP_FILE_OBJECT_PARAMETER 1
 
 static
-long Parse_Presentation_Parameter( register class zip		      *self )
+long Parse_Presentation_Parameter( class zip		      *self )
     {
-  register long			      status = zip_ok;
+  long			      status = zip_ok;
   char				     *token, *ptr;
   static const char		     * const vw[] =
     { "ViewWidth", "vw", NULL };
@@ -922,7 +922,7 @@ long Parse_Presentation_Parameter( register class zip		      *self )
 static char
 NextChar()
   {
-  register int				     c;
+  int				     c;
 
   if ( (c = getc( stream->zip_stream_file )) == EOF )
     {
@@ -935,7 +935,7 @@ NextChar()
   }
 
 static char
-PriorChar( register char				      c )
+PriorChar( char				      c )
     {
   c = ungetc( c, stream->zip_stream_file );
   DEBUGct(C,c);

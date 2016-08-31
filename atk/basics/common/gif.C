@@ -772,7 +772,7 @@ gif::WriteNative( FILE  *file, const char  *filename )
             {
     int colorstyle = 0; /* 0 == color; 1 == greyscale; 2 == b/w */
     byte r[256], g[256], b[256];
-    register int i;
+    int i;
 
     switch((this)->Type()) {
 	case IBITMAP:

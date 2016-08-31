@@ -188,7 +188,7 @@ MKEYTAB *keytable;
 int *last_opt_p;
 {
     int skflag, maxopts, new_option = 0 ;
-    register int i, ch;
+    int i, ch;
     MKEYTAB *k;
 
     current_option = (last_opt_p)?*last_opt_p:0;

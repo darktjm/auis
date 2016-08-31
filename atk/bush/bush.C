@@ -142,11 +142,11 @@ const char			baseName[] = "/afs"; /*Pathname to give to pioctl()*/
 
 
 ATKdefineRegistry(bush, apt, NULL);
-static int ExtractNodePath( register class bush     *self, register const char		   *source , register char		   **path );
-static int ExtractNodeName( register char		 *source, register char	        **name );
-static const char * gethomecell( register class bush   *self, register const char		 *filename );
-static const char * getcell( register class bush   *self, register const char		 *filename );
-static const char * getname( register class bush   *self, register int   	  uid, register const char		 *cell );
+static int ExtractNodePath( class bush     *self, const char		   *source , char		   **path );
+static int ExtractNodeName( char		 *source, char	        **name );
+static const char * gethomecell( class bush   *self, const char		 *filename );
+static const char * getcell( class bush   *self, const char		 *filename );
+static const char * getname( class bush   *self, int   	  uid, const char		 *cell );
 
 static int
 NodeFilter(SCANDIRSELARG_TYPE *dir )
@@ -159,7 +159,7 @@ NodeFilter(SCANDIRSELARG_TYPE *dir )
 class bush *
 bush::Create( const char			 *init_dir )
     {
-  register class bush  *self = NULL;
+  class bush  *self = NULL;
 
   if((self = new bush)) {
     if(init_dir && (init_dir[0] != '\0'))
@@ -219,12 +219,12 @@ bush::~bush() {
 }
 
 static int
-ExtractNodePath( register class bush *self, register const char *source, register char **path )
+ExtractNodePath( class bush *self, const char *source, char **path )
 {
-  register long     status = 0, i = 0, len;
+  long     status = 0, i = 0, len;
   char		    full_path[MAXPATHLEN + 1], 
 		    workingPathName[MAXPATHLEN + 1];
-  register char	   *ptr;
+  char	   *ptr;
 
   IN(ExtractNodePath);
   getwd(workingPathName);
@@ -266,10 +266,10 @@ ExtractNodePath( register class bush *self, register const char *source, registe
 }
 
 static int
-ExtractNodeName( register char	*source, register char **name )
+ExtractNodeName( char	*source, char **name )
 {
-  register long		 status = 0, len;
-  register char		*ptr = NULL;
+  long		 status = 0, len;
+  char		*ptr = NULL;
 
   if(source && (len = strlen(source)) > 0) {
       if((len > 1) && source[len-1] == '/')
@@ -286,7 +286,7 @@ ExtractNodeName( register char	*source, register char **name )
 }
 
 void
-bush::InitTree( register const char		 *root_path )
+bush::InitTree( const char		 *root_path )
     {
     class bush *self=this;
   tree_type_node	 root = NULL;
@@ -329,7 +329,7 @@ bush::InitTree( register const char		 *root_path )
 }
 
 static const char *
-gethomecell( register class bush   *self, register const char		 *filename )
+gethomecell( class bush   *self, const char		 *filename )
 {
 #ifdef AFS_ENV
 #if 0
@@ -363,7 +363,7 @@ gethomecell( register class bush   *self, register const char		 *filename )
 }
 
 static const char *
-getcell( register class bush   *self, register const char		 *filename )
+getcell( class bush   *self, const char		 *filename )
     {
 #ifdef AFS_ENV
   static char		 residence[MAX_PIOCTL_BUFF_SIZE];
@@ -388,12 +388,12 @@ getcell( register class bush   *self, register const char		 *filename )
 }
 
 static const char *
-getname( register class bush   *self, register int   	  uid, register const char		 *cell )
+getname( class bush   *self, int   	  uid, const char		 *cell )
       {
-  register int		     i = 0;
-  register struct map_item  *item = NULL;
+  int		     i = 0;
+  struct map_item  *item = NULL;
   char			    *uname = NULL;
-  register struct passwd    *pw = NULL;
+  struct passwd    *pw = NULL;
 #ifdef AFS_ENV
   for( i = 0 ; i < (UidUnameMap)->Count() ; i++ ) {
     item = (struct map_item*)(UidUnameMap)->Item(i);
@@ -457,14 +457,14 @@ getname( register class bush   *self, register int   	  uid, register const char
 }
 
 static void
-DestroyDirEntries( class bush *self, register tree_type_node   tn );
+DestroyDirEntries( class bush *self, tree_type_node   tn );
 
 int
-bush::ScanDir( register tree_type_node tn )
+bush::ScanDir( tree_type_node tn )
 {
     class bush *self=this;
-    register long i = 0, status = ok, count = 0;
-    register char *ptr = NULL;
+    long i = 0, status = ok, count = 0;
+    char *ptr = NULL;
     DIRENT_TYPE **anchor = NULL;
     struct stat stats, lstats;
     char fullEntryName[MAXPATHLEN+25], buf[MAXPATHLEN];
@@ -549,10 +549,10 @@ bush::ScanDir( register tree_type_node tn )
 }
 
 void
-bush::BuildSubDirs( register tree_type_node     tn )
+bush::BuildSubDirs( tree_type_node     tn )
     {
   class bush *self=this;
-  register long		     i = 0, count = 0;
+  long		     i = 0, count = 0;
   tree_type_node	     newTreeNode = NULL;
   struct Dir_		    *newDir = NULL;
   char			     newDirPath[MAXPATHLEN];
@@ -580,9 +580,9 @@ bush::BuildSubDirs( register tree_type_node     tn )
 }
 
 static void
-DestroyDirEntries( class bush *self, register tree_type_node   tn )
+DestroyDirEntries( class bush *self, tree_type_node   tn )
     {
-  register long		   i = 0, count = 0;
+  long		   i = 0, count = 0;
 
   IN(bush_DestroyDirEntries);
   if(tn && DirEntries(tn)) {
@@ -641,7 +641,7 @@ static void FreeDatum( tree_type_node tn, void *user )
 }
 
 boolean
-bush::ScanRequired( register tree_type_node   tn )
+bush::ScanRequired( tree_type_node   tn )
     {
   class bush *self=this;
   boolean	     status = FALSE;
@@ -658,11 +658,11 @@ bush::ScanRequired( register tree_type_node   tn )
 }
 
 int
-bush::DestroyEntry( register tree_type_node     tn, register struct Dir_Entry  *Entry )
+bush::DestroyEntry( tree_type_node     tn, struct Dir_Entry  *Entry )
       {
   class bush *self=this;
   char			     item[MAXPATHLEN*2];
-  register long		     status = 0;
+  long		     status = 0;
 
   sprintf(item,"%s/%s",DIRPATH(tn),Entry->name);
   if(Entry->type.dir) {
@@ -679,11 +679,11 @@ bush::DestroyEntry( register tree_type_node     tn, register struct Dir_Entry  *
 }
 
 int
-bush::MoveEntry( register tree_type_node     tn, register struct Dir_Entry  *Entry, register char		     *newName )
+bush::MoveEntry( tree_type_node     tn, struct Dir_Entry  *Entry, char		     *newName )
         {
   class bush *self=this;
   char			     oldPath[MAXPATHLEN*2], newPath[MAXPATHLEN];
-  register long		     status;
+  long		     status;
 
   sprintf(oldPath,"%s/%s",DIRPATH(tn),Entry->name);
   sprintf(newPath,"%s/%s",DIRPATH(tn),newName );
@@ -693,11 +693,11 @@ bush::MoveEntry( register tree_type_node     tn, register struct Dir_Entry  *Ent
 }
 
 int
-bush::RenameDir( register tree_type_node     tn, register char		     *newPath , register char		     *newName )
+bush::RenameDir( tree_type_node     tn, char		     *newPath , char		     *newName )
       {
   class bush *self=this;
-  register long		     status = ok, i = 0;
-  register char		    *newFullName = NULL;
+  long		     status = ok, i = 0;
+  char		    *newFullName = NULL;
 
   IN(bush_RenameDir);
   newFullName = (char*)malloc(strlen(newPath)+strlen(newName)+2);
@@ -717,7 +717,7 @@ bush::RenameDir( register tree_type_node     tn, register char		     *newPath , 
 }
 
 long
-bush::Read( register FILE		     *file, register long		      id )
+bush::Read( FILE		     *file, long		      id )
       {
   class bush *self=this;
   char			     RootPathIfInset[MAXPATHLEN];
@@ -736,7 +736,7 @@ bush::Read( register FILE		     *file, register long		      id )
 }
 
 long
-bush::Write( register FILE		 *file, register long		  id, register int		  level )
+bush::Write( FILE		 *file, long		  id, int		  level )
         {
   class bush *self=this;
   IN(bush_Write);
@@ -772,7 +772,7 @@ bush::ViewName( )
 }
 
 int
-bush::PerformSystemAction( register const char		     *name, register const char		     **argv )
+bush::PerformSystemAction( const char		     *name, const char		     **argv )
       {
     int			     pid = 0;
     WAIT_STATUS_TYPE status;
@@ -782,7 +782,7 @@ bush::PerformSystemAction( register const char		     *name, register const char	
       return(-1);
   }
   if((pid = osi_vfork()) == 0) {
-    register int	fd;
+    int	fd;
 
     NEWPGRP();
     fd = open("/dev/null",O_WRONLY,0644);

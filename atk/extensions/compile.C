@@ -86,8 +86,8 @@ static boolean SaveModifiedBuffer(class buffer  *b, class view  *messageView);
 static boolean SaveAllBuffers(class view  *view);
 static void compile_Build(class view  *view, long  key);
 static void resetErrors();
-static int getlinepos(register class text  *doc, int  line);
-static long nextlinepos(register class text  *doc, register long  pos);
+static int getlinepos(class text  *doc, int  line);
+static long nextlinepos(class text  *doc, long  pos);
 static int ParseCCError(class text  *doc, long  *startPos, char  *fileName, int  maxSize);
 static int ParseEgrepError(class text  *doc, long  *startPos, char  *fileName, int  maxSize);
 #ifdef SGI_4D_ENV
@@ -489,10 +489,10 @@ static void resetErrors()
     lastParsedLink = &allErrors;
 }
 
-static int getlinepos(register class text  *doc, int  line)
+static int getlinepos(class text  *doc, int  line)
         {
 
-    register int pos, len, i = 1;
+    int pos, len, i = 1;
 
     len = (doc)->GetLength();
     for (pos = 0; (i < line) && (pos < len); pos++)
@@ -501,10 +501,10 @@ static int getlinepos(register class text  *doc, int  line)
     return pos;
 }
 
-static long nextlinepos(register class text  *doc, register long  pos)
+static long nextlinepos(class text  *doc, long  pos)
         {
 
-    register int tempChar;
+    int tempChar;
 
     while ((tempChar = (doc)->GetChar( pos)) != '\n' && tempChar != EOF)
         pos++;

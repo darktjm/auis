@@ -299,7 +299,7 @@ daddr_t bno;
 char *buf;
 int cnt;
 {
-    register int n;
+    int n;
 
     (void) lseek(fi, (long)(bno * DEV_BSIZE), 0);
 #ifndef sun
@@ -324,7 +324,7 @@ int cnt;
 char *mpath(file)
 char *file;
 {
-    register struct mtab *mp;
+    struct mtab *mp;
 
     if (eq(file, root)){
 	return ("/");

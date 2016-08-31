@@ -117,7 +117,7 @@ static execute(buffer, len, type, cid)
     char reply[1024];
     char *ptr, *orig_buffer;
     int op, arg, rc;
-    register int i;
+    int i;
 
     orig_buffer = buffer;
     printf("[BIOYA] Buffer: ");

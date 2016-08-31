@@ -78,7 +78,7 @@ pbm_getc (FILE * file)
 /* Read next char, skipping over any comments */
 /* A comment/newline sequence is returned as a newline */
 {
-  register int ch;
+  int ch;
   
   ch = getc(file);
   if (ch == '#') {
@@ -97,8 +97,8 @@ read_pbm_integer (compress_info_ptr cinfo)
 /* Note that on a 16-bit-int machine, only values up to 64k can be read. */
 /* This should not be a problem in practice. */
 {
-  register int ch;
-  register unsigned int val;
+  int ch;
+  unsigned int val;
   
   /* Skip any leading whitespace */
   do {
@@ -135,9 +135,9 @@ METHODDEF void
 get_text_gray_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 /* This version is for reading text-format PGM files with any maxval */
 {
-  register JSAMPROW ptr0;
-  register unsigned int val;
-  register long col;
+  JSAMPROW ptr0;
+  unsigned int val;
+  long col;
   
   ptr0 = pixel_row[0];
   for (col = cinfo->image_width; col > 0; col--) {
@@ -153,9 +153,9 @@ METHODDEF void
 get_text_rgb_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 /* This version is for reading text-format PPM files with any maxval */
 {
-  register JSAMPROW ptr0, ptr1, ptr2;
-  register unsigned int val;
-  register long col;
+  JSAMPROW ptr0, ptr1, ptr2;
+  unsigned int val;
+  long col;
   
   ptr0 = pixel_row[0];
   ptr1 = pixel_row[1];
@@ -184,9 +184,9 @@ METHODDEF void
 get_scaled_gray_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 /* This version is for reading raw-format PGM files with any maxval */
 {
-  register FILE * infile = cinfo->input_file;
-  register JSAMPROW ptr0;
-  register long col;
+  FILE * infile = cinfo->input_file;
+  JSAMPROW ptr0;
+  long col;
   
   ptr0 = pixel_row[0];
   for (col = cinfo->image_width; col > 0; col--) {
@@ -199,9 +199,9 @@ METHODDEF void
 get_scaled_rgb_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 /* This version is for reading raw-format PPM files with any maxval */
 {
-  register FILE * infile = cinfo->input_file;
-  register JSAMPROW ptr0, ptr1, ptr2;
-  register long col;
+  FILE * infile = cinfo->input_file;
+  JSAMPROW ptr0, ptr1, ptr2;
+  long col;
   
   ptr0 = pixel_row[0];
   ptr1 = pixel_row[1];
@@ -218,9 +218,9 @@ METHODDEF void
 get_raw_gray_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 /* This version is for reading raw-format PGM files with maxval = MAXJSAMPLE */
 {
-  register FILE * infile = cinfo->input_file;
-  register JSAMPROW ptr0;
-  register long col;
+  FILE * infile = cinfo->input_file;
+  JSAMPROW ptr0;
+  long col;
   
   ptr0 = pixel_row[0];
   for (col = cinfo->image_width; col > 0; col--) {
@@ -233,9 +233,9 @@ METHODDEF void
 get_raw_rgb_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 /* This version is for reading raw-format PPM files with maxval = MAXJSAMPLE */
 {
-  register FILE * infile = cinfo->input_file;
-  register JSAMPROW ptr0, ptr1, ptr2;
-  register long col;
+  FILE * infile = cinfo->input_file;
+  JSAMPROW ptr0, ptr1, ptr2;
+  long col;
   
   ptr0 = pixel_row[0];
   ptr1 = pixel_row[1];
@@ -255,9 +255,9 @@ METHODDEF void
 get_scaled_gray_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 /* This version is for reading raw-format PGM files with any maxval */
 {
-  register JSAMPROW ptr0;
-  register U_CHAR * row_bufferptr;
-  register long col;
+  JSAMPROW ptr0;
+  U_CHAR * row_bufferptr;
+  long col;
   
   if (! ReadOK(cinfo->input_file, row_buffer, cinfo->image_width))
     ERREXIT(cinfo->emethods, "Premature EOF in PPM file");
@@ -273,9 +273,9 @@ METHODDEF void
 get_scaled_rgb_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 /* This version is for reading raw-format PPM files with any maxval */
 {
-  register JSAMPROW ptr0, ptr1, ptr2;
-  register U_CHAR * row_bufferptr;
-  register long col;
+  JSAMPROW ptr0, ptr1, ptr2;
+  U_CHAR * row_bufferptr;
+  long col;
   
   if (! ReadOK(cinfo->input_file, row_buffer, 3 * cinfo->image_width))
     ERREXIT(cinfo->emethods, "Premature EOF in PPM file");
@@ -295,9 +295,9 @@ METHODDEF void
 get_raw_gray_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 /* This version is for reading raw-format PGM files with maxval = MAXJSAMPLE */
 {
-  register JSAMPROW ptr0;
-  register U_CHAR * row_bufferptr;
-  register long col;
+  JSAMPROW ptr0;
+  U_CHAR * row_bufferptr;
+  long col;
   
   if (! ReadOK(cinfo->input_file, row_buffer, cinfo->image_width))
     ERREXIT(cinfo->emethods, "Premature EOF in PPM file");
@@ -313,9 +313,9 @@ METHODDEF void
 get_raw_rgb_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
 /* This version is for reading raw-format PPM files with maxval = MAXJSAMPLE */
 {
-  register JSAMPROW ptr0, ptr1, ptr2;
-  register U_CHAR * row_bufferptr;
-  register long col;
+  JSAMPROW ptr0, ptr1, ptr2;
+  U_CHAR * row_bufferptr;
+  long col;
   
   if (! ReadOK(cinfo->input_file, row_buffer, 3 * cinfo->image_width))
     ERREXIT(cinfo->emethods, "Premature EOF in PPM file");

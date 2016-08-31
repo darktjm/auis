@@ -140,7 +140,7 @@ time_t dateconv(mm, dd, yy, h, m, s, mer, zone, dayflag)
 int mm, dd, yy, h, m, s, mer, zone, dayflag;
 {
 	time_t tod, jdate;
-	register int i;
+	int i;
 	time_t timeconv();
 
 	if (yy < 0) yy = -yy;
@@ -162,7 +162,7 @@ int mm, dd, yy, h, m, s, mer, zone, dayflag;
 
 time_t dayconv(ord, day, now) int ord, day; time_t now;
 {
-	register struct tm *loctime;
+	struct tm *loctime;
 	time_t tod;
 	time_t daylcorr();
 
@@ -173,7 +173,7 @@ time_t dayconv(ord, day, now) int ord, day; time_t now;
 	return daylcorr(tod, now);
 }
 
-time_t timeconv(hh, mm, ss, mer) register int hh, mm, ss, mer;
+time_t timeconv(hh, mm, ss, mer) int hh, mm, ss, mer;
 {
 	if (mm < 0 || mm > 59 || ss < 0 || ss > 59) return (-1);
 	switch (mer) {
@@ -218,8 +218,8 @@ struct parser *lexerrock;
 YYSTYPE *pyylval;
 {
 	int sign;
-	register int c;
-	register char *p;
+	int c;
+	char *p;
 	char idbuf[20];
 	int pcnt;
 	for (;;) {
@@ -444,8 +444,8 @@ char *id;
 #define getid for(j=idvar, k=id; *j++ = *k++; )
 
 	char idvar[20];
-	register char *j, *k;
-	register struct table *i;
+	char *j, *k;
+	struct table *i;
 	int abbrev;
 
 	getid;

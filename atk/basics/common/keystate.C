@@ -54,7 +54,7 @@ class keystate *keystate::AddBefore(class keystate  *ks)
 
 class keystate *keystate::AddAfter(class keystate  *ks)
         {
-    register class keystate *kp;
+    class keystate *kp;
 
     this->next = NULL;
     if (ks == NULL)
@@ -177,7 +177,7 @@ enum keystate_DoProcValues keystate::DoProc(struct proctable_Entry  *pe, long  r
 
 void keystate::FreeChain()
     {
-    register class keystate *ks, *kp;
+    class keystate *ks, *kp;
 
     for (ks = this; ks != NULL; ks = kp) {
 	kp = ks->next;
@@ -204,7 +204,7 @@ keystate::keystate()
 
 class keystate *keystate::Create(ATK   *object, class keymap  *keymap)
             {
-    register class keystate *keystatep;
+    class keystate *keystatep;
     
     keystatep = new keystate;
     keystatep->orgMap = keymap;

@@ -259,7 +259,7 @@ PUBLIC char *getfulladdress ARGS2(CONST char *,           relative_name,
 */
 PRIVATE void scrsize ARGS2(int *, p_height, int *, p_width)
 {
-      register char *s;
+      char *s;
       int ioctl();
       struct winsize w;
 

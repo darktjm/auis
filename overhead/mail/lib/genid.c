@@ -82,9 +82,9 @@ char *convlongto64(num, pad)
 /* Note that the following routine throws away the first 4 of 36 bits */
 
 unsigned long conv64tolong(xnum)
-register char *xnum;
+char *xnum;
 {
-    register int digits;
+    int digits;
     unsigned long Answer = 0;
 
     digits = strlen(xnum);

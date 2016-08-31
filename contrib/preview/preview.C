@@ -437,10 +437,10 @@ void notdvifile(class preview  *self)
 }
 static void MakePageMap(FILE  *filein,class preview  *self)
 {
-   register int   c;
-   register long  FilePosition;
-   register    FILE * f = self->DviFileOut;
-   register int lastc = self->lastc;
+   int   c;
+   long  FilePosition;
+      FILE * f = self->DviFileOut;
+   int lastc = self->lastc;
     int lastread;
    FilePosition = self->DviFileLength;
    while ((c = getc(filein)) != EOF)
@@ -507,9 +507,9 @@ static void MakePageMap(FILE  *filein,class preview  *self)
 
 static void MakePageMapWithoutCopying(FILE  *filein,class preview  *self)
 {
-   register int   c;
-   register int   lastc;
-   register long  FilePosition;
+   int   c;
+   int   lastc;
+   long  FilePosition;
 
    self->DviFileComplete = FALSE;
 
@@ -655,7 +655,7 @@ static void insert(const char  *src,char  *c)
 }
 static void normalize(char  *s)
 {
-    register char *c;
+    char *c;
     for(c = s + strlen(s) - 1; c >= s; c--){
 	if(!isalnum(*c)){
 	    insert("\\",c);
@@ -676,9 +676,9 @@ static void DoPrintCmd(class preview  *self ,int  page)
    strcpy(PrintCommandFormat,p);
    sprintf(PrintCommand,PrintCommandFormat,BaseName,BaseName,BaseName);
    if(page != -1){
-       register FILE *fi,*fo;
+       FILE *fi,*fo;
        long n;
-       register long c,diff,lastc;
+       long c,diff,lastc;
        char buf[512];
        n = self->PageTable[page].FileOffset;
        if((fo = popen(PrintCommand,"w")) == NULL){

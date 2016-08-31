@@ -36,12 +36,12 @@
 #include <ness.H>
 
 
-int main(register int  argc, register char  **argv);
-void printdata(register class ness  *dobj);
+int main(int  argc, char  **argv);
+void printdata(class ness  *dobj);
 
 
-int main(register int  argc, register char  **argv) {
-	register class ness *dobj;
+int main(int  argc, char  **argv) {
+	class ness *dobj;
 	boolean debug = TRUE;
 
 	FILE *f;
@@ -109,7 +109,7 @@ int main(register int  argc, register char  **argv) {
 }
 
 	void 
-printdata(register class ness  *dobj) {
+printdata(class ness  *dobj) {
 	printf("Origin: %s\n", dobj->Origin);
 	printf("OriginalModValue: %ld\n", dobj->OriginalModValue);
 	printf("hasWarningText: %ld\n", dobj->hasWarningText);

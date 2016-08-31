@@ -56,12 +56,12 @@ extract_block (JSAMPARRAY input_data, int start_row, long start_col,
   DCTBLOCK svblock;		/* saves input data for comparison */
 #endif
 
-  { register JSAMPROW elemptr;
-    register DCTELEM *localblkptr = block;
+  { JSAMPROW elemptr;
+    DCTELEM *localblkptr = block;
 #if DCTSIZE != 8
-    register int elemc;
+    int elemc;
 #endif
-    register int elemr;
+    int elemr;
 
     for (elemr = DCTSIZE; elemr > 0; elemr--) {
       elemptr = input_data[start_row++] + start_col;
@@ -88,8 +88,8 @@ extract_block (JSAMPARRAY input_data, int start_row, long start_col,
 
   j_fwd_dct(block);
 
-  { register JCOEF temp;
-    register short i;
+  { JCOEF temp;
+    short i;
 
     for (i = 0; i < DCTSIZE2; i++) {
       temp = (JCOEF) block[ZAG[i]];
@@ -111,8 +111,8 @@ extract_block (JSAMPARRAY input_data, int start_row, long start_col,
 #ifdef DCT_ERR_STATS
   j_rev_dct(block);
 
-  { register int diff;
-    register short i;
+  { int diff;
+    short i;
 
     for (i = 0; i < DCTSIZE2; i++) {
       diff = block[i] - svblock[i];

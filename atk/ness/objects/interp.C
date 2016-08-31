@@ -356,7 +356,7 @@ popValue(union stackelement  *NSP) {
 		break;
 	    case (seqHdr): {
 		/* remove link to this mark.  */
-		register class nessmark *n = NSP->s.v;
+		class nessmark *n = NSP->s.v;
 		(n)->ungetMark();
 		NSPopSpace(seqstkelt);
 		break;
@@ -464,7 +464,7 @@ union  argType {
 */
 	boolean
 stackArg(union  argType  *arg, TType  type) {
-	register union stackelement *NSP = NSPstore;
+	union stackelement *NSP = NSPstore;
 	if (NSP-1 <= NSLowEnd) {
 		/* stack overflow */
 		/* XXX */
@@ -505,7 +505,7 @@ stackArg(union  argType  *arg, TType  type) {
 #define FETCHADDR(iar) (iar+=4, fetchaddr(iar-4))
 	static struct callnode *
 fetchaddr(unsigned char *iar) {
-	register union {
+	union {
 		struct callnode *call;
 		unsigned long symloc;
 	} pcall;
@@ -592,8 +592,8 @@ ness_stkeltsize(union stackelement *s) {
 */
 	struct errornode *
 interpretNess(short  func, ATK  *arg, class ness  *ness) {
-	register union stackelement *NSP;	/* stack pointer */
-	register unsigned char *iar;	/* next opcode to execute */
+	union stackelement *NSP;	/* stack pointer */
+	unsigned char *iar;	/* next opcode to execute */
 	unsigned char *iarzero;	/* point to first byte of object code */
 	unsigned char *PrevAddr;	/* former value of iar before goto or call */
 	long objlen = (ObjectCode)->GetLength();
@@ -721,7 +721,7 @@ while (TRUE)  {
 	case '*':	
 	case '/':
 	case '%':  {
-		register struct longstkelt *left ;
+		struct longstkelt *left ;
 		if (NSP->l.hdr != longHdr)
 			RunError(":right operand is not an integer value", iar-1);
 		left = &(&(NSP->l))[1];
@@ -741,8 +741,8 @@ while (TRUE)  {
 	case '(': {		/* FUNCVAL operations */
 		unsigned char *opiar = iar-1;
 		unsigned char op = *iar++;
-		register struct funcstkelt *src, *dest;
-		register unsigned long sysloc;
+		struct funcstkelt *src, *dest;
+		unsigned long sysloc;
 		static unsigned char *saveiar = NULL;  /* to call builtindef */
 
 		switch (op) {
@@ -1005,9 +1005,9 @@ brancher: {
 	}	break;
 
 	case 'j':	{	/* print string */
-		register long i, end;
-		register class simpletext *t;
-		register class nessmark *n = FETCHMARK(NSP);
+		long i, end;
+		class simpletext *t;
+		class nessmark *n = FETCHMARK(NSP);
 		t = (n)->GetText();
 		i = (n)->GetPos();
 		end = i + (n)->GetLength();
@@ -1016,12 +1016,12 @@ brancher: {
 		/* leave value on stack because print is a function and all such return values. */
 	}	break;
 	case 'k':	{	/* load string from ness_Globals */
-		register struct seqstkelt *s = GLOBADDR(s);
+		struct seqstkelt *s = GLOBADDR(s);
 		PUSHMARK(FETCHMARK((union stackelement *)s));
 	}	break;
 	case 'l':	{	/* load string from stack */
 			/* operand is index of arg from FramePtr */
-		register union stackelement *s
+		union stackelement *s
 			= (union stackelement *)((unsigned long)FramePtr
 					+ sizeof(struct frameelt) 
 					+ (unsigned long)*iar++);
@@ -1031,7 +1031,7 @@ brancher: {
 		PUSHMARK(FETCHMARK(NSP));	
 		break;
 	case 'n':	{	/* string next() */
-		register long pos;
+		long pos;
 		class nessmark *n = FETCHMARK(NSP);
 		pos = (n)->GetPos() + (n)->GetLength();
 		(n)->SetPos(pos);
@@ -1050,7 +1050,7 @@ brancher: {
 		PUSHMARK(NULL)->Set(new text, 0, 0);
 	}	break;
 	case 'r':	{	/* string replace()  top arg is 2nd operand*/
-		register class nessmark *left, *right;
+		class nessmark *left, *right;
 		class simpletext *stext;
 		right = FETCHMARK(NSP);
 		left = FETCHMARK((union stackelement *)(&(&NSP->s)[1]));
@@ -1066,11 +1066,11 @@ brancher: {
 	}	break;
 	case 's':	{	/* store string to a variable on the stack */
 			/* operand is index of arg from FramePtr */
-		register union stackelement *m		/* where to store */
+		union stackelement *m		/* where to store */
 			= (union stackelement *)((unsigned long)FramePtr 
 					+ sizeof(struct frameelt)
 					+ (unsigned long)*iar++);
-		register class nessmark *n = FETCHMARK(NSP);
+		class nessmark *n = FETCHMARK(NSP);
 		if (m->s.hdr != seqHdr) {
 			/* we are storing into an area which was not a mark */
 			m->s.hdr = seqHdr;
@@ -1083,10 +1083,10 @@ brancher: {
 		}
 	}	break;
 	case 't':	{	/* compare strings */
-		register long i, j, k;
+		long i, j, k;
 		long len, ilen, jlen, d;
-		register class simpletext *itext, *jtext;
-		register class nessmark *left, *right;
+		class simpletext *itext, *jtext;
+		class nessmark *left, *right;
 
 		right = FETCHMARK(NSP);
 		left = FETCHMARK((union stackelement *)(&(&NSP->s)[1]));
@@ -1118,8 +1118,8 @@ brancher: {
 		NSP = popValue(NSP);	/* discard operand */
 		break;
 	case 'v':	{	/*store string to Ness_Globals */
-		register struct seqstkelt *m = GLOBADDR(s);
-		register class nessmark *n = FETCHMARK(NSP);
+		struct seqstkelt *m = GLOBADDR(s);
+		class nessmark *n = FETCHMARK(NSP);
 
 		if (m->hdr != seqHdr) {
 			/* we are storing into an area which was not a mark */
@@ -1163,15 +1163,15 @@ brancher: {
 		}
 	}	break;
 	case 'x':	{	/* string extent()  top arg is 2nd operand*/
-		register class nessmark *left, *right;
+		class nessmark *left, *right;
 		right = FETCHMARK(NSP);
 		left = FETCHMARK((union stackelement *)(&(&NSP->s)[1]));
 
 		if ((left)->GetText() != (right)->GetText())
 			(left)->MakeConst("");	/* EmptyText IS UNIQUE */
 		else {
-			register int start = (left)->GetPos();
-			register int end = (right)->GetPos() 
+			int start = (left)->GetPos();
+			int end = (right)->GetPos() 
 				+ (right)->GetLength();
 			if (end < start)
 				start = end;
@@ -1198,7 +1198,7 @@ brancher: {
 
 
 	case 'A':	{	/* append top value on stack to second */
-		register class nessmark *source, *rcvr;
+		class nessmark *source, *rcvr;
 		long rcvrlen;
 		class simpletext *stext;
 		source = FETCHMARK(NSP);
@@ -1270,7 +1270,7 @@ brancher: {
 	}	break;
 	case 'C':	{	/* call an unknown function on the object atop stack */
 			/* operand is four bytes giving address of a callnode  */
-		register union {
+		union {
 			struct callnode *call;
 			unsigned long symloc;
 		} pcall;
@@ -1335,8 +1335,8 @@ brancher: {
 	case 'I':	{	/* integer operations */
 		unsigned char *opiar = iar-1;
 		unsigned char op = *iar++;
-		register struct longstkelt *src, *dest;
-		register long t;
+		struct longstkelt *src, *dest;
+		long t;
 		switch (op) {
 		case 'k':		/* load from ness_Globals */
 			src = GLOBADDR(l);
@@ -1506,7 +1506,7 @@ brancher: {
 	}	break;
 	case 'P':	{	/* enter a function */
 			/* operand is number of bytes of locals */
-		register unsigned long NlocBytes = (unsigned long)*iar++;
+		unsigned long NlocBytes = (unsigned long)*iar++;
 		unsigned long *t = (unsigned long *)NSP;
 
 		NSP = (union stackelement *)((unsigned long)NSP - NlocBytes);
@@ -1527,9 +1527,9 @@ brancher: {
 		FramePtr = &NSP->f;
 	}	break;
 	case 'Q':  {	/* return from function call */
-		register long eltsize;
+		long eltsize;
 		class simpletext *oldtext;
-		register union stackelement *tsp = NSP,
+		union stackelement *tsp = NSP,
 			*targ = (union stackelement *)(((unsigned long)FramePtr) 
 					+ sizeof(struct frameelt)
 					+(unsigned long)*iar++);
@@ -1545,7 +1545,7 @@ brancher: {
 
 		/* copy return value, last word first */
 		long nwords = eltsize/sizeof(unsigned long);
-		register unsigned long *src, *dest;
+		unsigned long *src, *dest;
 		src = (unsigned long *)tsp + nwords;
 		dest = (unsigned long *)NSP;
 		NSP = (union stackelement *)((unsigned long) NSP - eltsize);
@@ -1562,7 +1562,7 @@ brancher: {
 	case 'R': {	/* operations on real numbers */
 		unsigned char *opiar = iar-1;
 		unsigned char op = *iar++;
-		register struct dblstkelt *src, *dest;
+		struct dblstkelt *src, *dest;
 		double t;
 		switch (op) {
 		case 'k':		/* load from ness_Globals */
@@ -1646,8 +1646,8 @@ brancher: {
 	case 'V':	{	/* pointer operations */
 		unsigned char *opiar = iar-1;
 		unsigned char op = *iar++;
-		register struct ptrstkelt *src, *dest;
-		register long t;
+		struct ptrstkelt *src, *dest;
+		long t;
 		switch (op) {
 		case 'k':		/* load from ness_Globals */
 			src = GLOBADDR(p);
@@ -1699,7 +1699,7 @@ brancher: {
 				to the call on this operator, so the contents can
 				be returned as the value of the writefile */
 		unsigned char op = *iar++;
-		register class nessmark *contents;
+		class nessmark *contents;
 		ATK  *obj;
 		class text *t, *tempt;
 		char *s;

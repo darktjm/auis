@@ -87,9 +87,9 @@ METHODDEF void
 put_pixel_rows (decompress_info_ptr cinfo, int num_rows,
 		JSAMPIMAGE pixel_data)
 {
-  register FILE * outfile = cinfo->output_file;
-  register JSAMPROW ptr0, ptr1, ptr2;
-  register long col;
+  FILE * outfile = cinfo->output_file;
+  JSAMPROW ptr0, ptr1, ptr2;
+  long col;
   long width = cinfo->image_width;
   int row;
   
@@ -112,9 +112,9 @@ METHODDEF void
 put_gray_rows (decompress_info_ptr cinfo, int num_rows,
 	       JSAMPIMAGE pixel_data)
 {
-  register FILE * outfile = cinfo->output_file;
-  register JSAMPROW ptr0;
-  register long col;
+  FILE * outfile = cinfo->output_file;
+  JSAMPROW ptr0;
+  long col;
   long width = cinfo->image_width;
   int row;
   
@@ -134,9 +134,9 @@ put_pixel_rows (decompress_info_ptr cinfo, int num_rows,
 		JSAMPIMAGE pixel_data)
 {
   FILE * outfile = cinfo->output_file;
-  register JSAMPROW ptr0, ptr1, ptr2;
-  register char * row_bufferptr;
-  register long col;
+  JSAMPROW ptr0, ptr1, ptr2;
+  char * row_bufferptr;
+  long col;
   long width = cinfo->image_width;
   int row;
   
@@ -159,9 +159,9 @@ put_gray_rows (decompress_info_ptr cinfo, int num_rows,
 	       JSAMPIMAGE pixel_data)
 {
   FILE * outfile = cinfo->output_file;
-  register JSAMPROW ptr0;
-  register char * row_bufferptr;
-  register long col;
+  JSAMPROW ptr0;
+  char * row_bufferptr;
+  long col;
   long width = cinfo->image_width;
   int row;
   
@@ -188,13 +188,13 @@ METHODDEF void
 put_demapped_rgb (decompress_info_ptr cinfo, int num_rows,
 		  JSAMPIMAGE pixel_data)
 {
-  register FILE * outfile = cinfo->output_file;
-  register JSAMPROW ptr;
-  register JSAMPROW color_map0 = cinfo->colormap[0];
-  register JSAMPROW color_map1 = cinfo->colormap[1];
-  register JSAMPROW color_map2 = cinfo->colormap[2];
-  register int pixval;
-  register long col;
+  FILE * outfile = cinfo->output_file;
+  JSAMPROW ptr;
+  JSAMPROW color_map0 = cinfo->colormap[0];
+  JSAMPROW color_map1 = cinfo->colormap[1];
+  JSAMPROW color_map2 = cinfo->colormap[2];
+  int pixval;
+  long col;
   long width = cinfo->image_width;
   int row;
   
@@ -213,11 +213,11 @@ METHODDEF void
 put_demapped_gray (decompress_info_ptr cinfo, int num_rows,
 		   JSAMPIMAGE pixel_data)
 {
-  register FILE * outfile = cinfo->output_file;
-  register JSAMPROW ptr;
-  register JSAMPROW color_map0 = cinfo->colormap[0];
-  register int pixval;
-  register long col;
+  FILE * outfile = cinfo->output_file;
+  JSAMPROW ptr;
+  JSAMPROW color_map0 = cinfo->colormap[0];
+  int pixval;
+  long col;
   long width = cinfo->image_width;
   int row;
   
@@ -237,13 +237,13 @@ put_demapped_rgb (decompress_info_ptr cinfo, int num_rows,
 		  JSAMPIMAGE pixel_data)
 {
   FILE * outfile = cinfo->output_file;
-  register JSAMPROW ptr;
-  register char * row_bufferptr;
-  register JSAMPROW color_map0 = cinfo->colormap[0];
-  register JSAMPROW color_map1 = cinfo->colormap[1];
-  register JSAMPROW color_map2 = cinfo->colormap[2];
-  register int pixval;
-  register long col;
+  JSAMPROW ptr;
+  char * row_bufferptr;
+  JSAMPROW color_map0 = cinfo->colormap[0];
+  JSAMPROW color_map1 = cinfo->colormap[1];
+  JSAMPROW color_map2 = cinfo->colormap[2];
+  int pixval;
+  long col;
   long width = cinfo->image_width;
   int row;
   
@@ -265,11 +265,11 @@ put_demapped_gray (decompress_info_ptr cinfo, int num_rows,
 		   JSAMPIMAGE pixel_data)
 {
   FILE * outfile = cinfo->output_file;
-  register JSAMPROW ptr;
-  register char * row_bufferptr;
-  register JSAMPROW color_map0 = cinfo->colormap[0];
-  register int pixval;
-  register long col;
+  JSAMPROW ptr;
+  char * row_bufferptr;
+  JSAMPROW color_map0 = cinfo->colormap[0];
+  int pixval;
+  long col;
   long width = cinfo->image_width;
   int row;
   

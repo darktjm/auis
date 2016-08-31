@@ -33,13 +33,13 @@
 /* given an index and a record id, copy out key into abuffer, a buffer of max size alen */
 index_GetKey(ai, arid, abuffer, alen)
 struct Index *ai;
-register struct recordID *arid;
+struct recordID *arid;
 char *abuffer;
-register long alen;
+long alen;
 {
-    register struct indexBucket *tb;
-    register struct indexComponent *tc;
-    register long rval;
+    struct indexBucket *tb;
+    struct indexComponent *tc;
+    long rval;
     tb = index_CGetHash(ai, rhash(*arid));
     if (!tb) return INDEXNOENT;
     tc = index_FindID(tb, arid);
@@ -57,13 +57,13 @@ register long alen;
 /* given an index and a record id, copy out data into abuffer, a buffer of max size alen */
 long index_GetData(ai, arid, abuffer, alen)
 struct Index *ai;
-register struct recordID *arid;
+struct recordID *arid;
 char *abuffer;
-register long alen;
+long alen;
 {
-    register struct indexBucket *tb;
-    register struct indexComponent *tc;
-    register long rval;
+    struct indexBucket *tb;
+    struct indexComponent *tc;
+    long rval;
     tb = index_CGetHash(ai, rhash(*arid));
     if (!tb) return INDEXNOENT;
     tc = index_FindID(tb, arid);
@@ -82,10 +82,10 @@ register long alen;
     * record the given record id.
     */
 static index_RecordInUse(ab, arid)
-register struct indexBucket *ab;
-register struct recordID *arid;
+struct indexBucket *ab;
+struct recordID *arid;
 {
-    register struct indexComponent *tc;
+    struct indexComponent *tc;
     for(tc = ab->list; tc; tc=tc->next) {
 	if (tc->primary == 0 && req(*arid, tc->id)) return 1;
     }
@@ -97,10 +97,10 @@ register struct recordID *arid;
   * if none exist.
       */
 struct indexComponent *index_FindID(ab, arid)
-register struct indexBucket *ab;
-register struct recordID *arid;
+struct indexBucket *ab;
+struct recordID *arid;
 {
-    register struct indexComponent *tc;
+    struct indexComponent *tc;
     for(tc = ab->list; tc; tc=tc->next) {
 	if (tc->primary == 1 && req(*arid, tc->id)) return tc;
     }
@@ -112,8 +112,8 @@ register struct recordID *arid;
   * record id for records placed in that bucket.
       */
 static index_GenerateKey(ab, arid)
-register struct indexBucket *ab;
-register struct recordID *arid;
+struct indexBucket *ab;
+struct recordID *arid;
 {
     arid->word1 = ab->hashIndex;
     arid->word2 = ab->nextID++;
@@ -125,12 +125,12 @@ register struct recordID *arid;
       * with the same key.
       */
 index_AddPrimary(ai, akey, adata)
-register struct Index *ai;
-register char *akey;
+struct Index *ai;
+char *akey;
 char *adata;
 {
-    register struct indexBucket *tb;
-    register struct indexComponent *tc;
+    struct indexBucket *tb;
+    struct indexComponent *tc;
     tb = index_CGet(ai, akey);
     tc = (struct indexComponent *) malloc(sizeof (struct indexComponent));
     tc->primary = 1;
@@ -152,12 +152,12 @@ char *adata;
   * creates a new secondary record pointing to the named primary record.
   */
 index_AddSecondary(ai, arid, akey)
-register struct Index *ai;
-register char *akey;
+struct Index *ai;
+char *akey;
 struct recordID *arid;
 {
-    register struct indexBucket *tb;
-    register struct indexComponent *tc;
+    struct indexBucket *tb;
+    struct indexComponent *tc;
     long idUsed, keyHash;
     tb = index_CGet(ai, akey);
     idUsed = index_RecordInUse(tb, arid);
@@ -193,14 +193,14 @@ struct recordID *arid;
   */
 index_DeletePrimary(ai, arid)
 struct Index *ai;
-register struct recordID *arid;
+struct recordID *arid;
 {
-    register struct indexBucket *tb;
-    register struct indexComponent *tc;
-    register int i;
+    struct indexBucket *tb;
+    struct indexComponent *tc;
+    int i;
     struct indexComponent **lc;
-    register struct hashList *mh = NULL;
-    register struct hashList *th;
+    struct hashList *mh = NULL;
+    struct hashList *th;
     tb = index_CGetHash(ai, rhash(*arid));
     lc = &tb->list;
     for(tc = *lc; tc; tc=tc->next) {
@@ -237,11 +237,11 @@ register struct recordID *arid;
 index_PurgeBucket (ai, ahash, arid)
 struct Index *ai;
 long ahash;
-register struct recordID *arid;
+struct recordID *arid;
 {
-    register struct indexComponent *tc, *nc;
-    register struct indexBucket *tb;
-    register struct indexComponent **lc;
+    struct indexComponent *tc, *nc;
+    struct indexBucket *tb;
+    struct indexComponent **lc;
     tb = index_CGetHash(ai, ahash);
     lc = &tb->list;
     for(tc=tb->list; tc; tc=nc) {
@@ -261,13 +261,13 @@ register struct recordID *arid;
 	 * with the specified key that refers to the given primary record id.
 	 */
 index_DeleteSecondary(ai, arid, akey)
-register struct Index *ai;
+struct Index *ai;
 char *akey;
-register struct recordID *arid;
+struct recordID *arid;
 {
-    register struct indexComponent *tc, *nc;
+    struct indexComponent *tc, *nc;
     struct indexComponent **lc;
-    register struct indexBucket *tb;
+    struct indexBucket *tb;
     char flag;
 
     tb = index_CGet(ai, akey);
@@ -304,11 +304,11 @@ register struct recordID *arid;
 									       * found in the index structure).
 	*/
 long index_Hash(astring, hashSize)
-register short hashSize;
-register char *astring;
+short hashSize;
+char *astring;
 {
-    register long aval;
-    register short tc;
+    long aval;
+    short tc;
     aval = 0;
     while (tc  = *astring++) {
 	aval *= 173;
@@ -326,9 +326,9 @@ register char *astring;
 	  * if necessary, and truncated.
 	      */
 FILE *index_HashOpen(ai, ahash, awrite)
-register struct Index *ai;
-register long awrite;
-register long ahash;
+struct Index *ai;
+long awrite;
+long ahash;
 {
     char tpath[1024];
     char tbuffer[20];
@@ -348,9 +348,9 @@ struct Index *ai;
 index_efptr aproc;
 char *arock;
 {
-    register long i;
-    register struct indexBucket *tb;
-    register struct indexComponent *tc;
+    long i;
+    struct indexBucket *tb;
+    struct indexComponent *tc;
 
     for(i=0;i<ai->hashTableSize;i++) {
 	tb = index_CGetHash(ai, i);
@@ -367,12 +367,12 @@ char *arock;
       * and version number files.
       */
 struct Index *index_Open(apath)
-register const char *apath;
+const char *apath;
 {
-    register DIR *td;
-    register DIRENT_TYPE *tde;
-    register struct Index *ti;
-    register long code;
+    DIR *td;
+    DIRENT_TYPE *tde;
+    struct Index *ti;
+    long code;
     long htSize, version, foundFlag;
 
     td = opendir(apath);
@@ -412,9 +412,9 @@ register const char *apath;
   * Close an open index file, freeing all associated files.
   */
 void index_Close(ai)
-register struct Index *ai;
+struct Index *ai;
 {
-    register struct indexBucket *tb, *nb;
+    struct indexBucket *tb, *nb;
     for(tb=ai->blist;tb;tb=nb) {
 	nb = tb->next;		/* pull it out before freeing */
 	if (tb->modified) {
@@ -432,12 +432,12 @@ register struct Index *ai;
   * recordset_Free, when the caller is finished with it.
   */
 struct recordSet *index_GetPrimarySet(ai, akey)
-register struct Index *ai;
-register char *akey;
+struct Index *ai;
+char *akey;
 {
     struct indexBucket *tb;
-    register struct indexComponent *tlist;
-    register struct recordSet *rs;
+    struct indexComponent *tlist;
+    struct recordSet *rs;
 
     tb = index_CGet(ai, akey);
     rs = recordset_New(4);
@@ -455,12 +455,12 @@ register char *akey;
   * recordset_Free, when the caller is finished with it.
   */
 struct recordSet *index_GetAnySet(ai, akey)
-register struct Index *ai;
-register char *akey;
+struct Index *ai;
+char *akey;
 {
     struct indexBucket *tb;
-    register struct indexComponent *tlist;
-    register struct recordSet *rs;
+    struct indexComponent *tlist;
+    struct recordSet *rs;
 
     tb = index_CGet(ai, akey);
     rs = recordset_New(4);
@@ -477,11 +477,11 @@ register char *akey;
   * on standard output.  Very useful for debugging things.
       */
 index_Dump(ai)
-register struct Index *ai;
+struct Index *ai;
 {
-    register struct indexBucket *tb;
-    register struct indexComponent *tc;
-    register long i;
+    struct indexBucket *tb;
+    struct indexComponent *tc;
+    long i;
     struct hashList *th;
     long j;
     for(i=0;i<ai->hashTableSize;i++) {

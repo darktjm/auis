@@ -81,7 +81,7 @@ class celview *arbiterview::lookupname(const char  *ViewName)
     class cel *cl;
     const char *st;
     class celview **v;
-    register int i ;
+    int i ;
     for(v = (this->celviewlist), i = 0; i < this->celcount; v++,i++){	
 	cl = Cel((*v));
 	st = (cl)->GetRefName();
@@ -263,7 +263,7 @@ void arbiterview::DeleteCell(class celview  *cv)
 }
 int arbiterview::registername(class celview  *cv,const char  *refname)
 {
-    register class cel *clp;
+    class cel *clp;
     class cel *cl = Cel(cv);
     class celview **v;
     int i;
@@ -354,8 +354,8 @@ arbiterview::~arbiterview()
 {
 	ATKinit;
 
-    register class celview **v;
-    register int i = this->celcount;
+    class celview **v;
+    int i = this->celcount;
     for(v = this->celviewlist; i; v++,i--)
 	(*v)->RemoveObserver(this);
     free( this->celviewlist);
@@ -375,8 +375,8 @@ arbiterview::~arbiterview()
 
 static int addlist(class arbiterview  *self,class celview  *cv)
 {
-    register class celview **v;
-    register int i = 0;
+    class celview **v;
+    int i = 0;
     for(v = (self->celviewlist); i < self->celcount; v++,i++){	
 	if(*v == cv) return i;
     }
@@ -391,8 +391,8 @@ static int addlist(class arbiterview  *self,class celview  *cv)
 }
 static int deletelist(class arbiterview  *self,class celview  *cv)
 {
-    register class celview **v;
-    register int i = self->celcount;
+    class celview **v;
+    int i = self->celcount;
     int shift ;
     class cel *cl = Cel(cv);
     shift = 0;
@@ -427,7 +427,7 @@ printf("found string\n");
 void arbiterview::AddHandler(arbiterview_hfptr handler,long  rock)
 {
     class celview **v;
-    register int i = this->celcount;
+    int i = this->celcount;
 
     this->hrock = rock;
     this->handler = handler;
@@ -453,7 +453,7 @@ class dataobject * arbiterview::GetNamedObject(class view  *vw,const char  *name
     class arbiterview *self;
     class atomlist *al;
     class celview **v;
-    register int i ;
+    int i ;
     class atom *at;
     char *ObjectName,buf[1024];
     strcpy(buf,name);
@@ -531,7 +531,7 @@ class celview * arbiterview::GetNamedCelview(class view  *vw,const char  *name)
     char *sl;
     class arbiterview *self;
     class celview **v;
-    register int i ;
+    int i ;
     char *ViewName,buf[1024];
     strcpy(buf,name);
     ViewName = buf;
@@ -578,7 +578,7 @@ void arbiterview::SetDataObject(class dataobject  *dd)
 }
 void arbiterview::InitArbcon()
 {
-    register class celview **v;
+    class celview **v;
     class cel *cl;
     int i;
     for(v = (this->celviewlist), i = 0; i < this->celcount; v++,i++){	

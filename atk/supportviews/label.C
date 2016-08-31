@@ -62,7 +62,7 @@ label::label()
 }
 
 	void
-label::SetFlags( register int  flags )
+label::SetFlags( int  flags )
                 {
         this->flags = flags;
 }
@@ -70,7 +70,7 @@ label::SetFlags( register int  flags )
 
 
 	long
-label::Read( register FILE   *file, register long   id			/* !0 if data stream, 0 if direct from file*/ )
+label::Read( FILE   *file, long   id			/* !0 if data stream, 0 if direct from file*/ )
 			{
 	char fontfamily[50];
 	long style, size;
@@ -134,7 +134,7 @@ label::Write( FILE   *file, long   writeID, int   level )
 	void
 label::SetText(const char  *text)
 		{
-	register char *s, *t;
+	char *s, *t;
 	int length = strlen(text);
 	if (length > 255) length = 255;
 	if (this->text) free(this->text);

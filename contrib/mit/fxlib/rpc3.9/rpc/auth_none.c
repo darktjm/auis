@@ -86,9 +86,9 @@ static struct authnone_private {
 AUTH *
 authnone_create()
 {
-	register struct authnone_private *ap = authnone_private;
+	struct authnone_private *ap = authnone_private;
 	XDR xdr_stream;
-	register XDR *xdrs;
+	XDR *xdrs;
 
 	if (ap == 0) {
 		ap = (struct authnone_private *)calloc(1, sizeof (*ap));
@@ -116,7 +116,7 @@ authnone_marshal(client, xdrs)
 	AUTH *client;
 	XDR *xdrs;
 {
-	register struct authnone_private *ap = authnone_private;
+	struct authnone_private *ap = authnone_private;
 
 	if (ap == 0)
 		return (0);

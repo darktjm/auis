@@ -464,7 +464,7 @@ boolean xddimage::Process(graphic *dest) {
     Visual *visual; /* visual to use */
     Pixel *redvalue, *greenvalue, *bluevalue;
     unsigned int linelen, dpixlen, dbits;
-    register int x, y, a, b;
+    int x, y, a, b;
     unsigned short red, green, blue;
     class xcolor *xc;
     XColor xcolor;

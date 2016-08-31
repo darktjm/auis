@@ -81,7 +81,7 @@ static void freeentrys(class content  *self);
 static void clear(class content  *self);
 static boolean ns(class content  *self,class text  *text,long  pos,class environment  *env);
 static void initcontentstylenames(void);
-static int indexstyle(register const char  *name);
+static int indexstyle(const char  *name);
 static struct content_chapentry *addindexentry(class content  *self,long  pos,long  len,struct content_chapentry  **base);
 static struct content_chapentry *insertentry(class content  *self,long  pos,long  len,struct content_chapentry  **base);
 static void NoteStyle(class content  *self,long  pos,long  len,class style  *style);
@@ -613,10 +613,10 @@ void content::reinit()
 
 }
 
-int content::StyleNameContentLevel(register const char  *name)
+int content::StyleNameContentLevel(const char  *name)
 {
-    register char **sp;
-    register int which;
+    char **sp;
+    int which;
 
     if (contentstylecount < 0) {
 	initcontentstylenames();
@@ -632,10 +632,10 @@ int content::StyleNameContentLevel(register const char  *name)
     }
     return 0;
 }
-static int indexstyle(register const char  *name)
+static int indexstyle(const char  *name)
 {
-    register const char * const *sp;
-    register int which = 0;
+    const char * const *sp;
+    int which = 0;
     if(name == NULL) return 0;
     for(sp = indexnames;which < indexnamecount && sp &&  *sp && **sp; sp++){
 	which++;

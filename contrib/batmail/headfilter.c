@@ -52,7 +52,7 @@ char	*headfilter_Filter(buf,size)
 char	*buf;
 int	size;
 {
-    register char   c=BOGUS;
+    char   c=BOGUS;
 
     while(size-->0){
 	static char prevc=BOGUS;

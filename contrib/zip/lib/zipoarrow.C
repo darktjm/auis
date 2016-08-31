@@ -64,10 +64,10 @@ END-SPECIFICATION  ************************************************************/
 
 
 ATKdefineRegistry(zipoarrow, zipobject, NULL);
-static int Draw( register class zipoarrow		  *self, register zip_type_figure		   figure, register zip_type_pane		   pane );
-static void Draw_Basic_Style( register class zipoarrow		  *self, register zip_type_figure		   figure, register zip_type_pane		   pane, register char				   fill );
-static void Draw_Basic_Body( register class zipoarrow		  *self, register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		  *current_x , register zip_type_pixel		  *current_y , register zip_type_pixel		  *prior_x , register zip_type_pixel		  *prior_y );
-static void Feather_Points( register zip_type_pixel		   current_x , register zip_type_pixel		   current_y , register zip_type_pixel		   prior_x , register zip_type_pixel		   prior_y, register zip_type_pixel		   *x1 , register zip_type_pixel		   *y1 , register zip_type_pixel		   *x2 , register zip_type_pixel		   *y2 );
+static int Draw( class zipoarrow		  *self, zip_type_figure		   figure, zip_type_pane		   pane );
+static void Draw_Basic_Style( class zipoarrow		  *self, zip_type_figure		   figure, zip_type_pane		   pane, char				   fill );
+static void Draw_Basic_Body( class zipoarrow		  *self, zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		  *current_x , zip_type_pixel		  *current_y , zip_type_pixel		  *prior_x , zip_type_pixel		  *prior_y );
+static void Feather_Points( zip_type_pixel		   current_x , zip_type_pixel		   current_y , zip_type_pixel		   prior_x , zip_type_pixel		   prior_y, zip_type_pixel		   *x1 , zip_type_pixel		   *y1 , zip_type_pixel		   *x2 , zip_type_pixel		   *y2 );
 
 
 zipoarrow::zipoarrow( )
@@ -104,19 +104,19 @@ zipoarrow::Object_Datastream_Code( )
   }
 
 long
-zipoarrow::Show_Object_Properties( register zip_type_pane		   pane, register zip_type_figure		   figure )
+zipoarrow::Show_Object_Properties( zip_type_pane		   pane, zip_type_figure		   figure )
         {
   (this->view_object)->Announce(  "Draw Arrow from Tail to Head." );
   return  zip_ok;
   }
 
 long
-zipoarrow::Build_Object( register zip_type_pane		   pane, register enum view_MouseAction				   action , register long				   x , register long				   y , register long				   clicks, register zip_type_point		   X , register zip_type_point		   Y )
+zipoarrow::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   action , long				   x , long				   y , long				   clicks, zip_type_point		   X , zip_type_point		   Y )
           {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
   static zip_type_point			  prior_X, prior_Y;
   static zip_type_pixel			  prior_x, prior_y;
-  register zip_type_figure		  figure;
+  zip_type_figure		  figure;
 
   IN(zipoarrow::Build_Object);
   if ( action == (long)view_LeftDown  &&
@@ -199,9 +199,9 @@ zipoarrow::Build_Object( register zip_type_pane		   pane, register enum view_Mou
   }
 
 long
-zipoarrow::Draw_Object( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipoarrow::Draw_Object( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   if ( (this->view_object)->Condition(  pane, figure, zip_draw ) )
     status = Draw( this, figure, pane );
@@ -210,9 +210,9 @@ zipoarrow::Draw_Object( register zip_type_figure		   figure, register zip_type_p
   }
 
 long
-zipoarrow::Clear_Object( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipoarrow::Clear_Object( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipoarrow::Clear_Object);
   if ( (this->view_object)->Condition(  pane, figure, zip_clear ) )
@@ -222,10 +222,10 @@ zipoarrow::Clear_Object( register zip_type_figure		   figure, register zip_type_
   }
 
 static
-int Draw( register class zipoarrow		  *self, register zip_type_figure		   figure, register zip_type_pane		   pane )
+int Draw( class zipoarrow		  *self, zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
-  register unsigned char		  width;
+  long				  status = zip_ok;
+  unsigned char		  width;
 
   IN(Draw);
   if ( (self->view_object)->Ensure_Line_Attributes(  figure ) == zip_ok )
@@ -244,11 +244,11 @@ int Draw( register class zipoarrow		  *self, register zip_type_figure		   figure
   }
 
 static
-void Draw_Basic_Style( register class zipoarrow *self, register zip_type_figure		   figure, register zip_type_pane pane, register char fill )
+void Draw_Basic_Style( class zipoarrow *self, zip_type_figure		   figure, zip_type_pane pane, char fill )
 {
   long					  current_x, current_y, prior_x, prior_y;
   struct point				  points[3];
-  register short			  transfer_mode;
+  short			  transfer_mode;
 
   IN(Draw_Basic_Style);
   Draw_Basic_Body( self, figure, pane, &current_x, &current_y, &prior_x, &prior_y );
@@ -279,9 +279,9 @@ void Draw_Basic_Style( register class zipoarrow *self, register zip_type_figure	
   }
 
 static
-void Draw_Basic_Body( register class zipoarrow		  *self, register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		  *current_x , register zip_type_pixel		  *current_y , register zip_type_pixel		  *prior_x , register zip_type_pixel		  *prior_y )
+void Draw_Basic_Body( class zipoarrow		  *self, zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		  *current_x , zip_type_pixel		  *current_y , zip_type_pixel		  *prior_x , zip_type_pixel		  *prior_y )
           {
-  register long				  i;
+  long				  i;
 
   (self->view_object)->MoveTo(  *prior_x = window_x_point, *prior_y = window_y_point );
   for ( i = 0; i < figure->zip_figure_points->zip_points_count; i++ )
@@ -294,9 +294,9 @@ void Draw_Basic_Body( register class zipoarrow		  *self, register zip_type_figur
   }
 
 static
-void Feather_Points( register zip_type_pixel		   current_x , register zip_type_pixel		   current_y , register zip_type_pixel		   prior_x , register zip_type_pixel		   prior_y, register zip_type_pixel		   *x1 , register zip_type_pixel		   *y1 , register zip_type_pixel		   *x2 , register zip_type_pixel		   *y2 )
+void Feather_Points( zip_type_pixel		   current_x , zip_type_pixel		   current_y , zip_type_pixel		   prior_x , zip_type_pixel		   prior_y, zip_type_pixel		   *x1 , zip_type_pixel		   *y1 , zip_type_pixel		   *x2 , zip_type_pixel		   *y2 )
     {
-  register double			  theta, cos_theta, sin_theta;
+  double			  theta, cos_theta, sin_theta;
 
   IN(Feather_Points);
   DEBUGdt(Current-x,current_x);  DEBUGdt(Current-y,current_y);
@@ -314,13 +314,13 @@ void Feather_Points( register zip_type_pixel		   current_x , register zip_type_p
   }
 
 long
-zipoarrow::Print_Object( register zip_type_figure figure, register zip_type_pane pane )
+zipoarrow::Print_Object( zip_type_figure figure, zip_type_pane pane )
 {
   class zipoarrow *self=this;
-  register long				  pc, status = zip_ok, x1, y1, x2, y2,
+  long				  pc, status = zip_ok, x1, y1, x2, y2,
 					  current_x = 0, current_y = 0, prior_x, prior_y;
   zip_type_point_pairs	    		  points = NULL;
-  register double			  theta, cos_theta, sin_theta;
+  double			  theta, cos_theta, sin_theta;
 /*===debug=1;===*/
   IN(zipoarrow::Print_Object);
   if ( (status = (this->data_object)->Allocate_Figure_Points_Vector(  &points )) == zip_ok )
@@ -370,9 +370,9 @@ zipoarrow::Print_Object( register zip_type_figure figure, register zip_type_pane
   }
 
 long
-zipoarrow::Within_Object( register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y )
+zipoarrow::Within_Object( zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y )
           {
-  register long				  distance = -1;
+  long				  distance = -1;
 
   IN(zipoarrow::Within_Object);
 /*===*/
@@ -381,11 +381,11 @@ zipoarrow::Within_Object( register zip_type_figure		   figure, register zip_type
   }
 
 boolean
-zipoarrow::Enclosed_Object( register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y , register zip_type_pixel		   w , register zip_type_pixel		   h )
+zipoarrow::Enclosed_Object( zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y , zip_type_pixel		   w , zip_type_pixel		   h )
           {
-  register boolean			  enclosed = true;
-  register zip_type_pixel		  X, Y;
-  register long				  i;
+  boolean			  enclosed = true;
+  zip_type_pixel		  X, Y;
+  long				  i;
 
   IN(zipoarrow::Enclosed_Object);
   X = window_x_point;  Y = window_y_point;
@@ -402,10 +402,10 @@ zipoarrow::Enclosed_Object( register zip_type_figure		   figure, register zip_ty
   }
 
 long
-zipoarrow::Object_Enclosure( register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		  *x , register zip_type_pixel		  *y , register zip_type_pixel		  *w , register zip_type_pixel		  *h )
+zipoarrow::Object_Enclosure( zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		  *x , zip_type_pixel		  *y , zip_type_pixel		  *w , zip_type_pixel		  *h )
           {
-  register zip_type_pixel		  max_x, min_x, max_y, min_y, X, Y;
-  register long				  i;
+  zip_type_pixel		  max_x, min_x, max_y, min_y, X, Y;
+  long				  i;
 
   IN(zipoarrow::Object_Enclosure);
   max_x = min_x = window_x_point;  max_y = min_y = window_y_point;
@@ -430,9 +430,9 @@ zipoarrow::Object_Enclosure( register zip_type_figure		   figure, register zip_t
   }
 
 long
-zipoarrow::Proximate_Object_Points( register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y )
+zipoarrow::Proximate_Object_Points( zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y )
           {
-  register long				  point = 0, i;
+  long				  point = 0, i;
 
   IN(zipoarrow::Proximate_Object_Points);
   if ( (this->view_object)->Proximate_Figure_Point(  pane, figure,
@@ -452,9 +452,9 @@ zipoarrow::Proximate_Object_Points( register zip_type_figure		   figure, registe
   }
 
 long
-zipoarrow::Highlight_Object_Points( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipoarrow::Highlight_Object_Points( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok, i;
+  long				  status = zip_ok, i;
 
   IN(zipoarrow::Highlight_Object_Points);
   (this->edit_object)->Highlight_Point(  pane, window_x_point, window_y_point );
@@ -465,9 +465,9 @@ zipoarrow::Highlight_Object_Points( register zip_type_figure		   figure, registe
   }
 
 long
-zipoarrow::Normalize_Object_Points( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipoarrow::Normalize_Object_Points( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok, i;
+  long				  status = zip_ok, i;
 
   IN(zipoarrow::Normalize_Object_Points);
   (this->edit_object)->Normalize_Point(  pane, window_x_point, window_y_point );
@@ -478,9 +478,9 @@ zipoarrow::Normalize_Object_Points( register zip_type_figure		   figure, registe
   }
 
 long
-zipoarrow::Expose_Object_Points( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipoarrow::Expose_Object_Points( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok, i;
+  long				  status = zip_ok, i;
 
   IN(zipoarrow::Expose_Object_Points);
   (this->edit_object)->Expose_Point(  pane, figure, figure_x_point, figure_y_point );
@@ -491,9 +491,9 @@ zipoarrow::Expose_Object_Points( register zip_type_figure		   figure, register z
   }
 
 long
-zipoarrow::Hide_Object_Points( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipoarrow::Hide_Object_Points( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok, i;
+  long				  status = zip_ok, i;
 
   IN(zipoarrow::Hide_Points);
   (this->edit_object)->Hide_Point(  pane, figure, figure_x_point, figure_y_point );
@@ -504,9 +504,9 @@ zipoarrow::Hide_Object_Points( register zip_type_figure		   figure, register zip
   }
 
 long
-zipoarrow::Set_Object_Point( register zip_type_figure		   figure, register int				   point, register zip_type_point		   x , register zip_type_point		   y )
+zipoarrow::Set_Object_Point( zip_type_figure		   figure, int				   point, zip_type_point		   x , zip_type_point		   y )
           {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipoarrow::Set_Object_Point);
   if ( point == zip_figure_origin_point )
@@ -556,9 +556,9 @@ zipoarrow::Set_Object_Point( register zip_type_figure		   figure, register int		
   }
 
 long
-zipoarrow::Object_Point( register zip_type_figure		   figure, register long				   point, register zip_type_point		   *x , register zip_type_point		   *y )
+zipoarrow::Object_Point( zip_type_figure		   figure, long				   point, zip_type_point		   *x , zip_type_point		   *y )
           {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipoarrow::Object_Point);
 /*===*/*x = *y = 0;
@@ -567,9 +567,9 @@ zipoarrow::Object_Point( register zip_type_figure		   figure, register long				 
   }
 
 long
-zipoarrow::Adjust_Object_Point_Suite( register zip_type_figure		   figure, register zip_type_point		   x_delta , register zip_type_point		   y_delta )
+zipoarrow::Adjust_Object_Point_Suite( zip_type_figure		   figure, zip_type_point		   x_delta , zip_type_point		   y_delta )
         {
-  register long				  status = zip_ok, i;
+  long				  status = zip_ok, i;
 
   IN(zipoarrow::Adjust_Object_Point_Suite);
   figure_x_point += x_delta;

@@ -269,10 +269,10 @@ Gwindow w;
 char *var, *value, *arg;
 {
 	static short _widths[128];
-	register short *widths = _widths;
-	register int sum;
-	register char *p;
-	register struct alternatefont *af;
+	short *widths = _widths;
+	int sum;
+	char *p;
+	struct alternatefont *af;
 
 	if(_widths['A'] == 0 ) {
 		computewidths(w->wfontinfo, widths);
@@ -308,7 +308,7 @@ short *widths;
 		IBM as HAL
 */
 	char chars[128];
-	register char *p;
+	char *p;
 	for(p = chars; p < &chars[127]; p++)
 		*p = p - chars - 1;  /* handle bizzare bug */
 	XCharWidths(chars, 127, fontinfo->id, widths);
@@ -381,7 +381,7 @@ X11alternatefont(w, var, value, arg)
 Gwindow w;
 char *var, *value, *arg;
 {
-	register struct alternatefont *af =
+	struct alternatefont *af =
 		&w->alternatefont[w->nalternatefonts++];
 
 	if(w->nalternatefonts > NALTERNATEFONTS)
@@ -403,7 +403,7 @@ X11assignfont(w, var, value, arg)
 Gwindow w;
 char *var; int value; char *arg;
 {
-	register struct alternatefont *af =
+	struct alternatefont *af =
 		&w->alternatefont[w->nalternatefonts - 1];
 
 	if(w->nalternatefonts == 0)
@@ -439,7 +439,7 @@ X11pushregion(w, var, value, arg)
 Gwindow w;
 char *var, *value, *arg;
 {
-	register struct pstack *p = &pstack[pstacktop++];
+	struct pstack *p = &pstack[pstacktop++];
 	if(pstacktop > PSTACKSIZE)
 		xerror("PSTACKSIZE");
 	if(sscanf(value, "%d %d %d %d", &p->x, &p->y, &p->w, &p->h) != 4)
@@ -458,7 +458,7 @@ X11popregion(w, var, value, arg)
 Gwindow w;
 char *var, *value, *arg;
 {
-	register struct pstack *p = &pstack[--pstacktop];
+	struct pstack *p = &pstack[--pstacktop];
 	if(pstacktop < 0) xerror("X11Xpopregion");
 	XPixmapPut(w->win, 0, 0, p->x, p->y, p->w, p->h, p->pixmap,
 		GXcopy, AllPlanes);
@@ -693,7 +693,7 @@ Gwindow w;
 
 static
 lineflush(w)
-register Gwindow w;
+Gwindow w;
 {
 #ifdef BUFFER
 	if(w->curvertex > 0) {
@@ -705,12 +705,12 @@ register Gwindow w;
 }
 
 X11line(w, x1, y1, x2, y2)
-register Gwindow w;
+Gwindow w;
 COORD x1, y1, x2, y2;
 {
 
 #ifdef BUFFER
-	register Vertex *v;
+	Vertex *v;
 	static push1first = TRUE;
 	linecalls++;
 		/* heuristic:
@@ -807,17 +807,17 @@ COORD x, y, x2, y2;
 X11text(w, x, y, text)
 Gwindow w;
 COORD x, y;
-register char *text;
+char *text;
 {
 	int xoff = 0, yoff = -15;
-	register struct alternatefont *af;
+	struct alternatefont *af;
 
 #ifdef DEBUG
 	printf("text %d %d %s\n", x, y, text);
 #endif
 
 #ifdef HUH
-	register int fid;
+	int fid;
 	fid = w->wfontinfo->id;
 	for(af = &w->alternatefont[0];
 	    af < &w->alternatefont[w->nalternatefonts]; af++)
@@ -911,7 +911,7 @@ X11mouseinterest(w, event)
 Gwindow w;
 int event;
 {
-	register oldmask = w->inputmask;
+	int oldmask = w->inputmask;
 
 	if(event & DOWN_TRANSITION)
 		w->inputmask |= ButtonPressMask;
@@ -938,7 +938,7 @@ static Gwindow
 X11LookupGwindow(win)
 Window win;
 {
-	register Gwindow w;
+	Gwindow w;
 	for(w = window; w < &window[nwindows]; w++)
 		if(w->win == win)
 			return w;
@@ -1008,18 +1008,18 @@ X11input()
 
 static
 X11event(xe, menubuttonp)
-register XEvent *xe;
+XEvent *xe;
 struct menubutton *menubuttonp;
 {
     struct timeval tv;
-    register Gwindow w = X11LookupGwindow(xe->xany.window);
+    Gwindow w = X11LookupGwindow(xe->xany.window);
 
     if(xe->type == ButtonPress || xe->type == ButtonRelease ||
        xe->type == MotionNotify)
     {
-	register XButtonEvent *xb = (XButtonEvent *) xe;
+	XButtonEvent *xb = (XButtonEvent *) xe;
 
-	register int event;
+	int event;
 	int x, y;
 	static int lastbutton = 0;
 
@@ -1064,8 +1064,8 @@ struct menubutton *menubuttonp;
   else if(xe->type == KeyPress)
   {
 	char buffer[20];
-	register int i, nbytes;
-	register XKeyReleasedEvent *xk = (XKeyReleasedEvent *) xe;
+	int i, nbytes;
+	XKeyReleasedEvent *xk = (XKeyReleasedEvent *) xe;
 
 	nbytes = XLookupString(xk, buffer, sizeof(buffer), NULL, NULL);
 	for(i = 0; i < nbytes; i++) {
@@ -1080,7 +1080,7 @@ DoMenu(mb)
 struct menubutton *mb;
 {
 #ifdef HUH
-        register Gwindow w = X11LookupGwindow(mb->win);
+        Gwindow w = X11LookupGwindow(mb->win);
 	char *retval;
 	int a_pane = w->pane;
 	int a_sel = 0;

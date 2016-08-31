@@ -79,7 +79,7 @@ long fontdesc::TextSize(class graphic  *graphic, const char  *text, long  TextLe
 
 struct FontSummary *fontdesc::FontSummary(class graphic  *graphic)
 {
-    register struct FontSummary *tsp;
+    struct FontSummary *tsp;
 
     tsp = &this->summary;
     if (this->DescValid)
@@ -102,7 +102,7 @@ short *fontdesc::HeightTable(class graphic  *graphic)
 
 }
 
-long fontdesc::StringSize(class graphic  *graphic,  const char *string,register long  *XWidth,register long  *YWidth)
+long fontdesc::StringSize(class graphic  *graphic,  const char *string,long  *XWidth,long  *YWidth)
 {
     /* Override Me */
     return 0;
@@ -148,7 +148,7 @@ class fontdesc *fontdesc::Create(const char  *fontName, long  fontStyle, long  f
 struct fontnamedesc *fontdesc::GetFontNameDesc(char  *fontName)
 {
     static struct fontnamedesc *allFontNames = NULL;
-    register struct fontnamedesc *tp;
+    struct fontnamedesc *tp;
     
     for (tp = allFontNames; tp != NULL; tp = tp->next)
         if (*tp->name == *fontName && ! strcmp(tp->name, fontName))
@@ -308,8 +308,8 @@ boolean fontdesc::ExplodeFontName(const char  *fontName, char  *familyName, long
 long fontdesc::StringBoundingBox(class graphic  *graphic, const char  *string, int  *width, int  *height)
 {
   long w, a, d, ascent, descent, junk;
-  register short *fwt, *fht;
-  register const char *p;
+  short *fwt, *fht;
+  const char *p;
   static struct fontdesc_charInfo ci;
 
   fwt = (this)->WidthTable ( graphic);

@@ -78,7 +78,7 @@ pmap_getport(address, program, version, protocol)
 {
 	u_short port = 0;
 	int socket = -1;
-	register CLIENT *client;
+	CLIENT *client;
 	struct pmap parms;
 
 	address->sin_port = htons(PMAPPORT);

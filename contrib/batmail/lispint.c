@@ -44,7 +44,7 @@
  * and should be used whenever full generality is needed.
  */
 putLispString(str)
-register char	*str;
+char	*str;
 {
     bool    tooLong=(strlen(str)>MAXLISPSTRING);
 

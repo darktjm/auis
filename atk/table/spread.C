@@ -180,9 +180,9 @@ void InitializeGraphic(class spread  *V)
 }
 
 /* recompute thickness of rows */
-class view * spread_FindSubview (class spread  * V, register struct cell  * cell)
+class view * spread_FindSubview (class spread  * V, struct cell  * cell)
 {
-    register struct viewlist *vl;
+    struct viewlist *vl;
     const char *viewname;
 
     if (cell->celltype != table_ImbeddedObject) {
@@ -321,7 +321,7 @@ void spread::ComputeSizes() {
 }
 
 
-void ComputeRowSizes(register class spread  *V)
+void ComputeRowSizes(class spread  *V)
 {
     class table *T = MyTable(V);
     int r, c;
@@ -353,8 +353,8 @@ void ComputeRowSizes(register class spread  *V)
 		if (!(T)->IsJoinedToAnother( r, c)) {
 		    cell = (T)->GetCell( r, c);
 		    if (cell->celltype == table_ImbeddedObject) {
-			register int t;
-			register int width;
+			int t;
+			int width;
 
 			dHeight = 0;
 			width = (T)->ColumnWidth( c) - 2 * spread_CELLMARGIN;
@@ -624,7 +624,7 @@ class view *spread::GetApplicationLayer()
 
 /* scroll vertically */
 
-static void ySetFrame(register class spread  * V, long  pos		/* pel within view to move */, long  coord		/* where to move it to (numerator) */, long  denom		/* where to move it to (denominator) */)
+static void ySetFrame(class spread  * V, long  pos		/* pel within view to move */, long  coord		/* where to move it to (numerator) */, long  denom		/* where to move it to (denominator) */)
 {
     long k = spread_Height(V, 0, (MyTable(V))->NumberOfRows()) + spread_BORDER(V) + spread_SPACING - (V)->GetLogicalHeight();
     V->vOffset = pos - (coord * (V)->GetLogicalHeight()) / denom;
@@ -641,7 +641,7 @@ static void ySetFrame(register class spread  * V, long  pos		/* pel within view 
 
 /* scroll horizontally */
 
-static void xSetFrame(register class spread  * V, long  pos		/* pel within view to move */, long  coord		/* where to move it to (numerator) */, long  denom		/* where to move it to (denominator) */)
+static void xSetFrame(class spread  * V, long  pos		/* pel within view to move */, long  coord		/* where to move it to (numerator) */, long  denom		/* where to move it to (denominator) */)
 {
     long k = spread_Width(V, 0, (MyTable(V))->NumberOfColumns()) + spread_BORDER(V) + spread_SPACING - (V)->GetLogicalWidth();
     V->hOffset = pos - (coord * (V)->GetLogicalWidth()) / denom;
@@ -658,7 +658,7 @@ static void xSetFrame(register class spread  * V, long  pos		/* pel within view 
 
 /* get vertical scrolling information */
 
-static void yGetInfo(register class spread  * V, struct range  *total	/* overall inset bounds */, struct range  *seen	/* visible region */, struct range  *dot	/* selected region */)
+static void yGetInfo(class spread  * V, struct range  *total	/* overall inset bounds */, struct range  *seen	/* visible region */, struct range  *dot	/* selected region */)
 {
     total->beg = 0;
     total->end = spread_Height(V, 0, (MyTable(V))->NumberOfRows()) + spread_BORDER(V);
@@ -684,7 +684,7 @@ static void yGetInfo(register class spread  * V, struct range  *total	/* overall
 
 /* get horizontal scrolling information */
 
-static void xGetInfo(register class spread  * V, struct range  *total	/* overall inset bounds */, struct range  *seen	/* visible region */, struct range  *dot	/* selected region */)
+static void xGetInfo(class spread  * V, struct range  *total	/* overall inset bounds */, struct range  *seen	/* visible region */, struct range  *dot	/* selected region */)
 {
     total->beg = 0;
     total->end = spread_Width(V, 0, (MyTable(V))->NumberOfColumns()) + spread_BORDER(V);
@@ -709,7 +709,7 @@ static void xGetInfo(register class spread  * V, struct range  *total	/* overall
 
 /* convert vertical window position to view position */
 
-static long yWhatIsAt(register class spread  * V, long  coord, long  denom)
+static long yWhatIsAt(class spread  * V, long  coord, long  denom)
 {
     long pos = (coord * (V)->GetLogicalHeight()) / denom + V->vOffset;
 
@@ -720,7 +720,7 @@ static long yWhatIsAt(register class spread  * V, long  coord, long  denom)
 
 /* convert horizontal window position to view position */
 
-static long xWhatIsAt(register class spread  * V, long  coord, long  denom)
+static long xWhatIsAt(class spread  * V, long  coord, long  denom)
 {
     long pos = (coord * (V)->GetLogicalWidth()) / denom + V->hOffset;
 
@@ -760,12 +760,12 @@ const void *spread::GetInterface(const char  * type)
 
 
 
-static void DestroySubviews(register class spread  * V,class table  *T)
+static void DestroySubviews(class spread  * V,class table  *T)
 {
-    register struct cell * cell;
-    register struct viewlist *vl;
+    struct cell * cell;
+    struct viewlist *vl;
     struct viewlist *prevvl, *nextvl;
-    register int r, c;
+    int r, c;
 
     for (r = 0; r < (T)->NumberOfRows(); r++) {
 	for (c = 0; c < (T)->NumberOfColumns(); c++) {
@@ -807,7 +807,7 @@ spread::~spread ()
 
 void spread::LinkTree(class view  * parent)
 {
-    register struct viewlist *vl;
+    struct viewlist *vl;
     int r, c;
     struct cell *cell;
 

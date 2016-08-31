@@ -31,7 +31,7 @@
  */
 #include "tiffioP.h"
 
-int TIFFInitJPEG(register TIFF *tif)
+int TIFFInitJPEG(TIFF *tif)
 {
 	return (1);
 }

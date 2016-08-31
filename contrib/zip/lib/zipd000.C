@@ -68,8 +68,8 @@ END-SPECIFICATION  ************************************************************/
 
 #define	 Data this
 
-static int ZIP_Default_Exception_Handler( register class zip	    	  *self );
-int strhash (register char  *string, register unsigned int size);
+static int ZIP_Default_Exception_Handler( class zip	    	  *self );
+int strhash (char  *string, unsigned int size);
 
 
 struct zip_color_values *
@@ -85,9 +85,9 @@ zip::Allocate_Color( )
 }
 
 char
-zip::Contextual_Figure_Pattern( register zip_type_figure	   figure )
+zip::Contextual_Figure_Pattern( zip_type_figure	   figure )
       {
-  register char			  pattern = 0;
+  char			  pattern = 0;
 
   IN(zip::Contextual_Figure_Pattern);
   if ( figure->zip_figure_fill.zip_figure_pattern )
@@ -106,9 +106,9 @@ zip::Contextual_Figure_Pattern( register zip_type_figure	   figure )
   }
 
 char
-zip::Contextual_Figure_Shade( register zip_type_figure	   figure )
+zip::Contextual_Figure_Shade( zip_type_figure	   figure )
       {
-  register char			  shade = 0;
+  char			  shade = 0;
 
   IN(zip::Contextual_Figure_Shade);
   if ( figure->zip_figure_fill.zip_figure_shade )
@@ -127,9 +127,9 @@ zip::Contextual_Figure_Shade( register zip_type_figure	   figure )
   }
 
 unsigned char
-zip::Contextual_Figure_Line_Width( register zip_type_figure	   figure )
+zip::Contextual_Figure_Line_Width( zip_type_figure	   figure )
       {
-  register unsigned char	  width = 0;
+  unsigned char	  width = 0;
 
   IN(zip_Contextual_Figure_Line_Width);
   if ( figure->zip_figure_line_width != 255 )
@@ -150,7 +150,7 @@ zip::Contextual_Figure_Line_Width( register zip_type_figure	   figure )
   }
 
 void
-zip::Contextual_Figure_Line_Dash( register zip_type_figure	   figure, register char			  **pattern, register int			  *offset, register short		  *type )
+zip::Contextual_Figure_Line_Dash( zip_type_figure	   figure, char			  **pattern, int			  *offset, short		  *type )
             {
   IN(zip_Contextual_Figure_Line_Dash);
   if ( figure->zip_figure_line_dash_pattern )
@@ -180,9 +180,9 @@ zip::Contextual_Figure_Line_Dash( register zip_type_figure	   figure, register c
   }
 
 short
-zip::Contextual_Figure_Line_Join( register zip_type_figure	   figure )
+zip::Contextual_Figure_Line_Join( zip_type_figure	   figure )
       {
-  register short	  join = -1;
+  short	  join = -1;
 
   IN(zip_Contextual_Figure_Line_Join);
   if ( figure->zip_figure_line_join != -1 )
@@ -203,9 +203,9 @@ zip::Contextual_Figure_Line_Join( register zip_type_figure	   figure )
   }
 
 short
-zip::Contextual_Figure_Line_Cap( register zip_type_figure	   figure )
+zip::Contextual_Figure_Line_Cap( zip_type_figure	   figure )
       {
-  register short	  cap = -1;
+  short	  cap = -1;
 
   IN(zip_Contextual_Figure_Line_Cap);
   if ( figure->zip_figure_line_cap != -1 )
@@ -226,10 +226,10 @@ zip::Contextual_Figure_Line_Cap( register zip_type_figure	   figure )
   }
 
 long
-zip::Contextual_Figure_Line_Color( register zip_type_figure	     figure, register double		     *red , register double		     *green , register double		     *blue )
+zip::Contextual_Figure_Line_Color( zip_type_figure	     figure, double		     *red , double		     *green , double		     *blue )
         {
-  register struct zip_color	    *color;
-  register long			    status = zip_ok;
+  struct zip_color	    *color;
+  long			    status = zip_ok;
 
   IN(zip_Contextual_Figure_Line_Color);
   if ( figure->zip_figure_color_values && figure->zip_figure_color_values->line )
@@ -265,10 +265,10 @@ zip::Contextual_Figure_Line_Color( register zip_type_figure	     figure, registe
   }
 
 long
-zip::Contextual_Figure_FillFG_Color( register zip_type_figure	     figure, register double		     *red , register double		     *green , register double		     *blue )
+zip::Contextual_Figure_FillFG_Color( zip_type_figure	     figure, double		     *red , double		     *green , double		     *blue )
         {
-  register struct zip_color	    *color;
-  register long			    status = zip_ok;
+  struct zip_color	    *color;
+  long			    status = zip_ok;
 
   IN(zip_Contextual_Figure_FillFG_Color);
   if ( figure->zip_figure_color_values && figure->zip_figure_color_values->fillfg )
@@ -305,10 +305,10 @@ zip::Contextual_Figure_FillFG_Color( register zip_type_figure	     figure, regis
 
 
 long
-zip::Contextual_Figure_FillBG_Color( register zip_type_figure	     figure, register double		     *red , register double		     *green , register double		     *blue )
+zip::Contextual_Figure_FillBG_Color( zip_type_figure	     figure, double		     *red , double		     *green , double		     *blue )
         {
-  register struct zip_color	    *color;
-  register long			    status = zip_ok;
+  struct zip_color	    *color;
+  long			    status = zip_ok;
 
   IN(zip_Contextual_Figure_FillBG_Color);
   if ( figure->zip_figure_color_values && figure->zip_figure_color_values->fillbg )
@@ -345,13 +345,13 @@ zip::Contextual_Figure_FillBG_Color( register zip_type_figure	     figure, regis
 
 
 class fontdesc *
-zip::Define_Font( register const char *font_name, register short             	  *font_index )
+zip::Define_Font( const char *font_name, short             	  *font_index )
         {
-  register int			  loop_index;
+  int			  loop_index;
   char				  family_name[257];
   long				  font_style;
   long				  font_size;
-  register class fontdesc	 *font = NULL;
+  class fontdesc	 *font = NULL;
 
   IN(zip::Define_Font);
   DEBUGst(Font-name,font_name);
@@ -401,7 +401,7 @@ zip::Define_Font( register const char *font_name, register short             	  
   }
 
 int	
-zip::Try_Figure_Exception_Handler( register zip_type_figure	       figure )
+zip::Try_Figure_Exception_Handler( zip_type_figure	       figure )
       {
   IN(zip::Try_Figure_Exception_Handler);
   if ( FigureExceptionHandler )
@@ -419,7 +419,7 @@ zip::Try_Figure_Exception_Handler( register zip_type_figure	       figure )
   }
 
 int
-zip::Try_Image_Exception_Handler( register zip_type_image	       image )
+zip::Try_Image_Exception_Handler( zip_type_image	       image )
       {
   IN(zip::Try_Image_Exception_Handler);
   if ( ImageExceptionHandler )
@@ -436,7 +436,7 @@ zip::Try_Image_Exception_Handler( register zip_type_image	       image )
   }
 
 int
-zip::Try_Stream_Exception_Handler( register zip_type_stream	       stream )
+zip::Try_Stream_Exception_Handler( zip_type_stream	       stream )
       {
   IN(zip::Try_Stream_Exception_Handler);
   if ( StreamExceptionHandler )
@@ -472,7 +472,7 @@ zip::Try_general_Exception_Handler( )
   return false;
   }
 
-static int ZIP_Default_Exception_Handler( register class zip *self )
+static int ZIP_Default_Exception_Handler( class zip *self )
 {
     IN(ZIP_Default_Exception_Handler);
     /*===*/
@@ -545,11 +545,11 @@ typedef struct {
     struct block first_block;
 } pool_type;
 
-int palloc_create_pool (register pool_type  **pool, register unsigned int expected_size);
-unsigned char *palloc (register pool_type  *pool, register unsigned int size);
-unsigned int palloc_destroy_pool (register pool_type  *pool);
+int palloc_create_pool (pool_type  **pool, unsigned int expected_size);
+unsigned char *palloc (pool_type  *pool, unsigned int size);
+unsigned int palloc_destroy_pool (pool_type  *pool);
 
-int palloc_create_pool (register pool_type  **pool, register unsigned int expected_size)
+int palloc_create_pool (pool_type  **pool, unsigned int expected_size)
         {
 /*===
     /* allocate the pool discriptor including the first block !/
@@ -579,11 +579,11 @@ int palloc_create_pool (register pool_type  **pool, register unsigned int expect
     return (0);
 }
 
-unsigned char *palloc (register pool_type  *pool, register unsigned int size)
+unsigned char *palloc (pool_type  *pool, unsigned int size)
         {
 return (unsigned char *) malloc( (size + 3) & (~3) );
 /*===
-    register unsigned char *chunk; /* holds address of allocated chunk !/
+    unsigned char *chunk; /* holds address of allocated chunk !/
 
 /* force size to be a multiple of 4 for alignment !/
     size = (size + 3) & (~3);
@@ -613,11 +613,11 @@ return (unsigned char *) malloc( (size + 3) & (~3) );
 ===*/
 }
 
-unsigned int palloc_destroy_pool (register pool_type  *pool)
+unsigned int palloc_destroy_pool (pool_type  *pool)
     {
 /*===
-    register struct block *this_block;
-    register struct block *next_block;
+    struct block *this_block;
+    struct block *next_block;
 
     /* set up for scan and free pool descriptor which includes the first block !/
     this_block = pool->first_block.next_block;
@@ -703,11 +703,11 @@ unsigned int palloc_destroy_pool (register pool_type  *pool)
 * symtab_create	 *
 * 		 *
 \****************/
-int symtab_create (register symtab_type  **symtab, register int  expected_size)
+int symtab_create (symtab_type  **symtab, int  expected_size)
     {
-    register int     i;
+    int     i;
     pool_type *pool;
-    register int rc; 			/* return codes */
+    int rc; 			/* return codes */
 
   /*IN(symtab_create);*/
 rc = palloc_create_pool (&pool, expected_size*(sizeof(int *)+sizeof(symtab_entry_type))
@@ -726,10 +726,10 @@ if (rc < 0) {
 return 0;
 }
 
-void symtab_destroy( register symtab_type	          *symtab )
+void symtab_destroy( symtab_type	          *symtab )
     {
-  register int			  i;
-  register symtab_entry_type	 *entry, *ptr;
+  int			  i;
+  symtab_entry_type	 *entry, *ptr;
 
   /*IN(symtab_destroy);*/
   for (i = 0; i < symtab->size; i++)
@@ -754,10 +754,10 @@ void symtab_destroy( register symtab_type	          *symtab )
 * symtab_add  *
 * 	      *
 \*************/
-int symtab_add (register symtab_type  *symtab, register unsigned char *symbol, register struct user_data  *data)
+int symtab_add (symtab_type  *symtab, unsigned char *symbol, struct user_data  *data)
       {
-    register symtab_entry_type * entry;
-    register int     tabrow;		/* row in symtab->table where this symbols
+    symtab_entry_type * entry;
+    int     tabrow;		/* row in symtab->table where this symbols
 				   entry goes */
 
  /* allocate and initialize entry */
@@ -776,11 +776,11 @@ int symtab_add (register symtab_type  *symtab, register unsigned char *symbol, r
 }
 
 int
-symtab_delete( register symtab_type  *symtab, register unsigned char *symbol )
+symtab_delete( symtab_type  *symtab, unsigned char *symbol )
       {
-  register symtab_entry_type *entry, *ptr;
-  register int  tabrow;
-  register int	status = 0;
+  symtab_entry_type *entry, *ptr;
+  int  tabrow;
+  int	status = 0;
 
   /*IN(symtab_delete);*/
   tabrow = strhash( (char *) symbol, symtab->size );
@@ -812,12 +812,12 @@ symtab_delete( register symtab_type  *symtab, register unsigned char *symbol )
 * symtab_find  *
 * 	       *
 \**************/
-int symtab_find (register symtab_type  *symtab, register unsigned char *symbol, register struct user_data  **data)
+int symtab_find (symtab_type  *symtab, unsigned char *symbol, struct user_data  **data)
       {
-    register symtab_entry_type * entry;
-    register int     tabrow;		/* row in symbol table where symbol should
+    symtab_entry_type * entry;
+    int     tabrow;		/* row in symbol table where symbol should
 				   be */
-    register int     rc = 0;		/* return code */
+    int     rc = 0;		/* return code */
 
  /* compute row in symbol table */
     tabrow = strhash ((char *) symbol, symtab->size);
@@ -897,10 +897,10 @@ int symtab_scan_next (symtab_type  *symtab, unsigned char **symbol, struct user_
 * 							      *
 \*************************************************************/
 
-int strhash (register char  *string, register unsigned int size)
+int strhash (char  *string, unsigned int size)
     
 {
-    register unsigned int    temp_sum = 0;
+    unsigned int    temp_sum = 0;
 
     while (*string) {
 	temp_sum = (temp_sum * 31) + (*string - 31);

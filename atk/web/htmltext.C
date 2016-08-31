@@ -152,8 +152,8 @@ long htmltext::ReadTemplate(const char *templateName, boolean inserttemplatetext
 /* OverrideStyles is redundant code from a text static function.  It's used by ReadSubString to copy the stylesheet from the temporary holder object into the target.  This is necessary because ReadSubString is called when reading a template. */
 static void htmltext_OverrideStyles(class stylesheet *ssptr, class stylesheet *templateptr)
 {
-    register int i;
-    register class style **styles, *overridestyle;
+    int i;
+    class style **styles, *overridestyle;
 
     for (i = 0, styles = ssptr->styles; i < ssptr->nstyles; i++, styles++)
 	(*styles)->template_c = 0;

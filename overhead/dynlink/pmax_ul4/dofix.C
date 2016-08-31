@@ -45,7 +45,7 @@ static char *ComputeOutputFileName (char *InputFileName, char *extension)
 {
 
     static char name[256];
-    register char  *p, *q;
+    char  *p, *q;
     char   *ext;
 
  /* copy the input name and look for the last '.' */

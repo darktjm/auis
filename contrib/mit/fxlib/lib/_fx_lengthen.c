@@ -45,7 +45,7 @@ _fx_lengthen(fxp, oldname, newname)
      FX *fxp;
      char *oldname, *newname;
 {
-  register char *s;
+  char *s;
 
   (void) strcpy(newname, oldname);
   s = index(oldname, '@');

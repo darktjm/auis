@@ -100,7 +100,7 @@ clntraw_create(prog, vers)
 	u_long prog;
 	u_long vers;
 {
-	register struct clntraw_private *clp = clntraw_private;
+	struct clntraw_private *clp = clntraw_private;
 	struct rpc_msg call_msg;
 	XDR *xdrs = &clp->xdr_stream;
 	CLIENT	*client = &clp->client_object;
@@ -148,8 +148,8 @@ clntraw_call(h, proc, xargs, argsp, xresults, resultsp, timeout)
 	caddr_t resultsp;
 	struct timeval timeout;
 {
-	register struct clntraw_private *clp = clntraw_private;
-	register XDR *xdrs = &clp->xdr_stream;
+	struct clntraw_private *clp = clntraw_private;
+	XDR *xdrs = &clp->xdr_stream;
 	struct rpc_msg msg;
 	enum clnt_stat status;
 	struct rpc_err error;
@@ -225,8 +225,8 @@ clntraw_freeres(cl, xdr_res, res_ptr)
 	xdrproc_t xdr_res;
 	caddr_t res_ptr;
 {
-	register struct clntraw_private *clp = clntraw_private;
-	register XDR *xdrs = &clp->xdr_stream;
+	struct clntraw_private *clp = clntraw_private;
+	XDR *xdrs = &clp->xdr_stream;
 	bool_t rval;
 
 	if (clp == 0)

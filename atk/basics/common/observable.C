@@ -71,7 +71,7 @@ static struct triggerclass *Triggers = NULL;	/* the list of defined triggers */
 
 
 ATKdefineRegistry(observable, traced, NULL);
-static int FindObserver(register class observable  *self, register class observable  *observer  );
+static int FindObserver(class observable  *self, class observable  *observer  );
 
 
 observable::observable()
@@ -108,9 +108,9 @@ void observable::Destroy() {
     
 /* Finds the index of the observer in self observers table.  Returns -1 if observer is not in the list
  */
-static int FindObserver(register class observable  *self, register class observable  *observer  )
+static int FindObserver(class observable  *self, class observable  *observer  )
 {
-    register int i = 0;
+    int i = 0;
     class observable **observers;
 
     for (i = 0, observers = self->observers; i < self->nObservers; i++, observers++)
@@ -119,12 +119,12 @@ static int FindObserver(register class observable  *self, register class observa
     return -1;
 }
 
-boolean observable::IsObserver(register class observable  *observer  )
+boolean observable::IsObserver(class observable  *observer  )
 {
     return (FindObserver(this, observer) != -1 ? TRUE: FALSE);
 }
 
-void observable::AddObserver(register class observable  *observer  )
+void observable::AddObserver(class observable  *observer  )
 {
     if (this->maxObservers == 0)  {
 	this->maxObservers = INITIALNUMOBSERVERS;
@@ -138,9 +138,9 @@ void observable::AddObserver(register class observable  *observer  )
     this->observers[this->nObservers++] = observer;
 }
 
-void observable::RemoveObserver(register class observable  *observer  )
+void observable::RemoveObserver(class observable  *observer  )
 {
-    register int i;
+    int i;
 
     if ((i = FindObserver(this, observer)) != -1)  {
 	while (++i < this->nObservers) {
@@ -152,7 +152,7 @@ void observable::RemoveObserver(register class observable  *observer  )
 
 void observable::NotifyObservers(long  value  )
 {
-    register int i;
+    int i;
 
     if(this->ReferenceCount()>0) this->Reference();
     

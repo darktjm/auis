@@ -944,7 +944,7 @@ void RSearchTextview(class textview  *tv)
 
 void bcopyfromback(char  *from , char  *to, int  length)
 {
-    register char *f, *t;
+    char *f, *t;
 
     f = from + length-1;
     t = to+length-1;

@@ -57,22 +57,22 @@ ATK_IMPL("labelview.H")
 
 	
 ATKdefineRegistry(labelview, view, NULL);
-static boolean BogusCallFromParent(register class labelview  *self, const char  *where , const char  *msg);
-static boolean CheckWindow(register class labelview  *self, const char  *where);
-static void RedrawTable(register class labelview  *self);
+static boolean BogusCallFromParent(class labelview  *self, const char  *where , const char  *msg);
+static boolean CheckWindow(class labelview  *self, const char  *where);
+static void RedrawTable(class labelview  *self);
 
 
 static boolean
-BogusCallFromParent(register class labelview  *self, const char  *where , const char  *msg)
+BogusCallFromParent(class labelview  *self, const char  *where , const char  *msg)
 		{
 	fprintf(stderr, "<labelview>Bogus call to %s, %s\n", where, msg);
 	return FALSE;
 }
 
 	static boolean
-CheckWindow(register class labelview  *self, const char  *where)
+CheckWindow(class labelview  *self, const char  *where)
 		{
-	register class graphic *g
+	class graphic *g
 		= (class graphic *)(self)->GetDrawable();
 	if ( ! g) return BogusCallFromParent(self, where, "No Graphic");
 	return TRUE;
@@ -112,9 +112,9 @@ labelview::GetApplicationLayer()
 }
 
 	static void
-RedrawTable(register class labelview  *self)
+RedrawTable(class labelview  *self)
 	{
-	register class label *st 
+	class label *st 
 			= (class label *)self->dataobject;
 	struct rectangle r;
 	int x, y, oldwidth;
@@ -174,7 +174,7 @@ RedrawTable(register class labelview  *self)
 }
 
 	void 
-labelview::FullUpdate(register enum view_UpdateType   type, register long   left , register long   top , register long   width , register long   height)
+labelview::FullUpdate(enum view_UpdateType   type, long   left , long   top , long   width , long   height)
 			{
 	if (type == view_Remove) {
 		this->OnScreen = FALSE;
@@ -205,7 +205,7 @@ labelview::Update()
 }
 
 	class view *
-labelview::Hit(register enum view_MouseAction   action, register long   x , register long   y , register long   num_clicks)
+labelview::Hit(enum view_MouseAction   action, long   x , long   y , long   num_clicks)
 			{
 	if (action == view_NoMouseEvent)
 		return (class view *)this;
@@ -222,9 +222,9 @@ labelview::DesiredSize( long  width, long  height, enum view_DSpass  pass,
 	if ( ! this->GaveSize ) {
 		long w, h;
 		char *tail;
-		register class label *st 
+		class label *st 
 			= (class label *)this->dataobject;
-		register class graphic *g;
+		class graphic *g;
 		struct FontSummary *FS;
 		if ( ! CheckWindow(this, "DSize")) {
 			/* can't compute size without a window (we need a font)
@@ -238,7 +238,7 @@ labelview::DesiredSize( long  width, long  height, enum view_DSpass  pass,
 		FS = (st->font)->FontSummary( g);
 		tail = (char *)((class label *)this->dataobject)->GetText();
 		while (tail) {
-			register char *tend = strchr(tail, '\n');
+			char *tend = strchr(tail, '\n');
 			if (tend) {
 				(st->font)->TextSize( g, tail, tend-tail, &w, &h);
 				tail = tend+1;

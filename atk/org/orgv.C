@@ -195,24 +195,24 @@ static const char		  ExplodePhrase[]   = "Explode",
 
 
 ATKdefineRegistry(orgv, aptv, orgv::InitializeClass);
-static long Control_Button_Hit( register class orgv		   *self, register class suite		   *suite, register struct suite_item	   *item, register long			    type, register enum view_MouseAction    action, register long			    x , register long			    y , register long			    clicks );
-static void Add_Command( register class orgv  *self );
-static void Delete_Command( register class orgv  *self );
-static void Rename_Command( register class orgv  *self );
-static void Plode_Command( register class orgv  *self );
-static void Fold_Command( register class orgv  *self );
-static void Node_Border_Command( register class orgv  *self );
-static void Node_Connector_Command( register class orgv  *self );
-static void DEBUG_Command( register class orgv	      *self );
-static void Palette_Command( register class orgv  *self );
-static void Description_Command( register class orgv  *self );
-static void Arrangement_Command( register class orgv  *self );
-static void Alter_Control_Button( register class orgv  *self, register long  datum, register const char  *new_c );
-static void Passivate( register class orgv  *self );
-static void Activate( register class orgv  *self );
-static void FullUpdate_Tree( register class orgv  *self );
-static long Tree_Hit( register class orgv		  *self, register class treev	          *tree_view, register struct tree_node	  *node, register long			   type, register enum view_MouseAction   action, register long			   x , register long			   y , register long			   clicks );
-static void Prepare_Description( register class orgv  *self, register struct tree_node  *node );
+static long Control_Button_Hit( class orgv		   *self, class suite		   *suite, struct suite_item	   *item, long			    type, enum view_MouseAction    action, long			    x , long			    y , long			    clicks );
+static void Add_Command( class orgv  *self );
+static void Delete_Command( class orgv  *self );
+static void Rename_Command( class orgv  *self );
+static void Plode_Command( class orgv  *self );
+static void Fold_Command( class orgv  *self );
+static void Node_Border_Command( class orgv  *self );
+static void Node_Connector_Command( class orgv  *self );
+static void DEBUG_Command( class orgv	      *self );
+static void Palette_Command( class orgv  *self );
+static void Description_Command( class orgv  *self );
+static void Arrangement_Command( class orgv  *self );
+static void Alter_Control_Button( class orgv  *self, long  datum, const char  *new_c );
+static void Passivate( class orgv  *self );
+static void Activate( class orgv  *self );
+static void FullUpdate_Tree( class orgv  *self );
+static long Tree_Hit( class orgv		  *self, class treev	          *tree_view, struct tree_node	  *node, long			   type, enum view_MouseAction   action, long			   x , long			   y , long			   clicks );
+static void Prepare_Description( class orgv  *self, struct tree_node  *node );
 
 
 static treev_Specification specification[] = {
@@ -365,7 +365,7 @@ orgv::orgv( )
     {
 	ATKinit;
   class orgv *self=this;
-  register boolean status = true;
+  boolean status = true;
 
   IN(orgv_InitializeObject);
   DEBUGst(RCSID,rcsid);
@@ -434,7 +434,7 @@ orgv::~orgv( )
 }
 
 void
-orgv::SetDataObject( register class dataobject  *ddata )
+orgv::SetDataObject( class dataobject  *ddata )
     {
     class orgv *self=this;
     class org *data=(class org *)ddata;
@@ -496,7 +496,7 @@ orgv::SetDebug( boolean  state )
 }
 
 void
-orgv::SetHitHandler( org_hitfptr handler, register class view  *anchor )
+orgv::SetHitHandler( org_hitfptr handler, class view  *anchor )
       {
   class orgv *self=this;
   IN(orgv_SetHitHandler);
@@ -507,10 +507,10 @@ orgv::SetHitHandler( org_hitfptr handler, register class view  *anchor )
 }
 
 void
-orgv::FullUpdate( register enum view_UpdateType  type, register long  left , register long  top , register long  width , register long  height )
+orgv::FullUpdate( enum view_UpdateType  type, long  left , long  top , long  width , long  height )
       {
   class orgv *self=this;
-  register long controls = PaletteExposed * PaletteHeight;
+  long controls = PaletteExposed * PaletteHeight;
 
   IN(orgv_FullUpdate);
   DEBUGdt(Type,type);
@@ -558,10 +558,10 @@ orgv::FullUpdate( register enum view_UpdateType  type, register long  left , reg
 }
 
 class view *
-orgv::Hit( register enum view_MouseAction  action, register long  x , register long  y , register long  clicks )
+orgv::Hit( enum view_MouseAction  action, long  x , long  y , long  clicks )
       {
   class orgv *self=this;
-  register class view *hit = (class view *) this;
+  class view *hit = (class view *) this;
 
   IN(orgv_Hit );
   (this)->Announce(  "" );
@@ -591,10 +591,10 @@ orgv::Hit( register enum view_MouseAction  action, register long  x , register l
 }
 
 view_DSattributes
-orgv::DesiredSize( register long		      given_width , register long		      given_height, register enum view_DSpass   pass, register long		     *desired_width , register long		     *desired_height )
+orgv::DesiredSize( long		      given_width , long		      given_height, enum view_DSpass   pass, long		     *desired_width , long		     *desired_height )
         {
   class orgv *self=this;
-  register view_DSattributes result = view_WidthFlexible | view_HeightFlexible;
+  view_DSattributes result = view_WidthFlexible | view_HeightFlexible;
   IN(orgv_DesiredSize);
   if ( TreeView )
     result = (TreeView)->DesiredSize(  given_width, given_height, pass, desired_width, desired_height );
@@ -603,7 +603,7 @@ orgv::DesiredSize( register long		      given_width , register long		      given
 }
 
 static long
-Control_Button_Hit( register class orgv		   *self, register class suite		   *suite, register struct suite_item	   *item, register long			    type, register enum view_MouseAction    action, register long			    x , register long			    y , register long			    clicks )
+Control_Button_Hit( class orgv		   *self, class suite		   *suite, struct suite_item	   *item, long			    type, enum view_MouseAction    action, long			    x , long			    y , long			    clicks )
             {
   char msg[512];
 
@@ -634,9 +634,9 @@ Control_Button_Hit( register class orgv		   *self, register class suite		   *sui
 }
 
 static void
-Add_Command( register class orgv  *self )
+Add_Command( class orgv  *self )
   {
-  register struct tree_node *node;
+  struct tree_node *node;
   char *reply;
 
   IN(Add_Command);
@@ -665,9 +665,9 @@ Add_Command( register class orgv  *self )
 }
 
 static void
-Delete_Command( register class orgv  *self )
+Delete_Command( class orgv  *self )
   {
-  register struct tree_node *current_node = (TreeView )->CurrentNode( );
+  struct tree_node *current_node = (TreeView )->CurrentNode( );
   IN(Delete_Command);
   if ( current_node ) {
       (DescriptionView)->SetDataObject(  Description );
@@ -687,9 +687,9 @@ Delete_Command( register class orgv  *self )
 }
 
 static void
-Rename_Command( register class orgv  *self )
+Rename_Command( class orgv  *self )
   {
-  register struct tree_node *current_node = (TreeView )->CurrentNode( );
+  struct tree_node *current_node = (TreeView )->CurrentNode( );
   char *reply;
 
   IN(Rename_Command);
@@ -711,7 +711,7 @@ Rename_Command( register class orgv  *self )
 }
 
 void
-orgv::Print( register FILE		      *file, register const char		      *processor, register const char		      *format, register boolean	       level )
+orgv::Print( FILE		      *file, const char		      *processor, const char		      *format, boolean	       level )
           {
   class orgv *self=this;
   IN(orgv_Print);
@@ -720,7 +720,7 @@ orgv::Print( register FILE		      *file, register const char		      *processor, 
 }
 
 static void
-Plode_Command( register class orgv  *self )
+Plode_Command( class orgv  *self )
   {
   IN(Plode_Command);
   if ( (TreeView )->CurrentNode( ) ) {
@@ -743,7 +743,7 @@ Plode_Command( register class orgv  *self )
 }
 
 static void
-Fold_Command( register class orgv  *self )
+Fold_Command( class orgv  *self )
   {
   IN(Fold_Command);
   if ( Fold = !Fold ) {
@@ -761,7 +761,7 @@ Fold_Command( register class orgv  *self )
 }
 
 static void
-Node_Border_Command( register class orgv  *self )
+Node_Border_Command( class orgv  *self )
   {
   static const char * const choices[] = {"Cancel", "Rectangle", "Round", "Oval", "Circle", 0};
   long response = 0, style, state = 0;
@@ -792,7 +792,7 @@ Node_Border_Command( register class orgv  *self )
 }
 
 static void
-Node_Connector_Command( register class orgv  *self )
+Node_Connector_Command( class orgv  *self )
   {
   static const char * const choices[] = {"Cancel", "Dog Leg", "Direct", 0};
   long response = 0, style, state = 0;
@@ -821,7 +821,7 @@ Node_Connector_Command( register class orgv  *self )
 }
 
 static void
-DEBUG_Command( register class orgv	      *self )
+DEBUG_Command( class orgv	      *self )
   {
   IN(DEBUG_Command);
   (self)->SetDebug(  !debug );
@@ -830,7 +830,7 @@ DEBUG_Command( register class orgv	      *self )
 }
 
 static void
-Palette_Command( register class orgv  *self )
+Palette_Command( class orgv  *self )
   {
   IN(Palette_Command);
   if ( PaletteExposed = !PaletteExposed )
@@ -843,7 +843,7 @@ Palette_Command( register class orgv  *self )
 }
 
 static void
-Description_Command( register class orgv  *self )
+Description_Command( class orgv  *self )
   {
   IN(Description_Command);
   if ( DescriptionExposed = !DescriptionExposed ) {
@@ -863,7 +863,7 @@ Description_Command( register class orgv  *self )
 
 
 static void
-Arrangement_Command( register class orgv  *self )
+Arrangement_Command( class orgv  *self )
   {
   IN(Arrangement_Command);
   if ( HorizontalArrangement ) {
@@ -885,7 +885,7 @@ Arrangement_Command( register class orgv  *self )
 }
 
 static
-void Alter_Control_Button( register class orgv  *self, register long  datum, register const char  *new_c )
+void Alter_Control_Button( class orgv  *self, long  datum, const char  *new_c )
       {
   if ( PaletteExposed )
       (Suite)->ChangeItemAttribute(  (Suite)->ItemOfDatum(  datum ),
@@ -896,7 +896,7 @@ void Alter_Control_Button( register class orgv  *self, register long  datum, reg
 }
 
 static
-void Passivate( register class orgv  *self )
+void Passivate( class orgv  *self )
     {
   if ( PaletteExposed ) {
     (Suite)->PassivateItem(  (Suite)->ItemOfDatum(  plode_code   ) );
@@ -908,7 +908,7 @@ void Passivate( register class orgv  *self )
 }
 
 static
-void Activate( register class orgv  *self )
+void Activate( class orgv  *self )
   {
     if ( PaletteExposed ) {
 	(Suite)->ActivateItem(  (Suite)->ItemOfDatum(  plode_code   ) );
@@ -920,7 +920,7 @@ void Activate( register class orgv  *self )
 }
 
 static
-void FullUpdate_Tree( register class orgv  *self )
+void FullUpdate_Tree( class orgv  *self )
   {
   struct rectangle bounds;
 
@@ -931,7 +931,7 @@ void FullUpdate_Tree( register class orgv  *self )
 }
 
 static long
-Tree_Hit( register class orgv		  *self, register class treev	          *tree_view, register struct tree_node	  *node, register long			   type, register enum view_MouseAction   action, register long			   x , register long			   y , register long			   clicks )
+Tree_Hit( class orgv		  *self, class treev	          *tree_view, struct tree_node	  *node, long			   type, enum view_MouseAction   action, long			   x , long			   y , long			   clicks )
             {
   IN(Tree_Hit);
   DEBUGdt(Type,type);
@@ -955,9 +955,9 @@ Tree_Hit( register class orgv		  *self, register class treev	          *tree_vie
 }
 
 static
-void Prepare_Description( register class orgv  *self, register struct tree_node  *node )
+void Prepare_Description( class orgv  *self, struct tree_node  *node )
     {
-  register FILE *file;
+  FILE *file;
   class text *textp;
 
   IN(Prepare_Description);
@@ -979,7 +979,7 @@ void Prepare_Description( register class orgv  *self, register struct tree_node 
 }
 
 void
-orgv::ObservedChanged( register class observable	      *changed, register long			       change )
+orgv::ObservedChanged( class observable	      *changed, long			       change )
         {
   IN(orgv_ObservedChanged);
 /*=== needed ? */

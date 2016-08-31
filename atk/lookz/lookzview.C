@@ -107,62 +107,62 @@ preprocessor. */
 #define NOMENUSTRING "<No Menu>"
 
   
-static long CVDots(register long  amt, enum style_Unit  unit);
-static long  CVFractionalPoints(register long  amt, enum style_Unit  unit);
+static long CVDots(long  amt, enum style_Unit  unit);
+static long  CVFractionalPoints(long  amt, enum style_Unit  unit);
 static long MapStringToVal(const struct strTbl  tbl[], const char  *s);
 static const char * MapValToString(const struct strTbl  tbl[], long  val);
 static char * MapDeltaToString(long  dots, enum style_FontSize  basis);
 static void MapStringToDelta(char  *str, long  *dots, enum style_FontSize  *basis);
-static void  ChangeStyle(register class lookzview  *self);
-static void RulerValueChanged(class lprrulerview  *rv, register class lookzview  *self, enum lprrulerview_iconcode  icon, long  newvalue);
-static void TabsValueChanged(class lprrulerview  *rv, register class lookzview  *self, long  pos, enum style_TabAlignment  op, enum style_Unit  unit);
+static void  ChangeStyle(class lookzview  *self);
+static void RulerValueChanged(class lprrulerview  *rv, class lookzview  *self, enum lprrulerview_iconcode  icon, long  newvalue);
+static void TabsValueChanged(class lprrulerview  *rv, class lookzview  *self, long  pos, enum style_TabAlignment  op, enum style_Unit  unit);
 static void SetBitsForCode(unsigned long  code, const struct strTbl  names[], class stringtbl  *tbl, long  parity);
 static void  UnpackStyle(class lookzview  *self);
 static const char * InitialWord(const char  *s);
 static const char * clean(const char  *s);
-static void SetStyleDisplay(register class lookzview  *self, register class style  *st);
-static void ClearStyleDisplay(register class lookzview  *self);
-static void CloseStyleSheet(register class lookzview  *self);
-static boolean AddCardName(class style  *s, register class stringtbl  *st);
-static void OpenStyleSheet(register class lookzview  *self, register class stylesheet  *ss);
-static boolean FindAndUnpack(register class style  *s, register class lookzview  *lv);
-static boolean FindAndUnpackNoMenus(register class style  *s, register class lookzview  *lv);
-static void HitStyleName(register class stringtbl  *st1, register class lookzview  *lv, long  accnum);
-static void HitStyleNameNoMenus(register class stringtbl  *st1, register class lookzview  *lv, long  accnum);
-static boolean AddStyleName(register class style  *s, register class lookzview  *lv);
-static boolean AddStyleNameNoMenus(register class style  *s, register class lookzview  *lv);
-static void HitMenuCard(class stringtbl  *st0, register class lookzview  *lv, long  accnum);
+static void SetStyleDisplay(class lookzview  *self, class style  *st);
+static void ClearStyleDisplay(class lookzview  *self);
+static void CloseStyleSheet(class lookzview  *self);
+static boolean AddCardName(class style  *s, class stringtbl  *st);
+static void OpenStyleSheet(class lookzview  *self, class stylesheet  *ss);
+static boolean FindAndUnpack(class style  *s, class lookzview  *lv);
+static boolean FindAndUnpackNoMenus(class style  *s, class lookzview  *lv);
+static void HitStyleName(class stringtbl  *st1, class lookzview  *lv, long  accnum);
+static void HitStyleNameNoMenus(class stringtbl  *st1, class lookzview  *lv, long  accnum);
+static boolean AddStyleName(class style  *s, class lookzview  *lv);
+static boolean AddStyleNameNoMenus(class style  *s, class lookzview  *lv);
+static void HitMenuCard(class stringtbl  *st0, class lookzview  *lv, long  accnum);
 static char * GetStringValue(class stringtbl  *st, class lookzview  *self, short  accnum, const char  *prompt);
 static char * GetDelimitedStringValue(class stringtbl  *st, class lookzview  *self, short  accnum, const char  *prompt);
-static void HitFont(class stringtbl  *st, register class lookzview  *self, long  accnum);
-static void HitSize(class stringtbl  *st, register class lookzview  *self, long  accnum);
-static void HitMode(class stringtbl  *st, register class lookzview  *self, long  accnum);
-static void HitSubscr(class stringtbl  *st, register class lookzview  *self, long  accnum);
+static void HitFont(class stringtbl  *st, class lookzview  *self, long  accnum);
+static void HitSize(class stringtbl  *st, class lookzview  *self, long  accnum);
+static void HitMode(class stringtbl  *st, class lookzview  *self, long  accnum);
+static void HitSubscr(class stringtbl  *st, class lookzview  *self, long  accnum);
 static void FinagleStyleBits(class lookzview  *self, class stringtbl  *st, long  accnum, long  parity, unsigned long  *faces , unsigned long  *flags);
-static void HitEnable(class stringtbl  *st, register class lookzview  *self, long  accnum);
-static void HitDisable(class stringtbl  *st, register class lookzview  *self, long  accnum);
-static void HitSpacing(class stringtbl  *st, register class lookzview  *self, long  accnum);
-static void HitSpread(class stringtbl  *st, register class lookzview  *self, long  accnum);
-static void HitColor(class stringtbl  *st, register class lookzview  *self, long  accnum);
-static void HitTabFill(class stringtbl  *st, register class lookzview  *self, long  accnum);
-static void HitShrink(class labelview  *shrink, register enum view_MouseAction   action, register class lookzview  *self);
-static void ChooseShrinkIcon(register class lookzview  *self);
+static void HitEnable(class stringtbl  *st, class lookzview  *self, long  accnum);
+static void HitDisable(class stringtbl  *st, class lookzview  *self, long  accnum);
+static void HitSpacing(class stringtbl  *st, class lookzview  *self, long  accnum);
+static void HitSpread(class stringtbl  *st, class lookzview  *self, long  accnum);
+static void HitColor(class stringtbl  *st, class lookzview  *self, long  accnum);
+static void HitTabFill(class stringtbl  *st, class lookzview  *self, long  accnum);
+static void HitShrink(class labelview  *shrink, enum view_MouseAction   action, class lookzview  *self);
+static void ChooseShrinkIcon(class lookzview  *self);
 
 enum dir {H, V};
 static class lpair * LL(enum dir  dir, long  pct, class lpair  *top , class lpair  *bot);
 static class lpair * LBL (const char  *label, class view  *view);
 static  void EditStylesInWindow(class view  *textv);
 static  void NewTextObject(class lookzview  *self, class text  *text);
-static void BuildImage(register class lookzview   *self);
+static void BuildImage(class lookzview   *self);
 static void ChopTree(class lpair  *branch, struct ATKregistryEntry   *lpairInfo);
-static void  UpdateDocument(register class lookzview  *self);
-static boolean FindCardName(register class style  *s, register char  *nm);
+static void  UpdateDocument(class lookzview  *self);
+static boolean FindCardName(class style  *s, char  *nm);
 static char * NewMenuName(class lookzview  *lv, char  *name);
-static void  AddStyle(register class lookzview  *self);
+static void  AddStyle(class lookzview  *self);
 boolean CheckDelStyle(class style  *sty, class text  *txt, int  level, class environment  *env);
-static void DeleteStyle(register class lookzview  *self);
-static void SetBGcolor(register class lookzview  *self);
-static void SetROBGcolor(register class lookzview  *self);
+static void DeleteStyle(class lookzview  *self);
+static void SetBGcolor(class lookzview  *self);
+static void SetROBGcolor(class lookzview  *self);
 
 
 static struct bind_Description MenuOptions[] = {
@@ -313,7 +313,7 @@ ATKdefineRegistry(lookzview, view, lookzview::InitializeClass);
 
 
 static
-long CVDots(register long  amt, enum style_Unit  unit)
+long CVDots(long  amt, enum style_Unit  unit)
 		{
 	switch (unit) {
             case style_RawDots:
@@ -335,7 +335,7 @@ long CVDots(register long  amt, enum style_Unit  unit)
 */
 
 static long 
-CVFractionalPoints(register long  amt, enum style_Unit  unit)
+CVFractionalPoints(long  amt, enum style_Unit  unit)
 		{
 	switch (unit) {
             case style_RawDots:
@@ -405,7 +405,7 @@ MapStringToDelta(char  *str, long  *dots, enum style_FontSize  *basis)
 }
 
 	static void 
-ChangeStyle(register class lookzview  *self)
+ChangeStyle(class lookzview  *self)
 	{
 	self->curstyle->template_c = 0;
 	(self->curss)->NotifyObservers( (long) self);	/*BOGUS XXX
@@ -423,7 +423,7 @@ ChangeStyle(register class lookzview  *self)
 	use relative zero to mean no value */
 
 	static void
-RulerValueChanged(class lprrulerview  *rv, register class lookzview  *self, enum lprrulerview_iconcode  icon, long  newvalue)
+RulerValueChanged(class lprrulerview  *rv, class lookzview  *self, enum lprrulerview_iconcode  icon, long  newvalue)
 				{
 	if (self->curstyle == NULL) return;
 	switch (icon) {
@@ -447,7 +447,7 @@ RulerValueChanged(class lprrulerview  *rv, register class lookzview  *self, enum
 }
 
 	static void
-TabsValueChanged(class lprrulerview  *rv, register class lookzview  *self, long  pos, enum style_TabAlignment  op, enum style_Unit  unit)
+TabsValueChanged(class lprrulerview  *rv, class lookzview  *self, long  pos, enum style_TabAlignment  op, enum style_Unit  unit)
 					{
 	if (self->curstyle == NULL) return;
 
@@ -479,8 +479,8 @@ SetBitsForCode(unsigned long  code, const struct strTbl  names[], class stringtb
 static void 
 UnpackStyle(class lookzview  *self)
 	{
-	register class style *style = self->curstyle;
-	register class stringtbl **st = self->st;
+	class style *style = self->curstyle;
+	class stringtbl **st = self->st;
 
 	if (style == NULL) {
 		return;
@@ -625,7 +625,7 @@ static const char *
 InitialWord(const char  *s)
 	{
 	static char buf[50];
-	register char *bx;
+	char *bx;
 	const char*sx;
 	long i;
 	if(s==NULL) {
@@ -647,7 +647,7 @@ InitialWord(const char  *s)
 clean(const char  *s)
 	{
 	static char buf[50];
-	register char *bx;
+	char *bx;
 	const char*sx;
 	long i;
 	if(s==NULL) {
@@ -655,7 +655,7 @@ clean(const char  *s)
 	    return buf;
 	}
 	for (bx=buf, sx=s, i=48;   i && *sx;   i--) {
-		register char c = *sx++;
+		char c = *sx++;
 		if ( ! isalnum(c)) {}
 		else if (isupper(c)) 
 			*bx++ = tolower(c);
@@ -670,7 +670,7 @@ clean(const char  *s)
 	initiates editing the style 'st'
 */
 	static void
-SetStyleDisplay(register class lookzview  *self, register class style  *st)
+SetStyleDisplay(class lookzview  *self, class style  *st)
 		{
     if(st) {
 	self->curstyle = self->curss->MakeWritable(st->GetName());
@@ -683,7 +683,7 @@ SetStyleDisplay(register class lookzview  *self, register class style  *st)
 */
 
 	static void
-ClearStyleDisplay(register class lookzview  *self)
+ClearStyleDisplay(class lookzview  *self)
 	{
 	long i;
 	for (i=(long)TNfont; i<=(long)TNcolor; i++)
@@ -698,7 +698,7 @@ ClearStyleDisplay(register class lookzview  *self)
 	terminates editing the current style
 */
 	static void
-CloseStyleSheet(register class lookzview  *self)
+CloseStyleSheet(class lookzview  *self)
 	{
 	/* The document is updated for all changes, so there is no need
 	to do anything about the style currently displayed */
@@ -715,7 +715,7 @@ CloseStyleSheet(register class lookzview  *self)
 
 /* called by EnumerateStyles in OpenStyleSheet */
 	static boolean
-AddCardName(class style  *s, register class stringtbl  *st)
+AddCardName(class style  *s, class stringtbl  *st)
 		{
 	const char *mnnm = (s)->GetMenuName();
 	if (mnnm != NULL)    (st)->AddString( InitialWord(mnnm));
@@ -723,7 +723,7 @@ AddCardName(class style  *s, register class stringtbl  *st)
 }
 
 	static void
-OpenStyleSheet(register class lookzview  *self, register class stylesheet  *ss)
+OpenStyleSheet(class lookzview  *self, class stylesheet  *ss)
 		{
 	self->curss = ss;
 	if (ss != NULL) {
@@ -743,11 +743,11 @@ static char *TempStyleName;  /* holds the stylename during
 		it finds the style named by lv->curcard and TempStyleName
 		then it unpacks that style */
 	static boolean
-FindAndUnpack(register class style  *s, register class lookzview  *lv)
+FindAndUnpack(class style  *s, class lookzview  *lv)
 		{
-	register const char *mnnm = (s)->GetMenuName();
+	const char *mnnm = (s)->GetMenuName();
 	if (mnnm != NULL && ULstrcmp(lv->curcard, InitialWord(mnnm)) == 0) {
-		register const char *ThisStylename = strchr(mnnm, ',');
+		const char *ThisStylename = strchr(mnnm, ',');
 		if (ThisStylename
 				&& ULstrcmp(InitialWord(ThisStylename+1), 
 							TempStyleName) == 0) {
@@ -759,11 +759,11 @@ FindAndUnpack(register class style  *s, register class lookzview  *lv)
 }
 
 	static boolean
-FindAndUnpackNoMenus(register class style  *s, register class lookzview  *lv)
+FindAndUnpackNoMenus(class style  *s, class lookzview  *lv)
 		{
-	register const char *mnnm = (s)->GetMenuName();
+	const char *mnnm = (s)->GetMenuName();
 	if (mnnm == NULL) {
-		register const char *ThisStylename = (s)->GetName();
+		const char *ThisStylename = (s)->GetName();
 		if (ThisStylename
 				&& ULstrcmp(InitialWord(ThisStylename), 
 							TempStyleName) == 0) {
@@ -776,7 +776,7 @@ FindAndUnpackNoMenus(register class style  *s, register class lookzview  *lv)
 
 /* HitStyleName is called as an ItemHitProc for the stylename stringtbl */
 	static void
-HitStyleName(register class stringtbl  *st1, register class lookzview  *lv, long  accnum)
+HitStyleName(class stringtbl  *st1, class lookzview  *lv, long  accnum)
 			{
 	strtblview::OneOnly(st1, lv, accnum);
 	ClearStyleDisplay(lv);
@@ -787,7 +787,7 @@ HitStyleName(register class stringtbl  *st1, register class lookzview  *lv, long
 }
 
 	static void
-HitStyleNameNoMenus(register class stringtbl  *st1, register class lookzview  *lv, long  accnum)
+HitStyleNameNoMenus(class stringtbl  *st1, class lookzview  *lv, long  accnum)
 			{
 	strtblview::OneOnly(st1, lv, accnum);
 	ClearStyleDisplay(lv);
@@ -799,9 +799,9 @@ HitStyleNameNoMenus(register class stringtbl  *st1, register class lookzview  *l
 
 /* called by EnumerateStyles in HitMenuCard */
 	static boolean
-AddStyleName(register class style  *s, register class lookzview  *lv)
+AddStyleName(class style  *s, class lookzview  *lv)
 		{
-	register const char *mnnm = (s)->GetMenuName(), *ThisStylename;
+	const char *mnnm = (s)->GetMenuName(), *ThisStylename;
 	if (mnnm != NULL && ULstrcmp(lv->curcard, InitialWord(mnnm)) == 0) {
 		ThisStylename = strchr(mnnm, ',');
 		if (ThisStylename) 
@@ -812,9 +812,9 @@ AddStyleName(register class style  *s, register class lookzview  *lv)
 }
 
 	static boolean
-AddStyleNameNoMenus(register class style  *s, register class lookzview  *lv)
+AddStyleNameNoMenus(class style  *s, class lookzview  *lv)
 		{
-	register const char *mnnm = (s)->GetMenuName(), *ThisStylename;
+	const char *mnnm = (s)->GetMenuName(), *ThisStylename;
 	if (mnnm == NULL) {
 		ThisStylename = (s)->GetName();
 		if (ThisStylename) {
@@ -828,7 +828,7 @@ AddStyleNameNoMenus(register class style  *s, register class lookzview  *lv)
 /* called as an ItemHitProc for stringtbl[TNmenucard] 
 		set up the stylename stringtbl */
 	static void
-HitMenuCard(class stringtbl  *st0, register class lookzview  *lv, long  accnum)
+HitMenuCard(class stringtbl  *st0, class lookzview  *lv, long  accnum)
 			{
 	strtblview::OneOnly(st0, lv, accnum);
 	(lv->st[(long)TNstylename])->Clear();
@@ -918,7 +918,7 @@ GetDelimitedStringValue(class stringtbl  *st, class lookzview  *self, short  acc
 /* called as an ItemHitProc for stringtbl[TNfont] 
 		modify font  in the stylesheet */
 	static void
-HitFont(class stringtbl  *st, register class lookzview  *self, long  accnum)
+HitFont(class stringtbl  *st, class lookzview  *self, long  accnum)
 			{
 	if (self->curstyle == NULL) return;
 	strtblview::ZeroOrOne(st, self, accnum);
@@ -950,7 +950,7 @@ HitFont(class stringtbl  *st, register class lookzview  *self, long  accnum)
 /* called as an ItemHitProc for stringtbl[TNsize] 
 		modify size  in the stylesheet */
 	static void
-HitSize(class stringtbl  *st, register class lookzview  *self, long  accnum)
+HitSize(class stringtbl  *st, class lookzview  *self, long  accnum)
 			{
 	enum style_FontSize basis;
 	long points;
@@ -974,7 +974,7 @@ HitSize(class stringtbl  *st, register class lookzview  *self, long  accnum)
 /* called as an ItemHitProc for stringtbl[TNmode] 
 		modify JustificationMode  in the stylesheet */
 	static void
-HitMode(class stringtbl  *st, register class lookzview  *self, long  accnum)
+HitMode(class stringtbl  *st, class lookzview  *self, long  accnum)
 			{
 	if (self->curstyle == NULL) return;
 	strtblview::ZeroOrOne(st, self, accnum);
@@ -994,7 +994,7 @@ HitMode(class stringtbl  *st, register class lookzview  *self, long  accnum)
 /* called as an ItemHitProc for stringtbl[TNsubscr] 
 		modify subscription  in the stylesheet */
 	static void
-HitSubscr(class stringtbl  *st, register class lookzview  *self, long  accnum)
+HitSubscr(class stringtbl  *st, class lookzview  *self, long  accnum)
 			{
 	enum style_ScriptMovement  basis = style_PreviousScriptMovement;
 	long points = 0;
@@ -1056,7 +1056,7 @@ FinagleStyleBits(class lookzview  *self, class stringtbl  *st, long  accnum, lon
 /* called as an ItemHitProc for stringtbl[TNenable] 
 		modify enable flags  in the stylesheet */
 	static void 
-HitEnable(class stringtbl  *st, register class lookzview  *self, long  accnum)
+HitEnable(class stringtbl  *st, class lookzview  *self, long  accnum)
 			{
 	if (self->curstyle == NULL) return;
 	strtblview::ZeroOrMany(st, self, accnum);
@@ -1068,7 +1068,7 @@ HitEnable(class stringtbl  *st, register class lookzview  *self, long  accnum)
 /* called as an ItemHitProc for stringtbl[TNdisable] 
 		modify disable flags  in the stylesheet */
 	static void
-HitDisable(class stringtbl  *st, register class lookzview  *self, long  accnum)
+HitDisable(class stringtbl  *st, class lookzview  *self, long  accnum)
 			{
 	if (self->curstyle == NULL) return;
 	strtblview::ZeroOrMany(st, self, accnum);
@@ -1079,7 +1079,7 @@ HitDisable(class stringtbl  *st, register class lookzview  *self, long  accnum)
 }
 
 	static void
-HitSpacing(class stringtbl  *st, register class lookzview  *self, long  accnum)
+HitSpacing(class stringtbl  *st, class lookzview  *self, long  accnum)
 			{
 	enum style_SpacingValue basis;
 	long points;
@@ -1108,7 +1108,7 @@ HitSpacing(class stringtbl  *st, register class lookzview  *self, long  accnum)
 }
 
 	static void
-HitSpread(class stringtbl  *st, register class lookzview  *self, long  accnum)
+HitSpread(class stringtbl  *st, class lookzview  *self, long  accnum)
 			{
 	enum style_SpacingValue basis;
 	long points;
@@ -1138,7 +1138,7 @@ HitSpread(class stringtbl  *st, register class lookzview  *self, long  accnum)
 }
 
 	static void 
-HitColor(class stringtbl  *st, register class lookzview  *self, long  accnum)
+HitColor(class stringtbl  *st, class lookzview  *self, long  accnum)
 			{
 	if (self->curstyle == NULL) return;
 	strtblview::ZeroOrOne(st, self, accnum);
@@ -1152,7 +1152,7 @@ HitColor(class stringtbl  *st, register class lookzview  *self, long  accnum)
 }
 
 	static void 
-HitTabFill(class stringtbl  *st, register class lookzview  *self, long  accnum)
+HitTabFill(class stringtbl  *st, class lookzview  *self, long  accnum)
 			{
 	if (self->curstyle == NULL) return;
 	strtblview::ZeroOrOne(st, self, accnum);
@@ -1166,7 +1166,7 @@ HitTabFill(class stringtbl  *st, register class lookzview  *self, long  accnum)
 }
 
 	static void
-HitShrink(class labelview  *shrink, register enum view_MouseAction   action, register class lookzview  *self)
+HitShrink(class labelview  *shrink, enum view_MouseAction   action, class lookzview  *self)
 			{
 	class lookz *lookz;
 	if (action != view_LeftDown && action != view_RightDown)
@@ -1188,7 +1188,7 @@ HitShrink(class labelview  *shrink, register enum view_MouseAction   action, reg
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	void
-ChooseShrinkIcon(register class lookzview  *self)
+ChooseShrinkIcon(class lookzview  *self)
 	{
 	((class label *)(self->shrinkicon)->GetDataObject())->SetText( 
 			(char *)((self->HasInputFocus) ? "-" : ","));
@@ -1204,7 +1204,7 @@ LL(enum dir  dir, long  pct, class lpair  *top , class lpair  *bot)
 			{
 	/* XXX (sigh) would really like lines to be movable, 
 			but the wm has a terrible time leak in that area */
-	register class lpair *ret = new lpair;
+	class lpair *ret = new lpair;
 	if (dir == H) 
 		(ret)->HSplit( top, bot, pct, FALSE);
 	else
@@ -1222,8 +1222,8 @@ LBL (const char  *labelp, class view  *view)
 
 	class im *im;	
 	int w;
-	register class label *l = new label;
-	register class labelview *lv = new labelview;
+	class label *l = new label;
+	class labelview *lv = new labelview;
 
 	(l)->SetFont("andysans", fontdesc_Bold, 8);
 	(l)->SetText(labelp);
@@ -1253,7 +1253,7 @@ LBL (const char  *labelp, class view  *view)
 	static void
 EditStylesInWindow(class view  *textv)
 	{
-	register class text *d;
+	class text *d;
 	class lookz *newobject;
 	int i;
 	int openSlot = -1;
@@ -1333,7 +1333,7 @@ NewTextObject(class lookzview  *self, class text  *text)
 
 /* we defer building the image until LinkTree so LBL can compute label size */
 	static void
-BuildImage(register class lookzview   *self)
+BuildImage(class lookzview   *self)
 	{
 	class lpair *R[7];
 	class labelview *emptylabelview;
@@ -1633,7 +1633,7 @@ LEAVE(lookzview::LinkTree);
 /* intercept all requests from children for inputfocus 
 		and cause the lookz itself to request inputfocus */
 	void 
-lookzview::WantInputFocus(register class view  *child)
+lookzview::WantInputFocus(class view  *child)
 		{
 ENTER(lookzview::WantInputFocus);
 	if ( ! this->HasInputFocus)
@@ -1691,10 +1691,10 @@ DEBUG(("	Drawable at 0x%lx   Visibile: %s \n", (this)->GetDrawable(),
 			 && ! this->foundstylesheet) {
 		/* BOGOSITY ALERT:  we grub around in the parent to
 		  find its stylesheet */
-		register class view *v;
+		class view *v;
 		for (v = (class view *)this; v != NULL; v = v->parent) 
 			if ((v)->IsType("textview")) {
-				register class text *t = (class text *)v->GetDataObject();
+				class text *t = (class text *)v->GetDataObject();
 				if (t && t->styleSheet) 
 					OpenStyleSheet(this, t->styleSheet);
 				break;
@@ -1757,7 +1757,7 @@ LEAVE(lookzview::Update);
 }
 
 	class view *
-lookzview::Hit(register enum view_MouseAction   action, register long   x , register long   y , register long   num_clicks)
+lookzview::Hit(enum view_MouseAction   action, long   x , long   y , long   num_clicks)
 			{
 	class view *ret;
 	boolean oldvis=(this)->GetVisibility();
@@ -1790,7 +1790,7 @@ DEBUG(("Desired Size %d x %d\n", *desiredWidth, *desiredHeight));
 }
 
 	void
-lookzview::Print( register FILE    *file, register const char  	  *processor, register const char  	  *format, register boolean  	 level )
+lookzview::Print( FILE    *file, const char  	  *processor, const char  	  *format, boolean  	 level )
 					{
 	/* never print anything */
 }
@@ -1877,7 +1877,7 @@ lookzview::SetEmbedded(boolean  isEmbedded)
 }
 
 	static void 
-UpdateDocument(register class lookzview  *self)
+UpdateDocument(class lookzview  *self)
 	{
 	class lookz *lookz;
 	class text *text;
@@ -1892,7 +1892,7 @@ UpdateDocument(register class lookzview  *self)
 	}
 	if (self->embedded) {
 		/* BOGOSITY ALERT:  we call Full_Update of parent */
-		register class view *v;
+		class view *v;
 		for (v = (class view *)self; v != NULL; v = v->parent) 
 			if (strcmp("textview", (v)->GetTypeName()) == 0) {
 				/* this is exceedingly dangerous XXX XXX
@@ -1915,10 +1915,10 @@ static char CardFound[50];   /* result from FindCardName */
 	when match, set CardFound and exit
 */
 	static boolean
-FindCardName(register class style  *s, register char  *nm)
+FindCardName(class style  *s, char  *nm)
 		{
-	register const char *mnnm = (s)->GetMenuName();
-	register const char *iw;
+	const char *mnnm = (s)->GetMenuName();
+	const char *iw;
 	if (mnnm != NULL  &&  (iw=InitialWord(mnnm)) != NULL
 			&& FOLDEDEQ(nm, iw)) {
 		/* found a match */
@@ -1961,7 +1961,7 @@ NewMenuName(class lookzview  *lv, char  *name)
 	}
 	if (*CardFound != '\0') {
 		/* use existing card name and the remainder of 'name' */
-		register long len = strlen(CardFound);
+		long len = strlen(CardFound);
 		strcpy(buf, CardFound);
 		eltloc = buf + len;
 		strncpy(eltloc++, comma, 99 - len);
@@ -1980,9 +1980,9 @@ NewMenuName(class lookzview  *lv, char  *name)
 }
 
 	static void 
-AddStyle(register class lookzview  *self)
+AddStyle(class lookzview  *self)
 	{
-	register class style *newsty;
+	class style *newsty;
 	const char *stylename;
 	long accnum;
 	char name[75], temp[75];
@@ -2060,7 +2060,7 @@ boolean CheckDelStyle(class style  *sty, class text  *txt, int  level, class env
     return (env != NULL && env->type == environment_Style && env->data.style == sty);
 }
 
-static void DeleteStyle(register class lookzview  *self)
+static void DeleteStyle(class lookzview  *self)
 	{
 	class style *delsty;
 	class lookz *lz;

@@ -110,9 +110,9 @@ keymap::~keymap()
 static boolean bindKey(class keymap  *self,const unsigned char *keys,ATK   *obj,long  rock,enum keymap_Types  type)
                     {
     enum keymap_Types e;
-    register const unsigned char *p;
+    const unsigned char *p;
     class keymap *km1, *km2;
-    register unsigned char c;
+    unsigned char c;
 
     for (p = keys, km1 = self; p[1] != 0; ++p) {
 	c = (*p == 128)? 0 : *p; /*  allows nulls in string to be represented by 128 */

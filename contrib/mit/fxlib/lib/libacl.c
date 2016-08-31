@@ -93,7 +93,7 @@ acl_canonicalize_principal(principal, buf)
 _acl_match(criterion, sample)
      char *criterion, *sample;
 {
-  register char *c, *s;
+  char *c, *s;
 
   c = criterion; s = sample;
 

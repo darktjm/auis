@@ -38,8 +38,8 @@ extern int link(), unlink();
 /* add bcopy() so we don't have to pull in -lX11 */
 
 void bcopy (b1, b2, length)
-register unsigned char *b1, *b2;
-register length;
+unsigned char *b1, *b2;
+int length;
 {
     if (b1 >= b2 || (b1 + length) < b2) {
 	memcpy(b2, b1, length);	/* Note: memmove was much slower */

@@ -186,9 +186,9 @@ PCNAME *ToName;
  */
 
 int UpperCase(name)
-register char *name;
+char *name;
     {
-    register char c;
+    char c;
     while (c = *name++)
 	if (islower(c))
 	    return 0;
@@ -201,9 +201,9 @@ register char *name;
  */
 
 void FoldLower(name)
-register char *name;
+char *name;
     {
-    register char c;
+    char c;
     while (c = *name) {
 	if (isupper(c))
 	    *name = tolower(c);
@@ -220,7 +220,7 @@ register char *name;
 int GenericEquality(generic, name)
 PCNAME *generic, *name;
     {
-    register char *np = name->name;
+    char *np = name->name;
     if (generic->hidden != name->hidden)
 	return 0;
     return ComponentEqual(generic->name, np) &&
@@ -236,7 +236,7 @@ PCNAME *generic, *name;
 int NoCaseGenericEquality(generic, name)
 PCNAME *generic, *name;
     {
-    register char *np = name->name;
+    char *np = name->name;
     if (generic->hidden != name->hidden)
 	return 0;
     return NC_ComponentEqual(generic->name, np) &&
@@ -251,7 +251,7 @@ PCNAME *generic, *name;
  */
 
 int ComponentEqual(gc, c)
-register char *gc, *c;
+char *gc, *c;
     {
     while (*gc) {
 	if (*gc == '*')
@@ -272,7 +272,7 @@ register char *gc, *c;
  */
 
 int NC_ComponentEqual(gc, c)
-register char *gc, *c;
+char *gc, *c;
     {
     while (*gc) {
 	if (*gc == '*')
@@ -310,7 +310,7 @@ PCNAME *name, *generic;
 MakeNewComponent(c, generic)
 char *c, *generic;
     {
-    register char gc;
+    char gc;
     while (*c) {
 	gc = *generic++;
 	if (gc == '*')
@@ -376,7 +376,7 @@ PCNAME *name;
 GetPCDateTime (unixtime, pcdate, pctime)
 int unixtime, *pcdate, *pctime;
 {
-    register struct tm *tm = (struct tm *) localtime(&unixtime);
+    struct tm *tm = (struct tm *) localtime(&unixtime);
     if (tm->tm_year < 80) {
 	tm->tm_year = 80;
 	tm->tm_mon = 0;
@@ -660,7 +660,7 @@ char *path;
 
 PRIVATE FinalSlash ()
 {
-    register int i;
+    int i;
     i = strlen (ActualCaseCurrentDir);
     if (i == 0) {
 	strcpy (ActualCaseCurrentDir, ".");
@@ -680,7 +680,7 @@ int MixedCase (s)
 char *s;
 {
     short upperfound, lowerfound;
-    register int i;
+    int i;
 
     upperfound = FALSE;
     lowerfound = FALSE;

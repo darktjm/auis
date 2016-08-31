@@ -65,8 +65,8 @@
  */
 bool_t
 xdr_authunix_parms(xdrs, p)
-	register XDR *xdrs;
-	register struct authunix_parms *p;
+	XDR *xdrs;
+	struct authunix_parms *p;
 {
 
 	if (xdr_u_long(xdrs, &(p->aup_time))

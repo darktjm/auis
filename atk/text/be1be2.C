@@ -107,15 +107,15 @@ ATK_IMPL("be1be2.H")
 
 
 ATKdefineRegistry(be1be2, ATK, NULL);
-static long CVDots(register long  amt, enum style_Unit  unit);
+static long CVDots(long  amt, enum style_Unit  unit);
 boolean ConvertStyle(class style  *self, long  attr , long  opcode , long  optype , long  opparm);
 
 
 boolean be1be2::CheckBE1(class text  *text)
 {
     long gotlen, len = (text)->GetLength();
-    register int pos = 0;
-    register unsigned char *p;
+    int pos = 0;
+    unsigned char *p;
     int envcount = 0, defcount = 0, bincount = 0;
 
     while (pos < len)
@@ -161,7 +161,7 @@ boolean be1be2::CheckBE1(class text  *text)
  *    CVDots, copied from style.c
  */
 
-static long CVDots(register long  amt, enum style_Unit  unit)
+static long CVDots(long  amt, enum style_Unit  unit)
 {
     switch (unit) {
         case style_RawDots:

@@ -84,11 +84,11 @@ ATK_IMPL("tlex.H")
 
 	
 ATKdefineRegistry(tlex, ATK, tlex::InitializeClass);
-static int ErrorWithParm(register class tlex  *self, struct tlex_ErrorRecparm  *parm);
-static int ScanNumber(register class tlex  *self, struct tlex_NumberRecparm  *parm);
-static int ScanID(register class tlex  *self, struct tlex_IDRecparm  *parm);
-static int ScanString(register class tlex  *self, struct tlex_StringRecparm  *parm);
-static int ScanComment(register class tlex  *self, struct tlex_CommentRecparm  *parm);
+static int ErrorWithParm(class tlex  *self, struct tlex_ErrorRecparm  *parm);
+static int ScanNumber(class tlex  *self, struct tlex_NumberRecparm  *parm);
+static int ScanID(class tlex  *self, struct tlex_IDRecparm  *parm);
+static int ScanString(class tlex  *self, struct tlex_StringRecparm  *parm);
+static int ScanComment(class tlex  *self, struct tlex_CommentRecparm  *parm);
 
 
 /* calls to this routine can arise:
@@ -97,8 +97,8 @@ static int ScanComment(register class tlex  *self, struct tlex_CommentRecparm  *
 	via an illegal character 
 */
 static int
-ErrorWithParm(register class tlex  *self, struct tlex_ErrorRecparm  *parm) {
-	register long savex = self->RecentIndex;
+ErrorWithParm(class tlex  *self, struct tlex_ErrorRecparm  *parm) {
+	long savex = self->RecentIndex;
 	int val;
 
 	if (parm->handler == NULL) {
@@ -158,7 +158,7 @@ tlex::FetchChar() {
 */
 	int
 tlex::PutTokChar(char  c) {
-	register int where = this->tokbufx - this->tokenbuffer;
+	int where = this->tokbufx - this->tokenbuffer;
 	int size = this->tokbuflastx - this->tokenbuffer + 2;
 	if (where > size - 5) {
 		this->tokenbuffer = (char *)realloc(this->tokenbuffer, size+100);
@@ -321,7 +321,7 @@ tlex::Repeat(int  index)  {
 
 */
 	static int
-ScanNumber(register class tlex  *self, struct tlex_NumberRecparm  *parm)
+ScanNumber(class tlex  *self, struct tlex_NumberRecparm  *parm)
 		{
 	long len;
 	int success;
@@ -381,7 +381,7 @@ ScanNumber(register class tlex  *self, struct tlex_NumberRecparm  *parm)
 		or value from handler
 */
 	static int
-ScanID(register class tlex  *self, struct tlex_IDRecparm  *parm)
+ScanID(class tlex  *self, struct tlex_IDRecparm  *parm)
 		{
 	if (parm->SaveText) {
 		if (parm->continueset.vector)
@@ -422,12 +422,12 @@ ScanID(register class tlex  *self, struct tlex_IDRecparm  *parm)
 	at completion, currpos is the char after closing 'delim'
 */
 	static int
-ScanString(register class tlex  *self, struct tlex_StringRecparm  *parm)
+ScanString(class tlex  *self, struct tlex_StringRecparm  *parm)
 		{
-	register int c;
-	register int delim = *parm->endseq;
-	register int badch = *parm->badchar;
-	register int escape = *parm->escapechar;
+	int c;
+	int delim = *parm->endseq;
+	int badch = *parm->badchar;
+	int escape = *parm->escapechar;
 
 	if (parm->SaveText) {
 		(self)->StartToken();
@@ -476,11 +476,11 @@ ScanString(register class tlex  *self, struct tlex_StringRecparm  *parm)
 	at completion, currpos is the char after endseq
 */
 	static int
-ScanComment(register class tlex  *self, struct tlex_CommentRecparm  *parm)
+ScanComment(class tlex  *self, struct tlex_CommentRecparm  *parm)
 		{
 	char *delim = parm->endseq;
-	register char *cx;
-	register int c, dfirst = *delim, dlen;
+	char *cx;
+	int c, dfirst = *delim, dlen;
 
 	/* at the bottom of each while loop, c is a char that did not match, 
 		but might start delim.  Because the delimiter must not have
@@ -557,8 +557,8 @@ ScanComment(register class tlex  *self, struct tlex_CommentRecparm  *parm)
 tlex::LexFunc(void *lexrock, void *yylval) {
 	class tlex *self = (class tlex *)lexrock;
 
-	register const struct tlex_tables *tab = self->lextab;
-	register int action;
+	const struct tlex_tables *tab = self->lextab;
+	int action;
 	const struct tlex_Recparm *parm;
 	int success;
 	char *tbuf;

@@ -136,12 +136,12 @@ charthst::SetDebug( boolean		        state )
   }
 
 class view *
-charthst::HitChart( register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks )
+charthst::HitChart( enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
         {
   class charthst *self=this;
-  register class view		     *hit;
+  class view		     *hit;
   static struct chart_item_shadow    *shadow;
-  register long			      delta;
+  long			      delta;
   static long			      initial_y, prior_y, y_offset,
 				      value, value_original;
   static char			      value_string[257], *name;
@@ -204,10 +204,10 @@ void
 charthst::DrawChart( )
     {
   class charthst *self=this;
-  register long			      left, width, top, height, i = 0,
+  long			      left, width, top, height, i = 0,
 				      count = (Data )->ItemCount( ),
 				      excess, fudge;
-  register struct chart_item_shadow  *shadow = ITEMS;
+  struct chart_item_shadow  *shadow = ITEMS;
 
   IN(charthst_DrawChart);
   width = (Width / ((count) ? count : 1)) - 1;
@@ -237,12 +237,12 @@ void
 charthst::PrintChart( )
     {
   class charthst *self=this;
-  register long			      i, left, top, width, height,
+  long			      i, left, top, width, height,
 				      count = (Data )->ItemCount( ),
 				      excess, fudge;
-  register struct chart_item_shadow  *shadow = ITEMS;
-  register struct aptv_path	     *path;
-  register struct aptv_point	     *path_point;
+  struct chart_item_shadow  *shadow = ITEMS;
+  struct aptv_path	     *path;
+  struct aptv_point	     *path_point;
 
   IN(charthst_PrintChart);
   path = (struct aptv_path *)

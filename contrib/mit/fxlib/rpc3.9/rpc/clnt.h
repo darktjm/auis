@@ -279,7 +279,7 @@ clnt_create(/*host, prog, vers, prot*/); /*
  *	struct sockaddr_in *raddr;
  *	u_long prog;
  *	u_long version;
- *	register int *sockp;
+ *	int *sockp;
  *	u_int sendsz;
  *	u_int recvsz;
  */

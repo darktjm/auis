@@ -119,9 +119,9 @@ reverse_DCT (decompress_info_ptr cinfo,
 	 * representation (if DCTELEM != JCOEF).  On 80x86 machines it also
 	 * brings the data back from FAR storage to NEAR storage.
 	 */
-	{ register JCOEFPTR elemptr = browptr[bi];
-	  register DCTELEM *localblkptr = block;
-	  register int elem = DCTSIZE2;
+	{ JCOEFPTR elemptr = browptr[bi];
+	  DCTELEM *localblkptr = block;
+	  int elem = DCTSIZE2;
 
 	  while (--elem >= 0)
 	    *localblkptr++ = (DCTELEM) *elemptr++;
@@ -137,14 +137,14 @@ reverse_DCT (decompress_info_ptr cinfo,
 	 * DCT/IDCT phase.  We use the sample_range_limit[] table to do this
 	 * quickly; the CENTERJSAMPLE offset is folded into table indexing.
 	 */
-	{ register JSAMPROW elemptr;
-	  register DCTELEM *localblkptr = block;
-	  register JSAMPLE *range_limit = cinfo->sample_range_limit +
+	{ JSAMPROW elemptr;
+	  DCTELEM *localblkptr = block;
+	  JSAMPLE *range_limit = cinfo->sample_range_limit +
 						CENTERJSAMPLE;
 #if DCTSIZE != 8
-	  register int elemc;
+	  int elemc;
 #endif
-	  register int elemr;
+	  int elemr;
 
 	  for (elemr = 0; elemr < DCTSIZE; elemr++) {
 	    elemptr = srowptr[elemr] + (bi * DCTSIZE);

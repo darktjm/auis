@@ -111,7 +111,7 @@ environment *quickAddView(text *self, long pos, const char *viewtype, compress *
 {
     viewref *newviewref=viewref::Create(viewtype, (dataobject *)compressobj);
     char c=TEXT_VIEWREFCHAR;
-    register environment *newenv, *root=self->rootEnvironment;
+    environment *newenv, *root=self->rootEnvironment;
 
     (newviewref)->AddObserver(self);
     (self)->AlwaysInsertCharacters(pos, &c, 1);

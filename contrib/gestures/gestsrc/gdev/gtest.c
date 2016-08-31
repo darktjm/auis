@@ -119,7 +119,7 @@ init()
 		GDEVsets("Xgeometry", r);
 
 	while((r = fetcharg('#')) != NULL) {
-		register char *p = strchr(r, '#');
+		char *p = strchr(r, '#');
 		if(p != NULL) {
 			*p++ = '\0';
 			if(isdigit(*p)) {

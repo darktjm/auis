@@ -429,11 +429,11 @@ static const char * const PSheader[] = {
 /*		instance methods				*/
 /****************************************************************/
 void 
-psview::Print(register FILE    *file, register const char	 *processor, register const char	 *format, register boolean  toplevel)
+psview::Print(FILE    *file, const char	 *processor, const char	 *format, boolean  toplevel)
 {
     class ps *psobj;
     class text *textobject;
-    register char *text;
+    char *text;
     const char * const *psx;
     /* char *line = (char *)malloc(BUFSIZ); */
     long c, pos = 0, textlength = 0;
@@ -499,7 +499,7 @@ void psview::PrintPSRect(FILE *file, long logwidth, long logheight, struct recta
 {
     class ps *psobj;
     class text *textobject;
-    register char *text;
+    char *text;
     const char * const *psx;
     /* char *line = (char *)malloc(BUFSIZ); */
     long c, pos = 0, textlength = 0;

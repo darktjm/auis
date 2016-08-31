@@ -35,7 +35,7 @@ ATK_IMPL("fad.H")
 /* *********
 struct fad *fad__NewData()
 {
-	register struct fad *np;
+	struct fad *np;
 	np = (struct fad *)malloc(sizeof(struct fad));
 	fad_InitData(np);
 	return(np);
@@ -58,7 +58,7 @@ static class fontdesc *my_DefineFont(const char  *fname)
 	}
 static struct fadvector *newvector(struct fadpoint  *p1,struct fadpoint  *p2)
 {
-	register struct fadvector *nv;
+	struct fadvector *nv;
 	nv = (struct fadvector *)malloc( sizeof(struct fadvector));
 	nv->p1 = p1;
 	nv->p2 = p2;
@@ -100,7 +100,7 @@ struct fadpoint *fad::newpoint(long  x,long  y)
 
 struct fad_frame *fad::newframe()
 {
-	register struct fad_frame *fp;
+	struct fad_frame *fp;
 	fp = (struct fad_frame *)malloc(sizeof(struct fad_frame));
 	fp->f = NULL;
 	fp->p = NULL;
@@ -144,7 +144,7 @@ void fad::SetName(char *name)
 }
 struct fadpoint *fad::setpoint(long  x,long  y,int  type,struct fad_frame  *f)
 {
-	register struct fadpoint *pt;
+	struct fadpoint *pt;
 	if((pt = f->p) == NULL){
 		if(type == OLD) return(NULL);
 		f->p = (this)->newpoint(x,y);
@@ -168,7 +168,7 @@ static boolean pointmatch(class fad  *self,struct fadpoint  *pt,long  x,long  y)
 	}
 struct fadvector *fad::setvector(struct fadpoint  *pp1,struct fadpoint  *pp2,struct fad_frame  *f)
 {
-	register struct fadvector *vec,*pv;
+	struct fadvector *vec,*pv;
 	vec = newvector(pp1,pp2);
 	if(f->v == NULL)
 		 f->v = vec;
@@ -180,7 +180,7 @@ struct fadvector *fad::setvector(struct fadpoint  *pp1,struct fadpoint  *pp2,str
 	}
 void fad::delvector(struct fad_frame  *f)
 {
-	register struct fadvector *vec,*pv;
+	struct fadvector *vec,*pv;
 	vec = NULL;
 	if(f == NULL) return;
 	pv = f->v;
@@ -220,7 +220,7 @@ short fad::iconnum(const char  *s)
 		
 void fad::freeframe(struct fad_frame  *ff)
 {
-	register struct fadpoint *pt,*nextpt;
+	struct fadpoint *pt,*nextpt;
 	struct fadvector *vv,*nextvv;
 	for(pt = ff->p;pt != NULL; pt = nextpt){
 		nextpt = pt->p;
@@ -369,7 +369,7 @@ fad::~fad()
 
 int fad::flipicons()
 {
-	register struct fadpoint *iip;
+	struct fadpoint *iip;
 	if(this->iconpointend == this->iconpoints) return(0);
 	if(this->iconpointnow == NULL
 		 || ++(this->iconpointnow) ==this->iconpointend )
@@ -387,7 +387,7 @@ int fad::flipicons()
 int
 fad::unflipicons()
 {
-	register struct fadpoint *iip;
+	struct fadpoint *iip;
 	if(this->iconpointend == this->iconpoints) return(0);
 	if(this->iconpointnow == NULL)
 			this->iconpointnow = this->iconpoints;

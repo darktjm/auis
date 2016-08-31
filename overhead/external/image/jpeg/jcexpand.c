@@ -27,10 +27,10 @@ edge_expand (compress_info_ptr cinfo,
 {
   /* Expand horizontally */
   if (input_cols < output_cols) {
-    register JSAMPROW ptr;
-    register JSAMPLE pixval;
-    register long count;
-    register int row;
+    JSAMPROW ptr;
+    JSAMPLE pixval;
+    long count;
+    int row;
     short ci;
     long numcols = output_cols - input_cols;
 
@@ -48,7 +48,7 @@ edge_expand (compress_info_ptr cinfo,
   /* This happens only once at the bottom of the image, */
   /* so it needn't be super-efficient */
   if (input_rows < output_rows) {
-    register int row;
+    int row;
     short ci;
     JSAMPARRAY this_component;
 

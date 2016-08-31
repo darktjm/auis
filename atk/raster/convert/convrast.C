@@ -111,7 +111,7 @@ ProcessPix(struct pixelimage *pix)
 	if ( ! rectangle_IsEmptyRect(&crop)) {
 		/* do the cropping by replacing the bits area of the pix  XXX */
 		long buf[1000];
-		register long row;
+		long row;
 
 		tix = new pixelimage;
 		(tix)->Resize(crop.width, crop.height);
@@ -356,7 +356,7 @@ ParseSwitches(int argc, char **argv)
 OpenInputFile()
 {
 	FILE *infile;
-	register int c;
+	int c;
 
 	if ( ! *inname)  
 		infile = stdin;

@@ -200,13 +200,13 @@ static const struct InsetS InsetTable[] = {
 
 /* append a string to a struct USString */
 #define SAPPEND(sptr, text)  \
-	{register char c; const char *tp = (text); while ((c = *(tp)++)) SCHAPP((sptr), c);}
+	{char c; const char *tp = (text); while ((c = *(tp)++)) SCHAPP((sptr), c);}
 
 /* SCHAPP appends a character to a struct USString */
 #define SCHAPP(sptr, ch) {  \
 	if ((sptr)->used >= (sptr)->avail)   \
 		schappend((sptr), (ch));          \
-	else {register char *where = &(sptr)->s[(sptr)->used++];   \
+	else {char *where = &(sptr)->s[(sptr)->used++];   \
 		*where++  = (ch);  *where = '\0';  }}
 
 /*  append a character to a struct USString
@@ -966,7 +966,7 @@ HandleClose(struct ScribeState *State, FILE *fPtr)
 UnScribe(int code, struct ScribeState **refstate, const char *text, int textlen, FILE *fileptr)
 {
    
-    register int Char;
+    int Char;
     struct ScribeState *MyState;
     int	ReadCount;
     int WriteCount;
@@ -1460,7 +1460,7 @@ UnScribeAbort(int code, struct ScribeState **refstate)
 PrintMaybeFoldQuotingFormatting(FILE *fp, const char *text, const char *format, int len, int DoFold)
 { 
     int whichformat;
-    register const char *s;
+    const char *s;
     int numWritten, WasNL, Buffered, Column, CurrentLineMax;
     char *newNL, oldC, BreakCode;
     char LineBuf[2*MAXLONGLINE + 10], *LBP;

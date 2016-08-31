@@ -465,7 +465,7 @@ void ezapp::ReadInitFile()
 static void GotoLine(class text  *text, class textview  *view, int  line)
 {
     int argument, pos, endpos;
-    register int count;
+    int count;
 
     pos = (text)->GetPosForLine( line);
     (view)->SetDotPosition( pos);
@@ -629,7 +629,7 @@ int ezapp::Run()
                 StartupError(errtext,errorMessage);
                 this->bufferp = NULL;
                 next = fileEntry->next;
-		if(fileEntry->newWindowProc)
+		if(fileEntry->newWindowProc && fileEntry->newWindowProc[0])
 		    free(fileEntry->newWindowProc);
                 free(fileEntry);
                 continue;
@@ -714,7 +714,7 @@ int ezapp::Run()
             StartupError(errtext,errorMessage);
         }
         next = fileEntry->next;
-	if(fileEntry->newWindowProc)
+	if(fileEntry->newWindowProc && fileEntry->newWindowProc[0])
 	    free(fileEntry->newWindowProc);
         free(fileEntry);
     }

@@ -539,7 +539,7 @@ static int suiteta_debug = 0;
 
 
 boolean
-suitetapp::ParseArgs( register int  argc, register const char  **argv )
+suitetapp::ParseArgs( int  argc, const char  **argv )
       {
   IN(suiteta_ParseArgs);
   (this)->application::ParseArgs( argc, argv);
@@ -559,8 +559,8 @@ suitetapp::Start( )
   {
   FILE *file;
   long id;
-  register class im *im;
-  register class frame *framep;
+  class im *im;
+  class frame *framep;
   static const char instructions[] = "Use the Buttons to step through the tests.";
 
   if(debug)
@@ -598,7 +598,7 @@ suitetapp::Start( )
 class view *
 Change_Test( class suitetapp  *self )
   {
-  register class suite *prior_suite = current_suite;
+  class suite *prior_suite = current_suite;
 
   apt_StartTimer;
   current_suite = suite::Create(test_suites[current_test], (long)self);

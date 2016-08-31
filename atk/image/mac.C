@@ -256,8 +256,8 @@ mac::Load( const char  *fullname, FILE  *fp )
   FILE *f;
   BYTE *pixptr, ch;
   int eof;
-  register int scanLine;
-  register unsigned int i, j, k;
+  int scanLine;
+  unsigned int i, j, k;
 
   if((f = fp) == 0) {
       if (! (f = fopen(fullname, "r"))) {

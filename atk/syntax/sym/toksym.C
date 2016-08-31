@@ -84,10 +84,10 @@ toksym::toksym()
 	returns buf 
 */
 	char *
-toksym::ToC(register class text  *t, register char  *buf , long  maxlen)
+toksym::ToC(class text  *t, char  *buf , long  maxlen)
 				{
-	register char *cx;
-	register long loc, len;
+	char *cx;
+	long loc, len;
 	cx = buf;
 	loc = this->loc;
 	len = this->len;

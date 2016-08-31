@@ -164,7 +164,7 @@ static boolean EnsureSize(class simpletext  *self, long  neededGap)
 
 static void MoveGap(class simpletext  *self, long  pos)
 {
-    register long amount;
+    long amount;
     char *s, *t;
 
     if (pos > self->lowSize) {
@@ -270,7 +270,7 @@ long simpletext::Read(FILE  *file, long  id)
 	    long len;
 	    long result;
 	    long pos;
-	    register unsigned char *p;
+	    unsigned char *p;
 
 	    /* Just in case you are passed a file that has already been read determine the current position, reseek to that position - this should clear out the data stored in the buffer - and then set length to the remaining part of the file. */
 
@@ -434,9 +434,9 @@ boolean simpletext::InsertCharacters(long  pos, const char  *str, long  len)
 
 void simpletext::AlwaysInsertCharacters(long  pos, const char  *str, long  len)
 {
-    register long i;
-    register const char *s;
-    register char *t;
+    long i;
+    const char *s;
+    char *t;
 
     if (len == 0)
 	return;
@@ -733,11 +733,11 @@ long simpletext::HandleCloseBrace(long  pos, FILE  *file)
 
 long simpletext::ReadSubString(long  pos, FILE  *file, boolean  quoteCharacters)
 {
-    register long c;
+    long c;
     long addedcharacters = 0;
     long keywordpos = 0;
-    register int addedspace = -1;
-    register long lastadd = -1;
+    int addedspace = -1;
+    long lastadd = -1;
     long endcount = 1;		/* Number of enddata markers to be 
 				encountered before completion
  */
@@ -973,10 +973,10 @@ boolean simpletext::CopyText(long  pos,class simpletext  *srctext,long  srcpos,l
 
 void simpletext::AlwaysCopyText(long  pos,class simpletext  *srctext,long  srcpos,long  len)
                     {
-    register long i;
-    register char *s;
-    register char *t;
-    register long remlen;
+    long i;
+    char *s;
+    char *t;
+    long remlen;
 
     if (len == 0)
 	return;
@@ -1020,8 +1020,8 @@ void simpletext::AlwaysCopyText(long  pos,class simpletext  *srctext,long  srcpo
 
 long simpletext::Index(long  pos,char  c,long  len)
 {
-    register long remlen = len;
-    register char *s, *fs;
+    long remlen = len;
+    char *s, *fs;
     if( len + pos > this->length || pos < 0) return EOF;
      
     if (pos < this->lowSize)  {
@@ -1044,8 +1044,8 @@ long simpletext::Index(long  pos,char  c,long  len)
 
 int simpletext::Strncmp(long  pos,const char  *str,long  len)
 {
-    register long remlen = len;
-    register char *s;
+    long remlen = len;
+    char *s;
     if( len + pos > this->length || pos < 0) return EOF;
       
     if (pos < this->lowSize)  {
@@ -1070,8 +1070,8 @@ int simpletext::Strncmp(long  pos,const char  *str,long  len)
 
 int simpletext::Textncmp(long  pos,class simpletext  *text,long  pos2,long  len)
 {
-    register long remlen = len;
-    register char *s;
+    long remlen = len;
+    char *s;
     if(text == NULL || len + pos > this->length || pos < 0 || pos2 < 0 || len+pos2 > text->length) return EOF;
 
     if (pos < this->lowSize)  {

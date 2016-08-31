@@ -53,7 +53,7 @@ AllocTran()
 
 Transformation
 IdentityTran(t)
-register Transformation t;
+Transformation t;
 {
 	t[0][0] = 1;	t[0][1] = 0;	t[0][2] = 0;
 	t[1][0] = 0;	t[1][1] = 1;	t[1][2] = 0;
@@ -63,7 +63,7 @@ register Transformation t;
 
 Transformation
 TranslateTran(t, x, y)
-register Transformation t;
+Transformation t;
 int x, y;
 {
 	t[0][0] = 1;	t[0][1] = 0;	t[0][2] = 0;
@@ -78,7 +78,7 @@ int x, y;
 
 Transformation
 RotateTran(t, theta)
-register Transformation t;
+Transformation t;
 int theta;
 {
 	double rad = (PI/180.0) * theta;
@@ -87,7 +87,7 @@ int theta;
 
 Transformation
 RotateCosSinTran(t, c, s)
-register Transformation t;
+Transformation t;
 double c, s;
 {
 	t[0][0] = c;	t[0][1] = s;	t[0][2] = 0;
@@ -98,7 +98,7 @@ double c, s;
 
 Transformation
 ScaleTran(t, dilation)
-register Transformation t;
+Transformation t;
 double dilation;
 {
 	t[0][0] = dilation; 	t[0][1] = 0; 		t[0][2] = 0;
@@ -110,7 +110,7 @@ double dilation;
 void
 ApplyTran(x, y, t, xp, yp)
 int x, y, *xp, *yp;
-register Transformation t;
+Transformation t;
 {
 	/* .5 for rounding */
 	if(xp)
@@ -121,7 +121,7 @@ register Transformation t;
 
 double
 TransScale(t)
-register Transformation t;
+Transformation t;
 {
 	static double last = -1, lastres = -1;
 	double d;

@@ -45,7 +45,7 @@ ATKdefineRegistry(typetext, text, NULL);
 
 long typetext::HandleKeyWord(long  pos, char  *keyword, FILE  *file  )
 {
-    register long c;
+    long c;
     if ((strcmp(keyword, "textdsversion") == 0) || 
 	(strcmp(keyword, "define") == 0) ||
 	(strcmp(keyword, "template") == 0) ){

@@ -257,7 +257,7 @@ static void Error4(const char  *msg , const char  *a , const char  *b , const ch
 static void Error5(const char  *msg , const char  *a , const char  *b , const char  *c , const char  *d , const char  *e );
 static void InitCharType ();
 static char * CollectWord(int  *len );
-static int IsReserved (register char *word );
+static int IsReserved (char *word );
 static char ScribeDelimiter(char *tc);
 static void SaveWhiteSpace();
 static boolean  OutputWhiteSpace();
@@ -269,7 +269,7 @@ static void DefineSheet();
 static void appendtobuf(char  *buf,long  buflen,boolean  doit);
 static void DoText();
 static void DoAt();
-static void OpenEnvt(register class style  *style , char endc , unsigned  closemode);
+static void OpenEnvt(class style  *style , char endc , unsigned  closemode);
 static void CloseEnvt(char c, char *word);
 static void ProcessLine(boolean  NextIsNewline);
 
@@ -399,8 +399,8 @@ InitCharType ()
 CollectWord(int  *len ) 
 	{
 	static char word[102];
-	register char c, *wx = word;
-	register int cnt = 100;
+	char c, *wx = word;
+	int cnt = 100;
 	SaveWhiteSpace();
 	c = nextch;
 	while (cnt-- && CharType[c]) {
@@ -413,9 +413,9 @@ CollectWord(int  *len )
 }
 
 	static int
-IsReserved (register char *word ) 
+IsReserved (char *word ) 
 	{
-	register int inx;
+	int inx;
 
 	if (*word >='a' && *word <= 'z') {
 		inx = ResInx[(unsigned char)(*word - 'a')] - 1;
@@ -441,8 +441,8 @@ ScribeDelimiter(char *tc)
 	static const char
 		left[]  = "{[(<\"`'",	/* at end, null is paired to blank*/
 		right[] = "}])>\"'' ";
-	register int endc;
-	register const char *pc = left;
+	int endc;
+	const char *pc = left;
 	SaveWhiteSpace();
 	*tc = nextch;
 	while (*pc && nextch != *pc) pc++;
@@ -626,8 +626,8 @@ DoText()
 		   Converts newlines and @word`s according to rules 
 		*/
 #define ouch(c)  (*op++ = c, DocPos++)
-	register int c;
-	register char *op, *ep;
+	int c;
+	char *op, *ep;
 	op = outp;
 	ep = &(buf[BUFSIZE-1024]);
 	endsp = 0;
@@ -652,7 +652,7 @@ DoText()
 			c = getnextch();
 			break;
 		case ' ': 
-			{register int nsp = 0;
+			{int nsp = 0;
 				do {
 					nsp++;
 					ouch(c);
@@ -663,7 +663,7 @@ DoText()
 				else if (nsp>2) {
 					/*  >2  spaces.  count it as embedded white
 					   space unless it follows a "sentence" end */
-					register char *p = op-nsp-1;
+					char *p = op-nsp-1;
 					if (*p == '"' || *p == ')') p--;
 					switch (*p) {
 						case '.': case ';': 
@@ -740,7 +740,7 @@ DoText()
 DoAt()
 {
 	class style *stylep;
-	register char *word, endc;
+	char *word, endc;
 	char tc;
 	int len,code;
 	const char *subobjtype;
@@ -1041,7 +1041,7 @@ DoAt()
 }
 
 	static void
-OpenEnvt(register class style  *style , char endc , unsigned  closemode) 
+OpenEnvt(class style  *style , char endc , unsigned  closemode) 
 			{
 	struct stylemap *map;
 	scribeEnd[++endsp] = endc;
@@ -1119,7 +1119,7 @@ ProcessLine(boolean  NextIsNewline)
 				InsertString of text into output
 				set buf[0] for next line
 	*/
-	register char *cx;
+	char *cx;
 	boolean TabOnlyAtEnd = FALSE;  /* true for line with 
 				EmbeddedWhiteSpace==1 and last char =='\t' 
 				(This catches the mail kludge of using
@@ -1180,7 +1180,7 @@ ProcessLine(boolean  NextIsNewline)
 				punct ["] space* => punct ["] space
 				non-punct space space* => non-punct space* 
 				An additional space will occur from \n */
-		register int havespace = outp-cx-1;
+		int havespace = outp-cx-1;
 		if ((*cx=='"' || *cx==')') && cx>buf) cx--;
 		if (*cx=='.'||*cx=='!'||*cx==';'||*cx==':'||*cx=='?') {
 			if (havespace<1) pout(' ');

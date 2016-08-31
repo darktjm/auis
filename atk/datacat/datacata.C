@@ -243,7 +243,7 @@ boolean datacata::ParseArgs (int  argc, const char  **argv)
  The procedure is to call BeginRun(), then AddFile() for each file, then FinishRun().
  */
 {
-    register int i;
+    int i;
 
     /* initialize as if ez */
     ((class application * )this)->name = "ez";

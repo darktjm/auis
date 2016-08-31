@@ -53,9 +53,9 @@ static const int dmsize[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 time_t gtime(struct tm *ct)
 {
     time_t copyt;
-    register int day;
-    register int month;
-    register int year;
+    int day;
+    int month;
+    int year;
     static int init = 0;
 
     /* this part is the inverse of gmtime */

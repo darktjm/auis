@@ -421,7 +421,7 @@ static char *ClassifyFv()
 
 static char *ClassifyVector(Vector  y)
      {
-  register sClassDope cd;
+  sClassDope cd;
   
   cd = sClassify(fullclassifier, y);
   if(cd == NULL) {

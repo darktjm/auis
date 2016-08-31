@@ -50,11 +50,11 @@
 */
 
 char *FormatFontname (n)
-register struct FontName  *n;
+struct FontName  *n;
 {
    static char buf[128];
    char  rbuf[5];
-   register char *p;
+   char *p;
 
    /* first create the rotation substring */
    if (n->rotation)
@@ -93,11 +93,11 @@ register struct FontName  *n;
 */
 
 parsefname(FileName, Fontname)
-register char *FileName;
-register struct FontName  *Fontname;
+char *FileName;
+struct FontName  *Fontname;
 {
-   register char *p;
-   register int   i;
+   char *p;
+   int   i;
    int   err = 0;
 
    /* strip off Family Name (e.g. TimesRoman); copy to struct */

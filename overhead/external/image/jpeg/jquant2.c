@@ -124,9 +124,9 @@ METHODDEF void
 color_quant_prescan (decompress_info_ptr cinfo, int num_rows,
 		     JSAMPIMAGE image_data, JSAMPARRAY workspace)
 {
-  register JSAMPROW ptr0, ptr1, ptr2;
-  register histptr histp;
-  register int c0, c1, c2;
+  JSAMPROW ptr0, ptr1, ptr2;
+  histptr histp;
+  int c0, c1, c2;
   int row;
   long col;
   long width = cinfo->image_width;
@@ -178,9 +178,9 @@ find_biggest_color_pop (void)
 /* Find the splittable box with the largest color population */
 /* Returns NULL if no splittable boxes remain */
 {
-  register boxptr boxp;
-  register int i;
-  register long max = 0;
+  boxptr boxp;
+  int i;
+  long max = 0;
   boxptr which = NULL;
   
   for (i = 0, boxp = boxlist; i < numboxes; i++, boxp++) {
@@ -201,10 +201,10 @@ find_biggest_volume (void)
 /* Find the splittable box with the largest (scaled) volume */
 /* Returns NULL if no splittable boxes remain */
 {
-  register boxptr boxp;
-  register int i;
-  register INT32 max = 0;
-  register INT32 norm, c0,c1,c2;
+  boxptr boxp;
+  int i;
+  INT32 max = 0;
+  INT32 norm, c0,c1,c2;
   boxptr which = NULL;
   
   /* We use 2-norm rather than real volume here.
@@ -331,7 +331,7 @@ median_cut (int desired_colors)
 {
   int n,lb;
   int c0,c1,c2,cmax;
-  register boxptr b1,b2;
+  boxptr b1,b2;
 
   while (numboxes < desired_colors) {
     /* Select box to split */
@@ -705,12 +705,12 @@ find_best_colors (decompress_info_ptr cinfo, int minc0, int minc1, int minc2,
 {
   int ic0, ic1, ic2;
   int i, icolor;
-  register INT32 * bptr;	/* pointer into bestdist[] array */
+  INT32 * bptr;	/* pointer into bestdist[] array */
   JSAMPLE * cptr;		/* pointer into bestcolor[] array */
   INT32 dist0, dist1;		/* initial distance values */
-  register INT32 dist2;		/* current distance in inner loop */
+  INT32 dist2;		/* current distance in inner loop */
   INT32 xx0, xx1;		/* distance increments */
-  register INT32 xx2;
+  INT32 xx2;
   INT32 inc0, inc1, inc2;	/* initial values for increments */
   /* This array holds the distance to the nearest-so-far color for each cell */
   INT32 bestdist[BOX_Y_ELEMS * BOX_C_ELEMS * BOX_C_ELEMS];
@@ -781,8 +781,8 @@ fill_inverse_cmap (decompress_info_ptr cinfo, int c0, int c1, int c2)
 {
   int minc0, minc1, minc2;	/* lower left corner of update box */
   int ic0, ic1, ic2;
-  register JSAMPLE * cptr;	/* pointer into bestcolor[] array */
-  register histptr cachep;	/* pointer into main cache array */
+  JSAMPLE * cptr;	/* pointer into bestcolor[] array */
+  histptr cachep;	/* pointer into main cache array */
   /* This array lists the candidate colormap indexes. */
   JSAMPLE colorlist[MAXNUMCOLORS];
   int numcolors;		/* number of candidate colors */
@@ -841,9 +841,9 @@ pass2_nodither (decompress_info_ptr cinfo, int num_rows,
 		JSAMPIMAGE image_data, JSAMPARRAY output_workspace)
 /* This version performs no dithering */
 {
-  register JSAMPROW ptr0, ptr1, ptr2, outptr;
-  register histptr cachep;
-  register int c0, c1, c2;
+  JSAMPROW ptr0, ptr1, ptr2, outptr;
+  histptr cachep;
+  int c0, c1, c2;
   int row;
   long col;
   long width = cinfo->image_width;
@@ -914,16 +914,16 @@ pass2_dither (decompress_info_ptr cinfo, int num_rows,
 /* This version performs Floyd-Steinberg dithering */
 {
 #ifdef EIGHT_BIT_SAMPLES
-  register int c0, c1, c2;
+  int c0, c1, c2;
   int two_val;
 #else
-  register FSERROR c0, c1, c2;
+  FSERROR c0, c1, c2;
   FSERROR two_val;
 #endif
-  register FSERRPTR thisrowerr, nextrowerr;
+  FSERRPTR thisrowerr, nextrowerr;
   JSAMPROW ptr0, ptr1, ptr2, outptr;
   histptr cachep;
-  register int pixcode;
+  int pixcode;
   int dir;
   int row;
   long col;

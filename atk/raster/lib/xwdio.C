@@ -55,8 +55,8 @@ ATK_IMPL("xwdio.H")
 
 ATKdefineRegistry(xwdio, ATK, NULL);
 static void reverse_video(unsigned char *location , unsigned char *output, long  nbytes);
-static void _swapshort (register char  *bp, register unsigned  n);
-static void _swaplong (register char  *bp, register unsigned  n);
+static void _swapshort (char  *bp, unsigned  n);
+static void _swaplong (char  *bp, unsigned  n);
 static void reverse_bit_order(unsigned char *location , unsigned char *output, long  nbytes);
 static void pixmap_to_bitmap(unsigned char *location , unsigned char *output, long  nbytes);
 static unsigned int tone_scale_adjust(unsigned int val);
@@ -214,10 +214,10 @@ void xwdio::WriteRow(FILE  *file, unsigned char *row, long  nbytes)
 
 }
 
-static void _swapshort (register char  *bp, register unsigned  n)
+static void _swapshort (char  *bp, unsigned  n)
           {
-  register char c;
-  register char *ep = bp + n;
+  char c;
+  char *ep = bp + n;
   
   while (bp < ep) 
     {
@@ -228,11 +228,11 @@ static void _swapshort (register char  *bp, register unsigned  n)
     }
 }
 
-static void _swaplong (register char  *bp, register unsigned  n)
+static void _swaplong (char  *bp, unsigned  n)
 {
-    register char c;
-    register char *ep = bp + n;
-    register char *sp;
+    char c;
+    char *ep = bp + n;
+    char *sp;
 
     while (bp < ep) 
     {
@@ -451,7 +451,7 @@ long xwdio::ReadImage(FILE  *file		, class pixelimage  *pix	)
     return dataobject_NOREADERROR;
 }
 
-void xwdio::WriteImage(register FILE  *file		, register class pixelimage  *pix, register struct rectangle  *sub)
+void xwdio::WriteImage(FILE  *file		, class pixelimage  *pix, struct rectangle  *sub)
 
 {
     long left, top, width, height;
@@ -558,7 +558,7 @@ void xwdio::WriteImage(register FILE  *file		, register class pixelimage  *pix, 
 
 static void pixmap_to_bitmap(unsigned char *location , unsigned char *output, long  nbytes)
 {
-  register int x, c, b;
+  int x, c, b;
 
 /* Simple method: take each byte (which represents a pixel), and convert 
  it to a 0 if it is 0 or a 1 if it is any othre value, and make one byte out

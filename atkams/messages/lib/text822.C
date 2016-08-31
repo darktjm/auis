@@ -934,7 +934,7 @@ long text822::Write(FILE  *fp, long  writeID, int  level)
 
 static void RotateThirteen(class text  *d, int  start)
 {
-    register char *cp,*ecp;
+    char *cp,*ecp;
     long len, lengotten;
     char *tbuf;
 

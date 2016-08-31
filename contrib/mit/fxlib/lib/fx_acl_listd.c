@@ -43,7 +43,7 @@ void
 fx_acl_list_destroy(list)
      stringlist_res **list;
 {
-  register stringlist node;
+  stringlist node;
 
   if (list && *list) {
 

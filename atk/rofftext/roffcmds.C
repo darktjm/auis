@@ -105,7 +105,7 @@ void ev_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
  */
 void ds_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[])
 {
-    register int c;
+    int c;
     static BUF b = NULL;
     char name[3];
     boolean tmp = self->v_CopyMode;
@@ -141,7 +141,7 @@ void ds_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 /*  append to string */
 void as_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[])
 {
-    register int c;
+    int c;
     static BUF b = NULL;
     char name[3];
     const char *init;
@@ -984,7 +984,7 @@ void PA_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 
 void tl_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[])
 {
-    register int c,style;
+    int c,style;
     char *str,*string1=NULL,*string2=NULL,*string3=NULL,*end=NULL;
     int tmp = self->CurrentDiversion->OutputDone;
     static BUF b = NULL;
@@ -1324,7 +1324,7 @@ void ig_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 /* translate characters  - special syntax */
 void tr_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[])
 {
-    register int c;
+    int c;
     unsigned char source,new_c;
     char temp[3],name[3];
 

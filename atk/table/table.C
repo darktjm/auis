@@ -64,11 +64,11 @@ boolean table::InitializeClass()
 ATKdefineRegistry(table, dataobject, table::InitializeClass);
 void IgnoreObserved(class table  *T);
 static char * myrealloc (char  * s, int  n);
-static void CreateCell (register class table  *T, struct cell  *newcell , struct cell  *oldcell);
+static void CreateCell (class table  *T, struct cell  *newcell , struct cell  *oldcell);
 void RemoveCellView(class table  *T,struct cell  *c,class view  *v);
-void DestroyCell(register class table  *T, struct cell  *oldcell);
-void rangeLimit (register class table  * T, Chunk  chunk);
-void rcref (register class table  * T, register extended_double  *result, int      r , int      c , int      iftaped);
+void DestroyCell(class table  *T, struct cell  *oldcell);
+void rangeLimit (class table  * T, Chunk  chunk);
+void rcref (class table  * T, extended_double  *result, int      r , int      c , int      iftaped);
 void MakeStandard(extended_double  *x, double  value);
 void MakeBogus(extended_double  *x, const char  *message);
 
@@ -133,7 +133,7 @@ table::~table ()
 {
 	ATKinit;
 
-    register class table * S;
+    class table * S;
     
     if (table_debug)
 	printf("table_FinalizeObject(%s)\n", (this)->Name());
@@ -225,7 +225,7 @@ class table *table::FindName (const char  * name)
 
 class table * table::SetName (const char  * name)
 {
-    register class table * S;
+    class table * S;
 
     if (table_debug)
 	printf("table_SetName(%s, %s)\n", (this)->Name(), name);
@@ -384,7 +384,7 @@ void table::ChangeSize (int  nrows , int  ncols)
 
 class table * table::ExtractData (Chunk  chunk)
 {
-    register class table * S = new table;
+    class table * S = new table;
     int r0, c0, nrows, ncols;
     int     r, c;
 
@@ -431,7 +431,7 @@ class table * table::ExtractData (Chunk  chunk)
 
 /* insert chunk of table */
 
-void table::InsertData (register class table  * T, Chunk  chunk)
+void table::InsertData (class table  * T, Chunk  chunk)
 {
     int r0, c0;
     int r1, c1;
@@ -614,7 +614,7 @@ void table::ParseCell(struct cell  * cell, char  *buff)
 /* create and copy a cell */
 
 
-static void CreateCell (register class table  *T, struct cell  *newcell , struct cell  *oldcell)
+static void CreateCell (class table  *T, struct cell  *newcell , struct cell  *oldcell)
 {
     if (oldcell) {
 	newcell->format = oldcell->format;
@@ -701,7 +701,7 @@ void table::RemoveViewFromTable(class view  *v)
 
 /* delete a cell */
 
-void DestroyCell(register class table  *T, struct cell  *oldcell)
+void DestroyCell(class table  *T, struct cell  *oldcell)
 {
     struct viewlist *vl;
 
@@ -867,7 +867,7 @@ void table::SetBoundary (Chunk  chunk, Color  color)
     (this)->SetModified();
 }
 
-void rangeLimit (register class table  * T, Chunk  chunk)
+void rangeLimit (class table  * T, Chunk  chunk)
 {
     if (chunk->TopRow < 1) chunk->TopRow = 1;
     if (chunk->BotRow > (T)->NumberOfRows()) chunk->BotRow = (T)->NumberOfRows();
@@ -894,7 +894,7 @@ void table::ReEval (int      r , int      c)
     return;
 }
 
-void rcref (register class table  * T, register extended_double  *result, int      r , int      c , int      iftaped)
+void rcref (class table  * T, extended_double  *result, int      r , int      c , int      iftaped)
 {
     struct cell * cell;
 

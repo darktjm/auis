@@ -84,7 +84,7 @@ static const char RPCDB[] = "/etc/rpc";
 static struct rpcdata *
 _rpcdata()
 {
-	register struct rpcdata *d = rpcdata;
+	struct rpcdata *d = rpcdata;
 
 	if (d == 0) {
 		d = (struct rpcdata *)calloc(1, sizeof (struct rpcdata));
@@ -95,10 +95,10 @@ _rpcdata()
 
 struct rpcent *
 getrpcbynumber(number)
-	register int number;
+	int number;
 {
-	register struct rpcdata *d = _rpcdata();
-	register struct rpcent *p;
+	struct rpcdata *d = _rpcdata();
+	struct rpcent *p;
 	int reason;
 	char adrstr[10], *val = NULL;
 	int vallen;
@@ -137,7 +137,7 @@ getrpcbyname(name)
 setrpcent(f)
 	int f;
 {
-	register struct rpcdata *d = _rpcdata();
+	struct rpcdata *d = _rpcdata();
 
 	if (d == 0)
 		return;
@@ -153,7 +153,7 @@ setrpcent(f)
 
 endrpcent()
 {
-	register struct rpcdata *d = _rpcdata();
+	struct rpcdata *d = _rpcdata();
 
 	if (d == 0)
 		return;
@@ -174,7 +174,7 @@ getrpcent()
 	int reason;
 	char *key = NULL, *val = NULL;
 	int keylen, vallen;
-	register struct rpcdata *d = _rpcdata();
+	struct rpcdata *d = _rpcdata();
 
 	if (d == 0)
 		return;
@@ -188,9 +188,9 @@ getrpcent()
 static struct rpcent *
 interpret(val, len)
 {
-	register struct rpcdata *d = _rpcdata();
+	struct rpcdata *d = _rpcdata();
 	char *p;
-	register char *cp, **q;
+	char *cp, **q;
 
 	if (d == 0)
 		return;

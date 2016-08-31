@@ -63,18 +63,18 @@ ATK_IMPL("lpair.H")
 
 ATKdefineRegistry(lpair, view, NULL);
 static void DoFullUpdate(class lpair  *self, enum view_UpdateType  type, struct rectangle  *redrawRectangle);
-static void lpair_ComputeSizesFromTotal (register class lpair  *l, int	 totalsize);
-static void lpair_ComputeSizes (register class lpair  *l);
-static void lpair_ResetDimensions(register class lpair  *self);
+static void lpair_ComputeSizesFromTotal (class lpair  *l, int	 totalsize);
+static void lpair_ComputeSizes (class lpair  *l);
+static void lpair_ResetDimensions(class lpair  *self);
 
 
 static void DoFullUpdate(class lpair  *self, enum view_UpdateType  type, struct rectangle  *redrawRectangle)
 {
 	/*  All this code needs changed */
-	register int	x, y;
+	int	x, y;
 	int	offset; /* Used to get the bar line in the right place. */
-	register class view *leftTopObject = self->obj[0];
-	register class view *rightBottomObject = self->obj[1];
+	class view *leftTopObject = self->obj[0];
+	class view *rightBottomObject = self->obj[1];
 	struct rectangle childRectangle;
 
 	self->needsfull = 0;
@@ -215,7 +215,7 @@ void lpair::FullUpdate(enum view_UpdateType  type, long	 left, long	 top, long	 
 class view *lpair::Hit(enum view_MouseAction  action, long	 x , long	 y, long	 numberOfClicks)
 {
 
-	register long	dim;
+	long	dim;
 
 	if (this->typex == lpair_VERTICAL) {
 		dim = x;
@@ -367,7 +367,7 @@ view_DSattributes lpair::DesiredSize(long	 width , long	 height, enum view_DSpas
 }
 
 
-static void lpair_ComputeSizesFromTotal (register class lpair  *l, int	 totalsize)
+static void lpair_ComputeSizesFromTotal (class lpair  *l, int	 totalsize)
 {
 	int	i = 0;
 
@@ -395,7 +395,7 @@ static void lpair_ComputeSizesFromTotal (register class lpair  *l, int	 totalsiz
 }
 
 
-static void lpair_ComputeSizes (register class lpair  *l)
+static void lpair_ComputeSizes (class lpair  *l)
 {
 
 	int	totalsize;
@@ -415,11 +415,11 @@ static void lpair_ComputeSizes (register class lpair  *l)
 }
 
 
-static void lpair_ResetDimensions(register class lpair  *self)
+static void lpair_ResetDimensions(class lpair  *self)
 {
 
-	register int	i, x, y;
-	register class view *child;
+	int	i, x, y;
+	class view *child;
 	struct rectangle enclosingRect;
 
 	x = 0; 
@@ -610,7 +610,7 @@ class view *lpair::GetNth(int	 ai)
 }
 
 
-void lpair::SetNth(int	 ai, register class view  *x)
+void lpair::SetNth(int	 ai, class view  *x)
 {
 
 	if (ai >= 0 && ai <= 1 && this->obj[ai] != x) {
@@ -733,8 +733,8 @@ void lpair::RecSrchExpose(const struct rectangle &logical,struct rectangle &hit)
     v = this->GetNth(this->recsearchchild);
     lpair_ComputeSizesFromTotal(this, (typex==lpair_VERTICAL)?logical.width:logical.height);
 
-    register int	i, x, y;
-    register class view *child;
+    int	i, x, y;
+    class view *child;
     struct rectangle enclosingRect;
 
     x = 0; 

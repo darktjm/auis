@@ -87,19 +87,19 @@ END-SPECIFICATION  ************************************************************/
 #define  PaneRight		      ((self)->Pane_Right(  pane ))
 
 
-static int Show_Pane( register class zipview		  *self, register zip_type_pane		   pane, register long				   action );
-static int Pane_Suite_Member( register class zipview		  *self, register zip_type_pane		   major_pane, register zip_type_pane		   candidate_pane );
-static int Draw_Auxiliary_Streams( register class zipview		  *self, register zip_type_pane		   pane );
-void zipview_Draw_Pane_Border( register class zipview		  *self, register zip_type_pane		   pane );
-int zipview_Preserve_Overlay( register class zipview		  *self, register zip_type_pane		   pane );
-int zipview_Restore_Overlay( register class zipview		  *self, register zip_type_pane		   pane );
+static int Show_Pane( class zipview		  *self, zip_type_pane		   pane, long				   action );
+static int Pane_Suite_Member( class zipview		  *self, zip_type_pane		   major_pane, zip_type_pane		   candidate_pane );
+static int Draw_Auxiliary_Streams( class zipview		  *self, zip_type_pane		   pane );
+void zipview_Draw_Pane_Border( class zipview		  *self, zip_type_pane		   pane );
+int zipview_Preserve_Overlay( class zipview		  *self, zip_type_pane		   pane );
+int zipview_Restore_Overlay( class zipview		  *self, zip_type_pane		   pane );
 
-extern void zipview_Compute_Pane_Stretch_Factors( register class zipview      *self, register zip_type_pane             pane );
+extern void zipview_Compute_Pane_Stretch_Factors( class zipview      *self, zip_type_pane             pane );
 
 long
-zipview::Display_Pane( register zip_type_pane		   pane )
+zipview::Display_Pane( zip_type_pane		   pane )
       {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
   class zipview *self=this;
 
   IN(zipview_Display_Pane);
@@ -120,9 +120,9 @@ zipview::Display_Pane( register zip_type_pane		   pane )
   }
 
 long
-zipview::Draw_Pane( register zip_type_pane		   pane )
+zipview::Draw_Pane( zip_type_pane		   pane )
       {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
   class zipview *self=this;
 
   IN(zipview_Draw_Pane);
@@ -137,12 +137,12 @@ zipview::Draw_Pane( register zip_type_pane		   pane )
   return status;
   }
 
-extern void zipview_Mark_Pane_Exposed( register class zipview                 *self, register zip_type_pane             pane );
+extern void zipview_Mark_Pane_Exposed( class zipview                 *self, zip_type_pane             pane );
 
 static int
-Show_Pane( register class zipview		  *self, register zip_type_pane		   pane, register long				   action )
+Show_Pane( class zipview		  *self, zip_type_pane		   pane, long				   action )
         {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
 
   IN(Show_Pane);
   zipview_Mark_Pane_Exposed( self, pane );
@@ -206,14 +206,14 @@ Show_Pane( register class zipview		  *self, register zip_type_pane		   pane, reg
   }
 
 
-extern long zipview_Recoordinate_Panes( register class zipview                *self );
+extern long zipview_Recoordinate_Panes( class zipview                *self );
 
 long
 zipview::Redisplay_Panes( )
     {
   class zipview *self=this;
-  register int				  status = zip_ok;
-  register zip_type_pane_chain		  pane_link = PaneAnchor;
+  int				  status = zip_ok;
+  zip_type_pane_chain		  pane_link = PaneAnchor;
 
   IN(zipview_Redisplay_Panes);
   status = zipview_Recoordinate_Panes( self );
@@ -237,8 +237,8 @@ long
 zipview::Redraw_Panes( )
     {
   class zipview *self=this;
-  register int				  status = zip_ok;
-  register zip_type_pane_chain		  pane_link =
+  int				  status = zip_ok;
+  zip_type_pane_chain		  pane_link =
 			    PaneAnchor;
 
   IN(zipview_Redraw_Panes);
@@ -260,11 +260,11 @@ zipview::Redraw_Panes( )
   }
 
 long
-zipview::Redisplay_Pane_Suite( register zip_type_pane		   pane )
+zipview::Redisplay_Pane_Suite( zip_type_pane		   pane )
       {
   class zipview *self=this;
-  register int				  status = zip_ok;
-  register zip_type_pane_chain		  pane_link =
+  int				  status = zip_ok;
+  zip_type_pane_chain		  pane_link =
 			    PaneAnchor;
 
   IN(zipview_Redisplay_Pane_Suite);
@@ -285,11 +285,11 @@ zipview::Redisplay_Pane_Suite( register zip_type_pane		   pane )
   }
 
 long
-zipview::Redraw_Pane_Suite( register zip_type_pane		   pane )
+zipview::Redraw_Pane_Suite( zip_type_pane		   pane )
       {
   class zipview *self=this;
-  register int				  status = zip_ok;
-  register zip_type_pane_chain		  pane_link = PaneAnchor;
+  int				  status = zip_ok;
+  zip_type_pane_chain		  pane_link = PaneAnchor;
 
   IN(zipview_Redraw_Pane_Suite);
   zipview_Recoordinate_Panes( self );
@@ -309,10 +309,10 @@ zipview::Redraw_Pane_Suite( register zip_type_pane		   pane )
   }
 
 static int
-Pane_Suite_Member( register class zipview		  *self, register zip_type_pane		   major_pane, register zip_type_pane		   candidate_pane )
+Pane_Suite_Member( class zipview		  *self, zip_type_pane		   major_pane, zip_type_pane		   candidate_pane )
         {
-  register int				  status = false;
-  register zip_type_pane		  superior_pane;
+  int				  status = false;
+  zip_type_pane		  superior_pane;
 
   IN(Pane_Suite_Member);
   if ( candidate_pane == major_pane  &&
@@ -349,10 +349,10 @@ Pane_Suite_Member( register class zipview		  *self, register zip_type_pane		   m
   }
 
 static int
-Draw_Auxiliary_Streams( register class zipview		  *self, register zip_type_pane		   pane )
+Draw_Auxiliary_Streams( class zipview		  *self, zip_type_pane		   pane )
       {
-  register int				  status = zip_ok;
-  register zip_type_pane_auxiliary_stream ptr;
+  int				  status = zip_ok;
+  zip_type_pane_auxiliary_stream ptr;
 
   IN(Draw_Auxiliary_Streams);
   if ( pane->zip_pane_auxiliary_stream )
@@ -380,14 +380,14 @@ Draw_Auxiliary_Streams( register class zipview		  *self, register zip_type_pane	
   return status;
   }
 
-void zipview_Draw_Pane_Border( register class zipview		  *self, register zip_type_pane		   pane )
+void zipview_Draw_Pane_Border( class zipview		  *self, zip_type_pane		   pane )
       {
-  register class graphic		 *graphic;
-  register int				  thickness =
+  class graphic		 *graphic;
+  int				  thickness =
 				    pane->zip_pane_border_thickness;
-  register short		          font = 
+  short		          font = 
 				    pane->zip_pane_border_font;
-  register char				  pattern =
+  char				  pattern =
 				    pane->zip_pane_border_pattern;
 
   IN(zipview_Draw_Pane_Border);
@@ -451,12 +451,12 @@ void zipview_Draw_Pane_Border( register class zipview		  *self, register zip_typ
   }
 
 
-extern void zipview_Mark_Pane_Hidden( register class zipview           *self, register zip_type_pane            pane );
+extern void zipview_Mark_Pane_Hidden( class zipview           *self, zip_type_pane            pane );
 
 long
-zipview::Hide_Pane( register zip_type_pane		   pane )
+zipview::Hide_Pane( zip_type_pane		   pane )
       {
-  register int						  status = zip_ok;
+  int						  status = zip_ok;
   class zipview *self=this;
 
   IN(zipview_Hide_Pane);
@@ -502,9 +502,9 @@ zipview::Hide_Pane( register zip_type_pane		   pane )
   }
 
 long
-zipview::Expose_Pane( register zip_type_pane		   pane )
+zipview::Expose_Pane( zip_type_pane		   pane )
       {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
   class zipview *self=this;
 
   IN(zipview_Expose_Pane);
@@ -532,7 +532,7 @@ zipview::Expose_Pane( register zip_type_pane		   pane )
   }
 
 int
-zipview_Preserve_Overlay( register class zipview		  *self, register zip_type_pane		   pane )
+zipview_Preserve_Overlay( class zipview		  *self, zip_type_pane		   pane )
 {
     IN(zipview_Preserve_Overlay);
     /*===
@@ -558,7 +558,7 @@ zipview_Preserve_Overlay( register class zipview		  *self, register zip_type_pan
 
 
 int
-zipview_Restore_Overlay( register class zipview		  *self, register zip_type_pane		   pane )
+zipview_Restore_Overlay( class zipview		  *self, zip_type_pane		   pane )
 {
     IN(zipview_Restore_Overlay);
     /*===

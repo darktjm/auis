@@ -40,7 +40,7 @@ extern caddr_t	malloc();
 */
 void
 l_free(lp)
-register struct llist *lp;
+struct llist *lp;
 {
 	if (lp->l_next == NULL)
 		return;
@@ -54,9 +54,9 @@ register struct llist *lp;
 */
 struct llist *
 l_alloc(lp, s, len)
-register struct llist	*lp;
+struct llist	*lp;
 caddr_t	*s;
-register unsigned len;
+unsigned len;
 {
 	if (s == NULL || lp == NULL)
 		return(NULL);

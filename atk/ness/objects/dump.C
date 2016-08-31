@@ -89,7 +89,7 @@ log elided June 93   -wjh
 
 static void printstaddr(FILE  *f, union stackelement  *a, union stackelement  *NSP);
 void dumpStack(FILE  *f, union stackelement  *NSP);
-static void  PrintFromTbl(FILE  *file, register class simpletext  *text, register long  i, const struct srchtblelt  *Tbl);
+static void  PrintFromTbl(FILE  *file, class simpletext  *text, long  i, const struct srchtblelt  *Tbl);
 static void PrintChar(class simpletext  *text, long  j, FILE  *f);
 void dumpObjectCode(FILE  *file, long  offset);
 void dumpFuncDef(FILE  *file, class nesssym  *f);
@@ -442,10 +442,10 @@ cheatTbl[] = {
 };
 
 	static void 
-PrintFromTbl(FILE  *file, register class simpletext  *text, register long  i, 
+PrintFromTbl(FILE  *file, class simpletext  *text, long  i, 
 		const struct srchtblelt  *Tbl) {
-	register char c = (char)(text)->GetUnsignedChar( i);
-	register const struct srchtblelt *e;
+	char c = (char)(text)->GetUnsignedChar( i);
+	const struct srchtblelt *e;
 	for (e = Tbl; e->code && e->code != c; e++) {}
 	fprintf(file, "%s", e->name);
 }
@@ -456,7 +456,7 @@ PrintFromTbl(FILE  *file, register class simpletext  *text, register long  i,
 */
 	static void
 PrintChar(class simpletext  *text, long  j, FILE  *f) {
-	register long ic = (text)->GetUnsignedChar(j);
+	long ic = (text)->GetUnsignedChar(j);
 	if (ic < ' ') putc('^', f),  putc(ic+'@', f);
 	else if (ic < '\177') putc (ic, f);
 	else fprintf (f, "\\%03lo", ic);
@@ -469,9 +469,9 @@ PrintChar(class simpletext  *text, long  j, FILE  *f) {
 */
 	void
 dumpObjectCode(FILE  *file, long  offset) {
-	register long i, end;
+	long i, end;
 	long start;
-	register class simpletext *text;
+	class simpletext *text;
 	long sylcnt;	/* count syllables printed on each line */
 	class nessmark *m = ness_Globals[offset].e.s.v;
 

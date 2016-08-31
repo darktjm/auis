@@ -138,7 +138,7 @@ static int ColCount;				/* current column */
 
 ATKdefineRegistry(img, image, NULL);
 static int IMG_ReadHeader (FILE       *f,IMG_Header  *h);
-static void IMG_WriteByte (unsigned char c,register int  cols,unsigned int bpl);
+static void IMG_WriteByte (unsigned char c,int  cols,unsigned int bpl);
 
 
 int 
@@ -173,7 +173,7 @@ img::Ident( const char  *fullname)
 int
 img::Load ( const char  *fullname, FILE  *fp )
             {
-	register int i;				/* Random index */
+	int i;				/* Random index */
 	FILE *f;				/* Input file */
 	short creps;				/* Repetition counter */
 	short ictr;				/* Secondary index counter */
@@ -288,8 +288,8 @@ img::Load ( const char  *fullname, FILE  *fp )
 static int IMG_ReadHeader (FILE       *f,IMG_Header  *h)
 
         {
-	register int tlen;			/* total to read in */
-	register int rlen;			/* read lengths */
+	int tlen;			/* total to read in */
+	int rlen;			/* read lengths */
 	unsigned char junkbuffer[MAX_SCANLINE];	/* scrap buffer */
 
 	tlen = fread(junkbuffer, sizeof(unsigned char), (DEF_HLEN * 2), f);
@@ -375,12 +375,12 @@ static int IMG_ReadHeader (FILE       *f,IMG_Header  *h)
 **	Returns no value (void function)
 */
 
-static void IMG_WriteByte (unsigned char c,register int  cols,unsigned int bpl)
+static void IMG_WriteByte (unsigned char c,int  cols,unsigned int bpl)
 
             {
-	register int i;
-	register unsigned char *ptr;
-	register unsigned char *ptr2;
+	int i;
+	unsigned char *ptr;
+	unsigned char *ptr2;
 
 	BitRow[ColCount] = c;
 

@@ -1340,10 +1340,10 @@ static void OutputLabel(FILE  *f, const char  *l)
     }
 }
 
-void pushbuttonview::Print(register FILE   *file, const char    *processor, const char    *format, boolean    topLevel)
+void pushbuttonview::Print(FILE   *file, const char    *processor, const char    *format, boolean    topLevel)
 {
     int count;
-    register class pushbutton *dobj = (class pushbutton *)this->dataobject;
+    class pushbutton *dobj = (class pushbutton *)this->dataobject;
     if (strcmp(processor, "troff") == 0) {
 	/* output to troff */
 	if (topLevel)

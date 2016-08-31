@@ -121,7 +121,7 @@ class help *helpobj;		/* global help object for ncproc use */
 ATKdefineRegistry(helpapp, application, NULL);
 
 static void  show_usage(class helpapp  *self);
-static void AddPath(register const char  *astr);
+static void AddPath(const char  *astr);
 extern "C" int help_unique();
 extern "C" void helpapp_ncproc();
 extern int helpSocket;
@@ -157,10 +157,10 @@ show_usage(class helpapp  *self)
  * add a path to those to be searched
  */
 static void
-AddPath(register const char  *astr)
+AddPath(const char  *astr)
 {
     char tname[MAXPATHLEN];
-    register const char *np;
+    const char *np;
 
     DEBUG(("ha: IN addpath\n"));
     while(1) {
@@ -195,7 +195,7 @@ extern int helpPort;
 static void 
 unique_help(class helpapp  *self)
 {
-    register int i;
+    int i;
     char *wmHost = NULL, *dpyHost = NULL, displayHost[MAXHOSTNAMELEN], *colon;
     int runningLocally = 0;
     static FILE *tfile;

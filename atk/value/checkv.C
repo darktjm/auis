@@ -80,8 +80,8 @@ static void CarveFonts(class checkv  * self)
 
 static void Drawcheck(class checkv  * self)
 {
-    register int side;
-    register int gap;
+    int side;
+    int gap;
     struct rectangle r;
     char ch;
     (self)->SetTransferMode(  graphic_COPY );

@@ -156,7 +156,7 @@ static int ZoomProc(char  *filename , char  **foundp)
 
 static int VisitFile(class diredview  *self, const char  *fname)
 {
-    register class buffer *buffer;
+    class buffer *buffer;
     char realName[1000], buf[1000];
     boolean fileIsDir, fileExists;
     struct stat statBuf;

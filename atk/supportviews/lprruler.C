@@ -40,7 +40,7 @@ ATK_IMPL("lprruler.H")
 ATKdefineRegistry(lprruler, dataobject, NULL);
 
 long
-lprruler::Read( register FILE   *file, register long   id			/* !0 if data stream, 0 if direct from file*/ )
+lprruler::Read( FILE   *file, long   id			/* !0 if data stream, 0 if direct from file*/ )
 			{
 	/* reads a lprruler from -file-.  See file format in lprruler.ch */
 	/* This routine reads the \enddata, if any. Its syntax is not checked */

@@ -544,7 +544,7 @@ class valueview * buttonV::DoHit( enum view_MouseAction  type,long  x,long  y,lo
 class view * buttonV::Hit(enum view_MouseAction  type, long  x , long  y , long  numberOfClicks)
                     {/* should probably just restore this functionality to valueview,
 	with a way to optionly set it */
-	 register short sendEvent;
+	 short sendEvent;
 	 class valueview *vself = (class valueview *) this;
 	 if(((class valueview *) this)->HasInputFocus == FALSE)
 	     (this)->WantInputFocus(this);

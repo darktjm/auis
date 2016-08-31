@@ -305,12 +305,12 @@ struct sv_Globals sv_globals = {
 typedef struct sv_Globals *sv_globals_type;
 
 ATKdefineRegistry(rle, image, NULL);
-void bw_m_line(register unsigned char *dp,int  number);
-void c_m_line(register unsigned char *dp,int  number,int  line);
+void bw_m_line(unsigned char *dp,int  number);
+void c_m_line(unsigned char *dp,int  number,int  line);
 int rle_get_setup( sv_globals_type globals );
 int rle_getrow( sv_globals_type globals, rle_pixel  *scanline[] );
 static void bfill( char  *s, int  n , int  c );
-static char * match( register char  *n, register char  *v );
+static char * match( char  *n, char  *v );
 char * rle_getcom( char  *name, sv_globals_type globals );
 rle_pixel ** buildmap( sv_globals_type  globals, int  minmap, double  gamma );
 void dithermap( int levels, double  gamma, int  rgbmap[][3], int  divN[256], int  modN[256], int  magic[16][16] );
@@ -623,10 +623,10 @@ rle::Load( const char  *fullname, FILE  *fp )
 #define DMAP(v,x,y)	(modN[v]>magic[x][y] ? divN[v] + 1 : divN[v])
 
 /* run the black and white through its map */
-void bw_m_line(register unsigned char *dp,int  number)
+void bw_m_line(unsigned char *dp,int  number)
           {
-  register unsigned char *r;
-  register int i;
+  unsigned char *r;
+  int i;
   
   for(i=number,r= &scan[0][0];i>0;i--,r++,dp++)
     {
@@ -635,10 +635,10 @@ void bw_m_line(register unsigned char *dp,int  number)
 }
 
 /* convert a colour line with map to 8 bits per pixel */
-void c_m_line(register unsigned char *dp,int  number,int  line)
+void c_m_line(unsigned char *dp,int  number,int  line)
           {
-  register unsigned char *r, *g, *b;
-  register int i, col, row;
+  unsigned char *r, *g, *b;
+  int i, col, row;
   
   if(!bwflag)
     {		
@@ -703,9 +703,9 @@ int rle_get_setup( sv_globals_type  globals )
 {
     struct XtndRsetup setup;
     short magic;			/* assume 16 bits */
-    register FILE *infile = globals->svfb_fd;
+    FILE *infile = globals->svfb_fd;
     rle_pixel * bg_color;
-    register int i;
+    int i;
     char * comment_buf;
 
     BREAD( short, magic, sizeof magic );
@@ -764,7 +764,7 @@ int rle_get_setup( sv_globals_type  globals )
     globals->sv_cmaplen = setup.h_cmaplen;
     if ( globals->sv_ncmap > 0 )
     {
-	register int maplen =
+	int maplen =
 		     globals->sv_ncmap * (1 << globals->sv_cmaplen);
 	globals->sv_cmap = (rle_map *)malloc(
 	    (unsigned)(sizeof(rle_map) * maplen) );
@@ -788,7 +788,7 @@ int rle_get_setup( sv_globals_type  globals )
     if ( setup.h_flags & H_COMMENT )
     {
 	short comlen, evenlen;
-	register char * cp;
+	char * cp;
 
 	BREAD( short, comlen, sizeof comlen );	/* get comment length */
 	SWAB( comlen );
@@ -869,9 +869,9 @@ int rle_get_setup( sv_globals_type  globals )
 
 int rle_getrow( sv_globals_type  globals, rle_pixel  *scanline[] )
 {
-    register rle_pixel * scanc;
-    register int nc;
-    register FILE *infile = globals->svfb_fd;
+    rle_pixel * scanc;
+    int nc;
+    FILE *infile = globals->svfb_fd;
     int scan_x = globals->sv_xmin,	/* current X position */
 	   channel = 0;			/* current color channel */
     short word, long_data;
@@ -974,7 +974,7 @@ int rle_getrow( sv_globals_type  globals, rle_pixel  *scanline[] )
 	    }
 	    else
 		{		/* Emulate a forward fseek */
-		    register int ii;
+		    int ii;
 		    for ( ii = ((nc + 1) / 2) * 2; ii > 0; ii-- )
 			(void) fgetc( infile );	/* discard it */
 		}
@@ -1057,7 +1057,7 @@ static void bfill( char  *s, int  n , int  c )
  *	[None]
  */
 static char *
-match( register char  *n, register char  *v )
+match( char  *n, char  *v )
 {
     for ( ; *n != '\0' && *n != '=' && *n == *v; n++, v++ )
 	;
@@ -1136,7 +1136,7 @@ rle_pixel **
 buildmap( sv_globals_type  globals, int  minmap, double  gamma )
 {
     rle_pixel ** cmap, * gammap;
-    register int i, j;
+    int i, j;
     int maplen, cmaplen, ncmap, nmap;
 
     if ( globals->sv_ncmap == 0 )	/* make identity map */
@@ -1274,7 +1274,7 @@ void
 dithermap( int levels, double  gamma, int  rgbMap[][3], int  divN[256], int  modN[256], int  magic[16][16] )
 {
     double N;
-    register int i;
+    int i;
     int levelsq, levelsc;
     int gammamap[256];
     
@@ -1320,7 +1320,7 @@ dithermap( int levels, double  gamma, int  rgbMap[][3], int  divN[256], int  mod
 void
 make_square( double  N, int  divN[256], int  modN[256], int  magic[16][16]  )
 {
-    register int i, j, k, l;
+    int i, j, k, l;
     double magicfact;
 
     for ( i = 0; i < 256; i++ )
@@ -1455,7 +1455,7 @@ void make_magic( int  size, int  magic[16][16] )
  */
 void make_gamma( double  gamma, int  gammamap[256] )
 {
-	register int i;
+	int i;
 
     for ( i = 0; i < 256; i++ )
 		{

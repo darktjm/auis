@@ -45,7 +45,7 @@ _fx_shorten(fxp, name)
      FX *fxp;
      char *name;
 {
-  register char *s;
+  char *s;
   s = index(name, '@');
   if (s)
     if (strcmp(s, fxp->extension) == 0)

@@ -236,14 +236,14 @@ ATKdefineRegistry(texttroff, ATK, texttroff::InitializeClass);
 static void setcolor(char  *color,FILE  *f);
 static char *speclookup(long  c,long  f);
 static void PutNewlineIfNeeded();
-static void ComputeTroffFont(register const char  *name, register long  FaceCodemodifier , long  FontSize);
+static void ComputeTroffFont(const char  *name, long  FaceCodemodifier , long  FontSize);
 static void ChangeFont();
 static void ChangeJustification(enum style_Justification  old , enum style_Justification  new_c,boolean  putbreak);
 static void ChangeState();
 static void setdefaultstate();
 static void InitializeStyle();
 static void handlemac(FILE  *f,const char  *s);
-static void OutputInitialTroff(register FILE  *f, class view *vw, boolean  toplevel, class environment  *cenv);
+static void OutputInitialTroff(FILE  *f, class view *vw, boolean  toplevel, class environment  *cenv);
 static int FlushBars(FILE  *f);
 static void FlushLineSpacing(int  cs, int  hitchars, boolean  needbreak);
 static int findinlist(char  **lst ,int  cnt,char  *str);
@@ -297,13 +297,13 @@ static void PutNewlineIfNeeded()
     }
 }
 
-static void ComputeTroffFont(register const char  *name, register long  FaceCodemodifier , long  FontSize)
+static void ComputeTroffFont(const char  *name, long  FaceCodemodifier , long  FontSize)
 {
-    register int family, mod,specfamily;
+    int family, mod,specfamily;
 
     symbola = 0;
     for (family = 0; fonttable[family].fontname; family++) {
-	register const char *s, *t;
+	const char *s, *t;
 
 	for (s = name, t = fonttable[family].fontname; *s && *t; s++, t++) {
 	    if (*s != *t && *s != (*t - 32) && *s != (*t + 32))
@@ -315,7 +315,7 @@ static void ComputeTroffFont(register const char  *name, register long  FaceCode
     if(!fonttable[family].fontname){
 	/* try to look up symbol table font */
 	for (specfamily = 0; specfonttable[specfamily].fontname; specfamily++) {
-	    register const char *s, *t;
+	    const char *s, *t;
 
 	    for (s = name, t = specfonttable[specfamily].fontname; *s && *t; s++, t++) {
 		if (*s != *t && *s != (*t - 32) && *s != (*t + 32))
@@ -342,7 +342,7 @@ static void ComputeTroffFont(register const char  *name, register long  FaceCode
 
 static void ChangeFont()
 {
-    register const char *code = fonttable[dFont].fontcodes[dFace];
+    const char *code = fonttable[dFont].fontcodes[dFace];
 
     if (needNewLine)
 	fprintf(troffFile, code[1] ? "\\&\\f(%s" : "\\&\\f%s", code);
@@ -583,7 +583,7 @@ static void InitializeStyle()
 static void handlemac(FILE  *f,const char  *s)
 {
     FILE *fi;
-    register int c;
+    int c;
     if(InlineMacros && ((fi = fopen(s,"r")) != NULL)){
 	while((c = getc(fi)) != EOF) putc(c,f);
 	fclose(fi);
@@ -591,10 +591,10 @@ static void handlemac(FILE  *f,const char  *s)
     else fprintf(f, ".so %s\n",s);
 }
 
-static void OutputInitialTroff(register FILE  *f, class view *vw, boolean  toplevel, class environment  *cenv)
+static void OutputInitialTroff(FILE  *f, class view *vw, boolean  toplevel, class environment  *cenv)
 {
-/*     register char **mx; */
-    register int i;
+/*     char **mx; */
+    int i;
 
     tabscharspaces = environ::GetProfileInt("TabsCharSpaces", 8);
     
@@ -928,7 +928,7 @@ static void endspecialformating()
 }
 static void deletenewlines(char  *buf)
 {
-    register char *c;
+    char *c;
     for(c = buf; *c != '\0'; c++){
 	if(*c == '\n') *c = ' ';
     }
@@ -939,7 +939,7 @@ static void deletenewlines(char  *buf)
 }
 static void deletechapnumbers(char  *buf)
 {
-    register char *c,*s;
+    char *c,*s;
     s = buf;
     if(*s <= '9' && *s >= '0' && (c = strchr(buf,'\t')) != NULL){
 	c++;
@@ -1143,9 +1143,9 @@ class text *texttroff__CompileNotes(struct classstyle;
 void texttroff::WriteSomeTroff(class view  *view, class dataobject  *dd, FILE  * f, int  toplevel, unsigned long  flags)
 {
     int elen, cs, ln , flag,count,indexfontface,hitchars;
-    register long i, doclen;
-    register class text *d,*ttxt;
-    register boolean quotespace; 
+    long i, doclen;
+    class text *d,*ttxt;
+    boolean quotespace; 
     class environment *cenv, *nenv;
     char *list[64];
     const char *p,*val;

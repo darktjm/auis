@@ -122,7 +122,7 @@ bushapp::~bushapp( )
 }
 
 boolean
-bushapp::ParseArgs( register int		     argc, register const char		   **argv )
+bushapp::ParseArgs( int		     argc, const char		   **argv )
       {
   class bushapp *self = this;
   const char **args = argv;
@@ -142,7 +142,7 @@ boolean
 bushapp::Start( )
   {
   class bushapp *self = this;
-  register const char		    *startDir = NULL;
+  const char		    *startDir = NULL;
 	
   if(this->argc > 1) startDir = this->argv[1];
   if(!((this)->application::Start()) ||

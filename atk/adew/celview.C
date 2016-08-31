@@ -103,7 +103,7 @@ static void drawshadow(class celview  *self,struct rectangle  *r);
 void celview__SetDrawing(class celview  *self,long  key);
 static void SetVisible(class celview  *self);
 static void SetInvisible(class celview  *self);
-static boolean objecttest(register class celview   *self,const char  *name,const char  *desiredname);
+static boolean objecttest(class celview   *self,const char  *name,const char  *desiredname);
 static int lookuptype(char  *ty);
 static char * atomlisttostring(class atomlist  *al);
 static void appendresourceList( class celview  * self, struct resourceList  * resources);
@@ -815,7 +815,7 @@ boolean celview::InitializeClass()
     return TRUE;
 }
 
-static boolean objecttest(register class celview   *self,const char  *name,const char  *desiredname)
+static boolean objecttest(class celview   *self,const char  *name,const char  *desiredname)
 {
     if(ATK::LoadClass(name) == NULL){
         char foo[640];
@@ -1392,7 +1392,7 @@ return view;
 }
 void celview::WantUpdate(class view  *requestor)
 {
-    register class view *view;
+    class view *view;
     if(this->olist == NULL || requestor == (class view *)this){
 	(this)->view::WantUpdate(requestor);
 	return;
@@ -1405,7 +1405,7 @@ void celview::WantUpdate(class view  *requestor)
 }
 void celview::PostCursor(struct rectangle  *rec,class cursor  *c)
 {
-    register class view *view = c->view;
+    class view *view = c->view;
     if(this->olist == NULL || view == (class view *)this){
 	(this)->view::PostCursor(rec,c);
 	return;

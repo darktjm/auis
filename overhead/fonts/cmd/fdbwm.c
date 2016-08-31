@@ -244,8 +244,8 @@ short NIcons = -1;
 /* procedure Initialize  */
 Initialize()
 {
-    register short i;
-    register short c;
+    short i;
+    short c;
 
     /* ------------------------------------------ */
     /* We must define all of the following fields */
@@ -350,8 +350,8 @@ static
 char *GetString ()
 {
     static char StringBuffer[255];
-    register char  *sb;
-    register int    c;
+    char  *sb;
+    int    c;
 
     /* skip leading spaces */
     while (isspace(c = GetChar()) && c != '\n');
@@ -375,8 +375,8 @@ static
 char *GetLine ()
 {
     static char StringBuffer[255];
-    register char  *sb;
-    register int    c;
+    char  *sb;
+    int    c;
 
     /* skip leading spaces */
     while (isspace(c = GetChar()) && c != '\n');
@@ -469,7 +469,7 @@ short    GetShort ()
 
 skipsymbolic()
 {
-    register int   c;
+    int   c;
 
     /* skip leading spaces */
     while (isspace(c = GetChar()) && c != '\n');
@@ -532,8 +532,8 @@ char KeywordString[255];
 
 short  GetKeyWord ()
 {
-    register short i;
-    register char *p;
+    short i;
+    char *p;
 
     do
 	strcpy(KeywordString, GetString());
@@ -979,11 +979,11 @@ dumpfont()
 
 Boolean ConvertInternalToExternal()
 {
-    register FILE * OutputFontFile;
+    FILE * OutputFontFile;
 
     /* Zero the unused portion of the font family name */
     {
-	register char *p = fonthead.fn.FamilyName;
+	char *p = fonthead.fn.FamilyName;
 	short n = sizeof (fonthead.fn.FamilyName);
 	while (*p != '\0' && --n > 0)
 	    p++;
@@ -1110,8 +1110,8 @@ CheckOriginAndSpacing()
 
 CheckFixedWidths()
 {
-    register int c;
-    register int x,y;
+    int c;
+    int x,y;
 
     if ((fonthead.fn.FaceCode & FixedWidthFace) == 0) return;
 
@@ -1120,7 +1120,7 @@ CheckFixedWidths()
     y = 0;
     for (c = 0; c < NIcons; c++)
     {
-	register struct SVector *sv = &generic[c].Spacing;
+	struct SVector *sv = &generic[c].Spacing;
 
 	if (sv->x > x) x = sv->x;
 	if (sv->y > y) y = sv->y;
@@ -1131,7 +1131,7 @@ CheckFixedWidths()
       spacing vector (or zero) */
     for (c = 0; c < NIcons; c++)
     {
-	register struct SVector *sv = &generic[c].Spacing;
+	struct SVector *sv = &generic[c].Spacing;
 
 	if ((sv->x != x || sv->y != y)
 	    && (sv->x != 0 || sv->y != 0))
@@ -1168,12 +1168,12 @@ TightenAllBoundingBoxes()
 TightenBoundingBox(c)
 int c;
 {
-    register struct BitmapIconSpecificPart *sp = &(specific[c]);
+    struct BitmapIconSpecificPart *sp = &(specific[c]);
     int top, bottom, left, right;
 
     /* determine the extremes of the bit map */
     {
-	register  i, j;
+	int i, j;
 	int checkcols;
 
 	/* we have had problems of extra bits in some of the fdb files; to
@@ -1262,7 +1262,7 @@ int c;
 	*oldbits;
 	int     shiftcount;
 	unsigned short  mask;
-	register int    row,
+	int    row,
 	col;
 
 	newrows = bottom - top + 1;

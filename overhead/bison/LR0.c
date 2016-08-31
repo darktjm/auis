@@ -80,11 +80,11 @@ static core **state_table;
 void
 allocate_itemsets()
 {
-  register short *itemp;
-  register int symbol;
-  register int i;
-  register int count;
-  register short *symbol_count;
+  short *itemp;
+  int symbol;
+  int i;
+  int count;
+  short *symbol_count;
 
   count = 0;
   symbol_count = NEW2(nsyms, short);
@@ -198,11 +198,11 @@ generate_states()
 void
 new_itemsets()
 {
-  register int i;
-  register int shiftcount;
-  register short *isp;
-  register short *ksp;
-  register int symbol;
+  int i;
+  int shiftcount;
+  short *isp;
+  short *ksp;
+  int symbol;
 
 #ifdef	TRACE
   fprintf(stderr, "Entering new_itemsets\n");
@@ -246,9 +246,9 @@ new_itemsets()
 void
 append_states()
 {
-  register int i;
-  register int j;
-  register int symbol;
+  int i;
+  int j;
+  int symbol;
 
 #ifdef	TRACE
   fprintf(stderr, "Entering append_states\n");
@@ -286,12 +286,12 @@ int
 get_state(symbol)
 int symbol;
 {
-  register int key;
-  register short *isp1;
-  register short *isp2;
-  register short *iend;
-  register core *sp;
-  register int found;
+  int key;
+  short *isp1;
+  short *isp2;
+  short *iend;
+  core *sp;
+  int found;
 
   int n;
 
@@ -360,11 +360,11 @@ core *
 new_state(symbol)
 int symbol;
 {
-  register int n;
-  register core *p;
-  register short *isp1;
-  register short *isp2;
-  register short *iend;
+  int n;
+  core *p;
+  short *isp1;
+  short *isp2;
+  short *iend;
 
 #ifdef	TRACE
   fprintf(stderr, "Entering new_state, symbol = %d\n", symbol);
@@ -398,10 +398,10 @@ int symbol;
 void
 initialize_states()
 {
-  register core *p;
-/*  register unsigned *rp1; JF unused */
-/*  register unsigned *rp2; JF unused */
-/*  register unsigned *rend; JF unused */
+  core *p;
+/*  unsigned *rp1; JF unused */
+/*  unsigned *rp2; JF unused */
+/*  unsigned *rend; JF unused */
 
   p = (core *) xmalloc((unsigned) (sizeof(core) - sizeof(short)));
   first_state = last_state = this_state = p;
@@ -412,10 +412,10 @@ initialize_states()
 void
 save_shifts()
 {
-  register shifts *p;
-  register short *sp1;
-  register short *sp2;
-  register short *send;
+  shifts *p;
+  short *sp1;
+  short *sp2;
+  short *send;
 
   p = (shifts *) xmalloc((unsigned) (sizeof(shifts) +
 				       (nshifts - 1) * sizeof(short)));
@@ -449,12 +449,12 @@ save_shifts()
 void
 save_reductions()
 {
-  register short *isp;
-  register short *rp1;
-  register short *rp2;
-  register int item;
-  register int count;
-  register reductions *p;
+  short *isp;
+  short *rp1;
+  short *rp2;
+  int item;
+  int count;
+  reductions *p;
 
   short *rend;
 
@@ -510,13 +510,13 @@ Create such states and shifts if they don't happen to exist already.  */
 void
 augment_automaton()
 {
-  register int i;
-  register int k;
-/*  register int found; JF unused */
-  register core *statep;
-  register shifts *sp;
-  register shifts *sp2;
-  register shifts *sp1;
+  int i;
+  int k;
+/*  int found; JF unused */
+  core *statep;
+  shifts *sp;
+  shifts *sp2;
+  shifts *sp1;
 
   sp = first_shift;
 
@@ -683,8 +683,8 @@ augment_automaton()
 void
 insert_start_shift()
 {
-  register core *statep;
-  register shifts *sp;
+  core *statep;
+  shifts *sp;
 
   statep = (core *) xmalloc((unsigned) (sizeof(core) - sizeof(short)));
   statep->number = nstates;

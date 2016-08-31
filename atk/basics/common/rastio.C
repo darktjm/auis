@@ -171,7 +171,7 @@ If the terminator is '\' or '{', it is left at the front of the input.
 #define case8(v) case4(v): case4((v)+4)
 
 long
-rastio::ReadRow(register FILE  *file		/* where to get them from */, register unsigned char *row	/* where to put bytes */, register long  length	/* how many bytes in row must be filled */)
+rastio::ReadRow(FILE  *file		/* where to get them from */, unsigned char *row	/* where to put bytes */, long  length	/* how many bytes in row must be filled */)
 				{
 	/* Each input character is processed by the central loop.  There are 
 		some input codes which require two or three characters for completion; 
@@ -186,9 +186,9 @@ rastio::ReadRow(register FILE  *file		/* where to get them from */, register uns
 			RepeatAndDigit};	/* have seen repeat code and its first
 					following digit */
 	enum stateCode InputState;	/* current state */
-	register int c;		/* the current input character */
-	register long repeatcount = 0;	/* current repeat value */
-	register long hexval;	/* current hex value */
+	int c;		/* the current input character */
+	long repeatcount = 0;	/* current repeat value */
+	long hexval;	/* current hex value */
 	long pendinghex = 0;		/* the first of a pair of hex characters */
 	
 	/* We cannot exit when length becomes zero because we need to check 

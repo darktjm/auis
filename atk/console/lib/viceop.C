@@ -637,7 +637,7 @@ void	ReConnect(class consoleClass  *self)
 void InitHosts(class consoleClass  *self)
     {
     long    count;
-    register int    i;
+    int    i;
     char   *ptr;
     BBS list;
     char    data[512];

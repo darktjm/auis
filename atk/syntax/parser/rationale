@@ -213,7 +213,7 @@ elapsed()  {
 }
 f1() {}   f2(i) {foo = i;}
 main()  {
-	register int i;
+	int i;
 	elapsed();  elapsed();  elapsed();
 	for (i=10000000; i; i--) {}  elapsed();
 	for (i=10000000; i; i--) {f1();}  elapsed();
@@ -346,7 +346,7 @@ f4(a, b, c)
 
 main()
 {
-	register int i;
+	int i;
 	elapsed();
 printf("loop with no contents\n");
 	THRICE(for (i=M; i; i--) {}   elapsed();)

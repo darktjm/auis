@@ -188,7 +188,7 @@ Command
 Lookup(chr)
 int chr;
 {
-	register Command c;
+	Command c;
 	for(c = commands;
 	    c < &commands[sizeof(commands)/sizeof(commands[0])]; c++)
 		if(c->command == chr)

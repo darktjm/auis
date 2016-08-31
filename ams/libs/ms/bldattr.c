@@ -82,10 +82,10 @@ struct MS_Message *msg;
 /* #define MyPrime 2147483629 */
 
 unsigned long KRHash(s)
-register char *s;
+char *s;
 {
-    register unsigned long sum = 0;
-    register unsigned int Bit;
+    unsigned long sum = 0;
+    unsigned int Bit;
 
     while (*s) {
 	for (Bit = 0x80; Bit != 0; Bit >>= 1) {

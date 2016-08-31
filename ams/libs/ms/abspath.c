@@ -76,10 +76,10 @@ int abspath (name,result)
 char * name;
 char * result;
 {
-    register char * src;    /* source pointer for copy operations */
-    register char * dst;    /* destination pointer for copy operations */
-    register char * fence;  /* pointer to slash that cannot be backed over */
-    register char * t;      /* scanback pointer in dst when we hit a slash */
+    char * src;    /* source pointer for copy operations */
+    char * dst;    /* destination pointer for copy operations */
+    char * fence;  /* pointer to slash that cannot be backed over */
+    char * t;      /* scanback pointer in dst when we hit a slash */
 
     fence = 0;
     if (name == 0  ||  result == 0)

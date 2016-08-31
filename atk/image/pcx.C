@@ -216,7 +216,7 @@ static void PCX_LoadImage (FILE  *f,int  bytes_per_row,class pcx  *pcx,int  rows
  ** not set, then this is the byte to write.
  */
 
-    register unsigned char *ptr;
+    unsigned char *ptr;
     int row = 0;
     int bytes_this_row = 0;
     int b, i, cnt;

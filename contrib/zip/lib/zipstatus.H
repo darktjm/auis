@@ -67,8 +67,8 @@ public:
   virtual long Issue_Message( char *msg );
   virtual long Acknowledge_Message( char *msg );
   virtual long Clear_Message();
-  virtual long Issue_Status_Message( register long facility, register long status );
-  virtual long Acknowledge_Status_Message( register long facility, register long status );
+  virtual long Issue_Status_Message( long facility, long status );
+  virtual long Acknowledge_Status_Message( long facility, long status );
   virtual long Issue_Figure_Status_Message( zip_type_figure figure );
   virtual long Acknowledge_Figure_Status_Message( zip_type_figure figure );
   virtual long Issue_Image_Status_Message( zip_type_image image );

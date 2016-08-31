@@ -96,10 +96,10 @@ PackBitsEncodeChunk(TIFF *tif, u_char *bp, int cc, u_int s)
  * Encode a run of pixels.
  */
 static int
-PackBitsEncode(TIFF *tif, u_char *bp, register int cc, u_int s)
+PackBitsEncode(TIFF *tif, u_char *bp, int cc, u_int s)
 {
-	register char *op, *lastliteral;
-	register int n, b;
+	char *op, *lastliteral;
+	int n, b;
 	enum { BASE, LITERAL, RUN, LITERAL_RUN } state;
 	char *ep;
 	int slop;
@@ -215,11 +215,11 @@ PackBitsEncode(TIFF *tif, u_char *bp, register int cc, u_int s)
 }
 
 static int
-PackBitsDecode(TIFF *tif, register u_char *op, register int occ, u_int s)
+PackBitsDecode(TIFF *tif, u_char *op, int occ, u_int s)
 {
-	register char *bp;
-	register int n, b;
-	register int cc;
+	char *bp;
+	int n, b;
+	int cc;
 
 	bp = tif->tif_rawcp; cc = tif->tif_rawcc;
 	while (cc > 0 && occ > 0) {

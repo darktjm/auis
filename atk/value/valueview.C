@@ -228,7 +228,7 @@ void valueview::GetManyParameters( struct resourceList  * resources, class atoml
 {
     (this)->view::GetManyParameters(  resources, name, class_c );
     if(setpar){
-	register int i;
+	int i;
 	for(i = 0; i < MAXPAR; i++){
 	    par[i] = *resources++;
 	    if(par[i].name == NULL) break;
@@ -455,7 +455,7 @@ boolean valueview::OnTarget(long  x,long  y)
 class view * valueview::Hit(enum view_MouseAction  type, long  x , long  y , long  numberOfClicks)
                {
 #if 0
-  register short sendEvent;
+  short sendEvent;
   if (this->active)
     {
       switch (type)

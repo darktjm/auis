@@ -78,7 +78,7 @@ pmap_set(program, version, protocol, port)
 {
 	struct sockaddr_in myaddress;
 	int socket = -1;
-	register CLIENT *client;
+	CLIENT *client;
 	struct pmap parms;
 	bool_t rslt;
 
@@ -112,7 +112,7 @@ pmap_unset(program, version)
 {
 	struct sockaddr_in myaddress;
 	int socket = -1;
-	register CLIENT *client;
+	CLIENT *client;
 	struct pmap parms;
 	bool_t rslt;
 

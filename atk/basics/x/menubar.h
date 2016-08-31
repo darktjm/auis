@@ -159,7 +159,7 @@ void mb_AddSelection(struct menubar  *mb,const char *title ,int  tprio,const cha
 void mb_SetItemStatus(struct menubar  *mb,const char *title,const char *item,int  status);
 void mb_DeleteSelection(struct menubar  *mb,const char *title,const char *item);
 void mb_RefitMenubar(struct menubar  *mb);
-void mb_RedrawMenubar(register struct menubar  *mb, int  clear);
+void mb_RedrawMenubar(struct menubar  *mb, int  clear);
 void mb_HandleConfigure(struct mbinit  *mbi, struct menubar  *mb, long  width , long  height);
 void mb_Activate(struct menubar  *mb, long  x, long  y);
 void mb_KeyboardActivate(struct menubar  *mb);

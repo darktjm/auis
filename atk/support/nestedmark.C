@@ -154,9 +154,9 @@ class nestedmark *nestedmark::Split(long  rpos)
 
 class nestedmark *nestedmark::Add(long  pos, long  length)
 {
-    register class nestedmark *cp;
-    register class nestedmark *nm1;
-    register class nestedmark *nm2;
+    class nestedmark *cp;
+    class nestedmark *nm1;
+    class nestedmark *nm2;
     long eorg;
     long rpos;
     class tree23int *tt1;
@@ -237,7 +237,7 @@ void nestedmark::Delete()
 
 void nestedmark::Update(long  pos, long  length)
 {
-    register class nestedmark *up, *tp;
+    class nestedmark *up, *tp;
     long tpos, tsize;
     boolean includebeginning;
     boolean includeending;
@@ -310,7 +310,7 @@ void nestedmark::Update(long  pos, long  length)
 
 class nestedmark *nestedmark::GetInnerMost(long  pos  )
 {
-    register class nestedmark *tp;
+    class nestedmark *tp;
     long  eleft;
 
 /*     first check if it is within our range
@@ -340,7 +340,7 @@ class nestedmark *nestedmark::GetInnerMost(long  pos  )
 
 class nestedmark *nestedmark::GetEnclosing(long  pos  )
 {
-    register class nestedmark *tp;
+    class nestedmark *tp;
     long  eleft;
 
 /*     first check if it is within our range
@@ -386,7 +386,7 @@ class nestedmark *nestedmark::GetEnclosing(long  pos  )
 
 long nestedmark::Eval()
 {
-    register int i;
+    int i;
     class nestedmark *self=this;
     i=0;
     while (self != 0)
@@ -400,8 +400,8 @@ long nestedmark::Eval()
 
 class nestedmark *nestedmark::GetCommonParent(class nestedmark  *nmark  )
 {
-    register class nestedmark *tp;
-    register class nestedmark *up;
+    class nestedmark *tp;
+    class nestedmark *up;
 
     tp = this;
     while (tp != NULL)
@@ -435,8 +435,8 @@ then they are not directly related. */
 
 long nestedmark::Distance(class nestedmark  *nmark)
 {
-    register int i;
-    register class nestedmark *tmark = this;
+    int i;
+    class nestedmark *tmark = this;
     
     for (i = 0, tmark = this; tmark && tmark != nmark; i++, tmark = tmark->parent);
     if (tmark) return i;

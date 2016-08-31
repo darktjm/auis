@@ -267,7 +267,7 @@ char **av;
 		GDEVsets("Xgeometry", r);
 
 	if((r = fetcharg('#')) != NULL) {
-		register char *p = strchr(r, '#');
+		char *p = strchr(r, '#');
 		if(p != NULL) {
 			*p++ = '\0';
 			GDEVsets(r, p);

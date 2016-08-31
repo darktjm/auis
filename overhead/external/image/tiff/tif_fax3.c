@@ -141,8 +141,8 @@ static void
 skiptoeol(TIFF *tif, int len)
 {
 	Fax3DecodeState *sp = (Fax3DecodeState *)tif->tif_data;
-	register int bit = sp->b.bit;
-	register int data = sp->b.data;
+	int bit = sp->b.bit;
+	int data = sp->b.data;
 	int code = 0;
 
 	/*
@@ -200,7 +200,7 @@ nextbit(TIFF *tif)
 }
 
 static void
-bset(register unsigned char *cp, register int n, register int v)
+bset(unsigned char *cp, int n, int v)
 {
 	while (n-- > 0)
 		*cp++ = v;
@@ -307,7 +307,7 @@ Fax3PreDecode(TIFF *tif)
  * Fill a span with ones.
  */
 static void
-fillspan(register char *cp, register int x, register int count)
+fillspan(char *cp, int x, int count)
 {
 	static const unsigned char masks[] =
 	    { 0, 0x80, 0xc0, 0xe0, 0xf0, 0xf8, 0xfc, 0xfe, 0xff };
@@ -1041,11 +1041,11 @@ Fax3Cleanup(TIFF *tif)
  * value.
  */
 static int
-findspan(u_char **bpp, int bs, int be, register u_char const *tab)
+findspan(u_char **bpp, int bs, int be, u_char const *tab)
 {
-	register u_char *bp = *bpp;
-	register int bits = be - bs;
-	register int n, span;
+	u_char *bp = *bpp;
+	int bits = be - bs;
+	int n, span;
 
 	/*
 	 * Check partial byte on lhs.

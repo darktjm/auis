@@ -78,46 +78,46 @@ END-SPECIFICATION  ************************************************************/
 static int RBDT( class zipedit *self, zip_type_pane pane, long x, long y );
 static int RBDM( class zipedit *self, zip_type_pane pane, long x, long y );
 static int RBUT( class zipedit *self, zip_type_pane pane, long x, long y );
-static int Handle_Edit_Selection( register class zipedit		  *self, register zip_type_pane		   pane, register enum view_MouseAction	   action, register long				   x , register long				   y , register long				   clicks );
-static int Handle_Edit_Selection_Modification( register class zipedit	      *self, register zip_type_pane	       pane, register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks );
+static int Handle_Edit_Selection( class zipedit		  *self, zip_type_pane		   pane, enum view_MouseAction	   action, long				   x , long				   y , long				   clicks );
+static int Handle_Edit_Selection_Modification( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks );
 static int Edit_Modification_LBDT( class zipedit *self, zip_type_pane pane, zip_type_pixel	       x, zip_type_pixel y );
 static int Edit_Modification_LBDM( class zipedit *self, zip_type_pane pane, zip_type_pixel x, zip_type_pixel  y );
 static int Edit_Modification_LBUT( class zipedit *self, zip_type_pane pane, zip_type_pixel  x, zip_type_pixel  y );
-zip_type_figure zipedit_Next_Selected_Figure( register class zipedit	      *self, register zip_type_pane	       pane, register zip_type_figure	       figure );
-static void Move_Selection( register class zipedit	      *self, register zip_type_pane	       pane );
-static void Duplicate_Selection( register class zipedit	      *self, register zip_type_pane	       pane, register zip_type_point	       x_delta , register zip_type_point	       y_delta );
-void zipedit_Cancel_Enclosure( register class zipedit	      *self, register zip_type_pane	       pane );
-static boolean Within_Enclosure( register class zipedit	      *self, register zip_type_pane	       pane, register zip_type_pixel	       x , register zip_type_pixel	       y );
-static void Draw_Enclosure_Shadow( register class zipedit	      *self, register zip_type_pane	       pane, register long			       x , register long			       y );
-static void Clear_Enclosure_Shadow( register class zipedit	      *self, register zip_type_pane	       pane );
-static void Show_Enclosure_Shadow( register class zipedit	      *self, register zip_type_pane	       pane );
-void zipedit_Enclose_Figure( register class zipedit	      *self, register zip_type_figure	       figure, register zip_type_pane	       pane );
-static int Check_Enclosure( register class zipedit	      *self, register zip_type_pane	       pane, register zip_type_image	       image, register long			       count );
-static void Draw_Enclosure( register class zipedit	      *self, register zip_type_pane	       pane, register long			       x , register long			       y );
-static void Clear_Enclosure( register class zipedit	      *self, register zip_type_pane	       pane );
-void Show_Enclosure( register class zipedit	      *self, register zip_type_pane	       pane );
-static void Enclosure_Bounds( register class zipedit	      *self, register zip_type_pane	       pane, register zip_type_pixel	      *L , register zip_type_pixel	      *T , register zip_type_pixel	      *W , register zip_type_pixel	      *H );
-static void Show_Names( register class zipedit	       *self, register zip_type_pane	        pane );
-static void Show_Point( register class zipedit	      *self, register zip_type_pane	       pane, register zip_type_figure	       figure, register int			       point );
-static void Show_Font( register class zipedit	      *self, register zip_type_pane	       pane, register char			      *font_name );
-static void Clear_Font( register class zipedit	      *self, register zip_type_pane	       pane );
-static void Set_Constraints( register class zipedit	      *self, register zip_type_pane	       pane, register zip_type_pixel	       x  , register zip_type_pixel	       y, register zip_type_point	      *X , register zip_type_point	      *Y );
+zip_type_figure zipedit_Next_Selected_Figure( class zipedit	      *self, zip_type_pane	       pane, zip_type_figure	       figure );
+static void Move_Selection( class zipedit	      *self, zip_type_pane	       pane );
+static void Duplicate_Selection( class zipedit	      *self, zip_type_pane	       pane, zip_type_point	       x_delta , zip_type_point	       y_delta );
+void zipedit_Cancel_Enclosure( class zipedit	      *self, zip_type_pane	       pane );
+static boolean Within_Enclosure( class zipedit	      *self, zip_type_pane	       pane, zip_type_pixel	       x , zip_type_pixel	       y );
+static void Draw_Enclosure_Shadow( class zipedit	      *self, zip_type_pane	       pane, long			       x , long			       y );
+static void Clear_Enclosure_Shadow( class zipedit	      *self, zip_type_pane	       pane );
+static void Show_Enclosure_Shadow( class zipedit	      *self, zip_type_pane	       pane );
+void zipedit_Enclose_Figure( class zipedit	      *self, zip_type_figure	       figure, zip_type_pane	       pane );
+static int Check_Enclosure( class zipedit	      *self, zip_type_pane	       pane, zip_type_image	       image, long			       count );
+static void Draw_Enclosure( class zipedit	      *self, zip_type_pane	       pane, long			       x , long			       y );
+static void Clear_Enclosure( class zipedit	      *self, zip_type_pane	       pane );
+void Show_Enclosure( class zipedit	      *self, zip_type_pane	       pane );
+static void Enclosure_Bounds( class zipedit	      *self, zip_type_pane	       pane, zip_type_pixel	      *L , zip_type_pixel	      *T , zip_type_pixel	      *W , zip_type_pixel	      *H );
+static void Show_Names( class zipedit	       *self, zip_type_pane	        pane );
+static void Show_Point( class zipedit	      *self, zip_type_pane	       pane, zip_type_figure	       figure, int			       point );
+static void Show_Font( class zipedit	      *self, zip_type_pane	       pane, char			      *font_name );
+static void Clear_Font( class zipedit	      *self, zip_type_pane	       pane );
+static void Set_Constraints( class zipedit	      *self, zip_type_pane	       pane, zip_type_pixel	       x  , zip_type_pixel	       y, zip_type_point	      *X , zip_type_point	      *Y );
 
 
-extern int zipedit_Handle_Font_Family_Selection( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction action, register long  x , register long y , register long clicks );
-extern int zipedit_Handle_Font_Height_Selection( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction action, register long x , register long              y , register long clicks );
-extern int zipedit_Handle_Font_Italic_Selection( register class zipedit  *self, register zip_type_pane pane, register enum view_MouseAction action , register long x , register long y , register long  clicks );
-extern int zipedit_Handle_Font_Bold_Selection( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction action , register long x , register long  y , register long clicks );
-extern int zipedit_Handle_Font_Sample_Selection( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction action , register long x , register long y , register long clicks );
-extern int zipedit_Handle_Figure_Palette_Hit( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction action , register int x , register int  y , register int clicks );
-extern int zipedit_Handle_Shade_Palette_Hit( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction  action , register long x , register long y , register long clicks );
+extern int zipedit_Handle_Font_Family_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action, long  x , long y , long clicks );
+extern int zipedit_Handle_Font_Height_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action, long x , long              y , long clicks );
+extern int zipedit_Handle_Font_Italic_Selection( class zipedit  *self, zip_type_pane pane, enum view_MouseAction action , long x , long y , long  clicks );
+extern int zipedit_Handle_Font_Bold_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , long x , long  y , long clicks );
+extern int zipedit_Handle_Font_Sample_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , long x , long y , long clicks );
+extern int zipedit_Handle_Figure_Palette_Hit( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , int x , int  y , int clicks );
+extern int zipedit_Handle_Shade_Palette_Hit( class zipedit *self, zip_type_pane pane, enum view_MouseAction  action , long x , long y , long clicks );
 
 int
-zipedit::Accept_Hit( register zip_type_pane	hit_pane, enum view_MouseAction   action , register long x , register long y , register long clicks )
+zipedit::Accept_Hit( zip_type_pane	hit_pane, enum view_MouseAction   action , long x , long y , long clicks )
 {
   class zipedit *self=this;
-  register int			      status = zip_ok;
-  register zip_type_pane	      pane;
+  int			      status = zip_ok;
+  zip_type_pane	      pane;
 
   IN(zipedit_Accept_Hit);
   DEBUGst(HitPane-name,hit_pane->zip_pane_name);
@@ -189,12 +189,12 @@ zipedit::Accept_Hit( register zip_type_pane	hit_pane, enum view_MouseAction   ac
 
 static zip_type_point	      initial_x_point, initial_y_point,
 			      final_x_point, final_y_point;
-extern void zipedit_Reset_Editing_Selection( register class zipedit         *self, register zip_type_pane               pane );
+extern void zipedit_Reset_Editing_Selection( class zipedit         *self, zip_type_pane               pane );
 
 static int
 RBDT( class zipedit *self, zip_type_pane pane, long x, long y )
   {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
   IN(RBDT);
   if ( self->keyboard_processor )
@@ -219,7 +219,7 @@ RBDT( class zipedit *self, zip_type_pane pane, long x, long y )
 static int
 RBDM( class zipedit *self, zip_type_pane pane, long x, long y )
   {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
   IN(RBDM);
   status = (View)->Continue_Panning(  pane, x, y );
@@ -227,13 +227,13 @@ RBDM( class zipedit *self, zip_type_pane pane, long x, long y )
   return status;
   }
 
-extern void zipedit_Display_Background_Pane( register class zipedit        *self, register zip_type_pane            pane );
+extern void zipedit_Display_Background_Pane( class zipedit        *self, zip_type_pane            pane );
 
 static int
 RBUT( class zipedit *self, zip_type_pane pane, long x, long y )
 {
-  register int			      status = zip_ok;
-  register zip_type_image	      image =
+  int			      status = zip_ok;
+  zip_type_image	      image =
 			CurrentStream->zip_stream_image_anchor;
   long				      x_delta, y_delta;
 
@@ -293,13 +293,13 @@ RBUT( class zipedit *self, zip_type_pane pane, long x, long y )
   return status;
   }
 
-extern void zipedit_Expose_Selection_Menu( register class zipedit        *self );
+extern void zipedit_Expose_Selection_Menu( class zipedit        *self );
 
 
 static int
-Handle_Edit_Selection( register class zipedit		  *self, register zip_type_pane		   pane, register enum view_MouseAction	   action, register long				   x , register long				   y , register long				   clicks )
+Handle_Edit_Selection( class zipedit		  *self, zip_type_pane		   pane, enum view_MouseAction	   action, long				   x , long				   y , long				   clicks )
           {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
   long					  X, Y;
 
   IN(Handle_Edit_Selection);
@@ -348,9 +348,9 @@ Handle_Edit_Selection( register class zipedit		  *self, register zip_type_pane		
   }
 
 static int
-Handle_Edit_Selection_Modification( register class zipedit	      *self, register zip_type_pane	       pane, register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks )
+Handle_Edit_Selection_Modification( class zipedit	      *self, zip_type_pane	       pane, enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
           {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
   IN(Handle_Edit_Selection_Modification);
   switch ( action )
@@ -371,14 +371,14 @@ Handle_Edit_Selection_Modification( register class zipedit	      *self, register
   return status;
   }
 
-extern void zipedit_Hide_Selection_Menu( register class zipedit          *self );
+extern void zipedit_Hide_Selection_Menu( class zipedit          *self );
 
 static int
-Edit_Modification_LBDT( class zipedit *self, register zip_type_pane pane, zip_type_pixel  x , zip_type_pixel  y )
+Edit_Modification_LBDT( class zipedit *self, zip_type_pane pane, zip_type_pixel  x , zip_type_pixel  y )
 {
-    register long			      status = zip_ok;
-    register zip_type_figure	      figure = NULL;
-    register long			      point = 0;
+    long			      status = zip_ok;
+    zip_type_figure	      figure = NULL;
+    long			      point = 0;
     struct timeval		      dummy_time, dummy_zone;
     static long			      prior_time, this_time;
 
@@ -505,9 +505,9 @@ Edit_Modification_LBDT( class zipedit *self, register zip_type_pane pane, zip_ty
 }
 
 static int
-Edit_Modification_LBDM( class zipedit *self, register zip_type_pane pane, zip_type_pixel  x , zip_type_pixel  y )
+Edit_Modification_LBDM( class zipedit *self, zip_type_pane pane, zip_type_pixel  x , zip_type_pixel  y )
 {
-    register int			      status = zip_ok;
+    int			      status = zip_ok;
     long				      X, Y;
 
     IN(Edit_Modification_LBDM);
@@ -577,7 +577,7 @@ Edit_Modification_LBDM( class zipedit *self, register zip_type_pane pane, zip_ty
 }
 
 static int
-Edit_Modification_LBUT( class zipedit *self, register zip_type_pane pane, zip_type_pixel  x , zip_type_pixel  y )
+Edit_Modification_LBUT( class zipedit *self, zip_type_pane pane, zip_type_pixel  x , zip_type_pixel  y )
 {
     IN(Edit_Modification_LBUT);
     Moving = false;
@@ -622,10 +622,10 @@ Edit_Modification_LBUT( class zipedit *self, register zip_type_pane pane, zip_ty
 }
 
 zip_type_figure
-zipedit_Next_Selected_Figure( register class zipedit	      *self, register zip_type_pane	       pane, register zip_type_figure	       figure )
+zipedit_Next_Selected_Figure( class zipedit	      *self, zip_type_pane	       pane, zip_type_figure	       figure )
         {
-  register zip_type_figure	      next = NULL;
-  register long			      i = 0;
+  zip_type_figure	      next = NULL;
+  long			      i = 0;
 
   IN(zipedit_Next_Selected_Figure);
   if ( figure  &&  figure != CurrentFigure )
@@ -652,9 +652,9 @@ zipedit_Next_Selected_Figure( register class zipedit	      *self, register zip_t
   }
 
 static
-void Move_Selection( register class zipedit	      *self, register zip_type_pane	       pane )
+void Move_Selection( class zipedit	      *self, zip_type_pane	       pane )
       {
-  register zip_type_point	      X_delta, Y_delta;
+  zip_type_point	      X_delta, Y_delta;
   zip_type_point		      X1, Y1, X2, Y2;
   long				      L, T, W, H,
 				      i = 0;
@@ -699,15 +699,15 @@ void Move_Selection( register class zipedit	      *self, register zip_type_pane	
   }
 
 static
-void Duplicate_Selection( register class zipedit	      *self, register zip_type_pane	       pane, register zip_type_point	       x_delta , register zip_type_point	       y_delta )
+void Duplicate_Selection( class zipedit	      *self, zip_type_pane	       pane, zip_type_point	       x_delta , zip_type_point	       y_delta )
         {
-  register zip_type_figure	      original_figure = NULL;
+  zip_type_figure	      original_figure = NULL;
   zip_type_figure		      new_figure, peer_figure = NULL;
 /*===
   char				      name[512];
   static long			      name_serial = 1;
 ===*/
-  register long			      i;
+  long			      i;
 
   IN(Duplicate_Selection);
   peer_figure = CurrentImage->zip_image_figure_anchor;
@@ -762,9 +762,9 @@ void Duplicate_Selection( register class zipedit	      *self, register zip_type_
   OUT(Duplicate_Selection);
   }
 
-void zipedit_Cancel_Enclosure( register class zipedit	      *self, register zip_type_pane	       pane )
+void zipedit_Cancel_Enclosure( class zipedit	      *self, zip_type_pane	       pane )
       {
-  register long			      i = 0;
+  long			      i = 0;
 
   IN(zipedit_Cancel_Enclosure);
   zipedit_Hide_Selection_Menu( self );
@@ -790,9 +790,9 @@ void zipedit_Cancel_Enclosure( register class zipedit	      *self, register zip_
   }
 
 static
-boolean Within_Enclosure( register class zipedit	      *self, register zip_type_pane	       pane, register zip_type_pixel	       x , register zip_type_pixel	       y )
+boolean Within_Enclosure( class zipedit	      *self, zip_type_pane	       pane, zip_type_pixel	       x , zip_type_pixel	       y )
         {
-  register boolean		      within = false;
+  boolean		      within = false;
   long				      L, T, W, H;
 
   IN(Within_Enclosure);
@@ -805,7 +805,7 @@ boolean Within_Enclosure( register class zipedit	      *self, register zip_type_
   }
 
 static
-void Draw_Enclosure_Shadow( register class zipedit	      *self, register zip_type_pane	       pane, register long			       x , register long			       y )
+void Draw_Enclosure_Shadow( class zipedit	      *self, zip_type_pane	       pane, long			       x , long			       y )
         {
   IN(Draw_Enclosure_Shadow);
   if ( EnclosureShadowStartX < 0 )
@@ -824,7 +824,7 @@ void Draw_Enclosure_Shadow( register class zipedit	      *self, register zip_typ
   }
 
 static
-void Clear_Enclosure_Shadow( register class zipedit	      *self, register zip_type_pane	       pane )
+void Clear_Enclosure_Shadow( class zipedit	      *self, zip_type_pane	       pane )
       {
   IN(Clear_Enclosure_Shadow);
   if ( EnclosureShadowLastX > 0 )
@@ -833,7 +833,7 @@ void Clear_Enclosure_Shadow( register class zipedit	      *self, register zip_ty
   }
 
 static
-void Show_Enclosure_Shadow( register class zipedit	      *self, register zip_type_pane	       pane )
+void Show_Enclosure_Shadow( class zipedit	      *self, zip_type_pane	       pane )
       {
   long				      L, T, W, H;
 
@@ -856,7 +856,7 @@ W, H );
   OUT(Show_Enclosure_Shadow);
   }
 
-void zipedit_Enclose_Figure( register class zipedit	      *self, register zip_type_figure	       figure, register zip_type_pane	       pane )
+void zipedit_Enclose_Figure( class zipedit	      *self, zip_type_figure	       figure, zip_type_pane	       pane )
         {
   IN(zipedit_Enclose_Figure);
   if ( figure )
@@ -876,9 +876,9 @@ void zipedit_Enclose_Figure( register class zipedit	      *self, register zip_ty
   }
 
 static
-int Check_Enclosure( register class zipedit	      *self, register zip_type_pane	       pane, register zip_type_image	       image, register long			       count )
+int Check_Enclosure( class zipedit	      *self, zip_type_pane	       pane, zip_type_image	       image, long			       count )
           {
-  register zip_type_figure	      figure;
+  zip_type_figure	      figure;
   long				      L, T, W, H;
 
   IN(Check_Enclosure);
@@ -927,7 +927,7 @@ int Check_Enclosure( register class zipedit	      *self, register zip_type_pane	
   }
 
 static
-void Draw_Enclosure( register class zipedit	      *self, register zip_type_pane	       pane, register long			       x , register long			       y )
+void Draw_Enclosure( class zipedit	      *self, zip_type_pane	       pane, long			       x , long			       y )
         {
   IN(Draw_Enclosure);
   if ( x > ((View)->Pane_Left(    pane ) + 2)  &&
@@ -944,7 +944,7 @@ void Draw_Enclosure( register class zipedit	      *self, register zip_type_pane	
   }
 
 static
-void Clear_Enclosure( register class zipedit	      *self, register zip_type_pane	       pane )
+void Clear_Enclosure( class zipedit	      *self, zip_type_pane	       pane )
       {
   IN(Clear_Enclosure);
   EnclosureExposed = false;
@@ -955,7 +955,7 @@ void Clear_Enclosure( register class zipedit	      *self, register zip_type_pane
   OUT(Clear_Enclosure);
   }
 
-void Show_Enclosure( register class zipedit	      *self, register zip_type_pane	       pane )
+void Show_Enclosure( class zipedit	      *self, zip_type_pane	       pane )
       {
   long				     L, T, W, H;
 
@@ -976,9 +976,9 @@ if ( (View )->GetLineWidth( ) != 1 )
   }
 
 static
-void Enclosure_Bounds( register class zipedit	      *self, register zip_type_pane	       pane, register zip_type_pixel	      *L , register zip_type_pixel	      *T , register zip_type_pixel	      *W , register zip_type_pixel	      *H )
+void Enclosure_Bounds( class zipedit	      *self, zip_type_pane	       pane, zip_type_pixel	      *L , zip_type_pixel	      *T , zip_type_pixel	      *W , zip_type_pixel	      *H )
         {
-  register zip_type_pixel	      left = EnclosureLeft,  top = EnclosureTop,
+  zip_type_pixel	      left = EnclosureLeft,  top = EnclosureTop,
 				      width = EnclosureWidth, height = EnclosureHeight;
   IN(Enclosure_Bounds);
   if ( width  < 0 )
@@ -993,9 +993,9 @@ void Enclosure_Bounds( register class zipedit	      *self, register zip_type_pan
   }
 
 static
-void Show_Names( register class zipedit	       *self, register zip_type_pane	        pane )
+void Show_Names( class zipedit	       *self, zip_type_pane	        pane )
       {
-  register zip_type_figure	       name_figure;
+  zip_type_figure	       name_figure;
 
   if ( PalettesExposed  &&  NamePalette )
     {
@@ -1017,9 +1017,9 @@ void Show_Names( register class zipedit	       *self, register zip_type_pane	   
   }
 
 static
-void Show_Point( register class zipedit	      *self, register zip_type_pane	       pane, register zip_type_figure	       figure, register int			       point )
+void Show_Point( class zipedit	      *self, zip_type_pane	       pane, zip_type_figure	       figure, int			       point )
           {
-  register zip_type_figure	      name_figure;
+  zip_type_figure	      name_figure;
   char				      msg[257];
   zip_type_point		      X, Y;
 
@@ -1043,9 +1043,9 @@ void Show_Point( register class zipedit	      *self, register zip_type_pane	    
   }
 
 static
-void Show_Font( register class zipedit	      *self, register zip_type_pane	       pane, register char			      *font_name )
+void Show_Font( class zipedit	      *self, zip_type_pane	       pane, char			      *font_name )
         {
-  register zip_type_figure	      name_figure;
+  zip_type_figure	      name_figure;
 
   IN(Show_Font);
   if ( PalettesExposed  &&  AttributePalette )
@@ -1059,9 +1059,9 @@ void Show_Font( register class zipedit	      *self, register zip_type_pane	     
   }
 
 static
-void Clear_Font( register class zipedit	      *self, register zip_type_pane	       pane )
+void Clear_Font( class zipedit	      *self, zip_type_pane	       pane )
       {
-  register zip_type_figure	      name_figure;
+  zip_type_figure	      name_figure;
 
   IN(Clear_Font);
   if ( PalettesExposed  &&  AttributePalette )
@@ -1074,9 +1074,9 @@ void Clear_Font( register class zipedit	      *self, register zip_type_pane	    
   }
 
 static
-void Set_Constraints( register class zipedit	      *self, register zip_type_pane	       pane, register zip_type_pixel	       x  , register zip_type_pixel	       y, register zip_type_point	      *X , register zip_type_point	      *Y )
+void Set_Constraints( class zipedit	      *self, zip_type_pane	       pane, zip_type_pixel	       x  , zip_type_pixel	       y, zip_type_point	      *X , zip_type_point	      *Y )
           {
-  register double		      point_offset, point_delta;
+  double		      point_offset, point_delta;
     double gsize = 1.0, SM, SD;
 
   IN(Set_Constraints);

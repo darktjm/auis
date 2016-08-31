@@ -62,7 +62,7 @@ dolog()
 static int logme(name, password, cellname)
 char *name, *password, *cellname;
 {
-    register int pid;
+    int pid;
     int outStatus, valWait;
 
     errprintf(myname, ERR_CRITICAL, NIL, NIL, "Attempting re-authentication as %s@%s", name, (cellname == NULL ? WorkstationCell : cellname));
@@ -97,12 +97,12 @@ char *name, *password, *cellname;
 static int LogViaDir(dirn)
 char *dirn;
 {/* Scan the directory ``dirn'' for files corresponding to other-cell authentications. */
-    register DIR *dirp = NIL;
-    register DIRENT_TYPE *dp;
+    DIR *dirp = NIL;
+    DIRENT_TYPE *dp;
     int err, AnyFailed, fd, len;
     char FName[1024];
     char FContent[1024];
-    char *user, *pw; register char *x;
+    char *user, *pw; char *x;
 
     AnyFailed = 0;
     errno = 0;
@@ -161,7 +161,7 @@ main(argc, argv)
 int argc;
 char *argv[];
 {
-    register int len, nap, pid, LogStatus, SleepTime;
+    int len, nap, pid, LogStatus, SleepTime;
     struct timeval tv;
     char password[512];	/* Should be big enough */
 #ifdef AFS_ENV

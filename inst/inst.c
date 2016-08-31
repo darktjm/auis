@@ -92,9 +92,9 @@ static int stripName(const char *aname)
     else return 0;
     }
 
-static int atoo(register const char *astr)
-    {register long value;
-    register char tc;
+static int atoo(const char *astr)
+    {long value;
+    char tc;
     value = 0;
     while ((tc = *astr++))
 	{value <<= 3;
@@ -182,8 +182,8 @@ int main (int argc, const char **argv)
     int isDir;
     int strip;
     int fptr;
-    register const char *tp;
-    register long i;
+    const char *tp;
+    long i;
 
     fptr = 0;
     rcode = 0;

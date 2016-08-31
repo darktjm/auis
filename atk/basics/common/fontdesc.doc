@@ -390,11 +390,11 @@ struct fontdesc *fontdesc;
 
 struct graphic *graphic;
 
-register unsigned char *string;
+unsigned char *string;
 
-register long *XWidth;
+long *XWidth;
 
-register long *YWidth;} 
+long *YWidth;} 
 
 
 \leftindent{\bold{Method description.}  Gets the size of a text string. 

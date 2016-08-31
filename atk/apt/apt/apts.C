@@ -107,10 +107,10 @@ ATKdefineRegistry(apts, ATK, NULL);
 
 
 long
-apts::CompareStrings( register const char			  *s1 , register const char			  *s2 )
+apts::CompareStrings( const char			  *s1 , const char			  *s2 )
       {
-  register long			  result = 0;
-  register unsigned char	  c1, c2;
+  long			  result = 0;
+  unsigned char	  c1, c2;
 
   IN(apts_CompareStrings);
   do
@@ -129,10 +129,10 @@ apts::CompareStrings( register const char			  *s1 , register const char			  *s2 
   }
 
 long
-apts::SubstringIndex( register const char		  	  *pattern , register const char		  	  *string )
+apts::SubstringIndex( const char		  	  *pattern , const char		  	  *string )
       {
-  register long			  i, position = -1;
-  register const char			 *origin = string;
+  long			  i, position = -1;
+  const char			 *origin = string;
 
   IN(apts_SubstringIndex);
   while ( *string  &&  position == -1 )
@@ -152,9 +152,9 @@ apts::SubstringIndex( register const char		  	  *pattern , register const char		
   }
 
 char *
-apts::StripString( register char			  *string )
+apts::StripString( char			  *string )
       {
-  register char			 *source = string,
+  char			 *source = string,
 				 *cursor = string;
 
   IN(apts_StripString);
@@ -172,10 +172,10 @@ apts::StripString( register char			  *string )
   }
 
 long
-apts::CaptureString( register const char			  *source , register char			  **target )
+apts::CaptureString( const char			  *source , char			  **target )
       {
-  register char			 *cursor;
-  register long			  status = ok;
+  char			 *cursor;
+  long			  status = ok;
 
   IN(apts_CaptureString);
   if ( source  &&  target )
@@ -205,7 +205,7 @@ apts::CaptureString( register const char			  *source , register char			  **targe
 \******************************************************************************/
 
 void
-apts::HourMinuteSecond( register long		          *hour , register long		          *minute , register long		          *second )
+apts::HourMinuteSecond( long		          *hour , long		          *minute , long		          *second )
       {
   struct tm			 *time_units;
   time_t			  clock;   
@@ -220,7 +220,7 @@ apts::HourMinuteSecond( register long		          *hour , register long		        
   }
 
 void
-apts::HourOfDay( register char		   	  *hour )
+apts::HourOfDay( char		   	  *hour )
       {
   long				  hours, minutes, seconds;
 
@@ -232,7 +232,7 @@ apts::HourOfDay( register char		   	  *hour )
   }
 
 void
-apts::MinuteOfHour( register char			  *minute )
+apts::MinuteOfHour( char			  *minute )
       {
   long				  hours, minutes, seconds;
 
@@ -243,7 +243,7 @@ apts::MinuteOfHour( register char			  *minute )
   }
 
 void
-apts::SecondOfMinute( register char			  *second )
+apts::SecondOfMinute( char			  *second )
       {
   long				  hours, minutes, seconds;
 
@@ -266,9 +266,9 @@ static long			  days_per_month[2][13] =
     };
 
 long   /* Returns 1 if Leap-year, 0 otherwise */
-apts::YearMonthDay( register long			  *year , register long			  *month , register long			  *day )
+apts::YearMonthDay( long			  *year , long			  *month , long			  *day )
       {
-  register long			  leap; 
+  long			  leap; 
   struct tm			 *time_units;
   time_t			  clock;
 
@@ -286,9 +286,9 @@ apts::YearMonthDay( register long			  *year , register long			  *month , registe
   }
 
 long
-apts::DaysInMonth( register long			   year , register long			   month )
+apts::DaysInMonth( long			   year , long			   month )
       {
-  register long			  leap;
+  long			  leap;
 
   IN(apts_DaysInMonth);
   if ( year % 4 == 0  &&  year % 100 != 0  ||  year % 400 == 0 )
@@ -299,9 +299,9 @@ apts::DaysInMonth( register long			   year , register long			   month )
   }
 
 long   /* Return 0 thru 6: 0=Sunday, 1=Monday, ..., 6=Saturday */
-apts::WeekDayOffset( register long			   year , register long			   month , register long			   day )
+apts::WeekDayOffset( long			   year , long			   month , long			   day )
       {
-  register long			  i, leap, years, offset = day;
+  long			  i, leap, years, offset = day;
 
   IN(apts_WeekDayOffset);
   leap = year % 4 == 0  &&  year % 100 != 0  ||  year % 400 == 0;

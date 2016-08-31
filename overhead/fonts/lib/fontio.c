@@ -50,7 +50,7 @@ struct font *ReadFwmFont (FileName)
 char *FileName;
 {
     struct stat st;
-    register struct font   *f;
+    struct font   *f;
     int     fd = open (FileName, 0);
     char *end;	/* point to end of space for f to set \0 */
 
@@ -135,11 +135,11 @@ struct font *foo;
 {
     /*	Takes a font compiled on a byte reversed machine and converts it for use. 
 	Assumes BITMAP type icons 	*/
-    register unsigned char *cc1,*cc2,tmp;
-    register int i;
-    register struct BitmapIconSpecificPart *SPp ,*minspec,*maxspec;
-    register struct IconGenericPart *GPp ,*mingen,*maxgen;
-    register unsigned short *ip;
+    unsigned char *cc1,*cc2,tmp;
+    int i;
+    struct BitmapIconSpecificPart *SPp ,*minspec,*maxspec;
+    struct IconGenericPart *GPp ,*mingen,*maxgen;
+    unsigned short *ip;
     sb(foo->magic);
     sb( foo->NonSpecificLength);
     sb(foo->fn.rotation) ;
@@ -153,7 +153,7 @@ struct font *foo;
     mingen = NULL ; maxgen = NULL;
     for (i = 0; i <= 0177; i++)
     {
-	register struct icon *p = &foo->chars[i];
+	struct icon *p = &foo->chars[i];
 	sb(p->OffsetToGeneric);
 	sb(p->OffsetToSpecific );
 	if (p->OffsetToSpecific != 0 && p->OffsetToGeneric != 0)

@@ -324,7 +324,7 @@ const struct symbol symbols[] = {
 const struct symbol *eq::Lookup(const char  *name)
 {
 
-    register const struct symbol *s;
+    const struct symbol *s;
     for (s=symbols;  s->name;  s++)
 	if (*name == *(s->name) && strcmp(name, s->name)==0)
 	    break;
@@ -336,7 +336,7 @@ const struct symbol *eq::Lookup(const char  *name)
 
 void eq::EnumerateSymbols(eq_enumfptr proc, void *rock)
 {
-    register const struct symbol *s;
+    const struct symbol *s;
     for (s=symbols;  s->name;  s++) {
 	(*proc)(s->name, s->doc, rock);
     }

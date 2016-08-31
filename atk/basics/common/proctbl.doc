@@ -214,7 +214,7 @@ struct proctable_Entry *tempProc;
 
 \example{struct proctable_Entry *proctable_Lookup(classID, name)
 
-register char *name;} 
+char *name;} 
 
 
 \leftindent{\bold{Class procedure description.  }  \italic{proctable_Lookup} 

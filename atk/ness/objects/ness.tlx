@@ -255,9 +255,9 @@ tokenclass setSTRINGCON
 tokenclass setSTRINGCON
 seq	"//"
 {
-	register int c;
+	int c;
 	static const char delim[4] = "\n\\\\";
-	register const char *dx;
+	const char *dx;
 	class toksym *t;	/* is really a nesssym */	
 	long startloc;
 

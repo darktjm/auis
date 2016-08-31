@@ -177,18 +177,18 @@ static const char				  ZIP_postscript_header2[] =
 
 
 
-int zipprint_Write_Print_Datastream_Header( register class zipprint	          *self );
-int zipprint_Write_Print_Datastream_Trailer( register class zipprint	          *self );
-static char * zipprint_Line_Attributes_String( register class zipprint	          *self );
+int zipprint_Write_Print_Datastream_Header( class zipprint	          *self );
+int zipprint_Write_Print_Datastream_Trailer( class zipprint	          *self );
+static char * zipprint_Line_Attributes_String( class zipprint	          *self );
 
 
 int
-zipprint_Write_Print_Datastream_Header( register class zipprint	          *self )
+zipprint_Write_Print_Datastream_Header( class zipprint	          *self )
     {
-  register int				  status = zip_ok;
-  register long				  IH72 = (long) (72*InchHeight),
+  int				  status = zip_ok;
+  long				  IH72 = (long) (72*InchHeight),
 					  IW72 = (long) (72*InchWidth), W, H;
-  register char				  *cursor;
+  char				  *cursor;
   char					  *ZIP_postscript_header;
 
   IN(zipprint_Write_Print_Datastream_Header);
@@ -251,9 +251,9 @@ zipprint_Write_Print_Datastream_Header( register class zipprint	          *self 
   }
 
 int
-zipprint_Write_Print_Datastream_Trailer( register class zipprint	          *self )
+zipprint_Write_Print_Datastream_Trailer( class zipprint	          *self )
     {
-  register int				  status = zip_ok;
+  int				  status = zip_ok;
 
   IN(zipprint_Write_Print_Datastream_Trailer);
   if ( PostScriptLanguage )
@@ -278,7 +278,7 @@ zipprint_Write_Print_Datastream_Trailer( register class zipprint	          *self
   return status;
   }
 
-void zipprint::Set_Line_Width( register long	line_width )
+void zipprint::Set_Line_Width( long	line_width )
 {
     class zipprint *self=this;
     IN(zipprint_Set_Line_Width);
@@ -286,11 +286,11 @@ void zipprint::Set_Line_Width( register long	line_width )
     OUT(zipprint_Set_Line_Width);
 }
 
-long zipprint::Ensure_Line_Attributes( register zip_type_figure		 figure )
+long zipprint::Ensure_Line_Attributes( zip_type_figure		 figure )
 {
   class zipprint *self=this;
-  register unsigned char		lwidth;
-  register long				status = zip_ok;
+  unsigned char		lwidth;
+  long				status = zip_ok;
   char					*pattern = NULL;
   int					offset;
   short					dashtype, value;
@@ -317,7 +317,7 @@ long zipprint::Ensure_Line_Attributes( register zip_type_figure		 figure )
   }
 
 static char *
-zipprint_Line_Attributes_String( register class zipprint	          *self )
+zipprint_Line_Attributes_String( class zipprint	          *self )
     {
   static char			string[300];
   char				temp[100];
@@ -360,7 +360,7 @@ zipprint_Line_Attributes_String( register class zipprint	          *self )
     return string;
   }
 
-void zipprint::Set_Shade( register long  shade )
+void zipprint::Set_Shade( long  shade )
 {
     class zipprint *self=this;
     IN(zipprint_Set_Shade);
@@ -375,7 +375,7 @@ void zipprint::Set_Shade( register long  shade )
     OUT(zipprint_Set_Shade);
 }
 
-void zipprint::Move_To( register long x , register long y )
+void zipprint::Move_To( long x , long y )
       {
   class zipprint *self=this;
   IN(zipprint::Move_To);
@@ -384,7 +384,7 @@ void zipprint::Move_To( register long x , register long y )
   OUT(zipprint::Move_To);
   }
 
-void zipprint::Draw_To( register long  x , register long y )
+void zipprint::Draw_To( long  x , long y )
 {
   class zipprint *self=this;
   IN(zipprint::Draw_To);
@@ -402,11 +402,11 @@ void zipprint::Close_Path( )
   OUT(zipprint::Close_Path);
   }
 
-void zipprint::Draw_Multi_Line( register int npoints , register int	x_origin , register int y_origin, register zip_type_point_pairs   points )
+void zipprint::Draw_Multi_Line( int npoints , int	x_origin , int y_origin, zip_type_point_pairs   points )
         {
   class zipprint *self=this;
-  register long				  i, count, nchunks, remainder;
-  register float			  shade = 0.0;
+  long				  i, count, nchunks, remainder;
+  float			  shade = 0.0;
 
   IN(zipprint::Draw_Multi_Line);
   DEBUGdt(Points,npoints);
@@ -447,12 +447,12 @@ void zipprint::Draw_Multi_Line( register int npoints , register int	x_origin , r
 static   char   ZIP_pending_font[100] = ".ft R\n.ps 12"; /*=== improve ===*/
 static   int CURRENTFONTSIZE;/*===*/
 
-void zipprint::Draw_String( register int x , register int y, register char *string, register long mode )
+void zipprint::Draw_String( int x , int y, char *string, long mode )
           {
   class zipprint *self=this;
   char					 *expansion,
 					 *s, *t;
-  register boolean			  force_centered = false;
+  boolean			  force_centered = false;
 
   IN(zipprint::Draw_String);
   if ( mode == 0 )
@@ -496,10 +496,10 @@ void zipprint::Draw_String( register int x , register int y, register char *stri
 void zipprint::Change_Font( class fontdesc  *font )
       {
   class zipprint *self=this;
-  register char				 *font_family;
+  char				 *font_family;
   char					  face[50], ItalObl[20], Default[20];
-  register int				  font_face;
-  register int				  font_height;
+  int				  font_face;
+  int				  font_height;
 
   IN(zipprint::Change_Font);
   font_family = (font )->GetFontFamily( );
@@ -550,7 +550,7 @@ void zipprint::Restore_Font( )
   OUT(zipprint::Restore_Font);
   }
 
-void zipprint::Draw_Line( register int x1 , register int y1 , register int x2 , register int y2 )
+void zipprint::Draw_Line( int x1 , int y1 , int x2 , int y2 )
       {
   class zipprint *self=this;
   IN(zipprint::Draw_Line);
@@ -566,7 +566,7 @@ void zipprint::Draw_Line( register int x1 , register int y1 , register int x2 , 
   OUT(zipprint_Draw_Line);
   }
 
-void zipprint::Draw_Rectangle( register long	 left , register long top , register long right , register long bottom )
+void zipprint::Draw_Rectangle( long	 left , long top , long right , long bottom )
       {
   class zipprint *self=this;
   static const char				  format[] =
@@ -584,7 +584,7 @@ void zipprint::Draw_Rectangle( register long	 left , register long top , registe
   OUT(zipprint_Draw_Rectangle);
   }
 
-void zipprint::Draw_Round_Rectangle( register long left , register long top , register long	right , register long	 bottom , register long	 x_radius , register long y_radius )
+void zipprint::Draw_Round_Rectangle( long left , long top , long	right , long	 bottom , long	 x_radius , long y_radius )
       {
   class zipprint *self=this;
   static const char			  format[] =
@@ -602,15 +602,15 @@ void zipprint::Draw_Round_Rectangle( register long left , register long top , re
   OUT(zipprint::DrawRound_Rectangle);
   }
 
-void zipprint::Draw_Circle( register int x_center , register int y_center , register int x_radius )
+void zipprint::Draw_Circle( int x_center , int y_center , int x_radius )
   {
   (this)->Draw_Ellipse(  x_center, y_center, x_radius, x_radius );
   }
 
-void zipprint::Draw_Ellipse( register int x_center , register int y_center, register int x_radius , register int y_radius )
+void zipprint::Draw_Ellipse( int x_center , int y_center, int x_radius , int y_radius )
         {
   class zipprint *self=this;
-  register float			  x_scale, y_scale;
+  float			  x_scale, y_scale;
 
   IN(zipprint::Draw_Ellipse);
   DEBUGdt(X_radius,x_radius);  DEBUGdt(Y_radius,y_radius);
@@ -650,10 +650,10 @@ void zipprint::Draw_Ellipse( register int x_center , register int y_center, regi
   OUT(zipprint::Draw_Ellipse);
   }
 
-void zipprint::Draw_Arc( register long x_center , register long y_center, register long x_radius , register long  y_radius, register long x_start , register long y_start, register long  x_end , register long y_end )
+void zipprint::Draw_Arc( long x_center , long y_center, long x_radius , long  y_radius, long x_start , long y_start, long  x_end , long y_end )
       {
   class zipprint *self=this;
-  register float			  start_angle, end_angle, theta,
+  float			  start_angle, end_angle, theta,
 		    			  x_scale, y_scale;
   static const char			  format[] =
 "%s /cmtx matrix currentmatrix def %.2f %.2f moveto gsave "
@@ -689,10 +689,10 @@ void zipprint::Draw_Arc( register long x_center , register long y_center, regist
     }
   }
 
-void zipprint::Arc_To( register int x_center , register int	 y_center, register int x_radius , register int y_radius, register int x_start , register int y_start, register int x_end , register int y_end )
+void zipprint::Arc_To( int x_center , int	 y_center, int x_radius , int y_radius, int x_start , int y_start, int x_end , int y_end )
 {
   class zipprint *self=this;
-  register int				  x1, y1;
+  int				  x1, y1;
 
   if ( PostScriptLanguage )
     {
@@ -708,11 +708,11 @@ void zipprint::Arc_To( register int x_center , register int	 y_center, register 
   }
 
 void
-zipprint::Fill_Trapezoid( register int x1 , register int   y1 , register int   x2 , register int   y2 , register int   l1 , register int   l2, register char   pattern )
+zipprint::Fill_Trapezoid( int x1 , int   y1 , int   x2 , int   y2 , int   l1 , int   l2, char   pattern )
 {
   class zipprint *self=this;
-  register long				  x3, x4;
-  register float			  gray = 1.0;
+  long				  x3, x4;
+  float			  gray = 1.0;
 
   if ( PostScriptLanguage )
     {
@@ -740,7 +740,7 @@ zipprint::Fill_Trapezoid( register int x1 , register int   y1 , register int   x
   }
 
 long
-zipprint::Try_Printing_Exception_Handler( register zip_type_printing		   printing )
+zipprint::Try_Printing_Exception_Handler( zip_type_printing		   printing )
 {
   class zipprint *self=this;
 /*===

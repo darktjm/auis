@@ -88,7 +88,7 @@ main(ac, av)
 int	ac;
 char	*av[];
 {
-	register int	i;
+	int	i;
 	int status;
 	char *file, *user, *orgname;
 
@@ -140,8 +140,8 @@ headers are added also.
 static sendnews(host, file, user, orgname)
 char	*host, *file, *user, *orgname;
 {
-	register int	code;
-	register FILE	*fp;
+	int	code;
+	FILE	*fp;
 	char    tmpmsg[BUFSIZ], buf[BUFSIZ], file2[MAXPATHLEN];
 	int status = EX_OK;
 	/*
@@ -253,7 +253,7 @@ static post(fp)
 FILE	*fp;
 {
 	char	scr[LBUFLEN];
-	register int	code;
+	int	code;
 	char	buf[BUFSIZ];
 
 	strcpy(buf, "POST");

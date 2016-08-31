@@ -39,38 +39,38 @@
 #include <environ.H>
 #include <txtproc.h>
 
-void textview_EndOfWordCmd (register class textview  *self);
-void textview_ForwardWordCmd (register class textview  *self);
-void textview_BackwardWordCmd (register class textview  *self);
-void textview_LineToTopCmd(register class textview  *self);
-void textview_ForwardParaCmd(register class textview  *self);
-void textview_BackwardParaCmd(register class textview  *self);
-void textview_GotoParagraphCmd(register class textview  *self);
-void textview_WhatParagraphCmd (register class textview  *v);
-void textview_ViGlitchUpCmd(register class textview  *self);
-void textview_ViGlitchDownCmd(register class textview  *self);
-void textview_DownCmd(register class textview  *self);
-void textview_UpCmd(register class textview  *self);
-void textview_GlitchUpCmd(register class textview  *self);
-void textview_GlitchDownCmd(register class textview  *self);
+void textview_EndOfWordCmd (class textview  *self);
+void textview_ForwardWordCmd (class textview  *self);
+void textview_BackwardWordCmd (class textview  *self);
+void textview_LineToTopCmd(class textview  *self);
+void textview_ForwardParaCmd(class textview  *self);
+void textview_BackwardParaCmd(class textview  *self);
+void textview_GotoParagraphCmd(class textview  *self);
+void textview_WhatParagraphCmd (class textview  *v);
+void textview_ViGlitchUpCmd(class textview  *self);
+void textview_ViGlitchDownCmd(class textview  *self);
+void textview_DownCmd(class textview  *self);
+void textview_UpCmd(class textview  *self);
+void textview_GlitchUpCmd(class textview  *self);
+void textview_GlitchDownCmd(class textview  *self);
 static long PageOverlap(long  viewHeight);
 void textview_NextScreenCmd(class textview  *self);
-void textview_PrevScreenCmd(register class textview  *self);
-void textview_StartOfParaCmd (register class textview  *self);
-void textview_EndOfParaCmd (register class textview  *self);
-void textview_SelectRegionCmd(register class textview  *self);
-void textview_CtrlAtCmd(register class textview  *self);
-void textview_BackwardCmd(register class textview  *self);
-void textview_ForwardCmd(register class textview  *self);
-void textview_PreviousLineCmd (register class textview  *self  /**/);
-void textview_NextLineCmd (register class textview  *self /**/);
-void textview_EndOfTextCmd(register class textview  *self);
-void textview_BeginningOfTextCmd(register class textview  *self);
-void textview_EndOfLineCmd (register class textview  *self);
-void textview_BeginningOfLineCmd(register class textview  *self);
-void textview_EndOfWSWordCmd(register class textview  *self);
-void textview_ForwardWSWordCmd(register class textview  *self);
-void textview_BackwardWSWordCmd(register class textview  *self);
+void textview_PrevScreenCmd(class textview  *self);
+void textview_StartOfParaCmd (class textview  *self);
+void textview_EndOfParaCmd (class textview  *self);
+void textview_SelectRegionCmd(class textview  *self);
+void textview_CtrlAtCmd(class textview  *self);
+void textview_BackwardCmd(class textview  *self);
+void textview_ForwardCmd(class textview  *self);
+void textview_PreviousLineCmd (class textview  *self  /**/);
+void textview_NextLineCmd (class textview  *self /**/);
+void textview_EndOfTextCmd(class textview  *self);
+void textview_BeginningOfTextCmd(class textview  *self);
+void textview_EndOfLineCmd (class textview  *self);
+void textview_BeginningOfLineCmd(class textview  *self);
+void textview_EndOfWSWordCmd(class textview  *self);
+void textview_ForwardWSWordCmd(class textview  *self);
+void textview_BackwardWSWordCmd(class textview  *self);
 void textview_BeginningOfFirstWordCmd(class textview  *self);
 void textview_BeginningOfPreviousLineCmd(class textview  *self);
 void textview_BeginningOfNextLineCmd(class textview  *self);
@@ -78,13 +78,13 @@ void textview_CursorToLine(class textview  *self, long  line);
 void textview_CursorToTop(class textview  *self, long  key);
 void textview_CursorToCenter(class textview  *self, long  key);
 void textview_CursorToBottom(class textview  *self, long  key);
-void textview_GoToLineCmd(register class textview  *self);
+void textview_GoToLineCmd(class textview  *self);
 
 
-void textview_EndOfWordCmd (register class textview  *self)
+void textview_EndOfWordCmd (class textview  *self)
     {/**/
-    register int j, ct, pos, dlen, testType;
-    register class text *d;
+    int j, ct, pos, dlen, testType;
+    class text *d;
     char	c;
     /****/
     pos = (self)->CollapseDot();
@@ -112,10 +112,10 @@ void textview_EndOfWordCmd (register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_ForwardWordCmd (register class textview  *self)
+void textview_ForwardWordCmd (class textview  *self)
     {
-    register int j, count, pos, dlen;
-    register class text *d;
+    int j, count, pos, dlen;
+    class text *d;
 
     pos = (self)->CollapseDot();
     count = ((self)->GetIM())->Argument();
@@ -129,7 +129,7 @@ void textview_ForwardWordCmd (register class textview  *self)
 	    while (pos<dlen && isalnum((d)->GetChar(pos))!=0) pos++;
 	}
 	else {
-	    register int  testType;
+	    int  testType;
 	    char	c;
 
 	    if ( (testType = charType((d)->GetChar( pos))) == WHITESPACE )
@@ -173,9 +173,9 @@ void textview_ForwardWordCmd (register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_ForwardBeginWordCmd (register class textview *self)
+void textview_ForwardBeginWordCmd (class textview *self)
 {
-    register long pos, textSize;
+    long pos, textSize;
     class text *d = Text(self);
 
     textview_ForwardWordCmd(self);
@@ -188,10 +188,10 @@ void textview_ForwardBeginWordCmd (register class textview *self)
     self->WantUpdate(self);
 }
 
-void textview_BackwardWordCmd (register class textview  *self)
+void textview_BackwardWordCmd (class textview  *self)
     {
-    register int j, count, pos;
-    register class text *d;
+    int j, count, pos;
+    class text *d;
 
     pos = (self)->CollapseDot();
     count = ((self)->GetIM())->Argument();
@@ -205,7 +205,7 @@ void textview_BackwardWordCmd (register class textview  *self)
 	}
 	else
 	{
-	    register int testType;
+	    int testType;
 	    char	c;
 
 	    pos--;
@@ -227,7 +227,7 @@ void textview_BackwardWordCmd (register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_LineToTopCmd(register class textview  *self)
+void textview_LineToTopCmd(class textview  *self)
 {
     long pos;
 
@@ -238,10 +238,10 @@ void textview_LineToTopCmd(register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_ForwardParaCmd(register class textview  *self)
+void textview_ForwardParaCmd(class textview  *self)
 {
-    register int j, ct, pos, dlen;
-    register class text *d;
+    int j, ct, pos, dlen;
+    class text *d;
 
     j = 0;
     ct = ((self)->GetIM())->Argument();
@@ -260,10 +260,10 @@ void textview_ForwardParaCmd(register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_BackwardParaCmd(register class textview  *self)
+void textview_BackwardParaCmd(class textview  *self)
 {
-    register int j, ct, pos;
-    register class text *d;
+    int j, ct, pos;
+    class text *d;
 
     j = 0;
     ct = ((self)->GetIM())->Argument();
@@ -278,12 +278,12 @@ void textview_BackwardParaCmd(register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_GotoParagraphCmd(register class textview  *self)
+void textview_GotoParagraphCmd(class textview  *self)
 {
     char temp[100];
     int line, gf;
-    register int pos;
-    register class text *d;
+    int pos;
+    class text *d;
 
     d = Text(self);
 
@@ -304,11 +304,11 @@ void textview_GotoParagraphCmd(register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_WhatParagraphCmd (register class textview  *v)
+void textview_WhatParagraphCmd (class textview  *v)
 {
     char temp[100];
-    register int i, pos;
-    register class text *d;
+    int i, pos;
+    class text *d;
 
     d=Text(v);
     pos = (v)->GetDotPosition();
@@ -319,10 +319,10 @@ void textview_WhatParagraphCmd (register class textview  *v)
     message::DisplayString(v, 0, temp);
 }
 
-void textview_ViGlitchUpCmd(register class textview  *self)
+void textview_ViGlitchUpCmd(class textview  *self)
 {
-    register int n;
-    register int pos;
+    int n;
+    int pos;
     long 	dotPos;
     long 	dist, lines;
 
@@ -342,9 +342,9 @@ void textview_ViGlitchUpCmd(register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_ViGlitchDownCmd(register class textview  *self)
+void textview_ViGlitchDownCmd(class textview  *self)
 {
-    register int n,pos;
+    int n,pos;
     long	dotPos;
     long 	dist, lines;
 
@@ -376,7 +376,7 @@ void textview_ViGlitchDownCmd(register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_DownCmd(register class textview  *self)
+void textview_DownCmd(class textview  *self)
     {
     if ( (self->imPtr)->Argument() == 1 )
     {
@@ -387,7 +387,7 @@ void textview_DownCmd(register class textview  *self)
     textview_ViGlitchUpCmd(self);
 }
 
-void textview_UpCmd(register class textview  *self)
+void textview_UpCmd(class textview  *self)
     {
     if ( (self->imPtr)->Argument() == 1 )
     {
@@ -398,10 +398,10 @@ void textview_UpCmd(register class textview  *self)
     textview_ViGlitchDownCmd(self);
 }
 
-void textview_GlitchUpCmd(register class textview  *self)
+void textview_GlitchUpCmd(class textview  *self)
 {
-    register int n;
-    register int pos;
+    int n;
+    int pos;
 
     n = ((self)->GetIM())->Argument();
     pos = (self)->GetTopPosition();
@@ -414,9 +414,9 @@ void textview_GlitchUpCmd(register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_GlitchDownCmd(register class textview  *self)
+void textview_GlitchDownCmd(class textview  *self)
 {
-    register int n,pos;
+    int n,pos;
     long dist, lines;
 
     n = ((self)->GetIM())->Argument();
@@ -489,7 +489,7 @@ static void DoNextScreenCmd(class textview  *self, boolean move_dot)
     (self)->WantUpdate( self);
 }
 
-static void DoPrevScreenCmd(register class textview  *self, boolean move_dot)
+static void DoPrevScreenCmd(class textview  *self, boolean move_dot)
 {
     int argument = ((self)->GetIM())->Argument();
     int count;
@@ -536,30 +536,30 @@ static void DoPrevScreenCmd(register class textview  *self, boolean move_dot)
     (self)->WantUpdate( self);
 }
 
-void textview_NextScreenCmd(register class textview *self)
+void textview_NextScreenCmd(class textview *self)
 {
     DoNextScreenCmd(self, self->editor == VI);
 }
 
-void textview_NextScreenMoveCmd(register class textview *self)
+void textview_NextScreenMoveCmd(class textview *self)
 {
     DoNextScreenCmd(self, TRUE);
 }
 
-void textview_PrevScreenCmd(register class textview *self)
+void textview_PrevScreenCmd(class textview *self)
 {
     DoPrevScreenCmd(self, self->editor == VI);
 }
 
-void textview_PrevScreenMoveCmd(register class textview *self)
+void textview_PrevScreenMoveCmd(class textview *self)
 {
      DoPrevScreenCmd(self, TRUE);
 }
 
-void textview_StartOfParaCmd (register class textview  *self)
+void textview_StartOfParaCmd (class textview  *self)
 {
-    register class text *d;
-    register int pos;
+    class text *d;
+    int pos;
 
     d = Text(self);
     pos = (self)->GetDotPosition();
@@ -569,10 +569,10 @@ void textview_StartOfParaCmd (register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_EndOfParaCmd (register class textview  *self)
+void textview_EndOfParaCmd (class textview  *self)
 {
-    register class text *d;
-    register int pos;
+    class text *d;
+    int pos;
 
     d = Text(self);
     pos = (d)->GetEndOfLine( (self)->GetDotPosition());
@@ -581,10 +581,10 @@ void textview_EndOfParaCmd (register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_SelectRegionCmd(register class textview  *self)
+void textview_SelectRegionCmd(class textview  *self)
 {
-    register int i;
-    register int dot, mark;
+    int i;
+    int dot, mark;
 
     mark = (self->atMarker)->GetPos();
     dot = (self)->GetDotPosition();
@@ -599,17 +599,17 @@ void textview_SelectRegionCmd(register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_CtrlAtCmd(register class textview  *self)
+void textview_CtrlAtCmd(class textview  *self)
 {
     (self->atMarker)->SetPos((self)->GetDotPosition());
     (self->atMarker)->SetLength((self)->GetDotLength());
     message::DisplayString(self, 0, "Mark set.");
 }
 
-void textview_BackwardCmd(register class textview  *self)
+void textview_BackwardCmd(class textview  *self)
 {
-    register long endpos, len;
-    register class text *d;
+    long endpos, len;
+    class text *d;
 
     endpos = (self)->CollapseDot();
     d = Text(self);
@@ -631,10 +631,10 @@ void textview_BackwardCmd(register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_ForwardCmd(register class textview  *self)
+void textview_ForwardCmd(class textview  *self)
 {
-    register long pos;
-    register long newPos;
+    long pos;
+    long newPos;
 
     pos = (self)->CollapseDot();
     (self)->SetDotPosition( (newPos = pos + ((self)->GetIM())->Argument()));
@@ -644,9 +644,9 @@ void textview_ForwardCmd(register class textview  *self)
     }
 }
 
-void textview_PreviousLineCmd (register class textview  *self  /**/)
+void textview_PreviousLineCmd (class textview  *self  /**/)
 {
-    register int npos, j;
+    int npos, j;
     int xpos;
     class mark tm;	/* note this mark is not on the document's marker chain */
     long pos, dist, lines, cumLines, currentline, startPos, nlPos, prevPos;
@@ -740,9 +740,9 @@ void textview_PreviousLineCmd (register class textview  *self  /**/)
 }
 
 /* original textview_NextLineCmd..., now only used for VI mode */
-void textview_VINextLineCmd (register class textview  *self /**/)
+void textview_VINextLineCmd (class textview  *self /**/)
 {
-    register int npos, j;
+    int npos, j;
     int xpos;
     class mark tm;	/* note this mark is not on the document's marker chain */
     long currentline, pos, lines, nlines, newline, startPos, nlPos, dsize;
@@ -838,7 +838,7 @@ void textview_VINextLineCmd (register class textview  *self /**/)
 extern long textview_ExposeRegion(class textview *tv, long pos1, long rlen, class view *inset, const struct rectangle &area, struct rectangle &hit, long &off, long extra);
 extern long textview_LineStart(class textview *tv, long curx, long cury, long xs, long ys, long pos, long *lend=0, long *lheight=0);
 extern void textview_ComputeViewArea(class textview *tv, const struct rectangle &area, long &curx, long &cury, long &xs, long &ys);
-void textview_NextLineCmd (register class textview  *self /**/)
+void textview_NextLineCmd (class textview  *self /**/)
 {
     if(self->editor==VI) {
 	textview_VINextLineCmd(self);
@@ -928,10 +928,10 @@ void textview_NextLineCmd (register class textview  *self /**/)
     (self)->WantUpdate( self);
 }
 
-void textview_EndOfTextCmd(register class textview  *self)
+void textview_EndOfTextCmd(class textview  *self)
 {
-    register class text *d;
-    register int e;
+    class text *d;
+    int e;
 
     textview_CtrlAtCmd(self);
     d = Text(self);
@@ -942,7 +942,7 @@ void textview_EndOfTextCmd(register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_BeginningOfTextCmd(register class textview  *self)
+void textview_BeginningOfTextCmd(class textview  *self)
 {
     textview_CtrlAtCmd(self);
     (self)->SetDotPosition(0);
@@ -951,10 +951,10 @@ void textview_BeginningOfTextCmd(register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_EndOfLineCmd(register class textview *self)
+void textview_EndOfLineCmd(class textview *self)
 {
-    register int startpos, npos, dsize;
-    register class text *d;
+    int startpos, npos, dsize;
+    class text *d;
 
     d = Text(self);
     startpos= self->GetDotPosition();
@@ -981,9 +981,9 @@ void textview_EndOfLineCmd(register class textview *self)
     self->WantUpdate( self);
 }
 
-void textview_BeginningOfLineCmd(register class textview *self)
+void textview_BeginningOfLineCmd(class textview *self)
 {
-    register int pos;
+    int pos;
 
     pos = self->GetDotPosition();
     if ( self->editor == VI )
@@ -996,10 +996,10 @@ void textview_BeginningOfLineCmd(register class textview *self)
     self->WantUpdate( self);
 }
 
-void textview_EndOfWSWordCmd(register class textview  *self)
+void textview_EndOfWSWordCmd(class textview  *self)
     {/**/
     long	pos, textSize;
-    register int	j, ct;
+    int	j, ct;
     /***/
     ct	= ((self)->GetIM())->Argument();
     ((self)->GetIM())->ClearArg();
@@ -1014,10 +1014,10 @@ void textview_EndOfWSWordCmd(register class textview  *self)
     }
 }
 
-void textview_ForwardWSWordCmd(register class textview  *self)
+void textview_ForwardWSWordCmd(class textview  *self)
     {/**/
     long	pos, textSize;
-    register int	j, ct;
+    int	j, ct;
     /***/
     ct	= ((self)->GetIM())->Argument();
     ((self)->GetIM())->ClearArg();
@@ -1032,9 +1032,9 @@ void textview_ForwardWSWordCmd(register class textview  *self)
     }
 }
 
-void textview_ForwardBeginWSWordCmd(register class textview  *self)
+void textview_ForwardBeginWSWordCmd(class textview  *self)
 {
-    register long pos, textSize;
+    long pos, textSize;
     text *d = Text(self);
 
     textview_ForwardWSWordCmd(self);
@@ -1047,10 +1047,10 @@ void textview_ForwardBeginWSWordCmd(register class textview  *self)
     self->WantUpdate(self);
 }
 
-void textview_BackwardWSWordCmd(register class textview  *self)
+void textview_BackwardWSWordCmd(class textview  *self)
     {/**/
     long		pos;
-    register int	j, ct;
+    int	j, ct;
     /***/
     ct	= ((self)->GetIM())->Argument();
     ((self)->GetIM())->ClearArg();
@@ -1066,7 +1066,7 @@ void textview_BackwardWSWordCmd(register class textview  *self)
 
 void textview_BeginningOfFirstWordCmd(class textview  *self)
     {
-    register class text *d;
+    class text *d;
     char	c;
 
     ((self)->GetIM())->ClearArg(); 
@@ -1081,7 +1081,7 @@ void textview_BeginningOfFirstWordCmd(class textview  *self)
 void textview_BeginningOfPreviousLineCmd(class textview  *self)
     {
     int	ct;
-    register int    j;
+    int    j;
 
     ct = ((self)->GetIM())->Argument();
     ((self)->GetIM())->ClearArg(); 
@@ -1096,7 +1096,7 @@ void textview_BeginningOfPreviousLineCmd(class textview  *self)
 void textview_BeginningOfNextLineCmd(class textview  *self)
     {
     int	ct;
-    register int    j;
+    int    j;
 
     ct = (self->imPtr)->Argument();
     (self->imPtr)->ClearArg(); 
@@ -1134,11 +1134,11 @@ void textview_CursorToBottom(class textview  *self, long  key)
     textview_CursorToLine(self, self->nLines);
 }
 
-void textview_GoToLineCmd(register class textview  *self)
+void textview_GoToLineCmd(class textview  *self)
     {
 
     int argument, pos;
-    register class text *text;
+    class text *text;
 
     argument = ((self)->GetIM())->Argument();
     if ( !((self)->GetIM())->ArgProvided() )
@@ -1154,9 +1154,9 @@ void textview_GoToLineCmd(register class textview  *self)
     }
 }
 
-void textview_ExtendForwardCmd(register class textview *self)
+void textview_ExtendForwardCmd(class textview *self)
 {
-    register long len, pos, newlen;
+    long len, pos, newlen;
     int extendcnt = self->GetIM()->Argument();
 
     len = self->GetDotLength();
@@ -1184,9 +1184,9 @@ void textview_ExtendForwardCmd(register class textview *self)
     self->WantUpdate(self);
 }
 
-void textview_ExtendBackwardCmd(register class textview *self)
+void textview_ExtendBackwardCmd(class textview *self)
 {
-    register long len, pos, newlen;
+    long len, pos, newlen;
     int extendcnt = self->GetIM()->Argument();
 
     len = self->GetDotLength();
@@ -1219,9 +1219,9 @@ void textview_ExtendBackwardCmd(register class textview *self)
     self->WantUpdate(self);
 }
 
-void textview_ExtendForwardLineCmd(register class textview *self)
+void textview_ExtendForwardLineCmd(class textview *self)
 {
-    register long len, pos, newpos;
+    long len, pos, newpos;
 
     len = self->GetDotLength();
     pos = self->GetDotPosition();
@@ -1250,9 +1250,9 @@ void textview_ExtendForwardLineCmd(register class textview *self)
 }
 
 
-void textview_ExtendBackwardLineCmd(register class textview *self)
+void textview_ExtendBackwardLineCmd(class textview *self)
 {
-    register long len, pos, newpos;
+    long len, pos, newpos;
 
     len = self->GetDotLength();
     pos = self->GetDotPosition();
@@ -1280,9 +1280,9 @@ void textview_ExtendBackwardLineCmd(register class textview *self)
     }
 }
 
-void textview_ExtendForwardScreenCmd(register class textview *self)
+void textview_ExtendForwardScreenCmd(class textview *self)
 {
-    register long len, pos, newpos;
+    long len, pos, newpos;
 
     len = self->GetDotLength();
     pos = self->GetDotPosition();
@@ -1314,9 +1314,9 @@ void textview_ExtendForwardScreenCmd(register class textview *self)
 }
 
 
-void textview_ExtendBackwardScreenCmd(register class textview *self)
+void textview_ExtendBackwardScreenCmd(class textview *self)
 {
-    register long len, pos, newpos;
+    long len, pos, newpos;
 
     len = self->GetDotLength();
     pos = self->GetDotPosition();
@@ -1351,9 +1351,9 @@ void textview_ExtendBackwardScreenCmd(register class textview *self)
 /*
  * Extend dot to the end of the text.
  */
-void textview_ExtendEndCmd(register class textview *self)
+void textview_ExtendEndCmd(class textview *self)
 {
-    register long len, pos;
+    long len, pos;
     text *d = Text(self);
 
     pos = self->GetDotPosition();
@@ -1364,9 +1364,9 @@ void textview_ExtendEndCmd(register class textview *self)
 /*
  * Extend dot to the beginning of the text.
  */
-void textview_ExtendBeginCmd(register class textview *self)
+void textview_ExtendBeginCmd(class textview *self)
 {
-    register long len;
+    long len;
 
     len = self->GetDotPosition() + self->GetDotLength();
     self->SetDotPosition(0);

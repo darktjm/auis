@@ -196,7 +196,7 @@ static TGlobRef allocSysMark(long erroff, class ness *theNess);
 void  deallocSysGlobs(TGlobRef  ind);
 class nessmark * makeFunction(TGlobRef  *loc);
 TGlobRef makeConst(const char  *s);
-long BackSlashReduce(register class text  *text);
+long BackSlashReduce(class text  *text);
 TGlobRef makeStyledConst(class text  *text, long  pos , long  len, boolean  bsReduce);
 TGlobRef makeGlobal();
 void addOp(class nessmark  *m, char op);
@@ -208,7 +208,7 @@ void refAddress(class nessmark  *m, char op, struct callnode *address);
 void genLinkGlobal(class nesssym  *sym);
 static void RememberFixup(TCodeRef  refloc, class nesssym  *sym);
 static void DoFixups(unsigned long  lpsize);
-static unsigned long  allocate(register class nesssym  *syml, register unsigned long  prior);
+static unsigned long  allocate(class nesssym  *syml, unsigned long  prior);
 TGlobRef genEnter();
 void genreturn(struct exprnode  *exp);
 boolean genExit(class nesssym  *parmlist , class nesssym  *locallist);
@@ -217,7 +217,7 @@ void finishfunc(class nesssym  *fname, class nesssym  *parmlist,
 		class nesssym  *locallist, boolean Export);
 void abortfunc();
 void genchkforward();
-class nesssym * appendlists(register class nesssym  *list1 , register class nesssym  *list2);
+class nesssym * appendlists(class nesssym  *list1 , class nesssym  *list2);
 struct exprnode * genarith(char op, struct exprnode  *left , struct exprnode  *right);
 void gencomp(struct exprnode  *left , struct exprnode  *right, long  rop);
 Texpr genvarref(struct varnode  *var);
@@ -331,11 +331,11 @@ allocSysMark(long  erroff, class ness  *theNess) {
 deallocSysGlobs(TGlobRef inx) {
 	TGlobRef i = inx, succ;
 	while(i > 0) {
-		register struct globelt *g = &ness_Globals[i];
+		struct globelt *g = &ness_Globals[i];
 		succ = g->next;
 		if (g->e.s.hdr == seqHdr) {
 			/* free a nessmark.  but 1st check to free objcode */
-			register class nessmark *n = g->e.s.v;
+			class nessmark *n = g->e.s.v;
 
 			if (n->GetText() == ObjectCode) {
 				if (n->GetLength() > 0)
@@ -396,9 +396,9 @@ makeConst(const char  *s) {
 	return length of resulting text
 */
 	long
-BackSlashReduce(register class text  *text) {
-	register long pos, len;
-	register char c;
+BackSlashReduce(class text  *text) {
+	long pos, len;
+	char c;
 	len = (text)->GetLength();
 
 	for (pos = 0; pos < len; pos++) {
@@ -608,7 +608,7 @@ DoFixups(unsigned long  lpsize) {
 	frame header, which is at a higher location and lower address in the stack.
 */
 	static unsigned long 
-allocate(register class nesssym  *syml, register unsigned long  prior) {
+allocate(class nesssym  *syml, unsigned long  prior) {
 	for ( ; syml != NULL; syml = syml->next) {
 		nesssym_NGetINode(syml, vardefnode)->addr = prior;
 		if (syml->type == Tbool)
@@ -819,8 +819,8 @@ genchkforward() {
 	The lists are in _reverse_ order, so put 'list2' before 'list1'.
 */
 	class nesssym *
-appendlists(register class nesssym  *list1 , register class nesssym  *list2) {
-	register class nesssym *lastElt, *t;
+appendlists(class nesssym  *list1 , class nesssym  *list2) {
+	class nesssym *lastElt, *t;
 	if (list2 == NULL) return list1;
 	if (list1 == NULL) return list2;
 
@@ -1108,7 +1108,7 @@ appendgotolists(struct gotonode  **list , struct gotonode  *addon) {
 	if (*list == NULL) *list = addon;
 	else if (addon == NULL) {}
 	else {
-		register struct gotonode *t = *list;
+		struct gotonode *t = *list;
 		while (t->next != NULL) t = t->next;
 		t->next = addon;
 	}

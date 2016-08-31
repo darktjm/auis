@@ -156,16 +156,16 @@ ATKdefineRegistry(nessview, scroll, nessview::InitializeClass);
 
 static void  PostMenus(class nessview  *self);
 static void setExecFunc(class nessview  *self, char  *funcname);
-static void nessview_NextError(register class nessview  *self, long  rock);
-static void nessview_Compile(register class nessview  *self, ness_access  accesslevel);
-static void nessview_Execute(register class nessview  *self, long  rock);
+static void nessview_NextError(class nessview  *self, long  rock);
+static void nessview_Compile(class nessview  *self, ness_access  accesslevel);
+static void nessview_Execute(class nessview  *self, long  rock);
 static void ShowOrigin(class nessview  *self);
 static void DeauthButton(class nessview  *self);
 static void AuthorButton(class nessview  *self, long  option);
 static void ScanButton(class nessview  *self);
 static void CompileButton(class nessview  *self);
 static void CompileMenu(class nessview  *self);
-static void ToggleDebug(register class nessview  *self, long  rock);
+static void ToggleDebug(class nessview  *self, long  rock);
 static void WaitOn();
 static void WaitOff();
 static boolean DoAppend(class nessview  *self, class ness  *src, class ness  *dest);
@@ -225,8 +225,8 @@ setExecFunc(class nessview  *self, char  *funcname) {
 
 
 	static void
-nessview_NextError(register class nessview  *self, long  rock) {
-	register class ness *dobj = (class ness *)self->dataobject;
+nessview_NextError(class nessview  *self, long  rock) {
+	class ness *dobj = (class ness *)self->dataobject;
 	class im *im = (self)->GetIM();
 
 	if  (im && (im)->ArgProvided()) 
@@ -274,8 +274,8 @@ nessview::FirstError() {
 
 
 	static void
-nessview_Compile(register class nessview  *self, ness_access  accesslevel) {
-	register class ness *dobj = (class ness *)self->dataobject;
+nessview_Compile(class nessview  *self, ness_access  accesslevel) {
+	class ness *dobj = (class ness *)self->dataobject;
 	struct errornode *errs;
 
 	(dobj)->SetAccessLevel( accesslevel);
@@ -314,8 +314,8 @@ nessview_Compile(register class nessview  *self, ness_access  accesslevel) {
 }
 
 	static void
-nessview_Execute(register class nessview  *self, long  rock) {
-	register class ness *dobj = (class ness *)self->dataobject;
+nessview_Execute(class nessview  *self, long  rock) {
+	class ness *dobj = (class ness *)self->dataobject;
 	char buffer[1000];
 	struct errornode *errs = NULL;
 
@@ -493,7 +493,7 @@ CompileMenu(class nessview  *self) {
 }
 
 	static void
-ToggleDebug(register class nessview  *self, long  rock) {
+ToggleDebug(class nessview  *self, long  rock) {
 	debug = ! debug;
 	ness::SetDebug(debug);
 	printf("nessview debug is now %d\n", debug);  fflush (stdout);
@@ -1237,7 +1237,7 @@ nessview::~nessview() {
 nessview::SetDataObject(class dataobject *tdobj) {
 	ENTER(nessview_SetDataObject);
 
-	register struct ness *dobj = (struct ness *)tdobj;
+	struct ness *dobj = (struct ness *)tdobj;
 
 	if (dobj->templateName == NULL) {
 		/* if there is no template, read default.template 
@@ -1344,9 +1344,9 @@ Invert(class nessview  *self) {
 }
 
 	void
-nessview::FullUpdate(register enum view_UpdateType   type, register long   left , 
-		register long   top , register long   width , register long   height) {
-	register class ness *dobj = (class ness *)this->dataobject;
+nessview::FullUpdate(enum view_UpdateType   type, long   left , 
+		long   top , long   width , long   height) {
+	class ness *dobj = (class ness *)this->dataobject;
 	
 	DEBUG(("FullUpdate(%d)\n", type));
 
@@ -1374,7 +1374,7 @@ nessview::FullUpdate(register enum view_UpdateType   type, register long   left 
 
 	void
 nessview::Update() {
-	register class ness *dobj = (class ness *)this->dataobject;
+	class ness *dobj = (class ness *)this->dataobject;
 	struct errornode *errs = NULL;
 
 	ENTER(nessview_Update);
@@ -1527,7 +1527,7 @@ nessview::Print(FILE  *file, const char  *processor, const char *finalFormat,
 	if WARNINGTEXTCHANGED, we have to adjust the menus
 */
 void
-    nessview::ObservedChanged(register class observable  *ochanged, long  value) {
+    nessview::ObservedChanged(class observable  *ochanged, long  value) {
 	class ness *changed=(class ness *)ochanged;
 	DEBUG(("Observed changed (value=%ld)\n", value));
 	if (value == ness_NEWERROR)

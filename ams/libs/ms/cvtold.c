@@ -76,7 +76,7 @@ char name[]; int lockFD;
 static int lock(file, lockedFile, lockedFDp)
 char *file, *lockedFile; int *lockedFDp;
 {
-    register int f, g;
+    int f, g;
     char	locktmp[1+MAXPATHLEN];	    /* Usable lock temporary */
     char *s;
 

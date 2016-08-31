@@ -49,7 +49,7 @@ FindPrevTab(class tabs  *tabs, long  pos)
  *	NumTabs if not found in list
  */
 {
-    register int i;
+    int i;
 
     if (tabs->number == 0)
         return -1;
@@ -119,9 +119,9 @@ tabs::Delete(int  n)
 /* precondition: n represents a valid tab: 0 <= n < CurNumTabs */
 /* post: the original tabs are destroyed, if links > 1 */
 {
-    register class tabs *nt;
+    class tabs *nt;
 
-    register int num = this->number;
+    int num = this->number;
 
     if (num == 1) {
 	/* Last tab in this list */
@@ -172,9 +172,9 @@ tabs::Add(long  pos, enum style_TabAlignment  op)
 {
     /* Add tab into the list */
     /* The original lists ARE DESTROYED */
-    register class tabs *nt;
-    register int PrevTab;
-    register int num = this->number;
+    class tabs *nt;
+    int PrevTab;
+    int num = this->number;
 
     /* Find out what tab is before the destination spot */
     PrevTab = FindPrevTab(this, pos);
@@ -206,7 +206,7 @@ tabs::Add(long  pos, enum style_TabAlignment  op)
 	 * is similar to PrevTab, but takes into account the case
 	 * where PrevTab indicates the new pos is outside the old array bounds
 	 */
-	register int newpos = PrevTab;
+	int newpos = PrevTab;
 	if (newpos < num)
 	    newpos++;
 
@@ -266,8 +266,8 @@ tabs::Clear()
 class tabs *
 tabs::Create()
 {
-    register long x;
-    register int i;
+    long x;
+    int i;
     /*
      * We are using:
      * Default Tabs, every 1/2 inch, for the first 10inches;

@@ -44,8 +44,8 @@ ATK_IMPL("stringtbl.H")
 
 	
 ATKdefineRegistry(stringtbl, dataobject, NULL);
-static short FindString(register class stringtbl  *self, register const char  *s, int startIndex);
-static void SetIthBit(register class stringtbl  *self, short  i, boolean  val);
+static short FindString(class stringtbl  *self, const char  *s, int startIndex);
+static void SetIthBit(class stringtbl  *self, short  i, boolean  val);
 static short  FindEntry(class stringtbl  *self, short  accnum);
 
 
@@ -63,14 +63,14 @@ stringtbl::stringtbl()
 
 	stringtbl::~stringtbl()
 		{
-	register short i;
+	short i;
 	for (i = 0; i < this->used; i++)
 		free (this->item[i]);
 }
 
 
 	long
-stringtbl::Read( register FILE   *file, register long   id			/* !0 if data stream, 0 if direct from file*/ )
+stringtbl::Read( FILE   *file, long   id			/* !0 if data stream, 0 if direct from file*/ )
 			{
 	/* reads a stringtbl from -file-.  See file format in strtbl.ch */
 	/* This routine reads the \enddata, if any. Its syntax is not checked */
@@ -108,7 +108,7 @@ stringtbl::Read( register FILE   *file, register long   id			/* !0 if data strea
 stringtbl::Write( FILE   *file, long   writeID, int   level )
 		 		{
 	char head[50];
-	register short i;
+	short i;
 	long id = (this)->UniqueID();
 	if (this->writeID != writeID) {
 		/* new instance of write, do it */
@@ -129,7 +129,7 @@ stringtbl::Write( FILE   *file, long   writeID, int   level )
 stringtbl::Clear( )
   		/* Clears the string table of existing strings */
 {
- 	register short i;
+ 	short i;
 	for (i = this->used; --i >= 0; )
 		free (this->item[i]);
 	this->used = this->numacc = 0;
@@ -138,10 +138,10 @@ stringtbl::Clear( )
 }
 
 	static short
-FindString(register class stringtbl  *self, register const char  *s, int startIndex)
+FindString(class stringtbl  *self, const char  *s, int startIndex)
 		/* Finds string s in self and returns its index.   returns -1 for failure.*/
 {
-	register short i;
+	short i;
 	if (s == NULL || *s == '\0') return (-2);
 	for (i = startIndex; i < self->used; i++) {
 		if (strcmp(s, self->item[i]) == 0)
@@ -150,11 +150,11 @@ FindString(register class stringtbl  *self, register const char  *s, int startIn
 	return (-1);
 }
 	static void
-SetIthBit(register class stringtbl  *self, short  i, boolean  val)
+SetIthBit(class stringtbl  *self, short  i, boolean  val)
 					/* finds the named string in the table 
 			and sets its associated bit to the given val */
 {
-	register unsigned long mask;
+	unsigned long mask;
 	if (i < 0) 	/* string not found */
 		return;
 	mask = ((unsigned long)1)<<i;
@@ -165,9 +165,9 @@ SetIthBit(register class stringtbl  *self, short  i, boolean  val)
 	}
 }
 
-short stringtbl::GetEntryOfString(register char  *s, short  startIndex)
+short stringtbl::GetEntryOfString(char  *s, short  startIndex)
 			{
-	register short i;
+	short i;
 
 	i = FindString(this, s, startIndex);
 	if (i >= 0) {
@@ -177,10 +177,10 @@ short stringtbl::GetEntryOfString(register char  *s, short  startIndex)
 }
 
 	short
-stringtbl::AddString(register const char  *s)
+stringtbl::AddString(const char  *s)
 		{
 	short len;
-	register char *t, *p;
+	char *t, *p;
 	short i;
 	/* check for full table, length of string, backslash, and duplicate entry */
 	if (this->used >= MAXSTRINGSINTABLE)
@@ -217,12 +217,12 @@ stringtbl::AddString(register const char  *s)
 }
 
 	void
-stringtbl::RemoveString(register const char  *s)
+stringtbl::RemoveString(const char  *s)
 				/* Removes the specified string from the table.  
 			If the string is absent, the call is ignored */
 {
-	register short i;
-	register unsigned long mask;
+	short i;
+	unsigned long mask;
 	if (this->ContainsInitialStrings) {
 		(this)->Clear();
 		this->ContainsInitialStrings = FALSE;
@@ -246,7 +246,7 @@ stringtbl::RemoveString(register const char  *s)
 }
 
 	void
-stringtbl::SetBit(register const char  *s, boolean  val)
+stringtbl::SetBit(const char  *s, boolean  val)
 					/* finds the named string in the table 
 			and sets its associated bit to the given val */
 {
@@ -254,12 +254,12 @@ stringtbl::SetBit(register const char  *s, boolean  val)
 }
 
 	boolean
-stringtbl::GetBit(register const char  *s  )
+stringtbl::GetBit(const char  *s  )
 				/* finds the named string in the table and 
 			returns the current value of its bit */
 {
-	register short i;
-	register unsigned long mask;
+	short i;
+	unsigned long mask;
 	i = FindString(this, s, 0);
 	if (i < 0) 	/* string not found */
 		return FALSE;

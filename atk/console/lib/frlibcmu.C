@@ -56,7 +56,7 @@ int stablk (const char  *arg ,const char  **table,int  quiet /* ignored */);
 
 int stablk (const char  *arg ,const char  **table,int  quiet /* ignored */)
 {
-    register int i,ix = 0,count;
+    int i,ix = 0,count;
 
     count = 0;
     for (i=0; table[i] != 0; i++) {

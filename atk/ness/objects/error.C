@@ -414,9 +414,9 @@ isFuncStart(int nexttok, long ncheck) {
 */
 	void
 MapRunError(class ness  *ness) {
-	register struct funcnode *fnode;
+	struct funcnode *fnode;
 	class nesssym *errsym;
-	register class nessmark *objcode;
+	class nessmark *objcode;
 	struct errornode *err;
 	unsigned long loc, len;
 

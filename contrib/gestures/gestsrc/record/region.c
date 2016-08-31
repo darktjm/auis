@@ -60,8 +60,8 @@ void
 setrecordfile(filename)
 char *filename;
 {
-	register char *p, *endp;
-	register int i;
+	char *p, *endp;
+	int i;
 	static char fname[100];
 
 	strcpy(fname, filename);

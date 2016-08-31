@@ -56,7 +56,7 @@ char **argv;
     char *tokens;
 #endif /* AFS_ENV */
     int cid, iters, len, type;
-    register char *hostname, *user, *pw, *cell;
+    char *hostname, *user, *pw, *cell;
     static char longmsg[1000];
 
     if (argc < 3 || argc > 7) {
@@ -328,7 +328,7 @@ static call7(cid)
 {
     static char send[10000], reply[10000];
     int rc;
-    register int i;
+    int i;
     int msglen;
 
     msglen = (random() % 9996) + 3;

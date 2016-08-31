@@ -354,9 +354,9 @@ static char charmap[] = {
 };
 
 strcasecmp(s1, s2)
-	register char *s1, *s2;
+	char *s1, *s2;
 {
-	register char *cm = charmap;
+	char *cm = charmap;
 
 	while (cm[*s1] == cm[*s2++])
 		if (*s1++ == '\0')

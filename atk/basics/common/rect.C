@@ -108,11 +108,11 @@
 
 /******************** methods ******************/
 
-void rectangle_UnionRect(register struct rectangle  *Result,register struct rectangle  *LHS , register struct rectangle  *RHS);
-void rectangle_IntersectRect(register struct rectangle  *Result,register struct rectangle  *LHS , register struct rectangle  *RHS);
-void rectangle_SetRectSides(register struct rectangle  * LHS, long  left,long  top,long  right,long  bottom);
-void rectangle_SetRectCorners(register struct rectangle  * LHS, register struct point  * OneCorner, register struct point  * OtherCorner );
-void rectangle_InsetRect(register struct rectangle  * LHS, long  DeltaX, long  DeltaY);
+void rectangle_UnionRect(struct rectangle  *Result,struct rectangle  *LHS , struct rectangle  *RHS);
+void rectangle_IntersectRect(struct rectangle  *Result,struct rectangle  *LHS , struct rectangle  *RHS);
+void rectangle_SetRectSides(struct rectangle  * LHS, long  left,long  top,long  right,long  bottom);
+void rectangle_SetRectCorners(struct rectangle  * LHS, struct point  * OneCorner, struct point  * OtherCorner );
+void rectangle_InsetRect(struct rectangle  * LHS, long  DeltaX, long  DeltaY);
 void rectangle_OffsetRect(struct rectangle  * LHS, long  DeltaX, long  DeltaY);
 void rectangle_EmptyRect(struct rectangle  * Rect );
 boolean rectangle_IsEmptyRect(struct rectangle  * TestRect);
@@ -133,9 +133,9 @@ struct rectangle * rectangle_Duplicate(struct rectangle  * Rect );
 
 
 void
-rectangle_UnionRect(register struct rectangle  *Result,register struct rectangle  *LHS , register struct rectangle  *RHS)
+rectangle_UnionRect(struct rectangle  *Result,struct rectangle  *LHS , struct rectangle  *RHS)
 		{
-	register long left, top;
+	long left, top;
 		/* Result may be same as RHS or LHS, so we
 		must defer changing Result until after compute is done */
 
@@ -155,9 +155,9 @@ rectangle_UnionRect(register struct rectangle  *Result,register struct rectangle
 }
 
 	void
-rectangle_IntersectRect(register struct rectangle  *Result,register struct rectangle  *LHS , register struct rectangle  *RHS)
+rectangle_IntersectRect(struct rectangle  *Result,struct rectangle  *LHS , struct rectangle  *RHS)
 		{
-	register long left, top;
+	long left, top;
 		/* Result may be same as RHS or LHS, so we
 		must defer changing Result until after compute is done */
 
@@ -178,7 +178,7 @@ rectangle_IntersectRect(register struct rectangle  *Result,register struct recta
 
 /*
 void rectangle_SetRectSize(LHS, left,top,width,height)
-register struct rectangle * LHS;
+struct rectangle * LHS;
 long top;
 long left;
 long height;
@@ -190,7 +190,7 @@ long width;{
 }
 */
 
-void rectangle_SetRectSides(register struct rectangle  * LHS, long  left,long  top,long  right,long  bottom)
+void rectangle_SetRectSides(struct rectangle  * LHS, long  left,long  top,long  right,long  bottom)
 {
     LHS->top = top;
     LHS->left = left;
@@ -198,7 +198,7 @@ void rectangle_SetRectSides(register struct rectangle  * LHS, long  left,long  t
     LHS->width = right-left;
 }
 
-void rectangle_SetRectCorners(register struct rectangle  * LHS, register struct point  * OneCorner, register struct point  * OtherCorner )
+void rectangle_SetRectCorners(struct rectangle  * LHS, struct point  * OneCorner, struct point  * OtherCorner )
 {
 
     long LeftEdge;
@@ -223,7 +223,7 @@ void rectangle_SetRectCorners(register struct rectangle  * LHS, register struct 
     rectangle_SetRectSides(LHS,LeftEdge,TopEdge,RightEdge,BottomEdge);
 }
 
-void rectangle_InsetRect(register struct rectangle  * LHS, long  DeltaX, long  DeltaY)
+void rectangle_InsetRect(struct rectangle  * LHS, long  DeltaX, long  DeltaY)
 {
     LHS->top += DeltaY;
     LHS->height -= 2*DeltaY;
