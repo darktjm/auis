@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nessmrkt.C,v 1.3 1994/08/12 20:43:22 rr2b Stab74 $";
-#endif
-
 /* nessmarktest.c
 	test the nessmark object
 
@@ -104,15 +99,15 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objec
 static long writeid = 1;
 
 
-int main(register int	   argc, register char   **argv);
-void printdata(register class nessmark  *m);
+int main(int	   argc, char   **argv);
+void printdata(class nessmark  *m);
 void replacetabs(class nessmark  *file);
 
 
 	int
-main(register int	   argc, register char   **argv) {
-	register class nessmark *m;
-	register class simpletext *t;
+main(int	   argc, char   **argv) {
+	class nessmark *m;
+	class simpletext *t;
 
 	printf("Start\n"); fflush(stdout);
 /*
@@ -152,7 +147,7 @@ so nessmarktest need not be recompiled when nessmark is*/
 }
 
 	void
-printdata(register class nessmark  *m) {
+printdata(class nessmark  *m) {
 	long loc, lend;
 	lend = ((class mark *)m)->GetEndPos();
 	if (lend > 31) lend = 31;

@@ -25,20 +25,15 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/wpname.c,v 2.20 1993/07/01 21:34:42 gk5g Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	wpname.c
 	Library routines for White Pages lookups.
 	Include file ``wp.h'' declares the procedures for clients.
 \* ************************************************************ */
 
+#include <andrewos.h>		/* sys/file.h sys/types.h sys/time.h strings.h */
 #include <andyenv.h>
 #include <stdio.h>
-#include <andrewos.h>		/* sys/file.h sys/types.h sys/time.h strings.h */
 #include <ctype.h>
 #include <errno.h>
 #include <truth.h> /* itc.h -> truth.h DMT */
@@ -564,7 +559,7 @@ struct wp_CD *cd; struct IdSet **ISPtr; struct wp_Constraint *CList; int *ISCPtr
 static int AnyDigits(str)
 char *str;
 {/* Return 1 iff there are any digits in the argument string str. */
-	register char *S;
+	char *S;
 
 	for (S = str; *S != '\0'; ++S) if (isdigit(*S)) return 1;
 	return 0;
@@ -654,7 +649,7 @@ static int PBKeyLen = 0;
 static wp_ErrorCode w_ProbeBegins(cd, BTIx, Probe, ISPtr)
 struct wp_CD *cd; int BTIx; char *Probe; struct IdSet **ISPtr;
 {
-	register struct IdSet *IS = Undef_IdSet;
+	struct IdSet *IS = Undef_IdSet;
 	int IdCount, IdIx, PLen, DataLen, DataLen2, EachKeyLen, TempFail;
 	int NewMax, NewSize, EachKeyMatches;
 	bt_ErrorCode BTErr; wp_ErrorCode WPErr;

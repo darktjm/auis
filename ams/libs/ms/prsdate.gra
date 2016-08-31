@@ -747,9 +747,6 @@ the_nth_day :	THE nth_day
 nth_day	:	nth DAY
 	;
 %%
-static UNUSED const char prsdate_rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/prsdate.gra,v 1.6 1996/02/16 16:26:55 robr Stab74 $";
-
-
 /*
  *  pdate - parse date specification into time structure
  *
@@ -800,7 +797,7 @@ parsedate (str, tmp, settm, select, err, gmt)
     long curtim;
     char tstr[MAXSTRLEN+1];
     int i;
-    register struct tm *rtm;
+    struct tm *rtm;
 	struct parser *p=prsdate_New();
 	if(p==NULL) return CERROR;
     junk_err = err;
@@ -905,7 +902,7 @@ static int peeper (int n);
 static int locallexer (lexerrock, pyylval)
 struct parser *lexerrock;
 YYSTYPE *pyylval;
-{ register int ctoken, htoken;
+{ int ctoken, htoken;
   ctoken = nextlex(pyylval);
   htoken = lead0 ? HOUR : SHOUR;
   if (((ctoken == NUMBER) || (ctoken == NUMBER2)) && *pyylval <= 24)
@@ -926,7 +923,7 @@ static int prelex(void);
 
 static int nextlex (pyylval)
 YYSTYPE *pyylval;
-{ register int token;
+{ int token;
   if (peepb < peepe)
   { token = peep[peepb].token;
     *pyylval = peep[peepb].val;
@@ -941,7 +938,7 @@ YYSTYPE *pyylval;
 
 static int peeper (n)
 int n;
-{ register int i;
+{ int i;
   if (peepb != 0)
   { for (i = peepb; i < peepe; i++)
       peep[i-peepb] = peep[i];
@@ -980,9 +977,9 @@ static int tabfind (char *text, struct stable *table);
 static int prelex()
 {
 
-  register int ret;			/* temp for previous delimiter */
-  register char *fp;			/* current field */
-  register int find, ndig;
+  int ret;			/* temp for previous delimiter */
+  char *fp;			/* current field */
+  int find, ndig;
   extern char _argbreak;		/* current delimiter */
 
   while (1)
@@ -1170,8 +1167,8 @@ static int mday (struct dtm *dtm, int day, int past);
 static check(parser, date)
 struct parser *parser;
 int date;
-{ register int did;
-  register struct dtm *d = &dtm[date];
+{ int did;
+  struct dtm *d = &dtm[date];
   if (d->repn != RTM)
     return;
   did = month(parser, d, d->tm.tm_mon, FUTURE);
@@ -1194,10 +1191,10 @@ static constrain(parser, con, date, past, repeat)
 struct parser *parser;
 int con, date;
 int past, repeat;
-{ register int n;
-  register int did;
-  register struct tm *c;
-  register struct dtm *d = &dtm[date];
+{ int n;
+  int did;
+  struct tm *c;
+  struct dtm *d = &dtm[date];
   if (con >= 0)
     c = &(dtm[con].tm);
   else
@@ -1329,8 +1326,8 @@ static int mday (dtm, day, past)
 struct dtm *dtm;
 int day;
 int past;
-{ register int maxday;
-  register int status = 0;
+{ int maxday;
+  int status = 0;
   setrep (dtm, RTM);
   if (dtm->tm.tm_mday != day)
   { if (past)
@@ -1406,7 +1403,7 @@ int year;
 static int new_dtm(parser, current)
 struct parser *parser;
 int current;
-{ register int i;
+{ int i;
   for (i = 0; i < NDTMS; i++)
     if (! dtmused[i])
     { dtmused[i] = 1;
@@ -1484,7 +1481,7 @@ static long offset()
 {
     struct timeval tp;
     struct timezone tzp;
-    register struct tm *now;
+    struct tm *now;
     int gmtYear, gmtDay, gmtHour, gmtMin;
     static int virgin = 1;
     static long GMTDiff;	/* what to add to GMT (in minutes) to get
@@ -1518,7 +1515,7 @@ static long offset()
 }
 
 static timezone(gmt)
-    register long *gmt;
+    long *gmt;
 {
     long days;
     long minutes;

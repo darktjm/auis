@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipoplin.C,v 1.4 1993/09/30 19:51:01 rr2b Stab74 $";
-#endif
-
 /* zipoplin.c	Zip Object -- Ploy-Line					      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -97,16 +92,16 @@ zipoplin::Object_Datastream_Code( )
   }
 
 long
-zipoplin::Show_Object_Properties( register zip_type_pane		   pane, register zip_type_figure		   figure )
+zipoplin::Show_Object_Properties( zip_type_pane		   pane, zip_type_figure		   figure )
         {
   (this->view_object)->Announce(  "Draw PolyLine in Segments." );
   return  zip_ok;
   }
 
 long
-zipoplin::Build_Object( register zip_type_pane		   pane, register enum view_MouseAction				   action , register long				   x , register long				   y , register long				   clicks, register zip_type_point		   X , register zip_type_point		   Y )
+zipoplin::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   action , long				   x , long				   y , long				   clicks, zip_type_point		   X , zip_type_point		   Y )
           {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
   static long				  initial_x, initial_y,
 					  initial_X, initial_Y,
 					  prior_X, prior_Y,

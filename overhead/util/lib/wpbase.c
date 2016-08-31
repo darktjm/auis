@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/wpbase.c,v 2.23 1995/03/18 17:31:06 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	wpbase.c
 	Small library routines for White Pages lookups.
@@ -80,7 +75,7 @@ int num; char *fmt, *p1, *p2, *p3, *p4, *p5, *p6;
 #endif /* LogsYes */
 
 void w_LowerAll(S)
-register char *S;
+char *S;
 {
     for (; *S != '\0'; ++S) {
 	if (*S <= 'Z' && *S >= 'A') *S += ('a' - 'A');
@@ -174,7 +169,7 @@ static char *CursorVal = NULL;
 static int CursorValSize = 0;
 
 wp_ErrorCode w_LoadEntry(cd, IdKey)
-register struct wp_CD *cd; char *IdKey;
+struct wp_CD *cd; char *IdKey;
 {/* Load the identified entry into the Entries array. */
     char RecKey[PKLEN+4];
     bt_ErrorCode BTErr; wp_ErrorCode WPErr;

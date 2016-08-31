@@ -25,21 +25,12 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/tfail.c,v 2.11 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /*
 	tfail.c
 	tfail() -- Return a Boolean indicating whether the errno value represents a temporary failure.
 */
 
-
- 
-
+#include <andrewos.h>
 #include <stdio.h>
 #include <errno.h>
 #ifdef AFS_ENV

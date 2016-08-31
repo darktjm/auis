@@ -95,7 +95,7 @@ public:
 
    long Read( FILE *file, long id )				 ;
    long Write( FILE *file, long id, int level )		 ;
-   char * ViewName()						 ;
+   const char * ViewName()						 ;
 
 
 

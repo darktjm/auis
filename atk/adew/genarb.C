@@ -26,22 +26,14 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/genarb.C,v 1.2 1993/05/10 16:44:29 rr2b Stab74 $";
-#endif
-
 #include <stdio.h>
-#define CMD_STR "#! /bin/csh -f\n\
-if ($?ANDREWDIR) then\n\
-exec ez $1  $ANDREWDIR/lib/arbiters/Arb\n\
-else\n\
-exec ez $1  %s/lib/arbiters/Arb\n\
-endif\n"
+#define CMD_STR "#! /bin/csh -f\n" \
+"if ($?ANDREWDIR) then\n" \
+"exec ez $1  $ANDREWDIR/lib/arbiters/Arb\n" \
+"else\n" \
+"exec ez $1  %s/lib/arbiters/Arb\n" \
+"endif\n"
 
-#ifndef NORCSID
-#endif
 int main(int  argc, char  *argv[]);
 
 

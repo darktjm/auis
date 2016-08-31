@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/RCS/chompview.C,v 1.6 1994/08/11 03:02:28 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>	/* time.h */
 
 #include <chompview.H>
@@ -44,8 +39,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/
 
 
 ATKdefineRegistry(chompview, view, NULL);
-#ifndef NORCSID
-#endif
 
 
 chompview::chompview()
@@ -120,7 +113,7 @@ class view *chompview::Hit(enum view_MouseAction  action, long  x , long  y , lo
     return((this->toplpair)->Hit( action, x, y, numberOfClicks));
 }
 
-void chompview::Print(FILE  *f, char  *process, char  *final, int  toplevel)
+void chompview::Print(FILE  *f, const char  *process, const char  *final, int  toplevel)
 {
     (this->tv)->Print( f, process, final, toplevel);
 }

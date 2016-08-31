@@ -84,7 +84,7 @@ struct sbutton_prefs {
 
 struct sbutton_info {
     struct sbutton_prefs *prefs;
-    char *label;
+    const char *label;
     long rock;
     class atom *trigger;
     boolean lit;
@@ -95,7 +95,7 @@ struct sbutton_info {
 struct sbutton_list {
     const char *label;
     long rock;
-    char *trigger;
+    const char *trigger;
     boolean lit;
 };
 
@@ -124,15 +124,15 @@ public:
     
 	virtual ~sbutton();
     static class sbutton * CreateSButton(struct sbutton_prefs *prefs)  ;
-    static class sbutton * CreateFilledSButton(struct sbutton_prefs *prefs, struct sbutton_list *blist)  ;
-    static struct sbutton_prefs * GetNewPrefs(char *name)  ;
-    static void InitPrefs(struct sbutton_prefs *prefs, char *name);
+    static class sbutton * CreateFilledSButton(struct sbutton_prefs *prefs, const struct sbutton_list *blist)  ;
+    static struct sbutton_prefs * GetNewPrefs(const char *name)  ;
+    static void InitPrefs(struct sbutton_prefs *prefs, const char *name);
     static void FreePrefs(struct sbutton_prefs *prefs);
     static void WritePrefs(FILE *fp, struct sbutton_prefs *prefs);
-    static struct sbutton_prefs * DuplicatePrefs(struct sbutton_prefs *prefs, char *newname)  ;
+    static struct sbutton_prefs * DuplicatePrefs(struct sbutton_prefs *prefs, const char *newname)  ;
     
   
-     char * ViewName()  ;
+     const char * ViewName()  ;
      long Read (FILE *fp, long id)  ;
      long Write (FILE *fp, long id, int level)  ;
      void NotifyObservers(long value);
@@ -149,7 +149,7 @@ public:
     virtual void SetLit(int ind, boolean litp);
     virtual void SetPrefs(int ind, struct sbutton_prefs *prefs);
     virtual int Enumerate(sbutton_efptr func,long rock)  ;
-    virtual void SetTrigger(int ind, char *name);
+    virtual void SetTrigger(int ind, const char *name);
     virtual void Delete(int ind);
     virtual void Swap(int i1, int i2);
     virtual void SetChangeFlag(long on);
@@ -179,7 +179,7 @@ public:
   
     inline long GetRock(int ind) { return (((ind)<(this)->count && (ind)>=0)?(this)->buttons[ind].rock:0); }
     inline boolean GetLit(int ind) { return (((ind)<(this)->count && (ind)>=0)?(this)->buttons[ind].lit:FALSE); }
-    inline char * GetLabel(int ind) { return (((ind)<(this)->count && (ind)>=0)?(this)->buttons[ind].label:NULL); }
+    inline const char * GetLabel(int ind) { return (((ind)<(this)->count && (ind)>=0)?(this)->buttons[ind].label:NULL); }
     inline struct sbutton_prefs * GetPrefs(int ind) { return (((ind)<(this)->count && (ind)>=0)?(this)->buttons[ind].prefs:NULL); }
     inline class atom * GetTrigger(int ind) { return (((ind)<(this)->count && (ind)>=0)?(this)->buttons[ind].trigger:NULL); }
 

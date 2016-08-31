@@ -49,7 +49,7 @@ public:
         virtual void Stop();
         virtual boolean Fork()  ;
         virtual void PrintVersionNumber();
-	virtual char **SessionCheckpoint();
+	virtual const char * const *SessionCheckpoint();
     
         inline void SetFork(boolean torf) { (this->fork=(torf)); }
         inline boolean GetFork() { return (this->fork); }
@@ -80,7 +80,7 @@ public:
         static application *GetStartupApplication();
 
 	/* The following functions operate on the startup application. */
-	static char **AppSessionCheckpoint();
+	static const char * const *AppSessionCheckpoint();
 	static const char *AppGetName();
 	static void AppSetName(char *s);
 	static char **AppGetInitialArgv();

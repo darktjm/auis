@@ -1,5 +1,3 @@
-/* $Author: sa3e $ */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 

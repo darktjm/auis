@@ -32,11 +32,6 @@ the full agreement.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/recognition/RCS/util.c,v 1.6 1993/11/03 19:25:32 rr2b Stab74 $";
-#endif
-
 /*
  * Mundane utility routines
  *	see util.h
@@ -56,8 +51,8 @@ char *
 recog_myalloc(nitems, itemsize, typename)
 char *typename;
 {
-	register unsigned int bytes = nitems * itemsize;
-	register char *p = malloc(bytes);
+	unsigned int bytes = nitems * itemsize;
+	char *p = malloc(bytes);
 	if(p == NULL)
 	     recog_error("Can't get mem for %d %s's (each %d bytes, %d total bytes)",
 		nitems, typename, itemsize, bytes);
@@ -72,7 +67,7 @@ char *
 recog_scopy(s)
 char *s;
 {
-	register char *p = allocate(strlen(s) + 1, char);
+	char *p = allocate(strlen(s) + 1, char);
 	(void) strcpy(p, s);
 	return p;
 }
@@ -110,9 +105,9 @@ char *a;
 #if 0
 int
 ucstrcmp(s1, s2)
-register char *s1, *s2;
+char *s1, *s2;
 {
-	register i;
+	int i;
 
 	for(; *s1 && *s2; s1++, s2++)
 		if( (i = (upper(*s1) - upper(*s2))) != 0)

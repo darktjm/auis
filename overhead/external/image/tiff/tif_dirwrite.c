@@ -753,7 +753,7 @@ TIFFWriteData(TIFF *tif, TIFFDirEntry *dir, char *cp)
  * directory chain for the file.
  */
 static int
-TIFFLinkDirectory(register TIFF *tif)
+TIFFLinkDirectory(TIFF *tif)
 {
 	static const char module[] = "TIFFLinkDirectory";
 	u_short dircount;

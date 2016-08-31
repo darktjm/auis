@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/rectlist.C,v 3.7 1996/10/11 18:57:03 robr Exp $";
-#endif
-
-
- 
-
-
 ATK_IMPL("rectlist.H")
 #include <rectlist.H>
 
@@ -139,8 +129,8 @@ void rectlist::AddNewRectangle(long  bottom , long  top , long  left , long  rig
 {
     /* This routine adds a new rectangle to the newlist and then intersects it with the elements in the OldList.  If startscan is -1 the intersection i not done.  Otherwise it gives the location in the OldList to start doing the intersection. */
 
-    register int i;
-    register int newnum = EndNew++;
+    int i;
+    int newnum = EndNew++;
     if(rectangle_IsEmptyRect(&bounds)) {
 	rectangle_SetLeft(&bounds,left);
 	rectangle_SetTop(&bounds,top);
@@ -169,7 +159,7 @@ void rectlist::AddNewRectangle(long  bottom , long  top , long  left , long  rig
 
 void rectlist::InvertRectangles(class view  *vPtr, spotcolor *spots)
 {
-    register int i;
+    int i;
     struct rectangle invertRect;
     class graphic *pat;
 

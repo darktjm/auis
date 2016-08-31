@@ -1,5 +1,3 @@
-static char *hggh_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/atkbook/hgghkey/RCS/hggh.C,v 1.1 1994/05/19 20:42:37 Zarf Stab74 $";
-
 /* **************************************************** *\
 Copyright 1989 Nathaniel S. Borenstein
 Permission to use, copy, modify, and distribute this software and its

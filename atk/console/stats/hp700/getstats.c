@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/stats/hp700/RCS/getstats.c,v 1.5 1993/10/01 15:34:43 rr2b Stab74 $";
-#endif
-
 /* **********************************************************************
 *   This code is designed to read what might be priveledged (setuid) 
 *   information regarding both Disk Statistics (% full) and a host of 
@@ -146,7 +141,7 @@ union {
 GetGVMStats(UsersID)
 int UsersID;
 {
-    register int   i;
+    int   i;
     long  t;
     struct mapent *sp;
     int myval = 0;
@@ -296,8 +291,8 @@ int Init;
     int i = 0;
     struct stat statb;
     char tmpname[1024];
-    register FILE *mtabp;
-    register struct mntent *mnt;
+    FILE *mtabp;
+    struct mntent *mnt;
 
     sync();
     if ((mtabp = setmntent(MNT_MNTTAB, "r")) == NULL) {
@@ -348,7 +343,7 @@ char *mpath(file)
 char *file;
 {
     FILE *mntp;
-    register struct mntent *mnt;
+    struct mntent *mnt;
 
 
     if ((mntp = setmntent(MNT_MNTTAB, "r")) == 0) {

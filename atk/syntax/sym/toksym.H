@@ -80,26 +80,26 @@ public:
 	static inline toksym_scopeType TParentScope(toksym_scopeType scope) { 
 		return ((toksym_scopeType)sym::ParentScope(scope)); }
 
-	static inline class toksym * TDefine(char *name, 
+	static inline class toksym * TDefine(const char *name, 
 				class toksym *proto, toksym_scopeType scope) { 
 		return ((class toksym *)sym::Define(name, proto, scope)); }
 
-	static inline boolean TUndefine(char *name, toksym_scopeType scope) { 
+	static inline boolean TUndefine(const char *name, toksym_scopeType scope) { 
 		return (sym::Undefine(name, scope)); }
 
-	static inline class toksym *TFind(char *name, toksym_scopeType scope) { 
+	static inline class toksym *TFind(const char *name, toksym_scopeType scope) { 
 		return ((class toksym *)sym::Find(name, scope)); }
 
-	static inline class toksym *TLocate(char *name, class toksym *proto,
+	static inline class toksym *TLocate(const char *name, class toksym *proto,
  			toksym_scopeType scope, boolean *new_c) { 
 		return ((class toksym *)sym::Locate(name, proto, scope, new_c)); }
 
-	static inline long TFindAll(char *name, toksym_scopeType scope, 
+	static inline long TFindAll(const char *name, toksym_scopeType scope, 
 			sym_findfptr proc, long rock) { 
 		return (sym::FindAll(name, scope, proc, rock)); }
 
 
-	inline char * TGetName()	{ return ((this)->name); }
+	inline const char * TGetName()	{ return ((this)->name); }
 	inline toksym_scopeType TGetScope()  {
 		return ((toksym_scopeType)(this)->scope); }
 	inline long GetLoc()		{ return ((this)->loc); }

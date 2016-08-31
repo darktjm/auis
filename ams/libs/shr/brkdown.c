@@ -27,14 +27,6 @@
 
 #include <andrewos.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/shr/RCS/brkdown.c,v 2.10 1992/12/15 21:21:37 rr2b Stab74 $";
-#endif
-
-
- 
-
 extern char *Next822LPart();
 
 static char * Useful_Next822LPart(s, e, thing, size)
@@ -48,7 +40,8 @@ int size;
 }
 
 BreakDownContentTypeField(HeadBuf, fmt, fmtsz, vers, verssz, resources, resourcessz)
-char *HeadBuf, *fmt, *vers, *resources;
+const char *HeadBuf;
+char *fmt, *vers, *resources;
 int fmtsz, verssz, resourcessz;
 {
     char *s, *end, *ptr;

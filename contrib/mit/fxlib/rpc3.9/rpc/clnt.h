@@ -1,5 +1,3 @@
-/* @(#)clnt.h	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -50,8 +48,6 @@
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-/*	@(#)clnt.h 1.30 87/07/14 SMI      */
-
 /*
  * clnt.h - Client side remote procedure call interface.
  *
@@ -283,7 +279,7 @@ clnt_create(/*host, prog, vers, prot*/); /*
  *	struct sockaddr_in *raddr;
  *	u_long prog;
  *	u_long version;
- *	register int *sockp;
+ *	int *sockp;
  *	u_int sendsz;
  *	u_int recvsz;
  */

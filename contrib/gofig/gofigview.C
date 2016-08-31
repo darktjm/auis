@@ -24,11 +24,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gofig/RCS/gofigview.C,v 1.10 1996/04/23 22:05:45 wjh Stab74 $";
-#endif
-
 /* gofigv.c	
 
 	The view module for the gofig dataobject
@@ -195,15 +190,15 @@ static fontdesc *Font20;
 ATKdefineRegistry(gofigview, view, gofigview::InitializeClass);
 
 
-static int leftend(register gofigview *self);
-static int rightend(register gofigview *self);
-static int topend(register gofigview *self);
-static int bottomend(register gofigview *self);
+static int leftend(gofigview *self);
+static int rightend(gofigview *self);
+static int topend(gofigview *self);
+static int bottomend(gofigview *self);
 static void computeHoshi(int hoshi[4], boolean leftedge, boolean rightedge, 
 	int width);
 static void drawspot(gofigview *self, struct stone *s, boolean isclear);
 static  void RedrawView(gofigview  *self);
-static void modifymenuentry( menulist *m, char *f, char *prior, char *post, 
+static void modifymenuentry( menulist *m, const char *f, const char *prior, const char *post, 
 		struct proctable_Entry *proc, char code );
 static struct stone *atrowcol(gofigview *self, int row, int col);
 static struct stone *selectedspot(gofigview *self);
@@ -220,14 +215,14 @@ static void SetLayout(gofigview *self, int code);
 static void CopyCommand(gofigview *self, int code);
 static void ReplaceCommand(gofigview *self, int code);
 static void ToggleDebug(gofigview  *self, long  rock);
-static void GeneratePostScript(FILE *file, gofig *dobj, char *prefix, 
+static void GeneratePostScript(FILE *file, gofig *dobj, const char *prefix, 
 		int wpts, int hpts);
 static void printdata(gofigview *self, int code);
 
 static int inline mytrunc(double a) {return /* itrunc */( a );}
 
 	static inline void 
-setnextcolor(register gofigview *self, char color) {
+setnextcolor(gofigview *self, char color) {
 	switch(color) {
 	case 'B': self->nextcolor = 'W'; break;
 	case 'W': self->nextcolor = 'B'; break;
@@ -235,33 +230,33 @@ setnextcolor(register gofigview *self, char color) {
 }
 
 	static int
-leftend(register gofigview *self) {
+leftend(gofigview *self) {
 	unsigned edges;
-	register gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->dataobject;
 	dobj->getedges( &edges );
 	return self->xoff 
 		- ((edges&LEFTedge) ? self->linethickness/2 : self->radius);
 }
 	static int
-rightend(register gofigview *self) {
+rightend(gofigview *self) {
 	unsigned edges;
-	register gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->dataobject;
 	dobj->getedges( &edges );
 	return self->xoff + (dobj->width-1)*self->spotwidth 
 		+ ((edges&RIGHTedge) ? self->linethickness/2: self->radius);
 }
 	static int
-topend(register gofigview *self) {
+topend(gofigview *self) {
 	unsigned edges;
-	register gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->dataobject;
 	dobj->getedges( &edges );
 	return self->yoff 
 		- ((edges&TOPedge) ? self->linethickness/2 : self->radius);
 }
 	static int
-bottomend(register gofigview *self) {
+bottomend(gofigview *self) {
 	unsigned edges;
-	register gofig *dobj = (gofig *)self->dataobject;
+	gofig *dobj = (gofig *)self->dataobject;
 	dobj->getedges( &edges );
 	return self->yoff + (dobj->height-1)*self->spotheight 
 		+ ((edges&BOTTOMedge) ? self->linethickness/2 : self->radius);
@@ -802,7 +797,7 @@ struct proctable_Entry *DoNothingProc, *SetClickProc, *SetNoteProc;
 
 
 	static void
-modifymenuentry( menulist *m, char *f, char *prior, char *post,
+modifymenuentry( menulist *m, const char *f, const char *prior, const char *post,
 			struct proctable_Entry *proc, char code ) {
 	char buf[50];
 	sprintf( buf, f, prior );
@@ -811,7 +806,7 @@ modifymenuentry( menulist *m, char *f, char *prior, char *post,
 	m->AddToML( buf, proc, code, 0 );
 }
 
-	static char *
+	static const char *
 actionmenus(enum actionopts a, char *c) {
 	switch (a) {
 	case  Alternate: *c = 'A';  return "Gofig,Black-White%s~10";
@@ -821,7 +816,7 @@ actionmenus(enum actionopts a, char *c) {
 	case  Select: *c = 'S';  return "Gofig,Select Only%s~18";
 	}
 }
-	static char *
+	static const char *
 notemenus(enum noteopts a, char *c) {
 	switch (a) {
 	case  Letter: *c = 'a';  return "Gofig,Auto a b c ...%s~20";
@@ -842,7 +837,7 @@ ClickFirst() {
 	static void
 PostMyMenus(gofigview *self) {
 	static char code = ' ';
-	char *format;
+	const char *format;
 
 	if (self->hitaction != self->menuhitaction) {
 		/* move <= from menuhitaction to hitaction */
@@ -1178,7 +1173,7 @@ ReplaceCommand(gofigview *self, int code) {
 	gofig *dobj = (gofig *)self->dataobject;
 	if (dobj == NULL) return;
 	FILE *inf;
-	register int c;
+	int c;
 	int id;
 
 	inf = ((self)->GetIM())->FromCutBuffer();
@@ -1680,7 +1675,7 @@ gofigview::DesiredSize(long  width, long  height, enum view_DSpass  pass,
  *  # # # # # # # # # # # # #  */
 
 /* functions for drawing stones */
-	static char *
+	static const char * const
 stonefuncs[]  =  {
 	"", 
 	"godict begin",
@@ -1906,14 +1901,14 @@ stonefuncs[]  =  {
 };
 
 	static void
-putgodict( FILE *f, char *prefix ) {
-	char **dx;
+putgodict( FILE *f, const char *prefix ) {
+	const char * const *dx;
 	for (dx = stonefuncs; *dx; dx++)
 		fprintf( f, "%s %s\n", prefix, *dx );
 }
 
 	static void 
-GeneratePostScript(FILE *file, gofig *dobj, char *prefix, int wpts, int hpts) {
+GeneratePostScript(FILE *file, gofig *dobj, const char *prefix, int wpts, int hpts) {
 
 	int height = dobj->height,  width = dobj->width;
 
@@ -2106,7 +2101,7 @@ gofigview::DesiredPrintSize(long width, long height, enum view_DSpass pass,
 }
 
 	void *
-gofigview::GetPSPrintInterface(char *printtype) {
+gofigview::GetPSPrintInterface(const char *printtype) {
 	if (strcmp(printtype, "generic") == 0)
 		return (void *)this;
 	return NULL;
@@ -2146,7 +2141,7 @@ gofigview::PrintPSDoc(FILE *outfile, long pagew, long pageh) {
 }
 
 	void
-gofigview::Print(FILE *file, char *processor, char *finalFormat, boolean topLevel) {
+gofigview::Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel) {
 	gofig *dobj = (gofig *)dataobject;
 
 	/* compute size */
@@ -2154,7 +2149,7 @@ gofigview::Print(FILE *file, char *processor, char *finalFormat, boolean topLeve
 	DesiredPrintSize(pagew, pageh, view_NoSet, &wpts, &hpts);
 
 	/* generate preface and prefix */
-	char *prefix;
+	const char *prefix;
 	if (strcmp(processor, "troff") == 0) {
 		/* output to troff */
 		if (topLevel)

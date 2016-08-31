@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/shr/RCS/amserr.c,v 2.15 1992/12/15 21:21:37 rr2b Stab74 $";
-#endif
-
 /*
 	amserr.c -- Decoding the codes for message server errors 
 
@@ -45,6 +38,8 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 **********************************************************************************
 */
+
+#include <andrewos.h>
 
 #define NODECLAREMSERRCODE
 #include <mserrno.h>

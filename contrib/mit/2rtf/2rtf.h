@@ -22,8 +22,6 @@
  It is provided "as is" without express or implied warranty.
  
  2rtf was written by Scott Rixner, rixner@ATHENA.MIT.EDU and Jeremy Paul Kirby, jpkirby@ATHENA.MIT.EDU
-
- $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/2rtf/RCS/2rtf.h,v 1.2 1994/03/29 04:42:10 rr2b Stab74 $
 */
 
 /*

@@ -32,10 +32,6 @@ P_tmpdir can be defined as something else if needed.
  Not sure how to define TMP_MAX correctly..., the value in atkos.h is a guess.
  */
 
-#ifndef NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ossupport/RCS/oscommon.c,v 1.19 1995/01/16 04:29:02 rr2b Stab74 $";
-#endif
-
 #include "atkos.h"
 
 long atkos_dummy_variable_for_ar=99;

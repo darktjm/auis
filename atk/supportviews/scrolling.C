@@ -30,13 +30,13 @@ ATK_IMPL("scrolling.H")
 
 
 
-static char *InterfaceName[scroll_TYPES] = {"scroll,vertical", "scroll,horizontal"};
+static const char * const InterfaceName[scroll_TYPES] = {"scroll,vertical", "scroll,horizontal"};
 
 ScrollInterfaceClassic::ScrollInterfaceClassic(class view *v) {
     vw=v;
     if(vw) {
-	fns[scroll_VERT]=(struct scrollfns *)vw->GetInterface(InterfaceName[scroll_VERT]);
-	fns[scroll_HORIZ]=(struct scrollfns *)vw->GetInterface(InterfaceName[scroll_HORIZ]);
+	fns[scroll_VERT]=(const struct scrollfns *)vw->GetInterface(InterfaceName[scroll_VERT]);
+	fns[scroll_HORIZ]=(const struct scrollfns *)vw->GetInterface(InterfaceName[scroll_HORIZ]);
     }
 }
 
@@ -48,7 +48,7 @@ ScrollInterfaceClassic::ScrollInterfaceClassic() {
 void ScrollInterfaceClassic::Absolute(long totalx, long x, long totaly, long y) {
     if(vw==NULL) return;
     if(totalx) {
-	struct scrollfns *horiz=fns[scroll_HORIZ];
+	const struct scrollfns *horiz=fns[scroll_HORIZ];
 	struct range total, seen, dot;
 	if(horiz==NULL) return;
 	horiz->GetInfo(vw, &total, &seen, &dot);
@@ -60,7 +60,7 @@ void ScrollInterfaceClassic::Absolute(long totalx, long x, long totaly, long y) 
     }
 
     if(totaly) {
-	struct scrollfns *vert=fns[scroll_VERT];
+	const struct scrollfns *vert=fns[scroll_VERT];
 	struct range total, seen, dot;
 	if(vert==NULL) return;
 	vert->GetInfo(vw, &total, &seen, &dot);
@@ -75,7 +75,7 @@ void ScrollInterfaceClassic::Absolute(long totalx, long x, long totaly, long y) 
 void ScrollInterfaceClassic::ScreenDelta(long dx, long dy) {
     if(vw==NULL) return;
     if(dx) {
-	struct scrollfns *horiz=fns[scroll_HORIZ];
+	const struct scrollfns *horiz=fns[scroll_HORIZ];
 	if(horiz==NULL) return;
 	if(dx<0) {
 	    long posn=horiz->WhatIsAt(vw, -dx, vw->GetLogicalWidth());
@@ -87,7 +87,7 @@ void ScrollInterfaceClassic::ScreenDelta(long dx, long dy) {
 	}
     }
     if(dy) {
-	struct scrollfns *vert=fns[scroll_VERT];
+	const struct scrollfns *vert=fns[scroll_VERT];
 	if(vert==NULL) return;
 	if(dy<0) {
 	    long posn=vert->WhatIsAt(vw, -dy, vw->GetLogicalHeight());
@@ -101,7 +101,7 @@ void ScrollInterfaceClassic::ScreenDelta(long dx, long dy) {
       
 }
 
-static struct scrollfns *fns=NULL;
+static const struct scrollfns *fns=NULL;
 static void DoHorizEndZone(class view *vw, int typeEnd, enum view_MouseAction action) {
     if(fns==NULL || fns->SetFrame==NULL || fns->GetInfo==NULL)  return;
     struct range total, seen, beg;
@@ -129,8 +129,8 @@ static void DoVertEndZone(class view *vw, int typeEnd, enum view_MouseAction act
 
 void ScrollInterfaceClassic::Shift(scroll_Direction dir) {
     if(vw==NULL) return;
-    struct scrollfns *vert=fns[scroll_VERT];
-    struct scrollfns *horiz=fns[scroll_HORIZ];
+    const struct scrollfns *vert=fns[scroll_VERT];
+    const struct scrollfns *horiz=fns[scroll_HORIZ];
     scroll_endzonefptr vzone=NULL,hzone=NULL;
     if(vert) {
 	vzone=vert->EndZone;
@@ -162,8 +162,8 @@ void ScrollInterfaceClassic::Shift(scroll_Direction dir) {
 
 void ScrollInterfaceClassic::Extreme(scroll_Direction dir) {
     if(vw==NULL) return;
-    struct scrollfns *vert=fns[scroll_VERT];
-    struct scrollfns *horiz=fns[scroll_HORIZ];
+    const struct scrollfns *vert=fns[scroll_VERT];
+    const struct scrollfns *horiz=fns[scroll_HORIZ];
     scroll_endzonefptr vzone=NULL,hzone=NULL;
     if(vert) {
 	vzone=vert->EndZone;
@@ -196,8 +196,8 @@ void ScrollInterfaceClassic::Extreme(scroll_Direction dir) {
 void ScrollInterfaceClassic::UpdateRegions(class scroll &sc) {
     struct range htotal, hseen, hdot;
     struct range vtotal, vseen, vdot;
-    struct scrollfns *vert=fns[scroll_VERT];
-    struct scrollfns *horiz=fns[scroll_HORIZ];
+    const struct scrollfns *vert=fns[scroll_VERT];
+    const struct scrollfns *horiz=fns[scroll_HORIZ];
     long vrange=0;
     long vsb, vse;
     long vdb, vde;

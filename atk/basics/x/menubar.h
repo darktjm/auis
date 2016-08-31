@@ -101,7 +101,7 @@ struct mbinit {
 struct titem {
     const char *name;		/* name of this item */
     struct titem *next;	/* next item */
-    char *data;		/* data to be reported when this item is choosen */
+    const void *data;		/* data to be reported when this item is chosen */
     const char *keys;		/* the keybinding for this item */
     short y;
 #define SUBMENUFLAG (1<<1)
@@ -143,23 +143,23 @@ struct menubar {
     int	mmenus;		    /* number of pointers allocated for menus */
     int	lastmenuindex;	    /* index into menus of the top menu currently displayed */
     int resort;	    /* whether the menubar needs re-sorting */
-    void (*MenuFunction)(struct menubar *mb, char *data, char *md); /* function to be called for a menu selection */
+    void (*MenuFunction)(struct menubar *mb, const void *data, const void *md); /* function to be called for a menu selection */
     char *MenuFunctionData; /* data for the MenuFunction */
-    char *data;		    /* more data */
+    const void *data;	    /* more data */
     int morewidth;
     Bool refit;
 };
 
-typedef void (*menubar_menufptr)(struct menubar *mb, char *data, char *md);
+typedef void (*menubar_menufptr)(struct menubar *mb, const void *data, const void *md);
 
-typedef char *(*GetDefaultsFunction)(Display *, char *);
+typedef const char *(*GetDefaultsFunction)(Display *, const char *);
 GetDefaultsFunction mb_SetGetDefault(GetDefaultsFunction  func);
 void mb_SetKeys(struct menubar  *mb, const char *title, const char *item, char  *keys);
-void mb_AddSelection(struct menubar  *mb,const char *title ,int  tprio,const char *item,int  iprio,int  submenu,char  *data);
+void mb_AddSelection(struct menubar  *mb,const char *title ,int  tprio,const char *item,int  iprio,int  submenu,const void *data);
 void mb_SetItemStatus(struct menubar  *mb,const char *title,const char *item,int  status);
 void mb_DeleteSelection(struct menubar  *mb,const char *title,const char *item);
 void mb_RefitMenubar(struct menubar  *mb);
-void mb_RedrawMenubar(register struct menubar  *mb, int  clear);
+void mb_RedrawMenubar(struct menubar  *mb, int  clear);
 void mb_HandleConfigure(struct mbinit  *mbi, struct menubar  *mb, long  width , long  height);
 void mb_Activate(struct menubar  *mb, long  x, long  y);
 void mb_KeyboardActivate(struct menubar  *mb);
@@ -168,4 +168,4 @@ struct mbinit *mb_Init(Display  *dpy,XColor  *fore,XColor  *back, menubar_expose
 void mb_InitWindows(struct mbinit  *mbi,Window  client);
 void mb_Finalize(struct mbinit  *mbi);
 void mb_Destroy(struct menubar  *mb);
-struct menubar *mb_Create(struct mbinit  *mbi, const char  *maintitle , const char  *moretitle, char  *data, menubar_menufptr func);
+struct menubar *mb_Create(struct mbinit  *mbi, const char  *maintitle , const char  *moretitle, const void *data, menubar_menufptr func);

@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/types.h sys/file.h sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/cvtold.c,v 2.24 1995/07/11 18:28:24 rr2b Stab74 $";
-#endif
-
-
-
 #include <sys/param.h>
 #include <sys/stat.h>
 #include <ms.h>
@@ -84,7 +76,7 @@ char name[]; int lockFD;
 static int lock(file, lockedFile, lockedFDp)
 char *file, *lockedFile; int *lockedFDp;
 {
-    register int f, g;
+    int f, g;
     char	locktmp[1+MAXPATHLEN];	    /* Usable lock temporary */
     char *s;
 

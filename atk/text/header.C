@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/header.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
 ATK_IMPL("header.H")
 #include <text.H>
 #include <dictionary.H>
@@ -44,7 +37,7 @@ ATK_IMPL("header.H")
 
 #include "header.H"
 
-static char *header_prompts[] = {
+static const char * const header_prompts[] = {
     "  Left\t\t:  ",
     "    Center\t:  ",
     "          Right\t:  "
@@ -54,9 +47,7 @@ static class style *header_promptStyle;
 
 
 ATKdefineRegistry(header, dataobject, header::InitializeClass);
-#ifndef NORCSID
-#endif
-void header_SetPrompt(class text  *textobj, char  *string);
+void header_SetPrompt(class text  *textobj, const char  *string);
 static long header_FencedWrite(class text  *textobj, FILE  *file, long  writeID, int  level);
 
 
@@ -76,12 +67,12 @@ void header::ObservedChanged(class observable  *t,long  value)
     if(value==0) (this)->SetModified();
 }
 
-char *header::ViewName()
+const char *header::ViewName()
 {
     return "headrtv";
 }
 
-void header_SetPrompt(class text  *textobj, char  *string)
+void header_SetPrompt(class text  *textobj, const char  *string)
 {
     int x, l;
     class environment *newenv;
@@ -152,13 +143,14 @@ long header::Read(FILE  *file, long  id)
         if (c == EOF) return dataobject_NOREADERROR;
         if ((c = getc(file)) == EOF)
             return dataobject_PREMATUREEOF;
+	const char *be;
         if (c == 'b')  {
             begindata = TRUE;
-            s = "egindata";
+            be = "egindata";
         }
         else if (c == 'e')  {
             begindata = FALSE;
-            s = "nddata";
+            be = "nddata";
         }
         else  {
 	    if(endcount == 1){
@@ -166,8 +158,8 @@ long header::Read(FILE  *file, long  id)
 	    }
             continue;
         }
-        while ((c = getc(file)) != EOF && c == *s) s++;
-        if (c == '{' && *s == '\0')  {
+        while ((c = getc(file)) != EOF && c == *be) be++;
+        if (c == '{' && *be == '\0')  {
             if (begindata) {
                 s = objectname;
                 while ((c = getc(file)) != EOF && c != ',')
@@ -291,7 +283,7 @@ header::header()
     THROWONFAILURE( TRUE);
 }
 
-void header::SetHeader(int  which, char  *str)
+void header::SetHeader(int  which, const char  *str)
 {
     long pos;
     if(which<0 || which>=header_TEXTS) return;

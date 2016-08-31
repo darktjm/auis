@@ -23,10 +23,6 @@
  * 
  *  $
 */
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/batmail/RCS/driver.c,v 1.6 1996/02/10 04:20:45 robr Stab74 $";
-#endif
 
 /*
  * robin -- Message System Primitive Interface

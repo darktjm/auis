@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/entertext.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("entertext.H")
 #include <entertext.H>
 #include <stylesheet.H>
@@ -45,8 +35,6 @@ ATK_IMPL("entertext.H")
 #define INITIALSIZE 64
 
 ATKdefineRegistry(entertext, text, NULL);
-#ifndef NORCSID
-#endif
 static void checkstyles(class entertext  *self);
 
 
@@ -87,7 +75,7 @@ boolean entertext::Changed()
 {
     return (boolean)(this->mod != (this)->GetModified());
 }
-void entertext::SetChars(char  *str,int  len)
+void entertext::SetChars(const char  *str,int  len)
 {
     this->needswrap = FALSE;
     (this)->Clear();
@@ -121,7 +109,7 @@ boolean entertext::DeleteCharacters(long  pos, long  len  )
     return TRUE;
 }
 
-char *entertext::ViewName()
+const char *entertext::ViewName()
 {
     return ("etextview");
 }

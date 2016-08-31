@@ -19,11 +19,6 @@
 // 
 //  $
  */
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/owatch.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $ */
-
-#ifndef NORCSID
-char *owatch_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/owatch.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
 
 #include <andrewos.h>
 ATK_IMPL("owatch.H")
@@ -41,9 +36,6 @@ static class owatch *owo=NULL;
 
 
 ATKdefineRegistry(owatch, observable, NULL);
-#ifndef NORCSID
-#endif
-
 
 void owatch::ObservedChanged(class observable  *changed, long  value  )
 {
@@ -60,7 +52,7 @@ void owatch::ObservedChanged(class observable  *changed, long  value  )
 
 struct owatch_data *owatch::Create(class observable  *obj)
 {
-    int i;
+    unsigned int i;
     struct owatch_data *o=useddata;
     if(obj==NULL) return NULL;
     

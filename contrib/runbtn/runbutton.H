@@ -20,13 +20,13 @@ class runbutton : public  sbutton {
     // overrides
     long Read(FILE *file, long id);
     long Write(FILE *file, long writeid, int level);
-    char *ViewName();
+    const char *ViewName();
     boolean EnsureSize(int ind);
 
     virtual void SetCommandString(const char *cmd);
     inline char  *GetCommandString()	{ return (commandString); }
     virtual void SetLabelString(const char *lbl);
-    inline char *GetLabelString() { return GetLabel(0); }
+    inline const char *GetLabelString() { return GetLabel(0); }
     virtual void ExecuteCommand(runbuttonview *rbv);
 
   private:

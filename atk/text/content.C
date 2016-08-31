@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/content.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("content.H")
 #include "ctype.h"
 #include <environment.H>
@@ -51,7 +42,7 @@ ATK_IMPL("content.H")
 
 #define ISPRINT(x) ((((unsigned char)x)>160)?TRUE:isprint(x))
 
-static char defaultlist[] = 
+static const char defaultlist[] = 
 /*    "majorheading,heading,subheading,chapter,section,subsection,paragraph,function" */
     "chapter,section,subsection,paragraph,function"
 ;
@@ -59,7 +50,7 @@ static char defaultlist[] =
 static char *contentstylenames[48];
 static int contentstylecount = (-1);
 
-static char *indexnames[] = {
+static const char * const indexnames[] = {
     "index",
     "indexi",
     ""
@@ -90,7 +81,7 @@ static void freeentrys(class content  *self);
 static void clear(class content  *self);
 static boolean ns(class content  *self,class text  *text,long  pos,class environment  *env);
 static void initcontentstylenames(void);
-static int indexstyle(register char  *name);
+static int indexstyle(const char  *name);
 static struct content_chapentry *addindexentry(class content  *self,long  pos,long  len,struct content_chapentry  **base);
 static struct content_chapentry *insertentry(class content  *self,long  pos,long  len,struct content_chapentry  **base);
 static void NoteStyle(class content  *self,long  pos,long  len,class style  *style);
@@ -448,7 +439,7 @@ static void doindent(class content  *self)
 {   
     int tab[NUMLEV],i,lastlev,curlev;
     struct content_chapentry *cp;
-    static char buf[] = "                                                          ";
+    static const char buf[] = "                                                          ";
 
     if(self->srctext == NULL) return;
     for(i = 0; i < NUMLEV; i++) tab[i] = 0;
@@ -622,10 +613,10 @@ void content::reinit()
 
 }
 
-int content::StyleNameContentLevel(register char  *name)
+int content::StyleNameContentLevel(const char  *name)
 {
-    register char **sp;
-    register int which;
+    char **sp;
+    int which;
 
     if (contentstylecount < 0) {
 	initcontentstylenames();
@@ -641,10 +632,10 @@ int content::StyleNameContentLevel(register char  *name)
     }
     return 0;
 }
-static int indexstyle(register char  *name)
+static int indexstyle(const char  *name)
 {
-    register char **sp;
-    register int which = 0;
+    const char * const *sp;
+    int which = 0;
     if(name == NULL) return 0;
     for(sp = indexnames;which < indexnamecount && sp &&  *sp && **sp; sp++){
 	which++;
@@ -714,7 +705,7 @@ static struct content_chapentry *insertentry(class content  *self,long  pos,long
 static void NoteStyle(class content  *self,long  pos,long  len,class style  *style)
 {
     int which;
-    char *sn;
+    const char *sn;
     struct content_chapentry *cp;
     if(style == NULL || ((sn = (style)->GetName()) == NULL)) return;
     if((which = content::StyleNameContentLevel(sn)) > 0){
@@ -869,7 +860,7 @@ void content::ObservedChanged(class observable  *changed,long  value)
     }
     else (this)->text::ObservedChanged(changed,value);
 }
-char *content::ViewName()
+const char *content::ViewName()
 {
 return "contentv";
 }

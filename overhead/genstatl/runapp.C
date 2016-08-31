@@ -25,15 +25,6 @@
 //  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/genstatl/RCS/runapp.C,v 3.13 1995/11/13 21:50:26 robr Stab74 $";
-#endif
-
-
- 
-
-
 /* driver for generic applications
  */
 
@@ -63,7 +54,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/genst
 static void usage();
 static void initClass();
 static char *leaf(char  *path);
-static void stripSuffix(char  *buf,char  *suffix);
+static void stripSuffix(char  *buf,const char  *suffix);
 extern void doStaticLoads();
 
 static void usage()
@@ -97,7 +88,7 @@ static char *leaf(char  *path)
 }
 
 /* strip off the suffix, if any */
-static void stripSuffix(char  *buf,char  *suffix)
+static void stripSuffix(char  *buf,const char  *suffix)
 {
     char *end=buf+strlen(buf)-strlen(suffix);
     if(strcmp(suffix,end)==0)

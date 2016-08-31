@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipdi00.C,v 1.3 1993/06/17 04:28:00 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -136,17 +128,17 @@ END-SPECIFICATION  ************************************************************/
 #define  SetStreamModified	      {image->zip_image_stream->\
 					zip_stream_states.zip_stream_state_modified = 1;}
 
-static int Allocate_Image( register class zip		      *self, register struct zip_stream	      *stream, register struct zip_image	     **image, register char			      *name );
-static int Destroy_Inferior_Image( register class zip		      *self, register zip_type_image	       image );
-static void Free_Image( register class zip		      *self, register zip_type_image	       image );
-static int Propagate_Image_Stream_Ptr( register class zip		      *self, register zip_type_image	       image );
-static int Adjust_Inferior_Image_Point_Suite( register class zip		      *self, register zip_type_image	       image, register int			       x_delta , register int			       y_delta );
+static int Allocate_Image( class zip		      *self, struct zip_stream	      *stream, struct zip_image	     **image, const char			      *name );
+static int Destroy_Inferior_Image( class zip		      *self, zip_type_image	       image );
+static void Free_Image( class zip		      *self, zip_type_image	       image );
+static int Propagate_Image_Stream_Ptr( class zip		      *self, zip_type_image	       image );
+static int Adjust_Inferior_Image_Point_Suite( class zip		      *self, zip_type_image	       image, int			       x_delta , int			       y_delta );
 
 
 static
-int Allocate_Image( register class zip		      *self, register struct zip_stream	      *stream, register struct zip_image	     **image, register char			      *name )
+int Allocate_Image( class zip		      *self, struct zip_stream	      *stream, struct zip_image	     **image, const char			      *name )
           {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
   IN(Allocate_Image);
   if ( (*image = (zip_type_image) calloc( 1, sizeof(struct zip_image) )) != NULL )
@@ -169,10 +161,10 @@ int Allocate_Image( register class zip		      *self, register struct zip_stream	
   }
 
 long
-zip::Create_Peer_Image( register struct zip_image	     **image, register char			      *name, register struct zip_stream	      *stream, register struct zip_image	      *peer )
+zip::Create_Peer_Image( struct zip_image	     **image, const char			      *name, struct zip_stream	      *stream, struct zip_image	      *peer )
             {
-  register long			      status = zip_success;
-  register zip_type_image	      peer_ptr = peer;
+  long			      status = zip_success;
+  zip_type_image	      peer_ptr = peer;
 
   IN(zip_Create_Peer_Image);
   if ( stream )
@@ -197,10 +189,10 @@ zip::Create_Peer_Image( register struct zip_image	     **image, register char			
   }
 
 long
-zip::Create_Inferior_Image( register struct zip_image	     **image, register char			      *name, register struct zip_stream	      *stream, register struct zip_image	      *superior )
+zip::Create_Inferior_Image( struct zip_image	     **image, const char			      *name, struct zip_stream	      *stream, struct zip_image	      *superior )
             {
-  register long			      status = zip_success;
-  register zip_type_image	      superior_ptr = superior, image_ptr;
+  long			      status = zip_success;
+  zip_type_image	      superior_ptr = superior, image_ptr;
 
   IN(zip_Create_Inferior_Image);
   if ( stream )
@@ -242,10 +234,10 @@ zip::Create_Inferior_Image( register struct zip_image	     **image, register cha
   }
 
 long
-zip::Destroy_Image( register struct zip_image	      *image )
+zip::Destroy_Image( struct zip_image	      *image )
       {
-  register int			      status = zip_success;
-  register zip_type_figure	      figure, figure_ptr;
+  int			      status = zip_success;
+  zip_type_figure	      figure, figure_ptr;
 
   IN(zip::Destroy_Image);
   if ( image )
@@ -270,10 +262,10 @@ zip::Destroy_Image( register struct zip_image	      *image )
   }
 
 static int
-Destroy_Inferior_Image( register class zip		      *self, register zip_type_image	       image )
+Destroy_Inferior_Image( class zip		      *self, zip_type_image	       image )
       {
-  register int			      status = zip_success;
-  register zip_type_figure	      figure_ptr, figure;
+  int			      status = zip_success;
+  zip_type_figure	      figure_ptr, figure;
 
   IN(Destroy_Inferior_Image);
   figure = image->zip_image_figure_anchor;
@@ -295,7 +287,7 @@ Destroy_Inferior_Image( register class zip		      *self, register zip_type_image
   }
 
 static
-void Free_Image( register class zip		      *self, register zip_type_image	       image )
+void Free_Image( class zip		      *self, zip_type_image	       image )
       {
   IN(Free_Image);
   if ( image->zip_image_name )
@@ -314,9 +306,9 @@ void Free_Image( register class zip		      *self, register zip_type_image	      
   }
 
 long /*=== HOOK s/b in EDITING module???  ====*/
-zip::Hook_Peer_Image( register struct zip_image	      *image , register struct zip_image	      *peer_image )
+zip::Hook_Peer_Image( struct zip_image	      *image , struct zip_image	      *peer_image )
       {
-  register int			      status = zip_success;
+  int			      status = zip_success;
 
   IN(zip_Hook_Peer_Image);
   if ( image  &&  peer_image )
@@ -346,9 +338,9 @@ zip::Hook_Peer_Image( register struct zip_image	      *image , register struct z
   }
 
 long
-zip::Hook_Inferior_Image( register struct zip_image	      *image , register struct zip_image	      *superior_image )
+zip::Hook_Inferior_Image( struct zip_image	      *image , struct zip_image	      *superior_image )
       {
-  register int			      status = zip_success;
+  int			      status = zip_success;
 
   IN(zip_Hook_Inferior_Image);
   if ( image  &&  superior_image )
@@ -378,10 +370,10 @@ zip::Hook_Inferior_Image( register struct zip_image	      *image , register stru
   }
 
 static
-int Propagate_Image_Stream_Ptr( register class zip		      *self, register zip_type_image	       image )
+int Propagate_Image_Stream_Ptr( class zip		      *self, zip_type_image	       image )
       {
-  register zip_type_image	      image_ptr;
-  register zip_type_image	      superior_image, peer_image;
+  zip_type_image	      image_ptr;
+  zip_type_image	      superior_image, peer_image;
 
   peer_image = image->zip_image_peer;
   image->zip_image_peer = NULL;
@@ -398,10 +390,10 @@ int Propagate_Image_Stream_Ptr( register class zip		      *self, register zip_ty
   }
 
 long
-zip::Unhook_Image( register struct zip_image	      *image )
+zip::Unhook_Image( struct zip_image	      *image )
       {
-  register struct zip_image	     *image_ptr;
-  register int			      status = zip_success;
+  struct zip_image	     *image_ptr;
+  int			      status = zip_success;
 
   IN(zip_Unhook_Image);
   if ( image )
@@ -446,9 +438,9 @@ zip::Unhook_Image( register struct zip_image	      *image )
   }
 
 long
-zip::Set_Image_Name( register struct zip_image	      *image, register char			      *name )
+zip::Set_Image_Name( struct zip_image	      *image, const char			      *name )
         {
-  register int			      status = zip_success;
+  int			      status = zip_success;
   zip_type_image		      duplicate;
 
   IN(zip_Set_Image_Name);
@@ -499,9 +491,9 @@ image->zip_image_stream->zip_stream_name);
   }
 
 long
-zip::Set_Image_Text( register struct zip_image *image, char *text )
+zip::Set_Image_Text( struct zip_image *image, const char *text )
       {
-  register int			      status = zip_success;
+  int			      status = zip_success;
 
   IN(zip_Set_Image_Text);
   if ( image )
@@ -523,9 +515,9 @@ zip::Set_Image_Text( register struct zip_image *image, char *text )
   }
 
 long
-zip::Set_Image_Pattern( register struct zip_image *image, unsigned char pattern )
+zip::Set_Image_Pattern( struct zip_image *image, unsigned char pattern )
 {
-  register int			      status = zip_success;
+  int			      status = zip_success;
 
   IN(zip_Set_Image_Pattern);
   if ( image )
@@ -543,9 +535,9 @@ zip::Set_Image_Pattern( register struct zip_image *image, unsigned char pattern 
   }
 
 long
-zip::Set_Image_Shade( register struct zip_image *image, unsigned char shade )
+zip::Set_Image_Shade( struct zip_image *image, unsigned char shade )
 {
-  register int			      status = zip_success;
+  int			      status = zip_success;
 
   IN(zip_Set_Image_Shade);
   if ( image )
@@ -563,9 +555,9 @@ zip::Set_Image_Shade( register struct zip_image *image, unsigned char shade )
   }
 
 long
-zip::Set_Image_Font( register struct zip_image	      *image, register char			      *font_name )
+zip::Set_Image_Font( struct zip_image	      *image, char			      *font_name )
         {
-  register int			      status = zip_success;
+  int			      status = zip_success;
 
   IN(zip_Set_Image_Font);
   if ( image )
@@ -584,9 +576,9 @@ zip::Set_Image_Font( register struct zip_image	      *image, register char			   
   }
 
 long
-zip::Set_Image_Line_Width( register struct zip_image	      *image, register long			       width )
+zip::Set_Image_Line_Width( struct zip_image	      *image, long			       width )
         {
-  register int			      status = zip_success;
+  int			      status = zip_success;
 
   IN(zip_Set_Image_Line_Width);
   if ( image )
@@ -603,9 +595,9 @@ zip::Set_Image_Line_Width( register struct zip_image	      *image, register long
   }
 
 long
-zip::Set_Image_Line_Dash( register zip_type_image		 image, register char				 *pattern, register int				 offset, register short			 type )
+zip::Set_Image_Line_Dash( zip_type_image		 image, char				 *pattern, int				 offset, short			 type )
             {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
       IN(zip_Set_Image_Line_Dash);
       if ( image )
@@ -628,9 +620,9 @@ zip::Set_Image_Line_Dash( register zip_type_image		 image, register char				 *pa
   }
 
 long
-zip::Set_Image_Line_Cap( register zip_type_image		 image, register short			 cap )
+zip::Set_Image_Line_Cap( zip_type_image		 image, short			 cap )
         {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
       IN(zip_Set_Image_Line_Cap);
       if ( image )
@@ -646,9 +638,9 @@ zip::Set_Image_Line_Cap( register zip_type_image		 image, register short			 cap 
   }
 
 long
-zip::Set_Image_Line_Join( register zip_type_image		 image, register short			 join )
+zip::Set_Image_Line_Join( zip_type_image		 image, short			 join )
         {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
       IN(zip_Set_Image_Line_Join);
       if ( image )
@@ -664,9 +656,9 @@ zip::Set_Image_Line_Join( register zip_type_image		 image, register short			 joi
   }
 
 long
-zip::Set_Image_Line_Color( register zip_type_image		 image, register double			 red , register double			 green , register double			 blue )
+zip::Set_Image_Line_Color( zip_type_image		 image, double			 red , double			 green , double			 blue )
         {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
      IN(zip_Set_Image_Line_Color);
      if ( image )
@@ -693,9 +685,9 @@ zip::Set_Image_Line_Color( register zip_type_image		 image, register double			 r
   }
 
 long
-zip::Set_Image_FillFG_Color( register zip_type_image		 image, register double			 red , register double			 green , register double			 blue )
+zip::Set_Image_FillFG_Color( zip_type_image		 image, double			 red , double			 green , double			 blue )
         {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
      IN(zip_Set_Image_FillFG_Color);
      if ( image )
@@ -722,9 +714,9 @@ zip::Set_Image_FillFG_Color( register zip_type_image		 image, register double			
   }
 
 long
-zip::Set_Image_FillBG_Color( register zip_type_image		 image, register double			 red , register double			 green , register double			 blue )
+zip::Set_Image_FillBG_Color( zip_type_image		 image, double			 red , double			 green , double			 blue )
         {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
 
      IN(zip_Set_Image_FillBG_Color);
      if ( image )
@@ -751,10 +743,10 @@ zip::Set_Image_FillBG_Color( register zip_type_image		 image, register double			
   }
 
 long
-zip::Adjust_Image_Point_Suite( register struct zip_image *image, long x_delta, long y_delta )
+zip::Adjust_Image_Point_Suite( struct zip_image *image, long x_delta, long y_delta )
 {
-  register int			      status = zip_success;
-  register zip_type_figure	      figure_ptr;
+  int			      status = zip_success;
+  zip_type_figure	      figure_ptr;
 
   IN(zip::Adjust_Image_Point_Suite);
   if ( image )
@@ -777,10 +769,10 @@ zip::Adjust_Image_Point_Suite( register struct zip_image *image, long x_delta, l
   }
 
 static int
-Adjust_Inferior_Image_Point_Suite( register class zip		      *self, register zip_type_image	       image, register int			       x_delta , register int			       y_delta )
+Adjust_Inferior_Image_Point_Suite( class zip		      *self, zip_type_image	       image, int			       x_delta , int			       y_delta )
         {
-  register int			      status = zip_success;
-  register zip_type_figure	      figure_ptr;
+  int			      status = zip_success;
+  zip_type_figure	      figure_ptr;
 
   IN(Adjust_Inferior_Image_Point_Suite);
   figure_ptr = image->zip_image_figure_anchor;
@@ -800,12 +792,12 @@ Adjust_Inferior_Image_Point_Suite( register class zip		      *self, register zip
   }
 
 struct zip_image *
-zip::Image( register char			      *name )
+zip::Image( const char			      *name )
       {
   zip_type_image		      image = NULL;
-  register zip_type_stream_chain      stream_link =
+  zip_type_stream_chain      stream_link =
 					StreamAnchor;
-  register int			      status = zip_success;
+  int			      status = zip_success;
 
   IN(zip::Image);
   while ( stream_link )
@@ -822,10 +814,10 @@ zip::Image( register char			      *name )
   }
 
 struct zip_image *
-zip::Stream_Image( register struct zip_stream	      *stream, register char			      *name )
+zip::Stream_Image( struct zip_stream	      *stream, const char			      *name )
         {
   zip_type_image		      image = NULL;
-  register int			      status = zip_success;
+  int			      status = zip_success;
 
   IN(zip::Stream_Image);
   if ( stream  &&  name )
@@ -837,9 +829,9 @@ zip::Stream_Image( register struct zip_stream	      *stream, register char			   
   }
 
 struct zip_image *
-zip::Next_Image( register struct zip_image	      *image )
+zip::Next_Image( struct zip_image	      *image )
       {
-  register zip_type_image	      next_image = NULL;
+  zip_type_image	      next_image = NULL;
 
   IN(zip::Next_Image);
   if ( !( next_image = image->zip_image_inferior ) )
@@ -860,9 +852,9 @@ zip::Next_Image( register struct zip_image	      *image )
   }
 
  zip_type_image 
-zip::Image_Left_Peer( register zip_type_image	       image )
+zip::Image_Left_Peer( zip_type_image	       image )
       {
-  register zip_type_image	      peer = NULL, candidate;
+  zip_type_image	      peer = NULL, candidate;
 
   IN(zip::Image_Left_Peer);
   if ( image  &&  image->zip_image_superior )
@@ -879,7 +871,7 @@ zip::Image_Left_Peer( register zip_type_image	       image )
   }
 
 int
-zip::Set_Image_Extrema( register zip_type_image	       image, register zip_type_point	       x , register zip_type_point	       y )
+zip::Set_Image_Extrema( zip_type_image	       image, zip_type_point	       x , zip_type_point	       y )
         {
   IN(zip::Set_Image_Extrema);
   if ( x < image->zip_image_least_x )
@@ -911,8 +903,8 @@ zip::Set_Image_Extrema( register zip_type_image	       image, register zip_type_
 /*===
 static int
 ZIP_Balance_Image_Extrema( self, image )
-  register struct zip		     *self;
-  register zip_type_image		  image;
+  struct zip		     *self;
+  zip_type_image		  image;
   {
   IN(ZIP_Balance_Image_Extrema);
   if ( abs(image->zip_image_least_x) < abs(image->zip_image_greatest_x) )

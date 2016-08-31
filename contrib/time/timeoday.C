@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/time/RCS/timeoday.C,v 1.4 1993/07/13 22:30:00 gk5g Stab74 $";
-#endif
-
 #include <andrewos.h>
 #include <stdio.h>
 #include <timeoday.H>
@@ -57,15 +52,13 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/time/R
   
 
 /* Global variables */
-static char *months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", NULL};
-static char *weekdays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", NULL};
+static const char * const months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", NULL};
+static const char * const weekdays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", NULL};
 static int maxdigraphlen;
 
 
 
 ATKdefineRegistry(timeoday, dataobject, timeoday::InitializeClass);
-#ifndef NORCSID
-#endif
 static void UpdateTime(class timeoday  *self);
 static void WriteLine(FILE  *f, const char  *l);
 static char * GlomStrings(char  *s , char  *t);

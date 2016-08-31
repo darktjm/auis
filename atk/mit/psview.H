@@ -39,17 +39,17 @@ class psview : public  iconview
     static boolean InitializeClass();
     static boolean atk_inited;
 
-    void Print(FILE *file, char *processor, char *finalFormat, 
+    void Print(FILE *file, const char *processor, const char *finalFormat, 
 		boolean topLevel);
     void PostMenus(class menulist *menulist);
     void SetDataObject(class dataobject * dobj);
     void PrintPSDoc(FILE *outfile, long pagew, long pageh);
-    void *GetPSPrintInterface(char *printtype);
+    void *GetPSPrintInterface(const char *printtype);
     void PrintPSRect(FILE *outfile, 
 			long logwidth, long logheight, struct rectangle *visrect);
     void DesiredPrintSize(long width, long height, enum view_DSpass pass, 
 			long *desiredwidth, long *desiredheight);
-    boolean Gifify(char *filename, long *pmaxw, long *pmaxh, 
+    boolean Gifify(const char *filename, long *pmaxw, long *pmaxh, 
 			struct rectangle *visrect);
     class menulist *menus;
     int interpret;

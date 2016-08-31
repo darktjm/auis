@@ -49,8 +49,8 @@ class bpv: public  view {
       class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
       void ReceiveInputFocus();
       void LoseInputFocus();
-      void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
-      void *GetPSPrintInterface(char *printtype);
+      void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
+      void *GetPSPrintInterface(const char *printtype);
 
       boolean HasInputFocus;
       boolean NowBig;

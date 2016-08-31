@@ -17,7 +17,7 @@ class hiddenview : public textview {
     void PostMenus(class menulist *menulist);
 
     view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight);
-    void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
+    void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
     void Update();
     void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
 

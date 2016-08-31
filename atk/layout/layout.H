@@ -28,11 +28,6 @@ ATK_INTER
 //  $
 */
 
-/* $Header $ */
-/* $ACIS$ */
-
- 
-
 /* layout.ch - layout data object definition and interface */
 
 #define layout_VERSION 1
@@ -75,7 +70,7 @@ public:
 
 
 
-   char * ViewName()  ;
+   const char * ViewName()  ;
    long Read (FILE * f, long id)  ;
    long Write (FILE * f, long writeid, int level)  ;
    long GetModified()  ;
@@ -83,7 +78,7 @@ public:
 
   virtual void ToggleDebug();
   virtual void RemoveComponent(struct component *c);
-  virtual void FillInComponent(char *name, struct component *c);
+  virtual void FillInComponent(const char *name, struct component *c);
   virtual struct component * CreateComponent()  ;
   virtual void SetComponentSize(struct component *c, long x, long y, long w, long h);
   virtual void Promote(struct component *c);

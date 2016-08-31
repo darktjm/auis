@@ -25,17 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/plusspace.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 /*  plusspc.c
 
 	plusspace package
@@ -47,6 +36,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
  */
 
+#include <andrewos.h>
 ATK_IMPL("plusspace.H")
 #include <stdio.h>
 
@@ -62,23 +52,21 @@ static FILE *f;	/* to avoid passing 'file' to all PutXxxx functions */
 
 	
 ATKdefineRegistry(plusspace, ATK, NULL);
-#ifndef NORCSID
-#endif
-static void PutNibblePair(register unsigned char byte);
-static void PutSame(register unsigned char byte, register long  count);
-static void PutDiffer(register unsigned char *start, register long  length);
-static long GetPrintableNibblePair(register FILE  *fp);
+static void PutNibblePair(unsigned char byte);
+static void PutSame(unsigned char byte, long  count);
+static void PutDiffer(unsigned char *start, long  length);
+static long GetPrintableNibblePair(FILE  *fp);
 
 
 static void
-PutNibblePair(register unsigned char byte)
+PutNibblePair(unsigned char byte)
 	{
 	putc((byte&0xF) + ' ', f);		/* put low four bits before the upper ! */
 	putc(((byte>>4)&0xF) + ' ', f);
 }
 
 	static void
-PutSame(register unsigned char byte, register long  count)
+PutSame(unsigned char byte, long  count)
 		{
 	while (count > 129) 
 		PutNibblePair(257-129), PutNibblePair(~byte), count -= 129;
@@ -86,10 +74,10 @@ PutSame(register unsigned char byte, register long  count)
 }
 
 	static void
-PutDiffer(register unsigned char *start, register long  length)
+PutDiffer(unsigned char *start, long  length)
 		{
 	while (length > 0) {
-		register long tlength = (length>128) ? 128 : length;
+		long tlength = (length>128) ? 128 : length;
 		PutNibblePair(tlength-1);
 		while (tlength-- > 0)
 			PutNibblePair(~(*start++));
@@ -112,13 +100,13 @@ PutDiffer(register unsigned char *start, register long  length)
 		This code is virutally identical to that in paint.c.
 */
 	void
-plusspace::WriteRow(FILE  *file, register unsigned char *byteaddr, long  nbytes)
+plusspace::WriteRow(FILE  *file, unsigned char *byteaddr, long  nbytes)
 				{
-	register enum state {SameBytes, Differ, Differ1} CurSt;
-	register unsigned char thischar;	/* current input char */
-	register unsigned char prevchar;	/* previous char in differing string */
+	enum state {SameBytes, Differ, Differ1} CurSt;
+	unsigned char thischar;	/* current input char */
+	unsigned char prevchar;	/* previous char in differing string */
 	unsigned char *startstring;	/* start of a string of differing bytes */
-	register long samecount = 0;	/* count occurrences of samechar */
+	long samecount = 0;	/* count occurrences of samechar */
 	
 	f = file;
 	CurSt = Differ;
@@ -186,9 +174,9 @@ plusspace::WriteRow(FILE  *file, register unsigned char *byteaddr, long  nbytes)
 */
 #define ERRORBYTE 128
 	static long
-GetPrintableNibblePair(register FILE  *fp)
+GetPrintableNibblePair(FILE  *fp)
 	{
-	register  long a, b;
+	 long a, b;
 	a = getc(fp);
 	if (a == EOF) return ERRORBYTE;
 	if (a == '\\') 
@@ -209,10 +197,10 @@ GetPrintableNibblePair(register FILE  *fp)
 	returns 0 for success.  -1 for failure
 */
 	long
-plusspace::ReadRow(register FILE  *file		/* where to get them from */, register unsigned char *row	/* where to put bytes */, register long  length	/* how many bytes in row must be filled */)
+plusspace::ReadRow(FILE  *file		/* where to get them from */, unsigned char *row	/* where to put bytes */, long  length	/* how many bytes in row must be filled */)
 				{
-	register int sofar;		/* length unpacked so far */
-	register int curr;		/* current char from in stream */
+	int sofar;		/* length unpacked so far */
+	int curr;		/* current char from in stream */
 
 	sofar = 0;
 	while (sofar < length)	{
@@ -232,7 +220,7 @@ plusspace::ReadRow(register FILE  *file		/* where to get them from */, register 
 		}
 		else {
 			/* next char repeats (257-curr) times */
-			register int repchar = ~GetPrintableNibblePair(file);
+			int repchar = ~GetPrintableNibblePair(file);
 			curr = 257 - curr;
 			if (curr > length - sofar) {
 				/* ERROR: code gives line longer than length

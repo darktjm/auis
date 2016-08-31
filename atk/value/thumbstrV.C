@@ -26,31 +26,18 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/thumbstrV.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("thumbstrV.H")
 #include <value.H>
 #include <thumbstrV.H>
 
 
 ATKdefineRegistry(thumbstrV, thumbV, NULL);
-#ifndef NORCSID
-#endif
 
-
-char *thumbstrV::GetValueString()
+const char *thumbstrV::GetValueString()
 {
     class value *w = (this)->Value();
     long len,val;
-    char **arr;
+    const char * const *arr;
     if(((len = (w)->GetArraySize()) == 0) || 
 	((arr = (w)->GetStringArray()) == NULL) || 
 	  ((val = (this)->GetTmpVal())< 0) ||

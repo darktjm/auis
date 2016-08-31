@@ -1,10 +1,6 @@
 /**********************************************************************
  * Error table generator for kerberos
  *
- * $Author: sa3e $
- * $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/ets/RCS/mk_krb_err.c,v $
- * $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/ets/RCS/mk_krb_err.c,v 1.4 1994/01/31 22:18:16 sa3e Stab74 $
- *
  * Copyright 1989, 1990 by the Massachusetts Institute of Technology.
  *
  * For copying and distribution information, please see the file
@@ -32,11 +28,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/ets/RCS/mk_krb_err.c,v 1.4 1994/01/31 22:18:16 sa3e Stab74 $";
-#endif
 
 #include <mitcopyright.h>
 #include "krb.h"

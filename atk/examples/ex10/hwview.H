@@ -42,7 +42,7 @@ public:
      void LoseInputFocus();
      class view * GetApplicationLayer()  ;
      void DeleteApplicationLayer(class view *v);
-     char * GetInterface(char *type)  ;
+     const void * GetInterface(const char *type)  ;
 
     helloworldview();
 	

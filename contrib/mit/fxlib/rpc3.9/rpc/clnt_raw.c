@@ -1,5 +1,3 @@
-/* @(#)clnt_raw.c	1.2 87/11/09 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,12 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/clnt_raw.c,v 1.3 1992/12/15 21:53:58 rr2b Stab74 $";
-#endif
-
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
  * unrestricted use provided that this legend is included on all tape
@@ -55,10 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-#if !defined(lint) && defined(SCCSIDS)
-static char sccsid[] = "@(#)clnt_raw.c 1.22 87/08/11 Copyr 1984 Sun Micro";
-#endif
-
 /*
  * clnt_raw.c
  *
@@ -112,7 +100,7 @@ clntraw_create(prog, vers)
 	u_long prog;
 	u_long vers;
 {
-	register struct clntraw_private *clp = clntraw_private;
+	struct clntraw_private *clp = clntraw_private;
 	struct rpc_msg call_msg;
 	XDR *xdrs = &clp->xdr_stream;
 	CLIENT	*client = &clp->client_object;
@@ -160,8 +148,8 @@ clntraw_call(h, proc, xargs, argsp, xresults, resultsp, timeout)
 	caddr_t resultsp;
 	struct timeval timeout;
 {
-	register struct clntraw_private *clp = clntraw_private;
-	register XDR *xdrs = &clp->xdr_stream;
+	struct clntraw_private *clp = clntraw_private;
+	XDR *xdrs = &clp->xdr_stream;
 	struct rpc_msg msg;
 	enum clnt_stat status;
 	struct rpc_err error;
@@ -237,8 +225,8 @@ clntraw_freeres(cl, xdr_res, res_ptr)
 	xdrproc_t xdr_res;
 	caddr_t res_ptr;
 {
-	register struct clntraw_private *clp = clntraw_private;
-	register XDR *xdrs = &clp->xdr_stream;
+	struct clntraw_private *clp = clntraw_private;
+	XDR *xdrs = &clp->xdr_stream;
 	bool_t rval;
 
 	if (clp == 0)

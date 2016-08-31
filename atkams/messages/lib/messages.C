@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/messages.C,v 1.16 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
 #include <textview.H>
 #include <sys/param.h>
 #include <errprntf.h>
@@ -77,10 +68,6 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 ATKdefineRegistry(messages, textview, messages::InitializeClass);
-#ifndef NORCSID
-#endif
-#ifndef NOTREESPLEASE
-#endif
 void NoOp();
 void BSM_RefreshDisplayedFolder(class messages  *self, char  *CheckAll);
 void PurgeAllDeletions(class messages  *self);
@@ -110,7 +97,7 @@ void PrintMarked(class messages  *self);
 void ClassifyMarked(class messages  *self, char  *name);
 void CopyMarked(class messages  *self, char  *name);
 void AppendMarked(class messages  *self, char  *name);
-int GetFolderName(class captions  *self, char  *prompt , char  *FName);
+int GetFolderName(class captions  *self, const char  *prompt , char  *FName);
 void AppendMarkedToFile(class messages  *self);
 void AppendMarkedToRawFile(class messages  *self);
 void BackUp(class messages  *self);
@@ -721,10 +708,10 @@ void AppendMarked(class messages  *self, char  *name)
     (c)->ActOnMarkedMessages( MARKACTION_APPENDBYNAME, name);
 }
 
-int GetFolderName(class captions  *self, char  *prompt , char  *FName)
+int GetFolderName(class captions  *self, const char  *prompt , char  *FName)
 {
     char ErrorText[500];
-    char *lc = (self)->GetLastClassification();
+    const char *lc = (self)->GetLastClassification();
 
     FName[0] = '\0';
     sprintf(ErrorText, "%s all %d marked messages into what folder [%s] : ",
@@ -1389,7 +1376,7 @@ int countdots(char  *s)
 #endif
 
 void
-messages::ObservedChanged( register class observable  *changed, register long		       change )
+messages::ObservedChanged( class observable  *changed, long		       change )
 {
     (this)->textview::ObservedChanged(changed,change);
     switch(change) {
@@ -1598,9 +1585,9 @@ void SetSubStatus(char  *nickname, int  substatus)
     ams::SubscriptionChangeHook(FullName, nickname, substatus, NULL);
     ams::WaitCursor(FALSE);
 }
-static char lastWindowWarning[] =
+static const char lastWindowWarning[] =
 "This is the last window.";
-static char *lastWindowChoices[] = {
+static const char * const lastWindowChoices[] = {
     "Continue Running",
     "Quit Messages",
     NULL
@@ -1749,7 +1736,7 @@ void BSM_NextDigest(class messages  *self)
     class t822view *tv = (class t822view *) GetBodies(self);
     class text *t = (class text *) (tv)->GetDataObject();
     struct SearchPattern *Pattern = NULL;
-    char *tp = search::CompilePattern("\012--", &Pattern);
+    const char *tp = search::CompilePattern("\012--", &Pattern);
     int tmploc;
 
     if (tp) {
@@ -1768,7 +1755,7 @@ void BSM_PrevDigest(class messages  *self)
     class t822view *tv = (class t822view *) GetBodies(self);
     class text *t = (class text *) (tv)->GetDataObject();
     struct SearchPattern *Pattern = NULL;
-    char *tp = search::CompilePattern("\012--", &Pattern);
+    const char *tp = search::CompilePattern("\012--", &Pattern);
     int tmploc;
 
     if (tp) {

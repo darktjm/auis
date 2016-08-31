@@ -26,40 +26,32 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/indexpro.C,v 3.5 1994/03/21 17:02:06 rr2b Stab74 $";
-#endif
-
-
 #define GAP 1
 #define BUFSIZE 5120
 #define NUMSIZE 512
 #define DCHAR '+'
-static char header[] = "\
-.SH \n\
-Index\n\
-.LP \n\
-.nr PS 8\n\
-.nr VS 9\n\
-.MC 1.9i\n\
-.na	\n\
-.de XX	\n\
-.br	\n\
-.ti -.2i\n\
-.ne 2	\n\
-..\n\
-.de YY 	\n\
-.sp 1.5\n\
-.ne 3\n\
-.ce 1\n\
-- \\\\$1 -\n\
-.sp .5\n\
-..\n\
-.in .2i	\n\
-.hy 0\
-";
+static const char header[] =
+    ".SH \n"
+    "Index\n"
+    ".LP \n"
+    ".nr PS 8\n"
+    ".nr VS 9\n"
+    ".MC 1.9i\n"
+    ".na	\n"
+    ".de XX	\n"
+    ".br	\n"
+    ".ti -.2i\n"
+    ".ne 2	\n"
+    "..\n"
+    ".de YY 	\n"
+    ".sp 1.5\n"
+    ".ne 3\n"
+    ".ce 1\n"
+    "- \\\\$1 -\n"
+    ".sp .5\n"
+    "..\n"
+    ".in .2i	\n"
+    ".hy 0";
 
 static int cmp(int  *a,int  *b)
 {

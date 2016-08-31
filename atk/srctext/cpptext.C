@@ -26,7 +26,6 @@ $Disclaimer:
 #include <andrewos.h>
 
 static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/cpptext.C,v 2.1 1995/02/07 17:37:27 rr2b Stab74 $";
 
 #include <environment.H>
 #include <stylesheet.H>

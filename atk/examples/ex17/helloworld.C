@@ -25,12 +25,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/examples/ex17/RCS/helloworld.C,v 1.4 1996/12/19 20:24:08 fred Exp $";
-#endif
-
 ATK_IMPL("helloworld.H")
 #include <stdio.h>
 
@@ -44,8 +38,6 @@ ATK_IMPL("helloworld.H")
 
 
 ATKdefineRegistry(helloworld, dataobject, NULL);
-#ifndef NORCSID
-#endif
 class dataobject *createInitialDobj();
 
 

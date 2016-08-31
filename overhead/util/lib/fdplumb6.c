@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>    /* types */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fdplumb6.c,v 2.11 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
-
 #if defined(POSIX_ENV) || defined(M_UNIX)
 #include <dirent.h>
 #else

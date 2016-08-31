@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/RCS/butterview.C,v 1.2 1993/05/30 00:25:19 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 
 #include <butterview.H>
@@ -42,9 +37,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/
 
 
 ATKdefineRegistry(butterview, view, NULL);
-#ifndef NORCSID
-#endif
-
 
 void
 butterview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)

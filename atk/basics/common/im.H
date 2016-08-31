@@ -131,14 +131,14 @@ public:
      void WantColormap(class view *requestor, class colormap **cmap);
      void ReceiveColormap(class colormap *cmap);
      void WantNewSize(class view *requestor);
-     ATK  * WantHandler(char *handlerName)  ;
-     char * WantInformation(char *key)  ;
+     ATK  * WantHandler(const char *handlerName)  ;
+     const char * WantInformation(const char *key)  ;
      void PostKeyState(class keystate *keystate);
      void PostMenus(class menulist *menulist);
      void PostCursor(struct rectangle *rec,class cursor *cursor) ;
      void RetractCursor(class cursor *cursor) ;
      void RetractViewCursors(class view *requestor);
-     void PostDefaultHandler(char *handlerName, ATK  *handler);
+     void PostDefaultHandler(const char *handlerName, ATK  *handler);
      short GetResource( class atomlist * name, class atomlist * className,
 		class atom * type, long * data )  ;
      void PostResource( class atomlist * path, class atom * type,
@@ -301,7 +301,7 @@ public:
     static void KeyboardExit();
     static long KeyboardLevel()  ;
     static void KeyboardProcessor();
-    static class event * EnqueueEvent(event_fptr proc, char *procdata, long timeIncrement)  ;
+    static class event * EnqueueEvent(event_fptr proc, const void *procdata, long timeIncrement)  ;
     static boolean IsPlaying()  ;
     static boolean CheckForInterrupt()  ;  /* scans ahead for control-G */
     static void ForceUpdate();
@@ -328,7 +328,7 @@ public:
     static boolean IOMGRSelect(long maxnum,long *rmask,long *wmask,long *emask,struct timeval *retTime)  ;
     static void IOMGRSoftSig(procedure aproc, char *arock);
     static long LWPCurrentProcess(char * curProcessID)  ;
-    static FILE * vfileopen(char * mode, struct expandstring *buffer)  ;
+    static FILE * vfileopen(const char * mode, struct expandstring *buffer)  ;
     static void vfileclose(FILE *f, struct expandstring *buffer);
     static void vfilecleanup();
     static void plumber(FILE * reportFile);

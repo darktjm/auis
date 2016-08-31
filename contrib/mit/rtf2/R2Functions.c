@@ -22,8 +22,6 @@
  It is provided "as is" without express or implied warranty.
 
  Rtf2 was written by Jeremy Paul Kirby, jpkirby@ATHENA.MIT.EDU and Scott Rixner, rixner@ATHENA.MIT.EDU
-
- $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/rtf2/RCS/R2Functions.c,v 1.2 1994/02/03 20:01:58 susan Stab74 $
 */
 
 /*
@@ -81,12 +79,6 @@
  *  $
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/rtf2/RCS/R2Functions.c,v 1.2 1994/02/03 20:01:58 susan Stab74 $";
-#endif
-
 
 #include <stdio.h>
 #include <sys/file.h>

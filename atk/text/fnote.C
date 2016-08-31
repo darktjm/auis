@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/fnote.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("fnote.H")
 #include <environment.H>
 #include "text.H"
@@ -61,8 +51,6 @@ class style *HStyle = NULL;
 
 
 ATKdefineRegistry(fnote, text, fnote::InitializeClass);
-#ifndef NORCSID
-#endif
 class style *GetStyle(class fnote  *self,class text  *txt,int  openflag);
 static boolean doupdate(class fnote  *self,class text  *text,long  pos,class environment  *env);
 static boolean copy(class fnote  *self,class text  *text);
@@ -127,8 +115,7 @@ static boolean doupdate(class fnote  *self,class text  *text,long  pos,class env
     static long lastpos = -1;
     class style *st;
     class viewref *vr;
-    const char *name;
-    char *sn;
+    const char *name, *sn;
     boolean retval = FALSE;
     if(env->type == environment_Style) {
 	st = env->data.style;
@@ -366,7 +353,7 @@ boolean fnote::InitializeClass()
     HStyle = NULL;
     return TRUE;
 }
-char * fnote::ViewName()
+const char * fnote::ViewName()
 {
     return "fnotev";
 }

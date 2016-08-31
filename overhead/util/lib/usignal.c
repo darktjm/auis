@@ -25,17 +25,11 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/usignal.c,v 2.12 1993/11/03 07:36:05 rr2b Stab74 $";
-#endif
-
 /*
 	usignal.c -- Return a static string describing a signal value.
 */
 
+#include <andrewos.h>
 #include <util.h>
  
 #include <errno.h>

@@ -28,14 +28,6 @@ ATK_INTER
 //  $
 */
 
-
-/* $Header $ */
-/* $Source $ */
-
-
-
-
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Histogram Chart View-object
@@ -77,7 +69,7 @@ public:
    void DrawChart();
    void PrintChart();
    class view * HitChart( enum view_MouseAction action, long x, long y, long clicks )	     ;
-   char * Moniker()				     ;
+   const char * Moniker()				     ;
    void SetDebug( boolean state );
 
 

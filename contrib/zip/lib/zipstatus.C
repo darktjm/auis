@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipstatus.C,v 1.3 1993/06/17 04:28:00 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -124,7 +116,7 @@ END-SPECIFICATION  ************************************************************/
 */
 
 
-static char			 *zip_status_messages[] =
+static const char		 * const zip_status_messages[] =
 					  {
 				/* 000 */ "Success",
 					  "Failure",
@@ -169,7 +161,7 @@ static char			 *zip_status_messages[] =
 				/* Values above 1000 are "errno" values */
 					  };
 
-static char			 *zip_figure_facility_names[] =
+static const char		 * const zip_figure_facility_names[] =
 				{
 			/* 000 */ "<<< UNKNOWN FACILITY NAME >>>",
 				"zip_Initialize",
@@ -208,7 +200,7 @@ static char			 *zip_figure_facility_names[] =
 				"zip_Add_Figure_Point"
 				};
 
-char				 *zip_image_facility_names[] =
+static const char	 * const zip_image_facility_names[] =
 				{
 			/* 000 */ "<<< UNKNOWN FACILITY NAME >>>",
 				"zip_Initialize",
@@ -241,7 +233,7 @@ char				 *zip_image_facility_names[] =
 				"zip_Expose_Image_Points"
 				};
 
-char				 *zip_stream_facility_names[] =
+static const char		 * const zip_stream_facility_names[] =
 				{
 			/* 000 */ "<<< UNKNOWN FACILITY NAME >>>",
 				"zip_Initialize",
@@ -276,7 +268,7 @@ char				 *zip_stream_facility_names[] =
 			/* 025 */"zip_Copy_Stream"
 				};
 
-char				 *zip_pane_facility_names[] =
+static const char		 * const zip_pane_facility_names[] =
 				{
 			/* 000 */ "<<< UNKNOWN FACILITY NAME >>>",
 				"zip_Initialize",
@@ -343,18 +335,16 @@ char				 *zip_pane_facility_names[] =
 
 
 ATKdefineRegistry(zipstatus, zipview, NULL);
-#ifndef NORCSID
-#endif
-static char * Format_Message( register class zipstatus	      *self, register int			       facility, register int			       status );
-static char * Format_Figure_Status_Message ( register class zipstatus		  *self, register zip_type_figure		   figure );
-static char * Format_Image_Status_Message ( register class zipstatus		  *self, register zip_type_image		   image );
-static char * Format_Pane_Status_Message ( register class zipstatus		  *self, register zip_type_pane		   pane);
-static char * Format_Stream_Status_Message( register class zipstatus		  *self, register zip_type_stream		   stream );
+static char * Format_Message( class zipstatus	      *self, int			       facility, int			       status );
+static char * Format_Figure_Status_Message ( class zipstatus		  *self, zip_type_figure		   figure );
+static char * Format_Image_Status_Message ( class zipstatus		  *self, zip_type_image		   image );
+static char * Format_Pane_Status_Message ( class zipstatus		  *self, zip_type_pane		   pane);
+static char * Format_Stream_Status_Message( class zipstatus		  *self, zip_type_stream		   stream );
 
 
 zipstatus::zipstatus( )
       {
-  register long			      status = zip_ok;
+  long			      status = zip_ok;
   IN(zipstatus::zipstatus);
 /*===*/
   OUT(zipstatus::zipstatus);
@@ -369,10 +359,10 @@ zipstatus::~zipstatus( )
   }
 
 static char *
-Format_Message( register class zipstatus	      *self, register int			       facility, register int			       status )
+Format_Message( class zipstatus	      *self, int			       facility, int			       status )
         {
   static char				  msg[1001];
-  char					 *facility_name;
+  const char				 *facility_name;
   char					  facility_msg[101];
 
   if ( facility >= zip_lowest_figure_facility_name    &&
@@ -405,7 +395,7 @@ Format_Message( register class zipstatus	      *self, register int			       faci
   }
 
 long
-zipstatus::Issue_Message( register char				  *msg )
+zipstatus::Issue_Message( char				  *msg )
       {
 /*===  return (*MessageWriter)( self, msg );*/
 return 0;
@@ -413,7 +403,7 @@ return 0;
 
 
 long
-zipstatus::Acknowledge_Message( register char				  *msg )
+zipstatus::Acknowledge_Message( char				  *msg )
       {
 /*===  return (*MessageAcknowledger)( self, msg );*/
 return 0;
@@ -428,27 +418,27 @@ return 0;
   }
 
 long
-zipstatus::Issue_Status_Message( register long facility, register long status )
+zipstatus::Issue_Status_Message( long facility, long status )
 {
   return (this)->Issue_Message(  Format_Message( this, facility, status ) );
   }
 
 
 long
-zipstatus::Acknowledge_Status_Message( register long				   facility, register long				   status )
+zipstatus::Acknowledge_Status_Message( long				   facility, long				   status )
         {
   return (this)->Acknowledge_Message(  Format_Message( this, facility, status ) );
   }
 
 static char *
-Format_Figure_Status_Message ( register class zipstatus		  *self, register zip_type_figure		   figure )
+Format_Figure_Status_Message ( class zipstatus		  *self, zip_type_figure		   figure )
       {
   char					  msg[1001];
 /*===
-  register char				 *facility_name;
+  char				 *facility_name;
   char					  facility_msg[101];
-  register int 				  status;
-  register int				  facility;
+  int 				  status;
+  int				  facility;
 
   facility = figure -> zip_figure_image ->zip_image_stream ->
 		zip_stream_environment -> zip_env_facility;
@@ -476,27 +466,27 @@ Format_Figure_Status_Message ( register class zipstatus		  *self, register zip_t
   }
 
 long
-zipstatus::Issue_Figure_Status_Message( register zip_type_figure		   figure )
+zipstatus::Issue_Figure_Status_Message( zip_type_figure		   figure )
       {
   return (this)->Issue_Message(  Format_Figure_Status_Message( this, figure ));
   }
 
 
 long
-zipstatus::Acknowledge_Figure_Status_Message( register zip_type_figure		   figure )
+zipstatus::Acknowledge_Figure_Status_Message( zip_type_figure		   figure )
       {
   return (this)->Acknowledge_Message(  Format_Figure_Status_Message( this, figure ));
   }
 
 static char *
-Format_Image_Status_Message ( register class zipstatus		  *self, register zip_type_image		   image )
+Format_Image_Status_Message ( class zipstatus		  *self, zip_type_image		   image )
       {
   char					  msg[1001];
 /*===
-  register char				 *facility_name;
+  char				 *facility_name;
   char					  facility_msg[101];
-  register int 				  status;
-  register int				  facility;
+  int 				  status;
+  int				  facility;
 
   facility = image->zip_image_stream->zip_stream_environment->zip_env_facility;
   status = image->zip_image_stream->zip_stream_environment->zip_env_status;
@@ -522,28 +512,28 @@ Format_Image_Status_Message ( register class zipstatus		  *self, register zip_ty
   }
 
 long
-zipstatus::Issue_Image_Status_Message( register zip_type_image		   image )
+zipstatus::Issue_Image_Status_Message( zip_type_image		   image )
       {
   return (this)->Issue_Message(  Format_Image_Status_Message( this, image ) );
   }
 
 
 long
-zipstatus::Acknowledge_Image_Status_Message( register zip_type_image		   image )
+zipstatus::Acknowledge_Image_Status_Message( zip_type_image		   image )
       {
   return (this)->Acknowledge_Message(  Format_Image_Status_Message( this, image ) );
   }
 
 
 static char *
-Format_Pane_Status_Message ( register class zipstatus		  *self, register zip_type_pane		   pane)
+Format_Pane_Status_Message ( class zipstatus		  *self, zip_type_pane		   pane)
       {
   char					  msg[1001];
 /*===
-  register char				 *facility_name;
+  char				 *facility_name;
   char					  facility_msg[101];
-  register int 				  status;
-  register int				  facility;
+  int 				  status;
+  int				  facility;
 
   facility = pane-> zip_pane_environment->zip_env_facility;
   status = pane-> zip_pane_environment->zip_env_status;
@@ -569,27 +559,27 @@ Format_Pane_Status_Message ( register class zipstatus		  *self, register zip_typ
   }
 
 long
-zipstatus::Issue_Pane_Status_Message( register zip_type_pane		   pane)
+zipstatus::Issue_Pane_Status_Message( zip_type_pane		   pane)
       {
   return (this)->Issue_Message(  Format_Pane_Status_Message( this, pane ) );
   }
 
 
 long
-zipstatus::Acknowledge_Pane_Status_Message( register zip_type_pane		   pane )
+zipstatus::Acknowledge_Pane_Status_Message( zip_type_pane		   pane )
       {
   return (this)->Acknowledge_Message(  Format_Pane_Status_Message( this, pane ));
   }
 
 static char *
-Format_Stream_Status_Message( register class zipstatus		  *self, register zip_type_stream		   stream )
+Format_Stream_Status_Message( class zipstatus		  *self, zip_type_stream		   stream )
       {
   char					  msg[1001];
 /*===
-  register char				 *facility_name;
+  char				 *facility_name;
   char					  facility_msg[101];
-  register int 				  status;
-  register int				  facility;
+  int 				  status;
+  int				  facility;
 
   IN(Format_Stream_Status_Message);
   facility = stream -> zip_stream_environment -> zip_env_facility;
@@ -617,14 +607,14 @@ Format_Stream_Status_Message( register class zipstatus		  *self, register zip_ty
   }
 
 long
-zipstatus::Issue_Stream_Status_Message( register zip_type_stream		   stream )
+zipstatus::Issue_Stream_Status_Message( zip_type_stream		   stream )
       {
   return (this)->Issue_Message(  Format_Stream_Status_Message( this, stream ) );
   }
 
 
 long
-zipstatus::Acknowledge_Stream_Status_Message( register zip_type_stream		   stream )
+zipstatus::Acknowledge_Stream_Status_Message( zip_type_stream		   stream )
       {
   return (this)->Acknowledge_Message(  Format_Stream_Status_Message( this, stream ) );
   }

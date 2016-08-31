@@ -1,5 +1,3 @@
-/* @(#)clnt_tcp.c	1.2 87/11/09 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,12 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/clnt_tcp.c,v 1.3 1992/12/15 21:53:58 rr2b Stab74 $";
-#endif
-
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
  * unrestricted use provided that this legend is included on all tape
@@ -55,10 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-#if !defined(lint) && defined(SCCSIDS)
-static char sccsid[] = "@(#)clnt_tcp.c 1.37 87/10/05 Copyr 1984 Sun Micro";
-#endif
- 
 /*
  * clnt_tcp.c, Implements a TCP/IP based, client side RPC.
  *
@@ -138,12 +126,12 @@ clnttcp_create(raddr, prog, vers, sockp, sendsz, recvsz)
 	struct sockaddr_in *raddr;
 	u_long prog;
 	u_long vers;
-	register int *sockp;
+	int *sockp;
 	u_int sendsz;
 	u_int recvsz;
 {
 	CLIENT *h;
-	register struct ct_data *ct;
+	struct ct_data *ct;
 	struct timeval now;
 	struct rpc_msg call_msg;
 
@@ -248,7 +236,7 @@ fooy:
 
 static enum clnt_stat
 clnttcp_call(h, proc, xdr_args, args_ptr, xdr_results, results_ptr, timeout)
-	register CLIENT *h;
+	CLIENT *h;
 	u_long proc;
 	xdrproc_t xdr_args;
 	caddr_t args_ptr;
@@ -256,12 +244,12 @@ clnttcp_call(h, proc, xdr_args, args_ptr, xdr_results, results_ptr, timeout)
 	caddr_t results_ptr;
 	struct timeval timeout;
 {
-	register struct ct_data *ct = (struct ct_data *) h->cl_private;
-	register XDR *xdrs = &(ct->ct_xdrs);
+	struct ct_data *ct = (struct ct_data *) h->cl_private;
+	XDR *xdrs = &(ct->ct_xdrs);
 	struct rpc_msg reply_msg;
 	u_long x_id;
 	u_long *msg_x_id = (u_long *)(ct->ct_mcall);	/* yuk */
-	register bool_t shipnow;
+	bool_t shipnow;
 	int refreshes = 2;
 
 	if (!ct->ct_waitset) {
@@ -348,7 +336,7 @@ clnttcp_geterr(h, errp)
 	CLIENT *h;
 	struct rpc_err *errp;
 {
-	register struct ct_data *ct =
+	struct ct_data *ct =
 	    (struct ct_data *) h->cl_private;
 
 	*errp = ct->ct_error;
@@ -360,8 +348,8 @@ clnttcp_freeres(cl, xdr_res, res_ptr)
 	xdrproc_t xdr_res;
 	caddr_t res_ptr;
 {
-	register struct ct_data *ct = (struct ct_data *)cl->cl_private;
-	register XDR *xdrs = &(ct->ct_xdrs);
+	struct ct_data *ct = (struct ct_data *)cl->cl_private;
+	XDR *xdrs = &(ct->ct_xdrs);
 
 	xdrs->x_op = XDR_FREE;
 	return ((*xdr_res)(xdrs, res_ptr));
@@ -378,7 +366,7 @@ clnttcp_control(cl, request, info)
 	int request;
 	char *info;
 {
-	register struct ct_data *ct = (struct ct_data *)cl->cl_private;
+	struct ct_data *ct = (struct ct_data *)cl->cl_private;
 
 	switch (request) {
 	case CLSET_TIMEOUT:
@@ -402,7 +390,7 @@ static void
 clnttcp_destroy(h)
 	CLIENT *h;
 {
-	register struct ct_data *ct =
+	struct ct_data *ct =
 	    (struct ct_data *) h->cl_private;
 
 	if (ct->ct_closeit) {
@@ -420,9 +408,9 @@ clnttcp_destroy(h)
  */
 static int
 readtcp(ct, buf, len)
-	register struct ct_data *ct;
+	struct ct_data *ct;
 	caddr_t buf;
-	register int len;
+	int len;
 {
 #ifdef FD_SETSIZE
 	fd_set mask;
@@ -433,7 +421,7 @@ readtcp(ct, buf, len)
 	FD_ZERO(&mask);
 	FD_SET(ct->ct_sock, &mask);
 #else
-	register int mask = 1 << (ct->ct_sock);
+	int mask = 1 << (ct->ct_sock);
 	int readfds;
 
 	if (len == 0)
@@ -480,7 +468,7 @@ writetcp(ct, buf, len)
 	caddr_t buf;
 	int len;
 {
-	register int i, cnt;
+	int i, cnt;
 
 	for (cnt = len; cnt > 0; cnt -= i, buf += i) {
 		if ((i = write(ct->ct_sock, buf, cnt)) == -1) {

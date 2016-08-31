@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/file.h sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/msclients/cui/RCS/morprntf.c,v 2.10 1992/12/15 21:22:34 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include <cui.h>
 #include <hdrparse.h>
 #include <errprntf.h>

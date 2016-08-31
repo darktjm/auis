@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/cui/RCS/pcmchs.c,v 2.11 1992/12/15 21:17:22 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* Machine dependent modules --  PC Version                     */
 #include <andyenv.h>
 #include <stdio.h>

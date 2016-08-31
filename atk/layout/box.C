@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/layout/RCS/box.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-/* $ACIS$ */
-
- 
-
 ATK_IMPL("box.H")
 #include <stdio.h>
 #include <assert.h>
@@ -61,10 +51,8 @@ static boolean debug=FALSE;
 
 
 ATKdefineRegistry(box, dataobject, box::InitializeClass);
-#ifndef NORCSID
-#endif
-static void objectto(FILE  *f				/* input file containing offending material */, char  *message				/* error message */);
-static boolean			    /* returns TRUE for success */ fgetstring(FILE  *f			    /* input file */, char  *string			    /* desired input string */);
+static void objectto(FILE  *f				/* input file containing offending material */, const char  *message				/* error message */);
+static boolean			    /* returns TRUE for success */ fgetstring(FILE  *f			    /* input file */, const char  *string			    /* desired input string */);
 static long			    /* returns read error status */ readASCII(class box  *self, FILE  *f			    /* input file */, long  id			    /* unique identifier in data stream */);
 
 
@@ -79,7 +67,7 @@ box::InitializeClass()
 
 /* get corresponding view name */
 
-char *					/* returns "boxview */
+const char *					/* returns "boxview */
 box::ViewName()
 {
     return "boxview";
@@ -149,7 +137,7 @@ box::Write(FILE  * f				/* file to be written */, long  writeID				/* unique ID 
 /* object to and print out bad input */
 
 static void
-objectto(FILE  *f				/* input file containing offending material */, char  *message				/* error message */)
+objectto(FILE  *f				/* input file containing offending material */, const char  *message				/* error message */)
 {
     int ch;
 
@@ -166,7 +154,7 @@ objectto(FILE  *f				/* input file containing offending material */, char  *mess
 /* scan input for a specific string */
 
 static boolean			    /* returns TRUE for success */
-fgetstring(FILE  *f			    /* input file */, char  *string			    /* desired input string */)
+fgetstring(FILE  *f			    /* input file */, const char  *string			    /* desired input string */)
 {
     int ch;
 

@@ -1,5 +1,3 @@
-/* @(#)svc_tcp.c	1.2 87/11/09 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,12 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/svc_tcp.c,v 1.3 1992/12/15 21:54:40 rr2b Stab74 $";
-#endif
-
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
  * unrestricted use provided that this legend is included on all tape
@@ -55,10 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-#if !defined(lint) && defined(SCCSIDS)
-static char sccsid[] = "@(#)svc_tcp.c 1.21 87/08/11 Copyr 1984 Sun Micro";
-#endif
-
 /*
  * svc_tcp.c, Server side for TCP/IP based RPC. 
  *
@@ -147,13 +135,13 @@ struct tcp_conn {  /* kept in xprt->xp_p1 */
  */
 SVCXPRT *
 svctcp_create(sock, sendsize, recvsize)
-	register int sock;
+	int sock;
 	u_int sendsize;
 	u_int recvsize;
 {
 	bool_t madesock = FALSE;
-	register SVCXPRT *xprt;
-	register struct tcp_rendezvous *r;
+	SVCXPRT *xprt;
+	struct tcp_rendezvous *r;
 	struct sockaddr_in addr;
 	int len = sizeof(struct sockaddr_in);
 
@@ -219,8 +207,8 @@ makefd_xprt(fd, sendsize, recvsize)
 	u_int sendsize;
 	u_int recvsize;
 {
-	register SVCXPRT *xprt;
-	register struct tcp_conn *cd;
+	SVCXPRT *xprt;
+	struct tcp_conn *cd;
  
 	xprt = (SVCXPRT *)mem_alloc(sizeof(SVCXPRT));
 	if (xprt == (SVCXPRT *)NULL) {
@@ -251,7 +239,7 @@ makefd_xprt(fd, sendsize, recvsize)
 
 static bool_t
 rendezvous_request(xprt)
-	register SVCXPRT *xprt;
+	SVCXPRT *xprt;
 {
 	int sock;
 	struct tcp_rendezvous *r;
@@ -285,9 +273,9 @@ rendezvous_stat()
 
 static void
 svctcp_destroy(xprt)
-	register SVCXPRT *xprt;
+	SVCXPRT *xprt;
 {
-	register struct tcp_conn *cd = (struct tcp_conn *)xprt->xp_p1;
+	struct tcp_conn *cd = (struct tcp_conn *)xprt->xp_p1;
 
 	xprt_unregister(xprt);
 	(void)close(xprt->xp_sock);
@@ -315,11 +303,11 @@ static struct timeval wait_per_try = { 35, 0 };
  */
 static int
 readtcp(xprt, buf, len)
-	register SVCXPRT *xprt;
+	SVCXPRT *xprt;
 	caddr_t buf;
-	register int len;
+	int len;
 {
-	register int sock = xprt->xp_sock;
+	int sock = xprt->xp_sock;
 #ifdef FD_SETSIZE
 	fd_set mask;
 	fd_set readfds;
@@ -327,7 +315,7 @@ readtcp(xprt, buf, len)
 	FD_ZERO(&mask);
 	FD_SET(sock, &mask);
 #else
-	register int mask = 1 << sock;
+	int mask = 1 << sock;
 	int readfds;
 #endif /* def FD_SETSIZE */
 	do {
@@ -358,11 +346,11 @@ fatal_err:
  */
 static int
 writetcp(xprt, buf, len)
-	register SVCXPRT *xprt;
+	SVCXPRT *xprt;
 	caddr_t buf;
 	int len;
 {
-	register int i, cnt;
+	int i, cnt;
 
 	for (cnt = len; cnt > 0; cnt -= i, buf += i) {
 		if ((i = write(xprt->xp_sock, buf, cnt)) < 0) {
@@ -378,7 +366,7 @@ static enum xprt_stat
 svctcp_stat(xprt)
 	SVCXPRT *xprt;
 {
-	register struct tcp_conn *cd =
+	struct tcp_conn *cd =
 	    (struct tcp_conn *)(xprt->xp_p1);
 
 	if (cd->strm_stat == XPRT_DIED)
@@ -391,11 +379,11 @@ svctcp_stat(xprt)
 static bool_t
 svctcp_recv(xprt, msg)
 	SVCXPRT *xprt;
-	register struct rpc_msg *msg;
+	struct rpc_msg *msg;
 {
-	register struct tcp_conn *cd =
+	struct tcp_conn *cd =
 	    (struct tcp_conn *)(xprt->xp_p1);
-	register XDR *xdrs = &(cd->xdrs);
+	XDR *xdrs = &(cd->xdrs);
 
 	xdrs->x_op = XDR_DECODE;
 	(void)xdrrec_skiprecord(xdrs);
@@ -422,7 +410,7 @@ svctcp_freeargs(xprt, xdr_args, args_ptr)
 	xdrproc_t xdr_args;
 	caddr_t args_ptr;
 {
-	register XDR *xdrs =
+	XDR *xdrs =
 	    &(((struct tcp_conn *)(xprt->xp_p1))->xdrs);
 
 	xdrs->x_op = XDR_FREE;
@@ -432,12 +420,12 @@ svctcp_freeargs(xprt, xdr_args, args_ptr)
 static bool_t
 svctcp_reply(xprt, msg)
 	SVCXPRT *xprt;
-	register struct rpc_msg *msg;
+	struct rpc_msg *msg;
 {
-	register struct tcp_conn *cd =
+	struct tcp_conn *cd =
 	    (struct tcp_conn *)(xprt->xp_p1);
-	register XDR *xdrs = &(cd->xdrs);
-	register bool_t stat;
+	XDR *xdrs = &(cd->xdrs);
+	bool_t stat;
 
 	xdrs->x_op = XDR_ENCODE;
 	msg->rm_xid = cd->x_id;

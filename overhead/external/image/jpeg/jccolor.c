@@ -111,14 +111,14 @@ get_rgb_ycc_rows (compress_info_ptr cinfo,
 		  int rows_to_read, JSAMPIMAGE image_data)
 {
 #ifdef SIXTEEN_BIT_SAMPLES
-  register UINT16 r, g, b;
+  UINT16 r, g, b;
 #else
-  register int r, g, b;
+  int r, g, b;
 #endif
-  register INT32 * ctab = rgb_ycc_tab;
-  register JSAMPROW inptr0, inptr1, inptr2;
-  register JSAMPROW outptr0, outptr1, outptr2;
-  register long col;
+  INT32 * ctab = rgb_ycc_tab;
+  JSAMPROW inptr0, inptr1, inptr2;
+  JSAMPROW outptr0, outptr1, outptr2;
+  long col;
   long width = cinfo->image_width;
   int row;
 
@@ -174,14 +174,14 @@ get_rgb_gray_rows (compress_info_ptr cinfo,
 		   int rows_to_read, JSAMPIMAGE image_data)
 {
 #ifdef SIXTEEN_BIT_SAMPLES
-  register UINT16 r, g, b;
+  UINT16 r, g, b;
 #else
-  register int r, g, b;
+  int r, g, b;
 #endif
-  register INT32 * ctab = rgb_ycc_tab;
-  register JSAMPROW inptr0, inptr1, inptr2;
-  register JSAMPROW outptr;
-  register long col;
+  INT32 * ctab = rgb_ycc_tab;
+  JSAMPROW inptr0, inptr1, inptr2;
+  JSAMPROW outptr;
+  long col;
   long width = cinfo->image_width;
   int row;
 

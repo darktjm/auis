@@ -73,7 +73,7 @@ tokenclass setSTRINGCON
 tokenclass setSTRINGCON
 	seq	"//"
 {
-	register int c;
+	int c;
 	static char delim[4] = "\n\\\\";
 	char *dx;
 

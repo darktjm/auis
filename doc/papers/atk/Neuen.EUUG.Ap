@@ -47,7 +47,7 @@ struct textview *tv;
 {
     struct text *t;
     long start, len;
-    register unsigned char c, *cp;
+    unsigned char c, *cp;
     long rep = 0;
     t = (struct text *) textview_GetDataObject(tv);
     getSandL(t,tv,&start,&len);
@@ -68,7 +68,7 @@ struct textview *tv;
 {
     struct text *t;
     long start, len;
-    register unsigned char c, *cp;
+    unsigned char c, *cp;
     long rep = 0;
     t = (struct text *) textview_GetDataObject(tv);
     getSandL(t,tv,&start,&len);
@@ -88,7 +88,7 @@ char * swedish_converttotroff(i)
 unsigned char i;
 {
     static char buf[6];
-    register unsigned char *cp;
+    unsigned char *cp;
     if(i == 214){/* special case backslash, since it has to be quoted */
 	*buf = '\\'; buf[1] = '\\'; buf[2] = '\0';
 	return buf;

@@ -507,7 +507,7 @@ class ASlotString : public ASlot {
 class ASlotFile : public ASlotString {
 	// ASSERT:  val.cstr is never NULL
   private:
-    static char *devnull;
+    static const char devnull[];
   public:
     ATKregistryEntry *ATKregistry();
     inline ASlotFile() { val.cstr = devnull; }

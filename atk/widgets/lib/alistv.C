@@ -90,7 +90,7 @@ void AListv::ExtendedMode(view_MouseAction act, long ind) {
     AList *dself=(AList *)GetDataObject();
     long i,c;
     long min, max;
-    char *mods;
+    const char *mods;
     AListSelectedItem *items;
     if(firstInd==0 && act!=view_LeftDown) return;
     

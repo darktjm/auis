@@ -35,7 +35,7 @@ extern int table_DefaultPrecision;
 /* table.ch - table data object definition and interface */
 
 #define table_VERSION 1
-#define SafeFromNull(s) (((s) != NULL) ? (s) : (char *)"(null)")
+#define SafeFromNull(s) (((s) != NULL) ? (s) : "(null)")
 
 /* information about an entire row or column */
 
@@ -75,7 +75,7 @@ enum extended_type {extended_STANDARD, extended_BOGUS};
 struct extended_double_struct {
     union {
 	double standard;
-	char *bogus;
+	const char *bogus;
     } extended_value;
     enum extended_type type;
 };
@@ -152,15 +152,15 @@ public:
 
   void SetAttributes(struct attributes *attributes);
    void ObservedChanged (class observable *changed, long value);
-   char * ViewName()  ;
+   const char * ViewName()  ;
    long Read (FILE * f, long id)  ;
    long Write (FILE * f, long writeid, int level)  ;
    long GetModified()  ;
 
 
   virtual void ToggleDebug ();
-  virtual class table * FindName (char * name)  ;
-  virtual class table * SetName (char * name)  ;
+  virtual class table * FindName (const char * name)  ;
+  virtual class table * SetName (const char * name)  ;
   virtual void ChangeSize (int nrows, int ncols);
   virtual class table * ExtractData (Chunk chunk)  ;
   virtual void InsertData (class table * T, Chunk chunk);
@@ -182,7 +182,7 @@ public:
   virtual void RemoveViewFromTable(class view *v);
 
 
-  inline char * Name() { return SafeFromNull(this->tablename); }
+  inline const char * Name() { return SafeFromNull(this->tablename); }
   inline short &NumberOfRows() { return this->rows; }
   inline short &NumberOfColumns() { return this->cols; }
   inline short &RowHeight(short r) {return this->row[r].thickness; }

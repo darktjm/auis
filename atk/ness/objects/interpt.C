@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/interpt.C,v 1.4 1995/12/07 16:41:27 robr Stab74 $";
-#endif
-
 /* interptest.C
 	test the interp object
 
@@ -140,14 +135,14 @@ int yychar = -1;
 short yyerrflag = 0;
 
 
-int main(register int   argc, register char   **argv);
-void printdata(register class nessmark  *m);
+int main(int   argc, char   **argv);
+void printdata(class nessmark  *m);
 long LoadReplaceTabs();
 
 
 	int
-main(register int   argc, register char   **argv) {
-	register class nessmark *func, *printit;
+main(int   argc, char   **argv) {
+	class nessmark *func, *printit;
 	FILE *f;
 	TGlobRef   f1, f2, hi, nl;
 	TGlobRef   piloc, floc, reptabsloc;
@@ -278,7 +273,7 @@ main(register int   argc, register char   **argv) {
 }
 
 	void 
-printdata(register class nessmark  *m) {
+printdata(class nessmark  *m) {
 	long loc, lend;
 	lend = ((class mark *)m)->GetEndPos();
 	if (lend > 31) lend = 31;

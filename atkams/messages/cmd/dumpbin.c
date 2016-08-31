@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/cmd/RCS/dumpbin.c,v 2.10 1994/06/09 21:18:04 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
@@ -41,7 +33,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/message
 
 extern char *index();
 
-static char pref[]="messages.binaryoptions";
+static const char pref[]="messages.binaryoptions";
 long hatol();
 
 main(argc, argv)
@@ -50,9 +42,9 @@ char **argv;
 {
 FILE *f;
 char line[256];
-register char *s = 0, *t, *u;
+char *s = 0, *t, *u;
 long dum, dum2;
-register int i, offset=0;
+int i, offset=0;
 
     if (argc != 2) {
 	printf("usage: dumpbin preferencefile\n");
@@ -108,7 +100,7 @@ char *s;
 /***********************************************************************/
 
 fold(s)
-register char *s;
+char *s;
 {
     while (*s) {
 	if (isupper(*s)) *s = tolower(*s);

@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h> /* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textobjects/RCS/printopts.C,v 1.17 1995/02/03 21:40:07 Zarf Stab74 $";
-#endif
-
-// extern "C" char ProgramName[];	/* blechhh -- used by Print and Preview commands to guess a filename for printing. Not really necessary, but nice to have around. */
-
 ATK_IMPL("printopts.H")
 
 #include <rect.h>
@@ -553,16 +545,16 @@ static void LoadInitValue(class printopts *self, int onum)
     struct p_option *rec = (&(self->oplist[onum]));
     long value;
     short gotit;
-    char *str;
+    const char *str;
     int strlength;
 
     value = self->opview->GetPrintOption(rec->op->name);
 
     if (rec->op->type == A_boolean) {
-	str = (char *)(value ? "Yes" : "No");
+	str = value ? "Yes" : "No";
     }
     else if (rec->op->type == A_string || rec->op->type == A_file) {
-	str = value ? (char *)value : (char *)"";
+	str = value ? (const char *)value : "";
     }
     else if (rec->op->type == A_int) {
 	static char numbuf[12];
@@ -591,7 +583,7 @@ static void CreateWindow(class view  *callview, long  rock)
     class frame *framep;
     struct view_printoptlist *opl, *otmp;
     int ix, num, num2, num3;
-    char *label;
+    const char *label;
     class style *optionstyle, *answerstyle;
     class environment *env;
     class view *vp;

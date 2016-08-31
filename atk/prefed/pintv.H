@@ -68,8 +68,8 @@ public:
     class view *preferences_al;
     class textview *preferences;
     class environment *cat_sel, *pref_sel;
-    char *category;
-    char *pref;
+    const char *category;
+    const char *pref;
     struct prefdesc *cpd;
     class list *prefslist;
     boolean newerrors;

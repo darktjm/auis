@@ -1,5 +1,3 @@
-/* @(#)clnt_udp.c	1.2 87/11/09 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,12 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/clnt_udp.c,v 1.3 1992/12/15 21:53:58 rr2b Stab74 $";
-#endif
-
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
  * unrestricted use provided that this legend is included on all tape
@@ -55,10 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-#if !defined(lint) && defined(SCCSIDS)
-static char sccsid[] = "@(#)clnt_udp.c 1.39 87/08/11 Copyr 1984 Sun Micro";
-#endif
-
 /*
  * clnt_udp.c, Implements a UDP/IP based, client side RPC.
  *
@@ -134,12 +122,12 @@ clntudp_bufcreate(raddr, program, version, wait, sockp, sendsz, recvsz)
 	u_long program;
 	u_long version;
 	struct timeval wait;
-	register int *sockp;
+	int *sockp;
 	u_int sendsz;
 	u_int recvsz;
 {
 	CLIENT *cl;
-	register struct cu_data *cu;
+	struct cu_data *cu;
 	struct timeval now;
 	struct rpc_msg call_msg;
 
@@ -224,7 +212,7 @@ clntudp_create(raddr, program, version, wait, sockp)
 	u_long program;
 	u_long version;
 	struct timeval wait;
-	register int *sockp;
+	int *sockp;
 {
 
 	return(clntudp_bufcreate(raddr, program, version, wait, sockp,
@@ -233,7 +221,7 @@ clntudp_create(raddr, program, version, wait, sockp)
 
 static enum clnt_stat 
 clntudp_call(cl, proc, xargs, argsp, xresults, resultsp, utimeout)
-	register CLIENT	*cl;		/* client handle */
+	CLIENT	*cl;		/* client handle */
 	u_long		proc;		/* procedure number */
 	xdrproc_t	xargs;		/* xdr routine for args */
 	caddr_t		argsp;		/* pointer to args */
@@ -241,17 +229,17 @@ clntudp_call(cl, proc, xargs, argsp, xresults, resultsp, utimeout)
 	caddr_t		resultsp;	/* pointer to results */
 	struct timeval	utimeout;	/* seconds to wait before giving up */
 {
-	register struct cu_data *cu = (struct cu_data *)cl->cl_private;
-	register XDR *xdrs;
-	register int outlen;
-	register int inlen;
+	struct cu_data *cu = (struct cu_data *)cl->cl_private;
+	XDR *xdrs;
+	int outlen;
+	int inlen;
 	int fromlen;
 #ifdef FD_SETSIZE
 	fd_set readfds;
 	fd_set mask;
 #else
 	int readfds;
-	register int mask;
+	int mask;
 #endif /* def FD_SETSIZE */
 	struct sockaddr_in from;
 	struct rpc_msg reply_msg;
@@ -399,7 +387,7 @@ clntudp_geterr(cl, errp)
 	CLIENT *cl;
 	struct rpc_err *errp;
 {
-	register struct cu_data *cu = (struct cu_data *)cl->cl_private;
+	struct cu_data *cu = (struct cu_data *)cl->cl_private;
 
 	*errp = cu->cu_error;
 }
@@ -411,8 +399,8 @@ clntudp_freeres(cl, xdr_res, res_ptr)
 	xdrproc_t xdr_res;
 	caddr_t res_ptr;
 {
-	register struct cu_data *cu = (struct cu_data *)cl->cl_private;
-	register XDR *xdrs = &(cu->cu_outxdrs);
+	struct cu_data *cu = (struct cu_data *)cl->cl_private;
+	XDR *xdrs = &(cu->cu_outxdrs);
 
 	xdrs->x_op = XDR_FREE;
 	return ((*xdr_res)(xdrs, res_ptr));
@@ -430,7 +418,7 @@ clntudp_control(cl, request, info)
 	int request;
 	char *info;
 {
-	register struct cu_data *cu = (struct cu_data *)cl->cl_private;
+	struct cu_data *cu = (struct cu_data *)cl->cl_private;
 
 	switch (request) {
 	case CLSET_TIMEOUT:
@@ -458,7 +446,7 @@ static void
 clntudp_destroy(cl)
 	CLIENT *cl;
 {
-	register struct cu_data *cu = (struct cu_data *)cl->cl_private;
+	struct cu_data *cu = (struct cu_data *)cl->cl_private;
 
 	if (cu->cu_closeit) {
 		(void)close(cu->cu_sock);

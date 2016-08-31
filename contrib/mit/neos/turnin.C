@@ -1,5 +1,3 @@
-/* $Author: wjh $ */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -22,13 +20,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/turnin.C,v 1.5 1996/06/11 01:28:57 wjh Exp $";
-#endif
-
-
- 
 /*
  * turnin.c
  *
@@ -90,10 +81,6 @@ class menulist *turnin_menus;
 
 
 ATKdefineRegistry(turnin, view, turnin::InitializeClass);
-#ifndef NORCSID
-#endif
-#ifdef _IBMR2
-#endif
 void CancelOperation(class turnin  *self, FX  **fxp);
 void turnin_Hide( class turnin  *self, class observable  *triggerer, long  rock);
 void turnin_TurninGo(class turnin  *self, class observable  *triggerer, long  rock);

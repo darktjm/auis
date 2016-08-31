@@ -28,12 +28,6 @@
 
 #include <andrewos.h>
 ATK_IMPL("htmltext.H")
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/htmltext.C,v 1.43 1996/11/23 17:00:56 fred Exp $";
-#endif
-
 #include <util.h>
 #include <im.H>
 #include <dictionary.H>
@@ -75,14 +69,14 @@ static char *tag;		/* used for "efficiency". */
 static long taglen;
 
 struct stylemap {
-    char *ident;
+    const char *ident;
     long type;
 };
 
 struct symbolmap {
-    char *code;
+    const char *code;
     char symbol;
-    char *stylename;
+    const char *stylename;
 };
 
 
@@ -145,7 +139,7 @@ htmltext::~htmltext()  {
 
 
 /* ReadTemplate gets overridden as a cheesy hack to tell ReadSubString that it has to copy the style definitions from its dummy dataobject into the actual text object. */
-long htmltext::ReadTemplate(char *templateName, boolean inserttemplatetext)
+long htmltext::ReadTemplate(const char *templateName, boolean inserttemplatetext)
 {
     long retval;
     ReadingATemplate= TRUE;
@@ -158,8 +152,8 @@ long htmltext::ReadTemplate(char *templateName, boolean inserttemplatetext)
 /* OverrideStyles is redundant code from a text static function.  It's used by ReadSubString to copy the stylesheet from the temporary holder object into the target.  This is necessary because ReadSubString is called when reading a template. */
 static void htmltext_OverrideStyles(class stylesheet *ssptr, class stylesheet *templateptr)
 {
-    register int i;
-    register class style **styles, *overridestyle;
+    int i;
+    class style **styles, *overridestyle;
 
     for (i = 0, styles = ssptr->styles; i < ssptr->nstyles; i++, styles++)
 	(*styles)->template_c = 0;
@@ -438,7 +432,7 @@ htmltext::WriteSubString(long pos, long len, FILE *file,
 #define WNL_FLAGS ((1<<4)-1)	// get all WNL_ flags
 
 
-static struct symbolmap symboltable[] = {
+static const struct symbolmap symboltable[] = {
     {"AElig",	'\306',	""},
     {"Aacute",	'\301',	""},
     {"Acirc",	'\302',	""},
@@ -568,8 +562,8 @@ LookupSymbolByName(char *name) {
 	    return NULL;
 }
 
-	static struct symbolmap *
-LookupNameBySymbol(char symbol, char *style) {
+	static const struct symbolmap *
+LookupNameBySymbol(char symbol, const char *style) {
     static struct symbolmap temp; /* temporary-use #ascii symbol return struct */
     static char symbolname[10]; /* temporary-use #ascii symbol symbol name */
 	long i =0;
@@ -591,8 +585,8 @@ LookupNameBySymbol(char symbol, char *style) {
 
 
 /* gets the value of the attribute named id */
-	static char *
-getatt(attlist *atts, char *id)  {
+	static const char *
+getatt(attlist *atts, const char *id)  {
 	struct htmlatts *temp = (atts)->GetAttribute(id);
 	return (temp) ? temp->value : NULL;
 }
@@ -605,8 +599,8 @@ getatt(attlist *atts, char *id)  {
 	returns NULL if an empty string was passed for name
 		(which means the style name could not be identified)
 */
-	static char *
-build_first_tag(attlist *atts, char *name)  {
+	static const char *
+build_first_tag(attlist *atts, const char *name)  {
 	char *attributes;
 	long len;
 
@@ -792,11 +786,12 @@ StyleToCodes(style *sty) {
 	OR into *pmode the appropriate bits
 */
 	static char *
-CodesToTags(char *codes, char *stylename, boolean starttag,
+CodesToTags(const char *codes, const char *stylename, boolean starttag,
 			long *pmode) {
 	const char *codex, *codeend, *taggle;
 	int delta;
-	char atkattr[300], *styleAttr = "";
+	char atkattr[300];
+	const char *styleAttr = "";
 	static char tag[300], *tagx;
 	char colortag[20];
 
@@ -1060,8 +1055,8 @@ static hidden *insert_hidden(htmltext *self, long *ppos);
 enum DelimiterType { LONE, PAIR };
 
 struct tagmap {
-	char *id;
-	char *stylename;
+	const char *id;
+	const char *stylename;
 	enum DelimiterType endtag;
 		/* LONE if it's just a standalone <tag>,
 		PAIR if it has a matching </tag> */
@@ -1069,7 +1064,7 @@ struct tagmap {
 };
 
 /* this table is sorted alphabetically for ease of searching */
-	static struct tagmap
+	static const struct tagmap
 tagtable[] = {
 { "a",  	  	"anchor", PAIR,   NULL },
 { "abbrev", 	"abbreviation", PAIR,   NULL },
@@ -1220,8 +1215,8 @@ end_this_style(htmltext *self, struct htmltaginfo *node,
 		/* has a style, but zero length.  Hmm.  Rather than
 				discarding, make a hidden inset */
 		hidden *hiddenobj;
-		char *tagstring= build_first_tag(node->atts,
-				node->tagid);
+		const char *tagstring= build_first_tag(node->atts,
+						       node->tagid);
 		hiddenobj= insert_hidden(self, ppos);
 		hiddenobj->InsertCharacters(0, "</>", 3);
 		hiddenobj->InsertCharacters(2, node->tagid,
@@ -1240,7 +1235,7 @@ end_this_style(htmltext *self, struct htmltaginfo *node,
 //	set thestyle to NULL for ATKNOP
 //
 	static struct htmltaginfo *
-makeTagNode(htmltext *self, char *style_name, long pos,
+makeTagNode(htmltext *self, const char *style_name, long pos,
 				char *tag)  {
 	struct htmltaginfo *newnode = (struct htmltaginfo *)
 			malloc (sizeof(struct htmltaginfo));
@@ -1264,17 +1259,18 @@ makeTagNode(htmltext *self, char *style_name, long pos,
 		s = NULL;
 	else if ((val=(newnode->atts)->GetAttribute("atkstyle"))) {
 		// build style from codes in the attribute value
-		char *stylenm = val->value;
+		char *stylenm = strdup(val->value);
 		char *codes = strchr(stylenm, ':');
 		if (codes) {*codes = '\0';  codes++;}
 
 		s = ((self)->GetStyleSheet())->Find(stylenm);
 		if (!s && codes) {
 			s = CodesToStyle(codes);
-			if (!s) return NULL;
+			if (!s) { free(stylenm); return NULL; }
 			s->SetName(stylenm);
 			(self->GetStyleSheet())->Add(s);
 		}
+		free(stylenm);
 
 	}
 	else if (style_name) {
@@ -1344,7 +1340,7 @@ add_cell(htmltext *txt, table *table, short row, short *column,
 	struct cell *cll;
 	struct chunk chk;
 
-	char *rowstr = NULL, *colstr = NULL;
+	const char *rowstr = NULL, *colstr = NULL;
 	int numrow = 0, numcol = 0, counter = 0, inner_ctr = 0;
 
 	while ((*column) <= (table)->NumberOfColumns() &&
@@ -1492,8 +1488,8 @@ static long font_func(htmltext **ptxtobj, struct htmltaginfo *taginfo, long *ppo
         fontstack.Remove(top, (size_t)1);
     } else {
         style **ns=fontstack.Append();
-        char *sizestr=NULL;
-        char *colorstr=NULL;
+        const char *sizestr=NULL;
+        const char *colorstr=NULL;
         htmlatts *sizeatt=(taginfo->atts)->
           GetAttribute("size");
         if(sizeatt) sizestr=sizeatt->value;
@@ -1659,7 +1655,7 @@ rawinset_func(htmltext **ptxtobj, struct htmltaginfo *taginfo,
 	static long
 img_func(htmltext **ptxtobj, struct htmltaginfo *taginfo,
 		long *ppos, long *pmode)  {
-	char *src;
+	const char *src;
 	htmlenv *env;
 	attlist *atts;
 
@@ -1677,7 +1673,7 @@ img_func(htmltext **ptxtobj, struct htmltaginfo *taginfo,
 				put it in a hidden inset instead */
 		hidden *hiddenobj = insert_hidden(*ptxtobj, ppos);
 		if (hiddenobj) {
-			char *tag = build_first_tag(taginfo->atts,
+			const char *tag = build_first_tag(taginfo->atts,
 					taginfo->tagid);
 			(hiddenobj)->InsertCharacters(0, tag, strlen(tag));
 		}
@@ -1833,7 +1829,7 @@ table_func(htmltext **ptxtobj, struct htmltaginfo *taginfo,
 			long *ppos, long *pmode)  {
 	long retval = 0;
 	style *globalstyle = NULL;
-	char *alignment =NULL;
+	const char *alignment =NULL;
         
 	switch (taginfo->tagid[1]) {
 	case 'a': /* tag for table */
@@ -1927,7 +1923,8 @@ static htmltext *selectattrs = NULL;
 	static long
 form_func(htmltext **ptxtobj, struct htmltaginfo *taginfo,
 		long *ppos, long *pmode) {
-	char buff[300], *tag = buff;
+	char buff[300];
+	const char *tag = buff;
 
 	if ( ! (*pmode & STOP)) {
 		if (currentform != NULL) {
@@ -2533,7 +2530,8 @@ ColorName(char *name, char *givenname, unsigned char rgb[3]) {
 	static long
 write_inset(htmltext *txtobj, dataobject *inset, FILE *file,
 		long pos, long nlflags, htmlenv *env)  {
-	char *begin_tag, end_tag[36];
+	const char *begin_tag;
+	char end_tag[36];
 	htmlform *form;
 
 	if (inset->IsType("hr")) {
@@ -2605,7 +2603,7 @@ write_inset(htmltext *txtobj, dataobject *inset, FILE *file,
 		if (txtobj && '\n'==(txtobj)->GetChar(++pos)) ++pos;
 	}
 	else if (inset->IsType("urlbutton")) {
-		char *urlt= ((urlbutton *)inset)->GetURLLabel(),
+		const char *urlt= ((urlbutton *)inset)->GetURLLabel(),
 			*urlb= ((urlbutton *)inset)->GetURL();
 		if (urlt==NULL || urlt[0]=='\0')
 			urlt= urlb;
@@ -2706,7 +2704,7 @@ write_table(htmltext *self, table *table, FILE *file)  {
 			char *celltext = cell->interior.TextCell.textstring;
 			if (celltext && strlen(celltext) > 0) {
 				/* print the string between literal tags */
-				char *align = "";
+				const char *align = "";
 				switch(*celltext++) {
 				case '\"': align = " align=right";  break;
 				case '\'': align = " align=left";  break;
@@ -2868,10 +2866,10 @@ write_table(htmltext *self, table *table, FILE *file)  {
 */
 	static long
 writesymbols(FILE *file, htmltext *self, long pos, long len,
-		char *stylename)  {
+		const char *stylename)  {
 	long i;
 	int ch;
-	struct symbolmap *sym;
+	const struct symbolmap *sym;
 	for (i=0; i<len; ++i,++pos) {
 		ch = (self)->GetChar(pos);
 		switch (ch) {
@@ -2936,15 +2934,15 @@ writesymbols(FILE *file, htmltext *self, long pos, long len,
 #define WA_USECODE	(1<<14)	// use CodesToStyles 
 
 struct write_tbl {
-	char *stylename;
-	char *tag;
+	const char *stylename;
+	const char *tag;
 	int flags;
 };
 
 // organized by stylename.
 //	But stylenames are always lower case???!
 
-struct write_tbl WStyle[] = {
+static const struct write_tbl WStyle[] = {
 	{"Annotation", NULL, WA_NOP},
 	{"Bold", "b", 0},
 	{"ChapterHeading", "h2", WF_HEADER | WF_EndtagNL | WNL_brATnl},
@@ -3076,9 +3074,10 @@ dowrite(htmltext *self, FILE *file, htmlenv *parenv,
 		long parpos, long parlen, long nlflags)  {
 	long pos, len, endpos= parpos+parlen;
 	htmlenv *env= NULL;
-	char *begin_tag, c;
+	const char *begin_tag;
+	char c;
 	int Wentry;
-	struct symbolmap *entry;
+	const struct symbolmap *entry;
 	dataobject *inset;
 	boolean header=FALSE, justasymbol=FALSE;
 
@@ -3113,9 +3112,9 @@ dowrite(htmltext *self, FILE *file, htmlenv *parenv,
 
 		// get style name
 		style *sty = env->environment::data.style;
-		char *name = (sty)->GetName();
+		const char *name = (sty)->GetName();
 
-		struct write_tbl *WS = NULL;	   // pt to entry or tstyle
+		const struct write_tbl *WS = NULL;	   // pt to entry or tstyle
 		struct write_tbl tstyle;  // for style w/o entry
 		char *codeletters;	// for style w/o entry
 		int leftx, rightx, midx;
@@ -3222,7 +3221,7 @@ dowrite(htmltext *self, FILE *file, htmlenv *parenv,
 				nchars = strlen(codes);
 			}
                         else {
-                            char *space = strchr(WS->tag, ' ');
+                            const char *space = strchr(WS->tag, ' ');
                             int len = (space) ? space - WS->tag : 100;
                             fprintf(file, "</%.*s>", len, WS->tag);
                             nchars = 3 + strlen(WS->tag);
@@ -3630,7 +3629,7 @@ htmltext::ClearCompletely()  {
 /* returns the href of the anchor found at position pos
 	return NULL if it does not exist
 */
-	char *
+	const char *
 htmltext::GetAnchor(long pos)  {
 	htmlenv *env= (htmlenv *)
 		((htmlenv *)this->text::rootEnvironment)->
@@ -3645,11 +3644,11 @@ htmltext::GetAnchor(long pos)  {
 	return NULL;
 }
 
-char *htmltext::GetURL(long pos, long x, long  y) {
+const char *htmltext::GetURL(long pos, long x, long  y) {
     htmlenv *env= (htmlenv *)
       ((htmlenv *)this->text::rootEnvironment)->
       GetInnerMost(pos);
-    char *mapp=getatt(env->attribs, "ismap");
+    const char *mapp=getatt(env->attribs, "ismap");
     while (env) {
 	if (env->type == environment_Style
 	    && strcmp((env->environment::data.style)
@@ -3657,7 +3656,7 @@ char *htmltext::GetURL(long pos, long x, long  y) {
 	env= (htmlenv *)(env)->GetParent();
     }
     if(env==NULL) return NULL;
-    char *url=getatt(env->attribs, "href");
+    const char *url=getatt(env->attribs, "href");
     if(url==NULL) return NULL;
     static flex buf;
     // 1+1+2*20+1 -> NUL,sepchar,2 numbers, and a comma.
@@ -3680,7 +3679,7 @@ char *htmltext::GetURL(long pos, long x, long  y) {
 locate_id(htmlenv *par, char *val)  {
 	htmlenv *env;
 	long temppos, pos= (par)->Eval();
-	char *value;
+	const char *value;
 
 	/* is par the environment we are looking for? */
 	if ((value= (par)->GetAttribValue("id"))
@@ -3774,7 +3773,7 @@ htmltext::EnumerateInsets(htmlefptr f, arbval rock) {
 
 
 	htmlenv *
-htmltext::AddImage(long pos, char *file,
+htmltext::AddImage(long pos, const char *file,
                    class attlist  *atts)  {
             image *dat=GetImage(file, atts);
             htmlenv *imgEnv;
@@ -3794,8 +3793,8 @@ htmltext::AddImage(long pos, char *file,
 //		scale is divided by 100 to get the actual scale factor
 //	returns NULL for success or error message
 //
-	static char *
-GififyViaPS(view *v, char *filename, long *width, long *height, long scale) {
+	static const char *
+GififyViaPS(view *v, const char *filename, long *width, long *height, long scale) {
 
 	/* Could run the command in the background, but might get 
 			too many processes.
@@ -3845,14 +3844,14 @@ GififyViaPS(view *v, char *filename, long *width, long *height, long scale) {
 //	view->FullUpdate to offscreen image
 //	X offscreen image ->-> image inset ->-> gif
 //
-	static char *
-GififyViaView(view *v, char *filename, long width, long height) {
+	static const char *
+GififyViaView(view *v, const char *filename, long width, long height) {
 	im *realim = im::GetLastUsed();
 	im *Ximg = NULL;
 	graphic *drawbl = NULL;
 	colormap *privateCmap = NULL;
 	image *drawngif = NULL;
-	char *retval = NULL;
+	const char *retval = NULL;
 	static struct rectangle playpen = {0,0,0,0};
 
 	if ( ! realim || ! realim->SupportsOffscreen()) 
@@ -3895,12 +3894,12 @@ done:
 /*  convert an inset to a gif 
 	returns error message, else NULL
 */
-	char *
-htmltext::GififyInset(long pos, htmlenv *env, char *giffile) {
+	const char *
+htmltext::GififyInset(long pos, htmlenv *env, const char *giffile) {
 	dataobject *dobj = env->data.viewref->dataObject;
 	view *v;		// the view to generate a gif for
 	static char attrs[60];	// "WIDTH=ddd, HEIGHT=ddd"
-	char *errmsg;
+	const char *errmsg;
 	long width, height, scale = 100;
 
 	v = (view *)ATK::NewObject(env->data.viewref->viewType);
@@ -3958,12 +3957,12 @@ htmltext::GififyInset(long pos, htmlenv *env, char *giffile) {
 static boolean checkanchor(long rock, text *self, long pos, environment *env) {
     if(env->type!=environment_Style) return FALSE;
     style *s=env->data.style;
-    char *sname=s->GetName();
+    const char *sname=s->GetName();
     if(sname && *sname=='a'
 		&& strcmp(sname, "anchortarget")==0) {
 	char *target=(char *)rock;
 	htmlenv *henv=(htmlenv *)env;
-	char *name=getatt(henv->attribs, "name");
+	const char *name=getatt(henv->attribs, "name");
 	if(strcmp(name,target)==0)
 		return TRUE;
     }
@@ -3983,7 +3982,8 @@ long htmltext::FindNamedAnchor(const char *target, long pos, long len) {
 
 image *htmltext::GetImage(const char *file, attlist *atts) {
     image *dat = NULL;
-    char *filename, *type, *p;
+    char *filename, *p;
+    const char *type;
     buffer *buffer;
     static char *defaultImage= NULL,
     *defaultImageType= NULL;

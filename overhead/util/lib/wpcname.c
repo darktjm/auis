@@ -25,20 +25,15 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/wpcname.c,v 2.10 1993/06/12 12:29:34 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	wpcname.c
 	Compatibility routines for non-cellular White Pages lookups.
 	Include file ``wp.h'' declares the procedures for clients.
 \* ************************************************************ */
 
+#include <andrewos.h>		/* sys/file.h sys/types.h strings.h*/
 #include <stdio.h>
 #include <andyenv.h>
-#include <andrewos.h>		/* sys/file.h sys/types.h strings.h*/
 #include <ctype.h>
 #include <errno.h>
 #include <truth.h> /* itc.h -> truth.h DMT */

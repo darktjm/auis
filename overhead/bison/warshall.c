@@ -31,12 +31,12 @@ TC(R, n)
 unsigned *R;
 int n;
 {
-  register int rowsize;
-  register unsigned mask;
-  register unsigned *rowj;
-  register unsigned *rp;
-  register unsigned *rend;
-  register unsigned *ccol;
+  int rowsize;
+  unsigned mask;
+  unsigned *rowj;
+  unsigned *rp;
+  unsigned *rend;
+  unsigned *ccol;
 
   unsigned *relend;
   unsigned *cword;
@@ -91,10 +91,10 @@ RTC(R, n)
 unsigned *R;
 int n;
 {
-  register int rowsize;
-  register unsigned mask;
-  register unsigned *rp;
-  register unsigned *relend;
+  int rowsize;
+  unsigned mask;
+  unsigned *rp;
+  unsigned *relend;
 
   TC(R, n);
 

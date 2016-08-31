@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/stats/mac2_51/RCS/getstats.c,v 1.7 1994/03/21 16:59:25 rr2b Stab74 $";
-#endif
-
 /* **********************************************************************
 *   This code is designed to read what might be priveledged (setuid) 
 *   information regarding both Disk Statistics (% full) and a host of 
@@ -304,7 +299,7 @@ daddr_t bno;
 char *buf;
 int cnt;
 {
-    register int n;
+    int n;
 
     (void) lseek(fi, (long)(bno * DEV_BSIZE), 0);
 #ifndef sun
@@ -329,7 +324,7 @@ int cnt;
 char *mpath(file)
 char *file;
 {
-    register struct mtab *mp;
+    struct mtab *mp;
 
     if (eq(file, root)){
 	return ("/");

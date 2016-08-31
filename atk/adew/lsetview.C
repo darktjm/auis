@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h> /* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/lsetview.C,v 1.8 1994/12/06 21:54:28 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("lsetview.H")
 #include <lsetview.H>
 #include <lset.H>
@@ -67,10 +57,10 @@ static class lsetview *DeleteMode = NULL;
 #define VALUE 10
 #define CEL 5
 struct types {
-    char *str;
+    const char *str;
     int val;
 };
-static struct types typearray[] = {
+static const struct types typearray[] = {
     {"string",STRING},
     {"char *",STRING},
     {"int",LONG},
@@ -81,14 +71,12 @@ static struct types typearray[] = {
 
 
 ATKdefineRegistry(lsetview, lpair, lsetview::InitializeClass);
-#ifndef NORCSID
-#endif
 static int lookuptype(char  *ty);
 static class view *makeview(class lsetview  *self,class lset  *ls);
 void lsetview_SetMode(class lsetview  *self,int  mode);
 static void initkids(class lsetview  *self,class lset  *ls);
 static void dolink(class lsetview  *self);
-static boolean objecttest(register class lsetview   *self,char  *name,char  *desiredname);
+static boolean objecttest(class lsetview   *self,const char  *name,const char  *desiredname);
 static void lsetview_PlaceApplication(class lsetview  *self);
 static void lsetview_PlaceCel(class lsetview  *self);
 static void lsetview_PlaceValue(class lsetview  *self);
@@ -104,7 +92,7 @@ static void lsetview_SplitHorz(class lsetview  *self);
 
 static int lookuptype(char  *ty)
 {
-    struct types *tp;
+    const struct types *tp;
     for(tp = typearray;tp->val != 0; tp++)
 	if(*ty == *tp->str && strcmp(ty,tp->str) == 0)
 	    return tp->val;
@@ -114,7 +102,7 @@ static int lookuptype(char  *ty)
 static class view *makeview(class lsetview  *self,class lset  *ls)
 {
 
-    char *lv=ls->viewname;
+    const char *lv=ls->viewname;
     if(ls->dobj && ATK::IsTypeByName(ls->dobj->GetTypeName(), "unknown")) {
 	if(lv==NULL || !ATK::IsTypeByName(lv, "unknownv")) {
 	    lv="unknownv";
@@ -250,7 +238,7 @@ class view *vw;
 
     return((class view *)this);
 }
-static boolean objecttest(register class lsetview   *self,char  *name,char  *desiredname)
+static boolean objecttest(class lsetview   *self,const char  *name,const char  *desiredname)
 {
     if(ATK::LoadClass(name) == NULL){
         char foo[640];
@@ -410,7 +398,7 @@ int lsetview_ReadView(class lsetview  *self)
 void lsetview::ReadFile(FILE  *thisFile,const char  *iname)
 {
     long objectID;
-    char *objectName;
+    const char *objectName;
     class lset *ls = Data(this);
     objectName = filetype::Lookup(thisFile, iname, &objectID, NULL); /* For now, ignore attributes. */
     if(objectName == NULL) objectName = "text";
@@ -695,7 +683,7 @@ void lsetview::WantNewSize(class view  *requestor)
 }
 boolean lsetview::InitializeClass()
 {
-    char *cmdString;
+    const char *cmdString;
     struct proctable_Entry *tempProc;
     newMenus = new menulist;
     newKeymap = new keymap;
@@ -743,11 +731,11 @@ void lsetview::InitChildren()
     else     (this)->lpair::InitChildren();
 
 }
-boolean lsetview::CanView(char  *TypeName)
+boolean lsetview::CanView(const char  *TypeName)
 {
     return ATK::IsTypeByName(TypeName,"lset");
 }
-void lsetview::Print(FILE  *file, char  *processor, char  *finalFormat, boolean  topLevel)
+void lsetview::Print(FILE  *file, const char  *processor, const char  *finalFormat, boolean  topLevel)
 {
     class lpair *lself = (class lpair *) this;
     if(this->child) 

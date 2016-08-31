@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/types.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/index/RCS/rcordset.c,v 2.9 1993/06/30 05:04:24 rr2b Stab74 $";
-#endif
-
 #include <stdio.h>
 
 #include "index.h"
@@ -42,7 +36,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
  */
 struct hashList *index_NewHL()
 {
-    register struct hashList *th;
+    struct hashList *th;
     th = (struct hashList *) malloc (sizeof (struct hashList));
     th->next = (struct hashList *) 0;
     th->nentries = 0;
@@ -54,10 +48,10 @@ struct hashList *index_NewHL()
       * contained in the list, and false otherwise.
       */
 index_HashPresent(alist, ahash)
-register struct hashList *alist;
-register long ahash;
+struct hashList *alist;
+long ahash;
 {
-    register int i;
+    int i;
     for(;alist;alist=alist->next) {
 	for(i=0;i<alist->nentries;i++) {
 	    if (ahash == alist->entries[i]) return 1;
@@ -71,10 +65,10 @@ register long ahash;
   * the hash list.
   */
 index_HashRemove(alist, ahash)
-register struct hashList *alist;
-register long ahash;
+struct hashList *alist;
+long ahash;
 {
-    register int i;
+    int i;
     for(;alist;alist=alist->next) {
 	for(i=0;i<alist->nentries;i++) {
 	    if (ahash == alist->entries[i]) alist->entries[i] = 0xffff;
@@ -87,10 +81,10 @@ register long ahash;
   * Internal routine: given a hash list and a hash value, add the value to the list.
   */
 index_HashAdd(alist, ahash)
-register struct hashList *alist;
-register long ahash;
+struct hashList *alist;
+long ahash;
 {
-    register struct hashList *tlist;
+    struct hashList *tlist;
     for(tlist=alist;tlist;tlist=tlist->next) {
 	if (tlist->nentries < MAXHL) {
 	    tlist->entries[tlist->nentries++] = ahash;
@@ -108,9 +102,9 @@ register long ahash;
   * Internal routine: given a hash list, free it.
   */
 index_FreeHL(alist)
-register struct hashList *alist;
+struct hashList *alist;
 {
-    register struct hashList *next;
+    struct hashList *next;
     for(;alist;alist=next) {
 	next = alist->next;
 	free(alist);
@@ -122,7 +116,7 @@ register struct hashList *alist;
   */
 struct recordSet *recordset_New(asize)
 {
-    register struct recordSet *tr;
+    struct recordSet *tr;
     if (asize <= 0) asize = 1;
     tr = (struct recordSet *) malloc(sizeof(struct recordSet));
     tr->count = 0;
@@ -135,7 +129,7 @@ struct recordSet *recordset_New(asize)
   * Free a record set.
   */
 void recordset_Free(aset)
-register struct recordSet *aset;
+struct recordSet *aset;
 {
     free(aset->data);
     free(aset);
@@ -145,11 +139,11 @@ register struct recordSet *aset;
   * Add a record id to a record set.
   */
 recordset_Add(aset, arid)
-register struct recordSet *aset;
-register struct recordID *arid;
+struct recordSet *aset;
+struct recordID *arid;
 {
-    register long c;
-    register struct recordID *tid;
+    long c;
+    struct recordID *tid;
     long newSize;
     for(tid=aset->data,c=0; c<aset->count; tid++,c++) {
 	if (req(*tid, *arid)) return;

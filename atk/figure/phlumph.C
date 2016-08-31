@@ -21,10 +21,6 @@
  *  $
 */
 
-#ifndef NORCSID
-char *phlumph_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/phlumph.C,v 1.1 1995/03/23 21:09:49 Zarf Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("phlumph.H")
 #include <phlumph.H>
@@ -54,7 +50,7 @@ phlumph::~phlumph()
 
 }
 
-char *phlumph::ViewName()
+const char *phlumph::ViewName()
 {
     return "phlumphview";
 }

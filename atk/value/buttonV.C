@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/buttonV.C,v 1.7 1995/05/04 14:54:09 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("buttonV.H")
 #include <buttonV.H>
 #include <fontdesc.H>
@@ -102,8 +92,6 @@ struct buttonV_rl {
 
 
 ATKdefineRegistry(buttonV, valueview, buttonV::InitializeClass);
-#ifndef NORCSID
-#endif
 static boolean clearrl(struct buttonV_rl  *rl,class buttonV  *self);
 static boolean vsetrec(struct buttonV_rl  *rl,class buttonV  *self);
 static boolean wsetrec(struct buttonV_rl  *rl,class buttonV  *self);
@@ -205,7 +193,8 @@ int fourwaysort(struct buttonV_rl  *rl1,struct buttonV_rl  *rl2)
 }
  void buttonV::CacheSettings()
 {
-    char tmp[256],*t,*chr;
+    char tmp[256],*t;
+    const char *chr;
     class graphic *my_graphic;
     struct buttonV_rl *rl;
     long i,j;
@@ -221,7 +210,7 @@ int fourwaysort(struct buttonV_rl  *rl1,struct buttonV_rl  *rl2)
 	j = 0;
 	rl = (struct buttonV_rl *)
 	  malloc(sizeof(struct buttonV_rl));
-	rl->string = "";
+	rl->string = (char *)""; /* not freed if len == 0 */
 	t = tmp;
 	if(chr == NULL || *chr == '\0'){
 	    if(i < 4 && this->l[i] != NULL){
@@ -273,7 +262,7 @@ int fourwaysort(struct buttonV_rl  *rl1,struct buttonV_rl  *rl2)
     this->count = i + 1;
     this->max = max;
 }
-void buttonV::DrawButtonText(char  *text,long  len,struct rectangle  *rect,struct rectangle  *rect2,boolean  pushd)
+void buttonV::DrawButtonText(const char  *text,long  len,struct rectangle  *rect,struct rectangle  *rect2,boolean  pushd)
 {
 /* assumes '\0' terminated text */
     if(text != NULL && len > 0) 
@@ -283,7 +272,7 @@ void buttonV::DrawButtonText(char  *text,long  len,struct rectangle  *rect,struc
 static void DrawButton(class buttonV  * self,struct buttonV_rl  *rl,long  left,long  top,long  width,long  height,boolean  borderonly,boolean  blit)
 {
     struct rectangle Rect,*rect,in;
-    char *text ;
+    const char *text ;
     boolean ped ;
     if(rl == NULL) {
 	rect = &Rect;
@@ -388,7 +377,7 @@ buttonV::~buttonV()
 
 void buttonV::LookupParameters()
      {
-  char * fontname;
+  const char * fontname;
   long fontsize;
   struct resourceList parameters[7];
   parameters[0].name = AL_label;
@@ -555,7 +544,7 @@ class valueview * buttonV::DoHit( enum view_MouseAction  type,long  x,long  y,lo
 class view * buttonV::Hit(enum view_MouseAction  type, long  x , long  y , long  numberOfClicks)
                     {/* should probably just restore this functionality to valueview,
 	with a way to optionly set it */
-	 register short sendEvent;
+	 short sendEvent;
 	 class valueview *vself = (class valueview *) this;
 	 if(((class valueview *) this)->HasInputFocus == FALSE)
 	     (this)->WantInputFocus(this);

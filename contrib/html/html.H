@@ -1,7 +1,6 @@
 #ifndef _html_H_
 #define _html_H_
 /* HTML text, first run -*-c-*- */
-/* $Id$ */
 /*
  * Copyright 1993, City University
  * Copyright 1993, 1994, Nick Williams. 

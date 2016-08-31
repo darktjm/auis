@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/datacat/RCS/datacata.C,v 1.7 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
 ATK_IMPL("datacata.H")
 #include <sys/param.h> /* For MAXPATHLEN. */
 #include <errno.h>
@@ -63,8 +55,6 @@ static const char *progname;
 
 
 ATKdefineRegistry(datacata, application, NULL);
-#ifndef NORCSID
-#endif
 static void clean_insert(class datacata  *self, FILE  *fp);
 static void doinsert(class datacata  *self, long  size , long  endskip, long  depth);
 static void usage();
@@ -253,7 +243,7 @@ boolean datacata::ParseArgs (int  argc, const char  **argv)
  The procedure is to call BeginRun(), then AddFile() for each file, then FinishRun().
  */
 {
-    register int i;
+    int i;
 
     /* initialize as if ez */
     ((class application * )this)->name = "ez";

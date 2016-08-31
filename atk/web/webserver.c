@@ -24,11 +24,6 @@
  */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/webserver.c,v 1.3 1996/06/25 15:53:05 robr Exp $";
-#endif
-
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/un.h>
@@ -108,7 +103,7 @@ weblisten() {
 	char hostname[64];
 	struct hostent *hp;
 	char buf[2560], *cp;
-	register int i,  s,  ns,  len;
+	int i,  s,  ns,  len;
 	struct sockaddr_un saun,  fsaun;
 
 	/*
@@ -164,7 +159,7 @@ weblisten() {
 webclient(char  *buf, int  timeout, char  *rbuf, int  size)  {
 	char c, *eb;
 	FILE *fp, *ofp;
-	register int i,  s,  len, res, del;
+	int i,  s,  len, res, del;
 	struct sockaddr_un saun;
 	
 	/*

@@ -25,21 +25,10 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/menu.C,v 1.5 1994/08/12 18:54:11 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* menu.c - menu operations for table */
 
 
-
-
+#include <andrewos.h>
 #include <im.H>
 #include <view.H>
 #include <dataobject.H>
@@ -51,30 +40,28 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 #include <shared.h>
 
-#ifndef NORCSID
-#endif
-void m_rename(register class spread  * V, char  ch);
-static char *newext(char  *filename			/* "mumble.y" or something */, char  *extension		/* ".x" */);
-void m_writeTroff(register class spread  * V, char  ch);
-void m_write(register class spread  * V, char  ch);
-void m_read(register class spread  * V, char  ch);
-void m_cut(register class spread  * V, char  ch);
-void m_copy(register class spread  * V, char  ch);
-void m_paste(register class spread  * V, char  ch);
-void m_combine(register class spread  * V, char  ch);
-void m_separate(register class spread  * V, char  ch);
-void m_drawedges(register class spread  * V, char  ch);
-void m_eraseedges(register class spread  * V, char  ch);
-void m_format (register class spread  * V, char     ch);
-void m_precision (register class spread  * V, char     ch);
-static int objecttest(register class spread  *V, char  *name, char  *desiredname);
-void m_imbed (register class spread  * V, char     ch);
-void m_resetheights (register class spread  * V, char     ch);
-void m_lock (register class spread  * V, char     ch);
+void m_rename(class spread  * V, char  ch);
+static const char *newext(const char  *filename			/* "mumble.y" or something */, const char  *extension		/* ".x" */);
+void m_writeTroff(class spread  * V, char  ch);
+void m_write(class spread  * V, char  ch);
+void m_read(class spread  * V, char  ch);
+void m_cut(class spread  * V, char  ch);
+void m_copy(class spread  * V, char  ch);
+void m_paste(class spread  * V, char  ch);
+void m_combine(class spread  * V, char  ch);
+void m_separate(class spread  * V, char  ch);
+void m_drawedges(class spread  * V, char  ch);
+void m_eraseedges(class spread  * V, char  ch);
+void m_format (class spread  * V, char     ch);
+void m_precision (class spread  * V, char     ch);
+static int objecttest(class spread  *V, const char  *name, const char  *desiredname);
+void m_imbed (class spread  * V, char     ch);
+void m_resetheights (class spread  * V, char     ch);
+void m_lock (class spread  * V, char     ch);
 void DefineMenus (class menulist  *mainmenus, class keymap  * mainmap, class menulist *readonlymenus, class keymap *readonlymap, struct ATKregistryEntry   *classinfo);
 
 
-void m_rename(register class spread  * V, char  ch)
+void m_rename(class spread  * V, char  ch)
 {
     char buff[257];
 
@@ -92,13 +79,13 @@ void m_rename(register class spread  * V, char  ch)
     }
 }
 
-static char *newext(char  *filename			/* "mumble.y" or something */, char  *extension		/* ".x" */)	/* returns "mumble.x" */
+static const char *newext(const char  *filename			/* "mumble.y" or something */, const char  *extension		/* ".x" */)	/* returns "mumble.x" */
 {
     char *cp, *suffixp;
     static char newname[257];
-    char *safefn;
+    const char *safefn;
 
-    safefn = (filename == NULL ? (char *)"" : filename);
+    safefn = (filename == NULL ? "" : filename);
     strncpy(newname, safefn, (sizeof newname) - 1);
     newname[(sizeof newname) - 1] = '\0';
     for (cp = newname, suffixp = NULL; *cp; cp++)
@@ -116,7 +103,7 @@ static char *newext(char  *filename			/* "mumble.y" or something */, char  *exte
     return newname;
 }
 
-void m_writeTroff(register class spread  * V, char  ch)
+void m_writeTroff(class spread  * V, char  ch)
 {
     char buf[300];
     char fname[300];
@@ -132,7 +119,7 @@ void m_writeTroff(register class spread  * V, char  ch)
     }
 }
 
-void m_write(register class spread  * V, char  ch)
+void m_write(class spread  * V, char  ch)
 {
     char buf[300];
     char fname[300];
@@ -153,7 +140,7 @@ void m_write(register class spread  * V, char  ch)
     }
 }
 
-void m_read(register class spread  * V, char  ch)
+void m_read(class spread  * V, char  ch)
 {
     char buf[300];
     char fname[300];
@@ -169,7 +156,7 @@ void m_read(register class spread  * V, char  ch)
     }
 }
 
-void m_cut(register class spread  * V, char  ch)
+void m_cut(class spread  * V, char  ch)
 {
     if (V->selection.TopRow > V->selection.BotRow || V->selection.LeftCol > V->selection.RightCol)
 	k_TellUser (V, "Please select region to cut");
@@ -254,7 +241,7 @@ void m_cut(register class spread  * V, char  ch)
     (V->parent)->WantNewSize( V);
 }
 
-void m_copy(register class spread  * V, char  ch)
+void m_copy(class spread  * V, char  ch)
 {
     if (V->selection.TopRow > V->selection.BotRow || V->selection.LeftCol > V->selection.RightCol)
 	k_TellUser (V, "Please select region to copy");
@@ -266,7 +253,7 @@ void m_copy(register class spread  * V, char  ch)
     }
 }
 
-void m_paste(register class spread  * V, char  ch)
+void m_paste(class spread  * V, char  ch)
 {
     if ((V->selection.TopRow >= 0 || V->selection.BotRow < (MyTable(V))->NumberOfRows()-1) && (V->selection.LeftCol >= 0 || V->selection.RightCol < (MyTable(V))->NumberOfColumns()-1) && (V->selection.TopRow > V->selection.BotRow || V->selection.LeftCol > V->selection.RightCol))
 	k_TellUser (V, "Please select region to paste into");
@@ -314,7 +301,7 @@ void m_paste(register class spread  * V, char  ch)
     (V->parent)->WantNewSize( V);
 }
 
-void m_combine(register class spread  * V, char  ch)
+void m_combine(class spread  * V, char  ch)
 {
     struct chunk chunk;
 
@@ -327,7 +314,7 @@ void m_combine(register class spread  * V, char  ch)
     }
 }
 
-void m_separate(register class spread  * V, char  ch)
+void m_separate(class spread  * V, char  ch)
 {
     struct chunk chunk;
 
@@ -340,7 +327,7 @@ void m_separate(register class spread  * V, char  ch)
     }
 }
 
-void m_drawedges(register class spread  * V, char  ch)
+void m_drawedges(class spread  * V, char  ch)
 {
     if (max(0, V->selection.TopRow) > V->selection.BotRow && max(0, V->selection.LeftCol) > V->selection.RightCol)
 	k_TellUser(V, "Please select a region to draw edges");
@@ -348,7 +335,7 @@ void m_drawedges(register class spread  * V, char  ch)
 	(MyTable(V))->SetBoundary ( &(V->selection), BLACK);
 }
 
-void m_eraseedges(register class spread  * V, char  ch)
+void m_eraseedges(class spread  * V, char  ch)
 {
     if (max(0, V->selection.TopRow) > V->selection.BotRow && max(0, V->selection.LeftCol) > V->selection.RightCol)
 	k_TellUser(V, "Please select a region to erase edges");
@@ -358,14 +345,14 @@ void m_eraseedges(register class spread  * V, char  ch)
 
 /* process formatting menu hit */
 
-void m_format (register class spread  * V, char     ch)
+void m_format (class spread  * V, char     ch)
 {
     (MyTable(V))->SetFormat ( ch, &(V->selection));
 }
 
 /* process precision request */
 
-void m_precision (register class spread  * V, char     ch)
+void m_precision (class spread  * V, char     ch)
 {
     char parambuff[100];
     int param;
@@ -377,7 +364,7 @@ void m_precision (register class spread  * V, char     ch)
 	(MyTable(V))->SetPrecision ( (param >= 0 ? param : 0), &(V->selection));
 }
 
-static int objecttest(register class spread  *V, char  *name, char  *desiredname)
+static int objecttest(class spread  *V, const char  *name, const char  *desiredname)
 {
     if(ATK::LoadClass(name) == NULL){
         char foo[640];
@@ -396,7 +383,7 @@ static int objecttest(register class spread  *V, char  *name, char  *desiredname
 
 /* process request for imbedded object */
 
-void m_imbed (register class spread  * V, char     ch)
+void m_imbed (class spread  * V, char     ch)
 {
     char parambuff[100];
     struct cell * hitcell;
@@ -423,7 +410,7 @@ void m_imbed (register class spread  * V, char     ch)
 
 /* compute row heights automatically */
 
-void m_resetheights (register class spread  * V, char     ch)
+void m_resetheights (class spread  * V, char     ch)
 {
     int r;
     class table *T = MyTable(V);
@@ -435,7 +422,7 @@ void m_resetheights (register class spread  * V, char     ch)
 
 /* lock or unlock cells */
 
-void m_lock (register class spread  * V, char     ch)
+void m_lock (class spread  * V, char     ch)
 {
     (MyTable(V))->Lock ( ch, &(V->selection));
 }

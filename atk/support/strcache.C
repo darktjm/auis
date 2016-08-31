@@ -25,18 +25,9 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/strcache.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* A string cache */
 
+#include <andrewos.h>
 ATK_IMPL("strcache.H")
 
 #include <strcache.H>
@@ -47,8 +38,6 @@ static class strcache *gcache=NULL;
 
 
 ATKdefineRegistry(strcache, ghash, strcache::InitializeClass);
-#ifndef NORCSID
-#endif
 static int lchash(char  *key);
 static int lccomp(char  *a ,char  *b);
 static boolean EnumProc(struct egg  *e, struct enumerate  *rock);
@@ -56,7 +45,7 @@ char *Enumerate(class ghash  *self,procedure  proc,long  rock);
 boolean DumpStr(long  rock, char  *val, char  *key, class strcache  *self);
 
 
-static int lchash(char  *key)
+static int lchash(const char  *key)
 {
     char c;
     int index=0;
@@ -68,7 +57,7 @@ static int lchash(char  *key)
     return index;
 }
 
-static int lccomp(char  *a ,char  *b)
+static int lccomp(const char  *a ,const char  *b)
 {
     if(a==NULL && b==NULL) return 0;
     if(a==NULL) return -1;
@@ -92,11 +81,11 @@ strcache::strcache()
     THROWONFAILURE( TRUE);
 }
 
-char *strcache::SaveStr(char  *str)
+const char *strcache::SaveStr(const char  *str)
 {
 	ATKinit;
 
-    char *result;
+    const char *result;
     if(gcache==NULL) return NULL;
     result=(gcache)->LookupKey( str);
     if(result) return result;

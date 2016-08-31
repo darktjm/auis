@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/foldertreev.C,v 1.5 1994/08/15 04:04:55 rr2b Stab74 $";
-#endif
-
-
 #include <stdio.h>
 #include <keymap.H>
 #include <keystate.H>
@@ -65,8 +58,6 @@ static class menulist *foldertreev_standardmenulist = NULL;
 
 
 ATKdefineRegistry(foldertreev, orgv, foldertreev::InitializeClass);
-#ifndef NORCSID
-#endif
 static void QuitFolderTree( class foldertreev	 *self );
 static void QuitMessagesProc( class foldertreev	 *self );
 

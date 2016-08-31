@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/file.h and string(s).h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/pcompch.C,v 3.4 1994/12/06 21:36:15 rr2b Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("pcompch.H")
 
 #include <ctype.h>
@@ -53,21 +44,19 @@ static char *troffmagic[256];
 static char *asciimagic[256];
 static unsigned char order[256];
 
-static char hex[]="0123456789abcdef";
-static char octal[]="01234567";
+static const char hex[]="0123456789abcdef";
+static const char octal[]="01234567";
 
 
 
 
 ATKdefineRegistry(pcompch, ATK, pcompch::InitializeClass);
-#ifndef NORCSID
-#endif
 static void cleanmagic();
 static int TranslateKeySequence(char  *from, char  *to);
 static int parseBackslashed(char  **fromChars);
 static  char ahotoi(char  *ptr,int  base2);
 static  short parsecode(char  *ptr);
-static void scanerr(char  *msg,char  key,struct composites_s  *new_c,long  line);
+static void scanerr(const char  *msg,char  key,struct composites_s  *new_c,long  line);
 static char *scanstring(char  **str);
 static boolean scancomposites(char  *ptr,long  line);
 static void fix_fgets(char  *buf);
@@ -115,8 +104,8 @@ static int parseBackslashed(char  **fromChars)
 
     int returnChar;
     char *from = *fromChars;
-    static char *bsSource = "ebrnt";
-    static char *bsDest = "\033\b\r\n\t";
+    static const char bsSource[] = "ebrnt";
+    static const char bsDest[] = "\033\b\r\n\t";
 
     if (*from == '\\') {
 	++from;
@@ -138,7 +127,7 @@ static int parseBackslashed(char  **fromChars)
 	}
 	else {
 
-	    char *p;
+	    const char *p;
 
 	    p = strchr(bsSource, *from);
 	    if (p != NULL)
@@ -159,8 +148,8 @@ static  char ahotoi(char  *ptr,int  base2)
 {
     unsigned char result=0;
     unsigned char c;
-    char *i;
-    char *base=(base2==3)?octal:hex;
+    const char *i;
+    const char *base=(base2==3)?octal:hex;
     while(*ptr && *ptr!=' ') {
 	result<<=base2;
 	c=(unsigned char)(*ptr);
@@ -190,7 +179,7 @@ static  short parsecode(char  *ptr)
     }
 }
 
-static void scanerr(char  *msg,char  key,struct composites_s  *new_c,long  line)
+static void scanerr(const char  *msg,char  key,struct composites_s  *new_c,long  line)
 {
     fprintf(stderr,msg,line);
     printf(msg,line);

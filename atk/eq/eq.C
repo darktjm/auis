@@ -25,23 +25,13 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/eq/RCS/eq.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * eq.c
  * This module handles the eq data object.
  */
 
 
-
+#include <andrewos.h>
 ATK_IMPL("eq.H")
 #include "eq.H"
 
@@ -50,13 +40,11 @@ ATK_IMPL("eq.H")
 
 #define SIZE 10
 
-static char *init_string = "{ lpile d_eqstyle { zilch ^} }";
+static const char init_string[] = "{ lpile d_eqstyle { zilch ^} }";
 
 /* Create a new equation */
 
 ATKdefineRegistry(eq, dataobject, eq::InitializeClass);
-#ifndef NORCSID
-#endif
 #ifdef notyet
 void eq_SetCursor(class eq  *self, long  left , long  top , long  width , long  height);
 void eq_GetCursor(class eq  *self, long  *leftp , long  *topp , long  *widthp , long  *heightp);
@@ -67,7 +55,7 @@ eq::eq()
 {
 	ATKinit;
  
-    register struct formula *f = (struct formula *) malloc(SIZE*sizeof(struct formula));
+    struct formula *f = (struct formula *) malloc(SIZE*sizeof(struct formula));
 
     this->f = f;
     this->p1 = 0;
@@ -110,8 +98,8 @@ void eq::Insert(long  pos, struct formula  *f)
     }
 
     if (this->p1 != pos) {
-	register int i, gap = this->gap;
-	register struct formula *newf = this->f;
+	int i, gap = this->gap;
+	struct formula *newf = this->f;
 	for (i=this->p1-1; i>=pos; i--)
 	    newf[i+gap] = newf[i];
 	for (i=this->p1; i<pos; i++)
@@ -128,7 +116,7 @@ void eq::Insert(long  pos, struct formula  *f)
 
 /* Insert tokens */
 
-long eq::InsertTokens(long  pos, char  *s)
+long eq::InsertTokens(long  pos, const char  *s)
 {
     char buf[100], *p;
     int inserted = 0;
@@ -163,23 +151,27 @@ long eq::InsertTokens(long  pos, char  *s)
     return inserted;
 }
 
+/* generally useful.  Initialized in eqview_InitializeClass. */
+const struct symbol *eq_zilch;
+const struct symbol *eq_root;
+
 /*
  * Take account of zilches when inserting.
  * Caution: a near copy of this is in eqview_Paste, but
  * the two are inconsistent wrt scripted zilches.
  */
 
-long eq::InsertTokensCarefully(long  pos, char  *s)
+long eq::InsertTokensCarefully(long  pos, const char  *s)
 {
     long evenup = 0, inserted = 0;
     short zilch_removed = 0;
     struct formula *f;
 
-    if ((f = (this)->Access( pos)) != NULL && f->symbol == zilch) {
+    if ((f = (this)->Access( pos)) != NULL && f->symbol == eq_zilch) {
 	(this)->Delete( pos);
 	zilch_removed = 1;
     }
-    if ((f = (this)->Access( pos-1)) != NULL && f->symbol == zilch) {
+    if ((f = (this)->Access( pos-1)) != NULL && f->symbol == eq_zilch) {
 	(this)->Delete( --pos);
 	zilch_removed = 1;
 	evenup = 1;
@@ -199,8 +191,8 @@ void eq::Delete(long  pos)
     } else if (pos == this->p1) {
 	this->p2 -= 1;
     } else {
-	register int i, gap = this->gap;
-	register struct formula *f = this->f;
+	int i, gap = this->gap;
+	struct formula *f = this->f;
 	for (i=this->p1-1; i>=pos; i--)
 	    f[i+gap] = f[i];
 	for (i=this->p1; i<pos; i++)
@@ -220,13 +212,13 @@ void eq::Delete(long  pos)
 long eq::DeleteCarefully(long  start , long  stop)
 {
     long was_zilch;
-    register int i, j;
+    int i, j;
     enum type type;
     struct formula *f;
 
     /* remember whether we deleted a zilch */
     f = (this)->Access( stop-1);
-    was_zilch = (f != NULL && f->symbol == zilch);
+    was_zilch = (f != NULL && f->symbol == eq_zilch);
 
     /* eliminate unmatched groups */
     i = start;
@@ -255,7 +247,7 @@ long eq::DeleteCarefully(long  start , long  stop)
       && ((type=(this)->Access( start-1)->symbol->type)==BEGIN
       || type==ALIGN || type==EQSTYLE)   &&  was_zilch) {
 	/* find an enclosing group to delete */
-	register int i, b=start, e;
+	int i, b=start, e;
 	while ((this)->Access( --b)->symbol->type != BEGIN) ;
 	while (b!=0 && !(this)->Access( b)->has_hot_spot
 	  && (this)->Access( b-1)->symbol->type!=SCRIPT)
@@ -263,9 +255,9 @@ long eq::DeleteCarefully(long  start , long  stop)
 	if (b!=0) {
 	    e = (this)->FindEndGroup( b+1);
 	    for (i=b+1;  i<e;  i++) {
-		register struct formula *f = (this)->Access( i);
+		struct formula *f = (this)->Access( i);
 		if (f->symbol->type!=END && f->has_hot_spot
-		  && f->symbol != zilch)
+		  && f->symbol != eq_zilch)
 		    break;
 	    }
 	    if (i==e) {
@@ -296,13 +288,13 @@ long eq::DeleteCarefully(long  start , long  stop)
  * inserts string and returns new position.
  */
 
-long eq::DoScript(long  pos, enum script  script, char  *string)
+long eq::DoScript(long  pos, enum script  script, const char  *string)
 {
     long i, added, found = -1;
 
     for (i=pos-1; ; i--) {
 	struct formula *f = (this)->Access( i);
-	if (f->symbol == zilch)
+	if (f->symbol == eq_zilch)
 	    return pos;
 	if (f->symbol->type==END)
 	    i = (this)->FindBeginGroup( i);
@@ -409,7 +401,7 @@ long eq::Size()
 /* Given an equation and a formula, return the next formula. */
 struct formula *eq::NextFormula(struct formula  *f)
 {
-    register int n, p1 = this->p1, gap = this->gap, p2 = this->p2;
+    int n, p1 = this->p1, gap = this->gap, p2 = this->p2;
 
     f += 1;
     n = f - this->f;
@@ -424,10 +416,10 @@ struct formula *eq::NextFormula(struct formula  *f)
 /* Convert to printable representation.  Returns length in bytes, including trailing null. */
 long eq::GetTokens(long  *startp , long  stop, char  *string, long  size)
 {
-    register char *s = string;
-    register int i, len;
+    char *s = string;
+    int i, len;
     for (i= *startp; i<stop; i++) {
-	register struct formula *f = (this)->Access( i);
+	struct formula *f = (this)->Access( i);
 	len = strlen(f->symbol->name) + 1;
 	if (len > size)
 	    break;
@@ -449,7 +441,7 @@ long eq::GetTokens(long  *startp , long  stop, char  *string, long  size)
 
 long eq::FindEndGroup(long  i)
 {
-    register int j, level = 0;
+    int j, level = 0;
     for (j=i; ; j++) {
 	switch ((this)->Access( j)->symbol->type) {
 	case BEGIN:
@@ -472,7 +464,7 @@ long eq::FindEndGroup(long  i)
 
 long eq::FindBeginGroup(long  i)
 {
-    register int j, level = 0;
+    int j, level = 0;
     for (j=i-1; ; j--) {
 	switch ((this)->Access( j)->symbol->type) {
 	case END:
@@ -495,7 +487,7 @@ long eq::FindBeginGroup(long  i)
 
 long eq::FindLeftSibling(long  i)
 {
-    register int j;
+    int j;
     if (i==0)
 	return -1;
     for (j=i-1; ; j--) {
@@ -510,7 +502,7 @@ long eq::FindLeftSibling(long  i)
 
 long eq::FindRightSibling(long  i)
 {
-    register int j;
+    int j;
     if (i==0)
 	return -1;
     for (j=(this)->FindEndGroup( i+1)+1; ; j++) {
@@ -603,7 +595,7 @@ long eq::Write(FILE  *file, long  writeid, int  level)
 }
 
 /* Dump info */
-void eq::Dump(char  *name)
+void eq::Dump(const char  *name)
 {
     FILE *file = NULL;
     int n = (this)->Size(), i;
@@ -644,10 +636,10 @@ void eq::Dump(char  *name)
 
 boolean eq::InitializeClass()
 {
-    if (zilch == NULL)
-	zilch = eq::Lookup("zilch");
-    if (root == NULL)
-	root = eq::Lookup("root");
+    if (eq_zilch == NULL)
+	eq_zilch = eq::Lookup("zilch");
+    if (eq_root == NULL)
+	eq_root = eq::Lookup("root");
 
     return TRUE;
 }

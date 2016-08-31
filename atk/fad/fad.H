@@ -89,7 +89,7 @@ public:
     virtual struct fadpoint * setpoint(long x,long y, int type,struct fad_frame *f)  ;
     virtual struct fadvector * setvector(struct fadpoint *pp1,struct fadpoint *pp2,struct fad_frame *f)  ;
     virtual void delvector(struct fad_frame *f);
-    virtual short iconnum(char *s)  ;
+    virtual short iconnum(const char *s)  ;
     virtual void freeframe(struct fad_frame *ff);	
     virtual int flipicons() ;
     virtual int unflipicons() ;

@@ -25,16 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/typescript/RCS/typetext.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* typetext.c
  * Code for typescript to ignore styles and dataobjects in read text.
  *
@@ -44,6 +34,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #define TESTEND(C) (C == EOF || C == '\0')
 
 
+#include <andrewos.h>
 ATK_IMPL("typetext.H")
 #include <typetext.H>
 #include <style.H>
@@ -51,13 +42,10 @@ ATK_IMPL("typetext.H")
 
 
 ATKdefineRegistry(typetext, text, NULL);
-#ifndef NORCSID
-#endif
-
 
 long typetext::HandleKeyWord(long  pos, char  *keyword, FILE  *file  )
 {
-    register long c;
+    long c;
     if ((strcmp(keyword, "textdsversion") == 0) || 
 	(strcmp(keyword, "define") == 0) ||
 	(strcmp(keyword, "template") == 0) ){
@@ -80,7 +68,7 @@ long typetext::HandleBegindata(long  pos,FILE  *file)
 return (this)->text::HandleBegindata(pos,file);
 }
 
-char *typetext::ViewName()
+const char *typetext::ViewName()
     {
     return "typescript";
 }

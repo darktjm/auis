@@ -43,16 +43,16 @@ public:
 
      void ObservedChanged (class observable *changed, long value);
      void SetDataObject(class dataobject *ls);
-     ATK  * WantHandler(char *handlerName)  ;
+     ATK  * WantHandler(const char *handlerName)  ;
      void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
      void LinkTree(class view *parent);
 
-    virtual char * GetDataName()  ;
-    virtual int registername(class celview *cv,char *refname)  ;
+    virtual const char * GetDataName()  ;
+    virtual int registername(class celview *cv,const char *refname)  ;
     virtual void InitCell(class celview *cv);
     virtual void DeleteCell(class celview *cv);
     virtual boolean CreateCon(class text *EditText)  ;
-    virtual class celview * lookupname(char *ViewName)  ;
+    virtual class celview * lookupname(const char *ViewName)  ;
     virtual void ArbRead(char *frs);
     virtual void InitArbcon();
     virtual long GetArbName(char *buf,long buflen)  ;
@@ -72,9 +72,9 @@ public:
 	virtual ~arbiterview();
     
 	arbiterview();
-    static class dataobject * GetNamedObject(class view *vw,char *ObjectName)  ;
-    static class view * GetNamedView(class view *vw,char *ViewName)  ;
-    static class celview * GetNamedCelview(class view *vw,char *ViewName)  ;
+    static class dataobject * GetNamedObject(class view *vw,const char *ObjectName)  ;
+    static class view * GetNamedView(class view *vw,const char *ViewName)  ;
+    static class celview * GetNamedCelview(class view *vw,const char *ViewName)  ;
     static void SetIgnoreUpdates(class view *vw,boolean val);
     static class arbiterview* GetFirstLink()  ;
     static class arbiterview * FindArbByName(char *str)  ;

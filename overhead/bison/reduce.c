@@ -151,8 +151,8 @@ reduce_grammar ()
   /**/ statisticsflag = FALSE; /* someday getopts should handle this */
   if (statisticsflag == TRUE)
     fprintf(stderr,
-	    "reduced %s defines %d terminal%s, %d nonterminal%s\
-, and %d production%s.\n", infile,
+	    "reduced %s defines %d terminal%s, %d nonterminal%s"
+	    ", and %d production%s.\n", infile,
 	    ntokens, (ntokens == 1 ? "" : "s"),
 	    nvars,   (nvars   == 1 ? "" : "s"),
 	    nrules,  (nrules  == 1 ? "" : "s"));

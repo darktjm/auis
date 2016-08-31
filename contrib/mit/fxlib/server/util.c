@@ -1,10 +1,6 @@
 /*
  * The FX (File Exchange) Server
  *
- * $Author: sa3e $
- * $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/server/RCS/util.c,v $
- * $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/server/RCS/util.c,v 1.5 1994/01/31 22:28:24 sa3e Stab74 $
- *
  * Copyright 1989, 1990 by the Massachusetts Institute of Technology.
  *
  * For copying and distribution information, please see the file
@@ -15,11 +11,7 @@
 
 /*
  * This file contains miscellaneous utility routines.
- */
-
-#ifndef lint
-static char rcsid_util_c[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/server/RCS/util.c,v 1.5 1994/01/31 22:28:24 sa3e Stab74 $";
-#endif /* lint */
+U */
 
 #include <fxserver.h>
 #include <ctype.h>
@@ -36,8 +28,8 @@ static char rcsid_util_c[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contr
 valid_course_name(s)
     char *s;
 {
-    register char *ptr;
-    register short cc=0;		/* character count */
+    char *ptr;
+    short cc=0;		/* character count */
 
     if (!*s || *s == '.')
 	return 0;
@@ -59,8 +51,8 @@ valid_course_name(s)
 valid_filename(s)
     char *s;
 {
-    register char *ptr;
-    register short cc=0;
+    char *ptr;
+    short cc=0;
 
     for (ptr=s; *ptr; ptr++, cc++)
 	if (*ptr == '/' || cc > 128)
@@ -105,7 +97,7 @@ is_god()
 contains_wildcard(paper)
     Paper *paper;
 {
-  register char *s;
+  char *s;
 
   /* Don't allow control characters, esp \001 which could be used
    * to fake database entries.  The error message being about

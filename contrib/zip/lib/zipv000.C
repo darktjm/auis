@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipv000.C,v 1.5 1993/08/04 21:15:05 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* zipv000.c	Zip View-object	-- general			      */
 /* Author	TC Peters					      */
 /* Information Technology Center	   Carnegie-Mellon University */
@@ -83,17 +75,17 @@ END-SPECIFICATION  ************************************************************/
 #define  Objects(i)		((self->objects)[i])
 #define  PaneExceptionHandler	(self->pane_exception_handler)
 
-void zipview_Mark_Pane_Exposed( register class zipview		  *self, register zip_type_pane		   pane );
-void zipview_Mark_Pane_Hidden( register class zipview		  *self, register zip_type_pane		   pane );
+void zipview_Mark_Pane_Exposed( class zipview		  *self, zip_type_pane		   pane );
+void zipview_Mark_Pane_Hidden( class zipview		  *self, zip_type_pane		   pane );
 
 
 class graphic *
-zipview::Define_Graphic( register class fontdesc		  *font2, register unsigned char pattern )
+zipview::Define_Graphic( class fontdesc		  *font2, unsigned char pattern )
         {
-  register class graphic		 *graphic2 = NULL;
+  class graphic		 *graphic2 = NULL;
 /*===*/
 #define max_table_size  50
-register int			  i;
+int			  i;
 static struct zipv000table
   {
   class fontdesc		 *font2;
@@ -131,9 +123,9 @@ static struct zipv000table
   }
 
 class fontdesc *
-zipview::Contextual_Figure_Font( register zip_type_figure		   figure )
+zipview::Contextual_Figure_Font( zip_type_figure		   figure )
       {
-  register class fontdesc		 *font;
+  class fontdesc		 *font;
   class zipview *self=this;
 
   IN(zipview::Contextual_Figure_Font);
@@ -159,9 +151,9 @@ zipview::Contextual_Figure_Font( register zip_type_figure		   figure )
   }
 
 class fontdesc *
-zipview::Select_Contextual_Figure_Font( register zip_type_figure		   figure )
+zipview::Select_Contextual_Figure_Font( zip_type_figure		   figure )
       {
-  register class fontdesc		 *font;
+  class fontdesc		 *font;
   class zipview *self=this;
 
   IN(zipview::Select_Contextual_Figure_Font);
@@ -173,7 +165,7 @@ zipview::Select_Contextual_Figure_Font( register zip_type_figure		   figure )
   }
 
 void
-zipview::Ensure_Fill_Attributes( register zip_type_figure		 figure )
+zipview::Ensure_Fill_Attributes( zip_type_figure		 figure )
       {
   double				red, green, blue;
   const char				*def_bg, *def_fg;
@@ -208,11 +200,11 @@ zipview::Normalize_Fill_Attributes( )
   }
 
 long
-zipview::Ensure_Line_Attributes( register zip_type_figure		 figure )
+zipview::Ensure_Line_Attributes( zip_type_figure		 figure )
       {
-  register unsigned char		lwidth;
+  unsigned char		lwidth;
   double				red, green, blue;
-  register long				status = zip_failure;
+  long				status = zip_failure;
   char					*pattern = NULL;
   int					offset;
   short					dashtype, value;
@@ -271,9 +263,9 @@ zipview::Normalize_Line_Attributes( )
   }
 
 boolean
-zipview::Condition( register zip_type_pane		   pane, register zip_type_figure		   figure, register int				   action )
+zipview::Condition( zip_type_pane		   pane, zip_type_figure		   figure, int				   action )
           {
-  register boolean			  condition = true;
+  boolean			  condition = true;
   class zipview *self=this;
 
   IN(zipview::Condition);
@@ -327,7 +319,7 @@ zipview::Condition( register zip_type_pane		   pane, register zip_type_figure		 
   return condition;
   }
 
-void zipview::Set_Clip_Area( register zip_type_pane		   pane, register long				   l , register long				   t , register long				   w , register long				   h )
+void zipview::Set_Clip_Area( zip_type_pane		   pane, long				   l , long				   t , long				   w , long				   h )
         {
   struct rectangle			  rectangle;
   class zipview *self=this;
@@ -341,7 +333,7 @@ void zipview::Set_Clip_Area( register zip_type_pane		   pane, register long				 
   OUT(zipview::Set_Clip_Area);
   }
 
-void zipview::Set_Pane_Clip_Area( register zip_type_pane		   pane )
+void zipview::Set_Pane_Clip_Area( zip_type_pane		   pane )
       {
   struct rectangle			  rect, clip;
   class zipview *self=this;
@@ -362,7 +354,7 @@ void zipview::Set_Pane_Clip_Area( register zip_type_pane		   pane )
   OUT(zipview::Set_Pane_Clip_Area);
   }
 
-void zipview::Reset_Pane_Clip_Area( register zip_type_pane		   pane )
+void zipview::Reset_Pane_Clip_Area( zip_type_pane		   pane )
       {
   class zipview *self=this;
 
@@ -371,7 +363,7 @@ void zipview::Reset_Pane_Clip_Area( register zip_type_pane		   pane )
   OUT(zipview::Reset_Pane_Clip_Area);
   }
 
-void zipview_Mark_Pane_Exposed( register class zipview		  *self, register zip_type_pane		   pane )
+void zipview_Mark_Pane_Exposed( class zipview		  *self, zip_type_pane		   pane )
       {
   IN(zipview_Mark_Pane_Exposed);
   pane->zip_pane_state.zip_pane_state_exposed = true;
@@ -380,7 +372,7 @@ void zipview_Mark_Pane_Exposed( register class zipview		  *self, register zip_ty
   OUT(zipview_Mark_Pane_Exposed);
   }
 
-void zipview_Mark_Pane_Hidden( register class zipview		  *self, register zip_type_pane		   pane )
+void zipview_Mark_Pane_Hidden( class zipview		  *self, zip_type_pane		   pane )
       {
   IN(zipview_Mark_Pane_Hidden);
   pane->zip_pane_state.zip_pane_state_exposed = false;
@@ -390,9 +382,9 @@ void zipview_Mark_Pane_Hidden( register class zipview		  *self, register zip_typ
   }
 
 boolean
-zipview::Proximate_Figure_Point( register zip_type_pane		   pane, register zip_type_figure		   figure, register zip_type_pixel		   X , register zip_type_pixel		   Y , register zip_type_pixel		   x , register zip_type_pixel		   y )
+zipview::Proximate_Figure_Point( zip_type_pane		   pane, zip_type_figure		   figure, zip_type_pixel		   X , zip_type_pixel		   Y , zip_type_pixel		   x , zip_type_pixel		   y )
           {
-  register long				  status = false;
+  long				  status = false;
 
   IN(zipview::Proximate_Figure_Point);
   if ( X >= (x - zip_proximal_distance)  &&
@@ -405,9 +397,9 @@ zipview::Proximate_Figure_Point( register zip_type_pane		   pane, register zip_t
   }
 
 long
-zipview::Proximate_Enclosure( register zip_type_pane		   pane, register zip_type_pixel		   left , register zip_type_pixel		   top , register zip_type_pixel		   right , register zip_type_pixel		   bottom, register zip_type_pixel		   x , register zip_type_pixel		   y )
+zipview::Proximate_Enclosure( zip_type_pane		   pane, zip_type_pixel		   left , zip_type_pixel		   top , zip_type_pixel		   right , zip_type_pixel		   bottom, zip_type_pixel		   x , zip_type_pixel		   y )
           {
-  register long				  status = false;
+  long				  status = false;
 
   IN(zipview::Proximate_Enclosure);
   if ( x >= left  &&  x <= right  &&
@@ -418,7 +410,7 @@ zipview::Proximate_Enclosure( register zip_type_pane		   pane, register zip_type
   }
 
 long
-zipview::Try_Pane_Exception_Handler( register zip_type_pane		   pane )
+zipview::Try_Pane_Exception_Handler( zip_type_pane		   pane )
       {
   class zipview *self=this;
 

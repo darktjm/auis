@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/mailobjv.C,v 1.5 1995/07/07 19:26:34 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 #include <sbutton.H>
 #include <mailobjv.H>
 #include <mailobj.H>
@@ -52,8 +42,6 @@ static class menulist *mailobjv_standardmenulist;
 
 
 ATKdefineRegistry(mailobjv, sbuttonv, mailobjv::InitializeClass);
-#ifndef NORCSID
-#endif
 void ChangeContents(class mailobjv  *self);
 
 

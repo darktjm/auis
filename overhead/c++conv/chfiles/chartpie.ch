@@ -26,14 +26,6 @@
 */
 
 
-/* $Header $ */
-/* $Source $ */
-
-
-
-
-
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Pie Chart View-object

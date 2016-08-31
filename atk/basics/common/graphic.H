@@ -184,7 +184,7 @@ public:
     virtual void SetLineWidth(short NewLineWidth);
     virtual short GetLineWidth()  ;
 
-    virtual void SetLineDash( char *dashPattern, int dashOffset, short dashType );
+    virtual void SetLineDash( const char *dashPattern, int dashOffset, short dashType );
     virtual void GetLineDash( char **dashPattern, int *dashOffset, short *dashType );
 
     virtual void SetLineCap( short NewLineCap );
@@ -223,7 +223,7 @@ public:
 
     virtual long GetHorizontalResolution()  ;
     virtual long GetVerticalResolution()  ;
-    virtual char * GetWindowManagerType()  ;
+    virtual const char * GetWindowManagerType()  ;
     virtual long GetDevice()  ;
     virtual long DisplayClass()  ;
     virtual boolean IsImageInverted()  ;

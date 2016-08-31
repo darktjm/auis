@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/vmmonf.C,v 1.1 1993/05/11 16:27:01 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include <im.H>
 #include <consoleClass.H>
 #include <console.h>
@@ -45,10 +36,8 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 #define	GETSTAT_MASK   64   /* Getstats -is- dead, Restart Getstats -is- showing */
 
-#ifndef NORCSID
-#endif
 void RestartStats(class consoleClass  *self);
-void EndStats(class consoleClass  *self, FILE  *vmstats, char  *error, char  *type, int  fatal);
+void EndStats(class consoleClass  *self, FILE  *vmstats, const char  *error, const char  *type, int  fatal);
 void ComputeStatistics(FILE  *vmstats, class consoleClass  *self);
 void CheckWindows(class consoleClass  *self);
 
@@ -63,7 +52,7 @@ void RestartStats(class consoleClass  *self)
     (self)->PostMenus( self->stdMenulist);
 }
 
-void EndStats(class consoleClass  *self, FILE  *vmstats, char  *error, char  *type, int  fatal)
+void EndStats(class consoleClass  *self, FILE  *vmstats, const char  *error, const char  *type, int  fatal)
 {
     char buffer[256];
     

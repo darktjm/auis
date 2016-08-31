@@ -2677,7 +2677,7 @@ struct menulist **normalMenus;
 
     struct keymap *newKeymap = keymap_New();
 
-    register long i;
+    long i;
 
     char str[2];
 

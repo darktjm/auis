@@ -56,7 +56,7 @@ public:
 	virtual long GetLocLength()  ;
 
 	  long Read (FILE *file, long id)  ;
-	 char * ViewName()  ;
+	 const char * ViewName()  ;
 
     inline long GetLoc() { return ((this)->loc); }
     inline void SetLoc(long newValue) { ( ((this)->loc) = (newValue) ); }

@@ -24,13 +24,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mkparser/RCS/cparser.c,v 1.7 1994/04/08 17:42:03 wjh Stab74 $";
-#endif
-
-
 #include <ctype.h>
 #include <stdio.h>
 
@@ -329,8 +322,8 @@ parser_ParseNumber(buf, plen, intval, dblval)
 	long val;
 	int len;
 	char oldstate, currstate;
-	register int x;
-	register char *bx;
+	int x;
+	char *bx;
 	int success;
 
 	if (*buf == '\'') {
@@ -478,17 +471,17 @@ parser_Parse(self, lexer, lexrock)
 	parser_lexerfptr lexer;
 	void *lexrock;
 {
-	register struct parser_tables *desc = self->tables;
-	register int x, tact;	/* temps */
+	struct parser_tables *desc = self->tables;
+	int x, tact;	/* temps */
 	void *pendval;		/* lookahead symbol value */
-	register short pendtok;	/* the look ahead token.  NOTOK if none */
-	register int tstate;	/* temporary for state value */
+	short pendtok;	/* the look ahead token.  NOTOK if none */
+	int tstate;	/* temporary for state value */
 	void *tval;		/* temporary for values */
 	int *StateStack;	/* states */
 	void *ValueStack;	/* values */
-	register int *ssp;	/* statestack pointer,
+	int *ssp;	/* statestack pointer,
 					pts to highest occupied location  */
-	register void *vsp;	/* value stack pointer,
+	void *vsp;	/* value stack pointer,
 					pts to highest occupied location  */
 	int nstelts;		/* number of elements in the 2 stacks */
 	int *ssend;		/* pts to highest loc in StateStack */

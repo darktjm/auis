@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/real.C,v 1.3 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
 #include <math.h>
 #include <ness.H>
 
@@ -178,7 +171,7 @@ realOther(char  op, unsigned char *iar) {
 	union stackelement *NSP = NSPstore;
 	double x;
 	long l;
-	register struct dblstkelt *left ;
+	struct dblstkelt *left ;
 
 	/* check arguments */
 	switch (op) {

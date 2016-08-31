@@ -28,9 +28,9 @@ extern char *program_name;
 
 char *
 xmalloc (n)
-     register unsigned n;
+     unsigned n;
 {
-  register char *block;
+  char *block;
 
   /* Avoid uncertainty about what an arg of 0 will do.  */
   if (n == 0)
@@ -47,8 +47,8 @@ xmalloc (n)
 
 char *
 xrealloc (block, n)
-     register char *block;
-     register unsigned n;
+     char *block;
+     unsigned n;
 {
   /* Avoid uncertainty about what an arg of 0 will do.  */
   if (n == 0)

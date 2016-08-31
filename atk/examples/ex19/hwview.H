@@ -42,7 +42,7 @@ public:
   class view *Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
   void ReceiveInputFocus();
   void LoseInputFocus();
-  char *GetInterface(char *type);
+  const void *GetInterface(const char *type);
   class view *GetApplicationLayer();
   void DeleteApplicationLayer(class view *v);
   void LinkTree(class view *parent);

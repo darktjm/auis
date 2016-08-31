@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/init.c,v 2.54 1994/03/31 20:30:06 rr2b Stab74 $";
-#endif
-
 #include <ms.h>
 #include <stdio.h>
 #include <util.h>
@@ -442,7 +436,7 @@ Boolean UsingSnap;
     if (UsingSnap) {
 	int i, offset;
 	char *adir, *ldir;
-	static char USUALPATH[] = "PATH=%s/bin:%s/bin:%s/bin:/usr/ucb:/usr/bin:/bin";
+	static const char USUALPATH[] = "PATH=%s/bin:%s/bin:%s/bin:/usr/ucb:/usr/bin:/bin";
 
 	adir = (char *)AndrewDir(NULL);
 	if (!adir) adir = "/usr/andrew";

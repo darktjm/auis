@@ -59,9 +59,9 @@ public:
      void ObservedChanged(class observable *t,long value);
      long Read (FILE *file, long id)  ;
      long Write (FILE *file, long writeid, int level)  ;
-     char * ViewName()  ;
+     const char * ViewName()  ;
 
-    virtual void SetHeader(int which, char *str);
+    virtual void SetHeader(int which, const char *str);
 
     long  where;
     class text *texts[header_TEXTS];

@@ -25,15 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/ez2ascii.C,v 1.3 1993/06/04 16:21:31 rr2b Stab74 $";
-#endif
-
-
-/* $Author: rr2b $ */
 /*
  * Program to convert ATK datastream to plain ascii.
  *
@@ -48,13 +39,12 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
   * If no file is specified, stdin is read and output goes to stdout.
  */
 
+#include <andrewos.h>
 #include <stdio.h>
 #include <sys/file.h>
 
 #include <unscribe.h>
 
-#ifndef NORCSID
-#endif
 static int ez2a_doit (FILE  *infile , FILE  *outfile);
 
 static int ez2a_doit (FILE  *infile , FILE  *outfile)

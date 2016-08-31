@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/pcserver/RCS/pccsnap.c,v 2.6 1992/12/15 21:06:36 rr2b Stab74 $";
-#endif
-
 /*
  *	PC Client - SNAP Interface Component
  *	Access to the VICE File System for IBM PC/XT/ATs

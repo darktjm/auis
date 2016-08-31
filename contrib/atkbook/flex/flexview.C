@@ -1,5 +1,3 @@
-static char *flexview_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/atkbook/flex/RCS/flexview.C,v 1.2 1994/08/11 03:01:23 rr2b Stab74 $";
-
 /* **************************************************** *\
 Copyright 1989 Nathaniel S. Borenstein
 Permission to use, copy, modify, and distribute this software and its

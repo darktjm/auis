@@ -27,11 +27,6 @@
 
 #include <andrewos.h> /* strings.h */
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/rastvauy.C,v 1.3 1995/01/20 21:23:10 Zarf Stab74 $";
-#endif
-
 #define AUXMODULE 1
 #include <rasterview.H>
 
@@ -59,8 +54,8 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 void rasterview_ToggleCoordProc(class rasterview  *self, char  *rock);
 void rasterview_MakeToolsetProc(class rasterview  *self, char  *rock);
 void rasterview_KillToolsetProc(class rasterview  *self, char  *rock);
-static boolean objecttest(class rasterview  *self, char  *name, char  *desiredname);
-void rasterview_OverlayInsetProc(class rasterview  *self, char  *rock);
+static boolean objecttest(class rasterview  *self, const char  *name, const char  *desiredname);
+void rasterview_OverlayInsetProc(class rasterview  *self, const char  *rock);
 void rasterview_RemoveInsetProc(class rasterview  *self, char  *rock);
 void rasterview_ResizeInsetProc(class rasterview  *self, char  *rock);
 void rasterview_ImprintInsetProc(class rasterview  *self, long  rock);
@@ -297,7 +292,7 @@ void rasterview::DestroyToolset()
     rasterview_KillToolsetProc(this, 0);
 }
 
-static boolean objecttest(class rasterview  *self, char  *name, char  *desiredname)
+static boolean objecttest(class rasterview  *self, const char  *name, const char  *desiredname)
 {
     if(ATK::LoadClass(name) == NULL){
 	char foo[640];
@@ -315,15 +310,15 @@ static boolean objecttest(class rasterview  *self, char  *name, char  *desiredna
 }
 
 /* overlay an inset, using self->DesiredSelection for the box dimensions. insetname should be the name of a subclass of dataobject. If insetname is NULL, the user will be prompted for a class name. */
-void rasterview::OverlayInset(char  *insetname)
+void rasterview::OverlayInset(const char  *insetname)
 {
     rasterview_OverlayInsetProc(this, insetname);
 }
 
-void rasterview_OverlayInsetProc(class rasterview  *self, char  *rock)
+void rasterview_OverlayInsetProc(class rasterview  *self, const char  *rock)
 {
     char iname[100], buf[200];
-    char *viewname;
+    const char *viewname;
     long pf;
     class dataobject *dobj;
     class raster *ras;

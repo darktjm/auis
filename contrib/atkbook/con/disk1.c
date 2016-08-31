@@ -1,5 +1,3 @@
-static char *disk_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/atkbook/con/RCS/disk1.c,v 1.1 1992/10/06 22:08:31 susan Stab74 $";
-
 /* **************************************************** *\
 Copyright 1989 Nathaniel S. Borenstein
 Permission to use, copy, modify, and distribute this software and its

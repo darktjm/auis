@@ -93,12 +93,12 @@ public:
     static void SafeDrawButton(class view *v, struct sbutton_info *b, struct rectangle *r);
     static void HighlightButton(class view *v, struct sbutton_info *b, struct rectangle *r);
     static void UnHighlightButton(class view *v, struct sbutton_info *b, struct rectangle *r);
-    static class sbuttonv * CreateFilledSButtonv(char *defview, struct sbutton_prefs *prefs, struct sbutton_list *blist)  ;
+    static class sbuttonv * CreateFilledSButtonv(const char *defview, struct sbutton_prefs *prefs, const struct sbutton_list *blist)  ;
     
-    static void DrawLabel(class view *v, char *label, long x, long y, struct sbutton_prefs *b, boolean lit, long flags, boolean sensitive=TRUE);
+    static void DrawLabel(class view *v, const char *label, long x, long y, struct sbutton_prefs *b, boolean lit, long flags, boolean sensitive=TRUE);
     
 /*  special case of drawlabel which draws the label in the middle of the rectangle passed. */
-    static void DrawButtonLabel(class view *v, char *label, struct rectangle *interior, struct sbutton_prefs *prefs,  boolean lit, boolean sensitive=TRUE);
+    static void DrawButtonLabel(class view *v, const char *label, struct rectangle *interior, struct sbutton_prefs *prefs,  boolean lit, boolean sensitive=TRUE);
 
   
      void ObservedChanged (class observable *changed, long value);
@@ -110,7 +110,7 @@ public:
      void WantUpdate(class view *requestor);
      void GetOrigin(long width, long height, long *originX, long *originY);
      void SetDataObject(class dataobject *d);
-     void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
+     void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
 
     
   

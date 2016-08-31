@@ -57,9 +57,9 @@ public:
      void ObservedChanged (class observable *changed, long value);
      void LinkTree(class view *parent);
      void WantNewSize(class view *requestor);
-     void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
+     void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
      void InitChildren();
-     boolean CanView(char *TypeName)  ;
+     boolean CanView(const char *TypeName)  ;
 
     virtual void ReadFile(FILE *thisFile,const char *iname);
     virtual boolean Unsplit(class lsetview *who)  ;

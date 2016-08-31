@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-char *figoplin_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figoplin.C,v 3.6 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("figoplin.H")
 #include <math.h>
@@ -51,8 +47,6 @@ static int ptemp_size;
 
 
 ATKdefineRegistry(figoplin, figobj, figoplin::InitializeClass);
-#ifndef NORCSID
-#endif
 static void SetNumPts(class figoplin  *self, long  num);
 static void PartialSketch(class figoplin  *self, class figview  *v, long  ptref);
 static void RegularizePolygon(class figoplin  *self, long  endx , long  endy);
@@ -143,7 +137,7 @@ figoplin::~figoplin()
 	free(this->orpts);
 }
 
-char *figoplin::ToolName(class figtoolview  *v, long  rock)
+const char *figoplin::ToolName(class figtoolview  *v, long  rock)
 {
     if (rock & 2) {
 	if (rock & 1)
@@ -354,7 +348,7 @@ void figoplin::Draw(class figview  *v)
 {
     long basex, basey;
     long ix, shad, dash, lw, asize, ashape, apos;
-    char *col;
+    const char *col;
 
     (v)->SetTransferMode(graphic_COPY);
 
@@ -1152,12 +1146,12 @@ long figoplin::ReadBody(FILE  *fp, boolean  recompute)
 
 #define FadeColor(col, shad)  (1.0 - (1.0-(shad)) * (1.0-(col)))
 
-void figoplin::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolean newstyle)
+void figoplin::PrintObject(class figview  *v, FILE  *file, const char  *prefix, boolean newstyle)
 {
     long ix, x, y, xbase, ybase, nump;
     struct point *pts;
     long lw, shad, dash, asize, apos, ashape;
-    char *col;
+    const char *col;
     double rcol, bcol, gcol, shadcol;
     struct point arrowparh, arrowpart;
     struct figattr_arrowhead arrowrockh, arrowrockt;

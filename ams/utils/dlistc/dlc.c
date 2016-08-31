@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/dlistc/RCS/dlc.c,v 1.13 1993/03/10 20:21:56 gk5g Stab74 $";
-#endif
-
 /*
 
   dlc.c -- Distribution List "Compiler"

@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/fonts/lib/RCS/fntnamng.c,v 2.7 1992/12/15 21:02:39 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*********************************************************\
 * 							  *
 * 	File: fntnamng.c				  *
@@ -58,11 +50,11 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/fonts
 */
 
 char *FormatFontname (n)
-register struct FontName  *n;
+struct FontName  *n;
 {
    static char buf[128];
    char  rbuf[5];
-   register char *p;
+   char *p;
 
    /* first create the rotation substring */
    if (n->rotation)
@@ -101,11 +93,11 @@ register struct FontName  *n;
 */
 
 parsefname(FileName, Fontname)
-register char *FileName;
-register struct FontName  *Fontname;
+char *FileName;
+struct FontName  *Fontname;
 {
-   register char *p;
-   register int   i;
+   char *p;
+   int   i;
    int   err = 0;
 
    /* strip off Family Name (e.g. TimesRoman); copy to struct */

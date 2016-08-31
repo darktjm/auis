@@ -25,18 +25,12 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/sys/RCS/conftest.c,v 1.12 1995/11/07 19:43:11 robr Stab74 $";
-#endif
-
 /*
 	conftest.c
 	Test the current Andrew configuration for reasonableness.
 */
 
+#include <andrewos.h>
 #include <stdio.h>
 
 /* ./conftest "$(RESOLVLIB)" */

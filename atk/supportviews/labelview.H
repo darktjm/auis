@@ -66,7 +66,7 @@ public:
 			 ;
 	 void ObservedChanged(/* struct labelview *self, */ class observable *dobj, long status );
 	 void Print(/* struct labelview *self, */ FILE *file, 
-			char *processor, char *finalFormat, boolean topLevel );
+			const char *processor, const char *finalFormat, boolean topLevel );
 	 class view * GetApplicationLayer(/* struct labelview *self */)  ;
 	
 

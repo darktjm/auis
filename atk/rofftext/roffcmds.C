@@ -25,21 +25,12 @@
 //  $
 */
 
-#include <andrewos.h> /* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/roffcmds.C,v 1.8 1996/11/09 23:11:22 wjh Exp $";
-#endif
-
-
- 
-
 /* rofftext
  *
  * Commands
  */
 
+#include <andrewos.h> /* strings.h */
 #include <link.H>
 #include <hash.H>
 #include <glist.H>
@@ -74,7 +65,7 @@ void el_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 void Ct_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]);
 static char gettblopts(int  argc, char  argv[80][80] );
 static void gettblfmt(int  argc, char  argv[80][80] );
-static char *parsetbl(char  *line	/* the input */, char  *sep	/* separators */, int  multi	/* if 1, skip multiple separators */, char  *out );
+static char *parsetbl(char  *line	/* the input */, const char  *sep	/* separators */, int  multi	/* if 1, skip multiple separators */, char  *out );
 void InsertTbl(class rofftext  *self,Trickle  t);
 void Et_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]);
 void Hd_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]);
@@ -114,7 +105,7 @@ void ev_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
  */
 void ds_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[])
 {
-    register int c;
+    int c;
     static BUF b = NULL;
     char name[3];
     boolean tmp = self->v_CopyMode;
@@ -150,10 +141,10 @@ void ds_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 /*  append to string */
 void as_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[])
 {
-    register int c;
+    int c;
     static BUF b = NULL;
     char name[3];
-    char *init;
+    const char *init;
     boolean tmp = self->v_CopyMode;
 
     b = NewBuf();
@@ -190,7 +181,7 @@ void as_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 	void 
 rm_cmd(class rofftext  *self, Trickle  t, boolean  br, 
 			int  argc, char  *argv[]) {
-	char *value, *v, *arg;
+	const char *value, *v, *arg;
 
 	if (argv[0][1] == 'n') { /* this is rn, not rm */
 		arg = argv[1];
@@ -225,7 +216,7 @@ rm_cmd(class rofftext  *self, Trickle  t, boolean  br,
 			DEBUG(1, (stderr, "removing string (%s)", arg));
 			v = (self->Macros)->Delete(arg);
 			v += (int)(long)(self->Commands)->Delete(arg);
-			free(value);
+			free((char *)value);
 			DEBUG(1, (stderr, "%s\n",
 					(v ? "succeeded" : "FAILED ***")));
 			continue;
@@ -234,7 +225,7 @@ rm_cmd(class rofftext  *self, Trickle  t, boolean  br,
 		if (value) {
 			DEBUG(1, (stderr, "removing command (%s)", arg));
 			v = (self->Commands)->Delete(arg);
-			free(value);
+			free((char *)value);
 			DEBUG(1, (stderr, "%s\n",
 					(v ? "succeeded" : "FAILED ***")));
 			continue;
@@ -331,7 +322,7 @@ void ex_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 void DoMacro(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[])
 {
 
-    char *macro = (self->Macros)->Lookup(argv[0]);
+    const char *macro = (self->Macros)->Lookup(argv[0]);
     DEBUG(1, (stderr,"v-----Calling Macro named (%s)-------v\n",argv[0]));
     tpush(self,t,NULL,NULL,macro,TRUE,argc,argv);
 }
@@ -341,8 +332,8 @@ void DoMacro(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[
 /* define or re-define macro */
 void de_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[])
 {
-    char *macro,*existing,*name = StrDup(argv[1]);
-    char *end = StrDup(argv[2]);
+    char *macro,*existing,*name = strdup(argv[1]);
+    char *end = strdup(argv[2]);
     static BUF b = NULL;
     char *oldValue;
     boolean svCopyMode = self->v_CopyMode;
@@ -354,25 +345,21 @@ void de_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
     self->v_CopyMode = TRUE;
     self->CurrentDiversion->SnarfOutput = b;
 
-    Scan(self,t,((argc<3)?(char *)".":end));
+    Scan(self,t,((argc<3)?".":end));
 
     self->CurrentDiversion->SnarfOutput = NULL;
     self->v_CopyMode = FALSE;
     Add2Buf(b,'\0');
 
-    macro = StrDup(Buf2Str(b));
+    macro = strdup(Buf2Str(b));
 
     (self->Commands)->Delete(name);
-    existing = (self->Macros)->Delete(name);
+    existing = (char *)(self->Macros)->Delete(name);
     if (existing)
         free(existing);
 
     DEBUG(1, (stderr,"--Defining Macro (%s)--\n",name));
 
-    oldValue = (self->Macros)->Delete( name);
-    if (oldValue != NULL) {
-	free(oldValue);
-    }
     (self->Macros)->Store(name,macro);
     (self->Commands)->Store(name,(char *)DoMacro);
     free(name);
@@ -388,9 +375,9 @@ void de_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 /* append to macro */
 void am_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[])
 {
-    char *macro,*existing,*name = StrDup(argv[1]);
-    char *end = StrDup(argv[2]);
-    char *init;
+    char *macro,*existing,*name = strdup(argv[1]);
+    char *end = strdup(argv[2]);
+    const char *init;
     BUF b;
 
     b =	NewBuf(); 
@@ -402,16 +389,16 @@ void am_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
     self->v_CopyMode = TRUE;
     self->CurrentDiversion->SnarfOutput = b;
 
-    Scan(self,t,((argc<3)?(char *)".":end));
+    Scan(self,t,((argc<3)?".":end));
 
     self->CurrentDiversion->SnarfOutput = NULL;
     self->v_CopyMode = FALSE;
     Add2Buf(b,'\0');
 
-    macro = StrDup(Buf2Str(b));
+    macro = strdup(Buf2Str(b));
 
     (self->Commands)->Delete(name);
-    existing = (self->Macros)->Delete(name);
+    existing = (char *)(self->Macros)->Delete(name);
     if (existing)
         free(existing);
 
@@ -445,7 +432,7 @@ void di_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
         self->v_CopyMode = TRUE;*/
         PushDiversion(self);
 	self->CurrentDiversion->SnarfOutput = b;
-        self->CurrentDiversion->name = StrDup(argv[1]);
+        self->CurrentDiversion->name = strdup(argv[1]);
     }
     else{
         if (self->v_DiversionLevel > 0) {
@@ -454,7 +441,7 @@ void di_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
             /*        self->v_CopyMode = tmp;*/
             Add2Buf(b,'\0');
 
-            macro = StrDup(Buf2Str(b));
+            macro = strdup(Buf2Str(b));
 
             existing = (char *)(self->Macros)->Delete(self->CurrentDiversion->name);
             if (existing)
@@ -476,7 +463,7 @@ void da_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 {
     char *macro;
     char *existing;
-    char *init;
+    const char *init;
     BUF	b;
 
     b =	NewBuf();
@@ -493,7 +480,7 @@ void da_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
         self->v_CopyMode = TRUE;*/
         PushDiversion(self);
 	self->CurrentDiversion->SnarfOutput =	b;
-        self->CurrentDiversion->name = StrDup(argv[1]);
+        self->CurrentDiversion->name = strdup(argv[1]);
     }
     else{
         if (self->v_DiversionLevel > 0) {
@@ -502,7 +489,7 @@ void da_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
             /*        self->v_CopyMode = tmp;*/
             Add2Buf(b,'\0');
 
-            macro = StrDup(Buf2Str(b));
+            macro = strdup(Buf2Str(b));
 
             existing = (char *)(self->Macros)->Delete(self->CurrentDiversion->name);
             if (existing)
@@ -537,7 +524,8 @@ void c1_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 void ie_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[])
 {
     int c,delim,delimcount;
-    char *str,*string2;
+    char *str, *string2;
+    const char *string3;
     boolean sense = FALSE,result;
     int dresult;
     static BUF b = NULL;
@@ -601,12 +589,13 @@ void ie_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 
                 string2 = strchr(str,delim);
                 if (string2 == NULL)
-                    string2 = "";
+                    string3 = "";
                 else {
                     *string2++ = '\0';
+		    string3 = string2;
                 }
-                DEBUG(1, (stderr,"Comparing (%s) (%s)\n",str,string2));
-                result = (strcmp(str,string2)==0);
+                DEBUG(1, (stderr,"Comparing (%s) (%s)\n",str,string3));
+                result = (strcmp(str,string3)==0);
 
                 break;
         }
@@ -702,7 +691,7 @@ static void gettblfmt(int  argc, char  argv[80][80] )
 {
 }
 
-static char *parsetbl(char  *line	/* the input */, char  *sep	/* separators */, int  multi	/* if 1, skip multiple separators */, char  *out )
+static char *parsetbl(char  *line	/* the input */, const char  *sep	/* separators */, int  multi	/* if 1, skip multiple separators */, char  *out )
 {	/* the output */
     char *p = line;
     *out = *p;
@@ -798,7 +787,7 @@ void Hd_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
     int style = 0;
     int lev;
     char *p;
-    char *str;
+    const char *str;
     if (argc < 3) return;
     lev = atoi(argv[1]);
     switch (lev) {
@@ -972,7 +961,7 @@ void Tag_fixup(class rofftext  *self )
 /* print macro -- for debugging */
 void PM_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[])
 {
-    char *m;
+    const char *m;
     printf("Macro named (%s) ----->\n",argv[1]);
     m = (self->Macros)->Lookup(argv[1]);
     if (m)
@@ -995,7 +984,7 @@ void PA_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 
 void tl_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[])
 {
-    register int c,style;
+    int c,style;
     char *str,*string1=NULL,*string2=NULL,*string3=NULL,*end=NULL;
     int tmp = self->CurrentDiversion->OutputDone;
     static BUF b = NULL;
@@ -1076,13 +1065,13 @@ void wh_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
     EvalString(self,argv[1],&result,scale_u,&absolute,&relative);
     if (!relative && !absolute && (result == 0)) {
         DEBUG(1, (stderr,"Setting beginning trap\n"));
-        self->v_Trap = StrDup(argv[2]);
+        self->v_Trap = strdup(argv[2]);
     }
     /* foo */
     if (relative && (result < 0)) {
         struct trap *trap = (struct trap *)malloc(sizeof(struct trap));
         trap->loc = result;
-        trap->macro = StrDup(argv[2]);
+        trap->macro = strdup(argv[2]);
         (self->EndMacros)->InsertSorted((char *)trap,(glist_greaterfptr)SortTraps);
     }
 
@@ -1136,7 +1125,7 @@ void it_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
         self->CurrentEnviron->NextInputTrap = 0;
     }
     else {
-        self->CurrentEnviron->InputTrapCmd = StrDup(argv[2]);
+        self->CurrentEnviron->InputTrapCmd = strdup(argv[2]);
         EvalString(self,argv[1], &result, scale_u,NULL,NULL);
         self->CurrentEnviron->NextInputTrap = result + self->v_InputLineCount;
     }
@@ -1146,7 +1135,7 @@ void it_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 
 void ft_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[])
 {
-    char *font;
+    const char *font;
     font = "P";
     if (argc>1)font=argv[1];
     if (self->v_DiversionLevel>0) { /* yuck-o, handle fonts in diversions */
@@ -1312,7 +1301,7 @@ void Ce_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 /* ignore input */
 void ig_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[])
 {
-    char *end = StrDup(argv[1]);
+    char *end = strdup(argv[1]);
     static BUF b = NULL;
 
     b = NewBuf();
@@ -1322,7 +1311,7 @@ void ig_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
     self->v_CopyMode = TRUE;
     self->CurrentDiversion->SnarfOutput = b;
 
-    Scan(self,t,((argc<2)?(char *)".":end));
+    Scan(self,t,((argc<2)?".":end));
 
     self->CurrentDiversion->SnarfOutput = NULL;
     self->v_CopyMode = FALSE;
@@ -1335,7 +1324,7 @@ void ig_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 /* translate characters  - special syntax */
 void tr_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[])
 {
-    register int c;
+    int c;
     unsigned char source,new_c;
     char temp[3],name[3];
 
@@ -1389,7 +1378,7 @@ void tr_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
             temp[0] = new_c;
             temp[1] = '\0';
             /* we won't worry about keeping track of mallocs here */
-            (self->SpecialChars)->Store(name,StrDup(temp));
+            (self->SpecialChars)->Store(name,strdup(temp));
             DEBUG(1, (stderr,"tr: renaming %s to %s\n",name,temp));
         }
         self->v_RawMode = TRUE;

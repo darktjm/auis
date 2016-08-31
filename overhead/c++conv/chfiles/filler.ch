@@ -25,11 +25,6 @@
  *  $
 */
 
-/* $Header $ */
-/* $ACIS$ */
-
- 
-
 /* filler.ch - filler data object definition and interface */
 
 #include <rect.h>

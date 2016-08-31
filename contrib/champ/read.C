@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/RCS/read.C,v 1.4 1994/06/09 21:20:21 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
@@ -41,8 +36,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/
 
 struct eventnode *RootEventNode = NULL;
 
-#ifndef NORCSID
-#endif
 static void ResolveTildes(char    *in , char    *out);
 int ReadDatesFromChampPath(const char  *champpath);
 static int ReadDatesFromFile(FILE  *fp);
@@ -192,18 +185,20 @@ static int readdate(char  *datebuf, struct datespec  *datespec)
 
 struct eventnode *readdateintoeventnode(char  *Buf)
 {
-    char *event, *s;
+    const char *event;
+    char *ev, *s;
     int rval;
     struct datespec ds;
     struct eventnode *newevent;
 
     if (Buf[0] == '#') return(NULL); /* a comment */
-    event = strchr(Buf, '#');
-    if (event) {
-	*event++ = '0';
-	s = strchr(event, '\n');
+    ev = strchr(Buf, '#');
+    if (ev) {
+	*ev++ = '0';
+	s = strchr(ev, '\n');
 	if (s) *s = '\0';
-	while (*event && isspace(*event)) ++event;
+	while (*ev && isspace(*ev)) ++ev;
+	event = ev;
     } else {
 	event = "null event";
     }

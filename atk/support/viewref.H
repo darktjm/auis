@@ -44,7 +44,7 @@ public:
 	viewref();
     
 	virtual ~viewref();
-    static class viewref * Create(char *viewtype, class dataobject *dataobject)  ;
+    static class viewref * Create(const char *viewtype, class dataobject *dataobject)  ;
 
     char *viewType;
     long viewID;

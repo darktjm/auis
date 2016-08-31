@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynlink/rs_aix3/RCS/doload.c,v 1.3 1996/03/28 15:57:43 robr Stab74 $";
-#endif
-
 /* 
  *	doload.c - AIX.V3 dynamic loader for class system
  *      Written by Zalman Stern
@@ -48,7 +43,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynli
  * (like "") to conform to some AIX convention but for now we will do it
  * the way it has always been done.
  */
-char doload_extension[] = ".do";
+const char doload_extension[] = ".do";
 
 int doload_trace=0;		/* nonzero if debugging */
 /* Dummy function for debugging.

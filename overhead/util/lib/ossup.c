@@ -25,14 +25,8 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/ossup.c,v 1.4 1992/12/15 21:11:36 rr2b Stab74 $";
-#endif
-
-
-#include <stdio.h>
 #include <andrewos.h>
+#include <stdio.h>
 
 #ifdef M_UNIX
 #include <sys/param.h>
@@ -44,8 +38,8 @@ extern int link(), unlink();
 /* add bcopy() so we don't have to pull in -lX11 */
 
 void bcopy (b1, b2, length)
-register unsigned char *b1, *b2;
-register length;
+unsigned char *b1, *b2;
+length;
 {
     if (b1 >= b2 || (b1 + length) < b2) {
 	memcpy(b2, b1, length);	/* Note: memmove was much slower */

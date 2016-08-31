@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/undigest/RCS/undigest.c,v 1.16 1993/06/30 05:04:24 rr2b Stab74 $";
-#endif
-
 /* undigest: Split internet digests into component mail messages */
 
 /* About 80% of internet digests use a common format, which is of the form: */
@@ -68,8 +63,8 @@ Closing notes
 #include <mail.h>
 #include <svcconf.h>
 
-static char topline[] = "----------------------------------------------------------------------\n";
-static char sepline[] = "------------------------------\n";
+static const char topline[] = "----------------------------------------------------------------------\n";
+static const char sepline[] = "------------------------------\n";
 
 /* filename for error messages.  Since errprintf only does this in conjunction with console, this is really ignored. */
 static char *Log = NULL;

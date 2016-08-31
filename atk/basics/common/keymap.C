@@ -25,20 +25,11 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/keymap.C,v 3.8 1995/02/27 02:26:22 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* keymap.c -- A class that provides mappings of keys to procedures.
 December, 1986 */
 
 
+#include <andrewos.h>
 ATK_IMPL("keymap.H")
 #include <keymap.H>
 #include <proctable.H>
@@ -49,7 +40,7 @@ ATK_IMPL("keymap.H")
 ATKdefineRegistry(keymap, ATK, NULL);
 struct keymap_fulltable *NewFullTable();
 static void DoInitialize(class keymap  *self, boolean  sparsep);
-static boolean bindKey(class keymap  *self,unsigned char *keys,ATK   *obj,long  rock,enum keymap_Types  type);
+static boolean bindKey(class keymap  *self,const unsigned char *keys,ATK   *obj,long  rock,enum keymap_Types  type);
 static void ExpandTable(class keymap  *self);
 
 
@@ -116,12 +107,12 @@ keymap::~keymap()
     }
 }
 
-static boolean bindKey(class keymap  *self,unsigned char *keys,ATK   *obj,long  rock,enum keymap_Types  type)
+static boolean bindKey(class keymap  *self,const unsigned char *keys,ATK   *obj,long  rock,enum keymap_Types  type)
                     {
     enum keymap_Types e;
-    register unsigned char *p;
+    const unsigned char *p;
     class keymap *km1, *km2;
-    register unsigned char c;
+    unsigned char c;
 
     for (p = keys, km1 = self; p[1] != 0; ++p) {
 	c = (*p == 128)? 0 : *p; /*  allows nulls in string to be represented by 128 */
@@ -142,7 +133,7 @@ static boolean bindKey(class keymap  *self,unsigned char *keys,ATK   *obj,long  
     return TRUE;
 }
 
-boolean keymap::BindToKey(char  *keys, struct proctable_Entry  *pe, long  rock)
+boolean keymap::BindToKey(const char  *keys, const struct proctable_Entry  *pe, long  rock)
                 {
 
     if (keys == NULL || *keys == 0)
@@ -151,9 +142,9 @@ boolean keymap::BindToKey(char  *keys, struct proctable_Entry  *pe, long  rock)
     return TRUE;
 }
 
-void keymap::RemoveBinding(char  *keys)
+void keymap::RemoveBinding(const char  *keys)
 {
-    bindKey(this,(unsigned char *)keys,NULL,0,keymap_Empty);
+    bindKey(this,(const unsigned char *)keys,NULL,0,keymap_Empty);
 }
 
 static void ExpandTable(class keymap  *self)

@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-	char *tlex_gentlex_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/syntax/tlex/RCS/gentlex.C,v 1.2 1993/05/18 17:24:33 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
@@ -51,10 +47,8 @@ int MaxSeverity = 0;	/* maximum severity passed to Error() */
 int CurrSym = 0;	/* integer portion of next symbol from GenSym() */
 
 
-	#ifndef NORCSID
-#endif
-void Error(int  severity, char  *msg);
-void ErrorA(int  severity, char  *msg, char  *Arg);
+void Error(int  severity, const char  *msg);
+void ErrorA(int  severity, const char  *msg, const char  *Arg);
 char * GenSym();
 char * freeze(char  *sx , char  *ex);
 char * Escapify(char  *s, int  *plen);
@@ -63,7 +57,7 @@ int main(int  argc, char  **args);
 
 
 void
-Error(int  severity, char  *msg)
+Error(int  severity, const char  *msg)
 		{
 	if (severity > MaxSeverity)
 		MaxSeverity = severity;
@@ -72,7 +66,7 @@ Error(int  severity, char  *msg)
 }
 
 	void
-ErrorA(int  severity, char  *msg, char  *Arg)
+ErrorA(int  severity, const char  *msg, const char  *Arg)
 			{
 	int n = strlen(Arg);
 	while(n > 0 && isspace(Arg[n-1])) n--;
@@ -94,7 +88,7 @@ GenSym()
 	create a malloced version of the text	*sx...*(ex-1)
 */
 	char *
-freeze(char  *sx , char  *ex)
+freeze(const char  *sx , const char  *ex)
 	{
 	char *v;
 	int len = (ex == NULL) ? strlen(sx) : ex-sx;
@@ -109,7 +103,7 @@ freeze(char  *sx , char  *ex)
 	if plen is not NULL, set *plen to length of returned string
 */
 	char *
-Escapify(char  *s, int  *plen)
+Escapify(const char  *s, int  *plen)
 		{
 	static char escaped[200];
 	char *ex;

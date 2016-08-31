@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/textrefv.C,v 3.2 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("textrefv.H")
 #include <textref.H>
 #include <textrefv.H>
@@ -58,8 +49,6 @@ ATK_IMPL("textrefv.H")
 
 
 ATKdefineRegistry(textrefv, fnotev, textrefv::InitializeClass);
-#ifndef NORCSID
-#endif
 static boolean findtag(class textrefv  *self,class text  *text,long  pos,class environment  *env);
 
 
@@ -81,7 +70,7 @@ static boolean findtag(class textrefv  *self,class text  *text,long  pos,class e
     }
     return FALSE;
 }
-void textrefv::Print(FILE  *f, char  *process, char  *final, int  toplevel)
+void textrefv::Print(FILE  *f, const char  *process, const char  *final, int  toplevel)
 {
     class textref *ref;
     char buf[256];

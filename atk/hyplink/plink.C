@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/hyplink/RCS/plink.C,v 1.2 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 ATK_IMPL("plink.H")
 #include <plink.H>
 
@@ -44,7 +38,7 @@ ATK_IMPL("plink.H")
 
 
 ATKdefineRegistry(plink, link, NULL);
-static void WriteLine(FILE  *f, char  *l);
+static void WriteLine(FILE  *f, const char  *l);
 static char *GlomStrings(char  *s , char  *t);
 static char *ReadLine(FILE  *f);
 
@@ -144,7 +138,7 @@ long plink::Read(FILE  *fp, long  id)
     return dataobject_NOREADERROR;
 }
 
-static void WriteLine(FILE  *f, char  *l)
+static void WriteLine(FILE  *f, const char  *l)
 {
     /* Output a single line onto the data stream, quoting back slashes and staying within line length limits. Warning:  this routine wasn't meant to handle embedded newlines.*/
 

@@ -25,16 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/toez/RCS/toezapp.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * app for toez
  *
@@ -60,6 +50,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  *	If no output file is given, stdout is assumed.
  */
 
+#include <andrewos.h>
 ATK_IMPL("toezapp.H")
 #include <stdio.h>
 #include <toezapp.H>
@@ -68,8 +59,6 @@ ATK_IMPL("toezapp.H")
 
 	
 ATKdefineRegistry(toezapp, application, NULL);
-#ifndef NORCSID
-#endif
 static void show_usage(class toezapp  *self);
 static void InsistOn(const char  *arg , const char  *assumed);
 static void AnalyzeInput(class toezapp  *self);
@@ -110,16 +99,16 @@ show_usage(class toezapp  *self)
 	fprintf(stderr,
 		"Usage: toez [-help] [-scribe | [[-nroff | -troff][-m macro file][-H]]] [-o outputfile] [-] [file]\n");
 	fprintf(stderr,
-"	-help: show this usage statement\n\
-	-scribe: assume Scribe input (default for .mss)\n\
-	-nroff: pretend to be nroff (default for .n)\n\
-	-troff: pretend to be troff (default for .t)\n\
-	-m file: read in /usr/lib/tmac/tmac.file as a macro file\n\
-	-H: format for use with the ATK Help system.  Crush initial blank space\n\
-	-o file: send output file to 'file'.  (default is .d)\n\
-	-: use standard input as the file input\n\
-	file: read in this files\n\
-");
+"	-help: show this usage statement\n"
+"	-scribe: assume Scribe input (default for .mss)\n"
+"	-nroff: pretend to be nroff (default for .n)\n"
+"	-troff: pretend to be troff (default for .t)\n"
+"	-m file: read in /usr/lib/tmac/tmac.file as a macro file\n"
+"	-H: format for use with the ATK Help system.  Crush initial blank space\n"
+"	-o file: send output file to 'file'.  (default is .d)\n"
+"	-: use standard input as the file input\n"
+"	file: read in this files\n"
+);
 }
 
 	static void
@@ -171,7 +160,7 @@ toezapp::ParseArgs(int  argc,const char  **argv)
 			case 'm':
 				GETARGSTR(temp);
 				sprintf(temp2,"/usr/lib/tmac/tmac.%s",temp);
-				this->macrofile = StrDup(temp2);
+				this->macrofile = strdup(temp2);
 				break;
 			case 'o':
 				GETARGSTR(this->outputfile);

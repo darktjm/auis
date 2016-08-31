@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/captions.C,v 1.11 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
 #include <textview.H>
 #include <cui.h>
 #include <fdphack.h>
@@ -101,7 +92,7 @@ extern proctable_fptr captextv_PreviousLineCmd,
 
 class keymap *captions_privkeymap;
 class menulist *captions_privmenulist;
-static char *ForwardString = "---------- Forwarded message begins here ----------";
+static const char ForwardString[] = "---------- Forwarded message begins here ----------";
   
 extern int captions_InsertCaptions(class captions  *ci, char  *shortname , char  *dname , char  *StartTime, Boolean  ShowAll);
 extern void ClassifyMarkedByName(class captions  *self, char  *NameGiven);
@@ -110,7 +101,7 @@ extern void OneTimeInitKeyMenus(struct ATKregistryEntry   *ci);
 void captions::ShowHelp()
 {
     int doprefix = 0;
-    char *motdfile;
+    const char *motdfile;
     FILE *fp;
 
     (this->CaptText)->ClearCompletely();
@@ -222,7 +213,8 @@ void captions::SimulateClick(boolean  IsLeftClick)
 	class textview *tv = (class textview *)this;
 	class text *t = (class text *) (this)->GetDataObject();
 	long dot, len, tmpdot, retlen;
-	char *str, *tp, BodyBuf[1000];
+	char *str, BodyBuf[1000];
+	const char *tp;
 	struct SearchPattern *Pattern = NULL;
 	class text *bod;
 
@@ -349,12 +341,12 @@ static long WhatIsAt(class captions  *ci, long  n, long  d)
     return(pos);
 }
 
-static struct scrollfns capScrollInterface = {(scroll_getinfofptr)GetInfo, (scroll_setframefptr)SetFrame, NULL, (scroll_whatfptr)WhatIsAt};
+static const struct scrollfns capScrollInterface = {(scroll_getinfofptr)GetInfo, (scroll_setframefptr)SetFrame, NULL, (scroll_whatfptr)WhatIsAt};
 
-char * captions::GetInterface(char  *interfaceName) 
+const void * captions::GetInterface(const char  *interfaceName)
 {
     if (strcmp(interfaceName, "scroll,vertical") == 0)
-        return (char *) &capScrollInterface;
+        return &capScrollInterface;
     return NULL;
 }
 
@@ -952,7 +944,7 @@ void RSearchTextview(class textview  *tv)
 
 void bcopyfromback(char  *from , char  *to, int  length)
 {
-    register char *f, *t;
+    char *f, *t;
 
     f = from + length-1;
     t = to+length-1;
@@ -965,7 +957,7 @@ void bcopyfromback(char  *from , char  *to, int  length)
 /* The next two used to be defines, but things are getting tight again... */
 static int PADTOCOLUMNA = 11;
 static int PADTOCOLUMNB = 45;
-static char *LOTSASPACE="                                                                ";
+static const char LOTSASPACE[]="                                                                ";
 
 /* The next call returns a pointer to a static area, overwritten
 	on each call */
@@ -1032,7 +1024,8 @@ void MakeCaptionLine(char  **Buf , int  cuid , char  *RawSnapshot, int  Fixed , 
 
 void captions::SearchAll()
 {
-    char shortname[1+MAXPATHLEN], *tp, ErrorText[256];
+    char shortname[1+MAXPATHLEN], ErrorText[256];
+    const char *tp;
     struct SearchPattern *Pattern = NULL;
     int pos, numfound, len, orgpos, whichcaption, oldpos;
     class environment *envdum;
@@ -1179,7 +1172,7 @@ void captions::MarkRangeOfMessages()
 
 static char LastClassification[1+MAXPATHLEN] = AMS_DEFAULTMAILDIR;
 
-char *captions::GetLastClassification()
+const char *captions::GetLastClassification()
 {
     if ((this->ShortName) && !strcmp(LastClassification, this->ShortName)) {
 	return("");
@@ -1272,7 +1265,7 @@ void captions::MarkCurrent()
     message::DisplayString(NULL, 10, ErrorText);
 }
 
-void captions::Redisplay(int  Mode, char  *contenttype)
+void captions::Redisplay(int  Mode, const char  *contenttype)
 {
     int dot, top, len;
     class t822view *bod;
@@ -1462,7 +1455,7 @@ captions::captions()
 
     this->CaptText = new text;
     (this)->SetDataObject( this->CaptText);
-    this->textscrollinterface = (struct scrollfns *) (this)->messages::GetInterface( "scroll,vertical");
+    this->textscrollinterface = (const struct scrollfns *) (this)->messages::GetInterface( "scroll,vertical");
 
     this->ActiveCaptionStyle = new style;
     this->ActiveDeletedStyle = new style;

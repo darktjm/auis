@@ -23,10 +23,6 @@
 #include <table.H>
 #include <htablev.H>
 
-#ifndef NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/htablev.C,v 1.1 1996/11/07 17:46:47 robr Exp $";
-#endif
-
 ATKdefineRegistryNoInit(htablev, spread);
 
 htablev::htablev() {

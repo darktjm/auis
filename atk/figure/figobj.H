@@ -23,8 +23,6 @@ ATK_INTER
 // WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 // 
 //  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figobj.H,v 3.6 1995/03/20 20:22:03 Zarf Stab74 $
 */
 
 #include <rect.h>
@@ -86,7 +84,7 @@ class figobj : public  dataobject  {
 
       virtual void WriteBody(FILE *fp);
       virtual long ReadBody(FILE *file, boolean recompute)  ;
-      virtual char * ToolName(class figtoolview *v, long rock)  ;
+      virtual const char * ToolName(class figtoolview *v, long rock)  ;
       virtual void ToolModify(class figtoolview *v, long rock, boolean firsttime); 
       virtual class figobj * Instantiate(class figtoolview *v, long rock)  ;  
 
@@ -94,7 +92,7 @@ class figobj : public  dataobject  {
       virtual void Sketch(class figview *v);
       virtual void DrawAttachments(class figview *v);
       virtual void ClearAttachments();
-      virtual void PrintObject(class figview *v, FILE *file, char *prefix, boolean newstyle);
+      virtual void PrintObject(class figview *v, FILE *file, const char *prefix, boolean newstyle);
       virtual void Select(class figview *v);
       virtual void SetNumHandles(long num);
       virtual enum figobj_Status Build(class figview *v, enum view_MouseAction action, long x, long y, long clicks)  ;

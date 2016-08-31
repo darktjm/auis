@@ -58,7 +58,7 @@ public:
 	 void WantInputFocus(/* struct lookzview *self, */ class view *child);
 	 void ReceiveInputFocus(/* struct lookzview *self */);
 	 void LoseInputFocus(/* struct lookzview *self */);
-	 void Print(/* struct lookzview *self, */ FILE *file, char *processor, char *finalFormat, boolean topLevel);
+	 void Print(/* struct lookzview *self, */ FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
 	 void ObservedChanged(/* struct lookzview *self, */ class observable *dobj, long status);
 	 class view * GetApplicationLayer(/* struct lookzview *self */)  ;
 	 void LinkTree(/* struct lookzview *self, */ class view *parent);

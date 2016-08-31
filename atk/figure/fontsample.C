@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-char *fontsamp_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/fontsample.C,v 3.2 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("fontsample.H")
 #include <fontsample.H>
@@ -37,8 +33,6 @@ ATK_IMPL("fontsample.H")
 
 
 ATKdefineRegistry(fontsample, view, fontsample::InitializeClass);
-#ifndef NORCSID
-#endif
 static void RedrawView(class fontsample  *self);
 
 

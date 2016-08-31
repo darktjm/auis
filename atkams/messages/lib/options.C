@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/options.C,v 1.5 1994/08/11 03:05:07 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include <textview.H>
 #include <stdio.h>
 #include <errprntf.h>
@@ -64,12 +55,10 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 ATKdefineRegistry(options, ATK, NULL);
-#ifndef NORCSID
-#endif
 void ExpLevelHit(ATK * self, class value  *val, long  which , long  hisrock);
 void IntegerHit(ATK * self, class value  *val, long  which , long  hisrock);
 void ButtonHit(ATK * self, class value  *val, long  which , long  hisrock);
-int saveprofilestring(char  *prog , char  *pref , char  *val, int  warn);
+int saveprofilestring(const char  *prog , const char  *pref , const char  *val, int  warn);
 int CountCommas(char  *s);
 
 #define PREF_ERR 0
@@ -89,7 +78,7 @@ int CountCommas(char  *s);
 #define OT_INTEGER_CKP 5
 #define OT_INTEGER_MAXTOTALCLASSMENU 6
 
-static char *IntegerMessages[] = {
+static const char * const IntegerMessages[] = {
     "Changed the maximum size of the File Into... menu to %d.",
     "Changed the default font size to %d.",
     "Changed the number of pixels for the folders view to %d.",
@@ -107,12 +96,12 @@ int IntegerDefaults[] = {8, 12, 8, 50, 12, 1, 25};
 #define OT_SPECIAL_KEYHEADS 3
 
 struct OptionChoice {
-    char *OptionName;
+    const char *OptionName;
     int OptType, OptParm, IsStartup;
-    char *HelpText;
+    const char *HelpText;
 };
 
-static struct OptionChoice Options[] = {
+static const struct OptionChoice Options[] = {
 	{"Keystroke commands", OT_EXPLEVEL, EXP_KEYSTROKES, 0, "If you turn on keystroke commands, Messages will make a wide variety of its features available by typing single-letter commands at the keyboard.  See the help on 'messages-keys' for a listing of the keystroke commands available."},
 	{"Marking of messages", OT_EXPLEVEL, EXP_MARKING, 0, "If you turn on marking of messages, then Messages will allow you to mark a set of messages and act on them as a group.  You mark messages by clicking on the captions with the right mouse button once you have turned on message marking.  When you have marked messages, two new menu cards ('Marked Messages' and 'Send/File Marked') appear, offering you several ways to act on all the messages at once."},
 	{"Basic folder menus/features", OT_EXPLEVEL, EXP_FILEINTO, 0, "The basic menus include 'Create Folder', 'Rename folder', 'Delete Folder', and 'Expose/Hide Personal Folders'."},
@@ -187,7 +176,8 @@ void ExpLevelHit(ATK * self, class value  *val, long  which , long  hisrock)
 
 void IntegerHit(ATK * self, class value  *val, long  which , long  hisrock)
 {
-    char Msg[1000], AnsBuf[25], *pref;
+    char Msg[1000], AnsBuf[25];
+    const char *pref;
     int parm, numval;
 
     if (hisrock == value_OBJECTDESTROYED) return;
@@ -234,8 +224,8 @@ void IntegerHit(ATK * self, class value  *val, long  which , long  hisrock)
    
 void ButtonHit(ATK * self, class value  *val, long  which , long  hisrock)
 {
-    char Msg[1000], AnsBuf[5000], *pref, *prompt = "bogus";
-    const char *defaultans = "bogus";
+    char Msg[1000], AnsBuf[5000];
+    const char *pref, *prompt = "bogus", *defaultans = "bogus";
     int parm, numans;
 
     if (hisrock == value_OBJECTDESTROYED) return;
@@ -286,13 +276,13 @@ void ButtonHit(ATK * self, class value  *val, long  which , long  hisrock)
 
 void options::SetMessagesOptions(class t822view  *bv) 
 {
-    static char *Intro1 = "Setting Messages Options";
-    static char *Intro2 = "\nThe Messages program has a large number of options that you can alter to tailor the program's behavior to suit your needs.  A list of the options appears in the caption area, above.  Clicking on an option in the list above will scroll in this area to show you that option.\n\nTo set an option, you need to either left click a switch On or Off, change a slider value by dragging the slider or by clicking on the slider with the left button to increase the value or the right to decrease the value, or click on the Alter button which will prompt you to change the option's value.\n";
+    static const char Intro1[] = "Setting Messages Options";
+    static const char Intro2[] = "\nThe Messages program has a large number of options that you can alter to tailor the program's behavior to suit your needs.  A list of the options appears in the caption area, above.  Clicking on an option in the list above will scroll in this area to show you that option.\n\nTo set an option, you need to either left click a switch On or Off, change a slider value by dragging the slider or by clicking on the slider with the left button to increase the value or the right to decrease the value, or click on the Alter button which will prompt you to change the option's value.\n";
     int i, tpos = 0, len, def, cappos = 0, scaledown;
     int envPos, envLen;
     class value *v;
     static class style *MajorHeadingStyle = NULL, *CapStyle = NULL;
-    char *pref;
+    const char *pref;
     class textview *tv = (class textview *) bv;
     class text *t = (class text *) (bv)->GetDataObject();
     class captions *cap = (bv)->GetCaptions();
@@ -444,7 +434,7 @@ void options::SetMessagesOptions(class t822view  *bv)
     ams::WaitCursor(FALSE);
 }
 
-int saveprofilestring(char  *prog , char  *pref , char  *val, int  warn)
+int saveprofilestring(const char  *prog , const char  *pref , const char  *val, int  warn)
 {
     char ErrorText[256];
     int code;

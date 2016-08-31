@@ -21,15 +21,6 @@
 */
 
 #include <andrewos.h> /* sys/types.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/recsearch.C,v 1.5 1994/12/13 20:35:03 rr2b Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("recsearch.H")
 
 #include <im.H>
@@ -73,7 +64,9 @@ boolean recsearch::InitializeClass()
 
 static void DoRecSearch(class im  *self, class view *start, char *givenstr)
 {
-    char defSrchString[SRCHSTRLEN], *tp, messageBuf[120], *prompt;
+    char defSrchString[SRCHSTRLEN], messageBuf[120];
+    const char *tp;
+    const char *prompt;
     int pos = 0, gf;
     boolean defaultExists = FALSE;
     boolean res;

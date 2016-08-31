@@ -42,11 +42,6 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/gdev/RCS/gdev.c,v 1.4 1993/09/30 19:07:41 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 
 #include "gdrv.h"
@@ -263,7 +258,7 @@ int
 GDEVinit(device)
 char *device;
 {
-	register i;
+	int i;
 	char *getenv(), *p;
 	struct dev *d;
 
@@ -489,8 +484,8 @@ static int
 cbufgetc(classes)
 Cclass classes;
 {
-	register Cbuf *cp;
-	register int r;
+	Cbuf *cp;
+	int r;
 
 	/* skip over prevously returned chars */
 	for(; Chead->cclass == C_RETURNED && Chead != Ctail; nextcp(Chead)) 
@@ -498,7 +493,7 @@ Cclass classes;
 
 	if(playfile != NULL) {
 		static void cbufputc();
-		register int c;
+		int c;
 		Cclass class;
 		do {
 			if((c = getc(playfile)) == EOF ||
@@ -559,8 +554,8 @@ static
 cbufputi(i)
 int i;
 {
-	register char *p = (char *) &i;
-	register int n = sizeof(i);
+	char *p = (char *) &i;
+	int n = sizeof(i);
 
 	while(--n >= 0)
 		cbufputc(*p++, C_INT);
@@ -570,8 +565,8 @@ static int
 cbufgeti()
 {
 	int i = 0;
-	register char *p = (char *) &i;
-	register int n = sizeof(i);
+	char *p = (char *) &i;
+	int n = sizeof(i);
 	int c;
 
 	while(--n >= 0) {
@@ -589,8 +584,8 @@ static
 cbufputd(d)
 double d;
 {
-	register char *p = (char *) &d;
-	register int i = sizeof(d);
+	char *p = (char *) &d;
+	int i = sizeof(d);
 
 	while(--i >= 0)
 		cbufputc(*p++, C_DOUBLE);
@@ -600,8 +595,8 @@ static double
 cbufgetd()
 {
 	double d = 0;
-	register char *p = (char *) &d;
-	register int i = sizeof(d);
+	char *p = (char *) &d;
+	int i = sizeof(d);
 	int c;
 
 	while(--i >= 0) {
@@ -631,7 +626,7 @@ static char *
 scopy(s)
 char *s;
 {
-	register char *p = malloc((unsigned) strlen(s) + 1);
+	char *p = malloc((unsigned) strlen(s) + 1);
 	if(p == NULL)
 		GDEVerror("scopy");
 	(void) strcpy(p, s);
@@ -677,11 +672,11 @@ static Alist _makenew();
 
 static Alist
 _lookupint(alistp, tag, enterflag)
-register Alist *alistp;
+Alist *alistp;
 int tag;
 int enterflag;	/* if TRUE, make new entry if tag not found */
 {
-	register Alist l;
+	Alist l;
 
 	for(l = *alistp; l != NULL; l = l->next)
 		if(l->tag == tag)
@@ -692,11 +687,11 @@ int enterflag;	/* if TRUE, make new entry if tag not found */
 
 static Alist
 _lookupstring(alistp, s, enterflag)
-register Alist *alistp;
+Alist *alistp;
 char *s;
 int enterflag;	/* if TRUE, make new entry if tag not found */
 {
-	register Alist l;
+	Alist l;
 
 	for(l = *alistp; l != NULL; l = l->next)
 		if( ! strcmp(l->data1.string, s) )
@@ -716,7 +711,7 @@ _makenew(alistp, enterflag)
 int enterflag;
 Alist *alistp;
 {
-	register Alist newl;
+	Alist newl;
 
 	if( ! enterflag)
 		return NULL;
@@ -741,7 +736,7 @@ char *s;
 {
 	static int uid = 0;
 
-	register Alist a = LookupString(string_numbers, s, TRUE);
+	Alist a = LookupString(string_numbers, s, TRUE);
 	if(a->data1.string == NULL)
 		a->data1.string = scopy(s), a->tag = ++uid;
 	return a->tag;
@@ -752,7 +747,7 @@ static char *
 IntToString(i)
 int i;
 {
-	register Alist a = LookupInt(string_numbers, i, FALSE);
+	Alist a = LookupInt(string_numbers, i, FALSE);
 	if(a == NULL)
 		return NULL;
 	return a->data1.string;
@@ -767,7 +762,7 @@ ReadStdin()
 {
 	char buf[512];
 
-	register int i, n;
+	int i, n;
 	n = read(STDIN_FD, buf, 512);
 	if(n < 0)
 		perror("ReadStdin");
@@ -787,7 +782,7 @@ ReadStdin()
 static int
 GDEVpoll()
 {
-	register Alist a;
+	Alist a;
 	for(a = fd_functions; a != NULL; a = a->next)
 		if(a->tag == FD_POLL && a->data1.function) {
 			(*a->data1.function)();
@@ -842,7 +837,7 @@ static
 GDEVselect(waitflag)
 int waitflag;
 {
-	register Alist a;
+	Alist a;
 	int i, n;
 	fd_set rfds;
 	int maxfd;
@@ -890,7 +885,7 @@ bits(fds)
 fd_set fds;
 {
 	static char buf[300];
-	register int i;
+	int i;
 	sprintf(buf, "{");
 	for(i = 0; i < FD_SETSIZE; i++) {
 		if(FD_ISSET(i, &fds))
@@ -906,7 +901,7 @@ GDRVfdnotify(fd, function)
 int fd;
 Function function;
 {
-	register Alist a = LookupInt(fd_functions, fd, TRUE);
+	Alist a = LookupInt(fd_functions, fd, TRUE);
 	a->tag = fd;
 	a->data1.function = function;
 }
@@ -915,7 +910,7 @@ static int
 GDEVgetc(cclass)
 Cclass cclass;
 {
-	register int c;
+	int c;
 
 	if((c = cbufgetc(cclass)) != C_NOCHARSPENDING)
 		return c;
@@ -960,8 +955,8 @@ char *
 GDEVgets(line)
 char *line;
 {
-	register int c;
-	register char *p = line;
+	int c;
+	char *p = line;
 
 	while((c = GDEVgetc(C_TYPED)) != '\n' && c != EOF)
 		*p++ = c;
@@ -977,7 +972,7 @@ int
 GDEVplay(file)
 char *file;
 {
-	register int c;
+	int c;
 
 	if(playfile != NULL)
 		fclose(playfile);
@@ -1023,7 +1018,7 @@ void
 GDEVmenuitem(label, retval)
 char *label, *retval;
 {
-	register Alist item, rv;
+	Alist item, rv;
 	int found = TRUE;
 
 	item = LookupString(CurOut->menu_items, label, TRUE);
@@ -1058,8 +1053,8 @@ GDRVmenu(w, retval)
 int w;
 int retval;
 {
-	register Alist rv;
-	register struct window *gwin = Gwindow(w, "GDRVmenu");
+	Alist rv;
+	struct window *gwin = Gwindow(w, "GDRVmenu");
 
 	if(gdevdebug)
 		printf("GDRVmenu([win %d] %d)\n", w, retval);
@@ -1078,7 +1073,7 @@ GDEVmouse(event, retval)
 int event;
 char *retval;
 {
-	register Alist rv;
+	Alist rv;
 
 	rv = LookupInt(CurOut->mouse_retvals, event, TRUE);
 	if(rv->data1.string != NULL)	/* retval for item exists already */
@@ -1100,8 +1095,8 @@ int event;
 int x, y;
 int thetime;
 {
-	register Alist rv;
-	register struct window *gwin = Gwindow(w, "GDRVmouse");
+	Alist rv;
+	struct window *gwin = Gwindow(w, "GDRVmouse");
 
 	if(gdevdebug)
 		printf("GDRVmouse([win %d] %s, %d, %d[%d])\n", 
@@ -1166,7 +1161,7 @@ void
 GDRVrefresh(w)
 int w;
 {
-	register struct window *gwin = Gwindow(w, "GDRVrefresh");
+	struct window *gwin = Gwindow(w, "GDRVrefresh");
 
 	/* If we wanted to we could eliminate duplicate refreshes */
 	if(gdevdebug)
@@ -1196,8 +1191,8 @@ char *retval;
 /*----------------- variables ------------------------------*/
 
 #define GDEVset(elem) \
-	register int v = StringToInt(variable);  			\
-	register Alist a; 						\
+	int v = StringToInt(variable);  			\
+	Alist a; 						\
 	a = LookupInt(CurOut->dev->variable_functions, v, FALSE);  	\
 	if(a && a->data1.function)					\
 	  return (* a->data1.function)(CurOut->handle, variable,	\
@@ -1235,9 +1230,9 @@ Function function;
 Pointer arg;
 {
 	int i = StringToInt(varname);
-	register struct window *gwin = Gwindow(w, "GDRVvar_fcn");
+	struct window *gwin = Gwindow(w, "GDRVvar_fcn");
 
-	register Alist a = LookupInt(gwin->dev->variable_functions, i, TRUE); 
+	Alist a = LookupInt(gwin->dev->variable_functions, i, TRUE); 
 	a->tag = i;
 	a->data1.function = function;
 	a->data2 = arg;
@@ -1250,8 +1245,8 @@ char *varname;
 Pointer address;
 {
 	int i = StringToInt(varname);
-	register struct window *gwin = Gwindow(w, "GDRVvar_fcn");
-	register Alist a = LookupInt(gwin->dev->variable_pointers, i, TRUE); 
+	struct window *gwin = Gwindow(w, "GDRVvar_fcn");
+	Alist a = LookupInt(gwin->dev->variable_pointers, i, TRUE); 
 
 	a->tag = i;
 	a->data1.pointer = address;
@@ -1398,7 +1393,7 @@ hardcopydone()
 hardcopyinit()
 {
 	static called = 0;
-	register char *p;
+	char *p;
 	char d[100];
 
 	if(called) return;	/* avoid infinite recursion */

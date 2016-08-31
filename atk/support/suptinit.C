@@ -25,17 +25,6 @@
 //  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/suptinit.C,v 1.2 1993/04/26 20:54:27 rr2b Stab74 $";
-#endif
-
-
- 
-
-
-
-
 #define class_StaticEntriesOnly
 
 #include <andrewos.h>
@@ -51,8 +40,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RC
 #include <tree23int.H>
 #include <viewref.H>
 
-#ifndef NORCSID
-#endif
 int support_Initialize();
 
 

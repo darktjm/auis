@@ -27,9 +27,6 @@
 # Copyright 1987, 1989 MIT Student Information Processing Board
 # For copyright info, see mitcopyright.h.
 #
-#	$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/com_err/RCS/Imakefile,v 1.5 1994/08/15 18:06:57 rr2b Stab74 $
-#	$Locker:  $
-#
 
 #ifdef ULTRIX40
 DEFINES=-DULTRIX_40

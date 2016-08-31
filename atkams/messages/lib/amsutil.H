@@ -128,9 +128,9 @@ public:
 	static boolean InitializeClass();
 	static boolean atk_inited;
 
-      static char ** GetKeyHeadsArray()  ;
-      static char ** ParseKeyHeaders()  ;
-      static int setprofilestring(char *prog, char *pref, char *val)  ;
+      static const char * const * GetKeyHeadsArray()  ;
+      static const char ** ParseKeyHeaders()  ;
+      static int setprofilestring(const char *prog, const char *pref, const char *val)  ;
       static int GetOptBit(int opt)  ;
       static void SetOptBit(int opt, int val);
       static void BuildOptionPreference(char *buf);
@@ -138,7 +138,7 @@ public:
       static void SetPermOptBit(int opt, int val);
       static int GetOptMaskBit(int opt)  ;
       static void SetOptMaskBit(int opt, int val);
-      static void BreakDownContentTypeField(char *override, char *fmttype, int fmttypelen, char *fmtvers, int fmtverslen, char *fmtresources, int fmtresourceslen);
+      static void BreakDownContentTypeField(const char *override, char *fmttype, int fmttypelen, char *fmtvers, int fmtverslen, char *fmtresources, int fmtresourceslen);
       static char ** BreakDownResourcesIntoArray(char *fmtresources)  ;
       static int lc2strncmp(const char *s1, const char *s2, int len)  ;
       /* The above were what was needed for ezprinting (used by text822) */
@@ -149,8 +149,8 @@ public:
       static long conv64tolong(char *s64)  ;
       static void ReduceWhiteSpace(char *s);
       static void LowerStringInPlace(char *s, int slen);
-      static int debug_open(char *name, int flags, int mode)  ;
-      static FILE * debug_fopen(char *name, char *mode)  ;
+      static int debug_open(const char *name, int flags, int mode)  ;
+      static FILE * debug_fopen(const char *name, const char *mode)  ;
       static int debug_close(int fd)  ;
       static int debug_vclose(int fd)  ;
       static int debug_fclose(FILE *fp)  ;

@@ -28,8 +28,6 @@
 /*
  * Response codes for NNTP server
  *
- * @(#)respcode.h	1.6	(Berkeley) 2/6/86
- *
  * First digit:
  *
  *	1xx	Informative message

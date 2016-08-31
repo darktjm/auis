@@ -23,11 +23,6 @@
 
 #include <andrewos.h>
 ATK_IMPL("wbuttonv.H")
-
-#ifndef NORCSID
-static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/wbuttonv.C,v 1.2 1996/07/26 21:38:21 robr Exp $";
-#endif
-
 #include <buttonV.H>
 #include <wbuttonv.H>
 
@@ -68,7 +63,7 @@ wbuttonv::FullUpdate( enum view_UpdateType  type,
 }
 
 	void 
-wbuttonv::SetLabel(char  *label)  {
+wbuttonv::SetLabel(const char  *label)  {
 	if (this->wlabel) free(this->wlabel);
 	if (label) {
 		this->wlabel = (char *)malloc(strlen(label) + 1);

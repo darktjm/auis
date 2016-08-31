@@ -25,15 +25,9 @@
  *  $
 */
 
-#include <andrewos.h> /* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/scan822.c,v 2.12 1994/06/09 18:17:42 rr2b Stab74 $";
-#endif
-
 /* scan822.c: routines to parse pieces of header lines. */
 
+#include <andrewos.h> /* strings.h */
 #include <stdio.h>
 #include <ctype.h>
 
@@ -120,7 +114,7 @@ char **Line, *LineEnd, *RsltBuf; int sizeRsltBuf;
     If the buffer size is exceeded, or there's a lexical error, return 0.
  */
     int CommentCount, Quoted;
-    register char *Scan = *Line;
+    char *Scan = *Line;
 
     tokPtr = RsltBuf; *tokPtr = '\0';
     tokCount = 0;

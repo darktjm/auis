@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/clicklistV.C,v 1.7 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
 ATK_IMPL("clicklistV.H")
 
 #include <lpair.H>
@@ -47,13 +39,11 @@ ATK_IMPL("clicklistV.H")
 
 
 ATKdefineRegistry(clicklistV, stringV, NULL);
-#ifndef NORCSID
-#endif
 static void handleclicks(class clicklistV  *self,class cltextview  *cv,long  *position, long  *numberOfClicks, enum view_MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type);
 #ifdef USEGETCOUNT
 static void getcount(char  **str,long  size);
 #endif /* USEGETCOUNT */
-static void SetArray(class clicklistV  *self,char  **str,long  size);
+static void SetArray(class clicklistV  *self,const char  * const *str,long  size);
 
 
 static void handleclicks(class clicklistV  *self,class cltextview  *cv,long  *position, long  *numberOfClicks, enum view_MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type)
@@ -102,15 +92,15 @@ static void handleclicks(class clicklistV  *self,class cltextview  *cv,long  *po
 #ifdef USEGETCOUNT
 static void getcount(char  **str,long  size)
 {
-    register char *c;
-    register long cnt = 0;
+    char *c;
+    long cnt = 0;
     for(c = *str; size > 0; size--){
 	while(*c) cnt += (long) *c++;
     }
     return cnt;
 }
 #endif /* USEGETCOUNT */
-static void SetArray(class clicklistV  *self,char  **str,long  size)
+static void SetArray(class clicklistV  *self,const char * const *str,long  size)
 {
     class text *txt;
     long i,end,sl,textchanged;
@@ -155,7 +145,7 @@ static void SetArray(class clicklistV  *self,char  **str,long  size)
 void clicklistV::ObservedChanged(class observable  *changed,long  value)
 {
     class value *val ;
-    char **arr;
+    const char * const *arr;
     long size;
     val = (this)->Value();
     if(value == observable_OBJECTDESTROYED){

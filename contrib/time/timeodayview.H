@@ -49,7 +49,7 @@ public:
    void FullUpdate(enum view_UpdateType type, long left, long top, long width, long height);
    void Update();
    class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
-   void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
+   void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
    view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long * desired_width, long * desired_height)  ;
    void GetOrigin(long width, long height, long * originX, long * originY);
    void PostMenus(class menulist *ml);

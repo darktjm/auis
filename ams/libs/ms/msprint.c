@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/msprint.c,v 2.33 1993/10/06 18:32:15 rr2b Stab74 $";
-#endif
-
 #include <stdio.h>
 #include <sys/stat.h>
 #include <ms.h>
@@ -110,7 +104,7 @@ int flags;
     return(0);
 }
 
-static char SEPARATOR[] = "\n____________________________________________________________\n";
+static const char SEPARATOR[] = "\n____________________________________________________________\n";
 
 /* The following routine used to be needed for printing messages; it is still needed for generating reply templates, in reply.c */
 
@@ -284,7 +278,7 @@ static RotBuf13(buf, ct)
 char *buf;
 int ct;
 {
-    register char *s = buf;
+    char *s = buf;
     while (*s) {
 	if ((*s >= 0x41 && *s <= 0x5a) || (*s >= 0x61 && *s <= 0x7a)) {
 	    *s = (((((*s -1 ) & 0X1F) + 13) % 26) + 1) | (*s & 0XE0);

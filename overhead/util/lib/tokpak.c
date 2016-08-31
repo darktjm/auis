@@ -25,18 +25,12 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/tokpak.c,v 2.27 1995/03/18 17:31:01 rr2b Stab74 $";
-#endif
-
 /*
 		tokpak.c -- Subroutines for getting and packing
 			Venus tokens into datagrams.
 */
 
+#include <andrewos.h>
 #include <util.h> 
 
 #include <stdio.h>
@@ -62,7 +56,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 #ifdef AFS_ENV
 static int PackKTC(struct ktc_principal *aserv, struct ktc_token *atok, struct ktc_principal *acli, char *where, int debug, int IsPrim)
 {
-    register char *p;
+    char *p;
     long int Dum;
 
 #ifdef DEBUG

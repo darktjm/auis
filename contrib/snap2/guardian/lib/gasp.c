@@ -26,11 +26,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/guardian/lib/RCS/gasp.c,v 2.10 1993/01/15 19:07:55 gk5g Stab74 $";
-#endif
-
 /*
 		gasp.c -- Message server guardian interface routines.
 
@@ -45,9 +40,9 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/
 #endif
 #endif
 
+#include <andrewos.h> /* sys/types.h */
 #include <stdio.h>
 #include <netdb.h>
-#include <andrewos.h> /* sys/types.h */
 #include <sys/socket.h>
 #include <netinet/in.h>
 
@@ -83,8 +78,8 @@ int GASP_ServerInit(argc, argv, parms, client, fd, authenticated)
 {
     char key[SNAP_KEYLEN], host[512];
     int keyfd, code;
-    register struct servent *sv;
-    register struct hostent *ho;
+    struct servent *sv;
+    struct hostent *ho;
 
     /*
        Check on # arguments & process:
@@ -152,7 +147,7 @@ int GASP_Count(count)
 /* Return null-terminated string describing error */
 
 char *GASP_Error(errno)
-    register int errno;
+    int errno;
 {
     static char *errors[] = {
 	/*1*/	"(Unused)",

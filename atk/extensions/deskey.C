@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/deskey.C,v 3.5 1995/12/13 19:58:05 robr Stab74 $";
-#endif
-
 ATK_IMPL("deskey.H")
 #include <sys/param.h>
 #include <im.H>
@@ -59,8 +53,6 @@ static long NProcs;
 
 
 ATKdefineRegistry(deskey, ATK, deskey::InitializeClass);
-#ifndef NORCSID
-#endif
 static boolean bufferFill(class im  *im, class text  *text);
 static boolean bufferFind(class frame  *f,class buffer  *b);
 static boolean bufferSetup(FILE  **f, class im  *im, class text  **text);

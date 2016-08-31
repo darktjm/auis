@@ -79,7 +79,7 @@ attr:[FontFace Italic Int Set]}
 
 \example{void dictionary_Insert(view,id,object)
 
-register struct view *view;
+struct view *view;
 
 char *id; 
 
@@ -96,7 +96,7 @@ dictionary.}
 
 \example{char *dictionary_LookUp(view,id)
 
-register struct view *view;
+struct view *view;
 
 char *id;} 
 
@@ -152,7 +152,7 @@ directory.
 
 \example{long dictionary_CountRefs(view)
 
-register struct view *view;} 
+struct view *view;} 
 
 
 \leftindent{\bold{Class procedure description.  }  Counts the references in a 
@@ -168,7 +168,7 @@ dictionary.
 
 \example{long dictionary_ListRefs(view,refarray,len)
 
-register struct view *view;
+struct view *view;
 
 char **refarray;
 
@@ -188,7 +188,7 @@ dictionary.
 
 \example{void dictionary_Delete(view,id)
 
-register struct view *view;
+struct view *view;
 
 char *id;} 
 

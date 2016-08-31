@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/txtvcmod.C,v 3.6 1996/10/19 14:28:02 robr Exp $";
-#endif
-
-
-
- 
-
 #include <ctype.h>
 #define AUXMODULE 1
 #include <textview.H>
@@ -72,57 +62,57 @@ int textview_GetNextNonSpacePos(class textview  *self, int  pos);
 void textview_AddSpaces(class textview  *self, long  pos, long  startPos, long  len);
 boolean ConfirmViewDeletion(class textview  *self, long  pos , long  len);
 boolean ConfirmReadOnly(class textview  *self);
-void textview_SelfInsertCmd(register class textview  *self, char  a);
-void textview_DeleteWordCmd (register class textview  *self);
-void textview_ForeKillWordCmd (register class textview  *self);
-void textview_OpenLineCmd(register class textview  *self);
-void textview_JoinCmd(register class textview  *self);
-static void yankKillLine (register class textview  *self, int		 action);
-void textview_YankLineCmd(register class textview  *self);
-boolean textview_objecttest(register class textview  *self,char  *name,char  *desiredname);
-void textview_InsertInsetCmd (register class textview  *self, long  rock);
+void textview_SelfInsertCmd(class textview  *self, char  a);
+void textview_DeleteWordCmd (class textview  *self);
+void textview_ForeKillWordCmd (class textview  *self);
+void textview_OpenLineCmd(class textview  *self);
+void textview_JoinCmd(class textview  *self);
+static void yankKillLine (class textview  *self, int		 action);
+void textview_YankLineCmd(class textview  *self);
+boolean textview_objecttest(class textview  *self,const char  *name,const char  *desiredname);
+void textview_InsertInsetCmd (class textview  *self, long  rock);
 void textview_InsertFile(class textview  *self);
-void textview_YankCmd(register class textview  *self);
-static void textview_DoRotatePaste(register class textview  *self, int  count);
-void textview_PutAfterCmd(register class textview  *self);
-void textview_PutBeforeCmd(register class textview  *self);
+void textview_YankCmd(class textview  *self);
+static void textview_DoRotatePaste(class textview  *self, int  count);
+void textview_PutAfterCmd(class textview  *self);
+void textview_PutBeforeCmd(class textview  *self);
 void textview_BackwardsRotatePasteCmd(class textview  *self);
 void textview_RotatePasteCmd(class textview  *self);
-void textview_InsertNLCmd(register class textview  *self);
-static int stringmatch(register class text  *d,register long  pos,register char  *c);
-void textview_ZapRegionCmd(register class textview  *self);
-void textview_KillLineCmd(register class textview  *self);
-void textview_MITKillLineCmd(register class textview  *self);
+void textview_InsertNLCmd(class textview  *self);
+static int stringmatch(class text  *d,long  pos,const char  *c);
+void textview_ZapRegionCmd(class textview  *self);
+void textview_KillLineCmd(class textview  *self);
+void textview_MITKillLineCmd(class textview  *self);
 void textview_AppendNextCut(class textview  *self);
-void textview_CopyRegionCmd (register class textview  *self);
-void textview_GetToCol (register class textview  *self, register int  col);
-void textview_InsertSoftNewLineCmd(register class textview  *self);
-void textview_MyLfCmd(register class textview  *self);
+void textview_CopyRegionCmd (class textview  *self);
+void textview_GetToCol (class textview  *self, int  col);
+void textview_InsertSoftNewLineCmd(class textview  *self);
+void textview_MyLfCmd(class textview  *self);
 void textview_MySoftLfCmd(class textview  *self);
-void textview_DeleteCmd (register class textview  *self);
-void textview_ViDeleteCmd (register class textview  *self);
-void textview_KillWhiteSpaceCmd(register class textview  *self);
-int textview_GetSpace(class textview  *self, register int  pos);
+void textview_DeleteCmd (class textview  *self);
+void textview_ViDeleteCmd (class textview  *self);
+void textview_KillWhiteSpaceCmd(class textview  *self);
+int textview_GetSpace(class textview  *self, int  pos);
 static void AdjustIndentation(class textview  *self, int amount);
 void textview_UnindentCmd(class textview  *self);
 void textview_IndentCmd(class textview  *self);
-void textview_ExchCmd(register class textview  *self);
-void textview_RuboutCmd (register class textview  *self);
-void textview_TwiddleCmd (register class textview  *self);
-void textview_RuboutWordCmd (register class textview  *self);
-void textview_BackKillWordCmd (register class textview  *self);
-static void yankDeleteWord (register class textview  *self, int		 action, proctable_fptr moveFunction);
-void textview_YankWordCmd(register class textview  *self);
-void textview_DeleteEndOfWordCmd(register class textview  *self);
-void textview_YankEndOfWordCmd(register class textview  *self);
-void textview_DeleteBackwardWordCmd(register class textview  *self);
-void textview_YankBackwardWordCmd(register class textview  *self);
-void textview_DeleteWSWordCmd(register class textview  *self);
-void textview_YankWSWordCmd(register class textview  *self);
-void textview_DeleteBackwardWSWordCmd(register class textview  *self);
-void textview_YankBackwardWSWordCmd(register class textview  *self);
-void textview_DeleteEndOfWSWordCmd(register class textview  *self);
-void textview_YankEndOfWSWordCmd(register class textview  *self);
+void textview_ExchCmd(class textview  *self);
+void textview_RuboutCmd (class textview  *self);
+void textview_TwiddleCmd (class textview  *self);
+void textview_RuboutWordCmd (class textview  *self);
+void textview_BackKillWordCmd (class textview  *self);
+static void yankDeleteWord (class textview  *self, int		 action, proctable_fptr moveFunction);
+void textview_YankWordCmd(class textview  *self);
+void textview_DeleteEndOfWordCmd(class textview  *self);
+void textview_YankEndOfWordCmd(class textview  *self);
+void textview_DeleteBackwardWordCmd(class textview  *self);
+void textview_YankBackwardWordCmd(class textview  *self);
+void textview_DeleteWSWordCmd(class textview  *self);
+void textview_YankWSWordCmd(class textview  *self);
+void textview_DeleteBackwardWSWordCmd(class textview  *self);
+void textview_YankBackwardWSWordCmd(class textview  *self);
+void textview_DeleteEndOfWSWordCmd(class textview  *self);
+void textview_YankEndOfWSWordCmd(class textview  *self);
 static void viYankDeleteLine(class textview  *self, int		 action);
 void textview_ViDeleteLineCmd(class textview  *self);
 void textview_ViYankLineCmd(class textview  *self);
@@ -136,13 +126,13 @@ void textview_ChangeWordCmd(class textview  *self);
 void textview_ChangeSelectionCmd(class textview  *self);
 void textview_ReplaceCharCmd(class textview  *self);
 void textview_SubstituteCharCmd(class textview  *self);
-void textview_DigitCmd(class textview  *self, register char  c);
+void textview_DigitCmd(class textview  *self, char  c);
 static void AdjustCase(class textview  *self, boolean  upper , boolean  firstOnly);
 void textview_UppercaseWord(class textview  *self, long  key);
 void textview_LowercaseWord(class textview  *self, long  key);
 void textview_CapitalizeWord(class textview  *self, long  key);
 void textview_ToggleCase(class textview  *self, long  key);
-void textview_QuoteCmd(register class textview  *self);
+void textview_QuoteCmd(class textview  *self);
 
 
 int textview_GetNextNonSpacePos(class textview  *self, int  pos)
@@ -177,7 +167,7 @@ boolean ConfirmViewDeletion(class textview  *self, long  pos , long  len)
 {
     class text *d;
     boolean hasViews;
-    static char *yesOrNo[] = {"Yes", "No", NULL};
+    static const char * const yesOrNo[] = {"Yes", "No", NULL};
     long answer;
     class environment *env;
 
@@ -219,10 +209,10 @@ boolean ConfirmReadOnly(class textview  *self)
         return FALSE;
 }
 
-void textview_SelfInsertCmd(register class textview  *self, char  a)
+void textview_SelfInsertCmd(class textview  *self, char  a)
 {
-    register int ct, i, pos;
-    register class text *d;
+    int ct, i, pos;
+    class text *d;
 
     if (ConfirmReadOnly(self))
         return;
@@ -245,9 +235,9 @@ void textview_SelfInsertCmd(register class textview  *self, char  a)
     }
 }
 
-void textview_DeleteWordCmd (register class textview  *self)
+void textview_DeleteWordCmd (class textview  *self)
 {
-    register int count, pos, len;
+    int count, pos, len;
 
 
     if ( self->editor == VI )
@@ -274,10 +264,10 @@ void textview_DeleteWordCmd (register class textview  *self)
     }
 }
 
-void textview_ForeKillWordCmd (register class textview  *self)
+void textview_ForeKillWordCmd (class textview  *self)
 {
-    register int count, pos, len;
-    register class text *d;
+    int count, pos, len;
+    class text *d;
 
     if ( self->editor == VI )
 	yankDeleteWord(self, DELETE, (proctable_fptr)textview_ForwardWordCmd);
@@ -316,9 +306,9 @@ void textview_ForeKillWordCmd (register class textview  *self)
     }
 }
 
-void textview_OpenLineCmd(register class textview  *self)
+void textview_OpenLineCmd(class textview  *self)
 {
-    register int i, pos, ct;
+    int i, pos, ct;
     char tc;
     class text *d;
 
@@ -344,10 +334,10 @@ void textview_OpenLineCmd(register class textview  *self)
     }
 }
 
-void textview_JoinCmd(register class textview  *self)
+void textview_JoinCmd(class textview  *self)
     {
     class text	*text;
-    register int	i, ct;
+    int	i, ct;
     long pos;
     char	blank = ' ';
 
@@ -378,10 +368,10 @@ void textview_JoinCmd(register class textview  *self)
   back out in place of the old. Otherwise we might get two nested
   text obejcts instead of one long text object. */
 
-static void yankKillLine (register class textview  *self, int		 action)
+static void yankKillLine (class textview  *self, int		 action)
         {
-    register int count, pos, endpos, lastpos, numNLs, applen = 0;
-    register class text *d;
+    int count, pos, endpos, lastpos, numNLs, applen = 0;
+    class text *d;
 
     endpos = pos = (self)->CollapseDot();
     d = Text(self);
@@ -417,12 +407,12 @@ static void yankKillLine (register class textview  *self, int		 action)
     (d)->NotifyObservers( observable_OBJECTCHANGED);
 }
 
-void textview_YankLineCmd(register class textview  *self)
+void textview_YankLineCmd(class textview  *self)
     {
     yankKillLine(self, YANK);
 }
 
-boolean textview_objecttest(register class textview  *self,char  *name,char  *desiredname)
+boolean textview_objecttest(class textview  *self,const char  *name,const char  *desiredname)
 {
     if(ATK::LoadClass(name) == NULL){
         char foo[640];
@@ -444,7 +434,7 @@ boolean textview_objecttest(register class textview  *self,char  *name,char  *de
   as (char *) in rock. If ArgProvided (^U) then also ask for view name.
 */
 
-void textview_InsertInsetCmd (register class textview  *self, long  rock)
+void textview_InsertInsetCmd (class textview  *self, long  rock)
 {
     char iname[100];
     char viewname[200];
@@ -492,7 +482,9 @@ void textview_InsertInsetCmd (register class textview  *self, long  rock)
 
 void textview_InsertFile(class textview  *self)
 {
-    char filename[MAXPATHLEN], *basename, *nmend;
+    char filename[MAXPATHLEN];
+    const char *basename;
+    char *nmend;
     FILE *inputFile;
     long initialPos;
     long pos;
@@ -547,7 +539,7 @@ void textview_InsertFile(class textview  *self)
     (Text(self))->NotifyObservers( observable_OBJECTCHANGED);
 }
 
-static void YankCmd(register class textview  *self, boolean onlycut)
+static void YankCmd(class textview  *self, boolean onlycut)
 {
     long ct;
     long initialPos;
@@ -586,9 +578,9 @@ void textview_YankCmd(class textview *self)
     YankCmd(self, FALSE);
 }
 
-static void textview_DoRotatePaste(register class textview  *self, int  count)
+static void textview_DoRotatePaste(class textview  *self, int  count)
 {
-    register class text *d = Text(self);
+    class text *d = Text(self);
 
     ((self)->GetIM())->ClearArg();        /* Make it safe to call yank. */
 
@@ -604,7 +596,7 @@ static void textview_DoRotatePaste(register class textview  *self, int  count)
 
 
 
-void textview_PutAfterCmd(register class textview  *self)
+void textview_PutAfterCmd(class textview  *self)
     {
     FILE *pasteFile;
     int cutChar;
@@ -631,7 +623,7 @@ void textview_PutAfterCmd(register class textview  *self)
     textview_YankCmd(self);
 }
 
-void textview_PutBeforeCmd(register class textview  *self)
+void textview_PutBeforeCmd(class textview  *self)
     {
     FILE *pasteFile;
     int cutChar;
@@ -658,7 +650,7 @@ void textview_RotatePasteCmd(class textview  *self)
     textview_DoRotatePaste(self, ((self)->GetIM())->Argument());
 }
 
-void textview_InsertNLCmd(register class textview  *self)
+void textview_InsertNLCmd(class textview  *self)
 {
     textview_SelfInsertCmd(self,'\012');
     if (((self)->GetIM())->GetLastCmd() != lcInsertEnvironment) {
@@ -666,7 +658,7 @@ void textview_InsertNLCmd(register class textview  *self)
     }
 }
 
-static int stringmatch(register class text  *d,register long  pos,register char  *c)
+static int stringmatch(class text  *d,long  pos,const char  *c)
 {
     /* Tests if the text begins with the given string */
     while(*c != '\0') {
@@ -688,7 +680,7 @@ static int stringmatch(register class text  *d,register long  pos,register char 
 void textview::DoCopyRegion(long  pos , long  len, boolean  appendFlag, boolean copyAsText)
 {
     class text *d;
-    register long nextChange;
+    long nextChange;
     FILE *cutFile;
     int UseDataStream;
 
@@ -714,7 +706,7 @@ void textview::DoCopyRegion(long  pos , long  len, boolean  appendFlag, boolean 
 	((this)->GetIM())->CloseToCutBuffer( cutFile);
 }
 
-void textview_ZapRegionCmd(register class textview  *self)
+void textview_ZapRegionCmd(class textview  *self)
 {
     long pos, len;
     class text *d = Text(self);
@@ -736,10 +728,10 @@ void textview_ZapRegionCmd(register class textview  *self)
 /* a larger area is re-cut.  This isn't visible and wouldn't be so bad were */
 /* it not for the extreme inefficiency of cutbuffer transfers. */
 
-void textview_KillLineCmd(register class textview  *self)
+void textview_KillLineCmd(class textview  *self)
 {
-    register int count, pos, endpos, lastpos;
-    register class text *d;
+    int count, pos, endpos, lastpos;
+    class text *d;
 
 
     if ( self->editor == VI )
@@ -784,10 +776,10 @@ void textview_KillLineCmd(register class textview  *self)
   window will result in the latter cut being appended to
   the other window's cut. */
 
-void textview_MITKillLineCmd(register class textview  *self)
+void textview_MITKillLineCmd(class textview  *self)
 {
-    register int count, pos, endpos, lastpos;
-    register class text *d;
+    int count, pos, endpos, lastpos;
+    class text *d;
 
 
     if ( self->editor == VI )
@@ -836,7 +828,7 @@ void textview_AppendNextCut(class textview  *self)
     ((self)->GetIM())->SetLastCmd( lcKill);	/* mark us as a text killing command */
 }
 
-void textview_CopyRegionCmd (register class textview  *self)
+void textview_CopyRegionCmd (class textview  *self)
 {
     class text *d = Text(self);
 
@@ -845,10 +837,10 @@ void textview_CopyRegionCmd (register class textview  *self)
 		  (self)->GetDotLength(), FALSE, d->CopyAsText);
 }
 
-void textview_GetToCol (register class textview  *self, register int  col)
+void textview_GetToCol (class textview  *self, int  col)
 {
-    register class text *d;
-    register int pos;
+    class text *d;
+    int pos;
 
     d = Text(self);
     pos = (self)->GetDotPosition ();
@@ -872,15 +864,15 @@ void textview_GetToCol (register class textview  *self, register int  col)
     }
 }
 
-void textview_InsertSoftNewLineCmd(register class textview  *self)
+void textview_InsertSoftNewLineCmd(class textview  *self)
 {
     textview_SelfInsertCmd(self,'\r');
 }
 
-void textview_MyLfCmd(register class textview  *self)
+void textview_MyLfCmd(class textview  *self)
 {
-    register class text *d = Text(self);
-    register int pos, startPos, endPos;
+    class text *d = Text(self);
+    int pos, startPos, endPos;
 
     if (ConfirmReadOnly(self))
 	return;
@@ -896,8 +888,8 @@ void textview_MyLfCmd(register class textview  *self)
 
 void textview_MySoftLfCmd(class textview  *self)
 {
-    register class text *d;
-    register int pos, len, endPos, startPos;
+    class text *d;
+    int pos, len, endPos, startPos;
     long c;
 
    if (ConfirmReadOnly(self))
@@ -920,9 +912,9 @@ void textview_MySoftLfCmd(class textview  *self)
     (self)->SetDotPosition( (self)->GetDotPosition() + endPos - startPos);
 }
 
-void textview_DeleteCmd (register class textview  *self)
+void textview_DeleteCmd (class textview  *self)
 {
-    register int pos, len;
+    int pos, len;
 
     if (ConfirmReadOnly(self))
         return;
@@ -942,10 +934,10 @@ void textview_DeleteCmd (register class textview  *self)
     }
 }
 
-void textview_ViDeleteCmd (register class textview  *self)
+void textview_ViDeleteCmd (class textview  *self)
 {
-    register class text *d;
-    register int pos, len, j;
+    class text *d;
+    int pos, len, j;
     int		dsize;
 
     if (ConfirmReadOnly(self))
@@ -983,10 +975,10 @@ void textview_ViDeleteCmd (register class textview  *self)
     }
 }
 
-void textview_KillWhiteSpaceCmd(register class textview  *self)
+void textview_KillWhiteSpaceCmd(class textview  *self)
 {
-    register class text *d;
-    register int p, tc, ep;
+    class text *d;
+    int p, tc, ep;
 
     /* First move back until no longer looking at whitespace */
     /* Then delete forward white space. */
@@ -1010,12 +1002,12 @@ void textview_KillWhiteSpaceCmd(register class textview  *self)
     ((self)->GetIM())->SetLastCmd( lcInsertEnvironment);
 }
 
-int textview_GetSpace(class textview  *self, register int  pos)
+int textview_GetSpace(class textview  *self, int  pos)
 {
-    register int rval;
-    register int tc;
-    register class text *d;
-    register long len;
+    int rval;
+    int tc;
+    class text *d;
+    long len;
     
     d = Text(self);
     rval = 0;
@@ -1058,10 +1050,10 @@ void textview_IndentCmd(class textview  *self)
     AdjustIndentation(self, 4);
 }
 
-void textview_ExchCmd(register class textview  *self)
+void textview_ExchCmd(class textview  *self)
 {
-    register long p;
-    register long len;
+    long p;
+    long len;
 
     p = (self)->GetDotPosition();
     len = (self)->GetDotLength();
@@ -1073,9 +1065,9 @@ void textview_ExchCmd(register class textview  *self)
     (self)->WantUpdate( self);
 }
 
-void textview_RuboutCmd (register class textview  *self)
+void textview_RuboutCmd (class textview  *self)
 {
-    register long endpos, len;
+    long endpos, len;
     class text *d = Text(self);
 
     if (ConfirmReadOnly(self))
@@ -1112,10 +1104,10 @@ void textview_RuboutCmd (register class textview  *self)
 
 /* Switches the two characters before the dot. */
 
-void textview_TwiddleCmd (register class textview  *self)
+void textview_TwiddleCmd (class textview  *self)
 {
     long pos;
-    register class text *text;
+    class text *text;
     char char1, char2;
     class environment *env1, *env2;
     class viewref *vr1, *vr2;
@@ -1172,9 +1164,9 @@ void textview_TwiddleCmd (register class textview  *self)
     (text)->NotifyObservers( observable_OBJECTCHANGED);
 }
 
-void textview_RuboutWordCmd (register class textview  *self)
+void textview_RuboutWordCmd (class textview  *self)
 {
-    register int count, endpos, len;
+    int count, endpos, len;
 
     if (ConfirmReadOnly(self))
         return;
@@ -1198,10 +1190,10 @@ void textview_RuboutWordCmd (register class textview  *self)
 
 /* The safest way to prepend 'back killed' text is to yank it and kill the larger region. */
 
-void textview_BackKillWordCmd (register class textview  *self)
+void textview_BackKillWordCmd (class textview  *self)
 {
-    register int count, endpos, pos, startpos;
-    register class text *d;
+    int count, endpos, pos, startpos;
+    class text *d;
 
     if (ConfirmReadOnly(self))
         return;
@@ -1235,12 +1227,12 @@ void textview_BackKillWordCmd (register class textview  *self)
     }
 }
 
-static void yankDeleteWord (register class textview  *self, int		 action, proctable_fptr moveFunction)
+static void yankDeleteWord (class textview  *self, int		 action, proctable_fptr moveFunction)
             { 
-    register int i, ct, pos, npos, cutpos;
+    int i, ct, pos, npos, cutpos;
     boolean	backward = FALSE;
     FILE	*cutFile;
-    register class text *text;
+    class text *text;
 
     if (ConfirmReadOnly(self))
         return;
@@ -1277,65 +1269,65 @@ static void yankDeleteWord (register class textview  *self, int		 action, procta
     (Text(self))->NotifyObservers( observable_OBJECTCHANGED);
 }
 
-void textview_YankWordCmd(register class textview  *self)
+void textview_YankWordCmd(class textview  *self)
     {
     yankDeleteWord(self, YANK, (proctable_fptr)textview_ForwardWordCmd);
 }
 
-void textview_DeleteEndOfWordCmd(register class textview  *self)
+void textview_DeleteEndOfWordCmd(class textview  *self)
     {
     yankDeleteWord(self, DELETE, (proctable_fptr)textview_EndOfWordCmd);
 }
 
-void textview_YankEndOfWordCmd(register class textview  *self)
+void textview_YankEndOfWordCmd(class textview  *self)
     {
     yankDeleteWord(self, YANK, (proctable_fptr)textview_EndOfWordCmd);
 }
 
-void textview_DeleteBackwardWordCmd(register class textview  *self)
+void textview_DeleteBackwardWordCmd(class textview  *self)
     {
     yankDeleteWord(self, DELETE, (proctable_fptr)textview_BackwardWordCmd);
 }
 
-void textview_YankBackwardWordCmd(register class textview  *self)
+void textview_YankBackwardWordCmd(class textview  *self)
     {
     yankDeleteWord(self, YANK, (proctable_fptr)textview_BackwardWordCmd);
 }
 
-void textview_DeleteWSWordCmd(register class textview  *self)
+void textview_DeleteWSWordCmd(class textview  *self)
     {
     yankDeleteWord(self, DELETE, (proctable_fptr)textview_ForwardWSWordCmd);
 }
 
-void textview_YankWSWordCmd(register class textview  *self)
+void textview_YankWSWordCmd(class textview  *self)
     {
     yankDeleteWord(self, YANK, (proctable_fptr)textview_ForwardWSWordCmd);
 }
 
-void textview_DeleteBackwardWSWordCmd(register class textview  *self)
+void textview_DeleteBackwardWSWordCmd(class textview  *self)
     {
     yankDeleteWord(self, DELETE, (proctable_fptr)textview_BackwardWSWordCmd);
 }
 
-void textview_YankBackwardWSWordCmd(register class textview  *self)
+void textview_YankBackwardWSWordCmd(class textview  *self)
     {
     yankDeleteWord(self, YANK, (proctable_fptr)textview_BackwardWSWordCmd);
 }
 
-void textview_DeleteEndOfWSWordCmd(register class textview  *self)
+void textview_DeleteEndOfWSWordCmd(class textview  *self)
     {
     yankDeleteWord(self, DELETE, (proctable_fptr)textview_EndOfWSWordCmd);
 }
 
-void textview_YankEndOfWSWordCmd(register class textview  *self)
+void textview_YankEndOfWSWordCmd(class textview  *self)
     {
     yankDeleteWord(self, YANK, (proctable_fptr)textview_EndOfWSWordCmd);
 }
 
 static void viYankDeleteLine(class textview  *self, int		 action)
         {
-    register int  count, pos, endpos, lastpos, numNLs, applen = 0;
-    register class text *d;
+    int  count, pos, endpos, lastpos, numNLs, applen = 0;
+    class text *d;
  
     pos = (self)->CollapseDot();
     d = Text(self);
@@ -1493,7 +1485,7 @@ void textview_SubstituteCharCmd(class textview  *self)
     (self)->ToggleVIMode();
 }
 
-void textview_DigitCmd(class textview  *self, register char  c)
+void textview_DigitCmd(class textview  *self, char  c)
 {
     class im *im = (self)->GetIM();
 
@@ -1599,11 +1591,11 @@ void textview_ToggleCase(class textview  *self, long  key)
     (self)->SetDotPosition( pos + 1);
 }
 
-void textview_QuoteCmd(register class textview  *self)
+void textview_QuoteCmd(class textview  *self)
 {
-    register long i;
+    long i;
     long count;
-    register class text *d;
+    class text *d;
     char tc;
     long where;
 

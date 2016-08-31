@@ -21,10 +21,6 @@
 // 
 //  $
   */
-#ifndef NORCSID
-char *figio_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figio.C,v 3.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("figio.H")
 #include <math.h>
@@ -67,11 +63,9 @@ static long pts_size = 0;
 
 
 ATKdefineRegistry(figio, ATK, figio::InitializeClass);
-#ifndef NORCSID
-#endif
 static void EnsurePts(int  num);
 static char *GetString(FILE *fl);
-static char *EatLinesUntil(FILE  *fl, char  *list, boolean  inlist);
+static char *EatLinesUntil(FILE  *fl, const char  *list, boolean  inlist);
 static void SquishZipTextInput(char  *pt);
 
 
@@ -130,9 +124,9 @@ static char *GetString(FILE *fl)
 /* eats lines into buf until (first char IN list) == inlist 
   always reads at least one line
   returns NULL if EOF */
-static char *EatLinesUntil(FILE  *fl, char  *list, boolean  inlist)
+static char *EatLinesUntil(FILE  *fl, const char  *list, boolean  inlist)
 {
-    char *ctmp, *res;
+    const char *ctmp, *res;
 
     while (1) {
 	ctmp = GetString(fl);
@@ -168,7 +162,8 @@ long figio::ReadZipFile(FILE  *fl, class figure  *fig, long  parent, double  rat
 {
 	ATKinit;
 
-    char *ctmp, objtype;
+    const char *ctmp;
+    char objtype;
     long starx, stary, altx, alty, greyval;
     int res;
 

@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/time.h sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/update.C,v 1.2 1993/05/19 17:04:37 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include <consoleClass.H>
 #include <fontdesc.H>
 #include <rect.h>
@@ -52,9 +43,6 @@ int DynamicXmin, DynamicXmax, DynamicYmin, DynamicYmax, XGrowthRange, YGrowthRan
 
 
 
-
-#ifndef NORCSID
-#endif
 int ScaleCoordinate(class consoleClass  *self, int  old, boolean  IsX);
 void RedrawDisplays(class consoleClass  *self);
 

@@ -1,5 +1,3 @@
-/* @(#)types.h	1.2 87/11/07 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -50,8 +48,6 @@
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-/*      @(#)types.h 1.18 87/07/24 SMI      */
-
 /*
  * Rpc additions to <sys/types.h>
  */

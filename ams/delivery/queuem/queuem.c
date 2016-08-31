@@ -20,8 +20,7 @@
  * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
  * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
  * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- *  $Header: /obj/v6src/ams/delivery/queuem/RCS/queuem.c,v 1.86 1993/05/04 23:16:34 susan Exp $";
+ */
 #endif
 
 /*
@@ -180,7 +179,7 @@
 #include <dropoff.h>
 
 /* Program name for error messages */
-static char Qname[] = "QUEUEMAIL";
+static const char Qname[] = "QUEUEMAIL";
 
 extern char *arpadate();
 extern char Qmail_ErrMsg[];
@@ -285,7 +284,7 @@ static FileList *msgfiles;
 /* Index of first recipient */
 #define FIRSTRECIPIENT	MAILARGS
 
-static char NL[] = "%s\n";
+static const char NL[] = "%s\n";
 
 static struct RECIPIENTS {
     int 	size;		/* Current size of array */
@@ -430,9 +429,9 @@ char *name; int where, whether;
 #endif /* LPPlumb */
 
 static ListAllRecipients(f, between)
-    register FILE *f; char *between;
+    FILE *f; char *between;
 {
-    register int i;
+    int i;
 
     for (i=FIRSTRECIPIENT; i<CurrentRecipients->NextRecipient; ++i) {
 	if (i != FIRSTRECIPIENT) fputs(between, f);
@@ -441,10 +440,10 @@ static ListAllRecipients(f, between)
 }
 
 static char *copy(s)
-    register char *s;
+    char *s;
 {
-    register char *new;
-    register int len;
+    char *new;
+    int len;
 
     len = strlen(s) + 1;
     new = malloc(len);
@@ -936,7 +935,7 @@ static int HandleMessageFromQueue(LockFileName, LockFD, age, MaxLoadAv, ForceThr
 
 static void ClearRecipients()
 {
-    register int i;
+    int i;
 
     for (i=FIRSTRECIPIENT; i<OldRecipients.NextRecipient; ++i)
 	free(OldRecipients.ToName[i]);
@@ -1056,7 +1055,7 @@ static void InterjectDir(dirname, tokens, toklen, newFmt, forceUid)
     WhenToForce = time(0) + DEFAULT_MAXWAIT;
     TargetLoadAv = Initial_Xload;
     for (;;) {
-	register int Rslt;
+	int Rslt;
 	char LockFileName[MAXPATHLEN+1];
 	int LockFD, age;
 
@@ -1166,11 +1165,11 @@ char *tokens; int toklen;
 #endif /* AFS_ENV */
 
 static void ProcessRequest(packet, len)
-    register unsigned char *packet;
+    unsigned char *packet;
     int len;
 {
-    register int uid;
-    register struct passwd *pw;
+    int uid;
+    struct passwd *pw;
     char newname[MAXPATHLEN+1];
     unsigned char *tokens;
     int toklen, isNewFormat, NumTokenPairs;
@@ -1328,7 +1327,7 @@ static void ProcessMailRequests()
 
     /* Read requests from mail port & process */
     for (;;) {
-	register int len, nfds;
+	int len, nfds;
 	int fromlen;
 	fd_set readfds;
 	struct timeval timeout;
@@ -1389,7 +1388,7 @@ static void waitforaction()
 {
     struct timeval timeout;
     fd_set rmask;
-    register int nfds;
+    int nfds;
 
     if (ShuttingDown) return;
 
@@ -1415,10 +1414,10 @@ static void waitforaction()
 }
 
 static FreeFiles(files, np)
-    register FileList *files;
-    register int *np;
+    FileList *files;
+    int *np;
 {
-    register int n = *np;
+    int n = *np;
 
     if (n == 0) return;
     for (n--; n>=0; n--) if (files[n].name != NIL) free(files[n].name);
@@ -1435,8 +1434,8 @@ FileList *f1, *f2;
 }
 
 static void SortFiles(files, n)
-    register FileList *files;
-    register int n;
+    FileList *files;
+    int n;
 {
     if (n > 1) qsort(files, n, sizeof(FileList), FComp);
 }
@@ -1470,11 +1469,11 @@ char *str, *fldn; FileList *filep; int ix;
 }
 
 static int CheckFiles(dirName, files, n)
-    register char *dirName;
-    register FileList *files;
-    register int n;
+    char *dirName;
+    FileList *files;
+    int n;
 {/* Return TRUE iff client needs to re-read the dir, FALSE if no changes and all OK. */
-    register int i, j;
+    int i, j;
     int NeedReRead = FALSE, isOne;
     char BigComplaint[3 * MAXPATHLEN],
 	SubjBuff[MAXPATHLEN],
@@ -1579,13 +1578,13 @@ static int CheckFiles(dirName, files, n)
 
 static FileList *GetDirEntries(dirName, nfiles, err)
     char *dirName;
-    register int *nfiles, *err;
+    int *nfiles, *err;
 {
     DIR *dp;
-    register DIRENT_TYPE *ent;
-    static char msg[] = "Out of storage (%s) in GetDirEntries for \"%s\"";
-    register FileList *files;
-    register int fsize;	    /* Max # slots in files array */
+    DIRENT_TYPE *ent;
+    static const char msg[] = "Out of storage (%s) in GetDirEntries for \"%s\"";
+    FileList *files;
+    int fsize;	    /* Max # slots in files array */
     int i, dummy;
 
     *nfiles = 0;
@@ -1682,7 +1681,7 @@ static void CleanupOutgoing(dirName)
 {
     struct stat buf;
     int nfiles;
-    register FileList *files;
+    FileList *files;
 
     /* 1st check date on dir -- if not modified since last sweep, ignore */
     if (stat(dirName, &buf) < 0) return;
@@ -1701,7 +1700,7 @@ static void CleanupOutgoing(dirName)
 
 static CheckOutgoings()
 {
-    register struct passwd *pwd;
+    struct passwd *pwd;
     long int CleanupStartTime, FirstStartTime, LDum; int Pass;
     char Times[100]; char *cp; struct tm *tpack; char StartAt;
 
@@ -1738,9 +1737,9 @@ static CheckOutgoings()
 	}
 	for (pwd=getvpwent(); pwd!=NIL; pwd=getvpwent()) {
 	    char dirName[MAXPATHLEN+1];
-	    register DIR *dp;
-	    register DIRENT_TYPE *ent;
-	    register Boolean closed;
+	    DIR *dp;
+	    DIRENT_TYPE *ent;
+	    Boolean closed;
 
 	    /* See if shutdown signal received */
 	    if (ShuttingDown) {
@@ -1765,7 +1764,7 @@ static CheckOutgoings()
 	    closed = FALSE;
 	    for (ent=readdir(dp); ent!=NIL; ent=readdir(dp)) {
 		if (*ent->d_name != '.') {
-		    register char *whoiwas;
+		    char *whoiwas;
 
 		    closedir(dp);
 		    closed = TRUE;
@@ -2100,7 +2099,7 @@ static ProcessArguments(argc, argv)
     int argc;
     char **argv;
 {
-    register char *s;
+    char *s;
     int ArgsAreAddresses;
 
     Debugging = 0;
@@ -2303,7 +2302,7 @@ static int GetOwner(buf, fd, name)
     int fd;
     char *name;
 {
-    register int owner1, owner2, owner3;
+    int owner1, owner2, owner3;
 
     /* Try to get all 3 uids */
     owner1 = buf->st_uid;
@@ -2638,7 +2637,7 @@ static int GetMessageFromQueue(LockFile, refFD, refAge, JustLook, forceUid)
 static CheckMessageAge(age) 
     int age;
 {/* Returns 0 for all OK, +1 for retouched, -1 for retouch error */
-    register int fd;
+    int fd;
     char c;
     char *EMsg;
     int Res, XRes;
@@ -2764,8 +2763,8 @@ static MakeName(Dest, Dir, Prefix, Suffix)
 static int WriteQueueEntry(Qdir, Tolerant, IntoSlowQueue)
     char *Qdir; int Tolerant, IntoSlowQueue;
 {
-    register int rc;
-    register char *Auth;
+    int rc;
+    char *Auth;
 
     CurrentRecipients->ToName[CurrentRecipients->NextRecipient] = NIL;
     if (Tolerant && ReturnPath[0] == '\0') return -1;
@@ -2822,8 +2821,8 @@ static int WriteQueueEntry(Qdir, Tolerant, IntoSlowQueue)
 static int WriteToVice(UseAllQueues, UseSlowQueue)
 int UseAllQueues, UseSlowQueue;
 {
-    register char *Auth;
-    register int rc;
+    char *Auth;
+    int rc;
 
     /* See if user specified queues */
     if (PrimaryQueueDir[0] != '\0') {
@@ -2883,7 +2882,7 @@ int UseAllQueues, UseSlowQueue;
 }
 
 static Header(f, msg)
-    register FILE *f;
+    FILE *f;
     char *msg;
 {
     fprintf(f, "Date: %s", arpadate());
@@ -2898,7 +2897,7 @@ static int ErrorToPostmaster(Msg, AuxMsg, SendBody)
     Boolean SendBody;
 {
     char Text[sizeof ErrorText];
-    register FILE *f;
+    FILE *f;
     int i; 
     char *argv[3];
     char PMMailbox[200];
@@ -2950,8 +2949,8 @@ static int bailout(mesg, auxmsg, sendbody)
     char *mesg, *auxmsg;
     Boolean sendbody;
 {
-    register FILE * f;
-    register int i;
+    FILE * f;
+    int i;
     char current[MAXPATHLEN+1];
 
     debug(8, ("Entering bailout routine\n"));
@@ -3000,16 +2999,16 @@ static int bailout(mesg, auxmsg, sendbody)
 #define MESSAGE_SIZE	256
 
 static int ReadNextMessage(f, code, RefBuffer, RefLen, pgmname)
-    register FILE *f;
+    FILE *f;
     int *code;
     char **RefBuffer;
     int *RefLen;
     char *pgmname;
 {
     int cont, Ix, Ch;
-    register char *next;
+    char *next;
     Boolean first;
-    register int count;
+    int count;
     char *buffer = *RefBuffer;
     int len = *RefLen;
 #define HowMuchMore 80
@@ -3027,7 +3026,7 @@ static int ReadNextMessage(f, code, RefBuffer, RefLen, pgmname)
 	Log(601, "malloc returns 0x%x", buffer);
 #endif /* Logs */
 	if (buffer == NULL) {
-	    static char mesg[] = "Initial MALLOC failed in ReadNextMessage";
+	    static const char mesg[] = "Initial MALLOC failed in ReadNextMessage";
 	    debug(32768, (NL, mesg));
 	    ErrorToPostmaster(mesg, NIL, FALSE);
 	    return -1;
@@ -3095,7 +3094,7 @@ static int ReadNextMessage(f, code, RefBuffer, RefLen, pgmname)
 #endif /* LogsYes */
 	/* Read a line of the actual message */
 	for (;;) {
-	    register int c;
+	    int c;
 	    c = fgetc(f);
 	    if (c == EOF) {
 		ErrorToPostmaster(eofmsg, NIL, FALSE);
@@ -3108,7 +3107,7 @@ static int ReadNextMessage(f, code, RefBuffer, RefLen, pgmname)
 			      len+MESSAGE_SIZE));
 		buffer = realloc(buffer, len+MESSAGE_SIZE);
 		if (buffer == NULL) {
-		    static char mesg[] = "REALLOC failed in ReadNextMessage";
+		    static const char mesg[] = "REALLOC failed in ReadNextMessage";
 		    debug(32768, (NL, mesg));
 		    ErrorToPostmaster(mesg, NIL, FALSE);
 		    return -1;
@@ -3178,7 +3177,7 @@ static Boolean AddrPermFail(code)
 #endif /* NOTDEF */
 
 static int ReadAddresses(f, pgmname)
-    register FILE *f;
+    FILE *f;
     char *pgmname;
 {
     char *line;		/* Read results here */
@@ -3229,11 +3228,11 @@ static int ReadAddresses(f, pgmname)
 }
 
 static Boolean Contains(small, large)
-    register struct RECIPIENTS *small, *large;
+    struct RECIPIENTS *small, *large;
 
 {/* Return whether each element of small is somewhere in large. */
 
-    register int inSmall, inLarge, WasInLarge;
+    int inSmall, inLarge, WasInLarge;
 
     for (inSmall=FIRSTRECIPIENT; inSmall<small->NextRecipient; ++inSmall) {
 	WasInLarge = 0;
@@ -3249,7 +3248,7 @@ static Boolean Contains(small, large)
 }
 
 static Boolean EqualLists(l1, l2)
-    register struct RECIPIENTS *l1, *l2;
+    struct RECIPIENTS *l1, *l2;
 {
     if (!AnyDelivered) return TRUE;
     if (l1->NextRecipient != l2 ->NextRecipient)
@@ -3448,13 +3447,13 @@ static int TryLocalDelivery()
 static Boolean bol;
 
 static char *GetNextToken(fp) 
-    register FILE *fp;
+    FILE *fp;
 {
-    register Boolean StillLooking = TRUE;
-    register Boolean InQuotes = FALSE;
+    Boolean StillLooking = TRUE;
+    Boolean InQuotes = FALSE;
     int TokenPointer = 0;
     static char Token[MAXNAMESIZE];
-    register int c;
+    int c;
 
     debug(8, ("Entering GetNextToken\n"));
 
@@ -3528,9 +3527,9 @@ static char SaveForString[MAXNAMESIZE];
 
 static int ParseShadowFile()
 {
-    register char *s;
+    char *s;
     FILE *f;
-    register enum {
+    enum {
 		UNKNOWN_FIELD, TO_FIELD, FROM_FIELD, AUTH_FIELD,
 		ENQUEUEDATE_FIELD, FOR_FIELD, HOLDUNTIL_FIELD,
 		IGNORE_FIELD
@@ -3867,7 +3866,7 @@ static int MapErrno(errval, dflt)
 
 static CreateMessageTemp()
 {
-    register int i, pid, errn;
+    int i, pid, errn;
 
     debug(128, ("Entering CreateMessageTemp\n"));
     pid = getpid();
@@ -3918,7 +3917,7 @@ static CleanupMessageText()
 
 static int GetMessageText()
 {
-    register int size;
+    int size;
     int olderrno;
 
     debug(128, ("Entering GetMessageText\n"));
@@ -4011,10 +4010,10 @@ static int GetMessageText()
 /* Try to write contents of message to f */
 
 static int WriteMessage(f)
-    register FILE *f;
+    FILE *f;
 {
     struct stat buf;
-    register int bufsize;
+    int bufsize;
     char buffer[8192];
 
     debug(8, ("Entering WriteMessage(0x%x), message file %s\n", f, MailSourceFile));
@@ -4049,7 +4048,7 @@ static int WriteMessage(f)
     if (bufsize > sizeof buffer) bufsize = sizeof buffer;
     debug(8, ("Buffer size will be %d bytes\n", bufsize));
     for (;;) {
-	register int n;
+	int n;
 
 	n = read(MailSourceFD, buffer, bufsize);
 	if (n < 0) {
@@ -4080,7 +4079,7 @@ static int WriteMessage(f)
 */
 
 static int AddRecipient(r, name)
-    register struct RECIPIENTS *r;
+    struct RECIPIENTS *r;
     char *name;
 {
     debug(65536, ("AddRecipient(<%d, 0x%x, %d>, %s)\n",

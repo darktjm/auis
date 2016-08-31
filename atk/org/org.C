@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/org/RCS/org.C,v 1.8 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Org Data-Class
@@ -63,6 +56,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include <andrewos.h>
 ATK_IMPL("org.H")
 #include <ctype.h>
 #include <sys/param.h>
@@ -83,12 +77,12 @@ boolean Org_Debug = 0;
 #define debug Org_Debug
 
 ATKdefineRegistry(org, apt, NULL);
-static long Read_Body( register class org		      *self, register FILE			      *file );
-static long Write_Body( register class org  *self, register FILE  *file, long writeID );
-static void Strip( register char  *string );
+static long Read_Body( class org		      *self, FILE			      *file );
+static long Write_Body( class org  *self, FILE  *file, long writeID );
+static void Strip( char  *string );
 
 
-char *
+const char *
 org::ViewName( )
   {
     return ( "orgv" );
@@ -105,7 +99,7 @@ void FreeDatum( tree_type_node node, void *user)
 org::org( )
     {
   class org *self=this;
-  register boolean status = true;
+  boolean status = true;
 
   IN(org_InitializeObject);
   DEBUGst(RCSID,rcsid);
@@ -128,9 +122,9 @@ org::~org( )
 }
 
 long
-org::Read( register FILE  *file, register long  id )
+org::Read( FILE  *file, long  id )
       {
-  register long status;
+  long status;
 
   IN(org_Read);
   status = Read_Body( this, file );
@@ -139,16 +133,15 @@ org::Read( register FILE  *file, register long  id )
 }
 
 static
-long Read_Body( register class org		      *self, register FILE			      *file )
+long Read_Body( class org		      *self, FILE			      *file )
       {
-  register boolean		      done = false;
-  register long			      c, count, braces = 0, brackets = 0, status = ok,
+  boolean		      done = false;
+  long			      c, count, braces = 0, brackets = 0, status = ok,
 				      description_size, description_length,
 				      description_increment = 32;
-  char				      string[4096], *ptr, *end_ptr,
-				     *count_ptr, counter[32];
-  register char			     *description;
-  register tree_type_node	      parent = NULL, child = NULL, node;
+  char				      string[4096], *ptr, *end_ptr;
+  char			     *description;
+  tree_type_node	      parent = NULL, child = NULL, node;
   class text			     *textp = NULL;
 
   IN(Read_Body);
@@ -179,45 +172,32 @@ long Read_Body( register class org		      *self, register FILE			      *file )
 	if(ptr > string)
 	    break;
 	braces--;
-	if ( ptr > string ) {
-	  Strip( ptr = string );
-	  if ( parent ) {
-	    if ( (child = node = (Tree)->CreateChildNode(  string, 0, parent )) == NULL )
-	      { DEBUG(ERROR Creating Node);/*===*/      }
-	  }
-	  else {/*===*/}
-	}
-	else {
-	  child = parent;
-	  parent = (Tree)->ParentNode(  parent );
-	}
+	child = parent;
+	parent = (Tree)->ParentNode(  parent );
         continue;
       case '[':
 	if(ptr > string)
 	    break;
 	brackets++;
-	count_ptr = counter;
-	while ( (c = getc( file ))  &&  c != EOF  && c != '\n' )
-	  *count_ptr++ = c;
-	*count_ptr = 0;
-	count = atoi( counter );
-	DEBUGdt(Count,count);
-	description = (char *) malloc( count );
-	fread(description, count, 1, file);
-	{
-	  FILE *f = tmpfile();
-	  fwrite(description, count, 1, f);
-	  free(description);
-	  fputc('\n', f);
-	  rewind(f);
+	/* I'd like to ignore length, since inset reader will stop at end */
+	/* However, some files (e.g. example3.org) have broken insets */
+	/* As a compromise, if length=0, ignore length */
+	/* This will of course be broken on unseekables, but who cares? */
+	while((c = getc(file)) != '\n' && c != EOF) *ptr++ = c;
+	*ptr = 0;
+	ptr = string;
 	        {
+		    int len = atoi(string);
+		    unsigned long epos = 0;
+		    if(len > 0)
+			epos = ftell(file) + len;
 		    long objID;
-		    filetype::Lookup(f, NULL, &objID, NULL);
+		    filetype::Lookup(file, NULL, &objID, NULL);
 		    textp = new text;
-		    (textp)->Read( f, objID);
+		    (textp)->Read( file, objID);
+		    if(epos)
+			fseek(file, epos, SEEK_SET);
 		}
-	  fclose(f);
-	}
 	(Tree)->SetNodeDatum(  node, (long) textp );
 	continue;
       case ']':
@@ -225,10 +205,22 @@ long Read_Body( register class org		      *self, register FILE			      *file )
 	    break;
 	brackets--;
 	continue;
-      case '\\': /* no idea what old behavior was supposed to do */
+      case '\\':
+	/* the old code pretty much aborted no matter what, here */
+	/* I guess that meant it always assumed it was \enddata */
+	/* I prefer allowing backslashes within the node name */
 	if(ptr > string)
 	    break;
-	if ( (c = getc( file )) != '\n'  &&  c != EOF ) break;
+	/* and at the beginning, to escape \ { [ */
+	if ( (c = getc( file )) == '\\' || c == '[' || c == '{')
+	    break;
+	/* now it's either enddata or an error.  In any case, just
+	 * suck the line in and exit */
+	/* not that org is embeddable in other docs, anyway, but also
+	 * stop on }, and if not @ eol, preserve char after } */
+	while ( c != EOF && c != '}' && (c = getc( file )) != '\n' );
+	if(c == '}' && (c = getc( file )) != '\n')
+	    ungetc(c, file);
 	done = true;
 	continue;
       case EOF:
@@ -256,9 +248,9 @@ long Read_Body( register class org		      *self, register FILE			      *file )
   }
 
 long
-org::Write( register FILE			      *file, register long			       writeID, register int			       level )
+org::Write( FILE			      *file, long			       writeID, int			       level )
         {
-  register long			      status, id;
+  long			      status, id;
 
   IN(org_Write);
   DEBUGdt(Headerwriteid,this->writeID);
@@ -278,11 +270,11 @@ org::Write( register FILE			      *file, register long			       writeID, registe
 }
 
 static
-long Write_Body( register class org  *self, register FILE  *file, long writeID )
+long Write_Body( class org  *self, FILE  *file, long writeID )
     {
-  register long status = ok;
-  register tree_type_node node = (Tree )->RootNode( );
-  register long level, current_level = 1;
+  long status = ok;
+  tree_type_node node = (Tree )->RootNode( );
+  long level, current_level = 1;
   class text *textp;
   int size;
 
@@ -300,27 +292,17 @@ long Write_Body( register class org  *self, register FILE  *file, long writeID )
     fprintf( file, "%*s%s%s\n", (int)(2 * level), "", bs, name );
     if ( (textp = (class text *) (Tree)->NodeDatum( node)) && 
 	 (size = (textp)->GetLength()) > 0 ) {
-	long realSize = 0;
-	char *description;
-	FILE *f;
-	if(f = tmpfile()) {
-	    (textp)->Write( f, writeID, 1);
-	    fseek(f, 0, 2);
-	    realSize = ftell(f);
-	    rewind(f);
-	    {
-		if(description = (char*) malloc(realSize + 1)) {
-		    if(fread(description, realSize, 1, f) != 1) {
-			fprintf(stderr, "org: incomplete read on temp file\n");
-			realSize = 0;
-		    }
-		    description[realSize] = (char)0;
-		}
-	    }
-	    fclose(f);
-	}
-	fprintf( file, "%*s[%ld\n%s]\n", (int)(2 * level), "", realSize, description);
-	free(description);
+	/* don't write to tmp file, and don't output size of text */
+	/* it's unnecessary and just makes this code uglier than needed */
+	/* however, it does make this incompatible with official */
+	/* (and mostly broken anyway) org.  Oh well. */
+	/* I'll still write a length of 0 just for giggles.  The old */
+	/* org will abort reading shortly thereafter */
+	/* I'm tempted to just drpo the whole square bracket crap and use */
+	/* \begindata to signify descriptions */
+	fprintf( file, "%*s[0\n", (int)(2 * level), "" );
+	(textp)->Write( file, writeID, 1);
+        fputs( "]\n", file);
     }
     node = (Tree)->NextNode(  node );
   }
@@ -330,11 +312,11 @@ long Write_Body( register class org  *self, register FILE  *file, long writeID )
   return(status);
 }
 
-char *
-org::NodeName( register struct tree_node  *node )
+const char *
+org::NodeName( struct tree_node  *node )
     {
   class org *self=this;
-  register char *name = NULL;
+  const char *name = NULL;
 
   IN(org_NodeName);
   if ( node )
@@ -354,9 +336,9 @@ org::SetDebug( boolean  state )
 }
 
 static
-void Strip( register char  *string )
+void Strip( char  *string )
   {
-  register char *ptr = string;
+  char *ptr = string;
   int len;
 
   while ( *ptr == ' '  ||  *ptr == '\t' )  ptr++;

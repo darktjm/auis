@@ -1,4 +1,3 @@
-/* @(#)sort.x	1.1 87/11/04 3.9 RPCSRC */
 /*
  * The sort procedure receives an array of strings and returns an array
  * of strings.  This toy service handles a maximum of 64 strings.

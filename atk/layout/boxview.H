@@ -53,7 +53,7 @@ public:
    void LinkTree(class view *parent);
    void UnlinkNotification(class view *unlinkedview);
    void ObservedChanged(class observable *changed, long status);
-   void Print(FILE *f, char *processor, char *finalFormat, boolean toplevel);
+   void Print(FILE *f, const char *processor, const char *finalFormat, boolean toplevel);
 
 
   virtual void ToggleDebug();

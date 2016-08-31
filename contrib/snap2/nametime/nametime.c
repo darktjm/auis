@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/nametime/RCS/nametime.c,v 2.13 1993/09/22 19:49:50 gk5g Stab74 $";
-#endif
-
 /* ************************************************************ *\
 
 	nametime.c	Name and Time Server
@@ -81,7 +76,7 @@ main ()
     struct servent *servent;
 #ifndef DEBUG
     {
-	register int i;
+	int i;
 	if (fork ())
 	    exit (0);
 	for (i = 0; i < 10; i++)
@@ -134,7 +129,7 @@ main ()
     }
     selmask = 1 << nsock | 1 << tsock;
     while (1) {
-	register int cc;
+	int cc;
 	int fromlen;
 
 	readfds = selmask;
@@ -170,8 +165,8 @@ main ()
 nameit (buff, size)
 char *buff;
 {
-    register char *mp;
-    register int nl;
+    char *mp;
+    int nl;
     struct sockaddr_in target;
     mp = buff;
     if (size < 3) {
@@ -214,10 +209,10 @@ char *buff;
 }
 
 int find_addr (np, nl, tg)
-register char *np;
+char *np;
 struct sockaddr_in *tg;
 {
-    register struct hostent *hptr;
+    struct hostent *hptr;
     np[nl] = '\0';
     hptr = gethostbyname (np);
     if (hptr == 0) {
@@ -253,7 +248,7 @@ timeit ()
 panic (s)
 char *s;
 {
-    register int fd;
+    int fd;
     char msg[128];
     sprintf (msg, "nametime: %s\n", s);
     fd = open ("/dev/console", 1, 0744);

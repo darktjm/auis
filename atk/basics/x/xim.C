@@ -25,14 +25,6 @@
 //  $
 */
 
-#ifdef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xim.C,v 3.63 1996/07/26 20:36:07 robr Exp $";
-#endif
-
-
- 
-
 /* Put in error messages for handling of keystrokes.
     Figure out how to handle handlers and information requests.
     Figure out some way to handle levels of user.  Macros should probably not be an novice level facility. */
@@ -138,7 +130,7 @@ static int mystrcmp(char  **x,char  **y);
 static char **SetupMenuChoices(const char  *menulistname,int  *count);
 static void FreeMenuChoices(char  **list,int  count);
 static int CheckMenuChoice(const char  * const *list,int  count,const char  *choice);
-static struct cardorder *SetupCardOrder(char  *prefname);
+static struct cardorder *SetupCardOrder(const char  *prefname);
 static int GetCardPriority(struct cardorder  *co, const char  *card, int  def);
 static void FreeCardOrder(struct cardorder  *co);
 static void SetWMProperties(class xim  *self, boolean  nameChanged , boolean  iconic);
@@ -150,7 +142,7 @@ static Display *SetupDisplay(class xim  *self, const char  *host);
 static void DoGeometry(class xim  *self, long  *left, long  *top ,XSizeHints  **sizehintsp , XSizeHints  **zoomhintsp);
 static void DoTransientGeometry(class xim  *self , boolean  override, class xim  *other, int  *left , int  *top , unsigned int  *width , unsigned int  *height, XSizeHints  **sizehintsp , XSizeHints  **zoomhintsp);
 static void SetForegroundBackground(class xim  *self, const char  **foregroundColor , const char  **backgroundColor, class xcolor  **foreground , class xcolor  **background);
-static struct menubar *MakeStartupMenu(struct mbinit  *mbi, char  *progname);
+static struct menubar *MakeStartupMenu(struct mbinit  *mbi, const char  *progname);
 static void FreeSelectionData(struct seldata  *seldata);
 static boolean DoCreateTransientWindow(class xim  *self , class im  *iother, int  override, int flags=im_TRANSIENTMENUS, im_configurefptr cfp=NULL, long crock=0);
 static void  ExplodeMenuString(char  *str, char  *paneStr, long  paneStrLen, long  *panePriority,  		char  *selectionStr, long  selectionStrLen, long  *selectionPriority);
@@ -180,12 +172,12 @@ static void SendButtonUp(struct mouseStatus  *mfacts, long  x , long  y);
 static void HandleExposeFromMenubar(XEvent  *ee,class xim  *im);
 static void HandleWindowEvent(Display  *display);
 static void xim_ActivateMenubar(class xim  *xim, long  rock);
-static const char *mygetdefaults(Display  *dpy, char  *pname);
+static const char *mygetdefaults(Display  *dpy, const char  *pname);
 static long *CalculateIncrementList(char  *str, long  finalIncr, long  *listCount);
 static void updateGlobalCursors(class xim  *self);
 static void SetPNMask(Display  *display, Window  window);
 static void RemovePNMask(Display  *display, Window  window);
-static void appendtostring(struct expandstring  *string, char  *buffer, long  length);
+static void appendtostring(struct expandstring  *string, const char  *buffer, long  length);
 static Time xim_Now(class xim  *self);
 /* the four states below indicate variety of elements on the PropList.
   For each there is a window of interest and some atom value
@@ -231,7 +223,6 @@ static void Unscribe(struct expandstring  *cb);
 static void freeViewsMLCache(class xim  *self,struct mlcacheNode  **cachep, ATK   *view, struct mlcacheNode **parent);
 static void LocateWindow(class xim  *self);
 static void free_drop_files(class xim  *xim);
-static char *newstring(char  *s);
 static void HandleDropin(class xim  *self, XClientMessageEvent  *ev);
 
 typedef enum {drop_notfound, drop_hostfile, drop_string} drop_t;
@@ -415,13 +406,12 @@ static char **SetupMenuChoices(const char  *menulistname,int  *count)
 			lookingforquote=TRUE;
 		    } else { /* we found an un-escaped quote within a quoted item, enter the item in the table. */
 			*p='\0';
-			list[c]=(char *)malloc(strlen(buf)+1);
+			list[c]=strdup(buf);
 			if(!list[c]) {
 			    while(--c>=0 && list[c]) free(list[c]);
 			    free(list);
 			    return NULL;
 			}
-			strcpy(list[c],buf);
 			c++;
 			if(c>=maxchoices) { /* too many choices? then make more room */
 			    maxchoices*=2;
@@ -478,7 +468,7 @@ struct cardorder {
     long priorities[1];
 };
 
-static struct cardorder *SetupCardOrder(char  *prefname)
+static struct cardorder *SetupCardOrder(const char  *prefname)
 {
     int count,i;
     long curprio=10;
@@ -763,10 +753,10 @@ static int XErrorsToConsole(Display *DisplayPtr, XErrorEvent *ErrorBlock)
 */
 struct keybinding {
     KeySym key;
-    char *binding;
+    const char *binding;
 };
 
-static struct keybinding keybindings[] = {
+static const struct keybinding keybindings[] = {
     XK_Home, "\033H", /* esc H  */
     XK_Left, "\033D", /* esc D */
     XK_Up, "\033A", /* esc A */
@@ -999,7 +989,7 @@ static Display *SetupDisplay(class xim  *self, const char  *host)
     int i, Xfileno;
     struct mouseStatus *tmouse;
     char *xhost;
-    struct keybinding *thisBinding;
+    const struct keybinding *thisBinding;
     Display *xDisplay;
     static int doSynch=(environ::Get("ATKXDEBUG")!=NULL || environ::GetProfileSwitch("ATKXDEBUG", FALSE));
     boolean doallbuffers=environ::GetProfileSwitch("AlwaysMakeCutBuffers", FALSE);
@@ -1570,7 +1560,7 @@ static void SetForegroundBackground(class xim  *self, const char  **foregroundCo
 }
 
 
-static struct menubar *MakeStartupMenu(struct mbinit  *mbi, char  *progname)
+static struct menubar *MakeStartupMenu(struct mbinit  *mbi, const char  *progname)
 {
     char buf[256];
     static const char *Quit=messitem::Replace("Quit");
@@ -1626,7 +1616,7 @@ boolean xim::CreateWindow(char  *host)
 	} else {
 	    newWindow = XCreateSimpleWindow(xDisplay, RootWindow(xDisplay, DefaultScreen(xDisplay)), (int)left, (int)top, preferedWidth, preferedHeight, 2, BlackPixel(xDisplay, DefaultScreen(xDisplay)), WhitePixel(xDisplay, DefaultScreen(xDisplay)));
 	    mb_InitWindows(this->mbi, newWindow);
-	    this->menu=this->startupmenu=MakeStartupMenu(this->mbi, (char *)xim2programname(this));
+	    this->menu=this->startupmenu=MakeStartupMenu(this->mbi, xim2programname(this));
 	}
     } else {
 	newWindow = XCreateSimpleWindow(xDisplay, RootWindow(xDisplay, DefaultScreen(xDisplay)), (int)left, (int)top, preferedWidth, preferedHeight, 2, BlackPixel(xDisplay, DefaultScreen(xDisplay)), WhitePixel(xDisplay, DefaultScreen(xDisplay)));
@@ -1776,7 +1766,7 @@ DoCreateTransientWindow(class xim  *self , class im  *iother, int  override, int
 	    DoTransientGeometry(self, override, other, &left, &top, &width, &height, &sizehints, &zoomhints);
 	    newWindow = XCreateSimpleWindow(xDisplay, RootWindow(xDisplay, DefaultScreen(xDisplay)), left, top, width, height, 2, BlackPixel(xDisplay, DefaultScreen(xDisplay)), WhitePixel(xDisplay, DefaultScreen(xDisplay)));
 	    mb_InitWindows(self->mbi, newWindow);
-	    self->menu=self->startupmenu=MakeStartupMenu(self->mbi, (char *)xim2programname(self));
+	    self->menu=self->startupmenu=MakeStartupMenu(self->mbi, xim2programname(self));
 	}
     } else {
 	DoTransientGeometry(self, override && !self->override_redirect, other, &left, &top, &width, &height, &sizehints, &zoomhints);
@@ -1983,7 +1973,7 @@ static void Observe(class xim  *self, class view  *obj)
 static void 
 InstallMenus(class xim  *self, class menulist  *menulist)
 {
-    register struct itemlist *item;
+    struct itemlist *item;
     struct headerlist *header;
     if (menulist == NULL) /* Should never happen, but... */
 	return;
@@ -2041,7 +2031,7 @@ InstallMenus(class xim  *self, class menulist  *menulist)
 	    
 	    if((self->mshowinactive || (menulist)->ItemIsEnabled(item)) && self->menubaron && self->menu) {
 		selectionData->refs++;
-		mb_AddSelection(self->menu, paneTitle, menubarpanePriority, messitem::Replace(selectionString), selectionPriority, FALSE, (char *)selectionData);
+		mb_AddSelection(self->menu, paneTitle, menubarpanePriority, messitem::Replace(selectionString), selectionPriority, FALSE, selectionData);
 	    }
 
 	    if((self->cshowinactive || (menulist)->ItemIsEnabled(item)) &&  self->cmenuson && self->cmenu) {
@@ -2119,7 +2109,7 @@ freeCacheRegions(struct cacheregion  *region)
 	{
 	while(region != NULL) {
 		struct cacheregion *next = region->next;
-		free((char *)region);
+		free(region);
 		region = next;
 	}
 }
@@ -2168,7 +2158,7 @@ static void freeMLCache(class xim  *self,struct mlcacheNode  *cache)
 	    }	
 	    linkCacheRegion(cache->region, &self->freeRegions);
 	}
-	free((char *)cache);
+	free(cache);
 }
 
 	static void 
@@ -2186,7 +2176,7 @@ discardCachedML(struct mlcacheNode  *cache , struct mlcacheNode  **rootP)
 		cache = cache->prev;
 		cache->next = NULL;
 		/* printf("dcml: blowing away a ml...going up.\n"); */
-		free((char *)trash);
+		free(trash);
 	}
 
 	if (cache->ml != NULL || cache->next != NULL)
@@ -2205,7 +2195,7 @@ discardCachedML(struct mlcacheNode  *cache , struct mlcacheNode  **rootP)
 		/* printf("dcml: blowing away an OR node%s.\n", 
 			(backP == rootP) ? " (Replacing root)" : ""); */
 		*backP = cache->others;
-		free((char *)cache);
+		free(cache);
 	}
 	/* else printf("dcml: Avoiding blowing away the root.\n"); */
 }
@@ -2323,8 +2313,8 @@ updateMenus(class xim  *self, class menulist  *ml)
 	} else strcpy(morestr, "More...");
 
 	if(self->menubaron) self->menu = cache->region->menus 
-	      = mb_Create(self->mbi, messitem::Replace((char *)xim2programname(self)), morestr, (char *)self , (menubar_menufptr)QMenuChoice);
-	if(self->cmenuson) self->cmenu = cache->region->cmenus = cmenu_Create(xim2display(self), xim2window(self), (char *)xim2programname(self), (cmenu_FreeFunction)FreeSelectionData);
+	      = mb_Create(self->mbi, messitem::Replace(xim2programname(self)), morestr, self , (menubar_menufptr)QMenuChoice);
+	if(self->cmenuson) self->cmenu = cache->region->cmenus = cmenu_Create(xim2display(self), xim2window(self), xim2programname(self), (cmenu_FreeFunction)FreeSelectionData);
 
 	if ((self->menubaron && self->menu == NULL) || (self->cmenuson && self->cmenu == NULL))
 	    fprintf(stderr, "xim: Couldn't allocate menus\n");
@@ -2489,8 +2479,7 @@ xim::WhichWS()
 
     if(this->menubaron) this->MenubarRedrawType = mb_FullRedraw;
 
-    this->programname = (char *)malloc(strlen(name)+1);
-    if(this->programname) strcpy(this->programname, name);
+    this->programname = strdup(name);
 
     this->mshowkeys = this->cshowkeys = environ::GetProfileSwitch("MenusShowKeys", TRUE);
 
@@ -2591,7 +2580,7 @@ xim::~xim()
 	m=m->next;
     }
     
-    register int i;
+    int i;
     Display *dpy=xim2display(this);
     class xim *im;
     class view *owner=im::GetSelectionOwner();
@@ -3155,7 +3144,7 @@ StartButtonTimeout(class xim  *xim, unsigned int button, long  x , long  y)
 	mfacts->state = (button == LEFTBUTTON) 
 			? msLeftDownPending 
 			: msRightDownPending;
-	mfacts->event = im::EnqueueEvent((event_fptr)ButtonTimerFire, (char *)mfacts, event_MSECtoTU(MouseHysteresis));
+	mfacts->event = im::EnqueueEvent((event_fptr)ButtonTimerFire, mfacts, event_MSECtoTU(MouseHysteresis));
 }
 
 	static void
@@ -3205,13 +3194,13 @@ static void HandleExposeFromMenubar(XEvent  *ee,class xim  *im)
 static void HandleSessionManagerEvent(xim *im)
 {
     int argc;
-    char **argv;
+    const char * const *argv;
 
     argv = application::AppSessionCheckpoint();
     if (argv != NULL) {
 	for (argc = 0; argv[argc] != NULL; argc++)
 	    /* counting arguments... */;			
-	XSetCommand(xim2display(im), xim2window(im), argv, argc);
+	XSetCommand(xim2display(im), xim2window(im), (char **)argv, argc);
     } else {
 	XSetCommand(xim2display(im), xim2window(im), NULL, 0);
     }
@@ -3937,7 +3926,7 @@ static void xim_ActivateMenubar(class xim  *xim, long  rock)
     if(xim->menubaron) mb_KeyboardActivate(xim->menu);
 }
 
-static const char *mygetdefaults(Display  *dpy, char  *pname)
+static const char *mygetdefaults(Display  *dpy, const char  *pname)
 {
     return environ::GetProfile(pname);
 }
@@ -4177,8 +4166,8 @@ static void updateGlobalCursors(class xim  *self)
     if (XProcessCursor || XWindowCursor) {
 	/* First, make sure we have a global window */
 	if (!self->globalCursorWindow) {
-	    register long curGWindowWidth;
-	    register long curGWindowHeight;
+	    long curGWindowWidth;
+	    long curGWindowHeight;
 	    if (cursordebug) printf("(xim)updateGlobalCursors: make global window for global cursor\n");
 	    curGWindowWidth = (self)->GetLogicalWidth();
 	    curGWindowHeight = (self)->GetLogicalHeight();
@@ -4315,7 +4304,7 @@ RemovePNMask(Display  *display, Window  window)
 	}
 }
 
-static void appendtostring(struct expandstring  *string, char  *buffer, long  length)
+static void appendtostring(struct expandstring  *string, const char  *buffer, long  length)
 			{
 	if (string->string == NULL) {
 		string->string = (char *)malloc(string->size = length+1);
@@ -4343,13 +4332,13 @@ xim_Now(class xim  *self)
 	Window window =  RootWindow(display, 0);
 	XEvent event;
 
-	static char *junk = "";
+	static const unsigned char junk[] = "";
 	
 	if (lastEventTime == CurrentTime) {
 		SetPNMask(display, window);
 		(void) XChangeProperty(display, window,
 			XA_CUT_BUFFER0,  XA_STRING, 
-			 8, PropModeAppend, (unsigned char *)junk, 0);
+			 8, PropModeAppend, junk, 0);
 		XWindowEvent(display, window,
 			PropertyChangeMask, &event);
 
@@ -5344,7 +5333,7 @@ void xim::VanishWindow()
 /* 	op 1 - delete from backslash to and including char close
 	op 2 - delete up to and including matching \enddata{...}\n
 */
-static struct copstype {char *name; long op; char close;}
+static const struct copstype {const char *name; long op; char close;}
 	controlops[] = {
 		{"view", 1, '}'},
 		{"begindata", 2, ','},
@@ -5371,12 +5360,12 @@ static struct copstype {char *name; long op; char close;}
 	static void
 Unscribe(struct expandstring  *cb)
 	{
-	register char *cx, *tx;
+	char *cx, *tx;
 	char *brace;
 	boolean istext;
 	long wordlen, idnum;
-	struct copstype *cop;
-	static char *atkflag = "\\begindata{";
+	const struct copstype *cop;
+	static const char atkflag[] = "\\begindata{";
 	long flaglen = strlen(atkflag);
 
 	if (strncmp(cb->string, atkflag, flaglen) != 0) {
@@ -5722,21 +5711,6 @@ free_drop_files(class xim  *xim)
     }
 }
 
-static char *
-#if defined(_ANSI_C_SOURCE) && !defined(_NO_PROTO)
-newstring(char *s)
-#else
-newstring(char  *s)
-    #endif
-{
-    char *ret;
-
-    ret = (char *)malloc(strlen(s)+1);
-    if (ret != NULL)
-	strcpy(ret, s);
-    return ret;
-}
-
 static void
 HandleDropin(class xim  *self, XClientMessageEvent  *ev)
 {
@@ -5773,8 +5747,8 @@ HandleDropin(class xim  *self, XClientMessageEvent  *ev)
 	self->dropfiles = (char **)malloc(3 * sizeof(char *));
 	if (self->dropfiles == NULL)
 	    return;
-	self->dropfiles[0] = newstring("localhost");
-	self->dropfiles[1] = newstring((char *)prop_data);
+	self->dropfiles[0] = strdup("localhost");
+	self->dropfiles[1] = strdup((char *)prop_data);
 	self->dropfiles[2] = NULL;
     } else if (prop_type == host_filelist) {
         /* The data is a list of strings separated by nulls.  The data is
@@ -5788,13 +5762,13 @@ HandleDropin(class xim  *self, XClientMessageEvent  *ev)
 	self->dropfiles = (char **)malloc((num_files + 1) * sizeof(char *));
 	if (self->dropfiles == NULL)
 	    return;		/* out of memory */
-	self->dropfiles[0] = newstring((char *)prop_data); /* First string is host */
+	self->dropfiles[0] = strdup((char *)prop_data); /* First string is host */
 	p = (char *)prop_data;
 	for (i = 1; i < num_files; i++) {
 	    /* advance p to next string */
 	    while (*p != '\0') p++;
 	    p++;	/* skip null */
-	    self->dropfiles[i] = newstring(p);
+	    self->dropfiles[i] = strdup(p);
 	}
 	self->dropfiles[i] = NULL;
     } else
@@ -5892,7 +5866,7 @@ find_drop_window(Display  *dpy, Window  topwin, unsigned int x_coord , unsigned 
 		    /* Don't break; We might find host_filelist. */
 		}
 	    }
-	    XFree((char *)data);
+	    XFree(data);
 	}
 	srcwin = destwin;
 	destwin = childwin;
@@ -5921,7 +5895,7 @@ static void send_drop(Display  *dpy, Window  my_win , Window  dest_win, drop_t  
 	    /* Assume pathnames contains only one string! */
 	    if (pathnames[1] == NULL)
 		return;
-	    prop_data = newstring(pathnames[1]);
+	    prop_data = strdup(pathnames[1]);
 	    len = strlen(prop_data)+1;
 	    break;
 	case drop_hostfile:
@@ -6136,7 +6110,7 @@ void xim::Beep(int volume)
     XBell(xim2display(this), volume*2 - 100);
 }
 
-char *xim::WantInformation(char *key)
+const char *xim::WantInformation(const char *key)
 {
     if (strcmp(key, "hit_modifiers") == 0 || strcmp(key, "hit_all_modifiers") == 0) {
 	/* Caller is asking for mouse button hit modifiers.
@@ -6196,7 +6170,7 @@ char *xim::WantInformation(char *key)
 	 * the first answer may not be accurate.  We assume it is
 	 * best to answer "v" so a view will know to draw.
 	 */
-	static char *vistab[] = {"v", "p", "o"};
+	static const char * const vistab[] = {"v", "p", "o"};
 	if (visible_state == -1) {
 	    Display *dpy = xim2display(this);
 	    Window w = xim2window(this);

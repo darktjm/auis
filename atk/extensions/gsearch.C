@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/gsearch.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
 ATK_IMPL("gsearch.H")
 #include <stdio.h>
 #include <ctype.h>
@@ -88,8 +81,6 @@ static struct statestacknode *StackTop;
 
 
 ATKdefineRegistry(gsearch, ATK, gsearch::InitializeClass);
-#ifndef NORCSID
-#endif
 static int statestack_init(struct statestack  *s);
 static void statestack_destroy(struct statestack  *s);
 static void statestack_pop(struct statestack  *s);
@@ -97,8 +88,8 @@ static void statestack_push(struct statestack  *s, int  pl , int  wp , int  fp, 
 static int dynstr_init(struct dynstr  *d);
 static void dynstr_shortento(struct dynstr  *d, int  size);
 static void dynstr_ensuresize(struct dynstr  *d, int  size);
-static void dynstr_put(struct dynstr  *d, char  *str);
-static void dynstr_append(struct dynstr  *d, char  *str);
+static void dynstr_put(struct dynstr  *d, const char  *str);
+static void dynstr_append(struct dynstr  *d, const char  *str);
 static void dynstr_destroy(struct dynstr  *d);
 static int dynstr_empty(struct dynstr  *d);
 static void dynstr_addchar(struct dynstr  *d, int  c);
@@ -181,7 +172,7 @@ static void dynstr_ensuresize(struct dynstr  *d, int  size)
     d->allocated = newsize;
 }
 
-static void dynstr_put(struct dynstr  *d, char  *str)
+static void dynstr_put(struct dynstr  *d, const char  *str)
 {
     int need = 1 + strlen(str);
 
@@ -190,7 +181,7 @@ static void dynstr_put(struct dynstr  *d, char  *str)
     d->used = need;
 }
 
-static void dynstr_append(struct dynstr  *d, char  *str)
+static void dynstr_append(struct dynstr  *d, const char  *str)
 {
     int need = d->used + strlen(str);
 
@@ -235,7 +226,8 @@ static void dosearch(class textview  *tv, int  forwardp)
     struct dynstr pattern, prompt;
     int wasmeta = 0;
     int c, dodokey = 0, oldforwardp;
-    char *compiled, *compileerr, *tmpbuf;
+    char *compiled, *tmpbuf;
+    const char *compileerr;
     struct statestack stack;
 
     if (dynstr_init(&pattern)) {

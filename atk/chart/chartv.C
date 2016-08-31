@@ -25,13 +25,6 @@
  *  $
 */
 
-#include  <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chartv.C,v 1.8 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Chart View-object
@@ -76,6 +69,7 @@ HISTORY
 END-SPECIFICATION  ************************************************************/
 
 
+#include  <andrewos.h>
 ATK_IMPL("chartv.H")
 #include  <errno.h>
 #include  <sys/stat.h>
@@ -110,21 +104,21 @@ boolean chartv_debug = 0;
 
 
 ATKdefineRegistry(chartv, aptv, chartv::InitializeClass);
-static long SetChartAttribute( register class chartv      *self, register long		       attribute , register long		       value );
-static long ChangeChartAttribute( register class chartv      *self, register long		       attribute , register long		       value );
-static void Initialize( register class chartv      *self );
-void chartv_Add_Command( register class chartv      *self );
-void chartv_Delete_Command( register class chartv      *self );
-void chartv_ReChart( register class chartv      *self, register char		      *moniker );
-void chartv_ReChart_Command( register class chartv      *self, register char		      *moniker );
-void chartv_Print_Command( register class chartv      *self );
-static void chartv_Sort_Command( register class chartv      *self, register long		       datum );
-void chartv_Save_Command( register class chartv      *self );
-static void DEBUG_Command( register class chartv      *self );
-static void chartv_Palette_Command( register class chartv      *self );
-static void chartv_Quit_Command( register class chartv      *self );
-static boolean Description_Modified( register class chartv	  *self );
-static void Preserve_Description( register class chartv	  *self );
+static long SetChartAttribute( class chartv      *self, long		       attribute , long		       value );
+static long ChangeChartAttribute( class chartv      *self, long		       attribute , long		       value );
+static void Initialize( class chartv      *self );
+void chartv_Add_Command( class chartv      *self );
+void chartv_Delete_Command( class chartv      *self );
+void chartv_ReChart( class chartv      *self, char		      *moniker );
+void chartv_ReChart_Command( class chartv      *self, char		      *moniker );
+void chartv_Print_Command( class chartv      *self );
+static void chartv_Sort_Command( class chartv      *self, long		       datum );
+void chartv_Save_Command( class chartv      *self );
+static void DEBUG_Command( class chartv      *self );
+static void chartv_Palette_Command( class chartv      *self );
+static void chartv_Quit_Command( class chartv      *self );
+static boolean Description_Modified( class chartv	  *self );
+static void Preserve_Description( class chartv	  *self );
 
 
 class chartv *
@@ -132,7 +126,7 @@ chartv::Create( chartv_Specification		  *specification, char	  *anchor )
         {
 	ATKinit;
 
-  register class chartv	 *self;
+  class chartv	 *self;
 
   IN(chartv_Create);
   if ( (self = new chartv) == NULL )
@@ -219,7 +213,7 @@ chartv::chartv( )
       {
 	ATKinit;
   class chartv *self=this;
-  register long		       status = true;
+  long		       status = true;
 
   IN(chartv_InitializeObject);
   DEBUGst(RCSID,rcsidchartv);
@@ -287,7 +281,7 @@ chartv::GetApplicationLayer( )
   }
 
 void
-chartv::DeleteApplicationLayer( register class view	      *view )
+chartv::DeleteApplicationLayer( class view	      *view )
       {
   class chartv *self=this;
 
@@ -302,7 +296,7 @@ chartv::DeleteApplicationLayer( register class view	      *view )
   }
 
 void
-chartv::SetDataObject( register class dataobject	       *data_object )
+chartv::SetDataObject( class dataobject	       *data_object )
       {
   class chartv *self=this;
   IN(chartv_SetDataObject);
@@ -359,9 +353,9 @@ chartv::SetChartAttribute( long attribute, long value )
   {  return  ::SetChartAttribute( this, attribute, value );  }
 
 static
-long SetChartAttribute( register class chartv      *self, register long		       attribute , register long		       value )
+long SetChartAttribute( class chartv      *self, long		       attribute , long		       value )
       {
-  register long		      status = ok;
+  long		      status = ok;
 
   IN(::SetChartAttribute);
   switch ( attribute )
@@ -422,9 +416,9 @@ chartv::ChangeChartAttribute( long attribute, long value )
   {  return  ::ChangeChartAttribute( this, attribute, value );  }
 
 static
-long ChangeChartAttribute( register class chartv      *self, register long		       attribute , register long		       value )
+long ChangeChartAttribute( class chartv      *self, long		       attribute , long		       value )
       {
-  register long		      status = ok;
+  long		      status = ok;
 
   IN(::ChangeChartAttribute);
   if ( (status = ::SetChartAttribute( self, attribute, value )) == ok )
@@ -436,9 +430,9 @@ long ChangeChartAttribute( register class chartv      *self, register long		    
   }
 
 long
-chartv::ChartAttribute( register long		       attribute )
+chartv::ChartAttribute( long		       attribute )
       {
-  register long		      value = 0;
+  long		      value = 0;
 
 /*===*/
   return  value;
@@ -448,7 +442,7 @@ struct chart_item *
 chartv::CurrentItem( )
     {
   class chartv *self=this;
-  register struct chart_item *item = NULL;
+  struct chart_item *item = NULL;
 
   if ( ChartViewer )
     item = (ChartViewer )->CurrentItem( );
@@ -467,7 +461,7 @@ chartv::SetDebug( boolean		        state )
   }
 
 void 
-chartv::FullUpdate( register enum view_UpdateType	   type, register long			   left , register long			   top , register long			   width , register long			   height )
+chartv::FullUpdate( enum view_UpdateType	   type, long			   left , long			   top , long			   width , long			   height )
         {
   class chartv *self=this;
   IN(chartv_FullUpdate);
@@ -499,9 +493,9 @@ chartv::FullUpdate( register enum view_UpdateType	   type, register long			   le
   }
 
 static
-void Initialize( register class chartv      *self )
+void Initialize( class chartv      *self )
     {
-  register char		     *moniker = NULL;
+  char		     *moniker = NULL;
 
   IN(Initialize);
   if ( Chart )
@@ -525,10 +519,10 @@ void Initialize( register class chartv      *self )
   }
 
 class view *
-chartv::Hit( register enum view_MouseAction    action, register long			    x , register long			    y , register long			    clicks )
+chartv::Hit( enum view_MouseAction    action, long			    x , long			    y , long			    clicks )
         {
   class chartv *self=this;
-  register class view		  *hit;
+  class view		  *hit;
 
   IN(chartv_Hit );
   (this)->Announce(  "" );
@@ -548,7 +542,7 @@ chartv::Hit( register enum view_MouseAction    action, register long			    x , r
   }
 
 void
-chartv::Print( register FILE		      *file, register char		      *processor, register char		      *format, register boolean	       level )
+chartv::Print( FILE		      *file, const char		      *processor, const char		      *format, boolean	       level )
             {
   class chartv *self=this;
   IN(chartv_Print);
@@ -606,10 +600,10 @@ chartv::PrintCmd()
 }
 
 void
-chartv_Add_Command( register class chartv      *self )
+chartv_Add_Command( class chartv      *self )
     {
   char			     *reply;
-  register struct chart_item *item;
+  struct chart_item *item;
 
   IN(Add_Command);
 /*===*/
@@ -640,7 +634,7 @@ chartv_Add_Command( register class chartv      *self )
   }
 
 void
-chartv_Delete_Command( register class chartv      *self )
+chartv_Delete_Command( class chartv      *self )
     {
   IN(Delete_Command);
   if ( (ChartViewer )->CurrentItem( ) )
@@ -658,10 +652,10 @@ chartv_Delete_Command( register class chartv      *self )
 
 extern void Activate_Viewer(class chartv *);
 
-void chartv_ReChart( register class chartv      *self, register char		      *moniker )
+void chartv_ReChart( class chartv      *self, char		      *moniker )
       {
   struct rectangle	      bounds;
-  register class chartobj   *prior_viewer = ChartViewer;
+  class chartobj   *prior_viewer = ChartViewer;
 
   IN(ReChart);
   DEBUGst(Moniker,moniker);
@@ -708,7 +702,7 @@ void chartv_ReChart( register class chartv      *self, register char		      *mon
   OUT(ReChart);
   }
 void
-chartv_ReChart_Command( register class chartv      *self, register char		      *moniker )
+chartv_ReChart_Command( class chartv      *self, char		      *moniker )
       {
   IN(ReChart_Command);
   DEBUGst(moniker,moniker);
@@ -717,11 +711,11 @@ chartv_ReChart_Command( register class chartv      *self, register char		      *
   }
 
 void
-chartv_Print_Command( register class chartv      *self )
+chartv_Print_Command( class chartv      *self )
     {
-  register FILE		     *file;
+  FILE		     *file;
   char			      msg[512], *chart_file_name;
-  static char		      file_name[] = "/tmp/chart_print.PS";
+  static const char	      file_name[] = "/tmp/chart_print.PS";
 
   IN(Print_Command);
   (self )->UseWaitCursor( );
@@ -745,7 +739,7 @@ chartv_Print_Command( register class chartv      *self )
   }
 
 static void
-chartv_Sort_Command( register class chartv      *self, register long		       datum )
+chartv_Sort_Command( class chartv      *self, long		       datum )
       {
   IN(chartv_Sort_Command);
   (Chart)->Sort(  datum, NULL );
@@ -754,13 +748,13 @@ chartv_Sort_Command( register class chartv      *self, register long		       dat
   }
 
 void
-chartv_Save_Command( register class chartv      *self )
+chartv_Save_Command( class chartv      *self )
     {
   char			      msg[512],
 			      original_name[512], backup_name[512];
   char			     *file_name;
-  register FILE		     *file;
-  register long		      serial = 1, status = ok;
+  FILE		     *file;
+  long		      serial = 1, status = ok;
   struct stat		      st;
 
   IN(Save_Command);
@@ -818,7 +812,7 @@ chartv_Save_Command( register class chartv      *self )
   }
 
 static void
-DEBUG_Command( register class chartv      *self )
+DEBUG_Command( class chartv      *self )
     {
   IN(DEBUG_Command);
   (self)->SetDebug(  !chartv_debug );
@@ -830,7 +824,7 @@ extern void Hide_Palette(class chartv *);
 extern void Expose_Palette(class chartv *);
 
 static void
-chartv_Palette_Command( register class chartv      *self )
+chartv_Palette_Command( class chartv      *self )
     {
   IN(Palette_Command);
   if ( PaletteExposed )
@@ -843,9 +837,9 @@ chartv_Palette_Command( register class chartv      *self )
   }
 
 static void
-chartv_Quit_Command( register class chartv      *self )
+chartv_Quit_Command( class chartv      *self )
     {
-  static char		     *choices[] =
+  static const char		     * const choices[] =
 		{"Cancel", "Save", "Save & Quit", "Quit Anyway", 0};
   long			      response = 0;
 
@@ -870,9 +864,9 @@ chartv_Quit_Command( register class chartv      *self )
   }
 
 static
-boolean Description_Modified( register class chartv	  *self )
+boolean Description_Modified( class chartv	  *self )
     {
-  register boolean		  status = false;
+  boolean		  status = false;
 
   IN(Description_Modified);
   if ( (Description )->GetModified( ) != DescriptionLastModified )
@@ -886,11 +880,11 @@ boolean Description_Modified( register class chartv	  *self )
   }
 
 static
-void Preserve_Description( register class chartv	  *self )
+void Preserve_Description( class chartv	  *self )
     {
-  register FILE			 *file;
+  FILE			 *file;
   struct stat			  st;
-  register char			 *buffer = NULL;
+  char			 *buffer = NULL;
 
   IN(Preserve_Description);
   file = fopen( temp_name, "w" );

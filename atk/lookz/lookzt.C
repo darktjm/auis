@@ -23,11 +23,6 @@
 //  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/lookz/RCS/lookzt.C,v 1.3 1994/08/11 02:57:43 rr2b Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
@@ -50,15 +45,13 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/lookz/RCS/
 
 #include <lookz.H>
 
-#ifndef NORCSID
-#endif
-main( register int	   argc, register char   **argv );
-printdata(register class lookz  *st);
+main( int	   argc, char   **argv );
+printdata(class lookz  *st);
 
 
-main( register int	   argc, register char   **argv )
+main( int	   argc, char   **argv )
 		{
-	register class lookz *st, *st2;
+	class lookz *st, *st2;
 	FILE *f;
 
 	printf("Start\n"); fflush(stdout);
@@ -124,7 +117,7 @@ main( register int	   argc, register char   **argv )
 	printdata(st2);
 }
 
-printdata(register class lookz  *st)
+printdata(class lookz  *st)
 	{
 	printf("Image is %s\n", ((st)->GetVisibility() ? "visible" : "hidden"));
 	fflush(stdout);

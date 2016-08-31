@@ -136,7 +136,7 @@ void runbuttonview::ReceiveInputFocus()
 boolean runbuttonview::Touch(int ind, enum view_MouseAction action)
 {
     class runbutton *b = (runbutton *)ButtonData();
-    char *m, *cmd;
+    const char *m, *cmd;
     char msg[4096];
 
     switch (action) {
@@ -207,7 +207,7 @@ void runbuttonview::SetLabelProc(runbuttonview *self, const char *arg)
 {
     char buf[256];
     runbutton *b = self->GetRunButton();
-    char *oldtext;
+    const char *oldtext;
 
     oldtext = b->GetLabelString();
     if (message::AskForString(self,50,"Enter new label for button: ", oldtext, buf, sizeof(buf)) >= 0) {
@@ -221,7 +221,7 @@ void runbuttonview::SetLabelProc(runbuttonview *self, const char *arg)
 }
 
 
-void *runbuttonview::GetPSPrintInterface(char *printtype)
+void *runbuttonview::GetPSPrintInterface(const char *printtype)
 {
     if (strcmp(printtype, "text") == 0)
 	return GetTextPrintData();
@@ -233,8 +233,8 @@ void *runbuttonview::GetPSPrintInterface(char *printtype)
 struct textview_insetdata *runbuttonview::GetTextPrintData()
 {
     runbutton *b = GetRunButton();
-    char *lbl = b->GetLabelString();
-    char *cmd = b->GetCommandString();
+    const char *lbl = b->GetLabelString();
+    const char *cmd = b->GetCommandString();
     int lbl_len = strlen(lbl);
     int cmd_len = strlen(cmd);
 

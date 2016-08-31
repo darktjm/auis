@@ -113,7 +113,7 @@ extension\italic{ .d }should be edited with a text object.
 
 \example{filetype_DeleteEntry(extension)
 
-register char *extension;} 
+char *extension;} 
 
 
 \leftindent{\bold{Class procedure description. }  filetype_DeleteEntry is used 
@@ -128,7 +128,7 @@ to remove a mapping added with filetype_AddEntry.}
 
 FILE *file;
 
-register char *filename;
+char *filename;
 
 long *objectID;
 

@@ -200,7 +200,8 @@ struct display;
 struct datum {
     struct display *FirstDisplay;
     int Value, *Valuelist;
-    char *RawText, *ExtName;
+    char *RawText;
+    const char *ExtName;
     short ValueCtr;
     int IsDisplaying BIT(1), /* Whether or not to bother */
         AnAlwaysUpdate BIT(1),
@@ -217,8 +218,8 @@ struct display {
     struct logview *AssociatedLogView;/* view of text (log) data object */
     struct scroll *ScrollLogView; /* temporary */
     struct fontdesc *Labelfont, *Textfont;
-    char *ClickStringLeft, *NameOfTextFont, *NameOfLabelFont,
-	*disptext,  *label;
+    char *ClickStringLeft, *NameOfTextFont, *NameOfLabelFont, *disptext,
+	 *label;
     display_pdffptr PreDrawFunction;
     display_dffptr DrawFunction;  /* To init, draw, or redraw */
     int ValueMax,  /* Alleged maximum value, for %. */
@@ -322,7 +323,7 @@ extern char*DisplayTypeTable[];
 #define MENUCARDMAX 10 /* To limit the size of each menu card */
 
 extern struct fontdesc *FontsAvail[MAXNUMFONTS];
-extern char *AvailFontNames[MAXNUMFONTS];
+extern const char *AvailFontNames[MAXNUMFONTS];
 extern int AvailFontPts[MAXNUMFONTS];
 extern int FontCount;
 extern int ScaleFactor;
@@ -372,9 +373,9 @@ extern int ExternalsInUse;
 extern int DefaultErrorPriority;
 extern int HighestPriority;
 
-extern char *Nullity;
+extern char Nullity[];
 extern char *StatusServer; /* for vopcons server machine */
-extern int stablk(char *arg, char **table, int quiet);
+extern int stablk(const char *arg, const char * const *table, int quiet);
 extern void InitPrint(class consoleClass *self);
 extern void InitMail(class consoleClass *self);
 extern void DrawDebug(class consoleClass  *self,int  Op, struct display  *disp);
@@ -414,8 +415,8 @@ extern void DrawLog(class consoleClass  *self, int  Op, struct display  *disp);
 extern void DrawNothing(class consoleClass  *self, int  Op, struct display  *disp);
 extern void CheckErrorsIn(FILE  *ErrorsIn, char *selfl);
 extern int CheckConsoleSocket(FILE  *ConsoleIn, class consoleClass  *self);
-extern int AnotherError(class consoleClass  *self, char  *errstring, boolean  AddNewline);
-extern void RestartErrorMonitoring(class consoleClass  *self, char  *msg);
+extern int AnotherError(class consoleClass  *self, const char  *errstring, boolean  AddNewline);
+extern void RestartErrorMonitoring(class consoleClass  *self, const char  *msg);
 extern int InitErrorMonitoring(class consoleClass  *self,boolean  FirstTime);
 extern void DebugMenu(class ATK  *self, char  *rock);
 extern void DoQuit(class ATK  *self, char  *rock);
@@ -433,7 +434,7 @@ extern void ShrinkMenu(class ATK  *self);
 extern void GetStdItems(class menulist  *tempMenulist);
 extern void GetStdConsoles(class menulist  *tempMenulist);
 extern char *GetUserPaths();
-extern void GetExtraConsoles(class menulist  *tempMenulist, char  *conpath, char  *cardTitle);
+extern void GetExtraConsoles(class menulist  *tempMenulist, const char  *conpath, const char  *cardTitle);
 extern void SetStartUpConsole(char  *path, char  *ConFile);
 extern void FindStartUpConsole(char  *ConFile, boolean  IsStartUp);
 extern void PrepareStdMenus(boolean  IsStartup, class menulist  **stdMenulist, struct ATKregistryEntry   *ClassInfo);
@@ -477,7 +478,7 @@ extern void InitializeMariner(class consoleClass  *self);
 extern void LogMarinerFetchInfo(struct display  *disp);
 extern void VenusNovelty(class consoleClass  *self, char  *rock);
 extern int IsViceError(int  n);
-extern class fontdesc *SetupFont(char  *fontname);
+extern class fontdesc *SetupFont(const char  *fontname);
 extern void KillInitExecProcesses(boolean  killPIDs);
 extern void SetConsoleLib();
 extern boolean GetConsoleFileFromTypeIn(class consoleClass  *self, boolean  IsStartup);
@@ -488,7 +489,7 @@ extern void OneTimeInit(class consoleClass  *self);
 extern void ClearAllLogs(class consoleClass  *self, char  *rock);
 extern void WriteMonsterLog(class consoleClass  *self, char  *rock);
 extern void InitializeInstruments(class consoleClass *self);
-extern void ReportInternalError(class consoleClass *self, char *msg);
+extern void ReportInternalError(class consoleClass *self, const char *msg);
 extern void RestartStats(class consoleClass  *self);
 extern void EndStats(class consoleClass  *self, FILE  *vmstats, char  *error, char  *type, int  fatal);
 extern void ComputeStatistics(FILE  *vmstats, class consoleClass  *self);
@@ -496,13 +497,13 @@ extern void CheckWindows(class consoleClass  *self);
 extern void SetMailEnv();
 extern int NonAndrewCheckMail(class consoleClass *self, char *Name, int *LastModTime, int LastValue);
 extern void SetPrintEnv();
-extern int AbortPrintChecking(class consoleClass *self, char *msg);
+extern int AbortPrintChecking(class consoleClass *self, const char *msg);
 extern void ReInitializeRemoteInstruments();
 extern void ConfigureMachines(class consoleClass *self, int *Rows, int *Columns, int *Machines, boolean Initialize);
-extern struct datum *BuildDatum(char *keyword, int machine);
+extern struct datum *BuildDatum(const char *keyword, int machine);
 extern struct RegionLog *WhichErrorLog(int machine);
 extern void ChooseColumns(int numcol);
-extern void ChooseMachines(class consoleClass *self, char *machinelist);
+extern void ChooseMachines(class consoleClass *self, const char *machinelist);
 extern void OneTimeRemoteInit(class consoleClass *self);
 extern int console_InitStats(class consoleClass  *self);
 extern void InitializeGetStats(class consoleClass *self);

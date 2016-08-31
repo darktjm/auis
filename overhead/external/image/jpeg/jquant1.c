@@ -395,12 +395,12 @@ color_quantize (decompress_info_ptr cinfo, int num_rows,
 		JSAMPIMAGE input_data, JSAMPARRAY output_data)
 /* General case, no dithering */
 {
-  register int pixcode, ci;
-  register JSAMPROW ptrout;
-  register long col;
+  int pixcode, ci;
+  JSAMPROW ptrout;
+  long col;
   int row;
   long width = cinfo->image_width;
-  register int nc = cinfo->color_out_comps;  
+  int nc = cinfo->color_out_comps;  
 
   for (row = 0; row < num_rows; row++) {
     do_color_conversion(cinfo, input_data, row);
@@ -422,9 +422,9 @@ color_quantize3 (decompress_info_ptr cinfo, int num_rows,
 		 JSAMPIMAGE input_data, JSAMPARRAY output_data)
 /* Fast path for color_out_comps==3, no dithering */
 {
-  register int pixcode;
-  register JSAMPROW ptr0, ptr1, ptr2, ptrout;
-  register long col;
+  int pixcode;
+  JSAMPROW ptr0, ptr1, ptr2, ptrout;
+  long col;
   int row;
   long width = cinfo->image_width;
 
@@ -449,15 +449,15 @@ color_quantize_dither (decompress_info_ptr cinfo, int num_rows,
 		       JSAMPIMAGE input_data, JSAMPARRAY output_data)
 /* General case, with Floyd-Steinberg dithering */
 {
-  register FSERROR val;
+  FSERROR val;
   FSERROR two_val;
-  register FSERRPTR thisrowerr, nextrowerr;
-  register JSAMPROW input_ptr;
-  register JSAMPROW output_ptr;
+  FSERRPTR thisrowerr, nextrowerr;
+  JSAMPROW input_ptr;
+  JSAMPROW output_ptr;
   JSAMPLE *range_limit = cinfo->sample_range_limit;
   JSAMPROW colorindex_ci;
   JSAMPROW colormap_ci;
-  register int pixcode;
+  int pixcode;
   int dir;			/* 1 for left-to-right, -1 for right-to-left */
   int ci;
   int nc = cinfo->color_out_comps;

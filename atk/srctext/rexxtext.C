@@ -26,7 +26,6 @@ $Disclaimer:
 #include <andrewos.h>
 
 static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/rexxtext.C,v 2.0 1995/01/27 19:38:38 rr2b Stab74 $";
 
 #include <environment.H>
 #include <stylesheet.H>
@@ -91,7 +90,7 @@ void rexxtext::SetupStyles()
 
 boolean rexxtext::InitializeClass()
 {
-    static Dict rexxkeywords[]={
+    static const Dict rexxkeywords[]={
 	{"ADDRESS",0,KEYWRD},
 	{"ARG",0,KEYWRD},
 	{"BY",0,KEYWRD},
@@ -187,7 +186,7 @@ static long unstyledCommentStart(rexxtext *self, long pos)
 static long backwardSkipJunk(rexxtext *self, long pos, boolean skipNewLine)
 {
     while (pos>=0) {
-	register int c=(self)->GetChar(pos--);
+	int c=(self)->GetChar(pos--);
 
 	switch(c) {
 	    case '/':

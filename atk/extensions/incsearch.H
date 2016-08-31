@@ -5,15 +5,8 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/incsearch.H,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $ */
-/* $ACIS:incrsearch.ch 1.2$ */
-/* $Source: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/incsearch.H,v $ */
 
 #include <ATK.H>
-
-#ifndef lint
-static UNUSED const char *rcsidincsearch_H = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/incsearch.H,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif /* lint */
 
 class incsearch : public ATK  {
 public:

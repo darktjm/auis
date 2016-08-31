@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/utility/RCS/lt.C,v 1.4 1994/08/14 18:40:59 rr2b Stab74 $";
-#endif
-
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The LightTable Data-object Program
@@ -46,8 +40,6 @@ HISTORY
   10/10/88	Created (TCP)
 
 END-SPECIFICATION  ************************************************************/
-
-
 
 #include <andrewos.h>
 #include "lt.H"
@@ -84,11 +76,11 @@ lt::lt( )
 }
 
 long
-lt::Read_Visuals( register char *foreground , register char *background )
+lt::Read_Visuals( char *foreground , char *background )
 {
-    register long			      status = 0;
-    register FILE			     *file;
-    static char			     *source =
+    long			      status = 0;
+    FILE			     *file;
+    static const char			     source[] =
       "*G;-1000,1000\nLW0\n>1000,-1000";
 
     IN(lt_Read_Visuals);

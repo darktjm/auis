@@ -27,11 +27,6 @@
 
 #include <andrewos.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/prsdlib.c,v 2.7 1992/12/15 21:20:51 rr2b Stab74 $";
-#endif
-
 /*
  * prsdlib.c - A small library of routines used by parsedate.
  *
@@ -82,8 +77,8 @@ char *fold (out,in,whichway)
 char *in,*out;
 FOLDMODE whichway;
 {
-	register char *i,*o;
-	register char lower = 0;
+	char *i,*o;
+	char lower = 0;
 	char upper = 0;
 	int delta = 0;
 
@@ -166,7 +161,7 @@ char *skipto();
 char *nxtarg (q,brk)
 char **q,*brk;
 {
-	register char *front,*back;
+	char *front,*back;
 	front = *q;			/* start of string */
 	/* leading blanks and tabs */
 	while (*front && (*front == ' ' || *front == '\t')) front++;
@@ -223,7 +218,7 @@ static unsigned char tab[256] = {
 char *skipto (string,charset)
 unsigned char *string, *charset;
 {
-	register unsigned char *setp,*strp;
+	unsigned char *setp,*strp;
 
 	tab[0] = 1;		/* Stop on a null, too. */
 	for (setp=charset;  *setp;  setp++) tab[*setp]=1;
@@ -235,7 +230,7 @@ unsigned char *string, *charset;
 char *skipover (string,charset)
 unsigned char *string, *charset;
 {
-	register unsigned char *setp,*strp;
+	unsigned char *setp,*strp;
 
 	tab[0] = 0;		/* Do not skip over nulls. */
 	for (setp=charset;  *setp;  setp++) tab[*setp]=1;

@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gofig/RCS/gofigvt.C,v 1.3 1994/11/10 21:58:26 wjh Stab74 $";
-#endif
-
-
 #include <andrewos.h>
 #include <stdio.h>
 

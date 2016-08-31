@@ -25,18 +25,6 @@
 //  $
 */
 
-#include <andrewos.h> /* sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/funs.C,v 1.7 1996/09/03 19:17:27 robr Exp $";
-#endif
-
-
-
-
-
-
 /*
  * %%%% the need to undefine _C_func appears to be a bug in AIX...pgc
  */
@@ -45,6 +33,8 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #undef _C_func
 #endif /* ifdef _C_func */
 #endif /* if SY_AIX221 */
+
+#include <andrewos.h> /* sys/time.h */
 
 #include <math.h>
 
@@ -59,24 +49,16 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 extern int daysinmonth[];
 
 
-#ifndef NORCSID
-#endif
-#if SY_AIX221
-#ifdef _C_func
-#endif /* ifdef _C_func */
-#endif /* if SY_AIX221 */
-#ifdef hpux
-#endif /* hpux */
 #define false myfalse
 #define true mytrue
 int isrange (extended_double  *x);
-static void getrow (register class table  * T, register extended_double  *result, int      r , int      c, int      argc, extended_double  *argv);
-static void getcol (register class table  * T, register extended_double  *result, int      r , int      c, int      argc, extended_double  *argv);
-static void fsum (register class table  * T, register extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
-static void fcount (register class table  * T, register extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
-static void fmax (register class table  * T, register extended_double  *result, int      rr, int      cc, int      argc, extended_double  *argv);
-static void fmin (register class table  * T, register extended_double  *result, int      rr, int      cc, int      argc, extended_double  *argv);
-static void vlookup (register class table  * T, register extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
+static void getrow (class table  * T, extended_double  *result, int      r , int      c, int      argc, extended_double  *argv);
+static void getcol (class table  * T, extended_double  *result, int      r , int      c, int      argc, extended_double  *argv);
+static void fsum (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
+static void fcount (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
+static void fmax (class table  * T, extended_double  *result, int      rr, int      cc, int      argc, extended_double  *argv);
+static void fmin (class table  * T, extended_double  *result, int      rr, int      cc, int      argc, extended_double  *argv);
+static void vlookup (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
 static double   iffer (double   x , double   y , double   z);
 static double   false ();
 static double true ();
@@ -84,14 +66,14 @@ static double frand ();
 static double fnot (double   x);
 static double fand (double   x , double   y);
 static double orf (double   x , double   y);
-static void fiserr (register class table  * T, register extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
-static void fisinf (register class table  * T, register extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
+static void fiserr (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
+static void fisinf (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
 int     idate (int      y, int      m, int      d);
-static void fdate (register class table  * T, register extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
+static void fdate (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
 static double   fday (double   fdate);
 static double   fmonth (double   fdate);
 static double fyear (double   fdate);
-static void errorfunc (register class table  * T, register extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
+static void errorfunc (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
 static double   fmodulo (double   x , double   y);
 static double   fpi ();
 static double fround (double   x , double   yy);
@@ -104,7 +86,7 @@ int isrange (extended_double  *x)
     return (IsBogus(x) && strcmp (ExtractBogus(x), "range") == 0);
 }
 
-static void getrow (register class table  * T, register extended_double  *result, int      r , int      c, int      argc, extended_double  *argv)
+static void getrow (class table  * T, extended_double  *result, int      r , int      c, int      argc, extended_double  *argv)
 {
     if (argc != 0)
 	MakeBogus(result, "No args expected");
@@ -112,7 +94,7 @@ static void getrow (register class table  * T, register extended_double  *result
 	MakeStandard(result, (double) (r + 1));
 }
 
-static void getcol (register class table  * T, register extended_double  *result, int      r , int      c, int      argc, extended_double  *argv)
+static void getcol (class table  * T, extended_double  *result, int      r , int      c, int      argc, extended_double  *argv)
 {
     if (argc != 0)
 	MakeBogus(result, "No args expected");
@@ -120,7 +102,7 @@ static void getcol (register class table  * T, register extended_double  *result
 	MakeStandard(result, (double) (c + 1));
 }
 
-static void fsum (register class table  * T, register extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv)
+static void fsum (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv)
 {
     double  x = 0.0;
     extended_double *p = argv;
@@ -156,7 +138,7 @@ static void fsum (register class table  * T, register extended_double  *result, 
     MakeStandard(result, x);
 }
 
-static void fcount (register class table  * T, register extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv)
+static void fcount (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv)
 {
     int     x = 0;
     extended_double *p = argv;
@@ -186,7 +168,7 @@ static void fcount (register class table  * T, register extended_double  *result
     MakeStandard(result, (double) (x));
 }
 
-static void fmax (register class table  * T, register extended_double  *result, int      rr, int      cc, int      argc, extended_double  *argv)
+static void fmax (class table  * T, extended_double  *result, int      rr, int      cc, int      argc, extended_double  *argv)
 {
     double  x = 0;
     int     any = 0;
@@ -232,7 +214,7 @@ static void fmax (register class table  * T, register extended_double  *result, 
 	eval(T, result, rr, cc, "-1/0");
 }
 
-static void fmin (register class table  * T, register extended_double  *result, int      rr, int      cc, int      argc, extended_double  *argv)
+static void fmin (class table  * T, extended_double  *result, int      rr, int      cc, int      argc, extended_double  *argv)
 {
     double  x = 0;
     int     any = 0;
@@ -278,7 +260,7 @@ static void fmin (register class table  * T, register extended_double  *result, 
 	eval(T, result, rr, cc, "1/0");
 }
 
-static void vlookup (register class table  * T, register extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv)
+static void vlookup (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv)
 {
     double  x;
     extended_double *p = argv;
@@ -346,7 +328,7 @@ static double orf (double   x , double   y)
     return (x != 0 || y != 0);
 }
 
-static void fiserr (register class table  * T, register extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv)
+static void fiserr (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv)
 {
 
     if (argc != 1) {
@@ -364,7 +346,7 @@ static void fiserr (register class table  * T, register extended_double  *result
 	MakeStandard(result, e_FALSE);
 }
 
-static void fisinf (register class table  * T, register extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv)
+static void fisinf (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv)
 {
     if (argc != 1) {
 	MakeBogus(result, "Wrong # of parameters");
@@ -412,7 +394,7 @@ int     idate (int      y, int      m, int      d)
     return ans + (ans < 59);
 }
 
-static void fdate (register class table  * T, register extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv)
+static void fdate (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv)
 {
     int     y, m, d;
     int     leapyear = 0;
@@ -530,7 +512,7 @@ static double fyear (double   fdate)
     return (double) (y + 1900);
 }
 
-static void errorfunc (register class table  * T, register extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv)
+static void errorfunc (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv)
 
 {
     MakeBogus(result, "ERROR!");

@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipedit.C,v 1.5 1994/08/11 03:03:54 rr2b Stab74 $";
-#endif
-
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -183,60 +178,58 @@ static class keymap		     *class_keymap;
 
 
 ATKdefineRegistry(zipedit, ATK, zipedit::InitializeClass);
-#ifndef NORCSID
-#endif
-static void Fit_Command( register class zipedit	    *self );
-static void Duplicate_Command( register class zipedit	      *self );
-static void To_Front_Command( register class zipedit	       *self );
-static void To_Rear_Command( register class zipedit	       *self );
-static void Manipulate_Pane( register class zipedit	       *self, register int			        action );
-static void Delete_Command( register class zipedit     *self );
-static void Expose_Coordinates_Command( register class zipedit      *self );
-static void Hide_Coordinates_Command( register class zipedit      *self );
-static void Expose_Grid_Command( register class zipedit      *self );
-static void Hide_Grid_Command( register class zipedit     *self );
-static void Grid_Double_Command( register class zipedit      *self );
-static void Grid_Halve_Command( register class zipedit      *self );
-static void Constrain_Points_Command( register class zipedit  *self );
-static void Unconstrain_Points_Command( register class zipedit  *self );
-static int Insert_File_By_Name( register class zipedit	      *self, register char			      *name );
-static void Insert_File( register class zipedit	      *self );
-static void Insert_Reference_Command( register class zipedit	       *self );
-static void Insert_Stream_Command( register class zipedit	       *self );
-static void Object_Absolute_Command( register class zipedit      *self );
-static void Object_Relative_Command( register class zipedit         *self );
-static long Display_Processor( register class zipedit	      *self, register zip_type_pane	       pane, register long			       action );
-static void Background_Command( register class zipedit	      *self );
-static void Hide_Background_Command( register class zipedit	      *self );
-static void Expose_Background_Command( register class zipedit	      *self );
-void zipedit_Display_Background_Pane( register class zipedit	      *self, register zip_type_pane	       pane );
-static void Lighten_Background( register class zipedit	      *self );
-static void Lighten_Background_Command( register class zipedit	      *self );
-static void Darken_Background_Command( register class zipedit	      *self );
-static void Select_Background_Command( register class zipedit	      *self );
-static void Unselect_Background_Command( register class zipedit	      *self );
+static void Fit_Command( class zipedit	    *self );
+static void Duplicate_Command( class zipedit	      *self );
+static void To_Front_Command( class zipedit	       *self );
+static void To_Rear_Command( class zipedit	       *self );
+static void Manipulate_Pane( class zipedit	       *self, int			        action );
+static void Delete_Command( class zipedit     *self );
+static void Expose_Coordinates_Command( class zipedit      *self );
+static void Hide_Coordinates_Command( class zipedit      *self );
+static void Expose_Grid_Command( class zipedit      *self );
+static void Hide_Grid_Command( class zipedit     *self );
+static void Grid_Double_Command( class zipedit      *self );
+static void Grid_Halve_Command( class zipedit      *self );
+static void Constrain_Points_Command( class zipedit  *self );
+static void Unconstrain_Points_Command( class zipedit  *self );
+static int Insert_File_By_Name( class zipedit	      *self, char			      *name );
+static void Insert_File( class zipedit	      *self );
+static void Insert_Reference_Command( class zipedit	       *self );
+static void Insert_Stream_Command( class zipedit	       *self );
+static void Object_Absolute_Command( class zipedit      *self );
+static void Object_Relative_Command( class zipedit         *self );
+static long Display_Processor( class zipedit	      *self, zip_type_pane	       pane, long			       action );
+static void Background_Command( class zipedit	      *self );
+static void Hide_Background_Command( class zipedit	      *self );
+static void Expose_Background_Command( class zipedit	      *self );
+void zipedit_Display_Background_Pane( class zipedit	      *self, zip_type_pane	       pane );
+static void Lighten_Background( class zipedit	      *self );
+static void Lighten_Background_Command( class zipedit	      *self );
+static void Darken_Background_Command( class zipedit	      *self );
+static void Select_Background_Command( class zipedit	      *self );
+static void Unselect_Background_Command( class zipedit	      *self );
 static void Build_Menu();
-static void Accept_Character( register class zipedit	      *self, register char			       c );
-static void Pending_Delete( register class zipedit	     *self, register zip_type_pane	      pane );
-void zipedit_Expose_Selection_Menu( register class zipedit	    *self );
-void zipedit_Hide_Selection_Menu( register class zipedit	    *self );
-static void Pending_Palettes( register class zipedit	    *self, register zip_type_pane	     pane );
-static void Pending_Coordinates( register class zipedit	    *self, register zip_type_pane	     pane );
-static void Pending_Grid( register class zipedit	    *self, register zip_type_pane	     pane );
-static void Pending_Constrain( register class zipedit	    *self, register zip_type_pane	     pane );
-static void Pending_Double_Grid( register class zipedit	    *self, register zip_type_pane	     pane );
-static void Pending_Redisplay( register class zipedit	    *self, register zip_type_pane	     pane );
-static void Pending_Redraw( register class zipedit	    *self, register zip_type_pane	     pane );
-static void Pending_Halve_Grid( register class zipedit	    *self, register zip_type_pane	     pane );
-int zipedit_Prepare_Editing_Control( register class zipedit		  *self, register zip_type_pane		   pane );
-int zipedit_Reset_Editing_Control( register class zipedit		  *self, register zip_type_pane		   pane );
-void zipedit_Reset_Editing_Selection( register class zipedit	       *self, register zip_type_pane		   pane );
+static void Accept_Character( class zipedit	      *self, char			       c );
+static void Pending_Delete( class zipedit	     *self, zip_type_pane	      pane );
+void zipedit_Expose_Selection_Menu( class zipedit	    *self );
+void zipedit_Hide_Selection_Menu( class zipedit	    *self );
+static void Pending_Palettes( class zipedit	    *self, zip_type_pane	     pane );
+static void Pending_Coordinates( class zipedit	    *self, zip_type_pane	     pane );
+static void Pending_Grid( class zipedit	    *self, zip_type_pane	     pane );
+static void Pending_Constrain( class zipedit	    *self, zip_type_pane	     pane );
+static void Pending_Double_Grid( class zipedit	    *self, zip_type_pane	     pane );
+static void Pending_Redisplay( class zipedit	    *self, zip_type_pane	     pane );
+static void Pending_Redraw( class zipedit	    *self, zip_type_pane	     pane );
+static void Pending_Halve_Grid( class zipedit	    *self, zip_type_pane	     pane );
+int zipedit_Prepare_Editing_Control( class zipedit		  *self, zip_type_pane		   pane );
+int zipedit_Reset_Editing_Control( class zipedit		  *self, zip_type_pane		   pane );
+void zipedit_Reset_Editing_Selection( class zipedit	       *self, zip_type_pane		   pane );
 
 
 boolean 
 zipedit::InitializeClass( )
     {
-  register struct proctable_Entry    *proc;
+  struct proctable_Entry    *proc;
   char				      string[2];
 
 /*===debug=1;===*/
@@ -329,7 +322,7 @@ zipedit::Update( )
   }
 
 long
-zipedit::Set_Data_Object( register class zip	    	       *data_object )
+zipedit::Set_Data_Object( class zip	    	       *data_object )
       {
     class zipedit *self=this;
   IN(zipedit::Set_Data_Object);
@@ -339,7 +332,7 @@ zipedit::Set_Data_Object( register class zip	    	       *data_object )
   }
 
 long
-zipedit::Set_View_Object( register class zipview    	       *view_object )
+zipedit::Set_View_Object( class zipview    	       *view_object )
       {
     class zipedit *self=this;
   IN(zipedit::Set_View_Object);
@@ -367,13 +360,13 @@ zipedit::Set_Debug( boolean state )
 /*===
 static void
 Group_Command( self )
-  register struct zipedit	     *self;
+  struct zipedit	     *self;
   {
-  register zip_type_figure	      figure = NULL, peer_figure = NULL;
+  zip_type_figure	      figure = NULL, peer_figure = NULL;
   zip_type_image		      image;
   char				      name[512];
   static long			      name_serial = 1;
-  register zip_type_pane	      pane = PANE;
+  zip_type_pane	      pane = PANE;
 
   IN(Group_Command);
   sprintf( name, "ZIP-GROUP-%d", name_serial++ );
@@ -399,9 +392,9 @@ Group_Command( self )
 
 static void
 Ungroup_Command( self )
-  register struct zipedit	      *self;
+  struct zipedit	      *self;
   {
-  register zip_type_figure	      figure;
+  zip_type_figure	      figure;
 
   IN(Ungroup_Command);
   if ( figure = zipedit_Next_Selected_Figure( self, PANE, NULL ) )
@@ -414,11 +407,11 @@ extern void zipedit_Cancel_Enclosure( class zipedit *self, zip_type_pane pane );
 extern void zipedit_Enclose_Figure( class zipedit *self, zip_type_figure figure, zip_type_pane pane );
 
 static void
-Fit_Command( register class zipedit	    *self )
+Fit_Command( class zipedit	    *self )
     {
-  register zip_type_pane	    pane = PANE;
-  register zip_type_point	    x, y;
-  register float		    scale, EW, EH;
+  zip_type_pane	    pane = PANE;
+  zip_type_point	    x, y;
+  float		    scale, EW, EH;
 
   IN(Fit_Command);
   if ( CurrentImage )
@@ -454,9 +447,9 @@ Fit_Command( register class zipedit	    *self )
 
 
 static void
-Duplicate_Command( register class zipedit	      *self )
+Duplicate_Command( class zipedit	      *self )
     {
-  register zip_type_pane	      pane = PANE;
+  zip_type_pane	      pane = PANE;
 
   IN(Duplicate_Command);
   if ( CurrentImage )
@@ -476,21 +469,21 @@ Duplicate_Command( register class zipedit	      *self )
 /*===
 static void
 Replicate_Command( self )
-  register struct zipedit	      *self;
+  struct zipedit	      *self;
   {
 
   }
 
 static void
 Cut_Command( self )
-  register struct zipedit	      *self;
+  struct zipedit	      *self;
   {
 
   }
 
 static void
 Copy_Command( self )
-  register struct zipedit	      *self;
+  struct zipedit	      *self;
   {
 
   }
@@ -500,10 +493,10 @@ Copy_Command( self )
 extern zip_type_figure zipedit_Next_Selected_Figure( class zipedit *self, zip_type_pane pane, zip_type_figure figure );
 
 static void
-To_Front_Command( register class zipedit	       *self )
+To_Front_Command( class zipedit	       *self )
     {
-  register zip_type_pane	      pane = PANE;
-  register zip_type_figure	      figure = NULL,
+  zip_type_pane	      pane = PANE;
+  zip_type_figure	      figure = NULL,
 				      peer_figure = CurrentImage->zip_image_figure_anchor;
 
   while ( peer_figure  &&  peer_figure->zip_figure_next )
@@ -530,10 +523,10 @@ To_Front_Command( register class zipedit	       *self )
   }
 
 static void
-To_Rear_Command( register class zipedit	       *self )
+To_Rear_Command( class zipedit	       *self )
     {
-  register zip_type_pane	      pane = PANE;
-  register zip_type_figure	      figure = NULL,
+  zip_type_pane	      pane = PANE;
+  zip_type_figure	      figure = NULL,
 				      peer_figure = NULL;
 
   while ( figure = zipedit_Next_Selected_Figure( self, PANE, figure ) )
@@ -560,21 +553,21 @@ To_Rear_Command( register class zipedit	       *self )
 /*===
 static void
 Foreward_Command( self )
-  register struct zipedit	      *self;
+  struct zipedit	      *self;
   {
 
   }
 
 static void
 Rearward_Command( self )
-  register struct zipedit	      *self;
+  struct zipedit	      *self;
   {
 
   }
 ===*/
 
 static void
-Manipulate_Pane( register class zipedit	       *self, register int			        action )
+Manipulate_Pane( class zipedit	       *self, int			        action )
       {
 
   IN(Manipulate_Pane);
@@ -584,46 +577,46 @@ Manipulate_Pane( register class zipedit	       *self, register int			        act
   }
 
 static void
-Delete_Command( register class zipedit     *self )	      {  Manipulate_Pane( self, pending_delete );  }
+Delete_Command( class zipedit     *self )	      {  Manipulate_Pane( self, pending_delete );  }
 
 static void
-Expose_Coordinates_Command( register class zipedit      *self )   {  Manipulate_Pane( self, pending_coordinates );  }
+Expose_Coordinates_Command( class zipedit      *self )   {  Manipulate_Pane( self, pending_coordinates );  }
 
 static void
-Hide_Coordinates_Command( register class zipedit      *self )   {  Manipulate_Pane( self, pending_coordinates );  }
+Hide_Coordinates_Command( class zipedit      *self )   {  Manipulate_Pane( self, pending_coordinates );  }
 
 static void
-Expose_Grid_Command( register class zipedit      *self )    {  Manipulate_Pane( self, pending_grid );  }
+Expose_Grid_Command( class zipedit      *self )    {  Manipulate_Pane( self, pending_grid );  }
 
 static void
-Hide_Grid_Command( register class zipedit     *self )      {  Manipulate_Pane( self, pending_grid );  }
+Hide_Grid_Command( class zipedit     *self )      {  Manipulate_Pane( self, pending_grid );  }
 
 static void
-Grid_Double_Command( register class zipedit      *self )   { if ( GridExposed | PointsConstrained )  Manipulate_Pane( self, pending_double_grid ); }
+Grid_Double_Command( class zipedit      *self )   { if ( GridExposed | PointsConstrained )  Manipulate_Pane( self, pending_double_grid ); }
 
 static void
-Grid_Halve_Command( register class zipedit      *self )    { if ( GridExposed | PointsConstrained )  Manipulate_Pane( self, pending_halve_grid ); }
+Grid_Halve_Command( class zipedit      *self )    { if ( GridExposed | PointsConstrained )  Manipulate_Pane( self, pending_halve_grid ); }
 
 static void
-Constrain_Points_Command( register class zipedit  *self ) {  Manipulate_Pane( self, pending_constrain ); }
+Constrain_Points_Command( class zipedit  *self ) {  Manipulate_Pane( self, pending_constrain ); }
 
 static void
-Unconstrain_Points_Command( register class zipedit  *self ) {  Manipulate_Pane( self, pending_constrain ); }
+Unconstrain_Points_Command( class zipedit  *self ) {  Manipulate_Pane( self, pending_constrain ); }
 
 /*===
 static void
-Expose_Palettes_Command( self )	    register struct zipedit     *self;
+Expose_Palettes_Command( self )	    struct zipedit     *self;
   {  Manipulate_Pane( self, pending_palettes );  }
 
 static void
-Hide_Palettes_Command( self )	    register struct zipedit     *self;
+Hide_Palettes_Command( self )	    struct zipedit     *self;
   {  Manipulate_Pane( self, pending_palettes );  }
 ===*/
 
 static
-int Insert_File_By_Name( register class zipedit	      *self, register char			      *name )
+int Insert_File_By_Name( class zipedit	      *self, char			      *name )
       {
-  register int			      status = zip_ok;
+  int			      status = zip_ok;
   char				      msg[512];
   char				      full_name[257];
 
@@ -665,7 +658,7 @@ int Insert_File_By_Name( register class zipedit	      *self, register char			   
   }
 
 static void
-Insert_File( register class zipedit	      *self )
+Insert_File( class zipedit	      *self )
     {
   char				     *reply;
 
@@ -679,7 +672,7 @@ Insert_File( register class zipedit	      *self )
   }
 
 static void
-Insert_Reference_Command( register class zipedit	       *self )
+Insert_Reference_Command( class zipedit	       *self )
     {
   IN(Insert_Reference_Command);
   Insert_File( self );
@@ -687,7 +680,7 @@ Insert_Reference_Command( register class zipedit	       *self )
   }
 
 static void
-Insert_Stream_Command( register class zipedit	       *self )
+Insert_Stream_Command( class zipedit	       *self )
     {
   IN(Insert_Stream_Command);
   Insert_File( self );
@@ -699,7 +692,7 @@ Insert_Stream_Command( register class zipedit	       *self )
   }
 
 static void
-Object_Absolute_Command( register class zipedit      *self )
+Object_Absolute_Command( class zipedit      *self )
     {
   IN(Object_Absolute_Command);
   self->data_object->object_width = self->view_object->block.width;
@@ -716,7 +709,7 @@ Object_Absolute_Command( register class zipedit      *self )
   }
 
 static void
-Object_Relative_Command( register class zipedit         *self )
+Object_Relative_Command( class zipedit         *self )
     {
   IN(Object_Relative_Command);
   self->data_object->object_width = self->data_object->object_height = 0;
@@ -730,7 +723,7 @@ Object_Relative_Command( register class zipedit         *self )
   }
 
 static long
-Display_Processor( register class zipedit	      *self, register zip_type_pane	       pane, register long			       action )
+Display_Processor( class zipedit	      *self, zip_type_pane	       pane, long			       action )
         {
   IN(Display_Processor);
   zipedit_Display_Background_Pane( self, pane );
@@ -745,13 +738,13 @@ Display_Processor( register class zipedit	      *self, register zip_type_pane	  
   }
 
 static void
-Background_Command( register class zipedit	      *self )
+Background_Command( class zipedit	      *self )
     {
   char				     *reply;
-  register long			      status;
+  long			      status;
   char				      msg[512];
-  register zip_type_pane	      pane = PANE;
-  register FILE			     *file;
+  zip_type_pane	      pane = PANE;
+  FILE			     *file;
 
   IN(Background_Command);
    if ( (View)->Query_File_Name(  "Enter Background File Name: ", &reply ) == zip_ok )
@@ -793,7 +786,7 @@ Background_Command( register class zipedit	      *self )
   }
 
 static void
-Hide_Background_Command( register class zipedit	      *self )
+Hide_Background_Command( class zipedit	      *self )
     {
   IN(Hide_Background_Command);
   (Menu)->SetMask(  ((Menu )->GetMask( ) & ~menu_background_expose) |
@@ -806,7 +799,7 @@ Hide_Background_Command( register class zipedit	      *self )
   }
 
 static void
-Expose_Background_Command( register class zipedit	      *self )
+Expose_Background_Command( class zipedit	      *self )
     {
   IN(Expose_Background_Command);
   (Menu)->SetMask(  ((Menu )->GetMask( ) & ~menu_background_hide)
@@ -818,9 +811,9 @@ Expose_Background_Command( register class zipedit	      *self )
   OUT(Expose_Background_Command);
   }
 
-void zipedit_Display_Background_Pane( register class zipedit	      *self, register zip_type_pane	       pane )
+void zipedit_Display_Background_Pane( class zipedit	      *self, zip_type_pane	       pane )
       {
-  register long			      left = (View)->Pane_Left(  pane )+1,
+  long			      left = (View)->Pane_Left(  pane )+1,
 				      top =  (View)->Pane_Top(  pane )+1,
 				      width = (View)->Pane_Width(  pane )-2,
 				      height = (View)->Pane_Height(  pane )-2;
@@ -842,10 +835,10 @@ void zipedit_Display_Background_Pane( register class zipedit	      *self, regist
   }
 
 static
-void Lighten_Background( register class zipedit	      *self )
+void Lighten_Background( class zipedit	      *self )
     {
-  register zip_type_pane	      pane = PANE;
-  register long			      left = (View)->Pane_Left(  pane )+1,
+  zip_type_pane	      pane = PANE;
+  long			      left = (View)->Pane_Left(  pane )+1,
 				      top =  (View)->Pane_Top(  pane )+1,
 				      width = (View)->Pane_Width(  pane )-2,
 				      height = (View)->Pane_Height(  pane )-2;
@@ -870,7 +863,7 @@ void Lighten_Background( register class zipedit	      *self )
   }
 
 static void
-Lighten_Background_Command( register class zipedit	      *self )
+Lighten_Background_Command( class zipedit	      *self )
     {
   IN(Lighten_Background_Command);
   if ( BackgroundExposed )
@@ -882,7 +875,7 @@ Lighten_Background_Command( register class zipedit	      *self )
   }
 
 static void
-Darken_Background_Command( register class zipedit	      *self )
+Darken_Background_Command( class zipedit	      *self )
     {
   IN(Darken_Background_Command);
   if ( BackgroundExposed )
@@ -894,9 +887,9 @@ Darken_Background_Command( register class zipedit	      *self )
   }
 
 static void
-Select_Background_Command( register class zipedit	      *self )
+Select_Background_Command( class zipedit	      *self )
     {
-  register zip_type_pane	      pane = PANE;
+  zip_type_pane	      pane = PANE;
 
   IN(Select_Background_Command);
   BackgroundSelected = BackgroundExposed = true;
@@ -910,7 +903,7 @@ Select_Background_Command( register class zipedit	      *self )
   }
 
 static void
-Unselect_Background_Command( register class zipedit	      *self )
+Unselect_Background_Command( class zipedit	      *self )
     {
   IN(Unselect_Background_Command);
   (View)->WantInputFocus(  View );
@@ -928,15 +921,15 @@ Unselect_Background_Command( register class zipedit	      *self )
 /*===
 static void
 Page_New_Command( self )
-  register struct zipedit	     *self;
+  struct zipedit	     *self;
   {
   char				     *page_name = "ZIP_PAGE_IMAGE_nnn";
-  register zip_type_image	      root_image =
+  zip_type_image	      root_image =
 	    Pane->zip_pane_current_stream->zip_stream_image_anchor;
   zip_type_image		      page_image;
   zip_type_figure		      page_figure;
-  register zip_type_figure	      figure;
-  register long			      status = zip_ok;
+  zip_type_figure	      figure;
+  long			      status = zip_ok;
 
   IN(Page_New_Command);
   if ( Data->page_count == 0 )
@@ -987,7 +980,7 @@ Page_New_Command( self )
 
 static void
 Page_Delete_Command( self )
-  register struct zipedit	     *self;
+  struct zipedit	     *self;
   {
   IN(Page_Delete_Command);
 
@@ -996,7 +989,7 @@ Page_Delete_Command( self )
 
 static void
 Pan_Alone_Command( self )
-  register struct zipedit	     *self;
+  struct zipedit	     *self;
   {
   IN(Pan_Alone_Command);
 
@@ -1005,7 +998,7 @@ Pan_Alone_Command( self )
 
 static void
 Pan_Together_Command( self )
-  register struct zipedit	     *self;
+  struct zipedit	     *self;
   {
   IN(Pan_Together_Command);
 
@@ -1016,7 +1009,7 @@ Pan_Together_Command( self )
 /*===
 static void
 Expose_Stream_Command( self )
-  register struct zipedit	     *self;
+  struct zipedit	     *self;
   {
   IN(Expose_Stream);
 
@@ -1025,7 +1018,7 @@ Expose_Stream_Command( self )
 
 static void
 Hide_Stream_Command( self )
-  register struct zipedit	     *self;
+  struct zipedit	     *self;
   {
   IN(Hide_Stream_Command);
 
@@ -1034,7 +1027,7 @@ Hide_Stream_Command( self )
 
 static void
 ReRead_Stream_Command( self )
-  register struct zipedit	     *self;
+  struct zipedit	     *self;
   {
   IN(ReRead_Stream_Command);
 
@@ -1180,7 +1173,7 @@ void Build_Menu()
   }
 
 static void
-Accept_Character( register class zipedit	      *self, register char			       c )
+Accept_Character( class zipedit	      *self, char			       c )
       {
   IN(Accept_Character);
   DEBUGct(C,c);
@@ -1194,9 +1187,9 @@ Accept_Character( register class zipedit	      *self, register char			       c )
   }
 
 static
-void Pending_Delete( register class zipedit	     *self, register zip_type_pane	      pane )
+void Pending_Delete( class zipedit	     *self, zip_type_pane	      pane )
       {
-  register zip_type_figure	     figure;
+  zip_type_figure	     figure;
 
   IN(Pending_Delete);
   Reset_pending_delete;
@@ -1220,22 +1213,22 @@ void Pending_Delete( register class zipedit	     *self, register zip_type_pane	 
   OUT(Pending_Delete);
   }
 
-void zipedit_Expose_Selection_Menu( register class zipedit	    *self )
+void zipedit_Expose_Selection_Menu( class zipedit	    *self )
     {
   (Menu)->SetMask(  (Menu )->GetMask( ) | menu_selection );
   (View)->PostMenus(  Menu );
   }
 
-void zipedit_Hide_Selection_Menu( register class zipedit	    *self )
+void zipedit_Hide_Selection_Menu( class zipedit	    *self )
     {
   (Menu)->SetMask(  (Menu )->GetMask( ) & ~menu_selection );
   (View)->PostMenus(  Menu );
   }
 
 static
-void Pending_Palettes( register class zipedit	    *self, register zip_type_pane	     pane )
+void Pending_Palettes( class zipedit	    *self, zip_type_pane	     pane )
       {
-  register long			    mask = (Menu )->GetMask( );
+  long			    mask = (Menu )->GetMask( );
 
   IN(Pending_Palettes);
   if ( PalettesExposed = ! PalettesExposed )
@@ -1255,9 +1248,9 @@ void Pending_Palettes( register class zipedit	    *self, register zip_type_pane	
   }
 
 static
-void Pending_Coordinates( register class zipedit	    *self, register zip_type_pane	     pane )
+void Pending_Coordinates( class zipedit	    *self, zip_type_pane	     pane )
       {
-  register long			    mask = (Menu )->GetMask( );
+  long			    mask = (Menu )->GetMask( );
 
   IN(Pending_Coordinates);
   if ( CoordinatesExposed = ! CoordinatesExposed )
@@ -1277,9 +1270,9 @@ void Pending_Coordinates( register class zipedit	    *self, register zip_type_pa
   }
 
 static
-void Pending_Grid( register class zipedit	    *self, register zip_type_pane	     pane )
+void Pending_Grid( class zipedit	    *self, zip_type_pane	     pane )
       {
-  register long			    mask = (Menu )->GetMask( );
+  long			    mask = (Menu )->GetMask( );
 
   IN(Pending_Grid);
   if ( GridExposed = ! GridExposed )
@@ -1300,9 +1293,9 @@ void Pending_Grid( register class zipedit	    *self, register zip_type_pane	    
   }
 
 static
-void Pending_Constrain( register class zipedit	    *self, register zip_type_pane	     pane )
+void Pending_Constrain( class zipedit	    *self, zip_type_pane	     pane )
       {
-  register long			    mask = (Menu )->GetMask( );
+  long			    mask = (Menu )->GetMask( );
 
   IN(Pending_Constrain);
   if ( PointsConstrained = ! PointsConstrained )
@@ -1324,7 +1317,7 @@ void Pending_Constrain( register class zipedit	    *self, register zip_type_pane
   }
 
 static
-void Pending_Double_Grid( register class zipedit	    *self, register zip_type_pane	     pane )
+void Pending_Double_Grid( class zipedit	    *self, zip_type_pane	     pane )
       {
   IN(Pending_Double_Grid);
   (self)->Double_Pane_Grid(  pane );
@@ -1333,7 +1326,7 @@ void Pending_Double_Grid( register class zipedit	    *self, register zip_type_pa
   }
 
 static
-void Pending_Redisplay( register class zipedit	    *self, register zip_type_pane	     pane )
+void Pending_Redisplay( class zipedit	    *self, zip_type_pane	     pane )
       {
   IN(Pending_Redisplay);
   Reset_pending_redisplay;
@@ -1342,7 +1335,7 @@ void Pending_Redisplay( register class zipedit	    *self, register zip_type_pane
   }
 
 static
-void Pending_Redraw( register class zipedit	    *self, register zip_type_pane	     pane )
+void Pending_Redraw( class zipedit	    *self, zip_type_pane	     pane )
       {
   IN(Pending_Redraw);
   Reset_pending_redraw;
@@ -1351,7 +1344,7 @@ void Pending_Redraw( register class zipedit	    *self, register zip_type_pane	  
   }
 
 static
-void Pending_Halve_Grid( register class zipedit	    *self, register zip_type_pane	     pane )
+void Pending_Halve_Grid( class zipedit	    *self, zip_type_pane	     pane )
       {
   IN(Pending_Halve_Grid);
   (self)->Halve_Pane_Grid(  pane );
@@ -1363,7 +1356,7 @@ void Pending_Halve_Grid( register class zipedit	    *self, register zip_type_pan
 extern int zipedit_Redisplay_Edit_Pane( class zipedit *self, zip_type_pane pane );
 
 long
-zipedit::Redisplay_Panes( register zip_type_pane		   pane )
+zipedit::Redisplay_Panes( zip_type_pane		   pane )
       {
   IN(zipedit::Redisplay_Panes);
   DEBUGst(Pane-name,pane->zip_pane_name);
@@ -1374,7 +1367,7 @@ zipedit::Redisplay_Panes( register zip_type_pane		   pane )
   }
 
 long
-zipedit::Handle_Editing( register zip_type_pane		   pane )
+zipedit::Handle_Editing( zip_type_pane		   pane )
       {
   IN(zipedit::Handle_Editing);
   DEBUGst(Pane-name,pane->zip_pane_name);
@@ -1384,10 +1377,10 @@ zipedit::Handle_Editing( register zip_type_pane		   pane )
   }
 
 long
-zipedit::Initialize_Editing( register zip_type_pane		   pane )
+zipedit::Initialize_Editing( zip_type_pane		   pane )
       {
-  register int				  status = zip_success;
-  register long			          mask = (this->menu )->GetMask( );
+  int				  status = zip_success;
+  long			          mask = (this->menu )->GetMask( );
 
   IN(zipedit::Initialize_Editing);
   DEBUGst(Pane-name,pane->zip_pane_name);
@@ -1426,9 +1419,9 @@ zipedit::Initialize_Editing( register zip_type_pane		   pane )
   }
 
 long
-zipedit::Terminate_Editing( register zip_type_pane		   pane )
+zipedit::Terminate_Editing( zip_type_pane		   pane )
       {
-  register int				  status = zip_success;
+  int				  status = zip_success;
 
   IN(zipedit::Terminate_Editing);
   DEBUGst(Pane-name,pane->zip_pane_name);
@@ -1461,9 +1454,9 @@ zipedit::Terminate_Editing( register zip_type_pane		   pane )
   }
 
 int
-zipedit_Prepare_Editing_Control( register class zipedit		  *self, register zip_type_pane		   pane )
+zipedit_Prepare_Editing_Control( class zipedit		  *self, zip_type_pane		   pane )
       {
-  register int				  status = zip_success;
+  int				  status = zip_success;
 
   IN(zipedit_Prepare_Editing_Control);
   if ( pane->zip_pane_edit == NULL )
@@ -1479,7 +1472,7 @@ zipedit_Prepare_Editing_Control( register class zipedit		  *self, register zip_t
   }
 
 int
-zipedit_Reset_Editing_Control( register class zipedit		  *self, register zip_type_pane		   pane )
+zipedit_Reset_Editing_Control( class zipedit		  *self, zip_type_pane		   pane )
       {
   IN(zipedit_Reset_Editing_Control);
 /*=== consider whether state should be left alive for next return into editing... ===*/
@@ -1502,7 +1495,7 @@ zipedit_Reset_Editing_Control( register class zipedit		  *self, register zip_typ
   return zip_success;
   }
 
-void zipedit_Reset_Editing_Selection( register class zipedit	       *self, register zip_type_pane		   pane )
+void zipedit_Reset_Editing_Selection( class zipedit	       *self, zip_type_pane		   pane )
       {
   IN(zipedit_Reset_Editing_Selection);
   BuildPending = 0;

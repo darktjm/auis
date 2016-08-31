@@ -27,7 +27,6 @@ $Disclaimer:
 #include <andrewos.h>
 
 static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/srctextview.C,v 2.3 1995/02/23 23:30:08 rr2b Stab74 $";
 
 #include <ctype.h>
 
@@ -567,8 +566,8 @@ void srctextview::BalanceParens()
 	long type;
 	struct paren_node *next;
     } *parenstack=NULL, *temp;
-    static char *opens="({[", *closes=")}]";
-    char *parentype;
+    static const char opens[]="({[", closes[]=")}]";
+    const char *parentype;
     int ch;
     while (pos<ctlen) {
 	ch= ct->GetChar(++pos);
@@ -792,7 +791,8 @@ void srctextview::RenameIdent()
 {
     srctext *ct = (srctext *)GetDataObject();
     long pos, len, newlen;
-    char promptbuf[256], *prompt;
+    char promptbuf[256];
+    const char *prompt;
     static char defaultorig[40] = "";
     static char defaultrep[40] = "";
     char orig[40], rep[40];

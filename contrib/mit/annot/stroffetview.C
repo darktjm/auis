@@ -25,15 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/annot/RCS/stroffetview.C,v 1.3 1994/08/11 03:03:05 rr2b Stab74 $";
-#endif
-
-
-static char *stroffetview_rcsid = "$Header";
-
-
 #include <andrewos.h>
 #include <fontdesc.H>
 #include "view.H"
@@ -65,8 +56,6 @@ static class keymap *stroffetviewKeyMap;
 
 
 ATKdefineRegistry(stroffetview, iconview, stroffetview::InitializeClass);
-#ifndef NORCSID
-#endif
 static void Close(class stroffetview  *v,long  l);
 static void closeall(class view  *v,long  l);
 static void openall(class view  *v,long  l);
@@ -160,7 +149,7 @@ stroffetview::stroffetview()
 /****************************************************************/
 
 void
-stroffetview::Print(FILE  * file, char  * processor, char  * finalformat, boolean  toplevel)
+stroffetview::Print(FILE  * file, const char  * processor, const char  * finalformat, boolean  toplevel)
                     {
   class textview * textvobj;
   class text * textobj;

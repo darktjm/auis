@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/wpfuzz.c,v 2.14 1995/03/18 17:31:09 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	wpfuzz.c
 	Common procedures and data for manipulating the fields and B-tree
@@ -231,8 +226,8 @@ struct Map Ruleset[];
 int NumRuleset;
 char *str, *Title;
 {/* Apply the given ruleset at the beginning of the string. */
-	register char *Src, *Dst, *LastSrc;
-	register int Which, Changed, RightLen;
+	char *Src, *Dst, *LastSrc;
+	int Which, Changed, RightLen;
 	int EverChanged = 0;
 
 	for (;;) {
@@ -264,8 +259,8 @@ struct Map Ruleset[];
 int NumRuleset;
 char *str, *Title;
 {/* Apply the given ruleset at the end of the string. */
-	register char *Fing, *Src, *Dst, *LastSrc;
-	register int Which, Changed, RightLen;
+	char *Fing, *Src, *Dst, *LastSrc;
+	int Which, Changed, RightLen;
 	int EverChanged = 0;
 
 	for (;;) {
@@ -301,8 +296,8 @@ struct Map Ruleset[];
 int NumRuleset;
 char *str, *Title;
 {/* Apply the given ruleset anywhere in the string. */
-	register char *Fing, *Src, *Dst, *LastSrc;
-	register int Which, Changed, RightLen;
+	char *Fing, *Src, *Dst, *LastSrc;
+	int Which, Changed, RightLen;
 	int EverChanged = 0;
 
 	for (;;) {
@@ -335,7 +330,7 @@ static char *BasicCanon(str)
 char *str;
 {/* Allocate and return a minimally-processed representation of the given name, or NULL. */
 	char *ostr;
-	register char *Src, *Dst;
+	char *Src, *Dst;
 
 	ostr = malloc(strlen(str) + 15);
 	if (ostr == NULL) return NULL;
@@ -357,7 +352,7 @@ char *str;
 static void MapCG(str)
 char *str;
 {/* Do the C-{S,K} and G-{G,J} mapping for the given string, in place. */
-	register char *Src;
+	char *Src;
 
 	for (Src = str; *Src != '\0'; ++Src) {
 		if (*Src == 'c') {
@@ -391,7 +386,7 @@ char *str;
 static void PhoneticMap(str, IsGiven)
 char *str; int IsGiven;
 {/* Do the phonetic mapping for str, in place. */
-	register int Changed;
+	int Changed;
 
 	for (;;) {
 		Changed = 0;
@@ -420,8 +415,8 @@ char *str; int IsGiven;
 static void Codify(str, Codes)
 char *str; char Codes[];
 {/* Use the alphabetic code table Codes to reduce str to canonical form, in place. */
-	register char *Src, *Dst;
-	register char Code, LastCode;
+	char *Src, *Dst;
+	char Code, LastCode;
 
 	Src = str;
 	while (*Src < 'a' || *Src > 'z') {if (*Src == '\0') break; else ++Src;}
@@ -488,7 +483,7 @@ char *str;
 {/* Allocate and return a canonical representation of the given nickname, or NULL. */
     char *ostr;
     int oLen;
-    register int oLenMin, NLen, Ix;
+    int oLenMin, NLen, Ix;
     static char *NoiseSuffixes[] = {
 	"alin", "lin", "line", "ana", "ann", "inka", "bella", "bel", "bell", "belle", "beau", "iss", "issa",
 	"ique", "ietta", "etta", "elle", "ine", "inea", "alyn", "lyn", "ette", "ett", "ella",

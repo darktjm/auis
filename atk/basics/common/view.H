@@ -105,7 +105,7 @@ typedef int view_DSattributes;
 
 struct view_printopt {
     atom *name, *type;
-    char *label;
+    const char *label;
 };
 struct view_printoptlist {
     struct view_printopt *list; /* array of structures */
@@ -141,7 +141,7 @@ public:
     virtual void FullUpdate(enum view_UpdateType type, 
 			long l, long t, long w, long h);
     virtual void Update();
-    virtual void Print(FILE *file, char *proc, char *finalForm, boolean top);
+    virtual void Print(FILE *file, const char *proc, const char *finalForm, boolean top);
     virtual view *Hit (enum view_MouseAction action, long x, long y, 
 			long numberOfClicks);
     virtual view_DSattributes DesiredSize(long w, long h, 
@@ -177,10 +177,10 @@ public:
     virtual void RetractCursor(class cursor *cursor);
     virtual void RetractViewCursors(view *requestor);
 
-    virtual ATK  *WantHandler(char *handlerName);
-    virtual void PostDefaultHandler(char *handlerName, ATK  *handler);
-    virtual char *GetInterface(char *type);
-    virtual char *WantInformation(char *key);
+    virtual ATK  *WantHandler(const char *handlerName);
+    virtual void PostDefaultHandler(const char *handlerName, ATK  *handler);
+    virtual const void *GetInterface(const char *type);
+    virtual const char *WantInformation(const char *key);
 
 
 // View linking/unlinking functions
@@ -191,10 +191,10 @@ public:
     virtual void ExposeSelf(boolean recurse);
     virtual void ExposeChild(view *v);
 
-    virtual char *GetWindowManagerType();
+    virtual const char *GetWindowManagerType();
     virtual long GetDevice();
     virtual void InitChildren();
-    virtual boolean CanView(char *TypeName);
+    virtual boolean CanView(const char *TypeName);
 
 // Support for selections ala X 
     virtual void LoseSelectionOwnership();
@@ -208,7 +208,7 @@ public:
 			struct rectangle &hit);
     
 // Postscript printing
-    virtual void *GetPSPrintInterface(char *printtype);
+    virtual void *GetPSPrintInterface(const char *printtype);
     virtual void DesiredPrintSize(long w, long h, enum view_DSpass pass, 
 			long *desiredwidth, long *desiredheight);
     virtual void PrintPSDoc(FILE *outfile, long pagew, long pageh);
@@ -218,7 +218,7 @@ public:
     virtual long GetPrintOption(atom *popt);
     virtual void SetPrintOption(struct view_printopt *vopt, long value);
 
-    virtual boolean Gifify(char *filename, long *pmaxw, long *pmaxh, 
+    virtual boolean Gifify(const char *filename, long *pmaxw, long *pmaxh, 
 			struct rectangle *visrect);
 	/* put a gifified version of the view into the named file
 		The pmax args incoming values are the maximum gif size;
@@ -419,7 +419,7 @@ public:
     inline void SetLineWidth(short NewLineW) { DRAW(SetLineWidth((NewLineW)));}
     inline short GetLineWidth() { return DRAW(GetLineWidth()); }
 
-    inline void SetLineDash(char *dashPattern, int dashOffset, short dashType)
+    inline void SetLineDash(const char *dashPattern, int dashOffset, short dashType)
 		{ DRAW(SetLineDash((dashPattern), (dashOffset), (dashType))); }
     inline void GetLineDash(char **dashPat, int *dashOffset, short *dashType)
 		{ DRAW(GetLineDash((dashPat), (dashOffset), (dashType))); }

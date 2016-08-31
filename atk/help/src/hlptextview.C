@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/RCS/hlptextview.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-/* $ACIS$ */
-
 ATK_IMPL("hlptextview.H")
 #include <ctype.h>
 
@@ -45,8 +37,6 @@ ATK_IMPL("hlptextview.H")
 
 
 ATKdefineRegistry(hlptextview, textview, hlptextview::InitializeClass);
-#ifndef NORCSID
-#endif
 static char *TrimWhiteSpace(char  *buf, int  pos);
 
 

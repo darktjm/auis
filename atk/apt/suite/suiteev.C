@@ -25,14 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/suite/RCS/suiteev.C,v 1.11 1996/03/18 23:10:42 robr Stab74 $";
-#endif
-
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Suite-object
@@ -58,8 +50,7 @@ DESCRIPTION
 
 END-SPECIFICATION  ************************************************************/
 
-
-
+#include <andrewos.h>
 ATK_IMPL("suiteev.H")
 #include <ctype.h>
 #include <graphic.H>
@@ -209,53 +200,47 @@ static int suiteev_debug = 0;
 #define LIT TRUE
 
 ATKdefineRegistry(suiteev, view, suiteev::InitializeClass);
-#ifndef NORCSID
-#endif
-#ifndef MAX
-#endif
-#ifndef MIN
-#endif
-static void AllocNameSpace(register char  **target , register char  *source);
+static void AllocNameSpace(char  **target , const char  *source);
 static void CheckForNewFirstVisible( class suiteev  *self );
-static long Within(register long  x , register long  y , register long  left , register long  top , register long  width , register long  height);
-static long WithinRect(register long  x , register long  y, register struct rectangle  *r);
-static long CopySelected(register class suiteev  *self, register class suite  *suite, register struct suite_item  *item, register long  datum);
-static void Copy(register class suiteev  *self);
-static struct suite_item * NthAfter(register class suiteev  *self, register struct suite_item  *start, register long  numToSkip);
-static struct suite_item * NthPrior(register class suiteev  *self, register struct suite_item  *start, register long  numToSkip);
-static struct suite_item * NPixelsAfter(register class suiteev  *self, register struct suite_item  *start, register long  pix , register long  *numToSkip);
-static struct suite_item * NPixelsPrior(register class suiteev  *self, register struct suite_item  *start, register long  pix , register long  *numToSkip);
-static void DrawGutterLines(register class suiteev  *self);
-static long ResetItemBreaks(register class suite  *self, register class suite  *suite, register struct suite_item  *item, register long  datum);
-static void getinfo(register class suiteev  *self, register struct range  *total , register struct range  *seen , register struct range  *dot);
-static void endzone(register class suiteev  *self, register int  zone, register enum view_MouseAction  action);
-static long ywhatis(register class suiteev  *self, register long  num , register long  denom);
-static long xwhatis(register class suiteev  *self, register long  num , register long  denom);
-static void ysetframe(register class suiteev  *self, register long  posn , register long  coord , register long  outof);
-static void xsetframe(register class suiteev  *self, register long  posn , register long  coord , register long  outof);
-static void AttemptSymmetry(register class suiteev  *self, register long  numItems , register long  *rows , register long  *columns);
-static void SetBreakPoint(register class suiteev  *self, register struct suite_item  *item, register char  *end);
+static long Within(long  x , long  y , long  left , long  top , long  width , long  height);
+static long WithinRect(long  x , long  y, struct rectangle  *r);
+static long CopySelected(class suiteev  *self, class suite  *suite, struct suite_item  *item, long  datum);
+static void Copy(class suiteev  *self);
+static struct suite_item * NthAfter(class suiteev  *self, struct suite_item  *start, long  numToSkip);
+static struct suite_item * NthPrior(class suiteev  *self, struct suite_item  *start, long  numToSkip);
+static struct suite_item * NPixelsAfter(class suiteev  *self, struct suite_item  *start, long  pix , long  *numToSkip);
+static struct suite_item * NPixelsPrior(class suiteev  *self, struct suite_item  *start, long  pix , long  *numToSkip);
+static void DrawGutterLines(class suiteev  *self);
+static long ResetItemBreaks(class suite  *self, class suite  *suite, struct suite_item  *item, long  datum);
+static void getinfo(class suiteev  *self, struct range  *total , struct range  *seen , struct range  *dot);
+static void endzone(class suiteev  *self, int  zone, enum view_MouseAction  action);
+static long ywhatis(class suiteev  *self, long  num , long  denom);
+static long xwhatis(class suiteev  *self, long  num , long  denom);
+static void ysetframe(class suiteev  *self, long  posn , long  coord , long  outof);
+static void xsetframe(class suiteev  *self, long  posn , long  coord , long  outof);
+static void AttemptSymmetry(class suiteev  *self, long  numItems , long  *rows , long  *columns);
+static void SetBreakPoint(class suiteev  *self, struct suite_item  *item, char  *end);
 static boolean DoesItFit(class suiteev  *self, struct suite_item  *item, char  *head, char  *tail, long  width);
-static char * WalkBackwardToPunctuation(register char  *head, register char  *tail);
-static char * WalkBackwardBlackSpace( register class suiteev	 *self, register struct suite_item	 *item, register char			 *head, register char			 *tail, register long			  width );
-static void PlaceItems( register class suiteev	     *self, struct rectangle		     *rect, long				      rows , long				      cols , long				      numleftOvers, long				      itemWidth , long				      itemHeight );
+static char * WalkBackwardToPunctuation(char  *head, char  *tail);
+static char * WalkBackwardBlackSpace( class suiteev	 *self, struct suite_item	 *item, char			 *head, char			 *tail, long			  width );
+static void PlaceItems( class suiteev	     *self, struct rectangle		     *rect, long				      rows , long				      cols , long				      numleftOvers, long				      itemWidth , long				      itemHeight );
 static void DetermineVisibleListItems( class suiteev  *self, long  height );
-static void EraseItems( register class suiteev  *self );
-void suiteev_HandleExclusiveHit( register class suiteev  *self, register struct suite_item  *item, enum view_MouseAction  action, long  x , long  y, long  numberOfClicks );
-void suiteev_HighlightFirstToLast( register class suiteev  *self, register struct suite_item  *first, register struct suite_item  *last );
-void suiteev_HandleInclusiveHit( register class suiteev  *self, register struct suite_item  *item, register enum view_MouseAction  action, register long  x , register long  y , register long  numberOfClicks );
-void suiteev_HandleToggleHit( register class suiteev  *self, register struct suite_item  *item, register enum view_MouseAction  action, register long  x , register long  y , register long  numberOfClicks );
-static void ItemFullUpdate( register class suiteev  *self, register struct suite_item  *item, register enum	view_UpdateType  type, register long  left , register long  top , register long  width , register long  height );
-static void ItemPlaceCaption( register class suiteev  *self, register struct suite_item  *item, long  captionwidth, long  captionheight, unsigned  *place );
+static void EraseItems( class suiteev  *self );
+void suiteev_HandleExclusiveHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y, long  numberOfClicks );
+void suiteev_HighlightFirstToLast( class suiteev  *self, struct suite_item  *first, struct suite_item  *last );
+void suiteev_HandleInclusiveHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numberOfClicks );
+void suiteev_HandleToggleHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numberOfClicks );
+static void ItemFullUpdate( class suiteev  *self, struct suite_item  *item, enum	view_UpdateType  type, long  left , long  top , long  width , long  height );
+static void ItemPlaceCaption( class suiteev  *self, struct suite_item  *item, long  captionwidth, long  captionheight, unsigned  *place );
 void ItemPlaceTitle(class suiteev  *self, struct suite_item  *item, long  titlewidth , long  titleheight, int  newlineHeight);
-static void ReadWriteHandler( register long  anchor, register class suite  *suite, register struct suite_item  *item );
+static void ReadWriteHandler( long  anchor, class suite  *suite, struct suite_item  *item );
 static void MaxSubStringSize( class suiteev  *self, struct suite_item  *item, char  *str, class fontdesc  *font,  int *w ,  int *h );
 static long MaxListSubStringWidth( class suiteev  *self, struct suite_item  *item, char  *str, class fontdesc  *font );
 static void  DrawRectSize(class suiteev	 *self, long  x , long  y , long  width , long  height);
 static void  DrawRect(class suiteev  *self, struct suite_item  *item, struct rectangle  *Rect, boolean  lit);
 
-static struct scrollfns horizInterface = {(scroll_getinfofptr) getinfo, (scroll_setframefptr)xsetframe, (scroll_endzonefptr)endzone, (scroll_whatfptr)xwhatis };
-static struct scrollfns vertInterface =  {(scroll_getinfofptr)getinfo, (scroll_setframefptr)ysetframe, (scroll_endzonefptr)endzone, (scroll_whatfptr)ywhatis };
+static const struct scrollfns horizInterface = {(scroll_getinfofptr) getinfo, (scroll_setframefptr)xsetframe, (scroll_endzonefptr)endzone, (scroll_whatfptr)xwhatis };
+static const struct scrollfns vertInterface =  {(scroll_getinfofptr)getinfo, (scroll_setframefptr)ysetframe, (scroll_endzonefptr)endzone, (scroll_whatfptr)ywhatis };
 
  
 
@@ -266,7 +251,7 @@ static class menulist *smenulist = NULL;
 
 
 static void
-AllocNameSpace(register char  **target , register char  *source)
+AllocNameSpace(char  **target , const char  *source)
   {
   if(target && *target) {
     free(*target);
@@ -291,21 +276,21 @@ CheckForNewFirstVisible( class suiteev  *self )
 }
 
 static long
-Within(register long  x , register long  y , register long  left , register long  top , register long  width , register long  height)
+Within(long  x , long  y , long  left , long  top , long  width , long  height)
   {
   return((x >= left) && (x <= left + width) && (y >= top) && (y <= top + height));
 }
 
 static long
-WithinRect(register long  x , register long  y, register struct rectangle  *r)
+WithinRect(long  x , long  y, struct rectangle  *r)
     {
   return(Within(x, y, r->left, r->top, r->width, r->height));
 }
 
 static long
-CopySelected(register class suiteev  *self, register class suite  *suite, register struct suite_item  *item, register long  datum)
+CopySelected(class suiteev  *self, class suite  *suite, struct suite_item  *item, long  datum)
         {
-  register long int status = 0;
+  long int status = 0;
   static char buffer[1025];
 
   IN(CopySelected);
@@ -319,10 +304,10 @@ CopySelected(register class suiteev  *self, register class suite  *suite, regist
 }
 
 static void
-Copy(register class suiteev  *self)
+Copy(class suiteev  *self)
   {
-  register FILE *CutFile = NULL;
-  register class im *im = NULL;
+  FILE *CutFile = NULL;
+  class im *im = NULL;
 
   IN(Copy);
   if(im = (self)->GetIM()) {
@@ -347,7 +332,7 @@ suiteev::InitializeClass()
   return(TRUE);
 }
 
-static char suiteItemPrefs[] = "suiteItemPrefs";
+static const char suiteItemPrefs[] = "suiteItemPrefs";
 
 suiteev::suiteev()
 {
@@ -390,11 +375,11 @@ suiteev::PostMenus(class menulist  *menulistp)
 }
 
 static struct suite_item *
-NthAfter(register class suiteev  *self, register struct suite_item  *start, register long  numToSkip)
+NthAfter(class suiteev  *self, struct suite_item  *start, long  numToSkip)
       {
-  register int i = 0;
-  register struct suite_item *item = start;
-  register long count = 0, size = 0;
+  int i = 0;
+  struct suite_item *item = start;
+  long count = 0, size = 0;
 
   IN(NthAfter);
   if(Items && ITEM(0) && (i = (Items)->Subscript((long)start)) != -1) {
@@ -407,11 +392,11 @@ NthAfter(register class suiteev  *self, register struct suite_item  *start, regi
 }
 
 static struct suite_item *
-NthPrior(register class suiteev  *self, register struct suite_item  *start, register long  numToSkip)
+NthPrior(class suiteev  *self, struct suite_item  *start, long  numToSkip)
       {
-  register int i = 0;
-  register struct suite_item *item = start;
-  register long count = 0;
+  int i = 0;
+  struct suite_item *item = start;
+  long count = 0;
 
   IN(NthAfter);
   if(Items && ITEM(0) && (i = (Items)->Subscript((long)start)) != -1)
@@ -422,11 +407,11 @@ NthPrior(register class suiteev  *self, register struct suite_item  *start, regi
 }
 
 static struct suite_item *
-NPixelsAfter(register class suiteev  *self, register struct suite_item  *start, register long  pix , register long  *numToSkip)
+NPixelsAfter(class suiteev  *self, struct suite_item  *start, long  pix , long  *numToSkip)
       {
-  register int i = 0;
-  register struct suite_item *item = start;
-  register long count = 0, size = 0, tmp = 0;
+  int i = 0;
+  struct suite_item *item = start;
+  long count = 0, size = 0, tmp = 0;
 
   IN(NthAfter);
   if(Items && ITEM(0) && (i = (Items)->Subscript((long)start)) != -1) {
@@ -446,11 +431,11 @@ NPixelsAfter(register class suiteev  *self, register struct suite_item  *start, 
 }
 
 static struct suite_item *
-NPixelsPrior(register class suiteev  *self, register struct suite_item  *start, register long  pix , register long  *numToSkip)
+NPixelsPrior(class suiteev  *self, struct suite_item  *start, long  pix , long  *numToSkip)
       {
-  register int i = 0;
-  register struct suite_item *item = start;
-  register long count = 0, tmp = 0;
+  int i = 0;
+  struct suite_item *item = start;
+  long count = 0, tmp = 0;
 
   IN(NthAfter);
   if(Items && ITEM(0) && (i = (Items)->Subscript((long)start)) != -1) {
@@ -478,10 +463,10 @@ NPixelsPrior(register class suiteev  *self, register struct suite_item  *start, 
 }
 
 static void
-DrawGutterLines(register class suiteev  *self)
+DrawGutterLines(class suiteev  *self)
   {
-  register struct suite_item *item = FirstVisible;
-  register long i;
+  struct suite_item *item = FirstVisible;
+  long i;
   long numToDo, numToSkip, last, first;
   long Offset, clearLeft, clearTop;
 
@@ -553,9 +538,9 @@ DrawGutterLines(register class suiteev  *self)
 }
 
 static long
-ResetItemBreaks(register class suite  *self, register class suite  *suite, register struct suite_item  *item, register long  datum)
+ResetItemBreaks(class suite  *self, class suite  *suite, struct suite_item  *item, long  datum)
         {
-  register int status = 0, i = 0;
+  int status = 0, i = 0;
 
   if(item) {
     for(i = 0; i < BreakCount(item); i++)
@@ -566,7 +551,7 @@ ResetItemBreaks(register class suite  *self, register class suite  *suite, regis
 }
 
 void
-suiteev::FullUpdate(register enum view_UpdateType  type, register long  left , register long  top , register long  width , register long  height)
+suiteev::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
 {
     class suiteev *self=this;
   struct rectangle r;
@@ -583,21 +568,21 @@ suiteev::FullUpdate(register enum view_UpdateType  type, register long  left , r
     OUT(suiteev_FullUpdate);
 }
 
-char *
-suiteev::GetInterface(register char  *type)
+const void *
+suiteev::GetInterface(const char  *type)
 {
     class suiteev *self=this;
     IN(suiteev_GetInterface);
     if(!strcmp(type, "scroll,vertical"))
-	return((char *) &vertInterface);
+	return(&vertInterface);
     else if(!strcmp(type, "scroll,horizontal"))
-	return((char *) &horizInterface);
+	return(&horizInterface);
     else
 	return(NULL);
 }
 
 static void
-getinfo(register class suiteev  *self, register struct range  *total , register struct range  *seen , register struct range  *dot)
+getinfo(class suiteev  *self, struct range  *total , struct range  *seen , struct range  *dot)
     {
     IN(getinfo);
     total->beg = 0;
@@ -614,10 +599,10 @@ getinfo(register class suiteev  *self, register struct range  *total , register 
 }
 
 static void
-endzone(register class suiteev  *self, register int  zone, register enum view_MouseAction  action)
+endzone(class suiteev  *self, int  zone, enum view_MouseAction  action)
       {
-  register int numVisible = 0, EndOffset = 0;
-  register struct suite_item *LastItem = NULL;
+  int numVisible = 0, EndOffset = 0;
+  struct suite_item *LastItem = NULL;
 
     IN(endzone);
     if(Items && ITEM(0)) {
@@ -666,21 +651,21 @@ endzone(register class suiteev  *self, register int  zone, register enum view_Mo
 }
 
 static long
-ywhatis(register class suiteev  *self, register long  num , register long  denom)
+ywhatis(class suiteev  *self, long  num , long  denom)
     {
   return((self)->Locate(  0, (num * (self)->GetLogicalHeight()) / denom) );
 }
 
 static long
-xwhatis(register class suiteev  *self, register long  num , register long  denom)
+xwhatis(class suiteev  *self, long  num , long  denom)
     {
     return((self)->Locate( (num * (self)->GetLogicalWidth()) / denom, 0));
 }
 
 static void
-ysetframe(register class suiteev  *self, register long  posn , register long  coord , register long  outof)
+ysetframe(class suiteev  *self, long  posn , long  coord , long  outof)
     {
-  register long vertOffset = 0, height = ItemHeight;
+  long vertOffset = 0, height = ItemHeight;
   long numToSkip = 0;
 
     IN(ysetframe);
@@ -710,9 +695,9 @@ ysetframe(register class suiteev  *self, register long  posn , register long  co
 }
 
 static void
-xsetframe(register class suiteev  *self, register long  posn , register long  coord , register long  outof)
+xsetframe(class suiteev  *self, long  posn , long  coord , long  outof)
     {
-  register long width = ItemWidth, horizOffset = 0, numToSkip = 0;
+  long width = ItemWidth, horizOffset = 0, numToSkip = 0;
 
   IN(xsetframe);
   if(coord) { /* Right Click */
@@ -736,7 +721,7 @@ xsetframe(register class suiteev  *self, register long  posn , register long  co
 #define TwiceBorderSize (2 * ItemBorderSize)
 
 static void
-AttemptSymmetry(register class suiteev  *self, register long  numItems , register long  *rows , register long  *columns)
+AttemptSymmetry(class suiteev  *self, long  numItems , long  *rows , long  *columns)
     {
   if(numItems >= ((*rows) * (*columns))) {
       return;
@@ -754,7 +739,7 @@ AttemptSymmetry(register class suiteev  *self, register long  numItems , registe
 }
 
 static void
-SetBreakPoint(register class suiteev  *self, register struct suite_item  *item, register char  *end)
+SetBreakPoint(class suiteev  *self, struct suite_item  *item, char  *end)
       {
   (Breaks(item))->AddItem((long)(end - item_Caption));
 }
@@ -773,7 +758,7 @@ DoesItFit(class suiteev  *self, struct suite_item  *item, char  *head, char  *ta
 }
 
 static char *
-WalkBackwardToPunctuation(register char  *head, register char  *tail)
+WalkBackwardToPunctuation(char  *head, char  *tail)
     {
   if(tail && (*tail != ' ') && (*(tail - 1) == ' ')) tail--;
   while((tail > head) && (*tail == ' ')) tail--;
@@ -787,7 +772,7 @@ WalkBackwardToPunctuation(register char  *head, register char  *tail)
 }
 
 static char *
-WalkBackwardBlackSpace( register class suiteev	 *self, register struct suite_item	 *item, register char			 *head, register char			 *tail, register long			  width )
+WalkBackwardBlackSpace( class suiteev	 *self, struct suite_item	 *item, char			 *head, char			 *tail, long			  width )
           {
   char				*saved_tail = tail;
 
@@ -817,10 +802,10 @@ suiteev::ShrinkWrap( long				      width , long				      height )
 {
     class suiteev *self=this;
   boolean			     end = FALSE, ResetWidthForOffset = TRUE;
-  register int			     indx = 0, i = 0, numLines = 0;
-  register struct suite_item	    *item = NULL;
+  int			     indx = 0, i = 0, numLines = 0;
+  struct suite_item	    *item = NULL;
   long				     saved_width = 0;
-  register char			    *head = NULL, *nl = NULL, *t = NULL;
+  char			    *head = NULL, *nl = NULL, *t = NULL;
   long				     carriedHeight = YGutterSize + ItemBorderSize;
 
   IN(suiteev_ShrinkWrap);
@@ -872,21 +857,21 @@ suiteev::ShrinkWrap( long				      width , long				      height )
 }
 
 static void
-PlaceItems( register class suiteev	     *self, struct rectangle		     *rect, long				      rows , long				      cols , long				      numleftOvers, long				      itemWidth , long				      itemHeight )
+PlaceItems( class suiteev	     *self, struct rectangle		     *rect, long				      rows , long				      cols , long				      numleftOvers, long				      itemWidth , long				      itemHeight )
         {
-  register int			     i = 0;
-  register struct suite_item	    *item = NULL;
+  int			     i = 0;
+  struct suite_item	    *item = NULL;
   long				     itemIndex = 0;
   long int			     width = 0, height = 0, top = 0, left = 0; 
   long int			     OrigWidth = 0, OrigHeight = 0;
   long int			     OrigTop = 0, OrigLeft = 0; 
   long				     delta = 0;
-  register long			     XIndex = 0, XMax = cols;
-  register long			     YIndex = 0, YMax = rows;
-  register long			     leftOverIndex = 0;
+  long			     XIndex = 0, XMax = cols;
+  long			     YIndex = 0, YMax = rows;
+  long			     leftOverIndex = 0;
   long				     Ax = 0, Ay = 0;
   long				     X_LeftOvers = 0, Y_LeftOvers = 0;
-  register long			     AggrigateLeft = 0, AggrigateTop = 0;
+  long			     AggrigateLeft = 0, AggrigateTop = 0;
   long				     X_epsilon = 0, Y_epsilon = 0;
   unsigned			     newlineHeight;
 
@@ -1010,7 +995,7 @@ PlaceItems( register class suiteev	     *self, struct rectangle		     *rect, lon
 static void
 DetermineVisibleListItems( class suiteev  *self, long  height )
     {
-  register int i = 0, count = 0;
+  int i = 0, count = 0;
   struct suite_item *item = NULL;
   int sum = YGutterSize, newlineHeight;
 
@@ -1028,7 +1013,7 @@ DetermineVisibleListItems( class suiteev  *self, long  height )
 }
 
 void
-suiteev::Arrange( register struct rectangle	 *rect )
+suiteev::Arrange( struct rectangle	 *rect )
 {
     class suiteev *self=this;
   long				 itemWidth = 0, itemHeight = 0, 
@@ -1180,11 +1165,11 @@ suiteev::Arrange( register struct rectangle	 *rect )
 }
 
 void
-suiteev::DrawItems( register struct rectangle  *rect )
+suiteev::DrawItems( struct rectangle  *rect )
 {
     class suiteev *self=this;
-  register int i = 0;
-  register struct suite_item *item = NULL;
+  int i = 0;
+  struct suite_item *item = NULL;
 
     IN(suiteev_DrawItems);
     if(!Items || !ITEM(0))
@@ -1201,10 +1186,10 @@ suiteev::DrawItems( register struct rectangle  *rect )
 }
 
 static void
-EraseItems( register class suiteev  *self )
+EraseItems( class suiteev  *self )
   {
-  register int i = 0;
-  register struct suite_item *item = NULL;
+  int i = 0;
+  struct suite_item *item = NULL;
 
     IN(EraseItems);
     if(!Items || !ITEM(0) || !FirstVisible) 
@@ -1250,8 +1235,8 @@ long
 suiteev::NumberVisible( )
 {
     class suiteev *self=this;
-  register long i = 0;
-  register struct suite_item *item = FirstVisible;
+  long i = 0;
+  struct suite_item *item = FirstVisible;
 
   while(item && ++i && (item != LastVisible));
   return(i);
@@ -1261,8 +1246,8 @@ long
 suiteev::NumberExposed( )
 {
     class suiteev *self=this;
-  register long i = 0, index = 0;
-  register struct suite_item *item = NULL;
+  long i = 0, index = 0;
+  struct suite_item *item = NULL;
 
   if(Items && ITEM(0))
     while(item = ITEM(index++))
@@ -1282,11 +1267,11 @@ suiteev::Clear( )
 }
 
 struct suite_item *
-suiteev::WhichItem( register long  x , register long  y )
+suiteev::WhichItem( long  x , long  y )
 {
     class suiteev *self=this;
-  register int i = 0;
-  register struct suite_item *item = NULL;
+  int i = 0;
+  struct suite_item *item = NULL;
 
     IN(suiteev_WhichItem);
     if(Items && ITEM(0)) {
@@ -1316,7 +1301,7 @@ SetViewColors(				\
   item_BackgroundColor )
 
 void
-suiteev_HandleExclusiveHit( register class suiteev  *self, register struct suite_item  *item, enum view_MouseAction  action, long  x , long  y, long  numberOfClicks )
+suiteev_HandleExclusiveHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y, long  numberOfClicks )
           {
     IN(suiteev_HandleExclusiveHit);
     switch(action) {
@@ -1362,13 +1347,13 @@ suiteev_HandleExclusiveHit( register class suiteev  *self, register struct suite
 }
 
 void
-suiteev_HighlightFirstToLast( register class suiteev  *self, register struct suite_item  *first, register struct suite_item  *last )
+suiteev_HighlightFirstToLast( class suiteev  *self, struct suite_item  *first, struct suite_item  *last )
       {
     IN(suiteev_HighlightFirstToLast);
     if(Items && ITEM(0)) {
-	register struct suite_item *item = NULL;
+	struct suite_item *item = NULL;
 	boolean lastFound = FALSE;
-	register int f, l, i = 0;
+	int f, l, i = 0;
 
 	while(item = ITEM(i++)) {
 	    if(last == item) {
@@ -1406,7 +1391,7 @@ suiteev_HighlightFirstToLast( register class suiteev  *self, register struct sui
 }
 
 void
-suiteev_HandleInclusiveHit( register class suiteev  *self, register struct suite_item  *item, register enum view_MouseAction  action, register long  x , register long  y , register long  numberOfClicks )
+suiteev_HandleInclusiveHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numberOfClicks )
         {
     IN(suiteev_HandleInclusiveHit);
     switch(action) {
@@ -1439,7 +1424,7 @@ suiteev_HandleInclusiveHit( register class suiteev  *self, register struct suite
 }
 
 void
-suiteev_HandleToggleHit( register class suiteev  *self, register struct suite_item  *item, register enum view_MouseAction  action, register long  x , register long  y , register long  numberOfClicks )
+suiteev_HandleToggleHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numberOfClicks )
         {
     IN(suiteev_HandleToggleHit);
     if((action == view_LeftDown) || (action == view_RightDown))
@@ -1448,12 +1433,12 @@ suiteev_HandleToggleHit( register class suiteev  *self, register struct suite_it
 }
 
 class view *
-suiteev::Hit( register enum view_MouseAction  action, register long  x , register long  y , register long  numClicks )
+suiteev::Hit( enum view_MouseAction  action, long  x , long  y , long  numClicks )
 {
     class suiteev *self=this;
-    register struct suite_item *item = NULL;
+    struct suite_item *item = NULL;
     struct rectangle r;
-    register class view *ret = (class view *) this;
+    class view *ret = (class view *) this;
 
     IN(suiteev_Hit);
     (this)->GetVisualBounds( &r);
@@ -1489,7 +1474,7 @@ suiteev::Hit( register enum view_MouseAction  action, register long  x , registe
 }
 
 static
-void ItemFullUpdate( register class suiteev  *self, register struct suite_item  *item, register enum	view_UpdateType  type, register long  left , register long  top , register long  width , register long  height )
+void ItemFullUpdate( class suiteev  *self, struct suite_item  *item, enum	view_UpdateType  type, long  left , long  top , long  width , long  height )
         {
   struct rectangle *r = NULL;
 
@@ -1566,7 +1551,7 @@ void ItemFullUpdate( register class suiteev  *self, register struct suite_item  
 }
 
 void
-suiteev::ItemUpdate( register struct suite_item  *item )
+suiteev::ItemUpdate( struct suite_item  *item )
 {
     class suiteev *self=this;
   IN(suiteev_ItemUpdate);
@@ -1582,7 +1567,7 @@ suiteev::ItemUpdate( register struct suite_item  *item )
 }
 
 class view *
-suiteev::ItemHit( register struct suite_item  *item, register enum view_MouseAction  action, register long  x , register long  y , register long  numClicks )
+suiteev::ItemHit( struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numClicks )
 {
     class suiteev *self=this;
   class view *retval = (class view*)this;
@@ -1612,7 +1597,7 @@ suiteev::ItemHit( register struct suite_item  *item, register enum view_MouseAct
 }
 
 void
-suiteev::ItemClear( register struct suite_item  *item )
+suiteev::ItemClear( struct suite_item  *item )
 {
     class suiteev *self=this;struct rectangle r;
   IN(suiteev_ItemClear);
@@ -1624,7 +1609,7 @@ suiteev::ItemClear( register struct suite_item  *item )
 }
 
 void
-suiteev::ItemBlackOut( register struct suite_item  *item )
+suiteev::ItemBlackOut( struct suite_item  *item )
 {
     class suiteev *self=this;
   struct rectangle *r;
@@ -1642,7 +1627,7 @@ suiteev::ItemBlackOut( register struct suite_item  *item )
 }
 
 void
-suiteev::ItemHighlightReverseVideo( register struct suite_item  *item, boolean  border )
+suiteev::ItemHighlightReverseVideo( struct suite_item  *item, boolean  border )
 {
     class suiteev *self=this;
 
@@ -1653,7 +1638,7 @@ suiteev::ItemHighlightReverseVideo( register struct suite_item  *item, boolean  
 }
 
 void
-suiteev::ItemHighlightBorder( register struct suite_item  *item )
+suiteev::ItemHighlightBorder( struct suite_item  *item )
 {
     class suiteev *self=this;
   IN(suiteev_ItemHighlightBorder);
@@ -1662,7 +1647,7 @@ suiteev::ItemHighlightBorder( register struct suite_item  *item )
 }
 
 void
-suiteev::ItemHighlightCaptionBoldItalic( register struct suite_item  *item )
+suiteev::ItemHighlightCaptionBoldItalic( struct suite_item  *item )
 {
     class suiteev *self=this;
   IN(suiteev_ItemHighlightCaptionBoldItalic);
@@ -1672,7 +1657,7 @@ suiteev::ItemHighlightCaptionBoldItalic( register struct suite_item  *item )
 }
 
 void
-suiteev::ItemHighlightCaptionBold( register struct suite_item  *item )
+suiteev::ItemHighlightCaptionBold( struct suite_item  *item )
 {
     class suiteev *self=this;
   IN(suiteev_ItemHighlightCaptionBold);
@@ -1682,7 +1667,7 @@ suiteev::ItemHighlightCaptionBold( register struct suite_item  *item )
 }
 
 void
-suiteev::ItemHighlightCaptionItalic( register struct suite_item  *item )
+suiteev::ItemHighlightCaptionItalic( struct suite_item  *item )
 {
     class suiteev *self=this;
   IN(suiteev_ItemHighlightCaptionItalic);
@@ -1692,7 +1677,7 @@ suiteev::ItemHighlightCaptionItalic( register struct suite_item  *item )
 }
 
 void
-suiteev::ItemNormalize( register struct suite_item  *item )
+suiteev::ItemNormalize( struct suite_item  *item )
 {
     class suiteev *self=this;
   IN(suiteev_ItemNormalize);
@@ -1719,7 +1704,7 @@ suiteev::ItemNormalize( register struct suite_item  *item )
 #define TwiceBorderPlusOne (BorderPlusOne*2)
 
 static void
-ItemPlaceCaption( register class suiteev  *self, register struct suite_item  *item, long  captionwidth, long  captionheight, unsigned  *place )
+ItemPlaceCaption( class suiteev  *self, struct suite_item  *item, long  captionwidth, long  captionheight, unsigned  *place )
           {
   unsigned char alignment = 0;
   long l = Left + ItemBorderSize, t = Top + ItemBorderSize;
@@ -1749,14 +1734,14 @@ ItemPlaceCaption( register class suiteev  *self, register struct suite_item  *it
 }
 
 void
-suiteev::ItemDrawCaption( register struct suite_item  *item )
+suiteev::ItemDrawCaption( struct suite_item  *item )
 {
     class suiteev *self=this;
   long captionwidth = 0, captionheight = 0, totalWidth = 0;
   long X = 0, Y = 0, SubStringIndex = 0;
   unsigned tMode = graphic_COPY, placement = 0;
   unsigned alignment = item_CaptionAlignment;
-  register long pos = 0, i = 0, j = 0, numLines = 0;
+  long pos = 0, i = 0, j = 0, numLines = 0;
   char *tmp = NULL, *head = NULL, save;
   boolean WasBreakPos = FALSE, WasNewLine = FALSE;
   boolean dontDraw = FALSE;
@@ -1924,7 +1909,7 @@ ItemPlaceTitle(class suiteev  *self, struct suite_item  *item, long  titlewidth 
 }
 
 void
-suiteev::ItemDrawTitle( register struct suite_item  *item )
+suiteev::ItemDrawTitle( struct suite_item  *item )
 {
     class suiteev *self=this;
   long x = 0, y = 0, count = 0;
@@ -1987,7 +1972,7 @@ suiteev::ItemDrawTitle( register struct suite_item  *item )
 }
 
 void
-suiteev::ItemHighlight( register struct suite_item  *item )
+suiteev::ItemHighlight( struct suite_item  *item )
 {
     class suiteev *self=this;
   IN(suiteev_ItemHighlight);
@@ -2028,7 +2013,7 @@ suiteev::ItemClearCaption( struct suite_item  *item )
 }
 
 void
-suiteev::ItemShade( register struct suite_item  *item )
+suiteev::ItemShade( struct suite_item  *item )
 {
     class suiteev *self=this;
   short int shade = 0;
@@ -2045,11 +2030,11 @@ suiteev::ItemShade( register struct suite_item  *item )
 }
 
 long
-suiteev::Locate( register long  x , register long  y )
+suiteev::Locate( long  x , long  y )
 {
     class suiteev *self=this;
-  register struct suite_item *item = NULL;
-  register long i = 0;
+  struct suite_item *item = NULL;
+  long i = 0;
   long realLeft = 0, realTop = 0, realWidth = 0, realHeight = 0;
   long YGutterOffset = YGutterSize + 1;
   long XGutterOffset = XGutterSize + 1;
@@ -2083,10 +2068,10 @@ suiteev::Locate( register long  x , register long  y )
 }
 
 void
-suiteev::DrawItemBorder( register struct suite_item  *item )
+suiteev::DrawItemBorder( struct suite_item  *item )
 {
     class suiteev *self=this;
-  register long i = 0;
+  long i = 0;
   struct rectangle *rect = NULL;
 
   IN(suiteev_DrawItemBorder);
@@ -2102,7 +2087,7 @@ suiteev::DrawItemBorder( register struct suite_item  *item )
 }
 
 void
-suiteev::ItemToggle( register struct suite_item  *item )
+suiteev::ItemToggle( struct suite_item  *item )
 {
     class suiteev *self=this;
   IN(suiteev_ItemToggle);
@@ -2129,10 +2114,10 @@ suiteev::AllocItemArray( long  count )
 }
 
 static void
-ReadWriteHandler( register long  anchor, register class suite  *suite, register struct suite_item  *item )
+ReadWriteHandler( long  anchor, class suite  *suite, struct suite_item  *item )
       {
-  register class text *txt = NULL;
-  register class suitecv *txtv = NULL;
+  class text *txt = NULL;
+  class suitecv *txtv = NULL;
 
   if((txt = (class text*) (suite)->ItemDataObject( item)) && 
      (txtv = (class suitecv*) (suite)->ItemViewObject( item))) {
@@ -2142,7 +2127,7 @@ ReadWriteHandler( register long  anchor, register class suite  *suite, register 
 }
 
 void
-suiteev::SetItemToReadWrite( register struct suite_item  *item )
+suiteev::SetItemToReadWrite( struct suite_item  *item )
 {
     class suiteev *self=this;
   AllocNameSpace(&item->dataobjectname,"text");
@@ -2163,7 +2148,7 @@ MaxSubStringSize( class suiteev  *self, struct suite_item  *item, char  *str, cl
           {
   long int HMax = 0, WMax = 0;
   char *tmp = NULL, *head = NULL, save;
-  register int j = 0, pos = 0, i = 0;
+  int j = 0, pos = 0, i = 0;
 
   *w = *h = 0;
   tmp = head = str;
@@ -2220,7 +2205,7 @@ MaxListSubStringWidth( class suiteev  *self, struct suite_item  *item, char  *st
     long int WMax = 0;
     int w=0, h=0;
   char *tmp = NULL, *head = NULL, save;
-  register int j = 0, pos = 0, i = 0;
+  int j = 0, pos = 0, i = 0;
 
   w = 0;
   tmp = head = str;
@@ -2265,11 +2250,11 @@ void
 suiteev::MaxStringSize( long  *width , long  *height )
 {
     class suiteev *self=this;
-  register int i = 0;
-  register struct suite_item *item = NULL;
-  register long maxWidth = 0, maxHeight = 0;
+  int i = 0;
+  struct suite_item *item = NULL;
+  long maxWidth = 0, maxHeight = 0;
   int XWidth = 0, YWidth = 0;
-  register int numLines = 0;
+  int numLines = 0;
 
   IN(::MaxStringSize);
   while(item = ITEM(i++))
@@ -2299,11 +2284,11 @@ suiteev::MaxStringSize( long  *width , long  *height )
 }
 
 long
-suiteev::LineCount( register char  *str )
+suiteev::LineCount( char  *str )
 {
     class suiteev *self=this;
-  register long number = 1;
-  register char *tmp = str;
+  long number = 1;
+  char *tmp = str;
 
   if(tmp)
     while(*tmp != (char)0) 
@@ -2367,7 +2352,7 @@ DrawRect(class suiteev  *self, struct suite_item  *item, struct rectangle  *Rect
       free(childrect);
   }
   else {
-      register int i = item_BorderSize;
+      int i = item_BorderSize;
       SetViewColors((class view *) self, item_ForegroundColor, item_BackgroundColor);
       while(i > 0) {
 	  DrawRectSize(self, rectangle_Left(Rect), rectangle_Top(Rect), rectangle_Width(Rect), rectangle_Height(Rect));
@@ -2382,8 +2367,8 @@ void
 suiteev::LinkTree(class view  *parent)
 {
     class suiteev *self=this;
-    register int i = 0;
-    register struct suite_item *item = NULL;
+    int i = 0;
+    struct suite_item *item = NULL;
 
     (this)->view::LinkTree( parent);
     if((this)->GetIM()) {

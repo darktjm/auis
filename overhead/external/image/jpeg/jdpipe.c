@@ -336,7 +336,7 @@ duplicate_row (JSAMPARRAY image_data,
 /* This happens only at the bottom of the image, */
 /* so it needn't be super-efficient */
 {
-  register int row;
+  int row;
 
   for (row = 1; row <= num_rows; row++) {
     jcopy_sample_rows(image_data, source_row, image_data, source_row + row,

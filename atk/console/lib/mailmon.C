@@ -25,16 +25,6 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/mailmon.C,v 1.5 1996/09/03 19:10:59 robr Exp $";
-#endif
-
-
- 
-
 /* 
  ***************************************************************
  * Mail system monitoring routine for Instrument Console
@@ -42,6 +32,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
   *****************************************************************
  */
 
+#include <andrewos.h> /* sys/types.h */
 #include <andyenv.h>
 
 #include <consoleClass.H>
@@ -83,23 +74,12 @@ boolean CheckMyMail = FALSE;
 char OutgoingDir[MAXPATHLEN];
 int OutgoingAge = 3600; /* seconds until we notice delayed outgoing mail */
 
-#ifndef NORCSID
-#endif
-#ifdef AMS_DELIVERY_ENV
-#else /* AMS_DELIVERY_ENV */
-#endif /* AMS_DELIVERY_ENV */
-#ifdef ANDREW_PRINTING_ENV
-#else /* ANDREW_PRINTING_ENV */
-#endif /* ANDREW_PRINTING_ENV */
-#ifdef AFS_ENV
-#else /* AFS_ENV */
-#endif /* AFS_ENV */
 void SetMailEnv();
 void InitMail(class consoleClass  *self);
 void InitDirectories();
 void SetPrintEnv();
 void InitPrint(class consoleClass  *self);
-int AbortPrintChecking(class consoleClass  *self, char  *text);
+int AbortPrintChecking(class consoleClass  *self, const char  *text);
 int NonAndrewCheckMail(class consoleClass  *self, char  *Name, int  *LastModTime , int  LastValue);
 int NewMsgs(FILE  *mf);
 
@@ -358,8 +338,8 @@ int NewMsgs(FILE  *mf)
     
     while (!feof(mf)) {
 	char line[100];
-	register int c;
-	register char *cp = line;
+	int c;
+	char *cp = line;
 
 	/* read a line into our buffer */
 	while ((c = getc(mf)) != EOF && c != '\n') {

@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipobject.C,v 1.4 1993/09/28 04:52:23 rr2b Stab74 $";
-#endif
-
 /* zipobj.c	Zip Object -- Super-class				      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -81,7 +76,7 @@ zipobject::zipobject( )
   }
 
 void
-zipobject::Destroy_Object( register zip_type_figure		   object )
+zipobject::Destroy_Object( zip_type_figure		   object )
       {
   IN(zipobject::Destroy_Object);
   /*=== NULL ===*/
@@ -89,7 +84,7 @@ zipobject::Destroy_Object( register zip_type_figure		   object )
   }
 
 void
-zipobject::Set_Data_Object( register class zip *data_object )
+zipobject::Set_Data_Object( class zip *data_object )
       {
   class zipobject *self=this;
 
@@ -99,7 +94,7 @@ zipobject::Set_Data_Object( register class zip *data_object )
   }
 
 void
-zipobject::Set_View_Object( register class zipview *view_object )
+zipobject::Set_View_Object( class zipview *view_object )
       {
   class zipobject *self=this;
 
@@ -109,7 +104,7 @@ zipobject::Set_View_Object( register class zipview *view_object )
   }
 
 void
-zipobject::Set_Edit_Object( register class zipedit	          *edit_object )
+zipobject::Set_Edit_Object( class zipedit	          *edit_object )
       {
   class zipobject *self=this;
   IN(zipobject::Set_Edit_Object);
@@ -118,7 +113,7 @@ zipobject::Set_Edit_Object( register class zipedit	          *edit_object )
   }
 
 void
-zipobject::Set_Print_Object( register class zipprint	          *print_object )
+zipobject::Set_Print_Object( class zipprint	          *print_object )
       {
   class zipobject *self=this;
   class zipprint *zipprint = (class zipprint *) print_object;
@@ -128,7 +123,7 @@ zipobject::Set_Print_Object( register class zipprint	          *print_object )
   }
 
 void
-zipobject::Set_Debug( register boolean state )
+zipobject::Set_Debug( boolean state )
       {
   IN(zipobject::Set_Debug);
   debug = state;
@@ -136,7 +131,7 @@ zipobject::Set_Debug( register boolean state )
   }
 
 long
-zipobject::Object_Modified( register zip_type_figure	   object )
+zipobject::Object_Modified( zip_type_figure	   object )
       {
   IN(zipobject_Object_Modified);
   OUT(zipobject_Object_Modified);
@@ -153,7 +148,7 @@ zipobject::Object_DesiredSize( long width, long height, enum view_DSpass pass, l
 }
 
 void 
-zipobject::Object_FullUpdate( register enum view_UpdateType	       type, register long			       left , register long			       top , register long			       width , register long			       height )
+zipobject::Object_FullUpdate( enum view_UpdateType	       type, long			       left , long			       top , long			       width , long			       height )
         {
   IN(zipobject::Object_FullUpdate);
   /*=== NULL ===*/
@@ -169,7 +164,7 @@ zipobject::Object_Update( )
   }
 
 class view *
-zipobject::Object_Hit( register zip_type_figure	       figure, register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks )
+zipobject::Object_Hit( zip_type_figure	       figure, enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
           {
   IN(zipobject::Object_Hit );
   /*=== NULL ===*/
@@ -186,7 +181,7 @@ zipobject::Object_Icon( )
   return  0;
   }
 
-char *
+const char *
 zipobject::Object_Icon_Font_Name( )
     {
   IN(zipobject::Object_Icon_Font_Name);
@@ -203,7 +198,7 @@ zipobject::Object_Icon_Cursor( )
   return  0;
   }
 
-char *
+const char *
 zipobject::Object_Icon_Cursor_Font_Name( )
     {
   IN(zipobject::Object_Icon_Cursor_Font_Name);
@@ -230,7 +225,7 @@ zipobject::Build_Object( zip_type_pane pane, enum view_MouseAction action, long 
   }
 
 long
-zipobject::Show_Object_Properties( register zip_type_pane		   pane, register zip_type_figure		   figure )
+zipobject::Show_Object_Properties( zip_type_pane		   pane, zip_type_figure		   figure )
         {
   IN(zipobject::Show_Object_Properties);
   /****   NULL  ****/
@@ -239,9 +234,9 @@ zipobject::Show_Object_Properties( register zip_type_pane		   pane, register zip
   }
 
 long
-zipobject::Read_Object( register zip_type_figure		   figure )
+zipobject::Read_Object( zip_type_figure		   figure )
       {
-  register long				  status;
+  long				  status;
 
   IN(zipobject::Read_Object);
   status = (this->data_object)->Read_Figure(  figure );
@@ -250,7 +245,7 @@ zipobject::Read_Object( register zip_type_figure		   figure )
   }
 
 long
-zipobject::Read_Object_Stream( register zip_type_figure		   figure, register FILE				  *file, register long				   id )
+zipobject::Read_Object_Stream( zip_type_figure		   figure, FILE				  *file, long				   id )
           {
   IN(zipobject::Read_Object_Stream);
   /****   NULL  ****/
@@ -259,9 +254,9 @@ zipobject::Read_Object_Stream( register zip_type_figure		   figure, register FIL
   }
 
 long
-zipobject::Write_Object( register zip_type_figure		   figure )
+zipobject::Write_Object( zip_type_figure		   figure )
       {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipobject::Write_Object);
   status = (this->data_object)->Write_Figure(  figure );
@@ -270,7 +265,7 @@ zipobject::Write_Object( register zip_type_figure		   figure )
   }
 
 long
-zipobject::Draw_Object( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipobject::Draw_Object( zip_type_figure		   figure, zip_type_pane		   pane )
         {
   IN(zipobject::Draw_Object);
   /****   NULL  ****/
@@ -279,7 +274,7 @@ zipobject::Draw_Object( register zip_type_figure		   figure, register zip_type_p
   }
 
 long
-zipobject::Clear_Object( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipobject::Clear_Object( zip_type_figure		   figure, zip_type_pane		   pane )
         {
   IN(zipobject::Clear_Object);
   /****   NULL  ****/
@@ -288,7 +283,7 @@ zipobject::Clear_Object( register zip_type_figure		   figure, register zip_type_
   }
 
 long
-zipobject::Print_Object( register zip_type_figure figure, zip_type_pane pane )
+zipobject::Print_Object( zip_type_figure figure, zip_type_pane pane )
       {
   IN(zipobject::Print_Object);
   /****   NULL  ****/
@@ -297,7 +292,7 @@ zipobject::Print_Object( register zip_type_figure figure, zip_type_pane pane )
   }
 
 long
-zipobject::Proximate_Object_Points( register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y )
+zipobject::Proximate_Object_Points( zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y )
           {
   IN(zipobject::Proximate_Object_Points);
   /****   NULL  ****/
@@ -306,7 +301,7 @@ zipobject::Proximate_Object_Points( register zip_type_figure		   figure, registe
   }
 
 long
-zipobject::Within_Object( register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y )
+zipobject::Within_Object( zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y )
           {
   IN(zipobject::Within_Object);
   /****   NULL   ****/
@@ -315,7 +310,7 @@ zipobject::Within_Object( register zip_type_figure		   figure, register zip_type
   }
 
 boolean
-zipobject::Enclosed_Object( register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y , register zip_type_pixel		   w , register zip_type_pixel		   h )
+zipobject::Enclosed_Object( zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y , zip_type_pixel		   w , zip_type_pixel		   h )
           {
   IN(zipobject::Enclosed_Object);
   /****   NULL   ****/
@@ -324,7 +319,7 @@ zipobject::Enclosed_Object( register zip_type_figure		   figure, register zip_ty
   }
 
 long
-zipobject::Object_Enclosure( register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		   *x , register zip_type_pixel		   *y , register zip_type_pixel		   *w , register zip_type_pixel		   *h )
+zipobject::Object_Enclosure( zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		   *x , zip_type_pixel		   *y , zip_type_pixel		   *w , zip_type_pixel		   *h )
           {
   IN(zipobject::Object_Enclosure);
   /****   NULL   ****/
@@ -334,7 +329,7 @@ zipobject::Object_Enclosure( register zip_type_figure		   figure, register zip_t
   }
 
 long
-zipobject::Highlight_Object_Points( register zip_type_figure figure, zip_type_pane pane )
+zipobject::Highlight_Object_Points( zip_type_figure figure, zip_type_pane pane )
       {
   IN(zipobject::Highlight_Object_Points);
   /****   NULL  ****/
@@ -343,7 +338,7 @@ zipobject::Highlight_Object_Points( register zip_type_figure figure, zip_type_pa
   }
 
 long
-zipobject::Normalize_Object_Points( register zip_type_figure figure, zip_type_pane pane )
+zipobject::Normalize_Object_Points( zip_type_figure figure, zip_type_pane pane )
       {
   IN(zipobject::Normalize_Object_Points);
   /****   NULL  ****/
@@ -352,7 +347,7 @@ zipobject::Normalize_Object_Points( register zip_type_figure figure, zip_type_pa
   }
 
 long
-zipobject::Expose_Object_Points( register zip_type_figure figure, zip_type_pane pane )
+zipobject::Expose_Object_Points( zip_type_figure figure, zip_type_pane pane )
       {
   IN(zipobject::Expose_Object_Points);
   /****   NULL  ****/
@@ -361,7 +356,7 @@ zipobject::Expose_Object_Points( register zip_type_figure figure, zip_type_pane 
   }
 
 long
-zipobject::Hide_Object_Points( register zip_type_figure figure, zip_type_pane pane )
+zipobject::Hide_Object_Points( zip_type_figure figure, zip_type_pane pane )
       {
   IN(zipobject::Hide_Object_Points);
   /****   NULL  ****/
@@ -370,7 +365,7 @@ zipobject::Hide_Object_Points( register zip_type_figure figure, zip_type_pane pa
   }
 
 long
-zipobject::Set_Object_Shade( register zip_type_figure figure, unsigned char shade )
+zipobject::Set_Object_Shade( zip_type_figure figure, unsigned char shade )
         {
   IN(zipobject::Set_Object_Shade);
   /****   NULL  ****/
@@ -379,7 +374,7 @@ zipobject::Set_Object_Shade( register zip_type_figure figure, unsigned char shad
   }
 
 long
-zipobject::Set_Object_Font( register zip_type_figure		   figure, register short			   font )
+zipobject::Set_Object_Font( zip_type_figure		   figure, short			   font )
         {
   IN(zipobject::Set_Object_Font);
   /****   NULL  ****/
@@ -414,7 +409,7 @@ zipobject::Set_Object_Font( register zip_type_figure		   figure, register short	
 long
 zipobject::Set_Object_Point( zip_type_figure figure, int point, zip_type_point x, zip_type_point y )
 {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipobject::Set_Object_Point);
   if ( figure->zip_figure_points == NULL  &&
@@ -476,7 +471,7 @@ zipobject::Set_Object_Point( zip_type_figure figure, int point, zip_type_point x
   }
 
 long
-zipobject::Object_Point( register zip_type_figure		   figure, register long				   point, register zip_type_point		   *x , register zip_type_point		   *y )
+zipobject::Object_Point( zip_type_figure		   figure, long				   point, zip_type_point		   *x , zip_type_point		   *y )
           {
   IN(zipobject::Object_Point);
   if ( figure )
@@ -490,9 +485,9 @@ zipobject::Object_Point( register zip_type_figure		   figure, register long				 
   }
 
 long
-zipobject::Adjust_Object_Point_Suite( register zip_type_figure		   figure, register zip_type_point		   x_delta , register zip_type_point		   y_delta )
+zipobject::Adjust_Object_Point_Suite( zip_type_figure		   figure, zip_type_point		   x_delta , zip_type_point		   y_delta )
         {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipobject::Adjust_Object_Point_Suite);
   figure_x_point += x_delta;
@@ -507,7 +502,7 @@ zipobject::Adjust_Object_Point_Suite( register zip_type_figure		   figure, regis
   }
 
 boolean
-zipobject::Contains( register zip_type_figure		 figure, register zip_type_pane		 pane, register zip_type_pixel		 x , register zip_type_pixel		 y )
+zipobject::Contains( zip_type_figure		 figure, zip_type_pane		 pane, zip_type_pixel		 x , zip_type_pixel		 y )
         
   {
     return FALSE;

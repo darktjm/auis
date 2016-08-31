@@ -1,5 +1,3 @@
-/* @(#)dir_proc.c	1.3 87/11/16 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,11 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/demo/dir/RCS/dir_proc.c,v 1.3 1992/12/15 21:53:21 rr2b Stab74 $";
-#endif
 
 /*
  * dir_proc.c: remote readdir implementation

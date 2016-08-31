@@ -118,9 +118,9 @@ get_input_row (compress_info_ptr cinfo, JSAMPARRAY pixel_row)
    * from an input file in which the data is stored 3 bytes per pixel
    * in left-to-right, top-to-bottom order.
    */
-  register FILE * infile = cinfo->input_file;
-  register JSAMPROW ptr0, ptr1, ptr2;
-  register long col;
+  FILE * infile = cinfo->input_file;
+  JSAMPROW ptr0, ptr1, ptr2;
+  long col;
   
   ptr0 = pixel_row[0];
   ptr1 = pixel_row[1];
@@ -443,10 +443,10 @@ put_pixel_rows (decompress_info_ptr cinfo, int num_rows, JSAMPIMAGE pixel_data)
   /* This example shows how you might write full-color RGB data (3 components)
    * to an output file in which the data is stored 3 bytes per pixel.
    */
-  register FILE * outfile = cinfo->output_file;
-  register JSAMPROW ptr0, ptr1, ptr2;
-  register long col;
-  register int row;
+  FILE * outfile = cinfo->output_file;
+  JSAMPROW ptr0, ptr1, ptr2;
+  long col;
+  int row;
   
   for (row = 0; row < num_rows; row++) {
     ptr0 = pixel_data[0][row];

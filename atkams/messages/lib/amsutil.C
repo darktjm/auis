@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/amsutil.C,v 1.2 1993/06/03 00:33:17 Zarf Stab74 $";
-#endif
-
 #include <ctype.h>
 #include <stdio.h>
 #include <mailconf.h>
@@ -48,12 +42,10 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #include <mail.h>
 
 static struct OptionState MyOpts;
-static char **KeyHeaders = NULL;
+static const char **KeyHeaders = NULL;
 
 
 ATKdefineRegistry(amsutil, ATK, amsutil::InitializeClass);
-#ifndef NORCSID
-#endif
 long hatol(const char  *s);
 void GetBinaryOptions();
 
@@ -65,7 +57,7 @@ boolean amsutil::InitializeClass()
     return(TRUE);
 }
 
-char **amsutil::GetKeyHeadsArray() 
+const char * const *amsutil::GetKeyHeadsArray() 
 {
 	ATKinit;
 
@@ -114,7 +106,7 @@ void amsutil::SetOptMaskBit(int  opt , int  val)
     SETOPTBIT(MyOpts.OptMask, opt, val);
 }
 
-void amsutil::BreakDownContentTypeField(char  *override , char  *fmttype , int  fmttypelen , char  *fmtvers , int  fmtverslen , char  *fmtresources, int  fmtresourceslen)
+void amsutil::BreakDownContentTypeField(const char  *override , char  *fmttype , int  fmttypelen , char  *fmtvers , int  fmtverslen , char  *fmtresources, int  fmtresourceslen)
 {
 	ATKinit;
 
@@ -170,22 +162,23 @@ long amsutil::conv64tolong(char  *s64)
     return(::conv64tolong(s64));
 }
 
-int amsutil::setprofilestring(char  *prog , char  *pref , char  *val)
+int amsutil::setprofilestring(const char  *prog , const char  *pref , const char  *val)
 {
 	ATKinit;
 
     return(::setprofilestring(prog, pref, val));
 }
 
-char **amsutil::ParseKeyHeaders()
+const char **amsutil::ParseKeyHeaders()
 {
 	ATKinit;
 
     int numkeys = 0;
-    char *s, *t;
-    char **KeyHeads;
+    const char *s, *t;
+    char *ct;
+    const char **KeyHeads;
 
-    s = (char *) environ::GetProfile("messages.keyheaders");
+    s = environ::GetProfile("messages.keyheaders");
     if (!s) {
 	s = "From:Date:Subject:To:CC:ReSent-From:ReSent-To";
     }
@@ -193,16 +186,15 @@ char **amsutil::ParseKeyHeaders()
     for (t=s; t=strchr(t, ':'); ++t, ++numkeys) {
 	;
     }
-    KeyHeads = (char **) malloc((2+numkeys) * sizeof(char *));
-    t = (char *)malloc(1+strlen(s));
-    strcpy(t, s); /* permanent copy */
-    ::LowerStringInPlace(t, strlen(t));
-    KeyHeads[0] = t;
+    KeyHeads = (const char **) malloc((2+numkeys) * sizeof(char *));
+    ct = strdup(s); /* permanent copy */
+    ::LowerStringInPlace(ct, strlen(ct));
+    KeyHeads[0] = ct;
     numkeys = 1;
-    for (s=t; s=strchr(s, ':'); ++s, ++numkeys) {
-	*s++ = '\0';
-	if (*s) {
-	    KeyHeads[numkeys] = s;
+    for (; ct=strchr(ct, ':'); ++ct, ++numkeys) {
+	*ct++ = '\0';
+	if (*ct) {
+	    KeyHeads[numkeys] = ct;
 	} else {
 	    --numkeys;
 	}
@@ -367,14 +359,14 @@ void amsutil::LowerStringInPlace(char  *s, int  slen)
     ::LowerStringInPlace(s, slen);
 }
 
-int amsutil::debug_open(char  *name, int  flags , int  mode)
+int amsutil::debug_open(const char  *name, int  flags , int  mode)
 {
 	ATKinit;
 
     return(::dbg_open(name, flags, mode));
 }
 
-FILE *amsutil::debug_fopen(char  *name , char  *mode)
+FILE *amsutil::debug_fopen(const char  *name , const char  *mode)
 {
 	ATKinit;
 
@@ -460,7 +452,7 @@ const char * amsutil::GetDefaultFontName()
     return(myfontname);
 }
 
-static char *SubsChooseVec[] = {
+static const char * SubsChooseVec[] = { /* [0] set below */
     "",
     "Yes (Normal subscription; shows new notices)",
     "No (no subscription)",
@@ -470,7 +462,7 @@ static char *SubsChooseVec[] = {
     0,
 };
 
-static char *Ssubsvec[] = {
+static const char * Ssubsvec[] = { /* [0] set below */
     "",
     "Yes", 
     "No",
@@ -480,7 +472,7 @@ static char *Ssubsvec[] = {
     0,
 };
 
-static char *BabySubsVec[] = {
+static const char * BabySubsVec[] = { /* [0] set below */
     "",
     "Yes",
     "No",

@@ -25,16 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/strtblview.C,v 3.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* strtblv.c	
 
 	The view module for the stringtbl dataobject
@@ -45,7 +35,7 @@ known problems:
 	the inset fails if invoked via .ezinit for file.stringtbl
 */
 
-
+#include <andrewos.h>
 ATK_IMPL("strtblview.H")
 #include <rect.h>
 #include <graphic.H>
@@ -75,16 +65,14 @@ static struct keystate  *class_keystate;
 /* compute the parameters which say how big the largest item is */
 
 ATKdefineRegistry(strtblview, view, NULL);
-#ifndef NORCSID
-#endif
 static void ComputeItemSize(class strtblview  *self);
 static void ComputeOrganization (class strtblview  *self, short  width , short  height);
 static void iRect(class strtblview    *self, short  i, struct rectangle  *r);
 #ifdef NOTUSED
 static void AddItem_Command( class strtblview   *self );
 #endif /* NOTUSED ? */
-static boolean BogusCallFromParent(class strtblview  *self, char  *where , char  *msg);
-static boolean CheckWindow(class strtblview  *self, char  *where);
+static boolean BogusCallFromParent(class strtblview  *self, const char  *where , const char  *msg);
+static boolean CheckWindow(class strtblview  *self, const char  *where);
 static void  AdjustHighlight(class strtblview  *self);
 static void RedrawTable(class strtblview  *self);
 
@@ -218,14 +206,14 @@ strtblview::ObservedChanged(class observable  *dobj, long  status)
 
 
 static boolean
-BogusCallFromParent(class strtblview  *self, char  *where , char  *msg)
+BogusCallFromParent(class strtblview  *self, const char  *where , const char  *msg)
 		{
 	fprintf(stderr, "<strtblview>Bogus call to %s, %s\n", where, msg);
 	return FALSE;
 }
 
 static boolean
-CheckWindow(class strtblview  *self, char  *where)
+CheckWindow(class strtblview  *self, const char  *where)
 		{
 	class graphic *g
 		= (class graphic *)(self)->GetDrawable();
@@ -440,7 +428,7 @@ width, height, self->rows, self->cols, *desiredWidth, *desiredHeight); fflush(st
 }
 
 void
-strtblview::Print( FILE    *file, char  	  *processor, char  	  *format, boolean  	 level )
+strtblview::Print( FILE    *file, const char  	  *processor, const char  	  *format, boolean  	 level )
 					{
 	
 }

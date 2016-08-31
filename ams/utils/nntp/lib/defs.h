@@ -37,8 +37,6 @@
  * to be news_version below.
  */
 
-/*	@(#)defs.dist	2.47	6/6/85	*/
-
 #define NEWS_VERSION   "B 2.10.3 4.3bsd-beta 6/6/85"
 
 #define DAYS	(60L*60L*24L)

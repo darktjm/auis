@@ -105,7 +105,7 @@ static void PCX_LoadImage (FILE  *f,int  bytes_per_row,class pcx  *pcx,int  rows
 
 
 int 
-pcx::Ident( char  *fullname )
+pcx::Ident( const char  *fullname )
         {
     FILE *f;
     int ret;
@@ -147,7 +147,7 @@ pcx::Ident( char  *fullname )
 */
 
 int
-pcx::Load( char  *fullname, FILE  *fp )
+pcx::Load( const char  *fullname, FILE  *fp )
             {
     FILE *f;
     unsigned char pcxhd[128];
@@ -216,7 +216,7 @@ static void PCX_LoadImage (FILE  *f,int  bytes_per_row,class pcx  *pcx,int  rows
  ** not set, then this is the byte to write.
  */
 
-    register unsigned char *ptr;
+    unsigned char *ptr;
     int row = 0;
     int bytes_this_row = 0;
     int b, i, cnt;
@@ -266,7 +266,7 @@ pcx::Write( FILE  *file, long  writeID, int  level )
 }
 
 long
-pcx::WriteNative( FILE  *file, char  *filename )
+pcx::WriteNative( FILE  *file, const char  *filename )
             {
 return(0);
 }

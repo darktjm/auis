@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/tm/RCS/tmview.C,v 1.6 1996/02/09 19:37:26 susan Stab74 $";
-#endif
-
-
- 
-
 #include <andrewos.h>
 #include <sys/signal.h>
 #include <sys/errno.h>
@@ -94,10 +86,6 @@ static proctable_fptr textview_BeginningOfLine=NULL;
 
 
 ATKdefineRegistry(tmview, textview, tmview::InitializeClass);
-#ifndef NORCSID
-#endif
-#if defined(hpux) || defined(M_UNIX)
-#endif /* hpux */
 void rawKey(class tmview  *self,long  key);
 static enum keymap_Types rawKeyLookup(class tmview  *self,long  key,struct proctable_Entry  **peP,long  *rockP);
 static void trackTermulator(class tmview  *self);

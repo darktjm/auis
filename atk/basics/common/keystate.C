@@ -25,20 +25,11 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/keystate.C,v 3.10 1996/05/17 23:29:44 robr Exp $";
-#endif
-
-
- 
-
 /* keystate.ch -- A class that keep track of partially evaluated sequences of keystrokes.
 December, 1986 */
 
 
+#include <andrewos.h>
 ATK_IMPL("keystate.H")
 #include <proctable.H>
 #include <keymap.H>
@@ -63,7 +54,7 @@ class keystate *keystate::AddBefore(class keystate  *ks)
 
 class keystate *keystate::AddAfter(class keystate  *ks)
         {
-    register class keystate *kp;
+    class keystate *kp;
 
     this->next = NULL;
     if (ks == NULL)
@@ -186,7 +177,7 @@ enum keystate_DoProcValues keystate::DoProc(struct proctable_Entry  *pe, long  r
 
 void keystate::FreeChain()
     {
-    register class keystate *ks, *kp;
+    class keystate *ks, *kp;
 
     for (ks = this; ks != NULL; ks = kp) {
 	kp = ks->next;
@@ -213,7 +204,7 @@ keystate::keystate()
 
 class keystate *keystate::Create(ATK   *object, class keymap  *keymap)
             {
-    register class keystate *keystatep;
+    class keystate *keystatep;
     
     keystatep = new keystate;
     keystatep->orgMap = keymap;

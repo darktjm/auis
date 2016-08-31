@@ -66,14 +66,14 @@ public:
      void SetAttributes(struct attributes *attributes);
 
 
-    virtual long SetDir(char *dname)  ;
+    virtual long SetDir(const char *dname)  ;
     virtual char * GetDir()  ;            /* Null if none */
 
     virtual char * Locate(long pos)  ;    /* Filename */
 
-    virtual void Mark(char *fname);
-    virtual void Unmark(char *fname);
-    virtual boolean IsMarked(char *fname)  ;
+    virtual void Mark(const char *fname);
+    virtual void Unmark(const char *fname);
+    virtual boolean IsMarked(const char *fname)  ;
     virtual boolean AnythingMarked()  ;
 
     virtual char * EnumerateAll(dired_efptr proc, long rock)  ;

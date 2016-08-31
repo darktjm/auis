@@ -172,7 +172,4 @@ quote	:    SQUOTE
 	;
 
 %%
-static char *eliy_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/eliy.y,v 2.4 1992/12/17 01:13:14 rr2b Stab74 $";
-
-
 extern yylex();

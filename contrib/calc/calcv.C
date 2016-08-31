@@ -25,13 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/calc/RCS/calcv.C,v 1.5 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Calc View-object
@@ -121,7 +114,7 @@ END-SPECIFICATION  ************************************************************/
 
   
 				      
-static char			      digit_font[] = "andysans10b",
+static const char		      digit_font[] = "andysans10b",
 				      oper_font[]  = "andysans16b",
 				      expr_font[]  = "andysans12b";
 
@@ -146,36 +139,34 @@ static char			      digit_font[] = "andysans10b",
 #define  OR6	/* Oper. Row 6 */     (OR5 + OH)
 
 ATKdefineRegistry(calcv, aptv, calcv::InitializeClass);
-#ifndef NORCSID
-#endif
-static void Replace_String( register class calcv	      *self, register char		      *old, register char		      *new_c, register long		       area );
-static long Which_Area( register class calcv	      *self, register long		       x , register long		       y );
-static void Printer( register class calcv	      *self );
-static void Stroke( register class calcv	      *self, register long		       area );
-static void Digit( register class calcv	      *self, register long		       area );
-static void Operator( register class calcv	      *self, register long		       area );
-static void Shrink( register char		      *string );
-static void Clear( register class calcv	      *self, register long		       area );
-static void Display( register class calcv	      *self, register long		       area );
-static void Fill_Area( register class calcv	      *self, register long		       area, register long		       op );
-static void Highlight_Area( register class calcv	      *self, register long		       area );
-static void Normalize_Other_Areas( register class calcv	      *self, register long		       area );
-static void Normalize_Area( register class calcv	      *self, register long			       area );
-static void Draw_Calc( register class calcv	      *self );
-static void Draw_Outline( register class calcv	      *self );
+static void Replace_String( class calcv	      *self, char		      *old, char		      *new_c, long		       area );
+static long Which_Area( class calcv	      *self, long		       x , long		       y );
+static void Printer( class calcv	      *self );
+static void Stroke( class calcv	      *self, long		       area );
+static void Digit( class calcv	      *self, long		       area );
+static void Operator( class calcv	      *self, long		       area );
+static void Shrink( char		      *string );
+static void Clear( class calcv	      *self, long		       area );
+static void Display( class calcv	      *self, long		       area );
+static void Fill_Area( class calcv	      *self, long		       area, long		       op );
+static void Highlight_Area( class calcv	      *self, long		       area );
+static void Normalize_Other_Areas( class calcv	      *self, long		       area );
+static void Normalize_Area( class calcv	      *self, long			       area );
+static void Draw_Calc( class calcv	      *self );
+static void Draw_Outline( class calcv	      *self );
 
 
 struct calcv_setup
   {
-  char				     *string;
-  char				     *font_name;
+  const char				     *string;
+  const char				     *font_name;
   int				      mode;
   char				      shape;
   calcv_hitfptr			      hit_handler;
   long				      x_center, y_center, width, height;
   };
 
-static struct calcv_setup setups[] =
+static const struct calcv_setup setups[] =
    {
  { "7",	  digit_font, Balanced, box,   Digit,	    DC1,DR1, DW,DH },/* Area  0 */
  { "8",   digit_font, Balanced, box,   Digit,	    DC2,DR1, DW,DH },/* Area  1 */
@@ -220,8 +211,8 @@ calcv::calcv( )
     class calcv *self=this;
 	ATKinit;
 
-  register long		       i;
-  register struct proctable_Entry *key_proc;
+  long		       i;
+  struct proctable_Entry *key_proc;
 
   IN(calcv_InitializeObject);
   (this)->SetOptions(  aptv_SuppressControl |
@@ -270,7 +261,7 @@ calcv::~calcv( )
   }
 
 void
-calcv::SetDataObject( register class dataobject	       *data )
+calcv::SetDataObject( class dataobject	       *data )
       {
     class calcv *self=this;
   IN(calcv_SetDataObject);
@@ -309,10 +300,10 @@ calcv::LoseInputFocus( )
   }
 
 void 
-calcv::FullUpdate( register enum view_UpdateType	 type, register long		       left , register long		       top , register long		       width , register long		       height )
+calcv::FullUpdate( enum view_UpdateType	 type, long		       left , long		       top , long		       width , long		       height )
         {
     class calcv *self=this;
-  register long		      i, L, T, W, H;
+  long		      i, L, T, W, H;
 
   IN(calcv_FullUpdate);
   if ( Data  &&  (type == view_FullRedraw || type == view_LastPartialRedraw) )
@@ -362,7 +353,7 @@ calcv::Update( )
   }
 
 static
-void Replace_String( register class calcv	      *self, register char		      *old, register char		      *new_c, register long		       area )
+void Replace_String( class calcv	      *self, char		      *old, char		      *new_c, long		       area )
         {
 
   (self)->ClearBoundedString(  old, AreaFont(area), AreaBound(area),
@@ -373,7 +364,7 @@ void Replace_String( register class calcv	      *self, register char		      *old
   }
 
 void
-calcv::ObservedChanged( register class observable  *changed, register long		      value )
+calcv::ObservedChanged( class observable  *changed, long		      value )
         {
     class calcv *self=this;
   IN(calcv_ObservedChanged);
@@ -392,9 +383,9 @@ calcv::ObservedChanged( register class observable  *changed, register long		    
   }
 
 static long
-Which_Area( register class calcv	      *self, register long		       x , register long		       y )
+Which_Area( class calcv	      *self, long		       x , long		       y )
       {
-  register long		      i;
+  long		      i;
 
   for ( i = 0; i < AreaCount; i++ )
     if ( (self)->Within(  x, y, AreaBound(i) ) )
@@ -403,11 +394,11 @@ Which_Area( register class calcv	      *self, register long		       x , register
   }
 
 class view *
-calcv::Hit( register enum view_MouseAction  action, register long		       x , register long		       y , register long		       clicks )
+calcv::Hit( enum view_MouseAction  action, long		       x , long		       y , long		       clicks )
         {
     class calcv *self=this;
-  register class view	     *hit;
-  register long		      which;
+  class view	     *hit;
+  long		      which;
 
   IN(calcv_Hit );
   if ( ! InputFocus )
@@ -433,9 +424,9 @@ calcv::Hit( register enum view_MouseAction  action, register long		       x , re
   }
 
 static
-void Printer( register class calcv	      *self )
+void Printer( class calcv	      *self )
     {
-  register long		      i, x, y;
+  long		      i, x, y;
 
   (self)->PrintRoundBox(  Left+1, Top+1, Width-3, Height-3, 0 );
   for ( i = 0; i < AreaCount; i++ )
@@ -469,7 +460,7 @@ void Printer( register class calcv	      *self )
   }
 
 void
-calcv::Print( register FILE		      *file, register char		      *processor, register char		      *format, register boolean	       level )
+calcv::Print( FILE		      *file, const char		      *processor, const char		      *format, boolean	       level )
             {
     class calcv *self=this;
   IN(calcv_Print);
@@ -478,7 +469,7 @@ calcv::Print( register FILE		      *file, register char		      *processor, regis
   }
 
 static void
-Stroke( register class calcv	      *self, register long		       area )
+Stroke( class calcv	      *self, long		       area )
       {
   IN(Stroke);
   DEBUGdt(Area,area);
@@ -491,7 +482,7 @@ Stroke( register class calcv	      *self, register long		       area )
   }
 
 static void
-Digit( register class calcv	      *self, register long		       area )
+Digit( class calcv	      *self, long		       area )
       {
   IN(Digit);
   Highlight_Area( self, area );
@@ -521,7 +512,7 @@ Digit( register class calcv	      *self, register long		       area )
   }
 
 static void
-Operator( register class calcv	      *self, register long		       area )
+Operator( class calcv	      *self, long		       area )
       {
   double		  operand_1, operand_2, value;
 
@@ -571,9 +562,9 @@ Operator( register class calcv	      *self, register long		       area )
   }
 
 static
-void Shrink( register char		      *string )
+void Shrink( char		      *string )
     {
-  register char		     *ptr;
+  char		     *ptr;
 
   ptr = string + strlen( string ) - 1;
   if ( index( string, '.' ) )
@@ -582,7 +573,7 @@ void Shrink( register char		      *string )
   }
  
 static void
-Clear( register class calcv	      *self, register long		       area )
+Clear( class calcv	      *self, long		       area )
       {
   Highlight_Area( self, area );
   (Data)->SetValue(  0.0 );
@@ -593,12 +584,12 @@ Clear( register class calcv	      *self, register long		       area )
   }
 
 static void
-Display( register class calcv	      *self, register long		       area )
+Display( class calcv	      *self, long		       area )
       {
   }
 
 static
-void Fill_Area( register class calcv	      *self, register long		       area, register long		       op )
+void Fill_Area( class calcv	      *self, long		       area, long		       op )
         {
   (self)->SetTransferMode(  op );
   switch( AreaShape(area) )
@@ -618,7 +609,7 @@ void Fill_Area( register class calcv	      *self, register long		       area, re
   }
 
 static
-void Highlight_Area( register class calcv	      *self, register long		       area )
+void Highlight_Area( class calcv	      *self, long		       area )
       {
   if ( ! AreaHighlighted(area) )
     {
@@ -629,16 +620,16 @@ void Highlight_Area( register class calcv	      *self, register long		       are
   }
 
 static
-void Normalize_Other_Areas( register class calcv	      *self, register long		       area )
+void Normalize_Other_Areas( class calcv	      *self, long		       area )
       {
-  register long		      i;
+  long		      i;
   for ( i = 0; i < AreaCount; i++ )
     if ( AreaHighlighted(i)  &&  i != area )
       Normalize_Area( self, i );
   }
 
 static
-void Normalize_Area( register class calcv	      *self, register long			       area )
+void Normalize_Area( class calcv	      *self, long			       area )
       {
   if (  AreaHighlighted(area) )
     {
@@ -648,9 +639,9 @@ void Normalize_Area( register class calcv	      *self, register long			       ar
   }
 
 static
-void Draw_Calc( register class calcv	      *self )
+void Draw_Calc( class calcv	      *self )
     {
-  register long		      i, x, y;
+  long		      i, x, y;
 
   IN(Draw_Calc);
   (self)->SetTransferMode(  graphic_BLACK );
@@ -679,7 +670,7 @@ void Draw_Calc( register class calcv	      *self )
   }
 
 static
-void Draw_Outline( register class calcv	      *self )
+void Draw_Outline( class calcv	      *self )
     {
   IN(Draw_Outline);
   (self )->ClearClippingRect( );

@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/onoffV.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("onoffV.H")
 #include <onoffV.H>
 #include <atom.H>
@@ -68,9 +58,6 @@ static class atom *  A_string;
 
 
 ATKdefineRegistry(onoffV, buttonV, onoffV::InitializeClass);
-#ifndef NORCSID
-#endif
-
 
 boolean onoffV::InitializeClass()
 {
@@ -96,7 +83,7 @@ onoffV::onoffV()
 
 void onoffV::LookupParameters()
 {
-    char * fontname;
+    const char * fontname;
     long fontsize;
     struct resourceList parameters[8];
     class buttonV *bv = (class buttonV *) this;

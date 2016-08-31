@@ -110,7 +110,7 @@ void hiddenview::Update()
 }
 
 
-void hiddenview::Print(FILE *f, char *process, char *final, boolean toplevel)
+void hiddenview::Print(FILE *f, const char *process, const char *final, boolean toplevel)
 {
     /* NO-OP.  Don't print anything for this. */
 }

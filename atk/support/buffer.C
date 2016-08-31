@@ -23,13 +23,6 @@
 //  $
 */
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/buffer.C,v 3.9 1995/11/08 21:41:07 robr Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
@@ -52,6 +45,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
   site.h file.
 */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("buffer.H")
 #include <andyenv.h>
 #include <errno.h>
@@ -79,9 +73,9 @@ ATK_IMPL("buffer.H")
 #include <util.h>
 
 static class bufferlist *allBuffers;
-static char *backupExtension = NULL;
-static char *checkpointExtension = ".CKP";
-static char *checkpointDirectory = NULL;
+static const char *backupExtension = NULL;
+static const char *checkpointExtension = ".CKP";
+static const char *checkpointDirectory = NULL;
 static boolean overwriteFiles = TRUE;
 static boolean checkpointGawdyNames = FALSE;
 
@@ -196,7 +190,7 @@ class buffer *buffer::Create(const char  *bufferName , const char  *filename , c
     return (allBuffers)->CreateBuffer( bufferName, filename, objectName, data);
 }
 
-class view *buffer::GetView(class view  **inputFocus , class view  **targetView, char  *viewName)
+class view *buffer::GetView(class view  **inputFocus , class view  **targetView, const char  *viewName)
             {
     int counter;
 
@@ -408,7 +402,7 @@ int buffer::ReadFile(const char  *filename)
     long objectID;
     int returnCode = 0;
     char realName[MAXPATHLEN];
-    char *objectName;
+    const char *objectName;
     FILE *thisFile;
     struct stat stbuf;
     struct attributes *attributes;
@@ -471,14 +465,14 @@ class buffer *buffer::GetBufferOnFile(const char  *filename, long  flags)
 
 /* Changed bufferlist */
 
-void buffer::GuessBufferName (char  *filename , char  *bufferName, int  nameSize)
+void buffer::GuessBufferName (const char  *filename , char  *bufferName, int  nameSize)
             {
 	ATKinit;
 
     (allBuffers)->GuessBufferName( filename, bufferName, nameSize);
 }
 
-void buffer::GetUniqueBufferName (char  *proposedBufferName , char  *bufferName, int  nameSize)
+void buffer::GetUniqueBufferName (const char  *proposedBufferName , char  *bufferName, int  nameSize)
             {
 	ATKinit;
 
@@ -575,7 +569,7 @@ int buffer::WriteToFile(char  *filename, long  flags)
 		path::TruncatePath(filename, shortName,
 				  (sizeof (shortName)) - 1, TRUE);
 		if (ResolveLink(filename, linkdest)) {
-		    static char *choices[] = {
+		    static const char * const choices[] = {
 			"Replace link with file contents",
 			"Cancel",
 			NULL
@@ -596,7 +590,7 @@ int buffer::WriteToFile(char  *filename, long  flags)
 		    alreadyAsked = TRUE;
 		}
 		else {
-		    static char *choices[] = {
+		    static const char * const choices[] = {
 			"Replace link with file contents",
 			"Follow link, replacing pointed-to file",
 			"Cancel",
@@ -832,18 +826,15 @@ boolean buffer::InitializeClass()
     const char *s;
 
     if ((s = environ::GetProfile("BackupExtension")) != NULL) {
-        backupExtension = (char *)malloc(strlen(s) + 1);
-        strcpy(backupExtension, s);
+        backupExtension = strdup(s);
     }
 
     if ((s = environ::GetProfile("CheckpointExtension")) != NULL) {
-        checkpointExtension = (char *)malloc(strlen(s) + 1);
-        strcpy(checkpointExtension, s);
+        checkpointExtension = strdup(s);
     }
 
     if ((s = environ::GetProfile("CheckpointDirectory")) != NULL) {
-        checkpointDirectory = (char *)malloc(strlen(s) + 1);
-        strcpy(checkpointDirectory, s);
+        checkpointDirectory = strdup(s);
     }
 
     overwriteFiles = environ::GetProfileSwitch("OverwriteFiles", overwriteFiles);
@@ -862,7 +853,7 @@ void buffer::SetDefaultObject(const char  *objectname)
     (allBuffers)->SetDefaultObject( objectname);
 }
 
-void buffer::SetDefaultViewname(char  *name)
+void buffer::SetDefaultViewname(const char  *name)
 {
     if(this->viewname != NULL)
 	free(this->viewname);

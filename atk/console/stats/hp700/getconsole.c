@@ -2,13 +2,6 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/stats/hp700/RCS/getconsole.c,v 1.1 1993/06/24 17:49:37 gk5g Stab74 $ */
-/* $Source: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/stats/hp700/RCS/getconsole.c,v $ */
-
-#ifndef lint
-static char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/stats/hp700/RCS/getconsole.c,v 1.1 1993/06/24 17:49:37 gk5g Stab74 $";
-#endif /* lint */
-
 /* 
  ***************************************************************
  * Routines for monitoring messages on console service

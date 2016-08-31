@@ -33,12 +33,6 @@ the full agreement.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/recognition/RCS/bitvector.c,v 1.5 1993/06/22 19:55:33 gk5g Stab74 $";
-#endif
-
-
 /*LINTLIBRARY*/
 
 #include "util.h"
@@ -51,7 +45,7 @@ bitcount(max, bv)
 int max;
 BitVector bv;
 {
-	register i, count;
+	int i, count;
 
 	for(count = i = 0; i < max; i++)
 		if(IS_SET(i, bv))
@@ -64,7 +58,7 @@ BitVectorToString(max, bv)
 BitVector bv;
 {
 	char *string = recog_tempstring();
-	register i;
+	int i;
 
 	for(i = 0; i < max; i++)
 		string[i] = IS_SET(i, bv) ? (i % 10) + '0' : '-' ;
@@ -79,7 +73,7 @@ char *string;
 int max;
 BitVector bv;
 {
-	register i;
+	int i;
 
 	if(strlen(string) != max)
 		recog_error("StringToBitVector: strlen(%s)=%d != %d",
@@ -94,9 +88,9 @@ BitVector bv;
 
 
 SetBitVector(v)
-register BitVector v;
+BitVector v;
 {
-	register int nints = INTS_PER_VECTOR;
+	int nints = INTS_PER_VECTOR;
 
 	while(--nints >= 0)
 		*v++ = -1;
@@ -104,8 +98,8 @@ register BitVector v;
 
 
 ClearBitVector(nints, v)
-register int nints;
-register BitVector v;
+int nints;
+BitVector v;
 {
 
 	while(--nints >= 0)
@@ -114,8 +108,8 @@ register BitVector v;
 
 
 AssignBitVector(nints, v1, v2)
-register int nints;
-register BitVector v1, v2;
+int nints;
+BitVector v1, v2;
 {
 
 	while(--nints >= 0)
@@ -124,10 +118,10 @@ register BitVector v1, v2;
 
 int
 BitVectorDeQ(max, v)
-register int max;
-register BitVector v;
+int max;
+BitVector v;
 {
-	register int i;
+	int i;
 	for(i = 0; i < max; i++)
 		if(IS_SET(i, v)) {
 			BIT_CLEAR(i, v);
@@ -140,8 +134,8 @@ register BitVector v;
 int *
 BitVectorOr(v, v1, v2, ipv)
 int *v;
-register int *v1, *v2;
-register int ipv;
+int *v1, *v2;
+int ipv;
 {
 	int *vv = v;
 	do
@@ -153,8 +147,8 @@ register int ipv;
 int *
 BitVectorAnd(v, v1, v2, ipv)
 int *v;
-register int *v1, *v2;
-register int ipv;
+int *v1, *v2;
+int ipv;
 {
 	int *vv = v;
 	do
@@ -165,8 +159,8 @@ register int ipv;
 
 int
 BitVectorNoBitsSet(v, ipv)
-register int *v;
-register int ipv;
+int *v;
+int ipv;
 {
 	do
 		if(*v++) return 0;

@@ -271,7 +271,7 @@ extern int MS_NumDirsInSearchPath;
 #define PR_STARTTYPING 10
 #define PR_ENDTYPING 11
 
-extern char MAILSEARCHPATHTEMPLATE[];
+extern const char MAILSEARCHPATHTEMPLATE[];
 
 struct FileTime {
     char *Name;

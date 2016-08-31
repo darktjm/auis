@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/guardian/cmd/RCS/demonlog.c,v 2.19 1994/06/09 21:21:04 rr2b Stab74 $";
-#endif
-
 /*
    facility for deamons to write accounting records
 */
@@ -66,8 +61,8 @@ static int deal_errors = 0;
 char *deal_fixfield(s)
 char *s;
 {
-    register char *w=s;
-    register char ch;
+    char *w=s;
+    char ch;
     while((ch=(*w))!=0) {
 	if(ch!=(ch&0x7f))ch='?';
 	if((ch==',')||(ch<' ')||(ch==0x7f))
@@ -105,7 +100,7 @@ static int deal_getpid()
 
 static long deal_gethostid()
 {
-    register struct hostent *me;
+    struct hostent *me;
     static long my_host_number=0;
     strcpy(deal_hostname,"totaly_unknown_host_running_deamonlog"); 
     if(gethostname(deal_hostname,sizeof(deal_hostname))!=0)return (deal_errors++,0);

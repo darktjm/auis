@@ -198,4 +198,4 @@ struct chartv_instance
 #define  LastModified		  (self->instance->last_modified)
 #define  DescriptionLastModified  (self->instance->description_last_modified)
 
-static char			  temp_name[] = "/tmp/org_temp";
+static const char		  temp_name[] = "/tmp/org_temp";

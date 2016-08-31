@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RCS/pcpnlm.c,v 1.1 1995/08/02 18:46:45 susan Stab74 $";
-#endif
-
 /*
  *      C Panel Handling Package
  *	Hardware-dependent routines
@@ -373,7 +368,7 @@ unsigned char row, col, len, attr;
 
 ErrorBeep ()
     {
-    register int i;
+    int i;
     unsigned char save61;
 
     outp (0x43, 0xB6);
@@ -405,7 +400,7 @@ FIELD *curfield;
 ShowError(msg)
 PRMPT *msg;
     {
-    register int i;
+    int i;
 
     ShowMsg(msg);
     ErrorBeep();

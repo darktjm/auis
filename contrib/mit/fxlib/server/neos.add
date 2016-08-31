@@ -1,9 +1,5 @@
 #!/bin/sh
 #
-# $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/server/RCS/neos.add,v $
-# $Author: wdc $
-# $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/server/RCS/neos.add,v 1.1 1992/02/13 20:36:18 wdc Stab74 $
-#
 # This script does setup necessary to run the EOS file exchange server.
 # If you change $edir, be sure to change the message at end of this
 #   script as well as the message in the eos.del script.

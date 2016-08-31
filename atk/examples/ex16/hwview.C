@@ -25,12 +25,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/examples/ex16/RCS/hwview.C,v 1.5 1996/12/19 20:23:52 fred Exp $";
-#endif
-
 ATK_IMPL("hwview.H")
 #include <stdio.h>
 
@@ -59,14 +53,14 @@ static void ysetframe(class helloworldview  *hwv, int  posn, long  cord , long  
 static long xwhat(class helloworldview  *hwv, long  cord , long  outof);
 static long ywhat(class helloworldview  *hwv, long  cord , long  outof);
 
-static struct scrollfns horizInterface = {
+static const struct scrollfns horizInterface = {
     (scroll_getinfofptr) xgetinfo,
     (scroll_setframefptr) xsetframe,
     (scroll_endzonefptr) NULL,
     (scroll_whatfptr) xwhat
 };
 
-static struct scrollfns vertInterface = {
+static const struct scrollfns vertInterface = {
     (scroll_getinfofptr) ygetinfo,
     (scroll_setframefptr) ysetframe,
     (scroll_endzonefptr) NULL,
@@ -417,12 +411,12 @@ static long ywhat(class helloworldview  *hwv, long  cord , long  outof)
 }
 
 
-char *helloworldview::GetInterface(char  *type)
+const void *helloworldview::GetInterface(const char  *type)
 {
     if (strcmp(type, "scroll,vertical") == 0)
-	return (char *) &vertInterface;
+	return &vertInterface;
     else if (strcmp(type, "scroll,horizontal") == 0)
-	return (char *) &horizInterface;
+	return &horizInterface;
     else
 	return NULL;
 }

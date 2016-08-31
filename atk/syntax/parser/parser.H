@@ -65,9 +65,9 @@ ATK_INTER
 #define parser_FREEMSG	(1<<15)
 
 typedef int (*parser_lexerfptr)(void *lexrock, void *yylval);
-typedef void (*parser_enumresfptr)(void *rock, char *word, int tokennumber);
+typedef void (*parser_enumresfptr)(void *rock, const char *word, int tokennumber);
 typedef void (*parser_killfptr)(class parser *self, void *vsp);
-typedef void (*parser_errfptr)(int severity, char *msg, class parser *parser);
+typedef void (*parser_errfptr)(int severity, const char *msg, class parser *parser);
 typedef int (*parser_semfptr)(int i, void *pyyval, void *yyvsp,
 	class parser *parser);
 
@@ -84,7 +84,7 @@ struct parser_tables {
 					defred and defgoto, respectively */
 	short table_max; 	/* index of highest entry in table and valid */
 
-	char **names;	/* names[i] is text of i'th token or non-terminal
+	const char * const *names;	/* names[i] is text of i'th token or non-terminal
 		tokens occupy the first num_tokens locations
 		non-terminals occupy the subsequent num_nt locations
 		tokens may be: 
@@ -101,7 +101,7 @@ struct parser_tables {
 		The lexical analyzer must report tokens by their index
 		in 'names'.   And must report EOF as token 0.
 	*/
-	char *translate;	/* newstyle token number for
+	const char *translate;	/* newstyle token number for
 			each oldstyle token number.  The translation is:
 			given below under TranslateTokenNumber */
 
@@ -152,9 +152,9 @@ public:
 		Returns one of the severity values above, indicating
 		the highest severity error encountered */
 
-	virtual void Error(int severity, char *msg);
+	virtual void Error(int severity, const char *msg);
 		/* call this to report an error */
-	virtual void ErrorGuts(int severity, char *severityname, char *msg);
+	virtual void ErrorGuts(int severity, const char *severityname, const char *msg);
 		/* override this to provide error processing */
 
 	static class parser *GetCurrentparser();
@@ -164,13 +164,13 @@ public:
 	virtual void EnumerateReservedWords(parser_enumresfptr handler,
 			void *rock);
 		/* the handler is called for each alphabetic reserved word:
-			handler(rock, char *word, int tokennumber) 
+			handler(rock, const char *word, int tokennumber) 
 		  but it is not called for names beginning with "set"
 		  and for names beginning with "tok", 
 			only the rest of the name is passed
 		  uppercase letters are converted to lower, and vice versa
 		*/
-	virtual int TokenNumberFromName(char *name);
+	virtual int TokenNumberFromName(const char *name);
 		/* returns the token number corresponding to the string;
 		  typical strings:  
 			"function", "setID", "tokNULL", "'a'", "\":=\""  
@@ -180,7 +180,7 @@ public:
 		/* sets the debug flag to the given value.
 			Returns prior value */
 
-	static int ParseNumber(char *buf, long *plen, 
+	static int ParseNumber(const char *buf, long *plen, 
 			long *intval, double *dvlval);
 		/* parses a number from buf and sets *plen to length found
 		sets *intval to integer value and
@@ -188,7 +188,7 @@ public:
 		returns 1 if syntactically an integer, 2 for a double,
 			and 0 for a syntax error */
 
-	static int TransEscape(char *buf, int *plen);
+	static int TransEscape(const char *buf, int *plen);
 		/* buf holds a character sequence (at least three chars)
 		  that occurred after a backslash in a string.
 		  The translation is returned as an int.
@@ -223,7 +223,7 @@ public:
 	inline int GetMaxSeverity()		{ return (this->maxSeverity); }
 	inline void SetNErrors(int n)		{ (this->nerrors = (n)); }
 	inline int GetNErrors()			{ return (this->nerrors); }
-	inline char ** GetTokenNames()		{ return(this->tables->names);}
+	inline const char * const * GetTokenNames()		{ return(this->tables->names);}
 	inline short GetNTokens()		{ return (this->tables->num_tokens); }
 	inline void SetTables(struct parser_tables *t)
 						{ (this)->tables = (t); }

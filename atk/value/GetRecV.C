@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/GetRecV.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("GetRecV.H")
 #include <GetRecV.H>
 #include <fontdesc.H>
@@ -64,9 +54,6 @@ ATK_IMPL("GetRecV.H")
 
 
 ATKdefineRegistry(GetRecV, valueview, GetRecV::InitializeClass);
-#ifndef NORCSID
-#endif
-
 
 boolean GetRecV::InitializeClass()
 {

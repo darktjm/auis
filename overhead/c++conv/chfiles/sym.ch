@@ -20,10 +20,6 @@
  * 
  *  $
 \* ********************************************************************** */
-#if !defined(lint) && !defined(LOCORE) && defined(RCS_HDRS)
-static char *sym_H_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/c++conv/chfiles/RCS/sym.ch,v 1.1 1993/10/13 15:52:18 rr2b Stab74 $";
-#endif
-
 
 /* sym.c
  *

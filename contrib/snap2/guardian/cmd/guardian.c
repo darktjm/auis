@@ -25,17 +25,14 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/guardian/cmd/RCS/guardian.c,v 2.111 1996/09/03 19:24:50 robr Exp $";
-#endif
-
 /*
   guardian.c -- daemon for SNAP servers
   Written: 17 September 1985
 */
 
-static char GuardianVersion[] = "$Revision$ $Date$";
+#include <andrewos.h>
+/* tjm: ugh - I guess I'll leave this one in, since it gets printed */
+static const char GuardianVersion[] = "$Revision$ $Date$";
 #define GUARDIAN_PREIX_SKIP sizeof("xRevision")
 extern char *AndrewDir();
 #ifndef _IBMR2
@@ -43,7 +40,6 @@ extern char *malloc();
 #endif /* _IBMR2 */
 extern char *inet_ntoa();
 
-#include <andrewos.h>
 #include <amsenv.h>
 #include <errno.h>
 #include <stdio.h>
@@ -305,7 +301,7 @@ typedef struct USERINFO_R USERINFO,*USERINFO_pt;
 USERINFO auth_cache[NUM_CACHE];
 
 /* Name of this application */
-static char GuardianName[] = "SNAP.GUARDIAN";
+static const char GuardianName[] = "SNAP.GUARDIAN";
 
 /* Global string for doing sprintf's */
 static char ErrorText[2*MAXPATHLEN];
@@ -435,9 +431,9 @@ static int NAuthorizedUsers;	    /* # authorized users */
 
 static SetAuthorizedUsers()
 {
-    register int f, len, i;
+    int f, len, i;
     struct stat buf;
-    register char *c;
+    char *c;
 
     f = open(Permits, O_RDONLY);
     if (f < 0) {
@@ -486,9 +482,9 @@ static SetAuthorizedUsers()
 }
 
 static bool UserPermitted(uid)
-register char *uid;
+char *uid;
 {
-    register int i;
+    int i;
 
     for (i=0; i<NAuthorizedUsers; i++)
 	if (StrEql(AuthorizedUsers[i], uid)) return TRUE;
@@ -534,8 +530,8 @@ gtokens_pt toks;
 static int CellPwdAuth(u)
 USERINFO_pt u;
 {
-    register int rc;
-    register char *pwd, *cell;
+    int rc;
+    char *pwd, *cell;
     gtokens toks;
     int len=u->len;
 
@@ -597,8 +593,8 @@ USERINFO *u;
 static int MultiTokensAuth(u)
 USERINFO_pt u;
 {
-    register char *ThisCell;
-    register int tokens_id;
+    char *ThisCell;
+    int tokens_id;
 
     ThisCell = GetCellName();
     if (ThisCell == NIL) return set_gerror(GASP_NO_CELL,"no_this_cell");
@@ -724,8 +720,8 @@ static char MyAddress[4];	/* My machine address */
 static bool GetMyAddress()
 {
     static bool virgin = TRUE;
-    register char *name;
-    register struct hostent *me;
+    char *name;
+    struct hostent *me;
 
     if (!virgin) return TRUE;
 
@@ -772,7 +768,7 @@ int abool;
 
 void init_auth_cache()
 {
-    register int i;
+    int i;
     for(i=0;i<NUM_CACHE;i++)
 	auth_cache[i].valid=FALSE;
 }
@@ -861,7 +857,7 @@ char *argv[];
     ProcessArgs(argc, argv);
 
     if (!RunAsUser) {
-	register int uid;
+	int uid;
 	/*clear current authentication to start spawning users*/
 #ifdef AFS_ENV 
 	gclearauth();
@@ -911,7 +907,7 @@ char *argv[];
 }
 
 static void ProcessOption(arg)
-register char *arg;
+char *arg;
 {
     extern int atoi();
 
@@ -956,7 +952,7 @@ static ProcessArgs(argc, argv)
 int argc;
 char *argv[];
 {
-    register int i;
+    int i;
 
     /* Initialize flags */
     DebugFlags = 0;
@@ -995,13 +991,13 @@ char *argv[];
 }
 
 static char lc(c)
-register char c;
+char c;
 {
     return (c >= 'A' && c <= 'Z') ? (c+('a'-'A')) : c;
 }
 
 static bool IgnoreCaseEql(s, t)
-register char *s, *t;
+char *s, *t;
 {
     for (; *s!='\0' && *t!='\0'; s++, t++)
 	if (lc(*s) != lc(*t)) return FALSE;
@@ -1061,7 +1057,7 @@ char **p;			/* the token and returns a pointer  */
 static char *SvcsStorage;
 static void SetServicesTable()
 {
-    register int f;
+    int f;
     struct stat buf;
     int lineno, nextsvc;
     char *buffer;
@@ -1188,13 +1184,13 @@ static void SetServicesTable()
 *		     *
   \********************/
 
-static char GuardianAddress[] = "guardian";
+static const char GuardianAddress[] = "guardian";
 
 static void MailError(msg, arg)
 char *msg, *arg;
 {
-    register int rc;
-    register FILE *f;
+    int rc;
+    FILE *f;
     extern char *arpadate();
     static char errorfile[] = "/tmp/gerrorXXXXXX";
     char *to[2];
@@ -1325,7 +1321,7 @@ static Initialize()
 
 static void Demonize()
 {
-    register int pid, fd;
+    int pid, fd;
 #ifdef DEBUG
     if ((DebugFlags & 1)!=0) {
 	puts("[SNAP.GUARDIAN] Not forking");
@@ -1359,7 +1355,7 @@ static void Demonize()
 
 static bool GetServerRequest(fd, request)
 int fd;
-register REQUEST *request;
+REQUEST *request;
 {
     int len;
     SERVER_PACKET packet;
@@ -1382,11 +1378,11 @@ register REQUEST *request;
 }
 
 static char *ParseReboot(value)
-register char *value;
+char *value;
 {
     int hour, min;
     long now;
-    register struct tm *tm;
+    struct tm *tm;
 
     /* First check format -- `now', `off' or HH:MM */
     if (StrEql(value, "now")) {
@@ -1424,7 +1420,7 @@ register char *value;
 static SetReboot(arg)
 char *arg;
 {
-    register char *answer;
+    char *answer;
 
     answer = ParseReboot(arg);
     if (answer != NIL) {
@@ -1435,7 +1431,7 @@ char *arg;
 }
 
 static void kill_children()
-{register int i;
+{int i;
 for (i=0; i<NextServerSlot; i++)
     kill(servers[i].pid,SIGTERM);
 }
@@ -1444,7 +1440,7 @@ static void reboot()
 {
     static char *reboots[] = { "/etc/reboot", "/bin2/reboot" };
 #define NREBOOTS    (sizeof(reboots)/sizeof(reboots[0]))
-    register int i;
+    int i;
 
     errprintf(GuardianName, ERR_CRITICAL, NIL, NIL,
 	       "Rebooting by request in 45 seconds");
@@ -1508,7 +1504,7 @@ static void CheckLog()
 {
     long now=time(0);
     if(now>=log_checkpoint_time) {
-	register int i;
+	int i;
 	for(i=0;i<=STN_MAX;i++)
 	    DEALOG(("genrl,stat,%s,%ld\n",st_cnt_names[i],st_cnt[i]));
 	DEALOG(("genrl,load,%11.3e\n",getla(2)));
@@ -1643,9 +1639,9 @@ REQUEST *request;
 
 
 static SERVICE *FindService(name)
-register char *name;
+char *name;
 {
-    register int i;
+    int i;
 
     for (i=0; i<maxservices; i++)
 	if (StrEql(name, services[i].name))
@@ -1654,10 +1650,10 @@ register char *name;
 }
 
 static SERVER *FindServerByName(service, u)
-register SERVICE *service;
+SERVICE *service;
 USERINFO_pt u;
 {
-    register int i;
+    int i;
     if(SNAP_istcp())
       return NIL;
 
@@ -1672,16 +1668,16 @@ USERINFO_pt u;
 }
 
 static bool AddrEql(a1, a2)
-register struct sockaddr_in *a1, *a2;
+struct sockaddr_in *a1, *a2;
 {
     return (a1->sin_port == a2->sin_port) &&
       (a1->sin_addr.s_addr == a2->sin_addr.s_addr);
 }
 
 static SERVER *FindServerByAddress(address)
-register ADDRESS *address;
+ADDRESS *address;
 {
-    register int i;
+    int i;
 
     for (i=0; i<NextServerSlot; i++)
 	if (AddrEql(&servers[i].address, address))
@@ -1800,7 +1796,7 @@ stat_stuff_pt st;
 static void ServerDied(st)
 stat_stuff_pt st;
 {
-    register int i;
+    int i;
 
     debug(256, ("[ServerDied: %d...",st->pid));
     /* Find this server */
@@ -1817,7 +1813,7 @@ stat_stuff_pt st;
 }
 
 static int BindtoPort(sin)
-register struct sockaddr_in *sin;
+struct sockaddr_in *sin;
 {
     int fd;
     int sock_len;
@@ -1922,11 +1918,11 @@ int *code;
 }
 
 static void NewClient(server, from)
-register SERVER *server;
+SERVER *server;
 ADDRESS *from;
 {
-    register int i, next;
-    register CLIENT *c;
+    int i, next;
+    CLIENT *c;
 
     /* See if this REALLY is a new client */
     c = &server -> client;
@@ -1944,12 +1940,12 @@ ADDRESS *from;
 }
 
 static SERVER *NewServer(service,u, code, key)
-register SERVICE *service;
+SERVICE *service;
 USERINFO *u;
 int *code;
 KEY key;
 {
-    register int i;
+    int i;
     /* Find vacant server entry */
     /* Initialize entry */
     if (strlen(u->name) >= MAX_CLIENT_NAME) {
@@ -2063,9 +2059,9 @@ int type;
     strcpy(cur->name,name);
     /* the name might be name/cell which getpwnam doesn't like*/
     {char pure_name[MAX_NAME];
-    register char *scn_in=cur->name;
-    register char *scn_out=pure_name;
-    register char ch;
+    char *scn_in=cur->name;
+    char *scn_out=pure_name;
+    char ch;
     while(((ch=(*scn_in++))!=0)&&
 	   (ch!='/'))
 	*scn_out++ = ch;
@@ -2388,8 +2384,8 @@ KEY key;
 USERINFO *u;
 {
     extern int rand();
-    register int i;
-    register unsigned char *k;
+    int i;
+    unsigned char *k;
 
     /* Fill with random #s */
     k = key;
@@ -2418,9 +2414,9 @@ USERINFO *u;
 }
 
 static void count(request)
-register REQUEST *request;
+REQUEST *request;
 {
-    register SERVER *server;
+    SERVER *server;
 
     debug(512, ("[Count\n"));
     /* Find out who is sending */
@@ -2497,7 +2493,7 @@ int fds[2], sfd;
 
 #ifdef DEBUG
     if ((DebugFlags & 128) != 0) {
-	register int i;
+	int i;
 	printf("[Serverhead, exec string: %s", service->exec);
 	for (i=0; argv[i]!=NIL; i++)
 	    printf(" %s", argv[i]);
@@ -2518,7 +2514,7 @@ port_name_pt portn;
 {
     struct servent *sv;
     struct sockaddr_in sin;
-    register int fd;	/* Socket fd */
+    int fd;	/* Socket fd */
 
     debug(2, ("[SetAddress: %s, %s, %d\n", portn->name, portn->sproto, portn->iproto));
     sv = getservbyname(portn->name, portn->sproto);
@@ -2691,7 +2687,7 @@ enum DebugAction { DEBUG_EOF, DEBUG_COMMAND, DEBUG_CONT };
 
 static enum DebugAction GetDebugRequest()
 {
-    register int len;
+    int len;
     char c;
 
     len = read(debugfd, &c, 1);
@@ -2773,7 +2769,7 @@ static void ProcessDebugRequest()
 		if (DebugRequest[0] != '\0') { /* Only if not null */
 		    CheckPassword(DebugRequest);
 		    if (!WaitingForPassword) {
-			static char wontecho[] =
+			static const char wontecho[] =
 			  { IAC, WONT, TELOPT_ECHO, '\0' };
 			  fputs(wontecho, dout);
 		    }
@@ -2793,14 +2789,14 @@ static void ProcessDebugRequest()
 \**********************/
 
 static char *SkipWord(line)
-register char *line;
+char *line;
 {
     for (; *line != ' ' && *line != '\0'; line++) ;
     return line;
 }
 
 static char *SkipBlanks(line)
-register char *line;
+char *line;
 {
     for (; *line == ' '; line++) ;
     return line;
@@ -2809,7 +2805,7 @@ register char *line;
 #define SkipCommand(line)	(SkipBlanks(SkipWord(line)))
 
 static void PrintServer(s)
-register SERVER *s;
+SERVER *s;
 {
     fputs(s->service->name, dout);
     if (strlen(s->service->name) < 8) fputc('\t', dout);
@@ -2823,11 +2819,11 @@ register SERVER *s;
 }
 
 static void ServerCommand(command)
-register char *command;
+char *command;
 {
-    register int i;
-    register char *name, *client;
-    register bool first, any;
+    int i;
+    char *name, *client;
+    bool first, any;
 
     /* Quick check */
     if (NextServerSlot == 0) {
@@ -2888,10 +2884,10 @@ static char execbuffer[1025];
   */
 
 static void ExecCommand(command)
-register char *command;
+char *command;
 {
-    register char *name, *exec;
-    register SERVICE *service;
+    char *name, *exec;
+    SERVICE *service;
 
     command = SkipCommand(command);
 
@@ -2936,10 +2932,10 @@ register char *command;
 }
 
 static void KillCommand(command)
-register char *command;
+char *command;
 {
-    register int pid, i;
-    register char *start;
+    int pid, i;
+    char *start;
     char answer;
 
     command = SkipCommand(command);
@@ -3083,7 +3079,7 @@ FILE *f;
 long value;
 {
     long now;
-    register struct tm *tm;
+    struct tm *tm;
 
     now = time(0);
     tm = localtime(&now);
@@ -3101,7 +3097,7 @@ static int assignreboot(loc, value)
 long *loc;
 char *value;
 {
-    register char *answer;
+    char *answer;
 
     answer = ParseReboot(value);
     if (answer != NIL) fprintf(dout, "%s\n", answer);
@@ -3118,7 +3114,7 @@ long value;
 	if (RebootTime == 0)
 	    fputs("OFF", f);
 	else {
-	    register struct tm *tm;
+	    struct tm *tm;
 	    tm = localtime(&RebootTime);
 	    fprintf(f, "%02d:%02d", tm->tm_hour, tm->tm_min);
 	}
@@ -3127,8 +3123,8 @@ long value;
 static void VarCommand(command)
 char *command;
 {
-    register int i;
-    register char *name;
+    int i;
+    char *name;
 
     command = SkipCommand(command);
     if (*command == '\0') {
@@ -3151,7 +3147,7 @@ char *command;
     if (*command != '\0') *command++ = '\0';
     for (i=0; i<NVARS; i++)
 	if (StrEql(variables[i].name, name)) {
-	    register char *value;
+	    char *value;
 
 	    command = SkipBlanks(command);
 	    if (*command == '\0') {
@@ -3179,11 +3175,11 @@ char *command;
 }
 
 static void ServiceCommand(command)
-register char *command;
+char *command;
 {
-    register char *name;
-    register bool first, any;
-    register int i;
+    char *name;
+    bool first, any;
+    int i;
 
     command = SkipCommand(command);
 
@@ -3200,7 +3196,7 @@ register char *command;
     for (i=0; i<maxservices; i++) {
 	if (name == NIL || StrEql(services[i].name, name)) {
 	    char *type;
-	    register SERVICE *s;
+	    SERVICE *s;
 
 	    any = TRUE;
 	    if (first) {
@@ -3260,7 +3256,7 @@ static struct {
 static void HelpCommand(request)
 char *request;
 {
-    register int i;
+    int i;
 
     for (i=0; i<NCOMMANDS; i++) {
 	fputs(commands[i].help, dout);
@@ -3276,8 +3272,8 @@ char *request;
 static void CheckPassword(password)
 char *password;
 {
-    static char wizard[] = "root";
-    register struct passwd *pw;
+    static const char wizard[] = "root";
+    struct passwd *pw;
 
     /* Find password entry */
 #if defined(M_UNIX) || defined(sys_telmat)
@@ -3301,9 +3297,9 @@ char *password;
 }
 
 static void ExecuteDebugRequest(request)
-register char *request;
+char *request;
 {
-    register int i;
+    int i;
 
     /* Ignore blank lines */
     if (request[0] == '\0') return;
@@ -3350,7 +3346,7 @@ bool want_more_users()
 }
 
 static build_stat_packet(packet)
-register stat_packet_t *packet;
+stat_packet_t *packet;
 {
     struct osi_Times Tm;
 
@@ -3381,9 +3377,9 @@ register stat_packet_t *packet;
 }
 
 static bool NewUser(name)
-register char *name;
+char *name;
 {
-    register int i;
+    int i;
 
     for (i=0; i<NextServerSlot; i++)
 	if (StrEql(name, servers[i].client.name))
@@ -3409,9 +3405,9 @@ static char *GetCellName()
 
 #if 0
 static bool homeCell(name)
-register char *name;
+char *name;
 {
-    register char *thiscell;
+    char *thiscell;
     thiscell = GetCellName();
     if (thiscell == NIL) return FALSE;	/* Looks just like there was no error */
     /* Now do string comparison */
@@ -3422,7 +3418,7 @@ static int InitializeRPC()
 {
     extern long r_nPackets;
     static bool virgin = TRUE;
-    register int rc;
+    int rc;
 
     if (virgin) {
 	r_nPackets = 5;

@@ -1,10 +1,6 @@
 /**********************************************************************
  * File Exchange fxcreate client
  *
- * $Author: sa3e $
- * $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/clients/RCS/fxcreate.c,v $
- * $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/clients/RCS/fxcreate.c,v 1.4 1994/01/31 22:36:06 sa3e Stab74 $
- *
  * Copyright 1989, 1990 by the Massachusetts Institute of Technology.
  *
  * For copying and distribution information, please see the file
@@ -32,11 +28,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/clients/RCS/fxcreate.c,v 1.4 1994/01/31 22:36:06 sa3e Stab74 $";
-#endif
 
 #include <mitcopyright.h>
 
@@ -76,7 +67,7 @@ main(argc, argv)
   long code, code2;
   int i, verbose = 1, specified = 0, created = 0;
   char *course = NULL;
-  static char USAGE[] = "Usage: %s [ options ] course [ grader ... ]\n";
+  static const char USAGE[] = "Usage: %s [ options ] course [ grader ... ]\n";
 
   if (argc < 2) {
     fprintf(stderr, USAGE, argv[0]);

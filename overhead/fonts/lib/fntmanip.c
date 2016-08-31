@@ -25,15 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/fonts/lib/RCS/fntmanip.c,v 2.9 1992/12/15 21:02:39 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 /* ***************************************************************** */
 
 /*	fntmanip.c	Pack and unpack font structures */
@@ -116,7 +107,7 @@ return (inv[c & 0x0f] << 4) | inv[c >> 4];
 
 
 WordReverse(i)
-register short i;
+short i;
        {
 	struct TwoChar{
 	    unsigned char c1;
@@ -142,11 +133,11 @@ register short i;
 
 
 ExplodeFont(f)
-register struct font *f;
+struct font *f;
 {
-   register short i;
+   short i;
    struct BitmapIconSpecificPart *maxspecific;
-   register char *commentp;
+   char *commentp;
 
    /* copy font header information */
    fonthead = *f;
@@ -155,10 +146,10 @@ register struct font *f;
    maxspecific = 0;
    for (i = 0; i <= 0177; i++)
       {
-	 register struct icon *p = &f->chars[i];
+	 struct icon *p = &f->chars[i];
 	 if (p->OffsetToSpecific != 0 && p->OffsetToGeneric != 0)
 	    {
-	       register struct BitmapIconSpecificPart *SPp = SpecificPart(p);
+	       struct BitmapIconSpecificPart *SPp = SpecificPart(p);
 	       generic[i] = *GenericPart(p);
 	       specific[i] = *SPp;
 	       bits[i] = (unsigned short *)(SPp->bits);
@@ -242,8 +233,8 @@ ComputeGenericFromSpecific()
 
    if (fonthead.fn.rotation == 0)
       {
-	 register struct IconGenericPart *p;
-	 register short c;
+	 struct IconGenericPart *p;
+	 short c;
 	 short    above = 0;
 	 short    below = 0;
 	 short    left = 0;
@@ -251,7 +242,7 @@ ComputeGenericFromSpecific()
 
 	 for (c = 0; c <= 0177; c++)
 	    {
-	       register short t;
+	       short t;
 
 	       /* minimal check of consistency of specific */
 	       if (specific[c].rows == 0 || specific[c].cols == 0)
@@ -305,8 +296,8 @@ int FontFileFormat;
 {
    char *FileName;
    static char OutputFileName[255];
-   register char *p;
-   register char *d;
+   char *p;
+   char *d;
 
    /* get the font file name */
    FileName = (char *) FormatFontname(&fonthead.fn);
@@ -357,8 +348,8 @@ FILE *outf;
     short matchs[128];
     int UniqueGenerics = 0;
     int UniqueSpecifics = 0;
-    register short c;
-    register short d;
+    short c;
+    short d;
 
     fonthead.magic = FONTMAGIC;
     fonthead.type = BitmapIcon;
@@ -384,9 +375,9 @@ FILE *outf;
 	matchs[c] = -1;
 	UniqueSpecifics += 1;
 	for (d = 0; d < c; d++) {
-	    register unsigned short *p1;
-	    register unsigned short *p2;
-	    register n;
+	    unsigned short *p1;
+	    unsigned short *p2;
+	    n;
 
 	    p1 = bits[c];
 	    p2 = bits[d];
@@ -429,7 +420,7 @@ FILE *outf;
 	}
 
 	for (c = 0; c <= 0177; c++) {
-	    register struct icon   *p = &fonthead.chars[c];
+	    struct icon   *p = &fonthead.chars[c];
 	    int     offset = ((int) p) - ((int) & fonthead);
 	    p->OffsetToSpecific -= offset;
 	    p->OffsetToGeneric -= offset;

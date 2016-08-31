@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>		/* sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/t2open.c,v 2.31 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
 #include <util.h>
 #include <stdio.h>
 #include <signal.h>
@@ -131,7 +122,7 @@ int t2close(FILE *ptr, int seconds, int *timedout)
 #else
 	int status;
 	SIGSET_TYPE omask, nmask;
-    register int f, r;
+    int f, r;
     struct itimerval val;
 
 #ifdef __STDC__

@@ -25,20 +25,11 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/framemessage.C,v 3.8 1996/03/13 16:57:17 robr Stab74 $";
-#endif
-
-
- 
-
 /* framemsg.c
  * Provides functions for frame's message line.
   */
 
+#include <andrewos.h>
 ATK_IMPL("framemessage.H")
 
 #include <im.H>
@@ -72,8 +63,6 @@ static char copyrightnotice[]=AUIS_SHORT_COPYRIGHT;
 
 
 ATKdefineRegistry(framemessage, msghandler, framemessage::InitializeClass);
-#ifndef NORCSID
-#endif
 static void EraseDisplayedMessage(class framemessage  *self);
 static void QueueErasure(class framemessage  *self, long  length /* Length of text to erase. */);
 static void BuildPrompt(class framemessage  *self, const char  *prompt, const char  *defaultString);

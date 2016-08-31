@@ -25,17 +25,12 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/gtvpwnam.c,v 2.9 1992/12/15 21:10:10 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	gtvpwnam.c
 	getvpwnam(vuid) is like getpwnam(nam), but for Vice IDs.
 \* ************************************************************ */
-#include <andyenv.h>
 #include <andrewos.h> /* syslog.h */
+#include <andyenv.h>
 #include <stdio.h>
 #include <errno.h>
 #include <util.h>

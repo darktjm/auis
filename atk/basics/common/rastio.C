@@ -25,17 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/rastio.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 /*  rastio.c
 
 	rastio package
@@ -46,6 +35,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 		We could fix ReadRow to not check length before each code byte.
 
  */
+#include <andrewos.h>
 ATK_IMPL("rastio.H")
 #include <stdio.h>
 
@@ -86,10 +76,6 @@ The data is encoded with 4 columns to a line and lines usually have about fiftee
 
 
 ATKdefineRegistry(rastio, ATK, NULL);
-#ifndef NORCSID
-#endif
-
-
 void
 rastio::WriteRow(FILE  *file, unsigned char *byteaddr, long  nbytes)
 				{
@@ -148,7 +134,7 @@ rastio::WriteRow(FILE  *file, unsigned char *byteaddr, long  nbytes)
 					curcnt -= 16;
 				if (curcnt > 1)
 					fputc(OTHERZERO+curcnt, file), outcnt++;
-				else ;  /* the byte written will represent a single instance */
+				else {}  /* the byte written will represent a single instance */
 				fputc(hex[curbyte / 16], file),
 				fputc(hex[curbyte & 15], file),
 				outcnt += 2;
@@ -185,7 +171,7 @@ If the terminator is '\' or '{', it is left at the front of the input.
 #define case8(v) case4(v): case4((v)+4)
 
 long
-rastio::ReadRow(register FILE  *file		/* where to get them from */, register unsigned char *row	/* where to put bytes */, register long  length	/* how many bytes in row must be filled */)
+rastio::ReadRow(FILE  *file		/* where to get them from */, unsigned char *row	/* where to put bytes */, long  length	/* how many bytes in row must be filled */)
 				{
 	/* Each input character is processed by the central loop.  There are 
 		some input codes which require two or three characters for completion; 
@@ -200,9 +186,9 @@ rastio::ReadRow(register FILE  *file		/* where to get them from */, register uns
 			RepeatAndDigit};	/* have seen repeat code and its first
 					following digit */
 	enum stateCode InputState;	/* current state */
-	register int c;		/* the current input character */
-	register long repeatcount = 0;	/* current repeat value */
-	register long hexval;	/* current hex value */
+	int c;		/* the current input character */
+	long repeatcount = 0;	/* current repeat value */
+	long hexval;	/* current hex value */
 	long pendinghex = 0;		/* the first of a pair of hex characters */
 	
 	/* We cannot exit when length becomes zero because we need to check 

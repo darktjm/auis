@@ -71,9 +71,9 @@ public:
   virtual class view * Object_Hit( zip_type_figure object, enum view_MouseAction action, long x, long y, long clicks ) ;
 
   virtual char Object_Icon();
-  virtual char * Object_Icon_Font_Name();
+  virtual const char * Object_Icon_Font_Name();
   virtual char Object_Icon_Cursor();
-  virtual char * Object_Icon_Cursor_Font_Name();
+  virtual const char * Object_Icon_Cursor_Font_Name();
   virtual char Object_Datastream_Code();
   virtual long Object_Modified( zip_type_figure object );
 

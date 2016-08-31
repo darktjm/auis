@@ -22,17 +22,11 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/headrtv.C,v 1.14 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /*         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
 
+#include <andrewos.h>
 ATK_IMPL("headrtv.H")
 #include <text.H>
 #include <textview.H>
@@ -66,12 +60,12 @@ static class keymap *newKeymap;
 static const char **hvars=NULL;
 static int hvarcount=0;
 
-typedef char *strings[3];
+typedef const char * const strings[3];
 static strings strs[]={
     {"LT","CT","RT"},
     {"LB","CB","RB"}
 };
-static char *keywords[]={
+static const char * const keywords[]={
     "24hourtime",
     "blank",
     "date",
@@ -85,7 +79,7 @@ static char *keywords[]={
     "year"
 };
 
-static char *months[]={
+static const char * const months[]={
     "January",
     "February",
     "March",
@@ -100,7 +94,7 @@ static char *months[]={
     "December"
 };
 
-static char *day[]={
+static const char * const day[]={
     "Sunday",
     "Monday",
     "Tuesday",
@@ -117,8 +111,6 @@ struct textbuf {
 };
 
 ATKdefineRegistry(headrtv, view, headrtv::InitializeClass);
-#ifndef NORCSID
-#endif
 struct tm *GetCurrentTime();
 void TwentyFourHourTime(struct textbuf *tbuf);
 void Blank(struct textbuf *tbuf);
@@ -402,7 +394,7 @@ static char *headrtv_GetInput(class text  *textobj)
     return string;
 }
 
-void headrtv::Print(FILE  *file,char  *processor,char  *finalFormat, boolean  topLevel)
+void headrtv::Print(FILE  *file,const char  *processor,const char  *finalFormat, boolean  topLevel)
 {
     char *string;
     int i;
@@ -429,7 +421,7 @@ void headrtv::Print(FILE  *file,char  *processor,char  *finalFormat, boolean  to
     free(tbuf.text);
 }
 
-void *headrtv::GetPSPrintInterface(char *printtype)
+void *headrtv::GetPSPrintInterface(const char *printtype)
 {
     static struct textview_insetdata dat;
 
@@ -489,15 +481,15 @@ void headrtv::GetOrigin(long width, long height, long *originX, long *originY)
     *originY = height; /* fit into surrounding text, don't drop down to baseline */
 }
 
-static char *hdrtv_where[]={"Header","Footer"};
-static char *hdrtv_close="Close";
-static char *hdrtv_open="Open";
+static const char * const hdrtv_where[]={"Header","Footer"};
+static const char * const hdrtv_close="Close";
+static const char * const hdrtv_open="Open";
 
 #define ALIGNMENT (graphic_ATLEFT|graphic_ATBASELINE)
 static void DrawBorder(class headrtv  *self,struct rectangle  *vb)
 {
     long width,junk,left;
-    char *type;
+    const char *type;
    
     type=hdrtv_where[Data(self)->where];
     (self)->SetTransferMode(graphic_COPY);

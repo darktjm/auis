@@ -25,16 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/bpair.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* bpair.c	
 
 	An lpair without the line between the parts
@@ -42,8 +32,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 */
 
-
-
+#include <andrewos.h>
 ATK_IMPL("bpair.H")
 #include <graphic.H>
 #include <view.H>
@@ -69,13 +58,11 @@ ATK_IMPL("bpair.H")
 
 
 ATKdefineRegistry(bpair, lpair, NULL);
-#ifndef NORCSID
-#endif
-static void lpair_ComputeSizes (register class lpair  *l);
-static void lpair_ResetDimensions(register class lpair  *self);
+static void lpair_ComputeSizes (class lpair  *l);
+static void lpair_ResetDimensions(class lpair  *self);
 
 
-static void lpair_ComputeSizes (register class lpair  *l)
+static void lpair_ComputeSizes (class lpair  *l)
 {
 
     int totalsize, i = 0;
@@ -113,11 +100,11 @@ static void lpair_ComputeSizes (register class lpair  *l)
     l->objcvt[1-i] = totalsize - l->objcvt[i];
 }
 
-static void lpair_ResetDimensions(register class lpair  *self)
+static void lpair_ResetDimensions(class lpair  *self)
 {
 
-    register int i, x, y;
-    register class  view *child;
+    int i, x, y;
+    class  view *child;
     struct rectangle enclosingRect;
 
     x = 0; y = 0;
@@ -151,13 +138,13 @@ static void lpair_ResetDimensions(register class lpair  *self)
 
 
 void 
-bpair::FullUpdate(register enum view_UpdateType   type, register long   left , register long   top , register long   width , register long   height)
+bpair::FullUpdate(enum view_UpdateType   type, long   left , long   top , long   width , long   height)
 			{
 /* ( the following, including derogatory comment, is copied from lpair.c) */
 
 			/*  All this code needs changed */
-    register class view * leftTopObject = this->obj[0];
-    register class view * rightBottomObject = this->obj[1];
+    class view * leftTopObject = this->obj[0];
+    class view * rightBottomObject = this->obj[1];
     struct rectangle r;
 
     this->movable = FALSE;

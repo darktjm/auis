@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/time/RCS/timeodayview.C,v 1.5 1994/08/11 03:03:24 rr2b Stab74 $";
-#endif
-
-
 #include <andrewos.h>
 #include <timeodayview.H>
 #include <timeoday.H>
@@ -52,7 +46,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/time/R
 /* Global Variables */
 static class menulist *timeodayview_menulist = NULL;
 
-static char *formats[] = {
+static const char * const formats[] = {
   "Default~1", NULL,
   "H:MM AM/PM~10", "%u:%M %P",
   "Month DD YYYY~11", "%o %A, %Y",
@@ -61,8 +55,6 @@ static char *formats[] = {
 
 
 ATKdefineRegistry(timeodayview, view, timeodayview::InitializeClass);
-#ifndef NORCSID
-#endif
 static void MenuSetFormat(class timeodayview  *self, char  *format);
 static void Redraw(class timeodayview  *self);
 
@@ -202,7 +194,7 @@ timeodayview::Hit(enum view_MouseAction  action, long  x , long  y, long  numcli
 
 
 void
-timeodayview::Print(FILE  *file, char  *processor , char  *finalFormat, boolean  topLevel)
+timeodayview::Print(FILE  *file, const char  *processor , const char  *finalFormat, boolean  topLevel)
                     {
     char *time_str;
     class timeoday *time_do =  (class timeoday *) (this)->GetDataObject();

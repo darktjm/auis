@@ -25,21 +25,12 @@
 //  $
 */
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/spell.C,v 3.7 1994/12/13 20:35:03 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* xspell.c
  * Mega hack to get ispell capabilities in bx.
  * Perhaps will clean up later...
  */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("spell.H")
 
 #include <signal.h>
@@ -78,15 +69,13 @@ struct process {
 
 
 ATKdefineRegistry(spell, ATK, spell::InitializeClass);
-#ifndef NORCSID
-#endif
-static struct process *StartProcess(char  *command, FILE  **inputFile , FILE  **outputFile);
+static struct process *StartProcess(const char  *command, FILE  **inputFile , FILE  **outputFile);
 static int KillSpeller();
 static int BuildQuestionLine(char  *buffer , char  *choices);
 static void spell_CheckSpellingCmd(class textview  *self, long  rock);
 
 
-static struct process *StartProcess(char  *command, FILE  **inputFile , FILE  **outputFile)
+static struct process *StartProcess(const char  *command, FILE  **inputFile , FILE  **outputFile)
         {
 
     int inpipe[2], outpipe[2], pid;

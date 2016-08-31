@@ -9,7 +9,7 @@ void rasterview_UpdateZoomedSelection(class rasterview  *self, long  x , long  y
 void rasterview_ToggleCoordProc(class rasterview  *self, char  *rock);
 void rasterview_MakeToolsetProc(class rasterview  *self, char  *rock);
 void rasterview_KillToolsetProc(class rasterview  *self, char  *rock);
-void rasterview_OverlayInsetProc(class rasterview  *self, char  *rock);
+void rasterview_OverlayInsetProc(class rasterview  *self, const char  *rock);
 void rasterview_RemoveInsetProc(class rasterview  *self, char  *rock);
 void rasterview_ResizeInsetProc(class rasterview  *self, char  *rock);
 void rasterview_ImprintInsetProc(class rasterview  *self, long  rock);

@@ -25,16 +25,6 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/types.h sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/input.C,v 1.10 1996/02/09 19:37:26 susan Stab74 $";
-#endif
-
-
- 
-
 /* 
  ***************************************************************
  * Routines for handling kb & mouse input in Instrument Console
@@ -48,7 +38,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * "self"
  */
 
-
+#include <andrewos.h> /* sys/types.h sys/time.h */
 #define AUXMODULE 1
 #include <consoleClass.H>
 
@@ -121,16 +111,6 @@ static char *PriorityTexts[] = {
 
 
 
-#ifndef NORCSID
-#endif
-#if POSIX_ENV
-#else
-#ifdef M_UNIX
-#else
-#endif
-#endif /* POSIX */
-#ifdef NOTUSED
-#endif /* NOTUSED */
 void DebugMenu(class ATK *self, char  *rock);
 void DoQuit(class ATK *self, char  *rock);
 char *TitleFromFile(char  *fname, boolean  IncludeVersion);
@@ -147,10 +127,8 @@ void ShrinkMenu(class ATK *self);
 void GetStdItems(class menulist  *tempMenulist);
 void GetStdConsoles(class menulist  *tempMenulist);
 char *GetUserPaths();
-void GetExtraConsoles(class menulist  *tempMenulist, char  *conpath, char  *cardTitle);
+void GetExtraConsoles(class menulist  *tempMenulist, const char  *conpath, const char  *cardTitle);
 void SetStartUpConsole(char  *path, char  *ConFile);
-#ifndef getwd
-#endif /* getwd */
 void FindStartUpConsole(char  *ConFile, boolean  IsStartUp);
 void PrepareStdMenus(boolean  IsStartup, class menulist  **stdMenulist, struct ATKregistryEntry   *ClassInfo);
 class menulist *PrepareUserMenus(class consoleClass  *self, struct ATKregistryEntry   *ClassInfo);
@@ -290,7 +268,7 @@ void SetAlarm(class ATK *atkarg_self, char  *rock)
     int     hr, min, day, mday, wday, mon, year;
     static int TFHC = -1;
     char    buf2[80], *s, eventbuf[120];
-    static char *DayOfWeek[] = {
+    static const char * const DayOfWeek[] = {
 	"Sunday", "Monday", "Tuesday", "Wednesday", 
 	"Thursday", "Friday", "Saturday", 0};
     time_t    now;
@@ -852,7 +830,7 @@ char *GetUserPaths()
 }
 
 
-void GetExtraConsoles(class menulist  *tempMenulist, char  *conpath, char  *cardTitle)
+void GetExtraConsoles(class menulist  *tempMenulist, const char  *conpath, const char  *cardTitle)
 {
     char TmpBuf[MAXPATHLEN];
     int len, len2, i, j;

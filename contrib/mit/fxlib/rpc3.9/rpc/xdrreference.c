@@ -1,5 +1,3 @@
-/* @(#)xdr_reference.c	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,12 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/xdrreference.c,v 1.3 1992/12/15 21:55:04 rr2b Stab74 $";
-#endif
-
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
  * unrestricted use provided that this legend is included on all tape
@@ -55,10 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-#if !defined(lint) && defined(SCCSIDS)
-static char sccsid[] = "@(#)xdr_reference.c 1.11 87/08/11 SMI";
-#endif
-
 /*
  * xdr_reference.c, Generic XDR routines impelmentation.
  *
@@ -85,13 +73,13 @@ static char sccsid[] = "@(#)xdr_reference.c 1.11 87/08/11 SMI";
  */
 bool_t
 xdr_reference(xdrs, pp, size, proc)
-	register XDR *xdrs;
+	XDR *xdrs;
 	caddr_t *pp;		/* the pointer to work on */
 	u_int size;		/* size of the object pointed to */
 	xdrproc_t proc;		/* xdr routine to handle the object */
 {
-	register caddr_t loc = *pp;
-	register bool_t stat;
+	caddr_t loc = *pp;
+	bool_t stat;
 
 	if (loc == NULL)
 		switch (xdrs->x_op) {
@@ -140,7 +128,7 @@ xdr_reference(xdrs, pp, size, proc)
  */
 bool_t
 xdr_pointer(xdrs,objpp,obj_size,xdr_obj)
-	register XDR *xdrs;
+	XDR *xdrs;
 	char **objpp;
 	u_int obj_size;
 	xdrproc_t xdr_obj;

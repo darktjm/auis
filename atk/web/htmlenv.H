@@ -12,7 +12,7 @@ class htmlenv : public environment {
 
     virtual void ClearAttribs();
     virtual void SetAttribs(class attlist *atts);
-    virtual char *GetAttribValue(char *name);
+    virtual const char *GetAttribValue(const char *name);
     class nestedmark *NewButSimilar();
     class environment *Wrap(long pos, long length, 
 		enum environmenttype type, 

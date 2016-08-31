@@ -122,7 +122,7 @@ PRIVATE void allow_break ARGS3(HTStructured *, me, int, new_cleanness,
 **	   This should make the source files easier to read and modify
 **	by hand, too, though this is not a primary design consideration. TBL
 */
-PRIVATE char delims[] = ",;:.";		/* @@ english bias */
+PRIVATE const char delims[] = ",;:.";		/* @@ english bias */
 PRIVATE void HTMLGen_output_character ARGS2(HTStructured *, me, char, c)
 {
 

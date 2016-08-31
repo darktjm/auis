@@ -6,12 +6,6 @@ ATK_INTER
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
  
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/bp.H,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $ */
-
-#if !defined(lint) && !defined(LOCORE) && defined(RCS_HDRS)
-static char *rcsid_bp_ch = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/bp.H,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $ ";
-#endif
-
 #include <dataobject.H>
 
 #define bp_DATACHANGED 1
@@ -21,7 +15,7 @@ class bp : public  dataobject  {
       virtual ATKregistryEntry *ATKregistry();
       bp();
 
-      char * ViewName()  ;
+      const char * ViewName()  ;
       long Read (FILE *file, long id)  ;
       long Write (FILE *file, long writeid, int level)  ;
 

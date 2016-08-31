@@ -1,5 +1,3 @@
-/* @(#)rpc_clntout.c	1.2 87/11/24 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,12 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpcgen/RCS/rpc_clntout.c,v 1.3 1992/12/15 21:55:04 rr2b Stab74 $";
-#endif
-
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
  * unrestricted use provided that this legend is included on all tape
@@ -55,10 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-#ifndef lint
-static char sccsid[] = "@(#)rpc_clntout.c 1.2 87/06/24 (C) 1987 SMI";
-#endif
-
 /*
  * rpc_clntout.c, Client-stub outputter for the RPC protocol compiler
  * Copyright (C) 1987, Sun Microsytsems, Inc.

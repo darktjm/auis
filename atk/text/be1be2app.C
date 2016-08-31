@@ -25,18 +25,12 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/be1be2app.C,v 3.5 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /*
  * BE1 to BE2 conversion utility
  */
 
 
+#include <andrewos.h>
 ATK_IMPL("be1be2app.H")
 #include <be1be2.H>
 #include <text.H>
@@ -47,14 +41,12 @@ ATK_IMPL("be1be2app.H")
  * Obtain list of input files
  */
 
-char *progName = "be1be2";
+const char progName[] = "be1be2";
 char *fileList[1000];
 int fileCount;
 
 
 ATKdefineRegistry(be1be2app, application, NULL);
-#ifndef NORCSID
-#endif
 char *OutputName(char  *inputName);
 static void Convert(char  *fileName);
 

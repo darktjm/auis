@@ -80,7 +80,7 @@ ATKdefineRegistry(pbm, image, NULL);
 static void initializeTable();
 static int pbmReadChar(FILE  *f);
 static int pbmReadInt(FILE  *f);
-static int isPBM(FILE          *f, char          *name, unsigned int *width , unsigned int *height , unsigned int *maxval);
+static int isPBM(FILE          *f, const char          *name, unsigned int *width , unsigned int *height , unsigned int *maxval);
 
 
 static void initializeTable()
@@ -140,7 +140,7 @@ static int pbmReadInt(FILE  *f)
   }
 }
 
-static int isPBM(FILE          *f, char          *name, unsigned int *width , unsigned int *height , unsigned int *maxval)
+static int isPBM(FILE          *f, const char          *name, unsigned int *width , unsigned int *height , unsigned int *maxval)
                { byte buf[4];
 
   if(!Initialized)
@@ -196,7 +196,7 @@ static int isPBM(FILE          *f, char          *name, unsigned int *width , un
 }
 
 int 
-pbm::Ident( char  *fullname )
+pbm::Ident( const char  *fullname )
         { FILE *f;
   unsigned int  width, height, maxval, ret;
 
@@ -209,7 +209,7 @@ pbm::Ident( char  *fullname )
 }
 
 int
-pbm::Load( char  *fullname, FILE  *fp )
+pbm::Load( const char  *fullname, FILE  *fp )
             { FILE         *f;
   int           pbm_type;
   unsigned int  x, y;
@@ -483,7 +483,7 @@ pbm::Write( FILE  *file, long  writeID, int  level )
 }
 
 long
-pbm::WriteNative( FILE  *file, char  *filename )
+pbm::WriteNative( FILE  *file, const char  *filename )
             {
 
     return(-1);

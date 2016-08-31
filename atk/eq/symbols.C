@@ -25,22 +25,13 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/eq/RCS/symbols.C,v 1.6 1996/10/14 17:48:21 robr Exp $";
-#endif
-
-
- 
-
 /*
  * symbols.c
  * This module handles the symbols for eq.
  */
 
 
+#include <andrewos.h>
 #define AUXMODULE 1
 #include <eq.H>
 
@@ -51,7 +42,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #define NONE -1
 #define what (int)
 
-struct symbol symbols[] = {
+const struct symbol symbols[] = {
 
 /*
     eq		fmt	what		space	font	yacc
@@ -330,10 +321,10 @@ struct symbol symbols[] = {
 
 
 
-struct symbol *eq::Lookup(char  *name)
+const struct symbol *eq::Lookup(const char  *name)
 {
 
-    register struct symbol *s;
+    const struct symbol *s;
     for (s=symbols;  s->name;  s++)
 	if (*name == *(s->name) && strcmp(name, s->name)==0)
 	    break;
@@ -345,7 +336,7 @@ struct symbol *eq::Lookup(char  *name)
 
 void eq::EnumerateSymbols(eq_enumfptr proc, void *rock)
 {
-    register struct symbol *s;
+    const struct symbol *s;
     for (s=symbols;  s->name;  s++) {
 	(*proc)(s->name, s->doc, rock);
     }

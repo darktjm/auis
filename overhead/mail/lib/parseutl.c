@@ -25,18 +25,12 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/parseutl.c,v 2.8 1992/12/15 21:04:17 rr2b Stab74 $";
-#endif
-
 /*
 		Utility subroutines for mail address parsing.
 */
 
 
+#include <andrewos.h>
 #include <stdio.h>
 #include "parseadd.h"
 
@@ -68,7 +62,7 @@ char *StrCopy(old)
 char *StrCat3(s1, s2, s3)
     char *s1, *s2, *s3;
 {
-    register char *new;
+    char *new;
 
     new = (char *) malloc(strlen(s1)+strlen(s2)+strlen(s3)+1);
     if (new == NIL) {
@@ -91,7 +85,7 @@ PARSED_ADDRESS *MakeAddress(kind, local)
     ADDRESS_KIND kind;
     char *local;
 {
-    register PARSED_ADDRESS *addr;
+    PARSED_ADDRESS *addr;
 
     addr = (PARSED_ADDRESS *) malloc(sizeof(PARSED_ADDRESS));
     if (addr == NIL) {
@@ -113,7 +107,7 @@ PARSED_ADDRESS *MakeAddress(kind, local)
 ADDRESS_COMMENT *MakeComment(text)
     char *text;
 {
-    register ADDRESS_COMMENT *comment;
+    ADDRESS_COMMENT *comment;
 
     comment = (ADDRESS_COMMENT *) malloc(sizeof(ADDRESS_COMMENT));
     if (comment == NIL) {
@@ -131,7 +125,7 @@ ADDRESS_COMMENT *MakeComment(text)
  */
 
 ADDRESS_HOST *AppendHosts(h1, h2)
-    register ADDRESS_HOST *h1, *h2;
+    ADDRESS_HOST *h1, *h2;
 {
     ADDRESS_HOST *temp;
 
@@ -160,7 +154,7 @@ ADDRESS_HOST *MakeHostList(h)
 }
 
 PARSED_ADDRESS *AppendAddresses(a1, a2)
-    register PARSED_ADDRESS *a1, *a2;
+    PARSED_ADDRESS *a1, *a2;
 {
     PARSED_ADDRESS *temp;
 

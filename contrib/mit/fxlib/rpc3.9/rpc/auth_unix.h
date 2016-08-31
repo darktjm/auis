@@ -1,5 +1,3 @@
-/* @(#)auth_unix.h	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -50,8 +48,6 @@
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-/*      @(#)auth_unix.h 1.5 86/07/16 SMI      */
-
 /*
  * auth_unix.h, Protocol for UNIX style authentication parameters for RPC
  *

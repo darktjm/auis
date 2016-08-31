@@ -1,5 +1,3 @@
-static char *switcher_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/atkbook/switcher/RCS/switcher.C,v 1.2 1994/06/09 21:18:04 rr2b Stab74 $";
-
 /* **************************************************** *\
 Copyright 1989 Nathaniel S. Borenstein
 Permission to use, copy, modify, and distribute this software and its

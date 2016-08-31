@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <util.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fwrtallc.c,v 2.7 1992/12/15 21:09:01 rr2b Stab74 $";
-#endif
-
 /*
 	fwrtallc.c
 	fwriteallchars() -- Do fwrite, resuming if interrupted
@@ -40,6 +33,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 
  
 
+#include <util.h>
 #include <stdio.h>
 #include <errno.h>
 

@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/update.C,v 1.14 1996/10/26 16:48:13 robr Exp $";
-#endif
-
-
-
-
-
 #include <graphic.H>
 #include <fontdesc.H>
 #include <im.H>
@@ -66,7 +56,7 @@ static void SmashSelection (class spread  * V);
 void spread_ClearSelectionBox (class spread  * V );
 static void Flush(class spread  * V);
 static void updateCells(class spread  * V, int  zapped, enum view_UpdateType  how, struct rectangle  *updateClipRect);
-static void updateString (class spread  * V, char  justification, char  *string, struct rectangle  *cellBounds);
+static void updateString (class spread  * V, char  justification, const char  *string, struct rectangle  *cellBounds);
 static void  updateValue (class spread  * V, extended_double  *value, char  format, int  precision, struct rectangle  *cellBounds);
 static void updateCell(class spread  * V, struct cell  * cell, int      zapped, enum view_UpdateType  how, struct rectangle  *bodyClipRect, struct rectangle  *cellBounds);
 static void updateEdges(class spread  * V, struct rectangle  *updateClipRect);
@@ -400,7 +390,7 @@ static void updateCells(class spread  * V, int  zapped, enum view_UpdateType  ho
     (V)->SetClippingRect( updateClipRect);
 }
 
-static void updateString (class spread  * V, char  justification, char  *string, struct rectangle  *cellBounds)
+static void updateString (class spread  * V, char  justification, const char  *string, struct rectangle  *cellBounds)
 {
     if (justification == '\"') { 		/* right */
 	(V)->MoveTo( rectangle_Left(cellBounds) + rectangle_Width(cellBounds) - 1, rectangle_Top(cellBounds));

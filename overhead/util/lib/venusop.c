@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/venusop.c,v 2.10 1992/12/15 21:11:36 rr2b Stab74 $";
-#endif
-
 /*
 
 	venusop.c -- routines that are specific to Vice file system, doing Venus operations
@@ -47,6 +40,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 	All routines return the result of the pioctl/ioctl and leave error codes in errno.
 */
 
+#include <andrewos.h>
 #include <errno.h>
 #include <stdio.h>
 #include <sys/ioctl.h>

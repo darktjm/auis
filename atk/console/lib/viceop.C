@@ -25,15 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/viceop.C,v 1.2 1994/03/21 16:57:35 rr2b Stab74 $";
-#endif
-
-
-
- 
-
 /* **********************************************************************
 viceop.c  - Causes console to plot server activity			 
 
@@ -74,9 +65,9 @@ extern char *Nullity;
   2.) ../lib/setup.c
 */
 char *RealProgramName = "Vopcon";
-char EXTENSION[] = "vop";
-char EXTENSION1[] = "vopcon";
-char EXTENSION2[] = "Vopcon";
+const char EXTENSION[] = "vop";
+const char EXTENSION1[] = "vopcon";
+const char EXTENSION2[] = "Vopcon";
 
 int         activeClusters = 0;
 
@@ -164,12 +155,8 @@ int	bindrc;
 struct r_connection * con;
 int	NumberOfColumns = 1;
 
-#ifndef NORCSID
-#endif
-#ifdef AFS_ENV
-#endif /* AFS_ENV  */
 void ConfigureMachines(class consoleClass  *self, int  *Rows , int  *Columns , int  *Machines, boolean  Initialize);
-struct datum *BuildDatum(char  *keyword, int  machine);
+struct datum *BuildDatum(const char  *keyword, int  machine);
 void OneTimeRemoteInit(class consoleClass  *self);
 void InitializeInstruments(class consoleClass  *self);
 void WakeUp(class consoleClass  *self );
@@ -208,7 +195,7 @@ void ConfigureMachines(class consoleClass  *self, int  *Rows , int  *Columns , i
 
 #define MarkAndReturn(x)  { (x).IsDisplaying = TRUE; return (&(x));}
 
-struct datum *BuildDatum(char  *keyword, int  machine)
+struct datum *BuildDatum(const char  *keyword, int  machine)
 {
     mydbg(("entering: BuildDatum\n"));
     if(machine >= activeClusters)
@@ -650,7 +637,7 @@ void	ReConnect(class consoleClass  *self)
 void InitHosts(class consoleClass  *self)
     {
     long    count;
-    register int    i;
+    int    i;
     char   *ptr;
     BBS list;
     char    data[512];

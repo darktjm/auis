@@ -25,13 +25,7 @@
 //  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/preview/RCS/preview.C,v 1.9 1996/09/03 19:30:37 robr Exp $";
-#endif
-
-
- 
+#include <andrewos.h> /* sys/file.h */
 
 /* 
 *
@@ -39,7 +33,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/previe
 *		A program for previewing dvitroff input
 *
  */
-#include <andrewos.h> /* sys/file.h */
 ATK_IMPL("preview.H")
 #include <ctype.h>
 #ifdef hpux
@@ -65,12 +58,6 @@ ATK_IMPL("preview.H")
 #define ResetOffsets(self) if(! self->DoScaling ) self->yoff = self->xoff = 0;
 
 ATKdefineRegistry(preview, view, NULL);
-#ifndef NORCSID
-#endif
-#ifdef hpux
-#endif /* hpux */
-#ifdef USEFRAME
-#endif /* USEFRAME */
 static void SetTitle(class preview  *self);
 static void DisplayPage(class preview  *self,preview_pagetableindex  n);
 static void SetScale(class preview  *self);
@@ -93,7 +80,7 @@ static void DoFindFirstPage(class preview  *self);
 #ifdef hp9000s300
 void preview_sigAlrm();
 #endif /* hp9000s300 */
-static void insert(char  *src,char  *c);
+static void insert(const char  *src,char  *c);
 static void normalize(char  *s);
 static void DoPrintCmd(class preview  *self ,int  page);
 static void vgetinfo(class preview  *self, struct range  *total , struct range  *seen , struct range  *dot);
@@ -438,7 +425,7 @@ static void InitPageMap(class preview  *self)
    self->PageTable[0].FileOffset = 0;
    self->NumberofPageTableEntries = 0;
 }
-static char testdvi[] = "x T ";
+static const char testdvi[] = "x T ";
 #define TESTDVILEN 4
 
 void notdvifile(class preview  *self)
@@ -450,10 +437,10 @@ void notdvifile(class preview  *self)
 }
 static void MakePageMap(FILE  *filein,class preview  *self)
 {
-   register int   c;
-   register long  FilePosition;
-   register    FILE * f = self->DviFileOut;
-   register int lastc = self->lastc;
+   int   c;
+   long  FilePosition;
+      FILE * f = self->DviFileOut;
+   int lastc = self->lastc;
     int lastread;
    FilePosition = self->DviFileLength;
    while ((c = getc(filein)) != EOF)
@@ -520,9 +507,9 @@ static void MakePageMap(FILE  *filein,class preview  *self)
 
 static void MakePageMapWithoutCopying(FILE  *filein,class preview  *self)
 {
-   register int   c;
-   register int   lastc;
-   register long  FilePosition;
+   int   c;
+   int   lastc;
+   long  FilePosition;
 
    self->DviFileComplete = FALSE;
 
@@ -656,18 +643,19 @@ void preview_sigAlrm()
 { }
 #endif /* hp9000s300 */
   
-static void insert(char  *src,char  *c)
+static void insert(const char  *src,char  *c)
 {   /* inserts string src into the begining of string c , assumes enough space */
-    char *p,*enddest;
+    char *p, *enddest;
+    const char *q;
     enddest = c + strlen(c);
     p = enddest + strlen(src);
     while(enddest >= c) *p-- = *enddest-- ;
-    for(p = src; *p != '\0';p++)
+    for(q = src; *q != '\0';q++)
 	*c++ = *p;
 }
 static void normalize(char  *s)
 {
-    register char *c;
+    char *c;
     for(c = s + strlen(s) - 1; c >= s; c--){
 	if(!isalnum(*c)){
 	    insert("\\",c);
@@ -680,7 +668,7 @@ static void DoPrintCmd(class preview  *self ,int  page)
    int processid;
    Preview_Line PrintCommandFormat;
    Preview_Line PrintCommand;
-   char *p;
+   const char *p;
    char BaseName[2048];
    strcpy(BaseName,self->DviBaseName);
    normalize(BaseName);
@@ -688,9 +676,9 @@ static void DoPrintCmd(class preview  *self ,int  page)
    strcpy(PrintCommandFormat,p);
    sprintf(PrintCommand,PrintCommandFormat,BaseName,BaseName,BaseName);
    if(page != -1){
-       register FILE *fi,*fo;
+       FILE *fi,*fo;
        long n;
-       register long c,diff,lastc;
+       long c,diff,lastc;
        char buf[512];
        n = self->PageTable[page].FileOffset;
        if((fo = popen(PrintCommand,"w")) == NULL){
@@ -849,16 +837,16 @@ static void hsetframe(class preview  *self, long  position  , long  numerator , 
     self->xoff =  numerator -position;
     (self)->WantUpdate(self);
 }
-static struct scrollfns vscrollInterface = {(scroll_getinfofptr)vgetinfo, (scroll_setframefptr)vsetframe, NULL, (scroll_whatfptr)vwhatisat};
-static struct scrollfns hscrollInterface = {(scroll_getinfofptr)hgetinfo, (scroll_setframefptr)hsetframe, NULL, (scroll_whatfptr)hwhatisat};
+static const struct scrollfns vscrollInterface = {(scroll_getinfofptr)vgetinfo, (scroll_setframefptr)vsetframe, NULL, (scroll_whatfptr)vwhatisat};
+static const struct scrollfns hscrollInterface = {(scroll_getinfofptr)hgetinfo, (scroll_setframefptr)hsetframe, NULL, (scroll_whatfptr)hwhatisat};
 
-char *preview::GetInterface(char  *interfaceName)
+const void *preview::GetInterface(const char  *interfaceName)
         {
 
     if (strcmp(interfaceName, "scroll,vertical") == 0)
-        return (char *) &vscrollInterface;
+        return &vscrollInterface;
     if (strcmp(interfaceName, "scroll,horizontal") == 0)
-        return (char *) &hscrollInterface;
+        return &hscrollInterface;
     return NULL;
 }
 

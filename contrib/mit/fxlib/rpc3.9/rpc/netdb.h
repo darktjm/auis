@@ -1,5 +1,3 @@
-/* @(#)netdb.h	1.1 87/11/13 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -50,8 +48,6 @@
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-/*	@(#)rpc.h 1.8 87/07/24 SMI	*/
-
 /* Really belongs in <netdb.h> */
 
 struct rpcent {

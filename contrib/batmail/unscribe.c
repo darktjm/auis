@@ -23,11 +23,6 @@
  * 
  *  $
 */
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/batmail/RCS/unscribe.c,v 1.3 1995/06/12 21:28:59 wjh Stab74 $";
-#endif
-
 #include <stdio.h>
 #include <ctype.h>
 #include "com.h"
@@ -175,11 +170,11 @@ unscribe_end()
 }
 
 unscribe_filter(frombuf,fromSize)
-register char	*frombuf;
+char	*frombuf;
 long	fromSize;
 {
     int	    i;
-    register int   c=BOGUS;
+    int   c=BOGUS;
 
     while(fromSize-->0){
 	static char prevc=BOGUS;

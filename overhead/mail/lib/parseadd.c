@@ -25,18 +25,12 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/parseadd.c,v 2.20 1994/10/03 19:42:43 rr2b Stab74 $";
-#endif
-
 /*
 		Subroutines for parsing mail addresses.
 */
 
 
+#include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <parseadd.h>
@@ -112,7 +106,7 @@ int UnparseOneAddress(Addr, Mode, Buffer, Length, Prefix, LineLength)
     int LineLength;
 {
     extern PARSED_ADDRESS *MakeAddress(), *MakeAddrList();
-    register PARSED_ADDRESS *Copy, *List;
+    PARSED_ADDRESS *Copy, *List;
     int code, dummy;
 
     /* Make a copy of the address & place it in a list by itself */
@@ -136,7 +130,7 @@ int UnparseOneAddress(Addr, Mode, Buffer, Length, Prefix, LineLength)
     return code;
 }
 
-static char DefaultPrefix[] = " ";
+static const char DefaultPrefix[] = " ";
 #define DefaultLineLength	80
 
 /* Globals for unparsing */
@@ -184,7 +178,7 @@ int UnparseAddressList(AddrList,	/* The address list to unparse */
 	if (UP_HeaderLength == 0)
 	    UP_Prefix = DefaultPrefix;
 	else {
-	    register char *c;
+	    char *c;
 	    UP_Prefix = StrCopy(Header);	/* Bad hack to get storage */
 	    if (UP_Prefix == NIL) return PA_NO_MEM;
 	    for (c=UP_Prefix; *c!='\0'; c++) *c = ' ';
@@ -360,7 +354,7 @@ static int UnparseGroupAddress(Addr, Mode, Last)
 static bool SafeCopy(s)
     char *s;
 {
-    register int len;
+    int len;
 
     len = strlen(s);
     if (UP_BytesLeft < len) return FALSE;
@@ -389,11 +383,11 @@ static int PrintWith0Hosts(PARSED_ADDRESS *Addr, int Mode);
 static int PrintWith1Host(PARSED_ADDRESS *Addr, int Mode);
 static int PrintWithManyHosts(PARSED_ADDRESS *Addr, int Mode, int Nhosts);
 PrintSimpleAddress(Addr, Mode)
-    register PARSED_ADDRESS *Addr;
+    PARSED_ADDRESS *Addr;
     int Mode;
 {
     bool Comments;
-    register int nhosts;
+    int nhosts;
     int result;
 
     /* Dump route phrase if there is one */
@@ -418,7 +412,7 @@ PrintSimpleAddress(Addr, Mode)
 
     /* Now dump comments if desired */
     if (Comments) {
-	register ADDRESS_COMMENT *c;
+	ADDRESS_COMMENT *c;
 	for (c=Addr->Comments; c!=NIL; c=c->Next) {
 	    IFPUTC(' ');
 	    IFPUTS(c->Text);
@@ -430,7 +424,7 @@ PrintSimpleAddress(Addr, Mode)
 static int PrintLocalPart(char *Part, int Mode);
 
 static PrintWith0Hosts(Addr, Mode)
-    register PARSED_ADDRESS *Addr;
+    PARSED_ADDRESS *Addr;
     int Mode;
 {
     bool RoutePhrase;
@@ -446,7 +440,7 @@ static PrintWith0Hosts(Addr, Mode)
 }
 
 static PrintWith1Host(Addr, Mode)
-    register PARSED_ADDRESS *Addr;
+    PARSED_ADDRESS *Addr;
     int Mode;
 {
     bool RoutePhrase;
@@ -463,7 +457,7 @@ static PrintWith1Host(Addr, Mode)
 }
 
 static PrintWithManyHosts(Addr, Mode, Nhosts)
-    register PARSED_ADDRESS *Addr;
+    PARSED_ADDRESS *Addr;
     int Mode, Nhosts;
 {
     IFPUTC('<');
@@ -488,7 +482,7 @@ static int Shift(Start, Dist)
     char *Start;
     int Dist;
 {
-    register char *From, *To;
+    char *From, *To;
 
     if (Dist > UP_BytesLeft) return PA_TOO_LONG;
     for (From=UP_NextPos-1, To=UP_NextPos+Dist-1; From>=Start; ) *To-- = *From--;
@@ -522,7 +516,7 @@ static DoFold(Break)
 }
 
 static char *NextSpace(c)
-    register char *c;
+    char *c;
 {
     for (; c<UP_NextPos; c++)
 	switch (*c) {
@@ -550,8 +544,8 @@ static Fold(NewLine)
 
     /* Still, too long, do it the hard way */
     while (UP_LineLength > UP_MaxLineLength) {
-	register char *Last, *LastSpace, *PrevSpace;
-	register int Count, LastCount = 0;
+	char *Last, *LastSpace, *PrevSpace;
+	int Count, LastCount = 0;
 
 	/* Point to beginning of line */
 	Last = UP_NextPos - UP_LineLength;
@@ -569,7 +563,7 @@ static Fold(NewLine)
 	PrevSpace = NIL;
 	LastSpace = NIL;
 	while (Count<=UP_MaxLineLength+1) {
-	    register char *Next;
+	    char *Next;
 
 	    Next = NextSpace(Last);
 	    if (Next == NIL) break;		/* No more spaces, just leave */
@@ -593,7 +587,7 @@ static Fold(NewLine)
 }
 
 static int QuoteAndPrint(String)
-    register char *String;
+    char *String;
 {
     IFPUTC('"');
     for (; *String!='\0'; String++)
@@ -608,10 +602,10 @@ static int QuoteAndPrint(String)
 }
 
 int Unquote(String)
-    register char *String;
+    char *String;
 {
-    register char *to;
-    register bool InQuotes;
+    char *to;
+    bool InQuotes;
 
     for (to=String, InQuotes=FALSE; ;String++)
 	switch (*String) {
@@ -634,8 +628,8 @@ static int PrintRoutePhrase(Phrase, Mode)
     char *Phrase;
     int Mode;
 {
-    register char *c;
-    register bool legal;
+    char *c;
+    bool legal;
 
     /* See if legal phrase */
     for (legal=TRUE, c=Phrase; *c!='\0'&&legal; c++) {
@@ -677,8 +671,8 @@ static int PrintLocalPart(Part, Mode)
     char *Part;
     int Mode;
 {
-    register char *c, last;
-    register enum { LEGAL, ILLEGAL, MUSTQUOTE } status;
+    char *c, last;
+    enum { LEGAL, ILLEGAL, MUSTQUOTE } status;
 
     /* See if any spaces */
     for (status=LEGAL, c=Part, last='\0'; status!=MUSTQUOTE && *c!='\0'; c++) {
@@ -764,7 +758,7 @@ static int FreeHosts(Addr)
 static int FreeComments(Addr)
     PARSED_ADDRESS *Addr;
 {
-    register ADDRESS_COMMENT *c, *Next;
+    ADDRESS_COMMENT *c, *Next;
 
     for (c=Addr->Comments; c!=NIL; c=Next) {
 	Next = c -> Next;
@@ -786,9 +780,9 @@ static int FreeGroupMembers(Addr)
 */
 
 int FreeAddress(AddrIn)
-    register PARSED_ADDRESS *AddrIn;
+    PARSED_ADDRESS *AddrIn;
 {
-    register int code;
+    int code;
 
     if (AddrIn == NIL) return PA_NULL_POINTER;
     code = RemAddress(AddrIn);
@@ -837,9 +831,9 @@ int FreeAddressList(Addrs)
 */
 
 int RemAddress(Addr)
-    register PARSED_ADDRESS *Addr;
+    PARSED_ADDRESS *Addr;
 {
-    register PARSED_ADDRESS *Save;
+    PARSED_ADDRESS *Save;
 
     Save = Addr -> Next;
     Save -> Prev = Addr -> Prev;
@@ -855,9 +849,9 @@ int RemAddress(Addr)
 */
 
 int RemHost(Host)
-    register ADDRESS_HOST *Host;
+    ADDRESS_HOST *Host;
 {
-    register ADDRESS_HOST *Save;
+    ADDRESS_HOST *Save;
 
     Save = Host -> Next;
     Save -> Prev = Host -> Prev;
@@ -870,7 +864,7 @@ int RemHost(Host)
 ADDRESS_HOST *MakeHost(name)
     char *name;
 {
-    register ADDRESS_HOST *host;
+    ADDRESS_HOST *host;
 
     host = (ADDRESS_HOST *) malloc(sizeof(ADDRESS_HOST));
     if (host == NIL) {

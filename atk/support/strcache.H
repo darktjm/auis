@@ -50,7 +50,7 @@ public:
     
 	static boolean InitializeClass();
 
-    static char * SaveStr(char *str)  ;
+    static const char * SaveStr(const char *str)  ;
 
      char * Delete(char *key)  ;
      char * Rename(char *key, char *new_c)  ;

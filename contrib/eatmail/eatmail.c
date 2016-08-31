@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/eatmail/RCS/eatmail.c,v 1.9 1995/07/11 18:30:47 rr2b Stab74 $";
-#endif
-
-
 /* This includes most of the code from ams/libs/ms/cvtold.c  */
 
 #include <andrewos.h> /* sys/types.h sys/file.h sys/time.h */
@@ -180,7 +174,7 @@ char name[]; int lockFD;
 static int lock(file, lockedFile, lockedFDp)
 char *file, *lockedFile; int *lockedFDp;
 {
-    register int f, g;
+    int f, g;
     char	locktmp[1+MAXPATHLEN];	    /* Usable lock temporary */
     char *s;
 

@@ -1,10 +1,6 @@
 /**********************************************************************
  * File Exchange purge client
  *
- * $Author: sa3e $
- * $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/clients/RCS/fxpurge.c,v $
- * $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/clients/RCS/fxpurge.c,v 1.4 1994/01/31 22:36:06 sa3e Stab74 $
- *
  * Copyright 1989, 1990 by the Massachusetts Institute of Technology.
  *
  * For copying and distribution information, please see the file
@@ -33,11 +29,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/clients/RCS/fxpurge.c,v 1.4 1994/01/31 22:36:06 sa3e Stab74 $";
-#endif
-
 #include <mitcopyright.h>
 
  
@@ -61,7 +52,7 @@ char *full_name();
 compar(p1, p2)
      Paper **p1, **p2;
 {
-  register int ret;
+  int ret;
 
   ret = strcmp((*p1)->author, (*p2)->author);
   if (ret) return(ret);

@@ -267,7 +267,3 @@ empty		:
 		;
 
 %%
-#include <andrewos.h>
-
-static UNUSED const char *parsey_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/parsey.gra,v 1.2 1996/03/11 19:29:15 robr Stab74 $";
-

@@ -27,12 +27,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/hyplink/RCS/linkview.C,v 1.11 1996/07/06 03:31:10 wjh Exp $";
-#endif
-
 ATK_IMPL("linkview.H")
 #include <sys/param.h>	/* for MAXPATHLEN */
 #include <linkview.H>
@@ -252,14 +246,14 @@ FileLinkProc(class ATK  *aself, char  *param)
 	if (param != NULL) 
 	    strcpy(buf, param);
 	else {
-	    char *initval = (l)->GetRawLink();
+	    const char *initval = (l)->GetRawLink();
 	    if ( ! initval ||  ! *initval) {
 		initval = (self)->WantInformation("filename");
 		if (initval) {
 			strcpy(buf, initval);
 			initval = buf;
 			// N.B.:  sometimes initval refers to buf
-			char *slash = strrchr(initval, '/');
+			char *slash = strrchr(buf, '/');
 			if (slash) slash[1] = '\0';	// retain slash at end
 		}
 	    }
@@ -306,7 +300,7 @@ RelLinkProc(class ATK  *aself, char  *param) {
 	class linkview *self=(class linkview *)aself;
 	class link *l = (class link *)(self)->GetDataObject();
 
-	char *filename = self->WantInformation("filename");
+	const char *filename = self->WantInformation("filename");
 	char buf[MAXPATHLEN], initialpath[MAXPATHLEN];
 
 	// The original link and resulting link are both relative,
@@ -616,7 +610,7 @@ AutolinkProc(class ATK  *aself, long  param)
   Start the autolink process.  Check to make sure we're not trouncing
   on another autolink first though....
 */
-  static char *conflict[] = {
+  static const char * const conflict[] = {
     "Use new autolink source",
     "Use old autolink source",
     "Cancel autolink",

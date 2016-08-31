@@ -49,7 +49,7 @@ public:
     virtual void FreeStyles();			/* clear out all styles in the stylesheet */
     virtual void Add(class style *styleptr);	/* add a style to the stylesheet */
     virtual void Delete(class style *styleptr);	/* delete a style from the stylesheet */
-    virtual class style * Find(char *name)  ;	/* find a style, given its name */
+    virtual class style * Find(const char *name)  ;	/* find a style, given its name */
     virtual class menulist * GetMenuList(proctable_fptr procname, struct ATKregistryEntry  *infotype)  ;
 					/* get a menulist for the styles */
     virtual long Read(FILE *fileptr, boolean template_c)  ;

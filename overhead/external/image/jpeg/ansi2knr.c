@@ -275,8 +275,8 @@ main(argc, argv)
 /* Skip over space and comments, in either direction. */
 char *
 skipspace(p, dir)
-    register char *p;
-    register int dir;			/* 1 for forward, -1 for backward */
+    char *p;
+    int dir;			/* 1 for forward, -1 for backward */
 {	for ( ; ; )
 	   {	while ( isspace(*p) ) p += dir;
 		if ( !(*p == '/' && p[dir] == '*') ) break;
@@ -314,7 +314,7 @@ writeblanks(start, end)
 int
 test1(buf)
     char *buf;
-{	register char *p = buf;
+{	char *p = buf;
 	char *bend;
 	char *endfn;
 	int contin;
@@ -339,7 +339,7 @@ test1(buf)
 	/* Check that the apparent function name isn't a keyword. */
 	/* We only need to check for keywords that could be followed */
 	/* by a left parenthesis (which, unfortunately, is most of them). */
-	   {	static char *words[] =
+	   {	static const char * const words[] =
 		   {	"asm", "auto", "case", "char", "const", "double",
 			"extern", "float", "for", "if", "int", "long",
 			"register", "return", "short", "signed", "sizeof",
@@ -363,7 +363,7 @@ convert1(buf, out)
     char *buf;
     FILE *out;
 {	char *endfn = strchr(buf, '(') + 1;
-	register char *p;
+	char *p;
 	char **breaks;
 	unsigned num_breaks = 2;	/* for testing */
 	char **btop;

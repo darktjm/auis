@@ -52,8 +52,8 @@ int dbg_vclose(int fd);
 int dbg_vfclose(FILE *fp);
 FILE *dbg_popen(const char *path, const char *type);
 int dbg_pclose(FILE *fp);
-FILE *dbg_qopen(const char *path, char * const argv[], const char *mode);
-FILE *dbg_topen(const char *path, char * const argv[], const char *mode, int *pgrp);
+FILE *dbg_qopen(const char *path, const char * const argv[], const char *mode);
+FILE *dbg_topen(const char *path, const char * const argv[], const char *mode, int *pgrp);
 int dbg_qclose(FILE *fp);
 int dbg_tclose(FILE *fp, int seconds, int *timeout);
 int dbg_t2open(const char *name, char * const argv[], FILE **r, FILE **w);
@@ -67,8 +67,6 @@ extern time_t gtime(struct tm *ct);
 
 /* fpacheck.c */
 extern boolean fpacheck(void);
-
-extern FILE *qopen(const char *name, char * const *argv, const char *mode);
 
 /* system.c */
 extern int os_system(const char *cmd);
@@ -368,9 +366,9 @@ extern int tfail(int  errorNumber);               /* return TRUE iff the errno v
                                         * passed as arg is a temp failure */
 
 /* topen.c */
-extern FILE *topen(const char  *name , char  * const argv[] , const char  *mode, int  *pgrp);               /* like popen(void) but enable timeouts for
+extern FILE *topen(const char  *name , const char  * const argv[] , const char  *mode, int  *pgrp);               /* like popen(void) but enable timeouts for
                                         * the close */
-extern FILE *qopen(const char  *name , char  * const argv[] , const char  *mode);               /* topen(void) with simplified calling
+extern FILE *qopen(const char  *name , const char  * const argv[] , const char  *mode);               /* topen(void) with simplified calling
                                         * sequence */
 
 extern int tclose(FILE  *ptr, int  seconds , int  *timedout);              /* pclose(void) sensitive to subprocess

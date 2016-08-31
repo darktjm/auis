@@ -23,11 +23,6 @@
  * 
  *  $
 */
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/batmail/RCS/death.c,v 1.6 1996/03/06 17:30:49 susan Stab74 $";
-#endif
-
 /*
  * death.c -- message killing code for batmail
  * Copyright 1988,1989,1990 by Miles Bader

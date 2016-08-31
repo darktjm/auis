@@ -20,11 +20,6 @@
  * 
  *  $
 \* ********************************************************************** */
-#include <andrewos.h>
-
-#ifndef NORCSID
-static UNUSED const char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/ncompile.C,v 1.7 1995/02/27 02:30:48 rr2b Stab74 $";
-#endif
 
 /* compile.c
 	Compile a ness 
@@ -56,6 +51,7 @@ static UNUSED const char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/
  *
  */
 
+#include <andrewos.h>
 #include <ctype.h>
 
 #include <im.H>
@@ -106,7 +102,7 @@ static long FoundLoc, FoundLen;	/* where we found it */
 
 void compileLocate(long  bytes);
 void compileStmtStart(long  tokeninx);
-static void EnterReservedWord(void  *rock, char  *w, int  i);
+static void EnterReservedWord(void  *rock, const char  *w, int  i);
 /* (above) static void parsepragmat(class ness  * self, char  *prag); */
 static void compileInit();
 static void doCompile(class ness  *ness, long  pos , long  len, boolean  locating);
@@ -147,7 +143,7 @@ compileStmtStart(long  tokeninx) {
 
 
 	static void
-EnterReservedWord(void  *rock, char  *w, int  i) {
+EnterReservedWord(void  *rock, const char  *w, int  i) {
 	class nesssym *s;
 	boolean new_c;
 	s = nesssym::NLocate(w, SymProto, GrammarScope, &new_c);
@@ -156,8 +152,8 @@ EnterReservedWord(void  *rock, char  *w, int  i) {
 
 	static void
 parsepragmat(class ness  * self, char  *prag) {
-	char *enable = "enable class access";
-	char *Ness = "Ness";
+	const char enable[] = "enable class access";
+	const char Ness[] = "Ness";
 	
 	if (strncmp(prag, enable, strlen(enable)) == 0)
 		/* --$enable class access */

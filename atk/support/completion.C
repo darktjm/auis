@@ -23,20 +23,12 @@
 //  $
 */
 
-#include <andrewos.h> /* sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/completion.C,v 3.8 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
 
- 
-
+#include <andrewos.h> /* sys/types.h */
 ATK_IMPL("completion.H")
 
 #include <filetype.H>
@@ -61,17 +53,12 @@ static class cursor *waitCursor;
 
 
 ATKdefineRegistry(completion, ATK, completion::InitializeClass);
-#ifndef NORCSID
-#endif
-#if POSIX_ENV || defined(M_UNIX)
-#else
-#endif
-static void FileHelp(char  *partialPath, long  dummyData , message_workfptr helpTextFunction, long  helpTextRock);
+static void FileHelp(const char  *partialPath, long  dummyData , message_workfptr helpTextFunction, long  helpTextRock);
 static enum message_CompletionCode FileComplete(char  *pathname, long  directory, char  *buffer, int  bufferSize);
 static enum keymap_Types FileHack(struct fileRock  *rock, long  key, ATK   **entry, long  *rockP);
 
 
- long completion::FindCommon(char  *string1 , char  *string2)
+ long completion::FindCommon(const char  *string1 , const char  *string2)
         {
 	ATKinit;
 
@@ -88,7 +75,7 @@ static enum keymap_Types FileHack(struct fileRock  *rock, long  key, ATK   **ent
     return i;
 }
 
- void completion::CompletionWork(char  *string, struct result  *data)
+ void completion::CompletionWork(const char  *string, struct result  *data)
             {
 	ATKinit;
 
@@ -133,7 +120,7 @@ static enum keymap_Types FileHack(struct fileRock  *rock, long  key, ATK   **ent
     }
 }
 
- static void FileHelp(char  *partialPath, long  dummyData /* Just along for the ride. */, message_workfptr helpTextFunction, long  helpTextRock)
+ static void FileHelp(const char  *partialPath, long  dummyData /* Just along for the ride. */, message_workfptr helpTextFunction, long  helpTextRock)
                 {
 
     int namelen;
@@ -232,7 +219,7 @@ static enum keymap_Types FileHack(struct fileRock  *rock, long  key, ATK   **ent
     im::SetProcessCursor(NULL);
 }
 
- void completion::FileHelp(char  *partialPath, long  dummyData /* Just along for the ride. */, message_workfptr helpTextFunction, long  helpTextRock)
+ void completion::FileHelp(const char  *partialPath, long  dummyData /* Just along for the ride. */, message_workfptr helpTextFunction, long  helpTextRock)
                     {
 	ATKinit;
 
@@ -345,7 +332,8 @@ static enum message_CompletionCode FileComplete(char  *pathname, long  directory
     closedir(thisDir);
 
 /* Really ought to check for buffer overflow here. */
-    strncpy(buffer, dir, bufferSize);
+    if(dir != buffer)
+        strncpy(buffer, dir, bufferSize);
     strcat(buffer, result.best);
     isDirectory = (stat(buffer, &statBuf) >= 0) && ((statBuf.st_mode & S_IFMT) == S_IFDIR);
     if ((result.code == message_Complete) && (buffer[(len = strlen(buffer)) - 1] != '/') && isDirectory) {

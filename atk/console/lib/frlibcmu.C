@@ -25,16 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/frlibcmu.C,v 1.1 1993/05/25 21:29:58 gk5g Stab74 $";
-#endif
-
-
- 
-
 /*  stablk  --  string table lookup
  *
  *  Usage:  i = stablk (arg,table,quiet);
@@ -54,20 +44,19 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  *
  */
 
+#include <andrewos.h>
 #define NOTFOUND -1
 #define AMBIGUOUS -2
 #include <ctype.h>
 
 #include <util.h>
 
-#ifndef NORCSID
-#endif
-int stablk (char  *arg ,char  **table,int  quiet /* ignored */);
+int stablk (const char  *arg ,const char  **table,int  quiet /* ignored */);
 
 
-int stablk (char  *arg ,char  **table,int  quiet /* ignored */)
+int stablk (const char  *arg ,const char  **table,int  quiet /* ignored */)
 {
-    register int i,ix = 0,count;
+    int i,ix = 0,count;
 
     count = 0;
     for (i=0; table[i] != 0; i++) {

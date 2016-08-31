@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/pcserver/RCS/pccmain.c,v 2.6 1992/12/15 21:06:36 rr2b Stab74 $";
-#endif
-
 /*
  *	PC Server - Test Client
  *	Access to the VICE File System for IBM PC/XT/ATs
@@ -114,7 +109,7 @@ char *Mode(mode)
 long mode;
 {
     static char result[100];
-    register char **mp;
+    char **mp;
     int needplus = 0, m;
 
     *result = '\0';
@@ -132,7 +127,7 @@ long Intent(intent)
 char *intent;
 {
     static char *intents[] = {"input", "output", "unspecified", 0};
-    register char **p = intents;
+    char **p = intents;
     while (*p && strcmp(*p,intent) != 0)
 	p++;
     if (!*p)
@@ -158,8 +153,8 @@ char *filter;
     int returnvalue = 0;
 
     while(filter) {
-	register char *i;
-	register int f;
+	char *i;
+	int f;
 	if ((i = index(filter,'+')) != NULL) {
 	    *i = '\0';
 	    next = i+1;
@@ -225,7 +220,7 @@ char **argv;
     SNAP_SetConvParms (Cid, &cparms);
 
     for (;;) {
-	register struct command *cp = &commands[0];
+	struct command *cp = &commands[0];
 	getArgs();
 	if (nArgs-- == 0)
 	    continue;
@@ -420,8 +415,8 @@ int n;
     static char hex[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
     'a', 'b', 'c', 'd', 'e', 'f'};
     static char result[4096];
-    register char *r = result;
-    register char *p = data;
+    char *r = result;
+    char *p = data;
     while (n--) {
 	if (isprint(*p))
 	    *r++ = *p;

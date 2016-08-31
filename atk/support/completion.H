@@ -53,13 +53,13 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
     
-        static void CompletionWork(char *string, struct result *data);
+        static void CompletionWork(const char *string, struct result *data);
         static int GetFilename(class view *view, const char *prompt, const char *startPath, char *buffer, long bufsiz, boolean directoryP, boolean mustMatch)  ;
-        static long FindCommon(char *string1, char *string2)  ;
+        static long FindCommon(const char *string1, const char *string2)  ;
         
 	static boolean InitializeClass();
 
-	static void FileHelp(char *partialPath, long dummyData, message_workfptr helpTextFunction, long helpTextRock);
+	static void FileHelp(const char *partialPath, long dummyData, message_workfptr helpTextFunction, long helpTextRock);
         static enum message_CompletionCode FileComplete(char *pathname, boolean directory, char *buffer, int bufferSize)  ;
 };
 

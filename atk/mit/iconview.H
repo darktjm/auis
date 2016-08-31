@@ -58,9 +58,9 @@ class iconview : public  view
     virtual void RecommendSize(long w,long h);
     virtual void Open();
     virtual void Close();
-    virtual void SetIconFont(char *iconfont, int iconstyle, int iconpts);
+    virtual void SetIconFont(const char *iconfont, int iconstyle, int iconpts);
     virtual void SetIconChar(char iconchar);
-    virtual void SetTitleFont(char *titlefont, int titlestyle, int titlepts);
+    virtual void SetTitleFont(const char *titlefont, int titlestyle, int titlepts);
     virtual void SetChild(char *viewclass);
     virtual class view * GetChild()  ;
 

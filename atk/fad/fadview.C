@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/time.h sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/fad/RCS/fadview.C,v 1.9 1994/12/13 20:35:03 rr2b Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("fadview.H")
 #include <sys/stat.h>
 
@@ -113,12 +104,10 @@ static int samplefont_failed ;
 
 
 ATKdefineRegistry(fadview, view, fadview::InitializeClass);
-#ifndef NORCSID
-#endif
 static void MySetCursor(class fadview  *self,class fontdesc  *f,int  i);
 static void MySetStandardCursor(class fadview  *self,short  i);
 static int CurrentFrame(class fadview  *self);
-static class fontdesc *my_DefineFont(char  *fname);
+static class fontdesc *my_DefineFont(const char  *fname);
 static void UpdateCursor(class fadview  *self);
 static void fontinit(class fad  *cp);
 void HaltAnimation(class fadview  *self);
@@ -133,12 +122,12 @@ static void AddMenus(class fadview  *self,class menulist  *ml,struct proctable_E
 static void KeyIn(class fadview  *self,long  cr);
 static void nameframe(class fadview  *self);
 boolean QueueAnimation(class fadview  *self,enum view_MouseAction  action,long  mousex ,long  mousey);
-static void drawlist(class fadview  *self,register class fad  *cpic);
-static void getlist(register class fadview  *self,register struct fadpoint  *ppt);
+static void drawlist(class fadview  *self,class fad  *cpic);
+static void getlist(class fadview  *self,struct fadpoint  *ppt);
 static int seticon(class fadview  *self);
 static void ReadIcons(FILE  *f,class fadview  *self);
-static void idraw(register class fadview  *self,register struct anivect  *A);
-static void vecdraw(register class fadview  *self,register struct fadvector  *v);
+static void idraw(class fadview  *self,struct anivect  *A);
+static void vecdraw(class fadview  *self,struct fadvector  *v);
 static char labelfonttype(class fadview  *self);
 static int labelfontsize(class fadview  *self);
 static void PrintVec(class fad  *cp,struct fadvector  *v);
@@ -168,13 +157,13 @@ static void MySetStandardCursor(class fadview  *self,short  i)
 }
 static int CurrentFrame(class fadview  *self)
 {
-    register int i;
-    register struct fad_frame *fra;
+    int i;
+    struct fad_frame *fra;
     for(i = 1,fra = findpic(self)->bf;fra != NULL && fra != self->f ; fra = fra->f)
 	i++;
     return i;
 }
-static class fontdesc *my_DefineFont(char  *fname)
+static class fontdesc *my_DefineFont(const char  *fname)
 {
     char familyname[256];
     long fontStyle;
@@ -350,8 +339,8 @@ static boolean DoAnimation(class fadview  *self)
     int i;
     float fc;
     struct aniinfo *anobj;
-    register struct anivect *ap;
-    register struct fadvector *vp,*nvp;
+    struct anivect *ap;
+    struct fadvector *vp,*nvp;
     struct anivect *anbuf,*endanbuf;
 
     anobj = (struct aniinfo *) malloc(sizeof(struct aniinfo));
@@ -440,7 +429,7 @@ boolean doan(struct aniinfo  *anobj)
     struct fad_frame *lf,*sf;
     struct fadvector *vc,*vc1,*ov;
     int i;
-    register struct anivect *ap,*eap;
+    struct anivect *ap,*eap;
 
 
     self= anobj->self;
@@ -677,7 +666,7 @@ static void AddMenus(class fadview  *self,class menulist  *ml,struct proctable_E
 void 
 fadview::showfad(int  i,class fad  *cp)
 {
-    register struct fad_frame *fra;
+    struct fad_frame *fra;
     for(fra = cp->bf;fra != NULL && i > 1 ; fra = fra->f)
 	i--;
     if(fra != NULL){
@@ -1105,9 +1094,9 @@ class view *fadview::Hit(enum view_MouseAction  action,long  mousex ,long  mouse
     }
     return(this);
 }
-static void drawlist(class fadview  *self,register class fad  *cpic)
+static void drawlist(class fadview  *self,class fad  *cpic)
 {
-    register int i;
+    int i;
     static struct fadvector tempvec;
     if(cpic->lp){
 	tempvec.mode = self->mode;
@@ -1121,10 +1110,10 @@ static void drawlist(class fadview  *self,register class fad  *cpic)
 	vecdraw(self,cpic->veclist[i]);
     }
 }
-static void getlist(register class fadview  *self,register struct fadpoint  *ppt)
+static void getlist(class fadview  *self,struct fadpoint  *ppt)
 {
-    register int i = 0;
-    register struct fadvector *vc;
+    int i = 0;
+    struct fadvector *vc;
     class fad *cpic = findpic(self);
     for(vc = self->f->v; vc != NULL ; vc = vc->v){
 	if(vc->p1 == ppt || (vc->p2 == ppt))cpic->veclist[i++] = vc;
@@ -1146,7 +1135,7 @@ static int seticon(class fadview  *self)
 
 static void ReadIcons(FILE  *f,class fadview  *self)
 {
-    register int c;
+    int c;
     class fad *cpic = findpic(self);
     while(( c = getc(f))!= EOF){
 	if(c == '\0') break;
@@ -1203,7 +1192,7 @@ int fadview::geticons(char  *s)
 }
 
 
-static void idraw(register class fadview  *self,register struct anivect  *A) 
+static void idraw(class fadview  *self,struct anivect  *A) 
 {
     static char cc;
     class fad *cp = findpic(self);
@@ -1218,10 +1207,10 @@ static void idraw(register class fadview  *self,register struct anivect  *A)
 	(self)->DrawText(&cc,1,0);
     }
 }	
-static void vecdraw(register class fadview  *self,register struct fadvector  *v)
+static void vecdraw(class fadview  *self,struct fadvector  *v)
 {
     static char cc;
-    register class fad *cp = findpic(self);
+    class fad *cp = findpic(self);
     /* graphic_SetTransferMode(self,graphic_INVERT); */
     (self)->MoveTo(v->p1->x,v->p1->y);
     if(v->label){
@@ -1260,10 +1249,10 @@ fadview::fileread(char  *fnm)
     }
 }
 void
-fadview::Print(FILE  *file, char  *processor,char  *finalFormat,boolean  topLevel)
+fadview::Print(FILE  *file, const char  *processor,const char  *finalFormat,boolean  topLevel)
 {
     class fad *cp;
-    register struct fadvector *vc;
+    struct fadvector *vc;
     cp = findpic(this);
     BeginTroff(file, cp->desh,this);
     for(vc = this->f->v; vc != NULL ; vc = vc->v)
@@ -1447,7 +1436,8 @@ void fadview::WantUpdate(class view  *requestor)
 
 boolean fadview::InitializeClass()
 {
-    char *c,buf[2];
+    const char *c;
+    char buf[2];
 
     fadviewMenulist = new menulist;
     fadviewKeymap = new keymap;

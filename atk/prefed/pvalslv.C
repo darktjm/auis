@@ -23,17 +23,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/pvalslv.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
-
- 
-
-
 ATK_IMPL("pvalslv.H")
 #include <math.h>
 
@@ -48,9 +37,6 @@ ATK_IMPL("pvalslv.H")
 
 
 ATKdefineRegistry(pvalslv, ssliderv, NULL);
-#ifndef NORCSID
-#endif
-
 
 pvalslv::pvalslv()
 {

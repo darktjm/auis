@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/valueview.C,v 1.8 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("valueview.H")
 #include <atom.H>
 #include <atomlist.H>
@@ -62,8 +52,6 @@ static class atom *  A_long;
 
 
 ATKdefineRegistry(valueview, view, valueview::InitializeClass);
-#ifndef NORCSID
-#endif
 static void LookupParameters(class valueview  * self);
 static void DrawFromScratch(class valueview  * self);
 static void DA(class valueview  * self);
@@ -240,7 +228,7 @@ void valueview::GetManyParameters( struct resourceList  * resources, class atoml
 {
     (this)->view::GetManyParameters(  resources, name, class_c );
     if(setpar){
-	register int i;
+	int i;
 	for(i = 0; i < MAXPAR; i++){
 	    par[i] = *resources++;
 	    if(par[i].name == NULL) break;
@@ -467,7 +455,7 @@ boolean valueview::OnTarget(long  x,long  y)
 class view * valueview::Hit(enum view_MouseAction  type, long  x , long  y , long  numberOfClicks)
                {
 #if 0
-  register short sendEvent;
+  short sendEvent;
   if (this->active)
     {
       switch (type)

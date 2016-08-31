@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/chzdirs.c,v 2.25 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /*
         chzdirs.c -- Routines for deciding in which directories to put mail
 
@@ -43,6 +36,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 */
 
+#include <andrewos.h>
 #include <ms.h>
 #include <util.h>
 #include <mailconf.h>

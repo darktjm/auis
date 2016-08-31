@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/enterstrV.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("enterstrV.H")
 #include <lpair.H>
 #include <entertext.H>
@@ -50,9 +41,6 @@ ATK_IMPL("enterstrV.H")
 
 
 ATKdefineRegistry(enterstrV, buttonV, NULL);
-#ifndef NORCSID
-#endif
-
 
 class valueview *enterstrV::DoHit( enum view_MouseAction  type,long  x,long  y,long  hits )
                {
@@ -63,7 +51,7 @@ class valueview *enterstrV::DoHit( enum view_MouseAction  type,long  x,long  y,l
 void enterstrV::ObservedChanged(class observable  *changed,long  value)
 {
     class value *val ;
-    char *str,*os;
+    const char *str,*os;
 
     val = (this)->Value();
     if( changed == (class observable *) this->etext){

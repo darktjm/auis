@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>		/* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/svcconf.c,v 2.21 1995/03/18 17:30:59 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	svcconf.c
 	Definitions for cell-based services.
@@ -40,6 +33,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 
  
 
+#include <andrewos.h>		/* sys/file.h */
 #include <andyenv.h>
 #include <stdio.h>
 #include <sys/param.h>

@@ -26,7 +26,6 @@ $Disclaimer:
 #include <andrewos.h>
 
 static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/ctext.C,v 2.0 1995/01/27 19:38:38 rr2b Stab74 $";
 
 #include <stylesheet.H>
 #include <style.H>
@@ -52,7 +51,7 @@ void ctext::SetAttributes(struct attributes *atts)
 {
     (this)->srctext::SetAttributes(atts);
     while (atts!=NULL) {
-	char *key=atts->key;
+	const char *key=atts->key;
 	if (strcmp(key,"brace-indent")==0)
 	    this->braceIndent=atoi(atts->value.string);
 	else if (strcmp(key,"switch-label-undent")==0)
@@ -89,7 +88,7 @@ void ctext::SetupStyles()
 
 boolean ctext::InitializeClass()
 {
-    static Dict ckeywords[]={
+    static const Dict ckeywords[]={
 	{"auto",0,KEYWRD},
 	{"break",0,KEYWRD},
 	{"case",0,KEYWRD},
@@ -171,7 +170,7 @@ long ctext::MaybeBackwardSkipCppLines(long pos)
 long ctext::BackwardSkipJunk(long pos)
 {
     while (pos>=0) {
-	register int c=GetChar(pos--);
+	int c=GetChar(pos--);
 
 	switch(c) {
 	    case '/':

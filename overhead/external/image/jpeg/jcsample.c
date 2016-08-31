@@ -111,7 +111,7 @@ h2v1_downsample (compress_info_ptr cinfo, int which_component,
 {
   int outrow;
   long outcol;
-  register JSAMPROW inptr, outptr;
+  JSAMPROW inptr, outptr;
 
 #ifdef DEBUG			/* for debugging pipeline controller */
   jpeg_component_info * compptr = cinfo->cur_comp_info[which_component];
@@ -150,7 +150,7 @@ h2v2_downsample (compress_info_ptr cinfo, int which_component,
 {
   int inrow, outrow;
   long outcol;
-  register JSAMPROW inptr0, inptr1, outptr;
+  JSAMPROW inptr0, inptr1, outptr;
 
 #ifdef DEBUG			/* for debugging pipeline controller */
   jpeg_component_info * compptr = cinfo->cur_comp_info[which_component];
@@ -217,7 +217,7 @@ h2v2_smooth_downsample (compress_info_ptr cinfo, int which_component,
 {
   int inrow, outrow;
   long colctr;
-  register JSAMPROW inptr0, inptr1, above_ptr, below_ptr, outptr;
+  JSAMPROW inptr0, inptr1, above_ptr, below_ptr, outptr;
   INT32 membersum, neighsum, memberscale, neighscale;
 
 #ifdef DEBUG			/* for debugging pipeline controller */
@@ -328,7 +328,7 @@ fullsize_smooth_downsample (compress_info_ptr cinfo, int which_component,
 {
   int outrow;
   long colctr;
-  register JSAMPROW inptr, above_ptr, below_ptr, outptr;
+  JSAMPROW inptr, above_ptr, below_ptr, outptr;
   INT32 membersum, neighsum, memberscale, neighscale;
   int colsum, lastcolsum, nextcolsum;
 

@@ -25,18 +25,12 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/types.h strings.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/amsauth.c,v 2.18 1993/02/12 21:23:32 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	amsauth.c
 	Keep track of the current AMSHome cell.
 \* ************************************************************ */
 
+#include <andrewos.h> /* sys/types.h strings.h sys/file.h */
 #include <andyenv.h>
 #include <stdio.h>
 #include <errno.h>

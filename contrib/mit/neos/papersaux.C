@@ -1,5 +1,3 @@
-/* $Author: wjh $ */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -22,13 +20,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/papersaux.C,v 1.5 1996/06/11 01:28:57 wjh Exp $";
-#endif
-
-
- 
 /*
  * papersaux.c
  *
@@ -41,9 +32,9 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/ne
  *  For full copyright information see:'mit-copyright.h'     *
  *************************************************************/
 
-#include <andrewos.h>
 #include <mit-copyright.h>
 
+#include <andrewos.h>
 #include <cursor.H>
 #include <eosbutton.H>
 #include <eos.h>
@@ -82,24 +73,20 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/ne
 
 extern	class menulist *papers_global_menus;
 
-static char *buttonNames[]=
+static const char * const buttonNames[]=
 { "EDIT", "KEEP", "HIDE", NULL };
-static void (*buttonFuncs[])()=
+static const void (*buttonFuncs[])()=
 {  papers_Edit, papers_Keep, papers_Hide, NULL };
 
-static char *subdispbuttons[]=
+static const char * const subdispbuttons[]=
 { "SUBMIT", "DISPLAY", "EDIT", "KEEP", "HIDE", NULL };
-static void (*subdispFuncs[])()=
+static const void (*subdispFuncs[])()=
 { MakePaper, papers_Display, papers_Edit, papers_Keep, papers_Hide, NULL };
 
-static char *altbuttons[]=
+static const char * const altbuttons[]=
 { "OLD DOCS", "DISPLAY", "EDIT", "KEEP", "HIDE", NULL };
-static void (*altFuncs[])()=
+static const void (*altFuncs[])()=
 { papers_GradingToggleAndList, papers_Display, papers_Edit, papers_Keep, papers_Hide, NULL };
-
-#ifndef NORCSID
-#endif
-
 
 papers::papers()
 /* This is getting a bit messy... */

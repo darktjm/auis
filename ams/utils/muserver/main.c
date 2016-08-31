@@ -24,11 +24,6 @@
  * Start Date: 9/18/91
  */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/muserver/RCS/main.c,v 1.5 1993/01/06 22:03:55 rr2b Stab74 $";
-#endif
-
 #include <sys/types.h>
 #include <sys/file.h>
 #include <sys/ioctl.h>

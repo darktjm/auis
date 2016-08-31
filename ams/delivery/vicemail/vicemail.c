@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/delivery/vicemail/RCS/vicemail.c,v 1.17 1993/09/30 20:16:49 rr2b Stab74 $";
-#endif
-
 /*
 		vicemail.c -- Deliver a message to a user.
 */
@@ -93,8 +88,8 @@ extern char VM_text[];
 
 /* For error messages */
 static char errortext[512];
-static char notimpl[] = "not implemented";
-static char aborted[] = "delivery aborted";
+static const char notimpl[] = "not implemented";
+static const char aborted[] = "delivery aborted";
 
 static char **GlobalArgv;
 
@@ -112,10 +107,10 @@ static char *host()
 }
 
 static header(f, user, mesg, original, curfile, who)
-    register FILE *f;
+    FILE *f;
     char *user, *mesg, *original, *curfile, *who;
 {
-    register char **p;
+    char **p;
 
     /* Write mail header */
     fprintf(f, "Received: from %s via %s ID <%s>; %s", who, host(), curfile, arpadate());
@@ -135,14 +130,14 @@ static header(f, user, mesg, original, curfile, who)
 }
 
 static bool compose_message(f, user, mesg, original)
-    register FILE *f;
+    FILE *f;
     char *user, *mesg, *original;
 {
-    static char separator[] = "=============================";
+    static const char separator[] = "=============================";
 
     fprintf(f, "Undelivered mail follows...\n\n%s\n\n", separator);
     for (;;) {
-	register int n;
+	int n;
 #define BUFSIZE	512
 	char buf[BUFSIZE];
 	n = read(0, buf, sizeof buf);
@@ -160,8 +155,8 @@ static bailout(mesg, original, body)
     char *mesg, *original;
     bool body;
 {
-    register FILE *f;
-    register int i;
+    FILE *f;
+    int i;
     char current[MAXPATHLEN+1];
 
     /* Try to create error file */
@@ -199,7 +194,7 @@ static postmaster(user, mesg, include_body)
     char *user, *mesg;
     bool include_body;
 {
-    register FILE *fout;
+    FILE *fout;
     int p[2], stat, pid;
 
     if (is_postmaster(user)) {
@@ -259,7 +254,7 @@ static postmaster(user, mesg, include_body)
 }
 
 static void CheckVMReturn(rc, final, user)
-    register int rc;
+    int rc;
     bool final;
     char *user;
 {
@@ -289,7 +284,7 @@ static SendMessage(Mailbox, ReturnPath, For,
     bool Final;
     int MinSize;
 {
-    register int size;
+    int size;
 
     CheckVMReturn(VM_open(NIL, Mailbox, ReturnPath, For, Authenticated, "vicemail"),
 		  Final, Mailbox);
@@ -297,7 +292,7 @@ static SendMessage(Mailbox, ReturnPath, For,
     /* The open worked; now try to write the message */
     size = 0;
     for (;;) {
-	register int n;
+	int n;
 	char buf[512];
 
 	n = read(0, buf, sizeof buf);
@@ -395,7 +390,7 @@ main(argc, argv)
     char *User, *ReturnPath, *Mailbox, *For, *Authenticated;
     bool Final;
     int MinSize;
-    register int i;
+    int i;
 
     /* Place argv in global for error reports */
     GlobalArgv = argv;

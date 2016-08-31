@@ -24,16 +24,6 @@
 // 
 //  $
 */
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/rofftextapp.C,v 1.6 1995/07/17 21:08:55 wjh Stab74 $";
-#endif
-
-
- 
-
 /*
  * app for rofftext
  * 
@@ -41,6 +31,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 
+#include <andrewos.h>
 ATK_IMPL("rofftextapp.H")
 #include <rofftextapp.H>
 #include <text.H>
@@ -50,8 +41,6 @@ ATK_IMPL("rofftextapp.H")
 
 
 ATKdefineRegistry(rofftextapp, application, NULL);
-#ifndef NORCSID
-#endif
 static void show_usage(class rofftextapp  *self);
 
 
@@ -82,21 +71,22 @@ static void show_usage(class rofftextapp  *self)
 	"Usage: %s [-xhntbw] [-m macro file] [-o outputfile] [-] [file...]\n",
 	    (self)->GetName());
     fprintf(stderr,
-"	-x: show this usage statement\n\
-	-h: format for use with the ATK Help system.  Crush initial blank space\n\
-	-w: print message about badly formed numbers\n\
-	-n: pretend to be nroff (default)\n\
-	-t: pretend to be troff\n\
-	-m file: read in %sfile as a macro file\n\
-	-o file: set output file to 'file'.  Default is standard output\n\
-	- : use standard input as the file input\n\
-	file: read in these files\n", TMACPREFIX);
+"	-x: show this usage statement\n"
+"	-h: format for use with the ATK Help system.  Crush initial blank space\n"
+"	-w: print message about badly formed numbers\n"
+"	-n: pretend to be nroff (default)\n"
+"	-t: pretend to be troff\n"
+"	-m file: read in %sfile as a macro file\n"
+"	-o file: set output file to 'file'.  Default is standard output\n"
+"	- : use standard input as the file input\n"
+"	file: read in these files\n", TMACPREFIX);
 }
     
 
 boolean rofftextapp::ParseArgs(int  argc,const char  **argv)
 {
-    char temp2[128], *andrewdir;
+    char temp2[128];
+    const char *andrewdir;
     boolean slash = FALSE;
 
     if(!(this)->application::ParseArgs(argc,argv))
@@ -143,7 +133,7 @@ boolean rofftextapp::ParseArgs(int  argc,const char  **argv)
 			sprintf(temp2,"%s%s", TMACPREFIX, temp);
 			break;
 		}
-		this->macrofile = StrDup(temp2);
+		this->macrofile = strdup(temp2);
                 break;
             case 'o':
                 GETARGSTR(this->outputfile);

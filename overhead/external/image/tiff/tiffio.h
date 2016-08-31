@@ -170,7 +170,7 @@ extern int TIFFInitThunderScan(TIFF *tif);
 extern int TIFFFlushData1(TIFF *tif);
 extern void TIFFFreeDirectory(TIFF *tif);
 extern int TIFFDefaultDirectory(TIFF *tif);
-extern int TIFFSetDirectory(register TIFF *tif, int dirn);
+extern int TIFFSetDirectory(TIFF *tif, int dirn);
 
 extern int TIFFSetCompressionScheme(TIFF *tif, int scheme);
 #if defined(__cplusplus)

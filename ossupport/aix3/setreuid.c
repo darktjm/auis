@@ -25,13 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ossupport/aix3/RCS/setreuid.c,v 1.6 1992/12/15 21:16:51 rr2b Stab74 $";
-#endif
-
-
-
 /* can't do this since we have to build this
  before install, which is needed to install andrewos.h... #include <andrewos.h> */
 #include <sys/types.h>

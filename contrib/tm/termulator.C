@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/tm/RCS/termulator.C,v 1.7 1996/09/03 19:26:16 robr Exp $";
-#endif
-
-
 #include <andrewos.h> /* sys/types.h sys/file.h */
 #include <ctype.h>
 #include <sys/ioctl.h>
@@ -85,21 +79,11 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/tm/RCS
 #define scrPos(self,x,y) \
  ((self)->screen+(y)*((self)->width+1)+(x))
 
-static char spaces[]="                                                                                ";
+static const char spaces[]="                                                                                ";
 #define SPACES (sizeof(spaces)-1)
 
 
 ATKdefineRegistry(termulator, text, NULL);
-#ifndef NORCSID
-#endif
-#ifndef hp9000s300
-#endif /* hp9000s300 */
-#ifndef O_NDELAY
-#endif /* O_NDELAY */
-#ifdef hpux
-#endif /* hpux */
-#ifdef M_UNIX
-#endif
 static int fillChars(class termulator  *self,long  pos,long  num);
 static long fillLines(class termulator  *self,long  pos,int  width,int  height);
 static long stripEnds(class termulator  *self,long  num);
@@ -108,8 +92,8 @@ void termulator__InsertChars(class termulator  *self,long  num);
 static void readFromProc(FILE  *fp,class termulator  *self);
 static char *ignoreChar(class termulator  *self,char  *buf,long  len);
 static char *cntlChar(class termulator  *self,char  *buf,long  len);
-static char *specialChar(class termulator  *self,char  *buf,register long  len);
-static char *readDir(class termulator  *self,char  *buf,register long  len);
+static char *specialChar(class termulator  *self,char  *buf,long  len);
+static char *readDir(class termulator  *self,char  *buf,long  len);
 static void setupStyles(class termulator  *self);
 #ifdef hp9000s300
 #else /* hp9000s300 */
@@ -405,8 +389,8 @@ void termulator::WriteChars(char  *chars,int  len)
     if(this->screen<0){
 	if(!this->insert){
 	    /* not guaranteed that len characters exist */
-	    register long end;
-	    register int c;
+	    long end;
+	    int c;
 
 	    for(end=pos; end-pos<len && end<fence; end++){
 		c=(this)->GetChar(end);
@@ -662,7 +646,7 @@ static char *cntlChar(class termulator  *self,char  *buf,long  len)
 }
 
 /* used for some common occurances */
-static char *specialChar(class termulator  *self,char  *buf,register long  len)
+static char *specialChar(class termulator  *self,char  *buf,long  len)
 {
     int c= *buf,num=1;
 
@@ -689,7 +673,7 @@ static char *specialChar(class termulator  *self,char  *buf,register long  len)
 }
 
 /* read in directory string */
-static char *readDir(class termulator  *self,char  *buf,register long  len)
+static char *readDir(class termulator  *self,char  *buf,long  len)
 {
     char *dir=self->parseBuf+self->parseLen;
     int left=sizeof(self->parseBuf)-self->parseLen;
@@ -794,13 +778,13 @@ void termulator::SetDispSize(int  width,int  height)
 }
 
 /* the state machine for interpretting output */
-void termulator::ProcessOutput(char  *buf,register long  len)
+void termulator::ProcessOutput(char  *buf,long  len)
 {
-    register termulator_escfptr *escapes=this->escapes;
-    register char *end=buf;
+    termulator_escfptr *escapes=this->escapes;
+    char *end=buf;
 
     while(len>0){
-	register termulator_statefptr action=this->state;
+	termulator_statefptr action=this->state;
 
 	if(action==NULL){
 	    do{
@@ -1145,7 +1129,7 @@ int termulator::StartProcess(const char  **args)
     return 0;
 }
 
-char *termulator::ViewName()
+const char *termulator::ViewName()
 {
     return "tmview";
 }
@@ -1156,7 +1140,7 @@ static char ctrlbuf[2]="^";
 
 void termulator::ProcessInput(char  *buf,long  len)
 {
-    register char *end=buf;
+    char *end=buf;
 
 #ifdef INCORRECTSIGNALS
     if(this->mode&RAW)

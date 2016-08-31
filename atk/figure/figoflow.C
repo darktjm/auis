@@ -21,10 +21,6 @@
  * 
  *  $
 */
-#ifndef NORCSID
-char *figoflow_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figoflow.C,v 1.2 1995/03/24 19:19:17 Zarf Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("figoflow.H")
 #include <figoflow.H>
@@ -69,7 +65,7 @@ class figoflow *figoflow::Create(long  left , long  top , long  width , long  he
     return res;
 }
 
-char *figoflow::ToolName(class figtoolview  *v, long  rock)
+const char *figoflow::ToolName(class figtoolview  *v, long  rock)
 {
     return "Text Flow";
 }
@@ -233,7 +229,7 @@ long figoflow::Read(FILE  *fp, long  id)
     return res;
 }
 
-void figoflow::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolean newstyle)
+void figoflow::PrintObject(class figview  *v, FILE  *file, const char  *prefix, boolean newstyle)
 {
     fprintf(file, "%s  %% text flow\n", prefix);
 }

@@ -29,11 +29,11 @@ HASHTABLE   *table;
 char	    *key;
 {
     char	    *str=key;
-    register int    hv=0;
+    int    hv=0;
     HASHENTRY	    *pl;
 
     while(*str){
-	register char	c= *str++;
+	char	c= *str++;
 	if(isupper(c))
 	    c=tolower(c);
 	hv=hashVal(hv,c);
@@ -54,12 +54,12 @@ HASHTABLE   *table;
 char	    *key;
 VOID	    *value;
 {
-    register int    hv=0;
+    int    hv=0;
     HASHENTRY	    **plP;
     char	    *str=key;
 
     while(*str){
-	register char	c= *str++;
+	char	c= *str++;
 	if(isupper(c))
 	    c=tolower(c);
 	hv=hashVal(hv,c);

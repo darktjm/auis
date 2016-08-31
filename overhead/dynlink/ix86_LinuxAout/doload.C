@@ -2,8 +2,6 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
-static char *doload_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynlink/ix86_LinuxAout/RCS/doload.C,v 1.5 1994/08/26 15:35:23 rr2b Stab74 $";
-
 /* 
 	doload.c - dynamic loader for class system
 
@@ -75,8 +73,9 @@ static void doload_read(struct doload_environment *e)
 
     safe_read(e, (char *)&(e->header), (long)sizeof e->header);
     if (e->mode == List)
-	printf( "\nHEADER\n  magic= %x\n  text = %x\n  data = %x\n\
-  bss  = %x\n  syms = %x\n  entry= %x\n  trsize=%x\n  drsize=%x\n",
+	printf( "\nHEADER\n  magic= %x\n  text = %x\n  data = %x\n"
+		"  bss  = %x\n  syms = %x\n  entry= %x\n  trsize=%x\n"
+		"  drsize=%x\n",
 		N_MAGIC(e->header), e->header.a_text, e->header.a_data,
 		e->header.a_bss, e->header.a_syms, e->header.a_entry,
 		e->header.a_trsize, e->header.a_drsize);
@@ -147,7 +146,7 @@ static long adjust(struct doload_environment *e, long tw, struct relocation_info
     if (e->mode == List)
 	printf("  %s", format);
     if (IS_RP_EXTERN( rp )) {
-	register struct nlist *sp = e->symtab + rp->r_symbolnum;
+	struct nlist *sp = e->symtab + rp->r_symbolnum;
 	const char *np = ((sp->n_un.n_strx)
 		 ? (e->stringtab + sp->n_un.n_strx) :  "<<noname>>");
 	if (e->mode == List) {
@@ -197,7 +196,7 @@ static long adjust(struct doload_environment *e, long tw, struct relocation_info
 		break;
 	    case N_ABS:
 		if ((tw & 0xf00f0000) == 0xa0080000) {
-		    register int i = (tw >> 20) & 0xFF;
+		    int i = (tw >> 20) & 0xFF;
 		    const char *np = (i < globalcount)
 			     ? globals[i].entryname : "**INDEX TOO LARGE**";
 		    if (e->mode == List)
@@ -222,7 +221,7 @@ static long adjust(struct doload_environment *e, long tw, struct relocation_info
 
 static void doload_relocate(struct doload_environment *e, char *cp, struct relocation_info  *rp)
 {
-    register long tw;
+    long tw;
 
     switch (RP_LENGTH( rp )) {
     case 0:	/* 1 byte */
@@ -313,8 +312,8 @@ static long NewFixup(struct doload_environment *e, const char *name, long value)
     
 static void doload_preset(struct doload_environment *e)
 {
-    register struct nlist *sp;
-    register struct nlist *sbound;
+    struct nlist *sp;
+    struct nlist *sbound;
     void *sym;
     sbound = (struct nlist *)((char *)e->symtab+ e->header.a_syms);
 	
@@ -330,7 +329,7 @@ static void doload_preset(struct doload_environment *e)
 		    np );
 	}
 	else if ( SYM_TYPE(sp) == N_UNDF) {
-	    register int i;
+	    int i;
 
 	    for (i = globalcount;
 		 --i >= 0 && strcmp(globals[i].entryname, np) != 0; ) ;
@@ -438,7 +437,7 @@ static void doload_preset(struct doload_environment *e)
 #include <ATKDoLoad.H>
 
 
-static char registrystr[]="_ATKregistry_";
+static const char registrystr[]="_ATKregistry_";
 
 static int Exportable(const char *np) {
     const char *p;
@@ -461,8 +460,8 @@ static int find_global(const char *np) {
 }
 
 static int LoadDependencies(struct doload_environment *e, int debug) {
-    register struct nlist *sp;
-    register struct nlist *sbound;
+    struct nlist *sp;
+    struct nlist *sbound;
     void *sym;
     sbound = (struct nlist *)((char *)e->symtab + e->header.a_syms);
 
@@ -488,7 +487,7 @@ static int LoadDependencies(struct doload_environment *e, int debug) {
 doload_entry ATKDoLoadI(int inFD, const char *name, char **bp, long *lenP, const char *path, int debug)
 {
     struct doload_environment E;
-    register struct doload_environment *e;
+    struct doload_environment *e;
     unsigned long n;	/* number of relocation items */
     struct relocation_info *rp;
 

@@ -27,12 +27,6 @@
 
 #include <andrewos.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/printp.C,v 1.18 1996/10/18 03:42:48 wjh Exp $";
-#endif
-
-
 #define AUXMODULE 1
 #include <print.H>
 
@@ -58,7 +52,7 @@ static struct font_afm *symbolfont = NULL;
 static class atom *A_landscape, *A_scale, *A_papersize;
 
 struct afm_keyword {
-    char *name;
+    const char *name;
     int val;
 };
 
@@ -80,7 +74,7 @@ struct genheader {
 void printp_init();
 
 
-static int lookup_afmkey(char *keywd, struct afm_keyword *wordlist,int defval);
+static int lookup_afmkey(char *keywd, const struct afm_keyword *wordlist,int defval);
 static void suck_keywd(char **ppt, char *keywd);
 static void suck_string_keywd(char **ppt, char *keywd);
 static int suck_int_keywd(char **ppt);
@@ -88,14 +82,14 @@ static double suck_num_keywd(char **ppt);
 static boolean suck_bool_keywd(char **ppt);
 static void suck_char_metrics(char **ppt, struct font_afm *res, char *keywd);
 static void suck_composites(char **ppt, struct font_afm *res, char *keywd);
-static boolean ReadAFMFile(FILE *infl,char *nameexpected,struct font_afm *res);
-static int printp_GetPSHashKey(char *name);
+static boolean ReadAFMFile(FILE *infl,const char *nameexpected,struct font_afm *res);
+static int printp_GetPSHashKey(const char *name);
 
 static afm_font_hashtable *printp_CreatePSHashTable();
 static void printp_DestroyPSHashTable(afm_font_hashtable *tab, 
 		boolean freedata);
-static void *printp_LookUpPSHashTable(afm_font_hashtable *tab, char *name);
-static boolean printp_InsertInPSHashTable(afm_font_hashtable *tab, char *name, 
+static void *printp_LookUpPSHashTable(afm_font_hashtable *tab, const char *name);
+static boolean printp_InsertInPSHashTable(afm_font_hashtable *tab, const char *name, 
 		void *dat, int *entryindex);
 static boolean printp_IsEmptyPSHashTable(afm_font_hashtable *tab);
 static void dumpregfont_splot(char *nam, void *dat, void *rock);
@@ -202,7 +196,7 @@ static short SymbolAndy_map[256] = {
 #define afmkey_Characters	22
 #define afmkey_FontBBox		23
 
-static struct afm_keyword afm_keywords[] = {
+static const struct afm_keyword afm_keywords[] = {
     {"Ascender", afmkey_Ascender},
     {"CapHeight", afmkey_CapHeight},
     {"Characters", afmkey_Characters},
@@ -236,7 +230,7 @@ static struct afm_keyword afm_keywords[] = {
 /* This table maps character names to AGP encoded values.
  For values below 256, the character is direct; the AGP value can be dumped directly to a PS file.
  For values 256 and up, the flag print_SymbolChar indicates that the glyph must be pulled from the Symbol font; otherwise, the character is a composite. */
-static struct afm_keyword encoded_names[] = {
+static const struct afm_keyword encoded_names[] = {
     {"space",		32},
     {"exclam",		33},
     {"quotedbl",	34},
@@ -454,7 +448,7 @@ static struct afm_keyword encoded_names[] = {
     {NULL,		0}
 };
 
-static struct afm_font_symbolchar symbolcharlist[] = {
+static const struct afm_font_symbolchar symbolcharlist[] = {
     {312, 211},
     {313, 216},
     {314, 45},
@@ -469,10 +463,10 @@ static struct afm_font_symbolchar symbolcharlist[] = {
 
 
 struct pagesize {
-    char *name; /* in lower case */
+    const char *name; /* in lower case */
     long width, height; /* in PS units */
 };
-static struct pagesize pagesizelist[] = {
+static const struct pagesize pagesizelist[] = {
     {"letter", 612, 792},
     {"a4", 595, 842},
     {"legal", 612, 1008},
@@ -491,9 +485,9 @@ static struct pagesize pagesizelist[] = {
 
 
 
-static int lookup_afmkey(char *keywd, struct afm_keyword *wordlist, 
+static int lookup_afmkey(char *keywd, const struct afm_keyword *wordlist, 
 		int defval) {
-    struct afm_keyword *pt;
+    const struct afm_keyword *pt;
 
     for (pt = wordlist; pt->name; pt++) {
 	if (!strcmp(keywd, pt->name))
@@ -754,7 +748,7 @@ static void suck_composites(char **ppt, struct font_afm *res, char *keywd) {
 	0-direction metric information (horizontal) 
 	`res' is an allocated but uninitialized font_afm 
 */
-static boolean ReadAFMFile(FILE *infl, char *nameexpected, 
+static boolean ReadAFMFile(FILE *infl, const char *nameexpected,
 		struct font_afm *res) {
     char buf[260]; /* AFM file lines are < 256 chars */
     char keywd[260];
@@ -899,7 +893,7 @@ static boolean ReadAFMFile(FILE *infl, char *nameexpected,
 		}
 		/* now we add the Symbol-font substitutions. This can be done in any font, because only screen fonts that really want symbol substitutions will generate these AGP values. */
 		for (ix=0; encoded_names[ix].name; ix++) {
-		    struct afm_font_symbolchar *tmp;
+		    const struct afm_font_symbolchar *tmp;
 		    int aseval;
 		    aseval = (encoded_names[ix].val);
 		    if (aseval & print_SymbolChar) {
@@ -959,7 +953,7 @@ void printp_init() {
     AFMCache = (afm_font_hashtable *)printp_CreatePSHashTable();
 }
 
-static int printp_GetPSHashKey(char  *name) {
+static int printp_GetPSHashKey(const char  *name) {
     unsigned int res = 0;
     int mul = 3;
     while (*name) {
@@ -1010,7 +1004,7 @@ printp_DestroyPSHashTable(afm_font_hashtable  *tab, boolean  freedata) {
 }
 
 	static void *
-printp_LookUpPSHashTable(afm_font_hashtable  *tab, char  *name) {
+printp_LookUpPSHashTable(afm_font_hashtable  *tab, const char  *name) {
     int buk = printp_GetPSHashKey(name);
     struct afm_font_hashnode *tmp = tab->tab[buk];
 
@@ -1024,7 +1018,7 @@ printp_LookUpPSHashTable(afm_font_hashtable  *tab, char  *name) {
 
 /* returns TRUE if inserted, FALSE if already there. */
 	static boolean 
-printp_InsertInPSHashTable(afm_font_hashtable *tab, char *name, 
+printp_InsertInPSHashTable(afm_font_hashtable *tab, const char *name,
 		void *dat, int *entryindex) {
     int buk = printp_GetPSHashKey(name);
     struct afm_font_hashnode *res;
@@ -1098,7 +1092,7 @@ static void dumpreghead_splot(char  *nam, void  *dat, void *rock) {
 static void parse_papersize(print *self, char *size) {
     char buf[64];
     char *cx;
-    struct pagesize *sptr;
+    const struct pagesize *sptr;
     int res;
     double fwid, fhgt, convert;
 
@@ -1292,24 +1286,24 @@ print::WritePostScript(char *fnmarg, char *titlearg) {
 }
 
 struct ps_fontfamily_lookup {
-    char *xname;
-    char *psname;
-    char **facesuffix; /* pointer to array[4] of char *  */
+    const char *xname;
+    const char *psname;
+    const char * const *facesuffix; /* pointer to array[4] of char *  */
     int encoding;
 };
 
-static char *facesuffix_Roman[4] = {"-Roman", "-Italic", "-Bold", "-BoldItalic"};
-static char *facesuffix_None[4] = {"", "", "", ""};
-static char *facesuffix_BoldOblique[4] = {"", "-Oblique", "-Bold", "-BoldOblique"};
-static char *facesuffix_BookOblique[4] = {"-Book", "-BookOblique", "-Demi", "-DemiOblique"};
-static char *facesuffix_LightItalic[4] = {"-Light", "-LightItalic", "-Demi", "-DemiItalic"};
+static const char * const facesuffix_Roman[4] = {"-Roman", "-Italic", "-Bold", "-BoldItalic"};
+static const char * const facesuffix_None[4] = {"", "", "", ""};
+static const char * const facesuffix_BoldOblique[4] = {"", "-Oblique", "-Bold", "-BoldOblique"};
+static const char * const facesuffix_BookOblique[4] = {"-Book", "-BookOblique", "-Demi", "-DemiOblique"};
+static const char * const facesuffix_LightItalic[4] = {"-Light", "-LightItalic", "-Demi", "-DemiItalic"};
 
 /*encoding means:
  1: ISO8859-Latin-1
  2: Adobe Symbol font encoding
  3: SymbolA font encoding
  */
-static struct ps_fontfamily_lookup fontfamilylist[] = {
+static const struct ps_fontfamily_lookup fontfamilylist[] = {
     {"andy", "Times", facesuffix_Roman, 1},
     {"times", "Times", facesuffix_Roman, 1},
     {"andysans", "Helvetica", facesuffix_BoldOblique, 1},
@@ -1327,12 +1321,12 @@ static struct ps_fontfamily_lookup fontfamilylist[] = {
     {NULL, "Courier", facesuffix_BoldOblique, 1} /* the default */
 };
 
-boolean print::LookUpPSFont(char  *result, short  **encoding, class fontdesc  *fd, char  *family, long  size, long  style)
+boolean print::LookUpPSFont(char  *result, short  **encoding, class fontdesc  *fd, const char  *family, long  size, long  style)
 {
     char buf[256];
     char cx;
     int ix, faceval;
-    struct ps_fontfamily_lookup *tmp;
+    const struct ps_fontfamily_lookup *tmp;
     boolean resval;
 
     print_EnsureClassInitialized();
@@ -1393,7 +1387,7 @@ boolean print::LookUpPSFont(char  *result, short  **encoding, class fontdesc  *f
 }
 
 /* if maxlen < 0, it is ignored */
-void print::OutputPSString(FILE *outfile, char *str, int maxlen)
+void print::OutputPSString(FILE *outfile, const char *str, int maxlen)
 {
     boolean ignoremax;
     int ch;
@@ -1559,7 +1553,7 @@ void print::GeneratePSWord(FILE  *outfile, char  *buf, int  len, double  xpos, s
     }
 }
 
-int print::PSRegisterFont(char  *fontname)
+int print::PSRegisterFont(const char  *fontname)
 {
     int eix;
     boolean res;
@@ -1581,7 +1575,7 @@ int print::PSRegisterFont(char  *fontname)
     return eix;
 }
 
-void print::PSRegisterDef(char  *procname, char  *defstring)
+void print::PSRegisterDef(const char  *procname, const char  *defstring)
 {
     char *tmp;
 
@@ -1595,7 +1589,7 @@ void print::PSRegisterDef(char  *procname, char  *defstring)
 		procname, tmp, NULL);
 }
 
-void print::PSRegisterHeader(char *headname, 
+void print::PSRegisterHeader(const char *headname, 
 		print_header_fptr headproc, const void *rock) {
     struct genheader *tmp;
 
@@ -1654,7 +1648,7 @@ boolean print::PSNewPage(int  pagenum) {
 
 #define MAXLEN (14)
 /* copied from afm/afmmangle.c */
-static char *SquishAFMFileName(char *orig)
+static const char *SquishAFMFileName(const char *orig)
 {
     static char result[MAXLEN+1];
     int total[MAXLEN];
@@ -1696,7 +1690,7 @@ static char *SquishAFMFileName(char *orig)
 }
 
 
-struct font_afm *print::GetPSFontAFM(char  *fontname)
+struct font_afm *print::GetPSFontAFM(const char  *fontname)
 {
     const char *tpath;
     char afmname[1024];

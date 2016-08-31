@@ -25,14 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/mmtext.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
 /* ********************************************************************** *\
  *         Copyright AT&T Bell Laboratories - All Rights Reserved         *
  *        For full copyright information see:'andrew/config/COPYRITE.att' *
@@ -42,6 +34,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 
+#include <andrewos.h>
 ATK_IMPL("mmtext.H")
 #include <buffer.H>
 #include <environ.H>
@@ -56,9 +49,6 @@ ATK_IMPL("mmtext.H")
 
 
 ATKdefineRegistry(mmtext, rofftext, NULL);
-#ifndef NORCSID
-#endif
-
 
 mmtext::mmtext()
 {

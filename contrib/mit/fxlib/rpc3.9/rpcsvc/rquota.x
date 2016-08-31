@@ -1,6 +1,3 @@
-/* @(#)rquota.x	1.2 87/11/12 3.9 RPCSRC */
-/* @(#)rquota.x 1.2 87/09/20 Copyr 1987 Sun Micro */
-
 /*
  * Remote quota protocol
  * Requires unix authentication

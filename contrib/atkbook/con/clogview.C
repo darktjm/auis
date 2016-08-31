@@ -1,5 +1,3 @@
-static char *clogview_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/atkbook/con/RCS/clogview.C,v 1.3 1994/08/11 03:01:14 rr2b Stab74 $";
-
 /* **************************************************** *\
 Copyright 1989 Nathaniel S. Borenstein
 Permission to use, copy, modify, and distribute this software and its

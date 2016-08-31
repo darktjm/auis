@@ -25,22 +25,13 @@
  *  $
 */
 
-#include <util.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/lcappend.c,v 2.6 1992/12/15 21:10:10 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
   lcappend.c
 
   LCappend(s1, s2): append a lower-alpha-case copy of s2 to s1.
       */
 
+#include <util.h>
 #include <ctype.h>
 
 void LCappend(char *s1, const char *s2)

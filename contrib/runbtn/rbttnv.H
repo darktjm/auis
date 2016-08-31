@@ -24,7 +24,7 @@ class runbuttonview : public sbuttonv {
     boolean Touch(int ind, enum view_MouseAction action);
     void ReceiveInputFocus();
     void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
-    void *GetPSPrintInterface(char *printtype);
+    void *GetPSPrintInterface(const char *printtype);
 
     // This returns TRUE if rbv is still valid.  It is used by the dataobject
     // to report info when a command is finished executing (the view may be gone).

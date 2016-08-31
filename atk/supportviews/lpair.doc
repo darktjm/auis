@@ -114,7 +114,7 @@ long \paramname{x});}
 *\paramname{lpair}, int \paramname{i});} 
 
 \fixedtext{void \bold{lpair_}SetNth }\fixedindent{(struct lpair 
-*\paramname{lpair}, int \paramname{ai}, register struct view *\paramname{x});} 
+*\paramname{lpair}, int \paramname{ai}, struct view *\paramname{x});} 
 
 
 
@@ -273,7 +273,7 @@ split by rectangle percentage} \indexi{ \italic{lpair_VSplit}}
 
 \example{lpair_VSplit (lp, l1, l2, pct, movable)
 
-register struct lpair *lp;
+struct lpair *lp;
 
 struct view *l1, *l2;
 
@@ -371,7 +371,7 @@ struct view *l1, *l2;
 
 int pct;
 
-register struct lpair *lp;
+struct lpair *lp;
 
 int movable;} 
 
@@ -426,7 +426,7 @@ be dragged or not.
 
 \example{lpair_GetNth (l, ai)
 
-register struct lpair *l;
+struct lpair *l;
 
 int ai;} 
 
@@ -453,9 +453,9 @@ or right).
 
 \example{lpair_SetNth (l, ai, x)
 
-register struct lpair *l;
+struct lpair *l;
 
-register struct view *x;
+struct view *x;
 
 int ai;} 
 

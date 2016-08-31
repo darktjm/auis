@@ -25,13 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/tree/RCS/tree.C,v 1.5 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Tree Data-Class
@@ -68,6 +61,7 @@ END-SPECIFICATION  ************************************************************/
 
 
 
+#include <andrewos.h>
 ATK_IMPL("tree.H")
 #include <tree.H>
 #include <ctype.h>
@@ -94,18 +88,16 @@ static char tree_debug = 0;
 
 
 ATKdefineRegistry(tree, apt, NULL);
-#ifndef NORCSID
-#endif
-static tree_type_node Build_Node( register class tree	      *self, register char	    	      *name, register long		       datum );
-static char * Ancestry( register class tree	      *self, register tree_type_node      node, register char		      *separator , register char		      *string );
-void tree__SetNodeModified( register class tree 	      *self, register tree_type_node      node, register char		       state );
-boolean tree__NodeModified( register class tree	      *self, register tree_type_node      node );
+static tree_type_node Build_Node( class tree	      *self, char	    	      *name, long		       datum );
+static char * Ancestry( class tree	      *self, tree_type_node      node, const char		      *separator , char		      *string );
+void tree__SetNodeModified( class tree 	      *self, tree_type_node      node, char		       state );
+boolean tree__NodeModified( class tree	      *self, tree_type_node      node );
 
 
 class tree *
-tree::Create( tree_Specification	         *specification, register class dataobject     *anchor )
+tree::Create( tree_Specification	         *specification, class dataobject     *anchor )
         {
-  register class tree		*self;
+  class tree		*self;
 
   IN(tree_Create);
   self = new tree;
@@ -145,10 +137,10 @@ tree::~tree( )
   }
 
 long
-tree::SetTreeAttribute( register long		       attribute , register long		       value )
+tree::SetTreeAttribute( long		       attribute , long		       value )
       {
     class tree *self=this;
-  register long		      status = ok;
+  long		      status = ok;
 
   IN(tree_SetTreeAttribute);
   switch ( attribute )
@@ -165,10 +157,10 @@ tree::SetTreeAttribute( register long		       attribute , register long		       
   }
 
 long
-tree::TreeAttribute( register long		       attribute )
+tree::TreeAttribute( long		       attribute )
       {
     class tree *self=this;
-  register long		      value = 0;
+  long		      value = 0;
 
   IN(tree_TreeAttribute);
   switch ( attribute )
@@ -186,9 +178,9 @@ tree::TreeAttribute( register long		       attribute )
 
 static
 tree_type_node
-Build_Node( register class tree	      *self, register char	    	      *name, register long		       datum )
+Build_Node( class tree	      *self, const char	    	      *name, long		       datum )
         {
-  register struct tree_node  *node;
+  struct tree_node  *node;
 
   IN(Build_Node);
   DEBUGst(Name,name);
@@ -202,10 +194,10 @@ Build_Node( register class tree	      *self, register char	    	      *name, reg
   }
 
 tree_type_node
-tree::CreateRootNode( register char	    	      *name, register long		       datum )
+tree::CreateRootNode( const char	    	      *name, long		       datum )
         {
     class tree *self=this;
-  register tree_type_node     node = NULL;
+  tree_type_node     node = NULL;
 
   IN(tree_CreateRootNode);
   if ( RootNode == NULL  &&  (node = Build_Node( this, name, datum )) )
@@ -217,10 +209,10 @@ tree::CreateRootNode( register char	    	      *name, register long		       datu
   }
 
 tree_type_node
-tree::CreateParentNode( register char	    	      *name, register long		       datum, register tree_type_node      child )
+tree::CreateParentNode( const char	    	      *name, long		       datum, tree_type_node      child )
 {
     class tree *self=this;
-  register tree_type_node     node = NULL;
+  tree_type_node     node = NULL;
 
   IN(tree_CreateParentNode);
 /*===*/
@@ -229,10 +221,10 @@ tree::CreateParentNode( register char	    	      *name, register long		       da
   }
 
 tree_type_node
-tree::CreateChildNode( register char	    	      *name, register long		       datum, register tree_type_node      parent )
+tree::CreateChildNode( const char	    	      *name, long		       datum, tree_type_node      parent )
 {
     class tree *self=this;
-  register tree_type_node     node = NULL,  prior = NULL;
+  tree_type_node     node = NULL,  prior = NULL;
 
   IN(tree_CreateChildNode);
   if ( parent  &&  (node = Build_Node( this, name, datum )) )
@@ -255,10 +247,10 @@ tree::CreateChildNode( register char	    	      *name, register long		       dat
   }
 
 tree_type_node
-tree::CreateRightNode( register char	    	      *name, register long		       datum, register tree_type_node      left )
+tree::CreateRightNode( const char	    	      *name, long		       datum, tree_type_node      left )
 {
     class tree *self=this;
-  register tree_type_node     node = NULL;
+  tree_type_node     node = NULL;
 
   IN(tree_CreateRightNode);
   if ( left  &&  (node = Build_Node( this, name, datum )) )
@@ -275,10 +267,10 @@ tree::CreateRightNode( register char	    	      *name, register long		       dat
   }
 
 tree_type_node
-tree::CreateLeftNode( register char	    	      *name, register long		       datum, register tree_type_node      right )
+tree::CreateLeftNode( const char	    	      *name, long		       datum, tree_type_node      right )
 {
     class tree *self=this;
-  register tree_type_node     node = NULL;
+  tree_type_node     node = NULL;
 
   IN(tree_CreateLeftNode);
   if ( right  &&  (node = Build_Node( this, name, datum )) )
@@ -301,10 +293,10 @@ void tree::DestroyDatum( void (*FreeNodeDatum)(tree_type_node node, void *user),
 }
 
 void
-tree::DestroyNode( register tree_type_node      node )
+tree::DestroyNode( tree_type_node      node )
 {
     class tree *self=this;
-  register tree_type_node     child, peer;
+  tree_type_node     child, peer;
 
   IN(tree_DestroyNode);
   if ( node  ||  (node = RootNode) )
@@ -342,10 +334,10 @@ tree::DestroyNode( register tree_type_node      node )
   }
 
 void
-tree::DestroyNodeChildren( register tree_type_node      node )
+tree::DestroyNodeChildren( tree_type_node      node )
 {
     class tree *self=this;
-  register tree_type_node     child, peer;
+  tree_type_node     child, peer;
 
   IN(tree_DestroyNodeChildren);
   if ( node  ||  (node = RootNode) )
@@ -364,7 +356,7 @@ tree::DestroyNodeChildren( register tree_type_node      node )
   }
 
 tree_type_node
-tree::HookNode( register tree_type_node      node , register tree_type_node      parent , register tree_type_node      left , register tree_type_node      right )
+tree::HookNode( tree_type_node      node , tree_type_node      parent , tree_type_node      left , tree_type_node      right )
 {
     class tree *self=this;
   IN(tree_HookNode);
@@ -377,7 +369,7 @@ tree::HookNode( register tree_type_node      node , register tree_type_node     
   }
 
 tree_type_node
-tree::UnHookNode( register tree_type_node      node )
+tree::UnHookNode( tree_type_node      node )
 {
     class tree *self=this;
   IN(tree_UnhookNode);
@@ -390,7 +382,7 @@ tree::UnHookNode( register tree_type_node      node )
   }
 
 tree_type_node
-tree::MoveNode( register tree_type_node      node , register tree_type_node      parent , register tree_type_node      left , register tree_type_node      right )
+tree::MoveNode( tree_type_node      node , tree_type_node      parent , tree_type_node      left , tree_type_node      right )
 {
     class tree *self=this;
   IN(tree_MoveNode);
@@ -403,7 +395,7 @@ tree::MoveNode( register tree_type_node      node , register tree_type_node     
   }
 
 tree_type_node
-tree::DuplicateNode( register tree_type_node      node , register tree_type_node      parent , register tree_type_node      left , register tree_type_node      right )
+tree::DuplicateNode( tree_type_node      node , tree_type_node      parent , tree_type_node      left , tree_type_node      right )
 {
     class tree *self=this;
   IN(tree_DuplicateNode);
@@ -416,11 +408,11 @@ tree::DuplicateNode( register tree_type_node      node , register tree_type_node
   }
 
 tree_type_node
-tree::NodeOfName( register char		      *name, register tree_type_node      node )
+tree::NodeOfName( const char		      *name, tree_type_node      node )
 {
     class tree *self=this;
-  register tree_type_node     candidate = NULL;
-  register long		      level;
+  tree_type_node     candidate = NULL;
+  long		      level;
 
   IN(tree_NodeOfName);
   if ( node  ||  (node = RootNode) )
@@ -441,11 +433,11 @@ tree::NodeOfName( register char		      *name, register tree_type_node      node 
   }
 
 tree_type_node
-tree::NodeOfDatum( register long		       datum, register tree_type_node      node )
+tree::NodeOfDatum( long		       datum, tree_type_node      node )
 {
     class tree *self=this;
-  register tree_type_node     candidate = NULL;
-  register long		      level;
+  tree_type_node     candidate = NULL;
+  long		      level;
 
   IN(tree_NodeOfDatum);
   if ( node  ||  (node = RootNode) )
@@ -466,11 +458,11 @@ tree::NodeOfDatum( register long		       datum, register tree_type_node      nod
   }
 
 tree_type_node *
-tree::NodesOfName( register char		      *name, register tree_type_node      node )
+tree::NodesOfName( const char		      *name, tree_type_node      node )
 {
     class tree *self=this;
-  register tree_type_node    *candidates = NULL;
-  register long		      level, count = 0;
+  tree_type_node    *candidates = NULL;
+  long		      level, count = 0;
 
   IN(tree_NodesOfName);
   if ( node  ||  (node = RootNode) )
@@ -497,11 +489,11 @@ tree::NodesOfName( register char		      *name, register tree_type_node      node
   }
 
 tree_type_node *
-tree::NodesOfDatum( register long		       datum, register tree_type_node      node )
+tree::NodesOfDatum( long		       datum, tree_type_node      node )
 {
     class tree *self=this;
-  register tree_type_node    *candidates = NULL;
-  register long		      level, count = 0;
+  tree_type_node    *candidates = NULL;
+  long		      level, count = 0;
 
   IN(tree_NodesOfDatum);
   if ( node  ||  (node = RootNode) )
@@ -528,10 +520,10 @@ tree::NodesOfDatum( register long		       datum, register tree_type_node      no
   }
 
 long
-tree::TreeWidth( register tree_type_node      node)
+tree::TreeWidth( tree_type_node      node)
 {
     class tree *self=this;
-  register long		      width = 0;
+  long		      width = 0;
 
   IN(tree_TreeWidth);
 /*===*/
@@ -540,10 +532,10 @@ tree::TreeWidth( register tree_type_node      node)
   }
 
 long
-tree::TreeHeight( register tree_type_node      node)
+tree::TreeHeight( tree_type_node      node)
 {
     class tree *self=this;
-  register long		      height = 0, level;
+  long		      height = 0, level;
 
   IN(tree_TreeHeight);
   if ( node  ||  (node = RootNode) )
@@ -576,11 +568,11 @@ tree::NodeLevel(tree_type_node      node )
   }
 
 long
-tree::NodePosition( register tree_type_node      node )
+tree::NodePosition( tree_type_node      node )
 {
     class tree *self=this;
-  register long		      position = 0;
-  register tree_type_node     peer = node;
+  long		      position = 0;
+  tree_type_node     peer = node;
 
   IN(tree_NodePosition);
   if ( node  ||  (node = peer = RootNode) )
@@ -595,13 +587,13 @@ tree::NodePosition( register tree_type_node      node )
   }
 
 char *
-tree::NodeIndex( register tree_type_node      node )
+tree::NodeIndex( tree_type_node      node )
 {
     class tree *self=this;
-  register tree_type_node     parent = node;
+  tree_type_node     parent = node;
   static char		      string[1024];
   char			      temp[1024];
-  register long		      length;
+  long		      length;
 
   IN(tree_NodeIndex);
   *string = 0;
@@ -629,7 +621,7 @@ tree::NodeIndex( register tree_type_node      node )
   }
 
 static char *
-Ancestry( register class tree	      *self, register tree_type_node      node, register char		      *separator , register char		      *string )
+Ancestry( class tree	      *self, tree_type_node      node, const char		      *separator , char		      *string )
         {
   IN(Ancestry);
   if ( ParentNode(node) )
@@ -644,10 +636,10 @@ Ancestry( register class tree	      *self, register tree_type_node      node, re
   }
 
 char *
-tree::NodeAncestry( register tree_type_node      node, register char		      *separator )
+tree::NodeAncestry( tree_type_node      node, const char		      *separator )
 {
     class tree *self=this;
-  register char		     *ancestry = NULL;
+  char		     *ancestry = NULL;
 
   IN(tree_NodeAncestry);
   if ( node  &&  ParentNode(node)  &&
@@ -659,10 +651,10 @@ tree::NodeAncestry( register tree_type_node      node, register char		      *sep
   }
 
 boolean
-tree::NodeAncestor( register tree_type_node      candidate , register tree_type_node      node )
+tree::NodeAncestor( tree_type_node      candidate , tree_type_node      node )
 {
     class tree *self=this;
-  register boolean	      ancestor = false;
+  boolean	      ancestor = false;
 
   IN(tree_NodeAncestor);
   if ( candidate  &&  node )
@@ -678,10 +670,10 @@ tree::NodeAncestor( register tree_type_node      candidate , register tree_type_
   }
 
 long
-tree::Apply( register tree_type_node      node, tree_applyfptr proc, register char		      *anchor, register char		      *datum )
+tree::Apply( tree_type_node      node, tree_applyfptr proc, char		      *anchor, char		      *datum )
 {
     class tree *self=this;
-  register long		      level, result = 0;
+  long		      level, result = 0;
 
   IN(tree_Apply);
   if ( node  ||  (node = RootNode) )
@@ -721,10 +713,10 @@ tree::NextNode(tree_type_node      node )
   }
 
 tree_type_node
-tree::PriorNode( register tree_type_node      node )
+tree::PriorNode( tree_type_node      node )
 {
     class tree *self=this;
-  register tree_type_node     prior = NULL;
+  tree_type_node     prior = NULL;
 
   IN(tree_PriorNode);
 /*===*/
@@ -733,7 +725,7 @@ tree::PriorNode( register tree_type_node      node )
   }
 
 void
-tree__SetNodeModified( register class tree 	      *self, register tree_type_node      node, register char		       state )
+tree__SetNodeModified( class tree 	      *self, tree_type_node      node, char		       state )
         {
   IN(tree_SetNodeModified);
   if ( node  ||  (node = RootNode) )
@@ -742,7 +734,7 @@ tree__SetNodeModified( register class tree 	      *self, register tree_type_node
   }
 
 boolean
-tree__NodeModified( register class tree	      *self, register tree_type_node      node )
+tree__NodeModified( class tree	      *self, tree_type_node      node )
       {
   IN(tree_NodeModified);
   OUT(tree_NodeModified);
@@ -750,7 +742,7 @@ tree__NodeModified( register class tree	      *self, register tree_type_node    
   }
 
 void
-tree::SetTreeModified( register boolean		       state )
+tree::SetTreeModified( boolean		       state )
 {
     class tree *self=this;
   IN(tree_SetTreeModified);
@@ -768,10 +760,10 @@ tree::TreeModified( )
   }
 
 boolean
-tree::SetNodeName( register tree_type_node        node, register char		        *name )
+tree::SetNodeName( tree_type_node        node, const char		        *name )
 {
     class tree *self=this;
-  register long		        status = ok;
+  long		        status = ok;
 
   IN(tree_SetNodeName);
   if ( node )
@@ -790,7 +782,7 @@ tree::SetNodeName( register tree_type_node        node, register char		        *
   }
 
 boolean
-tree::SetNodeCaption( register tree_type_node          node, register char			  *caption )
+tree::SetNodeCaption( tree_type_node          node, const char			  *caption )
 {
     class tree *self=this;
   IN(tree_SetNodeCaption);
@@ -809,7 +801,7 @@ tree::SetNodeCaption( register tree_type_node          node, register char			  *
   }
 
 boolean
-tree::SetNodeTitle( register tree_type_node         node, register char			 *title )
+tree::SetNodeTitle( tree_type_node         node, const char			 *title )
 {
     class tree *self=this;
   IN(tree_SetNodeTitle);
@@ -828,7 +820,7 @@ tree::SetNodeTitle( register tree_type_node         node, register char			 *titl
   }
 
 boolean
-tree::SetNodeDatum( register tree_type_node        node, register long		         datum )
+tree::SetNodeDatum( tree_type_node        node, long		         datum )
 {
     class tree *self=this;
   IN(tree_SetNodeDatum);
@@ -839,10 +831,10 @@ tree::SetNodeDatum( register tree_type_node        node, register long		        
   }
 
 long
-tree::NodeCount( register tree_type_node      node )
+tree::NodeCount( tree_type_node      node )
 {
     class tree *self=this;
-  register long		      count = 0, level;
+  long		      count = 0, level;
 
   IN(tree_NodeCount);
   if ( node  ||  (node = RootNode) )
@@ -859,11 +851,11 @@ tree::NodeCount( register tree_type_node      node )
   }
 
 long
-tree::PeerNodeCount( register tree_type_node      node )
+tree::PeerNodeCount( tree_type_node      node )
 {
     class tree *self=this;
-  register long		      count = 0;
-  register tree_type_node     peer;
+  long		      count = 0;
+  tree_type_node     peer;
 
   IN(tree_PeerNodeCount);
   if ( node  &&  ParentNode(node) )
@@ -878,10 +870,10 @@ tree::PeerNodeCount( register tree_type_node      node )
 
 
 long
-tree::ChildNodeCount( register tree_type_node      node )
+tree::ChildNodeCount( tree_type_node      node )
 {
     class tree *self=this;
-  register long		      count = 0;
+  long		      count = 0;
 
   IN(tree_ChildNodeCount);
   if ( node  &&  ChildNode(node) )
@@ -891,10 +883,10 @@ tree::ChildNodeCount( register tree_type_node      node )
   }
 
 long
-tree::LeafNodeCount( register tree_type_node      node )
+tree::LeafNodeCount( tree_type_node      node )
 {
     class tree *self=this;
-  register long		      count = 0, level;
+  long		      count = 0, level;
 
   IN(tree_LeafNodeCount);
   if ( node  ||  (node = RootNode) )
@@ -912,7 +904,7 @@ tree::LeafNodeCount( register tree_type_node      node )
   }
 
 void
-tree::SetDebug( register boolean		        state )
+tree::SetDebug( boolean		        state )
 {
     class tree *self=this;
   IN(tree_SetDebug);

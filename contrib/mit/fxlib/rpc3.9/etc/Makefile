@@ -1,6 +1,4 @@
 #
-# @(#)Makefile	1.5 87/11/20 3.9 RPCSRC
-#
 #   Files and programs for /etc.  rpclib must have already been installed.
 #
 DESTDIR=

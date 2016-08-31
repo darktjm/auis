@@ -25,16 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/raster.C,v 1.5 1996/10/18 19:43:38 wjh Exp $";
-#endif
-
-
- 
-
 /* raster.c 
 
 	raster Data-object
@@ -49,6 +39,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #define MAXFILELINE 255
 #define BUFBYTES	600	/* enough for 4792 bits */
 
+#include <andrewos.h>
 ATK_IMPL("raster.H")
 #include <stdio.h>
 #include <sys/param.h> /* Defines MAXPATHLEN among other things */
@@ -69,14 +60,12 @@ ATK_IMPL("raster.H")
 
 
 ATKdefineRegistry(raster, dataobject, NULL);
-#ifndef NORCSID
-#endif
 #ifdef NOTUSED
 static void WriteV1Stream(class raster  *ras, FILE  *file, long  id);
 #endif /* NOTUSED */
-static long ReadRasterFile(register class raster   *self, FILE   *file, long  id);
-static long ReadV1Raster(register class raster   *self, FILE   *file, long  id);
-static long ReadV1SubRaster(class raster  *self, FILE  *file, register struct rectangle  *r);
+static long ReadRasterFile(class raster   *self, FILE   *file, long  id);
+static long ReadV1Raster(class raster   *self, FILE   *file, long  id);
+static long ReadV1SubRaster(class raster  *self, FILE  *file, struct rectangle  *r);
 
 
 raster::raster()
@@ -95,14 +84,14 @@ raster::~raster()
     (this)->SetPix( NULL);
 }
 
-class raster * raster::Create(register long  width , register long  height)
+class raster * raster::Create(long  width , long  height)
 {
-    register class raster *self = new raster;
+    class raster *self = new raster;
     (self)->Resize( width, height);
     return self;
 }
 
-void raster::Resize(register long  width , register long  height)
+void raster::Resize(long  width , long  height)
 {
     class rasterimage *pix = (this)->GetPix();
     if (pix == NULL) 
@@ -182,7 +171,7 @@ void raster::SetPix(class rasterimage  *newpix)
 	static void
 WriteV1Stream(class raster  *ras, FILE  *file, long  id)
 			{
-	register long nbytestofile;
+	long nbytestofile;
 	short buf[400];
 	long x, y, w, h, yend;
 	class pixelimage *pix = (class pixelimage *)(ras)->GetPix();
@@ -219,7 +208,7 @@ WriteV1Stream(class raster  *ras, FILE  *file, long  id)
 	long
 raster::Write(FILE  *file, long  writeID, int  level)
 	 	 	 	 {
-	register class rasterimage *pix = (this)->GetPix();
+	class rasterimage *pix = (this)->GetPix();
 	long id = (this)->UniqueID();
 	if (pix == NULL) {
 		return 0;
@@ -245,7 +234,7 @@ raster::Write(FILE  *file, long  writeID, int  level)
 		}
 		else if ((pix)->GetFileName()) {
 			/* write a "file" line */
-			char *path = (pix)->GetFilePath();
+			const char *path = (pix)->GetFilePath();
 			if (path == NULL || *path == '\0')
 				path = ".";	/* must write something non-white */
 			fprintf(file, "%ld %ld %ld %ld\n",
@@ -259,9 +248,9 @@ raster::Write(FILE  *file, long  writeID, int  level)
 		else if (pix->refcnt == 1) {
 			/* write a "bits" version of the file, but only write the 
 				selected subraster */
-			register long nbytestofile = (width+7)>>3;
+			long nbytestofile = (width+7)>>3;
 			short buf[400];
-			register long yend = y + height;
+			long yend = y + height;
 
 			fprintf(file, "%d %d %ld %ld\n",
 				 0, 0, width, height);	/* subraster */
@@ -277,9 +266,9 @@ raster::Write(FILE  *file, long  writeID, int  level)
 		}
 		else {
 			/* write a "bits" version of the file */
-			register unsigned char *bits, *bitsend;
-			register long W = (pix)->GetRowWidth();
-			register long nbytestofile = ((pix)->GetWidth()+7)>>3;
+			unsigned char *bits, *bitsend;
+			long W = (pix)->GetRowWidth();
+			long nbytestofile = ((pix)->GetWidth()+7)>>3;
 
 			fprintf(file, "%ld %ld %ld %ld\n",
 				 x, y, width, height);	/* subraster */
@@ -306,13 +295,13 @@ raster::Write(FILE  *file, long  writeID, int  level)
 		Returns the objectid.
 */
 	long
-raster::WriteSubRaster(register FILE  *file, long  objectid, struct rectangle  *sub)
+raster::WriteSubRaster(FILE  *file, long  objectid, struct rectangle  *sub)
 				{
-	register class rasterimage *pix = (this)->GetPix();
+	class rasterimage *pix = (this)->GetPix();
 	const char *name = (this)->GetTypeName();
 	struct rectangle R;
 	long x, y, width, height;
-	register long r;		/* count rows while putting */
+	long r;		/* count rows while putting */
 	long nbytestofile;		/* bytes to output to for each row */
 	unsigned short rowbits[BUFBYTES/2];
 
@@ -341,9 +330,9 @@ raster::WriteSubRaster(register FILE  *file, long  objectid, struct rectangle  *
 		write a "share" record for the indicated 'subraster' of 'self'
 */
 	void
-raster::WriteShare(register FILE  *file, struct rectangle  *sub)
+raster::WriteShare(FILE  *file, struct rectangle  *sub)
 			{
-	register class rasterimage *pix = (this)->GetPix();
+	class rasterimage *pix = (this)->GetPix();
 	const char *name = (this)->GetTypeName();
 	struct rectangle R;
 	long x, y, width, height;
@@ -381,9 +370,9 @@ raster::WriteShare(register FILE  *file, struct rectangle  *sub)
 
 */
 	static long
-ReadRasterFile(register class raster   *self, FILE   *file, long  id)
+ReadRasterFile(class raster   *self, FILE   *file, long  id)
 			{
-	register class rasterimage *pix = (self)->GetPix();
+	class rasterimage *pix = (self)->GetPix();
 	long retval;
 
 	if (pix == NULL) 
@@ -438,15 +427,15 @@ ReadRasterFile(register class raster   *self, FILE   *file, long  id)
 	fromthe values in the record.
 */
 	static long
-ReadV1Raster(register class raster   *self, FILE   *file, long  id)
+ReadV1Raster(class raster   *self, FILE   *file, long  id)
 			{
-	register class rasterimage *pix = (self)->GetPix();
+	class rasterimage *pix = (self)->GetPix();
 	unsigned long options;
 	long depth, compression, expansion;
 	long xoffset, yoffset,  height, width;
-	register long row, W;
-	register unsigned char *byteaddr;
-	register long nbytesfromfile;
+	long row, W;
+	unsigned char *byteaddr;
+	long nbytesfromfile;
 	long retval = 0;
 
 	char s[MAXFILELINE + 2];
@@ -501,7 +490,7 @@ ReadV1Raster(register class raster   *self, FILE   *file, long  id)
 	It now just skips the image in the file 
 */
 	static long
-ReadV1SubRaster(class raster  *self, FILE  *file, register struct rectangle  *r)
+ReadV1SubRaster(class raster  *self, FILE  *file, struct rectangle  *r)
 			{
 	char s[MAXFILELINE + 2];
 	while (getc(file) != '\\') {}
@@ -523,13 +512,13 @@ ReadV1SubRaster(class raster  *self, FILE  *file, register struct rectangle  *r)
 	XXX should check for read errors
 */
 	long
-raster::Read(register FILE   *file, long   id			/* !0 if data stream, 0 if direct from file*/)
+raster::Read(FILE   *file, long   id			/* !0 if data stream, 0 if direct from file*/)
 			{
-	register class rasterimage *pix = (this)->GetPix();
+	class rasterimage *pix = (this)->GetPix();
 	long version, width, height;
-	register long row, W;
-	register unsigned char *byteaddr;
-	register int nbytesfromfile;
+	long row, W;
+	unsigned char *byteaddr;
+	int nbytesfromfile;
 	long options, xscale, yscale, xoffset, yoffset, subwidth, subheight;
 	char keyword[6];
 	long objectid;	/* id read for the incoming pixel image */
@@ -696,11 +685,11 @@ raster::Read(register FILE   *file, long   id			/* !0 if data stream, 0 if direc
 	long
 raster::ReadSubRaster(FILE  *file, struct rectangle  *r)
 			{
-	register class rasterimage *pix = (this)->GetPix();
+	class rasterimage *pix = (this)->GetPix();
 	long version, width, height;
-	register long nbytesfromfile;
+	long nbytesfromfile;
 	unsigned short buffer[BUFBYTES/2];
-	register long ylim;
+	long ylim;
 	long x, y, w, h;
 	long options, xscale, yscale, xoffset, yoffset, subwidth, subheight;
 	char rastertype [6];

@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/tpllist.C,v 3.6 1996/06/12 19:16:15 wjh Exp $";
-#endif
-
-
 #include <text.H>
 
 #include <environ.H>
@@ -55,14 +48,14 @@ struct templatelist *tlHead = NULL;
 
 static struct templatelist *FindTemplate(class stylesheet  *ssptr);
 static struct templatelist *text_AddTemplate(class stylesheet  *ssptr);
-static struct templatelist *text_FindTemplateByName(char  *templateName);
+static struct templatelist *text_FindTemplateByName(const char  *templateName);
 static void text_OverrideStyles(class stylesheet  *ssptr, class stylesheet  *templateptr);
 static void SetGlobalStyleInText(class text  *self);
 
 
 static struct templatelist *FindTemplate(class stylesheet  *ssptr)
     {
-    register struct templatelist *tPtr;
+    struct templatelist *tPtr;
     
     for (tPtr = tlHead; tPtr != NULL && tPtr->sSheet != ssptr; tPtr = tPtr->next)
         ;
@@ -82,9 +75,9 @@ static struct templatelist *text_AddTemplate(class stylesheet  *ssptr)
     return newTL;
 }
 
-static struct templatelist *text_FindTemplateByName(char  *templateName)
+static struct templatelist *text_FindTemplateByName(const char  *templateName)
     {
-    register struct templatelist *tPtr;
+    struct templatelist *tPtr;
     
     for (tPtr = tlHead; tPtr != NULL && strcmp(tPtr->sSheet->templateName, templateName) != 0; tPtr = tPtr->next)
         ;
@@ -93,9 +86,9 @@ static struct templatelist *text_FindTemplateByName(char  *templateName)
 
 static void text_OverrideStyles(class stylesheet  *ssptr, class stylesheet  *templateptr)
         {
-    register int i;
+    int i;
     boolean forcecopy=FALSE;
-    register class style **styles, *overridestyle;
+    class style **styles, *overridestyle;
     if(ssptr->si==templateptr->si) {
 	// The document is already using the same exact template.
 	return;
@@ -146,7 +139,7 @@ static void SetGlobalStyleInText(class text  *self)
 }
 
 	static FILE *
-TryPath(char *filename, char *path, char *tplnm, char *ext) {
+TryPath(char *filename, const char *path, const char *tplnm, const char *ext) {
 		// (filename must be a buffer of size MAXPATHLEN+1)
 	char rawname[MAXPATHLEN+1];
 	sprintf(rawname, "%s/%s%s", path, tplnm, ext);
@@ -156,7 +149,7 @@ TryPath(char *filename, char *path, char *tplnm, char *ext) {
 }
 
 /* This routine parses the contents of a template file */
-long text::ReadTemplate(char  *templateName, boolean  inserttemplatetext)
+long text::ReadTemplate(const char  *templateName, boolean  inserttemplatetext)
             {
     FILE *fileptr;
     int c, statecode, i;
@@ -250,8 +243,8 @@ long text::ReadTemplate(char  *templateName, boolean  inserttemplatetext)
 	tlPtr->hasText = ((this)->GetLength() != 0);
 	fclose(fileptr);
 	if (overrideTemplate)  {
-	    register long i;
-	    register class style **styles;
+	    long i;
+	    class style **styles;
 
 	    (this->styleSheet)->SetTemplateName( templateptr->templateName);
 	    text_OverrideStyles(templateptr, this->styleSheet);

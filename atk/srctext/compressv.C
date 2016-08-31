@@ -27,7 +27,6 @@ $Disclaimer:
 #include <andrewos.h>
 
 static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/compressv.C,v 2.0 1995/01/27 19:38:38 rr2b Stab74 $";
 
 #include <view.H>
 #include <rect.h>
@@ -83,7 +82,7 @@ char *compressv::BoxText()
     return boxstr;
 }
 
-void compressv::Print(FILE *f, char *process, char *final, int toplevel)
+void compressv::Print(FILE *f, const char *process, const char *final, int toplevel)
 {
     /* note: the placement of the troff font size changes, \s-2 and \s+2, is not as haphazard as they may seem. If the -2 size includes BOTH spaces, the left edge of the box gets disconnected. If the -2 size includes NEITHER space, the top and bottom edges extend too far left. */
     fprintf(f, "\\(br \\s-2%s \\s+2\\(br\\l'|0\\(rn'\\l'|0\\(ul'", BoxText());
@@ -231,7 +230,7 @@ void engulfBoxes(text *txt, long *ppos, long *plen)
 	++*plen;
 }
 
-boolean getLinesFromUser(textview *self, char *rString, char *prompt, long *pfirst, long *plast)
+boolean getLinesFromUser(textview *self, char *rString, const char *prompt, long *pfirst, long *plast)
 {
     text *txt=(text *)(self)->GetDataObject();
     char range[32];

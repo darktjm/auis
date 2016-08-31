@@ -1,5 +1,3 @@
-/* $Author: wjh $ */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -22,13 +20,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/eosfx.C,v 1.5 1996/06/11 01:26:13 wjh Exp $";
-#endif
-
-
- 
 /*
  * eosfx.c
  *
@@ -52,8 +43,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/ne
 
 
 ATKdefineRegistry(eosfx, ATK, NULL);
-#ifndef NORCSID
-#endif
 static char *save_string(char  *s);
 
 

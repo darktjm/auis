@@ -199,7 +199,7 @@ struct zip_color_values
 };
 
 typedef  struct zip_paths			 *zip_type_paths;
-typedef  char					 *zip_type_path;
+typedef  const char				 *zip_type_path;
 struct zip_paths
   {
   long						  zip_paths_count;

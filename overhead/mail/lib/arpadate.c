@@ -27,11 +27,6 @@
 
 #include <andrewos.h> /* sys/time.h */
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/arpadate.c,v 2.14 1992/12/15 21:03:27 rr2b Stab74 $";
-#endif
-
 /*
 		arpadate.c -- return current time in ARPAnet format
 */
@@ -40,8 +35,8 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 char *arpadate()
 {
     static char time_out[] = "Mon, 03 Feb 1986 10:54:23 +HHMM (MEZ AUSSS FMT 664)\n";
-    static char *days[] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
-    static char *months[] = {
+    static const char * const days[] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+    static const char * const months[] = {
 	"Jan", "Feb", "Mar", "Apr", "May", "Jun",
 	"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     };

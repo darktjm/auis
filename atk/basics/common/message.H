@@ -68,7 +68,7 @@ enum message_Preference {
  */
 #include <ATK.H>
 
-	typedef void (*message_workfptr)(long rock, enum message_HelpItem item, char *str, char *val);
+	typedef void (*message_workfptr)(long rock, enum message_HelpItem item, const char *str, const char *val);
         typedef enum message_CompletionCode (*message_completionfptr) (char *partial, long dummyData, char *buffer, int bufferSize);
         typedef void (*message_helpfptr)(char *partial,long myrock,message_workfptr HelpWork,long rock);
 

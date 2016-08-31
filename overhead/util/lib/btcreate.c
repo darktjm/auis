@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/btcreate.c,v 2.15 1993/07/02 14:32:37 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	btcreate.c
 	Library routines for creating new B-trees.

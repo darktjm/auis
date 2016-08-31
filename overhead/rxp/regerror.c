@@ -25,15 +25,9 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/rxp/RCS/regerror.c,v 2.9 1993/02/04 15:31:15 rr2b Stab74 $";
-#endif
-
 /* Modified 14-Nov-89 by bobg@andrew.cmu.edu */
 
+#include <andrewos.h>
 #include <stdio.h>
 
 static void (*errfn)() = ((void (*) ()) 0);

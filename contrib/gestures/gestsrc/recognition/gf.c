@@ -32,12 +32,6 @@ the full agreement.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/recognition/RCS/gf.c,v 1.4 1993/06/17 04:35:10 rr2b Stab74 $";
-#endif
-
-
 #include "stdio.h"
 #include "util.h"
 #include "bitvector.h"
@@ -52,7 +46,7 @@ int
 ClassEnter(name)
 char *name;
 {
-	register int i;
+	int i;
 	for(i = nclassnames - 1; i >= 0; i--)
 		if(STREQ(classname[i], name)) return i;
 	classname[nclassnames] = recog_scopy(name);
@@ -63,15 +57,15 @@ GestureFile
 ReadGestureFile(infilename)
 char *infilename;
 {
-	register GestureFile gf;
+	GestureFile gf;
 	struct gpoint p[MAXPOINTS];
 	char classname[100];
 	char examplename[100];
 	FILE * infile = fopen(infilename, "r");
-	register struct gesture *g = NULL;
+	struct gesture *g = NULL;
 	char line[100];
 	int path, x, y, t;
-	register int i;
+	int i;
 
 	gf = allocate(1, struct gesturefile);
 	gf->ngestures = 0;
@@ -122,11 +116,11 @@ char *infilename;
 void
 WriteGesture(outfile, g, classname)
 FILE *outfile;
-register Gesture g;
+Gesture g;
 char *classname;
 {
-	register Gpoint p;
-	register int i;
+	Gpoint p;
+	int i;
 
 	fprintf(outfile, "x %s %s\n", classname, g->examplename);
 	for(i = 0; i < g->npoints; i++) {

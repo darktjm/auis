@@ -23,11 +23,6 @@
 
 #include <andrewos.h>
 ATK_IMPL("web.H")
-
-#ifndef NORCSID
-static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/web.C,v 1.16 1996/11/16 22:13:30 robr Exp $";
-#endif
-
 #include <sys/time.h>
 #include <sys/stat.h>
 #include <sys/file.h>
@@ -152,7 +147,7 @@ mybuffer_ReadFile(class buffer  *self, char  *filename)  {
 	long objectID;
 	int returnCode = 0;
 	char realName[MAXPATHLEN];
-	char *objectName;
+	const char *objectName;
 	FILE *thisFile;
 	struct stat stbuf;
 	struct attributes *attributes;

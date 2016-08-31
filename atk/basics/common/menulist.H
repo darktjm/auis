@@ -64,8 +64,8 @@ public:
     
         virtual class menulist * DuplicateML(class view *view)  ;
         virtual void SetView(class view *view);
-        virtual void AddToML(char *menuString, struct proctable_Entry *menuProc, long functionData, long mask);
-        virtual void DeleteFromML(char *menustring);
+        virtual void AddToML(const char *menuString, struct proctable_Entry *menuProc, long functionData, long mask);
+        virtual void DeleteFromML(const char *menustring);
         virtual void ClearML();
         virtual boolean NextME(char **outString, long *outData, struct proctable_Entry **outProc)  ;
         virtual class menulist * NextBeforeMC()  ;

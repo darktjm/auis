@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/genid.c,v 2.21 1993/10/07 17:46:41 rr2b Stab74 $";
-#endif
-
 /*
 
 genid.c -- Generates world-unique identifiers, or some approximation that fits
@@ -50,6 +43,7 @@ Includes old routines from
 	negative numbers.
 */
 
+#include <andrewos.h> /* sys/time.h */
 #include <mailconf.h>
 #include <ctype.h>
 #include <netinet/in.h>	/* Get the definition for ntohl. */
@@ -88,9 +82,9 @@ char *convlongto64(num, pad)
 /* Note that the following routine throws away the first 4 of 36 bits */
 
 unsigned long conv64tolong(xnum)
-register char *xnum;
+char *xnum;
 {
-    register int digits;
+    int digits;
     unsigned long Answer = 0;
 
     digits = strlen(xnum);

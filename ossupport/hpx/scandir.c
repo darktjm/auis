@@ -39,16 +39,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ossupport/hpx/RCS/scandir.c,v 1.3 1992/12/15 21:16:51 rr2b Stab74 $";
-#endif
-
-
-#if defined(LIBC_SCCS) && !defined(lint)
-static char sccsid[] = "@(#)scandir.c	5.9 (Berkeley) 6/24/90";
-#endif /* LIBC_SCCS and not lint */
-
 /*
  * Scan the directory dirname calling select to make a list of selected
  * directory entries then sort using qsort and compare routine dcomp.
@@ -79,8 +69,8 @@ scandir(dirname, namelist, select, dcomp)
 	struct dirent ***namelist;
 	int (*select)(), (*dcomp)();
 {
-	register struct dirent *d, *p, **names;
-	register int nitems;
+	struct dirent *d, *p, **names;
+	int nitems;
 	struct stat stb;
 	long arraysz;
 	DIR *dirp;

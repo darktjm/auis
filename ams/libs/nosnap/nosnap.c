@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/nosnap/RCS/nosnap.c,v 2.11 1993/06/14 03:21:30 rr2b Stab74 $";
-#endif
-
 #include <stdio.h>
 #include <mserrno.h>
 #include <errprntf.h>

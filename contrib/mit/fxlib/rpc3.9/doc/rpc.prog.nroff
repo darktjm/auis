@@ -1270,7 +1270,7 @@ main(argc, argv)
      struct timeval pertry_timeout, total_timeout;
      struct sockaddr_in server_addr;
      int sock = RPC_ANYSOCK;
-     register CLIENT *client;
+     CLIENT *client;
      enum clnt_stat clnt_stat;
      unsigned long nusers;
 
@@ -1727,7 +1727,7 @@ main(argc, argv)
      struct timeval pertry_timeout, total_timeout;
      struct sockaddr_in server_addr;
      int sock = RPC_ANYSOCK;
-     register CLIENT *client;
+     CLIENT *client;
      enum clnt_stat clnt_stat;
      char buf[1000], *s = buf;
 
@@ -2339,7 +2339,7 @@ callrpctcp(host, prognum, procnum, versnum,
      int socket = RPC_ANYSOCK;
      enum clnt_stat clnt_stat;
      struct hostent *hp;
-     register CLIENT *client;
+     CLIENT *client;
      struct timeval total_timeout;
 
      if ((hp = gethostbyname(host)) == NULL) {
@@ -2442,7 +2442,7 @@ callrpctcp(host, prognum, procnum, versnum,
 
 main()
 {
-     register SVCXPRT *transp;
+     SVCXPRT *transp;
      int rcp_service(), xdr_rcp();
 
      if ((transp = svctcp_create(RPC_ANYSOCK,
@@ -2461,8 +2461,8 @@ main()
 }
 
 rcp_service(rqstp, transp)
-     register struct svc_req *rqstp;
-     register SVCXPRT *transp;
+     struct svc_req *rqstp;
+     SVCXPRT *transp;
 {
      switch (rqstp->rq_proc) {
      case NULLPROC:
@@ -2745,8 +2745,8 @@ main()
 }
 
 callback(rqstp, transp)
-     register struct svc_req *rqstp;
-     register SVCXPRT *transp;
+     struct svc_req *rqstp;
+     SVCXPRT *transp;
 {
      switch (rqstp->rq_proc) {
           case 0:

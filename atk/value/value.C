@@ -26,17 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/value.C,v 1.4 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
-
-
 ATK_IMPL("value.H")
 #include <value.H>
 #include <atom.H>
@@ -52,8 +41,6 @@ static class atom *rock1atom, *rock2atom, *stringatom, *stringarrayatom, *valuea
 /****************************************************************/
 
 ATKdefineRegistry(value, dataobject, value::InitializeClass);
-#ifndef NORCSID
-#endif
 static short FindObserverCallBack(class value  * self, ATK   *observer, value_fptr  callBack);
 static short FindObserver( class value  * self, ATK   *observer );
 static short FreeSlot( class value  * self );
@@ -233,13 +220,13 @@ void value::SetValueType(long  rock,int  type)
 	    
 	    break;
 	case  value_STRING:
-	    this->string = (char *) rock;
+	    this->string = (const char *) rock;
 	    
 	    (this)->Put(valueatom,stringatom,rock);
 	    
 	    break;
 	case  value_STRINGARRAY:
-	    this->stringarray = (char **) rock;
+	    this->stringarray = (const char * const *) rock;
 	    
 	    (this)->Put(valueatom,stringarrayatom,rock);
 	    
@@ -248,7 +235,7 @@ void value::SetValueType(long  rock,int  type)
     (this->updatecount)++;
     if(this->notify) (this)->NotifyObservers(value_NEWVALUE);
 }
-char *value::ViewName()
+const char *value::ViewName()
     {
     return "buttonV";
 }

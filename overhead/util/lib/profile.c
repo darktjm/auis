@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>		/* sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/profile.c,v 2.21 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
 #include <fdplumb.h>
 #include <stdio.h>
 #include <sys/stat.h>
@@ -236,7 +229,7 @@ int getprofileswitch (const char *var, int DefaultValue)
 	                    {"0", 0},
 	                    {0, 0}
     };
-    register struct keys   *p;
+    struct keys   *p;
     if (var && (val = getprofile (var))) {
 	for (p = keys; p -> name; p++)
 	    if (FOLDEDEQ(p->name, val))
@@ -247,9 +240,9 @@ int getprofileswitch (const char *var, int DefaultValue)
 
 int getprofileint (const char *var, int DefaultValue)
 {
-    register const char  *val;
-    register    int n = 0;
-    register    int neg = 0;
+    const char  *val;
+       int n = 0;
+       int neg = 0;
 
     if (var == 0 || (val = getprofile(var)) == 0)  {
 	return DefaultValue;

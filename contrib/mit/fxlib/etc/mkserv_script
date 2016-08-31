@@ -1,9 +1,5 @@
 #!/bin/csh -f
 #
-# $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/etc/RCS/mkserv_script,v $
-# $Author: wdc $
-# $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/etc/RCS/mkserv_script,v 1.1 1992/02/13 20:18:14 wdc Stab74 $
-#
 # Set up a machine as a file exchange server
 #
 set newserver = /afs/athena/astaff/project/eosdev/$hosttype/server/fxserver

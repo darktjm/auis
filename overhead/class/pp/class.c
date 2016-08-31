@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/class/pp/RCS/class.c,v 2.57 1994/06/09 18:01:54 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h> 
 #include <sys/param.h>
 

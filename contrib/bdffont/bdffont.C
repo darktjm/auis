@@ -22,11 +22,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/bdffont/RCS/bdffont.C,v 1.6 1996/08/27 22:20:51 robr Exp $";
-#endif
-
 /*
 	Copyright Carnegie Mellon University 1991, 1992 - All rights reserved
 	$Disclaimer: 
@@ -74,32 +69,32 @@ static unsigned char  bdflex_ComposeByte(char  c1 , char  c2);
 void bdffont_EnsureDefns(class bdffont  *self, long  num);
 static void parseerror(class parse  *p, int  s, char  *m);
 static void WriteCharacter(FILE  *file, struct bdffont_fontchar  *defn);
-static long bdffont_AppendProperty(char  **props, long  length, char  *p, long  psize, long  v);
+static long bdffont_AppendProperty(char  **props, long  length, const char  *p, long  psize, long  v);
 static long FilterPropertiesOut(class bdffont  *self, char  **props);
 static void RecomputeFontExtent(class bdffont  *self);
 static void RecomputeFontOrigin(class bdffont  *self);
 
 
-static char bdffont_FONT_VERSION[] = "2.1";
-static char bdffont_FONT_NAME[] = "NewFont";
-static char bdffont_COMMENT[] = "COMMENT Created with bdffont (Andrew User Interface System)\n";
-static char bdffont_FOUNDRY[] = "AUIS";
+static const char bdffont_FONT_VERSION[] = "2.1";
+static const char bdffont_FONT_NAME[] = "NewFont";
+static const char bdffont_COMMENT[] = "COMMENT Created with bdffont (Andrew User Interface System)\n";
+static const char bdffont_FOUNDRY[] = "AUIS";
 
-static char bdfprop_FOUNDRY[] = "FOUNDRY";		/* string */
-static char bdfprop_DEFAULTCHAR[] = "DEFAULT_CHAR";	/* non-neg int */
-static char bdfprop_DEFAULTWIDTH[] = "DEFAULT_WIDTH";	/* positive int */
-static char bdfprop_DEFAULTHEIGHT[] = "DEFAULT_HEIGHT";	/* positive int */
-static char bdfprop_DEFAULTX[] = "DEFAULT_X";		/* non-neg int */
-static char bdfprop_DEFAULTY[] = "DEFAULT_Y";		/* non-neg int */
-static char bdfprop_DEFAULTDX[] = "DEFAULT_DX";		/* non-neg int */
-static char bdfprop_DEFAULTDY[] = "DEFAULT_DY";		/* non-neg int */
-static char bdfprop_ASCENT[] = "FONT_ASCENT";		/* positive int */
-static char bdfprop_DESCENT[] = "FONT_DESCENT";		/* positive int */
-static char bdfprop_FAMILY[] = "FAMILY";		/* string */
-static char bdfprop_RESX[] = "RESOLUTION_X";		/* positive int */
-static char bdfprop_RESY[] = "RESOLUTION_Y";		/* positive int */
-static char bdfprop_WEIGHTNAME[] = "WEIGHT_NAME";	/* string */
-static char bdfprop_WEIGHT[] = "WEIGHT";		/* non-neg int */
+static const char bdfprop_FOUNDRY[] = "FOUNDRY";		/* string */
+static const char bdfprop_DEFAULTCHAR[] = "DEFAULT_CHAR";	/* non-neg int */
+static const char bdfprop_DEFAULTWIDTH[] = "DEFAULT_WIDTH";	/* positive int */
+static const char bdfprop_DEFAULTHEIGHT[] = "DEFAULT_HEIGHT";	/* positive int */
+static const char bdfprop_DEFAULTX[] = "DEFAULT_X";		/* non-neg int */
+static const char bdfprop_DEFAULTY[] = "DEFAULT_Y";		/* non-neg int */
+static const char bdfprop_DEFAULTDX[] = "DEFAULT_DX";		/* non-neg int */
+static const char bdfprop_DEFAULTDY[] = "DEFAULT_DY";		/* non-neg int */
+static const char bdfprop_ASCENT[] = "FONT_ASCENT";		/* positive int */
+static const char bdfprop_DESCENT[] = "FONT_DESCENT";		/* positive int */
+static const char bdfprop_FAMILY[] = "FAMILY";		/* string */
+static const char bdfprop_RESX[] = "RESOLUTION_X";		/* positive int */
+static const char bdfprop_RESY[] = "RESOLUTION_Y";		/* positive int */
+static const char bdfprop_WEIGHTNAME[] = "WEIGHT_NAME";	/* string */
+static const char bdfprop_WEIGHT[] = "WEIGHT";		/* non-neg int */
 
 
 	static unsigned char 
@@ -163,8 +158,8 @@ bdffont::bdffont()
 {
     int i;
 
-    this->version = bdffont_FONT_VERSION;
-    this->comments = bdffont_COMMENT;
+    this->version = (char *)bdffont_FONT_VERSION; /* never freed */
+    this->comments = (char *)bdffont_COMMENT; /* never freed */
     this->fontname = NULL;
     this->pointsize = 0;
     this->resx = 0;
@@ -231,7 +226,7 @@ class bdffont *bdffont::CreateNewFont(long  pts, long  resx, long  resy)
 
     self = new bdffont;
 
-    self->comments = bdffont_COMMENT;
+    self->comments = (char *)bdffont_COMMENT; /* never freed */
     self->pointsize = pts;
     self->resx = resx;
     self->resy = resy;
@@ -315,7 +310,7 @@ enum keyvals {
 };
 
 
-static char *keys[]= {
+static const char * const keys[]= {
     "FOUNDRY",
     "FAMILY",
     "WEIGHT",
@@ -357,7 +352,7 @@ static char *keys[]= {
 enum keyvals FindKey(const char *key)
 {
     int i=0;
-    char **p=keys;
+    const char * const *p=keys;
     while(*p) {
 	if(strcmp(key, *p)==0) return (enum keyvals)i;
 	i++;
@@ -433,7 +428,7 @@ static char *Tokenize(char **p) {
 
 #define ERROR(p,where) if(*p=='\0') { fprintf(stderr, "bdffont: Bad format in %s directive.\n", keys[where]); return -1;}
 
-static char *FaceNames[] = {
+static const char * const FaceNames[] = {
     "Roman",
     "Bold",
     "Italic",
@@ -777,7 +772,7 @@ int bdffont::GetDefaultChar()
 	((strncmp(main, prefix, sizeof(prefix) - 1) == 0) && \
 	isspace(main[sizeof(prefix)-1]))
 
-static long bdffont_AppendProperty(char  **props, long  length, char  *p, long  psize, long  v)
+static long bdffont_AppendProperty(char  **props, long  length, const char  *p, long  psize, long  v)
 {
     long newlength = length + psize + bdfprop_INT_LEN + 1;
     /* includes property label, space, value, and line-feed */
@@ -1016,7 +1011,7 @@ static long FilterPropertiesOut(class bdffont  *self, char  **props)
     }
 
     if (needWEIGHTNAME) {
-	char *facename;
+	const char *facename;
 
 	count++;
 	facename = (self->fontface < sizeof(FaceNames)

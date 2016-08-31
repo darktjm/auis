@@ -30,11 +30,6 @@ the full agreement.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/gdp/RCS/set.c,v 1.5 1993/10/20 17:14:53 rr2b Stab74 $";
-#endif
-
 /* implementation */
 
 
@@ -72,7 +67,7 @@ Dll
 DllNull(datasize)
 int datasize;
 {
-	register Dll h = allocate(1, struct dll);
+	Dll h = allocate(1, struct dll);
 	h->next = h->prev = h;
 	h->u.datasize = datasize;
 	return h;
@@ -80,8 +75,8 @@ int datasize;
 
 void
 DllInsertElement(h, d)
-register Dll h;
-register DllElement d;
+Dll h;
+DllElement d;
 {
 	d->next = h;
 	d->prev = h->prev;
@@ -92,14 +87,14 @@ register DllElement d;
 static
 DllElement
 DllInsertData(h, data)
-register Dll h;
+Dll h;
 Pointer data;
 {
-	register DllElement d = (Dll) recog_myalloc(1, sizeof(struct dll)
+	DllElement d = (Dll) recog_myalloc(1, sizeof(struct dll)
 				- sizeof(h->u) + h->u.datasize, "Dll");
 #ifdef _IBMR2	/* In the rs6000 I used, mentioning bcopy gives
 			".movmen undefined" during the load */
-	{ register char *r = data, *l = d->u.c; register int n=h->u.datasize;
+	{ char *r = data, *l = d->u.c; int n=h->u.datasize;
 	  while(--n >= 0)
 		*l++ = *r++;
 	}
@@ -114,7 +109,7 @@ static
 void
 DllDeleteElement(h, d)
 Dll h;
-register DllElement d;
+DllElement d;
 {
 	d->prev->next = d->next;
 	d->next->prev = d->prev;
@@ -161,7 +156,7 @@ EmptySet(when_added, when_deleted, groupleader)
 void (*when_added)(), (*when_deleted)();
 Set groupleader;
 {
-	register Set s = allocate(1, struct set);
+	Set s = allocate(1, struct set);
 	Set ss;
 
 	s->set = DllNull(sizeof(Pointer));
@@ -197,7 +192,7 @@ Set s;
 Pointer data;
 {
 	LogRecord lr;
-	register DllElement d;
+	DllElement d;
 
 	d = DllInsertData(s->set, (Pointer) &data);
 	lr.operation = OP_INSERT;
@@ -211,7 +206,7 @@ Pointer data;
 void
 DeleteElement(s, e)
 Set s;
-register Element e;
+Element e;
 {
 	LogRecord lr;
 
@@ -262,11 +257,11 @@ void (*pf)();
 
 VersionNumber
 CheckpointSetGroup(groupleader)
-register Set groupleader;
+Set groupleader;
 {
 	
 	LogRecord lr;
-	register DllElement d;
+	DllElement d;
 
 	if(groupleader->group == NULL)
 		recog_error("CheckpointSetGroup: not groupleader");
@@ -282,11 +277,11 @@ register Set groupleader;
 
 void
 UndoSetGroup(groupleader, v)
-register Set groupleader;
+Set groupleader;
 VersionNumber v;
 {
 	void UndoSet();
-	register DllElement d;
+	DllElement d;
 
 	if(groupleader->group == NULL)
 		recog_error("UndoSetGroup: not groupleader");
@@ -307,7 +302,7 @@ Set s;
 VersionNumber v;
 {
 	LogRecord *lr;
-	register DllElement d;
+	DllElement d;
 
 	for(d = DLL_LAST(s->log); ! DLL_END(s->log, d);
 		d = DLL_PREV(s->log, d)) {
@@ -338,7 +333,7 @@ void (*fp)();
 Pointer arg;
 {
 
-	register DllElement d;
+	DllElement d;
 
 	for(d = DLL_FIRST(s->set); ! DLL_END(s->set, d);
 		d = DLL_NEXT(s->set, d))
@@ -352,7 +347,7 @@ void (*fp)();
 Pointer arg;
 {
 
-	register DllElement d;
+	DllElement d;
 
 	for(d = DLL_FIRST(s->set); ! DLL_END(s->set, d);
 		d = DLL_NEXT(s->set, d))
@@ -368,7 +363,7 @@ Element e;
 
 Element
 AnElement(s)
-register Set s;
+Set s;
 {
 	if(DLL_EMPTY(s->set))
 		return NULL;
@@ -398,7 +393,7 @@ Element
 NextElement(s)
 Set s;
 {
-	register Element e;
+	Element e;
 	e = s->cur_ptr;
 	if(DLL_END(s->set, e))
 		return NULL;

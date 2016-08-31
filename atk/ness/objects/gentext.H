@@ -141,25 +141,25 @@ public:
 	gentext();
 	virtual ~gentext();
 
-	virtual void SetVar(char *var, char *value);
+	virtual void SetVar(const char *var, const char *value);
 		/* sets the named global variable to the C string */
 
-	virtual void SetVarFromText(char *var, 
+	virtual void SetVarFromText(const char *var, 
 			text *t, long pos, long len);
 		/* sets the named global variable to the portion of the text
 			starting at pos and extending for len elements */
 
-	virtual void CopyVar(char *var, 
+	virtual void CopyVar(const char *var, 
 			text *t, long pos);
 		/* copies the value of the named global var to the
 			given text at the indicated position */
 
-	virtual boolean WriteVarToNamedFile(char *var, char *filename);
+	virtual boolean WriteVarToNamedFile(const char *var, const char *filename);
 		/* writes the indicated global variable to the named file.
 			returns TRUE for success and FALSE for failure 
 			(in the latter case, errno will be set) */
 
-	virtual boolean WriteVarToFile(char *var, FILE *f);
+	virtual boolean WriteVarToFile(const char *var, FILE *f);
 		/* writes the indicated global variable to the given FILE.
 			returns TRUE for success and FALSE for failure 
 			(in the latter case, errno will be set) */
@@ -167,7 +167,7 @@ public:
 	/* GetVarAddr(self, var) is available to get the actual nessmark
 		of the named variable.  See ness.ch.  */
 
-	virtual text * Instantiate(char *segment)  ;
+	virtual text * Instantiate(const char *segment)  ;
 		/* interprets the named segment from the template text, 
 			   evaluating all enclosures
 		   The name must be in all lowercase.
@@ -191,13 +191,13 @@ public:
 			will be non-NULL and gentext_PrintAllErrors
 			can be called to print the errors to stderr 
 	*/
-	static gentext * CreateFromNamedFile(char *fnm)  ;
+	static gentext * CreateFromNamedFile(const char *fnm)  ;
 		/* reads a named file and creates a gentext object for it 
 			processes the file name to determine ATK type */
 	static gentext * CreateFromFILE(FILE *f, long objectID)  ;
 		/* reads an open FILE and creates a gentext object for it;
 				uses objectID as arg to text_Read */
-	static gentext * Create(char *source);
+	static gentext * Create(const char *source);
 		/* creates a gentext using the argument as template */
 };
 

@@ -25,14 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>		/* sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/alquery.c,v 1.22 1994/05/24 21:32:41 rr2b Stab74 $";
-#endif
-
-
 #ifndef TESTINGONLYTESTING
 /*
 #define DEBUG   1
@@ -65,6 +57,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
  *                    *
  **********************/
 
+#include <andrewos.h>		/* sys/time.h */
 #include <stdio.h>
 #include <svcconf.h>
 #include <errno.h>

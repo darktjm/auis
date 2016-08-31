@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/updatelist.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("updatelist.H")
 #include <updatelist.H>
 #include <view.H>
@@ -44,9 +34,6 @@ static struct updateitem *freeList = NULL;
 
 
 ATKdefineRegistry(updatelist, ATK, NULL);
-#ifndef NORCSID
-#endif
-
 
 updatelist::updatelist()
         {
@@ -71,8 +58,8 @@ void updatelist::AddTo(class view  *view)
         {
   /* modified to 1) add the view to the end of the list, and 2) remove earlier occurrence of the view from the list */
 
-    register struct updateitem *newui;
-    register struct updateitem *item, *last;
+    struct updateitem *newui;
+    struct updateitem *item, *last;
 
     /* if view appears on list already, remove it */
     for (item = this->updates, last = NULL;  item != NULL;  last = item, item = item->next)

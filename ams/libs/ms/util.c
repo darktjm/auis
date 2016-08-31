@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/util.c,v 2.19 1992/12/15 21:21:37 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include <ms.h>
 #include <sys/stat.h>
 #include <mailconf.h>
@@ -46,16 +37,16 @@ extern Boolean DidInit;
 extern char *SearchPath;
 
 /* The following should have home prepended to it whenever used */
-char MAILSEARCHPATHTEMPLATE[]="/.MESSAGES";
+const char MAILSEARCHPATHTEMPLATE[]="/.MESSAGES";
 
-static char OTHERSEARCHPATHTEMPLATE[]="$LOCAL:$EXTERNAL"; /* strictly historical */
+static const char OTHERSEARCHPATHTEMPLATE[]="$LOCAL:$EXTERNAL"; /* strictly historical */
 
-static char DEFAULTMARKER[] = "$default";
-static char MAILMARKER[] = "$mail";
-static char LOCALMARKER[] = "$local";
-static char EXTERNALMARKER[] = "$external";
-static char OTHERMARKER[] = "$other";
-static char OFFICIALMARKER[] = "$official";
+static const char DEFAULTMARKER[] = "$default";
+static const char MAILMARKER[] = "$mail";
+static const char LOCALMARKER[] = "$local";
+static const char EXTERNALMARKER[] = "$external";
+static const char OTHERMARKER[] = "$other";
+static const char OFFICIALMARKER[] = "$official";
 #define MARKERINIT '$'
 /* MARKERINIT is the first char in the xxxMARKER values */
 

@@ -23,8 +23,6 @@ ATK_INTER
 // WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 // 
 //  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figorrec.H,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $
 */
 
 #include <figorect.H>
@@ -40,8 +38,8 @@ public:
 	figorrec();
 
     
-       void PrintObject(class figview *v, FILE *file, char *prefix, boolean newstyle);
-       char * ToolName(class figtoolview *v, long rock)  ;
+       void PrintObject(class figview *v, FILE *file, const char *prefix, boolean newstyle);
+       const char * ToolName(class figtoolview *v, long rock)  ;
        void Draw(class figview *v); 
        void Sketch(class figview *v); 
 };

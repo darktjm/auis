@@ -25,14 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/addalias/RCS/addalias.c,v 1.9 1993/06/12 12:53:21 rr2b Stab74 $";
-#endif
-
-
 /*
  * Merges a local help alias file (which need not be sorted) into
  * a global help alias file (which must be sorted).
@@ -41,6 +33,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
  * Lines starting with whitespace or '#' are ignored.
  */
 
+#include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <errno.h>

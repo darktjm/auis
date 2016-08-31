@@ -41,12 +41,12 @@ public:
 	static boolean atk_inited;
 
     
-       int GenericCompoundAction(class view *v, char *prefix, char *cmds)  ;
-       int GetBooleanFromUser(char *prompt, int defaultans)  ;
-       int GetStringFromUser(char *prompt, char *buf, int len, int IsPassword)  ;
-       int ChooseFromList(char **QVec, int defans)  ;
-       void ReportError(char *text, int level, int Decode, long mserrcode);
-       void ReportSuccess(char *text);
+       int GenericCompoundAction(class view *v, const char *prefix, const char *cmds)  ;
+       int GetBooleanFromUser(const char *prompt, int defaultans)  ;
+       int GetStringFromUser(const char *prompt, char *buf, int len, int IsPassword)  ;
+       int ChooseFromList(const char * const *QVec, int defans)  ;
+       void ReportError(const char *text, int level, int Decode, long mserrcode);
+       void ReportSuccess(const char *text);
        int TildeResolve(const char *in, char *out)  ;
        int OnlyMail()  ;
        const char* ap_Shorten(const char *fname)  ;
@@ -60,14 +60,14 @@ public:
        long CUI_DeleteMessage(int cuid)  ;
        long CUI_DeliveryType()  ;
        long CUI_DirectoriesToPurge()  ;
-       long CUI_DisambiguateDir(char *shortname, char **longname)  ;
+       long CUI_DisambiguateDir(const char *shortname, char **longname)  ;
        long CUI_DoesDirNeedPurging(char *name)  ;
        void CUI_EndConversation();
        long CUI_GenLocalTmpFileName(char *name)  ;
        long CUI_GenTmpFileName(char *name)  ;
        long CUI_GetFileFromVice(char *tmpfile, char *vfile)  ;
        long CUI_GetHeaderContents(int cuid, char *hdrname, int hdrnum, char *hdrbuf, int lim)  ;
-       long CUI_GetHeaders(char *dirname, char *date64, char *headbuf, int lim, int startbyte, long *nbytes, long *status, int RegisterCuids)  ;
+       long CUI_GetHeaders(const char *dirname, const char *date64, char *headbuf, int lim, int startbyte, long *nbytes, long *status, int RegisterCuids)  ;
        long CUI_GetSnapshotFromCUID(int cuid, char *Sbuf)  ;
        long CUI_HandleMissingFolder(char *dname)  ;
        long CUI_Initialize(int  (*TimerFunction)(char *rock), char *rock)  ;
@@ -85,9 +85,9 @@ public:
        long CUI_PurgeDeletions(char *dirname)  ;
        long CUI_PurgeMarkedDirectories(boolean ask, boolean OfferQuit)  ;
        long CUI_ReallyGetBodyToLocalFile(int cuid, char *fname, int *ShouldDelete, int MayFudge)  ;
-       long CUI_RemoveDirectory(char *dirname)  ;
-       long CUI_RenameDir(char *oldname, char *newname)  ;
-       void CUI_ReportAmbig(char *name, char *atype);
+       long CUI_RemoveDirectory(const char *dirname)  ;
+       long CUI_RenameDir(const char *oldname, const char *newname)  ;
+       void CUI_ReportAmbig(const char *name, const char *atype);
        long CUI_ResendMessage(int cuid, char *tolist)  ;
        long CUI_RewriteHeaderLine(char *addr, char **newaddr)  ;
        long CUI_RewriteHeaderLineInternal(char *addr, char **newaddr, int maxdealiases, int *numfound, int *externalcount, int *format, int *strip, int *trust)  ;
@@ -127,11 +127,11 @@ public:
        long MS_DomainHandlesFormatting(char *domname, int *retval)  ;
        int AMS_ErrNo()  ;
        void SubtleDialogs(boolean besubtle);
-       char * DescribeProt(int code)  ;
+       const char * DescribeProt(int code)  ;
        char * MessagesAutoBugAddress()  ;
        int UnScribe(int ucode, struct ScribeState **ss, char *LineBuf, int ct, FILE *fout)  ;
        int UnScribeFlush(int ucode, struct ScribeState **ss, FILE *fout)  ;
-       int UnScribeInit(char *vers, struct ScribeState **ss)  ;
+       int UnScribeInit(const char *vers, struct ScribeState **ss)  ;
        void WriteOutUserEnvironment(FILE *fp, boolean IsAboutMessages);
        char * ams_genid(boolean isfilename)  ;
        int CheckAMSUseridPlusWorks(char *dom)  ;

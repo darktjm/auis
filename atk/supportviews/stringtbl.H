@@ -79,22 +79,22 @@ public:
 		a newline, 	and then a sequence of the strings, each 
 		followed by a newline.
 	*/
-	 char * ViewName()  ;
+	 const char * ViewName()  ;
 
 
 	virtual void Clear( /* struct stringtbl *self */ );		
 		/* Clears the string table of existing strings */
-	virtual short AddString( /* struct stringtbl *self, */ char *s)  ;
+	virtual short AddString( /* struct stringtbl *self, */ const char *s)  ;
 		/* Adds a string to the set of strings in the table, 
 			returns its accession number 
 			returns -1 if table is full */
-	virtual void RemoveString( /* struct stringtbl *self, */ char *s);
+	virtual void RemoveString( /* struct stringtbl *self, */ const char *s);
 			/* Removes the specified string from the table.
 			If the string is absent, the call is ignored */
-	virtual void SetBit( /* struct stringtbl *self, */ char *s, boolean val);
+	virtual void SetBit( /* struct stringtbl *self, */ const char *s, boolean val);
 		/* finds the named string in the table 
 			and sets its associated bit to the given val */
-	virtual boolean GetBit( /* struct stringtbl *self, */ char *s)  ;
+	virtual boolean GetBit( /* struct stringtbl *self, */ const char *s)  ;
 		/* finds the named string in the table and 
 			returns the current value of its bit 
 		   if s is absent, returns FALSE anyway */

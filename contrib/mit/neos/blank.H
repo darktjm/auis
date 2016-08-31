@@ -1,7 +1,5 @@
 #ifndef _blank_H_
 #define _blank_H_
-/* $Author: wjh $ */
-
 /*
 	$Disclaimer: 
 *Permission to use, copy, modify, and distribute this software and its 

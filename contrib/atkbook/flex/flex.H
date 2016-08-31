@@ -33,7 +33,7 @@ public:
        long Write (FILE *file, long writeid, int level)  ;
     
       virtual void SetDisplayParams(int porf, int vorh, int movable, int pct);
-      virtual boolean InsertObject (class dataobject *d, char *viewname);
+      virtual boolean InsertObject (class dataobject *d, const char *viewname);
       virtual void ToggleParts();
       virtual void DeleteObjects();
     

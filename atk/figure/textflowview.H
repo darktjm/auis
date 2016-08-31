@@ -23,8 +23,6 @@ ATK_INTER
  * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  * 
  *  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/textflowview.H,v 1.1 1995/03/23 21:09:49 Zarf Stab74 $
 */
 
 #include <figview.H>
@@ -38,7 +36,7 @@ class textflowview : public figview {
 
       void BuildToolList(struct figtoolview_tool_t *&list, int &listnum, int &listsize);
       void PrintPSDoc(FILE *outfile, long pagew, long pageh);
-      void *GetPSPrintInterface(char *printtype);
+      void *GetPSPrintInterface(const char *printtype);
 
       virtual long BuildPlan(struct textps_layout_plan **planptr, long pagewidth, long pageheight);
 };

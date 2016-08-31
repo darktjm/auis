@@ -25,16 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/rasterimage.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1987
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -108,6 +98,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * 10 Nov 1987 WJHansen. Created.
  */
 
+#include <andrewos.h>
 ATK_IMPL("rasterimage.H")
 #include <stdio.h>
 
@@ -120,8 +111,6 @@ ATK_IMPL("rasterimage.H")
 */
 	
 ATKdefineRegistry(rasterimage, pixelimage, NULL);
-#ifndef NORCSID
-#endif
 static char * Stabilize(char  *s);
 
 

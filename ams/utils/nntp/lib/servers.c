@@ -1,5 +1,3 @@
-static char *servers_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp/lib/RCS/servers.c,v 1.3 1994/06/09 21:18:04 rr2b Stab74 $";
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -24,8 +22,6 @@ static char *servers_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/u
 
 /*
  * NNTP server routines.
- *
- * @(#)clients.c	1.2	(Berkeley) 4/13/86
  */
 
 #include <stdio.h>

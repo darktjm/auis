@@ -27,11 +27,6 @@
 
 #include <andrewos.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/abspath.c,v 2.10 1993/06/14 02:56:43 rr2b Stab74 $";
-#endif
-
 /*
  * abspath -- determine absolute pathname
  *
@@ -81,10 +76,10 @@ int abspath (name,result)
 char * name;
 char * result;
 {
-    register char * src;    /* source pointer for copy operations */
-    register char * dst;    /* destination pointer for copy operations */
-    register char * fence;  /* pointer to slash that cannot be backed over */
-    register char * t;      /* scanback pointer in dst when we hit a slash */
+    char * src;    /* source pointer for copy operations */
+    char * dst;    /* destination pointer for copy operations */
+    char * fence;  /* pointer to slash that cannot be backed over */
+    char * t;      /* scanback pointer in dst when we hit a slash */
 
     fence = 0;
     if (name == 0  ||  result == 0)

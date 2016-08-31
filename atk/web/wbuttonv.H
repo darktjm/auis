@@ -36,7 +36,7 @@ public:
 		long left, long top, long width, long right);
 	void Update();
 
-	virtual void SetLabel(char *label);
+	virtual void SetLabel(const char *label);
 
 	char *wlabel;
 	int needinit;

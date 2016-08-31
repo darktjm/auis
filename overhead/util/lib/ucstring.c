@@ -27,11 +27,6 @@
 
 #include <util.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/ucstring.c,v 1.4 1992/12/15 21:12:21 rr2b Stab74 $";
-#endif
-
 /*
 	ucstring.c-- copies a source string to a dest buff, converting all lowercase to upper.
 */

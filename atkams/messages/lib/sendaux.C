@@ -43,15 +43,6 @@ SOFTWARE.
 */
 
 #include <andrewos.h>                  /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/sendaux.C,v 1.11 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
-                                 
-
 #include <stdio.h>
 #include <sys/param.h>
 #include <util.h>
@@ -101,9 +92,6 @@ static class menulist *sm_menulist, *sm_hmenulist;
 #define SMMASK_CHECKRECIP 8
 #define SMMASK_INSERTHEAD 16
 #define SMMASK_FILEINTO 32
-
-#ifndef NORCSID
-#endif
 
 extern void DirectlyInsertFile(class textview  *tv, class text  *t, char  *fname, int  pos);
 extern void HandleButton(class sbutton  *self, long sendmessage, int  in, int  whichbut);
@@ -161,7 +149,7 @@ void NextLine(class sendmessage  *sm, int   IsNewline);
 void PreviousLine(class sendmessage  *sm);
 void sendmessage_InsertFile(class sendmessage  *sendmessage, char *fname);
 void PrepareBodyForSignature(class sendmessage  *self);
-void SetMyFrameTitle(class sendmessage  *sm, char *tit);
+void SetMyFrameTitle(class sendmessage  *sm, const char *tit);
 static boolean  AddIfView(class environment  *env, int  *ct);
 int EnvViewCt(class environment  *env);
 void sendmessage_wrap_QuoteBody(class sendmessage *self);
@@ -190,7 +178,7 @@ static int AddSpecialHeaders(class sendmessage  *sm)
     class textview *tv;
     int             ans, pos, oldpos, oldlen, useplus;
     char            buf[1000], head[2000], ShortName[1 + MAXPATHLEN], *FullName, *md;
-    static char    *SVec[] = {
+    static const char    * const SVec[] = {
         "What kind of `special' action should this message take?",
         "Cancel",
         "Request a return-receipt",
@@ -200,14 +188,14 @@ static int AddSpecialHeaders(class sendmessage  *sm)
         "Invite further redistribution",
         NULL
     };
-    static char    *EVec[] = {
+    static const char    * const EVec[] = {
         "What do you want to call an 'enclosure'?",
         "Cancel",
         "The whole message",
         "A certain file",
         NULL
     };
-    static char    *EnclosureString = "---- Enclosure ----";
+    static const char EnclosureString[] = "---- Enclosure ----";
     char            EnclosureBuf[50];
 
     ans = (ams::GetAMS())->ChooseFromList( SVec, 1);
@@ -399,7 +387,7 @@ void QuoteProperly(char            *str)
 {
     if (strchr(str, '"') || strchr(str, '\\') || strchr(str, ',')) {
         char            MyBuf[2000];
-        register char  *s, *t;
+        char  *s, *t;
 
         /* Needs quoting */
         MyBuf[0] = '"';
@@ -420,9 +408,9 @@ void            QuitMessages(class sendmessage  *self)
     ams::CommitState(TRUE, FALSE, TRUE, TRUE);
 }
 
-static char     lastWindowWarning[] =
+static const char     lastWindowWarning[] =
 "This is the last window.";
-static char    *lastWindowChoices[] = {
+static const char    * const lastWindowChoices[] = {
     "Continue Running",
     "Quit Messages",
 NULL};
@@ -507,7 +495,7 @@ void            SimulateResetButton(class sendmessage  *self)
 #define PREVIEW_UNSCRIBE 1
 #define PREVIEW_RAW 2
 
-static char    *PreviewCmdVector[] = {NULL, "-p", "-z", NULL, NULL};
+static const char    *PreviewCmdVector[] = {NULL, "-p", "-z", NULL, NULL};
 static char     PreviewProg[1 + MAXPATHLEN] = "";
 
 void            BSSM_Preview(class sendmessage  *sm)
@@ -515,7 +503,7 @@ void            BSSM_Preview(class sendmessage  *sm)
     DoPreview(sm, PREVIEW_ASK);
 }
 
-static char    *PrevQVec[] = {
+static const char    * const PrevQVec[] = {
     "Which kind of preview do you want?",
     "Cancel",
     "Show with formatting removed",
@@ -566,7 +554,7 @@ void DoPreview(class sendmessage  *sm, int              code)
         /* I am a child */
         for (fd = FDTABLESIZE(); fd > 2; --fd)
             close(fd);
-        execv(PreviewCmdVector[0], PreviewCmdVector);
+        execv(PreviewCmdVector[0], (char **)PreviewCmdVector);
         _exit(-1);                     /* not reached */
     }
     if (rcode > 0) {
@@ -948,7 +936,7 @@ void            UserWantsAHeader(class sendmessage  *self, char            *head
             strcpy(newheader, head);
         }
         else {
-            if (message::AskForString(hv, 50, "Enter the name of the header you want to add: ", head ? ++head : (char *)"", newheader, sizeof(newheader)) < 0)
+            if (message::AskForString(hv, 50, "Enter the name of the header you want to add: ", head ? ++head : "", newheader, sizeof(newheader)) < 0)
                 return;
         }
         if (newheader[0] == '\0')
@@ -1098,7 +1086,7 @@ void PrepareBodyForSignature(class sendmessage  *self)
     (tv)->SetDotLength( dotlen);
 }
 
-void SetMyFrameTitle(class sendmessage  *sm, char            *tit)
+void SetMyFrameTitle(class sendmessage  *sm, const char            *tit)
 {
     (sm->myframe)->SetTitle( tit);
 }

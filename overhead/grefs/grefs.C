@@ -24,7 +24,7 @@
 #include <refs.h>
 #include <util.h>
 
-extern FILE *pathopen(char *path, char *file, char *mode);
+#include "pathopen.h"
 
 static struct plist {
     char *path;
@@ -46,7 +46,6 @@ static struct clist {
 } *classes=NULL;
 
 #ifdef FLEX_ENV
-extern "C" void resetlexer();
 extern "C" void *yy_create_buffer(FILE *, int);
 extern "C" void yy_switch_to_buffer(void *);
 extern char *yytext;
@@ -102,7 +101,7 @@ static void PopFile()  {
     }
 }
 
-static void AddIncludeDir(char *dir)
+static void AddIncludeDir(const char *dir)
 {
     if(dir) {
 	if(ipath==NULL) {
@@ -271,7 +270,7 @@ int main(int argc, char **argv) {
     int tok;
     int i;
     char *p;
-    char *exts=".C.cc.c.i";
+    const char *exts=".C.cc.c.i";
     for(i=1;i<argc;i++) {
 	if(argv[i][0]!='-') break;
 	switch(argv[i][1]) {

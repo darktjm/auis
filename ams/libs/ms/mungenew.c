@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/mungenew.c,v 2.35 1995/02/07 18:18:18 Zarf Stab74 $";
-#endif
-
 #include <ms.h>
 #include <sys/stat.h>
 #include <mailconf.h>

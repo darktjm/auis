@@ -23,13 +23,6 @@
  *  $
 */
 
-#include <andrewos.h> /* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/convert/RCS/convrast.C,v 1.4 1994/08/11 19:06:08 rr2b Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
@@ -75,7 +68,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
     byte doesn't help, the program halts.
 */
 
-
+#include <andrewos.h> /* strings.h */
 #include <ctype.h>
 #include <rect.h>
 #include <ATK.H>
@@ -118,7 +111,7 @@ ProcessPix(struct pixelimage *pix)
 	if ( ! rectangle_IsEmptyRect(&crop)) {
 		/* do the cropping by replacing the bits area of the pix  XXX */
 		long buf[1000];
-		register long row;
+		long row;
 
 		tix = new pixelimage;
 		(tix)->Resize(crop.width, crop.height);
@@ -219,7 +212,7 @@ WriteOutputFile(FILE * OutputFile, struct pixelimage *pix)
 
 
 	static void
-fail(char *msg)
+fail(const char *msg)
 {
 	fprintf(stderr, "%s\n", msg);
 	exit(1);
@@ -237,7 +230,7 @@ usage()
 
 
 struct symentry {	
-	char *symbol;		/* string to recognize */
+	const char *symbol;		/* string to recognize */
 	void (*f)(char *sx, struct symentry *sym); /* function to call */
 	char *target;		/* where the function assigns value */
 	enum rasterType v;	/* value the function assigns */
@@ -363,7 +356,7 @@ ParseSwitches(int argc, char **argv)
 OpenInputFile()
 {
 	FILE *infile;
-	register int c;
+	int c;
 
 	if ( ! *inname)  
 		infile = stdin;

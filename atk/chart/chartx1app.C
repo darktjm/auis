@@ -25,19 +25,13 @@
  *  $
 */
 
-#include  <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chartx1app.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 /*****************************************\
 
   Chart Programming Guide --  Example #1
 
 \*****************************************/
 
+#include  <andrewos.h>
 ATK_IMPL("chartx1app.H")
 #include  <im.H>
 #include  <frame.H>
@@ -53,9 +47,7 @@ ATK_IMPL("chartx1app.H")
 
 
 ATKdefineRegistry(chartx1app, application, NULL);
-#ifndef NORCSID
-#endif
-int Query( char			      *topic );
+static int Query( const char			      *topic );
 
 
 chartx1app::chartx1app( )
@@ -124,7 +116,7 @@ chartx1app::Start( )
   }
 
 
-int Query( char			      *topic )
+static int Query( const char			      *topic )
     {
   char			      response[255];
 

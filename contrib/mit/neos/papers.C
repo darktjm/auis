@@ -1,10 +1,3 @@
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/papers.C,v 1.6 1996/06/11 01:28:57 wjh Exp $ */
-/* $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/papers.C,v $ */
-/* $Author: wjh $ */
-
-#ifndef lint
-static char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/papers.C,v 1.6 1996/06/11 01:28:57 wjh Exp $";
-#endif /* lint */
 /*
  * papers.c
  *
@@ -861,7 +854,7 @@ void papers_RemovePaper(class papers  *self, long  rock)
     return;
 }
 
-static char *handoutchoices[] =
+static const char * const handoutchoices[] =
 {
     "The contents of the current edit window",
     "A file",

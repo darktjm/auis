@@ -27,11 +27,6 @@
 
 #include <andrewos.h> /* strings.h */
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/rastvaux.C,v 1.8 1996/10/18 18:53:44 wjh Exp $";
-#endif
-
 #define AUXMODULE 1
 #include <rasterview.H>
 
@@ -80,12 +75,12 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 static void RedrawRaster(class rasterview  *self, enum view_UpdateType  type, long  left , long  top , long  width , long  height);
 
-static void x_getinfo(register class rasterview   *self, register struct range   *total , register struct range   *seen , register struct range   *dot);
-static long x_whatisat(register class rasterview   *self, register long   coordinate , register long   outof);
-static void  x_setframe(register class rasterview  *self, int   position, long   coordinate , long   outof);
-static void y_getinfo(register class rasterview   *self, register struct range   *total , register struct range   *seen , register struct range   *dot);
-static long y_whatisat(register class rasterview  *self, register long   coordinate , register long   outof);
-static void  y_setframe(register class rasterview  *self, int   position, long   coordinate , long   outof);
+static void x_getinfo(class rasterview   *self, struct range   *total , struct range   *seen , struct range   *dot);
+static long x_whatisat(class rasterview   *self, long   coordinate , long   outof);
+static void  x_setframe(class rasterview  *self, int   position, long   coordinate , long   outof);
+static void y_getinfo(class rasterview   *self, struct range   *total , struct range   *seen , struct range   *dot);
+static long y_whatisat(class rasterview  *self, long   coordinate , long   outof);
+static void  y_setframe(class rasterview  *self, int   position, long   coordinate , long   outof);
 boolean rasterview_FindFrameHelp(class frame  *frame, class im  *im);
 void rasterview_CurrentDirectory(class rasterview  *self, char  *f);
 void rasterview_CenterViewSelection(class rasterview  *self);
@@ -209,9 +204,9 @@ void rasterview::RotateRaster()
     rasterview_RotateCommand(this, 0);
 }
 
-void rasterview::SetDataObject(register class dataobject  *dras)
+void rasterview::SetDataObject(class dataobject  *dras)
 {
-    register class raster *oldras = (class raster *)(this)->GetDataObject();
+    class raster *oldras = (class raster *)(this)->GetDataObject();
     class raster *ras=(class raster *)dras;
     DEBUG(("rasterview__SetDataObject(0x%p, 0x%p) was 0x%p\n", this, ras, oldras));
     if (oldras == ras) return;	/* this is needed to avoid
@@ -554,9 +549,9 @@ static void RedrawRaster(class rasterview  *self, enum view_UpdateType  type, lo
 
 }
 
-void rasterview::FullUpdate(register enum view_UpdateType   type, register long   left , register long   top , register long   width , register long   height)
+void rasterview::FullUpdate(enum view_UpdateType   type, long   left , long   top , long   width , long   height)
 {
-    register class raster *ras = (class raster *)(this)->GetDataObject();
+    class raster *ras = (class raster *)(this)->GetDataObject();
     struct rectangle VB;
 
     (this)->GetVisualBounds( &VB);
@@ -591,7 +586,7 @@ void rasterview::FullUpdate(register enum view_UpdateType   type, register long 
 	  */
     if (! this->CheckedParent) {
 	class rasterimage *pix = (ras)->GetPix();
-	register class view *v;
+	class view *v;
 	this->CheckedParent = TRUE;
 	for (v = (class view *)this; v != NULL; v = v->parent) {
 	    const char *nm = (v)->GetTypeName();
@@ -670,8 +665,8 @@ void rasterview::Update()
 view_DSattributes rasterview::DesiredSize(long  width, long  height, enum view_DSpass  pass,
 						long  *desiredWidth, long  *desiredHeight) 
 {
-    register class raster *ras = (class raster *)(this)->GetDataObject();
-    register class rasterimage *pix;
+    class raster *ras = (class raster *)(this)->GetDataObject();
+    class rasterimage *pix;
     
     pix = (ras)->GetPix();
     if (pix == NULL) {
@@ -694,7 +689,7 @@ view_DSattributes rasterview::DesiredSize(long  width, long  height, enum view_D
     return view_Fixed;
 }
 
-static char *MouseEvent[] = {
+static const char * const MouseEvent[] = {
     "No Mouse Event",
     "Left Down",
     "Left Up",
@@ -949,7 +944,7 @@ class view * rasterview::Hit(enum view_MouseAction   action, long   x , long   y
 #define NO_FLOATS_IN_PRINTF_ENV
 #endif
 
-static char *PSheader[] = {
+static const char * const PSheader[] = {
 #ifndef NO_FLOATS_IN_PRINTF_ENV
 	"%s  /width %d def  /height %d def /xScale %0.4f def /yScale %0.4f def\n",
 #endif
@@ -961,17 +956,17 @@ static char *PSheader[] = {
 	"%s     image\n",
 	NULL };
 
-void rasterview::Print(register FILE   	 *file, register char	 *processor, register char	 *format, register boolean	 toplevel)
+void rasterview::Print(FILE   	 *file, const char	 *processor, const char	 *format, boolean	 toplevel)
 {
-    register class raster *ras = (class raster *)(this)->GetDataObject();
-    register class rasterimage *pix;
-    char **psx;
+    class raster *ras = (class raster *)(this)->GetDataObject();
+    class rasterimage *pix;
+    const char * const *psx;
     long row;
     short buf[300];
     long left, top, width, height;
     long wpts, hpts;  /* image dimensions in points */
     float xdscale, ydscale;
-    char *prefix;
+    const char *prefix;
 
     if (ras == NULL || (pix=(ras)->GetPix()) == NULL) return;
 
@@ -1196,7 +1191,7 @@ void rasterview::DesiredPrintSize(long width, long height, enum view_DSpass pass
     *desiredheight = hpts;
 }
 
-void *rasterview::GetPSPrintInterface(char *printtype)
+void *rasterview::GetPSPrintInterface(const char *printtype)
 {
     if (!strcmp(printtype, "generic"))
 	return (void *)this;
@@ -1205,7 +1200,7 @@ void *rasterview::GetPSPrintInterface(char *printtype)
 }
 
 	boolean 
-rasterview::Gifify(char *filename, long *pmaxw, long *pmaxh, 
+rasterview::Gifify(const char *filename, long *pmaxw, long *pmaxh, 
 			struct rectangle *visrect) {
 	cmuwm in;	// temp image of type ATK raster
 	gif out;		// temp image of type gif
@@ -1237,14 +1232,14 @@ rasterview::Gifify(char *filename, long *pmaxw, long *pmaxh,
 
    
  
-static struct scrollfns	vertical_scroll_interface =
+static const struct scrollfns	vertical_scroll_interface =
 		{(scroll_getinfofptr)y_getinfo, (scroll_setframefptr)y_setframe, NULL, (scroll_whatfptr)y_whatisat};
-static struct scrollfns	horizontal_scroll_interface =
+static const struct scrollfns	horizontal_scroll_interface =
 		{(scroll_getinfofptr)x_getinfo, (scroll_setframefptr)x_setframe, NULL, (scroll_whatfptr)x_whatisat};
 
-static void x_getinfo(register class rasterview   *self, register struct range   *total , register struct range   *seen , register struct range   *dot)
+static void x_getinfo(class rasterview   *self, struct range   *total , struct range   *seen , struct range   *dot)
 {
-    register class raster *ras = (class raster *)(self)->GetDataObject();
+    class raster *ras = (class raster *)(self)->GetDataObject();
     if (ras == NULL) {
 	total->beg = seen->beg = seen->end = dot->beg = dot->end = 0;
 	total->end = 1;
@@ -1275,10 +1270,10 @@ static void x_getinfo(register class rasterview   *self, register struct range  
 	    self->Xscroll));
 }
 
-static long x_whatisat(register class rasterview   *self, register long   coordinate , register long   outof)
+static long x_whatisat(class rasterview   *self, long   coordinate , long   outof)
 {
-    register long  value;
-    register class raster *ras = (class raster *)(self)->GetDataObject();
+    long  value;
+    class raster *ras = (class raster *)(self)->GetDataObject();
     if (ras == NULL) return 0;
     if (NotFullSize(self))
 	value = (coordinate - (coordinate % self->Scale)) +
@@ -1290,9 +1285,9 @@ static long x_whatisat(register class rasterview   *self, register long   coordi
     return value;
 }
 
-static void  x_setframe(register class rasterview  *self, int   position, long   coordinate , long   outof) 
+static void  x_setframe(class rasterview  *self, int   position, long   coordinate , long   outof) 
 {
-    register class raster *ras = (class raster *)(self)->GetDataObject();
+    class raster *ras = (class raster *)(self)->GetDataObject();
     long oldscroll = self->Xscroll;
     if (ras == NULL) return;
 
@@ -1320,9 +1315,9 @@ static void  x_setframe(register class rasterview  *self, int   position, long  
     DEBUG(("Scroll: (%ld,%ld)\n", self->Xscroll, self->Yscroll));
 }
 
-static void y_getinfo(register class rasterview   *self, register struct range   *total , register struct range   *seen , register struct range   *dot)
+static void y_getinfo(class rasterview   *self, struct range   *total , struct range   *seen , struct range   *dot)
 {
-    register class raster *ras = (class raster *)(self)->GetDataObject();
+    class raster *ras = (class raster *)(self)->GetDataObject();
     if (ras == NULL) {
 	total->beg = seen->beg = seen->end = dot->beg = dot->end = 0;
 	total->end = 1;
@@ -1353,10 +1348,10 @@ static void y_getinfo(register class rasterview   *self, register struct range  
 	    self->Yscroll));
 }
 
-static long y_whatisat(register class rasterview  *self, register long   coordinate , register long   outof)
+static long y_whatisat(class rasterview  *self, long   coordinate , long   outof)
 {
-    register long  value;
-    register class raster *ras = (class raster *)(self)->GetDataObject();
+    long  value;
+    class raster *ras = (class raster *)(self)->GetDataObject();
     if (ras == NULL) return 0;
     if (NotFullSize(self))
 	value = (coordinate - (coordinate % self->Scale)) +
@@ -1368,9 +1363,9 @@ static long y_whatisat(register class rasterview  *self, register long   coordin
     return value;
 }
 
-static void  y_setframe(register class rasterview  *self, int   position, long   coordinate , long   outof)
+static void  y_setframe(class rasterview  *self, int   position, long   coordinate , long   outof)
 {
-    register class raster *ras = (class raster *)(self)->GetDataObject();
+    class raster *ras = (class raster *)(self)->GetDataObject();
     long oldscroll = self->Yscroll;
     if (ras == NULL) return;
 
@@ -1398,9 +1393,9 @@ static void  y_setframe(register class rasterview  *self, int   position, long  
     DEBUG(("Scroll: (%ld,%ld)\n", self->Xscroll, self->Yscroll));
 }
 
-char * rasterview::GetInterface(register char   *interface_name)
+const void * rasterview::GetInterface(const char   *interface_name)
 {
-    register struct scrollfns *interface;
+    const struct scrollfns *interface;
     DEBUG(("GetInterface(%s)\n", interface_name));
     if (strcmp(interface_name, "scroll,vertical") == 0)
 	interface = &vertical_scroll_interface;
@@ -1408,7 +1403,7 @@ char * rasterview::GetInterface(register char   *interface_name)
 	interface = &horizontal_scroll_interface;
     else
 	interface = NULL;
-    return (char *)interface;
+    return interface;
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *\
@@ -1968,7 +1963,7 @@ static void DrawLineTo(class rasterview   *self, long  x1 , long  y1, boolean  b
 
     /* start algorithm */
     long dx, dy;
-    register long incr1, incr2, d, x, y;
+    long incr1, incr2, d, x, y;
     float slope;
 
     if (ras == NULL || (ras)->GetPix() == NULL) return;
@@ -1977,7 +1972,7 @@ static void DrawLineTo(class rasterview   *self, long  x1 , long  y1, boolean  b
     dy = y2-y1;
  
     if (dx == 0) {
-       register long yend;
+       long yend;
        if (y1 < y2) {
           y = y1; yend = y2; }
         else {
@@ -1993,7 +1988,7 @@ static void DrawLineTo(class rasterview   *self, long  x1 , long  y1, boolean  b
     /* both x and y are either increasing or decreasing */
     if (slope > 0) {
 	if (slope <= 1) {
-	    register long xend;
+	    long xend;
 	    /* Slope is between 0 and 1. */
 	    if (x1 > x2) {
 		x = x2;  y = y2;  xend = x1; }
@@ -2011,7 +2006,7 @@ static void DrawLineTo(class rasterview   *self, long  x1 , long  y1, boolean  b
 		    d += incr2; }
 		SetPixel(self, x, y, bit); } }
 	else {
-	    register long yend;
+	    long yend;
 	    /* Slope is greater than 1. */
 	    if (y1 > y2) {
 		x = x2;  y = y2;  yend = y1; }
@@ -2031,7 +2026,7 @@ static void DrawLineTo(class rasterview   *self, long  x1 , long  y1, boolean  b
     }
     else {
 	if (slope >= -1) {
-	    register long xend;
+	    long xend;
 	    /* Slope is between 0 and -1. */
 	    if (x1 < x2) {
 		x = x2;  y = y2;  xend = x1; }
@@ -2049,7 +2044,7 @@ static void DrawLineTo(class rasterview   *self, long  x1 , long  y1, boolean  b
 		    d += incr2; }
 		SetPixel(self, x, y, bit); } }
 	else {
-	    register long yend;
+	    long yend;
 	    /* Slope is less than -1. */
 	    if (y1 < y2) {
 		x = x2;  y = y2;  yend = y1; }

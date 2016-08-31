@@ -1,10 +1,5 @@
 /* bdffontv.ch  -  view for font editor for bdf files */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/bdffont/RCS/bdffontv.C,v 1.3 1994/08/11 03:02:06 rr2b Stab74 $";
-#endif
-
 /*
 	Copyright Carnegie Mellon University 1991, 1993 - All rights reserved
 	$Disclaimer: 
@@ -114,15 +109,13 @@ static long bdffontv_DefaultWidth = 12;
 
 
 ATKdefineRegistry(bdffontv, lpair, bdffontv::InitializeClass);
-#ifndef NORCSID
-#endif
 static void EnsureFocus(class bdffontv  *self);
 static long bdffontv_ComputeZoom(class bdffontv  *self, long  zoomhow);
 static void bdffontv_ZoomCmd(class bdffontv  *self	, long  zoomhow);
 static void bdffontv_SetZoomDeltaCmd(class bdffontv  *self, long  rock);
 static void bdffontv_ForwardCmd(class bdffontv  *self, long  proc);
-static int AskFor1(class bdffontv  *self, long  *value, char  *prompt);
-static int AskFor2(class bdffontv  *self, long  *value1 , long  *value2, char  *prompt1 , char  *prompt2);
+static int AskFor1(class bdffontv  *self, long  *value, const char  *prompt);
+static int AskFor2(class bdffontv  *self, long  *value1 , long  *value2, const char  *prompt1 , const char  *prompt2);
 static boolean FindBuffer(class frame  *f,class buffer  *b);
 static class view *FindViewOfBuffer(class buffer  *b);
 static int bdffontv_HelpCmd(class bdffontv  *self, class chlist  *l, enum view_MouseAction  action, long  nclicks, int  index, int  rgn);
@@ -166,20 +159,20 @@ static void EnsureFocus(class bdffontv  *self)
 #endif
 }
     
-static char bdffontv_EncodingLabel[] = "Index: ";
-static char bdffontv_NameLabel[] = "Name: ";
-static char bdffontv_DeltaXLabel[] = "dx: ";
-static char bdffontv_DeltaYLabel[] = "dy: ";
-static char bdffontv_OriginXLabel[] = "origin X: ";
-static char bdffontv_OriginYLabel[] = "origin Y: ";
-static char bdffontv_WidthLabel[] = "Width: ";
-static char bdffontv_HeightLabel[] = "Height: ";
-static char bdffontv_ResolutionXLabel[] = "X res: ";
-static char bdffontv_ResolutionYLabel[] = "Y res: ";
-static char bdffontv_PointLabel[] = "Pt size: ";
-static char bdffontv_FaceLabel[] = "Face: ";
-static char bdffontv_FamilyLabel[] = "Family: ";
-static char bdffontv_HelpLabel[] = " HELP! ";
+static const char bdffontv_EncodingLabel[] = "Index: ";
+static const char bdffontv_NameLabel[] = "Name: ";
+static const char bdffontv_DeltaXLabel[] = "dx: ";
+static const char bdffontv_DeltaYLabel[] = "dy: ";
+static const char bdffontv_OriginXLabel[] = "origin X: ";
+static const char bdffontv_OriginYLabel[] = "origin Y: ";
+static const char bdffontv_WidthLabel[] = "Width: ";
+static const char bdffontv_HeightLabel[] = "Height: ";
+static const char bdffontv_ResolutionXLabel[] = "X res: ";
+static const char bdffontv_ResolutionYLabel[] = "Y res: ";
+static const char bdffontv_PointLabel[] = "Pt size: ";
+static const char bdffontv_FaceLabel[] = "Face: ";
+static const char bdffontv_FamilyLabel[] = "Family: ";
+static const char bdffontv_HelpLabel[] = " HELP! ";
 
 #define bdffontv_CharNameMod	(0x01)
 #define bdffontv_CharDeltaMod	(0x02)
@@ -288,7 +281,7 @@ static void bdffontv_ForwardCmd(class bdffontv  *self, long  procl)
 #define bdffontv_AskUnchanged	(1)
 #define bdffontv_AskChanged	(2)
 
-static int AskFor1(class bdffontv  *self, long  *value, char  *prompt)
+static int AskFor1(class bdffontv  *self, long  *value, const char  *prompt)
             {
     char msg[128];
     char localbuffer[128], *bufp;
@@ -318,7 +311,7 @@ static int AskFor1(class bdffontv  *self, long  *value, char  *prompt)
     return (bdffontv_AskUnchanged);
 } /* AskFor1 */
 
-static int AskFor2(class bdffontv  *self, long  *value1 , long  *value2, char  *prompt1 , char  *prompt2)
+static int AskFor2(class bdffontv  *self, long  *value1 , long  *value2, const char  *prompt1 , const char  *prompt2)
             {
     switch (AskFor1(self, value1, prompt1)) {
 	case bdffontv_AskAborted:
@@ -336,7 +329,7 @@ static int AskFor2(class bdffontv  *self, long  *value1 , long  *value2, char  *
     return bdffontv_AskAborted;
 } /* AskFor2 */
 
-static char *bdffontv_FaceChoices[] =
+static const char * const bdffontv_FaceChoices[] =
       { "Cancel",
 	"Normal",
 	"Bold",
@@ -1072,9 +1065,9 @@ static void bdffontv_UpdateFontExtent(class bdffontv  *self, class bdffont  *fon
     (chl)->ChangeItemByIndex( 1, msg);
 } /* bdffontv_UpdateFontExtent */
 
-static char bdffontv_UpdateConfirm[] = "Retain the changes you made to";
+static const char bdffontv_UpdateConfirm[] = "Retain the changes you made to";
 
-static char *bdffontv_UpdateChoices[] = { "Yes", "No", "Cancel", NULL };
+static const char * const bdffontv_UpdateChoices[] = { "Yes", "No", "Cancel", NULL };
 
 #define bdffontv_UpdateYes	0
 #define bdffontv_UpdateNo	1

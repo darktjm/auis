@@ -31,7 +31,7 @@
 /* from asetup.c: */
 extern char *treeroots[];
 
-static char treeroot[] = ".MESSAGES/";
+static const char treeroot[] = ".MESSAGES/";
 
 /* encode a master update line into a mufstr
  */

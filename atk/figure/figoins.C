@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-char *figoins_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figoins.C,v 3.9 1995/04/28 16:19:17 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("figoins.H")
 #include <figoins.H>
@@ -75,7 +71,7 @@ class figobj * figoins::Instantiate(class figtoolview *v, long rock)  {
     return res;
 }
 
-char *figoins::ToolName(class figtoolview  *v, long  rock)
+const char *figoins::ToolName(class figtoolview  *v, long  rock)
 {
     if(rock==0) return "Inset";
     else return "Paste Inset";
@@ -190,11 +186,11 @@ static figobj_Status ObjectPrompt(class figoins *this_c, class figview *v) {
 static figobj_Status PasteInset(class figoins *this_c, class figview  *v)
 {
     FILE *fp;
-    static char hdr[] = "\\begindata{";
-    char *hx = hdr;
+    static const char hdr[] = "\\begindata{";
+    const char *hx = hdr;
     int c, ix, id;
     class dataobject *obj=NULL;
-    char classname[100];
+    char classname[100], *cp;
 
     fp = ((v)->GetIM())->FromCutBuffer();
 
@@ -210,11 +206,11 @@ static figobj_Status PasteInset(class figoins *this_c, class figview  *v)
 	return figobj_Failed;
     }
 
-    hx=classname;
+    cp=classname;
     do {
-	*hx++=c;
-    } while((c=getc(fp))!=EOF && c!=',' && (hx-classname<sizeof(classname)-2));
-    *hx='\0';
+	*cp++=c;
+    } while((c=getc(fp))!=EOF && c!=',' && (cp-classname<sizeof(classname)-2));
+    *cp='\0';
 
     while(!isdigit(c)) c=getc(fp);
     if(!isdigit(c)) {
@@ -304,7 +300,8 @@ long figoins::ReadBody(FILE  *fp, boolean  recompute)
 #define LINELENGTH (256)
     char buf[LINELENGTH+1];
     long tid, ix, ref;
-    char namebuf[100], *np=namebuf;
+    char namebuf[100];
+    const char *np=namebuf;
 
     ix = (this)->figorect::ReadBody( fp, FALSE);
     if (ix!=dataobject_NOREADERROR) return ix;
@@ -340,7 +337,7 @@ long figoins::ReadBody(FILE  *fp, boolean  recompute)
     return dataobject_NOREADERROR;
 }
 
-void figoins::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolean newstyle)
+void figoins::PrintObject(class figview  *v, FILE  *file, const char  *prefix, boolean newstyle)
 {
     long x, y, w, h;
     long shad, lw;

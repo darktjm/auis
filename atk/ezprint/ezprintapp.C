@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ezprint/RCS/ezprintapp.C,v 1.12 1995/04/27 01:40:24 rr2b Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("ezprintapp.H")
 
 #include <sys/param.h> /* For MAXPATHLEN. */
@@ -155,14 +146,14 @@ boolean ezprintapp::ParseArgs (int  argc, const char  **argv)
 /* Since we are non-interactive, everything is done in this function so we
  can handle the args as they come */
 {
-    register int i;
+    int i;
     int ix;
     const char *DocumentName, *c, *printargs, *outputfile;
     FILE *ofile,*f;
     boolean indexflag;
     class dataobject *d = NULL;
     class view *v = NULL;
-    char *objectName,*viewName;
+    const char *objectName,*viewName;
     long objectID;
     int ffl = 0;
     int popt = PRINT;

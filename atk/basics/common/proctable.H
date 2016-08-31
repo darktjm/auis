@@ -75,24 +75,24 @@ class proctable : public ATK  {
 public:
 	virtual ATKregistryEntry *ATKregistry();
 	static inline boolean Defined(const struct proctable_Entry * self); 		
-	static inline char *GetName(const struct proctable_Entry * self);		
+	static inline const char *GetName(const struct proctable_Entry * self);		
 	static inline proctable_fptr GetFunction(const struct proctable_Entry * self);		
-	static inline struct ATKregistryEntry *GetType(const struct proctable_Entry * self);		
+	static inline const struct ATKregistryEntry *GetType(const struct proctable_Entry * self);		
 	static inline enum proctable_type GetReturnType(const struct proctable_Entry * self);	
-	static inline char *GetModule(const struct proctable_Entry * self);		
-	static inline char *GetDocumentation(const struct proctable_Entry * self); 	
+	static inline const char *GetModule(const struct proctable_Entry * self);		
+	static inline const char *GetDocumentation(const struct proctable_Entry * self); 	
 	
 	static boolean InitializeClass();
 	/* called automagically */
 	/* Only the name field is required.  Later calls to DefineProc will update an existing entry. */
-	static struct proctable_Entry * DefineProc(char *name, proctable_fptr proc, struct ATKregistryEntry  *type, char *module, char *doc)  ;
-	static struct proctable_Entry * DefineAction(char *name, aaction *proc, struct ATKregistryEntry  *type, char *module, char *doc)  ;
-	static void DefineProcs(struct proctable_Description *procs);
-	static void DefineActions(struct proctable_ActionDescription *procs);
-	static struct proctable_Entry * DefineTypedProc(char *name, proctable_fptr proc, struct ATKregistryEntry  *type,
-			char *module, char *doc, enum proctable_type returntype) 
+	static struct proctable_Entry * DefineProc(const char *name, proctable_fptr proc, const struct ATKregistryEntry  *type, const char *module, const char *doc)  ;
+	static struct proctable_Entry * DefineAction(const char *name, aaction *proc, const struct ATKregistryEntry  *type, const char *module, const char *doc)  ;
+	static void DefineProcs(const struct proctable_Description *procs);
+	static void DefineActions(const struct proctable_ActionDescription *procs);
+	static struct proctable_Entry * DefineTypedProc(const char *name, proctable_fptr proc, const struct ATKregistryEntry  *type,
+			const char *module, const char *doc, enum proctable_type returntype) 
 			 ;
-	static void DefineProcsWithTypes(struct proctable_DescriptionWithType *procs);
+	static void DefineProcsWithTypes(const struct proctable_DescriptionWithType *procs);
 	static struct proctable_Entry * Lookup(const char *name)  ;
 	static void Enumerate(proctable_efptr proc, char *procdata);
 	static void ForceLoaded(const struct proctable_Entry *pe);
@@ -108,47 +108,47 @@ public:
 
 struct proctable_Entry {
 	struct proctable_Entry *hnext;  /* hash table link */
-	char *name;			/* name of the function */
+	const char *name;			/* name of the function */
 	proctable_fptr proc;		/* pointer to it */
-	struct ATKregistryEntry  *type;	/* type of object to apply it to */
-	char *module;		/* what to dynamically load to get it */
-	char *doc;			/* prose description of its function */
+	const struct ATKregistryEntry  *type;	/* type of object to apply it to */
+	const char *module;		/* what to dynamically load to get it */
+	const char *doc;			/* prose description of its function */
 	enum proctable_type returntype;
 	aaction *act;  /* the new way to specify the function is to derive from aaction
 	 and implement operator()(ATK *obj, const avalueflex &in, avalueflex &out); */
 };
 
 struct proctable_ActionDescription {
-	char *name;			/* name of the function */
+	const char *name;			/* name of the function */
 	aaction *act;		/* pointer to it */
-	struct ATKregistryEntry  *type;	/* type of object to apply it to */
-	char *doc;			/* prose description of its function */
-	char *module;		/* what to dynamically load to get it */
+	const struct ATKregistryEntry  *type;	/* type of object to apply it to */
+	const char *doc;			/* prose description of its function */
+	const char *module;		/* what to dynamically load to get it */
 };
 
 struct proctable_Description {
-	char *name;			/* name of the function */
+	const char *name;			/* name of the function */
 	 proctable_fptr proc;		/* pointer to it */
-	struct ATKregistryEntry  *type;	/* type of object to apply it to */
-	char *doc;			/* prose description of its function */
-	char *module;		/* what to dynamically load to get it */
+	const struct ATKregistryEntry  *type;	/* type of object to apply it to */
+	const char *doc;			/* prose description of its function */
+	const char *module;		/* what to dynamically load to get it */
 };
 
 struct proctable_DescriptionWithType {
-	char *name;			/* name of the function */
+	const char *name;			/* name of the function */
 	 proctable_fptr proc;		/* pointer to it */
-	struct ATKregistryEntry  *type;	/* type of object to apply it to */
-	char *doc;			/* prose description of its function */
-	char *module;		/* what to dynamically load to get it */
+	const struct ATKregistryEntry  *type;	/* type of object to apply it to */
+	const char *doc;			/* prose description of its function */
+	const char *module;		/* what to dynamically load to get it */
 	enum proctable_type returntype;
 };
 
 inline boolean proctable::Defined(const struct proctable_Entry * self) 		{ return ((self)->proc !=  0); }
-inline char *proctable::GetName(const struct proctable_Entry * self)		{ return ((self)->name); }
+inline const char *proctable::GetName(const struct proctable_Entry * self)		{ return ((self)->name); }
 inline proctable_fptr proctable::GetFunction(const struct proctable_Entry * self)		{ return ((self)->proc); }
-inline struct ATKregistryEntry *proctable::GetType(const struct proctable_Entry * self)		{ return ((self)->type); }
+inline const struct ATKregistryEntry *proctable::GetType(const struct proctable_Entry * self)		{ return ((self)->type); }
 inline enum proctable_type proctable::GetReturnType(const struct proctable_Entry * self)	{ return ((self)->returntype); }
-inline char *proctable::GetModule(const struct proctable_Entry * self)		{ return ((self)->module); }
-inline char *proctable::GetDocumentation(const struct proctable_Entry * self) 	{ return ((self)->doc); }
+inline const char *proctable::GetModule(const struct proctable_Entry * self)		{ return ((self)->module); }
+inline const char *proctable::GetDocumentation(const struct proctable_Entry * self) 	{ return ((self)->doc); }
 inline aaction *proctable::GetAction(const struct proctable_Entry * self) 	{ return ((self)->act); }
 #endif /* _proctable_H_ */

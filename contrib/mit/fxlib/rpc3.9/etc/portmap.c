@@ -1,5 +1,3 @@
-/* @(#)portmap.c	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,15 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/etc/RCS/portmap.c,v 1.3 1992/12/15 21:53:39 rr2b Stab74 $";
-#endif
-
-#ifndef lint
-static	char sccsid[] = "@(#)portmap.c 1.32 87/08/06 Copyr 1984 Sun Micro";
-#endif
 
 /*
  * Copyright (c) 1984 by Sun Microsystems, Inc.
@@ -89,7 +78,7 @@ main()
 	int sock, pid, t;
 	struct sockaddr_in addr;
 	int len = sizeof(struct sockaddr_in);
-	register struct pmaplist *pml;
+	struct pmaplist *pml;
 
 #ifndef DEBUG
 	pid = fork();
@@ -169,8 +158,8 @@ find_service(prog, vers, prot)
 	u_long prog;
 	u_long vers;
 {
-	register struct pmaplist *hit = NULL;
-	register struct pmaplist *pml;
+	struct pmaplist *hit = NULL;
+	struct pmaplist *pml;
 
 	for (pml = pmaplist; pml != NULL; pml = pml->pml_next) {
 		if ((pml->pml_map.pm_prog != prog) ||
@@ -373,8 +362,8 @@ typedef struct rmtcallargs {
 
 static bool_t
 xdr_rmtcall_args(xdrs, cap)
-	register XDR *xdrs;
-	register struct rmtcallargs *cap;
+	XDR *xdrs;
+	struct rmtcallargs *cap;
 {
 
 	/* does not get a port number */
@@ -388,8 +377,8 @@ xdr_rmtcall_args(xdrs, cap)
 
 static bool_t
 xdr_rmtcall_result(xdrs, cap)
-	register XDR *xdrs;
-	register struct rmtcallargs *cap;
+	XDR *xdrs;
+	struct rmtcallargs *cap;
 {
 	if (xdr_u_long(xdrs, &(cap->rmt_port)))
 		return (xdr_encap_parms(xdrs, &(cap->rmt_args)));
@@ -415,10 +404,10 @@ xdr_opaque_parms(xdrs, cap)
  */
 static bool_t
 xdr_len_opaque_parms(xdrs, cap)
-	register XDR *xdrs;
+	XDR *xdrs;
 	struct rmtcallargs *cap;
 {
-	register u_int beginpos, lowpos, highpos, currpos, pos;
+	u_int beginpos, lowpos, highpos, currpos, pos;
 
 	beginpos = lowpos = pos = xdr_getpos(xdrs);
 	highpos = lowpos + ARGSIZE;

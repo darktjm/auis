@@ -23,8 +23,6 @@ ATK_INTER
  * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  * 
  *  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figoflow.H,v 1.1 1995/03/07 20:18:02 Zarf Stab74 $
 */
 
 #include <figorect.H>
@@ -38,8 +36,8 @@ class figoflow : public  figorect {
     static class figoflow * Create(long left, long top, long width, long height);
 
     void ObservedChanged(class observable  *obs, long  status);
-    void PrintObject(class figview *v, FILE *file, char *prefix, boolean newstyle);
-    char * ToolName(class figtoolview *v, long rock)  ;
+    void PrintObject(class figview *v, FILE *file, const char *prefix, boolean newstyle);
+    const char * ToolName(class figtoolview *v, long rock)  ;
     enum figobj_HitVal HitMe(long x, long y, long delta, long *ptref)  ;
     void Draw(class figview *v); 
     void Sketch(class figview *v);

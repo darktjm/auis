@@ -23,11 +23,6 @@
 
 #include <andrewos.h>
 ATK_IMPL("webapp.H")
-
-#ifndef NORCSID
-static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/webapp.C,v 1.10 1996/11/07 02:00:24 robr Exp $";
-#endif
-
 #include <frame.H>
 #include <buffer.H>
 #include <im.H>
@@ -217,7 +212,7 @@ ButtonCallBack(class frame  *frame,  class value  *val,
                         {
                         class webcom *w =
                         webcom::FindWebcomFromData( (wv)->GetDataObject());
-                        char *s = "";
+                        const char *s = "";
                         if (w)  s = (w)->GetURL();
                         if (s == NULL) s = "";
                         webview::VisitWeb(wv, s, WEBCOM_Reload);

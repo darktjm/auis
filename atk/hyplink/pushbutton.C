@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/hyplink/RCS/pushbutton.C,v 1.5 1996/07/06 03:15:51 wjh Exp $";
-#endif
-
 ATK_IMPL("pushbutton.H")
 #include <stdio.h>
 #include <sys/param.h>
@@ -62,13 +56,11 @@ static class atom *pushbutton_trigger;
 
 
 ATKdefineRegistry(pushbutton, dataobject, pushbutton::InitializeClass);
-#ifndef NORCSID
-#endif
 static void pushbutton__WriteDataPart(class pushbutton  *self, FILE  *fp);
 static long pushbutton__ReadDataPart(class pushbutton  *self, FILE  *fp, int dsversion);
 static long pushbutton_SanelyReturnReadError(class pushbutton  *self, FILE  *fp, long  id, long  code);
 static int htoin(char  *s, int  n);
-static void WriteLine(FILE  *f, char  *l);
+static void WriteLine(FILE  *f, const char  *l);
 static char * GlomStrings(char  *s , char  *t);
 static char * ReadLine(FILE  *f);
 static char * EncodeFont(class pushbutton  *self);
@@ -154,13 +146,13 @@ pushbutton__WriteDataPart(class pushbutton  *self, FILE  *fp)
 */
   char buf[100], *encfont;
 
-  WriteLine(fp, self->text ? self->text : (char *)"");
+  WriteLine(fp, self->text ? self->text : "");
   sprintf(buf,"%d", self->style); /* *BUG* how do we tell a defaulted 
 				     style from a set style? */
   WriteLine(fp, buf);
 
   encfont = self->myfontdesc ? EncodeFont(self) : NULL;
-  WriteLine(fp, encfont ? encfont : (char *)"");
+  WriteLine(fp, encfont ? encfont : "");
   if (encfont) {
     free(encfont);
     encfont = NULL;
@@ -367,7 +359,7 @@ pushbutton::Read(FILE  *fp, long  id)
 
 
 void
-pushbutton::SetText(char  *txt)
+pushbutton::SetText(const char  *txt)
 {
 /*
   Set the text label for this object.
@@ -538,7 +530,7 @@ pushbutton::ParseRGB(char  *rgb_string, unsigned char *rgb_vect)
 
 
 static void
-WriteLine(FILE  *f, char  *l)
+WriteLine(FILE  *f, const char  *l)
 {
 /* 
   Output a single line onto the data stream, quoting

@@ -61,11 +61,11 @@ public:
 
 	virtual void DesiredPrintSize(long width, long height, 
 		enum view_DSpass pass, long *desiredwidth, long *desiredheight);
-	virtual void *GetPSPrintInterface(char *printtype);
+	virtual void *GetPSPrintInterface(const char *printtype);
 	virtual void PrintPSRect(FILE *outfile, long logwidth, long logheight, 
 		struct rectangle *visrect);
 	virtual void PrintPSDoc(FILE *outfile, long pagew, long pageh);
-	virtual void Print(FILE *file, char *processor, char *finalFormat, 
+	virtual void Print(FILE *file, const char *processor, const char *finalFormat, 
 		boolean topLevel);
 	
 	static boolean InitializeClass();

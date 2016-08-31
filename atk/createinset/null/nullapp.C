@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/createinset/null/RCS/nullapp.C,v 1.6 1995/01/27 02:29:26 wjh Stab74 $";
-#endif
-
-
 /*
  * app for null
  *

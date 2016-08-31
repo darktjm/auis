@@ -26,12 +26,6 @@
  */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/fontdesc.C,v 3.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
 ATK_IMPL("fontdesc.H")
 #include <graphic.H>
 #include <im.H>
@@ -42,8 +36,6 @@ ATK_IMPL("fontdesc.H")
 
 
 ATKdefineRegistry(fontdesc, ATK, NULL);
-#ifndef NORCSID
-#endif
 static class fontdesc *fontdesc_CreateUsingDescriptor(struct fontnamedesc  *FontName, long  FontStyle, long  FontSize);
 
 
@@ -87,7 +79,7 @@ long fontdesc::TextSize(class graphic  *graphic, const char  *text, long  TextLe
 
 struct FontSummary *fontdesc::FontSummary(class graphic  *graphic)
 {
-    register struct FontSummary *tsp;
+    struct FontSummary *tsp;
 
     tsp = &this->summary;
     if (this->DescValid)
@@ -110,7 +102,7 @@ short *fontdesc::HeightTable(class graphic  *graphic)
 
 }
 
-long fontdesc::StringSize(class graphic  *graphic,  const char *string,register long  *XWidth,register long  *YWidth)
+long fontdesc::StringSize(class graphic  *graphic,  const char *string,long  *XWidth,long  *YWidth)
 {
     /* Override Me */
     return 0;
@@ -156,7 +148,7 @@ class fontdesc *fontdesc::Create(const char  *fontName, long  fontStyle, long  f
 struct fontnamedesc *fontdesc::GetFontNameDesc(char  *fontName)
 {
     static struct fontnamedesc *allFontNames = NULL;
-    register struct fontnamedesc *tp;
+    struct fontnamedesc *tp;
     
     for (tp = allFontNames; tp != NULL; tp = tp->next)
         if (*tp->name == *fontName && ! strcmp(tp->name, fontName))
@@ -313,11 +305,11 @@ boolean fontdesc::ExplodeFontName(const char  *fontName, char  *familyName, long
     return TRUE;
 }
 
-long fontdesc::StringBoundingBox(class graphic  *graphic, char  *string, int  *width, int  *height)
+long fontdesc::StringBoundingBox(class graphic  *graphic, const char  *string, int  *width, int  *height)
 {
   long w, a, d, ascent, descent, junk;
-  register short *fwt, *fht;
-  register char *p;
+  short *fwt, *fht;
+  const char *p;
   static struct fontdesc_charInfo ci;
 
   fwt = (this)->WidthTable ( graphic);

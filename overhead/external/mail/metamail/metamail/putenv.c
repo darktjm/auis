@@ -52,8 +52,8 @@ putenv (string)
      const char *string;
 {
   char *name_end = index (string, '=');
-  register size_t size;
-  register char **ep;
+  size_t size;
+  char **ep;
 
   if (name_end == NULL)
     {

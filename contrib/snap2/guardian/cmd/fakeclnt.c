@@ -25,17 +25,12 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/guardian/cmd/RCS/fakeclnt.c,v 1.9 1992/12/15 21:05:43 rr2b Stab74 $";
-#endif
-
 /*
    A nop snap client, just created to test authentication
 */
 
-#include <stdio.h>
 #include <andrewos.h> /* sys/types.h sys/time.h */
+#include <stdio.h>
 #include <netinet/in.h>
 #include <gasp.h>
 #include <snap.h>

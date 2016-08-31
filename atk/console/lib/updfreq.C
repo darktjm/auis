@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/time.h sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/updfreq.C,v 1.2 1993/05/19 17:05:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 #include <consoleClass.H>
 #include <fontdesc.H>
 #include <event.H>
@@ -53,8 +43,6 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 
-#ifndef NORCSID
-#endif
 void UpdateDisplay(class consoleClass  *self, struct display  *disp);
 void NewValue(class consoleClass  *self, struct datum  *datum, int  val, char  *text, boolean  forceupdating);
 void CheckFPA(class consoleClass  *self);

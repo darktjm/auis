@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-	char *tlex_thongs_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/syntax/tlex/RCS/thongs.C,v 1.2 1993/05/18 17:27:50 rr2b Stab74 $";
-#endif
-
 /*
 	Maintains the list -Thongs-  sorted in order by ->thong
 		by adding elements with ThongAdd
@@ -47,17 +43,15 @@ static struct line *Thongs = NULL;	/* list of all thongs */
 /* compute the number of leading positions in which
 	the two strings s and q are the same
 */
-	#ifndef NORCSID
-#endif
-static int Similarity(char  *s , char  *q);
-void ThongAdd(char  *thong, struct line  *action, boolean  fromset);
+static int Similarity(const char  *s , const char  *q);
+void ThongAdd(const char  *thong, struct line  *action, boolean  fromset);
 void ThongReplaceNulls(struct line  *hdr);
 void ThongOut(FILE  *f);
 int ThongAction(struct line  *thong);
 
 
 static int
-Similarity(char  *s , char  *q)
+Similarity(const char  *s , const char  *q)
 	{
 	int n;
 	for (n=0; *s && *s++ == *q++; n++) {}
@@ -79,7 +73,7 @@ Similarity(char  *s , char  *q)
 	it may be the original Hdr or it may be a Thong.
 */
 	void
-ThongAdd(char  *thong, struct line  *action, boolean  fromset)
+ThongAdd(const char  *thong, struct line  *action, boolean  fromset)
 			{
 	struct line *tx, *prevx;
 	struct line *tl;
@@ -174,13 +168,13 @@ ThongReplaceNulls(struct line  *hdr)
 /* ThongOut - generate tables
 	tlex_thongtbl,  tlex_thongsame,  tlex_thongact
 with the form:
-	static char *tlex_thongtbl[] = {
+	static const char * const tlex_thongtbl[] = {
 		"/", ".9", ... ""
 	};
-	static char tlex_thongsame[] = {
+	static const char tlex_thongsame[] = {
 		0, 0, ..., 0
 	};
-	static short tlex_thongact[] = {
+	static const short tlex_thongact[] = {
 		13, N, ... 0
 	};
     assign u.g.index values
@@ -192,10 +186,11 @@ ThongOut(FILE  *f)
 	int len, tlen;
 	int index;
 	struct line *tx;
-	char *es, *prev;
+	char *es;
+	const char *prev;
 
 	/* thongtbl */
-	fprintf(f, "static char *%s_thongtbl[] = {", Prefix);
+	fprintf(f, "static const char * const %s_thongtbl[] = {", Prefix);
 	index = 0;
 	for (tx = Thongs; tx; tx = tx->next) {
 		tx->u.g.index = index++;	/* assign index value */
@@ -219,7 +214,7 @@ ThongOut(FILE  *f)
 
 	/* thongsame */
 	prev = "";
-	fprintf(f, "static char %s_thongsame[] = {\n\t", Prefix);
+	fprintf(f, "static const char %s_thongsame[] = {\n\t", Prefix);
 	len = 8;	/* (8 for the \t in thongcon) */
 	for (tx = Thongs; tx; tx = tx->next) {
 		if (len + 3 > 75) {
@@ -234,7 +229,7 @@ ThongOut(FILE  *f)
 	fprintf(f, "0};\n");
 
 	/* thongact */
-	fprintf(f, "static short %s_thongact[] = {\n\t", Prefix);
+	fprintf(f, "static const short %s_thongact[] = {\n\t", Prefix);
 	len = 8;	/* (8 for the \t in thongcon) */
 	for (tx = Thongs; tx; tx = tx->next) {
 		if (len + 5 > 64) {

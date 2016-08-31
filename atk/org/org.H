@@ -72,12 +72,12 @@ public:
 
    long Read( FILE *file, long id )				 ;
    long Write( FILE *file, long id, int level )		 ;
-   char * ViewName()						 ;
+   const char * ViewName()						 ;
 
 
 
   virtual void SetDebug( boolean state );
-  virtual char * NodeName( struct tree_node *node ) ;
+  virtual const char * NodeName( struct tree_node *node ) ;
 
 
 

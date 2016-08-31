@@ -1,5 +1,3 @@
-/* @(#)pmap_clnt.h	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -50,8 +48,6 @@
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-/*	@(#)pmap_clnt.h 1.10 86/07/16 SMI	*/
-
 /*
  * pmap_clnt.h
  * Supplies C routines to get to portmap services.

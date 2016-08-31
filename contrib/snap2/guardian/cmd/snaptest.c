@@ -25,13 +25,8 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/guardian/cmd/RCS/snaptest.c,v 2.8 1994/06/09 21:21:04 rr2b Stab74 $";
-#endif
-
-#include <stdio.h>
 #include <andrewos.h> /* sys/types.h */
+#include <stdio.h>
 #include <netinet/in.h>
 
 #include <snap.h>
@@ -61,7 +56,7 @@ char **argv;
     char *tokens;
 #endif /* AFS_ENV */
     int cid, iters, len, type;
-    register char *hostname, *user, *pw, *cell;
+    char *hostname, *user, *pw, *cell;
     static char longmsg[1000];
 
     if (argc < 3 || argc > 7) {
@@ -333,7 +328,7 @@ static call7(cid)
 {
     static char send[10000], reply[10000];
     int rc;
-    register int i;
+    int i;
     int msglen;
 
     msglen = (random() % 9996) + 3;

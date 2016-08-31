@@ -1,7 +1,4 @@
 #
-# @(#)Makefile	1.4 87/11/30 3.9 RPCSRC
-#
-#
 #   Build all demo services
 #
 MAKE = make

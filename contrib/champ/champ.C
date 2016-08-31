@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/RCS/champ.C,v 1.2 1993/05/30 00:26:21 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 #include "champ.H"
 
@@ -37,9 +32,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/
 
 
 ATKdefineRegistry(champ, ATK, NULL);
-#ifndef NORCSID
-#endif
-
 
 int champ::ReadDatesFromChampPath(const char  *path)
 {

@@ -23,10 +23,6 @@
  *  $
 */
 
-#ifdef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/image/cmd/RCS/ppm2atkimage.C,v 1.7 1995/11/08 03:08:52 robr Stab74 $";
-#endif
 #include <andrewos.h> /* strings.h */
 #include <stdio.h>
 #include <ctype.h>
@@ -40,7 +36,7 @@ int main(int  argc, char  **argv)
     long ret, saveQuality = -1;
     class pbm *self;
     FILE *f = stdin;
-    char *saveformat = NULL;
+    const char *saveformat = NULL;
     boolean qualityComing = FALSE;
 
     if(argc > 1) {

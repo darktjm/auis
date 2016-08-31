@@ -32,12 +32,6 @@ the full agreement.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/recognition/RCS/matrix.c,v 1.5 1993/06/17 04:35:10 rr2b Stab74 $";
-#endif
-
-
 /*
  Simple matrix operations
  Why I am writing this stuff over is beyond me
@@ -64,8 +58,8 @@ Vector
 NewVector(r)
 int r;
 {
-	register struct array_header *a;
-	register Vector v;
+	struct array_header *a;
+	Vector v;
 
 	a = (struct array_header *)
 	    allocate(sizeof(struct array_header) + r * sizeof(double), char);
@@ -88,10 +82,10 @@ Matrix
 NewMatrix(r, c)
 int r, c;
 {
-	register struct array_header *a = (struct array_header *)
+	struct array_header *a = (struct array_header *)
 	   allocate(sizeof(struct array_header) + r * sizeof(double *), char);
-	register int i;
-	register Matrix m;
+	int i;
+	Matrix m;
 
 	m = (Matrix) (a + 1);
 	for(i = 0; i < r; i++)
@@ -113,7 +107,7 @@ void
 FreeMatrix(m)
 Matrix m;
 {
-	register int i;
+	int i;
 
 	for(i = 0; i < NROWS(m); i++)
 		free(m[i]);
@@ -122,10 +116,10 @@ Matrix m;
 
 Vector
 VectorCopy(v)
-register Vector v;
+Vector v;
 {
-	register Vector r = NewVector(NROWS(v));
-	register int i;
+	Vector r = NewVector(NROWS(v));
+	int i;
 
 	for(i = 0; i < NROWS(v); i++)
 		r[i] = v[i];
@@ -134,10 +128,10 @@ register Vector v;
 
 Matrix
 MatrixCopy(m)
-register Matrix m;
+Matrix m;
 {
-	register Matrix r = NewMatrix(NROWS(m), NCOLS(m));
-	register int i, j;
+	Matrix r = NewMatrix(NROWS(m), NCOLS(m));
+	int i, j;
 
 	for(i = 0; i < NROWS(m); i++)
 		for(j = 0; j < NROWS(m); j++)
@@ -152,7 +146,7 @@ void
 ZeroVector(v)
 Vector v;
 {
-	register i;
+	int i;
 	for(i = 0; i < NROWS(v); i++) v[i] = 0.0;
 }
 
@@ -161,7 +155,7 @@ void
 ZeroMatrix(m)
 Matrix m;
 {
-	register i, j;
+	int i, j;
 	for(i = 0; i < NROWS(m); i++)
 		for(j = 0; j < NCOLS(m); j++)
 			m[i][j] = 0.0;
@@ -172,7 +166,7 @@ FillMatrix(m, fill)
 Matrix m;
 double fill;
 {
-	register i, j;
+	int i, j;
 	for(i = 0; i < NROWS(m); i++)
 		for(j = 0; j < NCOLS(m); j++)
 			m[i][j] = fill;
@@ -180,10 +174,10 @@ double fill;
 
 double
 InnerProduct(v1, v2)
-register Vector v1, v2;
+Vector v1, v2;
 {
 	double result = 0;
-	register int n = NROWS(v1);
+	int n = NROWS(v1);
 	if(n != NROWS(v2))
 		recog_error("InnerProduct %d x %d ", n, NROWS(v2));
 
@@ -194,9 +188,9 @@ register Vector v1, v2;
 
 void
 MatrixMultiply(m1, m2, prod)
-register Matrix m1, m2, prod;
+Matrix m1, m2, prod;
 {
-	register i, j, k;
+	int i, j, k;
 	double sum;
 
 	if(NCOLS(m1) != NROWS(m2))
@@ -229,7 +223,7 @@ Vector v;
 Matrix m;
 Vector prod;
 {
-	register int i, j;
+	int i, j;
 
 	if(NROWS(v) != NROWS(m))
 		recog_error("VectorTimesMatrix: Can't multiply %d vector by %dx%d",
@@ -248,9 +242,9 @@ Vector prod;
 void
 ScalarTimesVector(s, v, product)
 double s;
-register Vector v, product;
+Vector v, product;
 {
-	register int n = NROWS(v);
+	int n = NROWS(v);
 
 	if(NROWS(v) != NROWS(product))
 		recog_error("ScalarTimesVector: result wrong size (%d!=%d)",
@@ -263,9 +257,9 @@ register Vector v, product;
 void
 ScalarTimesMatrix(s, m, product)
 double s;
-register Matrix m, product;
+Matrix m, product;
 {
-	register int i, j;
+	int i, j;
 
 	if(NROWS(m) != NROWS(product)  || 
 	   NCOLS(m) != NCOLS(product))
@@ -284,10 +278,10 @@ register Matrix m, product;
 
 double
 QuadraticForm(v, m)
-register Vector v;
-register Matrix m;
+Vector v;
+Matrix m;
 {
-	register i, j, n;
+	int i, j, n;
 	double result = 0;
 
 	n = NROWS(v);
@@ -336,10 +330,10 @@ double
 InvertMatrix(ym, rm)
 Matrix ym, rm;
 {
-	register i, j, k;
+	int i, j, k;
 	double det, biga, recip_biga, hold;
 	int l[PERMBUFSIZE], m[PERMBUFSIZE];
-	register int n;
+	int n;
 
 	if(NROWS(ym) != NCOLS(ym))
 		recog_error("InvertMatrix: not square");
@@ -464,7 +458,7 @@ SliceVector(v, rowmask)
 Vector v;
 BitVector rowmask;
 {
-	register i, ri;
+	int i, ri;
 
 	Vector r = NewVector(bitcount(NROWS(v), rowmask));
 	for(i = ri = 0; i < NROWS(v); i++)
@@ -478,7 +472,7 @@ SliceMatrix(m, rowmask, colmask)
 Matrix m;
 BitVector rowmask, colmask;
 {
-	register i, ri, j, rj;
+	int i, ri, j, rj;
 
 	Matrix r;
 	
@@ -502,7 +496,7 @@ double fill;
 BitVector rowmask, colmask;
 Matrix r;
 {
-	register i, ri, j, rj;
+	int i, ri, j, rj;
 
 	FillMatrix(r, fill);
 
@@ -521,9 +515,9 @@ Matrix r;
 void
 OutputVector(f, v)
 FILE *f;
-register Vector v;
+Vector v;
 {
-	register int i;
+	int i;
 	fprintf(f, " V %d   ", NROWS(v));
 	for(i = 0; i < NROWS(v); i++)
 		fprintf(f, " %g", v[i]);
@@ -534,8 +528,8 @@ Vector
 InputVector(f)
 FILE *f;
 {
-	register Vector v;
-	register int i;
+	Vector v;
+	int i;
 	char check[4];
 	int nrows;
 
@@ -552,9 +546,9 @@ FILE *f;
 
 void
 OutputMatrix(f, m)
-register Matrix m;
+Matrix m;
 {
-	register int i, j;
+	int i, j;
 	fprintf(f, " M %d %d\n", NROWS(m), NCOLS(m));
 	for(i = 0; i < NROWS(m);  i++) {
 		for(j = 0; j < NCOLS(m); j++)
@@ -567,8 +561,8 @@ Matrix
 InputMatrix(f)
 FILE *f;
 {
-	register Matrix m;
-	register int i, j;
+	Matrix m;
+	int i, j;
 	char check[4];
 	int nrows, ncols;
 
@@ -588,7 +582,7 @@ double
 InvertSingularMatrix(m, inv)
 Matrix m, inv;
 {
-	register int i, j, k;
+	int i, j, k;
 	BitVector mask;
 	Matrix sm;
 	double det, maxdet;
@@ -689,10 +683,10 @@ found:
 
 void
 PrintVector(v, s,a1,a2,a3,a4,a5,a6,a7,a8)
-register Vector v;
+Vector v;
 char *s; int a1,a2,a3,a4,a5,a6,a7,a8;
 {
-	register int i;
+	int i;
 	printf(s,a1,a2,a3,a4,a5,a6,a7,a8);
 	for(i = 0; i < NROWS(v); i++) printf(" %8.4f", v[i]);
 	printf("\n");
@@ -700,10 +694,10 @@ char *s; int a1,a2,a3,a4,a5,a6,a7,a8;
 
 void
 PrintMatrix(m, s,a1,a2,a3,a4,a5,a6,a7,a8)
-register Matrix m;
+Matrix m;
 char *s; int a1,a2,a3,a4,a5,a6,a7,a8;
 {
-	register int i, j;
+	int i, j;
 	printf(s,a1,a2,a3,a4,a5,a6,a7,a8);
 	for(i = 0; i < NROWS(m);  i++) {
 		for(j = 0; j < NCOLS(m); j++)

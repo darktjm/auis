@@ -25,16 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>		/* for DPS_ENV */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/psview.C,v 1.6 1996/11/07 17:36:49 wjh Exp $";
-#endif
-
-
- 
-
 /*
   Still needs to be done:
 
@@ -48,6 +38,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 */
 
+#include <andrewos.h>		/* for DPS_ENV */
 #include <stdio.h>
 #include <signal.h>
 
@@ -116,15 +107,6 @@ static class keymap *psviewKeyMap;
 
 
 ATKdefineRegistry(psview, iconview, psview::InitializeClass);
-#ifndef NORCSID
-#endif
-#ifdef DPS_ENV
-#endif /* DPS_ENV */
-#ifdef DEBUG
-#else
-#endif
-#ifdef DPS_ENV
-#endif /* DPS_ENV */
 static void Close(class psview  *v,long  l);
 static void ps_open(class psview  *v,long  l);
 static void closeall(class view  *v,long  l);
@@ -315,14 +297,14 @@ static void autobounds(class psview  *self, long  rock)
     class textview *tvobj = (class textview *)(((class iconview *)self)->bottomview);
     class ps *psobj = (class ps *)(self)->GetDataObject();
     class text *tobj = (class text *)(psobj)->GetChild();
-    char *pattern = "\n%%BoundingBox:";
+    const char pattern[] = "\n%%BoundingBox:";
     char *pat = NULL;		/* compiled search pattern */
     long pos, i, c;
     char bbox_buf[200];
     long llx, lly, urx, ury;
-    char *translate = "%ld %ld translate %% inserted by ps inset at the request of user to make image visible\n";
+    const char translate[] = "%ld %ld translate %% inserted by ps inset at the request of user to make image visible\n";
     char tr_buf[200];
-    char *pattern2 = "translate % inserted by ps inset at the request of user to make image visible\n";
+    const char pattern2[] = "translate % inserted by ps inset at the request of user to make image visible\n";
 
     /* look for "\n%%BoundingBox: llx lly urx ury\n" information */
     if (search::CompilePattern(pattern, (struct SearchPattern **)&pat) != NULL) {
@@ -437,7 +419,7 @@ psview::~psview()
     if(this->menus) delete this->menus;
 }
 
-static char *PSheader[] = {
+static const char * const PSheader[] = {
     "%s  /width %d def  /height %d def /xScale %0.4f def /yScale %0.4f def\n",
     "%s xScale yScale scale\n",
     "%s /showpage {} def\n",
@@ -447,15 +429,15 @@ static char *PSheader[] = {
 /*		instance methods				*/
 /****************************************************************/
 void 
-psview::Print(register FILE    *file, register char	 *processor, register char	 *format, register boolean  toplevel)
+psview::Print(FILE    *file, const char	 *processor, const char	 *format, boolean  toplevel)
 {
     class ps *psobj;
     class text *textobject;
-    register char *text;
-    char **psx;
+    char *text;
+    const char * const *psx;
     /* char *line = (char *)malloc(BUFSIZ); */
     long c, pos = 0, textlength = 0;
-    char *prefix;
+    const char *prefix;
     double xdscale = 1.0, ydscale = 1.0;
     long height, width;
 
@@ -505,7 +487,7 @@ void psview::PrintPSDoc(FILE *outfile, long pagew, long pageh)
 {
 }
 
-void *psview::GetPSPrintInterface(char *printtype)
+void *psview::GetPSPrintInterface(const char *printtype)
 {
     if (!strcmp(printtype, "generic"))
 	return (void *)this;
@@ -517,11 +499,11 @@ void psview::PrintPSRect(FILE *file, long logwidth, long logheight, struct recta
 {
     class ps *psobj;
     class text *textobject;
-    register char *text;
-    char **psx;
+    char *text;
+    const char * const *psx;
     /* char *line = (char *)malloc(BUFSIZ); */
     long c, pos = 0, textlength = 0;
-    char *prefix = "";
+    const char *prefix = "";
     double xdscale = 1.0, ydscale = 1.0;
     long height, width;
 
@@ -567,7 +549,7 @@ void psview::DesiredPrintSize(long width, long height, enum view_DSpass pass, lo
 }
 
 	boolean 
-psview::Gifify(char *filename, long *pmaxw, long *pmaxh, 
+psview::Gifify(const char *filename, long *pmaxw, long *pmaxh, 
 			struct rectangle *visrect) {
 	ps *psobj = (ps *)GetDataObject();
 	long width = (psobj)->GetPixelWidth();

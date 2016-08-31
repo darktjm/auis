@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/RCS/match.C,v 1.4 1994/06/09 21:20:21 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>  /* time.h */
 #include <champ.h>
 

@@ -25,14 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/xbm.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
 /*  
   Enable import and export of X Bitmap
   paul@athena.mit.edu  5/90		
@@ -40,6 +32,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
   most of this code was stolen from the old 'x2wm' and wm2x' programs
 */		
 
+#include <andrewos.h>
 ATK_IMPL("xbm.H")
 
 #include <stdio.h>
@@ -99,10 +92,6 @@ static boolean initialized = FALSE;	/* easier to fill in at run time */
 /* from X11R5 XRdBitF.c */
 
 ATKdefineRegistry(xbm, ATK, NULL);
-#ifndef NORCSID
-#endif
-#if !defined(vax)
-#endif
 static int NextInt (FILE  *fstream);
 static void initHexTable();
 
@@ -233,11 +222,12 @@ char name[64], bits[64], *t;
    return dataobject_NOREADERROR;
 }
 
-void xbm::WriteImage(register FILE  *file		, register class pixelimage  *pix, register struct rectangle  *sub)
+void xbm::WriteImage(FILE  *file		, class pixelimage  *pix, struct rectangle  *sub)
 
 {
 
-    char c, *title = "raster";
+    char c;
+    const char *title = "raster";
     unsigned char *location;
     long left, top, width, height, nbytes, bytewidth, i;
 

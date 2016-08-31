@@ -20,12 +20,6 @@
   $
  */
 
- 
-#ifdef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/console.c,v 1.3 1994/03/21 16:57:35 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h> /* sys/time.h sys/types.h sys/file.h */
 #include <sys/ioctl.h>
 #include <sys/socket.h>
@@ -49,7 +43,7 @@ char *progname;
     int i;
     char tmpHostName[255];
     unsigned long hostaddr;
-    register int fd;
+    int fd;
     struct sockaddr_in sin;
     struct hostent *hostent;
 #ifdef USEGETSERV

@@ -25,20 +25,12 @@
  *  $
 */
 
-#include <andrewos.h>	/* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/lineprom.c,v 2.7 1992/12/15 21:10:10 rr2b Stab74 $";
-#endif
-
 /*
 	lineprom.c -- Decide whether a datastream line should be promoted
 		to the top of the message that encapsulates it.
 */
 
- 
-
+#include <andrewos.h>	/* strings.h */
 #include <stdio.h>
 #include <ctype.h>
 #include <util.h>

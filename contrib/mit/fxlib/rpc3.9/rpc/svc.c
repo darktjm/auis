@@ -1,5 +1,3 @@
-/* @(#)svc.c	1.4 87/11/16 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,11 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/svc.c,v 1.3 1992/12/15 21:54:19 rr2b Stab74 $";
-#endif
 
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
@@ -55,10 +48,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-#if !defined(lint) && defined(SCCSIDS)
-static char sccsid[] = "@(#)svc.c 1.41 87/10/13 Copyr 1984 Sun Micro";
-#endif
-
 /*
  * svc.c, Server-side remote procedure call interface.
  *
@@ -109,7 +98,7 @@ void
 xprt_register(xprt)
 	SVCXPRT *xprt;
 {
-	register int sock = xprt->xp_sock;
+	int sock = xprt->xp_sock;
 
 #ifdef FD_SETSIZE
 	if (xports == NULL) {
@@ -136,7 +125,7 @@ void
 xprt_unregister(xprt) 
 	SVCXPRT *xprt;
 { 
-	register int sock = xprt->xp_sock;
+	int sock = xprt->xp_sock;
 
 #ifdef FD_SETSIZE
 	if ((sock < _rpc_dtablesize()) && (xports[sock] == xprt)) {
@@ -168,7 +157,7 @@ svc_register(xprt, prog, vers, dispatch, protocol)
 	int protocol;
 {
 	struct svc_callout *prev;
-	register struct svc_callout *s;
+	struct svc_callout *s;
 
 	if ((s = svc_find(prog, vers, &prev)) != NULL_SVC) {
 		if (s->sc_dispatch == dispatch)
@@ -201,7 +190,7 @@ svc_unregister(prog, vers)
 	u_long vers;
 {
 	struct svc_callout *prev;
-	register struct svc_callout *s;
+	struct svc_callout *s;
 
 	if ((s = svc_find(prog, vers, &prev)) == NULL_SVC)
 		return;
@@ -226,7 +215,7 @@ svc_find(prog, vers, prev)
 	u_long vers;
 	struct svc_callout **prev;
 {
-	register struct svc_callout *s, *p;
+	struct svc_callout *s, *p;
 
 	p = NULL_SVC;
 	for (s = svc_head; s != NULL_SVC; s = s->sc_next) {
@@ -246,7 +235,7 @@ done:
  */
 bool_t
 svc_sendreply(xprt, xdr_results, xdr_location)
-	register SVCXPRT *xprt;
+	SVCXPRT *xprt;
 	xdrproc_t xdr_results;
 	caddr_t xdr_location;
 {
@@ -266,7 +255,7 @@ svc_sendreply(xprt, xdr_results, xdr_location)
  */
 void
 svcerr_noproc(xprt)
-	register SVCXPRT *xprt;
+	SVCXPRT *xprt;
 {
 	struct rpc_msg rply;
 
@@ -282,7 +271,7 @@ svcerr_noproc(xprt)
  */
 void
 svcerr_decode(xprt)
-	register SVCXPRT *xprt;
+	SVCXPRT *xprt;
 {
 	struct rpc_msg rply; 
 
@@ -298,7 +287,7 @@ svcerr_decode(xprt)
  */
 void
 svcerr_systemerr(xprt)
-	register SVCXPRT *xprt;
+	SVCXPRT *xprt;
 {
 	struct rpc_msg rply; 
 
@@ -342,7 +331,7 @@ svcerr_weakauth(xprt)
  */
 void 
 svcerr_noprog(xprt)
-	register SVCXPRT *xprt;
+	SVCXPRT *xprt;
 {
 	struct rpc_msg rply;  
 
@@ -358,7 +347,7 @@ svcerr_noprog(xprt)
  */
 void  
 svcerr_progvers(xprt, low_vers, high_vers)
-	register SVCXPRT *xprt; 
+	SVCXPRT *xprt; 
 	u_long low_vers;
 	u_long high_vers;
 {
@@ -418,14 +407,14 @@ svc_getreqset(readfds)
 {
     int readfds_local = *readfds;
 #endif /* def FD_SETSIZE */
-	register enum xprt_stat stat;
+	enum xprt_stat stat;
 	struct rpc_msg msg;
 	int prog_found;
 	u_long low_vers;
 	u_long high_vers;
 	struct svc_req r;
-	register int sock;
-	register SVCXPRT *xprt;
+	int sock;
+	SVCXPRT *xprt;
 	char cred_area[2*MAX_AUTH_BYTES + RQCRED_SIZE];
 	msg.rm_call.cb_cred.oa_base = cred_area;
 	msg.rm_call.cb_verf.oa_base = &(cred_area[MAX_AUTH_BYTES]);
@@ -446,7 +435,7 @@ svc_getreqset(readfds)
 			if (SVC_RECV(xprt, &msg)) {
 
 				/* now find the exported program and call it */
-				register struct svc_callout *s;
+				struct svc_callout *s;
 				enum auth_stat why;
 
 				r.rq_xprt = xprt;

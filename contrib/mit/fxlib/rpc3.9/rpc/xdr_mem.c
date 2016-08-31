@@ -1,5 +1,3 @@
-/* @(#)xdr_mem.c	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,12 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/xdr_mem.c,v 1.3 1992/12/15 21:54:40 rr2b Stab74 $";
-#endif
-
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
  * unrestricted use provided that this legend is included on all tape
@@ -55,10 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-#if !defined(lint) && defined(SCCSIDS)
-static char sccsid[] = "@(#)xdr_mem.c 1.19 87/08/11 Copyr 1984 Sun Micro";
-#endif
-
 /*
  * xdr_mem.h, XDR implementation using memory buffers.
  *
@@ -101,7 +89,7 @@ static struct	xdr_ops xdrmem_ops = {
  */
 void
 xdrmem_create(xdrs, addr, size, op)
-	register XDR *xdrs;
+	XDR *xdrs;
 	caddr_t addr;
 	u_int size;
 	enum xdr_op op;
@@ -121,7 +109,7 @@ xdrmem_destroy(/*xdrs*/)
 
 static bool_t
 xdrmem_getlong(xdrs, lp)
-	register XDR *xdrs;
+	XDR *xdrs;
 	long *lp;
 {
 
@@ -134,7 +122,7 @@ xdrmem_getlong(xdrs, lp)
 
 static bool_t
 xdrmem_putlong(xdrs, lp)
-	register XDR *xdrs;
+	XDR *xdrs;
 	long *lp;
 {
 
@@ -147,9 +135,9 @@ xdrmem_putlong(xdrs, lp)
 
 static bool_t
 xdrmem_getbytes(xdrs, addr, len)
-	register XDR *xdrs;
+	XDR *xdrs;
 	caddr_t addr;
-	register u_int len;
+	u_int len;
 {
 
 	if ((xdrs->x_handy -= len) < 0)
@@ -161,9 +149,9 @@ xdrmem_getbytes(xdrs, addr, len)
 
 static bool_t
 xdrmem_putbytes(xdrs, addr, len)
-	register XDR *xdrs;
+	XDR *xdrs;
 	caddr_t addr;
-	register u_int len;
+	u_int len;
 {
 
 	if ((xdrs->x_handy -= len) < 0)
@@ -175,7 +163,7 @@ xdrmem_putbytes(xdrs, addr, len)
 
 static u_int
 xdrmem_getpos(xdrs)
-	register XDR *xdrs;
+	XDR *xdrs;
 {
 
 	return ((u_int)xdrs->x_private - (u_int)xdrs->x_base);
@@ -183,11 +171,11 @@ xdrmem_getpos(xdrs)
 
 static bool_t
 xdrmem_setpos(xdrs, pos)
-	register XDR *xdrs;
+	XDR *xdrs;
 	u_int pos;
 {
-	register caddr_t newaddr = xdrs->x_base + pos;
-	register caddr_t lastaddr = xdrs->x_private + xdrs->x_handy;
+	caddr_t newaddr = xdrs->x_base + pos;
+	caddr_t lastaddr = xdrs->x_private + xdrs->x_handy;
 
 	if ((long)newaddr > (long)lastaddr)
 		return (FALSE);
@@ -198,7 +186,7 @@ xdrmem_setpos(xdrs, pos)
 
 static long *
 xdrmem_inline(xdrs, len)
-	register XDR *xdrs;
+	XDR *xdrs;
 	int len;
 {
 	long *buf = 0;

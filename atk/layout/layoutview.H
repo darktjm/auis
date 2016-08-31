@@ -98,7 +98,7 @@ public:
    void WantNewSize(class view *requestor);
    void LinkTree(class view *parent);
    void ObservedChanged(class observable *changed, long status);
-   void Print(FILE *f, char *processor, char *finalFormat, boolean toplevel);
+   void Print(FILE *f, const char *processor, const char *finalFormat, boolean toplevel);
 
 
   virtual void SetSelection(struct component *c);
@@ -109,7 +109,7 @@ public:
   virtual void SetInitMode();
   virtual void SetAuthoringMode();
   virtual void Paste();
-  virtual void SetChildByName(char *dataname);
+  virtual void SetChildByName(const char *dataname);
   virtual void SetChild();
   virtual void Promote();
   virtual void Demote();
@@ -118,7 +118,7 @@ public:
   virtual void MakeFixed();
   virtual void SetCreateMode(enum createmode_enum createmode);
   virtual void SetGranularity(int granularity);
-  virtual void ReplaceComponent(struct component *c, char *dataname);
+  virtual void ReplaceComponent(struct component *c, const char *dataname);
   virtual class view * FindSubview(struct component *c)  ;
   virtual struct component * RemoveSubview(class view *child)  ;
 

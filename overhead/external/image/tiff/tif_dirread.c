@@ -101,9 +101,9 @@ CheckMalloc(TIFF *tif, int n, const char *what)
  */
 int TIFFReadDirectory(TIFF *tif)
 {
-	register TIFFDirEntry *dp;
-	register int n;
-	register TIFFDirectory *td;
+	TIFFDirEntry *dp;
+	int n;
+	TIFFDirectory *td;
 	TIFFDirEntry *dir;
 	long v;
 	const TIFFFieldInfo *fip;
@@ -527,9 +527,9 @@ bad:
 static void
 EstimateStripByteCounts(TIFF *tif, TIFFDirEntry *dir, u_int dircount)
 {
-	register TIFFDirEntry *dp;
-	register TIFFDirectory *td = &tif->tif_dir;
-	register int n;
+	TIFFDirEntry *dp;
+	TIFFDirectory *td = &tif->tif_dir;
+	int n;
 
 	td->td_stripbytecount = (u_long *)
 	    CheckMalloc(tif, sizeof (u_long), "for \"StripByteCounts\" array");
@@ -818,7 +818,7 @@ TIFFFetchFloatArray(TIFF *tif, TIFFDirEntry *dir, float v[])
 static int
 TIFFFetchNormalTag(TIFF *tif, TIFFDirEntry *dp)
 {
-	static char mesg[] = "to fetch tag value";
+	static const char mesg[] = "to fetch tag value";
 	int ok = 0;
 
 	if (dp->tdir_count > 1) {		/* array of values */
@@ -939,7 +939,7 @@ TIFFFetchPerSampleShorts(TIFF *tif, TIFFDirEntry *dir, long *pl)
 static int
 TIFFFetchStripThing(TIFF *tif, TIFFDirEntry *dir, long nstrips, u_long **lpp)
 {
-	register u_long *lp;
+	u_long *lp;
 	int status;
 
 	if (!CheckDirCount(tif, dir, nstrips))
@@ -961,7 +961,7 @@ TIFFFetchStripThing(TIFF *tif, TIFFDirEntry *dir, long nstrips, u_long **lpp)
 		if (dp == NULL)
 			return (0);
 		if ((status = TIFFFetchShortArray(tif, dir, dp))) {
-			register u_short *wp = dp;
+			u_short *wp = dp;
 			while (nstrips-- > 0)
 				*lp++ = *wp++;
 		}
@@ -975,7 +975,7 @@ TIFFFetchStripThing(TIFF *tif, TIFFDirEntry *dir, long nstrips, u_long **lpp)
 static int
 TIFFFetchRefBlackWhite(TIFF *tif, TIFFDirEntry *dir)
 {
-	static char mesg[] = "for \"ReferenceBlackWhite\" array";
+	static const char mesg[] = "for \"ReferenceBlackWhite\" array";
 	char *cp;
 	int ok;
 

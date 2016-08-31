@@ -25,19 +25,9 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/eval.C,v 1.3 1993/06/04 11:35:13 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* eval.c - parse and evaluate expressions in table */
 
-
+#include <andrewos.h>
 #include <stdio.h>
 #include <setjmp.h>
 #include <signal.h>
@@ -103,27 +93,20 @@ struct jbstruct {
 };
 static struct jbstruct *jbs = NULL;
 
-#ifndef NORCSID
-#endif
-#if !POSIX_ENV
-#endif
-#if defined(_ANSI_C_SOURCE) && !defined(_NO_PROTO)
-#else
-#endif
 static void Exception (int sig);
 static double standardize(extended_double  *x);
-void  eval (register class table  * T, extended_double  *result, int      r , int      c, char    *input);
-static void expr (register class table  * T, extended_double  *result, char  **inptr, int      r , int      c);
-static double relexpr(register class table  *T, char  **inptr, int      r , int      c);
-static double aexpr (register class table  *T, char  **inptr, int      r , int      c);
-static double term (register class table  * T, char  **inptr, int      r , int      c);
-static double factor (register class table  * T, char  **inptr, int      r , int      c);
-static void cellref (register class table  * T, char  **inptr, int      rr , int      cc, double  *r , double  *c);
-static double fatom (register class table  * T, char  **inptr, int      rr , int      cc);
+void  eval (class table  * T, extended_double  *result, int      r , int      c, char    *input);
+static void expr (class table  * T, extended_double  *result, const char  **inptr, int      r , int      c);
+static double relexpr(class table  *T, const char  **inptr, int      r , int      c);
+static double aexpr (class table  *T, const char  **inptr, int      r , int      c);
+static double term (class table  * T, const char  **inptr, int      r , int      c);
+static double factor (class table  * T, const char  **inptr, int      r , int      c);
+static void cellref (class table  * T, const char  **inptr, int      rr , int      cc, double  *r , double  *c);
+static double fatom (class table  * T, const char  **inptr, int      rr , int      cc);
 void enterfun (char      *name, double  (*fptr)(), int      argc);
 static void inithash ();
-static double funcall (register class table  * T, int      rr , int      cc, char    *name, int      length, int      h, extended_double  *args, int      argc);
-static int trydate (char    *input);
+static double funcall (class table  * T, int      rr , int      cc, const char    *name, int      length, int      h, extended_double  *args, int      argc);
+static int trydate (const char    *input);
 
 
 void syntaxError ()
@@ -147,9 +130,9 @@ static double standardize(extended_double  *x)
     return StandardValue(x);
 }
 
-void  eval (register class table  * T, extended_double  *result, int      r , int      c, char    *input)
+void  eval (class table  * T, extended_double  *result, int      r , int      c, const char    *input)
 {
-    char *saveinput = input;
+    const char *saveinput = input;
 
     if (!*input) {
 	MakeBogus(result, "NULL!");
@@ -172,7 +155,7 @@ void  eval (register class table  * T, extended_double  *result, int      r , in
     }
 }
 
-static void expr (register class table  * T, extended_double  *result, char  **inptr, int      r , int      c)
+static void expr (class table  * T, extended_double  *result, const char  **inptr, int      r , int      c)
 {
     struct jbstruct new_jbs, *old_jbs;
     SIGNAL_RETURN_TYPE (*oldsig) (int sig);
@@ -187,7 +170,7 @@ static void expr (register class table  * T, extended_double  *result, char  **i
     signal (SIGFPE, oldsig);
 }
 
-static double relexpr(register class table  *T, char  **inptr, int      r , int      c)
+static double relexpr(class table  *T, const char  **inptr, int      r , int      c)
 {
     int     op, op2;
     double  x, y;
@@ -222,7 +205,7 @@ static double relexpr(register class table  *T, char  **inptr, int      r , int 
     return x;
 }
 
-static double aexpr (register class table  *T, char  **inptr, int      r , int      c)
+static double aexpr (class table  *T, const char  **inptr, int      r , int      c)
 {
     int     op;
     double  x, y;
@@ -240,7 +223,7 @@ static double aexpr (register class table  *T, char  **inptr, int      r , int  
     return x;
 }
 
-static double term (register class table  * T, char  **inptr, int      r , int      c)
+static double term (class table  * T, const char  **inptr, int      r , int      c)
 {
     int     op;
     double  x, y;
@@ -258,7 +241,7 @@ static double term (register class table  * T, char  **inptr, int      r , int  
     return x;
 }
 
-static double factor (register class table  * T, char  **inptr, int      r , int      c)
+static double factor (class table  * T, const char  **inptr, int      r , int      c)
 {
     int     op;
     double x, y;
@@ -282,7 +265,7 @@ static double factor (register class table  * T, char  **inptr, int      r , int
     return x;
 }
 
-static void cellref (register class table  * T, char  **inptr, int      rr , int      cc, double  *r , double  *c)
+static void cellref (class table  * T, const char  **inptr, int      rr , int      cc, double  *r , double  *c)
 {
     *r = relexpr(T, inptr, rr, cc);
     skipb(*inptr);
@@ -296,17 +279,17 @@ static void cellref (register class table  * T, char  **inptr, int      rr , int
 
 #define DigitToDouble(c) ((double) (c - '0'))
 
-static double fatom (register class table  * T, char  **inptr, int      rr , int      cc)
+static double fatom (class table  * T, const char  **inptr, int      rr , int      cc)
 {
     int    c;
     double x = 0, y = 0;
-    char *p;
+    const char *p;
     int h;
     int count;
     int length;
     extended_double args[100];
     double r0, c0, r1, c1;
-    char *isave;
+    const char *isave;
 
     skipb(*inptr);
     if (getop (*inptr, LBRACK)) {
@@ -388,7 +371,7 @@ static double fatom (register class table  * T, char  **inptr, int      rr , int
 }
 
 struct fun {
-    char   *name;
+    const char   *name;
     short   length,
 	    argc;
     double (*f)();
@@ -400,7 +383,7 @@ static int  initdone = 0;
 static struct fun  *htable[HASHMASK + 1];
 static struct fun   sentinal;
 
-void enterfun (char      *name, double  (*fptr)(), int      argc)
+void enterfun (const char      *name, double  (*fptr)(), int      argc)
 {
     struct fun *p, **q;
     char    c;
@@ -431,7 +414,7 @@ static void inithash () {
     initdone = 1;
 }
 
-static double funcall (register class table  * T, int      rr , int      cc, char    *name, int      length, int      h, extended_double  *args, int      argc)
+static double funcall (class table  * T, int      rr , int      cc, const char    *name, int      length, int      h, extended_double  *args, int      argc)
 {
     struct fun *p;
     extended_double myresult;
@@ -442,7 +425,7 @@ static double funcall (register class table  * T, int      rr , int      cc, cha
     sentinal.name = name;
     sentinal.length = length;
     for (p = htable[h & HASHMASK];; p = p -> next) {
-	char   *s, *t;
+	const char   *s, *t;
 	if (p -> length != length)
 	    continue;
 	for (s = p -> name, t = name; *s; s++, t++)
@@ -597,12 +580,12 @@ NOMATCH:
 }
 #endif
 
-static char *monthname[] = {
+static const char * const monthname[] = {
     NULL, "january", "february", "march", "april", "may", "june",
     "july", "august", "september", "october", "november", "december"
 };
 
-static int trydate (char    *input)
+static int trydate (const char    *input)
 {
     int     day = 0, month = 0, year = 0;
     int     i;

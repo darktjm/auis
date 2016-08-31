@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipprint.C,v 1.3 1993/06/17 04:28:00 rr2b Stab74 $";
-#endif
-
 /*LIBS:  -lm
 */
 
@@ -96,11 +91,11 @@ static boolean debug=TRUE;
 
 ATKdefineRegistry(zipprint, ATK, NULL);
 
-static long Print_Figure( register class zipprint	        *self, register zip_type_figure		 figure, register zip_type_pane		 pane );
-static long Print_Image( register class zipprint *self, register zip_type_image image, register zip_type_pane pane );
-static int Print_Inferior_Image( register class zipprint	        *self, register zip_type_image	         image, register zip_type_pane		 pane );
-static void Compute_Printing_Slug_Stretch_Factors( register class zipprint	          *self, register zip_type_pane		   pane );
-static void Set_Printing_Characteristics( register class zipprint	          *self, register zip_type_pane		   pane, register zip_type_figure		   figure );
+static long Print_Figure( class zipprint	        *self, zip_type_figure		 figure, zip_type_pane		 pane );
+static long Print_Image( class zipprint *self, zip_type_image image, zip_type_pane pane );
+static int Print_Inferior_Image( class zipprint	        *self, zip_type_image	         image, zip_type_pane		 pane );
+static void Compute_Printing_Slug_Stretch_Factors( class zipprint	          *self, zip_type_pane		   pane );
+static void Set_Printing_Characteristics( class zipprint	          *self, zip_type_pane		   pane, zip_type_figure		   figure );
 
 extern int zipprint_Write_Print_Datastream_Header( class zipprint *self );
 extern int zipprint_Write_Print_Datastream_Trailer( class zipprint *self );
@@ -124,7 +119,7 @@ zipprint::~zipprint( )
   }
 
 void
-zipprint::Set_Data_Object( register class zip		       *data_object )
+zipprint::Set_Data_Object( class zip		       *data_object )
       {
   IN(zipprint_Set_Data_Object );
   this->data_object = data_object;
@@ -132,7 +127,7 @@ zipprint::Set_Data_Object( register class zip		       *data_object )
   }
 
 void
-zipprint::Set_View_Object( register class zipview	      *view_object )
+zipprint::Set_View_Object( class zipview	      *view_object )
       {
   class zipprint *self=this;
   IN(zipprint_Set_View_Object);
@@ -164,10 +159,10 @@ zipprint::Set_Debug( boolean  state )
   }
 
 long
-zipprint::Set_Print_Language( register char				  *language )
+zipprint::Set_Print_Language( const char				  *language )
       {
   class zipprint *self=this;
-  register char language_code = 0;
+  char language_code = 0;
 
   IN(zipprint_Set_Print_Language);
   DEBUGst(Language,language);
@@ -182,10 +177,10 @@ zipprint::Set_Print_Language( register char				  *language )
   }
 
 long
-zipprint::Set_Print_Processor( register char				  *processor )
+zipprint::Set_Print_Processor( const char				  *processor )
       {
   class zipprint *self=this;
-  register char				  processor_code = 0;
+  char				  processor_code = 0;
 
   IN(zipprint_Set_Print_Processor);
   DEBUGst(Processor,processor);
@@ -200,7 +195,7 @@ zipprint::Set_Print_Processor( register char				  *processor )
   }
 
 long
-zipprint::Set_Print_Level( register long				   level )
+zipprint::Set_Print_Level( long				   level )
       {
   class zipprint *self=this;
   IN(zipprint_Set_Print_Level);
@@ -211,7 +206,7 @@ zipprint::Set_Print_Level( register long				   level )
   }
 
 long
-zipprint::Set_Print_File( register FILE				  *file )
+zipprint::Set_Print_File( FILE				  *file )
       {
   class zipprint *self=this;
   IN(zipprint_Set_Print_File);
@@ -221,7 +216,7 @@ zipprint::Set_Print_File( register FILE				  *file )
   }
 
 long
-zipprint::Set_Print_Resolution( register long				   resolution )
+zipprint::Set_Print_Resolution( long				   resolution )
       {
   class zipprint *self=this;
   IN(zipprint_Set_Print_Resolution);
@@ -232,7 +227,7 @@ zipprint::Set_Print_Resolution( register long				   resolution )
   }
 
 long
-zipprint::Set_Print_Dimensions( register float			   inch_width , register float			   inch_height )
+zipprint::Set_Print_Dimensions( float			   inch_width , float			   inch_height )
       {
   class zipprint *self=this;
   IN(zipprint_Set_Print_Dimensions);
@@ -250,7 +245,7 @@ zipprint::Set_Print_Dimensions( register float			   inch_width , register float	
   }
 
 void
-zipprint::Set_Default_Print_Size( register class zip  *data )
+zipprint::Set_Default_Print_Size( class zip  *data )
         {
       class zipprint  *self=this;
       IN(zipprint_Set_Default_Print_Size);
@@ -278,7 +273,7 @@ zipprint::Set_Print_Size( float  width , float height)
 
 
 long
-zipprint::Set_Print_Coordinates( register zip_type_percent x_origin , register zip_type_percent y_origin , register zip_type_percent width , register zip_type_percent height )
+zipprint::Set_Print_Coordinates( zip_type_percent x_origin , zip_type_percent y_origin , zip_type_percent width , zip_type_percent height )
 {
   class zipprint *self=this;
   int					  status = zip_success;
@@ -297,7 +292,7 @@ zipprint::Set_Print_Coordinates( register zip_type_percent x_origin , register z
   }
 
 long
-zipprint::Set_Print_Orientation( register long				   orientation )
+zipprint::Set_Print_Orientation( long				   orientation )
       {
   class zipprint *self=this;
   IN(zipprint_Set_Print_Orientation);
@@ -307,9 +302,9 @@ zipprint::Set_Print_Orientation( register long				   orientation )
   }
 
 long
-zipprint::Print_Figure( register zip_type_figure		 figure, register zip_type_pane		 pane )
+zipprint::Print_Figure( zip_type_figure		 figure, zip_type_pane		 pane )
         {
-  register long			        status = zip_ok;
+  long			        status = zip_ok;
 
   IN(zipprint_Print_Figure);
   if ( figure )
@@ -324,9 +319,9 @@ zipprint::Print_Figure( register zip_type_figure		 figure, register zip_type_pan
   }
 
 static
-long Print_Figure( register class zipprint	        *self, register zip_type_figure		 figure, register zip_type_pane		 pane )
+long Print_Figure( class zipprint	        *self, zip_type_figure		 figure, zip_type_pane		 pane )
         {
-  register long			        status = zip_ok;
+  long			        status = zip_ok;
 
   IN(::Print_Figure);
   if ( ! figure->zip_figure_state.zip_figure_state_deleted )
@@ -341,9 +336,9 @@ long Print_Figure( register class zipprint	        *self, register zip_type_figu
 
 
 long
-zipprint::Print_Image( register zip_type_image		 image, register zip_type_pane		 pane )
+zipprint::Print_Image( zip_type_image		 image, zip_type_pane		 pane )
         {
-  register long			        status = zip_ok;
+  long			        status = zip_ok;
 
   IN(zipprint_Print_Image);
   if ( image )
@@ -358,10 +353,10 @@ zipprint::Print_Image( register zip_type_image		 image, register zip_type_pane		
   }
 
 static
-long Print_Image( register class zipprint *self, register zip_type_image image, register zip_type_pane pane )
+long Print_Image( class zipprint *self, zip_type_image image, zip_type_pane pane )
 {
-  register long			        status = zip_ok;
-  register zip_type_figure		figure_ptr;
+  long			        status = zip_ok;
+  zip_type_figure		figure_ptr;
 
   IN(Print_Image);
   if ( 1 /*===image->zip_image_visibility == zip_image_exposed===*/ )
@@ -380,10 +375,10 @@ long Print_Image( register class zipprint *self, register zip_type_image image, 
   }
 
 static int
-Print_Inferior_Image( register class zipprint	        *self, register zip_type_image	         image, register zip_type_pane		 pane )
+Print_Inferior_Image( class zipprint	        *self, zip_type_image	         image, zip_type_pane		 pane )
         {
-  register int			        status = zip_success;
-  register zip_type_figure		figure_ptr;
+  int			        status = zip_success;
+  zip_type_figure		figure_ptr;
 
   IN(Print_Inferior_Image);
   if ( 1 /*===image->zip_image_visibility == zip_image_exposed===*/ )
@@ -404,10 +399,10 @@ Print_Inferior_Image( register class zipprint	        *self, register zip_type_i
   }
 
 long
-zipprint::Print_Stream( register zip_type_stream		 stream, register zip_type_pane		 pane )
+zipprint::Print_Stream( zip_type_stream		 stream, zip_type_pane		 pane )
         {
   class zipprint *self=this;
-  register long	  status = zip_ok;
+  long	  status = zip_ok;
 
   IN(zipprint_Print_Stream);
   if ( stream )
@@ -422,9 +417,9 @@ zipprint::Print_Stream( register zip_type_stream		 stream, register zip_type_pan
   }
 
 long
-zipprint::Print_Pane( register zip_type_pane		 pane )
+zipprint::Print_Pane( zip_type_pane		 pane )
       {
-  register long			        status = zip_ok;
+  long			        status = zip_ok;
 
   IN(zipprint_Print_Pane);
   if ( pane )
@@ -448,9 +443,9 @@ zipprint::Print_Pane( register zip_type_pane		 pane )
   }
 
 static
-void Compute_Printing_Slug_Stretch_Factors( register class zipprint *self, register zip_type_pane pane )
+void Compute_Printing_Slug_Stretch_Factors( class zipprint *self, zip_type_pane pane )
 {
-  register long				  greatest_x=1, least_x=1, greatest_y=1, least_y=1;
+  long				  greatest_x=1, least_x=1, greatest_y=1, least_y=1;
 
   IN(Compute_Printing_Slug_Stretch_Factors);
   if ( pane->zip_pane_attributes.zip_pane_attribute_stream_source )
@@ -489,7 +484,7 @@ void Compute_Printing_Slug_Stretch_Factors( register class zipprint *self, regis
   }
 
 static
-void Set_Printing_Characteristics( register class zipprint	          *self, register zip_type_pane		   pane, register zip_type_figure		   figure )
+void Set_Printing_Characteristics( class zipprint	          *self, zip_type_pane		   pane, zip_type_figure		   figure )
         {
   IN(Set_Printing_Characteristics);
   if ( pane->zip_pane_zoom_level >= 0 )

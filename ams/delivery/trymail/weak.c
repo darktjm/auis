@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/delivery/trymail/RCS/weak.c,v 1.14 1993/02/12 21:23:32 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	weak.c
 	Subroutines (often dummies) for ``trymail''--the trymail version that

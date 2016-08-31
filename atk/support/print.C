@@ -26,11 +26,6 @@
 */
 
 #include <andrewos.h>
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/print.C,v 3.22 1996/10/18 03:42:48 wjh Exp $";
-#endif
-
 ATK_IMPL("print.H")
 
 #include <ctype.h>
@@ -53,8 +48,8 @@ print *print::current_print = NULL;
 #define print_INDEXTROFF 10 /*   produce troff index */
 #define print_POSTSCRIPTMASK  (128) /* check this bit to see if the print command generates PS or troff in the tmp file. */
 
-static char *print_formatcommand, *print_pscformatcommand, *print_printcommand, *print_previewcommand, *print_pscprintcommand, *print_pscpreviewcommand;
-static char *print_spoolpath, *print_spooldir, *print_printertype;
+static const char *print_formatcommand, *print_pscformatcommand, *print_printcommand, *print_previewcommand, *print_pscprintcommand, *print_pscpreviewcommand;
+static const char *print_spoolpath, *print_spooldir, *print_printertype;
 
 /* The following ifndefs allow these defines to be set from the site.h file 
   They should probably all be set from site.h, but the following allows for backward compatibility */
@@ -192,10 +187,10 @@ ATKdefineRegistry(print, ATK, print::InitializeClass);
 static void print_sigAlrm();
 #endif /* hp9000s300 */
 static void insert(const char  *src,char  *c);
-static char *shove(register char  *dest,register const char  *search,register const char  *src);
+static char *shove(char  *dest,const char  *search,const char  *src);
 static void normalize(char  *s);
 static void SetPrinterType (char  *printertype, class view *v);
-static int ColorHash(char  *key);
+static int ColorHash(const char  *key);
 static boolean ParseHexColor(char  *colbuffer, double  *rval , double  *gval , double  *bval);
 void print_EnsureClassInitialized();
 
@@ -207,13 +202,13 @@ static print_sigAlrm()
 { }
 #endif /* hp9000s300 */
 
-static char hexchars[]="0123456789abcdef";
+static const char hexchars[]="0123456789abcdef";
 static class atom *A_printer, *A_tofile, *A_psfile;
 
 static int mystrtol16(char *p, char **pp)
 {
     long result=0;
-    char *h;
+    const char *h;
     while(*p && (h=strchr(hexchars, isupper(*p)?tolower(*p):*p))) {
 	result<<=4;
 	result+=(h-hexchars);
@@ -234,7 +229,7 @@ static void insert(const char  *src,char  *c)
 	*c++ = *p;
 }
 
-static char *shove(register char  *dest,register const char  *search,register const char  *src)
+static char *shove(char  *dest,const char  *search,const char  *src)
 {   /* shove the string src into dest after the string search */
     int searchlen;
     searchlen = strlen(search);
@@ -250,7 +245,7 @@ static char *shove(register char  *dest,register const char  *search,register co
 
 static void normalize(char  *s)
 {
-    register char *c;
+    char *c;
     for(c = s + strlen(s) - 1; c >= s; c--){
 	if(!isalnum(*c)){
 	    insert("\\",c);
@@ -280,8 +275,8 @@ int print::ProcessView(class view  *v, int  print, int  dofork ,
     char    PrintCommand[600];
     char    tname[400],tmpname[400];
     static int  seq = 1;
-    char   *p,*pp;
-    const char   *q;
+    char   *p;
+    const char   *q, *pp;
     char    dname[400];
     char   *dnameptr;
     FILE   *outf;
@@ -458,7 +453,7 @@ int print::ProcessView(class view  *v, int  print, int  dofork ,
     else switch(print){	
 	case print_PREVIEWTROFF:
 	    /* Preview Command */
-	    q = (char *) environ::GetProfile("previewcommand");
+	    q = environ::GetProfile("previewcommand");
 	    if (!q) {
 		q = tname;
 		if (dofork)
@@ -470,7 +465,7 @@ int print::ProcessView(class view  *v, int  print, int  dofork ,
 	    break;
 	case print_PREVIEWPOSTSCRIPT:
 	    /* Postscript Preview Command */
-	    q = (char *) environ::GetProfile("pscpreviewcommand");
+	    q = environ::GetProfile("pscpreviewcommand");
 	    if (!q) {
 		q = tname;
 		if (dofork)
@@ -484,8 +479,8 @@ int print::ProcessView(class view  *v, int  print, int  dofork ,
 	case print_PRINTPOSTSCRIPT:
 	default:
 	    /* Print Command */
-	    pp = (char *)((print == print_PRINTPOSTSCRIPT)? "pscprintcommand" : "printcommand");
-	    q = (char *) environ::GetProfile(pp);
+	    pp = (print == print_PRINTPOSTSCRIPT)? "pscprintcommand" : "printcommand";
+	    q = environ::GetProfile(pp);
 	    if (!q) {
 		pp =  (print == print_PRINTPOSTSCRIPT) ? print_pscprintcommand : print_printcommand ;
 		if(prarg == NULL || *prarg == '\0'){
@@ -596,7 +591,7 @@ static void SetPrinterType (char  *printertype, class view *v)
     struct stat buf;
     char *cp;
     char currentprinter[100];
-    char *SpoolPath = print_spoolpath;
+    const char *SpoolPath = print_spoolpath;
     const char *str;
 
     cp = (char *) v->GetPrintOption(A_printer);
@@ -617,7 +612,7 @@ static void SetPrinterType (char  *printertype, class view *v)
     
      /* Look at SpoolPath to find the right currentprinter */
     
-	char   *p;
+	const char   *p;
 	char   *r;
 
 	r = TempSpoolDir;
@@ -666,26 +661,26 @@ static void SetPrinterType (char  *printertype, class view *v)
     strcpy(printertype,print_printertype);
 }
 
-char *print::GetPrintCmd(int  print)
+const char *print::GetPrintCmd(int  print)
 {
 	ATKinit;
 
-    char *q;
+    const char *q;
     switch(print){
 	case print_PREVIEWTROFF:
-	    if((q = (char *) environ::GetProfile("previewcommand")) != NULL)
+	    if((q = environ::GetProfile("previewcommand")) != NULL)
 		return q;
 	    return print_previewcommand;
 	case print_PREVIEWPOSTSCRIPT:
-	    if((q = (char *) environ::GetProfile("pscpreviewcommand")) != NULL)
+	    if((q = environ::GetProfile("pscpreviewcommand")) != NULL)
 		return q;
 	    return print_pscpreviewcommand;
 	case print_PRINTPOSTSCRIPT:
-	    if((q = (char *) environ::GetProfile("pscprintcommand")) != NULL) return q;
+	    if((q = environ::GetProfile("pscprintcommand")) != NULL) return q;
 	    return print_pscprintcommand;
 	case print_PRINTTROFF:
 	default:
-	    if((q = (char *) environ::GetProfile("printcommand")) != NULL) return q;
+	    if((q = environ::GetProfile("printcommand")) != NULL) return q;
 	    return print_printcommand;
     }
 }
@@ -699,67 +694,49 @@ boolean print::InitializeClass()
 
     if((foo =environ::GetConfiguration("printcommand")) == NULL)
 	print_printcommand = print_PRINTCOMMAND;
-    else{
-	print_printcommand = (char *)malloc(strlen(foo) + 1);
-	strcpy(print_printcommand,foo);
-    }
+    else
+	print_printcommand = strdup(foo);
 
     if((foo =environ::GetConfiguration("pscprintcommand")) == NULL)
 	print_pscprintcommand = print_PSCPRINTCOMMAND;
-    else{
-	print_pscprintcommand = (char *)malloc(strlen(foo) + 1);
-	strcpy(print_pscprintcommand,foo);
-    }
+    else
+	print_pscprintcommand = strdup(foo);
 
     if((foo =environ::GetConfiguration("previewcommand")) == NULL)
 	print_previewcommand = print_PREVIEWCOMMAND;
-    else{
-	print_previewcommand = (char *)malloc(strlen(foo) + 1);
-	strcpy(print_previewcommand,foo);
-    }
+    else
+	print_previewcommand = strdup(foo);
 
     if((foo =environ::GetConfiguration("pscpreviewcommand")) == NULL)
 	print_pscpreviewcommand = print_PSCPREVIEWCOMMAND;
-    else{
-	print_pscpreviewcommand = (char *)malloc(strlen(foo) + 1);
-	strcpy(print_pscpreviewcommand,foo);
-    }
+    else
+	print_pscpreviewcommand = strdup(foo);
 
-    if(((foo = (char *) environ::GetProfile("formatcommand")) != NULL) ||
-	((foo =environ::GetConfiguration("formatcommand")) != NULL)){
-	print_formatcommand = (char *)malloc(strlen(foo) + 1);
-	strcpy(print_formatcommand,foo);
-    }
+    if(((foo = environ::GetProfile("formatcommand")) != NULL) ||
+	((foo =environ::GetConfiguration("formatcommand")) != NULL))
+	print_formatcommand = strdup(foo);
     else print_formatcommand = print_FORMATCOMMAND;
 
-    if(((foo = (char *) environ::GetProfile("pscformatcommand")) != NULL) ||
-	((foo =environ::GetConfiguration("pscformatcommand")) != NULL)){
-	print_pscformatcommand = (char *)malloc(strlen(foo) + 1);
-	strcpy(print_pscformatcommand,foo);
-    }
+    if(((foo = environ::GetProfile("pscformatcommand")) != NULL) ||
+	((foo =environ::GetConfiguration("pscformatcommand")) != NULL))
+	print_pscformatcommand = strdup(foo);
     else print_pscformatcommand = print_PSCFORMATCOMMAND;
 
     if((foo =environ::GetConfiguration("spoolpath")) == NULL)
 	print_spoolpath = print_SPOOLPATH;
-    else{
-	print_spoolpath = (char *)malloc(strlen(foo) + 1);
-	strcpy(print_spoolpath,foo);
-    }
+    else
+	print_spoolpath = strdup(foo);
 
     if((foo =environ::GetConfiguration("printer")) == NULL &&
        (foo =environ::GetConfiguration("spooldir")) == NULL)
 	print_spooldir = print_SPOOLDIR;
-    else{
-	print_spooldir = (char *)malloc(strlen(foo) + 1);
-	strcpy(print_spooldir,foo);
-    }
+    else
+	print_spooldir = strdup(foo);
 
     if((foo =environ::GetConfiguration("printertype")) == NULL)
 	print_printertype = print_PRINTERTYPE;
-    else{
-	print_printertype = (char *)malloc(strlen(foo) + 1);
-	strcpy(print_printertype,foo);
-    }
+    else
+	print_printertype = strdup(foo);
 
     printp_init(); /* initialize stuff in printp.C */
     return TRUE;
@@ -767,7 +744,7 @@ boolean print::InitializeClass()
 
 static int SavedKey;
 
-static int ColorHash(char  *key)
+static int ColorHash(const char  *key)
 {
     return SavedKey;
 }
@@ -823,13 +800,13 @@ static boolean ParseHexColor(char  *colbuffer, double  *rval , double  *gval , d
 If the color is found, the procedure will return TRUE; the three values are returned in *rval, *gval, *bval. Each will be a real number from 0 (black) to 1 (full intensity). 
 If the color is not found, the procedure will return FALSE, and *rval, *gval, *bval will each be set to 0 (pure black.) 
 Any or all of rval, gval, bval may be NULL if you don't care about that component. */
-boolean print::LookUpColor(char  *colname, double  *rval , double  *gval , double  *bval)
+boolean print::LookUpColor(const char  *colname, double  *rval , double  *gval , double  *bval)
 {
 	ATKinit;
 
 #define NUMBASICCOLORS (2)
     struct basic_colors_t {
-	char *name;
+	const char *name;
 	double r, g, b;
     };
     struct hash_colors_t {
@@ -838,7 +815,7 @@ boolean print::LookUpColor(char  *colname, double  *rval , double  *gval , doubl
     };
 
     /* basic_colors are a bunch of colors so common that we can assume their values. */
-    static struct basic_colors_t basic_colors[NUMBASICCOLORS] = {
+    static const struct basic_colors_t basic_colors[NUMBASICCOLORS] = {
 	{"black",   0.0, 0.0, 0.0},
 	{"white",   1.0, 1.0, 1.0}
     };
@@ -849,7 +826,8 @@ boolean print::LookUpColor(char  *colname, double  *rval , double  *gval , doubl
     int key;
     char lowercolor[128];
     char colbuffer[128];
-    char *cx, *dx;
+    const char *cx;
+    char *dx;
     struct hash_colors_t *colv;
     int rtmp, gtmp, btmp;
     FILE *fc;

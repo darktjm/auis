@@ -218,11 +218,11 @@ class style : public ATK {
     virtual void Reset();
     virtual void Copy(class style *dest);
 
-    virtual void SetName(char *name);
-    virtual char *GetName();
+    virtual void SetName(const char *name);
+    virtual const char *GetName();
 
-    virtual void SetMenuName(char *name);
-    virtual char *GetMenuName();
+    virtual void SetMenuName(const char *name);
+    virtual const char *GetMenuName();
 
     virtual void SetNewLeftMargin(enum style_MarginValue Basis, long Operand, enum style_Unit Unit);
     virtual void GetNewLeftMargin(enum style_MarginValue *RefBasis, long *RefOperand, enum style_Unit *RefUnit);
@@ -276,10 +276,10 @@ class style : public ATK {
 
     /* Provision for arbitrary attributes */
 
-    virtual void AddAttribute(char *name, char *value);
-    virtual void RemoveAttribute(char *name);
-    virtual char *GetAttribute(char *name);
-    virtual boolean IsAttribute(char *name);
+    virtual void AddAttribute(const char *name, const char *value);
+    virtual void RemoveAttribute(const char *name);
+    virtual char *GetAttribute(const char *name);
+    virtual boolean IsAttribute(const char *name);
 
     /* File I/O */
 

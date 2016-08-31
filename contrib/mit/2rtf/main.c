@@ -21,8 +21,6 @@
  It is provided "as is" without express or implied warranty.
 
  2rtf was written by Scott Rixner, rixner@ATHENA.MIT.EDU and Jeremy Paul Kirby, jpkirby@ATHENA.MIT.EDU
-
- $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/2rtf/RCS/main.c,v 1.6 1994/06/09 21:21:04 rr2b Stab74 $
 */
 
 /*
@@ -46,12 +44,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/2rtf/RCS/main.c,v 1.6 1994/06/09 21:21:04 rr2b Stab74 $";
-#endif
-
 
 #include <andrewos.h>
 #include <stdio.h>

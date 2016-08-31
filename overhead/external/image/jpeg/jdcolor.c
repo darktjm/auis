@@ -103,20 +103,20 @@ ycc_rgb_convert (decompress_info_ptr cinfo, int num_rows, long num_cols,
 		 JSAMPIMAGE input_data, JSAMPIMAGE output_data)
 {
 #ifdef SIXTEEN_BIT_SAMPLES
-  register INT32 y;
-  register UINT16 cb, cr;
+  INT32 y;
+  UINT16 cb, cr;
 #else
-  register int y, cb, cr;
+  int y, cb, cr;
 #endif
-  register JSAMPROW inptr0, inptr1, inptr2;
-  register JSAMPROW outptr0, outptr1, outptr2;
-  register long col;
+  JSAMPROW inptr0, inptr1, inptr2;
+  JSAMPROW outptr0, outptr1, outptr2;
+  long col;
   /* copy these pointers into registers if possible */
-  register JSAMPLE * range_limit = cinfo->sample_range_limit;
-  register int * Crrtab = Cr_r_tab;
-  register int * Cbbtab = Cb_b_tab;
-  register INT32 * Crgtab = Cr_g_tab;
-  register INT32 * Cbgtab = Cb_g_tab;
+  JSAMPLE * range_limit = cinfo->sample_range_limit;
+  int * Crrtab = Cr_r_tab;
+  int * Cbbtab = Cb_b_tab;
+  INT32 * Crgtab = Cr_g_tab;
+  INT32 * Cbgtab = Cb_g_tab;
   int row;
   SHIFT_TEMPS
   

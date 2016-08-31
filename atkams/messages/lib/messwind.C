@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/messwind.C,v 1.8 1995/07/07 19:26:34 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include <stdio.h>
 
 #include <textview.H>
@@ -65,8 +56,6 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 ATKdefineRegistry(messwind, lpair, messwind::InitializeClass);
-#ifndef NORCSID
-#endif
 static void DuplicateWindow(class messwind  *self);
 void CheckVerticalHorizontal(class messwind  *mess);
 void messwindCompound(struct messwind  *mess, char  *cmds);
@@ -165,8 +154,8 @@ void messwindFoldersCommand(class messwind  *mess, char  *cmds)
     (ams::GetAMS())->GenericCompoundAction( mess->foldersp, "folders", cmds);
 }
 
-static char lastWindowWarning[] = "This is the last window.";
-static char *lastWindowChoices[] = {
+static const char lastWindowWarning[] = "This is the last window.";
+static const char * const lastWindowChoices[] = {
     "Continue Running",
     "Quit Messages",
     NULL

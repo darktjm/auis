@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/dpstextview.C,v 1.3 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
 #include <andrewos.h>		/* for DPS_ENV */
 
 #include <dpstextview.H>

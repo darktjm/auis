@@ -6,7 +6,6 @@
 % lib/psdit.pro -- prolog for psdit (ditroff) files
 % Copyright (c) 1984, 1985 Adobe Systems Incorporated. All Rights Reserved.
 % last edit: shore Sat Nov 23 20:28:03 1985
-% RCSID: $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/doc/RCS/rpcgen.troff,v 1.1 1992/02/13 20:59:10 wdc Stab74 $
 
 /$DITroff 140 dict def $DITroff begin
 /fontnum 1 def /fontsize 10 def /fontheight 10 def /fontslant 0 def

@@ -1,5 +1,3 @@
-/* $Author: */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,14 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/blank.C,v 1.5 1996/06/11 01:26:13 wjh Exp $";
-#endif
-
-
- 
 
 /*
  * blank.c
@@ -52,9 +42,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/ne
 
 
 ATKdefineRegistry(blank, view, NULL);
-#ifndef NORCSID
-#endif
-
 
 void
 blank::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)

@@ -1,5 +1,3 @@
-/* $Author: wjh $ */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -22,13 +20,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/eosapp.C,v 1.6 1996/06/11 01:26:13 wjh Exp $";
-#endif
-
-
- 
 /*
  * eosapp.c
  *
@@ -110,8 +101,6 @@ struct bestbuffer {
 
 
 ATKdefineRegistry(eosapp, application, eosapp__InitializeClass);
-#ifndef NORCSID
-#endif
 boolean FindCkpBuffer(class buffer  *buffer, struct bestbuffer  *best);
 boolean CkpMessage(class view  *applicationView , class view  *targetView , class view  *inputFocusView, char  *message);
 void Checkpoint(long  dummyData);

@@ -22,11 +22,6 @@
 
 #include <andrewos.h>
 ATK_IMPL("abuttonv.H")
-
-#ifndef NORCSID
-static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/lib/RCS/abuttonv.C,v 1.41 1996/11/07 00:12:17 robr Exp $";
-#endif
-
 #include <abuttonv.H>
 #include <proctable.H>
 #include <abutton.H>
@@ -845,7 +840,7 @@ void AButtonv::DesiredPrintSize(long width, long height, enum view_DSpass pass, 
     }
 }
 
-void *AButtonv::GetPSPrintInterface(char *printtype)
+void *AButtonv::GetPSPrintInterface(const char *printtype)
 {
     if (!strcmp(printtype, "generic")) {
 	return (void *)this;
@@ -863,7 +858,7 @@ void AButtonv::GetPrintOrigin(long w, long h, long *xoff, long *yoff) {
 	    label->GetPrintOrigin(w, h, xoff, yoff);
     } else {
 	fontdesc *fd = FindFont();
-	char *ffam = FONT;
+	const char *ffam = FONT;
 	long fsiz = FONTSIZE;
 	long fsty = FONTTYPE;
 	char fontname[256];
@@ -888,7 +883,7 @@ void AButtonv::PrintPSRect(FILE *outfile, long logwidth, long logheight, struct 
     CheckIndicator();
     AButton *dobj = (AButton *)(this->GetDataObject());
     fontdesc *fd = FindFont();
-    char *ffam = FONT;
+    const char *ffam = FONT;
     long fsiz = FONTSIZE;
     long fsty = FONTTYPE;
     char fontname[256];

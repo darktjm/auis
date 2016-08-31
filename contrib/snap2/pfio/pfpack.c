@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/pfio/RCS/pfpack.c,v 1.13 1993/09/22 19:44:14 gk5g Stab74 $";
-#endif
-
 #include <andrewos.h>
 #include <pfio.h>
 #include <stdarg.h>
@@ -41,8 +36,8 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/
 void PFpack(PFM_pt o, ...)
 {
     va_list ap;
-    register atype;
-    register along;
+    int atype;
+    int along;
     char *astr;
     va_start(ap, c);
     atype=va_arg(ap,int);  

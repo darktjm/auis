@@ -43,15 +43,6 @@ SOFTWARE.
 */
 
 #include <andrewos.h>                  /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/writeone.C,v 1.4 1993/06/26 16:03:28 rr2b Stab74 $";
-#endif
-
-
-                                 
-
 #include <stdio.h>
 #include <amsutil.H>
 #include <sys/param.h>
@@ -89,7 +80,7 @@ int WriteOneFile(class sendmessage  *sendmessage, char  *ViceFileName, Boolean  
     char ErrorText[MAXPATHLEN+100], LocalName[1+MAXPATHLEN], MyViceFileName[1+MAXPATHLEN], boundary[60], boundary2[60];
     char TmpFname[1+MAXPATHLEN];
     FILE *fptmp;
-    char *charset;
+    const char *charset;
 
     if ((sendmessage->BodyText)->CheckHighBit()) {
 	charset = (char *) getenv("MM_CHARSET");
@@ -170,7 +161,7 @@ int WriteOneFile(class sendmessage  *sendmessage, char  *ViceFileName, Boolean  
 	    fprintf(fp, "Content-Type: X-BE2; %d\n", Version);
 	    fprintf(fp, "If-Type-Unsupported: %s\n", TrustDelivery ? "alter" : "send");
 	} else {
-          char *charset;
+          const char *charset;
 	  if ((sendmessage->BodyText)->CheckHighBit()) {
 	      charset = (char *) getenv("MM_CHARSET");
 	      if (!charset) charset = "iso-8859-1"; /* Just a guess! */

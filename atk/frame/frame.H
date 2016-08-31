@@ -92,8 +92,8 @@ public:
 	/* Make it hard for people to access our lpair functions. */
 	void Update();
 	void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
-	char * WantInformation(char *key)  ;
-	ATK  * WantHandler(char *handlerName)  ;
+	const char * WantInformation(const char *key)  ;
+	ATK  * WantHandler(const char *handlerName)  ;
 	void PostKeyState(class keystate *keystate);
 	void PostMenus(class menulist *menulist);
 	void ObservedChanged(class observable *changed, long value);

@@ -112,7 +112,7 @@ class htmlform: public ATK {
         // applies the given attributes to the last option entered in a select node.
 	void Completed();
 		// no more fields
-	char *Submission(web *wd, webview *wv);
+	const char *Submission(web *wd, webview *wv);
 		// constructs the message for a form
 	void WriteTaggedText(FILE *file, AWidget *w);
 	struct wdgnode *FindNodeByName(char *name);
@@ -121,10 +121,10 @@ class htmlform: public ATK {
 	struct wdgnode *FindNodeByWidget(AWidget *w);
 		// finds the node having the given widget
 		// NULL for failure
-	char *GetAtt(int index, char *id);
-	inline char *GetName(int index) 
+	const char *GetAtt(int index, const char *id);
+	inline const char *GetName(int index) 
 		{ return GetAtt(index, "name"); }
-	inline char *GetValue(int index)
+	inline const char *GetValue(int index)
 		{ return GetAtt(index, "value"); }
 
 	fieldlist fields;

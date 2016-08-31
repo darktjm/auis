@@ -1,5 +1,3 @@
-/* @(#)svc_raw.c	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,12 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/svc_raw.c,v 1.3 1992/12/15 21:54:19 rr2b Stab74 $";
-#endif
-
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
  * unrestricted use provided that this legend is included on all tape
@@ -55,10 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-#if !defined(lint) && defined(SCCSIDS)
-static char sccsid[] = "@(#)svc_raw.c 1.15 87/08/11 Copyr 1984 Sun Micro";
-#endif
-
 /*
  * svc_raw.c,   This a toy for simple testing and timing.
  * Interface to create an rpc client and server in the same UNIX process.
@@ -100,7 +88,7 @@ static struct xp_ops server_ops = {
 SVCXPRT *
 svcraw_create()
 {
-	register struct svcraw_private *srp = svcraw_private;
+	struct svcraw_private *srp = svcraw_private;
 
 	if (srp == 0) {
 		srp = (struct svcraw_private *)calloc(1, sizeof (*srp));
@@ -127,8 +115,8 @@ svcraw_recv(xprt, msg)
 	SVCXPRT *xprt;
 	struct rpc_msg *msg;
 {
-	register struct svcraw_private *srp = svcraw_private;
-	register XDR *xdrs;
+	struct svcraw_private *srp = svcraw_private;
+	XDR *xdrs;
 
 	if (srp == 0)
 		return (0);
@@ -145,8 +133,8 @@ svcraw_reply(xprt, msg)
 	SVCXPRT *xprt;
 	struct rpc_msg *msg;
 {
-	register struct svcraw_private *srp = svcraw_private;
-	register XDR *xdrs;
+	struct svcraw_private *srp = svcraw_private;
+	XDR *xdrs;
 
 	if (srp == 0)
 		return (FALSE);
@@ -165,7 +153,7 @@ svcraw_getargs(xprt, xdr_args, args_ptr)
 	xdrproc_t xdr_args;
 	caddr_t args_ptr;
 {
-	register struct svcraw_private *srp = svcraw_private;
+	struct svcraw_private *srp = svcraw_private;
 
 	if (srp == 0)
 		return (FALSE);
@@ -178,8 +166,8 @@ svcraw_freeargs(xprt, xdr_args, args_ptr)
 	xdrproc_t xdr_args;
 	caddr_t args_ptr;
 { 
-	register struct svcraw_private *srp = svcraw_private;
-	register XDR *xdrs;
+	struct svcraw_private *srp = svcraw_private;
+	XDR *xdrs;
 
 	if (srp == 0)
 		return (FALSE);

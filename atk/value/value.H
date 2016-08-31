@@ -62,7 +62,7 @@ public:
    void NotifyObservers( long rock );
    long Write(FILE *file, long writeID, int level)  ;
    long Read (FILE *file, long id)  ;
-   char * ViewName()  ;
+   const char * ViewName()  ;
 
   virtual void AddCallBackObserver( ATK  * observer,
 	      value_fptr callBack, long rock );
@@ -74,12 +74,12 @@ public:
 
   inline void SetValue(long rock) { ((this)->SetValueType((long)rock,value_ROCK1)); }
   inline void SetArraySize(long rock) { ((this)->SetValueType((long)rock,value_ROCK2)); }
-  inline void SetString(char *rock) { ((this)->SetValueType((long)rock,value_STRING)); }
-  inline void SetStringArray(char **rock) { ((this)->SetValueType((long)rock,value_STRINGARRAY)); }
+  inline void SetString(const char *rock) { ((this)->SetValueType((long)rock,value_STRING)); }
+  inline void SetStringArray(const char * const *rock) { ((this)->SetValueType((long)rock,value_STRINGARRAY)); }
   inline long GetValue() { return (this->rock1); }
   inline long GetArraySize() { return (this->rock2); }
-  inline char * GetString()  { return (this->string); }
-  inline char ** GetStringArray()  { return (this->stringarray); }
+  inline const char * GetString()  { return (this->string); }
+  inline const char * const * GetStringArray()  { return (this->stringarray); }
   inline void SetNotify(boolean val) { ((this)->notify = val); }
   inline long GetUpdateCount() { return ((this)->updatecount); }
 
@@ -96,7 +96,7 @@ public:
   short maxObservers;			/* number of entries in observers table */
   struct observer *observers;	/* table of observers */
   long rock1,rock2;
-  char *string, **stringarray;
+  const char *string, * const *stringarray;
   boolean notify;
   long updatecount;
 };

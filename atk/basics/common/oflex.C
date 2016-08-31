@@ -43,8 +43,7 @@ void oflex::MemCpy(char *dest, char *src, size_t bytelength) {
 
 void oflex::MemMove(char *dest, char *src, size_t bytelength) {
     size_t len=bytelength/typesize;
-    char *osrc=src;
-    if(dest-src>=bytelength) {
+    if((size_t)(dest-src)>=bytelength) {
 	/* copy forward */
 	while(len-->0) {
 	    CopyElement((void *)dest,(void *)src);

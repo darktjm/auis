@@ -30,11 +30,6 @@ the full agreement.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/gdp/RCS/gpoint.c,v 1.4 1993/06/17 04:34:09 rr2b Stab74 $";
-#endif
-
 #include <stdio.h>
 #include <ctype.h>
 #include <math.h>
@@ -63,7 +58,7 @@ Greset()
 
 Gerase()	/* just redraws, assumes XOR */
 {
-	register int i;
+	int i;
 
 	GDEVsets("currentlinetype", "solid");
 	for(i = 0; i < nlines; i++)

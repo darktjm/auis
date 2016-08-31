@@ -25,13 +25,8 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/guardian/cmd/RCS/bioya.c,v 2.8 1993/05/04 01:49:01 susan Stab74 $";
-#endif
-
-#include <stdio.h>
 #include <andrewos.h> /* sys/types.h sys/time.h */
+#include <stdio.h>
 #include <netinet/in.h>
 #include <gasp.h>
 #include <snap.h>
@@ -122,7 +117,7 @@ static execute(buffer, len, type, cid)
     char reply[1024];
     char *ptr, *orig_buffer;
     int op, arg, rc;
-    register int i;
+    int i;
 
     orig_buffer = buffer;
     printf("[BIOYA] Buffer: ");

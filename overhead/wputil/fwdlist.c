@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/wputil/RCS/fwdlist.c,v 1.8 1993/09/22 00:55:26 rr2b Stab74 $";
-#endif
-
 /*
 
   fwdlist.c -- Forward File Lister

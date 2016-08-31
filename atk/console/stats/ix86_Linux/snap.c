@@ -67,9 +67,9 @@ struct ps_proc_head *take_snapshot(char a, char u, char x, char m, char r,
     mycpy(ent->d_name, this->cmdline, "cmdline", sizeof(this->cmdline), 1);
     if(!mycpy(ent->d_name, stat_str, "stat", sizeof(stat_str), 0)) continue;
 
-    sscanf(stat_str, "%d %s %c %d %d %d %d %d %u %u \
-%u %u %u %d %d %d %d %d %d %u %u %d %u %u %u %u %u %u %u %u %d \
-%d %d %d %u",
+    sscanf(stat_str, "%d %s %c %d %d %d %d %d %u %u "
+	   "%u %u %u %d %d %d %d %d %d %u %u %d %u %u %u %u %u %u %u %u %d "
+	   "%d %d %d %u",
 	   &this->pid, this->cmd, &this->state, &this->ppid,
 	   &this->pgrp, &this->session, &this->tty, &this->tpgid,
 	   &this->flags, &this->min_flt, &this->cmin_flt,
@@ -144,9 +144,9 @@ struct ps_proc_head *get_process(int pid, int m) {
   if(!mycpy(fn, stat_str, "stat", sizeof(stat_str), 0))
     { free(ret); return ph; }
 
-  sscanf(stat_str, "%d %s %c %d %d %d %d %d %u %u \
-%u %u %u %d %d %d %d %d %d %u %u %d %u %u %u %u %u %u %u %u %d \
-%d %d %d %u",
+  sscanf(stat_str, "%d %s %c %d %d %d %d %d %u %u "
+	 "%u %u %u %d %d %d %d %d %d %u %u %d %u %u %u %u %u %u %u %u %d "
+	 "%d %d %d %u",
 	 &ret->pid, ret->cmd, &ret->state, &ret->ppid,
 	 &ret->pgrp, &ret->session, &ret->tty, &ret->tpgid,
 	 &ret->flags, &ret->min_flt, &ret->cmin_flt,
@@ -205,9 +205,9 @@ struct ps_proc_head *refresh_snapshot(struct ps_proc_head *ph,
     mycpy(ent->d_name, this->cmdline, "cmdline", sizeof(this->cmdline), 1);
     if(!mycpy(ent->d_name, stat_str, "stat", sizeof(stat_str), 0)) continue;
 
-    sscanf(stat_str, "%d %s %c %d %d %d %d %d %u %u \
-%u %u %u %d %d %d %d %d %d %u %u %d %u %u %u %u %u %u %u %u %d \
-%d %d %d %u",
+    sscanf(stat_str, "%d %s %c %d %d %d %d %d %u %u "
+	   "%u %u %u %d %d %d %d %d %d %u %u %d %u %u %u %u %u %u %u %u %d "
+	   "%d %d %d %u",
 	   &this->pid, this->cmd, &this->state, &this->ppid,
 	   &this->pgrp, &this->session, &this->tty, &this->tpgid,
 	   &this->flags, &this->min_flt, &this->cmin_flt,

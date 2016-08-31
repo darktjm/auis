@@ -25,22 +25,11 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/glist.C,v 3.4 1995/05/05 16:51:43 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* List object
  * for Graph Editor
  */
 
-
-
+#include <andrewos.h>
 ATK_IMPL("glist.H")
 #include <glist.H>
 
@@ -48,10 +37,8 @@ ATK_IMPL("glist.H")
 
 
 ATKdefineRegistry(glist, ATK, NULL);
-#ifndef NORCSID
-#endif
 static int copyElement(char  *value,class glist  *dest);
-static int MoveNew(char  *listelt, struct glist_SortStruct  *ss);
+static int MoveNew(void  *listelt, struct glist_SortStruct  *ss);
 
 
 glist::glist()
@@ -79,7 +66,7 @@ static int copyElement(char  *value,class glist  *dest)
 
 void glist::Copy(class glist  *dest,class glist  *source)
 {
-    (source)->Find((glist_findfptr)copyElement,(char *)dest);
+    (source)->Find((glist_findfptr)copyElement,(void *)dest);
 }
 
 void glist::Clear(boolean  destroy)
@@ -115,9 +102,9 @@ glist::~glist()
 }
 
 
-char * glist::Find(glist_findfptr  filter,char  * rock)
+void * glist::Find(glist_findfptr  filter,const void  * rock)
 {
-    char *rvalue;
+    void *rvalue;
     struct glistelt *item = this->head;
 
     while(item) {
@@ -135,7 +122,7 @@ char * glist::Find(glist_findfptr  filter,char  * rock)
  *
  */
 
-boolean glist::Push(char  * element)
+boolean glist::Push(void  * element)
 {
     struct glistelt *temp = newelt();
 
@@ -153,7 +140,7 @@ boolean glist::Push(char  * element)
  *
  */
 
-boolean glist::Insert(char  *element, int eposition)
+boolean glist::Insert(void  *element, int eposition)
 {
     struct glistelt *temp = newelt();
 
@@ -176,9 +163,9 @@ boolean glist::Insert(char  *element, int eposition)
  *
  */
 
-char * glist::Pop()
+void * glist::Pop()
 {
-    char *rvalue;
+    void *rvalue;
 
     if (this->size == 0)
 	return NULL;
@@ -200,7 +187,7 @@ char * glist::Pop()
 
 /***********************************************************************/
 
-boolean glist::InsertSorted(char  * element,glist_greaterfptr  greater /* greater(element_1,element_2) */, int eposition)
+boolean glist::InsertSorted(void  * element,glist_greaterfptr  greater /* greater(element_1,element_2) */, int eposition)
 
 {
     struct glistelt *temp = newelt();
@@ -250,7 +237,7 @@ boolean glist::InsertSorted(char  * element,glist_greaterfptr  greater /* greate
  *
  */
 
-boolean glist::InsertUnique(char  * element, int eposition)
+boolean glist::InsertUnique(void  * element, int eposition)
 {
     if ((this)->Contains(element))
         return FALSE;
@@ -266,7 +253,7 @@ struct glist_SortStruct {
     glist_greaterfptr compare;
 };
 
-static int MoveNew(char  *listelt, struct glist_SortStruct  *ss)
+static int MoveNew(void  *listelt, struct glist_SortStruct  *ss)
 {
     (ss->newlist)->InsertSorted(listelt,ss->compare);
     return FALSE;
@@ -282,7 +269,7 @@ boolean glist::Sort(glist_greaterfptr  compare)
     /* create new list, inserting old list elements in sorted order */
     ss.newlist = temp;
     ss.compare = compare;
-    (this)->Find((glist_findfptr)MoveNew,(char *)&ss);
+    (this)->Find((glist_findfptr)MoveNew,&ss);
     temphead = this->head;
     temptail = this->tail;
     tempsize = this->size;
@@ -303,7 +290,7 @@ boolean glist::Sort(glist_greaterfptr  compare)
 /***********************************************************************/
 
 
-boolean glist::Delete(char  * element,boolean  destroy)
+boolean glist::Delete(const void  * element,boolean  destroy)
 {
     struct glistelt *item = this->head;
     struct glistelt *prev = NULL;
@@ -349,7 +336,7 @@ boolean glist::Delete(char  * element,boolean  destroy)
  *
  */
 
-boolean glist::Contains(char  * element)
+boolean glist::Contains(const void  * element)
 {
     struct glistelt *item = this->head;
 

@@ -25,16 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/texttroff.C,v 3.12 1995/12/08 18:25:14 robr Stab74 $";
-#endif
-
-
- 
-
 /*
  * Rofftext: Write ATK multimedia text document to file in troff
  *
@@ -52,6 +42,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * Passthru not handled (should set needNewLine )
  */
 
+#include <andrewos.h>
 ATK_IMPL("texttroff.H")
 #include <system.h>
 
@@ -169,9 +160,9 @@ static int textLevel = -1;	/* For generating proper .ev argument */
 static struct text_statevector sv, nsv;     /* Current and new state vectors */
 static boolean printContents; /* Flag to indicate if we are printing a table of contents */
 static boolean printDuplex; /* Flag to indicate if we process for duplex printing. */
-static struct {
-    char *fontname;
-    char *fontcodes[9];
+static const struct {
+    const char *fontname;
+    const char * const fontcodes[9];
     /* Fontcodes are in this order:  */
     /*  plain, italic, bold, bolditalic,  fixed-plain, fixed-italic, */
     /* fixed-bold, fixed-bolditalic, shadow. */
@@ -197,7 +188,7 @@ static struct {
   }; 
 
 static struct {
-    char *fontname;
+    const char *fontname;
     int tablenumber;
 } specfonttable[] = {
     {"symbol", 1},
@@ -245,23 +236,23 @@ ATKdefineRegistry(texttroff, ATK, texttroff::InitializeClass);
 static void setcolor(char  *color,FILE  *f);
 static char *speclookup(long  c,long  f);
 static void PutNewlineIfNeeded();
-static void ComputeTroffFont(register char  *name, register long  FaceCodemodifier , long  FontSize);
+static void ComputeTroffFont(const char  *name, long  FaceCodemodifier , long  FontSize);
 static void ChangeFont();
 static void ChangeJustification(enum style_Justification  old , enum style_Justification  new_c,boolean  putbreak);
 static void ChangeState();
 static void setdefaultstate();
 static void InitializeStyle();
 static void handlemac(FILE  *f,const char  *s);
-static void OutputInitialTroff(register FILE  *f, class view *vw, boolean  toplevel, class environment  *cenv);
+static void OutputInitialTroff(FILE  *f, class view *vw, boolean  toplevel, class environment  *cenv);
 static int FlushBars(FILE  *f);
 static void FlushLineSpacing(int  cs, int  hitchars, boolean  needbreak);
 static int findinlist(char  **lst ,int  cnt,char  *str);
 static int appendlist(char  **lst,int  cnt,const char  *ostr,int  TEST);
-static int lookup(char  *s);
+static int lookup(const char  *s);
 static void endspecialformating();
 static void deletenewlines(char  *buf);
 static void deletechapnumbers(char  *buf);
-static void insert(char  *src,char  *c);
+static void insert(const char  *src,char  *c);
 static void quote(char  *buf,char  c,int  len);
 static void outputendnote();
 static int handlespecialformating(class text  *d,class environment  *env,long  pos,long  len);
@@ -306,13 +297,13 @@ static void PutNewlineIfNeeded()
     }
 }
 
-static void ComputeTroffFont(register char  *name, register long  FaceCodemodifier , long  FontSize)
+static void ComputeTroffFont(const char  *name, long  FaceCodemodifier , long  FontSize)
 {
-    register int family, mod,specfamily;
+    int family, mod,specfamily;
 
     symbola = 0;
     for (family = 0; fonttable[family].fontname; family++) {
-	register char *s, *t;
+	const char *s, *t;
 
 	for (s = name, t = fonttable[family].fontname; *s && *t; s++, t++) {
 	    if (*s != *t && *s != (*t - 32) && *s != (*t + 32))
@@ -324,7 +315,7 @@ static void ComputeTroffFont(register char  *name, register long  FaceCodemodifi
     if(!fonttable[family].fontname){
 	/* try to look up symbol table font */
 	for (specfamily = 0; specfonttable[specfamily].fontname; specfamily++) {
-	    register char *s, *t;
+	    const char *s, *t;
 
 	    for (s = name, t = specfonttable[specfamily].fontname; *s && *t; s++, t++) {
 		if (*s != *t && *s != (*t - 32) && *s != (*t + 32))
@@ -351,7 +342,7 @@ static void ComputeTroffFont(register char  *name, register long  FaceCodemodifi
 
 static void ChangeFont()
 {
-    register char *code = fonttable[dFont].fontcodes[dFace];
+    const char *code = fonttable[dFont].fontcodes[dFace];
 
     if (needNewLine)
 	fprintf(troffFile, code[1] ? "\\&\\f(%s" : "\\&\\f%s", code);
@@ -592,7 +583,7 @@ static void InitializeStyle()
 static void handlemac(FILE  *f,const char  *s)
 {
     FILE *fi;
-    register int c;
+    int c;
     if(InlineMacros && ((fi = fopen(s,"r")) != NULL)){
 	while((c = getc(fi)) != EOF) putc(c,f);
 	fclose(fi);
@@ -600,10 +591,10 @@ static void handlemac(FILE  *f,const char  *s)
     else fprintf(f, ".so %s\n",s);
 }
 
-static void OutputInitialTroff(register FILE  *f, class view *vw, boolean  toplevel, class environment  *cenv)
+static void OutputInitialTroff(FILE  *f, class view *vw, boolean  toplevel, class environment  *cenv)
 {
-/*     register char **mx; */
-    register int i;
+/*     char **mx; */
+    int i;
 
     tabscharspaces = environ::GetProfileInt("TabsCharSpaces", 8);
     
@@ -870,10 +861,10 @@ static void FlushLineSpacing(int  cs, int  hitchars, boolean  needbreak)
 #define NOFORMAT 1
 #define NOPRINT 2
 static char **namelist;
-static char listheader[] = 
+static const char listheader[] = 
     "footnote,index,indexi"
    ;
-static char defaultlist[] = 
+static const char defaultlist[] = 
 /*    "majorheading,heading,subheading,chapter,section,subsection,paragraph,function" */
 "chapter,section,subsection,paragraph"
 ;
@@ -918,7 +909,7 @@ static int appendlist(char  **lst,int  cnt,const char  *ostr,int  TEST)
     lst[cnt] = NULL;
     return cnt;
 }
-static int lookup(char  *s)
+static int lookup(const char  *s)
 {
     char **p;
     int i = 0;
@@ -937,7 +928,7 @@ static void endspecialformating()
 }
 static void deletenewlines(char  *buf)
 {
-    register char *c;
+    char *c;
     for(c = buf; *c != '\0'; c++){
 	if(*c == '\n') *c = ' ';
     }
@@ -948,7 +939,7 @@ static void deletenewlines(char  *buf)
 }
 static void deletechapnumbers(char  *buf)
 {
-    register char *c,*s;
+    char *c,*s;
     s = buf;
     if(*s <= '9' && *s >= '0' && (c = strchr(buf,'\t')) != NULL){
 	c++;
@@ -957,14 +948,15 @@ static void deletechapnumbers(char  *buf)
 	} while (*c++ != '\0');
     }
 }
-static void insert(char  *src,char  *c)
+static void insert(const char  *src,char  *c)
 {   /* inserts string src into the begining of string c , assumes enough space */
     char *p,*enddest;
+    const char *cp;
     enddest = c + strlen(c);
     p = enddest + strlen(src);
     while(enddest >= c) *p-- = *enddest-- ;
-    for(p = src; *p != '\0';p++)
-	*c++ = *p;
+    for(cp = src; *cp != '\0';cp++)
+	*c++ = *cp;
 }
 static void quote(char  *buf,char  c,int  len)
 {
@@ -990,7 +982,8 @@ static int handlespecialformating(class text  *d,class environment  *env,long  p
 {
     class style *st;
     struct content_chapentry *centry;
-    char buf[256],*sn,*bbf,*sbuf;
+    char buf[256],*bbf,*sbuf;
+    const char *sn;
     long type;
     int ch;
 /* printf("pos = %d formatnore = %d\n",pos,formatnote);
@@ -1150,9 +1143,9 @@ class text *texttroff__CompileNotes(struct classstyle;
 void texttroff::WriteSomeTroff(class view  *view, class dataobject  *dd, FILE  * f, int  toplevel, unsigned long  flags)
 {
     int elen, cs, ln , flag,count,indexfontface,hitchars;
-    register long i, doclen;
-    register class text *d,*ttxt;
-    register boolean quotespace; 
+    long i, doclen;
+    class text *d,*ttxt;
+    boolean quotespace; 
     class environment *cenv, *nenv;
     char *list[64];
     const char *p,*val;

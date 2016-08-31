@@ -25,16 +25,6 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/types.h sys/time.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/errormon.C,v 1.9 1996/02/09 19:37:26 susan Stab74 $";
-#endif
-
-
- 
-
 /* 
  ***************************************************************
  * Routines for monitoring messages on console service
@@ -43,7 +33,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  ****************************************************************
  */
 
-
+#include <andrewos.h> /* sys/types.h sys/time.h sys/file.h */
 #include <im.H>
 #include <consoleClass.H>
 #include <environ.H>
@@ -99,23 +89,15 @@ u_long ThisHostAddr;
 
 #define MAXERRORRESTARTS 2
 
-#ifndef NORCSID
-#endif
-#if SY_AIX221
-#endif /* #if SY_AIX221 */
-#ifdef ibm032
-#endif /* ibm032 */
-#ifdef M_UNIX
-#endif
-void RestartErrorMonitoring(class consoleClass  *self, char  *msg);
+void RestartErrorMonitoring(class consoleClass  *self, const char  *msg);
 int InitErrorMonitoring(class consoleClass  *self,boolean  FirstTime);
 extern "C" int OpenConsoleSocket();
-void ReportInternalError(class consoleClass  *self, char  *string);
+void ReportInternalError(class consoleClass  *self, const char  *string);
 #if defined(M_UNIX) || defined(__hpux) || defined(hpux)
 int ConsolePipe(class consoleClass  *self);
 #endif /* M_UNIX */
 
-void RestartErrorMonitoring(class consoleClass  *self, char  *msg)
+void RestartErrorMonitoring(class consoleClass  *self, const char  *msg)
         {
     char ErrTxt[256];
     static int ErrorRestarts = 0;
@@ -376,7 +358,7 @@ skipit:
 }
 
 
-void ReportInternalError(class consoleClass  *self, char  *string)
+void ReportInternalError(class consoleClass  *self, const char  *string)
         {
     mydbg(("entering: ReportInternalError\n"));
     AnotherError(self,string, TRUE);

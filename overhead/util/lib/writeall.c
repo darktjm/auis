@@ -25,18 +25,11 @@
  *  $
 */
 
-#include <util.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/writeall.c,v 2.6 1992/12/15 21:11:36 rr2b Stab74 $";
-#endif
-
 /*
 	writeall.c -- Do write, resuming if interrupted
 */
 
-
+#include <util.h>
 #include <errno.h>
 #include <unistd.h>
 

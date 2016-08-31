@@ -22,10 +22,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/server/RCS/malloc.c,v 1.3 1992/12/15 21:55:23 rr2b Stab74 $";
-#endif
 #ifdef MALLOC_LEAK
 #define scribblecheck
 #define parent
@@ -114,8 +110,6 @@ what you give them.   Help stamp out software-hoarding!  */
  ****************************************************************/
 
 /*
- * @(#)nmalloc.c 1 (Caltech) 2/21/82
- *
  *	U of M Modified: 20 Jun 1983 ACT: strange hacks for Emacs
  *
  *	Nov 1983, Mike@BRL, Added support for 4.1C/4.2 BSD.
@@ -338,7 +332,7 @@ public malloc_init (start)
 }
 
 public int m_blocksize(a_block)
-     register char *a_block;
+     char *a_block;
 {
   if (a_block == (char *)0) return 0;
   return(((struct mhead *)a_block-1)->mh_nbytes);
@@ -352,12 +346,12 @@ public int m_blocksize(a_block)
 
 static
 morecore (nu)			/* ask system for more memory */
-     register int nu;		/* size index to get more of  */
+     int nu;		/* size index to get more of  */
 {
   char *sbrk ();
-  register char *cp;
-  register int nblks;
-  register int siz;
+  char *cp;
+  int nblks;
+  int siz;
 
   if (!data_space_start)
     {
@@ -441,8 +435,8 @@ morecore (nu)			/* ask system for more memory */
 #ifdef scribblecheck
     {
       /* Check that upper stuff was still MAGIC1 */
-      register char *m = (char *)((struct mhead *)cp+1);
-      register char *en = (8<<nu) + cp;
+      char *m = (char *)((struct mhead *)cp+1);
+      char *en = (8<<nu) + cp;
       /* Fill whole block with MAGICFREE */
       while (m<en) *m++ = MAGICFREE;
     }
@@ -465,8 +459,8 @@ morecore (nu)			/* ask system for more memory */
 static
 getpool ()
 {
-  register int nu;
-  register char *cp = sbrk (0);
+  int nu;
+  char *cp = sbrk (0);
 
   if ((int) cp & 0x3ff)	/* land on 1K boundaries */
     sbrk (1024 - ((int) cp & 0x3ff));
@@ -504,8 +498,8 @@ getpool ()
 #endif /* rcheck */
 #ifdef scribblecheck
     {
-      register char *m = (char *)((struct mhead *)cp+1);
-      register char *en = (8<<nu) + cp;
+      char *m = (char *)((struct mhead *)cp+1);
+      char *en = (8<<nu) + cp;
       /* Fill whole block with MAGICFREE */
       while (m<en) *m++ = MAGICFREE;
     }
@@ -524,9 +518,9 @@ public char *
 malloc (n)		/* get a block */
      unsigned n;
 {
-  register struct mhead *p;
-  register unsigned int nbytes;
-  register int nunits = 0;
+  struct mhead *p;
+  unsigned int nbytes;
+  int nunits = 0;
 
 #ifdef parent
   char *PAPA = *(char **)(&n-2);
@@ -535,7 +529,7 @@ malloc (n)		/* get a block */
      multiple of 4, then figure out which nextf[] area to use */
   nbytes = (n + sizeof *p + EXTRA + 3) & ~3;
   {
-    register unsigned int   shiftr = (nbytes - 1) >> 2;
+    unsigned int   shiftr = (nbytes - 1) >> 2;
 
     while (shiftr >>= 1)
       nunits++;
@@ -567,9 +561,9 @@ malloc (n)		/* get a block */
 #ifdef scribblecheck
   /* Check for block filled with magic numbers, then change to zeros */
   {
-    register char  *m = (char *) (p + 1);
-    register char *en = (8<<p->mh_index) + (char *) p;
-    register int  block_valid = 0;
+    char  *m = (char *) (p + 1);
+    char *en = (8<<p->mh_index) + (char *) p;
+    int  block_valid = 0;
     while(m<en && (block_valid=(*m==MAGICFREE)))
       *m++=(char)0;
     /* so, status comes out as 1 if ok, 0 if terminated */
@@ -595,9 +589,9 @@ malloc (n)		/* get a block */
 #ifdef rcheck
   p -> mh_magic4 = MAGIC4;
   {
-    register char  *m = (char *) (p + 1) + n;
+    char  *m = (char *) (p + 1) + n;
 #ifdef scribblecheck
-    register char *en = (8<<p->mh_index)+(char *)p;
+    char *en = (8<<p->mh_index)+(char *)p;
     /* point to end of block */
     while (m<en) *m++ = MAGIC1;
 #else /* scribblecheck */
@@ -621,12 +615,12 @@ malloc (n)		/* get a block */
 public free (mem)
      char *mem;
 {
-  register struct mhead *p;
+  struct mhead *p;
 #ifdef parent
   char *PAPA = *(char **)((&mem)-2);
 #endif parent
   {
-    register char *ap = mem;
+    char *ap = mem;
 
     ASSERT (ap != 0);
     p = (struct mhead *) ap - 1;
@@ -640,15 +634,15 @@ public free (mem)
 #endif /* rcheck */
   }
   {
-    register int nunits = p -> mh_index;
+    int nunits = p -> mh_index;
 
     ASSERT (nunits <= 29);
 #ifdef scribblecheck
     {
       /* Check that upper stuff was still MAGIC1 */
-      register char  *m = (char *) (p + 1) + p->mh_nbytes;
-      register char *en = (8<<p->mh_index) + (char *) p;
-      register int  block_valid = 0;
+      char  *m = (char *) (p + 1) + p->mh_nbytes;
+      char *en = (8<<p->mh_index) + (char *) p;
+      int  block_valid = 0;
       while(m<en && (block_valid=(*m++==MAGIC1)));
       if (!block_valid) botch ("block freed with data out of bounds");
       /* Fill whole block with MAGICFREE */
@@ -678,12 +672,12 @@ public free (mem)
 public char *
 realloc (mem, n)
      char *mem;
-     register unsigned n;
+     unsigned n;
 {
-  register struct mhead *p;
-  register unsigned int tocopy;
-  register int nbytes;
-  register int nunits;
+  struct mhead *p;
+  unsigned int tocopy;
+  int nbytes;
+  int nunits;
 #ifdef parent
   char *PAPA = *(char **)((&mem)-2);
 #endif parent
@@ -700,10 +694,10 @@ realloc (mem, n)
 #ifdef rcheck
   ASSERT (p -> mh_magic4 == MAGIC4);
   {
-    register char *m = mem + tocopy;
+    char *m = mem + tocopy;
 #ifdef scribblecheck
-    register char *en = (8<<p->mh_index) + (char *)p;
-    register int block_valid = 0;
+    char *en = (8<<p->mh_index) + (char *)p;
+    int block_valid = 0;
     while(m<en && (block_valid=(*m++==MAGIC1)));
     if (!block_valid) botch ("out of bounds data on realloc");
 #else /* scribblecheck */
@@ -721,9 +715,9 @@ realloc (mem, n)
     {
       /* Here we check on realloc if we are grabbing unused space */
 #ifdef rcheck
-      register char *m = mem + tocopy;
+      char *m = mem + tocopy;
 #ifdef scribblecheck
-      register char *en = (8<<p->mh_index) + (char *) p;
+      char *en = (8<<p->mh_index) + (char *) p;
       while (m<en) *m++=(char)0;
 #else /* scribblecheck */
       *m++ = 0;  *m++ = 0;  *m++ = 0;  *m++ = 0;
@@ -742,7 +736,7 @@ realloc (mem, n)
   if (n < tocopy)
     tocopy = n;
   {
-    register char *new;
+    char *new;
 
     if ((new = malloc (n)) == 0)
       return 0;
@@ -775,8 +769,8 @@ malloc_stats (size)
      int size;
 {
   struct mstats_value v;
-  register int i;
-  register struct mhead *p;
+  int i;
+  struct mhead *p;
 
   v.nfree = 0;
 

@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/txtvps.C,v 1.27 1996/05/23 14:01:56 robr Exp $";
-#endif
-
 #include <ctype.h>
 #include <time.h>    
 
@@ -798,7 +792,7 @@ static void InitLexer(struct textps_slurp  *slurp, struct textps_lexstate_text  
 	    while (ex) {
 		PushStyle(slurp, ex, textps_pushtype_Env);
 		if (slurp->contents && ex->type==environment_Style) {
-		    char *nm = ex->data.style->GetName();
+		    const char *nm = ex->data.style->GetName();
 		    int lev;
 		    lev = content::StyleNameContentLevel(nm);
 		    if (lev) {
@@ -1023,7 +1017,7 @@ static void SlurpWord(struct textps_slurp  *slurp)
 		    while (ex) {
 			PushStyle(slurp, ex, textps_pushtype_Env);
 			if (slurp->contents && ex->type==environment_Style) {
-			    char *nm = ex->data.style->GetName();
+			    const char *nm = ex->data.style->GetName();
 			    int lev;
 			    lev = content::StyleNameContentLevel(nm);
 			    if (lev) {
@@ -3782,7 +3776,7 @@ void textview::PrintPSRect(FILE *outfile, long width, long height, struct rectan
     delete history;
 }
 
-void *textview::GetPSPrintInterface(char *printtype)
+void *textview::GetPSPrintInterface(const char *printtype)
 {
     /* ### we might not want the "text" stitching in general -- mostly I stuck it in for testing purposes. */
     /*if (!strcmp(printtype, "text")) {

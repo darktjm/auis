@@ -79,7 +79,7 @@ typedef struct _ADDRESS_ {
 
 #define FOR_ALL_GROUP_MEMBERS(var, addr, body)\
 	{\
-	    register PARSED_ADDRESS *var, *_NEXT_;\
+	    PARSED_ADDRESS *var, *_NEXT_;\
 	    for (var=(addr)->Members->Next, _NEXT_=var->Next;\
 		 var->Kind!=DUMMY_ADDRESS;\
 		 var=_NEXT_, _NEXT_=var->Next)\
@@ -88,7 +88,7 @@ typedef struct _ADDRESS_ {
 
 #define FOR_ALL_ADDRESSES(var, list, body)\
 	{\
-	    register PARSED_ADDRESS *var, *_NEXT_;\
+	    PARSED_ADDRESS *var, *_NEXT_;\
 	    for (var=(list)->Next, _NEXT_=var->Next;\
 		 var->Kind!=DUMMY_ADDRESS;\
 		 var=_NEXT_, _NEXT_=var->Next)\
@@ -97,7 +97,7 @@ typedef struct _ADDRESS_ {
 
 #define FOR_ALL_REVERSE_HOSTS(var, addr, body)\
 	{\
-	    register ADDRESS_HOST *var, *_HEAD_, *_PREV_;\
+	    ADDRESS_HOST *var, *_HEAD_, *_PREV_;\
 	    _HEAD_ = (addr)->Hosts;\
 	    for (var=_HEAD_->Prev, _PREV_=var->Prev;\
 		 var!=_HEAD_;\

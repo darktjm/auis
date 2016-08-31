@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-char *figorect_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figorect.C,v 3.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("figorect.H")
 #include <figorect.H>
@@ -72,7 +68,7 @@ class figorect *figorect::Create(long  left , long  top , long  width , long  he
     return res;
 }
 
-char *figorect::ToolName(class figtoolview  *v, long  rock)
+const char *figorect::ToolName(class figtoolview  *v, long  rock)
 {
     return "Rectangle";
 }
@@ -178,7 +174,7 @@ void figorect::Draw(class figview  *v)
 {
     long x, y, w, h;
     long shad, lw, dash;
-    char *col;
+    const char *col;
 
     if ((this)->PosW() >= 0) {
 	x = (v)->ToPixX( (this)->PosX());
@@ -528,11 +524,11 @@ long figorect::ReadBody(FILE  *fp, boolean  recompute)
 
 #define FadeColor(col, shad)  (1.0 - (1.0-(shad)) * (1.0-(col)))
 
-void figorect::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolean newstyle)
+void figorect::PrintObject(class figview  *v, FILE  *file, const char  *prefix, boolean newstyle)
 {
     long x, y, w, h;
     long shad, lw, dash;
-    char *col;
+    const char *col;
     double rcol, bcol, gcol, shadcol;
 
     fprintf(file, "%s  %% rectangle\n", prefix);

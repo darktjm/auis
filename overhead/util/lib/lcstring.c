@@ -25,20 +25,11 @@
  *  $
 */
 
-#include <util.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/lcstring.c,v 1.4 1992/12/15 21:11:36 rr2b Stab74 $";
-#endif
-
 /*
 	lcstring.c-- copies a source string to a dest buff, converting all uppercase to lower.
 */
 
-
- 
-
+#include <util.h>
 #include <ctype.h>
 
 #define DOWNCASE(x) (isascii(x) && isalpha(x) && isupper(x) ? (tolower(x)) : (x))

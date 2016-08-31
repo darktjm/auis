@@ -25,19 +25,14 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/wpgen.c,v 2.11 1993/06/12 12:35:25 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	wpgen.c
 	The wp_Generate function.
 	Include file ``wp.h'' declares the procedures for clients.
 \* ************************************************************ */
 
-#include <stdio.h>
 #include <andrewos.h>		/* sys/file.h sys/types.h sys/time.h strings.h */
+#include <stdio.h>
 #include <ctype.h>
 #include <errno.h>
 #include <truth.h> /* itc.h -> truth.h DMT */

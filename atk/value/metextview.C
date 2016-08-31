@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/metextview.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 static class keymap *ssmap;
 ATK_IMPL("metextview.H")
 #include <keystate.H>
@@ -49,14 +39,12 @@ ATK_IMPL("metextview.H")
 #define Text(A) ((class mentertext *)(A->dataobject))
 
 ATKdefineRegistry(metextview, textview, metextview::InitializeClass);
-#ifndef NORCSID
-#endif
-void metextview_CancelCommand(register class metextview  *self );
-void metextview_ReturnCommand(register class metextview  *self );
-void metextview_ClearCommand(register class metextview  *self );
+void metextview_CancelCommand(class metextview  *self );
+void metextview_ReturnCommand(class metextview  *self );
+void metextview_ClearCommand(class metextview  *self );
 
 
-void metextview_CancelCommand(register class metextview  *self )
+void metextview_CancelCommand(class metextview  *self )
 {
     class mentertext *txt = Text(self);
     if((txt)->Changed()){
@@ -64,7 +52,7 @@ void metextview_CancelCommand(register class metextview  *self )
 	(txt)->NotifyObservers(0);
     }
 }
-void metextview_ReturnCommand(register class metextview  *self )
+void metextview_ReturnCommand(class metextview  *self )
 {
     long np;
     char resp[64];
@@ -89,7 +77,7 @@ void metextview_ReturnCommand(register class metextview  *self )
 	}
     }
 }
-void metextview_ClearCommand(register class metextview  *self )
+void metextview_ClearCommand(class metextview  *self )
 {
     class mentertext *txt = Text(self);
     (txt)->Clear();
@@ -149,7 +137,7 @@ boolean metextview::InitializeClass()
 */
     return TRUE;
 }
-void metextview::ObservedChanged(class observable  *changed,register long  value)
+void metextview::ObservedChanged(class observable  *changed,long  value)
 {
     (this)->textview::ObservedChanged(changed,value);
     if(value != observable_OBJECTDESTROYED){

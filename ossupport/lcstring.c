@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ossupport/RCS/lcstring.c,v 1.1 1996/02/09 20:08:42 robr Stab74 $";
-#endif
-
 /*
 	lcstring.c-- copies a source string to a dest buff, converting all uppercase to lower.
 */

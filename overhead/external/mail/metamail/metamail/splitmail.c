@@ -425,7 +425,7 @@ char *ctype;
 }
 
 int ULstrcmp(s1, s2)
-register char *s1, *s2;
+char *s1, *s2;
 {
     char c1,c2;
 

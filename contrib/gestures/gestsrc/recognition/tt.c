@@ -42,14 +42,6 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/recognition/RCS/tt.c,v 1.4 1993/06/17 04:35:10 rr2b Stab74 $";
-#endif
-
-
-
-
 /*
   gesture trainer and tester with no graphical I/O
 
@@ -151,8 +143,8 @@ char **argv;
 
 Train()
 {
-	register Gesture g;
-	register Gpoint p;
+	Gesture g;
+	Gpoint p;
 	FV fv;
 
 	sC = sNewClassifier();
@@ -174,9 +166,9 @@ Train()
 
 Eval()
 {
-	register Gesture g;
-	register Gpoint p;
-	register sClassDope scd, expectedscd;
+	Gesture g;
+	Gpoint p;
+	sClassDope scd, expectedscd;
 	FV fv;
 	int ntries = 0, nwrong = 0;
 
@@ -238,7 +230,7 @@ char **argv;
 	ENDARGLOOP
 
 	{ extern double se_th_rolloff, dist_sq_threshold;
-	  register int i, j, z;
+	  int i, j, z;
 
 	for(i = z = 0; i < 128; i++) {
 		if(_zdebug_flag[i] && z==0)

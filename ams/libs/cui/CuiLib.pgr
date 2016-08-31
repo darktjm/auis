@@ -1456,10 +1456,6 @@ storage.}
 
 rcs information about this file:
 
-$Header: 
-/afs/andrew.cmu.edu/itc/src/andrew/doc/itc/ams/prog/RCS/LibraryCalls.d,v 1.3 
-89/01/18 09:46:43 nsb Exp Locker: jr34 $
-
 $Log: CuiLib.pgr,v $
 
 Revision 1.4  1992/12/17  21:57:12  rr2b

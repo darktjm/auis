@@ -25,18 +25,12 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/be1be2.C,v 3.5 1995/06/26 15:53:15 rr2b Stab74 $";
-#endif
-
 /*
  * BE1 to BE2 conversion package
  */
 
 
+#include <andrewos.h>
 ATK_IMPL("be1be2.H")
 #include <ctype.h>
 
@@ -113,17 +107,15 @@ ATK_IMPL("be1be2.H")
 
 
 ATKdefineRegistry(be1be2, ATK, NULL);
-#ifndef NORCSID
-#endif
-static long CVDots(register long  amt, enum style_Unit  unit);
+static long CVDots(long  amt, enum style_Unit  unit);
 boolean ConvertStyle(class style  *self, long  attr , long  opcode , long  optype , long  opparm);
 
 
 boolean be1be2::CheckBE1(class text  *text)
 {
     long gotlen, len = (text)->GetLength();
-    register int pos = 0;
-    register unsigned char *p;
+    int pos = 0;
+    unsigned char *p;
     int envcount = 0, defcount = 0, bincount = 0;
 
     while (pos < len)
@@ -169,7 +161,7 @@ boolean be1be2::CheckBE1(class text  *text)
  *    CVDots, copied from style.c
  */
 
-static long CVDots(register long  amt, enum style_Unit  unit)
+static long CVDots(long  amt, enum style_Unit  unit)
 {
     switch (unit) {
         case style_RawDots:

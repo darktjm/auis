@@ -26,13 +26,6 @@
 */
 
 
-/* $Header $ */
-/* $Source $ */
-
-#ifndef lint
-static char *rcsidchartapp_ch = "$Header $";
-#endif
-
 /*
     $Log: chartapp.ch,v $
  * Revision 1.1  1993/10/13  15:52:18  rr2b

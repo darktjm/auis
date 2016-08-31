@@ -27,11 +27,6 @@
 
 #include <andrewos.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/stats/common/RCS/gsmain.c,v 1.4 1992/12/15 21:31:10 rr2b Stab74 $";
-#endif
-
 /* **********************************************************************
 *   This code is designed to read what might be priveledged (setuid) 
 *   information regarding both Disk Statistics (% full) and a host of 

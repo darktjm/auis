@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/cmenu/RCS/scache.c,v 1.8 1996/08/07 22:15:13 robr Exp $";
-#endif
-
-
 #include <stdio.h>
 #include "scache.h"
 

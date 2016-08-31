@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/types.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/index/RCS/indexio.c,v 2.10 1993/10/06 00:32:02 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include <stdio.h>
 #include <sys/stat.h>
 
@@ -46,10 +37,10 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
  * form to the file.  Make sure this works for vaxes as well as normal machines.
  */
 static writeInteger(afile, ai)
-register long ai;
-register FILE *afile;
+long ai;
+FILE *afile;
 {
-    register long tc;
+    long tc;
 
     tc = (ai >> 24) & 0xff;
     putc(tc, afile);
@@ -66,11 +57,11 @@ register FILE *afile;
   * of the record ID to the file.
   */
 static writeRecordID(afile, arid)
-register struct recordID *arid;
-register FILE *afile;
+struct recordID *arid;
+FILE *afile;
 {
-    register long code;
-    register long tc;
+    long code;
+    long tc;
 
     code = arid->word1;
     tc = (code >> 24) & 0xff;
@@ -98,11 +89,11 @@ register FILE *afile;
   * of the integer from the file and return it in the place provided.
   */
 static readInteger(afile, ai)
-register long *ai;
-register FILE *afile;
+long *ai;
+FILE *afile;
 {
-    register long code;
-    register long tc;
+    long code;
+    long tc;
 
     code = 0;
     tc = getc(afile);
@@ -123,10 +114,10 @@ register FILE *afile;
   * recordID.
   */
 static struct recordID *readRecordID(afile)
-register FILE *afile;
+FILE *afile;
 {
-    register long code;
-    register long tc;
+    long code;
+    long tc;
     static struct recordID tid;
 
     code = 0;
@@ -158,10 +149,10 @@ register FILE *afile;
   * pointer to the newly-created list.
   */
 struct hashList *readHashList(afile)
-register FILE *afile;
+FILE *afile;
 {
-    register long temp;
-    register struct hashList *tlist, *clist;
+    long temp;
+    struct hashList *tlist, *clist;
 
     /* NEVER return null */
     clist = (struct hashList *) malloc(sizeof (struct hashList));
@@ -193,11 +184,11 @@ register FILE *afile;
   * the hash list representation to the file.
   */
 writeHashList(afile, alist)
-register FILE *afile;
-register struct hashList *alist;
+FILE *afile;
+struct hashList *alist;
 {
-    register long i;
-    register long temp, tc;
+    long i;
+    long temp, tc;
     for(;alist;alist=alist->next) {
 	for(i=0;i<alist->nentries;i++) {
 	    temp = alist->entries[i];
@@ -217,10 +208,10 @@ register struct hashList *alist;
   * the entire hash bucket to the file.
   */
 index_WriteIndex(afile, ab)
-register FILE *afile;
-register struct indexBucket *ab;
+FILE *afile;
+struct indexBucket *ab;
 {
-    register struct indexComponent *c;
+    struct indexComponent *c;
     writeInteger(afile, ab->nextID);
     for(c=ab->list; c; c=c->next) {
 	if (c->primary) {
@@ -247,15 +238,15 @@ register struct indexBucket *ab;
   * hashBucket * just created.
   */
 struct indexBucket *index_ReadIndex(afile)
-register FILE *afile;
+FILE *afile;
 {
-    register long tc;
+    long tc;
     char charBuffer[MAXSTRLENGTH];
     struct recordID *idp;
-    register long code;
-    register struct hashList *tlist;
+    long code;
+    struct hashList *tlist;
     struct indexComponent *enchilada;
-    register struct indexComponent *ti;
+    struct indexComponent *ti;
     struct indexBucket *tb;
     long nextID;
 
@@ -328,10 +319,10 @@ register FILE *afile;
   */
 index_FreeIndex(ai, abucket)
 struct Index *ai;
-register struct indexBucket *abucket;
+struct indexBucket *abucket;
 {
-    register struct indexComponent *idx, *nidx;
-    register struct indexBucket *tbucket, **lbucket;
+    struct indexComponent *idx, *nidx;
+    struct indexBucket *tbucket, **lbucket;
 
     /* remove bucket from chain */
     lbucket = &ai->blist;
@@ -349,7 +340,7 @@ register struct indexBucket *abucket;
 	nidx=idx->next;
 	free(idx->name);
 	if (idx->primary) {
-	    register struct hashList *th, *nh;
+	    struct hashList *th, *nh;
 	    for(th=idx->hashes;th;th=nh) {
 		nh = th->next;
 		free(th);
@@ -370,10 +361,10 @@ register struct indexBucket *abucket;
 	    */
 struct indexBucket *index_CGetHash(ai, ahash)
 struct Index *ai;
-register long ahash;
+long ahash;
 {
-    register FILE *file;
-    register struct indexBucket *tb;
+    FILE *file;
+    struct indexBucket *tb;
     for(tb=ai->blist;tb;tb=tb->next) {
 	if (tb->hashIndex == ahash) return tb;
     }
@@ -400,7 +391,7 @@ register long ahash;
 	    */
 struct indexBucket *index_CGet(ai, akey)
 struct Index *ai;
-register char *akey;
+char *akey;
 {
     return index_CGetHash(ai, index_Hash(akey, ai->hashTableSize));
 }
@@ -410,8 +401,8 @@ register char *akey;
   * the required storage.
   */
 index_CPut(ai, ab)
-register struct Index *ai;
-register struct indexBucket *ab;
+struct Index *ai;
+struct indexBucket *ab;
 {
 }
 
@@ -419,10 +410,10 @@ register struct indexBucket *ab;
   * Internal routine to write out a bucket.
   */
 index_CWrite(ai, ab)
-register struct Index *ai;
-register struct indexBucket *ab;
+struct Index *ai;
+struct indexBucket *ab;
 {
-    register FILE *tf;
+    FILE *tf;
 
     tf = index_HashOpen(ai, ab->hashIndex, 1);
     if (tf == 0) return;
@@ -436,13 +427,13 @@ register struct indexBucket *ab;
   * delete the directory itself, but does delete all of its contents.
   */
 static Purge(apath)
-register char *apath;
+char *apath;
 {
-    register DIR *td;
-    register DIRENT_TYPE *tde;
+    DIR *td;
+    DIRENT_TYPE *tde;
     char buffer[1024];
     struct stat tstat;
-    register long code;
+    long code;
 
     td = opendir(apath);
     if (!td) return;
@@ -467,12 +458,12 @@ register char *apath;
   * already exists, it is cleared out, with any data in the index being lost.
   */
 index_Create(apath, aHashSize)
-register char *apath;
-register long aHashSize;
+char *apath;
+long aHashSize;
 {
     char tbuffer[1024], sb[20];
-    register long i;
-    register FILE *tfile;
+    long i;
+    FILE *tfile;
     Purge(apath);		/* clear out old junk */
     mkdir(apath, 0755);
     strcpy(tbuffer, apath);

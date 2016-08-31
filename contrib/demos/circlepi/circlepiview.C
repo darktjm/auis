@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/demos/circlepi/RCS/circlepiview.C,v 1.4 1994/08/11 03:02:36 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 #include <math.h>
 
@@ -56,8 +51,6 @@ static class menulist *vmenulist = NULL;
 
 
 ATKdefineRegistry(circlepiview, view, circlepiview::InitializeClass);
-#ifndef NORCSID
-#endif
 int inside_circle(double  x,double  y);
 static void step(class circlepiview  *self  , double  x , double  y , double  side, double  *inside , double  *outside, int  depth , int  depth_limit);
 static void LimitProc(class circlepiview  *self, long  param);

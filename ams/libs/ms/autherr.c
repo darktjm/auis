@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/autherr.c,v 2.10 1992/12/15 21:17:22 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include <ms.h>
 #ifdef AFS_ENV
 #include <netinet/in.h>

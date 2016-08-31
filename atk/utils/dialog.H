@@ -46,7 +46,7 @@ public:
     
 	virtual ~dialog();
     
-     char * ViewName()  ;
+     const char * ViewName()  ;
      long Read (FILE *fp, long id)  ;
      long Write (FILE *fp, long id, int level)  ;
 

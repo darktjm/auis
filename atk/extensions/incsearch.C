@@ -26,17 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/incsearch.C,v 3.2 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
-
 ATK_IMPL("incsearch.H")
 #include <bind.H>
 #include <text.H>
@@ -57,14 +46,12 @@ static char LastString[MAXSTRING] = {0};
 
 
 ATKdefineRegistry(incsearch, ATK, incsearch::InitializeClass);
-#ifndef NORCSID
-#endif
-void strappend(char  *dst , char  *src, int  ch , int  len);
-static boolean dosearch(class textview  *tv, class text  *txt, class mark  *pos, char  *string , boolean  forwardp, boolean  contForward, boolean  contBackward, char  *errmsg);
+void strappend(char  *dst , const char  *src, int  ch , int  len);
+static boolean dosearch(class textview  *tv, class text  *txt, class mark  *pos, const char  *string , boolean  forwardp, boolean  contForward, boolean  contBackward, const char  *errmsg);
 static long incsearchf(ATK *tva, long  key);
 
 
-void strappend(char  *dst , char  *src, int  ch , int  len)
+void strappend(char  *dst , const char  *src, int  ch , int  len)
 {
     /* copy as much of the source as we can. */
     while (--len > 0 && (*dst = *src++) != '\0')
@@ -78,12 +65,13 @@ void strappend(char  *dst , char  *src, int  ch , int  len)
     *dst = '\0';
 }
 
-static boolean dosearch(class textview  *tv, class text  *txt, class mark  *pos, char  *string , boolean  forwardp, boolean  contForward, boolean  contBackward, char  *errmsg)
+static boolean dosearch(class textview  *tv, class text  *txt, class mark  *pos, const char  *string , boolean  forwardp, boolean  contForward, boolean  contBackward, const char  *errmsg)
 {
     int c, fudge;
     boolean results;
     class mark *newpos;
-    char newstring[MAXSTRING], *newerr;
+    char newstring[MAXSTRING];
+    const char *newerr;
     static char prompt[MAXSTRING+256];
     long loc;
     struct SearchPattern *pattern;
@@ -210,7 +198,7 @@ static long incsearchf(ATK *tva, long  key)
 	searchString = search::GetQuotedSearchString(unquotedString, NULL, 0);
     }
 	    
-    while (dosearch(tv, txt, mark, (searchString != NULL) ? searchString : (char *)"", key == 'S'-64, TRUE, TRUE, NULL))
+    while (dosearch(tv, txt, mark, (searchString != NULL) ? searchString : "", key == 'S'-64, TRUE, TRUE, NULL))
         ;
     
     if (searchString != NULL) {

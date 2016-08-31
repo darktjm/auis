@@ -25,12 +25,6 @@
 //  $
 */
 
-#ifdef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xgraphic.C,v 3.39 1996/08/27 22:03:40 robr Exp $";
-#endif
-
-
  /* xgraphic.c
   */
 
@@ -97,7 +91,7 @@ typedef struct _XRegion {
 
 ATKdefineRegistry(xgraphic, graphic, xgraphic::InitializeClass);
 #ifdef XRELEASE2_ENV
-static TempXSetRegion( Display  *dpy, GC  gc, register Region  r );
+static TempXSetRegion( Display  *dpy, GC  gc, Region  r );
 #endif /* XRELEASE2_ENV */
 class xgraphic * * xgraphic_FindGrayBlock(Display  * WhichDisplay, int  WhichScreen );
 struct  xgraphic_UpdateBlock * xgraphic_FindUpdateBlock(Display  * WhichDisplay, Drawable  WhichWindow);
@@ -105,10 +99,10 @@ static void InstallUpdateRegion(class xgraphic  * self );
 static void xgraphic_LocalSetTransferFunction(class xgraphic  * self, int  prevValue);
 static void  ReallySetFont(class xgraphic  *self);
 static void xgraphic_DrawChars(class xgraphic  * self,const char  * Text,short  Operation ,short  StringMode,long  TextLength );
-static void SetUpPixImage(register class xgraphic  *self, register class pixelimage  *pixelimage);
+static void SetUpPixImage(class xgraphic  *self, class pixelimage  *pixelimage);
 static unsigned int  bitsPerPixelAtDepth(Display       *disp, int            scrn, unsigned int depth);
 XImageInfo * imageToXImage( class xgraphic  *self, class image  *image, unsigned int private_cmap, unsigned int fit );
-static void SetUpXImage( register class xgraphic  *self, register class image  *image );
+static void SetUpXImage( class xgraphic  *self, class image  *image );
 void  sendXImage( class xgraphic  *self, XImageInfo   *ximageinfo, int           src_x , int           src_y , int           dst_x , int           dst_y, unsigned int w , unsigned int h );
 void xgraphic_LocalSetClippingRect(class xgraphic  * self ,struct xgraphic_UpdateBlock  * updateBlk );
 static void xgraphicClearGrayLevels(class xgraphic  *self);
@@ -127,10 +121,10 @@ static long RealDisplayClass( class xgraphic		     *self );
 
 #ifdef XRELEASE2_ENV
 
-static TempXSetRegion( Display  *dpy, GC  gc, register Region  r )
+static TempXSetRegion( Display  *dpy, GC  gc, Region  r )
             {
-    register int i;
-    register XRectangle *xr;
+    int i;
+    XRectangle *xr;
     xr = (XRectangle *) 
     	_XAllocScratch(dpy, (unsigned long)(r->numRects * sizeof (XRectangle)));
     for (i = 0; i < r->numRects; i++) {
@@ -506,7 +500,7 @@ void xgraphic::SetFont(class fontdesc  * ChosenFont)
 static void xgraphic_DrawChars(class xgraphic  * self,const char  * Text,short  Operation ,short  StringMode,long  TextLength )
 {
 
-    register XCharStruct *maxChar;
+    XCharStruct *maxChar;
     long x = point_X(&self->currentPoint);
     long y = point_Y(&self->currentPoint);
 
@@ -843,7 +837,7 @@ static boolean xgraphic_SetupFillGC(class xgraphic  * self, class graphic  * Til
     int grayIndex;
 
 class xgraphic * tile = (class xgraphic *)Tile;
-register long	fgPixel;
+long	fgPixel;
 
     /* See if transfer mode will take care of it, i.e., mode is source independent. If so, just make sure that a fillsolid mode is picked in the belief that the server won't be smart enough to realize that only the shape matters and not to waste time aligning any random tile that was left over */
     if ( (self->transferMode == graphic_BLACK) ||
@@ -903,7 +897,7 @@ register long	fgPixel;
     }
     /* Not black or white, but maybe predefind gray that is already down loaded, if so just set fill style and don't download pixmap again. Note: we are exceedingly tricky by using the assignment statement to pickup the gray shade that matches, and by picking what we think will be most common ones first. We assume, as per C book, that evaluatio stops with first true test.  We include 0 and 16 for the monochrome case. */
     else   {
-	register int i;
+	int i;
 	static int ind[] = { 0, 16, 8, 4, 12, 1, 2, 3, 5, 6, 7, 9, 10, 11, 13, 14, 15};
 
 	if (tile != NULL)  {
@@ -1280,7 +1274,7 @@ static XImage *PixImage = NULL;
 static Display *PixDisplay = NULL;
 
 static void
-SetUpPixImage(register class xgraphic  *self, register class pixelimage  *pixelimage)
+SetUpPixImage(class xgraphic  *self, class pixelimage  *pixelimage)
 		{
     VerifyUpdateClipping(self);
 
@@ -1419,7 +1413,7 @@ imageToXImage( class xgraphic  *self, class image  *image, unsigned int private_
   Visual *visual; /* visual to use */
   Pixel *redvalue, *greenvalue, *bluevalue;
   unsigned int newmap, linelen, dpixlen, dbits;
-  register int x, y, a, b;
+  int x, y, a, b;
   unsigned short red, green, blue;
   class xcolor *xc;
   XColor xcolor;
@@ -1779,7 +1773,7 @@ static void DestroyXImageInfo(xgraphic *self) {
 }
 
 static void
-SetUpXImage( register class xgraphic  *self, register class image  *image )
+SetUpXImage( class xgraphic  *self, class image  *image )
         { static int private_cmap = FALSE;
   static int fit = FALSE;
   Display *dpy = (self)->XDisplay();
@@ -2192,12 +2186,12 @@ void xgraphic::SetLineWidth(short  NewLineWidth)
     }
 }
 
-void xgraphic::SetLineDash( char		 *dashPattern, int		 dashOffset, short		 dashType )
+void xgraphic::SetLineDash( const char		 *dashPattern, int		 dashOffset, short		 dashType )
 {
     XGCValues tempGC;
-    register int	n = 0;
-    register char	*p;
-    register short	type = dashType;
+    int	n = 0;
+    const char	*p;
+    short	type = dashType;
     char		*oldPattern = NULL;
     int			oldOffset;
     short		oldType;
@@ -2273,7 +2267,7 @@ void xgraphic::SetTransferMode(short  NewTransferMode)
 
 static void xgraphicClearGrayLevels(class xgraphic  *self)
      {
-  register int i;
+  int i;
 
   /* clear the gray_scale to gray_level mapping table maintained for monochrome displays */
   for (i = 0;  i <= 16;  i++)
@@ -2821,7 +2815,7 @@ long xgraphic::GetVerticalResolution()
     return res;
 }
 
-char * xgraphic::GetWindowManagerType()
+const char * xgraphic::GetWindowManagerType()
 {
     return "XV11R1";
 }

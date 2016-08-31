@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/menterstrV.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("menterstrV.H")
 #include <lpair.H>
 #include <mentertext.H>
@@ -49,9 +40,6 @@ ATK_IMPL("menterstrV.H")
 
 
 ATKdefineRegistry(menterstrV, buttonV, NULL);
-#ifndef NORCSID
-#endif
-
 
 class valueview *menterstrV::DoHit( enum view_MouseAction  type,long  x,long  y,long  hits )
                {
@@ -62,7 +50,7 @@ class valueview *menterstrV::DoHit( enum view_MouseAction  type,long  x,long  y,
 void menterstrV::ObservedChanged(class observable  *changed,long  value)
 {
     class value *val ;
-    char *str,*os;
+    const char *str,*os;
     val = (this)->Value();
     if( changed == (class observable *) this->etext){
 	if(value == observable_OBJECTDESTROYED){
@@ -71,7 +59,7 @@ void menterstrV::ObservedChanged(class observable  *changed,long  value)
 	}
 	else if(value == mentertext_BUFCHANGEDFLAG){
 	    long size;
-	    char **buf = (this->etext)->GetStringArray();
+	    const char * const *buf = (this->etext)->GetStringArray();
 	    class value *val = (this)->Value();
 
 	    size = (this->etext)->GetArraySize();

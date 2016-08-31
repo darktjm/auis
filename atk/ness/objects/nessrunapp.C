@@ -25,14 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nessrunapp.C,v 1.6 1995/03/01 19:34:03 rr2b Stab74 $";
-#endif
- 
-
 /*
  * app for ness
  *
@@ -135,7 +127,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 * 11 May 1990 WJH converted from old standalone nessrun program.
  */
 
-
+#include <andrewos.h>
 ATK_IMPL("nessrunapp.H")
 #include <sys/param.h>
 
@@ -184,11 +176,10 @@ show_usage(class nessrunapp  *self) {
 		"Usage: %s  [-d]  programfilename  arguments\n",
 		(self)->GetName());
 	fprintf(stderr,
-"\
-	-d: display generated code\n\
-	programfilename: execute program in this files\n\
-	args: all further text is passed as the arg to main() in the program\n\
-");
+"	-d: display generated code\n"
+"	programfilename: execute program in this files\n"
+"	args: all further text is passed as the arg to main() in the program\n"
+);
 }
 
 	void
@@ -198,7 +189,7 @@ dumpall() {
 	for (n = ness::GetList(); n != NULL; n = (n)->GetNext()) {
 		name = (n)->GetName();
 		printf("\nObject code for %s\n", 
-			(name != NULL) ? name : (char *)"unknown");
+			(name != NULL) ? name : "unknown");
 		(n)->dumpattrs( stdout);
 	}
 }

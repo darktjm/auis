@@ -10,7 +10,7 @@ class hr : public dataobject {
   public:
     virtual ATKregistryEntry *ATKregistry();
 
-    char *ViewName();
+    const char *ViewName();
 };
 
 #endif /* _hr_H_ */

@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gofig/RCS/gflex.C,v 1.4 1995/06/14 12:54:33 wjh Stab74 $";
-#endif
-
 /* gflex.c		
 
 	Code for the gflex data object
@@ -162,7 +157,7 @@ gflex::gflex() {
 gflex::~gflex() {
 
 #ifdef objectsinelts
-	register i;
+	int i;
 	for (i = 0; i < gaploc; i++)
 		delete elts[i];
 	for (i = gaploc+gaplen; i < n+gaplen; i++)

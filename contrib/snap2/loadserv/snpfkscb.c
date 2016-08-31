@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/loadserv/RCS/snpfkscb.c,v 2.6 1992/12/15 21:06:36 rr2b Stab74 $";
-#endif
-
 /*
    a fake version of the ibmpc scb module
 */

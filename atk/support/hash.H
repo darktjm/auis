@@ -40,7 +40,7 @@ ATK_INTER
 #include <ATK.H>
 #include <glist.H>
 	typedef void (*hash_freefptr)(char *val);
-	typedef int (*hash_hashfptr)(char *n);
+	typedef int (*hash_hashfptr)(const char *n);
 
 class hash : public ATK  {
 public:
@@ -54,10 +54,10 @@ public:
 	static boolean InitializeClass();
 
 
-    virtual char * Lookup(char *key)  ;
-    virtual void Store(char *key, char *value);
-    virtual char * Delete(char *key)  ;
-    virtual char * Rename(char *key, char *new_c)  ;
+    virtual const char * Lookup(const char *key)  ;
+    virtual void Store(const char *key, const char *value);
+    virtual const char * Delete(const char *key)  ;
+    virtual const char * Rename(const char *key, const char *new_c)  ;
     virtual void Clear(hash_freefptr valFree);
     virtual void Debug();
 

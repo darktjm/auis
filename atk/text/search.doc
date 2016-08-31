@@ -23,7 +23,7 @@ for searching forwards and backwards for patterns in a text document.
 
 \paragraph{Creating a search procedure} \indexi{ \italic{search_CompilePattern}}
 
-\example{search_CompilePattern (string, result) register char *string;  struct 
+\example{search_CompilePattern (string, result) char *string;  struct 
 SearchPattern  **result; }
 
 
@@ -43,8 +43,8 @@ search.
 }
 \paragraph{Searching forward} \indexi{ \italic{search_MatchPattern}}
 
-\example{search_MatchPattern (doc, pos, p) register struct smpltext *doc; 
- register pos;  register struct SearchPattern *p;} 
+\example{search_MatchPattern (doc, pos, p) struct smpltext *doc; 
+ pos;  struct SearchPattern *p;} 
 
 
 \leftindent{\bold{Class procedure description.  }  \italic{search_MatchPattern 
@@ -66,8 +66,8 @@ document for a text string.
 \view{bpv,538927688,307,0,4}
 \paragraph{Searching backward} \indexi{ \italic{search_MatchPatternReverse}}
 
-\example{search_MatchPatternReverse (doc, pos, p) register struct smpltext 
-*doc;  register pos;  register struct SearchPattern *p; }
+\example{search_MatchPatternReverse (doc, pos, p) struct smpltext 
+*doc;  pos;  struct SearchPattern *p; }
 
 
 \leftindent{\bold{Class procedure description. 

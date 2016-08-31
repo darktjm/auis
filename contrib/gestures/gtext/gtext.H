@@ -15,7 +15,7 @@ public:
       
 	virtual ~gtext();
     
-       char * ViewName()  ;
+       const char * ViewName()  ;
 };
 
 #endif /* _gtext_H_ */

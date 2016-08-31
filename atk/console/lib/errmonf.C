@@ -25,16 +25,6 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/types.h sys/time.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/errmonf.C,v 1.9 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
 /* 
  ***************************************************************
  * Routines for monitoring messages on console service
@@ -43,7 +33,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  ***************************************************************
  */
 
-
+#include <andrewos.h> /* sys/types.h sys/time.h sys/file.h */
 #include <im.H>
 #include <consoleClass.H>
 #include <menulist.H>
@@ -84,11 +74,7 @@ char PrimaryErrorBuffer[ERRBUFSIZE];
  */
 
 #define DEVCONSOLEBUFSIZE 160
-#ifndef NORCSID
-#endif
-#ifndef hpux
-#endif /* hpux */
-int AnotherError(class consoleClass  *self, char  *errstring, boolean  AddNewline);
+int AnotherError(class consoleClass  *self, const char  *errstring, boolean  AddNewline);
 
 
 void CheckErrorsIn(FILE  *ErrorsIn, char *selfl)
@@ -96,7 +82,7 @@ void CheckErrorsIn(FILE  *ErrorsIn, char *selfl)
     class consoleClass  *self=(class consoleClass *)selfl;
     static char buf[DEVCONSOLEBUFSIZE];
     static char *fillptr = buf;
-    register int c;
+    int c;
 
     mydbg(("entering: CheckErrorsIn\n"));
     errno = 0;
@@ -161,14 +147,15 @@ int CheckConsoleSocket(FILE  *ConsoleIn, class consoleClass  *self)
     return 0;
 }
 
-static char *mailargvector[] = {_SITE_QUEUEMAIL, "-i", "bogus", 0};
+static const char *mailargvector[] = {_SITE_QUEUEMAIL, "-i", "bogus", 0};
 
 static char MyHost[100]="";
 
-int AnotherError(class consoleClass  *self, char  *errstring, boolean  AddNewline)
+int AnotherError(class consoleClass  *self, const char  *errstring, boolean  AddNewline)
             {
     int Priority = DefaultErrorPriority, i, j, max, nerr;
-    char *ErrText, *ErrPri=NULL, *Application=NULL, *LogAddress=NULL, *sdum;
+    const char *ErrText, *ErrPri=NULL, *Application=NULL, *LogAddress=NULL;
+    char *sdum;
     struct proctable_Entry *menuProc;
 
     mydbg(("entering: AnotherError\n"));
@@ -179,11 +166,16 @@ int AnotherError(class consoleClass  *self, char  *errstring, boolean  AddNewlin
 	for (i=1; i<max && errstring[i] != '>'; ++i) {
 	    ;
 	}
-	if (i<max) {
+	if(i >= max)
+	    i = 0;
+    } else i = 0;
+    char pri[i];
+    if(i > 0) {
 	    ErrText += i + 1;
-	    errstring[i] = '\0';
-	    ErrPri = errstring +1;
-	    for (sdum=ErrPri; *sdum && *sdum != ':'; ++sdum) { ; }
+	    memcpy(pri, errstring + 1, i);
+	    pri[i - 1] = 0;
+	    ErrPri = pri;
+	    for (sdum=pri; *sdum && *sdum != ':'; ++sdum) { ; }
 	    if (*sdum == ':') {
 		*sdum++ = '\0';
 		if (*sdum) Application = sdum;
@@ -213,11 +205,9 @@ int AnotherError(class consoleClass  *self, char  *errstring, boolean  AddNewlin
 		} else if (!lc_strcmp(ErrPri, "debug")){
 		    Priority = 9;
 		} else {
-		    errstring[i] = '>';
 		    ErrText = errstring;
 		}
 	    }
-	}
     }
     /* May eventually want to log everything at high priority with no ID,
      * but for now we require an explicit log address.
@@ -244,7 +234,7 @@ int AnotherError(class consoleClass  *self, char  *errstring, boolean  AddNewlin
 	    /* Log by sending mail */
 	    sprintf(ErrTxt, "console:  I cannot send logging mail to %s", LogAddress);
 	    mailargvector[2] = LogAddress;
-	    if ((lfp = qopen(_SITE_QUEUEMAIL, mailargvector, "w")) == NULL) {
+	    if ((lfp = qopen(_SITE_QUEUEMAIL, (char **)mailargvector, "w")) == NULL) {
 		ReportInternalError(self, ErrTxt);
 	    } else {
 		fprintf(lfp, "From: console\nTo:%s\nSubject:Console Error Report\n\n%s\n", LogAddress, ErrText);
@@ -257,20 +247,17 @@ int AnotherError(class consoleClass  *self, char  *errstring, boolean  AddNewlin
     if (Priority > HighestPriority) {
 	return(0);
     }
-    if (20+ (Application ? strlen(Application) : 0)+strlen(ErrText) > ERRBUFSIZE) {
-	ErrText[ERRBUFSIZE -20 -( Application ? strlen(Application) : 0 )] = '\0'; /* Truncate rather than dump core */
-    }
     if (Priority == 0) {
 	if (Application) {
-	    sprintf(PrimaryErrorBuffer, "ERROR: <%s>%s%s", Application, ErrText, AddNewline ? "\n" : "");
+	    snprintf(PrimaryErrorBuffer, ERRBUFSIZE, "ERROR: <%s>%s%s", Application, ErrText, AddNewline ? "\n" : "");
 	} else {
-	    sprintf(PrimaryErrorBuffer, "ERROR: %s%s", ErrText, AddNewline ? "\n" : "");
+	    snprintf(PrimaryErrorBuffer, ERRBUFSIZE, "ERROR: %s%s", ErrText, AddNewline ? "\n" : "");
 	}
     } else {
 	if (Application) {
-	    sprintf(PrimaryErrorBuffer, "<%s>%s%s", Application, ErrText, AddNewline ? "\n" : "");
+	    snprintf(PrimaryErrorBuffer, ERRBUFSIZE, "<%s>%s%s", Application, ErrText, AddNewline ? "\n" : "");
 	} else {
-	    sprintf(PrimaryErrorBuffer, "%s%s", ErrText, AddNewline ? "\n" : "");
+	    snprintf(PrimaryErrorBuffer, ERRBUFSIZE, "%s%s", ErrText, AddNewline ? "\n" : "");
 	}
     }
     nerr = Numbers[ERRORS].Value + 1;

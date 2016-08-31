@@ -21,13 +21,6 @@
  * 
  *  $
 \* ********************************************************************** */
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/error.C,v 1.7 1994/04/16 21:48:41 rr2b Stab74 $";
-#endif
-
 /* error.c
 	error processing for ness
 
@@ -156,6 +149,8 @@ MapRunError(ness)
 		newly generated for each occurrence)
 */
 
+#include <andrewos.h>
+
 #include <parser.H>
 #include <tlex.H>
 
@@ -165,19 +160,19 @@ MapRunError(ness)
 
 
 struct errornode * errornode_New();
-struct errornode * errornode_Create(class ness  *ness, long  loc , long  len , long  execloc, char  *msg, boolean  ownmsg, struct errornode  *next);
+struct errornode * errornode_Create(class ness  *ness, long  loc , long  len , long  execloc, const char *msg, boolean  ownmsg, struct errornode  *next);
 void  errornode_Destroy(struct errornode  *enode);
 static boolean HasLoc(class nesssym  *s, long  loc);
 class nesssym * codelocFind(long  loc);
 void SetupErrorHandling(class ness  *ness);
-void ReportError(char  *msg, long  index);
-void ExprError(char  *msg, struct exprnode  *expr);
-void SaveError(char  *msg, long  loc , long  len);
-void errorfromparse(int  severity, char *msg);
+void ReportError(const char *msg, long  index);
+void ExprError(const char *msg, struct exprnode  *expr);
+void SaveError(const char *msg, long  loc , long  len);
+void errorfromparse(int  severity, const char *msg);
 boolean errorsynch(long  index);
 boolean isFuncStart(int nexttok, long ncheck);
 void MapRunError(class ness  *ness);
-struct errornode * LocateErrorFunc(char *loc , unsigned char *base, char  *msg, class ness  *ness);
+struct errornode * LocateErrorFunc(const char *loc , unsigned const char *base, const char *msg, class ness  *ness);
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
 	errornode functions
@@ -191,11 +186,11 @@ errornode_New() {
 
 	struct errornode *
 errornode_Create(class ness  *ness, long  loc , long  len , long  execloc, 
-		char  *msg, boolean  ownmsg, struct errornode  *next) {
+		const char *msg, boolean  ownmsg, struct errornode  *next) {
 	struct errornode *enode = (struct errornode *)malloc(sizeof(struct errornode));
 	enode->where = (ness)->CreateMark( loc, len);
 	enode->execloc = execloc;
-	enode->msg = (char *)msg;
+	enode->msg = msg;
 	enode->ownmsg = ownmsg;
 	enode->next = next;
 	return enode;
@@ -204,7 +199,7 @@ errornode_Create(class ness  *ness, long  loc , long  len , long  execloc,
 
 	void 
 errornode_Destroy(struct errornode  *enode) {
-	if (enode->ownmsg) free(enode->msg);
+	if (enode->ownmsg) free((char *)enode->msg);
 	((class ness *)(enode->where)->GetObject())->RemoveMark( enode->where);
 	delete enode->where;
 	free(enode);
@@ -279,7 +274,7 @@ SetupErrorHandling(class ness  *ness) {
 		from the token at 'index'
 */
 	void
-ReportError(char  *msg, long  index) {
+ReportError(const char *msg, long  index) {
 	long loc, len;
 	loc = (curComp->tlex)->RecentPosition( index, &len);
 	SaveError(msg, loc, len);
@@ -289,7 +284,7 @@ ReportError(char  *msg, long  index) {
 	calls SaveError after getting the loc and len from 'expr'
 */
 	void
-ExprError(char  *msg, struct exprnode  *expr) {
+ExprError(const char *msg, struct exprnode  *expr) {
 	SaveError(msg, expr->loc, expr->len);
 }
 
@@ -298,7 +293,7 @@ ExprError(char  *msg, struct exprnode  *expr) {
 	list is maintained with earliest message first
 */
 	void
-SaveError(char  *msg, long  loc , long  len) {
+SaveError(const char *msg, long  loc , long  len) {
 	struct errornode *err;
 	class ness *curNess = curComp->ness;
 
@@ -315,10 +310,10 @@ SaveError(char  *msg, long  loc , long  len) {
 
 
 	void
-errorfromparse(int severity, char *msg) {
+errorfromparse(int severity, const char *msg) {
 	/* struct toksym *token; */
 	long loc, len;
-	static char *syntaxerror = "Syntax error";
+	static const char syntaxerror[] = "Syntax error";
 
 	loc = (curComp->tlex)->RecentPosition( 0, &len);
 
@@ -334,11 +329,11 @@ errorfromparse(int severity, char *msg) {
 		buf[0] = '*';
 		strncpy(buf+1, msg, 298);
 		buf[299] = '\0';	/* truncate if needed */
-		SaveError(freeze(buf), loc, len);
+		SaveError(strdup(buf), loc, len);
 	}
 	Restarted = FALSE;
 	if (severity & parser_FREEMSG)
-		free(msg);
+		free((char *)msg);
 }
 
 /* errorsynch(index)
@@ -419,9 +414,9 @@ isFuncStart(int nexttok, long ncheck) {
 */
 	void
 MapRunError(class ness  *ness) {
-	register struct funcnode *fnode;
+	struct funcnode *fnode;
 	class nesssym *errsym;
-	register class nessmark *objcode;
+	class nessmark *objcode;
 	struct errornode *err;
 	unsigned long loc, len;
 
@@ -484,7 +479,7 @@ MapRunError(class ness  *ness) {
 		failure in the library routine called at that point.
 */
 	struct errornode *
-LocateErrorFunc(unsigned char *loc , unsigned char *base, char  *msg,
+LocateErrorFunc(unsigned const char *loc , unsigned const char *base, const char *msg,
 		class ness  *ness) {
 	class nesssym *wheresym;
 	class ness *whereness;

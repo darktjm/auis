@@ -33,8 +33,8 @@ public:
   
      long Read( FILE *file, long id )  ;
      long Write( FILE *file, long writeID, int level )  ;
-     long WriteNative( FILE *file, char *filename )  ;
-     int Load( char *fullname, FILE *fp )  ;
+     long WriteNative( FILE *file, const char *filename )  ;
+     int Load( const char *fullname, FILE *fp )  ;
 };
 
 #endif /* _xpixmap_H_ */

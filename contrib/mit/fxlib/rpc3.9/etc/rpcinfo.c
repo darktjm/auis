@@ -1,5 +1,3 @@
-/* @(#)rpcinfo.c	1.5 87/11/20 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,15 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/etc/RCS/rpcinfo.c,v 1.3 1992/12/15 21:53:39 rr2b Stab74 $";
-#endif
-
-#ifndef lint
-static	char sccsid[] = "@(#)rpcinfo.c 1.22 87/08/12 SMI";
-#endif
 
 /*
  * Copyright (C) 1986, Sun Microsystems, Inc.
@@ -111,7 +100,7 @@ main(argc, argv)
 	int argc;
 	char **argv;
 {
-	register int c;
+	int c;
 	extern char *optarg;
 	extern int optind;
 	int errflg;
@@ -466,7 +455,7 @@ tcpping(portnum, argc, argv)
  */
 static int
 pstatus(client, prognum, vers)
-	register CLIENT *client;
+	CLIENT *client;
 	u_long prognum;
 	u_long vers;
 {
@@ -491,11 +480,11 @@ pmapdump(argc, argv)
 	char **argv;
 {
 	struct sockaddr_in server_addr;
-	register struct hostent *hp;
+	struct hostent *hp;
 	struct pmaplist *head = NULL;
 	int socket = RPC_ANYSOCK;
 	struct timeval minutetimeout;
-	register CLIENT *client;
+	CLIENT *client;
 	struct rpcent *rpc;
 	
 	if (argc > 1) {
@@ -563,7 +552,7 @@ reply_proc(res, who)
 	void *res;		/* Nothing comes back */
 	struct sockaddr_in *who; /* Who sent us the reply */
 {
-	register struct hostent *hp;
+	struct hostent *hp;
 
 	hp = gethostbyaddr((char *) &who->sin_addr, sizeof who->sin_addr,
 	    AF_INET);
@@ -609,8 +598,8 @@ static u_long
 getprognum(arg)
 	char *arg;
 {
-	register struct rpcent *rpc;
-	register u_long prognum;
+	struct rpcent *rpc;
+	u_long prognum;
 
 	if (isalpha(*arg)) {
 		rpc = getrpcbyname(arg);
@@ -631,7 +620,7 @@ static u_long
 getvers(arg)
 	char *arg;
 {
-	register u_long vers;
+	u_long vers;
 
 	vers = (int) atoi(arg);
 	return (vers);
@@ -642,7 +631,7 @@ get_inet_address(addr, host)
 	struct sockaddr_in *addr;
 	char *host;
 {
-	register struct hostent *hp;
+	struct hostent *hp;
 
 	bzero((char *)addr, sizeof *addr);
 	addr->sin_addr.s_addr = (u_long) inet_addr(host);

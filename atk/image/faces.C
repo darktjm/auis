@@ -140,7 +140,7 @@ static int nextInt(FILE         *f, unsigned int len)
 }
 
 int
-faces::Load( char  *fullname, FILE  *fp )
+faces::Load( const char  *fullname, FILE  *fp )
             { 
   FILE         *f;
   char          fname[BUFSIZ];
@@ -233,7 +233,7 @@ faces::Load( char  *fullname, FILE  *fp )
 }
 
 int 
-faces::Ident( char  *fullname )
+faces::Ident( const char  *fullname )
         { class faces *facesp = new faces;
 
   if ((facesp)->Load( fullname, NULL) == 0) {
@@ -259,7 +259,7 @@ faces::Write( FILE  *file, long  writeID, int  level )
 }
 
 long
-faces::WriteNative( FILE  *file, char  *filename )
+faces::WriteNative( FILE  *file, const char  *filename )
             {
 return(0);
 }

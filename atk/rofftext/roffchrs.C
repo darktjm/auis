@@ -25,28 +25,17 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/roffchrs.C,v 1.2 1993/05/03 20:44:00 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* special chars for rofftext.c
  *
  */
 
+#include <andrewos.h>
 
 #include <rofftext.H>
 #include <hash.H>
 
-#define Mangle(self,name,def) (self->SpecialChars)->Store(name,StrDup(def))
+#define Mangle(self,name,def) (self->SpecialChars)->Store(name,strdup(def))
 
-#ifndef NORCSID
-#endif
 void InitChars(class rofftext  *self);
 
 

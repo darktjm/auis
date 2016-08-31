@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/view.C,v 3.30 1996/10/18 18:17:37 wjh Exp $";
-#endif
-
-
-
 ATK_IMPL("view.H")
 
 #include <im.H>
@@ -185,13 +177,13 @@ void view::SetDataObject(class dataobject  *dataobject)
 	(dataobject)->Reference();
     }
 
-    if (!this->name_explicitly_set)
+    if (!this->name_explicitly_set) {
 	if (dataobject != NULL && 
 	    (dataobject)->Get( A_name, &A_atomlist, (long *) &newname))
 	    this->name = atomlist::Copy(newname);
 	else if (this->name == NULL)
 	    this->name = atomlist::StringToAtomlist((this)->GetTypeName());
-
+    }
     if (this->className == NULL)
 	this->className = atomlist::StringToAtomlist((this)->GetTypeName());
 
@@ -301,7 +293,7 @@ void view::Update()
     {
 }
 
-void view::Print(FILE  *file, char  *processor, char  *finalFormat, boolean  topLevel)
+void view::Print(FILE  *file, const char  *processor, const char  *finalFormat, boolean  topLevel)
                     {
 }
 
@@ -373,7 +365,7 @@ void view::WantNewSize(class view  *requestor)
         (this->parent)->WantNewSize( requestor);
 }
 
-ATK  * view::WantHandler(char  *handlerName)
+ATK  * view::WantHandler(const char  *handlerName)
         {
     if (this->parent != NULL)
 	return (this->parent)->WantHandler( handlerName);
@@ -381,7 +373,7 @@ ATK  * view::WantHandler(char  *handlerName)
 	return NULL;
 }
 
-char *view::WantInformation(char  *key)
+const char *view::WantInformation(const char  *key)
         {
     if (this->parent != NULL)
 	return (this->parent)->WantInformation( key);
@@ -417,7 +409,7 @@ void view::PostCursor(struct rectangle  *rec, class cursor  *cursor)
 	(this->parent)->PostCursor( rec, cursor);
 }
 
-void view::PostDefaultHandler(char  *handlerName, ATK   *handler)
+void view::PostDefaultHandler(const char  *handlerName, ATK   *handler)
             {
     if (this->parent != NULL)
 	(this->parent)->PostDefaultHandler( handlerName, handler);
@@ -458,7 +450,7 @@ void view::InsertViewSize(class view  *parent,long  xOriginInParent ,long  yOrig
 }
 
 
-char *view::GetInterface(char  *type)
+const void *view::GetInterface(const char  *type)
         /* Note: This routine is a placeholder for a future function. It is needed now to get scrollbars to work. - William Lott. */
 {
     return NULL;
@@ -541,7 +533,7 @@ void view::ExposeChild(class view *v)
     /* expose child -- no action, by default */
 }
 
-char * view::GetWindowManagerType()
+const char * view::GetWindowManagerType()
 {
     if ((this)->drawable) return ((this)->drawable)->GetWindowManagerType();
     return "";
@@ -671,7 +663,7 @@ void view::InitChildren()
     */
 }
 
-boolean view::CanView(char  *TypeName)
+boolean view::CanView(const char  *TypeName)
 {
     /* 
       Views should return TRUE or FALSE depending on whether they are
@@ -731,7 +723,7 @@ void view::PrintPSDoc(FILE *outfile, long pagew, long pageh)
     /* do nothing. Since this does not call print::PSNewPage, the print package will know that this inset type does not print as a top-level document. */
 }
 
-void *view::GetPSPrintInterface(char *printtype)
+void *view::GetPSPrintInterface(const char *printtype)
 {
     return NULL;
 }
@@ -739,8 +731,7 @@ void *view::GetPSPrintInterface(char *printtype)
 void view::DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight) 
 {
     /* the default is for the inset to use the same strategy for requesting a print size as it does when requesting a view size. */
-    view_DSattributes val;
-    val = this->DesiredSize(width, height, pass, desiredwidth, desiredheight);
+    this->DesiredSize(width, height, pass, desiredwidth, desiredheight);
 }
 
 void view::PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect)
@@ -748,7 +739,7 @@ void view::PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rect
 }
 
 	boolean 
-view::Gifify(char *filename, long *pmaxw, long *pmaxh, 
+view::Gifify(const char *filename, long *pmaxw, long *pmaxh, 
 			struct rectangle *visrect) {
 	return FALSE;
 }
@@ -781,7 +772,7 @@ long view::GetPrintOption(class atom *popt)
 	if (!gotit) {
 	    /* figure out a good name. Oh one called Kirok, what is this thing you call WantInformation()? */
 	    static char *stro = NULL;
-	    char *str = this->WantInformation("filename");
+	    const char *str = this->WantInformation("filename");
 	    if (stro)
 		free(stro);
 	    if (str) {

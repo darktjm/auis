@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/cltextview.C,v 3.2 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("cltextview.H")
 #include <textview.H>
 #include <cursor.H>
@@ -44,8 +34,6 @@ ATK_IMPL("cltextview.H")
 
 
 ATKdefineRegistry(cltextview, textview, NULL);
-#ifndef NORCSID
-#endif
 static short FindObserverCallBack(class cltextview  * self, ATK   *observer, cltextview_hitfptr  callBack);
 static short FindObserver( class cltextview  * self, ATK   *observer );
 static short FreeSlot( class cltextview  * self );

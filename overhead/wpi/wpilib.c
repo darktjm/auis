@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/wpi/RCS/wpilib.c,v 1.34 1993/05/30 20:48:01 rr2b Stab74 $";
-#endif
-
 /*========================================================================*\
  *                                                                        *
  * implementation of  libwpi.a,                                           *

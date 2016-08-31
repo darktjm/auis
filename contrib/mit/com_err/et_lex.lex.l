@@ -10,7 +10,7 @@ end		return END;
 
 [\t\n ]		;
 
-\"{PC}*\"	{ register char *p; yylval.dynstr = ds(yytext+1);
+\"{PC}*\"	{ char *p; yylval.dynstr = ds(yytext+1);
 		  if (p=rindex(yylval.dynstr, '"')) *p='\0';
 		  return QUOTED_STRING;
 		}
@@ -21,6 +21,3 @@ end		return END;
 
 .		{ return (*yytext); }
 %%
-#ifndef lint
-static char rcsid_et_lex_lex_l[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/com_err/RCS/et_lex.lex.l,v 1.1 1992/02/12 18:20:09 wdc Stab74 $";
-#endif

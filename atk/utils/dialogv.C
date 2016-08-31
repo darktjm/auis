@@ -26,19 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/utils/RCS/dialogv.C,v 3.8 1995/05/04 17:19:53 rr2b Stab74 $";
-#endif
-
-
- 
-
-#ifndef lint
-#endif /* lint */
-
-
 ATK_IMPL("dialogv.H")
 #include <environ.H>
 #include <fontdesc.H>
@@ -59,10 +46,6 @@ ATK_IMPL("dialogv.H")
 
 
 ATKdefineRegistry(dialogv, view, dialogv::InitializeClass);
-#ifndef NORCSID
-#endif
-#ifndef lint
-#endif /* lint */
 static void HitFunc(class sbutton  *self, class dialogv  *rock, int  button, long  brock);
 static void ConfigureFunc(class im  *self, long  rock , long  customrock, class im  *parent, long  *x , long  *y, unsigned long  *w , unsigned long  *h);
 static void Interface(class sbutton  *b, struct dialogv::HitRock  *rock, int  ind, long  brock);

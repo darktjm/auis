@@ -80,7 +80,7 @@ PUBLIC int HTUU_encode ARGS3(unsigned char *,	bufin,
 /* ENC is the basic 1 character encoding function to make a char printing */
 #define ENC(c) six2pr[c]
 
-   register char *outptr = bufcoded;
+   char *outptr = bufcoded;
    unsigned int i;
 
    for (i=0; i<nbytes; i += 3) {
@@ -138,9 +138,9 @@ PUBLIC int HTUU_decode ARGS3(char *,		bufcoded,
    static int first = 1;
 
    int nbytesdecoded, j;
-   register char *bufin = bufcoded;
-   register unsigned char *bufout = bufplain;
-   register int nprbytes;
+   char *bufin = bufcoded;
+   unsigned char *bufout = bufplain;
+   int nprbytes;
 
    /* If this is the first call, initialize the mapping table.
     * This code should work even on non-ASCII machines.

@@ -21,10 +21,6 @@
  *  $
 */ 
 
-#ifndef NORCSID
-char *phlumphview_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/phlumphview.C,v 1.2 1995/03/26 15:06:12 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("phlumphview.H")
 #include <phlumphview.H>
@@ -769,7 +765,7 @@ static struct textps_layout_plan *PrintLump(void *rock, long pagewidth, long pag
     return plan;
 }
 
-void *phlumphview::GetPSPrintInterface(char *printtype)
+void *phlumphview::GetPSPrintInterface(const char *printtype)
 {
     static struct textview_insetdata dat;
 

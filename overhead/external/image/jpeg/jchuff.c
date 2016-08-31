@@ -109,8 +109,8 @@ LOCAL void
 emit_bits (UINT16 code, int size)
 {
   /* This routine is heavily used, so it's worth coding tightly. */
-  register INT32 put_buffer = code;
-  register int put_bits = huff_put_bits;
+  INT32 put_buffer = code;
+  int put_bits = huff_put_bits;
 
   /* if size is 0, caller used an invalid Huffman table entry */
   if (size == 0)
@@ -156,9 +156,9 @@ flush_bits (void)
 LOCAL void
 encode_one_block (JBLOCK block, HUFF_TBL *dctbl, HUFF_TBL *actbl)
 {
-  register int temp, temp2;
-  register int nbits;
-  register int k, r, i;
+  int temp, temp2;
+  int nbits;
+  int k, r, i;
   
   /* Encode the DC coefficient difference per section F.1.2.1 */
   
@@ -508,9 +508,9 @@ LOCAL void
 htest_one_block (JBLOCK block, JCOEF block0,
 		 long dc_counts[], long ac_counts[])
 {
-  register INT32 temp;
-  register int nbits;
-  register int k, r;
+  INT32 temp;
+  int nbits;
+  int k, r;
   
   /* Encode the DC coefficient difference per section F.1.2.1 */
   

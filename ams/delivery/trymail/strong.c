@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/delivery/trymail/RCS/strong.c,v 1.55 1995/07/11 20:01:02 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	strong.c
 	Subroutines for ``switchmail''--the trymail version that runs on
@@ -169,7 +164,7 @@ static void WriteReceived(f, For, With)
 FILE *f;
 char *For, *With;
 {
-	static char head[] = "Received: via switchmail";
+	static const char head[] = "Received: via switchmail";
 	int curLen, forLeft;
 #define maxLen 80
 	char *fp, *bp, oldc;
@@ -236,10 +231,10 @@ struct BEStripper **pBES; char *Hdr; enum Formats Fmt;
 {/* Allocate and initialize the BEStripper structure according to our outgoing message. */
 /* AcceptsFormatting is FALSE in the normal case where the destination does not generally accept formatted mail, and is TRUE if the destination can accept formatted messages. */
 	struct BEStripper *BES;
-	static char xasfFieldName[] = "X-Andrew-ScribeFormat:";
-	static char ctFieldName[] = "Content-Type:";
-	static char ituFieldName[] = "If-Type-Unsupported:";
-	static char xamsFieldName[] = "X-Andrew-Message-Size:";
+	static const char xasfFieldName[] = "X-Andrew-ScribeFormat:";
+	static const char ctFieldName[] = "Content-Type:";
+	static const char ituFieldName[] = "If-Type-Unsupported:";
+	static const char xamsFieldName[] = "X-Andrew-Message-Size:";
 	char *CopyHdr;
 	char *ValPtr, *Val2, *xasfVal, *ctVal, Ch;
 	int xasfCode, ctCode, CopyHdrSize;
@@ -687,7 +682,7 @@ FILE *fp; char *title; struct BEStripper *bes; struct LinePromState *lps;
 char *lineBuf; int sizeLineBuf, whereGo;
 {
 	int C, WasBOL;
-	static char sepchars[] = "\n----------------\n";
+	static const char sepchars[] = "\n----------------\n";
 
 	sprintf(MsgBf, "%s%s", title, sepchars);
 	PrintMaybeFoldQuotingFormatting(fp, MsgBf,
@@ -1558,7 +1553,7 @@ static char *SqzAppend(Target, Start, End)
 char *Target, *Start, *End;
 {/* Copy chars in [Start..End) to Target, turning all strings of white space to single spaces */
 	int State;
-	register char *Tgt, *Src;
+	char *Tgt, *Src;
 
 	Tgt = Target;
 	State = -1;	/* -1 init, 0 last was space, 1 last wasn't space */
@@ -1934,7 +1929,7 @@ PARSED_ADDRESS *Addr;
 static int BackULcmp(p1, p2)
 char *p1, *p2;
 {/* Do like ULstrcmp, but look from the ends of the strings to the beginnings. */
-	register char *pe1, *pe2;
+	char *pe1, *pe2;
 	char c1, c2;
 
 	pe1 = p1 + strlen(p1) - 1;

@@ -49,7 +49,7 @@ public:
      ;
    void LookupParameters();
 
-  virtual char * GetValueString()  ;
+  virtual const char * GetValueString()  ;
   virtual void Drawslider(boolean fullupdate,struct rectangle *rr);
 
   inline long GetTmpVal() { return (this->tmpval); }
@@ -63,7 +63,7 @@ public:
 	virtual ~sliderV(); 
 
   char * label;
-  char * fontname;
+  const char * fontname;
   char buf[32];
   short fontsize;
   class fontdesc * normalfont, * boldfont, * activefont, *valuefont;

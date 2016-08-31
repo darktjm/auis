@@ -39,25 +39,27 @@ public:
 
      boolean InsertCharacters(long pos, const char *str, long len)  ;
      boolean DeleteCharacters(long pos, long len)  ;
-     char * ViewName()  ;
+     const char * ViewName()  ;
 
     virtual void updatebuf();
     virtual boolean Changed() ;
-    virtual void SetChars(char *str,int len);
+    virtual void SetChars(const char *str,int len);
     virtual void ClearLine(long pos);
 
     inline long buflen() { return (this->buflenval); }
     inline char * GetString() { return (this->buf); }
-    inline char ** GetStringArray() { return (this->bufp); }
+    inline const char * const * GetStringArray() { return (this->bufp); }
     inline long GetArraySize() { return (this->bufpcount); }
-    inline char * GetSrcString() { return (this->src); }
+    inline const char * GetSrcString() { return (this->src); }
 
     
 	mentertext();
     
 	virtual ~mentertext();
 
-    char *buf,*bufp[128],*src;
+    char *buf;
+    const char *src;
+    const char *bufp[128];
     long bufpcount;
     long buflenval,mod,realbuflen;
     class style *Style;

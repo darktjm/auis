@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textobjects/RCS/dired.C,v 1.6 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
 ATK_IMPL("dired.H")
 #if POSIX_ENV || defined(M_UNIX)
 #include <dirent.h>
@@ -64,11 +57,6 @@ ATK_IMPL("dired.H")
 
 
 ATKdefineRegistry(dired, text, NULL);
-#ifndef NORCSID
-#endif
-#if POSIX_ENV || defined(M_UNIX)
-#else
-#endif
 static int CompareFilenameProc(struct fileinfo  *f1 , struct fileinfo  *f2);
 static void LongModeLine(char  *dname , char  *fname , char  *buf);
 static class list *DirIntoList(char  *dname, boolean  longMode , boolean  dotFiles);
@@ -77,8 +65,8 @@ static void DestroyList(class list  *list);
 static int InsTextProc(struct fileinfo  *fi, class dired  *dired);
 static void ListIntoText(class dired  *self, class list  *list);
 static void SetupStyles(class dired  *self);
-static int FindNameProc(struct fileinfo  *fi, char  *name);
-struct fileinfo *LookupFile(class dired  *self, char  *name);
+static int FindNameProc(struct fileinfo  *fi, const char  *name);
+struct fileinfo *LookupFile(class dired  *self, const char  *name);
 static int FindPosProc(struct fileinfo  *fi, long  pos);
 struct fileinfo *LookupPos(class dired  *self, long  pos);
 static void WrapStyle(class dired  *self, struct fileinfo  *fi, class style  *style);
@@ -290,7 +278,7 @@ long dired::GetModified()
  * text, and leaves the error code from opendir(2) in errno.
  */
 
-long dired::SetDir(char  *dname)
+long dired::SetDir(const char  *dname)
 {
     char newDir[256];
     class list *newList;
@@ -323,12 +311,12 @@ char *dired::GetDir()
     return this->dir;
 }
 
-static int FindNameProc(struct fileinfo  *fi, char  *name)
+static int FindNameProc(struct fileinfo  *fi, const char  *name)
 {
     return (strcmp(fi->fileName, name) != 0);
 }
 
-struct fileinfo *LookupFile(class dired  *self, char  *name)
+struct fileinfo *LookupFile(class dired  *self, const char  *name)
 {
     if (self->flist == NULL)
         return NULL;
@@ -398,7 +386,7 @@ static void WrapStyle(class dired  *self, struct fileinfo  *fi, class style  *st
  * Given a filename, mark it (if it wasn't marked)
  */
 
-void dired::Mark(char  *fname)
+void dired::Mark(const char  *fname)
 {
     struct fileinfo *fi;
     fi = LookupFile(this, fname);
@@ -406,14 +394,14 @@ void dired::Mark(char  *fname)
         WrapStyle(this, fi, this->markedStyle);
 }
 
-void dired::Unmark(char  *fname)
+void dired::Unmark(const char  *fname)
 {
     struct fileinfo *fi = LookupFile(this, fname);
     if (fi != NULL)
         WrapStyle(this, fi, NULL);
 }
 
-boolean dired::IsMarked(char  *fname)
+boolean dired::IsMarked(const char  *fname)
 {
     struct fileinfo *fi = LookupFile(this, fname);
     return (fi != NULL && fi->env != NULL);

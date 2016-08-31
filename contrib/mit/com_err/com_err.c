@@ -26,12 +26,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/com_err/RCS/com_err.c,v 1.4 1994/02/02 21:44:11 sa3e Stab74 $";
-#endif
-
-
 #include <stdio.h>
 #include "mitcopyright.h"
 

@@ -1,7 +1,4 @@
 #
-# @(#)Makefile	1.4 87/11/18 3.9 RPCSRC
-#
-#
 #   The targets all.nroff and all.troff will make monolithic documents
 #   with nroff and troff, respectively.  The other *.nroff and *.troff
 #   targets will make individual documents

@@ -25,16 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/celview.C,v 1.11 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 #define UNSET 0
 #define FUDGE 2
 #define celview_ChangeWidth 1
@@ -46,6 +36,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #define VALUE 10
 #define ChildMenus 1
 #define ClientMenus 2
+#include <andrewos.h>
 ATK_IMPL("celview.H")
 
 #include <ctype.h>
@@ -98,8 +89,6 @@ struct overlay *next;
 #define celview_COVERCHILD 1
 
 ATKdefineRegistry(celview, view, celview::InitializeClass);
-#ifndef NORCSID
-#endif
 static void scaleoverlay(class celview  *self,struct overlay  *ov,struct rectangle  *Or);
 static class view *PopOverlay(class celview  *self,class view  *v);
 static void UpdateCursors(class celview  *self);
@@ -114,7 +103,7 @@ static void drawshadow(class celview  *self,struct rectangle  *r);
 void celview__SetDrawing(class celview  *self,long  key);
 static void SetVisible(class celview  *self);
 static void SetInvisible(class celview  *self);
-static boolean objecttest(register class celview   *self,char  *name,char  *desiredname);
+static boolean objecttest(class celview   *self,const char  *name,const char  *desiredname);
 static int lookuptype(char  *ty);
 static char * atomlisttostring(class atomlist  *al);
 static void appendresourceList( class celview  * self, struct resourceList  * resources);
@@ -208,7 +197,7 @@ static void UpdateCursors(class celview  *self)
 	    break;
     }
 }
-void celview::Print(FILE  *file, char  *processor, char  *finalFormat, boolean  topLevel)
+void celview::Print(FILE  *file, const char  *processor, const char  *finalFormat, boolean  topLevel)
 {
     if(this->truechild) 
 	(this->truechild)->Print(file, processor, finalFormat, topLevel);
@@ -337,7 +326,7 @@ class view *celview::makeview(class cel  *ls)
 	if(ls->dispatcher == NULL) celview_GetDispatcher(self); */
 
     class view *truechild;
-    char *lv = ls->viewType;
+    const char *lv = ls->viewType;
     this->NeedsRemade = FALSE;
     if(this->child == NULL || this->viewatm != (ls)->GetViewAtom() || this->dataatm != (ls)->GetObjectAtom()){
 	this->viewatm = (ls)->GetViewAtom();
@@ -445,7 +434,7 @@ static char * trunc(char  *c)
 void celview_ReadFile(class celview  *self,FILE  *thisFile,char  *iname)
 {
     long objectID;
-    char *objectName;
+    const char *objectName;
     class cel *ls = Data(self);
     objectName = filetype::Lookup(thisFile, iname, &objectID, NULL); /* For now, ignore attributes. */
     if(objectName == NULL) objectName = "text";
@@ -456,7 +445,7 @@ void celview_ReadFile(class celview  *self,FILE  *thisFile,char  *iname)
     }
     else{
 	if(objecttest(self,objectName,"dataobject") && (ls)->SetObjectByName(objectName) && ls->dataObject != NULL){
-	    char *nm = NULL;
+	    const char *nm = NULL;
 	    class arbiter *arb = NULL;
 	    (ls)->SetViewName(NULL,TRUE);
 	    (ls)->SetRefName("");
@@ -826,7 +815,7 @@ boolean celview::InitializeClass()
     return TRUE;
 }
 
-static boolean objecttest(register class celview   *self,char  *name,char  *desiredname)
+static boolean objecttest(class celview   *self,const char  *name,const char  *desiredname)
 {
     if(ATK::LoadClass(name) == NULL){
         char foo[640];
@@ -843,10 +832,10 @@ static boolean objecttest(register class celview   *self,char  *name,char  *desi
     return(TRUE);
 }
 struct types {
-    char *str;
+    const char *str;
     int val;
 };
-static struct types typearray[] = {
+static const struct types typearray[] = {
     {"string",STRING},
     {"char *",STRING},
     {"int",LONG},
@@ -857,7 +846,7 @@ static struct types typearray[] = {
 
 static int lookuptype(char  *ty)
 {
-    struct types *tp;
+    const struct types *tp;
     for(tp = typearray;tp->val != 0; tp++)
 	if(*ty == *tp->str && strcmp(ty,tp->str) == 0)
 	    return tp->val;
@@ -1165,7 +1154,8 @@ fprintf(stdout,"Posting something \n"); fflush(stdout);
 int celview::PromptForInfo(class arbiterview  *arb,boolean  promptForViewName,boolean  changeRefName)
 {
 
-    char iname[100],qz[64], *prompt;
+    char iname[100],qz[64];
+    const char *prompt;
     char viewname[200],refname[256];
     long pf;	
     class cel *ls = Cel(this);
@@ -1336,7 +1326,7 @@ void celview::InitChildren()
 	(this->child)->InitChildren();
 	
 }
-boolean celview::CanView(char  *TypeName)
+boolean celview::CanView(const char  *TypeName)
 {
     return ATK::IsTypeByName(TypeName,"cel");
 }
@@ -1402,7 +1392,7 @@ return view;
 }
 void celview::WantUpdate(class view  *requestor)
 {
-    register class view *view;
+    class view *view;
     if(this->olist == NULL || requestor == (class view *)this){
 	(this)->view::WantUpdate(requestor);
 	return;
@@ -1415,7 +1405,7 @@ void celview::WantUpdate(class view  *requestor)
 }
 void celview::PostCursor(struct rectangle  *rec,class cursor  *c)
 {
-    register class view *view = c->view;
+    class view *view = c->view;
     if(this->olist == NULL || view == (class view *)this){
 	(this)->view::PostCursor(rec,c);
 	return;
@@ -1570,7 +1560,7 @@ class view *celview::Hit(enum view_MouseAction  action,long  mousex ,long  mouse
     return NULL;
 }
 
-ATK  * celview::WantHandler(char  *handlerName)
+ATK  * celview::WantHandler(const char  *handlerName)
 {
     if(strcmp(handlerName,"arbiterview") == 0 && this->arb) return (ATK  *)this->arb;
     return (this)->view::WantHandler( handlerName);

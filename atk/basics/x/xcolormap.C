@@ -27,10 +27,6 @@
 
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xcolormap.C,v 3.27 1996/08/27 22:00:55 robr Exp $";
-#endif
 ATK_IMPL("xcolormap.H")
 #include <X11/X.h>
 #include <X11/Xlib.h>
@@ -436,7 +432,7 @@ xcolor *xcolormap::FindClosest(unsigned short r, unsigned short g, unsigned shor
     xcolor *tmp, *best;
     unsigned short R, G, B;
     Screen *s = DefaultScreenOfDisplay(XDisplay());
-    register int i = -1, nc = CellsOfScreen(s), bestDef = -1;
+    int i = -1, nc = CellsOfScreen(s), bestDef = -1;
     unsigned int diff = 0, bestDiff = ~0;
     XColor *defs=NULL;
 
@@ -610,7 +606,7 @@ static void dumbzombie(int /* pid */, long data, WAIT_STATUS_TYPE *zs) {
     PromptAndStart(self);
 }
 
-static char *RestartChoices[]={
+static const char * const RestartChoices[]={
     "Yes",
     "No",
     "Cancel",
@@ -626,7 +622,7 @@ static void ForkManager(xcolormap *self) {
 	im::RemoveZombieHandler(self->managerpid);
     }
     retry:
-    char *prog="acolorman";
+    const char *prog="acolorman";
     const char *aprog=environ::AndrewDir("/bin/acolorman");
     const char *colors=environ::GetProfile("ColorManagerQuota");
     char *dpystr=XDisplayString(self->display);

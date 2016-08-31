@@ -26,17 +26,6 @@
 */
 
 #include <andrewos.h>
-
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/txtvcmds.C,v 3.7 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
-
- 
-
 #include <ctype.h>
 #define AUXMODULE 1
 #include <textview.H>
@@ -59,10 +48,8 @@ long lcDisplayEnvironment;
 long lcInsertEnvironment;
 long lcNewLine;
 
-#ifndef NORCSID
-#endif
-void textview_NOOPCmd (register class textview  *self);
-int charType(register char  c);
+void textview_NOOPCmd (class textview  *self);
+int charType(char  c);
 static void CheckStylePreferences(class keymap  *newKeymap, class menulist  **normalMenus);
 static int TranslateKeySequence(const char  *from, char  *to);
 static int parseBackslashed(const char  **fromChars);
@@ -72,7 +59,7 @@ class keymap *textview_InitViCommandModeKeyMap(struct textview_ATKregistry_   *c
 class keymap *textview_InitViInputModeKeyMap(struct textview_ATKregistry_   *classInfo, class menulist  **Menus);
 
 
-void textview_NOOPCmd (register class textview  *self)
+void textview_NOOPCmd (class textview  *self)
 {
     /* Do nothing.  Used to rebind keys for no operation */
 }
@@ -82,7 +69,7 @@ void textview_NOOPCmd (register class textview  *self)
  * and is used or forward/backward word operations
  */
 
-int charType(register char  c)
+int charType(char  c)
 	{
 
 	if (isspace(c))
@@ -93,22 +80,22 @@ int charType(register char  c)
 		return(SPECIAL);
 }
 
-static char styleString[] = "textview-insert-environment";
+static const char styleString[] = "textview-insert-environment";
 
 /****** EMACS key bindings ********/
-static char italicString[]="italic";
-static char boldString[]="bold";
-static char superString[]="superscript";
-static char subString[]="subscript";
-static char underString[]="underline";
-static char typeString[]="typewriter";
-static char biggerString[]="bigger";
-static char smallerString[]="smaller";
-static char centerString[]="center";
-static char leftString[]="flushlfeft";
-static char rightString[]="flushright";
-static char leftindentString[]="leftindent";
-static char newString[]="new";
+static const char italicString[]="italic";
+static const char boldString[]="bold";
+static const char superString[]="superscript";
+static const char subString[]="subscript";
+static const char underString[]="underline";
+static const char typeString[]="typewriter";
+static const char biggerString[]="bigger";
+static const char smallerString[]="smaller";
+static const char centerString[]="center";
+static const char leftString[]="flushlfeft";
+static const char rightString[]="flushright";
+static const char leftindentString[]="leftindent";
+static const char newString[]="new";
 static struct bind_Description textviewEmacsBindings[]={
     {"textview-show-styles", "\033s",0,0,0,0,(proctable_fptr)textview_ShowStylesCmd,"Show styles at dot.", 0},
     {"textview-show-styles", "\033'\033s", 0, 0, 0, 0,(proctable_fptr) textview_ShowStylesCmd, "Show styles at dot.", 0},
@@ -345,8 +332,8 @@ static int parseBackslashed(const char  **fromChars)
 
     int returnChar;
     const char *from = *fromChars;
-    static char *bsSource = "ebrnt";
-    static char *bsDest = "\033\b\r\n\t";
+    static const char bsSource[] = "ebrnt";
+    static const char bsDest[] = "\033\b\r\n\t";
 
     if (*from == '\\') {
         ++from;
@@ -368,7 +355,7 @@ static int parseBackslashed(const char  **fromChars)
         }
         else {
 
-            char *p;
+            const char *p;
 
             p = strchr(bsSource, *from);
             if (p != NULL)
@@ -402,11 +389,12 @@ static void adjustBindings(struct bind_Description  *bindings)
 		    }
 		    else if (bd->keyVector[0] == '\033' && bd->keyVector[1] == '\'') {
 			long vlen = strlen(bd->keyVector);
-			char *oldVector = bd->keyVector;
+			char *newVector;
 
-			if (bd->keyVector = (char *) malloc(plen + vlen - 1)) {
-			strcpy(bd->keyVector, stylePrefixStr);
-			strcat(bd->keyVector, &oldVector[2]);
+			if (newVector = (char *) malloc(plen + vlen - 1)) {
+			strcpy(newVector, stylePrefixStr);
+			strcat(newVector, &bd->keyVector[2]);
+			bd->keyVector = newVector;
 			}
 		    }
 		}
@@ -418,7 +406,7 @@ static void adjustBindings(struct bind_Description  *bindings)
 class keymap *textview_InitEmacsKeyMap(struct ATKregistryEntry  *classInfo, class menulist  **normalMenus)
 {
     class keymap *newKeymap = new keymap;
-    register long i;
+    long i;
     char str[2];
     struct proctable_Entry *si;
     
@@ -749,7 +737,7 @@ static struct bind_Description textviewViCommandModeBindings[]={
 class keymap *textview_InitViCommandModeKeyMap(struct ATKregistryEntry   *classInfo, class menulist  **Menus)
 {
     class keymap *newKeymap = new keymap;
-    register long i;
+    long i;
     char str[2];
     struct proctable_Entry *dig;
 
@@ -816,7 +804,7 @@ static struct bind_Description textviewViInputModeBindings[] = {
 class keymap *textview_InitViInputModeKeyMap(struct ATKregistryEntry   *classInfo, class menulist  **Menus)
 {
     class keymap *newKeymap = new keymap;
-    register long i;
+    long i;
     unsigned char str[2];
     struct proctable_Entry *si, *proc;
     

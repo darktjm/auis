@@ -28,14 +28,6 @@ ATK_INTER
 //  $
 */
 
-
-/* $Header $ */
-/* $Source $ */
-
-
-
-
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Apt View-object
@@ -87,7 +79,7 @@ struct aptv_area
   long				      size;
   struct rectangle		      bound;
   class fontdesc		     *font;
-  char				     *font_name;
+  const char			     *font_name;
   long				      strings_count;
   char				  **strings;
   };
@@ -151,22 +143,22 @@ public:
 
   virtual void SetOptions( long options );
   virtual void SetDimensions( long width, long height );
-  virtual class fontdesc * BuildFont( char *font_name, long *height )		     ;
-  virtual void DrawBoundedString( char *string, class fontdesc *font,
+  virtual class fontdesc * BuildFont( const char *font_name, long *height )		     ;
+  virtual void DrawBoundedString( const char *string, class fontdesc *font,
 	       struct rectangle *bounds, long center, long middle, long mode );
   virtual void ClearBoundedString( char *string, class fontdesc *font,
 		struct rectangle *bounds, long center, long middle, long mode );
   virtual boolean Within( long x, long y, struct rectangle *bounds )	     ;
-  virtual void SetShrinkIcon( char icon, char *icon_font_name, char *title, char *title_font_name );
+  virtual void SetShrinkIcon( const char icon, const char *icon_font_name, const char *title, const char *title_font_name );
   virtual void Shrink();
   virtual void ShrinkView( class aptv *aptv );
   virtual void Expand();
   virtual void ExpandView( class aptv *aptv );
   virtual void ClearBody();
 
-  virtual void PrintObject( FILE *file, char *processor, char *finalFormat, boolean topLevel, aptv_printfptr printer );
+  virtual void PrintObject( FILE *file, const char *processor, const char *finalFormat, boolean topLevel, aptv_printfptr printer );
   virtual void PrintContinue();
-  virtual boolean OpenPrintStream( FILE *file, char *processor, char *format, long level )  ;
+  virtual boolean OpenPrintStream( FILE *file, const char *processor, const char *format, long level )  ;
   virtual void ClosePrintStream();
   virtual void SetPrintStream( struct aptv_print_stream *stream );
   virtual void PreservePrintState();
@@ -190,19 +182,19 @@ public:
   virtual void SetPrintPath( struct aptv_path *path );
   virtual void PrintPath( struct aptv_path *path );
   virtual void PrintPathFilled( struct aptv_path *path );
-  virtual void SetPrintFont( char *font_name );
+  virtual void SetPrintFont( const char *font_name );
   virtual void ResetPrintFont( );
-  virtual void PrintString( long x1, long y1, char *string, long mode );
+  virtual void PrintString( long x1, long y1, const char *string, long mode );
 
-  virtual void SetHelpString( char *string );
-  virtual void SetHelpFileName( char *file_name);
+  virtual void SetHelpString( const char *string );
+  virtual void SetHelpFileName( const char *file_name);
   virtual void UseWaitCursor();
   virtual void UseNormalCursor();
   virtual void UseInvisibleCursor();
-  virtual long Query(char *query , char *default_response , char **response );
-  virtual long QueryFileName(char *query, char **response );
-  virtual long QueryDirectoryName(char *query, char **response );
-  virtual long Announce(char *message );
+  virtual long Query(const char *query , const char *default_response , char **response );
+  virtual long QueryFileName(const char *query, char **response );
+  virtual long QueryDirectoryName(const char *query, char **response );
+  virtual long Announce(const char *message );
 
 
 
@@ -236,8 +228,8 @@ public:
   class fontdesc		    *icon_font, *cursor_font, *default_font;
   class text			    *help_text;
   class	view			    *help_textview;
-  char				    *help_string;
-  char				    *help_file_name;
+  const char			    *help_string;
+  const char			    *help_file_name;
   struct aptv_enclosure		     enclosures[EnclosureCount];
   struct rectangle		     shrinker_bounds;
   struct rectangle		     helper_bounds;

@@ -29,11 +29,9 @@
 #include <text.H>
 #include <search.H>
 
-static const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textobjects/RCS/recover.C,v 1.2 1994/11/07 18:33:19 rr2b Stab74 $";
-
-static char umatch[]="\\begindata{unknown,";
-static char uematch[]="\\enddata{unknown,";
-static char bmatch[]="\\begindata{";
+static const char umatch[]="\\begindata{unknown,";
+static const char uematch[]="\\enddata{unknown,";
+static const char bmatch[]="\\begindata{";
 
 static void FatalInternal(int err) {
     fprintf(stderr, "Internal error in updating object id.\nThe output file is corrupted and incomplete.\n");
@@ -57,8 +55,8 @@ int main (int argc, char *argv[])
     }
 
     struct SearchPattern *pat=NULL, *pat2;
-    char *err1= search::CompilePattern("\\\\begindata{unknown,[0-9]*}\n", &pat);
-    char *err2= search::CompilePattern("\\\\enddata{unknown,[0-9]*}\n", &pat2);
+    const char *err1= search::CompilePattern("\\\\begindata{unknown,[0-9]*}\n", &pat);
+    const char *err2= search::CompilePattern("\\\\enddata{unknown,[0-9]*}\n", &pat2);
     if(err1) {
 	fprintf(stderr, "Internal error in pattern match for unknown begindata.\nError was:%s",err1);
 	exit(-4);
@@ -121,7 +119,7 @@ t->Strncmp(pos+len, bmatch, sizeof(bmatch)-1)!=0) {
 	    FatalInternal(-13);
 	}
 	struct SearchPattern *pat3;
-	char *err3=search::CompilePattern(pstr, &pat3);
+	const char *err3=search::CompilePattern(pstr, &pat3);
 	if(err3) {
 	    fprintf(stderr, "Fatal internal errror.\nError was:%s\n", err3);
 	    exit(-14);

@@ -25,14 +25,7 @@
 //  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/preview/RCS/dvi2disp.C,v 1.4 1994/03/21 17:00:38 rr2b Stab74 $";
-#endif
-
-
- 
-
+#include <andrewos.h>
 
 /* ***************************************************************** */
 
@@ -48,7 +41,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/previe
 
 
 
-#include <andrewos.h>
 #include <math.h>
 #include <ctype.h>
 #define AUXMODULE 1
@@ -62,11 +54,9 @@ preview_coordinate	DY = 5;	/* step size in y */
 
 preview_coordinate   maxdots = 32000; /* maximum number of dots in an object */
 
-#ifndef NORCSID
-#endif
 static int   geti (class preview  *self );
 static char *pregets (class preview  *self);
-static Boolean SetPosition(register class preview  *self);
+static Boolean SetPosition(class preview  *self);
 static void UseFont(class preview  *self,int  f,int  s);
 static void DrawThing(class preview  *self);
 static void ShowSpecial(class preview  *self);
@@ -83,10 +73,10 @@ static void conicarc(class preview  *self,long xp, long yp, long x0, long y0, lo
 
 static int   geti (class preview  *self )
 {
-   register    FILE * f = self->DviFileIn;
-   register int   n = 0;
-   register    Boolean neg = FALSE;
-   register int   c;
+      FILE * f = self->DviFileIn;
+   int   n = 0;
+      Boolean neg = FALSE;
+   int   c;
 
    if (self->peekc == 0 || isspace(c = self->peekc))
       while (isspace(c = getc(f)));
@@ -105,10 +95,10 @@ static int   geti (class preview  *self )
 }
 
 static char *pregets (class preview  *self) {
-   register    FILE * f = self->DviFileIn;
-   register char *p;
+      FILE * f = self->DviFileIn;
+   char *p;
    static   Preview_Line buf;
-   register int c;
+   int c;
    if (self->peekc == 0 || isspace(c = self->peekc))
       while (isspace(c = getc(f)));
    p = buf;
@@ -132,10 +122,10 @@ static char *pregets (class preview  *self) {
 	      return FALSE if not on screen
  */
 
-static Boolean SetPosition(register class preview  *self)
+static Boolean SetPosition(class preview  *self)
 {
-   register int cvx = self->LogicalX * self->DisplayResolution / self->InputResolution;
-   register int cvy = self->LogicalY * self->DisplayResolution / self->InputResolution;
+   int cvx = self->LogicalX * self->DisplayResolution / self->InputResolution;
+   int cvy = self->LogicalY * self->DisplayResolution / self->InputResolution;
    if (cvx+self->xoff < 0 || self->WindowWidth+self->cursize <= cvx+self->xoff 
 	|| cvy+self->yoff < 0 || self->WindowHeight+self->cursize <= cvy+self->yoff)
 	return(FALSE);
@@ -156,8 +146,8 @@ static Boolean SetPosition(register class preview  *self)
 
 static void UseFont(class preview  *self,int  f,int  s)
 {
-   register int h, l, m;
-   register struct preview_fontname  *p;
+   int h, l, m;
+   struct preview_fontname  *p;
    int n;
 
    s = self->DisplayResolution*s/preview_DISPLAY_RESOLUTION;
@@ -184,7 +174,7 @@ static void UseFont(class preview  *self,int  f,int  s)
    if (self->NWMFonts == 0 || p->number != n)
       {
 	 Preview_Line fname;
-	 static char *format[] =
+	 static const char * const format[] =
 	 {
 	    "AndySymbol%d",
 	    "AndySymbolA%d",
@@ -458,11 +448,11 @@ struct trs
 
 static void ShowSpecial(class preview  *self)
 {
-    register char  *s = pregets (self);
-    register int h,
+    char  *s = pregets (self);
+    int h,
                  l,
                  m;
-    register struct trs *p;
+    struct trs *p;
 /* 
     if (s[0] == 'u' && s[1] == 'l' && s[2] == 0) {
 	if (SetPosition(self))
@@ -631,8 +621,8 @@ static void DumpCharacter(class preview  *self,char  c)
 
 void preview::DviToDisplay() 
 {
-   register    FILE * f =  this->DviFileIn;
-   register int   c,lastc=EOF;
+      FILE * f =  this->DviFileIn;
+   int   c,lastc=EOF;
 
     this->CharactersOnThisPage = FALSE;
     this->peekc = getc(f);

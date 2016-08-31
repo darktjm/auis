@@ -25,15 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/fonts/cmd/RCS/wmfdb.c,v 2.7 1992/12/15 21:02:39 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 /* ***************************************************************** */
 
 /*	wmdb		convert a font file to an ASCII file */
@@ -179,8 +170,8 @@ unsigned char reverse_bits[] = {
 DumpCharacter(c)
 short    c /* character to dump */ ;
 {
-   register struct IconGenericPart *gp;
-   register struct BitmapIconSpecificPart *sp;
+   struct IconGenericPart *gp;
+   struct BitmapIconSpecificPart *sp;
 
    Boolean ShowType;
    Boolean ShowImage;
@@ -247,9 +238,9 @@ short    c /* character to dump */ ;
       {
 	 unsigned short *bitptr /* pointer to bit array */ ;
 	 short    w /* width in shorts (16-bit chunks */ ;
-	 register short j /* x direction; from 1 to width in shorts */ ;
-	 register short i /* y direction; from 1 to height */ ;
-	 register unsigned short *p /* pointer to packed bits */ ;
+	 short j /* x direction; from 1 to width in shorts */ ;
+	 short i /* y direction; from 1 to height */ ;
+	 unsigned short *p /* pointer to packed bits */ ;
 	 unsigned short lastwordmask;
 
 	 fprintf(output, "$raster\n");
@@ -366,8 +357,8 @@ char *name;
       /* check if a directory path has been specified for this file
          name; if so separate it out */
 
-      register short i;
-      register short j;
+      short i;
+      short j;
 
       if (debug)
 	 fprintf(stderr, "Try font %s\n", name);
@@ -412,8 +403,8 @@ char *name;
    {
       /* now check the fontpath entries */
 
-      register char *p;
-      register char *st;
+      char *p;
+      char *st;
       Boolean more;
 
       p = (char *) getprofile("fontpath");
@@ -541,7 +532,7 @@ char *s;
 
 /* ************************************************************ */
  
-char ProgramName[] = "wmfdb";
+const char ProgramName[] = "wmfdb";
 
 main(argc, argv)
 int   argc;

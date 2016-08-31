@@ -27,11 +27,6 @@
 
 #include <andrewos.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/sysexits.c,v 2.6 1992/12/15 21:04:17 rr2b Stab74 $";
-#endif
-
 /*
 		sysexits.c -- Text messages for sysexits.
 */

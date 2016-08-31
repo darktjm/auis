@@ -92,9 +92,9 @@ ATK_CLASS(htmlform);
 ATK_CLASS(text);	
 ATK_CLASS(AWidget);
 
-struct tagTableType {
+static const struct tagTableType {
 	enum htmlformTag tag;
-	char *name;	
+	const char *name;	
 } tagTable [] = {
 	{htmlform_InText, "text"},		// default is first in table
 	{htmlform_InImage, "image"},
@@ -108,7 +108,7 @@ struct tagTableType {
 };
 
 	static void
-SetInt(AWidget *wdg, const atom *slotat, attlist *atts, char *attr, int val) {
+SetInt(AWidget *wdg, const atom *slotat, attlist *atts, const char *attr, int val) {
 	struct htmlatts *intat = atts->GetAttribute(attr);
 	if (intat && isdigit(*intat->value))
 		val = atoi(intat->value);
@@ -123,7 +123,7 @@ SetupRadioButton(htmlform *self, AWidget *w, attlist *atts) {
 	struct htmlatts *wname, *chatt;
 	int fx, maxfx = self->fields.GetN();
 	AWidget *firstsibling, *prevsibling;
-	char *sibname;
+	const char *sibname;
 
 	// if has CHECKED attribute, set slot_set
 	chatt = atts->GetAttribute("checked");
@@ -197,7 +197,7 @@ static void CBSubmissionFunc (AWidget *self,
             return;
         }
         web *wd=(web *)wv->GetDataObject();
-        char *err=form->Submission(wd, wv);
+        const char *err=form->Submission(wd, wv);
         if(err) {
             fprintf(stderr, "web: form submission failed with error: %s\n", err);
         }
@@ -212,7 +212,7 @@ static void CBResetFunc (AWidget *self,
 	
 	int fx;
 	struct htmlatts *attx;
-	char *cval;
+	const char *cval;
         text *textarea, *ttxt;
 
 	htmlform *form = (htmlform *)
@@ -232,7 +232,7 @@ static void CBResetFunc (AWidget *self,
 		case htmlform_InText:
 			// set text to atts->VALUE
 			attx = atts->GetAttribute("value");
-			cval = (attx) ? attx->value : (char *)"";
+			cval = (attx) ? attx->value : "";
 
 			ttxt = (text *)
                           wgt->GetATK(slot_source, class_text);
@@ -302,7 +302,7 @@ static void CBMapClickFunc (AWidget *self,
 	long y = in[2].Integer();
         self->Set(slot_hitX, x);
         self->Set(slot_hitY, y);
-        char *err=form->Submission(wd, wv);
+        const char *err=form->Submission(wd, wv);
         if(err) {
             fprintf(stderr, "web: form submission failed with error: %s\n", err);
         }
@@ -360,7 +360,7 @@ htmlform::AddInputNode(attlist *atts) {
 	AWidget *w;
 	long cols;
 	struct htmlatts *attx;
-	char *cval;
+	const char *cval;
 	text *wtext;
 	ASlot *tslot;
 
@@ -368,7 +368,7 @@ htmlform::AddInputNode(attlist *atts) {
 	attx = atts->GetAttribute("type");
 
 	// find type in table 
-	struct tagTableType *tx = tagTable;  // pts to default
+	const struct tagTableType *tx = tagTable;  // pts to default
 	if (attx) for (tx = tagTable; tx->name; tx++)
 		if (cistrcmp(tx->name, attx->value) == 0) break;
 	// now tx pts to tagTable entry
@@ -380,7 +380,7 @@ htmlform::AddInputNode(attlist *atts) {
 		w->Set(slot_rows, 1L);			// rows
 		SetInt(w, slot_columns, atts, "size", 20);
 		attx = atts->GetAttribute("value");
-		cval = (attx) ? attx->value : (char *)"";
+		cval = (attx) ? attx->value : "";
 		if (*cval) {
 			// put initial value into widget text
 			wtext = (text *)
@@ -413,7 +413,7 @@ htmlform::AddInputNode(attlist *atts) {
 		w = AWidget::NewWidget("Password");
 		SetInt(w, slot_columns, atts, "size", 20);
 		attx = atts->GetAttribute("value");
-		cval = (attx) ? attx->value : (char *)"";
+		cval = (attx) ? attx->value : "";
 		if (*cval) {
 			// put initial value into widget text
 			wtext = (text *)
@@ -445,7 +445,7 @@ htmlform::AddInputNode(attlist *atts) {
 	case htmlform_InSubmit:
 		w = AWidget::NewWidget("PushButton");
 		attx = atts->GetAttribute("value");
-		cval = (attx) ? attx->value : (char *)"Submit";
+		cval = (attx) ? attx->value : "Submit";
 		w->Set(slot_text, cval);
 		w->Set(slot_activateCallback, &CBSubmission);
 		break;
@@ -453,7 +453,7 @@ htmlform::AddInputNode(attlist *atts) {
 	case htmlform_InReset:
 		w = AWidget::NewWidget("PushButton");
 		attx = atts->GetAttribute("value");
-		cval = (attx) ? attx->value : (char *)"Reset";
+		cval = (attx) ? attx->value : "Reset";
 		w->Set(slot_text, cval);
 		w->Set(slot_activateCallback, &CBReset);
 		break;
@@ -642,15 +642,15 @@ static long EncodeSelect(wdgnode *wn, const char *name, flex &query, boolean sep
 }
 
 // constructs the message for a form
-char *htmlform::Submission(web *wd, webview *wv) {
+const char *htmlform::Submission(web *wd, webview *wv) {
     size_t i;
     webcom *wp=wd->getwebcom();
     if(wp==NULL) {
         return "No webcom available.";
     }
-    char *act=wp->GetURL();
-    char *method="GET";
-    char *enctype="application/x-www-form-urlencoded";
+    const char *act=wp->GetURL();
+    const char *method="GET";
+    const char *enctype="application/x-www-form-urlencoded";
     htmlatts *acta=atts->GetAttribute("action");
     htmlatts *methoda=atts->GetAttribute("method");
     htmlatts *enctypea=atts->GetAttribute("enctype");
@@ -680,7 +680,7 @@ char *htmlform::Submission(web *wd, webview *wv) {
     boolean separator=FALSE;
     for(i=0;i<fields.GetN();i++) {
         wdgnode *wn=&fields[i];
-        char *name=GetName(i);
+        const char *name=GetName(i);
         const char *value=GetValue(i);
         boolean set=TRUE;
         if(wn->tag==htmlform_Select) {
@@ -858,7 +858,7 @@ htmlform::WriteTaggedText(FILE *file, AWidget *w) {
 htmlform::FindNodeByName(char *name) {
 	int i, n = fields.GetN();
 	for (i = 0;  i < n;  i++) {
-		char *nm = GetName(i);
+		const char *nm = GetName(i);
 		if (nm && strcmp(nm, name) == 0)
 			return &fields[i];
 	}
@@ -877,18 +877,13 @@ htmlform::FindNodeByWidget(AWidget *w) {
 }
 
 /* gets the value of the attribute named id */
-	char *
-htmlform::GetAtt(int index, char *id)  {
+	const char *
+htmlform::GetAtt(int index, const char *id)  {
 	struct htmlatts *temp 
 			= fields[index].atts->GetAttribute(id);
 	return (temp) ? temp->value : NULL;
 }
 
-
-#ifndef NORCSID
-#define NORCSID
-	UNUSED const static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/htmlform.C,v 1.17 1996/11/07 19:26:38 robr Exp $";
-#endif
 /*
  *    $Log: htmlform.C,v $
  * Revision 1.17  1996/11/07  19:26:38  robr

@@ -25,22 +25,13 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/bind.C,v 3.6 1995/03/30 01:19:12 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* bind.c
  */
 
 /*  */
 
 
+#include <andrewos.h>
 ATK_IMPL("bind.H")
 #include <keymap.H>
 #include <menulist.H>
@@ -50,7 +41,7 @@ ATK_IMPL("bind.H")
 
 ATKdefineRegistryNoInit(bind, ATK);
 
-void bind::BindList(struct bind_Description  *bl, class keymap  *km, class menulist  *ml, struct ATKregistryEntry   *type)
+void bind::BindList(const struct bind_Description  *bl, class keymap  *km, class menulist  *ml, const struct ATKregistryEntry   *type)
 {
     while(bl && (bl->procName || bl->keyVector || bl->menuEntry)) {
 	struct proctable_Entry *pe;
@@ -70,7 +61,7 @@ void bind::BindList(struct bind_Description  *bl, class keymap  *km, class menul
 }
 
 
-void bind::BindList(struct bind_ActionDescription  *bl, class keymap  *km, class menulist  *ml, struct ATKregistryEntry   *type)
+void bind::BindList(const struct bind_ActionDescription  *bl, class keymap  *km, class menulist  *ml, const struct ATKregistryEntry   *type)
 {
     while(bl && (bl->procName || bl->keyVector || bl->menuEntry)) {
 	struct proctable_Entry *pe;

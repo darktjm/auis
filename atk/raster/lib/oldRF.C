@@ -25,17 +25,6 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/oldRF.C,v 1.2 1996/03/08 20:21:46 susan Stab74 $";
-#endif
-
-
- 
-
-
 /*  oldrf.c
 
 	oldRF package
@@ -49,6 +38,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
  */
 
+#include <andrewos.h> /* sys/types.h */
 ATK_IMPL("oldRF.H")
 #include <stdio.h>
 #include <sys/stat.h>
@@ -76,17 +66,15 @@ static unsigned char masks[] = {0xFF, 0x80, 0xC0, 0xE0, 0xF0, 0xF8, 0xFC, 0xFE};
 */
 	
 ATKdefineRegistry(oldRF, ATK, NULL);
-#ifndef NORCSID
-#endif
 
 
 void
-oldRF::WriteRow(FILE  *file, register unsigned char *row, long  length)
+oldRF::WriteRow(FILE  *file, unsigned char *row, long  length)
 				{
 	unsigned char buf[BUFBITS>>3];	/* temp for inversion */
 	unsigned char *sx;			/* where to get bytes */
 	unsigned char *dx;			/* where to put them */
-	register long W = (length+7)>>3;	/* total number of bytes */
+	long W = (length+7)>>3;	/* total number of bytes */
 
 	/* convert colors */
 	for (sx = row, dx = buf; sx < row+W; )
@@ -101,9 +89,9 @@ oldRF::WriteRow(FILE  *file, register unsigned char *row, long  length)
 	returns 0 for success.  -1 for failure
 */
 	long
-oldRF::ReadRow(register FILE  *file			/* where to get bytes from */, register unsigned char *row		/* where to put them */, register long  length		/* how many bits in row must be filled */)
+oldRF::ReadRow(FILE  *file			/* where to get bytes from */, unsigned char *row		/* where to put them */, long  length		/* how many bits in row must be filled */)
 				{
-	register long W = (length+7)>>3;/* number of bytes */
+	long W = (length+7)>>3;/* number of bytes */
 	unsigned char savebyte;
 
 	savebyte = *(row+W-1);		/* save last byte */
@@ -132,8 +120,8 @@ oldRF::ReadRow(register FILE  *file			/* where to get bytes from */, register un
 
 	if (length & 0x7) {
 		/* fix the last byte if length is not a multiple of 8 bits */
-		register long mask = masks[length & 0x7];
-		register unsigned char *loc = row+W-1;
+		long mask = masks[length & 0x7];
+		unsigned char *loc = row+W-1;
 		*loc = (*loc & mask) | (savebyte & ~mask);
 	}
 	return dataobject_NOREADERROR;
@@ -146,12 +134,12 @@ oldRF::ReadRow(register FILE  *file			/* where to get bytes from */, register un
 		return error code
 */
 	long
-oldRF::ReadImage(register FILE  *file		/* where to get bits from */, register class pixelimage  *pix/* where to put them */)
+oldRF::ReadImage(FILE  *file		/* where to get bits from */, class pixelimage  *pix/* where to put them */)
 			{
 	struct stat st;			/* buffer to read stat info */
 	struct RasterHeader hdr;	/* buffer to read file header */
-	register unsigned char *where;		/* where to store next row */
-	register long row, W;		/* count rows;  byte length of row */
+	unsigned char *where;		/* where to store next row */
+	long row, W;		/* count rows;  byte length of row */
 
 	if (fread(&hdr, 14, 1, file) < 0)   /* read the header */
 		  return dataobject_PREMATUREEOF;
@@ -193,7 +181,7 @@ oldRF::ReadImage(register FILE  *file		/* where to get bits from */, register cl
 	Write a raster image from 'pix' to 'file'
 */
 	void
-oldRF::WriteImage(register FILE  *file		/* where to put bits  */, register class pixelimage  *pix/* where to get them from */, register struct rectangle  *sub)
+oldRF::WriteImage(FILE  *file		/* where to put bits  */, class pixelimage  *pix/* where to get them from */, struct rectangle  *sub)
 				{
 	long left, top, width, height;
 	long buf[BUFBITS>>5];

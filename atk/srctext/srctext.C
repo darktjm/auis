@@ -28,8 +28,6 @@ $Disclaimer:
 
 static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
 
-static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/srctext.C,v 2.5 1995/02/24 00:11:42 rr2b Stab74 $";
-
 #include <ctype.h>
 
 #include <environment.H>
@@ -250,7 +248,7 @@ srctext::~srctext()
     if (this->copyright_key) free(this->copyright_key);
 }
 
-void srctext::HashInsert(Dict *hashTable[], Dict *word)
+void srctext::HashInsert(Dict *hashTable[], const Dict *word)
 {
     Dict *bucket;
     int hashval;
@@ -258,7 +256,7 @@ void srctext::HashInsert(Dict *hashTable[], Dict *word)
 	hashval= HASH(word->stng);
 	bucket= (Dict *)malloc(sizeof(Dict));
 	bucket->stng= (char *)malloc(strlen(word->stng)+1);
-	strcpy(bucket->stng,word->stng);
+	strcpy((char *)bucket->stng,word->stng);
 	bucket->val= word->val;
 	bucket->kind= word->kind;
 	bucket->next= hashTable[hashval];
@@ -286,12 +284,12 @@ static void PutPrefStringIntoHashTable(Dict *hashTable[], const char *st, int ki
     } while (*st++);
 }
 
-void srctext::BuildTable(char *classname, Dict *hashTable[], Dict wordlist[])
+void srctext::BuildTable(const char *classname, Dict *hashTable[], const Dict wordlist[])
 {
     int i;
     char profilename[256];
     const char *preflist;
-    Dict *wordPtr;
+    const Dict *wordPtr;
 
     /* clear out the hash table */
     for (i=0; i<TABLESIZE; ++i)
@@ -316,7 +314,7 @@ void srctext::BuildTable(char *classname, Dict *hashTable[], Dict wordlist[])
 }
 
 /* srctext_Lookup does a case-sensitive hash table lookup */
-Dict *srctext::Lookup(Dict *hashTable[], char *word) 
+Dict *srctext::Lookup(Dict *hashTable[], const char *word) 
 {
     Dict *bucket;
     static Dict miss={NULL,0,0};
@@ -358,7 +356,7 @@ static void addSortedTabStop(srctext *self, int tabstop)
 }
 
 /* setTabStops parses string of tab stops given in ezinit */
-static void setTabStops(srctext *self, char *st)
+static void setTabStops(srctext *self, const char *st)
 {
     int tabstop=0;
     self->numTabStops= 0;
@@ -377,7 +375,7 @@ void srctext::SetAttributes(struct attributes *atts)
 {
     (this)->text::SetAttributes(atts);
     while (atts!=NULL) {
-	char *key=atts->key;
+	const char *key=atts->key;
 	if (strcmp(key,"force-upper")==0)
 	    SetForceUpper(atoi(atts->value.string));
 	else if (strcmp(key,"use-tabs")==0)
@@ -451,7 +449,7 @@ void srctext::CopyrightScramble(text *txt, long pos, long len)
 }
 
 /* base64[] contains the character forms of all base64 digits, in order. (pray that none of these characters are ever used for comment delimiters in any language!) */
-static char base64[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-";
+static const char base64[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-";
 
 /* encode64 munches up str so that it's base-64 encoded using the above table. Make sure the string passed here has at least 4/3 its actual length allocated! */
 static void encode64(char *str)
@@ -491,7 +489,7 @@ static void encode64(char *str)
 /* base64value returns the actual value of a base64 digit that's in character form */
 static int base64value(char ch)
 {
-    char *digit=strchr(base64,ch);
+    const char *digit=strchr(base64,ch);
     if (digit)
 	return (digit-base64);
     else
@@ -826,7 +824,7 @@ long srctext::ReadSubString(long pos, FILE *file, boolean quoteCharacters)
 }
 
 /* override */
-long srctext::ReadTemplate(char *templateName, boolean inserttemplatetext)
+long srctext::ReadTemplate(const char *templateName, boolean inserttemplatetext)
 {
     long retval;
     retval= (this)->text::ReadTemplate(templateName,inserttemplatetext);
@@ -1090,7 +1088,7 @@ static mark *prev_pos=NULL;
 /* GetPosForLine "tricks" everyone who calls it by ALSO counting newlines inside compress objects */
 long srctext::GetPosForLine(long line)
 {
-    register long base_line=1, pos=0;
+    long base_line=1, pos=0;
     long len=GetLength(), mod=this->dataobject::modified;
 
     if (this==prev_self && mod==prev_mod && prev_pos && !(prev_pos)->ObjectFree()) {
@@ -1152,7 +1150,7 @@ long srctext::GetPosForLine(long line)
 /* GetLineForPos "tricks" everyone who calls it by ALSO counting newlines inside compress objects */
 long srctext::GetLineForPos(long pos)
 {
-    register long base_pos=0, line=1;
+    long base_pos=0, line=1;
     long mod=this->dataobject::modified;
     if (this==prev_self && mod==prev_mod && prev_pos && !(prev_pos)->ObjectFree()) {
 	long prvpos=(prev_pos)->GetPos();
@@ -1162,7 +1160,7 @@ long srctext::GetLineForPos(long pos)
 	    line= prev_line;
 	} else if (pos>(prvpos/2)) {
 	    /* save a lot of counting by going backward from the cache */
-	    register long neglines=0;
+	    long neglines=0;
 	    base_pos= prvpos;
 	    while (--base_pos >= pos)
 		COUNT_LINES(this,base_pos,neglines);
@@ -1415,7 +1413,7 @@ long srctext::BackwardCopyWord(long from, long to, char buf[])
 /* srctext_CurrentIndent returns the indentation of the current line */
 int srctext::CurrentIndent(long pos)
 {
-    register int ind=0;
+    int ind=0;
 
     pos= GetBeginningOfLine(pos);
     while (1)
@@ -1485,7 +1483,7 @@ int srctext::NextTabStop(int curcol)
 /* ExtendToOutdent modifies the pos and len parameters to appropriately point to the full indentation level that pos is inside of.  It returns TRUE if it thinks the region has a "significant" size (3 lines or more). */
 boolean srctext::ExtendToOutdent(int indent, long *pos, long *len)
 {
-    register long start=*pos, end=*pos, temp=GetBeginningOfLine(start);
+    long start=*pos, end=*pos, temp=GetBeginningOfLine(start);
     long lines=0, txtlen=GetLength();
     /* find beginning */
     do  {
@@ -1513,12 +1511,12 @@ boolean srctext::Quoted(long pos)
 long srctext::ReverseBalance(long pos)
 {
     int thischar;
-    char *parentype;
+    const char *parentype;
     struct paren_node {
 	long type;
 	struct paren_node *next;
     } *parenstack=NULL, *temp;
-    static char *opens="({[", *closes=")}]";
+    static const char opens[]="({[", closes[]=")}]";
 
     while (pos>0) {
 	thischar= GetChar(--pos);
@@ -1556,14 +1554,14 @@ long srctext::ReverseBalance(long pos)
     return EOF;
 }
 
-boolean srctext::DoMatch(long pos, char *str, int len)
+boolean srctext::DoMatch(long pos, const char *str, int len)
 {
     while(len>0 && GetChar(pos++)==*str++)
 	--len;
     return len==0;
 }
 
-static char *spaces="        ";
+static const char spaces[]="        ";
 
 /*RSK91overstrike: changed srctext_InsertCharacters calls to srctext_ JustInsertCharacters calls*/
 #define TABOVER(self,oldpos,pos,oldcol,col) \

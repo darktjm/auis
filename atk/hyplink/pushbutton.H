@@ -92,7 +92,7 @@ public:
      long Read (FILE *fp, long id)  ;
      long Write (FILE *fp, long id, int level)  ;
   
-    virtual void SetText(char *txt);
+    virtual void SetText(const char *txt);
     virtual void SetStyle(int stylecode);
     virtual void SetButtonFont(class fontdesc *f);
     virtual void SetFGColor(char *name, int red, int green, int blue); /* if name is NULL, use RGB */
@@ -102,8 +102,8 @@ public:
     virtual void ParseRGB(char *rgb_string, unsigned char *rgb_vect);
   
 
-    inline char * GetText() { return (this->text); }
-    inline char * GetSafeText() { return this->text?this->text:(char *)"Push Me"; }
+    inline const char * GetText() { return (this->text); }
+    inline const char * GetSafeText() { return this->text?this->text:"Push Me"; }
     inline int GetStyle() { return (this->style); }
     inline class fontdesc * GetButtonFont() { return (this->myfontdesc); }
   

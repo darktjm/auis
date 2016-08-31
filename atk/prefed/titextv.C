@@ -23,16 +23,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/titextv.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
-
- 
-
 ATK_IMPL("titextv.H")
 
 
@@ -44,9 +34,6 @@ ATK_IMPL("titextv.H")
 
 
 ATKdefineRegistry(titextv, textview, NULL);
-#ifndef NORCSID
-#endif
-
 
 titextv::titextv()
 {

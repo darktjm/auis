@@ -23,13 +23,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/environ.C,v 3.7 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
@@ -43,6 +36,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 
+#include <andrewos.h>
 ATK_IMPL("environ.H")
 #include <environ.H>
 
@@ -52,11 +46,11 @@ extern char ProgramName[];	/* blechhh */
 
 /* used to avoid problems with null pointers expected to be
   treated as null strings */
-static char *nullstring="";
+static const char *nullstring="";
 
 
 ATKdefineRegistry(environ, ATK, NULL);
-static boolean varcmp(register const char  *variable, register const char  *envEntry);
+static boolean varcmp(const char  *variable, const char  *envEntry);
 static char * strncpyMovePointer(char *dest, const char *src, const int numchars);
 
 static char *strncpyMovePointer(char *dest, const char *src, const int numchars)
@@ -70,7 +64,7 @@ static char *strncpyMovePointer(char *dest, const char *src, const int numchars)
 /* Quick and simple routine for checking if a environment entry is for a given
  * variable, probably faster than raw strlen and strncmp combinations.
  */
-static boolean varcmp(register const char  *variable, register const char  *envEntry)
+static boolean varcmp(const char  *variable, const char  *envEntry)
         {
 
     while (*variable != '\0' && *variable++ == *envEntry++)
@@ -119,7 +113,7 @@ void environ::Put(const char    *variable , const char    *value)
  */
     static char **lastEnviron = NULL; /* The last environment we allocated. */
     static int lastEnvironLength = 0; /* The maximum number of entries in lastEnviron. */
-    register char **p;
+    char **p;
 
     /* check for a NULL value so we can make it the expected null string */
     if(value==NULL) value=nullstring;
@@ -129,7 +123,7 @@ void environ::Put(const char    *variable , const char    *value)
     if (*p == NULL) {
         if (environ != lastEnviron || p - environ > lastEnvironLength) {
 
-	    register char **np;
+	    char **np;
 
 	    lastEnvironLength = (p - environ) + 12; /* 1 for new entry, 1 for NULL, and 10 for expansion. */
 	    if (lastEnviron != NULL)
@@ -154,7 +148,7 @@ void environ::Delete(const char	 *variable)
         {
 #undef environ
     extern char **environ;
-    register char **p;
+    char **p;
 
     for (p = environ; *p != NULL && !varcmp(variable, *p); p++)
 	;
@@ -263,7 +257,7 @@ void environ::ExpandEnvVars(char *toString, const char *fromString, int maxsize)
 	  if (dollar == NULL) break;
 	  dx = dollar+1;
 	  if(*dx=='$') {
-	      if ((strlen(toString) + (dx-fs)+1) <= maxsize) 
+	      if ((int)(strlen(toString) + (dx-fs)+1) <= maxsize) 
 		  tx = strncpyMovePointer(tx, fs, dx-fs);
 	      else {
 		  tx = strncpyMovePointer(tx, fs, (maxsize-strlen(toString)-1));
@@ -285,7 +279,7 @@ void environ::ExpandEnvVars(char *toString, const char *fromString, int maxsize)
 	  else envval=environ::AndrewDir("");
 	  if (envval == NULL) {
 	      /* leave $xxx in place */
-	      if ((strlen(toString) + (dx-fs)+1) <= maxsize) 
+	      if ((int)(strlen(toString) + (dx-fs)+1) <= maxsize) 
 		  tx = strncpyMovePointer(tx, fs, dx-fs);
 	      else {
 		  tx = strncpyMovePointer(tx, fs, (maxsize-strlen(toString)-1));
@@ -294,7 +288,7 @@ void environ::ExpandEnvVars(char *toString, const char *fromString, int maxsize)
 	  }
 	  else {
 
-	      if ((strlen(toString) + (dollar-fs)+1) <= maxsize) {
+	      if ((int)(strlen(toString) + (dollar-fs)+1) <= maxsize) {
 		  tx = strncpyMovePointer(tx, fs, dollar-fs);
 	      }
 	      else {
@@ -302,7 +296,7 @@ void environ::ExpandEnvVars(char *toString, const char *fromString, int maxsize)
 		  strfull=TRUE;
 	      }
 	      if (*envval != '\0') {
-		  if ((strlen(toString)+strlen(envval)+1) <= maxsize) {
+		  if ((int)(strlen(toString)+strlen(envval)+1) <= maxsize) {
 		      strcpy(tx, envval);
 		      // move tx ptr to end of string
 			tx = tx+strlen(envval);
@@ -317,7 +311,7 @@ void environ::ExpandEnvVars(char *toString, const char *fromString, int maxsize)
 	  fs = dx;
       }
     if (!strfull) {
-	if ((strlen(toString)+strlen(fs)+1) <= maxsize)
+	if ((int)(strlen(toString)+strlen(fs)+1) <= maxsize)
 	    strcpy(tx, fs);
 	else 
 	    tx = strncpyMovePointer(tx, fs, maxsize-strlen(toString)-1);

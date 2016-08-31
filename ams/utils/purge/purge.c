@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/purge/RCS/purge.c,v 1.17 1995/07/11 19:58:46 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	purge.c
 	Purger for the database of already-sent messages on
@@ -110,7 +105,7 @@ long int MinimumTime;
 	int Date, RetLen, ForLen, Count;
 	static char KeyBuf[PBLKSIZ+1]; int KeyLen;
 	static char RetPth[PBLKSIZ+1], ForStr[PBLKSIZ+1];
-	register int longval;
+	int longval;
 	int HardErrs = 1000, IsForStr = 0;
 
 	readDB = dbm_open(dbmfile, osi_O_READLOCK, 0644);

@@ -103,6 +103,7 @@ struct Dir_ {
 };
 
 #include <apt.H>
+#include <attribs.h>
 class bush : public  apt {
 public:
 	virtual ATKregistryEntry *ATKregistry();
@@ -113,27 +114,23 @@ public:
   virtual ~bush();
 	static class bush * Create(const char *init_dir)  ;
 
-    
 
-	virtual void InitTree(char *root_path)  ;
+	/* dired compatibility */
+	virtual void SetAttributes(struct attributes *attributes);
+
+	virtual void InitTree(const char *root_path)  ;
 	virtual int ScanDir(tree_type_node tn)  ;
-	virtual void BuildSubDirs(tree_type_node tn)	 ;
-	virtual void DestroySubDirs(tree_type_node tn)  ;
-	virtual void DestroyDirEntries(tree_type_node tn)  ;
-	virtual void DestroyDirEntry(tree_type_node tn)  ;
-	virtual void FreeSubDirs(tree_type_node tn)  ;
+	virtual void BuildSubDirs(tree_type_node tn)    ;
 	virtual int DestroyEntry(tree_type_node tn,struct Dir_Entry *Entry)  ; 
 	virtual boolean ScanRequired(tree_type_node tn)  ;
 	virtual int RenameDir(tree_type_node tn,char *newPath, char *newName)  ;
 	virtual int MoveEntry(tree_type_node tn,struct Dir_Entry *Entry,char *newName)  ;
-	virtual int PerformSystemAction( char* name, char **argv )  ;
+	virtual int PerformSystemAction( const char* name, const char **argv )  ;
 
     
-	virtual void ClearTree();
-	
   	 long Read(FILE *file,long id)  ;
   	 long Write(FILE *file,long id,int level)  ;
-	 char * ViewName()  ;
+	 const char * ViewName()  ;
 
     
 

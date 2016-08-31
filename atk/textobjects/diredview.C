@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textobjects/RCS/diredview.C,v 1.5 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
 ATK_IMPL("diredview.H")
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -77,13 +70,11 @@ static class cursor *waitCursor;
 
 
 ATKdefineRegistry(diredview, textview, diredview::InitializeClass);
-#ifndef NORCSID
-#endif
 static void SetMenuMask(class diredview  *self);
-static char *GetFullName(class diredview  *self, char  *filename);
+static const char *GetFullName(class diredview  *self, const char  *filename);
 static void ptproc_Refresh(class diredview  *self, long  rock);
 static int ZoomProc(char  *filename , char  **foundp);
-static int VisitFile(class diredview  *self, char  *fname);
+static int VisitFile(class diredview  *self, const char  *fname);
 static void ptproc_Zoom(class diredview  *self, long  rock);
 static int DeleteProc(char  *filename, class diredview  *self);
 static void ptproc_Delete(class diredview  *self, long  rock);
@@ -123,7 +114,7 @@ static void SetMenuMask(class diredview  *self)
  * currently viewed directory.
  */
 
-static char *GetFullName(class diredview  *self, char  *filename)
+static const char *GetFullName(class diredview  *self, const char  *filename)
 {
     static char fullName[256];
     char buf[256];
@@ -163,9 +154,9 @@ static int ZoomProc(char  *filename , char  **foundp)
 
 /* Perform the excrutiating activities necessary to visit file */
 
-static int VisitFile(class diredview  *self, char  *fname)
+static int VisitFile(class diredview  *self, const char  *fname)
 {
-    register class buffer *buffer;
+    class buffer *buffer;
     char realName[1000], buf[1000];
     boolean fileIsDir, fileExists;
     struct stat statBuf;
@@ -221,7 +212,8 @@ static void ptproc_Zoom(class diredview  *self, long  rock)
 {
     class dired *dired = Dired(self);
     struct stat stbuf;
-    char *fname, buf[256], tmpfname[256];
+    const char *fname;
+    char buf[256], tmpfname[256];
 
     if (! (dired)->AnythingMarked()) {
         fname = (dired)->Locate( (self)->GetDotPosition());
@@ -451,7 +443,8 @@ static void ptproc_ToggleSelect(class diredview  *self, long  rock)
 static void ptproc_RegexpSelect(class diredview  *self, long  rock)
 {
     class dired *dired = Dired(self);
-    char buf[256], *res;
+    char buf[256];
+    const char *res;
     static struct SearchPattern *pat = NULL;
     long pos;
 

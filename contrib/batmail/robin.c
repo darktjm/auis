@@ -23,10 +23,6 @@
  * 
  *  $
 */
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/batmail/RCS/robin.c,v 1.9 1996/03/15 18:22:08 robr Stab74 $";
-#endif
 /*
  * robin.c -- main service routines for batmail
  * 1 march 1986, Miles Bader
@@ -99,11 +95,11 @@ static VOID cacheFolderUpdate(/* char *folder, char *date */);
 static buildField(bufP,strP,c,wid,eolp)
 char		**bufP,
 		**strP;
-register char	c;
-register int	wid;
+char	c;
+int	wid;
 bool		eolp;
 {
-    register char   *output= *bufP,
+    char   *output= *bufP,
 		    *str= *strP;
 
     if(!eolp)

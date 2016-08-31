@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>	/* index */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/config.c,v 2.24 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
 #include <stdio.h>
 #include <andyenv.h>	/* LOCAL_ANDREW_SETUP_ENV */
 #include <system.h>	/* LOCAL_ANDREW_SETUP_ENV */
@@ -89,8 +80,8 @@ int ReadConfigureLine(FILE *fp, char *text, int maxTextLength, const char **prog
 	    /* Check for Machine Type / Host Name/ Environment variable  */
 
 	    if (text[1] == 'C' || text[1] == 'M' || text[1] == 'E')  {
-		register char *p;
-		register char *d;
+		char *p;
+		char *d;
 
 		p = &(text[2]);
 
@@ -451,7 +442,7 @@ const char *GetConfiguration(const char *key)
 
 void FreeConfigureList(struct configurelist *cList)
 {
-    register struct configurelist *t;
+    struct configurelist *t;
 
     while (cList != NULL)  {
 	t = cList;

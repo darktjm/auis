@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/pcserver/RCS/pcsexec.c,v 2.14 1996/09/03 19:25:30 robr Exp $";
-#endif
-
 /*
  *	PC Server - Command Execution Component
  *	Access to the UNIX File System for IBM PC/XT/ATs
@@ -50,8 +45,8 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/
  *
  */
 
-#include <stdio.h>
 #include <andrewos.h> /* sys/file.h */
+#include <stdio.h>
 #include <pwd.h>
 #include <sys/ioctl.h>
 #include <ctype.h>
@@ -64,8 +59,8 @@ extern int PCS_debuglevel;
 
 char **environ;
 char *MyEnvironment[10];
-#define USUALPATH "PATH=%s/bin:/usr/andrew/bin:/usr/andy/bin:/usr/local/bin:\
-/usr/ucb:/usr/bin:/bin:/usr/etc:/etc"
+#define USUALPATH "PATH=%s/bin:/usr/andrew/bin:/usr/andy/bin:/usr/local/bin:" \
+                  "/usr/ucb:/usr/bin:/bin:/usr/etc:/etc"
 
 #ifndef _IBMR2
 char *malloc ();
@@ -127,7 +122,7 @@ ShiftLeft (str, n)
 char *str;
 int n;
 {
-    register int i, len;
+    int i, len;
 
     if (n == 0)
 	return;
@@ -142,7 +137,7 @@ int n;
 RemoveDoubleQuote (tok)
 char *tok;
 {
-    register int i;
+    int i;
     for (i=0; tok[i]; i++)
 	if (tok[i] == '\"')
 	    ShiftLeft (tok+i, 1);
@@ -170,7 +165,7 @@ Tokenize (cmd, cmdtokens, maxtokens)
 char *cmd, *cmdtokens[];
 int maxtokens;
 {
-    register int len, i, j;
+    int len, i, j;
     int (*NoSeparator)();
 
     len = strlen (cmd);
@@ -317,7 +312,7 @@ CleanUpOrphans ()
 TextOutput (str)
 char *str;
 {
-    register int i;
+    int i;
 
     for (i=0; str[i]; i++) {
 	if ((str[i] != ' ') && (isascii(str[i])) && (isprint (str[i])))

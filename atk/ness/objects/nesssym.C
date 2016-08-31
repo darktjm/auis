@@ -25,14 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nesssym.C,v 1.8 1996/05/17 20:53:12 robr Exp $";
-#endif
-
-
 /*
  *    $Log: nesssym.C,v $
  * Revision 1.8  1996/05/17  20:53:12  robr
@@ -127,8 +119,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * Copied from sym.c and discarded EVERYTHING
  */
 
-
-
+#include <andrewos.h>
 #include <ness.H>
 #include <aaction.H>
 	

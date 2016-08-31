@@ -27,16 +27,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/text.C,v 3.31 1996/11/15 20:42:21 wjh Exp $";
-#endif
-
-
- 
-
-
 ATK_IMPL("text.H")
 #include <ctype.h>
 
@@ -104,10 +94,6 @@ static int DataStreamVersion = 0;
 
 
 ATKdefineRegistry(text, simpletext, NULL);
-#ifndef NORCSID
-#endif
-#ifdef CHECK_BE1
-#endif /* CHECK_BE1 */
 static void AddObj(class text  *self, class dataobject  *obj);
 static void DelObj(class text  *self, class dataobject  *obj);
 #if 0
@@ -116,14 +102,14 @@ static long text_ListObjects(class text  *self, class dataobject  **list, long  
 static long text_ListObjects(class text  *self, class dataobject  **list, long  size);
 #endif /* !0 */
 static void ClearStyles(class text  *self);
-boolean DoReplaceCharacters(class text  *self, long  pos , long  len, char  *repStr, long  repLen, boolean  alwaysp);
+boolean DoReplaceCharacters(class text  *self, long  pos , long  len, const char  *repStr, long  repLen, boolean  alwaysp);
 static int ParseInteger(FILE  *file,long  *id);
 static boolean DiscardToEnddata(FILE  *file);
 #ifdef CHECK_BE1
 static boolean HasBinaryChars(class text  *self  /* (Other than viewrefs) */);
 static void TryConversion(class text  *self);
 #endif /* CHECK_BE1 */
-static int StringMatch(register class text  *self, register long  pos, register char  *c);
+static int StringMatch(class text  *self, long  pos, const char  *c);
 static boolean TestForNoTemplate(class style  *style);
 static void PutsRange(char  *p, FILE  *fp, char  *ep);
 static char *WriteOutBuf(FILE  *file,char  *outbuf,char  *outp,char  *lastblank);
@@ -177,7 +163,7 @@ static void DelObj(class text  *self, class dataobject  *obj)
     }
 }
 
- class environment *text::AlwaysWrapViewChar(long  pos, char  *viewtype, class dataobject  *dataobject)
+ class environment *text::AlwaysWrapViewChar(long  pos, const char  *viewtype, class dataobject  *dataobject)
 {
     class viewref *newviewref;
     class environment *newenv;
@@ -240,7 +226,7 @@ text::~text()
 }
 
 
-void text::SetBaseTemplateName(char  *name)
+void text::SetBaseTemplateName(const char  *name)
 {
     if(this->templateName != NULL) free(this->templateName);
     if(name==NULL) this->templateName=NULL;
@@ -296,7 +282,7 @@ void text::SetAttributes(struct attributes  *attributes)
     }
 }
 
-class viewref *text::InsertObject(long  pos, char  *name, char  *viewname)
+class viewref *text::InsertObject(long  pos, const char  *name, const char  *viewname)
 {
     class dataobject *newobject;
     class environment *env;
@@ -525,7 +511,7 @@ void text::LengthChanged(long  pos, long  len)
     (this->rootEnvironment)->Update( pos, len);
 }
 
-boolean DoReplaceCharacters(class text  *self, long  pos , long  len, char  *repStr, long  repLen, boolean  alwaysp)
+boolean DoReplaceCharacters(class text  *self, long  pos , long  len, const char  *repStr, long  repLen, boolean  alwaysp)
 {
     class environment *environment;
 
@@ -543,21 +529,21 @@ boolean DoReplaceCharacters(class text  *self, long  pos , long  len, char  *rep
     return TRUE;
 }
 
-boolean text::ReplaceCharacters(long  pos , long  len, char  *repStr, long  repLen)
+boolean text::ReplaceCharacters(long  pos , long  len, const char  *repStr, long  repLen)
 {
     return DoReplaceCharacters(this, pos, len, repStr, repLen, FALSE);
 }
 
-void text::AlwaysReplaceCharacters(long  pos , long  len, char  *repStr, long  repLen)
+void text::AlwaysReplaceCharacters(long  pos , long  len, const char  *repStr, long  repLen)
 {
     DoReplaceCharacters(this, pos, len, repStr, repLen, TRUE);
 }
 
 	environment *
 DoAddView(text *self, long pos, 
-			char *viewtype, class dataobject *dataobject) {
+			const char *viewtype, class dataobject *dataobject) {
 	class viewref *newviewref;
-	register environment *newenv;
+	environment *newenv;
 
 	AddObj(self, dataobject);
 	newviewref = viewref::Create(viewtype, dataobject);
@@ -572,7 +558,7 @@ DoAddView(text *self, long pos,
 
 	environment * 
 text::ReplaceWithView(long pos, long len, 
-			char *viewtype, class dataobject *dataobject) {
+			const char *viewtype, class dataobject *dataobject) {
 	char foo = TEXT_VIEWREFCHAR;
 	if ( ! DoReplaceCharacters(this, pos, len, 
 			&foo, 1, FALSE))
@@ -582,7 +568,7 @@ text::ReplaceWithView(long pos, long len,
 
 	environment *
 text::AlwaysReplaceWithView(long pos, long len, 
-			char *viewtype, class dataobject *dataobject) {
+			const char *viewtype, class dataobject *dataobject) {
 	char foo = TEXT_VIEWREFCHAR;
 	DoReplaceCharacters(this, pos, len, &foo, 1, TRUE);
 	return DoAddView(this, pos, viewtype, dataobject);
@@ -658,7 +644,7 @@ long text::HandleKeyWord(long  pos, char  *keyword, FILE  *file)
     class environment *newenv;
     class style *stylep;
 
-    static char *EOFerror =
+    static const char EOFerror[] =
       "EOF encountered while reading in a view marker or template name - ignoring\n";
 
     if (strcmp(keyword, "textdsversion") == 0)  {
@@ -858,7 +844,7 @@ long text::HandleCloseBrace(long  pos, FILE  *file)
 
 class environment *text::AlwaysAddStyle(long  pos , long  len, class style  *stylep)
 {
-    register class environment *newenv;
+    class environment *newenv;
 
     if ((newenv = (this->rootEnvironment)->WrapStyle( pos, len, stylep)) != NULL) {
 	setStyleFlags(newenv);
@@ -877,14 +863,14 @@ class environment *text::AddStyle(long  pos, long  len, class style  *stylep)
         return (this)->AlwaysAddStyle( pos, len, stylep);
 }
 
-class environment *text::AlwaysAddView(long  pos, char  *viewtype, class dataobject  *dataobject)
+class environment *text::AlwaysAddView(long  pos, const char  *viewtype, class dataobject  *dataobject)
 {
     char c = TEXT_VIEWREFCHAR;
     (this)->AlwaysInsertCharacters(pos, &c, 1);
     return DoAddView(this, pos, viewtype, dataobject);
 }
 
-class environment *text::AddView(long  pos, char  *viewtype, class dataobject  *dataobject)
+class environment *text::AddView(long  pos, const char  *viewtype, class dataobject  *dataobject)
 {
     if ((this)->GetReadOnly() || pos < (this)->GetFence())
         return NULL;
@@ -1086,7 +1072,7 @@ long text::Read(FILE  *file, long  id)
     return retval;
 }
 
-static int StringMatch(register class text  *self, register long  pos, register char  *c)
+static int StringMatch(class text  *self, long  pos, const char  *c)
 {
     /* Tests if the text begins with the given string */
     while (*c != '\0') {
@@ -1229,7 +1215,7 @@ static char *WriteOutBuf(FILE  *file,char  *outbuf,char  *outp,char  *lastblank)
     class environment *curenv;
     class environment *newenv;
     class environment *parentenv;
-    register int lastblankset = FALSE;
+    int lastblankset = FALSE;
     long end;
     long i;
     long elen;
@@ -1812,7 +1798,7 @@ static void PlayTabs(struct text_statevector  *sv , struct text_statevector  *ol
 /* style to use, and plays that style over the state vector. */
 static void PlayStyle(struct text_statevector  *sv, class style  *styleptr)
 {
-    register long delta;
+    long delta;
     struct text_statevector oldvalues;
     char *color;
 
@@ -2055,7 +2041,7 @@ void text::ApplyEnvironmentsToStyle(environment *env, style *dest) {
     env->data.style->MergeInto(dest);
 }
 
-class viewref *text::FindViewreference(register long  pos , register long  len)
+class viewref *text::FindViewreference(long  pos , long  len)
 {
     while (len > 0) {
         long gotlen;
@@ -2222,7 +2208,7 @@ struct stk {
 } *Top = NULL;
 
 
-char *TranslateStyleFrom[] = {
+const char * const TranslateStyleFrom[] = {
     "typewriter",
     "quotation",
     "excerptedcaption",
@@ -2231,7 +2217,7 @@ char *TranslateStyleFrom[] = {
     NULL
 };
 
-char *TranslateStyleTo[] = {
+const char * const TranslateStyleTo[] = {
     "fixed",
     "excerpt",
     "bold,excerpt",
@@ -2243,7 +2229,7 @@ char *TranslateStyleTo[] = {
 char *
 WriteStyle(class environment  *env, char  *outp , int  IsOpen, char  *outbuf)
 {
-    char *name = env->data.style->name;
+    const char *name = env->data.style->name;
     char *temp, *s, *comma, *dum, negation[50];
     int i, IsReal=1, len;
 
@@ -2434,7 +2420,7 @@ long text::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usagety
     char *buf = NULL;
     long bufLen;
     int nextcode;
-    char *charset;
+    const char *charset;
     boolean terminateNewline = FALSE;
 
     if (strcmp((this)->GetTypeName(), "text")) {
@@ -2448,7 +2434,7 @@ long text::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usagety
     this->writeID = writeID;
 
     if ((this)->CheckHighBit()) {
-	charset = (char *) environ::Get("MM_CHARSET");
+	charset = environ::Get("MM_CHARSET");
 	if (!charset) charset = "ISO-8859-1";
     } else charset = "US-ASCII";
 
@@ -2593,7 +2579,7 @@ long text::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usagety
 	    if ((c < 32 && (c != '\n' && c != '\t'))
 		|| (c == '=')
 		|| ((c >= 127))) {
-		static char basis_hex[] = "0123456789ABCDEF";
+		static const char basis_hex[] = "0123456789ABCDEF";
 		*outp++ = '=';
 		*outp++ = basis_hex[c>>4];
 		*outp++ = basis_hex[c&0xF];

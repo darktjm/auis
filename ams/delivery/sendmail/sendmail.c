@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/delivery/sendmail/RCS/sendmail.c,v 1.14 1996/05/13 16:48:58 robr Exp $";
-#endif
-
 /*
 		sendmail.c -- Replacement for sendmail on workstations.
 */
@@ -58,7 +53,7 @@ main(argc, argv)
     int argc;
     char *argv[];
 {
-    register int i, nrecps;
+    int i, nrecps;
 
     nrecps = 0;
     ignoredots = FALSE;
@@ -66,7 +61,7 @@ main(argc, argv)
     CheckAMSConfiguration();
     /* Process arguments */
     for (i=1; argv[i] != NIL; i++) {
-	register char *arg;
+	char *arg;
 
 	arg = argv[i];
 	switch (*arg) {
@@ -114,10 +109,10 @@ static deliver(argv, nrecps)
     int nrecps;
 {
     char **qargs;
-    register FILE *qmail;
-    register bool lookfordot;
-    register int i, q;
-    register int chk_date = 0;
+    FILE *qmail;
+    bool lookfordot;
+    int i, q;
+    int chk_date = 0;
 
     /* Get space for args */
     /* Allow space for arg[0], -i & NIL */
@@ -148,7 +143,7 @@ static deliver(argv, nrecps)
 
     lookfordot = FALSE;
     for (;;) {
-	register int c;
+	int c;
 
 	c = getchar();
 	switch (c) {
@@ -250,8 +245,8 @@ static postmaster(argv, problem)
     char *argv[], *problem;
 {
     static char *args[] = { "queuemail", "-i", NIL, NIL }; 
-    register FILE *fout;
-    register int i;
+    FILE *fout;
+    int i;
 
     args[2] = PostmasterTitle;
     fout = qopen(queuemail, args, "w");

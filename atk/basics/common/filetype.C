@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/types.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/filetype.C,v 3.9 1996/03/12 17:59:38 robr Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("filetype.H")
 #include <stdio.h>
 #include <util.h>
@@ -83,22 +74,23 @@ void filetype::FreeAttributes(struct attributes *attributes)
 {
     struct attributes *thisAttr, *nextAttr;
 
+    /* This assumes an allocated list of attributes */
     for (thisAttr = attributes; thisAttr != NULL; thisAttr = nextAttr) {
-        free(thisAttr->key);
+        free((char *)thisAttr->key);
         if (thisAttr->value.string != NULL) /* Attributes on this list are guaranteed to be string attributes... */
-            free(thisAttr->value.string);
+            free((char *)thisAttr->value.string);
         nextAttr = thisAttr->next;
         free(thisAttr);
     }
 }
 
-static struct mapEntry *GetEntry(char  *extension, char  *dataName)
+static struct mapEntry *GetEntry(const char  *extension, const char  *dataName)
 {
-    register struct mapEntry *thisEntry;
+    struct mapEntry *thisEntry;
 
     if (strcmp(extension, "*") == 0) {
         thisEntry = &defaultMapping;
-	defaultMapping.fileExtension = "*";
+	defaultMapping.fileExtension = (char *)"*"; /* never freed */
     }
     else {
         for (thisEntry = allEntries; thisEntry != NULL && strcmp(thisEntry->fileExtension, extension); thisEntry = thisEntry->next)
@@ -107,8 +99,7 @@ static struct mapEntry *GetEntry(char  *extension, char  *dataName)
 
     if (thisEntry == NULL) { /* Allocate an entry if we didn't find one. */
         thisEntry = (struct mapEntry *) malloc(sizeof(struct mapEntry));
-        thisEntry->fileExtension = (char *) malloc(strlen(extension) + 1);
-	strcpy(thisEntry->fileExtension, extension);
+        thisEntry->fileExtension = strdup(extension);
 	thisEntry->dataName = NULL;
 	thisEntry->newAttributes = NULL;
 	thisEntry->existingAttributes = NULL;
@@ -119,13 +110,12 @@ static struct mapEntry *GetEntry(char  *extension, char  *dataName)
 /* Fill in name. */
     if (thisEntry->dataName != NULL)
 	free(thisEntry->dataName);
-    thisEntry->dataName = (char *) malloc(strlen(dataName) + 1);
-    strcpy(thisEntry->dataName, dataName);
+    thisEntry->dataName = strdup(dataName);
     
     return thisEntry;
 }
 
-struct attributes *filetype::ParseAttributes(char *attributes)
+struct attributes *filetype::ParseAttributes(const char *attributes)
 {
 /* If necessary, parse the semicolon-seperated string of assignments to generate the
  * values list. The string looks like "key1=value1;key2=value2;...". All values
@@ -139,25 +129,26 @@ struct attributes *filetype::ParseAttributes(char *attributes)
     struct attributes *attr = NULL;
 
     if (attributes != NULL) {
-        char *thisKey = attributes, *thisVal;
+        const char *thisKey = attributes, *thisVal;
         struct attributes *thisAttr;
 
         while (*thisKey != '\0') {
             for (thisVal = thisKey; *thisVal != '=' && *thisVal != '\0'; ++thisVal)
                 ; /* Skip to find value */
             if (thisVal != thisKey) { /* If we found something. */
+		char *s;
                 thisAttr = (struct attributes *) malloc(sizeof(struct attributes));
-                thisAttr->key = (char *) malloc(thisVal - thisKey + 1);
-                strncpy(thisAttr->key, thisKey, thisVal - thisKey);
-                thisAttr->key[thisVal - thisKey] = '\0';
+                thisAttr->key = s = (char *) malloc(thisVal - thisKey + 1);
+                strncpy(s, thisKey, thisVal - thisKey);
+                s[thisVal - thisKey] = '\0';
                 if (*thisVal != '\0') /* Guaranteed to be either '=' or '\0' */
                     thisVal++;
                 for (thisKey = thisVal; *thisKey != ';' && *thisKey != '\0'; ++thisKey)
                     ;
                 if (thisKey != thisVal) {
-                    thisAttr->value.string = (char *) malloc(thisKey - thisVal + 1);
-                    strncpy(thisAttr->value.string, thisVal, thisKey - thisVal);
-                    thisAttr->value.string[thisKey - thisVal] = '\0';
+                    thisAttr->value.string = s = (char *) malloc(thisKey - thisVal + 1);
+                    strncpy(s, thisVal, thisKey - thisVal);
+                    s[thisKey - thisVal] = '\0';
                 }
                 else
                     thisAttr->value.string = NULL;
@@ -175,7 +166,7 @@ struct attributes *filetype::ParseAttributes(char *attributes)
     return attr;
 }
 
-void filetype::AddEntry(char  *extension , char  *dataName, char  *attributes)
+void filetype::AddEntry(const char  *extension , const char  *dataName, const char  *attributes)
 {
     struct mapEntry *thisEntry;
 
@@ -185,7 +176,7 @@ void filetype::AddEntry(char  *extension , char  *dataName, char  *attributes)
     thisEntry->newAttributes = ParseAttributes(attributes); 
 }
 
-void filetype::AddExistingAttributes(char  *extension , char  *dataName, char  *attributes)
+void filetype::AddExistingAttributes(const char  *extension , const char  *dataName, const char  *attributes)
 {
     struct mapEntry *thisEntry;
 
@@ -195,9 +186,9 @@ void filetype::AddExistingAttributes(char  *extension , char  *dataName, char  *
     thisEntry->existingAttributes = ParseAttributes(attributes); 
 }
 
-int filetype::DeleteEntry(register char  *extension)
+int filetype::DeleteEntry(char  *extension)
 {
-    register struct mapEntry *traverse, **previous;
+    struct mapEntry *traverse, **previous;
 
     if (strcmp(extension, "*")) {
         if (defaultMapping.dataName)
@@ -231,12 +222,12 @@ int filetype::DeleteEntry(register char  *extension)
  *    the next call to this routine. If this can't be guaranteed, the
  *    programmer must copy the attributes list.
  */
-char *filetype::Lookup(FILE  *file, register const char  *filename, long  *objectID, struct attributes  **attributes)
+char *filetype::Lookup(FILE  *file, const char  *filename, long  *objectID, struct attributes  **attributes)
 {
-    register struct mapEntry *thisEntry;
-    register const char *extension;
+    struct mapEntry *thisEntry = &defaultMapping;
+    const char *extension;
     static char objectName[100]; /* The place to put the name of the class that should be used to read this file. */
-    char *targetObject = NULL; /* Holds potential value for objectName. */
+    const char *targetObject = NULL; /* Holds potential value for objectName. */
     struct attributes *newAttributes = NULL; /* Only used if the file is in non-datastream format. */
     struct attributes *existingAttributes = NULL;
 
@@ -247,15 +238,15 @@ char *filetype::Lookup(FILE  *file, register const char  *filename, long  *objec
  * This information may be overrriden by that in the file.
  */
     if (filename != NULL && filename[0] != '\0') {
-        register const char *s;
+        const char *s;
 	char prefix[256];
 	char *dotpos;
 
-	if (s = strrchr(filename, '/')) ++s;
+	if ((s = strrchr(filename, '/'))) ++s;
 	else s = filename;
 	strncpy(prefix, s, sizeof(prefix));
 	prefix[sizeof(prefix)-1] = '\0';
-	if (dotpos = strchr(prefix, '.')) *(dotpos+1) = '\0';
+	if ((dotpos = strchr(prefix, '.'))) *(dotpos+1) = '\0';
 
         extension = strrchr(filename, '.');
         if (extension == NULL || (s != NULL && s > extension))
@@ -288,6 +279,7 @@ char *filetype::Lookup(FILE  *file, register const char  *filename, long  *objec
  *    "filesize" => An integer attribute giving the size (in bytes) of the file.
  *                  This is filled in below in the file part of this routine.
  */
+/* hardwiredAttributes are never freed, so it's OK to use read-only strings */
         if (attributes != NULL) {
             strcpy(lastFilename, filename);
             /* Why can't the string library do the right thing? */
@@ -330,16 +322,17 @@ char *filetype::Lookup(FILE  *file, register const char  *filename, long  *objec
 
 	switch (getc(file)) {
 	    case '\\': { /* "\begindata{"? */
-		char *s= "begindata{", objectIDBuffer[20], *readID= objectIDBuffer;
+		const char *s= "begindata{";
+		char objectIDBuffer[20], *readID= objectIDBuffer;
 
 		while (getc(file) == *s && *++s != '\0')
 		    ;
 		if (*s == '\0') {
-		    s = objectName;
+		    char *o = objectName;
 		    while ((c = getc(file)) != EOF && c != ',')
-			*s++ = c;
+			*o++ = c;
 		    if (c == ',') {
-			*s = '\0';
+			*o = '\0';
 			while ((c= getc(file)) != EOF && c != '}' && (readID < (objectIDBuffer + (sizeof(objectIDBuffer) - 1))))
 			    *readID++ = c;
 			if (c == '}') {
@@ -381,9 +374,10 @@ char *filetype::Lookup(FILE  *file, register const char  *filename, long  *objec
 		    targetObject= "rexxtext";
 		else if (strstr(shellname, "sh")) {
 		    /* use asmtext with static attribute to recognize comment delimiters, for ksh, csh, bsh, etc */
+		    /* note that this will be freed, since it's newAttributes */
 		    static struct attributes shellcommentdelimatt;
-		    shellcommentdelimatt.key= "bang-comment";
-		    shellcommentdelimatt.value.string= "#";
+		    shellcommentdelimatt.key= strdup("bang-comment");
+		    shellcommentdelimatt.value.string= strdup("#");
 		    shellcommentdelimatt.next= newAttributes;
 		    newAttributes= &shellcommentdelimatt;
 		    targetObject= "asmtext";
@@ -399,7 +393,7 @@ char *filetype::Lookup(FILE  *file, register const char  *filename, long  *objec
 		    targetObject= "gif";
 		break; }
 #if SY_OS2
-	    case '/': { /* "/*"? */
+	    case '/': { // "/*"?
 		if (thisEntry != &defaultMapping) break; /* extension is explicitly bound to something; don't even look */
 		if (getc(file) == '*')
 		    /* almost any file starting with a slash-star in OS/2 is a REXX script */
@@ -427,9 +421,9 @@ char *filetype::Lookup(FILE  *file, register const char  *filename, long  *objec
 void filetype::CanonicalizeFilename(char  *canonicalName , const char  *name, int  maxSize)
 {
     char fullName[MAXPATHLEN];
-    char *slash;
 
 #ifdef DOS_STYLE_PATHNAMES
+    char *slash;
     char *tmpstr;
     tmpstr = NewString(name);
     /* Change all backslashes to forward slashes */

@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/bldattr.c,v 2.14 1993/06/15 03:56:02 rr2b Stab74 $";
-#endif
-
 #include <ms.h>
 #include <hdrparse.h>
 #include <netinet/in.h>  /* for htonl, etc. */
@@ -88,10 +82,10 @@ struct MS_Message *msg;
 /* #define MyPrime 2147483629 */
 
 unsigned long KRHash(s)
-register char *s;
+char *s;
 {
-    register unsigned long sum = 0;
-    register unsigned int Bit;
+    unsigned long sum = 0;
+    unsigned int Bit;
 
     while (*s) {
 	for (Bit = 0x80; Bit != 0; Bit >>= 1) {

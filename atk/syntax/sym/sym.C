@@ -20,10 +20,6 @@
 // 
 //  $
 \* ********************************************************************** */
-#if !defined(lint) && !defined(LOCORE) && defined(RCS_HDRS)
-static char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/syntax/sym/RCS/sym.C,v 1.5 1995/12/07 16:41:27 robr Stab74 $";
-#endif
-
 /* sym.c		
 
 	Code for the sym object
@@ -124,9 +120,9 @@ static long *tableSize;
 ATKdefineRegistry(sym, ATK, sym::InitializeClass);
 #if !defined(lint) && !defined(LOCORE) && defined(RCS_HDRS)
 #endif
-static long hash(char *name);
-static class sym** lookup(char  *name, long  scope, boolean  *found);
-static class sym** lookupInScope(char  *name, long  scope, boolean  *found);
+static long hash(const char *name);
+static class sym** lookup(const char *name, long  scope, boolean  *found);
+static class sym** lookupInScope(const char *name, long  scope, boolean  *found);
 static void insert(class sym  *self);
 static void resizeTable();
 static void resizeArray(long  **a , long  from , long  to);
@@ -135,21 +131,21 @@ void printdata(class sym  *self);
 
 
 static long
-hash(char *name)
+hash(const char *name)
 {
-    register unsigned long val;
-    register unsigned char *pos;
+    unsigned long val;
+    unsigned const char *pos;
 
-    for (val = 0, pos=(unsigned char *)name; *pos; ++pos)
+    for (val = 0, pos=(unsigned const char *)name; *pos; ++pos)
 	val = ((val<<5) | (val>>27)) ^ *pos;
 
     return val % *tableSize;
 }
 
 static class sym**
-lookup(char  *name, long  scope, boolean  *found)
+lookup(const char *name, long  scope, boolean  *found)
 {
-    register class sym **s, **start = table+hash(name);
+    class sym **s, **start = table+hash(name);
 
     while (scope != SCOPE_NULL) {
 
@@ -174,9 +170,9 @@ lookup(char  *name, long  scope, boolean  *found)
 }
 
 static class sym**
-lookupInScope(char  *name, long  scope, boolean  *found)
+lookupInScope(const char *name, long  scope, boolean  *found)
 {
-    register class sym **s;
+    class sym **s;
 
     if (name == NULL) {
 	*found = FALSE;
@@ -250,7 +246,7 @@ resizeArray(long  **a , long  from , long  to)
 static void
 removeScopeFromScopes(sym_ScopeType  scope)
 {
-    register long i;
+    long i;
  
     for (i = 0; i < maxScopes; ++i)
 	if (enclosingScope[i] == scope)
@@ -293,8 +289,8 @@ sym::DestroyScope(sym_ScopeType  scope)
 {
 	ATKinit;
 
-    register long i, s;
-    register class sym **pos;
+    long i, s;
+    class sym **pos;
 
     for (i = 0; i < *tableSize; ++i)
 	for (pos = &table[i]; *pos != NULL;) {
@@ -325,7 +321,7 @@ sym::ParentScope(sym_ScopeType  scope)
 
 
 class sym*
-sym::Define(char  *name, class sym  *proto, sym_ScopeType  scope)
+sym::Define(const char *name, class sym  *proto, sym_ScopeType  scope)
 {
 	ATKinit;
 
@@ -356,7 +352,7 @@ sym::Define(char  *name, class sym  *proto, sym_ScopeType  scope)
 
 
 boolean
-sym::Undefine(char  *name, sym_ScopeType  scope)
+sym::Undefine(const char *name, sym_ScopeType  scope)
 {
 	ATKinit;
 
@@ -378,7 +374,7 @@ sym::Undefine(char  *name, sym_ScopeType  scope)
 
 
 class sym*
-sym::Find(char  *name, sym_ScopeType  scope)
+sym::Find(const char *name, sym_ScopeType  scope)
 {
 	ATKinit;
 
@@ -392,7 +388,7 @@ sym::Find(char  *name, sym_ScopeType  scope)
 }
 
 class sym*
-sym::Locate(char  *name, class sym  *proto, sym_ScopeType  scope, boolean  *newc)
+sym::Locate(const char  *name, class sym  *proto, sym_ScopeType  scope, boolean  *newc)
 {
     ATKinit;
 
@@ -423,12 +419,12 @@ sym::Locate(char  *name, class sym  *proto, sym_ScopeType  scope, boolean  *newc
 }
 
 long
-sym::FindAll(char  *name, sym_ScopeType  scope, sym_findfptr proc, long  rock)
+sym::FindAll(const char *name, sym_ScopeType  scope, sym_findfptr proc, long  rock)
 {
 	ATKinit;
 
-    register long i, s;
-    register class sym **pos;
+    long i, s;
+    class sym **pos;
 
     for (i = 0; i < *tableSize; ++i)
 	for (pos = &table[i]; *pos != NULL;) {
@@ -451,8 +447,8 @@ sym::Enumerate(sym_ScopeType  scope, sym_findfptr proc, long  rock)
 {
 	ATKinit;
 
-    register long i, s;
-    register class sym **pos;
+    long i, s;
+    class sym **pos;
 
     for (i = 0; i < *tableSize; ++i)
 	for (pos = &table[i]; *pos != NULL;) {

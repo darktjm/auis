@@ -25,17 +25,7 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/tm/RCS/tmapp.C,v 1.4 1994/08/14 02:05:19 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include <andrewos.h>
-
-
 #include <tmapp.H>
 
 #include <application.H>
@@ -47,9 +37,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/tm/RCS
 
 
 ATKdefineRegistry(tmapp, application, NULL);
-#ifndef NORCSID
-#endif
-
 
 tmapp::tmapp()
 {

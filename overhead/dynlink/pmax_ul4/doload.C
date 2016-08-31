@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynlink/pmax_ul4/RCS/doload.C,v 1.10 1995/02/15 23:18:46 Zarf Stab74 $";
-#endif
-
 /* 
  *	doload.c - dynamic loader for class system
  *
@@ -82,7 +77,7 @@ void *(* doload(int  inFD			/* open fd for package file */, char  *name			/* nam
 static char *symbol_class_name(int  class_number);
 static int doload_finish_resolution(struct doload_environment  *e, int debug);
 static long adjust(struct doload_environment  *e, long  tw, struct reloc  *rp);
-static void relocate_section(register struct doload_environment  *e, struct doload_section  *section);
+static void relocate_section(struct doload_environment  *e, struct doload_section  *section);
 
 
 static char *read_section(struct doload_environment  *e, long  offset, char  *buffer, long  length)
@@ -152,7 +147,7 @@ static int gcomp(const void *a, const void *b) {
 
 static struct globaltab *find_global(char  *name)
     {
-    register struct globaltab *thisGlobal;
+    struct globaltab *thisGlobal;
     static int sorted=0;
     if(!sorted) {
 	sorted=1;
@@ -420,7 +415,7 @@ static void DoIniFinis(struct doload_environment *e) {
 void *(* ATKDoLoadI(int  inFD			/* open fd for package file */, const char  *name			/* name of package being loaded */, char  **bp			/* base address of package */, long  *lenP			/* size of text segment */, const char  *path			/* Pathname of package being loaded */, int trace) )()
 {
     struct doload_environment E;
-    register struct doload_environment *e = &E;
+    struct doload_environment *e = &E;
     unsigned long n;	/* number of relocation items */
     struct reloc *rp;
     struct doload_section *section;
@@ -523,7 +518,7 @@ static char *symbol_class_name(int  class_number)
 }
 
 
-static char registrystr[]="_ATKregistry_";
+static const char registrystr[]="_ATKregistry_";
 
 static int Exportable(char *np) {
     char *p;
@@ -546,7 +541,7 @@ static int Exportable(char *np) {
  */
 static int doload_finish_resolution(struct doload_environment  *e, int debug)
 {
-    register pEXTR sp;
+    pEXTR sp;
     for (sp = e->symtab; sp < e->symtab + e->symheader.iextMax; sp++) {
 	char *name = e->stringtab + sp->asym.iss;
 
@@ -720,7 +715,7 @@ static long adjust(struct doload_environment  *e, long  tw, struct reloc  *rp)
 #define SETLOWHALF(addr, value) ((*(((short *)(addr)))) = (value))
 #endif /* Byte order selection */
 
-static void relocate_section(register struct doload_environment  *e, struct doload_section  *section)
+static void relocate_section(struct doload_environment  *e, struct doload_section  *section)
         {
     struct reloc *rp;
     struct reloc *sectionRelocBound = section->rtab + section->num_relocs;

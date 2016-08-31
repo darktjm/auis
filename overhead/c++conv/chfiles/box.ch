@@ -25,11 +25,6 @@
  *  $
 */
 
-/* $Header $ */
-/* $ACIS$ */
-
- 
-
 /* box.ch - box data object definition and interface */
 
 #include <rect.h>

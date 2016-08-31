@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RCS/vuisend.c,v 1.1 1995/08/02 18:46:45 susan Stab74 $";
-#endif
-
 /* 
  *      This module contains the mainline VUI code for sending mail (sendsomemail)
  */

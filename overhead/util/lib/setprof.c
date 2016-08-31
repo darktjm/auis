@@ -25,16 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>		/* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/setprof.c,v 2.21 1995/03/18 17:30:58 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* 
  * WARNING WARNING WARNING WARNING WARNING WARNING 
  * 
@@ -55,6 +45,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 	setprof.c -- routines to set preferences.
 	    (routines to read preferences are in profile.c) 
 \* ************************************************************ */
+#include <andrewos.h>		/* sys/file.h */
 #include <system.h>
 #include <stdio.h>
 #include <ctype.h>

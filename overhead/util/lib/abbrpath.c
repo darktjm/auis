@@ -25,16 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/abbrpath.c,v 1.11 1995/03/18 17:30:48 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
   abbrpath.c
 
@@ -44,6 +34,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 	ap_ShortenAlsoTo(pathname, otherID, otherHD, maxlen) does it all.
       */
 
+#include <andrewos.h>
 #include <stdio.h>
 #include <sys/param.h>
 #include <ctype.h>

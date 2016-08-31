@@ -20,8 +20,6 @@
  * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  * 
  *  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/c++conv/chfiles/RCS/figattr.ch,v 1.1 1993/10/13 15:52:18 rr2b Stab74 $
 */
 
 #define	figattr_MaskAll	    (0x00ff) /* binary 11111111 */

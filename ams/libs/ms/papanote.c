@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/papanote.c,v 2.15 1993/04/30 19:08:18 Zarf Stab74 $";
-#endif
-
 #include <ms.h>
 #include <hdrparse.h>
 #include <stdio.h>

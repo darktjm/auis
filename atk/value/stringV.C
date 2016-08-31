@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/stringV.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("stringV.H")
 #include <stringV.H>
 #include <fontdesc.H>
@@ -77,11 +67,9 @@ static class atom *  A_string;
 
 
 ATKdefineRegistry(stringV, valueview, stringV::InitializeClass);
-#ifndef NORCSID
-#endif
 static void CarveFonts(class stringV  * self);
 static void DrawLabel(class stringV  * self);
-static char *GetString(class stringV  * self);
+static const char *GetString(class stringV  * self);
 
 
 static void CarveFonts(class stringV  * self)
@@ -109,12 +97,12 @@ static void DrawLabel(class stringV  * self)
 
 }
 
-static char *GetString(class stringV  * self)
+static const char *GetString(class stringV  * self)
 {
-    char *str;
+    const char *str;
     class value *w = (self)->Value();
     long len,val;
-    char **arr;
+    const char * const *arr;
     str = (w)->GetString();
     if(str == NULL && 
 	((len = (w)->GetArraySize()) != 0) && 
@@ -160,7 +148,7 @@ stringV::stringV()
 
 void stringV::LookupParameters()
 {
-    char * fontname;
+    const char * fontname;
     long fontsize;
     struct resourceList parameters[7];
 
@@ -214,7 +202,7 @@ void stringV::LookupParameters()
 
 void stringV::DrawFromScratch(long  x,long  y,long  width,long  height)
 {
-    char *str;
+    const char *str;
     this->x = x; this->y = y;
     this->height = height; this->width = width;
     if (width > 0 && height > 0)
@@ -245,7 +233,7 @@ void stringV::DrawHighlight()
  
 void stringV::DrawNewValue( )
 {
-    char *str;
+    const char *str;
     if(this->UseAlt) str = GetString(this);
     else str = NULL;
     if(str != NULL && *str) this->label = str;

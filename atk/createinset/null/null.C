@@ -26,14 +26,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/createinset/null/RCS/null.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* null.c		
 
 	Code for the null data object
@@ -89,16 +81,13 @@ ATK_IMPL("null.H")
 /* $$$ */
 	
 ATKdefineRegistry(null, dataobject, null::InitializeClass);
-#ifndef NORCSID
-#endif
-
 
 void
 null::ClearDots()
 	{
-	register struct dotlist *d;
+	struct dotlist *d;
 	for (d = (this)->GetFirstDot();  d != NULL; )  {
-		register struct dotlist *t = (this)->GetNextDot( d);
+		struct dotlist *t = (this)->GetNextDot( d);
 		free(d);
 		d = t;
 	}
@@ -110,7 +99,7 @@ null::ClearDots()
 	void
 null::AddDot(long  x , long  y)
 		{
-	register struct dotlist *d;
+	struct dotlist *d;
 	d = (struct dotlist *)malloc(sizeof (struct dotlist));
 	d->next = (this)->GetFirstDot();
 	d->x = x;
@@ -160,7 +149,7 @@ null::InitializeClass()
 	Fails if syntax of headers is incorrect.
 */
 	long
-null::Read(register FILE   *file, register long   id)
+null::Read(FILE   *file, long   id)
 			{
 	long result = dataobject_BADFORMAT;
 	char s[MAXFILELINE + 2];
@@ -251,7 +240,7 @@ null::Write(FILE   *file, long   writeID, int   level)
 	long id = (this)->GetID();
 	if (this->writeID != writeID) {
 		/* new instance of write, do it */
-		register struct dotlist *d;
+		struct dotlist *d;
 		this->writeID = writeID;
 		sprintf(head, "data{%s, %d}\n", (this)->GetTypeName(), id);
 		fprintf(file, "\\begin%s", head);

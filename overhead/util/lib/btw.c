@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/btw.c,v 2.28 1996/03/28 19:24:24 robr Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	btw.c
 	Library routines for writing B-trees.

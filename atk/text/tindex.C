@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/tindex.C,v 3.11 1995/08/06 23:05:41 wjh Stab74 $";
-#endif
-
-
- 
 ATK_IMPL("tindex.H")
 #include <ctype.h>
 #include <util.h>
@@ -62,7 +54,7 @@ ATK_IMPL("tindex.H")
 #define Data(self) ((class content *)(((class view *) self)->dataobject))
 #define Text(self) ((class text *) ((self)->dataobject))
 
-static char *indexnames[] = {
+static const char * const indexnames[] = {
     "index",
     "indexi",
     ""
@@ -79,14 +71,14 @@ static class textview *getrealview(class view  *v);
 static boolean skipnewlines(class text  *d,long  *pos,long  *len);
 static void printindex(class view  *self, char *usepsstr);
 static void previewindex(class view  *self, char *usepsstr);
-static void tindex_IndexTermCmd(register class view  *v);
-void tindex_ReadIndexFile(register class view  *v);
-void tindex_WriteIndexFile(register class view  *v);
-static void tindex_FudgeFonts(class text  *txt,char  *name , int  ftype);
-void tindex_MakeIndexPlain(register class view  *v);
-void tindex_MakeIndexItalic(register class view  *v);
-void tindex_HideInvIndex(register class view  *v);
-void tindex_ExposeInvIndex(register class view  *v);
+static void tindex_IndexTermCmd(class view  *v);
+void tindex_ReadIndexFile(class view  *v);
+void tindex_WriteIndexFile(class view  *v);
+static void tindex_FudgeFonts(class text  *txt,const char  *name , int  ftype);
+void tindex_MakeIndexPlain(class view  *v);
+void tindex_MakeIndexItalic(class view  *v);
+void tindex_HideInvIndex(class view  *v);
+void tindex_ExposeInvIndex(class view  *v);
 static boolean isindexenv(class content  *self,class text  *text,long  pos,class environment  *env);
 static void skipchapnumber(class text  *d,long  *pos,long  *len);
 static boolean writeindex(FILE  *f,class text  *text,long  pos,class environment  *env);
@@ -206,7 +198,7 @@ void tindex::PrintIndex(class view  *self, boolean useps)
 
 }
 
-void tindex::PreviewIndex(register class view  *self, boolean useps)
+void tindex::PreviewIndex(class view  *self, boolean useps)
 {
     ATKinit;
     boolean oldoption;
@@ -222,10 +214,11 @@ void tindex::PreviewIndex(register class view  *self, boolean useps)
     message::DisplayString(NULL,0,"Index preview window should appear soon.");
 }
 
-static void tindex_IndexTermCmd(register class view  *v)
+static void tindex_IndexTermCmd(class view  *v)
 {
     /* Prompt for an index term and call index_IndexTerm */
-    char thisString[100],*error;
+    char thisString[100];
+    const char *error;
     class text *d;
     long gf,i;
     class textview *self;
@@ -249,11 +242,12 @@ static void tindex_IndexTermCmd(register class view  *v)
 	(d)->NotifyObservers(0);
     }
 }
-void tindex_ReadIndexFile(register class view  *v)
+void tindex_ReadIndexFile(class view  *v)
 {
     /* Prompt for an index term and call index_IndexTerm */
     FILE *f;
-    char thisString[1024],*error;
+    char thisString[1024];
+    const char *error;
     class text *d;
     class textview *self;
     if((self = getrealview(v)) == NULL) return ;
@@ -276,7 +270,7 @@ void tindex_ReadIndexFile(register class view  *v)
 	(d)->NotifyObservers(0);
     }
 }
-void tindex_WriteIndexFile(register class view  *v)
+void tindex_WriteIndexFile(class view  *v)
 {
     /* Prompt for an index term and call index_IndexTerm */
     FILE *f;
@@ -298,7 +292,7 @@ void tindex_WriteIndexFile(register class view  *v)
 
     message::DisplayString(v,0,"Done");
 }
-static void tindex_FudgeFonts(class text  *txt,char  *name , int  ftype)
+static void tindex_FudgeFonts(class text  *txt,const char  *name , int  ftype)
 {
     class style *Style;
     if(txt && (Style = (txt->styleSheet)->Find(name )) != NULL){
@@ -320,25 +314,25 @@ static void tindex_FudgeFonts(class text  *txt,char  *name , int  ftype)
     (txt)->RegionModified(0,(txt)->GetLength());
     (txt)->NotifyObservers(0);
 }
-void tindex_MakeIndexPlain(register class view  *v)
+void tindex_MakeIndexPlain(class view  *v)
 {
     class textview *self;
     if((self = getrealview(v)) == NULL) return ;
     tindex_FudgeFonts(Text(self),"index",fontdesc_Plain);
 }
-void tindex_MakeIndexItalic(register class view  *v)
+void tindex_MakeIndexItalic(class view  *v)
 {
     class textview *self;
     if((self = getrealview(v)) == NULL) return ;
     tindex_FudgeFonts(Text(self),"index",fontdesc_Italic);
 }
-void tindex_HideInvIndex(register class view  *v)
+void tindex_HideInvIndex(class view  *v)
 {
     class textview *self;
     if((self = getrealview(v)) == NULL) return ;
     tindex_FudgeFonts(Text(self),"indexi", tindex_HIDDEN);
 }
-void tindex_ExposeInvIndex(register class view  *v)
+void tindex_ExposeInvIndex(class view  *v)
 {
     class textview *self;
     if((self = getrealview(v)) == NULL) return ;
@@ -346,10 +340,10 @@ void tindex_ExposeInvIndex(register class view  *v)
 }
 
 /* returns 0 if not an index style, nonzero if it is */
-int tindex::StyleNameIndexLevel(char *name)
+int tindex::StyleNameIndexLevel(const char *name)
 {
-    register char **sp;
-    register int which = 0;
+    const char * const *sp;
+    int which = 0;
     if(name == NULL) return 0;
     for(sp = indexnames;which < indexnamecount && sp &&  *sp && **sp; sp++){
 	which++;
@@ -362,7 +356,7 @@ int tindex::StyleNameIndexLevel(char *name)
 
 static boolean isindexenv(class content  *self,class text  *text,long  pos,class environment  *env)
 {
-    char *sn;
+    const char *sn;
     if (env->type == environment_Style){
 	class style *style = env->data.style;
 	if(style == NULL || ((sn = (style)->GetName()) == NULL)) return FALSE;
@@ -371,19 +365,19 @@ static boolean isindexenv(class content  *self,class text  *text,long  pos,class
     else return TRUE;
     return FALSE;
 }
-int tindex::IndexTerm(class text  *d,char  *term,char  **error)
+int tindex::IndexTerm(class text  *d,const char  *term,const char  **error)
 {
 	ATKinit;
 
     char *lastPattern = NULL;
-    char  *tp;
+    const char  *tp;
     int pos = 0, len,dlen,c;
-    register int j;
+    int j;
     class style *Style = NULL;
     class environment *te;
  
     tp =search::CompilePattern(term,(struct SearchPattern **)&lastPattern);
-    if(tp != '\0'){
+    if(tp != NULL){
 	if(error) *error = tp;
 	return -1;
     }
@@ -438,7 +432,8 @@ fflush(stdout);
 static boolean writeindex(FILE  *f,class text  *text,long  pos,class environment  *env)
 {
     long len;
-    char *sn,c;
+    const char *sn;
+    char c;
     if (env->type == environment_Style){
 	class style *style = env->data.style;
 	if(style == NULL || ((sn = (style)->GetName()) == NULL)) return FALSE;
@@ -462,11 +457,12 @@ void tindex::WriteIndexList(class text  *d,FILE  *f)
 
 	(d)->EnumerateEnvironments(0,(d)->GetLength(),(text_eefptr)writeindex,(long)f);
 }
-char *tindex::ReadIndexList(class text  *d,FILE  *f)
+const char *tindex::ReadIndexList(class text  *d,FILE  *f)
 {
 	ATKinit;
 
-    char buf[512],*error,*nl;
+    char buf[512],*nl;
+    const char *error;
     while(fgets(buf,511,f) != NULL){
 	if((nl  = strchr(buf,'\n')) != NULL) *nl = '\0';
 	if(tindex::IndexTerm(d,buf,&error) < 0){

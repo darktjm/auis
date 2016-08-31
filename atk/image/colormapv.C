@@ -22,10 +22,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/image/RCS/colormapv.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
 #include <andrewos.h>
 ATK_IMPL("colormapv.H")
 #include <colormapv.H>
@@ -34,18 +30,16 @@ ATK_IMPL("colormapv.H")
 #include <message.H>
 #include <lpair.H>
 #include <suite.H>
-#include <slider.H>k
+/* #include <slider.H> */ /* just to shut up makedep; this file is not built */
 #include <sliderV.H>
 #include <color.H>
 #include <colorv.H>
-#include <colormap.H>
+/* #include <colormap.H> */ /* just to shut up makedep; this file is not built */
 
 ATKdefineRegistry(colormapv, view, colormapv::InitializeClass);
-#ifndef NORCSID
-#endif
 static long SliderChanged( long rock, long  inten );
-class view * Color_Choice( class colormapv  *self, register class suite  *suite, register struct suite_item  *item, enum view_UpdateType  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
-class view * Control_Choice( class colormapv  *self, register class suite  *suite, register struct suite_item  *item, enum view_UpdateType  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
+class view * Color_Choice( class colormapv  *self, class suite  *suite, struct suite_item  *item, enum view_UpdateType  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
+class view * Control_Choice( class colormapv  *self, class suite  *suite, struct suite_item  *item, enum view_UpdateType  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
 
 
 static suite_Specification cmap_entries[] = {
@@ -134,8 +128,8 @@ SliderChanged( long rock, long  inten )
         {
     struct sliderCBData *callBackData = (struct sliderCBData *) rock;
     class colormapv *self = callBackData->cmapv;
-    register class suite *s = self->controlPanel;
-    register struct suite_item *item = callBackData->item;
+    class suite *s = self->controlPanel;
+    struct suite_item *item = callBackData->item;
     class colormap *cmap = (class colormap *) (self)->GetDataObject();
     class color *c;
     if(c = self->currentColor) {
@@ -174,7 +168,7 @@ colormapv::FullUpdate( enum view_UpdateType  type, long  left , long  top , long
   (this)->GetVisualBounds( &r);
   if((this->map)->ItemCount() == 0) {
       int size = (cmap)->Used();
-      register int i, j;
+      int i, j;
       struct suite_item *item;
 
       firstTime = TRUE;
@@ -223,13 +217,13 @@ colormapv::Update( )
 }
 
 class view *
-Color_Choice( class colormapv  *self, register class suite  *suite, register struct suite_item  *item, enum view_UpdateType  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
+Color_Choice( class colormapv  *self, class suite  *suite, struct suite_item  *item, enum view_UpdateType  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
             {
   if(item && action == view_LeftDown) {
       class suite *s = self->controlPanel;
       class color *c;
       unsigned short R, G, B;
-      register int i;
+      int i;
 
       c = (class color *) (self->map)->ItemDataObject( item);
       (c)->GetRGB( R, G, B);
@@ -254,7 +248,7 @@ Color_Choice( class colormapv  *self, register class suite  *suite, register str
 }
 
 class view *
-Control_Choice( class colormapv  *self, register class suite  *suite, register struct suite_item  *item, enum view_UpdateType  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
+Control_Choice( class colormapv  *self, class suite  *suite, struct suite_item  *item, enum view_UpdateType  type, enum view_MouseAction  action, long  x , long  y , long  clicks )
             {
   if(item && action == view_LeftDown) {
       message::DisplayString(self, 0, (char *) ((suite)->ItemAttribute( item, suite_itemcaption )) );

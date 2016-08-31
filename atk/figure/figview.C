@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-char *figv_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figview.C,v 3.25 1996/02/16 16:46:01 robr Stab74 $";
-#endif 
-
 #include <andrewos.h>
 ATK_IMPL("figview.H")
 #include <math.h>
@@ -69,9 +65,9 @@ static char debug=0;
 
 struct printlump {
     FILE *file;
-    char *prefix;
+    const char *prefix;
     class figview *figview;
-    char *processor, *format; /* if these are NULL, we're using the new PS printing code. */
+    const char *processor, *format; /* if these are NULL, we're using the new PS printing code. */
     struct rectangle visrect; /* useful for optimizing */
 };
 
@@ -442,14 +438,14 @@ class view *figview::GetApplicationLayer()
 
    
  
-static struct scrollfns	vertical_scroll_interface =
+static const struct scrollfns	vertical_scroll_interface =
 {(scroll_getinfofptr)y_getinfo, (scroll_setframefptr)y_setframe, NULL, (scroll_whatfptr)y_whatisat};
-static struct scrollfns	horizontal_scroll_interface =
+static const struct scrollfns	horizontal_scroll_interface =
 {(scroll_getinfofptr)x_getinfo, (scroll_setframefptr)x_setframe, NULL, (scroll_whatfptr)x_whatisat};
 
-char *figview::GetInterface(char  *interface_name)
+const void *figview::GetInterface(const char  *interface_name)
 {
-    struct scrollfns *interface;
+    const struct scrollfns *interface;
     
     if (strcmp(interface_name, "scroll,vertical") == 0)
 	interface = &vertical_scroll_interface;
@@ -457,7 +453,7 @@ char *figview::GetInterface(char  *interface_name)
 	interface = &horizontal_scroll_interface;
     else
 	interface = NULL;
-    return (char *)interface;
+    return interface;
 }
 
 static void x_getinfo(class figview  *self, struct range  *total , struct range  *seen , struct range  *dot)
@@ -1269,7 +1265,7 @@ static void UpdateCache(class figview  *self, boolean  needfull )
 	/* entirely separate things to deal with inset bits. Note that o may be NULL in these blocks. */
 	o = self->objs[ix].o;
 	{
-	    char *name;
+	    const char *name;
 
 	    if (o && (o)->IsInset())
 		dobj = ((class figoins *)o)->GetDataObject();
@@ -2278,7 +2274,7 @@ static void PasteSelProc(class figview  *self, long  rock)
 {
     class figure *fig = (class figure *)(self)->GetDataObject();
     FILE *fp;
-    /*static char hdr[] = "\\begindata{figure,";
+    /*static const char hdr[] = "\\begindata{figure,";
      char *hx = hdr;*/
     char namebuf[100];
 #define LINELENGTH (250)
@@ -2647,12 +2643,12 @@ static boolean PrintSplot(class figobj  *o, long  ref, class figure  *fig, struc
     return FALSE;
 }
 
-void figview::Print(FILE  *file, char  *processor, char  *format, boolean  toplevel)
+void figview::Print(FILE  *file, const char  *processor, const char  *format, boolean  toplevel)
 {
     class figure *fig = (class figure *)this->dataobject;
     long wpts, hpts;  /* image dimensions in points */
     long tmpval;
-    char *prefix;
+    const char *prefix;
     struct printlump lump;
     boolean landscape = fig->GetPrintLandscape();
     
@@ -2924,7 +2920,7 @@ void figview::PrintPSDoc(FILE *outfile, long pagew, long pageh)
 
 }
 
-void *figview::GetPSPrintInterface(char *printtype)
+void *figview::GetPSPrintInterface(const char *printtype)
 {
     if (!strcmp(printtype, "generic"))
 	return (void *)this;
@@ -3084,7 +3080,7 @@ static void ToolsetKillProc(class figview  *self, char  *rock)
 void figview::BuildToolList(struct figtoolview_tool_t *&list, int &listnum, int &listsize)
 {
 #define FIGOBJS_NUM (12)
-    static struct figtoolview_tool_t objectlayout[FIGOBJS_NUM] = {
+    static const struct figtoolview_tool_t objectlayout[FIGOBJS_NUM] = {
 	{"figotext", 0},
 	{"figoplin", 1},
 	{"figoplin", 0},
@@ -3175,7 +3171,7 @@ void figview::LinkTree( class view  *parent )
 {
     this->view::LinkTree( parent);
     if (parent && this->GetIM()) {
-	register int ix;
+	int ix;
 	class figobj *o;
 	for (ix = 0; ix < this->objs_size; ix++ ) {
 	    o = this->objs[ix].o;

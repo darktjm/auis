@@ -21,11 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-	char *tlex_readtabc_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/syntax/tlex/RCS/readtabc.C,v 1.2 1993/05/18 17:27:02 rr2b Stab74 $";
-#endif
-
-
 #include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
@@ -55,8 +50,6 @@
 		      \o	      :  other characters, unchanged
 	(This code was once identical to a portion of parse/lexan.c)
 */
-	#ifndef NORCSID
-#endif
 int TransEscape(char  *buf, int  *plen);
 char * ScanToken(char  *cx, char  *sub);
 int  ScanTokenToNumber(char  *cx, char  *sub);

@@ -1,7 +1,3 @@
-#
-# @(#)Makefile	1.6 87/11/30 3.9 RPCSRC
-#
-#
 RPCCOM = rpcgen
 LIB = -lrpclib
 

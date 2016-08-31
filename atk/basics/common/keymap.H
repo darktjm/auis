@@ -74,8 +74,8 @@ public:
         keymap(const keymap &o);
 	virtual ~keymap();
 
-    virtual boolean BindToKey(char *keys, struct proctable_Entry *pe, long rock)	 ;
-    virtual void RemoveBinding(char *keys);
+    virtual boolean BindToKey(const char *keys, const struct proctable_Entry *pe, long rock)	 ;
+    virtual void RemoveBinding(const char *keys);
     virtual void InsertObject(long slot, ATK  *object, long rock, enum keymap_Types type);
     /* Lookup stuffs an object in the char * and returns an int that describes its type. */
     virtual enum keymap_Types Lookup(char key, ATK  **object, long *rockP)  ;

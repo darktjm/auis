@@ -94,7 +94,7 @@ public:
    class view * Hit( enum view_MouseAction action, long x, long y, long n )	 ;
    void ObservedChanged( class observable *changed, long value );
    void UnlinkNotification( class view *linkee );
-   void Print( FILE *file, char *processor, char *finalFormat, boolean topLevel );
+   void Print( FILE *file, const char *processor, const char *finalFormat, boolean topLevel );
 
 
 
@@ -107,7 +107,7 @@ public:
   virtual void PrintChart();
   virtual class view * HitChart( enum view_MouseAction action, long x, long y, long clicks )		 ;
   virtual void ObserveChart( long change );
-  virtual char * Moniker()					 ;
+  virtual const char * Moniker()					 ;
 
 
 
@@ -157,7 +157,7 @@ public:
 				  left_scale, right_scale, top_scale, bottom_scale,
 				  left_labels, right_labels, top_labels, bottom_labels;
   class fontdesc		 *scale_font, *label_font, *graphic_font;
-  char				 *scale_font_name, *label_font_name;
+  const char			 *scale_font_name, *label_font_name;
   class graphic		 *dotted_graphic, *dashed_graphic;
   struct chart_item_shadow	 *item_shadows;
   struct chart_item		 *current_item;

@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/thumbV.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("thumbV.H")
 #include <thumbV.H>
 #include <fontdesc.H>
@@ -87,8 +77,6 @@ static class atom *  A_string;
 
 
 ATKdefineRegistry(thumbV, valueview, thumbV::InitializeClass);
-#ifndef NORCSID
-#endif
 static void CarveFonts(class thumbV  * self);
 static void getsizes(class thumbV  * self);
 static void DrawLabel(class thumbV  * self);
@@ -152,14 +140,14 @@ static void DrawLabel(class thumbV  * self)
     }
 
 }
-char *thumbV::GetValueString()
+const char *thumbV::GetValueString()
 {
     sprintf(this->buf,"%ld",(this)->GetTmpVal());
     return this->buf;
 }
 static void DrawValue(class thumbV  * self)
 {
-    char *buf;   
+    const char *buf;   
     buf = (self)->GetValueString();
     (self)->SetTransferMode(  graphic_COPY);
     (self)->EraseRect( &self->valrec);
@@ -285,7 +273,7 @@ thumbV::thumbV()
 
 void thumbV::LookupParameters()
 {
-    char * fontname;
+    const char * fontname;
     long fontsize,diff;
     struct resourceList parameters[10];
 

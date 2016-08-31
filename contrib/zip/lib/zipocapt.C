@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipocapt.C,v 1.5 1993/09/30 19:51:01 rr2b Stab74 $";
-#endif
-
 /* zipocapt.c	Zip Object -- Captions					      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */

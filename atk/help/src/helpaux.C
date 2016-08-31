@@ -25,20 +25,10 @@
 //  $
 */
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/RCS/helpaux.C,v 1.9 1995/02/17 21:00:41 Zarf Stab74 $";
-#endif
-
-/* $ACIS$ */
-
-
-
 #define label gezornenplatz
 /* sys/types.h in AIX PS2 defines "struct label", causing a type name clash.
    Avoid this by temporarily redefining "label" to be something else in the preprocessor. */
+#include <andrewos.h> /* sys/types.h sys/file.h */
 #undef label
 
 /* BSD/RT is overflowing the cpp define table. */
@@ -133,16 +123,16 @@ void init_hlptextview(class hlptextview  *hv);
 static int safesystem(char  *acmd);
 static class frame * getframe(class view  *vw);
 static void  destroyWindow(class help  *self);
-void help_aux_ExitProc(register class help  *self);
-void help_aux_Print(register class help  *self);
-static void ShowHelp(register class help  *self, char  *topic, boolean  new_win);
+void help_aux_ExitProc(class help  *self);
+void help_aux_Print(class help  *self);
+static void ShowHelp(class help  *self, char  *topic, boolean  new_win);
 static void CompletionSplot(char  *name , char  *original, struct helpdb_completesplot  *rock);
 static enum message_CompletionCode HelpCompletionProc(char  *string, class help  *self, char  *buffer, int  buffersize);
 static int lenstrcmp(char *s1 , char *s2);
 static void HelpEnumProc(char  *name , char  *original, struct help_helpsplot  *rock);
 static void HelpHelpProc(char  *partialKeyword, class help  *rock, message_workfptr HelpWork, char  *hrock);
-void help_aux_NewHelp(register class help  *self, long  type		/* help_ON 			if Help On... */);
-void help_aux_AddBookmark(register class help  *self);
+void help_aux_NewHelp(class help  *self, long  type		/* help_ON 			if Help On... */);
+void help_aux_AddBookmark(class help  *self);
 void help_aux_AddSearchDir(class help  *self);
 
 
@@ -509,7 +499,7 @@ help::~help()
 /*
  * help__ method interface for using an alias file
  */
-void help::SetAliasesFile(register const char  *alias)
+void help::SetAliasesFile(const char  *alias)
 {
 	ATKinit;
 
@@ -519,7 +509,7 @@ void help::SetAliasesFile(register const char  *alias)
 /*
  * help__ method for adding a help index directory
  */
-void help::SetIndex(register const char  *aindex)
+void help::SetIndex(const char  *aindex)
 {
 	ATKinit;
 
@@ -684,7 +674,7 @@ void help::Update()
 /*
  * update event handler
  */
-void help::WantUpdate(register class view  *requestor)
+void help::WantUpdate(class view  *requestor)
 {
     /* if the scrollbar took the hit, check if the user has selected something,
        and turn on some menus items if so */
@@ -714,7 +704,7 @@ static int safesystem(char  *acmd)
 /*
  * classproc to handle getting help using a terminal-based interface
  */
-void help::GetHelpOnTerminal(register const char  *akey		/* topic string */,register int  list		/* do help on topic, or just list files? */,register int  print		/* prompt for printing each helpfile? */)
+void help::GetHelpOnTerminal(const char  *akey		/* topic string */,int  list		/* do help on topic, or just list files? */,int  print		/* prompt for printing each helpfile? */)
 {
 	ATKinit;
 
@@ -913,7 +903,7 @@ destroyWindow(class help  *self)
 /*
  * Allows help to just delete one window
  */
-void help_aux_ExitProc(register class help  *self)
+void help_aux_ExitProc(class help  *self)
 {
     struct self_help *t, *p;
 
@@ -968,7 +958,7 @@ void help_aux_ExitProc(register class help  *self)
 /*
  * print a help file
  */
-void help_aux_Print(register class help  *self)
+void help_aux_Print(class help  *self)
 {
     int pmode;
 #ifdef PSPRINTING_ENV
@@ -988,7 +978,7 @@ void help_aux_Print(register class help  *self)
  * show the new help
  */
 static void
-ShowHelp(register class help  *self, char  *topic, boolean  new_win)
+ShowHelp(class help  *self, char  *topic, boolean  new_win)
 { 
     class help *hv;
     class im *imp;
@@ -1192,12 +1182,12 @@ static void HelpHelpProc(char  *partialKeyword, class help  *rock, message_workf
  * get help on a prompted-for topic or a selected word, bringing up a
  * new window if necessary
  */
-void help_aux_NewHelp(register class help  *self, long  type		/* help_ON 			if Help On... */)
+void help_aux_NewHelp(class help  *self, long  type		/* help_ON 			if Help On... */)
 			/* help_ON & help_NEW_WIN	if New Help On... */
 			/* help_SEL			if Help On Selected */
 			/* help_SEL & help_NEW_WIN	if New Help On Selected */
 {
-    register int i, pos, len, code;
+    int i, pos, len, code;
     char tc;
     char helpName[HNSIZE];
 
@@ -1238,7 +1228,7 @@ void help_aux_NewHelp(register class help  *self, long  type		/* help_ON 			if H
 /*
  * Add a history item for a given file with given dot, dotlen and top
  */
-void help_aux_AddBookmark(register class help  *self)
+void help_aux_AddBookmark(class help  *self)
 {
     AddHistoryItem(self, help_HE_BOOKMARK, help_SHOW_HIST);
 }

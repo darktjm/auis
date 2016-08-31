@@ -19,14 +19,7 @@
 //  $
  */
 
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/prefs.C,v 1.10 1994/11/30 20:42:06 rr2b Stab74 $ */
-
 #include <andrewos.h>
-
-#ifndef NORCSID
-static UNUSED const char *rcsid_prefs_c = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/prefs.C,v 1.10 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif /* NORCSID */
-
 ATK_IMPL("prefs.H")
 #include <math.h>
 
@@ -47,8 +40,6 @@ ATK_IMPL("prefs.H")
 
 
 ATKdefineRegistry(prefs, text, NULL);
-#ifndef NORCSID
-#endif /* NORCSID */
 static int FindCat(struct prefgroup  *a, char  *b);
 static void FreeHelpStyles(class prefs  *self);
 static class environment *AddStyle(class text  *self, long  pos , long  len, class style  *style);
@@ -58,7 +49,7 @@ static void freestringlist(class list  *vl);
 static boolean freeall(struct prefdesc  *pd, class prefs  *rock);
 static boolean freegroups(struct prefgroup  *pg, class prefs  *self);
 static boolean AddViews(char  *vname, struct therock  *tr);
-static struct prefdesc *NewPrefDesc(class prefs  *self, char  *p);
+static struct prefdesc *NewPrefDesc(class prefs  *self, const char  *p);
 static boolean CopyViewName(char  *name, class list  *nl);
 static class list *CopyViewList(class list  *vl);
 static boolean CopyStr(char  *name, class list  *nl);
@@ -71,11 +62,9 @@ static boolean ListsEqual(class list  *l1 , class list  *l2);
 static boolean InsertPref(struct prefdesc  *pd, class prefs  *self);
 static void HandlePref(class prefs  *self, struct prefline  *line, int  *order);
 static char *myindex(char  *p, char  ch);
-static char * SetBuf(struct wbuf  *wb, char  *str);
-#ifndef MAX
-#endif
+static char * SetBuf(struct wbuf  *wb, const char  *str);
 static void AddHelpStyle(class prefs  *self, long  pos, long  len, enum style_type  type);
-static void AddCategory(class prefs  *self, char  *group, long  pos);
+static void AddCategory(class prefs  *self, const char  *group, long  pos);
 static boolean ReadPrefLine(class prefs  *self,struct prefline  *line);
 static int sortbyname(struct prefdesc  *pd1 , struct prefdesc  *pd2);
 static int sortbyapp(struct prefdesc  *pd1 , struct prefdesc  *pd2);
@@ -298,7 +287,7 @@ prefs::~prefs()
 
 static boolean endflag=TRUE;
 
-static char *trans[]={
+static const char * const trans[]={
     "file", "pvaltvf",
     "string", "pvaltv",
     "integer", "pvaltv",
@@ -316,9 +305,9 @@ static char *trans[]={
     NULL, NULL
 };
 
-char *prefs::TranslateViewName(char  *name)
+const char *prefs::TranslateViewName(const char  *name)
 {
-    char **p=trans;
+    const char * const *p=trans;
     while(p[0] && !FOLDEDEQ(p[0],name)) {
 	p+=2;
     }
@@ -334,8 +323,8 @@ char *prefs::TranslateViewName(char  *name)
 
 struct thedescrock {
     struct prefdesc *pd;
-    char *name;
-    char *app;
+    const char *name;
+    const char *app;
     char *cond;
 };
 
@@ -356,10 +345,10 @@ static boolean AddViews(char  *vname, struct therock  *tr)
     return TRUE;
 }
 
-static struct prefdesc *NewPrefDesc(class prefs  *self, char  *p)
+static struct prefdesc *NewPrefDesc(class prefs  *self, const char  *p)
 {
     struct prefdesc *result=(struct prefdesc *)malloc(sizeof(struct prefdesc));
-    char *q;
+    char *q, *mp, *pp;
     enum prefval_Type type;
     char separators[3];
     separators[0]=separators[1]=separators[2]='\0';
@@ -385,22 +374,24 @@ static struct prefdesc *NewPrefDesc(class prefs  *self, char  *p)
     result->expert=FALSE;
     result->prevlines=NULL;
     result->pm=NULL;
-    q=strchr(p, ' ');
+    mp = strdup(p);
+    q=strchr(mp, ' ');
     if(q) *q='\0';
-    result->type=prefval::StringToType(p);
-    if(q==NULL) return result;
+    result->type=prefval::StringToType(mp);
+    if(q==NULL){ free(mp); return result; }
     q++;
-    p=strchr(q, ' ');
-    if(p) *p='\0';
+    pp=strchr(q, ' ');
+    if(pp) *pp='\0';
     if(FOLDEDEQ(q, "List")) {
 	result->listsize=65536;
-	if(p) {
-	    p++;
-	    strncpy(separators, p, 2);
+	if(pp) {
+	    pp++;
+	    strncpy(separators, pp, 2);
 	} else strcpy(separators, ":");
 
 	result->seps=SAVESTR(separators);
     }
+    free(mp);
     return result;
 }
 
@@ -484,8 +475,8 @@ static boolean FixOrderValues(struct prefdesc  *pd, long  val)
 struct prefdesc *prefs::DuplicatePref(struct prefdesc  *pd, char  *newapp , char  *newcond)
 {
     struct prefdesc *result=DuplicateDesc(pd);
-    char *v;
-    static char *star;
+    const char *v;
+    static const char *star;
 
     if(star==NULL) star=SAVESTR("*");
     
@@ -588,13 +579,13 @@ static class list *HandleViewList(class prefs  *self, char  *buf)
     if(vl==NULL) return NULL;
     while(p) {
 	char *q=strchr(p, ' ');
-	char *vname;
+	const char *vname;
 	long pos=(self)->GetLength();
 	if(q) *q='\0';
 	if(*p!='\0') {
 	    vname=SAVESTR(prefs::TranslateViewName(p));
 	    if(vname==NULL) continue;
-	    (vl)->InsertEnd( vname);
+	    (vl)->InsertEnd( (char *)vname);
 	}
 	if(q) p=q+1;
 	else break;
@@ -605,8 +596,8 @@ static class list *HandleViewList(class prefs  *self, char  *buf)
 
 static boolean FindDesc(struct prefdesc  *pd, struct thedescrock  *rock)
 {
-    char *app=rock->app;
-    char *name=rock->name;
+    const char *app=rock->app;
+    const char *name=rock->name;
     char *cond=rock->cond;
 
     if(pd->shadow) return TRUE;
@@ -674,10 +665,10 @@ static void HandlePref(class prefs  *self, struct prefline  *line, int  *order)
     struct prefdesc *desc;
     struct thedescrock otherrock;
     boolean newobj=FALSE;
-    char *app=SAVESTR(line->app), *name=SAVESTR(line->name);
+    const char *app=SAVESTR(line->app), *name=SAVESTR(line->name);
     char *cond=line->cond;
     char *val=line->val;
-    char *group=SAVESTR(line->group);
+    const char *group=SAVESTR(line->group);
 
     otherrock.app=app;
     otherrock.name=name;
@@ -687,13 +678,13 @@ static void HandlePref(class prefs  *self, struct prefline  *line, int  *order)
    if(!line->type || self->readingdefaults) (self->prefsp)->Enumerate((list_efptr)FindDesc, (char *)&otherrock);
     if(otherrock.pd==NULL) {
 	if(line->shadow) fprintf(stderr, "prefs WARNING: no match found for shadow preference %s.%s\n", app, name);
-	desc=NewPrefDesc(self, line->type?line->type:(char *)"String");
+	desc=NewPrefDesc(self, line->type?line->type:"String");
 	desc->helppos=line->helppos;
 	if(line->expert>=0) desc->expert=line->expert;
 	if(line->vl && (line->vl)->Size()>0) desc->defviews=CopyViewList(line->vl);
 	else {
 	    desc->defviews=new list;
-	    (desc->defviews)->InsertEnd( SAVESTR("pvaltv"));
+	    (desc->defviews)->InsertEnd( (char *)SAVESTR("pvaltv"));
 	}
 	if(line->views) desc->views=SAVESTR(line->views);
 	else desc->views=SAVESTR("pvaltv");
@@ -852,7 +843,7 @@ static struct wbuf condbuf={
     0
 };
 
-static char * SetBuf(struct wbuf  *wb, char  *str)
+static char * SetBuf(struct wbuf  *wb, const char  *str)
 {
     if(str==NULL) str="";
     if(wb->buf==NULL) {
@@ -904,7 +895,7 @@ static void AddHelpStyle(class prefs  *self, long  pos, long  len, enum style_ty
 #define ValBufSet(str) SetBuf(&valbuf, str)
 #define CondBufSet(str) SetBuf(&condbuf, str)
 
-static void AddCategory(class prefs  *self, char  *group, long  pos)
+static void AddCategory(class prefs  *self, const char  *group, long  pos)
 {
     struct prefgroup *pg=(struct prefgroup *)(self->categories)->Enumerate((list_efptr)FindCat, (char *)group);
     if(pg==NULL) {
@@ -919,7 +910,8 @@ static void AddCategory(class prefs  *self, char  *group, long  pos)
 
 static boolean ReadPrefLine(class prefs  *self,struct prefline  *line)
 {
-    char *buf=NULL, *pp, *app, *name, *val;
+    char *buf=NULL, *pp, *name, *val;
+    const char *app;
     boolean errorflag=FALSE;
     boolean seentype=FALSE;
     boolean seenviews=FALSE;
@@ -1355,9 +1347,9 @@ static void twrite(struct writerock  *rock, struct prefdesc  *pd)
 
 void prefs::UpdateOneInText(struct prefdesc  *pd)
 {
-    char *nval=(pd->obj)->FullPreferenceString();
+    const char *nval=(pd->obj)->FullPreferenceString();
     int len;
-    nval=nval?nval:(char *)"";
+    nval=nval?nval:"";
     len=strlen(nval);
     if(pd->pm==NULL) {
 	long pos=(this)->GetLength();
@@ -1464,7 +1456,7 @@ static char *ReadLine(class text *self)
 }
 
 
-char *prefs::ViewName()
+const char *prefs::ViewName()
 {
     return "pintv";
 }

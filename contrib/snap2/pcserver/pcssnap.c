@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/pcserver/RCS/pcssnap.c,v 2.13 1992/12/15 21:06:36 rr2b Stab74 $";
-#endif
-
 /*
  *      PC Server - SNAP Interface Component
  *      Access to the UNIX File System for IBM PC/XT/ATs
@@ -195,7 +190,7 @@ char *argv[];
 char *PCS_ExtractStringFromMsg(ip,dst)
 char *ip;
 char **dst;
-{register char *op=SNAP_ExtractStringFromMsg(ip,dst);
+{char *op=SNAP_ExtractStringFromMsg(ip,dst);
 if((*dst)==0) {
     *dst = "";
     fprintf(stderr,"pcserver extacted bogus string\n");

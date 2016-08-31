@@ -25,22 +25,13 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/eq/RCS/eqvcmds.C,v 1.7 1994/08/12 18:50:25 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * eqvcmds.c
  * This module handles the view commands for eq.
  */
 
 
+#include <andrewos.h>
 
 #define AUXMODULE 1
 #include <eqview.H>
@@ -59,10 +50,10 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 
-char *line = "{ zilch ^}";
+const char line[] = "{ zilch ^}";
 
-char* eqview_cut_prefix = "{ lpile d_eqstyle { ";
-char* eqview_cut_suffix = "} } ";
+const char eqview_cut_prefix[] = "{ lpile d_eqstyle { ";
+const char eqview_cut_suffix[] = "} } ";
 
 /*
  * Call this routine when you have changed something in
@@ -70,8 +61,6 @@ char* eqview_cut_suffix = "} } ";
  * the screen eventually via the update mechanism.
  */
 
-#ifndef NORCSID
-#endif
 void eqview_Default(class eqview  *self, char  c);
 void eqview_WriteC(class eqview  *self);
 void eqview_WritePS(class eqview  *self);
@@ -101,13 +90,13 @@ void eqview_Paste(class eqview  *self);
 void eqview_Exit();
 void eqview_DumpAndWrite(class eqview  *self);
 void eqview_doc();
-void eqview_DoSpecial(class eqview  *self, char  *s);
+void eqview_DoSpecial(class eqview  *self, const char  *s);
 void eqview_Special(class eqview  *self, char  c);
 void eqview_SuperScript(class eqview  *self);
 void eqview_SubScript(class eqview  *self);
 void eqview_AboveScript(class eqview  *self);
 void eqview_BelowScript(class eqview  *self);
-void eqview_String(class eqview  *self, char  *s);
+void eqview_String(class eqview  *self, const char  *s);
 void eqview_Root(class eqview  *self);
 void eqview_Fraction(class eqview  *self);
 void eqview_lbrace(class eqview  *self);
@@ -182,7 +171,7 @@ void eqview_WriteDvi(class eqview  *self)
 void eqview_PreviewMe(self)
 struct eqview *self;
 {
-    register struct eq *eqptr = Eq(self);
+    struct eq *eqptr = Eq(self);
     FILE *file;
 
     message_DisplayString(self, 0, "Processing preview request.");
@@ -196,7 +185,7 @@ struct eqview *self;
 void eqview_PrintMe(self)
 struct eqview *self;
 {
-    register struct eq *eqptr = Eq(self);
+    struct eq *eqptr = Eq(self);
     FILE *file;
 
     message_DisplayString(self, 0, "Processing print request.");
@@ -210,7 +199,7 @@ struct eqview *self;
 void eqview_WriteOutFile(self)
 struct eqview *self;
 {
-    register struct eq *eqptr = Eq(self);
+    struct eq *eqptr = Eq(self);
     char name[MAXFILENAME], out[500];
     long code;
     FILE *file;
@@ -245,7 +234,7 @@ struct eqview *self;
 void eqview_Save(self)
 struct eqview *self;
 {
-    register struct eq *eqptr = Eq(self);
+    struct eq *eqptr = Eq(self);
     char out[500];
     FILE *file;
 
@@ -269,7 +258,7 @@ struct eqview *self;
 void eqview_ReadInFile(self)
 struct eqview *self;
 {
-    register struct eq *eqptr = Eq(self);
+    struct eq *eqptr = Eq(self);
     char name[MAXFILENAME], out[500];
     long code;
     FILE *file;
@@ -314,15 +303,15 @@ struct eqview *self;
 
 long eqview_MoveRight(class eqview  *self, class eq  *eqptr, long  i , long  x)
 {
-    register int n = (eqptr)->FindEndGroup( i+1), closest = 0, distance = 1000000, j;
+    int n = (eqptr)->FindEndGroup( i+1), closest = 0, distance = 1000000, j;
     for (j = i+1;  j<=n;  j++) {
-	register struct formula *f = (eqptr)->Access( j);
+	struct formula *f = (eqptr)->Access( j);
 	if (f->symbol->type == ALIGN)
 	    j = (eqptr)->FindEndGroup( j);
 	else if (f->symbol->type==SCRIPT && (eqptr)->Access(j+1)->symbol->type==BEGIN)
 	    j = (eqptr)->FindEndGroup( j+2);
 	else if (f->has_hot_spot) {
-	    register int dx = f->hot.x - x;
+	    int dx = f->hot.x - x;
 	    dx = ABS(dx);
 	    if (dx < distance) {
 		closest = j;
@@ -335,7 +324,7 @@ long eqview_MoveRight(class eqview  *self, class eq  *eqptr, long  i , long  x)
 
 void eqview_MoveForward(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     long n = (eqptr)->Size(), i, pos, len;
     pos = (self)->GetDotPosition();
     len = (self)->GetDotLength();
@@ -367,7 +356,7 @@ void eqview_MoveForward(class eqview  *self)
 
 void eqview_MoveBackward(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     int i, pos, len;
     pos = (self)->GetDotPosition();
     len = (self)->GetDotLength();
@@ -403,7 +392,7 @@ void eqview_MoveBackward(class eqview  *self)
 
 void eqview_MoveToBeginning(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     int pos, len;
     /*eqview_MoveBackward(eqptr);*/
     pos = (self)->GetDotPosition();
@@ -425,7 +414,7 @@ void eqview_MoveToBeginning(class eqview  *self)
 
 void eqview_MoveToEnd(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     int pos, len;
     /*eqview_MoveForward(eqptr);*/
     pos = (self)->GetDotPosition();
@@ -444,7 +433,7 @@ void eqview_MoveToEnd(class eqview  *self)
 
 void eqview_DeleteBackward(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     int pos, len, start, stop;
 
     pos = (self)->GetDotPosition();
@@ -478,7 +467,7 @@ void eqview_DeleteBackward(class eqview  *self)
 
 void eqview_DeleteForward(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     int pos, len, start, stop;
 
     pos = (self)->GetDotPosition();
@@ -513,7 +502,7 @@ void eqview_DeleteForward(class eqview  *self)
 
 void eqview_CR(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     long i, pos, len, added, n = (eqptr)->Size();;
 
     pos = (self)->GetDotPosition();
@@ -536,7 +525,7 @@ void eqview_CR(class eqview  *self)
 
 void eqview_MoveUp(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     long i;
     int pos, len;
     struct formula *start;
@@ -604,7 +593,7 @@ void eqview_MoveUp(class eqview  *self)
 
 void eqview_MoveDown(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     long i;
     int pos, len, j;
     struct formula *start;
@@ -689,7 +678,7 @@ void eqview_MoveDown(class eqview  *self)
 
 void eqview_Bar(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     long pos, len, start, stop;
 
     pos = (self)->GetDotPosition();
@@ -712,7 +701,7 @@ void eqview_Bar(class eqview  *self)
 
 void eqview_Dot(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     long n, pos, len, added = 0;
 
     pos = (self)->GetDotPosition();
@@ -737,7 +726,7 @@ void eqview_Dot(class eqview  *self)
 
 void eqview_Prime(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     long n, pos, len, added = 0;
 
     pos = (self)->GetDotPosition();
@@ -767,7 +756,7 @@ void eqview_Prime(class eqview  *self)
 #ifdef notdef
 void eqview_Open(class eqview  *self, char  c)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     long pos, len, added;
     char buf[20];
 
@@ -787,7 +776,7 @@ void eqview_Open(class eqview  *self, char  c)
 
 void eqview_Close(class eqview  *self, char  c)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     long pos, len, added, level = 0, i, matched = 0;
     struct formula *f;
 
@@ -803,7 +792,7 @@ void eqview_Close(class eqview  *self, char  c)
 	    break;
 	else if (f->symbol->genre == CLOSE)
 	    level++;
-	else if (f->symbol->genre == OPEN && f->symbol != root) {	
+	else if (f->symbol->genre == OPEN && f->symbol != eq_root) {	
 	    if (level != 0)
 		level--;
 	    else {
@@ -905,7 +894,7 @@ void eqview_Copy(class eqview  *self)
 void eqview_Paste(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
-    register int i;
+    int i;
     long pos, len;
     FILE *pasteFile;
     long ct;
@@ -919,9 +908,9 @@ void eqview_Paste(class eqview  *self)
     pos += len;
     len = 0;
 
-    if ((f = (eqptr)->Access( pos)) != NULL && f->symbol == zilch)
+    if ((f = (eqptr)->Access( pos)) != NULL && f->symbol == eq_zilch)
 	(eqptr)->Delete( pos);
-    if ((f = (eqptr)->Access( pos-1)) != NULL && f->symbol ==  zilch)
+    if ((f = (eqptr)->Access( pos-1)) != NULL && f->symbol ==  eq_zilch)
 	(eqptr)->Delete( --pos);
 
     while(i < ct) {
@@ -1027,7 +1016,7 @@ void eqview_doc()
  * Called as a result of eqview_Special
  */
 
-void eqview_DoSpecial(class eqview  *self, char  *s)
+void eqview_DoSpecial(class eqview  *self, const char  *s)
 {
     long pos, len, added;
 
@@ -1238,7 +1227,7 @@ struct eqview *self;
 
 void eqview_SuperScript(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     long pos, len, n;
 
     pos = (self)->GetDotPosition();
@@ -1253,7 +1242,7 @@ void eqview_SuperScript(class eqview  *self)
 
 void eqview_SubScript(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     long pos, len, n;
 
     pos = (self)->GetDotPosition();
@@ -1268,7 +1257,7 @@ void eqview_SubScript(class eqview  *self)
 
 void eqview_AboveScript(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     long pos, len, n;
 
     pos = (self)->GetDotPosition();
@@ -1283,7 +1272,7 @@ void eqview_AboveScript(class eqview  *self)
 
 void eqview_BelowScript(class eqview  *self)
 {
-    register class eq *eqptr = Eq(self);
+    class eq *eqptr = Eq(self);
     long pos, len, n;
 
     pos = (self)->GetDotPosition();
@@ -1301,7 +1290,7 @@ void eqview_BelowScript(class eqview  *self)
  * There should be a third parameter to keymap-called routines!
  */
 
-void eqview_String(class eqview  *self, char  *s)
+void eqview_String(class eqview  *self, const char  *s)
 {
     long pos, len, added;
 
@@ -1441,7 +1430,7 @@ class keymap *eqview_InitKeyMap(struct ATKregistryEntry   *classInfo, class menu
 {
     class keymap *keymapp = new keymap;
     char str[2];
-    register int i;
+    int i;
     struct proctable_Entry *def;
 
     if (eqviewMenus != NULL)

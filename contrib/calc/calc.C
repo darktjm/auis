@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/calc/RCS/calc.C,v 1.3 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
 /*
     $Log: calc.C,v $
  * Revision 1.3  1995/11/07  20:17:10  robr
@@ -98,12 +92,8 @@ END-SPECIFICATION  ************************************************************/
 
 
 ATKdefineRegistry(calc, apt, NULL);
-#ifndef NORCSID
-#endif
-#ifndef lint
-#endif
-static void Reader( register class calc	    	      *self );
-static void Writer( register class calc		      *self );
+static void Reader( class calc	    	      *self );
+static void Writer( class calc		      *self );
 
 
 calc::calc( )
@@ -125,7 +115,7 @@ calc::~calc( )
   OUT(calc_FinalizeObject);
   }
 
-char *
+const char *
 calc::ViewName( )
     {
   IN(calc_ViewName);
@@ -134,7 +124,7 @@ calc::ViewName( )
   }
 
 void
-calc::SetValue( register double		        value )
+calc::SetValue( double		        value )
       {
   IN(calc::SetValue);
   Value = value;
@@ -143,9 +133,9 @@ calc::SetValue( register double		        value )
   }
 
 static
-void Reader( register class calc	    	      *self )
+void Reader( class calc	    	      *self )
     {
-  register struct apt_field	     *field;
+  struct apt_field	     *field;
 
   IN(Reader);
   while ( field = (self )->ReadObjectField( ) )
@@ -157,9 +147,9 @@ void Reader( register class calc	    	      *self )
   }
 
 long
-calc::Read( register FILE			      *file, register long			       id )
+calc::Read( FILE			      *file, long			       id )
         {
-  register long			      status; 
+  long			      status; 
 
   IN(calc::Read);
   if ( (status = (this)->ReadObject(  file, id, (apt_readfptr)Reader )) ==
@@ -172,7 +162,7 @@ calc::Read( register FILE			      *file, register long			       id )
   }
 
 static
-void Writer( register class calc		      *self )
+void Writer( class calc		      *self )
     {
   struct apt_field		      field;
   char				      value[25];
@@ -186,7 +176,7 @@ void Writer( register class calc		      *self )
   }
 
 long
-calc::Write( register FILE			      *file, register long			       id, register int			       level )
+calc::Write( FILE			      *file, long			       id, int			       level )
           {
   IN(calc_Write);
   (this)->WriteObject(	file, id, level, (apt_writefptr)Writer );

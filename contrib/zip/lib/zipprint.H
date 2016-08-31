@@ -31,9 +31,6 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipprint.H,v 1.2 1993/06/09 17:45:37 gk5g Stab74 $ */
-/* $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipprint.H,v $ */
-
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -86,8 +83,8 @@ public:
   virtual long Set_Print_Dimensions( float width, float height );
   virtual long Set_Print_Coordinates( zip_type_percent x_origin, zip_type_percent y_origin, zip_type_percent width, zip_type_percent height );
   virtual long Set_Print_Orientation( long orientation );
-  virtual long Set_Print_Language( char *language );
-  virtual long Set_Print_Processor( char *processor );
+  virtual long Set_Print_Language( const char *language );
+  virtual long Set_Print_Processor( const char *processor );
   virtual long Set_Print_Level( long level );
   virtual long Set_Print_File( FILE *file );
   virtual long Set_Print_Size( float width, float height );

@@ -1,5 +1,3 @@
-/* @(#)pmap_getport.c	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,12 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/pmap_getport.c,v 1.3 1992/12/15 21:54:19 rr2b Stab74 $";
-#endif
-
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
  * unrestricted use provided that this legend is included on all tape
@@ -55,10 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-#if !defined(lint) && defined(SCCSIDS)
-static char sccsid[] = "@(#)pmap_getport.c 1.9 87/08/11 Copyr 1984 Sun Micro";
-#endif
-
 /*
  * pmap_getport.c
  * Client interface to pmap rpc service.
@@ -90,7 +78,7 @@ pmap_getport(address, program, version, protocol)
 {
 	u_short port = 0;
 	int socket = -1;
-	register CLIENT *client;
+	CLIENT *client;
 	struct pmap parms;
 
 	address->sin_port = htons(PMAPPORT);

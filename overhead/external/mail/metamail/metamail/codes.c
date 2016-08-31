@@ -17,7 +17,7 @@ WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES.
 #include <config.h>
 
 extern char *index();
-static char basis_64[] =
+static const char basis_64[] =
    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 static char index_64[128] = {
@@ -246,8 +246,8 @@ int PortableNewlines;
     if (CRpending) putc(13, outfile); /* Don't drop a lone trailing char 13 */
 }
 
-static char basis_hex[] = "0123456789ABCDEF";
-static char index_hex[128] = {
+static const char basis_hex[] = "0123456789ABCDEF";
+static const char index_hex[128] = {
     -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1,
     -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1,
     -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1, -1,-1,-1,-1,

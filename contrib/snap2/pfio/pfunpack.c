@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/pfio/RCS/pfunpack.c,v 1.17 1993/09/22 19:43:52 gk5g Stab74 $";
-#endif
-
 #include <andrewos.h>
 #include <pfio.h>
 #include <stdarg.h>
@@ -39,10 +34,10 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/
  * read some bytes from a stream as an unsigned long
  */
 ulong PFslurp(amsg,size)
-register PFM_pt amsg;
-register int size;
+PFM_pt amsg;
+int size;
 {
-    register ulong result=0;
+    ulong result=0;
     while((size--)>0) {
 	if(PFM_remaining(*amsg)<1)
 	    (*(amsg->parerr))(amsg,"PFIO:message too short");
@@ -106,7 +101,7 @@ void PFunpack(PFM_pt amsg, ...)
 	switch(LR_get_mach(atype)) {
 	    case LRh_str:
 		{
-		register char *outstr;
+		char *outstr;
 		outstr=((char*)va_arg(ap,uint8*));
 		bcopy(astr_pt,outstr,((int)(along+1)));
 		amsg->buf+=along;
@@ -116,7 +111,7 @@ void PFunpack(PFM_pt amsg, ...)
 		break;
 	    case LRh_str_pt:
 		{
-		register char **outstr;
+		char **outstr;
 		outstr=va_arg(ap,char**);
 		*outstr=astr_pt;
 		amsg->buf+=along;
@@ -130,14 +125,14 @@ void PFunpack(PFM_pt amsg, ...)
 		break;
 	    case LRh_int16:
 		{
-		register uint16 *auint16_pt;
+		uint16 *auint16_pt;
 		auint16_pt=va_arg(ap,uint16*);
 		(*auint16_pt)=along;
 		}
 		break;
 	    case LRh_int32:
 		{
-		register uint32 *auint32_pt;
+		uint32 *auint32_pt;
 		auint32_pt=va_arg(ap,uint32*);
 		(*auint32_pt)=along;
 		}

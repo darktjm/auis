@@ -23,13 +23,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/compile.C,v 3.7 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
@@ -41,6 +34,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * compilation package for be2 based editor.
  */
 
+#include <andrewos.h>
 ATK_IMPL("compile.H")
 
 #include <ctype.h>
@@ -80,15 +74,11 @@ struct lengthPair {
 
 
 ATKdefineRegistry(compile, ATK, compile::InitializeClass);
-#ifndef NORCSID
-#endif
-#ifdef hpux
-#endif /* hpux */
 static boolean SetDotToEnd(class view  *applicationView , class view  *targetView , class view  *inputFocus, struct lengthPair  *lengths);
-static void InsertMessage(class buffer  *b, long  pos, char  *string, long  len);
-static struct process *StartProcess(char  *command, FILE  **inputFile , FILE  **outputFile);
+static void InsertMessage(class buffer  *b, long  pos, const char  *string, long  len);
+static struct process *StartProcess(const char  *command, FILE  **inputFile , FILE  **outputFile);
 static int FinishProcess(struct process  *process);
-static class buffer *MakeCommandBuffer(char  *command , char  *buffername, im_filefptr handler);
+static class buffer *MakeCommandBuffer(const char  *command , const char  *buffername, im_filefptr handler);
 static void compile_BuildHandler(FILE  *inputFile, struct processbuffer  *processBuffer);
 static void compile_KillBuild(class view  *view, long  key);
 static void compile_SetCommand(char  *command);
@@ -96,8 +86,8 @@ static boolean SaveModifiedBuffer(class buffer  *b, class view  *messageView);
 static boolean SaveAllBuffers(class view  *view);
 static void compile_Build(class view  *view, long  key);
 static void resetErrors();
-static int getlinepos(register class text  *doc, int  line);
-static long nextlinepos(register class text  *doc, register long  pos);
+static int getlinepos(class text  *doc, int  line);
+static long nextlinepos(class text  *doc, long  pos);
 static int ParseCCError(class text  *doc, long  *startPos, char  *fileName, int  maxSize);
 static int ParseEgrepError(class text  *doc, long  *startPos, char  *fileName, int  maxSize);
 #ifdef SGI_4D_ENV
@@ -131,7 +121,7 @@ static boolean SetDotToEnd(class view  *applicationView , class view  *targetVie
     return FALSE; /* Keep on enumerating. */
 }
 
-static void InsertMessage(class buffer  *b, long  pos, char  *string, long  len)
+static void InsertMessage(class buffer  *b, long  pos, const char  *string, long  len)
                 {
 
     class environment *tempEnv;
@@ -166,7 +156,7 @@ struct processbuffer {
     class buffer *b;
 };
 
-static struct process *StartProcess(char  *command, FILE  **inputFile , FILE  **outputFile)
+static struct process *StartProcess(const char  *command, FILE  **inputFile , FILE  **outputFile)
         {
 
     int inpipe[2], outpipe[2], pid;
@@ -250,11 +240,11 @@ static int FinishProcess(struct process  *process)
 
 /* Process and comman global state. */
 static struct process *currentProcess = NULL; /* pid of compilation process, is 0 if none currently executing. */
-static char *defaultCommand;
+static const char *defaultCommand;
 static char *compileCommand;
 
 /* Starts a process dumping output into a buffer. */
-static class buffer *MakeCommandBuffer(char  *command , char  *buffername, im_filefptr handler)
+static class buffer *MakeCommandBuffer(const char  *command , const char  *buffername, im_filefptr handler)
         {
 
     class text *commandLogDoc;
@@ -357,7 +347,7 @@ static void compile_SetCommand(char  *command)
     if (compileCommand != defaultCommand)
         free(compileCommand);
     if (command == NULL) {
-        compileCommand = defaultCommand;
+        compileCommand = (char *)defaultCommand; /* not freed if default */
         return;
     }
     compileCommand = (char *) malloc(strlen(command) + 1);
@@ -499,10 +489,10 @@ static void resetErrors()
     lastParsedLink = &allErrors;
 }
 
-static int getlinepos(register class text  *doc, int  line)
+static int getlinepos(class text  *doc, int  line)
         {
 
-    register int pos, len, i = 1;
+    int pos, len, i = 1;
 
     len = (doc)->GetLength();
     for (pos = 0; (i < line) && (pos < len); pos++)
@@ -511,10 +501,10 @@ static int getlinepos(register class text  *doc, int  line)
     return pos;
 }
 
-static long nextlinepos(register class text  *doc, register long  pos)
+static long nextlinepos(class text  *doc, long  pos)
         {
 
-    register int tempChar;
+    int tempChar;
 
     while ((tempChar = (doc)->GetChar( pos)) != '\n' && tempChar != EOF)
         pos++;
@@ -992,10 +982,8 @@ boolean compile::InitializeClass()
 
     if ((command = environ::GetProfile("CompileCommand")) == NULL)
         defaultCommand = "build -k";
-    else {
-        defaultCommand = (char *) malloc(strlen(command) + 1);
-        strcpy(defaultCommand, command);
-    }
-    compileCommand = defaultCommand;
+    else
+        defaultCommand = strdup(command);
+    compileCommand = (char *)defaultCommand; /* not freed if default */
     return TRUE;
 }

@@ -50,10 +50,10 @@ static	int TIFFAppendToStrip();
 #endif
 
 /*VARARGS3*/
-int TIFFWriteScanline(register TIFF *tif, u_char *buf, u_int row, u_int sample)
+int TIFFWriteScanline(TIFF *tif, u_char *buf, u_int row, u_int sample)
 {
-	static char module[] = "TIFFWriteScanline";
-	register TIFFDirectory *td;
+	static const char module[] = "TIFFWriteScanline";
+	TIFFDirectory *td;
 	int strip, status, imagegrew = 0;
 
 	if (!TIFFWriteCheck(tif, 0, module))
@@ -172,7 +172,7 @@ int TIFFWriteScanline(register TIFF *tif, u_char *buf, u_int row, u_int sample)
  */
 int TIFFWriteEncodedStrip(TIFF *tif, u_int strip, u_char *data, u_int cc)
 {
-	static char module[] = "TIFFWriteEncodedStrip";
+	static const char module[] = "TIFFWriteEncodedStrip";
 	TIFFDirectory *td = &tif->tif_dir;
 
 	if (!TIFFWriteCheck(tif, 0, module))
@@ -223,7 +223,7 @@ int TIFFWriteEncodedStrip(TIFF *tif, u_int strip, u_char *data, u_int cc)
  */
 int TIFFWriteRawStrip(TIFF *tif, u_int strip, u_char *data, u_int cc)
 {
-	static char module[] = "TIFFWriteRawStrip";
+	static const char module[] = "TIFFWriteRawStrip";
 
 	if (!TIFFWriteCheck(tif, 0, module))
 		return (-1);
@@ -269,7 +269,7 @@ int TIFFWriteTile(TIFF *tif, u_char *buf, u_long x, u_long y, u_long z, u_int s)
  */
 int TIFFWriteEncodedTile(TIFF *tif, u_int tile, u_char *data, u_int cc)
 {
-	static char module[] = "TIFFWriteEncodedTile";
+	static const char module[] = "TIFFWriteEncodedTile";
 	TIFFDirectory *td;
 
 	if (!TIFFWriteCheck(tif, 1, module))
@@ -336,7 +336,7 @@ int TIFFWriteEncodedTile(TIFF *tif, u_int tile, u_char *data, u_int cc)
  */
 int TIFFWriteRawTile(TIFF *tif, u_int tile, u_char *data, u_int cc)
 {
-	static char module[] = "TIFFWriteRawTile";
+	static const char module[] = "TIFFWriteRawTile";
 
 	if (!TIFFWriteCheck(tif, 1, module))
 		return (-1);
@@ -353,7 +353,7 @@ TIFFSetupStrips(TIFF *tif)
 {
 #define	isUnspecified(td, v) \
     (td->v == 0xffffffff || (td)->td_imagelength == 0)
-	register TIFFDirectory *td = &tif->tif_dir;
+	TIFFDirectory *td = &tif->tif_dir;
 
 	if (!isTiled(tif))
 		td->td_stripsperimage = isUnspecified(td, td_rowsperstrip) ?
@@ -389,7 +389,7 @@ TIFFSetupStrips(TIFF *tif)
  * that important information is not changed.
  */
 static int
-TIFFWriteCheck(register TIFF *tif, int tiles, const char module[])
+TIFFWriteCheck(TIFF *tif, int tiles, const char module[])
 {
 	if (tif->tif_mode == O_RDONLY) {
 		TIFFError(module, "%s: File not open for writing",
@@ -441,7 +441,7 @@ TIFFWriteCheck(register TIFF *tif, int tiles, const char module[])
  * Setup the raw data buffer used for encoding.
  */
 static int
-TIFFBufferSetup(register TIFF *tif, const char module[])
+TIFFBufferSetup(TIFF *tif, const char module[])
 {
 	int size;
 
@@ -501,7 +501,7 @@ static int
 TIFFAppendToStrip(TIFF *tif, u_int strip, u_char *data, u_int cc)
 {
 	TIFFDirectory *td = &tif->tif_dir;
-	static char module[] = "TIFFAppendToStrip";
+	static const char module[] = "TIFFAppendToStrip";
 
 	if (td->td_stripoffset[strip] == 0 || tif->tif_curoff == 0) {
 		/*
@@ -534,7 +534,7 @@ TIFFAppendToStrip(TIFF *tif, u_int strip, u_char *data, u_int cc)
  * called by ``encodestrip routines'' w/o concern
  * for infinite recursion.
  */
-int TIFFFlushData1(register TIFF *tif)
+int TIFFFlushData1(TIFF *tif)
 {
 	if (tif->tif_rawcc > 0) {
 		if (tif->tif_dir.td_fillorder != tif->tif_fillorder &&

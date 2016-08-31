@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/dbgmode.c,v 2.9 1993/06/10 21:01:44 rr2b Stab74 $";
-#endif
-
 #include <ms.h>
 #include <andyenv.h>
 

@@ -611,9 +611,9 @@ Flavor_Choice( self, suite, item, type, action, x, y, clicks )
 
 struct suitex1app		 *self;
 
-register struct suite		 *suite;
+struct suite		 *suite;
 
-register struct suite_item	 *item;
+struct suite_item	 *item;
 
   \{
 
@@ -4184,9 +4184,9 @@ Flavor_Choice( self, suite, item, type, action, x, y, clicks )
 
 struct suites1app	         *self;
 
-register struct suite	         *suite;
+struct suite	         *suite;
 
-register struct suite_item   *item;
+struct suite_item   *item;
 
   \{
 
@@ -4464,7 +4464,7 @@ Raster_Handler( self, suite, item, type )
 
   \{
 
-  register FILE		 *file;
+  FILE		 *file;
 
   char			  file_name[256];
 

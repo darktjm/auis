@@ -1,5 +1,3 @@
-/* @(#)svc_auth.c	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,11 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/svc_auth.c,v 1.3 1992/12/15 21:54:19 rr2b Stab74 $";
-#endif
 
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
@@ -55,10 +48,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-#if !defined(lint) && defined(SCCSIDS)
-static char sccsid[] = "@(#)svc_auth.c 1.19 87/08/11 Copyr 1984 Sun Micro";
-#endif
-
 /*
  * svc_auth.c, Server-side rpc authenticator interface.
  *
@@ -77,8 +66,8 @@ static char sccsid[] = "@(#)svc_auth.c 1.19 87/08/11 Copyr 1984 Sun Micro";
  * 
  *	enum auth_stat
  *	flavorx_auth(rqst, msg)
- *		register struct svc_req *rqst; 
- *		register struct rpc_msg *msg;
+ *		struct svc_req *rqst; 
+ *		struct rpc_msg *msg;
  *
  */
 
@@ -116,10 +105,10 @@ static struct {
  */
 enum auth_stat
 _authenticate(rqst, msg)
-	register struct svc_req *rqst;
+	struct svc_req *rqst;
 	struct rpc_msg *msg;
 {
-	register int cred_flavor;
+	int cred_flavor;
 
 	rqst->rq_cred = msg->rm_call.cb_cred;
 	rqst->rq_xprt->xp_verf.oa_flavor = _null_auth.oa_flavor;

@@ -25,42 +25,31 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/ghash.C,v 3.2 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* A hash table */
 
-
+#include <andrewos.h>
 ATK_IMPL("ghash.H")
 #include <ghash.H>
 #include <glist.H>
 #include <util.h>
 
 struct egg {
-    char *key,*value;
+    const char *key;
+    char *value;
 };
 
 
 
 
 ATKdefineRegistry(ghash, ATK, ghash::InitializeClass);
-#ifndef NORCSID
-#endif
-static int DefaultHash(char  *key);
-static int safestrcmp(char  *a ,char  *b);
-static int FindEgg(struct egg  *egg,char  *key);
+static int DefaultHash(const char  *key);
+static int safestrcmp(const char  *a ,const char  *b);
+static int FindEgg(struct egg  *egg,const char  *key);
 static boolean EnumProc(struct egg  *e, struct enumerate  *rock);
 static int PrintAll(struct egg  *egg,int  nothing);
 
 
-static int DefaultHash(char  *key)
+static int DefaultHash(const char  *key)
 {
     char c;
     int index=0;
@@ -78,7 +67,7 @@ boolean ghash::InitializeClass()
     return TRUE;
 }
 
-static int safestrcmp(char  *a ,char  *b)
+static int safestrcmp(const char  *a ,const char  *b)
 {
     if(a==NULL && b==NULL) return 0;
     if(a==NULL) return -1;
@@ -112,7 +101,7 @@ ghash::~ghash()
             delete this->buckets[i];
 }
 
-boolean ghash::Store(char  *key,char  *value)
+boolean ghash::Store(const char  *key,const char  *value)
 {
     int bucket = (*this->hash)(key);
     struct egg *egg = (struct egg *)malloc(sizeof(struct egg));
@@ -123,18 +112,18 @@ boolean ghash::Store(char  *key,char  *value)
     egg->key = key;
     
     if((this)->GetCopyVal()) value = (this)->GetCopyVal()(value);
-    egg->value = value;
+    egg->value = (char *)value;
 
     if (this->buckets[bucket] == NULL)
         this->buckets[bucket] = glist::Create(NULL);
 
-    (this->buckets[bucket])->Insert((char *)egg);
+    (this->buckets[bucket])->Insert(egg);
     return TRUE;
 }
 
 static ghash_comparekeyfptr compkey=NULL;
 
-static int FindEgg(struct egg  *egg,char  *key)
+static int FindEgg(struct egg  *egg,const char  *key)
 {
 
     if (compkey) {
@@ -149,7 +138,7 @@ static int FindEgg(struct egg  *egg,char  *key)
 
 
 
-char *ghash::Lookup(char  *key)
+char *ghash::Lookup(const char  *key)
 {
     int bucket = (*this->hash)(key);
     struct egg *egg;
@@ -169,7 +158,7 @@ char *ghash::Lookup(char  *key)
     }
 }
 
-char *ghash::LookupKey(char  *key)
+const char *ghash::LookupKey(const char  *key)
 {
     int bucket = (*this->hash)(key);
     struct egg *egg;
@@ -189,7 +178,7 @@ char *ghash::LookupKey(char  *key)
     }
 }
 
-char * ghash::Delete(char  *key)
+char * ghash::Delete(const char  *key)
 {
     int bucket = (this->hash)(key);
     struct egg *egg;
@@ -199,11 +188,11 @@ char * ghash::Delete(char  *key)
     egg = (struct egg *)(this->buckets[bucket])->Find((glist_findfptr)FindEgg,key);
     if (egg != NULL) {
 	char *val = egg->value;
-        (this->buckets[bucket])->Delete((char *)egg,FALSE);
+        (this->buckets[bucket])->Delete(egg,FALSE);
 	if((this)->GetFreeVal()) (this)->GetFreeVal()(egg->value);
-	if((this)->GetFreeKey()) (this)->GetFreeVal()(egg->key);
+	if((this)->GetFreeKey()) (this)->GetFreeVal()((char *)egg->key);
         free(egg);
-        return egg->value; /* OK to reference after just freed */
+        return val; /* which may be freed - be wary! */
     }
     else
         return NULL;
@@ -236,14 +225,14 @@ char *ghash::Enumerate(ghash_efptr  proc,long  rock)
     r.rock=rock;
     r.self=this;
     for(i=0;i<ghash_BUCKETS;i++) {
-	if(this->buckets[i]) result=(this->buckets[i])->Find((glist_findfptr) EnumProc, (char *)&r);
+	if(this->buckets[i]) result=(char *)(this->buckets[i])->Find((glist_findfptr) EnumProc, &r);
 	if(r.found) return result;
     }
     return NULL;
 }
     
 
-char *ghash::Rename(char  *key,char  *new_c)
+char *ghash::Rename(const char  *key,char  *new_c)
 {
     int bucket = (*this->hash)(key);
     struct egg *egg;
@@ -254,14 +243,14 @@ char *ghash::Rename(char  *key,char  *new_c)
     if (egg == NULL)
         return NULL;
     else {
-        (this->buckets[bucket])->Delete((char *)egg,FALSE);
-	if((this)->GetFreeKey()) (this)->GetFreeKey()(egg->key);
+        (this->buckets[bucket])->Delete(egg,FALSE);
+	if((this)->GetFreeKey()) (this)->GetFreeKey()((char *)egg->key);
 	if((this)->GetCopyKey()) key = (this)->GetCopyKey()(key);
-	egg->key = key;
+	egg->key = key; /* tjm - wtf?  shouldn't this be new_c? */
         bucket = (*this->hash)(new_c);
         if (this->buckets[bucket] == NULL)
             this->buckets[bucket] = glist::Create(NULL);
-        (this->buckets[bucket])->Insert((char *)egg);
+        (this->buckets[bucket])->Insert(egg);
         return egg->value;
     }
 }
@@ -276,7 +265,7 @@ void ghash::Clear()
 	if ((gl = this->buckets[i]) != NULL)  {
 	    while ((egg = (struct egg *) (gl)->Pop()) != NULL)  {
 		if (egg->key != NULL)  {
-		    if((this)->GetFreeKey()) (this)->GetFreeKey()(egg->key);
+		    if((this)->GetFreeKey()) (this)->GetFreeKey()((char *)egg->key);
 		}
 		if ((this)->GetFreeVal())  {
 		    (this)->GetFreeVal()(egg->value);

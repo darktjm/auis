@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/psprint.C,v 1.2 1996/05/13 17:09:25 robr Exp $";
-#endif
-
-
-
 #include <graphic.H>
 #include <fontdesc.H>
 #include <view.H>
@@ -108,7 +100,7 @@ static void WriteCell(struct printlump *lump, FILE *file, int cx, int cy, long x
 {
     struct cell *c;
     struct viewlist *vl;
-    char *str;
+    const char *str;
     extended_double *celval;
     char buf[1030];
 
@@ -180,8 +172,8 @@ static void WriteCell(struct printlump *lump, FILE *file, int cx, int cy, long x
 		}
 		else {
 		    str = buf;
-		    str[0] = '"';
-		    spread_printVal(lump->tab, str+1, celval, c->format, c->precision);
+		    buf[0] = '"';
+		    spread_printVal(lump->tab, buf+1, celval, c->format, c->precision);
 		    /* fall though */
 		}
 	    }
@@ -203,7 +195,7 @@ static void WriteCell(struct printlump *lump, FILE *file, int cx, int cy, long x
 	    {
 		int thech, just;
 		double sofar, wix;
-		char *tmpstr;
+		const char *tmpstr;
 		boolean clip = FALSE;
 
 		just = str[0];
@@ -455,7 +447,7 @@ void spread::PrintPSDoc(FILE *file, long pagew, long pageh)
     }
 }
 
-void *spread::GetPSPrintInterface(char *printtype)
+void *spread::GetPSPrintInterface(const char *printtype)
 {
     if (!strcmp(printtype, "generic"))
 	return (void *)this;

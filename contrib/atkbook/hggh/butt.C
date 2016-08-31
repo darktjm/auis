@@ -1,5 +1,3 @@
-static char *butt_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/atkbook/hggh/RCS/butt.C,v 1.1 1994/05/19 20:42:16 Zarf Stab74 $";
-
 /* **************************************************** *\
 Copyright 1989 Nathaniel S. Borenstein
 Permission to use, copy, modify, and distribute this software and its

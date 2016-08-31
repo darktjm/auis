@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RCS/panelp.c,v 1.1 1995/08/02 18:46:45 susan Stab74 $";
-#endif
-
 /* 
  *      C Panel Handling Package
  *	Machine-independent routines
@@ -48,7 +43,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RC
  *      The keytab provided to GetKeys is presumed to contain an exit key.
  *
  */
-
 
 #include <andrewos.h>
 #include <vui.h>
@@ -161,11 +155,11 @@ FIELD *curfield;
 PRIVATE FIELD *CursorDown (curfield)
 FIELD *curfield;
 {
-    register XTENT *x;
+    XTENT *x;
 
     x = curfield->flocation;
     if (x[cursor_xtent+1].xlen) {
-	register int i;
+	int i;
 	int new_offset, len, extendx;
 	char *data;
 
@@ -341,7 +335,7 @@ PRIVATE FIELD *CursorRight (curfield)
 FIELD *curfield;
 {
     XTENT *x;
-    register char *data;
+    char *data;
 
     if (curfield->ftype == FTYPE_SEL)
 	return (RightField (curfield));
@@ -377,7 +371,7 @@ PRIVATE FIELD *DeleteChar (curfield)
 FIELD *curfield;
 {
     XTENT *x;
-    register int len, row, col;
+    int len, row, col;
     char *data;
     unsigned char cursor_attr;
 
@@ -414,9 +408,9 @@ FIELD *curfield;
 PRIVATE FIELD *EndCursor (curfield)
 FIELD *curfield;
 {
-    register XTENT *x;
-    register char *data;
-    register int i;
+    XTENT *x;
+    char *data;
+    int i;
     int last_nonblank;
 
     x = curfield->flocation;  /* Find the beginning of the current xtent */
@@ -544,7 +538,7 @@ PRIVATE FIELD *EraseEOF (curfield)
 FIELD *curfield;
 {
     XTENT *x;
-    register int i;
+    int i;
     int totallen, row, col,movelinesup = TRUE;
     char *data;
     unsigned char cursor_attr;
@@ -622,7 +616,7 @@ PRIVATE int IntegerCheck (data, chr, offset)
 char *data, chr;
 int offset;
 {
-    register int i, j;
+    int i, j;
     int df = FALSE, ib = FALSE;
     int len;
     char curchar;
@@ -676,7 +670,7 @@ PRIVATE unsigned char ValidateData (curfield, chr)
 FIELD *curfield;
 unsigned char chr;
 {
-    register int i;
+    int i;
     int result, lhe, rhs, rhnb, lhnb;
 
     switch (curfield->ftype) {
@@ -768,7 +762,7 @@ PRIVATE int ShiftDown (curfield)
 FIELD *curfield;
 {
     XTENT *x;
-    register int i;
+    int i;
     int new_offset, totallen, last_xtent;
     char *data, *data2;
 /*    unsigned char cursor_attr; */
@@ -846,7 +840,7 @@ PRIVATE int ShiftRight (curfield)
 FIELD *curfield;
 {
     XTENT *x;
-    register int i;
+    int i;
     int len, totallen;
     char *data, *idata;
     unsigned char cursor_attr, extendx, noblanks, tmprow, tmpcol;
@@ -980,7 +974,7 @@ int advance;
 PRIVATE FIELD *homeCursor (curfield)
 FIELD *curfield;
 {
-    register XTENT *x;
+    XTENT *x;
 
     if (curfield) {
 	x=curfield->flocation;
@@ -1035,7 +1029,7 @@ InitPanels (p, f)
 PANEL *p[];
 FIELD *f[];
 {
-    register int i, j;
+    int i, j;
 
     if (p != NULL)
 	for (j=0; p[j]; j++)
@@ -1085,7 +1079,7 @@ EraseCursor ()
 RefreshField(attr)
 unsigned char attr;
 {
-    register int i = 0;
+    int i = 0;
     char *data, *enddata;
     XTENT *x;
 
@@ -1133,7 +1127,7 @@ PANEL *panel;
 FIELD *inputfield;
 int clearp;
 {
-    register int i = 0;
+    int i = 0;
 
     CursorOff ();
     if (clearp) ClearScreen();
@@ -1217,7 +1211,7 @@ KEYTAB *keytable;
 char standard_also;
 {
     int skflag;
-    register int i, ch;
+    int i, ch;
     KEYTAB *k;
     FIELD *new_field = NULL;
 
@@ -1339,7 +1333,7 @@ char *deflt, field_type, *return_str;
 strip (str)
 char *str;
 {
-    register int i, j;
+    int i, j;
 
     i = 0;
     while (str[i]==' ') i++;

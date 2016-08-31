@@ -23,10 +23,6 @@ ATK_INTER
 // 
 //  $
 \* ********************************************************************** */
-#if !defined(lint) && !defined(LOCORE) && defined(RCS_HDRS)
-static char *sym_H_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/syntax/sym/RCS/sym.H,v 1.5 1995/12/07 16:41:27 robr Stab74 $";
-#endif
-
 
 /* sym.c
  *
@@ -95,7 +91,7 @@ public:
 
 
 
-	inline char * GetName()		{ return ((this)->name); }
+	inline const char * GetName()		{ return ((this)->name); }
 
 	inline long GetScope()		{ return ((this)->scope); }
 	inline void SetScope(long newScope)	{ ((this)->scope = (newScope)); }
@@ -122,28 +118,28 @@ public:
 		/* returns the enclosing scope for the given scope 
 		 */
 
-	static class sym* Define(char *name, class sym *proto, sym_ScopeType scope)  ;
+	static class sym* Define(const char *name, class sym *proto, sym_ScopeType scope)  ;
 		/* defines the symbol (name, scope).  If it already exists, NULL is
 		 * returned.
 		 */
 
-	static boolean Undefine(char *name, sym_ScopeType scope)  ;
+	static boolean Undefine(const char *name, sym_ScopeType scope)  ;
 		/* undefines (name, scope).  Returns TRUE if successful,
 		 * false otherwise.
 		 */
 
-	static class sym* Find(char *name, sym_ScopeType scope)  ;
+	static class sym* Find(const char *name, sym_ScopeType scope)  ;
 		/* attempts to find a match for (name, scope).  If one is found
 		 * it is returned.  If not, then NULL is returned.
 		 */
 
-	static class sym* Locate(char *name, class sym *proto, sym_ScopeType scope, boolean *new_c)
+	static class sym* Locate(const char *name, class sym *proto, sym_ScopeType scope, boolean *new_c)
 	           ;
 		/* attempts to find a match for (name, scope).  If one is found, 
 		 * it is returned.  If not, (name, scope) is defined.
 		 */
 
-	static long FindAll(char *name, sym_ScopeType scope, sym_findfptr proc, long rock)  ;
+	static long FindAll(const char *name, sym_ScopeType scope, sym_findfptr proc, long rock)  ;
 		/* finds all of name's matches that are defined in scope or any of scope's
 		 * descendent scopes.  For each match, proc is called with sym and rock.
 		 * proc should be declared as:

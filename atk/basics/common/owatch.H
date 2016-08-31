@@ -22,7 +22,6 @@ ATK_INTER
 // 
 //  $
  */
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/owatch.H,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $ */
 
 struct owatch_data {
     class observable *obj;

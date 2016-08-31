@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/dataobject.C,v 3.6 1996/05/08 17:03:43 wjh Exp $";
-#endif
-
-
- 
-
-
 ATK_IMPL("dataobject.H")
 #include <dataobject.H>
 #include <attribs.h>
@@ -44,9 +34,6 @@ ATK_IMPL("dataobject.H")
 
 
 ATKdefineRegistry(dataobject, observable, NULL);
-#ifndef NORCSID
-#endif
-
 
 dataobject::dataobject()
         {
@@ -82,6 +69,7 @@ long dataobject::Read(FILE  *file, long  id)
     long endcount = 1;
     boolean begindata;
     char *s;
+    const char *be;
     long c;
     long status;
     char objectname[200];
@@ -100,11 +88,11 @@ long dataobject::Read(FILE  *file, long  id)
             return dataobject_PREMATUREEOF;
         if (c == 'b')  {
             begindata = TRUE;
-            s = "egindata";
+            be = "egindata";
         }
         else if (c == 'e')  {
             begindata = FALSE;
-            s = "nddata";
+            be = "nddata";
         }
         else  {
 	    if(endcount == 1){
@@ -112,8 +100,8 @@ long dataobject::Read(FILE  *file, long  id)
 	    }
             continue;
         }
-        while ((c = getc(file)) != EOF && c == *s) s++;
-        if (c == '{' && *s == '\0')  {
+        while ((c = getc(file)) != EOF && c == *be) be++;
+        if (c == '{' && *be == '\0')  {
             if (begindata) {
                 s = objectname;
                 while ((c = getc(file)) != EOF && c != ',')
@@ -199,22 +187,21 @@ void dataobject::RestoreModified(long  oldmodified)
 }
 
 static char viewname[200];
-static char *fmts[] = {
+static const char * const fmts[] = {
 	"%sview",  "%sv",  "%sView",  "%sV",  NULL
 };
 ATK_CLASS(view);
 
-char *dataobject::ViewName() {
-	char **fx;
+const char *dataobject::ViewName() {
+	const char * const *fx;
 	const char *tnm = (this)->GetTypeName();
 	for (fx = fmts; *fx; fx++) {
 		sprintf(viewname, *fx, tnm);
 		ATKregistryEntry *are = ATK::LoadClass(viewname);
 		if (are && are->IsType(class_view))
-			return viewname;
+			return are->ClassName;
 	}
-	strcpy(viewname, "view");
-	return viewname;
+	return "view";
 }
 
 void dataobject::SetAttributes(struct attributes  *attributes) {

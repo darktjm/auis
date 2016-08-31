@@ -23,7 +23,6 @@ ATK_INTER
 // WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 // 
 //  $
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/fontsel.H,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $
 */
 
 #define	fontsel_DATACHANGED	(1)
@@ -55,12 +54,12 @@ public:
     
       virtual void SetStyle(long mask);
       virtual void SetSize(short val);
-      virtual void SetFamily(char *val);
+      virtual void SetFamily(const char *val);
 
     
       inline long   GetStyle()  { return ((this)->style); }
       inline short   GetSize()  { return ((this)->size); }
-      inline char  * GetFamily()  { return ((this)->family); }
+      inline const char  * GetFamily()  { return ((this)->family); }
       inline long IsActive(int val)  { return ((this)->active & ((unsigned long)1<<(val))); }
       inline void UnsetStyle()  { (((this))->SetStyle( fontsel_default_Style), (this)->active &= ~((unsigned long)1<<fontsel_Style)); }
       inline void UnsetSize()  { (((this))->SetSize( fontsel_default_Size), (this)->active &= ~((unsigned long)1<<fontsel_Size)); }

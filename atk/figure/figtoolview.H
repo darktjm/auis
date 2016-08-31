@@ -23,21 +23,19 @@ ATK_INTER
 // WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 // 
 //  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figtoolview.H,v 3.7 1995/02/28 23:37:46 Zarf Stab74 $
 */
 #include <figobj.H>
 #include <figtoolview.H>
 #include <lpair.H>
 
 struct figtoolview_tool_t {
-    char *name; /* name of the ATK object */
+    const char *name; /* name of the ATK object */
     long rock; /* rock passed to Instantiate() */
 };
 
 typedef class view *(*figtoolview_layout_f)(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
 typedef void (*figtoolview_mod_f)(class figtoolview  *self, long  rock);
-typedef void (*figtoolview_comm_f)(class figtoolview  *self, char  *rock);
+typedef void (*figtoolview_comm_f)(class figtoolview  *self, const char  *rock);
 
 class figtoolview  : public  lpair {
   public:

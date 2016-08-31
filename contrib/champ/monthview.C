@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/RCS/monthview.C,v 1.8 1994/08/13 18:21:02 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>	/* time.h */
 
 #include <month.H>
@@ -48,8 +43,7 @@ static class style *daystyle;
 
 
 ATKdefineRegistry(monthview, view, monthview::InitializeClass);
-#ifndef NORCSID
-#endif
+
 static int MonthLength(int  yr , int  mon);
 static void LogEvent(struct eventnode  *en, class monthview  *self);
 static void ClearAnnouncements(class monthview  *self);
@@ -92,11 +86,11 @@ void monthview::SetTextview(class textview  *tv)
 	(this->tv)->LinkTree( this);
 }
 
-static char *DayAbbrevs[] = {"M", "Tu", "W", "Th", "F", "Sa", "Su"};
-static int RawMonthLengths[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-static char *MonthNames[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-static char *Weekdays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-static char *DayStrs[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+static const char * const DayAbbrevs[] = {"M", "Tu", "W", "Th", "F", "Sa", "Su"};
+static const int RawMonthLengths[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+static const char * const MonthNames[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+static const char * const Weekdays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+static const char * const DayStrs[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
 
 static int MonthLength(int  yr , int  mon)
 {
@@ -177,7 +171,8 @@ void monthview::FullUpdate(enum view_UpdateType  type, long  left, long  top, lo
     static class fontdesc *plainfont = NULL, *boldfont = NULL;
     int xcenter, x, y, i, j, startday, highlight;
     struct rectangle Rect;
-    char MyString[150], *StrToUse;
+    char MyString[150];
+    const char *StrToUse;
 
     if((type == view_LastPartialRedraw) || (type == view_FullRedraw)) {
 	mon = (class month *) (this)->GetDataObject();

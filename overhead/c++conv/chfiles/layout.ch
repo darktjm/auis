@@ -25,11 +25,6 @@
  *  $
 */
 
-/* $Header $ */
-/* $ACIS$ */
-
- 
-
 /* layout.ch - layout data object definition and interface */
 
 #define layout_VERSION 1

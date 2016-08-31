@@ -1,5 +1,3 @@
-/* $Author: Zarf $ */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -22,16 +20,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/vutils.C,v 1.5 1994/08/24 16:27:47 Zarf Stab74 $";
-#endif
-
-
- 
-
 /*************************************************
  * View utility package
  * Contains stuff useful to all views.
@@ -52,11 +40,8 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * warranty.
  *************************************************/
 
-
+#include <andrewos.h>
 #include <ctype.h>
-
-
-
 #include <bind.H>
 #include <view.H>
 #include <im.H>
@@ -81,8 +66,6 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 ATKdefineRegistry(vutils, ATK, vutils::InitializeClass);
-#ifndef NORCSID
-#endif
 static void helpDeath (int  pid, class view  *self, WAIT_STATUS_TYPE  *status);
 static void forkhelpproc (class view  *self, long  key);
 

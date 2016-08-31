@@ -27,15 +27,10 @@
 
 #include <andrewos.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/itops.c,v 2.5 1992/12/15 21:20:00 rr2b Stab74 $";
-#endif
-
 /* This routine converts a long integer to a string padded or truncated to an
 	exact length.  The length persists, though the value may not. */
 
-static char Digits[] = "0123456789";
+static const char Digits[] = "0123456789";
 
 itops(num, buf, len)
 long    num;

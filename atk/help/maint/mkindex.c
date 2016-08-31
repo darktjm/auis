@@ -25,20 +25,11 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/types.h sys/file.h */ 
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/maint/RCS/mkindex.c,v 2.39 1994/03/21 17:00:38 rr2b Stab74 $";
-#endif
-
- 
- 
- 
 #define FSSIZE		32	/* max number of files */
 #define BUCKETS		11	/* number of hash buckets */
 #define MANSUBS "12345678nolpx"	/* array of possible subdirectories of MANDIR, ie man1, mann */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */ 
 #include <stdio.h>
 #include <ctype.h>
 #include <sys/param.h>
@@ -54,9 +45,9 @@ static int action = 1;
  * lowercases's a string.
  */
 static char *LowerCase(astring)
-register char *astring;
+char *astring;
 {
-    register char *tp = astring;
+    char *tp = astring;
 
     while (tp && *tp != (char)0)
 	if (isupper(*tp)) {
@@ -85,18 +76,18 @@ char *key, *path;
 
 static BuildIndex(aindex, srcDirName, targetDirName)
 char *srcDirName, *targetDirName;
-register struct Index *aindex;
+struct Index *aindex;
 {
-    register DIR *srcDir;
+    DIR *srcDir;
     DIRENT_TYPE *sde;
-    register char *tp, *tfp, *sfp;
+    char *tp, *tfp, *sfp;
     char srcPath[MAXPATHLEN];
     char targetPath[MAXPATHLEN];
     char keyBuffer[MAXPATHLEN / 4];
     char mandir = 0;
-    static char ManName[] = "man";
+    static const char ManName[] = "man";
     struct stat tstat;
-    register long code;
+    long code;
     
     if (!(srcDir = opendir(srcDirName))) {
         fprintf(stderr, "%s: can't open %s; skipping.\n", prog, srcDirName);
@@ -168,7 +159,7 @@ void show_usage()
 
 main(argc, argv)
 int argc;
-register char **argv;
+char **argv;
 {
     struct Index *newIndex;
     long code, lineNo[FSSIZE];

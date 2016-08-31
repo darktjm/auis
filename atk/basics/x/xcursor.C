@@ -26,17 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xcursor.C,v 3.5 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
-
-
 ATK_IMPL("xcursor.H")
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
@@ -79,8 +68,6 @@ static struct ccache {
 
 
 ATKdefineRegistry(xcursor, cursor, xcursor::InitializeClass);
-#ifndef NORCSID
-#endif
 Cursor LookupCursor(Display  *dpy, class xfontdesc  *xfd, int  c);
 
 

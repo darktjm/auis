@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/types.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/bufferlist.C,v 3.9 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("bufferlist.H")
 
 #include <errno.h>
@@ -66,11 +57,6 @@ static char defaultobjectname[64] = DEFAULTOBJECT;
 
 
 ATKdefineRegistry(bufferlist, observable, NULL);
-#ifndef NORCSID
-#endif
-#ifndef MAXPATHLEN 
-#endif
-
 
 bufferlist::bufferlist()
         {
@@ -334,7 +320,7 @@ class buffer *bufferlist::GetBufferOnFile(const char  *filename, long  flags)
 	}
 	/* Tell it which dir to use */
 	attr.key = "dir";
-	attr.value.string = (char *)filename;
+	attr.value.string = filename;
 	attr.next = NULL;
 	(dobj)->SetAttributes( &attr);
 	(thisBuffer)->SetFilename(filename);
@@ -435,9 +421,9 @@ class buffer *bufferlist::GetBufferOnFile(const char  *filename, long  flags)
     return thisBuffer;
 }
 
-void bufferlist::GetUniqueBufferName(char  *proposedName, char  *bufferName, int  nameSize)
+void bufferlist::GetUniqueBufferName(const char  *proposedName, char  *bufferName, int  nameSize)
 {
-    register int uniquefier, nameLength;
+    int uniquefier, nameLength;
 
     strcpy(bufferName, proposedName);
 

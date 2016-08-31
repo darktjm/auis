@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/subs.c,v 2.41 1993/03/17 04:02:41 gk5g Stab74 $";
-#endif
-
 #include <ms.h>
 #include <mailconf.h>
 #include <stdio.h>
@@ -517,7 +511,7 @@ HandleSpecialProfileLine(line)
 char *line;
 {
     char *parm, *val, ErrorText[100+MAXPATHLEN];
-    static char NomeM[] = "NO MEMORY TO HANDLE PATH CHANGES";
+    static const char NomeM[] = "NO MEMORY TO HANDLE PATH CHANGES";
 
     sprintf(ErrorText, "Ignoring unrecognized profile line %s", line);
     parm = ++line;
@@ -685,7 +679,7 @@ struct SubscriptionProfile **sub1, **sub2;
 int PreorderSubscriptionStrcmp(s, t)
 char *s, *t;
 {
-    register char sc, tc;
+    char sc, tc;
     if (!s || !t)
       return (0);
     for (;;) {
@@ -1103,7 +1097,7 @@ int pathelt;
 }
 
 ScoreMatch(pattern, string, matchct)
-register char *pattern, *string;
+char *pattern, *string;
 int *matchct;
 {
 /*     debug(256, ("Matching pattern %s against name %s\n", pattern, string)); */

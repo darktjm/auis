@@ -25,19 +25,14 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/snap2t/RCS/snptserv.c,v 1.14 1993/05/04 01:50:02 susan Stab74 $";
-#endif
-
 #ifdef _IBMR2
 #ifndef _BSD
 #define _BSD 43
 #endif
 #endif
 
-#include <stdio.h>
 #include <andrewos.h> /* sys/types.h sys/time.h */
+#include <stdio.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>

@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/openpipe.c,v 2.10 1993/10/06 18:32:15 rr2b Stab74 $";
-#endif
-
 #include <stdio.h>
 #include <ms.h>
 #include <mailconf.h>

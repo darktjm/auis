@@ -67,12 +67,12 @@ struct bothrectangle {
 		(*(x) = (r)->left, *(y) = (r)->top, \
 		*(w) = (r)->width, *(h) = (r)->height)
 
-void rectangle_IntersectRect(register struct rectangle  *Result,register struct rectangle  *LHS , register struct rectangle  *RHS);
-void rectangle_UnionRect(register struct rectangle  *Result,register struct rectangle  *LHS , register struct rectangle  *RHS);
+void rectangle_IntersectRect(struct rectangle  *Result,struct rectangle  *LHS , struct rectangle  *RHS);
+void rectangle_UnionRect(struct rectangle  *Result,struct rectangle  *LHS , struct rectangle  *RHS);
 /*void rectangle_SetRectSize(LHS, left,top,width,height); */
-void rectangle_SetRectSides(register struct rectangle  * LHS, long  left,long  top,long  right,long  bottom);
-void rectangle_SetRectCorners(register struct rectangle  * LHS, register struct point  * OneCorner, register struct point  * OtherCorner );
-void rectangle_InsetRect(register struct rectangle  * LHS, long  DeltaX, long  DeltaY);
+void rectangle_SetRectSides(struct rectangle  * LHS, long  left,long  top,long  right,long  bottom);
+void rectangle_SetRectCorners(struct rectangle  * LHS, struct point  * OneCorner, struct point  * OtherCorner );
+void rectangle_InsetRect(struct rectangle  * LHS, long  DeltaX, long  DeltaY);
 void rectangle_OffsetRect(struct rectangle  * LHS, long  DeltaX, long  DeltaY);
 void rectangle_EmptyRect(struct rectangle  * Rect );
 boolean rectangle_IsEmptyRect(struct rectangle  * TestRect);

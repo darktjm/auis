@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/snap/RCS/cuisnap.c,v 2.25 1994/04/04 19:19:53 rr2b Stab74 $";
-#endif
-
 /* 
 		cuisnap.c -- CUI interface to SNAP rpc.
 
@@ -101,7 +96,7 @@ char   *name;
 ReturnPacket * packet;
 int	code;
 {
-    register int    i;
+    int    i;
 
     fprintf(stderr, "[CUI]: Return failure (%d): 0x", code);
     for (i = 0; i < RETURN_PACKET_HEADER_LENGTH; i++)
@@ -231,7 +226,7 @@ char *service;
 {
     char *MyPasswd;
     int MyPasswdLen;
-    register int    rc;
+    int    rc;
     char    ErrorText[125];
     SNAP_CPARMS parms;
 
@@ -295,14 +290,14 @@ ReturnPacket * reply;
 int	BufferSize;
 SNAP_CPARMS * ConParm;
 {
-    register int    KeepTrying,
+    int    KeepTrying,
 		    Retries = 0,
 		    result;
     int     Restarts = 0;
 
     if (CUIDebugging & 16) {	/* Debugging SHOULD go to stdout -- nsb
 				   5/16/86 */
-	register int	i;
+	int	i;
 
 	fputs("[cui]: DoRPC(0x", stdout);
 	for (i = 0; i < length; i++)
@@ -331,7 +326,7 @@ int	Overwrite;
 char   *BodyDirName;
 {
     PROCNAME name = "MS_CreateNewMessageDirectory";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     SNAP_integer rval;
@@ -364,7 +359,7 @@ long	MS_AppendFileToFolder(FileName, FolderName)
 char   *FileName, *FolderName;
 {
     PROCNAME name = "MS_AppendFileToFolder";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     SNAP_integer rval;
@@ -405,7 +400,7 @@ int    *NumGood,
 long   *FirstError;
 {
     PROCNAME name = "MS_ProcessNewMessages";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval, temp;
@@ -468,7 +463,7 @@ long	startbyte,
        *bytesleft;		/* ***	Added 8/19/86  for PC	*** */
 {
     PROCNAME name = "MS_HeadersSince";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     char   *dummy;
@@ -518,7 +513,7 @@ char   *DirName,
 int	flags;
 {
     PROCNAME name = "MS_PrintMessage";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -553,7 +548,7 @@ char   *DirName,
        *id;
 int	GetNext;
 {
-    register char  *ptr;
+    char  *ptr;
     int length;
 
     CUI_RPCInProgress = 1;
@@ -595,7 +590,7 @@ char   *Buf;
 int	lim;
 {
     PROCNAME name = "MS_GetVersion";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     SNAP_integer rval;
@@ -631,7 +626,7 @@ int	level,
 	malloc;
 {
     PROCNAME name = "MS_DebugMode";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -666,7 +661,7 @@ char   *Root,
        *MapFile;
 {
     PROCNAME name = "MS_NameSubscriptionMapFile";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -702,7 +697,7 @@ char   *source,
 int	MustBeDir;
 {
     PROCNAME name = "MS_DisambiguateFile";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -738,7 +733,7 @@ char   *OldName,
        *NewName;
 {
     PROCNAME name = "MS_CheckMissingFolder";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -778,7 +773,7 @@ long	offset,
 int    *ct;
 {
     PROCNAME name = "MS_GetPartialBody";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     char   *dummy;
@@ -824,7 +819,7 @@ int *UseAmsDelivery, *UseNameSep, *DeliveryType, len;
 char *MailDomain;
 {
     PROCNAME name = "MS_GetConfigurationParameters";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     char   *dummy;
@@ -863,7 +858,7 @@ char *AndrewDir;
 int len;
 {
     PROCNAME name = "MS_AndrewDir";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     char   *dummy;
@@ -902,7 +897,7 @@ long	offset,
 int    *ct;
 {
     PROCNAME name = "MS_GetPartialFile";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     char   *dummy;
@@ -947,7 +942,7 @@ char   *FullName,
        *newvalue;
 {
     PROCNAME name = "MS_SetAssociatedTime";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -981,7 +976,7 @@ char   *FullName,
 int	lim;
 {
     PROCNAME name = "MS_GetAssociatedTime";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     SNAP_integer rval;
@@ -1017,7 +1012,7 @@ char   *buf;
 int	lim;
 {
     PROCNAME name = "MS_GetSearchPathEntry";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     SNAP_integer rval;
@@ -1053,7 +1048,7 @@ char   *FullName,
 int	status;
 {
     PROCNAME name = "MS_SetSubscriptionEntry";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     SNAP_integer rval;
@@ -1087,7 +1082,7 @@ char   *FullName,
 int    *status;
 {
     PROCNAME name = "MS_GetSubscriptionEntry";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     char   *dummy;
@@ -1123,7 +1118,7 @@ char   *DomName;
 int    *rslt;
 {
     PROCNAME name = "MS_DomainHandlesFormatting";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     SNAP_integer rval, temp;
@@ -1156,7 +1151,7 @@ char   *FullName,
 int    *status;
 {
     PROCNAME name = "MS_GetSubscriptionEntry";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     char   *dummy;
@@ -1191,7 +1186,7 @@ int    *status;
 
 long	MS_Die () {
     PROCNAME name = "MS_Die";
-/*    register char *ptr; */
+/*    char *ptr; */
     int     result,
 	    length;
     SNAP_integer rval;
@@ -1222,7 +1217,7 @@ long	MS_OpenDebuggingPipescript (DoIt)
 int	DoIt;
 {
     PROCNAME name = "MS_OpenDebuggingPipescript";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -1252,7 +1247,7 @@ int	DoIt;
 
 long	MS_RebuildSubscriptionMaps () {
     PROCNAME name = "MS_RebuildSubscriptionMaps";
-/*    register char *ptr; */
+/*    char *ptr; */
     int     result,
 	    length;
     SNAP_integer rval;
@@ -1287,12 +1282,12 @@ long	MS_RebuildOneSubscriptionMap (PathElt)
 char *PathElt;
 {
     PROCNAME name = "MS_RebuildOneSubscriptionMap";
-/*    register char *ptr; */
+/*    char *ptr; */
     int     result,
 	    length;
     SNAP_integer rval;
     SNAP_CPARMS cp;
-    register char *ptr;
+    char *ptr;
 
     cp.maxtime = 300;		/* five minutes */
     cp.encryptlevel = SNAP_ENCRYPT;
@@ -1327,7 +1322,7 @@ char   *DirName,
 int	code;
 {
     PROCNAME name = "MS_NameReplyFile";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     char   *dummy;
@@ -1394,7 +1389,7 @@ char   *ambigname, /* IN */
        *FileName; /* OUT */
 {
     PROCNAME name = "MS_WriteAllMatchesToFile";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     char   *dummy;
@@ -1428,7 +1423,7 @@ char   *dirname,
        *date64;
 {
     PROCNAME name = "MS_Epoch";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -1463,7 +1458,7 @@ char   *dirname,
 int	Code;
 {
     PROCNAME name = "MS_AlterSnapshot";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -1497,7 +1492,7 @@ long	MS_PurgeDeletedMessages (dirname)
 char   *dirname;
 {
     PROCNAME name = "MS_PurgeDeletedMessages";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -1530,7 +1525,7 @@ char   *dirname,
        *SnapshotBuf;
 {
     PROCNAME name = "MS_GetSnapshot";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     char   *dummy;
@@ -1566,7 +1561,7 @@ char   *dirname,
 long n;
 {
     PROCNAME name = "MS_GetNthSnapshot";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     char   *dummy;
@@ -1605,7 +1600,7 @@ int	HeaderTypeNumber,
 	lim;
 {
     PROCNAME name = "MS_GetHeaderContents";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     char   *dummy;
@@ -1645,7 +1640,7 @@ int outaddrsize, which; /* IN */
 int *outcode; /* OUT */
 {
     PROCNAME name = "MS_ValidateAndReplaceChunk";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     char   *dummy;
@@ -1688,7 +1683,7 @@ int OutLim, opcode, defaulti; /* Passed IN */
 int *resulti; /* Passed OUT */
 {
     PROCNAME name = "MS_HandlePreference";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     char   *dummy;
@@ -1729,7 +1724,7 @@ long	MS_WriteUnscribedBodyFile(DirName, id, FileName)
 char *DirName, *id, *FileName;
 {
     PROCNAME name = "MS_WriteUnscribedBodyFile";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     char   *dummy;
@@ -1767,7 +1762,7 @@ int	DeliveryOptions,
 char *ErrorMessage, *ClientProgram;	
 {
     PROCNAME name = "MS_SubmitMessage";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -1815,7 +1810,7 @@ int	len,
 	Truncate;
 {
     PROCNAME name = "MS_StorePartialFile";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -1859,7 +1854,7 @@ int	len,
 
 long	MS_UpdateState () {
     PROCNAME name = "MS_UpdateState";
-/*    register char *ptr; */
+/*    char *ptr; */
     int     result,
 	    length;
     SNAP_integer rval;
@@ -1885,7 +1880,7 @@ long	MS_UpdateState () {
     return(long) rval;
 }
 long	MS_FastUpdateState () {
-/*    register char *ptr; */
+/*    char *ptr; */
 #ifdef OLDCODE
     PROCNAME name = "MS_FastUpdateState";
     int result;
@@ -1925,7 +1920,7 @@ char   *ParentName,
        *ShortName;
 {
     PROCNAME name = "MS_InstallWelcomeMessage";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     SNAP_integer rval;
@@ -1957,7 +1952,7 @@ char   *ParentName,
 
 long	MS_ReInitialize () {
      PROCNAME name = "MS_ReInitialze";
-     register char  *ptr;
+     char  *ptr;
     int     length,
 	    result;
     SNAP_integer rval,longlen;
@@ -1992,7 +1987,7 @@ char *key;
 char *vers;
 char *result_str;
 {PROCNAME name = "MS_GetVConfig";
- register char  *ptr;
+ char  *ptr;
  int length;
  int result;
  char *dummy;
@@ -2029,7 +2024,7 @@ int    *NumGood,
 	TrustTimeStamp;
 {
     PROCNAME name = "MS_ReconstructDirectory";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval, temp;
@@ -2074,7 +2069,7 @@ int Recurse, *NumGood, *NumBad, quiet, Purge;
 /* added in Recurse, quiet, Purge; removed TrustTimeStamp */
 {
     PROCNAME name = "MS_ScavengeDirectory";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval, temp;
@@ -2123,7 +2118,7 @@ int    *NumFastGood,
        *NumProbablyGood;
 {
     PROCNAME name = "MS_RebuildMasterUpdateFiles";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval, temp;
@@ -2175,7 +2170,7 @@ int    *NumFastGood,
        *NumProbablyGood;
 {
     PROCNAME name = "MS_RebuildOneMasterUpdateFile";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval, temp;
@@ -2230,7 +2225,7 @@ int     MailOnly,
        *NumFastFellas;
 {
     PROCNAME name = "MS_NameChangedMapFile";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval, temp;
@@ -2284,7 +2279,7 @@ int	pathelt;
 char   *Buf;
 {
     PROCNAME name = "MS_FindMailbox";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     char   *dummy;
@@ -2322,7 +2317,7 @@ char   *SourceDirName,
 int	Code;
 {
     PROCNAME name = "MS_CloneMessage";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -2357,7 +2352,7 @@ char   *SourceDirName,
        *DestDirName;
 {
     PROCNAME name = "MS_MergeDirectories";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -2390,7 +2385,7 @@ int DoAll;
 int *ProtFailures;
 {
     PROCNAME name = "MS_TakeHints";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval, temp;
@@ -2427,7 +2422,7 @@ int    *ProtCode,
        *MsgCount;
 {
     PROCNAME name = "MS_GetDirInfo";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval, temp;
@@ -2467,7 +2462,7 @@ char *Attrs;
 int SepChar, ShowEmpty;
 {
     PROCNAME name = "MS_GetDirAttributes";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     char *dummy;
@@ -2509,7 +2504,7 @@ int    *year, *month, *day, *hour, *min, *sec, *wday;
 long   *gtm;
 {
     PROCNAME name = "MS_ParseDate";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval, temp;
@@ -2622,7 +2617,7 @@ long	MS_SetDeathKnell (dk)
 int    dk;
 {
     PROCNAME name = "MS_SetDeathKnell";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -2655,7 +2650,7 @@ char   *FullDirName, *LastOldDate;
 long    *numnew, *numtotal, InsistOnFetch;
 {
     PROCNAME name = "MS_GetNewMessageCount";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval, temp;
@@ -2697,7 +2692,7 @@ char   *DirName;
 int MaxRemovals;
 {
     PROCNAME name = "MS_RemoveDirectory";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -2731,7 +2726,7 @@ long	MS_UnlinkFile (FileName)
 char   *FileName;
 {
     PROCNAME name = "MS_UnlinkFile";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -2764,7 +2759,7 @@ long	MS_DeleteAttr (DirName, AttrName)
 char   *DirName, *AttrName;
 {
     PROCNAME name = "MS_DeleteAttr";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -2799,7 +2794,7 @@ char   *DirName, *AttrName;
 int *AttNum;
 {
     PROCNAME name = "MS_AddAttribute";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval, temp;
@@ -2838,7 +2833,7 @@ char   *dirname,
 int	Reparse;
 {
     PROCNAME name = "MS_EditMessage";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;
@@ -2873,7 +2868,7 @@ int    *NumGood,
        *NumBad;
 {
     PROCNAME name = "MS_ConvertOldMail";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval, temp;
@@ -2916,7 +2911,7 @@ char   *OldName,
        *NewFullName;
 {
     PROCNAME name = "MS_RenameDir";
-    register char  *ptr;
+    char  *ptr;
     int     length,
 	    result;
     char   *dummy;
@@ -2951,7 +2946,7 @@ char   *pat,
        *OutFile;
 {
     PROCNAME name = "MS_MatchFolderName";
-    register char  *ptr;
+    char  *ptr;
     int     result,
 	    length;
     SNAP_integer rval;

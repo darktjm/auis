@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/dbgprntf.c,v 2.8 1993/06/15 02:21:24 rr2b Stab74 $";
-#endif
-
 #include <stdio.h>
 
 static char buf[16384];

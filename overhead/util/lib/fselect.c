@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>		/* sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fselect.c,v 2.13 1994/01/30 05:37:19 rr2b Stab74 $";
-#endif
-
 #include <stdio.h>
 #include <util.h>
 
@@ -41,7 +35,7 @@ int fselect(int nfds, FILE **rfiles, FILE **wfiles, FILE **xfiles, struct timeva
 {
     fd_set rmask, wmask, xmask;
     int ret=0;
-    register int	i;
+    int	i;
 
     FD_ZERO(&rmask);
     FD_ZERO(&wmask);
@@ -50,7 +44,7 @@ int fselect(int nfds, FILE **rfiles, FILE **wfiles, FILE **xfiles, struct timeva
 	NOFILES = FDTABLESIZE();
     }
     for (i = nfds; --i >= 0;) {
-	register int fd;
+	int fd;
 	if (rfiles && rfiles[i] != NULL && (fd = fileno(rfiles[i])) >= 0 && fd < NOFILES) {
 	    if (FILE_HAS_IO(rfiles[i]) > 0)
 		ret++;

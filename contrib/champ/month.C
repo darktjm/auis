@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/RCS/month.C,v 1.3 1994/08/13 18:13:51 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>	/* time.h */
 #include <stdio.h>
 
@@ -37,8 +32,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/
 
 
 ATKdefineRegistry(month, dataobject, NULL);
-#ifndef NORCSID
-#endif
 
 
 month::month()

@@ -1,5 +1,3 @@
-static char *buttview_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/atkbook/buttons/RCS/buttview.C,v 1.1 1994/05/19 20:41:12 Zarf Stab74 $";
-
 /* **************************************************** *\
 Copyright 1989 Nathaniel S. Borenstein
 Permission to use, copy, modify, and distribute this software and its

@@ -25,21 +25,9 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chartmap.C,v 1.5 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 int chartmap_debug = 0;
 
 #define debug chartmap_debug
-
-/* $Header $ */
-/* $Source $ */
-
-
-
-
 
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
@@ -86,7 +74,7 @@ ATK_IMPL("chartmap.H")
 #include <aptv.H>
 #include <chartobj.H>
 #include <chart.H>
-#include <chartmap.eh>
+/* #include <chartmap.eh>*/ /* just to shut up makedep; this file is not built */
 #include <ctype.h>
 #include <zip.H>
 #include <zipview.H>
@@ -120,18 +108,18 @@ ATK_IMPL("chartmap.H")
 
 
 ATKdefineRegistry(chartmap, chartobj, NULL);
-boolean chartmap__InitializeObject( register struct classheader	  *classID, register struct chartmap	  *self);
-void  chartmap__FinalizeObject( register struct classheader    *classID, register struct chartmap	 *self );
-void chartmap__SetDebug( register struct chartmap	  *self, register char			   state );
-class view * chartmap__HitChart( register struct chartmap	      *self, register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks );
-void chartmap__DrawChart( register struct chartmap	      *self );
-void chartmap__PrintChart( register struct chartmap	      *self );
+boolean chartmap__InitializeObject( struct classheader	  *classID, struct chartmap	  *self);
+void  chartmap__FinalizeObject( struct classheader    *classID, struct chartmap	 *self );
+void chartmap__SetDebug( struct chartmap	  *self, char			   state );
+class view * chartmap__HitChart( struct chartmap	      *self, enum view_MouseAction       action, long			       x , long			       y , long			       clicks );
+void chartmap__DrawChart( struct chartmap	      *self );
+void chartmap__PrintChart( struct chartmap	      *self );
 
 
-chartmap__InitializeObject( register struct classheader	  *classID, register struct chartmap	  *self)
+chartmap__InitializeObject( struct classheader	  *classID, struct chartmap	  *self)
       {
-  register boolean		  status = TRUE;
-  register FILE			 *file;
+  boolean		  status = TRUE;
+  FILE			 *file;
   char				  file_name[MAXPATHLEN];
 
   IN(chartmap_InitializeObject);
@@ -175,7 +163,7 @@ chartmap__InitializeObject( register struct classheader	  *classID, register str
   return  status;
   }
 
-chartmap__FinalizeObject( register struct classheader    *classID, register struct chartmap	 *self )
+chartmap__FinalizeObject( struct classheader    *classID, struct chartmap	 *self )
       {
   IN(chartmap_FinalizeObject);
   if ( Zip )	    (Zip )->Destroy();
@@ -184,7 +172,7 @@ chartmap__FinalizeObject( register struct classheader    *classID, register stru
   }
 
 void
-chartmap__SetDebug( register struct chartmap	  *self, register char			   state )
+chartmap__SetDebug( struct chartmap	  *self, char			   state )
       {
   IN(chartmap_SetDebug);
   super_SetDebug( self, debug = state );
@@ -192,9 +180,9 @@ chartmap__SetDebug( register struct chartmap	  *self, register char			   state )
   }
 
 class view *
-chartmap__HitChart( register struct chartmap	      *self, register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks )
+chartmap__HitChart( struct chartmap	      *self, enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
         {
-  register zip_type_figure	      figure;
+  zip_type_figure	      figure;
   char				      msg[512];
 
   IN(chartmap_HitChart);
@@ -213,7 +201,7 @@ chartmap__HitChart( register struct chartmap	      *self, register enum view_Mou
   }
 
 void
-chartmap__DrawChart( register struct chartmap	      *self )
+chartmap__DrawChart( struct chartmap	      *self )
     {
   IN(chartmap_DrawChart);
 
@@ -227,7 +215,7 @@ chartmap__DrawChart( register struct chartmap	      *self )
   }
 
 void
-chartmap__PrintChart( register struct chartmap	      *self )
+chartmap__PrintChart( struct chartmap	      *self )
     {
   IN(chartmap_PrintChart);
 /*===*/

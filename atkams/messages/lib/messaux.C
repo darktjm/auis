@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/messaux.C,v 1.7 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
 #include <sys/param.h>
 
 #include <textview.H>
@@ -66,8 +57,6 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 
-#ifndef NORCSID
-#endif
 void sm_SetMessagesOptions(class messages  *self);
 class captions *GetCaptions(class messages  *self);
 class t822view *GetBodies(class messages  *self);

@@ -15,7 +15,7 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
 
-    static char * CompilePattern(char *string, struct SearchPattern **result)  ;
+    static const char * CompilePattern(const char *string, struct SearchPattern **result)  ;
     static int MatchPattern(class simpletext *d, long pos, struct SearchPattern *p)  ;
     static int MatchPatternReverse(class simpletext *d, long pos, struct SearchPattern *p)  ;
     static int MatchPatternStr(unsigned char *str, long pos, long length, struct SearchPattern *p)  ;

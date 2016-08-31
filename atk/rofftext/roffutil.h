@@ -53,7 +53,7 @@ extern struct diversionLevel *CreateDiversion(struct rofftext  *self,struct dive
 extern void DestroyDiversion(struct rofftext  *self,struct diversionLevel  *d);
 extern void PushDiversion(struct rofftext  *self);
 extern void PopDiversion(struct rofftext  *self);
-extern char *getstring(struct rofftext  *self,char  *name);
+extern const char *getstring(struct rofftext  *self,const char  *name);
 /* #endif /* AIX */
 
 extern void FreeBuf(BUF  b);

@@ -25,11 +25,6 @@
 //  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xinit.C,v 3.3 1993/08/27 22:37:34 gk5g Stab74 $";
-#endif
-
 #include <andrewos.h>
 
 #ifdef SGI_4D_ENV
@@ -49,10 +44,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/R
 #include <xcursor.H>
 #include <xws.H>
 
-#ifndef NORCSID
-#endif
-#ifdef SGI_4D_ENV
-#endif
 int xbasicsinit ();
 
 

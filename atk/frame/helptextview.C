@@ -25,18 +25,9 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/helptextview.C,v 3.2 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 #define Text(self) ((class text *) ((self)->dataobject))
 
+#include <andrewos.h>
 ATK_IMPL("helptextview.H")
 #include <text.H>
 #include <message.H>
@@ -46,8 +37,6 @@ ATK_IMPL("helptextview.H")
 
 
 ATKdefineRegistry(helptextview, textview, NULL);
-#ifndef NORCSID
-#endif
 static char *helptextview_getstartstring(class helptextview  *self,char  *buf);
 
 
@@ -69,8 +58,8 @@ static char *helptextview_getstartstring(class helptextview  *self,char  *buf)
       2. portions of the string following the last '/' are to be discarded.
       */
     /* assumes too much */
-    register char *bp;
-    register int i,len;
+    char *bp;
+    int i,len;
     class text *doc = Text(self);
     len = (doc)->GetLength();
     for(i = 0;i < len; i++) if((doc)->GetChar(i) == '`') break;

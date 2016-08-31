@@ -25,18 +25,11 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/mantext.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
 /* mantext: link to rofftext -man. */
 
 
 
+#include <andrewos.h>
 ATK_IMPL("mantext.H")
 #include <mark.H>
 #include <rofftext.H>

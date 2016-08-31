@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/utility/RCS/schedapp.C,v 1.4 1994/08/14 18:48:19 rr2b Stab74 $";
-#endif
-
-
 #include <andrewos.h>
 #include <im.H>
 #include <frame.H>
@@ -58,7 +52,7 @@ schedapp::schedapp( )
 }
 
 boolean
-schedapp::ParseArgs( register int  argc, register const char **argv )
+schedapp::ParseArgs( int  argc, const char **argv )
 {
     IN(schedapp_ParseArgs);
     while ( *++argv )

@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/frameview.C,v 3.12 1996/03/12 18:14:37 robr Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("frameview.H")
 #include <im.H>
 #include <event.H>
@@ -65,13 +55,11 @@ static class menulist *frameviewMenulist;
 
 
 ATKdefineRegistry(frameview, textview, frameview::InitializeClass);
-#ifndef NORCSID
-#endif
 static int CalculateLineHeight(class frameview  *self);
 static void EraseMessage(class frameview  *self);
 static void CleanMessageState (class frameview  *self);
 static enum keymap_Types KeyEraseMessage(class frameview  *self, long  key, ATK   *entry, long  *rockP);
-static void TransientMessage(class frameview  *self, char  *message);
+static void TransientMessage(class frameview  *self, const char  *message);
 static long Punt(ATK *self, long  key);
 static void CompletionMessage(class frameview  *self, enum message_CompletionCode  code);
 static long InsertSorted(class text  *doc, long  pos, char  *string);
@@ -330,7 +318,7 @@ static enum keymap_Types KeyEraseMessage(long s, long  key, struct proctable_Ent
     return (self->keystatep->curMap)->Lookup( key, (ATK **)entry, rockP);
 }
 
-static void TransientMessage(class frameview  *self, char  *message)
+static void TransientMessage(class frameview  *self, const char  *message)
         {
 
     int pos, len;
@@ -376,7 +364,7 @@ static void CompletionMessage(class frameview  *self, enum message_CompletionCod
 
 void frameview::Return(long  key)
         {
-    register class framemessage *messageLine = this->messageLine;
+    class framemessage *messageLine = this->messageLine;
     int startpos, endpos;
 
     /* give feedback that Return was pressed   -wjh */
@@ -426,7 +414,7 @@ void frameview::Return(long  key)
 
 void frameview::Complete(long  key)
         {
-    register class framemessage *messageLine = this->messageLine;
+    class framemessage *messageLine = this->messageLine;
     enum message_CompletionCode code;
     int len, startpos, endpos;
 
@@ -524,7 +512,7 @@ static void HelpWork(struct helpRock  *helpRock, enum message_HelpItem  helpType
 
 void frameview::Help(long  key)
 {
-    register class framemessage *messageLine = this->messageLine;
+    class framemessage *messageLine = this->messageLine;
     class buffer *LastBuffer;
 
     /* For now, there is no help for frames without buffers. */
@@ -551,8 +539,8 @@ void frameview::Help(long  key)
             (*messageLine->helpProc)(messageLine->textBuffer, messageLine->completionData, (message_workfptr)HelpWork, (long)&helpRock);
 
 	    if (helpRock.insertPos == 0) {
-                register char *s;
-		register int len;
+                const char *s;
+		int len;
                 static class style *boldStyle = NULL,
                    *ulineStyle = NULL, *fixedStyle = NULL;
 

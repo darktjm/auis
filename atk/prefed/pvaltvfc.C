@@ -23,16 +23,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/pvaltvfc.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
-
- 
-
 ATK_IMPL("pvaltvfc.H")
 #include <math.h>
 
@@ -57,9 +47,6 @@ ATK_IMPL("pvaltvfc.H")
 
 
 ATKdefineRegistry(pvaltvfc, pvaltvc, pvaltvfc::InitializeClass);
-#ifndef NORCSID
-#endif
-
 
  void pvaltvfc::Select(int  ind)
 {

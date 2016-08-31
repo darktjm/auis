@@ -155,9 +155,9 @@ struct wp_CD {
 };
 
 /* In wpbase.c. */
-extern wp_ErrorCode w_LoadEntry(register struct wp_CD  *cd , char  *IdKey);
+extern wp_ErrorCode w_LoadEntry(struct wp_CD  *cd , char  *IdKey);
 extern wp_ErrorCode w_GrowString(char  **strP , int  *ssizeP , int  NSize);
-extern void w_LowerAll(register char  *S);
+extern void w_LowerAll(char  *S);
 extern wp_ErrorCode w_ProbeMatches(struct wp_CD  *cd , int  BTIx , char  *Probe , struct IdSet  **ISPtr);
 extern void w_ZapIdSet(struct IdSet  *IS);
 extern wp_ErrorCode w_IDtoPKSet(struct IdSet  *IS , wp_PrimeKeySet  **PKSPtr, int  MaxResults , int  *ResultNumberTruncated);

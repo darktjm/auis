@@ -25,18 +25,12 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/typescript/RCS/fcomp.C,v 1.7 1996/10/29 21:44:20 robr Exp $";
-#endif
-
 /* fcomp.c -- typescript package to perform filename completion
   * David Anderson
   * August 1988
   */
 
+#include <andrewos.h>
 ATK_IMPL("fcomp.H")
 #include <ctype.h>
 
@@ -80,32 +74,30 @@ static proctable_fptr typescript_GrabLastCmd;
 
 
 ATKdefineRegistry(fcomp, ATK, fcomp::InitializeClass);
-#ifndef NORCSID
-#endif
-void CompleteFname(register class typescript  *ts, long  key);
+void CompleteFname(class typescript  *ts, long  key);
 static void GatherStats(struct helpstat  *rock, enum message_HelpItem  itemtype, char  *item, long  dummy /* along for the ride */);
 static void MakeReport(struct repCookie  *cookie, enum message_HelpItem  itemtype, char  *item, long  dummy /* along for the ride */);
 static char * SaveLastCommand(class typescript  *td);
-static int mystrcmp(register char  **s1,register char  **s2);
-void PossibleCompletions(register class typescript  *ts, long  key);
-void CompleteTokenWork(register class typescript  *ts, boolean  forward);
-void CompleteTokenForward(register class typescript  *ts, long  key);
-void CompleteTokenBackward(register class typescript  *ts, long  key);
-void CompleteCmdWork(register class typescript  *ts, boolean  forward);
-void CompleteCmdForward(register class typescript  *ts, long  key);
-void CompleteCmdBackward(register class typescript  *ts, long  key);
+static int mystrcmp(char  **s1,char  **s2);
+void PossibleCompletions(class typescript  *ts, long  key);
+void CompleteTokenWork(class typescript  *ts, boolean  forward);
+void CompleteTokenForward(class typescript  *ts, long  key);
+void CompleteTokenBackward(class typescript  *ts, long  key);
+void CompleteCmdWork(class typescript  *ts, boolean  forward);
+void CompleteCmdForward(class typescript  *ts, long  key);
+void CompleteCmdBackward(class typescript  *ts, long  key);
 
 
-void CompleteFname(register class typescript  *ts, long  key)
+void CompleteFname(class typescript  *ts, long  key)
 {
-    register long pos;
-    register long fname;
-    register class text *theText = Text(ts);
+    long pos;
+    long fname;
+    class text *theText = Text(ts);
     char pathname[MAXPATHLEN];
     char buffer[MAXPATHLEN];
     char canonical[MAXPATHLEN];
-    register char *insert;
-    char *msg = NULL;
+    char *insert;
+    const char *msg = NULL;
     long c;
     long tlen = (theText)->GetLength();
     long cStart = (ts->cmdStart)->GetPos();
@@ -250,22 +242,22 @@ SaveLastCommand(class typescript  *td)
 }
 
 static int
-mystrcmp(register char  **s1,register char  **s2)
+mystrcmp(char  **s1,char  **s2)
 {
   if(s1 && *s1 && s2 && *s2)
       return(strcmp(*s1,*s2));
   else return(0);
 }
 
-void PossibleCompletions(register class typescript  *ts, long  key)
+void PossibleCompletions(class typescript  *ts, long  key)
 {
-    register long pos;
-    register class text *theText = Text(ts);
+    long pos;
+    class text *theText = Text(ts);
     long c;
     long tlen = (theText)->GetLength();
     long cStart = (ts->cmdStart)->GetPos();
     long endpos;
-    register long fname;
+    long fname;
     char pathname[MAXPATHLEN];
     long pathlen;
     char *cmdStr;
@@ -300,7 +292,7 @@ void PossibleCompletions(register class typescript  *ts, long  key)
     else {
 	if(pathname[pathlen-1] == '/') rock.refusedot = TRUE;
     }
-    completion::FileHelp((*pathname) ? pathname : (char *)"./", 0, (message_workfptr)GatherStats, (long) &rock);
+    completion::FileHelp((*pathname) ? pathname : "./", 0, (message_workfptr)GatherStats, (long) &rock);
 
     if(rock.errorcnt || rock.itemcnt == 0) {
 	message::DisplayString(ts, 0, "[No Match]");
@@ -315,7 +307,7 @@ void PossibleCompletions(register class typescript  *ts, long  key)
 	char spaces[MAXPATHLEN];
 	long windowwidth, windowheight;
 	struct repCookie cookie;
-	register long row, col;
+	long row, col;
 	char **files, *thisfile;
 	int len, count;
 
@@ -335,7 +327,7 @@ void PossibleCompletions(register class typescript  *ts, long  key)
 	cookie.maxwidthinpix = 0;
 	cookie.report = (char**) calloc(rock.itemcnt, sizeof(char*));
 
-	completion::FileHelp((*pathname) ? pathname : (char *)"./", 0, (message_workfptr)MakeReport, (long)&cookie);
+	completion::FileHelp((*pathname) ? pathname : "./", 0, (message_workfptr)MakeReport, (long)&cookie);
 
 	cookie.colwidth = rock.maxitemlen + COLSPACE;
 	cookie.columns = windowwidth / (cookie.maxwidthinpix + charwidth);
@@ -392,15 +384,15 @@ static long lastmatch;
 static long beginToken;
 static long endToken;
 
-void CompleteTokenWork(register class typescript  *ts, boolean  forward)
+void CompleteTokenWork(class typescript  *ts, boolean  forward)
 {
-    register long pos;
-    register class text *theText = Text(ts);
-    register long begincmd;
+    long pos;
+    class text *theText = Text(ts);
+    long begincmd;
     long lastEventCmd;
     char cmd[MAXPATHLEN];
-    register long match;
-    char *patcode;
+    long match;
+    const char *patcode;
     long tlen;
     long clen;
     long c;
@@ -519,26 +511,26 @@ void CompleteTokenWork(register class typescript  *ts, boolean  forward)
     ((ts)->GetIM())->SetLastCmd( tokenSearchCmd);
 }
 
-void CompleteTokenForward(register class typescript  *ts, long  key)
+void CompleteTokenForward(class typescript  *ts, long  key)
 {
     CompleteTokenWork(ts, TRUE);
 }
 
-void CompleteTokenBackward(register class typescript  *ts, long  key)
+void CompleteTokenBackward(class typescript  *ts, long  key)
 {
     CompleteTokenWork(ts, FALSE);
 }
 
 
-void CompleteCmdWork(register class typescript  *ts, boolean  forward)
+void CompleteCmdWork(class typescript  *ts, boolean  forward)
 {
-    register long pos;
-    register class text *theText;
-    register long begincmd;
+    long pos;
+    class text *theText;
+    long begincmd;
     long lastEventCmd;
     char cmd[MAXPATHLEN];
-    register long match;
-    char *patcode;
+    long match;
+    const char *patcode;
 
     if (ts->pipescript) return;
 
@@ -604,7 +596,7 @@ void CompleteCmdWork(register class typescript  *ts, boolean  forward)
     }
 
     if (match >= 0 && match != (ts->cmdText)->GetLength()) {
-	register long endmatch;
+	long endmatch;
 
 	lastmatch = match;
 	strcpy(lastcmd, cmd);
@@ -624,12 +616,12 @@ void CompleteCmdWork(register class typescript  *ts, boolean  forward)
     ((ts)->GetIM())->SetLastCmd( searchCmd);
 }
 
-void CompleteCmdForward(register class typescript  *ts, long  key)
+void CompleteCmdForward(class typescript  *ts, long  key)
 {
     CompleteCmdWork(ts, TRUE);
 }
 
-void CompleteCmdBackward(register class typescript  *ts, long  key)
+void CompleteCmdBackward(class typescript  *ts, long  key)
 {
     CompleteCmdWork(ts, FALSE);
 }

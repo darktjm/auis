@@ -85,13 +85,13 @@ public:
 
 
 
-	virtual void SetText(/* struct label *self, */ char *text);
+	virtual void SetText(/* struct label *self, */ const char *text);
 		/* the text is copied within the struct label, so the source is no longer needed */
-	virtual void SetFont(/* struct label *self, */ char *fontfamily, long style, long size);
+	virtual void SetFont(/* struct label *self, */ const char *fontfamily, long style, long size);
 		/* The parameters to SetFont are the same as those to fontdesc_Create */
 	virtual char * GetText(/* struct label *self */)  ;
 		/* returns a pointer to the text.  It must not be modified by the caller */
-	virtual char * GetFont(/* struct label *self, */ long *style, long *size)  ;
+	virtual const char * GetFont(/* struct label *self, */ long *style, long *size)  ;
 		/* returns a pointer to an internal buffer containing the font family name;
 			it must not be modified */
 	virtual void SetFlags(/* struct  label *self, */ int flags);

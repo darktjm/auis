@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zip.C,v 1.3 1993/06/17 04:28:00 rr2b Stab74 $";
-#endif
-
-
 /* zip.c	Zip Data-object					      */
 /* Author	TC Peters					      */
 /* Information Technology Center	   Carnegie-Mellon University */
@@ -80,7 +74,7 @@ static boolean debug;
 #define	 Objects(s,i)		      (((s)->objects)[i])
 
 
-static char   *object_names[] = {
+static const char   * const object_names[] = {
 /* NULL	       */ "zipobject",
 /* A Caption   */ "zipocapt",
 /* B FlexCapt  */ "zipofcapt",
@@ -114,14 +108,14 @@ NULL
 
 
 ATKdefineRegistry(zip, dataobject, zip::InitializeClass);
-static long Check_Image( register class zip		      *self, register zip_type_image	       image, register long			       modified );
-static void Write_View_Info( register class zip		      *self, register FILE			      *file );
-static void Write_Object_Info( register class zip		      *self, register FILE			      *file );
-void Write_PrintSize_Info( register class zip		      *self, register FILE			      *file );
-static long Generate_Temp_File( register class zip		      *self, register FILE			      *file, register char			     **generated_file_name );
-static long Init_Message_Writer( register class zip		      *self, register char			      *msg );
-static long Init_Message_Clearer( register class zip		      *self );
-static long Init_Message_Acknowledger( register class zip		      *self, register char			      *msg );
+static long Check_Image( class zip		      *self, zip_type_image	       image, long			       modified );
+static void Write_View_Info( class zip		      *self, FILE			      *file );
+static void Write_Object_Info( class zip		      *self, FILE			      *file );
+void Write_PrintSize_Info( class zip		      *self, FILE			      *file );
+static long Generate_Temp_File( class zip		      *self, FILE			      *file, char			     **generated_file_name );
+static long Init_Message_Writer( class zip		      *self, char			      *msg );
+static long Init_Message_Clearer( class zip		      *self );
+static long Init_Message_Acknowledger( class zip		      *self, char			      *msg );
 
 boolean
 zip::InitializeClass( )
@@ -145,9 +139,9 @@ zip::zip( )
       {
 	ATKinit;
 
-  register long			      status = zip_ok;
-  register char			     *font_name = NULL;
-  register int			      i;
+  long			      status = zip_ok;
+  const char			     *font_name = NULL;
+  int			      i;
 
   IN(zip_InitializeObject);
   STREAM = NULL;
@@ -210,9 +204,9 @@ zip::~zip( )
   }
 
 void 
-zip::Set_Debug( register boolean state )
+zip::Set_Debug( boolean state )
       {
-  register long i;
+  long i;
 
   IN(zip_Set_Debug);
   debug = state;
@@ -224,9 +218,9 @@ zip::Set_Debug( register boolean state )
   }
 
 static long
-Check_Image( register class zip *self, register zip_type_image image, register long modified )
+Check_Image( class zip *self, zip_type_image image, long modified )
         {
-  register zip_type_figure figure;
+  zip_type_figure figure;
 
   IN(Check_Image);
   if ( image )
@@ -250,7 +244,7 @@ Check_Image( register class zip *self, register zip_type_image image, register l
 long
 zip::GetModified( )
     {
-  register long			      modified = (this )->dataobject::GetModified( );
+  long			      modified = (this )->dataobject::GetModified( );
 
   IN(zip_GetModified);
   if ( STREAM )
@@ -260,9 +254,9 @@ zip::GetModified( )
   }
 
 long
-zip::Read( register FILE			      *file, register long			       id )
+zip::Read( FILE			      *file, long			       id )
         {
-  register long			      status;
+  long			      status;
   char				     *generated_file_name;
 
   IN(zip_Read);
@@ -282,12 +276,12 @@ zip::Read( register FILE			      *file, register long			       id )
   return status;
   }
 
-extern long zip_Enparse_Stream(class zip *self, register struct zip_stream *stream);
+extern long zip_Enparse_Stream(class zip *self, struct zip_stream *stream);
 
 long
-zip::Write( register FILE			      *file, register long			       id, register int 			       level )
+zip::Write( FILE			      *file, long			       id, int 			       level )
           {
-  register long			      status;
+  long			      status;
 
   IN(zip_Write);
   DEBUGdt( Headerwriteid, this->writeID );
@@ -337,7 +331,7 @@ zip::Write( register FILE			      *file, register long			       id, register int
   }
 
 static
-void Write_View_Info( register class zip *self, register FILE *file )
+void Write_View_Info( class zip *self, FILE *file )
 {
   if ( self->desired_view_width )
     fprintf( file, "%%ViewWidth %ld\n", self->desired_view_width );
@@ -346,7 +340,7 @@ void Write_View_Info( register class zip *self, register FILE *file )
 }
 
 static
-void Write_Object_Info( register class zip *self, register FILE *file )
+void Write_Object_Info( class zip *self, FILE *file )
       {
   if ( self->object_width )
     fprintf( file, "%%ObjectWidth %ld\n", self->object_width );
@@ -354,7 +348,7 @@ void Write_Object_Info( register class zip *self, register FILE *file )
     fprintf( file, "%%ObjectHeight %ld\n", self->object_height );
   }
 
-void Write_PrintSize_Info( register class zip *self, register FILE *file )
+void Write_PrintSize_Info( class zip *self, FILE *file )
 {
     /* Encode print size as a presentation parameter */
 
@@ -365,12 +359,12 @@ void Write_PrintSize_Info( register class zip *self, register FILE *file )
 
 
 static
-long Generate_Temp_File( register class zip		      *self, register FILE			      *file, register char			     **generated_file_name )
+long Generate_Temp_File( class zip		      *self, FILE			      *file, char			     **generated_file_name )
         {
-  register long			      status = dataobject_NOREADERROR;
+  long			      status = dataobject_NOREADERROR;
   static char			      temp_name[512];
-  register FILE			     *temp_file;
-  register long			      level = 0;
+  FILE			     *temp_file;
+  long			      level = 0;
   char				      line[32000];
 
 
@@ -410,13 +404,13 @@ long Generate_Temp_File( register class zip		      *self, register FILE			      
   return  status;
   }
 
-void zip::Show_Statistics( register int options )
+void zip::Show_Statistics( int options )
       {
-  register zip_type_stream_chain	  stream_chain;
-  register zip_type_stream		  stream;
-  register zip_type_image		  image;
-  register zip_type_figure		  figure;
-  register int				  bytes,
+  zip_type_stream_chain	  stream_chain;
+  zip_type_stream		  stream;
+  zip_type_image		  image;
+  zip_type_figure		  figure;
+  int				  bytes,
 					  figure_count = 0,
 					  image_count = 0,
 					  stream_count = 0,
@@ -473,21 +467,21 @@ void zip::Show_Statistics( register int options )
   }
 
 static long
-Init_Message_Writer( register class zip *self, register char  *msg )
+Init_Message_Writer( class zip *self, char  *msg )
       {
 /*===  apt_Announce( msg );===*/
   return zip_success;
   }
 
 static long
-Init_Message_Clearer( register class zip		      *self )
+Init_Message_Clearer( class zip		      *self )
     {
 /*===  apt_Unannounce();===*/
   return zip_success;
   }
 
 static long
-Init_Message_Acknowledger( register class zip		      *self, register char			      *msg )
+Init_Message_Acknowledger( class zip		      *self, char			      *msg )
       {
 /*===
   while ( apt_Acknowledge( msg ) == -1 )

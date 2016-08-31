@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/drawfreq.C,v 1.5 1994/10/19 18:02:54 Zarf Stab74 $";
-#endif
-
-
- 
-
-
 #include <consoleClass.H>
 #include <fontdesc.H>
 #include <graphic.H>
@@ -59,7 +49,7 @@ extern int SineMult[], CosineMult[];
 
 boolean REVSCROLL = FALSE;
 
-char *ErrorParseTable[] = {
+const char * const ErrorParseTable[] = {
     "!@#TROUBLE:",
 #define ERRFLAG_TROUBLE 0
         "!@#ERRORTROUBLE:",
@@ -89,10 +79,6 @@ char *ErrorParseTable[] = {
        * HandLength * radius /10 is  length of dial hand
        */
 
-#ifndef NORCSID
-#endif
-#if !POSIX_ENV
-#endif
 void DrawDialHand(class consoleClass  *self, struct display  *disp, int  DialPosition , int  Bend , int  CHL);
 void DrawDial(class consoleClass  *self, int  Op, struct display  *disp);
 void DrawIndicator(class consoleClass  *self,int  Op, struct display  *disp);
@@ -110,7 +96,7 @@ void LogReport(class consoleClass  *self, int  Op, struct display  *disp);
 void LogUser(class consoleClass  *self, int  Op, struct display  *disp);
 void LogSilly(class consoleClass  *self, int  Op, struct display  *disp);
 void AddToLog(class consoleClass  *self,struct display  *disp, boolean  IsClick, struct RegionLog  *logptr,boolean  IsUser);
-void AddStringToLog(char  *string, struct RegionLog  *logptr);
+void AddStringToLog(const char  *string, struct RegionLog  *logptr);
 long GetMyPosition(class text  *textlog);
 void SetLogFence(class text  *textlog);
 void ScrollToEnd(struct RegionLog  *rlogptr, int  Op);
@@ -313,7 +299,9 @@ void DrawIndicator(class consoleClass  *self,int  Op, struct display  *disp)
 
 void maketext(class consoleClass  *self, char  *target, struct display  *disp, int  Which)
                 {
-    char   *s, *t, u[20], *v;
+    char   *s, u[20];
+    const char *t;
+    const char *v;
 
     mydbg(("entering: maketext\n"));
     s = target;
@@ -772,10 +760,10 @@ void AddToLog(class consoleClass  *self,struct display  *disp, boolean  IsClick,
 
 
 
-void AddStringToLog(char  *string, struct RegionLog  *logptr)
+void AddStringToLog(const char  *string, struct RegionLog  *logptr)
 {
     static char Buffer[256];
-    char   *s,
+    const char   *s,
         *t;
 
     mydbg(("entering: AddStringToLog\n"));

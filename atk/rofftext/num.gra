@@ -33,7 +33,7 @@
 
 
 	void
-num::ErrorGuts(int severity, char *severityname, char *msg)
+num::ErrorGuts(int severity, const char *severityname, const char *msg)
 {
 	struct evalstrdata *data = DATA(this);
 	if (data->rt->PrintWarnings) {
@@ -44,7 +44,7 @@ num::ErrorGuts(int severity, char *severityname, char *msg)
 			msg);
 	}
 	if (severity & parser_FREEMSG) 
-		free(msg);
+		free((char *)msg);
 }
 
 

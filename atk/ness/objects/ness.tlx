@@ -3,7 +3,6 @@
 
 -- ******************************************************
 --	Copyright 1992,1993 Carnegie Mellon University.  All Rights Reserved.
---	$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/ness.tlx,v 1.4 1994/04/10 23:50:56 wjh Stab74 $
 --	$Disclaimer: 
 -- Permission to use, copy, modify, and distribute this software and its 
 -- documentation for any purpose and without fee is hereby granted, provided 
@@ -256,9 +255,9 @@ tokenclass setSTRINGCON
 tokenclass setSTRINGCON
 seq	"//"
 {
-	register int c;
-	static char delim[4] = "\n\\\\";
-	register char *dx;
+	int c;
+	static const char delim[4] = "\n\\\\";
+	const char *dx;
 	class toksym *t;	/* is really a nesssym */	
 	long startloc;
 

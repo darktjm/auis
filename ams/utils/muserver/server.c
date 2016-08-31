@@ -24,12 +24,6 @@
  * Start Date: 9/4/91
  */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/muserver/RCS/server.c,v 1.12 1996/09/03 19:01:52 robr Exp $";
-#endif
-
-
 #ifdef _IBMR2
 #ifndef _BSD
 #define _BSD 43
@@ -53,11 +47,11 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/muse
 #define FDBASE 3		/* base file descriptor */
 
 #ifdef CMU_ENV
-static char logfile[] = "/usr/log/muserver.log";
-static char oldfile[] = "/usr/log/muserver.old";
+static const char logfile[] = "/usr/log/muserver.log";
+static const char oldfile[] = "/usr/log/muserver.old";
 #else
-static char logfile[] = "/tmp/muserver.log";
-static char oldfile[] = "/tmp/muserver.old";
+static const char logfile[] = "/tmp/muserver.log";
+static const char oldfile[] = "/tmp/muserver.old";
 #endif
 
 typedef struct fdinfo {
@@ -219,7 +213,7 @@ int unzombie()
  */
 int statreset()
 {
-    static char sreset[] = "statistics reset";
+    static const char sreset[] = "statistics reset";
 		    
     reqtotal = conntotal = connnum = 0;
     server_msg(sreset, 0);

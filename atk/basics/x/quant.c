@@ -64,7 +64,7 @@ mediancut( colorhist_vector chv, int colors, int sum, pixval maxval, int newcolo
 {
     colorhist_vector colormap;
     box_vector bv;
-    register int bi, i;
+    int bi, i;
     int boxes;
 
     colormap =
@@ -96,9 +96,9 @@ mediancut( colorhist_vector chv, int colors, int sum, pixval maxval, int newcolo
      */
     while ( boxes < newcolors )
     {
-	register int indx, clrs;
+	int indx, clrs;
 	int sm;
-	register int minr, maxr, ming, maxg, minb, maxb, v;
+	int minr, maxr, ming, maxg, minb, maxb, v;
 	int halfsum, lowersum;
 
 	/*
@@ -219,9 +219,9 @@ mediancut( colorhist_vector chv, int colors, int sum, pixval maxval, int newcolo
     for ( bi = 0; bi < boxes; ++bi )
     {
 #ifdef REP_CENTER_BOX
-	register int indx = bv[bi].index;
-	register int clrs = bv[bi].colors;
-	register int minr, maxr, ming, maxg, minb, maxb, v;
+	int indx = bv[bi].index;
+	int clrs = bv[bi].colors;
+	int minr, maxr, ming, maxg, minb, maxb, v;
 
 	minr = maxr = PPM_GETR( chv[indx].color );
 	ming = maxg = PPM_GETG( chv[indx].color );
@@ -243,9 +243,9 @@ mediancut( colorhist_vector chv, int colors, int sum, pixval maxval, int newcolo
 		   ( minb + maxb ) / 2 );
 #endif /*REP_CENTER_BOX*/
 #ifdef REP_AVERAGE_COLORS
-	register int indx = bv[bi].index;
-	register int clrs = bv[bi].colors;
-	register long r = 0, g = 0, b = 0;
+	int indx = bv[bi].index;
+	int clrs = bv[bi].colors;
+	long r = 0, g = 0, b = 0;
 
 	for ( i = 0; i < clrs; ++i )
 	{
@@ -259,9 +259,9 @@ mediancut( colorhist_vector chv, int colors, int sum, pixval maxval, int newcolo
 	PPM_ASSIGN( colormap[bi].color, r, g, b );
 #endif /*REP_AVERAGE_COLORS*/
 #ifdef REP_AVERAGE_PIXELS
-	register int indx = bv[bi].index;
-	register int clrs = bv[bi].colors;
-	register long r = 0, g = 0, b = 0, sum = 0;
+	int indx = bv[bi].index;
+	int clrs = bv[bi].colors;
+	long r = 0, g = 0, b = 0, sum = 0;
 
 	for ( i = 0; i < clrs; ++i )
 	{

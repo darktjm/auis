@@ -22,8 +22,6 @@ ATK_INTER
 // 
 //  $ */
 
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/phelpv.H,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $ */
-
 #include <textview.H>
 class phelpv : public  textview  {
 public:

@@ -26,13 +26,6 @@
  *  $
 */
 
-#include <andrewos.h>	/* for bzero() bcmp() */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nsearch.C,v 1.10 1995/04/05 01:48:15 rr2b Stab74 $";
-#endif
-
 /* 
 	search.c  -  implement searches and pattern matches
 
@@ -146,6 +139,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * 
 */
 
+#include <andrewos.h>	/* for bzero() bcmp() */
 #include <ctype.h>
 #include <dataobject.H>
 #include <text.H>
@@ -217,14 +211,14 @@ static boolean CharTable[256];	/* assumed initially zero */
 
 static void SetCharTable(class nessmark  *pat);
 static void ClearCharTable(class nessmark  *pat);
-static boolean BufMatch(register long  offset);
+static boolean BufMatch(long  offset);
 static long SimpleSearch();
 static long DeltaSearch();
 static void fsearch(class nessmark  *subject , class nessmark  *pat);
 static void match(class nessmark  *subject , class nessmark  *pat);
 static void anyof(class nessmark  *subject , class nessmark  *pat);
 static void span(class nessmark  *subject , class nessmark  *pat);
-static void token(register class nessmark  *subject , register class nessmark  *pat);
+static void token(class nessmark  *subject , class nessmark  *pat);
 static void AddOneStyle(class text  *text, long  pos , long  len, class style  *style);
 static void AddStyles(class text  *text, long  pos , long  len, class environment  *env);
 static boolean HasStyle(class environment  *env , class environment  *penv);
@@ -242,8 +236,8 @@ void SearchOp(unsigned char op, unsigned char *opiar /* iar of the opcode */);
 */
 	static void
 SetCharTable(class nessmark  *pat) {
-	register class simpletext *ptext;
-	register long pos, end;
+	class simpletext *ptext;
+	long pos, end;
 	ptext = (pat)->GetText();
 	pos = (pat)->GetPos();
 	end = pos + (pat)->GetLength();
@@ -257,8 +251,8 @@ SetCharTable(class nessmark  *pat) {
 */
 	static void
 ClearCharTable(class nessmark  *pat) {
-	register class simpletext *ptext;
-	register long pos, end, len;
+	class simpletext *ptext;
+	long pos, end, len;
 	len = (pat)->GetLength();
 	if (len > 20) {
 		memset(CharTable, 0, sizeof(CharTable));
@@ -284,8 +278,8 @@ static long patlen, bufAlen, bufBlen;
 	return TRUE for a match and FALSE otherwise
  */
 	static boolean
-BufMatch(register long  offset) {
-	register long Apart;	/* how much is in A */
+BufMatch(long  offset) {
+	long Apart;	/* how much is in A */
 	if (offset >= bufAlen) 
 		/* entirely in B */
 		return (memcmp(patBuf, bufB + offset - bufAlen, patlen) == 0);
@@ -315,8 +309,8 @@ BufMatch(register long  offset) {
 */
 	static long
 SimpleSearch() {
-	register char *cx, *curend,  target;
-	register long i, toff;
+	char *cx, *curend,  target;
+	long i, toff;
 	
 	/* compute target character:  first low probability character in pat
 		the high probability characters are deemed to be
@@ -397,8 +391,8 @@ static short freq[256] = {
 	static long
 DeltaSearch() {
 	long delta[256];
-	register char *cx, *curend, target;
-	register long i, toff;
+	char *cx, *curend, target;
+	long i, toff;
 
 	/* for each character of pattern, compute a delta value
 		such that if the pattern is aligned at cx-toff
@@ -552,8 +546,8 @@ fsearch(class nessmark  *subject , class nessmark  *pat) {
 */
 	static void
 match(class nessmark  *subject , class nessmark  *pat) {
-	register class simpletext *stext, *ptext;
-	register long pos, end, patpos, patend;
+	class simpletext *stext, *ptext;
+	long pos, end, patpos, patend;
 	long spos, slen;
 
 	stext = (subject)->GetText();
@@ -583,8 +577,8 @@ match(class nessmark  *subject , class nessmark  *pat) {
 
 	static void
 anyof(class nessmark  *subject , class nessmark  *pat) {
-	register class simpletext *stext;
-	register long pos, end;
+	class simpletext *stext;
+	long pos, end;
 	long slen, spos;
 
 	stext = (subject)->GetText();
@@ -613,8 +607,8 @@ anyof(class nessmark  *subject , class nessmark  *pat) {
 
 	static void
 span(class nessmark  *subject , class nessmark  *pat) {
-	register class simpletext *stext;
-	register long pos, end;
+	class simpletext *stext;
+	long pos, end;
 	long spos, slen;
 
 	stext = (subject)->GetText();
@@ -639,8 +633,8 @@ span(class nessmark  *subject , class nessmark  *pat) {
 }
 
 	static void
-token(register class nessmark  *subject , register class nessmark  *pat) {
-	register class simpletext *stext;
+token(class nessmark  *subject , class nessmark  *pat) {
+	class simpletext *stext;
 	long slen, spos;
 	stext = (subject)->GetText();
 	spos = (subject)->GetPos();
@@ -710,7 +704,7 @@ AddStyles(class text  *text, long  pos , long  len, class environment  *env) {
 */
 	static boolean
 HasStyle(class environment  *env , class environment  *penv) {
-	char *pname, *name;
+	const char *pname, *name;
 	enum nametype {None, Name, Menu} nt = None;
 	if (penv->data.style == NULL) return TRUE;
 	pname = (penv->data.style)->GetName();
@@ -914,7 +908,7 @@ DeleteNonTemplateStyles(class style  *stylep, class stylesheet  *ss) {
 */
 	void
 SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
-	register union stackelement *NSP = NSPstore; 
+	union stackelement *NSP = NSPstore; 
 
 	/* these definitions are global because GDB can't get at local decls. */
 
@@ -922,6 +916,7 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 	boolean boolval;
 	long intval;
 	double realval;
+	const char *cxc;
 	char *cstring, *cx;
 	ATK  *objval;
 	long pos, len, finish;
@@ -966,14 +961,14 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 		len = (subject)->GetLength();
 		finish = pos + len;  /* failure location */
 		cstring = (char *)(pat)->ToC();
-		cx = search::CompilePattern(cstring, &regPat);
+		cxc = search::CompilePattern(cstring, &regPat);
 		free(cstring);
 		/* XXX save pat's cstring and compiled pattern
 		test and avoid recompilation (? will this really be faster) */
 
-		if (cx != 0) {
+		if (cxc != 0) {
 			/* not a valid pattern */
-			fprintf(stderr, "Ness regSearch: %s\n", cx);
+			fprintf(stderr, "Ness regSearch: %s\n", cxc);
 			(subject)->MakeConst("");  /* EmptyText */
 		}
 		else {
@@ -1012,12 +1007,12 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 		len = (subject)->GetLength();
 		finish = pos + len;  /* failure location */
 		cstring = (char *)(pat)->ToC();
-		cx = search::CompilePattern(cstring, &regPat);
+		cxc = search::CompilePattern(cstring, &regPat);
 		free(cstring);
 		/* XXX save cstring and test to avoid recompilation (? is this really faster) */
-		if (cx != 0) {
+		if (cxc != 0) {
 			/* not a valid pattern */
-			fprintf(stderr, "Ness regSearchReverse: %s\n", cx);
+			fprintf(stderr, "Ness regSearchReverse: %s\n", cxc);
 			(subject)->MakeConst("");   /* EmptyText */
 		}
 		else {
@@ -1570,7 +1565,7 @@ for (pos = 0; pos <= (textp)->GetLength(); pos ++) {
 		len = (subject)->GetLength();
 		if (*cstring == '\0') {
 			free(cstring);
-			cstring = (char *)freeze(((class dataobject *)objval  )->ViewName(
+			cstring = strdup(((class dataobject *)objval  )->ViewName(
 					));
 		}
 

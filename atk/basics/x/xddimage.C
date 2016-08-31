@@ -21,11 +21,6 @@
  */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xddimage.C,v 1.6 1996/08/27 22:05:04 robr Exp $";
-#endif
 ATK_IMPL("xddimage.H")
 
 #include <xddimage.H>
@@ -469,7 +464,7 @@ boolean xddimage::Process(graphic *dest) {
     Visual *visual; /* visual to use */
     Pixel *redvalue, *greenvalue, *bluevalue;
     unsigned int linelen, dpixlen, dbits;
-    register int x, y, a, b;
+    int x, y, a, b;
     unsigned short red, green, blue;
     class xcolor *xc;
     XColor xcolor;

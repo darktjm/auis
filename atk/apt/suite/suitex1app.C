@@ -22,11 +22,6 @@
 
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/suite/RCS/suitex1app.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
 ATK_IMPL("suitex1app.H")
 #include <im.H>
 #include <frame.H>
@@ -38,7 +33,7 @@ ATK_IMPL("suitex1app.H")
 
 ATKdefineRegistry(suitex1app, application, NULL);
 
-class view * Flavor_Choice( class suitex1app  *self, register class suite  *suite, register struct suite_item  *item, int type, view_MouseAction action, long x, long y, long clicks );
+class view * Flavor_Choice( class suitex1app  *self, class suite  *suite, struct suite_item  *item, int type, view_MouseAction action, long x, long y, long clicks );
 
 static suite_Specification vanilla[] = {
     suite_ItemCaption( "   Vanilla" ),
@@ -136,7 +131,7 @@ suitex1app::Start( )
 }
 
 class view *
-Flavor_Choice( class suitex1app  *self, register class suite  *suite, register struct suite_item  *item, int  type, view_MouseAction action, long x, long y, long clicks )
+Flavor_Choice( class suitex1app  *self, class suite  *suite, struct suite_item  *item, int  type, view_MouseAction action, long x, long y, long clicks )
 {
     char msg[100];
     if(action == view_LeftUp) {

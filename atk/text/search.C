@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/search.C,v 3.5 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("search.H")
 #include <ctype.h>
 
@@ -89,8 +79,6 @@ int MatchLength;
 
 
 ATKdefineRegistry(search, ATK, NULL);
-#ifndef NORCSID
-#endif
 static unsigned char * SkipOp (unsigned char *s );
 static long TryMatch (class simpletext  *d, long  pos, unsigned char **s , int loop);
 static long TryMatchStr (unsigned char *str, long  pos, long length, unsigned char **s , int loop);
@@ -168,10 +156,10 @@ char *search::GetQuotedSearchString(char  *string, char  *resString, long  resSt
     return result;
 }
 
-char *
-search::CompilePattern (char *s, struct SearchPattern   **result )
+const char *
+search::CompilePattern (const char *s, struct SearchPattern   **result )
 {
-    unsigned char *string=(unsigned char *)s;
+    const unsigned char *string=(const unsigned char *)s;
     struct SearchPattern  *p;
     long    used = 0;
     int     LastStart = -1;

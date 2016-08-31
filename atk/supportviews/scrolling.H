@@ -94,13 +94,13 @@ class ScrollInterfaceClassic : public ScrollInterface {
     inline void SetScrollee(class view *v) {
 	vw=v; 
 	if(vw) { 
-	    fns[scroll_VERT]=(struct scrollfns *)vw->GetInterface("scroll,vertical");
-	    fns[scroll_HORIZ]=(struct scrollfns *)vw->GetInterface("scroll,horizontal");
+	    fns[scroll_VERT]=(const struct scrollfns *)vw->GetInterface("scroll,vertical");
+	    fns[scroll_HORIZ]=(const struct scrollfns *)vw->GetInterface("scroll,horizontal");
 	}
     }
     inline class view *GetScrollee() { return vw; }
     
-    struct scrollfns *fns[scroll_TYPES];
+    const struct scrollfns *fns[scroll_TYPES];
     class view *vw;
 };
 

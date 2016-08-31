@@ -30,11 +30,6 @@ the full agreement.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/gdp/RCS/object.c,v 1.4 1993/06/17 04:34:09 rr2b Stab74 $";
-#endif
-
 #include "set.h"
 #include <gestures/bool.h>
 #include <gestures/util.h>
@@ -61,8 +56,8 @@ Object
 CreateObject(type)
 ObjectType type;
 {
-	register Object o = allocate(1, struct object);
-	register int i;
+	Object o = allocate(1, struct object);
+	int i;
 
 	if( (int) type < 0 || (int) type >= NDOPE)
 		recog_error("CreateObject: bad type %d\n", (int) type);
@@ -83,11 +78,11 @@ ObjectType type;
 
 Bool
 UpdatePoint(o, which, x, y)
-register Object o;
+Object o;
 int which;
 int x, y;
 {
-	register struct dope *d = &dope[(int) o->type];
+	struct dope *d = &dope[(int) o->type];
 	struct object save;
 	
 	if(which < 0 || which > d->npoints)
@@ -106,7 +101,7 @@ int x, y;
 
 Bool
 AddSubObject(o, subo)
-register Object o, subo;
+Object o, subo;
 {
 	if(o->type != SetOfObjects)
 		return FALSE;
@@ -117,7 +112,7 @@ register Object o, subo;
 
 Bool
 AddText(o, s)
-register Object o;
+Object o;
 char *s;
 {
 	Erase(o);
@@ -130,7 +125,7 @@ Object
 CopyObject(old)
 Object old;
 {
-	register Object o = allocate(1, struct object);
+	Object o = allocate(1, struct object);
 	Set CopySet();
 	*o = *old;
 	if(o->type == SetOfObjects)
@@ -147,10 +142,10 @@ Object o;
 
 void
 Transform(o, t)
-register Object o;
+Object o;
 Transformation t;
 {
-	register struct dope *d = &dope[(int) o->type];
+	struct dope *d = &dope[(int) o->type];
 	if(o->type == SetOfObjects)
 		(d->transform)(o, t);
 	else {
@@ -177,8 +172,8 @@ AlwaysBad()
 
 Bool
 VlinePoint(o, which)
-register Object o;
-register int which;
+Object o;
+int which;
 {
 	/* make vertical or horizontal or 45 degrees */
 	return TRUE;
@@ -186,7 +181,7 @@ register int which;
 
 int
 Distance(o, x, y)
-register Object o;
+Object o;
 int x, y;
 {
 	(*dope[(int)o->type].distance)(o, x, y);	

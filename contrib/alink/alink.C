@@ -24,12 +24,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/alink/RCS/alink.C,v 1.3 1994/06/09 21:18:04 rr2b Stab74 $";
-#endif
-
-
 #include <stdio.h>
 #include <andrewos.h>
 #include <environ.H>
@@ -52,8 +46,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/alink/
 
 
 ATKdefineRegistry(alink, pushbutton, alink::InitializeClass);
-#ifndef NORCSID
-#endif
 long A64L(char  *s );
 char *L64A(long  l );
 static void WriteAudio(FILE  *fp, long  len , char  *audio );

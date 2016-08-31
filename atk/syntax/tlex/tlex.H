@@ -71,7 +71,7 @@ public:
 		/* backup and repeat tokens starting with the index'th
 		    most recent token, where index is as for RecentPosition */
 
-	virtual void Error(char *msg);
+	virtual void Error(const char *msg);
 		/* a lexical error is reported by calling the
 			error handler after setting up a dummy token
 			for the error text
@@ -201,7 +201,7 @@ public:
 
 
 
-	static struct tlex * Create(struct tlex_tables *description, void *rock,
+	static struct tlex * Create(const struct tlex_tables *description, void *rock,
 			struct text *text, long pos, long len)
 			 ;
 		/* the rock is available to any function passed this tlex
@@ -216,7 +216,7 @@ public:
 	virtual ~tlex();
 
 
-	struct tlex_tables *lextab;
+	const struct tlex_tables *lextab;
 
 	void *rock;		/* available to action routines */
 

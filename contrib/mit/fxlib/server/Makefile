@@ -1,10 +1,6 @@
 #
 # Makefile for the FX (file exchange) server
 #
-# $Author: wdc $
-# $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/server/RCS/Makefile,v $
-# $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/server/RCS/Makefile,v 1.1 1992/02/13 20:37:46 wdc Stab74 $
-#
 # Copyright 1989, 1990 by the Massachusetts Institute of Technology.
 #
 # For copying and distribution information, please see the file

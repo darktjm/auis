@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/org/RCS/orgapp.C,v 1.6 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Org Application-Class
@@ -68,6 +61,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include <andrewos.h>
 ATK_IMPL("orgapp.H")
 #include  <im.H>
 #include  <filetype.H>
@@ -104,7 +98,7 @@ orgapp::~orgapp(  )
       {}
 
 boolean
-orgapp::ParseArgs( register int			   argc, register const char			 **argv )
+orgapp::ParseArgs( int			   argc, const char			 **argv )
         {
   class orgapp *self=this;  
   IN(orgapp_ParseArgs);
@@ -133,7 +127,7 @@ boolean
 orgapp::Start(  )
     {
   class orgapp *self=this;
-  register FILE			 *file;
+  FILE			 *file;
   long				  id, status = true;
 
   (this)->application::Start(  );

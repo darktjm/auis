@@ -38,7 +38,7 @@ class headrtv: public  view {
       static boolean atk_inited;
 
       void PostKeyState(class keystate *ks);
-      void Print(FILE *file,char *processor, char *finalFormat, boolean topLevel);
+      void Print(FILE *file,const char *processor, const char *finalFormat, boolean topLevel);
       void WantInputFocus(class view *requestor);
       void LinkTree(class view *parent);
       class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
@@ -49,7 +49,7 @@ class headrtv: public  view {
       void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
       view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
       void GetOrigin(long width, long height, long *originX, long *originY);
-      void *GetPSPrintInterface(char *printtype);
+      void *GetPSPrintInterface(const char *printtype);
 
       virtual char *GetExpandedString(int pos, boolean *haspage);
 

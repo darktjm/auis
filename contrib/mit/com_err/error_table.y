@@ -71,12 +71,6 @@ description	:	QUOTED_STRING
 #include "error_table.h"
 #include "mitcopyright.h"
 
-#ifndef	lint
-static char const rcsid_error_table_y[] =
-    "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/com_err/RCS/error_table.y,v 1.2 1994/02/02 21:44:16 sa3e Stab74 $";
-#endif
-
-char *malloc(), *realloc();
 extern FILE *hfile, *cfile;
 
 static long gensym_n = 0;

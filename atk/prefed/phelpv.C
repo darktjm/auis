@@ -20,14 +20,7 @@
 //  $
  */
 
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/phelpv.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $ */
-
 #include <andrewos.h>
-
-#ifndef NORCSID
-static UNUSED const char *rcsid_phelpv_c = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/phelpv.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif 
-
 ATK_IMPL("phelpv.H")
 
 
@@ -48,8 +41,6 @@ ATK_IMPL("phelpv.H")
 
 
 ATKdefineRegistry(phelpv, textview, phelpv::InitializeClass);
-#ifndef NORCSID
-#endif 
 static boolean WarpToGroupHelp(struct prefgroup  *pg, struct fghrock  *rock);
 static void DoGroupHelp(class phelpv  *self);
 
@@ -74,7 +65,7 @@ phelpv::~phelpv()
 
 struct fghrock {
     class phelpv *self;
-    char *name;
+    const char *name;
 };
 
 static boolean WarpToGroupHelp(struct prefgroup  *pg, struct fghrock  *rock)

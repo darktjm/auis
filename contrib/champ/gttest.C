@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/RCS/gttest.C,v 1.2 1993/05/30 00:32:39 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>	/* time.h */
 #include <stdio.h>
 #include <champ.h>
@@ -38,8 +33,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/
 
 static int MonthLengths[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-/* fake */ #ifndef NORCSID
-#endif
 void IncrementDate(struct tm  *d);
 
 /*

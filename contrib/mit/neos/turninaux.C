@@ -1,5 +1,3 @@
-/* $Author: wjh $ */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,13 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/turninaux.C,v 1.5 1996/06/11 01:28:57 wjh Exp $";
-#endif
-
-
  
 /*
  * turninaux.c
@@ -43,6 +34,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/ne
 
 #include <mit-copyright.h>
 
+#include <andrewos.h>	/* andrewos.h includes sys/types.h */
 #include <atom.H>
 #include <atomlist.H>
 #include <blank.H>
@@ -67,7 +59,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/ne
 /* sys/types.h in AIX PS2 defines "struct label",  causing a type name clash.
   Avoid this by temporarily redefining "label" to be something else. */
 #define label gezornenplatz
-#include <andrewos.h>	/* andrewos.h includes sys/types.h */
 #undef label
 
 #include <label.H>
@@ -88,10 +79,6 @@ static char *obotlabel = "Use named file";
 
 extern class menulist *turnin_menus;
 extern class keymap *turnin_kmap;
-
-#ifndef NORCSID
-#endif
-
 
 turnin::turnin()
 {

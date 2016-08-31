@@ -22,8 +22,6 @@
  It is provided "as is" without express or implied warranty.
 
  Scribetext was written entirely by Jeremy Paul Kirby, jpkirby@ATHENA.MIT.EDU
-
- $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/scribetext/RCS/main.c,v 1.7 1994/06/09 21:21:04 rr2b Stab74 $
 */
 
 /*
@@ -47,11 +45,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/scribetext/RCS/main.c,v 1.7 1994/06/09 21:21:04 rr2b Stab74 $";
-#endif
 
 #include <andrewos.h>
 #include <stdio.h>

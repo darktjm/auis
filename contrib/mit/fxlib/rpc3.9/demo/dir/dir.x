@@ -1,4 +1,3 @@
-/* @(#)dir.x	1.1 87/11/04 3.9 RPCSRC */
 /*
  * dir.x: Remote directory listing protocol
  */

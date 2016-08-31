@@ -25,16 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/lprruler.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* lprruler.c		
 
 	Code for the lprruler data object
@@ -42,17 +32,15 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 */
 
 
+#include <andrewos.h>
 ATK_IMPL("lprruler.H")
 #include <lprruler.H>
 
 	
 ATKdefineRegistry(lprruler, dataobject, NULL);
-#ifndef NORCSID
-#endif
-
 
 long
-lprruler::Read( register FILE   *file, register long   id			/* !0 if data stream, 0 if direct from file*/ )
+lprruler::Read( FILE   *file, long   id			/* !0 if data stream, 0 if direct from file*/ )
 			{
 	/* reads a lprruler from -file-.  See file format in lprruler.ch */
 	/* This routine reads the \enddata, if any. Its syntax is not checked */

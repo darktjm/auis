@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/text822.C,v 1.16 1996/08/27 22:19:24 robr Exp $";
-#endif
-
 #include <util.h>
 
 #include <text822.H>
@@ -51,7 +45,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #include <ams.h>
 #include <fdphack.h>
 
-static char *EmptyMsgString = "<empty message>";
+static const char EmptyMsgString[] = "<empty message>";
 static class style *FixedStyle, *BoldStyle, *FormatStyle, *TinyStyle, *GlobalStyle;
 static const char *myfontname = NULL;
 static int myfontsize, UsingFootNote, PrintMinorHeaders;
@@ -59,16 +53,14 @@ static int myfontsize, UsingFootNote, PrintMinorHeaders;
 
 
 ATKdefineRegistry(text822, text, text822::InitializeClass);
-#ifndef NORCSID
-#endif
 static char *StripWhiteSpace( char *t );
 static char *GetHeader(char  *LineBuf, int  lim, FILE  *fp);
 static int ignoretoken(char  *t);
-static char *translate(char  *t);
-static boolean ReadMessage(class text  *d, FILE  *fp, int  Mode, char  *ContentTypeOverride, int  *len, boolean  IsReallyTextObject, int  *BodyStart , int  *IgnorePosition, class text  *AuxHeadText, int  InsideRecursion , int  AlternativeNumber , int  JunkAtEnd , int  DisplayAllHeaders);
+static const char *translate(const char  *t);
+static boolean ReadMessage(class text  *d, FILE  *fp, int  Mode, const char  *ContentTypeOverride, int  *len, boolean  IsReallyTextObject, int  *BodyStart , int  *IgnorePosition, class text  *AuxHeadText, int  InsideRecursion , int  AlternativeNumber , int  JunkAtEnd , int  DisplayAllHeaders);
 static void RotateThirteen(class text  *d, int  start);
 static char *paramend(char  *s);
-static int FindParam(char  *ct , char  *paramname , char  *ValueBuf);
+static int FindParam(const char  *ct , const char  *paramname , char  *ValueBuf);
 static int InsertProperObject(class text  *d, FILE  *fp, int  *ShowPos, char  *ctype, char  *encoding, char  *descrip);
 static int ParseEncoding(char  *enc);
 static int getcdecoding(FILE  *fp, int  code);
@@ -81,7 +73,7 @@ static char * fgetsdecoding(char  *buf, int  size , FILE  *fp, int  code);
 // static int hexchar(int  c);
 // static int char64(int  c);
 static char *UnquoteString(char  *s);
-static int PlainAsciiText(char  *s , char  *currentcharset);
+static int PlainAsciiText(const char  *s , const char  *currentcharset);
 static int ForceMetamail(char  *ctype);
 
 
@@ -207,7 +199,7 @@ static char *GetHeader(char  *LineBuf, int  lim, FILE  *fp)
     }
 }
 
-boolean text822::ReadIntoText(class text  *d, FILE  *fp, int  Mode, char  *ContentTypeOverride, int  *len, boolean  IsReallyTextObject, int  *BodyStart , int  *IgnorePosition, class text  *AuxHeadText)
+boolean text822::ReadIntoText(class text  *d, FILE  *fp, int  Mode, const char  *ContentTypeOverride, int  *len, boolean  IsReallyTextObject, int  *BodyStart , int  *IgnorePosition, class text  *AuxHeadText)
 {
 	ATKinit;
 
@@ -227,7 +219,7 @@ static int ignoretoken(char  *t)
     return(0);
 }
 
-static char *translate(char  *t)
+static const char *translate(const char  *t)
 {
     if (!strcmp(t, "fixed")) return("typewriter");
     if (!strcmp(t, "excerpt")) return("quotation");
@@ -235,16 +227,17 @@ static char *translate(char  *t)
     return(t);
 }
 
-static boolean ReadMessage(class text  *dtxt, FILE  *fp, int  Mode, char  *ContentTypeOverride, int  *len, boolean  IsReallyTextObject, int  *BodyStart , int  *IgnorePosition, class text  *AuxHeadText, int  InsideRecursion , int  AlternativeNumber , int  JunkAtEnd , int  DisplayAllHeaders)
+static boolean ReadMessage(class text  *dtxt, FILE  *fp, int  Mode, const char  *ContentTypeOverride, int  *len, boolean  IsReallyTextObject, int  *BodyStart , int  *IgnorePosition, class text  *AuxHeadText, int  InsideRecursion , int  AlternativeNumber , int  JunkAtEnd , int  DisplayAllHeaders)
 {
     class environment *et;
     char LineBuf[10000], ScribeFormatVersion[100], *ColonLocation, c, ContentType[400], ContentEncoding[50], ContentDescription[200], Subject[200];
     int HighlightThisOne, ShowPos, linelen, ColonOffset;
     boolean SawEndData;
     int SVers, pos, fnlen, didbig, didsmall, ForceMet;
-    char fmttype[25], fmtvers[25], fmtresources[200], *sfmttype, *sfmtvers, *s, charsetbuf[100], *currentcharset;
-    char **MyHeadsArray;
-    static char *SendHeadsArray[] = {
+    char fmttype[25], fmtvers[25], fmtresources[200], *sfmttype, *sfmtvers, *s, charsetbuf[100];
+    static const char *currentcharset = NULL;
+    const char * const *MyHeadsArray;
+    static const char * const SendHeadsArray[] = {
 	"if-type-unsupported", "content-type",
 	"x-andrew-scribeformat", "x-andrew-message-size",
 	"x-andrew-text822mode", NULL
@@ -258,15 +251,18 @@ static boolean ReadMessage(class text  *dtxt, FILE  *fp, int  Mode, char  *Conte
     if (auto_fix_mail == -1)
 	auto_fix_mail = environ::GetProfileSwitch("AutoFixedWidthMail", FALSE);
 
-    currentcharset = (char *) getenv("MM_CHARSET");
-    if (!currentcharset) {
+    if(!currentcharset) {
+        currentcharset = getenv("MM_CHARSET");
+	if (!currentcharset) {
 #ifdef ISO80_FONTS_ENV
-	currentcharset = "iso-8859-1";
+	    currentcharset = "iso-8859-1";
 #else
-	currentcharset = "us-ascii";
+	    currentcharset = "us-ascii";
 #endif
-    } else {
-	for (s=currentcharset; *s; ++s) if (isupper(*s)) *s = tolower(*s);
+	} else {
+	    currentcharset = s = strdup(currentcharset);
+	    for (; *s; ++s) if (isupper(*s)) *s = tolower(*s);
+	}
     }
 
     if (AuxHeadText) {
@@ -895,7 +891,7 @@ if (nofill <= 0 && JustSawNewline > 0) {		\
     return(TRUE);
 }
 
-char *text822::ViewName()
+const char *text822::ViewName()
 {
     return("textview"); /* t822view is not necessary */
 }
@@ -938,7 +934,7 @@ long text822::Write(FILE  *fp, long  writeID, int  level)
 
 static void RotateThirteen(class text  *d, int  start)
 {
-    register char *cp,*ecp;
+    char *cp,*ecp;
     long len, lengotten;
     char *tbuf;
 
@@ -1008,7 +1004,7 @@ static char *paramend(char  *s)
     return(NULL);
 }        
 
-static int FindParam(char  *ct , char  *paramname , char  *ValueBuf)
+static int FindParam(const char  *ct , const char  *paramname , char  *ValueBuf)
 {
     char *s, *t, *t2, *eq, BigBuf[1000];
 
@@ -1242,8 +1238,8 @@ fgetsdecoding(char  *buf, int  size , FILE  *fp, int  code)
     }
 }
 
-static char basis_hex[] = "0123456789ABCDEF";
-static char basis_64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+static const char basis_hex[] = "0123456789ABCDEF";
+static const char basis_64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 /* static int hexchar(int  c)
 {
@@ -1284,7 +1280,7 @@ static char *UnquoteString(char  *s)
     return(ans);
 }
 
-static int PlainAsciiText(char  *s , char  *currentcharset)
+static int PlainAsciiText(const char  *s , const char  *currentcharset)
 {
     char *t, *semi;
     char Buf[1000], Charset[1000];

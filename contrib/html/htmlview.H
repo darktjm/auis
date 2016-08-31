@@ -1,6 +1,5 @@
 #ifndef _htmlview_H_
 #define _htmlview_H_
-/* $Id$ */
 /*
  * Copyright 1993, City University
  * Copyright 1993, 1994, Nick Williams. 

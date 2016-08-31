@@ -1,5 +1,3 @@
-/* @(#)svc_udp.c	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,11 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/svc_udp.c,v 1.3 1992/12/15 21:54:40 rr2b Stab74 $";
-#endif
 
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
@@ -55,10 +48,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-#if !defined(lint) && defined(SCCSIDS)
-static char sccsid[] = "@(#)svc_udp.c 1.21 87/08/11 Copyr 1984 Sun Micro";
-#endif
-
 /*
  * svc_udp.c,
  * Server side for UDP/IP based RPC.  (Does some caching in the hopes of
@@ -119,12 +108,12 @@ struct svcudp_data {
  */
 SVCXPRT *
 svcudp_bufcreate(sock, sendsz, recvsz)
-	register int sock;
+	int sock;
 	u_int sendsz, recvsz;
 {
 	bool_t madesock = FALSE;
-	register SVCXPRT *xprt;
-	register struct svcudp_data *su;
+	SVCXPRT *xprt;
+	struct svcudp_data *su;
 	struct sockaddr_in addr;
 	int len = sizeof(struct sockaddr_in);
 
@@ -192,12 +181,12 @@ svcudp_stat(xprt)
 
 static bool_t
 svcudp_recv(xprt, msg)
-	register SVCXPRT *xprt;
+	SVCXPRT *xprt;
 	struct rpc_msg *msg;
 {
-	register struct svcudp_data *su = su_data(xprt);
-	register XDR *xdrs = &(su->su_xdrs);
-	register int rlen;
+	struct svcudp_data *su = su_data(xprt);
+	XDR *xdrs = &(su->su_xdrs);
+	int rlen;
 	char *reply;
 	u_long replylen;
 
@@ -226,13 +215,13 @@ svcudp_recv(xprt, msg)
 
 static bool_t
 svcudp_reply(xprt, msg)
-	register SVCXPRT *xprt; 
+	SVCXPRT *xprt; 
 	struct rpc_msg *msg; 
 {
-	register struct svcudp_data *su = su_data(xprt);
-	register XDR *xdrs = &(su->su_xdrs);
-	register int slen;
-	register bool_t stat = FALSE;
+	struct svcudp_data *su = su_data(xprt);
+	XDR *xdrs = &(su->su_xdrs);
+	int slen;
+	bool_t stat = FALSE;
 
 	xdrs->x_op = XDR_ENCODE;
 	XDR_SETPOS(xdrs, 0);
@@ -267,7 +256,7 @@ svcudp_freeargs(xprt, xdr_args, args_ptr)
 	xdrproc_t xdr_args;
 	caddr_t args_ptr;
 {
-	register XDR *xdrs = &(su_data(xprt)->su_xdrs);
+	XDR *xdrs = &(su_data(xprt)->su_xdrs);
 
 	xdrs->x_op = XDR_FREE;
 	return ((*xdr_args)(xdrs, args_ptr));
@@ -275,9 +264,9 @@ svcudp_freeargs(xprt, xdr_args, args_ptr)
 
 static void
 svcudp_destroy(xprt)
-	register SVCXPRT *xprt;
+	SVCXPRT *xprt;
 {
-	register struct svcudp_data *su = su_data(xprt);
+	struct svcudp_data *su = su_data(xprt);
 
 	xprt_unregister(xprt);
 	(void)close(xprt->xp_sock);
@@ -402,9 +391,9 @@ cache_set(xprt, replylen)
 	SVCXPRT *xprt;
 	u_long replylen;	
 {
-	register cache_ptr victim;	
-	register cache_ptr *vicp;
-	register struct svcudp_data *su = su_data(xprt);
+	cache_ptr victim;	
+	cache_ptr *vicp;
+	struct svcudp_data *su = su_data(xprt);
 	struct udp_cache *uc = (struct udp_cache *) su->su_cache;
 	u_int loc;
 	char *newbuf;
@@ -470,9 +459,9 @@ cache_get(xprt, msg, replyp, replylenp)
 	u_long *replylenp;
 {
 	u_int loc;
-	register cache_ptr ent;
-	register struct svcudp_data *su = su_data(xprt);
-	register struct udp_cache *uc = (struct udp_cache *) su->su_cache;
+	cache_ptr ent;
+	struct svcudp_data *su = su_data(xprt);
+	struct udp_cache *uc = (struct udp_cache *) su->su_cache;
 
 #	define EQADDR(a1, a2)	(bcmp((char*)&a1, (char*)&a2, sizeof(a1)) == 0)
 

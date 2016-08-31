@@ -49,7 +49,7 @@ struct text_statevector {
     long CurSpread;
     long SpecialFlags;
     struct fontdesc *CurCachedFont;
-    char *CurFontFamily;
+    const char *CurFontFamily;
 /* 
     struct dfamily * CurFontFamily;
     struct dfont * CurCachedFont;

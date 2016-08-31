@@ -1,3 +1,4 @@
+#if 0  /* just to shut up makedep; this file is not built */
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
@@ -24,11 +25,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/stats/RCS/getstats.c,v 2.20 1993/06/30 05:04:24 rr2b Stab74 $";
-#endif
 
 /* **********************************************************************
 *   This code is designed to read what might be priveledged (setuid) 
@@ -129,7 +125,7 @@ char **argv;
 
 #else /* #ifdef AIX */
 
-#include <sitevars.h>
+/* #include <sitevars.h> */ /* just to shut up makedep; this file is not built */
 
 /* The following include defines sys_vax_20 for Vax release 2.0 op sys, */
 /* since that particular OS needs some special treatment.  We would have */
@@ -276,7 +272,7 @@ union {
 GetGVMStats(UsersID)
 int UsersID;
 {
-    register int   i;
+    int   i;
     long  t;
     struct mapent *sp;
     lseek(MemoryFile,(long) RawStatistics[X_CPTIME].n_value, 0);
@@ -332,7 +328,7 @@ int UsersID;
     {
 	int myval = 0;
 	{
-	    register int   i;
+	    int   i;
 	    for (i = 1; i < DK_NDRIVE - 1; i++)
 		s.dk_xfer[0] += s.dk_xfer[i];
 	}
@@ -482,15 +478,15 @@ int Init;
 {
     int i = 0;
 #ifdef sys_vax_20
-    register int ret = 0;
-    register struct	fs_data *fd;
+    int ret = 0;
+    struct	fs_data *fd;
     int loc = 0;
 #else /* sys_vax_20 */
 #if (defined(sun) | defined(hpux))
     struct stat statb;
     char tmpname[1024];
-    register FILE *mtabp;
-    register struct mntent *mnt;
+    FILE *mtabp;
+    struct mntent *mnt;
 #else /* (defined(sun) | defined(hpux)) */
     struct fstab *fsp;
 #endif /* (defined(sun) | defined(hpux)) */
@@ -603,9 +599,9 @@ char *file;
 {
 #if defined(sun) | defined(hpux)
     FILE *mntp;
-    register struct mntent *mnt;
+    struct mntent *mnt;
 #else /* defined(sun) | defined(hpux) */
-    register struct mtab *mp;
+    struct mtab *mp;
 #endif /* defined(sun) | defined(hpux) */
 
 
@@ -667,10 +663,10 @@ double num;
 #ifdef sys_vax_20
 print_df(id, fd, Init)
 int id;
-register struct fs_data *fd;
+struct fs_data *fd;
 int Init;
 {
-	register int used;
+	int used;
 	used = fd->fd_btot - fd->fd_bfree;
 	if (Init){
 	    sendval(("%d:%d:%s\n", id, 0, fd->fd_path));
@@ -821,3 +817,4 @@ char **argv;
 #endif /* #ifdef AIX */
 
 
+#endif

@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipdf01.C,v 1.4 1993/06/30 05:04:24 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* zipedf01.c	Zip Data-object	-- Figures  Generics		      */
 /* Author	TC Peters					      */
 /* Information Technology Center	   Carnegie-Mellon University */
@@ -78,9 +70,9 @@ END-SPECIFICATION  ************************************************************/
 
 
 char
-zip::Superior_Image_Pattern( register zip_type_image	       image )
+zip::Superior_Image_Pattern( zip_type_image	       image )
       {
-  register char			      pattern = 0;
+  char			      pattern = 0;
 
   while ( image )
     {
@@ -95,9 +87,9 @@ zip::Superior_Image_Pattern( register zip_type_image	       image )
   }
 
 char
-zip::Superior_Image_Shade( register zip_type_image	       image )
+zip::Superior_Image_Shade( zip_type_image	       image )
       {
-  register char			      shade = 0;
+  char			      shade = 0;
 
   while ( image )
     {
@@ -112,9 +104,9 @@ zip::Superior_Image_Shade( register zip_type_image	       image )
   }
 
 unsigned char
-zip::Superior_Image_Line_Width( register zip_type_image	       image )
+zip::Superior_Image_Line_Width( zip_type_image	       image )
       {
-  register unsigned char	      width = 255;
+  unsigned char	      width = 255;
 
   while ( image )
     {
@@ -129,9 +121,9 @@ zip::Superior_Image_Line_Width( register zip_type_image	       image )
   }
 
 long
-zip::Superior_Image_Line_Dash( register zip_type_image	       image, register char			      **pattern, register int			      *offset, register short		      *type )
+zip::Superior_Image_Line_Dash( zip_type_image	       image, char			      **pattern, int			      *offset, short		      *type )
             {
-  register long			    status = zip_failure;
+  long			    status = zip_failure;
 
   while ( image )
     {
@@ -149,9 +141,9 @@ zip::Superior_Image_Line_Dash( register zip_type_image	       image, register ch
   }
 
 short
-zip::Superior_Image_Line_Cap( register zip_type_image	       image )
+zip::Superior_Image_Line_Cap( zip_type_image	       image )
       {
-  register short	      cap = -1;
+  short	      cap = -1;
 
   while ( image )
     {
@@ -166,9 +158,9 @@ zip::Superior_Image_Line_Cap( register zip_type_image	       image )
   }
 
 short
-zip::Superior_Image_Line_Join( register zip_type_image	       image )
+zip::Superior_Image_Line_Join( zip_type_image	       image )
       {
-  register short	      join = -1;
+  short	      join = -1;
 
   while ( image )
     {
@@ -183,9 +175,9 @@ zip::Superior_Image_Line_Join( register zip_type_image	       image )
   }
 
 struct zip_color *
-zip::Superior_Image_Line_Color( register zip_type_image	     image )
+zip::Superior_Image_Line_Color( zip_type_image	     image )
       {
-  register struct zip_color	    *color = NULL;
+  struct zip_color	    *color = NULL;
 
   while ( image )
     {
@@ -200,9 +192,9 @@ zip::Superior_Image_Line_Color( register zip_type_image	     image )
   }
 
 struct zip_color *
-zip::Superior_Image_FillFG_Color( register zip_type_image	     image )
+zip::Superior_Image_FillFG_Color( zip_type_image	     image )
       {
-  register struct zip_color	    *color = NULL;
+  struct zip_color	    *color = NULL;
 
   while ( image )
     {
@@ -217,9 +209,9 @@ zip::Superior_Image_FillFG_Color( register zip_type_image	     image )
   }
 
 struct zip_color *
-zip::Superior_Image_FillBG_Color( register zip_type_image	     image )
+zip::Superior_Image_FillBG_Color( zip_type_image	     image )
       {
-  register struct zip_color	    *color = NULL;
+  struct zip_color	    *color = NULL;
 
   while ( image )
     {
@@ -234,9 +226,9 @@ zip::Superior_Image_FillBG_Color( register zip_type_image	     image )
   }
 
 char *
-zip::Superior_Image_Text( register zip_type_image	       image )
+zip::Superior_Image_Text( zip_type_image	       image )
       {
-  register char			     *text = NULL;
+  char			     *text = NULL;
 
   while ( image )
     {
@@ -252,9 +244,9 @@ zip::Superior_Image_Text( register zip_type_image	       image )
 
 
 class fontdesc *
-zip::Superior_Image_Font( register zip_type_image	       image )
+zip::Superior_Image_Font( zip_type_image	       image )
       {
-  register class fontdesc 	     *font = NULL;
+  class fontdesc 	     *font = NULL;
 
   while ( image )
     {

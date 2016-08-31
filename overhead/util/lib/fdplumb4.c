@@ -26,18 +26,12 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fdplumb4.c,v 2.7 1992/12/15 21:09:01 rr2b Stab74 $";
-#endif
-
 #include <stdio.h>
 #include <fdplumbi.h>
 #include <util.h>
  
 
-FILE *dbg_qopen(const char *path, char * const argv[], const char *mode)
+FILE *dbg_qopen(const char *path, const char * const argv[], const char *mode)
 {
     FILE *fp;
 
@@ -46,7 +40,7 @@ FILE *dbg_qopen(const char *path, char * const argv[], const char *mode)
     return(fp);
 }
 
-FILE *dbg_topen(const char *path, char * const argv[], const char *mode, int *pgrp)
+FILE *dbg_topen(const char *path, const char * const argv[], const char *mode, int *pgrp)
 {
     FILE *fp;
 

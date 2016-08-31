@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/time/RCS/clock.C,v 1.3 1993/06/04 02:21:41 rr2b Stab74 $";
-#endif
-
 #define clock hidden_clock_
 #include <andrewos.h>
 #undef clock
@@ -66,13 +61,11 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/time/R
 
 
 ATKdefineRegistry(clock, dataobject, clock::InitializeClass);
-#ifndef NORCSID
-#endif
 static void UpdateTime(class clock  *self);
 static void clock__WriteDataPart(class clock  *self, FILE  *fp);
 static long clock__ReadDataPart(class clock  *self, FILE  *fp);
 static long SanelyReturnReadError(class clock  *self, FILE  *fp, long  id, long  code);
-static void WriteLine(FILE  *f, char  *l);
+static void WriteLine(FILE  *f, const char  *l);
 static char * GlomStrings(char  *s , char  *t);
 static char * ReadLine(FILE  *f);
 
@@ -109,7 +102,7 @@ clock::clock()
 /*
   Inititialize the object instance data.
 */
-  static char *labels[] = {"12", "3", "6", "9", NULL};
+  static const char * const labels[] = {"12", "3", "6", "9", NULL};
 
   this->ev = NULL;
   this->epoch = 1;		/* update every second */
@@ -289,14 +282,15 @@ clock__ReadDataPart(class clock  *self, FILE  *fp)
 
   if ((self->options.num_labels) > 0) {
       int i;
+      char **labels;
 
-      if ((self->options.labels = (char **)malloc(self->options.num_labels*sizeof(char *))) == NULL)
+      if ((labels = (char **)malloc(self->options.num_labels*sizeof(char *))) == NULL)
 	return(dataobject_OBJECTCREATIONFAILED);
-      
+      self->options.labels = labels;
       for(i = 0; i < self->options.num_labels; ++i) {
 	  if ((buf = ReadLine(fp)) == NULL)
 	    return(dataobject_PREMATUREEOF);
-	  self->options.labels[i] = buf;
+	  labels[i] = buf;
       } /* for i */
   } /* if num_labels > 0 */
 
@@ -369,7 +363,7 @@ clock::SetOptions(struct clock_options  *options)
 
 
 static void
-WriteLine(FILE  *f, char  *l)
+WriteLine(FILE  *f, const char  *l)
 {
 /* 
   Output a single line onto the data stream, quoting

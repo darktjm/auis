@@ -59,7 +59,7 @@ public:
     
        long Read (FILE *file, long id)  ;
        long Write (FILE *file, long writeid, int level)  ;
-       char * ViewName()  ;
+       const char * ViewName()  ;
        long GetModified()  ;
     
       inline boolean GetPostMenus() { return ((this)->PostMenusFlag); }
@@ -72,20 +72,20 @@ public:
       inline struct page_switchee * GetNowPlayingSwitchee() { return ((this)->NowPlaying); }
        
     
-      virtual boolean AddObject(class dataobject *d, char *label,
-		 char *viewname,long position)  ;
+      virtual boolean AddObject(class dataobject *d, const char *label,
+		 const char *viewname,long position)  ;
       virtual boolean DeleteObject(class dataobject *d)  ;
       virtual boolean SetNowPlaying(class dataobject *d)  ;
       virtual boolean SetNowPlayingByName(char *name)  ;
-      virtual char * GetNowPlayingName()  ;
+      virtual const char * GetNowPlayingName()  ;
       virtual boolean SetNowPlayingByPosition(long position)  ;
       virtual long GetPositionOfObject(class dataobject *d)  ;
-      virtual char * GetNameOfObject(class dataobject *d)  ;	
+      virtual const char * GetNameOfObject(class dataobject *d)  ;	
       virtual class dataobject * GetObjectAtPosition(long position)  ;
       virtual class dataobject * GetObjectByName(char *name)  ;
       virtual long GetObjectCount()  ;
 /* The following methods are private */
-      virtual char * GetSwitcheeName(struct page_switchee *sw)  ;
+      virtual const char * GetSwitcheeName(struct page_switchee *sw)  ;
     
       struct page_switchee *FirstSwitchee, *NowPlaying;
       boolean PostMenusFlag,executingGetModified;

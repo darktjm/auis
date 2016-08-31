@@ -23,17 +23,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/prefval.C,v 1.6 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
-
- 
-
-
 ATK_IMPL("prefval.H")
 #include <math.h>
 
@@ -46,6 +35,7 @@ ATK_IMPL("prefval.H")
 #include "prefval.H"
 
 #define zfree(x) do { if(x) { free(x); (x)=NULL;}} while (0)
+#define zcfree(x) do { if(x) { free((void *)x); (x)=NULL;}} while (0)
 
 #define MAX_LINE_LENGTH 70
 
@@ -53,8 +43,6 @@ ATK_IMPL("prefval.H")
 
 
 ATKdefineRegistry(prefval, dataobject, NULL);
-#ifndef NORCSID
-#endif
 static char *strsave(char  *str);
 static boolean EnsureListSize(class prefval  *self, int  n);
 static boolean EnsureChoiceListSize(class prefval  *self, int  n);
@@ -67,46 +55,31 @@ static boolean condproc(class prefval  *self, FILE  *fp, char  *buf);
 static boolean sepproc(class prefval  *self, FILE  *fp, char  *buf);
 static boolean listmaxproc(class prefval  *self, FILE  *fp, char  *buf);
 static boolean doneproc(class prefval  *self, FILE  *fp, char  *buf);
-static long dostuff(class prefval  *self, FILE  *fp, long  rock, struct dataprocs  *procs);
-static char *PreferenceString(class prefval  *self);
+static long dostuff(class prefval  *self, FILE  *fp, long  rock, const struct dataprocs  *procs);
+static const char *PreferenceString(class prefval  *self);
 static long prefval_SanelyReturnReadError(class prefval  *self, FILE  *fp, long  id, long  code);
 static int compare_choices(int  *i1 , int  *i2);
 static char *GlomStrings(char  *s , char  *t);
 static char *ReadLine(FILE  *f);
 
 
-static char *strsave(char  *str)
-{
-    char *result;
-
-    if(str==NULL) return NULL;
-
-    result=(char *)malloc(strlen(str)+1);
-    
-    if(result==NULL) return NULL;
-
-    strcpy(result, str);
-
-    return result;
-}
-
 void prefval::FreeValue(struct prefval_value  *v)
-{
+{ /* presumably vlue was cpied in using CopyValue, so safe to un-const */
     switch((this)->GetType()) {
 	case prefval_Filename:
-	    zfree(v->v.fval);
+	    zcfree(v->v.fval);
 	    break;
 	case prefval_Directory:
-	    zfree(v->v.dval);
+	    zcfree(v->v.dval);
 	    break;
 	case prefval_String:
-	    zfree(v->v.sval);
+	    zcfree(v->v.sval);
 	    break;
 	case prefval_Font:
-	    zfree(v->v.fontval);
+	    zcfree(v->v.fontval);
 	    break;
 	case prefval_Color:
-	    zfree(v->v.cval);
+	    zcfree(v->v.cval);
 	    break;
 	default: ;
     }
@@ -118,19 +91,19 @@ void prefval::CopyValue(struct prefval_value  *v1 , struct prefval_value  *v2)
     (this)->FreeValue( v1);
     switch((this)->GetType()) {
 	case prefval_Filename:
-	    v1->v.fval=strsave(v2->v.fval);
+	    v1->v.fval=strdup(v2->v.fval);
 	    break;
 	case prefval_Directory:
-	    v1->v.dval=strsave(v2->v.dval);
+	    v1->v.dval=strdup(v2->v.dval);
 	    break;
 	case prefval_String:
-	    v1->v.sval=strsave(v2->v.sval);
+	    v1->v.sval=strdup(v2->v.sval);
 	    break;
 	case prefval_Font:
-	    v1->v.fontval=strsave(v2->v.fontval);
+	    v1->v.fontval=strdup(v2->v.fontval);
 	    break;
 	case prefval_Color:
-	    v1->v.cval=strsave(v2->v.cval);
+	    v1->v.cval=strdup(v2->v.cval);
 	    break;
 	default: 
 	    *v1 = (*v2);
@@ -352,8 +325,8 @@ static boolean doneproc(class prefval  *self, FILE  *fp, char  *buf)
 
 typedef boolean (*readfptr)(class prefval *self, FILE *fp, char *buf);
 
-static struct dataprocs {
-    char *name;
+static const struct dataprocs {
+    const char *name;
     readfptr func;
 } sprocs[]={
     {"appname", appproc},
@@ -371,12 +344,12 @@ static struct dataprocs {
 /* set in ReadLine if a line has a control directive */
 static boolean linehascontrol;
 
-static long dostuff(class prefval  *self, FILE  *fp, long  rock, struct dataprocs  *procs)
+static long dostuff(class prefval  *self, FILE  *fp, long  rock, const struct dataprocs  *procs)
 {
     char *buf, *buf2;
     boolean done=FALSE;
     while(!done) {
-	struct dataprocs *dps;
+	const struct dataprocs *dps;
 	buf=ReadLine(fp);
 	if(buf==NULL) return dataobject_PREMATUREEOF;
 	if(!linehascontrol) {
@@ -414,7 +387,7 @@ static long dostuff(class prefval  *self, FILE  *fp, long  rock, struct dataproc
     return err;
 }
 
- struct prefval_value *prefval::StringToValue(char  *str)
+ struct prefval_value *prefval::StringToValue(const char  *str)
 {
     static struct prefval_value sv;
     if((this)->GetType()==prefval_None) return NULL;
@@ -451,8 +424,8 @@ static long dostuff(class prefval  *self, FILE  *fp, long  rock, struct dataproc
     return &sv;
 }
 
-static struct prefvaltypes {
-    char *name;
+static const struct prefvaltypes {
+    const char *name;
     enum prefval_Type type;
 } types[] = {
     {"Integer", prefval_Integer},
@@ -467,9 +440,9 @@ static struct prefvaltypes {
 };
 
 
-enum prefval_Type prefval::StringToType(char  *str)
+enum prefval_Type prefval::StringToType(const char  *str)
 {
-    struct prefvaltypes *t=types;
+    const struct prefvaltypes *t=types;
 
     while(t->name) {
 	if(FOLDEDEQ(t->name, str)) {
@@ -481,10 +454,10 @@ enum prefval_Type prefval::StringToType(char  *str)
     return prefval_None;
 }
 
-char *prefval::TypeString()
+const char *prefval::TypeString()
 {
     
-    struct prefvaltypes *t=types;
+    const struct prefvaltypes *t=types;
 
     while(t->name) {
 	if(t->type==(this)->GetType()) {
@@ -495,7 +468,7 @@ char *prefval::TypeString()
     return "Unkown";
 }
 
-char *prefval::IndexValueString(int  which)
+const char *prefval::IndexValueString(int  which)
 {
     static char buf[1024];
     if(which>=this->vlistsize) return "NO VALUE 3!";
@@ -526,7 +499,7 @@ char *prefval::IndexValueString(int  which)
 }
 
 static char prefvalbuf[1024];
-static char *PreferenceString(class prefval  *self)
+static const char *PreferenceString(class prefval  *self)
 {
     char *buf=prefvalbuf;
     int i;
@@ -539,7 +512,7 @@ static char *PreferenceString(class prefval  *self)
 	strcat(buf,": ");
     }
     for(i=(self)->GetListSize()-1;i>=0;i--) {
-	char *vs=(self)->IndexValueString( i);
+	const char *vs=(self)->IndexValueString( i);
 	strcat(buf, vs?vs:"");
 	if(i && (self)->GetSeparator()) strcat(buf, (self)->GetSeparator());
     }
@@ -547,13 +520,13 @@ static char *PreferenceString(class prefval  *self)
 }
 
 
-char *prefval::PreferenceString()
+const char *prefval::PreferenceString()
 {
     prefvalbuf[0]='\0';
     return ::PreferenceString(this);
 }
 
-char *prefval::FullPreferenceString()
+const char *prefval::FullPreferenceString()
 {
     if((this)->GetCondition()) {
 	sprintf(prefvalbuf, "?%s:", (this)->GetCondition());
@@ -562,11 +535,11 @@ char *prefval::FullPreferenceString()
 }
 
 
-void prefval::SetFromPreferenceString(char  *str)
+void prefval::SetFromPreferenceString(const char  *str)
 {
     (this)->ClearValues();
     if(this->separator) {
-	char *b=str;
+	char *sstr = strdup(str), *b=sstr;
 	char *p;
 	int i=0;
 	
@@ -581,7 +554,7 @@ void prefval::SetFromPreferenceString(char  *str)
 	    }
 	} while (p);
 	
-	b=str;
+	b=sstr;
 	
 	do {
 	    p=strchr(b, this->separator[0]);
@@ -594,6 +567,7 @@ void prefval::SetFromPreferenceString(char  *str)
 		while(isspace(*b)) b++;
 	    }
 	} while (p);
+	free(sstr);
     } else {
 	(this)->SetIndexValue( 0, (this)->StringToValue( str));
     }
@@ -667,7 +641,7 @@ long prefval::Write(FILE  *file, long  writeID, int  level)
 	if((this)->GetListMax()>1) fprintf(file, "\\listmax\n%d\n", (this)->GetListMax());
 	fprintf(file, "\\list\n%d\n", i);
 	while(--i>=0) {
-	    char *vs=(this)->IndexValueString( i);
+	    const char *vs=(this)->IndexValueString( i);
 	    fprintf(file, "%s\n", vs?vs:"");
 	}
 	fprintf(file, "\\done\n\n");
@@ -678,24 +652,24 @@ long prefval::Write(FILE  *file, long  writeID, int  level)
 }
 
 
-void prefval::SetAppName(char  *name)
+void prefval::SetAppName(const char  *name)
 {
     zfree(this->appname);
-    this->appname=strsave(name);
+    this->appname=strdup(name);
     (this)->SetModified();
 }
 
-void prefval::SetPrefName(char  *name)
+void prefval::SetPrefName(const char  *name)
 {
     zfree(this->prefname);
-    this->prefname=strsave(name);
+    this->prefname=strdup(name);
     (this)->SetModified();
 }
 
-void prefval::SetSeparator(char  *name)
+void prefval::SetSeparator(const char  *name)
 {
     zfree(this->separator);
-    this->separator=strsave(name);
+    this->separator=strdup(name);
     (this)->SetModified();
 }
 
@@ -817,7 +791,7 @@ void prefval::SortChoices()
     }
 
     for(i=0;i<listsize;i++) {
-	::choices[i]=strsave(this->choices[i]);
+	::choices[i]=strdup(this->choices[i]);
 	(this)->InitValue( ::cvalues+i);
 	(this)->CopyValue( ::cvalues+i, this->cvalues+i);
 	indices[i]=i;
@@ -844,7 +818,7 @@ void prefval::SortChoices()
 void prefval::SetCondition(char  *cond)
 {
     zfree(this->condition);
-    this->condition=strsave(cond);
+    this->condition=strdup(cond);
     (this)->SetModified();
 }
 

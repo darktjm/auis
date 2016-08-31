@@ -90,13 +90,13 @@ class calcv;
 typedef void (*calcv_hitfptr)(class calcv *self, long area);
 struct calcv_area
   {
-  char				     *string;
+  const char			     *string;
   class fontdesc		     *font;
   struct rectangle		      bounds;
   char				      shape;
   int				      mode;
   calcv_hitfptr			      hit_handler;
-  struct calcv_setup		     *spec;
+  const struct calcv_setup	     *spec;
   struct calcv_area_states	      states;
   };
 
@@ -113,7 +113,7 @@ public:
    void Update();
    void ObservedChanged( class observable *changed, long value );
    class view * Hit( enum view_MouseAction action, long x, long y, long n )	 ;
-   void Print( FILE *file, char *processor, char *finalFormat, boolean topLevel );
+   void Print( FILE *file, const char *processor, const char *finalFormat, boolean topLevel );
    void ReceiveInputFocus();
    void LoseInputFocus();
 

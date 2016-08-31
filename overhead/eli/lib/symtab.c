@@ -27,11 +27,6 @@
 
 #include  <symtab.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/symtab.c,v 2.6 1992/12/15 21:02:39 rr2b Stab74 $";
-#endif
-
 /*
  * Functions to handle manipulation of the global symbol table (basically,
  * front-end to ht.c) MOST OF THESE ASSUME THAT SYM'S ARE IN THE TABLE 

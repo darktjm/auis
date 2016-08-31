@@ -25,21 +25,13 @@
  *  $
 */
 
-#include <andrewos.h>		/* sys/types.h sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/tokunpak.c,v 2.28 1995/03/18 17:31:56 rr2b Stab74 $";
-#endif
-
 /*
 		tokunpak.c -- Subroutines for unpacking Venus tokens
 			from datagrams and setting them
 			as current with Venus.
 */
 
- 
-
+#include <andrewos.h>		/* sys/types.h sys/time.h */
 #include <stdio.h>
 #include <netinet/in.h>
 #include <svcconf.h>
@@ -77,7 +69,7 @@ static int IsKTC(char *where)
 
 static int UnpackKTC(char *tokens, struct ktc_token *atok, struct ktc_principal *aserv, struct ktc_principal *acli, int debug, int pPrimFlag)
 {
-    register char *p;
+    char *p;
     long int Dum;
 
     p = tokens;

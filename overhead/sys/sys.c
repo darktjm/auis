@@ -27,11 +27,6 @@
 
 #include <andrewos.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/sys/RCS/sys.c,v 2.14 1994/06/09 21:18:04 rr2b Stab74 $";
-#endif
-
 /*
 	sys.c		
 	Print name that describes current machine and operating

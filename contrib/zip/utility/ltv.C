@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/utility/RCS/ltv.C,v 1.7 1994/08/14 18:40:59 rr2b Stab74 $";
-#endif
-
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The LightTable View-object Program
@@ -437,11 +431,12 @@ void Initialize( class ltv  *self )
     zip_type_image     root_image;
     boolean	      satisified = false;
     char	     *reply, stream_name[512], raster_name[512];
+    const char       *wm;
 
     IN(Initialize);
-    reply = (ZipView )->GetWindowManagerType( );
-    DEBUGst(Window Manager,reply);
-    if ( strcmp( "AndrewWM", reply ) == 0 )   WM = 1;  else  WM = 2;
+    wm = (ZipView )->GetWindowManagerType( );
+    DEBUGst(Window Manager,wm);
+    if ( strcmp( "AndrewWM", wm ) == 0 )   WM = 1;  else  WM = 2;
     (ZipView )->Use_Working_Pane_Cursors( );
     (ZipView)->Create_Pane(  &ForegroundPane, "Foreground-Pane", Block, zip_opaque );
     (ZipView)->Set_Pane_Cursor(  ForegroundPane, normal_cursor, "aptcsr20" );
@@ -1432,7 +1427,7 @@ Print_Command( class ltv  *self )
 static void
 Quit_Command( class ltv  *self )
 {
-    static char		     *choices[] =
+    static const char	     * const choices[] =
     {"Cancel", "Save", "Save & Quit", "Quit Anyway", 0};
     long			      response = 0, result;
 

@@ -1,5 +1,3 @@
-/* @(#)xdr.h	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -50,8 +48,6 @@
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-/*      @(#)xdr.h 1.19 87/04/22 SMI      */
-
 /*
  * xdr.h, External Data Representation Serialization Routines.
  *

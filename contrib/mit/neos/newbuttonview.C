@@ -1,5 +1,3 @@
-/* $Author: wjh $ */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -22,13 +20,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/newbuttonview.C,v 1.5 1996/06/11 01:28:57 wjh Exp $";
-#endif
-
-
- 
 /*
  * newbuttonv.c
 */
@@ -83,8 +74,6 @@ static class atom *pushedtrigger;
 
 
 ATKdefineRegistry(newbuttonview, view, newbuttonview::InitializeClass);
-#ifndef NORCSID
-#endif
 void db(class newbuttonview  * self,struct rectangle  *foo,struct rectangle  *fo);
 static int RectEnclosesXY(struct rectangle  *r, long  x , long  y);
 static void HighlightButton(class newbuttonview  *self);

@@ -25,20 +25,11 @@
  *  $
 */
 
-#include <util.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/ulstrcmp.c,v 2.11 1992/12/15 21:10:49 rr2b Stab74 $";
-#endif
-
 /*
 	ulstrcmp.c--compare strings ignoring alphabetic case.
 */
 
-
- 
-
+#include <util.h>
 #include <ctype.h>
 
 
@@ -46,7 +37,7 @@ int ULstrcmp(const char *s1, const char *s2)
 {
     /* case INSENSITIVE:  Compare strings:  s1>s2: >0  s1==s2: 0  s1<s2: <0
 	  */
-    register char c1,c2;
+    char c1,c2;
 
     for(;;) {
 	c1 = *s1++; if (c1 <= 'Z') if (c1 >= 'A') c1 += 040;
@@ -65,8 +56,8 @@ int ULstrncmp(const char *s1,const char *s2,int n)
      s1>s2: >0  s1==s2: 0  s1<s2: <0
    */
 
-  register int i;
-  register int result = 0;
+  int i;
+  int result = 0;
 
   for(i = 0;(s1[i] || s2[i]) && i<n && !result;++i){
     result = DOWNCASE(s1[i]) - DOWNCASE(s2[i]);

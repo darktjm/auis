@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/getnth.c,v 2.7 1992/12/15 21:19:11 rr2b Stab74 $";
-#endif
-
 #include <ms.h>
 
 MS_GetNthSnapshot(DirName, n, SnapshotBuf)

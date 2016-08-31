@@ -1,5 +1,3 @@
-/* @(#)auth_unix.c	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,11 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/auth_unix.c,v 1.3 1992/12/15 21:53:39 rr2b Stab74 $";
-#endif
 
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
@@ -55,10 +48,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-#if !defined(lint) && defined(SCCSIDS)
-static char sccsid[] = "@(#)auth_unix.c 1.19 87/08/11 Copyr 1984 Sun Micro";
-#endif
-
 /*
  * auth_unix.c, Implements UNIX style authentication parameters. 
  *  
@@ -120,15 +109,15 @@ authunix_create(machname, uid, gid, len, aup_gids)
 	char *machname;
 	int uid;
 	int gid;
-	register int len;
+	int len;
 	int *aup_gids;
 {
 	struct authunix_parms aup;
 	char mymem[MAX_AUTH_BYTES];
 	struct timeval now;
 	XDR xdrs;
-	register AUTH *auth;
-	register struct audata *au;
+	AUTH *auth;
+	struct audata *au;
 
 	/*
 	 * Allocate and set up auth handle
@@ -196,10 +185,10 @@ authunix_create(machname, uid, gid, len, aup_gids)
 AUTH *
 authunix_create_default()
 {
-	register int len;
+	int len;
 	char machname[MAX_MACHINE_NAME + 1];
-	register int uid;
-	register int gid;
+	int uid;
+	int gid;
 	int gids[NGRPS];
 
 	if (gethostname(machname, MAX_MACHINE_NAME) == -1)
@@ -228,17 +217,17 @@ authunix_marshal(auth, xdrs)
 	AUTH *auth;
 	XDR *xdrs;
 {
-	register struct audata *au = AUTH_PRIVATE(auth);
+	struct audata *au = AUTH_PRIVATE(auth);
 
 	return (XDR_PUTBYTES(xdrs, au->au_marshed, au->au_mpos));
 }
 
 static bool_t
 authunix_validate(auth, verf)
-	register AUTH *auth;
+	AUTH *auth;
 	struct opaque_auth verf;
 {
-	register struct audata *au;
+	struct audata *au;
 	XDR xdrs;
 
 	if (verf.oa_flavor == AUTH_SHORT) {
@@ -265,13 +254,13 @@ authunix_validate(auth, verf)
 
 static bool_t
 authunix_refresh(auth)
-	register AUTH *auth;
+	AUTH *auth;
 {
-	register struct audata *au = AUTH_PRIVATE(auth);
+	struct audata *au = AUTH_PRIVATE(auth);
 	struct authunix_parms aup;
 	struct timeval now;
 	XDR xdrs;
-	register int stat;
+	int stat;
 
 	if (auth->ah_cred.oa_base == au->au_origcred.oa_base) {
 		/* there is no hope.  Punt */
@@ -308,9 +297,9 @@ done:
 
 static void
 authunix_destroy(auth)
-	register AUTH *auth;
+	AUTH *auth;
 {
-	register struct audata *au = AUTH_PRIVATE(auth);
+	struct audata *au = AUTH_PRIVATE(auth);
 
 	mem_free(au->au_origcred.oa_base, au->au_origcred.oa_length);
 
@@ -331,11 +320,11 @@ authunix_destroy(auth)
  */
 static bool_t
 marshal_new_auth(auth)
-	register AUTH *auth;
+	AUTH *auth;
 {
 	XDR		xdr_stream;
-	register XDR	*xdrs = &xdr_stream;
-	register struct audata *au = AUTH_PRIVATE(auth);
+	XDR	*xdrs = &xdr_stream;
+	struct audata *au = AUTH_PRIVATE(auth);
 
 	xdrmem_create(xdrs, au->au_marshed, MAX_AUTH_BYTES, XDR_ENCODE);
 	if ((! xdr_opaque_auth(xdrs, &(auth->ah_cred))) ||

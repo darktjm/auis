@@ -25,17 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chartcsn.C,v 1.4 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
-/* $Header $ */
-/* $Source $ */
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Cartesian Chart View-object
@@ -65,6 +54,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include <andrewos.h>
 ATK_IMPL("chartcsn.H")
 #include <stdio.h>
 #include <math.h>
@@ -108,9 +98,6 @@ boolean chartscn_debug = 0;
 
 
 ATKdefineRegistry(chartcsn, chartobj, NULL);
-#ifndef NORCSID
-#endif
-
 
 chartcsn::chartcsn( )
       {
@@ -133,7 +120,7 @@ chartcsn::SetDebug( boolean			   state )
   }
 
 class view *
-chartcsn::HitChart( register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks )
+chartcsn::HitChart( enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
         {
 
   IN(chartcsn_HitChart);

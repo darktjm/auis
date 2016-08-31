@@ -12,7 +12,7 @@ class hidden : public htmltext {
   public:
     virtual ATKregistryEntry *ATKregistry();
 
-    char *ViewName();
+    const char *ViewName();
     inline boolean IsVisible() { return ((this)->Visibility != hidden_HIDDEN); }
     inline boolean IsFullScreen() { return ((this)->Visibility == hidden_FULLSCREEN); }
     inline void SetVisibility(enum visibility v) { ((this)->Visibility = ((this)->Visibility == hidden_FULLSCREEN)?hidden_FULLSCREEN:v); }

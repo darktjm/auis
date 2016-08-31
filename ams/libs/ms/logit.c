@@ -25,19 +25,13 @@
  *  $
 */
 
-#include <andrewos.h>                  /* sys/file.h sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/logit.c,v 1.7 1993/06/15 03:56:02 rr2b Stab74 $";
-#endif
-
 #ifdef _IBMR2
 #ifndef _BSD
 #define _BSD 43
 #endif
 #endif
 
+#include <andrewos.h>                  /* sys/file.h sys/types.h */
 #include <stdio.h>
 #include <sys/socket.h>
 #include <sys/param.h>

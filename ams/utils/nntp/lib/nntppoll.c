@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp/lib/RCS/nntppoll.c,v 1.40 1996/02/09 19:37:26 susan Stab74 $";
-#endif
-
 /*
  * Obtains all articles in the groups from the distributions specified
  * by GRP and DEST by polling a given server. All articles that are
@@ -224,15 +219,15 @@ FileList *f1, *f2;
 }
 
 static void SortFiles(files, n)
-register FileList *files;
-register int n;
+FileList *files;
+int n;
 {
     if (n > 1) qsort(files, n, sizeof(FileList), FComp);
 }
 
 static void FreeFiles(files, n)
-register FileList *files;
-register int n;
+FileList *files;
+int n;
 {
     if (n > 0) free(files);
 }
@@ -242,14 +237,14 @@ register int n;
 
 static FileList *GetDirEntries(dir, nfiles, err, onlyDirs)
 char *dir;
-register int *nfiles, *err, onlyDirs;
+int *nfiles, *err, onlyDirs;
 {
     DIR *dp;
-    register DIRENT_TYPE *ent;
-    static char msg[] = "Out of storage (%d) in GetDirEntries for \"%s\"";
-    register FileList *files;
-    register int fsize;	    /* Max # slots in files array */
-    register int i;
+    DIRENT_TYPE *ent;
+    static const char msg[] = "Out of storage (%d) in GetDirEntries for \"%s\"";
+    FileList *files;
+    int fsize;	    /* Max # slots in files array */
+    int i;
     int dummy;
     char f[MAXPATHLEN+1];
     struct stat buf;
@@ -564,7 +559,7 @@ nntppoll(Debug) int Debug;
     }
     ThisArt = 0;
     for (;;) {
-	register char *s;
+	char *s;
 	int GotAny;
 #ifndef UseVMail
 	FILE *fileTemp;
@@ -852,14 +847,14 @@ closefiles()
 int move_files()
 {
     char tmp_filename[MAXPATHLEN+1];
-    register int i;
+    int i;
     int nfiles, err, movedcount;
 #ifndef UseVMail
     int code;
 #else /* UseVMail */
     char dest_filename[MAXPATHLEN+1];
 #endif /* UseVMail */
-    register FileList *files;
+    FileList *files;
 
     files = GetDirEntries(tmpdir, &nfiles, &err, 0);
     if (err != 0) {
@@ -873,7 +868,7 @@ int move_files()
     if (numHoldWrite < 0) InitDirs();	/* Start directory-maintenance stuff. */
     movedcount = 0;
     for (i=0; i<nfiles; i++) {
-	register char *name;
+	char *name;
 
 	name = files[i].Name;
 	if (strcmp(name, ".") == 0 || strcmp(name, "..") == 0) continue;

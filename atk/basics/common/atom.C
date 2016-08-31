@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h> /* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/atom.C,v 3.7 1996/04/01 15:29:17 wjh Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("atom.H")
 #include <stdio.h>
 #include <atom.H>
@@ -58,15 +48,13 @@ static struct alist *hashTable[HashTableSize];
 
 
 ATKdefineRegistry(atom, ATK, atom::InitializeClass);
-#ifndef NORCSID
-#endif
-static int Hash(register unsigned char *word);
-static class atom *CreateAtom(register const char  *name, register int  index);
+static int Hash(unsigned char *word);
+static class atom *CreateAtom(const char  *name, int  index);
 
 
-static int Hash(register unsigned char *word)
+static int Hash(unsigned char *word)
 {
-    register unsigned int total = 0;
+    unsigned int total = 0;
 
     /* Pretty good hash function */
 
@@ -76,10 +64,10 @@ static int Hash(register unsigned char *word)
     return total & (HashTableSize - 1);
 }
 
-static class atom *CreateAtom(register const char  *name, register int  index)
+static class atom *CreateAtom(const char  *name, int  index)
 {
-    register class atom *a;
-    register struct alist *l;
+    class atom *a;
+    struct alist *l;
 
     a = new atom;
     a->name = (char*) malloc(strlen(name) + 1);
@@ -97,12 +85,12 @@ static class atom *CreateAtom(register const char  *name, register int  index)
  * Class procedures
  */
 
-class atom *atom::Intern(register const char  *name)
+class atom *atom::Intern(const char  *name)
 {
 	ATKinit;
 
-    register int index;
-    register struct alist *a;
+    int index;
+    struct alist *a;
 
     index = Hash((unsigned char *)name);
 
@@ -113,7 +101,7 @@ class atom *atom::Intern(register const char  *name)
     return CreateAtom(name, index);
 }
 
-class atom *atom::Intern(register char  *name)
+class atom *atom::Intern(char  *name)
 {
     return Intern((const char *)name);
 }
@@ -123,7 +111,7 @@ class atom *atom::InternRock(long  rock)
 {
 	ATKinit;
 
-    char temp[16];
+    char temp[20];
 
     sprintf(temp, "g0x%lx", rock); 
     return atom::Intern(temp);
@@ -131,8 +119,8 @@ class atom *atom::InternRock(long  rock)
 
 boolean atom::InitializeClass()
 {
-    register struct alist **ap = hashTable;
-    register int i = HashTableSize;
+    struct alist **ap = hashTable;
+    int i = HashTableSize;
 
     while (i--)
         *ap++ = NULL;

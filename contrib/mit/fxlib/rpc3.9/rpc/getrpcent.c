@@ -1,5 +1,3 @@
-/* @(#)getrpcent.c	1.4 87/11/13 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,15 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/getrpcent.c,v 1.3 1992/12/15 21:53:58 rr2b Stab74 $";
-#endif
-
-#if !defined(lint) && defined(SCCSIDS)
-static  char sccsid[] = "@(#)getrpcent.c 1.9 87/08/11  Copyr 1984 Sun Micro";
-#endif
 
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
@@ -90,12 +79,12 @@ struct	hostent *gethostent();
 char	*inet_ntoa();
 /*static*/	char *index();
 
-static char RPCDB[] = "/etc/rpc";
+static const char RPCDB[] = "/etc/rpc";
 
 static struct rpcdata *
 _rpcdata()
 {
-	register struct rpcdata *d = rpcdata;
+	struct rpcdata *d = rpcdata;
 
 	if (d == 0) {
 		d = (struct rpcdata *)calloc(1, sizeof (struct rpcdata));
@@ -106,10 +95,10 @@ _rpcdata()
 
 struct rpcent *
 getrpcbynumber(number)
-	register int number;
+	int number;
 {
-	register struct rpcdata *d = _rpcdata();
-	register struct rpcent *p;
+	struct rpcdata *d = _rpcdata();
+	struct rpcent *p;
 	int reason;
 	char adrstr[10], *val = NULL;
 	int vallen;
@@ -148,7 +137,7 @@ getrpcbyname(name)
 setrpcent(f)
 	int f;
 {
-	register struct rpcdata *d = _rpcdata();
+	struct rpcdata *d = _rpcdata();
 
 	if (d == 0)
 		return;
@@ -164,7 +153,7 @@ setrpcent(f)
 
 endrpcent()
 {
-	register struct rpcdata *d = _rpcdata();
+	struct rpcdata *d = _rpcdata();
 
 	if (d == 0)
 		return;
@@ -185,7 +174,7 @@ getrpcent()
 	int reason;
 	char *key = NULL, *val = NULL;
 	int keylen, vallen;
-	register struct rpcdata *d = _rpcdata();
+	struct rpcdata *d = _rpcdata();
 
 	if (d == 0)
 		return;
@@ -199,9 +188,9 @@ getrpcent()
 static struct rpcent *
 interpret(val, len)
 {
-	register struct rpcdata *d = _rpcdata();
+	struct rpcdata *d = _rpcdata();
 	char *p;
-	register char *cp, **q;
+	char *cp, **q;
 
 	if (d == 0)
 		return;

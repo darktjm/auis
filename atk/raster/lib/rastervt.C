@@ -23,11 +23,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/rastervt.C,v 1.3 1994/08/11 18:54:07 rr2b Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
@@ -88,17 +83,13 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib
 #undef class_StaticEntriesOnly
 
 
-#ifndef NORCSID
-#endif
-#ifdef WM_ENV
-#endif /* WM_ENV */
-int printdata(register class raster  *dobj);
+int printdata(class raster  *dobj);
 
 
-main(register int	   argc, register char   **argv)
+main(int	   argc, char   **argv)
 		{
-	register class raster *dobj;
-	register class rasterview *dview;
+	class raster *dobj;
+	class rasterview *dview;
 
 	class frame *frame;
 	FILE *f;
@@ -163,7 +154,7 @@ main(register int	   argc, register char   **argv)
 	im::KeyboardProcessor();		/* Do it */
 }
 
-int printdata(register class raster  *dobj)
+int printdata(class raster  *dobj)
 	{
 	printf ("%d x %d\n", (dobj)->GetWidth(), 
 			(dobj)->GetHeight());

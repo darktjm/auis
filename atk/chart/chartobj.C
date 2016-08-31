@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chartobj.C,v 1.9 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Chart View-object Abstract-class
@@ -69,6 +62,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include <andrewos.h>
 ATK_IMPL("chartobj.H")
 #include <math.h>
 #include "chartobj.H"
@@ -225,26 +219,24 @@ boolean chartobj_debug = 0;
 
 
 ATKdefineRegistry(chartobj, aptv, NULL);
-#ifndef NORCSID
-#endif
-static void Generate_Shadows( register class chartobj	    *self );
-static void Set_Shadows( register class chartobj	      *self );
-static void Free_Shadows( register class chartobj	      *self );
-void Printer( register class chartobj	      *self, register FILE			      *file, register char			      *processor, register char			      *format, register boolean		       level, aptv_printfptr printer );
-static void Draw_Labels( register class chartobj	  *self );
-static void Draw_Horizontal_Labels( register class chartobj	  *self, long left, long top, long width, long height );
-static void Draw_Vertical_Labels( register class chartobj	  *self, long left, long top, long width, long height );
-static void Draw_Scales( register class chartobj	  *self );
-static void Draw_Left_Scale( register class chartobj	  *self );
-static void Draw_Right_Scale( register class chartobj	  *self );
-static void Prepare_Vertical_Scale( register class chartobj	  *self );
-static void Draw_Top_Scale( register class chartobj	  *self );
-static void Draw_Bottom_Scale( register class chartobj	  *self );
-static void Prepare_Horizontal_Scale( register class chartobj	  *self );
-static void Print_Scales( register class chartobj	  *self );
-static void Print_Left_Scale( register class chartobj	  *self );
-static void Print_Labels( register class chartobj	  *self );
-static void Print_Horizontal_Labels( register class chartobj	  *self, long left, long width, long middle );
+static void Generate_Shadows( class chartobj	    *self );
+static void Set_Shadows( class chartobj	      *self );
+static void Free_Shadows( class chartobj	      *self );
+void Printer( class chartobj	      *self, FILE			      *file, char			      *processor, char			      *format, boolean		       level, aptv_printfptr printer );
+static void Draw_Labels( class chartobj	  *self );
+static void Draw_Horizontal_Labels( class chartobj	  *self, long left, long top, long width, long height );
+static void Draw_Vertical_Labels( class chartobj	  *self, long left, long top, long width, long height );
+static void Draw_Scales( class chartobj	  *self );
+static void Draw_Left_Scale( class chartobj	  *self );
+static void Draw_Right_Scale( class chartobj	  *self );
+static void Prepare_Vertical_Scale( class chartobj	  *self );
+static void Draw_Top_Scale( class chartobj	  *self );
+static void Draw_Bottom_Scale( class chartobj	  *self );
+static void Prepare_Horizontal_Scale( class chartobj	  *self );
+static void Print_Scales( class chartobj	  *self );
+static void Print_Left_Scale( class chartobj	  *self );
+static void Print_Labels( class chartobj	  *self );
+static void Print_Horizontal_Labels( class chartobj	  *self, long left, long width, long middle );
 
 
 chartobj::chartobj( )
@@ -283,7 +275,7 @@ chartobj::~chartobj( )
   }
 
 void 
-chartobj::UnlinkNotification( register class view		  *linkee )
+chartobj::UnlinkNotification( class view		  *linkee )
 {
   IN(chartobj_UnlinkNotification);
   if ( linkee == (class view *)this )
@@ -294,7 +286,7 @@ chartobj::UnlinkNotification( register class view		  *linkee )
   }
 
 void
-chartobj::ObservedChanged( register class observable	      *changed, register long			       value )
+chartobj::ObservedChanged( class observable	      *changed, long			       value )
         {
   class chartobj *self=this;
   IN(chartobj_ObservedChanged);
@@ -313,7 +305,7 @@ chartobj::ObservedChanged( register class observable	      *changed, register lo
   }
 
 void
-chartobj::ObserveChart( register long			     change )
+chartobj::ObserveChart( long			     change )
       {
   class chartobj *self=this;
   IN(chartobj_ObserveChart);
@@ -332,7 +324,7 @@ chartobj::SetDebug( boolean		      state )
   }
 
 void
-chartobj::SetDataObject( register class dataobject	      *data )
+chartobj::SetDataObject( class dataobject	      *data )
       {
   class chartobj *self=this;
   IN(chartobj_SetDataObject);
@@ -342,7 +334,7 @@ chartobj::SetDataObject( register class dataobject	      *data )
   }
 
 void
-chartobj::SetChartOptions( register long		       options )
+chartobj::SetChartOptions( long		       options )
       {
   class chartobj *self=this;
   IN(chartobj_SetChartOptions);
@@ -354,7 +346,7 @@ chartobj::SetChartOptions( register long		       options )
   OUT(chartobj_SetChartOptions);
   }
 
-char *
+const char *
 chartobj::Moniker( )
     {
   IN(chartobj_Moniker);
@@ -363,7 +355,7 @@ chartobj::Moniker( )
   }
 
 void 
-chartobj::FullUpdate( register enum view_UpdateType	   type, register long			   left , register long			   top , register long			   width , register long			   height )
+chartobj::FullUpdate( enum view_UpdateType	   type, long			   left , long			   top , long			   width , long			   height )
         {
   class chartobj *self=this;
   char				  value_string[25];
@@ -511,9 +503,9 @@ chartobj::DrawChart( )
   }
 
 class view *
-chartobj::Hit( register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks )
+chartobj::Hit( enum view_MouseAction       action, long			       x , long			       y , long			       clicks )
         {
-  register class view		     *hit;
+  class view		     *hit;
 
   IN(chartobj_Hit );
   if ( (hit = (this)->aptv::Hit(  action, x, y, clicks )) == NULL )
@@ -523,11 +515,11 @@ chartobj::Hit( register enum view_MouseAction       action, register long			    
   }
 
 class view *
-chartobj::HitChart( register enum view_MouseAction     action, register long			     x , register long			     y , register long			     clicks )
+chartobj::HitChart( enum view_MouseAction     action, long			     x , long			     y , long			     clicks )
         {
   class chartobj *self=this;
   static struct chart_item_shadow  *shadow;
-  register long			    delta;
+  long			    delta;
   static long			    value, value_original, initial_y, prior_y;
   static char			    value_string[25], *name;
 
@@ -583,10 +575,10 @@ chartobj::HitChart( register enum view_MouseAction     action, register long			 
   }
 
 static
-void Generate_Shadows( register class chartobj	    *self )
+void Generate_Shadows( class chartobj	    *self )
     {
-  register struct chart_item_shadow   *shadow = NULL, *prior = NULL;
-  register struct chart_item	   *chart_item = (Chart )->ItemAnchor( );
+  struct chart_item_shadow   *shadow = NULL, *prior = NULL;
+  struct chart_item	   *chart_item = (Chart )->ItemAnchor( );
 
   IN(Generate_Shadows);
   if ( Shadows )
@@ -610,12 +602,12 @@ void Generate_Shadows( register class chartobj	    *self )
   }
 
 static
-void Set_Shadows( register class chartobj	      *self )
+void Set_Shadows( class chartobj	      *self )
     {
-  register long			      i, x, y, width, high_adjust = 0, low_adjust = 0,
+  long			      i, x, y, width, high_adjust = 0, low_adjust = 0,
 				      count = (Chart )->ItemCount( ),
 				      excess, fudge;
-  register struct chart_item_shadow  *shadow = Shadows;
+  struct chart_item_shadow  *shadow = Shadows;
 
   IN(Set_Shadows);
   width = (ChartWidth / ((count) ? count : 1));
@@ -655,9 +647,9 @@ void Set_Shadows( register class chartobj	      *self )
   }
 
 static
-void Free_Shadows( register class chartobj	      *self )
+void Free_Shadows( class chartobj	      *self )
     {
-  register struct chart_item_shadow  *shadow = Shadows, *next;
+  struct chart_item_shadow  *shadow = Shadows, *next;
 
   while ( shadow )
     {
@@ -669,10 +661,10 @@ void Free_Shadows( register class chartobj	      *self )
   }
 
 struct chart_item_shadow *
-chartobj::WhichItem( register long			       x , register long			       y )
+chartobj::WhichItem( long			       x , long			       y )
       {
   class chartobj *self=this;
-  register struct chart_item_shadow  *shadow = Shadows;
+  struct chart_item_shadow  *shadow = Shadows;
 
   while ( shadow )
     {
@@ -684,7 +676,7 @@ chartobj::WhichItem( register long			       x , register long			       y )
   }
 
 void
-Printer( register class chartobj	      *self, register FILE			      *file, register char			      *processor, register char			      *format, register boolean		       level, aptv_printfptr printer )
+Printer( class chartobj	      *self, FILE			      *file, char			      *processor, char			      *format, boolean		       level, aptv_printfptr printer )
             {
   IN(Printer);
   if ( !ScalesSuppressed )
@@ -707,7 +699,7 @@ chartobj::PrintChart( )
   }
 
 void
-chartobj::Print( register FILE			      *file, register char			      *processor, register char			      *format, register boolean		       top_level )
+chartobj::Print( FILE			      *file, const char			      *processor, const char			      *format, boolean		       top_level )
             {
   IN(chartobj_Print);
   if ( top_level )
@@ -722,7 +714,7 @@ chartobj::Print( register FILE			      *file, register char			      *processor, 
   }
 
 static
-void Draw_Labels( register class chartobj	  *self )
+void Draw_Labels( class chartobj	  *self )
     {
   IN(Draw_Labels);
   (self)->SetFont(  LabelFont );
@@ -742,10 +734,10 @@ void Draw_Labels( register class chartobj	  *self )
   }
 
 static
-void Draw_Horizontal_Labels( register class chartobj	  *self, long left, long top, long width, long height )
+void Draw_Horizontal_Labels( class chartobj	  *self, long left, long top, long width, long height )
     {
-  register struct chart_item	 *chart_item = (Chart )->ItemAnchor( );
-  register short		  x, x_increment, y, excess, fudge, i = 0;
+  struct chart_item	 *chart_item = (Chart )->ItemAnchor( );
+  short		  x, x_increment, y, excess, fudge, i = 0;
 
   IN(Draw_Horizontal_Labels);
   (self)->SetTransferMode(  graphic_WHITE );
@@ -773,7 +765,7 @@ void Draw_Horizontal_Labels( register class chartobj	  *self, long left, long to
   }
 
 static
-void Draw_Vertical_Labels( register class chartobj	  *self, long left, long top, long width, long height )
+void Draw_Vertical_Labels( class chartobj	  *self, long left, long top, long width, long height )
     {
   IN(Draw_Left_Labels);
 /*===*/
@@ -781,7 +773,7 @@ void Draw_Vertical_Labels( register class chartobj	  *self, long left, long top,
   }
 
 static
-void Draw_Scales( register class chartobj	  *self )
+void Draw_Scales( class chartobj	  *self )
     {
   IN(Draw_Scales);
   (self)->SetFont(  ScaleFont );
@@ -793,10 +785,10 @@ void Draw_Scales( register class chartobj	  *self )
   }
 
 static
-void Draw_Left_Scale( register class chartobj	  *self )
+void Draw_Left_Scale( class chartobj	  *self )
     {
-  register long			  value, Y, adjust;
-  register float		  y, y_increment;
+  long			  value, Y, adjust;
+  float		  y, y_increment;
   long				  half_y_increment;
   char				  value_string[25];
 
@@ -860,7 +852,7 @@ void Draw_Left_Scale( register class chartobj	  *self )
   }
 
 static
-void Draw_Right_Scale( register class chartobj	  *self )
+void Draw_Right_Scale( class chartobj	  *self )
     {
   IN(Draw_Right_Scale);
   Prepare_Vertical_Scale( self );
@@ -869,7 +861,7 @@ void Draw_Right_Scale( register class chartobj	  *self )
   }
 
 static
-void Prepare_Vertical_Scale( register class chartobj	  *self )
+void Prepare_Vertical_Scale( class chartobj	  *self )
     {
   long  ValueSpanScale = 1;
   long  ScaledValueSpan;
@@ -901,7 +893,7 @@ void Prepare_Vertical_Scale( register class chartobj	  *self )
   }
 
 static
-void Draw_Top_Scale( register class chartobj	  *self )
+void Draw_Top_Scale( class chartobj	  *self )
     {
   IN(Draw_Top_Scale);
   Prepare_Horizontal_Scale( self );
@@ -910,7 +902,7 @@ void Draw_Top_Scale( register class chartobj	  *self )
   }
 
 static
-void Draw_Bottom_Scale( register class chartobj	  *self )
+void Draw_Bottom_Scale( class chartobj	  *self )
     {
   IN(Draw_Bottom_Scale);
   Prepare_Horizontal_Scale( self );
@@ -919,7 +911,7 @@ void Draw_Bottom_Scale( register class chartobj	  *self )
   }
 
 static
-void Prepare_Horizontal_Scale( register class chartobj	  *self )
+void Prepare_Horizontal_Scale( class chartobj	  *self )
     {
   IN(Prepare_Horizontal_Scale);
 /*===*/
@@ -927,7 +919,7 @@ void Prepare_Horizontal_Scale( register class chartobj	  *self )
   }
 
 static
-void Print_Scales( register class chartobj	  *self )
+void Print_Scales( class chartobj	  *self )
     {
   IN(Print_Scales);
   (self)->SetPrintLineWidth(  1 );
@@ -942,9 +934,9 @@ void Print_Scales( register class chartobj	  *self )
   }
 
 static
-void Print_Left_Scale( register class chartobj	  *self )
+void Print_Left_Scale( class chartobj	  *self )
     {
-  register long			  value, y, adjust,
+  long			  value, y, adjust,
 				  y_increment, half_y_increment;
   char				  value_string[25];
 
@@ -993,7 +985,7 @@ void Print_Left_Scale( register class chartobj	  *self )
   }
 
 static
-void Print_Labels( register class chartobj	  *self )
+void Print_Labels( class chartobj	  *self )
     {
   IN(Print_Labels);
   (self)->SetPrintFont(  LabelFontName );
@@ -1009,10 +1001,10 @@ void Print_Labels( register class chartobj	  *self )
   }
 
 static
-void Print_Horizontal_Labels( register class chartobj	  *self, long left, long width, long middle )
+void Print_Horizontal_Labels( class chartobj	  *self, long left, long width, long middle )
     {
-  register struct chart_item	 *chart_item = (Chart )->ItemAnchor( );
-  register short		  x, x_increment, y;
+  struct chart_item	 *chart_item = (Chart )->ItemAnchor( );
+  short		  x, x_increment, y;
 
   IN(Print_Horizontal_Labels);
   if ( (Chart )->ItemCount( ) )

@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h>		/* sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/vclose.c,v 2.16 1994/01/30 15:55:11 rr2b Stab74 $";
-#endif
-
-
- 
 #include <util.h>
 
 /*
@@ -153,7 +145,7 @@ int vclose(int fd)
     SIGSET_TYPE newmask, oldmask;
 #endif /* AFS_ENV */
 
-    register int rc;
+    int rc;
 
 #ifdef AFS_ENV
     DoIoctl(fd);
@@ -184,7 +176,7 @@ int vfclose(FILE *f)
 #ifdef AFS_ENV
     SIGSET_TYPE oldmask, newmask;
 #endif /* AFS_ENV */
-    register int rc;
+    int rc;
 
     /* Barf immediately on NULL arg */
     if (f == NULL) {
@@ -257,7 +249,7 @@ int IsOnVice(int fd)
     struct ViceIoctl dummy;
     auto char CellN[64];
     int Err;
-    register int rc;
+    int rc;
     SIGSET_TYPE oldmask, newmask;
 
     if (!HasCheckedVice) CkVice();

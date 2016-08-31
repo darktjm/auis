@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/btwp.c,v 2.18 1993/05/20 00:27:29 gk5g Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	btwp.c
 	Common procedures and data for manipulating the fields and B-tree

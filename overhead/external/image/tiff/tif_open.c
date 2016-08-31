@@ -91,7 +91,7 @@ static const int litTypeshift[13] = {
  * contents and the machine architecture.
  */
 static void
-DECLARE3(TIFFInitOrder, register TIFF*, tif, int, magic, int, bigendian)
+DECLARE3(TIFFInitOrder, TIFF*, tif, int, magic, int, bigendian)
 {
 	/* XXX how can we deduce this dynamically? */
 	tif->tif_fillorder = FILLORDER_MSB2LSB;
@@ -138,7 +138,7 @@ DECLARE2(getMode, const char*, mode, const char*, module)
 TIFF *
 TIFFOpen(const char *name, const char *mode)
 {
-	static char module[] = "TIFFOpen";
+	static const char module[] = "TIFFOpen";
 	int m, fd;
 
 	m = getMode(mode, module);
@@ -158,7 +158,7 @@ TIFFOpen(const char *name, const char *mode)
 TIFF *
 TIFFFdOpen(int fd, const char *name, const char *mode)
 {
-	static char module[] = "TIFFFdOpen";
+	static const char module[] = "TIFFFdOpen";
 	TIFF *tif;
 	int m, bigendian;
 

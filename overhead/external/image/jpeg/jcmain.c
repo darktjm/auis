@@ -266,8 +266,8 @@ keymatch (char * arg, const char * keyword, int minchars)
 /* keyword is the constant keyword (must be lower case already), */
 /* minchars is length of minimum legal abbreviation. */
 {
-  register int ca, ck;
-  register int nmatched = 0;
+  int ca, ck;
+  int nmatched = 0;
 
   while ((ca = *arg++) != '\0') {
     if ((ck = *keyword++) == '\0')
@@ -290,7 +290,7 @@ qt_getc (FILE * file)
 /* Read next char, skipping over any comments (# to end of line) */
 /* A comment/newline sequence is returned as a newline */
 {
-  register int ch;
+  int ch;
   
   ch = getc(file);
   if (ch == '#') {
@@ -307,8 +307,8 @@ read_qt_integer (FILE * file)
 /* Read an unsigned decimal integer from a quantization-table file */
 /* Swallows one trailing character after the integer */
 {
-  register int ch;
-  register long val;
+  int ch;
+  long val;
   
   /* Skip any leading whitespace, detect EOF */
   do {

@@ -1,5 +1,4 @@
 /* File viewholderv.C created by Jon Tollefson at 12:44:40 on Thu Jan 19 1995. */
-/* $Id$ */
 /* Copyright 1995 Carnegie Mellon University All rights reserved.
   $Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 

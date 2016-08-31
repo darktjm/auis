@@ -217,7 +217,7 @@ static void fdeallocate(char *&ptr) {
 }
 
 avalue *avalueflex::Find(const atom *n, const atom *t) {
-    for(int i=0;i<GetN();i++) {
+    for(unsigned int i=0;i<GetN();i++) {
 	if((*this)[i].Name()==n && (t==NULL || (*this)[i].Name()==t)) return &((*this)[i]);
 	if((*this)[i].Type()==avalue::valueflex) {
 	    avalue *res=(*this)[i].ValueFlex()->Find(n);
@@ -291,7 +291,6 @@ static const atom *ParseType(const char **str) {
 }
 
 int avalueflex::InterpretString(const char **str) {
-    int level=0;
     const char *p=(*str);
     if(*p!='(') return -1;
     p++;

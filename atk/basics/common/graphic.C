@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/graphic.C,v 3.10 1996/02/14 18:25:58 robr Stab74 $";
-#endif
-
 ATK_IMPL("graphic.H")
 #include <fontdesc.H>
 #include <region.H>
@@ -538,6 +532,8 @@ void graphic::SetBitAtLoc(long  XPos,long  YPos, boolean  NewValue)
     (this)->MoveToPt(&tempPt);
     (this)->SetLineWidth(tempLineWidth);
     (this)->SetLineDash(  dashPattern, dashOffset, dashStyle );
+    if(dashPattern)
+	free(dashPattern);
     (this)->SetLineCap(  tempLineCap );
     (this)->SetLineJoin(  tempLineJoin );
     (this)->SetTransferMode(tempTMode);
@@ -684,7 +680,7 @@ short graphic::GetLineWidth()
     return this->lineWidth;
 }
 
-void graphic::SetLineDash( char		 *dashPattern, int		 dashOffset, short		 dashType )
+void graphic::SetLineDash( const char		 *dashPattern, int		 dashOffset, short		 dashType )
 {
 char		*oldDash = this->lineDashPattern;
 
@@ -706,8 +702,7 @@ void graphic::GetLineDash( char		 **dashPattern, int		 *dashOffset, short		 *das
     {
       if ( this->lineDashPattern )
       {
-        *dashPattern = (char *)malloc( strlen( this->lineDashPattern ) + 1 );
-        strcpy( *dashPattern, this->lineDashPattern );
+        *dashPattern = strdup(this->lineDashPattern);
       }
       else *dashPattern = NULL;
     }
@@ -1148,7 +1143,7 @@ long graphic::GetVerticalResolution()
     return 80L;
 }
 
-char * graphic::GetWindowManagerType()
+const char * graphic::GetWindowManagerType()
 {
     return "";
 }

@@ -25,20 +25,15 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/wpcbase.c,v 2.14 1993/02/12 21:23:32 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	wpcbase.c
 	Compatibility routines that choose a cell to use.
 	Include file ``wp.h'' declares the procedures for clients.
 \* ************************************************************ */
 
+#include <andrewos.h>		/* sys/file.h sys/types.h sys/time.h strings.h */
 #include <andyenv.h>
 #include <stdio.h>
-#include <andrewos.h>		/* sys/file.h sys/types.h sys/time.h strings.h */
 #include <ctype.h>
 #include <errno.h>
 #include <truth.h> /* itc.h -> truth.h DMT */

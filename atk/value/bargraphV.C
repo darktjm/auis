@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/bargraphV.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("bargraphV.H")
 #include <bargraphV.H>
 #include <sbuttonv.H>
@@ -52,10 +42,6 @@ ATK_IMPL("bargraphV.H")
 #endif
 
 ATKdefineRegistry(bargraphV, sliderV, NULL);
-#ifndef NORCSID
-#endif
-#ifndef MIN
-#endif
 static void DrawKnurl(class bargraphV  * self,boolean  fullupdate,struct rectangle  *rr);
 
 

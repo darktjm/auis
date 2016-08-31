@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp/lib/RCS/rfc822.c,v 1.23 1994/06/09 21:18:04 rr2b Stab74 $";
-#endif
-
 /*
 ** Get header info from mail-format file.
 ** Return non-zero on success.
@@ -142,11 +137,11 @@ char *malloc();
 #endif
 
 rfc822read(hp, fp, bfr)
-register struct hbuf *hp;
-register FILE *fp;
+struct hbuf *hp;
+FILE *fp;
 char	*bfr;
 {
-	register int	i = type(bfr);
+	int	i = type(bfr);
 	long	curpos;
 	int	status = EX_OK;
 
@@ -220,10 +215,10 @@ char	*bfr;
 #define its(type) (prefix(ptr, type))
 
 type(ptr)
-register char	*ptr;
+char	*ptr;
 {
-	register struct htype	*hp;
-	register char	*colon, *space;
+	struct htype	*hp;
+	char	*colon, *space;
 	static int	lasthdr = FALSE;	/* for continuation headers */
 
 	/*
@@ -308,8 +303,8 @@ int	size;			/* of dest (total bytes) */
 ** Ideally, we should do continuations in here...
 */
 rfc822write(hp, fp)
-register struct hbuf *hp;
-register FILE *fp;
+struct hbuf *hp;
+FILE *fp;
 {
 	time_t t;
 
@@ -359,9 +354,9 @@ register FILE *fp;
 */
 char *
 sp_strip(s)
-register char	*s;
+char	*s;
 {
-	register char	*cp;
+	char	*cp;
 
 	if (s == NULL)
 		return(NULL);
@@ -389,9 +384,9 @@ char	*addr, *name, *field;
 {
 	char	commbuf[LBUFLEN];
 	char	addrbuf[LBUFLEN];
-	register char	*p;
-	register char	*ap = addrbuf;
-	register char	*np = NULL;
+	char	*p;
+	char	*ap = addrbuf;
+	char	*np = NULL;
 	short	commfound = 0, comment = 0;
 	short	addrfound = 0, address = 0;
 	struct llist	comm, *cp = &comm;
@@ -479,7 +474,7 @@ char	*addr, *name, *field;
 	** we'll take all of the comments!
 	*/
 	if (commfound) {
-		register int	flag = (*name != '\0' ? TRUE : FALSE);
+		int	flag = (*name != '\0' ? TRUE : FALSE);
 
 		for(cp = &comm; cp->l_item; cp = cp->l_next) {
 			if (flag)
@@ -501,9 +496,9 @@ char	*addr, *name, *field;
 ** and non-control characters.
 */
 msgid_ok(id)
-register char	*id;
+char	*id;
 {
-	register atdot = FALSE;
+	atdot = FALSE;
 
 	if (id == NULL)
 		return(FALSE);		/* don't waste my time! */
@@ -543,9 +538,9 @@ char *buf;
 int len;
 FILE *fp;
 {
-	register int c = 0;
-	register int n = 0;
-	register char *cp;
+	int c = 0;
+	int n = 0;
+	char *cp;
 
 	cp = buf;
 	while (n < len && (c = getc(fp)) != EOF) {
@@ -598,8 +593,8 @@ char *
 arpadate(longtime)
 time_t *longtime;
 {
-	register char *p, *q, *ud;
-	register int i;
+	char *p, *q, *ud;
+	int i;
 	static char b[40];
 
 	/*  Get current time. This will be used resolve the timezone. */
@@ -677,10 +672,10 @@ int code;
  * Return TRUE if newline was found, else FALSE.
  */
 nstrip(s)
-register char *s;
+char *s;
 {
-	register char *p;
-	register int rc;
+	char *p;
+	int rc;
 
 	rc = FALSE;
 	p = s;
@@ -693,9 +688,9 @@ register char *s;
 }
 
 prefix(full, pref)
-register char *full, *pref;
+char *full, *pref;
 {
-	register char fc, pc;
+	char fc, pc;
 
 	while ((pc = *pref++) != '\0') {
 		fc = *full++;
@@ -712,9 +707,9 @@ register char *full, *pref;
 #if !defined(USG) && !defined(NeXT) && !defined(HAVE_ANSI_LIBC)
 char *
 strpbrk(str, chars)
-register char *str, *chars;
+char *str, *chars;
 {
-	register char *cp;
+	char *cp;
 
 	do {
 		cp = chars - 1;

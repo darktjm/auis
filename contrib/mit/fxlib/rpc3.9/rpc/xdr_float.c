@@ -1,5 +1,3 @@
-/* @(#)xdr_float.c	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,12 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/xdr_float.c,v 1.3 1992/12/15 21:54:40 rr2b Stab74 $";
-#endif
-
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
  * unrestricted use provided that this legend is included on all tape
@@ -60,10 +52,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
 #ifndef ibm032
 /* or the mips! */
 #ifndef mips
-
-#if !defined(lint) && defined(SCCSIDS)
-static char sccsid[] = "@(#)xdr_float.c 1.12 87/08/11 Copyr 1984 Sun Micro";
-#endif
 
 /*
  * xdr_float.c, Generic XDR routines impelmentation.
@@ -118,8 +106,8 @@ static struct sgl_limits {
 
 bool_t
 xdr_float(xdrs, fp)
-	register XDR *xdrs;
-	register float *fp;
+	XDR *xdrs;
+	float *fp;
 {
 #if !defined(mc68000) && !defined(sparc) && !defined(i386)
 	struct ieee_single is;
@@ -223,14 +211,14 @@ static struct dbl_limits {
 
 bool_t
 xdr_double(xdrs, dp)
-	register XDR *xdrs;
+	XDR *xdrs;
 	double *dp;
 {
-	register long *lp;
+	long *lp;
 #if !defined(mc68000) && !defined(sparc) && !defined(i386)
 	struct	ieee_double id;
 	struct	vax_double vd;
-	register struct dbl_limits *lim;
+	struct dbl_limits *lim;
 	int i;
 #endif
 

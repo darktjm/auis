@@ -26,8 +26,6 @@ $Disclaimer:
 #include <andrewos.h>
 
 static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/dogtags.C,v 2.2 1995/02/09 22:05:44 susan Stab74 $";
-
 
 #include <ctype.h>
 #include <pwd.h>
@@ -52,7 +50,7 @@ static char *makeupper(char  *str)
 /* nextDogtagPos() returns the position of the next "<@" in the file, or returns "length" if not found */
 static long nextDogtagPos(text *txt, long pos, long length)
 {
-    register long p=pos;
+    long p=pos;
     while (p<length) {
 	p= (txt)->Index(p, '<',length-p);
 	if (p<0) break;
@@ -271,7 +269,7 @@ static char *dogtagSubstitution(text *self, long dtpos, long dtlen)
 /* dogtags_substituteregion() will replace dogtags with the appropriate information, but only in the region specified */
 void dogtags_substituteregion(text *self, long *posa, long *lena /* *posa and *lena passed by reference; *lena will probably be changing! */)
 {
-    register long pos;
+    long pos;
     long srclen=(*posa)+(*lena), dtstart=nextDogtagPos(self, *posa, srclen);
     while (dtstart<srclen) {
 	pos= (self)->Index(dtstart+2, '@',srclen-dtstart-2);

@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/RCS/enodeview.C,v 1.4 1994/08/11 03:02:23 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 #include "butter.H"
 #include "butterview.H"
@@ -41,19 +36,18 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/
 #include "chlistview.H"
 #include "enodeview.H"
 
-static char *WkDays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Any Day", NULL};
-static char *months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "Any Month", NULL};
-static char *HebrewMonths[] = {"Tishri", "Heshvan", "Kislev", "Tevet", "Shvat", "First Adar", "Second Adar", "Nisan", "Iyyar", "Sivan", "Tammuz", "Av", "Elul", "Any Month", NULL};
-static char *DefaultString[] = {"calendar system", "year", "month", "date", "day of week", "week", "hour", "minute", "Add Event", "Delete Event"};
-static char *WeekStrs[] = {"First Week in Month", "Second Week in Month", "Third Week in Month", "Fourth Week in Month", "Fifth Week in Month", "Last Week in Month", "Any Week", NULL};
-static char *LandmarkStrs[] = {"First Sunday of Advent", "First Sunday after Christmas", "First Sunday after Epiphany", "Easter", NULL};
-static char *SysChoices[] = {"Gregorian", "Hebrew", "Ecclesiastical", NULL};
-static char *BooleanChoices[] = {"Yes", "No", NULL};
+static const char * const WkDays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Any Day", NULL};
+static const char * const months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "Any Month", NULL};
+static const char * const HebrewMonths[] = {"Tishri", "Heshvan", "Kislev", "Tevet", "Shvat", "First Adar", "Second Adar", "Nisan", "Iyyar", "Sivan", "Tammuz", "Av", "Elul", "Any Month", NULL};
+static const char * const DefaultString[] = {"calendar system", "year", "month", "date", "day of week", "week", "hour", "minute", "Add Event", "Delete Event"};
+static const char * const WeekStrs[] = {"First Week in Month", "Second Week in Month", "Third Week in Month", "Fourth Week in Month", "Fifth Week in Month", "Last Week in Month", "Any Week", NULL};
+static const char * const LandmarkStrs[] = {"First Sunday of Advent", "First Sunday after Christmas", "First Sunday after Epiphany", "Easter", NULL};
+static const char * const SysChoices[] = {"Gregorian", "Hebrew", "Ecclesiastical", NULL};
+static const char * const BooleanChoices[] = {"Yes", "No", NULL};
 
 
 ATKdefineRegistry(enodeview, lpair, NULL);
-#ifndef NORCSID
-#endif
+
 static void ButtHit(class enodeview  *self, int  buttcode, class butter  *butter, enum view_MouseAction  action);
 void ResetButterTexts(class enodeview  *self);
 
@@ -403,7 +397,8 @@ void enodeview::ObservedChanged(class observable  *changed, long  value)
 
 void ResetButterTexts(class enodeview  *self)
 {
-    char Buf[50], *mystr;
+    char Buf[50];
+    const char *mystr;
     int i, j;
     struct eventnode *en = NULL;
     class enode *enode;

@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/types.h sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/stats.c,v 2.23 1994/06/09 18:17:42 rr2b Stab74 $";
-#endif
-
 /*
 		stats.c -- Make statistics entries for mail system.
 */
@@ -42,6 +35,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 #endif
 #endif
 
+#include <andrewos.h> /* sys/types.h sys/time.h */
 #include <stdio.h>
 #include <errno.h>
 #include <netdb.h>
@@ -63,12 +57,12 @@ typedef int bool;
 #define LOGSTRLEN	25
 
 #ifdef CMU_ENV
-static char HostsFile[] = "/afs/andrew.cmu.edu/usr0/postman/stats/LogHosts";
+static const char HostsFile[] = "/afs/andrew.cmu.edu/usr0/postman/stats/LogHosts";
 #else /* CMU_ENV */
-static char HostsFile[] = "/nonexistent";
+static const char HostsFile[] = "/nonexistent";
 #endif /* CMU_ENV */
 static char LogHost[100];
-static char LoggingService[] = "mail.logger";
+static const char LoggingService[] = "mail.logger";
 
 static char MyName[LOGSTRLEN+1];
 static char ProgName[LOGSTRLEN+1];
@@ -114,10 +108,10 @@ static bool GetMyName()
 }
 
 static Format(to, from, len)
-    register char *to, *from;
-    register int len;	/* Doesn't include '\0' */
+    char *to, *from;
+    int len;	/* Doesn't include '\0' */
 {
-    register int flen;
+    int flen;
 
     flen = strlen(from);
     if (flen >= len) {
@@ -154,10 +148,10 @@ static Format(to, from, len)
 
 static bool ChooseLogHost()
 {
-    register FILE *f;
+    FILE *f;
     char buffer[50];
-    register char *c;
-    register int nhosts, host;
+    char *c;
+    int nhosts, host;
 
     /* Open hosts file */
     f = fopen(HostsFile, "r");
@@ -216,9 +210,9 @@ static bool ChooseLogHost()
 
 static int OpenSocket()
 {
-    register int s;
+    int s;
 #ifdef NOTDEF
-    register struct servent *serv;
+    struct servent *serv;
 #endif /* NOTDEF */
 #ifndef hp9000s800 /* socket.h defines as extern u_long */
     extern long inet_addr();
@@ -359,9 +353,9 @@ int Logstat(module, call, format, a0, a1, a2, a3, a4, a5, a6, a7, a8, a9)
     int save_errno;
     char ModuleName[LOGSTRLEN+1];
     struct osi_Times tp;
-    register struct tm *now;
+    struct tm *now;
     char buffer[1500];	/* Larger than datagram size */
-    register char *c;
+    char *c;
 
     if (StatFile < 0) return -1;
     save_errno = errno;

@@ -25,17 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/layout/RCS/boxview.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-/* $ACIS$ */
-
- 
-
 #define viewname(v) ((v) == NULL ? "<NO VIEW>" : (((v)->GetName())->First())->Name())
 #define classname(do) ((do) == NULL ? "<NO OBJECT>" : (do)->GetTypeName())
 
@@ -44,7 +33,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #define getView(self) (*(self))
 #define getBox(self) ((class box *)(self)->GetDataObject())
 
-
+#include <andrewos.h>
 ATK_IMPL("boxview.H")
 #include <assert.h>
 #include <rect.h>
@@ -68,9 +57,7 @@ static boolean boxview_debug=0;
 
 
 ATKdefineRegistry(boxview, view, boxview::InitializeClass);
-#ifndef NORCSID
-#endif
-void ReplaceChild(class boxview  *self, class view  *child			/* child to be replaced */, char  *dataname				/* name of replacement dataobject */);
+void ReplaceChild(class boxview  *self, class view  *child			/* child to be replaced */, const char  *dataname				/* name of replacement dataobject */);
 void InitChild(class boxview  *self);
 void Update(class boxview  *self, enum view_UpdateType  how		/* kind of update */, struct rectangle  *updateRect		/* rectangle affected; or NULL for update */, boolean  contentsChanged		/* contents changed since last update */);
 void RequestUpdate(class boxview  *self);
@@ -109,7 +96,7 @@ ReplaceChild(class boxview  *self, class view  *child			/* child to be replaced 
 void
 InitChild(class boxview  *self)
 {
-    char *subviewname;			/* name for new view */
+    const char *subviewname;			/* name for new view */
 
     if (getBox(self)->contents == NULL) {
 	ReplaceChild(self, self->child, "filler");
@@ -428,7 +415,7 @@ boxview::Paste()
 {
     FILE *pasteFile;
     long objectID;
-    char *objectName;
+    const char *objectName;
 
     if (boxview_debug)
 	printf("boxview_Paste()\n");
@@ -447,7 +434,7 @@ boxview::Paste()
 /* print as part of larger document */
 
 void
-boxview::Print(FILE  *f			/* output file */, char  *processor		/* processor */, char  *finalFormat		/* final format */, boolean	 toplevel		/* am I the top level view? */)
+boxview::Print(FILE  *f			/* output file */, const char  *processor		/* processor */, const char  *finalFormat		/* final format */, boolean	 toplevel		/* am I the top level view? */)
 {
     int tw = (this)->BoxWidth();
 

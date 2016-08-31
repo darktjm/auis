@@ -23,21 +23,17 @@
  *  $
  */
 
-#ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/gtest.C,v 1.1 1996/09/20 19:18:17 wjh Exp $";
-#endif
-
 #include <andrewos.h>
 #include <gentext.H>
 
 extern void doStaticLoads();
 
-void main(register int	   argc, register char   **argv);
-void printdata(register class gentext  *dobj);
+void main(int	   argc, char   **argv);
+void printdata(class gentext  *dobj);
 
 	void 
-main(register int	   argc, register char   **argv)  {
-	register class gentext *dobj;
+main(int	   argc, char   **argv)  {
+	class gentext *dobj;
 	boolean debug = TRUE;
 
 	FILE *f;
@@ -92,7 +88,7 @@ main(register int	   argc, register char   **argv)  {
 }
 
 	void 
-printdata(register class gentext  *dobj)  {
+printdata(class gentext  *dobj)  {
 	FILE *f = fopen("/tmp/gnout", "w");
 	printf("gentext data object at 0x%lx\n", dobj);
 	fflush(stdout);

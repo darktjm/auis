@@ -49,12 +49,12 @@ struct prefval_value {
     union prefval_realvalue {
 	int ival;
 	float rval;
-	char *sval;
+	const char *sval;
 	boolean bval;
-	char *fval;
-	char *dval;
-	char *fontval;
-	char *cval;
+	const char *fval;
+	const char *dval;
+	const char *fontval;
+	const char *cval;
     } v;
     boolean set;
 };
@@ -71,23 +71,23 @@ public:
 	prefval();
     
 	virtual ~prefval();
-    static enum prefval_Type StringToType(char *str)  ;
+    static enum prefval_Type StringToType(const char *str)  ;
 
 
-    virtual void SetAppName(char *name);
-    virtual void SetPrefName(char *name);
-    virtual void SetSeparator(char *sep);
+    virtual void SetAppName(const char *name);
+    virtual void SetPrefName(const char *name);
+    virtual void SetSeparator(const char *sep);
     virtual void SetChoices(int nchoices, char **choices, struct prefval_value *cvalues);
     virtual void SetValues(int nvalues, struct prefval_value *tvalues);
     virtual void SetIndexValue(int which, struct prefval_value *tvalue);
     virtual void SetValue(struct prefval_value *tvalue);
     virtual void SetChoice(int which, char *choice, struct prefval_value *tvalue);
-    virtual struct prefval_value * StringToValue(char *str)  ;
-    virtual char * IndexValueString(int which)  ;
-    virtual char * TypeString()  ;
+    virtual struct prefval_value * StringToValue(const char *str)  ;
+    virtual const char * IndexValueString(int which)  ;
+    virtual const char * TypeString()  ;
     virtual long ReadDataPart(FILE *fp, int dsversion)  ;
-    virtual char *PreferenceString();
-    virtual void SetFromPreferenceString(char *str);
+    virtual const char *PreferenceString();
+    virtual void SetFromPreferenceString(const char *str);
     virtual void ClearValues();
     virtual void ClearChoices();
     virtual void FreeValue(struct prefval_value *v);
@@ -96,7 +96,7 @@ public:
     virtual void SortChoices();
     virtual void SetCondition(char *str);
     virtual void SetDefault();
-    virtual char * FullPreferenceString()  ;
+    virtual const char * FullPreferenceString()  ;
 
      long Write(FILE *fp, long writeID, int level)  ;
      long Read(FILE *fp, long id)  ;
@@ -104,8 +104,8 @@ public:
   
 
 
-    inline char  * GetAppName() { return (this->appname); }
-    inline char  * GetPrefName(){ return (this->prefname); }
+    inline const char  * GetAppName() { return (this->appname); }
+    inline const char  * GetPrefName(){ return (this->prefname); }
     inline char  ** GetChoiceNames() { return (this->choices); }
     inline char *GetIndexChoiceName(int which) { return (this->choices?this->choices[which]:NULL); }
     inline struct prefval_value *GetIndexChoiceValue(int which) { return (this->cvalues?&this->cvalues[which]:NULL); }
@@ -115,7 +115,7 @@ public:
     inline struct prefval_value *GetValue() { return (this->values ? &this->values[0] : NULL); }
     inline void SetType(enum prefval_Type t) { ((this)->type=(t)); }
     inline prefval_Type   GetType() { return (this->type); }
-    inline char *ValueString() { return ((this)->IndexValueString( 0)); }
+    inline const char *ValueString() { return ((this)->IndexValueString( 0)); }
     inline void SetListMax(int n) { (this->listmax=(n)); }
     inline int   GetListMax() { return (this->listmax); }
     inline char  * GetSeparator() { return (this->separator); }

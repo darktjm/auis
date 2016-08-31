@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/stats/pmax_mach/RCS/getstats.c,v 1.3 1992/12/15 21:31:51 rr2b Stab74 $";
-#endif
-
 /* **********************************************************************
 *   ****************
 *   STUB LIBRARY FILE---NOT YET IMPLEMENTED FOR THIS SYSTEM

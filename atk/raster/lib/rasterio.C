@@ -25,17 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/rasterio.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 /*  rasterio.c
 
 	rasterio package
@@ -47,6 +36,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 		We could fix ReadRow to not check length before each code byte.
 
  */
+#include <andrewos.h>
 ATK_IMPL("rasterio.H")
 #include <stdio.h>
 
@@ -93,9 +83,6 @@ static unsigned char hex[16] = {
 */
 	
 ATKdefineRegistry(rasterio, ATK, NULL);
-#ifndef NORCSID
-#endif
-
 
 void
 rasterio::WriteRow(FILE  *file, unsigned char *byteaddr, long  nbytes)
@@ -195,7 +182,7 @@ rasterio::WriteRow(FILE  *file, unsigned char *byteaddr, long  nbytes)
 #define case8(v) case4(v): case4((v)+4)
 
 	long
-rasterio::ReadRow(register FILE  *file		/* where to get them from */, register unsigned char *row	/* where to put bytes */, register long  length	/* how many bytes in row must be filled */)
+rasterio::ReadRow(FILE  *file		/* where to get them from */, unsigned char *row	/* where to put bytes */, long  length	/* how many bytes in row must be filled */)
 				{
 	/* Each input character is processed by the central loop.  There are 
 		some input codes which require two or three characters for completion; 
@@ -210,9 +197,9 @@ rasterio::ReadRow(register FILE  *file		/* where to get them from */, register u
 			RepeatAndDigit};	/* have seen repeat code and its first
 					following digit */
 	enum stateCode InputState;	/* current state */
-	register int c;		/* the current input character */
-	register long repeatcount = 0;	/* current repeat value */
-	register long hexval;	/* current hex value */
+	int c;		/* the current input character */
+	long repeatcount = 0;	/* current repeat value */
+	long hexval;	/* current hex value */
 	long pendinghex = 0;		/* the first of a pair of hex characters */
 	
 	/* We cannot exit when length becomes zero because we need to check 
@@ -351,10 +338,10 @@ store:
 		return error code
 */
 	long
-rasterio::ReadImage(register FILE  *file			/* where to get bits from */, register class pixelimage  *pix	/* where to put them */)
+rasterio::ReadImage(FILE  *file			/* where to get bits from */, class pixelimage  *pix	/* where to put them */)
 			{
-	register unsigned char *byteaddr;	/* where to store next row */
-	register long row, W, nbytesfromfile;	/* count rows;  byte length of row */
+	unsigned char *byteaddr;	/* where to store next row */
+	long row, W, nbytesfromfile;	/* count rows;  byte length of row */
 	long version, options, xscale, yscale, xoffset, yoffset, subwidth, subheight;
 	char keyword[6];
 	long discardid, objectid;		/* id read for the incoming pixel image */
@@ -422,13 +409,13 @@ rasterio::ReadImage(register FILE  *file			/* where to get bits from */, registe
 	Write a raster image from 'pix' to 'file'
 */
 	void
-rasterio::WriteImage(register FILE  *file		/* where to put bits  */, register class pixelimage  *pix/* where to get them from */, register struct rectangle  *sub)
+rasterio::WriteImage(FILE  *file		/* where to put bits  */, class pixelimage  *pix/* where to get them from */, struct rectangle  *sub)
 				{
 	long left, top, width, height;
 	long buf[1000];
 	int id = 91;			/* dummy identifier */
-	register long nbytestofile;
-	register long row, bottom;
+	long nbytestofile;
+	long row, bottom;
 
 	rectangle_GetRectSize(sub, &left, &top, &width, &height);
 

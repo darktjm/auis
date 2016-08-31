@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/RCS/chimp.C,v 1.3 1994/08/11 03:02:33 rr2b Stab74 $";
-#endif
-
-
 #include <andrewos.h>
 #include "champ.H"
 #include "view.H"
@@ -39,8 +33,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/
 
 
 ATKdefineRegistry(chimp, chlist, NULL);
-#ifndef NORCSID
-#endif
 static void ChimpCallBack(struct eventnode  *en, class chimp  *self, enum view_MouseAction  action, long  nclicks);
 static void WriteOutEvent(FILE  *fp, struct eventnode  *en);
 

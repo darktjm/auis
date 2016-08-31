@@ -25,17 +25,12 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/gtvpwkey.c,v 2.15 1993/01/08 16:30:59 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	gtvpwkey.c
 	getvpwkey(key) is like getpwent given a WP key value, for Vice IDs.
 \* ************************************************************ */
-#include <andyenv.h>
 #include <andrewos.h> /* syslog.h */
+#include <andyenv.h>
 #include <stdio.h>
 #include <errno.h>
 #include <util.h>

@@ -31,8 +31,6 @@
 \* ************************************************************ */
 
 #include <fdplumb.h>
-extern FILE *fopen();
-extern FILE *popen();
 extern FILE *topen();
 
 struct FwdLink {

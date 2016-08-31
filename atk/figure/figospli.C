@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-char *figospli_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figospli.C,v 3.8 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("figospli.H")
 #include <math.h>
@@ -101,7 +97,7 @@ figospli::~figospli()
 	free(this->tmppts);
 }
 
-char *figospli::ToolName(class figtoolview  *v, long  rock)
+const char *figospli::ToolName(class figtoolview  *v, long  rock)
 {
     if (rock & 2)
 	return "Closed Spline";
@@ -377,7 +373,7 @@ void figospli::RecomputeBounds()
 void figospli::Draw(class figview  *v) 
 {
     long ix, shad, dash, lw, apos, asize, ashape;
-    char *col;
+    const char *col;
     int num = (this)->NumPts();
     if ((this)->Closed()) {
 	if (num<2) return;
@@ -522,12 +518,12 @@ R = (dx+cx+bx+ax, dy+cy+by+ay)
   and then
 P Q R curveto
 */
-void figospli::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolean newstyle)
+void figospli::PrintObject(class figview  *v, FILE  *file, const char  *prefix, boolean newstyle)
 {
     long ix, x, y, xbase, ybase, nump;
     struct point *pts;
     long lw, shad, dash, apos, asize, ashape;
-    char *col;
+    const char *col;
     struct figospli_cubit *cb;
     long Px, Py, Qx, Qy, Rx, Ry;
     double rcol, bcol, gcol, shadcol;

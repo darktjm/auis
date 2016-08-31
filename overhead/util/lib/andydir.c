@@ -30,11 +30,6 @@
 #include <string.h>
 #include <util.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/andydir.c,v 1.7 1992/12/15 21:08:11 rr2b Stab74 $";
-#endif
-
 /* andydir.c */
 
 /* Return a string with the current value for ANDYDIR imbedded in it. */

@@ -27,15 +27,6 @@
 
 #include <andyenv.h>
 #include <system.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/getla.c,v 2.21 1996/02/14 16:14:30 robr Stab74 $";
-#endif
-
-
- 
-
 #include <fdplumb.h>
 #include <sys/ioctl.h>
 #include <sys/param.h>

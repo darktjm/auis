@@ -22,10 +22,6 @@
  *  $
 */
 
-#ifdef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/image/RCS/imagev.C,v 1.32 1996/10/31 20:42:04 wjh Exp $";
-#endif
 #include <andrewos.h>
 ATK_IMPL("imagev.H")
 
@@ -111,13 +107,13 @@ ATKdefineRegistry(imagev, view, imagev::InitializeClass);
 static void PostCursor( class imagev  *self, int  type );
 void DrawBorder( class imagev  *self, struct rectangle  *outer , struct rectangle  *inner );
 void GetScreenCoordinates( class imagev  *self, struct rectangle  *pixRect );
-static char * imageTypeName(enum image_fileType  type);
-static class image * image_Import( char  *filename, enum image_fileType  type );
-static int image_Export( class image  *image, char  *filename, enum image_fileType  type );
+static const char * imageTypeName(enum image_fileType  type);
+static class image * image_Import( const char  *filename, enum image_fileType  type );
+static int image_Export( class image  *image, const char  *filename, enum image_fileType  type );
 static void Import_Cmd( class imagev  *self, enum image_fileType  type );
 static void Export_Cmd( class imagev  *self, enum image_fileType  type );
 static void SaveAs( class imagev  *self, long  rock );
-static int  WriteToFile( class imagev   *self, char  *filename );
+static int  WriteToFile( class imagev   *self, const char  *filename );
 static void Dither( class imagev  *self );
 static void Halftone( class imagev  *self );
 static void Reduce( class imagev  *self );
@@ -270,7 +266,7 @@ imagev::InitializeClass( )
     return(TRUE);
 }
 
-static char panebutton[]="panebutton";
+static const char panebutton[]="panebutton";
 
 imagev::imagev( )
 {
@@ -348,7 +344,7 @@ imagev::~imagev( )
     }
 }
 
-struct sbutton_info thebutton = {
+static const struct sbutton_info thebutton = {
     NULL,   /* the prefs struct will be filled later */
     "",	    /* the label is empty */
     0,	    /* the rock isn't needed */
@@ -702,10 +698,10 @@ imagev::Update( )
     }
 }
 
-static char *
+static const char *
 imageTypeName(enum image_fileType  type)
 {
-    static char *objName = NULL;
+    static const char *objName = NULL;
     switch (type) {
 	case faces_imageType:
 	    objName = "faces";
@@ -763,11 +759,11 @@ imageTypeName(enum image_fileType  type)
 }
 
 static class image *
-image_Import( char  *filename, enum image_fileType  type )
+image_Import( const char  *filename, enum image_fileType  type )
 {
     int ret = -1;
     class image *image;
-    char *objName = NULL;
+    const char *objName = NULL;
     objName = imageTypeName(type);
     if(image = (class image *) ATK::NewObject(objName)) {
 	(image)->Load(filename, NULL);
@@ -776,11 +772,11 @@ image_Import( char  *filename, enum image_fileType  type )
 }
 
 static int
-image_Export( class image  *image, char  *filename, enum image_fileType  type )
+image_Export( class image  *image, const char  *filename, enum image_fileType  type )
 {
     int ret = -1;
     class image *newimage;
-    char *objName = NULL;
+    const char *objName = NULL;
     objName = imageTypeName(type);
     if(newimage = (class image*) ATK::NewObject(objName)) {
 	(image)->Duplicate( newimage);
@@ -876,10 +872,11 @@ SaveAs( class imagev  *self, long  rock )
 }
 
 static int 
-WriteToFile( class imagev   *self, char  *filename )
+WriteToFile( class imagev   *self, const char  *filename )
 { class image *image = self->orig;
   char realName[MAXPATHLEN], tempFilename[MAXPATHLEN];
-  char *originalFilename = NULL, *endString, *basename;
+  const char *originalFilename = NULL;
+  char *endString, *basename;
   int closeCode, errorCode, originalMode, fd, counter = 1;
   FILE *outFile;
   struct stat statBuf;
@@ -998,7 +995,8 @@ static void
 Reduce( class imagev  *self )
 {
     class image *image = self->orig;
-    char *prompt = "Reduce to how many colors?", answer[MAXPATHLEN];
+    const char prompt[] = "Reduce to how many colors?";
+    char answer[MAXPATHLEN];
     int reduction = 0;
 
     if(message::AskForString(self, 0, prompt, NULL, answer, sizeof(answer)) == -1)
@@ -1060,7 +1058,8 @@ static void
 Brighten( class imagev  *self )
 {
     class image *image = self->orig;
-    char *prompt = "Brighten percent?", answer[MAXPATHLEN];
+    const char prompt[] = "Brighten percent?";
+    char answer[MAXPATHLEN];
     unsigned int brighten = 0;
 
     if(message::AskForString(self, 0, prompt, NULL, answer, sizeof(answer)) == -1)
@@ -1084,7 +1083,8 @@ static void
 GammaCorrect( class imagev  *self )
 {
     class image *image = self->orig;
-    char *prompt = "Gamma level?", answer[MAXPATHLEN];
+    const char prompt[] = "Gamma level?";
+    char answer[MAXPATHLEN];
     float gamma = 0;
 
     if(message::AskForString(self, 0, prompt, NULL, answer, sizeof(answer)) == -1)
@@ -1141,7 +1141,7 @@ ScaleToFit( class imagev  *self )
 extern int writePS(class imagev *v, FILE *tmpFile, int *wpts, int *hpts, int toplevel);
 
 void
-imagev::Print( FILE  *f, char  *process, char  *final, int  toplevel )
+imagev::Print( FILE  *f, const char  *process, const char  *final, int  toplevel )
 {
     FILE *tmpFile;
     char tmpName[MAXPATHLEN];
@@ -1149,7 +1149,7 @@ imagev::Print( FILE  *f, char  *process, char  *final, int  toplevel )
     if(tmpFile = fopen(tmpName, "w")) {
 	int wpts, hpts;
 	char buf[BUFSIZ], buf1[BUFSIZ];
-	char *prefix;
+	const char *prefix;
 	writePS(this, tmpFile, &wpts, &hpts, toplevel);
 	fclose(tmpFile);
 	if(tmpFile = fopen(tmpName, "r")) {
@@ -1190,7 +1190,7 @@ void imagev::PrintPSDoc(FILE *outfile, long pagew, long pageh)
     }
 }
 
-void *imagev::GetPSPrintInterface(char *printtype)
+void *imagev::GetPSPrintInterface(const char *printtype)
 {
     if (!strcmp(printtype, "generic"))
 	return (void *)this;
@@ -1211,7 +1211,7 @@ void imagev::DesiredPrintSize(long width, long height, enum view_DSpass pass, lo
 
 
 	boolean 
-imagev::Gifify(char *filename, long *pmaxw, long *pmaxh, 
+imagev::Gifify(const char *filename, long *pmaxw, long *pmaxh, 
 			struct rectangle *visrect) {
 		// (is supposed to pay attention to input values of pmax*)
 	image *src = (image *)GetDataObject();	// get the image object
@@ -1627,7 +1627,8 @@ static void
 SetSaveQuality( class imagev  *self, long  rock )
 {
     class image *image = self->orig;
-    char *prompt = "Save quality [5-95]: ", answer[MAXPATHLEN];
+    const char prompt[] = "Save quality [5-95]: ";
+    char answer[MAXPATHLEN];
     int q;
 
     sprintf(answer, "%d", (image)->GetJPEGSaveQuality());
@@ -1643,8 +1644,9 @@ static void
 SetSaveFormat( class imagev *self, long  rock )
 {
     class image *image = self->orig;
-    char *prompt = "New Image Save-Format: ", response[100], *choice;
-    static char *choices[3] = {"GIF", "JPEG", NULL};
+    const char prompt[] = "New Image Save-Format: ";
+    char response[100], *choice;
+    static const char * const choices[3] = {"GIF", "JPEG", NULL};
     long result = 0;
 
     if(message::MultipleChoiceQuestion(self, 100, prompt, 0, &result, choices, NULL) == -1)

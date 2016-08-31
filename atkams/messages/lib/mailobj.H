@@ -45,9 +45,9 @@ public:
        long Read (FILE *file, long id)  ;
        long Write (FILE *file, long writeid, int level)  ;
        long WriteOtherFormat(FILE *file, long writeid, int level, int usagetype, char *boundary)  ;
-       char * ViewName()  ;
+       const char * ViewName()  ;
      
-      virtual void ReadAlienMail(char *ContentType, char *ContentEncoding, FILE *fp, boolean StopAtEndData);
+      virtual void ReadAlienMail(const char *ContentType, const char *ContentEncoding, FILE *fp, boolean StopAtEndData);
       virtual void RunMetamail();
       virtual void SetTextInsertion(class text *t, class environment *env);
     

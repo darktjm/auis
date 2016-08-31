@@ -72,8 +72,8 @@ public:
     virtual int  Clear()  ;
     virtual int  ReadFromFile(char *SourceFile, Boolean DeleteIt)  ;
     virtual void Reset();
-    virtual void  AddHeaderLine(char *line)  ;
-    virtual void  AddToToHeader(char *line)  ;
+    virtual void  AddHeaderLine(const char *line)  ;
+    virtual void  AddToToHeader(const char *line)  ;
     virtual void  ResetSendingDot()  ;
     virtual int  ResetFromParameters(char *ToName, char *Subject, char *CC, char *IncludeFile, int Delete)  ;
     virtual int  Checkpoint()  ;

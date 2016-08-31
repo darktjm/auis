@@ -25,8 +25,6 @@
  *  $
 */
 
-static char *nntpserv_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp/cmd/RCS/nntpserv.c,v 1.2 1996/02/09 19:37:26 susan Stab74 $";
-
 #include <stdio.h>
 #include <ctype.h>
 #include <system.h>
@@ -73,7 +71,7 @@ main(argc,argv)
 int argc;
 char **argv;
 {
-	register char *cp;
+	char *cp;
 	int i, sval, Debug=0;
     
 	CheckAMSConfiguration();
@@ -294,15 +292,15 @@ FileList *f1, *f2;
 }
 
 static void SortFiles(files, n)
-register FileList *files;
-register int n;
+FileList *files;
+int n;
 {
     if (n > 1) qsort(files, n, sizeof(FileList), FComp);
 }
 
 static void FreeFiles(files, n)
-register FileList *files;
-register int n;
+FileList *files;
+int n;
 {
     if (n > 0) free(files);
 }
@@ -312,14 +310,14 @@ register int n;
 
 static FileList *GetDirEntries(dir, nfiles, err, onlyDirs)
 char *dir;
-register int *nfiles, *err, onlyDirs;
+int *nfiles, *err, onlyDirs;
 {
     DIR *dp;
-    register DIRENT_TYPE  *ent;
-    static char msg[] = "Out of storage (%d) in GetDirEntries for \"%s\"";
-    register FileList *files;
-    register int fsize;	    /* Max # slots in files array */
-    register int i;
+    DIRENT_TYPE  *ent;
+    static const char msg[] = "Out of storage (%d) in GetDirEntries for \"%s\"";
+    FileList *files;
+    int fsize;	    /* Max # slots in files array */
+    int i;
     int dummy;
     char f[MAXPATHLEN+1];
     struct stat buf;

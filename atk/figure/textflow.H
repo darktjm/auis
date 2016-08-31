@@ -23,8 +23,6 @@ ATK_INTER
  * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  * 
  *  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/textflow.H,v 1.1 1995/03/23 21:09:49 Zarf Stab74 $
 */
 #include <figure.H>
 
@@ -35,7 +33,7 @@ class textflow : public figure {
       textflow();
       virtual ~textflow();
 
-      virtual char *ViewName();
+      virtual const char *ViewName();
 };
 
 #endif /* _textflow_H_ */

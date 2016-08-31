@@ -107,8 +107,8 @@ public:
 	 void ReceiveInputFocus();
 	 void LoseInputFocus();
 	 void ObservedChanged(class observable *dobj, long status);
-	 void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
-	 void *GetPSPrintInterface(char *printtype);
+	 void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
+	 void *GetPSPrintInterface(const char *printtype);
 	 void PrintPSDoc(FILE *outfile, long pagew, long pageh);
 	 void PrintPSRect(FILE *file, long logwidth, long logheight, struct rectangle *visrect);
 	 class view *GetApplicationLayer();

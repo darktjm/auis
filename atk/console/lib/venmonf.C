@@ -25,23 +25,13 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/venmonf.C,v 1.4 1993/06/13 17:37:39 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* ***************************************************************
 /*	These routines monitor file system traffic. 
 */
 
 /* ***************************************************************** */
 
-
+#include <andrewos.h>
 #include <system.h>
 
 #include <im.H>
@@ -74,10 +64,6 @@ extern boolean NonViceHost, NonAFSDHost;
 
 extern char MyHomeDir[];
 
-#ifndef NORCSID
-#endif
-#ifdef AFS_ENV
-#endif /* AFS_ENV */
 int SetHomeEnv();
 void CheckVenusQuota(class consoleClass  *self);
 void CheckMariner(FILE  *ActiveVenus, char *rock);
@@ -203,7 +189,7 @@ void CheckMariner(FILE  *ActiveVenus, char  *rock)
 #ifdef AFS_ENV
     static char buf[MARINERBUFSIZE];
     static char *fillptr = buf;
-    register int c;
+    int c;
 
     mydbg(("entering: CheckMariner\n"));
     if(!NonViceHost){

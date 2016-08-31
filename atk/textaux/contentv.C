@@ -25,21 +25,12 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textaux/RCS/contentv.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*  Modified 3/15/90  cch@mtgzx.att.com
  *  Made it so that any change in dot position scrolls other window.
    Modified so that scrolls to main window put selection on top line.
  */
 
+#include <andrewos.h>
 ATK_IMPL("contentv.H")
 #include <ctype.h>
 #include <bind.H>
@@ -72,8 +63,6 @@ static int ScrollTop = FALSE;
 #define Srctext(self) (Data(self)->srctext)
 
 ATKdefineRegistry(contentv, textview, contentv::InitializeClass);
-#ifndef NORCSID
-#endif
 static void reinit(class contentv  *self,long  value);
 static void enumerate(class contentv  *self,long  value);
 static int LocateInView(class view  *v1,class view  *v2,class view  *v3,long  dat);
@@ -82,9 +71,9 @@ static void denumerate(class contentv  *self,long  value);
 static int check(class frame  *fr, struct contentv_cntr  *rock);
 static class frame *getframe(class view  *vw);
 static void destroy(class contentv  *self,long  value);
-static void contentv_MakeContents(register class textview  *self);
+static void contentv_MakeContents(class textview  *self);
 static boolean findframe(class frame  *fr,class buffer  *buf);
-static void contentv_doprint(register class contentv  *self,char  *type);
+static void contentv_doprint(class contentv  *self,const char  *type);
 static void contentv_PreviewCmd(class contentv  *self);
 static void contentv_PrintCmd(class contentv  *self);
 
@@ -241,7 +230,7 @@ static void destroy(class contentv  *self,long  value)
 	}
     }
 }
-static void contentv_MakeContents(register class textview  *self)
+static void contentv_MakeContents(class textview  *self)
     {
     contentv::MakeWindow(Text(self));
 }
@@ -256,7 +245,7 @@ static boolean findframe(class frame  *fr,class buffer  *buf)
     if((fr)->GetBuffer() == buf) return TRUE;
     return FALSE;
 }
-static void contentv_doprint(register class contentv  *self,char  *type)
+static void contentv_doprint(class contentv  *self,const char  *type)
 {
     class buffer *bu;
     class frame *fr;

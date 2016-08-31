@@ -21,9 +21,6 @@
  */
 
 #include <andrewos.h>
-
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/cmenu/RCS/shadows.c,v 1.2 1993/09/21 22:26:14 rr2b Stab74 $";
-
 #include <shadows.h>
 
 static void Lighten(br, bg, bb, rr, rg, rb, inc)

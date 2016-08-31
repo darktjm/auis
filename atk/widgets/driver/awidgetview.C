@@ -23,11 +23,6 @@
  *  $
  */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/awidgetview.C,v 1.32 1996/11/07 00:11:22 robr Exp $";
-#endif
-
 /* awidgetview.c	
 	The view module for the widget dataobject
  */
@@ -557,16 +552,16 @@ AWidgetView::RecSrchExpose(const struct rectangle &,
  *	PRINTING	
  *  # # # # # # # # # # # # #  */
 
-char *defaultImage = "\
-	newpath 0 0 moveto 0 19 lineto 19 19  lineto \n\
-	19 0 lineto closepath 1 setlinewidth stroke \n\
-	newpath 0 19 moveto 19 0 lineto 1 setlinewidth stroke \n\
-";
+static const char defaultImage[] =
+"	newpath 0 0 moveto 0 19 lineto 19 19  lineto \n"
+"	19 0 lineto closepath 1 setlinewidth stroke \n"
+"	newpath 0 19 moveto 19 0 lineto 1 setlinewidth stroke \n";
+
 
 
 /* AWidgetView::Print is the method that is used by the old printing mechanism. */
 	void
-AWidgetView::Print(FILE   *file, char    *processor, char    *, 
+AWidgetView::Print(FILE   *file, const char    *processor, const char    *, 
 		boolean    topLevel)  {
 	class AWidget *dobj = (class AWidget *)GetDataObject();
 	ASlot *pimage = dobj->Get(slot_printImage);
@@ -592,7 +587,7 @@ AWidgetView::Print(FILE   *file, char    *processor, char    *,
 	if (pwidth < 0) 
 		pwidth = (wpts > 0) ? wpts : 19;
 
-	char *prefix;	// prefix for troff stream
+	const char *prefix;	// prefix for troff stream
 	if (strcmp(processor, "troff") == 0) {
 		/* output to troff */
 		if (topLevel)
@@ -635,7 +630,7 @@ AWidgetView::Print(FILE   *file, char    *processor, char    *,
 // GetPSPrintInterface, PrintPSDoc and PrintPSRect 
 //		are used by the new printing mechanism. 
 	void *
-AWidgetView::GetPSPrintInterface(char *printtype)  {
+AWidgetView::GetPSPrintInterface(const char *printtype)  {
     if (strcmp(printtype, "generic") != 0)
 	return (void *)this;
 

@@ -31,7 +31,6 @@
 #define NORCSID
 static UNUSED const char ibmid[] = 
  "(c) Copyright IBM Corp.  (This work is unpublished).  All rights reserved.";
-static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/ez2htmlapp.C,v 1.12 1996/11/23 17:00:56 fred Exp $";
 #endif
 
 ATK_IMPL("ez2htmlapp.H")
@@ -83,21 +82,21 @@ static struct envlist *doomedenvs;
 
 ATKdefineRegistry(ez2htmlapp, application, NULL);
 static void cleanup(htmltext *txt);
-static style *findOrCreateStyle(text *txt, char *stylename);
+static style *findOrCreateStyle(text *txt, const char *stylename);
 
-static char defaultWrapper[] = 
-"<|! marker title |><|! marker body |> \n\
-<|! marker html |><|! marker CleanUphtml |> \n\
-\n\
-	<| html := |>\
-<html> \n\
-<head><title>  \n\
-<| clearstyles(title) |> \n\
-</title></head> \n\
-<body> \n\
-<| body |> \n\
-</body> </html> \n\
-<| CleanUp: |> \n";
+static const char defaultWrapper[] = 
+"<|! marker title |><|! marker body |> \n"
+"<|! marker html |><|! marker CleanUphtml |> \n"
+"\n"
+"	<| html := |>"
+"<html> \n"
+"<head><title>  \n"
+"<| clearstyles(title) |> \n"
+"</title></head> \n"
+"<body> \n"
+"<| body |> \n"
+"</body> </html> \n"
+"<| CleanUp: |> \n";
 
 
 ez2htmlapp::ez2htmlapp() {
@@ -547,7 +546,7 @@ neighborfile(htmltext *self, char *file, char *fmt)  {
 }
 #endif
 
-static char *(nogif[]) = {
+static const char * const nogif[] = {
 	"fnote",
 	"bp",
 	"hidden",
@@ -581,7 +580,7 @@ ConvertInsets(htmltext *htxt, long pos, htmlenv *env,
 		dataobject *dobj, arbval rock) {
 	boolean needsgif = NeedsGIF(dobj);
 	char gifname[200], nmbuf[MAXPATHLEN], whatt[100];
-	char *wh;
+	const char *wh;
 	ez2htmlapp *cvtr = (ez2htmlapp *)rock.obj;
 
 	if ( ! needsgif) 
@@ -958,7 +957,7 @@ ez2htmlapp::Run() {
 		and the text at pos are equal 
 */
 	static boolean 
-textciStrEq(text *txt, long pos, char *str) {
+textciStrEq(text *txt, long pos, const char *str) {
 	while (*str) {
 		if (tolower(*str) != tolower(txt->GetChar(pos)))
 			return FALSE;
@@ -968,7 +967,7 @@ textciStrEq(text *txt, long pos, char *str) {
 }
 
 	static style *
-findOrCreateStyle(text *txt, char *stylename) {
+findOrCreateStyle(text *txt, const char *stylename) {
 	style *sty= (txt->styleSheet)->Find(stylename);
 	if (!sty) { /* create one! no need to set any attributes, 
 			since we won't be displaying it on the screen */
@@ -1000,7 +999,7 @@ addtodoomedlist(htmlenv *env, enum style_actions action) {
 	static boolean 
 markforcleanup(long dummy, text *txt, long pos, environment *env) {
 	boolean destroyStyle=FALSE, destroyText=FALSE;
-	char *name;
+	const char *name;
 	if (env->type != environment_Style)
 		return FALSE; /* "Next!" */
 	name= (env->data.style)->GetName();
@@ -1056,7 +1055,7 @@ cleanupmarked(htmltext *txt) {
 	struct envlist *elist= doomedenvs;
 	while (elist) {
 		htmlenv *env= elist->env;
-		char *stylename= 
+		const char *stylename= 
 				(env->data.style)->GetName();
 		long pos = env->Eval(), len = env->GetLength();
 		if (elist->action & (action_REMOVE 
@@ -1091,7 +1090,7 @@ cleanupmarked(htmltext *txt) {
 							rootEnvironment &&
 						list->Eval()==pos) {
 					if (list->type==environment_Style) {
-						char *styname=(list->data.style)
+						const char *styname=(list->data.style)
 								->GetName();
 						if (strcmp(styname,"ordered")==0 || 
 						strcmp(styname,"unordered")==0 || 

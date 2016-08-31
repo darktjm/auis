@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/cel.C,v 1.7 1995/02/28 21:37:18 rr2b Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("cel.H")
 
 #include <ctype.h>
@@ -172,7 +163,7 @@ class cel *cel::Create(char  *viewType, class dataobject  *dataObject)
     fprintf(stderr, "Could not allocate cel structure.\n");
     return NULL;
 }
-char *cel::SetRefName(char  *refname)
+const char *cel::SetRefName(const char  *refname)
 {
     if(refname){
 	if((this->refatm = atom::Intern(refname)) != NULL)
@@ -182,16 +173,20 @@ char *cel::SetRefName(char  *refname)
 }
 void cel::UnsetRefName()
 {
+#if 0 /* refname isn't alloc'd by SetRefName, so this seems unsafe - tjm */
     if(this->refname && *this->refname){
 	free(this->refname);
+#endif
 	this->refname = NULL;
+#if 0
     }
+#endif
 }
 class dataobject *cel::GetObject()
 {
     return (this->dataObject);
 }
-boolean cel::SetChildObject(class dataobject  *newobject,char  *viewName)
+boolean cel::SetChildObject(class dataobject  *newobject,const char  *viewName)
 {
     if(viewName == NULL || *viewName == '\0')
 	(this)->SetViewName(viewName,TRUE);
@@ -202,7 +197,7 @@ boolean cel::SetChildObject(class dataobject  *newobject,char  *viewName)
 }
 long cel::GetModified()
 {
-    register long mod = (this)->dataobject::GetModified();
+    long mod = (this)->dataobject::GetModified();
     if(this->NoSave) return mod;
     if(this->dataObject)
 	mod += (this->dataObject)->GetModified();
@@ -231,7 +226,7 @@ boolean cel::SetObject(class dataobject  *newobject)
     }
     return FALSE;
 }
-boolean cel::SetObjectByName(char  *dataname)
+boolean cel::SetObjectByName(const char  *dataname)
 {
     class dataobject *newobject;
     if((dataname == NULL || *dataname == '\0')) return FALSE;
@@ -242,7 +237,7 @@ boolean cel::SetObjectByName(char  *dataname)
     }
     return FALSE;
 }
-void cel::SetObjectName(char  *dataname)
+void cel::SetObjectName(const char  *dataname)
 {
     if(dataname && *dataname && 
 	(this->dataatm = atom::Intern(dataname))!= NULL) {
@@ -252,7 +247,7 @@ void cel::SetObjectName(char  *dataname)
     }
 }
     
-void cel::SetViewName(char  *viewname,int  usedefaultview)
+void cel::SetViewName(const char  *viewname,int  usedefaultview)
 {
     if(viewname && *viewname){
 	this->usedefaultview = FALSE;
@@ -267,7 +262,7 @@ void cel::SetViewName(char  *viewname,int  usedefaultview)
 	    this->viewType = (this->viewatm)->Name();
     }
 }
-void cel::SetLinkName(char  *linkname)
+void cel::SetLinkName(const char  *linkname)
 {
     if (linkname && *linkname && 
 	 (this->linkatm = atom::Intern(linkname))!= NULL) {
@@ -289,7 +284,7 @@ void cel::SetApplication(int  app)
     this->application = app;
 }
 
-void cel::InsertObject (class dataobject  *newobject, char  *dataname,char  *viewname,int  usedefaultview)
+void cel::InsertObject (class dataobject  *newobject, char  *dataname,const char  *viewname,int  usedefaultview)
 {
     char buf[128];
     if(newobject != NULL){
@@ -366,7 +361,7 @@ long cel::ReadFile(FILE  *thisFile)
 {  
     long objectID;
     long result;
-    char *objectName;
+    const char *objectName;
     objectName = filetype::Lookup(thisFile, NULL, &objectID, NULL); /* For now, ignore attributes. */
     if(objectName == NULL) objectName = "text";
     if(ATK::IsTypeByName("cel",objectName) || ATK::IsTypeByName(objectName,"cel")){ 
@@ -376,7 +371,7 @@ long cel::ReadFile(FILE  *thisFile)
     else{
 
 	if(/* objecttest(self,objectName,"dataobject") && */ (this)->SetObjectByName(objectName) && (this)->GetObject() != NULL){
-	    char *nm = NULL;
+	    const char *nm = NULL;
 	    class cel *arb = NULL;
 	    (this)->SetViewName(NULL,TRUE);
 	    (this)->SetRefName("");
@@ -405,7 +400,9 @@ long cel::Read(FILE  *file, long  id)
     long c;
     class arbiter *master;
     long status;
-    char objectname[200],*cp;
+    char objectname[200];
+    const char *ccp;
+    char *cp;
     long objectid;
     class dataobject *newobject = NULL;
     char cbuf[2048];
@@ -428,13 +425,14 @@ long cel::Read(FILE  *file, long  id)
         if (c == EOF) return dataobject_NOREADERROR;
         if ((c = getc(file)) == EOF)
             return dataobject_PREMATUREEOF;
+	const char *be;
         if (c == 'b')  {
             begindata = TRUE;
-            s = "egindata";
+            be = "egindata";
         }
         else if (c == 'e')  {
             begindata = FALSE;
-            s = "nddata";
+            be = "nddata";
         }
         else  {
 	    if(endcount == 1){
@@ -451,8 +449,8 @@ long cel::Read(FILE  *file, long  id)
 	    }
             continue;
         }
-        while ((c = getc(file)) != EOF && c == *s) s++;
-        if (c == '{' && *s == '\0')  {
+        while ((c = getc(file)) != EOF && c == *be) be++;
+        if (c == '{' && *be == '\0')  {
             if (begindata) {
                 s = objectname;
                 while ((c = getc(file)) != EOF && c != ',')
@@ -471,11 +469,11 @@ long cel::Read(FILE  *file, long  id)
 		    id = 1;
 		    continue;
 		}
-		cp = objectname;
-		if(!ATK::LoadClass(cp)) {
-		    cp="unknown";
+		ccp = objectname;
+		if(!ATK::LoadClass(ccp)) {
+		    ccp="unknown";
 		}
-                if ((newobject = (class dataobject *) ATK::NewObject(cp)))  {
+                if ((newobject = (class dataobject *) ATK::NewObject(ccp)))  {
                     /* Register the object with the dictionary */
 		    dictionary::Insert(NULL,(char *)objectid, (char *)newobject);
 		    /* Call the read routine for the object */

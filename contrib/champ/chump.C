@@ -25,20 +25,13 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/RCS/chump.C,v 1.3 1994/08/13 18:25:34 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>	/* time.h */
 #include <stdio.h>
 #include <champ.h>
 #include <ctype.h>
 
-static char *Weekdays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+static const char * const Weekdays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
-#ifndef NORCSID
-#endif
 static void PrintNode(struct eventnode  *en, struct tm  *thisdate);
 
 

@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/ezdiff.C,v 3.18 1996/09/03 19:11:52 robr Exp $";
-#endif
-
-
- 
 ATK_IMPL("ezdiff.H")
 
 
@@ -67,12 +59,6 @@ struct diffinfo {
 #define buffertext(BUF) (class text *)(BUF)->GetData()
 
 ATKdefineRegistry(ezdiff, observable, ezdiff::InitializeClass);
-#ifndef NORCSID
-#endif
-#ifndef hpux 
-#endif /* hpux */
-#if POSIX_ENV || defined(hpux)
-#endif /* POSIX_ENV || hpux*/
 static class ezdiff *FindBufferDiff(class buffer  *b,int  *which);
 static class ezdiff *FindViewDiff(class textview  *v,int  *which);
 static char *getpair(char  *cp,int  *ip);
@@ -89,7 +75,7 @@ static void ezdiff_Start(class view  *v,long  dat);
 
 static class ezdiff *FindBufferDiff(class buffer  *b,int  *which)
 {
-    register class ezdiff *ep;
+    class ezdiff *ep;
     if(b == NULL) return NULL;
     for(ep = firstlink; ep != NULL ; ep = ep->next){
 	if(ep->buf[0] == b){
@@ -130,7 +116,7 @@ static char *getpair(char  *cp,int  *ip)
 static class mark *setmark (int  *ip,class text  *d,int  *pi  ,int  *ppos)
 {
     int spos, len;
-    register int i, pos;
+    int i, pos;
     len = (d)->GetLength();
     pos = *ppos;
     i= *pi;
@@ -212,7 +198,7 @@ class ezdiff *ezdiff::Create(class buffer  *buf1,class buffer  *buf2,char  *diff
 
     class ezdiff *self;
     char name1[256],name2[256],fnm[512];
-    char *argv[6],**av;
+    const char *argv[6],**av;
     int pid, exitstatus;
 #if POSIX_ENV || defined(hpux)
     int status;
@@ -258,7 +244,7 @@ class ezdiff *ezdiff::Create(class buffer  *buf1,class buffer  *buf2,char  *diff
 	if((open(fnm,O_RDWR | O_CREAT | O_TRUNC,0600)) == -1){
 	    _exit(3);
 	}
-	execvp("diff",argv);
+	execvp("diff",(char **)argv);
 	_exit(4);
     }
 #if POSIX_ENV || defined(hpux)

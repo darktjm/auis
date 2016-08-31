@@ -124,7 +124,7 @@ DHACK			(({WORD}\.+)|(\.+{WORD})|(\.\.+))
 {LWSP}+			;
 
 \(			{
-			  register ADDRESS_COMMENT *c;
+			  ADDRESS_COMMENT *c;
 			  char *s;
 
 			  cbuffer = yytext+1;
@@ -206,8 +206,6 @@ DHACK			(({WORD}\.+)|(\.+{WORD})|(\.\.+))
 .			return BADTOKEN;
 
 %%
-static char *parsel_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/parsel.lex,v 2.19 1994/06/01 19:59:16 rr2b Stab74 $";
-
 void SetNextLine(line)
     char *line;
 {
@@ -238,7 +236,7 @@ static int my_YY_input(buf, max_size)
     char *buf;
     int max_size;
 {
-      register char c;
+      char c;
   
     *buf = c = *CurrentChar++;
     if ((c & 0x80) || c == 04)	/* High-order bit is on, or it's a ^D */
@@ -258,7 +256,7 @@ static my_unput(c)
 
 static char my_input()
 {
-    register char c;
+    char c;
 
     c = *CurrentChar++;
     if ((c & 0x80) || c == 04)	/* High-order bit is on, or it's a ^D */
@@ -281,7 +279,7 @@ static bool EatComment()
 
     /* Just ate ( */
     for (;cbuffer < last;) {
-	register char c;
+	char c;
 
 	c = input();
 	switch (c) {
@@ -321,11 +319,11 @@ static bool EatComment()
 
 static bool GetString()
 {
-    register char *next = yytext + 1, *last = yytext + YYLMAX - 2;
+    char *next = yytext + 1, *last = yytext + YYLMAX - 2;
 
     /* Already seen " */
     for (; next < last ; ) {
-	register char c;
+	char c;
 
 	c = input();
 	switch (c) {
@@ -361,11 +359,11 @@ static bool GetString()
 
 static bool GetDomainLit()
 {
-    register char *next = yytext + 1, *last = yytext + YYLMAX - 2;
+    char *next = yytext + 1, *last = yytext + YYLMAX - 2;
 
     /* Already seen [ */
     for (; next < last ; ) {
-	register char c;
+	char c;
 
 	c = input();
 	switch (c) {

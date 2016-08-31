@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/types.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ez/RCS/ezapp.C,v 3.8 1996/03/12 17:56:55 robr Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("ezapp.H")
 
 #include <sys/errno.h>
@@ -79,7 +70,7 @@ static boolean CkpMessage(class view  *applicationView , class view  *targetView
 static void Checkpoint(long  dummyData);
 static void SetBufferCkpLatency(class frame  *frame, long  key);
 static void Startup(class frame  *frame);
-static void addFile(class ezapp *self, const char *name, char *newWinProc, boolean ro, int initline);
+static void addFile(class ezapp *self, const char *name, const char *newWinProc, boolean ro, int initline);
 static void makeErrorBuf(class ezapp  *self);
 static void GotoLine(class text  *text, class textview  *view, int  line);
 
@@ -270,7 +261,7 @@ bufferDirectory(class buffer  *buffer, char  *dir			/* Output: At least MAXPATHL
 extern int frame_VisitNamedFile(class frame *f, const char *file, boolean b1, boolean b2);
 
 /* Not static so it can be used from eza.c */
-static int VisitFilePrompting(class frame  *self, char  *prompt, boolean  newWindow, boolean  rawMode)
+static int VisitFilePrompting(class frame  *self, const char  *prompt, boolean  newWindow, boolean  rawMode)
                 {
     char filename[MAXPATHLEN];
     class buffer *buffer;
@@ -345,7 +336,7 @@ static void Startup(class frame  *frame)
 	message::DisplayString(frame, 0, "New file.");
 }
 
-static void addFile(class ezapp *self, const char *name, char *newWinProc, boolean ro, int initline)
+static void addFile(class ezapp *self, const char *name, const char *newWinProc, boolean ro, int initline)
 {
     /* Its a file right? */
     struct ezapp_fileList *fileEntry=
@@ -353,7 +344,8 @@ static void addFile(class ezapp *self, const char *name, char *newWinProc, boole
 
     fileEntry->filename=name;
     fileEntry->ObjectName=self->defaultObject;
-    fileEntry->newWindowProc=newWinProc;
+    /* assumes either NULL, "", or a malloc'd string copy */
+    fileEntry->newWindowProc=(char *)newWinProc;
     fileEntry->readOnly=ro;
     fileEntry->initLine=initline;
     fileEntry->next=NULL;
@@ -414,12 +406,11 @@ boolean ezapp::ParseArgs(int  argc,const char  **argv)
 		    pendingTitle = TRUE;
 		    break;
 		case 'w': /* New window. */
-		    procNewWindow = ""; /* empty string sufficient to be non-null */
 		    if ((*argv)[2]==':' && (*argv)[3]!='\0') { /* specified a proc to be called in the new window, copy for posterity */
 			const char *parg= &((*argv)[3]);
-			procNewWindow= (char *)malloc(strlen(parg)+1); /* this will get freed when the proc has been called */
-			strcpy(procNewWindow, parg);
-		    }
+			procNewWindow= strdup(parg);
+		    } else /* may be freed if non=NULL */
+		      procNewWindow = strdup(""); /* empty string sufficient to be non-null */
 		    break;
 		default:
 		    fprintf(stderr,"%s: unrecognized switch: %s\n", (this)->GetName(), *argv);
@@ -438,16 +429,20 @@ boolean ezapp::ParseArgs(int  argc,const char  **argv)
 	    }else{
 		boolean mustHaveWindow= (maxInitWindows-->0);
 		addFile(this, *argv,
-			(procNewWindow ? procNewWindow : (mustHaveWindow ? (char *)"" : NULL)),
+			(procNewWindow ? procNewWindow : (mustHaveWindow ? "" : NULL)),
 			pendingReadOnly, pendingInitLine);
+		/* leak? */
 		procNewWindow=NULL;
 		pendingReadOnly=FALSE;
 		pendingInitLine=0;
 	    }
 	}
     }
-    if (procNewWindow) /* new window proc wasn't used (memory leak); store globally for use by the DefaultStartUpFile or ScratchBuffer */
+    if (procNewWindow) { /* new window proc wasn't used (memory leak); store globally for use by the DefaultStartUpFile or ScratchBuffer */
+	if(procForDefaultWindow)
+	    free(procForDefaultWindow);
 	procForDefaultWindow= procNewWindow;
+    }
     return TRUE;
 }
 
@@ -470,7 +465,7 @@ void ezapp::ReadInitFile()
 static void GotoLine(class text  *text, class textview  *view, int  line)
 {
     int argument, pos, endpos;
-    register int count;
+    int count;
 
     pos = (text)->GetPosForLine( line);
     (view)->SetDotPosition( pos);
@@ -563,7 +558,7 @@ boolean ezapp::Start()
 	const char *defFile;
 
 	if ((defFile = environ::GetProfile("DefaultStartUpFile")) != NULL && *defFile != '\0')  {
-	    addFile(this, defFile, procForDefaultWindow?procForDefaultWindow:(char *)"", FALSE, 0);
+	    addFile(this, defFile, procForDefaultWindow?procForDefaultWindow:"", FALSE, 0);
 	} else if (environ::GetProfileSwitch("DefaultIsScratchBuffer", TRUE)) {
 	    /* Create a scratch buffer instead. */
 	    this->bufferp = buffer::Create("Scratch", NULL, NULL, NULL);
@@ -634,6 +629,8 @@ int ezapp::Run()
                 StartupError(errtext,errorMessage);
                 this->bufferp = NULL;
                 next = fileEntry->next;
+		if(fileEntry->newWindowProc && fileEntry->newWindowProc[0])
+		    free(fileEntry->newWindowProc);
                 free(fileEntry);
                 continue;
             }
@@ -717,6 +714,8 @@ int ezapp::Run()
             StartupError(errtext,errorMessage);
         }
         next = fileEntry->next;
+	if(fileEntry->newWindowProc && fileEntry->newWindowProc[0])
+	    free(fileEntry->newWindowProc);
         free(fileEntry);
     }
 

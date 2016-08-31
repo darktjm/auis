@@ -1,10 +1,6 @@
 /**********************************************************************
  * Macros to deal with allocation properly
  *
- * $Author: sa3e $
- * $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/include/RCS/memory.h,v $
- * $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/include/RCS/memory.h,v 1.3 1994/01/31 22:22:59 sa3e Stab74 $
- *
  * Copyright 1989, 1990 by the Massachusetts Institute of Technology.
  *
  * For copying and distribution information, please see the file

@@ -48,7 +48,7 @@ public:
 	${prefix}();
 EOF
 if egrep ErrorGuts $cfile > /dev/null; then
-	echo "	virtual void ErrorGuts(int severity, char *severityname, char *msg);" >> $tmpfile.classdecl
+	echo "	virtual void ErrorGuts(int severity, const char *severityname, const char *msg);" >> $tmpfile.classdecl
 fi
 echo "};" >> $tmpfile.classdecl
 

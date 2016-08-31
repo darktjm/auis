@@ -1,5 +1,11 @@
 %{
 #include "refs.h"
+static int refs_TokUnput(int tok);
+static int refs_TokComment(void);
+static int refs_TokString(void);
+static int refs_TokCharacter(void);
+static int refs_TokWhiteSpace(void);
+static int refs_TokLineComment(void);
 %}
 %%
 struct[^A-Z0-9a-z_]		return(refs_TokUnput(refs_Class));
@@ -36,19 +42,14 @@ ATKregistryEntry[^A-Z0-9a-z_]			return(refs_TokUnput(refs_ATKregistryEntry));
 
 .				return(refs_Other);
 %%
-#ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/grefs/RCS/refs.lex,v 1.2 1995/03/01 01:50:33 rr2b Stab74 $";
-#endif
-
-int refs_TokUnput(tok)
-int tok;
+static int refs_TokUnput(int tok)
 {
     unput(yytext[--yyleng]);
     yytext[yyleng]='\0';
     return tok;
 }
 
-int refs_TokWhitespace()
+static int refs_TokWhitespace(void)
 {
     /* convert an escaped newline into a space */	
     if(yytext[0]=='\\'){
@@ -59,7 +60,7 @@ int refs_TokWhitespace()
     return (refs_WhiteSpace);
 }
 
-int refs_TokComment() {
+static int refs_TokComment(void) {
     /* must search to the end of the comment */
     /* attempt to return it in str - up to the point that fits */
 
@@ -77,7 +78,7 @@ int refs_TokComment() {
     return (refs_WhiteSpace);
 }
 
-int refs_TokLineComment() {
+static int refs_TokLineComment(void) {
     /* must search to the end of the comment */
     /* attempt to return it in str - up to the point that fits */
 
@@ -94,7 +95,7 @@ int refs_TokLineComment() {
     return (refs_WhiteSpace);
 }
 
-int refs_TokString() {
+static int refs_TokString(void) {
     int i = 1, c, SawBackSlash = 0;
     
     yytext[YYLMAX-2] = '"';
@@ -114,7 +115,7 @@ int refs_TokString() {
     return (refs_String);
 }
 
-int refs_TokCharacter() {
+static int refs_TokCharacter(void) {
     int i = 1, c, SawBackSlash=0;
     yytext[YYLMAX-2] = '\'';
     yytext[YYLMAX-1] = '0';
@@ -125,6 +126,7 @@ int refs_TokCharacter() {
 	if(c == '\\') SawBackSlash=!SawBackSlash;
 	else SawBackSlash=0;
     }
+    return refs_Character;
 }
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *

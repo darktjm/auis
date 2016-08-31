@@ -1,4 +1,3 @@
-/* $Id$ */
 /*
  * Copyright 1993, City University
  * Copyright 1993, 1994, Nick Williams. 

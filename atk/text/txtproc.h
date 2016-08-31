@@ -23,7 +23,7 @@
 extern boolean ConfirmReadOnly(class textview *self);
 extern long textview_LookCmd(ATK *self, long c);
 extern void InitializeMod();
-extern int charType(register char  c);
+extern int charType(char  c);
 extern class keymap *textview_InitEmacsKeyMap();
 extern class keymap *textview_InitViInputModeKeyMap();
 extern class keymap *textview_InitViCommandModeKeyMap();
@@ -47,7 +47,7 @@ extern void textview_ForeKillWordCmd (class textview *self);
 extern void textview_OpenLineCmd(class textview *self);
 extern void textview_JoinCmd(class textview *self);
 extern void textview_YankLineCmd(class textview *self);
-extern boolean textview_objecttest(class textview *self,char *name,char *desiredname);
+extern boolean textview_objecttest(class textview *self,const char *name,const char *desiredname);
 extern void textview_InsertInsetCmd (class textview *self,long rock);
 extern void textview_InsertFile(class textview *self);
 extern void textview_YankCmd(class textview *self);
@@ -184,7 +184,7 @@ extern void textview_UpInsertEnvironmentCmd(class textview *self);
 extern void textview_DownInsertEnvironmentCmd(class textview *self);
 extern void textview_LeftInsertEnvironmentCmd(class textview *self);
 extern void textview_RightInsertEnvCmd(class textview *self);
-extern void textview_InsertEnvironment(class textview *self,char *sName);
+extern void textview_InsertEnvironment(class textview *self,const char *sName);
 extern void textview_ToggleLineDisplay(textview *self, char *arg);
 /* Horizontal scrolling */
 extern int textview_get_hshift_interval(textview *self);

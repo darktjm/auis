@@ -51,7 +51,7 @@ static	int TIFFCheckRead();
 #endif
 
 /*VARARGS3*/
-int TIFFReadScanline(register TIFF *tif, u_char *buf, u_int row, u_int sample)
+int TIFFReadScanline(TIFF *tif, u_char *buf, u_int row, u_int sample)
 {
 	int e;
 
@@ -72,9 +72,9 @@ int TIFFReadScanline(register TIFF *tif, u_char *buf, u_int row, u_int sample)
  */
 static int
 /*VARARGS2*/
-TIFFSeek(register TIFF *tif, u_int row, u_int sample)
+TIFFSeek(TIFF *tif, u_int row, u_int sample)
 {
-	register TIFFDirectory *td = &tif->tif_dir;
+	TIFFDirectory *td = &tif->tif_dir;
 	int strip;
 
 	if (row >= td->td_imagelength) {	/* out of range */
@@ -158,7 +158,7 @@ int TIFFReadEncodedStrip(TIFF *tif, u_int strip, u_char *buf, u_int size)
  */
 int TIFFReadRawStrip(TIFF *tif, u_int strip, u_char *buf, u_int size)
 {
-	static char module[] = "TIFFReadRawStrip";
+	static const char module[] = "TIFFReadRawStrip";
 	TIFFDirectory *td = &tif->tif_dir;
 	u_long bytecount;
 
@@ -214,7 +214,7 @@ TIFFReadRawStrip1(TIFF *tif, u_int strip, u_char *buf, u_int size, const char mo
 static int
 TIFFFillStrip(TIFF *tif, u_int strip)
 {
-	static char module[] = "TIFFFillStrip";
+	static const char module[] = "TIFFFillStrip";
 	TIFFDirectory *td = &tif->tif_dir;
 	u_long bytecount;
 
@@ -336,7 +336,7 @@ int TIFFReadEncodedTile(TIFF *tif, u_int tile, u_char *buf, u_int size)
  */
 int TIFFReadRawTile(TIFF *tif, u_int tile, u_char *buf, u_int size)
 {
-	static char module[] = "TIFFReadRawTile";
+	static const char module[] = "TIFFReadRawTile";
 	TIFFDirectory *td = &tif->tif_dir;
 	u_long bytecount;
 
@@ -392,7 +392,7 @@ TIFFReadRawTile1(TIFF *tif, u_int tile, u_char *buf, u_int size, const char modu
 static int
 TIFFFillTile(TIFF *tif, u_int tile)
 {
-	static char module[] = "TIFFFillTile";
+	static const char module[] = "TIFFFillTile";
 	TIFFDirectory *td = &tif->tif_dir;
 	u_long bytecount;
 
@@ -464,7 +464,7 @@ TIFFFillTile(TIFF *tif, u_int tile)
 int
 TIFFReadBufferSetup(TIFF *tif, char *bp, u_int size)
 {
-	static char module[] = "TIFFReadBufferSetup";
+	static const char module[] = "TIFFReadBufferSetup";
 
 	if (tif->tif_rawdata) {
 		if (tif->tif_flags & TIFF_MYBUFFER)
@@ -495,7 +495,7 @@ TIFFReadBufferSetup(TIFF *tif, char *bp, u_int size)
  * strip has just been read in.
  */
 static int
-TIFFStartStrip(register TIFF *tif, u_int strip)
+TIFFStartStrip(TIFF *tif, u_int strip)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 
@@ -511,7 +511,7 @@ TIFFStartStrip(register TIFF *tif, u_int strip)
  * tile has just been read in.
  */
 static int
-TIFFStartTile(register TIFF *tif, u_int tile)
+TIFFStartTile(TIFF *tif, u_int tile)
 {
 	TIFFDirectory *td = &tif->tif_dir;
 

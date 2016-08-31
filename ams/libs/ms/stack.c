@@ -25,18 +25,12 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/stack.c,v 2.8 1993/06/15 03:56:02 rr2b Stab74 $";
-#endif
-
 /*	stack.c -- push and pop on an otherwise private stack.
 	You pass in pointers, and the stack routines do appropriate mallocs and frees
 	to store *duplicates* of the strings you pass.   Pop returns a pointer to
 	a static area overwritten with each call. */
 
+#include <andrewos.h>
 #include <ms.h>
 #include <ctype.h>
 

@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-char *fontsel_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/fontsel.C,v 3.2 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("fontsel.H")
 #include <fontsel.H>
@@ -35,9 +31,7 @@ ATK_IMPL("fontsel.H")
 
 
 ATKdefineRegistry(fontsel, dataobject, fontsel::InitializeClass);
-#ifndef NORCSID
-#endif
-static char *CopyString(char  *str);
+static char *CopyString(const char  *str);
 
 
 boolean fontsel::InitializeClass()
@@ -77,7 +71,7 @@ void fontsel::SetSize(short  newsize)
     this->active |= ((unsigned long)1<<fontsel_Size);
 }
 
-void fontsel::SetFamily(char  *newfam)
+void fontsel::SetFamily(const char  *newfam)
 {
     if (strcmp(newfam, this->family)) {
 	free(this->family);
@@ -86,16 +80,12 @@ void fontsel::SetFamily(char  *newfam)
     this->active |= ((unsigned long)1<<fontsel_Family);
 }
 
-static char *CopyString(char  *str)
+static char *CopyString(const char  *str)
 {
     char *tmp;
 
     if (str==NULL)
 	return NULL;
-    tmp = (char *)malloc(strlen(str)+1);
-    if (!tmp)
-	return NULL;
-    strcpy(tmp, str);
-    return tmp;
+    return strdup(str);
 }
 

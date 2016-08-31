@@ -25,14 +25,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/examples/ex16/RCS/hwapp.C,v 1.5 1996/12/19 20:23:55 fred Exp $";
-#endif
-
-
-
 ATK_IMPL("hwapp.H")
 #include "hwapp.H"
 
@@ -49,8 +41,6 @@ ATK_IMPL("hwapp.H")
 
 
 ATKdefineRegistry(helloworldapp, application, NULL);
-#ifndef NORCSID
-#endif
 static class view *appLayerOrDestroy(class view  *v);
 static boolean makeSplitWindow(class dataobject  *dobj1,class dataobject  *dobj2);
 

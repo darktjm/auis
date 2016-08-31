@@ -23,16 +23,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/pvaltvc.C,v 1.6 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
-
- 
-
 ATK_IMPL("pvaltvc.H")
 #include <math.h>
 
@@ -61,8 +51,6 @@ static class keymap *pvaltvcKeymap=NULL;
 
 
 ATKdefineRegistry(pvaltvc, pvaltv, pvaltvc::InitializeClass);
-#ifndef NORCSID
-#endif
 static void pvaltvcUpdate(class pvaltvc  *self, long  rock);
 
 

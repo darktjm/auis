@@ -26,24 +26,11 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/nbutterv.C,v 1.1 1993/06/01 00:45:29 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 #include <sbutton.H>
 #include "nbutterv.H"
 
 
 ATKdefineRegistry(nbutterv, sbuttonv, NULL);
-#ifndef NORCSID
-#endif
-
 
 boolean nbutterv::Touch(int  ind, enum view_MouseAction  action)
 { 

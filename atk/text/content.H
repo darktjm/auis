@@ -44,7 +44,7 @@ class content : public  text {
 
 
       void ObservedChanged (class observable *changed, long value);
-      char * ViewName()  ;
+      const char * ViewName()  ;
 
       virtual void reinit();
       virtual void SetSourceText(class text *txt);
@@ -55,7 +55,7 @@ class content : public  text {
       virtual class mark * locate(long pos);
       virtual struct content_chapentry* CopyEntry(long pos,long len,char *buf,long buflen);
 
-      static int StyleNameContentLevel(char *stylename);
+      static int StyleNameContentLevel(const char *stylename);
 
       content();
       virtual ~content();

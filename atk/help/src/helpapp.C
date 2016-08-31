@@ -25,17 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/RCS/helpapp.C,v 1.9 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-/* $ACIS$ */
-
- 
-
 /*---------------------------------------------------------------------------*/
 /*									     */
 /*		          	ATK Help Program			     */
@@ -57,6 +46,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 /*---------------------------------------------------------------------------*/
 
 #define label gezornenplatz
+#include <andrewos.h>
 ATK_IMPL("helpapp.H")
 #undef label
 
@@ -120,7 +110,7 @@ const char *help_indexName=NULL;	/* alternative index file? */
 const char *help_aliasName=NULL;	/* additional index file? */
 /* list of addition search directories */
 struct helpDir *helpsearchDirs=(struct helpDir *)NULL;
-static char *error = "Sorry; no help available on '%s'.";
+static const char error[] = "Sorry; no help available on '%s'.";
 
 class help *helpobj;		/* global help object for ncproc use */
 
@@ -131,7 +121,7 @@ class help *helpobj;		/* global help object for ncproc use */
 ATKdefineRegistry(helpapp, application, NULL);
 
 static void  show_usage(class helpapp  *self);
-static void AddPath(register const char  *astr);
+static void AddPath(const char  *astr);
 extern "C" int help_unique();
 extern "C" void helpapp_ncproc();
 extern int helpSocket;
@@ -150,16 +140,16 @@ show_usage(class helpapp  *self)
 	    (self)->GetName());
 #endif /* DEBUGGING */
     fprintf(stderr,
-"	-h: show this usage statement\n\
-	-m: 'more' mode (for use with terminals)\n\
-	-o: in 'more' mode, prompt for printing each file\n\
-	-n: use a new help window, don't re-use old window\n\
-	-l: just list the help files available for this topic\n\
-	-e: don't show default help file\n\
-	-i directory: specify different index directory\n\
-	-a alias file: specify different help.aliases file\n\
-	-s directory: search this directory, too\n\
-	topic: the subject on which you want help.\n");
+"	-h: show this usage statement\n"
+"	-m: 'more' mode (for use with terminals)\n"
+"	-o: in 'more' mode, prompt for printing each file\n"
+"	-n: use a new help window, don't re-use old window\n"
+"	-l: just list the help files available for this topic\n"
+"	-e: don't show default help file\n"
+"	-i directory: specify different index directory\n"
+"	-a alias file: specify different help.aliases file\n"
+"	-s directory: search this directory, too\n"
+"	topic: the subject on which you want help.\n");
 }
     
 
@@ -167,10 +157,10 @@ show_usage(class helpapp  *self)
  * add a path to those to be searched
  */
 static void
-AddPath(register const char  *astr)
+AddPath(const char  *astr)
 {
     char tname[MAXPATHLEN];
-    register const char *np;
+    const char *np;
 
     DEBUG(("ha: IN addpath\n"));
     while(1) {
@@ -205,7 +195,7 @@ extern int helpPort;
 static void 
 unique_help(class helpapp  *self)
 {
-    register int i;
+    int i;
     char *wmHost = NULL, *dpyHost = NULL, displayHost[MAXHOSTNAMELEN], *colon;
     int runningLocally = 0;
     static FILE *tfile;

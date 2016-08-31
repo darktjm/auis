@@ -1,10 +1,6 @@
 /**********************************************************************
  * File Exchange client library
  *
- * $Author: sa3e $
- * $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/lib/RCS/_fx_shorten.c,v $
- * $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/lib/RCS/_fx_shorten.c,v 1.5 1994/02/01 21:29:44 sa3e Stab74 $
- *
  * Copyright 1989, 1990 by the Massachusetts Institute of Technology.
  *
  * For copying and distribution information, please see the file
@@ -33,11 +29,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/lib/RCS/_fx_shorten.c,v 1.5 1994/02/01 21:29:44 sa3e Stab74 $";
-#endif
-
 #include <mitcopyright.h>
 
  
@@ -54,7 +45,7 @@ _fx_shorten(fxp, name)
      FX *fxp;
      char *name;
 {
-  register char *s;
+  char *s;
   s = index(name, '@');
   if (s)
     if (strcmp(s, fxp->extension) == 0)

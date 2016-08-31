@@ -23,8 +23,6 @@ ATK_INTER
 // WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 // 
 //  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figogrp.H,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $
 */
 
 #include <rect.h>
@@ -50,7 +48,7 @@ public:
     
        void WriteBody(FILE *fp);
        long ReadBody(FILE *file, boolean recompute)  ;
-       char * ToolName(class figtoolview *v, long rock)  ;
+       const char * ToolName(class figtoolview *v, long rock)  ;
        void Draw(class figview *v); 
        void Sketch(class figview *v);
        void Select(class figview *v); 

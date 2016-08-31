@@ -92,8 +92,8 @@ struct apt_strings
 
 struct apt_field
   {
-  char				     *name;
-  char				     *content;
+  const char			     *name;
+  const char			     *content;
   };
 
 struct apt_fields
@@ -122,16 +122,16 @@ public:
 
 
 
-  virtual void SetAreaTitle( char *title, long area );
-  virtual void SetAreaSpreadTitle( char **title, long count, long area, long mode );
-  virtual void SetAreaTitleFontName( char *font, long area );
-  virtual void SetAreaLegend( char *legend, long area  );
-  virtual void SetAreaSpreadLegend( char **legend, long count, long area, long mode );
-  virtual void SetAreaLegendFontName( char *font, long area );
+  virtual void SetAreaTitle( const char *title, long area );
+  virtual void SetAreaSpreadTitle( const char **title, long count, long area, long mode );
+  virtual void SetAreaTitleFontName( const char *font, long area );
+  virtual void SetAreaLegend( const char *legend, long area  );
+  virtual void SetAreaSpreadLegend( const char **legend, long count, long area, long mode );
+  virtual void SetAreaLegendFontName( const char *font, long area );
   virtual long ReadObject( FILE *file, long id, apt_readfptr reader )     ;
   virtual struct apt_field * ReadObjectField()				 ;
-  virtual char ** ParseFieldContent( char *string )		 ;
-  virtual struct apt_field_contents * ParseFieldContents( char *string )		 ;
+  virtual char ** ParseFieldContent( const char *string )		 ;
+  virtual struct apt_field_contents * ParseFieldContents( const char *string )		 ;
   virtual void WriteObject( FILE *file, long id, long level, apt_writefptr writer );
   virtual void WriteObjectField(struct apt_field *field);
 
@@ -139,16 +139,16 @@ public:
 
   inline char ** AreaTitlesAnchor( int area)	    { return ((this)->titles[area].strings); }
   inline long AreaTitlesCount( int area)	    { return ((this)->titles[area].strings_count); }
-  inline char * AreaTitle( int area)		    { return (((this)->titles[area].strings) ?
+  inline const char * AreaTitle( int area)		    { return (((this)->titles[area].strings) ?
 					 ((this)->titles[area].strings)[0] : NULL); }
-  inline char * AreaTitles( int area, int i)		    { return (((this)->titles[area].strings)[i]); }
-  inline char * AreaTitleFontName( int area)	    { return ((this)->titles[area].font_name); }
+  inline const char * AreaTitles( int area, int i)		    { return (((this)->titles[area].strings)[i]); }
+  inline const char * AreaTitleFontName( int area)	    { return ((this)->titles[area].font_name); }
   inline char ** AreaLegendsAnchor( int area)	    { return ((this)->legends[area].strings); }
   inline long AreaLegendsCount( int area)	    { return ((this)->legends[area].strings_count); }
-  inline char * AreaLegend( int area)		    { return (((this)->legends[area].strings) ?
+  inline const char * AreaLegend( int area)		    { return (((this)->legends[area].strings) ?
 					 ((this)->legends[area].strings)[0] : NULL); }
-  inline char * AreaLegends( int area, int i)	    { return (((this)->legends[area].strings)[i]); }
-  inline char * AreaLegendFontName( int area)	    { return ((this)->legends[area].font_name); }
+  inline const char * AreaLegends( int area, int i)	    { return (((this)->legends[area].strings)[i]); }
+  inline const char * AreaLegendFontName( int area)	    { return ((this)->legends[area].font_name); }
 
 
 
@@ -272,9 +272,10 @@ Initial revision
 #define  off	0
 
 
-static  struct timeval	  tod;
-static  struct timezone	  tzone;
-static  float	    	  elapsed_time;
+/* tjm - FIXME: only define these in C files that actually use the timers */
+static UNUSED struct timeval	  tod;
+static UNUSED struct timezone	  tzone;
+static UNUSED float	    	  elapsed_time;
 
 #define  apt_StartTimer	  {gettimeofday( &tod, &tzone );\
 			  elapsed_time = (tod.tv_sec * 1000) + (tod.tv_usec / 1000);}

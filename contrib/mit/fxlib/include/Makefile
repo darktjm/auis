@@ -1,10 +1,6 @@
 ######################################################################
 # File Exchange include/ Makefile
 #
-# $Author: wdc $
-# $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/include/RCS/Makefile,v $
-# $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/include/RCS/Makefile,v 1.1 1992/02/13 20:27:02 wdc Stab74 $
-#
 # Copyright 1990 by the Massachusetts Institute of Technology.
 #
 # For copying and distribution information, please see the file

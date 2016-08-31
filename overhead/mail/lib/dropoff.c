@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/dropoff.c,v 2.30 1994/06/09 18:17:42 rr2b Stab74 $";
-#endif
-
 /*
 		dropoff.c -- Subroutines for performing dropoff
 			     of a piece of user mail.
@@ -108,6 +101,7 @@ Returns an integer (one of the DT_xxx codes defined in dropoff.h) that says how 
 #endif
 #endif
 
+#include <andrewos.h>
 #include <fdplumb.h>
 #include <stdio.h>
 #include <pwd.h>
@@ -236,7 +230,7 @@ int test_dropoff()
 
 #ifdef AMS_DELIVERY_ENV
 static int getuserinfo(uid, returnpath, inhome, outhome, myname)
-    register int *uid;
+    int *uid;
     char **returnpath, **inhome, **outhome, **myname;
 {
     struct CellAuth *ca;
@@ -326,7 +320,7 @@ static int rewind_fd(f)
 static bool setprotection(dirname, who, homecell)
     char *dirname, *who, *homecell;
 {
-    register int rights;
+    int rights;
     struct ViceIoctl blob;
     auto char space[2000], prot[1000];
     char *PMName;
@@ -472,8 +466,8 @@ static int tryoutgoing(uid, home, tolist, f, returnpath, flags, whoname, auth, h
     char *whoname, *auth, *homecell;
 {
     char outgoing[MAXPATHLEN+1];
-    register bool created;
-    register int tries;
+    bool created;
+    int tries;
     static int fixedOne = 0;
 
     strcpy(outgoing, home);
@@ -489,7 +483,7 @@ static int tryoutgoing(uid, home, tolist, f, returnpath, flags, whoname, auth, h
     created = FALSE;  /* This will become TRUE if .Outgoing is created */
     for (tries=0; tries<2; ++tries) {
 	if (qmail(outgoing, tolist, f, returnpath, auth) == Q_OK) {
-	    register int rc;
+	    int rc;
 	    Dropoff_ErrMsg[0] = '\0';	/* Blipdaemon may have a message */
 	    rc = D_OK;
 	    if ((flags & DF_NOBLIP) == 0 && !blipdaemon(uid, flags, outgoing, homecell))
@@ -530,14 +524,14 @@ static int tryoutgoing(uid, home, tolist, f, returnpath, flags, whoname, auth, h
 
 #ifdef AMS_DELIVERY_ENV
 static int trytoqueue(f, tolist, returnpath, inhome, flags, auth, homecell)
-    register int f;
-    register char *tolist[];
+    int f;
+    char *tolist[];
     char *returnpath, *inhome;
     long flags;
     char *auth, *homecell;
 {
     int uid;
-    register int rc;
+    int rc;
     char *myname, *outhome;
 
     /* First place to try is ~/.Outgoing */
@@ -588,13 +582,13 @@ static int trytoqueue(f, tolist, returnpath, inhome, flags, auth, homecell)
 #endif /* AMS_DELIVERY_ENV */
 
 int dropoff_auth(tolist, mesgfile, returnpath, home, flags, auth)
-    register char *tolist[];
+    char *tolist[];
     char *mesgfile, *returnpath, *home, *auth;
     long flags;
 {
-    register int f;
+    int f;
 #ifdef AMS_DELIVERY_ENV
-    register int rc;
+    int rc;
     struct CellAuth *ca;
     char *oneDom;
 #endif /* AMS_DELIVERY_ENV */
@@ -712,7 +706,7 @@ int dropoff_auth(tolist, mesgfile, returnpath, home, flags, auth)
 }
 
 int dropoff(tolist, mesgfile, returnpath, home, flags)
-register char *tolist[];
+char *tolist[];
 char *mesgfile, *returnpath, *home;
 long flags;
 {

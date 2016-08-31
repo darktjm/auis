@@ -70,15 +70,10 @@ static UNUSED const char KLJCopyright[] = "Copyright 1989, 1990 Kirk L. Johnson"
 #define _KLJ_COPYRIGHT_
 #endif
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/gif.C,v 3.6 1996/02/22 17:45:12 robr Stab74 $";
-#endif
-
-
 ATK_IMPL("gif.H")
 #include <image.H>
 #include <gif.H>
+#include <gifl.H>
 
 /* ---***--- Contents of gif.h ---***--- */
 /* gif.h:
@@ -91,35 +86,6 @@ ATK_IMPL("gif.H")
  * Copyright 1989 Kirk L. Johnson (see the included file
  * "kljcpyrght.h" for complete copyright information)
  */
-#ifndef _KLJ_COPYRIGHT_
-/****
-  Copyright 1989, 1990 Kirk L. Johnson
-
-  Permission to use, copy, modify, distribute, and sell this
-  software and its documentation for any purpose is hereby granted
-  without fee, provided that the above copyright notice appear in
-  all copies and that both that copyright notice and this
-  permission notice appear in supporting documentation. The
-  author makes no representations about the suitability of this
-  software for any purpose. It is provided "as is" without express
-  or implied warranty.
-
-  THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE,
-  INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS,
-  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, INDIRECT
-  OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT,
-  NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN
-  CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-****/
-
-#ifndef __SABER__
-static char *KLJCopyright = "Copyright 1989, 1990 Kirk L. Johnson";
-#endif
-#define _KLJ_COPYRIGHT_
-#endif
-
-
 /*
 	$Disclaimer: 
 // Permission to use, copy, modify, and distribute this software and its 
@@ -186,7 +152,7 @@ static int gifin_skip_extension();
 static int gifin_read_data_block();
 static int gifin_push_string(int  code);
 static void gifin_add_string(int  p, int  e);
-static void gifin_fatal(char  *msg);
+static void gifin_fatal(const char  *msg);
 
 /* #defines, typedefs, and such
  */
@@ -292,27 +258,18 @@ static byte gifin_l_cmap[3][256];      /* local colormap */
 static byte gifin_interlace_flag;      /* interlace image format flag */
 
 
-extern int WriteGIF(FILE *fp, byte *pic, int   w, int h, byte *rmap, byte *gmap, byte *bmap, int   numcols, int colorstyle);
-
 /*
  * open a GIF file, using s as the input stream
  */
 
 
 ATKdefineRegistry(gif, image, NULL);
-#ifndef NORCSID
-#endif
 static int  gifin_open_file(FILE  *s);
 static int  gifin_open_image();
 static int gifin_get_pixel(int  *pel);
 static int gifin_close_file();
 static int gifin_load_cmap(byte  cmap[3][256], int   ncolors);
-static int gifin_skip_extension();
-static int gifin_read_data_block();
-static int gifin_push_string(int  code);
-static void gifin_add_string(int  p, int  e);
-static void gifin_fatal(char  *msg);
-static void  tellAboutImage( char  *name );
+static void  tellAboutImage( const char  *name );
 
 
 static int 
@@ -614,7 +571,7 @@ static int gifin_read_data_block()
   buf_cnt = fgetc(ins);
 
   /* read the data block body */
-  if (fread(buf, 1, buf_cnt, ins) != buf_cnt)
+  if ((int)fread(buf, 1, buf_cnt, ins) != buf_cnt)
     return GIFIN_ERR_EOF;
 
   buf_idx = 0;
@@ -666,14 +623,14 @@ static void gifin_add_string(int  p, int  e)
  * semi-graceful fatal error mechanism
  */
 
-static void gifin_fatal(char  *msg)
+static void gifin_fatal(const char  *msg)
      {
   printf("Error reading GIF file: %s\n", msg);
   exit(0);
 }
 
 static void 
-tellAboutImage( char  *name )
+tellAboutImage( const char  *name )
     {
   printf("%s is a %dx%d %sGIF image with %d colors\n", name,
 	 gifin_img_width, gifin_img_height,
@@ -682,7 +639,7 @@ tellAboutImage( char  *name )
 }
 
 int
-gif::Load( char  *fullname, FILE  *fp )
+gif::Load( const char  *fullname, FILE  *fp )
             { 
   FILE *f;
   int x, y, pixel, pass, scanlen;
@@ -715,7 +672,7 @@ gif::Load( char  *fullname, FILE  *fp )
    */
 
   if (gifin_l_cmap_flag) {
-    for (x = 0; x < (this)->RGBSize(); x++) {
+    for (x = 0; x < (int)(this)->RGBSize(); x++) {
       (this)->RedPixel( x) = gifin_l_cmap[GIF_RED][x] << 8;
       (this)->GreenPixel( x) = gifin_l_cmap[GIF_GRN][x] << 8;
       (this)->BluePixel( x) = gifin_l_cmap[GIF_BLU][x] << 8;
@@ -776,7 +733,7 @@ gif::Load( char  *fullname, FILE  *fp )
 }
 
 int 
-gif::Ident( char  *fullname )
+gif::Ident( const char  *fullname )
         { 
     FILE *f;
     unsigned int ret;
@@ -811,11 +768,11 @@ gif::Write( FILE  *file, long  writeID, int  level )
 }
 
 long
-gif::WriteNative( FILE  *file, char  *filename )
+gif::WriteNative( FILE  *file, const char  *filename )
             {
     int colorstyle = 0; /* 0 == color; 1 == greyscale; 2 == b/w */
     byte r[256], g[256], b[256];
-    register int i;
+    int i;
 
     switch((this)->Type()) {
 	case IBITMAP:
@@ -826,7 +783,7 @@ gif::WriteNative( FILE  *file, char  *filename )
 	    break;
     }
 
-    for(i = 0; i < (this)->RGBUsed(); i++) {
+    for(i = 0; i < (int)(this)->RGBUsed(); i++) {
 	*(r + i) = (this)->RedPixel( i) >> 8;
 	*(g + i) = (this)->GreenPixel( i) >> 8;
 	*(b + i) = (this)->BluePixel( i) >> 8;
@@ -838,7 +795,7 @@ gif::WriteNative( FILE  *file, char  *filename )
     else {
 	FILE *f;
 	if(filename) {
-	    if(f = fopen(filename, "w")) {
+	    if((f = fopen(filename, "w"))) {
 		WriteGIF(f, (this)->Data(), (this)->Width(), (this)->Height(), r, g, b, (this)->RGBSize(), colorstyle);
 		fclose(f);
 	    }

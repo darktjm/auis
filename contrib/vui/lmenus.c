@@ -25,16 +25,10 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RCS/lmenus.c,v 1.1 1995/08/02 18:46:45 susan Stab74 $";
-#endif
-
 /* 
  *      C Lotus-style menus package
  *	Extracted from code by Mark Chance
  */
-
 
 #include <andrewos.h>
 #include <vui.h>
@@ -194,7 +188,7 @@ MKEYTAB *keytable;
 int *last_opt_p;
 {
     int skflag, maxopts, new_option = 0 ;
-    register int i, ch;
+    int i, ch;
     MKEYTAB *k;
 
     current_option = (last_opt_p)?*last_opt_p:0;

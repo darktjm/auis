@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/metax.C,v 3.5 1995/11/13 18:41:59 robr Stab74 $";
-#endif
-
 ATK_IMPL("metax.H")
 
 #include <stdio.h>
@@ -64,23 +58,21 @@ struct helpRock {
     char *partial;
 };
 
-static char spaces[]="                               ";
+static const char spaces[]="                               ";
 #define MAXFUNLEN sizeof(spaces)
 
 
 ATKdefineRegistry(metax, ATK, metax::InitializeClass);
-#ifndef NORCSID
-#endif
 static void LoadClass(char  *partial);
 static long match(struct proctable_Entry  *pe,struct helpRock  *h);
 static void helpProc(char  *partial,struct helpRock  *myrock,message_workfptr  HelpWork,long  rock);
-static char *GetProcName(struct proctable_Entry  *pe);
+static const char *GetProcName(struct proctable_Entry  *pe);
 static boolean myCompletionWork(struct proctable_Entry  *pe, struct result  *data);
 static enum message_CompletionCode mycomplete(char  *partial, long  dummyData /* Just along for the ride... */, char  *buffer, int  bufferSize);
 static long donothing(class view  *vw);
 static proctable_fptr dofunc(char  *func);
-static boolean getfunction(class view  *v,char  *buf,int  size,char  *prompt,char  *initial);
-static boolean getarg(class view  *v,char  *arg,int size,char  *prompt,char  *initial,long  *result);
+static boolean getfunction(class view  *v,char  *buf,int  size,const char  *prompt,const char  *initial);
+static boolean getarg(class view  *v,char  *arg,int size,const char  *prompt,const char  *initial,long  *result);
 
 
 static void LoadClass(char  *partial)
@@ -102,8 +94,8 @@ static long match(struct proctable_Entry  *pe,struct helpRock  *h)
 {
     char buf[1024];
     int len;
-    char *name=proctable::GetName(pe);
-    char *doc=proctable::GetDocumentation(pe);
+    const char *name=proctable::GetName(pe);
+    const char *doc=proctable::GetDocumentation(pe);
     if(!name) name="";
     if(!doc) doc="";
     if(!strncmp(name, h->partial, strlen(h->partial))) {
@@ -142,9 +134,9 @@ static void helpProc(char  *partial,struct helpRock  *myrock,message_workfptr  H
     (t)->AddStyle(39,(t)->GetLength()-39,columns);
 }
 
-static char *GetProcName(struct proctable_Entry  *pe)
+static const char *GetProcName(struct proctable_Entry  *pe)
 {
-    return proctable::GetName(pe)?proctable::GetName(pe):(char *)"";
+    return proctable::GetName(pe)?proctable::GetName(pe):"";
 }
 
 static boolean myCompletionWork(struct proctable_Entry  *pe, struct result  *data)
@@ -187,7 +179,7 @@ static proctable_fptr dofunc(char *func)
     else return (proctable_fptr)donothing;
 }
 
-static boolean getfunction(class view  *v,char  *buf,int  size,char  *prompt,char  *initial)
+static boolean getfunction(class view  *v,char  *buf,int  size,const char  *prompt,const char  *initial)
 {
     struct helpRock myrock;
     class framemessage *fmsg=(class framemessage *)(v)->WantHandler("message");
@@ -205,7 +197,7 @@ static boolean getfunction(class view  *v,char  *buf,int  size,char  *prompt,cha
     return TRUE;
 }
 
-static boolean getarg(class view  *v,char  *arg,int size,char  *prompt,char  *initial,long  *result)
+static boolean getarg(class view  *v,char  *arg,int size,const char  *prompt,const char  *initial,long  *result)
 {
 
     if(message::AskForString(v, 0,prompt, initial, arg, size) != 0) return FALSE;

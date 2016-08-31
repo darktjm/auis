@@ -26,21 +26,12 @@
 */
 
 #include <andrewos.h> /* sys/types.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/index/RCS/testidx.c,v 2.10 1993/07/02 14:30:39 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include "index.h"
 
 static listerproc(ai, ac, arock)
-register struct Index *ai;
-register struct indexComponent *ac;
-register char *arock;
+struct Index *ai;
+struct indexComponent *ac;
+char *arock;
 {
     if ((long) arock != 17) printf("arock was trashed\n");
     printf("Record keyed by %s\n", ac->name);
@@ -55,21 +46,21 @@ char **argv;
 	index_Create(argv[2], 25);
     }
     else if (!strcmp(argv[1], "ap")) {
-	register struct Index *idx;
+	struct Index *idx;
 	idx = index_Open(argv[2]);
 	if (!idx) return printf("open failed\n");
 	index_AddPrimary(idx, argv[3], argv[4]);
 	index_Close(idx);
     }
     else if (!strcmp(argv[1], "ls")) {
-	register struct Index *idx;
+	struct Index *idx;
 	idx = index_Open(argv[2]);
 	if (!idx) return printf("open failed\n");
 	index_Enumerate(idx, listerproc, (char *) 17);
     }
     else if (!strcmp(argv[1], "as")) {
-	register struct Index *idx;
-	register struct recordSet *ts;
+	struct Index *idx;
+	struct recordSet *ts;
 	idx = index_Open(argv[2]);
 	if (!idx) return printf("open failed\n");
 	ts = index_GetPrimarySet(idx, argv[3]);
@@ -82,9 +73,9 @@ char **argv;
 	index_Close(idx);
     }
     else if (!strcmp(argv[1], "pr")) {
-	register struct Index *idx;
-	register struct recordSet *ts;
-	register long i, code;
+	struct Index *idx;
+	struct recordSet *ts;
+	long i, code;
 	char buffer[1024];
 
 	idx = index_Open(argv[2]);
@@ -103,9 +94,9 @@ char **argv;
 	index_Close(idx);
     }
     else if (!strcmp(argv[1], "dp")) {
-	register struct Index *idx;
-	register struct recordSet *ts;
-	register long i;
+	struct Index *idx;
+	struct recordSet *ts;
+	long i;
 	idx = index_Open(argv[2]);
 	if (!idx) return printf("open failed\n");
 	ts = index_GetPrimarySet(idx, argv[3]);
@@ -119,9 +110,9 @@ char **argv;
 	index_Close(idx);	
     }
     else if (!strcmp(argv[1], "ds")) {
-	register struct Index *idx;
-	register struct recordSet *ts;
-	register long i;
+	struct Index *idx;
+	struct recordSet *ts;
+	long i;
 	idx = index_Open(argv[2]);
 	if (!idx) return printf("open failed\n");
 	ts = index_GetPrimarySet(idx, argv[3]);
@@ -135,7 +126,7 @@ char **argv;
 	index_Close(idx);	
     }
     else if (!strcmp(argv[1], "dump")) {
-	register struct Index *idx;
+	struct Index *idx;
 	idx = index_Open(argv[2]);
 	if (!idx) return printf("open failed\n");
 	index_Dump(idx);

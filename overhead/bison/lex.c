@@ -97,8 +97,8 @@ grow_token_buffer (p)
 int
 skip_white_space()
 {
-  register int c;
-  register int inside;
+  int c;
+  int inside;
 
   c = getc(finput);
 
@@ -168,7 +168,7 @@ int
 safegetc(f)
   FILE *f;
 {
-  register int c = getc(f);
+  int c = getc(f);
   if (c == EOF)
     fatal("Unexpected end of file");
   return c;
@@ -186,9 +186,9 @@ literalchar(pp, pcode, term)
   int *pcode;
   char term;
 {
-  register int c;
-  register char *p;
-  register int code;
+  int c;
+  char *p;
+  int code;
   int wasquote = 0;
 
   c = safegetc(finput);
@@ -307,7 +307,7 @@ int token;
 int
 lex()
 {
-  register int c;
+  int c;
   char *p;
 
   if (unlexed >= 0)
@@ -551,9 +551,9 @@ struct percent_table_struct {
 int
 parse_percent_token ()
 {
-  register int c;
-  register char *p;
-  register struct percent_table_struct *tx;
+  int c;
+  char *p;
+  struct percent_table_struct *tx;
 
   p = token_buffer;
   c = getc(finput);

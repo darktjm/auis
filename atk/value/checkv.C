@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/checkv.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("checkv.H")
 #include <checkv.H>
 #include <fontdesc.H>
@@ -79,8 +69,6 @@ static class atom *  A_string;
 
 
 ATKdefineRegistry(checkv, valueview, checkv::InitializeClass);
-#ifndef NORCSID
-#endif
 static void CarveFonts(class checkv  * self);
 static void Drawcheck(class checkv  * self);
 
@@ -92,8 +80,8 @@ static void CarveFonts(class checkv  * self)
 
 static void Drawcheck(class checkv  * self)
 {
-    register int side;
-    register int gap;
+    int side;
+    int gap;
     struct rectangle r;
     char ch;
     (self)->SetTransferMode(  graphic_COPY );
@@ -173,7 +161,7 @@ checkv::checkv()
 
 void checkv::LookupParameters()
 {
-    char * fontname;
+    const char * fontname;
     long fontsize;
     struct resourceList parameters[7];
 

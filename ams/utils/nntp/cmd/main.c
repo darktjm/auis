@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp/cmd/RCS/main.c,v 1.15 1992/12/15 21:24:03 rr2b Stab74 $";
-#endif
-
 #include <stdio.h>
 #include <andrewos.h> /* sys/types.h sys/file.h */
 #include <sys/stat.h>
@@ -74,7 +69,7 @@ char **argv;
 {
 	FILE *fp;
 	char lastbuf[MAXPATHLEN], *flag, *lasttm;
-	register char *cp;
+	char *cp;
 	int i, pid, FirstTime=1, sval, Debug=0;
 #ifdef UseVMail
 	int VMailInUse = 0;

@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/wpi/RCS/wpi.c,v 1.30 1996/04/24 16:10:06 robr Stab74 $";
-#endif
-
 /*========================================================================*\
  *                                                                        *
  * implementation of wpi, the UNIX, command-line interface for            *

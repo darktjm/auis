@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/utils/RCS/dialog.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
-
 ATK_IMPL("dialog.H")
 #include <stdio.h>
 #include <environ.H>
@@ -48,8 +40,6 @@ ATK_IMPL("dialog.H")
 
 
 ATKdefineRegistry(dialog, dataobject, dialog::InitializeClass);
-#ifndef NORCSID
-#endif
 static long SanelyReturnReadError(class dialog  *self, FILE  *fp, long  id, long  code);
 
 
@@ -115,7 +105,7 @@ dialog::~dialog()
 }
 
 
-char *dialog::ViewName()
+const char *dialog::ViewName()
 {
     return "dialogv";
 }
@@ -172,7 +162,7 @@ static long SanelyReturnReadError(class dialog  *self, FILE  *fp, long  id, long
     return(code);
 }
 
-static char *DatastreamHeader="Datastream version:";
+static const char DatastreamHeader[]="Datastream version:";
 
 long dialog::Read(FILE  *fp, long  id)
 {
@@ -233,7 +223,7 @@ const char *dialog::GetForeground()
     const char *fg, *bg;
     graphic::GetDefaultColors(&fg, &bg);
     if(this->prefs->colors[sbutton_FOREGROUND]) return this->prefs->colors[sbutton_FOREGROUND];
-    else return fg?fg:(char *)"black";
+    else return fg?fg:"black";
 }
 
 const char *dialog::GetBackground()
@@ -241,5 +231,5 @@ const char *dialog::GetBackground()
     const char *fg, *bg;
     graphic::GetDefaultColors(&fg, &bg);
     if(this->prefs->colors[sbutton_BACKGROUND]) return this->prefs->colors[sbutton_BACKGROUND];
-    else return bg?bg:(char *)"white";
+    else return bg?bg:"white";
 }

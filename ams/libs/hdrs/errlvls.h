@@ -3,10 +3,6 @@
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
 /*
-$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/hdrs/RCS/errlvls.h,v 2.4 1991/09/12 19:15:55 bobg Stab74 $
-$Source: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/hdrs/RCS/errlvls.h,v $
-*/
-/*
 	Error levels -- should be made obsolete by Andrew standard 
 */
 

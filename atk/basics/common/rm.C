@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/rm.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("rm.H")
 #include <rm.H>
 #include <namespace.H> 
@@ -307,7 +297,7 @@ short TryConversion( struct resourceTree_s  * tree, class atom  * type, long  * 
   rm_fptr converter;
   short gotgooddata = FALSE;
 
-  if (tree->data != NULL)
+  if (tree->data != NULL) {
     if ((tree->data)->Boundp(  type, data ))
       gotgooddata = TRUE;
     else
@@ -319,6 +309,7 @@ short TryConversion( struct resourceTree_s  * tree, class atom  * type, long  * 
 					  (tree->data)->NameAt(fromtype) );
 	  gotgooddata =  (*converter)((tree->data)->ValueAt(fromtype),data);
 	}
+  }
   return gotgooddata;
 }
 

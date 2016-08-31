@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipoarc.C,v 1.4 1993/06/26 15:47:27 rr2b Stab74 $";
-#endif
-
 /* zipoarc.c	Zip Object -- Arc					      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -67,9 +62,9 @@ END-SPECIFICATION  ************************************************************/
 static char two = 2; /* To quieten Compiler */
 
 ATKdefineRegistry(zipoarc, zipobject, NULL);
-static long Draw( register class zipoarc		  *self, register zip_type_figure		   figure, register zip_type_pane		   pane );
-static void Set_Points( register zip_type_figure		   figure, register float			   x_center , register float			   y_center , register float			   x_radius , register float			   y_radius, 		register float			   xs_delta , register float			   ys_delta , register float			   xe_delta , register float			   ye_delta );
-static void Compute_Handle_Positions( register class zipoarc		  *self, register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		  *X1 , register zip_type_pixel		  *X2 , register zip_type_pixel		  *X3 , register zip_type_pixel		  *Y1 , register zip_type_pixel		  *Y2 , register zip_type_pixel		  *Y3, register zip_type_pixel		  *XS , register zip_type_pixel		  *YS , register zip_type_pixel		  *XE , register zip_type_pixel		  *YE );
+static long Draw( class zipoarc		  *self, zip_type_figure		   figure, zip_type_pane		   pane );
+static void Set_Points( zip_type_figure		   figure, float			   x_center , float			   y_center , float			   x_radius , float			   y_radius, 		float			   xs_delta , float			   ys_delta , float			   xe_delta , float			   ye_delta );
+static void Compute_Handle_Positions( class zipoarc		  *self, zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		  *X1 , zip_type_pixel		  *X2 , zip_type_pixel		  *X3 , zip_type_pixel		  *Y1 , zip_type_pixel		  *Y2 , zip_type_pixel		  *Y3, zip_type_pixel		  *XS , zip_type_pixel		  *YS , zip_type_pixel		  *XE , zip_type_pixel		  *YE );
 
 
 char
@@ -98,18 +93,18 @@ zipoarc::Object_Datastream_Code( )
   }
 
 long
-zipoarc::Show_Object_Properties( register zip_type_pane		   pane, register zip_type_figure		   figure )
+zipoarc::Show_Object_Properties( zip_type_pane		   pane, zip_type_figure		   figure )
         {
   (this->view_object)->Announce(  "Draw Arc Clockwise: Noon to 3:00, 3:00 to 6:00, etc." );
   return  zip_ok;
   }
 
 long
-zipoarc::Build_Object( register zip_type_pane		   pane, register enum view_MouseAction				   action , register long				   x , register long				   y , register long				   clicks, register zip_type_point		   X , register zip_type_point		   Y )
+zipoarc::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   action , long				   x , long				   y , long				   clicks, zip_type_point		   X , zip_type_point		   Y )
           {
-  register long				  status = zip_ok;
-  register zip_type_figure		  figure;
-  register zip_type_point		  X_origin = 0, Y_origin = 0,
+  long				  status = zip_ok;
+  zip_type_figure		  figure;
+  zip_type_point		  X_origin = 0, Y_origin = 0,
 					  X_start, Y_start;
 
   IN(zipoarc::Build_Object);
@@ -170,9 +165,9 @@ zipoarc::Build_Object( register zip_type_pane		   pane, register enum view_Mouse
   }
 
 long
-zipoarc::Draw_Object( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipoarc::Draw_Object( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipoarc::Draw_Object);
   if ( (this->view_object)->Condition(  pane, figure, zip_draw ) )
@@ -182,9 +177,9 @@ zipoarc::Draw_Object( register zip_type_figure		   figure, register zip_type_pan
   }
 
 long
-zipoarc::Clear_Object( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipoarc::Clear_Object( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipoarc::Clear_Object);
   if ( (this->view_object)->Condition(  pane, figure, zip_clear ) )
@@ -194,14 +189,14 @@ zipoarc::Clear_Object( register zip_type_figure		   figure, register zip_type_pa
   }
 
 static
-long Draw( register class zipoarc		  *self, register zip_type_figure		   figure, register zip_type_pane		   pane )
+long Draw( class zipoarc		  *self, zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
-  register long				  x_radius, y_radius;
-  register long				  left, top, width, height;
-  register short			  start_angle, offset_angle;
-  register double			  theta, angle, x, y;
-  register unsigned char		  lwidth;
+  long				  status = zip_ok;
+  long				  x_radius, y_radius;
+  long				  left, top, width, height;
+  short			  start_angle, offset_angle;
+  double			  theta, angle, x, y;
+  unsigned char		  lwidth;
 
   IN(Draw); /*=== CLEAN UP THIS OLD MIGRATORY MESS... ===*/
   if ( (self->view_object)->Ensure_Line_Attributes(  figure ) == zip_ok )
@@ -235,10 +230,10 @@ long Draw( register class zipoarc		  *self, register zip_type_figure		   figure,
   }
 
 long
-zipoarc::Print_Object( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipoarc::Print_Object( zip_type_figure		   figure, zip_type_pane		   pane )
         {
   class zipoarc *self=this;
-  register long	status = zip_ok;
+  long	status = zip_ok;
   long x, y, xlen, ylen, x0, y0, x1, y1;
 
   IN(zipoarc::Print_Object);
@@ -257,9 +252,9 @@ zipoarc::Print_Object( register zip_type_figure		   figure, register zip_type_pa
   }
 
 long
-zipoarc::Proximate_Object_Points( register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y )
+zipoarc::Proximate_Object_Points( zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y )
           {
-  register int				  point = 0;
+  int				  point = 0;
   zip_type_pixel			  X1, X2, X3, Y1, Y2, Y3, XS, YS, XE, YE;
 
   IN(zipoarc::Proximate_Object_Points);
@@ -302,9 +297,9 @@ zipoarc::Proximate_Object_Points( register zip_type_figure		   figure, register 
   }
 
 boolean
-zipoarc::Enclosed_Object( register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		   x , register zip_type_pixel		   y , register zip_type_pixel		   w , register zip_type_pixel		   h )
+zipoarc::Enclosed_Object( zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y , zip_type_pixel		   w , zip_type_pixel		   h )
           {
-  register boolean			  enclosed = false;
+  boolean			  enclosed = false;
   zip_type_pixel			  X1, X2, X3, Y1, Y2, Y3, XS, YS, XE, YE;
 
   IN(zipoarc::Enclosed_Object);
@@ -317,7 +312,7 @@ zipoarc::Enclosed_Object( register zip_type_figure		   figure, register zip_type
   }
 
 long
-zipoarc::Object_Enclosure( register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		  *x , register zip_type_pixel		  *y , register zip_type_pixel		  *w , register zip_type_pixel		  *h )
+zipoarc::Object_Enclosure( zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		  *x , zip_type_pixel		  *y , zip_type_pixel		  *w , zip_type_pixel		  *h )
           {
   zip_type_pixel			  X1, X2, X3, Y1, Y2, Y3, XS, YS, XE, YE;
 
@@ -330,10 +325,10 @@ zipoarc::Object_Enclosure( register zip_type_figure		   figure, register zip_typ
   }
 
 long
-zipoarc::Highlight_Object_Points( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipoarc::Highlight_Object_Points( zip_type_figure		   figure, zip_type_pane		   pane )
         {
   zip_type_pixel			  X1, X2, X3, Y1, Y2, Y3, XS, YS, XE, YE;
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipoarc::Highlight_Object_Points);
   Compute_Handle_Positions( this, figure, pane,
@@ -348,10 +343,10 @@ zipoarc::Highlight_Object_Points( register zip_type_figure		   figure, register 
   }
 
 long
-zipoarc::Normalize_Object_Points( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipoarc::Normalize_Object_Points( zip_type_figure		   figure, zip_type_pane		   pane )
         {
   zip_type_pixel			  X1, X2, X3, Y1, Y2, Y3, XS, YS, XE, YE;
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipoarc::Normalize_Object_Points);
   Compute_Handle_Positions( this, figure, pane,
@@ -366,9 +361,9 @@ zipoarc::Normalize_Object_Points( register zip_type_figure		   figure, register 
   }
 
 long
-zipoarc::Expose_Object_Points( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipoarc::Expose_Object_Points( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipoarc::Expose_Object_Points);
   (this->edit_object)->Expose_Point(  pane, figure, figure_x_point, figure_y_point );
@@ -377,9 +372,9 @@ zipoarc::Expose_Object_Points( register zip_type_figure		   figure, register zip
   }
 
 long
-zipoarc::Hide_Object_Points( register zip_type_figure		   figure, register zip_type_pane		   pane )
+zipoarc::Hide_Object_Points( zip_type_figure		   figure, zip_type_pane		   pane )
         {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipoarc::Hide_Points);
   (this->edit_object)->Hide_Point(  pane, figure, figure_x_point, figure_y_point );
@@ -388,8 +383,8 @@ zipoarc::Hide_Object_Points( register zip_type_figure		   figure, register zip_t
   }
 
 static
-void Set_Points( register zip_type_figure		   figure, register float			   x_center , register float			   y_center , register float			   x_radius , register float			   y_radius,
-		register float			   xs_delta , register float			   ys_delta , register float			   xe_delta , register float			   ye_delta )
+void Set_Points( zip_type_figure		   figure, float			   x_center , float			   y_center , float			   x_radius , float			   y_radius,
+		float			   xs_delta , float			   ys_delta , float			   xe_delta , float			   ye_delta )
       {
   figure_x_point = (long) x_center;
   figure_y_point = (long) y_center;
@@ -402,14 +397,14 @@ void Set_Points( register zip_type_figure		   figure, register float			   x_cent
   }
 
 long
-zipoarc::Set_Object_Point( register zip_type_figure		   figure, register int				   point, register zip_type_point		   x , register zip_type_point		   y )
+zipoarc::Set_Object_Point( zip_type_figure		   figure, int				   point, zip_type_point		   x , zip_type_point		   y )
           {
-  register long				  status = zip_ok;
-  register float			  x_radius, y_radius, span,
+  long				  status = zip_ok;
+  float			  x_radius, y_radius, span,
 					  X1, X2, X3, Y1, Y2, Y3,
 					  XS, YS, XE, YE,
 					  XS_delta, YS_delta, XE_delta, YE_delta;
-  register double			  theta;
+  double			  theta;
 
   IN(zipoarc::Set_Object_Point);
   if ( figure->zip_figure_points == NULL )
@@ -508,9 +503,9 @@ zipoarc::Set_Object_Point( register zip_type_figure		   figure, register int				
   }
 
 long
-zipoarc::Adjust_Object_Point_Suite( register zip_type_figure		   figure, register zip_type_point		   x_delta , register zip_type_point		   y_delta )
+zipoarc::Adjust_Object_Point_Suite( zip_type_figure		   figure, zip_type_point		   x_delta , zip_type_point		   y_delta )
         {
-  register long				  status = zip_ok;
+  long				  status = zip_ok;
 
   IN(zipoarc::Adjust_Object_Point_Suite);
   figure_x_point += x_delta;
@@ -527,7 +522,7 @@ zipoarc::Adjust_Object_Point_Suite( register zip_type_figure		   figure, registe
   }
 
 static
-void Compute_Handle_Positions( register class zipoarc		  *self, register zip_type_figure		   figure, register zip_type_pane		   pane, register zip_type_pixel		  *X1 , register zip_type_pixel		  *X2 , register zip_type_pixel		  *X3 , register zip_type_pixel		  *Y1 , register zip_type_pixel		  *Y2 , register zip_type_pixel		  *Y3, register zip_type_pixel		  *XS , register zip_type_pixel		  *YS , register zip_type_pixel		  *XE , register zip_type_pixel		  *YE )
+void Compute_Handle_Positions( class zipoarc		  *self, zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		  *X1 , zip_type_pixel		  *X2 , zip_type_pixel		  *X3 , zip_type_pixel		  *Y1 , zip_type_pixel		  *Y2 , zip_type_pixel		  *Y3, zip_type_pixel		  *XS , zip_type_pixel		  *YS , zip_type_pixel		  *XE , zip_type_pixel		  *YE )
           {
   *X1 = (self->view_object)->X_Point_To_Pixel(  pane, figure, figure_x_point - figure_x_points(two) );
   *X2 = window_x_point;

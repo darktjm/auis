@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/time/RCS/writestmpv.C,v 1.4 1994/08/11 03:03:29 rr2b Stab74 $";
-#endif
-
-
 #include <andrewos.h>
 #include <writestmpv.H>
 #include <writestamp.H>
@@ -46,7 +40,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/time/R
 /* Global Variables */
 static class menulist *writestampview_menulist = NULL;
 
-static char *formats[] = {
+static const char * const formats[] = {
   "Default~1", NULL,
   "H:MM AM/PM~10", "%u:%M %P",
   "Month DD YYYY~11", "%o %A, %Y",
@@ -55,8 +49,6 @@ static char *formats[] = {
 
 
 ATKdefineRegistry(writestampview, timeodayview, writestampview::InitializeClass);
-#ifndef NORCSID
-#endif
 static void MenuSetFormat(class writestampview  *self, char  *format);
 
 

@@ -1,10 +1,6 @@
 /**********************************************************************
  * File Exchange client library
  *
- * $Author: sa3e $
- * $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/lib/RCS/fx_init.c,v $
- * $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/lib/RCS/fx_init.c,v 1.6 1994/02/01 21:34:55 sa3e Stab74 $
- *
  * Copyright 1989, 1990 by the Massachusetts Institute of Technology.
  *
  * For copying and distribution information, please see the file
@@ -12,10 +8,6 @@
  **********************************************************************/
 
 #include <mitcopyright.h>
-
-#ifndef lint
-static char rcsid_fx_init_c[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/lib/RCS/fx_init.c,v 1.6 1994/02/01 21:34:55 sa3e Stab74 $";
-#endif /* lint */
 
 #include <netdb.h>
 #include <strings.h>

@@ -23,8 +23,6 @@ ATK_INTER
 // WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 // 
 //  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figattr.H,v 3.5 1994/11/30 20:42:06 rr2b Stab74 $
 */
 
 #define	figattr_MaskAll	    (0x0fff) /* binary 1111 1111 1111 */
@@ -118,7 +116,7 @@ class figattr : public  dataobject  {
       static char *LineStylePattern(long val, long lwidth);
       static void DrawArrowHead(class figview *v, long tipx, long tipy, long *vecx, long *vecy, long shape, long size);
       static void SetupPrintArrowHead(struct figattr_arrowhead *arrowtemp, class figview *v, long tipx, long tipy, long *vecx, long *vecy, long ashape, long asize);
-      static void PrintArrowHead(FILE *file, char *prefix, struct figattr_arrowhead *arrowtemp);
+      static void PrintArrowHead(FILE *file, const char *prefix, struct figattr_arrowhead *arrowtemp);
 
       inline void SetActive(int att, unsigned long val)  { ((this)->active = ((val) ? ((this)->active | ((unsigned long)1<<(att))) : ((this)->active & ~((unsigned long)1<<(att))))); }
       inline unsigned long IsActive(int att)	{ return ((this)->active & ((unsigned long)1<<(att))); }
@@ -138,10 +136,10 @@ class figattr : public  dataobject  {
       inline void SetRRectCorner(long val)  { ((this)->rrectcorner = (val), (this)->active |= ((unsigned long)1<<figattr_RRectCorner)); }
       inline long GetRRectCorner(class figattr *def)  { return (((this))->IsActive( figattr_RRectCorner) ? ((this)->rrectcorner) : ((def)->rrectcorner)); }
 
-      inline void SetColorVal(char *val)  { (((this)->color ? (free((this)->color), 1) : 0), (this)->color = (char *)malloc(1+strlen(val)), strcpy((this)->color, (val))); }
-      inline char  * GetColorVal()  { return ((this)->color); }
-      inline void SetColor(char *val)  { ((this)->SetColorVal( val), (this)->active |= ((unsigned long)1<<figattr_Color)); }
-      inline char *GetColor(class figattr *def)  { return (((this))->IsActive( figattr_Color) ? ((this)->color) : ((def)->color)); }
+      inline void SetColorVal(const char *val)  { (((this)->color ? (free((this)->color), 1) : 0), (this)->color = (char *)malloc(1+strlen(val)), strcpy((this)->color, (val))); }
+      inline const char  * GetColorVal()  { return ((this)->color); }
+      inline void SetColor(const char *val)  { ((this)->SetColorVal( val), (this)->active |= ((unsigned long)1<<figattr_Color)); }
+      inline const char *GetColor(class figattr *def)  { return (((this))->IsActive( figattr_Color) ? ((this)->color) : ((def)->color)); }
 
       inline void SetFontFamilyVal(const char *val)  { (((this)->fontfamily ? (free((this)->fontfamily), 1) : 0), (this)->fontfamily = (char *)malloc(1+strlen(val)), strcpy((this)->fontfamily, (val))); }
       inline char  * GetFontFamilyVal()  { return ((this)->fontfamily); }

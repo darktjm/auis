@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/tree23int.C,v 3.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
- 
- 
-
-
 ATK_IMPL("tree23int.H")
 #include <tree23int.H>
 
@@ -50,8 +40,6 @@ static class tree23int *lastBlock = NULL;
 
 
 ATKdefineRegistry(tree23int, ATK, NULL);
-#ifndef NORCSID
-#endif
 
 #if 0
 class tree23int *tree23int::Allocate()
@@ -96,7 +84,7 @@ class tree23int *tree23int::Delete()
 }
 long tree23int::Eval()
 {
-    register int i;
+    int i;
     class tree23int *self=this;
     for (i = 0; self != NULL; i+= self->bump, self =  self->parent);
     return i;
@@ -198,7 +186,7 @@ void tree23int::Filter(long  offset, class tree23int  *left, class tree23int  *r
 
 long tree23int::FindL(long  offset, long  key  )
 {
-    register int nKids;
+    int nKids;
     class tree23int *self=this;
     if(self->leaf ) return self->data;
     while (self != NULL)  {
@@ -217,8 +205,8 @@ long tree23int::FindL(long  offset, long  key  )
 
 long tree23int::FindR(long  offset, long  key  )
 {
-    register class tree23int *lastright;
-    register int lastrightx = 0;
+    class tree23int *lastright;
+    int lastrightx = 0;
     class tree23int *self=this;
     if(self->leaf ) return 0;
 
@@ -340,9 +328,9 @@ void tree23int::Update(long  pos, long  size  )
 
 void tree23int::Jam(class tree23int  *newnode  )
 {
-    register class tree23int *tp, *up;
+    class tree23int *tp, *up;
     class tree23int *nroot;
-    register int i;
+    int i;
     int slot, value;
 /*     called to jam a new leaf node under a parent (self)
  */
@@ -555,7 +543,7 @@ long tree23int::NumberOfLeaves()
 }
 void tree23int::Dump(long  offset  )
 {
-    register int i;
+    int i;
 
     printf("%8p (%8p^): ",this,this->parent);
     if(this->leaf) {

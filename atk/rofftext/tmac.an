@@ -2,15 +2,9 @@
 .\" 5799-WZQ (C) COPYRIGHT = NONE
 .\" LICENSED MATERIALS - PROPERTY OF IBM
 .\"
-.\" $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/tmac.an,v 1.1 1991/02/05 17:32:40 gk5g Stab74 $ 
-.\" $ACIS:tmac.an 9.1$ 
-.\" $Source: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/tmac.an,v $ 
-.\"
 .\" Copyright (c) 1980 Regents of the University of California.
 .\" All rights reserved.  The Berkeley software License Agreement
 .\" specifies the terms and conditions for redistribution.
-.\"
-.\"	@(#)tmac.an	6.1 (Berkeley) 5/28/85
 .\"
 .de th
 .if t .so /usr/lib/tmac/tmac.an6t

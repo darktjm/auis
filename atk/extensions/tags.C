@@ -25,16 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/tags.C,v 3.5 1996/09/03 19:12:18 robr Exp $";
-#endif
-
-
- 
-
 /* * tags.c -- A tags package for the ATK editor
    *
    * Uses the output from the 'ctags' command to find
@@ -44,6 +34,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
    * Now does recursive edit -- give it an argument (^U) to AVOID recursive edit
 */
 
+#include <andrewos.h>
 ATK_IMPL("tags.H")
 
 #include <textview.H>
@@ -80,8 +71,6 @@ struct finderInfo {
 
 
 ATKdefineRegistry(tags, ATK, tags::InitializeClass);
-#ifndef NORCSID
-#endif
 static boolean ViewEqual(class frame  *frame, class view  *view);
 static class frame *FindByView(class view  *view);
 static void checkFileName();
@@ -437,7 +426,7 @@ void tags_FindTag (class view  *view, char  *tag, int  RecursiveEdit)
 	/* being called by ezapp to open a window */
 	view = TagsCreateWindow(filebuffer);
 	if (view == NULL) {
-	    tag = "Window could not be created.";
+	    /* tag = "Window could not be created."; */ /* pointless */
 	    return;
 	}
 	*tag = '\0';	/* let caller know it succeeded */

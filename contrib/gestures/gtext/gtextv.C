@@ -33,12 +33,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gtext/RCS/gtextv.C,v 1.3 1993/05/31 19:15:13 rr2b Stab74 $";
-#endif
-
-
 #define NOPOINT -1L
 
 #define MODULE "gtextv"
@@ -427,7 +421,7 @@ static char *ClassifyFv()
 
 static char *ClassifyVector(Vector  y)
      {
-  register sClassDope cd;
+  sClassDope cd;
   
   cd = sClassify(fullclassifier, y);
   if(cd == NULL) {

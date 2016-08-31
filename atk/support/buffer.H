@@ -68,14 +68,14 @@ public:
         virtual void SetCkpClock(long clock);
         virtual void SetCkpLatency(long latency);
         virtual void SetScratch(boolean scratch);
-        virtual class view * GetView(class view **inputFocus, class view **targetView, char *ViewName)  ;
+        virtual class view * GetView(class view **inputFocus, class view **targetView, const char *ViewName)  ;
         virtual boolean Visible()  ;
         virtual void RemoveView(class view *unusedView);
         virtual int ReadFile(const char *filename)  ;
         virtual int WriteToFile(char *filename, long flags)  ;
         /* Disk file date may differ from GetTouchDate if file is modified externally. */
         virtual long GetFileDate()  ;
-	virtual void SetDefaultViewname(char *name);
+	virtual void SetDefaultViewname(const char *name);
 	virtual void SetDestroyData(boolean destroy);
 	virtual void SetReadOnly(boolean readOnly);
 	virtual void SetLastTouchDate(long dataStamp);
@@ -96,7 +96,7 @@ public:
         inline void SetMadeBackup(boolean value) { ((this)->madeBackup = (value)); }
         /* Unavailable/unapplicable dates are returned as 0 */
         inline long GetLastTouchDate() { return ((this)->lastTouchDate); }
-	inline char * GetDefaultViewname() { return ((this)->viewname); }
+	inline const char * GetDefaultViewname() { return ((this)->viewname); }
         inline boolean GetReadOnly() { return (this->readOnly); }
 	inline boolean GetIsModified() { return (this->isModified); }
         inline boolean GetIsRawFile() { return (this->isRawFile); }
@@ -116,8 +116,8 @@ public:
 
 /* File functions. */
         static class buffer * GetBufferOnFile(const char *filename, long flags)  ;
-        static void GuessBufferName( char *filename, char *bufferName, int nameSize);
-        static void GetUniqueBufferName(char *proposedBufferName, char *bufferName, int nameSize);
+        static void GuessBufferName( const char *filename, char *bufferName, int nameSize);
+        static void GetUniqueBufferName(const char *proposedBufferName, char *bufferName, int nameSize);
         
 	virtual ~buffer();
         

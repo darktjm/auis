@@ -43,7 +43,7 @@
 #define RFOLDEDEQ(x,y) ((x)==(y))
 
 
-static char explanation[]="In the following cases a general preference of the form \"*.prefname:...\" or \"prefname:...\" was found to precede a preference of the form \"appname.prefname:...\"\nIn cases like this the general preference overrides the specific preference, which probably isn't what was intended.  If you save your preferences they will be re-ordered so that this conflict does not occur.  This may cause a CHANGE in behavior.\n\n";
+static const char explanation[]="In the following cases a general preference of the form \"*.prefname:...\" or \"prefname:...\" was found to precede a preference of the form \"appname.prefname:...\"\nIn cases like this the general preference overrides the specific preference, which probably isn't what was intended.  If you save your preferences they will be re-ordered so that this conflict does not occur.  This may cause a CHANGE in behavior.\n\n";
 
 
 static void ReportErrors(class pintv  *self, long  curtime);

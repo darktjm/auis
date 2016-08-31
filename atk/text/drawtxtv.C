@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/drawtxtv.C,v 3.21 1996/11/05 17:45:23 robr Exp $";
-#endif
-
-
- 
-
-
 #define AUXMODULE 1
 #include <textview.H>
 
@@ -69,25 +59,25 @@ static class graphic *pat;
 #define MAXOVERHANG 4
 
 extern class environment *textview_PrevCharIsNewline(class text *t, long pos);
-static long StringWidth(register short  *widths, register unsigned char *s);
-static void CharToOctal(register unsigned char *s, register char  c);
+static long StringWidth(short  *widths, unsigned char *s);
+static void CharToOctal(unsigned char *s, char  c);
 static long GetNextTabPosition(class textview  *v, int  width, struct text_statevector  *sv, struct formattinginfo  *info);
-static long ParagraphIndent(class textview  *self, class text  *text, long  pos, register struct formattinginfo  *info);
-static long MovePast(class textview  *self, register long  width, register short  *widths, struct formattinginfo  *info, register unsigned char *string);
-static void LocateCursor(class textview  *self, long  startX, long  spaceShim, long  startPos, register short  *widths, long  linePos, long  searchPos, register struct formattinginfo  *info);
-static void LocateHit(class textview  *self, long  startX, long  spaceShim, long  startPos, register short  *widths, long  linePos, long  searchX, register struct formattinginfo  *info);
-static void AllocateLineItem(class textview  *self, class text  *text, long  pos, register struct formattinginfo  *info);
-static void ComputeStyleItem(class textview  *self, long  startPos , long  endPos, long  *pixelAddr , long  *charAddr, register struct formattinginfo  *info);
-static void GenerateLineItems(class textview  *self, class text  *text, class mark  *currentLine, register struct formattinginfo  *info);
+static long ParagraphIndent(class textview  *self, class text  *text, long  pos, struct formattinginfo  *info);
+static long MovePast(class textview  *self, long  width, short  *widths, struct formattinginfo  *info, unsigned char *string);
+static void LocateCursor(class textview  *self, long  startX, long  spaceShim, long  startPos, short  *widths, long  linePos, long  searchPos, struct formattinginfo  *info);
+static void LocateHit(class textview  *self, long  startX, long  spaceShim, long  startPos, short  *widths, long  linePos, long  searchX, struct formattinginfo  *info);
+static void AllocateLineItem(class textview  *self, class text  *text, long  pos, struct formattinginfo  *info);
+static void ComputeStyleItem(class textview  *self, long  startPos , long  endPos, long  *pixelAddr , long  *charAddr, struct formattinginfo  *info);
+static void GenerateLineItems(class textview  *self, class text  *text, class mark  *currentLine, struct formattinginfo  *info);
 static void DrawBar(class textview  *self, struct lineitem  *tt, long  bx , long  by, long  width);
-static void DrawChangeBar(class textview  *self,register struct formattinginfo  *info,long  by);
+static void DrawChangeBar(class textview  *self,struct formattinginfo  *info,long  by);
 static void DrawStringNoTabs(class textview  *self, unsigned char *s, int  ctrl);
-static void drawcontinued(class textview  *self,register struct formattinginfo  *info,long  by);
+static void drawcontinued(class textview  *self,struct formattinginfo  *info,long  by);
 
 
-static long StringWidth(register short  *widths, register unsigned char *s)
+static long StringWidth(short  *widths, unsigned char *s)
 {
-    register short w = 0;
+    short w = 0;
     while (*s)
         w += widths[*s++];
     return (long) w;
@@ -95,7 +85,7 @@ static long StringWidth(register short  *widths, register unsigned char *s)
 
 /* Puts a 5-char sequence in string */
 
-static void CharToOctal(register unsigned char *s, register char  c)
+static void CharToOctal(unsigned char *s, char  c)
 {
     *s++ = '\\';
     *s++ = '0' + ((c >> 6) & 3);
@@ -146,13 +136,13 @@ static long GetNextTabPosition(class textview  *v, int  width, struct text_state
 
 }
 
-static long ParagraphIndent(class textview  *self, class text  *text, long  pos, register struct formattinginfo  *info)
+static long ParagraphIndent(class textview  *self, class text  *text, long  pos, struct formattinginfo  *info)
 {
     class environment *myEnv;
     struct text_statevector mysv;
     int spaceWidth;
-    register int width = 0;
-    register int c;
+    int width = 0;
+    int c;
     class fontdesc *font;
     short *widthTable;
 
@@ -181,10 +171,10 @@ static long ParagraphIndent(class textview  *self, class text  *text, long  pos,
     return width;
 }
 
-static long MovePast(class textview  *self, register long  width, register short  *widths, struct formattinginfo  *info, register unsigned char *string)
+static long MovePast(class textview  *self, long  width, short  *widths, struct formattinginfo  *info, unsigned char *string)
 {
-    register unsigned char tc;
-    register long bump = info->spaceBump;
+    unsigned char tc;
+    long bump = info->spaceBump;
 
     while (1) {
 	if ((tc = *string++) == '\0')
@@ -202,7 +192,7 @@ static long MovePast(class textview  *self, register long  width, register short
  * Finds the screen X coordinate for a given document pos
  */
 
-static void LocateCursor(class textview  *self, long  startX, long  spaceShim, long  startPos, register short  *widths, long  linePos, long  searchPos, register struct formattinginfo  *info)
+static void LocateCursor(class textview  *self, long  startX, long  spaceShim, long  startPos, short  *widths, long  linePos, long  searchPos, struct formattinginfo  *info)
 {
     long bx = (self->hasApplicationLayer) ? self->bx : self->ebx;
     long bxm = bx + self->para_width + self->hz_offset;
@@ -213,7 +203,7 @@ static void LocateCursor(class textview  *self, long  startX, long  spaceShim, l
     info->locateX = startX;   /* Default x */
 
     while (1) {
-        register unsigned char tc = (unsigned char ) info->lineBuffer[linePos++];
+        unsigned char tc = (unsigned char ) info->lineBuffer[linePos++];
 	if (startPos == searchPos) {
 	    info->locateX = startX;
 	    return;
@@ -236,7 +226,7 @@ static void LocateCursor(class textview  *self, long  startX, long  spaceShim, l
  * Finds document pos for a given screen X coordinate
  */
 
-static void LocateHit(class textview  *self, long  startX, long  spaceShim, long  startPos, register short  *widths, long  linePos, long  searchX, register struct formattinginfo  *info)
+static void LocateHit(class textview  *self, long  startX, long  spaceShim, long  startPos, short  *widths, long  linePos, long  searchX, struct formattinginfo  *info)
 {
     long bx = (self->hasApplicationLayer) ? self->bx : self->ebx;
     long bxm = bx + self->para_width + self->hz_offset;
@@ -247,8 +237,8 @@ static void LocateHit(class textview  *self, long  startX, long  spaceShim, long
     info->locateX = startPos;	/* Default pos */
 
     while (1) {
-        register unsigned char tc;
-        register int endX;
+        unsigned char tc;
+        int endX;
 
 	endX = startX;
 	tc = (unsigned char) info->lineBuffer[linePos++];
@@ -274,12 +264,12 @@ static void LocateHit(class textview  *self, long  startX, long  spaceShim, long
     }
 }
 
-static void AllocateLineItem(class textview  *self, class text  *text, long  pos, register struct formattinginfo  *info)
+static void AllocateLineItem(class textview  *self, class text  *text, long  pos, struct formattinginfo  *info)
 {
-    register class fontdesc *tf;
-    register struct lineitem *tlp;
+    class fontdesc *tf;
+    struct lineitem *tlp;
     struct text_statevector *tsv;
-    register int th;
+    int th;
     struct FontSummary *fontInfo;
 
     /* Now allocate a lineitem for this call */
@@ -325,7 +315,7 @@ static void AllocateLineItem(class textview  *self, class text  *text, long  pos
         tlp->ti_color = tsv->CurColor;
         tlp->ti_bgcolor = tsv->CurBGColor;
     } else {
-        register class view *view = tsv->CurView;
+        class view *view = tsv->CurView;
         long desw, desh;
 	long aw=info->xDim;
         tlp->type = li_View;
@@ -405,13 +395,13 @@ short *exposeStylesWidths = NULL;
 
 /* Need to look here - ajp */
 
-static void ComputeStyleItem(class textview  *self, long  startPos , long  endPos, long  *pixelAddr , long  *charAddr, register struct formattinginfo  *info)
+static void ComputeStyleItem(class textview  *self, long  startPos , long  endPos, long  *pixelAddr , long  *charAddr, struct formattinginfo  *info)
 {
     class environment *startEnv, *endEnv;
-    register class environment *cparent, *te;
+    class environment *cparent, *te;
     class environment *envStack[NCXS];
     class text *text;
-    register unsigned char *tp;
+    unsigned char *tp;
     long newChars, newPixels, i, nextSlot;
 
     if (exposeStylesFont == NULL) {
@@ -540,11 +530,11 @@ static void ComputeStyleItem(class textview  *self, long  startPos , long  endPo
 
 /* NOTE: the info structure passed in is expected to be initialized, and will be left initialized upon exit.
   The caller (text__LinRedraw) is responsible for finalizing the statevector in the info struct. */
-static void GenerateLineItems(class textview  *self, class text  *text, class mark  *currentLine, register struct formattinginfo  *info)
+static void GenerateLineItems(class textview  *self, class text  *text, class mark  *currentLine, struct formattinginfo  *info)
 {
     class environment *myEnv;
     long lastEnvPos = 0;
-    register unsigned char *tp, tc;
+    unsigned char *tp, tc;
     long nChars, pos, bufEnd;
     long pi;            /* Value from ParagraphIndent */
     long i, localWidth, initPos, localRubber;
@@ -1035,7 +1025,7 @@ static void DrawBar(class textview  *self, struct lineitem  *tt, long  bx , long
 /*
  * Draw a change bar line at the right side of the view.
  */
-static void DrawChangeBar(class textview  *self,register struct formattinginfo  *info,long  by)
+static void DrawChangeBar(class textview  *self,struct formattinginfo  *info,long  by)
 {
     long x = (self)->GetLogicalWidth();
     if (x > 5) {
@@ -1061,7 +1051,7 @@ static void DrawStringNoTabs(class textview  *self, unsigned char *s, int  ctrl)
     (self)->DrawString( (char *)xbuf, graphic_ATBASELINE);
 }
 
-static void drawcontinued(class textview  *self,register struct formattinginfo  *info,long  by)
+static void drawcontinued(class textview  *self,struct formattinginfo  *info,long  by)
 {   /* draw a pointer at the end of the line 
       to indicate that unwrapped text is 
       beyond the end of the page */
@@ -1088,7 +1078,7 @@ static void drawcontinued(class textview  *self,register struct formattinginfo  
     (self)->DrawPolygon(pt, 3);
 }
 
-long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *currentLine, long  x , long  y, long  xSize , long  ySize, long  search, boolean  *cont, long  *txheight, register struct formattinginfo  *info)
+long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *currentLine, long  x , long  y, long  xSize , long  ySize, long  search, boolean  *cont, long  *txheight, struct formattinginfo  *info)
 {
     return LineRedraw(type, currentLine, x, y, xSize, ySize, search, cont, txheight, info, NULL);
 }
@@ -1140,7 +1130,7 @@ static void draw_linenum(textview *self, mark *line_mark, struct rectangle *area
 
 
 /* NOTE: the info structure passed in is expected to be UN-initialized. The info structure will be initialized upon exit, but the tabs field of the statevector will be NULL. */
-long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *currentLine, long  x , long  y, long  xSize , long  ySize, long  search, boolean  *cont, long  *txheight, register struct formattinginfo  *info, spotcolor **spots)
+long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *currentLine, long  x , long  y, long  xSize , long  ySize, long  search, boolean  *cont, long  *txheight, struct formattinginfo  *info, spotcolor **spots)
 {
     class text *text = Text(this);
     long zapMe;
@@ -1148,8 +1138,8 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
     unsigned char *sPtr;
     boolean isBlack = FALSE;
     class fontdesc *fontID = (this)->GetFont();
-    register int i, j = 0;
-    register struct lineitem *tt, *tlp;
+    int i, j = 0;
+    struct lineitem *tt, *tlp;
     int leftmost, leftmostchar;
     int currentBump;
     char *color = NULL, *bgcolor=NULL;
@@ -1254,7 +1244,7 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
 	 *  1 = burning as soon as tab seen
 	 * >1 = burning unconditionally
 	 */
-	register int burning = 0; /* Whether or not we are burning rubber */
+	int burning = 0; /* Whether or not we are burning rubber */
 
 	i = info->lineBP - 2;   /* Before nul at end of last item */
 	for (lli = info->lineIP - 1; lli >= 0; lli--) {

@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/sliderV.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("sliderV.H")
 #include <sliderV.H>
 #include <fontdesc.H>
@@ -91,8 +81,6 @@ static class atom *  A_string;
 #define STYLEOPTIONSUPPORTED 1
 
 ATKdefineRegistry(sliderV, valueview, sliderV::InitializeClass);
-#ifndef NORCSID
-#endif
 static void sliderV_HandleStyleString(class sliderV  *self,char  *s);
 static void CarveFonts(class sliderV  * self);
 static void getsizes(class sliderV  * self);
@@ -243,14 +231,14 @@ static void DrawLabel(class sliderV  * self)
     }
 
 }
-char *sliderV::GetValueString()
+const char *sliderV::GetValueString()
 {
     sprintf(this->buf,"%ld",(this)->GetTmpVal());
     return this->buf;
 }
 static void DrawValue(class sliderV  * self)
 {
-    char *buf;   
+    const char *buf;   
     buf = (self)->GetValueString();
     (self)->SetTransferMode(  graphic_COPY);
     (self)->EraseRect( &self->valrec);
@@ -385,7 +373,7 @@ sliderV::~sliderV()
 }
 void sliderV::LookupParameters()
 {
-    char * fontname;
+    const char * fontname;
     long fontsize,diff;
     struct resourceList parameters[11];
 

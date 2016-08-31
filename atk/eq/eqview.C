@@ -25,23 +25,12 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/eq/RCS/eqview.C,v 1.9 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
 /*
  * eqv.c
  * This module handles the view for eq.
  */
 
-
-
+#include <andrewos.h>
 ATK_IMPL("eqview.H")
 #include <eqview.H>
 
@@ -90,13 +79,13 @@ extern void eqview_Paste(class eqview  *self);
 extern void eqview_Exit();
 extern void eqview_DumpAndWrite(class eqview  *self);
 extern void eqview_doc();
-extern void eqview_DoSpecial(class eqview  *self, char  *s);
+extern void eqview_DoSpecial(class eqview  *self, const char  *s);
 extern void eqview_Special(class eqview  *self, char  c);
 extern void eqview_SuperScript(class eqview  *self);
 extern void eqview_SubScript(class eqview  *self);
 extern void eqview_AboveScript(class eqview  *self);
 extern void eqview_BelowScript(class eqview  *self);
-extern void eqview_String(class eqview  *self, char  *s);
+extern void eqview_String(class eqview  *self, const char  *s);
 extern void eqview_Root(class eqview  *self);
 extern void eqview_Fraction(class eqview  *self);
 extern void eqview_lbrace(class eqview  *self);
@@ -112,9 +101,6 @@ static int debug_flag = 0;
 
 
 ATKdefineRegistry(eqview, view, eqview::InitializeClass);
-#ifndef NORCSID
-#endif
-
 
 eqview::eqview()
 {
@@ -367,7 +353,7 @@ boolean eqview::InitializeClass()
     return TRUE;
 }
 
-void eqview::Print(FILE  *file, char  *process, char  *final, int  toplevel)
+void eqview::Print(FILE  *file, const char  *process, const char  *final, int  toplevel)
 {
     class eq *eqptr = Eq(this);
 
@@ -377,7 +363,7 @@ void eqview::Print(FILE  *file, char  *process, char  *final, int  toplevel)
     }    
 }
 
-void *eqview::GetPSPrintInterface(char *printtype)
+void *eqview::GetPSPrintInterface(const char *printtype)
 {
     if (!strcmp(printtype, "generic"))
 	return (void *)this;

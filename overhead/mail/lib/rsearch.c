@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h> /* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/rsearch.c,v 2.14 1993/06/02 15:28:09 rr2b Stab74 $";
-#endif
-
 /* cptres_search: search for a domain given a query type.
  * (Useful with Bind distributions predating bind 4.8.)
  * Returns the query-buffer in which answers are to be found.
@@ -40,6 +33,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
  * search for MX records for a domain name.
  */
 
+#include <andrewos.h> /* strings.h */
 #include <stdio.h>
 #ifdef RESOLVER_ENV
 #include <sys/param.h>
@@ -101,9 +95,9 @@ int anslen;		/* size of answer */
 }
 
 static char *myhostalias(name)		/* same as hostalias() in gethostnamadr.c, sigh */
-register char *name;
+char *name;
 {
-    register char *C1, *C2;
+    char *C1, *C2;
     FILE *fp;
     char *file, *getenv();
     char buf[BUFSIZ];
@@ -142,11 +136,11 @@ int class, type;		/* class and type of query */
 char *answer;		/* buffer to put answer */
 int anslen;		/* size of answer */
 {
-    register char *cp;
+    char *cp;
 #ifdef RES_DNSRCH
-    register char **domain;
+    char **domain;
 #endif /* RES_DNSRCH */
-    register HEADER *hp;
+    HEADER *hp;
     int n, NumDots;
 
 #ifdef CMUCS

@@ -78,7 +78,7 @@ public:
 	virtual ~panel();
 
 
-    virtual struct panel_Entry * Add(char *item, char *tag, int showNow)  ;
+    virtual struct panel_Entry * Add(const char *item, char *tag, int showNow)  ;
     virtual void Remove(struct panel_Entry *entry);
     virtual void RemoveAll();
     virtual void FreeAllTags(); /* destroys the client tag(rock) associated w/ a panel_Entry */

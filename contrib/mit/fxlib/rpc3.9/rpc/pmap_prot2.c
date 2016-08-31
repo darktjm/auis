@@ -1,5 +1,3 @@
-/* @(#)pmap_prot2.c	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,12 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/pmap_prot2.c,v 1.3 1992/12/15 21:54:19 rr2b Stab74 $";
-#endif
-
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
  * unrestricted use provided that this legend is included on all tape
@@ -55,10 +47,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-#if !defined(lint) && defined(SCCSIDS)
-static char sccsid[] = "@(#)pmap_prot2.c 1.3 87/08/11 Copyr 1984 Sun Micro";
-#endif
-
 /*
  * pmap_prot2.c
  * Protocol for the local binder service, or pmap.
@@ -111,8 +99,8 @@ static char sccsid[] = "@(#)pmap_prot2.c 1.3 87/08/11 Copyr 1984 Sun Micro";
  */
 bool_t
 xdr_pmaplist(xdrs, rp)
-	register XDR *xdrs;
-	register struct pmaplist **rp;
+	XDR *xdrs;
+	struct pmaplist **rp;
 {
 	/*
 	 * more_elements is pre-computed in case the direction is
@@ -120,8 +108,8 @@ xdr_pmaplist(xdrs, rp)
 	 * xdr_bool when the direction is XDR_DECODE.
 	 */
 	bool_t more_elements;
-	register int freeing = (xdrs->x_op == XDR_FREE);
-	register struct pmaplist **next;
+	int freeing = (xdrs->x_op == XDR_FREE);
+	struct pmaplist **next;
 
 	while (TRUE) {
 		more_elements = (bool_t)(*rp != NULL);

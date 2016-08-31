@@ -36,15 +36,15 @@ class tindex : public ATK  {
   public:
     virtual ATKregistryEntry *ATKregistry();
     
-    static int IndexTerm(class text *d,char *term,char **error) ;
+    static int IndexTerm(class text *d,const char *term,const char **error) ;
     static void WriteIndexList(class text *d,FILE *f);
-    static char * ReadIndexList(class text *d,FILE *f)  ;
+    static const char * ReadIndexList(class text *d,FILE *f)  ;
 
     static boolean InitializeClass();
 
     static void PrintIndex(class view *self, boolean useps);
     static void PreviewIndex(class view *self, boolean useps);
-    static int StyleNameIndexLevel(char *stylename);
+    static int StyleNameIndexLevel(const char *stylename);
     static class text *BuildIndexText(struct textps_locatag *taglist);
 };
 

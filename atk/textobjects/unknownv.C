@@ -77,7 +77,7 @@ static long SaveRaw(ATK   *aself, long  rock)
     return 0;
 }
 
-static char sepline[]="### Raw Inset Data, do not edit ###\n";
+static const char sepline[]="### Raw Inset Data, do not edit ###\n";
 static long DisplayRaw(ATK   *aself, long  rock)
 {
     class unknownv *self=(class unknownv *)aself;
@@ -105,7 +105,7 @@ static long Help(ATK *aself, long rock) {
 }
 
 
-static char *choices[]={
+static const char * const choices[]={
     "Show Help",
     "Proceed",
     "Cancel",
@@ -114,14 +114,14 @@ static char *choices[]={
 
 
 static void ExecuteRecovery(class unknownv *self) {
-    char *path=self->WantInformation("filename");
+    const char *path=self->WantInformation("filename");
     if(path==NULL) {
 	message::DisplayString(self, 100, "Unable to begin conversion automatically.  Please see help unknown.");
 	return;
     }
     char buf[1024];
     while(1) {
-	long pos=0, len;
+	long len;
 	int res;
 	buf[0]='\0';
 	res=completion::GetFilename(self, "Filename for recovered file:", "/tmp/", buf, sizeof(buf), FALSE, FALSE);

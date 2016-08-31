@@ -30,11 +30,6 @@ the full agreement.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/gdp/RCS/state.c,v 1.4 1993/06/17 04:34:09 rr2b Stab74 $";
-#endif
-
 #include <gestures/bool.h>
 #include <gestures/util.h>
 #include "object.h"
@@ -103,7 +98,7 @@ Element
 StNewObj(t)
 ObjectType t;
 {
-	register Object o = CreateObject(t);
+	Object o = CreateObject(t);
 	return AddElement(Objs, o);
 }
 
@@ -118,7 +113,7 @@ Element
 StCopyElement(e)
 Element e;
 {
-	register Object o = CopyObject(EtoO(e));
+	Object o = CopyObject(EtoO(e));
 	return AddElement(Objs, o);
 }
 
@@ -208,7 +203,7 @@ StReplaceObject(e, s)
 Element e;
 Object s;
 {
-	register Object d = EtoO(e);
+	Object d = EtoO(e);
 
 /*
 	printf("StReplaceObject: \nreplacing ("); DumpObject(d);
@@ -243,7 +238,7 @@ StEdit(e, oldo)
 Element e;
 Object *oldo;
 {
-	register Object o = CopyObject(EtoO(e));
+	Object o = CopyObject(EtoO(e));
 	if(oldo)
 		*oldo = EtoO(e);
 	/* printf("StEdit old=%x, copy=%x\n", EtoO(e), o); */

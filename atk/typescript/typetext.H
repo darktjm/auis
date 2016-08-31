@@ -46,7 +46,7 @@ public:
      long HandleBegindata(long pos,FILE *file)  ;
      long HandleKeyWord(long pos, char *keyword, FILE *file)  ;
      long HandleCloseBrace(long pos, FILE *file)  ;
-     char * ViewName()  ;
+     const char * ViewName()  ;
      long GetModified()  ;
 
 int hashandler;

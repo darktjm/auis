@@ -1,5 +1,3 @@
-/* @(#)pmap_rmt.c	1.4 87/11/30 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,11 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/pmap_rmt.c,v 1.3 1992/12/15 21:54:19 rr2b Stab74 $";
-#endif
 
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
@@ -55,10 +48,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fx
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-#if !defined(lint) && defined(SCCSIDS)
-static char sccsid[] = "@(#)pmap_rmt.c 1.21 87/08/27 Copyr 1984 Sun Micro";
-#endif
-
 /*
  * pmap_rmt.c
  * Client interface to pmap rpc service.
@@ -100,7 +89,7 @@ pmap_rmtcall(addr, prog, vers, proc, xdrargs, argsp, xdrres, resp, tout, port_pt
 	u_long *port_ptr;
 {
 	int socket = -1;
-	register CLIENT *client;
+	CLIENT *client;
 	struct rmtcallargs a;
 	struct rmtcallres r;
 	enum clnt_stat stat;
@@ -134,8 +123,8 @@ pmap_rmtcall(addr, prog, vers, proc, xdrargs, argsp, xdrres, resp, tout, port_pt
  */
 bool_t
 xdr_rmtcall_args(xdrs, cap)
-	register XDR *xdrs;
-	register struct rmtcallargs *cap;
+	XDR *xdrs;
+	struct rmtcallargs *cap;
 {
 	u_int lenposition, argposition, position;
 
@@ -165,8 +154,8 @@ xdr_rmtcall_args(xdrs, cap)
  */
 bool_t
 xdr_rmtcallres(xdrs, crp)
-	register XDR *xdrs;
-	register struct rmtcallres *crp;
+	XDR *xdrs;
+	struct rmtcallres *crp;
 {
 	caddr_t port_ptr;
 
@@ -247,19 +236,19 @@ clnt_broadcast(prog, vers, proc, xargs, argsp, xresults, resultsp, eachresult)
 	enum clnt_stat stat;
 	AUTH *unix_auth = authunix_create_default();
 	XDR xdr_stream;
-	register XDR *xdrs = &xdr_stream;
+	XDR *xdrs = &xdr_stream;
 	int outlen, inlen, fromlen, nets;
-	register int sock;
+	int sock;
 #ifdef FD_SETSIZE
 	fd_set mask;
 	fd_set readfds;
 #else
 	int readfds;
-	register int mask;
+	int mask;
 #endif /* def FD_SETSIZE */
-	register int i;
+	int i;
 	bool_t done = FALSE;
-	register u_long xid;
+	u_long xid;
 	u_long port;
 	struct in_addr addrs[20];
 	struct sockaddr_in baddr, raddr; /* broadcast and response addresses */

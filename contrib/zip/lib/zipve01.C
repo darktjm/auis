@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipve01.C,v 1.4 1993/06/26 15:42:07 rr2b Stab74 $";
-#endif
-
 /* zipve01.c	Zip EditView-object  -- Grids			      */
 /* Author	TC Peters					      */
 /* Information Technology Center	   Carnegie-Mellon University */
@@ -74,14 +69,14 @@ END-SPECIFICATION  ************************************************************/
 #include "zipobject.H"
 #include "zipiff00.h"
 
-static void Clear_Pane_Mark_Areas( register class zipedit		  *self, register zip_type_pane		   pane );
-static void Draw_Pane_Coordinate_Marks( register class zipedit		  *self, register zip_type_pane		   pane );
-static void Draw_Pane_Coordinate_Ticks( register class zipedit		  *self, register zip_type_pane		   pane );
-long Compute_Pane_Coordinate_Deltas( register class zipedit		  *self, register zip_type_pane		   pane );
+static void Clear_Pane_Mark_Areas( class zipedit		  *self, zip_type_pane		   pane );
+static void Draw_Pane_Coordinate_Marks( class zipedit		  *self, zip_type_pane		   pane );
+static void Draw_Pane_Coordinate_Ticks( class zipedit		  *self, zip_type_pane		   pane );
+long Compute_Pane_Coordinate_Deltas( class zipedit		  *self, zip_type_pane		   pane );
 
 
 long
-zipedit::Draw_Pane_Coordinates( register zip_type_pane		   pane )
+zipedit::Draw_Pane_Coordinates( zip_type_pane		   pane )
       {
   class zipedit *self=this;
   IN(zipedit::Draw_Pane_Coordinates);
@@ -118,18 +113,18 @@ zipedit::Draw_Pane_Coordinates( register zip_type_pane		   pane )
   return zip_success;
   }
 
-long zipedit::Draw_Pane_Grid( register zip_type_pane	   pane )
+long zipedit::Draw_Pane_Grid( zip_type_pane	   pane )
 {
-    register long			  i, j, k, point_spacing;
-    register float		  X, Y, GX, GY, point_delta_SMSD;
-    register float		    grid_factor, delta;
-    register long                   X_int, Y_int, r, c;
-    register float		  SM, SD, point_delta,L, T, R, B;
+    long			  i, j, k, point_spacing;
+    float		  X, Y, GX, GY, point_delta_SMSD;
+    float		    grid_factor, delta;
+    long                   X_int, Y_int, r, c;
+    float		  SM, SD, point_delta,L, T, R, B;
     float			  x_center, y_center;
     long                          n;
     class fontdesc		 *current_font = (this->view_object)->GetFont( );
    char				  big_dot = 'C';
-   register class graphic	 *black = (this->view_object)->BlackPattern( );;
+   class graphic	 *black = (this->view_object)->BlackPattern( );;
    class zipedit *self=this;
 
   IN(zipedit::Draw_Pane_Grid);
@@ -208,7 +203,7 @@ long zipedit::Draw_Pane_Grid( register zip_type_pane	   pane )
   }
 
 static
-void Clear_Pane_Mark_Areas( register class zipedit		  *self, register zip_type_pane		   pane )
+void Clear_Pane_Mark_Areas( class zipedit		  *self, zip_type_pane		   pane )
       {
   (self->view_object)->SetTransferMode(  graphic_WHITE );
   (self->view_object)->FillRectSize(  PaneLeft + 1, PaneTop + 1,
@@ -224,9 +219,9 @@ void Clear_Pane_Mark_Areas( register class zipedit		  *self, register zip_type_p
   }
 
 static
-void Draw_Pane_Coordinate_Marks( register class zipedit		  *self, register zip_type_pane		   pane )
+void Draw_Pane_Coordinate_Marks( class zipedit		  *self, zip_type_pane		   pane )
       {
-  register class fontdesc		 *current_font = (View )->GetFont( );
+  class fontdesc		 *current_font = (View )->GetFont( );
 
   IN(Draw_Pane_Coordinate_Marks);
   (self->view_object)->Set_Clip_Area(  pane, PaneLeft, PaneTop, PaneWidth, PaneHeight );
@@ -241,10 +236,10 @@ void Draw_Pane_Coordinate_Marks( register class zipedit		  *self, register zip_t
   }
 
 static
-void Draw_Pane_Coordinate_Ticks( register class zipedit		  *self, register zip_type_pane		   pane )
+void Draw_Pane_Coordinate_Ticks( class zipedit		  *self, zip_type_pane		   pane )
       {
-  register float			  SM, SD;
-  register int				  i, center, middle, edge;
+  float			  SM, SD;
+  int				  i, center, middle, edge;
   char					  point_value[256];
   short				     font = 0;
 
@@ -327,10 +322,10 @@ void Draw_Pane_Coordinate_Ticks( register class zipedit		  *self, register zip_t
   }
 
 /*static If self isn't static then I can access it from Set_Constrains */
-long Compute_Pane_Coordinate_Deltas( register class zipedit		  *self, register zip_type_pane		   pane )
+long Compute_Pane_Coordinate_Deltas( class zipedit		  *self, zip_type_pane		   pane )
       {
-  register float			  SM, SD, delta = 1.0, limit = 10.0;
-  register int				  done = false, low;
+  float			  SM, SD, delta = 1.0, limit = 10.0;
+  int				  done = false, low;
 
   if ( pane->zip_pane_zoom_level >= 0 )
     SM = pane->zip_pane_stretch_multiplier * (pane->zip_pane_zoom_level + 1);
@@ -365,7 +360,7 @@ long Compute_Pane_Coordinate_Deltas( register class zipedit		  *self, register z
   return zip_success;
   }
 
-void zipedit::Lighten_Pane( register zip_type_pane		   pane, register char				   density )
+void zipedit::Lighten_Pane( zip_type_pane		   pane, char				   density )
         {
   class zipedit *self=this;
   (this->view_object)->Set_Pane_Clip_Area(  pane );

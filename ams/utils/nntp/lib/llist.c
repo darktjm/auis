@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp/lib/RCS/llist.c,v 1.8 1994/06/09 21:18:04 rr2b Stab74 $";
-#endif
-
 #include "llist.h"
 #include <andrewos.h>
 
@@ -45,7 +40,7 @@ extern caddr_t	malloc();
 */
 void
 l_free(lp)
-register struct llist *lp;
+struct llist *lp;
 {
 	if (lp->l_next == NULL)
 		return;
@@ -59,9 +54,9 @@ register struct llist *lp;
 */
 struct llist *
 l_alloc(lp, s, len)
-register struct llist	*lp;
+struct llist	*lp;
 caddr_t	*s;
-register unsigned len;
+unsigned len;
 {
 	if (s == NULL || lp == NULL)
 		return(NULL);

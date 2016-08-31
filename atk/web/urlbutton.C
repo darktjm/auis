@@ -99,8 +99,8 @@ long urlbutton::Read(FILE *fp, long id)
  */
 long urlbutton::Write(FILE  *fp, long  id, int  level)
 {
-    char *url = GetURL();
-    char *lbl = GetURLLabel();
+    const char *url = GetURL();
+    const char *lbl = GetURLLabel();
     long uniqueid = UniqueID();
     const char *tname = GetTypeName();
 
@@ -124,7 +124,7 @@ long urlbutton::Write(FILE  *fp, long  id, int  level)
 }
 
 
-char *urlbutton::ViewName()
+const char *urlbutton::ViewName()
 {
     return "urlbuttonview";
 }
@@ -143,7 +143,7 @@ void urlbutton::SetURL(char  *url)
 
 void urlbutton::SetText(char  *txt)
 {
-    char *newlabel;
+    const char *newlabel;
 
     if (txt == NULL || *txt == '\0') {
 	has_label = FALSE;
