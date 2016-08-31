@@ -26,11 +26,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/guardian/lib/RCS/gasp.c,v 2.10 1993/01/15 19:07:55 gk5g Stab74 $";
-#endif
-
 /*
 		gasp.c -- Message server guardian interface routines.
 
@@ -45,9 +40,9 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/
 #endif
 #endif
 
+#include <andrewos.h> /* sys/types.h */
 #include <stdio.h>
 #include <netdb.h>
-#include <andrewos.h> /* sys/types.h */
 #include <sys/socket.h>
 #include <netinet/in.h>
 

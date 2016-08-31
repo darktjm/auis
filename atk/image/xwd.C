@@ -160,13 +160,13 @@ typedef struct {
 
 
 ATKdefineRegistry(xwd, image, NULL);
-static int isXWD(char       *name, FILE       *f, XWDHeader  *header);
-void loadXYBitmap( class xwd  *self, char  *fullname, FILE  *f, XWDHeader   header );
-void loadXYPixmap( class xwd  *self, char  *fullname, FILE  *f, XWDHeader  header );
-void loadZPixmap( class xwd  *self, char  *fullname, FILE  *f, XWDHeader  header );
+static int isXWD(const char       *name, FILE       *f, XWDHeader  *header);
+void loadXYBitmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader   header );
+void loadXYPixmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader  header );
+void loadZPixmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader  header );
 
 
-static int isXWD(char       *name, FILE       *f, XWDHeader  *header)
+static int isXWD(const char       *name, FILE       *f, XWDHeader  *header)
                { GenericXWDHeader  gh;
   int               a;
 
@@ -259,7 +259,7 @@ static int isXWD(char       *name, FILE       *f, XWDHeader  *header)
 }
 
 int 
-xwd::Ident( char  *fullname )
+xwd::Ident( const char  *fullname )
         { FILE     *f;
   XWDHeader  header;
   int ret;
@@ -274,7 +274,7 @@ xwd::Ident( char  *fullname )
 extern void flipBits(unsigned char *p, unsigned int len);
 
 void
-loadXYBitmap( class xwd  *self, char  *fullname, FILE  *f, XWDHeader   header )
+loadXYBitmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader   header )
                 { int    dlinelen;       /* length of scan line in data file */
   int    ilinelen;       /* length of line within image structure */
   int    unit;           /* # of bytes in a bitmap unit */
@@ -343,7 +343,7 @@ loadXYBitmap( class xwd  *self, char  *fullname, FILE  *f, XWDHeader   header )
  */
 
 void
-loadXYPixmap( class xwd  *self, char  *fullname, FILE  *f, XWDHeader  header )
+loadXYPixmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader  header )
                 { int plane;
   int    dlinelen;       /* length of scan line in data file */
   int    ilinelen;       /* length of line within image structure */
@@ -428,7 +428,7 @@ loadXYPixmap( class xwd  *self, char  *fullname, FILE  *f, XWDHeader  header )
  */
 
 void
-loadZPixmap( class xwd  *self, char  *fullname, FILE  *f, XWDHeader  header )
+loadZPixmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader  header )
                 { int    dlinelen;       /* length of scan line in data file */
   int    ilinelen;       /* length of scan line in image file */
   int    depth;          /* depth rounded up to 8-bit value */
@@ -520,7 +520,7 @@ loadZPixmap( class xwd  *self, char  *fullname, FILE  *f, XWDHeader  header )
 }
 
 int
-xwd::Load( char  *fullname, FILE  *fp )
+xwd::Load( const char  *fullname, FILE  *fp )
             { FILE      *f;
   XWDHeader  header;
   int        cmaplen;
@@ -634,7 +634,7 @@ xwd::Write( FILE  *file, long  writeID, int  level )
 }
 
 long
-xwd::WriteNative( FILE  *file, char  *filename )
+xwd::WriteNative( FILE  *file, const char  *filename )
             {
 return(0);
 }

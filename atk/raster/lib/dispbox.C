@@ -42,22 +42,13 @@
  *  $
 */
 
-#include <andrewos.h> /* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/dispbox.C,v 1.1 1993/05/23 18:37:52 gk5g Stab74 $";
-#endif
-
-
- 
-
 /* dispbox.c
 
   Support for the Display Box in Expanded Mode in rasterv.c
 
       */
 
+#include <andrewos.h> /* strings.h */
 #include <graphic.H>
 #include <view.H>
 #include <fontdesc.H>
@@ -72,8 +63,6 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #include <rastvaux.h>
 
 static char debug;
-#ifndef NORCSID
-#endif
 void DisplayBoxBlitOverlap(class rasterview  *self, class rasterimage  *pix);
 #if 0
 void DisplayBoxDrawPanHighlight(class rasterview  *self);

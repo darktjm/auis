@@ -4,8 +4,8 @@
    (c) Copyright IBM Corp 1995.  All rights reserved.  */
 
 struct htmlatts {
-    char *name;
-    char *value;
+    const char *name;
+    const char *value;
     boolean quoted;
 };
 
@@ -16,11 +16,11 @@ class attlist : public list {
     virtual ATKregistryEntry *ATKregistry();
 
     virtual void DebugPrint();
-    virtual void AddAttribute(char *name, char *value, boolean quoted);
-    virtual struct htmlatts *GetAttribute(char *name);
+    virtual void AddAttribute(const char *name, const char *value, boolean quoted);
+    virtual struct htmlatts *GetAttribute(const char *name);
 		// returns null if attr not found
     virtual void ClearAttributes();
-    virtual void MakeFromString(char *str);
+    virtual void MakeFromString(const char *str);
     virtual char *MakeIntoString();
     virtual class attlist *CopyAttributes();
 
@@ -28,7 +28,7 @@ class attlist : public list {
     virtual ~attlist();
     static boolean InitializeClass();
 
-    static class attlist * ParseAttributes(char *str);
+    static class attlist * ParseAttributes(const char *str);
     static void Copy(class attlist *dst, class attlist *src);
     inline void Reference() {
 	refs++;
@@ -44,13 +44,6 @@ class attlist : public list {
 
 
 /* cistrcmp is a case-insensitive strcmp, used mainly to match up attribute names (which are not case-sensitive) */
-static int cistrcmp(char *a, char *b)
-{
-    int delta;
-    do  {
-	delta= tolower(*a) - tolower(*b);
-    } while (!delta && *a++ && *b++);
-    return delta;
-}
+#define cistrcmp strcasecmp
 
 #endif /* _attlist_H_ */

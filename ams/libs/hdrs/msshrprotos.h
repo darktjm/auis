@@ -27,7 +27,7 @@ char *FindUserDir(char *user, char *cellname);
 void FindTreeRoot(char *DirName, char *RootName, int ReallyWantParent);
 
 /* brkdown.c */
-void BreakDownContentTypeField(char *HeadBuf, char *fmt, int fmtsz, char *vers, int verssz, char *resources, int resourcessz);
+void BreakDownContentTypeField(const char *HeadBuf, char *fmt, int fmtsz, char *vers, int verssz, char *resources, int resourcessz);
 char **BreakDownResourcesIntoArray(char *reslist);
 
 ENDCPLUSPLUSPROTOS

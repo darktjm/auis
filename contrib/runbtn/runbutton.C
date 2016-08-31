@@ -234,7 +234,7 @@ boolean runbutton::EnsureSize(int  ind)
  * This function is limited to returning < 4096 bytes.
  */
 static char *quote_buf = NULL;
-static char *quote(char  *s)
+static const char *quote(const char  *s)
 {
     char *p;
 
@@ -258,7 +258,7 @@ static char *quote(char  *s)
 /*
  * Unquote special chars.  The inverse of quote.
  */
-static char *unquote(char  *s)
+static const char *unquote(const char  *s)
 {
     char *p;
 
@@ -375,9 +375,9 @@ long runbutton::Read(FILE  *fp, long  id)
  */
 long runbutton::Write(FILE  *fp, long  id, int  level)
 {
-    char *cmd = GetCommandString();
-    char *lbl = GetLabelString();
-    char *quotecmd, *quotelabel, *p;
+    const char *cmd = GetCommandString();
+    const char *lbl = GetLabelString();
+    const char *quotecmd, *quotelabel, *p;
     char savechar;
     int len;
     long uniqueid = UniqueID();
@@ -396,10 +396,7 @@ long runbutton::Write(FILE  *fp, long  id, int  level)
 	    /* Write out the command in chunks to fit ~70 char lines. */
 	     p = quotecmd;
 	     while (len > 70) {
-		 savechar = p[70];
-		 p[70] = '\0';
-		 fprintf(fp, "X%sX\n", p);
-		 p[70] = savechar;
+		 fprintf(fp, "X%.70sX\n", p);
 		 p += 70;
 		 len -= 70;
 	     }
@@ -417,7 +414,7 @@ long runbutton::Write(FILE  *fp, long  id, int  level)
 }
 
 
-char *runbutton::ViewName()
+const char *runbutton::ViewName()
 {
     return "runbuttonview";
 }
@@ -678,7 +675,7 @@ void runbutton::ChildDone(int pid, long rbvc, WAIT_STATUS_TYPE *status)
     runbuttonview *rbv=(runbuttonview *)rbvc;
     runbutton *b;
     int code;
-    char *m = NULL;
+    const char *m = NULL;
     char msg[256];
 
     if (!runbuttonview::IsValidRunButtonView(rbv))

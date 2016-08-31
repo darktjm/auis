@@ -25,20 +25,11 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/keystate.C,v 3.10 1996/05/17 23:29:44 robr Exp $";
-#endif
-
-
- 
-
 /* keystate.ch -- A class that keep track of partially evaluated sequences of keystrokes.
 December, 1986 */
 
 
+#include <andrewos.h>
 ATK_IMPL("keystate.H")
 #include <proctable.H>
 #include <keymap.H>

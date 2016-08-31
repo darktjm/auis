@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynlink/hp700_90/RCS/doload.c,v 1.1 1994/06/06 17:12:53 rr2b Stab74 $";
-#endif
-
-
 /* 
  *	doload.c - dynamic loader for class system
  *          for HP 9000/800's running HPUX 7.0
@@ -55,7 +49,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynli
  * code. I suppose one might want to set this to something other than ".do"
  * but for now we will do it the way it has always been done.
  */
-char doload_extension[] = ".do";
+const char doload_extension[] = ".do";
 
 int doload_trace=0;		/* nonzero if debugging */
 

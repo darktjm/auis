@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/windowsystem.C,v 3.4 1996/01/31 19:54:06 robr Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("windowsystem.H")
 #include <environ.H>
 #include <cursor.H>
@@ -49,9 +39,6 @@ struct windowsysteminfo *windowSystem;
 
 
 ATKdefineRegistry(windowsystem, ATK, NULL);
-#ifndef NORCSID
-#endif
-
 
 class cursor *windowsystem::CreateCursor()
     {

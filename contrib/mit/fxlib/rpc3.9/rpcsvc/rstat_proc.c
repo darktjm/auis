@@ -1,5 +1,3 @@
-/* @(#)rstat_proc.c	1.2 87/11/24 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,15 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpcsvc/RCS/rstat_proc.c,v 1.3 1992/12/15 21:55:23 rr2b Stab74 $";
-#endif
-
-#ifndef lint
-static  char sccsid[] = "@(#)rpc.rstatd.c 1.1 86/09/25 Copyr 1984 Sun Micro";
-#endif
 
 /*
  * Copyright (c) 1984 by Sun Microsystems, Inc.

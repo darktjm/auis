@@ -23,16 +23,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/pvaltvf.C,v 1.7 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
-
- 
-
 ATK_IMPL("pvaltvf.H")
 #include <math.h>
 
@@ -68,8 +58,6 @@ static struct helprock {
 
 
 ATKdefineRegistry(pvaltvf, pvaltvl, pvaltvf::InitializeClass);
-#ifndef NORCSID
-#endif
 static void helpfunc(struct helprock  *rock, enum message_HelpItem  type, char  *item, long  null);
 static void pvaltvfHelp(class pvaltvf  *self, long  rock);
 static void pvaltvfNop(class pvaltvf  *self, long  rock);

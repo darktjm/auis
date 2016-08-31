@@ -96,7 +96,7 @@ public:
     virtual struct font * GetRealFontDesc(class graphic *gr)  ;
 
     virtual long StringSize(class graphic *gr, const char * string, long * XWidth, long * YWidth)  ;
-    virtual long StringBoundingBox(class graphic *graphic, char *string, int *width, int *height)  ;
+    virtual long StringBoundingBox(class graphic *graphic, const char *string, int *width, int *height)  ;
     virtual long TextSize(class graphic *gr, const char * text, long TextLength, long *XWidth, long *YWidth)
 		 ;
     virtual short* WidthTable(class graphic *gr)   ; /* actually an array of short's */

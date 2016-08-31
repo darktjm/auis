@@ -29,12 +29,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/com_err/RCS/compile_et.c,v 1.4 1994/02/02 21:44:12 sa3e Stab74 $";
-#endif
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/file.h>
@@ -50,9 +44,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/co
 #ifndef lint
 static const char copyright[] =
     "Copyright 1987,1988 by MIT Student Information Processing Board";
-
-static const char rcsid_compile_et_c[] =
-    "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/com_err/RCS/compile_et.c,v 1.4 1994/02/02 21:44:12 sa3e Stab74 $";
 #endif
 
 extern char *gensym();
@@ -321,10 +312,6 @@ int yyerror(s) char *s; {
  * All rights reserved.  The Berkeley software License Agreement
  * specifies the terms and conditions for redistribution.
  */
-
-#if defined(LIBC_SCCS) && !defined(lint)
-static char sccsid[] = "@(#)strcasecmp.c	1.3 (Berkeley) 8/3/87";
-#endif LIBC_SCCS and not lint
 
 /*
  * This array is designed for mapping upper and lower case letter

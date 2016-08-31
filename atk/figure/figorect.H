@@ -23,8 +23,6 @@ ATK_INTER
 // WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 // 
 //  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figorect.H,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $
 */
 #include <figobj.H>
 
@@ -39,10 +37,10 @@ public:
 	figorect();
 
     
-       void PrintObject(class figview *v, FILE *file, char *prefix, boolean newstyle);
+       void PrintObject(class figview *v, FILE *file, const char *prefix, boolean newstyle);
        void WriteBody(FILE *fp);
        long ReadBody(FILE *file, boolean recompute)  ;
-       char * ToolName(class figtoolview *v, long rock)  ;
+       const char * ToolName(class figtoolview *v, long rock)  ;
        void ToolModify(class figtoolview *v, long rock, boolean firsttime);
        class figobj * Instantiate(class figtoolview *v, long rock)  ;  
        void Draw(class figview *v); 

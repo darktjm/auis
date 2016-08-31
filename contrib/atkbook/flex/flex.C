@@ -1,5 +1,3 @@
-static char *flex_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/atkbook/flex/RCS/flex.C,v 1.2 1994/06/09 21:18:04 rr2b Stab74 $";
-
 /* **************************************************** *\
 Copyright 1989 Nathaniel S. Borenstein
 Permission to use, copy, modify, and distribute this software and its
@@ -105,7 +103,7 @@ void flex::ToggleParts()
     this->rvname = name;
 }
 
-boolean flex::InsertObject (class dataobject  *d, char  *viewname)
+boolean flex::InsertObject (class dataobject  *d, const char  *viewname)
 {
     class dataobject *d2;
     char *n1, *n2;

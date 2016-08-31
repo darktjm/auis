@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/nametime/RCS/nametime.c,v 2.13 1993/09/22 19:49:50 gk5g Stab74 $";
-#endif
-
 /* ************************************************************ *\
 
 	nametime.c	Name and Time Server

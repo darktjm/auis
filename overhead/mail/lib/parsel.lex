@@ -206,8 +206,6 @@ DHACK			(({WORD}\.+)|(\.+{WORD})|(\.\.+))
 .			return BADTOKEN;
 
 %%
-static char *parsel_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/parsel.lex,v 2.19 1994/06/01 19:59:16 rr2b Stab74 $";
-
 void SetNextLine(line)
     char *line;
 {

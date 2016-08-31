@@ -22,19 +22,13 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/controllers/RCS/calccon.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
  
 /* user code ends here for HeaderInfo */
+#include <andrewos.h>
 ATK_IMPL("calccon.H")
 
 #include <proctable.H>
@@ -57,8 +51,6 @@ ATK_IMPL("calccon.H")
 #define DIV 4
 
 ATKdefineRegistry(calccon, observable, calccon::InitializeClass);
-#ifndef NORCSID
-#endif
 void displayval(class calccon  *self);
 void clear(class calccon  *self);
 static class calccon *FindSelf(class view  *v);
@@ -157,7 +149,7 @@ if(r2 == value_OBJECTDESTROYED) {
 /* user code begins here for valenterCallBack */
 {
     double f ;
-    char *c;
+    const char *c;
     c  = (val)->GetString();
     switch (*c){
 	case 0:

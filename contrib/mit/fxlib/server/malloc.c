@@ -22,10 +22,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/server/RCS/malloc.c,v 1.3 1992/12/15 21:55:23 rr2b Stab74 $";
-#endif
 #ifdef MALLOC_LEAK
 #define scribblecheck
 #define parent
@@ -114,8 +110,6 @@ what you give them.   Help stamp out software-hoarding!  */
  ****************************************************************/
 
 /*
- * @(#)nmalloc.c 1 (Caltech) 2/21/82
- *
  *	U of M Modified: 20 Jun 1983 ACT: strange hacks for Emacs
  *
  *	Nov 1983, Mike@BRL, Added support for 4.1C/4.2 BSD.

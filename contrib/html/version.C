@@ -22,4 +22,4 @@
  * OF THIS SOFTWARE.
  */
 
-char versionString[] = "HTML-Text $Revision$";
+const char versionString[] = "HTML-Text $Revision$";

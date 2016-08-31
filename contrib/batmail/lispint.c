@@ -23,10 +23,6 @@
  * 
  *  $
 */
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/batmail/RCS/lispint.c,v 1.4 1995/06/28 17:10:13 wjh Stab74 $";
-#endif
 /*
  * MLisp interface for mspi
  * 25 feb 1986 - Miles Bader

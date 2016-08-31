@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipoarc.C,v 1.4 1993/06/26 15:47:27 rr2b Stab74 $";
-#endif
-
 /* zipoarc.c	Zip Object -- Arc					      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */

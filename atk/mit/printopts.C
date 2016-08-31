@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/printopts.C,v 1.1 1994/08/11 03:02:44 rr2b Stab74 $";
-#endif
-
-
 /* sys/types.h in AIX PS2 defines "struct label", causing a type name clash.
   Avoid this by temporarily redefining "label" to be something else in the preprocessor. */
 #define label gezornenplatz
@@ -101,13 +95,7 @@ static boolean  debug = FALSE;
 #define INSET_Y 1
 
 ATKdefineRegistry(printopts, view, printopts::InitializeClass);
-#ifndef NORCSID
-#endif
-#ifdef POPTS_USE_SUITE
-#else /* POPTS_USE_SUITE */
-#endif /* POPTS_USE_SUITE */
-#ifdef POPTS_USE_SUITE
-#else /* POPTS_USE_SUITE */
+#ifndef POPTS_USE_SUITE
 static struct buttonList *printopts_MakeButton(struct buttonList  *blist, char  *text, observable_fptr function, class view  *object);
 static struct lplist *printopts_MakeLpair(struct lplist  *lpl);
 #endif /* POPTS_USE_SUITE */
@@ -237,7 +225,7 @@ suite_Specification control_spec[] = {
 #else /* POPTS_USE_SUITE */
 /* Structure is linked list of buttons */   
   
-static char *printopts_bNames[] = 
+static const char * const printopts_bNames[] = 
 { "Done", "Cancel", NULL };
 
 static observable_fptr printopts_bFuncs[]=
@@ -591,7 +579,7 @@ printopts::DesiredSize( long  width, long  height, enum view_DSpass  pass,
 }
 
 void
-printopts::Print( register FILE    *file, register char  	  *processor, register char  	  *format, register boolean  	 level )
+printopts::Print( register FILE    *file, register const char  	  *processor, register const char  	  *format, register boolean  	 level )
 {
     /* never print anything */
 }

@@ -47,7 +47,7 @@ BEGINCPLUSPLUSPROTOS
 #ifdef ANSI_COMPILER
 typedef void (*cmenu_FreeFunction)(void *f);
 extern struct cmenu *cmenu_Create(Display *display, Window parent,
-                         char *defaultEnvironment, cmenu_FreeFunction freeFunction);
+                         const char *defaultEnvironment, cmenu_FreeFunction freeFunction);
 extern void cmenu_Destroy(struct cmenu *menu);
 extern int cmenu_AddPane(struct cmenu *menu, char *paneTitle,
                          int panePriority, int flags);

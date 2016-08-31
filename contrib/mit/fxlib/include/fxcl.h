@@ -1,10 +1,6 @@
 /***********************************************************************
  * to be included by all fx library clients
  *
- * $Author: sa3e $
- * $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/include/RCS/fxcl.h,v $
- * $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/include/RCS/fxcl.h,v 1.4 1994/02/01 21:44:20 sa3e Stab74 $
- *
  * Copyright 1989, 1990 by the Massachusetts Institute of Technology.
  *
  * For copying and distribution information, please see the file

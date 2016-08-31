@@ -24,12 +24,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/alink/RCS/alinkview.C,v 1.4 1994/08/11 03:01:07 rr2b Stab74 $";
-#endif
-
-
 /*
  *  Audio link.
  *  

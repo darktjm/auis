@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>	/* for bzero() bcmp() */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/rexf.C,v 1.8 1995/04/05 01:48:15 rr2b Stab74 $";
-#endif
-
 /*
 	rexf.c	-  implement a REXX compatability package
 
@@ -115,6 +108,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * 
 */
 
+#include <andrewos.h>	/* for bzero() bcmp() */
 #include <ctype.h>
 
 #include <text.H>

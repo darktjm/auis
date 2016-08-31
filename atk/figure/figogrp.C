@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-char *figogrp_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figogrp.C,v 3.2 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("figogrp.H")
 #include <figogrp.H>
@@ -42,8 +38,6 @@ ATK_IMPL("figogrp.H")
 
 
 ATKdefineRegistry(figogrp, figobj, figogrp::InitializeClass);
-#ifndef NORCSID
-#endif
 static void MoveHandleNocon(class figogrp  *self, long  x , long  y , long  ptref);
 static void MoveHandleCon(class figogrp  *self, long  x , long  y , long  ptref);
 static boolean ReconfigureChild(class figobj  *o, long  ref, class figure  *v, class figogrp  *self);
@@ -77,7 +71,7 @@ boolean figogrp::InitializeClass()
     return TRUE;
 }
 
-char *figogrp::ToolName(class figtoolview  *v, long  rock)
+const char *figogrp::ToolName(class figtoolview  *v, long  rock)
 {
     return "<group>";
 }

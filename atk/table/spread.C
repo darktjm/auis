@@ -20,19 +20,12 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/spread.C,v 1.32 1996/11/08 20:34:09 wjh Exp $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
  \* ********************************************************************** */
 
-
+#include <andrewos.h>
 ATK_IMPL("spread.H")
 #include <view.H>
 #include <im.H>
@@ -190,7 +183,7 @@ void InitializeGraphic(class spread  *V)
 class view * spread_FindSubview (class spread  * V, register struct cell  * cell)
 {
     register struct viewlist *vl;
-    char *viewname;
+    const char *viewname;
 
     if (cell->celltype != table_ImbeddedObject) {
 	printf("FindSubview called with non-subview cell! (internal bug)\n");
@@ -519,7 +512,7 @@ void spread::WantNewSize(class view  *requestor)
 
 /* print as part of larger document */
 
-void spread::Print(FILE  * f, char  *proc /* processor */, char  *format /* final format */, boolean  toplevel /* am I the top level view? */)
+void spread::Print(FILE  * f, const char  *proc /* processor */, const char  *format /* final format */, boolean  toplevel /* am I the top level view? */)
 {
     if (debug)
 	printf("spread_Print(%p, %p, %s, %s, %d)\n", this, f, proc, format, toplevel);

@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipve01.C,v 1.4 1993/06/26 15:42:07 rr2b Stab74 $";
-#endif
-
 /* zipve01.c	Zip EditView-object  -- Grids			      */
 /* Author	TC Peters					      */
 /* Information Technology Center	   Carnegie-Mellon University */

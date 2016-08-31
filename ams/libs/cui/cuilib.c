@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/time.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/cui/RCS/cuilib.c,v 2.62 1994/04/04 19:03:45 rr2b Stab74 $";
-#endif
-
 #include <cui.h>
 #include <errprntf.h>
 #include <stdio.h>
@@ -538,9 +532,9 @@ char   *arg;
 
 long
 CUI_GetHeaders(DirName, date64, headbuf, limit, startbyte, nbytes, status, RegisterCuids)
-char   *DirName,
-       *date64,
-       *headbuf;
+const char   *DirName,
+              *date64;
+char       *headbuf;
 int	limit, RegisterCuids;
 long	startbyte,
 	*nbytes,
@@ -1023,7 +1017,7 @@ char *name;
 
 
 long CUI_DisambiguateDir(shortname, longname)
-char   *shortname;
+const char   *shortname;
 char  **longname;
 {
     struct CUIDirNode *DNtmp;
@@ -2222,7 +2216,7 @@ char *LocalFile, *ViceFile;
 }
 
 CUI_RenameDir(old, new)
-char *old, *new;
+const char *old, *new;
 {
     struct CUIDirNode  *DNtmp, *NewDN;
     int status, fullnamehash;
@@ -2281,7 +2275,7 @@ char *old, *new;
 }
 
 CUI_RemoveDirectory(DirName)
-char *DirName;
+const char *DirName;
 {
     int ProtCode, MsgCount;
     char ErrorText[256], NickName[1+MAXPATHLEN];
@@ -3267,9 +3261,9 @@ char *OldName;
     return(0);
 }
 
-static char ResendFormat[] = "Message Re-Sent to '%s'.";
+static const char ResendFormat[] = "Message Re-Sent to '%s'.";
 
-static char *ExtVec[] = {
+static const char * ExtVec[] = { /* modified below */
     "The readers of this message may not recognize Andrew formatting.",
     "Cancel resending", /* 3 -> 1 */
     "Remove formatting & send", /* 2 */
@@ -3397,7 +3391,7 @@ char *Tolist;
 }
 
 CUI_ReportAmbig(name, atype)
-char *name, *atype;
+const char *name, *atype;
 {
     char ErrorText[1000];
 

@@ -45,12 +45,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/image/RCS/ips.C,v 1.6 1995/12/08 22:18:21 robr Stab74 $";
-#endif
-
 #include <math.h>
 #include <image.H>
 #include <print.H>
@@ -96,7 +90,7 @@ static void psColorImage(FILE  *fp, boolean usereg);
 static void psColorMap(FILE  *fp, int  color , int  nc, byte  *rmap , byte  *gmap , byte  *bmap);
 static void psRleCmapImage(FILE  *fp, int color);
 static void epsPreview(class imagev  *self, FILE  *fp, byte  *pic);
-static int writeBWStip(FILE  *fp, byte  *pic, char  *prompt, int   w , int   h);
+static int writeBWStip(FILE  *fp, byte  *pic, const char  *prompt, int   w , int   h);
 
 /* local variables */
 static double sz_inx, sz_iny;     /* image size, in inches */
@@ -687,7 +681,7 @@ static unsigned char invhex[16] = {
 };
 
 /***********************************/
-static int writeBWStip(FILE  *fp, byte  *pic, char  *prompt, int   w , int   h)
+static int writeBWStip(FILE  *fp, byte  *pic, const char  *prompt, int   w , int   h)
                 {
   /* write the given 'pic' (B/W stippled, 1 byte per pixel, 0=blk,1=wht) out as hexadecimal, max of 72 hex chars per line. returns '0' if everythings fine, 'EOF' if writing failed */
   int err = 0, i, j, lwidth;

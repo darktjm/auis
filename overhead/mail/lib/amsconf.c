@@ -25,18 +25,12 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/amsconf.c,v 2.9 1993/05/20 04:54:41 gk5g Stab74 $";
-#endif
-
 /* amsconf.c -- Uses the /AndrewSetup file to see if all programs
 	in the Andrew Message System should be run from an experimental
 	binary directory 
 */
 
+#include <andrewos.h>
 #include <stdio.h>
 #include <sys/param.h>
 #include <errprntf.h>

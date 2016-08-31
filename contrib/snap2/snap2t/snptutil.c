@@ -25,13 +25,8 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/snap2t/RCS/snptutil.c,v 1.11 1993/05/04 01:50:02 susan Stab74 $";
-#endif
-
-#include <stdio.h>
 #include <andrewos.h> /* sys/types.h */
+#include <stdio.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <snap.h>

@@ -59,7 +59,7 @@ public:
       int textpositions[31];
       struct tm FullTimes[31];
       class text *t;
-      char *AnnounceArray[11];
+      const char *AnnounceArray[11];
       int AnnounceArraySize;
       int pendingtop;
       int firstpendingtop;

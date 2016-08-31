@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/consoleapp.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
@@ -44,8 +37,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * shared libraries.
  */
 
-
-
+#include <andrewos.h>
 ATK_IMPL("consoleapp.H")
 #include <application.H>
 
@@ -64,8 +56,6 @@ ATK_IMPL("consoleapp.H")
  */
 
 ATKdefineRegistry(consoleapp, application, consoleapp::InitializeClass);
-#ifndef NORCSID
-#endif
 static void delete_console_win(class im  *im, long  rock);
 
 

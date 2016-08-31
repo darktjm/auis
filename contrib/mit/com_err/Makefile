@@ -49,9 +49,6 @@ FRC::
 # Copyright 1987, 1989 MIT Student Information Processing Board
 # For copyright info, see mitcopyright.h.
 #
-#	$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/com_err/RCS/Makefile,v 1.2 1994/02/02 21:44:10 sa3e Stab74 $
-#	$Locker:  $
-#
 
 LINTFLAGS=-uhvb
 LINTFILES= error_message.c et_name.c init_et.c com_err.c # perror.c

@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/types.h sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/typescript/RCS/typescript.C,v 1.30 1996/02/09 19:37:26 susan Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("typescript.H")
 
 #include <text.H>

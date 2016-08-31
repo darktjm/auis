@@ -39,11 +39,11 @@ public:
 
      boolean InsertCharacters(long pos, const char *str, long len)  ;
      boolean DeleteCharacters(long pos, long len)  ;
-     char * ViewName()  ;
+     const char * ViewName()  ;
 
     virtual void updatebuf();
     virtual boolean Changed() ;
-    virtual void SetChars(char *str,int len);
+    virtual void SetChars(const char *str,int len);
 
     inline long buflen() { return (this->buflenval); }
     inline char * GetString() { return (this->buf); }

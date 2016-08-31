@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/txtvcmod.C,v 3.6 1996/10/19 14:28:02 robr Exp $";
-#endif
-
-
-
- 
-
 #include <ctype.h>
 #define AUXMODULE 1
 #include <textview.H>
@@ -79,7 +69,7 @@ void textview_OpenLineCmd(register class textview  *self);
 void textview_JoinCmd(register class textview  *self);
 static void yankKillLine (register class textview  *self, int		 action);
 void textview_YankLineCmd(register class textview  *self);
-boolean textview_objecttest(register class textview  *self,char  *name,char  *desiredname);
+boolean textview_objecttest(register class textview  *self,const char  *name,const char  *desiredname);
 void textview_InsertInsetCmd (register class textview  *self, long  rock);
 void textview_InsertFile(class textview  *self);
 void textview_YankCmd(register class textview  *self);
@@ -89,7 +79,7 @@ void textview_PutBeforeCmd(register class textview  *self);
 void textview_BackwardsRotatePasteCmd(class textview  *self);
 void textview_RotatePasteCmd(class textview  *self);
 void textview_InsertNLCmd(register class textview  *self);
-static int stringmatch(register class text  *d,register long  pos,register char  *c);
+static int stringmatch(register class text  *d,register long  pos,register const char  *c);
 void textview_ZapRegionCmd(register class textview  *self);
 void textview_KillLineCmd(register class textview  *self);
 void textview_MITKillLineCmd(register class textview  *self);
@@ -177,7 +167,7 @@ boolean ConfirmViewDeletion(class textview  *self, long  pos , long  len)
 {
     class text *d;
     boolean hasViews;
-    static char *yesOrNo[] = {"Yes", "No", NULL};
+    static const char * const yesOrNo[] = {"Yes", "No", NULL};
     long answer;
     class environment *env;
 
@@ -422,7 +412,7 @@ void textview_YankLineCmd(register class textview  *self)
     yankKillLine(self, YANK);
 }
 
-boolean textview_objecttest(register class textview  *self,char  *name,char  *desiredname)
+boolean textview_objecttest(register class textview  *self,const char  *name,const char  *desiredname)
 {
     if(ATK::LoadClass(name) == NULL){
         char foo[640];
@@ -492,7 +482,9 @@ void textview_InsertInsetCmd (register class textview  *self, long  rock)
 
 void textview_InsertFile(class textview  *self)
 {
-    char filename[MAXPATHLEN], *basename, *nmend;
+    char filename[MAXPATHLEN];
+    const char *basename;
+    char *nmend;
     FILE *inputFile;
     long initialPos;
     long pos;
@@ -666,7 +658,7 @@ void textview_InsertNLCmd(register class textview  *self)
     }
 }
 
-static int stringmatch(register class text  *d,register long  pos,register char  *c)
+static int stringmatch(register class text  *d,register long  pos,register const char  *c)
 {
     /* Tests if the text begins with the given string */
     while(*c != '\0') {

@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RCS/vui.c,v 1.2 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /* 
  *      This module contains the mainline VUI code for access
  *      to Message servers from an IBM PC/XT/AT
@@ -46,7 +41,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RC
 #include <hdrparse.h>
 #include <vuidebug.h>
 
-static char default_headers[] = "cc:date:from:subj:to";
+static const char default_headers[] = "cc:date:from:subj:to";
 #define DEFAULT_HEADERS strcpy(malloc(strlen(default_headers)+1),default_headers)
 
 extern char *getenv(), CUI_VersionString[], *GetSUser();
@@ -94,7 +89,7 @@ char ProgramVersion[80];
 char RunningOnHost[81];
 extern char *ProgramPrefix;
 
-char IBMid[] = "(c) Copyright IBM Corporation, 1987, 1988 ";
+const char IBMid[] = "(c) Copyright IBM Corporation, 1987, 1988 ";
 char *mailyn;     /* Switch indicator       */
 char *bbrdyn;     /* Switch indicator       */
 char *sendyn;     /* Switch indicator       */
@@ -1176,19 +1171,19 @@ Boolean visible;
 
 HelpCmd ()
 {
-   printf("  ** Visual User Interface - Full screen access to the Andrew Message System **\n\
-  vui [ -m | -p <name> '<date>' | -b <name> '<date>' | -n | -s | -f | -c]\n\
-       -m       Process mail.\n\
-       -c       Use larger screen size for EGA/VGA (43 or 50 by 80)\n");
+   printf("  ** Visual User Interface - Full screen access to the Andrew Message System **\n"
+"  vui [ -m | -p <name> '<date>' | -b <name> '<date>' | -n | -s | -f | -c]\n"
+"       -m       Process mail.\n"
+"       -c       Use larger screen size for EGA/VGA (43 or 50 by 80)\n");
    printf(
-"       -p       Read personal folders.\n\
-       -b       Read bulletin boards.\n\
-       -n       Check for new messages on all subscriptions.\n\
-       -s       Send a message.\n");
+"       -p       Read personal folders.\n"
+"       -b       Read bulletin boards.\n"
+"       -n       Check for new messages on all subscriptions.\n"
+"       -s       Send a message.\n");
    printf(
-"     <name>     The name of a folder or bboard you want to read.\n\
-     <date>     A date to see messages since.  If you enter more\n\
-                than one word use quotes (i.e. '7 days ago').\n");
+"     <name>     The name of a folder or bboard you want to read.\n"
+"     <date>     A date to see messages since.  If you enter more\n"
+"                than one word use quotes (i.e. '7 days ago').\n");
 }
 
 SetTerminalParams (h, w)

@@ -25,19 +25,10 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/roffstyl.C,v 1.3 1993/06/09 01:59:39 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* styles */
 
 
+#include <andrewos.h>
 #include <text.H>
 #include <style.H>
 #include <stylesheet.H>
@@ -52,12 +43,10 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  *  This is a no-no on SPARC.
  */
 
-#ifndef NORCSID
-#endif
 void WriteText(class rofftext  *self);
-int ChangeStyle(class rofftext  *self,int  id,char  *st);
+int ChangeStyle(class rofftext  *self,int  id,const char  *st);
 void CloseStyle(class rofftext  *self);
-int BeginStyle(class rofftext  *self,char  *st);
+int BeginStyle(class rofftext  *self,const char  *st);
 void EndStyle(class rofftext  *self,int  ID);
 void CloseAllStyles(class rofftext  *self);
 
@@ -73,7 +62,7 @@ void WriteText(class rofftext  *self)
  *
  */
 
-int ChangeStyle(class rofftext  *self,int  id,char  *st)
+int ChangeStyle(class rofftext  *self,int  id,const char  *st)
 {
     int l, newid;
 
@@ -130,7 +119,7 @@ void CloseStyle(class rofftext  *self)
 
 /* begin a style.  Caller must hang onto returned ID to close style */
 
-int BeginStyle(class rofftext  *self,char  *st)
+int BeginStyle(class rofftext  *self,const char  *st)
 {
     class style *style;
     

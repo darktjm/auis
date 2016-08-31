@@ -39,7 +39,7 @@ public:
 
 
      class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
-     void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
+     void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
 
     
 	static boolean InitializeClass();

@@ -55,23 +55,23 @@ public:
     
        void Clear();
     
-      virtual boolean AddItemAtIndex(long index, char *str, chlist_itemfptr proc, long rock)  ;
-      virtual boolean AddItemToEnd(char *str, chlist_itemfptr proc, long rock)  ;
-      virtual boolean DeleteItem(char *str)  ;
+      virtual boolean AddItemAtIndex(long index, const char *str, chlist_itemfptr proc, long rock)  ;
+      virtual boolean AddItemToEnd(const char *str, chlist_itemfptr proc, long rock)  ;
+      virtual boolean DeleteItem(const char *str)  ;
       virtual boolean DeleteItemByIndex(long index)  ;
-      virtual long GetIndexByString(char *str)  ;
+      virtual long GetIndexByString(const char *str)  ;
       virtual long GetIndexByData(long rock)  ;
-      virtual struct listitem * FindItem(char *str)  ;
+      virtual struct listitem * FindItem(const char *str)  ;
       virtual struct listitem * FindItemByIndex(unsigned long index)  ;
       virtual chlist_freefptr SetFreeProcedure(chlist_freefptr freeProc)  ;
-      virtual boolean ChangeItem(char *oldstr, char *newstr)  ;
-      virtual boolean ChangeItemByIndex(long index, char *newstr)  ;
-      virtual boolean ChangeData(char *oldstr, long rock)  ;
+      virtual boolean ChangeItem(const char *oldstr, const char *newstr)  ;
+      virtual boolean ChangeItemByIndex(long index, const char *newstr)  ;
+      virtual boolean ChangeData(const char *oldstr, long rock)  ;
       virtual boolean ChangeDataByIndex(long index, long rock)  ;
       virtual void DefineRegion(long regionNum);
       virtual void DefineStringRegion(long regionNum);
-      virtual void SetRegionStringByIndex(long index, long regionNum, char *regionStr);
-      virtual void SetRegionString(char *str, long regionNum, char *regionStr);
+      virtual void SetRegionStringByIndex(long index, long regionNum, const char *regionStr);
+      virtual void SetRegionString(const char *str, long regionNum, const char *regionStr);
       virtual long GetRegionInfoForPosition(long index, long position, long *size, long *offset)  ;
       virtual long GetIndexByPosition(long position, long *regionID, long *size, long *offset)  ;
       virtual void EnumerateItems(long startIndex, long length, chlist_efptr proc, long rock);

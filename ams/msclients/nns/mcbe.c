@@ -25,16 +25,10 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/msclients/nns/RCS/mcbe.c,v 2.6 1992/12/15 21:22:34 rr2b Stab74 $";
-#endif
-
 /* Methods for Message Cache Bucket Entries
 */
 
+#include <andrewos.h>
 #include <big.h>
 
 char           *MCBEGetFilename(mcbe)

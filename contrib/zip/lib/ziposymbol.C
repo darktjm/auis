@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/ziposymbol.C,v 1.7 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /* ziposym.c	Zip Object -- Symbols					      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -58,8 +53,8 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
-#include <andrewos.h>
 
+#include <andrewos.h>
 #include <view.H>
 #include <environ.H>
 #include <text.H>
@@ -118,7 +113,7 @@ ATKdefineRegistry(ziposymbol, ziporect, NULL);
 static long Draw( class ziposymbol *self, zip_type_figure figure, zip_type_pane pane );
 static long Draw_Symbol( class ziposymbol *self, zip_type_figure figure, zip_type_pane pane, char *algorithm, zip_type_pixel left , zip_type_pixel top , zip_type_pixel width , zip_type_pixel height,  long x_factor , long y_factor, boolean print );
 static long Identify_Symbol_Sets( class ziposymbol *self );
-static int Identify_Pathed_Symbol_Sets( class ziposymbol *self, char *path );
+static int Identify_Pathed_Symbol_Sets( class ziposymbol *self, const char *path );
 static struct symbol_set * Symbol_Set( class ziposymbol *self, char	  *set_name );
 static struct symbol * Symbol_Set_Vector( class ziposymbol *self, char  *set_name );
 static long Open_Symbol_Set_File( class ziposymbol *self, struct symbol_set*set );
@@ -833,7 +828,7 @@ long Identify_Symbol_Sets( class ziposymbol		  *self )
   }
 
 static int
-Identify_Pathed_Symbol_Sets( class ziposymbol		  *self, char				  *path )
+Identify_Pathed_Symbol_Sets( class ziposymbol		  *self, const char				  *path )
       {
   long				  status = zip_ok, count, i, j;
   char					  msg[1025];
@@ -1083,10 +1078,8 @@ Identify_Paths( class ziposymbol	      *self, zip_type_paths	      *paths_ptr )
 	else status = zip_insufficient_stream_space;
       }
     if ( (*paths_ptr)->zip_paths_vector[(*paths_ptr)->zip_paths_count] =
-         (char *) malloc( strlen( symbol_library_path ) + 1 ))
+         strdup( symbol_library_path ) )
     {
-      strcpy( (*paths_ptr)->zip_paths_vector[(*paths_ptr)->zip_paths_count],
-		symbol_library_path );
       (*paths_ptr)->zip_paths_count++;
     }
       else status = zip_insufficient_stream_space;
@@ -1101,10 +1094,11 @@ static char *
 Symbol_Algorithm( class ziposymbol		  *self, zip_type_figure		   figure )
       {
   long				  symbol_index;
-  char				 *s, *t, *algorithm = NULL, *number;
+  char				 *s, *t, *algorithm = NULL;
+  const char			 *number;
   static char				  string[257], symbol_string[257];
   struct symbol		 *symbol_vector;
-  static char				 *old_names[] =
+  static const char			 * const old_names[] =
     { "Arrows", "arrows",	"Borders", "borders",
       "CMU", "cmu",		"Computers", "computer",
       "DayBooks", "daybooks",
@@ -1114,7 +1108,7 @@ Symbol_Algorithm( class ziposymbol		  *self, zip_type_figure		   figure )
       "Mathematical", "math",	"Organization", "organize",
       "Shields", "shields",	"Stars", "stars",
       NULL };
-  char				**old_name = old_names;
+  const char		* const *old_name = old_names;
 
   IN(Symbol_Algorithm);
   if ( Identify_Symbol_Sets( self ) == zip_ok )

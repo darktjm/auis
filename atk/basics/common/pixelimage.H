@@ -36,7 +36,7 @@ ATK_INTER
  
 
 /*
-/* Pixel Image -- a simple data structure for blasting bits 
+ * Pixel Image -- a simple data structure for blasting bits 
 
 */
 

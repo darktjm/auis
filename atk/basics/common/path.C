@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/path.C,v 3.9 1996/07/06 02:47:28 wjh Exp $";
-#endif
-
-
 ATK_IMPL("path.H")
 
 #include <ctype.h>
@@ -78,7 +71,7 @@ static void FoldName (register char  *p);
 #endif
 static long SetNewHome(char  *shortPathName, const char  *name, const char  *cell, const char  *dir, long  dirlen);
 static void HandleCellTwiddle(const char  *fromString, char  *toString);
-static void HandleRelativeFileName(const char  *fromString, char  *toString, char  *basefile);
+static void HandleRelativeFileName(const char  *fromString, char  *toString, const char  *basefile);
 int CompareFileNames(char  **a, char  **b);
 
 
@@ -329,7 +322,7 @@ enum segtype {Dot, DotDot, ID, Empty};
 #define NSTATES 7
 #define NTYPES 4
 
-static struct {enum segaction Action; enum state NewState;}
+static const struct {enum segaction Action; enum state NewState;}
 	SegTrans[NSTATES][NTYPES]
 = {
 /* Start */  {{Naught, IDot},  {Naught, IDots},{SaveX, IX}, {Naught, ISlash}},
@@ -341,7 +334,7 @@ static struct {enum segaction Action; enum state NewState;}
 /* X */	     {{SaveY, X},      {Backup, Check},{NextX, X},   {SaveY, X}}
 };
 
-static char *LastSeg[NSTATES][NTYPES]
+static const char * const LastSeg[NSTATES][NTYPES]
 	= {
 /* Start */	{".",     "..",     "x",     "."},
 /* ISlash */	{"/",     "/..",    "/x",    "/"},
@@ -363,7 +356,8 @@ FoldName (register char  *p		/* path to fold */)
 	char *src;	/* start of current segment */
 	char *sx;	/* segment scanner 
 				segment extends from src to sx-1 */
-	char *lx;	/* last segment string */
+	const char *lx;	/* last segment string */
+	char *slx;
 	enum segtype CurrType;
 
 	*SavedY = '\0';
@@ -426,8 +420,8 @@ FoldName (register char  *p		/* path to fold */)
 				break;
 			}
 			*dest = '\0';
-			lx = strrchr(p, '/');	/* find last slash */
-			if (lx == NULL) {
+			slx = strrchr(p, '/');	/* find last slash */
+			if (slx == NULL) {
 				/* no slash generated yet */
 				strcpy(SavedY, p);
 				NextState = (strcmp(SavedY, "..") == 0)
@@ -435,8 +429,8 @@ FoldName (register char  *p		/* path to fold */)
 				dest = p;
 				break;
 			}
-			strcpy(SavedY, lx+1);
-			dest = lx;
+			strcpy(SavedY, slx+1);
+			dest = slx;
 			if (strcmp(SavedY, "..") != 0)
 				NextState = X;
 			else if (*p == '/')
@@ -621,9 +615,11 @@ char *path::TruncatePath(char  *frompath, char  *result, long  limit, boolean  t
     static char passwdName[100];
     static char passwdDir[MAXPATHLEN];
     static int passwdDirLen;
+#ifdef AFS_ENV
     static char cellPasswdName[100];
     static char cellPasswdDir[MAXPATHLEN];
     static int cellPasswdDirLen;
+#endif /* AFS_ENV */
     static boolean gotBaseInfo = FALSE;
     static boolean CheckOwnerHome = FALSE;
 #ifdef AFS_ENV
@@ -836,8 +832,10 @@ static void HandleCellTwiddle(const char  *fromString, char  *toString)
     }
     else {
 	long pos;
-	char name[MAXPATHLEN];
+#ifdef AFS_ENV
 	long endpos;
+#endif /* AFS_ENV */
+	char name[MAXPATHLEN];
 	char cellName[MAXPATHLEN];
 	char *cn = cellName;
 
@@ -885,7 +883,7 @@ static void HandleCellTwiddle(const char  *fromString, char  *toString)
      }
 }
 
-static void HandleRelativeFileName(const char  *fromString, char  *toString, char  *basefile)
+static void HandleRelativeFileName(const char  *fromString, char  *toString, const char  *basefile)
 {
     register char *slash;
     /* Use allDone instead of confusing combination of #if/#endif and if/else's */
@@ -951,11 +949,10 @@ static void HandleRelativeFileName(const char  *fromString, char  *toString, cha
     if the file name needs to be unfolded.
 */
 
-const char *path::UnfoldFileName(const char  *fromString, char  *toString, char  *basefile) 
+const char *path::UnfoldFileName(const char  *fromString, char  *toString, const char  *basefile)
 {
     const char *fs = fromString;
     char tempstr[2*MAXPATHLEN+1];
-    boolean uncName=FALSE;
 
     while (isspace(*fs))
         fs++;
@@ -966,6 +963,7 @@ const char *path::UnfoldFileName(const char  *fromString, char  *toString, char 
 #ifndef DOS_STYLE_PATHNAMES
     if (*fs == '/') strcpy(toString, fs);
 #else
+    boolean uncName=FALSE;
     char *slash;
 	/* Change all backslashes to forward slashes
 	 * just to make it pretty */
@@ -1049,10 +1047,10 @@ boolean path::Scan(boolean  statEverything)
     struct stat statBuf;
     DIR *thisDir;
     DIRENT_TYPE *dirEntry;
-    long filesalloced;
-    long dirsalloced;
-    long nextfile;
-    long nextdir;
+    long filesalloced = 0;
+    long dirsalloced = 0;
+    long nextfile = 0;
+    long nextdir = 0;
     long len;
     boolean noProblems = FALSE;
 #ifdef AFS_ENV
@@ -1340,11 +1338,12 @@ void path::FindFileInPath(char *retbuff, const char *path, const char *fname)
 		which is ignored
 */
 	boolean 
-path::RelativizePathname(char *name, char *basepath, int maxup) {
+path::RelativizePathname(char *name, const char *basepath, int maxup) {
 	if ( ! name || ! basepath) return FALSE;
 
 	// scan across common parts of names 
-	char *nx = name, *bx = basepath;
+	char *nx = name;
+	const char *bx = basepath;
 	while (*nx && *bx && *nx == *bx) nx++, bx++;
 	nx--, bx--;
 	while (nx > name && *nx != '/') 
@@ -1359,9 +1358,9 @@ path::RelativizePathname(char *name, char *basepath, int maxup) {
 		return FALSE;
 
 	// construct relative name from ../s and tail of name
-	bx = name; 
+	char *nbx = name; 
 	while (ndirs --) 
-		*bx++ = '.', *bx++ = '.', *bx++ = '/';
-	while (*bx++ = *nx++) {}
+		*nbx++ = '.', *nbx++ = '.', *nbx++ = '/';
+	while ((*nbx++ = *nx++)) {}
 	return TRUE;
 }

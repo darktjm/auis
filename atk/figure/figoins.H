@@ -23,8 +23,6 @@ ATK_INTER
 // WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 // 
 //  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figoins.H,v 3.5 1994/11/30 20:42:06 rr2b Stab74 $
 */
 
 #include <figorect.H>
@@ -41,10 +39,10 @@ public:
 
     
        class figobj * Instantiate(class figtoolview *v, long rock)  ;  
-       void PrintObject(class figview *v, FILE *file, char *prefix, boolean newstyle);
+       void PrintObject(class figview *v, FILE *file, const char *prefix, boolean newstyle);
        void WriteBody(FILE *fp);
        long ReadBody(FILE *file, boolean recompute)  ;
-       char * ToolName(class figtoolview *v, long rock)  ;
+       const char * ToolName(class figtoolview *v, long rock)  ;
        enum figobj_Status Build( class figview *v, enum view_MouseAction action, long x, long y, long clicks)  ; 
        void Draw(class figview *v); 
        void RecomputeBounds();

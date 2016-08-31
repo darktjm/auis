@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/logview.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("logview.H")
 #include <view.H>
 #include <textview.H>
@@ -47,8 +37,6 @@ static class menulist *logviewMenu;
 
 
 ATKdefineRegistry(logview, textview, logview::InitializeClass);
-#ifndef NORCSID
-#endif
 static int logview_NoTextviewKey();
 
 

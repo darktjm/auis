@@ -32,7 +32,7 @@ public:
 	webview();
 	virtual ~webview();
 
-    static int VisitWeb(class view *self,char *url, int flags=0, const char *postdata=NULL) ;
+    static int VisitWeb(class view *self,const char *url, int flags=0, const char *postdata=NULL) ;
     static void movehist(class view *self,int res,class view *v);
     static void Clone(class view *self);
     static void OpenURL(class view *self);

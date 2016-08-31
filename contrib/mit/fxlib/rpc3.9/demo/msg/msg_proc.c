@@ -1,5 +1,3 @@
-/* @(#)msg_proc.c	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,11 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/demo/msg/RCS/msg_proc.c,v 1.3 1992/12/15 21:53:21 rr2b Stab74 $";
-#endif
 
 /*
  * msg_proc.c: implementation of the remote procedure "printmessage"

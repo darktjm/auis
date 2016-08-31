@@ -25,22 +25,13 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/eq/RCS/eqvcmds.C,v 1.7 1994/08/12 18:50:25 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * eqvcmds.c
  * This module handles the view commands for eq.
  */
 
 
+#include <andrewos.h>
 
 #define AUXMODULE 1
 #include <eqview.H>
@@ -59,10 +50,10 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 
-char *line = "{ zilch ^}";
+const char line[] = "{ zilch ^}";
 
-char* eqview_cut_prefix = "{ lpile d_eqstyle { ";
-char* eqview_cut_suffix = "} } ";
+const char eqview_cut_prefix[] = "{ lpile d_eqstyle { ";
+const char eqview_cut_suffix[] = "} } ";
 
 /*
  * Call this routine when you have changed something in
@@ -70,8 +61,6 @@ char* eqview_cut_suffix = "} } ";
  * the screen eventually via the update mechanism.
  */
 
-#ifndef NORCSID
-#endif
 void eqview_Default(class eqview  *self, char  c);
 void eqview_WriteC(class eqview  *self);
 void eqview_WritePS(class eqview  *self);
@@ -101,13 +90,13 @@ void eqview_Paste(class eqview  *self);
 void eqview_Exit();
 void eqview_DumpAndWrite(class eqview  *self);
 void eqview_doc();
-void eqview_DoSpecial(class eqview  *self, char  *s);
+void eqview_DoSpecial(class eqview  *self, const char  *s);
 void eqview_Special(class eqview  *self, char  c);
 void eqview_SuperScript(class eqview  *self);
 void eqview_SubScript(class eqview  *self);
 void eqview_AboveScript(class eqview  *self);
 void eqview_BelowScript(class eqview  *self);
-void eqview_String(class eqview  *self, char  *s);
+void eqview_String(class eqview  *self, const char  *s);
 void eqview_Root(class eqview  *self);
 void eqview_Fraction(class eqview  *self);
 void eqview_lbrace(class eqview  *self);
@@ -803,7 +792,7 @@ void eqview_Close(class eqview  *self, char  c)
 	    break;
 	else if (f->symbol->genre == CLOSE)
 	    level++;
-	else if (f->symbol->genre == OPEN && f->symbol != root) {	
+	else if (f->symbol->genre == OPEN && f->symbol != eq_root) {	
 	    if (level != 0)
 		level--;
 	    else {
@@ -919,9 +908,9 @@ void eqview_Paste(class eqview  *self)
     pos += len;
     len = 0;
 
-    if ((f = (eqptr)->Access( pos)) != NULL && f->symbol == zilch)
+    if ((f = (eqptr)->Access( pos)) != NULL && f->symbol == eq_zilch)
 	(eqptr)->Delete( pos);
-    if ((f = (eqptr)->Access( pos-1)) != NULL && f->symbol ==  zilch)
+    if ((f = (eqptr)->Access( pos-1)) != NULL && f->symbol ==  eq_zilch)
 	(eqptr)->Delete( --pos);
 
     while(i < ct) {
@@ -1027,7 +1016,7 @@ void eqview_doc()
  * Called as a result of eqview_Special
  */
 
-void eqview_DoSpecial(class eqview  *self, char  *s)
+void eqview_DoSpecial(class eqview  *self, const char  *s)
 {
     long pos, len, added;
 
@@ -1301,7 +1290,7 @@ void eqview_BelowScript(class eqview  *self)
  * There should be a third parameter to keymap-called routines!
  */
 
-void eqview_String(class eqview  *self, char  *s)
+void eqview_String(class eqview  *self, const char  *s)
 {
     long pos, len, added;
 

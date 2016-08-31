@@ -25,23 +25,12 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/eq/RCS/draweqv.C,v 1.2 1993/05/06 15:38:51 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * draweqv.c
  * This module implements the eq drawing routines.
  */
 
-
-
+#include <andrewos.h>
 
 #define AUXMODULE 1
 #include <eqview.H>
@@ -180,8 +169,6 @@ long exHeightTable[] = {
      16,   8,   4,   1,  16,   8,   4,   1,
       0,   0,   0,   0,   0,   0,   0,   0
 };
-#ifndef NORCSID
-#endif
 #ifdef NOTUSED
 static void ZeroSpacing();
 #endif /* NOTUSED ? */
@@ -212,8 +199,9 @@ static void ZeroSpacing() {  /* for debugging */
  * Fonts
  */
 
+/* macro below fills in font member */
 struct {
-    char *fontfamily;
+    const char *fontfamily;
     long fontstyle;
     long fontsize;
     class fontdesc *font;
@@ -287,7 +275,7 @@ static void eqview_FormatSimple(class eqview  *self, struct formula  *f			/* pri
 {
     class fontdesc *font = FONT(f->symbol->what, eqstyle);
     struct fontdesc_charInfo info;
-    char *s;
+    const char *s;
     int i, x = 0;
 
     if (f->symbol->type!=SIMPLE)
@@ -328,8 +316,9 @@ static void eqview_FormatSimple(class eqview  *self, struct formula  *f			/* pri
  * Generate extender of type 'code' and size 'size' into 'string'
  */
 
+/* font member set by macro */
 struct {
-    char *fontfamily;
+    const char *fontfamily;
     long fontstyle;
     long fontsize;
     class fontdesc *font;
@@ -838,13 +827,13 @@ struct formula *eqview::Draw(class eq  *eqptr, struct formula  *f, long  x , lon
 	    case BEGIN:
 		if (prev && prev->symbol->genre == OPEN) {
 		    this_c->deletable = TRUE;
-		    if (prev->symbol != root)
+		    if (prev->symbol != eq_root)
 			this_c->transparent = TRUE;
 		}
 		next = (this)->Draw( eqptr, this_c, x, y);
 		next->has_hot_spot = !this_c->has_hot_spot;
 		next->transparent = this_c->transparent;
-		if (this_c->deletable && ! (prev && prev->symbol == root))
+		if (this_c->deletable && ! (prev && prev->symbol == eq_root))
 		    next->deletable = TRUE;
 		break;
 	    case END:

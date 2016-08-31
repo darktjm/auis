@@ -23,16 +23,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/pvalcv.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
-
- 
-
 ATK_IMPL("pvalcv.H")
 
 
@@ -48,9 +38,6 @@ ATK_IMPL("pvalcv.H")
 
 
 ATKdefineRegistry(pvalcv, pvalsbv, NULL);
-#ifndef NORCSID
-#endif
-
 
 pvalcv::pvalcv()
 {
@@ -68,7 +55,7 @@ pvalcv::~pvalcv()
 void pvalcv::UpdateSButton()
 {
     class sbutton *sb=(this)->GetSButton();
-    char *ps=(DATA(this))->IndexValueString( 0);
+    const char *ps=(DATA(this))->IndexValueString( 0);
     class atom *a;
 
     if(ps==NULL) return;

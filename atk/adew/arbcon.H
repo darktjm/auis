@@ -86,9 +86,9 @@ static void InitArbiters();
  	class text *ArbCelList;
  	class cltextview *ArbCelListView;
  	class text *ArbArbList;
- 	char *ArbiterName;
- 	char *ObjectName;
- 	char *ViewName;
+ 	const char *ArbiterName;
+ 	const char *ObjectName;
+ 	const char *ViewName;
 
 /* user code ends here for classdata */
 	class view *v;

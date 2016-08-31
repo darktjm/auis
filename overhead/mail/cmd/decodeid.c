@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/cmd/RCS/decodeid.c,v 1.13 1994/06/09 21:18:04 rr2b Stab74 $";
-#endif
-
 #include <stdio.h>
 #include <mailconf.h>
 #include <ctype.h>

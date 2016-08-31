@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/hdlnew.c,v 2.61 1996/09/03 18:58:15 robr Exp $";
-#endif
-
-
-                                 
-
 #include <fcntl.h>
 #include <andyenv.h>
 #include <util.h>

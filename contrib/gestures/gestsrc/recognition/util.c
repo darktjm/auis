@@ -32,11 +32,6 @@ the full agreement.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/recognition/RCS/util.c,v 1.6 1993/11/03 19:25:32 rr2b Stab74 $";
-#endif
-
 /*
  * Mundane utility routines
  *	see util.h

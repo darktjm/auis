@@ -27,11 +27,6 @@
 
 #include <andrewos.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/fnnode.c,v 2.9 1993/06/30 21:59:00 rr2b Stab74 $";
-#endif
-
 #include  <fnnode.h>
 
 EliFn_t        *eliFn_GetNew(st)

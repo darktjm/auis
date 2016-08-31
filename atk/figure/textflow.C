@@ -21,10 +21,6 @@
  *  $
 */
 
-#ifndef NORCSID
-char *textflow_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/textflow.C,v 1.1 1995/03/23 21:09:49 Zarf Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("textflow.H")
 #include <textflow.H>
@@ -43,7 +39,7 @@ textflow::~textflow()
     ATKinit;
 }
 
-char *textflow::ViewName()
+const char *textflow::ViewName()
 {
     return "textflowview";
 }

@@ -71,14 +71,10 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/gifwr.C,v 3.3 1994/03/12 21:12:28 rr2b Stab74 $";
-#endif
 #include <image.H>
 #define AUXMODULE 1
 #include <gif.H>
+#include "gifl.H"
 typedef long int        count_int;
 
 static int  Width, Height;

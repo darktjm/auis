@@ -21,10 +21,6 @@
  *  $
 */
 
-#ifndef NORCSID
-char *textflowview_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/textflowview.C,v 1.2 1995/03/29 20:39:30 Zarf Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("textflowview.H")
 #include <textflowview.H>
@@ -52,7 +48,7 @@ textflowview::~textflowview()
 void textflowview::BuildToolList(struct figtoolview_tool_t *&list, int &listnum, int &listsize)
 {
 #define FIGOBJS_NUM (1)
-    static struct figtoolview_tool_t objectlayout[FIGOBJS_NUM] = {
+    static const struct figtoolview_tool_t objectlayout[FIGOBJS_NUM] = {
 	{"figoflow", 0},
     };
     int ix;
@@ -187,7 +183,7 @@ long textflowview::BuildPlan(struct textps_layout_plan **planptr, long pagewidth
     return startcol;
 }
 
-void *textflowview::GetPSPrintInterface(char *printtype)
+void *textflowview::GetPSPrintInterface(const char *printtype)
 {
     static struct textview_insetdata dat;
 

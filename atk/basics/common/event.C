@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/event.C,v 3.4 1994/12/13 20:35:03 rr2b Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("event.H")
 
 #include <event.H>
@@ -103,7 +94,7 @@ void event::Cancel()
     delete this;
 }
 
-class event *event::Enqueue(long  time, event_fptr proc, void  *procdata)
+class event *event::Enqueue(long  time, event_fptr proc, const void  *procdata)
                 {
     register class event *e;
 
@@ -160,7 +151,7 @@ void event::StartTimer()
     register class event *e = timerQueue;
 
     osi_GetTimes(&tp);
-    if (timerQueue) 
+    if (timerQueue) {
 	if (timeInited) {
 	    /* reduce every time by 'now' */
 
@@ -178,6 +169,7 @@ void event::StartTimer()
 	    for ( ; e; e = e->next)
 		e->t = 0;
 	}
+    }
     currSec = tp.Secs;
     tuBase = - event_USECtoTU(tp.USecs);
     timeInited = TRUE;
@@ -202,7 +194,7 @@ long event::HandleTimer(long  currentTime)
     /* handle first event on queue */
 
     timerQueue = e->next;
-    (*e->proc)(e->procdata, currentTime);
+    (*e->proc)((void *)e->procdata, currentTime);
     delete e;
 
     if (timerQueue == NULL) return event_ENDOFTIME;

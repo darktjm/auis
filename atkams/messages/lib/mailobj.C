@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/mailobj.C,v 1.7 1995/08/09 18:20:49 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include <util.h>
 #include <mailobj.H>
 #include <environment.H>
@@ -175,7 +166,7 @@ mailobj::SetTextInsertion(class text  *t, class environment  *env)
 }
 
 void
-mailobj::ReadAlienMail(char  *ContentType , char  *ContentEncoding, FILE  *fp, int  StopAtEndData)
+mailobj::ReadAlienMail(const char  *ContentType , const char  *ContentEncoding, FILE  *fp, int  StopAtEndData)
 {
     int Alloced = 0, Used = 0, len, needsencoding=0;
 #define CHUNKSIZE 5000
@@ -264,8 +255,8 @@ void mailobj::RunMetamail()
     }
 }
 
-static char basis_hex[] = "0123456789ABCDEF";
-static char basis_64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+static const char basis_hex[] = "0123456789ABCDEF";
+static const char basis_64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 /* static int hexchar(char  c)
 {
@@ -437,17 +428,15 @@ static void output64chunk(unsigned int c1 , unsigned int c2 , unsigned int c3, i
 
 static void WriteEncoded(class mailobj  *self, FILE  *fp)
 {
-    char *s;
+    const char *s;
     int CodeToUse, needtoencode;
     if (self->ContentType && self->ContentType[0]) {
 	WriteCtypeNicely(fp, self->ContentType);
     }
     s = (self)->GetLabel( 0);
     if (s) {
-	char *tt = index(s, '\n');
-	if (tt) *tt = '\0';
-	fprintf(fp, "Content-Description: %s\n", s);
-	if (tt) *tt = '\n';
+	const char *tt = index(s, '\n');
+	fprintf(fp, "Content-Description: %.*s\n", (int)(tt ? tt - s : strlen(s)), s);
     }
     if (self->EncodingCode == ENC_NONE
 	 && self->EncodingNeeded != ENC_NONE) {
@@ -531,7 +520,8 @@ long mailobj::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usag
 
 long mailobj::Read(FILE  *file, long  id)
 {
-    char LineBuf[200], Ctype[2000], Cenc[2000], Descrip[2000], c, *ctp;
+    char LineBuf[200], Ctype[2000], Cenc[2000], Descrip[2000], c;
+    const char *ctp;
 
     Ctype[0] = '\0';
     Cenc[0] = '\0';
@@ -560,7 +550,7 @@ long mailobj::Read(FILE  *file, long  id)
 	    strcpy(Descrip, LineBuf+20);
 	}
     }
-    ctp = Ctype[0] ? Ctype : (char *)"text/plain";
+    ctp = Ctype[0] ? Ctype : "text/plain";
     while (*ctp && isspace(*ctp)) ++ctp;
     if (Descrip[0]) {
 	sprintf(LineBuf, "%s ('%s' format)", Descrip, ctp);
@@ -573,7 +563,7 @@ long mailobj::Read(FILE  *file, long  id)
     return dataobject_NOREADERROR;
 } 		
 
-char *mailobj::ViewName()
+const char *mailobj::ViewName()
 {
     return "mailobjv";
 }

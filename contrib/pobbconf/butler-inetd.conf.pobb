@@ -31,10 +31,6 @@
 # 5799-CGZ (C) COPYRIGHT = NONE
 # LICENSED MATERIALS - PROPERTY OF IBM
 #
-# $$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/pobbconf/RCS/butler-inetd.conf.pobb,v 1.2 1992/12/17 03:30:37 rr2b Stab74 $$ 
-# $$ACIS:inetd.conf 9.0$$ 
-# $$Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/pobbconf/RCS/butler-inetd.conf.pobb,v $$ 
-#
 # Internet server configuration database
 #
 #Standard internet services

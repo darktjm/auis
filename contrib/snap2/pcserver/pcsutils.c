@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/pcserver/RCS/pcsutils.c,v 2.14 1993/09/22 19:51:25 gk5g Stab74 $";
-#endif
-
 /*
  *	PC Server - Utility Component
  *	Access to the VICE File System for IBM PC/XT/ATs

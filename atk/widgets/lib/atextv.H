@@ -141,7 +141,7 @@ class ATextv : public AWidgetView {
     boolean RecSrchReplace(class dataobject *text, long pos, long len);
     void RecSrchExpose(const struct rectangle &logical, 
 		       struct rectangle &hit);
-    void *GetPSPrintInterface(char *printtype);
+    void *GetPSPrintInterface(const char *printtype);
     void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);     
     void DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight);
     void GetPrintOrigin(long w, long h, long *xoff, long *yoff);

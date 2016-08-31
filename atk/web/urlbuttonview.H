@@ -24,7 +24,7 @@ class urlbuttonview : public sbuttonv {
     // overrides
     boolean Touch(int ind, enum view_MouseAction action);
     void ReceiveInputFocus();
-    void *GetPSPrintInterface(char *printtype);
+    void *GetPSPrintInterface(const char *printtype);
 
     // new function
     inline urlbutton *GetURLButton()	{ return (urlbutton *)ButtonData(); }

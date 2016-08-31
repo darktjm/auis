@@ -42,7 +42,7 @@ public:
      void PostMenus(class menulist *menulist);
      void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
      void Update();
-     void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
+     void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
      class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
      view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
      void GetOrigin(long width, long height, long *originX, long *originY);
@@ -58,7 +58,7 @@ public:
      boolean RecSrchResume(struct SearchPattern *pat);
      boolean RecSrchReplace(class dataobject *text, long pos, long len);
      void PrintPSDoc(FILE *outfile, long pagew, long pageh);
-     void *GetPSPrintInterface(char *printtype);
+     void *GetPSPrintInterface(const char *printtype);
      void DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight);
      void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);
      void ChildLosingInputFocus();
@@ -68,7 +68,7 @@ public:
 
     virtual void RecSrchExpose(const struct rectangle &logical, struct rectangle &hit);
 
-    virtual char *WantInformation(char *name);
+    virtual const char *WantInformation(const char *name);
     //  when name=="style":
     // compute a style representing the effects of all the styles
     // effective at this matte's location in the text.  the caller

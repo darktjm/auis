@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/purge/RCS/purge.c,v 1.17 1995/07/11 19:58:46 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	purge.c
 	Purger for the database of already-sent messages on

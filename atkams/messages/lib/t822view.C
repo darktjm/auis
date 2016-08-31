@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/t822view.C,v 1.5 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 #include <sys/param.h>
 
 #include <textview.H>
@@ -67,8 +61,6 @@ static class menulist *t822view_standardmenulist;
 
 
 ATKdefineRegistry(t822view, messages, t822view::InitializeClass);
-#ifndef NORCSID
-#endif
 void BodiesCompound(class t822view  *self, char  *cmds);
 void BodiesTextviewCommand(class t822view  *self, char  *cmds);
 void BodiesCaptionsCommand(class t822view  *self, char  *cmds);
@@ -151,10 +143,10 @@ void t822view::SetCaptions(class captions  *cap)
     this->mycaps = cap;
 }
 
-void t822view::ShowHelp(char  *text)
+void t822view::ShowHelp(const char  *text)
 {
     int len;
-    static char *InitialHelpString = "To see the captions for messages in a folder, click with the left mouse button on the folder name.\n\nTo see a message, click on its caption in the middle region of the window.\n\nTo perform actions on a folder, or get information about it, click on the help icon next to its name.";
+    static const char InitialHelpString[] = "To see the captions for messages in a folder, click with the left mouse button on the folder name.\n\nTo see a message, click on its caption in the middle region of the window.\n\nTo perform actions on a folder, or get information about it, click on the help icon next to its name.";
     char *SurrogateHelpFile, *s;
     char ErrMsg[500+MAXPATHLEN];
     class environment *et;

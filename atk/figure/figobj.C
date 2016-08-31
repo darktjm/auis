@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-char *figobj_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figobj.C,v 3.7 1995/01/13 20:28:06 Zarf Stab74 $";
-#endif 
-
 #include <andrewos.h>
 ATK_IMPL("figobj.H")
 #include <util.h>
@@ -90,7 +86,7 @@ figobj::~figobj()
     (this->iattr)->Destroy();
 }
 
-char *figobj::ToolName(class figtoolview  *v, long  rock)
+const char *figobj::ToolName(class figtoolview  *v, long  rock)
 {
     return "<no-name>";
 }
@@ -645,7 +641,7 @@ long figobj::Read(FILE  *fp, long  id)
     return dataobject_NOREADERROR;     
 }
 
-void figobj::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolean newstyle)
+void figobj::PrintObject(class figview  *v, FILE  *file, const char  *prefix, boolean newstyle)
 {
 }
 

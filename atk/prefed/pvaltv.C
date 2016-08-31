@@ -23,13 +23,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/pvaltv.C,v 1.7 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
 ATK_IMPL("pvaltv.H")
 #include <math.h>
 
@@ -58,8 +51,6 @@ static class keymap *pvaltvKeymap=NULL;
 
 
 ATKdefineRegistry(pvaltv, textintv, pvaltv::InitializeClass);
-#ifndef NORCSID
-#endif
 static void pvaltvUpdate(class pvaltv  *self, long  rock);
 
 
@@ -138,7 +129,7 @@ void pvaltv::UpdateText(long  val)
     class prefval *pvd=DATA(this);
     class text *pvt=TEXT(this);
     class textview *tv=(this)->GetTextView();
-    char *vs;
+    const char *vs;
     long pos=(tv)->GetDotPosition();
 
     if(val==prefval_ValuesChanged || val==prefval_Generic) {

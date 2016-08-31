@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h> /* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/atom.C,v 3.7 1996/04/01 15:29:17 wjh Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("atom.H")
 #include <stdio.h>
 #include <atom.H>
@@ -58,8 +48,6 @@ static struct alist *hashTable[HashTableSize];
 
 
 ATKdefineRegistry(atom, ATK, atom::InitializeClass);
-#ifndef NORCSID
-#endif
 static int Hash(register unsigned char *word);
 static class atom *CreateAtom(register const char  *name, register int  index);
 

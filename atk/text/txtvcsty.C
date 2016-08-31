@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/txtvcsty.C,v 3.6 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
-
- 
-
 #define AUXMODULE 1
 #include <textview.H>
 #include <txtvcmds.h>
@@ -80,8 +70,6 @@ static long flipEndMax = 0;
 class mark *insertMark = NULL;
 
 
-#ifndef NORCSID
-#endif
 static class environment *AddNewEnvironment(class textview  *self, class stylesheet  *ss, class environment  *env, struct InsertStack  *insert);
 static void PushFlipBegEnv(class environment  *te, boolean  value);
 static void PushFlipEndEnv(class environment  *te, boolean  value);
@@ -105,7 +93,7 @@ static boolean StyleCompletionWork(class style  *style, struct result  *data);
 static enum message_CompletionCode StyleComplete(char  *partial, class stylesheet  *styleSheet, char  *resultStr, int  resultSize);
 static boolean StyleHelpWork(class style  *style, struct helpData  *helpData);
 static void StyleHelp(char  *partial, class stylesheet  *styleSheet, int  (*helpTextFunction)(), long  helpTextRock);
-void textview_InsertEnvironment(class textview  *self, char  *sName);
+void textview_InsertEnvironment(class textview  *self, const char  *sName);
 void InitializeMod();
 
 
@@ -159,7 +147,7 @@ void textview::PrepareDeletion(long  pos, long  len)
 	       || (len > 0 && (envPos + envLen == pos + len && pos <= envPos))) {
 	    if (env->type == environment_Style) {
 		class style *style = env->data.style;
-		char *styleName = (style)->GetName();
+		const char *styleName = (style)->GetName();
 
 		if (styleName != NULL) {
 		    struct InsertStack *p = (struct InsertStack *) malloc(sizeof(struct InsertStack));
@@ -661,7 +649,7 @@ long textview_LookCmd(ATK *selfa, long c)
     register class text *d;
     class stylesheet *ss;
     class style *styleptr;
-    char *name;	
+    const char *name;	
 
     if (ConfirmReadOnly(self))
         return 0;
@@ -797,7 +785,7 @@ void textview_ExposeStyleEditor(class textview  *self)
 void textview_ShowStylesCmd(register class textview  *self)
 {
     char tbuf[SHOWSIZE];
-    register char *tp;
+    register const char *tp;
     class environment *te;
     class environment *de = NULL;
     class text *d;
@@ -914,18 +902,20 @@ void textview_ToggleColorStyles(class textview  *self)
 static void DoDisplayInsertEnvironment(class textview  *self)
 {
     class text *d = Text(self);
+    const char *cp;
     char *p;
     char outstr[1000];
 
     if (self->insertEnvironment == d->rootEnvironment && self->insertStack == NULL) {
-	p = "Current Insertion Style: default";
+	cp = "Current Insertion Style: default";
     }
     else {
 	long count = 0;
 	long len;
 	struct InsertStack *st;
 	class environment *env;
-	char *name;
+	const char *name;
+	char *s;
 
 	p = &outstr[999];
 	*p = '\0';
@@ -967,6 +957,7 @@ static void DoDisplayInsertEnvironment(class textview  *self)
 	}
 	p -= 23;
 	strncpy(p, "Current Insertion Style", 23);
+	cp = p;
     }
     message::DisplayString(self, 0, p);
 
@@ -1132,13 +1123,13 @@ static boolean StyleHelpWork(class style  *style, struct helpData  *helpData)
 {
     char infoBuffer[1024];
     char strippedMenuName[1000];
-    char *p;
-    char *q;
+    const char *p;
+    const char *q;
     char *r;
 
     if (completion::FindCommon(helpData->partial,
        (style)->GetName()) == strlen(helpData->partial)) {
-        char *menuName;
+        const char *menuName;
 	
 	strippedMenuName[0] = '\0';
 	r = strippedMenuName;
@@ -1175,7 +1166,7 @@ static void StyleHelp(char  *partial, long ss, message_workfptr helpTextFunction
     (styleSheet)->EnumerateStyles( (stylesheet_efptr)StyleHelpWork, (long) &helpData);
 }
 
-void textview_InsertEnvironment(class textview  *self, char  *sName)
+void textview_InsertEnvironment(class textview  *self, const char  *sName)
 {
     class text *d = Text(self);
     class stylesheet *ss = (d)->GetStyleSheet();

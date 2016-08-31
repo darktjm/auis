@@ -25,17 +25,11 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/vmail.c,v 2.26 1994/06/09 18:17:42 rr2b Stab74 $";
-#endif
-
 /*
 		vmail.c -- Deliver a message to a user.
 */
 
+#include <andrewos.h> /* sys/file.h */
 #include <system.h>
 #include <errno.h>
 #include <stdio.h>
@@ -71,7 +65,7 @@ static char msgfilename[MAXPATHLEN+1];
 char VM_text[MAXPATHLEN*2+1];
 int VM_errordetail;
 
-static char AFSDownMsg[] = "AFS is apparently down for ``%s'': %s";
+static const char AFSDownMsg[] = "AFS is apparently down for ``%s'': %s";
 
 /* Logging definitions */
 #ifndef Logs

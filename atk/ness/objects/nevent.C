@@ -27,13 +27,6 @@
 */
 
 #include <andrewos.h>	/* for index() */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nevent.C,v 1.13 1995/11/14 22:06:28 robr Stab74 $";
-#endif
-
-
 #include <physical.h>
 #include <util.h>		/* for FOLDEDEQ */
 
@@ -281,7 +274,7 @@ neventFinishEvent(class nesssym  *event , class nesssym  *locals , class nesssym
 	if (e != enode->varsym) {
 		char buf[50];
 		sprintf(buf, "*Should end \"%s\"",  (enode->varsym)->NGetName());
-		ReportError(freeze(buf), -1);
+		ReportError(strdup(buf), -1);
 	}
 	enode->locallist = locals;
 	loc = (curComp->tlex)->RecentPosition( 0, &len);

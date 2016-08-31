@@ -84,14 +84,14 @@ int      Scrn; /* X screen number */
 
 ATKdefineRegistry(xpixmap, image, NULL);
 
-static void corrupted(char   *fullname, FILE  *f)
+static void corrupted(const char   *fullname, FILE  *f)
 {
   fclose(f);
   printf("%s: X Pixmap file is corrupted\n", fullname);
 }
 
 int
-xpixmap::Load( char  *fullname, FILE  *fp )
+xpixmap::Load( const char  *fullname, FILE  *fp )
 { FILE          *f;
   class xpixmap *self=this;
   char           buf[BUFSIZ];
@@ -246,7 +246,7 @@ xpixmap::Write( FILE  *file, long  writeID, int  level )
 }
 
 long
-xpixmap::WriteNative( FILE  *file, char  *filename )
+xpixmap::WriteNative( FILE  *file, const char  *filename )
 {
     return(0);
 }

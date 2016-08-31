@@ -26,7 +26,6 @@ WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 /* ***************************************************************** *\ 
  * andrew.rls - macro (rules) for Imakefiles 
  * 
- * $Header: /afs/cs.cmu.edu/project/atk-src-C++/config/RCS/andrew.rls,v 2.274 1996/11/12 19:17:03 az28 Exp $
 \* ***************************************************************** */ 
 #ifndef LexStaticFile
 #define LexStaticFile lex.yy.c
@@ -842,26 +841,26 @@ InstallFont(fontname)
 
 #define ForceInstallFiles(files, mode, dest)				@@\
 install.time::								@@\
-	@(case '$(MFLAGS)' in *[i]*) set +e;; esac; \			@@\
+	@(case '$(MFLAGS)' in *[ki]*) set +e;; esac; \			@@\
 	for i in files; do \						@@\
 		(set -x; $(INSTALL) mode $$i dest/$$i); done) 
 
 
 #define InstallFiles(files, mode, dest)					@@\
 install.time:: files							@@\
-	@(case '$(MFLAGS)' in *[i]*) set +e;; esac; \			@@\
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \			@@\
 	for i in $?; do \						@@\
 		(set -x; $(INSTALL) mode $$i dest/$$i); done) 
 
 #define InstallDocFiles(files, mode, dest)					@@\
 install.doc:: files							@@\
-	@(case '$(MFLAGS)' in *[i]*) set +e;; esac; \			@@\
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \			@@\
 	for i in $?; do \						@@\
 		(set -x; $(INSTALL) mode $$i dest/$$i); done) 
 
 #define InstallLibraries(libs, dest)					@@\
 install.time:: libs							@@\
-	@(case '$(MFLAGS)' in *[i]*) set +e;; esac; \			@@\
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \			@@\
 	for i in $?; do \						@@\
 		(set -x; \						@@\
 		$(INSTALL) $(INSTLIBFLAGS) $$i dest/$$i ;\		@@\
@@ -873,7 +872,7 @@ install.time:: file							@@\
 
 #define InstallFWDE(files, mode, dest, ex1, ex2)			@@\
 install.time:: files							@@\
-	@(case '$(MFLAGS)' in *[i]*) set +e;; esac; \			@@\
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \			@@\
 	a=`echo ex1 | tr -d "	"`; \					@@\
 	b=`echo ex2 | tr -d "	"`; \					@@\
 	for i in $?; do \						@@\
@@ -883,7 +882,7 @@ install.time:: files							@@\
 
 #define InstallBasename(files, mode, dest, ex1, ex2)			@@\
 install.time:: files							@@\
-	@(case '$(MFLAGS)' in *[i]*) set +e;; esac; \			@@\
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \			@@\
 	a=`echo ex1 | tr -d "	"`; \					@@\
 	b=`echo ex2 | tr -d "	"`; \					@@\
 	for i in $?; do \						@@\
@@ -943,7 +942,7 @@ install.time:: file							@@\
 
 #define InstallHelpAlias(file, aliases)					@@\
 do.alias::								@@\
-	@(case '$(MFLAGS)' in *[i]*) set +e;; esac; \			@@\
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \			@@\
 	PWD=`pwd`; for i in aliases; do \				@@\
 	(set -x; echo "$$i	"Stringize(file)"	!$$PWD" >> ,help.alias) done) 
 

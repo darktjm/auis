@@ -38,10 +38,7 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/nametime/RCS/nmtimeg.c,v 2.37 1993/05/04 01:49:29 susan Stab74 $";
-#endif
+#include <andrewos.h> /* sys/types.h sys/time.h sys/file.h */
 
 /* nametimeg program versions*/
 #define VER_MAJ (0)
@@ -81,7 +78,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/
 
 #define MAX_INT ((-1)^(1<<((sizeof(int)*8)-1)))
 
-#include <andrewos.h> /* sys/types.h sys/time.h sys/file.h */
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/socket.h>
@@ -629,8 +625,6 @@ FILE *dfile;
 {
     register int i;
     fprintf(dfile,"nametimeg %d.%d internal table dump\n",VER_MAJ,VER_MIN);
-    fprintf(dfile,"nametimeg $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/nametime/RCS/nmtimeg.c,v 2.37 1993/05/04 01:49:29 susan Stab74 $\n");
-    fprintf(dfile,"nametimeg $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/nametime/RCS/nmtimeg.c,v $\n");
     fprintf(dfile,"this nametimeg stated at %s",ctime(&gl.time_started));
     fprintf(dfile,"we handled %d name requests\n",gl.number_of_ien116_real_names);
     fprintf(dfile,"we handled %d ien-116 pool requests\n",gl.number_of_ien116_pool_names);

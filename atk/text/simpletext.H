@@ -71,8 +71,8 @@ class simpletext: public dataobject {
     virtual void AddInCharacter(long pos, char c);   /* Does not modify marks */
     virtual boolean DeleteCharacters(long pos, long len);  /* FALSE if read-only */
     virtual void AlwaysDeleteCharacters(long position, long size);
-    virtual boolean ReplaceCharacters(long pos, long len, char *repStr, long repLen);  /* FALSE if read-only */
-    virtual void AlwaysReplaceCharacters(long pos, long len, char *repStr, long repLen);
+    virtual boolean ReplaceCharacters(long pos, long len, const char *repStr, long repLen);  /* FALSE if read-only */
+    virtual void AlwaysReplaceCharacters(long pos, long len, const char *repStr, long repLen);
 
     virtual long GetLength();
     virtual long GetChar(long pos);
@@ -89,7 +89,7 @@ class simpletext: public dataobject {
     virtual boolean CopyText(long pos, class simpletext *srctext, long srcpos, long len);  /* FALSE if read-only */
     virtual void AlwaysCopyText(long pos, class simpletext *srctext, long srcpos, long len);
     virtual long Index(long pos, char c, long len);
-    virtual int Strncmp(long pos, char *str, long len);
+    virtual int Strncmp(long pos, const char *str, long len);
     virtual int Textncmp(long pos, class simpletext *text, long pos2, long len);
 
     /* Operations for FILE I/O */

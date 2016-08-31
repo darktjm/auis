@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/sbuttonv.C,v 3.8 1995/05/03 22:23:42 rr2b Stab74 $";
-#endif
-
-
 ATK_IMPL("sbuttonv.H")
 #include <stdio.h>
 
@@ -49,7 +42,7 @@ ATK_IMPL("sbuttonv.H")
 #include "sbutton.H"
 #include "sbuttonv.H"
 
-#define NO_MSG (char *)"Push Me"
+#define NO_MSG "Push Me"
 
 #define PROMPTFONT "andysans12b"
 #define FONT "andysans"
@@ -90,11 +83,11 @@ static void MyOldSetShade(class view  *self, struct sbutton_prefs  *prefs, doubl
 static void MyNewComputeColor(class view  *self, struct sbutton_prefs  *prefs,double  *foreground , double  *background, int  color, double  *result);
 static void MyNewSetShade(class view  *self, struct sbutton_prefs  *prefs, double  *foreground , double  *background, int  color);
 static void MySetShade(class view  *self, struct sbutton_prefs  *prefs, double  *foreground , double  *background, int  color);
-static void DrawText(class view  *self, class fontdesc  *font, long  x , long  y, char  *text, int  len, long  flags);
+static void DrawText(class view  *self, class fontdesc  *font, long  x , long  y, const char  *text, int  len, long  flags);
 static void EnsureInfo(class sbuttonv  *self);
 static int RectEnclosesXY(struct rectangle  *r, long  x , long  y);
 static boolean definetriggers(class sbutton  *b, int  i, struct sbutton_info  *si, class sbuttonv  *self);
-static void OutputLabel(FILE  *f, char  *l);
+static void OutputLabel(FILE  *f, const char  *l);
 
 
 static void InitFGBG(class view  *self, struct sbutton_prefs  *prefs, double  *fg , double  *bg)
@@ -106,8 +99,8 @@ static void InitFGBG(class view  *self, struct sbutton_prefs  *prefs, double  *f
 
     graphic::GetDefaultColors(&deffg, &defbg);
 
-    if(bgcolor==NULL) bgcolor=defbg?defbg:(char *)"white";
-    if(fgcolor==NULL) fgcolor=deffg?deffg:(char *)"black";
+    if(bgcolor==NULL) bgcolor=defbg?defbg:"white";
+    if(fgcolor==NULL) fgcolor=deffg?deffg:"black";
 
     /* This is necessary for consistent results on monochrome machines, the color setting functions try to pick a stipple on monochrome screens and they determine which stipple to use based on the fg (or bg for setfg) color in effect */ 
     (self)->SetBackgroundColor( bgcolor, 0, 0, 0);
@@ -656,7 +649,7 @@ void sbuttonv::InteriorBGColor(class view  *self, struct sbutton_prefs  *prefs, 
     sbuttonv::RestoreViewState(self, &vi);
 }
 
-static void DrawText(class view  *self, class fontdesc  *font, long  x , long  y, char  *text, int  len, long  flags)
+static void DrawText(class view  *self, class fontdesc  *font, long  x , long  y, const char  *text, int  len, long  flags)
 {
     if(flags==TEXTINMIDDLE && len==1 && font!=NULL) {
 	long tx, ty;
@@ -674,7 +667,7 @@ static void DrawText(class view  *self, class fontdesc  *font, long  x , long  y
 
 #define SOMEFONT(prefs) (sbutton::GetFont(prefs)?sbutton::GetFont(prefs):fontdesc::Create(FONT, FONTTYPE, FONTSIZE))
 
-static void DrawLabel(class view  *self, char  *text, boolean  lit, struct sbutton_prefs  *prefs, double  *fg , double  *bg, long  x , long  y, long  flags, boolean sensitive)
+static void DrawLabel(class view  *self, const char  *text, boolean  lit, struct sbutton_prefs  *prefs, double  *fg , double  *bg, long  x , long  y, long  flags, boolean sensitive)
 {
     int style;
     int len;
@@ -731,7 +724,7 @@ static void DrawLabel(class view  *self, char  *text, boolean  lit, struct sbutt
     }
 }
     
-void sbuttonv::DrawLabel(class view  *self, char  *text,  long  x , long  y, struct sbutton_prefs  *prefs, boolean  lit, long  flags, boolean sensitive)
+void sbuttonv::DrawLabel(class view  *self, const char  *text,  long  x , long  y, struct sbutton_prefs  *prefs, boolean  lit, long  flags, boolean sensitive)
 {
 	ATKinit;
 
@@ -746,7 +739,7 @@ void sbuttonv::DrawLabel(class view  *self, char  *text,  long  x , long  y, str
     ::DrawLabel(self, text, lit, prefs, fg, bg, x, y, flags, sensitive);
 }
 
-void sbuttonv::DrawButtonLabel(class view  *self, char  *text, struct rectangle  *interior, struct sbutton_prefs  *prefs, boolean  lit, boolean sensitive)
+void sbuttonv::DrawButtonLabel(class view  *self, const char  *text, struct rectangle  *interior, struct sbutton_prefs  *prefs, boolean  lit, boolean sensitive)
 {
 	ATKinit;
 
@@ -770,7 +763,7 @@ void sbuttonv::DrawButton(class view  *self, struct sbutton_info  *si, struct re
     struct rectangle Rect2;
     int tx, ty;
     int bdepth, r_bot, r2_bot;
-    char *text=si->label?si->label:NO_MSG;
+    const char *text=si->label?si->label:NO_MSG;
     double fg[3], bg[3];
     class fontdesc *my_fontdesc=SOMEFONT(si->prefs);
     class graphic *my_graphic=(self)->GetDrawable();
@@ -1092,7 +1085,7 @@ static int RectEnclosesXY(struct rectangle  *r, long  x , long  y)
     int bdepth, r2_bot, r_bot;
     struct sbuttonv_view_info vi;
     int style=DEFAULTSTYLE(sbutton::GetStyle(si->prefs));
-    char *text=si->label?si->label:NO_MSG;
+    const char *text=si->label?si->label:NO_MSG;
     double fg[3], bg[3];
     
     sbuttonv::SaveViewState(self, &vi);
@@ -1178,7 +1171,7 @@ static int RectEnclosesXY(struct rectangle  *r, long  x , long  y)
     struct rectangle Rect2;
     int tx, ty;
     int bdepth, r2_bot, r_bot;
-    char *text=si->label?si->label:NO_MSG;
+    const char *text=si->label?si->label:NO_MSG;
     double fg[3], bg[3];
     int style=DEFAULTSTYLE(sbutton::GetStyle(si->prefs));
     
@@ -1453,7 +1446,7 @@ view_DSattributes sbuttonv::DesiredSize(long  width, long  height, enum view_DSp
 	    my_fontdesc= fontdesc::Create(FONT, FONTTYPE, FONTSIZE);
 	}
 	if (my_fontdesc) {
-	    char *label=(b)->GetLabel( count) ? (b)->GetLabel( count) : NO_MSG;
+	    const char *label=(b)->GetLabel( count) ? (b)->GetLabel( count) : NO_MSG;
 	    struct fontdesc_charInfo ci;
 	    if(strlen(label)==1) {
 		(my_fontdesc)->CharSummary( my_graphic, *label, &ci);
@@ -1592,7 +1585,7 @@ void sbuttonv::WantUpdate(class view  *requestor)
     /* if this is an activation change make it happen NOW! */
 } /* sbuttonv__WantUpdate */
 
-class sbuttonv *sbuttonv::CreateFilledSButtonv(char  *defview, struct sbutton_prefs  *prefs, struct sbutton_list  *blist)
+class sbuttonv *sbuttonv::CreateFilledSButtonv(const char  *defview, struct sbutton_prefs  *prefs, const struct sbutton_list  *blist)
 {
 	ATKinit;
 
@@ -1622,7 +1615,7 @@ class sbuttonv *sbuttonv::CreateFilledSButtonv(char  *defview, struct sbutton_pr
  *	PRINTING	
  *  # # # # # # # # # # # # #  */
 
-static void OutputLabel(FILE  *f, char  *l)
+static void OutputLabel(FILE  *f, const char  *l)
 {
     while(*l) {
 	if(l[0]=='\\' || l[0]=='\"') fprintf(f, "\\\\");
@@ -1631,7 +1624,7 @@ static void OutputLabel(FILE  *f, char  *l)
     }
 }
 
-void sbuttonv::Print(register FILE   *file, char    *processor, char    *format, boolean    topLevel)
+void sbuttonv::Print(register FILE   *file, const char    *processor, const char    *format, boolean    topLevel)
 {
 	int count;
 	register class sbutton *dobj = (class sbutton *)this->dataobject;
@@ -1647,7 +1640,7 @@ void sbuttonv::Print(register FILE   *file, char    *processor, char    *format,
 		fprintf(file, ".de bx\n\\(br\\|\\\\$1\\|\\(br\\l'|0\\(rn'\\l'|0\\(ul'\n..\n");
 		fprintf(file, ".bx \"");
 		for(count=(dobj)->GetCount()-1;count>=0;count--) {
-		    char *label=(dobj)->GetLabel( count);
+		    const char *label=(dobj)->GetLabel( count);
 		    if(label==NULL) label="Push Me";
 		    fprintf(file, "[");
 		    OutputLabel(file, label);
@@ -1659,7 +1652,7 @@ void sbuttonv::Print(register FILE   *file, char    *processor, char    *format,
 	    /* guess we're trying to write in postscript, no idea how to try this out though... */
 	    fprintf(file, "(");
 	    for(count=(dobj)->GetCount()-1;count>=0;count--) {
-		char *label=(dobj)->GetLabel( count);
+		const char *label=(dobj)->GetLabel( count);
 		if(label==NULL) label="Push Me";
 		fprintf(file, "[");
 		OutputLabel(file, label);

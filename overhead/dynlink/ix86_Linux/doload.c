@@ -20,19 +20,11 @@
  *  $
 */
 
-
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynlink/ix86_Linux/RCS/doload.c,v 1.2 1996/08/27 21:50:45 robr Exp $";
-#endif
-
-
 /* 
  *	doload.c - dynamic loader for SunOS 4.1.3
  */
 
+#include <andrewos.h>
 #include <errno.h>
 #include <dlfcn.h>
 
@@ -58,7 +50,7 @@ static void dodtors() {
  * code. I suppose one might want to set this to something other than ".do"
  * but for now we will do it the way it has always been done.
  */
-char doload_extension[] = ".do";
+const char doload_extension[] = ".do";
 
 int doload_trace=0;		/* nonzero if debugging */
 

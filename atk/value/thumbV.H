@@ -48,7 +48,7 @@ public:
      ;
    void LookupParameters();
 
-  virtual char * GetValueString()  ;
+  virtual const char * GetValueString()  ;
 
   inline long GetTmpVal() { return (this->tmpval); }
 
@@ -58,7 +58,7 @@ public:
 
 
   char * label;
-  char * fontname;
+  const char * fontname;
   short fontsize;
   char buf[32];
   class fontdesc * normalfont, * boldfont, * activefont, *valuefont;

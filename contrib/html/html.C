@@ -1,4 +1,3 @@
-/* $Id$ */
 /* This is a HTML viewing/editing object */
 /* Unfortunately, there's lots of duplicate information between the stylesheet
  * info and the tables below.  It would be nice if we could snarf the info 
@@ -307,7 +306,7 @@ static char* parBreakString = "\n\n<p>";
 static char* breakString = "<br>\n";
 
 static char errbuf[200]; /* A string buffer to temporarily play with error messages */
-static char errString[] = "\nErrors encountered while reading document:\n\n";
+static const char errString[] = "\nErrors encountered while reading document:\n\n";
 
 /* This is the name of the attribute attached to the styles */
 static char* styleHTMLCodes = "htmlcodes";

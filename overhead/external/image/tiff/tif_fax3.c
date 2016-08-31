@@ -446,7 +446,7 @@ Fax3Decode1DRow(TIFF *tif, u_char *buf, int npels)
 	int x = 0;
 	int runlen;
 	short color = sp->b.white;
-	static char module[] = "Fax3Decode1D";
+	static const char module[] = "Fax3Decode1D";
 
 	for (;;) {
 		if (color == sp->b.white)
@@ -547,7 +547,7 @@ Fax3Decode2DRow(TIFF *tif, u_char *buf, int npels)
 	int run1, run2;		/* for horizontal mode */
 	short mode;
 	short color = sp->b.white;
-	static char module[] = "Fax3Decode2D";
+	static const char module[] = "Fax3Decode2D";
 
 	do {
 		if (sp->b.bit == 0 || sp->b.bit > 7) {

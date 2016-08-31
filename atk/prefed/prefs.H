@@ -34,10 +34,10 @@ ATK_INTER
 #include <atom.H>
 
 struct prefdesc {
-    char *name;
-    char *app;
-    char *group;
-    char *seps;
+    const char *name;
+    const char *app;
+    const char *group;
+    const char *seps;
     char *cond;
     char *val;
     class prefval *obj;
@@ -48,7 +48,7 @@ struct prefdesc {
     long listsize;
     boolean writetype;
     boolean writeviews;
-    char *views;
+    const char *views;
     class mark *mark;
     boolean shadow;
     boolean indefs;
@@ -66,7 +66,7 @@ struct prefline {
     class list *vl;
     char *app;
     char *name;
-    char *group;
+    const char *group;
     char *cond;
     char *val;
     char *views;
@@ -78,7 +78,7 @@ struct prefline {
 
 struct prefgroup {
     long grouphelp;
-    char *name;
+    const char *name;
 };
 
 enum style_type {
@@ -112,7 +112,7 @@ public:
 	prefs();
     
 	virtual ~prefs();
-    static char * TranslateViewName(char *name)  ;
+    static const char * TranslateViewName(const char *name)  ;
 
     virtual long ReadDataPart()  ;
     virtual void Sort(enum prefs_SortType sortby, boolean perm);
@@ -124,7 +124,7 @@ public:
     virtual long ReScan()  ;
 
      void ObservedChanged(class observable *changed, long val);
-     char * ViewName()  ;
+     const char * ViewName()  ;
      long Write(FILE *fp, long writeID, int level)  ;
      long Read(FILE *fp, long id)  ;
 
@@ -138,7 +138,7 @@ public:
     char *lastheader;
     class style *hstyle;
     class style *pstyle;
-    char *lastgroup;
+    const char *lastgroup;
     class list *categories;
     boolean sane;
     class text *help;

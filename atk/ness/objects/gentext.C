@@ -27,11 +27,6 @@
 
 #include <andrewos.h>
 ATK_IMPL("gentext.H")
-
-#ifndef NORCSID
-static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/gentext.C,v 1.2 1996/10/13 23:13:41 wjh Exp $";
-#endif
-
 #include <im.H>
 #include <filetype.H>
 #include <simpletext.H>
@@ -59,8 +54,8 @@ static char CharClass[256];
 
 	
 ATKdefineRegistry(gentext, ness, gentext::InitializeClass);
-static nessmark * GetMark(gentext  *self, char  *var);
-static void addConst(text  *dest, char  *str);
+static nessmark * GetMark(gentext  *self, const char  *var);
+static void addConst(text  *dest, const char  *str);
 static void addText(text  *dest, text  *t, long  pos , long  nextpos);
 void addMark(text  *dest, nessmark  *m);
 static void GenInitial();
@@ -80,7 +75,7 @@ static gentext * GenerateNess(text  *t);
 	If there is none, returns NULL.
 */
 	static nessmark *
-GetMark(gentext  *self, char  *var)  {
+GetMark(gentext  *self, const char  *var)  {
 	union stackelement *v = (self)->GetVarAddr( var);
 	if (v == NULL) return NULL;
 	if (v->s.hdr == idleHdr) {
@@ -96,7 +91,7 @@ GetMark(gentext  *self, char  *var)  {
 	errors abort the operation
 */
 	void
-gentext::SetVar(char  *var, char  *value)  {
+gentext::SetVar(const char  *var, const char  *value)  {
 	nessmark *n = GetMark(this, var);
 	if (n == NULL) return;		/* allocation failed */
 	(n)->MakeConst(value);
@@ -109,7 +104,7 @@ gentext::SetVar(char  *var, char  *value)  {
 	errors abort the operation
 */
 	void
-gentext::SetVarFromText(char  *var, text  *t, long  pos, long  len)  {
+gentext::SetVarFromText(const char  *var, text  *t, long  pos, long  len)  {
 	nessmark *n = GetMark(this, var);
 	if (n == NULL)  return;
 	text *newt = new text;
@@ -124,7 +119,7 @@ gentext::SetVarFromText(char  *var, text  *t, long  pos, long  len)  {
 	errors abort the operation
 */
 	void
-gentext::CopyVar(char  *var, text  *t, long  pos)  {
+gentext::CopyVar(const char  *var, text  *t, long  pos)  {
 	nessmark *n = GetMark(this, var);
 	if (n == NULL) return;
 	(t)->AlwaysCopyText( pos, (n)->GetText(), 
@@ -137,7 +132,7 @@ gentext::CopyVar(char  *var, text  *t, long  pos)  {
 		(in the latter case, errno will often be set) 
 */
 	boolean
-gentext::WriteVarToNamedFile(char  *var, char  *filename)  {
+gentext::WriteVarToNamedFile(const char  *var, const char  *filename)  {
 	nessmark *n = GetMark(this, var);
 	if (n == NULL) return FALSE;
 	FILE *f = fopen(filename, "w");
@@ -152,13 +147,13 @@ gentext::WriteVarToNamedFile(char  *var, char  *filename)  {
 	return TRUE;
 }
 
-/* gentext__WriteVarToFile(char *var, FILE *f)
+/* gentext__WriteVarToFile(const char *var, FILE *f)
 	writes the indicated global variable to the given FILE.
 	Returns: returns TRUE for success and FALSE for failure 
 		(in the latter case, errno will often be set) 
 */
 	boolean
-gentext::WriteVarToFile(char *var, FILE *f)  {
+gentext::WriteVarToFile(const char *var, FILE *f)  {
 	if (f == NULL) return FALSE;
 	nessmark *n = GetMark(this, var);
 	if (n == NULL) return FALSE;
@@ -188,7 +183,7 @@ gentext::WriteVarToFile(char *var, FILE *f)  {
 		section in the unnamed initial segment in the source.
 */
 	text *
-gentext::Instantiate(char  *segment)  {
+gentext::Instantiate(const char  *segment)  {
 	char tnm[200];
 	char *nx;
 	nessmark *n;
@@ -288,7 +283,7 @@ static text *Segnms;	/* names of segments for GenTextQ002 */
 /* functions to add pieces to destinations */
 
 	static void
-addConst(text  *dest, char  *str)  {
+addConst(text  *dest, const char  *str)  {
 	(dest)->AlwaysInsertCharacters( (dest)->GetLength(),
 		str, strlen(str));
 }
@@ -676,13 +671,13 @@ GenerateNess(text  *t)  {
 		errors are printed to stderr
 */
 	gentext *
-gentext::CreateFromNamedFile(char  *fnm)  {
+gentext::CreateFromNamedFile(const char  *fnm)  {
 	ATKinit;
 
 	text *t;		/* where to put the result */
 	FILE *inputfile;
 	long objectID;
-	char *objectType;
+	const char *objectType;
 	struct attributes *attributes;
 
 	inputfile = fopen(fnm, "r");
@@ -739,7 +734,7 @@ gentext::CreateFromFILE(FILE  *f, long  objectID)  {
 	Returns: the created gentext
 */
 	gentext *
-gentext::Create(char  *source)  {
+gentext::Create(const char  *source)  {
 	ATKinit;
 
 	text *t = new text;

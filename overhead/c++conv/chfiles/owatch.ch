@@ -19,7 +19,6 @@
  * 
  *  $
  */
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/c++conv/chfiles/RCS/owatch.ch,v 1.1 1993/10/13 15:52:18 rr2b Stab74 $ */
 
 struct owatch_data {
     struct observable *obj;

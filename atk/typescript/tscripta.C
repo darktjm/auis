@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/typescript/RCS/tscripta.C,v 1.7 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("tscripta.H")
 #include <tscripta.H>
 #include <application.H>
@@ -222,11 +212,11 @@ void typescriptapp::Stop()
  * argument list and munges it to include a -c <dir> to restore
  * the current working directory.
  */
-char **typescriptapp::SessionCheckpoint()
+const char * const *typescriptapp::SessionCheckpoint()
 {
     char **argv;
     int i, new_argc;
-    static char *new_argv[50];
+    static const char *new_argv[50];
     static char cwd[4096];
 
     argv = GetInitialArgv();

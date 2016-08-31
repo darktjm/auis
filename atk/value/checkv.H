@@ -49,8 +49,8 @@ public:
 	static boolean InitializeClass();
 
 
-  char *label;
-  char *fontname;
+  const char *label;
+  const char *fontname;
   class fontdesc *normalfont;
   class graphic *BlackPattern;
   short fontsize;

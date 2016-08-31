@@ -25,13 +25,6 @@
  *  $
 */
 
-#include  <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chartv.C,v 1.8 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Chart View-object
@@ -76,6 +69,7 @@ HISTORY
 END-SPECIFICATION  ************************************************************/
 
 
+#include  <andrewos.h>
 ATK_IMPL("chartv.H")
 #include  <errno.h>
 #include  <sys/stat.h>
@@ -548,7 +542,7 @@ chartv::Hit( register enum view_MouseAction    action, register long			    x , r
   }
 
 void
-chartv::Print( register FILE		      *file, register char		      *processor, register char		      *format, register boolean	       level )
+chartv::Print( register FILE		      *file, register const char		      *processor, register const char		      *format, register boolean	       level )
             {
   class chartv *self=this;
   IN(chartv_Print);
@@ -721,7 +715,7 @@ chartv_Print_Command( register class chartv      *self )
     {
   register FILE		     *file;
   char			      msg[512], *chart_file_name;
-  static char		      file_name[] = "/tmp/chart_print.PS";
+  static const char	      file_name[] = "/tmp/chart_print.PS";
 
   IN(Print_Command);
   (self )->UseWaitCursor( );
@@ -845,7 +839,7 @@ chartv_Palette_Command( register class chartv      *self )
 static void
 chartv_Quit_Command( register class chartv      *self )
     {
-  static char		     *choices[] =
+  static const char		     * const choices[] =
 		{"Cancel", "Save", "Save & Quit", "Quit Anyway", 0};
   long			      response = 0;
 

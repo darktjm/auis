@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>	/* for index() */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nevent1.C,v 1.10 1994/08/13 16:00:54 rr2b Stab74 $";
-#endif
-
 #include <im.H>
 #include <view.H>
 #include <message.H>
@@ -60,7 +54,7 @@ static struct ATKregistryEntry  *bufferClass = NULL;
 static struct ATKregistryEntry  *arbiterviewClass = NULL;
 
 
-ATK *ProperPtr(ATK *ptr, struct ATKregistryEntry *type);
+ATK *ProperPtr(ATK *ptr, const struct ATKregistryEntry *type);
 class text *FrameMark(class ness *ness, class nessmark *m, char *title, 
 	char *pgmnm, boolean enablecommands, long *pPos , long *pLen);
 
@@ -72,7 +66,7 @@ class text *FrameMark(class ness *ness, class nessmark *m, char *title,
 		and nothing is found in the neighborhood, the ancestors of the view are used.
 */
 ATK  *
-ProperPtr(ATK   *ptr, struct ATKregistryEntry   *type) {
+ProperPtr(ATK   *ptr, const struct ATKregistryEntry   *type) {
 	class dataobject *dobj;
 	class view *view;
 	long i;

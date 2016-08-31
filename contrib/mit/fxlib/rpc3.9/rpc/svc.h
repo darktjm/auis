@@ -1,5 +1,3 @@
-/* @(#)svc.h	1.2 87/11/09 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -50,8 +48,6 @@
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-/*      @(#)svc.h 1.18 87/07/14 SMI      *
-
 /*
  * svc.h, Server-side remote procedure call interface.
  *

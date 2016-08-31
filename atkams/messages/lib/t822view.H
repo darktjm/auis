@@ -41,7 +41,7 @@ public:
        void ObservedChanged(class observable *changed, long value);
        void PrintPSDoc(FILE  *outfile, long  width, long  height);
     
-      virtual void ShowHelp(char *text);
+      virtual void ShowHelp(const char *text);
       virtual void SetCaptions(class captions *cap);
       virtual class captions * NewCaptionsInNewWindow()  ;
       virtual class captions * GetCaptions()  ;

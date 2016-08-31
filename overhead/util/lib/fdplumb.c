@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/fdplumb.c,v 2.16 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
 #include <stdio.h>
 #include <fdplumbi.h>
 #include <util.h>

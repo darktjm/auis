@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ossupport/hpx/RCS/strncpy.c,v 1.3 1992/12/15 21:16:51 rr2b Stab74 $";
-#endif
-
-
 /* this exists because of a bug in hp's strncpy 
  * (in that one, bad things can happen when s and t overlap)
  */

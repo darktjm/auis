@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-	char *tlex_tlex_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/syntax/tlex/RCS/tlex.C,v 1.9 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 /*
  *    $Log: tlex.C,v $
 // Revision 1.9  1994/11/30  20:42:06  rr2b
@@ -125,7 +121,7 @@ ErrorWithParm(register class tlex  *self, struct tlex_ErrorRecparm  *parm) {
 
 
 	 void
-tlex::Error(char  *msg) {
+tlex::Error(const char  *msg) {
 	struct tlex_ErrorRecparm *eparm = this->lextab->ErrorHandler;
 	eparm->msg = msg;
 	ErrorWithParm(this, eparm);
@@ -183,7 +179,7 @@ tlex::PutTokChar(char  c) {
     The text, pos, and len specify a portion of a text to be processed
 */
 	class tlex *
-tlex::Create(struct tlex_tables  *description, void  *rock, 
+tlex::Create(const struct tlex_tables  *description, void  *rock, 
 		class text  *text, long  pos, long  len)   {
 	ATKinit;
 
@@ -561,9 +557,9 @@ ScanComment(register class tlex  *self, struct tlex_CommentRecparm  *parm)
 tlex::LexFunc(void *lexrock, void *yylval) {
 	class tlex *self = (class tlex *)lexrock;
 
-	register struct tlex_tables *tab = self->lextab;
+	register const struct tlex_tables *tab = self->lextab;
 	register int action;
-	struct tlex_Recparm *parm;
+	const struct tlex_Recparm *parm;
 	int success;
 	char *tbuf;
 
@@ -609,13 +605,13 @@ tryagain:  /* loop in case encountered whitespace or comment */
 			table.	Traverse table and input
 			to find thong and thus the final
 			tokennumber and action */
-		char **thongx;	/* index into thongtbl.
+		const char * const *thongx;	/* index into thongtbl.
 			Just before the Advance() *thongx is the first thong
 			having as prefix the characters in
 				text[tokpos...tokpos+currlen] */
-		char *samex;	/* pointer to thongsame elt for *thongx */
+		const char *samex;	/* pointer to thongsame elt for *thongx */
 		int currlen;	/* position in *thongx to consider */
-		char **matchx;	/* index of longest recognized thong
+		const char * const *matchx;	/* index of longest recognized thong
 				 matchx <= thongx */
 		int matchlen;	/* length of *matchx */
 		int i;
@@ -706,7 +702,7 @@ haveprefix:
 				while (isspace(self->currchar))
 					(self)->Advance();
 			(self)->EndToken();
-			success = (wp->handler)(self, parm);
+			success = (wp->handler)(self, (void *)parm);
 			break;
 		}
 		else {
@@ -768,7 +764,7 @@ haveprefix:
 	case tlex_TOKEN: {
 		if (parm->handler == NULL)
 			success = tlex_ACCEPT;
-		else success = (parm->handler)(self, parm);
+		else success = (parm->handler)(self, (void *)parm);
 		break;
 	}
 	}  /* end switch(parm->recognizerindex) */

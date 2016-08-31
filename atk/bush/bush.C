@@ -24,13 +24,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/bush/RCS/bush.C,v 1.21 1996/09/03 19:05:56 robr Exp $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Bush Data-object
@@ -66,6 +59,7 @@ struct map_item {
   char	*ucell;
 };
 
+#include <andrewos.h>
 ATK_IMPL("bush.H")
 
 #include <pwd.h>
@@ -96,6 +90,9 @@ ATK_IMPL("bush.H")
 #define	TREE			    ((self)->tree)
 #define	Root			    ((TREE)->RootNode())
 #define	RootPathName		    ((self)->root_pathname)
+#define SetTreeNotificationData(self, node, code)	\
+    (TREE)->notification_node = node;			\
+    (TREE)->notification_code = code
 #define	DIR(tn)			    ((struct Dir_*)(TREE)->NodeDatum(tn))
 #define	DirMode(tn)		    (DIR(tn)->mode)
 #define	DIRPATH(tn)		    (DIR(tn)->path)
@@ -139,17 +136,17 @@ ATK_IMPL("bush.H")
 
 tree_Specification DirTree[] = {tree_Order(tree_PreOrder), 0};
 
-char				baseName[] = "/afs"; /*Pathname to give to pioctl()*/
+const char			baseName[] = "/afs"; /*Pathname to give to pioctl()*/
 #define	MAX_PIOCTL_BUFF_SIZE	1000
  
 
 
 ATKdefineRegistry(bush, apt, NULL);
-static int ExtractNodePath( register class bush     *self, register char		   *source , register char		   **path );
+static int ExtractNodePath( register class bush     *self, register const char		   *source , register char		   **path );
 static int ExtractNodeName( register char		 *source, register char	        **name );
-static char * gethomecell( register class bush   *self, register char		 *filename );
-static char * getcell( register class bush   *self, register char		 *filename );
-static char * getname( register class bush   *self, register int   	  uid, register char		 *cell );
+static const char * gethomecell( register class bush   *self, register const char		 *filename );
+static const char * getcell( register class bush   *self, register const char		 *filename );
+static const char * getname( register class bush   *self, register int   	  uid, register const char		 *cell );
 
 static int
 NodeFilter(SCANDIRSELARG_TYPE *dir )
@@ -164,7 +161,7 @@ bush::Create( const char			 *init_dir )
     {
   register class bush  *self = NULL;
 
-  if(self = new bush) {
+  if((self = new bush)) {
     if(init_dir && (init_dir[0] != '\0'))
       strcpy(GivenDirName,init_dir);
     else im::GetDirectory(GivenDirName);
@@ -175,10 +172,39 @@ bush::Create( const char			 *init_dir )
   return(self);
 }
 
+void bush::SetAttributes(struct attributes *attributes)
+{
+    while(attributes) {
+	if(!strcmp(attributes->key, "dir")) {
+	    class bush *self=this;
+	    /* FIXME: abort if attr isn't actually a directory */
+	    /* since dired sets attrs before viewing, there's really
+	     * no need to notify observers */
+	    /* bushv can't deal with tree changing under it, anyway */
+#if 0
+	    SetTreeNotificationData(self,Root,tree_NodeDestroyed);
+	    (TREE)->NotifyObservers(0);
+#endif
+	    (TREE)->DestroyNode(Root);
+	    this->InitTree(attributes->value.string);
+	    this->BuildSubDirs(Root);
+#if 0
+	    SetTreeNotificationData(self,Root,tree_NodeCreated);
+	    (TREE)->NotifyObservers(0);
+#endif
+	}
+	attributes = attributes->next;
+    }
+}
+
+
+static void FreeDatum( tree_type_node n, void *user );
+
 bush::bush( )
     {
     class bush *self=this;
   TREE = tree::Create(DirTree,this);
+  TREE->DestroyDatum(FreeDatum, this);
   RootPath = NULL;
   *GivenDirName = 0;
   Debug = 0;
@@ -188,26 +214,12 @@ bush::bush( )
 }
 
 bush::~bush() {
-    ClearTree();
-}
-
-void bush::ClearTree() {
-    bush *self=this;
-    if(Root) {
-	struct Dir_ *oldDir=DIR(Root);
-	if(oldDir) {
-	    if(oldDir->path) free(oldDir->path);
-	    if(oldDir->name) free(oldDir->name);
-	    if(Child(Root))
-		(this)->DestroySubDirs( Root);
-	    (this)->DestroyDirEntries( Root);
-	    free(oldDir);
-	}
-    }
+    class bush *self=this;
+    delete Root;
 }
 
 static int
-ExtractNodePath( register class bush *self, register char *source, register char **path )
+ExtractNodePath( register class bush *self, register const char *source, register char **path )
 {
   register long     status = 0, i = 0, len;
   char		    full_path[MAXPATHLEN + 1], 
@@ -221,7 +233,7 @@ ExtractNodePath( register class bush *self, register char *source, register char
     case '.':
       while(*(source + i) == '.' && *(source + i + 1) == '.' &&
   	     (*(source + i + 2) == '\0' || *(source + i + 2) == '/')) {
-	if(ptr = (char*)strrchr(full_path,'/')) 
+	if((ptr = (char*)strrchr(full_path,'/')))
 	  *ptr = '\0';
 	if(*(source + i + 2) == '\0') {
 	  i += 2;
@@ -243,10 +255,11 @@ ExtractNodePath( register class bush *self, register char *source, register char
       }
   }
   len = strlen(source);
-  if ((len > 1) && source[len - 1] == '/')
-      source[len - 1] = (char) 0;
-  if(!status && (*path = (char*)malloc(strlen(source)+1)))
+  if(!status && (*path = (char*)malloc(strlen(source)+1))) {
     strcpy(*path,source);
+    if ((len > 1) && (*path)[len - 1] == '/')
+        (*path)[len - 1] = (char) 0;
+  }
   else status = -1;
   OUT(ExtractNodePath);
   return(status);
@@ -263,7 +276,7 @@ ExtractNodeName( register char	*source, register char **name )
 	  source[len-1] = (char) 0;
       if((ptr = (char *)strrchr(source, '/')) && *(source + 1) != '\0')
 	  source = ++ptr;
-      if(*name = (char *)malloc(strlen(source) + 1))
+      if((*name = (char *)malloc(strlen(source) + 1)))
 	  strcpy(*name, source);
       else
 	  status = -1;
@@ -273,7 +286,7 @@ ExtractNodeName( register char	*source, register char **name )
 }
 
 void
-bush::InitTree( register char		 *root_path )
+bush::InitTree( register const char		 *root_path )
     {
     class bush *self=this;
   tree_type_node	 root = NULL;
@@ -315,18 +328,8 @@ bush::InitTree( register char		 *root_path )
   OUT(bush_InitTree);
 }
 
-void
-bush::DestroySubDirs( register tree_type_node     tn )
-    {
-    class bush *self=this;
-  IN(bush_DestroySubDirs);
-  (this)->FreeSubDirs(tn);
-  (TREE)->DestroyNodeChildren(tn);
-  IN(bush_DestroySubDirs);
-}
-
-static char *
-gethomecell( register class bush   *self, register char		 *filename )
+static const char *
+gethomecell( register class bush   *self, register const char		 *filename )
 {
 #ifdef AFS_ENV
 #if 0
@@ -359,8 +362,8 @@ gethomecell( register class bush   *self, register char		 *filename )
   return(NULL);
 }
 
-static char *
-getcell( register class bush   *self, register char		 *filename )
+static const char *
+getcell( register class bush   *self, register const char		 *filename )
     {
 #ifdef AFS_ENV
   static char		 residence[MAX_PIOCTL_BUFF_SIZE];
@@ -384,8 +387,8 @@ getcell( register class bush   *self, register char		 *filename )
 #endif /* AFS_ENV */
 }
 
-static char *
-getname( register class bush   *self, register int   	  uid, register char		 *cell )
+static const char *
+getname( register class bush   *self, register int   	  uid, register const char		 *cell )
       {
   register int		     i = 0;
   register struct map_item  *item = NULL;
@@ -429,7 +432,7 @@ getname( register class bush   *self, register int   	  uid, register char		 *ce
     }
   }
   if(!uname) {
-    if(pw = getpwuid(uid)) {
+    if((pw = getpwuid(uid))) {
       item = (struct map_item*)calloc(1,sizeof(struct map_item));
       item->uid = uid;
       AllocNameSpace(pw->pw_name,&item->uname);
@@ -452,6 +455,9 @@ getname( register class bush   *self, register int   	  uid, register char		 *ce
 #endif /* AFS_ENV */
   return(uname);
 }
+
+static void
+DestroyDirEntries( class bush *self, register tree_type_node   tn );
 
 int
 bush::ScanDir( register tree_type_node tn )
@@ -481,9 +487,9 @@ bush::ScanDir( register tree_type_node tn )
   }
   else if(status == ok) {
     if(Child(tn))
-	(this)->DestroySubDirs( tn);
-    (this)->DestroyDirEntries( tn);
-    if(count)
+	(TREE)->DestroyNodeChildren(tn);
+    DestroyDirEntries( self, tn);
+    if(count) {
       if(!(DirEntries(tn) = (struct Dir_Entries*) 
 	calloc(1, sizeof(struct Dir_Entries))))
 	  status = no_space;
@@ -492,6 +498,7 @@ bush::ScanDir( register tree_type_node tn )
 	    (struct Dir_Entry **) calloc(count,sizeof(struct Dir_Entry*));
 	DirEntriesCount(tn) = count;
       }
+    }
     for( i = 0; i < count && status == ok; i++ ) {
       DirEntry(tn,i) = (struct Dir_Entry*)calloc(1,sizeof(struct Dir_Entry));
       DirEntryPos(tn,i) = i;
@@ -510,7 +517,7 @@ bush::ScanDir( register tree_type_node tn )
 #ifdef S_IFLNK
 	else if((stats.st_mode & S_IFMT) == S_IFLNK) {
 	  DirEntryType(tn,i).soft_link = TRUE;
-	  if(cc = readlink(fullEntryName,buf,MAXPATHLEN)) {
+	  if((cc = readlink(fullEntryName,buf,MAXPATHLEN))) {
 	    buf[cc] = '\0';
 	    AllocNameSpace(buf,&DirEntryLinkName(tn,i));
 	  }
@@ -572,10 +579,9 @@ bush::BuildSubDirs( register tree_type_node     tn )
   OUT(bush_BuildSubDirs);
 }
 
-void
-bush::DestroyDirEntries( register tree_type_node   tn )
+static void
+DestroyDirEntries( class bush *self, register tree_type_node   tn )
     {
-  class bush *self=this;
   register long		   i = 0, count = 0;
 
   IN(bush_DestroyDirEntries);
@@ -614,13 +620,12 @@ bush::DestroyDirEntries( register tree_type_node   tn )
   OUT(bush_DestroyDirEntries);
 }
 
-void
-bush::DestroyDirEntry( register tree_type_node   tn )
+static void FreeDatum( tree_type_node tn, void *user )
     {
-    class bush *self=this;
+    class bush *self = (class bush *)user;
     IN(bush_DestroyDirEntry);
-    if(tn && (this)->Dir(tn)) {
-	if(DirEntries(tn)) (this)->DestroyDirEntries(tn);
+    if(tn && (self)->Dir(tn)) {
+	if(DirEntries(tn)) DestroyDirEntries(self, tn);
 	if(DIRPATH(tn)) {
 	    free(DIRPATH(tn));
 	    DIRPATH(tn) = NULL;
@@ -629,23 +634,10 @@ bush::DestroyDirEntry( register tree_type_node   tn )
 	    free(DirName(tn));
 	    DirName(tn) = NULL;
 	}
-	free((this)->Dir(tn));
+	free((self)->Dir(tn));
 	(TREE)->SetNodeDatum(tn,0);
     }
     OUT(bush_DestroyDirEntry);
-}
-
-void
-bush::FreeSubDirs( register tree_type_node   tn )
-    {
-  class bush *self=this;
-  register tree_type_node  tmp = NULL;
-  register int		   level = 0;
-
-  IN(bush_FreeSubDirs);
-  if((tmp = tn) && ((level = (TREE)->NodeLevel(tmp)) > 0))
-    while((tmp = (TREE)->NextNode(tmp)) && ((TREE)->NodeLevel(tmp) > level))
-      (this)->DestroyDirEntry(tmp);
 }
 
 boolean
@@ -674,7 +666,7 @@ bush::DestroyEntry( register tree_type_node     tn, register struct Dir_Entry  *
 
   sprintf(item,"%s/%s",DIRPATH(tn),Entry->name);
   if(Entry->type.dir) {
-    static char	*argv[4] = {"rm","-rf",NULL,NULL};
+    static const char	*argv[4] = {"rm","-rf",NULL,NULL};
     argv[2] = item;
     status = (this)->PerformSystemAction("/bin/rm",argv);
   }
@@ -710,7 +702,7 @@ bush::RenameDir( register tree_type_node     tn, register char		     *newPath , 
   IN(bush_RenameDir);
   newFullName = (char*)malloc(strlen(newPath)+strlen(newName)+2);
   sprintf(newFullName,"%s/%s",newPath,newName);
-  if(status = rename(DIRPATH(tn),newFullName)) return(status);
+  if((status = rename(DIRPATH(tn),newFullName))) return(status);
   else {
     AllocNameSpace(newFullName,&DIRPATH(tn));
     AllocNameSpace(newName,&DirName(tn));
@@ -773,14 +765,14 @@ bush::Write( register FILE		 *file, register long		  id, register int		  level )
   return((long)this);
 }
 
-char *
+const char *
 bush::ViewName( )
   {
   return("bushv");
 }
 
 int
-bush::PerformSystemAction( register char		     *name, register char		     **argv )
+bush::PerformSystemAction( register const char		     *name, register const char		     **argv )
       {
     int			     pid = 0;
     WAIT_STATUS_TYPE status;
@@ -796,7 +788,7 @@ bush::PerformSystemAction( register char		     *name, register char		     **argv
     fd = open("/dev/null",O_WRONLY,0644);
     if(fd >= 0) dup2(fd,1);
     close(fd);
-    execvp(name,argv);
+    execvp(name,(char **)argv);
     /* flow should never reach here, but just in case.... */
     return(-1);
   }	

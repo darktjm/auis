@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/time.h sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/gtime.c,v 1.5 1992/12/15 21:10:10 rr2b Stab74 $";
-#endif
-
 #include <util.h>
 
 /* gtime.c - inverse of localtime */

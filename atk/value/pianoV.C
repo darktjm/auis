@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/pianoV.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("pianoV.H")
 #include <pianoV.H>
 #include <fontdesc.H>
@@ -74,8 +64,6 @@ static class atom *  A_string;
 
 
 ATKdefineRegistry(pianoV, valueview, pianoV::InitializeClass);
-#ifndef NORCSID
-#endif
 static void CarveFonts(class pianoV  * self);
 int locateHit(class pianoV  * self,int  x,int  y);
 void parselabels(class pianoV  * self,char  *chr);
@@ -234,7 +222,7 @@ pianoV::pianoV()
 
 void pianoV::LookupParameters()
 {
-    char * fontname;
+    const char * fontname;
     long fontsize;
     struct resourceList parameters[7];
 

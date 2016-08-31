@@ -2,8 +2,6 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
-static char *dofix_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynlink/ix86_LinuxAout/RCS/dofix.C,v 1.4 1994/08/26 15:35:23 rr2b Stab74 $";
-
 /* 
 	dofix.c - convert .o file into .do file
 
@@ -70,8 +68,9 @@ static void doload_read(struct doload_environment *e)
 
     safe_read(e, (char *)&(e->header), (long)sizeof e->header);
     if (e->mode == List)
-	printf( "\nHEADER\n  magic= %x\n  text = %x\n  data = %x\n\
-  bss  = %x\n  syms = %x\n  entry= %x\n  trsize=%x\n  drsize=%x\n",
+	printf( "\nHEADER\n  magic= %x\n  text = %x\n  data = %x\n"
+		"  bss  = %x\n  syms = %x\n  entry= %x\n  trsize=%x\n"
+		"  drsize=%x\n",
 		N_MAGIC(e->header), e->header.a_text, e->header.a_data,
 		e->header.a_bss, e->header.a_syms, e->header.a_entry,
 		e->header.a_trsize, e->header.a_drsize);
@@ -270,7 +269,7 @@ static void FixSets(struct doload_environment *e) {
     }
 }
 
-static char registrystr[]="_ATKregistry_";
+static const char registrystr[]="_ATKregistry_";
 
 static int Exportable(const char *np) {
     const char *p;

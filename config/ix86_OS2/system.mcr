@@ -1,6 +1,3 @@
-/* $Id$ */
-
-
 /* Copyright IBM Corporation 1994 - All Rights Reserved */
 /* For full copyright information see:'andrew/config/COPYRITE' */
  

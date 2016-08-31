@@ -25,19 +25,10 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/menulist.C,v 3.12 1995/07/14 18:52:45 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* menulist.c
  * Provides an abstraction for cooperative menu usage among views.
  */
+#include <andrewos.h>
 ATK_IMPL("menulist.H")
 
 #include <menulist.H>
@@ -74,7 +65,7 @@ ATKdefineRegistry(menulist, ATK, NULL);
 
 
 static void 
-ExplodeMenuString(char  *str, char  *paneStr, long  paneStrLen, long  *panePriority, 
+ExplodeMenuString(const char  *str, char  *paneStr, long  paneStrLen, long  *panePriority, 
 		  char  *selectionStr, long  selectionStrLen, long  *selectionPriority)
 {
     char *p;
@@ -281,7 +272,6 @@ static int ReadMenuFile(const char  *filename, boolean  executeImmediately)
         p = buffer;
         while (p < buffer + length) {
 	    char str[128];
-	    char strvalue[128];
 	    int i = 0;
             ++currentLine;
 	    /* Skip to the end of line. */
@@ -346,7 +336,7 @@ static int ReadMenuFile(const char  *filename, boolean  executeImmediately)
 }    
 
 
-void InitMenuFile()
+static void InitMenuFile(void)
 {
     const char *al=environ::Get("ANDREWLANGUAGE");
     const char *alf=environ::Get("ANDREWLANGUAGEMENUFILE");
@@ -465,7 +455,7 @@ static void SetPrio(int  p, char  *sp)
     else sprintf(sp, "~%d", p);
 }
     
-void menulist::AddToML(char  *string, struct proctable_Entry  *menuProc, long  functionData /* Actually any 32 bit crufty... */, long  mask)
+void menulist::AddToML(const char  *string, struct proctable_Entry  *menuProc, long  functionData /* Actually any 32 bit crufty... */, long  mask)
                     {
 
     struct itemlist *thisItem;
@@ -518,7 +508,6 @@ void menulist::AddToML(char  *string, struct proctable_Entry  *menuProc, long  f
     for (thisItem = this->menus; thisItem != NULL && (strcmp(thisItem->string, string) != 0); thisItem = thisItem->next);
 
     if (thisItem == NULL) {
-	char *p;
         thisItem = (struct itemlist *) malloc(sizeof(struct itemlist));
         thisItem->string = (char *) malloc(strlen(string) + 1);
         strcpy(thisItem->string, string);
@@ -534,7 +523,7 @@ void menulist::AddToML(char  *string, struct proctable_Entry  *menuProc, long  f
     this->version = this->menuVersion = nextMLVersion;
 }
 
-void menulist::DeleteFromML(char  *string)
+void menulist::DeleteFromML(const char  *string)
         {
 
     struct itemlist *traverse, **previous = &(this->menus);

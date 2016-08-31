@@ -26,7 +26,6 @@ $Disclaimer:
 #include <andrewos.h>
 
 static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/modtext.C,v 2.2 1995/02/09 21:56:46 susan Stab74 $";
 
 #include <environment.H>
 #include <stylesheet.H>
@@ -53,7 +52,7 @@ void modtext::SetAttributes(struct attributes *atts)
 {
     (this)->srctext::SetAttributes(atts);
     while (atts!=NULL) {
-	char *key=atts->key;
+	const char *key=atts->key;
 	if (strcmp(key,"preprocessor")==0)
 	    this->preprocessor=atoi(atts->value.string);
 	else if (strcmp(key,"outdent-preproc")==0)
@@ -247,12 +246,12 @@ long modtext::ReverseBalance(long pos)
     boolean instring=FALSE, doublestring=FALSE;
     int incomment=0, inpragma=0;
     int thischar, prechar;
-    char *parentype;
+    const char *parentype;
     struct paren_node {
 	long type;
 	struct paren_node *next;
     } *parenstack=NULL, *temp;
-    static char *opens = "({[", *closes = ")}]";
+    static const char opens[] = "({[", closes[] = ")}]";
 
     while (pos>0) {
 	thischar= GetChar(--pos);

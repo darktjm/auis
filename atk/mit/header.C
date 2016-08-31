@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/header.C,v 1.1 1994/08/11 03:02:50 rr2b Stab74 $";
-#endif
-
-
 #include <andrewos.h>
 #include <text.H>
 #include <dictionary.H>
@@ -52,8 +46,6 @@ static class style *header_promptStyle;
 
 
 ATKdefineRegistry(header, dataobject, header::InitializeClass);
-#ifndef NORCSID
-#endif
 void header_SetPrompt(class text  *textobj, char  *string);
 static long header_FencedWrite(class text  *textobj, FILE  *file, long  writeID, int  level);
 
@@ -74,7 +66,7 @@ void header::ObservedChanged(class observable  *t,long  value)
     if(value==0) (this)->SetModified();
 }
 
-char *header::ViewName()
+const char *header::ViewName()
 {
     return "headrtv";
 }

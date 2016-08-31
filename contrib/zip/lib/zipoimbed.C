@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipoimbed.C,v 1.4 1994/06/09 21:21:04 rr2b Stab74 $";
-#endif
-
 /* zipoimbd.c	Zip Object -- Imbed					      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -76,7 +71,7 @@ struct imbed
 
 ATKdefineRegistry(zipoimbed, ziporect, NULL);
 
-static long Load_Object( class zipoimbed *self, zip_type_figure  figure, char *name, boolean announce );
+static long Load_Object( class zipoimbed *self, zip_type_figure  figure, const char *name, boolean announce );
 static long Draw( class zipoimbed *self, zip_type_figure figure, zip_type_pane pane, long  action );
 
 
@@ -177,10 +172,11 @@ zipoimbed::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   act
 	  {
 	  (this->view_object)->Query(  "Enter Object Type [text]: ",
 					NULL, &response );
+          const char *ot = response;
 	  if ( response == NULL  ||  *response == 0 )
-	    response = "text";
+	    ot = "text";
 	  (this->view_object )->Use_Working_Pane_Cursors( );
-	  if ( (status = Load_Object( this, figure, response, true )) != zip_ok )
+	  if ( (status = Load_Object( this, figure, ot, true )) != zip_ok )
     	    (this->edit_object)->Delete_Figure(  figure, pane );
 	  (this->view_object )->Use_Normal_Pane_Cursors( );
 	  }
@@ -285,13 +281,13 @@ zipoimbed::Read_Object_Stream( zip_type_figure		   figure, FILE				  *file, long
   }
 
 static
-long Load_Object( class zipoimbed		  *self, zip_type_figure		   figure, char				  *name, boolean			   announce )
+long Load_Object( class zipoimbed		  *self, zip_type_figure		   figure, const char				  *name, boolean			   announce )
           {
   long				  status = zip_ok;
   struct imbed			 *imbed;
   class dataobject		 *data_object;
   class view			 *view_object;
-  char					 *view_name;
+  const char				 *view_name;
   char					  msg[512];
 
   IN(Load_Object);
@@ -466,7 +462,7 @@ zipoimbed::Print_Object( zip_type_figure figure, zip_type_pane pane )
 {
   class zipoimbed *self=this;
   long				  status = zip_ok;
-  char				 *language, *processor;
+  const char			 *language, *processor;
   struct imbed			 *imbed = (struct imbed *) figure->zip_figure_datum.zip_figure_anchor;
 
   IN(zipoimbed::Print_Object);

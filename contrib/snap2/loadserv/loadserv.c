@@ -25,17 +25,13 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/loadserv/RCS/loadserv.c,v 2.17 1993/01/15 19:09:03 gk5g Stab74 $";
-#endif
-
-
 #ifdef _IBMR2
 #ifndef _BSD
 #define _BSD 43
 #endif
 #endif
+
+#include <andrewos.h> /* sys/types.h sys/time.h sys/file.h */
 
 #define SEC (1L)
 #define MINS (60L*(SEC))
@@ -96,7 +92,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/
 /* default number of users to print*/
 #define ITOPN (10)
 
-#include <andrewos.h> /* sys/types.h sys/time.h sys/file.h */
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/param.h>
@@ -952,8 +947,6 @@ FILE *dfile;
     register int i;
     char otbuf[OUTPUT_TOKEN_MAX];
     fprintf(dfile,"loadserv %d.%d internal table dump\n",VER_MAJ,VER_MIN);
-    fprintf(dfile,"loadserv $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/loadserv/RCS/loadserv.c,v 2.17 1993/01/15 19:09:03 gk5g Stab74 $\n");
-    fprintf(dfile,"loadserv $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/loadserv/RCS/loadserv.c,v $\n");
     fprintf(dfile,"this loadserv stated at %s",ctime(&gl.time_started));
     fprintf(dfile,"we have handled %ld requests\n",
 	     gl.number_of_requests_processed);

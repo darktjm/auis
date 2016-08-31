@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/note.C,v 1.3 1994/08/11 03:02:56 rr2b Stab74 $";
-#endif
-
-
 #include <text.H>
 #include <sys/types.h>
 #include <pwd.h>
@@ -50,9 +43,6 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 /****************************************************************/
 
 ATKdefineRegistry(note, icon, note::InitializeClass);
-#ifndef NORCSID
-#endif
-
 
 boolean
 note::InitializeClass()

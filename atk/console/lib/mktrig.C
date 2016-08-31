@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/mktrig.C,v 1.2 1993/05/25 21:25:45 gk5g Stab74 $";
-#endif
-
-
- 
-
 /*************************************************************
 
 	mktrig.c

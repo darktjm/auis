@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/fonts/lib/RCS/fontio.c,v 2.7 1992/12/15 21:02:39 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* ************************************************************ *\
 
 	fontio.c	Input/Output of fonts.
@@ -40,9 +32,9 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/fonts
 
 \* ************************************************************ */
 
+#include <andrewos.h> /* sys/types.h */
 #include "font.h"
 #include <stdio.h>
-#include <andrewos.h> /* sys/types.h */
 #include <sys/stat.h> /* for fstat */
 static unsigned char reverse_bits[] = {
 	0x0, 0x8, 0x4, 0xc,

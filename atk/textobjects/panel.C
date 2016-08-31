@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textobjects/RCS/panel.C,v 1.8 1996/02/16 14:35:55 robr Stab74 $";
-#endif
-
-
-
 ATK_IMPL("panel.H")
 #include <cursor.H>
 #include <environment.H>
@@ -65,8 +57,6 @@ static char defaultIcon;
 
 
 ATKdefineRegistry(panel, textview, panel::InitializeClass);
-#ifndef NORCSID
-#endif
 static void DestroyPanelList(register struct panel_Entry  *pe);
 static void DestroyKeyList(register struct key_Entry  *ke);
 static void ClearHighlight(register class panel  *self);
@@ -267,7 +257,7 @@ panel::~panel()
  * Methods
  */
 
-struct panel_Entry *panel::Add(char  *item, char  *tag, int  showNow			/* make new selection visible now? */)
+struct panel_Entry *panel::Add(const char  *item, char  *tag, int  showNow			/* make new selection visible now? */)
 {
     register struct panel_Entry *new_c;
     register long len;

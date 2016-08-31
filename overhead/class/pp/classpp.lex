@@ -59,9 +59,6 @@ exit[^A-Z0-9a-z_]			return(class_TokName(name_Exit));
 
 .				return(class_Other);
 %%
-#ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/class/pp/RCS/classpp.lex,v 1.1 1993/08/27 18:50:25 gk5g Stab74 $";
-#endif
 #undef YYLMAX
 #define YYLMAX 1000
 

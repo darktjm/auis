@@ -1,6 +1,4 @@
 /* 
- * @(#)Makefile	1.2 87/11/09 3.9 RPCSRC
- *
  * Makefile for rpc protocol compiler
  * Copyright (C) 1987, Sun Microsystems, Inc.
  */

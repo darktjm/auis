@@ -25,15 +25,6 @@
 //  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/basinit.C,v 2.2 1993/07/29 20:15:08 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 #define class_StaticEntriesOnly
 
 #include <andrewos.h>
@@ -62,8 +53,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/com
 #include <rm.H>
 #include <windowsystem.H>
 
-#ifndef NORCSID
-#endif
 int basics_Initialize();
 
 

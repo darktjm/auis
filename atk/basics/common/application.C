@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/application.C,v 3.12 1995/11/29 17:45:30 robr Stab74 $";
-#endif
-
 #include <util.h>
 ATK_IMPL("application.H")
 
@@ -94,7 +88,7 @@ application *application::GetStartupApplication()
 {
     return startup_app;
 }
-char **application::AppSessionCheckpoint()
+const char * const *application::AppSessionCheckpoint()
 {
     return (startup_app) ? startup_app->SessionCheckpoint() : NULL;
 }
@@ -118,7 +112,7 @@ char **application::AppGetInitialArgv()
  * NOTE:  The caller is responsible for making a copy of the value
  *        returned here.
  */
-char **application::SessionCheckpoint()
+const char * const *application::SessionCheckpoint()
 {
     return init_argv;
 }
@@ -350,10 +344,8 @@ application::ReadInitFile()
 	    sprintf(buffer, "%s/global.%sinit", thisStr, name);
 	    if ((initp)->Load( buffer, this->errorProc, (long) this->errorRock, this->forceload) >= 0) {
 		HadGlobalNameInit = TRUE;
-		if(localLib = (char*) malloc(strlen(thisStr) + 1))
+		if((localLib = (char*) malloc(strlen(thisStr) + 1)))
 		    strcpy((char *)localLib, thisStr);
-		else
-		    localLib = NULL;
 		break;
 	    }
 	    thisStr = nextStr;

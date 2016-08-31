@@ -28,11 +28,6 @@
 #include <andrewos.h>
 ATK_IMPL("htmltextview.H")
 #include <htmltextview.H>
-
-#ifndef NORCSID
-static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/htmltextview.C,v 1.7 1996/09/04 18:06:08 robr Exp $";
-#endif
-
 #include <view.H>
 #include <viewref.H>
 #include <bind.H>
@@ -247,7 +242,7 @@ htmlenv *first_list_env(htmltextview *self, long pos, enum ListType *type, htmle
     htmlenv *env;
     long o=0, u=0, d=0;
     style *style;
-    char *sname;
+    const char *sname;
     if (start_env) env= (htmlenv *)(start_env)->GetParent();
     else env= (htmlenv *)(self)->GetInsertEnvironment(pos);
 
@@ -343,7 +338,7 @@ static void insert_dingbats(htmlenv *curr_env, htmltext *txtobj, long pos, long 
     }
 }
 
-int doproc(htmltextview *self, char *procname, long parm)
+static int doproc(htmltextview *self, const char *procname, long parm)
 {
     struct proctable_Entry *proc= proctable::Lookup(procname);
 
@@ -367,7 +362,7 @@ void makeList(htmltextview *self, enum ListType listtype)
     long origpos= pos;
     htmlenv *env=NULL, *temp_env=NULL;
     style *list_style;
-    char *list_name;
+    const char *list_name;
     boolean SibEndFlag, SibBeginFlag;
     enum ListType Sibltype;
 
@@ -630,7 +625,8 @@ void setTargetLink(frame *frame, long param)
 	/* do something like make an id if one isn't already there and stuff */
 	long pos, len, i=0;
 	htmlenv *first_env, *env, *rootenv;
-	char *value, *begin, *end, hrefval[128];
+	const char *value;
+	char *begin, *end, hrefval[128];
 
 	rootenv= (htmlenv *)tar_hto->text::rootEnvironment;
 
@@ -684,7 +680,7 @@ void setTargetLink(frame *frame, long param)
 void setSourceLink(htmltextview *self, long param)
 {
     /* Start the autolink process.  Check to make sure we're not trouncing on another autolink first though.... */
-    static char *conflict[]= {
+    static const char * const conflict[]= {
 	"Use new sourcelink source",
 	"Use old sourcelink source",
 	"Cancel sourcelink",
@@ -782,12 +778,12 @@ void addTarget(htmltextview *self, long rock)
 	/* prompt for new name for existing anchortarget style */
 	struct htmlatts *nameAtt= (env->GetAttribs())->GetAttribute("name");
 	if (nameAtt) {
-	    char *oldname= nameAtt->value;
+	    const char *oldname= nameAtt->value;
 	    strcpy(newname, oldname);
 	    if (message::AskForString(self, 0, "New name for anchor target: ", newname, newname, sizeof(newname)) < 0)
 		return; /* cancelled */
 	    nameAtt->value= (char *)malloc(strlen(newname) +1);
-	    strcpy(nameAtt->value, newname);
+	    strcpy((char *)nameAtt->value, newname);
 	}
     } else {
 	/* get name, wrap anchortarget style, set name of anchortarget style */
@@ -1076,8 +1072,7 @@ view *htmltextview::Hit(enum view_MouseAction action, long x, long y, long numbe
 	}
 	if (env && env != rootenv) {
 	    // it is an anchor
-	    char *href_value
-	      = (env)->GetAttribValue("href");
+	    const char *href_value = (env)->GetAttribValue("href");
 	    if (href_value) {
 		message::DisplayString(this, 0, href_value);
 		DisplayingHref = TRUE;

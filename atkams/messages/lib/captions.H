@@ -139,7 +139,7 @@ public:
     virtual int DeleteVisibleMessage(boolean delete_c)  ;
     virtual int DisplayNewBody(int thisCUID, int linestart, int linelen, class environment *env)  ;
     virtual int FindCUIDByDocLocation(int *position,  int *len, class environment **envptr, int *whichcaption)  ;
-    virtual int GetBodyFromCUID(int cuid, int Mode, char *ContentTypeOverride)  ;
+    virtual int GetBodyFromCUID(int cuid, int Mode, const char *ContentTypeOverride)  ;
     virtual int GuaranteeFetchedRange(int min, int max)  ;
     virtual int InsertUpdatesInDocument(char *shortname, char *dname, boolean ShowFirst)  ;
     virtual void MarkVisibleMessageStateofSeeing(boolean hasseen);
@@ -163,13 +163,13 @@ public:
     virtual class folders * NewFoldersInNewWindow()  ;
     virtual void BackUpCheckingMarks(boolean checkmarks);
     virtual void ActOnMarkedMessages(int markaction, char *string);
-    virtual char * GetLastClassification()  ;
+    virtual const char * GetLastClassification()  ;
     virtual void ClearMarks();
     virtual void AlterFileIntoMenus(boolean shrink);
     virtual void CloneMessage(int code);
     virtual void MarkCurrent();
     virtual void PrintVisibleMessage();
-    virtual void Redisplay(int Mode, char *contenttype);
+    virtual void Redisplay(int Mode, const char *contenttype);
     virtual class folders * GetFolders()  ;
     virtual class t822view * GetBodView()  ;
 

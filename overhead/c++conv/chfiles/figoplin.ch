@@ -20,8 +20,6 @@
  * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  * 
  *  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/c++conv/chfiles/RCS/figoplin.ch,v 1.1 1993/10/13 15:52:18 rr2b Stab74 $
 */
 
 #include <point.h>

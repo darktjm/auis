@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/time/RCS/writestamp.C,v 1.3 1993/06/04 02:21:41 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 #include <stdio.h>
 #include <writestamp.H>
@@ -53,8 +48,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/time/R
 
 
 ATKdefineRegistry(writestamp, timeoday, writestamp::InitializeClass);
-#ifndef NORCSID
-#endif
 static void WriteLine(FILE  *f, char  *l);
 static char * GlomStrings(char  *s , char  *t);
 static char * ReadLine(FILE  *f);

@@ -26,13 +26,6 @@
  *  $
 */
 
-#include <andrewos.h>	/* sys/file sys/time */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/createinset/cmd/RCS/createinset.C,v 1.4 1994/08/16 17:42:38 wjh Stab74 $";
-#endif
-
 /* createinset.c
 	create a directory and initial files for an inset
 
@@ -127,6 +120,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  *
 */
 
+#include <andrewos.h>	/* sys/file sys/time */
 #include <stdio.h>
 #ifndef MAXPATHLEN
 #include <sys/param.h>
@@ -138,7 +132,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  *	For changes in the list of files or names or locations.
  */
 
-static char *filelist[] = {
+static const char * const filelist[] = {
         "%s/Imakefile",
 	"%s/%s.help",
 /* 	"%s/%sst.C",		- no idea what this was -wjh */
@@ -151,8 +145,8 @@ static char *filelist[] = {
 	"%s/%sapp.C",
 	NULL
 };
-static char *sourcename = "null";
-static char *residence = "/lib/null";
+static const char sourcename[] = "null";
+static const char residence[] = "/lib/null";
 
 
 
@@ -165,7 +159,7 @@ static boolean debug;
 /* check the result of a system call 
 	if b is TRUE, is okay
 	otherwise print msg and errno and exit  */
-static void checkerrno(char *msg, boolean b)
+static void checkerrno(const char *msg, boolean b)
 {
 	if (b) return;
 	perror(msg);
@@ -210,7 +204,7 @@ static void convert(FILE *inf, FILE *outf)
 		if (c == EOF) return;
 		if (c == firstletter) {
 			/* found first letter, check for rest of source name */
-			register char *test = sourcename, *tx = test;
+			register const char *test = sourcename, *tx = test;
 			while (c == *tx) 
 				c = getc(inf), tx++;
 			/* c is first char that did not match */
@@ -219,7 +213,7 @@ static void convert(FILE *inf, FILE *outf)
 				/* there is something left, we failed to find sourcename */
 				/* output contains everything before the firs letter
 					tx points to first character that did not match */
-				register char *ttx = test;
+				register const char *ttx = test;
 				while (ttx < tx)
 					fputc(*ttx++, outf);
 			}
@@ -229,7 +223,7 @@ static void convert(FILE *inf, FILE *outf)
 		}
 		else if (c == '$') {
 			/* found a "$" check for continuation with "Log:" */
-			register char *test = "Log:", *tx = test;
+			const char test[] = "Log:", *tx = test;
 			fputc(c, outf);	/* output the '$' */
 			while ((c=getc(inf)) == *tx) 
 				tx++;
@@ -239,7 +233,7 @@ static void convert(FILE *inf, FILE *outf)
 				/* there is something left, we failed to find "null" */
 				/* output contains everything up to and including the "$"
 					tx points to first character that did not match */
-				register char *ttx = test;
+				register const char *ttx = test;
 				while (ttx < tx)
 					fputc(*ttx++, outf);
 			}
@@ -254,7 +248,7 @@ static void convert(FILE *inf, FILE *outf)
 int main(int argc, char **argv)
 {
 	FILE *inf, *outf;
-	char **filename;
+	const char * const *filename;
 	short i;
 	char cwd[MAXPATHLEN+1], cmd[MAXPATHLEN<<1], reply[40];
 	long uid;

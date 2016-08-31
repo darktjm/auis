@@ -1,5 +1,5 @@
 int MSDebugging=0;
-char ProgramName[]="testdate";
+const char ProgramName[]="testdate";
 
 main(argc,argv)
 int	argc;

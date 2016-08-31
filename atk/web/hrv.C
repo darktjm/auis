@@ -49,7 +49,7 @@ void hrv::ReceiveInputFocus()
     }
 }
 
-void hrv::Print(FILE *f, char *process, char *final, boolean toplevel)
+void hrv::Print(FILE *f, const char *process, const char *final, boolean toplevel)
 {
     fputs("\\l(5.5i_\n\\&\n.sp 12p\n", f);
 }

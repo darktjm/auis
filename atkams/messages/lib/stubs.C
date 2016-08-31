@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/stubs.C,v 1.15 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 #include <stdio.h>
 #include <string.h>
 #include <sys/signal.h>
@@ -79,8 +73,8 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #include <stubs.h>
 
 void SubtleDialogs(int  Really);
-int ChooseFromList(char  **QVec, int  def);
-int HandleTimeout(char  *name, int  retries , int  restarts);
+int ChooseFromList(const char  * const *QVec, int  def);
+int HandleTimeout(const char  *name, int  retries , int  restarts);
 void DidRestart();
 void SetTerminalParams(int  h,int  w);
 #if defined(AMS_DEBUG_MALLOC_ENV) || defined(ELI_DEBUG_MALLOC_ENV)
@@ -90,27 +84,27 @@ void SetMallocCheckLevel();
 void SubscriptionChangeHook(char  *name , char  *nick, int  status, class messages  *mess);
 void DirectoryChangeHook(char  *adddir , char  *deldir, class messages  *mess);
 void SetProgramVersion();
-static int SendBug(char  *text , char  *moretext, int  code);
-static int PrepareAutoBugFile(char  *text , char  *moretext , int  code, char  *FileName);
+static int SendBug(const char  *text , const char  *moretext, int  code);
+static int PrepareAutoBugFile(const char  *text , const char  *moretext , int  code, char  *FileName);
 void WriteOutUserEnvironment(FILE  *fp, Boolean  IsAboutMessages);
 static void DescribeLink(FILE  *fp, const char  *name);
 static int SnarfFile(FILE  *fp, const char  *fname);
 static void ReportOptionState(FILE  *fp);
 int TildeResolve(const char  *old , char  *new_c);
-void ReportError(char  *text, int  level, int  Decode);
-void RealReportError(char  *text, int  level, int  Decode);
-void ReportFailure(char  *text , char  *moretext, int  fmask);
-void ReportSuccessNoLogging(char  *text);
-void ReportSuccess(char  *text);
-void RealReportSuccess(char  *text);
-static void RememberMessage(char  *text , char  *moretext);
+void ReportError(const char  *text, int  level, int  Decode);
+void RealReportError(const char  *text, int  level, int  Decode);
+void ReportFailure(const char  *text , const char  *moretext, int  fmask);
+void ReportSuccessNoLogging(const char  *text);
+void ReportSuccess(const char  *text);
+void RealReportSuccess(const char  *text);
+static void RememberMessage(const char  *text , const char  *moretext);
 static void ReportErrorHistory(FILE  *fp);
-int GenericCompoundAction(class view  *v, char  *prefix , char  *orgcmds);
-Boolean GetBooleanFromUser(char  *prompt, int  defaultans);
-int GetStringFromUser(char    *prompt , char    *buf, int  len , int  IsPassword);
-char *BalancedQuote(char  *qstring);
-void GetSeparators(char  *cmds , char  **argsep , char  **cmdsep);
-char * DescribeProt(int  ProtCode);
+int GenericCompoundAction(class view  *v, const char  *prefix , const char  *orgcmds);
+Boolean GetBooleanFromUser(const char  *prompt, int  defaultans);
+int GetStringFromUser(const char    *prompt , char    *buf, int  len , int  IsPassword);
+char *BalancedQuote(const char  *qstring);
+void GetSeparators(char  *cmds , const char  * const *argsep , char  **cmdsep);
+const char * DescribeProt(int  ProtCode);
 void SnarfCommandOutputToFP(char  *cmd, FILE  *fp);
 
 extern "C" {
@@ -208,7 +202,7 @@ void SubtleDialogs(int  Really)
     SubtleDialogFlag = Really;
 }
 
-int ChooseFromList(char  **QVec, int  def)
+int ChooseFromList(const char  * const *QVec, int  def)
 {
     long myans;
     class view *v;
@@ -226,7 +220,7 @@ int ChooseFromList(char  **QVec, int  def)
     return(myans+1);
 }
 
-int HandleTimeout(char  *name, int  retries , int  restarts)
+int HandleTimeout(const char  *name, int  retries , int  restarts)
 {
 /*    if (retries < 2) { */ /* Not needed in SNAP 2 */
     if (retries < 0) {
@@ -276,7 +270,7 @@ void SetProgramVersion()
     sprintf(ProgramVersion, "((prog messages %d %d))", MESSAGES_MAJOR_VERSION, MESSAGES_MINOR_VERSION);
 }
 
-static int SendBug(char  *text , char  *moretext, int  code)
+static int SendBug(const char  *text , const char  *moretext, int  code)
 {
     char FileName[1+MAXPATHLEN], Msg[100+MAXPATHLEN];
     int DumpingCore;
@@ -315,7 +309,7 @@ static int SendBug(char  *text , char  *moretext, int  code)
     return(0);
 }
 
-static int PrepareAutoBugFile(char  *text , char  *moretext , int  code, char  *FileName)
+static int PrepareAutoBugFile(const char  *text , const char  *moretext , int  code, char  *FileName)
 {
     char Buf[2000], Subj[50], CoreDirectory[1+MAXPATHLEN];
     FILE *fp;
@@ -376,7 +370,7 @@ static int PrepareAutoBugFile(char  *text , char  *moretext , int  code, char  *
     return(0);
 }
 
-static char *SepLine = "\n\n----------------------------------------\n\n";
+static const char SepLine[] = "\n\n----------------------------------------\n\n";
 
 void WriteOutUserEnvironment(FILE  *fp, Boolean  IsAboutMessages)
 {
@@ -593,7 +587,7 @@ static int SnarfFile(FILE  *fp, const char  *fname)
     return 0;
 }
 
-static char *OptDescriptions[] = {
+static const char * const OptDescriptions[] = {
     "EXP_FILEINTO",
     "OBSOLETE 1",
     "OBSOLETE 2",
@@ -709,12 +703,12 @@ int TildeResolve(const char  *old , char  *new_c)
 }
 
 
-void ReportError(char  *text, int  level, int  Decode)
+void ReportError(const char  *text, int  level, int  Decode)
 {
     RealReportError(text, level, Decode);
 }
 
-void RealReportError(char  *text, int  level, int  Decode)
+void RealReportError(const char  *text, int  level, int  Decode)
 {
     static char LatestDisaster[400] = "";
     char    ErrorText[500],
@@ -854,10 +848,10 @@ void RealReportError(char  *text, int  level, int  Decode)
     }	
 }
 
-void ReportFailure(char  *text , char  *moretext, int  fmask)
+void ReportFailure(const char  *text , const char  *moretext, int  fmask)
 {
 #define MAXFAILCHOICES 5
-    char *QVec[MAXFAILCHOICES+1];
+    const char *QVec[MAXFAILCHOICES+1];
     int ct, Codes[MAXFAILCHOICES+1], ans;
 
     if (moretext && !*moretext) moretext = NULL; /* get it over with */
@@ -874,7 +868,7 @@ restart:
 	}
     }
     if (fmask & FMASK_QUIT) {
-	QVec[ct] = (char *)((fmask & FMASK_CONT) ? "Quit the program" : "Quit the program (cannot continue)");
+	QVec[ct] = ((fmask & FMASK_CONT) ? "Quit the program" : "Quit the program (cannot continue)");
 	Codes[ct++] = FMASK_QUIT;
     }
     /* This one should remain last if you add other things */
@@ -915,18 +909,18 @@ restart:
     }
 }
 
-void ReportSuccessNoLogging(char  *text)
+void ReportSuccessNoLogging(const char  *text)
 {
     message::DisplayString(GetIM(), 10, text);
     im::ForceUpdate();
 }
 
-void ReportSuccess(char  *text)
+void ReportSuccess(const char  *text)
 {
     RealReportSuccess(text);
 }
 
-void RealReportSuccess(char  *text)
+void RealReportSuccess(const char  *text)
 {
     debug(1, ("ReportSuccess %s\n", text));
     RememberMessage(text, NULL);
@@ -941,7 +935,7 @@ static time_t ErrHistTimes[ERRHISTSIZE];
 static int DidInitErrHist = 0;
 static int ErrHistStart = 0;
 
-static void RememberMessage(char  *text , char  *moretext)
+static void RememberMessage(const char  *text , const char  *moretext)
 {
     char *SavedCopy;
 
@@ -990,7 +984,7 @@ static void ReportErrorHistory(FILE  *fp)
     } while (i!=ErrHistStart);
 }
 
-int GenericCompoundAction(class view  *v, char  *prefix , char  *orgcmds)
+int GenericCompoundAction(class view  *v, const char  *prefix , const char  *orgcmds)
 {
     char *nextcmd, *args, ErrorText[1000], *cmds, *cmdstofree;
     struct proctable_Entry *ptent;
@@ -1067,9 +1061,9 @@ int GenericCompoundAction(class view  *v, char  *prefix , char  *orgcmds)
     return(0);
 }
 
-Boolean GetBooleanFromUser(char  *prompt, int  defaultans)
+Boolean GetBooleanFromUser(const char  *prompt, int  defaultans)
 {
-    static char *BooleanQVec[4] = {"", "Yes", "No", NULL};
+    static const char * BooleanQVec[4] = {"", "Yes", "No", NULL}; /* modified below */
     int ans;
     char MyQuest[500];
 
@@ -1080,7 +1074,7 @@ Boolean GetBooleanFromUser(char  *prompt, int  defaultans)
     return (ans == 1);
 }
 
-int GetStringFromUser(char    *prompt , char    *buf, int  len , int  IsPassword)
+int GetStringFromUser(const char    *prompt , char    *buf, int  len , int  IsPassword)
 {
     char *new_prompt = (char *)malloc(strlen(prompt) + 3);
     int retval = 0;
@@ -1102,10 +1096,10 @@ int GetStringFromUser(char    *prompt , char    *buf, int  len , int  IsPassword
     return(retval);
 }
 
-char *BalancedQuote(char  *qstring)
+char *BalancedQuote(const char  *qstring)
 {
     int qct = 0;
-    char *s;
+    const char *s;
 
     if (!qstring) return(NULL);
     for (s=qstring; *s; ++s) {
@@ -1113,14 +1107,14 @@ char *BalancedQuote(char  *qstring)
 	    ++qct;
 	} else if (*s == '\'') {
 	    if (--qct <= 0) {
-		return(qct ? NULL : s);
+		return(qct ? NULL : (char *)s);
 	    }
 	}
     }
     return(NULL);
 }
 
-void GetSeparators(char  *cmds , char  **argsep , char  **cmdsep)
+void GetSeparators(char  *cmds , const char  **argsep , char  **cmdsep)
 {
     char *secondquote, *firstspace, *firstsemi;
 
@@ -1162,7 +1156,7 @@ void GetSeparators(char  *cmds , char  **argsep , char  **cmdsep)
     return;
 }    
 
-char *
+const char *
 DescribeProt(int  ProtCode)
 {
       switch(ProtCode) {
@@ -1188,7 +1182,8 @@ DescribeProt(int  ProtCode)
 void SnarfCommandOutputToFP(char  *cmd, FILE  *fp)
 {
     FILE *myfp;
-    char LineBuf[2000], *cmdv[5];
+    char LineBuf[2000];
+    const char *cmdv[5];
     int pgrp, timedout;
 
     fprintf(fp, "Here is the output of the command '%s':\n", cmd);

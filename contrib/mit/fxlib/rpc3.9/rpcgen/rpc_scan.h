@@ -1,5 +1,3 @@
-/* @(#)rpc_scan.h	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -50,8 +48,6 @@
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-/* @(#)rpc_scan.h 1.3 87/03/09 (C) 1987 SMI */
-
 /*
  * rpc_scan.h, Definitions for the RPCL scanner 
  * Copyright (C) 1987, Sun Microsystems, Inc. 

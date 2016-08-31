@@ -40,13 +40,13 @@ ATK_INTER
 #include <ATK.H>
 
 
-	typedef boolean (*ghash_efptr)(long rock, char *value, char *key, class ghash *self);
+	typedef boolean (*ghash_efptr)(long rock, char *value, const char *key, class ghash *self);
 	typedef void (*ghash_freevalfptr)(char *value);
 	typedef void (*ghash_freekeyfptr)(char *key);
-	typedef char *(*ghash_copyvalfptr)(char *value);
+	typedef char *(*ghash_copyvalfptr)(const char *value);
 	typedef char *(*ghash_copykeyfptr)(const char *key);
-	typedef int (*ghash_comparekeyfptr)(char *key1, char *key2);
-	typedef int (*ghash_hashfptr)(char *key);
+	typedef int (*ghash_comparekeyfptr)(const char *key1, const char *key2);
+	typedef int (*ghash_hashfptr)(const char *key);
 
 class ghash : public ATK  {
 public:
@@ -58,11 +58,11 @@ public:
 	static boolean InitializeClass();
 
 
-    virtual char * Lookup(char *key)  ;
-    virtual char * LookupKey(char *key)  ;
-    virtual boolean Store(char *key, char *value)  ;
-    virtual char * Delete(char *key)  ;
-    virtual char * Rename(char *key, char *new_c)  ;
+    virtual char * Lookup(const char *key)  ;
+    virtual const char * LookupKey(const char *key)  ;
+    virtual boolean Store(const char *key, const char *value)  ;
+    virtual char * Delete(const char *key)  ;
+    virtual char * Rename(const char *key, char *new_c)  ;
     virtual void Clear();
     virtual char * Enumerate(ghash_efptr proc, long rock)  ;
     virtual void Debug();

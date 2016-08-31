@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipvp01.C,v 1.4 1993/08/04 21:15:05 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* zipvp01.c	Zip View-object	-- Pane	Cursors			      */
 /* Author	TC Peters					      */
 /* Information Technology Center	   Carnegie-Mellon University */
@@ -82,7 +74,7 @@ END-SPECIFICATION  ************************************************************/
 
 
 long
-zipview::Set_Pane_Cursor( register zip_type_pane		   pane, register char				   icon, register char				  *font_name )
+zipview::Set_Pane_Cursor( register zip_type_pane		   pane, register char				   icon, register const char				  *font_name )
           {
   register int				  status = zip_ok;
   register class fontdesc		 *old_font;

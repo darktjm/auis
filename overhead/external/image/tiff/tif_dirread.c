@@ -818,7 +818,7 @@ TIFFFetchFloatArray(TIFF *tif, TIFFDirEntry *dir, float v[])
 static int
 TIFFFetchNormalTag(TIFF *tif, TIFFDirEntry *dp)
 {
-	static char mesg[] = "to fetch tag value";
+	static const char mesg[] = "to fetch tag value";
 	int ok = 0;
 
 	if (dp->tdir_count > 1) {		/* array of values */
@@ -975,7 +975,7 @@ TIFFFetchStripThing(TIFF *tif, TIFFDirEntry *dir, long nstrips, u_long **lpp)
 static int
 TIFFFetchRefBlackWhite(TIFF *tif, TIFFDirEntry *dir)
 {
-	static char mesg[] = "for \"ReferenceBlackWhite\" array";
+	static const char mesg[] = "for \"ReferenceBlackWhite\" array";
 	char *cp;
 	int ok;
 

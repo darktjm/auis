@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/wpi/RCS/wpq.c,v 1.7 1994/11/04 22:37:12 rr2b Stab74 $";
-#endif
-
 /*========================================================================*\
  * wpq -- White Pages Query                                               *
  *   The "ultimate" WP command line user interface                        *

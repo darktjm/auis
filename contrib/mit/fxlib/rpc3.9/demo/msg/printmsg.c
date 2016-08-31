@@ -1,5 +1,3 @@
-/* @(#)printmsg.c	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,11 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/demo/msg/RCS/printmsg.c,v 1.3 1992/12/15 21:53:21 rr2b Stab74 $";
-#endif
 
 /*
  * printmsg.c: print a message on the console

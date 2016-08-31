@@ -42,10 +42,6 @@ ATKregistryEntry[^A-Z0-9a-z_]			return(refs_TokUnput(refs_ATKregistryEntry));
 
 .				return(refs_Other);
 %%
-#ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/grefs/RCS/refs.lex,v 1.2 1995/03/01 01:50:33 rr2b Stab74 $";
-#endif
-
 static int refs_TokUnput(int tok)
 {
     unput(yytext[--yyleng]);

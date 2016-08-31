@@ -43,7 +43,7 @@ void htmlenv::SetAttribs(attlist *atts)
     attlist::Copy(this->attribs, atts);
 }
 
-char *htmlenv::GetAttribValue(char *name)
+const char *htmlenv::GetAttribValue(const char *name)
 {
     struct htmlatts *atts = (this->attribs)->GetAttribute(name);
     return (atts) ? atts->value : NULL;

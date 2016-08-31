@@ -27,11 +27,6 @@
 
 #include <andrewos.h> /* strings.h */
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/rastvaux.C,v 1.8 1996/10/18 18:53:44 wjh Exp $";
-#endif
-
 #define AUXMODULE 1
 #include <rasterview.H>
 
@@ -694,7 +689,7 @@ view_DSattributes rasterview::DesiredSize(long  width, long  height, enum view_D
     return view_Fixed;
 }
 
-static char *MouseEvent[] = {
+static const char * const MouseEvent[] = {
     "No Mouse Event",
     "Left Down",
     "Left Up",
@@ -949,7 +944,7 @@ class view * rasterview::Hit(enum view_MouseAction   action, long   x , long   y
 #define NO_FLOATS_IN_PRINTF_ENV
 #endif
 
-static char *PSheader[] = {
+static const char * const PSheader[] = {
 #ifndef NO_FLOATS_IN_PRINTF_ENV
 	"%s  /width %d def  /height %d def /xScale %0.4f def /yScale %0.4f def\n",
 #endif
@@ -961,17 +956,17 @@ static char *PSheader[] = {
 	"%s     image\n",
 	NULL };
 
-void rasterview::Print(register FILE   	 *file, register char	 *processor, register char	 *format, register boolean	 toplevel)
+void rasterview::Print(register FILE   	 *file, register const char	 *processor, register const char	 *format, register boolean	 toplevel)
 {
     register class raster *ras = (class raster *)(this)->GetDataObject();
     register class rasterimage *pix;
-    char **psx;
+    const char * const *psx;
     long row;
     short buf[300];
     long left, top, width, height;
     long wpts, hpts;  /* image dimensions in points */
     float xdscale, ydscale;
-    char *prefix;
+    const char *prefix;
 
     if (ras == NULL || (pix=(ras)->GetPix()) == NULL) return;
 
@@ -1196,7 +1191,7 @@ void rasterview::DesiredPrintSize(long width, long height, enum view_DSpass pass
     *desiredheight = hpts;
 }
 
-void *rasterview::GetPSPrintInterface(char *printtype)
+void *rasterview::GetPSPrintInterface(const char *printtype)
 {
     if (!strcmp(printtype, "generic"))
 	return (void *)this;
@@ -1205,7 +1200,7 @@ void *rasterview::GetPSPrintInterface(char *printtype)
 }
 
 	boolean 
-rasterview::Gifify(char *filename, long *pmaxw, long *pmaxh, 
+rasterview::Gifify(const char *filename, long *pmaxw, long *pmaxh, 
 			struct rectangle *visrect) {
 	cmuwm in;	// temp image of type ATK raster
 	gif out;		// temp image of type gif

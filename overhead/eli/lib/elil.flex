@@ -97,9 +97,6 @@ WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,
 ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
 SOFTWARE.
 ******************************************************************/
-#ifndef NORCSID
-static UNUSED const char elil[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/elil.flex,v 1.4 1996/03/11 19:29:45 robr Stab74 $";
-#endif
 
 #ifdef unput
 #undef unput

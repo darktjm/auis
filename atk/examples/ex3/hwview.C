@@ -25,13 +25,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/examples/ex3/RCS/hwview.C,v 1.4 1996/12/19 20:24:43 fred Exp $";
-#endif
-
-
 ATK_IMPL("hwview.H")
 #include "hwview.H"
 #include "graphic.H"
@@ -40,9 +33,6 @@ ATK_IMPL("hwview.H")
 
 
 ATKdefineRegistry(helloworldview, view, NULL);
-#ifndef NORCSID
-#endif
-
 
 helloworldview::helloworldview()
 {

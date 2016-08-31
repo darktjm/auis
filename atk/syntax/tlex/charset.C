@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-	char *tlex_charset_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/syntax/tlex/RCS/charset.C,v 1.2 1993/05/18 17:23:32 rr2b Stab74 $";
-#endif
-
 /*
 	a char set declaration is bounded with [ and ]
 	it contains a sequence of characters to be included in the set
@@ -64,8 +60,6 @@ static struct bitarray *CurrBitAr = NULL;
 	Returns ptr to static storage containing a 256 character bit
 		vector with ones set for the characters in the set.
 */
-	#ifndef NORCSID
-#endif
 char * CharsetParse(char  *s);
 char * CharsetValue(char  *set);
 void CharsetOutputArrays(FILE  *f);
@@ -167,7 +161,7 @@ CharsetOutputArrays(FILE  *f)
 	{
 	int j;
 	for ( ; CurrBitAr != NULL; CurrBitAr = CurrBitAr->prev) {
-		fprintf(f, "static char %s[256] = {", CurrBitAr->name);
+		fprintf(f, "static const char %s[256] = {", CurrBitAr->name);
 		for (j = 0; j < 256; j++) {
 			if (j % 8 == 0) {
 				char b[2];

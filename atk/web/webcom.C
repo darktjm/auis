@@ -23,11 +23,6 @@
 
 #include <andrewos.h>
 ATK_IMPL("webcom.H")
-
-#ifndef NORCSID
-static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/webcom.C,v 1.26 1996/11/07 02:05:41 robr Exp $";
-#endif
-
 #include <environ.H>
 #include <message.H>
 #include <atom.H>
@@ -62,7 +57,7 @@ static class event *web_event;
 
 ATKdefineRegistry(webcom,  observable,  webcom::InitializeClass);
 
-static char *guessimgtype(class webcom  *self, char  *url);
+static const char *guessimgtype(class webcom  *self, const char  *url);
 static void loadimg(class image  *dat, class webcom  *self, int  status);
 static void hweb(FILE  *f,  void  *td);
 static void eweb(FILE  *f,  void  *td);
@@ -116,8 +111,8 @@ webcom::getfullname(char  *name) {
 }
 
 
-	static char *
-guessimgtype(class webcom  *self, char  *url)  {
+	static const char *
+guessimgtype(class webcom  *self, const char  *url)  {
 	char *p;
 	if ((self)->Status() & WEBCOM_Loaded){
 		if (self->mimetype == xbm)  return "xbitmap";
@@ -187,7 +182,8 @@ loadimg(class image  *dat, class webcom  *self, int  status)  {
 
 	class image * 
 webcom::getimage (char  *url, char  *type)  {
-	char *b, *e, *t, *s, *ltype, *gtype;
+	char *b, *e, *t, *s, *ltype;
+	const char *gtype;
 	FILE *f;
 	class image* dat;
 	char obuf[1024];
@@ -283,7 +279,7 @@ static void HandleRedir(webcom *self, char *buf) {
 static void HandleError(webcom *self, char *buf) {
     flex out;
     if(self->url) {
-	static char msg[]="URL %s had the following error:\n";
+	static const char msg[]="URL %s had the following error:\n";
 	char *p=out.Insert((size_t)0, strlen(msg)+strlen(self->url->Name()));
 	if(p) sprintf(p, msg, self->url->Name());
     }
@@ -484,7 +480,7 @@ setuppipes()  {
 	pipe(fromwww);
 //	pipe(errwww);
 	if ((kidpid = fork()) == 0){
-		char *foo[2];
+		const char *foo[2];
 		close(0);
 		close(1);
 //		close(2);
@@ -502,15 +498,15 @@ setuppipes()  {
 #define ATKWWW "aw3c"
 #ifdef ATKWWW
 		foo[0] = ATKWWW;
-		execvp(*foo, foo);
+		execvp(*foo, (char **)foo);
 #else
 		/* not defined, try "awww" */
 		foo[0] = (char *)environ::AndrewDir("/bin/aw3c");
 #endif
-		execvp(*foo, foo);
+		execvp(*foo, (char **)foo);
 
 		foo[0] = "aw3c";
-		execvp(*foo, foo);
+		execvp(*foo, (char **)foo);
 
 		/* nope, no awww */
 		fprintf(stderr, "web: Cannot find \"aw3c\", %s\n",
@@ -637,7 +633,7 @@ webcom::CreateFromStream(FILE  *f)  {
 
 
 	void
-webcom::Cancel(char  *buf){
+webcom::Cancel(const char  *buf){
 	ATKinit;
 	class webcom *self, *nextself;
 	for(self = startpending; self != NULL; self = nextself){
@@ -653,7 +649,7 @@ webcom::Cancel(char  *buf){
 }
 
 	class webcom *
-webcom::Create(char  *url, class webcom  *parent, int  flags, const char *postdata)  {
+webcom::Create(const char  *url, class webcom  *parent, int  flags, const char *postdata)  {
 	ATKinit;
 	class webcom *w;
 	class atom *atm;
@@ -945,7 +941,7 @@ webcom::ExternalView()  {
 	return 0;
 }
 
-	char * 
+	const char * 
 webcom::CanView()  {
 	if (this->mimetype == htmlatom) return "web";
 	else  if (this->mimetype == plainatom) 
@@ -1053,7 +1049,7 @@ webcom::Load(webcom_cbptr proc, void *rock)  {
             strcat(cdir, "/");
 	    referer=cdir;
         }
-        char *get;
+        const char *get;
         if(reload) get="reget";
         else if(postfile) {
             get="post";

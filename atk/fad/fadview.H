@@ -44,7 +44,7 @@ public:
    	 void ReceiveInputFocus();
     	 void LoseInputFocus();
     	 class view * Hit (enum view_MouseAction action, long mousex, long mousey, long numberOfClicks)  ;
-	 void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
+	 void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
 	 void ObservedChanged( class observable *changed, long value);
 	 void SetDataObject(class dataobject *dataObject);
 

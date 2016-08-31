@@ -25,20 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/suite/RCS/suitecv.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-/* $Header $ */
-/* $Source $ */
-
-
-
-
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Suite-object
@@ -73,6 +59,7 @@ HISTORY
 END-SPECIFICATION  ************************************************************/
 
 
+#include <andrewos.h>
 ATK_IMPL("suitecv.H")
 #include <rect.h>
 #include <keystate.H>
@@ -93,8 +80,6 @@ ATK_IMPL("suitecv.H")
 
 
 ATKdefineRegistry(suitecv, textview, suitecv::InitializeClass);
-#ifndef NORCSID
-#endif
 void suitecv_InsertNLCmd( class suitecv  *self, long  key );
 
 

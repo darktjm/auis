@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/charthst.C,v 1.5 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Histogram Chart View-object
@@ -66,6 +59,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include <andrewos.h>
 ATK_IMPL("charthst.H")
 #include <math.h>
 #include "graphic.H"
@@ -112,9 +106,6 @@ boolean charthst_debug = 0;
 
 
 ATKdefineRegistry(charthst, chartobj, NULL);
-#ifndef NORCSID
-#endif
-
 
 charthst::charthst( )
       {
@@ -128,7 +119,7 @@ charthst::charthst( )
 charthst::~charthst( )
       {}
 
-char *
+const char *
 charthst::Moniker( )
     {
   IN(charthst_Moniker);

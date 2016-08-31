@@ -21,8 +21,6 @@
  It is provided "as is" without express or implied warranty.
  
  Rtf2 was written entirely by Jeremy Paul Kirby, jpkirby@ATHENA.MIT.EDU
-
- $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/rtf2/RCS/rtf2.h,v 1.2 1994/03/29 04:49:18 rr2b Stab74 $
 */
 
 /*

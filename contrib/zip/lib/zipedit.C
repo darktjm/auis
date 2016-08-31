@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipedit.C,v 1.5 1994/08/11 03:03:54 rr2b Stab74 $";
-#endif
-
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -183,8 +178,6 @@ static class keymap		     *class_keymap;
 
 
 ATKdefineRegistry(zipedit, ATK, zipedit::InitializeClass);
-#ifndef NORCSID
-#endif
 static void Fit_Command( register class zipedit	    *self );
 static void Duplicate_Command( register class zipedit	      *self );
 static void To_Front_Command( register class zipedit	       *self );

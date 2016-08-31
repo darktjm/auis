@@ -26,13 +26,6 @@
 //  $
  */
 
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/observable.C,v 3.10 1996/05/17 17:40:15 robr Exp $ */
-
-#ifndef NORCSID
-char *observe_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/observable.C,v 3.10 1996/05/17 17:40:15 robr Exp $";
-#endif
-
-
 #include <andrewos.h>
 ATK_IMPL("observable.H")
 #include <observable.H>
@@ -159,7 +152,6 @@ void observable::RemoveObserver(register class observable  *observer  )
 
 void observable::NotifyObservers(long  value  )
 {
-    register class observable **observers;
     register int i;
 
     if(this->ReferenceCount()>0) this->Reference();

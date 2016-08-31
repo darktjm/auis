@@ -52,7 +52,7 @@ enum genre { ORD, OP, BIN, REL, OPEN, CLOSE, PUNCT, INNER, MAX_genre };
 	MAX_type
     };
 
-typedef void (*eq_enumfptr)(char *alias, char *orig, void *rock);
+typedef void (*eq_enumfptr)(const char *alias, const char *orig, void *rock);
 
 #include <mark.H>
 
@@ -73,11 +73,11 @@ public:
  */
 
     virtual void Insert(long pos, struct formula *f);
-    virtual long InsertTokens(long pos, char *s)  ;
-    virtual long InsertTokensCarefully(long pos, char *s)  ;
+    virtual long InsertTokens(long pos, const char *s)  ;
+    virtual long InsertTokensCarefully(long pos, const char *s)  ;
     virtual void Delete(long pos);
     virtual long DeleteCarefully(long start, long stop)  ;
-    virtual long DoScript(long pos, enum script script, char *string)  ;
+    virtual long DoScript(long pos, enum script script, const char *string)  ;
     virtual class mark * CreateMark(long pos, long length)  ;
     virtual void RemoveMark(class mark *mark);
     virtual void Erase();
@@ -91,14 +91,14 @@ public:
     virtual long FindRightSibling(long i)  ;
     virtual void WriteFILE(FILE *f, long start, long stop, char sep);
     virtual long ReadFILE(FILE *f, long start)  ;
-    virtual void Dump(char *name);
+    virtual void Dump(const char *name);
     virtual void Parse(FILE *file, long whch, long *width=NULL, long *height=NULL);
     static int Lex(void *rock, void *pyylval);
 
     eq();
 
     virtual ~eq();
-    static struct symbol * Lookup(char *name)  ;
+    static const struct symbol * Lookup(const char *name)  ;
     static void EnumerateSymbols(eq_enumfptr proc, void *rock);
     static boolean InitializeClass();
 
@@ -126,7 +126,7 @@ public:
  * makes certain formatting operations easier.
  */
 struct symbol {
-    char *name;					/* print name */
+    const char *name;				/* print name */
     enum type type;
     short what;					/* should be a union of: */
 	/* enum align if type is ALIGN */
@@ -134,9 +134,9 @@ struct symbol {
 	/* enum script if type is SCRIPT */
 	/* enum simple if type is SIMPLE */
     enum genre genre;				/* spacing genre */
-    char *string;				/* for real symbols */
+    const char *string;				/* for real symbols */
     long y_genre;				/* parse genre */
-    char *doc;					/* online documentation string */
+    const char *doc;				/* online documentation string */
 };
 
 /*
@@ -154,7 +154,7 @@ struct formula {
     struct pos posp;				/* where relative to group */
     struct pos hot;				/* absolute hot spot */
     class fontdesc *font;			/* for drawing */
-    struct symbol *symbol;			/* symbol for this formula */
+    const struct symbol *symbol;		/* symbol for this formula */
     char *string;				/* string for extendables */
     boolean has_hot_spot;			/* whether dot can be here */
     boolean transparent;
@@ -192,8 +192,8 @@ enum space {		/* Knuth:	Description:			     */
 
 
 /* generally useful.  Initialized in eqview_InitializeClass. */
-static struct symbol *zilch;
-static struct symbol *root;
+extern const struct symbol *eq_zilch;
+extern const struct symbol *eq_root;
 
 
 #endif /* _eq_H_ */

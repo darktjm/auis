@@ -87,11 +87,6 @@ return refs_String;
 [A-Za-z_][0-9A-Za-z_]*		return(refs_Name);
 .				return(refs_Other);
 %%
-#ifndef NORCSID
-static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/grefs/RCS/refs.flex,v 1.7 1996/07/21 18:31:36 robr Exp $";
-#endif
-
-
 static int refs_TokWhitespace(void)
 {
     /* convert an escaped newline into a space */	

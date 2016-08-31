@@ -97,7 +97,7 @@ void urlbuttonview::OpenURL(const char  *url)
 {
     pid_t mosaic_pid;
     FILE *f;
-    char *mosaic_cmd;
+    const char *mosaic_cmd;
     char *homedir;
     char filename[4096];
     char buf[50];
@@ -160,7 +160,7 @@ void urlbuttonview::OpenURL(const char  *url)
 boolean urlbuttonview::Touch(int ind, enum view_MouseAction action)
 {
     urlbutton *b = GetURLButton();
-    char *m, *url;
+    const char *m, *url;
     char msg[4096];
 
     switch (action) {
@@ -199,7 +199,7 @@ void urlbuttonview::SetURLProc(urlbuttonview *self, char *arg)
 void urlbuttonview::SetLabelProc(urlbuttonview *self, char *arg)
 {
     urlbutton *b = self->GetURLButton();
-    char *oldtext;
+    const char *oldtext;
     char buf[4096];
 
     oldtext = b->GetURLLabel();
@@ -209,7 +209,7 @@ void urlbuttonview::SetLabelProc(urlbuttonview *self, char *arg)
     }
 }
 
-void *urlbuttonview::GetPSPrintInterface(char *printtype)
+void *urlbuttonview::GetPSPrintInterface(const char *printtype)
 {
     if (strcmp(printtype, "text") == 0)
 	return urlbuttonview::GetTextPrintData();
@@ -221,7 +221,7 @@ void *urlbuttonview::GetPSPrintInterface(char *printtype)
 struct textview_insetdata *urlbuttonview::GetTextPrintData()
 {
     urlbutton *b = GetURLButton();
-    char *lbl = b->GetURLLabel();
+    const char *lbl = b->GetURLLabel();
     char *url = b->GetURL();
     int lbl_len = strlen(lbl);
     int url_len = strlen(url);

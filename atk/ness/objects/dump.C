@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/dump.C,v 1.3 1993/12/16 20:38:01 wjh Stab74 $";
-#endif
-
 /* dump.c
 	debugging output for ness environment
 
@@ -88,6 +81,7 @@ log elided June 93   -wjh
  * 
 */
 
+#include <andrewos.h>
 #include <proctable.H>
 
 #include <nessmark.H>
@@ -95,7 +89,7 @@ log elided June 93   -wjh
 
 static void printstaddr(FILE  *f, union stackelement  *a, union stackelement  *NSP);
 void dumpStack(FILE  *f, union stackelement  *NSP);
-static void  PrintFromTbl(FILE  *file, register class simpletext  *text, register long  i, struct srchtblelt  *Tbl);
+static void  PrintFromTbl(FILE  *file, register class simpletext  *text, register long  i, const struct srchtblelt  *Tbl);
 static void PrintChar(class simpletext  *text, long  j, FILE  *f);
 void dumpObjectCode(FILE  *file, long  offset);
 void dumpFuncDef(FILE  *file, class nesssym  *f);
@@ -203,8 +197,8 @@ dumpStack(FILE  *f, union stackelement  *NSP)  {
 enum addrtype {none, enter, stack, global, branch, call, callnd, 
 	srch, event, realunary, realbinary, current, cheat, cheatcall};
 
-static struct {
-	char *name;
+static const struct {
+	const char *name;
 	enum addrtype randcode;
 }
 opTbl[] = {		/* first operator is for char ' ' */
@@ -307,10 +301,10 @@ opTbl[] = {		/* first operator is for char ' ' */
 };
 struct srchtblelt {
 	char code;
-	char *name;
+	const char *name;
 };
 
-static struct srchtblelt 
+static const struct srchtblelt 
 searchTbl[] = {
 	{'a', "search"},
 	{'b', "match"},
@@ -329,7 +323,7 @@ searchTbl[] = {
 	{'x', "ReplaceWithObj"},
 	{'\0', "*Unknown Search Code*"}
 };
-static struct srchtblelt 
+static const struct srchtblelt 
 eventTbl[] = {
 	{'a', "evLdn"},
 	{'b', "evLup"},
@@ -360,7 +354,7 @@ eventTbl[] = {
 	{'U', "evAsk"},
 	{'\0', "*Unknown Event Code*"}
 };
-static struct srchtblelt 
+static const struct srchtblelt 
 realUnTbl[] = {
 	{'a', "acos"},
 	{'b', "acosh"},
@@ -393,7 +387,7 @@ realUnTbl[] = {
 	{'_', "-"},
 	{'\0', "*Unknown real Unary Code*"}
 };
-static struct srchtblelt 
+static const struct srchtblelt 
 realBinTbl[] = {
 	{'+', "R+"},
 	{'-', "R-"},
@@ -412,19 +406,19 @@ realBinTbl[] = {
 	{'\0', "*Unknown real Binary Code*"}
 };
 
-static struct srchtblelt 
+static const struct srchtblelt 
 currentTbl[] = {
 	{'m', "curmark"},
 	{'s', "cursel"},
 	{'\0', "*Unknown \"current\" Code*"}
 };
-static struct srchtblelt 
+static const struct srchtblelt 
 cheatcallTbl[] = {
 	{'a', "CHcMeth "},
 	{'b', "CHcProc "},
 	{'\0', "*Unknown \"cheatcall\" Code*"}
 };
-static struct srchtblelt 
+static const struct srchtblelt 
 cheatTbl[] = {
 	{'a', "CHgL"},
 	{'b', "CHgD"},
@@ -449,9 +443,9 @@ cheatTbl[] = {
 
 	static void 
 PrintFromTbl(FILE  *file, register class simpletext  *text, register long  i, 
-		struct srchtblelt  *Tbl) {
+		const struct srchtblelt  *Tbl) {
 	register char c = (char)(text)->GetUnsignedChar( i);
-	register struct srchtblelt *e;
+	register const struct srchtblelt *e;
 	for (e = Tbl; e->code && e->code != c; e++) {}
 	fprintf(file, "%s", e->name);
 }

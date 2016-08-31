@@ -20,18 +20,12 @@
  *  $
   */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/awgtfigview.C,v 1.7 1996/06/14 17:14:23 robr Exp $";
-#endif
-
 /* awgtfigview.c	
 
 	view widgets built built atop figures
  */
 
+#include <andrewos.h>
 ATK_IMPL("awgtfigview.H")
 #include <awgtfigview.H>
 
@@ -326,7 +320,7 @@ AWgtFigView::RecSrchExpose(const struct rectangle &logical,
 
 /* AWgtFigView::Print is the method that is used by the old printing mechanism. */
 void
-AWgtFigView::Print(FILE *file, char *processor, char	*format, boolean topLevel)  {
+AWgtFigView::Print(FILE *file, const char *processor, const char	*format, boolean topLevel)  {
 	class AWidget *dobj = (class AWidget *)GetDataObject();
 	ASlot *pimage = dobj->Get(slot_printImage);
 

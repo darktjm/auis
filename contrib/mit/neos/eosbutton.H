@@ -1,12 +1,5 @@
 #ifndef _eosbutton_H_
 #define _eosbutton_H_
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/eosbutton.H,v 1.5 1996/06/11 01:26:13 wjh Exp $ */
-/* $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/eosbutton.H,v $ */
-
-#ifndef lint
-static char *rcsideosbutt = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/eosbutton.H,v 1.5 1996/06/11 01:26:13 wjh Exp $";
-#endif /* lint */
-
 /*
  * eosbutt.ch
  *

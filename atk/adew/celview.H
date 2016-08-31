@@ -55,7 +55,7 @@ class celview: public view {
       void WantNewSize(class view *requestor);
       void PostMenus(class menulist *menulistp);
       void PostKeyState(class keystate *keystate);
-      void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
+      void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
       void FullUpdate(enum view_UpdateType type, long left, long top, long width, long right);
       void Update();
       class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
@@ -67,10 +67,10 @@ class celview: public view {
       view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
       void LinkTree(class view *parent);
       void InitChildren();
-      boolean CanView(char *TypeName)  ;
+      boolean CanView(const char *TypeName)  ;
       void WantUpdate(class view *requestor);
       void PostCursor(struct rectangle *rec,class cursor *cursor) ;
-      ATK  * WantHandler(char *handlerName)  ;
+      ATK  * WantHandler(const char *handlerName)  ;
       void GetOrigin(long width, long height, long *originX, long *originY);
       boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
       boolean RecSrchResume(struct SearchPattern *pat);

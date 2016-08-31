@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/wpbase.c,v 2.23 1995/03/18 17:31:06 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	wpbase.c
 	Small library routines for White Pages lookups.

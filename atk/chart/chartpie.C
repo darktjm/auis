@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chartpie.C,v 1.6 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Pie Chart View-object
@@ -62,6 +55,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include <andrewos.h>
 ATK_IMPL("chartpie.H")
 #include <math.h>
 #include "graphic.H"
@@ -128,8 +122,6 @@ struct chartpie_drawing
 
 
 ATKdefineRegistry(chartpie, chartobj, NULL);
-#ifndef NORCSID
-#endif
 static void Show_Pie_Chart( register class chartpie	      *self, register long			       medium );
 static void Compute_Pie_Points( register class chartpie	      *self );
 

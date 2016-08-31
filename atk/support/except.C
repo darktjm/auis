@@ -23,11 +23,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/except.C,v 3.2 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
 ATK_IMPL("except.H")
 #include <except.H>
 
@@ -38,8 +33,6 @@ except_UncaughtExceptionHandler except_UncaughtHandler = NULL;
 
 
 ATKdefineRegistry(except, ATK, NULL);
-#ifndef NORCSID
-#endif
 static void except_DefaultHandler();
 
 

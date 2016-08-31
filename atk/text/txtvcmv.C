@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/txtvcmv.C,v 3.10 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
-
- 
-
 #include <ctype.h>
 #define AUXMODULE 1
 #include <textview.H>

@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/pcserver/RCS/pcsexec.c,v 2.14 1996/09/03 19:25:30 robr Exp $";
-#endif
-
 /*
  *	PC Server - Command Execution Component
  *	Access to the UNIX File System for IBM PC/XT/ATs
@@ -50,8 +45,8 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/
  *
  */
 
-#include <stdio.h>
 #include <andrewos.h> /* sys/file.h */
+#include <stdio.h>
 #include <pwd.h>
 #include <sys/ioctl.h>
 #include <ctype.h>
@@ -64,8 +59,8 @@ extern int PCS_debuglevel;
 
 char **environ;
 char *MyEnvironment[10];
-#define USUALPATH "PATH=%s/bin:/usr/andrew/bin:/usr/andy/bin:/usr/local/bin:\
-/usr/ucb:/usr/bin:/bin:/usr/etc:/etc"
+#define USUALPATH "PATH=%s/bin:/usr/andrew/bin:/usr/andy/bin:/usr/local/bin:" \
+                  "/usr/ucb:/usr/bin:/bin:/usr/etc:/etc"
 
 #ifndef _IBMR2
 char *malloc ();

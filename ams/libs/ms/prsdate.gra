@@ -747,9 +747,6 @@ the_nth_day :	THE nth_day
 nth_day	:	nth DAY
 	;
 %%
-static UNUSED const char prsdate_rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/prsdate.gra,v 1.6 1996/02/16 16:26:55 robr Stab74 $";
-
-
 /*
  *  pdate - parse date specification into time structure
  *

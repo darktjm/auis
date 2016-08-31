@@ -25,18 +25,12 @@
  *  $
 */
 
-#include <andrewos.h>		/* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/newstr.c,v 2.9 1993/02/12 21:23:32 rr2b Stab74 $";
-#endif
-
 /*
 	newstr.c -- Return a dynamically-allocated copy of a string.
 */
 
 
+#include <andrewos.h>		/* strings.h */
 #include <util.h> 
 
 char *NewString(const char *srcptr)

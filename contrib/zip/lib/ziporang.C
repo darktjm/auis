@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/ziporang.C,v 1.3 1993/06/17 04:28:00 rr2b Stab74 $";
-#endif
-
 /* ziporang.c	Zip Object -- Roundangle					      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */

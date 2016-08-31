@@ -68,8 +68,8 @@ public:
 	 void ReceiveInputFocus();
 	 void LoseInputFocus();
 	 void ObservedChanged(class observable *dobj, long status);
-	 void Print(FILE *file, char *processor, 
-			char *finalFormat, boolean topLevel);
+	 void Print(FILE *file, const char *processor, 
+			const char *finalFormat, boolean topLevel);
 	 class view * GetApplicationLayer()  ;
 	 const void *GetInterface(const char *interface_name) 
 			 ;
@@ -78,11 +78,11 @@ public:
 	 void LinkTree(class view *parent);
 
 	 void PrintPSDoc(FILE *outfile, long pagew, long pageh);
-	 void *GetPSPrintInterface(char *printtype);
+	 void *GetPSPrintInterface(const char *printtype);
 	 void DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight);
 	 void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);
 
-	 virtual boolean Gifify(char *filename, long *pmaxw, long *pmaxh, 
+	 virtual boolean Gifify(const char *filename, long *pmaxw, long *pmaxh, 
 			struct rectangle *visrect);
 		// currently ignoring pmax...
 
@@ -119,7 +119,7 @@ public:
 	virtual void ImprintInset(long function);
 	virtual void RemoveInset();
 	virtual void ResizeInset();
-	virtual void OverlayInset(char *insetname);
+	virtual void OverlayInset(const char *insetname);
 
 
 	

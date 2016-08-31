@@ -25,20 +25,11 @@
 //  $
 */
 
-#include <andrewos.h> /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/readscr.C,v 3.2 1994/12/06 21:36:15 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* ** readscr.c  -  converts an ASCII file containing Scribe commands to
 		 a base editor II document ** */
 
 
+#include <andrewos.h> /* sys/file.h */
 ATK_IMPL("readscr.H")
 #include <stdio.h>
 #include <ctype.h>
@@ -71,7 +62,7 @@ static class environment *Par;
 static struct environment *NewPar;
  */
 static int Top, CurPos, Offset, PPos, Mode, End, LineFeeds, OldFormat;
-static char Left[] = "{[(<\"'\0",  Right[] = "}])>\"'\0";
+static const char Left[] = "{[(<\"'\0",  Right[] = "}])>\"'\0";
 static struct StackItem {
     class environment *Parent;
     class style *StyleName;
@@ -88,10 +79,6 @@ static struct StackItem {
 
 
 ATKdefineRegistry(readscr, ATK, NULL);
-#ifndef NORCSID
-#endif
-#ifdef hpux
-#endif /* hpux */
 static void goshdarn(char  *errmsg);
 static int textfix(class text  *d, int  len);
 static void linefix(class text  *d);
@@ -102,7 +89,7 @@ static int startenv(int  delim, class style  *tempstyle);
 static int finishenv();
 
 
-static void goshdarn(char  *errmsg)
+static void goshdarn(const char  *errmsg)
 {
     fprintf(stderr, "<warning:readscr>%s\n", errmsg);
 }

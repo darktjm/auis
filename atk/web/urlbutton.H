@@ -20,14 +20,14 @@ class urlbutton : public sbutton {
     // overrides
     long Read(FILE *file, long id);
     long Write(FILE *file, long writeid, int level);
-    char *ViewName()  ;
+    const char *ViewName()  ;
     boolean EnsureSize(int ind)  ;
     virtual void SetURL(char *url);
     virtual void SetText(char *txt);		/* Text for user to read (i.e the label) */
 
     // new interface
     inline char	*GetURL()	 { return (current_url); }
-    inline char *GetURLLabel() { return GetLabel(0); }
+    inline const char *GetURLLabel() { return GetLabel(0); }
 
   private:
     char *current_url;

@@ -26,20 +26,11 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textobjects/RCS/chlist.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
 ATK_IMPL("chlist.H")
 #include <chlist.H>
 
 
 ATKdefineRegistry(chlist, text, NULL);
-#ifndef NORCSID
-#endif
 void Clear(class chlist  *self);
 
 
@@ -103,7 +94,7 @@ void chlist::Clear()
     (this)->SetReadOnly( TRUE);
 }
     
-void chlist::SetRegionStringByIndex(long  index, long  regionNum, char  *regionStr)
+void chlist::SetRegionStringByIndex(long  index, long  regionNum, const char  *regionStr)
 {
     struct listitem *item;
     long len, oldLen, changeLen = 0;
@@ -197,7 +188,7 @@ void chlist::SetRegionStringByIndex(long  index, long  regionNum, char  *regionS
     (this)->NotifyObservers( 0);
 }
 
-void chlist::SetRegionString(char  *str, long  regionNum, char  *regionStr)
+void chlist::SetRegionString(const char  *str, long  regionNum, const char  *regionStr)
 {
     (this)->SetRegionStringByIndex( (this)->GetIndexByString( str), regionNum, regionStr);
 
@@ -238,7 +229,7 @@ void chlist::DefineStringRegion(long  regionNum)
     }
 }
 
-boolean chlist::AddItemAtIndex(long  index, char  *str, chlist_itemfptr proc, long  data)
+boolean chlist::AddItemAtIndex(long  index, const char  *str, chlist_itemfptr proc, long  data)
 {
     char *mycopy;
     struct listitem *newbuf;
@@ -291,12 +282,12 @@ boolean chlist::AddItemAtIndex(long  index, char  *str, chlist_itemfptr proc, lo
 }
 
 
-boolean chlist::AddItemToEnd(char  *str, chlist_itemfptr proc, long  data)
+boolean chlist::AddItemToEnd(const char  *str, chlist_itemfptr proc, long  data)
 {
     return (this)->AddItemAtIndex( this->numitems, str, proc, data);
 }
 
-struct listitem * chlist::FindItem(char  *str)
+struct listitem * chlist::FindItem(const char  *str)
 {
     long i;
     i = (this)->GetIndexByString(str);
@@ -321,7 +312,7 @@ chlist_freefptr chlist::SetFreeProcedure(chlist_freefptr  proc)
     return(oldproc);
 }
 
-long chlist::GetIndexByString(char  *str)
+long chlist::GetIndexByString(const char  *str)
 {
     long i;
     for (i=0; i<this->numitems; ++i) {
@@ -382,21 +373,21 @@ boolean chlist::DeleteItemByIndex(long  i)
     return(TRUE);
 }
 
-boolean chlist::DeleteItem(char  *str)
+boolean chlist::DeleteItem(const char  *str)
 {
     long i = (this)->GetIndexByString( str);
 
     return (this)->DeleteItemByIndex( i);
 }
 
-boolean chlist::ChangeItemByIndex(long  index, char  *newstr)
+boolean chlist::ChangeItemByIndex(long  index, const char  *newstr)
 {
     (this)->SetRegionStringByIndex( index, this->strRegionNum, newstr);
 
     return(TRUE);
 }
 
-boolean chlist::ChangeItem(char  *oldstr , char  *newstr)
+boolean chlist::ChangeItem(const char  *oldstr , const char  *newstr)
 {
     return (this)->ChangeItemByIndex( (this)->GetIndexByString( oldstr), newstr);
 }
@@ -416,7 +407,7 @@ boolean chlist::ChangeDataByIndex(long  i, long  rock)
     return(TRUE);
 }
 
-boolean chlist::ChangeData(char  *oldstr, long  rock)
+boolean chlist::ChangeData(const char  *oldstr, long  rock)
 {
     return (this)->ChangeDataByIndex( (this)->GetIndexByString( oldstr), rock);
 }

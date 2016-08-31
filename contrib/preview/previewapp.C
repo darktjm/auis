@@ -25,13 +25,7 @@
 //  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/preview/RCS/previewapp.C,v 1.7 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
+#include <andrewos.h>
 
 /*
 *
@@ -39,7 +33,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/previe
 *		A program for previewing dvitroff input
 *
 */
-#include <andrewos.h>
 ATK_IMPL("previewapp.H")
 
 #include <previewapp.H>

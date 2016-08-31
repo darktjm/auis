@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/style.C,v 3.10 1996/09/05 15:19:37 robr Exp $";
-#endif
-
-
- 
-
-
 ATK_IMPL("style.H")
 #include <style.H>
 
@@ -52,8 +42,6 @@ ATK_IMPL("style.H")
 
 
 ATKdefineRegistry(style, ATK, NULL);
-#ifndef NORCSID
-#endif
 static long CVDots(register long  amt, enum style_Unit  unit);
 static int style_freeattributes(long  procdata, class Namespace  * curnamespace, int  indexvalue );
 static int style_copyattributes(long  procdata, class Namespace  * curnamespace, int  indexvalue );
@@ -96,7 +84,7 @@ static int style_freeattributes(long  procdata, class Namespace  * curnamespace,
  * Datastream alias table for attributes
  */
 
-static char *AttributeAlias[] = {
+static const char * const AttributeAlias[] = {
     "LeftMargin",
     "RightMargin",
     "Indent",
@@ -124,7 +112,7 @@ static char *AttributeAlias[] = {
     NULL
 };
 
-static char *OptypeAlias[] = {
+static const char * const OptypeAlias[] = {
     "Inch",
     "Cm",
     "Point",
@@ -135,7 +123,7 @@ static char *OptypeAlias[] = {
     NULL
 };
 
-static char *OpcodeAlias[] = {
+static const char * const OpcodeAlias[] = {
     "Noop",
     "Copy",
     "Add",
@@ -144,7 +132,7 @@ static char *OpcodeAlias[] = {
     NULL
 };
 
-static char *TabAlignmentAlias[] = {
+static const char * const TabAlignmentAlias[] = {
     "",
     "LeftAligned",
     "RightAligned",
@@ -157,7 +145,7 @@ static char *TabAlignmentAlias[] = {
     NULL
 };
 
-static char *JustificationAlias[] = {
+static const char * const JustificationAlias[] = {
     "PreviousJustification",
     "LeftJustified",
     "RightJustified",
@@ -167,20 +155,20 @@ static char *JustificationAlias[] = {
     NULL
 };
 
-static char *ScopeAlias[] = {
+static const char * const ScopeAlias[] = {
     "GlobalScope",
     "LocalScope",
     NULL
 };
 
-static char *PositionAlias[] = {
+static const char * const PositionAlias[] = {
     "EnvironmentCtr",
     "ParagraphCtr",
     "LineCtr",
     NULL
 };
 
-static char *MarginValueAlias[] = {
+static const char * const MarginValueAlias[] = {
     "ConstantMargin",
     "LeftMargin",
     "LeftEdge",
@@ -194,7 +182,7 @@ static char *MarginValueAlias[] = {
     NULL
 };
 
-static char *SpacingValueAlias[] = {
+static const char * const SpacingValueAlias[] = {
     "ConstantSpacing",
     "InterlineSpacing",
     "InterparagraphSpacing",
@@ -203,19 +191,19 @@ static char *SpacingValueAlias[] = {
     NULL
 };
 
-static char *FontSizeAlias[] = {
+static const char * const FontSizeAlias[] = {
     "PreviousFontSize",
     "ConstantFontSize",
     NULL
 };
 
-static char *ScriptMovementAlias[] = {
+static const char * const ScriptMovementAlias[] = {
     "PreviousScriptMovement",
     "ConstantScriptMovement",
     NULL
 };
 
-static char *FlagAlias[] = {
+static const char * const FlagAlias[] = {
     "Underline",
     "Hidden",
     "ReadOnly",
@@ -238,7 +226,7 @@ static char *FlagAlias[] = {
     NULL
 };
 
-static char *FaceStyleAlias[] = {
+static const char * const FaceStyleAlias[] = {
     "Bold",
     "Italic",
     "Shadow",
@@ -293,7 +281,7 @@ enum style_FontFaceIndex {
  * Class procedures
  */
 
-static char unknownstyle[]="unknown";
+static const char unknownstyle[]="unknown";
 
 style::style()
 {
@@ -597,7 +585,7 @@ void style::Copy(class style  *dest)
 
 /* Attribute Setting and Clearing Functions */
 
-void style::SetName(char  *name)
+void style::SetName(const char  *name)
 {
     if (this->name != NULL)
         free(this->name);
@@ -607,12 +595,12 @@ void style::SetName(char  *name)
     strcpy(this->name, name);
 }
 
-char *style::GetName()
+const char *style::GetName()
 {
     return this->name;
 }
 
-void style::SetMenuName(char  *menuName)
+void style::SetMenuName(const char  *menuName)
 {
     if (this->menuName != NULL)
         free(this->menuName);
@@ -625,7 +613,7 @@ void style::SetMenuName(char  *menuName)
     }
 }
 
-char *style::GetMenuName()
+const char *style::GetMenuName()
 {
     return this->menuName;
 }
@@ -963,7 +951,7 @@ void style::GetTabChangeList(long  *RefNumTabChanges, struct tabentry  ***RefTab
     }
 }
 
-void style::AddAttribute(char  * NewAttributeName, char  * NewAttributeValue )
+void style::AddAttribute(const char  * NewAttributeName, const char  * NewAttributeValue )
 {
     class atom *tmpAtom;
     char * tmpValue;
@@ -978,7 +966,7 @@ void style::AddAttribute(char  * NewAttributeName, char  * NewAttributeValue )
     if(this->AdditionalAttributes)    (this->AdditionalAttributes)->SetValue(tmpAtom, (long) tmpValue);
 }
 
-void style::RemoveAttribute(char  * OldAttributeName)
+void style::RemoveAttribute(const char  * OldAttributeName)
 {
     class atom * tmpAtom;
     long tmpValue;
@@ -991,7 +979,7 @@ void style::RemoveAttribute(char  * OldAttributeName)
 
 }
 
-char * style::GetAttribute(char  * OldAttributeName )
+char * style::GetAttribute(const char  * OldAttributeName )
 {
     class atom * tmpAtom;
     long tmpValue;
@@ -1004,7 +992,7 @@ char * style::GetAttribute(char  * OldAttributeName )
     
 }
 
-boolean style::IsAttribute(char  * TestAttributeName)
+boolean style::IsAttribute(const char  * TestAttributeName)
 {
     class atom * tmpAtom;
 
@@ -1097,8 +1085,8 @@ void style::WriteAttr(FILE  *fp)
     char newfontfamily[200], newName[200], newcparent[200];
     struct tabentry **tabchanges;
 
-    static char *AttrD = "\nattr:[%s %s %s %d]";
-    static char *AttrS = "\nattr:[%s %s %s %s]";
+    static const char AttrD[] = "\nattr:[%s %s %s %d]";
+    static const char AttrS[] = "\nattr:[%s %s %s %s]";
 
     (this)->GetNewLeftMargin( &newmargin, &operand, &unit);
     if (newmargin != style_LeftMargin || operand != 0 || unit != style_Points)

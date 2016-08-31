@@ -51,7 +51,7 @@ public:
     
 	lset();
 
-    virtual void InsertObject (char *name,char *viewname);
+    virtual void InsertObject (const char *name,const char *viewname);
     virtual char * registername(char *rf)  ;
 
 	int type;

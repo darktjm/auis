@@ -26,20 +26,10 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/vopconapp.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* 
  * console application class - to run dynamically loaded console with
  * shared libraries.
  */
-
-
 
 #include <andrewos.h>
 ATK_IMPL("vopconapp.H")

@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipds01.C,v 1.4 1993/06/26 15:48:32 rr2b Stab74 $";
-#endif
-
 /* zipds01.c	Zip Data-object	-- Stream Input Parsing		      */
 /* Author	TC Peters					      */
 /* Information Technology Center	   Carnegie-Mellon University */
@@ -91,7 +86,7 @@ static char * Unique_Name( register char			      *name, register int			       se
 static int Parse_Stream_Integer();
 static double Parse_Stream_Real();
 static int Parse_Stream_Commentary( register class zip *self, register char c );
-static int Equivalent_Token( register class zip		      *self, register char			      *token, register char			      *table[] );
+static int Equivalent_Token( register class zip		      *self, register const char			      *token, register const char			      * const table[] );
 static long Parse_Presentation_Parameter( register class zip		      *self );
 static char NextChar();
 static char PriorChar( register char				      c );
@@ -188,7 +183,7 @@ zip_Deparse_Stream( register class zip		      *self, register zip_type_stream	  
   }
 
 extern int zip_Close_Stream_File( class zip *self, zip_type_stream stream );
-extern int zip_Set_Stream_File_Name( class zip *self, zip_type_stream stream, char *name );
+extern int zip_Set_Stream_File_Name( class zip *self, zip_type_stream stream, const char *name );
 extern int zip_Open_Stream_File( class zip *self, zip_type_stream stream, long open_mode );
 
 static int
@@ -808,7 +803,7 @@ int Parse_Stream_Commentary( register class zip		      *self, register char			  
   }
 
 static
-int Equivalent_Token( register class zip		      *self, register char			      *token, register char			      *table[] )
+int Equivalent_Token( register class zip		      *self, register const char			      *token, register const char			      * const table[] )
         {
   register int			      result = 0;
 
@@ -852,15 +847,15 @@ long Parse_Presentation_Parameter( register class zip		      *self )
     {
   register long			      status = zip_ok;
   char				     *token, *ptr;
-  static char			     *vw[] =
+  static const char		     * const vw[] =
     { "ViewWidth", "vw", NULL };
-  static char			     *vh[] =
+  static const char		     * const vh[] =
     { "ViewHeight", "vh", NULL };
-  static char			     *ow[] =
+  static const char		     * const ow[] =
     { "ObjectWidth", "ow", NULL };
-  static char			     *oh[] =
+  static const char		     * const oh[] =
     { "ObjectHeight", "oh", NULL };
-  static char			     *ps[] =
+  static const char		     * const ps[] =
     { "PrintSize", "ps", NULL };
 
   IN(Parse_Presentation_Parameter);

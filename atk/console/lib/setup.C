@@ -25,23 +25,13 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/setup.C,v 1.14 1996/09/03 19:08:27 robr Exp $";
-#endif
-
-
- 
-
 /* 
  ***************************************************************
  * Routines for reading in .console files for Instrument Console
  ****************************************************************
  */
 
-
+#include <andrewos.h> /* sys/file.h */
 #include <consoleClass.H>
 #include <im.H>
 #include <view.H>
@@ -108,25 +98,12 @@ extern int	ForceErrorMonitoring;
 
 
 
-#ifndef NORCSID
-#endif
-#ifndef hp9000s300
-#endif /* hp9000s300 */
-#ifdef hpux
-#endif /* hpux */
 void ToggleDebugging (class consoleClass  *self, char  *rock);
-#ifdef POSIX_ENV
-#ifdef __STDC__		       
-#endif
-#else
-#endif
 static int LaccNameLookup(char  *string, char  **table);
 class fontdesc *SetupFont(const char  *fontname);
 static void CleanOldState(class consoleClass  *self);
 void KillInitExecProcesses(boolean  killPIDs);
 void SetConsoleLib();
-#ifndef DOWNCASE
-#endif /* DOWNCASE */
 boolean GetConsoleFileFromTypeIn(class consoleClass  *self, boolean  IsStartup);
 void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup);
 void InitDisplay(class consoleClass  *self);
@@ -191,10 +168,11 @@ static SIGNAL_RETURN_TYPE DieGracefully(int sig)
 }
 
 struct FuncStruct {
-    char *keyword, *defaultleftclick;
+    const char *keyword, *defaultleftclick;
     int datumindex;
 };
 
+/* datumindex is modified below for both of the next tables */
 static struct FuncStruct AuxFuncParse[] = {
     "disk", "Disk * is $% full.",  -1,
     "directory", "There are $ files in directory *.", -1,
@@ -259,7 +237,7 @@ static struct FuncStruct FuncParse[] = {
         0, 0, 0,
 };
 
-static char *DisplayTypeTable[]= {
+static const char * const DisplayTypeTable[]= {
 	"debug",
 	"debug",
 #define DISPFLAG_DEBUG 1
@@ -294,7 +272,7 @@ static char *DisplayTypeTable[]= {
 	0
 };
 
-static char *StyleTable[] = {
+static const char * const StyleTable[] = {
 	"logindicator",
 #define SFLAG_LOGINDICATOR 0
 	"repeatindicator",
@@ -312,7 +290,7 @@ static char *StyleTable[] = {
 	0
 };
 
-static char *OptionTable[] =  {
+static const char * const OptionTable[] =  {
 	"xmin",
 #define FLAG_XMIN 0
 	"xmax",
@@ -482,7 +460,7 @@ static char *OptionTable[] =  {
 	"statusserver",
 #define FLAG_STATUSSERVER 83
 	0};
-char *ClickOptions[] = {
+const char * const ClickOptions[] = {
 	"errorlog",
 #define CLICK_ERRORLOG 0
 	"reportlog",
@@ -495,7 +473,7 @@ char *ClickOptions[] = {
 };
 
 
-static int LaccNameLookup(char  *string, char  **table)
+static int LaccNameLookup(const char  *string, const char  * const *table)
 {
     int i;
 
@@ -509,13 +487,13 @@ static int LaccNameLookup(char  *string, char  **table)
 }
 
 
-static struct FuncStruct *AuxFuncLookup(char  *string, int  index, int  len , int  *num)
+static struct FuncStruct *AuxFuncLookup(const char  *string, int  index, int  len , int  *num)
 {
     struct FuncStruct *myfs;
 
     myfs = &AuxFuncParse[index];
     if (!lc_strncmp(string, myfs->keyword, len)){
-	char *c;
+	const char *c;
 	c = string;
 	c += len;
 	*num = atoi(c);
@@ -524,7 +502,7 @@ static struct FuncStruct *AuxFuncLookup(char  *string, int  index, int  len , in
     return(NULL);
 }
 
-static struct FuncStruct *FuncLookup(char  *string)
+static const struct FuncStruct *FuncLookup(const char  *string)
     {
     struct FuncStruct *myfs;
     int num;
@@ -571,7 +549,7 @@ class fontdesc *SetupFont(const char  *fontname)
 
 #define NOMORETOKENS '\0'
 #define MAXTOKENSIZE 256
-static char *GetNextToken(class consoleClass  *self, boolean  MapToLower, FILE  *fp, int  *lineno, boolean  PanicAtEOF)
+static const char *GetNextToken(class consoleClass  *self, boolean  MapToLower, FILE  *fp, int  *lineno, boolean  PanicAtEOF)
                     {
     boolean StillLooking = TRUE,
 	    InQuotes = FALSE;
@@ -862,12 +840,12 @@ static char *FindConsoleInPaths(char  *theTypeInPtr)
     FILE *pfd = NULL;
     char *theName = NULL;
     /* Extensions we recognize automatically */
-    char *conExtension = "con";
-    char *vopExtension  = "vop";
-    char *consoleExtension = "console";
-    char *vopconExtension = "vopcon";
-    char *ConsoleExtension  = "Console";
-    char *VopconExtension  = "Vopcon";
+    const char conExtension[] = "con";
+    const char vopExtension[]  = "vop";
+    const char consoleExtension[] = "console";
+    const char vopconExtension[] = "vopcon";
+    const char ConsoleExtension[]  = "Console";
+    const char VopconExtension[]  = "Vopcon";
     /* end of extensions that we recognize automatically */
     char *c;
     int loopCtr = 0;
@@ -1119,7 +1097,8 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 {
     struct display *thisdisp;
     int            *newchild;
-    char           *s, *TokenBuf, *string, *tmp = NULL;
+    char           *s, *tmp = NULL;
+    const char     *TokenBuf, *string;
     char            *theTypeInPtr = NULL;
     char            DEFAULTFILE[50]; 
     FILE          *pfd = NULL;
@@ -1279,7 +1258,7 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 		break;
 	    case FLAG_FUNCTION:
 		{
-		struct FuncStruct *fs;
+		const struct FuncStruct *fs;
 		struct display *mydisp;
 
 		string = GetNextToken(self, TRUE, pfd, &lineno, TRUE);
@@ -1328,7 +1307,7 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 		    mydisp->NextDisplay = thisdisp;
 		}
 		thisdisp->NextDisplay = NULL;
-		thisdisp->ClickStringLeft = fs->defaultleftclick;
+		thisdisp->ClickStringLeft = strdup(fs->defaultleftclick); /* tjm - FIXME: probable leak */
 		break;
 		}
 	    case FLAG_REMOTEFUNCTION:
@@ -1674,7 +1653,7 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 		thisdisp->WhatToDisplay->ExtName = (char *) malloc(1 + strlen(TokenBuf));
 		thisdisp->WhatToDisplay->RawText = (char *) malloc(256);
 		memset(thisdisp->WhatToDisplay->RawText, 0, 256);
-		strcpy(thisdisp->WhatToDisplay->ExtName, TokenBuf);
+		strcpy((char *)thisdisp->WhatToDisplay->ExtName, TokenBuf);
 		break;
 	    case FLAG_HIGHLIGHTBOXMIN:
 		thisdisp->FlashStyle = 1;
@@ -1770,10 +1749,10 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 		thisdisp->DisplayStyle = (int) (GetNextToken(self, TRUE, pfd, &lineno, TRUE)[0]);
 		break;
 	    case FLAG_EXTERNALERRORFILE:
-		s = GetNextToken(self, FALSE, pfd, &lineno, TRUE);
-		if ((ExternalLogFP = fopen(s, "a")) == NULL) {
+		TokenBuf = GetNextToken(self, FALSE, pfd, &lineno, TRUE);
+		if ((ExternalLogFP = fopen(TokenBuf, "a")) == NULL) {
 		    ParsingError = TRUE;
-		    sprintf(ParsingErrorText, "Line %d: Cannot open external log file %s\n", lineno, s);
+		    sprintf(ParsingErrorText, "Line %d: Cannot open external log file %s\n", lineno, TokenBuf);
 		    break;
 		}
 		LogErrorsExternally = TRUE;
@@ -1894,7 +1873,7 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 	}
 	AvailFontNames[FontCount] = (char *) malloc(5 + strlen(FontFamily));
 	if (AvailFontNames[FontCount] != NULL) {
-	    sprintf(AvailFontNames[FontCount], "%s%d", FontFamily, i);
+	    sprintf((char *)AvailFontNames[FontCount], "%s%d", FontFamily, i);
 	    AvailFontPts[FontCount] = i;
 	    FontsAvail[FontCount] = 0;
 	    ++FontCount;

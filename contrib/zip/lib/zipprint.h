@@ -85,9 +85,9 @@ struct zip_printing
   char					  zip_printing_processor;
   boolean				  zip_printing_level;
   long					  zip_printing_orientation;
-  char					 *zip_printing_prefix;
+  const char				 *zip_printing_prefix;
   char					  zip_printing_line_width;
-  char					 *zip_printing_line_dash_pattern;
+  const char				 *zip_printing_line_dash_pattern;
   int					  zip_printing_line_dash_offset;
   short					  zip_printing_line_cap;
   short					  zip_printing_line_join;

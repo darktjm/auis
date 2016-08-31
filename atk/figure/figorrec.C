@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-char *figorrec_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figorrec.C,v 3.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("figorrec.H")
 #include <figorrec.H>
@@ -37,8 +33,6 @@ ATK_IMPL("figorrec.H")
 
 
 ATKdefineRegistry(figorrec, figorect, NULL);
-#ifndef NORCSID
-#endif
 
 
 figorrec::figorrec()
@@ -62,7 +56,7 @@ class figorrec *figorrec::Create(long  left , long  top , long  width , long  he
     return res;
 }
 
-char *figorrec::ToolName(class figtoolview  *v, long  rock)
+const char *figorrec::ToolName(class figtoolview  *v, long  rock)
 {
     return "Round Rect";
 }
@@ -71,7 +65,7 @@ void figorrec::Draw(class figview  *v)
 {
     long x, y, w, h;
     long shad, lw, corn, dash;
-    char *col;
+    const char *col;
 
     if ((this)->PosW() >= 0) {
 	x = (v)->ToPixX( (this)->PosX());
@@ -156,11 +150,11 @@ void figorrec::Sketch(class figview  *v)
 
 #define FadeColor(col, shad)  (1.0 - (1.0-(shad)) * (1.0-(col)))
 
-void figorrec::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolean newstyle)
+void figorrec::PrintObject(class figview  *v, FILE  *file, const char  *prefix, boolean newstyle)
 {
     long x, y, w, h;
     long shad, lw, corn, dash;
-    char *col;
+    const char *col;
     double rcol, bcol, gcol, shadcol;
 
     fprintf(file, "%s  %% rounded rectangle\n", prefix);

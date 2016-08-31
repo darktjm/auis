@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-char *fontselv_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/fontselview.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("fontselview.H")
 #include <fontselview.H>
@@ -80,8 +76,6 @@ static char sizelayout[SIZES_NUM_INIT][16] = {
 
 
 ATKdefineRegistry(fontselview, lpair, fontselview::InitializeClass);
-#ifndef NORCSID
-#endif
 static void InsertSize(class fontselview  *self, short  val);
 static void SetSizeProc(class stringtbl  *st, class fontselview  *self, short  accnum);
 static void SetStyleProc(class stringtbl  *st, class fontselview  *self, short  accnum);
@@ -239,7 +233,7 @@ void fontselview::ObservedChanged(class observable  *d, long  status)
 {
     class fontsel *dobj=(class fontsel *)d;
     long ix, vnum, accnum;
-    char *cx;
+    const char *cx;
 
     if (status == observable_OBJECTDESTROYED) {
     }

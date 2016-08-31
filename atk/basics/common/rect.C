@@ -25,16 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/rect.C,v 3.2 1993/07/29 20:15:08 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * $Log: rect.C,v $
 // Revision 3.2  1993/07/29  20:15:08  rr2b
@@ -113,12 +103,11 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  *
  */
 
+#include <andrewos.h>
 #include <rect.h>
 
 /******************** methods ******************/
 
-	#ifndef NORCSID
-#endif
 void rectangle_UnionRect(register struct rectangle  *Result,register struct rectangle  *LHS , register struct rectangle  *RHS);
 void rectangle_IntersectRect(register struct rectangle  *Result,register struct rectangle  *LHS , register struct rectangle  *RHS);
 void rectangle_SetRectSides(register struct rectangle  * LHS, long  left,long  top,long  right,long  bottom);

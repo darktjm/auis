@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/vmmon.C,v 1.5 1996/07/10 18:18:22 robr Exp $";
-#endif
-
-
- 
-
-
 #include <im.H>
 #include <consoleClass.H>
 #include <console.h>
@@ -60,8 +50,6 @@ extern int children[]; /* Make getstats a bona-fide controlled child */
   * processed in ComputeStatistics - in vmmonf.c
   */
 
-#ifndef NORCSID
-#endif
 void getkmemexit(int  pid, class consoleClass  *self);
 
 
@@ -80,7 +68,8 @@ int console_InitStats(class consoleClass  *self)
     int i; 
     FILE *vmstats;
     int flags;
-    char *myargv[5], userid[50], freq1[50], freq2[50];
+    const char *myargv[5];
+    char userid[50], freq1[50], freq2[50];
     int *newchild;
     SIGSET_TYPE nmask, omask;
 
@@ -130,7 +119,7 @@ int console_InitStats(class consoleClass  *self)
 	myargv[2] = freq1;
 	myargv[3] = freq2;
 	myargv[4] = NULL;
-	execvp("getstats", myargv);
+	execvp("getstats", (char **)myargv);
 	/* it's an error if execvp returns */
 	perror("execvp failed");
 	_exit(-1);

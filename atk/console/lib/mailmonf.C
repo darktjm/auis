@@ -25,21 +25,12 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/mailmonf.C,v 1.10 1996/09/03 19:06:56 robr Exp $";
-#endif
-
-
- 
-
 /* ***************************************************************
 	Mail system monitoring routine for Instrument Console
 	Also now monitors random directories and print requests
 ***************************************************************** */
 
+#include <andrewos.h>
 #include <andyenv.h>
 
 #include <consoleClass.H>
@@ -87,16 +78,6 @@ extern boolean UseNonAndrewPrint, UseNonAndrewMail, NonViceHost, NonAFSDHost, Ch
 #define SUFFIX 2
 #define NO_DOTS 3
 
-#ifndef NORCSID
-#endif
-#if POSIX_ENV
-#else
-#ifdef M_UNIX
-#else
-#endif
-#endif /* POSIX */
-#ifdef AFS_ENV
-#endif /* AFS_ENV */
 int CheckDir(class consoleClass  *self, char  *Name, int  *LastModTime , int  LastValue);
 void CheckMail(class consoleClass  *self, int  requested);
 void CheckDirectories(class consoleClass  *self);

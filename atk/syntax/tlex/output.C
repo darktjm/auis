@@ -21,11 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-	char *tlex_output_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/syntax/tlex/RCS/output.C,v 1.4 1995/03/01 01:54:31 rr2b Stab74 $";
-#endif
-
-
 #include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
@@ -39,7 +34,7 @@ static int HiChar;  /* last character for which there is an action other
 
 
 /* !!! Order here is same as order of numbers in gentlex.h and global.h !!! */
-static char *(RecName[]) = {
+static const char * const RecName[] = {
 	"undefined recognizer",
 	"tlex_ERROR",
 	"tlex_WHITESPACE",
@@ -83,7 +78,7 @@ void
 WriteClass(FILE  *fout, struct line  *hdr)
 		{
 	struct line *elt;
-	char *procname = (hdr->u.h.Ccode)  ? GenSym()  : (char *)"NULL";
+	const char *procname = (hdr->u.h.Ccode)  ? GenSym()  : "NULL";
 
 	/* output identification */
 	if (hdr->u.h.tokennumber >0 && 
@@ -118,7 +113,7 @@ WriteClass(FILE  *fout, struct line  *hdr)
 	}
 
 	/* output struct variables and initial values */
-	fprintf(fout, "static struct %s_type %s = {\n", 
+	fprintf(fout, "static const struct %s_type %s = {\n", 
 			hdr->u.h.structname, hdr->u.h.structname);
 	for (elt = hdr->u.h.decls; elt; elt = elt->next) {
 		if (*elt->u.d.val == '$') {
@@ -157,14 +152,14 @@ WriteRectbl(FILE  *f)
 	{
 	struct line *lx;
 	int i;
-	char *comma;
+	const char *comma;
 
-	fprintf(f, "\nstatic struct tlex_Recparm *(%s_recparmtbl[]) = {", 
+	fprintf(f, "\nstatic const struct tlex_Recparm *(%s_recparmtbl[]) = {", 
 			Prefix);
 
 	comma = "";	/* no comma before the first entry */
 	for (lx = Classes, i = 0; lx; lx = lx->next, i++) {
-		fprintf(f, "%s\n\t(struct tlex_Recparm *)&%s",
+		fprintf(f, "%s\n\t(const struct tlex_Recparm *)&%s",
 			comma, lx->u.h.structname);
 		comma = ",";
 	}
@@ -260,25 +255,25 @@ WriteTlc(FILE  *fout, char  *fname)
 	WriteActions(fout);
 	buf[0] = HiChar;  buf[1] = '\0';
 
-fprintf(fout, "\nstatic struct tlex_tables %s_tlex_tables = {\n", Prefix);
+fprintf(fout, "\nstatic const struct tlex_tables %s_tlex_tables = {\n", Prefix);
 fprintf(fout, "\t/* rectbl; */		%s_recparmtbl,\n", Prefix);
 fprintf(fout, "\t/* short *action; */	%s_actiontbl,\n", Prefix);
 fprintf(fout, "\t/* int hichar; */	%d,\n", (int)(unsigned char)HiChar);
 fprintf(fout, "\t/* int defaultaction;*/	%d,\n", defaultaction);
 fprintf(fout, "\t/* reservedwordparm;*/	");
 if (ResWordHandler)
-	fprintf(fout, "(struct tlex_Recparm *)&%s,\n",
+	fprintf(fout, "(const struct tlex_Recparm *)&%s,\n",
 			ResWordHandler->u.h.structname);
 else 
-	fprintf(fout, "(struct tlex_Recparm *)NULL,\n");
-fprintf(fout, "\t/* char **thongtbl; */	(char **)%s_thongtbl,\n", Prefix);
-fprintf(fout, "\t/* char *thongsame; */	%s_thongsame,\n", Prefix);
+	fprintf(fout, "NULL,\n");
+fprintf(fout, "\t/* const char **thongtbl; */	%s_thongtbl,\n", Prefix);
+fprintf(fout, "\t/* const char *thongsame; */	%s_thongsame,\n", Prefix);
 fprintf(fout, "\t/* short *thongact; */	%s_thongact,\n", Prefix);
 if (GlobalHandler)
 	fprintf(fout, "\t/* global; */		(struct tlex_Recparm *)&%s,\n",
 			GlobalHandler->u.h.structname);
 else
-	fprintf(fout, "\t/* global; */		(struct tlex_Recparm *)NULL,\n");
+	fprintf(fout, "\t/* global; */		NULL,\n");
 fprintf(fout, "\t/* ErrorHandler; */	(struct tlex_ErrorRecparm *)&%s\n",
 			ErrorHandler->u.h.structname);
 fprintf(fout, "};\n");

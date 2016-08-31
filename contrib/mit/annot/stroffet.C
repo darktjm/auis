@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/annot/RCS/stroffet.C,v 1.3 1994/08/11 03:03:00 rr2b Stab74 $";
-#endif
-
-
-static char *stroffet_rcsid = "$Header";
-
 #include <andrewos.h>
 
 #include <text.H>
@@ -53,9 +45,6 @@ static char *stroffet_rcsid = "$Header";
 /****************************************************************/
 
 ATKdefineRegistry(stroffet, icon, stroffet::InitializeClass);
-#ifndef NORCSID
-#endif
-
 
 boolean
 stroffet::InitializeClass()

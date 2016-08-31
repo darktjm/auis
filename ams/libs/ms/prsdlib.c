@@ -27,11 +27,6 @@
 
 #include <andrewos.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/prsdlib.c,v 2.7 1992/12/15 21:20:51 rr2b Stab74 $";
-#endif
-
 /*
  * prsdlib.c - A small library of routines used by parsedate.
  *

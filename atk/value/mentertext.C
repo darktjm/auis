@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/mentertext.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("mentertext.H")
 
 #include <stylesheet.H>
@@ -50,8 +41,6 @@ ATK_IMPL("mentertext.H")
 
 
 ATKdefineRegistry(mentertext, text, NULL);
-#ifndef NORCSID
-#endif
 static void checkstyles(class mentertext  *self);
 int mentertext_GetBufP(class mentertext  *self,char  *buf);
 
@@ -135,7 +124,7 @@ boolean mentertext::Changed()
 {
     return (boolean)(this->mod != (this)->GetModified());
 }
-void mentertext::SetChars(char  *str,int  len)
+void mentertext::SetChars(const char  *str,int  len)
 {
     this->src = str;
     this->bufpcount = 0;
@@ -208,7 +197,7 @@ void mentertext::ClearLine(long  pos)
 }
 
 
-char *mentertext::ViewName()
+const char *mentertext::ViewName()
 {
     return ("etextview");
 }

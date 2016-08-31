@@ -1,7 +1,5 @@
 #ifndef _eframe_H_
 #define _eframe_H_
-/* $Author: wjh $ */
-
 /*
 	$Disclaimer: 
 *Permission to use, copy, modify, and distribute this software and its 

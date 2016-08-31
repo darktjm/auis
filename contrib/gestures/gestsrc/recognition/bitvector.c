@@ -33,12 +33,6 @@ the full agreement.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/recognition/RCS/bitvector.c,v 1.5 1993/06/22 19:55:33 gk5g Stab74 $";
-#endif
-
-
 /*LINTLIBRARY*/
 
 #include "util.h"

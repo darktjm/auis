@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/tree23int.C,v 3.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
- 
- 
-
-
 ATK_IMPL("tree23int.H")
 #include <tree23int.H>
 
@@ -50,8 +40,6 @@ static class tree23int *lastBlock = NULL;
 
 
 ATKdefineRegistry(tree23int, ATK, NULL);
-#ifndef NORCSID
-#endif
 
 #if 0
 class tree23int *tree23int::Allocate()

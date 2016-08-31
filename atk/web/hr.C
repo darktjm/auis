@@ -8,7 +8,7 @@
 
 ATKdefineRegistry(hr, dataobject, NULL);
 
-char *hr::ViewName()
+const char *hr::ViewName()
 {
     return "hrv";
 }

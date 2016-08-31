@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/btstat.c,v 2.9 1992/12/15 21:08:11 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	btstat.c
 	Library routines for understanding results from other routines.

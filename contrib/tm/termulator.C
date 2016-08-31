@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/tm/RCS/termulator.C,v 1.7 1996/09/03 19:26:16 robr Exp $";
-#endif
-
-
 #include <andrewos.h> /* sys/types.h sys/file.h */
 #include <ctype.h>
 #include <sys/ioctl.h>
@@ -85,21 +79,11 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/tm/RCS
 #define scrPos(self,x,y) \
  ((self)->screen+(y)*((self)->width+1)+(x))
 
-static char spaces[]="                                                                                ";
+static const char spaces[]="                                                                                ";
 #define SPACES (sizeof(spaces)-1)
 
 
 ATKdefineRegistry(termulator, text, NULL);
-#ifndef NORCSID
-#endif
-#ifndef hp9000s300
-#endif /* hp9000s300 */
-#ifndef O_NDELAY
-#endif /* O_NDELAY */
-#ifdef hpux
-#endif /* hpux */
-#ifdef M_UNIX
-#endif
 static int fillChars(class termulator  *self,long  pos,long  num);
 static long fillLines(class termulator  *self,long  pos,int  width,int  height);
 static long stripEnds(class termulator  *self,long  num);
@@ -1145,7 +1129,7 @@ int termulator::StartProcess(const char  **args)
     return 0;
 }
 
-char *termulator::ViewName()
+const char *termulator::ViewName()
 {
     return "tmview";
 }

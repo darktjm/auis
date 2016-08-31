@@ -26,18 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/layout/RCS/filler.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-/* $ACIS$ */
-
- 
-
-
-
 ATK_IMPL("filler.H")
 #include <filler.H>
 
@@ -45,11 +33,9 @@ ATK_IMPL("filler.H")
 
 
 ATKdefineRegistry(filler, cel, NULL);
-#ifndef NORCSID
-#endif
 
 
-char *				    /* returns "fillerview" */
+const char *				    /* returns "fillerview" */
 filler::ViewName()
 {
     return "fillerview";

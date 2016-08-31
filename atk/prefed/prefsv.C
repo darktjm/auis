@@ -23,16 +23,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/prefsv.C,v 1.6 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
-
- 
-
 ATK_IMPL("prefsv.H")
 
 
@@ -55,8 +45,6 @@ static class keymap *prefsvKeymap=NULL;
 
 
 ATKdefineRegistry(prefsv, textview, prefsv::InitializeClass);
-#ifndef NORCSID
-#endif
 static void sort(class prefsv  *pv, char  *rock);
 
 

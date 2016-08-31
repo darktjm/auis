@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/folders.C,v 1.8 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
 #include <textview.H>
 #include <cui.h>
 #include <fdphack.h>
@@ -79,19 +70,19 @@ extern int GlobalTransactionCount;
 static class keymap *folders_standardkeymap;
 static class menulist *folders_standardmenulist;
 
-static char *ForgetItString = "Forget it -- do nothing.";
+static const char ForgetItString[] = "Forget it -- do nothing.";
 
 
 
 ATKdefineRegistry(folders, messages, folders::InitializeClass);
 
-static char * WhichIcon(int  substatus);
+static const char * WhichIcon(int  substatus);
 void folders_ClearFolders(class folders  *ci);
 void folders_DoClick(class folders  *folders, boolean  IsLeftClick , boolean  IgnorePosition);
 static void UpdateBEDirCachePositions(class folders  *ci, struct BEDirCache  *entry, int  addedlen);
 static void RemoveFromBEDirCache(class folders  *ci, char  *longname , char  *shortname);
 static int AddToBEDirCache(class folders  *ci, const char  *longname , const char  *shortname, int  substatus);
-static int BEDC_AddComment(class folders  *ci, struct BEDirCache  *bdc, char  *comm, int  *addedlen);
+static int BEDC_AddComment(class folders  *ci, struct BEDirCache  *bdc, const char  *comm, int  *addedlen);
 static void InsertFolderNameInText(class folders  *f, struct BEDirCache  *bdcent, char  *comm);
 static void AddSetupItem(class folders  *ci, const char  *longname , const char  *shortname, int  substatus , int  showingnewstuff , int  HasNew, boolean  *HasCleared);
 int folders_SetupList(class folders  *ci, int  code, const char  *thingstoread[]);
@@ -147,10 +138,10 @@ void folders::HandleAsyncPrefetch()
 }
 
 
-static char *
+static const char *
 WhichIcon(int  substatus)
 {
-	char *whichicon;
+	const char *whichicon;
 
 	switch (substatus) {
 	    case AMS_ASKSUBSCRIBED:
@@ -200,11 +191,11 @@ void folders::ShowHelp()
 {
     char InitString[50];
     int pos, len;
-    static char *blurb1 = "by N. Borenstein\n";
-    static char *altblurb1 = "by N. Borenstein and R. Glickstein\n";
-    static char *blurb2 = "a multi-media interface to the Andrew Message System\n";
-    static char *blurb3 = "also by J. Rosenberg, C. Everhart, A. Stoller, and R. Glickstein.\n\n";
-    static char *altblurb3 = "also by J. Rosenberg, C. Everhart, and A. Stoller.\n\n";
+    static const char blurb1[] = "by N. Borenstein\n";
+    static const char altblurb1[] = "by N. Borenstein and R. Glickstein\n";
+    static const char blurb2[] = "a multi-media interface to the Andrew Message System\n";
+    static const char blurb3[] = "also by J. Rosenberg, C. Everhart, A. Stoller, and R. Glickstein.\n\n";
+    static const char altblurb3[] = "also by J. Rosenberg, C. Everhart, and A. Stoller.\n\n";
     static int bobgvanity = -1;
     class environment *et;
     class text *mytext = (class text *) (this)->GetDataObject();
@@ -358,7 +349,7 @@ static int AddToBEDirCache(class folders  *ci, const char  *longname , const cha
 }
 
 
-static int BEDC_AddComment(class folders  *ci, struct BEDirCache  *bdc, char  *comm, int  *addedlen)
+static int BEDC_AddComment(class folders  *ci, struct BEDirCache  *bdc, const char  *comm, int  *addedlen)
 {
     int newlen;
 
@@ -609,7 +600,8 @@ int folders_SetupList(class folders  *ci, int  code, const char  *thingstoread[]
 
 void folders::ActionHit(int  substatus, char  *FullName , char  *nickname)
 {
-    char    ErrorText[256], *ActionVector[10], Question[100+MAXPATHLEN];
+    char    ErrorText[256], Question[100+MAXPATHLEN];
+    const char *ActionVector[10];
     int result, quicknewstatus, vecsize;
     Boolean HasCurrent = FALSE, NowPlaying;
     class captions *mainci;
@@ -768,7 +760,8 @@ static void AlterSubStatus(class folders  *ci, char  *dir , int  status, char  *
 
 int folders::AlterSubscriptionStatus(char  *dir , int  status, char  *shortname)
 {
-    char *StatusString, ErrorText[256];
+    const char *StatusString;
+    char ErrorText[256];
 
     AlterSubStatus(this, dir, status, shortname);
     switch (status) {

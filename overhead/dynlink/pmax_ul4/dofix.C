@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynlink/pmax_ul4/RCS/dofix.C,v 1.6 1995/01/11 18:01:06 rr2b Stab74 $";
-#endif
-
 /* 
 	dofix.c - convert .o file into .do file
 

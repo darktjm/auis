@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipvp00.C,v 1.3 1993/06/17 04:28:00 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -98,7 +90,7 @@ END-SPECIFICATION  ************************************************************/
 
 #define  Block			      (View->block)
 
-static int Allocate_Pane_Object( register class zipview		  *self, register zip_type_pane		  *pane, register char				  *name, register int				   attributes /*=== set attributes ===*/ );
+static int Allocate_Pane_Object( register class zipview		  *self, register zip_type_pane		  *pane, register const char				  *name, register int				   attributes /*=== set attributes ===*/ );
 static int Deallocate_Pane_Object( register class zipview		  *self, register zip_type_pane		   pane );
 static long Assign_Pane_Stream_Attributes( register class zipview		  *self, register zip_type_pane		   pane, register zip_type_stream		   stream );
 static long Assign_Pane_Image_Attributes( register class zipview		  *self, register zip_type_pane		   pane, register zip_type_image		   image );
@@ -115,7 +107,7 @@ static void Compute_Pane_Figure_Stretch_Factors( register class zipview		  *self
 
 
 long
-zipview::Create_Pane( register zip_type_pane		  *pane, register char				  *name, register struct rectangle		  *block, register long				   attributes )
+zipview::Create_Pane( register zip_type_pane		  *pane, register const char				  *name, register struct rectangle		  *block, register long				   attributes )
             {
   class zipview *self=this;
   register int				  status = zip_ok;
@@ -137,7 +129,7 @@ zipview::Create_Pane( register zip_type_pane		  *pane, register char				  *name,
   }
 
 long
-zipview::Create_Nested_Pane( register zip_type_pane		  *pane, register char				  *name, register zip_type_pane		   master_pane, register long				   attributes )
+zipview::Create_Nested_Pane( register zip_type_pane		  *pane, register const char				  *name, register zip_type_pane		   master_pane, register long				   attributes )
             {
   register int				  status = zip_ok;
   class zipview *self=this;
@@ -156,7 +148,7 @@ zipview::Create_Nested_Pane( register zip_type_pane		  *pane, register char				 
   }
 
 static int
-Allocate_Pane_Object( register class zipview		  *self, register zip_type_pane		  *pane, register char				  *name, register int				   attributes /*=== set attributes ===*/ )
+Allocate_Pane_Object( register class zipview		  *self, register zip_type_pane		  *pane, register const char				  *name, register int				   attributes /*=== set attributes ===*/ )
           {
   register int				  status = zip_ok;
   register zip_type_pane_chain		  pane_link, prior_link;

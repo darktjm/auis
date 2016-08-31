@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/file.h and string(s).h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/textaux/RCS/compchar.C,v 3.7 1995/04/26 21:50:05 rr2b Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("compchar.H")
 
 #include <ctype.h>
@@ -64,23 +55,23 @@ static struct proctable_Entry *nop=NULL,*insertchar=NULL;
 
 static proctable_fptr textview_SelfInsertCmd=NULL;
 
-static char leftaccent[]="AEIOUYaeiouy";
-static  char leftaccentcodes[]={0xc1,0xc9,0xcd,0xd3,0xda,0xdd,0xe1,0xe9, 0xed,0xf3,0xfa,0xfd};
+static const char leftaccent[]="AEIOUYaeiouy";
+static  const char leftaccentcodes[]={0xc1,0xc9,0xcd,0xd3,0xda,0xdd,0xe1,0xe9, 0xed,0xf3,0xfa,0xfd};
 
-static char rightaccent[]="AEIOUaeiou";
-static  char rightaccentcodes[]={0xc0,0xc8,0xcc,0xd2,0xd9,0xe0,0xe8,0xec, 0xf2,0xf9};
+static const char rightaccent[]="AEIOUaeiou";
+static  const char rightaccentcodes[]={0xc0,0xc8,0xcc,0xd2,0xd9,0xe0,0xe8,0xec, 0xf2,0xf9};
 
-static char hat[]="AEIOUaeiou";
-static  char hatcodes[]={0xc2,0xca,0xce,0xd4,0xdb,0xe2,0xea,0xee,0xf4,0xfb};
+static const char hat[]="AEIOUaeiou";
+static  const char hatcodes[]={0xc2,0xca,0xce,0xd4,0xdb,0xe2,0xea,0xee,0xf4,0xfb};
 
-static char tilde[]="ANOano";
-static  char tildecodes[]={0xc3,0xd1,0xd5,0xe3,0xf1,0xf5};
+static const char tilde[]="ANOano";
+static  const char tildecodes[]={0xc3,0xd1,0xd5,0xe3,0xf1,0xf5};
 
-static char umlaut[]="AEIOUaeiouy";
-static  char umlautcodes[]={0xc4,0xcb,0xcf,0xd6,0xdc,0xe4,0xeb,0xef,0xf6, 0xfc,0xff};
+static const char umlaut[]="AEIOUaeiouy";
+static  const char umlautcodes[]={0xc4,0xcb,0xcf,0xd6,0xdc,0xe4,0xeb,0xef,0xf6, 0xfc,0xff};
 
-static char hex[]="0123456789abcdef";
-static char octal[]="01234567";
+static const char hex[]="0123456789abcdef";
+static const char octal[]="01234567";
 
 /* ahotoi: used by compchar_insert to parse a hexadecimal or octal number depending on if base is 3 or 4. */
 
@@ -89,9 +80,9 @@ static  char ahotoi(char  *ptr,int  base2);
 static  char parsecode(char  *ptr);
 static void SelfInsertCmd(class textview *tv, char code,char  *style);
 static void compchar_insert(class textview  *tv,char  *ptr);
-static void compchar_modifier(class textview  *tv,char  *ptr,char  *list,char *codes);
-static enum keymap_Types doafter(struct arock  *rock,char  key,struct proctable_Entry  **ppe,long  *prock);
-static void after(class textview  *tv,char  *list, char *codes,char  *ch);
+static void compchar_modifier(class textview  *tv,char  *ptr,const char  *list,const char *codes);
+static enum keymap_Types doafter(struct arock  *rock,const char  key,struct proctable_Entry  **ppe,long  *prock);
+static void after(class textview  *tv,const char  *list, const char *codes,char  *ch);
 static void compchar_leftaccentafter(class textview  *tv,char  *rock);
 static void compchar_rightaccentafter(class textview  *tv,char  *rock);
 static void compchar_umlautafter(class textview  *tv,char  *rock);
@@ -119,7 +110,9 @@ static void compchar_ASCIIToATK(class textview  *tv,long  rock);
 static  char ahotoi(char  *ptr,int  base2)
 {
      char result=0;
-    char c,*i,*base=(base2==3)?octal:hex;
+    char c;
+    const char *i;
+    const char *base=(base2==3)?octal:hex;
     while(*ptr && *ptr!=' ') {
 	result<<=base2;
 	c=(*ptr);
@@ -156,7 +149,8 @@ static void SelfInsertCmd(class textview *tv, char code,char  *style)
     class style *st;
     class environment *env;
     long pos=(tv)->GetDotPosition(),pos2;
-    char *tmpl2,*tmpl;
+    const char *tmpl2;
+    char *tmpl;
     textview_SelfInsertCmd(tv,code);
     if(style[0]) {
 	char *tstyle=(char *)malloc(strlen(style)+1);
@@ -215,12 +209,12 @@ static void compchar_insert(class textview  *tv,char  *ptr)
 }
 
 /* compchar_modifier: if ptr isn't a valid character assumes it to be a pointer to an argument as provided by an .*init file.  In this case it inserts the character pointed to with the appropriate code as given by list and codes.  If ptr is a valid character then the character before the cursor is changed to the appropriate code as given by list and codes. */
-static void compchar_modifier(class textview  *tv,char  *ptr,char  *list,char *codes)
+static void compchar_modifier(class textview  *tv,char  *ptr,const char  *list,const char *codes)
 {
     class text *t=(class text *)(tv)->GetDataObject();
     /* if given an arg in a  .*init insert it with an accent */
     if((unsigned long)ptr>MAXCHAR && ptr[0]!='\0') {
-	char *i=strchr(list,*ptr);
+	const char *i=strchr(list,*ptr);
 	if(!i) {
 	    message::DisplayString(tv,0,"Character not available.");
 	    return;
@@ -228,7 +222,7 @@ static void compchar_modifier(class textview  *tv,char  *ptr,char  *list,char *c
 	textview_SelfInsertCmd(tv,codes[i-list]);
     } else {
 	long pos=(tv)->GetDotPosition()-1;
-	char *i;
+	const char *i;
 	if(pos<0) {
 	    message::DisplayString(tv,0,"No character before the cursor.");
 	    return;
@@ -245,18 +239,18 @@ static void compchar_modifier(class textview  *tv,char  *ptr,char  *list,char *c
 
 struct arock {
     class textview *tv;
-    char *list;
-     char *codes;
+    const char *list;
+     const char *codes;
     keystate_fptr oldoverride;
     long oldrock;
 };
 
 /* doafter: the keystate override function for applying a umlaut, hat, tilde, etc to the next character typed;
   */
-static enum keymap_Types doafter(struct arock  *rock,char  key,struct proctable_Entry  **ppe,long  *prock)
+static enum keymap_Types doafter(struct arock  *rock,const char  key,struct proctable_Entry  **ppe,long  *prock)
 {
     class textview *tv=rock->tv;
-    char *i=strchr(rock->list,key);
+    const char *i=strchr(rock->list,key);
     if(!i) {
 	(tv->keystate)->SetOverride((keystate_fptr)rock->oldoverride, rock->oldrock);
 	free(rock);
@@ -273,7 +267,7 @@ static enum keymap_Types doafter(struct arock  *rock,char  key,struct proctable_
 }
 
 /* after: the function which actually handles the work for all the compchar_*after functions, sets doafter as the override function on the textviews keystate, if the override function is already doafter it cancels the operation and if the .*init file so indicated will insert a character. */
-static void after(class textview  *tv,char  *list, char *codes,char  *ch)
+static void after(class textview  *tv,const char  *list, const char *codes,char  *ch)
 {
     struct arock *rock;
     rock=(struct arock *)malloc(sizeof(struct arock));
@@ -381,7 +375,7 @@ static long match(char  key,struct composites_s  *c,long  rock)
     struct helpRock *h=(struct helpRock *)rock;
     char buf[256];
     char ch[2];
-    char *t;
+    const char *t;
     if(*(h->partial)&&strncmp(h->partial+1,(char *) c->exts, strlen(h->partial+1))) return 0;
     ch[0]=(char)c->code;
     ch[1]='\0';

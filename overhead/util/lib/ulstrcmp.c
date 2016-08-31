@@ -25,20 +25,11 @@
  *  $
 */
 
-#include <util.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/ulstrcmp.c,v 2.11 1992/12/15 21:10:49 rr2b Stab74 $";
-#endif
-
 /*
 	ulstrcmp.c--compare strings ignoring alphabetic case.
 */
 
-
- 
-
+#include <util.h>
 #include <ctype.h>
 
 

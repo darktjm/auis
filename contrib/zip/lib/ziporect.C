@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/ziporect.C,v 1.3 1993/06/17 04:28:00 rr2b Stab74 $";
-#endif
-
 /* ziporect.c	Zip Object -- Rectangle					      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -55,7 +50,6 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
-
 #include <andrewos.h>
 #include <view.H>
 #include <fontdesc.H>
@@ -66,7 +60,7 @@ END-SPECIFICATION  ************************************************************/
 #include "zipobject.H"
 #include "ziporect.H"
 
-static char				*rect_attributes[] =
+static const char		  * const rect_attributes[] =
 					{
 					"icon", "B",
 					"iconfontname", IconFontName,
@@ -80,7 +74,7 @@ static void Compute_Handle_Positions( class ziporect  *self, zip_type_figure  fi
 
 
 char
-ziporect::Object_Attributes( char **attributes[] )
+ziporect::Object_Attributes( const char * const *attributes[] )
   {
   IN(ziporect::Object_Attributes);
   *attributes = rect_attributes;

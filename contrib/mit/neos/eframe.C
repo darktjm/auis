@@ -1,5 +1,3 @@
-/* $Author: wjh $ */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,14 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/eframe.C,v 1.5 1996/06/11 01:26:13 wjh Exp $";
-#endif
-
-
- 
 
 /* eframe.c 
  * This is a silly little view so we
@@ -66,8 +56,6 @@ static class menulist *eframeMenu;
 
 
 ATKdefineRegistry(eframe, view, eframe::InitializeClass);
-#ifndef NORCSID
-#endif
 void eframe_SetDefault(class eframe  *self);
 void eframe_SetDisplay(class eframe  *self);
 void eframe_NewWindow(class eframe  *self);

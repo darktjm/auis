@@ -21,17 +21,11 @@
  *  $
  */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/ashadow.C,v 1.18 1996/11/12 21:51:10 robr Exp $";
-#endif
-
 /* ashadow.C		
 	Draw borders around widgets
 */
 
+#include <andrewos.h>
 ATK_IMPL("ashadow.H")
 #include <ashadow.H>
 

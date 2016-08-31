@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/fonts/cmd/RCS/fdbwm.c,v 2.12 1992/12/15 21:02:39 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* ************************************************************ */
 
 /*	fdbwm		convert ASCII to wm font representation */
@@ -1053,7 +1045,7 @@ Boolean ConvertInternalToExternal()
 
 /* Main program */
 
-char ProgramName[] = "fdbwm";
+const char ProgramName[] = "fdbwm";
 
 main(argc, argv)
 int   argc;

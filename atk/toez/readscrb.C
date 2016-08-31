@@ -25,16 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/toez/RCS/readscrb.C,v 1.4 1994/08/13 16:46:24 rr2b Stab74 $";
-#endif
-
- 
-
-
 /* ReadScribe.c - 
 	 convert an ASCII file (with Scribe commands) to ATK text
 */
@@ -174,6 +164,7 @@ with passthru set.
 
 */
 
+#include <andrewos.h>
 #include <ctype.h>
 #include <stdio.h>
 #include <text.H>
@@ -258,19 +249,19 @@ static struct stylemap *LatestEndMap = NULL;
 
 boolean ReadScribeFromFileToDoc(FILE  *f , class text  *doc , int  pos , void  (*errhandler)(long, char *));
 static void Error();
-static void Error0(char  *msg );
-static void Error1(char  *msg , char  *a );
-static void Error2(char  *msg , char  *a , char  *b );
-static void Error3(char  *msg , char  *a , char  *b , char  *c );
-static void Error4(char  *msg , char  *a , char  *b , char  *c , char  *d );
-static void Error5(char  *msg , char  *a , char  *b , char  *c , char  *d , char  *e );
+static void Error0(const char  *msg );
+static void Error1(const char  *msg , const char  *a );
+static void Error2(const char  *msg , const char  *a , const char  *b );
+static void Error3(const char  *msg , const char  *a , const char  *b , const char  *c );
+static void Error4(const char  *msg , const char  *a , const char  *b , const char  *c , const char  *d );
+static void Error5(const char  *msg , const char  *a , const char  *b , const char  *c , const char  *d , const char  *e );
 static void InitCharType ();
 static char * CollectWord(int  *len );
 static int IsReserved (register char *word );
 static char ScribeDelimiter(char *tc);
 static void SaveWhiteSpace();
 static boolean  OutputWhiteSpace();
-static class style * createStyle(char  *name , char  *mnm);
+static class style * createStyle(const char  *name , const char  *mnm);
 static void InitStyles(class text  *doc);
 #if 0
 static void DefineSheet();
@@ -315,22 +306,22 @@ Error()
 	HadError = TRUE;
 }
 	static void
-Error0(char  *msg ) 
+Error0(const char  *msg ) 
 	{	sprintf (ErrBuf, msg);   Error();   }
 	static void
-Error1(char  *msg , char  *a ) 
+Error1(const char  *msg , const char  *a ) 
 	{	sprintf (ErrBuf, msg, a);   Error();   }
 	static void
-Error2(char  *msg , char  *a , char  *b ) 
+Error2(const char  *msg , const char  *a , const char  *b ) 
 	{	sprintf (ErrBuf, msg, a, b);   Error();   }
 	static void
-Error3(char  *msg , char  *a , char  *b , char  *c ) 
+Error3(const char  *msg , const char  *a , const char  *b , const char  *c ) 
 	{	sprintf (ErrBuf, msg, a, b, c);   Error();   }
 	static void
-Error4(char  *msg , char  *a , char  *b , char  *c , char  *d ) 
+Error4(const char  *msg , const char  *a , const char  *b , const char  *c , const char  *d ) 
 	{	sprintf (ErrBuf, msg, a, b, c, d);   Error();   }
 	static void
-Error5(char  *msg , char  *a , char  *b , char  *c , char  *d , char  *e ) 
+Error5(const char  *msg , const char  *a , const char  *b , const char  *c , const char  *d , const char  *e ) 
 	{	sprintf (ErrBuf, msg, a, b, c, d, e);   Error();   }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -346,7 +337,7 @@ Error5(char  *msg , char  *a , char  *b , char  *c , char  *d , char  *e )
  textform, title, *u, use, value
 */
 
-static int ResInx[26] = {
+static const int ResInx[26] = {
 /*a*/		0,1,7,14,17,
 /*f*/		20,0,24,27,0,
 /*k*/		0,34,37,41,43,
@@ -354,7 +345,7 @@ static int ResInx[26] = {
 /*u*/		67,70,0,0,0,0
 };
 
-static char *ResWord[] = {0, 
+static const char * const ResWord[] = {0, 
 /*  1 */ "b", "begin", "bibliography", "blankpage", "blankspace", 0,
 /*  7 */ "caption", "case", "cite", "citemark", "comment", "counter", 0,
 /* 14 */ "define", "device", 0,
@@ -394,9 +385,9 @@ static char CharType[256];
 InitCharType ()
 {
 	int i;
-	static char upper[] = "ABCDEFGHJIKLMNOPQRSTUVWXYZ";
-	static char lower[] = "abcdefghjiklnmoqprstuvwxyz";
-	static char other[] = "0123456789%#";
+	static const char upper[] = "ABCDEFGHJIKLMNOPQRSTUVWXYZ";
+	static const char lower[] = "abcdefghjiklnmoqprstuvwxyz";
+	static const char other[] = "0123456789%#";
 		/* '.' '-' '&' ought to be in other, but they are valid as @. @- @& */
 	for (i=256; i; )				 CharType[--i] = 0;
 	for (i=strlen(lower); i; )		 CharType[lower[--i]] = 1;
@@ -447,11 +438,11 @@ IsReserved (register char *word )
 	static char
 ScribeDelimiter(char *tc)
 	{
-	static char
+	static const char
 		left[]  = "{[(<\"`'",	/* at end, null is paired to blank*/
 		right[] = "}])>\"'' ";
 	register int endc;
-	register char *pc = left;
+	register const char *pc = left;
 	SaveWhiteSpace();
 	*tc = nextch;
 	while (*pc && nextch != *pc) pc++;
@@ -489,7 +480,7 @@ OutputWhiteSpace()
 class style *iStyle, *bStyle, *uStyle, *inxiStyle, *passStyle;
 
 	static class style *
-createStyle(char  *name , char  *mnm)
+createStyle(const char  *name , const char  *mnm)
 	{
 	class style *s;
 	s = new style;
@@ -752,7 +743,7 @@ DoAt()
 	register char *word, endc;
 	char tc;
 	int len,code;
-	char *subobjtype;
+	const char *subobjtype;
 	class text *subobj;
 	static char C1[2] = " ", C2[2] = " ", C3[2] = " ";
 

@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/wpfuzz.c,v 2.14 1995/03/18 17:31:09 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	wpfuzz.c
 	Common procedures and data for manipulating the fields and B-tree

@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/palette.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("palette.H")
 #include <fontdesc.H>
 #include <graphic.H>
@@ -46,8 +36,6 @@ static struct palette_item *FreeList;
 
 
 ATKdefineRegistry(palette, view, NULL);
-#ifndef NORCSID
-#endif
 static struct palette_item *palette_AddItem(class palette  *self, union palette_iteminfo  info, int  pos, palette_hitfptr fn, long  rock, enum palette_autoselect  autoselect);
 
 

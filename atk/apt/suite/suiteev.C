@@ -25,14 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/suite/RCS/suiteev.C,v 1.11 1996/03/18 23:10:42 robr Stab74 $";
-#endif
-
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Suite-object
@@ -58,8 +50,7 @@ DESCRIPTION
 
 END-SPECIFICATION  ************************************************************/
 
-
-
+#include <andrewos.h>
 ATK_IMPL("suiteev.H")
 #include <ctype.h>
 #include <graphic.H>
@@ -209,13 +200,7 @@ static int suiteev_debug = 0;
 #define LIT TRUE
 
 ATKdefineRegistry(suiteev, view, suiteev::InitializeClass);
-#ifndef NORCSID
-#endif
-#ifndef MAX
-#endif
-#ifndef MIN
-#endif
-static void AllocNameSpace(register char  **target , register char  *source);
+static void AllocNameSpace(register char  **target , register const char  *source);
 static void CheckForNewFirstVisible( class suiteev  *self );
 static long Within(register long  x , register long  y , register long  left , register long  top , register long  width , register long  height);
 static long WithinRect(register long  x , register long  y, register struct rectangle  *r);
@@ -266,7 +251,7 @@ static class menulist *smenulist = NULL;
 
 
 static void
-AllocNameSpace(register char  **target , register char  *source)
+AllocNameSpace(register char  **target , register const char  *source)
   {
   if(target && *target) {
     free(*target);
@@ -347,7 +332,7 @@ suiteev::InitializeClass()
   return(TRUE);
 }
 
-static char suiteItemPrefs[] = "suiteItemPrefs";
+static const char suiteItemPrefs[] = "suiteItemPrefs";
 
 suiteev::suiteev()
 {

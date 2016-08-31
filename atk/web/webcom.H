@@ -82,7 +82,7 @@ public:
 	virtual ~webcom();
 
 	static class webcom *CreateFromStream(FILE *f) ;
-	static class webcom *Create(char *url, class webcom *parent, 
+	static class webcom *Create(const char *url, class webcom *parent, 
 		int flags, const char *postdata=NULL) ;
 	static char * GenPass(char *name, char *passwd)  ;
 	static char * promptForPasswd(class view *view)  ;
@@ -91,7 +91,7 @@ public:
 	static int PromptForURL(class view *v)  ;
 	static int GoTo(class textview *v)  ;
 	static void KillChild(int restart) ; 
-	static void Cancel(char *buf);
+	static void Cancel(const char *buf);
 	static class webcom *FindWebcomFromData(
 			class dataobject *dat)  ;
 	/* Transition procedures */
@@ -121,7 +121,7 @@ public:
 	virtual void Close(FILE *f);
 	virtual class atom *  Type()  ;
 	virtual int  ExternalView()   ;
-	virtual char *  CanView()  ;
+	virtual const char *  CanView()  ;
 	virtual int Delete()  ;
 	virtual int Reload()  ;
 	virtual char * GetTmpName()  ;

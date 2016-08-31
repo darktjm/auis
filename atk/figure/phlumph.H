@@ -23,8 +23,6 @@ ATK_INTER
  * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  * 
  *  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/phlumph.H,v 1.1 1995/03/23 21:09:49 Zarf Stab74 $
 */
 #include <dataobject.H>
 
@@ -40,7 +38,7 @@ class phlumph : public dataobject {
     phlumph();
     virtual ~phlumph();
 
-    char *ViewName();
+    const char *ViewName();
     long Write(FILE *fp, long writeid, int level);
     long Read(FILE *file, long id);
 

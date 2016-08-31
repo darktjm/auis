@@ -115,24 +115,24 @@ class print : public ATK  {
 	static int ProcessView(view *v, int print, int dofork, 
 		const char *DocumentName, const char *prarg)  ;
 
-	static char * GetPrintCmd(int print)  ;
-	static boolean LookUpColor(char *name, 
+	static const char * GetPrintCmd(int print)  ;
+	static boolean LookUpColor(const char *name, 
 		double *rval, double *gval, double *bval)  ;
-	static struct font_afm *GetPSFontAFM(char  *fontname);
+	static struct font_afm *GetPSFontAFM(const char  *fontname);
 	static short *EncodeISO8859();
 	static short *EncodeAdobeSymbol();
 	static short *EncodeSymbolAndy();
 	static boolean LookUpPSFont(char *result, short **encoding, 
-		fontdesc *fd, char *family, long size, long style);
+		fontdesc *fd, const char *family, long size, long style);
 	static double ComputePSCharWidth(int chi, struct font_afm *afm, 
 		int size);
-	static void OutputPSString(FILE *outfile, char *str, int maxlen);
+	static void OutputPSString(FILE *outfile, const char *str, int maxlen);
 	static void GeneratePSWord(FILE *outfile, char *buf, int len, 
 		double xpos, short *encoding, struct font_afm *afm, 
 		int fontsize);
-	static int PSRegisterFont(char *fontname);
-	static void PSRegisterDef(char *procname, char *defstring);
-	static void PSRegisterHeader(char *headname, 
+	static int PSRegisterFont(const char *fontname);
+	static void PSRegisterDef(const char *procname, const char *defstring);
+	static void PSRegisterHeader(const char *headname, 
 		print_header_fptr headproc, const void *rock);
 	static void PSRegisterCleanup(print_cleanup_fptr cleanproc,void *rock);
 	static boolean PSNewPage(int pagenum);

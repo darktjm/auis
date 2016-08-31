@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/nestedmark.C,v 3.6 1996/05/28 18:51:06 robr Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("nestedmark.H")
 #include <nestedmark.H>
 #include <tree23int.H>
@@ -50,8 +41,6 @@ static long ncrlength;
 
 
 ATKdefineRegistry(nestedmark, ATK, NULL);
-#ifndef NORCSID
-#endif
 static void DoFreeTree(class nestedmark  *self);
 static void FilterProc(class nestedmark  *self, struct filterstruct  *data, class tree23int  *t, class tree23int  *which  );
 class nestedmark *splitOffRight(class nestedmark  *self,int  rpos);

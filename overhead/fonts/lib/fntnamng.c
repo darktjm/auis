@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/fonts/lib/RCS/fntnamng.c,v 2.7 1992/12/15 21:02:39 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*********************************************************\
 * 							  *
 * 	File: fntnamng.c				  *

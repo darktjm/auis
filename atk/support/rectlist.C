@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/rectlist.C,v 3.7 1996/10/11 18:57:03 robr Exp $";
-#endif
-
-
- 
-
-
 ATK_IMPL("rectlist.H")
 #include <rectlist.H>
 

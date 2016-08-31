@@ -27,13 +27,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/call.C,v 1.24 1996/04/02 16:55:38 wjh Stab74 $";
-#endif
-
-
 #include <filetype.H>
 #include <environ.H>
 #include <proctable.H>
@@ -56,8 +49,8 @@ ATK_IMPL("prochook.H")
 
 
 
-/* defining occurrence for declaration in call.hn */
-char *callvarietyname[] = {
+/* defining occurrence for declaration in ness.hn */
+const char * const callvarietyname[] = {
 	"callC",
 	"callPE",
 	"callSym",
@@ -76,7 +69,7 @@ nesssym_scopeType LibScope = nesssym_GLOBAL;
 
 /* {{fields name and defn should be unsigned char, but the Sun considers
 	character constants to be *signed* (bletch) }} */
-static struct builtindef builtintable[] = {
+static const struct builtindef builtintable[] = {
 	{"next", "n", {Tstr, Tstr, Tend}, ness_codeOrange, NULL},
 	{"start", "o", {Tstr, Tstr, Tend}, ness_codeOrange, NULL},
 	{"base", "p", {Tstr, Tstr, Tend}, ness_codeOrange, NULL},
@@ -288,7 +281,7 @@ static struct builtindef builtintable[] = {
 	{NULL, NULL}
 };
 
-struct builtindef  predefinedTable[] = {
+static const struct builtindef  predefinedTable[] = {
 	{"mousex", "Ux", {Tlong}, ness_codeOrange, NULL},
 	{"mousey", "Uy", {Tlong}, ness_codeOrange, NULL},
 	{"mouseaction", "Uw", {Tlong}, ness_codeOrange, NULL},
@@ -317,7 +310,7 @@ struct builtindef  predefinedTable[] = {
 void callInit(nesssym_scopeType  Gscope, int  idtok, class nesssym  *proto);
 void callPredefId(class nesssym  *var);
 struct callnode * callLoadFuncval(struct varnode  *var);
-static char * argcounterror(char  *format, long  n);
+static const char * argcounterror(const char  *format, long  n);
 static char * argtypeerror(long  n, Texpr  formal , Texpr  actual);
 static Texpr builtincall(struct varnode  *fnode, struct exprnode  *argtypes);
 void checkargtypes(class nesssym  *func, struct exprnode  *fexpr, 
@@ -347,7 +340,7 @@ long ReadTextFileStream(class text  *text, const char *name, FILE  *f, boolean  
 */
 	void
 callInit(nesssym_scopeType  Gscope, int  idtok, class nesssym  *proto) {
-	struct builtindef *b;
+	const struct builtindef *b;
 	class nesssym *sym;
 
 	for (b = builtintable; b->name != NULL; b++) {
@@ -504,11 +497,11 @@ callLoadFuncval(struct varnode  *var) {
 
 
 
-static char *toomanyargs = "*function call has %d extra argument%s";
-static char *toofewargs = "*function call needs %d more argument%s";
+static const char toomanyargs[] = "*function call has %d extra argument%s";
+static const char toofewargs[] = "*function call needs %d more argument%s";
 
-	static char *
-argcounterror(char  *format, long  n) {
+	static const char *
+argcounterror(const char  *format, long  n) {
 	char *msg = (char *)malloc(50);
 	sprintf(msg, format, n, (n>1) ? "s" : "");
 	return msg;
@@ -647,7 +640,7 @@ checkargtypes(class nesssym  *funcXXX	/* the function symbol */,
 		nargs++;
 	}
 	if (tformal != NULL || tactual != NULL) {	/* wrong number of arguments */
-		char *msg;
+		const char *msg;
 		n = 0;
 		if (tformal != NULL)  {	/* too few arguments */
 			while (tformal != NULL) n++, tformal = tformal->next;
@@ -842,7 +835,7 @@ callFunc(struct varnode * varnode, struct exprnode  *argtypes) {
 	struct callnode *cnode;
 	struct exprnode *e;
 	long n;
-	char *msg;
+	const char *msg;
 
 	loc = (curComp->tlex)->RecentPosition( 0, &len);
 	val = exprnode_Create(Tstr, NULL, FALSE, 
@@ -1641,7 +1634,7 @@ callInitSubTree(class ness  *ness) {
 		char buf[300];
 		sprintf(buf, "*Circular initializations involving %s\n", ness->name);
 		return ness->ErrorList = 
-			errornode_Create(ness, 0, 0, 0, freeze(buf), TRUE, ness->ErrorList);
+			errornode_Create(ness, 0, 0, 0, strdup(buf), TRUE, ness->ErrorList);
 	}
 
 	ness->compilationid = InitId;

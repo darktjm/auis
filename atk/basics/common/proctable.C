@@ -25,20 +25,11 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/proctable.C,v 3.13 1996/05/17 17:49:47 robr Exp $";
-#endif
-
-
- 
-
 /* proctbl.c -- A module that manages a mapping from strings to procedure pointers.
  */
 
 
+#include <andrewos.h>
 ATK_IMPL("proctable.H")
 #include <util.h>
 #include <ctype.h>
@@ -58,7 +49,7 @@ static struct proctable_Entry *hashTable[HASHMAX];
 	
 ATKdefineRegistry(proctable, ATK, proctable::InitializeClass);
 
-static int ModuleClear(struct proctable_Entry  *pe, char  *module);
+static int ModuleClear(struct proctable_Entry  *pe, const char  *module);
 static int HashName(const char  *name);
 static struct proctable_Entry *LookupHash(const char  *name, int  hash);
 
@@ -77,7 +68,7 @@ proctable::InitializeClass()
 	(do the mallocs in the caller or pass literals). 
 */
 	struct proctable_Entry *
-proctable::DefineProc(char  *name		/* these match the fields in an entry */, proctable_fptr proc, struct ATKregistryEntry   *type, char  *module, char  *doc)
+proctable::DefineProc(const char  *name		/* these match the fields in an entry */, proctable_fptr proc, const struct ATKregistryEntry   *type, const char  *module, const char  *doc)
 						{
 	ATKinit;
 
@@ -126,7 +117,7 @@ proctable::DefineProc(char  *name		/* these match the fields in an entry */, pro
 	return pe;
 }
 
-void proctable::DefineProcs(struct proctable_Description  *procs)
+void proctable::DefineProcs(const struct proctable_Description  *procs)
 {
 	ATKinit;
 
@@ -141,8 +132,8 @@ void proctable::DefineProcs(struct proctable_Description  *procs)
 	but all storage pointed to must be permanent (do the mallocs in the caller or pass literals). 
 */
 	struct proctable_Entry *
-proctable::DefineTypedProc(char  *name		/* these match the fields in an entry */, proctable_fptr proc, struct ATKregistryEntry   *type, 
-		char  *module, char  *doc, enum proctable_type  returntype)
+proctable::DefineTypedProc(const char  *name		/* these match the fields in an entry */, proctable_fptr proc, const struct ATKregistryEntry   *type,
+		const char  *module, const char  *doc, enum proctable_type  returntype)
 							{
 	ATKinit;
 
@@ -153,7 +144,7 @@ proctable::DefineTypedProc(char  *name		/* these match the fields in an entry */
 	return pe;
 }
 
-void proctable::DefineProcsWithTypes(struct proctable_DescriptionWithType  *procs)
+void proctable::DefineProcsWithTypes(const struct proctable_DescriptionWithType  *procs)
 {
 	ATKinit;
 
@@ -189,7 +180,9 @@ void proctable::Preload(const char *name) {
     }
     static boolean tryness=environ::GetProfileSwitch("AutoLoadNessProcs", TRUE);
     if(tryness) {
-	static ATKregistryEntry *nessent=ATK::LoadClass("ness"); 
+	static ATKregistryEntry *nessent=NULL;
+	if(!nessent)
+	    nessent = ATK::LoadClass("ness");
 	// at first glance this line might seem to invite mutual recursion, but the 'static' saves us.
 	static proctable_Entry *pe=proctable::Lookup("ness-proctable-hook");
 	if(pe) proctable::Call(pe, NULL, name, NULL);
@@ -257,11 +250,11 @@ void proctable::ForceLoaded(const struct proctable_Entry  *pe)
 		return;
 	(void) proctable::Preload(pe->module);
 	/* Go ahead and mark all other procs for this module as loaded. */
-	proctable::Enumerate((proctable_efptr)ModuleClear, pe->module);
+	proctable::Enumerate((proctable_efptr)ModuleClear, (char *)pe->module);
 }
 
 /* Potentially clear the module pointer for this entry. */
-static int ModuleClear(struct proctable_Entry  *pe, char  *module)
+static int ModuleClear(struct proctable_Entry  *pe, const char  *module)
 		{
 	if (pe != NULL && pe->module != NULL && strcmp(pe->module, module) == 0)
 		pe->module = NULL;
@@ -315,7 +308,7 @@ static long ActionInterface(ATK *obj, long rock) {
 	(do the mallocs in the caller or pass literals). 
 */
 	struct proctable_Entry *
-proctable::DefineAction(char  *name		/* these match the fields in an entry */, aaction *act, struct ATKregistryEntry   *type, char  *module, char  *doc)
+proctable::DefineAction(const char  *name		/* these match the fields in an entry */, aaction *act, const struct ATKregistryEntry   *type, const char  *module, const char  *doc)
 						{
 	ATKinit;
 
@@ -365,7 +358,7 @@ proctable::DefineAction(char  *name		/* these match the fields in an entry */, a
 }
 
 
-void proctable::DefineActions(struct proctable_ActionDescription  *procs)
+void proctable::DefineActions(const struct proctable_ActionDescription  *procs)
 {
 	ATKinit;
 

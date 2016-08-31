@@ -25,12 +25,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/examples/ex19/RCS/hwview.C,v 1.6 1996/12/20 02:18:03 fred Exp $";
-#endif
-
 ATK_IMPL("hwview.H")
 #include <stdio.h>
 

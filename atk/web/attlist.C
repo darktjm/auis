@@ -32,7 +32,7 @@ attlist::~attlist()
     return;
 }
 
-boolean Print(char *attsneak, char *rock)
+static boolean Print(char *attsneak, char *rock)
 {
     struct htmlatts *att= (struct htmlatts *)attsneak;
     printf("[%p] name = [%s], value = [%s], quoted = [%d]\n", att, att->name, att->value, att->quoted);
@@ -47,7 +47,7 @@ void attlist::DebugPrint()
 }
 
 
-void attlist::AddAttribute(char *name, char *value, boolean quoted)
+void attlist::AddAttribute(const char *name, const char *value, boolean quoted)
 {
     struct htmlatts *newnode = NULL;
     int namelen=0, vallen=0;
@@ -58,8 +58,8 @@ void attlist::AddAttribute(char *name, char *value, boolean quoted)
     newnode = (struct htmlatts *) malloc (sizeof(struct htmlatts));
     newnode->name = (char *) malloc (namelen + 1);
     newnode->value = (char *) malloc (vallen + 1);
-    strcpy(newnode->name, name);
-    strcpy(newnode->value, value);
+    strcpy((char *)newnode->name, name);
+    strcpy((char *)newnode->value, value);
     newnode->quoted = quoted;
 
     Enqueue((char *)newnode);
@@ -72,30 +72,30 @@ static int IsAttrib(char *attsneak, char *name)
 }
 
 /* will return NULL if the attribute was not found */
-struct htmlatts *attlist::GetAttribute(char *name)
+struct htmlatts *attlist::GetAttribute(const char *name)
 {
     return (struct htmlatts *) Enumerate(IsAttrib, name);
 }
 
-char *skipwhitespace(char *s)
+char *skipwhitespace(const char *s)
 {
     while (*s && isspace(*s)) ++s;
-    return s;
+    return (char *)s;
 }
 
-char *skiptokenchars(char *s)
+char *skiptokenchars(const char *s)
 {
     while (*s && !isspace(*s) && *s != '=') ++s;
-    return s;
+    return (char *)s;
 }
 
-char *skipstring(char *s)
+char *skipstring(const char *s)
 {
     while (*s && *s != '"') ++s;
-    return s;
+    return (char *)s;
 }
 
-void attlist::MakeFromString(char *str)
+void attlist::MakeFromString(const char *str)
 {
     char *end, *name, *value, *copy;
     boolean quoted, equalsign=FALSE;
@@ -180,8 +180,8 @@ char *attlist::MakeIntoString()
 boolean ClearAtts(char *attsneak, char *rock)
 {
     struct htmlatts *attrib= (struct htmlatts *)attsneak;
-    if (attrib->name) free(attrib->name);
-    if (attrib->value) free(attrib->value);
+    if (attrib->name) free((char *)attrib->name);
+    if (attrib->value) free((char *)attrib->value);
     free(attrib);
     return TRUE;
 }
@@ -192,7 +192,7 @@ void attlist::ClearAttributes()
     Clear();
 }
 
-boolean CopyAtts(char *attsneak, char *newlistsneak)
+static boolean CopyAtts(char *attsneak, char *newlistsneak)
 {
     struct htmlatts *attrib= (struct htmlatts *)attsneak;
     attlist *newlist= (attlist *)newlistsneak;
@@ -214,7 +214,7 @@ void attlist::Copy(attlist *dst, attlist *src)
     (src)->Enumerate(CopyAtts, (char *)dst);
 }
 
-attlist *attlist::ParseAttributes(char *str)
+attlist *attlist::ParseAttributes(const char *str)
 {
     ATKinit;
     attlist *alist = new attlist;

@@ -32,14 +32,14 @@
 
 char *AndrewDirStr=NULL;
 char *XLibDirStr=NULL;
-char *AFSBaseDirStr=NULL;
-char *JpegLibDirStr=NULL;
-char *TiffLibDirStr=NULL;
+const char *AFSBaseDirStr=NULL;
+const char *JpegLibDirStr=NULL;
+const char *TiffLibDirStr=NULL;
 
 char builddir[MAXPATHLEN+1];
 char *buildpath=NULL;
 char rbuf[MAXPATHLEN+1];
-static char ext[]=".rf";
+static const char ext[]=".rf";
 char wd[MAXPATHLEN];
 boolean makingdyn=FALSE;
 
@@ -411,7 +411,7 @@ static long ProcessReferences(FILE *fp)
 static char *FixSeg(char *arg)
 {
     char *p;
-    p=(char *)strchr(arg, ' ');
+    p=strchr(arg, ' ');
     if(p==NULL) return arg+strlen(arg);
     *p='\0';
     return p+1;
@@ -445,7 +445,7 @@ static void AddDirToList(char *dir)
     lastp=(&result->next);
 }
 
-char *libexts[]={
+const char * const libexts[]={
 #ifdef ATKLIBEXT
     ATKLIBEXT,
 #endif
@@ -459,7 +459,7 @@ static char *FindLib(char *lib)
     struct dirlist *d=dirs;
     while(d) {
 	char *p;
-	char **libext=libexts;
+	const char * const *libext=libexts;
 	strcpy(realpath_linuxsucks, d->path);
 	strcat(realpath_linuxsucks, "/lib");
 	strcat(realpath_linuxsucks, lib);
@@ -478,7 +478,7 @@ static char *FindLib(char *lib)
 
 static char *TranslatePath(const char *q)
 {
-    char *p;
+    const char *p;
     static char filebuf[MAXPATHLEN+1];
     filebuf[0]='\0';
     if(strncmp(q, "ANDREWDIR", 9)==0) {
@@ -493,17 +493,17 @@ static char *TranslatePath(const char *q)
 	strcpy(filebuf, TiffLibDirStr);
     } else {
 	char *v;
-	v=(char *)getenv(q);
+	v=getenv(q);
 	if(v) strcpy(filebuf, v);
 	else strcpy(filebuf, q);
     }
-    p=(char *)strchr(q, '/');
+    p=strchr(q, '/');
     if(p==NULL) return filebuf;
     else strcat(filebuf,p);
     return filebuf;
 }
 
-static void AddLibList(char *p, char *ltpath, int defaultlevel)
+static void AddLibList(char *p, const char *ltpath, int defaultlevel)
 {
     char *q;
     int liblevel=0;
@@ -655,7 +655,7 @@ static char *DynPath(char *spath, char *lpath) {
 static char *LibPath(char *spath, char *lpath) {
     char *p=strrchr(lpath, '/');
     char *q;
-    char **libext=libexts;
+    const char * const *libext=libexts;
     if(p) {
 	strcpy(p+1, "lib");
 	q=strrchr(spath, '/');
@@ -683,7 +683,7 @@ static char *LibPath(char *spath, char *lpath) {
 static void AddLibraries()
 {
     int i;
-    char *p=NULL, *q;
+    char *p=NULL;
  
     for(i=0;i<HASHMAX;i++) {
 	struct hashf *sf=havefile[i];
@@ -783,7 +783,7 @@ static void OrderLibraries(char *orderfile)
 		} else {
 		    char *v;
 		    p[0]='\0';
-		    v=(char *)getenv(q);
+		    v=getenv(q);
 		    if(v) strcat(filebuf, v);
 		    else p=(--q);
 		}
@@ -933,7 +933,7 @@ static void usage()
     exit(-1);
 }
 
-static char *normalobjects[2]={
+static const char * const normalobjects[2]={
     "runapp.o",
     NULL
 };
@@ -953,13 +953,12 @@ static void AddLibDir(const char *dir) {
     libdirs[libdirsc-1]=dir;
 }
 
-static void MakeRunapp(FILE *ifp, char *odir, char **objects, int ocount, char *executablename) {
+static void MakeRunapp(FILE *ifp, const char *odir, const char * const *objects, int ocount, const char *executablename) {
     int i;
     fprintf(ifp, "NormalObjectRule()\nNormalATKRule()\n");
 
     if(libdirs!=NULL) {
 	fprintf(ifp, "LOCAL_SHARED_LIB_PATH=\\\n");
-	const char **p=libdirs;
 	int i;
 	for(i=0;i<libdirsc;i++) {
 	    fprintf(ifp, "\tATK_SHARED_LIB_DIR(%s)%s\n", libdirs[i], i<libdirsc-1?" \\":"");
@@ -1033,7 +1032,7 @@ static int DoLibraries(int argc, char **argv) {
     return args;
 }
 
-static void MakeLibrary(FILE *ifp, char *odir, char **objects, int ocount, char *executablename) {
+static void MakeLibrary(FILE *ifp, const char *odir, const char * const *objects, int ocount, const char *executablename) {
     
     if(libdirs!=NULL) {
 	fprintf(ifp, "LOCAL_SHARED_LIB_PATH=\\\n");
@@ -1059,7 +1058,7 @@ static void MakeLibrary(FILE *ifp, char *odir, char **objects, int ocount, char 
     fprintf(ifp, "\nATKLibraryTarget(%s, $(OBJS), $(LIBS), $(SYSLIBS))\n", executablename);
 }
 
-static void MakeDynObj(FILE *ifp, char *odir, char **objects, int ocount, char *executablename, char *extras) {
+static void MakeDynObj(FILE *ifp, const char *odir, const char * const *objects, int ocount, const char *executablename, const char *extras) {
     
     if(libdirs!=NULL) {
 	fprintf(ifp, "LOCAL_SHARED_LIB_PATH=\\\n");
@@ -1120,28 +1119,28 @@ int main(int argc, char **argv)
     boolean doatklib=TRUE;
     boolean dodefaultapp=TRUE;
     FILE *ifp;
-    char *executablename="runapp";
+    const char *executablename="runapp";
     char **objects=NULL;
     char *extras=NewString("");
     int ocount=0;
     char *directory=NULL;
-    char *odir="";
+    const char *odir="";
     char *orderfilename;
-    char *imakefile=NULL;
+    const char *imakefile=NULL;
     char mainFile[MAXPATHLEN];
     FILE *mfp=NULL; /*file to write entry point function 'libName_main_()' in*/
     char ibuf[MAXPATHLEN];
-    AndrewDirStr=NewString((char *)AndrewDir(""));
-    XLibDirStr=NewString((char *)XLibDir(""));
-    AFSBaseDirStr=(char *)getenv("AFSBASEDIR");
+    AndrewDirStr=NewString(AndrewDir(""));
+    XLibDirStr=NewString(XLibDir(""));
+    AFSBaseDirStr=getenv("AFSBASEDIR");
     if(AFSBaseDirStr==NULL) AFSBaseDirStr=AFSBASEDIR;
     AFSBaseDirStr=NewString(AFSBaseDirStr);
-    JpegLibDirStr=(char *)getenv("JPEGLIBDIR");
+    JpegLibDirStr=getenv("JPEGLIBDIR");
     if(JpegLibDirStr) JpegLibDirStr=JPEGLIBDIR;
-    TiffLibDirStr=(char *)getenv("TIFFLIBDIR");
+    TiffLibDirStr=getenv("TIFFLIBDIR");
     if(TiffLibDirStr) TiffLibDirStr=TIFFLIBDIR;
     
-    orderfilename=NewString( (char *)AndrewDir("/lib/genstatl/liborder"));
+    orderfilename=NewString( AndrewDir("/lib/genstatl/liborder"));
 
     getwd(wd);
     

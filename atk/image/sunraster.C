@@ -119,11 +119,11 @@ struct rheader {
 
 
 ATKdefineRegistry(sunraster, image, NULL);
-static void babble(char            *name, struct rheader  *header);
+static void babble(const char            *name, struct rheader  *header);
 static void sunread(FILE         *f, byte          *buf, unsigned int len, unsigned int enc  /* true if encoded file */);
 
 
-static void babble(char            *name, struct rheader  *header)
+static void babble(const char            *name, struct rheader  *header)
           {
   printf("%s is a", name);
   switch (memToVal(header->type, 4)) {
@@ -173,7 +173,7 @@ static void babble(char            *name, struct rheader  *header)
 }
 
 int 
-sunraster::Ident( char  *fullname )
+sunraster::Ident( const char  *fullname )
         { FILE          *f;
   struct rheader  header;
   int             r;
@@ -257,7 +257,7 @@ static void sunread(FILE         *f, byte          *buf, unsigned int len, unsig
 }
 
 int
-sunraster::Load( char  *fullname, FILE  *fp )
+sunraster::Load( const char  *fullname, FILE  *fp )
             { FILE          *f;
   struct rheader  header;
   unsigned int    mapsize;
@@ -435,7 +435,7 @@ sunraster::Write( FILE  *file, long  writeID, int  level )
 }
 
 long
-sunraster::WriteNative( FILE  *file, char  *filename )
+sunraster::WriteNative( FILE  *file, const char  *filename )
             {
 return(0);
 }

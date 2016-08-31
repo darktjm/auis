@@ -27,11 +27,6 @@
 
 #include <andrewos.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/hdrs/RCS/genhdr.c,v 1.8 1996/06/14 23:49:35 wjh Exp $";
-#endif
-
 /**
  **
  **  Create the file andrdir.h which gives the defined

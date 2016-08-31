@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/bush/RCS/bushv.C,v 1.18 1996/03/18 23:10:14 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Bush View-object
@@ -61,7 +54,7 @@ HISTORY
 
 END-SPECIFICATION  ******************************************************/
 
-
+#include <andrewos.h>
 ATK_IMPL("bushv.H")
 #include <sys/param.h>
 #include <sys/stat.h>
@@ -113,7 +106,7 @@ ATK_IMPL("bushv.H")
 #define	DEFAULTCKPINTERVAL			    120
 int CkpInterval;
 
-static char	*sorts[] = { "name", 
+static const char * const sorts[] = { "name", 
 			     "size", 
 			     "date", 
 			     "suffix", 
@@ -121,7 +114,7 @@ static char	*sorts[] = { "name",
 			      NULL };
 
 
-static char	*default_editor_choices[] = { "ez",
+static const char * const default_editor_choices[] = { "ez",
 					      "emacs",
 					      "gnu-emacs",
 					      "zip",
@@ -132,7 +125,7 @@ static char	*default_editor_choices[] = { "ez",
 
 static char			    msg[MAXPATHLEN * 2];
 static char			    cmd[MAXPATHLEN * 2];
-static char			   *argv[10];
+static const char		   *argv[10];
 
 static class keymap		   *kmap;
 static class menulist		   *bushv_menulist = NULL;
@@ -296,8 +289,6 @@ static suite_Specification rename_it[] = {
     0 };
 
 ATKdefineRegistry(bushv, aptv, bushv::InitializeClass);
-#ifndef NORCSID
-#endif
 static void PostCursor( register class bushv    *self, register int		    type );
 static long ResetSelectedState( register class bushv		 *self, register class suite		 *suite, register struct suite_item	 *item, register long		  datum );
 static class view * EntriesHitHandler( register class bushv		 *self, register class suite		 *suite, register struct suite_item	 *item, register long			  object, register enum view_MouseAction  action, register long			  x , register long			  y , register long			  numClicks );
@@ -305,8 +296,8 @@ static void StartDirMove( register class bushv     *self, register tree_type_nod
 static int FinishDirMove( register class bushv	     *self, register tree_type_node     tn );
 static class view * TreeHitHandler( register class bushv		     *self, register class treev		     *tree_view, register tree_type_node	      node, register long			      object, register enum view_MouseAction      action, register long			      x , register long			      y , register long			      numClicks );
 static class view * ControlHitHandler( register class bushv		     *self, register class suite		     *suite, register struct suite_item	     *item, register long			      object, register enum view_MouseAction      action, register long			      x , register long			      y , register long			      numClicks );
-static char * FileSuffix( register char    *file_name );
-static char * FileType( register char	     *file_name );
+static const char * FileSuffix( register const char    *file_name );
+static const char * FileType( register const char	     *file_name );
 long SortByName( register class bushv		 *self, register class suite		 *suite, register struct suite_item     *e1, register struct suite_item     *e2 );
 long SortBySuffix( register class bushv		 *self, register class suite		 *suite, register struct suite_item     *e1, register struct suite_item     *e2 );
 long SortBySize( register class bushv		 *self, register class suite		 *suite, register struct suite_item     *e1, register struct suite_item     *e2 );
@@ -320,12 +311,12 @@ static void PerformEdit( class bushv  *self );
 static void PerformPrint( class bushv	 *self );
 static void DoPrint( class bushv  *self, char  *path , char  *name  );
 static void PerformCreate( class bushv  *self );
-static void IssueError( register class bushv  *self, register char  *what , register char  *where, boolean  overlay );
+static void IssueError( register class bushv  *self, register const char  *what , register const char  *where, boolean  overlay );
 static int DoDestroy( register class bushv  *self, register tree_type_node  tn, register struct Dir_Entry  *Entry, int  overlay );
 static void PerformDestroy( class bushv  *self );
 static void PerformExec( class bushv  *self );
 static void DoExecute( class bushv		 *self, tree_type_node	  tn , struct Dir_Entry	 *Entry  );
-static int PerformSystemAction( class bushv	 *self, char		 *name, char		 *argv[], char		 *msg );
+static int PerformSystemAction( class bushv	 *self, const char		 *name, const char		 *argv[], char		 *msg );
 static char* Format_Tags( u_short	     tag );
 static char* FormatEntriesItem( register class bushv	 *self, tree_type_node	  tn, int			  i, struct Dir_Entry	 *dirEntry );
 static void ResetEntriesCaptions( class bushv  *self );
@@ -553,7 +544,7 @@ FinishDirMove( register class bushv	     *self, register tree_type_node     tn )
     Announce(msg);
     sprintf(finalLocation,"%s/%s",DirPath(tn),
 	     DirName(MoveNode));
-    if(status = rename(DirPath(MoveNode),finalLocation)) {
+    if((status = rename(DirPath(MoveNode),finalLocation))) {
       IssueError(self,"Moving",DirName(MoveNode),TRUE);
       sprintf(msg,"Move failed.");
       Announce(msg);
@@ -621,7 +612,7 @@ TreeHitHandler( register class bushv *self, register class treev *tree_view, tre
 		if(Child(peer)) {
 		    SetTreeNotificationData(self, peer, tree_NodeChildrenDestroyed);
 		    NotifyTreeObservers(self);
-		    (BUSH)->DestroySubDirs(peer);
+		    (TREE)->DestroyNodeChildren(peer);
 		    break;
 		}
 		peer = Right(peer);
@@ -656,7 +647,7 @@ ControlHitHandler( register class bushv		     *self, register class suite		     
     if(item && (object == suite_ItemObject)) {
       struct item_data	*itemData = NULL;
 
-      if(itemData = (struct item_data*) (suite)->ItemAttribute( item, suite_itemdatum))
+      if((itemData = (struct item_data*) (suite)->ItemAttribute( item, suite_itemdatum)))
         switch(itemData->code) {
 	    case(edit_code):	PerformEdit(self);	break;
 	    case(exec_code):	PerformExec(self);	break;
@@ -698,23 +689,24 @@ ControlHitHandler( register class bushv		     *self, register class suite		     
   return(0);
 }
 
-static char *
-FileSuffix( register char    *file_name )
+static const char *
+FileSuffix( register const char    *file_name )
   {
-  register char   *suffix;
+  register const char   *suffix;
 
-  if(suffix = (char*)strrchr(file_name,'.')) suffix++;
+  if((suffix = strrchr(file_name,'.'))) suffix++;
   else suffix = file_name + strlen(file_name);
   return(suffix);
 }
 
-static char *
+static const char *
 FileType( register char *file_name )
   {
-  static char	    *suffixes[] = {"BAK","CKP",0};
-  register char	    *suffix, **suffix_ptr;
+  static const char * const suffixes[] = {"BAK","CKP",0};
+  const char * const *suffix_ptr;
+  register char	    *suffix;
 
-  suffix = (char*)strrchr(file_name,'.');
+  suffix = strrchr(file_name,'.');
   if(!suffix) return(file_name + strlen(file_name));
   suffix++;
   suffix_ptr = suffixes;
@@ -754,7 +746,7 @@ SortBySuffix( register class bushv		 *self, register class suite		 *suite, regis
   if(!e1|| !e2) return(0);
   a = (struct Dir_Entry*)(suite)->ItemAttribute(e1,suite_itemdatum);
   b = (struct Dir_Entry*)(suite)->ItemAttribute(e2,suite_itemdatum);
-  if(a && b)
+  if(a && b) {
     if(!(rc = strcmp(FileSuffix(a->name),FileSuffix(b->name)))) {
       rc = strcmp(a->name,b->name);
       if(rc > 0) return(1);
@@ -764,6 +756,7 @@ SortBySuffix( register class bushv		 *self, register class suite		 *suite, regis
       if(rc > 0) return(1);
       else if(rc < 0) return(-1);
     }
+  }
   return(0);
 }
 
@@ -881,7 +874,7 @@ GetPreferredEditors( register class bushv  *self )
   if(((ctmp = environ::GetProfile("editors")) ||
       (ctmp = environ::GetProfile("editor"))) && *ctmp) {
     AllocNameSpace(ctmp,&myCopy);
-    if(colon = strchr(tmp = myCopy,':')) {
+    if((colon = strchr(tmp = myCopy,':'))) {
       while((colon = strchr(tmp,':')) && (i < MAXEDITORS)) {
         *colon = '\0';
 	if(tmp && (*tmp != '\0')) {
@@ -923,7 +916,7 @@ GetPreferredEditors( register class bushv  *self )
     struct suite_item	*editorItem = NULL;
     char		 editorCaption[64];
 
-    if(editorItem = (ControlView)->ItemOfDatum((long) &editor_data)) {
+    if((editorItem = (ControlView)->ItemOfDatum((long) &editor_data))) {
       sprintf(editorCaption,"Editor: %s",EditorProgram);
       (ControlView)->SetItemAttribute( editorItem, suite_ItemCaption(editorCaption));
     }
@@ -937,7 +930,6 @@ GetPreferredFonts( register class bushv	 *self )
   const char *control_font;
   const char *tree_node_font;
   const char *listing_font;
-  int size = 0;
 
   IN(GetPreferredFont);
   control_font = environ::GetProfile("controlfont");
@@ -1027,7 +1019,7 @@ bushv::Create( register char  object )
 
   class bushv *self = NULL;
 
-  if(self = new bushv)
+  if((self = new bushv))
       Object = object;
   OUT(bushv_Create);
   return(self);
@@ -1082,7 +1074,7 @@ bushv::FullUpdate( enum view_UpdateType  Type, long  left , long  top , long  wi
     (this)->aptv::FullUpdate(Type,left,top,width,height);
     if(!RootPathName) {
 	im::GetDirectory(RootPathIfInset);
-	BUSH->ClearTree();
+	(TREE)->DestroyNode(TreeRoot);
       (BUSH)->InitTree(RootPathIfInset);
       CurrNode = InitNode = TreeRoot;
       (BUSH)->BuildSubDirs(TreeRoot);
@@ -1163,7 +1155,7 @@ PerformPrint( class bushv	 *self )
 	// XXX Fix this!
 	Announce("You must visit a file to print.");
 #else
-      if(file = fopen("/tmp/bush_print.PS","w")) {
+      if((file = fopen("/tmp/bush_print.PS","w"))) {
         (DirTreeView)->Print(file,"PostScript","PostScript",1);
 	fclose(file);
 	system("lpr /tmp/bush_print.PS");
@@ -1261,10 +1253,10 @@ PerformCreate( class bushv  *self )
 }
 
 static void
-IssueError( register class bushv  *self, register char  *what , register char  *where, boolean  overlay )
+IssueError( register class bushv  *self, register const char  *what , register const char  *where, boolean  overlay )
       {
   long result = 0;
-  static char *question[] = { "Continue", NULL };
+  static const char * const question[] = { "Continue", NULL };
 
   IN(IssueError);
   if(errno > 0 && errno <= sys_nerr) 
@@ -1296,7 +1288,7 @@ DoDestroy( register class bushv  *self, register tree_type_node  tn, register st
 static void
 PerformDestroy( class bushv  *self )
 {
-    static char *question[] = {"Confirm", "Cancel", 0};
+    static const char * const question[] = {"Confirm", "Cancel", 0};
     int i = 0;
     long result = 0;
     long count = 0;
@@ -1446,7 +1438,7 @@ void DoExecute( class bushv		 *self, tree_type_node	  tn , struct Dir_Entry	 *En
 }
 
 static int
-PerformSystemAction( class bushv	 *self, char		 *name, char		 *argv[], char		 *msg )
+PerformSystemAction( class bushv	 *self, const char		 *name, const char		 *argv[], char		 *msg )
         {
   Announce(msg);
   return((BUSH)->PerformSystemAction(name,argv));
@@ -1562,7 +1554,7 @@ HandleModifiedObject( register class bushv	     *self )
   {
   int			     return_value = 0;
   long			     result = 0;
-  static char		    *answers[] = { "Save to file.",
+  static const char  * const answers[] = { "Save to file.",
                                            "Save As...",
 					   "Don't save",
                                            "Cancel",
@@ -1607,7 +1599,7 @@ PerformExit( class bushv	 *self )
 static void
 SwitchDirectory( class bushv	     *self )
   {
-  static char	    *question[] = {"Continue",NULL};
+  static const char * const question[] = {"Continue",NULL};
   int		     msg_status = 0;
   long		     result = 0;
   char		    *response = NULL;
@@ -1638,7 +1630,6 @@ SwitchDirectory( class bushv	     *self )
   }
   SetTreeNotificationData(self,TreeRoot,tree_NodeDestroyed);
   NotifyTreeObservers(self);
-  BUSH->ClearTree();
   (TREE)->DestroyNode(TreeRoot);
   (BUSH)->InitTree(response);
   CurrNode = InitNode = TreeRoot;
@@ -1797,7 +1788,7 @@ static void
 PushToEntry( class bushv  *self )
   {
   char file_name[MAXPATHLEN];
-  char *objectName = NULL;
+  const char *objectName = NULL;
   long objectID = 0;
   struct attributes *attrs;
 

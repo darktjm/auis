@@ -25,19 +25,11 @@
  *  $
 */
 
-#include <util.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/ulstlmat.c,v 2.7 1992/12/15 21:10:49 rr2b Stab74 $";
-#endif
-
 /*
 	ulstlmat.c--match leftmost part of string, ignoring alphabetic case.
 */
 
-
- 
+#include <util.h>
 
 int ULstlmatch (const char *big,const char *small)
 {

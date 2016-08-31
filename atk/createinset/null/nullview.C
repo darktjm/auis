@@ -26,14 +26,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/createinset/null/RCS/nullview.C,v 1.13 1995/02/09 22:46:21 Zarf Stab74 $";
-#endif
-
-
- 
-
 /* nullv.c	
 
 	The view module for the null dataobject
@@ -670,7 +662,7 @@ nullview::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *
 
 /* nullview::Print is the method that is used by the old printing mechanism. */
 	void
-nullview::Print(FILE   *file, char    *processor, char    *format, boolean    topLevel)
+nullview::Print(FILE   *file, const char    *processor, const char    *format, boolean    topLevel)
 					{
 #ifdef texttroff_HASPBPE		/* use this until new texttroff is everywhere  */
 	class null *dobj = (class null *)this->dataobject;
@@ -745,7 +737,7 @@ nullview::Print(FILE   *file, char    *processor, char    *format, boolean    to
 
 /* GetPSPrintInterface, PrintPSDoc and PrintPSRect are used by the new printing mechanism. */
 	void *
-nullview::GetPSPrintInterface(char *printtype)
+nullview::GetPSPrintInterface(const char *printtype)
 {
     if (!strcmp(printtype, "generic"))
 	return (void *)this;

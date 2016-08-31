@@ -1,5 +1,3 @@
-# $Id$
-
 create_dir(/usr/athena/config)
 
 FILES=	Imake.rules Imake.tmpl site.def mkdirhier.sh

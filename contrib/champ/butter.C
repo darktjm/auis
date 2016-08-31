@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/RCS/butter.C,v 1.2 1993/05/30 00:24:27 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 #include "butter.H"
 #include "fontdesc.H"
@@ -38,9 +33,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/
 
 
 ATKdefineRegistry(butter, dataobject, NULL);
-#ifndef NORCSID
-#endif
-
 
 butter::butter()
 {

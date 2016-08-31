@@ -25,16 +25,6 @@
 //  $
 */
 
-#include <andrewos.h> /* sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/paint.C,v 1.3 1994/12/13 20:35:03 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*  paint.c
 
 	paint package
@@ -44,6 +34,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
  */
 
+#include <andrewos.h> /* sys/types.h */
 ATK_IMPL("paint.H")
 #include <stdio.h>
 #include <netinet/in.h>
@@ -70,8 +61,6 @@ static FILE *outf;	/* to avoid passing 'file' to two PutXxxx functions */
 
 	
 ATKdefineRegistry(paint, ATK, NULL);
-#ifndef NORCSID
-#endif
 static void PutSame(register unsigned char byte, register long  count);
 static void PutDiffer(register unsigned char *start, register long  length);
 

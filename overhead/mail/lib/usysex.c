@@ -25,17 +25,11 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/usysex.c,v 2.9 1992/12/15 21:04:17 rr2b Stab74 $";
-#endif
-
 /*
   usysex.c -- Return a static string describing a sysexits value.
   */
 
+#include <andrewos.h>
 #include <errno.h>
 #ifdef HAS_SYSEXITS
 #include <sysexits.h>

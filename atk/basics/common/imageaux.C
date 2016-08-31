@@ -47,13 +47,6 @@
 
 #include <andrewos.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/imageaux.C,v 3.2 1993/07/29 20:15:08 rr2b Stab74 $";
-#endif
-
-#ifndef NORCSID
-#endif
 unsigned long doMemToVal(unsigned char *p, unsigned int len);
 unsigned long doValToMem(unsigned long   val, unsigned char *p, unsigned int len);
 unsigned long doMemToValLSB(unsigned char *p, unsigned int len);

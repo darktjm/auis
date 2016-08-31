@@ -25,19 +25,6 @@
 //  $
 */
 
-/* sys/types.h in AIX PS2 defines "struct label", causing a type name clash.
-   Avoid this by temporarily redefining "label" to be something else in the preprocessor. */
-#define label gezornenplatz
-#include <andrewos.h> /* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/labelview.C,v 3.5 1994/12/13 20:29:20 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* labelv.c	
 
 	The view module for the label dataobject
@@ -45,7 +32,10 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 */
 
-
+/* sys/types.h in AIX PS2 defines "struct label", causing a type name clash.
+   Avoid this by temporarily redefining "label" to be something else in the preprocessor. */
+#define label gezornenplatz
+#include <andrewos.h> /* strings.h */
 ATK_IMPL("labelview.H")
 #undef label
 
@@ -67,22 +57,20 @@ ATK_IMPL("labelview.H")
 
 	
 ATKdefineRegistry(labelview, view, NULL);
-#ifndef NORCSID
-#endif
-static boolean BogusCallFromParent(register class labelview  *self, char  *where , char  *msg);
-static boolean CheckWindow(register class labelview  *self, char  *where);
+static boolean BogusCallFromParent(register class labelview  *self, const char  *where , const char  *msg);
+static boolean CheckWindow(register class labelview  *self, const char  *where);
 static void RedrawTable(register class labelview  *self);
 
 
 static boolean
-BogusCallFromParent(register class labelview  *self, char  *where , char  *msg)
+BogusCallFromParent(register class labelview  *self, const char  *where , const char  *msg)
 		{
 	fprintf(stderr, "<labelview>Bogus call to %s, %s\n", where, msg);
 	return FALSE;
 }
 
 	static boolean
-CheckWindow(register class labelview  *self, char  *where)
+CheckWindow(register class labelview  *self, const char  *where)
 		{
 	register class graphic *g
 		= (class graphic *)(self)->GetDrawable();
@@ -275,7 +263,7 @@ width, height, *desiredWidth, *desiredHeight); fflush(stderr);
 }
 
 	void
-labelview::Print( FILE    *file, char  	  *processor, char  	  *format, boolean  	 level )
+labelview::Print( FILE    *file, const char  	  *processor, const char  	  *format, boolean  	 level )
 					{
 	/* XXX sigh */
 }

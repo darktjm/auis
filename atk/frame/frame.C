@@ -25,20 +25,11 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/frame.C,v 3.23 1996/10/29 22:11:58 robr Exp $";
-#endif
-
-
- 
-
 /* frame.c
  * Provides the toplevel view on a buffer and message line.
   */
 
+#include <andrewos.h>
 ATK_IMPL("frame.H")
 
 #ifndef MAX
@@ -123,12 +114,8 @@ static double foreground_color[3],background_color[3];
 
 
 ATKdefineRegistry(frame, lpair, frame::InitializeClass);
-#ifndef NORCSID
-#endif
-#ifndef MAX
-#endif /* MAX */
 static void frame_setShade(class frame  *self, int  val			/* 0 - 200*/);
-static const char * GetProfileString (char  *pref, char  *defalt);
+static const char * GetProfileString (const char  *pref, const char  *defalt);
 static void frame_CacheSettings(class frame  *self);
 static void drawButton(class frame  * self,struct rectangle  *rect,const char  *text,boolean  pushed,boolean  borderonly,boolean  blit);
 static int CalculateLineHeight(class frame  *self);
@@ -203,7 +190,7 @@ static void frame_setShade(class frame  *self, int  val			/* 0 - 200*/)
 #define BWBGCOLOR "white"
 
 static const char *
-GetProfileString (char  *pref, char  *defalt)
+GetProfileString (const char  *pref, const char  *defalt)
           {
   const char *p = environ::GetProfile (pref);
   if (p == NULL)
@@ -710,7 +697,7 @@ class frame *frame::Enumerate(frame_effptr mapFunction, long  functionData)
     return NULL;
 }
 
-ATK  *frame::WantHandler(char  *handlerName)
+ATK  *frame::WantHandler(const char  *handlerName)
 {
     if (strcmp(handlerName, "message") == 0)
 	return (ATK  *) this->messageLine;
@@ -719,7 +706,7 @@ ATK  *frame::WantHandler(char  *handlerName)
 	return (this->parent)->WantHandler( handlerName);
 }
 
-char *frame::WantInformation(char  *key)
+const char *frame::WantInformation(const char  *key)
 {
     if (!strcmp(key, "filename")) {
 	if (this->GetBuffer())

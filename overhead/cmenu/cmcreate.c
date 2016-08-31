@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/cmenu/RCS/cmcreate.c,v 2.35 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 #include <X11/Xlib.h>
 #include <cmintern.h>
 #include <crsrimg.h>
@@ -567,7 +561,7 @@ error:
 struct cmenu *cmenu_Create(dpy, parent, def_env, freeFunction)
 Display *dpy;		/* Display structure pointer. */
 Window parent;		/* Window ID of the menu's parent window. */
-register char *def_env;	/* X Defaults program environment name. */
+register const char *def_env;	/* X Defaults program environment name. */
 void (*freeFunction)();
 {
 

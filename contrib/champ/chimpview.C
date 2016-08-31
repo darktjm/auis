@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/RCS/chimpview.C,v 1.4 1994/08/11 03:02:31 rr2b Stab74 $";
-#endif
-
-
 #include <andrewos.h>
 #include "scroll.H"
 #include "chlistview.H"
@@ -41,9 +35,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/
 
 
 ATKdefineRegistry(chimpview, lpair, NULL);
-#ifndef NORCSID
-#endif
-
 
 chimpview::chimpview()
 {

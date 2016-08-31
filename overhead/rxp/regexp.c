@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/rxp/RCS/regexp.c,v 2.8 1993/02/08 21:40:34 rr2b Stab74 $";
-#endif
-
 /*
  * regcomp and regexec -- regsub and regerror are elsewhere
  *
@@ -56,6 +49,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
  * precedence is structured in regular expressions.  Serious changes in
  * regular-expression syntax might require a total rethink.
  */
+#include <andrewos.h>
 #include <stdio.h>
 #include <regexp.h>
 #include "regmagic.h"

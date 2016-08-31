@@ -26,18 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/lpair.C,v 3.10 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
-
-
 ATK_IMPL("lpair.H")
 #include <lpair.H>
 
@@ -74,8 +62,6 @@ ATK_IMPL("lpair.H")
 /* Basically, the only reason this routine exists is because the FullUpdate signature does not use rectangles. This routine expects its redrawRectangle argument to be valid know matter what the type argument is. The type arg is just passed through to the children that need to be redrawn. All in all, this, Update, and FullUpdate can probably be simplified. -Z- */
 
 ATKdefineRegistry(lpair, view, NULL);
-#ifndef NORCSID
-#endif
 static void DoFullUpdate(class lpair  *self, enum view_UpdateType  type, struct rectangle  *redrawRectangle);
 static void lpair_ComputeSizesFromTotal (register class lpair  *l, int	 totalsize);
 static void lpair_ComputeSizes (register class lpair  *l);

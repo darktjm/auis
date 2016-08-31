@@ -25,13 +25,8 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/guardian/cmd/RCS/snaptest.c,v 2.8 1994/06/09 21:21:04 rr2b Stab74 $";
-#endif
-
-#include <stdio.h>
 #include <andrewos.h> /* sys/types.h */
+#include <stdio.h>
 #include <netinet/in.h>
 
 #include <snap.h>

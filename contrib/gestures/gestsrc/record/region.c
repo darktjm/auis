@@ -32,11 +32,6 @@ the full agreement.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/record/RCS/region.c,v 1.4 1996/02/09 19:37:26 susan Stab74 $";
-#endif
-
 /*
  region.c - manipulates a GDEV window
  */

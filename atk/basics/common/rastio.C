@@ -25,17 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/rastio.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 /*  rastio.c
 
 	rastio package
@@ -46,6 +35,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 		We could fix ReadRow to not check length before each code byte.
 
  */
+#include <andrewos.h>
 ATK_IMPL("rastio.H")
 #include <stdio.h>
 
@@ -86,10 +76,6 @@ The data is encoded with 4 columns to a line and lines usually have about fiftee
 
 
 ATKdefineRegistry(rastio, ATK, NULL);
-#ifndef NORCSID
-#endif
-
-
 void
 rastio::WriteRow(FILE  *file, unsigned char *byteaddr, long  nbytes)
 				{
@@ -148,7 +134,7 @@ rastio::WriteRow(FILE  *file, unsigned char *byteaddr, long  nbytes)
 					curcnt -= 16;
 				if (curcnt > 1)
 					fputc(OTHERZERO+curcnt, file), outcnt++;
-				else ;  /* the byte written will represent a single instance */
+				else {}  /* the byte written will represent a single instance */
 				fputc(hex[curbyte / 16], file),
 				fputc(hex[curbyte & 15], file),
 				outcnt += 2;

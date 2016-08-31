@@ -1,6 +1,3 @@
-#
-# @(#)Makefile	1.4 87/11/30 3.9 RPCSRC
-#
 BIN = printmsg msg_svc rprintmsg
 GEN = msg_clnt.c msg_svc.c msg.h
 LIB = -lrpclib

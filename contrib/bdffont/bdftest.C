@@ -22,11 +22,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/bdffont/RCS/bdftest.C,v 1.3 1994/08/11 03:02:15 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 #include <environ.H>
 #include <bdffont.H>

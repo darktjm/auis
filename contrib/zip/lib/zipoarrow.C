@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipoarrow.C,v 1.4 1993/09/30 19:51:01 rr2b Stab74 $";
-#endif
-
 /* zipoarrw.c	Zip Object -- Arrow					      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -54,7 +49,6 @@ HISTORY
    08/14/90	Use Ensure_Line_Attributes on Draw and Print (SCG)
 
 END-SPECIFICATION  ************************************************************/
-
 
 #include <andrewos.h>
 #include <math.h>

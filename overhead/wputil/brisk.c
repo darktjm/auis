@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/wputil/RCS/brisk.c,v 1.12 1994/06/09 21:18:04 rr2b Stab74 $";
-#endif
-
 /*
   brisk.c: massage captured addresses
 */
@@ -143,8 +138,8 @@ char *hst, *outhst;
     } else for (Ix = 0; Ix < numEnds; ++Ix) if (Ends[Ix].Preempt && ULstrcmp(s, Ends[Ix].endName) == 0) return (Ends[Ix].Good);
 #ifdef tst_NDBM
     {
-	static char badHost[] = "#";
-	static char unkHost[] = "&";
+	static const char badHost[] = "#";
+	static const char unkHost[] = "&";
 	static DBM *db = NULL;
 	datum key, val;
 	enum MailHostQuality mhq;
@@ -618,7 +613,7 @@ char *comm; char *nameRes, *affilRes, *otherRes;
     char *nComm, *s, *t, *u, *v;
     int Ctr, oldC, RDum;
     auto char Copy[ADDRLEN];
-    static char EndGarbage[] = "\",-=<>~/;:_!|";
+    static const char EndGarbage[] = "\",-=<>~/;:_!|";
 
     nameRes[0] = affilRes[0] = otherRes[0] = '\0';
     if (Debugging) fprintf(stderr, "GetPersonal(``%s''): ", comm);

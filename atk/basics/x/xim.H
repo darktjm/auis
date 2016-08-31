@@ -106,7 +106,7 @@ public:
 	virtual void CloseToCutBuffer(FILE *writeFile);
 	virtual void RotateCutBuffers(long count);
 	virtual void AppendToCutBuffer(FILE *writeFile);
-	virtual char *WantInformation(char *key);
+	virtual const char *WantInformation(const char *key);
 
 	/* These are window manager interface calls */
 	virtual void SetWMFocus();

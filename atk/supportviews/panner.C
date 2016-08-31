@@ -22,13 +22,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/panner.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 	$Disclaimer: 
@@ -52,7 +45,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 //  $
 */
 
-
+#include <andrewos.h>
 ATK_IMPL("panner.H")
 #include <panner.H>
 #include <view.H>
@@ -74,8 +67,6 @@ ATK_IMPL("panner.H")
 
 
 ATKdefineRegistry(panner, scroll, panner::InitializeClass);
-#ifndef NORCSID
-#endif
 static void recompute_panrect(class panner  *self);
 static void get_interface(class panner  *self, int  type /* scroll_VERT or scroll_HORIZ */);
 static void getinfo(class panner  *self, int  type /* scroll_VERT or scroll_HORIZ */, struct range  *total , struct range  *seen , struct range  *dot);
@@ -210,7 +201,7 @@ static void recompute_panrect(class panner  *self)
     self->visible = TRUE;
 }
 
-static char *InterfaceName[scroll_TYPES] = {"scroll,vertical", "scroll,horizontal"};
+static const char * const InterfaceName[scroll_TYPES] = {"scroll,vertical", "scroll,horizontal"};
 
 /* right now, only called from getinfo(); may put in-line */
 static void get_interface(class panner  *self, int  type /* scroll_VERT or scroll_HORIZ */)

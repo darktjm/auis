@@ -55,19 +55,11 @@
 ** documentation.  This software is provided "as is" without express or
 ** implied warranty.
 */
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/image.C,v 3.27 1996/03/14 22:52:56 robr Stab74 $ */
-/* $ACIS:graphic.c 1.11$ */
-/* $Source: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/image.C,v $ */
-
-
-#ifndef LINT
-	char image_rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/image.C,v 3.27 1996/03/14 22:52:56 robr Stab74 $";
-#endif /* LINT */
 
 /* image.c
  */
-
 #include <andrewos.h>
+
 ATK_IMPL("image.H")
 
 #include <ctype.h>
@@ -88,14 +80,14 @@ ATK_IMPL("image.H")
 #define MAXFILELINE 255
 #define DEFAULT_SAVE_QUALITY (75)
 
-static char *imageTypeLabels[NUM_IMAGE_TYPES] = {
+static const char * const imageTypeLabels[NUM_IMAGE_TYPES] = {
     "IBITMAP",
     "IGREYSCALE",
     "IRGB",
     "ITRUE"
 };
 
-static unsigned short RedIntensity[256]= {
+static const unsigned short RedIntensity[256]= {
       0,    76,   153,   230,   307,   384,   460,   537,
     614,   691,   768,   844,   921,   998,  1075,  1152,
    1228,  1305,  1382,  1459,  1536,  1612,  1689,  1766,
@@ -130,7 +122,7 @@ static unsigned short RedIntensity[256]= {
   19046, 19123, 19200, 19276, 19353, 19430, 19507, 19584
 };
 
-static unsigned short GreenIntensity[256]= {
+static const unsigned short GreenIntensity[256]= {
      0,  151,  302,  453,  604,  755,  906, 1057,
   1208, 1359, 1510, 1661, 1812, 1963, 2114, 2265,
   2416, 2567, 2718, 2869, 3020, 3171, 3322, 3473,
@@ -165,7 +157,7 @@ static unsigned short GreenIntensity[256]= {
  37457,37608,37760,37911,38062,38213,38364,38515
 };
 
-static unsigned short BlueIntensity[256]= {
+static const unsigned short BlueIntensity[256]= {
      0,   28,   56,   84,  112,  140,  168,  197,
    225,  253,  281,  309,  337,  366,  394,  422,
    450,  478,  506,  535,  563,  591,  619,  647,
@@ -318,7 +310,7 @@ image::image( )
 
 void
 image::Duplicate( class image  *target )
-{ register int i;
+{ register unsigned int i;
   int size = 0;
 
     (target)->Type() = (this)->Type();
@@ -398,11 +390,9 @@ image::GetBeginData(FILE  *file, long  id)
 long
 image::GetImageData(FILE  *file)
 {
-    char tmpName1[100], tmpName2[100];
     char format[64];
     FILE *tmpFile1, *tmpFile2; 
     char buf[BUFSIZ];
-    long status;
 
     *format = (char)0;
     if(fscanf(file, "format: %s", format) == 0) { /* empty image? Better be! */
@@ -423,7 +413,6 @@ image::GetImageData(FILE  *file)
     }
 
     /* open temp files */
-    tmpName1[0]=tmpName2[2]='\0';
     if( (tmpFile1 = tmpfile()) == NULL || 
        (tmpFile2 = tmpfile()) == NULL ) { /* Error */	
 	if(tmpFile1)
@@ -494,7 +483,7 @@ image::GetEndData(FILE  *file, long  id)
 static long
 WriteImageToTempFile( class image  *self, FILE  *file )
 {
-    char tmpName[MAXPATHLEN], buf[BUFSIZ];
+    char buf[BUFSIZ];
     FILE *f;
     int size = 0;
     long retval= dataobject_NOREADERROR;
@@ -504,9 +493,7 @@ WriteImageToTempFile( class image  *self, FILE  *file )
 	free(self->origData);
 	self->origDataSize = 0;
     }
-    tmpName[0]='\0';
-    tmpnam(tmpName);
-    if(f = fopen(tmpName, "w")) {
+    if((f = tmpfile())) {
 	int savepos = ftell(file), cnt;
 
 	while(fgets(buf, sizeof(buf), file)) {
@@ -522,10 +509,9 @@ WriteImageToTempFile( class image  *self, FILE  *file )
 		return dataobject_NOTATKDATASTREAM;
 	    }
 	}
-	fclose(f);
-	if(self->origData = (char*) calloc(size, sizeof(char))) {
-	    if(f = fopen(tmpName, "r")) {
-		if((cnt = fread(self->origData, sizeof(char), size, f)) != size) {
+	if((self->origData = (char*) malloc(size))) {
+	    if(!fflush(f) && !fseek(f, 0, SEEK_SET)) {
+		if((cnt = fread(self->origData, 1, size, f)) != size) {
 		    fprintf(stderr, "image: short read on image data.\n");
 		    retval= dataobject_PREMATUREEOF; /*RSK*/
 		    free(self->origData);
@@ -544,8 +530,7 @@ WriteImageToTempFile( class image  *self, FILE  *file )
 	    }
 	}
 	fclose(f);
-	unlink(tmpName);
-	fseek(file, savepos, 0);
+	fseek(file, savepos, SEEK_SET);
     }
     else {
 	fprintf(stderr, "image: couldn't open temp file for writing.\n");
@@ -591,12 +576,9 @@ image::SendImageData(FILE  *file)
 
 	if((this)->GetModified() > this->lastModified || this->origData == NULL) {
 	    class image *savedimage = (class image *) ATK::NewObject(this->saveformatstring);
-	    char tmpName[100];
 	    FILE *tmpFile; 
 
-	    tmpName[0]='\0';
-	    tmpnam(tmpName);
-	    if(tmpFile = fopen(tmpName, "w")) {
+	    if((tmpFile = tmpfile())) {
 
 	/* duplicate self into savedimage and write native format data into tmp file */
 		(this)->Duplicate( savedimage);
@@ -604,23 +586,21 @@ image::SendImageData(FILE  *file)
 		    ((struct jpeg*) savedimage)->SetSaveQuality( (this)->GetJPEGSaveQuality());
 		(savedimage)->WriteNative( tmpFile, NULL);
 		(savedimage)->Destroy();
-		fclose(tmpFile);
 
 	/* open tmp file and encode base64 into file */
-		if(!(tmpFile = fopen(tmpName, "r"))) {
-		    printf("image: failed to open temp file %s for reading.", tmpName);
-		    unlink(tmpName);
+		if(fflush(tmpFile) || fseek(tmpFile, 0, SEEK_SET)) {
+		    printf("image: failed to open temp file for reading.");
+		    fclose(tmpFile);
 		    return(-1);
 		}
 		fprintf(file,"format: %s\n", this->saveformatstring);
 		to64(tmpFile, file);
 		fclose(tmpFile);
-		unlink(tmpName);
 	    }
 	    else {
 		if(savedimage)
 		    (savedimage)->Destroy();
-		fprintf(stderr, "image: failed to open temp file %s for writing.", tmpName);
+		fprintf(stderr, "image: failed to open temp file for writing.");
 		return(-1);
 	    }
 	}
@@ -649,7 +629,7 @@ image::SendEndData(FILE  *file, long  writeID, int  id)
 long
 image::Write( FILE  *file, long  writeID, int  level )
 {   long id = (this)->SendBeginData( file, writeID, level);
-    long status;    
+    long status = -1;
     if( (id > 0) &&
        (status = (this)->SendImageData( file)) == 0 &&
        (status = (this)->SendEndData( file, writeID, id)) == 0)
@@ -658,7 +638,7 @@ image::Write( FILE  *file, long  writeID, int  level )
 	return(status);
 }
 
-char *
+const char *
 image::ViewName( )
 {
   return("imagev");
@@ -774,8 +754,7 @@ image::newRGBImage( unsigned int width, unsigned int height, unsigned int depth 
 
 void
 image::newTrueImage( unsigned int width , unsigned int height )
-{ unsigned int pixlen, numcolors, a;
-
+{
   (this)->Type() = ITRUE;
   (this)->RGBUsed() = (this)->RGBSize() = 0;
   (this)->Width() = width;
@@ -801,7 +780,7 @@ image::freeImageData( )
 
 void 
 image::Brighten( unsigned int percent )
-{ int          a;
+{ unsigned int a;
   unsigned int newrgb;
   float        fperc;
   unsigned int size;
@@ -880,7 +859,7 @@ make_gamma( double  gamma, int  gammamap[256] )
 
 void 
 image::GammaCorrect( float   disp_gam )
-{ int a;
+{ unsigned int a;
   int gammamap[256];
   unsigned int size;
   byte *destptr;
@@ -922,7 +901,7 @@ image::GammaCorrect( float   disp_gam )
 
 static void 
 setupNormalizationArray( unsigned int min , unsigned int max, byte  *array )
-{ int a;
+{ unsigned int a;
   unsigned int new_c;
   float factor;
 
@@ -1036,7 +1015,7 @@ image::Normalize( )
 
 void 
 image::Gray( )
-{ int a;
+{ unsigned int a;
   unsigned int size;
   Intensity intensity, red, green, blue;
   byte *destptr;
@@ -1219,10 +1198,10 @@ image::Compress( ) {
 	OldCompress(this);
 	return;
     }
-    int oused=rgb->used;
+    unsigned int oused=rgb->used;
     byte *srcptr = data;
     Pixel pixval;
-    int x, y, nc;
+    unsigned int x, y, nc;
     compressrgb *c=(compressrgb *)malloc(sizeof(struct compressrgb)*rgb->used);
     if(c==NULL) return;
     unsigned int *map=(unsigned int *)malloc(sizeof(unsigned int)*rgb->used);
@@ -1307,8 +1286,7 @@ buildZoomIndex( unsigned int width, unsigned int zoom, unsigned int *rwidth )
 
 class image *
 image::Zoom( unsigned int xzoom , unsigned int yzoom )
-{ char          buf[BUFSIZ];
-  class image *newimage=NULL;
+{ class image *newimage=NULL;
   unsigned int *xindex, *yindex;
   unsigned int  xwidth, ywidth;
   unsigned int  x, y, xsrc, ysrc;
@@ -1721,12 +1699,11 @@ image::Reduce( unsigned int n )
 { unsigned long pixel_counts[32768]; /* pixel occurrance histogram */
   unsigned short pixel_array[32768];
   unsigned long count, midpoint;
-  int x, y, num_pixels, allocated, depth, ncolors;
+  unsigned int x, y, num_pixels, allocated, depth;
   byte *pixel, *dpixel;
   struct color_area *areas, *largest_area, *smallest_area;
   struct color_area *new_area, *old_area;
   class image *new_image;
-  char buf[BUFSIZ];
 
   if (n > 32768) /* max # of colors we can handle */
     n = 32768;
@@ -1849,10 +1826,9 @@ image::Reduce( unsigned int n )
    */
 
   for (x = 0; x < allocated; x++) {
-    long red, green, blue, count, pixel;
+    long red, green, blue, pixel;
 
     red = green = blue = 0;
-    count = areas[x].pixel_count;
     for (y = 0; y < areas[x].num_pixels; y++) {
       pixel = areas[x].pixels[y];
       red += RED_INTENSITY(pixel);
@@ -1913,7 +1889,7 @@ class image *
 image::Expand( )
 {
   class image *new_image;
-  int x, y;
+  unsigned int x, y;
   Pixel spixval;
   byte *spixel, *dpixel, *line;
   unsigned int linelen;
@@ -1972,7 +1948,7 @@ class image *
 image::Bit2Grey( )
 {
   class image *new_image;
-  int x, y;
+  unsigned int x, y;
   byte *spixel, *dpixel, *line;
   unsigned int linelen;
   byte mask;
@@ -2379,7 +2355,6 @@ image::ReadOtherFormat(FILE  *file, char  *fmt, char  *encoding, char  *desc)
     char TmpFile[250];
     FILE *tmpfp = NULL;
     int code;
-    class image *pix;
 
     if (strcmp(fmt, "image/gif")
 	&& strcmp(fmt, "image/x-gif")
@@ -2419,27 +2394,28 @@ image::ReadOtherFormat(FILE  *file, char  *fmt, char  *encoding, char  *desc)
 }
 
 long
-image::WriteNative( FILE  *file, char  *filename )
+image::WriteNative( FILE  *file, const char  *filename )
 {
     printf("image_WriteNative\n");
     return -1;
 }
 
 int
-image::Load( char  *fullname, FILE  *fp )
+image::Load( const char  *fullname, FILE  *fp )
 {
 /* This method should be overridden by subclasses of image */
   return(0);
 }
 
 void
-image::SetSaveFormatString( char  *format )
+image::SetSaveFormatString( const char  *format )
 {
     if(this->saveformatstring)
 	free(this->saveformatstring);
     this->saveformatstring = NULL;
     if(format && *format != (char) 0) {
-	char *src, *dest;
+	const char *src;
+	char *dest;
 	this->saveformatstring = (char *) malloc(strlen(format) + 1);
 	for( src = format, dest = this->saveformatstring; *src ;)
 	    *dest++ = tolower(*src++);
@@ -2474,7 +2450,6 @@ image *image::ColorDither(RGBMap *map) {
     (result)->newRGBImage(Width(), Height(), colorsToDepth(map->used));
     result->freeRGBMapData();
     result->rgb=map;
-    int floyd;
     long* thisrerr;
     long* nextrerr;
     long* thisgerr;
@@ -2483,10 +2458,10 @@ image *image::ColorDither(RGBMap *map) {
     long* nextberr;
     long* temperr;
     long sr, sg, sb, err;
-    int row, col, limitcol;
+    unsigned int row, col, limitcol;
 #define FS_SCALE 1024
     int fs_direction=1;
-    Intensity R, G, B;
+    Intensity R = 0, G = 0, B = 0;
     Pixel pixval;
     Pixel hash[32768];
     memset(hash, 0xff, sizeof(hash));
@@ -2513,7 +2488,7 @@ image *image::ColorDither(RGBMap *map) {
    (((G) & 0xf800) >> 6) | \
    (((B) & 0xf800) >> 11))
     {
-	int i;
+	unsigned int i;
 	for ( i = 0; i < map->used; ++i )
 	{
 	    hash[RGB_TO_15BIT(map->red[i], map->green[i], map->blue[i])]=i;
@@ -2566,7 +2541,7 @@ image *image::ColorDither(RGBMap *map) {
 	    h=RGB_TO_15BIT(R, G, B);
 	    Pixel index=hash[h];
 	    if(index==NIL_PIXEL) { /* No; search colormap for closest match. */
-		int i;
+		unsigned int i;
 		unsigned long dist, newdist;
 		dist = ~0;
 		for ( i = 0; i < map->used; ++i )
@@ -2691,9 +2666,9 @@ image *image::ColorDitherToCube(int reds, int greens, int blues) {
     long* nextberr;
     long* temperr;
     long sr, sg, sb, err;
-    int row, col, limitcol;
+    unsigned int row, col, limitcol;
     int fs_direction=1;
-    Intensity R, G, B;
+    Intensity R = 0, G = 0, B = 0;
     Pixel pixval;
     thisrerr = (long*) malloc((Width()+2)*sizeof(long));
     nextrerr = (long*) malloc((Width()+2)*sizeof(long));
@@ -2731,7 +2706,6 @@ image *image::ColorDitherToCube(int reds, int greens, int blues) {
 	}
 	do {
 	    pixval=memToVal(pP, pixlen);
-	    unsigned short h;
 	    switch(type) {
 		case IGREYSCALE:
 		case IRGB:

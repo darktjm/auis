@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/messagesapp.C,v 1.6 1994/08/15 02:19:08 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include <textview.H>
 #include <sys/param.h>
 #include <stdio.h>
@@ -59,9 +50,6 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 ATKdefineRegistry(messagesapp, application, NULL);
-#ifndef NORCSID
-#endif
-
 
 messagesapp::messagesapp()
 {

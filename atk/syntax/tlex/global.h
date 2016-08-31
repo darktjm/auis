@@ -46,7 +46,7 @@
 
 
 struct symbol {
-	char *s;
+	const char *s;
 	int n;
 };
 
@@ -79,9 +79,9 @@ struct line {
 		} h;
 		/* Elt */
 		struct {
-			char *type;
-			char *var;
-			char *val;
+			const char *type;
+			const char *var;
+			const char *val;
 			int toknum;	/* for action variables */
 		} d;
 		/* C */
@@ -111,11 +111,11 @@ extern struct line *ResWordHandler;
 extern int MaxSeverity;   /* maximum severity passed to Error() */
 extern int CurrSym;	  /* integer portion of next symbol from GenSym() */
 extern int LineNo;	  /* current input file line number */
-void Error(int  severity, char  *msg);
-void ErrorA(int  severity, char  *msg, char  *Arg);
+void Error(int  severity, const char  *msg);
+void ErrorA(int  severity, const char  *msg, const char  *Arg);
 char * GenSym();
-char * freeze(char  *sx , char  *ex);
-char * Escapify(char  *s, int  *plen);
+char * freeze(const char  *sx , const char  *ex);
+char * Escapify(const char  *s, int  *plen);
 
 /* readtabc.c */
 /* 'TokenNames' has all the token names parsed from ftabc
@@ -142,7 +142,7 @@ void ComputeDefaults();
 void WriteTlc(FILE  *fout, char  *fname);
 
 /* thongs.c */
-void ThongAdd(char  *thong, struct line  *action, boolean  fromset);
+void ThongAdd(const char  *thong, struct line  *action, boolean  fromset);
 void ThongReplaceNulls(struct line  *hdr);
 void ThongOut(FILE  *f);
 int ThongAction(struct line  *thong);

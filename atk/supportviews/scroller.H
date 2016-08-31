@@ -109,7 +109,7 @@ public:
      boolean RecSrchReplace(class dataobject *text, long pos, long len);
      void RecSrchExpose(const struct rectangle &logical, struct rectangle &hit);
      void PrintPSDoc(FILE *outfile, long pagew, long pageh);
-     void *GetPSPrintInterface(char *printtype);
+     void *GetPSPrintInterface(const char *printtype);
      void DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight);
      void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);
 

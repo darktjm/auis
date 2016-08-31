@@ -66,7 +66,7 @@ typedef void (*tileSeparateRoutine)
     (byte*, u_char*, u_char*, u_char*, RGBvalue*, u_long, u_long, int, int);
 
 ATKdefineRegistry(tif, image, NULL);
-int LoadTIFF( class tif  *self, char  *fname, FILE  *f, int    nc );
+int LoadTIFF( class tif  *self, const char  *fname, FILE  *f, int    nc );
 static int loadPalette(TIFF  *tif, long   w, long   h, int    photo, int    bps);
 static int loadColor(TIFF  *tif, long   w, long   h, int    photo, int    bps, int    nc);
 static void _TIFFerr(const char  *module, const char  *fmt, va_list  ap);
@@ -100,7 +100,7 @@ static int gtTileSeparate(TIFF  *tif, u_char *raster, RGBvalue *Map, u_long h, u
 static int gtTileContig(TIFF  *tif, u_char *raster, RGBvalue *Map, u_long h, u_long w, int bpp);
 
 int
-tif::Load( char  *fullname, FILE  *fp )
+tif::Load( const char  *fullname, FILE  *fp )
       /*******************************************/
 {
   register int i;
@@ -113,14 +113,14 @@ tif::Load( char  *fullname, FILE  *fp )
 
 
 /*******************************************/
-int LoadTIFF( class tif  *self, char  *fname, FILE  *f, int    nc )
+int LoadTIFF( class tif  *self, const char  *fname, FILE  *f, int    nc )
                 /*******************************************/
 {
   TIFF *tif;
   long w, h;
   short bps, spp, photo, orient;
   int rv;
-  char *filename = NULL;
+  const char *filename = NULL;
   char tmpName[256];
   FILE *fp;
   boolean unlinkTmpFile = FALSE;
@@ -1293,7 +1293,7 @@ tif::Write( FILE  *file, long  writeID, int  level )
 }
 
 int 
-tif::Ident( char  *fullname )
+tif::Ident( const char  *fullname )
         { 
     return(TRUE);
 }

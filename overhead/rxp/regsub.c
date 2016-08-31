@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/rxp/RCS/regsub.c,v 2.8 1993/02/08 21:40:34 rr2b Stab74 $";
-#endif
-
 /*
  * regsub
  *
@@ -52,6 +45,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
  *	3. Altered versions must be plainly marked as such, and must not
  *		be misrepresented as being the original software.
  */
+#include <andrewos.h>
 #include <stdio.h>
 #include <regexp.h>
 #include "regmagic.h"

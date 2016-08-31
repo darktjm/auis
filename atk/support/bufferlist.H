@@ -54,7 +54,7 @@ public:
 /* File functions. */
         virtual class buffer * GetBufferOnFile(const char *filename, long flags)  ;
         virtual void GuessBufferName( const char *filename, char *bufferName, int nameSize);
-        virtual void GetUniqueBufferName( char *proposedBufferName, char *bufferName, int nameSize);
+        virtual void GetUniqueBufferName( const char *proposedBufferName, char *bufferName, int nameSize);
         virtual void SetDefaultObject(const char *objectname);
 
 /* Sorting the buffer list. */

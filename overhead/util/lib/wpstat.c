@@ -25,20 +25,15 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/wpstat.c,v 2.11 1993/02/12 21:23:32 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	wpstat.c
 	The wp_ErrorString function.
 	Include file ``wp.h'' declares the procedures for clients.
 \* ************************************************************ */
 
+#include <andrewos.h>		/* sys/file.h */
 #include <andyenv.h>
 #include <stdio.h>
-#include <andrewos.h>		/* sys/file.h */
 #include <ctype.h>
 #include <errno.h>
 #include <truth.h> /* itc.h -> truth.h DMT */

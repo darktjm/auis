@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/wputil/RCS/makeboth.c,v 5.40 1994/10/20 17:37:24 Zarf Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	makeboth.c
 	Construct the White Pages database.
@@ -438,7 +433,7 @@ static void ParseArguments(argc,argv)
     int	argc;
     char	**argv;
 {
-    static char UsageArgs[] = " [-dDrRwWNfFE] [-Mmalloclevel] [-c conf] [-Pperiod -pwhich] [-s treerootname] outtreedir inchg outchg oldpass curpasswd";
+    static const char UsageArgs[] = " [-dDrRwWNfFE] [-Mmalloclevel] [-c conf] [-Pperiod -pwhich] [-s treerootname] outtreedir inchg outchg oldpass curpasswd";
     int	thisarg, argval;
     char *Swch;
 

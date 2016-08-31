@@ -49,7 +49,7 @@
 
 #define PRIVATE static
 #ifdef DEBUG
-PRIVATE char snapid[] = "[-SNAP-] ";
+PRIVATE const char snapid[] = "[-SNAP-] ";
 char *SNAP_Ptr();
 #define DBGMSG(mask,prtargs)\
 	if ((mask)& (~(NCR|NPR)) & SNAP_debugmask)\

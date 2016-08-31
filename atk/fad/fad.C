@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/fad/RCS/fad.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
 ATK_IMPL("fad.H")
 #include <dataobject.H>
 #include <fad.H>
@@ -50,14 +43,12 @@ struct fad *fad__NewData()
 ***************** */
 
 ATKdefineRegistry(fad, dataobject, NULL);
-#ifndef NORCSID
-#endif
-static class fontdesc *my_DefineFont(char  *fname);
+static class fontdesc *my_DefineFont(const char  *fname);
 static struct fadvector *newvector(struct fadpoint  *p1,struct fadpoint  *p2);
 static boolean pointmatch(class fad  *self,struct fadpoint  *pt,long  x,long  y);
 
 
-static class fontdesc *my_DefineFont(char  *fname)
+static class fontdesc *my_DefineFont(const char  *fname)
 {
 	char familyname[256];
 	long fontStyle;
@@ -203,7 +194,7 @@ void fad::delvector(struct fad_frame  *f)
 		}
 	return;
 	}
-short fad::iconnum(char  *s)
+short fad::iconnum(const char  *s)
 {
 	int i;
 	char *c;

@@ -24,11 +24,6 @@
 
 #include <andrewos.h>
 ATK_IMPL("weblink.H")
-
-#ifndef NORCSID
-static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/weblink.C,v 1.2 1995/12/12 18:53:04 wjh Stab74 $";
-#endif
-
 #include <text.H>
 #include <message.H>
 #include <view.H>
@@ -48,7 +43,7 @@ static proctable_fptr frame_VisitFile = NULL;
 #define getframe(DV)  \
 		((frame *) (((view *)DV)->GetIM())->topLevel)
 
-char *lnames[] = {"http:", ""};
+const char * const lnames[] = {"http:", ""};
 
 ATKdefineRegistry(weblink, link, weblink::InitializeClass);
 
@@ -83,7 +78,7 @@ weblink::GetNewWebLink(char  *url)  {
 	boolean 
 weblink::isLinkString(char  * s)  {
 	ATKinit;
-	char **nm;
+	const char * const *nm;
 	for(nm = lnames; **nm != '\0'; nm++) {
 		if (**nm == *s 
 				&& (strncmp(s, *nm, strlen(*nm)) == 0))
@@ -95,7 +90,7 @@ weblink::isLinkString(char  * s)  {
 	static long 
 shouldBeALink(text  *text, long  pos)  {
 	int tlen, len, c;
-	char **nm;
+	const char * const *nm;
 
 	for(nm = lnames; **nm != '\0'; nm++) {
 		if ((text)->Strncmp(pos, *nm, strlen(*nm)) == 0)

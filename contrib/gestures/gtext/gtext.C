@@ -22,19 +22,11 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gtext/RCS/gtext.C,v 1.2 1993/05/31 18:57:42 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 #include <gtext.H>
 
 
 ATKdefineRegistry(gtext, text, gtext::InitializeClass);
-#ifndef NORCSID
-#endif
-
 
 boolean
 gtext::InitializeClass( )
@@ -55,7 +47,7 @@ gtext::~gtext( )
 
 }
 
-char *
+const char *
 gtext::ViewName( )
     {
   return((char*)"gtextv");

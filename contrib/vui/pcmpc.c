@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RCS/pcmpc.c,v 1.1 1995/08/02 18:46:45 susan Stab74 $";
-#endif
-
-
- 
-
 /* 
  * This package contains more C library routines either 1.missing from those
  * supplied with the MSC/IBM compilers, or 2. included in libmail or libitc.

@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/scroller.C,v 1.13 1995/07/17 20:27:28 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* Scrollbar code for ATK based on the original scrollbar code for be2. */
 
 
@@ -309,12 +301,12 @@ void scroller::SetRegion(enum scroller_Regions sr, class ScrollRegion *r) {
     r->SetBaseSButtonPrefs(elevatorprefs);
 }
     
-static char scrollbarstr[]="scroll";
-static char scrollbarmatte[]="scrollmatte";
-static char scrollbarbox[]="scrollbar";
-static char scrollbarbutton[]="scrollbutton";
-static char scrollbarelevator[]="scrollelevator";
-static char scrollbardot[]="scrolldot";
+static const char scrollbarstr[]="scroll";
+static const char scrollbarmatte[]="scrollmatte";
+static const char scrollbarbox[]="scrollbar";
+static const char scrollbarbutton[]="scrollbutton";
+static const char scrollbarelevator[]="scrollelevator";
+static const char scrollbardot[]="scrolldot";
 
 scroller::scroller()
 {
@@ -1834,7 +1826,7 @@ void scroller::PrintPSDoc(FILE *outfile, long pagew, long pageh)
     if (this->scrolleree)
 	this->scrolleree->PrintPSDoc(outfile, pagew, pageh);
 }
-void *scroller::GetPSPrintInterface(char *printtype)
+void *scroller::GetPSPrintInterface(const char *printtype)
 {
     if (this->scrolleree)
 	return this->scrolleree->GetPSPrintInterface(printtype);

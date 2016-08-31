@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/delivery/vicemail/RCS/vicemail.c,v 1.17 1993/09/30 20:16:49 rr2b Stab74 $";
-#endif
-
 /*
 		vicemail.c -- Deliver a message to a user.
 */
@@ -93,8 +88,8 @@ extern char VM_text[];
 
 /* For error messages */
 static char errortext[512];
-static char notimpl[] = "not implemented";
-static char aborted[] = "delivery aborted";
+static const char notimpl[] = "not implemented";
+static const char aborted[] = "delivery aborted";
 
 static char **GlobalArgv;
 
@@ -138,7 +133,7 @@ static bool compose_message(f, user, mesg, original)
     register FILE *f;
     char *user, *mesg, *original;
 {
-    static char separator[] = "=============================";
+    static const char separator[] = "=============================";
 
     fprintf(f, "Undelivered mail follows...\n\n%s\n\n", separator);
     for (;;) {

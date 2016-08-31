@@ -21,11 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-	char *tlex_defaults_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/syntax/tlex/RCS/defaults.C,v 1.2 1993/05/18 17:23:32 rr2b Stab74 $";
-#endif
-
-
 #include <andrewos.h>
 #include <ctype.h>
 #include <global.h>
@@ -71,9 +66,9 @@ static struct line *WhiteSpace;  /* points to a hdr for tlex_WHITESPACE */
 /* templates for building struct in output */
 
 struct recparmtemplate {
-	char *type;
-	char *name;
-	char *defaultval;
+	const char *type;
+	const char *name;
+	const char *defaultval;
 };
 
 /* defaultval == "$1" is a flag for handler/recognizer
@@ -86,14 +81,14 @@ struct recparmtemplate {
 
 */
 
-struct recparmtemplate ErrorRecparm[] = {
+const struct recparmtemplate ErrorRecparm[] = {
 	{"short", "tokennumber", "$2"},
 	{"int", "recognizerindex", "tlex_ERROR"},
 	{"int", "(*handler)()", "$1"},
-	{"char *", "msg", "\"Unspecified error\""},
+	{"const char *", "msg", "\"Unspecified error\""},
 	{NULL, NULL, NULL}
 };
-struct recparmtemplate WhitespaceRecparm[] = {
+const struct recparmtemplate WhitespaceRecparm[] = {
 	{"short", "tokennumber", "$2"},
 	{"int", "recognizerindex", "tlex_WHITESPACE"},
 	{"int", "(*handler)()", "$1"},
@@ -101,27 +96,27 @@ struct recparmtemplate WhitespaceRecparm[] = {
 	{"Charset", "continueset", "{NULL,0}"},
 	{NULL, NULL, NULL}
 };
-struct recparmtemplate CommentRecparm[] = {
+const struct recparmtemplate CommentRecparm[] = {
 	{"short", "tokennumber", "$2"},
 	{"int", "recognizerindex", "tlex_COMMENT"},
 	{"int", "(*handler)()", "$1"},
 	{"boolean", "SaveText", "FALSE"},
-	{"char *", "endseq", "\"\\n\""},
+	{"const char *", "endseq", "\"\\n\""},
 	{NULL, NULL, NULL}
 };
-struct recparmtemplate Recparm[] = {
+const struct recparmtemplate Recparm[] = {
 	{"short", "tokennumber", "$2"},
 	{"int", "recognizerindex", "tlex_TOKEN"},
 	{"int", "(*handler)()", "$1"},
 	{NULL, NULL, NULL}
 };
-struct recparmtemplate GlobalRecparm[] = {
+const struct recparmtemplate GlobalRecparm[] = {
 	{"short", "tokennumber", "0"},
 	{"int", "recognizerindex", "tlex_TOKEN"},
 	{"int", "(*handler)()", "$1"},
 	{NULL, NULL, NULL}
 };
-struct recparmtemplate IDRecparm[] = {
+const struct recparmtemplate IDRecparm[] = {
 	{"short", "tokennumber", "$2"},
 	{"int", "recognizerindex", "tlex_ID"},
 	{"int", "(*handler)()", "$1"},
@@ -129,7 +124,7 @@ struct recparmtemplate IDRecparm[] = {
 	{"Charset", "continueset", "{NULL,0}"},
 	{NULL, NULL, NULL}
 };
-struct recparmtemplate NumberRecparm[] = {
+const struct recparmtemplate NumberRecparm[] = {
 	{"short", "tokennumber", "$2"},
 	{"int", "recognizerindex", "tlex_NUMBER"},
 	{"int", "(*handler)()", "$1"},
@@ -138,21 +133,21 @@ struct recparmtemplate NumberRecparm[] = {
 	{"double", "realval", "0.0"},
 	{NULL, NULL, NULL}
 };
-struct recparmtemplate StringRecparm[] = {
+const struct recparmtemplate StringRecparm[] = {
 	{"short", "tokennumber", "$2"},
 	{"int", "recognizerindex", "tlex_STRING"},
 	{"int", "(*handler)()", "$1"},
 	{"boolean", "SaveText", "FALSE"},
-	{"char *", "endseq", "\"\\\"\""},
-	{"char *", "escapechar", "\"\\\\\""},
-	{"char *", "badchar", "\"\\n\""},
+	{"const char *", "endseq", "\"\\\"\""},
+	{"const char *", "escapechar", "\"\\\\\""},
+	{"const char *", "badchar", "\"\\n\""},
 	{NULL, NULL, NULL}
 };
 
 /* table of pointers to descriptions of recparms */
-static struct tmpltbl {
+static const struct tmpltbl {
 	int recognizer;
-	struct recparmtemplate *tmpl;
+	const struct recparmtemplate *tmpl;
 } rectmpltbl[] = {
 		/* recognizers from gentlex.h */
 	{tlex_WHITESPACE,	WhitespaceRecparm},
@@ -173,8 +168,6 @@ static struct tmpltbl {
 	normalize and expand Elt list as per template
 	add other unspecified fields as per table below
 */
-	#ifndef NORCSID
-#endif
 void NormalizeStruct(struct line  *hdr);
 void BuildDefaultStructs();
 static void ProcessReserved(struct line  *hdr);
@@ -184,8 +177,8 @@ void ComputeDefaults();
 void
 NormalizeStruct(struct line  *hdr)
 	{
-	struct tmpltbl *ttx;
-	struct recparmtemplate *tpl;
+	const struct tmpltbl *ttx;
+	const struct recparmtemplate *tpl;
 	struct line eltanchor;
 			/* eltanchor is a struct itself and serves as a dummy
 			so prevx is always non-NULL */
@@ -273,7 +266,8 @@ NormalizeStruct(struct line  *hdr)
 				if (hdr->u.h.tokennumber == ex->u.d.toknum
 					&& hdr->u.h.subtoken== ex->u.d.val[2])
 				    break;
-			sprintf(ex->u.d.val, "%d", (hdr) ? hdr->u.h.action 
+		        /* tjm - FIXME: verify this is really writable */
+			sprintf((char *)ex->u.d.val, "%d", (hdr) ? hdr->u.h.action 
 						: tlex_ACCEPT);
 		}
 }
@@ -323,7 +317,7 @@ BuildDefaultStructs()
 		hdr->u.h.decls->lineno = 0;
 		hdr->u.h.decls->type = Elt;
 		hdr->u.h.decls->next = NULL;
-		hdr->u.h.decls->u.d.type = "char *";
+		hdr->u.h.decls->u.d.type = "const char *";
 		hdr->u.h.decls->u.d.var = "msg";
 		hdr->u.h.decls->u.d.val = "\"illegal character\"";
 	hdr->u.h.Ccode = NULL;

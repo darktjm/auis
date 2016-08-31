@@ -22,11 +22,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/headrtv.C,v 1.1 1994/08/11 03:02:51 rr2b Stab74 $";
-#endif
-
 /*         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
@@ -110,8 +105,6 @@ static char *day[]={
 
 
 ATKdefineRegistry(headrtv, view, headrtv::InitializeClass);
-#ifndef NORCSID
-#endif
 struct tm *GetCurrentTime();
 void TwentyFourHourTime(FILE  *file);
 void Blank(FILE  *file);
@@ -355,7 +348,7 @@ static char *headrtv_GetInput(class text  *textobj)
     return string;
 }
 
-void headrtv::Print(FILE  *file,char  *processor,char  *finalFormat, boolean  topLevel)
+void headrtv::Print(FILE  *file,const char  *processor,const char  *finalFormat, boolean  topLevel)
 {
     char *string;
     int i;

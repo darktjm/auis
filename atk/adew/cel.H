@@ -67,18 +67,18 @@ public:
     
 	virtual ~cel();
 
-    virtual boolean SetChildObject(class dataobject *newobject,char *viewName)  ;
-    virtual boolean SetObjectByName(char *dataname)  ;
+    virtual boolean SetChildObject(class dataobject *newobject,const char *viewName)  ;
+    virtual boolean SetObjectByName(const char *dataname)  ;
     virtual class dataobject * GetObject()  ;
-    virtual void SetViewName(char *viewname,boolean UseDefault);
+    virtual void SetViewName(const char *viewname,boolean UseDefault);
     virtual void SetApplication(int app);
-    virtual void InsertObject (class dataobject *newobject,char *dataname,char *viewname,int usedefaultview);
-    virtual char * SetRefName(char *refname)  ;
+    virtual void InsertObject (class dataobject *newobject,char *dataname,const char *viewname,int usedefaultview);
+    virtual const char * SetRefName(const char *refname)  ;
     virtual void UnsetRefName();
     virtual void SetVisibilityBit(int mode);
     virtual boolean SetObject(class dataobject *newobject)  ;
-    virtual void SetLinkName(char *linkname);
-    virtual void SetObjectName(char *dataname) ;
+    virtual void SetLinkName(const char *linkname);
+    virtual void SetObjectName(const char *dataname) ;
     virtual long WriteLink (FILE *file, long writeid, int level)  ;
     virtual char * GetStringAtt(char *attname,char *buf,long buflen)  ;
     virtual long GetLongAtt(char *attname)  ;
@@ -89,13 +89,13 @@ public:
     virtual long ReadFile(FILE *file)  ;
     virtual long InitDefault()  ;
 
-    inline char * GetRefName() { return (this->refname); }
-    inline char * GetViewName() { return (this->viewType); }
-    inline char * GetObjectName() { return (this->dataType); }
+    inline const char * GetRefName() { return (this->refname); }
+    inline const char * GetViewName() { return (this->viewType); }
+    inline const char * GetObjectName() { return (this->dataType); }
     inline class atom * GetRefAtom() { return (this->refatm); }
     inline class atom * GetViewAtom() { return (this->viewatm); }
     inline class atom * GetObjectAtom() { return (this->dataatm); }
-    inline char * GetLinkName() { return (this->linkname); }
+    inline const char * GetLinkName() { return (this->linkname); }
     inline class atom * GetLinkAtom() { return (this->linkatm); }
     inline boolean GetApplication() { return (this->application); }
     inline class text * GetScript() { return (this->script); }
@@ -115,7 +115,7 @@ public:
     inline void SetArbiter(class arbiter *AA) { ((this)->ab = (AA)); }
 
     class atom *viewatm,*dataatm,*refatm,*linkatm;
-    char *viewType, *dataType, *refname, *linkname;
+    const char *viewType, *dataType, *refname, *linkname;
     long viewID;
     class dataobject *dataObject;
     long desw,desh;

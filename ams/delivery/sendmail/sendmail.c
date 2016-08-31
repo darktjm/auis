@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/delivery/sendmail/RCS/sendmail.c,v 1.14 1996/05/13 16:48:58 robr Exp $";
-#endif
-
 /*
 		sendmail.c -- Replacement for sendmail on workstations.
 */

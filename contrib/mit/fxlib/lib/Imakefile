@@ -1,10 +1,6 @@
 /* 
  * Imakefile for the FX (file exchange) intermediate level
  *
- * $Author: rr2b $
- * $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/lib/RCS/Imakefile,v $
- * $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/lib/RCS/Imakefile,v 1.9 1994/08/15 18:06:47 rr2b Stab74 $
- *
  * Copyright (c) 1989, Massachusetts Institute of Technology
  *
  */

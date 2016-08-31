@@ -138,7 +138,7 @@ DECLARE2(getMode, const char*, mode, const char*, module)
 TIFF *
 TIFFOpen(const char *name, const char *mode)
 {
-	static char module[] = "TIFFOpen";
+	static const char module[] = "TIFFOpen";
 	int m, fd;
 
 	m = getMode(mode, module);
@@ -158,7 +158,7 @@ TIFFOpen(const char *name, const char *mode)
 TIFF *
 TIFFFdOpen(int fd, const char *name, const char *mode)
 {
-	static char module[] = "TIFFFdOpen";
+	static const char module[] = "TIFFFdOpen";
 	TIFF *tif;
 	int m, bigendian;
 

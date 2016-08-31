@@ -39,9 +39,9 @@ yyerror(char *msg) {
 }
 
 	void 
-foo::ErrorGuts(int severity, char *severityname, char *msg)  {
+foo::ErrorGuts(int severity, const char *severityname, const char *msg)  {
 	printf("%s parse error: %s\n", severityname, msg);
 	if (severity&parser_FREEMSG)
-		free(msg);
+		free((char *)msg);
 }
 

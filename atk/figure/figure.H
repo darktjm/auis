@@ -23,8 +23,6 @@ ATK_INTER
 // WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 // 
 //  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figure.H,v 3.4 1995/03/20 20:22:03 Zarf Stab74 $
 */
 
 #include <rect.h>
@@ -69,7 +67,7 @@ public:
        void SetAttributes(struct attributes *attributes);
        long Write(FILE *fp, long writeid, int level)  ;
        long Read(FILE *file, long id)  ;
-       char * ViewName()  ;
+       const char * ViewName()  ;
 
     
       virtual long InsertObject(class figobj *o, long parent, long depth)  ;

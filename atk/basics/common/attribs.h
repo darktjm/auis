@@ -44,10 +44,10 @@ BEGINCPLUSPLUSPROTOS
 
 struct attributes {
     struct attributes *next; /* Representation is a linked list. */
-    char *key; /* attribute name. */
+    const char *key; /* attribute name. */
     union { /* Value can either be an integer or a string. */
         long integer;
-        char *string;
+        const char *string;
     } value;
 };
 #endif /* ATTRIBUTES_DEFINED */

@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/interpt.C,v 1.4 1995/12/07 16:41:27 robr Stab74 $";
-#endif
-
 /* interptest.C
 	test the interp object
 

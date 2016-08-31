@@ -27,9 +27,6 @@
 //  $
 */
 
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipview.H,v 1.6 1994/08/14 18:27:27 rr2b Stab74 $ */
-/* $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipview.H,v $ */
-
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -114,7 +111,7 @@ public:
    void LoseInputFocus();
    void SetDataObject( class dataobject *d );
    void ObservedChanged ( class observable *changed, long value );
-   void Print( FILE *file, char *processor, char *finalFormat, boolean topLevel );
+   void Print( FILE *file, const char *processor, const char *finalFormat, boolean topLevel );
    class view * GetApplicationLayer();
    const void *GetInterface( const char *interface_name );
    void PostMenus( class menulist *menulist );
@@ -150,8 +147,8 @@ public:
   virtual boolean Stream_Visible( zip_type_stream stream, zip_type_pane pane );
 
   virtual struct zip_pane * Pane( char *name );
-  virtual long Create_Pane( zip_type_pane *pane,  char  *name,  struct rectangle		  *block,  long   attributes );
-  virtual long Create_Nested_Pane( zip_type_pane *pane, char *name,  zip_type_pane master_pane,  long attributes );
+  virtual long Create_Pane( zip_type_pane *pane,  const char  *name,  struct rectangle		  *block,  long   attributes );
+  virtual long Create_Nested_Pane( zip_type_pane *pane, const char *name,  zip_type_pane master_pane,  long attributes );
   virtual long Destroy_Pane( zip_type_pane pane );
   virtual long Redisplay_Panes();
   virtual long Redraw_Panes();
@@ -174,7 +171,7 @@ public:
   virtual long Reset_Pane_Figure( zip_type_pane pane, zip_type_figure figure );
   virtual struct zip_figure * Pane_Figure( zip_type_pane pane );
   virtual long Set_Pane_Scale( zip_type_pane pane, float scale );
-  virtual long Set_Pane_Cursor( zip_type_pane pane, char cursor_icon, char *cursor_font );
+  virtual long Set_Pane_Cursor( zip_type_pane pane, char cursor_icon, const char *cursor_font );
   virtual long Set_Pane_Painting_Mode( zip_type_pane pane, char mode );
 
   virtual long Display_Pane( zip_type_pane pane );
@@ -212,8 +209,8 @@ public:
   virtual long Set_Print_Dimensions( float width, float height );
   virtual long Set_Print_Coordinates( zip_type_percent x_origin, zip_type_percent y_origin, zip_type_percent width, zip_type_percent height );
   virtual long Set_Print_Orientation( long orientation );
-  virtual long Set_Print_Language( char *language );
-  virtual long Set_Print_Processor( char *processor );
+  virtual long Set_Print_Language( const char *language );
+  virtual long Set_Print_Processor( const char *processor );
   virtual long Set_Print_Level( long level );
   virtual long Set_Print_File( FILE *file );
 
@@ -240,10 +237,10 @@ public:
   virtual boolean Proximate_Figure_Point( zip_type_pane pane, zip_type_figure figure, zip_type_pixel X, zip_type_pixel Y, zip_type_pixel x, zip_type_pixel y );
   virtual long Proximate_Enclosure( zip_type_pane pane, zip_type_pixel left, zip_type_pixel top, zip_type_pixel right, zip_type_pixel bottom, zip_type_pixel x, zip_type_pixel y );
   virtual long Try_Pane_Exception_Handler( zip_type_pane pane );
-  virtual long Query( char *query, char *default_response, char **response );
-  virtual long Query_File_Name( char *query, char **response );
-  virtual long AskOrCancel( char *query, char *default_resopnse, char **response );
-  virtual long Announce( char *message );
+  virtual long Query( const char *query, const char *default_response, char **response );
+  virtual long Query_File_Name( const char *query, char **response );
+  virtual long AskOrCancel( const char *query, const char *default_resopnse, char **response );
+  virtual long Announce( const char *message );
   virtual void Ensure_Fill_Attributes( zip_type_figure figure );
   virtual long Ensure_Line_Attributes( zip_type_figure figure );
   virtual void Normalize_Fill_Attributes();

@@ -26,7 +26,6 @@ $Disclaimer:
 #include <andrewos.h>
 
 static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/perltext.C,v 2.1 1995/02/07 17:37:27 rr2b Stab74 $";
 
 #include <stylesheet.H>
 #include <style.H>
@@ -67,7 +66,7 @@ void perltext::SetupStyles()
 
 boolean perltext::InitializeClass()
 {
-    static Dict perlkeywords[]={
+    static const Dict perlkeywords[]={
 	{"continue",0,KEYWRD},
 	{"else",0,KEYWRD},
 	{"elsif",0,KEYWRD},
@@ -506,9 +505,9 @@ long perltext::ReverseBalance(long pos)
 {
     boolean found=FALSE, atleastone=FALSE;
     int thischar=0, prevchar;
-    char *parentype;
+    const char *parentype;
     struct paren_node *parenstack=NULL, *temp_stack_ptr;
-    static char *opens="({[", *closes=")}]";
+    static const char opens[]="({[", closes[]=")}]";
 
     while ((parenstack !=NULL || !atleastone) && (pos>0)) {
 	prevchar=thischar;

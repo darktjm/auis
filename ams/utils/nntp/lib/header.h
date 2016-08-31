@@ -29,8 +29,6 @@
  * header.h - Article header format
  */
 
-/*	@(#)header.h	2.18	4/16/85	*/
-
 #define NUNREC 50
 
 /* article header */

@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/capaux.C,v 1.9 1996/08/27 22:19:24 robr Exp $";
-#endif
-
-
- 
-
 #include <sys/param.h>
 
 #include <textview.H>
@@ -665,7 +656,8 @@ void text_CleanUpGlitches(class text  *self)
     class style *uss = 0, *bolds = 0;
     struct SearchPattern *Pattern = NULL;
     int loc = 0, tmploc=0;
-    char *tp, c1, c2;
+    const char *tp;
+    char c1, c2;
 
     /* CLEANUP PART ONE:  DEAL WITH _\010 -type underlining */
     tp = search::CompilePattern("\010", &Pattern);
@@ -821,7 +813,7 @@ void text_CleanUpGlitches(class text  *self)
 #endif
 }
 
-int captions::GetBodyFromCUID(int  cuid , int  Mode, char  *ContentTypeOverride)
+int captions::GetBodyFromCUID(int  cuid , int  Mode, const char  *ContentTypeOverride)
 {
     class text *d;
     class t822view *bv;

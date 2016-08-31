@@ -42,11 +42,6 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/gdev/RCS/gdev.c,v 1.4 1993/09/30 19:07:41 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 
 #include "gdrv.h"

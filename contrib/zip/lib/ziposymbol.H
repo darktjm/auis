@@ -57,7 +57,7 @@ struct symbol
 struct symbol_set
   {
   char					 *set_name;
-  char					 *set_path;
+  const char				 *set_path;
   FILE					 *set_file;
   struct symbol				 *set_symbols;
   short					  set_symbols_count;

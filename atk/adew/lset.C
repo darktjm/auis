@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/lset.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("lset.H")
 
 #include <lset.H>
@@ -106,11 +97,11 @@ boolean lset::InitializeClass()
     a_atomlist = atom::Intern("atomlist");
     return TRUE;
 }
-void lset::InsertObject (char  *name,char  *viewname)
+void lset::InsertObject (const char  *name,const char  *viewname)
 {
     class dataobject *newobject;
     char buf[128];
-    char *val = "value";
+    const char *val = "value";
     if(name == NULL || *name == '\0') newobject = NULL;
     else if((newobject = getregisteredobject(this)) == NULL){
 	if((this->application == VALUE) && !ATK::IsTypeByName(name,"value")) {
@@ -181,7 +172,9 @@ long lset::Read(FILE  *file, long  id)
     char *s;
     long c,version;
     long status;
-    char objectname[200],*cp;
+    char objectname[200];
+    const char *ccp;
+    char *cp;
     long objectid;
     class dataobject *newobject = NULL;
     char cbuf[2048];
@@ -205,13 +198,14 @@ putchar(c);
         if (c == EOF) return dataobject_NOREADERROR;
         if ((c = getc(file)) == EOF)
             return dataobject_PREMATUREEOF;
+	const char *be;
         if (c == 'b')  {
             begindata = TRUE;
-            s = "egindata";
+            be = "egindata";
         }
         else if (c == 'e')  {
             begindata = FALSE;
-            s = "nddata";
+            be = "nddata";
         }
         else  {
 	    if(endcount == 1){
@@ -225,8 +219,8 @@ putchar(c);
 	    }
             continue;
         }
-        while ((c = getc(file)) != EOF && c == *s) s++;
-        if (c == '{' && *s == '\0')  {
+        while ((c = getc(file)) != EOF && c == *be) be++;
+        if (c == '{' && *be == '\0')  {
             if (begindata) {
                 s = objectname;
                 while ((c = getc(file)) != EOF && c != ',')
@@ -239,11 +233,11 @@ putchar(c);
                 if (c == EOF) return dataobject_PREMATUREEOF;
 		if(((c = getc(file))!= '\n') || (strcmp(objectname,"zip") == 0)) ungetc(c,file);
 		/* Call the New routine for the object */
-		cp=objectname;
-		if(!ATK::LoadClass(cp)) {
-		    cp="unknown";
+		ccp=objectname;
+		if(!ATK::LoadClass(ccp)) {
+		    ccp="unknown";
 		}
-                if ((newobject = (class dataobject *) ATK::NewObject(cp)))  {
+                if ((newobject = (class dataobject *) ATK::NewObject(ccp)))  {
                     /* Register the object with the dictionary */
 		    dictionary::Insert(NULL,(char *)objectid, (char *)newobject);
                     /* Call the read routine for the object */

@@ -23,13 +23,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nessm.C,v 1.7 1995/07/11 19:16:53 rr2b Stab74 $";
-#endif
-
-
 ATK_IMPL("nessm.H")
 
 #include <ctype.h>
@@ -49,17 +42,17 @@ ATK_IMPL("nessm.H")
 #include <nessm.H>
 
 
-static char keytmpl[]="DoKeys(currentinputfocus, \"%\")\n";
-static char menutmpl[]="(currentinputfocus, %)\n";
-static char answertmpl[]="QueueAnswer(\"%\")\n";
-static char canceltmpl[]="QueueCancellation()\n";
-static char menu[]="menu";
-static char keys[]="keys";
+static const char keytmpl[]="DoKeys(currentinputfocus, \"%\")\n";
+static const char menutmpl[]="(currentinputfocus, %)\n";
+static const char answertmpl[]="QueueAnswer(\"%\")\n";
+static const char canceltmpl[]="QueueCancellation()\n";
+static const char menu[]="menu";
+static const char keys[]="keys";
 
 
 ATKdefineRegistry(nessm, ATK, nessm::InitializeClass);
 
-static char *mousehits(enum view_MouseAction  act);
+static const char *mousehits(enum view_MouseAction  act);
 static long InsertKey(class ness  *n, class mark  *m, long  pos, char  key);
 static int InsertProcCall(class ness  *n, long  pos, struct proctable_Entry  *proc, long  rock);
 static void DumpActions(struct action  *a);
@@ -68,7 +61,7 @@ static struct action *QueueAnswers(class ness  *n, struct action  *look, class m
 static void DoConv(class view  *self, long  rock);
 
 
-static char *mousehits(enum view_MouseAction  act) {
+static const char *mousehits(enum view_MouseAction  act) {
     switch(act) {
 	case view_LeftDown:
 	    return "mouseleftdown";
@@ -104,7 +97,7 @@ static long InsertKey(class ness  *n, class mark  *m, long  pos, char  key) {
 static int InsertProcCall(class ness  *n, long  pos, struct proctable_Entry  *proc, long  rock) {
     char buf[32];
     char procbuf[256], *p;
-    char *procname=proctable::GetName(proc);
+    const char *procname=proctable::GetName(proc);
     char *opstring;
     
     if(strlen(procname)>sizeof(procbuf)-1) {
@@ -247,7 +240,7 @@ static struct action *QueueAnswers(class ness  *n, struct action  *look, class m
     return a;
 }
  
-static char *choices[]={
+static const char * const choices[]={
     "Cancel - Don't make any binding.",
     "Install as a menu option.",
     "Install as a key binding.",

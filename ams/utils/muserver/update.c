@@ -38,8 +38,8 @@
 #define MAX(a,b) (a > b ? a : b)
 #endif
 
-static char logfile[] = "/tmp/mupdate.log";
-static char oldfile[] = "/tmp/mupdate.old";
+static const char logfile[] = "/tmp/mupdate.log";
+static const char oldfile[] = "/tmp/mupdate.old";
 
 #define MS_MASTERUPDATE ".MS.Master/Update"
 

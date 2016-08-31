@@ -25,16 +25,10 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/amsn.C,v 1.6 1994/04/28 19:34:30 rr2b Stab74 $";
-#endif
-
 /* Until I come up with a better scheme, new functions here have to be added to SIX files -- ams.ch, amss.ch, amsn.ch (all identical specs) and the corresponding c files */ 
 
 
+#include <andrewos.h>
 #include <ams.H>
 #include <im.H>
 #include <message.H>
@@ -113,7 +107,7 @@ long amsn::CUI_DirectoriesToPurge()
     return(::CUI_DirectoriesToPurge());
 }
 
-long amsn::CUI_DisambiguateDir(char  *shortname , char  **longname) 
+long amsn::CUI_DisambiguateDir(const char  *shortname , char  **longname) 
 {
     return(::CUI_DisambiguateDir(shortname, longname));
 }
@@ -148,7 +142,7 @@ long amsn::CUI_GetHeaderContents(int  cuid, char  *hdrname, int  hdrnum, char  *
     return(::CUI_GetHeaderContents(cuid, hdrname, hdrnum, hdrbuf, lim));
 }
 
-long amsn::CUI_GetHeaders(char  *dirname , char  *date64 , char  *headbuf, int  lim , int  startbyte , long  *nbytes , long  *status , int  RegisterCuids)
+long amsn::CUI_GetHeaders(const char  *dirname , const char  *date64 , char  *headbuf, int  lim , int  startbyte , long  *nbytes , long  *status , int  RegisterCuids)
 {
     return(::CUI_GetHeaders(dirname, date64, headbuf, lim, startbyte, nbytes, status, RegisterCuids));
 }
@@ -243,16 +237,16 @@ long amsn::CUI_ReallyGetBodyToLocalFile(int  cuid, char  *fname, int  *ShouldDel
     return(::CUI_ReallyGetBodyToLocalFile(cuid, fname, ShouldDelete, MayFudge));
 }
 
-long amsn::CUI_RemoveDirectory(char  *dirname)
+long amsn::CUI_RemoveDirectory(const char  *dirname)
 {
     return(::CUI_RemoveDirectory(dirname));
 }
-long amsn::CUI_RenameDir(char  *oldname , char  *newname) 
+long amsn::CUI_RenameDir(const char  *oldname , const char  *newname) 
 {
     return(::CUI_RenameDir(oldname, newname));
 }
 
-void amsn::CUI_ReportAmbig(char  *name , char  *atype)
+void amsn::CUI_ReportAmbig(const char  *name , const char  *atype)
 {
     ::CUI_ReportAmbig(name, atype);
 }
@@ -432,7 +426,7 @@ long amsn::MS_UpdateState()
     return(::MS_UpdateState());
 }
 
-void amsn::ReportSuccess(char  *s)
+void amsn::ReportSuccess(const char  *s)
 {
     ::ReportSuccess(s);
 }
@@ -443,23 +437,23 @@ long amsn::MS_DomainHandlesFormatting(char  *domname, int  *retval)
     return(::MS_DomainHandlesFormatting(domname, retval));
 }
 
-void amsn::ReportError(char  *s, int  level , int  decode, long  err)
+void amsn::ReportError(const char  *s, int  level , int  decode, long  err)
 {
     if (decode) ::mserrcode = err;
     ::ReportError(s, level, decode);
 }
 
-int amsn::GenericCompoundAction(class view  *v, char  *prefix, char  *cmds)
+int amsn::GenericCompoundAction(class view  *v, const char  *prefix, const char  *cmds)
 {
     return(::GenericCompoundAction(v, prefix, cmds));
 }
 
-int amsn::GetBooleanFromUser(char  *prompt, int  defaultans)
+int amsn::GetBooleanFromUser(const char  *prompt, int  defaultans)
 {
     return(::GetBooleanFromUser(prompt, defaultans));
 }
 
-int amsn::GetStringFromUser(char  *prompt , char  *buf, int  len , int  ispass)
+int amsn::GetStringFromUser(const char  *prompt , char  *buf, int  len , int  ispass)
 {
     return(::GetStringFromUser(prompt, buf, len, ispass));
 }
@@ -504,12 +498,12 @@ void amsn::SubtleDialogs(boolean  besubtle)
     ::SubtleDialogs(besubtle);
 }
 
-char *amsn::DescribeProt(int  code)
+const char *amsn::DescribeProt(int  code)
 {
     return(::DescribeProt(code));
 }
 
-int amsn::ChooseFromList(char  **QVec, int  defans)
+int amsn::ChooseFromList(const char  * const *QVec, int  defans)
 {
     return(::ChooseFromList(QVec, defans));
 }
@@ -533,7 +527,7 @@ int amsn::UnScribeFlush(int  ucode, struct ScribeState  **ss, FILE  *fout)
     return(::UnScribeFlush(ucode, ss, fout));
 }
 
-int amsn::UnScribeInit(char  *vers, struct ScribeState  **ss)
+int amsn::UnScribeInit(const char  *vers, struct ScribeState  **ss)
 {
     return(::UnScribeInit(vers, ss));
 }

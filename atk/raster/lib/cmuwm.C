@@ -23,11 +23,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-static UNUSED const char cmuwm_rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/cmuwm.C,v 1.9 1996/10/20 20:37:30 wjh Exp $";
-#endif
-
 ATK_IMPL("cmuwm.H")
 #include <image.H>
 #include <dataobject.H>
@@ -41,7 +36,7 @@ ATK_IMPL("cmuwm.H")
 ATKdefineRegistry(cmuwm, image, NULL);
 
 	int 
-cmuwm::Ident( char  *fullname ) {
+cmuwm::Ident( const char  *fullname ) {
     FILE *f;
     int r = 0;
     long objectID;
@@ -57,7 +52,7 @@ cmuwm::Ident( char  *fullname ) {
 }
 
 	int
-cmuwm::Load( char  *fullname, FILE  *fp ) {
+cmuwm::Load( const char  *fullname, FILE  *fp ) {
     FILE *f;
     class raster *rasterp = new raster;
     long objectID;
@@ -127,7 +122,7 @@ cmuwm::Write( FILE  *file, long  writeID, int  level )  {
 }
 
 	long
-cmuwm::WriteNative( FILE  *file, char  *filename ) {
+cmuwm::WriteNative( FILE  *file, const char  *filename ) {
     class raster *ras;
     FILE *f;
     int w = (this)->Width(), h = (this)->Height();

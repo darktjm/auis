@@ -1,10 +1,6 @@
 #
 # Makefile for the FX (file exchange) intermediate level
 #
-# $Author: wdc $
-# $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/lib/RCS/Makefile,v $
-# $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/lib/RCS/Makefile,v 1.1 1992/02/13 20:29:26 wdc Stab74 $
-#
 # Copyright (c) 1989, Massachusetts Institute of Technology
 #
 

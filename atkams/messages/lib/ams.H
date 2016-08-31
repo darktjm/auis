@@ -39,7 +39,7 @@ public:
 
     
       static void Focus(class view *v);
-      static class frame * InstallInNewWindow(class view *v, char *programname, char *windowname, int width, int ht, class view *focusv)  ;
+      static class frame * InstallInNewWindow(class view *v, const char *programname, const char *windowname, int width, int ht, class view *focusv)  ;
       static void SetWantSnap(int wantsnap);
       static class ams * GetAMS()  ;
       static void SetCheckpointFrequency(int freq);
@@ -68,15 +68,15 @@ public:
       static void SetCUIRock(long r);
       static void CommitState(boolean DoQuit, boolean MustQuit, boolean MayPurge, boolean OfferQuit);
       static int CountAMSViews()  ;
-      static int GetFolderName(char *prompt, char *buf, int buflen, char *defaultname, boolean MustMatch)  ;
+      static int GetFolderName(const char *prompt, char *buf, int buflen, const char *defaultname, boolean MustMatch)  ;
       static class ams *MakeAMS();
       
-      virtual int GenericCompoundAction(class view *v, char *prefix, char *cmds)  ;
-      virtual int GetBooleanFromUser(char *prompt, int defaultans)  ;
-      virtual int GetStringFromUser(char *prompt, char *buf, int len, int IsPassword)  ;
-      virtual int ChooseFromList(char **QVec, int defans)  ;
-      virtual void ReportError(char *text, int level, int Decode, long mserrcode);
-      virtual void ReportSuccess(char *text);
+      virtual int GenericCompoundAction(class view *v, const char *prefix, const char *cmds)  ;
+      virtual int GetBooleanFromUser(const char *prompt, int defaultans)  ;
+      virtual int GetStringFromUser(const char *prompt, char *buf, int len, int IsPassword)  ;
+      virtual int ChooseFromList(const char * const *QVec, int defans)  ;
+      virtual void ReportError(const char *text, int level, int Decode, long mserrcode);
+      virtual void ReportSuccess(const char *text);
       virtual int TildeResolve(const char *in, char *out)  ;
       virtual int OnlyMail()  ;
       virtual char* ap_Shorten(char *fname)  ;
@@ -90,14 +90,14 @@ public:
       virtual long CUI_DeleteMessage(int cuid)  ;
       virtual long CUI_DeliveryType()  ;
       virtual long CUI_DirectoriesToPurge()  ;
-      virtual long CUI_DisambiguateDir(char *shortname, char **longname)  ;
+      virtual long CUI_DisambiguateDir(const char *shortname, char **longname)  ;
       virtual long CUI_DoesDirNeedPurging(char *name)  ;
       virtual void CUI_EndConversation();
       virtual long CUI_GenLocalTmpFileName(char *name)  ;
       virtual long CUI_GenTmpFileName(char *name)  ;
       virtual long CUI_GetFileFromVice(char *tmpfile, char *vfile)  ;
       virtual long CUI_GetHeaderContents(int cuid, char *hdrname, int hdrnum, char *hdrbuf, int lim)  ;
-      virtual long CUI_GetHeaders(char *dirname, char *date64, char *headbuf, int lim, int startbyte, long *nbytes, long *status, int RegisterCuids)  ;
+      virtual long CUI_GetHeaders(const char *dirname, const char *date64, char *headbuf, int lim, int startbyte, long *nbytes, long *status, int RegisterCuids)  ;
       virtual long CUI_GetSnapshotFromCUID(int cuid, char *Sbuf)  ;
       virtual long CUI_HandleMissingFolder(char *dname)  ;
       virtual long CUI_Initialize(int  (*TimerFunction)(char *rock), char *rock)  ;
@@ -115,9 +115,9 @@ public:
       virtual long CUI_PurgeDeletions(char *dirname)  ;
       virtual long CUI_PurgeMarkedDirectories(boolean ask, boolean OfferQuit)  ;
       virtual long CUI_ReallyGetBodyToLocalFile(int cuid, char *fname, int *ShouldDelete, int MayFudge)  ;
-      virtual long CUI_RemoveDirectory(char *dirname)  ;
-      virtual long CUI_RenameDir(char *oldname, char *newname)  ;
-      virtual void CUI_ReportAmbig(char *name, char *atype);
+      virtual long CUI_RemoveDirectory(const char *dirname)  ;
+      virtual long CUI_RenameDir(const char *oldname, const char *newname)  ;
+      virtual void CUI_ReportAmbig(const char *name, const char *atype);
       virtual long CUI_ResendMessage(int cuid, char *tolist)  ;
       virtual long CUI_RewriteHeaderLine(char *addr, char **newaddr)  ;
       virtual long CUI_RewriteHeaderLineInternal(char *addr, char **newaddr, int maxdealiases, int *numfound, int *externalcount, int *format, int *strip, int *trust)  ;
@@ -157,11 +157,11 @@ public:
       virtual long MS_DomainHandlesFormatting(char *domname, int *retval)  ;
       virtual int AMS_ErrNo()  ;
       virtual void SubtleDialogs(boolean besubtle);
-      virtual char * DescribeProt(int code)  ;
+      virtual const char * DescribeProt(int code)  ;
       virtual char * MessagesAutoBugAddress()  ;
       virtual int UnScribe(int ucode, struct ScribeState **ss, char *LineBuf, int ct, FILE *fout)  ;
       virtual int UnScribeFlush(int ucode, struct ScribeState **ss, FILE *fout)  ;
-      virtual int UnScribeInit(char *vers, struct ScribeState **ss)  ;
+      virtual int UnScribeInit(const char *vers, struct ScribeState **ss)  ;
       virtual void WriteOutUserEnvironment(FILE *fp, boolean IsAboutMessages);
       virtual char * ams_genid(boolean isfilename)  ;
       virtual int CheckAMSUseridPlusWorks(char *dom)  ;

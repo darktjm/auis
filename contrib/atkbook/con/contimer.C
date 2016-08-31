@@ -1,5 +1,3 @@
-static char *contimer_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/atkbook/con/RCS/contimer.C,v 1.1 1994/05/19 20:41:18 Zarf Stab74 $";
-
 /* **************************************************** *\
 Copyright 1989 Nathaniel S. Borenstein
 Permission to use, copy, modify, and distribute this software and its

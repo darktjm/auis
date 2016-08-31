@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/lookz/RCS/tabrulerview.C,v 1.7 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
-
 ATK_IMPL("tabrulerview.H")
 #include <graphic.H>
 #include <view.H>
@@ -84,10 +76,8 @@ static struct TickTbl CMTbl = {30, 6, 1, {6, 3, 3, 3, 3}, "%+5.2f c", "Cm."};
 
 
 ATKdefineRegistry(tabrulerview, view, tabrulerview::InitializeClass);
-#ifndef NORCSID
-#endif
-static boolean BogusCallFromParent(register class tabrulerview  *self, char  *where , char  *msg);
-static boolean CheckWindow(register class tabrulerview  *self, char  *where);
+static boolean BogusCallFromParent(register class tabrulerview  *self, const char  *where , const char  *msg);
+static boolean CheckWindow(register class tabrulerview  *self, const char  *where);
 static void MoveIcon(class tabrulerview  *self, register long  newx, short which);
 static void RepaintIcon(register class tabrulerview   *self, register long  position, short which, short  color);
 static void RemoveIcon(register class tabrulerview  *self, register long  pos, short which);
@@ -102,14 +92,14 @@ int FindClosestTab(register class tabrulerview  *self, register long  pos);
 
 
 static boolean
-BogusCallFromParent(register class tabrulerview  *self, char  *where , char  *msg)
+BogusCallFromParent(register class tabrulerview  *self, const char  *where , const char  *msg)
 {
     fprintf(stderr, "<tabrulerview>Bogus call to %s, %s\n", where, msg);
     return FALSE;
 }
 
 static boolean
-CheckWindow(register class tabrulerview  *self, char  *where)
+CheckWindow(register class tabrulerview  *self, const char  *where)
 {
     register class graphic *g
       = (class graphic *)(self)->GetDrawable();
@@ -176,7 +166,7 @@ MoveIcon(class tabrulerview  *self, register long  newx, short which)
 static void
 RepaintIcon(register class tabrulerview   *self, register long  position, short which, short  color)
 {
-    char *str;
+    const char *str;
     switch (which) {
 	case style_LeftAligned:
 	    str = IconStringLeft;

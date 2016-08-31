@@ -24,13 +24,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nessmv.C,v 1.6 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
 ATK_IMPL("nessmv.H")
 
 #include <menulist.H>
@@ -65,7 +58,7 @@ static void helpProc(char  *partial, struct helpRock  *myrock,
 		message_workfptr  HelpWork, long  rock);
 static enum message_CompletionCode mycomplete(char  *partial, 
 		struct helpRock  *myrock, char  *buffer, int  bufferSize);
-static long AskForScript(class nessmv  *self, char  *prompt, char  *buf, long  bufsiz);
+static long AskForScript(class nessmv  *self, const char  *prompt, char  *buf, long  bufsiz);
 static void ScriptAppend(class nessmv  *self, long  rock);
 static void Append(class nessmv  *self, long  rock);
 static void Visit(class nessmv  *self, long  rock);
@@ -264,7 +257,7 @@ static enum message_CompletionCode mycomplete(char  *partial,
 
 static char sbuf[1024]=".atkmacros";
 
-static long AskForScript(class nessmv  *self, char  *prompt, char  *buf, long  bufsiz) {
+static long AskForScript(class nessmv  *self, const char  *prompt, char  *buf, long  bufsiz) {
     class ness *n=ness::GetList();
     struct helpRock myrock;
     class framemessage *fmsg=(class framemessage *)(self)->WantHandler("message");
@@ -344,7 +337,7 @@ static void ScriptAppend(class nessmv  *self, long  rock) {
 
 static char dbuf[1024]="~/.atkmacros";
  
-static char *appendchoices[]={
+static const char * const appendchoices[]={
     "Cancel",
     "Update the existing script. (discard file)",
     "Update the file.",

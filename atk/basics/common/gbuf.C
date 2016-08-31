@@ -24,26 +24,20 @@
  *  $
 */
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/gbuf.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 #include <gbuf.H>
 
 
 
 ATKdefineRegistry(gbuf, ATK, gbuf::InitializeClass);
 
-static void CheckHolds(register class gbuf  *self, register char  *where);
+static void CheckHolds(register class gbuf  *self, register const char  *where);
 
 #ifdef TestingOnlyTesting
 void main();
 #endif
 
 
-static void CheckHolds(register class gbuf  *self, register char  *where)
+static void CheckHolds(register class gbuf  *self, register const char  *where)
 {
     if (self->holds > 0)
 	fprintf(stderr, 

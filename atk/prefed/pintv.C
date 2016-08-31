@@ -21,11 +21,6 @@
  */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-static UNUSED const char *pintv_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/pintv.C,v 1.11 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif /* NORCSID */
-
 ATK_IMPL("pintv.H")
 
 
@@ -70,9 +65,9 @@ ATK_IMPL("pintv.H")
 #define PREFS(pv) ((class prefs *)(pv)->GetDataObject())
 #define RFOLDEDEQ(x,y) ((x)==(y))
 
-static char texteditatomstr[]="TextEdit";
+static const char texteditatomstr[]="TextEdit";
 
-static struct sbutton_list blist[]={
+static const struct sbutton_list blist[]={
     {"Edit As Text", 0, texteditatomstr, FALSE},
     {NULL, 0, NULL, FALSE}
 };
@@ -80,7 +75,7 @@ static struct sbutton_list blist[]={
 
 ATKdefineRegistry(pintv, lpair, pintv::InitializeClass);
 
-static class labelview *MakeLabel(char  *str);
+static class labelview *MakeLabel(const char  *str);
 static void DestroyLabel(class labelview  *lv);
 static class textview *MakeText();
 static void DestroyText(class textview  *tv, class view  *tva);
@@ -88,16 +83,16 @@ static void DestroyButtons(class sbuttonv  *sbv);
 static void DestroyLpair(class lpair  *lp);
 static void ClearLpair(class lpair  *lp);
 static class environment *SelectLine(class textview  *tv, class environment  *oldsel, boolean  donew);
-static class environment *AddView(class text  *self, long  pos, char  *viewtype, class dataobject  *dataobject);
-static class viewref *InsertObject(class text  *self, long  pos, char  *name, char  *viewname);
+static class environment *AddView(class text  *self, long  pos, const char  *viewtype, class dataobject  *dataobject);
+static class viewref *InsertObject(class text  *self, long  pos, const char  *name, const char  *viewname);
 static class environment *AddStyle(class text  *self, long  pos , long  len, class style  *style);
 static struct dstyle *GetDStyle(class text  *pt);
 static void PushStyle(class text  *pt, long  pos , long  len, class style  *style);
-static void PushView(class text  *pt, long  pos, char  *view, class dataobject  *data);
-static void PushObject(class text  *pt, long  pos, char  *objname, char  *dummy);
+static void PushView(class text  *pt, long  pos, const char  *view, class dataobject  *data);
+static void PushObject(class text  *pt, long  pos, const char  *objname, const char  *dummy);
 static void PushMark(class text  *pt, struct prefdesc  *pd, long  pos , long  len);
 static void DoStyles(class pintv  *self);
-static long AddVal(class text  *ct, long pos, char  *label, char  *val, boolean  bolditalic);
+static long AddVal(class text  *ct, long pos, const char  *label, const char  *val, boolean  bolditalic);
 static boolean AddViews(char  *name, struct addrock  *rock);
 static boolean AddCommentLines(char  *line, struct addrock  *rock);
 static boolean getcondition(class pintv  *self, char  **current);
@@ -128,7 +123,7 @@ static boolean CheckSanity(struct prefdesc  *pd, class pintv  *self);
 static boolean AddCategories(struct prefgroup  *pg, class pintv  *self);
 
 
-static class labelview *MakeLabel(char  *str)
+static class labelview *MakeLabel(const char  *str)
 {
     class label *l=new label;
     class labelview *lv=new labelview;
@@ -194,8 +189,8 @@ static void DestroyButtons(class sbuttonv  *sbv)
     (sbv)->Destroy();
 }
 
-static char currlab[]="---Current---";
-static char *currlabp=NULL;
+static const char currlab[]="---Current---";
+static const char *currlabp=NULL;
 
 
 
@@ -398,7 +393,7 @@ struct addrock {
     struct prefdesc *cpd;
 };
 
-static class environment *AddView(class text  *self, long  pos, char  *viewtype, class dataobject  *dataobject)
+static class environment *AddView(class text  *self, long  pos, const char  *viewtype, class dataobject  *dataobject)
 {
     class environment *newenv=(self)->AlwaysWrapViewChar( pos, viewtype, dataobject);
   /* yes, this looks weird, but the viewref takes ownership of the object.... so all this does is decrement the reference count the code which adds prefvals to the queue grabs an extra reference so that this destroy won't remove the prefs ownership of the prefval */
@@ -406,7 +401,7 @@ static class environment *AddView(class text  *self, long  pos, char  *viewtype,
     return newenv;
 }
 
-static class viewref *InsertObject(class text  *self, long  pos, char  *name, char  *viewname)
+static class viewref *InsertObject(class text  *self, long  pos, const char  *name, const char  *viewname)
 {
     class dataobject *newobject;
     class environment *env;
@@ -437,7 +432,7 @@ static struct dstyle {
     long pos, len;
     class dataobject *data;
     class style *style;
-    char *view;
+    const char *view;
     struct prefdesc *pd;
     class text *pt;
     struct dstyle *next;
@@ -471,7 +466,7 @@ static void PushStyle(class text  *pt, long  pos , long  len, class style  *styl
 }
 
 static char viewrefchar='\377';
-static void PushView(class text  *pt, long  pos, char  *view, class dataobject  *data)
+static void PushView(class text  *pt, long  pos, const char  *view, class dataobject  *data)
 {
     struct dstyle *n=GetDStyle(pt);
     if(n==NULL) return;
@@ -483,7 +478,7 @@ static void PushView(class text  *pt, long  pos, char  *view, class dataobject  
     n->pd=NULL;
 }
 
-static void PushObject(class text  *pt, long  pos, char  *objname, char  *dummy)
+static void PushObject(class text  *pt, long  pos, const char  *objname, const char  *dummy)
 {
     struct dstyle *n=GetDStyle(pt);
     if(n==NULL) return;
@@ -537,7 +532,7 @@ static void DoStyles(class pintv  *self)
     firststyle=NULL;
 }
 
-static long AddVal(class text  *ct, long pos, char  *label, char  *val, boolean  bolditalic)
+static long AddVal(class text  *ct, long pos, const char  *label, const char  *val, boolean  bolditalic)
 {
     class stylesheet *ss=(ct)->GetStyleSheet();
     class style *bold=(ss)->Find( bolditalic?"bold":"italic");
@@ -582,11 +577,11 @@ static boolean AddCommentLines(char  *line, struct addrock  *rock)
     return TRUE;
 }
 
-static char deleteatomstr[]="Delete";
-static char changeatomstr[]="ChangeCondition";
-static char duplicateatomstr[]="Duplicate";
-static char changeappatomstr[]="ChangeApp";
-static char resetatomstr[]="Reset";
+static const char deleteatomstr[]="Delete";
+static const char changeatomstr[]="ChangeCondition";
+static const char duplicateatomstr[]="Duplicate";
+static const char changeappatomstr[]="ChangeApp";
+static const char resetatomstr[]="Reset";
 
 
 static struct sbutton_list blistt[]={
@@ -668,7 +663,7 @@ enum {
     Cancel
 } Choices;
 
-static char *choices[]={
+static const char * const choices[]={
     "Always",
     "CPU Type",
     "Machine Name",
@@ -682,7 +677,8 @@ static boolean getcondition(class pintv  *self, char  **current)
 {
     long result;
     int num=0;
-    char *prompt, *newcond, *def=NULL;
+    const char *prompt;
+    char *newcond, *def=NULL;
     char buf[1024];
     static char defbuf[1024];
 
@@ -778,8 +774,8 @@ static boolean getcondition(class pintv  *self, char  **current)
 }
 
 struct uniqrock {
-    char *prefname;
-    char *appname;
+    const char *prefname;
+    const char *appname;
     char *cond;
 };
 
@@ -999,16 +995,16 @@ static boolean AddInstances(struct prefdesc  *pd, struct addrock  *rock)
     class pintv *self=rock->self;
 
     if(INCLUDE(self, pd, self->autolist)) {
-	static char editors[]="Current Setting (";
-	static char comments[]="Comments";
-	static char def[]=" (";
+	static const char editors[]="Current Setting (";
+	static const char comments[]="Comments";
+	static const char def[]=" (";
 	class text *pt=TEXT(self->cpref);
 	class style *bold=rock->bold;
 	struct sbutton_prefs *prefs=rock->prefs;
 	class sbutton *sb;
 	long pos,len;
 	class style *prefstyle=rock->prefstyle;
-	char *val;
+	const char *val;
 
 	if(sethelp) {
 	    sethelp=FALSE;
@@ -1057,7 +1053,7 @@ static boolean AddInstances(struct prefdesc  *pd, struct addrock  *rock)
 	(sb)->AddRecipient( atom::Intern(changeatomstr), self, (observable_fptr)changecondition, (long)pd);
 	PushView(pt, pos, "sbuttonv", (class dataobject *)sb);
 	pos++;
-	pos=AddVal(pt, pos, "Conditional", pd->cond?pd->cond:(char *)"Always", TRUE);
+	pos=AddVal(pt, pos, "Conditional", pd->cond?pd->cond:"Always", TRUE);
 
 
 	if(pd->val) {
@@ -1072,7 +1068,7 @@ static boolean AddInstances(struct prefdesc  *pd, struct addrock  *rock)
 	    PushStyle(pt, pos, sizeof(editors)-2, bold);
 	    pos+=sizeof(editors) /* - 1  REMOVE -1 WHEN doing views */;
 	    (pt)->AlwaysInsertCharacters( pos, " to ", 4);
-	    val=pd->val?pd->val:(char *)"<None>";
+	    val=pd->val?pd->val:"<None>";
 	    len=strlen(val);
 	    (pt)->AlwaysInsertCharacters( pos+4, val, len);
 
@@ -1108,7 +1104,7 @@ static boolean AddInstances(struct prefdesc  *pd, struct addrock  *rock)
 
 static boolean AddPreferences(struct prefdesc  *pd, class pintv  *self)
 {
-    char *name=pd->name;
+    const char *name=pd->name;
     class text *pt=TEXT(self->preferences);
     (pt)->AlwaysInsertCharacters( (pt)->GetLength(), name, strlen(name));
     (pt)->AlwaysInsertCharacters( (pt)->GetLength(), "\n", 1);

@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/pfio/RCS/pfioutl.c,v 1.14 1993/10/10 17:54:35 gk5g Stab74 $";
-#endif
-
 #include <andrewos.h>
 #include <pfiou.h>
 

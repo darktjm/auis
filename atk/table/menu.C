@@ -25,21 +25,10 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/menu.C,v 1.5 1994/08/12 18:54:11 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* menu.c - menu operations for table */
 
 
-
-
+#include <andrewos.h>
 #include <im.H>
 #include <view.H>
 #include <dataobject.H>
@@ -51,10 +40,8 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 #include <shared.h>
 
-#ifndef NORCSID
-#endif
 void m_rename(register class spread  * V, char  ch);
-static char *newext(char  *filename			/* "mumble.y" or something */, char  *extension		/* ".x" */);
+static const char *newext(const char  *filename			/* "mumble.y" or something */, const char  *extension		/* ".x" */);
 void m_writeTroff(register class spread  * V, char  ch);
 void m_write(register class spread  * V, char  ch);
 void m_read(register class spread  * V, char  ch);
@@ -67,7 +54,7 @@ void m_drawedges(register class spread  * V, char  ch);
 void m_eraseedges(register class spread  * V, char  ch);
 void m_format (register class spread  * V, char     ch);
 void m_precision (register class spread  * V, char     ch);
-static int objecttest(register class spread  *V, char  *name, char  *desiredname);
+static int objecttest(register class spread  *V, const char  *name, const char  *desiredname);
 void m_imbed (register class spread  * V, char     ch);
 void m_resetheights (register class spread  * V, char     ch);
 void m_lock (register class spread  * V, char     ch);
@@ -92,13 +79,13 @@ void m_rename(register class spread  * V, char  ch)
     }
 }
 
-static char *newext(char  *filename			/* "mumble.y" or something */, char  *extension		/* ".x" */)	/* returns "mumble.x" */
+static const char *newext(const char  *filename			/* "mumble.y" or something */, const char  *extension		/* ".x" */)	/* returns "mumble.x" */
 {
     char *cp, *suffixp;
     static char newname[257];
-    char *safefn;
+    const char *safefn;
 
-    safefn = (filename == NULL ? (char *)"" : filename);
+    safefn = (filename == NULL ? "" : filename);
     strncpy(newname, safefn, (sizeof newname) - 1);
     newname[(sizeof newname) - 1] = '\0';
     for (cp = newname, suffixp = NULL; *cp; cp++)
@@ -377,7 +364,7 @@ void m_precision (register class spread  * V, char     ch)
 	(MyTable(V))->SetPrecision ( (param >= 0 ? param : 0), &(V->selection));
 }
 
-static int objecttest(register class spread  *V, char  *name, char  *desiredname)
+static int objecttest(register class spread  *V, const char  *name, const char  *desiredname)
 {
     if(ATK::LoadClass(name) == NULL){
         char foo[640];

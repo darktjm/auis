@@ -46,16 +46,16 @@ class fnotev: public  view {
     view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
     void LinkTree(class view *parent);
     void GetOrigin(long width, long height, long *originX, long *originY);
-    void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
+    void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
     void ReceiveInputFocus();
     boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
     boolean RecSrchResume(struct SearchPattern *pat);
-    void *GetPSPrintInterface(char *printtype);
+    void *GetPSPrintInterface(const char *printtype);
 
     virtual void pushchild();
     virtual void popchild();
 
-    inline void SetDisplayStr(char *S) { ((this)->displaystr = (S)); }
+    inline void SetDisplayStr(const char *S) { ((this)->displaystr = (S)); }
     inline class textview * GetParentTextview() { return ((this)->parentview); }
     inline class text * GetParentText() { return ((this)->parenttext); }
 
@@ -69,7 +69,7 @@ class fnotev: public  view {
     int fnotetype;
     class text *parenttext;
     class textview *parentview;
-    char *displaystr;
+    const char *displaystr;
     struct  fontdesc_charInfo *ci;
 };
 

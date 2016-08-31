@@ -25,23 +25,12 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/lookz/RCS/lookz.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 /* lookz.c		
 
 	Code for the lookz data object
 */
 
-
+#include <andrewos.h>
 ATK_IMPL("lookz.H")
 #include <dataobject.H>	/* for dataobject_NOREADERROR */
 #include <text.H>
@@ -51,9 +40,6 @@ ATK_IMPL("lookz.H")
 
 	
 ATKdefineRegistry(lookz, dataobject, NULL);
-#ifndef NORCSID
-#endif
-
 
 lookz::lookz()
 		{

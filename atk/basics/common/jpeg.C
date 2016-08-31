@@ -25,12 +25,6 @@
 //  $
 */
 
-#ifdef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/jpeg.C,v 3.9 1996/10/11 21:41:59 robr Exp $";
-#endif
-
-
 /*
  * Portions Copyright 1989, 1990, 1991, 1992 by John Bradley and
  *                                The University of Pennsylvania
@@ -65,7 +59,8 @@ static int pWIDE, pHIGH;
 static byte r[256],g[256],b[256];
 static byte *pic = NULL;
 
-static int colorType, numColors, quality;
+static int colorType, quality;
+static unsigned int numColors;
 static byte *image8, *image24;
 
 static byte *CurImagePtr;
@@ -97,11 +92,10 @@ static int writeJFIF(FILE  *fp);
 
 
 long
-jpeg::WriteNative(FILE  *file, char  *filename)
+jpeg::WriteNative(FILE  *file, const char  *filename)
 {
     FILE *fp;
-    int i, nc, rv, w, h, size;
-    register byte *ip, *ep, *inpix;
+    int nc, rv;
 
   /* get the image into a format that the JPEG software can grok on.  Also, open the output file, so we don't waste time doing this format conversion if we won't be able to write it out */
 
@@ -187,7 +181,6 @@ d_ui_method_selection(decompress_info_ptr  cinfo)
 {
   /* select output colorspace & quantization parameters */
   if (cinfo->jpeg_color_space == CS_GRAYSCALE) {
-      int i;
       cinfo->out_color_space = CS_GRAYSCALE;
       cinfo->quantize_colors = FALSE;
   }
@@ -306,10 +299,9 @@ static void JPEG_Error (const char  *msgtext)
 
 /*******************************************/
 int
-jpeg::Load( char  *fname, FILE  *f )
+jpeg::Load( const char  *fname, FILE  *f )
 /*******************************************/
 {
-  int rtval;
   /* These three structs contain JPEG parameters and working data.
    * They must survive for the duration of parameter setup and one
    * call to jpeg_decompress; typically, making them local data in the
@@ -503,7 +495,7 @@ static int writeJFIF(FILE  *fp)
   cinfo.emethods = &e_methods;
 
   /* Set up longjmp for error recovery out of JPEG_Error */
-  if(retval = setjmp(jmpState))
+  if((retval = setjmp(jmpState)))
     return retval;		/* no further cleanup needed */
 
   e_methods.error_exit = JPEG_Error; /* provide my own error/message rtns */
@@ -545,13 +537,13 @@ jpeg::Write( FILE  *file, long  writeID, int  level )
 }
 
 int 
-jpeg::Ident( char  *fullname )
+jpeg::Ident( const char  *fullname )
 {
     FILE *f;
     int status = 0;
     boolean ret = FALSE;
 
-    if(f = fopen(fullname, "r")) {
+    if((f = fopen(fullname, "r"))) {
 	unsigned char c1, c2, c3, c4;
 	char jfif[5];
 

@@ -25,17 +25,6 @@
  *  $
 */
 
-#include  <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chart.C,v 1.8 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-#ifndef lint
-static UNUSED const char rcsidchart[] = "$Header $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Chart Data-object
@@ -70,6 +59,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include  <andrewos.h>
 ATK_IMPL("chart.H")
 #include  <rect.h>
 #include  <dataobject.H>
@@ -110,17 +100,13 @@ boolean chart_debug = 0;
 
 
 ATKdefineRegistry(chart, apt, NULL);
-#ifndef NORCSID
-#endif
-#ifndef lint
-#endif
 static long SetChartAttribute( register class chart		    *self, register long			     attribute , register long			     value );
 static long SetItemAttribute( register class chart       *self, register struct chart_item  *item, register long		       attribute , register long		       value );
-static char * Extract_Field_Value( register class chart		      *self, register char			     **fields, register char			      *name );
+static char * Extract_Field_Value( register class chart		      *self, register const char			     **fields, register const char			      *name );
 static void Reader( register class chart	    	      *self );
-static void Parse_Name_Field( register class chart		      *self, register char			      *string );
-static void Parse_Type_Field( register class chart		      *self, register char			      *string );
-static void Parse_Item_Field( register class chart		      *self, register char			      *string );
+static void Parse_Name_Field( register class chart		      *self, register const char			      *string );
+static void Parse_Type_Field( register class chart		      *self, register const char			      *string );
+static void Parse_Item_Field( register class chart		      *self, register const char			      *string );
 static char * ValueString( register class chart		      *self, register struct chart_item	      *item );
 static void Writer( register class chart		      *self );
 static void SetItemValue( register class chart		      *self, register struct chart_item	      *item, register long			       value );
@@ -196,7 +182,7 @@ chart::~chart( )
   OUT(chart_FinalizeObject);
   }
 
-char *
+const char *
 chart::ViewName( )
     {
   IN(chart_ViewName);
@@ -334,9 +320,10 @@ chart::SetDebug( boolean		        state )
   }
 
 static char *
-Extract_Field_Value( register class chart		      *self, register char			     **fields, register char			      *name )
+Extract_Field_Value( register class chart		      *self, register const char			     **fields, register const char			      *name )
         {
-  register char			     *field = NULL, *s, *t;
+  register char			     *field = NULL, *t;
+  const char *s;
   register long			      length;
   char				      mask[257];
 
@@ -404,7 +391,7 @@ chart::Read( register FILE			      *file, register long			       id )
   }
 
 static
-void Parse_Name_Field( register class chart		      *self, register char			      *string )
+void Parse_Name_Field( register class chart		      *self, register const char			      *string )
       {
   IN(Parse_Name_Field);
   DEBUGst(Name,string);
@@ -413,19 +400,19 @@ void Parse_Name_Field( register class chart		      *self, register char			      
   }
 
 static
-void Parse_Type_Field( register class chart		      *self, register char			      *string )
+void Parse_Type_Field( register class chart		      *self, register const char			      *string )
       {
   IN(Parse_Type_Field);
   DEBUGst(Type,string);
-  ChartType = string;
+  ChartType = strdup(string); /* tjm - FIXME: find out if necessary */
   OUT(Parse_Type_Field);
   }
 
 static
-void Parse_Item_Field( register class chart		      *self, register char			      *string )
+void Parse_Item_Field( register class chart		      *self, register const char			      *string )
       {
-  register char			    **fields,
-				     *extract;
+  register char			    **fields;
+  char				     *extract;
   register struct chart_item	     *item;
   long				      value;
 
@@ -433,17 +420,17 @@ void Parse_Item_Field( register class chart		      *self, register char			      
   DEBUGst(Item,string);
   if ( fields = (self)->ParseFieldContent(  string ) )
     {
-    extract = Extract_Field_Value( self, fields, "Name" );
+    extract = Extract_Field_Value( self, (const char **)fields, "Name" );
     if ( item = (self)->CreateItem(  extract, 0 ) )
       {
       if ( extract )  free( extract );
-      if ( extract = Extract_Field_Value( self, fields, "Value" ) )
+      if ( extract = Extract_Field_Value( self, (const char **)fields, "Value" ) )
 	{
 	sscanf( extract, "%ld", &value );
 	SetItemValue( self, item, value );
         free( extract );
 	}
-      if ( extract = Extract_Field_Value( self, fields, "Position" ) )
+      if ( extract = Extract_Field_Value( self, (const char **)fields, "Position" ) )
 	{
 	sscanf( extract, "%ld", &value );
 	ItemPosition(item) = value;
@@ -510,10 +497,10 @@ chart::Write( register FILE			      *file, register long			       writeID, regis
   return  this->dataobject::id;
   }
 
-struct chart_monikers *
+const struct chart_monikers *
 chart::Monikers( )
     {
-static struct chart_monikers	monikers[] = /*===MUST BE DYNAMIC*/
+static const struct chart_monikers	monikers[] = /*===MUST BE DYNAMIC*/
 {
 {"Histogram","charthst"},
 {"Pie","chartpie"},
@@ -531,11 +518,11 @@ static struct chart_monikers	monikers[] = /*===MUST BE DYNAMIC*/
 return  monikers;
   }
 
-char *
-chart::ModuleName( register char			      *moniker )
+const char *
+chart::ModuleName( register const char			      *moniker )
       {
-  register char			     *module_name = NULL;
-  register struct chart_monikers     *monikers;
+  register const char			     *module_name = NULL;
+  register const struct chart_monikers     *monikers;
 
   IN(chart_ModuleName);
   DEBUGst(Moniker,moniker);
@@ -562,7 +549,7 @@ chart::ModuleName( register char			      *moniker )
   }
 
 struct chart_item *
-chart::CreateItem( register char			      *name, register long			       datum )
+chart::CreateItem( register const char			      *name, register long			       datum )
         {
   class chart *self=this;
   register struct chart_item	     *item, *next = ItemAnchor;
@@ -586,7 +573,7 @@ chart::CreateItem( register char			      *name, register long			       datum )
   }
 
 struct chart_item *
-chart::ItemOfName( register char			      *name )
+chart::ItemOfName( register const char			      *name )
       {
   class chart *self=this;
   register struct chart_item	     *item = NULL, *next = ItemAnchor;

@@ -661,7 +661,7 @@ tryagain:
 }
 
 int
-g3::Load( char  *fullname, FILE  *fp )
+g3::Load( const char  *fullname, FILE  *fp )
             {
 
 	FILE	*fd;
@@ -745,7 +745,7 @@ g3::Load( char  *fullname, FILE  *fp )
  * it was always getting false positives so now it loads the whole image in
  * to see if it's reasonable.
  */
-int	g3Ident( char	 *fullname )
+int	g3::Ident( const char	 *fullname )
 	{ class g3 *g3 = new g3;
 
 	g3_verb = 0;
@@ -772,7 +772,7 @@ g3::Write( FILE  *file, long  writeID, int  level )
 }
 
 long
-g3::WriteNative( FILE  *file, char  *filename )
+g3::WriteNative( FILE  *file, const char  *filename )
             {
     return(0);
 }

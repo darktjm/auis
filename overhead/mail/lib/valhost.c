@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/valhost.c,v 2.16 1993/06/22 22:05:41 Zarf Stab74 $";
-#endif
-
 #include <system.h>
 #include <andyenv.h>
 #include <stdio.h>
@@ -214,7 +208,7 @@ char *OutN; int sizeOutN; char *OutFwd; int sizeOutFwd;
 
 static struct hostent host;
 static char *host_aliases[30];
-static char HOSTDB[] = "/etc/hosts";
+static const char HOSTDB[] = "/etc/hosts";
 static FILE *hostf = NULL;
 static char line[512];
 static char hostaddr[10];

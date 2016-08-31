@@ -25,22 +25,12 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/oscroll.C,v 3.7 1995/07/17 20:27:28 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* oscrollbar code for be2. */
 
 #define DEBUG(X)
 
 
-
+#include <andrewos.h>
 ATK_IMPL("oscroll.H")
 #include <oscroll.H>
 
@@ -76,7 +66,7 @@ ATK_IMPL("oscroll.H")
 #define PIXELSPERINCH 75
 
 /* The descriptions of the different types of scrollbars */
-static int Type[scroll_SIDES] = {scroll_VERT, scroll_VERT, scroll_HORIZ, scroll_HORIZ},
+static const int Type[scroll_SIDES] = {scroll_VERT, scroll_VERT, scroll_HORIZ, scroll_HORIZ},
     LeftChange[scroll_SIDES] = {1, 0, 0, 0},
     TopChange[scroll_SIDES] = {0, 0, 1, 0},
     WidthChange[scroll_SIDES] = {-1, -1, 0, 0},
@@ -85,7 +75,7 @@ static int Type[scroll_SIDES] = {scroll_VERT, scroll_VERT, scroll_HORIZ, scroll_
     NoWidthChange[scroll_SIDES] = {-TD_GAP, -TD_GAP, 0, 0},
     NoHeightChange[scroll_SIDES] = {0, 0, -TD_GAP, -TD_GAP};    
 
-static char *InterfaceName[scroll_TYPES] = {"scroll,vertical", "scroll,horizontal"};
+static const char * const InterfaceName[scroll_TYPES] = {"scroll,vertical", "scroll,horizontal"};
 
 
 /* Icon infomation */
@@ -157,8 +147,6 @@ static int current_end_state = 0;
 
 
 ATKdefineRegistry(oscroll, scroll, oscroll::InitializeClass);
-#ifndef NORCSID
-#endif
 static void get_interface(class oscroll  *self, int  type);
 static void getinfo(class oscroll  *self, int  type, struct range  *total , struct range  *seen , struct range  *dot);
 static void set_frame(class oscroll  *self, int  side, int  posn, long  coord);

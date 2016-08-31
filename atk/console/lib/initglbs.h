@@ -46,13 +46,13 @@ long UserLib = -1;
 char ConFile[1024] = "";
 int MYDEBUGGING = FALSE;
 struct fontdesc *FontsAvail[MAXNUMFONTS];
-char *AvailFontNames[MAXNUMFONTS] = { "" };
+const char *AvailFontNames[MAXNUMFONTS] = { "" };
 int AvailFontPts[MAXNUMFONTS];
 int FontCount = 0;
 int ExternalsInUse = 0;
 FILE *VenusIn, *ErrorsIn, *ConsoleIn;
 char ErrTxt[256] = "";
-char *Nullity = "";
+char Nullity[] = "";
 char *StatusServer = NULL; /* for vopcon server machine */
 int ScaleFactor = 100;
 int VMPollCt = 1,

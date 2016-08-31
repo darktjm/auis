@@ -25,29 +25,18 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/physical.C,v 3.2 1993/07/29 20:15:08 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* This is a utility package only to be used by im and graphic (and
  perhaps other machine dependent modules that I do not yet know about,
  such as the cursor system. This package provides a way to convert
  between the coordinate spaces of a graphic and wm "hardware" */
 
+#include <andrewos.h>
 
 #include <graphic.H>
 
 
 #define SINGLEWINDOW 1
 
-#ifndef NORCSID
-#endif
 long physical_LogicalPtToGlobalX(class graphic  * CoordinateSystem,struct point  * LogicalPoint );
 long physical_LogicalPtToGlobalY(class graphic  * CoordinateSystem,struct point  * LogicalPoint );
 void physical_LogicalPtToGlobalPt(class graphic  * CoordinateSystem,struct point  * tempPoint );

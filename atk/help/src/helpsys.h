@@ -85,7 +85,7 @@
 static long answer;
 
 /* default choice for the dialog box */
-static char *defchoices[] =
+static const char * const defchoices[] =
 	{"Continue", (char *)NULL};
 
 #define ERRORBOX(vw, msg) (message::MultipleChoiceQuestion(vw, 0, msg, 0,\

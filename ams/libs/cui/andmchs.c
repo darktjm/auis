@@ -25,14 +25,8 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/cui/RCS/andmchs.c,v 2.33 1996/09/03 18:56:22 robr Exp $";
-#endif
-
 /* Machine dependent module --  Andrew Version                     */
+#include <andrewos.h>
 #include <util.h>
 #include <cui.h>
 #include <stdio.h>

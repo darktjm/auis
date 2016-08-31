@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h> /* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/atomlist.C,v 3.5 1994/12/13 20:35:03 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("atomlist.H")
 #include <atomlist.H>
 #include <atom.H>
@@ -46,9 +36,6 @@ ATK_IMPL("atomlist.H")
 
 
 ATKdefineRegistry(atomlist, ATK, NULL);
-#ifndef NORCSID
-#endif
-
 
 atomlist::atomlist()
 {

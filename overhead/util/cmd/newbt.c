@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/cmd/RCS/newbt.c,v 2.14 1993/07/02 14:31:20 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	newbt.c
 	Create a new B-tree of specified desired-node size.

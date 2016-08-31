@@ -64,12 +64,12 @@ class pushbuttonview: public  view {
       void LinkTree(class view *parent);
       void PostMenus(class menulist *ml);
       void WantUpdate(class view *requestor);
-      void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
+      void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
       boolean RecSearch(struct SearchPattern *pat, boolean toplevel);
       boolean RecSrchResume(struct SearchPattern *pat);
       boolean RecSrchReplace(class dataobject *text, long pos, long len);
       void RecSrchExpose(const struct rectangle &logical, struct rectangle &hit);
-      void *GetPSPrintInterface(char *printtype);
+      void *GetPSPrintInterface(const char *printtype);
       void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);
 
 
@@ -78,7 +78,7 @@ class pushbuttonview: public  view {
       short lit;
       class cursor *cursor;
       double foreground_color[3], background_color[3];
-      char *cached_label;
+      const char *cached_label;
       int cached_style;
       class fontdesc *cached_fontdesc;
       class menulist *ml;

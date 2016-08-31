@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/btr.c,v 2.20 1993/08/30 19:07:08 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	btr.c
 	Library routines for reading B-trees.

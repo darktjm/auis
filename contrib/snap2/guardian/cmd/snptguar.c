@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="";
-#endif
-
 #ifdef _IBMR2
 #ifndef _BSD
 #define _BSD 43
@@ -86,12 +81,6 @@ int SNAP_istcp()
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/guardian/cmd/RCS/snptguar.c,v 1.20 1993/09/22 19:48:08 gk5g Stab74 $";
-#endif
-
 
 int NotifyHandler ()
 {

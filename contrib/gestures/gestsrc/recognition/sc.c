@@ -43,13 +43,6 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/recognition/RCS/sc.c,v 1.6 1993/06/22 19:55:33 gk5g Stab74 $";
-#endif
-
-
-
 #include "bitvector.h"
 #include "matrix.h"
 #include "util.h"

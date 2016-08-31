@@ -25,13 +25,6 @@
  *  $
 */
 
-#include  <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chartp.C,v 1.4 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Chart View-object Palette
@@ -64,6 +57,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include  <andrewos.h>
 #include  <view.H>
 #include  <im.H>
 #include  <frame.H>

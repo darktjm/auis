@@ -1,5 +1,3 @@
-/* @(#)yp.x	1.2 87/11/12 3.9 RPCSRC */
-
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
  * unrestricted use provided that this legend is included on all tape

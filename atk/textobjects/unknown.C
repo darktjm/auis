@@ -33,9 +33,9 @@ static char keywordbuf[32];
 
 ATKdefineRegistry(unknown, text, NULL);
 
-char *unknown::GetRealClass()
+const char *unknown::GetRealClass()
 {
-    return this->realclass?this->realclass:(char *)"unknown";
+    return this->realclass?this->realclass:"unknown";
 }
 
 void unknown::SetRealClass(char  *rclass)

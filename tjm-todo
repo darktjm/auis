@@ -14,10 +14,31 @@
   - fix example docs to document C++-style code
   - find out purpose of every file installed in auis, and document
 - general cleanup:
+  - get rid of csh usage for scripts (sh is better)
   - remove all warnings
   - remove externs in c files
+  - remove all statics in header files, if possible (gads, help.h is awful)
   - remove type casts if possible
   - constify pointers if possible
+    There's almost never a good reason to cast pointers (well, in C++,
+    you have to cast void * to the destination type, but that's it).
+      gcc has no "flag all explicit casts" warning flag.
+      -Wint-conversion (on by default)
+      -Wbad-function-cast
+      -Wcast-qual
+      -Wcast-align
+      -Wconversion
+      -Wuseless-cast
+      -Wsign-conversion
+      -Wfloat-conversion
+      -Wint-to-pointer-cast (on by default)
+      -Wpointer-to-int-cast (on by default)
+    It's usually better to make structures const by default and cast them to
+    non-const when known to be malloc'd than the other way around
+      e.g. ErrorGuts() -> only cast if explicit free flag given
+    The only exception is when one statically allocated structure uses
+    constants, but all else is malloc'd.
+      e.g. filetype.C: mapEntry.fileExtension
   - remove any unsupportable code (i.e., old UNIX, DOS, OS/2)
   - remove any functions which duplicate standard functions (e.g. strdup)
 - find out and possibly remove additional CMU/MIT-specific crap

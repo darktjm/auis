@@ -25,13 +25,8 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ossupport/telmat/RCS/ossup.c,v 1.1 1993/11/16 20:16:56 gk5g Stab74 $";
-#endif
-
-#include <stdio.h>
 #include <andrewos.h>
+#include <stdio.h>
 
 #if defined(RENAME_IS_BROKEN)
 /* This is due to a bug in rename() that limits it to 13 character filenames!

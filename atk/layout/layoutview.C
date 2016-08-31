@@ -25,23 +25,12 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/layout/RCS/layoutview.C,v 1.7 1996/10/17 14:59:53 robr Exp $";
-#endif
-
-/* $ACIS$ */
-
- 
-
 #define layoutview_MINIMUMSIZE 100
 #define CHILD_MENULIST_KEY 999
 
 #define viewname(v) ((v) == NULL ? "<NO VIEW>" : (((v)->GetName())->First())->Name())
 
-
+#include <andrewos.h>
 ATK_IMPL("layoutview.H")
 #include <rect.h>
 #include <assert.h>
@@ -193,7 +182,7 @@ static struct bind_Description layoutview_bindings[] = {
 
 ATKdefineRegistry(layoutview, view, layoutview::InitializeClass);
 static void  InitializeGraphic(class layoutview  *self);
-static char * GetClassName(class layoutview  *self, class dataobject  *object);
+static const char * GetClassName(class layoutview  *self, class dataobject  *object);
 static void InitComponent(class layoutview  *self);
 static void DrawRubberBox(class layoutview  *self);
 static void Update(class layoutview  *self, enum view_UpdateType  how		/* kind of update */, struct rectangle  *updateRect		/* rectangle affected; or NULL for update */, boolean  geometryChanged		/* geometry changed since last update */);
@@ -201,7 +190,7 @@ static void SetAuthoringMask(class layoutview  *self);
 static void SetRubberBox(class layoutview  *self, long  x			/* current position relative to self->dragx */, long  y			/* current position relative to self->dragy */);
 static struct component *	/* returns component containing x, y or NULL */ FindContainingComponent(class layoutview  *self, long  x				/* point to be found */, long  y, long  thresh			/* tolerance outside component allowed */);
 static void DestroySubviews(class layoutview  *self);
-static void PrintComponents(class layoutview  *self, FILE  *f, char  *processor			/* processor */, char  *finalFormat			/* final format */, struct component  *c			/* current component to be printed */, int  saveno				/* number of state-restoring macro */);
+static void PrintComponents(class layoutview  *self, FILE  *f, const char  *processor			/* processor */, const char  *finalFormat			/* final format */, struct component  *c			/* current component to be printed */, int  saveno				/* number of state-restoring macro */);
 
 
 boolean					/* always returns TRUE */
@@ -253,10 +242,10 @@ InitializeGraphic(class layoutview  *self)
 
 /* get printable class name of an object */
 
-static char *
+static const char *
 GetClassName(class layoutview  *self, class dataobject  *object)
 {
-    char *result;
+    const char *result;
 
     if (object == NULL)
 	result = "<NO OBJECT>";
@@ -275,7 +264,7 @@ class view *		    /* returns view, or NULL if error */
 layoutview::FindSubview(struct component  *c		    /* component for which view is needed */)
 {
     struct layoutviewlist *vl;
-    char *subviewname;			/* name for new view */
+    const char *subviewname;			/* name for new view */
 
     if (c == NULL)
 	return NULL;
@@ -350,7 +339,7 @@ layoutview::RemoveSubview(class view  *child)
 /* replace contents of a component */
 
 void
-layoutview::ReplaceComponent(struct component  *c, char  *dataname)
+layoutview::ReplaceComponent(struct component  *c, const char  *dataname)
 {
     class view *child;
     char foo[81];
@@ -1189,7 +1178,7 @@ layoutview::Paste()
 {
     FILE *pasteFile;
     long objectID;
-    char *objectName;
+    const char *objectName;
 
     if (layout_debug)
 	printf("layoutview_Paste()\n");
@@ -1210,7 +1199,7 @@ layoutview::Paste()
 /* insert dataobject by name */
 
 void
-layoutview::SetChildByName(char  *dataname				/* dataobject name */)
+layoutview::SetChildByName(const char  *dataname				/* dataobject name */)
 {
     if(Selection()==NULL) return;
     
@@ -1334,7 +1323,7 @@ layoutview::SetGranularity(int  granularity)
 /* print components back to front */
 
 static void
-PrintComponents(class layoutview  *self, FILE  *f, char  *processor			/* processor */, char  *finalFormat			/* final format */, struct component  *c			/* current component to be printed */, int  saveno				/* number of state-restoring macro */)
+PrintComponents(class layoutview  *self, FILE  *f, const char  *processor			/* processor */, const char  *finalFormat			/* final format */, struct component  *c			/* current component to be printed */, int  saveno				/* number of state-restoring macro */)
 {
     class view *child;
     struct rectangle childRect;
@@ -1370,7 +1359,7 @@ PrintComponents(class layoutview  *self, FILE  *f, char  *processor			/* process
 /* print as part of larger document */
 
 void
-layoutview::Print(FILE  *f					/* output file */, char  *processor				/* processor */, char  *finalFormat				/* final format */, boolean	 toplevel				/* am I the top level view? */)
+layoutview::Print(FILE  *f					/* output file */, const char  *processor				/* processor */, const char  *finalFormat				/* final format */, boolean	 toplevel				/* am I the top level view? */)
 {
     long height;
     struct component *c;

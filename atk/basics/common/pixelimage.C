@@ -25,17 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/pixelimage.C,v 3.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 /* pixelimg.c 
 
 	Object to store pixel images.
@@ -44,6 +33,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 
+#include <andrewos.h>
 ATK_IMPL("pixelimage.H")
 #include <pixelimage.H>
 
@@ -67,8 +57,6 @@ static int bitmask[8] = {0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01};
 
 
 ATKdefineRegistry(pixelimage, observable, NULL);
-#ifndef NORCSID
-#endif
 static boolean ClipChange(class pixelimage  *self, struct rectangle  *sub);
 static long GetRow(class pixelimage  *self, long  x , long  y , long  length, register unsigned char *dest);
 static long SetRow(class pixelimage  *self, long  x , long  y , long  length, register unsigned char *src);

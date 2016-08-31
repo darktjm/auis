@@ -25,24 +25,13 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/lwpstubs.C,v 3.2 1993/07/29 20:15:08 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* Stub routines incase we are not linked against the LWP library. */
 
 #ifdef LWP
+#include <andrewos.h>
 
 /* this is a dummy iomgr_select.  It is linked in only if IOMGR is not being used */
 
-#ifndef NORCSID
-#endif
 #ifdef LWP
 IOMGR_Select(long  num , long  rfs , long  wfs , long  xfs, struct timeval  *timeout);
 LWP_CurrentProcess();

@@ -25,14 +25,7 @@
 //  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/preview/RCS/dvi2disp.C,v 1.4 1994/03/21 17:00:38 rr2b Stab74 $";
-#endif
-
-
- 
-
+#include <andrewos.h>
 
 /* ***************************************************************** */
 
@@ -48,7 +41,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/previe
 
 
 
-#include <andrewos.h>
 #include <math.h>
 #include <ctype.h>
 #define AUXMODULE 1
@@ -62,8 +54,6 @@ preview_coordinate	DY = 5;	/* step size in y */
 
 preview_coordinate   maxdots = 32000; /* maximum number of dots in an object */
 
-#ifndef NORCSID
-#endif
 static int   geti (class preview  *self );
 static char *pregets (class preview  *self);
 static Boolean SetPosition(register class preview  *self);
@@ -184,7 +174,7 @@ static void UseFont(class preview  *self,int  f,int  s)
    if (self->NWMFonts == 0 || p->number != n)
       {
 	 Preview_Line fname;
-	 static char *format[] =
+	 static const char * const format[] =
 	 {
 	    "AndySymbol%d",
 	    "AndySymbolA%d",

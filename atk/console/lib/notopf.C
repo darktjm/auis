@@ -27,14 +27,6 @@
 
 #include <andrewos.h> /* sys/time.h */
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/notopf.C,v 1.2 1993/05/19 16:23:50 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* 
  * notop.c -- Routines for instrument console that are
  * NOT shared by the operator's console.
@@ -49,8 +41,6 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #include <signal.h>
 
 
-#ifndef NORCSID
-#endif
 void WakeUp(class consoleClass  *self);
 
 

@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/bpv.C,v 3.7 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 ATK_IMPL("bpv.H")
 #include <view.H>
 #include <fontdesc.H>
@@ -244,7 +238,7 @@ static void ClearPageNumProc(class bpv  *self, long  val)
     RepostMenus(self, FALSE);
 }
 
-void bpv::Print(FILE  *f, char  *process, char  *final, boolean  toplevel)
+void bpv::Print(FILE  *f, const char  *process, const char  *final, boolean  toplevel)
 {
     class bp *dobj = (class bp *)(this->GetDataObject());
 
@@ -254,7 +248,7 @@ void bpv::Print(FILE  *f, char  *process, char  *final, boolean  toplevel)
 	fputs(".OC\n.bp\n", f);
 }
 
-void *bpv::GetPSPrintInterface(char *printtype)
+void *bpv::GetPSPrintInterface(const char *printtype)
 {
     static struct textview_insetdata dat;
 

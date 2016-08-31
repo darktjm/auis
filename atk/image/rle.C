@@ -320,7 +320,7 @@ void make_gamma( double  gamma, int  gammamap[256] );
 
 
 int 
-rle::Ident( char  *fullname )
+rle::Ident( const char  *fullname )
         {
   FILE *rlefile;
   int x_len,y_len;
@@ -400,7 +400,7 @@ rle::Ident( char  *fullname )
 }
 
 int
-rle::Load( char  *fullname, FILE  *fp )
+rle::Load( const char  *fullname, FILE  *fp )
             {
   int x_len, y_len;
   int i,j;
@@ -1486,7 +1486,7 @@ rle::Write( FILE  *file, long  writeID, int  level )
 }
 
 long
-rle::WriteNative( FILE  *file, char  *filename )
+rle::WriteNative( FILE  *file, const char  *filename )
             {
 return(0);
 }

@@ -25,17 +25,14 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/guardian/cmd/RCS/guardian.c,v 2.111 1996/09/03 19:24:50 robr Exp $";
-#endif
-
 /*
   guardian.c -- daemon for SNAP servers
   Written: 17 September 1985
 */
 
-static char GuardianVersion[] = "$Revision$ $Date$";
+#include <andrewos.h>
+/* tjm: ugh - I guess I'll leave this one in, since it gets printed */
+static const char GuardianVersion[] = "$Revision$ $Date$";
 #define GUARDIAN_PREIX_SKIP sizeof("xRevision")
 extern char *AndrewDir();
 #ifndef _IBMR2
@@ -43,7 +40,6 @@ extern char *malloc();
 #endif /* _IBMR2 */
 extern char *inet_ntoa();
 
-#include <andrewos.h>
 #include <amsenv.h>
 #include <errno.h>
 #include <stdio.h>
@@ -305,7 +301,7 @@ typedef struct USERINFO_R USERINFO,*USERINFO_pt;
 USERINFO auth_cache[NUM_CACHE];
 
 /* Name of this application */
-static char GuardianName[] = "SNAP.GUARDIAN";
+static const char GuardianName[] = "SNAP.GUARDIAN";
 
 /* Global string for doing sprintf's */
 static char ErrorText[2*MAXPATHLEN];
@@ -1188,7 +1184,7 @@ static void SetServicesTable()
 *		     *
   \********************/
 
-static char GuardianAddress[] = "guardian";
+static const char GuardianAddress[] = "guardian";
 
 static void MailError(msg, arg)
 char *msg, *arg;
@@ -2773,7 +2769,7 @@ static void ProcessDebugRequest()
 		if (DebugRequest[0] != '\0') { /* Only if not null */
 		    CheckPassword(DebugRequest);
 		    if (!WaitingForPassword) {
-			static char wontecho[] =
+			static const char wontecho[] =
 			  { IAC, WONT, TELOPT_ECHO, '\0' };
 			  fputs(wontecho, dout);
 		    }
@@ -3276,7 +3272,7 @@ char *request;
 static void CheckPassword(password)
 char *password;
 {
-    static char wizard[] = "root";
+    static const char wizard[] = "root";
     register struct passwd *pw;
 
     /* Find password entry */

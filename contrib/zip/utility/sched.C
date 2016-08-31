@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/utility/RCS/sched.C,v 1.4 1994/08/14 18:44:54 rr2b Stab74 $";
-#endif
-
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Sched Data-object Program

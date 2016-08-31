@@ -61,7 +61,7 @@ class AWgtFigView : public AWidgetView {
 			long pos, long len);
 	virtual void RecSrchExpose(const struct rectangle &logical, 
 			struct rectangle &hit);
-	void Print(FILE *file, char *processor, char *finalFormat, 
+	void Print(FILE *file, const char *processor, const char *finalFormat, 
 			boolean topLevel);
 	void PrintPSRect(FILE *file, long logwidth, long logheight, 
 			struct rectangle *visrect);

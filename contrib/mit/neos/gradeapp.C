@@ -1,5 +1,3 @@
-/* $Author: wjh $ */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -22,13 +20,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/gradeapp.C,v 1.5 1996/06/11 01:28:57 wjh Exp $";
-#endif
-
-
- 
 /*
  * gradeapp.c
  *
@@ -43,16 +34,13 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/ne
  *   For full copyright information see:'mit-copyright.h'     *
  ************************************************************ */
 
-#include <andrewos.h>
 #include <mit-copyright.h>
 
+#include <andrewos.h>
 #include "gradeapp.H"
 
 
 ATKdefineRegistry(gradeapp, eosapp, NULL);
-#ifndef NORCSID
-#endif
-
 
 gradeapp::gradeapp()
 {

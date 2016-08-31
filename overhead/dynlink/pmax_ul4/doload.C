@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynlink/pmax_ul4/RCS/doload.C,v 1.10 1995/02/15 23:18:46 Zarf Stab74 $";
-#endif
-
 /* 
  *	doload.c - dynamic loader for class system
  *
@@ -523,7 +518,7 @@ static char *symbol_class_name(int  class_number)
 }
 
 
-static char registrystr[]="_ATKregistry_";
+static const char registrystr[]="_ATKregistry_";
 
 static int Exportable(char *np) {
     char *p;

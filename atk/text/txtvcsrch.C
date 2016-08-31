@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/txtvcsrch.C,v 3.19 1996/03/12 18:41:44 robr Stab74 $";
-#endif
-
-
-
- 
-
 #include <ctype.h>
 #define AUXMODULE 1
 #include <textview.H>
@@ -71,7 +61,9 @@ extern long textview_ExposeRegion(class textview *tv, long pos1, long rlen, clas
 
 int textview_SearchCmd(register class textview  *self, char *arg)
 {
-    char defSrchString[SRCHSTRLEN], *tp, messageBuf[120], *prompt;
+    char defSrchString[SRCHSTRLEN], messageBuf[120];
+    const char *tp;
+    const char *prompt;
     int gf, ct;
     register long pos;
     register int j;
@@ -134,7 +126,9 @@ int textview_RSearchCmd(register class textview  *self, char *arg)
     register long pos;
     register int j;
     class text *d;
-    char defSrchString[SRCHSTRLEN], *tp, messageBuf[130], *prompt;
+    char defSrchString[SRCHSTRLEN], messageBuf[130];
+    const char *prompt;
+    const char *tp;
     boolean defaultExists = FALSE;
 
     d = Text(self);
@@ -241,7 +235,7 @@ void textview_QueryReplaceCmd(class textview  *self)
     boolean returnPosition = TRUE;
     struct SearchPattern *lastPattern = NULL;
     char *prompt = NULL;
-    char *searchError = NULL;
+    const char *searchError = NULL;
     char casedString[SRCHSTRLEN];
     char promptBuf[SRCHSTRLEN +20];
     int numFound = 0;
@@ -439,7 +433,7 @@ long skipToNextBalanceSymbol(class text *doc, long pos, int direction)
     /* skip to next paren, bracket, or brace.
      * Search direction specified in "direction" */
     int thischar, nextChar;
-    static char *opens = "({[", *closes = ")}]";
+    static const char opens[] = "({[", closes[] = ")}]";
     long docLength = (doc)->GetLength();
     long limit= (direction==FORWARD) ? docLength : 0;
     int increment= (direction==FORWARD) ? 1 : -1;
@@ -463,10 +457,10 @@ static long balance(class text *doc, long pos)
      * Returns the pos of the balancing symbol to the one
      * pointed to by the passed value of pos
      */
-    char *parentype;
+    const char *parentype;
     struct paren_node *parenstack = NULL;
-    static char *opens = "({[", *closes = ")}]";
-    char *closeTable, *openTable;
+    static const char opens[] = "({[", closes[] = ")}]";
+    const char *closeTable, *openTable;
 
     if ( pos <= 0  || pos >= (doc)->GetLength() )
 	return EOF;
@@ -509,7 +503,7 @@ void textview_BalanceCmd(class textview  *self)
     register	class text	*doc;
     long	pos, docLength;
     long	leftBalancedPos = EOF, rightBalancedPos = EOF;
-    static 	char	balanceSymbols[] = "[{()}]";
+    static 	const char	balanceSymbols[] = "[{()}]";
 
     doc	= Text(self);
     docLength	= (doc)->GetLength();

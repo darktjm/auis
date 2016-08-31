@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipprint.C,v 1.3 1993/06/17 04:28:00 rr2b Stab74 $";
-#endif
-
 /*LIBS:  -lm
 */
 
@@ -164,7 +159,7 @@ zipprint::Set_Debug( boolean  state )
   }
 
 long
-zipprint::Set_Print_Language( register char				  *language )
+zipprint::Set_Print_Language( register const char				  *language )
       {
   class zipprint *self=this;
   register char language_code = 0;
@@ -182,7 +177,7 @@ zipprint::Set_Print_Language( register char				  *language )
   }
 
 long
-zipprint::Set_Print_Processor( register char				  *processor )
+zipprint::Set_Print_Processor( register const char				  *processor )
       {
   class zipprint *self=this;
   register char				  processor_code = 0;

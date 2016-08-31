@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipstatus.C,v 1.3 1993/06/17 04:28:00 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -124,7 +116,7 @@ END-SPECIFICATION  ************************************************************/
 */
 
 
-static char			 *zip_status_messages[] =
+static const char		 * const zip_status_messages[] =
 					  {
 				/* 000 */ "Success",
 					  "Failure",
@@ -169,7 +161,7 @@ static char			 *zip_status_messages[] =
 				/* Values above 1000 are "errno" values */
 					  };
 
-static char			 *zip_figure_facility_names[] =
+static const char		 * const zip_figure_facility_names[] =
 				{
 			/* 000 */ "<<< UNKNOWN FACILITY NAME >>>",
 				"zip_Initialize",
@@ -208,7 +200,7 @@ static char			 *zip_figure_facility_names[] =
 				"zip_Add_Figure_Point"
 				};
 
-char				 *zip_image_facility_names[] =
+static const char	 * const zip_image_facility_names[] =
 				{
 			/* 000 */ "<<< UNKNOWN FACILITY NAME >>>",
 				"zip_Initialize",
@@ -241,7 +233,7 @@ char				 *zip_image_facility_names[] =
 				"zip_Expose_Image_Points"
 				};
 
-char				 *zip_stream_facility_names[] =
+static const char		 * const zip_stream_facility_names[] =
 				{
 			/* 000 */ "<<< UNKNOWN FACILITY NAME >>>",
 				"zip_Initialize",
@@ -276,7 +268,7 @@ char				 *zip_stream_facility_names[] =
 			/* 025 */"zip_Copy_Stream"
 				};
 
-char				 *zip_pane_facility_names[] =
+static const char		 * const zip_pane_facility_names[] =
 				{
 			/* 000 */ "<<< UNKNOWN FACILITY NAME >>>",
 				"zip_Initialize",
@@ -343,8 +335,6 @@ char				 *zip_pane_facility_names[] =
 
 
 ATKdefineRegistry(zipstatus, zipview, NULL);
-#ifndef NORCSID
-#endif
 static char * Format_Message( register class zipstatus	      *self, register int			       facility, register int			       status );
 static char * Format_Figure_Status_Message ( register class zipstatus		  *self, register zip_type_figure		   figure );
 static char * Format_Image_Status_Message ( register class zipstatus		  *self, register zip_type_image		   image );
@@ -372,7 +362,7 @@ static char *
 Format_Message( register class zipstatus	      *self, register int			       facility, register int			       status )
         {
   static char				  msg[1001];
-  char					 *facility_name;
+  const char				 *facility_name;
   char					  facility_msg[101];
 
   if ( facility >= zip_lowest_figure_facility_name    &&

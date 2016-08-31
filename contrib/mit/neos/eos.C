@@ -1,5 +1,3 @@
-/* $Author: wjh $ */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -22,13 +20,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/eos.C,v 1.5 1996/06/11 01:26:13 wjh Exp $";
-#endif
-
-
- 
 /*
  * eos.c
  *
@@ -41,6 +32,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/ne
  *   For full copyright information see:'mit-copyright.h'     *
  ************************************************************ */
 
+#include <andrewos.h>	/* andrewos.h includes sys/types.h */
 #include <mit-copyright.h>
 
 #include <stdio.h>
@@ -71,7 +63,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/ne
 /* sys/types.h in AIX PS2 defines "struct label",  causing a type name clash.
   Avoid this by temporarily redefining "label" to be something else. */
 #define label gezornenplatz
-#include <andrewos.h>	/* andrewos.h includes sys/types.h */
 #include <eosfx.H> /* eosfx.ih includes sys/types.h */
 #undef label
 
@@ -112,8 +103,6 @@ struct helpRock {
 
 
 ATKdefineRegistry(eos, view, eos::InitializeClass);
-#ifndef NORCSID
-#endif
 int ReadCourseList(register class eos  *self);
 enum message_CompletionCode CourseComplete(char  *partial, class eos  *self, char  *buffer, int  bufferSize);
 static void CourseHelp(char  *partial, class eos  *self, procedure  HelpWork, long  rock);
@@ -836,9 +825,9 @@ void eos_Return(class eos  *self, class observable  *triggerer, long  rock)
     return;
 }
 
-static char delwindowWarning[] =
+static const char delwindowWarning[] =
   "Deleting this window kills the program.";
-static char *delwindowChoices[] = {
+static const char * const delwindowChoices[] = {
 	"Continue Running",
 	"Quit Application",
 	NULL};

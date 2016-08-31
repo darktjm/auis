@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/sbutton.C,v 3.6 1995/04/17 15:40:04 rr2b Stab74 $";
-#endif
-
-
- 
 ATK_IMPL("sbutton.H")
 #include <stdio.h>
 #include <sys/param.h>
@@ -60,14 +52,12 @@ ATK_IMPL("sbutton.H")
 /* Global variables */
 static class atom *buttonpushed=NULL;
 static boolean linehascontrol=FALSE;
-static char *True="True";
-static char *False="False";
-static char *EmptyString="";
+static const char True[]="True";
+static const char False[]="False";
+static const char EmptyString[]="";
 
 
 ATKdefineRegistry(sbutton, dataobject, sbutton::InitializeClass);
-#ifndef NORCSID
-#endif
 static const char *Intern(const char  *str);
 static void init(class sbutton  *self, int  i , int  j);
 static boolean SetupInitialState(class sbutton  *self);
@@ -90,7 +80,7 @@ static boolean nameproc(class sbutton  *self, struct read_status  *rock, char  *
 static boolean prefsproc(class sbutton  *self, struct read_status  *rock, char  *buf);
 static boolean doneproc(class sbutton  *self, struct read_status  *rock, char  *buf);
 static boolean triggerproc(class sbutton  *self, struct read_status  *rock, char  *buf);
-static long dostuff(class sbutton  *self, FILE  *fp, struct read_status *rock, struct dataprocs  *procs);
+static long dostuff(class sbutton  *self, FILE  *fp, struct read_status *rock, const struct dataprocs  *procs);
 static long sbutton__ReadDataPart(class sbutton  *self, FILE  *fp, int  dsversion);
 static long sbutton_SanelyReturnReadError(class sbutton  *self, FILE  *fp, long  id, long  code);
 static void WriteLine(FILE  *f, const char  *l);
@@ -186,7 +176,7 @@ boolean sbutton::EnsureSize(int  ind)
 }
 
 
-const char *colorprefs[sbutton_COLORS]={
+static const char * const colorprefs[sbutton_COLORS]={
     "background",
     "topshadow",
     "top", 
@@ -199,9 +189,9 @@ const char *colorprefs[sbutton_COLORS]={
     "insensitivetop"
 };
 
-static char *defprefname="sbutton";
+static const char defprefname[]="sbutton";
 
-void sbutton::InitPrefs(struct sbutton_prefs  *prefs, char  *name)
+void sbutton::InitPrefs(struct sbutton_prefs  *prefs, const char  *name)
 {
 	ATKinit;
 
@@ -228,7 +218,7 @@ void sbutton::InitPrefs(struct sbutton_prefs  *prefs, char  *name)
     if (fontdesc::ExplodeFontName(font,buf,sizeof(buf), &style, &size)) prefs->font=fontdesc::Create(buf,style,size);
 }
 
-struct sbutton_prefs *sbutton::GetNewPrefs(char  *name)
+struct sbutton_prefs *sbutton::GetNewPrefs(const char  *name)
 {
 	ATKinit;
 
@@ -297,7 +287,7 @@ void sbutton::FreePrefs(struct sbutton_prefs  *prefs)
     }
 }
 
-struct sbutton_prefs *sbutton::DuplicatePrefs(struct sbutton_prefs  *prefs, char  *name)
+struct sbutton_prefs *sbutton::DuplicatePrefs(struct sbutton_prefs  *prefs, const char  *name)
 {
 	ATKinit;
 
@@ -363,7 +353,7 @@ sbutton::~sbutton()
     
     while(--i>=0) {
 	struct sbutton_info *bi=this->buttons+i;
-	if(bi->label) free(bi->label);
+	if(bi->label) free((char *)bi->label); /* we created it; it is always malloc'd */
 	if(bi->prefs) sbutton::FreePrefs(bi->prefs);
     }
     if(this->buttons) {
@@ -384,7 +374,7 @@ long sbutton::GetChangeType()
     return this->change;
 }
 
-static char *sizepolicies[]={
+static const char * const sizepolicies[]={
     "NoneSet",
     "Fixed",
     "Rows",
@@ -638,8 +628,8 @@ static boolean triggerproc(class sbutton  *self, struct read_status  *rock, char
 }
 typedef boolean (*dostufffptr)(class sbutton *self, struct read_status *rock, char *buf);
 
-static struct dataprocs {
-    char *name;
+static const struct dataprocs {
+    const char *name;
     dostufffptr func;
 } sprocs[]={
     {"newprefs", (dostufffptr)newprefsproc},
@@ -667,12 +657,12 @@ static struct dataprocs {
     {NULL, NULL}
 };
 
-static long dostuff(class sbutton  *self, FILE  *fp, struct read_status *rock, struct dataprocs  *procs)
+static long dostuff(class sbutton  *self, FILE  *fp, struct read_status *rock, const struct dataprocs  *procs)
 {
     char *buf, *buf2;
     boolean done=FALSE;
     while(!done) {
-	struct dataprocs *dps;
+	const struct dataprocs *dps;
 	buf=ReadLine(fp);
 	if(buf==NULL) return dataobject_PREMATUREEOF;
 	if(!linehascontrol) {
@@ -824,7 +814,7 @@ long sbutton::Read(FILE  *fp, long  id)
 }
 
 
-char *sbutton::ViewName()
+const char *sbutton::ViewName()
 {
     return "sbttnav";
 }
@@ -940,7 +930,7 @@ void sbutton::Delete(int  ind)
     if(ind<0 || ind>=this->count) return;
     
     prefs=(this)->GetPrefs( ind);
-    label=(this)->GetLabel( ind);
+    label=(char *)(this)->GetLabel( ind); /* always malloc'd */
     
     if(prefs) sbutton::FreePrefs(prefs);
     if(label) free(label);
@@ -983,7 +973,7 @@ void sbutton::SetLabel(int  ind, const char  *txt)
     
     if (this->buttons[ind].label) {
       if(txt && !strcmp(this->buttons[ind].label, txt)) return;
-      free(this->buttons[ind].label);
+      free((char *)this->buttons[ind].label); /* always malloc'd here */
       this->buttons[ind].label = NULL;
     }
     
@@ -993,7 +983,7 @@ void sbutton::SetLabel(int  ind, const char  *txt)
     (this)->NotifyObservers( ind+sbutton_CHANGEBASE);
 }
 
-void sbutton::SetTrigger(int  ind, char  *txt)
+void sbutton::SetTrigger(int  ind, const char  *txt)
 {
 /*
   Set the text label for this object.
@@ -1196,7 +1186,7 @@ class sbutton *sbutton::CreateSButton(struct sbutton_prefs  *prefs)
 	while(--i>=0) {
 	    struct sbutton_info *bi=self->buttons+i;
 	    if(bi->prefs) sbutton::FreePrefs(bi->prefs);
-	    if(bi->label) free(bi->label);
+	    if(bi->label) free((char *)bi->label); /* always malloc'd for this list */
 
 	}
 	free(self->buttons);
@@ -1218,13 +1208,13 @@ class sbutton *sbutton::CreateSButton(struct sbutton_prefs  *prefs)
 }
 
 
-class sbutton *sbutton::CreateFilledSButton(struct sbutton_prefs  *prefs, struct sbutton_list  *blist)
+class sbutton *sbutton::CreateFilledSButton(struct sbutton_prefs  *prefs, const struct sbutton_list  *blist)
 {
 	ATKinit;
 
     class sbutton *self=sbutton::CreateSButton(prefs);
     int count=0;
-    struct sbutton_list *bl=blist;
+    const struct sbutton_list *bl=blist;
 
     if(!self) return self;
 

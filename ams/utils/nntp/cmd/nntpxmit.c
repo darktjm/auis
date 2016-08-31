@@ -25,8 +25,6 @@
  *  $
 */
 
-static char *nntpxmit_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp/cmd/RCS/nntpxmit.c,v 1.22 1993/06/30 05:04:24 rr2b Stab74 $";
-
 /*
 ** nntpxmit - transmit netnews articles across the internet with nntp
 **

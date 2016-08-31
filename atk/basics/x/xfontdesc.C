@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xfontdesc.C,v 3.8 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
 #include <sys/param.h> /* For MAXPATHLEN. */
 
 
@@ -465,12 +456,12 @@ xfontdesc_LoadXFont(class xfontdesc  * self, class xgraphic  *graphic)
     struct fcache *oldMDFD = MDFD;
     char xstyleName[MAXPATHLEN];
     const char *xfamily;
-    static char *charset = 0;
+    static const char *charset = 0;
 
     substitute[0] = '\0';
 
     if (!charset) {
-	charset = (char *) environ::Get("MM_CHARSET");
+	charset = environ::Get("MM_CHARSET");
 	if (!charset) {
 #ifdef ISO80_FONTS_ENV
 	    charset = "iso-8859-1";
@@ -478,10 +469,9 @@ xfontdesc_LoadXFont(class xfontdesc  * self, class xgraphic  *graphic)
 	    charset = "us-ascii";
 #endif
 	}
-    }
-    else {
-	char *s;
-	for (s = charset; *s; s++) {
+	char *s = strdup(charset);
+	charset = s;
+	for (; *s; s++) {
 	    if (isupper(*s)) *s = tolower(*s);
 	}
     }

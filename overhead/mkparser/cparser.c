@@ -24,13 +24,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mkparser/RCS/cparser.c,v 1.7 1994/04/08 17:42:03 wjh Stab74 $";
-#endif
-
-
 #include <ctype.h>
 #include <stdio.h>
 

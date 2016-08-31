@@ -23,8 +23,6 @@ ATK_INTER
 // WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 // 
 //  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figview.H,v 3.8 1995/02/28 23:37:46 Zarf Stab74 $
 */
 
 #include <rect.h>
@@ -99,7 +97,7 @@ class figview  : public  view {
       void ReceiveInputFocus();
       void LoseInputFocus();
       void ObservedChanged(class observable *dobj, long status);
-      void Print(FILE *file, char *processor, char *finalFormat, boolean toplevel);
+      void Print(FILE *file, const char *processor, const char *finalFormat, boolean toplevel);
       class view * GetApplicationLayer()  ;
       const void * GetInterface(const char *interface_name)  ;
       void PostMenus(class menulist *ml);
@@ -112,7 +110,7 @@ class figview  : public  view {
       boolean RecSrchReplace(class dataobject *text, long pos, long len);
       void RecSrchExpose(const struct rectangle &logica, struct rectangle &hit);
       void PrintPSDoc(FILE *outfile, long pagew, long pageh);
-      void *GetPSPrintInterface(char *printtype);
+      void *GetPSPrintInterface(const char *printtype);
       void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);
       void DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight);
 

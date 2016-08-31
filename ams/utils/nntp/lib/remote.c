@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp/lib/RCS/remote.c,v 1.12 1993/03/10 20:16:49 gk5g Stab74 $";
-#endif
-
 #include <stdio.h>
 #include <system.h>
 #include <andrewos.h>

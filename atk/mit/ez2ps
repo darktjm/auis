@@ -2,9 +2,6 @@
 #
 # Based on printscribe which is a Copyright IBM utility.
 # For full copyright information see 'andrew/config/COPYRITE'
-# $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/ez2ps,v 1.3 1993/05/30 15:27:35 rr2b Stab74 $
-# $Author: rr2b $
-# $Source: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/ez2ps,v $
 
 # use clever csh bits to discover if we should act like a filter, or emit
 # files.  Output filenames are the input filename with .PS appended

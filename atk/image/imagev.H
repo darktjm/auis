@@ -94,7 +94,7 @@ class imagev : public  view {
     void Update()  ;
     void ReceiveInputFocus();
     void LoseInputFocus();
-    void Print( FILE *file, char *processor, char *finalFormat, boolean topLevel );
+    void Print( FILE *file, const char *processor, const char *finalFormat, boolean topLevel );
     void ReceiveColormap(class colormap *cmap);
     void LoseColormap(class colormap *cmap);
     void UnlinkNotification(class view *unlinkedTree);
@@ -104,11 +104,11 @@ class imagev : public  view {
     void DeleteApplicationLayer(class view *scrollbar);
     void SetDataObject( class dataobject *image);
     void PrintPSDoc(FILE *outfile, long pagew, long pageh);
-    void *GetPSPrintInterface(char *printtype);
+    void *GetPSPrintInterface(const char *printtype);
     void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);
     void DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight);
 
-    virtual boolean Gifify(char *filename, long *pmaxw, long *pmaxh, 
+    virtual boolean Gifify(const char *filename, long *pmaxw, long *pmaxh, 
 			struct rectangle *visrect);
 
     ScrollInterface *GetScrollInterface();

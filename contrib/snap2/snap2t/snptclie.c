@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/snap2t/RCS/snptclie.c,v 1.13 1993/05/04 01:50:02 susan Stab74 $";
-#endif
-
 #define SNAPSCRAM
 
 #include <andrewos.h> /* sys/types.h sys/time.h */

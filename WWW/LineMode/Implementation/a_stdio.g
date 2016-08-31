@@ -1,4 +1,3 @@
-/*	$Id$
 //	AGL(C) 1994
 */
 #include <stdio.h>

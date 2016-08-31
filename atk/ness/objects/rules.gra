@@ -22,10 +22,6 @@
 #  $
 \* ********************************************************************** */
 
-#ifndef NORCSID
-	char *ness_gra_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/rules.gra,v 1.6 1995/12/07 16:41:27 robr Stab74 $";
-#endif
-
 /* ness.gra
 
 	Grammar for the ness string expression language
@@ -95,7 +91,7 @@ nevent.c:
 #include <tlex.H>
 
 	void
-rules::ErrorGuts(int severity, char *severityname, char *msg)  {
+rules::ErrorGuts(int severity, const char *severityname, const char *msg)  {
 	errorfromparse(severity, msg);
 }
 

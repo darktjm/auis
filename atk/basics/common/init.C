@@ -25,20 +25,11 @@
 //  $
 */
 
-#include <andrewos.h> /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/init.C,v 3.13 1995/11/29 17:45:30 robr Stab74 $";
-#endif
-
-
- 
-
 /* init.c
  * Read a user's init file to bind keys and menus.
   */
 
+#include <andrewos.h> /* sys/file.h */
 ATK_IMPL("init.H")
 #include <sys/file.h> /* MRT */
 
@@ -117,24 +108,27 @@ static long currentErrorRock;
 
 ATKdefineRegistry(init, ATK, NULL);
 
-static class keymap *GetKeymap(class init  *init, char  *className, boolean  inheritFlag);
-static class menulist *GetMenulist(class init  *init, char  *className, boolean  inheritFlag);
+static class keymap *GetKeymap(class init  *init, const char  *className, boolean  inheritFlag);
+static class menulist *GetMenulist(class init  *init, const char  *className, boolean  inheritFlag);
 enum init_bindingtype {init_KEY, init_MENU, init_BUTTON};
-static void BindFunction(class init  *init, char  **args, boolean  forceLoad, enum init_bindingtype  type, char  *commandName);
+static void BindFunction(class init  *init, char  **args, boolean  forceLoad, enum init_bindingtype  type, const char  *commandName);
 static void AddFileType(char  **args, boolean  forceLoad);
 static void Call(char  **args);
 static void Load(char  **args);
 static int IfDef (char  **args);
 static int IfSys (char **args);
 static void Include(class init  *init, char  **args, boolean  forceLoad);
-static char *GetToken(char  **pp);
-static int TranslateKeySequence(char  *from, char  *to);
-static int parseBackslashed(char  **fromChars);
+static const char *GetToken(char  **pp);
+static int TranslateKeySequence(const char  *from, char  *to);
+static int parseBackslashed(const char  **fromChars);
 static struct keys *GetKeyFromKeystate(class init  *self, class keystate  *keystate);
 static ATK  *CheckML(class menulist  *menulist, char  *class_c, boolean  inherit);
 static char *MapFile(const char  *filename, long  *fileLength );
 static int ReadFile(class init  *init, const char  *filename, boolean  executeImmediately);
-static void ErrorMsg(char  *msg, ...);
+#ifdef __GNUC__
+__attribute__((format(printf,1,2)))
+#endif
+static void ErrorMsg(const char  *msg, ...);
 
 
 init::init()
@@ -218,7 +212,7 @@ init::~init()
     }
 }
 
-static class keymap *GetKeymap(class init  *init, char  *className, boolean  inheritFlag)
+static class keymap *GetKeymap(class init  *init, const char  *className, boolean  inheritFlag)
             {
 
     struct keys *keys;
@@ -238,7 +232,7 @@ static class keymap *GetKeymap(class init  *init, char  *className, boolean  inh
     return keys->keymap;
 }
 
-static class menulist *GetMenulist(class init  *init, char  *className, boolean  inheritFlag)
+static class menulist *GetMenulist(class init  *init, const char  *className, boolean  inheritFlag)
             {
 
     struct menus *menus;
@@ -258,7 +252,7 @@ static class menulist *GetMenulist(class init  *init, char  *className, boolean 
     return menus->menulist;
 }
 
-static class menulist *GetButtonlist(class init  *init, char  *className, boolean  inheritFlag)
+static class menulist *GetButtonlist(class init  *init, const char  *className, boolean  inheritFlag)
             {
 
     struct menus *menus;
@@ -279,14 +273,14 @@ static class menulist *GetButtonlist(class init  *init, char  *className, boolea
 
 
 
-static void BindFunction(class init  *init, char  **args, boolean  forceLoad, enum init_bindingtype  type, char  *commandName)
+static void BindFunction(class init  *init, char  **args, boolean  forceLoad, enum init_bindingtype  type, const char  *commandName)
                     {
 
-    char *function, *tempString, *binding, *class_c, *loadClass, *inherit, *parameterString;
+    const char *function, *binding, *class_c, *loadClass, *inherit, *parameterString;
+    char *tempString;
     char className[100], loadClassName[100], translatedKeys[32];
     struct proctable_Entry *proc;
     boolean inheritFlag = TRUE;
-    keymap *kmap;
     menulist *mlist;
 
     function = GetToken(args);
@@ -312,7 +306,7 @@ static void BindFunction(class init  *init, char  **args, boolean  forceLoad, en
     class_c = GetToken(args);
     if (class_c == NULL) {
 
-        char *hyphen;
+        const char *hyphen;
 
         hyphen = strchr(function, '-');
         if (hyphen == NULL) {
@@ -327,7 +321,7 @@ static void BindFunction(class init  *init, char  **args, boolean  forceLoad, en
         loadClass = GetToken(args);
         if (loadClass == NULL && *function != '\0') {
 
-            char *hyphen;
+            const char *hyphen;
 
             hyphen = strchr(function, '-');
             if (hyphen == NULL) {
@@ -341,14 +335,14 @@ static void BindFunction(class init  *init, char  **args, boolean  forceLoad, en
     }
 
     inherit = GetToken(args);
-    if (inherit != NULL)
+    if (inherit != NULL) {
         if (strcmp(inherit, "noinherit") == 0)
             inheritFlag = FALSE;
         else if (strcmp(inherit, "inherit") != 0) {
             ErrorMsg("Bad inherit flag value %s; must be either \"inherit\" or \"noinherit\".\n", inherit);
             return;
-        }            
-
+        }
+    }
     parameterString = GetToken(args);
     if(parameterString) {
 	// there was an argument now lets check to see if it is an extended argument.
@@ -357,14 +351,14 @@ static void BindFunction(class init  *init, char  **args, boolean  forceLoad, en
 	// elements may be quoted, within quotes \ and " must be preceded by a \.
        while(*args[0] && isspace(*args[0]) && *args[0]!='\n') (*args)++;
        if(parameterString[0]=='(' && parameterString[1]=='\0' && *args[0]!='\n'  && *args[0]!='\0') {
-	   parameterString[1]=' ';
 	   while(*args[0] && *args[0]!='\n') (*args)++;
 	   *args[0]='\0';
-	   char *res=(char *)malloc(strlen(parameterString)+6 /* 1 NUL, 5 list: */);
+	   char *res=(char *)malloc(strlen(parameterString + 2)+8 /* 1 NUL, 5 list: */);
 	   if(res) {
-	       strcpy(res, "list:");
-	       strcat(res, parameterString);
+	       strcpy(res, "list:( ");
+	       strcat(res, parameterString + 2);
 	       parameterString=NewString(res);
+	       free(res);
 	   } else parameterString=NULL;
        } else parameterString=NewString(parameterString);
     }
@@ -434,7 +428,7 @@ static void BindFunction(class init  *init, char  **args, boolean  forceLoad, en
 static void AddFileType(char  **args, boolean  forceLoad)
         {
 
-    char *extension, *type, *attributes, *existingAttributes;
+    const char *extension, *type, *attributes, *existingAttributes;
 
     extension = GetToken(args);
     if (extension == NULL) {
@@ -465,12 +459,12 @@ static void AddFileType(char  **args, boolean  forceLoad)
 static void Call(char  **args)
     {
 
-    char *functionName;
-    char *functionArgs[NARGS];
+    const char *functionName;
+    const char *functionArgs[NARGS];
     struct proctable_Entry *entry;
     proctable_fptr function= NULL;
     int i;
-    char *argument;
+    const char *argument;
 
     functionName = GetToken(args);
     if (functionName == NULL) {
@@ -479,7 +473,7 @@ static void Call(char  **args)
     }
     for (i = 0; i < NARGS && ((argument = GetToken(args)) != NULL); ++i) {
 	if (isdigit(*argument))
-	    functionArgs[i] = (char *) atoi(argument);
+	    functionArgs[i] = (char *)(long) atoi(argument); /* ick! */
 	else
 	    functionArgs[i] = argument;
     }
@@ -502,7 +496,7 @@ static void Call(char  **args)
 static void Load(char  **args)
     {
 
-    char *class_c = GetToken(args);
+    const char *class_c = GetToken(args);
 
     if (class_c == NULL)
         ErrorMsg("Missing class name in load command.\n");
@@ -521,7 +515,7 @@ Process an 'ifdef' entry, checking the specified environment variable.
 */
 static int IfDef (char  **args)
 {
-    char *envvar, errmsg;
+    const char *envvar;
 
     if ((envvar = GetToken(args)) == NULL) {
 	ErrorMsg("No environment variable named for ifdef.\n");
@@ -541,7 +535,7 @@ static int IfDef (char  **args)
  */
 static int IfSys (char  **args)
 {
-    char *systype;
+    const char *systype;
 
     if ((systype = GetToken(args)) == NULL) {
 	ErrorMsg("No system type named for ifsys.\n");
@@ -594,7 +588,7 @@ static void Include(class init  *init, char  **args, boolean  forceLoad)
 /* Find the first token on this line and update the pointer to the buffer to
  * point past it.  Also smashes the buffer with a null character.
  */
-static char *GetToken(char  **pp)
+static const char *GetToken(char  **pp)
     {
     char *from = *pp, *to = from;
     int quote = FALSE;
@@ -625,7 +619,7 @@ static char *GetToken(char  **pp)
         to = s = from;
     do {
         if (*from == '\\')
-            *to++ = parseBackslashed(&from);
+            *to++ = parseBackslashed((const char **)&from);
         else
             *to++ = *from++;
     } while (*from != 0 && (quote ? *from != '"' : !isspace(*from)));
@@ -640,7 +634,7 @@ static char *GetToken(char  **pp)
 }
 
 /* Translate a key sequence that has ^A, \ddd, and \c conventions. */
-static int TranslateKeySequence(char  *from, char  *to)
+static int TranslateKeySequence(const char  *from, char  *to)
         {
     while (*from != '\0') {
         if (*from == '\\') {
@@ -665,13 +659,13 @@ static int TranslateKeySequence(char  *from, char  *to)
     return 0;
 }
 
-static int parseBackslashed(char  **fromChars)
+static int parseBackslashed(const char  **fromChars)
     {
 
     int returnChar;
-    char *from = *fromChars;
-    static char *bsSource = "ebrnt";
-    static char *bsDest = "\033\b\r\n\t";
+    const char *from = *fromChars;
+    static const char *bsSource = "ebrnt";
+    static const char *bsDest = "\033\b\r\n\t";
 
     if (*from == '\\') {
         ++from;
@@ -693,7 +687,7 @@ static int parseBackslashed(char  **fromChars)
         }
         else {
 
-            char *p;
+            const char *p;
 
             p = strchr(bsSource, *from);
             if (p != NULL)
@@ -962,7 +956,8 @@ static int ReadFile(class init  *init, const char  *filename, boolean  executeIm
     
     if ((buffer = MapFile(filename, &length)) != NULL) {
 
-        char *token, *p;
+        const char *token;
+	char *p;
         const char *prevFile = currentFile;
         int prevLine = currentLine;
   
@@ -973,7 +968,7 @@ static int ReadFile(class init  *init, const char  *filename, boolean  executeIm
           while (p < buffer + length) {
               ++currentLine;
               token = GetToken(&p);
-              if (token != NULL)
+              if (token != NULL) {
 		if (strcmp(token, "endif") == 0) {
 		    if (!ignoring[level])
 			ignoring[level] = FALSE;
@@ -985,7 +980,7 @@ static int ReadFile(class init  *init, const char  *filename, boolean  executeIm
 			    ignoring[level]= !ignoring[level];
 		    }
 		    else
-			ErrorMsg("Invalid syntax\n", token);
+			ErrorMsg("Invalid syntax\n");
 		}
   		else if (strcmp(token, "ifdef") == 0)
 		    ++level,ignoring[level] = ignoring[level-1] ? TRUE:(IfDef(&p)==0);
@@ -1013,7 +1008,7 @@ static int ReadFile(class init  *init, const char  *filename, boolean  executeIm
                     Include(init, &p, executeImmediately);
                 else
                     ErrorMsg("Undefined command - %s\n", token);
-
+	      }
             /* Skip to the end of line. */
             while (*p != '\n' && *p != '\0')
                 ++p;
@@ -1050,7 +1045,7 @@ int init::Load(char  *filename, init_fptr  errorProc, long  errorRock, boolean  
     return ReadFile(this, filename, executeImmediately);
 }
 
-static void ErrorMsg(char  *msg, ...)
+static void ErrorMsg(const char  *msg, ...)
     {
 
     char buffer[300], *bufferEnd;

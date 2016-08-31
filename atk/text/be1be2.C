@@ -25,18 +25,12 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/be1be2.C,v 3.5 1995/06/26 15:53:15 rr2b Stab74 $";
-#endif
-
 /*
  * BE1 to BE2 conversion package
  */
 
 
+#include <andrewos.h>
 ATK_IMPL("be1be2.H")
 #include <ctype.h>
 
@@ -113,8 +107,6 @@ ATK_IMPL("be1be2.H")
 
 
 ATKdefineRegistry(be1be2, ATK, NULL);
-#ifndef NORCSID
-#endif
 static long CVDots(register long  amt, enum style_Unit  unit);
 boolean ConvertStyle(class style  *self, long  attr , long  opcode , long  optype , long  opparm);
 

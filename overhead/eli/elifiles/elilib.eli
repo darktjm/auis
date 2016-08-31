@@ -5,9 +5,6 @@
 ;;;;                                                                   ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-; $Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/elifiles/RCS/elilib.eli,v 2.4 1991/09/13 17:06:01 bobg Stab74 $
-; $Source: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/elifiles/RCS/elilib.eli,v $
-
 (load "strings")
 (load "lists")
 (load "ints")

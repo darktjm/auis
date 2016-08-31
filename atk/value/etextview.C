@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/etextview.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 static class keymap *ssmap;
 ATK_IMPL("etextview.H")
 #include <keystate.H>
@@ -47,8 +37,6 @@ ATK_IMPL("etextview.H")
 #define Text(A) ((class entertext *)(A->dataobject))
 
 ATKdefineRegistry(etextview, textview, etextview::InitializeClass);
-#ifndef NORCSID
-#endif
 void etextview_CancelCommand(register class etextview  *self );
 void etextview_ReturnCommand(register class etextview  *self );
 void etextview_ClearCommand(register class etextview  *self );

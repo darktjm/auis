@@ -25,17 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/plusspace.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 /*  plusspc.c
 
 	plusspace package
@@ -47,6 +36,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
  */
 
+#include <andrewos.h>
 ATK_IMPL("plusspace.H")
 #include <stdio.h>
 
@@ -62,8 +52,6 @@ static FILE *f;	/* to avoid passing 'file' to all PutXxxx functions */
 
 	
 ATKdefineRegistry(plusspace, ATK, NULL);
-#ifndef NORCSID
-#endif
 static void PutNibblePair(register unsigned char byte);
 static void PutSame(register unsigned char byte, register long  count);
 static void PutDiffer(register unsigned char *start, register long  length);

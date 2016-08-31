@@ -25,14 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nessview.C,v 1.11 1995/03/01 01:51:33 rr2b Stab74 $";
-#endif
-
-
 /*
  *   $Log: nessview.C,v $
  * Revision 1.11  1995/03/01  01:51:33  rr2b
@@ -109,7 +101,7 @@ log elided 6/92 -wjh
 
 */
 
-
+#include <andrewos.h>
 ATK_IMPL("nessview.H")
 
 #include <dataobject.H>
@@ -182,7 +174,7 @@ static char *GetName(class ness  *n);
 static long match(class ness  *n,struct helpRock  *h);
 static void helpProc(char  *partial, long lrock,message_workfptr  HelpWork,long  rock);
 static enum message_CompletionCode mycomplete(char  *partial, struct helpRock  *myrock, char  *buffer, int  bufferSize);
-static long AskForScript(class view  *self, class ness  *current, char  *prompt, char  *buf, long  bufsiz);
+static long AskForScript(class view  *self, class ness  *current, const char  *prompt, char  *buf, long  bufsiz);
 static void ScriptAppend(class nessview  *self, long  rock);
 static void Append(class nessview  *self, long  rock);
 static void Visit(class view  *self, long  rock);
@@ -221,14 +213,14 @@ PostMenus(class nessview  *self) {
  *
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-static char *defaultExecFunc = "main";
+static const char defaultExecFunc[] = "main";
 
 	static void
 setExecFunc(class nessview  *self, char  *funcname) {
 	if (self->ExecFunction != defaultExecFunc)
 		free(self->ExecFunction);
 	self->ExecFunction = (funcname == NULL || *funcname == '\0')
-				? defaultExecFunc : freeze(funcname);
+				? (char *)defaultExecFunc : strdup(funcname);
 }
 
 
@@ -291,7 +283,7 @@ nessview_Compile(register class nessview  *self, ness_access  accesslevel) {
 	if (dobj->PromptBeforeCompile && accesslevel >= ness_codeGreen) {
 		/* give a dialog box to verify the compile choice */
 		long choice;
-		static char *choices[] = {
+		static const char * const choices[] = {
 			"Cancel - Keep Ness script inactive", 
 			"Empower - Let script do its thing", 
 			NULL
@@ -432,7 +424,7 @@ AuthorButton(class nessview  *self, long  option) {
 		/*  In 3 of the 12 cases we remove the warning */
 		/* prompt first to make sure the user wants to */
 		long choice;
-		static char *choices[] = {
+		static const char * const choices[] = {
 			"Cancel - Leave script read-only", 
 			"Author mode - Make script read-write", 
 			NULL
@@ -679,7 +671,7 @@ match(class ness  *n,struct helpRock  *h) {
 }
 
 
-static char *headingtxt="Active Ness Scripts\n";
+static const char headingtxt[]="Active Ness Scripts\n";
 
 /* This is the function called to provide help when the user uses '?' 
 		in a prompt for a Ness script. 
@@ -740,7 +732,7 @@ mycomplete(char *partial, struct helpRock *myrock, char *buffer,
 static char sbuf[1024]=".atkmacros";
 
 	static long 
-AskForScript(class view *self, class ness *current, char *prompt, char *buf, long bufsiz) {
+AskForScript(class view *self, class ness *current, const char *prompt, char *buf, long bufsiz) {
 	class ness *n=ness::GetList();
 	struct helpRock myrock;
 	class framemessage *fmsg=(class framemessage *)(self)->WantHandler("message");
@@ -838,7 +830,7 @@ ScriptAppend(class nessview  *self, long  rock) {
 
 static char dbuf[1024]="~/.atk.macros";
 
-static char *appendchoices[]={
+static const char * const appendchoices[]={
 	"Yes",
 	"No",
 	NULL
@@ -1091,7 +1083,7 @@ DisplayDialogBox(class nessview  *self, long  time  /* ignored */) {
 	class ness *dobj = (class ness *)self->dataobject;
 	long choice;
 
-	static char *choices[] = {
+	static const char * const choices[] = {
 		"Cancel - Keep Ness script inactive", 
 		"Help - Add warning text to script", 
 		"Scan - Check for dangerous statements", 
@@ -1215,7 +1207,7 @@ nessview::nessview() {
 	    SetCustomInterface(ti);
 
 	}
-	this->ExecFunction = defaultExecFunc;
+	this->ExecFunction = (char *)defaultExecFunc; /* only freed if !default */
 	this->CurrError = NULL;
 	this->compmod = -1;
 	this->ButtonPending = 0;
@@ -1523,7 +1515,7 @@ nessview::DesiredSize(long  width, long  height, enum view_DSpass  pass,
 }
 
 	void
-nessview::Print(FILE  *file, char  *processor, char *finalFormat, 
+nessview::Print(FILE  *file, const char  *processor, const char *finalFormat, 
 		boolean topLevel) {
 	DEBUG(("Ignore nessview__Print\n"));
 }

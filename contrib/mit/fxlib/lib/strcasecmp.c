@@ -22,19 +22,10 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/lib/RCS/strcasecmp.c,v 1.3 1992/12/15 21:53:21 rr2b Stab74 $";
-#endif
-
 /*
  * This file is stolen from the Athena OLH system
  * It contains the definition of strcasecmp, which isn't present on the
  * *^&)(&* broken PS/2's.
- *
- * $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/lib/RCS/strcasecmp.c,v $
- * $Id$
- * $Author: rr2b $
  *
  */
 

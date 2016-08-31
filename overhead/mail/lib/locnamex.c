@@ -25,17 +25,11 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/locnamex.c,v 2.7 1992/12/15 21:04:17 rr2b Stab74 $";
-#endif
-
 /*
 	locnamex.c -- Deallocator for low-level resolver of local addresses
 */
 
+#include <andrewos.h>
 #include <stdio.h>
 #include "mail.h"
 

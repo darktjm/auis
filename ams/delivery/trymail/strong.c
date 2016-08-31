@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/delivery/trymail/RCS/strong.c,v 1.55 1995/07/11 20:01:02 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	strong.c
 	Subroutines for ``switchmail''--the trymail version that runs on
@@ -169,7 +164,7 @@ static void WriteReceived(f, For, With)
 FILE *f;
 char *For, *With;
 {
-	static char head[] = "Received: via switchmail";
+	static const char head[] = "Received: via switchmail";
 	int curLen, forLeft;
 #define maxLen 80
 	char *fp, *bp, oldc;
@@ -236,10 +231,10 @@ struct BEStripper **pBES; char *Hdr; enum Formats Fmt;
 {/* Allocate and initialize the BEStripper structure according to our outgoing message. */
 /* AcceptsFormatting is FALSE in the normal case where the destination does not generally accept formatted mail, and is TRUE if the destination can accept formatted messages. */
 	struct BEStripper *BES;
-	static char xasfFieldName[] = "X-Andrew-ScribeFormat:";
-	static char ctFieldName[] = "Content-Type:";
-	static char ituFieldName[] = "If-Type-Unsupported:";
-	static char xamsFieldName[] = "X-Andrew-Message-Size:";
+	static const char xasfFieldName[] = "X-Andrew-ScribeFormat:";
+	static const char ctFieldName[] = "Content-Type:";
+	static const char ituFieldName[] = "If-Type-Unsupported:";
+	static const char xamsFieldName[] = "X-Andrew-Message-Size:";
 	char *CopyHdr;
 	char *ValPtr, *Val2, *xasfVal, *ctVal, Ch;
 	int xasfCode, ctCode, CopyHdrSize;
@@ -687,7 +682,7 @@ FILE *fp; char *title; struct BEStripper *bes; struct LinePromState *lps;
 char *lineBuf; int sizeLineBuf, whereGo;
 {
 	int C, WasBOL;
-	static char sepchars[] = "\n----------------\n";
+	static const char sepchars[] = "\n----------------\n";
 
 	sprintf(MsgBf, "%s%s", title, sepchars);
 	PrintMaybeFoldQuotingFormatting(fp, MsgBf,

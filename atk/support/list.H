@@ -81,7 +81,7 @@ public:
     /* proc returns FALSE, enumerate terminates and */
     /* returns the piece of data responsible. */
 
-    virtual char * Enumerate(list_efptr proc, char *rock)  ;
+    virtual char * Enumerate(list_efptr proc, const char *rock)  ;
 
     virtual void Clear();
 

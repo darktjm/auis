@@ -23,11 +23,6 @@
  *  $
 */
 
-#ifdef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/image/cmd/RCS/xwd2atkimage.C,v 1.6 1995/11/08 02:34:52 robr Stab74 $";
-#endif
-
 #include <andrewos.h> /* strings.h */
 #include <stdio.h>
 #include <ctype.h>
@@ -41,7 +36,7 @@ int main(int  argc, char  **argv)
     long ret, saveQuality = -1;
     class xwd *self;
     FILE *f = stdin;
-    char *saveformat = NULL;
+    const char *saveformat = NULL;
     boolean qualityComing = FALSE;
 
     if(argc > 1) {

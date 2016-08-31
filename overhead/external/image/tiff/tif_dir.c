@@ -918,7 +918,7 @@ int TIFFDefaultDirectory(TIFF *tif)
  */
 int TIFFSetDirectory(register TIFF *tif, int dirn)
 {
-	static char module[] = "TIFFSetDirectory";
+	static const char module[] = "TIFFSetDirectory";
 	u_short dircount;
 	long nextdir;
 	int n;

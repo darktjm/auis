@@ -30,11 +30,6 @@ the full agreement.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/gdp/RCS/transform.c,v 1.3 1992/12/15 21:50:19 rr2b Stab74 $";
-#endif
-
 #include <gestures/util.h>
 #include <gestures/matrix.h>
 #include "transform.h"

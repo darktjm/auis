@@ -25,13 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/suite/RCS/suite.C,v 1.15 1996/03/18 23:10:42 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Suite-object
@@ -59,8 +52,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
-
-
+#include <andrewos.h>
 ATK_IMPL("suite.H")
 #include <graphic.H>
 #include <dataobject.H>
@@ -308,7 +300,7 @@ suite::InitializeClass( )
   return(TRUE);
 }
 
-static char suitebutton[] = "suite";
+static const char suitebutton[] = "suite";
 
 suite::suite( )
 {
@@ -2323,7 +2315,7 @@ DefaultExceptionHandler( register class suite  *self )
   {
   char msg[1000];
   long result;
-  static char *continue_choice[2] = {"continue", 0};
+  static const char * const continue_choice[2] = {"continue", 0};
 
   sprintf(msg, "Suite: DefaultExceptionHandler:: exception code '%ld' detected.",
 	(self)->ExceptionCode() );
@@ -2512,8 +2504,8 @@ AllocColorFromPref( class suite  *self, class color  *color, const char  *prefNa
     *color = prefVal;
 }
 
-#define DEFAULT_FOREGROUND (char *)"black"
-#define DEFAULT_BACKGROUND (char *)"white"
+#define DEFAULT_FOREGROUND "black"
+#define DEFAULT_BACKGROUND "white"
 
 static void
 AllocateColors( class suite  *self )

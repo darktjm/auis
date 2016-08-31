@@ -55,7 +55,7 @@ public:
    void LookupParameters();
 
   virtual void CacheSettings();
-  virtual void DrawButtonText(char *text,long len,struct rectangle *rect,struct rectangle *rect2,boolean pushd);
+  virtual void DrawButtonText(const char *text,long len,struct rectangle *rect,struct rectangle *rect2,boolean pushd);
   virtual void HandleStyleString(char *s);
 
   
@@ -75,9 +75,9 @@ public:
   inline void SetFixedColumns(long VAL) { (this->fixedcolumns = this->columns = (VAL)); }
   inline long GetFixedColumns() { return (this->fixedcolumns); }
  
-  char * label;
+  const char * label;
   char *l[4];
-  char * fontname;
+  const char * fontname;
   short fontsize;
   short buttontype;
   short count,fixedcount;

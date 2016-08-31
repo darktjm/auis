@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp/lib/RCS/tcpconn.c,v 1.11 1992/12/15 21:24:39 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h> /* sys/types.h */
 #include <sys/socket.h>
 #include <netinet/in.h>

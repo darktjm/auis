@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipve02.C,v 1.6 1994/06/09 21:21:04 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -94,7 +86,7 @@ int zipedit_Handle_Figure_Palette_Hit( register class zipedit		  *self, register
 static int Figure_Palette_LBDT( register class zipedit		  *self, register zip_type_pane		   icon_pane, register int				   x , register int				   y , register int				   clicks );
 static int Create_Name_Palette( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette );
 static int Create_Font_Palette( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette );
-static int Create_Font_Icon( register class zipedit		  *self, register zip_type_pane		   containing_pane , register zip_type_pane		   pane , register zip_type_pane		  *palette, 		  register char				  *source, register char				   cursor, register int				   x , register int				   y , register int				   width , register int				   height, char *name );
+static int Create_Font_Icon( register class zipedit		  *self, register zip_type_pane		   containing_pane , register zip_type_pane		   pane , register zip_type_pane		  *palette, 		  register const char				  *source, register char				   cursor, register int				   x , register int				   y , register int				   width , register int				   height, const char *name );
 void zipedit_Expose_Font_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
 long zipedit_Hide_Font_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
 static int Create_Shade_Palette( register class zipedit		  *self, zip_type_pane containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette );
@@ -103,7 +95,7 @@ void zipedit_Hide_Shade_Palette( register class zipedit		  *self, register zip_t
 static int Create_Figure_Palette( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette );
 void zipedit_Expose_Figure_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
 void zipedit_Hide_Figure_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-static int Create_Figure_Icon( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   editing_pane, register zip_type_pane		  *palette, register long				   type, 		    register char				   icon, register char				  *icon_font_name, register char				   cursor, register char				  *cursor_font_name, 		    register long				   serial , register long				   count );
+static int Create_Figure_Icon( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   editing_pane, register zip_type_pane		  *palette, register long				   type, 		    register char				   icon, register const char				  *icon_font_name, register char				   cursor, register const char				  *cursor_font_name, 		    register long				   serial , register long				   count );
 static int Create_Attribute_Palette( register class zipedit		  *self, register zip_type_pane			   containing_pane, register zip_type_pane			   pane, register zip_type_pane			  *palette );
 static int Create_TL_Palette( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette );
 void zipedit_Expose_TL_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
@@ -117,7 +109,7 @@ void zipedit_Hide_BL_Palette( register class zipedit		  *self, register zip_type
 static int Create_BR_Palette( register class zipedit		  *self, register zip_type_pane			   containing_pane, register zip_type_pane			   pane, register zip_type_pane			  *palette );
 void zipedit_Expose_BR_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
 void zipedit_Hide_BR_Palette( register class zipedit		  *self, register zip_type_pane		   pane );
-static int Create_Palette_Surround( register class zipedit  *self, register zip_type_pane  pane, register zip_type_pane  *palette, char *name, register int x_origin , register int   y_origin , register int width , register int height );
+static int Create_Palette_Surround( register class zipedit  *self, register zip_type_pane  pane, register zip_type_pane  *palette, const char *name, register int x_origin , register int   y_origin , register int width , register int height );
 int zipedit_Handle_Font_Family_Selection( register class zipedit *self, register zip_type_pane pane, register enum view_MouseAction  action, register long  x , register long  y , register long  clicks );
 int zipedit_Handle_Font_Height_Selection( register class zipedit	      *self, register zip_type_pane	       pane, register enum view_MouseAction       action, register long			       x , register long			       y , register long			       clicks );
 int zipedit_Handle_Font_Italic_Selection( register class zipedit	      *self, register zip_type_pane	       pane, register int			       action , register long			       x , register long			       y , register long			       clicks );
@@ -501,16 +493,16 @@ Create_Name_Palette( register class zipedit		  *self, register zip_type_pane		  
           {
   register int				  status = zip_ok;
   zip_type_stream			  stream;
-  static char				  source[] =
-"{ZIP_NAME_STREAM\n\
-Fandysans10b\n\
-*A;-590,75\nT Stream:\n\
-*A;-300,75\nNZIP_current_stream_name\nFandysans10\n\
-*A;-590,0\nT Image:\n\
-*A;-300,0\nNZIP_current_image_name\nFandysans10\n\
-*A;-590,-75\nT Figure:\n\
-*A;-300,-75\nNZIP_current_figure_name\nFandysans10\n\
-}";
+  static const char			  source[] =
+"{ZIP_NAME_STREAM\n"
+"Fandysans10b\n"
+"*A;-590,75\nT Stream:\n"
+"*A;-300,75\nNZIP_current_stream_name\nFandysans10\n"
+"*A;-590,0\nT Image:\n"
+"*A;-300,0\nNZIP_current_image_name\nFandysans10\n"
+"*A;-590,-75\nT Figure:\n"
+"*A;-300,-75\nNZIP_current_figure_name\nFandysans10\n"
+"}";
 
   IN(Create_Name_Palette);
   Create_Palette_Surround( self, containing_pane, palette, "NAME", 30,5,40,10 );
@@ -526,15 +518,15 @@ static int
 Create_Font_Palette( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   pane, register zip_type_pane		  *palette )
           {
   register int				  status = zip_ok;
-  static char				  family[] =
+  static const char			  family[] =
 "{ZIP_FONT_FAMILY\n*A;0,0\nNfont_catalog_family\nMMC\nFandysans10\nTSerif\n}";
-  static char					  height[] =
+  static const char				  height[] =
 "{ZIP_FONT_HEIGHT\n*A;0,0\nNfont_catalog_height\nMMC\nFandysans10\nT12\n}";
-  static char					  italic[] =
+  static const char				  italic[] =
 "{ZIP_FONT_ITALIC\n*A;0,0\nNfont_catalog_italic\nMMC\nFandysans10\nTItalic\n}";
-  static char					  bold[] =
+  static const char				  bold[] =
 "{ZIP_FONT_BOLD\n*A;0,0\nNfont_catalog_bold\nMMC\nFandysans10\nTBold\n}";
-  static char					  sample[] =
+  static const char				  sample[] =
 "{ZIP_FONT_SAMPLE\n*A;0,0\nNfont_catalog_sample\nMMC\nFandy12\nTSample\n*C;0,50\n>0,-50\n*C;-100,0\n>100,0\n}";
 
   IN(Create_Font_Palette);
@@ -566,7 +558,7 @@ Create_Font_Palette( register class zipedit		  *self, register zip_type_pane		  
 
 static int
 Create_Font_Icon( register class zipedit		  *self, register zip_type_pane		   containing_pane , register zip_type_pane		   pane , register zip_type_pane		  *palette,
-		  register char				  *source, register char				   cursor, register int				   x , register int				   y , register int				   width , register int				   height, char *name )
+		  register const char				  *source, register char				   cursor, register int				   x , register int				   y , register int				   width , register int				   height, const char *name )
                 {
   register int				  status = zip_ok;
   zip_type_stream			  stream;
@@ -623,67 +615,67 @@ Create_Shade_Palette( register class zipedit		  *self, zip_type_pane containing_
         {
   register int				  status = zip_ok;
   zip_type_stream			  stream;
-  static char				  source[] =
-"{\n\
-*J;-1100,0\n\
-NZIP-SHADE-SELECTOR\n\
->77,0\n\
-*G;-1200,100\n\
->-1000,-100\n\
-*G;-1175,75\n\
-NZIP-SHADE-DISPLAY\n\
->-1025,-75\n\
-*A;-1100,0\n\
-NZIP-SHADE-TRANSPARENT\n\
-Fzipicn20\n\
-T2\n\
-*G;-900,50\n\
-#White\n\
-NZIP-SHADE=01\n\
-G1\n\
->-800,-50\n\
-*G;-700,50\n\
-NZIP-SHADE=10\n\
-G10\n\
->-600,-50\n\
-*G;-500,50\n\
-NZIP-SHADE=20\n\
-G20\n\
->-400,-50\n\
-*G;-300,50\n\
-NZIP-SHADE=30\n\
-G30\n\
->-200,-50\n\
-*G;-100,50\n\
-NZIP-SHADE=40\n\
-G40\n\
->0,-50\n\
-*G;100,50\n\
-NZIP-SHADE=50\n\
-G50\n\
->200,-50\n\
-*G;300,50\n\
-NZIP-SHADE=60\n\
-G60\n\
->400,-50\n\
-*G;500,50\n\
-NZIP-SHADE=70\n\
-G70\n\
->600,-50\n\
-*G;700,50\n\
-NZIP-SHADE=80\n\
-G80\n\
->800,-50\n\
-*G;900,50\n\
-NZIP-SHADE=100\n\
-#Black\n\
-G100\n\
->1000,-50\n\
-#*G;1100,100\n\
-#NZIP-SHADE=100\n\
-#G100\n\
-#>1200,-100\n\
-}";
+  static const char			  source[] =
+"{\n"
+"*J;-1100,0\n"
+"NZIP-SHADE-SELECTOR\n"
+">77,0\n"
+"*G;-1200,100\n"
+">-1000,-100\n"
+"*G;-1175,75\n"
+"NZIP-SHADE-DISPLAY\n"
+">-1025,-75\n"
+"*A;-1100,0\n"
+"NZIP-SHADE-TRANSPARENT\n"
+"Fzipicn20\n"
+"T2\n"
+"*G;-900,50\n"
+"#White\n"
+"NZIP-SHADE=01\n"
+"G1\n"
+">-800,-50\n"
+"*G;-700,50\n"
+"NZIP-SHADE=10\n"
+"G10\n"
+">-600,-50\n"
+"*G;-500,50\n"
+"NZIP-SHADE=20\n"
+"G20\n"
+">-400,-50\n"
+"*G;-300,50\n"
+"NZIP-SHADE=30\n"
+"G30\n"
+">-200,-50\n"
+"*G;-100,50\n"
+"NZIP-SHADE=40\n"
+"G40\n"
+">0,-50\n"
+"*G;100,50\n"
+"NZIP-SHADE=50\n"
+"G50\n"
+">200,-50\n"
+"*G;300,50\n"
+"NZIP-SHADE=60\n"
+"G60\n"
+">400,-50\n"
+"*G;500,50\n"
+"NZIP-SHADE=70\n"
+"G70\n"
+">600,-50\n"
+"*G;700,50\n"
+"NZIP-SHADE=80\n"
+"G80\n"
+">800,-50\n"
+"*G;900,50\n"
+"NZIP-SHADE=100\n"
+"#Black\n"
+"G100\n"
+">1000,-50\n"
+"#*G;1100,100\n"
+"#NZIP-SHADE=100\n"
+"#G100\n"
+"#>1200,-100\n"
+"}";
 
 
   IN(Create_Shade_Palette);
@@ -780,7 +772,7 @@ void zipedit_Hide_Figure_Palette( register class zipedit		  *self, register zip_
 
 static int
 Create_Figure_Icon( register class zipedit		  *self, register zip_type_pane		   containing_pane, register zip_type_pane		   editing_pane, register zip_type_pane		  *palette, register long				   type,
-		    register char				   icon, register char				  *icon_font_name, register char				   cursor, register char				  *cursor_font_name,
+		    register char				   icon, register const char				  *icon_font_name, register char				   cursor, register const char				  *cursor_font_name,
 		    register long				   serial , register long				   count )
                       {
   register long				  status = zip_ok,
@@ -811,22 +803,22 @@ Create_Attribute_Palette( register class zipedit		  *self, register zip_type_pan
           {
   register int					  status = zip_ok;
   zip_type_stream				  stream;
-  static char					  source[] =
-"{ZIP_ATTRIBUTES\n\
-Fandysans10b\n\
-##*G;-120,1000\n##>120,-1000\n\
-\n\
-*C;-100,1000\n>-100,1000\n\
-*A;0,900\nTX-Point\nMMC\n\
-*A;0,850\nNZIP_current_x_point_name\nFandysans10\nMMC\n\
-\n\
-*A;0,700\nTY-Point\nMMC\n\
-*A;0,650\nNZIP_current_y_point_name\nFandysans10\nMMC\n\
-\n\
-*A;0,500\nTFont\nMMC\n\
-*A;0,450\nNZIP_current_font_name\nFandysans10\nMMC\n\
-*C;100,-1000\n>100,-1000\n\
-}";
+  static const char				  source[] =
+"{ZIP_ATTRIBUTES\n"
+"Fandysans10b\n"
+"##*G;-120,1000\n##>120,-1000\n"
+"\n"
+"*C;-100,1000\n>-100,1000\n"
+"*A;0,900\nTX-Point\nMMC\n"
+"*A;0,850\nNZIP_current_x_point_name\nFandysans10\nMMC\n"
+"\n"
+"*A;0,700\nTY-Point\nMMC\n"
+"*A;0,650\nNZIP_current_y_point_name\nFandysans10\nMMC\n"
+"\n"
+"*A;0,500\nTFont\nMMC\n"
+"*A;0,450\nNZIP_current_font_name\nFandysans10\nMMC\n"
+"*C;100,-1000\n>100,-1000\n"
+"}";
 
   Create_Palette_Surround( self, containing_pane, palette, "ATTRIBUTE-SURROUND", 5,50,10,80 );
   (self->data_object)->Create_Stream(  &stream, NULL, zip_default );
@@ -841,11 +833,11 @@ Create_TL_Palette( register class zipedit		  *self, register zip_type_pane		   c
           {
   register int				  status = zip_ok;
   zip_type_stream			  stream;
-  static char				  source[] =
-"{\n\
-Fandysans16\n\
-##*1;0,0\n##T*\n\
-}";
+  static const char			  source[] =
+"{\n"
+"Fandysans16\n"
+"##*1;0,0\n##T*\n"
+"}";
 
   Create_Palette_Surround( self, containing_pane, palette, "TL-SURROUND", 5,5,10,10 );
   (self->data_object)->Create_Stream(  &stream, NULL, zip_default );
@@ -870,11 +862,11 @@ Create_TR_Palette( register class zipedit		  *self, register zip_type_pane		   c
           {
   register int				  status = zip_ok;
   zip_type_stream			  stream;
-  static char				  source[] =
-"{\n\
-Fandysans10b\n\
-##*1;0,0\n##T*\n\
-}";
+  static const char			  source[] =
+"{\n"
+"Fandysans10b\n"
+"##*1;0,0\n##T*\n"
+"}";
 
   Create_Palette_Surround( self, containing_pane, palette, "TR-SURROUND", 95, 5,10,10 ); 
   (self->data_object)->Create_Stream(  &stream, NULL, zip_default );
@@ -899,11 +891,11 @@ Create_BL_Palette( register class zipedit		  *self, register zip_type_pane			   
           {
   register int					  status = zip_ok;
   zip_type_stream				  stream;
-  static char					  source[] =
-"{\n\
-Fandysans10b\n\
-##*1;0,0\n##T*\n\
-}";
+  static const char				  source[] =
+"{\n"
+"Fandysans10b\n"
+"##*1;0,0\n##T*\n"
+"}";
 
   Create_Palette_Surround( self, containing_pane, palette, "BL-SURROUND", 5,95, 10,10 );
   (self->data_object)->Create_Stream(  &stream, NULL, zip_default ); 
@@ -928,11 +920,11 @@ Create_BR_Palette( register class zipedit		  *self, register zip_type_pane			   
           {
   register int					  status = zip_ok;
   zip_type_stream				  stream;
-  static char					  source[] =
-"{\n\
-Fandysans10b\n\
-##*1;0,0\n##T*\n\
-}";
+  static const char				  source[] =
+"{\n"
+"Fandysans10b\n"
+"##*1;0,0\n##T*\n"
+"}";
 
   Create_Palette_Surround( self, containing_pane, palette, "BR-SURROUND", 95,95,10,10 );
   (self->data_object)->Create_Stream(  &stream, NULL, zip_default );
@@ -953,17 +945,17 @@ void zipedit_Hide_BR_Palette( register class zipedit		  *self, register zip_type
   }
 
 static int
-Create_Palette_Surround( register class zipedit		  *self, register zip_type_pane		   pane, register zip_type_pane		  *palette, char *name,
+Create_Palette_Surround( register class zipedit		  *self, register zip_type_pane		   pane, register zip_type_pane		  *palette, const char *name,
 			    register int				   x_origin , register int				   y_origin , register int				   width , register int				   height )
           {
   register int				  status = zip_ok;
   zip_type_stream			  stream;
-  static char				  source[] =
-"{\n\
-Fandysans10b\n\
-##*1;0,0\n\
-##T*\n\
-}";
+  static const char			  source[] =
+"{\n"
+"Fandysans10b\n"
+"##*1;0,0\n"
+"##T*\n"
+"}";
 
   IN(Create_Palette_Surround);
   (self->view_object)->Create_Nested_Pane(  palette, name, pane, zip_default );

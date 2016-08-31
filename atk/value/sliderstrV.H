@@ -41,7 +41,7 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
  
-   char * GetValueString()  ;
+   const char * GetValueString()  ;
 };
 
 /* parameters to spst

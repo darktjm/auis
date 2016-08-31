@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/ps.C,v 1.3 1994/08/11 03:02:58 rr2b Stab74 $";
-#endif
-
-
-
 #include "dataobject.H"
 #include "dictionary.H"
 #include "ps.H"
@@ -52,14 +44,12 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 ATKdefineRegistry(ps, icon, ps::InitializeClass);
-#ifndef NORCSID
-#endif
 static long check_for_title(class ps  * self, FILE  * file);
 
 
 static long check_for_title(class ps  * self, FILE  * file)
 {
-    char * match = "title{";
+    const char * match = "title{";
     char title[1024];
     int c;
     int x;
@@ -185,7 +175,7 @@ ps::Read(FILE  * file,long  id)
     long x, y, haschild, width, height;
     long objectid;
     int c;
-    char *match;
+    const char *match;
     char datatype[1024];
     class dataobject * newobject;
     long status;

@@ -25,18 +25,9 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/file.h sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/msclients/cui/RCS/unixmach.c,v 2.9 1992/12/15 21:22:34 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*  machine dependant functions for the cui program */
 
+#include <andrewos.h> /* sys/file.h sys/time.h */
 #include <cui.h>
 #include <hdrparse.h>
 #include <errprntf.h>

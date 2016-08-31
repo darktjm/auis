@@ -1,3 +1,4 @@
+#if 0  /* just to shut up makedep; this file is not built */
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
@@ -24,11 +25,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/stats/RCS/getstats.c,v 2.20 1993/06/30 05:04:24 rr2b Stab74 $";
-#endif
 
 /* **********************************************************************
 *   This code is designed to read what might be priveledged (setuid) 
@@ -129,7 +125,7 @@ char **argv;
 
 #else /* #ifdef AIX */
 
-#include <sitevars.h>
+/* #include <sitevars.h> */ /* just to shut up makedep; this file is not built */
 
 /* The following include defines sys_vax_20 for Vax release 2.0 op sys, */
 /* since that particular OS needs some special treatment.  We would have */
@@ -821,3 +817,4 @@ char **argv;
 #endif /* #ifdef AIX */
 
 
+#endif

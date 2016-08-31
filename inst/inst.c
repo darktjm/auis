@@ -25,14 +25,6 @@
  *  $
 */
 
-/* I think we can do this now that the Imakefile passes -I../config and -I../config/$(SYS_CONFDIR) to the compiler. -rr2b 6/95*/
-
-#include <andrewos.h>
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/inst/RCS/inst.c,v 1.14 1996/09/03 19:31:30 robr Exp $";
-#endif
-
 /* ALSO utimes and strip the file
 
 Generic install command.  Options are:
@@ -43,6 +35,9 @@ Generic install command.  Options are:
 	-o <user>		chown to this user
 	-g <group>	chgrp to this group
 */
+
+/* I think we can do this now that the Imakefile passes -I../config and -I../config/$(SYS_CONFDIR) to the compiler. -rr2b 6/95*/
+#include <andrewos.h>
 
 #define MAXFILES 200
 #define BUFSIZE 32768

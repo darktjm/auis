@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/value/RCS/fourwayV.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("fourwayV.H")
 #include <fourwayV.H>
 #include <atom.H>
@@ -75,8 +65,6 @@ static class atom *  A_string;
 
 
 ATKdefineRegistry(fourwayV, buttonV, fourwayV::InitializeClass);
-#ifndef NORCSID
-#endif
 
 
 boolean fourwayV::InitializeClass()
@@ -96,7 +84,7 @@ fourwayV::fourwayV()
 
 void fourwayV::LookupParameters()
 {
-    char * fontname;
+    const char * fontname;
     long fontsize;
     struct resourceList parameters[7];
     class buttonV *bv;

@@ -25,16 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/consoleClass.C,v 1.9 1996/08/19 18:48:56 robr Exp $";
-#endif
-
-
- 
-
 /* 
  * console -- User-configurable instrument console for Andrew
  * -originally written for use under the Andrew Window Manager
@@ -47,7 +37,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  *
  */
 
-
+#include <andrewos.h>
 ATK_IMPL("consoleClass.H")
 #include <consoleClass.H>
 #include <menulist.H>
@@ -68,8 +58,6 @@ ATK_IMPL("consoleClass.H")
 
 
 ATKdefineRegistry(consoleClass, view, consoleClass::InitializeClass);
-#ifndef NORCSID
-#endif
 struct ATKregistryEntry  *consoleClass_GetInfoHack();
 void SetLogFont(class text  *textObj);
 
@@ -135,7 +123,7 @@ void consoleClass::WantUpdate(class view  *requestor)
 void consoleClass::Update()
 {
     struct display *mydisp;
-    char *window_visibility = NULL;
+    const char *window_visibility = NULL;
 
     mydbg(("entering: consoleClass::Update\n"));
     if ((window_visibility = WantInformation("im_visible")) &&

@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/astringtest.C,v 1.1 1995/09/23 15:18:47 wjh Stab74 $";
-#endif
-
-
 /* astringtest.C
 
 	test the astring object

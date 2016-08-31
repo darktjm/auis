@@ -32,12 +32,6 @@ the full agreement.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/recognition/RCS/matrix.c,v 1.5 1993/06/17 04:35:10 rr2b Stab74 $";
-#endif
-
-
 /*
  Simple matrix operations
  Why I am writing this stuff over is beyond me

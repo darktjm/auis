@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/pause.c,v 2.11 1993/08/27 21:42:42 gk5g Stab74 $";
-#endif
-
-
- 
-
 /*
 		pause.c -- test and set the Computer Science pause-on-disk-full facility
 

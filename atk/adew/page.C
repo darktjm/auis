@@ -25,20 +25,11 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/page.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* This code is taken , in part, from the switcher inset of N. Borenstein's
 Andrew Toolkit Book . It has been modified and used with the permission
 of the author */
 
+#include <andrewos.h>
 ATK_IMPL("page.H")
 #include <page.H>
 #include <dataobject.H>
@@ -146,7 +137,9 @@ long page::Write(FILE  *fp ,long  writeid,int  level)
 
 long page::Read(FILE  *fp, long  id)
 {
-    char LineBuf[250], Label[250], *s, *obidstr, *thisname;
+    char LineBuf[250], Label[250], *s, *obidstr;
+    const char *thisname;
+    char *lp;
     int status, obid;
     class dataobject *newob = NULL;
 
@@ -163,8 +156,8 @@ long page::Read(FILE  *fp, long  id)
 	if (strncmp(LineBuf, "\\begindata{", 11)) {
 	    return(dataobject_BADFORMAT);
 	}
-	thisname = &LineBuf[11];
-	obidstr = strchr(thisname, ',');
+	thisname = lp = &LineBuf[11];
+	obidstr = strchr(lp, ',');
 	if (!obidstr) return(dataobject_BADFORMAT);
 	*obidstr++ = '\0';
 	s = strchr(obidstr, '}');
@@ -189,8 +182,8 @@ long page::Read(FILE  *fp, long  id)
 	if (strncmp(LineBuf, "\\view{", 6)) {
 	    return(dataobject_BADFORMAT);
 	}
-	thisname = &LineBuf[6];
-	s = strchr(thisname, '}');
+	thisname = lp = &LineBuf[6];
+	s = strchr(lp, '}');
 	if (s) *s = '\0';
 	s = strchr(Label, '\n');
 	if (s) *s = '\0';
@@ -212,7 +205,7 @@ long page::Read(FILE  *fp, long  id)
 }
 
 
-boolean page::AddObject(class dataobject  *d, char  *label , char  *viewname,long which)
+boolean page::AddObject(class dataobject  *d, const char  *label , const char  *viewname,long which)
 {
     struct page_switchee *sw, *swtmp;
 
@@ -297,7 +290,7 @@ boolean page::DeleteObject(class dataobject  *d)
     }
     return(FALSE);
 }
- char * page::GetSwitcheeName(struct page_switchee  *sw)
+const char * page::GetSwitcheeName(struct page_switchee  *sw)
 {
 
     if(ATK::IsTypeByName((sw->d)->GetTypeName(),"cel")){
@@ -305,7 +298,7 @@ boolean page::DeleteObject(class dataobject  *d)
     }
     return(sw->label);
 }
- char * page::GetNowPlayingName()
+const char * page::GetNowPlayingName()
 {
     struct page_switchee *sw;
 
@@ -363,7 +356,7 @@ class dataobject *page::GetObjectByName(char  *name)
     }
     return NULL;
 }
-char  *page::GetNameOfObject(class dataobject  *d)
+const char  *page::GetNameOfObject(class dataobject  *d)
 {
     struct page_switchee *sw;
     sw = FindSwitchee(this,d,page_BYDATAOBJECT);
@@ -389,7 +382,7 @@ long page::GetObjectCount()
     }
     return count;
 }
-char *page::ViewName()
+const char *page::ViewName()
 {
     return("pagev"); 
 }

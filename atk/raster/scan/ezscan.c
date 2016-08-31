@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/scan/RCS/ezscan.c,v 1.10 1992/12/15 21:40:02 rr2b Stab74 $";
-#endif
-
-
 /* ***************************************************************** 
 
 	ezscan.c - a simple interface to exercise the 3117 scanner

@@ -1,5 +1,3 @@
-/* @(#)portmap.c	1.1 87/11/04 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,15 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/etc/RCS/portmap.c,v 1.3 1992/12/15 21:53:39 rr2b Stab74 $";
-#endif
-
-#ifndef lint
-static	char sccsid[] = "@(#)portmap.c 1.32 87/08/06 Copyr 1984 Sun Micro";
-#endif
 
 /*
  * Copyright (c) 1984 by Sun Microsystems, Inc.

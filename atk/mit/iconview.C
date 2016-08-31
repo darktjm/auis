@@ -2,14 +2,6 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/iconview.C,v 1.8 1994/10/29 16:06:24 rr2b Stab74 $ */
-/* $ACIS:$ */
-/* $Source: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/iconview.C,v $ */
-
-#if !defined(lint) && !defined(LOCORE) && defined(RCS_HDRS)
-static char *iconview_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/iconview.C,v 1.8 1994/10/29 16:06:24 rr2b Stab74 $";
-#endif /* !defined(lint) && !defined(LOCORE) && defined(RCS_HDRS) */
-
 #include <andrewos.h>
 #include "rect.h"
 
@@ -208,7 +200,7 @@ static
 void AdoptNewChild(class iconview  * self,class icon  * dobj)
         {  
     long x,y;
-    char * viewclass;
+    const char * viewclass;
     class dataobject * d;
 
     SlayChild(self);
@@ -561,7 +553,7 @@ iconview::LinkTree(class view  *parent)
 }
 
 void
-iconview::SetIconFont(char  * iconfont,int  iconstyle,int  iconpts)
+iconview::SetIconFont(const char  * iconfont,int  iconstyle,int  iconpts)
     {
  
     this->iconfont = fontdesc::Create(iconfont, iconstyle, iconpts);
@@ -585,7 +577,7 @@ iconview::SetIconChar(char  iconchar)
 }
 
 void
-iconview::SetTitleFont(char  * titlefont,int  titlestyle,int  titlepts)
+iconview::SetTitleFont(const char  * titlefont,int  titlestyle,int  titlepts)
     {
  
     this->titlefont = fontdesc::Create(titlefont, titlestyle, titlepts);

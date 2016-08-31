@@ -25,18 +25,12 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/cmd/RCS/arpadate.c,v 1.8 1992/12/15 21:04:17 rr2b Stab74 $";
-#endif
-
 /*
 		arpadate.c -- Shell command to print current time in
 			      ARPAnet format
 */
 
+#include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
 
@@ -47,7 +41,7 @@ char *argv[];
 {
     int AnyArgs, ac;
     unsigned long int Then;
-    static char Usage[] = "[-n] [ctime1 ctime2 ...]";
+    static const char Usage[] = "[-n] [ctime1 ctime2 ...]";
 
     AnyArgs = 0;
     for (ac = 1; ac < argc; ++ac) {

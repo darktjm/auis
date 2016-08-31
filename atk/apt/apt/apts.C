@@ -25,20 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/apt/RCS/apts.C,v 1.6 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-/* $Header $ */
-/* $Source $ */
-
-#ifndef lint
-static UNUSED const char *rcsidapts_c = "$Header $";
-#endif
-
 /*
     $Log: apts.C,v $
  * Revision 1.6  1995/11/07  20:17:10  robr
@@ -103,6 +89,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include <andrewos.h>
 ATK_IMPL("apts.H")
 #include  "apt.H"
 #include  "apts.H"
@@ -117,10 +104,6 @@ ATK_IMPL("apts.H")
 
 
 ATKdefineRegistry(apts, ATK, NULL);
-#ifndef NORCSID
-#endif
-#ifndef lint
-#endif
 
 
 long

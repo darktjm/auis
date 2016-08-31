@@ -25,16 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/bpair.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* bpair.c	
 
 	An lpair without the line between the parts
@@ -42,8 +32,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 */
 
-
-
+#include <andrewos.h>
 ATK_IMPL("bpair.H")
 #include <graphic.H>
 #include <view.H>
@@ -69,8 +58,6 @@ ATK_IMPL("bpair.H")
 
 
 ATKdefineRegistry(bpair, lpair, NULL);
-#ifndef NORCSID
-#endif
 static void lpair_ComputeSizes (register class lpair  *l);
 static void lpair_ResetDimensions(register class lpair  *self);
 

@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-char *figotoolv_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figtoolview.C,v 3.12 1995/09/18 21:51:50 robr Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("figtoolview.H")
 #include <figtoolview.H>
@@ -80,7 +76,7 @@ static void InsertArrowSize(class figtoolview  *self, short  val);
 static void SetArrowProc(class stringtbl  *st, class figtoolview  *self, short  accnum);
 static void InsertRRectCorner(class figtoolview  *self, short  val);
 static void SetRRectCornerProc(class stringtbl  *st, class figtoolview  *self, short  accnum);
-static void InsertColor(class figtoolview  *self, char  *val);
+static void InsertColor(class figtoolview  *self, const char  *val);
 static void SetColorProc(class stringtbl  *st, class figtoolview  *self, short  accnum);
 static void InsertSnapGrid(class figtoolview  *self, short  val);
 static void SetSnapGridProc(class stringtbl  *st, class figtoolview  *self, short  accnum);
@@ -135,7 +131,7 @@ static void Toolmod_Select(class figtoolview  *self, long  rock);
 static class view *Tool_CreateProc(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
 static void Tool_Name(class figtoolview  *self, long  rock);
 static void AbortObjectProc(class figtoolview  *self, long  rock);
-static char *CopyString(char  *str);
+static char *CopyString(const char  *str);
 static void LowerString(char  *str);
 static char *WhiteKillString(char  *buf);
   
@@ -149,20 +145,20 @@ struct layout_t {
     figtoolview_layout_f proc; /* tool procedure */
     figtoolview_mod_f procmod; /* procedure to call when tool is double-clicked */
     boolean writes; /* does the tool change the raster data? */
-    char *name; /* name in the toolset window */
+    const char *name; /* name in the toolset window */
 };
 
 struct comlayout_t {
     figtoolview_comm_f proc; /* command procedure */
-    char *rock;	    /* a rock */
-    char *name; /* name in the toolset window */
+    const char *rock;	    /* a rock */
+    const char *name; /* name in the toolset window */
 };
 
 #define FIGTOOLS_NUM (5)
 #define FIGTOOLSEX_NUM (2)
 #define NumFigTools(self)  ((self)->toolextras ? (FIGTOOLS_NUM+FIGTOOLSEX_NUM) : FIGTOOLS_NUM)
 
-static struct layout_t toollayout[FIGTOOLS_NUM+FIGTOOLSEX_NUM] = {
+static const struct layout_t toollayout[FIGTOOLS_NUM+FIGTOOLSEX_NUM] = {
     {NULL, NULL, 0, "TOOLS:"},
     {NULL, NULL, 0, "Browse"},
     {(figtoolview_layout_f)Tool_Select, Toolmod_Select, 0, "Reshape"},
@@ -174,13 +170,13 @@ static struct layout_t toollayout[FIGTOOLS_NUM+FIGTOOLSEX_NUM] = {
 };
 
 struct objlayout_t {
-    char *name;	    /* name in the toolset window */
+    const char *name;	    /* name in the toolset window */
     long rock;	    /* rock passed to Instantiate() */
 };
 
 /*
 #define FIGOBJS_NUM (12)
-static struct objlayout_t objectlayout[FIGOBJS_NUM] = {
+static const struct objlayout_t objectlayout[FIGOBJS_NUM] = {
     {"figotext", 0},
     {"figoplin", 1},
     {"figoplin", 0},
@@ -199,7 +195,7 @@ static struct objlayout_t objectlayout[FIGOBJS_NUM] = {
 #define FIGCMDS_NUM (16)
 #define FIGCMDSEX_NUM (5)
 #define FIGCMD_LOCKCREATE (14)
-static struct comlayout_t cmdlayout[FIGCMDS_NUM+FIGCMDSEX_NUM] = {
+static const struct comlayout_t cmdlayout[FIGCMDS_NUM+FIGCMDSEX_NUM] = {
     {NULL,		    NULL,	"COMMANDS:"},
     {(figtoolview_comm_f)Command_SelectAll,	    NULL,	"Select all"},
     {(figtoolview_comm_f)Command_CutNPaste,	    (char *)figview_OpCut, "Cut"},
@@ -229,7 +225,7 @@ static struct comlayout_t cmdlayout[FIGCMDS_NUM+FIGCMDSEX_NUM] = {
 #define figtoolv_shade_Clear (2)
 #define figtoolv_shade_Zero (3)
 
-static char *shadelayout[FIGSHADES_NUM] = {
+static const char * const shadelayout[FIGSHADES_NUM] = {
     "SHADES:",
     "<default>",
     "clear",
@@ -248,7 +244,7 @@ static char *shadelayout[FIGSHADES_NUM] = {
 #define figtoolv_textpos_Inherit (1)
 #define figtoolv_textpos_Zero (2)
 
-static char *textposlayout[FIGTEXTPOSS_NUM] = {
+static const char * const textposlayout[FIGTEXTPOSS_NUM] = {
     "TEXT POS:",
     "<default>",
     "Center",
@@ -260,7 +256,7 @@ static char *textposlayout[FIGTEXTPOSS_NUM] = {
 #define figtoolv_linestyle_Inherit (1)
 #define figtoolv_linestyle_Zero (2)
 
-static char *linestylelayout[FIGLINESTYLES_NUM] = {
+static const char * const linestylelayout[FIGLINESTYLES_NUM] = {
     "LINE STYLES:",
     "<default>",
     "________",
@@ -276,7 +272,7 @@ static char *linestylelayout[FIGLINESTYLES_NUM] = {
 #define figtoolv_linewidth_Other (2)
 #define figtoolv_linewidth_Zero (3)
 
-static char *linewidthlayout[FIGLINEWIDTHS_NUM_INIT] = {
+static const char * const linewidthlayout[FIGLINEWIDTHS_NUM_INIT] = {
     "LINE WIDTHS:",
     "<default>",
     "<other>",
@@ -293,7 +289,7 @@ static char *linewidthlayout[FIGLINEWIDTHS_NUM_INIT] = {
 #define figtoolv_rrectcorner_Other (2)
 #define figtoolv_rrectcorner_Zero (3)
 
-static char *rrectcornerlayout[FIGRRECTCORNERS_NUM_INIT] = {
+static const char * const rrectcornerlayout[FIGRRECTCORNERS_NUM_INIT] = {
     "ROUND CORNER:",
     "<default>",
     "<other>",
@@ -307,7 +303,7 @@ static char *rrectcornerlayout[FIGRRECTCORNERS_NUM_INIT] = {
 #define figtoolv_color_Other (2)
 #define figtoolv_color_Zero (3)
 
-static char *colorlayout[FIGCOLORS_NUM_INIT] = {
+static const char * const colorlayout[FIGCOLORS_NUM_INIT] = {
     "COLORS:",
     "<default>",
     "<other>",
@@ -334,7 +330,7 @@ static char *colorlayout[FIGCOLORS_NUM_INIT] = {
 #define figtoolv_arrow_Other (10)
 #define figtoolv_arrow_Zero (11)
 
-static char *arrowlayout[FIGARROWS_NUM_INIT] = {
+static const char * const arrowlayout[FIGARROWS_NUM_INIT] = {
     "ARROWS:",
     "<default pos>",
     "on tails",
@@ -353,7 +349,7 @@ static char *arrowlayout[FIGARROWS_NUM_INIT] = {
 };
 
 struct snapgridlayout_t {
-    char *name;  /* name in the toolset window */
+    const char *name;  /* name in the toolset window */
     long size;	    /* snap distance in figs */
 };
 
@@ -367,7 +363,7 @@ struct snapgridlayout_t {
 #define figtoolv_snapgrid_Other  (4)
 #define	figtoolv_snapgrid_Zero	 (5)
 
-static struct snapgridlayout_t snapgridlayout[FIGSNAPGRIDS_NUM_INIT] = {
+static const struct snapgridlayout_t snapgridlayout[FIGSNAPGRIDS_NUM_INIT] = {
     {"GRID SNAP:",  0},
     {"points",	    0},
     {"inches", 	    0},
@@ -1568,7 +1564,7 @@ static void SetRRectCornerProc(class stringtbl  *st, class figtoolview  *self, s
     AdjustToMenus(self, (1<<figattr_RRectCorner));
 }
 
-static void InsertColor(class figtoolview  *self, char  *val)
+static void InsertColor(class figtoolview  *self, const char  *val)
 {
     class stringtbl *st = self->colortbl;   
     int ix;
@@ -1929,7 +1925,7 @@ static void AdjustToSelection(class figtoolview  *self)
 {
     long ref = (self->primaryview)->GetOneSelected();
     long ix, vnum, accnum;
-    char *cx;
+    const char *cx;
     class figobj *o;
     boolean fselchanged = FALSE;
 
@@ -3491,17 +3487,11 @@ static void AbortObjectProc(class figtoolview  *self, long  rock)
     (self)->AbortObjectBuilding();
 }
 
-static char *CopyString(char  *str)
+static char *CopyString(const char  *str)
 {
-    char *tmp;
-
     if (str==NULL)
 	return NULL;
-    tmp = (char *)malloc(strlen(str)+1);
-    if (!tmp)
-	return NULL;
-    strcpy(tmp, str);
-    return tmp;
+    return strdup(str);
 }
 
 static void LowerString(char  *str)

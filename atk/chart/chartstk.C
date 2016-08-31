@@ -25,17 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chartstk.C,v 1.4 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-/* $Header $ */
-/* $Source $ */
-
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Stack Chart View-object
@@ -65,6 +54,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include <andrewos.h>
 ATK_IMPL("chartstk.H")
 #include <stdio.h>
 #include <math.h>
@@ -108,9 +98,6 @@ boolean chartstk_debug = FALSE;
 
 
 ATKdefineRegistry(chartstk, chartobj, NULL);
-#ifndef NORCSID
-#endif
-
 
 chartstk::chartstk( )
       {

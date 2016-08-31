@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/ms/RCS/ms.c,v 2.30 1996/09/03 18:59:56 robr Exp $";
-#endif
-
-
- 
-
 /*
 		Message server process.
 */
@@ -288,7 +280,7 @@ static void ms_create_new_message_directory(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_CreateNewMessageDirectory";
+    static const char name[] = "MS_CreateNewMessageDirectory";
     register char *ptr;
     char *DirName, *BodyDirName;
     SNAP_integer Overwrite;
@@ -320,7 +312,7 @@ static void ms_append_file_to_folder(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_AppendFileToFolder";
+    static const char name[] = "MS_AppendFileToFolder";
     register char *ptr;
     char *FileName, *FolderName;
 
@@ -347,7 +339,7 @@ static void ms_process_new_messages(buffer, len, type, cid, opcode)
 CallPacket *buffer;
 int len, type, cid, opcode;
 {
-    static char name[] = "MS_ProcessNewMessages";
+    static const char name[] = "MS_ProcessNewMessages";
     register char *ptr;
     char *SourceDir, *ParseSpecFile;
     int NumGood, NumBad, NumLocks, NumInProgress, resultcode, FirstError, buflim;
@@ -400,7 +392,7 @@ static void ms_reconstruct_directory(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_ReconstructDirectory";
+    static const char name[] = "MS_ReconstructDirectory";
     register char *ptr;
     char *DirName;
     int NumGood, NumBad, TrustTimeStamp;
@@ -432,7 +424,7 @@ static void ms_scavenge_directory(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_ScavengeDirectory";
+    static const char name[] = "MS_ScavengeDirectory";
     register char *ptr;
     char *DirName;
     int NumGood, NumBad, Recurse, Quiet, Purge;
@@ -466,7 +458,7 @@ static void generic_ms_rebuild_master_update(buffer, len, type, cid, IsOld)
 CallPacket *buffer;
 int len, type, cid, IsOld;
 {    
-    static char name[] = "MS_RebuildMasterUpdate";
+    static const char name[] = "MS_RebuildMasterUpdate";
     register char *ptr;
     int NumFastGood, NumSlowGood, NumBad, NumAbsent, NumProbablyGood;
 
@@ -513,7 +505,7 @@ CallPacket *buffer;
 int len, type, cid, IsOld;
 {
 
-    static char name[] = "MS_RebuildOneMasterUpdateFile";
+    static const char name[] = "MS_RebuildOneMasterUpdateFile";
     register char *ptr;
     int NumFastGood, NumSlowGood, NumBad, NumAbsent, NumProbablyGood;
     char *PathElt;
@@ -561,7 +553,7 @@ static void ms_name_changed_map(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_NameChangedMapFile";
+    static const char name[] = "MS_NameChangedMapFile";
     register char *ptr;
     int NumChanged, NumUnavailable, NumMissingFolders, NumSlowpokes, NumFastFellas, MailOnly, ListAll;
 
@@ -595,7 +587,7 @@ static void ms_headers_since(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_HeadersSince";
+    static const char name[] = "MS_HeadersSince";
     register char *ptr;
     char *FullDirName, *datefield;
     SNAP_integer MaxReturn, startbyte;
@@ -637,7 +629,7 @@ static void real_ms_print_message(buffer, len, type, cid, GetPrinter)
 CallPacket *buffer;
 int len, type, cid, GetPrinter;
 {
-    static char name[] = "MS_PrintMessage";
+    static const char name[] = "MS_PrintMessage";
     register char *ptr;
     char *DirName, *id, *printer;
     SNAP_integer flags;
@@ -687,7 +679,7 @@ static void ms_prefetch_message(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_PrefetchMessage";
+    static const char name[] = "MS_PrefetchMessage";
     register char *ptr;
     char *DirName, *id;
     SNAP_integer GetNext;
@@ -716,7 +708,7 @@ static void ms_get_version(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GetVersion";
+    static const char name[] = "MS_GetVersion";
     SNAP_integer lim;
 
     /* Get argument */
@@ -746,7 +738,7 @@ static void ms_debug_mode(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_DebugMode";
+    static const char name[] = "MS_DebugMode";
     register char *ptr;
     SNAP_integer level, snap, malloc;
 
@@ -776,7 +768,7 @@ static void ms_name_subscription_map_file(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_NameSubscriptionMapFile";
+    static const char name[] = "MS_NameSubscriptionMapFile";
     register char *ptr;
     char *Root;
 
@@ -806,7 +798,7 @@ static void ms_match_folder_name(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_MatchFolderName";
+    static const char name[] = "MS_MatchFolderName";
     register char *ptr;
     char *pat;
 
@@ -836,7 +828,7 @@ static void ms_check_missing_folder(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_CheckMissingFolder";
+    static const char name[] = "MS_CheckMissingFolder";
     register char *ptr;
     char *source;
 
@@ -866,7 +858,7 @@ static void ms_disambiguate_file(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_DisambiguateFile";
+    static const char name[] = "MS_DisambiguateFile";
     register char *ptr;
     char *source;
     SNAP_integer MustBeDir;
@@ -898,7 +890,7 @@ static void ms_get_partial_body(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GetPartialBody";
+    static const char name[] = "MS_GetPartialBody";
     register char *ptr;
     char *DirName, *id;
     SNAP_integer BufLim, offset;
@@ -943,7 +935,7 @@ static void ms_get_config_parms(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GetConfigurationParameters";
+    static const char name[] = "MS_GetConfigurationParameters";
     register char *ptr;
     SNAP_integer usedeliv, usesep, deltype;
 
@@ -981,7 +973,7 @@ static void ms_get_vconfig(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GetVConfig";
+    static const char name[] = "MS_GetVConfig";
     char *ptr, *key, *vers;
     auto char buf[2*MAXPATHLEN];
 
@@ -1014,7 +1006,7 @@ static void ms_andrewdir(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_AndrewDir";
+    static const char name[] = "MS_AndrewDir";
     register char *ptr;
 
     /* Unpack args */
@@ -1049,7 +1041,7 @@ static void ms_get_partial_file(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GetPartialFile";
+    static const char name[] = "MS_GetPartialFile";
     register char *ptr;
     char *FileName;
     SNAP_integer BufLim, offset;
@@ -1092,7 +1084,7 @@ static void ms_set_associated_time(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_SetAssociatedTime";
+    static const char name[] = "MS_SetAssociatedTime";
     register char *ptr;
     char *FullName, *newvalue;
 
@@ -1119,7 +1111,7 @@ static void ms_get_associated_time(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GetAssociatedTime";
+    static const char name[] = "MS_GetAssociatedTime";
     register char *ptr;
     char *FullName;
     SNAP_integer lim;
@@ -1152,7 +1144,7 @@ static void ms_get_search_path_entry(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GetSearchPathEntry";
+    static const char name[] = "MS_GetSearchPathEntry";
     register char *ptr;
     SNAP_integer which, lim;
 
@@ -1184,7 +1176,7 @@ static void ms_set_subscription_entry(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_SetSubscriptionEntry";
+    static const char name[] = "MS_SetSubscriptionEntry";
     register char *ptr;
     char *FullName, *NickName;
     SNAP_integer status;
@@ -1213,7 +1205,7 @@ static void ms_get_subscription_entry(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GetSubscriptionEntry";
+    static const char name[] = "MS_GetSubscriptionEntry";
     register char *ptr;
     char *FullName;
     int status;
@@ -1245,7 +1237,7 @@ static void ms_domain_handles_formatting(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_DomainHandlesFormatting";
+    static const char name[] = "MS_DomainHandlesFormatting";
     register char *ptr;
     char *DomName;
     int retVal;
@@ -1273,7 +1265,7 @@ static void ms_get_next_subs_entry(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GetNextSubsEntry";
+    static const char name[] = "MS_GetNextSubsEntry";
     register char *ptr;
     char *FullName, Results2[500];
     int status;
@@ -1307,7 +1299,7 @@ static void ms_die(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_Die";
+    static const char name[] = "MS_Die";
 
     /* Unpack args */
 
@@ -1330,7 +1322,7 @@ static void ms_open_debugging_pipescript(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_DebugMode";
+    static const char name[] = "MS_DebugMode";
     SNAP_integer DoIt;
 
     /* Unpack args */
@@ -1355,7 +1347,7 @@ static void ms_rebuild_subscription_maps(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_RebuildSubscriptionMaps";
+    static const char name[] = "MS_RebuildSubscriptionMaps";
 
     /* Get argument */
 
@@ -1378,7 +1370,7 @@ static void ms_rebuild_one_subscription_map(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_RebuildOneSubscriptionMap";
+    static const char name[] = "MS_RebuildOneSubscriptionMap";
     char *PathElt;
 
     /* Get argument */
@@ -1403,7 +1395,7 @@ static void ms_name_reply_file(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_NameReplyFile";
+    static const char name[] = "MS_NameReplyFile";
     register char *ptr;
     char *DirName, *id;
     SNAP_integer code;
@@ -1441,7 +1433,7 @@ static void ms_gen_temp_file_name(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GenTempFileName";
+    static const char name[] = "MS_GenTempFileName";
     register char *ptr;
 
     /* Unpack args */
@@ -1474,7 +1466,7 @@ static void ms_write_all_matches_to_file(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_WriteAllMatchesToFile";
+    static const char name[] = "MS_WriteAllMatchesToFile";
     register char *ptr;
     char *ambigname;
 
@@ -1509,7 +1501,7 @@ static void ms_epoch(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_Epoch";
+    static const char name[] = "MS_Epoch";
     register char *ptr;
     char *dirname, *date64;
 
@@ -1536,7 +1528,7 @@ static void ms_alter_snapshot(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_AlterSnapshot";
+    static const char name[] = "MS_AlterSnapshot";
     register char *ptr;
     char *dirname, *id, *NewSnapshot;
     int Code;
@@ -1566,7 +1558,7 @@ static void ms_purge_deleted_messages(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_PurgeDeletedMessages";
+    static const char name[] = "MS_PurgeDeletedMessages";
     char *dirname;
 
     /* Get arguments */
@@ -1591,7 +1583,7 @@ static void ms_get_snapshot(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GetSnapshot";
+    static const char name[] = "MS_GetSnapshot";
     register char *ptr;
     char *dirname, *id;
 
@@ -1627,7 +1619,7 @@ static void ms_get_nth_snapshot(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GetSnapshot";
+    static const char name[] = "MS_GetSnapshot";
     register char *ptr;
     char *dirname;
     int n;
@@ -1664,7 +1656,7 @@ static void ms_get_header_contents(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GetHeaderContents";
+    static const char name[] = "MS_GetHeaderContents";
     register char *ptr;
     char *dirname, *id, *HeaderName;
     SNAP_integer HeaderTypeNumber, lim;
@@ -1705,7 +1697,7 @@ static void ms_validate_chunk(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_ValidateAndReplaceChunk";
+    static const char name[] = "MS_ValidateAndReplaceChunk";
     register char *ptr;
     char *FileName, *inaddr;
     SNAP_integer outaddrsize, which, outcode;
@@ -1745,7 +1737,7 @@ static void ms_handle_preference(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_HandlePreference";
+    static const char name[] = "MS_HandlePreference";
     register char *ptr;
     char *prog, *pref, *InVal;
     SNAP_integer OutLim, opcode, defaulti, resulti;
@@ -1787,7 +1779,7 @@ static void ms_write_unscribed(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_WriteUnscribedBodyFile";
+    static const char name[] = "MS_WriteUnscribedBodyFile";
     register char *ptr;
     char *DirName, *id;
 
@@ -1823,7 +1815,7 @@ static void ms_submit_message(buffer, len, type, cid, opcode)
 CallPacket *buffer;
 int len, type, cid, opcode;
 {
-    static char name[] = "MS_SubmitMessage";
+    static const char name[] = "MS_SubmitMessage";
     register char *ptr;
     char *FileName, *ClientProgram;
     SNAP_integer DeliveryOptions, ErrMsgLimit;
@@ -1860,7 +1852,7 @@ static void ms_update_state(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_UpdateState";
+    static const char name[] = "MS_UpdateState";
 
     /* Unpack args */
     /* None */
@@ -1884,7 +1876,7 @@ static void ms_fast_update_state(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_FastUpdateState";
+    static const char name[] = "MS_FastUpdateState";
 
     /* Unpack args */
     /* None */
@@ -1908,7 +1900,7 @@ static void ms_store_partial_file(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_StorePartialFile";
+    static const char name[] = "MS_StorePartialFile";
     register char *ptr;
     char *FileName, *WhatToStore;
     SNAP_integer startpos, mylen, mode, Truncate;
@@ -1946,7 +1938,7 @@ static void ms_install_welcome_message(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_InstallWelcomeMessage";
+    static const char name[] = "MS_InstallWelcomeMessage";
     register char *ptr;
     char *ParentName, *InitDir, *InitFile, *ShortName;
 
@@ -1975,7 +1967,7 @@ static void ms_reinitialize(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_ReInitialize";
+    static const char name[] = "MS_ReInitialize";
     int msresult;
     register char *ptr;
 
@@ -2004,7 +1996,7 @@ static void ms_rewrite_header_line(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_RewriteHeaderline";
+    static const char name[] = "MS_RewriteHeaderline";
     register char *ptr;
     char *old;
     int errcode;
@@ -2038,7 +2030,7 @@ static void ms_find_mailbox(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_FindMailbox";
+    static const char name[] = "MS_FindMailbox";
     register char *ptr;
     int pathelt;
 
@@ -2073,7 +2065,7 @@ static void ms_clone_message(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_CloneMessage";
+    static const char name[] = "MS_CloneMessage";
     register char *ptr;
     char *SourceDirName, *id, *DestDirName;
     int Code;
@@ -2103,7 +2095,7 @@ static void ms_merge_directories(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_MergeDirectories";
+    static const char name[] = "MS_MergeDirectories";
     register char *ptr;
     char *SourceDirName, *DestDirName;
 
@@ -2129,7 +2121,7 @@ static void ms_takehints(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_TakeHints";
+    static const char name[] = "MS_TakeHints";
     register char *ptr;
     register int length;
     int DoAll, ProtFailures;
@@ -2157,7 +2149,7 @@ static void ms_getdirinfo(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GetDirInfo";
+    static const char name[] = "MS_GetDirInfo";
     register char *ptr;
     register int length;
     char *DirName;
@@ -2187,7 +2179,7 @@ static void ms_getdirattributes(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GetDirAttributes";
+    static const char name[] = "MS_GetDirAttributes";
     register char *ptr;
     register int length;
     char *DirName;
@@ -2220,7 +2212,7 @@ static void ms_parse_date(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_ParseDate";
+    static const char name[] = "MS_ParseDate";
     register char *ptr;
     register int length;
     char *indate;
@@ -2256,7 +2248,7 @@ static void ms_do_i_have_mail(buffer, len, type, cid)
       CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_DoIHaveMail";
+    static const char name[] = "MS_DoIHaveMail";
     register char *ptr;
     register int length;
     int count;
@@ -2283,7 +2275,7 @@ static void ms_check_authentication(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_CheckAuthentication";
+    static const char name[] = "MS_CheckAuthentication";
     register char *ptr;
     register int length;
     int Authentication, rval;
@@ -2317,7 +2309,7 @@ static void ms_set_deathknell(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_SetDeathKnell";
+    static const char name[] = "MS_SetDeathKnell";
     register int length;
     int dk;
 
@@ -2343,7 +2335,7 @@ static void ms_get_new_msg_ct(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_GetNewMessageCount";
+    static const char name[] = "MS_GetNewMessageCount";
     register char *ptr;
     register int length;
     char *FullDirName;
@@ -2375,7 +2367,7 @@ static void ms_remove_directory(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_RemoveDirectory";
+    static const char name[] = "MS_RemoveDirectory";
     register char *ptr;
     char *DirName;
     int MaxRemovals;
@@ -2402,7 +2394,7 @@ static void ms_unlink_file(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_UnlinkFile";
+    static const char name[] = "MS_UnlinkFile";
     char *FileName;
 
     /* Get arguments */
@@ -2426,7 +2418,7 @@ static void ms_deleteattr(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_DeleteAttr";
+    static const char name[] = "MS_DeleteAttr";
     char *DirName, *AttrName;
     register char *ptr;
 
@@ -2452,7 +2444,7 @@ static void ms_addattr(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_AddAttribute";
+    static const char name[] = "MS_AddAttribute";
     char *DirName, *AttrName;
     int AttNum;
     register char *ptr;
@@ -2480,7 +2472,7 @@ static void ms_edit_message(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_EditMessage";
+    static const char name[] = "MS_EditMessage";
     register char *ptr;
     char *dirname, *id, *NewBodyFile;
     int Reparse;
@@ -2510,7 +2502,7 @@ static void ms_convert_old_mail(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_ConvertOldMail";
+    static const char name[] = "MS_ConvertOldMail";
     register char *ptr;
     int NumGood, NumBad;
 
@@ -2538,7 +2530,7 @@ static void ms_rename_dir(buffer, len, type, cid)
 CallPacket *buffer;
 int len, type, cid;
 {
-    static char name[] = "MS_RenameDir";
+    static const char name[] = "MS_RenameDir";
     register char *ptr;
     char *OldName, *NewName;
 
@@ -2574,7 +2566,7 @@ static void Execute(buffer, len, type, cid)
 char *buffer;
 int len, type, cid;
 {
-    static char name[] = "Execute";
+    static const char name[] = "Execute";
     register void (*proc)();
     register int i;
     SNAP_integer opcode;

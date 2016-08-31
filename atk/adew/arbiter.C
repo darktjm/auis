@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/arbiter.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("arbiter.H")
 #include <cel.H>
 #include <arbiter.H>
@@ -43,9 +33,6 @@ static class arbiter *master;
 
 
 ATKdefineRegistry(arbiter, cel, arbiter::InitializeClass);
-#ifndef NORCSID
-#endif
-
 
 class arbiter *arbiter::GetMaster()
 {
@@ -115,7 +102,7 @@ FILE *arbiter::DeclareRead(class cel  *cel)
 class cel *arbiter::FindChildCelByName(char  *name)
 {
     class cel *cel,*ncel;
-    char *tname;
+    const char *tname;
     cel = (this)->GetFirst();
     while(cel != (class cel *) this){
 	if((tname = (cel)->GetRefName()) != NULL &&

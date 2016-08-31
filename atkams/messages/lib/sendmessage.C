@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/sendmessage.C,v 1.9 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
-
 #include <stdio.h>
 #include <sys/param.h>
 #include <util.h>
@@ -84,11 +76,6 @@ typedef short Boolean;
 
 
 ATKdefineRegistry(sendmessage, view, sendmessage::InitializeClass);
-#ifndef NORCSID
-#endif
-#ifdef ibm032
-#else
-#endif
 void sendmessage_SetButtonFont(class sendmessage  *self, class fontdesc  *font);
 void BSSM_HeadersFocus(class sendmessage  *sm);
 void BSSM_BodyFocus(class sendmessage  *sm);
@@ -110,7 +97,7 @@ static void UnlinkCKPFile(class sendmessage  *sendmessage);
 void MakeHeaderFieldsBold(class sendmessage  *self);
 void MakeOneHeaderFieldBold(class sendmessage  *self, int  pos);
 int CheckAndCountRecipients(class sendmessage  *sm, int  *tot , int  *ext , int  *totformat , int  *totstrip , int  *tottrust);
-int ValidateHeader(class sendmessage  *sm, char  *lookfor, int  *externalct , int  *totct , int  *formatct , int  *stripct , int  *trustct);
+int ValidateHeader(class sendmessage  *sm, const char  *lookfor, int  *externalct , int  *totct , int  *formatct , int  *stripct , int  *trustct);
 int RemoveUselessHeaderLines(class sendmessage  *sm);
 int FileIntoFolder(class sendmessage  *sm, char  *name);
 int ProduceUnscribedVersion(char  *FileName, FILE  *OutputFP);
@@ -130,7 +117,7 @@ extern void InitProcStuff(class sendmessage  *sendmessage);
 extern void InitStylesAndFonts(class sendmessage  *sendmessage);
 extern void DestroyProcStuff(class sendmessage  *self);
 extern void DestroyStyles(class sendmessage  *self);
-extern void SetMyFrameTitle(class sendmessage  *sm, char *tit);
+extern void SetMyFrameTitle(class sendmessage  *sm, const char *tit);
 extern void PrepareBodyForSignature(class sendmessage  *self);
 extern int EnvViewCt(class environment  *env);
 extern int WriteOneFile(class sendmessage  *sendmessage, char  *ViceFileName, Boolean  OnVice , Boolean  MayOverwrite , int  Version , Boolean  TrustDelivery , Boolean  UseMultipartFormat, int  *EightBitText);
@@ -157,7 +144,7 @@ void sendmessage::UnlinkTree()
     }
 }
 
-void sendmessage::AddHeaderLine(char  *headerline)
+void sendmessage::AddHeaderLine(const char  *headerline)
 {
     class textview *v = this->HeadTextview;
     int len;
@@ -219,7 +206,7 @@ void BSSM_UpFocus(class sendmessage  *sm)
     }
 }
 
-static char dummyname[]="";
+static const char dummyname[]="";
 
 struct sbutton_list blist[]={
     {dummyname, (long)0, NULL, FALSE}, /* Reset */
@@ -238,7 +225,7 @@ struct sbutton_list blist[]={
 void HandleButton(class sbutton  *self, long Asendmessage, int  in, int  whichbut)
 {
     class sendmessage *sendmessage=(class sendmessage *)Asendmessage;
-    char *Yes, *No;
+    const char *Yes, *No;
 
     switch (whichbut) {
 	case 0:
@@ -444,7 +431,7 @@ sendmessage::~sendmessage()
 
 void sendmessage::SetCurrentState(int state)
 {
-    char *tit;
+    const char *tit;
 
     if (this->CurrentState == state) return;
     this->CurrentState = state;
@@ -505,7 +492,7 @@ sendmessage::Hit(enum view_MouseAction  action, long  x , long  y , long  Number
 
 void BSSM_FakeBug(class sendmessage  *sm, char  *txt)
 {
-    (ams::GetAMS())->ReportError( txt ? txt : (char *)"One of my bits is missing!  Call an ambulance!", ERR_CRITICAL, FALSE, 0);
+    (ams::GetAMS())->ReportError( txt ? txt : "One of my bits is missing!  Call an ambulance!", ERR_CRITICAL, FALSE, 0);
 }
 
 int ComposeBugReport(class sendmessage  *sm)
@@ -605,7 +592,7 @@ int Deliver(class sendmessage  *sendmessage, int  formathandlingcode)
     int code, total, external, ans, StreamVersion = 12, TrustDelivery = 0, nkids, format, strip, trust, ThisMailFormat;
     Boolean Unformat = FALSE, SendingWithAMSDel;
     static int MailFormatToUse = MAILFORMAT_UNDEFINED;
-    static char *ExternalQVec[] = {
+    static const char * ExternalQVec[] = { /* modified below */
 	"The readers of this message may not recognize Andrew formatting.",
 	"Cancel sending",
 	"Remove formatting & send",
@@ -668,7 +655,7 @@ int Deliver(class sendmessage  *sendmessage, int  formathandlingcode)
 	    fp = fopen(fname, "r");
 	}
 	if (!fp) {
-	    static char *NoSignatureQVec[] = {
+	    static const char * const NoSignatureQVec[] = {
 		"The file '~/.signature' could not be read",
 		"Send unsigned",
 		"Do not send",
@@ -712,7 +699,7 @@ int Deliver(class sendmessage  *sendmessage, int  formathandlingcode)
 	    ans = 3;
 	    ThisMailFormat = MAILFORMAT_MULTIPART; /* Probably redundant */
 	} else if (ThisMailFormat == MAILFORMAT_ASK) {
-	    static char *Question[] = {
+	    static const char * const Question[] = {
 		"The readers of this message may not recognize multimedia formatting.",
 		"Cancel sending",
 		"Remove formatting & send",
@@ -762,7 +749,7 @@ int Deliver(class sendmessage  *sendmessage, int  formathandlingcode)
     }
     if (nkids <= 0) ThisMailFormat = MAILFORMAT_ANDREW; /* handled right  there */
     if (!Unformat && ThisMailFormat == MAILFORMAT_ASK) {
-	static char *whichfmt[] = {
+	static const char * const whichfmt[] = {
 	    "Which mail data format do you want to use?",
 	    "Andrew 'native' data stream",
 	    "MIME (Internet standard) format",
@@ -1005,7 +992,7 @@ void sendmessage_wrap_Reset(class sendmessage *self)
 
 void sendmessage::Reset()
 {
-    static char *InitialText = "To: \nSubject: \nCC: ";
+    static const char InitialText[] = "To: \nSubject: \nCC: ";
 
     if ((this)->HasChanged()) {
 	if (!(this)->AskEraseUnsentMail()) {
@@ -1055,9 +1042,9 @@ void MakeOneHeaderFieldBold(class sendmessage  *self, int  pos)
     }
 }
 
-void sendmessage::AddToToHeader(char  *line)
+void sendmessage::AddToToHeader(const char  *line)
 {
-    static char ToStates[] = "\nTo:";
+    static const char ToStates[] = "\nTo:";
     int pos, len, state = 1;
     class textview *v;
     class text *d;
@@ -1201,9 +1188,10 @@ int CheckAndCountRecipients(class sendmessage  *sm, int  *tot , int  *ext , int 
     return(0);
 }
 
-int ValidateHeader(class sendmessage  *sm, char  *lookfor, int  *externalct , int  *totct , int  *formatct , int  *stripct , int  *trustct)
+int ValidateHeader(class sendmessage  *sm, const char  *lookfor, int  *externalct , int  *totct , int  *formatct , int  *stripct , int  *trustct)
 {
-    char *tp, *old, *new_c, *s, *realname;
+    const char *tp;
+    char *old, *new_c, *s, *realname;
     int tpos, pos, newpos, len, i, errct, c;
     class text *d;
     Boolean Searching = FALSE, SeeingAt = FALSE;
@@ -1336,7 +1324,7 @@ int sendmessage::Checkpoint()
 int RemoveUselessHeaderLines(class sendmessage  *sm)
 {
     class text *d;
-    char *tp;
+    const char *tp;
     struct SearchPattern *pat;
     int pos, orgpos, c;
 
@@ -1380,7 +1368,7 @@ int FileIntoFolder(class sendmessage  *sm, char  *name)
     if (name && *name != '?') {
 	strcpy(ShortName, name);
     } else {
-	if (ams::GetFolderName("Save draft in what folder? ", ShortName, sizeof(ShortName), name ? ++name : (char *)"", FALSE)) return(-1);
+	if (ams::GetFolderName("Save draft in what folder? ", ShortName, sizeof(ShortName), name ? ++name : "", FALSE)) return(-1);
     }
     ams::WaitCursor(TRUE);
     if ((ams::GetAMS())->CUI_DisambiguateDir( ShortName, &FullName)) {
@@ -1649,7 +1637,7 @@ void sendmessage_DuplicateWindow(class sendmessage  *self)
 
 int sendmessage::AskEraseUnsentMail()
 {
-    char *ActionVector[10];
+    const char *ActionVector[10];
     int result;
 
     ActionVector[0] = "You have unsent mail. What do you want to do?";

@@ -25,21 +25,12 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/cawp.c,v 1.13 1993/02/12 21:23:32 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	cawp.c
 	The part of cellauth.c that needs the White Pages code.
 \* ************************************************************ */
 
-
- 
-
+#include <andrewos.h>
 #include <andyenv.h>
 #include <stdio.h>
 #include <errno.h>

@@ -25,14 +25,6 @@
  *  $
 */
 
-
-/* $Header $ */
-/* $Source $ */
-
-
-
-
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Dot Chart View-object

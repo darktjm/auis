@@ -114,7 +114,7 @@ public:
 
    long Read( FILE *file, long id )  ;
    long Write( FILE *file, long writeID, int level )  ;
-   char * ViewName()  ;
+   const char * ViewName()  ;
    long WriteOtherFormat(FILE *file, long writeid, int level, int usagetype, char *boundary)  ;
    boolean ReadOtherFormat(FILE *file, char *fmt, char *encoding, char *description)  ;
 
@@ -131,7 +131,7 @@ public:
 
 
   virtual void Reset()  ;
-  virtual void SetSaveFormatString( char *saveformat );
+  virtual void SetSaveFormatString( const char *saveformat );
   virtual void newRGBMapData( unsigned int size )  ;
   virtual void freeRGBMapData()  ;
   virtual void newBitImage( unsigned int width, unsigned int height )  ;
@@ -151,7 +151,7 @@ public:
   virtual void GammaCorrect( float disp_gam )  ;
   virtual class image * Halftone()  ;
   virtual void Duplicate( class image *target )  ;
-  virtual long WriteNative( FILE *file, char *filename )  ;
+  virtual long WriteNative( FILE *file, const char *filename )  ;
 
   virtual long SendBeginData(FILE *file, long writeID, int level)  ;
   virtual long SendImageData(FILE *file)  ;
@@ -162,7 +162,7 @@ public:
   virtual long GetEndData(FILE *file, long id)  ;
 
   /* The following method should be overridden by subclasses */
-  virtual int Load( char *fullname, FILE *fp )  ;
+  virtual int Load( const char *fullname, FILE *fp )  ;
 
   virtual class image *ColorDither(RGBMap *map);
   virtual class image *ColorDitherToCube(int reds, int greens, int blues);

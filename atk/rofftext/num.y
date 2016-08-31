@@ -103,9 +103,6 @@ expr	:	'(' expr ')'
 	;
 
 %%	/* start of programs */
-
-static char *num_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/num.y,v 1.6 1994/02/23 22:41:27 rr2b Stab74 $";
-
 yylex()  /* lexical analysis routine */
 {
     int c;

@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipdf00.C,v 1.3 1993/06/17 04:28:00 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -86,7 +78,7 @@ END-SPECIFICATION  ************************************************************/
 
 
 long
-zip::Create_Figure( register zip_type_figure	      *figure, register char			      *name, unsigned char type, register zip_type_image	       image, register zip_type_figure	       peer )
+zip::Create_Figure( register zip_type_figure	      *figure, register const char			      *name, unsigned char type, register zip_type_image	       image, register zip_type_figure	       peer )
             {
     class zip *self=this;
   register long			      status = zip_ok;
@@ -219,7 +211,7 @@ zip::Unhook_Figure( register zip_type_figure	       figure )
   }
 
 long
-zip::Set_Figure_Name( register zip_type_figure figure, register char  *name )
+zip::Set_Figure_Name( register zip_type_figure figure, register const char  *name )
 {
   register int			      status = zip_ok;
   zip_type_figure		      duplicate;
@@ -270,7 +262,7 @@ name, figure->zip_figure_image->zip_image_stream->zip_stream_name,duplicate->zip
   }
 
 long
-zip::Set_Figure_Text( register zip_type_figure figure, char *text )
+zip::Set_Figure_Text( register zip_type_figure figure, const char *text )
 {
   register int			      status = zip_ok;
 
@@ -426,7 +418,7 @@ zip::Set_Figure_Line_Width( zip_type_figure figure, short width )
   }
 
 long
-zip::Set_Figure_Line_Dash( register zip_type_figure		 figure, register char				 *pattern, register int				 offset, register short			 type )
+zip::Set_Figure_Line_Dash( register zip_type_figure		 figure, register const char				 *pattern, register int				 offset, register short			 type )
             {
   register int			      status = zip_ok;
 
@@ -632,7 +624,7 @@ return  zip_failure;/*===*/
 
 
 struct zip_figure *
-zip::Figure( register char			      *name )
+zip::Figure( register const char			      *name )
       {
   zip_type_figure		      figure = NULL;
   register zip_type_stream_chain      stream_link = StreamAnchor;
@@ -652,7 +644,7 @@ zip::Figure( register char			      *name )
   }
 
 struct zip_figure *
-zip::Image_Figure( register struct zip_image	      *image, register char			      *name )
+zip::Image_Figure( register struct zip_image	      *image, register const char			      *name )
         {
   zip_type_figure		      figure = NULL;
 
@@ -665,7 +657,7 @@ zip::Image_Figure( register struct zip_image	      *image, register char			     
   }
 
 struct zip_figure *
-zip::Stream_Figure( register struct zip_stream	      *stream, register char			      *name )
+zip::Stream_Figure( register struct zip_stream	      *stream, register const char			      *name )
         {
   zip_type_figure		      figure = NULL;
 

@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/typescript/RCS/pscripta.C,v 1.6 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("pscripta.H")
 #include <pscripta.H>
 #include <application.H>
@@ -49,9 +39,6 @@ static FILE *outfile = NULL;
 
 
 ATKdefineRegistry(pipescriptapp, application, NULL);
-#ifndef NORCSID
-#endif
-
 
 boolean pipescriptapp::ParseArgs(int  argc,const char  **argv)
 {

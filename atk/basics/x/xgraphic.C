@@ -25,12 +25,6 @@
 //  $
 */
 
-#ifdef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/xgraphic.C,v 3.39 1996/08/27 22:03:40 robr Exp $";
-#endif
-
-
  /* xgraphic.c
   */
 
@@ -2192,11 +2186,11 @@ void xgraphic::SetLineWidth(short  NewLineWidth)
     }
 }
 
-void xgraphic::SetLineDash( char		 *dashPattern, int		 dashOffset, short		 dashType )
+void xgraphic::SetLineDash( const char		 *dashPattern, int		 dashOffset, short		 dashType )
 {
     XGCValues tempGC;
     register int	n = 0;
-    register char	*p;
+    register const char	*p;
     register short	type = dashType;
     char		*oldPattern = NULL;
     int			oldOffset;
@@ -2821,7 +2815,7 @@ long xgraphic::GetVerticalResolution()
     return res;
 }
 
-char * xgraphic::GetWindowManagerType()
+const char * xgraphic::GetWindowManagerType()
 {
     return "XV11R1";
 }

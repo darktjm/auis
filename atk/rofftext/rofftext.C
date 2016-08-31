@@ -21,12 +21,6 @@
 // WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 // 
 //  $ */
-#include <andrewos.h> /* sys/time.h strings.h */
-
-#ifndef NORCSID
-static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/rofftext.C,v 1.11 1995/07/17 21:08:55 wjh Stab74 $ ";
-#endif
-
 /* rofftext
  *
  * a text object to interpret troff code
@@ -36,6 +30,7 @@ static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++
  */
 
 
+#include <andrewos.h> /* sys/time.h strings.h */
 ATK_IMPL("rofftext.H")
 #include <ctype.h>
 #include <text.H>
@@ -59,7 +54,7 @@ ATK_IMPL("rofftext.H")
 #include <roffstyl.h>
 #include <roffutil.h>
 
-static int SCALE[8] = 
+static const int SCALE[8] = 
 {    1, /* u, basic unit */
    432, /* i, inch */
    170, /* c, centimeter */
@@ -70,7 +65,7 @@ static int SCALE[8] =
     72 /* v, vertical line space */
 };
 
-static char *FONT[5]  = {"roman","italic","bold","special","typewriter"};
+static const char * const FONT[5]  = {"roman","italic","bold","special","typewriter"};
 
 /* for when debugging is turned off */
 
@@ -79,7 +74,7 @@ int ROFFDEBUG = 0;
 #endif /* DEBUGGING */
 
 
-typedef void (*cmdfptr)(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]);
+typedef void (*cmdfptr)(class rofftext  *self,Trickle  t,boolean  br,int  argc,const char  * const argv[]);
 ATKdefineRegistry(rofftext, text, rofftext::InitializeClass);
 void SetIndent(class rofftext  *self,int  u);
 void SetTempIndent(class rofftext  *self,int  u);
@@ -90,7 +85,7 @@ static Trickle topen(class rofftext  *self,char  *filename,FILE  *f,char  *s);
 static void tclose(class rofftext  *self,Trickle  t);
 static int g(class rofftext  *self,Trickle  t);
 void ung(class rofftext  *self,int  c,Trickle  t);
-void tpush(class rofftext  *self,Trickle  t,const char  *filename,FILE  *f,char  *s,boolean  push,int  argc,char  *argv[]);
+void tpush(class rofftext  *self,Trickle  t,const char  *filename,FILE  *f,const char  *s,boolean  push,int  argc,const char  * const argv[]);
 static void munch(class rofftext  *self,Trickle  t);
 static void special(class rofftext  *self,Trickle  t);
 static void setfont(class rofftext  *self,Trickle  t);
@@ -101,10 +96,10 @@ static void dohmove(class rofftext  *self,Trickle  t);
 static int munchmove(class rofftext  *self,Trickle  t);
 static void getname(class rofftext  *self,Trickle  t,char  *name);
 static int getsize(class rofftext  *self,Trickle  t);
-static char *getregister(class rofftext  *self,Trickle  t);
-void putregister(class rofftext  *self,char  *name,int  value,enum RegFmt  fmt,int  inc,boolean  relative);
-char *getstring(class rofftext  *self,char  *name);
-void putstring(class rofftext  *self,char  *name,char  *value);
+static const char *getregister(class rofftext  *self,Trickle  t);
+void putregister(class rofftext  *self,const char  *name,int  value,enum RegFmt  fmt,int  inc,boolean  relative);
+const char *getstring(class rofftext  *self,const char  *name);
+void putstring(class rofftext  *self,const char  *name,const char  *value);
 void getarg(class rofftext  *self,Trickle  t,char  *buf,int  n,boolean  copymode);
 void put(class rofftext  *self,int c);
 void DoBreak(class rofftext  *self);
@@ -114,7 +109,7 @@ int get(class rofftext  *self,Trickle  t);
 #endif /* defined(__STDC__) && !defined(__HIGHC__) */
 static void CreateDefaultCommands(class rofftext  *self);
 static void DoCommand(class rofftext  *self,Trickle  t,char  *name,boolean  br);
-void Scan(class rofftext  *self,Trickle  t,char  *cmd);
+void Scan(class rofftext  *self,Trickle  t,const char  *cmd);
 static int setmode(class rofftext  *self, int  oldmode , int  newmode );
 static long ReadFormatted(class rofftext  *self, FILE  *file, long  id);
 static boolean istroff(FILE  *fp );
@@ -230,9 +225,9 @@ static Trickle topen(class rofftext  *self,char  *filename,FILE  *f,char  *s)
         else {
             fprintf(stderr,"rofftext: could not open file %s\n",filename);
             cur->type = trickle_String;
-            cur->u.s = cur->buf = "";
+            cur->u.s = cur->buf = strdup("");
         }
-        cur->filename = StrDup(filename);
+        cur->filename = strdup(filename);
         cur->LineNumber = 0;
         cur->prev = NULL;
         cur->pop = FALSE;
@@ -247,7 +242,7 @@ static Trickle topen(class rofftext  *self,char  *filename,FILE  *f,char  *s)
     }
     else if (s != NULL) {
         cur->type = trickle_String;
-        cur->u.s = cur->buf = StrDup(s);
+        cur->u.s = cur->buf = strdup(s);
         cur->filename = "(none)\n";
         cur->LineNumber = 0;
         cur->prev = NULL;
@@ -255,7 +250,7 @@ static Trickle topen(class rofftext  *self,char  *filename,FILE  *f,char  *s)
     }
     else {
         cur->type = trickle_String;
-        cur->u.s = cur->buf = "";
+        cur->u.s = cur->buf = strdup("");
         cur->prev = NULL;
         cur->pop = FALSE;
     }
@@ -370,7 +365,7 @@ void ung(class rofftext  *self,int  c,Trickle  t)
  * f is TRUE if we should pop the macro stack on EOF or end-of-string
  */
 
-void tpush(class rofftext  *self,Trickle  t,const char  *filename,FILE  *f,char  *s,boolean  push,int  argc,char  *argv[])
+void tpush(class rofftext  *self,Trickle  t,const char  *filename,FILE  *f,const char  *s,boolean  push,int  argc,const char  * const argv[])
 {
     struct _trickle *temp = (struct _trickle *)malloc(sizeof(struct _trickle));
     static char fn[512] = "/usr/man/";
@@ -406,10 +401,10 @@ void tpush(class rofftext  *self,Trickle  t,const char  *filename,FILE  *f,char 
 	    else {
 		fprintf(stderr,"rofftext: could not open file %s\n",filename);
 		temp->type = trickle_String;
-		temp->u.s = temp->buf = "";
+		temp->u.s = temp->buf = strdup("");
 	    }
         }
-        temp->filename = StrDup(filename);
+        temp->filename = strdup(filename);
         temp->LineNumber = 0;
     }
     else if (f != NULL) {
@@ -420,7 +415,7 @@ void tpush(class rofftext  *self,Trickle  t,const char  *filename,FILE  *f,char 
     }
     else if (s != NULL) {
         temp->type = trickle_String;
-        temp->buf = temp->u.s = StrDup(s);
+        temp->u.s = temp->buf = strdup(s);
         if (t->t) {
             temp->filename = t->t->filename;
             temp->LineNumber = t->t->LineNumber;
@@ -433,7 +428,7 @@ void tpush(class rofftext  *self,Trickle  t,const char  *filename,FILE  *f,char 
     else {
         DEBUG(1, (stderr,"********tpush: called with null arguments\n"));
         temp->type = trickle_String;
-        temp->buf = temp->u.s = "";
+        temp->u.s = temp->buf = strdup("");
         temp->filename = "(NULL!)";
         temp->LineNumber = 0;
     }
@@ -443,11 +438,11 @@ void tpush(class rofftext  *self,Trickle  t,const char  *filename,FILE  *f,char 
         int i;
         (self->ArgStack)->Push((char *)self->CurrentContext);
         self->CurrentContext = (IC)malloc(sizeof(struct InputContext));
-        self->CurrentContext->argv = (char **)malloc(sizeof(char *)*10);
+        self->CurrentContext->argv = (const char **)malloc(sizeof(char *)*10);
         self->CurrentContext->argc = argc;
 
         for(i=0;i<argc;i++) {
-            self->CurrentContext->argv[i] = StrDup(argv[i]);
+            self->CurrentContext->argv[i] = strdup(argv[i]);
         }
         while(i<10)
             self->CurrentContext->argv[i++] = "";
@@ -469,7 +464,8 @@ static void munch(class rofftext  *self,Trickle  t)
 
 static void special(class rofftext  *self,Trickle  t)
 {
-    char temp[3],*result;
+    char temp[3];
+    const char *result;
     temp[0] = g(self,t);
     temp[1] = g(self,t);
     temp[2] = '\0';
@@ -487,7 +483,8 @@ static void special(class rofftext  *self,Trickle  t)
 
 static void setfont(class rofftext  *self,Trickle  t)
 {
-    char name[3],*font;
+    char name[3];
+    const char *font;
     getname(self,t,name);
     if (isdigit(name[0])) {
         int digit = name[0]-'1';
@@ -656,12 +653,13 @@ static int getsize(class rofftext  *self,Trickle  t)
 
 /* Get the contents of a register, formatted appropriately */
 
-static char *getregister(class rofftext  *self,Trickle  t)
+static const char *getregister(class rofftext  *self,Trickle  t)
 {
     register int c;
     struct reg *r;
     int inc = 0;
-    static char temp[32],*ptr,*fmtstring;
+    static char temp[32],*ptr;
+    const char *fmtstring;
 
 
     ptr = temp;
@@ -738,7 +736,7 @@ DEBUG(1, (stderr, "value of .$ is %s\n", temp));
 }
 
 
-void putregister(class rofftext  *self,char  *name,int  value,enum RegFmt  fmt,int  inc,boolean  relative)
+void putregister(class rofftext  *self,const char *name,int  value,enum RegFmt  fmt,int  inc,boolean  relative)
 {
     struct reg *r = (Reg)(self->Registers)->Lookup(name);
     if (r==NULL) {
@@ -758,9 +756,9 @@ void putregister(class rofftext  *self,char  *name,int  value,enum RegFmt  fmt,i
 
 /* storing and retrieving named strings */
 
-char *getstring(class rofftext  *self,char  *name)
+const char *getstring(class rofftext  *self,const char *name)
 {
-    char *str;
+    const char *str;
     DEBUG(1, (stderr,"Name = (%s)\n",name));
     if ((str = (self->Macros)->Lookup(name)) == NULL) {
         DEBUG(1, (stderr,"String was Null\n"));
@@ -772,13 +770,13 @@ char *getstring(class rofftext  *self,char  *name)
     }
 }
 
-void putstring(class rofftext  *self,char  *name,char  *value)
+void putstring(class rofftext  *self,const char *name,const char *value)
 {
-    char *v = StrDup(value), *existing;
+    char *v = strdup(value), *existing;
 
     DEBUG(1, (stderr,"Storing string (%s) (%s)\n",name,v));
     (self->Commands)->Delete(name);
-    existing = (self->Macros)->Delete(name);
+    existing = (char *)(self->Macros)->Delete(name);
     if (existing)
         free(existing);
     (self->Macros)->Store(name,v);
@@ -1252,7 +1250,7 @@ rofftext::rofftext()
     /* initialize arguments */
     DEBUG(1, (stderr, "context\n"));
     this->CurrentContext = (IC)malloc(sizeof(struct InputContext));
-    this->CurrentContext->argv = (char **)malloc(sizeof(char *)*10);
+    this->CurrentContext->argv = (const char **)malloc(sizeof(char *)*10);
     for(i=0;i<10;i++) {
         this->CurrentContext->argv[i] = "";
         this->Nullarg[i] = "";
@@ -1265,11 +1263,11 @@ rofftext::rofftext()
     for (i=0,mult=1;i<INDENTLEVELS;i++,mult*=2) {
         this->IndentStyle[i]= this->TempIndentStyle[i] = this->MinusTempIndentStyle[i] = 0;
         sprintf(temp,"indent%d",mult);
-        this->IndentName[i] = StrDup(temp);
+        this->IndentName[i] = strdup(temp);
         sprintf(temp,"tempindent%d",mult);
-        this->TempIndentName[i] = StrDup(temp);
+        this->TempIndentName[i] = strdup(temp);
         sprintf(temp,"tempindentneg%d",mult);
-        this->MinusTempIndentName[i] = StrDup(temp);
+        this->MinusTempIndentName[i] = strdup(temp);
     }
 
     DEBUG(1, (stderr, "environment\n"));
@@ -1363,11 +1361,11 @@ static void DoCommand(class rofftext  *self,Trickle  t,char  *name,boolean  br)
     char temp[128];
     boolean copy = FALSE;
     cmdfptr cmd = NULL;
-    char *Arg[MAXARGS];
+    const char *Arg[MAXARGS];
 
     DEBUG(1, (stderr,"<Getting 1st argument,"));
     getarg(self,t,temp,2,copy); 
-    Arg[i++] = StrDup(temp);
+    Arg[i++] = strdup(temp);
     DEBUG(1, (stderr,"%s>\n",temp));
 
     if ((cmd = (cmdfptr)(long)(self->Goofy)->Lookup(temp)) == NULL) {
@@ -1384,7 +1382,7 @@ static void DoCommand(class rofftext  *self,Trickle  t,char  *name,boolean  br)
 
         for( getarg(self,t,temp,127,copy); (*temp != '\n') && (i < MAXARGS);     getarg(self,t,temp,127,copy)) {
             /* copy argument */
-            Arg[i++] = StrDup(temp);
+            Arg[i++] = strdup(temp);
         }
         while(get(self,t) != '\n'); /* munch newline & extraneous args */
     }
@@ -1407,14 +1405,14 @@ static void DoCommand(class rofftext  *self,Trickle  t,char  *name,boolean  br)
     name[2] = '\0';
 
     for (j=0;j<i;j++) {
-        free(Arg[j]);
+        free((char *)Arg[j]); /* strdup'd above */
     }
     DEBUG(1, (stderr, "freed\n"));
 }
 
 /* scan the input for commands, do commands, crush text  until EOF or cmd */
 
-void Scan(class rofftext  *self,Trickle  t,char  *cmd)
+void Scan(class rofftext  *self,Trickle  t,const char  *cmd)
 {
     register int c;
     char temp[3],name[3],*ptr;
@@ -1551,7 +1549,7 @@ void Scan(class rofftext  *self,Trickle  t,char  *cmd)
 #define M_ITALIC 3
 static int setmode(class rofftext  *self, int  oldmode , int  newmode )
 {
-    char *font;
+    const char *font;
     if (oldmode == newmode) return oldmode;
     if (newmode == M_PLAIN) font = "typewriter";
     if (newmode == M_BOLD) font = "bold";
@@ -1686,7 +1684,7 @@ long rofftext::Read(FILE  *file,long  id)
     return dataobject_NOREADERROR;
 }
 
-char *rofftext::ViewName()
+const char *rofftext::ViewName()
 {
     return "textview";
 }
@@ -1718,13 +1716,13 @@ void rofftext::SetAttributes(struct attributes  *atts)
     while(atts!=NULL){
         DEBUG(1, (stderr,"Found attribute (%s)\n",atts->key));
         if (strncmp(atts->key,"filename",8) == 0) {
-            this->filename = StrDup(atts->value.string);
+            this->filename = strdup(atts->value.string);
         }
         else if(strncmp(atts->key,"rofftext-",9)==0){
-            char    *key=atts->key+9;
+            const char    *key=atts->key+9;
 
             if (strcmp(key,"macrofile")==0) {
-                this->macrofile = StrDup(atts->value.string);
+                this->macrofile = strdup(atts->value.string);
             }
             else if (strcmp(key,"help-mode")==0) {
                 this->HelpMode = atoi(atts->value.string);

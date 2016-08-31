@@ -14,7 +14,7 @@ class hrv: public view {
     view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight);
     void LinkTree(class view *parent);
     void ReceiveInputFocus();
-    void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
+    void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
 
     hrv();
 

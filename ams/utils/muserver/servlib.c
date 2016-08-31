@@ -117,7 +117,7 @@ void serv_shutdown()
 #ifdef TESTSERVER
 #define MAXCLIENTS 1
 
-static char noconn[] = "ERROR: Server is currently in use.  Please try Later.\n";
+static const char noconn[] = "ERROR: Server is currently in use.  Please try Later.\n";
 
 main()
 {

@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/dynlink/pmax_ul4/RCS/globals.c,v 1.1 1994/08/25 19:36:34 rr2b Stab74 $";
-#endif
-
-
 /* 
  * array of global entry points for dynamic loader
  *

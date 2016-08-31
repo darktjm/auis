@@ -23,17 +23,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/ssliderv.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
-
- 
-
-
 ATK_IMPL("ssliderv.H")
 #include <math.h>
 
@@ -47,8 +36,6 @@ ATK_IMPL("ssliderv.H")
 
 
 ATKdefineRegistry(ssliderv, scroll, NULL);
-#ifndef NORCSID
-#endif
 static void getinfo(class ssliderv  *self, struct range  *total , struct range  *seen , struct range  *dot);
 static long whatisat(class ssliderv  *self, long  numerator , long  denominator);
 static void setframe(class ssliderv  *self, long  position , long  numerator , long  denominator);

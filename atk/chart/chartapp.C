@@ -25,13 +25,6 @@
  *  $
 */
 
-#include  <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chartapp.C,v 1.6 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Chart Application-Class
@@ -66,6 +59,7 @@ HISTORY
 END-SPECIFICATION  ************************************************************/
 
 
+#include  <andrewos.h>
 ATK_IMPL("chartapp.H")
 #include  <im.H>
 #include  <filetype.H>
@@ -96,9 +90,6 @@ chartv_Specification	    view_specification[] =
 
 
 ATKdefineRegistry(chartapp, application, NULL);
-#ifndef NORCSID
-#endif
-
 
 chartapp::chartapp( )
       {

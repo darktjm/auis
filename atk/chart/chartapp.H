@@ -28,14 +28,7 @@ ATK_INTER
 //  $
 */
 
-
-/* $Header $ */
-/* $Source $ */
-
 #include <application.H>
-#ifndef lint
-static UNUSED const char rcsidchartapp_ch[] = "$Header $";
-#endif
 
 /*
     $Log: chartapp.H,v $

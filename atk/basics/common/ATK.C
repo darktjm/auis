@@ -93,7 +93,7 @@ char *ATK_aliases::FindAlias(const char *name) {
 	if(f->name && strcmp(f->name, name)==0) return f->alias;
 	f=f->next;
     }
-    int len = strlen(name);
+    unsigned int len = strlen(name);
     if(len > sizeof(lowered) - 1)
 	len = sizeof(lowered) - 1;
     memmove(lowered, name, len); /* sometimes overlaps */
@@ -177,18 +177,12 @@ static int dynpathopen(const char  *path, const char  *fpath)
 }
 
 
-extern "C" void ATKLoadedObject(const char *name, const char *path)
-{
-}
-
 static ATKregistryEntry *FindRegistryEntryByName(const char *classname);
 ATKregistryEntry *ATK::DynamicLoad(const char *name, boolean atrace)
 {
     ATKregistryEntry *ent=FindRegistryEntryByName(name);
     if(ent!=NULL) return ent;
     
-    char *base=NULL;
-    long len=0;
     int (*mainfunc)(int, char **);
     int retval=0;
     int slen=strlen(name);
@@ -299,7 +293,6 @@ ATKregistryEntry *ATK::DynamicLoad(const char *name, boolean atrace)
 #else
     if (trace) {
 	printf("Dynamic loaded %s\n", fullname);
-	ATKLoadedObject(name, fullname);
     }
 #endif /* RCH_ENV */
 

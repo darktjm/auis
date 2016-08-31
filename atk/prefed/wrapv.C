@@ -24,16 +24,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/prefed/RCS/wrapv.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
-
- 
-
 ATK_IMPL("wrapv.H")
 
 
@@ -46,9 +36,6 @@ ATK_IMPL("wrapv.H")
 
 
 ATKdefineRegistry(wrapv, view, NULL);
-#ifndef NORCSID
-#endif
-
 
 wrapv::wrapv()
 {

@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/rastoolview.C,v 1.6 1995/01/20 21:23:10 Zarf Stab74 $";
-#endif
-
-
- 
 ATK_IMPL("rastoolview.H")
 
 #include <stdio.h>
@@ -1435,8 +1427,8 @@ static class raster *GetPasted(class rastoolview  *self)
 {
     class raster *ras = self->pasteraster;
     FILE *pasteFile;
-    static char hdr[] = "\\begindata{raster,";
-    char *hx = hdr;
+    static const char hdr[] = "\\begindata{raster,";
+    const char *hx = hdr;
     int c;
 
     /* it would be nice if there was some way to determine whether the cut buffer contents hadn't changed since the last paste operation; if so, we could just return self->pasteraster immediately. */

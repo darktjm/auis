@@ -24,24 +24,13 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/xwdio.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
-/* $Author: rr2b $ */
-
- 
-
 /*  
   Enable import and export of X Window Dump (version 7) files	
   paul@athena.mit.edu  1/90		
   "...it becomes natural, like a third sense." -- Homer Simpson 
  */		
 
+#include <andrewos.h>
 ATK_IMPL("xwdio.H")
 #include <stdio.h>
 #include <sys/stat.h>
@@ -65,8 +54,6 @@ ATK_IMPL("xwdio.H")
 
 
 ATKdefineRegistry(xwdio, ATK, NULL);
-#ifndef NORCSID
-#endif
 static void reverse_video(unsigned char *location , unsigned char *output, long  nbytes);
 static void _swapshort (register char  *bp, register unsigned  n);
 static void _swaplong (register char  *bp, register unsigned  n);

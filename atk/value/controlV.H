@@ -50,7 +50,7 @@ public:
       static void SetAutoInit(boolean val);
     
       char *cclass;
-      char *function;
+      const char *function;
       boolean autoinit,needsinit;
 };
 

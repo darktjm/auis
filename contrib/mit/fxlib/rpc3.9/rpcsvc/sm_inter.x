@@ -1,6 +1,3 @@
-/* @(#)sm_inter.x	1.2 87/11/12 3.9 RPCSRC */
-/* @(#)sm_inter.x 1.7 87/06/24 Copyr 1987 Sun Micro */
-
 /*
  * Status monitor protocol specification
  * Copyright (C) 1986 Sun Microsystems, Inc.

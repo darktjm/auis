@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/cmd/RCS/dumpbin.c,v 2.10 1994/06/09 21:18:04 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
@@ -41,7 +33,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/message
 
 extern char *index();
 
-static char pref[]="messages.binaryoptions";
+static const char pref[]="messages.binaryoptions";
 long hatol();
 
 main(argc, argv)

@@ -25,14 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/errors/RCS/errprntf.c,v 2.20 1996/05/13 16:54:07 robr Exp $";
-#endif
-
-
 /* *************************************************************** 
 
  errprntf.c:  Routine for printing Andrew-standard errors.
@@ -42,6 +34,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 		********************************************
 
 */
+#include <andrewos.h>
 #include <stdio.h>
 #include "errprntf.h"
 
@@ -82,7 +75,7 @@ va_dcl
 }
 
 
-static char formatstr[]="<%s%s%s%s%s%s%s>";
+static const char formatstr[]="<%s%s%s%s%s%s%s>";
 
 int
 errprintf(va_alist)
@@ -202,7 +195,7 @@ int safefprintf(FILE *fp, ...)
     }
     return(0);
 }
-static char formatstr[]="<%s%s%s%s%s%s%s>";
+static const char formatstr[]="<%s%s%s%s%s%s%s>";
 
 int
 errprintf(const char *application, ...)

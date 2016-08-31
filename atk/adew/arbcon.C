@@ -22,18 +22,12 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/arbcon.C,v 1.6 1995/11/15 23:13:23 robr Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
 /* user code ends here for HeaderInfo */
+#include <andrewos.h>
 ATK_IMPL("arbcon.H")
 
 #include <proctable.H>
@@ -87,22 +81,20 @@ static class arbiterview *OwnArb;
 #define ARBCONNAME environ::AndrewDir("/lib/arbiters/Arb")
 #define LISTNAME environ::AndrewDir("/lib/arbiters/vallist")
 #define VWLISTFILE  environ::AndrewDir("/lib/arbiters/viewlist")
-static char defaultvwlist[] = "text,fad,table,eq,raster,lookz,lset,page,ness,zip,link,chomp,calc,bush,chart,value bargraphV,value fourwayV,value sliderV,value thumbV,value buttonV,value \
-onoffV,value sliderstrV,value thumbstrV,value controlV,value pianoV,value stringV,value enterstrV,value menterstrV,value clicklistV,arbiter" ;
+static const char defaultvwlist[] = "text,fad,table,eq,raster,lookz,lset,page,ness,zip,link,chomp,calc,bush,chart,value bargraphV,value fourwayV,value sliderV,value thumbV,value buttonV,"
+"value onoffV,value sliderstrV,value thumbstrV,value controlV,value pianoV,value stringV,value enterstrV,value menterstrV,value clicklistV,arbiter" ;
 class menulist *arbconMenus;
 static class atom *atta[7];
 
 ATKdefineRegistry(arbcon, observable, arbcon::InitializeClass);
-#ifndef NORCSID
-#endif
 static void DoCopy(class arbcon  *self,boolean  clear);
-static int mystrcmp(register char  *s1,register char  *s2);
+static int mystrcmp(register const char  *s1,register const char  *s2);
 static int findinlist(char  **lst ,int  cnt,char  *str);
-static char *parseobv(register char  *str,register char  *buf);
-static void SetNotice(char  *str);
+static char *parseobv(register const char  *str,register char  *buf);
+static void SetNotice(const char  *str);
 static int appendlist(char  **lst,int  cnt,char  *str,int  TEST);
-static void SetName(class celview  *cv,class arbiterview  *abv,char  *name);
-static long findstring(class text  *txt,char  *str);
+static void SetName(class celview  *cv,class arbiterview  *abv,const char  *name);
+static long findstring(class text  *txt,const char  *str);
 static void handleclicks(class arbcon  *self,class cltextview  *ct,long  *position, long  *numberOfClicks, enum view_MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type);
 static void NewWindow(const char  *filename,int  bflags,boolean  AddArb);
 void arbcon_Create();
@@ -113,7 +105,7 @@ static void CopyText(class text  *dst,class text  *src);
 #endif /* NOTUSED */
 static class celview *currentcelview(struct classheader  *ClassID);
 static boolean isarbcon(class celview  *cv);
-static void setobview(class arbcon  *self,char  *str,boolean  docopy);
+static void setobview(class arbcon  *self,const char  *str,boolean  docopy);
 static void addobview(class view  *v);
 static void copy(class view  *v);
 static void copylink(class view  *v);
@@ -141,7 +133,9 @@ void arbcon_copycon(class view  *v,long  dat);
 
 static void DoCopy(class arbcon  *self,boolean  clear)
 {
-   char buf[256],*s,*oldref;
+   char buf[256];
+   const char *oldref;
+   const char *s;
    *buf = '\0';
     if(Gself != NULL){
 	if (Gself->currentcelviewval && (Gself->ArbLinkCel->GetValue() == 0)){
@@ -187,7 +181,7 @@ static void DoCopy(class arbcon  *self,boolean  clear)
 	}
     }
 }
-static int mystrcmp(register char  *s1,register char  *s2)
+static int mystrcmp(register const char  *s1,register const char  *s2)
 {
     if(s1 == NULL && s2 == NULL) return 0;
     if(s1 == NULL || s2 == NULL) return 1;
@@ -204,7 +198,7 @@ static int findinlist(char  **lst ,int  cnt,char  *str)
     }
     return -1;
 }
-static char *parseobv(register char  *str,register char  *buf)
+static char *parseobv(register const char  *str,register char  *buf)
 {
     register char *stop = NULL;
     while(*str){
@@ -221,7 +215,7 @@ static char *parseobv(register char  *str,register char  *buf)
     return NULL;
 }
     
-static void SetNotice(char  *str)
+static void SetNotice(const char  *str)
 {
     if(Gself == NULL) return;
     if(str) {
@@ -238,7 +232,7 @@ static void SetNotice(char  *str)
 	}
     }
     else {
-	char *srs,*vv;
+	const char *srs, *vv;
 	if((srs = Gself->ObjectName) == NULL || *srs == '\0')
 	    sprintf(Gself->arr,"< New Object >");
 	else{
@@ -271,7 +265,7 @@ static int appendlist(char  **lst,int  cnt,char  *str,int  TEST)
     }
     return cnt;
 }
-static void SetName(class celview  *cv,class arbiterview  *abv,char  *name)
+static void SetName(class celview  *cv,class arbiterview  *abv,const char  *name)
 {
 
     int count = 0;
@@ -283,7 +277,8 @@ static void SetName(class celview  *cv,class arbiterview  *abv,char  *name)
 	if(cv == Gself->currentcelviewval) 
 	    arbcon::DeleteCelview(abv,cv);
 	if((abv)->registername(cv,name)== FALSE){
-	    char *dp,*cp;
+	    const char *dp;
+	    char *cp;
 	    if((dp = strrchr(name,SEPCHAR) ) != NULL) {
 		dp++;
 		if(*dp >= '0' && *dp <= '9') count = atoi(dp) + 1;
@@ -297,10 +292,10 @@ static void SetName(class celview  *cv,class arbiterview  *abv,char  *name)
 	}
     }
 }
-static long findstring(class text  *txt,char  *str)
+static long findstring(class text  *txt,const char  *str)
 {   /* searches text for str by itself on a line */
     register long i,ch,pos,len;
-    register char *p;
+    register const char *p;
     if(txt == NULL) return -2 ;
     len = (txt)->GetLength();
     p = str;pos = 0;
@@ -359,7 +354,7 @@ static void NewWindow(const char  *filename,int  bflags,boolean  AddArb)
     class frame *newFrame;
     class im *window;
     class buffer *buffer;
-    char *type;
+    const char *type;
     const char *otype;
     if((buffer = buffer::GetBufferOnFile(filename, bflags)) == NULL){
 	char buf[1300];
@@ -526,8 +521,8 @@ static void addtypes(class cel  *cl)
 }
 static boolean setupcel(class cel  *cl)
 {
-    char *obstr,*vwstr;
-    char *name,*str;
+    const char *obstr,*vwstr;
+    const char *name,*str;
     if(Gself == NULL) return FALSE;
     obstr = Gself->ObjectName;
     vwstr = Gself->ViewName;
@@ -580,9 +575,9 @@ boolean arbcon::InitCel(class celview  *cv,class arbiterview  *abv)
 
 #if 0
     class cel *cl;
-    char  *obstr,*vwstr;
+    const char  *obstr,*vwstr;
     class dataobject *dob;
-    char *name;
+    const char *name;
     if((cl = Cel(cv)) == NULL || Gself == NULL) return FALSE;
     if( cl->viewType != NULL && !(cv->NeedsRemade)) return FALSE;
     obstr = Gself->ObjectName;
@@ -649,7 +644,10 @@ void arbcon::EditCurrentCelview()
 
     class text *src;
     long i,len,bufsize;
-    char foo,*c,*refname,*vtype,buf[256];
+    char foo,*c;
+    const char *refname;
+    char buf[256];
+    const char *vtype;
     class cel *cl;
     if(Gself == NULL || Gself->ArbTextEdit == NULL )
 	return;
@@ -703,7 +701,7 @@ void arbcon::AddCel(class arbiterview  *arb,class cel  *cl,boolean  notify)
 
     char buf[512];
     class celview *cv;
-    char *str = (cl)->GetRefName();
+    const char *str = (cl)->GetRefName();
     if(str == NULL || *str == '\0' || *str == '-') return;
     strcpy(buf,str);
     strcat(buf,"\n");
@@ -735,7 +733,7 @@ void arbcon::DeleteCelview(class arbiterview  *arb,class celview  *cv)
 	ATKinit;
 
     int loc;
-    char *name;
+    const char *name;
     if(Gself == NULL || cv == NULL) return;
 
     if(cv == Gself->currentcelviewval) 
@@ -763,7 +761,10 @@ void arbcon::SaveCurrentCelview()
     (Gself->currentcelviewval)->PostParameters();
 #else /* 0 */
     class text *src;
-    char buf[256],*str,*oldstr,**arr;
+    char buf[256];
+    const char *str;
+    const char * const *arr;
+    const char *oldstr;
     long len,size;
     if(Gself == NULL || Gself->ArbTextEdit == NULL || Gself->currentcelviewval == NULL ||
 	Cel(Gself->currentcelviewval) == NULL ||
@@ -827,7 +828,7 @@ void arbcon::SetCurrentCelview(class celview  *cv)
 {
 	ATKinit;
 
-    char *srs;
+    const char *srs;
     char buf[256];
     /* printf("In SetCurrentCelview cv = %d\n",(long)cv); */
    /*  fprintf(stderr,"In scc\n");
@@ -881,9 +882,9 @@ void arbcon::DestroyCurrentCelview()
 	(cv)->Destroy();
     }
 }
-static void setobview(class arbcon  *self,char  *str,boolean  docopy)
+static void setobview(class arbcon  *self,const char  *str,boolean  docopy)
 {
-    char *vw,*obs,*vws;
+    const char *vw,*obs,*vws;
     static char buf[128];
     boolean NeedUpdate = FALSE;
     obs = self->ObjectName;
@@ -967,7 +968,8 @@ static void cut(class view  *v)
 }
 static void newwin(class view  *v)
 {
-    char frs[1024],prompt[256],*type;
+    char frs[1024],prompt[256];
+    const char *type;
     if(Gself == NULL) return;
     type = NULL;
     if(Gself && (type = Gself->ObjectName) != NULL && *type){
@@ -1179,7 +1181,7 @@ static boolean createGself(class arbcon  *self)
 	/* all this to center the title, sigh */
 	class style *Style = NULL;
 	class environment *te;
-	char *buf ;
+	const char *buf ;
 	class text *txt;
 
 	buf = ARBCONMESSAGE;

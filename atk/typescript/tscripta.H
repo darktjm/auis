@@ -44,7 +44,7 @@ public:
      boolean ParseArgs(int argc, const char **argv)  ;
      boolean Start()  ;
      void Stop();
-    char **SessionCheckpoint();
+    const char * const *SessionCheckpoint();
 
     class typescript *ss;
     class frame *framep;

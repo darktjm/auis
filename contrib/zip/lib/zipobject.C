@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipobject.C,v 1.4 1993/09/28 04:52:23 rr2b Stab74 $";
-#endif
-
 /* zipobj.c	Zip Object -- Super-class				      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -186,7 +181,7 @@ zipobject::Object_Icon( )
   return  0;
   }
 
-char *
+const char *
 zipobject::Object_Icon_Font_Name( )
     {
   IN(zipobject::Object_Icon_Font_Name);
@@ -203,7 +198,7 @@ zipobject::Object_Icon_Cursor( )
   return  0;
   }
 
-char *
+const char *
 zipobject::Object_Icon_Cursor_Font_Name( )
     {
   IN(zipobject::Object_Icon_Cursor_Font_Name);

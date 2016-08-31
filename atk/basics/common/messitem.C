@@ -237,7 +237,7 @@ static int ReadMessFile(const char  *filename, boolean  executeImmediately)
 	      if (*p == '"') p++;
 	    } else
 	      s1[0] = '\0';
-	    if (s1 && s1[0] != '\0') {
+	    if (s1[0] != '\0') {
 	      struct messitemi *mess;
 	      while (*p == ' ') p++; /* Skip blank */
 	      i = 0;

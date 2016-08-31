@@ -78,10 +78,6 @@ exit[^A-Z0-9a-z_]		yyless(yyleng-1);return(nametype=name_Exit,class_Name);
 
 .				return(class_Other);
 %%
-#ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/class/pp/RCS/classpp.flex,v 1.2 1994/05/16 20:39:32 rr2b Stab74 $";
-#endif
-
 static int FilePtr = 0;
 static YY_BUFFER_STATE FileStack[FILESTACKSIZE];
 

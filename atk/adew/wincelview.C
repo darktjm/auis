@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/wincelview.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
 ATK_IMPL("wincelview.H")
 #include <cel.H>
 #include <arbiterview.H>
@@ -47,8 +40,6 @@ ATK_IMPL("wincelview.H")
 
 
 ATKdefineRegistry(wincelview, view, NULL);
-#ifndef NORCSID
-#endif
 static void DoUpdate(class wincelview  *self);
 
 

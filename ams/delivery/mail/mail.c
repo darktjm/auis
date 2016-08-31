@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/delivery/mail/RCS/mail.c,v 1.10 1992/12/15 21:25:24 rr2b Stab74 $";
-#endif
-
 /*
 		mail.c -- Warn user & postmaster that /bin/mail is no longer supported.
 */
@@ -87,7 +82,7 @@ static char *user()
 static postmaster(argv)
     char *argv[];
 {
-    static char sendmail[] = "/usr/lib/sendmail -oi postmaster";
+    static const char sendmail[] = "/usr/lib/sendmail -oi postmaster";
     extern FILE *popen();
     extern pclose();
     register FILE *fout;

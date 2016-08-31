@@ -143,7 +143,7 @@ EightBitCharHelp() {
         printf("There are no extended characters available for your US-ASCII terminal.\n\n");
         printf("If you are actually using a terminal or terminal emulator with a richer\ncharacter set, you must use the '-a' option or the 'MM_CHARSET' environment\nvariable to inform this program of that fact.\n");
     } else {
-        static char *kbd1[] =
+        static const char * const kbd1[] =
           {
             "1234567890-=",
             "qwertyuiop[]",
@@ -151,7 +151,7 @@ EightBitCharHelp() {
             "zxcvbnm,./\\",
             NULL
         };
-        static char *kbd2[] = /* MUST have same # of entries as kbd1 */
+        static const char * const kbd2[] = /* MUST have same # of entries as kbd1 */
           {
             "!@#$%^&*()_+",
             "QWERTYUIOP{}",
@@ -2396,7 +2396,7 @@ char *hdr;
     }
 }
 
-static char basis_hex[] = "0123456789ABCDEF";
+static const char basis_hex[] = "0123456789ABCDEF";
 
 PutQP(c, fp)
 unsigned char c;

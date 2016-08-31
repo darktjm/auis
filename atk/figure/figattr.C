@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-char *figattr_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figattr.C,v 3.8 1996/01/21 03:34:54 wjh Stab74 $";
-#endif 
-
 #include <andrewos.h>
 ATK_IMPL("figattr.H")
 #include <math.h>
@@ -594,7 +590,7 @@ void figattr::SetupPrintArrowHead(struct figattr_arrowhead *arrowhead, class fig
 }
 
 
-void figattr::PrintArrowHead(FILE *file, char *prefix, struct figattr_arrowhead *arrowhead)
+void figattr::PrintArrowHead(FILE *file, const char *prefix, struct figattr_arrowhead *arrowhead)
 {
     int ix;
 

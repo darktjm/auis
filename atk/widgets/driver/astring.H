@@ -94,13 +94,13 @@ private:
 	char *body;
 public:
 	inline AString() 
-		{space = 0; used = 0; body = "";}
+		{space = 0; used = 0; body = (char *)"";} /* not freed if 0 */
 	inline AString(const char *s) 
-		{space = 0; used = 0; body = "";  *this = s;}
+		{space = 0; used = 0; body = (char *)"";  *this = s;}
 	inline AString(const AString &s) 
-		{space = 0; used = 0; body = "";  *this = s;}
+		{space = 0; used = 0; body = (char *)"";  *this = s;}
 	inline AString(const char s) 
-		{space = 0; used = 0; body = "";  *this = s;}
+		{space = 0; used = 0; body = (char *)"";  *this = s;}
 	inline ~AString() 
 		{if (space > 0) free (body);}
 
@@ -148,7 +148,7 @@ public:
 		{return ReplaceN(used, 0, &s, 1);}
 	inline AString &Append(const AString &s) 
 		{return ReplaceN(used, 0, s.body, s.used);}
-	inline AString &Insert(int i, char *s) 
+	inline AString &Insert(int i, const char *s) 
 		{const char *ss=s?s:""; return ReplaceN(i, 0, ss, strlen(ss));}
 	inline AString &Insert (int i, const char s) 
 		{return ReplaceN(i, 0, &s, 1);}
@@ -187,7 +187,7 @@ public:
 	char *SubstrCpy(char *s, int pos, int len) const;  // copies len chars
 			// starting at pos TO s
 	AString &Sprintf(const char *fmt, ...);	// construct string from format
-	FILE *VfileOpen(char *mode);	// return a FILE * for I/O w/ string
+	FILE *VfileOpen(const char *mode);	// return a FILE * for I/O w/ string
 		// *mode == 'w': write to the FILE *, gives AString a value
 		// *mode == 'r': reading from FILE * fetches from AString
 		// DO NOT USE THE ASTRING VALUE UNTIL CLOSING THE VFILE

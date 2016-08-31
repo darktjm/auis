@@ -25,18 +25,6 @@
 //  $
 */
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/RCS/help.C,v 1.14 1995/02/02 20:35:54 Zarf Stab74 $";
-#endif
-
-/* $ACIS$ */
-
- 
-
-
 /*---------------------------------------------------------------------------*/
 /*									     */
 /*		          	ATK Help Program			     */
@@ -61,6 +49,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #define label gezornenplatz
 /* sys/types.h in AIX PS2 defines "struct label", causing a type name clash.
    Avoid this by temporarily redefining "label" to be something else in the preprocessor. */
+#include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("help.H")
 #undef label
 
@@ -142,18 +131,18 @@ static int packedString[] = {037, 036, 0, 0};
 static int compressedString[] = {037, 0235, 0220};
 static int gzippedString[] = {037, 0213, 010, 010};
 struct filterinfo {
-    char *cmd;
+    const char *cmd;
     int len;
     int *magic;
     boolean possible;
 };
-struct filterinfo filters[] = {
+struct filterinfo filters[] = { /* possible field modified below */
     {"zcat", 3, compressedString, 0},
     {"pcat", 4, packedString, 0},
     {"gunzip", 4, gzippedString, 0},
     {0, 0, 0, 0}
 };
-char *colcmd = "col -b | tr '\t' ' '";
+const char colcmd[] = "col -b | tr '\t' ' '";
 
 /*---------------------------------------------------------------------------*/
 /*			CONDITIONAL DEBUGGING				     */
@@ -184,14 +173,6 @@ int HELPDEBUG = 0;
  */
 
 ATKdefineRegistry(help, view, help::InitializeClass);
-#ifndef NORCSID
-#endif
-#if POSIX_ENV || defined(M_UNIX)
-#else
-#endif
-#ifdef DEBUGGING
-#else
-#endif /* DEBUGGING */
 static char * AndyCopy(register char  *aproto , register char  *aresult);
 static char * CopyString(register char  *as);
 static int  ScanLine(register FILE  *afile, char  *ae1 , char  *ae2);
@@ -201,19 +182,19 @@ char * LowerCase(register char  *astring);
 static char * MapParens(char  *s);
 static char * sindex(char  *big , char  *small);
 void  AddHistoryItem (register class help  *self, int  marcp			/* is this a bookmark? */, int  flash			/* should we expose the history panel? */);
-static int  ShowFile(register class help  *self, register char  *afilename	/* the file */, int  amoreFlag			/* put "(more)" in the titlebar?
+static int  ShowFile(register class help  *self, register const char  *afilename	/* the file */, int  amoreFlag			/* put "(more)" in the titlebar?
 				   TRUE - yes, FALSE - no,
 				   help_USE_OLD_TITLE - use last setting */, int  hist			/* add this previous file to the history?
 				   help_HIST_NOADD - none at all,
 				   help_HIST_NAME - aname,
 				   help_HIST_TAIL - tail of the found filename
 				   */);
-static char * FindEntryInDirs(char	 *dirs[], char	 *entry  , char	 *extension);
+static const char * FindEntryInDirs(const char	 * const dirs[], const char	 *entry  , const char	 *extension);
 int  help_GetHelpOn(register class help  *self, const char  *aname	/* what topic */, long  isnew	/* is this a new topic? */, int  ahistory	/* show in history log under what name?
 		   help_HIST_NOADD - none at all,
 		   help_HIST_NAME - aname,
 		   help_HIST_TAIL - tail of the found filename
-		   */, char  *errmsg	/* error to print if failure. "Error" if this is NULL */);
+		   */, const char  *errmsg	/* error to print if failure. "Error" if this is NULL */);
 void  SetupMenus(register struct cache  *c);
 static void  SearchOverviews(register class help * self);
 static void  SearchPrograms(register class help * self);
@@ -227,7 +208,7 @@ void  HistoryHelp(class help  *self		/* callback rock */, struct history_entry  
 void  OverviewHelp(register class help  *self, register char  *name		/* which topic to request - panelEntry rock */, class panel  *apanel);
 static boolean EnsurePanelListSize();
 void FreePanelListData();
-long SetupPanel(boolean  readpairs, char  *fname, class panel  *panel		/* the panel to add entries to */, char  **def);
+long SetupPanel(boolean  readpairs, const char  *fname, class panel  *panel		/* the panel to add entries to */, const char  * const *def);
 class view *SetupLpairs(register class help  *self);
 static void  TogglePanels(register class help  *self, long  rock);
 static void  ToggleOverviews(register class help  *self, long  rock);
@@ -449,7 +430,7 @@ AddHistoryItem (register class help  *self, int  marcp			/* is this a bookmark? 
  * help file.
  */
 static int 
-ShowFile(register class help  *self, register char  *afilename	/* the file */, int  amoreFlag			/* put "(more)" in the titlebar?
+ShowFile(register class help  *self, register const char  *afilename	/* the file */, int  amoreFlag			/* put "(more)" in the titlebar?
 				   TRUE - yes, FALSE - no,
 				   help_USE_OLD_TITLE - use last setting */, int  hist			/* add this previous file to the history?
 				   help_HIST_NOADD - none at all,
@@ -459,8 +440,8 @@ ShowFile(register class help  *self, register char  *afilename	/* the file */, i
 {
     register FILE *fd;
     long objectID;
-    static char *manfiles[] = MACFILES;
-    char **manptr = manfiles;
+    static const char *manfiles[] = MACFILES; /* entries may be modifed below */
+    const char **manptr = manfiles;
     char tbuffer[MAXPATHLEN];
     char isTroffFormat = 0;
     int tc;
@@ -473,13 +454,15 @@ ShowFile(register class help  *self, register char  *afilename	/* the file */, i
     boolean hlp_view = FALSE;
     int ind;
     boolean reOpen;
-    char *p, *nextp;
-    char *realfilename = afilename;
+    const char *p, *nextp;
+    const char *realfilename = afilename;
 
 
     struct attributes attrs, *attr;
 
-    char *viewName, *objName, *tmp;
+    const char *viewName, *objName;
+    char *tmp;
+    const char *t;
 
     struct cache *c = self->info; /* view and dataobject to replace with new file object */
 
@@ -671,7 +654,8 @@ ShowFile(register class help  *self, register char  *afilename	/* the file */, i
 	    return 0;
 	}
     } else {			/* it's troff */
-	char *manroot = "/usr/man", *slash = NULL;
+	const char *manroot = "/usr/man", *slash;
+	char mroot[strlen(afilename) + 1];
 
 	/* check if the manfiles are absolute or relative paths.
 	   If 1st char is '/', path is absolute, OW, we andycopy it
@@ -691,26 +675,26 @@ ShowFile(register class help  *self, register char  *afilename	/* the file */, i
 	im::ForceUpdate();
 
 	/* ======== START of change to root of man pages ========== */
-	slash = (char*)strchr(afilename, '/');
+	slash = strchr(afilename, '/');
 	while(slash && (slash+1)) {
 	    if(!strncmp(slash+1,"man",3) && *(slash+4) == '/') {
 		/* found substring "man" somewhere in afilename; chdir there */
-		slash += 4;
-		*slash = '\0';
-		manroot = afilename;
+		strcpy(mroot, afilename);
+		mroot[slash - afilename + 4] = 0;
+		manroot = mroot;
 		break;
 	    }
 	    else 
-		slash = (char*)strchr(slash + 1, '/');
+		slash = strchr(slash + 1, '/');
 	}
 	if(!slash) {	/* troff file not located in standard man path */
 	    /* Chdir to directory containing afilename */
-	    manroot = afilename;
+	    strcpy(mroot, afilename);
+	    manroot = mroot;
 	    slash = strrchr(afilename,'/');
-	    if(slash) *slash = '\0';
+	    if(slash) mroot[slash - afilename] = 0;
 	}
 	chdir(manroot);
-	if(slash) *slash = '/';
 	/* ======== END of change to root of man pages ========== */
 
 	if (rofftext::ReadRoffIntoText((class text *)newdata, fd, 0, manfiles) != dataobject_NOREADERROR) {
@@ -743,8 +727,8 @@ ShowFile(register class help  *self, register char  *afilename	/* the file */, i
 	break;
       case help_HIST_NOADD:	/* do this so that bookmarks will work correctly */
       case help_HIST_TAIL:
-	tmp = strrchr(afilename,'/');
-	strcpy(c->histent, (tmp != NULL) ? tmp+1 : afilename);
+	t = strrchr(afilename,'/');
+	strcpy(c->histent, (tmp != NULL) ? t+1 : afilename);
     }
     DEBUG(("setting histent to: %s\n", c->histent));
 
@@ -788,8 +772,8 @@ char *extension;    The extension that will be concatenated to entry for searchi
    Used in: HistoryHelp(), ShowTutorial(), GetHelpOn(). NOTE: this routine is currently only used to find tutorial files because it is useful to be able to place tutorials in various places ( /usr/local/help, /usr/andrew/help, ...).  In the future other files (like .help files) may have various homes and this routine should be used to access them.
 */
 
-static char *
-FindEntryInDirs(char	 *dirs[], char	 *entry  , char	 *extension)
+static const char *
+FindEntryInDirs(const char	 * const dirs[], const char	 *entry  , const char	 *extension)
 {
   static char	fullPath[MAXPATHLEN];
   char		*returnPath = NULL;
@@ -844,7 +828,7 @@ help_GetHelpOn(register class help  *self, const char  *aname	/* what topic */, 
 		   help_HIST_NOADD - none at all,
 		   help_HIST_NAME - aname,
 		   help_HIST_TAIL - tail of the found filename
-		   */, char  *errmsg	/* error to print if failure. "Error" if this is NULL */)
+		   */, const char  *errmsg	/* error to print if failure. "Error" if this is NULL */)
 {
     register struct cache *c = self->info;
     char tbuffer[MAXPATHLEN];
@@ -1049,7 +1033,7 @@ static void
 ShowTutorial(register class help  *self)
 {
     static char tbuffer[MAXPATHLEN];
-    char *tmp = NULL;
+    const char *tmp = NULL;
 
     if(tmp = FindEntryInDirs(help_tutorialDirs,self->info->name,TUTORIAL_EXT)) {
 	strcpy(tbuffer,tmp);
@@ -1094,7 +1078,8 @@ HistoryHelp(class help  *self		/* callback rock */, struct history_entry  *ent	/
 {
     char buf[HNSIZE + HELP_MAX_ERR_LENGTH];
     char fnbuf[MAXPATHLEN];
-    char *tmp = NULL, *dir = NULL;
+    char *tmp = NULL;
+    const char *dir = NULL;
     int code;
     int file = FALSE;
 
@@ -1217,9 +1202,9 @@ FreePanelListData()
 	returns the number of entries added to the panel
  */
 long
-SetupPanel(boolean  readpairs, char  *fname, class panel  *panel		/* the panel to add entries to */, char  **def)
+SetupPanel(boolean  readpairs, const char  *fname, class panel  *panel		/* the panel to add entries to */, const char  * const *def)
 				{
-	char **defptr;
+	const char * const *defptr;
 	register FILE *tfile;
 	char elt1[HNSIZE], elt2[HNSIZE];
 	register long code;
@@ -1247,7 +1232,7 @@ SetupPanel(boolean  readpairs, char  *fname, class panel  *panel		/* the panel t
 			defptr = def;
 			if (defptr) 
 			    while (*defptr != (char *) NULL) {
-				(panel)->Add( *defptr, *defptr, FALSE);
+				(panel)->Add( *defptr, strdup(*defptr), FALSE);
 				defptr++;
 				entriesadded++;
 			    }
@@ -1682,7 +1667,7 @@ ToggleProgramListSize(register class help * self, long  rock)
 	/* now add in the auxiliary help dirs */
 	for(thd = (struct helpDir *)helpdb::GetHelpDirs(); thd; thd = thd->next) {
 	    char *tmp;
-	    char *subdir = MANSUBS;
+	    const char *subdir = MANSUBS;
 	    char dir[MAXPATHLEN];
 	    
 	    tmp = strrchr(thd->dirName, '/');

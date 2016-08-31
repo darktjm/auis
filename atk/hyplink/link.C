@@ -27,11 +27,6 @@
 */
 
 #include <andrewos.h>
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/hyplink/RCS/link.C,v 1.7 1996/07/06 03:29:26 wjh Exp $";
-#endif
-
 ATK_IMPL("link.H")
 
 #include <stdio.h>
@@ -54,7 +49,7 @@ ATK_IMPL("link.H")
 ATKdefineRegistry(link, pushbutton, link::InitializeClass);
 static long link_SanelyReturnReadError(class link  *self, FILE  *fp, long  id, long  code);
 static long ReadOldFormat(class link  *self, FILE  *fp, long  id);
-static void WriteLine(FILE  *f, char  *l);
+static void WriteLine(FILE  *f, const char  *l);
 static char * GlomStrings(char  *s , char  *t);
 static char * ReadLine(FILE  *f);
 #ifdef PL8
@@ -172,7 +167,7 @@ link::Write(FILE  *fp, long  id, int  level) {
 		  	(this)->GetTypeName(), uniqueid, 
 		  	DS_VERSION);
 		WriteLine(fp, (this)->GetRawLink() ? 
-				(this)->GetRawLink() : (char *)"");
+				(this)->GetRawLink() : "");
 		fprintf(fp, "%ld\n", (this)->GetPos());
 		fprintf(fp, "%ld\n", (this)->GetLen());
 		fprintf(fp, "%c\n", 
@@ -393,7 +388,7 @@ link::SetLen(long  len ) {
 
 
 static void
-WriteLine(FILE  *f, char  *l)
+WriteLine(FILE  *f, const char  *l)
 {
 /* 
 	Output a single line onto the data stream, quoting

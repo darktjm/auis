@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/wpi/RCS/wpiupdat.c,v 1.20 1993/07/02 15:55:01 rr2b Stab74 $";
-#endif
-
 /*========================================================================*\
  *                                                                        *
  * implementation of wpiupdat, the WP update filter                       *

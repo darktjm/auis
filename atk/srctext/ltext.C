@@ -26,7 +26,6 @@ $Disclaimer:
 #include <andrewos.h>
 
 static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/ltext.C,v 2.1 1995/02/07 17:37:27 rr2b Stab74 $";
 
 #include <setjmp.h>
 #include <ctype.h>
@@ -48,7 +47,7 @@ static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src
 
 ATKdefineRegistry(ltext, srctext, NULL);
 
-static void addindent(ltext *self, char *name, int args)
+static void addindent(ltext *self, const char *name, int args)
 {
     struct indenter *newindent = new_c(struct indenter);
     char *ptr;
@@ -65,7 +64,7 @@ void ltext::SetAttributes(struct attributes *atts)
 {
     (this)->srctext::SetAttributes(atts);
     while (atts != NULL) {
-	char *key = atts->key;
+	const char *key = atts->key;
 	if (strcmp(key, "defun-indent")==0)
 	    addindent(this, "defun", atoi(atts->value.string));
 	else if (strcmp(key, "defmacro-indent")==0)
@@ -297,9 +296,9 @@ long ltext::ReverseBlance(long pos, int type)
 
     boolean found = FALSE, instring = FALSE, atleastone = FALSE;
     int thischar, prechar;
-    char *parentype;
+    const char *parentype;
     struct paren_node *parenstack = NULL;
-    static char *opens = "({[", *closes = ")}]";
+    static const char opens[] = "({[", closes[] = ")}]";
 
     if (type == EOF)
 	if (pos > 0)

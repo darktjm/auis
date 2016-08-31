@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/wputil/RCS/genaccts.c,v 5.19 1992/12/15 21:12:21 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	genaccts.c
 	Generate a copy of our names database for use at CS.
@@ -63,7 +58,7 @@ char	**argv;
     char *CellName;
     struct wp_cd *CD;
     int AccRes, ForceList, AffilFmt, Dum;
-    static char Usage[] = "[-a] [-f] [cellname]";
+    static const char Usage[] = "[-a] [-f] [cellname]";
 
     CheckServiceConfiguration();
     AffilFmt = ForceList = AccRes = 0;

@@ -43,11 +43,6 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/muclient.c,v 1.11 1993/08/13 17:25:09 rr2b Stab74 $";
-#endif
-
 #ifdef _IBMR2
 #include <sys/select.h>
 #endif

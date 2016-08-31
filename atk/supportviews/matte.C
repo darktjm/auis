@@ -25,17 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/matte.C,v 3.23 1996/11/12 21:19:00 wjh Exp $";
-#endif
-
-
- 
-
-
 #define UNSET 0
 #define FUDGE 2
 #define BIGFUDGE 5	/* for bigger insets */
@@ -45,6 +34,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #define matte_ChangeHeight 2
 
 
+#include <andrewos.h>
 ATK_IMPL("matte.H")
 #include <bind.H>
 #include <view.H>
@@ -116,7 +106,7 @@ static void UpdateCursors(class matte  *self)
     }
 }
 
-void matte::Print(FILE  *file, char  *processor, char  *finalFormat, boolean  topLevel)
+void matte::Print(FILE  *file, const char  *processor, const char  *finalFormat, boolean  topLevel)
 {
     if(this->child) 
 	(this->child)->Print(file, processor, finalFormat, topLevel);
@@ -353,7 +343,7 @@ class matte *matte::Create(class viewref  *vr,class view  *parent)
     ATKinit;
 
     class matte *self;
-    char *viewT=vr->viewType;
+    const char *viewT=vr->viewType;
     self = new matte;
     self->ref = vr;
     self->desh = self->ref->desh;
@@ -419,7 +409,7 @@ static void ApplyEnvironmentsToStyle(environment *env, style *dest) {
     env->data.style->MergeInto(dest);
 }
 
-char *matte::WantInformation(char *name) {
+const char *matte::WantInformation(const char *name) {
     if(strcmp(name, "style")==0) {
         // compute a style representing the effects of all the styles
         // effective at this matte's location in the text.  the caller
@@ -586,7 +576,7 @@ void matte::PrintPSDoc(FILE *outfile, long pagew, long pageh)
     if (this->child)
 	this->child->PrintPSDoc(outfile, pagew, pageh);
 }
-void *matte::GetPSPrintInterface(char *printtype)
+void *matte::GetPSPrintInterface(const char *printtype)
 {
      if (this->child)
 	return this->child->GetPSPrintInterface(printtype); 

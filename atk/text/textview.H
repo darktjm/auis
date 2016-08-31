@@ -219,14 +219,14 @@ class textview : public  view {
       class view * GetApplicationLayer()  ;
       void DeleteApplicationLayer(class view *scrollbar);
       const void * GetInterface(const char *interfaceName)  ;
-      void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
+      void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
       void WantNewSize(class view *requestor);
       void ObservedChanged (class observable *changed, long value);
       void LinkTree(class view *parent);
       view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
       void GetOrigin(long width, long height, long *originX, long *originY);
       void InitChildren();
-      boolean CanView(char *TypeName)  ;
+      boolean CanView(const char *TypeName)  ;
       long WriteSelection(FILE *out)  ;
       void LoseSelectionOwnership();
       void ExposeChild(class view *v);
@@ -235,7 +235,7 @@ class textview : public  view {
       boolean RecSrchReplace(class dataobject *text, long pos, long len);
       void RecSrchExpose(const struct rectangle &logical, struct rectangle &hit);
       void PrintPSDoc(FILE *outfile, long pagew, long pageh);
-      void *GetPSPrintInterface(char *printtype);
+      void *GetPSPrintInterface(const char *printtype);
       void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);
 
       struct view_printoptlist *PrintOptions();

@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/hyplink/RCS/pshbttnv.C,v 1.22 1996/05/06 17:45:17 robr Exp $";
-#endif
-
 ATK_IMPL("pshbttnv.H")
 #include <sys/param.h>	/* for MAXPATHLEN */
 #include <stdio.h>
@@ -71,7 +65,7 @@ ATK_IMPL("pshbttnv.H")
 #define DBG(x) ;
 #endif
 
-#define NO_MSG (char *)"Push Me"
+#define NO_MSG "Push Me"
 
 #define PROMPTFONT "andysans12b"
 #define FONT "andysans"
@@ -110,7 +104,7 @@ static void LabelProc(class ATK  *self, long  param);
 static void FontProc(class ATK  *self, long  param);
 static void StyleProc(class ATK  *self, long  param);
 static void ColorProc(class ATK  *self, long  param);
-static void OutputLabel(FILE  *f, char  *l);
+static void OutputLabel(FILE  *f, const char  *l);
 
 
 static void
@@ -215,7 +209,7 @@ pushbuttonview_CacheSettings(class pushbuttonview  *self, class pushbutton  *b, 
     unsigned char fg_rgb[3], bg_rgb[3];
     double get_rgb[3];
     int i;
-    char *pb_label;
+    const char *pb_label;
     int pb_style;
     class fontdesc *pb_font;
     int UpdateNeeded, NewSize;
@@ -316,7 +310,7 @@ pushbuttonview::~pushbuttonview()
   return;
 }
 
-static long ComputePos(class pushbuttonview *self, char *msg, class fontdesc *font, long left, long width, boolean *cont=NULL) {
+static long ComputePos(class pushbuttonview *self, const char *msg, class fontdesc *font, long left, long width, boolean *cont=NULL) {
     int mw, mh;
     font->StringBoundingBox(self->GetDrawable(), msg, &mw, &mh);
     if(mw+TEXTPAD>width) {
@@ -338,7 +332,7 @@ static void DrawContinued(class pushbuttonview *self, struct rectangle *inner) {
     self->FillPolygon(poly, 3, NULL);
 }
 
-static void DoSelectionHighlight(class pushbuttonview *self,char *textl, class fontdesc *my_fontdesc, long tx, struct rectangle *r, struct rectangle *hit, boolean draw)
+static void DoSelectionHighlight(class pushbuttonview *self,const char *textl, class fontdesc *my_fontdesc, long tx, struct rectangle *r, struct rectangle *hit, boolean draw)
 {
 
     
@@ -350,10 +344,10 @@ static void DoSelectionHighlight(class pushbuttonview *self,char *textl, class f
 	char k;
 	my_fontdesc->StringBoundingBox(self->GetDrawable(), textl, &width, &height);
 	tx-=width/2;
-	k=textl[start];
-	textl[start]='\0';
+	char buf[start + 1];
+	memcpy(buf, textl, start);
+	buf[start] = 0;
 	my_fontdesc->StringBoundingBox(self->GetDrawable(), textl, &swidth, &sheight);
-	textl[start]=k;
 	tx+=swidth;
 	width-=swidth;
 	my_fontdesc->StringBoundingBox(self->GetDrawable(), textl+start+slen, &swidth, &sheight);
@@ -376,7 +370,7 @@ static void LocateHit(class pushbuttonview *pv, const struct rectangle &logical,
     class pushbutton *b = (class pushbutton *) (pv)->GetDataObject();
     int bdepth, r2_bot, r_bot;
     int tx = 0;
-    char *textl;
+    const char *textl;
     int style;
     class fontdesc *my_fontdesc;
     class graphic *my_graphic;
@@ -483,7 +477,7 @@ pushbuttonview::FullUpdate(enum view_UpdateType  type, long  left , long  top , 
   double ulshade, lrshade, topshade;
   int tx = 0, ty = 0;
   short t_op;
-  char *textl;
+  const char *textl;
   int style;
   class fontdesc *my_fontdesc;
   class graphic *my_graphic;
@@ -775,10 +769,10 @@ HighlightButton(class pushbuttonview  *self)
   struct FontSummary *my_FontSummary;
   int tx, ty;
   short t_op;
-  char *text;
+  const char *text;
   int bdepth, r2_bot, r_bot;
   double ulshade, lrshade;
-  char *textl;
+  const char *textl;
   if(self->GetIM()==NULL) return;
   if(b->GetText()) {
       textl = (b)->GetText();
@@ -902,10 +896,10 @@ UnhighlightButton(class pushbuttonview  *self)
   struct FontSummary *my_FontSummary;
   int tx, ty;
   short t_op;
-  char *text;
+  const char *text;
   int bdepth, r2_bot, r_bot;
   double ulshade, lrshade;
-  char *textl;
+  const char *textl;
   if(self->GetIM()==NULL) return;
   if(b->GetText()) {
       textl = (b)->GetText();
@@ -1196,7 +1190,7 @@ LabelProc(class ATK  *aself, long  param)
 
     char buf[MAXPATHLEN];
     class pushbutton *b = (class pushbutton *)(self)->GetDataObject();
-    char *oldtext;
+    const char *oldtext;
 
     oldtext = (b)->GetSafeText();
     if (message::AskForString(self,50,"Enter new text for button: ",
@@ -1246,7 +1240,7 @@ StyleProc(class ATK  *aself, long  param)
       */
 
     class pushbutton *b = (class pushbutton *)(self)->GetDataObject();
-    static char *style_menu[] = {
+    static const char * const style_menu[] = {
 	"Plain Text",
 	"Boxed Text",
 	"Three Dimensional",
@@ -1335,7 +1329,7 @@ void pushbuttonview::WantUpdate(class view  *requestor)
     (this)->view::WantUpdate( requestor);
 } /* pushbuttonview__WantUpdate */
 
-static void OutputLabel(FILE  *f, char  *l)
+static void OutputLabel(FILE  *f, const char  *l)
 {
     if(l==NULL) l=NO_MSG;
     while(*l) {
@@ -1346,7 +1340,7 @@ static void OutputLabel(FILE  *f, char  *l)
     }
 }
 
-void pushbuttonview::Print(register FILE   *file, char    *processor, char    *format, boolean    topLevel)
+void pushbuttonview::Print(register FILE   *file, const char    *processor, const char    *format, boolean    topLevel)
 {
     int count;
     register class pushbutton *dobj = (class pushbutton *)this->dataobject;
@@ -1367,10 +1361,11 @@ void pushbuttonview::Print(register FILE   *file, char    *processor, char    *f
     } else {
 	/* guess we're trying to write in postscript */
 	class fontdesc *fd = (dobj)->GetButtonFont();
-	char *ffam = FONT;
+	const char *ffam = FONT;
 	long fsiz = FONTSIZE;
 	long fsty = FONTTYPE;
-	char fontname[256], *prefix;
+	char fontname[256];
+	const char *prefix;
 	short *encoding;
 
 	if (strcmp(format, "troff") == 0)
@@ -1397,7 +1392,8 @@ static char *PrintLump(void *rock, class style **styptr)
 {
     class pushbuttonview *self = (class pushbuttonview *)rock;
     class pushbutton *dobj = (class pushbutton *)(self->GetDataObject());
-    char *tx, *res;
+    const char *tx;
+    char *res;
 
     if (styptr) {
 	/*  *styptr = NULL;  */
@@ -1410,7 +1406,7 @@ static char *PrintLump(void *rock, class style **styptr)
     return res;
 }
 
-void *pushbuttonview::GetPSPrintInterface(char *printtype)
+void *pushbuttonview::GetPSPrintInterface(const char *printtype)
 {
     static struct textview_insetdata dat;
 
@@ -1433,7 +1429,7 @@ void pushbuttonview::PrintPSRect(FILE *outfile, long logwidth, long logheight, s
 {
     class pushbutton *dobj = (class pushbutton *)(this->GetDataObject());
     class fontdesc *fd = dobj->GetButtonFont();
-    char *ffam = FONT;
+    const char *ffam = FONT;
     long fsiz = FONTSIZE;
     long fsty = FONTTYPE;
     char fontname[256];
@@ -1461,7 +1457,7 @@ void pushbuttonview::PrintPSRect(FILE *outfile, long logwidth, long logheight, s
 
 boolean pushbuttonview::RecSearch(struct SearchPattern *pat, boolean toplevel)
 {
-    char *ts;
+    const char *ts;
     int substart;
     class pushbutton *d;
 
@@ -1486,7 +1482,7 @@ boolean pushbuttonview::RecSearch(struct SearchPattern *pat, boolean toplevel)
 boolean pushbuttonview::RecSrchResume(struct SearchPattern *pat)
 {
     if(this->recsearchvalid) {
-	char *ts;
+	const char *ts;
 	int substart=(-1);
 	class pushbutton *d;
 	int len;
@@ -1518,7 +1514,7 @@ boolean pushbuttonview::RecSrchReplace(class dataobject *srcdobj, long srcpos, l
     class pushbutton *d = (class pushbutton *) (this)->GetDataObject();
 
     char *buf;
-    char *ts;
+    const char *ts;
     int substart, sublen;
     class simpletext *srctext;
 

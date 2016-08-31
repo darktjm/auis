@@ -20,13 +20,6 @@
  *  $
  */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/awgtfig.C,v 1.5 1996/05/07 20:36:04 wjh Exp $";
-#endif
-
 /* awgtfig.C	
 
 	Build widgets atop figure
@@ -42,6 +35,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * Copied from /afs/cs/misc/atk/@sys/alpha/lib/null
  */
 
+#include <andrewos.h>
 ATK_IMPL("awgtfig.H")
 
 #include <awgtfig.H>

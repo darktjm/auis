@@ -29,15 +29,9 @@
  *  $
 */
 
-#include <util.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/xbasedir.c,v 1.5 1996/06/14 21:08:40 wjh Exp $";
-#endif
-
 /* andydir.c */
 
+#include <util.h>
 #include <stdio.h>
 #include <andrdir.h>
 

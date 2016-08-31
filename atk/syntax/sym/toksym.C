@@ -20,10 +20,6 @@
 // 
 //  $
 \* ********************************************************************** */
-#if !defined(lint) && !defined(LOCORE) && defined(RCS_HDRS)
-static char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/syntax/sym/RCS/toksym.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 /* toksym.c		
 
 	Code for the toksym object

@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/layout/RCS/layout.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-/* $ACIS$ */
-
- 
-
 ATK_IMPL("layout.H")
 #include <stdio.h>
 #include <assert.h>
@@ -67,10 +57,8 @@ static boolean debug=FALSE;
 
 
 ATKdefineRegistry(layout, dataobject, layout::InitializeClass);
-#ifndef NORCSID
-#endif
-static void objectto(FILE  *f			    /* input file containing offending material */, char  *message			    /* error message */);
-static boolean			    /* returns TRUE for success */ fgetstring(FILE  *f			    /* input file */, char  *string			    /* desired input string */);
+static void objectto(FILE  *f			    /* input file containing offending material */, const char  *message			    /* error message */);
+static boolean			    /* returns TRUE for success */ fgetstring(FILE  *f			    /* input file */, const char  *string			    /* desired input string */);
 static long			    /* returns read error status */ readASCII(class layout  *self, FILE  *f			    /* input file */, long  id			    /* unique identifier in data stream */);
 
 
@@ -82,7 +70,7 @@ boolean layout::InitializeClass()
 
 /* get corresponding view name */
 
-char *					/* returns "layoutview */
+const char *					/* returns "layoutview */
 layout::ViewName()
 {
     return "layoutview";
@@ -158,7 +146,7 @@ layout::Write(FILE  * f				/* file to be written */, long  writeID				/* unique 
 
 /* object to and print out bad input */
 
-static void objectto(FILE  *f			    /* input file containing offending material */, char  *message			    /* error message */)
+static void objectto(FILE  *f			    /* input file containing offending material */, const char  *message			    /* error message */)
 {
     int ch;
 
@@ -175,7 +163,7 @@ static void objectto(FILE  *f			    /* input file containing offending material 
 /* scan input for a specific string */
 
 static boolean			    /* returns TRUE for success */
-fgetstring(FILE  *f			    /* input file */, char  *string			    /* desired input string */)
+fgetstring(FILE  *f			    /* input file */, const char  *string			    /* desired input string */)
 {
     int ch;
 
@@ -388,7 +376,7 @@ void layout::RemoveComponent(struct component  *c		    /* component to be remove
 
 /* fill in component */
 
-void layout::FillInComponent(char  *name				/* name of dataobject subclass */, struct component  *c			/* component to be filled in */)
+void layout::FillInComponent(const char  *name				/* name of dataobject subclass */, struct component  *c			/* component to be filled in */)
 {
     class dataobject *newobject;
 

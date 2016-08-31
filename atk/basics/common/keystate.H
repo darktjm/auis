@@ -62,6 +62,7 @@ enum keystate_DoProcValues {
 class keystate : public ATK  {
 public:
 	virtual ATKregistryEntry *ATKregistry();
+    virtual ~keystate() {}
     inline ATK  * GetObject() { return (this->object); }
 
     virtual void SetObject(ATK  *object);

@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/delivery/trymail/RCS/trymail.c,v 1.57 1996/04/20 16:40:24 robr Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	trymail.c
 	This is the part of mail delivery service that is exported
@@ -305,7 +300,7 @@ int CodeVal; char *Fmt;
 char *p1, *p2, *p3, *p4, *p5;
 {/* Issue a message for a global temporary (transient) failure. */
 	static char NewFmt[240];
-	static char Subj[] = "1 error: Long-term undeliverable mail";
+	static const char Subj[] = "1 error: Long-term undeliverable mail";
 	int RetErrVal;
 
 	ExitStatus |= tmexit_GlobalTempFail;
@@ -394,7 +389,7 @@ char *p1, *p2, *p3, *p4, *p5;
 	static char NewFmt[240];
 	int RetErrVal;
 	int IsSuccess = FALSE;
-	static char Subj[] = "1 error: Long-term undeliverable mail";
+	static const char Subj[] = "1 error: Long-term undeliverable mail";
 
 	if (CodeVal >= tm_AddrDeliveredLowest && CodeVal <= tm_AddrDeliveredHighest)
 		IsSuccess = TRUE;
@@ -934,7 +929,7 @@ PARSED_ADDRESS *Addr; char *Hdr, *FileName, *newITUVal;
 	FILE *outF;
 	auto char ChBuffer[1025];
 	char *ituBegin, *ituEnd, *Dum;
-	static char ITUname[] = "If-Type-Unsupported:";
+	static const char ITUname[] = "If-Type-Unsupported:";
 
 	sprintf(FileName, "/usr/tmp/%s", ams_genid(1));
 	errno = 0;

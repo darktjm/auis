@@ -26,12 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/cmenu/RCS/cmmanip.c,v 2.11 1993/08/27 19:30:42 gk5g Stab74 $";
-#endif
-
 #include <X11/Xlib.h>
 #include <cmintern.h>
 #include <scache.h>

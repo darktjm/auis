@@ -25,20 +25,9 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/scroll.C,v 3.25 1996/10/10 19:11:39 robr Exp $";
-#endif
-
-
- 
-
 /* Scrollbar code for ATK based on the original scrollbar code for be2. */
 
-
-
+#include <andrewos.h>
 ATK_IMPL("scroll.H")
 #include <scroll.H>
 
@@ -93,11 +82,11 @@ ATK_IMPL("scroll.H")
 
 
 /* The descriptions of the different types of scrollbars */
-static int Type[scroll_SIDES] = {scroll_VERT, scroll_VERT, scroll_HORIZ, scroll_HORIZ};    
+static const int Type[scroll_SIDES] = {scroll_VERT, scroll_VERT, scroll_HORIZ, scroll_HORIZ};    
 
-static int cursortypes[scroll_TYPES]={Cursor_VerticalArrows, Cursor_HorizontalArrows};
+static const int cursortypes[scroll_TYPES]={Cursor_VerticalArrows, Cursor_HorizontalArrows};
 
-static char *InterfaceName[scroll_TYPES] = {"scroll,vertical", "scroll,horizontal"};
+static const char * const InterfaceName[scroll_TYPES] = {"scroll,vertical", "scroll,horizontal"};
 
 #define REALBARWIDTH(self) ((self)->barWidth)
 #define WPADDING(x) ((x)->windowPadding)
@@ -308,12 +297,12 @@ void scroll::SetRegion(enum scroll_Regions sr, class ScrollRegion *r) {
     r->SetBaseSButtonPrefs(elevatorprefs);
 }
     
-static char scrollbarstr[]="scroll";
-static char scrollbarmatte[]="scrollmatte";
-static char scrollbarbox[]="scrollbar";
-static char scrollbarbutton[]="scrollbutton";
-static char scrollbarelevator[]="scrollelevator";
-static char scrollbardot[]="scrolldot";
+static const char scrollbarstr[]="scroll";
+static const char scrollbarmatte[]="scrollmatte";
+static const char scrollbarbox[]="scrollbar";
+static const char scrollbarbutton[]="scrollbutton";
+static const char scrollbarelevator[]="scrollelevator";
+static const char scrollbardot[]="scrolldot";
 
 scroll::scroll()
 {
@@ -1954,7 +1943,7 @@ void scroll::PrintPSDoc(FILE *outfile, long pagew, long pageh)
 	this->scrollee->PrintPSDoc(outfile, pagew, pageh);
 }
 
-void *scroll::GetPSPrintInterface(char *printtype)
+void *scroll::GetPSPrintInterface(const char *printtype)
 {
     if (this->scrollee)
 	return this->scrollee->GetPSPrintInterface(printtype);

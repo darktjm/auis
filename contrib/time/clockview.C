@@ -25,14 +25,8 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/time/RCS/clockview.C,v 1.6 1994/08/14 15:54:25 rr2b Stab74 $";
-#endif
-
-#define clock hidden_clock
 #include <andrewos.h>
-
+#define clock hidden_clock
 #include <math.h>
 #undef clock
 
@@ -58,11 +52,11 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/time/R
 
 /* Global Variables */
 static class menulist *clockview_menulist = NULL;
-static char *label_set1[3][1] = {{"12"}, {"XII"}, {"Twelve"}};
-static char *label_set4[3][4] = {{"12", "3", "6", "9"},
+static const char * const label_set1[3][1] = {{"12"}, {"XII"}, {"Twelve"}};
+static const char * const label_set4[3][4] = {{"12", "3", "6", "9"},
 				   {"XII", "III", "VI", "IX"},
 				   {"Twelve", "Three", "Six", "Nine"}};
-static char *label_set12[3][12] = {{"12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"},
+static const char * const label_set12[3][12] = {{"12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"},
 				   {"XII", "I", "II", "III", "IIII", "V", "VI", "VII", "VIII", "IX", "X", "XI"},
 				   {"Twelve", "One", "Two",
 				      "Three", "Four", "Five",
@@ -72,13 +66,11 @@ static char *label_set12[3][12] = {{"12", "1", "2", "3", "4", "5", "6", "7", "8"
 
 
 ATKdefineRegistry(clockview, view, clockview::InitializeClass);
-#ifndef NORCSID
-#endif
 static void MenuSetShape(class clockview  *self, char  *format);
 static void MenuSetLabels(class clockview  *self, char  *format);
 static void MenuSetTicks(class clockview  *self, char  *format);
 static void MenuSetSeconds(class clockview  *self, char  *format);
-static void PlotLabels(class clockview  *self, double  theta, int  radius, char  *label, enum border_shapes  shape);
+static void PlotLabels(class clockview  *self, double  theta, int  radius, const char  *label, enum border_shapes  shape);
 static void PlotPoints(class clockview  *self, double  theta, int  radius , int  thickness, enum border_shapes  shape);
 static void Redraw(class clockview  *self);
 
@@ -316,7 +308,7 @@ clockview::~clockview()
 
 
 static void
-PlotLabels(class clockview  *self, double  theta, int  radius, char  *label, enum border_shapes  shape)
+PlotLabels(class clockview  *self, double  theta, int  radius, const char  *label, enum border_shapes  shape)
 {
   struct rectangle rect;
   long max_radius;
@@ -547,7 +539,7 @@ clockview::Hit(enum view_MouseAction  action, long  x , long  y, long  numclicks
 
 
 void
-clockview::Print(FILE  *file, char  *processor , char  *finalFormat, boolean  topLevel)
+clockview::Print(FILE  *file, const char  *processor , const char  *finalFormat, boolean  topLevel)
 {
   time_t t;
 

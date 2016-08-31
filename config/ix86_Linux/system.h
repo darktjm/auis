@@ -569,11 +569,8 @@ ENDCPLUSPLUSPROTOS
 #define USE_VARARGS
 #define ANSI_COMPILER 1
 
-/* where is this from? */
-#if 0
 #ifdef __cplusplus
-#include <new.h>
-#endif
+#include <new>
 #endif
 #undef NULL
 #define NULL 0

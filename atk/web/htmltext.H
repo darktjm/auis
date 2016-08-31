@@ -79,24 +79,24 @@ class htmltext: public text {
     long Write(FILE *file, long writeID, int level);
     void Clear();
     void ClearCompletely();
-    long ReadTemplate(char *templateName, boolean inserttemplatetext);
-    virtual htmlenv *AddImage(long pos, char *file, 
+    long ReadTemplate(const char *templateName, boolean inserttemplatetext);
+    virtual htmlenv *AddImage(long pos, const char *file,
 		attlist  *atts=NULL);
     virtual void RenumberList(long pos, enum ListType ltype, 
 		htmlenv *env);
     virtual htmlenv *AddDingbat(long pos, 
 		enum ListType ltype, htmlenv *env);
     virtual long FindDestId(char *dest);
-    virtual char *GetAnchor(long pos);
+    virtual const char *GetAnchor(long pos);
     virtual void ShowComments(boolean viewcomments);
-    virtual char *GififyInset(long pos, htmlenv *env, char *filename); 
+    virtual const char *GififyInset(long pos, htmlenv *env, const char *filename);
 		// filename is path and name of gif file (w/  .gif)
 		// returns static string with attributes:
 		//		"WIDTH=ddd, HEIGHT=ddd"
 		// 	or error string starting with "*"
 		// caller must revise the text with AddImage
     virtual long EnumerateInsets(htmlefptr f, arbval rock);
-    virtual char *GetURL(long pos, long x=0, long y=0);
+    virtual const char *GetURL(long pos, long x=0, long y=0);
     virtual void ImbedTextInTable(table *t, chunk *c);
     inline const char *Title() {return title;}
     virtual long FindNamedAnchor(const char *target, 

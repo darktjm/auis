@@ -58,7 +58,7 @@ public:
 
   char *label[pianov_NUMLABELS];
   int lsize[pianov_NUMLABELS];
-  char *fontname;
+  const char *fontname;
   short fontsize;
   class fontdesc * normalfont, * boldfont, * activefont, *valuefont;
   long  tmpval, lastval;

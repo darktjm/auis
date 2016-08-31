@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/reauth/RCS/reauth.c,v 1.18 1996/09/03 19:02:31 robr Exp $";
-#endif
-
 /*
 	Reauthenticate to Vice repeatedly.
 
@@ -52,7 +47,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/reau
 
 #define NIL	0
 
-static char myname[] = "reauth";
+static const char myname[] = "reauth";
 
 /*
 	reauth time who password [dirWithAuths]

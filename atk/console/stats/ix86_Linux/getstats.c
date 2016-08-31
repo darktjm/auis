@@ -2,17 +2,6 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
-#include <andrewos.h>
-
-static UNUSED const char getstats_rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/stats/ix86_Linux/RCS/getstats.c,v 1.1 1994/04/28 19:34:30 rr2b Stab74 $";
-
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/stats/ix86_Linux/RCS/getstats.c,v 1.1 1994/04/28 19:34:30 rr2b Stab74 $ */
-/* $Source: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/stats/ix86_Linux/RCS/getstats.c,v $ */
-
-#ifndef lint
-static UNUSED const char getstats_c_id[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/stats/ix86_Linux/RCS/getstats.c,v 1.1 1994/04/28 19:34:30 rr2b Stab74 $";
-#endif /* lint */
-
 /* **********************************************************************
 *   This code is designed to read what might be priveledged (setuid) 
 *   information regarding both Disk Statistics (% full) and a host of 
@@ -95,8 +84,7 @@ static UNUSED const char getstats_c_id[] = "$Header: /afs/cs.cmu.edu/project/atk
  * and facilities.   Just thought you should know....
  */
 
-
-
+#include <andrewos.h>
 #include <getstats.h>
 
 #include <stdio.h>

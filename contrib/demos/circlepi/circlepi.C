@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/demos/circlepi/RCS/circlepi.C,v 1.3 1993/06/04 01:30:48 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 #include <stdio.h>
 #include <math.h>
@@ -47,9 +42,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/demos/
 
 
 ATKdefineRegistry(circlepi, dataobject, circlepi::InitializeClass);
-#ifndef NORCSID
-#endif
-
 
 boolean
 circlepi::InitializeClass()

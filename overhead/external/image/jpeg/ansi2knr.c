@@ -339,7 +339,7 @@ test1(buf)
 	/* Check that the apparent function name isn't a keyword. */
 	/* We only need to check for keywords that could be followed */
 	/* by a left parenthesis (which, unfortunately, is most of them). */
-	   {	static char *words[] =
+	   {	static const char * const words[] =
 		   {	"asm", "auto", "case", "char", "const", "double",
 			"extern", "float", "for", "if", "int", "long",
 			"register", "return", "short", "signed", "sizeof",

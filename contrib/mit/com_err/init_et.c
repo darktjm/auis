@@ -1,8 +1,4 @@
 /*
- * $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/com_err/RCS/init_et.c,v 1.4 1994/02/02 21:44:20 sa3e Stab74 $
- * $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/com_err/RCS/init_et.c,v $
- * $Locker:  $
- *
  * Copyright 1986, 1987, 1988 by MIT Information Systems and
  *	the MIT Student Information Processing Board.
  *
@@ -30,11 +26,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/com_err/RCS/init_et.c,v 1.4 1994/02/02 21:44:20 sa3e Stab74 $";
-#endif
 
 #include <stdio.h>
 #include "error_table.h"

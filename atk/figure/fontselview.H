@@ -23,8 +23,6 @@ ATK_INTER
 // WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 // 
 //  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/fontselview.H,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $
 */
 
 #include <lpair.H>

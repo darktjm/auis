@@ -24,14 +24,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/astring.C,v 1.9 1996/09/29 22:00:24 robr Exp $";
-#endif
-
-
 /* astring.C		
 
 	Code for the String data object
@@ -73,7 +65,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * Copied from /afs/cs/misc/atk/@sys/alpha/lib/null
  */
 
-
+#include <andrewos.h>
 ATK_IMPL("astring.H")
 #include <util.h>
 #include <search.H>
@@ -221,7 +213,7 @@ AString::RegSearch(const char *pat, int pos, int *len) const {
 	if ( ! pat || ! *pat) return -9;
 
 	static struct SearchPattern *regPat;
-	static char *msg;
+	static const char *msg;
 	static AString oldpat = AString();
 
 	if (len) *len = 0;
@@ -325,7 +317,7 @@ AString::Sprintf(const char *fmt, ...)  {
 			if (width > n1) {
 				int padding = width - n1;
 				// pad with (padding) spaces
-				static char spaces[] = "                   ";
+				static const char spaces[] = "                   ";
 				static const int splen = sizeof(spaces) - 1;
 				while (padding > splen) {
 					*this << spaces;
@@ -411,7 +403,7 @@ static boolean vinited = FALSE;
 // 	DO NOT USE THE ASTRING VALUE UNTIL CLOSING THE VFILE
 //
 		FILE *
-AString::VfileOpen(char *mode) {
+AString::VfileOpen(const char *mode) {
 	int i;
 	if ( ! vinited) {
 		for (i = sizeof(expbuftable)/sizeof(*expbuftable); i--; )

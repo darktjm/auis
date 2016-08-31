@@ -62,7 +62,7 @@ public:
        void WantInputFocus(class view *v);
        void InitChildren() ;
      view_DSattributes DesiredSize(long width, long height, enum view_DSpass pass, long *dWidth, long *dheight)  ;
-     void Print(FILE *file, char *processor, char *finalFormat, boolean topLevel);
+     void Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel);
      void ObservedChanged (class observable *changed, long value);
 
     

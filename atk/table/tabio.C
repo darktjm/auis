@@ -25,20 +25,9 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/tabio.C,v 1.8 1996/11/08 20:28:24 wjh Exp $";
-#endif
-
-
- 
-
 /* tabio.c - input/output for table */
 
-
-
+#include <andrewos.h>
 #include <dataobject.H>
 
 #include <util.h>
@@ -107,9 +96,7 @@ static boolean debug=FALSE;
 
 /* write thickness data */
 
-#ifndef NORCSID
-#endif
-static void WriteThickness(FILE  *f, char  *tag, struct slice  * slice, int  first , int  last, int def);
+static void WriteThickness(FILE  *f, const char  *tag, struct slice  * slice, int  first , int  last, int def);
 static void WriteAboveColor(register class table  * T, FILE  *f, int  r, int  first , int  last);
 void WriteCell (register class table  * T, FILE  *f, struct cell  * cell, char  **buff, int  level);
 void WriteASCII (register class table  * T, FILE  *f, Chunk  chunk, int  level);
@@ -123,7 +110,7 @@ void ReadCell(register class table  *T, FILE  *f, char  *buff, char  **cpp, char
 class table * ReadASCII (register class table  * T, FILE  *f);
 
 
-static void WriteThickness(FILE  *f, char  *tag, struct slice  * slice, int  first , int  last, int def)
+static void WriteThickness(FILE  *f, const char  *tag, struct slice  * slice, int  first , int  last, int def)
 {
     int i;
     int alldef;
@@ -258,7 +245,7 @@ void WriteCell (register class table  * T, FILE  *f, struct cell  * cell, char  
 	    break;
 	case table_ImbeddedObject:
 	    if (!(cell->interior.ImbeddedObject.data)) {
-		static char tp[] = "MISSING DATA OBJECT!";
+		static const char tp[] = "MISSING DATA OBJECT!";
 		ENSURESIZE(sizeof(tp)-1);
 		strcpy(cp, tp);
 		cp+=sizeof(tp)-1;

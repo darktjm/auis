@@ -45,7 +45,7 @@ public:
     virtual void Cancel();
     event();
     virtual ~event();
-    static class event * Enqueue(long time, event_fptr proc, void *procdata)  ;
+    static class event * Enqueue(long time, event_fptr proc, const void *procdata)  ;
     static void ForceNext();
     static long FirstTime(long currentTime)  ;
     static void StartTimer();
@@ -56,7 +56,7 @@ public:
 
     long t;		/* time of evenet in microsec >> 6 */
     event_fptr proc;	/* procedure to call for event */
-    void *procdata;	/* data to be passed to proc */
+    const void *procdata;	/* data to be passed to proc */
     class event *next;
 };
 

@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>		/* sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/topen.c,v 2.26 1994/10/10 19:35:00 rr2b Stab74 $";
-#endif
-
-
 #include <util.h> 
 
 #include <stdio.h>
@@ -62,7 +55,7 @@ static SignalReturnType (*oldfunc)();
 #endif
 
 
-FILE *topen(const char *name, char * const argv[], const char *mode, int *pgrp)
+FILE *topen(const char *name, const char * const argv[], const char *mode, int *pgrp)
 {
     int p[2];
     register int myside, hisside;
@@ -90,7 +83,7 @@ FILE *topen(const char *name, char * const argv[], const char *mode, int *pgrp)
 	dup2(hisside, tst(0, 1));
 	close(hisside);
 	for (fd = FDTABLESIZE(); fd > 2; --fd) close(fd);
-	execv(name, argv);
+	execv(name, (char **)argv);
 	_exit(1);
     }
     if (*pgrp == -1) return NULL;
@@ -181,7 +174,7 @@ int tclose(FILE *ptr, int seconds, int *timedout)
     return status;
 }
 
-FILE *qopen(const char *name, char * const argv[], const char *mode)
+FILE *qopen(const char *name, const char * const argv[], const char *mode)
 {
     int dummy;
 

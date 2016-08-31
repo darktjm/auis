@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/foldaux.C,v 1.7 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
 #include <sys/param.h>
 #include <errprntf.h>
 
@@ -70,8 +61,6 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #include <folders.H>
 #undef AUXMODULE
 
-#ifndef NORCSID
-#endif
 void folders_Warp(class im  *im);
 void folders_Expose(class im  *im);
 void folders_Hide(class im  *im);
@@ -88,7 +77,7 @@ void folders_UpFocus(class folders  *self);
 void folders_SimulateLeftClick(class folders  *self);
 void folders_FinalizeProcStyleStuff(class folders  *self);
 void folders_CreateFoldersCursor(class folders  *self);
-static void QAddToDoc(class text  *d, int  *pos, char  *text, int  tlen , class style  *ss, int  stylelen );
+static void QAddToDoc(class text  *d, int  *pos, const char  *text, int  tlen , class style  *ss, int  stylelen );
 void folders_ConsiderResettingDescription(class folders  *ci, int  code, Boolean  FirstTime);
 
 extern void folders_DoClick(class folders  *folders, boolean  IsLeftClick , boolean  IgnorePosition);
@@ -282,7 +271,7 @@ void folders::UpdateMsgs(int  mailonly, const char  *thingstoread[], boolean  Sh
     ams::WaitCursor(FALSE);
 }
 
-static void QAddToDoc(class text  *d, int  *pos, char  *text, int  tlen , class style  *ss, int  stylelen )
+static void QAddToDoc(class text  *d, int  *pos, const char  *text, int  tlen , class style  *ss, int  stylelen )
 {
     class environment *et;
 
@@ -294,19 +283,20 @@ static void QAddToDoc(class text  *d, int  *pos, char  *text, int  tlen , class 
     *pos += tlen;
 }
 
-static char *E1 = "   (NOT the currently-displayed folder)";
-static char *E2 = "Folder name: ";
-static char *E3 = "\nFolder type: ";
-static char *E4 = "\nNumber of messages: ";
-static char *E5 = "\nYour subscription status: ";
-static char *E6 = "\n\nExplanation of this message folder:\n\n";
-static char *E7 = "\n\nNo explanation of this folder is available, but here is the first message:\n\n";
-static char *E8 = "\n\nNo explanation of this folder is available.";
+static const char E1[] = "   (NOT the currently-displayed folder)";
+static const char E2[] = "Folder name: ";
+static const char E3[] = "\nFolder type: ";
+static const char E4[] = "\nNumber of messages: ";
+static const char E5[] = "\nYour subscription status: ";
+static const char E6[] = "\n\nExplanation of this message folder:\n\n";
+static const char E7[] = "\n\nNo explanation of this folder is available, but here is the first message:\n\n";
+static const char E8[] = "\n\nNo explanation of this folder is available.";
 
 void folders::ExplainDir(char  *FullName , char  *nickname)
 {
     int ProtCode, MsgCount;
-    char ErrorText[100+MAXPATHLEN], *TypeStr, *SubsStr, ExpFileName[1+MAXPATHLEN], LocalFileName[1+MAXPATHLEN];
+    char ErrorText[100+MAXPATHLEN], ExpFileName[1+MAXPATHLEN], LocalFileName[1+MAXPATHLEN];
+    const char *TypeStr, *SubsStr;
     class text *d;
     int pos = 0, substatus, ShouldDelete, fpos;
     long mcode;

@@ -27,9 +27,6 @@
 //  $
 */
 
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipedit.H,v 1.3 1993/06/26 15:41:12 rr2b Stab74 $ */
-/* $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipedit.H,v $ */
-
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM

@@ -23,13 +23,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/filter.C,v 3.6 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
@@ -40,7 +33,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 /* filter the textview selection region through a command
  */
 
-
+#include <andrewos.h>
 ATK_IMPL("filter.H")
 #include <filter.H>
 
@@ -146,7 +139,7 @@ static void filterf(class textview  *tv,char  *command,short  method)
 	fd->infp=fopen("/dev/null","r");
     if(fd->infp==NULL){
 	char mbuf[200];
-	sprintf("Can't open %s.",buf);
+	sprintf(mbuf,"Can't open %s.",buf);
 	message::DisplayString(tv,1,mbuf);
 	return;
     }
@@ -159,7 +152,7 @@ static void filterf(class textview  *tv,char  *command,short  method)
 	fd->outfp=fopen("/dev/null","w");
     if(fd->outfp==NULL){
 	char mbuf[200];
-	sprintf("Can't open %s.",buf);
+	sprintf(mbuf,"Can't open %s.",buf);
 	message::DisplayString(tv,1,mbuf);
 	fclose(fd->infp);
 	return;

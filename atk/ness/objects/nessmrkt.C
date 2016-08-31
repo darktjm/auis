@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nessmrkt.C,v 1.3 1994/08/12 20:43:22 rr2b Stab74 $";
-#endif
-
 /* nessmarktest.c
 	test the nessmark object
 

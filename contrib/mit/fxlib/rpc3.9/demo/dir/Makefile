@@ -1,6 +1,3 @@
-#
-# @(#)Makefile	1.3 87/11/30 3.9 RPCSRC
-#
 BIN = dir_svc rls
 GEN = dir_clnt.c dir_svc.c dir_xdr.c dir.h
 LIB = -lrpclib

@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RCS/addlib.c,v 1.1 1995/08/02 18:46:45 susan Stab74 $";
-#endif
-
-
- 
-
 /* Program to run on the PC that mimics the Unix ar command's syntax and 
 generates the proper calls to the Microsoft library manager.  */
 #ifdef IBMPC

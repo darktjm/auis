@@ -25,13 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/calc/RCS/calcv.C,v 1.5 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Calc View-object
@@ -121,7 +114,7 @@ END-SPECIFICATION  ************************************************************/
 
   
 				      
-static char			      digit_font[] = "andysans10b",
+static const char		      digit_font[] = "andysans10b",
 				      oper_font[]  = "andysans16b",
 				      expr_font[]  = "andysans12b";
 
@@ -146,8 +139,6 @@ static char			      digit_font[] = "andysans10b",
 #define  OR6	/* Oper. Row 6 */     (OR5 + OH)
 
 ATKdefineRegistry(calcv, aptv, calcv::InitializeClass);
-#ifndef NORCSID
-#endif
 static void Replace_String( register class calcv	      *self, register char		      *old, register char		      *new_c, register long		       area );
 static long Which_Area( register class calcv	      *self, register long		       x , register long		       y );
 static void Printer( register class calcv	      *self );
@@ -167,15 +158,15 @@ static void Draw_Outline( register class calcv	      *self );
 
 struct calcv_setup
   {
-  char				     *string;
-  char				     *font_name;
+  const char				     *string;
+  const char				     *font_name;
   int				      mode;
   char				      shape;
   calcv_hitfptr			      hit_handler;
   long				      x_center, y_center, width, height;
   };
 
-static struct calcv_setup setups[] =
+static const struct calcv_setup setups[] =
    {
  { "7",	  digit_font, Balanced, box,   Digit,	    DC1,DR1, DW,DH },/* Area  0 */
  { "8",   digit_font, Balanced, box,   Digit,	    DC2,DR1, DW,DH },/* Area  1 */
@@ -469,7 +460,7 @@ void Printer( register class calcv	      *self )
   }
 
 void
-calcv::Print( register FILE		      *file, register char		      *processor, register char		      *format, register boolean	       level )
+calcv::Print( register FILE		      *file, register const char		      *processor, register const char		      *format, register boolean	       level )
             {
     class calcv *self=this;
   IN(calcv_Print);

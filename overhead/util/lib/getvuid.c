@@ -25,22 +25,15 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/getvuid.c,v 2.9 1992/12/15 21:10:10 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	getvuid.c
 	getvuid() (``get Vice UID'') gets the VUID associated with the ThisDomain authentication.
 \* ************************************************************ */
 
- 
-
+#include <andrewos.h>	/* types.h */
 #include <andyenv.h>
 #include <stdio.h>
 #include <errno.h>
-#include <andrewos.h>	/* types.h */
 #include <svcconf.h>
 #include <util.h>
 

@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/ms/RCS/errmsgs.c,v 2.9 1995/01/23 20:03:03 Zarf Stab74 $";
-#endif
-
-
- 
-
 #include <stdio.h>
 #include <errprntf.h>
 #include <mailconf.h>

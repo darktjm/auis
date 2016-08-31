@@ -26,14 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/noteview.C,v 1.3 1994/08/11 03:02:54 rr2b Stab74 $";
-#endif
-
-
-
 #include <fontdesc.H>
 #include "view.H"
 #include "textview.H"
@@ -64,8 +56,6 @@ static class keymap *noteviewKeyMap;
 
 
 ATKdefineRegistry(noteview, iconview, noteview::InitializeClass);
-#ifndef NORCSID
-#endif
 static void Close(class noteview  *v,long  l);
 static void closeall(class view  *v,long  l);
 static void openall(class view  *v,long  l);
@@ -106,7 +96,7 @@ insert(class textview  *tv,long  l)
     (t)->NotifyObservers(0);
 }
 
-static struct bind_Description noteviewBindings[]={
+static const struct bind_Description noteviewBindings[]={
     {"noteview-close",NULL,0,"notes,close~2", 0,0,(proctable_fptr)Close,"close the note"},
     {"noteview-closeall",NULL,0,"notes,close all~12", 0,0,(proctable_fptr)closeall,"close all the notes"},
     {"noteview-openall",NULL,0,"notes,open all~11", 0,0,(proctable_fptr)openall,"open all the notes"},
@@ -159,7 +149,7 @@ noteview::noteview()
 /****************************************************************/
 
 void
-noteview::Print(FILE  * file, char  * processor, char  * finalformat, boolean  toplevel)
+noteview::Print(FILE  * file, const char  * processor, const char  * finalformat, boolean  toplevel)
                     {
     short doit;
     if (this->child == (class view *)0)

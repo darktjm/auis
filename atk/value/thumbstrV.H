@@ -40,7 +40,7 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
  
-   char * GetValueString()  ;
+   const char * GetValueString()  ;
    class valueview  * DoHit(enum view_MouseAction type, long x,long y,long hits)
      ;
 };

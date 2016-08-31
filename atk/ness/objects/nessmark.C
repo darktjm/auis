@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nessmark.C,v 1.7 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 /* nessmark.c		
 
 	Code for the nessmark data object
@@ -103,7 +96,7 @@ XXX code in the basic operations here will be repeated in the interpreter
 
 */
 
-
+#include <andrewos.h>
 ATK_IMPL("nessmark.H")
 #include <mark.H>
 #include <text.H>

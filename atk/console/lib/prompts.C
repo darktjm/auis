@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/prompts.C,v 1.1 1993/05/11 16:27:01 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 #include <consoleClass.H>
 #include <im.H>
 #include <graphic.H>
@@ -49,8 +39,6 @@ int Pposx, Pposy;
 char Pstring1[256] = "", Pstring2[256] = "", Pstring3[256] = "", Pstring4[MAXPATHLEN] = "";
 
 
-#ifndef NORCSID
-#endif
 void ClearRectangle(class consoleClass  *self, struct rectangle  *clpRect, short  Op1, class graphic  *Op2);
 void ClearBox(class consoleClass  *self, int  x , int  y , int  w , int  h, short  Op1, class graphic  *Op2);
 void ClearWindow(class consoleClass  *self);

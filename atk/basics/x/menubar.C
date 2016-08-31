@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/menubar.C,v 3.11 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
 #include <stdio.h>
 #include <X11/Xos.h>
 #include <X11/X.h>
@@ -100,11 +93,9 @@ static long grayImage[] = {
 };
 
 /* defaultgetdefault: inform the user of a problem if the client program (ie xim) doesn't provide a getdefault function. */
-#ifndef NORCSID
-#endif
-static char *defaultgetdefault(Display  *dpy, char  *pname);
-static int getdefaultint(Display  *dpy, char  *pname, int  def);
-static int getdefaultbool(Display  *dpy, char  *pname, int  def);
+static const char *defaultgetdefault(Display  *dpy, const char  *pname);
+static int getdefaultint(Display  *dpy, const char  *pname, int  def);
+static int getdefaultbool(Display  *dpy, const char  *pname, int  def);
 static int CountGroups(struct tmenu  *lm);
 static void ClearMenu(struct menubar  *mb,struct tmenu  *m);
 static void DestroyMenu(struct menubar  *mb,struct tmenu  *m);
@@ -112,7 +103,7 @@ static struct tmenu *FindMenu(struct menubar  *mb,const char *title);
 static struct titem *FindItem(struct tmenu  *t,const char  *name);
 static void UpdateGeometry(struct menubar  *mb);
 static struct tmenu *CreateMenu(struct menubar  *mb,const char *title,int  prio);
-static struct titem *AddItem(struct menubar  *mb,struct tmenu  *t,const char *item,int  prio,int  submenu,char  *data);
+static struct titem *AddItem(struct menubar  *mb,struct tmenu  *t,const char *item,int  prio,int  submenu,const void *data);
 static int mcomp(struct tmenu  **a,struct tmenu  **b);
 static void SelectRegion(struct menubar  *mb,Window  win,struct gcs  *gcs,int  x,int  y,int  w,int  h);
 static void UnSelectRegion(struct menubar  *mb, Window  win, struct gcs  *gcs, int  x , int  y , int  w , int  h);
@@ -135,20 +126,20 @@ static Bool HandleButtonOrMotion(struct menubar  *mb, Window  window, XEvent  *e
 static void DoMenuLoop(struct menubar  *mb, Bool  track);
 static void SetGCs(struct mbinit  *mbi,Window  w,struct gcs  *gcs,XGCValues  *gcv,unsigned long  gcmask);
 static void FreeGCs(struct mbinit  *mbi,struct gcs  *gcs);
-static XFontStruct *ReallyGetFont(Display  *dpy,char  *fontname);
-static unsigned long ReallyGetColor(Display  *dpy,char  *color,XColor  *desired);
-static void SetBottomShadow(struct prefs_s  *p, char  *bName, XColor  *bcolor, XColor  *background);
-static void SetGray(struct prefs_s  *p, XColor  *foreground ,  XColor  *background , char  *grayName, XColor  *graycolor, Pixmap  *graypixmap);
-static void SetTopShadow(struct prefs_s  *p, XColor  *foreground ,  XColor  *background , char  *topcolorName, XColor  *topcolor, Pixmap  *toppixmap);
-static void SetPixmap(struct prefs_s  *p, char  *name, Pixmap  *pixmap);
-static void BuildGraphicContext(struct prefs_s  *p, char  *foregroundColor , char  *backgroundColor, char  *grayColor, char  *graypixmapName , char  *topcolorName , char  *toppixmapName , char  *botcolorName, char  *botpixmapName, XColor  *realForeground , XColor  *realBackground, XColor  *realGray, Pixmap  *grayPixmap, XColor  *topShadow, XColor  *bottomShadow, Pixmap  *topshadowPixmap , Pixmap  *bottomshadowPixmap);
+static XFontStruct *ReallyGetFont(Display  *dpy,const char  *fontname);
+static unsigned long ReallyGetColor(Display  *dpy,const char  *color,XColor  *desired);
+static void SetBottomShadow(struct prefs_s  *p, const char  *bName, XColor  *bcolor, XColor  *background);
+static void SetGray(struct prefs_s  *p, XColor  *foreground ,  XColor  *background , const char  *grayName, XColor  *graycolor, Pixmap  *graypixmap);
+static void SetTopShadow(struct prefs_s  *p, XColor  *foreground ,  XColor  *background , const char  *topcolorName, XColor  *topcolor, Pixmap  *toppixmap);
+static void SetPixmap(struct prefs_s  *p, const char  *name, Pixmap  *pixmap);
+static void BuildGraphicContext(struct prefs_s  *p, const char  *foregroundColor , const char  *backgroundColor, const char  *grayColor, const char  *graypixmapName , const char  *topcolorName , const char  *toppixmapName , const char  *botcolorName, const char  *botpixmapName, XColor  *realForeground , XColor  *realBackground, XColor  *realGray, Pixmap  *grayPixmap, XColor  *topShadow, XColor  *bottomShadow, Pixmap  *topshadowPixmap , Pixmap  *bottomshadowPixmap);
 static void Configure(Display  *dpy, struct prefs_s  *p, XColor  *fore, XColor  *back);
 static void MakeGCs(struct mbinit  *mbi);
 static void MakeWindows(struct mbinit  *mbi);
 static void DestroyPrefsForDisplay(Display  *dpy);
 
 
-static char *defaultgetdefault(Display  *dpy, char  *pname)
+static const char *defaultgetdefault(Display  *dpy, const char  *pname)
 {
 	fprintf(stderr,"Warning: no getdefault function defined for menubar!\n");
 	return NULL;
@@ -157,18 +148,18 @@ static char *defaultgetdefault(Display  *dpy, char  *pname)
 static GetDefaultsFunction getdefault = (GetDefaultsFunction)defaultgetdefault;
 
 /* getdefaultint: get a user specified integer under name pname, or return def if none is specified. */
-static int getdefaultint(Display  *dpy, char  *pname, int  def)
+static int getdefaultint(Display  *dpy, const char  *pname, int  def)
 {
-    char *v;
+    const char *v;
     v=getdefault(dpy,pname);
     if(!v) return def;
     else return atoi(v);
 }
 
  /* getdefaultbool: get a user specified boolean under name pname, or return def if none is specified. */
-static int getdefaultbool(Display  *dpy, char  *pname, int  def)
+static int getdefaultbool(Display  *dpy, const char  *pname, int  def)
 {
-    char *v;
+    const char *v;
     v=getdefault(dpy,pname);
     if(!v) return def;
     switch(v[0]) {
@@ -226,7 +217,7 @@ static void ClearMenu(struct menubar  *mb,struct tmenu  *m)
     struct titem *i=m->items;
     while(i) {
 	struct titem *o=i->next;
-	if(m!=mb->moremenu && !ISSUBMENU(i) && i->data && mb->mbi->FreeItem ) mb->mbi->FreeItem(i->data);
+	if(m!=mb->moremenu && !ISSUBMENU(i) && i->data && mb->mbi->FreeItem ) mb->mbi->FreeItem((void *)i->data);
 	scache_Free(i->name);
 	if(i->keys) scache_Free(i->keys);
 	free(i);
@@ -308,7 +299,7 @@ static struct tmenu *CreateMenu(struct menubar  *mb,const char *title,int  prio)
 }
 
 /* AddItem: an internal routine which adds an item to a menu card given a pointer to the menu card, doesn't do much sanity checking of the input as that should be done elsewhere. */
-static struct titem *AddItem(struct menubar  *mb,struct tmenu  *t,const char *item,int  prio,int  submenu,char  *data)
+static struct titem *AddItem(struct menubar  *mb,struct tmenu  *t,const char *item,int  prio,int  submenu,const char *data)
 {
     struct titem *i;
     struct titem *w=t->items;
@@ -318,7 +309,7 @@ static struct titem *AddItem(struct menubar  *mb,struct tmenu  *t,const char *it
     t->groupcount=0;
     if(i = FindItem(t,item)) {
 	i->keys=NULL;
-	if(!ISSUBMENU(i) && i->data && mb->mbi->FreeItem) mb->mbi->FreeItem(i->data);
+	if(!ISSUBMENU(i) && i->data && mb->mbi->FreeItem) mb->mbi->FreeItem((void *)i->data);
 	if(submenu) i->flags |= SUBMENUFLAG;
 	else i->flags &= ~SUBMENUFLAG;
 	if(submenu) {
@@ -385,7 +376,7 @@ void mb_SetKeys(struct menubar  *mb, const char *title, const char *item, char  
     
 
 /* mb_AddSelection: add a new menu choice.  title is the name of the menu card it should appear on, tprio is the priority of this menu card or -1 if it shouldn't be modified.  item is the name of the menu itemm iprio is the priority of the item or -1 if its priority shouldn't be modified, submenu indicates whether or not this item is another menu which will cascade off the top-level menu card when activated, data is to be supplied to the menubar's function when this item is choosen or a pointer to the menu card if this is a submenu. */
-void mb_AddSelection(struct menubar  *mb,const char *title ,int  tprio,const char *item,int  iprio,int  submenu,char  *data)
+void mb_AddSelection(struct menubar  *mb,const char *title ,int  tprio,const char *item,int  iprio,int  submenu,const void *data)
 {
      struct tmenu *t=FindMenu(mb,title);
 
@@ -405,7 +396,7 @@ void mb_AddSelection(struct menubar  *mb,const char *title ,int  tprio,const cha
 	     mb->resort=True;
 	 }
      }
-     (void) AddItem(mb,t,item,iprio,submenu,data);
+     (void) AddItem(mb,t,item,iprio,submenu,(const char *)data);
 }
 
 /* mb_SetItemStatus: indicate whether or not a menu item is active. */
@@ -436,7 +427,7 @@ void mb_DeleteSelection(struct menubar  *mb,const char *title,const char *item)
     t->groupcount = 0;
     if(!strcmp(t->items->name,item)) {
 	n=t->items->next;
-	if(!ISSUBMENU(t->items) && t->items->data && mb->mbi->FreeItem) mb->mbi->FreeItem(t->items->data);
+	if(!ISSUBMENU(t->items) && t->items->data && mb->mbi->FreeItem) mb->mbi->FreeItem((void *)t->items->data);
 	
 	scache_Free(t->items->name);
 	free(t->items);
@@ -448,7 +439,7 @@ void mb_DeleteSelection(struct menubar  *mb,const char *title,const char *item)
 	if(n->next) {
 	    n2=n->next;
 	    n->next=n2->next;
-	    if(!ISSUBMENU(n2) && n2->data && mb->mbi->FreeItem) mb->mbi->FreeItem(n2->data);
+	    if(!ISSUBMENU(n2) && n2->data && mb->mbi->FreeItem) mb->mbi->FreeItem((void *)n2->data);
 
 	    scache_Free(n2->name);
 	    free(n2);
@@ -1414,7 +1405,7 @@ static void FreeGCs(struct mbinit  *mbi,struct gcs  *gcs)
 
 /* ReallyGetFont: try to get the font called fontname if it isn't
   available try to get the "Fixed" font. */
-static XFontStruct *ReallyGetFont(Display  *dpy,char  *fontname)
+static XFontStruct *ReallyGetFont(Display  *dpy,const char  *fontname)
 {
     XFontStruct *f=XLoadQueryFont(dpy,fontname);
     if(f==NULL) {
@@ -1427,7 +1418,7 @@ static XFontStruct *ReallyGetFont(Display  *dpy,char  *fontname)
 }
 
 /* ReallyGetColor: get the color named color, if color is NULL or cannot be parsed by parse color use the color pointed to as a default and return the pixel value of the resulting color.  If color is non-null and can be parsed its rgb values are filled into the color pointed to by desired and its pixel value is returned. */
-static unsigned long ReallyGetColor(Display  *dpy,char  *color,XColor  *desired)
+static unsigned long ReallyGetColor(Display  *dpy,const char  *color,XColor  *desired)
 {
     XColor maybedesired;
     long status;
@@ -1456,7 +1447,7 @@ static unsigned long ReallyGetColor(Display  *dpy,char  *color,XColor  *desired)
 #define MAXCOLOR 65535
 
 /* SetBottomShadow: try to get a good color for the bottom shadow..., it will be placed in the color pointed to by bcolor. */
-static void SetBottomShadow(struct prefs_s  *p, char  *bName, XColor  *bcolor, XColor  *background)
+static void SetBottomShadow(struct prefs_s  *p, const char  *bName, XColor  *bcolor, XColor  *background)
 {
     if(ISWHITE(p, *background)) {
 	 *bcolor=p->blackColor;
@@ -1476,7 +1467,7 @@ static void SetBottomShadow(struct prefs_s  *p, char  *bName, XColor  *bcolor, X
 
 
 /* SetGray: try to get a good gray color.  If grayName is non-null it will be used if possible.  Otherwise a color hopefully between the background and foreground in brightness and a hue similar to the foreground will be used.  On a black and white display a grayish pixmap is used with the default foreground and background colors */
-static void SetGray(struct prefs_s  *p, XColor  *foreground ,  XColor  *background , char  *grayName, XColor  *graycolor, Pixmap  *graypixmap)
+static void SetGray(struct prefs_s  *p, XColor  *foreground ,  XColor  *background , const char  *grayName, XColor  *graycolor, Pixmap  *graypixmap)
 {
     if(p->ColorDisplay) {
 	int r,g,b;
@@ -1500,7 +1491,7 @@ static void SetGray(struct prefs_s  *p, XColor  *foreground ,  XColor  *backgrou
     }
 }
 
-static void SetTopShadow(struct prefs_s  *p, XColor  *foreground ,  XColor  *background , char  *topcolorName, XColor  *topcolor, Pixmap  *toppixmap)
+static void SetTopShadow(struct prefs_s  *p, XColor  *foreground ,  XColor  *background , const char  *topcolorName, XColor  *topcolor, Pixmap  *toppixmap)
 {
     if(p->ColorDisplay) {
 	if(!p->newshadows) {
@@ -1530,7 +1521,7 @@ static void SetTopShadow(struct prefs_s  *p, XColor  *foreground ,  XColor  *bac
 }
 
 /* SetPixmap: get a pixmap from file name, or if name is None set the pixmap to None. */
-static void SetPixmap(struct prefs_s  *p, char  *name, Pixmap  *pixmap)
+static void SetPixmap(struct prefs_s  *p, const char  *name, Pixmap  *pixmap)
 {
     unsigned int width_ret, height_ret;
     int x_hot_ret, y_hot_ret;
@@ -1544,7 +1535,7 @@ static void SetPixmap(struct prefs_s  *p, char  *name, Pixmap  *pixmap)
 }
 
 /* BuildGraphicContext: try to make reasonable choices for everything given what a user has specified or not specified. */
-static void BuildGraphicContext(struct prefs_s  *p, char  *foregroundColor , char  *backgroundColor, char  *grayColor, char  *graypixmapName , char  *topcolorName , char  *toppixmapName , char  *botcolorName, char  *botpixmapName, XColor  *realForeground , XColor  *realBackground, XColor  *realGray, Pixmap  *grayPixmap, XColor  *topShadow, XColor  *bottomShadow, Pixmap  *topshadowPixmap , Pixmap  *bottomshadowPixmap)
+static void BuildGraphicContext(struct prefs_s  *p, const char  *foregroundColor , const char  *backgroundColor, const char  *grayColor, const char  *graypixmapName , const char  *topcolorName , const char  *toppixmapName , const char  *botcolorName, const char  *botpixmapName, XColor  *realForeground , XColor  *realBackground, XColor  *realGray, Pixmap  *grayPixmap, XColor  *topShadow, XColor  *bottomShadow, Pixmap  *topshadowPixmap , Pixmap  *bottomshadowPixmap)
 {
     (void) ReallyGetColor(p->dpy, foregroundColor, realForeground);
 
@@ -1579,10 +1570,10 @@ static void BuildGraphicContext(struct prefs_s  *p, char  *foregroundColor , cha
 /* Configure: Get the user's preferences for this display and do other configuration which is display specific. */
 static void Configure(Display  *dpy, struct prefs_s  *p, XColor  *fore, XColor  *back)
 {
-    char *fontName;
-    char *graypixmapName, *toppixmapName, *botpixmapName;
-    char *foreName, *backName, *grayName;
-    char *topcolorName, *botcolorName;
+    const char *fontName;
+    const char *graypixmapName, *toppixmapName, *botpixmapName;
+    const char *foreName, *backName, *grayName;
+    const char *topcolorName, *botcolorName;
     XColor foreground, background, gray;
     Pixmap grayPixmap=None, topshadowPixmap, bottomshadowPixmap;
     XColor menutopshadow, menubottomshadow;
@@ -1892,7 +1883,7 @@ void mb_Destroy(struct menubar  *mb)
 }
 
 /* mb_Create: Construct a new menubar with a given maintitle, moretitle and item function.  The function func will be called as func(mb, itemdata, mbdata) when a menu item is choosen. */
-struct menubar *mb_Create(struct mbinit  *mbi, const char  *maintitle , const char  *moretitle, char  *data, menubar_menufptr func)
+struct menubar *mb_Create(struct mbinit  *mbi, const char  *maintitle , const char  *moretitle, const void *data, menubar_menufptr func)
 {
     struct menubar *mb=(struct menubar *)malloc(sizeof(struct menubar));
     

@@ -22,10 +22,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpcsvc/RCS/rstat_svc.c,v 1.3 1992/12/15 21:55:23 rr2b Stab74 $";
-#endif
 #include <stdio.h>
 #include <rpc/rpc.h>
 #include "rstat.h"

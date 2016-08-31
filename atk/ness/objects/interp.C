@@ -26,13 +26,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/interp.C,v 1.15 1996/08/19 18:15:51 wjh Exp $";
-#endif
-
 /* interp.c
 	interpret byte code representation of ness programs
 
@@ -179,6 +172,7 @@ static UNUSED const char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/
  * 
 */
 
+#include <andrewos.h>
 #include <sys/param.h> /* for MAXPATHLEN */
 #include <signal.h>
 #include <setjmp.h>
@@ -238,17 +232,17 @@ class ness *InterpretationInProgress = NULL;	/* used in ness.c */
 
 static jmp_buf ExecutionExit;
 static unsigned char *iarStore;
-static char *ErrorMsg;
+static const char *ErrorMsg;
 static struct errornode *SavedMsg;
 
 
-boolean RunError(char  *msg, unsigned char *iar);
+boolean RunError(const char  *msg, const unsigned char *iar);
 static SIGNAL_RETURN_TYPE SigHandler(int);
 void initializeEnvt();
 union stackelement * popValue(union stackelement  *NSP);
 static struct callnode * fetchaddr(unsigned char *iar);
 static void InterruptNess(class ness  *ness);
-static void QueryReadOnly(class ness  *ness, class simpletext  *s, char  *msg, 
+static void QueryReadOnly(class ness  *ness, class simpletext  *s, const char  *msg, 
 		unsigned char *iar);
 struct errornode * interpretNess(short  func, class nessmark  *arg, class ness  *ness);
 
@@ -266,7 +260,7 @@ boolean stackArg(union  argType  *arg, TType  type);
 	'iar' is the index of the opcode that failed (it has been adjusted backward).
 */
 	boolean	/* type is to fool the conditional expr in PTSTOMARK */
-RunError(char  *msg, unsigned char *iar)  {
+RunError(const char  *msg, const unsigned char *iar)  {
 /* printf("RunError @ %d: %s\n", iar, msg); */
 	ErrorMsg = msg;
 	longjmp (ExecutionExit, 99);
@@ -535,11 +529,11 @@ InterruptNess(class ness  *ness) {
 
 	static void
 QueryReadOnly(class ness  *ness, class simpletext  *s, 
-		char  *msg, unsigned char *iar) {
+		const char  *msg, unsigned char *iar) {
 	if (s == (class simpletext *)(ness)->GetDefaultText()) {
 		/* see if user wants to make defaulttext read/write */
 		long choice;
-		static char *choices[] = {
+		static const char * const choices[] = {
 			"Cancel - Leave text read-only", 
 			"Read-Write - Let the Ness script modify the text", 
 			NULL
@@ -1779,7 +1773,7 @@ brancher: {
 					&&  (sstpl=(s)->GetTemplateName()) 
 						!= NULL
 					&&  *sstpl != '\0')
-				    ? sstpl : (char *)"default",      FALSE);
+				    ? sstpl : "default",      FALSE);
 		}
 
 		if (pos == 0  &&  len == (t)->GetLength()) 
@@ -1839,7 +1833,7 @@ brancher: {
 			pclose(output);
 		}
 		else {
-			static char *msg = "ERROR: Could not execute command";
+			static const char msg[] = "ERROR: Could not execute command";
 			(t)->InsertCharacters( end, msg, strlen(msg));
 			end += strlen(msg);
 		}

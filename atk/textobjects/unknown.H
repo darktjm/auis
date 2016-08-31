@@ -29,7 +29,7 @@ public:
 	virtual ATKregistryEntry *ATKregistry();
 
     
-      virtual char * GetRealClass()  ;
+      virtual const char * GetRealClass()  ;
     virtual void SetRealClass(char *rclass);
     
        long Read(FILE *file, long id)  ;

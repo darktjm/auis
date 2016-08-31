@@ -28,11 +28,6 @@ ATK_INTER
 //  $
 */
 
-/* $Header $ */
-/* $ACIS$ */
-
- 
-
 /* box.ch - box data object definition and interface */
 
 #include <rect.h>
@@ -49,7 +44,7 @@ public:
 
 
 
-   char * ViewName()  ;
+   const char * ViewName()  ;
    long Read (FILE * f, long id)  ;
    long Write (FILE * f, long writeid, int level)  ;
    long GetModified()  ;

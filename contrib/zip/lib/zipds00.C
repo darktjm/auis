@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipds00.C,v 1.4 1994/06/09 21:21:04 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* zipeds.c	Zip Data-object	-- Streams			      */
 /* Author	TC Peters					      */
 /* Information Technology Center	   Carnegie-Mellon University */
@@ -83,17 +75,17 @@ END-SPECIFICATION  ************************************************************/
 
 #define	 Data			      this
 
-static void Extract_Stream_Name( register class zip		      *self, register char			      *name, register char			     **stream_name );
-static void Extract_Stream_File_Name( register class zip		      *self, register char			      *name, register char			     **file_name );
-static void Extract_Stream_File_Path( register class zip		      *self, register char			      *name, register char			     **path_name );
+static void Extract_Stream_Name( register class zip		      *self, register const char			      *name, register char			     **stream_name );
+static void Extract_Stream_File_Name( register class zip		      *self, register const char			      *name, register char			     **file_name );
+static void Extract_Stream_File_Path( register class zip		      *self, register const char			      *name, register char			     **path_name );
 int zip_Open_Stream_File( register class zip		      *self, register zip_type_stream	       stream, register long			       open_mode );
-static int Open_Via_Alternate_Paths( register class zip		      *self, register zip_type_stream	       stream, register char  *			      mode );
-static int Open_Alternate( register class zip		      *self, register zip_type_stream	       stream, register char  *			      open_mode_flags, register char			      *path );
+static int Open_Via_Alternate_Paths( register class zip		      *self, register zip_type_stream	       stream, register const char  *			      mode );
+static int Open_Alternate( register class zip		      *self, register zip_type_stream	       stream, register const char  *			      open_mode_flags, register const char			      *path );
 int zip_Close_Stream_File( register class zip		      *self, register zip_type_stream	       stream );
 static void Reset_Stream_File_Open_States( register class zip		      *self, register zip_type_stream	       stream );
 static int Identify_Paths( register class zip		      *self, register zip_type_paths	      *paths_ptr );
-static int Allocate_Stream_Object( register class zip		      *self, register zip_type_stream	      *stream, register char			      *name );
-int zip_Set_Stream_File_Name( register class zip		      *self, register zip_type_stream	       stream, register char			      *name );
+static int Allocate_Stream_Object( register class zip		      *self, register zip_type_stream	      *stream, register const char			      *name );
+int zip_Set_Stream_File_Name( register class zip		      *self, register zip_type_stream	       stream, register const char			      *name );
 static int Deallocate_Stream_Object( register class zip		      *self, register zip_type_stream	       stream );
 static int Deallocate_Stream_Resources( register class zip		      *self, register zip_type_stream	       stream );
 
@@ -473,7 +465,7 @@ zip::Set_Stream_Text( register zip_type_stream	       stream, register char			  
   }
 
 long
-zip::Set_Stream_Font( register zip_type_stream	       stream, register char			      *font_name )
+zip::Set_Stream_Font( register zip_type_stream	       stream, register const char			      *font_name )
         {
   register int			      status = zip_ok;
   short				      font;
@@ -495,7 +487,7 @@ zip::Set_Stream_Font( register zip_type_stream	       stream, register char			  
   }
 
 long
-zip::Set_Stream_Source( register zip_type_stream	       stream, register char			      *source )
+zip::Set_Stream_Source( register zip_type_stream	       stream, register const char			      *source )
         {
   register int			      status = zip_ok;
   char				      temp_name[257];
@@ -605,9 +597,9 @@ zip::Set_Stream_Extrema( register zip_type_stream	       stream, register zip_ty
   }
 
 static
-void Extract_Stream_Name( register class zip		      *self, register char			      *name, register char			     **stream_name )
+void Extract_Stream_Name( register class zip		      *self, register const char			      *name, register char			     **stream_name )
         {
-  register char			     *start_ptr, *end_ptr;
+  register const char			     *start_ptr, *end_ptr;
 
   IN(Extract_Stream_Name);
   DEBUGst(Name,name);
@@ -629,9 +621,9 @@ void Extract_Stream_Name( register class zip		      *self, register char			     
   }
 
 static
-void Extract_Stream_File_Name( register class zip		      *self, register char			      *name, register char			     **file_name )
+void Extract_Stream_File_Name( register class zip		      *self, register const char			      *name, register char			     **file_name )
         {
-  register char			     *start_ptr, *end_ptr;
+  register const char			     *start_ptr, *end_ptr;
 
   IN(Extract_Stream_File_Name);
   DEBUGst(Name,name);
@@ -652,9 +644,9 @@ void Extract_Stream_File_Name( register class zip		      *self, register char			
   }
 
 static
-void Extract_Stream_File_Path( register class zip		      *self, register char			      *name, register char			     **path_name )
+void Extract_Stream_File_Path( register class zip		      *self, register const char			      *name, register char			     **path_name )
         {
-  register char			     *start_ptr, *end_ptr;
+  register const char			     *start_ptr, *end_ptr;
 
   IN(Extract_Stream_File_Path);
   DEBUGst(Name,name);
@@ -674,7 +666,7 @@ int
 zip_Open_Stream_File( register class zip		      *self, register zip_type_stream	       stream, register long			       open_mode )
         {
   register int			      status = zip_ok;
-  register char			     *open_mode_flags = 0;
+  register const char		     *open_mode_flags = 0;
 
   IN(zip_Open_Stream_File);
   DEBUGxt(Mode,open_mode);
@@ -718,7 +710,7 @@ zip_Open_Stream_File( register class zip		      *self, register zip_type_stream	
   }
 
 static int
-Open_Via_Alternate_Paths( register class zip *self, register zip_type_stream stream, register char  *mode )
+Open_Via_Alternate_Paths( register class zip *self, register zip_type_stream stream, register const char  *mode )
 {
   register int			      status = zip_ok;
   register int			      i;
@@ -744,7 +736,7 @@ Open_Via_Alternate_Paths( register class zip *self, register zip_type_stream str
   }
 
 static int
-Open_Alternate( register class zip		      *self, register zip_type_stream	       stream, register char  *			      open_mode_flags, register char			      *path )
+Open_Alternate( register class zip		      *self, register zip_type_stream	       stream, register const char  *			      open_mode_flags, register const char			      *path )
           {
   register int			      status = -1;
 
@@ -845,14 +837,12 @@ Identify_Paths( register class zip		      *self, register zip_type_paths	      *
 	else status = zip_insufficient_stream_space;
       }
     if ( (*paths_ptr)->zip_paths_vector[(*paths_ptr)->zip_paths_count] =
-         (char *) malloc( strlen( zip_default_path ) + 1 ) )
-      strcpy( (*paths_ptr)->zip_paths_vector[(*paths_ptr)->zip_paths_count++],
-		zip_default_path );
+         strdup(zip_default_path ) )
+      (*paths_ptr)->zip_paths_count++;
       else status = zip_insufficient_stream_space;
     if ( (*paths_ptr)->zip_paths_vector[(*paths_ptr)->zip_paths_count] =
-         (char *) malloc( strlen( zip_default_path_alternate ) + 1 ) )
-      strcpy( (*paths_ptr)->zip_paths_vector[(*paths_ptr)->zip_paths_count++],
-		zip_default_path_alternate );
+         strdup( zip_default_path_alternate ) )
+      (*paths_ptr)->zip_paths_count++;
       else status = zip_insufficient_stream_space;
     }
     else status = zip_insufficient_stream_space;
@@ -883,7 +873,7 @@ Reset_Paths( self )
 ===*/
 
 static int
-Allocate_Stream_Object( register class zip		      *self, register zip_type_stream	      *stream, register char			      *name )
+Allocate_Stream_Object( register class zip		      *self, register zip_type_stream	      *stream, register const char			      *name )
         {
   register int			      status = zip_ok;
   register zip_type_stream_chain      stream_link;
@@ -912,7 +902,7 @@ Allocate_Stream_Object( register class zip		      *self, register zip_type_strea
   }
 
 int
-zip_Set_Stream_File_Name( register class zip		      *self, register zip_type_stream	       stream, register char			      *name )
+zip_Set_Stream_File_Name( register class zip		      *self, register zip_type_stream	       stream, register const char			      *name )
         {
   register long			      status = zip_ok;
 

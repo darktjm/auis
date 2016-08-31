@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chartlin.C,v 1.6 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Line Chart View-object
@@ -66,6 +59,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include <andrewos.h>
 ATK_IMPL("chartlin.H")
 #include <math.h>
 #include "graphic.H"
@@ -112,9 +106,6 @@ boolean chartlin_debug = 0;
 
 
 ATKdefineRegistry(chartlin, chartobj, NULL);
-#ifndef NORCSID
-#endif
-
 
 chartlin::chartlin( )
       {
@@ -136,7 +127,7 @@ chartlin::SetDebug( boolean			   state )
   OUT(chartlin_SetDebug);
   }
 
-char *
+const char *
 chartlin::Moniker( )
     {
   IN(chartlin_Moniker);

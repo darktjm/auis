@@ -25,20 +25,9 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/keyboard.C,v 1.5 1994/03/13 08:09:04 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* keyboard.c - keyboard input for table */
 
-
-
+#include <andrewos.h>
 #include <bind.H>
 #include <proctable.H>
 #include <keymap.H>
@@ -53,12 +42,10 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 static boolean debug=FALSE;
 
-#ifndef NORCSID
-#endif
 void k_SetMessageState (register class spread  * V, int  newstate);
-void k_TellUser (register class spread  * V, char    *s);
-boolean k_AskUser (register class spread  * V, char  prompt[], char  def[], char  buff[], int  n);
-boolean k_AreYouSure (register class spread  * V, char  *why);
+void k_TellUser (register class spread  * V, const char    *s);
+boolean k_AskUser (register class spread  * V, const char  prompt[], const char  def[], char  buff[], int  n);
+boolean k_AreYouSure (register class spread  * V, const char  *why);
 boolean k_WantToDiscard (register class spread  * V);
 #ifdef NOTUSED
 static void k_exit(register class spread  * V, char  ch);
@@ -99,7 +86,7 @@ void k_SetMessageState (register class spread  * V, int  newstate)
 
 /* message to user */
 
-void k_TellUser (register class spread  * V, char    *s)
+void k_TellUser (register class spread  * V, const char    *s)
 {
     k_SetMessageState (V, BUFFERHASMESSAGE);
     message::DisplayString (V, 0, s);
@@ -107,7 +94,7 @@ void k_TellUser (register class spread  * V, char    *s)
 
 /* ask for and read keyboard input */
 
-boolean k_AskUser (register class spread  * V, char  prompt[], char  def[], char  buff[], int  n)
+boolean k_AskUser (register class spread  * V, const char  prompt[], const char  def[], char  buff[], int  n)
 {
     int notOK;
 
@@ -123,7 +110,7 @@ boolean k_AskUser (register class spread  * V, char  prompt[], char  def[], char
 
 /* Are you sure? */
 
-boolean k_AreYouSure (register class spread  * V, char  *why)
+boolean k_AreYouSure (register class spread  * V, const char  *why)
 {
     char buff[10];
 

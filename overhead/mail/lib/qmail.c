@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/time.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/qmail.c,v 2.31 1996/02/09 19:37:26 susan Stab74 $";
-#endif
-
 /*
 		qmail.c -- Subroutines for performing dropoff
 			   of a piece of user mail.
@@ -142,6 +135,7 @@ These two routines are just like tryvicequeues_ext except that they implement tw
 
 */
 
+#include <andrewos.h> /* sys/time.h sys/file.h */
 #include <errno.h>
 #include <stdio.h>
 #include <sys/param.h>

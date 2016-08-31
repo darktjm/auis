@@ -77,10 +77,6 @@ ness.H		ness data object
 #define ness_codeUV		13	/* no warning notice; no dialog box */
 
 
-inline char *freeze(char *msg) {
-	return ((char *)strcpy((char *)malloc(strlen(msg)+1), msg));
-}
-
 typedef unsigned long Texpr;	/* expression types within compilation
 			also used at runtime in checking function calls */
 
@@ -89,6 +85,9 @@ inline long ExtendShortSign(long x) {return (((x) ^ 0x8000) - 0x8000);}
 
 /* nodeclass.h - global definition for the nodeclass system 
 	 static to avoid global namespace pollution. */
+/* TJM - having this here is worse than global namespace pollution: */
+/*       it creates QTnode everywhere that uses ness */
+/* same is true of all the crap that gets added to ness.H in general */
 static struct node *QTnode;
 
 
@@ -97,7 +96,7 @@ static struct node *QTnode;
 struct errornode {
 	class mark *where;  /* location in source */
 	long execloc;	/* object code location of error */
-	char *msg;	/* the error message */
+	const char *msg;	/* the error message */
 	boolean ownmsg;	/* TRUE if this node is the only ptr to the msg */
 	struct errornode *next;
 };
@@ -146,11 +145,11 @@ public:
 	static inline boolean NUndefine(char *name, nesssym_scopeType scope) { 
 		return (toksym::TUndefine(name, (toksym_scopeType)scope)); }
 
-	static inline class nesssym *NFind(char *name, nesssym_scopeType scope) { 
+	static inline class nesssym *NFind(const char *name, nesssym_scopeType scope) {
 		return ((class nesssym *)
 			toksym::TFind(name, (toksym_scopeType)scope)); }
 
-	static inline class nesssym *NLocate(char *name, class nesssym *proto,
+	static inline class nesssym *NLocate(const char *name, class nesssym *proto,
  			nesssym_scopeType scope, boolean *new_c) { 
 		return ((class nesssym *)
 			toksym::TLocate(name, proto, (toksym_scopeType)scope, new_c)); }
@@ -545,13 +544,13 @@ flag_library			file in a directory on nesspath   libnode
 #define Tshrt	((Texpr) 11)	/* short  	(Tlong) */
 #define Tchr	((Texpr) 12)	/* char   	(Tlong) */
 
-extern char *TypeName[];  /* see gen.c */
+extern const char * const TypeName[];  /* see gen.c */
 
 
 /* call.hn -  definitions for nesscomp function call routines */
 
 struct builtindef {
-	char *name, *defn;
+	const char *name, *defn;
 	Texpr types[8];	/* the first in this list is the return type,
 				the rest is args in REVERSE ORDER
 				the end of list indicator is Tend
@@ -565,7 +564,7 @@ struct builtindef {
 
 enum callvariety {callC, callPE, callSym, callNess, callBuiltin, 
 		callMethod, callClProc, callGet, callSet, callNone};
-extern char *callvarietyname[];
+extern const char * const callvarietyname[];
 extern nesssym_scopeType LibScope;
 
 #define MAXARGS  12
@@ -579,7 +578,7 @@ struct callnode {
 		struct builtindef *bid;		/* callBuiltin */
 		long offset;	/* callMethod, callClProc, callGet, callSet */
 	} where;
-	struct ATKregistryEntry *requiredclass;  /* if 1st arg must be obj */
+	const struct ATKregistryEntry *requiredclass;  /* if 1st arg must be obj */
 	Texpr rettype;		/* callMethod, callClProc, callGet, callSet  */
 	long nargs;		/* number of arguments supplied 
 					if (nargs==MAXARGS && argtype[0]==Tptr && argtype[1]==Tunk), arg types are deferred */
@@ -678,7 +677,7 @@ public:
 
 /* overrides */
 	long Read(FILE *file, long id);
-	long ReadTemplate(char *templateName, 
+	long ReadTemplate(const char *templateName, 
 				boolean inserttemplatetext);
 	long HandleKeyWord(long pos, char *keyword, FILE *file);
 	long Write (FILE *file, long writeid, int level);
@@ -702,7 +701,7 @@ public:
 		/* compile the source (no need to call, Execute will call it) 
 		 should be called to establish any event handlers */
 
-	virtual struct errornode * Execute(char *func);
+	virtual struct errornode * Execute(const char *func);
 		/* execute named function in the current script 
 			using nessview as access to arbiter
 			and using textview as subject for currentselection() */
@@ -738,7 +737,7 @@ public:
 	virtual long printerrors( FILE *file)  ;
 		/* format and print error messages for 'self' to 'file' 
 		    return number of errors */
-	virtual union stackelement *GetVarAddr( char *var);
+	virtual union stackelement *GetVarAddr( const char *var);
 		/* returns the address of the value (as a stackelement) 
 			for the global variable named 'var' 
 			returns NULL if there is none */
@@ -774,7 +773,7 @@ public:
 
 	static void SetDebug(boolean d);
 	static class ness * GetList()  ;
-	static long PrintAllErrors(char *when)  ;
+	static long PrintAllErrors(const char *when)  ;
 		/* formats error messages for all loaded Nesses 
 		    and prints them to stderr.   'when' is printed in header
 		    return number of errors found */
@@ -878,13 +877,9 @@ void da();
 void dna(class nesssym *n);
 
 /* interp.C */
-boolean RunError(char  *msg, unsigned char *iar);
+boolean RunError(const char  *msg, const unsigned char *iar);
 void initializeEnvt();
 union stackelement * popValue(union stackelement  *NSP);
-static struct callnode * fetchaddr(unsigned char *iar);
-static void InterruptNess(class ness  *ness);
-static void QueryReadOnly(class ness  *ness, class simpletext  *s, char  *msg, 
-		unsigned char *iar);
 extern struct errornode *
 interpretNess(short  func, ATK  *arg, class ness  *ness);
 extern	void ness_InitInterp(ness *) ;
@@ -900,24 +895,24 @@ void SearchOp(unsigned char op, unsigned char *opiar  /* iar of the opcode */);
 /* error.C */
 struct errornode *errornode_New();
 struct errornode *errornode_Create(class ness  *ness, long  loc, long  len, 
-	long  execloc, char  *msg, boolean  ownmsg, struct errornode  *next);
+	long  execloc, const char  *msg, boolean  ownmsg, struct errornode  *next);
 void  errornode_Destroy(struct errornode  *enode);
 class nesssym *codelocFind(long  loc);		/* find nesssym for loc */
-void SaveError(char  *msg, long  loc , long  len);	/* add to error list */
-void ReportError(char  *msg, long  index); 
+void SaveError(const char  *msg, long  loc , long  len);	/* add to error list */
+void ReportError(const char  *msg, long  index); 
 		/* SaveError at the loc of 'index'th token */
-void ExprError(char  *msg, struct exprnode  *expr); 
+void ExprError(const char  *msg, struct exprnode  *expr); 
 		/* SaveError at the loc of 'expr' */
 void SetupErrorHandling(class ness  *ness);
 		/* init compilation recovery */
-void errorfromparse(int severity, char *msg);
+void errorfromparse(int severity, const char *msg);
 		/* capture parser error */
 boolean errorsynch(long  index);	/* "... restart with token" */
 boolean isFuncStart(int  nexttok, long  ncheck);	
 		/* test for 0 indent for this or next two tokens */
 
-struct errornode *LocateErrorFunc(unsigned char *loc , unsigned char *base, 
-	char  *msg, class ness  *ness);  /* see which ness has the error */
+struct errornode *LocateErrorFunc(const unsigned char *loc , const unsigned char *base, 
+	const char  *msg, class ness  *ness);  /* see which ness has the error */
 void MapRunError(class ness  *ness);
 
 
@@ -1033,14 +1028,14 @@ void  neventPost (class ness  *ness, boolean  debug);
 void neventUnpost (class ness  *ness, boolean  debug);
 
 /* run time routines */
-ATK  * ProperPtr(ATK   *ptr, struct ATKregistryEntry   *type);  
+ATK  * ProperPtr(ATK   *ptr, const struct ATKregistryEntry   *type);  
 		/* finds descendent ptr of desired type */
 void neventInfo(unsigned char op, unsigned char *iar, class ness  *ness);  
 		/* dispatches for many event related routines */
 void InterpretEvent(class view  *obj, struct eventnode  *enode);
 
 /* nevent1.C */
-ATK *ProperPtr(ATK *ptr, struct ATKregistryEntry *type);
+ATK *ProperPtr(ATK *ptr, const struct ATKregistryEntry *type);
 class text *FrameMark(class ness *ness, class nessmark *m, char *title, 
 	char *pgmnm, boolean enablecommands, long *pPos , long *pLen);
 

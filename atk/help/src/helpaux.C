@@ -25,20 +25,10 @@
 //  $
 */
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/RCS/helpaux.C,v 1.9 1995/02/17 21:00:41 Zarf Stab74 $";
-#endif
-
-/* $ACIS$ */
-
-
-
 #define label gezornenplatz
 /* sys/types.h in AIX PS2 defines "struct label", causing a type name clash.
    Avoid this by temporarily redefining "label" to be something else in the preprocessor. */
+#include <andrewos.h> /* sys/types.h sys/file.h */
 #undef label
 
 /* BSD/RT is overflowing the cpp define table. */

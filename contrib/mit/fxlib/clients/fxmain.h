@@ -1,10 +1,6 @@
 /**********************************************************************
  * File Exchange fxmain header
  *
- * $Author: sa3e $
- * $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/clients/RCS/fxmain.h,v $
- * $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/clients/RCS/fxmain.h,v 1.3 1994/01/31 22:36:06 sa3e Stab74 $
- *
  * Copyright 1990 by the Massachusetts Institute of Technology.
  *
  * For copying and distribution information, please see the file

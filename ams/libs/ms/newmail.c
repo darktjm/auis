@@ -25,17 +25,11 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/newmail.c,v 2.20 1992/12/15 21:20:00 rr2b Stab74 $";
-#endif
-
 /*
         newmail.c -- Routines for accessing incoming mail files in the raw.
 */
 
+#include <andrewos.h>
 #include <andyenv.h>
 #include <ms.h>
 #include <hdrparse.h>

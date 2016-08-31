@@ -21,11 +21,6 @@
  */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/color.C,v 3.11 1996/09/28 01:10:03 robr Exp $";
-#endif
-
 ATK_IMPL("color.H");
 #include <color.H>
 #include <util.h>
@@ -381,7 +376,7 @@ icolor *icolormap::Alloc(unsigned short r, unsigned short g, unsigned short b) {
 }
 
 void icolormap::Clear() {
-    for(int i=0;i<GetN();i++) {
+    for(unsigned int i=0;i<GetN();i++) {
 	(*this)[i]->Destroy();
     }
     Remove((size_t)0, GetN()-1);

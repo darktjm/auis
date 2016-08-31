@@ -1,8 +1,4 @@
 /*
- * $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/com_err/RCS/error_msg.c,v 1.4 1994/02/02 21:44:14 sa3e Stab74 $
- * $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/com_err/RCS/error_msg.c,v $
- * $Locker:  $
- *
  * Copyright 1987 by the Student Information Processing Board
  * of the Massachusetts Institute of Technology
  *
@@ -30,11 +26,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/com_err/RCS/error_msg.c,v 1.4 1994/02/02 21:44:14 sa3e Stab74 $";
-#endif
 
 #include <stdio.h>
 #include <string.h>

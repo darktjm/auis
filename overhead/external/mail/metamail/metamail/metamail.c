@@ -1852,7 +1852,7 @@ void setKeyHeads()
 	for (s=KeyHeads;*s;++s) if (isupper((unsigned char) *s)) *s=tolower((unsigned char) *s);
 	KeyKeep = 1;
     } else {
-	static char khtmp[] = "to:cc:subject:from:content-description:date";
+	static const char khtmp[] = "to:cc:subject:from:content-description:date";
 	KeyHeads = khtmp;
     }
     for (s=KeyHeads; *s; ++s) if (*s == ':') ++numkeys;

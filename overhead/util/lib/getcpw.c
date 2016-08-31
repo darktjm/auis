@@ -25,17 +25,12 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/getcpw.c,v 2.19 1993/01/08 16:30:59 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	getcpw.c
 	Routines to do Vice-cell-based getpwuid and getpwnam.
 \* ************************************************************ */
-#include <andyenv.h>
 #include <andrewos.h> /* syslog.h */
+#include <andyenv.h>
 #include <stdio.h>
 #include <errno.h>
 #include <util.h>

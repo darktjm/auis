@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/btr4.c,v 2.15 1995/03/18 17:30:50 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 
 	btr4.c

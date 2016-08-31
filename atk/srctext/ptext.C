@@ -26,7 +26,6 @@ $Disclaimer:
 #include <andrewos.h>
 
 static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/ptext.C,v 2.0 1995/01/27 19:38:38 rr2b Stab74 $";
 
 /*
  * ptext, a Pascal mode for ATK
@@ -116,7 +115,7 @@ void ptext::SetAttributes(struct attributes *atts)
 {
     (this)->srctext::SetAttributes(atts);
     while (atts!=NULL) {
-	char *key=atts->key;
+	const char *key=atts->key;
 	if(strcmp(key,"case-level-indent")==0)
 	    this->caseLevelIndent=atoi(atts->value.string);
 	else if(strcmp(key, "slash-asterisk-comments")==0)
@@ -153,7 +152,7 @@ void ptext::SetupStyles()
 
 boolean ptext::InitializeClass()
 {
-    static Dict pkeywords[] = {
+    static const Dict pkeywords[] = {
 	{"ABORT", 0, KEYWRD},
 	{"ABS", 0, KEYWRD},
 	{"ADR", 0, KEYWRD},

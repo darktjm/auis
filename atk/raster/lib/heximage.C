@@ -25,17 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/heximage.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 /*  heximage.c
 
 	heximage package
@@ -45,6 +34,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
  */
 
+#include <andrewos.h>
 ATK_IMPL("heximage.H")
 #include <stdio.h>
 #include <math.h>
@@ -89,8 +79,6 @@ static unsigned char unhex[8][17] = {
 */
 	
 ATKdefineRegistry(heximage, ATK, NULL);
-#ifndef NORCSID
-#endif
 
 
 void
@@ -187,7 +175,7 @@ heximage::WriteImage(register FILE  *file		/* where to put bits  */, register cl
 }
 
 /* Headers for postscript file.  The order here is reflected in the 'hx' stmts below. */
-static char *PSheader[] = {
+static const char * const PSheader[] = {
 /* 1*/	"%%!PS-Adobe-2.0 EPSF-1.2\n",
 /* 2*/	"%%%%BoundingBox: %d %d %d %d\n",
 /* 3*/	"%%  This file written by the Andrew Toolkit's heximage object.\n",
@@ -206,7 +194,7 @@ static char *PSheader[] = {
 /*15*/	NULL
 };
 
-static char *PStrailer[] = {
+static const char * const PStrailer[] = {
 /* 1*/	"\nshowpage	%% cause image to be printed\n",
 /* 2*/	"%%  End of image written by Andrew Toolkit heximage object.\n",
 	NULL
@@ -225,7 +213,7 @@ heximage::WritePostscript(register FILE  *file		/* where to put bits  */, regist
 					{
 	long row;
 	long left, top, width, height;
-	char **hx;
+	const char * const *hx;
 	short buf[BUFBITS>>4];
 
 	rectangle_GetRectSize(sub, &left, &top, &width, &height);

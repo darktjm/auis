@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RCS/vuimsgs.c,v 1.1 1995/08/02 18:46:45 susan Stab74 $";
-#endif
-
 /* vui error messages */
 
 char *VUIMSG_NOMEM = "Out of Memory...";

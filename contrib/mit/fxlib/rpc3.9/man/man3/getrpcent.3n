@@ -1,5 +1,3 @@
-.\" @(#)getrpcent.3n	1.2 87/11/13 3.9 RPCSRC
-.\" @(#)getrpcent.3n 1.6 87/10/06 SMI;
 .TH GETRPCENT 3N "6 October 1987"
 .SH NAME
 getrpcent, getrpcbyname, getrpcbynumber \- get RPC entry

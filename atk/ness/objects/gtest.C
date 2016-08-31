@@ -23,10 +23,6 @@
  *  $
  */
 
-#ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/gtest.C,v 1.1 1996/09/20 19:18:17 wjh Exp $";
-#endif
-
 #include <andrewos.h>
 #include <gentext.H>
 

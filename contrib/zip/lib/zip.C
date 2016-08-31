@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zip.C,v 1.3 1993/06/17 04:28:00 rr2b Stab74 $";
-#endif
-
-
 /* zip.c	Zip Data-object					      */
 /* Author	TC Peters					      */
 /* Information Technology Center	   Carnegie-Mellon University */
@@ -80,7 +74,7 @@ static boolean debug;
 #define	 Objects(s,i)		      (((s)->objects)[i])
 
 
-static char   *object_names[] = {
+static const char   * const object_names[] = {
 /* NULL	       */ "zipobject",
 /* A Caption   */ "zipocapt",
 /* B FlexCapt  */ "zipofcapt",
@@ -146,7 +140,7 @@ zip::zip( )
 	ATKinit;
 
   register long			      status = zip_ok;
-  register char			     *font_name = NULL;
+  register const char			     *font_name = NULL;
   register int			      i;
 
   IN(zip_InitializeObject);

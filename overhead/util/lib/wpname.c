@@ -25,20 +25,15 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/wpname.c,v 2.20 1993/07/01 21:34:42 gk5g Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	wpname.c
 	Library routines for White Pages lookups.
 	Include file ``wp.h'' declares the procedures for clients.
 \* ************************************************************ */
 
+#include <andrewos.h>		/* sys/file.h sys/types.h sys/time.h strings.h */
 #include <andyenv.h>
 #include <stdio.h>
-#include <andrewos.h>		/* sys/file.h sys/types.h sys/time.h strings.h */
 #include <ctype.h>
 #include <errno.h>
 #include <truth.h> /* itc.h -> truth.h DMT */

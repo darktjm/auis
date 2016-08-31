@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h>	/* file, time, strings */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/desym.c,v 1.10 1995/03/18 17:30:54 rr2b Stab74 $";
-#endif
-
-
 #include <andyenv.h>
 #include <sys/param.h>
 #include <errno.h>
@@ -93,7 +86,7 @@ int DeSymLink(const char *inp, char *outp, int newRoots)
 int main(int argc, char **argv) {
     char Out[1000];
     int Full, AC, RC;
-    static char Usage[] = "[-f] file file ...";
+    static const char Usage[] = "[-f] file file ...";
 
     Full = 0;
     for (AC = 1; AC < argc; ++AC) {

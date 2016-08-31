@@ -21,10 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-char *figure_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figure.C,v 3.6 1996/03/28 20:59:01 robr Stab74 $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("figure.H")
 
@@ -117,7 +113,7 @@ figure::~figure()
     free(this->objs);
 }
 
-char *figure::ViewName()
+const char *figure::ViewName()
 {
     return "figview";
 }

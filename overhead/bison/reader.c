@@ -38,10 +38,23 @@ The entry point is reader().  */
 #include "gram.h"
 #include "machine.h"
 
-#define	LTYPESTR	"\n#ifndef YYLTYPE\ntypedef\n  struct yyltype\n\
-    {\n      int timestamp;\n      int first_line;\n      int first_column;\
-\n      int last_line;\n      int last_column;\n      char *text;\n   }\n\
-  yyltype;\n\n#define YYLTYPE yyltype\n#endif\n\n"
+#define	LTYPESTR	"\n" \
+    "#ifndef YYLTYPE\n" \
+    "typedef\n" \
+    "  struct yyltype\n" \
+    "    {\n" \
+    "      int timestamp;\n" \
+    "      int first_line;\n" \
+    "      int first_column;\n" \
+    "      int last_line;\n" \
+    "      int last_column;\n" \
+    "      char *text;\n" \
+    "   }\n" \
+    "  yyltype;\n" \
+    "\n" \
+    "#define YYLTYPE yyltype\n" \
+    "#endif\n" \
+    "\n"
 
 /* Number of slots allocated (but not necessarily used yet) in `rline'  */
 int rline_allocated;

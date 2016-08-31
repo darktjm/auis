@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/dlistc/RCS/readalias.c,v 1.7 1993/10/06 18:47:25 rr2b Stab74 $";
-#endif
-
 /*
 
   readalias.c -- Read in an alias file

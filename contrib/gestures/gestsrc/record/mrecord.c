@@ -44,11 +44,6 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/record/RCS/mrecord.c,v 1.5 1996/02/10 04:50:52 robr Stab74 $";
-#endif
-
 /***********************************************************************
    (C) Copyright, 1990 by Dean Rubine, Carnegie Mellon University
     All Rights Reserved

@@ -88,8 +88,8 @@ ConsumeEverything(FILE *fp, const char *name, long id) {
 	int c;
 	while(!feof(fp) && (c=fgetc(fp)) != EOF) {
 		if(c != '\\') continue;
-		static char enddata[] = "enddata{";
-		char *p = enddata;
+		static const char enddata[] = "enddata{";
+		const char *p = enddata;
 		while(*p && !feof(fp) && (c=fgetc(fp)) != EOF && *p == c) p++;
 		if(*p == '\0') {
 			while(!feof(fp) && (c=fgetc(fp)) != EOF && isspace(c));
@@ -260,7 +260,7 @@ AVarSet::WriteLocalData(FILE */* file */) { }
 
 
 // compare tail of AString p vs s
-static boolean taileq(AString *p, char *s) {
+static boolean taileq(AString *p, const char *s) {
     size_t len=strlen(s);
     if(p->Length()>=len) return 0 ==
 	  strcmp((*p)+p->Length()-len, s);

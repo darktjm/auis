@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/utility/RCS/schedv.C,v 1.5 1994/08/14 18:53:46 rr2b Stab74 $";
-#endif
-
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Sched View-object Program
@@ -286,7 +280,7 @@ schedv::FullUpdate( enum view_UpdateType type, long left , long  top , long  wid
 static
 void Initialize( class schedv *self )
 {
-    char *reply;
+    const char *reply;
 
     IN(Initialize);
     (ZipView)->LinkTree(  self );
@@ -637,7 +631,7 @@ void Print_Button( class schedv  *self, class suite  *suite, struct suite_item *
 static
 void Quit_Button( class schedv *self, class suite  *suite, struct suite_item	 *item, long type, enum view_MouseAction       action, long x, long y, long clicks )
 {
-    static char			     *choices[] =
+    static const char		     * const choices[] =
     {"Cancel", "Save", "Save & Quit", "Quit Anyway", 0};
     long				       response = 0, result;
 

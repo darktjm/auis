@@ -25,21 +25,12 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/cellauth.c,v 2.25 1993/02/12 21:23:32 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	cellauth.c
 	Keep track of the current user's authentication status in different cells.
 \* ************************************************************ */
 
-
- 
-
+#include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <errno.h>

@@ -19,12 +19,6 @@
  * 
  *  $
  */
-#ifndef NORCSID
-static char rcsid[] = "$Header:
-/afs/cs.cmu.edu/project/atk-1/wjh/w/widget/RCS/aslot.C,v 1.3 1995/11/07
-17:38:00 wjh Exp wjh $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("wsaction.H")
 

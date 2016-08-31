@@ -1,6 +1,3 @@
-/* @(#)nlm_prot.x	1.2 87/11/12 3.9 RPCSRC */
-/* @(#)nlm_prot.x 1.8 87/09/21 Copyr 1987 Sun Micro */
-
 /*
  * Network lock manager protocol definition
  * Copyright (C) 1986 Sun Microsystems, Inc.

@@ -8,7 +8,7 @@
 
 ATKdefineRegistry(hidden, htmltext, hidden::InitializeClass);
 
-char *hidden::ViewName()
+const char *hidden::ViewName()
 {
     return "hiddenview";
 }

@@ -29,7 +29,6 @@ $Disclaimer:
 	/* 	Steven M. Bellovin (unc!smb)			*/
 	/*	Dept. of Computer Science			*/
 	/*	University of North Carolina at Chapel Hill	*/
-	/*	@(#)getdate.y	2.12	4/16/85	*/
 
 #include <andrewos.h> /* sys/types.h sys/time.h */
 #define YYSTYPE int
@@ -132,9 +131,6 @@ rspec:	NUMBER UNIT =
 	| rspec AGO =
 		{relsec = -relsec; relmonth = -relmonth;};
 %%
-static char *getdate_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp/lib/RCS/getdate.gra,v 1.2 1994/05/27 17:23:49 rr2b Stab74 $";
-
-
 static int mdays[12] =
 	{31, 0, 31,  30, 31, 30,  31, 31, 30,  31, 30, 31};
 #define epoch 1970

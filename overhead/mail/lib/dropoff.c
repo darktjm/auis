@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/dropoff.c,v 2.30 1994/06/09 18:17:42 rr2b Stab74 $";
-#endif
-
 /*
 		dropoff.c -- Subroutines for performing dropoff
 			     of a piece of user mail.
@@ -108,6 +101,7 @@ Returns an integer (one of the DT_xxx codes defined in dropoff.h) that says how 
 #endif
 #endif
 
+#include <andrewos.h>
 #include <fdplumb.h>
 #include <stdio.h>
 #include <pwd.h>

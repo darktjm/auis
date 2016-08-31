@@ -25,20 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/apt/RCS/apt.C,v 1.6 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-/* $Header $ */
-/* $Source $ */
-
-#ifndef lint
-static UNUSED const char *rcsidapt = "$Header $";
-#endif
-
 /*
     $Log: apt.C,v $
  * Revision 1.6  1995/11/07  20:17:10  robr
@@ -141,6 +127,7 @@ HISTORY
    08/30/89	Removed include of andrewos.h because that is in apt.h. (GW Keim)
 
 END-SPECIFICATION  ************************************************************/
+#include <andrewos.h>
 ATK_IMPL("apt.H")
 #include <dataobject.H>
 #include <apt.H>
@@ -174,7 +161,7 @@ int apt_debug = 0;
 #define  FieldContent(i)	      self->fields->field[i].content
 
 
-static char			     *areas[] =
+static const char			     * const areas[] =
 				     { "Left", "Top", "Right", "Bottom" };
 
 
@@ -185,15 +172,11 @@ static char			     *areas[] =
 
 
 ATKdefineRegistry(apt, dataobject, apt::InitializeClass);
-#ifndef NORCSID
-#endif
-#ifndef lint
-#endif
 static void Free_Vector( register char **vector );
-static long Assign_String( register class apt		      *self, register char			      *prefix , register char			      *desire , register char			      *candidate , register char			      *source , register char			      **target );
-static long Assign_Strings( class apt *self, char *prefix , char *desire , char *candidate , char *source, char ***target, long *count );
-static void Write_Strings( register class apt		      *self, register FILE			      *file, register char			      *name , register char			      *prefix, register long			       count, register char			      *anchor[] );
-static void Parse_Field( register class apt		      *self, register char			      *line, register struct apt_field	      *field );
+static long Assign_String( register class apt		      *self, register const char			      *prefix , register const char			      *desire , register const char			      *candidate , register const char			      *source , register char			      **target );
+static long Assign_Strings( class apt *self, const char *prefix , const char *desire , const char *candidate , const char *source, char ***target, long *count );
+static void Write_Strings( register class apt		      *self, register FILE			      *file, register const char			      *name , register const char			      *prefix, register long			       count, register const char			      * const anchor[] );
+static void Parse_Field( register class apt		      *self, register const char			      *line, register struct apt_field	      *field );
 
 
 static
@@ -256,9 +239,9 @@ apt::~apt( )
       if(TitleFontName(i)) free(TitleFontName(i));
   }
   if(Fields) {
-      for(i = 0; i < FieldCount; i++) {
-	  if(FieldName(i)) free(FieldName(i));
-	  if(FieldContent(i)) free(FieldContent(i));
+      for(i = 0; i < FieldCount; i++) { /* allocated by apt, so safe to free */
+	  if(FieldName(i)) free((char *)FieldName(i));
+	  if(FieldContent(i)) free((char *)FieldContent(i));
       }
       free(Fields);
   }
@@ -266,9 +249,9 @@ apt::~apt( )
   }
 
 void
-apt::SetAreaTitle( register char			      *title, register long			       area )
+apt::SetAreaTitle( register const char			      *title, register long			       area )
         {
-  char				     *titles[2];
+  const char				     *titles[2];
 	class apt *self=this;
 
   IN(apt_SetAreaTitle);
@@ -279,7 +262,7 @@ apt::SetAreaTitle( register char			      *title, register long			       area )
   }
 
 void
-apt::SetAreaSpreadTitle( register char			     **titles, register long			       count , register long			       area , register long			       mode )
+apt::SetAreaSpreadTitle( register const char			     **titles, register long			       count , register long			       area , register long			       mode )
         {
   register long			      i = 0;
   
@@ -304,7 +287,7 @@ apt::SetAreaSpreadTitle( register char			     **titles, register long			       c
   }
 
 void
-apt::SetAreaTitleFontName( register char			      *font_name, register long			       area )
+apt::SetAreaTitleFontName( register const char			      *font_name, register long			       area )
         {
 	class apt *self=this;
   IN(apt_SetAreaTitleFontName);
@@ -320,9 +303,9 @@ apt::SetAreaTitleFontName( register char			      *font_name, register long			   
   }
 
 void
-apt::SetAreaLegend( register char			      *legend, register long			       area )
+apt::SetAreaLegend( register const char			      *legend, register long			       area )
         {
-  char				     *legends[2];
+  const char				     *legends[2];
 	class apt *self=this;
 
   IN(apt_SetAreaLegend);
@@ -333,7 +316,7 @@ apt::SetAreaLegend( register char			      *legend, register long			       area )
   }
 
 void
-apt::SetAreaSpreadLegend( register char			     **legends, register long			       count , register long			       area , register long			       mode )
+apt::SetAreaSpreadLegend( register const char			     **legends, register long			       count , register long			       area , register long			       mode )
         {
   register long			      i = 0;
 
@@ -358,7 +341,7 @@ apt::SetAreaSpreadLegend( register char			     **legends, register long			      
   }
 
 void
-apt::SetAreaLegendFontName( register char			      *font_name, register long			       area )
+apt::SetAreaLegendFontName( register const char			      *font_name, register long			       area )
         {
 	class apt *self=this;
   IN(apt_SetAreaLegendFontName);
@@ -457,7 +440,7 @@ apt::ReadObject( register FILE			      *file, register long			       id, apt_rea
   }
 
 static
-long Assign_String( register class apt		      *self, register char			      *prefix , register char			      *desire , register char			      *candidate , register char			      *source , register char			      **target )
+long Assign_String( register class apt		      *self, register const char			      *prefix , register const char			      *desire , register const char			      *candidate , register const char			      *source , register char			      **target )
       {
   char				      name[257];
   register long			      status = 0;
@@ -478,7 +461,7 @@ long Assign_String( register class apt		      *self, register char			      *pref
   }
 
 static
-long Assign_Strings( register class apt		      *self, register char			      *prefix , register char			      *desire , register char			      *candidate , register char			      *source, register char			    ***target, register long			      *count )
+long Assign_Strings( register class apt		      *self, register const char			      *prefix , register const char			      *desire , register const char			      *candidate , register const char			      *source, register char			    ***target, register long			      *count )
           {
   char				      name[257], **strings;
   register long			      status = 0;
@@ -546,7 +529,7 @@ apt::WriteObject( register FILE			      *file, register long			       id , regis
   }
 
 static
-void Write_Strings( register class apt		      *self, register FILE			      *file, register char			      *name , register char			      *prefix, register long			       count, register char			      **anchor )
+void Write_Strings( register class apt		      *self, register FILE			      *file, register const char			      *name , register const char			      *prefix, register long			       count, register const char			      * const *anchor )
             {
   register long			      i;
 
@@ -566,7 +549,7 @@ void Write_Strings( register class apt		      *self, register FILE			      *file
   }
 
 static
-void Parse_Field( register class apt		      *self, register char			      *line, register struct apt_field	      *field )
+void Parse_Field( register class apt		      *self, register const char			      *line, register struct apt_field	      *field )
         {
   char				      work[257];
   register char			     *t = work;
@@ -576,23 +559,24 @@ void Parse_Field( register class apt		      *self, register char			      *line, 
   while ( *line  &&  *line != ' ' )  *t++ = *line++;
   *t = 0;
   field->name = (char *) malloc( strlen( work ) + 1 );
-  strcpy( field->name, work );
+  strcpy( (char *)field->name, work );
   while ( *line  &&  *line == ' ' )  line++;
   t = work;
   while ( *line  &&  *line != '\n' )  *t++ = *line++;
   *t = 0;
   field->content = (char *) malloc( strlen( work ) + 1 );
-  strcpy( field->content, work );
+  strcpy( (char *)field->content, work );
   OUT(Parse_Field);
   }
 
 #define  max_field_content_items    50
 
 char **
-apt::ParseFieldContent( register char			      *string )
+apt::ParseFieldContent( register const char			      *string )
       {
   register char			    **fields;
-  register char			     *s = string, *s2, *t;
+  register const char		     *s = string, *s2;
+  char *t;
   register long			      i, length;
 	class apt *self=this;
 
@@ -609,7 +593,7 @@ apt::ParseFieldContent( register char			      *string )
       s2++;
       length++;
       }
-    t = fields[i] = (char *) malloc( length + 1 );
+    fields[i] = t = (char *) malloc( length + 1 );
     while ( *s  &&  *s != ';' )
       *t++ = *s++;
     *t = 0;
@@ -623,7 +607,7 @@ apt::ParseFieldContent( register char			      *string )
   }
 
 struct apt_field_contents *
-apt::ParseFieldContents( register char			      *string )
+apt::ParseFieldContents( register const char			      *string )
       {
   register char			    **content, **field;
   register struct apt_field_contents *contents;
@@ -643,7 +627,7 @@ apt::ParseFieldContents( register char			      *string )
     s = s2 = *field;
     while ( *s2  &&  *s2 != '(' )
       { length++; s2++; }
-    t = contents->field[i].name = (char *) malloc( length + 1 );
+    contents->field[i].name = t = (char *) malloc( length + 1 );
     while ( *s  &&  *s != '(' )
       *t++ = *s++;
     *t = 0;
@@ -653,7 +637,7 @@ apt::ParseFieldContents( register char			      *string )
     length = 0;
     while( *s2  &&  *s2 != ')' )
       { length++; s2++; }
-    t = contents->field[i].content = (char *) malloc( length + 1 );
+    contents->field[i].content = t = (char *) malloc( length + 1 );
     while ( *s  &&  *s != ')' )
       *t++ = *s++;
     *t = 0;

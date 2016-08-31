@@ -40,7 +40,7 @@ $Disclaimer:
 #define USRDEF MAX_STYLES-1 /* user-defined keywords */
 
 typedef struct DictStruct {
-    char    *stng;
+    const char    *stng;
     short   val;    /*bits contain indentation info*/
     short   kind;    /*used for multiple style types*/
     struct DictStruct *next;
@@ -61,7 +61,7 @@ class srctext: public text {
     boolean InsertCharacters(long pos, const char *str, long len); /*RSK91overstrike*/
     long Read(FILE *file, long id);
     long ReadSubString(long pos, FILE *file, boolean quoteCharacters);
-    long ReadTemplate(char *templateName, boolean inserttemplatetext);
+    long ReadTemplate(const char *templateName, boolean inserttemplatetext);
     void SetAttributes(struct attributes *atts);
     long Write(FILE *file, long writeID, int level);
     void WriteSubString(long pos, long len, FILE *file, boolean quoteCharacters);
@@ -88,7 +88,7 @@ class srctext: public text {
     virtual long CopyWord(long pos,long end,char buffer[]);
     virtual int CurrentIndent(long pos);
     virtual int CurrentColumn(long pos);
-    virtual boolean DoMatch(long pos,char *str,int len);
+    virtual boolean DoMatch(long pos,const char *str,int len);
     virtual boolean ExtendToOutdent(int indent,long *pos,long *len);
     virtual void FindSrcInsets();
     virtual environment *GetEnvironment(long pos);
@@ -117,9 +117,9 @@ class srctext: public text {
     srctext();
     virtual ~srctext();
 
-    static void BuildTable(char *classname, Dict *hashTable[], Dict wordlist[]);
-    static void HashInsert(Dict *hashTable[], Dict *word);
-    static Dict *Lookup(Dict *hashTable[], char *word);
+    static void BuildTable(const char *classname, Dict *hashTable[], const Dict wordlist[]);
+    static void HashInsert(Dict *hashTable[], const Dict *word);
+    static Dict *Lookup(Dict *hashTable[], const char *word);
     static void CopyrightScramble(text *txt, long pos, long len);
 
     inline boolean GetForceUpper() { return ((this)->forceUpper); }
@@ -144,7 +144,7 @@ class srctext: public text {
     int tabSize, numTabStops, tabStop[MAX_TABSTOPS];
 
     /* Variables used by Esc-1 and Esc-2 comment insertion */
-    char *commentString, *linecommentString;
+    const char *commentString, *linecommentString;
     int commentCol, linecommentCol;
     boolean commentFixed, linecommentFixed;
     int remarkPadding;

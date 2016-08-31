@@ -24,23 +24,12 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/examples/ex1/RCS/hwview.C,v 1.4 1996/12/19 20:22:52 fred Exp $";
-#endif
-
-
-
 ATK_IMPL("hwview.H")
 #include "graphic.H"
 #include "hwview.H"
 
 
 ATKdefineRegistry(helloworldview, view, NULL);
-#ifndef NORCSID
-#endif
-
 
 void helloworldview::FullUpdate(enum view_UpdateType  type, long  left, long  top, long  width, long  height)
                         {

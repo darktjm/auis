@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp/lib/RCS/llist.c,v 1.8 1994/06/09 21:18:04 rr2b Stab74 $";
-#endif
-
 #include "llist.h"
 #include <andrewos.h>
 

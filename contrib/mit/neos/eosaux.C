@@ -1,5 +1,3 @@
-/* $Author: wjh $ */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -22,13 +20,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/eosaux.C,v 1.5 1996/06/11 01:26:13 wjh Exp $";
-#endif
-
-
- 
 /*
  * eosaux.c
  *
@@ -43,6 +34,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/ne
 
 #include <mit-copyright.h>
 
+#include <andrewos.h>	/* andrewos.h includes sys/types.h */
 #include <atom.H>
 #include <buffer.H>
 #include <dataobject.H>
@@ -63,7 +55,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/ne
 /* sys/types.h in AIX PS2 defines "struct label",  causing a type name clash.
   Avoid this by temporarily redefining "label" to be something else. */
 #define label gezornenplatz
-#include <andrewos.h>	/* andrewos.h includes sys/types.h */
 #include <eosfx.H> /* eosfx.ih includes sys/types.h */
 #undef label
 
@@ -86,18 +77,16 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/ne
 extern class menulist *eosMenu;
 extern class keymap *eosKeys;
 
-static char *studentbuttonNames[]=
+static const char * const studentbuttonNames[]=
   { "Pick Up", "Turn In", "Handouts", "Exchange", "Guide", "Help", NULL};
-static void (*studentbuttonFuncs[])()=
+static const void (*studentbuttonFuncs[])()=
   { eos_PickUp, eos_TurnIn, eos_Handouts, eos_Exchange, eos_StyleGuide, eos_Help, NULL };
 
-static char *instructbuttonNames[]=
+static const char * const instructbuttonNames[]=
   { "Grade","Return", "Handouts", "Exchange", "Guide", "Help", NULL };
-static void (*instructbuttonFuncs[])()=
+static const void (*instructbuttonFuncs[])()=
   { eos_Grade, eos_Return, eos_Handouts, eos_Exchange, eos_StyleGuide, eos_Help, NULL };
 
-#ifndef NORCSID
-#endif
 void eos_NewWindow(class eos  *self);
 
 

@@ -25,14 +25,9 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/wputil/RCS/nickgen.c,v 5.9 1994/06/09 21:18:04 rr2b Stab74 $";
-#endif
-
+#include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
-#include <andrewos.h>
 #include <wp.h>
 
 #include <bt.h>
@@ -47,7 +42,7 @@ int argc; char *argv[];
     int arg;
     char *ifile = NULL;
     FILE *IF;
-    static char Usage[] = " [-d(ebug)|-n(icknames)|-s(urnames)]";
+    static const char Usage[] = " [-d(ebug)|-n(icknames)|-s(urnames)]";
     static char InBuf[1000];
     char *CPtr, *NextPtr, *Canon1, *Canon2;
     int DoSurns;

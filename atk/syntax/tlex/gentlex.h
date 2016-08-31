@@ -41,8 +41,8 @@
 		tlex_BITISSET(parm->b, c)
 */
 typedef struct charsettype {
-	char *vector;
-	char mask;
+	const char *vector;
+	const char mask;
 }    Charset;
 #define tlex_BITISSET(bs, c) ((((bs).vector)[UNSIGN(c)]) & ((bs).mask))
 
@@ -132,14 +132,14 @@ struct tlex_ErrorRecparm {
 	short tokennumber;
 	int recognizerindex;	/* tlex_ERROR */
 	tlex_handlerfptr handler;
-	char *msg;
+	const char *msg;
 };
 
 
 struct tlex_tables {
-	struct tlex_Recparm **rectbl;
+	const struct tlex_Recparm * const *rectbl;
 			/* array describing possible actions */
-	short *action;	/* action for each initial character
+	const short *action;	/* action for each initial character
 			if value has tlex_ACTTHONG set,
 				consult thongtbl using low bits as index
 			if value has tlex_ACTSCAN bit set,
@@ -148,18 +148,18 @@ struct tlex_tables {
 				with value as token number */
 	int hichar;	/* action has elements for 0...hichar */
 	int defaultaction;	/* action for characters above hichar */
-	struct tlex_Recparm *reservedwordparm;
+	const struct tlex_Recparm *reservedwordparm;
 				/* points to a recparm struct for
 				handling reserved words */
-	char **thongtbl;	/* points to sorted array of thong strings
+	const char * const *thongtbl;	/* points to sorted array of thong strings
 				If there are thongs beginning with the letter x,
 				there is a one character entry for x as the
 				first of the thongs for that letter.
 				The last entry is followed by a zero length string. */
-	char *thongsame;	/* thongsame[i] has as its value the number of
+	const char *thongsame;	/* thongsame[i] has as its value the number of
 				leading characters which are the same between
 				thongtbl[i-1] and thongtbl[i] */
-	short *thongact;	/* array of action values for thongs */
+	const short *thongact;	/* array of action values for thongs */
 	struct tlex_Recparm *global;	/* points to the global struct */
 	struct tlex_ErrorRecparm *ErrorHandler; 
 		/* ErrorHandler->handler is called by tlex_Error.

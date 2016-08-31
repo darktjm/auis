@@ -23,8 +23,6 @@
 
  2rtf was written by Scott Rixner, rixner@ATHENA.MIT.EDU and Jeremy Paul Kirby,jpkirby@ATHENA.MIT.EDU
 
- $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/2rtf/RCS/stvec.h,v 1.1 1994/02/02 19:05:55 susan Stab74 $
-
  This file was created from parts of 'atk/text/txtstvec.h' and
  'andrew/common/include/atk/style.ih'.  As this program is a 
  conversion utility involving ATK, any changes to either of those 
@@ -246,7 +244,7 @@ struct text_statevector {
     long SpecialFlags;
     struct fontdesc *CurCachedFont;
  */
-    char *CurFontFamily;
+    const char *CurFontFamily;
 /* 
     struct dfamily * CurFontFamily;
     struct dfont * CurCachedFont;

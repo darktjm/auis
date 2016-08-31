@@ -25,13 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/suite/RCS/vector.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Vector-object
@@ -65,7 +58,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
-
+#include <andrewos.h>
 ATK_IMPL("vector.H")
 #include <stdio.h>
 
@@ -84,8 +77,6 @@ ATK_IMPL("vector.H")
 
 
 ATKdefineRegistry(vector, ATK, NULL);
-#ifndef NORCSID
-#endif
 static void ReallocData( register class vector    *self );
 
 

@@ -291,16 +291,6 @@ all function declarations (with main() last, if there is one)}
 
 
 
-\bold{/////  Delete the spaces after the dollar signs}
-
-#ifndef NORCSID
-
-#define NORCSID
-
-	static char rcsid[]="$ Header: $";
-
-#endif
-
 /*
 
  *    $ Log: $

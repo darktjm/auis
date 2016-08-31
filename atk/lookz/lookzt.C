@@ -23,11 +23,6 @@
 //  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/lookz/RCS/lookzt.C,v 1.3 1994/08/11 02:57:43 rr2b Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
@@ -50,8 +45,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/lookz/RCS/
 
 #include <lookz.H>
 
-#ifndef NORCSID
-#endif
 main( register int	   argc, register char   **argv );
 printdata(register class lookz  *st);
 

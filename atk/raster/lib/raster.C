@@ -25,16 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/raster.C,v 1.5 1996/10/18 19:43:38 wjh Exp $";
-#endif
-
-
- 
-
 /* raster.c 
 
 	raster Data-object
@@ -49,6 +39,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #define MAXFILELINE 255
 #define BUFBYTES	600	/* enough for 4792 bits */
 
+#include <andrewos.h>
 ATK_IMPL("raster.H")
 #include <stdio.h>
 #include <sys/param.h> /* Defines MAXPATHLEN among other things */
@@ -69,8 +60,6 @@ ATK_IMPL("raster.H")
 
 
 ATKdefineRegistry(raster, dataobject, NULL);
-#ifndef NORCSID
-#endif
 #ifdef NOTUSED
 static void WriteV1Stream(class raster  *ras, FILE  *file, long  id);
 #endif /* NOTUSED */
@@ -245,7 +234,7 @@ raster::Write(FILE  *file, long  writeID, int  level)
 		}
 		else if ((pix)->GetFileName()) {
 			/* write a "file" line */
-			char *path = (pix)->GetFilePath();
+			const char *path = (pix)->GetFilePath();
 			if (path == NULL || *path == '\0')
 				path = ".";	/* must write something non-white */
 			fprintf(file, "%ld %ld %ld %ld\n",

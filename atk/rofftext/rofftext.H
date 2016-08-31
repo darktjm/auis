@@ -94,9 +94,9 @@ struct _trickle {
     enum trickle_type type;
     union {
         FILE *f;
-        char *s;
+        const char *s;
     }u;
-    char *filename;
+    const char *filename;
     int LineNumber;
     char *buf;
     boolean pop;
@@ -115,7 +115,7 @@ typedef struct MagicBuf *BUF;
 
 struct InputContext {
     int argc;
-    char **argv;
+    const char **argv;
 };
 typedef struct InputContext *IC;
 
@@ -126,7 +126,6 @@ struct trap {
 };
 
 #define MAXARGS 24
-#define StrDup(string) ((char *)strcpy((char *)malloc(strlen(string)+1),string))
 #define NewObj(type) ((type *)malloc(sizeof(type)))
 
 /* reserve the use of 200 - 210 */
@@ -151,8 +150,8 @@ enum scale_type {
 struct roffEnviron{
     int pointSize;
     boolean fill;
-    char *font; /* name of the font */
-    char *prevFont;
+    const char *font; /* name of the font */
+    const char *prevFont;
     int fontStyle; /* style ID for font */
     int indent;     /* number of basic units to indent */
     int prevIndent;
@@ -227,7 +226,7 @@ public:
 
      long Read(FILE *file, long id)  ;
      long Write(FILE *file, long writeID, int level)  ;
-     char * ViewName()  ;
+     const char * ViewName()  ;
      void SetAttributes(struct attributes *atts);
 
     /* global state variables */
@@ -292,14 +291,14 @@ public:
     class hash *Goofy; /* commands with special syntax */
     class hash *SpecialChars; /* for \(XX */
     char current;
-    char *Nullarg[10];
+    const char *Nullarg[10];
     IC CurrentContext;
 
 
     int ScaleFactor[8];
     /* Fonts */
 
-    char *Fonts[5];/* = {"roman","italic","bold","special","typewriter"};*/
+    const char *Fonts[5];/* = {"roman","italic","bold","special","typewriter"};*/
     /*int CurrentFont = 0;*/
     int CurrentFontSize;
 

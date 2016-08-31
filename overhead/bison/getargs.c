@@ -66,13 +66,13 @@ void
 usage (stream)
      FILE *stream;
 {
-  fprintf (stream, "\
-Usage: %s [-dhklntvyV] [-b file-prefix] [-o outfile] [-p name-prefix]\n\
-       [--debug] [--defines] [--fixed-output-files] [--no-lines]\n\
-       [--verbose] [--version] [--help] [--yacc]\n\
-       [--no-parser] [--token-table]\n\
-       [--file-prefix=prefix] [--name-prefix=prefix]\n\
-       [--output=outfile] grammar-file\n",
+  fprintf (stream,
+"Usage: %s [-dhklntvyV] [-b file-prefix] [-o outfile] [-p name-prefix]\n"
+"       [--debug] [--defines] [--fixed-output-files] [--no-lines]\n"
+"       [--verbose] [--version] [--help] [--yacc]\n"
+"       [--no-parser] [--token-table]\n"
+"       [--file-prefix=prefix] [--name-prefix=prefix]\n"
+"       [--output=outfile] grammar-file\n",
 	   program_name);
 }
 

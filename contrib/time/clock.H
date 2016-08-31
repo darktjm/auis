@@ -45,8 +45,8 @@ struct clock_options {
   int major_ticks, minor_ticks;
   int tick_length;
   int num_labels;
-  char **labels;
-  char *fontfamily;
+  const char * const *labels;
+  const char *fontfamily;
   int fontface;
 };
 

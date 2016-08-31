@@ -26,17 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/stylesheet.C,v 3.6 1996/11/19 22:22:40 robr Exp $";
-#endif
-
-
- 
-
-
-
 ATK_IMPL("stylesheet.H")
 #include <style.H>
 #include <menulist.H>
@@ -134,7 +123,7 @@ void stylesheetInternal::Delete(class style  *styleptr)
     this->version++;
 }
 
-class style *stylesheetInternal::Find(char  *name)
+class style *stylesheetInternal::Find(const char  *name)
 {
     register int i;
     register class style **styles;

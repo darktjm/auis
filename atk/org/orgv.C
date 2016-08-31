@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/org/RCS/orgv.C,v 1.8 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Org View-object
@@ -94,6 +87,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include <andrewos.h>
 ATK_IMPL("orgv.H")
 #include <ctype.h>
 #include <errno.h>
@@ -140,7 +134,7 @@ static  class keymap		 *class_keymap;
 #define  menu_debug		  (1<<14)
 
 
-static char			  ExplodePhrase[]   = "Explode",
+static const char		  ExplodePhrase[]   = "Explode",
 				  ImplodePhrase[]   = "Implode",
 				  VerticalPhrase[]  = "Vertical",
 				  HorizontalPhrase[] = "Horizontal",
@@ -201,8 +195,6 @@ static char			  ExplodePhrase[]   = "Explode",
 
 
 ATKdefineRegistry(orgv, aptv, orgv::InitializeClass);
-#ifndef NORCSID
-#endif
 static long Control_Button_Hit( register class orgv		   *self, register class suite		   *suite, register struct suite_item	   *item, register long			    type, register enum view_MouseAction    action, register long			    x , register long			    y , register long			    clicks );
 static void Add_Command( register class orgv  *self );
 static void Delete_Command( register class orgv  *self );
@@ -215,7 +207,7 @@ static void DEBUG_Command( register class orgv	      *self );
 static void Palette_Command( register class orgv  *self );
 static void Description_Command( register class orgv  *self );
 static void Arrangement_Command( register class orgv  *self );
-static void Alter_Control_Button( register class orgv  *self, register long  datum, register char  *new_c );
+static void Alter_Control_Button( register class orgv  *self, register long  datum, register const char  *new_c );
 static void Passivate( register class orgv  *self );
 static void Activate( register class orgv  *self );
 static void FullUpdate_Tree( register class orgv  *self );
@@ -719,7 +711,7 @@ Rename_Command( register class orgv  *self )
 }
 
 void
-orgv::Print( register FILE		      *file, register char		      *processor, register char		      *format, register boolean	       level )
+orgv::Print( register FILE		      *file, register const char		      *processor, register const char		      *format, register boolean	       level )
           {
   class orgv *self=this;
   IN(orgv_Print);
@@ -771,7 +763,7 @@ Fold_Command( register class orgv  *self )
 static void
 Node_Border_Command( register class orgv  *self )
   {
-  static char *choices[] = {"Cancel", "Rectangle", "Round", "Oval", "Circle", 0};
+  static const char * const choices[] = {"Cancel", "Rectangle", "Round", "Oval", "Circle", 0};
   long response = 0, style, state = 0;
 
   IN(Node_Border_Command);
@@ -802,7 +794,7 @@ Node_Border_Command( register class orgv  *self )
 static void
 Node_Connector_Command( register class orgv  *self )
   {
-  static char *choices[] = {"Cancel", "Dog Leg", "Direct", 0};
+  static const char * const choices[] = {"Cancel", "Dog Leg", "Direct", 0};
   long response = 0, style, state = 0;
 
   IN(Node_Connector_Command);
@@ -893,7 +885,7 @@ Arrangement_Command( register class orgv  *self )
 }
 
 static
-void Alter_Control_Button( register class orgv  *self, register long  datum, register char  *new_c )
+void Alter_Control_Button( register class orgv  *self, register long  datum, register const char  *new_c )
       {
   if ( PaletteExposed )
       (Suite)->ChangeItemAttribute(  (Suite)->ItemOfDatum(  datum ),

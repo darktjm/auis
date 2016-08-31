@@ -25,15 +25,9 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atkams/messages/lib/RCS/ams.C,v 1.11 1994/08/15 03:52:52 rr2b Stab74 $";
-#endif
-
 /* Until I come up with a better scheme, new functions here have to be added to SIX files -- ams.ch, amss.ch, amsn.ch (all identical specs) and the corresponding c files */ 
 
+#include <andrewos.h>
 #include <sys/param.h>
 #include <util.h>
 #include <ctype.h>
@@ -67,15 +61,11 @@ static int IWantSnap = 0;
 
 
 ATKdefineRegistry(ams, ATK, NULL);
-#ifndef NORCSID
-#endif
-#ifdef SNAP_ENV
-#endif /* SNAP_ENV */
-static void ReportMissing(char  *s);
+static void ReportMissing(const char  *s);
 int AddToClassList(char  *TempName , char  *FullName, Boolean  CheckDups);
 static void HandleInitProblem(long  rock, char  *err);
-static class init *ReadInitFile(char  *fakeprogname , char  *realprogname);
-static void DisplayAMS_ERRNO(char  *prefix);
+static class init *ReadInitFile(const char  *fakeprogname , const char  *realprogname);
+static void DisplayAMS_ERRNO(const char  *prefix);
 static int UpdateServerState();
 static void HandleTimer(void *pdrock, long timerock);
 static void RestartTimer(long datarock);
@@ -139,7 +129,7 @@ class ams *ams::MakeAMS() {
     return(myamsp);
 }
 
-static void ReportMissing(char  *s)
+static void ReportMissing(const char  *s)
 {
     fprintf(stderr, "The %s function is not included in the skeleton ams class.\n", s);
 }
@@ -185,7 +175,7 @@ long ams::CUI_DirectoriesToPurge()
     return(0);
 }
 
-long ams::CUI_DisambiguateDir(char  *shortname , char  **longname) 
+long ams::CUI_DisambiguateDir(const char  *shortname , char  **longname) 
 {
     ReportMissing("CUI_DisambiguateDir");
     return(0);
@@ -226,7 +216,7 @@ long ams::CUI_GetHeaderContents(int  cuid, char  *hdrname, int  hdrnum, char  *h
     return(0);
 }
 
-long ams::CUI_GetHeaders(char  *dirname , char  *date64 , char  *headbuf, int  lim , int  startbyte , long  *nbytes , long  *status , int  RegisterCuids)
+long ams::CUI_GetHeaders(const char  *dirname , const char  *date64 , char  *headbuf, int  lim , int  startbyte , long  *nbytes , long  *status , int  RegisterCuids)
 {
     ReportMissing("CUI_GetHeaders");
     return(0);
@@ -333,18 +323,18 @@ long ams::CUI_ReallyGetBodyToLocalFile(int  cuid, char  *fname, int  *ShouldDele
     return(0);
 }
 
-long ams::CUI_RemoveDirectory(char  *dirname)
+long ams::CUI_RemoveDirectory(const char  *dirname)
 {
     ReportMissing("CUI_RemoveDirectory");
     return(0);
 }
-long ams::CUI_RenameDir(char  *oldname , char  *newname) 
+long ams::CUI_RenameDir(const char  *oldname , const char  *newname) 
 {
     ReportMissing("CUI_RenameDir");
     return(0);
 }
 
-void ams::CUI_ReportAmbig(char  *name , char  *atype)
+void ams::CUI_ReportAmbig(const char  *name , const char  *atype)
 {
     ReportMissing("CUI_ReportAmbig");
 }
@@ -563,31 +553,31 @@ long ams::MS_DomainHandlesFormatting(char  *domname, int  *retval)
     return(0);
 }
 
-void ams::ReportSuccess(char  *s)
+void ams::ReportSuccess(const char  *s)
 {
     ReportMissing("ReportSuccess");
 }
 
 
-void ams::ReportError(char  *s, int  level , int  decode, long  mserrcode)
+void ams::ReportError(const char  *s, int  level , int  decode, long  mserrcode)
 {
     ReportMissing("ReportError");
 }
 
 
-int ams::GenericCompoundAction(class view  *v, char  *prefix, char  *cmds)
+int ams::GenericCompoundAction(class view  *v, const char  *prefix, const char  *cmds)
 {
     ReportMissing("GenericCompoundAction");
     return(0);
 }
 
-int ams::GetBooleanFromUser(char  *prompt, int  defaultans)
+int ams::GetBooleanFromUser(const char  *prompt, int  defaultans)
 {
     ReportMissing("GetBooleanFromUser");
     return(0);
 }
 
-int ams::GetStringFromUser(char  *prompt , char  *buf, int  len , int  ispass)
+int ams::GetStringFromUser(const char  *prompt , char  *buf, int  len , int  ispass)
 {
     ReportMissing("GetStringFromUser");
     return(0);
@@ -640,13 +630,13 @@ void ams::SubtleDialogs(boolean  besubtle)
     ReportMissing("SubtleDialogs");
 }
 
-char *ams::DescribeProt(int  code)
+const char *ams::DescribeProt(int  code)
 {
     ReportMissing("DescribeProt");
     return(NULL);
 }
 
-int ams::ChooseFromList(char  **QVec, int  defans)
+int ams::ChooseFromList(const char  * const *QVec, int  defans)
 {
     ReportMissing("ChooseFromList");
     return(0);
@@ -675,7 +665,7 @@ int ams::UnScribeFlush(int  ucode, struct ScribeState  **ss, FILE  *fout)
     return(0);
 }
 
-int ams::UnScribeInit(char  *vers, struct ScribeState  **ss)
+int ams::UnScribeInit(const char  *vers, struct ScribeState  **ss)
 {
     ReportMissing("UnScribeInit");
     return(0);
@@ -1162,7 +1152,7 @@ int ams::TryDelayedUpdates()
     return 0;
 }
 
-static char *NoCacheMem = "Out of memory; cannot save your unremembered profile information";
+static const char NoCacheMem[] = "Out of memory; cannot save your unremembered profile information";
 
 void ams::CacheDelayedUpdate(char  *FullName , char  *UpdateDate)
 {
@@ -1190,7 +1180,7 @@ static void HandleInitProblem(long  rock, char  *err)
     fprintf(stderr,"%s\n",err);
 }
 
-static class init *ReadInitFile(char  *fakeprogname , char  *realprogname)
+static class init *ReadInitFile(const char  *fakeprogname , const char  *realprogname)
 {
     char buffer[256], buffer1[256];
     const char *andrewDir, *sitename;
@@ -1268,7 +1258,7 @@ done:
     return initp;
 }
 
-class frame *ams::InstallInNewWindow(class view  *v, char  *programname , char  *windowname, int  w , int  h, class view  *focusv)
+class frame *ams::InstallInNewWindow(class view  *v, const char  *programname , const char  *windowname, int  w , int  h, class view  *focusv)
 {
     class frame *myframe;
     class im *myim;
@@ -1341,11 +1331,11 @@ void ams::TimerInit()
     RestartTimer(0);
 }
 
-static void DisplayAMS_ERRNO(char  *prefix)
+static void DisplayAMS_ERRNO(const char  *prefix)
 {
     long myerrno;
     char ErrorText[1000];
-    char *msg2;
+    const char *msg2;
 
     myerrno = (ams::GetAMS())->AMS_ErrNo();
     switch (myerrno) {
@@ -1522,7 +1512,8 @@ void ams::CommitState(boolean  DoQuit , boolean  MustQuit , boolean  MayPurge , 
 	    }
 	}
 	if (ChangedSendmessages) {
-	    char Question[400], *quest;
+	    char Question[400];
+	    const char *quest;
 
 	    if (ChangedSendmessages > 1) {
 		sprintf(Question, "Do you want to erase the %d pieces of mail you have not yet sent", ChangedSendmessages);
@@ -1692,7 +1683,7 @@ static enum message_CompletionCode FolderComplete(char  *part , long  dummy , ch
     return(incomplete ? message_Valid : message_CompleteValid);
 }
 
-int ams::GetFolderName(char  *prompt , char  *buf , int  buflen, char  *defaultname, boolean  MustMatch)
+int ams::GetFolderName(const char  *prompt , char  *buf , int  buflen, const char  *defaultname, boolean  MustMatch)
 {
     if (message::AskForStringCompleted(NULL, 25, prompt, defaultname, buf, buflen, NULL, (message_completionfptr)FolderComplete, (message_helpfptr)FolderHelp, 0 /* rock */, MustMatch ? message_MustMatch : 0)< 0) return(-1);
     return(0);

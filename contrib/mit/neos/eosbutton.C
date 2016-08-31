@@ -1,10 +1,3 @@
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/eosbutton.C,v 1.6 1996/06/11 01:26:13 wjh Exp $ */
-/* $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/eosbutton.C,v $ */
-/* $Author: wjh $ */
-
-#ifndef lint
-static char *eosbut_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/neos/RCS/eosbutton.C,v 1.6 1996/06/11 01:26:13 wjh Exp $";
-#endif /* lint */
 /*
  * eosbutt.c
  *

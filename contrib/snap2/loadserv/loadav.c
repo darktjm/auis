@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/snap2/loadserv/RCS/loadav.c,v 2.12 1993/01/15 19:09:03 gk5g Stab74 $";
-#endif
-
-
 /*
 **LIBS: -lsnap 
 */

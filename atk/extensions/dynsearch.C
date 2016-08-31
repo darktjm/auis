@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/extensions/RCS/dynsearch.C,v 3.2 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("dynsearch.H")
 #include <text.H>
 #include <textview.H>
@@ -61,8 +51,6 @@ static int lastDirection = FORWARD;
 
 
 ATKdefineRegistry(dynsearch, ATK, dynsearch::InitializeClass);
-#ifndef NORCSID
-#endif
 static void dynsearch_SearchForward(register class textview  *view);
 static void dynsearch_SearchReverse(register class textview  *view);
 static int GetPattern(class textview  *view		/* textview we're using */, class text  *text		/* and doc */, int  direction			/* direction of the search */);
@@ -188,7 +176,7 @@ static int GetPattern(class textview  *view		/* textview we're using */, class t
     }
     if (!useLast) {
 
-        char *errorMessage;
+        const char *errorMessage;
 
 	failures = 0;
 	errorMessage = search::CompilePattern(string, (struct SearchPattern **)&lastPattern);

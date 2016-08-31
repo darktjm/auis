@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipvr00.C,v 1.3 1993/06/17 04:28:00 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* zipvr00.c	Zip PrintView-object				      */
 /* Author	TC Peters					      */
 /* Information Technology Center	   Carnegie-Mellon University */
@@ -104,85 +96,85 @@ END-SPECIFICATION  ************************************************************/
 
 /*=== PostScript usage should be more sophisticated... ===*/
 /* Split up header so module will compile on Suns - tpn */
-static char					  ZIP_postscript_header1[] =
-"\n\
-\\!%!PS-Adobe-2.0 EPSF-1.2\n\
-\\!% Begin Zip PostScript Prelude  Version 0.0\n\
-\\!gsave  % Save Environment Around Zip Drawing\n\
-\\!1 -1 scale\n\
-\\!1 setlinewidth  2 setlinejoin\n\
-\\!\n\
-\\!/zip_Rectangle {\n\
-\\!	gsave newpath\n\
-\\!	0 setgray /shade exch def\n\
-\\!	/B exch def  /R exch def  /T exch def  /L exch def\n\
-\\!	L T moveto  R T lineto  R B lineto  L B lineto  L T lineto\n\
-\\!	shade 0 gt {gsave shade setgray fill grestore} if\n\
-\\!	closepath currentlinewidth 0 gt {stroke} if  grestore\n\
-\\!	}def\n\
-\\!/zip_Round_Rectangle {\n\
-\\!	gsave newpath\n\
-\\!	0 setgray /shade exch def\n\
-\\!	/YR exch def\n\
-\\!	/XR exch def\n\
-\\!	/B exch def  /R exch def  /T exch def  /L exch def\n\
-\\!	L XR add   T moveto\n\
-\\!	R T  R B XR arcto  4 {pop} repeat\n\
-\\!	R B  L B XR arcto  4 {pop} repeat\n\
-\\!	L B  L T XR arcto  4 {pop} repeat\n\
-\\!	L T  R T XR arcto  4 {pop} repeat\n\
-\\!	shade 0 gt {gsave shade setgray fill grestore} if\n\
-\\!	closepath currentlinewidth 0 gt {stroke}if  grestore\n\
-\\!	}def\n\
-\\!/zip_Line {\n\
-\\!	0 setgray moveto lineto stroke\n\
-\\!	}def\n\
-";
-static char					  ZIP_postscript_header2[] =
-"\\!/zip_Poly_Line {\n\
-\\!	newpath 0 setgray\n\
-\\!	2 sub /npoints exch def\n\
-\\!	moveto currentpoint\n\
-\\!	/lastY exch def   /lastX exch def\n\
-\\!	0 1 npoints {pop lineto} for\n\
-\\!	lastx lasty lineto\n\
-\\!	/lastx lastX def  /lasty lastY def\n\
-\\!	shade 0 gt {gsave shade setgray fill grestore} if\n\
-\\!	currentlinewidth 0 gt {stroke} if\n\
-\\!	}def\n\
-\\!/zip_Trapezoid {\n\
-\\!    setgray\n\
-\\!    moveto  3 {lineto} repeat\n\
-\\!    fill  0 setgray\n\
-\\!    }def\n\
-\\!/zip_Ellipse {\n\
-\\!    moveto  /R exch def\n\
-\\!    gsave scale\n\
-\\!    currentpoint newpath\n\
-\\!    R 0 360 arc  closepath stroke grestore\n\
-\\!    }def\n\
-\\!/zip_Fill_Ellipse {\n\
-\\!    moveto  /R exch def\n\
-\\!    gsave scale\n\
-\\!    currentpoint newpath\n\
-\\!    R 0 360 arc  closepath setgray fill  grestore\n\
-\\!    }def\n\
-\\!/zip_Center_X {\n\
-\\!    stringwidth pop  2 div sx exch sub /sx exch def\n\
-\\!    }def\n\
-\\!/zip_Right_X {\n\
-\\!    stringwidth pop  sx exch sub /sx exch def\n\
-\\!    }def\n\
-\\!/zip_Middle_Y {\n\
-\\!    2 div sy exch sub /sy exch def\n\
-\\!    }def\n\
-\\!/zip_Bottom_Y {\n\
-\\!    sy exch sub /sy exch def\n\
-\\!    }def\n\
-\\!% End Zip PostScript Prelude\n\
-\\!\n\
-\\!% Begin Zip Drawing\n\
-";
+static const char				  ZIP_postscript_header1[] =
+"\n"
+"\\!%!PS-Adobe-2.0 EPSF-1.2\n"
+"\\!% Begin Zip PostScript Prelude  Version 0.0\n"
+"\\!gsave  % Save Environment Around Zip Drawing\n"
+"\\!1 -1 scale\n"
+"\\!1 setlinewidth  2 setlinejoin\n"
+"\\!\n"
+"\\!/zip_Rectangle {\n"
+"\\!	gsave newpath\n"
+"\\!	0 setgray /shade exch def\n"
+"\\!	/B exch def  /R exch def  /T exch def  /L exch def\n"
+"\\!	L T moveto  R T lineto  R B lineto  L B lineto  L T lineto\n"
+"\\!	shade 0 gt {gsave shade setgray fill grestore} if\n"
+"\\!	closepath currentlinewidth 0 gt {stroke} if  grestore\n"
+"\\!	}def\n"
+"\\!/zip_Round_Rectangle {\n"
+"\\!	gsave newpath\n"
+"\\!	0 setgray /shade exch def\n"
+"\\!	/YR exch def\n"
+"\\!	/XR exch def\n"
+"\\!	/B exch def  /R exch def  /T exch def  /L exch def\n"
+"\\!	L XR add   T moveto\n"
+"\\!	R T  R B XR arcto  4 {pop} repeat\n"
+"\\!	R B  L B XR arcto  4 {pop} repeat\n"
+"\\!	L B  L T XR arcto  4 {pop} repeat\n"
+"\\!	L T  R T XR arcto  4 {pop} repeat\n"
+"\\!	shade 0 gt {gsave shade setgray fill grestore} if\n"
+"\\!	closepath currentlinewidth 0 gt {stroke}if  grestore\n"
+"\\!	}def\n"
+"\\!/zip_Line {\n"
+"\\!	0 setgray moveto lineto stroke\n"
+"\\!	}def\n";
+
+static const char				  ZIP_postscript_header2[] =
+"\\!/zip_Poly_Line {\n"
+"\\!	newpath 0 setgray\n"
+"\\!	2 sub /npoints exch def\n"
+"\\!	moveto currentpoint\n"
+"\\!	/lastY exch def   /lastX exch def\n"
+"\\!	0 1 npoints {pop lineto} for\n"
+"\\!	lastx lasty lineto\n"
+"\\!	/lastx lastX def  /lasty lastY def\n"
+"\\!	shade 0 gt {gsave shade setgray fill grestore} if\n"
+"\\!	currentlinewidth 0 gt {stroke} if\n"
+"\\!	}def\n"
+"\\!/zip_Trapezoid {\n"
+"\\!    setgray\n"
+"\\!    moveto  3 {lineto} repeat\n"
+"\\!    fill  0 setgray\n"
+"\\!    }def\n"
+"\\!/zip_Ellipse {\n"
+"\\!    moveto  /R exch def\n"
+"\\!    gsave scale\n"
+"\\!    currentpoint newpath\n"
+"\\!    R 0 360 arc  closepath stroke grestore\n"
+"\\!    }def\n"
+"\\!/zip_Fill_Ellipse {\n"
+"\\!    moveto  /R exch def\n"
+"\\!    gsave scale\n"
+"\\!    currentpoint newpath\n"
+"\\!    R 0 360 arc  closepath setgray fill  grestore\n"
+"\\!    }def\n"
+"\\!/zip_Center_X {\n"
+"\\!    stringwidth pop  2 div sx exch sub /sx exch def\n"
+"\\!    }def\n"
+"\\!/zip_Right_X {\n"
+"\\!    stringwidth pop  sx exch sub /sx exch def\n"
+"\\!    }def\n"
+"\\!/zip_Middle_Y {\n"
+"\\!    2 div sy exch sub /sy exch def\n"
+"\\!    }def\n"
+"\\!/zip_Bottom_Y {\n"
+"\\!    sy exch sub /sy exch def\n"
+"\\!    }def\n"
+"\\!% End Zip PostScript Prelude\n"
+"\\!\n"
+"\\!% Begin Zip Drawing\n";
+
 
 
 int zipprint_Write_Print_Datastream_Header( register class zipprint	          *self );
@@ -328,7 +320,8 @@ static char *
 zipprint_Line_Attributes_String( register class zipprint	          *self )
     {
   static char			string[300];
-  char				temp[100], *p;
+  char				temp[100];
+  const char		       *p;
   short				cap, join;
 
     switch ( Printing->zip_printing_line_cap )
@@ -576,7 +569,7 @@ void zipprint::Draw_Line( register int x1 , register int y1 , register int x2 , 
 void zipprint::Draw_Rectangle( register long	 left , register long top , register long right , register long bottom )
       {
   class zipprint *self=this;
-  static char				  format[] =
+  static const char				  format[] =
 "%s %.2f %.2f %.2f %.2f %.2f zip_Rectangle\n";
 
 
@@ -594,7 +587,7 @@ void zipprint::Draw_Rectangle( register long	 left , register long top , registe
 void zipprint::Draw_Round_Rectangle( register long left , register long top , register long	right , register long	 bottom , register long	 x_radius , register long y_radius )
       {
   class zipprint *self=this;
-  static char				  format[] =
+  static const char			  format[] =
 "%s %.2f %.2f %.2f %.2f %.2f %.2f %.2f zip_Round_Rectangle\n";
 
   IN(zipprint::Draw_Round_Rectangle);
@@ -662,10 +655,10 @@ void zipprint::Draw_Arc( register long x_center , register long y_center, regist
   class zipprint *self=this;
   register float			  start_angle, end_angle, theta,
 		    			  x_scale, y_scale;
-  static char				  format[] =
-"%s /cmtx matrix currentmatrix def %.2f %.2f moveto gsave \
- %.2f %.2f scale currentpoint newpath %.2f %.2f %.2f arcn \
- cmtx setmatrix stroke grestore\n";
+  static const char			  format[] =
+"%s /cmtx matrix currentmatrix def %.2f %.2f moveto gsave "
+" %.2f %.2f scale currentpoint newpath %.2f %.2f %.2f arcn "
+" cmtx setmatrix stroke grestore\n";
 
   if ( PostScriptLanguage )
     {

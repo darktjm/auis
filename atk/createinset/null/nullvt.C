@@ -26,12 +26,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/createinset/null/RCS/nullvt.C,v 1.5 1995/01/27 02:29:26 wjh Stab74 $";
-#endif
-
-
 /* nullvt.c
 
 	test the nullv object

@@ -25,18 +25,11 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/champ/RCS/enode.C,v 1.2 1993/05/30 00:31:16 rr2b Stab74 $";
-#endif
-
 #include <andrewos.h>
 #include "enode.H"
 
 
 ATKdefineRegistry(enode, dataobject, NULL);
-#ifndef NORCSID
-#endif
 
 
 enode::enode()

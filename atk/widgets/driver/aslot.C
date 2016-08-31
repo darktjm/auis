@@ -22,11 +22,6 @@
 
 #include <andrewos.h>
 ATK_IMPL("aslot.H")
-
-#ifndef NORCSID
-static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/driver/RCS/aslot.C,v 1.33 1996/11/06 20:18:20 robr Exp $";
-#endif
-
 #include <util.h>
 
 #include <atom.H>
@@ -312,7 +307,7 @@ ASlot::ReadValue(const char *) {
 }
 
 
-static char *tagtbl[] = {
+static const char * const tagtbl[] = {
 						"STRING", 
 #define STRINGTAG     	0
 						"PROC",
@@ -755,7 +750,7 @@ ASlotString::ReadValue(const char *src) {
 // ASlotFile
 //
 ATKdefineRegistryNoInit(ASlotFile, ASlotString);
-char *ASlotFile::devnull = "/dev/null";
+const char ASlotFile::devnull[] = "/dev/null";
 
 	ASlot &
 ASlotFile::Default() {
@@ -1224,7 +1219,8 @@ ASlotDataObj::WriteValue(AString *dest) const {
 ASlotDataObj::ReadValue(const char *src) {
 	int objid;
 	struct expandstring es;
-	char *begindata = "\\begindata{", *bex, objname[100], *objx;
+	const char begindata[] = "\\begindata{", *bex;
+	char objname[100], *objx;
 
 	// be sure we have an appropriate dataobject object
 	dataobject *dobj = *this;

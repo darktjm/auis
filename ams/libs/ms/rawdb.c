@@ -25,17 +25,11 @@
  *  $
 */
 
-#include <andrewos.h>                  /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/ms/RCS/rawdb.c,v 2.70 1994/03/21 17:37:14 rr2b Stab74 $";
-#endif
-
 /*
         rawdb.c -- Routines for accessing MS database files in the raw.
 */
 
+#include <andrewos.h>                  /* sys/file.h */
 #include <ms.h>
 #include <stdio.h>
 #include <netinet/in.h>
@@ -1613,8 +1607,8 @@ char           *dirname;
     return (SetProgressMark(dirname, FALSE, FALSE));
 }
 
-static char     MS_DIRINPROGRESSFILE[] = ".AMS_DIRMOD";
-static char     QuietMark[] = "shhh\n";
+static const char     MS_DIRINPROGRESSFILE[] = ".AMS_DIRMOD";
+static const char     QuietMark[] = "shhh\n";
 
 static int      SetProgressMark(dirname, TurnOnMark, Quietly)
 char           *dirname;

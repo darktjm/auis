@@ -25,20 +25,11 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/types.h sys/file.h */ 
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/maint/RCS/mkindex.c,v 2.39 1994/03/21 17:00:38 rr2b Stab74 $";
-#endif
-
- 
- 
- 
 #define FSSIZE		32	/* max number of files */
 #define BUCKETS		11	/* number of hash buckets */
 #define MANSUBS "12345678nolpx"	/* array of possible subdirectories of MANDIR, ie man1, mann */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */ 
 #include <stdio.h>
 #include <ctype.h>
 #include <sys/param.h>
@@ -94,7 +85,7 @@ register struct Index *aindex;
     char targetPath[MAXPATHLEN];
     char keyBuffer[MAXPATHLEN / 4];
     char mandir = 0;
-    static char ManName[] = "man";
+    static const char ManName[] = "man";
     struct stat tstat;
     register long code;
     

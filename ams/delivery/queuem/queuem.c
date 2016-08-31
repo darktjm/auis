@@ -20,8 +20,7 @@
  * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
  * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
  * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- *  $Header: /obj/v6src/ams/delivery/queuem/RCS/queuem.c,v 1.86 1993/05/04 23:16:34 susan Exp $";
+ */
 #endif
 
 /*
@@ -180,7 +179,7 @@
 #include <dropoff.h>
 
 /* Program name for error messages */
-static char Qname[] = "QUEUEMAIL";
+static const char Qname[] = "QUEUEMAIL";
 
 extern char *arpadate();
 extern char Qmail_ErrMsg[];
@@ -285,7 +284,7 @@ static FileList *msgfiles;
 /* Index of first recipient */
 #define FIRSTRECIPIENT	MAILARGS
 
-static char NL[] = "%s\n";
+static const char NL[] = "%s\n";
 
 static struct RECIPIENTS {
     int 	size;		/* Current size of array */
@@ -1583,7 +1582,7 @@ static FileList *GetDirEntries(dirName, nfiles, err)
 {
     DIR *dp;
     register DIRENT_TYPE *ent;
-    static char msg[] = "Out of storage (%s) in GetDirEntries for \"%s\"";
+    static const char msg[] = "Out of storage (%s) in GetDirEntries for \"%s\"";
     register FileList *files;
     register int fsize;	    /* Max # slots in files array */
     int i, dummy;
@@ -3027,7 +3026,7 @@ static int ReadNextMessage(f, code, RefBuffer, RefLen, pgmname)
 	Log(601, "malloc returns 0x%x", buffer);
 #endif /* Logs */
 	if (buffer == NULL) {
-	    static char mesg[] = "Initial MALLOC failed in ReadNextMessage";
+	    static const char mesg[] = "Initial MALLOC failed in ReadNextMessage";
 	    debug(32768, (NL, mesg));
 	    ErrorToPostmaster(mesg, NIL, FALSE);
 	    return -1;
@@ -3108,7 +3107,7 @@ static int ReadNextMessage(f, code, RefBuffer, RefLen, pgmname)
 			      len+MESSAGE_SIZE));
 		buffer = realloc(buffer, len+MESSAGE_SIZE);
 		if (buffer == NULL) {
-		    static char mesg[] = "REALLOC failed in ReadNextMessage";
+		    static const char mesg[] = "REALLOC failed in ReadNextMessage";
 		    debug(32768, (NL, mesg));
 		    ErrorToPostmaster(mesg, NIL, FALSE);
 		    return -1;

@@ -25,17 +25,8 @@
  *  $
 */
 
-#include <andrewos.h>		/* sys/time.h index rindex */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/procstuf.c,v 2.18 1996/09/03 18:55:19 robr Exp $";
-#endif
-
-
- 
-
 /* convenient stuff for dealing with subprocesses */
+#include <andrewos.h>		/* sys/time.h index rindex */
 #include <util.h>
 #include <ctype.h>
 #include <truth.h>

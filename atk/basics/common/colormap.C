@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/colormap.C,v 1.1 1996/05/06 12:35:16 robr Exp $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("colormap.H")
 #include <color.H>
@@ -102,7 +97,7 @@ colormap::LookupColor( const char  *name, unsigned int r , unsigned int g , unsi
     return NULL;
 }
 
-char *
+const char *
 colormap::ViewName( )
 {
     return("colormapv");

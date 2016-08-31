@@ -26,13 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/simpletext.C,v 3.12 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
 ATK_IMPL("simpletext.H")
 
 #include <sys/stat.h>
@@ -493,7 +486,7 @@ void simpletext::AlwaysDeleteCharacters(long  pos, long  len)
     (this)->LengthChanged( pos, -len);
 }
 
-boolean simpletext::ReplaceCharacters(long  pos , long  len, char  *replacementString, long  replacementLen)
+boolean simpletext::ReplaceCharacters(long  pos , long  len, const char  *replacementString, long  replacementLen)
                 {
 
     if (pos >= (this)->GetFence()) {
@@ -504,7 +497,7 @@ boolean simpletext::ReplaceCharacters(long  pos , long  len, char  *replacementS
         return FALSE;
 }
 
-void simpletext::AlwaysReplaceCharacters(long  pos , long  len, char  *replacementString, long  replacementLen)
+void simpletext::AlwaysReplaceCharacters(long  pos , long  len, const char  *replacementString, long  replacementLen)
                 {
 
     int i;
@@ -1049,7 +1042,7 @@ long simpletext::Index(long  pos,char  c,long  len)
     return EOF ;
 }
 
-int simpletext::Strncmp(long  pos,char  *str,long  len)
+int simpletext::Strncmp(long  pos,const char  *str,long  len)
 {
     register long remlen = len;
     register char *s;

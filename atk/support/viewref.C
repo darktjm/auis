@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/viewref.C,v 3.4 1996/09/05 15:20:58 robr Exp $";
-#endif
-
-
- 
-
-
 ATK_IMPL("viewref.H")
 #include <dataobject.H>
 #include <viewref.H>
@@ -69,7 +59,7 @@ viewref::~viewref()
     }
 }
 
-class viewref *viewref::Create(char  *viewType, class dataobject  *dataObject)
+class viewref *viewref::Create(const char  *viewType, class dataobject  *dataObject)
 {
     class viewref *newvr;
     

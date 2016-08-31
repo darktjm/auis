@@ -1,5 +1,3 @@
-# $Id$
-
 # ATK initializations (all applications)
 
 include /usr/itc/tools/lib/global.atkinit

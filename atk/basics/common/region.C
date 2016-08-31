@@ -23,21 +23,13 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/region.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
 
  
-
-
+#include <andrewos.h>
 ATK_IMPL("region.H")
 #include <point.h>
 #include <rect.h>
@@ -53,9 +45,6 @@ ATK_IMPL("region.H")
 
 
 ATKdefineRegistry(region, ATK, NULL);
-#ifndef NORCSID
-#endif
-
 
 void region::XorRegion(class region  * RHS, class region  * Result)
 {

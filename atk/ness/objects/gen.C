@@ -21,12 +21,6 @@
  * 
  *  $
 \* ********************************************************************** */
-#include <andrewos.h>	/* for bzero() */
-
-#ifndef NORCSID
-static UNUSED const char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/gen.C,v 1.11 1995/12/07 16:41:27 robr Stab74 $";
-#endif
-
 /* 
 	gen.c  -  generate interpreter code for ness
 
@@ -149,6 +143,7 @@ static UNUSED const char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/
  * Initial creation by WJHansen
  * 
 */
+#include <andrewos.h>	/* for bzero() */
 #include <ctype.h>
 
 #include <text.H>
@@ -161,8 +156,8 @@ static UNUSED const char *rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/
 /* functions declared FORWARD and not yet defined */
 static class nesssym *ForwardFuncs = NULL;   
 
-/* defining instance for declaration in compdefs.hn */
-char *TypeName[/* Texpr */] = {
+/* defining instance for declaration in ness.hn */
+const char * const TypeName[/* Texpr */] = {
 	"list-end", 
 	"integer", 
 	"boolean", 
@@ -200,7 +195,7 @@ static TGlobRef allocSysGlob(long  erroff, class ness  *theNess);
 static TGlobRef allocSysMark(long erroff, class ness *theNess);
 void  deallocSysGlobs(TGlobRef  ind);
 class nessmark * makeFunction(TGlobRef  *loc);
-TGlobRef makeConst(char  *s);
+TGlobRef makeConst(const char  *s);
 long BackSlashReduce(register class text  *text);
 TGlobRef makeStyledConst(class text  *text, long  pos , long  len, boolean  bsReduce);
 TGlobRef makeGlobal();
@@ -383,7 +378,7 @@ makeFunction(TGlobRef  *loc)  {
 	returns an index into ness_Globals
 */
 	TGlobRef
-makeConst(char  *s) {
+makeConst(const char  *s) {
 	TGlobRef loc = allocSysMark(0, NULL);
 	if (loc == 0 || curComp->Locating) 
 		return 0;
@@ -1397,7 +1392,7 @@ genParmDecl(class nesssym  *sym  , Texpr  type) {
 	void
 genCheckEndtag(class nesssym  *tag, long  desired) {
 	long tagtok;
-	char *desiredname;
+	const char *desiredname;
 	char buf[300];
 	char constructForTag;
 
@@ -1428,7 +1423,7 @@ genCheckEndtag(class nesssym  *tag, long  desired) {
 	if (desiredname != NULL)  {
 		sprintf(buf, "*Should be:   end %s.  Trying to fix by inventing ends.\n", 
 				desiredname);
-		ReportError(freeze(buf), -1);
+		ReportError(strdup(buf), -1);
 	}
 	while (pssp->construct != constructForTag
 			&& pssp->construct != 'X'

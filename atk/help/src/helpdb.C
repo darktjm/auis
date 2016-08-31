@@ -25,24 +25,11 @@
 //  $
 */
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/help/src/RCS/helpdb.C,v 1.9 1996/02/09 19:37:26 susan Stab74 $";
-#endif
-
-/* $ACIS$ */
-
- 
-
-#ifdef CCH
 /*	Modified 1/19/90 CCH cch@mtgzx.att.com
  *	Fixed so that help files that have upper case charactrers can be found.
  *	The name being searched for is lowercased in help.c, but when it is
  *	looking for a man file, it does not lowercase the filenames.
  */
-#endif
 
 /*---------------------------------------------------------------------------*/
 /*	MODULE: helpdb.c						     */
@@ -50,6 +37,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 /*		matching algorithms.					     */
 /*---------------------------------------------------------------------------*/
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("helpdb.H")
 
 #include <andyenv.h>
@@ -124,13 +112,13 @@ static struct helpDir *firstHelpDirs = NULL;
 static class cursor *waitCursor; /* the watch cursor */
 
 /* list of "good" file extensions */
-static char *file_ext_array[] = FILE_EXTS;
+static const char * const file_ext_array[] = FILE_EXTS;
 
 /* the directory to store "missing" files in */
-static char *missing_dir = MISSINGDIR;
+static const char missing_dir[] = MISSINGDIR;
 
-static char *err_server = "Sorry; a file server is down.";
-static char *err_index2 = "Sorry; index cannot be found";
+static const char err_server[] = "Sorry; a file server is down.";
+static const char err_index2[] = "Sorry; index cannot be found";
 
 
 
@@ -503,7 +491,7 @@ static void ComputeMetric(register struct helpFile  *ah)
 {
     register char *extension;
     register char *tf;
-    register char **defptr;
+    register const char * const *defptr;
     register int metric;
 
     metric = 0;
@@ -870,7 +858,7 @@ static struct helpFile *SetupHelpAux(register const char  *aname, int  strip			/
 
     for(thd = firstHelpDirs; thd; thd = thd->next) {
 	char *tmp;
-	char *subdir = MANSUBS;
+	const char *subdir = MANSUBS;
 	char dir[MAXPATHLEN];
 
 	tmp = strrchr(thd->dirName, '/');

@@ -25,19 +25,13 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/suite/RCS/suitetapp.C,v 1.6 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**********************************\
 **                                **
 **  suite CLIENT/TEST PROGRAM     **
 **                                **
 \**********************************/
 
+#include <andrewos.h>
 ATK_IMPL("suitetapp.H")
 #include <frame.H>
 #include <im.H>
@@ -62,8 +56,6 @@ ATK_IMPL("suitetapp.H")
 	     
   
 ATKdefineRegistry(suitetapp, application, NULL);
-#ifndef NORCSID
-#endif
 class view * Change_Test( class suitetapp  *self );
 class view * First_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
 class view * Last_Test( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks );
@@ -79,7 +71,7 @@ class view * Alphabet_Sort( class suitetapp  *self, class suite  *suite, struct 
           
 
 #define NUM_NAMES 27
-static char *names[NUM_NAMES] = {
+static const char * const names[NUM_NAMES] = {
   "Adams, Joe",	
   "Brown, Sally",   
   "Crandall, Harry",
@@ -109,11 +101,11 @@ static char *names[NUM_NAMES] = {
   NULL
 };
 
-static char *alphabet[] =
+static const char * const alphabet[] =
   { "A","B","C","D","E","F","G","H","I","J","K","L","M",
     "N","O","P","Q","R","S","T","U","V","W","X","Y","Z", NULL };
 
-static char *list_items[] = {
+static const char * const list_items[] = {
     "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
     "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
     "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC",
@@ -569,7 +561,7 @@ suitetapp::Start( )
   long id;
   register class im *im;
   register class frame *framep;
-  static char instructions[] = "Use the Buttons to step through the tests.";
+  static const char instructions[] = "Use the Buttons to step through the tests.";
 
   if(debug)
       (this)->SetFork(FALSE);
@@ -723,7 +715,7 @@ RW_Hit_Handler( class suitetapp  *self, class suite  *suite, struct suite_item  
 class view *
 Text_Object_Handler( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type )
         {
-  static char words[]= "Hello.  I am a Text Inset; just tickle me to make yourself a believer.  I am not showing myself with a Scrollbar, for I feel that would impinge upon your view of this textual material.  Further, I am seen only as plain text, because that is all I was born with (if my creator had elected to read me from a file, or do the necessary text-operations, I could have Bold, and all the formatted styles.)";
+  static const char words[]= "Hello.  I am a Text Inset; just tickle me to make yourself a believer.  I am not showing myself with a Scrollbar, for I feel that would impinge upon your view of this textual material.  Further, I am seen only as plain text, because that is all I was born with (if my creator had elected to read me from a file, or do the necessary text-operations, I could have Bold, and all the formatted styles.)";
   ((class text *) (suite)->ItemDataObject( item))->InsertCharacters( 0, words, sizeof(words) - 1);
   return(0);
 }
@@ -739,7 +731,7 @@ class view *
 Alphabet_Sort( class suitetapp  *self, class suite  *suite, struct suite_item  *item, long  type, enum view_MouseAction  action, long  x , long  y , long  clicks ) 
             {
   static long sort = suite_Ascend;
-  static char *sorted, *forward = "Sorted Ascending",
+  static const char *sorted, *forward = "Sorted Ascending",
   *backward = "Sorted Descending";
 
   if(action == view_RightUp) {

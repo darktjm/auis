@@ -1,5 +1,3 @@
-static char *getstats_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/atkbook/con/RCS/getstats.c,v 1.2 1993/06/30 05:04:24 rr2b Stab74 $";
-
 /* **************************************************** *\
 Copyright 1989 Nathaniel S. Borenstein
 Permission to use, copy, modify, and distribute this software and its

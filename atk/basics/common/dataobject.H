@@ -62,7 +62,7 @@ public:
     virtual long WriteOtherFormat(FILE *file, long writeid, int level, int usagetype, char *boundary)  ;
     virtual long GetModified()  ;
     virtual void SetModified();
-    virtual char * ViewName()  ;
+    virtual const char * ViewName()  ;
     virtual void SetAttributes(struct attributes *attributes);
     virtual void Put( class atom * property, class atom * type, long rock );
     virtual short Get( class atom * property, class atom ** type, long * rock )

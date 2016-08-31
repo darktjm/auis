@@ -21,10 +21,6 @@
 */
 
 #include <andrewos.h>
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/launchapp/RCS/launchapp.C,v 1.16 1995/11/07 20:17:10 robr Stab74 $";
-#endif
 ATK_IMPL("launchapp.H")
 #include <stdio.h>
 #include <string.h>
@@ -78,10 +74,6 @@ enum lpair_type {
    
  
 ATKdefineRegistry(launchapp, application, NULL);
-#ifndef NORCSID
-#endif
-#ifdef USE_CLOCK
-#endif /* USE_CLOCK */
 static class lpair *lpair_AddSplit(class lpair  *lp, class view  *v, enum lpair_side  side, enum lpair_dir  splitdir, enum lpair_type  splittype, 				    long  splitval, boolean  movable);
 static void ZombieHandler(int  pid, long  rock, int  *status);
 static void Do(const char  *name, class frame  *frame, long  index, const char  **args);
@@ -98,8 +90,8 @@ static void YaGotMe(int  signal, class launchapp  *self);
 
 
 typedef void (*progfptr)(class launchapp *, class pushbutton *, long);
-static struct buttoninfo {
-    char *label, *text;
+static struct buttoninfo { /* pid is modified below */
+    const char *label, *text;
     progfptr fn;
     int pid;
 } Buttons[] = {
@@ -197,7 +189,7 @@ static void Do(const char  *name, class frame  *frame, long  index, const char  
 }
 
 
-static char *Bin(char  *str)
+static const char *Bin(const char  *str)
 {
     static char buf[1024];
     const char *bin=environ::AndrewDir("/bin/");

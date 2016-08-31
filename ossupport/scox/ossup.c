@@ -25,13 +25,8 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ossupport/scox/RCS/ossup.c,v 1.1 1993/11/16 20:15:48 gk5g Stab74 $";
-#endif
-
-#include <stdio.h>
 #include <andrewos.h>
+#include <stdio.h>
 
 #ifdef M_UNIX
 #include <sys/param.h>

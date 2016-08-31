@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RCS/vuipnl.c,v 1.2 1996/03/11 19:21:12 robr Stab74 $";
-#endif
-
 /* 
  *      This module defines, and responds to input from, the
  *      main VUI panel.

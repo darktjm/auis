@@ -163,7 +163,7 @@ ATKdefineRegistry(fbm, image, NULL);
 static int fbmin_open_image(FILE  *s);
 static int fbmin_close_file();
 static int fbmin_image_test();
-static void tellAboutImage(char  *name);
+static void tellAboutImage(const char  *name);
 
 
 static int fbmin_open_image(FILE  *s)
@@ -282,14 +282,14 @@ static int fbmin_image_test()
  * descriptive but I don't care
  */
 
-static void tellAboutImage(char  *name)
+static void tellAboutImage(const char  *name)
      {
   printf("%s is a %dx%d FBM image with %d colors\n", name,
     fbmin_img_width, fbmin_img_height, fbmin_img_clrlen / 3);
 }
 
 int
-fbm::Load( char  *fullname, FILE  *fp )
+fbm::Load( const char  *fullname, FILE  *fp )
             { 
   FILE *f;
   register int x, y, j, k, rowlen, plnlen;
@@ -360,7 +360,7 @@ fbm::Load( char  *fullname, FILE  *fp )
 }
 
 int 
-fbm::Ident( char  *fullname )
+fbm::Ident( const char  *fullname )
         {
   FILE        *f;
   unsigned int  ret;
@@ -393,7 +393,7 @@ fbm::Write( FILE  *file, long  writeID, int  level )
 }
 
 long
-fbm::WriteNative( FILE  *file, char  *filename )
+fbm::WriteNative( FILE  *file, const char  *filename )
             {
 return(0);
 }

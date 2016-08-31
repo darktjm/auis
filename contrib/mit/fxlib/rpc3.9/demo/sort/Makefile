@@ -1,6 +1,3 @@
-#
-# @(#)Makefile	1.4 87/11/30 3.9 RPCSRC
-#
 
 BIN =  rsort sort_svc
 GEN = sort_clnt.c sort_svc.c sort_xdr.c sort.h

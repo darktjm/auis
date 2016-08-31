@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/utils/nntp/lib/RCS/nntppoll.c,v 1.40 1996/02/09 19:37:26 susan Stab74 $";
-#endif
-
 /*
  * Obtains all articles in the groups from the distributions specified
  * by GRP and DEST by polling a given server. All articles that are
@@ -246,7 +241,7 @@ register int *nfiles, *err, onlyDirs;
 {
     DIR *dp;
     register DIRENT_TYPE *ent;
-    static char msg[] = "Out of storage (%d) in GetDirEntries for \"%s\"";
+    static const char msg[] = "Out of storage (%d) in GetDirEntries for \"%s\"";
     register FileList *files;
     register int fsize;	    /* Max # slots in files array */
     register int i;

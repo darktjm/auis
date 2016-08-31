@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>	/* index */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/config.c,v 2.24 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
- 
-
 #include <stdio.h>
 #include <andyenv.h>	/* LOCAL_ANDREW_SETUP_ENV */
 #include <system.h>	/* LOCAL_ANDREW_SETUP_ENV */

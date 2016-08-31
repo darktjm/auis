@@ -39,7 +39,7 @@ public:
   colormap();
   virtual ~colormap();
 
-  char * ViewName();
+  const char * ViewName();
 
   virtual int SetColor(class color *color, boolean needpixel)  ;
   virtual class color * LookupColor(const char *name, unsigned int red, unsigned int green, unsigned int blue, boolean needpixel)  ;

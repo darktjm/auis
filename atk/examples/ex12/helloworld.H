@@ -5,7 +5,6 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/examples/ex12/RCS/helloworld.H,v 1.2 1994/11/30 20:42:06 rr2b Stab74 $ */
 /* Mouse drag, key bindings, menus, scrollbar, data object, read/write */
 
 #define POSUNDEF (-1)

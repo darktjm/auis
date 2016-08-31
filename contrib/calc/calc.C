@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/calc/RCS/calc.C,v 1.3 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
-
 /*
     $Log: calc.C,v $
  * Revision 1.3  1995/11/07  20:17:10  robr
@@ -98,10 +92,6 @@ END-SPECIFICATION  ************************************************************/
 
 
 ATKdefineRegistry(calc, apt, NULL);
-#ifndef NORCSID
-#endif
-#ifndef lint
-#endif
 static void Reader( register class calc	    	      *self );
 static void Writer( register class calc		      *self );
 
@@ -125,7 +115,7 @@ calc::~calc( )
   OUT(calc_FinalizeObject);
   }
 
-char *
+const char *
 calc::ViewName( )
     {
   IN(calc_ViewName);

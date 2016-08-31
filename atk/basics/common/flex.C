@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/flex.C,v 1.7 1996/01/31 19:37:39 robr Stab74 $";
-#endif
-
 /* flex.c		
 
 	Code for the flex data object
@@ -96,6 +89,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * Revision 1.0  94/08/16  13:10:48  wjh
  */
 
+#include <andrewos.h>
 ATK_IMPL("flex.H")
 #include <flex.H>
 
@@ -241,7 +235,7 @@ flex &flex::operator=(const flex &src) {
 /* Returns a reference to the ith element 
 */
 char & flex::operator[]( size_t i )  /* throw(int) */ {
-    if (i < 0 || i >= n || elts==NULL) /* throw(i) */ {
+    if (/* i < 0 || */ i >= n || elts==NULL) /* throw(i) */ {
 	fprintf(stderr, "flex[0...%lu] access to non-existent elt %lu\n",
 		n, i);
 	return elts[gaploc];	/* UGHHH */
@@ -260,7 +254,7 @@ const char & flex::operator[]( size_t i ) const  /* throw(int) */ {
 */
 	char *
 flex::Insert( size_t i, size_t len )  {
-	if (i < 0) i = 0;
+	/* if (i < 0) i = 0; */
 	if (i > n) i = n;
 	MakeGap(i, len );
 	n += len;  gaplen -= len;
@@ -273,7 +267,7 @@ flex::Insert( size_t i, size_t len )  {
 */
 	void
 flex::Remove( size_t i, size_t len ) {
-	    if (i < 0 || i >= n) return;
+	    if (/* i < 0 || */ i >= n) return;
 	    if (i+len > n) len = n-i;
 
 	    if (i <= gaploc && i+len >= gaploc) {
@@ -317,7 +311,7 @@ flex::Find( const char &o ) const {
 	char *
 flex::GetBuf( size_t i, size_t len, size_t *gotlenp ) {
 	if(elts==NULL) return NULL;
-	if (i < 0) i = 0;
+	/* if (i < 0) i = 0; */
 	if (i+len > n) len = n-i;
 	if (gaploc <= i) {
 		*gotlenp = n-i;

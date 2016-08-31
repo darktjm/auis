@@ -1,5 +1,3 @@
-/* @(#)auth.h	1.2 87/11/23 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -50,8 +48,6 @@
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-/*      @(#)auth.h 1.16 87/10/01 SMI      */
-
 /*
  * auth.h, Authentication interface.
  *

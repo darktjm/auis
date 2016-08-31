@@ -22,13 +22,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/controllers/RCS/pcontrol.C,v 1.6 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
@@ -36,6 +29,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
  
 /* user code ends here for HeaderInfo */
+#include <andrewos.h>
 ATK_IMPL("pcontrol.H")
 
 #include <proctable.H>
@@ -75,10 +69,6 @@ struct nh {
 float arr[61];
 
 ATKdefineRegistry(pcontrol, ATK, pcontrol::InitializeClass);
-#ifndef NORCSID
-#endif
-#if defined (sys_rt_r3) || defined (sys_rt_aos4)
-#endif /* defined (sys_rt_r3) || defined (sys_rt_aos4) */
 void setbl(struct spk_blk  *b,float  freq);
 void play(char  *buf,int  Speed);
 static class pcontrol *FindSelf(class view  *v);
@@ -159,7 +149,7 @@ void play(char  *buf,int  Speed)
 #define closespk() close(sp)
 
 static int masks[] = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096 };
-char *names[] = { "","C","C#","D","D#","E","F","F#","G","G#","A","A#","B","C" };
+static const char * const names[] = { "","C","C#","D","D#","E","F","F#","G","G#","A","A#","B","C" };
 /* user code ends here for includes */
 
 static class pcontrol *firstpcontrol;

@@ -25,23 +25,13 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/eq/RCS/eq.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * eq.c
  * This module handles the eq data object.
  */
 
 
-
+#include <andrewos.h>
 ATK_IMPL("eq.H")
 #include "eq.H"
 
@@ -50,13 +40,11 @@ ATK_IMPL("eq.H")
 
 #define SIZE 10
 
-static char *init_string = "{ lpile d_eqstyle { zilch ^} }";
+static const char init_string[] = "{ lpile d_eqstyle { zilch ^} }";
 
 /* Create a new equation */
 
 ATKdefineRegistry(eq, dataobject, eq::InitializeClass);
-#ifndef NORCSID
-#endif
 #ifdef notyet
 void eq_SetCursor(class eq  *self, long  left , long  top , long  width , long  height);
 void eq_GetCursor(class eq  *self, long  *leftp , long  *topp , long  *widthp , long  *heightp);
@@ -128,7 +116,7 @@ void eq::Insert(long  pos, struct formula  *f)
 
 /* Insert tokens */
 
-long eq::InsertTokens(long  pos, char  *s)
+long eq::InsertTokens(long  pos, const char  *s)
 {
     char buf[100], *p;
     int inserted = 0;
@@ -163,23 +151,27 @@ long eq::InsertTokens(long  pos, char  *s)
     return inserted;
 }
 
+/* generally useful.  Initialized in eqview_InitializeClass. */
+const struct symbol *eq_zilch;
+const struct symbol *eq_root;
+
 /*
  * Take account of zilches when inserting.
  * Caution: a near copy of this is in eqview_Paste, but
  * the two are inconsistent wrt scripted zilches.
  */
 
-long eq::InsertTokensCarefully(long  pos, char  *s)
+long eq::InsertTokensCarefully(long  pos, const char  *s)
 {
     long evenup = 0, inserted = 0;
     short zilch_removed = 0;
     struct formula *f;
 
-    if ((f = (this)->Access( pos)) != NULL && f->symbol == zilch) {
+    if ((f = (this)->Access( pos)) != NULL && f->symbol == eq_zilch) {
 	(this)->Delete( pos);
 	zilch_removed = 1;
     }
-    if ((f = (this)->Access( pos-1)) != NULL && f->symbol == zilch) {
+    if ((f = (this)->Access( pos-1)) != NULL && f->symbol == eq_zilch) {
 	(this)->Delete( --pos);
 	zilch_removed = 1;
 	evenup = 1;
@@ -226,7 +218,7 @@ long eq::DeleteCarefully(long  start , long  stop)
 
     /* remember whether we deleted a zilch */
     f = (this)->Access( stop-1);
-    was_zilch = (f != NULL && f->symbol == zilch);
+    was_zilch = (f != NULL && f->symbol == eq_zilch);
 
     /* eliminate unmatched groups */
     i = start;
@@ -265,7 +257,7 @@ long eq::DeleteCarefully(long  start , long  stop)
 	    for (i=b+1;  i<e;  i++) {
 		register struct formula *f = (this)->Access( i);
 		if (f->symbol->type!=END && f->has_hot_spot
-		  && f->symbol != zilch)
+		  && f->symbol != eq_zilch)
 		    break;
 	    }
 	    if (i==e) {
@@ -296,13 +288,13 @@ long eq::DeleteCarefully(long  start , long  stop)
  * inserts string and returns new position.
  */
 
-long eq::DoScript(long  pos, enum script  script, char  *string)
+long eq::DoScript(long  pos, enum script  script, const char  *string)
 {
     long i, added, found = -1;
 
     for (i=pos-1; ; i--) {
 	struct formula *f = (this)->Access( i);
-	if (f->symbol == zilch)
+	if (f->symbol == eq_zilch)
 	    return pos;
 	if (f->symbol->type==END)
 	    i = (this)->FindBeginGroup( i);
@@ -603,7 +595,7 @@ long eq::Write(FILE  *file, long  writeid, int  level)
 }
 
 /* Dump info */
-void eq::Dump(char  *name)
+void eq::Dump(const char  *name)
 {
     FILE *file = NULL;
     int n = (this)->Size(), i;
@@ -644,10 +636,10 @@ void eq::Dump(char  *name)
 
 boolean eq::InitializeClass()
 {
-    if (zilch == NULL)
-	zilch = eq::Lookup("zilch");
-    if (root == NULL)
-	root = eq::Lookup("root");
+    if (eq_zilch == NULL)
+	eq_zilch = eq::Lookup("zilch");
+    if (eq_root == NULL)
+	eq_root = eq::Lookup("root");
 
     return TRUE;
 }

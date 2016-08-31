@@ -1,5 +1,3 @@
-/* @(#)rpc_util.h	1.2 87/11/24 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -50,8 +48,6 @@
  * 2550 Garcia Avenue
  * Mountain View, California  94043
  */
-/* @(#)rpc_util.h 1.6 87/06/24 (C) 1987 SMI */
-
 /*
  * rpc_util.h, Useful definitions for the RPC protocol compiler 
  * Copyright (C) 1987, Sun Microsystems, Inc. 

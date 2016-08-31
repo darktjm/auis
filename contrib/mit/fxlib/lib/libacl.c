@@ -22,17 +22,8 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/lib/RCS/libacl.c,v 1.5 1994/02/01 21:35:12 sa3e Stab74 $";
-#endif
-
 /**********************************************************************
  * Access Control List Library
- *
- * $Author: sa3e $
- * $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/lib/RCS/libacl.c,v $
- * $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/lib/RCS/libacl.c,v 1.5 1994/02/01 21:35:12 sa3e Stab74 $
  *
  * Copyright 1989, 1990 by the Massachusetts Institute of Technology.
  *

@@ -23,10 +23,6 @@
  * 
  *  $
 */
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/batmail/RCS/robin.c,v 1.9 1996/03/15 18:22:08 robr Stab74 $";
-#endif
 /*
  * robin.c -- main service routines for batmail
  * 1 march 1986, Miles Bader

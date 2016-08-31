@@ -133,7 +133,7 @@ vhtonl(unsigned long  lend )
 
 /* ARGSUSED */
 int 
-mcidas::Ident( char  *fullname )
+mcidas::Ident( const char  *fullname )
         { FILE          *f;
   struct area_dir dir ;
   int             r;
@@ -165,7 +165,7 @@ mcidas::Ident( char  *fullname )
 
 
 int
-mcidas::Load( char  *fullname, FILE  *fp )
+mcidas::Load( const char  *fullname, FILE  *fp )
             { FILE          *f;
   struct area_dir  dir;
   struct navigation  nav;
@@ -256,7 +256,7 @@ mcidas::Write( FILE  *file, long  writeID, int  level )
 }
 
 long
-mcidas::WriteNative( FILE  *file, char  *filename )
+mcidas::WriteNative( FILE  *file, const char  *filename )
             {
 return(0);
 }

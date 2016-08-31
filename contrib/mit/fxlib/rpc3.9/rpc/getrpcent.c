@@ -1,5 +1,3 @@
-/* @(#)getrpcent.c	1.4 87/11/13 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,15 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/rpc/RCS/getrpcent.c,v 1.3 1992/12/15 21:53:58 rr2b Stab74 $";
-#endif
-
-#if !defined(lint) && defined(SCCSIDS)
-static  char sccsid[] = "@(#)getrpcent.c 1.9 87/08/11  Copyr 1984 Sun Micro";
-#endif
 
 /*
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
@@ -90,7 +79,7 @@ struct	hostent *gethostent();
 char	*inet_ntoa();
 /*static*/	char *index();
 
-static char RPCDB[] = "/etc/rpc";
+static const char RPCDB[] = "/etc/rpc";
 
 static struct rpcdata *
 _rpcdata()

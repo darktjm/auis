@@ -26,7 +26,6 @@ $Disclaimer:
 #include <andrewos.h>
 
 static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/compress.C,v 2.0 1995/01/27 19:38:38 rr2b Stab74 $";
 
 
 #include <environment.H>
@@ -108,7 +107,7 @@ long compress::GetLineForPos(long pos)
 
 /* quickAddView is a ripoff of text_AlwaysAddView, but with all but the bare necessities ripped out of it. It also changes env_WRAPView to env_INSERTView, which is a zillion times faster, but doesn't allow nesting. */
 /* text_AlwaysInsertFile calls dictionary_Insert. I have no idea what that does. I don't call it when I insert a compress object/view, and it seems to work OK, so I just left it out. -RSK*/
-environment *quickAddView(text *self, long pos, char *viewtype, compress *compressobj)
+environment *quickAddView(text *self, long pos, const char *viewtype, compress *compressobj)
 {
     viewref *newviewref=viewref::Create(viewtype, (dataobject *)compressobj);
     char c=TEXT_VIEWREFCHAR;

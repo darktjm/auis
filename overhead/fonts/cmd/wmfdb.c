@@ -25,15 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/fonts/cmd/RCS/wmfdb.c,v 2.7 1992/12/15 21:02:39 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 /* ***************************************************************** */
 
 /*	wmdb		convert a font file to an ASCII file */
@@ -541,7 +532,7 @@ char *s;
 
 /* ************************************************************ */
  
-char ProgramName[] = "wmfdb";
+const char ProgramName[] = "wmfdb";
 
 main(argc, argv)
 int   argc;

@@ -25,16 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/venusmon.C,v 1.7 1996/09/03 19:10:25 robr Exp $";
-#endif
-
-
- 
-
 /* 
  ***************************************************************
  * Routines swiped from mariner for Instrument Console
@@ -42,6 +32,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  ***************************************************************
  */
 
+#include <andrewos.h>
 #include <andyenv.h>
 
 #include <consoleClass.H>
@@ -82,10 +73,6 @@ extern class fontdesc *console10font;
 char OtherVenusStr[150], FetchVenusStr[150], FinishedVenusStr[150];
 extern boolean NonViceHost, NonAFSDHost;
 
-#ifndef NORCSID
-#endif
-#ifdef AFS_ENV
-#endif /* AFS_ENV */
 void IsViceRunning();
 void InitializeMariner(class consoleClass  *self);
 extern "C" int Bind (int  service, char  *host);

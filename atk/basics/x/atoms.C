@@ -23,12 +23,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/x/RCS/atoms.C,v 3.5 1996/01/31 18:41:59 robr Stab74 $";
-#endif
-
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -36,7 +30,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 #include <atoms.h>
 /* Note the order and number of the entries below should be reflected in the atom #defines in atoms.h */
-static char *atomnames[]={
+static const char * const atomnames[]={
     "ATK",
     "INCOMING",
     "TARGETS",

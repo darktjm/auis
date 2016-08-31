@@ -25,14 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>	/* for strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/ness.C,v 1.11 1995/12/07 16:41:27 robr Stab74 $";
-#endif
-
-
 /*
  *    $Log: ness.C,v $
  * Revision 1.11  1995/12/07  16:41:27  robr
@@ -155,6 +147,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * Copied from /usr/andrew/lib/dummy
  */
 
+#include <andrewos.h>	/* for strings.h */
 ATK_IMPL("ness.H")
 #include <ctype.h>
 #include <pwd.h>
@@ -206,7 +199,7 @@ static boolean debug;
 ATKdefineRegistry(ness, text, ness::InitializeClass);
 
 static void releaseResources(class ness  *self);
-static struct errornode * execute(class ness  *self, char  *func);
+static struct errornode * execute(class ness  *self, const char  *func);
 static char * ThisUser();
 static char * udate(class ness  *self, const char *d, const char *n);
 static void ResetOrigin(class ness  *self);
@@ -252,7 +245,7 @@ releaseResources(class ness  *self) {
 }
 
 	static struct errornode *
-execute(class ness  *self, char  *func) {
+execute(class ness  *self, const char  *func) {
 
 	class nesssym *funcsym;
 	ENTER(execute);
@@ -270,7 +263,7 @@ execute(class ness  *self, char  *func) {
 		char buf[200];
 		sprintf(buf, "*Couldn't find %s\n", func);
 		return (self->ErrorList = 
-			errornode_Create(self, 0, 0, 0, freeze(buf), TRUE, self->ErrorList));
+			errornode_Create(self, 0, 0, 0, strdup(buf), TRUE, self->ErrorList));
 	}
 	if (self->ErrorList == NULL)
 		self->ErrorList = callInitAll(self);	/* sigh XXX check all libraries */
@@ -301,7 +294,7 @@ execute(class ness  *self, char  *func) {
 	static char *
 ThisUser() {
 
-	char *login = NULL, *name = NULL;
+	const char *login = NULL, *name = NULL;
 	struct CellAuth *thiscell;
 	long uid, n;
 	struct passwd *pw;
@@ -331,9 +324,9 @@ ThisUser() {
 		}
 	}
 	if (login == NULL)
-		login = (char *)"???";
+		login = "???";
 	if (name == NULL)
-		name = (char *)"Unknown user";
+		name = "Unknown user";
 
 	strcpy(buf, login);
 	strcat(buf, ":  ");
@@ -583,7 +576,7 @@ ness::Read(FILE  *file, long  id) {
 	set switch to tell __Read we are reading a template
 */
 	long
-ness::ReadTemplate(char  *templateName, boolean  inserttemplatetext) {
+ness::ReadTemplate(const char  *templateName, boolean  inserttemplatetext) {
 
 	long val;
 	this->ReadingTemplate = TRUE;
@@ -638,8 +631,8 @@ ness::GetOriginData(char  **date , char  **author) {
 
 	start = strchr(origin, '\\');
 	if (start == NULL) {
-		*date = freeze("(unknown date)");
-		*author = freeze("(unknown author)");
+		*date = strdup("(unknown date)");
+		*author = strdup("(unknown author)");
 		return;
 	}
 
@@ -812,9 +805,9 @@ ness::EstablishViews(class view  *child) {
 	struct errornode *
 ness::Compile() {
 
-	static char *RedMsg = 
+	static const char RedMsg[] = 
 		":You must Empower this Ness before trying to compile";
-	static char *RecurMsg = 
+	static const char RecurMsg[] =
 		":Ness cannot compile while an execution is in progress";
 	
 	ENTER(::Compile);
@@ -858,7 +851,7 @@ ness::Compile() {
 }
 
 	struct errornode *
-ness::Execute(char  *func) {
+ness::Execute(const char  *func) {
 
 	return execute(this, func);
 }
@@ -910,8 +903,8 @@ dostmt(class view  *parentview) {
 	char stmt [1025];
 	char def[1025];
 	char prompt[200];
-	static char prefix [] = "function main()";
-	static char suffix [] = ";end function;";
+	static const char prefix [] = "function main()";
+	static const char suffix [] = ";end function;";
 	struct errornode *success;
 
 	(tempNess)->EstablishViews( parentview);
@@ -1201,7 +1194,7 @@ ness::AddWarningText() {
 	/* process each character of the warning text */
 	for (i = 0; i < len; i++) {
 		char c = (t)->GetChar( i);
-		char *codex;
+		const char *codex;
 		if (c != '$') 
 			continue;
 
@@ -1221,7 +1214,7 @@ ness::AddWarningText() {
 			this->CompileButtonLoc = loc;
 			break;
 		case 'd':
-			codex = (char *)"date";
+			codex = "date";
 			while (*++codex) {
 				i++;
 				if (*codex != (t)->GetChar( i)) break;
@@ -1235,7 +1228,7 @@ ness::AddWarningText() {
 			}
 			break;
 		case 'n':
-			codex = (char *)"name";
+			codex = "name";
 			while (*++codex) {
 				i++;
 				if (*codex != (t)->GetChar( i)) break;
@@ -1249,7 +1242,7 @@ ness::AddWarningText() {
 			}
 			break;
 		case 's':
-			codex = (char *)"script";
+			codex = "script";
 			while (*++codex) {
 				i++;
 				if (*codex != (t)->GetChar( i)) break;
@@ -1396,7 +1389,7 @@ ness::printerrors(FILE  *file) {
 	return number of errors found
 */
 	long
-ness::PrintAllErrors(char  *when) {
+ness::PrintAllErrors(const char  *when) {
 
 	ATKinit;
 
@@ -1423,7 +1416,7 @@ ness::PrintAllErrors(char  *when) {
    returns NULL if there is none such
 */
 	union stackelement *
-ness::GetVarAddr(char  *var) {
+ness::GetVarAddr(const char  *var) {
 
 	class nesssym *s;
 	char tnm[100];

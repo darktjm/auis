@@ -43,7 +43,7 @@ public:
        long Read(FILE *file, long id)  ;
        long ReadSubString(long pos, FILE *file, boolean quoteCharacters)  ;
        long Write(FILE *file, long writeID, int level)  ;
-       char * ViewName()  ;
+       const char * ViewName()  ;
        void Clear();
        void ClearCompletely();
     
@@ -54,7 +54,7 @@ public:
 	static boolean InitializeClass();
 	static boolean atk_inited;
 
-      static boolean ReadIntoText(class text *d, FILE *fp, int Mode, char *ContentTypeOverride, int *len, boolean IsReallyTextObject, int *bodystart, int *ignorepos, class text *auxheadtext)  ;
+      static boolean ReadIntoText(class text *d, FILE *fp, int Mode, const char *ContentTypeOverride, int *len, boolean IsReallyTextObject, int *bodystart, int *ignorepos, class text *auxheadtext)  ;
       static void ResetGlobalStyle(class text *t);
     
       class style *InstructionsStyle, *BigBoldStyle;

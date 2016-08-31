@@ -26,23 +26,12 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/icon.C,v 1.2 1993/05/30 14:47:01 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include "dataobject.H"
 #include "dictionary.H"
 #include "icon.H"
 
 
 ATKdefineRegistry(icon, dataobject, icon::InitializeClass);
-#ifndef NORCSID
-#endif
 static long check_for_title(class icon  * self, FILE  * file);
 
 
@@ -156,7 +145,7 @@ icon::Write(FILE  *file, long  writeID, int  level)
 
 static long check_for_title(class icon  * self, FILE  * file)
 {
-    char * match = "title{";
+    const char * match = "title{";
     char title[1024];
     int c;
     int x;
@@ -203,7 +192,7 @@ icon::Read(FILE  * file,long  id)
     long x,y,haschild;
     long objectid;
     int c;
-    char * match;
+    const char * match;
     char datatype[1024];
     class dataobject * newobject;
     long status;

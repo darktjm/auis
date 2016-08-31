@@ -25,17 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/rasterio.C,v 1.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 /*  rasterio.c
 
 	rasterio package
@@ -47,6 +36,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 		We could fix ReadRow to not check length before each code byte.
 
  */
+#include <andrewos.h>
 ATK_IMPL("rasterio.H")
 #include <stdio.h>
 
@@ -93,9 +83,6 @@ static unsigned char hex[16] = {
 */
 	
 ATKdefineRegistry(rasterio, ATK, NULL);
-#ifndef NORCSID
-#endif
-
 
 void
 rasterio::WriteRow(FILE  *file, unsigned char *byteaddr, long  nbytes)

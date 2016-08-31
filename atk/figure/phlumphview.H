@@ -23,8 +23,6 @@ ATK_INTER
  * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  * 
  *  $
-
-  $Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/phlumphview.H,v 1.1 1995/03/23 21:09:49 Zarf Stab74 $
 */
 
 #include <view.H>
@@ -49,7 +47,7 @@ class phlumphview : public view {
     void PostMenus(class menulist *ml);
     void PostKeyState(class keystate *ks);
     class view *Hit(enum view_MouseAction action, long x, long y, long numberOfClicks);
-    void *GetPSPrintInterface(char *printtype);
+    void *GetPSPrintInterface(const char *printtype);
 
     class menulist *Menus;
     class keystate *Keystate;

@@ -142,7 +142,7 @@ static void IMG_WriteByte (unsigned char c,register int  cols,unsigned int bpl);
 
 
 int 
-img::Ident( char  *fullname)
+img::Ident( const char  *fullname)
         {
 	FILE *f;				/* Input file */
 	IMG_Header header;			/* GEM Image header info */
@@ -171,7 +171,7 @@ img::Ident( char  *fullname)
 */
 
 int
-img::Load ( char  *fullname, FILE  *fp )
+img::Load ( const char  *fullname, FILE  *fp )
             {
 	register int i;				/* Random index */
 	FILE *f;				/* Input file */
@@ -416,7 +416,7 @@ img::Write( FILE  *file, long  writeID, int  level )
 }
 
 long
-img::WriteNative( FILE  *file, char  *filename )
+img::WriteNative( FILE  *file, const char  *filename )
             {
 return(0);
 }

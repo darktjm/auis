@@ -25,18 +25,12 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/typescript/RCS/fcomp.C,v 1.7 1996/10/29 21:44:20 robr Exp $";
-#endif
-
 /* fcomp.c -- typescript package to perform filename completion
   * David Anderson
   * August 1988
   */
 
+#include <andrewos.h>
 ATK_IMPL("fcomp.H")
 #include <ctype.h>
 
@@ -80,8 +74,6 @@ static proctable_fptr typescript_GrabLastCmd;
 
 
 ATKdefineRegistry(fcomp, ATK, fcomp::InitializeClass);
-#ifndef NORCSID
-#endif
 void CompleteFname(register class typescript  *ts, long  key);
 static void GatherStats(struct helpstat  *rock, enum message_HelpItem  itemtype, char  *item, long  dummy /* along for the ride */);
 static void MakeReport(struct repCookie  *cookie, enum message_HelpItem  itemtype, char  *item, long  dummy /* along for the ride */);
@@ -105,7 +97,7 @@ void CompleteFname(register class typescript  *ts, long  key)
     char buffer[MAXPATHLEN];
     char canonical[MAXPATHLEN];
     register char *insert;
-    char *msg = NULL;
+    const char *msg = NULL;
     long c;
     long tlen = (theText)->GetLength();
     long cStart = (ts->cmdStart)->GetPos();
@@ -300,7 +292,7 @@ void PossibleCompletions(register class typescript  *ts, long  key)
     else {
 	if(pathname[pathlen-1] == '/') rock.refusedot = TRUE;
     }
-    completion::FileHelp((*pathname) ? pathname : (char *)"./", 0, (message_workfptr)GatherStats, (long) &rock);
+    completion::FileHelp((*pathname) ? pathname : "./", 0, (message_workfptr)GatherStats, (long) &rock);
 
     if(rock.errorcnt || rock.itemcnt == 0) {
 	message::DisplayString(ts, 0, "[No Match]");
@@ -335,7 +327,7 @@ void PossibleCompletions(register class typescript  *ts, long  key)
 	cookie.maxwidthinpix = 0;
 	cookie.report = (char**) calloc(rock.itemcnt, sizeof(char*));
 
-	completion::FileHelp((*pathname) ? pathname : (char *)"./", 0, (message_workfptr)MakeReport, (long)&cookie);
+	completion::FileHelp((*pathname) ? pathname : "./", 0, (message_workfptr)MakeReport, (long)&cookie);
 
 	cookie.colwidth = rock.maxitemlen + COLSPACE;
 	cookie.columns = windowwidth / (cookie.maxwidthinpix + charwidth);
@@ -400,7 +392,7 @@ void CompleteTokenWork(register class typescript  *ts, boolean  forward)
     long lastEventCmd;
     char cmd[MAXPATHLEN];
     register long match;
-    char *patcode;
+    const char *patcode;
     long tlen;
     long clen;
     long c;
@@ -538,7 +530,7 @@ void CompleteCmdWork(register class typescript  *ts, boolean  forward)
     long lastEventCmd;
     char cmd[MAXPATHLEN];
     register long match;
-    char *patcode;
+    const char *patcode;
 
     if (ts->pipescript) return;
 

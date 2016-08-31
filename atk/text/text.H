@@ -47,13 +47,13 @@ class text: public  simpletext {
     void Clear();
     long GetModified()  ;
     boolean ReplaceCharacters(long pos, long len, 
-			char *repStr, long replen)  ;
+			const char *repStr, long replen)  ;
     void AlwaysReplaceCharacters(long pos, long len, 
-			char *repStr, long replen);
+			const char *repStr, long replen);
     environment *ReplaceWithView(long pos, long len, 
-			char *viewtype, class dataobject *dataobject);
+			const char *viewtype, class dataobject *dataobject);
     environment *AlwaysReplaceWithView(long pos, long len, 
-			char *viewtype, class dataobject *dataobject);
+			const char *viewtype, class dataobject *dataobject);
     void LengthChanged(long pos, long len);
     long HandleKeyWord(long pos, char *keyword, FILE *file)  ;
     long HandleCloseBrace(long pos, FILE *file)  ;
@@ -68,22 +68,22 @@ class text: public  simpletext {
     void AlwaysDeleteCharacters(long position, long size);
     boolean CheckHighBit()  ;
 
-    virtual class viewref * InsertObject(long pos, char *name,char *viewname)  ;
+    virtual class viewref * InsertObject(long pos, const char *name,const char *viewname)  ;
     virtual class environment * AddStyle(long pos, long len, class style *style)  ; 
-    virtual class environment * AddView(long pos, char *viewtype, class dataobject *dataobject)  ;
+    virtual class environment * AddView(long pos, const char *viewtype, class dataobject *dataobject)  ;
     virtual class environment * AlwaysAddStyle(long pos, long len, class style *style)  ; 
-    virtual class environment * AlwaysAddView(long pos, char *viewtype, class dataobject *dataobject)  ;
+    virtual class environment * AlwaysAddView(long pos, const char *viewtype, class dataobject *dataobject)  ;
     virtual void SetEnvironmentStyle(class environment *envptr, class style *styleptr);
     virtual void SetGlobalStyle(class style *styleptr);
     virtual class style * GetGlobalStyle()  ;
-    virtual long ReadTemplate(char *templateName, boolean inserttemplatetext)  ;
+    virtual long ReadTemplate(const char *templateName, boolean inserttemplatetext)  ;
     virtual class viewref * FindViewreference(long pos, long len)  ;
     virtual long AlwaysInsertFile(FILE * file,const char *filename, long position)  ;
     virtual long InsertFile(FILE * file,const char *filename, long position)  ;
     virtual void ClearCompletely();
     virtual class environment * EnumerateEnvironments(long pos,long len,text_eefptr callBack,long rock)  ;
-    virtual void SetBaseTemplateName(char *name);
-    virtual class environment * AlwaysWrapViewChar(long pos, char *view, class dataobject *dobj)  ;
+    virtual void SetBaseTemplateName(const char *name);
+    virtual class environment * AlwaysWrapViewChar(long pos, const char *view, class dataobject *dobj)  ;
     virtual boolean CopyTextExactly(long pos, class simpletext *srctext, long srcpos, long len)  ;
     virtual void AlwaysCopyTextExactly(long pos, class simpletext *srctext, long srcpos, long len);
     

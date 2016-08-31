@@ -25,13 +25,6 @@
 //  $
 */
 
-#include  <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/tree/RCS/treev.C,v 1.11 1996/03/18 23:09:19 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Tree View-object
@@ -97,6 +90,7 @@ END-SPECIFICATION  ************************************************************/
 
 
 
+#include  <andrewos.h>
 ATK_IMPL("treev.H")
 #include  <graphic.H>
 #include  <observable.H>
@@ -387,8 +381,6 @@ static long treev_bgr, treev_bgg, treev_bgb;
 
 
 ATKdefineRegistry(treev, aptv, NULL);
-#ifndef NORCSID
-#endif
 static void treev_FlipColors(class treev  *self);
 static void treev_RestoreColors(class treev  *self);
 static void SetTreeAttribute( register class treev	      *self, register long		       attribute , register long		       value );
@@ -745,7 +737,7 @@ void Initialize_Graphics( register class treev	      *self )
 	}
 	else (TreeCursor)->SetStandard(  TreeCursorByte );
       }
-    fontdesc::ExplodeFontName( (NodeFontName) ? NodeFontName : (char *)"andysans10b",
+    fontdesc::ExplodeFontName( (NodeFontName) ? NodeFontName : "andysans10b",
 				font_family, sizeof(font_family), &font_type, &font_size );
     NodeFont = fontdesc::Create( font_family, font_type, font_size );
     (Tree)->Apply(  ROOTNODE, (tree_applyfptr)Name_Sizing, (char *)self, NULL );
@@ -1869,7 +1861,7 @@ void Print_Node_Connector( register class treev	       *self, register struct no
   }
 
 void
-treev::Print( register FILE		      *file, register char		      *processor, register char		      *format, register boolean	       level )
+treev::Print( register FILE		      *file, register const char		      *processor, register const char		      *format, register boolean	       level )
 {
     class treev *self=this;
   static struct aptv_print_stream   *print_stream;

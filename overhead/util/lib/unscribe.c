@@ -24,13 +24,6 @@
  *  $
 */
 
-#include <andrewos.h> /* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/unscribe.c,v 1.13 1996/06/24 15:12:06 wjh Exp $";
-#endif
-
 /*
 	unscribe.c -- Remove Andrew datastream formatting.
 
@@ -43,6 +36,7 @@ version of the datastream interpretation.
 
 */
 
+#include <andrewos.h> /* strings.h */
 #include <stdio.h>
 #include <ctype.h>
 #include <util.h>

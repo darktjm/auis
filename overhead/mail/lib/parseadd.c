@@ -25,18 +25,12 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/parseadd.c,v 2.20 1994/10/03 19:42:43 rr2b Stab74 $";
-#endif
-
 /*
 		Subroutines for parsing mail addresses.
 */
 
 
+#include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <parseadd.h>
@@ -136,7 +130,7 @@ int UnparseOneAddress(Addr, Mode, Buffer, Length, Prefix, LineLength)
     return code;
 }
 
-static char DefaultPrefix[] = " ";
+static const char DefaultPrefix[] = " ";
 #define DefaultLineLength	80
 
 /* Globals for unparsing */

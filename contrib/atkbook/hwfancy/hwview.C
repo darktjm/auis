@@ -1,5 +1,3 @@
-static char *hwview_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/atkbook/hwfancy/RCS/hwview.C,v 1.1 1994/05/19 20:43:15 Zarf Stab74 $";
-
 /* **************************************************** *\
 Copyright 1989 Nathaniel S. Borenstein
 Permission to use, copy, modify, and distribute this software and its

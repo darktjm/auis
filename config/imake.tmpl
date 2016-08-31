@@ -6,7 +6,6 @@
 #endif
 #endif
 #include <aconcat.h>
-XCOMM $Id$
 XCOMM==================================================
 XCOMM Copyright IBM Corporation 1988,1991 - All Rights Reserved
 XCOMM Copyright Carnegie Mellon Univ. 1993,1996 - All Rights Reserved
@@ -49,10 +48,6 @@ all::
 .SUFFIXES:
 .SUFFIXES: .PS .o .snf .rtx .C .c .s .spp .y .l .ch .mss .bdf .fb .pcf .i
 
-#ifdef ConstructMFLAGS
-         MFLAGS = -$(MAKEFLAGS)
-#endif /* ConstructMFLAGS */
-
         ALL_INCLUDES = -I. $(LOCALINCLUDES) $(INCLUDES)
         ALL_DEFINES = $(STD_DEFINES) $(DEFINES)
         CPPC_DEFINES = $(STD_CPPC_DEFINES) $(DEFINES)
@@ -77,6 +72,10 @@ XCOMM ##################################################
 XCOMM Back from platform.tmpl
 XCOMM ##################################################
 
+
+#ifdef ConstructMFLAGS
+         MFLAGS = -$(MAKEFLAGS)
+#endif /* ConstructMFLAGS */
 
 INSTMODEFLAGS = -c -m
         INSTUIDFLAGS = $(INSTMODEFLAGS) 4755

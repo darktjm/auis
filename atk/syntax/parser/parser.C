@@ -24,12 +24,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/syntax/parser/RCS/parser.C,v 1.9 1995/06/20 15:52:49 wjh Stab74 $";
-#endif
-
 ATK_IMPL("parser.H")
 
 #include <ctype.h>
@@ -70,10 +64,10 @@ parser::GetCurrentparser() {
 }
 
 	void
-parser::ErrorGuts(int severity, char *severityname, char *msg) {
+parser::ErrorGuts(int severity, const char *severityname, const char *msg) {
 		fprintf(stderr, "%s  %s\n", severityname, msg);
 	if (severity & parser_FREEMSG)
-		free(msg);
+		free((char *)msg);
 }
 
 parser::parser() {
@@ -89,9 +83,9 @@ parser::parser() {
 parser::~parser() { }
 
 	 void
-parser::Error(int  severity, char  *msg) {
+parser::Error(int  severity, const char  *msg) {
 	int tsev = severity & (~parser_FREEMSG);
-	char *name;
+	const char *name;
 	if (tsev > this->maxSeverity)
 		this->maxSeverity = tsev;
 	this->nerrors++;
@@ -114,13 +108,13 @@ parser::Error(int  severity, char  *msg) {
 	 void
 parser::EnumerateReservedWords(parser_enumresfptr handler, void *rock) {
 	int i, nnames;
-	char **names;
+	const char * const *names;
 	char buf[100], *bx;
 
 	nnames = this->tables->num_tokens;
 	names = this->tables->names;
 	for (i = 0; i < nnames; i++) {
-		char *name = *names++;
+		const char *name = *names++;
 		switch (*name) {
 		case '$':
 		case '\'':
@@ -152,13 +146,13 @@ parser::EnumerateReservedWords(parser_enumresfptr handler, void *rock) {
 	Typical strings:  "function", "setID", "tokNULL", "'a'", "\":=\""  
 */
 	 int
-parser::TokenNumberFromName(char  *name) {
+parser::TokenNumberFromName(const char  *name) {
 	int i, nnames, nmlen = strlen(name);
-	char **names;
+	const char * const *names;
 	nnames = this->tables->num_tokens;
 	names = this->tables->names;
 	for (i = 0; i < nnames; i++) {
-		char *tnm = *names++;
+		const char *tnm = *names++;
 		if (strcmp(name, tnm) == 0) return i;
 		if (*tnm == '\'' || *tnm == '\"') {
 			/* maybe client omitted quotes */
@@ -193,11 +187,11 @@ parser::TokenNumberFromName(char  *name) {
 	if no character follows the \, return \ and length of zero
 */
 	int
-parser::TransEscape(char  *buf, int  *plen) {
+parser::TransEscape(const char  *buf, int  *plen) {
 	
 	static char esctab[]
 =   "r\rn\nf\ft\tb\bv\v\"\"\'\'\\\\?\177e\033E\033R\rN\nF\fT\tB\bV\v";
-	char *cx;
+	const char *cx;
 	int val, len;
 
 	if (*buf == '\0') {
@@ -292,13 +286,13 @@ static char newstate [9][21] = {
 		E may be 'e' or 'E'  and means the exponent
 */
 	int
-parser::ParseNumber(char  *buf, long  *plen , long  *intval, double  *dblval) {
+parser::ParseNumber(const char  *buf, long  *plen , long  *intval, double  *dblval) {
 	
 	long val;
 	int len;
 	char oldstate, currstate;
 	register int x;
-	register char *bx;
+	register const char *bx;
 	int success;
 
 	if (*buf == '\'') {

@@ -134,22 +134,22 @@ public:
 
   /**  Methods Dealing with Individual Nodes  **/
 
-  virtual struct tree_node * CreateRootNode( char *name, long datum )			 ;
-  virtual struct tree_node * CreateParentNode( char *name, long datum, struct tree_node *child ) 
+  virtual struct tree_node * CreateRootNode( const char *name, long datum )			 ;
+  virtual struct tree_node * CreateParentNode( const char *name, long datum, struct tree_node *child ) 
 								 ;
-  virtual struct tree_node * CreateChildNode( char *name, long datum, struct tree_node *parent ) 
+  virtual struct tree_node * CreateChildNode( const char *name, long datum, struct tree_node *parent ) 
 								 ;
-  virtual struct tree_node * CreateRightNode( char *name, long datum, struct tree_node *left ) 
+  virtual struct tree_node * CreateRightNode( const char *name, long datum, struct tree_node *left ) 
 								 ;
-  virtual struct tree_node * CreateLeftNode( char *name, long datum, struct tree_node *right ) 
+  virtual struct tree_node * CreateLeftNode( const char *name, long datum, struct tree_node *right ) 
 								 ;
   virtual void DestroyDatum( void (*FreeNodeDatum)(tree_type_node node, void *user), void *user );
   virtual void DestroyNode( struct tree_node *node );
   virtual void DestroyNodeChildren( struct tree_node *node );
   virtual struct tree_node * NextNode( struct tree_node *node )				 ;
   virtual struct tree_node * PriorNode( struct tree_node *node )				 ;
-  virtual struct tree_node * NodeOfName( char *name, struct tree_node *node )		 ;
-  virtual struct tree_node ** NodesOfName( char *name, struct tree_node *node )		 ;
+  virtual struct tree_node * NodeOfName( const char *name, struct tree_node *node )		 ;
+  virtual struct tree_node ** NodesOfName( const char *name, struct tree_node *node )		 ;
   virtual struct tree_node * NodeOfDatum( long datum, struct tree_node *node )		 ;
   virtual struct tree_node ** NodesOfDatum( long datum, struct tree_node *node )		 ;
   virtual struct tree_node * HookNode( struct tree_node *node, struct tree_node *parent, 
@@ -164,9 +164,9 @@ public:
 								 ;
   virtual long Apply( struct tree_node *node, tree_applyfptr proc, char *anchor, char *datum )
 								 ;
-  virtual boolean SetNodeName( struct tree_node *node, char *name )		 ;
-  virtual boolean SetNodeCaption( struct tree_node *node, char *caption )	 ;
-  virtual boolean SetNodeTitle( struct tree_node *node, char *title )		 ;
+  virtual boolean SetNodeName( struct tree_node *node, const char *name )		 ;
+  virtual boolean SetNodeCaption( struct tree_node *node, const char *caption )	 ;
+  virtual boolean SetNodeTitle( struct tree_node *node, const char *title )		 ;
   virtual boolean SetNodeDatum( struct tree_node *node, long datum )		 ;
   virtual long NodeCount( struct tree_node *node )				 ;
   virtual long PeerNodeCount( struct tree_node *node )			 ;
@@ -175,15 +175,15 @@ public:
   virtual long NodeLevel( struct tree_node *node )				 ;
   virtual long NodePosition( struct tree_node *node )			 ;
   virtual char * NodeIndex( struct tree_node *node )				 ;
-  virtual char * NodeAncestry( struct tree_node *node, char *separator )	 ;
+  virtual char * NodeAncestry( struct tree_node *node, const char *separator )	 ;
   virtual boolean NodeAncestor( struct tree_node *candidate, struct tree_node *node )  ;
 
 
 
   inline struct tree_node * RootNode()	    		      { return ((this)->root_node); }
-  inline char * NodeName( struct tree_node *node)		      { return ((node) ? node->name : NULL); }
-  inline char * NodeCaption( struct tree_node * node)		      { return ((node) ? node->caption : NULL); }
-  inline char * NodeTitle( struct tree_node * node)		      { return ((node) ? node->title : NULL); }
+  inline const char * NodeName( struct tree_node *node)		      { return ((node) ? node->name : NULL); }
+  inline const char * NodeCaption( struct tree_node * node)		      { return ((node) ? node->caption : NULL); }
+  inline const char * NodeTitle( struct tree_node * node)		      { return ((node) ? node->title : NULL); }
   inline long NodeDatum( struct tree_node * node)		      { return ((node) ? node->datum : 0); }
   inline struct tree_node * ParentNode( struct tree_node * node)		      { return ((node) ? node->parent : NULL); }
   inline struct tree_node * ChildNode( struct tree_node * node)		      { return ((node) ? node->child : NULL); }

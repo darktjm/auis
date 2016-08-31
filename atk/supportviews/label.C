@@ -25,26 +25,16 @@
 //  $
 */
 
-/* sys/types.h in AIX PS2 defines "struct label", causing a type name clash.
-   Avoid this by temporarily redefining "label" to be something else in the preprocessor. */
-#define label gezornenplatz
-#include <andrewos.h> /* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/label.C,v 3.3 1994/12/13 20:29:03 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 /* label.c		
 
 	Code for the label data object
 
 */
 
+/* sys/types.h in AIX PS2 defines "struct label", causing a type name clash.
+   Avoid this by temporarily redefining "label" to be something else in the preprocessor. */
+#define label gezornenplatz
+#include <andrewos.h> /* strings.h */
 ATK_IMPL("label.H")
 #undef label
 
@@ -54,9 +44,6 @@ ATK_IMPL("label.H")
 /**/
 
 ATKdefineRegistry(label, dataobject, NULL);
-#ifndef NORCSID
-#endif
-
 
 label::label()
 		{
@@ -125,7 +112,7 @@ label::Read( register FILE   *file, register long   id			/* !0 if data stream, 0
 label::Write( FILE   *file, long   writeID, int   level )
 		 		{
 	char head[50];
-	char *fontfamily;
+	const char *fontfamily;
 	long style, size;
 	long id = (this)->UniqueID();
 	if (this->writeID != writeID) {
@@ -145,7 +132,7 @@ label::Write( FILE   *file, long   writeID, int   level )
 }
 
 	void
-label::SetText(char  *text)
+label::SetText(const char  *text)
 		{
 	register char *s, *t;
 	int length = strlen(text);
@@ -172,7 +159,7 @@ label::SetText(char  *text)
 	(this)->NotifyObservers( label_DATACHANGED);
 }
 	void
-label::SetFont(char  *fontfamily, long  style , long  size)
+label::SetFont(const char  *fontfamily, long  style , long  size)
 			{
 	this->font = fontdesc::Create(fontfamily, style, size);
 	(this)->NotifyObservers( label_DATACHANGED);
@@ -182,7 +169,7 @@ label::GetText()
 	{
 	return this->text;
 }
-	char *
+	const char *
 label::GetFont(long  *style , long  *size)
 		{
 	*style = (this->font)->GetFontStyle();

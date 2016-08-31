@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gofig/RCS/gofig.C,v 1.7 1995/10/25 17:00:29 wjh Stab74 $";
-#endif
-
 /* gofig.c		
 
 	Code for the gofig data object
@@ -672,9 +667,7 @@ converttext(textview *txtv, long c) {
 	newfig->setdimensions( maxcols, row );
 	guessedges(newfig);
 
-	char *vname = "gofigview";
-	vname = (char *)strcpy( (char *)malloc( strlen(vname)+1 ),
-			vname );
+	char *vname = strdup("gofigview");
 	(txt)->AddView( startpos, vname, (class dataobject *)newfig);
 	if (undeletednewline)
 		(txt)->InsertCharacters(startpos+1, "\n", 1);

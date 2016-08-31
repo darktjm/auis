@@ -25,16 +25,6 @@
  *  $
 */
 
-#include <andrewos.h> /* strings.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/rasterview.C,v 1.6 1995/07/18 04:33:31 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* Added X Window Dump read/write menu options  -paul@athena.mit.edu 3/7/90; Added X Bitmap read/write menu options - paul@athena.mit.edu 5/16/90 */
 
 /* Some comments on changes checked in on 8/10/88
@@ -74,6 +64,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 */
 
+#include <andrewos.h> /* strings.h */
 ATK_IMPL("rasterview.H")
 #include <stdio.h>
 #include <util.h>
@@ -181,8 +172,6 @@ static class keymap *Keymap;
 
 
 ATKdefineRegistry(rasterview, view, rasterview::InitializeClass);
-#ifndef NORCSID
-#endif
 static void ToggleDebug();
 static void CropCommand(class rasterview  *self, long  rock);
 static void UncropCommand(class rasterview  *self, long  rock);
@@ -755,8 +744,8 @@ void ReadRaster(class rasterview  *self, class raster  *ras, char  *filename)
 	readresult = (ras)->Read( f, 0);
     else {
 	/* XXX If the file does not begin with a raster, we may as well scan until we find one */
-	static char hdr[] = "\\begindata{raster,";
-	char *hx = hdr;
+	static const char hdr[] = "\\begindata{raster,";
+	const char *hx = hdr;
 
 	while ((c = getc(f)) != EOF && *hx)
 	    if (c == *hx) hx++;
@@ -828,7 +817,7 @@ void WriteFileCommand(class rasterview  *self )
     message::DisplayString((class view *)self, 0, "Write Raster not yet implemented");
 }
 
-static char *prompts[] = {
+static const char * const prompts[] = {
 	"Read MacPaint file: ",
 	"Write MacPaint file: ",
 	"Write RasterFile file: ",
@@ -1053,8 +1042,8 @@ static void ReplaceCommand (class rasterview  *self)
 {
     class raster *ras = (class raster *)(self)->GetDataObject();
     FILE *pasteFile;
-    static char hdr[] = "\\begindata{raster,";
-    char *hx = hdr;
+    static const char hdr[] = "\\begindata{raster,";
+    const char *hx = hdr;
     register int c;
 
     pasteFile = ((self)->GetIM())->FromCutBuffer();
@@ -1386,8 +1375,8 @@ static void ScaleReplaceCommand(class rasterview  *self)
     class raster *ras = (class raster *)(self)->GetDataObject();
     class rasterimage *pix;
     FILE *pasteFile;
-    static char hdr[] = "\\begindata{raster,";
-    char *hx = hdr;
+    static const char hdr[] = "\\begindata{raster,";
+    const char *hx = hdr;
     register int c;
 
     if (ras == NULL || (pix = (ras)->GetPix()) == NULL) return;

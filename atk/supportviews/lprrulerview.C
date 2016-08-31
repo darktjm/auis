@@ -25,16 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/supportviews/RCS/lprrulerview.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* lprrulv.c	
 
 	The view module for the lprruler dataobject
@@ -53,7 +43,7 @@ deferred features:
 
 */
 
-
+#include <andrewos.h>
 ATK_IMPL("lprrulerview.H")
 #include <graphic.H>
 #include <view.H>
@@ -110,11 +100,9 @@ static struct TickTbl CMTbl = {30, 6, 1, {6, 3, 3, 3, 3}, "%+5.2f c", "Cm."};
 
 
 ATKdefineRegistry(lprrulerview, view, lprrulerview::InitializeClass);
-#ifndef NORCSID
-#endif
- ;
-static boolean BogusCallFromParent(class lprrulerview  *self, char  *where , char  *msg);
-static boolean CheckWindow(class lprrulerview  *self, char  *where);
+
+static boolean BogusCallFromParent(class lprrulerview  *self, const char  *where , const char  *msg);
+static boolean CheckWindow(class lprrulerview  *self, const char  *where);
 static void RepaintIcon(class lprrulerview   *self, enum lprrulerview_iconcode  icon, short  color);
 static void RepaintPark(class lprrulerview   *self, enum lprrulerview_iconcode  icon, short  color);
 static void RecomputeIconX(class lprrulerview  *self, enum lprrulerview_iconcode  icon);
@@ -132,14 +120,14 @@ static void RedrawIcons(class lprrulerview   *self);
 
 
 static boolean
-BogusCallFromParent(class lprrulerview  *self, char  *where , char  *msg)
+BogusCallFromParent(class lprrulerview  *self, const char  *where , const char  *msg)
 		{
 	fprintf(stderr, "<lprrulerview>Bogus call to %s, %s\n", where, msg);
 	return FALSE;
 }
 
 static boolean
-CheckWindow(class lprrulerview  *self, char  *where)
+CheckWindow(class lprrulerview  *self, const char  *where)
 		{
 	class graphic *g
 		= (class graphic *)(self)->GetDrawable();

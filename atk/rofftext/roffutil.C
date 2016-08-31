@@ -25,18 +25,11 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/rofftext/RCS/roffutil.C,v 1.7 1995/07/17 21:08:55 wjh Stab74 $";
-#endif
-
-
 /* utility stuff for rofftext
  *
  */
 
+#include <andrewos.h>
 #include <glist.H>
 #include <rofftext.H>
 #include <roffstyl.h>
@@ -190,7 +183,7 @@ struct diversionLevel *CreateDiversion(class rofftext  *self,struct diversionLev
     else {
         d->NextDiversionTrap = c->NextDiversionTrap;
         if (c->name)
-            d->name = StrDup(c->name);
+            d->name = strdup(c->name);
         else
             d->name = NULL;
         d->level = c->level+1;

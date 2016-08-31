@@ -25,16 +25,6 @@
 //  $
 */
 
-#include <andrewos.h> /* sys/types.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/frame/RCS/framecmds.C,v 3.22 1996/05/13 17:16:37 robr Exp $";
-#endif
-
-
- 
-
 /* framecmd.c
  * The user commands for the frame package.
  * Makes up the file, buffer, and window handling functions of the editor.
@@ -54,6 +44,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * 
  */
 
+#include <andrewos.h> /* sys/types.h sys/file.h */
 ATK_IMPL("framecmds.H")
 #include <util.h>
 
@@ -95,8 +86,8 @@ ATKdefineRegistry(framecmds, ATK, framecmds::InitializeClass);
 
 typedef void (*excursionfptr)(class frame *self);
 void frame_Exit(class frame  *self);
-static int LocalReadFile(class frame  *self, char  *fname, boolean  preserveBuffer);
-int frame_VisitFilePrompting(class frame  *self, char  *prompt, boolean  newWindow, boolean  rawMode);
+static int LocalReadFile(class frame  *self, const char  *fname, boolean  preserveBuffer);
+int frame_VisitFilePrompting(class frame  *self, const char  *prompt, boolean  newWindow, boolean  rawMode);
 int frame_VisitNamedFile(class frame  *self, const char  *filename, boolean  newWindow, boolean  rawMode);
 int frame_WriteFile(class frame  *self);
 
@@ -147,9 +138,9 @@ static boolean bufferDirtyP(class buffer  *buffer)
  * user may choose to re-read it.
  */
 
-static char SyncLossage[] =
+static const char SyncLossage[] =
     "The version on disk is more recent than the version in the buffer.";
-static char *SyncChoices[] = {
+static const char * const SyncChoices[] = {
     "Read the new version from disk",
     "Use the old version in the buffer",
     0};
@@ -187,9 +178,9 @@ preventOutofSyncLossage(class frame  *outputFrame, class buffer  *buffer)
  * modifications without offering to trash the unmodified copy.
  */
 
-static char ReversionLossage [] =
+static const char ReversionLossage [] =
     "Rereading this file will cause changes in the buffer to be lost.";
-static char *ReversionChoices [] = {
+static const char * const ReversionChoices [] = {
     "Cancel",
     "Read the file from disk (losing the changes in the buffer)",
     0};
@@ -226,9 +217,9 @@ preventReversionLossage(class frame  *outputFrame, class buffer  *buffer)
  * Returns true if the operation should proceed.
  */
 
-static char OverwriteLossage[] =
+static const char OverwriteLossage[] =
     "The file `%.*s' has changed on disk since it was last read.";
-static char *OverwriteChoices[] = {
+static const char * const OverwriteChoices[] = {
     "Cancel",
     "Proceed with save (losing the changes on disk).",
     0};
@@ -497,9 +488,9 @@ saveTheWorld(class frame  *outputFrame)
  * aborted.
  */
 
-static char lossageWarning[] =
+static const char lossageWarning[] =
   "You have unsaved changes that would be lost by this operation.";
-static char *lossageChoices[] = {
+static const char * const lossageChoices[] = {
 	"Cancel",
 	"Save changes and proceed",
 	"Proceed without saving changes",
@@ -521,7 +512,7 @@ static boolean countChangedBuffer(struct buffer *buf, long rock)
 static boolean preventBufferLossage(class frame  *outputFrame, class buffer  * preciousBuffer)
         {
     long answer;
-    char *warningstring = lossageWarning;
+    const char *warningstring = lossageWarning;
     char bigLossageWarning[80];
     int numChanged;
 
@@ -650,9 +641,9 @@ static int countFrames(class frame  *self, long  *rock)
 
 
 
-static char lastWindowWarning[] =
+static const char lastWindowWarning[] =
 "This is the last window.";
-static char *lastWindowChoices[] = {
+static const char * const lastWindowChoices[] = {
     "Continue Running",
     "Quit Application",
     NULL};
@@ -837,7 +828,7 @@ static enum message_CompletionCode BufferComplete(char  *partial, long  dummyDat
 }
 
 struct helpData {
-    char *partial;
+    const char *partial;
     message_workfptr textFunction;
     long textRock;
 };
@@ -848,7 +839,7 @@ static boolean BufferHelpWork(class buffer  *buffer, struct helpData  *helpData)
 
     if (completion::FindCommon(helpData->partial,
        (buffer)->GetName()) == strlen(helpData->partial)) {
-        char *modStatus;
+        const char *modStatus;
         char sizeBuf[16];
         const char *className;
         char *fileName, shortFileName[256];
@@ -892,7 +883,7 @@ static boolean BufferHelpWork(class buffer  *buffer, struct helpData  *helpData)
     return FALSE; /* Keep on enumerating. */
 }
 
-static void BufferHelp(char  *partial, long  listInfo, message_workfptr helpTextFunction, long  helpTextRock)
+static void BufferHelp(const char  *partial, long  listInfo, message_workfptr helpTextFunction, long  helpTextRock)
 {
     struct helpData helpData;
 
@@ -1019,7 +1010,8 @@ void frame_ListBuffers(class frame  *self, long  key)
         class text *listDoc = (class text *) (helpBuffer)->GetData();
         class buffer *oldBuffer;
         char oldBufferName[100];
-        char dummy[2], *s;
+        char dummy[2];
+	const char *s;
         static class style *boldStyle = NULL,
            *ulineStyle = NULL, *fixedStyle = NULL;
 
@@ -1251,16 +1243,16 @@ static class buffer *LocalGetBufferOnFile(class frame  *self, const char  *filen
  * start with a new buffer.
  */
 
-static char *MBufferWarning="That file is already in a buffer, it may be confusing...";
+static const char MBufferWarning[]="That file is already in a buffer, it may be confusing...";
 
-static char *MBufferChoices[]={
+static const char * const MBufferChoices[]={
     "Make a new buffer for this file",
     "Visit the existing buffer",
     "Cancel",
     NULL
 };
 
-static int LocalReadFile(class frame  *self, char  *fname, boolean  preserveBuffer)
+static int LocalReadFile(class frame  *self, const char  *fname, boolean  preserveBuffer)
 {
     class buffer *buffer = (self)->GetBuffer(), *oldBuffer;
     char tempName[256];
@@ -1331,7 +1323,7 @@ static int LocalReadFile(class frame  *self, char  *fname, boolean  preserveBuff
 
 
 /* Not static so it can be used from eza.c */
-int frame_VisitFilePrompting(class frame  *self, char  *prompt, boolean  newWindow, boolean  rawMode)
+int frame_VisitFilePrompting(class frame  *self, const char  *prompt, boolean  newWindow, boolean  rawMode)
                 {
     char filename[MAXPATHLEN];
     class buffer *buffer;
@@ -1390,7 +1382,7 @@ int frame_VisitNamedFile(class frame  *self, const char  *filename, boolean  new
 }
 
 /* like frame_VisitFilePrompting, but won't prompt if arg is non-NULL */
-int frame_VisitAFile(class frame  *self, char  *arg , char  *prompt, boolean  newWindow)
+int frame_VisitAFile(class frame  *self, char  *arg , const char  *prompt, boolean  newWindow)
             {
     if (isString(arg))
 	return frame_VisitNamedFile(self, arg, newWindow, FALSE);

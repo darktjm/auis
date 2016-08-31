@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/draw.C,v 1.2 1993/05/19 16:11:15 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 #include <im.H>
 #include <consoleClass.H>
 #include <view.H>
@@ -55,8 +45,6 @@ extern int Pposx, Pposy;
 extern char Pstring1[256], Pstring2[256], Pstring3[256], Pstring4[MAXPATHLEN];
 
 
-#ifndef NORCSID
-#endif
 void DrawDebug(class consoleClass  *self,int  Op, struct display  *disp);
 void RingAlarm(class consoleClass  *self, int  Op , int  indexed);
 int DrawGauge(class consoleClass  *self, int  Op, struct display  *disp);
@@ -83,7 +71,7 @@ void DrawDebug(class consoleClass  *self,int  Op, struct display  *disp)
 
 void RingAlarm(class consoleClass  *self, int  Op , int  indexed)
 {
-    static char *BufPtr;
+    char *BufPtr;
 
     mydbg(("entering: RingAlarm\n"));
     if (Op == NEWVAL) {

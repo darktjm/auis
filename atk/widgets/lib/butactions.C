@@ -19,10 +19,6 @@
  * 
  *  $
  */
-#ifndef NORCSID
-static char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/lib/RCS/butactions.C,v 1.16 1996/09/29 14:48:23 robr Exp $";
-#endif
-
 #include <andrewos.h>
 ATK_IMPL("butactions.H")
 #include <butactions.H>

@@ -25,16 +25,6 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/notop.C,v 1.1 1993/05/25 21:29:58 gk5g Stab74 $";
-#endif
-
-
- 
-
 /* 
  ****************************************************************
  * notop.c -- Routines for instrument console that are NOT
@@ -42,7 +32,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  ****************************************************************
  */
 
-
+#include <andrewos.h> /* sys/time.h */
 #include <consoleClass.H>
 #include <console.h>
 #include <errno.h>
@@ -52,15 +42,12 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
   1.) ../lib/input.c
   2.) ../lib/setup.c
 */
-char *RealProgramName = "Console";
-char EXTENSION[] = "con";
-char EXTENSION1[] = "console";
-char EXTENSION2[] = "Console";
+const char RealProgramName[] = "Console";
+const char EXTENSION[] = "con";
+const char EXTENSION1[] = "console";
+const char EXTENSION2[] = "Console";
 
 
-
-#ifndef NORCSID
-#endif
 void ChooseColumns(int  numcol);
 void ChooseMachines(class consoleClass  *self, char  *machinelist);
 void ConfigureMachines(class consoleClass  *self, int  *Rows , int  *Columns , int  *Machines, boolean  Initialize);

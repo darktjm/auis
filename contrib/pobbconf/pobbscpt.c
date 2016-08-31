@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/pobbconf/RCS/pobbscpt.c,v 1.4 1994/06/09 21:21:04 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	pobbscpt.c
 	Configure the scripts for the post office and bboard machines.
@@ -1328,7 +1323,7 @@ static void DumpTables()
 static void ParseArguments(argc,argv)
 int argc; char **argv;
 {
-    static char UsageArgs[] = " [-dD] [-M[val]] src object";
+    static const char UsageArgs[] = " [-dD] [-M[val]] src object";
     int thisarg, argval;
     char *Swch;
 

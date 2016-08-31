@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipoplin.C,v 1.4 1993/09/30 19:51:01 rr2b Stab74 $";
-#endif
-
 /* zipoplin.c	Zip Object -- Ploy-Line					      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */

@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/types.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/runadewapp.C,v 1.5 1994/12/06 21:54:28 rr2b Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("runadewapp.H")
 
 #include <andyenv.h>
@@ -57,8 +48,6 @@ static int Gargc;
 
 
 ATKdefineRegistry(runadewapp, application, runadewapp::InitializeClass);
-#ifndef NORCSID
-#endif
 static void StartupError( char  *string);
 static void addFile(class runadewapp  *self,const char  *name,boolean  newWin,boolean  ro);
 static const char *getarg(const char  **argv,int  *argc);

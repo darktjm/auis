@@ -1,5 +1,3 @@
-static char *hgghview_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/atkbook/silly/RCS/hgghview.C,v 1.2 1994/08/11 03:01:56 rr2b Stab74 $";
-
 /* **************************************************** *\
 Copyright 1989 Nathaniel S. Borenstein
 Permission to use, copy, modify, and distribute this software and its

@@ -26,14 +26,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/createinset/null/RCS/null.C,v 1.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* null.c		
 
 	Code for the null data object
@@ -89,9 +81,6 @@ ATK_IMPL("null.H")
 /* $$$ */
 	
 ATKdefineRegistry(null, dataobject, null::InitializeClass);
-#ifndef NORCSID
-#endif
-
 
 void
 null::ClearDots()

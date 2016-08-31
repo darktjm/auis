@@ -21,10 +21,6 @@
 // 
 //  $
 */ 
-#ifndef NORCSID
-char *figotext_c_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/figure/RCS/figotext.C,v 3.8 1996/09/06 00:17:59 wjh Exp $";
-#endif 
-
 #include <andrewos.h>
 ATK_IMPL("figotext.H")
 #include <ctype.h>
@@ -56,8 +52,6 @@ static class region *tmpreg;
 
 
 ATKdefineRegistry(figotext, figobj, figotext::InitializeClass);
-#ifndef NORCSID
-#endif 
 static void IncreaseNumChars(class figotext  *self, int  val);
 static void CompleteProc(class figotext  *self, int  rock);
 static void KillDotProc(class figotext  *self);
@@ -164,7 +158,7 @@ figotext::~figotext()
 	free(this->text);
 }
 
-char *figotext::ToolName(class figtoolview  *v, long  rock)
+const char *figotext::ToolName(class figtoolview  *v, long  rock)
 {
     return "Text";
 }
@@ -332,7 +326,7 @@ struct rectangle *figotext::GetBounds(class figview  *vv)
 void figotext::Draw(class figview  *v) 
 {
     long gray, count;
-    char *fam, *col, *cx, *cxend;
+    const char *fam, *col, *cx, *cxend;
     long size, style, textpos, grapos, grax;
     struct rectangle *rec = (this)->GetBounds( v);
     class region *viewclip;
@@ -948,15 +942,15 @@ static boolean StringMatch(char  *str1 , char  *str2)
     return TRUE;
 }
 
-void figotext::PrintObject(class figview  *v, FILE  *file, char  *prefix, boolean newstyle)
+void figotext::PrintObject(class figview  *v, FILE  *file, const char  *prefix, boolean newstyle)
 {
     int ix, ch, count;
-    char *fam, *psfam;
+    char *fam, *psfam, fontname[256];
     long size, style, textpos;
     long x, y, w, h;
     long shad, lw;
-    char *col, fontname[256];
-    char *posmod;
+    const char *col;
+    const char *posmod;
     double rcol, bcol, gcol;
     short *encoding;
 
@@ -1078,7 +1072,7 @@ boolean figotext::ORecSrchResume(struct SearchPattern *pat)
 boolean figotext::ORecSrchReplace(class dataobject *srcdobj, long srcpos, long srclen)
 {
     char *buf;
-    char *ts;
+    const char *ts;
     int substart, sublen;
     class simpletext *srctext;
 

@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/delivery/queuem/RCS/deliver.c,v 1.13 1992/12/15 21:24:39 rr2b Stab74 $";
-#endif
-
 /*
 
 			    QUEUEMAIL
@@ -88,7 +83,7 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/delivery/q
 #include <stdlib.h>
 
 /* Program name for error messages */
-static char Qname[] = "QUEUEMAIL";
+static const char Qname[] = "QUEUEMAIL";
 
 extern char *UnixError(), *mktemp();
 extern char Dropoff_ErrMsg[];

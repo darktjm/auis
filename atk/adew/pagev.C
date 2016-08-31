@@ -25,20 +25,11 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/pagev.C,v 1.7 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* This code is taken , in part, from the switcher inset of N. Borenstein's
 Andrew Toolkit Book . It has been modified and used with the permission
 of the author */
 
+#include <andrewos.h>
 ATK_IMPL("pagev.H")
 #include <pagev.H>
 #include <dataobject.H>
@@ -64,8 +55,6 @@ static struct proctable_Entry *switchobjproc = NULL;
 
 
 ATKdefineRegistry(pagev, view, pagev::InitializeClass);
-#ifndef NORCSID
-#endif
 static void SetCurrentView(class pagev  *self,char  *name);
 static boolean CheckRightSwitchee(class pagev  *self, boolean  *NeedFullRedraw,struct page_switchee  *cp);
 static void AddSwitchee(class pagev  *self);
@@ -209,7 +198,7 @@ static boolean CheckRightSwitchee(class pagev  *self, boolean  *NeedFullRedraw,s
     swtmp = (struct pagev_switcheroo *)
       malloc(sizeof(struct pagev_switcheroo));
     if (swtmp) {
-	char *cpv=cp->viewname;
+	const char *cpv=cp->viewname;
 	if(cp->d && ATK::IsTypeByName(cp->d->GetTypeName(), "unknown")) {
 	    if(!ATK::IsTypeByName(cpv, "unknownv")) cpv="unknownv";
 	}
@@ -528,7 +517,7 @@ void pagev::InitChildren()
     this->NowPlaying = safe;
 }
 
-void pagev::Print(FILE  *file, char  *processor, char  *finalFormat, boolean  topLevel)
+void pagev::Print(FILE  *file, const char  *processor, const char  *finalFormat, boolean  topLevel)
 {
     struct page_switchee *sw;
     struct pagev_switcheroo *safe;

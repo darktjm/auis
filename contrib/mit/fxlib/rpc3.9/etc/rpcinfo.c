@@ -1,5 +1,3 @@
-/* @(#)rpcinfo.c	1.5 87/11/20 3.9 RPCSRC */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,15 +19,6 @@
  * 
  *  $
 */
-
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/fxlib/rpc3.9/etc/RCS/rpcinfo.c,v 1.3 1992/12/15 21:53:39 rr2b Stab74 $";
-#endif
-
-#ifndef lint
-static	char sccsid[] = "@(#)rpcinfo.c 1.22 87/08/12 SMI";
-#endif
 
 /*
  * Copyright (C) 1986, Sun Microsystems, Inc.

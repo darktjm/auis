@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/tm/RCS/tm19.C,v 1.2 1993/05/31 20:35:18 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * subclass of termulator implementing h19 escape sequences
  */
@@ -48,8 +40,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/tm/RCS
  */
 
 ATKdefineRegistry(tm19, termulator, NULL);
-#ifndef NORCSID
-#endif
 static char *escapeChar(class tm19  *self,char  *buf,int  len);
 
 
@@ -213,11 +203,11 @@ static char tcbuf[2000]; /* stupid HC can't handle statics inside functions */
 char *tm19::GetTermcap()
 {
     sprintf(tcbuf,
-	    "tm19|termulator h19 emulation:\
-cr=^M:nl=^J:al=5*\\EL:le=^H:bs:cd=\\EJ:ce=\\EK:cl=\\EE:\
-cm=\\EY%%+ %%+ :co#%d:dc=\\EN:dl=5*\\EM:do=\\EB:ei=\\EO:\
-ho=\\EH:im=\\E@:li#%d:mi:nd=\\EC:ms:ta=^I:pt:sr=\\EI:up=\\EA:\
-so=\\Ep:se=\\Eq:",(this)->GetWidth(),(this)->GetHeight());
+	    "tm19|termulator h19 emulation:"
+	    "cr=^M:nl=^J:al=5*\\EL:le=^H:bs:cd=\\EJ:ce=\\EK:cl=\\EE:"
+	    "cm=\\EY%%+ %%+ :co#%d:dc=\\EN:dl=5*\\EM:do=\\EB:ei=\\EO:"
+	    "ho=\\EH:im=\\E@:li#%d:mi:nd=\\EC:ms:ta=^I:pt:sr=\\EI:up=\\EA:"
+	    "so=\\Ep:se=\\Eq:",(this)->GetWidth(),(this)->GetHeight());
     return tcbuf;
 }
 

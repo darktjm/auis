@@ -27,10 +27,6 @@
 //  $
 */
 
-/* $Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zip.H,v 1.2 1993/06/09 17:45:37 gk5g Stab74 $ */
-/* $Source: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zip.H,v $ */
-
-
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -82,16 +78,16 @@ public:
   virtual void Set_Debug( boolean state );
   virtual void Show_Statistics( int options );
 
-  virtual long Create_Figure( zip_type_figure *figure, char *name, unsigned char type, zip_type_image image, zip_type_figure peer );
+  virtual long Create_Figure( zip_type_figure *figure, const char *name, unsigned char type, zip_type_image image, zip_type_figure peer );
   virtual long Destroy_Figure( zip_type_figure figure );
   virtual long Hook_Figure( zip_type_figure figure, zip_type_figure peer_figure );
   virtual long Unhook_Figure( zip_type_figure figure );
-  virtual long Set_Figure_Name( zip_type_figure figure, char *name );
-  virtual long Set_Figure_Text( zip_type_figure figure, char *text );
+  virtual long Set_Figure_Name( zip_type_figure figure, const char *name );
+  virtual long Set_Figure_Text( zip_type_figure figure, const char *text );
   virtual long Set_Figure_Pattern( zip_type_figure figure, char pattern );
   virtual long Set_Figure_Shade( zip_type_figure figure, unsigned char shade );
   virtual long Set_Figure_Line_Width( zip_type_figure figure, short width );
-  virtual long Set_Figure_Line_Dash( zip_type_figure figure, char *pattern, int offset, short type );
+  virtual long Set_Figure_Line_Dash( zip_type_figure figure, const char *pattern, int offset, short type );
   virtual long Set_Figure_Line_Cap( zip_type_figure figure, short cap );
   virtual long Set_Figure_Line_Join( zip_type_figure figure, short join );
   virtual long Set_Figure_Line_Color( zip_type_figure figure, double red, double green, double blue );
@@ -104,19 +100,19 @@ public:
   virtual long Change_Figure_Point( zip_type_figure figure, long old_x, long old_y, long new_x, long new_y );
   virtual long Remove_Figure_Point( zip_type_figure figure, long old_x, long old_y );
   virtual long Add_Figure_Point( zip_type_figure figure, long new_x, long new_y );
-  virtual struct zip_figure * Figure( char *name );
-  virtual struct zip_figure * Image_Figure( struct zip_image *image, char *name );
-  virtual struct zip_figure * Stream_Figure( struct zip_stream *stream, char *name );
+  virtual struct zip_figure * Figure( const char *name );
+  virtual struct zip_figure * Image_Figure( struct zip_image *image, const char *name );
+  virtual struct zip_figure * Stream_Figure( struct zip_stream *stream, const char *name );
 
-  virtual long Create_Peer_Image( struct zip_image **image, char *name, struct zip_stream	      *stream, struct zip_image *peer );
-  virtual long Create_Inferior_Image( struct zip_image **image, char *name, struct zip_stream	      *stream, struct zip_image *superior );
+  virtual long Create_Peer_Image( struct zip_image **image, const char *name, struct zip_stream	      *stream, struct zip_image *peer );
+  virtual long Create_Inferior_Image( struct zip_image **image, const char *name, struct zip_stream	      *stream, struct zip_image *superior );
   virtual long Destroy_Image(  struct zip_image	*image );
   virtual long Hook_Peer_Image( struct zip_image *image, struct zip_image *peer_image );
   virtual long Hook_Inferior_Image( struct zip_image *image, struct zip_image *superior_image );
   virtual long Unhook_Image( struct zip_image *image );
   virtual struct zip_image * Image_Left_Peer( zip_type_image image );
-  virtual long Set_Image_Name( struct zip_image *image, char *name );
-  virtual long Set_Image_Text( struct zip_image *image, char *text );
+  virtual long Set_Image_Name( struct zip_image *image, const char *name );
+  virtual long Set_Image_Text( struct zip_image *image, const char *text );
   virtual long Set_Image_Pattern( struct zip_image *image, unsigned char pattern );
   virtual long Set_Image_Shade( struct zip_image *image, unsigned char shade );
   virtual long Set_Image_Line_Width( struct zip_image *image, long width );
@@ -139,8 +135,8 @@ public:
   virtual char * Superior_Image_Text( struct zip_image *image );
   virtual class fontdesc * Superior_Image_Font( struct zip_image *image );
   virtual long Adjust_Image_Point_Suite( struct zip_image *image, long x_delta, long y_delta );
-  virtual struct zip_image * Image( char *name );
-  virtual struct zip_image * Stream_Image( struct zip_stream *stream, char *image_name );
+  virtual struct zip_image * Image( const char *name );
+  virtual struct zip_image * Stream_Image( struct zip_stream *stream, const char *image_name );
   virtual struct zip_image * Next_Image( struct zip_image *image );
 
   virtual long Open_Stream( struct zip_stream **stream, char *name, long mode );
@@ -158,8 +154,8 @@ public:
   virtual long Set_Stream_FillFG_Color( struct zip_stream *stream, double red, double green, double blue );
   virtual long Set_Stream_FillBG_Color( struct zip_stream *stream, double red, double green, double blue );
   virtual long Set_Stream_Text( struct zip_stream *stream, char *text );
-  virtual long Set_Stream_Font( struct zip_stream *stream, char *font_name );
-  virtual long Set_Stream_Source( struct zip_stream *stream, char *name );
+  virtual long Set_Stream_Font( struct zip_stream *stream, const char *font_name );
+  virtual long Set_Stream_Source( struct zip_stream *stream, const char *name );
   virtual struct zip_stream * Stream( char *name );
   virtual long Destroy_Stream( zip_type_stream stream );
   virtual char Contextual_Figure_Pattern( zip_type_figure figure );

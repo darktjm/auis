@@ -25,18 +25,6 @@
 //  $
 */
 
-#include <andrewos.h> /* sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/funs.C,v 1.7 1996/09/03 19:17:27 robr Exp $";
-#endif
-
-
-
-
-
-
 /*
  * %%%% the need to undefine _C_func appears to be a bug in AIX...pgc
  */
@@ -45,6 +33,8 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #undef _C_func
 #endif /* ifdef _C_func */
 #endif /* if SY_AIX221 */
+
+#include <andrewos.h> /* sys/time.h */
 
 #include <math.h>
 
@@ -59,14 +49,6 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 extern int daysinmonth[];
 
 
-#ifndef NORCSID
-#endif
-#if SY_AIX221
-#ifdef _C_func
-#endif /* ifdef _C_func */
-#endif /* if SY_AIX221 */
-#ifdef hpux
-#endif /* hpux */
 #define false myfalse
 #define true mytrue
 int isrange (extended_double  *x);

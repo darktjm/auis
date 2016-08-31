@@ -1,5 +1,3 @@
-.\" @(#)bindresvport.3n	1.2 87/11/13 3.9 RPCSRC
-.\" @(#)bindresvport.3n 1.2 87/10/06 SMI;
 .TH BINDRESVPORT 3N  "6 October 1987"
 .SH NAME
 bindresvport \- bind a socket to a privileged IP port

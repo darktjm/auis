@@ -23,20 +23,13 @@
 //  $
 */
 
-#include <andrewos.h> /* sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/adew/RCS/mkcon.C,v 1.7 1994/05/27 20:07:29 rr2b Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
 
  
-
+#include <andrewos.h> /* sys/file.h */
 #include <util.h>
 #include <stdio.h>
 #include <sys/param.h>
@@ -44,43 +37,43 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 char *cls,*viewname,*oldcls,*oldvw;
-static char defstring[] = "\
-usage: createcon <-C ClassName(:oldclassname)> <-F FunctionName> <-T Title> <-O ShellScriptName> <-M> <-I> <-V Viewname(:oldviewname)> <-W> <-Help> <Filename>\n\
-Explanation of Arguments\n\
--C ClassName(:oldclassname) \n\
-	Sets the name of the class for createcon to create\n\
-	If the source file contains a control button view,\n\
-	it will default to the class given there.\n\
-	If an old classname is given, it will merge in the information from that file\n\
--F FunctionName\n\
-	Sets the name of the initialzation function \n\
-	If the source file contains a control button view,\n\
-	it will default to the function given there.\n\
-	If used w/ -I, classname_FunctionName will be used as the initialization method,\n\
-	which will default to classname_InitApp.\n\
--O ShellScriptName \n\
-	Tells createcon to create a shell script that will use runadew\n\
-	to run the application in stand-alone mode.\n\
--T Title \n\
-	Sets the title to use when the application is run stand alone with\n\
-	the shell script created with -O.\n\
--M \n\
-	Forces the creation of a new Imakefile, even if one already exists.\n\
-	The old Makefile is moved to Makefile.old\n\
--I \n\
-	Creates an inset rather than a controller. The callbacks and pointers\n\
-	will be placed in the view. The -C argument will specify the name of\n\
-	the dataobject to create. Control buttons are supported but unnecessary.\n\
--V Viewname(:oldviewname) \n\
-	If -I is specified, -V can be used to specify the name of the view to create.\n\
-	By default, a 'v' will be appended to the dataobject name.\n\
-	If an old viewname is given, it will merge in the information from that file\n\
--W\n\
-	If -I is specified, -W will indicate that the datastream describing the object\n\
-	will be written when the file containing the object is saved. \n\
--Help\n\
-	Display this help message.\n\
-";
+static const char defstring[] =
+"usage: createcon <-C ClassName(:oldclassname)> <-F FunctionName> <-T Title> <-O ShellScriptName> <-M> <-I> <-V Viewname(:oldviewname)> <-W> <-Help> <Filename>\n"
+"Explanation of Arguments\n"
+"-C ClassName(:oldclassname) \n"
+"	Sets the name of the class for createcon to create\n"
+"	If the source file contains a control button view,\n"
+"	it will default to the class given there.\n"
+"	If an old classname is given, it will merge in the information from that file\n"
+"-F FunctionName\n"
+"	Sets the name of the initialzation function \n"
+"	If the source file contains a control button view,\n"
+"	it will default to the function given there.\n"
+"	If used w/ -I, classname_FunctionName will be used as the initialization method,\n"
+"	which will default to classname_InitApp.\n"
+"-O ShellScriptName \n"
+"	Tells createcon to create a shell script that will use runadew\n"
+"	to run the application in stand-alone mode.\n"
+"-T Title \n"
+"	Sets the title to use when the application is run stand alone with\n"
+"	the shell script created with -O.\n"
+"-M \n"
+"	Forces the creation of a new Imakefile, even if one already exists.\n"
+"	The old Makefile is moved to Makefile.old\n"
+"-I \n"
+"	Creates an inset rather than a controller. The callbacks and pointers\n"
+"	will be placed in the view. The -C argument will specify the name of\n"
+"	the dataobject to create. Control buttons are supported but unnecessary.\n"
+"-V Viewname(:oldviewname) \n"
+"	If -I is specified, -V can be used to specify the name of the view to create.\n"
+"	By default, a 'v' will be appended to the dataobject name.\n"
+"	If an old viewname is given, it will merge in the information from that file\n"
+"-W\n"
+"	If -I is specified, -W will indicate that the datastream describing the object\n"
+"	will be written when the file containing the object is saved. \n"
+"-Help\n"
+"	Display this help message.\n";
+
 #define AWKPROG AndrewDir("/lib/arbiters/conpros.awk")
 #define INSETAWKPROG AndrewDir("/lib/arbiters/instpros.awk")
 #define MAKEFILE  (const char *) AndrewDir("/lib/arbiters/makefile.arb") 
@@ -94,35 +87,33 @@ struct stf {
     char *begin,*end,*key;
     struct stf *next,*bro;
 };
-static char Imakebase[] =  "\
-NormalObjectRule()\n\
-NormalATKRule()\n\
-InstallClassFiles($(HFILES))\n\
-LIBS =\n\
-SYSLIBS =\n\
-DynamicMultiObject(%s,%s,%s.o %s,$(LIBS),$(SYSLIBS),)\n\
-ATKLibrary(%s,%s.o %s,$(LIBS),$(SYSLIBS),)\n\
-DependTarget()\n\
-";
-static char shellbase[] = "\
-if test -r Makefile \n\
-then \n\
-echo Using existing Makefile\n\
-else \n\
-genmake\n\
-echo making dependencies\n\
-make depend\n\
-fi\n\
-make\n\
-";
-static char Insetbase[] = "\
-HFILES = %s.H %s.H\n\
-";
-static char Controlbase[] = "\
-HFILES = %s.H\n\
-";
-#ifndef NORCSID
-#endif
+static const char Imakebase[] =
+"NormalObjectRule()\n"
+"NormalATKRule()\n"
+"InstallClassFiles($(HFILES))\n"
+"LIBS =\n"
+"SYSLIBS =\n"
+"DynamicMultiObject(%s,%s,%s.o %s,$(LIBS),$(SYSLIBS),)\n"
+"ATKLibrary(%s,%s.o %s,$(LIBS),$(SYSLIBS),)\n"
+"DependTarget()\n";
+
+static const char shellbase[] =
+"if test -r Makefile \n"
+"then \n"
+"echo Using existing Makefile\n"
+"else \n"
+"genmake\n"
+"echo making dependencies\n"
+"make depend\n"
+"fi\n"
+"make\n";
+
+static const char Insetbase[] =
+"HFILES = %s.H %s.H\n";
+
+static const char Controlbase[] =
+"HFILES = %s.H\n";
+
 void ws(struct stf  *s,FILE  *f);
 boolean justcomments(struct stf  *s);
 void writemerge(struct stf  *o,struct stf  *n,FILE  *f);
@@ -191,7 +182,7 @@ struct stf *newstf(struct stf  *old)
     new_c->bro = new_c->next = NULL;
     return new_c;
 }
-void writestr(FILE  *fi,FILE  *fo,char  *name)
+void writestr(FILE  *fi,FILE  *fo,const char  *name)
 {
     int c;
     fprintf(fo,"static char %s[] = {\"\\\n",name);
@@ -249,7 +240,7 @@ struct stf *makestf(char  *buf)
     new_c->end = c;
     return start;
 }				
-char *getf(FILE  *f,char  *s,char  *buf,char  *s1,char  *s2)
+char *getf(FILE  *f,const char  *s,char  *buf,char  *s1,char  *s2)
 {
     static char ending[1024];
     register char *c,*cp;
@@ -430,7 +421,7 @@ int main(int argc, char  *argv[])
     boolean writechild = FALSE;
     int success = TRUE;
     int domake = FALSE;
-    char *func,*title,*sname;
+    const char *func,*title,*sname;
     FILE *f;
     if(getprofileswitch("SecurityConscious", FALSE)) {
 	fprintf(stderr, "SecurityConsciousness does not permit createcon to run.\n");
@@ -439,7 +430,7 @@ int main(int argc, char  *argv[])
     strcpy(makefile,MAKEFILE);
     sprintf(defaultawk,"awk -f %s",AWKPROG);
     awkprog = defaultawk;
-    src = cls = viewname = title = sname = NULL;
+    title = sname = src = cls = viewname = NULL;
     func = "go";
     *tmpfile = '\0';
     program = *argv;

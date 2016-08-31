@@ -114,7 +114,7 @@ public:
     virtual void ClearClippingRect();
 
     virtual void SetLineWidth(short NewLineWidth);
-    virtual void SetLineDash( char *dashPattern, int dashOffset, short dashType );
+    virtual void SetLineDash( const char *dashPattern, int dashOffset, short dashType );
     virtual void SetLineCap( short newLineCap );
     virtual void SetLineJoin( short newLineJoin );
 
@@ -135,7 +135,7 @@ public:
     
     virtual long GetHorizontalResolution()  ;
     virtual long GetVerticalResolution()  ;
-    virtual char * GetWindowManagerType()  ;
+    virtual const char * GetWindowManagerType()  ;
     virtual long GetDevice()  ;
     virtual long DisplayClass()  ;
     virtual boolean IsImageInverted()  ;

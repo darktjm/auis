@@ -27,11 +27,6 @@
 
 #include  <bglisp.h>
 
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/bglisp/RCS/bglisp.c,v 2.10 1992/12/15 21:00:33 rr2b Stab74 $";
-#endif
-
 EliProcessInfo_t EliProcessInfo;
 char            ProgramName[100] = "bglisp";
 

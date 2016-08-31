@@ -25,14 +25,6 @@
 //  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/lookz/RCS/lookzvt.C,v 1.4 1994/08/11 02:57:51 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* testv.c
 
 	test the lookzview object
@@ -86,10 +78,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/lookz/RCS/
 
 #undef class_StaticEntriesOnly
 
-#ifndef NORCSID
-#endif
-#ifdef WM_ENV
-#endif /* WM_ENV */
 printdata(register class lookz  *dobj);
 static boolean PrintAStyle(class style  *s, register class lookzview  *v);
 boolean findDefine(register FILE  *f);

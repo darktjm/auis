@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipview.C,v 1.6 1994/08/14 18:02:15 rr2b Stab74 $";
-#endif
-
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1987
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -626,7 +621,7 @@ zipview::Hit( register enum view_MouseAction       action, register long			     
   }
 
 void
-zipview::Print( register FILE			      *file, register char			      *processor, register char			      *format, register boolean		       top_level )
+zipview::Print( register FILE			      *file, register const char			      *processor, register const char			      *format, register boolean		       top_level )
             {
 /*  register float		      inch_width, inch_height; */
   class zipview *self=this;
@@ -668,7 +663,7 @@ zipview::Print( register FILE			      *file, register char			      *processor, r
   }
 
 long
-zipview::Set_Print_Language( register char				  *language )
+zipview::Set_Print_Language( register const char				  *language )
       {
   register long				  status;
   class zipview *self=this;
@@ -681,7 +676,7 @@ zipview::Set_Print_Language( register char				  *language )
   }
 
 long
-zipview::Set_Print_Processor( register char				  *processor )
+zipview::Set_Print_Processor( register const char				  *processor )
       {
   register long				  status;
   class zipview *self=this;
@@ -1557,7 +1552,7 @@ Prepare_Default_Stream( register class zipview	       *self )
   register long			      status = zip_ok;
   char				      stream_name[257];
   static int			      stream_number = 1;
-  char				     *source =
+  const char			      source[] =
 	"#Default Stream Header\n";
 
   IN(Prepare_Default_Stream);
@@ -1594,7 +1589,7 @@ Prepare_Default_Stream( register class zipview	       *self )
   }
 
 long
-zipview::Query( register char			       *query , register char			       *default_response , register char			       **response )
+zipview::Query( register const char			       *query , register const char			       *default_response , register char			       **response )
       {
   register long			      status = zip_ok;
   static char			      buffer[512];
@@ -1617,7 +1612,7 @@ zipview::Query( register char			       *query , register char			       *default_
   }
 
 long
-zipview::Query_File_Name( register char			      *query, register char			     **response )
+zipview::Query_File_Name( register const char			      *query, register char			     **response )
         {
   register enum message_CompletionCode  result;
   static char			      path[257];
@@ -1656,7 +1651,7 @@ zipview::Query_File_Name( register char			      *query, register char			     **r
   }
 
 long
-zipview::Announce( register char			       *message )
+zipview::Announce( register const char			       *message )
       {
   register long			      status = zip_ok;
 
@@ -1674,7 +1669,7 @@ zipview::Announce( register char			       *message )
 
 
 long
-zipview::AskOrCancel( char  *request , char  *def , char  **answer)
+zipview::AskOrCancel( const char  *request , const char  *def , char  **answer)
 {
     register long		      status = zip_ok;
     static char			      buffer[512];

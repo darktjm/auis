@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RCS/panelp.c,v 1.1 1995/08/02 18:46:45 susan Stab74 $";
-#endif
-
 /* 
  *      C Panel Handling Package
  *	Machine-independent routines
@@ -48,7 +43,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/vui/RC
  *      The keytab provided to GetKeys is presumed to contain an exit key.
  *
  */
-
 
 #include <andrewos.h>
 #include <vui.h>

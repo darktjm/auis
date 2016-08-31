@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/texttagv.C,v 3.2 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("texttagv.H")
 #include <texttag.H>
 #include <texttagv.H>
@@ -47,11 +37,8 @@ ATK_IMPL("texttagv.H")
 
 
 ATKdefineRegistry(texttagv, fnotev, texttagv::InitializeClass);
-#ifndef NORCSID
-#endif
 
-
-void texttagv::Print(FILE  *f, char  *process, char  *final, int  toplevel)
+void texttagv::Print(FILE  *f, const char  *process, const char  *final, int  toplevel)
 {
     class texttag *tag;
     char buf[256];

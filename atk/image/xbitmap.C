@@ -145,7 +145,7 @@ static int nextInt(FILE  *f)
 }
 
 int
-xbitmap::Load( char  *fullname, FILE  *fp)
+xbitmap::Load( const char  *fullname, FILE  *fp)
             { FILE         *f;
   char          line[MAX_SIZE];
   char          name_and_type[MAX_SIZE];
@@ -257,7 +257,7 @@ xbitmap::Load( char  *fullname, FILE  *fp)
  */
 
 int 
-xbitmap::Ident( char  *fullname )
+xbitmap::Ident( const char  *fullname )
         { class xbitmap *self;
 
   if ((self = new xbitmap)->Load( fullname, NULL) == 0) {
@@ -283,7 +283,7 @@ xbitmap::Write( FILE  *file, long  writeID, int  level )
 }
 
 long
-xbitmap::WriteNative( FILE  *file, char  *filename )
+xbitmap::WriteNative( FILE  *file, const char  *filename )
             {
 return(0);
 }

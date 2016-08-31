@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/time.h sys/file.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/console/lib/RCS/timemon.C,v 1.3 1994/08/12 18:53:39 rr2b Stab74 $";
-#endif
-
-
- 
-
 #include <consoleClass.H>
 #include <console.h>
 #include <environ.H>
@@ -43,8 +34,6 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 extern boolean WasUDPAction;
 
-#ifndef NORCSID
-#endif
 void InitClock();
 void CheckClock(class consoleClass  *self);
 
@@ -63,7 +52,7 @@ void CheckClock(class consoleClass  *self)
     struct tm  *currentTime;
     boolean IsPM = FALSE;
     int     hours;
-    static char *DayOfWeek[] = {
+    static const char * const DayOfWeek[] = {
 	"Sunday", "Monday", "Tuesday", "Wednesday", 
 	"Thursday", "Friday", "Saturday", "Sunday", 0};
     static int OldHours = 0,

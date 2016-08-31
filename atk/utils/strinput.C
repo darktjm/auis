@@ -25,23 +25,13 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/utils/RCS/strinput.C,v 3.4 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
-/* $Author: rr2b $ */
-
- 
 /*
  * strinput.c
  *
  * String input dialogue box thingie.
 */
 
+#include <andrewos.h>
 ATK_IMPL("strinput.H")
 #include <stdio.h>
 
@@ -60,8 +50,6 @@ static class style *promptStyle = NULL;
 
 
 ATKdefineRegistry(strinput, view, strinput::InitializeClass);
-#ifndef NORCSID
-#endif
 
 
 boolean strinput::InitializeClass()
@@ -149,7 +137,7 @@ void strinput::SetInput(char  *string)
     (this)->SetPrompt( this->prompt);
 
     (this->textobj)->InsertCharacters( (this->textobj)->GetLength(), 
-			   (string ? string : (char *)""), 
+			   (string ? string : ""), 
 			   (string ? strlen(string) : 0));
     /* Now to change the view, iff it's linked into the viewTree */
     (this->textv)->SetDotPosition( (this->textobj)->GetLength());

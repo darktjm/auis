@@ -25,12 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/wpedit/RCS/wpeditapp.C,v 1.6 1994/08/11 03:03:39 rr2b Stab74 $";
-#endif
-
-
 #include <andrewos.h>
 #include <pwd.h>
 #include <stdio.h>
@@ -88,10 +82,6 @@ static char *progname = "WPEdit";
 
 
 ATKdefineRegistry(wpeditapp, application, wpeditapp::InitializeClass);
-#ifndef NORCSID
-#endif
-#ifndef _STD_C
-#endif
 static char *GetWPEntry(WPI_entry_t  entry, char  *key);
 static char * quote_wp_chg_field(char  *s);
 static int CommitChanges(class wpeditapp  *self);
@@ -546,7 +536,7 @@ static boolean OnExit(class wpeditapp  *self, int  status)
     }
     if (ct > 0) {
       int result;
-      static char *choices[] = 
+      static const char * const choices[] = 
 	{"Yes, save changes", "No, ignore changes", "Don't exit", NULL};
 
       if (message::MultipleChoiceQuestion(NULL, 90, 

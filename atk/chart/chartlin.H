@@ -28,14 +28,6 @@ ATK_INTER
 //  $
 */
 
-
-/* $Header $ */
-/* $Source $ */
-
-
-
-
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Line Chart View-object
@@ -79,7 +71,7 @@ public:
 
    void DrawChart();
    void PrintChart();
-   char * Moniker()				     ;
+   const char * Moniker()				     ;
    void SetDebug( boolean state );
 
 

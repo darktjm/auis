@@ -25,14 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/zip/lib/RCS/zipdi00.C,v 1.3 1993/06/17 04:28:00 rr2b Stab74 $";
-#endif
-
-
- 
-
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -136,7 +128,7 @@ END-SPECIFICATION  ************************************************************/
 #define  SetStreamModified	      {image->zip_image_stream->\
 					zip_stream_states.zip_stream_state_modified = 1;}
 
-static int Allocate_Image( register class zip		      *self, register struct zip_stream	      *stream, register struct zip_image	     **image, register char			      *name );
+static int Allocate_Image( register class zip		      *self, register struct zip_stream	      *stream, register struct zip_image	     **image, register const char			      *name );
 static int Destroy_Inferior_Image( register class zip		      *self, register zip_type_image	       image );
 static void Free_Image( register class zip		      *self, register zip_type_image	       image );
 static int Propagate_Image_Stream_Ptr( register class zip		      *self, register zip_type_image	       image );
@@ -144,7 +136,7 @@ static int Adjust_Inferior_Image_Point_Suite( register class zip		      *self, r
 
 
 static
-int Allocate_Image( register class zip		      *self, register struct zip_stream	      *stream, register struct zip_image	     **image, register char			      *name )
+int Allocate_Image( register class zip		      *self, register struct zip_stream	      *stream, register struct zip_image	     **image, register const char			      *name )
           {
   register int			      status = zip_ok;
 
@@ -169,7 +161,7 @@ int Allocate_Image( register class zip		      *self, register struct zip_stream	
   }
 
 long
-zip::Create_Peer_Image( register struct zip_image	     **image, register char			      *name, register struct zip_stream	      *stream, register struct zip_image	      *peer )
+zip::Create_Peer_Image( register struct zip_image	     **image, register const char			      *name, register struct zip_stream	      *stream, register struct zip_image	      *peer )
             {
   register long			      status = zip_success;
   register zip_type_image	      peer_ptr = peer;
@@ -197,7 +189,7 @@ zip::Create_Peer_Image( register struct zip_image	     **image, register char			
   }
 
 long
-zip::Create_Inferior_Image( register struct zip_image	     **image, register char			      *name, register struct zip_stream	      *stream, register struct zip_image	      *superior )
+zip::Create_Inferior_Image( register struct zip_image	     **image, register const char			      *name, register struct zip_stream	      *stream, register struct zip_image	      *superior )
             {
   register long			      status = zip_success;
   register zip_type_image	      superior_ptr = superior, image_ptr;
@@ -446,7 +438,7 @@ zip::Unhook_Image( register struct zip_image	      *image )
   }
 
 long
-zip::Set_Image_Name( register struct zip_image	      *image, register char			      *name )
+zip::Set_Image_Name( register struct zip_image	      *image, register const char			      *name )
         {
   register int			      status = zip_success;
   zip_type_image		      duplicate;
@@ -499,7 +491,7 @@ image->zip_image_stream->zip_stream_name);
   }
 
 long
-zip::Set_Image_Text( register struct zip_image *image, char *text )
+zip::Set_Image_Text( register struct zip_image *image, const char *text )
       {
   register int			      status = zip_success;
 
@@ -800,7 +792,7 @@ Adjust_Inferior_Image_Point_Suite( register class zip		      *self, register zip
   }
 
 struct zip_image *
-zip::Image( register char			      *name )
+zip::Image( register const char			      *name )
       {
   zip_type_image		      image = NULL;
   register zip_type_stream_chain      stream_link =
@@ -822,7 +814,7 @@ zip::Image( register char			      *name )
   }
 
 struct zip_image *
-zip::Stream_Image( register struct zip_stream	      *stream, register char			      *name )
+zip::Stream_Image( register struct zip_stream	      *stream, register const char			      *name )
         {
   zip_type_image		      image = NULL;
   register int			      status = zip_success;

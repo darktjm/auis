@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/org/RCS/org.C,v 1.8 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Org Data-Class
@@ -63,6 +56,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include <andrewos.h>
 ATK_IMPL("org.H")
 #include <ctype.h>
 #include <sys/param.h>
@@ -88,7 +82,7 @@ static long Write_Body( register class org  *self, register FILE  *file, long wr
 static void Strip( register char  *string );
 
 
-char *
+const char *
 org::ViewName( )
   {
     return ( "orgv" );
@@ -318,11 +312,11 @@ long Write_Body( register class org  *self, register FILE  *file, long writeID )
   return(status);
 }
 
-char *
+const char *
 org::NodeName( register struct tree_node  *node )
     {
   class org *self=this;
-  register char *name = NULL;
+  register const char *name = NULL;
 
   IN(org_NodeName);
   if ( node )

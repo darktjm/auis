@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/pobbconf/RCS/pobbconf.c,v 1.3 1992/12/15 21:56:26 rr2b Stab74 $";
-#endif
-
 /* ************************************************************ *\
 	pobbconf.c
 	Configuration information for the post office and bboard machines.

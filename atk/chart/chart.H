@@ -85,8 +85,8 @@ struct  chart_item
 typedef struct chart_monikers	     *chart_type_monikers;
 struct  chart_monikers
   {
-  char				     *chart_moniker;
-  char				     *chart_module_name;
+  const char			     *chart_moniker;
+  const char			     *chart_module_name;
   };
 
 typedef long (*chart_applyfptr)(long ca, class chart *self, struct chart_item *i, long datum);
@@ -102,7 +102,7 @@ public:
 
    long Read( FILE *file, long id )				 ;
    long Write( FILE *file, long id, int level )		 ;
-   char * ViewName()						 ;
+   const char * ViewName()						 ;
 
 
 
@@ -114,8 +114,8 @@ public:
   virtual void Apply( chart_applyfptr proc, long anchor, long datum );
   virtual void Reset( long mode );
   virtual void Sort( long mode, chart_sortfptr handler );
-  virtual struct chart_monikers * Monikers()						 ;
-  virtual char * ModuleName( char *moniker )				 ;
+  virtual const struct chart_monikers * Monikers()						 ;
+  virtual const char * ModuleName( const char *moniker )				 ;
   virtual void SetDebug( boolean state );
 
   /**  Methods Dealing with Individual Items  **/
@@ -124,9 +124,9 @@ public:
 							 ;
   virtual long ItemAttribute( struct chart_item *item, long attribute_code )
 							 ;
-  virtual struct chart_item * CreateItem( char *item_name, long datum )		 ;
+  virtual struct chart_item * CreateItem( const char *item_name, long datum )		 ;
   virtual void DestroyItem( struct chart_item *item );
-  virtual struct chart_item * ItemOfName( char *item_name )				 ;
+  virtual struct chart_item * ItemOfName( const char *item_name )				 ;
 
 
 
@@ -139,7 +139,7 @@ public:
   inline long ItemValueRangeInterval()	      { return (this->item_value_range_interval); }
   inline long ItemValueRangeLow()		      { return (this->item_value_range_low); }
   inline long ItemValueSpan()		      { return (this->item_value_span); }
-  inline char * ItemFontName()		      { return (this->item_font_name); }
+  inline const char * ItemFontName()	      { return (this->item_font_name); }
 
   inline struct chart_item * NextItem( struct chart_item *item)		      { return ((item)->next); }
 
@@ -396,6 +396,6 @@ struct chartv_instance
 #define  LastModified		  (self->instance->last_modified)
 #define  DescriptionLastModified  (self->instance->description_last_modified)
 
-static char			  temp_name[] = "/tmp/org_temp";
+static const char		  temp_name[] = "/tmp/org_temp";
 
 #endif /* _chart_H_ */

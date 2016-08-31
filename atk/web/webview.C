@@ -23,11 +23,6 @@
 
 #include <andrewos.h>
 ATK_IMPL("webview.H")
-
-#ifndef NORCSID
-static UNUSED const char rcsid[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/web/RCS/webview.C,v 1.26 1996/11/07 23:54:55 robr Exp $";
-#endif
-
 #include <im.H>
 #include <frame.H>
 #include <buffer.H>
@@ -162,7 +157,7 @@ ReloadCurrent(class view  *self) {
 	class webcom *w =
 		webcom::FindWebcomFromData(
 					(self)->GetDataObject());
-	char *s = "";
+	const char *s = "";
 	if (w)  s = (w)->GetURL();
 	if (s == NULL) s = "";
 	webview::VisitWeb(self, s, WEBCOM_Reload);
@@ -170,7 +165,7 @@ ReloadCurrent(class view  *self) {
         
 static	void 
 OpenFile(class view  *self) {
-    static char prefix[]="file://localhost";
+    static const char prefix[]="file://localhost";
     char buf[MAXPATHLEN+sizeof(prefix)];
     char dir[MAXPATHLEN+1];
     strcpy(buf, prefix);
@@ -205,7 +200,7 @@ History(class view  *self) {
 	size_t i;
 	int j=0;
 	long res;
-	char **hcp=new char *[wp->history.GetN()+2];
+	const char **hcp=new const char *[wp->history.GetN()+2];
 	for(i = 0; i < wp->history.GetN(); i++) {
 		w = (class web *)(wp->history[i])->GetData();
 		wc = (w)->getwebcom();
@@ -228,7 +223,7 @@ History(class view  *self) {
 
 	static class view *
 getbv(class view  *v, class frame  *f, class im  *pim, 
-		char *label, value_fptr callback) {
+		const char *label, value_fptr callback) {
 	class value *local_bt;
 	class wbuttonv *local_bv;
 	class lpair *local_lpMain;
@@ -425,7 +420,7 @@ MyOpenURL(class view  *self) {
 	class webcom *w =
 		webcom::FindWebcomFromData(
 					(self)->GetDataObject());
-	char *s = "";
+	const char *s = "";
 	if (w)  s = (w)->GetURL();
 	if (s == NULL) s = "";
 	
@@ -440,7 +435,7 @@ ViewSrc(class view  *self) {
 	class webcom *w =
 		webcom::FindWebcomFromData(
 					(self)->GetDataObject());
-	char *s = "";
+	const char *s = "";
 	if (w)  s = (w)->GetURL();
 	if (s == NULL) s = "";
 	webview::VisitWeb(self, s, WEBCOM_ViewRaw);
@@ -746,7 +741,7 @@ void webview_handleload(class view  *self, class webcom	 *ww, int  )
     // (in case that document might be destroyed before we would otherwise perform the updates)
     im::ForceUpdate();
     if (ww->status &  WEBCOM_Loaded) {
-	char *obtype;
+	const char *obtype;
 	obtype = (ww)->CanView();
 	if (obtype) {
 	    FILE *f = NULL;
@@ -825,7 +820,7 @@ void webview_handleload(class view  *self, class webcom	 *ww, int  )
 }
 
 	int 
-webview::VisitWeb(class view  *self, char  *url, int r, const char *postdata) {
+webview::VisitWeb(class view  *self, const char  *url, int r, const char *postdata) {
 	ATKinit;
 	class dataobject *w= (self)->GetDataObject();
         webcom *ww=NULL;
@@ -876,7 +871,7 @@ class view *webview::Hit(enum view_MouseAction  action, long  x,  long  y,  long
     ATK_CLASS(htmlimagev);
     class web *web = (class web *) this->view::dataobject;
     long pos;
-    char *s=NULL;
+    const char *s=NULL;
     view *hit=NULL;
 
     view *nf=NULL;

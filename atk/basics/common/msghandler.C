@@ -25,27 +25,15 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/msghandler.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* Complete bogosity. */
 
 
+#include <andrewos.h>
 ATK_IMPL("msghandler.H")
 #include <msghandler.H>
 
 
 ATKdefineRegistry(msghandler, ATK, NULL);
-#ifndef NORCSID
-#endif
-
 
 int msghandler::DisplayString(int  priority, const char  *string)
             {

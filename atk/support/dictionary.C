@@ -26,17 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/dictionary.C,v 3.2 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
-
 ATK_IMPL("dictionary.H")
 #include <dictionary.H>
 #include <view.H>
@@ -53,9 +42,6 @@ struct dirtable {
 static struct dirtable *table, *last, *end;
 
 ATKdefineRegistry(dictionary, ATK, dictionary::InitializeClass);
-#ifndef NORCSID
-#endif
-
 
 boolean dictionary::InitializeClass()
     {

@@ -26,12 +26,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/com_err/RCS/et_name.c,v 1.4 1994/02/02 21:44:19 sa3e Stab74 $";
-#endif
-
-
 #include "error_table.h"
 #include "mitcopyright.h"
 #include "internal.h"
@@ -39,8 +33,6 @@ static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/co
 #ifndef	lint
 static const char copyright[] =
     "Copyright 1987,1988 by Student Information Processing Board, Massachusetts Institute of Technology";
-static const char rcsid_et_name_c[] =
-    "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/mit/com_err/RCS/et_name.c,v 1.4 1994/02/02 21:44:19 sa3e Stab74 $";
 #endif
 
 static const char char_set[] =

@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <util.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/titles.c,v 1.8 1994/05/24 21:33:49 rr2b Stab74 $";
-#endif
-
 /* titles.c */
 
 #include <stdio.h>

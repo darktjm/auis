@@ -25,40 +25,29 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/support/RCS/hash.C,v 3.3 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
 /* A hash table */
 
-
+#include <andrewos.h>
 ATK_IMPL("hash.H")
 
 #include <hash.H>
 #include <glist.H>
 
 struct egg {
-    char *key,*value;
+    char *key;
+    const char *value;
 };
 
 
 
 
 ATKdefineRegistry(hash, ATK, hash::InitializeClass);
-#ifndef NORCSID
-#endif
-static int DefaultHash(char  *key);
-static int FindEgg(struct egg  *egg,char  *key);
+static int DefaultHash(const char  *key);
+static int FindEgg(struct egg  *egg,const char  *key);
 static int PrintAll(struct egg  *egg,int  nothing);
 
 
-static int DefaultHash(char  *key)
+static int DefaultHash(const char  *key)
 {
     char c;
     int index=0;
@@ -97,7 +86,7 @@ hash::~hash()
             delete this->buckets[i];
 }
 
-void hash::Store(char  *key,char  *value)
+void hash::Store(const char  *key,const char  *value)
 {
     int bucket = (*this->hashfunc)(key);
     struct egg *egg = (struct egg *)malloc(sizeof(struct egg));
@@ -112,7 +101,7 @@ void hash::Store(char  *key,char  *value)
     (this->buckets[bucket])->Insert((char *)egg);
 }
 
-static int FindEgg(struct egg  *egg,char  *key)
+static int FindEgg(struct egg  *egg,const char  *key)
 {
 
     if (strcmp(egg->key,key)==0)
@@ -123,7 +112,7 @@ static int FindEgg(struct egg  *egg,char  *key)
 
 
 
-char *hash::Lookup(char  *key)
+const char *hash::Lookup(const char  *key)
 {
     int bucket = (*this->hashfunc)(key);
     struct egg *egg;
@@ -142,9 +131,9 @@ char *hash::Lookup(char  *key)
     }
 }
 
-char * hash::Delete(char  *key)
+const char * hash::Delete(const char  *key)
 {
-    char *value;
+    const char *value;
     int bucket = (*this->hashfunc)(key);
     struct egg *egg;
     if (this->buckets[bucket] == NULL)
@@ -162,7 +151,7 @@ char * hash::Delete(char  *key)
     
 }
 
-char *hash::Rename(char  *key,char  *new_c)
+const char *hash::Rename(const char  *key,const char  *new_c)
 {
     int bucket = (*this->hashfunc)(key);
     struct egg *egg;
@@ -196,7 +185,7 @@ void hash::Clear(hash_freefptr valFree)
 		    free(egg->key);
 		}
 		if (egg->value != NULL && valFree != NULL)  {
-		    (*valFree)(egg->value);
+		    (*valFree)((char *)egg->value);
 		}
 		free(egg);
 	    }

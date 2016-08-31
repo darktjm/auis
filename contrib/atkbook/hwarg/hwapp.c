@@ -1,5 +1,3 @@
-static char *hwapp_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/atkbook/hwarg/RCS/hwapp.c,v 1.1 1992/10/06 22:19:11 susan Stab74 $";
-
 /* **************************************************** *\
 Copyright 1989 Nathaniel S. Borenstein
 Permission to use, copy, modify, and distribute this software and its

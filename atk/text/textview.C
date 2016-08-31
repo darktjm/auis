@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/textview.C,v 3.102 1996/11/05 17:45:23 robr Exp $";
-#endif
-
- 
-
-
 ATK_IMPL("textview.H")
 #include <ctype.h>
 #include <scroll.H>
@@ -3880,7 +3871,7 @@ class style *textview::GetDefaultStyle()
     return this->defaultStyle;
 }
 
-void textview::Print(FILE  *f, char  *process, char  *final, int  toplevel)
+void textview::Print(FILE  *f, const char  *process, const char  *final, int  toplevel)
                     {
     /* This is really screwed. This should return an error and the guy above this */
     /* layer should handle it. */
@@ -3945,7 +3936,7 @@ void textview::InitChildren()
     }
 }
 
-boolean textview::CanView(char  *TypeName)
+boolean textview::CanView(const char  *TypeName)
 {
     ATK::LoadClass(TypeName);
     return ATK::IsTypeByName(TypeName, "text");
@@ -4021,7 +4012,7 @@ void textview::LoseSelectionOwnership()
     (this)->WantUpdate( this);
 }
 
-static int stringmatch(register class text  *d,register long  pos,register char  *c)
+static int stringmatch(register class text  *d,register long  pos,register const char  *c)
 {
     /* Tests if the text begins with the given string */
     while(*c != '\0') {

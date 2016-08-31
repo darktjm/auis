@@ -25,13 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/tree/RCS/tree.C,v 1.5 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Tree Data-Class
@@ -68,6 +61,7 @@ END-SPECIFICATION  ************************************************************/
 
 
 
+#include <andrewos.h>
 ATK_IMPL("tree.H")
 #include <tree.H>
 #include <ctype.h>
@@ -94,10 +88,8 @@ static char tree_debug = 0;
 
 
 ATKdefineRegistry(tree, apt, NULL);
-#ifndef NORCSID
-#endif
 static tree_type_node Build_Node( register class tree	      *self, register char	    	      *name, register long		       datum );
-static char * Ancestry( register class tree	      *self, register tree_type_node      node, register char		      *separator , register char		      *string );
+static char * Ancestry( register class tree	      *self, register tree_type_node      node, register const char		      *separator , register char		      *string );
 void tree__SetNodeModified( register class tree 	      *self, register tree_type_node      node, register char		       state );
 boolean tree__NodeModified( register class tree	      *self, register tree_type_node      node );
 
@@ -186,7 +178,7 @@ tree::TreeAttribute( register long		       attribute )
 
 static
 tree_type_node
-Build_Node( register class tree	      *self, register char	    	      *name, register long		       datum )
+Build_Node( register class tree	      *self, register const char	    	      *name, register long		       datum )
         {
   register struct tree_node  *node;
 
@@ -202,7 +194,7 @@ Build_Node( register class tree	      *self, register char	    	      *name, reg
   }
 
 tree_type_node
-tree::CreateRootNode( register char	    	      *name, register long		       datum )
+tree::CreateRootNode( register const char	    	      *name, register long		       datum )
         {
     class tree *self=this;
   register tree_type_node     node = NULL;
@@ -217,7 +209,7 @@ tree::CreateRootNode( register char	    	      *name, register long		       datu
   }
 
 tree_type_node
-tree::CreateParentNode( register char	    	      *name, register long		       datum, register tree_type_node      child )
+tree::CreateParentNode( register const char	    	      *name, register long		       datum, register tree_type_node      child )
 {
     class tree *self=this;
   register tree_type_node     node = NULL;
@@ -229,7 +221,7 @@ tree::CreateParentNode( register char	    	      *name, register long		       da
   }
 
 tree_type_node
-tree::CreateChildNode( register char	    	      *name, register long		       datum, register tree_type_node      parent )
+tree::CreateChildNode( register const char	    	      *name, register long		       datum, register tree_type_node      parent )
 {
     class tree *self=this;
   register tree_type_node     node = NULL,  prior = NULL;
@@ -255,7 +247,7 @@ tree::CreateChildNode( register char	    	      *name, register long		       dat
   }
 
 tree_type_node
-tree::CreateRightNode( register char	    	      *name, register long		       datum, register tree_type_node      left )
+tree::CreateRightNode( register const char	    	      *name, register long		       datum, register tree_type_node      left )
 {
     class tree *self=this;
   register tree_type_node     node = NULL;
@@ -275,7 +267,7 @@ tree::CreateRightNode( register char	    	      *name, register long		       dat
   }
 
 tree_type_node
-tree::CreateLeftNode( register char	    	      *name, register long		       datum, register tree_type_node      right )
+tree::CreateLeftNode( register const char	    	      *name, register long		       datum, register tree_type_node      right )
 {
     class tree *self=this;
   register tree_type_node     node = NULL;
@@ -416,7 +408,7 @@ tree::DuplicateNode( register tree_type_node      node , register tree_type_node
   }
 
 tree_type_node
-tree::NodeOfName( register char		      *name, register tree_type_node      node )
+tree::NodeOfName( register const char		      *name, register tree_type_node      node )
 {
     class tree *self=this;
   register tree_type_node     candidate = NULL;
@@ -466,7 +458,7 @@ tree::NodeOfDatum( register long		       datum, register tree_type_node      nod
   }
 
 tree_type_node *
-tree::NodesOfName( register char		      *name, register tree_type_node      node )
+tree::NodesOfName( register const char		      *name, register tree_type_node      node )
 {
     class tree *self=this;
   register tree_type_node    *candidates = NULL;
@@ -629,7 +621,7 @@ tree::NodeIndex( register tree_type_node      node )
   }
 
 static char *
-Ancestry( register class tree	      *self, register tree_type_node      node, register char		      *separator , register char		      *string )
+Ancestry( register class tree	      *self, register tree_type_node      node, register const char		      *separator , register char		      *string )
         {
   IN(Ancestry);
   if ( ParentNode(node) )
@@ -644,7 +636,7 @@ Ancestry( register class tree	      *self, register tree_type_node      node, re
   }
 
 char *
-tree::NodeAncestry( register tree_type_node      node, register char		      *separator )
+tree::NodeAncestry( register tree_type_node      node, register const char		      *separator )
 {
     class tree *self=this;
   register char		     *ancestry = NULL;
@@ -768,7 +760,7 @@ tree::TreeModified( )
   }
 
 boolean
-tree::SetNodeName( register tree_type_node        node, register char		        *name )
+tree::SetNodeName( register tree_type_node        node, register const char		        *name )
 {
     class tree *self=this;
   register long		        status = ok;
@@ -790,7 +782,7 @@ tree::SetNodeName( register tree_type_node        node, register char		        *
   }
 
 boolean
-tree::SetNodeCaption( register tree_type_node          node, register char			  *caption )
+tree::SetNodeCaption( register tree_type_node          node, register const char			  *caption )
 {
     class tree *self=this;
   IN(tree_SetNodeCaption);
@@ -809,7 +801,7 @@ tree::SetNodeCaption( register tree_type_node          node, register char			  *
   }
 
 boolean
-tree::SetNodeTitle( register tree_type_node         node, register char			 *title )
+tree::SetNodeTitle( register tree_type_node         node, register const char			 *title )
 {
     class tree *self=this;
   IN(tree_SetNodeTitle);

@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chartobj.C,v 1.9 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Chart View-object Abstract-class
@@ -69,6 +62,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include <andrewos.h>
 ATK_IMPL("chartobj.H")
 #include <math.h>
 #include "chartobj.H"
@@ -225,8 +219,6 @@ boolean chartobj_debug = 0;
 
 
 ATKdefineRegistry(chartobj, aptv, NULL);
-#ifndef NORCSID
-#endif
 static void Generate_Shadows( register class chartobj	    *self );
 static void Set_Shadows( register class chartobj	      *self );
 static void Free_Shadows( register class chartobj	      *self );
@@ -354,7 +346,7 @@ chartobj::SetChartOptions( register long		       options )
   OUT(chartobj_SetChartOptions);
   }
 
-char *
+const char *
 chartobj::Moniker( )
     {
   IN(chartobj_Moniker);
@@ -707,7 +699,7 @@ chartobj::PrintChart( )
   }
 
 void
-chartobj::Print( register FILE			      *file, register char			      *processor, register char			      *format, register boolean		       top_level )
+chartobj::Print( register FILE			      *file, register const char			      *processor, register const char			      *format, register boolean		       top_level )
             {
   IN(chartobj_Print);
   if ( top_level )

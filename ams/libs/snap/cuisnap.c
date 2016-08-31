@@ -25,11 +25,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/ams/libs/snap/RCS/cuisnap.c,v 2.25 1994/04/04 19:19:53 rr2b Stab74 $";
-#endif
-
 /* 
 		cuisnap.c -- CUI interface to SNAP rpc.
 

@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/types.h sys/time.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/stats.c,v 2.23 1994/06/09 18:17:42 rr2b Stab74 $";
-#endif
-
 /*
 		stats.c -- Make statistics entries for mail system.
 */
@@ -42,6 +35,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/o
 #endif
 #endif
 
+#include <andrewos.h> /* sys/types.h sys/time.h */
 #include <stdio.h>
 #include <errno.h>
 #include <netdb.h>
@@ -63,12 +57,12 @@ typedef int bool;
 #define LOGSTRLEN	25
 
 #ifdef CMU_ENV
-static char HostsFile[] = "/afs/andrew.cmu.edu/usr0/postman/stats/LogHosts";
+static const char HostsFile[] = "/afs/andrew.cmu.edu/usr0/postman/stats/LogHosts";
 #else /* CMU_ENV */
-static char HostsFile[] = "/nonexistent";
+static const char HostsFile[] = "/nonexistent";
 #endif /* CMU_ENV */
 static char LogHost[100];
-static char LoggingService[] = "mail.logger";
+static const char LoggingService[] = "mail.logger";
 
 static char MyName[LOGSTRLEN+1];
 static char ProgName[LOGSTRLEN+1];

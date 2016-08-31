@@ -26,15 +26,6 @@
 */
 
 #include <andrewos.h> /* sys/time.h sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/fad/RCS/fadview.C,v 1.9 1994/12/13 20:35:03 rr2b Stab74 $";
-#endif
-
-
- 
-
 ATK_IMPL("fadview.H")
 #include <sys/stat.h>
 
@@ -113,12 +104,10 @@ static int samplefont_failed ;
 
 
 ATKdefineRegistry(fadview, view, fadview::InitializeClass);
-#ifndef NORCSID
-#endif
 static void MySetCursor(class fadview  *self,class fontdesc  *f,int  i);
 static void MySetStandardCursor(class fadview  *self,short  i);
 static int CurrentFrame(class fadview  *self);
-static class fontdesc *my_DefineFont(char  *fname);
+static class fontdesc *my_DefineFont(const char  *fname);
 static void UpdateCursor(class fadview  *self);
 static void fontinit(class fad  *cp);
 void HaltAnimation(class fadview  *self);
@@ -174,7 +163,7 @@ static int CurrentFrame(class fadview  *self)
 	i++;
     return i;
 }
-static class fontdesc *my_DefineFont(char  *fname)
+static class fontdesc *my_DefineFont(const char  *fname)
 {
     char familyname[256];
     long fontStyle;
@@ -1260,7 +1249,7 @@ fadview::fileread(char  *fnm)
     }
 }
 void
-fadview::Print(FILE  *file, char  *processor,char  *finalFormat,boolean  topLevel)
+fadview::Print(FILE  *file, const char  *processor,const char  *finalFormat,boolean  topLevel)
 {
     class fad *cp;
     register struct fadvector *vc;
@@ -1447,7 +1436,8 @@ void fadview::WantUpdate(class view  *requestor)
 
 boolean fadview::InitializeClass()
 {
-    char *c,buf[2];
+    const char *c;
+    char buf[2];
 
     fadviewMenulist = new menulist;
     fadviewKeymap = new keymap;

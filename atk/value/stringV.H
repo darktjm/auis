@@ -54,8 +54,8 @@ public:
    inline boolean GetUseAlt(){ return (this->UseAlt); }
    inline void SetUseAlt(boolean val) { (this->UseAlt = val); }
  
-  char * label;
-  char * fontname;
+  const char * label;
+  const char * fontname;
   short fontsize;
   class fontdesc * normalfont, * boldfont, * activefont;
   struct rectangle labelrec;

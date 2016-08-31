@@ -25,13 +25,6 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/apt/apt/RCS/aptv.C,v 1.13 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Apt View-object
@@ -81,6 +74,7 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include <andrewos.h>
 ATK_IMPL("aptv.H")
 #include <graphic.H>
 #include <fontdesc.H>
@@ -264,7 +258,7 @@ struct  aptv_print_stream
   char				      processor;
   char				      format;
   short				      level;
-  char				     *prefix;
+  const char			     *prefix;
   float				      pixels_per_inch, resolution_factor;
   float				      unit_inch_width, unit_inch_height;
   float				      page_inch_width, page_inch_height;
@@ -276,15 +270,13 @@ struct  aptv_print_stream
 
 
 ATKdefineRegistry(aptv, view, NULL);
-#ifndef NORCSID
-#endif
 static class aptv * Parent_AptView( register class aptv	       *self );
 static void Print_Area( register class aptv	      *self, register long		       enclosure , register long		       area );
 static void Size_Enclosures( register class aptv	      *self );
 static void Help( register class aptv	      *self );
 static void Help_FullUpdate( register class aptv	      *self );
 static void Unhelp( register class aptv	      *self );
-static void Draw_String( register class aptv	      *self, register char		      *string, register class fontdesc    *font, register struct rectangle   *bounds, register long		       x , register long		       y , register long		       mode );
+static void Draw_String( register class aptv	      *self, register const char		      *string, register class fontdesc    *font, register struct rectangle   *bounds, register long		       x , register long		       y , register long		       mode );
 static void Draw_Enclosures( register class aptv	      *self );
 
 
@@ -314,6 +306,7 @@ class aptv *self=this;
   Initialized = false;
   InputFocus = false;
   Shrunk = false;
+  Shrinking = false;
   ControlSuppressed = false;
   BorderSuppressed = false;
   EnclosuresSuppressed = false;
@@ -398,7 +391,7 @@ class aptv *self=this;
   }
 
 void
-aptv::SetHelpString( register char		       *string )
+aptv::SetHelpString( register const char		       *string )
       {
 class aptv *self=this;
 
@@ -406,7 +399,7 @@ class aptv *self=this;
   }
 
 void
-aptv::SetHelpFileName( register char		       *file_name )
+aptv::SetHelpFileName( register const char		       *file_name )
       {
 class aptv *self=this;
 
@@ -414,7 +407,7 @@ class aptv *self=this;
   }
 
 class fontdesc *
-aptv::BuildFont( register char		       *font_name, register long	       *height )
+aptv::BuildFont( register const char		       *font_name, register long	       *height )
         {
 class aptv *self=this;
 
@@ -439,7 +432,7 @@ class aptv *self=this;
   }
 
 void
-aptv::SetShrinkIcon( register char		        icon, register char		       *icon_font_name, register char		       *title, register char		       *title_font_name )
+aptv::SetShrinkIcon( register const char		        icon, register const char		       *icon_font_name, register const char		       *title, register const char		       *title_font_name )
             {
 class aptv *self=this;
 
@@ -719,7 +712,7 @@ aptv::PrintContinue( )
   }
 
 void
-aptv::PrintObject( register FILE		      *file, register char		      *processor, register char		      *format, register boolean	       level, register aptv_printfptr printer )
+aptv::PrintObject( register FILE		      *file, register const char		      *processor, register const char		      *format, register boolean	       level, register aptv_printfptr printer )
               {
 class aptv *self=this;
 
@@ -764,7 +757,7 @@ void Print_Area( register class aptv	      *self, register long		       enclosur
     }
   }
 
-static char	*PostScript_prelude[] =
+static const char 	* const PostScript_prelude[] =
 {
 "% Begin AptView PostScript Prelude  Version 0.0",
 "gsave % Save Environment Around AptView Drawing",
@@ -839,11 +832,11 @@ NULL
 };
 
 boolean
-aptv::OpenPrintStream( register FILE		      *file, register char		      *processor, register char		      *format, register long		       level )
+aptv::OpenPrintStream( register FILE		      *file, register const char		      *processor, register const char		      *format, register long		       level )
             {
 class aptv *self=this;
 
-  register char		    **ptr = PostScript_prelude;
+  register const char		    * const *ptr = PostScript_prelude;
 
   if ( PrintStream  ||  (PrintStream = (struct aptv_print_stream *)
 		calloc( 1, sizeof(struct aptv_print_stream) )) )
@@ -1063,8 +1056,8 @@ aptv::PrintFilledRoundBox( register long		       left , register long		       to
         {
 class aptv *self=this;
 
-  fprintf( PrintFile,"%s/left %g def /top %g def /right %g def /bottom\
-	    %g def /shade %ld def fillroundbox\n",
+  fprintf( PrintFile,"%s/left %g def /top %g def /right %g def /bottom"
+	            " %g def /shade %ld def fillroundbox\n",
 	    PrintPrefix, PRF(left), PRF(top),
 			 PRF(left) + (PRF(width) - 1), PRF(top) + (PRF(height) - 1), shade );
   }
@@ -1131,7 +1124,7 @@ class aptv *self=this;
   }
 
 void
-aptv::SetPrintFont( register char		      *font_name )
+aptv::SetPrintFont( register const char		      *font_name )
       {
 class aptv *self=this;
 
@@ -1163,13 +1156,13 @@ class aptv *self=this;
   }
 
 void
-aptv::PrintString( register long		       x, register long		       y, register char		      *string, register long		       placement )
+aptv::PrintString( register long		       x, register long		       y, register const char		      *string, register long		       placement )
           {
 class aptv *self=this;
 
-  register char		     *place;
+  register const char		     *place;
 /*===
-static char *places[] =
+static const char * const places[] =
     {"aptv_LeftTop","aptv_LeftMiddle","apt_LeftBottom",
 ===*/
 place = "centerstring";
@@ -1227,7 +1220,7 @@ void Size_Enclosures( register class aptv	      *self )
     {
   register long		      i;
   long			      w, h;
-  register char		     *font_name;
+  register const char		     *font_name;
 
   IN(Size_Enclosures);
   if ( Data  &&  ! EnclosuresSuppressed )
@@ -1282,7 +1275,7 @@ void Size_Enclosures( register class aptv	      *self )
 static
 void Help( register class aptv	      *self )
     {
-  static char		     *notice = "Sorry, No help available for this Object.";
+  static const char	      notice[] = "Sorry, No help available for this Object.";
   FILE			     *file;
   struct attributes	      attrs;
   long			      id;
@@ -1390,7 +1383,7 @@ class aptv *self=this;
   }
 
 void
-aptv::DrawBoundedString( register char		      *string, register class fontdesc    *font, register struct rectangle   *bounds, register long		       x , register long		       y , register long		       mode )
+aptv::DrawBoundedString( register const char		      *string, register class fontdesc    *font, register struct rectangle   *bounds, register long		       x , register long		       y , register long		       mode )
             {
 class aptv *self=this;
 
@@ -1418,7 +1411,7 @@ class aptv *self=this;
   }
 
 static
-void Draw_String( register class aptv	      *self, register char		      *string, register class fontdesc    *font, register struct rectangle   *bounds, register long		       x , register long		       y , register long		       mode )
+void Draw_String( register class aptv	      *self, register const char		      *string, register class fontdesc    *font, register struct rectangle   *bounds, register long		       x , register long		       y , register long		       mode )
             {
   struct rectangle	      bound_interior;
 
@@ -1516,7 +1509,7 @@ void Draw_Enclosures( register class aptv	      *self )
 ===*/
 
 long
-aptv::Query( register char		       *query , register char		       *default_response , register char		       **response )
+aptv::Query( register const char		       *query , register const char		       *default_response , register char		       **response )
       {
 class aptv *self=this;
 
@@ -1538,7 +1531,7 @@ class aptv *self=this;
   }
 
 long
-aptv::QueryFileName( register char		      *query, register char		     **response )
+aptv::QueryFileName( register const char		      *query, register char		     **response )
         {
 class aptv *self=this;
 
@@ -1589,7 +1582,7 @@ class aptv *self=this;
 }
 
 long
-aptv::QueryDirectoryName( register char		      *query, register char		     **response )
+aptv::QueryDirectoryName( register const char		      *query, register char		     **response )
         {
   register enum message_CompletionCode  result;
   static char				path[258];
@@ -1639,7 +1632,7 @@ aptv::QueryDirectoryName( register char		      *query, register char		     **res
 
 
 long
-aptv::Announce( register char		       *message )
+aptv::Announce( register const char		       *message )
       {
 class aptv *self=this;
 

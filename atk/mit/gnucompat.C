@@ -1,5 +1,3 @@
-/* $Author: rr2b $ */
-
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -21,16 +19,6 @@
  * 
  *  $
 */
-
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/mit/RCS/gnucompat.C,v 1.5 1995/03/26 03:00:47 rr2b Stab74 $";
-#endif
-
-
- 
 
 /*************************************************
  * GNU Emacs Compatiblity package.
@@ -56,10 +44,8 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 /* Fill Paragraph:  Removes hard newlines within a paragraph */
 
+#include <andrewos.h>
 #include <ctype.h>
-
-
-
 #include <bind.H>
 #include <text.H>
 #include <textview.H>
@@ -84,8 +70,6 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
 
 ATKdefineRegistry(gnucompat, ATK, gnucompat::InitializeClass);
-#ifndef NORCSID
-#endif
 static boolean ConfirmReadOnly(class textview  *self, class text  *txt);
 int back_to_start (class text  *txt, int  pos);
 static void gcparafill (class textview  *self, long  key);

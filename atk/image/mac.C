@@ -154,7 +154,7 @@ static int macin_close_file();
 #if 0
 static void macin_fatal(char  *msg);
 #endif
-static void tellAboutImage(char  *name);
+static void tellAboutImage(const char  *name);
 
 
 static int macin_open_image(FILE  *s)
@@ -244,14 +244,14 @@ static void macin_fatal(char  *msg)
  * descriptive but I don't care
  */
 
-static void tellAboutImage(char  *name)
+static void tellAboutImage(const char  *name)
 {
   printf("%s is a %dx%d MacPaint image\n",
     name, macin_img_width, macin_img_height);
 }
 
 int
-mac::Load( char  *fullname, FILE  *fp )
+mac::Load( const char  *fullname, FILE  *fp )
             { 
   FILE *f;
   BYTE *pixptr, ch;
@@ -316,7 +316,7 @@ mac::Load( char  *fullname, FILE  *fp )
 }
 
 int 
-mac::Ident( char  *fullname )
+mac::Ident( const char  *fullname )
         {
   FILE        *f;
   unsigned int  ret;
@@ -349,7 +349,7 @@ mac::Write( FILE  *file, long  writeID, int  level )
 }
 
 long
-mac::WriteNative( FILE  *file, char  *filename )
+mac::WriteNative( FILE  *file, const char  *filename )
             {
 return(0);
 }

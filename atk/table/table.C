@@ -23,20 +23,12 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/table.C,v 1.11 1996/11/21 22:58:52 robr Exp $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
 
- 
-
+#include <andrewos.h>
 ATK_IMPL("table.H")
 
 #include <ctype.h>
@@ -70,10 +62,6 @@ boolean table::InitializeClass()
 }
 
 ATKdefineRegistry(table, dataobject, table::InitializeClass);
-#ifndef NORCSID
-#endif
-#ifndef _IBMR2
-#endif /* _IBMR2 */
 void IgnoreObserved(class table  *T);
 static char * myrealloc (char  * s, int  n);
 static void CreateCell (register class table  *T, struct cell  *newcell , struct cell  *oldcell);
@@ -82,12 +70,12 @@ void DestroyCell(register class table  *T, struct cell  *oldcell);
 void rangeLimit (register class table  * T, Chunk  chunk);
 void rcref (register class table  * T, register extended_double  *result, int      r , int      c , int      iftaped);
 void MakeStandard(extended_double  *x, double  value);
-void MakeBogus(extended_double  *x, char  *message);
+void MakeBogus(extended_double  *x, const char  *message);
 
 
 /* return corresponding view name */
 
-char * table::ViewName ()
+const char * table::ViewName ()
 {
     return "spread";
 }
@@ -220,7 +208,7 @@ void table::ToggleDebug ()
 
 /* find a table by name */
 
-class table *table::FindName (char  * name)
+class table *table::FindName (const char  * name)
 {
     class table *self=this;
     if (table_debug)  {
@@ -235,7 +223,7 @@ class table *table::FindName (char  * name)
 
 /* rename a table (may return pointer to pre-existing table) */
 
-class table * table::SetName (char  * name)
+class table * table::SetName (const char  * name)
 {
     register class table * S;
 
@@ -889,7 +877,7 @@ void rangeLimit (register class table  * T, Chunk  chunk)
 
 /* re-evaluate one cell */
 
-static char *circ = "CIRC!";
+static const char circ[] = "CIRC!";
 
 void table::ReEval (int      r , int      c)
 {
@@ -1094,7 +1082,7 @@ void table::Lock (char  ch, Chunk  chunk)
 
 /* format date */
 
-static char   *monthname[] = {
+static const char   * const monthname[] = {
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
 };
@@ -1146,7 +1134,7 @@ void MakeStandard(extended_double  *x, double  value)
 
 /* construct a extended floating "bogus" value */
 
-void MakeBogus(extended_double  *x, char  *message)
+void MakeBogus(extended_double  *x, const char  *message)
 {
     ExtendedType(x) = extended_BOGUS;
     ExtractBogus(x) = message;

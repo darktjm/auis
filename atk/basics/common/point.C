@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/basics/common/RCS/point.C,v 3.2 1993/07/29 20:15:08 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 #include <point.h>
 
 /* These have been macrofied */
@@ -52,8 +42,6 @@ struct point * Pt; {
 }
 */
 
-#ifndef NORCSID
-#endif
 void point_SetX(struct point  * Pt,long  Value );
 void point_SetY(struct point  * Pt,long  Value );
 void point_OffsetPoint(struct point  * Pt,long  DeltaX , long  DeltaY);

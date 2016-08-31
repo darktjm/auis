@@ -26,7 +26,6 @@
 #include <andrewos.h>
 
 static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rights reserved.";
-static UNUSED const char rcsHeader[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/srctext/RCS/asmtext.C,v 2.2 1995/02/09 21:48:34 susan Stab74 $";
 
 #include <attribs.h>
 #include <toolcnt.h>
@@ -39,7 +38,7 @@ static Dict *words[TABLESIZE];
 ATKdefineRegistry(asmtext, srctext, asmtext::InitializeClass);
 
 /* addBangComment postpends a character to the string used to remember bang-comment chars.  This is of little use, except to make the info available to the VIEW, which needs it to create the proper keybindings */
-static void addBangComment(asmtext *self, char *ch)
+static void addBangComment(asmtext *self, const char *ch)
 {
     int indx=0;
     while (indx<MAX_BANGCHARS && self->bangComments[indx]!='\0')
@@ -55,7 +54,7 @@ static void addBangComment(asmtext *self, char *ch)
 }
 
 /* setReindentFilterName remembers the name of the filter that was specified in ezinit */
-static void setReindentFilterName(asmtext *self, char *name)
+static void setReindentFilterName(asmtext *self, const char *name)
 {
     if (self->reindentFilterName!=NULL)
 	free(self->reindentFilterName);

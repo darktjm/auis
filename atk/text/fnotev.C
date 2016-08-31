@@ -26,16 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/text/RCS/fnotev.C,v 3.8 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-
- 
-
-
 ATK_IMPL("fnotev.H")
 #include <text.H>
 #include <textview.H>
@@ -72,8 +62,6 @@ static struct impair *list;
 static int endnotes = FALSE;
 
 ATKdefineRegistry(fnotev, view, fnotev::InitializeClass);
-#ifndef NORCSID
-#endif
 void initci(class fnotev  *self);
 #if 0
 fnotev_FindLoc(class fnotev  *self,class text  *parent);
@@ -99,7 +87,7 @@ void fnotev::GetOrigin(long  width, long  height, long  *originX, long  *originY
     *originY = height - 3;
 }
 static int clevel = -100;
-void fnotev::Print(FILE  *f, char  *process, char  *final, int  toplevel)
+void fnotev::Print(FILE  *f, const char  *process, const char  *final, int  toplevel)
                     {
 	class text *d;
 	long i,doclen,ln,cs,c,addNewLine;
@@ -162,7 +150,7 @@ void fnotev::Print(FILE  *f, char  *process, char  *final, int  toplevel)
 	clevel = -100;
     }
 
-void *fnotev::GetPSPrintInterface(char *printtype)
+void *fnotev::GetPSPrintInterface(const char *printtype)
 {
     static struct textview_insetdata dat;
 

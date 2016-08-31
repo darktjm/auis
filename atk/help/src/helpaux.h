@@ -18,7 +18,7 @@ extern void NextHelp(register class help  *self);
 extern void  HistoryHelp(class help  *self		/* callback rock */, struct history_entry  *ent	/* panelEntry rock */, class panel  *apanel		/* appropriate panel */);
 extern void  OverviewHelp(register class help  *self, register char  *name		/* which topic to request - panelEntry rock */, class panel  *apanel);
 extern void FreePanelListData();
-extern long SetupPanel(boolean  readpairs, char  *fname, class panel  *panel		/* the panel to add entries to */, char  **def);
+extern long SetupPanel(boolean  readpairs, const char  *fname, class panel  *panel		/* the panel to add entries to */, const char  * const *def);
 extern class view *SetupLpairs(register class help  *self);
 extern void  ToggleProgramListSize(register class help * self, long  rock);
 char * LowerCase(register char  *astring);

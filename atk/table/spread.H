@@ -75,8 +75,8 @@ class spread: public  view {
 
 
       void WantInputFocus(class view *requestor);
-      void Print(FILE *f, char *processor, char *format, boolean toplevel);
-      void *GetPSPrintInterface(char *printtype);
+      void Print(FILE *f, const char *processor, const char *format, boolean toplevel);
+      void *GetPSPrintInterface(const char *printtype);
       void PrintPSDoc(FILE *outfile, long pagew, long pageh);
       void PrintPSRect(FILE *file, long logwidth, long logheight, struct rectangle *visrect);
       void FullUpdate(enum view_UpdateType how, long left, long top, long width, long height);

@@ -26,18 +26,6 @@
 */
 
 #include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/table/RCS/tprint.C,v 1.4 1996/09/03 19:16:14 robr Exp $";
-#endif
-
-
- 
-
-
-
-
 #include <table.H>
 #include <texttroff.H>
 #include <view.H>
@@ -56,9 +44,9 @@ static int NeedNewTabs(class table  *T, int  r);
 static int CellWidth(class table  *T, int  r , int  c, int  *nextc);
 static void SetTabs(class table  *T, FILE  *f, int r);
 static void PrintEdges(class table  *T, FILE  *f, int  r);
-static void PrintChild(class table  *T, FILE  *f, int  r , int  c, class view  *child, char  *processor, char  *format, int  linemacro	/* numeric name of macro to restore line widths */);
-static void PrintRow(class spread  *V, FILE  *f, int  r, char  *processor, char  *format, int  linemacro	/* numeric name of macro to restore line widths */);
-void WriteTroff(class spread  * V, FILE  * f, char  *processor, char  *format, boolean toplevel);
+static void PrintChild(class table  *T, FILE  *f, int  r , int  c, class view  *child, const char  *processor, const char  *format, int  linemacro	/* numeric name of macro to restore line widths */);
+static void PrintRow(class spread  *V, FILE  *f, int  r, const char  *processor, const char  *format, int  linemacro	/* numeric name of macro to restore line widths */);
+void WriteTroff(class spread  * V, FILE  * f, const char  *processor, const char  *format, boolean toplevel);
 
 
 static char TabType(class table  *T, int  r , int  c)
@@ -124,7 +112,7 @@ static void SetTabs(class table  *T, FILE  *f, int r)
     int x;
     int prevtab;
     int nexttab;
-    char *prefix;
+    const char *prefix;
     int c1;
     int x1;
 
@@ -206,7 +194,7 @@ static void PrintEdges(class table  *T, FILE  *f, int  r)
 
 /* generate the value of a cell as a string */
 
-void spread_printVal(class table  * T, char *buf, extended_double  *value, char format, int prec)
+void spread_printVal(class table  * T, char *buf, extended_double  *value, const char format, int prec)
 {
     extended_double newvalue;
     int decpt, sign;
@@ -260,7 +248,7 @@ void spread_printVal(class table  * T, char *buf, extended_double  *value, char 
 /* uses macros 40... to stack current status */
 /* assumes .rt will return to beginning of row */
 
-static void PrintChild(class table  *T, FILE  *f, int  r , int  c, class view  *child, char  *processor, char  *format, int  linemacro	/* numeric name of macro to restore line widths */)
+static void PrintChild(class table  *T, FILE  *f, int  r , int  c, class view  *child, const char  *processor, const char  *format, int  linemacro	/* numeric name of macro to restore line widths */)
 {
     int k;
     int x;
@@ -285,7 +273,7 @@ static void PrintChild(class table  *T, FILE  *f, int  r , int  c, class view  *
 
 /* print one row */
 
-static void PrintRow(class spread  *V, FILE  *f, int  r, char  *processor, char  *format, int  linemacro	/* numeric name of macro to restore line widths */)
+static void PrintRow(class spread  *V, FILE  *f, int  r, const char  *processor, const char  *format, int  linemacro	/* numeric name of macro to restore line widths */)
 {
     class table *T = MyTable(V);
     int c;
@@ -337,7 +325,7 @@ static void PrintRow(class spread  *V, FILE  *f, int  r, char  *processor, char 
 /* number register 31 = trash */
 /* number register 32 = top to baseline distance of digits */
 
-void WriteTroff(class spread  * V, FILE  * f, char  *processor, char  *format, boolean toplevel)
+void WriteTroff(class spread  * V, FILE  * f, const char  *processor, const char  *format, boolean toplevel)
 {
     register class table *T = MyTable(V);
     int r;

@@ -21,11 +21,6 @@
 // 
 //  $
 */
-#ifndef NORCSID
-	char *tlex_readtlx_rcsid = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/syntax/tlex/RCS/readtlx.C,v 1.2 1993/05/18 17:27:33 rr2b Stab74 $";
-#endif
-
-
 #include <andrewos.h>
 #include <stdio.h>
 #include <ctype.h>
@@ -56,7 +51,7 @@ static char *InputText;		/* pts to first non-whitespace in InputBuffer*/
 
 
 /* table of keywords (words that start lines)*/
-static struct symbol keyword[] = {
+static const struct symbol keyword[] = {
 	{"tokenclass",	TOKENCLASS },
 	{"recognizer",	RECOGNIZER},
 	{"seq",		SEQ},
@@ -74,7 +69,7 @@ static struct symbol keyword[] = {
 };
 
 /* builtin recognizer names */
-static struct symbol recognizer[] = {
+static const struct symbol recognizer[] = {
 	{"ScanWhitespace", 	tlex_WHITESPACE},
 	{"ScanWhiteSpace", 	tlex_WHITESPACE},
 	{"ScanError",		tlex_ERROR},
@@ -93,9 +88,7 @@ static struct symbol recognizer[] = {
 	return table->n for the successful table entry
 	if none found, return the table entry for NULL
 */
-	#ifndef NORCSID
-#endif
-static int lookup(char  *sx , char  *ex, struct symbol  *table);
+static int lookup(const char  *sx , const char  *ex, const struct symbol  *table);
 static void GetLine(FILE  *f, boolean  deblank);
 struct line * parseClines(FILE  *f);
 boolean ParseLine(FILE  *fin, struct line  *hdr);
@@ -104,7 +97,7 @@ void ReadTlx(FILE  *f);
 
 
 static int
-lookup(char  *sx , char  *ex, struct symbol  *table)
+lookup(const char  *sx , const char  *ex, const struct symbol  *table)
 		{
 	for ( ; table->s; table++)
 		if (strncmp(sx, table->s, ex-sx) == 0)
@@ -217,10 +210,10 @@ Line types:
 	boolean
 ParseLine(FILE  *fin, struct line  *hdr)
 		{
-	char *bx, *kx;
+        char *bx, *kx;
 	struct line *v;
 	int keywd, i;
-	char *type, *var, *val;
+	const char *type, *var, *val;
 	char buf[20];
 
 	GetLine(fin, TRUE);
@@ -257,16 +250,17 @@ ParseLine(FILE  *fin, struct line  *hdr)
 		if (hdr->u.h.action == -888)
 			Error(WARNING, "Unexpected 'seq' line");
 		else {
-			val = ScanToken(kx, NULL);
-			if (*val == '"' || *val == '\'') {
+			char *vval = ScanToken(kx, NULL);
+			if (*vval == '"' || *vval == '\'') {
 				/* remove quotes */
-				strcpy(val, val+1);
-				*(val + strlen(val)-1) = '\0';
+				int len = strlen(vval);
+				memmove(vval, vval + 1, len - 2);
+				vval[len - 2] = 0;
 			}
-			if (*val == '\0') ErrorA(ERROR, 
+			if (*vval == '\0') ErrorA(ERROR, 
 	"'seq' should be followed by a non-empty quoted string; not", kx);
 			else
-				ThongAdd(val, hdr, FALSE);
+				ThongAdd(vval, hdr, FALSE);
 			hdr->u.h.action = 0;
 		}
 		return TRUE;
@@ -307,15 +301,18 @@ ParseLine(FILE  *fin, struct line  *hdr)
 		}
 		else {
 			ErrorA(WARNING, "Unquoted string", val);
-			kx = val;
+			kx = (char *)val;
 			i = strlen(val);
 		}
 		/* freeze and add quotes */
-		val = (char *)malloc(i+3);
-		*val = '"';
-		strncpy(val+1, kx, i);
-		val[i+1] = '"';
-		val[i+2] = '\0';
+	    {
+		char *b = (char *)malloc(i+3);
+		*b = '"';
+		strncpy(b+1, kx, i);
+		b[i+1] = '"';
+		b[i+2] = '\0';
+		val = b;
+	    }
 		goto decl;
 	case CHARSET:
 		type = "Charset";
@@ -342,23 +339,26 @@ ParseLine(FILE  *fin, struct line  *hdr)
 		while (*bx && isalnum(UNSIGN(*bx))) bx++;
 		var = freeze(kx, bx);
 		while (*bx && isspace(UNSIGN(*bx))) bx++;
-		val = (char *)malloc(4);  /* space for sprintf of action */
-		val[0] = '$';  val[1] = '3';  val[2] = '\0';  val[3] = '\0';
+	    {
+		char *b = (char *)malloc(4);  /* space for sprintf of action */
+		val = b;
+		b[0] = '$';  b[1] = '3';  b[2] = '\0';  b[3] = '\0';
 		if (strncmp(bx, "-none-", sizeof("-none-")-1) == 0) {
 			keywd = 0;
 			for ( ; *bx && *bx != '(' && *bx != '\n'; bx++) {}
 			if (*bx == '(') 
-				val[2] = bx[1];
+				b[2] = bx[1];
 		}
 		else if (strncmp(bx, "-reservedwords-", 
 				sizeof("-reservedwords-")-1) == 0) {
 			keywd = 2;
 		}
 		else {
-			keywd = ScanTokenToNumber(bx, val+2);
+			keywd = ScanTokenToNumber(bx, b+2);
 			if (keywd == 0)
 				ErrorA(ERROR, "Unrecognized token for action", bx);
 		}
+	    }
 		goto decl;
 	case BOOLEAN:
 		type = "boolean";

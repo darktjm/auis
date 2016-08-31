@@ -25,18 +25,12 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/util/lib/RCS/uerror.c,v 2.11 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 /*
 	uerror.c -- Return a static string describing an errno value.
 */
 
 
+#include <andrewos.h>
 #include <util.h> 
 
 #include <string.h>

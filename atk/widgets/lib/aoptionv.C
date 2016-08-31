@@ -33,11 +33,6 @@
 #include <textview.H>
 
 ATK_IMPL("aoptionv.H")
-
-#ifndef NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/widgets/lib/RCS/aoptionv.C,v 1.5 1996/11/04 02:50:48 robr Exp $";
-#endif
-    
 ATKdefineRegistry(AOptionMenuv, AButtonv, AOptionMenuv::Init);
 ATKdefineRegistryNoInit(AOptionCardv, AButtonv);
 ATKdefineRegistryNoInit(AOptionSourceFormula, AFormula);

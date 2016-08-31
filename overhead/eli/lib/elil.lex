@@ -63,10 +63,6 @@ WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,
 ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
 SOFTWARE.
 ******************************************************************/
-#ifndef NORCSID
-static char elil[] = "$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/eli/lib/RCS/elil.lex,v 1.3 1994/05/19 22:11:52 rr2b Stab74 $";
-#endif
-
 #undef input
 
 static int  input()		/* Replaces the lex macro */

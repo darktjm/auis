@@ -33,10 +33,10 @@ public:
   
      long Read( FILE *file, long id )  ;
      long Write( FILE *file, long writeID, int level )  ;
-/*    WriteNative( FILE *file, char *filename ) returns long;*/
-     int Load( char *fullname, FILE *fp )  ;
+/*    WriteNative( FILE *file, const char *filename ) returns long;*/
+     int Load( const char *fullname, FILE *fp )  ;
   
-    static int Ident( char *fullname )  ;
+    static int Ident( const char *fullname )  ;
 };
 
 

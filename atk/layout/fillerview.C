@@ -25,17 +25,6 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/layout/RCS/fillerview.C,v 1.5 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
-/* $ACIS$ */
-
- 
-
 /* reference to the associated data object */
 
 #define getView(V) (*(V))
@@ -50,6 +39,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 #define viewnamestring(v) ((v) == NULL ? "<NO VIEW>" : (((v)->GetName())->First())->Name())
 
 
+#include <andrewos.h>
 ATK_IMPL("fillerview.H")
 #include <assert.h>
 
@@ -91,8 +81,6 @@ static struct proctable_Entry *replaceProc = (struct proctable_Entry *) NULL;
 
 
 ATKdefineRegistry(fillerview, celview, fillerview::InitializeClass);
-#ifndef NORCSID
-#endif
 static void addInset(char  *newposs);
 static void initializeInsets();
 static void InitializeGraphics(class fillerview  *self, struct graphicstuff  *gc);
@@ -417,7 +405,7 @@ fillerview::~fillerview()
 /* set contained data object */
 
 void
-fillerview::SetDataObjectByName(char  *dataname				/*class  dataname of replacement dataobject */)
+fillerview::SetDataObjectByName(const char  *dataname				/*class  dataname of replacement dataobject */)
 {
     DEBUGPRINTF(("fillerview_SetDataObjectByName(,%s)\n", dataname));
 

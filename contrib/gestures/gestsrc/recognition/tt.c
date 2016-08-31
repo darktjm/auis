@@ -42,14 +42,6 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gestures/gestsrc/recognition/RCS/tt.c,v 1.4 1993/06/17 04:35:10 rr2b Stab74 $";
-#endif
-
-
-
-
 /*
   gesture trainer and tester with no graphical I/O
 

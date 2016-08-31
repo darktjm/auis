@@ -25,21 +25,9 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/chart/RCS/chartmap.C,v 1.5 1995/11/07 20:17:10 robr Stab74 $";
-#endif
-
 int chartmap_debug = 0;
 
 #define debug chartmap_debug
-
-/* $Header $ */
-/* $Source $ */
-
-
-
-
 
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
@@ -86,7 +74,7 @@ ATK_IMPL("chartmap.H")
 #include <aptv.H>
 #include <chartobj.H>
 #include <chart.H>
-#include <chartmap.eh>
+/* #include <chartmap.eh>*/ /* just to shut up makedep; this file is not built */
 #include <ctype.h>
 #include <zip.H>
 #include <zipview.H>

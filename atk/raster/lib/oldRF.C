@@ -25,17 +25,6 @@
  *  $
 */
 
-#include <andrewos.h> /* sys/types.h */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/raster/lib/RCS/oldRF.C,v 1.2 1996/03/08 20:21:46 susan Stab74 $";
-#endif
-
-
- 
-
-
 /*  oldrf.c
 
 	oldRF package
@@ -49,6 +38,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
 
  */
 
+#include <andrewos.h> /* sys/types.h */
 ATK_IMPL("oldRF.H")
 #include <stdio.h>
 #include <sys/stat.h>
@@ -76,8 +66,6 @@ static unsigned char masks[] = {0xFF, 0x80, 0xC0, 0xE0, 0xF0, 0xF8, 0xFC, 0xFE};
 */
 	
 ATKdefineRegistry(oldRF, ATK, NULL);
-#ifndef NORCSID
-#endif
 
 
 void

@@ -26,13 +26,6 @@
  *  $
 */
 
-#include <andrewos.h>	/* for bzero() bcmp() */
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/ness/objects/RCS/nsearch.C,v 1.10 1995/04/05 01:48:15 rr2b Stab74 $";
-#endif
-
 /* 
 	search.c  -  implement searches and pattern matches
 
@@ -146,6 +139,7 @@ static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/a
  * 
 */
 
+#include <andrewos.h>	/* for bzero() bcmp() */
 #include <ctype.h>
 #include <dataobject.H>
 #include <text.H>
@@ -710,7 +704,7 @@ AddStyles(class text  *text, long  pos , long  len, class environment  *env) {
 */
 	static boolean
 HasStyle(class environment  *env , class environment  *penv) {
-	char *pname, *name;
+	const char *pname, *name;
 	enum nametype {None, Name, Menu} nt = None;
 	if (penv->data.style == NULL) return TRUE;
 	pname = (penv->data.style)->GetName();
@@ -922,6 +916,7 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 	boolean boolval;
 	long intval;
 	double realval;
+	const char *cxc;
 	char *cstring, *cx;
 	ATK  *objval;
 	long pos, len, finish;
@@ -966,14 +961,14 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 		len = (subject)->GetLength();
 		finish = pos + len;  /* failure location */
 		cstring = (char *)(pat)->ToC();
-		cx = search::CompilePattern(cstring, &regPat);
+		cxc = search::CompilePattern(cstring, &regPat);
 		free(cstring);
 		/* XXX save pat's cstring and compiled pattern
 		test and avoid recompilation (? will this really be faster) */
 
-		if (cx != 0) {
+		if (cxc != 0) {
 			/* not a valid pattern */
-			fprintf(stderr, "Ness regSearch: %s\n", cx);
+			fprintf(stderr, "Ness regSearch: %s\n", cxc);
 			(subject)->MakeConst("");  /* EmptyText */
 		}
 		else {
@@ -1012,12 +1007,12 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 		len = (subject)->GetLength();
 		finish = pos + len;  /* failure location */
 		cstring = (char *)(pat)->ToC();
-		cx = search::CompilePattern(cstring, &regPat);
+		cxc = search::CompilePattern(cstring, &regPat);
 		free(cstring);
 		/* XXX save cstring and test to avoid recompilation (? is this really faster) */
-		if (cx != 0) {
+		if (cxc != 0) {
 			/* not a valid pattern */
-			fprintf(stderr, "Ness regSearchReverse: %s\n", cx);
+			fprintf(stderr, "Ness regSearchReverse: %s\n", cxc);
 			(subject)->MakeConst("");   /* EmptyText */
 		}
 		else {
@@ -1570,7 +1565,7 @@ for (pos = 0; pos <= (textp)->GetLength(); pos ++) {
 		len = (subject)->GetLength();
 		if (*cstring == '\0') {
 			free(cstring);
-			cstring = (char *)freeze(((class dataobject *)objval  )->ViewName(
+			cstring = strdup(((class dataobject *)objval  )->ViewName(
 					));
 		}
 

@@ -25,17 +25,11 @@
  *  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/overhead/mail/lib/RCS/canon.c,v 2.7 1992/12/15 21:03:27 rr2b Stab74 $";
-#endif
-
 /*
 	canon.c -- canonicalize a person's name
 */
 
+#include <andrewos.h>
 #include <ctype.h>
 
 #define Ctxt 0

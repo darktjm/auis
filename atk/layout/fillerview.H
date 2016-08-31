@@ -51,7 +51,7 @@ public:
    void LoseInputFocus();
 
 
-  virtual void SetDataObjectByName(char *dataname);	/* replace myself */
+  virtual void SetDataObjectByName(const char *dataname);	/* replace myself */
 
 
   

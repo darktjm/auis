@@ -24,11 +24,6 @@
  *  $
 */
 
-#ifndef NORCSID
-#define NORCSID
-static char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/contrib/gofig/RCS/gofigview.C,v 1.10 1996/04/23 22:05:45 wjh Stab74 $";
-#endif
-
 /* gofigv.c	
 
 	The view module for the gofig dataobject
@@ -203,7 +198,7 @@ static void computeHoshi(int hoshi[4], boolean leftedge, boolean rightedge,
 	int width);
 static void drawspot(gofigview *self, struct stone *s, boolean isclear);
 static  void RedrawView(gofigview  *self);
-static void modifymenuentry( menulist *m, char *f, char *prior, char *post, 
+static void modifymenuentry( menulist *m, const char *f, const char *prior, const char *post, 
 		struct proctable_Entry *proc, char code );
 static struct stone *atrowcol(gofigview *self, int row, int col);
 static struct stone *selectedspot(gofigview *self);
@@ -220,7 +215,7 @@ static void SetLayout(gofigview *self, int code);
 static void CopyCommand(gofigview *self, int code);
 static void ReplaceCommand(gofigview *self, int code);
 static void ToggleDebug(gofigview  *self, long  rock);
-static void GeneratePostScript(FILE *file, gofig *dobj, char *prefix, 
+static void GeneratePostScript(FILE *file, gofig *dobj, const char *prefix, 
 		int wpts, int hpts);
 static void printdata(gofigview *self, int code);
 
@@ -802,7 +797,7 @@ struct proctable_Entry *DoNothingProc, *SetClickProc, *SetNoteProc;
 
 
 	static void
-modifymenuentry( menulist *m, char *f, char *prior, char *post,
+modifymenuentry( menulist *m, const char *f, const char *prior, const char *post,
 			struct proctable_Entry *proc, char code ) {
 	char buf[50];
 	sprintf( buf, f, prior );
@@ -811,7 +806,7 @@ modifymenuentry( menulist *m, char *f, char *prior, char *post,
 	m->AddToML( buf, proc, code, 0 );
 }
 
-	static char *
+	static const char *
 actionmenus(enum actionopts a, char *c) {
 	switch (a) {
 	case  Alternate: *c = 'A';  return "Gofig,Black-White%s~10";
@@ -821,7 +816,7 @@ actionmenus(enum actionopts a, char *c) {
 	case  Select: *c = 'S';  return "Gofig,Select Only%s~18";
 	}
 }
-	static char *
+	static const char *
 notemenus(enum noteopts a, char *c) {
 	switch (a) {
 	case  Letter: *c = 'a';  return "Gofig,Auto a b c ...%s~20";
@@ -842,7 +837,7 @@ ClickFirst() {
 	static void
 PostMyMenus(gofigview *self) {
 	static char code = ' ';
-	char *format;
+	const char *format;
 
 	if (self->hitaction != self->menuhitaction) {
 		/* move <= from menuhitaction to hitaction */
@@ -1680,7 +1675,7 @@ gofigview::DesiredSize(long  width, long  height, enum view_DSpass  pass,
  *  # # # # # # # # # # # # #  */
 
 /* functions for drawing stones */
-	static char *
+	static const char * const
 stonefuncs[]  =  {
 	"", 
 	"godict begin",
@@ -1906,14 +1901,14 @@ stonefuncs[]  =  {
 };
 
 	static void
-putgodict( FILE *f, char *prefix ) {
-	char **dx;
+putgodict( FILE *f, const char *prefix ) {
+	const char * const *dx;
 	for (dx = stonefuncs; *dx; dx++)
 		fprintf( f, "%s %s\n", prefix, *dx );
 }
 
 	static void 
-GeneratePostScript(FILE *file, gofig *dobj, char *prefix, int wpts, int hpts) {
+GeneratePostScript(FILE *file, gofig *dobj, const char *prefix, int wpts, int hpts) {
 
 	int height = dobj->height,  width = dobj->width;
 
@@ -2106,7 +2101,7 @@ gofigview::DesiredPrintSize(long width, long height, enum view_DSpass pass,
 }
 
 	void *
-gofigview::GetPSPrintInterface(char *printtype) {
+gofigview::GetPSPrintInterface(const char *printtype) {
 	if (strcmp(printtype, "generic") == 0)
 		return (void *)this;
 	return NULL;
@@ -2146,7 +2141,7 @@ gofigview::PrintPSDoc(FILE *outfile, long pagew, long pageh) {
 }
 
 	void
-gofigview::Print(FILE *file, char *processor, char *finalFormat, boolean topLevel) {
+gofigview::Print(FILE *file, const char *processor, const char *finalFormat, boolean topLevel) {
 	gofig *dobj = (gofig *)dataobject;
 
 	/* compute size */
@@ -2154,7 +2149,7 @@ gofigview::Print(FILE *file, char *processor, char *finalFormat, boolean topLeve
 	DesiredPrintSize(pagew, pageh, view_NoSet, &wpts, &hpts);
 
 	/* generate preface and prefix */
-	char *prefix;
+	const char *prefix;
 	if (strcmp(processor, "troff") == 0) {
 		/* output to troff */
 		if (topLevel)

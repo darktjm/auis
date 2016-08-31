@@ -22,19 +22,13 @@
 //  $
 */
 
-#include <andrewos.h>
-
-#ifndef NORCSID
-#define NORCSID
-static UNUSED const char rcsid[]="$Header: /afs/cs.cmu.edu/project/atk-src-C++/atk/controllers/RCS/helpcon.C,v 1.7 1994/11/30 20:42:06 rr2b Stab74 $";
-#endif
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/config/COPYRITE'     *
 \* ********************************************************************** */
  
 /* user code ends here for HeaderInfo */
+#include <andrewos.h>
 ATK_IMPL("helpcon.H")
 #include "proctable.H"
 #include "view.H"
@@ -66,11 +60,6 @@ ATK_IMPL("helpcon.H")
 
 
 ATKdefineRegistry(helpcon, ATK, helpcon::InitializeClass);
-#ifndef NORCSID
-#endif
-#if POSIX_ENV || defined(M_UNIX)
-#else
-#endif
 static void NoteHistory(class helpcon  *self);
 static void settopics(class helpcon  *self);
 static boolean GetHelpOn(class helpcon  *self,char  *buf,char  *type,boolean SaveHistory);
