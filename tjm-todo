@@ -44,6 +44,8 @@
 - find out and possibly remove additional CMU/MIT-specific crap
   - figure out what "AFS integration" means
   - find out what AMS is/does and maybe drop it
+  - remove all packages available elsewhere; e.g. metamail, rpc, jpeg, tiff
+    (making sure there is no afs/atk "enhancement" first)
 - build improvements
   - make it possible to build w/o simultaneous install
   - make it possible to use -k and -j
@@ -56,6 +58,7 @@
 Long-term:
   - more image::WriteNative overrides (at least 1 full-color lossless)
   - add support for png and/or imagemagick or some other wrapper library
+    and make png default instead of gif
   - add code snippet inset for literate programming
   - make LaTeX the default output format
   - unicode support

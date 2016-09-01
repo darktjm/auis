@@ -964,19 +964,6 @@ variable is tested in $/doc/Imakefile.)}
 \paragraph{3.2.3.2.  Overhead build options}
 
 
-\bold{CPPCONVERTER_ENV#}  [Default: not defined]
-
-\leftindent{If your site has Andrew source code written in C for version 
-6., it can be converted to C++ code for version 8.  #Define 
-CPPCONVERTER_ENV in your site.h file and follow the instructions in 
-$/doc/atkprogramming/Conversion.ez.  As a result of defining this variable 
-two directories will be built
-
-\leftindent{$/overhead/c++conv - the converter
-
-$/overhead/class - the old preprocessor for header files}}
-
-
 \bold{MK_JPEG#} [Default: defined]
 
 \leftindent{If your site has already built a jpeg library, you can prevent 

@@ -52,14 +52,8 @@
     DYNLINK = dynlink
 #endif
 
-    CPPCONVERT = c++conv
-#ifdef CPPCONVERTER_ENV
-    CLASSM = class
-#endif
-
 SUBDIRS = relativize \
         sys \
-	$(CPPCONVERT) \
 	genmake \
 	util \
         external \
@@ -69,7 +63,6 @@ SUBDIRS = relativize \
 	addalias \
 	errors \
 	index \
-	$(CLASSM) \
 	$(DYNLINK) \
 	rxp \
 	mkparser \
