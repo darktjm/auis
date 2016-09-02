@@ -1,9 +1,0 @@
-!Class: Button
-widgetDataClass: AButton
-widgetViewClass: AOptionCardv
-mouseAny:(Function)PROC:aoption-card-hit
-borderType:(Int) 4
-mouseLeftDown:(Function)PROC:NONE
-mouseLeftMove:(Function)PROC:NONE
-mouseLeftUp:(Function)PROC:NONE
-mouseRightUp:(Function)PROC:NONE

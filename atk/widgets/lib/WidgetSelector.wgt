@@ -1,4 +1,0 @@
-designHeight:(Int) 80
-designWidth:(Int) 170
-screenImage: (Figure) FILE:/afs/cs.cmu.edu/project/atk-1/wjh/w/lib/Selector.fig:$(HOME)/w/lib/Selector.fig
-mouseLeftUp:(Function)PROC:butactions-wgtsel-left-up

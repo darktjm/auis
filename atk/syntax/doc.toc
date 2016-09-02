@@ -1,3 +1,0 @@
-@include(parser/doc.toc)
-@include(sym/doc.toc)
-@include(tlex/doc.toc)

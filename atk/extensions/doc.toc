@@ -1,7 +1,0 @@
-@include(deskey.doc)
-@include(tags.doc)
-@include(spell.doc)
-@include(isearch.doc)
-@include(dsearch.doc)
-@include(filter.doc)
-@include(ezdiff.doc)

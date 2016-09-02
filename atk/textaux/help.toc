@@ -1,4 +1,0 @@
-@include(cpchar.help)
-@include(cntproc.help)
-@include(gemacscp.help)
-@include(gemacsdf.help)

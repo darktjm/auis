@@ -1,3 +1,0 @@
-@include(Overview.doc)
-@include(RefMan.doc)
-@include(Tutorial.doc)

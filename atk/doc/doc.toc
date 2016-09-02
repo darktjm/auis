@@ -1,3 +1,0 @@
-@include(Readme.doc)
-@include(intro.doc)
-@include(class.doc)

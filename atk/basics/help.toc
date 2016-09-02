@@ -1,2 +1,0 @@
-@include(common/help.toc)
-@include(x/help.toc)

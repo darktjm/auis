@@ -1,6 +1,0 @@
-!Class: Text
-widgetDataClass: AList
-widgetViewClass: AListv
-listHitCallback:(Function)PROC:alist-text-hit
-visibleItemCount:(Int)5
-columns:(Int)0

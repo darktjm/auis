@@ -1,2 +1,0 @@
-@include(chart.help)
-@include(chtproc.help)

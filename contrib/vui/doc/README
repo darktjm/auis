@@ -1,4 +1,0 @@
-The pcmxx*.help files needed to build vui are located in the file pcmfiles.tar.  Extract these files using the "tar" command before attempting to build vui.  From this directory, issue the following command to csh: 
-
-	tar -xvf pcmfiles 
-	

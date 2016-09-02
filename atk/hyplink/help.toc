@@ -1,7 +1,0 @@
-@include(pshbttn.help)
-@include(linkins.pro)
-@include(Developr.pro)
-@include(Help.pro)
-@include(Link.pro)
-@include(Prefs.pro)
-@include(Procs.pro)

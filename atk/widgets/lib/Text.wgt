@@ -1,6 +1,0 @@
-widgetDataClass:(String)AText
-widgetViewClass:(String)ATextv
-mouseAny:(Function)PROC:atext-hit
-borderShape:(Int)1
-
-

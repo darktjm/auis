@@ -1,2 +1,0 @@
-@include(table.help)
-@include(tblproc.help)

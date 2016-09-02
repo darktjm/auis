@@ -1,3 +1,0 @@
-@include(frame.doc)
-@include(framemsg.doc)
-@include(framev.doc)

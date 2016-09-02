@@ -1,5 +1,0 @@
-@include(cutbuf.help)
-@include(improc.help)
-@include(initfls.help)
-@include(menus.help)
-@include(fontprob.help)

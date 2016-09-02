@@ -1,5 +1,0 @@
-#define IHaveSubdirs
-
-MkdirTarget( ${DESTDIR}/doc/syntax)
-
-SUBDIRS =  parser tlex sym

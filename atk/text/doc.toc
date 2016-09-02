@@ -1,9 +1,0 @@
-@include(bp.doc)
-@include(bpv.doc)
-@include(search.doc)
-@include(smpltext.doc)
-@include(tabs.doc)
-@include(text.doc)
-@include(textv.doc)
-@include(txtstvec.doc)
-

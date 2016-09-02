@@ -1,9 +1,0 @@
-#~group Tags
-
-#~type string
-#~views string
-#~help
-The file to read to get tags information
-#~endhelp
-TagFilename: tags
-

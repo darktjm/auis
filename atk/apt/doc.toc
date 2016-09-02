@@ -1,2 +1,0 @@
-@include(suite/doc.toc)
-@include(tree/doc.toc)

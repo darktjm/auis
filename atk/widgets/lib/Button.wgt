@@ -1,8 +1,0 @@
-borderShape:(Int)1
-widgetDataClass:(String)AButton
-widgetViewClass:(String)AButtonv
-mouseLeftDown:(Function)PROC:abutton-arm
-mouseLeftMove:(Function)PROC:abutton-arm
-mouseLeftUp:(Function)PROC:abutton-activate
-activateCallback:(Function)PROC:abutton-toggle
-units:(Real)0

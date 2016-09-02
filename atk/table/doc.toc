@@ -1,2 +1,0 @@
-@include(spread.doc)
-@include(table.doc)

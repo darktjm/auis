@@ -1,3 +1,0 @@
-@include(raster.help)
-@include(rasters.help)
-@include(rstproc.help)

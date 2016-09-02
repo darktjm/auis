@@ -1,2 +1,0 @@
-@include(cmd/help.toc)
-@include(null/help.toc)
