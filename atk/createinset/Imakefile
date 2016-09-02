@@ -1,0 +1,19 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+#define IHaveSubdirs
+
+SUBDIRS = cmd
+
+MkdirTarget($(DESTDIR)/lib/null)
+
+InstallFileToFile(null/Imakefile, ${INSTINCFLAGS}, ${DESTDIR}/lib/null/Imakefile)
+InstallFileToFile(null/null.C, ${INSTINCFLAGS}, ${DESTDIR}/lib/null/null.C)
+InstallFileToFile(null/null.H, ${INSTINCFLAGS}, ${DESTDIR}/lib/null/null.H)
+InstallFileToFile(null/nullview.C, ${INSTINCFLAGS}, ${DESTDIR}/lib/null/nullview.C)
+InstallFileToFile(null/nullview.H, ${INSTINCFLAGS}, ${DESTDIR}/lib/null/nullview.H)
+InstallFileToFile(null/nullapp.C, ${INSTINCFLAGS}, ${DESTDIR}/lib/null/nullapp.C)
+InstallFileToFile(null/nullapp.H, ${INSTINCFLAGS}, ${DESTDIR}/lib/null/nullapp.H)
+InstallFileToFile(null/nullvt.C, ${INSTINCFLAGS}, ${DESTDIR}/lib/null/nullvt.C)
+InstallFileToFile(null/null.help, $(INSTINCFLAGS), $(DESTDIR)/lib/null/null.help)

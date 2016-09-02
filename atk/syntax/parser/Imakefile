@@ -1,0 +1,77 @@
+/* syntax/parser  -  parser object */
+/*
+	Copyright Carnegie Mellon University 1992, 1994 - All rights reserved
+	$Disclaimer: 
+ * Permission to use, copy, modify, and distribute this software and its 
+ * documentation for any purpose and without fee is hereby granted, provided 
+ * that the above copyright notice appear in all copies and that both that 
+ * copyright notice and this permission notice appear in supporting 
+ * documentation, and that the name of IBM not be used in advertising or 
+ * publicity pertaining to distribution of the software without specific, 
+ * written prior permission. 
+ *                         
+ * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+ * TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+ * HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+ * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+ * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+ * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ * 
+ *  $
+*/
+
+
+/*
+	parser object 
+
+	see $ANDREWDIR/doc/syntax/parserclass.doc
+*/
+
+OBJS = parser.o
+HFILES = parser.H
+NormalObjectRule()
+NormalATKRule()
+
+DynamicMultiObjectWithExports(parser,,$(OBJS),,,)
+InstallDynamicObjectWithExports(parser,, ${FULLATKDLIBDIR})
+
+InstallClassFiles($(HFILES))
+InstallShScript(mkparserclass, $(DESTDIR)/bin/mkparserclass)
+InstallDocs(prsclass.doc, ${DESTDIR}/doc/PROGRAMMER)
+InstallDocs(parse.help, ${DESTDIR}/help)
+InstallHelpAlias(parse.help, parser bison mkparser parserclass sym symbol tlex lexer mkparserclass grammar token tokens)
+
+foo.C foo.H: mkparserclass Imakefile
+testparser.o: foo.H
+MKPARSERCLASS = ./mkparserclass
+Parser(foo, -d -k -v -r)
+
+ATKTestProgram(testparser, testparser.o foo.o, parser.o, , ) 
+
+/* interim until ATKTestProgram works 
+testparser: testparser.o foo.o parser.o
+Runapp(testparser, -m testparser.o foo.o parser.o -a -c environ)
+*/
+
+
+
+DependTarget(foo.C)
+
+CleanTarget (foo.[CH] *.act *.tab.* index *.output *.asc)
+
+
+/* create system for non-AUIS distribution  */
+distribution: clean
+	rm -f Imakefile RCS Makefile *.tmp rationale doc.toc
+	sed -e /andrewos/s/andrewos/stdio/ \
+		-e /ATK/d  parser.C > parser.C.tmp
+	sed -e /andrewos/d -e /ATK/d  parser.H > parser.H.tmp
+	rm -f parser.C parser.H
+	mv parser.C.tmp parser.C
+	mv parser.H.tmp parser.H
+	mv Makefile.dist Makefile
+	ez2ascii prsclass.doc > prsclass.asc
+	ez2ascii parse.help > parse.asc
+	rm -f prsclass.doc parse.help

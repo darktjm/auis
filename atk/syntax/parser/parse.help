@@ -1,0 +1,85 @@
+\begindata{text,8695240}
+\textdsversion{12}
+\template{default}
+
+
+\majorheading{Parsing in Andrew}
+
+
+
+Andrew has a number of tools for generating parsers and assisting in 
+compilation.
+
+
+\subsection{Bison}
+
+
+\leftindent{Bison is the parser generator provided by the Free Software 
+Foundation.  The Andrew version supports a few additional switches and has 
+improved error checking capabilities for reading grammars.  \
+
+
+
+Documents installed in: $ANDREWDIR/doc/syntax/bison.*
+
+Source directory:  overhead/bision}
+
+
+\subsection{Parser (C)}
+
+
+\leftindent{This package processes Bison output to produce a C source file 
+for a parser for a particular grammar.  The source file has unique names 
+and multiple parses can be in progress simultaneously.  \
+
+
+
+Documents installed in: $ANDREWDIR/doc/syntax/parser.doc
+
+Source directory:  overhead/mkparser}\leftindent{
+
+}
+\subsection{ParserClass (C++)}
+
+
+\leftindent{The mkparserclass script processes Bison output to produce the 
+.H and .C files for a C++ object which parses lexemes in the language 
+described by the Bison input grammar.}\leftindent{
+
+
+Documents installed in: $ANDREWDIR/doc/syntax/prsclass.doc
+
+Source directory:  atk/syntax/parser
+
+}
+\subsection{Symbol Table (C++)}
+
+
+\leftindent{Symbol table object.}\leftindent{ \
+
+
+
+Documents installed in: $ANDREWDIR/doc/syntax/sym.doc
+
+Source directory:  atk/syntax/sym}
+
+
+\subsection{Token Scanner (C++)}
+
+
+\leftindent{Gentlex, part of the tlex package, processes a set of lexeme 
+descriptions and produces a token scanner for those lexemes.  The lexeme 
+language is more limited than lex in that full regular expressions are not 
+supported; however, the user can incorporate C routines to process the tail 
+end of a tokern once the front end has been identified.  The entire scheme 
+is integrated with Bison so there is little effort to generate the token 
+numbers necessary. \
+
+
+
+Documents installed in: $ANDREWDIR/doc/syntax/tlex.doc
+
+Source directory:  atk/syntax/tlex}
+
+
+\enddata{text,8695240}

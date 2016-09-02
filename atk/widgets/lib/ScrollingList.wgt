@@ -1,0 +1,6 @@
+designHeight:(Int) 170
+designWidth:(Int) 100
+
+screenImage: (Figure) FILE:/afs/cs.cmu.edu/project/atk-1/wjh/w/lib/ScrollingList.fig:$(HOME)/w/lib/ScrollingList.fig
+
+ScrollingList_contents:(String)- no entries -

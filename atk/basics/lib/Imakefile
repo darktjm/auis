@@ -1,0 +1,60 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+COMMOBJS = ../common/application.o ../common/ATKdebug.o ../common/atom.o ../common/atomlist.o \
+	../common/bind.o ../common/cursor.o ../common/dataobject.o \
+	../common/environ.o ../common/event.o \
+	../common/filetype.o ../common/fontdesc.o ../common/graphic.o ../common/im.o \
+	../common/init.o ../common/keymap.o ../common/keystate.o \
+	../common/lwpstubs.o ../common/menulist.o ../common/message.o \
+	../common/messitem.o ../common/msghandler.o ../common/namespace.o ../common/observable.o \
+	../common/path.o ../common/physical.o ../common/pixelimage.o ../common/point.o \
+	../common/proctable.o ../common/rect.o ../common/region.o \
+	../common/rm.o ../common/updatelist.o ../common/view.o ../common/windowsystem.o \
+	../common/color.o  ../common/image.o ../common/gif.o \
+	../common/gifwr.o  ../common/jpeg.o ../common/imageaux.o ../common/traced.o ../common/owatch.o \
+	../common/ATK.o ../common/rastio.o ../common/flex.o ../common/mflex.o ../common/oflex.o ../common/avalue.o ../common/aaction.o  ../common/viewholderv.o ../common/ddimage.o ../common/ahash.o ../common/workproc.o
+
+#ifdef X11_ENV
+X11OBJS = ../x/xws.o ../x/xim.o ../x/xcursor.o ../x/xfontdesc.o ../x/xcolor.o \
+	../x/xcolormap.o ../x/xgraphic.o ../x/menubar.o ../x/atoms.o ../x/console.o \
+../x/xddimage.o
+#endif /* X11_ENV */
+
+OBJS = $(COMMOBJS) $(X11OBJS)
+BASELIBDIR = $(BASEDIR)/lib
+
+#if defined(RCH_ENV) && SY_AIXx
+DEBUGLIBS=/usr/local/lib/libtb.a /usr/contrib/lib/malloc/libdbmalloc.a
+#endif
+
+LIBS =$(BASELIBDIR)/libcmenu.a $(BASELIBDIR)/libshadows.a $(BASELIBDIR)/libjpeg.a  $(BASELIBDIR)/liberrors.a $(DYNEXELIBS) $(UTILLIB)
+
+ATKLibrary(basics, $(OBJS), $(LIBS),  -L$(XLIBDIR) -lX11 $(DEBUGLIBS) $(LIBMATHLIB),)
+InstallATKLibrary(basics, $(DESTDIR)/lib/atk)
+
+DependTarget()

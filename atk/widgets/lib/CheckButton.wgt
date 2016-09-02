@@ -1,0 +1,8 @@
+!Class: Button
+widgetDataClass:(String)AButton
+widgetViewClass:(String)AButtonv
+indicatorOn:(Bool)True
+indicatorType:(String)N
+units:(Real)0
+
+

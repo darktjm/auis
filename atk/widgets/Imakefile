@@ -1,0 +1,10 @@
+/* ********************************************************************** *\
+ *         Copyright Carnegie Mellon Univ.,1996 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+#define	IHaveSubdirs
+
+MkdirTarget($(DESTDIR)/lib/widgets)
+
+SUBDIRS =  driver lib doc
+

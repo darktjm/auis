@@ -1,0 +1,107 @@
+\begindata{text,537692328}
+\textdsversion{12}
+\template{default}
+\majorheading{Welcome  \
+
+
+to the \
+
+
+AUIS Document Launcher !!}
+
+
+This launcher is intended to be a starting point for document reading.  The 
+links below will guide you to a specific area of interest.  \
+
+
+
+Enjoy ! \
+
+
+
+\begindata{link,537698056}
+Datastream version: 3
+$ANDREWDIR/doc/progtools.d
+0
+0
+\begindata{link,537698056}
+Datastream version: 2
+Programming Tools
+2
+
+black
+white
+\enddata{link,537698056}
+\enddata{link,537698056}
+\view{linkview,537698056,0,0,0}Programming Tools
+
+
+\begindata{link,537698696}
+Datastream version: 3
+$ANDREWDIR/doc/mailsys.d
+0
+0
+\begindata{link,537698696}
+Datastream version: 2
+Mail System
+2
+
+black
+white
+\enddata{link,537698696}
+\enddata{link,537698696}
+\view{linkview,537698696,1,0,0}Mail System \
+
+
+
+\begindata{link,537699144}
+Datastream version: 3
+$ANDREWDIR/doc/insets.d
+0
+0
+\begindata{link,537699144}
+Datastream version: 2
+Insets
+2
+
+black
+white
+\enddata{link,537699144}
+\enddata{link,537699144}
+\view{linkview,537699144,2,0,0}Insets
+
+
+\begindata{link,538444824}
+Datastream version: 3
+$ANDREWDIR/doc/pinsets.d
+0
+0
+\begindata{link,538444824}
+Datastream version: 2
+Programmer Insets
+2
+
+black
+white
+\enddata{link,538444824}
+\enddata{link,538444824}
+\view{linkview,538444824,3,0,0}Programming Other Insets
+
+
+\begindata{link,538445176}
+Datastream version: 3
+$ANDREWDIR/doc/texttools.d
+0
+0
+\begindata{link,538445176}
+Datastream version: 2
+Text Tools
+2
+
+black
+white
+\enddata{link,538445176}
+\enddata{link,538445176}
+\view{linkview,538445176,4,0,0}Text Tools
+
+\enddata{text,537692328}

@@ -1,0 +1,184 @@
+#!/bin/sh -
+# Shell interface to BatMail, the emacs message reader
+# 15 April 1987 - Miles Bader
+# revised Nov, 1994 -wjh
+
+BATCAVE=${BATCAVE-${ANDREWDIR-/usr/andrew}} export BATCAVE
+
+LOCALDIR=${LOCALDIR-/usr/local} export LOCALDIR
+
+if  test  \! \( -r $BATCAVE/bin/robin  -a -r $BATCAVE/lib/el/batmail.el \)  
+then
+	if  test  \( -r $LOCALDIR/bin/robin -a -r $LOCALDIR/lib/el/batmail.el \) 
+	then
+		BATCAVE=$LOCALDIR
+	else
+		echo Batmail files are not in either
+		echo	$BATCAVE
+		echo or
+		echo	$LOCALDIR
+		echo Please set environment variable BATCAVE to a directory 
+		echo that has bin/robin and the other batmail files.
+		exit 1
+	fi
+fi
+
+folders=""
+
+gnu=true
+gnusw=""
+
+for i in ${@+"$@"}
+do
+    case "$i" in
+	-u|-update)
+	    gotsince=true
+	    since="updates";;
+	-s|-since)
+	    wantsince=true;;
+	-m|-mail)
+	    mail=true;;
+	-pick)
+	    pick=true;;
+	-G)
+	    gnu=true;;
+	-U)
+	    gnu=false;;
+	-nw)
+	    gnusw="$gnusw $i";;
+	-x|-h|-\?|-help)
+	    echo 'Usage: batmail [-umr] [-s time] group ...'
+	    echo '-since time'
+	    echo '-s time	Read since time (or date or...)'
+	    echo '-u	The same as "-s updates"'
+	    echo '-m	Shorthand for "mail.*"'
+	    echo '-nw	Passed through to gnu-emacs'
+	    echo '-help'
+	    echo '-x	Print this list of switches'
+	    echo 'group	A folder to read; "*" means "all subscribed"'
+	    echo ''
+	    echo 'The usual command line is "batmail -u"'
+	    exit 0;;
+	-*)
+	    echo Unknown switch: $i
+	    echo Use batmail -x for help
+	    exit 1;;
+	*)
+	    if ${wantsince-false}
+	    then
+		since="$i"
+		gotsince=true
+		wantsince=false
+	    elif [ "$folders" = "" ]
+	    then
+		folders="$i"
+	    else
+		folders="$folders,$i"
+	    fi;;
+    esac
+done
+
+if ${wantsince-false}
+then
+    echo The -s flag expects a date/time...
+    exit 1
+fi
+
+if test -r $BATCAVE/etc/batlock -a ${pick-false}
+then
+    echo Sorry, maintenance is being performed on the batcave right now...
+    echo Try again in a few minutes.
+    exit 1
+fi
+
+
+if ${mail-false}
+then
+    if [ "$folders" = "" ]
+    then
+    	folders="mail.*"
+    else
+	folders="$folders,mail.*"
+    fi
+fi
+
+if ${gotsince-false}
+then
+    if [ "$folders" = "" ]
+    then
+	folders="*"
+    fi
+fi
+
+if [ "$folders" != "" ]
+then
+    BATFOLDERS="$folders" export BATFOLDERS
+    echo BATFOLDERS: "$BATFOLDERS"
+
+    if ${gotsince-false}
+    then
+	BATSINCE="$since" export BATSINCE
+    else
+	BATSINCE="updates" export BATSINCE
+    fi
+    echo BATSINCE: "$BATSINCE"
+fi
+
+
+# execute an emacs using proper macro package
+
+if ${gnu-true}
+then
+	# use gnu emacs
+
+	# try environment variable GNUEMACS
+	emacsbinary=${GNUEMACS}
+	if [ "$emacsbinary" != "" ]
+	then
+		if [ -x $emacsbinary ]
+		then
+			exec $emacsbinary $gnusw \
+				-l $BATCAVE/lib/el/batmail \
+				-f bat-auto-start
+		else
+			echo Environment variable GNUEMACS is
+			echo \	$emacsbinary
+			echo which is not executable.
+		fi
+	fi
+	# try value from GNUEMACS in allsys.mcr or site.mcr
+	emacsbinary=@EMACSNAME@
+	if [ "$emacsbinary" != "" -a  "$emacsbinary" != "GNUEMACS" ]
+	then
+		if [ -x $emacsbinary ]
+		then
+			exec $emacsbinary $gnusw \
+				-l $BATCAVE/lib/el/batmail \
+				-f bat-auto-start
+		else
+			echo Tell administrator that site.mcr GNUEMACS value is
+			echo \	$emacsbinary
+			echo which is not executable.
+			echo Executing "emacs" if it is on your path.
+		fi
+	fi
+
+	exec emacs $gnusw \
+		-l $BATCAVE/lib/el/batmail \
+		-f bat-auto-start
+else
+
+	# extend EPATH and invoke Unipress emacs
+
+	if [ "${EPATH-xx}" != "xx" ]
+	then
+		EPATH="$BATCAVE/lib/ml:$EPATH":"$LOCALDIR/lib/emacs/maclib" \
+			export EPATH
+	else
+		EPATH=$BATCAVE/lib/ml:$LOCALDIR/lib/emacs/maclib \
+			export EPATH
+	fi
+
+	EMACS=${EMACS-$LOCALDIR/bin/emacs} export EMACS
+	exec $EMACS -lbatmail -e~bat-auto-start
+fi

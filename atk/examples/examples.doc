@@ -1,0 +1,374 @@
+\begindata{text,6720704}
+\textdsversion{12}
+\template{default}
+\define{global
+}
+This directory contains several examples of Andrew Toolkit programming.
+
+
+The remaining subdirectories, ``ex1'' through ``ex19,'' contain a 
+ programmed sequence of tutorial examples in increasing order of 
+complexity.  Each example builds on the previous one.
+
+
+Additional documention is available for selected examples.  See the 
+individual files or use the link inset below to go to the documents.  \
+
+
+
+\begindata{link,6790416}
+4
+$ANDREWDIR/examples/doc/ex1.doc
+0
+0
+V
+\begindata{link,6790416}
+Datastream version: 2
+ex1
+2
+
+black
+white
+\enddata{link,6790416}
+\enddata{link,6790416}
+\view{linkview,6790416,0,0,0}ex1.doc - how to create a class an application 
+program
+
+\begindata{link,6796896}
+4
+$ANDREWDIR/examples/doc/ex2.doc
+0
+0
+V
+\begindata{link,6796896}
+Datastream version: 2
+ex2
+2
+
+black
+white
+\enddata{link,6796896}
+\enddata{link,6796896}
+\view{linkview,6796896,1,0,0}ex2.doc - example showing how to respond to 
+mouse hits
+
+\begindata{link,6797632}
+4
+$ANDREWDIR/examples/doc/ex3.doc
+0
+0
+V
+\begindata{link,6797632}
+Datastream version: 2
+ex3
+2
+
+black
+white
+\enddata{link,6797632}
+\enddata{link,6797632}
+\view{linkview,6797632,2,0,0}ex3.doc - example showing how to respond to 
+mouse dragging
+
+\begindata{link,6798336}
+4
+$ANDREWDIR/examples/doc/ex4.doc
+0
+0
+V
+\begindata{link,6798336}
+Datastream version: 2
+ex4
+2
+
+black
+white
+\enddata{link,6798336}
+\enddata{link,6798336}
+\view{linkview,6798336,3,0,0}ex4.doc - example of keyboard input
+
+\begindata{link,7028064}
+4
+${ANDREWDIR}/examples/doc/ex5.doc
+0
+0
+V
+\begindata{link,7028064}
+Datastream version: 2
+ex5
+2
+
+black
+white
+\enddata{link,7028064}
+\enddata{link,7028064}
+\view{linkview,7028064,7,0,0}ex5.doc - how to add menus
+
+\begindata{link,7033216}
+4
+${ANDREWDIR}/examples/doc/ex6.doc
+0
+0
+V
+\begindata{link,7033216}
+Datastream version: 2
+ex6
+2
+
+black
+white
+\enddata{link,7033216}
+\enddata{link,7033216}
+\view{linkview,7033216,8,0,0}ex6.doc - how to add scroll bars
+
+\begindata{link,7072464}
+4
+${ANDREWDIR}/examples/doc/ex7.doc
+0
+0
+V
+\begindata{link,7072464}
+Datastream version: 2
+ex7
+2
+
+black
+white
+\enddata{link,7072464}
+\enddata{link,7072464}
+\view{linkview,7072464,9,0,0}ex7.doc - the application layer
+
+\begindata{link,7076752}
+4
+${ANDREWDIR}/examples/doc/ex8.doc
+0
+0
+V
+\begindata{link,7076752}
+Datastream version: 2
+ex8
+2
+
+black
+white
+\enddata{link,7076752}
+\enddata{link,7076752}
+\view{linkview,7076752,10,0,0}ex8.doc - posting messages
+
+\begindata{link,7081104}
+4
+${ANDREWDIR}/examples/doc/ex9.doc
+0
+0
+V
+\begindata{link,7081104}
+Datastream version: 2
+ex9
+2
+
+black
+white
+\enddata{link,7081104}
+\enddata{link,7081104}
+\view{linkview,7081104,11,0,0}ex9.doc - posting questions
+
+\begindata{link,7085312}
+4
+${ANDREWDIR}/examples/doc/ex10.doc
+0
+0
+V
+\begindata{link,7085312}
+Datastream version: 2
+ex10
+2
+
+black
+white
+\enddata{link,7085312}
+\enddata{link,7085312}
+\view{linkview,7085312,12,0,0}ex10.doc - data objects
+
+\begindata{link,7089712}
+4
+${ANDREWDIR}/examples/doc/ex11.doc
+0
+0
+V
+\begindata{link,7089712}
+Datastream version: 2
+ex11
+2
+
+black
+white
+\enddata{link,7089712}
+\enddata{link,7089712}
+\view{linkview,7089712,13,0,0}ex11.doc - data streams
+
+\begindata{link,7129088}
+4
+${ANDREWDIR}/examples/doc/ex12.doc
+0
+0
+V
+\begindata{link,7129088}
+Datastream version: 2
+ex12
+2
+
+black
+white
+\enddata{link,7129088}
+\enddata{link,7129088}
+\view{linkview,7129088,22,0,0}ex12.doc - multiple views on one data object
+
+\begindata{link,7124624}
+4
+${ANDREWDIR}/examples/doc/ex13.doc
+0
+0
+V
+\begindata{link,7124624}
+Datastream version: 2
+ex13
+2
+
+black
+white
+\enddata{link,7124624}
+\enddata{link,7124624}
+\view{linkview,7124624,21,0,0}ex13.doc - using multiple fonts
+
+\begindata{link,7120096}
+4
+${ANDREWDIR}/examples/doc/ex14.doc
+0
+0
+V
+\begindata{link,7120096}
+Datastream version: 2
+ex14
+2
+
+black
+white
+\enddata{link,7120096}
+\enddata{link,7120096}
+\view{linkview,7120096,20,0,0}ex14.doc - creating text documents
+
+\begindata{link,7115888}
+4
+${ANDREWDIR}/examples/doc/ex15.doc
+0
+0
+V
+\begindata{link,7115888}
+Datastream version: 2
+ex15
+2
+
+black
+white
+\enddata{link,7115888}
+\enddata{link,7115888}
+\view{linkview,7115888,19,0,0}ex15.doc - creating styles in documents
+
+\begindata{link,7111696}
+4
+${ANDREWDIR}/examples/doc/ex16.doc
+0
+0
+V
+\begindata{link,7111696}
+Datastream version: 2
+ex16
+2
+
+black
+white
+\enddata{link,7111696}
+\enddata{link,7111696}
+\view{linkview,7111696,18,0,0}ex16.doc - splitting windows
+
+\begindata{link,7107152}
+4
+${ANDREWDIR}/examples/doc/ex17.doc
+0
+0
+V
+\begindata{link,7107152}
+Datastream version: 2
+ex17
+2
+
+black
+white
+\enddata{link,7107152}
+\enddata{link,7107152}
+\view{linkview,7107152,17,0,0}ex17.doc - creating a vew that has children
+
+\begindata{link,7102544}
+4
+${ANDREWDIR}/examples/doc/ex18.doc
+0
+0
+V
+\begindata{link,7102544}
+Datastream version: 2
+ex18
+2
+
+black
+white
+\enddata{link,7102544}
+\enddata{link,7102544}
+\view{linkview,7102544,16,0,0}ex18.doc - dynamically loading objects
+
+\begindata{link,7098368}
+4
+${ANDREWDIR}/examples/doc/ex19.doc
+0
+0
+V
+\begindata{link,7098368}
+Datastream version: 2
+ex19
+2
+
+black
+white
+\enddata{link,7098368}
+\enddata{link,7098368}
+\view{linkview,7098368,15,0,0}ex19.doc - changing cursors
+
+
+
+Directory ``<src>/contrib/atkbook'' is a tree of examples from Nathaniel 
+Borenstein's book, \italic{Multimedia Application Development with the 
+Andrew Toolkit}.
+
+
+\begindata{bp,6799360}
+Version 2
+n 0
+\enddata{bp,6799360}
+\view{bpv,6799360,4,0,0}
+Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
+
+\smaller{\smaller{$Disclaimer: # Permission to use, copy, modify, and 
+distribute this software and its # documentation for any purpose and 
+without fee is hereby granted, provided # that the above copyright notice 
+appear in all copies and that both that # copyright notice and this 
+permission notice appear in supporting # documentation, and that the name 
+of IBM not be used in advertising or # publicity pertaining to distribution 
+of the software without specific, # written prior permission. # 
+                        # THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES 
+WITH REGARD # TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF # 
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT # HOLDER BE 
+LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL # DAMAGES OR ANY DAMAGES 
+WHATSOEVER RESULTING FROM LOSS OF USE, # DATA OR PROFITS, WHETHER IN AN 
+ACTION OF CONTRACT, NEGLIGENCE # OR OTHER TORTIOUS ACTION, ARISING OUT OF 
+OR IN CONNECTION # WITH THE USE OR PERFORMANCE OF THIS SOFTWARE. # #  $
+
+}}\enddata{text,6720704}

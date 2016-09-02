@@ -1,0 +1,8 @@
+!Class: Button
+mouseLeftDown:(Function)PROC:NONE
+mouseLeftMove:(Function)PROC:NONE
+mouseRightDown:(Function)PROC:NONE
+mouseRightUp:(Function)PROC:NONE
+activateCallback:(Function)PROC:NONE
+
+

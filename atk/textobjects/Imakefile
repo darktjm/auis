@@ -1,0 +1,50 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+OBJS = chlist.o chlistview.o dired.o diredview.o panel.o unknown.o unknownv.o printopts.o
+HFILES = chlist.H chlistview.H dired.H diredview.H panel.H printopts.H
+LIBS = $(UTILLIB) $(SUPLIBS) 
+
+NormalObjectRule()
+NormalATKRule()
+
+ATKLibrary(textobjs, $(OBJS), $(LIBS),,)
+InstallATKLibrary(textobjs, $(DESTDIR)/lib/atk)
+InstallClassFiles($(HFILES))
+
+InstallFile(dired.tpl, ${INSTINCFLAGS}, ${DESTDIR}/lib/tpls)
+InstallFile(printopt.tpl, ${INSTINCFLAGS}, ${DESTDIR}/lib/tpls)
+Runapp(recover,-m recover.o -c @text -a)
+InstallProgram(recover, ${DESTDIR}/bin)
+
+DependTarget()
+
+NormalHelpRule()
+InstallDocs(unknown.help drdproc.help,  ${DESTDIR}/help)
+InstallHelpAlias(unknown, recover)
+InstallHelpAlias(drdproc, diredproc diredprocs)
+InstallDocs(dired.doc panel.doc,${DESTDIR}/doc/PROGRAMMER)

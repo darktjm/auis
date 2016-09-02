@@ -1,0 +1,4 @@
+
+DOCS = WidgetUser.d /* WidgetAuthor.d WidgetDeveloper.d */
+
+InstallDocs($(DOCS),$(DESTDIR)/doc/PROGRAMMER)

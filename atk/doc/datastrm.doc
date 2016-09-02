@@ -1,0 +1,349 @@
+
+Data stream formats in the Andrew User Interface System
+
+	Wilfred J. Hansen
+	Andrew Consortium
+	Carnegie Mellon University
+
+
+(The Andrew Toolkit (ATK) is the architecture and tools for building application in the Andrew User Interface System.)
+
+
+In order to support the inclusion of arbitrary objects in multi-media editors, the Andrew Toolkit requires data objects to conform to a set of conventions for their file representation.  A data object must write its data enclosed in a begin/end marker pair.  The marker must include a tag denoting the type of the object being written and a unique identifier, used for referencing the data object by other data objects.  If a data object includes other data objects, they must be properly nested.  The begin/end markers make it possible to find the data associated with an object without actually parsing the data. 
+
+For example, a text with an embedded picture has the format:
+
+	\begindata{text,1}
+	<text data>
+	\begindata{picture,2}
+	<picture data>
+	\enddata{picture,2}
+	\view {pictureview,2}
+	<more text data>
+	\enddata{text,1}
+
+In order to transport files across most networks, data streams use only printable 7-bit ASCII characters, including tab, space and new-line, and keep line lengths below 80 characters.
+
+____________________________________
+Text format
+
+Text data streams in the Andrew User Interface System follow the general
+principles for Andrew Toolkit data streams.  The overall structure 
+of a text data stream is 
+
+	A. \begindata line
+	B. \textdsversion line
+	C. \template line
+	D. definitions of additional styles
+	E. the text body itself
+	F. styled text
+	G. embedded objects in text body
+	H. \enddata line
+
+Subsequent sections of this document describe each of these components.
+
+As usual in ATK, the appropriate way to read or write the data stream is 
+to call upon the corresponding Read or Write method from the AUIS 
+distribution.  Only in this way is your code likely to continue to work in
+the face of changes to the data stream definition.  Moreover, there are
+a number of special features--mostly outdated data streams--that are 
+implemented in the code, but not described here.
+
+
+A. \begindata line
+
+Standard ATK begindata line having the form
+
+	\begindata{text,99999}
+
+where 99999 is some identifying number unique within this data stream.
+
+
+B. \textdsversion line
+
+This line always has the form 
+
+	\textdsversion{12}
+
+There exist files written with earlier data stream versions having values 
+other than 12.
+
+
+C. \template line
+
+If the file utilizes a style template, there will be a line of this form:
+
+	\template{default}
+
+where 'default' is whatever template name is used.  This template name is
+the prefix of a filename.  The name is appended with the suffix ".tpl" and 
+sought in the directories named in the user's atktemplatepath preference
+value.  If there is none, the default directory is $ANDREWDIR/lib/tpls.
+
+'default' is the most usual template name.  Every installation of AUIS
+is expected to have $ANDREWDIR/lib/tpls/default.tpl and its styles are
+not defined further in the document.
+
+
+D. definitions of additional styles
+
+A document may define and use styles that are not in the template.  Each 
+such definition is two or more lines:
+
+	\define{internalstylename
+	menuname
+	attribute
+	. . .
+	attribute}
+
+The internalstylename is lower case and may have digits, but no spaces.
+There may be no menuname, in which case there is an empty line;  if there
+a menuname line, it is of the form
+
+	menu:[Menu card name,Style name]
+
+If there are no attributes, the closing '}' appears at the end of the 
+menuname line.  Each attribute line is of the form
+
+	attr:[attributename basis units value]
+
+where the first three are strings and the fourth is an integer, possibly 
+signed.  The specific values allowed are beyond the scope of this document;
+they do correspond closely to values in style.H.
+
+
+E. the text body itself
+
+Text is represented by itself.  A sequence of n consecutive newlines is
+represented by n+1 newlines in the data stream.  Single newlines are used
+to break the stream into lines of less than 80 bytes;  these are ignored
+when the file is read.  Earlier data stream versions required a space before
+a newline if there was to be a space in the text;  version 12 invents a 
+space before the newline if one is not there.  The latter is prevented by
+ending the line with a single backslash (\).  If a sentence ends a line and 
+has more than one space after its punctuation, the additional spaces must 
+appear at the start of the next line.  The characters backslash, left 
+brace, and right brace are always preceded in the text with a backslash.
+
+Characters in the data stream may have the high bit set to get the 
+appropriate character from the ISO-8859 set.
+
+In late 1993, the standard text reader and writer was modified slightly in 
+what was considered a backward compatible manner.  The intention was
+to more accurately map text that is not ATK text and thus has a newline 
+after each screen line.  The behavior at end-of-line is shown by the table 
+below.  The first column gives the text as it appears on screen; the '|' 
+indicates where a line break is inserted when writing to the data stream.  A 
+real newline as represented as '%' and spaces by '-'.  The second column
+shows the text in the data stream and the third shows it when converted to
+plain ASCII by the "unscribe" routine.
+
+screen text		data stream      	unscribed
+
+...abc-|def...		...abc-%def...    	one space, except none at end of line
+...abc-|-def...		...abc-%-def...	two spaces, but only one at end of line
+...abc|def...		...abc\%def...		no space ever;  no backslash
+
+...abc%def...		...abc%%def...  	one newline.  no space at end of line
+...abc-%def...    	...abc-\%%%def...	one newline.  space at end of line
+...abc---%def...	...abc---\%%%def...	one newline.  three spaces at end of line
+
+
+F. styled text
+
+If text in the body is to be displayed in a style, e.g. italic, the text is
+preceded with
+	\internalstylename{
+and followed by a closing curly brace.  The internal style name is 
+one of the names defined either in the template or in a \define line.
+
+
+G. embedded objects in text body
+
+When an object is embedded in a text body, two items appear: the data 
+stream for the object and a \view line.  The \begindata for the object is
+always at the beginning of a line.  (The previous line is terminated with
+backslash if there is to be no space before the object.)  The \enddata
+line for the object always ends with a newline (which is not treated as a 
+space).  
+
+The \view line has the form:
+
+	\view{rasterview,8888,777,0,0}
+
+In future data stream versions, other items may appear before the '}'; each
+such item is preceded by a comma.  The first item in the list is the textual
+name of the view object to be used to display the dataobject.  The second 
+item is the identifing integer that also appears in the \begindata for the
+object.  The third value is ignored.  The fourth and fifth items are 
+usually zero;  however, if non-zero the specify the desired width and height 
+to display the object.
+
+
+H. \enddata line
+
+Has the form
+
+	\enddata{text,99999}
+
+that is, it is the same as the \begindata line, but has 'end' instead 
+of 'begin'.
+
+
+
+____________________________________
+Format of ATK raster images
+
+The raster data object writes a standard ATK data stream beginning with
+a \begindata line and ending with a \enddata line.  Between these comes
+a header and possibly an image body.
+
+The first line of the header looks like this:
+
+	2 0 65536 65536 0 0 484 603
+
+Where the values are these:
+
+RasterVersion:  '2'  
+	This specification describes the second version of this encoding.
+
+Options: '0'
+	This field may specify changes to the image before displaying it:
+
+		raster_INVERT	(1<<0)	/* exchange black and white */
+		raster_FLIP	(1<<1)	/* exch top and bottom */
+		raster_FLOP	(1<<2)	/* exch left and right */
+		raster_ROTATE	(1<<3)	/* rotate 90 clockwise */
+
+xScale, yScale:  '65536 65536'
+
+	These scale factors affect the size at which the image is printed.
+	The value raster_UNITSCALE (136535) will print the image at
+	approximately the size on the screen.  The default scale of
+	65536 is approximately half the screen size.  (It is not
+	exactly half screen size in an effort to simplify scaling on
+	300-dots-per-inch printers.)
+
+x, y, width, height:    '0 0 484 603'
+
+	It is possible for a raster object to display a portion of an
+	image.  These fields select this portion by specifying the
+	index of the upper left pixel and the width and height of the
+	image in pixels.
+
+	In all instances so far, x and y are both zero and the width
+	and height specify the entire raster.
+
+The second header line specifies the actual raster in one of three forms;
+but only the first of these forms is actually used.
+
+First form:
+	bits 10156544 484 603
+
+RasterType: 'bits'
+	This form.
+RasterId: '10156544'
+	An identifier so other raster objects can refer to this one.
+	Usually this is the same identifier as in the \begindata line.
+Width, Height:  '484 603'
+	Describes the width of each row and the number of rows.
+	This many rows follow one subsequent lines.
+
+Second form:   refer 10135624
+	The current data object does not have the bits, but refers to the
+	bits as stored in another data object (which should appear earlier
+	in the same data stream.)   'refer' identifies this form and
+	the integer is the identifying number.
+
+Third form:   file 10235498 filename path
+	The raster is not in the current data object, but is in a file.
+	'file' identifies this form.  The id number '10235498' allows
+	this raster data to be refered to by a 'refer' form.  The filename
+	is the full pathname of the file.  Path is the element of a
+	"rasterpath" list against which the filename was resolved.
+	(This is not fully implemented.  The idea is to acheive a 
+	measure of recovery in case the file is moved.)
+
+
+In the first form ('bits'), the header is followed by lines specifying the 
+image.  There is at least one line per raster row, though some rows may take 
+more lines.  The bits of a row are encoded in blocks of eight; a multiple 
+of 8 bits are specified, though trailing bits will be ignored after reading
+the row.  Following the last bits for a row are a space, a vertical bar (|),
+and a newline.  Basically, white space is to be ignored, so the bytes of the
+encoding are broken into blocks of 13 or 14 bytes separated with tabs.
+
+The bits of the row are run-length encoded by bytes.  That is, a sequence
+of identical bytes will be represented in only a few bytes rather than
+at full length.  Hexadecimal is a subset of this encoding with a one bit 
+representing black and zero for white.  Here is the 
+interpretation of each range of byte values:
+
+control characters and space:
+	Ignored.
+@ [ ] ^ _ ` } ~ 0x7F and all characters with high bit set:
+	These are errors, but at present they are ignored.
+{ \:
+	Illegal end of line.  Treat as end of row.
+|:
+	Legal end of row.  If there have not been enough
+	codes for the entire width, pad with white bits.
+0x21 ... 0x2F  (punctuation characters)
+	The next two bytes specify a hex value.  This value is
+	to be repeated in the row the number of times given
+	by c-0x1F, where c is the input code.  (That is, 0x21 means
+	to repeat the byte two times, 0x22 three times, and so on.)
+0x30 ... 0x3F  (digit or punctuation)
+	This is a hex digit and encodes one byte of the row
+	with the value c-0x30.
+A ... F  a ... f
+	These are hex digits with values 0xA ... 0xF.
+g ... z
+	Multiple white bytes.  c-'f' bytes of white are generated into row
+G ... Z
+	Multiple black bytes.  c- 'F' bytes of black are generated into row
+
+
+
+
+\begindata{text,538375988}
+\textdsversion{12}
+\template{default}
+\define{global
+}
+\define{up15
+menu:[Justify,Up15]
+attr:[Script PreviousScriptMovement Point -15]}
+
+This is text in the document.  \italic{This is 
+italic.}  These two lines are one paragraph.
+
+
+This paragraph is preceded by two newlines, but it will be 
+displayed with only one blank line between it and the previous one. 
+ When two space are required between words, the second
+must appear at the beginning of a line.  When a newli\
+ne is not to be replaced with a space, it must be preceded
+with backslash.
+
+\begindata{bp,9233088}
+\enddata{bp,9233088}
+\view{bpv,9233088,38,0,0}
+
+This second page has a raster on it.
+
+\begindata{raster,10156544}
+2 0 68266 68266 0 0 484 603
+bits 10156544 484 603
+zzzg |
+zzzg |
+7fZZHfeKfeOc0	g |
+. . .
+zzzg |
+\enddata{raster, 10156544}
+\view{rasterview,10156544,31,0,0}
+
+
+\enddata{text,538375988}
+
+

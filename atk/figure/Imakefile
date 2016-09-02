@@ -1,0 +1,114 @@
+
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+/* uncomment this line to keep figobj and all its subclasses as separate objects, rather than linking them all into figure.do */
+/*#define SEPARATEFIGOBJECTS*/
+
+OBJS = figattr.o \
+	figio.o \
+	figobj.o \
+	figoell.o \
+	figogrp.o \
+	figoins.o \
+	figoplin.o \
+	figorect.o \
+	figorrec.o \
+	figospli.o \
+	figotext.o \
+	figoflow.o \
+	figtoolview.o \
+	figure.o \
+	figview.o \
+	fontsample.o \
+	fontsel.o \
+	fontselview.o \
+	textflowview.o \
+	textflow.o \
+	phlumphview.o \
+	phlumph.o
+
+HFILES = figattr.H \
+	figio.H \
+	figobj.H \
+	figoell.H \
+	figogrp.H \
+	figoins.H \
+	figoplin.H \
+	figorect.H \
+	figorrec.H \
+	figospli.H \
+	figotext.H \
+	figoflow.H \
+	figtoolview.H \
+	figure.H \
+	figview.H \
+	fontsample.H \
+	fontsel.H \
+	fontselview.H \
+	textflowview.H \
+	textflow.H \
+	phlumphview.H \
+	phlumph.H
+
+EXTRACLASSES = figattr \
+	figio \
+	figobj \
+	figoell \
+	figogrp \
+	figoins \
+	figoplin \
+	figorect \
+	figorrec \
+	figospli \
+	figotext \
+	figoflow \
+	figtoolview \
+	figview \
+	fontsample \
+	fontsel \
+	fontselview \
+	textflowview \
+	textflow \
+	phlumphview \
+	phlumph
+
+
+NormalObjectRule()
+NormalATKRule()
+
+ATKLibrary(figure,$(OBJS),,$(DYNMATHLIB),)
+InstallATKLibrary(figure,$(DESTDIR)/lib/atk)
+
+InstallClassFiles($(HFILES))
+InstallRunappAPP(figure)
+
+NormalHelpRule()
+InstallDocs(figure.help, $(DESTDIR)/help)
+InstallDocs(figure.pr, ${DESTDIR}/lib/prs)
+InstallDocs(figattr.doc figobj.doc figure.doc figv.doc, ${DESTDIR}/doc/PROGRAMMER)
+
+/* InstallHelpAlias: the second argument is a space-separated list of aliases */
+InstallHelpAlias(figure, drawing)
+
+DependTarget()

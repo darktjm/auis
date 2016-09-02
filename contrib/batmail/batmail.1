@@ -1,0 +1,193 @@
+.TH BATMAIL 1 "Andrew User Interface System"
+.SH Name
+batmail \- AMS mail reading/sending environment
+.SH SYNTAX
+.B batmail
+[\-\fBum\fR] [-\fBs\fR \fItime\fR] \fIgroup\fR ...
+.SH DESCRIPTION
+.I Batmail
+is an AMS (Andrew Message System) mail reading environment.
+Batmail is actually a program which runs within GNU emacs.
+It has full functionality,
+including reading of all AMS bboards (and local mail folders), sending
+mail with full editing capability, message manipulation, folder
+manipulation, subscription manipulation, and message killing. 
+.PP
+.I Batmail
+has an online help facility which is invoked with the '?' key.
+To get a more detailed overview of batmail, run
+.I batmail -u
+and then sometime after the screen gets cleared, type the '?' key followed
+by the
+.B Return
+(or
+.BR Enter)
+key.
+.SH OPTIONS
+.TP
+.B -m
+shorthand for "mail.*".  That is, update the mail folder and all its
+subfolders.
+.TP 
+.B -u
+instructs 
+.I batmail
+to show all new messages (updates) on all 
+subscribed folders.  The initial title screen asking for a folder
+list and update time is skipped.
+.TP
+.B -s
+.I time / date
+answers the "Since?" prompt, that is, show messages since
+.I time
+or 
+.I date.
+.TP
+.I group
+A folder to read.  "*" means "all subscribed folders".
+.SK
+.PP
+.SH COMMANDS
+.PP
+On-line help is always available in
+.I batmail
+from the
+.I bat-captions
+window by typing \fB?\fR and then a character as follows:
+.TP 8
+.B o
+for an overview of
+.I batmail
+.TP 8
+.B c
+for help on commands
+.TP 8
+.B f
+for help on files associated with
+.I batmail
+.TP 8
+.B h
+for help on function hooks
+.TP 8
+.B v
+for help on various user-settable variables
+.PP
+In the 
+.I bat-captions
+window,
+.I batmail
+shows the user the 
+folders the user requested (or the default subscribed folders)
+followed by the new messages in each respective folder.  From here,
+reading of mail as well as all the other features are achieved with
+single keystroke commands.  A list of the major commands follows.
+For a complete list, type \fB?\fR followed by \fBc\fR once inside
+batmail (and after the captions list is ready). \fBNOTE:\fR Case
+(uppercase/lowercase) of all keystrokes are significant.  Be sure to use
+the case shown on the left.
+.TP
+.B <space>
+Scroll forward in message or read next message.
+.TP 
+.B n
+Read \fBn\fRext message.
+.TP
+.B p
+Read \fBp\fRrevious message.
+.TP
+.B s
+\fBS\fRend mail. 
+.TP
+.B r
+\fBR\fReply to the currently displayed message.
+.TP
+.B w
+\fBW\fRide reply to (all the readers of) the currently displayed message
+.TP
+.B p
+\fBP\fRost a message to the current folder.
+.TP
+.B Q
+\fBQ\fRuit batmail.
+.TP
+.B ?
+Online help facility.  Type \fB?\fR again for help with sub-choices.
+.SH ENVIRONMENT VARIABLES
+.PP
+The following variables can be set in your environment.  Set them in csh
+with 
+.IP
+setenv VARIABLE value
+.PP
+and in sh with
+.IP
+set VARIABLE=value  export VARIABLE
+.TP
+.B BATCAVE
+The location of the batmail files.  The default value is $ANDREWDIR.
+.TP
+.B BATFOLDERS
+Comma separated list of folders to be opened.  Usually this variable is set 
+from arguments supplied on the batmail command line as given above.  
+The command line will override any previous setting of this variable.
+Default is the empty list.
+.TP
+. B BATSINCE
+Display all messages from this date onward.  Usually this variable is set 
+from arguments supplied on the batmail command line as given above.  
+The command line will override any previous setting of this variable.
+Default is "updates".
+.SH BATCAVE
+.PP
+The batcave maintainer can add various files to those in the batcave:
+.TP
+.B etc/batlock
+If this file exists, no one can start up batmail.  This is intended for
+infrequent maintenance.
+.TP
+.B etc/news
+This file will be displayed at the bottom of the intro text in the 
+*bat-display* buffer.
+.TP
+.B etc/folderaliases
+Folders can be given nicknames.  Each is specified on a separate line
+containing the nickname, a space, and the full folder name.  See online help
+describing $HOME/.folderaliases.
+.TP
+.B etc/fakedomains
+Address and header rewriting rules.  Each line is one rule specified as
+a regular expression, a space, and the replacement for the expression.
+Headers are processed by comparing each rule entry (starting with the last)
+against the header and making the replacement if the entry matches the header.
+Use of this mechanism is not recommended.
+.SH FILES
+.PP
+The following files in $HOME are utilized by batmail:
+.ta 1.8i
+.br
+.AMS.prof	User's mail profile.
+.br
+.headers	Optional header list to be added to the top of outgoing mail.
+.br
+.signature	Optional "signature" to be added to the end of outgoing mail.
+.br
+.folderaliases	Optional folder aliasing capability. See the online help for details.
+.br
+.graveyard	Batmail's "kill file," used to store unwanted subjects & authors.  
+.br
+	Can safely be edited by hand as well.
+.SH AUTHOR
+Miles Bader
+.SH SUPPORT
+Batmail is maintained as part of the Andrew Consortium's contributed collection.  
+Send bug reports to: 
+	info-andrew-bugs@andrew.cmu.edu
+.SH SEE ALSO
+    gnu-emacs(1)
+    \fBGNU Emacs User's Manual\fR
+
+
+
+
+
+

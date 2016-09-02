@@ -1,0 +1,88 @@
+-- num.tlx
+--	tokens for parsing numeric expressions in rofftext
+
+-- ******************************************************
+--	Copyright 1993, Carnegie Mellon University.  All Rights Reserved.
+--	$Disclaimer: 
+-- Permission to use, copy, modify, and distribute this software and its 
+-- documentation for any purpose and without fee is hereby granted, provided 
+-- that the above copyright notice appear in all copies and that both that 
+-- copyright notice and this permission notice appear in supporting 
+-- documentation, and that the name of IBM not be used in advertising or 
+-- publicity pertaining to distribution of the software without specific, 
+-- written prior permission. 
+--                         
+-- THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+-- TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+-- MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+-- HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+-- DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+-- DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+-- OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+-- WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+-- 
+--  $
+-- ******************************************************
+
+tokenclass -errorhandler-
+{
+	struct evalstrdata *data = (struct evalstrdata *)((tlex)->GetRock());
+
+	(data->numparse)->Error(parser_SERIOUS, parm->msg);
+}
+
+-- whitespace:  control characters, space, DEL, and \200+ controls
+--
+tokenclass -none-
+	recognizer	ScanWhitespace
+	set		[\000-\040\177-\237]
+	charset 	continueset [\000-\040\177-\237]
+
+-- scale factors: [a-zA-Z]
+--
+-- Note that the scale factors do not include abcdefx, so numbers will not
+-- usually be confused with C numeric constants (since ScanNumber is used)
+--
+tokenclass SCALE
+	set [a-zA-Z]
+{
+	switch(*((tlex)->GetTokenText())) {
+	case 'i':  (tlex)->SetTokenValue((void *)scale_i);  break;
+	case 'c':  (tlex)->SetTokenValue((void *)scale_c);  break;
+	case 'P':  (tlex)->SetTokenValue((void *)scale_P);  break;
+	case 'm':  (tlex)->SetTokenValue((void *)scale_m);  break;
+	case 'n':  (tlex)->SetTokenValue((void *)scale_n);  break;
+	case 'p':  (tlex)->SetTokenValue((void *)scale_p);  break;
+	case 'u':  (tlex)->SetTokenValue((void *)scale_u);  break;
+	case 'v':  (tlex)->SetTokenValue((void *)scale_v);  break;
+	default:   (tlex)->SetTokenValue((void *)scale_u);  break;
+	}
+	return tlex_ACCEPT;
+}
+
+-- numbers:	decimal: [0-9]+
+--		real: ((.[0-9]+)|([0-9]+.[0-9]*))
+--	(see comment under SCALE)
+--
+tokenclass CONST
+	set		[0-9.]
+	recognizer	ScanNumber
+{
+	struct evalstrdata *data = (struct evalstrdata *)((tlex)->GetRock());
+
+	/* store parm->realval into a double (from data) 
+		and return ptr to the double */
+	double *dp;
+	if (data->nextdbl < 0) {
+		(tlex)->Error("expression nested too deeply");
+		dp = &data->dummydbl;	/* soldier onward */
+		*dp = 0;
+	}
+	else {
+		dp = &(data->dbls[data->nextdbl]);
+		data->nextdbl = (int)(*dp);
+		*dp = parm->realval;
+	}
+	(tlex)->SetTokenValue((void *)dp);
+	return tlex_ACCEPT;
+}	

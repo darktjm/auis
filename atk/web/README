@@ -1,0 +1,47 @@
+4-Sep-96
+This is version 2.960904.  This is the integration of 2.960809 with the work done at CMU in support of the web browser and improved ez -> html conversion.
+
+9-Aug-96
+This is version 2.960809 of the HTML+ dataobject/view (which form the HTML+ editor/browser extension of EZ) and the accompanying datastream-to-HTML+ converter application (ez2html).
+
+- To use the converter, ez2html must be an executable symlink to runapp.  Otherwise you must 'runapp ez2htmlapp'.
+- To use the editor/browser dataobject, html.tpl must be available in your TEMPLATEPATH, and you must map a file extension in your ~/.ezinit like so:   addfiletype .html htmltext "template=html"
+- The preference  "*.DefaultImage: /path/filename.gif"  should be set if you want unreadable images to appear as image insets.  globe.gif is included in this distribution for this purpose, but it doesn't get automatically installed anywhere.
+
+-- Note that our template name (html.tpl) conflicts with the one used by Nick Williams's 'html' dataobject, so make sure you're getting ours.  Our global style forces a serif'ed "andy" font for the global style.
+-- Tables, Footnotes, raw HTML+, and images (local files only, not remote URLs) are supported.
+-- Read htmltext.help for instructions on using the editor.
+
+This code is still under development, so before starting any significant modifications, or to get the latest version (Class-C or C++), contact Rob Kemmetmueller (rskm@vnet.ibm.com), alternate Todd Inglett (tinglett@vnet.ibm.com)
+
+
+
+--Notable changes from v950519--
+* Copy/Paste of insets won't crash, and will now retain attributes (especially important for image insets!)
+* Raw HTML insets will size themselves reasonably now
+* Handles example text in the template properly
+* Really long spaceless tags won't crash anymore
+* Output of defunct <plaintext> tag eliminated
+* Supports &#99; symbol format
+* ">" inside an SGML comment won't terminate the comment
+* Supports <center> and <strike> tags, per HTML3.2 draft
+* Cleaned up some <P> and <BR> writing anomalies
+* <a></a> with no text inside it won't be discarded.  Also, a menu has been added to allow easy insertion of anchor-target style.
+
+--Things to be done (in no particular order)--
+* support NOFOLD, NOWRAP, JUSTIFY, etc attributes of <P> tag.
+* get rid of defunct <LIT> literal tag support.
+* subclass imageview, get rid of ugly chisel border, change origin so it won't drop down to baseline of surrounding text.
+* add an option to turn <A> anchor tags into URLbutton insets instead of **anchor**-styled text.
+* bugs: last newline of list style should not be wrapped when read; omitting it will make adding non-list text less problematic. crashes adding bullet to ordered list immediately after a nested unordered list.
+* copy Nick's "title in subwindow" and "-set-title" features.
+* word-break long paragraphs (except in <PRE> et al) for lame punch-card-based mailing systems and browsers.
+* add a preference to determine where the local server (and hence ez) should look for images whose "src=" starts with "/".
+* finish the code to support all the recognized tags that are currently commented-out. Only add menu definitions for styles that aren't "obsolete" in HTML 3.X.
+* ez2html's helptopic->anchor convertor should support #fragmentIDs someday.  Few people use helptopic's sophisticated extensions anyway.
+* add caption support to table/spread in base toolkit, then make htmltext use it.
+* "frame-read-file" (evil base toolkit proc) shouldn't strip all the environments off.
+* bug: pasting styled text into "Raw HTML" window results in a datastream being written.
+* "Hide HTML Insets" should also affect insets inside table inset cells.
+* add support to table for cellspacing, cellpadding, width hints, and other Netscapisms and HTML 3.2 things that were introduced recently.
+* fix crash and renumbering bugs with nested lists.

@@ -1,0 +1,357 @@
+\begindata{text,538443672}
+\textdsversion{12}
+\template{help}
+\define{global
+}
+
+
+\chapter{Ezprint: Printing EZ documents}
+
+
+\section{What Ezprint is
+
+}
+\leftindent{Ezprint prepares  \italic{\helptopic{ATK}}  document files 
+(created using the  \italic{\helptopic{EZ} } editor) for printing and then 
+prints them. \
+
+
+}
+\section{Quick Reference}
+
+
+\leftindent{To print out an EZ file, type the command "ezprint" followed by 
+the name of the file you want to print:
+
+
+\typewriter{\leftindent{ezprint \italic{filename}}}
+
+
+Using the ezprint command with the name of a file from the command prompt 
+is the same as selecting the\bold{ Print} pop-up menu command from the 
+\italic{File} menu card in EZ, or the \bold{Print} command from the Preview 
+menus.\italic{
+
+}
+\bold{Printing multiple files.}  You can print more than one file with a 
+single ezprint command by separating filenames with a space.  When you want 
+to print files in other directories, use pathnames.  For example, to print 
+a copy of your preferences file from your home directory and a copy of the 
+file "draft.1" from the subdirectory "work," you would type the following 
+command from your home directory:
+
+
+\leftindent{\typewriter{ezprint preferences work/draft.1}}
+
+}
+\section{Options}  \
+
+
+\leftindent{
+Any of these print options that you want to use must come \italic{before} 
+the name of the file you want to print. If you print multiple files, each 
+file is affected by all the options that appear before it in the command 
+line.
+
+
+\bold{-P} \italic{printername}  The -P option, followed by a printer name, 
+prints your document on the printer you choose.  This option is similar to 
+the "print -P" option.  For example, to print a document named "termpaper" 
+on a printer called "sycamore," you would use the following command:
+
+
+\leftindent{\typewriter{ezprint -P sycamore termpaper}}
+
+
+\bold{-o} \italic{name}  The "-o" option, plus a name or a message, allows 
+you to specify a new name or message to be printed in the "File:" line on 
+the cover page of a printout.  If you do not specify a new name or message 
+for the file, ezprint by default lists the original filename.   If you have 
+a multi-word message, do not separate words with spaces but with some 
+character, like underscore, or use quotes around "sample string".  For 
+example,
+
+
+\leftindent{\typewriter{ezprint -o sample_string \italic{filename}}}
+
+
+\bold{-O} \italic{name} The same as -o.
+
+
+\bold{-p}  The "-p" option allows you to send formatted output from ezprint 
+directly to a previewing program from a command line.  Use the following 
+command line, substituting in the name of your file, and then press Enter 
+to preview a file:
+
+
+\leftindent{\typewriter{ezprint -p\italic{ filename}}}
+
+
+Which program is used to display the file depends on whether you are using 
+the troff or PostScript printing mechanisms. (See the descriptions of the} 
+"-M" \leftindent{option.) PostScript output is usually displayed with 
+\helptopic{\italic{ghostview}}; troff output may be displayed with 
+\helptopic{\italic{preview}}, or automatically converted to PostScript and 
+displayed with \italic{ghostview}.
+
+
+The following options apply only to text documents being printed (not 
+figures, rasters, or other kinds of documents):
+
+
+\bold{-n}  The "-n" option lets you set a starting page number. This option 
+only works with the troff-generating print routi}nes ("-M 
+troff").\leftindent{
+
+
+It is recommended that you not use the "-n" option. Instead, you should set 
+page numbers by inserting a page break at the beginning of your document 
+and using the "Set Page Number" menu option. This will work with both the 
+troff and PostScript printing mechanisms.
+
+
+\bold{-c  }The "-c" option tells ezprint to produce the table of contents. \
+
+
+
+\bold{-E}   The "-E" option tells ezprint to automatically enumerate the 
+table of contents entries, if any, when printing.  (See the 
+\italic{\helptopic{ez-contents} } help file for information about creating 
+a table of contents.)  You can force ezprint to always enumerate the table 
+of contents with the AutoEnumerate:true preference.
+
+
+\bold{-cn}  The "-cn" option tells ezprint to override any preference set 
+to print a table of contents (PrintContents:yes) and not print a table of 
+contents.
+
+
+\bold{-N }  The "-N" option lets you set a starting chapter number for the 
+table of contents.
+
+
+\bold{-C }\italic{"style1,style2"}\bold{ }  The "-C" option specifies the 
+styles that will be looked for and put into the table of contents.   (See 
+the \italic{\helptopic{ez-contents} } help file for information about 
+creating a table of contents.)  The default styles are 
+"chapter,section,subsection,paragraph,function."  So, to specify that 
+"Heading" and "SubHeading" be included in the table of contents, and not 
+any of the text in the default styles, you would use
+
+
+\typewriter{\leftindent{ezprint -c -C "heading,subheading" filename}}
+
+
+You can also set the default via a ContentsList preference.
+
+ \
+
+
+\bold{-I}   The "-I" option specifies that only an index for the give file 
+be printed.  See the  \italic{\helptopic{ez-index} } help file for more 
+information on creating and using an interactive index.
+
+
+\bold{-F}  The "-F" option specifies that footnote insets in an EZ file 
+should be printed at the bottom of the page.  This is the default behavior. 
+ See the  \italic{\helptopic{ez-footnotes} } help file for more information 
+on creating footnotes.
+
+
+\bold{-FE}  The "-FE" option specifies that footnotes insets in an EZ file 
+should be printed as end notes.  See the  \italic{\helptopic{ez-footnotes} 
+} help file for more information on creating footnotes.
+
+
+The following arguments are for advanced users:
+
+
+\bold{-M} \italic{mechanism}  The "-M" option determines which set of ATK 
+printing routines are used to print the document. \italic{mechanism} should 
+be either \bold{troff}, to use the old troff-generating print routines, or 
+\bold{ps}, to use the newer PostScript-generating routines. The default 
+depends on how your ATK software is configured, which will depend on which 
+is more efficient or useful at your site.
+
+
+\bold{-f} \italic{outputfile}   The "-f" option converts the file to troff 
+or PostScript, and sends the result to the designated file, instead of 
+printing it. The format of the output depends on whether the "-M troff" or 
+"-M ps" is used. If \italic{outputfile} is "-", the output is sent to 
+stdout. Thus, to convert the file \italic{filename1.ez} to PostScript and 
+store the result in \italic{filename2.ps}, you could use a command like 
+this:
+
+
+\typewriter{\leftindent{ezprint -f filename2.ps -M ps filename1.ez \
+
+
+}}
+Again, remember that the name of the file you want to print must come 
+\italic{after} all the options and switches.
+
+
+\bold{-s}   The "-s" option tells ezprint to read input from stdin.
+
+
+\bold{-t }  The "-t" option converts any ATK (or BE1) file into troff 
+format and sends it to stdout.  This is equivalent to "-M troff -f -".
+
+
+\bold{-L}   The "-L" option causes the document to print in landscape mode. 
+This option only works if the PostScript printing mechanism is being used 
+("-M ps").
+
+
+\bold{-%} \italic{number}   The "-%" option causes the document to be 
+scaled to the given percentage. The default is "-% 100". This option only 
+works if the PostScript printing mechanism is being used ("-M ps").
+
+
+\bold{-g} \italic{papersize}   The "-g" option sets the paper size that the 
+document will be formatted for. The default is "letter". You may specify 
+"letter", "legal", "a4", "folio", and other common terms; you may also 
+specify dimensions in inches, e.g. "8x10", or in centimeters, e.g. 
+"20x30c". This option only works if the PostScript printing mechanism is 
+being used ("-M ps").
+
+
+\bold{-z}  The "-z" option tells ezprint to Zap (delete) the file when it 
+is done printing and the print appears to have been successful.  This 
+option also causes ezprint to lock the file when it opens it for reading 
+with flock; thus an application can safely collect things to be printed in 
+a file and periodically queue them for printing, relying on the flock 
+(which the application must also do) to ensure that both duplicate prints 
+and missing prints due to timing errors do not occur.  If the print request 
+fails, the file is renamed to PrintErr.xxx (for some 
+not-previously-existing version of xxx) in the same directory.
+
+
+\bold{-v} \italic{ScribeVersion}  The "-v" option, plus a version string, 
+allows you to print files in the old Scribe-like datastream that was 
+sometimes used by BE1 applications and the messages program.  The only 
+reasonable options for "ScribeVersion" are "yes" and "2".  It is unlikely 
+that this option will be useful to anything other than the messageserver 
+printing old-format mail and bboard messages.
+
+
+\bold{-T}\italic{ <args>}  The "-T" option passes the specified arguments 
+to troff.  Use of this is incompatable with -n.  If you wish to use both, 
+the -n argument should be included in the -T arguments , i.e. \
+
+
+
+\example{ezprint -T "-n10 -o12-15" p.doc}
+
+
+\bold{-e }\italic{<foo=bar>}  The "-e" option sets the environment 
+variables specified.
+
+
+\bold{-q} The "-q" option tells ezprint to run without displaying of the 
+ATK version message. \
+
+
+}
+\section{Changing ezprint defaults}
+
+\leftindent{
+There are no options available for ezprint which allow you to override EZ 
+defaults and change the appearance of your document only at the time it is 
+printed.  All changes to the appearance of your document must be made 
+either in the EZ document itself or in the preferences stored in your 
+\helptopic{preferences} file.  The ez.bodyfont preference affects both the 
+screen and printer font.  To change the printing font used by ezprint 
+without affecting ez's screen appearance, you must change the 
+print.bodyfont preference.  See the preferences section of the 
+\italic{\helptopic{ez}} help document for details.
+
+}
+\section{EZprint and PostScript
+
+}
+\leftindent{Most sites with PostScript printers should have psdit software 
+for converting from \helptopic{troff} to PostScript.  Ezprint software 
+should be set up to do this automatically when printing. To produce a 
+postscript file with ezprint, the follow should work at most sites.  If 
+not, check with your local systems people.
+
+
+ezprint -t  file.d | eqn -Tpsc | troff -Tpsc | psdit > file.psc}
+
+
+\section{How Ezprint works
+
+}
+\leftindent{If you are interested in how ezprint works, there is a document 
+describing it in the Andrew sources; in andrew/atk/ezprint/printing.ins.}
+
+
+\section{Related Tools}
+
+
+Select (highlight) one of the italicized names and choose "Show Help on 
+Selected Word" to see the help document for:
+
+\leftindent{\italic{
+\helptopic{ez}
+
+\helptopic{ez-contents}
+
+\helptopic{ez-footnotes}
+
+\helptopic{ez-index}
+
+\helptopic{ez-troff}
+
+\helptopic{preferences}
+
+\helptopic{preview}}}
+
+
+\begindata{bp,538539736}
+Version 2
+n 0
+\enddata{bp,538539736}
+\view{bpv,538539736,0,0,0}
+Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
+
+\smaller{\smaller{$Disclaimer: 
+
+Permission to use, copy, modify, and distribute this software and its 
+
+documentation for any purpose and without fee is hereby granted, provided 
+
+that the above copyright notice appear in all copies and that both that 
+
+copyright notice and this permission notice appear in supporting 
+
+documentation, and that the name of IBM not be used in advertising or 
+
+publicity pertaining to distribution of the software without specific, 
+
+written prior permission. 
+
+                        
+
+THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+
+TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+
+HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+
+DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+
+DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+
+OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+
+WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+
+
+ $
+
+}}\enddata{text,538443672}

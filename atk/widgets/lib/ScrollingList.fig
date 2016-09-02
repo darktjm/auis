@@ -1,0 +1,45 @@
+\begindata{figure,8718272}
+$origin 0 0
+$printscale 1.000000 1.000000
+#none 0
+\begindata{figogrp,8718496}
+\figattr{
+}
+$ 1 0 0 1324 1516
+$endatt
+\enddata{figogrp,8718496}
+\begindata{figoins,9638856}
+\figattr{
+shade:-1
+color:black
+linewidth:1
+rrectcorner:10
+fontsize:12
+fontstyle:0
+fontfamily:andy
+textpos:0
+arrowsize:8
+arrowpos:0
+arrow:5
+linestyle:0
+}
+$ 14 5
+$ 1332 1528
+\begindata{cel,9637960}
+\V 2
+\begindata{text,9638104}
+\textdsversion{12}
+\enddata{text,9638104}
+1 9638104 0 0 0 0 
+>OBJ< text
+>VIEW< textview
+>REF< text
+\enddata{cel,9637960}
+$# 1 2083 1040 0 0
+$# 3 1052 7 0 0
+$# 5 22 1040 0 0
+$# 7 1052 2072 0 0
+$endatt
+\enddata{figoins,9638856}
+#end
+\enddata{figure,8718272}

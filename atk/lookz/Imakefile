@@ -1,0 +1,68 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+
+OBJS = lookz.o lookzview.o tabrulerview.o 
+HFILES = lookz.H lookzview.H tabrulerview.H 
+LIBS =  $(BASEDIR)/lib/libutil.a
+
+NormalObjectRule()
+NormalATKRule()
+
+EXTRACLASSES=lookzview tabrulerview
+
+DynamicMultiObjectWithExports(lookz,$(EXTRACLASSES),$(OBJS),$(LIBS),,)
+InstallDynamicObjectWithExports(lookz,$(EXTRACLASSES),$(FULLATKDLIBDIR))
+InstallClassFiles($(HFILES))
+
+#ifdef WM_ENV
+WMLIB = $(BASEDIR)/lib/libwm.a
+#endif
+
+TESTLIBS = ${BASEDIR}/lib/atk/libframe.a \
+	${BASEDIR}/lib/atk/libtext.a \
+	${BASEDIR}/lib/atk/libsupviews.a \
+	${BASEDIR}/lib/atk/libsupport.a
+
+BASETESTLIBS = ${BASEDIR}/lib/atk/libbasics.a \
+	$(WMLIB) \
+	${BASEDIR}/lib/liberrors.a \
+	${BASEDIR}/lib/libplumber.a \
+	${UTILLIB}
+
+SYSLIBS = -lm
+
+TestProgramTarget(lookzt,lookzt.o lookz.o, ${BASETESTLIBS},  ${SYSLIBS} ${BSDLIB})
+TestProgramTarget(lookzvt,lookzvt.o lookz.o lookzv.o, ${TESTLIBS} ${BASETESTLIBS}, ${SYSLIBS} ${BSDLIB})
+
+DependTarget()
+
+NormalHelpRule()
+InstallDocs(lookz.help lkzproc.help, ${DESTDIR}/help)
+InstallDocs(lookz.pr, ${DESTDIR}/lib/prs)
+InstallHelpAlias(lookz, edit-styles editstyles edit-style editstyle)
+InstallHelpAlias(lkzproc, lookzproc lookzprocs)

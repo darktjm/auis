@@ -1,0 +1,39 @@
+The following variables may be set in your .emacs_pro file with
+setq-default to affect the behavior of BatMail.
+E.g.: (setq-default bat-folders-only 1)
+
+--Name--		--Default-- --Description--
+bat-headers		"from:subject:date:to"
+				    List of headers to show, seperated
+				    by ':', OR a '!' followed by a
+				    list of headers NOT to show.
+bat-folders-only	0	    When non-0, checking more than one
+				    folder for new messages will only
+				    list the folders, not the captions
+				    (this is much faster).  To see the
+				    captions, you can use the 'N'
+				    command.
+bat-body-active  	1	    If 0, certain commands pertain to
+                                    the message under the cursor
+				    instead of the currently displayed
+				    message
+bat-send-bcc		0	    If non-0, all outgoing message will
+				    be bcc'd to you.
+bat-caption-percentage	30	    Percentage of screen height used by header
+				    window.
+bat-default-folders	"*"	    Initial list of folders to read.
+bat-low-density		0	    If non-0, will put a blank line between
+				    message directories.
+
+These probably don't concern most people:
+
+--Name--		--Default-- --Description--
+bat-digest-separator	"^-----------------------------"
+				    Regular expression of separator in
+				    digests.
+bat-trace		0	    If non-0, will record interactions
+				    with the robin subprocess in the
+				    buffer "*bat-log*".
+robin			"robin"    The name of the executable for robin.
+batcave			"/afs/andrew.cmu.edu/usr0/cl0x/batcave"
+				    The prefix used to find bat-files.

@@ -1,0 +1,50 @@
+The following keys have special meaning in BatMail.  Most Emacs movement
+commands still work as they normally do.
+
+--key--	    --description--
+<SPACE>	    Scroll forward in message or read next message
+n	    read [n]ext message
+p	    read [p]revious message
+<CR>	    The same as ^N (for one-fingered browsing)
+
+s	    [s]end mail
+r	    [r]eply to currently displayed message
+w	    "[w]ide" reply to (readers of) message
+W	    "All" reply to readers and sender message
+P	    Send to the current folder ([P]ost)
+f	    [f]orward body of a message
+F	    Resend a message
+g	    Send a bat-[g]ripe
+
+a	    [a]ppend message to file
+^U a	    pipe message to a command
+A	    [A]ppend currently displayed message to a file
+v	    Scroll currently displayed message forward
+b, DEL	    Scroll currently displayed message backward
+^F	    Move to next message in digest
+^B	    Move to previous message in digest
+x	    rot13 current message
+^W	    toggle stripping of headers in current body
+ESC-p	    Print the current message body on your default printer
+<	    Beginning-of-body
+>	    End-of-body
+V	    [V]ote on a message (only for messages with votes in them)
+
+q, ^X^C     Exit batmail
+
+d	    [d]elete a message
+u	    [u]ndelete a message
+.	    Mark a message as unseen (can you think of a better key?)
+c	    [c]opy and delete a message to another folder
+^U c	    append and delete a message to another folder
+C	    [C]opy a message to another folder
+^U C	    append a message to another folder
+k	    [k]ill a message subject (permanently)
+^U k	    [k]ill a message author (permanently) [I wish!]
+
+R	    [R]ead message from folder
+N	    Read updates from current folder
+U	    [U]n-subscribe to folder
+S	    [S]ubscribe to folder
+/	    Punt (goto end, mark all messages read) this folder
+^	    Set quit-line (Put the last-read mark before this message)

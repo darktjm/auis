@@ -1,0 +1,188 @@
+\begindata{text,538372888}
+\textdsversion{12}
+\template{help}
+\chapter{The 'Unknown' Inset: Interoperation with future AUIS releases
+
+}
+\section{What Unknown is
+
+}\leftindent{
+The unknown inset is an inset which is substituted when a document calls 
+for an inset which your current version of AUIS does not support. (Or which 
+simply isn't installed at your site.)
+
+}
+\section{Starting Unknown
+
+}\leftindent{
+The unknown inset is introduced automatically when an unavailable inset is 
+included in a document.  The unknown inset informs you of the problem, and 
+will optionally allow you to save or view the original data.
+
+}
+\section{Warnings
+
+}\leftindent{
+If a document containing unavailable insets is read in, it may not behave 
+properly.  But, with the unknown inset in place the application should not 
+crash because of an unavailable inset.  Saving a document read in when one 
+or more of its insets were unavailable may result in the corruption of the 
+document and the included data.  Manual intervention may be able to restore 
+the document to its original form, but this is not guaranteed.  Documents 
+should generally only be edited with an installation of AUIS which has all 
+the insets needed.
+
+}
+\section{Automatic Recovery}
+
+
+\leftindent{To recover the original contents of a file which has been saved 
+with unknown insets you can try the Attempt Recovery menu option on the 
+Unknown menu card.   (After clicking in an unknown inset.)  This menu 
+option will run the recovery program and then ez or another program you 
+specify to test whether the resulting file is useful.  If running the ez 
+command fails to give you a window with the proper contents and behavior 
+you may need to consult the sources for the insets involved and examine and 
+edit the partially corrected file.  (You can use ^XEsc^V to edit the raw 
+data in the corrected file.)}
+
+
+\section{Manual Recovery}
+
+
+\leftindent{It may become necessary to repair a document for use with a 
+later version of AUIS after it has been saved by an older version.  For 
+example, consider a doucment created with AUIS 7.0 with a 'foobar' inset. 
+ It is then read in and saved with an AUIS 6.3 application.  The 'foobar' 
+inset is now wrapped in an unknown inset.  This prevents any corruption of 
+the foobar data from crashing an AUIS 7.0 application which might read it 
+subsequently.  In the simplest case recovering the original appearance of 
+the document is as simple as executing:
+
+
+recover<original-file>corrected-file
+
+
+The corrected-file resulting from this operation may still be corrupted 
+such that editing it would cause ez to crash.  For this reason you should 
+try bringing it up in a new ez process by running:
+
+
+ez corrected-file
+
+
+(Or whatever program is normally used to edit the orginal file.)
+
+
+(In the above you can and should replace original-file and corrected-file 
+with the appropriate filenames.  Note that if the orginal-file has an 
+extension such as .c, or any other extension, then the correct-file should 
+have the same extension.)
+
+
+You can manually apply the steps that the recover program uses by editing 
+the original file in raw mode (e.g. with ^X ESC v) and looking for lines 
+like:
+
+	\
+
+
+\\begindata\{unknown,82728\}
+
+\\enddata\{unknown,82728\}
+
+
+Where the number 82728 is probably something else, and will vary.  After 
+the begindata, and before the enddata there will be lines such as:
+
+
+\\begindata\{foobar,28338\}
+
+and
+
+\\enddata\{foobar,28338\}
+
+(note that the enddata may not be on a line by itself)
+
+
+The number from the begin/enddata with a type of unknown should be 
+substituted for the number in the begin/enddata with type foobar.  (But 
+only the outermpst pair bracketed by the begin/enddata for unknown.)  Then 
+simply remove the begin/endata\{unknown,82728\}.  After removing these 
+lines simply run ez on the resulting file.  The ez program may crash 
+though, so it is advised that you use an ez which does not have any unsaved 
+changes in its buffers.  This procedure will work as long as the object is 
+self contained and is not referred to by other insets and does not 
+reference other insets.  If there are such references the recovery process 
+is dependent on the specific inset, the best guide in these cases is the 
+source code for the inset. \
+
+
+
+For example:
+
+\\begindata\{unknown,82728\}
+
+\\begindata\{foobar,28338\}
+
+	....
+
+\\enddata\{foobar,28338\}
+
+\\enddata\{unknown,82728\}
+
+
+would become:
+
+\\begindata(foobar,82728\}
+
+	....
+
+\\enddata\{foobar,82728\}}
+
+
+
+\section{Menu meanings
+
+}\leftindent{
+The unknown inset presents a single card of menus, the "Unknown" card.  The 
+options on this menu card include:
+
+
+\bold{Help}, brings up this help file.
+
+
+\bold{Attempt Recovery}, runs the recover command to attempt automatic 
+recovery, also prompts for a command to run to test the resulting file.
+
+
+\bold{Save Raw Data}, saves the raw data for the unavailable inset into a 
+specified file.  You can then use ^X ESC v (the default binding for 
+frame-visit-file-uninterpretted), to view and edit the data.  It is not 
+possible to modify the data as it appears in the original document unless 
+you use ^X ESC v to edit it in raw mode.
+
+
+\bold{Display Raw Data}, copies the raw data for the unavailable inset into 
+the text which is displayed in place of the unavailable inset.  Note that 
+editing this data is not possible.
+
+}
+
+\section{Program Author}
+
+\leftindent{\leftindent{
+}Robert Ryan
+
+}
+\section{Related tools}  \
+
+
+
+Select (highlight) one of the italicized names and choose "Show Help on 
+Selected Word" from the pop-up menu to see the help file for:
+
+
+\leftindent{\helptopic{ez}
+
+}\enddata{text,538372888}

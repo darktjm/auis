@@ -1,0 +1,10 @@
+#define NOVAL -1
+#define BACK 0
+#define FORWARD 1
+#define HOME 2
+#define RELOAD 3
+#define OPEN 4
+#define SAVE_AS 5
+#define CLONE 6
+#define CLOSE 7
+#define CANCEL 8

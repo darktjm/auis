@@ -1,0 +1,18 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+OBJS = tree.o treev.o
+HFILES = tree.H treev.H
+LIBS =
+
+NormalObjectRule()
+NormalATKRule()
+DependTarget()
+
+DynamicMultiObjectWithExports(tree,treev,$(OBJS),$(LIBS),,)
+InstallDynamicObjectWithExports(tree,treev,$(FULLATKDLIBDIR))
+
+InstallClassFiles($(HFILES))
+
+InstallDocs(TreePG.doc,${DESTDIR}/doc/PROGRAMMER)

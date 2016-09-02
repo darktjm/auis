@@ -1,0 +1,56 @@
+/* ********************************************************************** *\
+ *	Copyright IBM Corporation 1988,1991 - All Rights Reserved
+ *	Copyright Carnegie Mellon University, 1996
+ *	For full copyright information see:'andrew/config/COPYRITE'
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+
+OBJS = heximage.o oldRF.o paint.o plusspace.o rasterio.o xbm.o xwdio.o \
+	cmuwm.o dispbox.o raster.o rasterimage.o rasterview.o rastoolview.o \
+	rastvaux.o rastvauy.o
+HFILES = heximage.H oldRF.H paint.H plusspace.H rasterio.H xbm.H xwdio.H \
+	cmuwm.H raster.H rasterimage.H rasterview.H rastoolview.H dispbox.h \
+	pattern.h rastvaux.h
+
+LIBS = $(BASEDIR)/lib/libutil.a 
+
+NormalObjectRule()
+NormalATKRule()
+
+EXTRACLASSES = heximage oldRF paint plusspace rasterio xbm xwdio cmuwm \
+	rasterimage rasterview rastoolview
+DynamicMultiObjectWithExports(raster,$(EXTRACLASSES),$(OBJS), $(LIBS), $(DYNMATHLIB) $(NETLIBS) $(SYS_LIBRARIES),)
+InstallDynamicObjectWithExports(raster, $(EXTRACLASSES), $(DESTDIR)/lib/atk)
+InstallClassFiles($(HFILES))
+InstallRunappAPP(raster)
+
+NormalHelpRule()
+
+InstallDocs(raster.help rasters.help rstproc.help, ${DESTDIR}/help)
+InstallHelpAlias(raster, pictures)
+InstallHelpAlias(rstproc, rasterproc rasterprocs)
+
+InstallDocs(raster.doc,${DESTDIR}/doc/PROGRAMMER)
+InstallDocs(raster.pr, ${DESTDIR}/lib/prs)

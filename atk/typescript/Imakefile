@@ -1,0 +1,58 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+
+OBJS = fcomp.o pscripta.o typescript.o tscripta.o typetext.o
+HFILES = fcomp.H pscripta.H typescript.H tscripta.H typetext.H
+
+LIBS = $(UTILLIB)
+
+NormalObjectRule()
+NormalATKRule()
+
+EXTRACLASSES= fcomp pipescriptapp  typescriptapp typetext
+DynamicMultiObject(typescript,$(EXTRACLASSES),$(OBJS),$(LIBS),$(BSDLIB),)
+InstallDynamicObject(typescript,$(EXTRACLASSES),$(FULLATKDLIBDIR))
+
+OptionalATKLibrary(tscript, $(OBJS),$(LIBS) ,${BSDLIB},)
+InstallOptionalATKLibrary(tscript,${DESTDIR}/lib/atk)
+InstallClassFiles($(HFILES))
+
+InstallFile(shmenu,${INSTINCFLAGS},${DESTDIR}/lib)
+InstallFile(typescript.tpl,${INSTINCFLAGS},${DESTDIR}/lib/tpls)
+
+DependTarget()
+
+NormalHelpRule()
+InstallDocs(tscript.help tsckeys.help pscript.help typproc.help, ${DESTDIR}/help)
+InstallDocs(tscript.pr, ${DESTDIR}/lib/prs)
+InstallHelpAlias(tscript, typescript tx shmenu)
+InstallHelpAlias(tsckeys, typescript-keys typescriptkeys)
+InstallHelpAlias(pscript, pipescript)
+InstallHelpAlias(typproc, typescriptproc typescriptprocs tscriptproc tscriptprocs)
+InstallLink(runapp, $(DESTDIR)/bin/typescript)
+InstallLink(runapp, $(DESTDIR)/bin/pipescript)

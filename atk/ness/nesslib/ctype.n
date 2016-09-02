@@ -1,0 +1,131 @@
+\begindata{text,538549432}
+\textdsversion{12}
+\template{default}
+-- ctype.n   Ness case translation library
+
+
+--  ctype_tolower(m)
+
+--	modifies the text referenced by m, replacing all upper case letters \
+
+
+--	with the corresponding lower case letters
+
+
+--  ctype_toupper(m)
+
+--	modifies the text referenced by m, replacing all lower case letters \
+
+
+--	with the corresponding upper case letters
+
+
+
+
+marker CaseTran		-- translation of the case of letters \
+
+
+	:= "qQwWeErRtTyYuUiIoOpPaAsSdDfFgGhHjJkKlLzZxXcCvVbBnNmM"
+
+
+marker lowerLetters	-- the lower case letters
+
+	:= "qwertyuiopasdfghjklzxcvbnm"
+
+
+marker upperLetters	-- the upper case letters
+
+	:= "QWERTYUIOPASDFGHJKLZXCVBNM"
+
+
+
+void	function
+
+ctype_tolower(m)
+
+	marker p
+
+	while True do
+
+		p := anyof(start(m), upperLetters)
+
+		if p = "" or extent(p, m) = "" then return void end if
+
+		m := extent(next(replace (p, previous(search(CaseTran, p)))), m)
+
+	end while
+
+end function
+
+
+
+void	function
+
+ctype_toupper(m)
+
+	marker p
+
+	while True do
+
+		p := anyof(start(m), lowerLetters)
+
+		if p = "" or extent(p, m) = "" then return void \
+
+
+end if
+
+		m := extent(next(replace (p, next(search(CaseTran, p)))), m)
+
+	end while
+
+end function
+
+
+-- 
+\begindata{bp,538551704}
+Version 2
+n 0
+\enddata{bp,538551704}
+\view{bpv,538551704,0,0,0}
+
+-- Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
+
+\smaller{\smaller{-- $Disclaimer: 
+
+-- Permission to use, copy, modify, and distribute this software and its 
+
+-- documentation for any purpose and without fee is hereby granted, provided 
+
+-- that the above copyright notice appear in all copies and that both that 
+
+-- copyright notice and this permission notice appear in supporting 
+
+-- documentation, and that the name of IBM not be used in advertising or 
+
+-- publicity pertaining to distribution of the software without specific, 
+
+-- written prior permission. 
+
+--                         
+
+-- THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+
+-- TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+
+-- MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+
+-- HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+
+-- DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+
+-- DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+
+-- OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+
+-- WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+-- 
+
+--  $
+
+}}\enddata{text,538549432}

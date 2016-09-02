@@ -1,0 +1,100 @@
+/* ********************************************************************** *\
+ *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
+ *        For full copyright information see:'andrew/config/COPYRITE'     *
+\* ********************************************************************** */
+
+/*
+	$Disclaimer: 
+* Permission to use, copy, modify, and distribute this software and its 
+* documentation for any purpose and without fee is hereby granted, provided 
+* that the above copyright notice appear in all copies and that both that 
+* copyright notice and this permission notice appear in supporting 
+* documentation, and that the name of IBM not be used in advertising or 
+* publicity pertaining to distribution of the software without specific, 
+* written prior permission. 
+*                         
+* THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
+* TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
+* MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
+* HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
+* DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
+* DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
+* OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
+* WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+* 
+*  $
+*/
+
+
+OBJS = compile.o deskey.o dynsearch.o ezdiff.o filter.o gsearch.o incsearch.o \
+	metax.o spell.o tags.o recsearch.o
+HFILES = compile.H deskey.H dynsearch.H ezdiff.H filter.H gsearch.H incsearch.H \
+	metax.H spell.H tags.H  recsearch.H
+LIBS =
+
+NormalObjectRule()
+NormalATKRule()
+
+DynamicObject(compile,$(LIBS),,)
+InstallDynamicObjectClass(compile,$(FULLATKDLIBDIR))
+
+DynamicObject(deskey,$(LIBS),,)
+InstallDynamicObjectClass(deskey,$(FULLATKDLIBDIR))
+
+DynamicObject(dynsearch,$(LIBS),,)
+InstallDynamicObjectClass(dynsearch,$(FULLATKDLIBDIR))
+ 
+DynamicObject(ezdiff,$(LIBS),,)
+InstallDynamicObjectClass(ezdiff,$(FULLATKDLIBDIR))
+
+DynamicObject(filter,$(LIBS),,)
+InstallDynamicObjectClass(filter,$(FULLATKDLIBDIR))
+
+DynamicObject(gsearch,$(LIBS),,)
+InstallDynamicObjectClass(gsearch,$(FULLATKDLIBDIR))
+
+DynamicObject(incsearch,$(LIBS),,)
+InstallDynamicObjectClass(incsearch,$(FULLATKDLIBDIR))
+
+DynamicObject(metax,$(LIBS),,)
+InstallDynamicObjectClass(metax,$(FULLATKDLIBDIR))
+
+DynamicObject(spell,$(LIBS),,)
+InstallDynamicObjectClass(spell,$(FULLATKDLIBDIR))
+
+DynamicObject(tags,$(LIBS),,)
+InstallDynamicObjectClass(tags,$(FULLATKDLIBDIR))
+
+DynamicObject(recsearch,$(LIBS),,)
+InstallDynamicObjectClass(recsearch,$(FULLATKDLIBDIR))
+
+OptionalATKLibrary(atkexts, $(OBJS), $(LIBS),,)
+InstallOptionalATKLibrary(atkexts, $(DESTDIR)/lib/atk)
+
+InstallClassFiles($(HFILES))
+
+InstallFile(compile.tpl, ${INSTINCFLAGS}, ${DESTDIR}/lib/tpls)
+
+DependTarget()
+
+NormalHelpRule()
+InstallDocs(tags.help ezdiff.help compile.help search.help spellck.help ezdproc.help comproc.help metax.help desproc.help dsrproc.help gsrproc.help gsearch.help isrproc.help ftrproc.help splproc.help tgsproc.help, ${DESTDIR}/help)
+InstallHelpAlias(gsearch, search searches searching)
+InstallHelpAlias(ftrproc, filterproc filterprocs)
+InstallHelpAlias(splproc, spellproc spellprocs)
+InstallHelpAlias(tgsproc, tagsproc tagsprocs)
+InstallHelpAlias(ezdproc, ezdiffproc ezdiffprocs ez-diffproc)
+InstallHelpAlias(comproc, compileproc compileprocs)
+InstallHelpAlias(metax, metaxproc metaxprocs meta-x)
+InstallHelpAlias(desproc, deskey deskeyproc deskeyprocs)
+InstallHelpAlias(dsrproc, dsearch dsearchproc dsearchprocs)
+InstallHelpAlias(gsrproc, gsearch gsearchproc gsearchprocs)
+InstallHelpAlias(isrproc, isearch isearchproc isearchprocs)
+InstallHelpAlias(ezdiff, ez-diff)
+InstallHelpAlias(search, searching)
+InstallHelpAlias(spellck, spellcheck checkspell checkspelling ez-spell ez-spellcheck ez-spelling ezspellcheck spelling)
+InstallHelpAlias(tags, tag)
+
+InstallDocs(ezdiff.doc deskey.doc dsearch.doc isearch.doc filter.doc spell.doc tags.doc,${DESTDIR}/doc/PROGRAMMER)
+InstallDocs(ezdiff.pr compile.pr tags.pr isearch.pr spell.pr, ${DESTDIR}/lib/prs)
+
