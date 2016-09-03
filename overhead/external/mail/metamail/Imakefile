@@ -1,5 +1,0 @@
-#define IHaveSubdirs
-
-SUBDIRS = metamail richmail fonts doc bin
-
-InstallFileToFile(mailcap, ${INSTINCFLAGS}, ${DESTDIR}/etc/mailcap)
