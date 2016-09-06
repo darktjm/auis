@@ -75,7 +75,7 @@ static bucket *unlexed_symval;	/* by the next call to lex */
 
 
 void
-init_lex()
+init_lex(void)
 {
   maxtoken = 100;
   token_buffer = NEW2 (maxtoken + 1, char);
@@ -84,8 +84,7 @@ init_lex()
 
 
 static char *
-grow_token_buffer (p)
-     char *p;
+grow_token_buffer (char *p)
 {
   int offset = p - token_buffer;
   maxtoken *= 2;
@@ -95,7 +94,7 @@ grow_token_buffer (p)
 
 
 int
-skip_white_space()
+skip_white_space(void)
 {
   int c;
   int inside;
@@ -165,8 +164,7 @@ skip_white_space()
 
 /* do a getc, but give error message if EOF encountered */
 int
-safegetc(f)
-  FILE *f;
+safegetc(FILE *f)
 {
   int c = getc(f);
   if (c == EOF)
@@ -181,10 +179,7 @@ safegetc(f)
 	report error for \n
 */
 int
-literalchar(pp, pcode, term)
-  char **pp;
-  int *pcode;
-  char term;
+literalchar(char **pp, int *pcode, char term)
 {
   int c;
   char *p;
@@ -296,8 +291,7 @@ literalchar(pp, pcode, term)
 
 
 void
-unlex(token)
-int token;
+unlex(int token)
 {
   unlexed = token;
   unlexed_symval = symval;
@@ -305,7 +299,7 @@ int token;
 
 
 int
-lex()
+lex(void)
 {
   int c;
   char *p;
@@ -549,7 +543,7 @@ struct percent_table_struct {
 /* parse a token which starts with %.  Assumes the % has already been read and discarded.  */
 
 int
-parse_percent_token ()
+parse_percent_token (void)
 {
   int c;
   char *p;

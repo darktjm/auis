@@ -64,7 +64,7 @@ static class menulist *Menus;
 
 
 
-static char* bulletChars = "*+";
+static const char bulletChars[] = "*+";
 ATKdefineRegistry(htmlview, textview, htmlview::InitializeClass);
 static boolean ConfirmReadOnly(class htmlview  *self, class html * html);
 void htmlview_SetTitle(class htmlview * self, long  key);
@@ -77,13 +77,13 @@ void htmlview_SetImage(class htmlview * self, long  key);
 void htmlview_AddHrule(class htmlview * self, long  key);
 static int parse_num (class html  *html, int  start , int  end , int  *numret);
 int checkEnumerate(class html * html, long  pos, long  end, int * the_number);
-char* stringEnumerate(int * the_number /* datum1 */);
+const char* stringEnumerate(int * the_number /* datum1 */);
 int lineEnumerate(class html * html, long * pos, long * end, int * the_number	 );
 int checkBullet(class html * html, long  pos, long  end, int * datum);
-char* stringBullet(int * datum);
+static const char* stringBullet(int * datum);
 int lineBullet(class html * html, long * pos, long * end, int * datum);
 int checkGlossary(class html * html, long  pos, long  end, int * datum);
-char* stringGlossary( int * datum);
+static const char* stringGlossary( int * datum);
 int lineGlossary(class html * html, long * pos, long * end, int * datum);
 void  htmlview_makeList (class htmlview  *self, char * listStyleName);
 void htmlview_unlistify (class htmlview  *self, long  key);
@@ -241,7 +241,7 @@ htmlview::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfCli
     return retv;
 }
 
-char* editOptions[] = {
+static const char* const editOptions[] = {
     "Add new variable",
     "Next environment",
     "Done",
@@ -276,7 +276,7 @@ htmlview_EditAttributes(class htmlview * self, long  key)
 
     (html)->GetAttributeList( self->styleInQuestion, choices, &count);
     for (i = 0; i < sizeof(editOptions); i++) {
-	choices[count+i] = editOptions[i];
+	choices[count+i] = (char *)editOptions[i]; // only frees up to count
     }
     startEnv = self->styleInQuestion;
     (self)->SetDotPosition( (self->styleInQuestion)->Eval());
@@ -301,7 +301,7 @@ htmlview_EditAttributes(class htmlview * self, long  key)
 		/* Rebuild the options */
 		(html)->GetAttributeList( self->styleInQuestion, choices, &count);
 		for (i = 0; i < sizeof(editOptions); i++) {
-		    choices[count+i] = editOptions[i];
+		    choices[count+i] = (char *)editOptions[i]; // only frees up to count
 		}
 	    }
 	} else if (result == (count+1)) {
@@ -322,7 +322,7 @@ htmlview_EditAttributes(class htmlview * self, long  key)
 	    /* build the new list */
 	    (html)->GetAttributeList( self->styleInQuestion, choices, &count);
 	    for (i = 0; i < sizeof(editOptions); i++) {
-		choices[count+i] = editOptions[i];
+		choices[count+i] = (char *)editOptions[i]; // only frees up to count
 	    }
 	    (self)->SetDotPosition( (self->styleInQuestion)->Eval());
 	    (self)->SetDotLength( (self->styleInQuestion)->GetLength());
@@ -463,7 +463,7 @@ checkEnumerate(class html * html, long  pos, long  end, int * the_number)
 }
 
 
-char*
+const char*
 stringEnumerate(int * the_number /* datum1 */)
 {
     static char numstring[16];
@@ -488,7 +488,7 @@ lineEnumerate(class html * html, long * pos, long * end, int * the_number	 )
 	return 0;
     } else {
 	/* We need to replace the number at point. */
-	char* numstring;
+	const char* numstring;
 	int tlen;
 
 	if (newnum != *the_number) {
@@ -514,7 +514,7 @@ checkBullet(class html * html, long  pos, long  end, int * datum)
 
 
 
-char*
+static const char*
 stringBullet(int * datum)
 {
     return "*\t";
@@ -533,7 +533,7 @@ checkGlossary(class html * html, long  pos, long  end, int * datum)
     return 0;
 }
 
-char*
+static const char*
 stringGlossary(int * datum)
 {
     return "";
@@ -547,14 +547,14 @@ lineGlossary(class html * html, long * pos, long * end, int * datum)
 
 typedef int (*html_LookAtFptr)(class html * html, long  pos, long  end, int * the_number);
 typedef int (*html_LineFptr)(class html * html, long * pos, long * end, int * the_number	 );
-typedef char *(*html_TagStringFptr)(int *datum);
+typedef const char *(*html_TagStringFptr)(int *datum);
 
-struct listCompileTable {
-      char* styleName;
+const struct listCompileTable {
+      const char* styleName;
       html_LookAtFptr lookAtFn; /* Check the tag at point to see relevance to new item */
       html_LineFptr lineFn;   /* For each line, this is called at beginning of line */
       html_TagStringFptr computeTagStringFn; /* When doing a tag, this is called to get the string */
-      char* itemStyle;
+      const char* itemStyle;
 } listTypes[] = {
     { "ol", checkEnumerate, lineEnumerate, stringEnumerate, 0 },
     { "ul", checkBullet, lineBullet, stringBullet, 0 },
@@ -575,8 +575,8 @@ htmlview_makeList (class htmlview  *self, char * listStyleName)
     int one_only = 0, modified = 0;
     int datum = 0;
     int oldList = 0;
-    char* tagString;
-    char* itemStyle;
+    const char* tagString;
+    const char* itemStyle;
     int diff;
 
     int i;

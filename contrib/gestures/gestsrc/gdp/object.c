@@ -53,8 +53,7 @@ struct dope dope[] = {
 #define NDOPE	(sizeof(dope)/sizeof(dope[0]))
 
 Object
-CreateObject(type)
-ObjectType type;
+CreateObject(ObjectType type)
 {
 	Object o = allocate(1, struct object);
 	int i;
@@ -77,10 +76,7 @@ ObjectType type;
 }
 
 Bool
-UpdatePoint(o, which, x, y)
-Object o;
-int which;
-int x, y;
+UpdatePoint(Object o, int which, int x, int y)
 {
 	struct dope *d = &dope[(int) o->type];
 	struct object save;
@@ -100,8 +96,7 @@ int x, y;
 }
 
 Bool
-AddSubObject(o, subo)
-Object o, subo;
+AddSubObject(Object o, Object subo)
 {
 	if(o->type != SetOfObjects)
 		return FALSE;
@@ -111,9 +106,7 @@ Object o, subo;
 }
 
 Bool
-AddText(o, s)
-Object o;
-char *s;
+AddText(Object o, char *s)
 {
 	Erase(o);
 	o->text = recog_scopy(s);
@@ -122,8 +115,7 @@ char *s;
 }
 
 Object
-CopyObject(old)
-Object old;
+CopyObject(Object old)
 {
 	Object o = allocate(1, struct object);
 	Set CopySet();
@@ -134,16 +126,13 @@ Object old;
 }
 
 void
-FreeObject(o)
-Object o;
+FreeObject(Object o)
 {
 	free( (char *) o);
 }
 
 void
-Transform(o, t)
-Object o;
-Transformation t;
+Transform(Object o, Transformation t)
 {
 	struct dope *d = &dope[(int) o->type];
 	if(o->type == SetOfObjects)
@@ -158,42 +147,37 @@ Transformation t;
 /* --------------------- dope functions ---------------- */
 
 Bool
-AlwaysOK()
+AlwaysOK(void)
 {
 	return TRUE;
 }
 
 Bool
-AlwaysBad()
+AlwaysBad(void)
 {
 	return FALSE;
 }
 
 
 Bool
-VlinePoint(o, which)
-Object o;
-int which;
+VlinePoint(Object o, int which)
 {
 	/* make vertical or horizontal or 45 degrees */
 	return TRUE;
 }
 
 int
-Distance(o, x, y)
-Object o;
-int x, y;
+Distance(Object o, int x, int y)
 {
-	(*dope[(int)o->type].distance)(o, x, y);	
+	return (*dope[(int)o->type].distance)(o, x, y);	
 }
 
 /* ---------------- object manipulation ----------- */
 
 
-ObjHighlight(o, highlight)
-Object o;
+void ObjHighlight(Object o, int highlight)
 {
-	static depth = 0;
+	static int depth = 0;
 
 /*
 	printf("%d ", depth);

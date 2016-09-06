@@ -84,8 +84,7 @@ char *trainfilename, *evalfilename;
 sClassifier sC;
 char *classifierfilename;
 
-main(argc, argv)
-char **argv;
+int main(int argc, char **argv)
 {
 	FILE *f;
 
@@ -141,7 +140,7 @@ char **argv;
 	Z('L') Loop();
 }
 
-Train()
+void Train(void)
 {
 	Gesture g;
 	Gpoint p;
@@ -164,7 +163,7 @@ Train()
 	if(nclosest > 0) sDistances(sC, nclosest);
 }
 
-Eval()
+void Eval(void)
 {
 	Gesture g;
 	Gpoint p;
@@ -210,8 +209,7 @@ Eval()
 		printf("No examples to evaluate!\n");
 }
 
-ArgLoop(argc, argv)
-char **argv;
+void ArgLoop(int argc, char **argv)
 {
 	ARGLOOP
 		STRINGARG('c')	classifierfilename = p;	ENDSTRINGARG
@@ -246,7 +244,7 @@ char **argv;
 	}
 }
 
-Loop()
+void Loop(void)
 {
 	char line[100];
 	char *args[10], argspace[10][50];
@@ -259,8 +257,8 @@ Loop()
 		gets(line);
 		for(i = 0; i < 10; i++) args[i] = argspace[i];
 		strcpy(args[0], "tt");
-		argc = sscanf(line, "%s %s %s %s %s %s %s %s %s %s",
-			args[1], args[2], args[3], args[4], args[6],
+		argc = sscanf(line, "%s %s %s %s %s %s %s %s %s",
+			args[1], args[2], args[3], args[4], args[5], args[6],
 			args[7], args[8], args[9]) + 1;
 
 

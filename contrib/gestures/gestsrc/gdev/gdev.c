@@ -69,7 +69,14 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 int gdevdebug = 0;
 
 static char *mouse_event();
-static char *appendf();
+#ifdef __GNUC__
+__attribute((format(printf,2,3)))
+#endif
+static char *appendf(char *s, char *f, ...);
+#ifdef __GNUC__
+__attribute((format(printf,1,2)))
+#endif
+void GDEVerror(char *a, ...);
 static char *chr();
 static char *chrs();
 
@@ -88,7 +95,7 @@ static	int fileversion = VERSION;
  *	X
  */
 
-static int GDEVnull() { }	/* Used for functions not supplied */
+static void GDEVnull(void) { }	/* Used for functions not supplied */
 
 Pointer	POOFinit();
 int	POOFstart(), POOFflush(), POOFstop(),
@@ -104,12 +111,6 @@ Pointer	DPinit();
 int	DPstart(), DPflush(), DPstop(),
 	DPline(), DPpoint(), DPrect(), DPtext(),
 	DPsetdim(), DPgetdim();
-
-Pointer	WMinit();
-int	WMstart(), WMflush(), WMstop(),
-	WMline(), WMpoint(), WMrect(), WMtext(),
-	WMsetdim(), WMgetdim(),
-	WMmenuitem(), WMmouseinterest();
 
 Pointer	XDEVinit();
 int	XDEVstart(), XDEVflush(), XDEVstop(),
@@ -178,15 +179,6 @@ struct dev {
 	},
 #endif
 
-#ifdef WM
-	{ "wm",
-		WMinit, WMstart, WMflush, WMstop, 
-		WMline, WMpoint, WMrect, WMtext,
-		WMsetdim, WMgetdim,
-		WMmenuitem, WMmouseinterest,
-	},
-#endif
-
 #ifdef XDEV
 	{ "X",
 		XDEVinit, XDEVstart, XDEVflush, XDEVstop,
@@ -247,16 +239,16 @@ static struct window *CurOut = NULL;	/* current window */
 static int inhardcopy;
 static struct window *hardcopyout;
 static int hardcopychar = 'z'&037;
-
-static void cbufputc();
+static void cbufinit(void);
+static void ReadStdin(void);
+static char *bits(fd_set fds);
 
 /*
  * Create a new window, making it the current window for output
  */
 
 int
-GDEVinit(device)
-char *device;
+GDEVinit(char *device)
 {
 	int i;
 	char *getenv(), *p;
@@ -289,7 +281,7 @@ char *device;
 
 	if(CurOut == NULL) {	/* first time called */
 		cbufinit();
-		{ int ReadStdin();  GDRVfdnotify(STDIN_FD, ReadStdin); }
+		{ GDRVfdnotify(STDIN_FD, ReadStdin); }
 		hardcopyinit();
 	}
 
@@ -307,9 +299,7 @@ char *device;
 }
 
 static struct window *
-Gwindow(w, s)
-int w;
-char *s;
+Gwindow(int w, char *s)
 {
 	if(w < 0 ||  w >= nwindows) {
 		printf("%s: no such window %d\n", s, w);
@@ -319,22 +309,23 @@ char *s;
 }
 
 void
-GDEVcurrentoutput(w)
-int w;
+GDEVcurrentoutput(int w)
 {
 	if(! inhardcopy)
 		CurOut = Gwindow(w, "GDEVcurrentoutput");
 }
 
+static void GDEVsetmaxy(void);
+
 void
-GDEVstart()
+GDEVstart(void)
 {
 	(*CurOut->dev->start)(CurOut->handle);
 	GDEVsetmaxy();
 }
 
 void
-GDEVflush()
+GDEVflush(void)
 {
 	if(recordfile != NULL)
 		fflush(recordfile);
@@ -344,7 +335,7 @@ GDEVflush()
 }
 
 void
-GDEVstop()
+GDEVstop(void)
 {
 	if(recordfile != NULL)
 		fflush(recordfile);
@@ -352,8 +343,7 @@ GDEVstop()
 }
 
 void
-GDEVline(x1, y1, x2, y2)
-int x1, y1, x2, y2;
+GDEVline(int x1, int y1, int x2, int y2)
 {
 	if(INVERTING_Y)
 		(*CurOut->dev->line)(CurOut->handle, x1, INVERT_Y(y1),
@@ -363,15 +353,13 @@ int x1, y1, x2, y2;
 }
 
 void
-GDEVpoint(x, y)
-int x, y;
+GDEVpoint(int x, int y)
 {
 	(*CurOut->dev->point)(CurOut->handle, x, TRANSFORM_Y(y));
 }
 
 void
-GDEVrect(x1, y1, x2, y2)
-int x1, y1, x2, y2;
+GDEVrect(int x1, int y1, int x2, int y2)
 {
 	if(INVERTING_Y)
 		(*CurOut->dev->rect)(CurOut->handle,
@@ -382,24 +370,20 @@ int x1, y1, x2, y2;
 }
 
 void
-GDEVtext(x1, y1, str)
-int x1, y1;
-char *str;
+GDEVtext(int x1, int y1, char *str)
 {
 	(*CurOut->dev->text)(CurOut->handle, x1, TRANSFORM_Y(y1), str);
 }
 
 void
-GDEVsetdim(x, y)
-int x, y;
+GDEVsetdim(int x, int y)
 {
 	(*CurOut->dev->setdim)(CurOut->handle, x, y);
 	GDEVsetmaxy();
 }
 
 void
-GDEVgetdim(x, y)
-int *x, *y;
+GDEVgetdim(int *x, int *y)
 {
 	(*CurOut->dev->getdim)(CurOut->handle, x, y);
 }
@@ -448,14 +432,16 @@ static	Cbuf	*Ctail;			/* Points to where to add chars   */
 
 #define	C_NOCHARSPENDING	(257)	/*  return when no chars available */
 
+static void cbufputs(const char *s, Cclass cclass);
+static void cbufputc(int c, Cclass cclass);
+
 static
-cbufinit()
+void cbufinit(void)
 {
 	Chead = Ctail = cbuf;
 }
 
-cbufwindow(w)
-int w;
+void cbufwindow(int w)
 {
 	static int lastwin = -2;
 
@@ -472,7 +458,7 @@ int w;
 #define	nextcp(cp)	(((cp) == &cbuf[CBUFSIZE-1]) ? ((cp) = cbuf) : ++(cp))
 
 static int
-cbufempty()
+cbufempty(void)
 {
 	for(; Chead->cclass == C_RETURNED && Chead != Ctail; nextcp(Chead)) 
 		/* skip */ ;
@@ -481,8 +467,7 @@ cbufempty()
 }
 
 static int
-cbufgetc(classes)
-Cclass classes;
+cbufgetc(Cclass classes)
 {
 	Cbuf *cp;
 	int r;
@@ -492,7 +477,6 @@ Cclass classes;
 		/* skip */ ;
 
 	if(playfile != NULL) {
-		static void cbufputc();
 		int c;
 		Cclass class;
 		do {
@@ -524,9 +508,7 @@ Cclass classes;
 }
 
 static void
-cbufputc(c, cclass)
-int c;
-Cclass cclass;
+cbufputc(int c, Cclass cclass)
 {
 	if(gdevdebug)
 		printf(">%s ", chr(c)), fflush(stdout);
@@ -551,8 +533,7 @@ Cclass cclass;
 }
 
 static
-cbufputi(i)
-int i;
+void cbufputi(int i)
 {
 	char *p = (char *) &i;
 	int n = sizeof(i);
@@ -562,7 +543,7 @@ int i;
 }
 
 static int
-cbufgeti()
+cbufgeti(void)
 {
 	int i = 0;
 	char *p = (char *) &i;
@@ -581,8 +562,7 @@ cbufgeti()
 
 
 static
-cbufputd(d)
-double d;
+void cbufputd(double d)
 {
 	char *p = (char *) &d;
 	int i = sizeof(d);
@@ -592,7 +572,7 @@ double d;
 }
 
 static double
-cbufgetd()
+cbufgetd(void)
 {
 	double d = 0;
 	char *p = (char *) &d;
@@ -609,10 +589,8 @@ cbufgetd()
 	return d;
 }
 
-static int
-cbufputs(s, cclass)
-char *s;
-Cclass cclass;
+static void
+cbufputs(const char *s, Cclass cclass)
 {
 	if(s) while(*s)
 		cbufputc(*s++, cclass);
@@ -623,8 +601,7 @@ Cclass cclass;
 
 
 static char *
-scopy(s)
-char *s;
+scopy(char *s)
 {
 	char *p = malloc((unsigned) strlen(s) + 1);
 	if(p == NULL)
@@ -654,13 +631,13 @@ Alist __alist;
 #define	LookupInt(alist, tag, enterflag) \
 	( __alist = _lookupint(&alist, tag, enterflag), \
 	gdevdebug > 1 ? \
-	  printf("_lookupint(%x, %d, %d)=%x\n", &alist, tag, enterflag, __alist) :0, \
+	  printf("_lookupint(%p, %d, %d)=%p\n", &alist, tag, enterflag, __alist) :0, \
 	__alist )
 
 #define	LookupString(alist, s, enterflag) \
 	( __alist = _lookupstring(&alist, s, enterflag), \
 	gdevdebug > 1 ? \
-	  printf("_lookupstring(%x, %s, %d)=%x\n", &alist, chrs(s), enterflag, __alist) :0, \
+	  printf("_lookupstring(%p, %s, %d)=%p\n", &alist, chrs(s), enterflag, __alist) :0, \
 	__alist )
 
 #else
@@ -671,10 +648,7 @@ Alist __alist;
 static Alist _makenew();
 
 static Alist
-_lookupint(alistp, tag, enterflag)
-Alist *alistp;
-int tag;
-int enterflag;	/* if TRUE, make new entry if tag not found */
+_lookupint(Alist *alistp, int tag, int enterflag /* if TRUE, make new entry if tag not found */)
 {
 	Alist l;
 
@@ -686,10 +660,7 @@ int enterflag;	/* if TRUE, make new entry if tag not found */
 }
 
 static Alist
-_lookupstring(alistp, s, enterflag)
-Alist *alistp;
-char *s;
-int enterflag;	/* if TRUE, make new entry if tag not found */
+_lookupstring(Alist *alistp, char *s, int enterflag /* if TRUE, make new entry if tag not found */)
 {
 	Alist l;
 
@@ -707,9 +678,7 @@ int enterflag;	/* if TRUE, make new entry if tag not found */
 #endif
 
 static Alist
-_makenew(alistp, enterflag)
-int enterflag;
-Alist *alistp;
+_makenew(Alist *alistp, int enterflag)
 {
 	Alist newl;
 
@@ -717,7 +686,7 @@ Alist *alistp;
 		return NULL;
 	
 	if((newl = alistmalloc()) == NULL)
-		GDEVerror("Lookup malloc(%d)", sizeof(*newl));
+		GDEVerror("Lookup malloc(%d)", (int)sizeof(*newl));
 
 	newl->next = *alistp;
 	newl->tag = 0;
@@ -731,8 +700,7 @@ Alist *alistp;
 static	Alist string_numbers;	      /* Assoc strings with numbers */
 
 static int
-StringToInt(s)
-char *s;
+StringToInt(char *s)
 {
 	static int uid = 0;
 
@@ -758,7 +726,7 @@ int i;
 /*--------- Input to the application  ---------------------------------------*/
 
 static
-ReadStdin()
+void ReadStdin(void)
 {
 	char buf[512];
 
@@ -780,7 +748,7 @@ ReadStdin()
 /* Call polling function, if any, to try to get input */
 
 static int
-GDEVpoll()
+GDEVpoll(void)
 {
 	Alist a;
 	for(a = fd_functions; a != NULL; a = a->next)
@@ -834,8 +802,7 @@ static	char 		*timeout_retval;
 char *bits();
 
 static
-GDEVselect(waitflag)
-int waitflag;
+void GDEVselect(int waitflag)
 {
 	Alist a;
 	int i, n;
@@ -881,8 +848,7 @@ int waitflag;
 }
 
 static char *
-bits(fds)
-fd_set fds;
+bits(fd_set fds)
 {
 	static char buf[300];
 	int i;
@@ -897,9 +863,7 @@ fd_set fds;
 }
 
 void
-GDRVfdnotify(fd, function)
-int fd;
-Function function;
+GDRVfdnotify(int fd, Function function)
 {
 	Alist a = LookupInt(fd_functions, fd, TRUE);
 	a->tag = fd;
@@ -907,8 +871,7 @@ Function function;
 }
 
 static int
-GDEVgetc(cclass)
-Cclass cclass;
+GDEVgetc(Cclass cclass)
 {
 	int c;
 
@@ -933,13 +896,13 @@ again:
 }
 
 int
-GDEVgetchar()
+GDEVgetchar(void)
 {
 	return GDEVgetc(C_ANY);
 }
 
 int
-GDEVcharswaiting()
+GDEVcharswaiting(void)
 {
 	if( ! cbufempty() )
 		return TRUE;
@@ -952,8 +915,7 @@ GDEVcharswaiting()
 }
 
 char *
-GDEVgets(line)
-char *line;
+GDEVgets(char *line)
 {
 	int c;
 	char *p = line;
@@ -969,8 +931,7 @@ char *line;
 #define	MAGIC	0xf0	/* magic header byte */
 
 int
-GDEVplay(file)
-char *file;
+GDEVplay(char *file)
 {
 	int c;
 
@@ -993,8 +954,7 @@ char *file;
 }
 
 int
-GDEVrecord(file)
-char *file;
+GDEVrecord(char *file)
 {
 	if((recordfile = fopen(file, "w")) == NULL) {
 		printf("Couldn't create %s", file);
@@ -1006,7 +966,7 @@ char *file;
 }
 
 void
-GDEVstoprecording()
+GDEVstoprecording(void)
 {
 	if(recordfile != NULL)
 		fclose(recordfile);
@@ -1015,8 +975,7 @@ GDEVstoprecording()
 /* menus */
 
 void
-GDEVmenuitem(label, retval)
-char *label, *retval;
+GDEVmenuitem(char *label, char *retval)
 {
 	Alist item, rv;
 	int found = TRUE;
@@ -1049,9 +1008,7 @@ char *label, *retval;
 }
 
 void
-GDRVmenu(w, retval)
-int w;
-int retval;
+GDRVmenu(int w, int retval)
 {
 	Alist rv;
 	struct window *gwin = Gwindow(w, "GDRVmenu");
@@ -1069,9 +1026,7 @@ int retval;
 /* mouse */
 
 void
-GDEVmouse(event, retval)
-int event;
-char *retval;
+GDEVmouse(int event, char *retval)
 {
 	Alist rv;
 
@@ -1089,11 +1044,7 @@ char *retval;
 }
 
 void
-GDRVmouse(w, event, x, y, thetime)
-int w;
-int event;
-int x, y;
-int thetime;
+GDRVmouse(int w, int event, int x, int y, int thetime)
 {
 	Alist rv;
 	struct window *gwin = Gwindow(w, "GDRVmouse");
@@ -1112,9 +1063,7 @@ int thetime;
 }
 
 void
-GDEVgetXYT(xp, yp, timep)
-int *xp, *yp;
-int *timep; 
+GDEVgetXYT(int *xp, int *yp, int *timep)
 {
 	int x, y;
 	int thetime = 0;
@@ -1131,8 +1080,7 @@ int *timep;
 /* window changed */
 
 void
-GDEVwindowchanged(retval)
-char *retval;
+GDEVwindowchanged(char *retval)
 {
 	if(windowchanged_retval)
 		free(windowchanged_retval);
@@ -1142,8 +1090,7 @@ char *retval;
 /* refresh */
 
 void
-GDEVrefresh(retval)
-char *retval;
+GDEVrefresh(char *retval)
 {
 	if(CurOut->refresh_retval)
 		free(CurOut->refresh_retval);
@@ -1151,15 +1098,13 @@ char *retval;
 }
 
 void
-GDEVrefresh_function(fcn)
-int (*fcn)();
+GDEVrefresh_function(int (*fcn)(void))
 {
 	CurOut->refresh_function = fcn;
 }
 
 void
-GDRVrefresh(w)
-int w;
+GDRVrefresh(int w)
 {
 	struct window *gwin = Gwindow(w, "GDRVrefresh");
 
@@ -1173,9 +1118,7 @@ int w;
 }
 
 void
-GDEVtimeout(msec, retval)
-int msec;
-char *retval; 
+GDEVtimeout(int msec, char *retval)
 {
 	static struct timeval timer;
 	timeout_retval = retval;
@@ -1203,31 +1146,25 @@ char *retval;
 	return 0;
 
 int
-GDEVseti(variable, value)
-char *variable; int value;
+GDEVseti(char *variable, int value)
 {
 	GDEVset(intp);
 }
 
 int
-GDEVsetd(variable, value)
-char *variable; double value;
+GDEVsetd(char *variable, double value)
 {
 	GDEVset(doublep);
 }
 
 int
-GDEVsets(variable, value)
-char *variable, *value;
+GDEVsets(char *variable, char *value)
 {
 	GDEVset(stringp);
 }
 
 void
-GDRVvar_fcn(w, varname, function, arg)
-char *varname;
-Function function;
-Pointer arg;
+GDRVvar_fcn(int w, char *varname, Function function, Pointer arg)
 {
 	int i = StringToInt(varname);
 	struct window *gwin = Gwindow(w, "GDRVvar_fcn");
@@ -1239,10 +1176,7 @@ Pointer arg;
 }
 
 void
-GDRVvar_addr(w, varname, address)
-int w;
-char *varname;
-Pointer address;
+GDRVvar_addr(int w, char *varname, Pointer address)
 {
 	int i = StringToInt(varname);
 	struct window *gwin = Gwindow(w, "GDRVvar_fcn");
@@ -1253,18 +1187,19 @@ Pointer address;
 }
 
 /*VARARGS1*/
-GDEVerror(a, b, c, d, e, f)
-char *a;
+void GDEVerror(char *a, ...)
 {
+	va_list ap;
+	va_start(ap, a);
 	printf("GDEV: ");
-	printf(a, b, c, d, e, f);
+	vprintf(a, ap);
 	printf("\n");
 	exit(1);
 }
 
 static
 char *
-mouse_event(event)
+mouse_event(int event)
 {
 	static char buf[200];
 	buf[0] = '\0';
@@ -1280,16 +1215,16 @@ mouse_event(event)
 
 /*VARARGS2*/
 static char *
-appendf(s, f, a, b, c, d, e)
-char *s, *f;
+appendf(char *s, char *f, ...)
 {
-	sprintf(strlen(s) + s, f, a, b, c, d, e);
+	va_list ap;
+	va_start(ap, f);
+	vsprintf(strlen(s) + s, f, ap);
 	return 0;
 }
 
 static char *
-chr(r)
-int r;
+chr(int r)
 {
 	static char buf[10];
 	if(!isascii(r) || r==0177)
@@ -1302,8 +1237,7 @@ int r;
 }
 
 static char *
-chrs(s)
-char *s;
+chrs(char *s)
 {
 	static char buf[100];
 	buf[0] = '\0';
@@ -1316,7 +1250,7 @@ char *s;
 /* handle y=0 top/bottom sillyness */
 
 static
-GDEVsetmaxy()
+void GDEVsetmaxy(void)
 {
 	int x;
 
@@ -1324,32 +1258,31 @@ GDEVsetmaxy()
 }
 
 void
-GDEV00topleft()
+GDEV00topleft(void)
 {
 	CurOut->app_wants_y_at_top = TRUE;
 }
 
 void
-GDRV00topleft(w)
+GDRV00topleft(int w)
 {
 	Gwindow(w, "GDRV00topleft")->dev->drv_thinks_y_at_top = TRUE;
 }
 
 
-GDRVputc(c)
+void GDRVputc(int c)
 {
 	cbufputc(c, C_TYPED);
 }
 
-GDRVwindow(w)
-int w;
+void GDRVwindow(int w)
 {
 	cbufwindow(w);
 }
 
 #include <sys/time.h>
 int
-GDEVcurrenttime()
+GDEVcurrenttime(void)
 {
 	struct timeval tv;
 	gettimeofday(&tv, NULL);
@@ -1360,7 +1293,7 @@ GDEVcurrenttime()
 
 static struct window *savedwindow;
 
-hardcopy()
+void hardcopy(void)
 {
 	if(!hardcopyout || !CurOut) {
 		printf("hardcopy() ignored\n");
@@ -1380,7 +1313,7 @@ hardcopy()
 	}
 }
 
-hardcopydone()
+void hardcopydone(void)
 {
 	if(inhardcopy) {
 		inhardcopy = FALSE;
@@ -1390,9 +1323,9 @@ hardcopydone()
 	}
 }
 
-hardcopyinit()
+void hardcopyinit(void)
 {
-	static called = 0;
+	static int called = 0;
 	char *p;
 	char d[100];
 

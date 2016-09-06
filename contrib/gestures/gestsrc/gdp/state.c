@@ -48,16 +48,17 @@ static	Set	Objs;	/* set of all visible objects */
 static	VersionNumber	lastckp;
 
 Set
-StEmptySet()
+StEmptySet(void)
 {
 	return EmptySet(NULL, NULL, Objs);
 }
 
-void
-StInit()
-{
-	void object_added(), object_deleted();
+static void object_added(Set s, Element e, Object o);
+static void object_deleted(Set s, Element e, Object o);
 
+void
+StInit(void)
+{
 	Objs = EmptySet(object_added, object_deleted, NULL);
 	lastckp = CheckpointSetGroup(Objs);
 }
@@ -66,7 +67,7 @@ StInit()
 static char bottom_line[LINESIZE];
 
 static void
-DrawBottomLine()
+DrawBottomLine(void)
 {
 	char line[102];
 	sprintf(line, "%-100.100s", bottom_line);
@@ -74,8 +75,7 @@ DrawBottomLine()
 }
 
 void
-StBottomLine(string)
-char *string;
+StBottomLine(char *string)
 {
 	DrawBottomLine();  /* Erases old bottom line */
 	strncpy(bottom_line, string, LINESIZE);
@@ -84,7 +84,7 @@ char *string;
 
 
 void
-StRedraw()
+StRedraw(void)
 {
 	void Draw();
 
@@ -95,23 +95,20 @@ StRedraw()
 }
 
 Element
-StNewObj(t)
-ObjectType t;
+StNewObj(ObjectType t)
 {
 	Object o = CreateObject(t);
 	return AddElement(Objs, o);
 }
 
 void
-StAddSubObject(e, sube)
-Element e, sube;
+StAddSubObject(Element e, Element sube)
 {
 	AddSubObject(EtoO(e),EtoO(sube));
 }
 
 Element
-StCopyElement(e)
-Element e;
+StCopyElement(Element e)
 {
 	Object o = CopyObject(EtoO(e));
 	return AddElement(Objs, o);
@@ -119,52 +116,39 @@ Element e;
 
 
 void
-StDelete(e)
-Element e;
+StDelete(Element e)
 {
 	DeleteElement(Objs, e);
 }
 
 static
 void
-object_added(s, e, o)
-Set s;
-Element e;
-Object o;
+object_added(Set s, Element e, Object o)
 {
 	Draw(o);
 }
 
 static
 void
-object_deleted(s, e, o)
-Set s;
-Element e;
-Object o;
+object_deleted(Set s, Element e, Object o)
 {
 	Erase(o);
 }
 
 void
-StUpdatePoint(e, point_number, x, y)
-Element e;
-int point_number, x, y;
+StUpdatePoint(Element e, int point_number, int x, int y)
 {
 	UpdatePoint(EtoO(e), point_number, x, y);
 }
 
 void
-StTransform(e, t)
-Element e;
-Transformation t;
+StTransform(Element e, Transformation t)
 {
 	Transform(EtoO(e), t);
 }
 
 void
-StMove(e, x, y)
-Element e;
-int x, y;
+StMove(Element e, int x, int y)
 {
 	static Transformation t;
 
@@ -176,8 +160,7 @@ static int _x, _y, _min_d;
 static Element _min_e;
 
 static void
-sizem(e)
-Element e;
+sizem(Element e)
 {
 	int d = Distance(EtoO(e), _x, _y);
 	if(d < _min_d) {
@@ -187,8 +170,7 @@ Element e;
 }
 
 Element
-StPick(x, y)	/* pick the item pointed to by x, y */
-int x, y;
+StPick(int x, int y)	/* pick the item pointed to by x, y */
 {
 	_x = x; _y = y;
 	_min_d = 5;	/* must be within five pixels */
@@ -199,9 +181,7 @@ int x, y;
 }
 
 void
-StReplaceObject(e, s)
-Element e;
-Object s;
+StReplaceObject(Element e, Object s)
 {
 	Object d = EtoO(e);
 
@@ -234,9 +214,7 @@ Object s;
 }
 
 Element
-StEdit(e, oldo)
-Element e;
-Object *oldo;
+StEdit(Element e, Object *oldo)
 {
 	Object o = CopyObject(EtoO(e));
 	if(oldo)
@@ -250,19 +228,18 @@ Object *oldo;
 */
 }
 
-StCheckpoint()
+void StCheckpoint(void)
 {
 	lastckp = CheckpointSetGroup(Objs);
 }
 
-StUndo()
+void StUndo(void)
 {
 	UndoSetGroup(Objs, lastckp);
 }
 
 static void
-CopySetHelp(s)
-Set s;
+CopySetHelp(Set s)
 {
 	Element e = AnElement(s);
 	Object o;
@@ -277,16 +254,13 @@ Set s;
 }
 
 static void
-copysethelp(o, s)
-Object o;
-Set s;
+copysethelp(Object o, Set s)
 {
 	AddElement(s, CopyObject(o));
 }
 
 Set
-CopySet(s)
-Set s;
+CopySet(Set s)
 {
 	Set new = EmptySet(NULL, NULL, Objs);
 	Map(s, copysethelp, new);
@@ -294,20 +268,17 @@ Set s;
 }
 
 
-StHighlight(e, highlight)
-Element e;
+void StHighlight(Element e, int highlight)
 {
 	ObjHighlight(EtoO(e), highlight);
 }
 
-StErase(e)
-Element e;
+void StErase(Element e)
 {
 	Erase(EtoO(e));
 }
 
-StDraw(e)
-Element e;
+void StDraw(Element e)
 {
 	Draw(EtoO(e));
 }

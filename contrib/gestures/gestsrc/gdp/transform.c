@@ -46,14 +46,13 @@ the full agreement.
 */
 
 Transformation
-AllocTran()
+AllocTran(void)
 {
 	return NewMatrix(3, 3);
 }
 
 Transformation
-IdentityTran(t)
-Transformation t;
+IdentityTran(Transformation t)
 {
 	t[0][0] = 1;	t[0][1] = 0;	t[0][2] = 0;
 	t[1][0] = 0;	t[1][1] = 1;	t[1][2] = 0;
@@ -62,9 +61,7 @@ Transformation t;
 }
 
 Transformation
-TranslateTran(t, x, y)
-Transformation t;
-int x, y;
+TranslateTran(Transformation t, int x, int y)
 {
 	t[0][0] = 1;	t[0][1] = 0;	t[0][2] = 0;
 	t[1][0] = 0;	t[1][1] = 1;	t[1][2] = 0;
@@ -77,18 +74,14 @@ int x, y;
 #define 	PI 	3.1415926535897932384626433
 
 Transformation
-RotateTran(t, theta)
-Transformation t;
-int theta;
+RotateTran(Transformation t, int theta)
 {
 	double rad = (PI/180.0) * theta;
 	return RotateCosSinTran(t, cos(rad), sin(rad));
 }
 
 Transformation
-RotateCosSinTran(t, c, s)
-Transformation t;
-double c, s;
+RotateCosSinTran(Transformation t, double c, double s)
 {
 	t[0][0] = c;	t[0][1] = s;	t[0][2] = 0;
 	t[1][0] = -s;	t[1][1] = c;	t[1][2] = 0;
@@ -97,9 +90,7 @@ double c, s;
 }
 
 Transformation
-ScaleTran(t, dilation)
-Transformation t;
-double dilation;
+ScaleTran(Transformation t, double dilation)
 {
 	t[0][0] = dilation; 	t[0][1] = 0; 		t[0][2] = 0;
 	t[1][0] = 0;		t[1][1] = dilation;	t[1][2] = 0;
@@ -108,9 +99,7 @@ double dilation;
 }
 
 void
-ApplyTran(x, y, t, xp, yp)
-int x, y, *xp, *yp;
-Transformation t;
+ApplyTran(int x, int y, Transformation t, int *xp, int *yp)
 {
 	/* .5 for rounding */
 	if(xp)
@@ -120,8 +109,7 @@ Transformation t;
 }
 
 double
-TransScale(t)
-Transformation t;
+TransScale(Transformation t)
 {
 	static double last = -1, lastres = -1;
 	double d;

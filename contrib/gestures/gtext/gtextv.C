@@ -115,17 +115,6 @@ mclock()
     return this_c.tv_usec;
 }
 
-/* strdup: return a freshly malloced copy of a string so that it
-  can be safely freed later. */
-
-static char *mynewstring(char  *x)
-{
-    char *p=(char *)malloc(strlen(x) + 1);
-    if(!p) return NULL;
-    strcpy(p, x);
-    return p;
-}
-
 static sClassifier fullclassifier;
 static sClassifier doneclassifier;
 static FV fvb;
@@ -162,9 +151,9 @@ boolean gtextv::InitializeClass()
   temp = (char *) environ::GetProfile("GestureFile");
 
   if(temp == NULL) 
-    filename = (char *) mynewstring(environ::AndrewDir(GESTURE_FILE));
+    filename = strdup(environ::AndrewDir(GESTURE_FILE));
   else
-    filename = (char *) mynewstring(temp);
+    filename = strdup(temp);
 
   fp = fopen(filename,"r");
 

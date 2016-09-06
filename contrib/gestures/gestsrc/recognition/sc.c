@@ -58,7 +58,7 @@ double exp();
 
 #define	EPS	(1.0e-6)	/* for singular matrix check */
 sClassifier
-sNewClassifier()
+sNewClassifier(void)
 {
 	sClassifier sc = allocate(1, struct sclassifier);
 	sc->nfeatures = -1;
@@ -69,8 +69,7 @@ sNewClassifier()
 }
 
 void
-sFreeClassifier(sc)
-sClassifier sc;
+sFreeClassifier(sClassifier sc)
 {
 	int i;
 	sClassDope scd;
@@ -91,9 +90,7 @@ sClassifier sc;
 }
 
 sClassDope
-sClassNameLookup(sc, classname)
-sClassifier sc;
-char *classname;
+sClassNameLookup(sClassifier sc, char *classname)
 {
 	int i;
 	sClassDope scd;
@@ -114,9 +111,7 @@ char *classname;
 }
 
 static sClassDope
-sAddClass(sc, classname)
-sClassifier sc;
-char *classname;
+sAddClass(sClassifier sc, char *classname)
 {
 	sClassDope scd;
 
@@ -130,10 +125,7 @@ char *classname;
 }
 
 void
-sAddExample(sc, classname, y)
-sClassifier sc;
-char *classname;
-Vector y;
+sAddExample(sClassifier sc, char *classname, Vector y)
 {
 	sClassDope scd;
 	int i, j;
@@ -181,8 +173,7 @@ Vector y;
 }
 
 void
-sDoneAdding(sc)
-sClassifier sc;
+sDoneAdding(sClassifier sc)
 {
 	int i, j;
 	int c;
@@ -246,16 +237,12 @@ sClassifier sc;
 }
 
 sClassDope
-sClassify(sc, fv) {
+sClassify(sClassifier sc, Vector fv) {
 	return sClassifyAD(sc, fv, NULL, NULL);
 }
 
 sClassDope
-sClassifyAD(sc, fv, ap, dp)
-sClassifier sc;
-Vector fv;
-double *ap;
-double *dp;
+sClassifyAD(sClassifier sc, Vector fv, double *ap, double *dp)
 {
 	double disc[MAXSCLASSES];
 	int i, maxclass;
@@ -264,7 +251,7 @@ double *dp;
 	double d;
 
 	if(sc->w == NULL)
-		recog_error("sClassifyAD: %x no trained classifier", sc);
+		recog_error("sClassifyAD: %p no trained classifier", sc);
 
 	for(i = 0; i < sc->nclasses; i++)
 		disc[i] = InnerProduct(sc->w[i], fv) + sc->cnst[i];
@@ -307,9 +294,7 @@ double *dp;
  */
 
 double
-MahalanobisDistance(v, u, sigma)
-Vector v, u;
-Matrix sigma;
+MahalanobisDistance(Vector v, Vector u, Matrix sigma)
 {
 	int i;
 	static Vector space;
@@ -325,9 +310,7 @@ Matrix sigma;
 	return result;
 }
 
-FixClassifier(sc, avgcov)
-sClassifier sc;
-Matrix avgcov;
+void FixClassifier(sClassifier sc, Matrix avgcov)
 {
 	int i;
 	double det;
@@ -361,12 +344,11 @@ Matrix avgcov;
 
 }
 
-sDumpClassifier(sc)
-sClassifier sc;
+void sDumpClassifier(sClassifier sc)
 {
 	sClassIndex c;
 
-	printf("\n----Classifier %x, %d features:-----\n", sc, sc->nfeatures);
+	printf("\n----Classifier %p, %d features:-----\n", sc, sc->nfeatures);
 	printf("%d classes: ", sc->nclasses);
 	for(c = 0; c < sc->nclasses; c++)
 		printf("%s  ", sc->classdope[c]->name);
@@ -380,9 +362,7 @@ sClassifier sc;
 }
 
 void
-sWrite(outfile, sc)
-FILE *outfile;
-sClassifier sc;
+sWrite(FILE *outfile, sClassifier sc)
 {
 	int i;
 	sClassDope scd;
@@ -403,8 +383,7 @@ sClassifier sc;
 }
 
 sClassifier
-sRead(infile)
-FILE *infile;
+sRead(FILE *infile)
 {
 	int i, n;
 	sClassifier sc;
@@ -436,8 +415,7 @@ FILE *infile;
 }
 
 
-sDistances(sc, nclosest)
-sClassifier sc;
+void sDistances(sClassifier sc, int nclosest)
 {
 	Matrix d = NewMatrix(sc->nclasses, sc->nclasses);
 	int i, j;

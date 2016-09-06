@@ -61,6 +61,8 @@ the full agreement.
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/Xos.h>
+#include <stdarg.h>
+
 
 #ifdef BUFFERLINES	/* buffer up lines before calling XDraw, needs -loldX */
 #	include <X11/X10.h>
@@ -83,6 +85,11 @@ the full agreement.
 #define MENU_EVENT	MOUSE_EVENT(MIDDLE_BUTTON, DOWN_TRANSITION)
 
 typedef int COORD;
+
+#ifdef __GNUC__
+__attribute__((format(printf,1,2)))
+#endif
+void xerror(char *a, ...);
 
 /* statics */
 
@@ -164,12 +171,12 @@ static struct gwindow initialw = {
 	0,				/* cursor */
 };
 
+static void lineflush(Gwindow w);
+
 static struct gwindow window[NWINDOWS];
 
 static
-X11currentcolor(w, var, value, arg)
-Gwindow w;
-char *var, *value, *arg;
+void X11currentcolor(Gwindow w, char *var, char *value, char *arg)
 {
 	lineflush(w);
 	if(DisplayPlanes(display, screen_id) == 1) {	/* monochrome */
@@ -192,9 +199,7 @@ char *var, *value, *arg;
 }
 
 static
-X11currentfunction(w, var, value, arg)
-Gwindow w;
-char *var, *value, *arg;
+void X11currentfunction(Gwindow w, char *var, char *value, char *arg)
 {
 	lineflush(w);
 	switch(value[0]) {
@@ -205,9 +210,7 @@ char *var, *value, *arg;
 }
 
 static
-X11currentlinetype(w, var, value, arg)
-Gwindow w;
-char *var, *value, *arg;
+void X11currentlinetype(Gwindow w, char *var, char *value, char *arg)
 {
 	lineflush(w);
 	switch(value[0]) {
@@ -221,52 +224,40 @@ char *var, *value, *arg;
 
 
 static
-X11currentcursor(w, var, value, arg)
-Gwindow w;
-char *var, *arg;
-int value;
+X11currentcursor(Gwindow w, char *var, char *value, char *arg)
 {
 	/* printf("cursor = %d\n", value); */
-	XDefineCursor(w->win, value);
+	XDefineCursor(w->win, (long)value);
 }
 #endif
 
 static
-X11thickness(w, var, value, arg)
-Gwindow w;
-char *var, *arg;
-int value;
+void X11thickness(Gwindow w, char *var, char *value, char *arg)
 {
 	lineflush(w);
 
-	w->thickness = value;
-	w->xlineshift = -value / 2;
-	w->ylineshift = -value / 2;
+	w->thickness = (long)value;
+	w->xlineshift = -(long)value / 2;
+	w->ylineshift = -(long)value / 2;
 	X11updateGC(w);
 }
 
 
 static
-X11map(w, var, value, arg)
-Gwindow w;
-char *var, *arg, *value;
+void X11map(Gwindow w, char *var, char *value, char *arg)
 {
 	XMapWindow(display, w->win);
 }
 
 static
-X11unmap(w, var, value, arg)
-Gwindow w;
-char *var, *arg, *value;
+void X11unmap(Gwindow w, char *var, char *value, char *arg)
 {
 	XUnmapWindow(display, w->win);
 }
 
 #ifdef HUH
 static int
-X11stringwidth(w, var, value, arg)
-Gwindow w;
-char *var, *value, *arg;
+X11stringwidth(Gwindow w, char *var, char *value, char *arg)
 {
 	static short _widths[128];
 	short *widths = _widths;
@@ -294,9 +285,7 @@ char *var, *value, *arg;
 }
 
 static
-computewidths(fontinfo, widths)
-FontInfo *fontinfo;
-short *widths;
+computewidths(FontInfo *fontinfo, short *widths)
 {
 
 /*
@@ -315,17 +304,13 @@ short *widths;
 }
 
 static int
-X11stringheight(w, var, value, arg)
-Gwindow w;
-char *var, *value, *arg;
+X11stringheight(Gwindow w, char *var, char *value, char *arg)
 {
 	return w->wfontinfo->height;
 }
 
 static
-X11eventstring(w, var, value, arg)
-Gwindow w;
-char *var, *value, *arg;
+X11eventstring(Gwindow w, char *var, char *value, char *arg)
 {
 	switch(*value) {
 	case 'c': case 'C':
@@ -343,9 +328,7 @@ char *var, *value, *arg;
 #endif
 
 static
-X11program(w, var, value, arg)
-Gwindow w;
-char *var, *value, *arg;
+void X11program(Gwindow w, char *var, char *value, char *arg)
 {
 	w->program = value;
 
@@ -368,9 +351,7 @@ char *var, *value, *arg;
 }
 
 static
-X11font(w, var, value, arg)
-Gwindow w;
-char *var, *value, *arg;
+void X11font(Gwindow w, char *var, char *value, char *arg)
 {
 	w->font = value;
 }
@@ -399,30 +380,24 @@ char *var, *value, *arg;
 
 /* if a text string begins (first char) with value, use current font */
 static
-X11assignfont(w, var, value, arg)
-Gwindow w;
-char *var; int value; char *arg;
+void X11assignfont(Gwindow w, char *var, char *value, char *arg)
 {
 	struct alternatefont *af =
 		&w->alternatefont[w->nalternatefonts - 1];
 
 	if(w->nalternatefonts == 0)
 		xerror("X11assignfonts: no current alternate font");
-	af->key = value;
+	af->key = (long)value;
 }
 
 static
-X11Xgeometry(w, var, value, arg)
-Gwindow w;
-char *var, *value, *arg;
+void X11Xgeometry(Gwindow w, char *var, char *value, char *arg)
 {
 	w->Xgeometry = value;
 }
 
 static
-X11Xdefault(w, var, value, arg)
-Gwindow w;
-char *var, *value, *arg;
+void X11Xdefault(Gwindow w, char *var, char *value, char *arg)
 {
 	w->Xdefault = value;
 }
@@ -495,11 +470,11 @@ static short cursor_mask_bits[] = {
 };
 #endif
 
+static void X11input(void);
+
 Pointer
-X11init(gdevhandle)
-int gdevhandle;
+X11init(int gdevhandle)
 {
-	int X11input();
 	Gwindow w;
 
 	if(nwindows == 0) {	/* first time called */
@@ -580,8 +555,7 @@ int gdevhandle;
 }
 
 static
-X11getsizes(w)
-Gwindow w;
+void X11getsizes(Gwindow w)
 {
 	XWindowAttributes win_attr;
 
@@ -594,8 +568,7 @@ Gwindow w;
 	w->ycorner = win_attr.y;
 }
  
-X11start(w)
-Gwindow w;
+void X11start(Gwindow w)
 {
 	if(w->win == 0) {
 		char *X11GetDefault();
@@ -677,23 +650,20 @@ Gwindow w;
 	}
 }
 
-X11flush(w)
-Gwindow w;
+void X11flush(Gwindow w)
 {
 	XRaiseWindow(display, w->win);	/* try it */
 	lineflush(w);
 	XFlush(display);
 }
 
-X11stop(w)
-Gwindow w;
+void X11stop(Gwindow w)
 {
 	X11flush(w);
 }
 
 static
-lineflush(w)
-Gwindow w;
+void lineflush(Gwindow w)
 {
 #ifdef BUFFER
 	if(w->curvertex > 0) {
@@ -704,9 +674,7 @@ Gwindow w;
 #endif
 }
 
-X11line(w, x1, y1, x2, y2)
-Gwindow w;
-COORD x1, y1, x2, y2;
+void X11line(Gwindow w, COORD x1, COORD y1, COORD x2, COORD y2)
 {
 
 #ifdef BUFFER
@@ -780,9 +748,7 @@ COORD x1, y1, x2, y2;
 
 }
 
-X11rect(w, x, y, x2, y2)
-Gwindow w;
-COORD x, y, x2, y2;
+void X11rect(Gwindow w, COORD x, COORD y, COORD x2, COORD y2)
 {
 #ifdef BUFFER
 	int rh = y2 - y;
@@ -804,10 +770,7 @@ COORD x, y, x2, y2;
 #endif
 }
 
-X11text(w, x, y, text)
-Gwindow w;
-COORD x, y;
-char *text;
+void X11text(Gwindow w, COORD x, COORD y, char *text)
 {
 	int xoff = 0, yoff = -15;
 	struct alternatefont *af;
@@ -832,9 +795,7 @@ char *text;
 			text, strlen(text));
 }
 
-X11point(w, x, y)
-Gwindow w;
-COORD x, y;
+void X11point(Gwindow w, COORD x, COORD y)
 {
 #ifdef DEBUG
 	printf("point  %d %d\n", x, y);
@@ -844,9 +805,7 @@ COORD x, y;
 		x+w->thickness, y+w->thickness);
 }
 
-X11setdim(w, width, height)
-Gwindow w;
-COORD width, height;
+void X11setdim(Gwindow w, COORD width, COORD height)
 {
 	XWindowChanges v;
 
@@ -855,9 +814,7 @@ COORD width, height;
 	XConfigureWindow(display, w->win, CWWidth | CWHeight, &v);
 }
 
-X11getdim(w, wp, hp)
-Gwindow w;
-COORD *wp, *hp;
+void X11getdim(Gwindow w, COORD *wp, COORD *hp)
 {
 	COORD ox = w->width, oy = w->height;
 
@@ -872,19 +829,23 @@ COORD *wp, *hp;
 	*hp = w->height;
 }
 
-X11menuitem(w, itemname, retval, addflag)
-Gwindow w;
-char *itemname;
-int retval;
-int addflag;
+/* structure used to communicate between X11input and X11event */
+
+struct menubutton {
+	int	activate;
+	int	x, y;
+	Window	win;
+};
+
+static void X11event(XEvent *xe, struct menubutton *menubuttonp);
+
+void X11menuitem(Gwindow w, char *itemname, int retval, int addflag)
 {
 #ifdef HUH
     char *data;
     int r;
 
     if(w->menu == NULL) {
-	int X11event();
-
 	if( (w->menu = XMenuCreate(RootWindow, w->program)) == NULL)
 		xerror("XMenuCreate");
 	if((w->pane = XMenuAddPane(w->menu, w->program, TRUE)) == XM_FAILURE)
@@ -907,9 +868,7 @@ int addflag;
 #endif
 }
 
-X11mouseinterest(w, event)
-Gwindow w;
-int event;
+void X11mouseinterest(Gwindow w, int event)
 {
 	int oldmask = w->inputmask;
 
@@ -935,8 +894,7 @@ int event;
 /* map x window handles into internal structure */
 
 static Gwindow
-X11LookupGwindow(win)
-Window win;
+X11LookupGwindow(Window win)
 {
 	Gwindow w;
 	for(w = window; w < &window[nwindows]; w++)
@@ -947,16 +905,8 @@ Window win;
 	return &window[0];
 }
 
-/* structure used to communicate between X11input and X11event */
-
-struct menubutton {
-	int	activate;
-	int	x, y;
-	Window	win;
-};
-
 static
-X11input()
+void X11input(void)
 {
 	XEvent xevent, moved_event;
 	struct menubutton menubutton;
@@ -1006,10 +956,7 @@ X11input()
 
 #include <sys/time.h>
 
-static
-X11event(xe, menubuttonp)
-XEvent *xe;
-struct menubutton *menubuttonp;
+static void X11event(XEvent *xe, struct menubutton *menubuttonp)
 {
     struct timeval tv;
     Gwindow w = X11LookupGwindow(xe->xany.window);
@@ -1076,8 +1023,7 @@ struct menubutton *menubuttonp;
   else printf("Funny X event %d (0x%x)\n", xe->type, xe->type);
 }
 
-DoMenu(mb)
-struct menubutton *mb;
+void DoMenu(struct menubutton *mb)
 {
 #ifdef HUH
         Gwindow w = X11LookupGwindow(mb->win);
@@ -1135,11 +1081,13 @@ struct menubutton *mb;
 }
 
 /*VARARGS1*/
-xerror(a, b, c, d)
-char *a;
+void xerror(char *a, ...)
 {
+	va_list ap;
+	va_start(ap, a);
 	printf("X11 error: ");
-	printf(a, b, c, d);
+	vprintf(a, ap);
+	va_end(ap);
 
 #ifdef HUH
 	if(!strncmp(a, "XMenu", 5))
@@ -1163,8 +1111,7 @@ char *a;
 
 
 char *
-X11GetDefault(program, name)
-char *program, *name;
+X11GetDefault(char *program, char *name)
 {
 	char n[200], *r;
 
@@ -1174,8 +1121,7 @@ char *program, *name;
 	return r;
 }
 
-X11updateGC(w)
-Gwindow w;
+void X11updateGC(Gwindow w)
 {
 	if(w->gc == NULL)	/* window not created yet */
 		return;

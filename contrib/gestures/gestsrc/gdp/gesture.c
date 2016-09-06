@@ -60,7 +60,7 @@ char 	**argv;
 double	rho = 1.0;
 
 char *
-fetcharg(c)
+fetcharg(int c)
 {
 	int i;
 	char *r;
@@ -80,9 +80,7 @@ fetcharg(c)
 int timeout = 300;
 int eagerness = 0;
 
-GESTUREinit(ac, av)
-int ac;
-char **av;
+void GESTUREinit(int ac, char **av)
 {
 	char *r;
 	FILE *f;
@@ -138,7 +136,7 @@ char **av;
 
 static FV fv;
 
-init3()
+void init3(void)
 {
 	fv = FvAlloc(0);
 }
@@ -158,8 +156,7 @@ static	int	Gx, Gy, Gt;	/* first point of gesture */
 static	int	Lx, Ly, Lt = 0;	/* last point of gesture */
 
 int
-read_gesture(chr)
-int *chr;
+read_gesture(int *chr)
 {
 
 	int button;
@@ -251,11 +248,11 @@ classifynow:
 	/* goto charwait_then_set_time; */
 
 escape:
-	return;
+	return G_MOUSE_UP; // what??  this is a guess - tjm
 }
 
 int
-ClassifyFv()
+ClassifyFv(void)
 {
 	Vector v;
 
@@ -264,14 +261,13 @@ ClassifyFv()
 }
 
 int
-ClassifyVector(y)
-Vector y;
+ClassifyVector(Vector y)
 {
 	sClassDope cd;
 
 	cd = sClassify(fullclassifier, y);
 	if(cd == NULL) {
-		printf(" rejected\n", cd->name);
+		printf(" rejected %s\n", cd->name);
 		return 0;
 	} else {
 		printf(" %s\n", cd->name);
@@ -279,8 +275,7 @@ Vector y;
 	}
 }
 
-Xat(x, y, eps)
-int x, y, eps;
+void Xat(int x, int y, int eps)
 {
 	Gline(x-eps, y-eps, x+eps, y+eps);
 	Gline(x-eps, y+eps, x+eps, y-eps);
@@ -290,8 +285,7 @@ int x, y, eps;
 static	int	gesture_character = 0xff;
 
 void
-GESTUREcharacter(c)
-int c;
+GESTUREcharacter(int c)
 {
 	gesture_character = c;
 }
@@ -300,7 +294,7 @@ int c;
 static int peek[NPEEK];
 static int npeek = 0;
 
-Gpop()
+int Gpop(void)
 {
 	int i, r;
 
@@ -316,7 +310,7 @@ Gpop()
 }
 
 int
-GESTUREgetchar()
+GESTUREgetchar(void)
 {
 	int r, chr;
 
@@ -350,8 +344,7 @@ GESTUREgetchar()
 }
 
 
-GESTUREgetXYT(xp, yp, tp)
-int *xp, *yp, *tp;
+void GESTUREgetXYT(int *xp, int *yp, int *tp)
 {
 	if(xp) *xp = Gx;
 	if(yp) *yp = Gy;
@@ -367,7 +360,7 @@ int *xp, *yp, *tp;
 
 static int Gfaking;
 
-Ggetchar()
+int Ggetchar(void)
 {
 	if(npeek > 0)
 		return Gpop();
@@ -375,8 +368,7 @@ Ggetchar()
 }
 
 void
-GgetXYT(xp, yp, tp)
-int *xp, *yp, *tp;
+GgetXYT(int *xp, int *yp, int *tp)
 {
 	if(Gfaking) {
 		Gfaking = 0;
@@ -388,7 +380,7 @@ int *xp, *yp, *tp;
 		GDEVgetXYT(xp, yp, tp);
 }
 
-Gfake()
+void Gfake(void)
 {
 	/* if(Gfaking) recog_error("Gfaking"); */
 	Gfaking = 1;
@@ -396,8 +388,7 @@ Gfake()
 
 /*----------------------------------------------------------------------*/
 
-Unambiguous(fv)
-FV fv;
+int Unambiguous(FV fv)
 {
 	Vector y;
 	sClassDope cd;

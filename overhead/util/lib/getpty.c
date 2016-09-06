@@ -34,6 +34,7 @@ for a pty. It takes two pointers to ints and returns the file decriptors.
 It returns TRUE if it succeeds.
 */
 
+#ifndef _XOPEN_SOURCE
 #ifdef SGI_4D_ENV
 #include <sys/stat.h>
 #include <sys/sysmacros.h>
@@ -193,6 +194,44 @@ int GetPtyandName(int *masterFD, int *slaveFD,char *name,int len)
 #endif /* SGI_4D_ENV */
 #endif /* SY_AIX31 */
 }
+#else /* _XOPEN_SOURCE */
+#include <unistd.h>
+#include <stdlib.h>
+
+#define OPEN_FLAGS O_RDWR|O_NOCTTY
+
+int GetPtyandName(int *masterFD, int *slaveFD,char *name,int len)
+{
+    /* XOPEN (Single UNIX Spec) lets us open a single device "/dev/ptmx" which
+     * finds an available pty for us.  ptsname() returns the
+     * name of that device.
+     */
+    int master;
+    int slave;
+    const char *ptyname;
+
+    if ((master = open("/dev/ptmx", OPEN_FLAGS)) < 0)
+	return 0;	/* none left */
+    if (grantpt(master) || unlockpt(master) || /* need to enable pts first */
+	(ptyname = ptsname(master)) == NULL) {
+	/* major weirdness */
+	close(master);
+	return 0;
+    }
+    if ((slave = open(ptyname, OPEN_FLAGS)) < 0) {
+	/* more weirdness */
+	close(master);
+	return 0;
+    }
+    if (name != NULL)
+        strncpy(name,ptyname,len);
+    if (masterFD != NULL)
+	*masterFD = master;
+    if (slaveFD != NULL)
+	*slaveFD = slave;
+    return 1;
+}
+#endif /* _XOPEN_SOURCE */
 
 int GetPty(int *masterFD, int *slaveFD)
 {

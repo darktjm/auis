@@ -189,11 +189,6 @@ static int  ShowFile(class help  *self, const char  *afilename	/* the file */, i
 				   help_HIST_TAIL - tail of the found filename
 				   */);
 static const char * FindEntryInDirs(const char	 * const dirs[], const char	 *entry  , const char	 *extension);
-int  help_GetHelpOn(class help  *self, const char  *aname	/* what topic */, long  isnew	/* is this a new topic? */, int  ahistory	/* show in history log under what name?
-		   help_HIST_NOADD - none at all,
-		   help_HIST_NAME - aname,
-		   help_HIST_TAIL - tail of the found filename
-		   */, const char  *errmsg	/* error to print if failure. "Error" if this is NULL */);
 void  SetupMenus(struct cache  *c);
 static void  SearchOverviews(class help * self);
 static void  SearchPrograms(class help * self);

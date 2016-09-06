@@ -62,12 +62,10 @@ const char * const ErrorParseTable[] = {
 #define ERRFLAG_FULLTIME 4
         "!@#PRINTSTATUS:",
 #define ERRFLAG_PRINTSTATUS 5
-        "!@#MARINERFETCH:",
-#define ERRFLAG_MARINERFETCH 6
         "!@#TOGGLE:",
-#define ERRFLAG_TOGGLE 7
+#define ERRFLAG_TOGGLE 6
         "!@#MAILSTATUS:",
-#define ERRFLAG_MAILSTATUS 8
+#define ERRFLAG_MAILSTATUS 7
         0};
 
 #if !POSIX_ENV
@@ -78,32 +76,6 @@ const char * const ErrorParseTable[] = {
        * 2*Handwidths is width in degrees
        * HandLength * radius /10 is  length of dial hand
        */
-
-void DrawDialHand(class consoleClass  *self, struct display  *disp, int  DialPosition , int  Bend , int  CHL);
-void DrawDial(class consoleClass  *self, int  Op, struct display  *disp);
-void DrawIndicator(class consoleClass  *self,int  Op, struct display  *disp);
-void maketext(class consoleClass  *self, char  *target, struct display  *disp, int  Which);
-void DrawBarGraph(class consoleClass  *self, int  Op, struct display  *disp);
-void itoa(int  n,char  s[]);
-void reverse(char  s[]);
-void DrawEKGGraph(class consoleClass  *self, int  Op, struct display  *disp);
-void PreLogError(class consoleClass  *self, int  Op, struct display  *disp);
-void PreLogReport(class consoleClass  *self,int  Op, struct display  *disp);
-void PreLogUser(class consoleClass  *self, int  Op, struct display  *disp);
-void PreLogSilly(class consoleClass  *self, int  Op, struct display  *disp);
-void LogError(class consoleClass  *self, int  Op, struct display  *disp);
-void LogReport(class consoleClass  *self, int  Op, struct display  *disp);
-void LogUser(class consoleClass  *self, int  Op, struct display  *disp);
-void LogSilly(class consoleClass  *self, int  Op, struct display  *disp);
-void AddToLog(class consoleClass  *self,struct display  *disp, boolean  IsClick, struct RegionLog  *logptr,boolean  IsUser);
-void AddStringToLog(const char  *string, struct RegionLog  *logptr);
-long GetMyPosition(class text  *textlog);
-void SetLogFence(class text  *textlog);
-void ScrollToEnd(struct RegionLog  *rlogptr, int  Op);
-void AddLineToLog(char  *string, struct RegionLog  *rlogptr);
-void DrawLog(class consoleClass  *self, int  Op, struct display  *disp);
-void DrawNothing(class consoleClass  *self, int  Op, struct display  *disp);
-
 
 void DrawDialHand(class consoleClass  *self, struct display  *disp, int  DialPosition , int  Bend , int  CHL)
 {
@@ -599,10 +571,6 @@ void AddToLog(class consoleClass  *self,struct display  *disp, boolean  IsClick,
    FirstWord[i] = '\0';
     k = stablk(FirstWord, ErrorParseTable, 1);
     switch (k) {
-        case ERRFLAG_MARINERFETCH:
-            LogMarinerFetchInfo(disp);
-   (self)->WantUpdate( self);
-           break;
         case ERRFLAG_ERRORTROUBLE:
             HighlightTrouble = TRUE;
         /* drop through to next case */

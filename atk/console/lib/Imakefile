@@ -25,7 +25,7 @@
 *  $
 */
 
-HFILES = consoleClass.H logview.H consoleapp.H vopconapp.H
+HFILES = consoleClass.H logview.H consoleapp.H
 
 OBJS = consoleClass.o \
 	draw.o \

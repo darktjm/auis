@@ -51,10 +51,9 @@
 
 #include <util.h>
 
-int stablk (const char  *arg ,const char  **table,int  quiet /* ignored */);
+#include "console.h"
 
-
-int stablk (const char  *arg ,const char  **table,int  quiet /* ignored */)
+int stablk (const char  *arg ,const char  * const *table,int  quiet /* ignored */)
 {
     int i,ix = 0,count;
 

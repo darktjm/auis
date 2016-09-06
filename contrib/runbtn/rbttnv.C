@@ -144,7 +144,7 @@ boolean runbuttonview::Touch(int ind, enum view_MouseAction action)
 	    WantInputFocus(this);
 	    cmd = b->GetCommandString();
 	    if (cmd) {
-		sprintf(msg, "This command will be executed: %0.4000s", cmd);
+		sprintf(msg, "This command will be executed: %.4000s", cmd);
 		m = msg;
 	    } else
 		m = "No command will be executed when this button is pushed.";

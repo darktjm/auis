@@ -57,10 +57,6 @@ void WakeUp(class consoleClass  *self)
 		DiskPollCt = 1;
 /*		FindFreeDiskSpace(self);*//*handled directly by im_AddFileHandler in vmmon.c:InitStatistics ? */
 	    }
-	    if (DoVenusChecking && ++VenusPollCt > VenusPollFreq) {
-		VenusPollCt = 1;
-		CheckVenusQuota(self);
-	    }
 	    if (DoMailChecking && ++MailPollCt > MailPollFreq) {
 		MailPollCt = 1;
 		CheckMail(self, FALSE);

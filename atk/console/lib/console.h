@@ -65,8 +65,6 @@ extern int MYDEBUGGING;
 #include <getstats.h>
 #endif 
 
-#define MARINERFETCH (MAXGETSTATSCOUNTERS + 1)
-#define MARINEROTHER (MAXGETSTATSCOUNTERS + 2)
 #define CLOCKHOURS (MAXGETSTATSCOUNTERS + 3)
 #define CLOCKHOURFIFTHS (MAXGETSTATSCOUNTERS + 4)
 #define CLOCKMINUTES (MAXGETSTATSCOUNTERS + 5)
@@ -128,9 +126,6 @@ extern int MYDEBUGGING;
 #define PRINTQUEUE (MAXGETSTATSCOUNTERS + 60)
 #define PRINTSENT (MAXGETSTATSCOUNTERS + 61)
 #define PRINTERRORS (MAXGETSTATSCOUNTERS + 62)
-#define MARINERFINISHED (MAXGETSTATSCOUNTERS + 63)
-#define VICEPERSONAL (MAXGETSTATSCOUNTERS + 64)
-#define VICEPARTITION (MAXGETSTATSCOUNTERS + 65)
 #define NETRESPONSES (MAXGETSTATSCOUNTERS + 66)
 #define UDPIDLE (MAXGETSTATSCOUNTERS + 67)
 #define UNAUTHENTICATED (MAXGETSTATSCOUNTERS + 68)
@@ -170,11 +165,9 @@ extern int MYDEBUGGING;
 extern int theGetstatsPid;
 
 extern FILE *ErrorsIn,
-    *VenusIn,
     *ConsoleIn;
 extern char ErrTxt[256];
 extern boolean ErrorInputPending,
-    VenusInputPending,
     WindowInputPending,
     ConsoleSocketInputPending;
 extern int LastMailMod;
@@ -279,15 +272,12 @@ extern int Period,
     WindowPollFreq,
     DirPollFreq,
     ClockPollFreq,
-    VenusPollFreq,
     NetPollFreq,
     PrintPollFreq,
     FPAPollFreq;
 extern boolean DoTroubleChecking,
-    DoVenusChecking,
     DoVMStat,
     DoDiskFreeStat,
-    DoVenusMonitoring,
     DoMailChecking,
     DoPrintChecking,
     DoDirChecking,
@@ -328,7 +318,6 @@ extern int AvailFontPts[MAXNUMFONTS];
 extern int FontCount;
 extern int ScaleFactor;
 extern boolean DidInitGVM,
-    DidInitVenus,
     DidInitErrLog,
     DidInitPrinting;
 extern int VMPollCt,
@@ -337,7 +326,6 @@ extern int VMPollCt,
     DirPollCt,
     WindowPollCt,
     ClockPollCt,
-    VenusPollCt,
     NetPollCt,
     PrintPollCt,
     FPAPollCt;
@@ -406,7 +394,7 @@ extern void LogReport(class consoleClass  *self, int  Op, struct display  *disp)
 extern void LogUser(class consoleClass  *self, int  Op, struct display  *disp);
 extern void LogSilly(class consoleClass  *self, int  Op, struct display  *disp);
 extern void AddToLog(class consoleClass  *self,struct display  *disp, boolean  IsClick, struct RegionLog  *logptr,boolean  IsUser);
-extern void AddStringToLog(char  *string, struct RegionLog  *logptr);
+extern void AddStringToLog(const char  *string, struct RegionLog  *logptr);
 long GetMyPosition(class text  *textlog);
 extern void SetLogFence(class text  *textlog);
 extern void ScrollToEnd(struct RegionLog  *rlogptr, int  Op);
@@ -467,14 +455,6 @@ extern void CheckFPA(class consoleClass  *self);
 extern void CheckTrouble(class consoleClass  *self);
 extern void HighlightDisplay(class consoleClass  *self, struct display  *dp);
 extern int SetHomeEnv();
-extern void CheckVenusQuota(class consoleClass  *self);
-extern void CheckMariner(FILE  *ActiveVenus, class consoleClass  *self);
-extern void CheckTheMariner(char  *buf, class consoleClass  *self);
-extern void IsViceRunning();
-extern void InitializeMariner(class consoleClass  *self);
-extern void LogMarinerFetchInfo(struct display  *disp);
-extern void VenusNovelty(class consoleClass  *self, char  *rock);
-extern int IsViceError(int  n);
 extern class fontdesc *SetupFont(const char  *fontname);
 extern void KillInitExecProcesses(boolean  killPIDs);
 extern void SetConsoleLib();
@@ -505,3 +485,8 @@ extern void OneTimeRemoteInit(class consoleClass *self);
 extern int console_InitStats(class consoleClass  *self);
 extern void InitializeGetStats(class consoleClass *self);
 extern void InitDirectories();
+
+extern const char RealProgramName[];
+extern const char EXTENSION[];
+extern const char EXTENSION1[];
+extern const char EXTENSION2[];

@@ -97,7 +97,7 @@ float sleeptime = 5;
  * Main procedure. Contains loop which displays tasks, and then
  * sleeps/waits for input
  ********************************************************************/
-int top_main()
+int top_main(void)
 {
   static int initted = 0;
   static struct ps_proc_head *ph;
@@ -182,7 +182,7 @@ void show_procs(struct ps_proc_head *ph, unsigned int maxcmd)
  * elapsed since the last update. This is essential for computing
  * percent CPU usage.
  ********************************************************************/
-float get_elapsed_time()
+float get_elapsed_time(void)
 {
   struct timeval time;
   static struct timeval oldtime;
@@ -204,7 +204,7 @@ float get_elapsed_time()
  * returns the total memory available for use in percent memory 
  * usage calculations.
  ********************************************************************/
-unsigned int show_meminfo()
+unsigned int show_meminfo(void)
 {
   char memory[1024];
   static int fd;

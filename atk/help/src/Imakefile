@@ -27,7 +27,7 @@
 
 OBJS = help.o helpapp.o helpaux.o helpdb.o hlptextview.o network.o
 HFILES = help.H helpapp.H helpdb.H hlptextview.H
-LIBS = $(BASEDIR)/lib/libutil.a $(BASEDIR)/lib/librxp.a $(BASEDIR)/lib/libindex.a 
+LIBS = $(BASEDIR)/lib/libutil.a $(BASEDIR)/lib/libindex.a 
 
 NormalObjectRule()
 NormalATKRule()

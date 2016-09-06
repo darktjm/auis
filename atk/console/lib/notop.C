@@ -48,23 +48,12 @@ const char EXTENSION1[] = "console";
 const char EXTENSION2[] = "Console";
 
 
-void ChooseColumns(int  numcol);
-void ChooseMachines(class consoleClass  *self, char  *machinelist);
-void ConfigureMachines(class consoleClass  *self, int  *Rows , int  *Columns , int  *Machines, boolean  Initialize);
-struct datum *BuildDatum(char  *keyword, int  machine);
-void OneTimeRemoteInit(class consoleClass  *self);
-void InitializeGetStats(class consoleClass  *self);
-void InitializeInstruments(class consoleClass  *self);
-struct RegionLog *WhichErrorLog(int  i);
-void ReInitializeRemoteInstruments();
-
-
 void ChooseColumns(int  numcol)
     {
     mydbg(("entering: ChooseColumns\n"));
 }
 
-void ChooseMachines(class consoleClass  *self, char  *machinelist)
+void ChooseMachines(class consoleClass  *self, const char  *machinelist)
     {
     mydbg(("entering: ChooseMachines\n"));
 }
@@ -75,7 +64,7 @@ void ConfigureMachines(class consoleClass  *self, int  *Rows , int  *Columns , i
     *Rows = *Columns = *Machines = 1;
 }
 
-struct datum *BuildDatum(char  *keyword, int  machine)
+struct datum *BuildDatum(const char  *keyword, int  machine)
         {
     mydbg(("entering: BuildDatum\n"));
     return(&Numbers[ALWAYS]);
@@ -103,14 +92,6 @@ void InitializeInstruments(class consoleClass  *self)
     static boolean DidInitMail = FALSE, DidInitDirs = FALSE, DidInitPrint = FALSE;
 
     mydbg(("entering: InitializeInstruments\n"));
-    if (DoVenusMonitoring && ! DidInitVenus) {
-	InitializeMariner(self);
-	DidInitVenus = TRUE;
-    }
-    if (! DidInitVenus) {
-/*	VenusIn = winin; */
-	VenusIn = NULL; /* ??? */
-    }
     if (DoMailChecking && !DidInitMail) {
 	InitMail(self);
 	DidInitMail = TRUE;

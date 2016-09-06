@@ -76,10 +76,7 @@ int fixed_outfiles = 0;
 
 
 char*
-stringappend(string1, end1, string2)
-char *string1;
-int end1;
-char *string2;
+stringappend(char *string1, int end1, char *string2)
 {
   char *ostring;
   char *cp, *cp1;
@@ -105,7 +102,7 @@ char *string2;
 /* JF this has been hacked to death.  Nowaday it sets up the file names for
    the output files, and opens the tmp files and the parser */
 void
-openfiles()
+openfiles(void)
 {
   char *name_base;
   char *cp;
@@ -291,7 +288,7 @@ openfiles()
 This is done when %semantic_parser is seen in the declarations section.  */
 
 void
-open_extra_files()
+open_extra_files(void)
 {
   FILE *ftmp;
   int c;
@@ -333,9 +330,7 @@ open_extra_files()
 	/* JF to make file opening easier.  This func tries to open file
 	   NAME with mode MODE, and prints an error message if it fails. */
 FILE *
-tryopen(name, mode)
-char *name;
-char *mode;
+tryopen(char *name, char *mode)
 {
   FILE	*ptr;
 
@@ -350,8 +345,7 @@ char *mode;
 }
 
 void
-done(k)
-int k;
+done(int k)
 {
   if (faction)
     fclose(faction);

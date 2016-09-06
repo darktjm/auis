@@ -394,7 +394,7 @@ int STInclude(char *command, int tofind)
   int in, accessible, readable;
   long int tempcurrline;
 
-  sprintf(instruction, "");
+  instruction[0] = 0;
 
   while((in = fgetc(fin)) != EOF)
     {

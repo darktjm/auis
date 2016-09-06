@@ -421,6 +421,13 @@ void arbcon_Create(){
     strcpy(foo,ARBCONNAME);
     NewWindow(foo,0,FALSE);
 }
+class celview *arbcon::currentcelview()
+{
+	ATKinit;
+
+    if(Gself == NULL) return NULL;
+    return Gself->currentcelviewval;
+}
 void arbcon::SetCurrentArbiterview(class arbiterview  *ab)
 {
 	ATKinit;

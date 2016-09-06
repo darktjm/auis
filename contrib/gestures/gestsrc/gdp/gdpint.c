@@ -141,7 +141,7 @@ struct command {
 
 static
 void
-DpInit()
+DpInit(void)
 {
 	char rv[3];
 
@@ -168,7 +168,7 @@ DpInit()
 }
 
 void
-DpDebug()
+DpDebug(void)
 {
 	extern int DrawDebug;
 
@@ -177,7 +177,7 @@ DpDebug()
 }
 
 void
-DpQuit()
+DpQuit(void)
 {
 	(void) system("stty echo -cbreak");	/* too lazy to ioctl */
 	exit(0);
@@ -185,8 +185,7 @@ DpQuit()
 
 static
 Command
-Lookup(chr)
-int chr;
+Lookup(int chr)
 {
 	Command c;
 	for(c = commands;
@@ -197,8 +196,7 @@ int chr;
 }
 
 void
-GetNextMouseEvent(whichp, xp, yp)
-int *whichp, *xp, *yp;
+GetNextMouseEvent(int *whichp, int *xp, int *yp)
 {
 	int chr;
 
@@ -211,13 +209,12 @@ int *whichp, *xp, *yp;
 }
 
 int
-IsUpEvent(which)
+IsUpEvent(int which)
 {
 	return which == LEFT_UP || which == RIGHT_UP;
 }
 
-main(argc, argv)
-char **argv;
+int main(int argc, char **argv)
 {
 	WmInit(argv[0]);
 	StInit();
@@ -231,7 +228,7 @@ char **argv;
 	mainloop();
 }
 
-mainloop()
+void mainloop(void)
 {
 	Command command = &commands[0], c;
 	int chr;
@@ -269,9 +266,7 @@ mainloop()
 }
 
 void
-LinePointHandler(c, xdown, ydown)
-Command c;
-int xdown, ydown;
+LinePointHandler(Command c, int xdown, int ydown)
 {
 	int which, x, y;
 	Element e;
@@ -287,9 +282,7 @@ int xdown, ydown;
 
 
 void
-RectPointHandler(c, xdown, ydown)
-Command c;
-int xdown, ydown;
+RectPointHandler(Command c, int xdown, int ydown)
 {
 	int which, x, y;
 	Element e;
@@ -305,9 +298,7 @@ int xdown, ydown;
 }
 
 void
-CirclePointHandler(c, xdown, ydown)
-Command c;
-int xdown, ydown;
+CirclePointHandler(Command c, int xdown, int ydown)
 {
 	int which, x, y;
 	Element e;
@@ -323,16 +314,13 @@ int xdown, ydown;
 }
 
 void
-TextHandler(c, xdown, ydown)
-Command c;
-int xdown, ydown;
+TextHandler(Command c, int xdown, int ydown)
 {
 }
 
 static
 Element
-WaitForPick(/* in out */ xdownp, /* in out */ ydownp)
-int *xdownp, *ydownp;
+WaitForPick(/* in out */ int *xdownp, /* in out */ int *ydownp)
 {
 	int x, y, which;
 	Element e;
@@ -356,9 +344,7 @@ int *xdownp, *ydownp;
 }
 
 void
-MoveHandler(c, xdown, ydown)
-Command c;
-int xdown, ydown;
+MoveHandler(Command c, int xdown, int ydown)
 {
 	int x, y, which;
 	Element e;
@@ -387,10 +373,7 @@ int xdown, ydown;
 #define	MAGNIFY	3
 
 static int
-GenRotate(t, x1, y1, x2, y2, scalekind)
-Transformation t;
-int x1, y1, x2, y2;
-int scalekind;
+GenRotate(Transformation t, int x1, int y1, int x2, int y2, int scalekind)
 {
 	int dx, dy;
 	double ihyp;
@@ -412,9 +395,7 @@ int scalekind;
 
 
 void
-RotateHandler(c, xdown, ydown)
-Command c;
-int xdown, ydown;
+RotateHandler(Command c, int xdown, int ydown)
 {
 	int x, y, which;
 	Element e;
@@ -477,9 +458,7 @@ int xdown, ydown;
 #define ROTATETHRESH	(8*8)
 
 void
-RotateHandler2(c, xdown, ydown)
-Command c;
-int xdown, ydown;
+RotateHandler2(Command c, int xdown, int ydown)
 {
 	int x, y, which;
 	Element e;
@@ -554,16 +533,12 @@ int xdown, ydown;
 
 
 void
-SelectHandler(c, xdown, ydown)
-Command c;
-int xdown, ydown;
+SelectHandler(Command c, int xdown, int ydown)
 {
 }
 
 void
-DeleteHandler(c, xdown, ydown)
-Command c;
-int xdown, ydown;
+DeleteHandler(Command c, int xdown, int ydown)
 {
 	Element e;
 	
@@ -576,9 +551,7 @@ int xdown, ydown;
 }
 
 void
-PackHandler(c, xdown, ydown)
-Command c;
-int xdown, ydown;
+PackHandler(Command c, int xdown, int ydown)
 {
 	Element newe, e;
 	
@@ -596,9 +569,7 @@ int xdown, ydown;
 }
 
 void
-PackHandler2(c, xdown, ydown)
-Command c;
-int xdown, ydown;
+PackHandler2(Command c, int xdown, int ydown)
 {
 	Element newe, e;
 	

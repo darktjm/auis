@@ -89,6 +89,9 @@
 #define MK_ZIP 1
 #define MK_PREVIEW 1
 #define MK_HELP 1
+#define MK_CONTRIB_HTML 1
+#define MK_STROFFET 1
+#define MK_GTEXT 1
 
 /* If you are programming in Andrew, you may want:
 	Examples: a set of program examples.

@@ -43,8 +43,7 @@ char *classname[MAXCLASSES];
 static int nclassnames = 0;
 
 int
-ClassEnter(name)
-char *name;
+ClassEnter(char *name)
 {
 	int i;
 	for(i = nclassnames - 1; i >= 0; i--)
@@ -54,8 +53,7 @@ char *name;
 }
 
 GestureFile
-ReadGestureFile(infilename)
-char *infilename;
+ReadGestureFile(char *infilename)
 {
 	GestureFile gf;
 	struct gpoint p[MAXPOINTS];
@@ -114,10 +112,7 @@ char *infilename;
 }
 
 void
-WriteGesture(outfile, g, classname)
-FILE *outfile;
-Gesture g;
-char *classname;
+WriteGesture(FILE *outfile, Gesture g, char *classname)
 {
 	Gpoint p;
 	int i;
