@@ -254,7 +254,7 @@ static void deletenewlines(char  *buf);
 static void deletechapnumbers(char  *buf);
 static void insert(const char  *src,char  *c);
 static void quote(char  *buf,char  c,int  len);
-static void outputendnote();
+/* static void outputendnote(); */
 static int handlespecialformating(class text  *d,class environment  *env,long  pos,long  len);
 #if 0
 class text *texttroff__CompileNotes(struct classheader  *classID,class text  *txt);
@@ -683,8 +683,6 @@ static void OutputInitialTroff(FILE  *f, class view *vw, boolean  toplevel, clas
 
 
     if (toplevel) {
-	char *val;
-
 	fputs(".sp 0.5i\n", f);     /* Space down for start of page */
 
 	if (vw)
@@ -974,10 +972,12 @@ static void quote(char  *buf,char  c,int  len)
 	ebuf--;
     }
 }
+#if 0 /* commented out below */
 static void outputendnote()
 {
     fprintf(troffFile,"%d ",endnotes++);
 }
+#endif
 static int handlespecialformating(class text  *d,class environment  *env,long  pos,long  len)
 {
     class style *st;
@@ -1142,7 +1142,7 @@ class text *texttroff__CompileNotes(struct classstyle;
 
 void texttroff::WriteSomeTroff(class view  *view, class dataobject  *dd, FILE  * f, int  toplevel, unsigned long  flags)
 {
-    int elen, cs, ln , flag,count,indexfontface,hitchars;
+    int elen, cs, ln , flag,count,indexfontface = 0,hitchars;
     long i, doclen;
     class text *d,*ttxt;
     boolean quotespace; 
@@ -1362,7 +1362,7 @@ void texttroff::WriteSomeTroff(class view  *view, class dataobject  *dd, FILE  *
 		     } else fprintf(".nr ds 0\n"); /* flag that the vh and vw regs are nonsense */
 #endif /* VIEWREF_DESIREDSIZE_SET */		     
 		     (sv.CurView)->Print( f, "troff", "PostScript", 0);
-		     if(needta)
+		     if(needta) {
 			 /* reset tab stops, as table is want to mess them up */
 			 if (sv.SpecialFlags & style_TabsCharacters) {
 #if 0
@@ -1387,6 +1387,7 @@ void texttroff::WriteSomeTroff(class view  *view, class dataobject  *dd, FILE  *
 			 } else {
 			     (sv.tabs)->OutputTroff( (resetTabs) ? 0 : sv.CurIndentation, troffFile);
 			 }
+		     }
 		 }
 	    }
 	    text::FinalizeStateVector(&nsv);

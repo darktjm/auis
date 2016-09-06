@@ -34,7 +34,7 @@
  * Internal routine: return a new, empty hash list.  Empty hash lists are not represented
  * by null pointers, but rather a hash list with a zero entry count.
  */
-struct hashList *index_NewHL()
+struct hashList *index_NewHL(void)
 {
     struct hashList *th;
     th = (struct hashList *) malloc (sizeof (struct hashList));
@@ -47,9 +47,7 @@ struct hashList *index_NewHL()
   * Internal routine: given a hash list and a hash value, return true if the value is
       * contained in the list, and false otherwise.
       */
-index_HashPresent(alist, ahash)
-struct hashList *alist;
-long ahash;
+int index_HashPresent(struct hashList *alist, long ahash)
 {
     int i;
     for(;alist;alist=alist->next) {
@@ -64,9 +62,7 @@ long ahash;
   * Internal routine: given a hash list and a hash value, delete the value from
   * the hash list.
   */
-index_HashRemove(alist, ahash)
-struct hashList *alist;
-long ahash;
+int index_HashRemove(struct hashList *alist, long ahash)
 {
     int i;
     for(;alist;alist=alist->next) {
@@ -80,9 +76,7 @@ long ahash;
 /*
   * Internal routine: given a hash list and a hash value, add the value to the list.
   */
-index_HashAdd(alist, ahash)
-struct hashList *alist;
-long ahash;
+void index_HashAdd(struct hashList *alist, long ahash)
 {
     struct hashList *tlist;
     for(tlist=alist;tlist;tlist=tlist->next) {
@@ -101,8 +95,7 @@ long ahash;
 /*
   * Internal routine: given a hash list, free it.
   */
-index_FreeHL(alist)
-struct hashList *alist;
+void index_FreeHL(struct hashList *alist)
 {
     struct hashList *next;
     for(;alist;alist=next) {
@@ -114,7 +107,7 @@ struct hashList *alist;
 /*
   * Create a new, empty record set.
   */
-struct recordSet *recordset_New(asize)
+struct recordSet *recordset_New(int asize)
 {
     struct recordSet *tr;
     if (asize <= 0) asize = 1;
@@ -128,8 +121,7 @@ struct recordSet *recordset_New(asize)
 /*
   * Free a record set.
   */
-void recordset_Free(aset)
-struct recordSet *aset;
+void recordset_Free(struct recordSet *aset)
 {
     free(aset->data);
     free(aset);
@@ -138,9 +130,7 @@ struct recordSet *aset;
 /*
   * Add a record id to a record set.
   */
-recordset_Add(aset, arid)
-struct recordSet *aset;
-struct recordID *arid;
+void recordset_Add(struct recordSet *aset, struct recordID *arid)
 {
     long c;
     struct recordID *tid;

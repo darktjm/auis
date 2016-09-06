@@ -58,7 +58,6 @@ static void reverse_video(unsigned char *location , unsigned char *output, long 
 static void _swapshort (char  *bp, unsigned  n);
 static void _swaplong (char  *bp, unsigned  n);
 static void reverse_bit_order(unsigned char *location , unsigned char *output, long  nbytes);
-static void pixmap_to_bitmap(unsigned char *location , unsigned char *output, long  nbytes);
 static unsigned int tone_scale_adjust(unsigned int val);
 static void LeftToRight(int  *curr, int  *next, int   width);
 static void RightToLeft(int  *curr, int  *next, int   width);
@@ -185,7 +184,7 @@ long xwdio::ReadRow(FILE  *file		, unsigned char *row	, long  nbytes   )
 
 {
 
-    if (fread(row, sizeof(char), nbytes, file) < 0) 
+    if ((long)fread(row, sizeof(char), nbytes, file) < nbytes)
 	return dataobject_PREMATUREEOF;
     return dataobject_NOREADERROR;
 }
@@ -281,7 +280,7 @@ long xwdio::ReadImage(FILE  *file		, class pixelimage  *pix	)
     unsigned char *row;
     unsigned int rownum, rowsize, rowcount, i = 0;
     struct _xwd_file_header hdr;
-    int win_name_size = 0, ncolors = 0;
+    unsigned int win_name_size = 0, ncolors = 0;
     char win_name[512];
     unsigned long swaptest = 1;
     XColor colors[512];
@@ -298,7 +297,7 @@ long xwdio::ReadImage(FILE  *file		, class pixelimage  *pix	)
       hdr.header_size.
       */
 
-    if (fread(&hdr, sizeof(hdr), 1, file) < 0) 
+    if (fread(&hdr, sizeof(hdr), 1, file) < 1)
 	return dataobject_PREMATUREEOF;
     
     /* Swap header bytes if necessary */
@@ -555,27 +554,6 @@ void xwdio::WriteImage(FILE  *file		, class pixelimage  *pix, struct rectangle  
 
 
 
-
-static void pixmap_to_bitmap(unsigned char *location , unsigned char *output, long  nbytes)
-{
-  int x, c, b;
-
-/* Simple method: take each byte (which represents a pixel), and convert 
- it to a 0 if it is 0 or a 1 if it is any othre value, and make one byte out
-of each eight such converted values */
-
-  c = 0; b = 1;
-  for (x = 0; x < nbytes;)
-  {
-      if (*(location + x)) c |= b;
-      b <<= 1;
-      if (!(++x & 7))
-      {
-	  *(output++) = c;
-	  c = 0; b = 1;
-      }
-  }
-}
 
 /*
  * a _very_ simple tone scale adjustment routine. provides a piecewise

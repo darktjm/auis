@@ -82,8 +82,6 @@ void fontsel::SetFamily(const char  *newfam)
 
 static char *CopyString(const char  *str)
 {
-    char *tmp;
-
     if (str==NULL)
 	return NULL;
     return strdup(str);

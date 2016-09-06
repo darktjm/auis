@@ -77,8 +77,8 @@ static core **state_table;
 
 
 
-void
-allocate_itemsets()
+static void
+allocate_itemsets(void)
 {
   short *itemp;
   int symbol;
@@ -122,8 +122,8 @@ allocate_itemsets()
 }
 
 
-void
-allocate_storage()
+static void
+allocate_storage(void)
 {
   allocate_itemsets();
 
@@ -133,8 +133,8 @@ allocate_storage()
 }
 
 
-void
-free_storage()
+static void
+free_storage(void)
 {
   FREE(shift_symbol);
   FREE(redset);
@@ -150,7 +150,7 @@ free_storage()
 /* compute the nondeterministic finite state machine (see state.h for details)
 from the grammar.  */
 void
-generate_states()
+generate_states(void)
 {
   allocate_storage();
   initialize_closure(nitems);
@@ -196,7 +196,7 @@ generate_states()
    a vector of item numbers activated if that symbol is shifted,
    and kernel_end[symbol] points after the end of that vector.  */
 void
-new_itemsets()
+new_itemsets(void)
 {
   int i;
   int shiftcount;
@@ -244,7 +244,7 @@ new_itemsets()
 
    shiftset is set up as a vector of state numbers of those states.  */
 void
-append_states()
+append_states(void)
 {
   int i;
   int j;
@@ -283,8 +283,7 @@ Create a new state if no equivalent one exists already.
 Used by append_states  */
 
 int
-get_state(symbol)
-int symbol;
+get_state(int symbol)
 {
   int key;
   short *isp1;
@@ -357,8 +356,7 @@ int symbol;
 /* subroutine of get_state.  create a new state for those items, if necessary.  */
 
 core *
-new_state(symbol)
-int symbol;
+new_state(int symbol)
 {
   int n;
   core *p;
@@ -396,7 +394,7 @@ int symbol;
 
 
 void
-initialize_states()
+initialize_states(void)
 {
   core *p;
 /*  unsigned *rp1; JF unused */
@@ -410,7 +408,7 @@ initialize_states()
 
 
 void
-save_shifts()
+save_shifts(void)
 {
   shifts *p;
   short *sp1;
@@ -447,7 +445,7 @@ save_shifts()
 /* find which rules can be used for reduction transitions from the current state
    and make a reductions structure for the state to record their rule numbers.  */
 void
-save_reductions()
+save_reductions(void)
 {
   short *isp;
   short *rp1;
@@ -508,7 +506,7 @@ which has a shift going to the final state, which has a shift
 to the termination state.
 Create such states and shifts if they don't happen to exist already.  */
 void
-augment_automaton()
+augment_automaton(void)
 {
   int i;
   int k;
@@ -516,7 +514,7 @@ augment_automaton()
   core *statep;
   shifts *sp;
   shifts *sp2;
-  shifts *sp1;
+  shifts *sp1 = NULL; /* shut gcc up */
 
   sp = first_shift;
 
@@ -681,7 +679,7 @@ augment_automaton()
    Create the next-to-final state, to which a shift has already been made in
    the initial state.  */
 void
-insert_start_shift()
+insert_start_shift(void)
 {
   core *statep;
   shifts *sp;

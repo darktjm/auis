@@ -553,7 +553,7 @@ void celview::Update()
 	return;
 
     }
-    if(Cel(this) && this->desw != Cel(this)->desw || this->desh != Cel(this)->desh){
+    if(Cel(this) && (this->desw != Cel(this)->desw || this->desh != Cel(this)->desh)){
 	this->desw = Cel(this)->desw ;
 	this->desh = Cel(this)->desh ;
 	if(!this->sizepending) {
@@ -600,7 +600,7 @@ void celview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  w
 	(this->arb = arbiterview::FindArb(this->parent)) != NULL){
 	(this->arb)->InitCell(this);
     }
-    if(type == view_FullRedraw && Cel(this) && this->desw != Cel(this)->desw || this->desh != Cel(this)->desh){
+    if(type == view_FullRedraw && Cel(this) && (this->desw != Cel(this)->desw || this->desh != Cel(this)->desh)){
 	this->desw = Cel(this)->desw ;
 	this->desh = Cel(this)->desh ;
 	if(!this->sizepending) {
@@ -937,7 +937,7 @@ void celview::GetManyParameters( struct resourceList  * resources, class atomlis
 }
 static void appendresourceList( class celview  * self, struct resourceList  * resources)
 {   /* append new entries onto the cels text */
-    char *buf,tbuf[1024],*obp,*cp,*el;
+    char *buf,tbuf[1024],*cp,*el;
     struct resourceList rl;
     long len,x;
     boolean fnd[64];
@@ -1020,12 +1020,12 @@ static void editresourceList( class celview  * self, struct resourceList  * reso
     SKIPTO(S2,C1,S1); \
     S1++;\
     SKIPTOSET(S1,C2,S2,tmp);\
-    *S2++ ; *tmp = '\0'
+    S2++ ; *tmp = '\0'
 
 static boolean StringToResourceList(struct resourceList  *rl,char  *str)
 {
     char buf[512], *tmp;
-    char *start,*end,*cp;
+    char *start,*end;
     end = str;
     PULLOUT(start,end,'[',']',buf);
     rl->type = atom::Intern(buf);
@@ -1445,7 +1445,7 @@ void celview::ObservedChanged(class observable  *changed, long  value)
 	    this->vismode = Cel(this)->mode;
 	    (this)->WantNewSize(this);
 	}
-	else if (Cel(this) && this->desw != Cel(this)->desw || this->desh != Cel(this)->desh) 
+	else if (Cel(this) && (this->desw != Cel(this)->desw || this->desh != Cel(this)->desh))
 	    (this)->WantUpdate(this);
 
     }
@@ -1555,6 +1555,8 @@ class view *celview::Hit(enum view_MouseAction  action,long  mousex ,long  mouse
 		}
 		return (class view *) this;
 	    }
+	default:
+	    break;
     }
     if(this->Moving || this->child == NULL) return (class view *) this;
     return NULL;

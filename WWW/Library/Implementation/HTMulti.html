@@ -27,14 +27,14 @@ Library of Common Code</A>.
 /*
 **	Set default file name for welcome page on each directory.
 */
-extern void HTAddWelcome PARAMS((char * welcome_name));
+extern void HTAddWelcome (char * welcome_name);
 
 /*
 **	Perform multiformat handling
 */
-extern char * HTMulti PARAMS((HTRequest *	req,
+extern char * HTMulti (HTRequest *	req,
 			      char *		path,
-			      struct stat *	stat_info));
+			      struct stat *	stat_info);
 
 #endif /* HTMULTI_H */
 

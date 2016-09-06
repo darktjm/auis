@@ -62,8 +62,8 @@ must be freed.
 </DL>
 
 <PRE>		
-extern char * HTPrompt PARAMS((CONST char * Msg, CONST char * deflt));
-extern char * HTPromptPassword PARAMS((CONST char * Msg));
+extern char * HTPrompt (CONST char * Msg, CONST char * deflt);
+extern char * HTPromptPassword (CONST char * Msg);
 
 </PRE>
 <H2>HTPromptUsernameAndPassword: Get both username and password</H2>
@@ -83,9 +83,9 @@ the typed-in username and password.  Initial strings pointed to
 by them are NOT freed!
 </DL>
 <PRE>
-extern void HTPromptUsernameAndPassword PARAMS((CONST char *	Msg,
+extern void HTPromptUsernameAndPassword (CONST char *	Msg,
 						char **		username,
-						char **		password));
+						char **		password);
 
 </PRE>
 <H2>Display a message, don't wait for
@@ -97,7 +97,7 @@ input</H2>
 </DL>
 
 <PRE>
-extern void HTAlert PARAMS((CONST char * Msg));
+extern void HTAlert (CONST char * Msg);
 
 
 </PRE>
@@ -105,7 +105,7 @@ extern void HTAlert PARAMS((CONST char * Msg));
 (and diagnostics) only</H2>
 <H3>On entry,</H3>The input is a list of parameters
 for printf.
-<PRE>extern void HTProgress PARAMS((CONST char * Msg));
+<PRE>extern void HTProgress (CONST char * Msg);
 
 
 </PRE>
@@ -126,7 +126,7 @@ FALSE otherwise.
 </DL>
 
 <PRE>
-extern BOOL HTConfirm PARAMS ((CONST char * Msg));
+extern BOOL HTConfirm (CONST char * Msg);
 
 #endif
 </PRE>

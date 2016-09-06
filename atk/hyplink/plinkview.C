@@ -145,7 +145,6 @@ static boolean HuntCheck(class plinkview  *self, class text  *t, long  pos, clas
 {
     class viewref *vref;
     enum environmenttype etype;
-    class view *v;
     class dataobject *d;
     class texttag *ttag;
     class plink *pl;

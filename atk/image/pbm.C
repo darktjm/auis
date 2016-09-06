@@ -142,6 +142,7 @@ static int pbmReadInt(FILE  *f)
 
 static int isPBM(FILE          *f, const char          *name, unsigned int *width , unsigned int *height , unsigned int *maxval)
                { byte buf[4];
+  int w, h;
 
   if(!Initialized)
     initializeTable();
@@ -149,14 +150,18 @@ static int isPBM(FILE          *f, const char          *name, unsigned int *widt
   if(fread(buf, sizeof(byte), 2, f) != 2)
     return(NOTPBM);
   if (memToVal((byte *)buf, 2) == memToVal((byte *)"P1", 2)) {
-    if (((*width = pbmReadInt(f)) < 0) || ((*height = pbmReadInt(f)) < 0))
+    if (((w = pbmReadInt(f)) < 0) || ((h = pbmReadInt(f)) < 0))
       return(NOTPBM);
+    *width = w;
+    *height = h;
     *maxval = 1;
     return(PBMNORMAL);
   }
   if (memToVal((byte *)buf, 2) == memToVal((byte *)"P4", 2)) {
-    if (((*width = pbmReadInt(f)) < 0) || ((*height = pbmReadInt(f)) < 0))
+    if (((w = pbmReadInt(f)) < 0) || ((h = pbmReadInt(f)) < 0))
       return(NOTPBM);
+    *width = w;
+    *height = h;
     *maxval = 1;
     return(PBMRAWBITS);
   }
@@ -169,26 +174,34 @@ static int isPBM(FILE          *f, const char          *name, unsigned int *widt
     return(PBMCOMPACT);
   }
   if (memToVal(buf, 2) == memToVal((byte *)"P2", 2)) {
-    if (((*width = pbmReadInt(f)) < 0) || ((*height = pbmReadInt(f)) < 0))
+    if (((w = pbmReadInt(f)) < 0) || ((h = pbmReadInt(f)) < 0))
       return(NOTPBM);
+    *width = w;
+    *height = h;
     *maxval = pbmReadInt(f);
     return(PGMNORMAL);
   }
   if (memToVal(buf, 2) == memToVal((byte *)"P5", 2)) {
-    if (((*width = pbmReadInt(f)) < 0) || ((*height = pbmReadInt(f)) < 0))
+    if (((w = pbmReadInt(f)) < 0) || ((h = pbmReadInt(f)) < 0))
       return(NOTPBM);
+    *width = w;
+    *height = h;
     *maxval = pbmReadInt(f);
     return(PGMRAWBITS);
   }
   if (memToVal(buf, 2) == memToVal((byte *)"P3", 2)) {
-    if (((*width = pbmReadInt(f)) < 0) || ((*height = pbmReadInt(f)) < 0))
+    if (((w = pbmReadInt(f)) < 0) || ((h = pbmReadInt(f)) < 0))
       return(NOTPBM);
+    *width = w;
+    *height = h;
     *maxval = pbmReadInt(f);
     return(PPMNORMAL);
   }
   if (memToVal(buf, 2) == memToVal((byte *)"P6", 2)) {
-    if (((*width = pbmReadInt(f)) < 0) || ((*height = pbmReadInt(f)) < 0))
+    if (((w = pbmReadInt(f)) < 0) || ((h = pbmReadInt(f)) < 0))
       return(NOTPBM);
+    *width = w;
+    *height = h;
     *maxval = pbmReadInt(f);
     return(PPMRAWBITS);
   }
@@ -212,12 +225,12 @@ int
 pbm::Load( const char  *fullname, FILE  *fp )
             { FILE         *f;
   int           pbm_type;
-  unsigned int  x, y;
+  unsigned int  x, y, size;
   unsigned int  width, height, maxval, depth;
   unsigned int  linelen;
   byte          srcmask, destmask;
-  byte         *destptr, *destline;
-  int           src, size;
+  byte         *destptr = NULL, *destline;  /* init to shut gcc up */
+  int           src = 0; /* likewise */
   unsigned int  numbytes, numread;
   int           red, grn, blu;
 
@@ -374,8 +387,8 @@ pbm::Load( const char  *fullname, FILE  *fp )
 /* convert image values
  */
 		  destptr = (this)->Data();
-		  for (y = 0; y < size; y++)
-		      *(destptr++) = PM_SCALE(*destptr, maxval, 0xff);
+		  for (y = 0; y < size; y++, destptr++)
+		      *(destptr) = PM_SCALE(*destptr, maxval, 0xff);
 		  break;
 
 	      case ITRUE:

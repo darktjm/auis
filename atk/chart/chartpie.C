@@ -202,6 +202,8 @@ chartpie::HitChart( enum view_MouseAction       action, long			       x , long		
       if ( delta )/*===*/
         (Data)->NotifyObservers(  chart_ItemValueChanged );
       break;
+    default:
+      break;
     }
   OUT(chartpie_HitChart);
   return  hit;
@@ -254,8 +256,9 @@ void Show_Pie_Chart( class chartpie	      *self, long			       medium )
       degrees = 360.0 *
 	((Data)->ItemAttribute(  item, chart_itemvalue ) / DrawingSum);
       (self)->PrintSlice(  DrawingX, DrawingY, DrawingX - DrawingLeft,
-			     current_degree, current_degree += degrees,
+			     current_degree, current_degree + degrees,
 			     i, (Data)->ItemCount(), 0 );
+      current_degree += degrees;
       }
     if ( (Data)->ItemAttribute(  item, chart_itemname ) )
       { DEBUGst(Name,(Data)->ItemAttribute(  item, chart_ItemName(0) ));

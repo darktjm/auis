@@ -31,19 +31,13 @@
 
 /* This file (scache.c) and scache.h will implement a string cacheing mechanism so that even if menus are leaked they won't represent much of a drain... */
 
-static struct scache_node scache[256];
+static struct scache_node scache[256] = {};
 
 #define HASH(str,len) (((*(str)<<2)+((str)[(len)>>1])+((str)[(len)-(len)?1:0]<<2)+((str)[len>>2]<<2)+(len))&0xff)
 #define BLOCKSIZE 5
 #define GROWTHFACTOR 2
 
-void scache_Init()
-{
-    memset(scache,0, sizeof(scache));
-}
-
-const char *scache_Hold(str)
-const char *str;
+const char *scache_Hold(const char *str)
 {
     unsigned long len;
     unsigned long hash;
@@ -58,7 +52,7 @@ const char *str;
     s=scache+hash;
 
     if(s->els) {
-	int i;
+	unsigned long i;
 	struct scache_el **p=s->scache_el;
 	for(i=0;i<s->els;i++, p++) {
 	    if(*p && !strcmp((*p)->str, str)) {
@@ -96,17 +90,16 @@ const char *str;
     return e->str;
 }
 
-void scache_Free(str)
-const char *str;
+void scache_Free(const char *str)
 {
     scache_REFCOUNT(str)--;
 }
 
 
-void scache_Collect() {
+void scache_Collect(void) {
     int i;
     for(i=0;i<256;i++) {
-        int j;
+        unsigned long j;
         struct scache_el **p=scache[i].scache_el;
         for(j=0;j<scache[i].els;j++, p++) {
             if((*p)->refcount<=0) {
@@ -117,15 +110,17 @@ void scache_Collect() {
     }
 }
 
-void scache_Dump()
+#if 0 /* unused & undeclared in headers */
+void scache_Dump(void)
 {
     int i;
     printf("doing scache dump\n");
     for(i=0;i<256;i++) {
 	printf("------\n");
 	if(scache[i].els) {
-	    int j;
+	    unsigned long j;
 	    for(j=0;j<scache[i].els;j++) printf("%s\n",scache[i].scache_el[j]->str);
 	}
     }
 }
+#endif

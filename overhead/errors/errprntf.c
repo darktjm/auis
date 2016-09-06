@@ -41,31 +41,26 @@
 #define CONTROLMAX 1000  /* Longest printf control string */
 
 
-#ifndef ANSI_COMPILER
-int safefprintf(va_alist)
-va_dcl
+int safefprintf(FILE *fp, const char *control, ...)
 {
-    FILE *fp;
-    char *control, *rest;
     va_list ap;
 
-    va_start(ap);
-    fp = va_arg(ap, FILE *);
-    control = va_arg(ap, char *);
+    va_start(ap, control);
     vfprintf(fp, control, ap);
     va_end(ap);
+    
     fflush(fp);
     if (ferror(fp)) {
-	va_start(ap);
-	fp = va_arg(ap, FILE *);
-	control = va_arg(ap, char *);
 	fp = freopen("/dev/console", "w", fp);
 	if (fp == NULL) {
 	    fp=freopen("/dev/null", "w", fp);
 	    return(-1);
 	}
+	
+	va_start(ap, control);
 	vfprintf(fp, control, ap);
 	va_end(ap);
+	
 	fflush(fp);
 	if (ferror(fp)) {
 	    return(-1);
@@ -73,28 +68,26 @@ va_dcl
     }
     return(0);
 }
-
-
 static const char formatstr[]="<%s%s%s%s%s%s%s>";
 
 int
-errprintf(va_alist)
-va_dcl
+errprintf(const char *application, int type, const char *log, const char *id, const char *format, ...)
 {
-    char *application;
+    int ret;
     va_list ap;
-    char *log, *id, *format;
-    int type;
-    char ControlString[CONTROLMAX], *typestr;
-    int numfields, ret;
-    static FILE *fp=NULL;
+    va_start(ap, format);
+    ret = errprintv(application, type, log, id, format, ap);
+    va_end(ap);
+    return ret;
+}
 
-    va_start(ap);
-    application = va_arg(ap, char *);
-    type = va_arg(ap, int);
-    log = va_arg(ap, char *);
-    id = va_arg(ap, char *);
-    format = va_arg(ap, char *);
+int
+errprintv(const char *application, int type, const char *log, const char *id, const char *format, va_list ap)
+{
+    const char *typestr;
+    int numfields;
+    static FILE *fp=NULL;
+    
     if (type < 0 || type > 9) type = 0;
     numfields = 1;
     if (application) numfields = 2;
@@ -122,7 +115,6 @@ va_dcl
 	fp=freopen("/dev/console", "w", fp);
 	if(fp==NULL) {
 	    fp=freopen("/dev/null", "w", fp);
-	    va_end(ap);
 	    return -1;
 	}
 	fprintf(fp, formatstr, typestr, 
@@ -134,21 +126,13 @@ va_dcl
 	    id ? id : "");
     }
     vfprintf(fp, format, ap);
-    va_end(ap);
     if(ferror(fp)) {
 	fp=freopen("/dev/console", "w", fp);
 	if(fp==NULL) {
 	    fp=freopen("/dev/null", "w", fp);
 	    return -1;
 	}
-	va_start(ap);
-	application = va_arg(ap, char *);
-	type = va_arg(ap, int);
-	log = va_arg(ap, char *);
-	id = va_arg(ap, char *);
-	format = va_arg(ap, char *);
 	vfprintf(fp, format, ap);
-	va_end(ap);
     }
     fprintf(fp, "\n");
     if(ferror(fp)) {
@@ -162,121 +146,3 @@ va_dcl
     fflush(fp);
     return ferror(fp);
 }
-
-#else
-
-int safefprintf(FILE *fp, ...)
-{
-    char *control, *rest;
-    va_list ap;
-
-    va_start(ap, fp);
-    control = va_arg(ap, char *);
-    vfprintf(fp, control, ap);
-    va_end(ap);
-    
-    fflush(fp);
-    if (ferror(fp)) {
-	fp = freopen("/dev/console", "w", fp);
-	if (fp == NULL) {
-	    fp=freopen("/dev/null", "w", fp);
-	    return(-1);
-	}
-	
-	va_start(ap, fp);
-	control = va_arg(ap, char *);
-	vfprintf(fp, control, ap);
-	va_end(ap);
-	
-	fflush(fp);
-	if (ferror(fp)) {
-	    return(-1);
-	}
-    }
-    return(0);
-}
-static const char formatstr[]="<%s%s%s%s%s%s%s>";
-
-int
-errprintf(const char *application, ...)
-{
-    va_list ap;
-    char *log, *id, *format;
-    int type;
-    char ControlString[CONTROLMAX], *typestr;
-    int numfields, ret;
-    static FILE *fp=NULL;
-    
-    va_start(ap, application);
-    type = va_arg(ap, int);
-    log = va_arg(ap, char *);
-    id = va_arg(ap, char *);
-    format = va_arg(ap, char *);
-    if (type < 0 || type > 9) type = 0;
-    numfields = 1;
-    if (application) numfields = 2;
-    if (log) numfields = 3;
-    if (id) numfields = 4;
-    if (type == ERR_CRITICAL) {
-	typestr = "critical";
-    } else if (type <= ERR_WARNING) {
-	typestr = "warning";
-    } else if (type <= ERR_MONITOR) {
-	typestr = "monitor";
-    } else {
-	typestr = "debug";
-    }
-    if(!fp)
-	fp = stderr;
-    fprintf(fp, formatstr, typestr, 
-	(numfields > 1) ? ":" : "",
-	application ? application : "",
-	(numfields > 2) ? ":" : "",
-	log ? log : "",
-	(numfields > 3) ? ":" : "",
-	    id ? id : "");
-    if(ferror(fp)) {
-	fp=freopen("/dev/console", "w", fp);
-	if(fp==NULL) {
-	    fp=freopen("/dev/null", "w", fp);
-	    va_end(ap);
-	    return -1;
-	}
-	fprintf(fp, formatstr, typestr, 
-	(numfields > 1) ? ":" : "",
-	application ? application : "",
-	(numfields > 2) ? ":" : "",
-	log ? log : "",
-	(numfields > 3) ? ":" : "",
-	    id ? id : "");
-    }
-    vfprintf(fp, format, ap);
-    va_end(ap);
-    if(ferror(fp)) {
-	fp=freopen("/dev/console", "w", fp);
-	if(fp==NULL) {
-	    fp=freopen("/dev/null", "w", fp);
-	    return -1;
-	}
-	va_start(ap, application);
-	type = va_arg(ap, int);
-	log = va_arg(ap, char *);
-	id = va_arg(ap, char *);
-	format = va_arg(ap, char *);
-	vfprintf(fp, format, ap);
-	va_end(ap);
-    }
-    fprintf(fp, "\n");
-    if(ferror(fp)) {
-	fp=freopen("/dev/console", "w", fp);
-	if(fp==NULL) {
-	    fp=freopen("/dev/null", "w", fp);
-	    return -1;
-	}
-	fprintf(fp, "\n");
-    }
-    fflush(fp);
-    return ferror(fp);
-}
-
-#endif

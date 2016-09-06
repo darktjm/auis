@@ -105,7 +105,7 @@ static void text_OverrideStyles(class stylesheet  *ssptr, class stylesheet  *tem
 	// If there were styles in ssptr not present in templateptr, then we'll just have to
 	// copy the styles from templateptr into ssptr
 	for (i = 0, styles = templateptr->styles; i < templateptr->nstyles; i++, styles++) {
-	    if (overridestyle = (ssptr)->Find( (*styles)->name)) {
+	    if ((overridestyle = (ssptr)->Find( (*styles)->name))) {
 		((*styles))->Copy( overridestyle);
 	    } else {
 		overridestyle = new style;
@@ -155,7 +155,6 @@ long text::ReadTemplate(const char  *templateName, boolean  inserttemplatetext)
     int c, statecode, i;
     class stylesheet *templateptr = NULL;
     struct templatelist *tlPtr;
-    class style *styleptr;
     char filename[MAXPATHLEN+1], string[1000];
     const char *tpath;
     boolean overrideTemplate = TRUE;
@@ -278,7 +277,7 @@ long text::ReadTemplate(const char  *templateName, boolean  inserttemplatetext)
 		    fclose(fileptr);
 		    return -1;
 		}
-		else ;		/* only used for existing files, don't put out text */
+		/* else ; // only used for existing files, don't put out text */
 		break;
 	    case StateSawSlash:
 		if ((c != '\\') && (c != '{') && (c != '}') && c!='\n'/* just in case there is a long line of spaces followed by more default text than fits into string[] -RSK */) {

@@ -292,6 +292,7 @@ if(i<obj.MaxHash()) j=buckets[i].GetN()-1; \
       keys=obj.Keys(); \
 buckets=obj.Buckets(); \
 i=obj.FirstBucket(0); \
+j=-1; \
 if(i<obj.MaxHash()) j=buckets[i].GetN()-1; \
   } \
   inline type &operator*() { \

@@ -54,7 +54,7 @@ extern void DestroyDiversion(struct rofftext  *self,struct diversionLevel  *d);
 extern void PushDiversion(struct rofftext  *self);
 extern void PopDiversion(struct rofftext  *self);
 extern const char *getstring(struct rofftext  *self,const char  *name);
-/* #endif /* AIX */
+/* #endif // AIX */
 
 extern void FreeBuf(BUF  b);
 extern void EvalString(class rofftext *self, char *str, 

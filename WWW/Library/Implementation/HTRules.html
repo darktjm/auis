@@ -105,8 +105,8 @@ save time and storage, when malloc's
 allocation units are large.
 
 <PRE>
-extern int HTAddRule PARAMS((	HTRuleOp op, const char * pattern,
-				const char * equiv));
+extern int HTAddRule (	HTRuleOp op, const char * pattern,
+				const char * equiv);
 </PRE>
 
 <H2>HTClearRules: Clear all rules</H2>
@@ -120,7 +120,7 @@ extern int HTAddRule PARAMS((	HTRuleOp op, const char * pattern,
 </DL>
 
 <PRE>
-extern int HTClearRules NOPARAMS;
+extern int HTClearRules (void);
 </PRE>
 
 <H2><A NAME=z4>HTTranslate: Translate by rules</A></H2>
@@ -143,7 +143,7 @@ original.
 </DL>
 
 <PRE>
-extern char * HTTranslate PARAMS((CONST char * required));
+extern char * HTTranslate (CONST char * required);
 
 </PRE>
 <H2><A
@@ -159,7 +159,7 @@ This routine may be used for loading
 configuration information from sources
 other than the  rule file, for example
 INI files for X resources.
-<PRE>extern int HTSetConfiguration PARAMS((CONST char * config));
+<PRE>extern int HTSetConfiguration (CONST char * config);
 
 
 </PRE>
@@ -184,7 +184,7 @@ be tried first.
 </DL>
 
 <PRE>
-extern int HTLoadRules PARAMS((const char * filename));
+extern int HTLoadRules (const char * filename);
 </PRE>
 
 <PRE>

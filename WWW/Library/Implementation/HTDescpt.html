@@ -69,7 +69,7 @@ The description file for a directory is read in only once by
 <CODE>HTReadDescriptions()</CODE>, and the result returned by it is
 given as an argument when finding out a description for a single file.
 <PRE>
-extern HTList * HTReadDescriptions PARAMS((char * dirname));
+extern HTList * HTReadDescriptions (char * dirname);
 </PRE>
 
 
@@ -80,10 +80,10 @@ returned by <CODE>HTReadDescriptions()</CODE>, the function
 <CODE>HTGetDescription()</CODE> can be used to get a description for a
 given file:
 <PRE>
-extern char * HTGetDescription PARAMS((HTList *	descriptions,
+extern char * HTGetDescription (HTList *	descriptions,
 				       char *	dirname,
 				       char *	filename,
-				       HTFormat	format));
+				       HTFormat	format);
 </PRE>
 Directory name has to be present because this function may then take a
 peek at the file itself (to get the HTML TITLE, for example).
@@ -100,7 +100,7 @@ Once descriptions have been gotten, the description list returned by
 <CODE>HTReadDescriptions()</CODE> must be freed by
 <CODE>HTFreeDescriptions()</CODE>:
 <PRE>
-extern void HTFreeDescriptions PARAMS((HTList * descriptions));
+extern void HTFreeDescriptions (HTList * descriptions);
 </PRE>
 
 <PRE>

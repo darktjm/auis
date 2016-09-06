@@ -45,7 +45,7 @@ cmuwm::Ident( const char  *fullname ) {
     if (!(f = fopen(fullname, "r")))
 	return(0);
 
-    if(objectName = filetype::Lookup(f, fullname, &objectID, NULL))
+    if((objectName = filetype::Lookup(f, fullname, &objectID, NULL)))
 	r = !(strcmp(objectName, "raster"));
     fclose(f);
     return r;
@@ -70,7 +70,7 @@ cmuwm::Load( const char  *fullname, FILE  *fp ) {
 	}
     }
 
-    if(objectName = filetype::Lookup(f, fullname, &objectID, NULL)) {
+    if((objectName = filetype::Lookup(f, fullname, &objectID, NULL))) {
 	long status = 0;
 	if((status = (rasterp)->Read( f, objectID)) == dataobject_NOREADERROR && (rasterp)->GetPix()!=NULL) {
 	    int i;

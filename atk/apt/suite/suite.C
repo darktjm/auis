@@ -284,7 +284,7 @@ strip( char  *str )
   if(!str) return(str);
   tmp = head = str;
   while(*str == 040) str++;
-  while(*tmp++ = *str++);
+  while((*tmp++ = *str++));
   tmp = head + strlen(head) - 1;
   while(*tmp == 040) tmp--;
   *(tmp+1) = '\0';
@@ -491,7 +491,6 @@ suite::DestroyItem( struct suite_item  *item )
 struct suite_item *
 suite::CreateItem( char  *name, long  datum )
 {
-    class suite *self=this;
     struct suite_item *item = NULL;
   IN(::CreateItem);
   item = GenerateItem(this,NULL,name,datum);
@@ -583,7 +582,6 @@ void
 suite::FullUpdate( enum view_UpdateType  type, long  left , long  top , long  width , long  height )
 {
     class suite *self=this;struct rectangle *curse_rect = NULL, title;
-  boolean needs_scroll = FALSE;
 
   IN(suite_FullUpdate);
   graphicIsMono = ((this)->GetDrawable())->DisplayClass() & graphic_Monochrome;
@@ -698,7 +696,7 @@ DrawTitle( class suite  *self, struct rectangle  *rect )
     else align |= graphic_BETWEENLEFTANDRIGHT;
     if(TitleFont) SetFont(self, TitleFont);
     for( i = 0 ; i < title_lines ; i++ ) {
-      if(newline = (char*)strrchr(next_str,'\n')) {
+      if((newline = (char*)strrchr(next_str,'\n'))) {
 	next_str = newline + 1;
 	*newline = '\0';
       }
@@ -742,9 +740,7 @@ DrawTitle( class suite  *self, struct rectangle  *rect )
 
 static void
 DrawOutline(class suite  *self, struct rectangle  *rect, short  width, unsigned  style, class color  *fg , class color  *bg)
-{ long i = 0;
-  struct rectangle *inner = NULL;
-  long X1 = 0, Y1 = 0, X2 = 0, Y2 = 0;
+{ long X1 = 0, Y1 = 0, X2 = 0, Y2 = 0;
 
   IN(DrawOutline);
   SETTRANSFERMODE(self,graphic_COPY);
@@ -828,20 +824,21 @@ suite::Reset( long  state )
   }
   if(state & suite_Activate) {
     if(Items && ITEM(0)) {
-      while(item = ITEM(i++)) {
+      while((item = ITEM(i++))) {
 	if(FirstVisible && (FirstVisible == item)) onScreen = TRUE;
   	if(Exposed(item) && !Active(item)) {
 	  (this)->ActivateItem(item);
 	  if((state & suite_Immediate) && onScreen)
 	    (SetView)->ItemNormalize(item);
 	}
-	else if(Exposed(item) && Highlighted(item)) 
+	else if(Exposed(item) && Highlighted(item)) {
 	  if((state & suite_Immediate) && onScreen)
 	    (SetView)->ItemNormalize(item);
 	  else if((state & suite_Expose) && !Exposed(item)) {
 	    item->exposed = TRUE;
 	    doContainerRedraw = TRUE;
 	  }
+	}
 	item->mode = ((item_Active | item_Normalized) & ~item_Highlighted);
 	if(LastVisible && (LastVisible == item)) onScreen = FALSE;
       }
@@ -850,7 +847,7 @@ suite::Reset( long  state )
   }
   if(state & suite_Normalize) {
     if(Items && ITEM(0)) {
-      while(item = ITEM(i++)) {
+      while((item = ITEM(i++))) {
 	if(FirstVisible && (FirstVisible == item)) onScreen = TRUE;
 	if(Exposed(item) && Active(item) && Highlighted(item)) {
 	  if((state & suite_Immediate) && onScreen)
@@ -918,7 +915,7 @@ TitleSectionWidth( class suite  *self )
     strcpy(title,TitleCaption);
     numLines = NumberLines(TitleCaption);
     for (i = 0 ; i < numLines ; i++) {
-      if(newline = (char*) strrchr(tmp,'\n')) {
+      if((newline = (char*) strrchr(tmp,'\n'))) {
         *newline = '\0';
 	(TitleFont)->StringBoundingBox( (self)->GetDrawable(), tmp, &XWidth, &YWidth);
 	tmp = newline + 1;
@@ -1059,14 +1056,16 @@ ParseFontFullName( class suite  *self, char  *fullname , char  *familyName, long
 static void
 ChangeItemCaption( class suite  *self, struct suite_item  *item, char  *caption )
       { class text *txt = NULL;
-  class suitecv *CV = NULL;
+  class suitecv *CV = NULL, *t;
 
     ValidateItem(self,item);
     AllocNameSpace(&item->caption, caption);
     if(item_AccessType & suite_ReadWrite) {
 	(txt = (class text*) item->dataobject)->Clear();
 	(txt)->InsertCharacters( 0, item->caption, strlen(item->caption));
-	(CV = (class suitecv *)item->viewobject)->WantUpdate( CV);
+	t = (class suitecv *)item->viewobject;
+	t->WantUpdate( CV);
+	CV = t; /* tjm - FIXME: verify this is what was intended */
     }
     (SetView)->ItemUpdate(item);
 }
@@ -1292,13 +1291,13 @@ suite::SelectedItems( long  *number )
   long count = 0, index = 0;
 
   if(Items && ITEM(0)) {
-      while(item = ITEM(i++))
+      while((item = ITEM(i++)))
 	  if(Exposed(item) && Active(item) && Highlighted(item)) 
 	      count++;
       (SetView)->AllocItemArray(count);
       if(ItemArray) {
 	  i = 0;
-	  while(item = ITEM(i++))
+	  while((item = ITEM(i++)))
 	      if(Exposed(item) && Active(item) && Highlighted(item)) 
 		  ItemArray[index++] = item;
       }
@@ -1664,7 +1663,6 @@ SetSuiteAttribute( class suite  *self, long  attribute , long  value     )
 long
 suite::SetSuiteAttribute( long  attribute , long  value )
 {
-    class suite *self=this;
 long status = 0;
   ::SetSuiteAttribute(this,attribute,value);
   return(status);
@@ -1772,7 +1770,6 @@ ChangeSuiteAttribute( class suite  *self, long  attribute , long  value     )
 long
 suite::ChangeSuiteAttribute( long  attribute , long  value )
 {
-    class suite *self=this;
     long status = 0;
     ::ChangeSuiteAttribute(this,attribute,value);
     return(status);
@@ -1871,7 +1868,6 @@ suite::HideItem( struct suite_item  *item )
 boolean
 suite::ItemHighlighted( struct suite_item  *item )
 {
-    class suite *self=this;
   if(!item) return(FALSE);
   return(Highlighted(item));
 }
@@ -1889,7 +1885,7 @@ suite::HighlightItem( struct suite_item  *item )
     i = (Items)->Subscript((long)FirstVisible);
     if(SelectionMode & suite_Exclusive) 
       (this)->Reset(suite_Normalize);
-    while(this_one = ITEM(i++))
+    while((this_one = ITEM(i++)))
       if(item == this_one) {
 	onScreen = TRUE;
 	break;
@@ -1910,7 +1906,6 @@ suite::HighlightItem( struct suite_item  *item )
 boolean
 suite::ItemNormalized( struct suite_item  *item )
 {
-    class suite *self=this;
   if(!item) return(FALSE);
   return(Normalized(item));
 }
@@ -1928,7 +1923,7 @@ suite::NormalizeItem( struct suite_item  *item )
     i = (Items)->Subscript((long)FirstVisible);
     if(SelectionMode & suite_Exclusive) 
       (this)->Reset(suite_Normalize);
-    while(this_one = ITEM(i++))
+    while((this_one = ITEM(i++)))
       if(item == this_one) {
 	onScreen = TRUE;
 	break;
@@ -1948,7 +1943,6 @@ suite::NormalizeItem( struct suite_item  *item )
 boolean
 suite::ItemActivated( struct suite_item  *item )
 {
-    class suite *self=this;
   if(!item) return(FALSE);
   return(Active(item));
 }
@@ -2085,7 +2079,6 @@ SetItemAttribute( class suite  *self, struct suite_item  *item, long  attribute 
 long
 suite::SetItemAttribute( struct suite_item  *item, long  attribute , long  value )
 {
-    class suite *self=this;
 long status = 0;
   ::SetItemAttribute(this,item,attribute,value);
   return(status);
@@ -2155,7 +2148,6 @@ ChangeItemAttribute( class suite  *self, struct suite_item  *item, long  attribu
 long
 suite::ChangeItemAttribute( struct suite_item  *item, long  attribute , long  value )
 {
-    class suite *self=this;
   long status = 0;
   ::ChangeItemAttribute(this,item,attribute,value);
   return(status);
@@ -2225,7 +2217,7 @@ suite::ItemOfDatum( long  datum )
   int i = 0;
 
   if(Items && ITEM(0))
-    while(item = ITEM(i++)) if(datum == (long)item->datum) 
+    while((item = ITEM(i++))) if(datum == (long)item->datum) 
       return(item);
   return(NULL);
 }
@@ -2239,10 +2231,10 @@ suite::ItemsOfDatum( long  datum )
   int count = 0;
 
   if(Items && ITEM(0)) {
-    while(item = ITEM(i++)) if(datum == (long)item->datum) count++;
+    while((item = ITEM(i++))) if(datum == (long)item->datum) count++;
     (SetView)->AllocItemArray(count);
     i = count = 0;
-    while(item = ITEM(i++))
+    while((item = ITEM(i++)))
       if(datum == (long)item->datum) ItemArray[count++] = item;
   }
   else return(NULL);
@@ -2258,7 +2250,7 @@ suite::ItemOfName( char  *name )
   char *item_name;
 
   if(Items && ITEM(0))
-      while(item = ITEM(i++)) {
+      while((item = ITEM(i++))) {
 	  item_name = (char*) (this)->ItemAttribute( item, suite_itemname);
 	  if((!name || !(*name)) && item_name == name)
 	      return(item);
@@ -2277,7 +2269,7 @@ suite::ItemsOfName( char  *name )
   char *item_name;
 
   if(Items && ITEM(0)) {
-      while(item = ITEM(i++)) {
+      while((item = ITEM(i++))) {
 	  item_name = (char*) (this)->ItemAttribute( item, suite_itemname);
 	  if((!name || !(*name)) && item_name == name)
 	      count++;
@@ -2286,7 +2278,7 @@ suite::ItemsOfName( char  *name )
       }
     (SetView)->AllocItemArray(count);
     i = count = 0;
-    while(item = ITEM(i++)) {
+    while((item = ITEM(i++))) {
 	item_name = (char*) (this)->ItemAttribute( item, suite_itemname);
 	if((!name || !(*name)) && item_name == name)
 	    ItemArray[count++] = item;
@@ -2471,7 +2463,7 @@ SetItems(class suite	 *self, char  *elts)
     tmp = elts;
     AllocNameSpace(&copy,elts);
     if(!copy) return;
-    while(ret = (char*)strchr(tmp,':')) {
+    while((ret = (char*)strchr(tmp,':'))) {
       count++;
       tmp = ++ret;
     }

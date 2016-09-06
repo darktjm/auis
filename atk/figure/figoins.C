@@ -188,8 +188,7 @@ static figobj_Status PasteInset(class figoins *this_c, class figview  *v)
     FILE *fp;
     static const char hdr[] = "\\begindata{";
     const char *hx = hdr;
-    int c, ix, id;
-    class dataobject *obj=NULL;
+    int c, ix, id = 0;
     char classname[100], *cp;
 
     fp = ((v)->GetIM())->FromCutBuffer();
@@ -209,7 +208,7 @@ static figobj_Status PasteInset(class figoins *this_c, class figview  *v)
     cp=classname;
     do {
 	*cp++=c;
-    } while((c=getc(fp))!=EOF && c!=',' && (cp-classname<sizeof(classname)-2));
+    } while((c=getc(fp))!=EOF && c!=',' && (cp-classname<(int)sizeof(classname)-2));
     *cp='\0';
 
     while(!isdigit(c)) c=getc(fp);
@@ -267,8 +266,6 @@ enum figobj_Status figoins::Build(class figview  *v, enum view_MouseAction  acti
 
     res = (this)->figorect::Build( v, action, x, y, clicks);
     if (res==figobj_Done) {
-	char buffer[32];
-	int ix;
 	if(this->paste) {
 	    res=PasteInset(this, v);
 	    if(res!=figobj_Done) return res;
@@ -299,7 +296,7 @@ long figoins::ReadBody(FILE  *fp, boolean  recompute)
 {
 #define LINELENGTH (256)
     char buf[LINELENGTH+1];
-    long tid, ix, ref;
+    long tid, ix;
     char namebuf[100];
     const char *np=namebuf;
 
@@ -340,9 +337,6 @@ long figoins::ReadBody(FILE  *fp, boolean  recompute)
 void figoins::PrintObject(class figview  *v, FILE  *file, const char  *prefix, boolean newstyle)
 {
     long x, y, w, h;
-    long shad, lw;
-    char *col;
-    double rcol, bcol, gcol, shadcol;
 
     fprintf(file, "%s  %% inset\n", prefix);
 

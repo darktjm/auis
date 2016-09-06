@@ -260,6 +260,8 @@ class view *matte::Hit(enum view_MouseAction  action,long  mousex ,long  mousey 
 		if(width-fudge >= mousex && height-fudge >= mousey && child) 
 		    return (this->child)->Hit(action,(this->child)->EnclosedXToLocalX( mousex), (this->child)->EnclosedYToLocalY( mousey),numberOfClicks);
 	    }
+	default:
+	    break;
     }
     return (class view *) this;
 }
@@ -277,7 +279,7 @@ static void UpdateDrawing(class matte  *self)
 }
 void matte::Update()
 {
-    if(this->ref && this->desw != this->ref->desw || this->desh != this->ref->desh){
+    if(this->ref && (this->desw != this->ref->desw || this->desh != this->ref->desh)){
 	this->desw = this->ref->desw ;
 	this->desh = this->ref->desh ;
 	if(!this->sizepending) {
@@ -505,7 +507,7 @@ void matte::ObservedChanged(class observable  *changed, long  value)
  /* assumes the parent is also observing the viewref and will destroy the matte */
 /*	    matte_Destroy(self); */
 	}
-	else if (this->ref && this->desw != this->ref->desw || this->desh != this->ref->desh) 
+	else if (this->ref && (this->desw != this->ref->desw || this->desh != this->ref->desh))
 	    (this)->WantUpdate(this);
 	}
     if(changed == (class observable *)this->child && value ==  observable_OBJECTDESTROYED){

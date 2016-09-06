@@ -71,7 +71,6 @@ static class arbiterview *firstlink , *lastlink;
 #define Arbiter(A) ((class arbiter *) DataObject(A))
 
 ATKdefineRegistry(arbiterview, celview, arbiterview::InitializeClass);
-static int appendlist(char  **lst,int  cnt,char  *str);
 static int addlist(class arbiterview  *self,class celview  *cv);
 static int deletelist(class arbiterview  *self,class celview  *cv);
 
@@ -216,7 +215,6 @@ boolean arbiterview::CreateCon(class text  *EditText)
     
     truechild = (this)->GetTrueChild();
     strcpy(fnm, "/tmp/arbtmpXXXXXX");
-    mktemp(fnm);
     im::SetProcessCursor(WaitCursor);
 
     if(ATK::IsTypeByName((truechild)->GetTypeName(),"frame") &&
@@ -233,7 +231,8 @@ boolean arbiterview::CreateCon(class text  *EditText)
 	    erase = FALSE;
 	}
 	else {
-	    if((f = fopen(fnm,"w")) == NULL) return FALSE;
+	    int fd = mkstemp(fnm);
+	    if(fd < 0 || !(f = fdopen(fd, "w"))) return FALSE;
 	    (dat)->Write(f,im::GetWriteID(),0);
 	}
     }
@@ -301,26 +300,6 @@ printf(" exiting Register name \n");
 #endif /* DEBUG */
     return TRUE;
 }
-static int appendlist(char  **lst,int  cnt,char  *str)
-{
-    int next = 1;
-    while(*str){
-	if(*str == ',' || *str == '\n') {
-	    *str = '\0';
-	    next++;
-	}
-	else if(*str == '\0') break;
-	else if(*str == ' ') ;
-	else if(next){
-	    lst[cnt++] = str;
-	    next = 0;
-	}
-	str++;
-    }
-    return cnt;
-}
-	
-
 arbiterview::arbiterview()
 {
 	ATKinit;
@@ -616,7 +595,7 @@ long arbiterview::GetArbName(char  *buf,long  buflen)
     if(myname == NULL || *myname == '\0'){
 	myname = "UNNAMED";
     }
-    if(strlen(myname) + csize + 2 < buflen){
+    if(strlen(myname) + csize + 2 < (unsigned)buflen){
 	if(csize) buf[csize++] = arbiterview_SEPCHAR;
 	sprintf(buf + csize,"%s",myname);
     }

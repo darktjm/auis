@@ -115,9 +115,9 @@ extern int HTDirMaxDescrLength;
 <H3>Functions for directory browsing on local UNIX system</H3>
 
 <PRE>
-extern int HTBrowseDirectory PARAMS((
+extern int HTBrowseDirectory (
 		HTRequest *  	req,
-		char *		directory));
+		char *		directory);
 </PRE>
 
 <H3>Functions for directory browsing from other sources</H3>
@@ -146,14 +146,14 @@ This function fills out the EntryInfo file structure and should return:
 </UL>
 
 <PRE>
-typedef int (*HTDirLineInput) PARAMS((HTNetInfo *, dir_file_info *));
+typedef int (*HTDirLineInput) (HTNetInfo *, dir_file_info *);
 </PRE>
 
 <PRE>
-extern int HTFTPBrowseDirectory PARAMS((
+extern int HTFTPBrowseDirectory (
 		HTRequest * 	req,
 		char *		directory,
-		HTDirLineInput  input));
+		HTDirLineInput  input);
 </PRE>
 
 <PRE>

@@ -95,10 +95,7 @@ xpixmap::Load( const char  *fullname, FILE  *fp )
 { FILE          *f;
   class xpixmap *self=this;
   char           buf[BUFSIZ];
-  char           what[BUFSIZ];
-  char          *p;
   const char     *hostp;
-  char          *imagetitle;
   unsigned int   value;
   unsigned int   w, h;    /* image dimensions */
   unsigned int   cpp;     /* chars per pixel */
@@ -106,7 +103,7 @@ xpixmap::Load( const char  *fullname, FILE  *fp )
   unsigned int   depth;   /* depth of image */
   char         **ctable;  /* color table */
   XColor         xcolor;
-  unsigned int   a, b, x, y;
+  unsigned int   a, x, y;
   int            c;
   byte          *dptr;
   char		 colorName[20], *quote;
@@ -119,7 +116,7 @@ xpixmap::Load( const char  *fullname, FILE  *fp )
       }
   }
 
-  if (hostp = environ::Get("DISPLAY"))
+  if ((hostp = environ::Get("DISPLAY")))
       strcpy(host, hostp);
   else
       strcpy(host, "unix:0");
@@ -176,7 +173,7 @@ xpixmap::Load( const char  *fullname, FILE  *fp )
     sscanf(buf, formatStr, colorCode, colorName);
 
     colorCode[cpp] = (char) 0;
-    if(quote = strchr(colorName, '"'))
+    if((quote = strchr(colorName, '"')))
 	*quote = (char)0;
 
     strcpy(*(ctable+a), colorCode);

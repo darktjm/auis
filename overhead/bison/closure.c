@@ -79,8 +79,7 @@ static int varsetsize;
 
 
 void
-initialize_closure(n)
-int n;
+initialize_closure(int n)
 {
   itemset = NEW2(n, short);
 
@@ -98,7 +97,7 @@ int n;
    the sequence of symbols 8 3 20, and one of the rules for deriving
    symbol 8 is rule 4, then the [5 - ntokens, 4] bit in fderives is set.  */
 void
-set_fderives()
+set_fderives(void)
 {
   unsigned *rrow;
   unsigned *vrow;
@@ -158,7 +157,7 @@ set_fderives()
    the symbol 8 can be the beginning of the data for symbol 5,
    so the bit [8 - ntokens, 5 - ntokens] in firsts is set. */
 void
-set_firsts()
+set_firsts(void)
 {
   unsigned *row;
 /*   int done; JF unused */
@@ -198,9 +197,7 @@ set_firsts()
 
 
 void
-closure(core, n)
-short *core;
-int n;
+closure(short *core, int n)
 {
   int ruleno;
   unsigned word;
@@ -282,7 +279,7 @@ int n;
 
 
 void
-finalize_closure()
+finalize_closure(void)
 {
   FREE(itemset);
   FREE(ruleset);
@@ -293,8 +290,7 @@ finalize_closure()
 
 #ifdef	DEBUG
 
-print_closure(n)
-int n;
+print_closure(int n)
 {
   short *isp;
 

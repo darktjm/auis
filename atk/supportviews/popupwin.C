@@ -111,7 +111,6 @@ void popupwin::InitChildren()
 void popupwin::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
 {
     struct rectangle r;
-    int i;
     
     if(v) {
 	GetLogicalBounds( &r);

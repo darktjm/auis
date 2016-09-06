@@ -125,7 +125,7 @@ Authentication Schemes
 ** ON EXIT:
 **      returns         the enumerated constant for that scheme.
 */
-extern HTAAScheme HTAAScheme_enum PARAMS((CONST char* name));
+extern HTAAScheme HTAAScheme_enum (CONST char* name);
 
 
 /* PUBLIC                                               HTAAScheme_name()
@@ -138,7 +138,7 @@ extern HTAAScheme HTAAScheme_enum PARAMS((CONST char* name));
 **      returns         the name of the scheme, i.e.
 **                      "none", "basic", "pubkey", ...
 */
-extern char *HTAAScheme_name PARAMS((HTAAScheme scheme));
+extern char *HTAAScheme_name (HTAAScheme scheme);
 
 
 /* PUBLIC                                           HTAA_templateCaseMatch()
@@ -163,8 +163,8 @@ extern char *HTAAScheme_name PARAMS((HTAAScheme scheme));
 **      returns         YES, if filename matches the template.
 **                      NO, otherwise.
 */
-extern BOOL HTAA_templateCaseMatch PARAMS((CONST char * tmplate,
-                                           CONST char * filename));
+extern BOOL HTAA_templateCaseMatch (CONST char * tmplate,
+                                           CONST char * filename);
 
 
 /* PUBLIC                                       HTAA_makeProtectionTemplate()
@@ -186,7 +186,7 @@ extern BOOL HTAA_templateCaseMatch PARAMS((CONST char * tmplate,
 **                              being a comment marker here,
 **                              there really isn't any space.
 */
-extern char *HTAA_makeProtectionTemplate PARAMS((CONST char * docname));/*
+extern char *HTAA_makeProtectionTemplate (CONST char * docname);/*
 
 MIME Argument List Parser
 
@@ -217,7 +217,7 @@ MIME Argument List Parser
 **              the number of order number of that item. E.g.
 **              "1" for the first, etc.
 */
-extern HTList *HTAA_parseArgList PARAMS((char * str));
+extern HTList *HTAA_parseArgList (char * str);
 /*
 
  */

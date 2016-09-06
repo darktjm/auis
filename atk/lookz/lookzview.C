@@ -442,6 +442,8 @@ RulerValueChanged(class lprrulerview  *rv, class lookzview  *self, enum lprruler
 			(self->curstyle)->SetNewIndentation( style_LeftMargin,
 					(newvalue>>4)*127/225, style_CM);
 			break;
+		case noIcon:
+			break;
 	}
 	ChangeStyle(self);
 }
@@ -1029,7 +1031,7 @@ FinagleStyleBits(class lookzview  *self, class stringtbl  *st, long  accnum, lon
 	char *str;
 	unsigned long bit;
 	unsigned long *which;
-	unsigned long val;
+	long val;
 
 	str =  GetStringValue(st, self, accnum, "New attribute: ");
 	if(str==NULL) return;
@@ -1557,7 +1559,6 @@ LEAVE(lookzview::lookzview);
 static void
 ChopTree(class lpair  *branch, struct ATKregistryEntry   *lpairInfo)
 		{
-	struct ATKregistryEntry  *branchInfo = (branch)->ATKregistry();
 	/* destroy both children if the branch is either an lpair or
 		a sub class of lpair (such as bpair) 
 		XXX use knowledge that class_GetType returns ptr to classinfo */
@@ -2160,7 +2161,7 @@ static void DeleteStyle(class lookzview  *self)
 
 static void SetBGcolor(lookzview *self)
 {
-    char *oldbgcolor, *color;
+    char *oldbgcolor;
     struct style *globalsty;
     char colorbuf[75];
 
@@ -2198,7 +2199,7 @@ static void SetBGcolor(lookzview *self)
 
 static void SetROBGcolor(lookzview *self)
 {
-    char *oldbgcolor, *color;
+    char *oldbgcolor;
     struct style *globalsty;
     char colorbuf[75];
 

@@ -36,7 +36,7 @@ PRIVATE HTList *HTThreads = NULL;      	 /* List of the HTNetInfo structures */
 **	this function is called. It is currently done inside HTAccess in the
 **	HTAccessInit function.
 */
-PUBLIC BOOL HTThreadInit NOARGS
+PUBLIC BOOL HTThreadInit (void)
 {
     static BOOL done=NO;
 
@@ -59,7 +59,7 @@ PUBLIC BOOL HTThreadInit NOARGS
 **
 **	Returns the maximum bit width and the read and write bit array.
 */
-PUBLIC int HTThreadGetFDInfo ARGS2(fd_set *, read, fd_set *, write)
+PUBLIC int HTThreadGetFDInfo (fd_set *read, fd_set *write)
 {
     *read = HTfd_read;
     *write = HTfd_write;
@@ -72,7 +72,7 @@ PUBLIC int HTThreadGetFDInfo ARGS2(fd_set *, read, fd_set *, write)
 **	This function registers a socket as waiting for the action given
 **	(read or write etc.).
 */
-PUBLIC void HTThreadState ARGS2(SOCKFD, sockfd, HTThreadAction, action)
+PUBLIC void HTThreadState (SOCKFD sockfd, HTThreadAction action)
 {
     if (THD_TRACE) {
 	static char *actionmsg[] = {
@@ -156,7 +156,7 @@ PUBLIC void HTThreadState ARGS2(SOCKFD, sockfd, HTThreadAction, action)
 **
 **	This function returns YES or NO to the question
 */
-PUBLIC BOOL HTThreadIntr ARGS1(SOCKFD, sockfd)
+PUBLIC BOOL HTThreadIntr (SOCKFD sockfd)
 {
     return FD_ISSET(sockfd, &HTfd_intr) ? YES : NO;
 }
@@ -167,7 +167,7 @@ PUBLIC BOOL HTThreadIntr ARGS1(SOCKFD, sockfd)
 **	Marks all Library sockets as interrupted. User sockets can not be
 **	interrupted
 */
-PUBLIC void HTThreadMarkIntrAll ARGS1(CONST fd_set *,	fd_user)
+PUBLIC void HTThreadMarkIntrAll (CONST fd_set *	fd_user)
 {
     int cnt;
     if (THD_TRACE)
@@ -184,7 +184,7 @@ PUBLIC void HTThreadMarkIntrAll ARGS1(CONST fd_set *,	fd_user)
 **	Returns yes as long as a socket other than stdin is registered in 
 **	the total set of sockets.
 */
-PUBLIC BOOL HTThreadActive NOARGS
+PUBLIC BOOL HTThreadActive (void)
 {
     int cnt;
     for (cnt=STDIN_FILENO+1; cnt<HTMaxfdpl; cnt++)
@@ -199,7 +199,7 @@ PUBLIC BOOL HTThreadActive NOARGS
 **	Register the HTNetInfo structure in a list so that we can find the 
 **	request which corresponds to a socket descriptor
 */
-PUBLIC void HTThread_new ARGS1(HTNetInfo *, new_net)
+PUBLIC void HTThread_new (HTNetInfo * new_net)
 {
     if (!HTThreads)
 	HTThreads = HTList_new();
@@ -211,7 +211,7 @@ PUBLIC void HTThread_new ARGS1(HTNetInfo *, new_net)
 **
 **	Remove the HTNetInfo from the list of acrive threads.
 */
-PUBLIC int HTThread_clear ARGS1(HTNetInfo *, old_net)
+PUBLIC int HTThread_clear (HTNetInfo * old_net)
 {
     if (HTThreads)
 	return HTList_removeObject(HTThreads, (void *) old_net);
@@ -226,8 +226,8 @@ PUBLIC int HTThread_clear ARGS1(HTNetInfo *, old_net)
 **	Returns the request structure of the active thread, NULL on error.
 **	A interrupted socket has the highest priority
 */
-PUBLIC HTRequest *HTThread_getRequest ARGS2(CONST fd_set *,	fd_read,
-					    CONST fd_set *, 	fd_write)
+PUBLIC HTRequest *HTThread_getRequest (CONST fd_set *	fd_read,
+					    CONST fd_set * 	fd_write)
 {
     HTList *cur = HTThreads;
     HTNetInfo *pres;

@@ -865,7 +865,6 @@ long figure::ReadPartial(FILE  *fp, long  id, long  focus, struct point  *origin
     double fal1, fal2;
     char namebuf[100];
     class figobj *o;
-    class figogrp *gro;
     /* long unid;
     if (id==0) 
 	unid = figure_UniqueID(self);

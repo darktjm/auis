@@ -108,7 +108,6 @@ static long RealRead(class unknown  *uself, class text  *self, FILE  *file, long
 {
     int ch;
     int sawslash=0;
-    int level=0;
     long res=0;
     while((ch=tgetc(self, file))!=EOF) {
 	if(sawslash) {
@@ -118,7 +117,7 @@ static long RealRead(class unknown  *uself, class text  *self, FILE  *file, long
 	    /* else look for keyword{data} */
 	    *p++=ch;
 	    while((ch=tgetc(self, file))!=EOF && ch!='{'  && ch!='\\' && ch!='}') {
-		if(p-keywordbuf<sizeof(keywordbuf)-1) {
+		if(p-keywordbuf<(int)sizeof(keywordbuf)-1) {
 		    *p++=ch;
 		}
 	    }
@@ -172,7 +171,7 @@ static long RealRead(class unknown  *uself, class text  *self, FILE  *file, long
 			 second level subobject set the name appropriately */
 			cepos=(self)->GetLength()-1;
 			if(ch==',' && cepos>cpos) cepos--;
-			if(cepos-cpos+1>sizeof(cbuf)) {
+			if(cepos-cpos+1>(int)sizeof(cbuf)) {
 			    cepos=cpos+sizeof(cbuf)-1;
 			}
 			(self)->CopySubString( cpos, cepos-cpos+1, cbuf, FALSE);
@@ -269,7 +268,7 @@ long unknown::Write(FILE  *file, long  writeid, int  level)
 	    /* write out the data verbatim! */
 	    while(pos<(this->odata)->GetLength()) {
 		char *buf=(this->odata)->GetBuf( pos, (this->odata)->GetLength()-pos, &len);
-		if(len==0 || fwrite(buf, 1, len, file)!=len) return -1;
+		if(len==0 || (long)fwrite(buf, 1, len, file)!=len) return -1;
 		pos+=len;
 	    }
 	} else fprintf(file, "\n");

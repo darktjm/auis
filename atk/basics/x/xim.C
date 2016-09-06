@@ -37,6 +37,7 @@ ATK_IMPL("xim.H")
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
+#include <X11/XKBlib.h> /* tjm - not sure how to tag this, and don't want to add XKB_ENV */
 #if defined(PRE_X11R4_ENV)
 typedef int (*XErrorHandler) ();
 #endif /* defined(PRE_X11R4_ENV) */
@@ -84,6 +85,7 @@ typedef int (*XErrorHandler) ();
 #include <message.H>
 #include <bind.H>
 #include <xim.H>
+#include "xim.h"
 
 #include <errprntf.h>
 
@@ -126,7 +128,6 @@ static boolean initialized_session_mgmt = FALSE;
 ATKdefineRegistry(xim, im, xim::InitializeClass);
 
 static void ForceLocUpdate(class xim  *self);
-static int mystrcmp(char  **x,char  **y);
 static char **SetupMenuChoices(const char  *menulistname,int  *count);
 static void FreeMenuChoices(char  **list,int  count);
 static int CheckMenuChoice(const char  * const *list,int  count,const char  *choice);
@@ -135,7 +136,6 @@ static int GetCardPriority(struct cardorder  *co, const char  *card, int  def);
 static void FreeCardOrder(struct cardorder  *co);
 static void SetWMProperties(class xim  *self, boolean  nameChanged , boolean  iconic);
 static int XErrorsToConsole(Display  * DisplayPtr, XErrorEvent  * ErrorBlock );
-extern "C" void xim_EstablishConsole(char  * xhost, char *progname );
 static class xcolormap ** ColormapForDisplay( Display  *display );
 static void InitDefaultColormap( class xim  *self );
 static Display *SetupDisplay(class xim  *self, const char  *host);
@@ -173,7 +173,7 @@ static void HandleExposeFromMenubar(XEvent  *ee,class xim  *im);
 static void HandleWindowEvent(Display  *display);
 static void xim_ActivateMenubar(class xim  *xim, long  rock);
 static const char *mygetdefaults(Display  *dpy, const char  *pname);
-static long *CalculateIncrementList(char  *str, long  finalIncr, long  *listCount);
+static long *CalculateIncrementList(const char  *str, long  finalIncr, long  *listCount);
 static void updateGlobalCursors(class xim  *self);
 static void SetPNMask(Display  *display, Window  window);
 static void RemovePNMask(Display  *display, Window  window);
@@ -342,8 +342,6 @@ struct displayListItem {
 };
 
 static struct displayListItem *displayList = NULL;
-static int numberOfDisplays = 0;
-static long xDisplayCtr = 0;
 
 static struct xwindowfiles *windowList;
 static unsigned int numberOfWindowFiles = 0;
@@ -352,17 +350,19 @@ static long xWindowCtr = 0;
 #define RIGHTBUTTON 3
 #define MENUBUTTON 2
 #define ZUPBUTTON 4 /* ^Z */
-#define ZDOWNBUTTON 5 /* ^Q = ESC-Z &/
+#define ZDOWNBUTTON 5 /* ^Q = ESC-Z */
 /* so what are 6 & 7? */
 #define ZLEFTBUTTON 8
 #define ZRIGHTBUTTON 9
 
 #define MENUBARHEIGHT(anXIMPtr) (anXIMPtr->menubaron?anXIMPtr->mbi->prefs->menubarheight:0)
 
-static int mystrcmp(char  **x,char  **y)
+#if 0 /* unused */
+static int mystrcmp(const void  *x,const void *y)
 {
-    return strcmp(*x,*y);
+    return strcmp(*(char **)x,*(char **)y);
 }
+#endif
 
 /* Grrrr, this used to be small...
   Specification:
@@ -394,7 +394,7 @@ static char **SetupMenuChoices(const char  *menulistname,int  *count)
     if(!list) return NULL;
     
     p=buf;
-    while(pref && *pref && p-buf<sizeof(buf)-1) {
+    while(pref && *pref && p-buf<(int)sizeof(buf)-1) {
 	boolean newbackslash;
 	newbackslash=FALSE;
 	*p=(*pref);
@@ -629,7 +629,7 @@ SetWMProperties(class xim  *self, boolean  nameChanged , boolean  iconic)
     if(useProgramNameInTitle && name)
 	lengthName = strlen(name);
 
-    if(c = title) {
+    if((c = title)) {
 	clen = lengthTitle = strlen(c);
 	if(titleMaxLength > 0 && lengthTitle > titleMaxLength) {
 	    c = title + lengthTitle - titleMaxLength;
@@ -719,7 +719,7 @@ static int XErrorsToConsole(Display *DisplayPtr, XErrorEvent *ErrorBlock)
     ATKXErrors++;
     if (ErrorBlock->request_code == X_SetFontPath) {
 	errprintf(im::GetProgramName(), ERR_WARNING, 0, 0, 
-		  "X_SetFontPath failed on resource ID %x.  Please see 'help fonts'",
+		  "X_SetFontPath failed on resource ID %lx.  Please see 'help fonts'",
 		  ErrorBlock->resourceid);
 	return 0;
     }
@@ -730,7 +730,7 @@ static int XErrorsToConsole(Display *DisplayPtr, XErrorEvent *ErrorBlock)
 		CodeNumber, "Unknown operation",
 		RequestCode, sizeof(RequestCode));
     errprintf(im::GetProgramName(), ERR_WARNING, 0, 0, 
-		 "X error %d-%s.  Will ignore %s on resource ID %x",
+		 "X error %d-%s.  Will ignore %s on resource ID %lx",
 		ErrorBlock->error_code, ErrMsg, 
 		RequestCode, ErrorBlock->resourceid);
     return 0;
@@ -967,13 +967,11 @@ InitDefaultColormap( class xim  *self )
   {
   class xcolormap *xcmap;
   Display *disp = xim2display(self);
-  Screen *s = DefaultScreenOfDisplay(disp);
-  int scrn = DefaultScreen(disp);
   struct displayListItem *displayListItem;
  
   xcmap = new xcolormap(disp);
 
-  if(displayListItem = (struct displayListItem *) malloc(sizeof(struct displayListItem))) {
+  if((displayListItem = (struct displayListItem *) malloc(sizeof(struct displayListItem)))) {
       displayListItem->display = disp;
       displayListItem->colormap = xcmap;
       displayListItem->next = displayList;
@@ -1112,31 +1110,59 @@ static Display *SetupDisplay(class xim  *self, const char  *host)
 		 */
 		keycode = xmodmap->modifiermap[1 * xmodmap->max_keypermod];
 		if (keycode != None)
+#if 0 /* tjm - not sure how to tag this, and don't want to add XKB_ENV */
 		    caps_lock = XKeycodeToKeysym(xim2display(self), keycode, 0);
+#else
+		    caps_lock = XkbKeycodeToKeysym(xim2display(self), keycode, 0, 0);
+#endif
 		keycode = xmodmap->modifiermap[7 * xmodmap->max_keypermod];
 		if (keycode != None)
+#if 0 /* tjm - not sure how to tag this, and don't want to add XKB_ENV */
 		    num_lock = XKeycodeToKeysym(xim2display(self), keycode, 0);
+#else
+		    num_lock = XkbKeycodeToKeysym(xim2display(self), keycode, 0, 0);
+#endif
 	    }
 	    /* Get shift modifiers. */
 	    keycode = xmodmap->modifiermap[0 * xmodmap->max_keypermod];
 	    if (keycode != None)
+#if 0 /* tjm - not sure how to tag this, and don't want to add XKB_ENV */
 		shift[0] = XKeycodeToKeysym(xim2display(self), keycode, 0);
+#else
+		shift[0] = XkbKeycodeToKeysym(xim2display(self), keycode, 0, 0);
+#endif
 	    keycode = xmodmap->modifiermap[0 * xmodmap->max_keypermod+1];
 	    if (keycode != None)
+#if 0 /* tjm - not sure how to tag this, and don't want to add XKB_ENV */
 		shift[1] = XKeycodeToKeysym(xim2display(self), keycode, 0);
+#else
+		shift[1] = XkbKeycodeToKeysym(xim2display(self), keycode, 0, 0);
+#endif
 
 	    /* Get control modifiers. */
 	    keycode = xmodmap->modifiermap[2 * xmodmap->max_keypermod];
 	    if (keycode != None)
+#if 0 /* tjm - not sure how to tag this, and don't want to add XKB_ENV */
 		ctrl[0] = XKeycodeToKeysym(xim2display(self), keycode, 0);
+#else
+		ctrl[0] = XkbKeycodeToKeysym(xim2display(self), keycode, 0, 0);
+#endif
 
 	    /* Get meta modifiers. */
 	    keycode = xmodmap->modifiermap[3 * xmodmap->max_keypermod];
 	    if (keycode != None)
+#if 0 /* tjm - not sure how to tag this, and don't want to add XKB_ENV */
 		meta[0] = XKeycodeToKeysym(xim2display(self), keycode, 0);
+#else
+		meta[0] = XkbKeycodeToKeysym(xim2display(self), keycode, 0, 0);
+#endif
 	    keycode = xmodmap->modifiermap[3 * xmodmap->max_keypermod+1];
 	    if (keycode != None)
+#if 0 /* tjm - not sure how to tag this, and don't want to add XKB_ENV */
 		meta[1] = XKeycodeToKeysym(xim2display(self), keycode, 0);
+#else
+		meta[1] = XkbKeycodeToKeysym(xim2display(self), keycode, 0, 0);
+#endif
 	    XFreeModifiermap(xmodmap);
 	}
 	/* Reasonable defaults if we couldn't lookup the modifiers. */
@@ -1313,13 +1339,13 @@ static void DoGeometry(class xim  *self, long  *left, long  *top ,XSizeHints  **
 
     if (preferedWidth<=0) {
 	errprintf(xim2programname(self),ERR_WARNING,0,0,
-		  "window of width %d requested for %X; using 91 instead", 
+		  "window of width %ld requested for %p; using 91 instead", 
 		  preferedWidth, self);
 	preferedWidth = 91;
     }
     if (preferedHeight<=0) {
 	errprintf(xim2programname(self),ERR_WARNING,0,0,
-		  "window of height %d requested for %X; using 20 instead",
+		  "window of height %ld requested for %p; using 20 instead",
 		  preferedHeight, self);
 	preferedHeight = 20;
     }
@@ -1457,7 +1483,7 @@ static void DoTransientGeometry(class xim  *self , boolean  override, class xim 
     if (preferedWidth <= 0) {
 	*width = owidth / 2;
 	if(preferedWidth<0) errprintf(xim2programname(self),ERR_WARNING,0,0,
-		"window of width %d requested for %X; using %d instead", 
+		"window of width %ld requested for %p; using %d instead", 
 		preferedWidth, self, *width);
 	
     } else *width = preferedWidth;
@@ -1465,7 +1491,7 @@ static void DoTransientGeometry(class xim  *self , boolean  override, class xim 
     if (preferedHeight <= 0) {
 	*height = oheight / 4;
 	if(preferedHeight<0) errprintf(xim2programname(self),ERR_WARNING,0,0,
-		"window of height %d requested for %X; using %d instead",
+		"window of height %ld requested for %p; using %d instead",
 		preferedHeight, self, *height);
     } else *height = preferedHeight;
    
@@ -1529,7 +1555,6 @@ static void DoTransientGeometry(class xim  *self , boolean  override, class xim 
 
 static void SetForegroundBackground(class xim  *self, const char  **foregroundColor , const char  **backgroundColor, class xcolor  **foreground , class xcolor  **background)
 {
-    long status;
     graphic::GetDefaultColors(foregroundColor, backgroundColor);
     if (foregroundColor && *foregroundColor)  {
 	*foreground = (class xcolor *)((class xcolormap*) *(self)->CurrentColormap())->Allocate(*foregroundColor);
@@ -1583,7 +1608,7 @@ static void FreeSelectionData(struct seldata  *seldata)
 boolean xim::CreateWindow(char  *host)
 {
     Display *xDisplay;
-    Window newWindow;
+    Window newWindow = 0;
     XSetWindowAttributes windowAttributes;
 
     XSizeHints *sizehints, *zoomhints;
@@ -1701,7 +1726,7 @@ static boolean
 DoCreateTransientWindow(class xim  *self , class im  *iother, int  override, int flags, im_configurefptr cfp, long crock)
         {
     Display *xDisplay;
-    Window oWindow, newWindow;
+    Window oWindow, newWindow = 0;
     int i;
     int Xfileno;
     static int doSynch = 0;
@@ -1987,7 +2012,7 @@ InstallMenus(class xim  *self, class menulist  *menulist)
 
     for (item = menulist->menus; item != NULL; item = item->next){
 	char paneString[500];
-	long panePriority;
+	long panePriority = 0;
 	char selectionString[500];
 	long selectionPriority;
 	const char *paneTitle;
@@ -3129,6 +3154,8 @@ ButtonTimerFire(struct mouseStatus  *mfacts, long  now)
 			mfacts->xPending, mfacts->yPending, 
 			im_RightDown);
 		break;
+	default:
+	        break;
 	}
 }
 
@@ -3169,6 +3196,8 @@ SendButtonUp(struct mouseStatus  *mfacts, long  x , long  y)
 	case msRightDown:
 		enQuserMouse(mfacts->xim, view_RightUp, x, y, im_AllUp);
 		break;
+	default:
+	        break; /* can't happen */
 	}
 	mfacts->state = msAllUp;
 }
@@ -3878,9 +3907,6 @@ xim::RedrawWindow()
 		/*  If the window is not mapped, we have to map it 
 		    and then wait for the exposure event.
 		   The HandleExposure routine will call xim_HandleRedraw() */
-		XEvent Event;
-		XEvent exposeEvent;
-
 		if(!(this)->GetAutoMap()) return;
 		XMapWindow(xim2display(this), xim2window(this));
 		if(this->override_redirect) {
@@ -3938,7 +3964,6 @@ static long *CalculateIncrementList(const char  *str, long  finalIncr, long  *li
     long neg = 1;
     long val = 0;
     boolean inVal = FALSE;
-    char *ptr;
     long *list;
 
     if (str) {
@@ -4153,7 +4178,6 @@ static void updateGlobalCursors(class xim  *self)
     class xcursor * XProcessCursor = (class xcursor *) ProcessCursor;
     class xcursor * XWindowCursor = (class xcursor *) self->WindowCursor;
     class xcursor * tmp = 0;
-    Display *DummyDisplay = xim2display(self); /* used to hold useless return value */
 
     if (self->IsOffscreenWindow) return;
     /* If we had a global cursor, toss it */
@@ -4523,7 +4547,7 @@ HandleSelectionNotify(XSelectionEvent  *event)
 	unsigned long nitems, remainingbytes;
 	unsigned char *propList;
 	static Atom DesirableTargets[4] = {None};
-	long i, j;
+	unsigned long i, j;
 	Atom target;
 	Atom *AtomCache=FindAtomCache(event->display);
 	
@@ -4626,6 +4650,9 @@ HandleSelectionNotify(XSelectionEvent  *event)
 		}
 
 		break;
+	    case prop_InIncr:
+	    case prop_OutIncr:
+	        break; /* handled in HandleProperty */
 	}
 	CancelProp(elt);
 }
@@ -4697,6 +4724,9 @@ HandleProperty(XPropertyEvent  *event)
 			(unsigned char *)elt->string->string + elt->string->pos, nitems);
 		elt->string->pos += nitems;
 		break;
+	    case prop_Incoming:
+	    case prop_SelectTarget:
+	        break; /* selection notify */
 	}
 	CancelProp(elt);
 }
@@ -4913,7 +4943,7 @@ ProcessMultiple(XSelectionRequestEvent  *req)
 	unsigned long nitems, remainingbytes;
 	unsigned char *propList;
 	Atom *pairlist;
-	long i;
+	unsigned long i;
 	Atom originalProperty;
 	boolean OK = TRUE;
 	originalProperty = req->property;
@@ -5125,11 +5155,8 @@ sendToCutBuffer(class xim  *self, int  initialmode, struct expandstring  *cb)
 	void 
 xim::CloseToCutBuffer(FILE  *writeFile)
 	{
-	    class xim *self=this;
 	Display *display = xim2display(this);
-	Window window = xim2window(this);
-	Window selOwner;
-	Time now = xim_Now(this);
+	xim_Now(this); /* tjm - FIXME: are the side effects of this function needed?  If not, remove this line */
 
 	im::vfileclose(writeFile, &CachedCutBuffer);
 /*
@@ -5584,7 +5611,6 @@ static void LocateWindow(class xim  *self)
 
 boolean xim::ResizeWindow(int  width , int  height)
 {
-    XSizeHints hints;
     Pixmap newMap;
  
     if(this->IsOffscreenWindow) {
@@ -5603,11 +5629,12 @@ boolean xim::ResizeWindow(int  width , int  height)
 	this->drawable->visualBounds = this->drawable->localBounds;
     }
     else {
+/* is this necessary? */
+/*
+	XSizeHints hints;
 	hints.width = width;
 	hints.height = height;
 	hints.flags = PSize;
-/* is this necessary? */
-/*
 #ifdef PRE_X11R4_ENV
 	XSetNormalHints(xim2display(self), xim2window(self), &hints);
 #else
@@ -5623,14 +5650,14 @@ boolean xim::ResizeWindow(int  width , int  height)
 
 boolean xim::MoveWindow(int  x, int  y)
 {
-    XSizeHints hints;
+    /* XSizeHints hints; */
 
     if(this->IsOffscreenWindow) return FALSE;
+/* is this necessary? */
+/*
     hints.x = x;
     hints.y = y;
     hints.flags = USPosition;
-/* is this necessary? */
-/*
 #ifdef PRE_X11R4_ENV
     XSetNormalHints(xim2display(self), xim2window(self), &hints);
 #else
@@ -5722,8 +5749,8 @@ HandleDropin(class xim  *self, XClientMessageEvent  *ev)
     int prop_fmt;
     Atom prop_type;
     unsigned char *prop_data;
-    int num_files;
-    int i;
+    unsigned int num_files;
+    unsigned int i;
     char *p;
     enum view_MouseAction action;
     class im *im = (class im *)self;
@@ -5826,7 +5853,8 @@ find_drop_window(Display  *dpy, Window  topwin, unsigned int x_coord , unsigned 
     int srcx, srcy, destx, desty;
     Atom prop_type;
     drop_t drop_type = drop_notfound;
-    int data_unit, i;
+    unsigned int i;
+    int data_unit;
     unsigned long num_items, bytes_left;
     unsigned long *data;
     Atom *AtomCache = FindAtomCache(dpy);
@@ -5920,6 +5948,8 @@ static void send_drop(Display  *dpy, Window  my_win , Window  dest_win, drop_t  
 		strcpy(prop_data+pos, pathnames[i]);
 		pos += strlen(pathnames[i])+1;
 	    }
+	    break;
+	case drop_notfound:
 	    break;
     }
 
@@ -6031,7 +6061,6 @@ boolean xim::RequestSelectionOwnership(class view  *requestor)
 void xim::GiveUpSelectionOwnership(class view  *requestor)
 {
     Display *display = xim2display(this);
-    Window window = xim2window(this);
     class xim *self=this;
     if(!IOwnSelection || im::GetSelectionOwner()!=requestor) return;
     
@@ -6048,10 +6077,6 @@ void xim::GiveUpSelectionOwnership(class view  *requestor)
 void
 xim::ReceiveColormap( class colormap  *cmap )
         {
-    Display *disp = xim2display(this);
-    Screen *s = DefaultScreenOfDisplay(disp);
-    int cells = CellsOfScreen(s);
-
     (this)->im::ReceiveColormap( cmap);
     /* Set menubar & cmenu colormap attribute here */
     (this)->RedrawWindow();

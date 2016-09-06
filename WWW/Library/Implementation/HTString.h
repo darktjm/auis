@@ -31,28 +31,28 @@ Dynamic String Manipulation
  */
 #define StrAllocCopy(dest, src) HTSACopy (&(dest), src)
 #define StrAllocCat(dest, src)  HTSACat  (&(dest), src)
-extern char * HTSACopy PARAMS ((char **dest, CONST char *src));
-extern char * HTSACat  PARAMS ((char **dest, CONST char *src));/*
+extern char * HTSACopy (char **dest, CONST char *src);
+extern char * HTSACat  (char **dest, CONST char *src);/*
 
 Case-insensitive String Comparison
 
    The usual routines (comp instead of cmp) had some problem.
    
  */
-extern int strcasecomp  PARAMS((CONST char *a, CONST char *b));
-extern int strncasecomp PARAMS((CONST char *a, CONST char *b, int n));/*
+extern int strcasecomp  (CONST char *a, CONST char *b);
+extern int strncasecomp (CONST char *a, CONST char *b, int n);/*
 
 Case-insensitive strstr
 
    This works like strstr() but is not case-sensitive.
    
  */
-extern char * strcasestr PARAMS((char * s1, char * s2));/*
+extern char * strcasestr (char * s1, char * s2);/*
 
 Next word or quoted string
 
  */
-extern char * HTNextField PARAMS ((char** pstr));
+extern char * HTNextField (char** pstr);
 #endif/*
 
     */

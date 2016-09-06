@@ -55,7 +55,7 @@ Read Description File
    single file.
    
  */
-extern HTList * HTReadDescriptions PARAMS((char * dirname));/*
+extern HTList * HTReadDescriptions (char * dirname);/*
 
 Get Description For a File
 
@@ -64,10 +64,10 @@ Get Description For a File
    for a given file:
    
  */
-extern char * HTGetDescription PARAMS((HTList * descriptions,
+extern char * HTGetDescription (HTList * descriptions,
                                        char *   dirname,
                                        char *   filename,
-                                       HTFormat format));/*
+                                       HTFormat format);/*
 
    Directory name has to be present because this function may then take a peek at the file
    itself (to get the HTML TITLE, for example). If format is WWW_HTML and description is
@@ -81,7 +81,7 @@ Freeing Descriptions
    HTReadDescriptions() must be freed by HTFreeDescriptions():
    
  */
-extern void HTFreeDescriptions PARAMS((HTList * descriptions));/*
+extern void HTFreeDescriptions (HTList * descriptions);/*
 
  */
 #endif /* !HTDESCRIPT_H *//*

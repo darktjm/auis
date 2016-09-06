@@ -49,14 +49,14 @@ static class keymap *pvaltvlKeymap=NULL;
 
 
 ATKdefineRegistry(pvaltvl, pvaltv, pvaltvl::InitializeClass);
-static void pvaltvlUpdate(class pvaltvl  *self, long  rock);
 
 
+#if 0 /* use commented out below */
 static void pvaltvlUpdate(class pvaltvl  *self, long  rock)
 {
 }
 
-static struct bind_Description pvaltvlBindings[]={
+static const struct bind_Description pvaltvlBindings[]={
     {
 	"pvaltvl-update",
 	"\r",
@@ -79,6 +79,7 @@ static struct bind_Description pvaltvlBindings[]={
 	0
     }
 };
+#endif
     
     
 boolean pvaltvl::InitializeClass()
@@ -124,7 +125,6 @@ pvaltvl::~pvaltvl()
 
 void pvaltvl::SetDotPosition(long  pos)
 {
-    class text *t=(this)->GetText();
     int count=(this)->Locate( pos);
     if(count<(DATA(this))->GetListSize()) {
 	(DATA(this))->SetCurrentItem( (DATA(this))->GetListSize() - count - 1);
@@ -167,10 +167,7 @@ void pvaltvl::UpdateValue()
     struct prefval_value *pvl=NULL;
     
     do {
-	long len;
 	npos=(pvt)->Index( pos, '\n', (pvt)->GetLength()-pos);
-	if(npos>=0) len=npos-pos;
-	else len=(pvt)->GetLength()-pos;
 	lines++;
 	pos=npos+1;
     } while(npos>=0);

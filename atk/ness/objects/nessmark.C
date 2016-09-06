@@ -226,8 +226,8 @@ nessmark::UpdateMarks(long  pos, long  size) {
 			}
 		}
 		else if (pos < (mark)->GetPos() 
-				|| pos == (mark)->GetPos() 
-				&& ! (mark)->IncludeBeginning())
+				|| (pos == (mark)->GetPos() 
+				&& ! (mark)->IncludeBeginning()))
 			(mark)->SetPos( (mark)->GetPos() + size);
 		else {
 			(mark)->SetLength( 

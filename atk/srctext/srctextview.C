@@ -183,11 +183,12 @@ void srctextview::ReceiveInputFocus()
 	PostKeyState(this->textview::keystate);
     else
 	PostKeyState(PrependKeyState());
-    if (GetEditor() == VI)
+    if (GetEditor() == VI) {
 	if (GetVIMode() == COMMAND)
 	    message::DisplayString(this, 0, "Command Mode");
 	else
 	    message::DisplayString(this, 0, "Input Mode");
+    }
     WantUpdate(this);
 }
 
@@ -746,7 +747,7 @@ void srctextview::CompressAll()
 	while (pos<srclen && (ct)->CurrentIndent(pos)<curInd)
 	    pos= (ct)->GetEndOfLine(pos) +1;
 	startcompress= pos;
-	if (pos<srclen)
+	if (pos<srclen) {
 	    if ((ct)->ExtendToOutdent(curInd, &startcompress,&len)) {
 		compress::Compress(ct,startcompress,len);
 		pos= startcompress+1; /* move past the new inset */
@@ -763,6 +764,7 @@ void srctextview::CompressAll()
 	    } else {
 		pos= startcompress+len+1+1; /* skip insignificant indented region */
 	    }
+	}
     } while (pos<srclen); /* srclen may be invalid, but no matter. we'll figure that out on the next loop */
     message::DisplayString(this,0, "compressing completed.");
     WaitCursorOff();
@@ -891,7 +893,7 @@ static boolean FrameFinder(frame *frame, long infop)
     if (info->otherFrame != NULL && info->bestFrame != NULL)
 	return TRUE;
     (frame)->GetVisualBounds(&bogus);
-    if (!rectangle_IsEmptyRect(&bogus))
+    if (!rectangle_IsEmptyRect(&bogus)) {
 	if ((frame)->GetBuffer() == info->myBuffer) {
 	    info->bestFrame = frame;
 	    return FALSE;
@@ -901,6 +903,7 @@ static boolean FrameFinder(frame *frame, long infop)
 		return FALSE;
 	    }
 	}
+    }
     return FALSE;
 }
 static boolean ViewEqual(frame *frame, long view)
@@ -1041,9 +1044,9 @@ boolean srctextview::FindSubFile(char *filename, char *bufname, char *procname, 
     }
 
     /*check Search Path*/
-    if (searchpath!=NULL && strlen(searchpath)>0 && searchpath[0]!=' ') {
-	while (pos<strlen(searchpath)) {
-	    while (pos<strlen(searchpath) && searchpath[pos]!=':') ++pos;
+    if (searchpath!=NULL && searchpath[0] && searchpath[0]!=' ') {
+	while (searchpath[pos]) {
+	    while (searchpath[pos] && searchpath[pos]!=':') ++pos;
 	    strncpy(path,searchpath+oldpos,pos-oldpos);
 	    path[pos-oldpos]='\0';
 	    oldpos=(++pos);
@@ -1088,13 +1091,14 @@ void srctextview::InsertComment()
     if (spaceWanted<ct->remarkPadding)
 	spaceWanted= ct->remarkPadding;
     linelength= (ct)->CurrentColumn(endofline);
-    if (linelength+spaceWanted>desiredCol)
+    if (linelength+spaceWanted>desiredCol) {
 	if (ct->commentFixed)
 	    /* it's not going to fit and it MUST be in commentCol, so start a new line */
 	    (ct)->JustInsertCharacters(endofline++,"\n",1);
 	else
 	    /* we just have to nudge it over a little */
 	    desiredCol= linelength+spaceWanted;
+    }
     if ((ct)->CurrentColumn(endofline)<desiredCol)
 	endofline= (ct)->TabAndOptimizeWS(endofline,desiredCol);
     /* insert the comment and style it */
@@ -1136,13 +1140,14 @@ void srctextview::InsertLineComment()
     if (spaceWanted<ct->remarkPadding)
 	spaceWanted= ct->remarkPadding;
     linelength= (ct)->CurrentColumn(endofline);
-    if (linelength+spaceWanted>desiredCol)
+    if (linelength+spaceWanted>desiredCol) {
 	if (ct->linecommentFixed)
 	    /* it's not going to fit and it MUST be in linecommentCol, so start a new line */
 	    (ct)->JustInsertCharacters(endofline++,"\n",1);
 	else
 	    /* we just have to nudge it over a little */
 	    desiredCol= linelength+spaceWanted;
+    }
     if ((ct)->CurrentColumn(endofline)<desiredCol)
 	endofline= (ct)->TabAndOptimizeWS(endofline,desiredCol);
     /* insert the line-comment and style it */
@@ -1195,7 +1200,7 @@ void srctextview::EndComment(char key /* must be char for "&" to work. */)
 	(GetIM())->HandleMenu(proctable::Lookup("textview-zap-region"), this, 0); /* not a particularly efficient way to call textview_ZapRegionCmd, but what else ya gonna do? */
     oldpos= pos= CollapseDot();
     while (count--) (ct)->InsertCharacters(pos++,&key,1);
-    if (oldpos && (ct)->GetChar(oldpos-1)=='*')
+    if (oldpos && (ct)->GetChar(oldpos-1)=='*') {
 	if ((ct)->GetStyle(oldpos+1)==ct->comment_style)
 	    /* terminate existing style */
 	    ((ct->text::rootEnvironment)->GetEnclosing(oldpos+1))->SetStyle(FALSE,FALSE);
@@ -1203,7 +1208,7 @@ void srctextview::EndComment(char key /* must be char for "&" to work. */)
 	    /* wrap a new style */
 	    long start=oldpos-1;
 	    while (--start>0) {
-		if ((ct)->GetChar(start)=='*')
+		if ((ct)->GetChar(start)=='*') {
 		    if ((ct)->GetChar(start-1)=='/') {
 			/* found start of comment, wrap style */
 			if ((ct)->GetStyle(start) && (ct)->GetStyle(start)!=ct->comment_style)
@@ -1217,8 +1222,10 @@ void srctextview::EndComment(char key /* must be char for "&" to work. */)
 		    } else if ((ct)->GetChar(start+1)=='/')
 			/* uh-oh, found another end of comment! */
 			break;
+		}
 	    }
 	}
+    }
     SetDotPosition(pos);
     FrameDot(pos);
     (ct)->NotifyObservers(0); 
@@ -1318,7 +1325,7 @@ static void nextLongLine(srctextview *self, long key)
 	message::DisplayString(self,0,"None found; No maximum line length set.");
     else {
 	long pos=(self)->GetDotPosition()+(self)->GetDotLength();
-	long samepos=pos, start=0;
+	long start=0;
 	long len=(ct)->GetLength();
 	int c, linelen=0;
 

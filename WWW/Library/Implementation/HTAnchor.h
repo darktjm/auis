@@ -139,10 +139,8 @@ Class methods
    
  */
 extern HTChildAnchor * HTAnchor_findChild
-  PARAMS(
      (HTParentAnchor *parent,
-      CONST char *tag)
-  );
+      CONST char *tag);
 /*
 
   HTANCHOR_FINDCHILDANDLINK:  CREATE OR FIND A CHILD ANCHOR WITH A POSSIBLE LINK
@@ -152,12 +150,12 @@ extern HTChildAnchor * HTAnchor_findChild
    
  */
 extern HTChildAnchor * HTAnchor_findChildAndLink
-  PARAMS((
+  (
       HTParentAnchor * parent,  /* May not be 0 */
       CONST char * tag,         /* May be "" or 0 */
       CONST char * href,        /* May be "" or 0 */
       HTLinkType * ltype        /* May be 0 */
-  ));
+  );
 
 /*
 
@@ -172,9 +170,7 @@ extern HTChildAnchor * HTAnchor_findChildAndLink
    
  */
 extern HTAnchor * HTAnchor_findAddress
-  PARAMS(
-     (CONST char * address)
-     );
+     (CONST char * address);
 
 /*
 
@@ -189,9 +185,7 @@ extern HTAnchor * HTAnchor_findAddress
    
  */
 extern BOOL HTAnchor_delete
-  PARAMS(
-     (HTParentAnchor *me)
-     );
+     (HTParentAnchor *me);
 
 /*
 
@@ -202,33 +196,23 @@ extern BOOL HTAnchor_delete
    
  */
 extern void HTAnchor_makeLastChild
-  PARAMS(
-     (HTChildAnchor *me)
-     );
+     (HTChildAnchor *me);
 /*
 
 Accessing Properties of the Anchor
 
  */
 extern HTParentAnchor * HTAnchor_parent
-  PARAMS(
-     (HTAnchor *me)
-     );
+     (HTAnchor *me);
 
 extern void HTAnchor_setDocument
-  PARAMS(
-     (HTParentAnchor *me, HyperDoc *doc)
-     );
+     (HTParentAnchor *me, HyperDoc *doc);
 
 extern HyperDoc * HTAnchor_document
-  PARAMS(
-     (HTParentAnchor *me)
-     );
+     (HTParentAnchor *me);
 /* We don't want code to change an address after anchor creation... yet ?
 extern void HTAnchor_setAddress
-  PARAMS(
-     (HTAnchor *me, char *addr)
-     );
+     (HTAnchor *me, char *addr);
 */
 /*
 
@@ -239,79 +223,66 @@ extern void HTAnchor_setAddress
    
  */
 extern char * HTAnchor_address
-  PARAMS(
-     (HTAnchor *me)
-     );
+     (HTAnchor *me);
 /*
 
   FORMAT OF SOURCE
   
  */
 extern void HTAnchor_setFormat
-  PARAMS(
-     (HTParentAnchor *me, HTFormat form)
-     );
+     (HTParentAnchor *me, HTFormat form);
 
 extern HTFormat HTAnchor_format
-  PARAMS(
-     (HTParentAnchor *me)
-     );/*
-
+     (HTParentAnchor *me);
+/*
   IS IT SEARCHABLE?
   
  */
-extern void HTAnchor_clearIndex PARAMS((HTParentAnchor *me));
-extern void HTAnchor_setIndex PARAMS((HTParentAnchor *me));
-extern BOOL HTAnchor_isIndex PARAMS((HTParentAnchor *me));/*
+extern void HTAnchor_clearIndex (HTParentAnchor *me);
+extern void HTAnchor_setIndex (HTParentAnchor *me);
+extern BOOL HTAnchor_isIndex (HTParentAnchor *me);
+/*
 
   DOES IT HAVE ANY ANCHORS WITHIN IT?
   
  */
 extern BOOL HTAnchor_hasChildren
-  PARAMS(
-     (HTParentAnchor *me)
-     );
+     (HTParentAnchor *me);
 /*
 
   LIST OF METHODS WHICH CAN OPERATE ON OBJECT
   
  */
-extern HTList * HTAnchor_methods PARAMS((HTParentAnchor *me));
+extern HTList * HTAnchor_methods (HTParentAnchor *me);
 /*
 
   PROTOCOL
   
  */
-extern void * HTAnchor_protocol PARAMS((HTParentAnchor * me));
-extern void HTAnchor_setProtocol PARAMS((HTParentAnchor * me,
-                                        void* protocol));
+extern void * HTAnchor_protocol (HTParentAnchor * me);
+extern void HTAnchor_setProtocol (HTParentAnchor * me,
+                                        void* protocol);
 /*
 
   PHYSICAL ADDRESS
   
  */
-extern char * HTAnchor_physical PARAMS((HTParentAnchor * me));
-extern void HTAnchor_setPhysical PARAMS((HTParentAnchor * me,
-                                        char * protocol));
+extern char * HTAnchor_physical (HTParentAnchor * me);
+extern void HTAnchor_setPhysical (HTParentAnchor * me,
+                                        char * protocol);
 /*
 
 Title handling
 
  */
 extern CONST char * HTAnchor_title
-  PARAMS(
-     (HTParentAnchor *me)
-     );
+     (HTParentAnchor *me);
 
 extern void HTAnchor_setTitle
-  PARAMS(
-     (HTParentAnchor *me, CONST char * title)
-     );
+     (HTParentAnchor *me, CONST char * title);
 
 extern void HTAnchor_appendTitle
-  PARAMS(
-     (HTParentAnchor *me, CONST char * title)
-     );
+     (HTParentAnchor *me, CONST char * title);
 
 /*
 
@@ -321,36 +292,28 @@ Manipulation of Links
   
  */
 extern BOOL HTAnchor_link
-  PARAMS(
-     (HTAnchor *source, HTAnchor *destination, HTLinkType *type)
-     );
+     (HTAnchor *source, HTAnchor *destination, HTLinkType *type);
 /*
 
   FIND DESTINATION OF LINK
   
  */
 extern HTAnchor * HTAnchor_followMainLink
-  PARAMS(
-     (HTAnchor *me)
-     );
+     (HTAnchor *me);
 /*
 
   FIND DESTINATION WITH GIVEN RELATIONSHIP
   
  */
 extern HTAnchor * HTAnchor_followTypedLink
-  PARAMS(
-     (HTAnchor *me, HTLinkType *type)
-     );
+     (HTAnchor *me, HTLinkType *type);
 /*
 
   MAKE A PARTICULAR LINK THE MAIN LINK
   
  */
 extern BOOL HTAnchor_makeMainLink
-  PARAMS(
-     (HTAnchor *me, HTLink *movingLink)
-     );
+     (HTAnchor *me, HTLink *movingLink);
 
 
 #endif /* HTANCHOR_H */

@@ -114,6 +114,7 @@ static void Import_Cmd( class imagev  *self, enum image_fileType  type );
 static void Export_Cmd( class imagev  *self, enum image_fileType  type );
 static void SaveAs( class imagev  *self, long  rock );
 static int  WriteToFile( class imagev   *self, const char  *filename );
+#ifdef THISWORKS
 static void Dither( class imagev  *self );
 static void Halftone( class imagev  *self );
 static void Reduce( class imagev  *self );
@@ -122,20 +123,16 @@ static void Normalize( class imagev  *self );
 static void Brighten( class imagev  *self );
 static void GammaCorrect( class imagev  *self );
 static void ScaleToFit( class imagev  *self );
+#endif
+#if 0
 static void InfoCmd( class imagev  *self );
+#endif
 static void ShowTrue( class imagev  *self );
 static void ShowFixed( class imagev  *self );
 static void Write_Postscript( class imagev  *self );
-static void x_getinfo(class imagev  *self, struct range  *total , struct range  *seen , struct range  *dot);
-static long x_whatisat(class imagev  *self, long  coordinate , long  outof);
-static void x_setframe(class imagev  *self, int  position, long  coordinate , long  outof);
-static void y_getinfo(class imagev  *self, struct range  *total , struct range  *seen , struct range  *dot);
-static long y_whatisat(class imagev  *self, long  coordinate , long  outof);
-static void y_setframe(class imagev  *self, int  position, long  coordinate , long  outof);
 static void ReadCmd( class imagev  *self );
 static void ChangeZoomCmd( class imagev  *self, long  rock );
 static void PanToOriginCmd( class imagev  *self, long  rock );
-static void RectToPix(class imagev  *self, struct rectangle  *dest , struct rectangle  *src);
 static void SetSaveQuality( class imagev  *self, long  rock );
 static void SetSaveFormat( class imagev  *self, long  rock );
 
@@ -559,6 +556,7 @@ imagev::Hit( enum view_MouseAction  action, long  ix, long  iy, long  numberOfCl
 	    (this)->WantUpdate( this);
 	    break;
 	case view_LeftUp:
+	default:
 	    break;
     }
     return((class view *) this);
@@ -761,11 +759,10 @@ imageTypeName(enum image_fileType  type)
 static class image *
 image_Import( const char  *filename, enum image_fileType  type )
 {
-    int ret = -1;
     class image *image;
     const char *objName = NULL;
     objName = imageTypeName(type);
-    if(image = (class image *) ATK::NewObject(objName)) {
+    if((image = (class image *) ATK::NewObject(objName))) {
 	(image)->Load(filename, NULL);
     }
     return(image);
@@ -778,7 +775,7 @@ image_Export( class image  *image, const char  *filename, enum image_fileType  t
     class image *newimage;
     const char *objName = NULL;
     objName = imageTypeName(type);
-    if(newimage = (class image*) ATK::NewObject(objName)) {
+    if((newimage = (class image*) ATK::NewObject(objName))) {
 	(image)->Duplicate( newimage);
 	ret = (newimage)->WriteNative( NULL, filename);
 	(newimage)->Destroy();
@@ -792,7 +789,6 @@ Import_Cmd( class imagev  *self, enum image_fileType  type )
     class image *image = self->orig;
     char filename[MAXPATHLEN + 1];
     char message[MAXPATHLEN];
-    int result = 0;
     class image *newimage;
 
     im::GetDirectory(filename);
@@ -800,7 +796,7 @@ Import_Cmd( class imagev  *self, enum image_fileType  type )
     if(completion::GetFilename(self, "Import image file: ", filename, filename, sizeof(filename), FALSE, FALSE) == -1)
 	return;
     POSTWAITCURSOR(self);
-    if(newimage = image_Import(filename, type)) { /* OK */
+    if((newimage = image_Import(filename, type))) { /* OK */
 	boolean havecmap= self->havePrivateCmap;
 	if(havecmap) {
 	    (self)->WantColormap( self , NULL);
@@ -876,7 +872,7 @@ WriteToFile( class imagev   *self, const char  *filename )
 { class image *image = self->orig;
   char realName[MAXPATHLEN], tempFilename[MAXPATHLEN];
   const char *originalFilename = NULL;
-  char *endString, *basename;
+  char *endString;
   int closeCode, errorCode, originalMode, fd, counter = 1;
   FILE *outFile;
   struct stat statBuf;
@@ -897,7 +893,7 @@ WriteToFile( class imagev   *self, const char  *filename )
     sprintf(endString,".%d",counter++);
 #else /* USESHORTFILENAMES */
   strcpy(tempFilename,filename);
-  basename = strrchr(tempFilename,'/');
+  char *basename = strrchr(tempFilename,'/');
   if(!basename) basename = tempFilename;
   else basename++;
   if(strlen(basename) > 8) basename[8] = '\0';
@@ -920,19 +916,11 @@ WriteToFile( class imagev   *self, const char  *filename )
     closeCode = -1;
   }
   else {
-#ifdef AFS_ENV
-    if((closeCode = vclose(fileno(outFile))) < 0) /* stdio can trash errno. */
-      errorCode = errno; /* Protect it from the fclose below. */
-    else if(originalFilename != NULL)
-      if((closeCode = rename(filename, originalFilename)) < 0)
-        errorCode = errno;
-#else /* AFS_ENV */
     if((closeCode = close(fileno(outFile))) < 0) /* stdio can trash errno. */
       errorCode = errno; /* Protect it from the fclose below. */
     else if(originalFilename != NULL)
       if((closeCode = rename(filename, originalFilename)) < 0)
         errorCode = errno;
-#endif /* AFS_ENV */
     fclose(outFile); /* Free stdio resources. */
     if(closeCode >= 0) { /* Reset readonly mode. */
       struct attributes attributes;
@@ -953,6 +941,7 @@ WriteToFile( class imagev   *self, const char  *filename )
   return(closeCode);
 }
 
+#ifdef THISWORKS
 static void
 Dither( class imagev  *self )
 {
@@ -1137,6 +1126,7 @@ ScaleToFit( class imagev  *self )
     self->do_renderupdate = TRUE;
     (self)->WantUpdate(self);
 }
+#endif
 
 extern int writePS(class imagev *v, FILE *tmpFile, int *wpts, int *hpts, int toplevel);
 
@@ -1146,13 +1136,13 @@ imagev::Print( FILE  *f, const char  *process, const char  *final, int  toplevel
     FILE *tmpFile;
     char tmpName[MAXPATHLEN];
     strcpy(tmpName, tmpnam(NULL));
-    if(tmpFile = fopen(tmpName, "w")) {
+    if((tmpFile = fopen(tmpName, "w"))) {
 	int wpts, hpts;
 	char buf[BUFSIZ], buf1[BUFSIZ];
 	const char *prefix;
 	writePS(this, tmpFile, &wpts, &hpts, toplevel);
 	fclose(tmpFile);
-	if(tmpFile = fopen(tmpName, "r")) {
+	if((tmpFile = fopen(tmpName, "r"))) {
 	    if(strcmp(process, "troff") == 0) {
 		if(toplevel)
 		    texttroff::BeginDoc(f);
@@ -1292,10 +1282,8 @@ imagev::LoseColormap( class colormap  *cmap )
 static void
 Write_Postscript( class imagev  *self )
 {
-    class image *image = self->orig;
     char filename[MAXPATHLEN + 1];
     char message[MAXPATHLEN];
-    int result = 0;
     FILE *f;
     
     im::GetDirectory(filename);
@@ -1303,7 +1291,7 @@ Write_Postscript( class imagev  *self )
     if(completion::GetFilename(self, "Postscript file: ", filename, filename, sizeof(filename), FALSE, FALSE) == -1)
 	return;
     POSTWAITCURSOR(self);
-    if(f = fopen(filename, "w")) {
+    if((f = fopen(filename, "w"))) {
 	writePS(self, f, 0, 0, imagev_PURE_POSTSCRIPT);
 	fclose(f);
 	RETRACTWAITCURSOR(self);
@@ -1364,6 +1352,8 @@ void imagevInterface::Shift(scroll_Direction dir) {
 	case scroll_Right:
 	    px--;
 	    break;
+	case scroll_None:
+	    break;
     }
     if(px!=0 || py!=0) {
 	iv->panx+=px;
@@ -1389,6 +1379,8 @@ void imagevInterface::Extreme(scroll_Direction dir) {
 	    break;
 	case scroll_Right:
 	    px=-(IMAGE(iv)->Width()) + iv->GetLogicalWidth()/2;
+	    break;
+        case scroll_None:
 	    break;
     }
     if(px!=iv->panx || py!=iv->pany) {
@@ -1483,7 +1475,6 @@ ReadCmd( class imagev  *self )
     class image *imagep = self->orig;
     char filename[MAXPATHLEN + 1];
     char message[MAXPATHLEN];
-    int result = 0;
     FILE *in;
 
     im::GetDirectory(filename);
@@ -1491,7 +1482,7 @@ ReadCmd( class imagev  *self )
     if(completion::GetFilename(self, "Image file: ", filename, filename, sizeof(filename), FALSE, FALSE) == -1)
 	return;
     POSTWAITCURSOR(self);
-    if(in = fopen(filename, "r")) { /* OK */
+    if((in = fopen(filename, "r"))) { /* OK */
 	long status;
 	class image *new_c = new image;
 	if(new_c) {
@@ -1651,7 +1642,7 @@ SetSaveFormat( class imagev *self, long  rock )
 
     if(message::MultipleChoiceQuestion(self, 100, prompt, 0, &result, choices, NULL) == -1)
 	return;
-    if(choice = (char *) malloc(strlen(choices[result]) + 1)) {
+    if((choice = (char *) malloc(strlen(choices[result]) + 1))) {
 	strcpy(choice, choices[result]);
 	(image)->SetSaveFormatString(choice);    
 	if(self->scaled)

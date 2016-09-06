@@ -401,7 +401,6 @@ static void move_panner(class panner  *self)
 
 void panner::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
 {
-    class panner *self=this;
     struct rectangle r;
     int i;
 
@@ -470,7 +469,6 @@ void panner::FullUpdate(enum view_UpdateType  type, long  left , long  top , lon
 
 void panner::Update()
 {
-    int i;
     struct rectangle r;
     (this)->GetLogicalBounds( &r);
 
@@ -560,9 +558,6 @@ static void HandleThumbing(class panner  *self, enum view_MouseAction  action, l
 
 static void HandleDownHit(class panner  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks)
 {
-    scroll_whatfptr WhatIsAt;
-    long valx, valy;
-
     if (action==view_RightDown) {
 	self->rockx = x - self->panrect.left;
 	self->rocky = y - self->panrect.top;

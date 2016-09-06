@@ -105,12 +105,6 @@ typedef unsigned char BYTE;	/* 8 bits unsigned		*/
 #define MACIN_ERR_NFO      -7   /* no file open */
 #define MACIN_ERR_NIO      -8   /* no image open */
 
-static int macin_open_image();
-static int macin_close_file();
-#if 0
-static int macin_fatal();
-#endif
-
 #define	MAC_HDR_LEN	512
 #define ADD_HDR_LEN	128
 #define	MAX_LINES	720

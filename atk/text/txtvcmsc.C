@@ -204,7 +204,7 @@ void textview_NextPage (class textview  *self)
 	pos++;
     }
 }
-long text_rindex(class text  *txt,long  pos,char  c)
+static long text_rindex(class text  *txt,long  pos,char  c)
 {
     for(;pos > 0;pos--){
 	if((txt)->GetChar(pos) == c) return pos;

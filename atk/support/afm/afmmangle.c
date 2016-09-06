@@ -9,7 +9,7 @@ static char *SquishAFMFileName(char *orig)
 {
     static char result[MAXLEN+1];
     int total[MAXLEN];
-    int ix, val, oval;
+    int ix, val;
 
     for (ix=0; ix<MAXLEN; ix++)
 	total[ix] = 0;
@@ -46,7 +46,7 @@ static char *SquishAFMFileName(char *orig)
     return result;
 }
 
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     char buf[MAXPATHLEN];
     char *cx;
@@ -60,7 +60,7 @@ main(int argc, char *argv[])
     }
     else {
 
-	while (cx = fgets(buf, MAXPATHLEN, stdin)) {
+	while ((cx = fgets(buf, MAXPATHLEN, stdin))) {
 	    cx = strchr(buf, '\n');
 	    if (cx)
 		*cx = '\0';

@@ -92,7 +92,7 @@ static void forkhelpproc (class view  *self, long  key)
     switch (pid = osi_vfork()) {
 	case 0:
 	    for (fd = FDTABLESIZE(); fd > 2; --fd) close(fd);
-	    execl(helpname, helpname, im::GetProgramName(), 0);
+	    execl(helpname, helpname, im::GetProgramName(), (char *)NULL);
 	    printf ("Exec of %s failed.\n", helpname);
 	    fflush (stdout);
 	    _exit(-1);

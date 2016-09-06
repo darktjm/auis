@@ -56,8 +56,8 @@ PRIVATE unsigned char isAcceptable[96] =
 
 PRIVATE char *hex = "0123456789ABCDEF";
 
-PUBLIC char * HTEscape ARGS2 (CONST char *, str,
-	unsigned char, mask)
+PUBLIC char * HTEscape  (CONST char * str,
+	unsigned char mask)
 {
 #define ACCEPTABLE(a)	( a>=32 && a<128 && ((isAcceptable[a-32]) & mask))
     CONST char * p;
@@ -92,14 +92,14 @@ PUBLIC char * HTEscape ARGS2 (CONST char *, str,
 **	The string is converted in place, as it will never grow.
 */
 
-PRIVATE char from_hex ARGS1(char, c)
+PRIVATE char from_hex (char c)
 {
     return  c >= '0' && c <= '9' ?  c - '0' 
     	    : c >= 'A' && c <= 'F'? c - 'A' + 10
     	    : c - 'a' + 10;	/* accept small letters just in case */
 }
 
-PUBLIC char * HTUnEscape ARGS1( char *, str)
+PUBLIC char * HTUnEscape ( char * str)
 {
     char * p = str;
     char * q = str;

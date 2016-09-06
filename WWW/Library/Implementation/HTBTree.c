@@ -22,7 +22,7 @@
 
 
 
-PUBLIC HTBTree * HTBTree_new ARGS1(HTComparer, comp)
+PUBLIC HTBTree * HTBTree_new (HTComparer comp)
     /*********************************************************
     ** This function returns an HTBTree with memory allocated 
     ** for it when given a mean to compare things
@@ -40,7 +40,7 @@ PUBLIC HTBTree * HTBTree_new ARGS1(HTComparer, comp)
 
 
 
-PRIVATE void HTBTElement_free ARGS1(HTBTElement*, element)
+PRIVATE void HTBTElement_free (HTBTElement* element)
     /**********************************************************
     ** This void will free the memory allocated for one element
     */
@@ -52,7 +52,7 @@ PRIVATE void HTBTElement_free ARGS1(HTBTElement*, element)
     }
 }
 
-PUBLIC void HTBTree_free ARGS1(HTBTree*, tree)
+PUBLIC void HTBTree_free (HTBTree* tree)
     /**************************************************************
     ** This void will free the memory allocated for the whole tree
     */
@@ -64,7 +64,7 @@ PUBLIC void HTBTree_free ARGS1(HTBTree*, tree)
 
 
 
-PRIVATE void HTBTElementAndObject_free ARGS1(HTBTElement*, element)
+PRIVATE void HTBTElementAndObject_free (HTBTElement *element)
     /**********************************************************
     ** This void will free the memory allocated for one element
     */
@@ -78,7 +78,7 @@ PRIVATE void HTBTElementAndObject_free ARGS1(HTBTElement*, element)
     }
 }
 
-PUBLIC void HTBTreeAndObject_free ARGS1(HTBTree*, tree)
+PUBLIC void HTBTreeAndObject_free (HTBTree *tree)
     /**************************************************************
     ** This void will free the memory allocated for the whole tree
     */
@@ -90,9 +90,9 @@ PUBLIC void HTBTreeAndObject_free ARGS1(HTBTree*, tree)
 
 
 
-PUBLIC void HTBTree_add ARGS2(
-		    HTBTree*,  tree,
-		    void*,     object)
+PUBLIC void HTBTree_add (
+		    HTBTree*  tree,
+		    void*     object)
     /**********************************************************************
     ** This void is the core of HTBTree.c . It will
     **       1/ add a new element to the tree at the right place
@@ -490,9 +490,9 @@ PUBLIC void HTBTree_add ARGS2(
 
 
 
-PUBLIC HTBTElement * HTBTree_next ARGS2(
-                               HTBTree*,       tree,
-                               HTBTElement*,   ele)
+PUBLIC HTBTElement * HTBTree_next (
+                               HTBTree*       tree,
+                               HTBTElement*   ele)
     /**************************************************************************
     ** this function returns a pointer to the leftmost element if ele is NULL,
     ** and to the next object to the right otherways.
@@ -559,7 +559,7 @@ PUBLIC HTBTElement * HTBTree_next ARGS2(
 
 
 #ifdef TEST
-main ()
+int main (void)
     /******************************************************
     ** This is just a test to show how to handle HTBTree.c
     */
@@ -713,6 +713,7 @@ main ()
         next_element = HTBTree_next(tree,next_element);
     }
     HTBTree_free (tree);
+    return 0;
 }
 
 

@@ -119,7 +119,6 @@ void RestartErrorMonitoring(class consoleClass  *self, const char  *msg)
 
 int RealOpenConsoleSocket(class consoleClass *self)
 {
-    int flags;
     ConsoleSocket=OpenConsoleSocket();
     if(ConsoleSocket<0)
 	switch(ConsoleSocket) {
@@ -208,7 +207,6 @@ static int IsRemoteDisplay( const char *s )
 int InitErrorMonitoring(class consoleClass  *self, boolean  FirstTime)
 {
     int tempfd;
-    int PtyNumber = 0;
     int flags;
     char ptyname[64];
     

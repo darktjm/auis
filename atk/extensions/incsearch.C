@@ -182,7 +182,7 @@ static long incsearchf(ATK *tva, long  key)
     class textview  *tv=(class textview *)tva;
     class text *txt = (class text *)(tv->dataobject);
     long pos = (tv)->GetDotPosition();
-    long len = (tv)->GetDotLength();
+    unsigned long len = (tv)->GetDotLength();
     class mark *mark = (txt)->CreateMark( pos, len);
     char *searchString = NULL;
 

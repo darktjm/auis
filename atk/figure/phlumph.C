@@ -141,7 +141,7 @@ long phlumph::Write(FILE  *fp, long  writeid, int  level)
 
 long phlumph::Read(FILE  *fp, long  id)
 {
-    long tid, ix, jx, val1, val2;
+    long tid, ix, jx, val1;
     int numpg;
     char namebuf[100];
 #define LINELENGTH (250)

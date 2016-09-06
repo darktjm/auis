@@ -77,10 +77,8 @@ static void clean_insert(class datacata  *self, FILE  *fp)
     long pos;
     boolean done = FALSE;
     class dataobject *o;
-    long startpos;
 
     pos = (self->tx)->GetLength()-1;
-    startpos = pos;
 
     if (fgets(buf, BUFSIZE, fp) == NULL)
 	done = TRUE; /* end of file */

@@ -67,13 +67,8 @@
 #define osi_readlink(PATH,BUF,SIZE) readlink((PATH),(BUF),(SIZE))
 
 #include <sys/lockf.h>
-#if SY_AIX12 && defined(AFS_ENV) /* hack for BSD NFS/AFS bridge flock bug */
-#define osi_ExclusiveLockNoBlock(fid)	(0)
-#define osi_UnLock(fid)			(0)
-#else
 #define osi_ExclusiveLockNoBlock(fid)	lockf((fid), F_TLOCK, 0)
 #define osi_UnLock(fid)			lockf((fid), F_ULOCK, 0)
-#endif /* SY_AIX12 && defined(AFS_ENV) */
 #define osi_O_READLOCK			O_RDWR
 #define osi_F_READLOCK			"r+"
 

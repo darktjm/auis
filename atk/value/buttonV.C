@@ -73,7 +73,7 @@ struct buttonV_rl {
 #define CLOSEBUTTON TRUE
 /****************************************************************/
 /*		private functions				*/
-/****************************************************************
+/****************************************************************/
 
 #define DEFAULTPCT 10
 
@@ -502,6 +502,8 @@ class valueview * buttonV::DoHit( enum view_MouseAction  type,long  x,long  y,lo
 		    this->current = NULL;
 		}
 		return this;
+	    default:
+	        break;
 	}
     }
     switch(type){
@@ -537,6 +539,8 @@ class valueview * buttonV::DoHit( enum view_MouseAction  type,long  x,long  y,lo
 		this->current = rl;
 	    }
 	    break;
+	default:
+	    break;
     } 
     return this;
 }
@@ -544,7 +548,7 @@ class valueview * buttonV::DoHit( enum view_MouseAction  type,long  x,long  y,lo
 class view * buttonV::Hit(enum view_MouseAction  type, long  x , long  y , long  numberOfClicks)
                     {/* should probably just restore this functionality to valueview,
 	with a way to optionly set it */
-	 short sendEvent;
+	 short sendEvent = FALSE;
 	 class valueview *vself = (class valueview *) this;
 	 if(((class valueview *) this)->HasInputFocus == FALSE)
 	     (this)->WantInputFocus(this);
@@ -595,6 +599,8 @@ class view * buttonV::Hit(enum view_MouseAction  type, long  x , long  y , long 
 			     sendEvent = TRUE;
 
 		     }
+		     break;
+		 default:
 		     break;
 	     }
 	 }

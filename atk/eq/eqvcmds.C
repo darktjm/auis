@@ -46,6 +46,8 @@
 #include <view.H>
 #include <message.H>
 
+#include "eqview.h"
+
 #define MAXFILENAME 400
 
 
@@ -454,6 +456,8 @@ void eqview_DeleteBackward(class eqview  *self)
 	else
 	    return;
 	break;
+    default: // only care about above two
+	break;
     }
     while (!(eqptr)->Access( start)->has_hot_spot)
 	start -= 1;
@@ -487,6 +491,8 @@ void eqview_DeleteForward(class eqview  *self)
 	    stop = (eqptr)->FindEndGroup( stop)+1;
 	else
 	    return;
+	break;
+    default: // only care about above two
 	break;
     }
     while (!(eqptr)->Access( stop)->has_hot_spot)
@@ -991,7 +997,7 @@ void eqview_DumpAndWrite(class eqview  *self)
     FILE *file;
     class eq *eqptr = Eq(self);
 
-    if (file = fopen("new.eq", "w"))
+    if ((file = fopen("new.eq", "w")))
 	(eqptr)->Write( file, 0L, 1);
     else
 	message::DisplayString(self, 0, "Couldn't write to file new.eq.");
@@ -1125,8 +1131,6 @@ static void CompletionSplot(char  *name , char  *original, struct eq_completespl
 
 static enum message_CompletionCode EqCompletionProc(char  *string, class eqview  *self, char  *buffer, int  buffersize)
 {
-    struct helpAlias *ta;
-    int ix, jx;
     char origstr[64];
     struct eq_completesplot hcsplot;
 
@@ -1235,7 +1239,7 @@ void eqview_SuperScript(class eqview  *self)
     (self)->SetDotLength( 0);
     (self)->SetDotPosition( pos = (pos + len));
 
-    if (n = (eqptr)->DoScript( pos, SUP, "sup { zilch ^}"))
+    if ((n = (eqptr)->DoScript( pos, SUP, "sup { zilch ^}")))
 	(self)->SetDotPosition( n);
     (self)->Changed( EQVIEW_eq);
 }
@@ -1250,7 +1254,7 @@ void eqview_SubScript(class eqview  *self)
     (self)->SetDotLength( 0);
     (self)->SetDotPosition( pos = (pos + len));
 
-    if (n = (eqptr)->DoScript( pos, SUB, "sub { zilch ^}"))
+    if ((n = (eqptr)->DoScript( pos, SUB, "sub { zilch ^}")))
 	(self)->SetDotPosition( n);
     (self)->Changed( EQVIEW_eq);
 }
@@ -1265,7 +1269,7 @@ void eqview_AboveScript(class eqview  *self)
     (self)->SetDotLength( 0);
     (self)->SetDotPosition( pos = (pos + len));
 
-    if (n = (eqptr)->DoScript( pos, ABOVE, "above { zilch ^}"))
+    if ((n = (eqptr)->DoScript( pos, ABOVE, "above { zilch ^}")))
 	(self)->SetDotPosition( n);
     (self)->Changed( EQVIEW_eq);
 }
@@ -1280,7 +1284,7 @@ void eqview_BelowScript(class eqview  *self)
     (self)->SetDotLength( 0);
     (self)->SetDotPosition( pos = (pos + len));
 
-    if (n = (eqptr)->DoScript( pos, BELOW, "below { zilch ^}"))
+    if ((n = (eqptr)->DoScript( pos, BELOW, "below { zilch ^}")))
 	(self)->SetDotPosition( n);
     (self)->Changed( EQVIEW_eq);
 }

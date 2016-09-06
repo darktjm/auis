@@ -4,8 +4,4 @@
 \* ********************************************************************** */
 #define	IHaveSubdirs
 
-#ifdef	WM_ENV
-LIB = lib
-#endif /* WM_ENV */
-
-SUBDIRS = $(LIB) cmd fonts
+SUBDIRS = cmd fonts

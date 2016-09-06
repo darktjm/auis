@@ -24,7 +24,7 @@
 #include "HTInit.h"				         /* Implemented here */
 
 /* Note: Wildcard is no longer `*' (see further dovn) */
-PUBLIC void HTFormatInit ARGS1(HTList *, c)
+PUBLIC void HTFormatInit (HTList * c)
 {
 #ifdef NeXT
     HTSetPresentation(c,"application/postscript", "open %s",	NULL, 1.0, 2.0, 0.0);
@@ -67,7 +67,7 @@ PUBLIC void HTFormatInit ARGS1(HTList *, c)
    redirects the output stream to a temp file, e.g., HTSaveLocally()
    Henrik 01/03-94
    ----------------- */ 
-PUBLIC void HTFormatInitNIM ARGS1(HTList *, c)
+PUBLIC void HTFormatInitNIM (HTList * c)
 {
     HTSetConversion(c,"www/mime",		"*/*",		HTMIMEConvert,	1.0, 0.0, 0.0);
     HTSetConversion(c,"text/html",		"text/x-c",	HTMLToC,	0.5, 0.0, 0.0);
@@ -100,7 +100,7 @@ PUBLIC void HTFormatInitNIM ARGS1(HTList *, c)
 */
 
 #ifndef NO_INIT
-PUBLIC void HTFileInit NOARGS
+PUBLIC void HTFileInit (void)
 {
     /*		Suffix     Contenet-Type	Content-Encoding  Quality			*/
 

@@ -116,7 +116,7 @@ static void initHexTable()
 static int nextInt(FILE         *f, unsigned int len)
           { int c;
   int value= 0;
-  int count;
+  unsigned int count;
 
   len <<= 1;
   for (count = 0; count < len;) {

@@ -161,7 +161,8 @@ class menulist *stylesheetInternal::GetMenuList(proctable_fptr procname, struct 
 
 long stylesheetInternal::Read(FILE  *fp, boolean  template_c)
 {
-    int c, i;
+    int c;
+    unsigned int i;
     class style *styleptr;
     char styleName[80];
 
@@ -291,8 +292,7 @@ DEFINE_MFLEX_CLASS(stylesheet_maplist,stylesheet_mapentry,10);
 
 void stylesheet::Copy(stylesheet *dest) {
     int i;
-    boolean forcecopy=FALSE;
-    class style **styles, *overridestyle;
+    class style **styles;
     if(si==dest->si) {
 	// The dest is already using the same exact data.
 	return;

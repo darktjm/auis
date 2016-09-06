@@ -80,7 +80,6 @@ static void InsertSize(class fontselview  *self, short  val);
 static void SetSizeProc(class stringtbl  *st, class fontselview  *self, short  accnum);
 static void SetStyleProc(class stringtbl  *st, class fontselview  *self, short  accnum);
 static void SetFamilyProc(class stringtbl  *st, class fontselview  *self, short  accnum);
-static void ShowExtraProc(class fontselview  *self, long  rock);
 static char *CopyString(char  *str);
 
 
@@ -515,11 +514,6 @@ void fontselview::ShowExtraOption()
     this->sizeextra = (this->sizetbl)->AddString( this->defaultstring);
     this->styleextra = (this->styletbl)->AddString( this->defaultstring);
     this->familyextra = (this->familytbl)->AddString( this->defaultstring);
-}
-
-static void ShowExtraProc(class fontselview  *self, long  rock)
-{
-    (self)->ShowExtraOption();
 }
 
 static char *CopyString(char  *str)

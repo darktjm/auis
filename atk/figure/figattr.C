@@ -290,7 +290,7 @@ long figattr::Read(FILE  *fp, long  id)
     static char buf[LINELENGTH+1];
     char *pt, *tmp;
     int ix;
-    long ival, jval;
+    long ival;
 
     if (fgets(buf, LINELENGTH, fp) == NULL)
 	return dataobject_PREMATUREEOF;

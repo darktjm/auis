@@ -131,9 +131,9 @@ orgapp::Start(  )
   long				  id, status = true;
 
   (this)->application::Start(  );
-  if ( Org = new org )
+  if ( ( Org = new org ) )
     (Org)->SetDebug(  debug );
-  if ( OrgView = new orgv )
+  if ( ( OrgView = new orgv ) )
     (OrgView)->SetDebug(  debug );
   if ( Org  &&  OrgView )
     {
@@ -150,7 +150,7 @@ orgapp::Start(  )
     if ( *Source )
       {
       (Frame)->SetTitle(  Source );
-      if ( file = fopen( Source, "r" ) )
+      if ( ( file = fopen( Source, "r" ) ) )
         {
         filetype::Lookup( file, Source, &id, 0);
         (Org)->Read(  file, 0 );

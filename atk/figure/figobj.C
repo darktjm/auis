@@ -322,12 +322,10 @@ void figobj::DrawAttachments(class figview  *v)
     long ix;
     long x, y, dx, dy;
     short offx, offy; /* offsets to make things more visible. */
-    class graphic *BlackPattern;
     int typ;
 
     if (this->anyattachmentsactive && this->vas && this->numpts) {
 	(v)->SetTransferMode( graphic_INVERT);
-	BlackPattern = (v)->BlackPattern();
 
 	for (ix=0; ix<this->numpts; ix++) 
 	    if (this->vas[ix].on) {
@@ -457,6 +455,8 @@ boolean figobj::Reshape(enum view_MouseAction  action, class figview  *v, long  
 	    (this)->Sketch( v);
 	    (this)->MoveHandle( x, y, ptref);
 	    (this)->SetModified();
+	    break;
+	default:
 	    break;
     }
     return TRUE;

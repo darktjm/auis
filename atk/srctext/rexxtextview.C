@@ -98,7 +98,7 @@ static long matchingdelim(rexxtext *ct, long pos)
 {
     int delimcount=1;
     while (--pos>0) {
-	if ((ct)->GetChar(pos)=='*')
+	if ((ct)->GetChar(pos)=='*') {
 	    if ((ct)->GetChar(pos-1)=='/') {
 		/* found start delimiter */
 		if (--delimcount < 1)
@@ -106,6 +106,7 @@ static long matchingdelim(rexxtext *ct, long pos)
 		    return pos-1;
 	    } else if ((ct)->GetChar(pos+1)=='/')
 		++delimcount;
+	}
     }
     return 0;
 }
@@ -123,7 +124,7 @@ void rexxtextview::EndComment(char key /* must be char for "&" to work. */)
 	(GetIM())->HandleMenu(proctable::Lookup("textview-zap-region"), this, 0); /* not a particularly efficient way to call textview_ZapRegionCmd, but what else ya gonna do? */
     oldpos= pos= CollapseDot();
     while (count--) (ct)->InsertCharacters(pos++,&key,1);
-    if (oldpos && (ct)->GetChar(oldpos-1)=='*')
+    if (oldpos && (ct)->GetChar(oldpos-1)=='*') {
 	if ((ct)->GetStyle(oldpos+1)==ct->srctext::comment_style) {
 	    /* terminate existing style IF this isn't a NESTED star-slash */
 	    if ((ct)->GetStyle(matchingdelim(ct,oldpos-1)) != ct->srctext::comment_style)
@@ -137,6 +138,7 @@ void rexxtextview::EndComment(char key /* must be char for "&" to work. */)
 	    else
 		(ct)->WrapStyleNow(start,oldpos-start+1, ct->srctext::comment_style, FALSE,isnested);
 	}
+    }
     SetDotPosition(pos);
     FrameDot(pos);
     (ct)->NotifyObservers(0); 

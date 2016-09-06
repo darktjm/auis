@@ -452,6 +452,8 @@ long eq::FindEndGroup(long  i)
 		return j;
 	    level--;
 	    break;
+	default: // only care about above two
+	    break;
 	}
     }
 }
@@ -475,6 +477,8 @@ long eq::FindBeginGroup(long  i)
 		return j;
 	    level--;
 	    break;
+	default: // only care about above two
+	    break;
 	}
     }
 }
@@ -496,6 +500,8 @@ long eq::FindLeftSibling(long  i)
 	    return (this)->FindBeginGroup( j);
 	case BEGIN:
 	    return -1;
+	default: // only care about above two
+	    break;
 	}
     }
 }
@@ -511,6 +517,8 @@ long eq::FindRightSibling(long  i)
 	    return -1;
 	case BEGIN:
 	    return j;
+	default: // only care about above two
+	    break;
 	}
     }
 }

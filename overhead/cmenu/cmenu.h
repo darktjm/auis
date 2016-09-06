@@ -44,29 +44,23 @@ BEGINCPLUSPLUSPROTOS
 #define cmenu_BackgroundPixmap          2
 #define cmenu_NoSaveUnder               3
 
-#ifdef ANSI_COMPILER
 typedef void (*cmenu_FreeFunction)(void *f);
 extern struct cmenu *cmenu_Create(Display *display, Window parent,
                          const char *defaultEnvironment, cmenu_FreeFunction freeFunction);
 extern void cmenu_Destroy(struct cmenu *menu);
-extern int cmenu_AddPane(struct cmenu *menu, char *paneTitle,
+extern int cmenu_AddPane(struct cmenu *menu, const char *paneTitle,
                          int panePriority, int flags);
-extern int cmenu_DeletePane(struct cmenu *menu, char *paneTitle, int priority);
+extern int cmenu_DeletePane(struct cmenu *menu, const char *paneTitle, int priority);
 extern int cmenu_AddSelection(struct cmenu *menu, const char *paneTitle,
                int panePriority, const char *selectionLabel, int selectionPriority,
-               long selectionData, int flags, char *keys);
+               long selectionData, int flags, const char *keys);
 extern int cmenu_DeleteSelection(struct cmenu *menu, const char *paneTitle,
                int panePriority, const char *slectionLabel, int selectionPriority,
                int flags);
 extern int cmenu_Activate(struct cmenu *menu, XButtonEvent *menuEvent,
                long *data, int backgroundType, long backgroundValue);
-#else /* ANSI_COMPILER */
-typedef void (*cmenu_FreeFunction)();
-extern struct cmenu *cmenu_Create();
-extern int cmenu_AddPane();
-extern int cmenu_AddSelection();
-extern int cmenu_DeletePane();
-extern int cmenu_DeleteSelection();
-#endif /* ANSI_COMPILER */
+/* following 2 basically unused */
+extern int cmenu_SetActive(struct cmenu *menu, const char *paneTitle, int panePriority, int priority, int active);
+extern int cmenu_GetActive(struct cmenu *menu, const char *paneTitle, int panePriority, int priority);
  
 ENDCPLUSPLUSPROTOS

@@ -464,7 +464,7 @@ long layout::GetModified()
 
 /* see if b would completely obscure c */
 
-#define obscures(self, b, c) ((cLeft(b) <= 0 || cLeft(c) > 0 && cLeft(b) <= cLeft(c)) && (cWidth(b) <= 0 || cWidth(c) > 0 && cRight(b) >= cRight(c)) && (cTop(b) <= 0 || cTop(c) > 0 && cTop(b) <= cTop(c)) && (cHeight(b) <= 0 || cHeight(c) > 0 && cBottom(b) >= cBottom(c)))
+#define obscures(self, b, c) ((cLeft(b) <= 0 || (cLeft(c) > 0 && cLeft(b) <= cLeft(c))) && (cWidth(b) <= 0 || (cWidth(c) > 0 && cRight(b) >= cRight(c))) && (cTop(b) <= 0 || (cTop(c) > 0 && cTop(b) <= cTop(c))) && (cHeight(b) <= 0 || (cHeight(c) > 0 && cBottom(b) >= cBottom(c))))
 
 /* see if b and c overlap */
 

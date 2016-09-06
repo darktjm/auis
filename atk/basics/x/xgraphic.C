@@ -90,9 +90,6 @@ typedef struct _XRegion {
 /******* end of special declarations *********/
 
 ATKdefineRegistry(xgraphic, graphic, xgraphic::InitializeClass);
-#ifdef XRELEASE2_ENV
-static TempXSetRegion( Display  *dpy, GC  gc, Region  r );
-#endif /* XRELEASE2_ENV */
 class xgraphic * * xgraphic_FindGrayBlock(Display  * WhichDisplay, int  WhichScreen );
 struct  xgraphic_UpdateBlock * xgraphic_FindUpdateBlock(Display  * WhichDisplay, Drawable  WhichWindow);
 static void InstallUpdateRegion(class xgraphic  * self );
@@ -111,31 +108,10 @@ static void GetShades(class xgraphic  *self);
 class xgraphic * xgraphicGrayShade (class xgraphic  *self, long  index	);
 static void SetFGPixel( class xgraphic  *self, unsigned long  pixel );
 static void SetBGPixel( class xgraphic  *self, unsigned long  pixel );
-static void SetFGColor( class xgraphic  * self, char  *colorName, unsigned short  red , unsigned short  green , unsigned short  blue );
-static void SetBGColor(class xgraphic  *self, char  *colorName, unsigned short  red , unsigned short  green , unsigned short  blue);
 static short xgraphic_ApproximateColor( class xgraphic  *self, unsigned short  *red , unsigned short  *green , unsigned short  *blue );
 static void SetStipple(class xgraphic  *self, long  index);
-static boolean IsValidColorCell(class xgraphic  *self, class xcolor  *xc);
 static long RealDisplayClass( class xgraphic		     *self );
 
-
-#ifdef XRELEASE2_ENV
-
-static TempXSetRegion( Display  *dpy, GC  gc, Region  r )
-            {
-    int i;
-    XRectangle *xr;
-    xr = (XRectangle *) 
-    	_XAllocScratch(dpy, (unsigned long)(r->numRects * sizeof (XRectangle)));
-    for (i = 0; i < r->numRects; i++) {
-        xr[i].x = r->rects[i].x1;
-	xr[i].y = r->rects[i].y1;
-	xr[i].width = r->rects[i].x2 - r->rects[i].x1;
-	xr[i].height = r->rects[i].y2 - r->rects[i].y1;
-      }
-    XSetClipRectangles(dpy, gc, 0, 0, xr, r->numRects, Unsorted);
-}
-#endif /* XRELEASE2_ENV */
 
 class xgraphic * * xgraphic_FindGrayBlock(Display  * WhichDisplay, int  WhichScreen )
 {
@@ -837,7 +813,7 @@ static boolean xgraphic_SetupFillGC(class xgraphic  * self, class graphic  * Til
     int grayIndex;
 
 class xgraphic * tile = (class xgraphic *)Tile;
-long	fgPixel;
+unsigned long	fgPixel;
 
     /* See if transfer mode will take care of it, i.e., mode is source independent. If so, just make sure that a fillsolid mode is picked in the belief that the server won't be smart enough to realize that only the shape matters and not to waste time aligning any random tile that was left over */
     if ( (self->transferMode == graphic_BLACK) ||
@@ -897,8 +873,8 @@ long	fgPixel;
     }
     /* Not black or white, but maybe predefind gray that is already down loaded, if so just set fill style and don't download pixmap again. Note: we are exceedingly tricky by using the assignment statement to pickup the gray shade that matches, and by picking what we think will be most common ones first. We assume, as per C book, that evaluatio stops with first true test.  We include 0 and 16 for the monochrome case. */
     else   {
-	int i;
-	static int ind[] = { 0, 16, 8, 4, 12, 1, 2, 3, 5, 6, 7, 9, 10, 11, 13, 14, 15};
+	static const int ind[] = { 0, 16, 8, 4, 12, 1, 2, 3, 5, 6, 7, 9, 10, 11, 13, 14, 15};
+	unsigned int i = sizeof(ind)/sizeof(int);
 
 	if (tile != NULL)  {
 	    for (i = 0; i < (sizeof(ind)/sizeof(int)) && self->gray_shades[ind[i]] != tile; i++)
@@ -1165,11 +1141,7 @@ void xgraphic::FillRgn(class region  * Rgn,class graphic *Tile)
 	if (curBlock->updateRegionInUse) XIntersectRegion(tmpRegion->regionData, curBlock->updateRegionInUse, tmpRegion->regionData);
 
 	/* Step 5 - installing clipping rectangles */
-#ifdef XRELEASE2_ENV
-	TempXSetRegion((this)->XDisplay(), (this)->XFillGC(), tmpRegion->regionData);
-#else /* XRELEASE2_ENV */
 	XSetRegion((this)->XDisplay(), (this)->XFillGC(), tmpRegion->regionData);
-#endif /* XRELEASE2_ENV */
 
 	/* Step 6 - fill entire visual */
 	XFillRectangle((this)->XDisplay(),
@@ -1352,7 +1324,7 @@ bitsPerPixelAtDepth(Display       *disp, int            scrn, unsigned int depth
 
   xf = XListPixmapFormats(disp, &nxf);
   for (a = 0; a < nxf; a++)
-      if (xf[a].depth == depth) {
+      if (xf[a].depth == (int)depth) {
 	  unsigned int bpp=xf[a].bits_per_pixel;
 	  XFree((char *)xf);
 	  return bpp;
@@ -1412,16 +1384,13 @@ imageToXImage( class xgraphic  *self, class image  *image, unsigned int private_
   int scrn;
   Visual *visual; /* visual to use */
   Pixel *redvalue, *greenvalue, *bluevalue;
-  unsigned int newmap, linelen, dpixlen, dbits;
-  int x, y, a, b;
+  unsigned int linelen, dpixlen, dbits;
+  unsigned int x, y, a, b;
   unsigned short red, green, blue;
   class xcolor *xc;
-  XColor xcolor;
   XImageInfo *ximageinfo;
   unsigned int ddepth; /* depth of the visual to use */
-  int visual_class;
   class xcolormap **cmap = (class xcolormap**) (self)->CurrentColormap();
-  unsigned long whitepix, blackpix;
 
   if (cmap == NULL)
       return NULL;
@@ -1431,11 +1400,6 @@ imageToXImage( class xgraphic  *self, class image  *image, unsigned int private_
   visual = DefaultVisual(disp, scrn);
   ddepth = DefaultDepth(disp, scrn);
 
-  /* Get white/black pixels (XXX need to verify they are indeed white/black) */
-  whitepix = WhitePixel(disp, scrn);
-  blackpix = BlackPixel(disp, scrn);
-
-  xcolor.flags = DoRed | DoGreen | DoBlue;
   redvalue = greenvalue = bluevalue = NULL;
   if(self->index) {
       self->numColorsInIndex = 0;
@@ -1492,11 +1456,8 @@ imageToXImage( class xgraphic  *self, class image  *image, unsigned int private_
   if(visual->map_entries > 2) {
       switch (visual->c_class) {
 	  case TrueColor:
-	      { Pixel pixval;
+	      {
 	      struct pixelmap pm;
-	      unsigned int redstep, greenstep, bluestep;
-	      unsigned int redbottom, greenbottom, bluebottom;
-	      unsigned int redtop, greentop, bluetop;
 	      redvalue = (Pixel *) malloc(sizeof(Pixel) * 256);
 	      greenvalue = (Pixel *) malloc(sizeof(Pixel) * 256);
 	      bluevalue = (Pixel *) malloc(sizeof(Pixel) * 256);
@@ -1508,14 +1469,13 @@ imageToXImage( class xgraphic  *self, class image  *image, unsigned int private_
 	  /* sanity check
 	   */
 
-	      if( (pm.redcolors > visual->map_entries) ||
-		 (pm.greencolors > visual->map_entries) ||
-		 (pm.bluecolors > visual->map_entries)) {
+	      if( ((int)pm.redcolors > visual->map_entries) ||
+		 ((int)pm.greencolors > visual->map_entries) ||
+		 ((int)pm.bluecolors > visual->map_entries)) {
 		  if(imageDebug)
 		      fprintf(stderr, "Warning: inconsistency in color information (this may be ugly)\n");
 	      }
 
-	      redbottom = greenbottom = bluebottom = 0;
 	      for(a=0;a<256;a++) {
 		  redvalue[a]=((pm.redcolors*a)/256)<<pm.firstredbit;
 		  greenvalue[a]=((pm.greencolors*a)/256)<<pm.firstgreenbit;
@@ -1779,7 +1739,6 @@ SetUpXImage( class xgraphic  *self, class image  *image )
   Display *dpy = (self)->XDisplay();
   int scrn = DefaultScreen(dpy);
   class xcolormap **cmap = (class xcolormap**) (self)->CurrentColormap();
-  unsigned long dpyclass=self->DisplayClass();
 
   if (cmap == NULL)
       return;
@@ -1794,7 +1753,7 @@ SetUpXImage( class xgraphic  *self, class image  *image )
   if(!image->inited || !self->ximageinfo) {
       if(self->ximageinfo) DestroyXImageInfo(self);
       
-      if(self->ximageinfo = imageToXImage(self, image, private_cmap, fit)) {
+      if((self->ximageinfo = imageToXImage(self, image, private_cmap, fit))) {
 	  image->inited = TRUE;
   }
       }
@@ -1847,7 +1806,7 @@ static int AllocateImageColor(image *img, unsigned short r, unsigned short g, un
 	img->Compress();
 	if(img->RGBUsed()>=img->RGBSize()) {
 	    int bestdiff=0, best=(-1);
-	    int k;
+	    unsigned int k;
 	    for(k=0;k<img->RGBUsed();k++) {
 		int rd=(img->RedPixel(k)-r)>>8;
 		int gd=(img->GreenPixel(k)-g)>>8;
@@ -1926,7 +1885,7 @@ void xgraphic::ReadImage(long SrcX, long SrcY, class image *img, long DestX, lon
 
     switch(v->c_class) {
 	case TrueColor: {
-	    int x, y, i;
+	    int x, y;
 	    pm.redcolors--;
 	    pm.greencolors--;
 	    pm.bluecolors--;
@@ -1956,7 +1915,8 @@ void xgraphic::ReadImage(long SrcX, long SrcY, class image *img, long DestX, lon
 	    if(pm.bits_per_pixel<=8) goto AnyOl8BitOrLessDisplay;
 	    unsigned int maxcolors=MAX(MAX(pm.redcolors, pm.greencolors), pm.bluecolors);
 
-	    int i, x, y;
+	    unsigned int i;
+	    int x, y;
 	    XColor *pixels=(XColor *)malloc(sizeof(XColor)*maxcolors);
 	    if(pixels==NULL) {
 		fprintf(stderr, "ReadImage error: Couldn't get colormap.\n");
@@ -2130,13 +2090,8 @@ void xgraphic_LocalSetClippingRect(class xgraphic  * self ,struct xgraphic_Updat
 	    }
 	}
 
-#ifdef XRELEASE2_ENV
-	TempXSetRegion((self)->XDisplay(), (self)->XGC(), (clipRegion)->GetRegionData());
-	TempXSetRegion((self)->XDisplay(), (self)->XFillGC(), (clipRegion)->GetRegionData());
-#else /* XRELEASE2_ENV */
 	XSetRegion((self)->XDisplay(), (self)->XGC(), (clipRegion)->GetRegionData());
 	XSetRegion((self)->XDisplay(), (self)->XFillGC(), (clipRegion)->GetRegionData());
-#endif /* XRELEASE2_ENV */
 	/* and toss temporary region */
         delete clipRegion;
     }
@@ -2600,7 +2555,6 @@ class graphic * xgraphic::GrayPattern(short  IntensityNum , short  IntensityDeno
       return (class graphic *) this->gray_levels[IntensityNum];
 
   if ((this)->DisplayClass() & graphic_StaticGray) {
-      char *colorName = NULL;
       unsigned short red, blue, green;
       short FGindex, BGindex;
 
@@ -2682,7 +2636,6 @@ static void SetBGPixel( class xgraphic  *self, unsigned long  pixel )
 static short xgraphic_ApproximateColor( class xgraphic  *self,unsigned short  *red , unsigned short  *green , unsigned short  *blue )
       {
     short		    ind = 0;
-  class xcolor *xc;
   class xcolormap **cmap = (class xcolormap **) (self)->CurrentColormap();
 
   if (cmap == NULL)

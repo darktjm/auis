@@ -45,7 +45,7 @@ u_long ThisHostAddr;
 
 static void maptolower(char  *str)
 {
-    int i;
+    unsigned int i;
     for (i = 0; i < strlen(str); i++){
 	if (isupper(str[i])){
 	    str[i] = tolower(str[i]);
@@ -92,12 +92,7 @@ static void maptolower(char  *str)
 	ReportInternalError(self, "console:<make_socket> bind failed");
  */
 
-#ifdef ANSI_COMPILER
 int make_socket(int  port)
-#else
-int make_socket(port)
-int port;
-#endif
 {
 
     int desc, protonum;
@@ -165,7 +160,8 @@ char ConsoleMessage[MESSAGESIZE+100] = "";
 extern int ConsoleSocket;
 int FakeCheckConsoleSocket()
 {
-    int j, len;
+    int j;
+    socklen_t len;
     static char hostname[80];
     struct hostent *hp;
     static u_long lastHostAddr = 0;

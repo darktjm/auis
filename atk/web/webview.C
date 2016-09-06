@@ -59,6 +59,8 @@ ATK_IMPL("webview.H")
 #include <environment.H>
 #include <viewref.H>
 
+#include "web.h"
+
 static char *starttm;
 
 static class menulist *web_Menus;
@@ -74,7 +76,6 @@ static proctable_fptr frame_OpenFile;
 ATKdefineRegistry(webview, htmltextview, webview::InitializeClass);
 
 static void lpinit();
-static void phist(char  *s, struct webapp_webhist  *wp);
 static int HLtoHTML(FILE  *in, FILE  *outf);
 
 
@@ -217,7 +218,7 @@ History(class view  *self) {
 	    return;
 	}
 	delete [] hcp;
-	if (res < 0 || res>=wp->history.GetN()) return;
+	if (res < 0 || res>=(int)wp->history.GetN()) return;
 	webview::movehist(self, res + 100,  self);
 }
 
@@ -533,9 +534,9 @@ webview::InitializeClass() {
 	bind::BindList(webBindings, NULL, web_Menus, 
 		&webview_ATKregistry_ );
 
-	if (tempProc = proctable::Lookup("frame-visit-file"))
+	if ((tempProc = proctable::Lookup("frame-visit-file")))
 		frame_VisitFile = proctable::GetFunction(tempProc);
-	if (tempProc = proctable::Lookup("frame-new-window"))
+	if ((tempProc = proctable::Lookup("frame-new-window")))
 		frame_NewWindow 
 				= proctable::GetFunction(tempProc);
 	lastPattern = NULL;
@@ -543,7 +544,7 @@ webview::InitializeClass() {
 	return TRUE;
 }
 
-
+#if 0
 	static void 
 phist(char  *s, struct webapp_webhist  *wp) {
 	class web *w;
@@ -560,8 +561,9 @@ phist(char  *s, struct webapp_webhist  *wp) {
 	}
 	printf("---\n");
 }
+#endif
 
-buffer *pushbuf(buffer  *b, struct webapp_webhist  *wp) {
+static buffer *pushbuf(buffer  *b, struct webapp_webhist  *wp) {
     size_t n=wp->history.GetN();
     size_t i;
     // grn... wp->hpos<n is only true after the first pushbuf right...? -robr
@@ -584,7 +586,7 @@ buffer *pushbuf(buffer  *b, struct webapp_webhist  *wp) {
     return b;
 }
 
-buffer *popbuf(buffer *, struct webapp_webhist  *wp) {
+static buffer *popbuf(buffer *, struct webapp_webhist  *wp) {
     if(wp->hpos>0) {
 	wp->hpos--;
 	return wp->history[wp->hpos];
@@ -592,7 +594,7 @@ buffer *popbuf(buffer *, struct webapp_webhist  *wp) {
 }
 
 
-buffer *fwdbuf(buffer *, struct webapp_webhist  *wp) {
+static buffer *fwdbuf(buffer *, struct webapp_webhist  *wp) {
     if(wp->hpos<wp->history.GetN()-1) {
 	wp->hpos++;
 	return wp->history[wp->hpos];
@@ -681,7 +683,7 @@ webview::movehist(class view  *self, int  which,  class view  *v) {
 	}
 	else if (which >= 100) {
 	    which = which - 100;
-	    if(which<wp->history.GetN()) {
+	    if(which<(int)wp->history.GetN()) {
 		wp->hpos=which;
 		buffer=wp->history[wp->hpos];
 	    }
@@ -697,6 +699,7 @@ webview::movehist(class view  *self, int  which,  class view  *v) {
         }
 }
 
+#if 0
 static	void 
 webview_back(class view  *v, enum view_MouseAction  action,  
 				view  *self) {
@@ -707,12 +710,12 @@ webview_back(class view  *v, enum view_MouseAction  action,
 		webview::movehist(self, FORWARD, v);
 	}
 }
+#endif
 
 #ifndef TEXTVIEWREFCHAR
 #define TEXTVIEWREFCHAR ((unsigned char)255)
 #endif
 
-extern dataobject *NewFixupText(dataobject *obj);
 // FixupBuffer will examine the buffer's data, if it is a text with only whitespace,
 // hidden insets, and one table inset it will replace the text with the table.
 static void FixupBuffer(buffer *buf) {
@@ -731,7 +734,7 @@ static void FixupBuffer(buffer *buf) {
 }
 
 
-void webview_handleload(class view  *self, class webcom	 *ww, int  )
+static void webview_handleload(class view  *self, class webcom	 *ww, int  )
 {
     class frame *frame;
     class buffer *buffer;
@@ -1007,7 +1010,8 @@ struct perlog{
 	struct perlog *next;
 };
 
-// never called 
+// never called
+#if 0
 	static struct perlog *
 readlogs(char  *filename)  {
 	FILE *f;
@@ -1042,6 +1046,7 @@ readlogs(char  *filename)  {
 	fclose(f);
 	return last;
 }
+#endif
 
 	// these two should be in text.C and exported as methods.
 static class environment *CheckHidden(class text *self, long pos)

@@ -200,25 +200,25 @@ static void ZeroSpacing() {  /* for debugging */
  */
 
 /* macro below fills in font member */
-struct {
+static struct {
     const char *fontfamily;
     long fontstyle;
     long fontsize;
-    class fontdesc *font;
+    class fontdesc *font; /* filled in below */
 } fonts [MAX_simple][MAX_eqstyle] = {
     /* D_EQSTYLE		T_EQSTYLE            S_EQSTYLE            SS_EQSTYLE */
     /* ITALIC */
-    "Andy",fontdesc_Italic,12,0, "Andy",fontdesc_Italic,12,0, "Andy",fontdesc_Italic,10,0, "Andy",fontdesc_Italic,8,0,
+    {{"Andy",fontdesc_Italic,12,0}, {"Andy",fontdesc_Italic,12,0}, {"Andy",fontdesc_Italic,10,0}, {"Andy",fontdesc_Italic,8,0}},
     /* ROMAN */
-    "Andy",fontdesc_Plain,12,0, "Andy",fontdesc_Plain,12,0, "Andy",fontdesc_Plain,10,0, "Andy",fontdesc_Plain,8,0,
+    {{"Andy",fontdesc_Plain,12,0}, {"Andy",fontdesc_Plain,12,0}, {"Andy",fontdesc_Plain,10,0}, {"Andy",fontdesc_Plain,8,0}},
     /* BOLD */
-    "Andy",fontdesc_Bold,12,0, "Andy",fontdesc_Bold,12,0, "Andy",fontdesc_Bold,10,0, "Andy",fontdesc_Bold,8,0,
+    {{"Andy",fontdesc_Bold,12,0}, {"Andy",fontdesc_Bold,12,0}, {"Andy",fontdesc_Bold,10,0}, {"Andy",fontdesc_Bold,8,0}},
     /* SYMBOL */
-    "AndySymbol",fontdesc_Plain,12,0, "AndySymbol",fontdesc_Plain,12,0, "AndySymbol",fontdesc_Plain,10,0, "AndySymbol",fontdesc_Plain,8,0,
+    {{"AndySymbol",fontdesc_Plain,12,0}, {"AndySymbol",fontdesc_Plain,12,0}, {"AndySymbol",fontdesc_Plain,10,0}, {"AndySymbol",fontdesc_Plain,8,0}},
     /* SYMBOLA */
-    "AndySymbolA",fontdesc_Plain,12,0, "AndySymbolA",fontdesc_Plain,12,0, "AndySymbolA",fontdesc_Plain,10,0, "AndySymbolA",fontdesc_Plain,8,0,
+    {{"AndySymbolA",fontdesc_Plain,12,0}, {"AndySymbolA",fontdesc_Plain,12,0}, {"AndySymbolA",fontdesc_Plain,10,0}, {"AndySymbolA",fontdesc_Plain,8,0}},
     /* SYM */
-    "Sym",fontdesc_Bold,12,0, "Sym",fontdesc_Plain,12,0, "Sym",fontdesc_Plain,10,0, "Sym",fontdesc_Plain,8,0
+    {{"Sym",fontdesc_Bold,12,0}, {"Sym",fontdesc_Plain,12,0}, {"Sym",fontdesc_Plain,10,0}, {"Sym",fontdesc_Plain,8,0}}
 
 };
     
@@ -317,13 +317,13 @@ static void eqview_FormatSimple(class eqview  *self, struct formula  *f			/* pri
  */
 
 /* font member set by macro */
-struct {
+static struct {
     const char *fontfamily;
     long fontstyle;
     long fontsize;
-    class fontdesc *font;
-} exfont [1] = {
-    "ex",fontdesc_Plain,12,NIL
+    class fontdesc *font; /* filled in below */
+} exfont [] = {
+    { "ex",fontdesc_Plain,12,NIL }
 };
 
 #define EXFONT(n) (exfont[n].font ? exfont[(int)n].font \
@@ -459,7 +459,7 @@ char *eqview_Extendable(class eqview  *self, struct formula  *f , struct formula
 		f->min.y = j;
 	    if ((j += info.height-1) > f->max.y)
 		f->max.y = j;
-	    y += exHeightTable[*s];
+	    y += exHeightTable[(unsigned char)*s];
 	}
 
 	/* center adjacent items */
@@ -729,6 +729,9 @@ static struct formula *eqview_FormatGroup(class eqview  *self, class eq  *eqptr,
 		f2->posp.y = f1->posp.y + f1->max.y - f2->min.y;
 	    if (f2->symbol->type==EXTEND)
 		pile_axis_y = f2->posp.y;
+	    break;
+	case MAX_align: // to shut up warning
+	    break;
 	}
 
 	/* script positions (f2script[]->posp) relative to group */
@@ -859,7 +862,7 @@ struct formula *eqview::Draw(class eq  *eqptr, struct formula  *f, long  x , lon
 			(this)->DrawText( s, 1, view_ATLEFT|view_ATBASELINE);
 			(this_c->font)->CharSummary( (this)->GetDrawable(), *s, &info);
 			xPos += info.xSpacing;
-			yPos += exHeightTable[*s];
+			yPos += exHeightTable[(unsigned char)*s];
 			(this)->MoveTo( xPos, yPos);
 			s++;
 		    }
@@ -917,11 +920,12 @@ long eqview::Find(class eq  *eqptr, long  mx , long  my , long  restrict)
 		nearest_i = i;
 	    }
 	}
-	if (restrict && !f->transparent)
+	if (restrict && !f->transparent) {
 	    if (f->symbol->type == BEGIN)
 		i = (eqptr)->FindEndGroup( i+1);
 	    else if (f->symbol->type == END)
 		break;
+	}
     }
     return nearest_i;
 }
@@ -954,6 +958,8 @@ static int eqview_Box(class eq  *eqptr, long  pos , long  start , long  stop , l
 		break;
 	    case END:
 		return i;
+	    default: // EQSTYLE SCRIPT ALIGN
+	        break;
 	}
     }
     return stop;

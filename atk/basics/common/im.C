@@ -3259,9 +3259,6 @@ static const struct wsinfo {
     const char *keyName;
     const char *windowSystemName;
 } knownWindowSystems[] = {
-#ifdef WM_ENV
-    {"andrewwm", "wmws"},
-#endif /* WM_ENV */
     {"x11", "xws"},
     {"pm", "pmws"}
 };
@@ -3320,10 +3317,6 @@ boolean im::InitializeClass()
 	}
 	wsName = windowsys->windowSystemName;
     }
-#ifdef WM_ENV
-    else if ((envString = environ::Get("WMHOST")) != NULL) 
-	wsName = "wmws";
-#endif /* WM_ENV */
 #ifdef X11_ENV
     else if ((envString = environ::Get("DISPLAY")) != NULL) 
 	wsName = "xws";

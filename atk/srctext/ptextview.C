@@ -118,7 +118,7 @@ void ptextview::Paren(char key /* must be char for "&" to work. */)
 	    /* wrap a new style */
 	    long start=oldpos-1;
 	    while (--start>0) {
-		if ((pt)->GetChar(start)=='*')
+		if ((pt)->GetChar(start)=='*') {
 		    if ((pt)->GetChar(start-1)=='(') {
 			/* found start of comment, wrap style */
 			--start;
@@ -129,6 +129,7 @@ void ptextview::Paren(char key /* must be char for "&" to work. */)
 		    } else if ((pt)->GetChar(start+1)==')')
 			/* uh-oh, found another end of comment! */
 			break;
+		}
 	    }
 	}
     } else
@@ -139,7 +140,7 @@ void ptextview::Paren(char key /* must be char for "&" to work. */)
 static void braceslash(ptextview *self, char key /* must be char for "&" to work. */)
 {
     ptext *pt = (ptext *)(self)->GetDataObject();
-    int count = ((self)->GetIM())->Argument(), i, pos, oldpos;
+    int count = ((self)->GetIM())->Argument(), pos, oldpos;
 
     if (IsAutoCutMode() && (self)->GetDotLength()>0)
 	((self)->GetIM())->HandleMenu(proctable::Lookup("textview-zap-region"), self, 0); /* not a particularly efficient way to call textview_ZapRegionCmd, but what else ya gonna do? */
@@ -163,14 +164,14 @@ static void braceslash(ptextview *self, char key /* must be char for "&" to work
 		    break;
 	    }
 	}
-    else if (key == '/') 
+    else if (key == '/') {
 	if((pt)->GetStyle(oldpos) == pt->srctext::comment_style)
 	    ((pt->text::rootEnvironment)->GetEnclosing(oldpos))->SetStyle(FALSE, FALSE);
 	else {
 	    /* wrap a new style */
 	    long start=oldpos-1;
 	    while (--start>0) {
-		if ((pt)->GetChar(start)=='*')
+		if ((pt)->GetChar(start)=='*') {
 		    if ((pt)->GetChar(start-1)=='/') {
 			/* found start of comment, wrap style */
 			--start;
@@ -181,8 +182,10 @@ static void braceslash(ptextview *self, char key /* must be char for "&" to work
 		    } else if ((pt)->GetChar(start+1)=='/')
 			/*uh-oh, found another end of comment! */
 			break;
+		}
 	    }
 	}
+    }
     (self)->SetDotPosition(pos);
     (self)->FrameDot(pos);
     (pt)->NotifyObservers(0);

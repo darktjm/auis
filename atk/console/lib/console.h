@@ -444,9 +444,6 @@ extern void CheckMail(class consoleClass  *self, int  requested);
 extern void CheckDirectories(class consoleClass  *self);
 extern int CheckPrint(class consoleClass  *self);
 extern void CheckOutgoingMail(class consoleClass  *self);
-#ifdef AFS_ENV
-extern void PrefetchMailFiles(class consoleClass  *self, char  *MailboxDir, int  requested);
-#endif /* AFS_ENV */
 extern void ParseMail(class consoleClass  *self, char  *fname, int  requested);
 extern void CheckNet();
 extern void InitNet();

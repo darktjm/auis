@@ -153,6 +153,8 @@
 #include <ness.H>
 #include <rules.H>
 
+#include "nessint.h"
+
 /* functions declared FORWARD and not yet defined */
 static class nesssym *ForwardFuncs = NULL;   
 
@@ -532,22 +534,23 @@ fixRefSysGlob(class nessmark  *m, TCodeRef  loc, TGlobRef  val) {
 			sizeof(TGlobRef), (char *)&val, sizeof(TGlobRef));
 }
 /* refAddress(m, op, address)
-	append to m the opcode op with the four-byte operand rand 
+	append to m the opcode op with the 4/8-byte operand rand 
 */
 	void
 refAddress(class nessmark  *m, char op, struct callnode *address) {
 	long pos, len;
-	char s[5];
+	unsigned long a = (unsigned long)address, i;
+	char s[1+sizeof(void *)];
 	if (curComp->Locating)  {compileLocate(5); return;}
 	s[0] = op;
-	s[1] = ((unsigned long)address)>>24;
-	s[2] = ((unsigned long)address)>>16;
-	s[3] = ((unsigned long)address)>>8;
-	s[4] = ((unsigned long)address) & 0xFF;
+	for(i = 0; i < sizeof(void *); i++) {
+		s[sizeof(void *) - i] = a & 0xff;
+		a >>= 8;
+	}
 	pos = (m)->GetPos();
 	len = (m)->GetLength();
-	((m)->GetText())->InsertCharacters( pos+len, s, 5);
-	(m)->SetLength( len+5);
+	((m)->GetText())->InsertCharacters( pos+len, s, 1 + sizeof(void *));
+	(m)->SetLength( len+1 + sizeof(void *));
 }
 
 /* genLinkGlobal(sym)
@@ -579,7 +582,6 @@ RememberFixup(TCodeRef  refloc, class nesssym  *sym) {
 	static void
 DoFixups(unsigned long  lpsize) {
 	struct fixupstackrefnode *f, *t;
-	long addr;
 	struct vardefnode *vdnode;
 	for (f = curComp->varfixups; f != NULL; f = t) {
 		if (f->sym != NULL) {
@@ -733,8 +735,6 @@ startfunc(class nesssym  *fname, Texpr  functype) {
 	locallist is list of locally declared variables
 		if local list is -1, this is a FORWARD declaration
  */
-	extern void ness_ExportFunction(ness *self, nesssym *fname, funcnode *func);
-	
 	void
 finishfunc(class nesssym  *fname, class nesssym  *parmlist, 
 		class nesssym  *locallist, boolean Export) {
@@ -1392,9 +1392,9 @@ genParmDecl(class nesssym  *sym  , Texpr  type) {
 	void
 genCheckEndtag(class nesssym  *tag, long  desired) {
 	long tagtok;
-	const char *desiredname;
+	const char *desiredname = NULL;
 	char buf[300];
-	char constructForTag;
+	char constructForTag = 0;
 
 	tagtok = tag->toknum;
 	if (tagtok == desired)

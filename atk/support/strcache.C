@@ -38,9 +38,8 @@ static class strcache *gcache=NULL;
 
 
 ATKdefineRegistry(strcache, ghash, strcache::InitializeClass);
-static int lchash(char  *key);
-static int lccomp(char  *a ,char  *b);
-static boolean EnumProc(struct egg  *e, struct enumerate  *rock);
+static int lchash(const char  *key);
+static int lccomp(const char  *a ,const char  *b);
 char *Enumerate(class ghash  *self,procedure  proc,long  rock);
 boolean DumpStr(long  rock, char  *val, char  *key, class strcache  *self);
 

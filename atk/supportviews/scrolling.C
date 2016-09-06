@@ -157,6 +157,8 @@ void ScrollInterfaceClassic::Shift(scroll_Direction dir) {
 	    ::fns=horiz;
 	    if(hzone) hzone(vw, scroll_MOTIFBOTTOMENDZONE, view_RightDown);
 	    break;
+	case scroll_None:
+	    break;
     }
 }
 
@@ -190,6 +192,8 @@ void ScrollInterfaceClassic::Extreme(scroll_Direction dir) {
 	    ::fns=horiz;
 	    if(hzone) hzone(vw, scroll_BOTTOMENDZONE, view_LeftDown);
 	    break;
+	case scroll_None:
+	    break;
     }
 }
 
@@ -199,11 +203,11 @@ void ScrollInterfaceClassic::UpdateRegions(class scroll &sc) {
     const struct scrollfns *vert=fns[scroll_VERT];
     const struct scrollfns *horiz=fns[scroll_HORIZ];
     long vrange=0;
-    long vsb, vse;
-    long vdb, vde;
+    long vsb = 0, vse = 0;
+    long vdb = 0, vde = 0;
     long hrange=0;
-    long hsb, hse;
-    long hdb, hde;
+    long hsb = 0, hse = 0;
+    long hdb = 0, hde = 0;
     if(vert!=NULL) {
 	vert->GetInfo(vw, &vtotal,&vseen,&vdot);
 
@@ -359,7 +363,7 @@ void ScrollRegion::ComputeRect(class scroll &scroll, int stype, const struct rec
 		    if(area.width+area.left>=bar.left+bar.width) {
 			long diff=(area.width + area.left) - (bar.left + bar.width);
 			area.left-=diff;
-			area.width=area.width-=diff;
+			area.width-=diff;
 			if(area.left<bar.left) area.left=bar.left;
 		    }
 		}
@@ -389,7 +393,7 @@ void ScrollRegion::ComputeRect(class scroll &scroll, int stype, const struct rec
 		    if(area.height+area.top>=bar.top+bar.height) {
 			long diff=(area.height + area.top) - (bar.top + bar.height);
 			area.top-=diff;
-			area.height=area.height-=diff;
+			area.height-=diff;
 			if(area.top<bar.top) area.top=bar.top;
 		    }
 		}

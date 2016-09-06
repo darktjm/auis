@@ -87,7 +87,8 @@ ATK_IMPL("chart.H")
 #define  ItemValueGreatest	     (self->item_value_greatest)
 #define  ItemValueLeast		     (self->item_value_least)
 #define  ItemValueSpan		     (self->item_value_span)
-#define	 ITEMFONTNAME		     (self->item_font_name)
+
+#define  ITEMFONTNAME		     (self->item_font_name)
 
 #define  ItemName(x)		     ((x)->name)
 #define  ItemDatum(x)		     ((x)->datum)
@@ -357,7 +358,7 @@ void Reader( class chart	    	      *self )
   struct apt_field	     *field;
 
   IN(Reader);
-  while ( field = (self )->ReadObjectField( ) )
+  while ( ( field = (self )->ReadObjectField( ) ) )
     {
     DEBUGst(Field-Name,field->name);
     DEBUGst(Field-Content,field->content);
@@ -418,19 +419,19 @@ void Parse_Item_Field( class chart		      *self, const char			      *string )
 
   IN(Parse_Item_Field);
   DEBUGst(Item,string);
-  if ( fields = (self)->ParseFieldContent(  string ) )
+  if ( ( fields = (self)->ParseFieldContent(  string ) ) )
     {
     extract = Extract_Field_Value( self, (const char **)fields, "Name" );
-    if ( item = (self)->CreateItem(  extract, 0 ) )
+    if ( ( item = (self)->CreateItem(  extract, 0 ) ) )
       {
       if ( extract )  free( extract );
-      if ( extract = Extract_Field_Value( self, (const char **)fields, "Value" ) )
+      if ( ( extract = Extract_Field_Value( self, (const char **)fields, "Value" ) ) )
 	{
 	sscanf( extract, "%ld", &value );
 	SetItemValue( self, item, value );
         free( extract );
 	}
-      if ( extract = Extract_Field_Value( self, (const char **)fields, "Position" ) )
+      if ( ( extract = Extract_Field_Value( self, (const char **)fields, "Position" ) ) )
 	{
 	sscanf( extract, "%ld", &value );
 	ItemPosition(item) = value;
@@ -490,7 +491,6 @@ void Writer( class chart		      *self )
 long
 chart::Write( FILE			      *file, long			       writeID, int			       level )
           {
-  class chart *self=this;
   IN(chart::Write);
   (this)->WriteObject(  file, writeID, level, (apt_writefptr) Writer );
   OUT(chart::Write);
@@ -526,7 +526,7 @@ chart::ModuleName( const char			      *moniker )
 
   IN(chart_ModuleName);
   DEBUGst(Moniker,moniker);
-  if ( monikers = (this )->Monikers( ) )
+  if ( ( monikers = (this )->Monikers( ) ) )
     {
     while ( monikers->chart_moniker )
       {
@@ -555,7 +555,7 @@ chart::CreateItem( const char			      *name, long			       datum )
   struct chart_item	     *item, *next = ItemAnchor;
 
   IN(chart_CreateItem);
-  if ( item = (struct chart_item *) calloc( 1, sizeof(struct chart_item) ) )
+  if ( ( item = (struct chart_item *) calloc( 1, sizeof(struct chart_item) ) ) )
     {
     ItemPosition(item) = ++ItemCount;
     apts::CaptureString( name, &ItemName(item) );
@@ -738,7 +738,7 @@ chart::Sort( long			       mode, chart_sortfptr handler )
   chart_type_item	      item = ItemAnchor;
 
   IN(chart_Sort);
-  if ( vector = (chart_type_item *) malloc( ItemCount * sizeof(chart_type_item) ) )
+  if ( ( vector = (chart_type_item *) malloc( ItemCount * sizeof(chart_type_item) ) ) )
     {
     while ( item )
       {

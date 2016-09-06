@@ -32,22 +32,20 @@
 */
 
 extern void HTHistory_record
-  PARAMS(
-    (HTAnchor * destination)
-  );
+    (HTAnchor * destination);
 
 /*              Go back in history (find the last visited node)
 **              ------------------
 */
 
-extern HTAnchor * HTHistory_back        PARAMS((HTAnchor * cur_anch));
+extern HTAnchor * HTHistory_back        (HTAnchor * cur_anch);
 
-extern HTAnchor * HTHistory_forward     PARAMS((HTAnchor * cur_anch));
+extern HTAnchor * HTHistory_forward     (HTAnchor * cur_anch);
 
 /* FIXME: Should we add a `sticky' option ? */
-extern HTAnchor * HTHistory_backtrack   NOPARAMS;
+extern HTAnchor * HTHistory_backtrack   (void);
 
-extern BOOL HTHistory_canBacktrack      NOPARAMS;
+extern BOOL HTHistory_canBacktrack      (void);
 
 /*              Browse through references in the same parent node
 **              -------------------------------------------------
@@ -57,14 +55,10 @@ extern BOOL HTHistory_canBacktrack      NOPARAMS;
 */
 
 extern HTAnchor * HTHistory_moveBy
-  PARAMS(
-     (int offset)
-     );
+     (int offset);
 
 extern BOOL HTHistory_canMoveBy
-  PARAMS(
-     (int offset)
-     );
+     (int offset);
 
 #define HTHistory_next (HTHistory_moveBy (+1))
 #define HTHistory_canNext (HTHistory_canMoveBy (+1))
@@ -81,9 +75,7 @@ extern BOOL HTHistory_canMoveBy
 */
 
 extern HTAnchor * HTHistory_read
-  PARAMS(
-    (int number)
-  );
+    (int number);
 
 /*              Recall numbered visited anchor (1 is the oldest)
 **              ------------------------------
@@ -91,9 +83,7 @@ extern HTAnchor * HTHistory_read
 */
 
 extern HTAnchor * HTHistory_recall
-  PARAMS(
-    (int number)
-  );
+    (int number);
 
 /*              Number of Anchors stored
 **              ------------------------
@@ -101,7 +91,7 @@ extern HTAnchor * HTHistory_recall
 **      This is needed in order to check the validity of certain commands
 **      for menus, etc.
 (not needed for now. Use canBacktrack, etc.)
-extern int HTHistory_count NOPARAMS;
+extern int HTHistory_count (void);
 */
 
 /*              Change last history entry
@@ -111,9 +101,7 @@ extern int HTHistory_count NOPARAMS;
 **      one, and it is the one we left from which we want to remember.
 */
 extern void HTHistory_leavingFrom
-  PARAMS(
-    (HTAnchor * anchor)
-  );
+    (HTAnchor * anchor);
 
 #endif /* HTHISTORY_H */
 /*

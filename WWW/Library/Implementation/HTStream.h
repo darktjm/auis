@@ -49,25 +49,25 @@ typedef struct _HTStreamClass {
 
         char*  name;                            /* Just for diagnostics */
                 
-        int (*_free) PARAMS((
-                HTStream*       me));
+        int (*_free) (
+                HTStream*       me);
 
-        int (*abort) PARAMS((
+        int (*abort) (
                 HTStream*       me,
-                HTError         e));
+                HTError         e);
                 
-        void (*put_character) PARAMS((
+        void (*put_character) (
                 HTStream*       me,
-                char            ch));
+                char            ch);
                                 
-        void (*put_string) PARAMS((
+        void (*put_string) (
                 HTStream*       me,
-                CONST char *    str));
+                CONST char *    str);
                 
-        void (*put_block) PARAMS((
+        void (*put_block) (
                 HTStream*       me,
                 CONST char *    str,
-                int             len));
+                int             len);
                 
                 
 } HTStreamClass;

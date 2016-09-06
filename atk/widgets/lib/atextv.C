@@ -102,16 +102,19 @@ void ATextvStateFormula::Evaluate() {
 }
 
 START_ATEXTV_CALLBACK_METHOD(WantUpdateMethod) {
+    (void)dself; /* unused */
     if(GetIM()) WantUpdate(this);
 }
 END_ATEXTV_CALLBACK_METHOD();
 
 START_ATEXTV_CALLBACK_METHOD(WantNewSizeMethod) {
+    (void)dself; /* unused */
     if(GetIM()) WantNewSize(this);
 }
 END_ATEXTV_CALLBACK_METHOD();
 
 START_ATEXTV_MOUSE_METHOD(HitMethod) {
+    (void)dself; (void)within; /* unused */
     dataViewFormula.Validate();
     if(child) {
         view *nf=NULL;
@@ -215,10 +218,11 @@ START_ATEXTV_CALLBACK_METHOD(DataViewMethod) {
 END_ATEXTV_CALLBACK_METHOD();
 
 START_ATEXTV_CALLBACK_METHOD(SizeMethod) {
+    (void)dself; /* unused */
     AText *b = (AText *)GetDataObject();
     dataViewFormula.Validate();
     struct rectangle linterior, exterior;
-    long below, oy;
+    long oy;
     linterior.left=0;
     linterior.top=0;
     linterior.width=0;
@@ -247,6 +251,7 @@ START_ATEXTV_CALLBACK_METHOD(SizeMethod) {
 END_ATEXTV_CALLBACK_METHOD();
 
 START_ATEXTV_CALLBACK_METHOD(TextMethod) {
+    (void)dself; /* unused */
     // should use a formula to set vself->interior
     struct rectangle bounds;
     GetLogicalBounds(&bounds);
@@ -267,8 +272,9 @@ START_ATEXTV_CALLBACK_METHOD(BorderMethod) {
     AShadow *asb=GetBorder();
     AFORMULA_BEGIN;
     if((boolean)(long)asb) {
-        if((boolean)dself->scrolled) if(asb) asb->UseBorder(0);
-        else if(asb) asb->UseBorder(AShadow_Plain);
+        if((boolean)dself->scrolled) {
+	    if(asb) asb->UseBorder(0);
+	} else if(asb) asb->UseBorder(AShadow_Plain);
     }
     AFORMULA_END;
     if(asb) {
@@ -295,6 +301,7 @@ START_ATEXTV_CALLBACK_METHOD(KeyStateMethod) {
 END_ATEXTV_CALLBACK_METHOD();
 
 START_ATEXTV_CALLBACK_METHOD(WantKeyStateMethod) {
+    (void)dself; /* unused */
     dataViewFormula.Validate();
     if(tv && HasInputFocus) tv->PostKeyState(NULL);
 }
@@ -313,11 +320,11 @@ static ATextvMethodAct wantkeystateact(&ATextv::WantKeyStateMethod, 0L);
 ATextv::ATextv() :
 lformula(this, &lact, &updateact),
 bformula(this, &bact, &updateact),
-size(this, &sizeact, &newsizeact),
 scaleFormula(this, &scaleact),
-dataViewFormula(this, &viewdataact, &updateact),
 keyStateFormula(this, &keystateact, &wantkeystateact),
-stateFormula(this)
+dataViewFormula(this, &viewdataact, &updateact),
+stateFormula(this),
+size(this, &sizeact, &newsizeact)
 {
     ATKinit;
     tv=NULL;
@@ -339,7 +346,6 @@ ATextv::~ATextv() {
 
 void ATextv::PostKeyState(keystate  *ks)
 {
-    AText *at=(AText *)GetDataObject();
     keyStateFormula.Validate();
     if(keyState && postKeyState) {
         keystate *pks=(keyState)->AddBefore( ks);
@@ -384,7 +390,6 @@ void ATextv::TextDimensions(long &w, long &h, long lrm, long tbm) {
 }
 
 void ATextv::FullUpdate(enum view_UpdateType type, long /* left */, long /* top */, long /* width */, long /* height */) {
-    AText *b=(AText *)GetDataObject();
     struct rectangle bounds;
     GetLogicalBounds(&bounds);
     if(border) {
@@ -531,7 +536,6 @@ void ATextv::RecSrchExpose(const struct rectangle &logical, struct rectangle &hi
 
 void ATextv::DesiredPrintSize(long width, long height, enum view_DSpass pass, long *desiredwidth, long *desiredheight) 
 {
-    AText *dobj = (AText *)(this->GetDataObject());
     dataViewFormula.Validate();
     if(child) {
         child->DesiredPrintSize(width, height, pass, desiredwidth, desiredheight);
@@ -551,7 +555,6 @@ void *ATextv::GetPSPrintInterface(const char *printtype)
 
 void ATextv::GetPrintOrigin(long w, long h, long *xoff, long *yoff) {
     dataViewFormula.Validate();
-    AText *dobj = (AText *)(this->GetDataObject());
     if(child) {
         child->GetPrintOrigin(w, h, xoff, yoff);
     }
@@ -560,7 +563,6 @@ void ATextv::GetPrintOrigin(long w, long h, long *xoff, long *yoff) {
 void ATextv::PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect)
 {
     dataViewFormula.Validate();
-    AText *dobj = (AText *)(this->GetDataObject());
     if(child) child->PrintPSRect(outfile, logwidth, logheight, visrect);
 }
 

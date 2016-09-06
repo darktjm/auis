@@ -391,7 +391,7 @@ static void adjustBindings(struct bind_Description  *bindings)
 			long vlen = strlen(bd->keyVector);
 			char *newVector;
 
-			if (newVector = (char *) malloc(plen + vlen - 1)) {
+			if ((newVector = (char *) malloc(plen + vlen - 1))) {
 			strcpy(newVector, stylePrefixStr);
 			strcat(newVector, &bd->keyVector[2]);
 			bd->keyVector = newVector;
@@ -806,7 +806,7 @@ class keymap *textview_InitViInputModeKeyMap(struct ATKregistryEntry   *classInf
     class keymap *newKeymap = new keymap;
     long i;
     unsigned char str[2];
-    struct proctable_Entry *si, *proc;
+    struct proctable_Entry *si;
     
     adjustBindings(textviewViInputModeBindings);
     bind::BindList(textviewViInputModeBindings, newKeymap, NULL, classInfo);

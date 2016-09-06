@@ -48,8 +48,6 @@ extern int dbg_dup2(int oldfd, int newfd);
 extern int dbg_pipe(int fdarr[2]);
 extern int dbg_socket(int af, int typ, int prot);
 int dbg_socketpair(int dom, int typ, int prot, int sv[]);
-int dbg_vclose(int fd);
-int dbg_vfclose(FILE *fp);
 FILE *dbg_popen(const char *path, const char *type);
 int dbg_pclose(FILE *fp);
 FILE *dbg_qopen(const char *path, const char * const argv[], const char *mode);
@@ -76,27 +74,9 @@ extern char *statustostr(WAIT_STATUS_TYPE *status, char *buf, int len);
 extern const char **strtoargv(char *command, const char **argvbuf, int len);
 extern char *argvtostr(const char * const *argv,char *buf,unsigned int len);
 
-extern int CheckServiceConfiguration(void);
-
 extern int GetPty(int *master, int *pty); /* opens up both ends of a pty */
 extern int GetPtyandName(int *master, int *pty, char *ptyname, int ptysize);
-#ifdef WHITEPAGES_ENV
-/* Compatibility routines */
-extern int getvuid(void);             /* returns ViceID or -1 (sets errno on error) */
-extern struct passwd *getvpwuid(int  vuid);     /* These work a lot like the non-V
-                                        * versions */
-extern struct passwd *getvpwnam(char  *vnam);
-extern int setvpwent(void);
-extern int endvpwent(void);
-extern struct passwd *getvpwent(void);
-
-extern struct passwd *getcpwuid(int  vuid , char  *vcell);     /* Take TWO arguments: a uid/nam and a
-                                        * Vice cell name. */
-extern struct passwd *getcpwnam(char  *vnam , char  *vcell);
-extern int      cpw_error;
-
-#else                                  /* WHITEPAGES_ENV */
-/* Real backwards compatibility. */
+/* Real wp backwards compatibility. */
 #define getvuid getuid
 #define getvpwuid getpwuid
 #define getvpwnam getpwnam
@@ -106,7 +86,6 @@ extern int      cpw_error;
 #define getcpwuid(X, Y) getpwuid(X)
 #define getcpwnam(X, Y) getpwnam(X)
 #define cpw_error errno
-#endif                                 /* WHITEPAGES_ENV */
 
 /* foldedeq.c */
 extern const int     FoldTRT[256];
@@ -269,98 +248,6 @@ extern int BE2LinePromoteEnd(struct LinePromState  *state);
 extern const char *UnixSignal(int	 signalNumber);          /* Pass it a signal and it returns a
                                         * static string giving its name */
 
-/* venusop.c */
-extern int VenusFlush(const char  *pname);          /* Hand it the name of a file to flush
-                                        * from Venus cache */
-extern int VenusFlushCallback(const char  *pname);  /* Hand it the name of a file for which
-                                        * to flush the callback */
-extern int VenusFetch(const char  *pname);          /* Hand it the name of a file to
-                                        * pre-fetch into the Venus cache */
-/* Caveat: the CancelStore function is no longer implemented in in-kernel AFS (10/11/88) */
-extern int VenusCancelStore(int  fid);    /* Hand it a fid and Venus won't store
-                                        * the file on its close */
-
-/* Functions to describe a user's authentication in multiple cells */
-struct CellAuth {
-    char           *CellName;          /* description for this cell */
-    int             ViceID;            /* the ViceID within that cell */
-    char           *UserName;          /* pw_name (login ID) for user in this
-                                        * cell */
-    char           *PersonName;        /* pw_gecos (personal name) for user in
-                                        * this cell */
-    char           *homeDir;           /* pwdir (home directory) for user in
-                                        * this cell */
-    int             WpError;           /* White pages error, if any, from
-                                        * trying to get UserName and
-                                        * PersonName. -1 means UserName,
-                                        * PersonName, and homeDir not
-                                        * initialized; 0 (wperr_NoError) means
-                                        * that all are OK. */
-    int             IsPrimary;         /* whether this cell is the primary one
-                                        * for the user. */
-    int             UsesAMSDelivery;   /* 0 initially; -1 for no, +1 for yes */
-    unsigned long   ExpireTime;        /* When this token will expire (or 0 if
-                                        * it's not valid now) */
-    int             IsLocal;           /* whether this auth is local or
-                                        * AFS-based. */
-};
-
-/* cellauth.c */
-extern void EraseCellMemory(void);     /* Makes us get a new array of auth
-                                        * descriptors next time. */
-extern int ca_UpdateCellAuths(void);  /* int ca_UpdateCellAuths(void); Update the
-                                        * ExpireTime fields in our CellAuth
-                                        * structures. */
-extern int FindCell(const char  *cellName, struct CellAuth  **ppCellAuth);            /* int FindCell(cellName, ppCellAuth)
-                                        * char *cellName; struct CellAuth
-                                        * **ppCellAuth; Return a pointer to
-                                        * our authentication for cell
-                                        * cellName, via ppCellAuth. Return 0
-                                        * if it was found, or an error code
-                                        * (>0 for permanent, <0 for
-                                        * temporary). Return 1 if we don't
-                                        * have any authentication in that
-                                        * cell, or if there's no such cell.
-                                        * Return 2 if we're completely
-                                        * unauthenticated. */
-#if 0
-/* MISSING DEFINITION FindHomeCell(void) */
-extern int       FindHomeCell(void);        /* int FindHomeCell(ppCellAuth) struct
-                                        * CellAuth **ppCellAuth; Like
-                                        * FindCell, except that it returns a
-                                        * pointer to the $HOME cell, if there
-                                        * is one. Return 1 if there's no home
-                                        * cell. */
-#endif
-extern int FindAnyCell(struct CellAuth  **ppCellAuth);         /* int FindAnyCell(ppCellAuth) struct
-                                        * CellAuth **ppCellAuth; Like
-                                        * FindCell, except that it returns a
-                                        * pointer to any authenticated cell,
-                                        * if there is one. */
-
-extern int FindNextCell(struct CellAuth  **ppCellAuth);        /* int FindNextCell(ppCellAuth) struct
-                                        * CellAuth **ppCellAuth; Generate the
-                                        * authenticated cells.  Starts and
-                                        * ends with *ppCellAuth == NULL. */
-
-/* cawp.c */
-extern void FillInCell(struct CellAuth  *cellAuth);          /* void FillInCell(cellAuth) struct
-                                        * CellAuth *cellAuth; Fill in the
-                                        * white pages values for the given
-                                        * cell pointer; an error (or success)
-                                        * code is left in cellAuth->WpError. */
-
-/* vclose.c */
-extern boolean IsOnVice(int fd);
-extern boolean ViceIsRunning(void);
-extern int vclose(int  fd);              /* Close a fileid and wait for it to
-                                        * complete in Vice */
-extern int vfclose(FILE  *f);             /* fclose a FILE* and wait for it to
-                                        * complete in Vice */
-extern int vdown(int  err);               /* return TRUE iff the errno value
-                                        * passed as argument says that Vice or
-                                        * Venus was down */
-
 /* tfail.c */
 extern int tfail(int  errorNumber);               /* return TRUE iff the errno value
                                         * passed as arg is a temp failure */
@@ -415,10 +302,6 @@ extern void FreeString(char *srcptr);		/* Deallocate
 extern const char *UnixError(int	 errorNumber);           /* Pass it an errno value and it
                                         * returns a static (canned) string
                                         * describing the error */
-
-/* thiscell.c */
-extern int GetCurrentWSCell(char  *Buf, unsigned int    size);    /* (Buf, size) */
-extern int GetCellFromFileName(const char  *FileName, char  *Buf, unsigned int    size); /* (Filename, Buf, size) */
 
 /* titles.c */
 extern void SetInitialArgs(int  argc , char  **argv , char  **envp);      /* SetInitialArgs(argc, argv,
@@ -541,62 +424,6 @@ extern char *CopyString(const char *old);
 
 #endif /* ERRHDLR_H */
 
-/* tokpak.c */
-extern int tok_AddStr(char **pOut, int *pOutL, int *pOutM, const char *StrToAdd);
-extern int GetAndPackAllTokens_Prim(char **pWhere, int *pWhereLen, int *pWhereMax, int debug, const char *PrimCell);
-extern int GetAndPackAllTokens(char **pWhere, int *pWhereLen, int *pWhereMax, int debug);
-
-/* tokunpak.c */
-extern int unpacktokens(const char *tokens, char *ctoken, char *stoken, int debug, int set);
-extern int tok_GenAuths(char **pWhere, int *pWhereLen, unsigned long *begdP, unsigned long *expdP, int *vidP, const char *cell, const char *vname, int *primP, int *locP, int debug);
-extern int GenTokens(char **pWhere, int *pWhereLen, unsigned long *expdP, unsigned long *vidP, const char *cell, int *primP, int *locP, int debug);
-extern int UnpackAndSetTokens(char *Where, int WhereLen, int debug, int setPag);
-extern int ExtractCellID(char *Where, int WhereLen, const char *cellName, int debug);
-
-/* alquery.c */
-#ifdef AFS30_ENV
-/* Error codes for aq_XXX functions.  Actually, their negatives are returned. */
-#define ALQ_ERRNO 1
-#define ALQ_ENONAME 2
-#define ALQ_EPARSEACL 3
-#define ALQ_NOT_GROUP 4
-#define ALQ_SYSTEM_GROUP 5
-#define ALQ_EPRS_BASE 20
-
-extern int aq_GroupP(const char  *group , const char  *groupcell);
-/* Returns 1 if the name "group" is a groupname, 0 if not, <0 on errors. */
-
-extern int aq_GetGroupMembers(const char  *group , const char  *groupcell , char  **outBuf);  
-/* Return the members of the given group as a newline-separated list in 
-   outBuf, which is modified to point to a malloc'd string.  The return 
-   value is 0 if all is OK and negative on errors: a return value of -1 
-   means to look in errno. */
-
-extern int aq_UserInGroup(const char  *user , const char  *usercell , const char  *group , const char  *groupcell);
-/* Return whether the given user is in the given group in the given cell.  
-   1 means YES, 0 means NO, negative numbers are error codes; 
-   -1 means to look in errno. */
-
-
-extern long int aq_UserRightsToDir(const char  *user , const char  *usercell , const char  *dir);
-/* Return the access rights that the given user has to the given dir.  
-   Negative numbers are error codes; -1 means to look in errno. */
-
-extern int aq_CheckUserAllRightsToDir(const char  *user , const char *usercell , const char *dir , long int rights);
-/* Check whether the given user has all of a collection of rights to 
-   the given directory.  Return 1 if YES, 0 if NO; negative numbers 
-   are error codes, and -1 means to look in errno. */
-
-extern int aq_CheckUserAnyRightToDir(const char *user , const char *usercell , const char *dir , long int rights);
-/* Check whether the given user has any of a collection of rights to the 
-   given directory.  Return 1 if YES, 0 if NO; negative numbers are 
-   error codes, and -1 means to look in errno. */
-
-extern const char *aq_GetLastErrorMessage(void);
-/* Returns the text string of the last error message.  Points to static 
-   storage, do NOT free. */
-
-#endif /* AFS30_ENV */
 #endif /* _UTIL_H_ */
 
 ENDCPLUSPLUSPROTOS

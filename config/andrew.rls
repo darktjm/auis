@@ -304,22 +304,6 @@ all:: $(SHARED)							@@\
 	$(RM) ,$*.c ,$*.s 
 
 
-#ifdef FLEX_ENV
-#define FlexOrLexFileRule(file)					@@\
-clean::								@@\
-	$(RM) file.l file.c					@@\
-file.l: file.flex						@@\
-	$(RM) file.l file.c					@@\
-	$(LN) file.flex file.l
-#else
-#define FlexOrLexFileRule(file)					@@\
-clean::								@@\
-	$(RM) file.l file.c					@@\
-file.l: file.lex						@@\
-	$(RM) file.l file.c					@@\
-	$(LN) file.lex file.l
-#endif
-
 #define	NormalLexRule()						@@\
 all:: $(SHARED)							@@\
 .l.o:								@@\
@@ -358,7 +342,9 @@ all:: $(SHARED)							@@\
 #define	Parser(classname,bisonargs)		@@\
 all:: $(SHARED)	@@\
 depend:: classname.H classname.C @@\
-classname.H classname.C: classname.gra	$(MKPARSERCLASS) @@\
+classname.C: classname.H @@\
+	touch classname.C @@\
+classname.H: classname.gra	$(MKPARSERCLASS) @@\
 	$(RM) classname.tab.c classname.tab.h	@@\
 	ExecuteFromBASEDIR(bison bisonargs -b classname -k  classname.gra)	@@\
 	$(RM) classname.C classname.H	@@\
@@ -371,7 +357,9 @@ clean::		@@\
 #define	CParser(classname,bisonargs)		@@\
 all:: $(SHARED)	@@\
 depend:: classname.h classname.c	@@\
-classname.h classname.c: classname.gra $(MKPARSER) @@\
+classname.c: classname.h @@\
+	touch classname.c @@\
+classname.h: classname.gra $(MKPARSER) @@\
 	$(RM) classname.tab.c classname.tab.h	@@\
 	ExecuteFromBASEDIR(bison bisonargs -d -b classname -k  classname.gra)	@@\
 	$(RM) classname.c classname.h	@@\
@@ -719,9 +707,7 @@ PATHSEP=:
  *		FONTS_TO_BDF_ENV 
  *		FONTS_TO_PCF_ENV 
  *		NO_FONTS_ENV 
- *		OPENWINDOWS_ENV 
  *		SCOunix 
- *		WM_ENV 
  *		X11_ENV 
  *		i386 
  *************************************************** 
@@ -756,26 +742,9 @@ FONTEXT = pcf
 #endif 
 #endif 
 
-#ifdef OPENWINDOWS_ENV 
-#define OWFONTRULE						@@\
-.bdf.fb:							@@\
-	$(CONVERTFONT) -n `egrep '^FONT '  $*.bdf | \		@@\
-	sed -e 's/FONT //'` -o $* -f 200 $*.bdf 
-
-#define OWDECLAREFONT(fontname)					@@\
-all:: fontname.fb 
-
-#else 
-#define OWFONTRULE 
-#define OWDECLAREFONT(fontname) 
-#endif 
-
 #define XFontRule()						@@\
 .bdf.$(FONTEXT):						@@\
-	$(XFC) $*.bdf > $*.$(FONTEXT)				@@\
-	OWFONTRULE 
-
-#define WMFontRule() 
+	$(XFC) $*.bdf > $*.$(FONTEXT)
 
 #ifdef OPENWINDOWS_ENV 
 #define InstallOWFont(fontname)					@@\
@@ -803,7 +772,6 @@ install.time:: fontname.$(FONTEXT)				@@\
 #define InstallFont(fontname)		InstallXFont(fontname) 
 #define DeclareFont(fontname)					@@\
 all:: fontname.$(FONTEXT)					@@\
-	OWDECLAREFONT(fontname)					@@\
 InstallFont(fontname) 
 #define NSDeclareFont(fontname)		DeclareFont(fontname) 
 #endif		/* <============================================> */ 
@@ -1047,10 +1015,12 @@ Makefile:: Imakefile \						@@\
 
 #define SubdirTarget(dirs, mktag, string)				@@\
 mktag::								@@\
-	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \		@@\
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; *) set -e;; esac; \ @@\
+	res=0; \
 	for i in dirs; do \					@@\
 	    (cd $$i; echo string "(`pwd`)"; \			@@\
-		$(MAKE) PassMakeVars() DESTDIR=$(DESTDIR) mktag || exit 1 ) || exit 1; done)
+		$(MAKE) PassMakeVars() DESTDIR=$(DESTDIR) mktag ); \ @@\
+		res=$$((res>$$??res:$$?)); done; exit $$res)
 
 /************************************************************* 
 NOTE: The following uses of SubdirTarget() have no spaces between the 

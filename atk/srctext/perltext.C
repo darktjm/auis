@@ -144,7 +144,6 @@ static long backwardSkipDelimited(perltext *self, long pos, char beg, char end)
 {
     int level=1;
     long startcomment;
-    char ch;
     while (pos>=0 && level>0){
 	char c;
 	if ((self)->InString(pos)) 
@@ -214,7 +213,7 @@ void perltext::BackwardCheckWord(long from, long to)
     return /*j*/;
 }
 
-long my_CheckWord(perltext *self, long i, long end, int state /* boolean:  0 if not in a block, 1 if in a block */)
+static long my_CheckWord(perltext *self, long i, long end, int state /* boolean:  0 if not in a block, 1 if in a block */)
 {
     long j;
     Dict *word;
@@ -298,10 +297,9 @@ void perltext::RedoStyles()
 {
     long posn, len=GetLength();
     int prev=0, c=0, d, parens=0, newpos=0, oldpos;
-    char buff[256], string[256];
+    char buff[256];
     Dict *word;
 
-    string[0]=0;
     RemoveStyles(); /* Remove the old styles, but leave the root environment in place. */
 
     for (posn=0; posn<len-1; ++posn) {
@@ -438,9 +436,8 @@ static long currentStatementIndent(perltext *self, long pos, boolean continued)
 /* Indentation returns the proper indentation of the line that starts at pos */
 int perltext::Indentation(long pos) /* WRN, Oct.92 */
 {
-    long savedPos=(-1), len=GetLength(), newpos;
+    long newpos;
     int addingChar=0, ch;
-    boolean continued = FALSE;
 
     /* avoid potential problems with first line of file */ 
     if (pos<1)
@@ -503,14 +500,13 @@ struct paren_node {
 
 long perltext::ReverseBalance(long pos)
 {
-    boolean found=FALSE, atleastone=FALSE;
-    int thischar=0, prevchar;
+    boolean atleastone=FALSE;
+    int thischar=0;
     const char *parentype;
     struct paren_node *parenstack=NULL, *temp_stack_ptr;
     static const char opens[]="({[", closes[]=")}]";
 
     while ((parenstack !=NULL || !atleastone) && (pos>0)) {
-	prevchar=thischar;
 	thischar= GetChar(--pos);
 
 	if ((parentype=strchr(opens,thischar)) != NULL) {

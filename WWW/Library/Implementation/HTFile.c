@@ -91,36 +91,36 @@ PRIVATE HTSuffix unknown_suffix = { "*.*", NULL, NULL, NULL, 1.0};
 **	If filename suffix is already defined its previous
 **	definition is overridden.
 */
-PUBLIC void HTAddType ARGS4(CONST char *,	suffix,
-			    CONST char *,	representation,
-			    CONST char *,	encoding,
-			    double,		value)
+PUBLIC void HTAddType (CONST char *	suffix,
+			    CONST char *	representation,
+			    CONST char *	encoding,
+			    double		value)
 {
     HTSetSuffix(suffix, representation, encoding, NULL, value);
 }
 
 
-PUBLIC void HTAddEncoding ARGS3(CONST char *,	suffix,
-				CONST char *,	encoding,
-				double,		value)
+PUBLIC void HTAddEncoding (CONST char *		suffix,
+				CONST char *	encoding,
+				double		value)
 {
     HTSetSuffix(suffix, NULL, encoding, NULL, value);
 }
 
 
-PUBLIC void HTAddLanguage ARGS3(CONST char *,	suffix,
-				CONST char *,	language,
-				double,		value)
+PUBLIC void HTAddLanguage (CONST char *		suffix,
+				CONST char *	language,
+				double		value)
 {
     HTSetSuffix(suffix, NULL, NULL, language, value);
 }
 
 
-PUBLIC void HTSetSuffix ARGS5(CONST char *,	suffix,
-			      CONST char *,	representation,
-			      CONST char *,	encoding,
-			      CONST char *,	language,
-			      double,		value)
+PUBLIC void HTSetSuffix (CONST char *	suffix,
+			      CONST char *	representation,
+			      CONST char *	encoding,
+			      CONST char *	language,
+			      double		value)
 {
     HTSuffix * suff;
 
@@ -164,7 +164,7 @@ PUBLIC void HTSetSuffix ARGS5(CONST char *,	suffix,
 **	Cleans up the memory allocated by file suffixes
 **	Written by Eric Sink, eric@spyglass.com, and Henrik
 */
-PUBLIC void HTFile_deleteSuffixes NOARGS
+PUBLIC void HTFile_deleteSuffixes (void)
 {
     HTList *cur = HTSuffixes;
     HTSuffix *pres;
@@ -179,7 +179,7 @@ PUBLIC void HTFile_deleteSuffixes NOARGS
 }
 
 
-PRIVATE BOOL is_separator ARGS1(char, ch)
+PRIVATE BOOL is_separator (char ch)
 {
     if (strchr(suffix_separators, ch)) return YES;
     else return NO;
@@ -192,8 +192,8 @@ PRIVATE BOOL is_separator ARGS1(char, ch)
 **	Return the number of parts placed to the array.
 **	Array should have MAX_SUFF+1 items.
 */
-PUBLIC int HTSplitFilename ARGS2(char *,	s_str,
-				 char **,	s_arr)
+PUBLIC int HTSplitFilename (char *	s_str,
+				 char **	s_arr)
 {
     char * start = s_str;
     char * end;
@@ -216,8 +216,8 @@ PUBLIC int HTSplitFilename ARGS2(char *,	s_str,
 
 
 
-PUBLIC HTContentDescription * HTGetContentDescription ARGS2(char **,	actual,
-							    int,	n)
+PUBLIC HTContentDescription * HTGetContentDescription (char **	actual,
+							    int	n)
 {
     HTContentDescription * cd;
     int i;
@@ -281,7 +281,7 @@ PUBLIC HTContentDescription * HTGetContentDescription ARGS2(char **,	actual,
 ** On exit,
 **	returns	a malloc'ed string which must be freed by the caller.
 */
-PUBLIC char * HTCacheFileName ARGS1(CONST char *,name)
+PUBLIC char * HTCacheFileName (CONST char *name)
 {
     char * access = HTParse(name, "", PARSE_ACCESS);
     char * host = HTParse(name, "", PARSE_HOST);
@@ -304,7 +304,7 @@ PUBLIC char * HTCacheFileName ARGS1(CONST char *,name)
 **	----------------------------------------
 */
 #ifdef NOT_IMPLEMENTED
-PRIVATE int HTCreatePath ARGS1(CONST char *,path)
+PRIVATE int HTCreatePath (CONST char *path)
 {
     return -1;
 }
@@ -323,7 +323,7 @@ PRIVATE int HTCreatePath ARGS1(CONST char *,path)
 **	BUG: FILENAME IS NOT UNESCAPED!!!!!!
 **
 */
-PUBLIC char * HTLocalName ARGS1(CONST char *,name)
+PUBLIC char * HTLocalName (CONST char *name)
 {
     char * access = HTParse(name, "", PARSE_ACCESS);
     char * host = HTParse(name, "", PARSE_HOST);
@@ -405,7 +405,7 @@ PUBLIC char * HTLocalName ARGS1(CONST char *,name)
 **	the general case.
 */
 
-PUBLIC char * WWW_nameOfFile ARGS1 (CONST char *,name)
+PUBLIC char * WWW_nameOfFile  (CONST char *name)
 {
     char * result;
 #ifdef NeXT
@@ -439,7 +439,7 @@ PUBLIC char * WWW_nameOfFile ARGS1 (CONST char *,name)
 **	returns	a pointer to a suitable suffix string if one has been
 **		found, else "".
 */
-PUBLIC CONST char * HTFileSuffix ARGS1(HTAtom*, rep)
+PUBLIC CONST char * HTFileSuffix (HTAtom* rep)
 {
     HTSuffix * suff;
     HTList * cur;
@@ -466,9 +466,9 @@ PUBLIC CONST char * HTFileSuffix ARGS1(HTAtom*, rep)
 **	It will handle for example  x.txt, x.txt,Z, x.Z
 */
 
-PUBLIC HTFormat HTFileFormat ARGS3(CONST char *,	filename,
-				   HTAtom **,		pencoding,
-				   HTAtom **,		planguage)
+PUBLIC HTFormat HTFileFormat (CONST char *	filename,
+				   HTAtom **	pencoding,
+				   HTAtom **	planguage)
 {
     char * actual[MAX_SUFF+1];
     int n;
@@ -513,7 +513,7 @@ PUBLIC HTFormat HTFileFormat ARGS3(CONST char *,	filename,
 **
 */
 
-PUBLIC double HTFileValue ARGS1 (CONST char *,filename)
+PUBLIC double HTFileValue  (CONST char *filename)
 
 {
     HTSuffix * suff;
@@ -547,7 +547,7 @@ PUBLIC double HTFileValue ARGS1 (CONST char *,filename)
 **	2.	Isn't there a quicker way?
 */
 #ifndef NO_UNIX_IO
-PUBLIC BOOL HTEditable ARGS1 (CONST char *,filename)
+PUBLIC BOOL HTEditable  (CONST char *filename)
 {
 #ifdef NO_GROUPS
     return NO;		/* Safe answer till we find the correct algorithm */
@@ -604,7 +604,7 @@ PUBLIC BOOL HTEditable ARGS1 (CONST char *,filename)
 **	The stream must be used for writing back the file.
 **	@@@ no backup done
 */
-PUBLIC HTStream * HTFileSaveStream ARGS1(HTRequest *, request)
+PUBLIC HTStream * HTFileSaveStream (HTRequest *request)
 {
 
     CONST char * addr = HTAnchor_address((HTAnchor*)request->anchor);
@@ -671,7 +671,7 @@ PUBLIC HTStream * HTFileSaveStream ARGS1(HTRequest *, request)
 **			HTLOADED	OK 
 **
 */
-PUBLIC int HTLoadFile ARGS1 (HTRequest *, request)
+PUBLIC int HTLoadFile  (HTRequest *request)
 {
     int status = -1;
     char *url;

@@ -587,7 +587,7 @@ GenerateNess(text  *t)  {
 		
 		while (state != done && curr < srclen) {
 			currchar = (t)->GetChar( curr);
-			tran = &inclTran[state][CharClass[currchar]];
+			tran = &inclTran[state][(unsigned char)CharClass[currchar]];
 			state = tran->next;
 			switch (tran->action) {
 			case 0:  /* {no action} */

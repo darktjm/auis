@@ -101,8 +101,8 @@ typedef struct _gopher_info {
 **	list. Actually it is only a shell build upon HTGetIcon().
 **
 */
-PRIVATE HTIconNode *get_gopher_icon ARGS2(CONST char *, filename,
-					  int, gopher_type)
+PRIVATE HTIconNode *get_gopher_icon (CONST char * filename,
+					  int gopher_type)
 {
     HTFormat content_type = NULL;
     HTAtom *content_encoding = NULL;
@@ -174,9 +174,9 @@ PRIVATE HTIconNode *get_gopher_icon ARGS2(CONST char *, filename,
 **	if other error.
 **
 */
-PRIVATE int parse_menu ARGS3(HTRequest *,     	request,
-			     gopher_info *,	gopher,
-			     CONST char *,	url)
+PRIVATE int parse_menu (HTRequest *     	request,
+			     gopher_info *	gopher,
+			     CONST char *	url)
 #define TAB 		'\t'
 #define HEX_ESCAPE 	'%'
 {
@@ -485,9 +485,9 @@ PRIVATE int parse_menu ARGS3(HTRequest *,     	request,
 **	Returns HT_LOADED on succed, HT_INTERRUPTED if interrupted and -1
 **	if other error.
 */
-PRIVATE int parse_cso ARGS3(HTRequest *, 	request,
-			    gopher_info *, 	gopher,
-			    CONST char *, 	url)
+PRIVATE int parse_cso (HTRequest * 	request,
+			    gopher_info * 	gopher,
+			    CONST char * 	url)
 {
     int status = -1;
     unsigned int records = 0;
@@ -697,8 +697,8 @@ PRIVATE int parse_cso ARGS3(HTRequest *, 	request,
 /*	Display a Gopher Index document
 **	-------------------------------
 */
-PRIVATE void display_index ARGS2(HTRequest *, 		request,
-				 CONST char *,		url)
+PRIVATE void display_index (HTRequest * 		request,
+				 CONST char *		url)
 {
     HTStructured *target = HTML_new(request, NULL, WWW_HTML,
 				    request->output_format,
@@ -728,8 +728,8 @@ PRIVATE void display_index ARGS2(HTRequest *, 		request,
 /*      Display a CSO index document
 **      -------------------------------
 */
-PRIVATE void display_cso ARGS2(HTRequest *,		request,
-			       CONST char *,		url)
+PRIVATE void display_cso (HTRequest *		request,
+			       CONST char *		url)
 {
     HTStructured *target = HTML_new(request, NULL, WWW_HTML,
 				    request->output_format,
@@ -764,9 +764,9 @@ PRIVATE void display_cso ARGS2(HTRequest *,		request,
 **
 **      Returns 0 on OK, else <0 but does NOT close the connection
 */
-PRIVATE int HTGopher_send_cmd ARGS3(gopher_info *, 	gopher,
-				    char *,		url,
-				    char *,		command)
+PRIVATE int HTGopher_send_cmd (gopher_info * 	gopher,
+				    char *		url,
+				    char *		command)
 {
     int status = 0;
     if (!gopher || !command) {
@@ -818,7 +818,7 @@ PRIVATE int HTGopher_send_cmd ARGS3(gopher_info *, 	gopher,
 **                      HT_LOADED       OK
 **
 */
-PUBLIC int HTLoadGopher ARGS1(HTRequest *, request)
+PUBLIC int HTLoadGopher (HTRequest * request)
 {
     char *url;
     int status = -1;

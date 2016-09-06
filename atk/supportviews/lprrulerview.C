@@ -602,6 +602,8 @@ lprrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   n
 					MoveParaIcon(this, x); 
 					t = i->value; 
 					break;
+			        case noIcon:
+			                break;
 			}
 			if (i->parkx - 11 <= i->x  && i->x <= i->parkx + 11) {
 				t = i->value = lprrulerview_NoValue;
@@ -621,7 +623,7 @@ lprrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   n
 			CleanUpIconArea(this);
 		}
 		else {  /* Down or Move */
-			short relx;	/* used later to display numeric value */
+			short relx = 0;	/* used later to display numeric value */
 			if (action == view_LeftDown) {
 				struct lprrulerview_icondata *i;
 				long cnt;
@@ -668,6 +670,8 @@ lprrulerview::Hit(enum view_MouseAction   action, long   x , long   y , long   n
 					else
 						relx = PARA.x - LEFT.x;
 					break;
+			        case noIcon:
+			                break;
 			}
 			CleanUpIconArea(this);
 			if (this->MovingIcon != noIcon) {

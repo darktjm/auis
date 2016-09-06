@@ -175,7 +175,6 @@ static long match(class ness  *n,struct helpRock  *h);
 static void helpProc(char  *partial, long lrock,message_workfptr  HelpWork,long  rock);
 static enum message_CompletionCode mycomplete(char  *partial, struct helpRock  *myrock, char  *buffer, int  bufferSize);
 static long AskForScript(class view  *self, class ness  *current, const char  *prompt, char  *buf, long  bufsiz);
-static void ScriptAppend(class nessview  *self, long  rock);
 static void Append(class nessview  *self, long  rock);
 static void Visit(class view  *self, long  rock);
 static void DisplayDialogBox(class nessview  *self, long  time  /* ignored */);
@@ -659,7 +658,6 @@ GetName(class ness  *n) {
 	static long 
 match(class ness  *n,struct helpRock  *h) {
 	char buf[1024];
-	int len;
 	char *name=GetName(n);
 	if(name==NULL) return 0;
 	if(!strncmp(name, h->partial, strlen(h->partial))) {
@@ -679,7 +677,6 @@ static const char headingtxt[]="Active Ness Scripts\n";
 	static void
 helpProc(char *partial, long lrock, message_workfptr HelpWork, long rock) {
 	struct helpRock *myrock = (struct helpRock *) lrock;
-	class text *t=myrock->text;
 	class ness *n=ness::GetList();
 	int len=strlen(headingtxt);
 	if(!HelpWork) return;
@@ -775,6 +772,7 @@ AskForScript(class view *self, class ness *current, const char *prompt, char *bu
 	return 0;
 }
 
+#if 0 /* commented out below */
 /* Appends one Ness script to another.  If the rock is >255 it is assumed to be a pointer to the name of the destination Ness script, otherwise AskForScript is used to get the name of the destination. If the destination has a filename associated with it the file is updated to reflect the new contents of the script, throwing away any changes which had been made to the file. The destination Ness will be recompiled with the new code, and the source will be destroyed if it has a buffer. */
 	static void 
 ScriptAppend(class nessview  *self, long  rock) {
@@ -827,6 +825,7 @@ ScriptAppend(class nessview  *self, long  rock) {
 	UpdateFile(self, (class ness *)(self)->GetDataObject(), b, 
 			(n)->GetFilename());
 }
+#endif
 
 static char dbuf[1024]="~/.atk.macros";
 
@@ -841,7 +840,7 @@ static const char * const appendchoices[]={
 Append(class nessview  *self, long  rock) {
 	char buf[1024];
 	char *filename=NULL, *p, *q;
-	class buffer *b, *ob;
+	class buffer *b;
 	ATK  *data;
 	class ness *dest, *src=(class ness *)(self)->GetDataObject();
 	class ness *n=ness::GetList();

@@ -63,7 +63,6 @@ static class keymap *Keymap;
 
 ATKdefineRegistry(figtoolview, lpair, figtoolview::InitializeClass);
 
-static void SetExpertModeProc(class figtoolview  *self, long  val);
 static void RebuildToolMenu(class figtoolview *self);
 static void RepostMenus(class figtoolview  *self);
 static void SetToolProc(class stringtbl  *st, class figtoolview  *self, short  accnum);
@@ -129,7 +128,6 @@ static class view *Tool_AddAnchor(class figtoolview  *self, enum view_MouseActio
 static class view *Tool_DelAnchor(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
 static void Toolmod_Select(class figtoolview  *self, long  rock);
 static class view *Tool_CreateProc(class figtoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
-static void Tool_Name(class figtoolview  *self, long  rock);
 static void AbortObjectProc(class figtoolview  *self, long  rock);
 static char *CopyString(const char  *str);
 static void LowerString(char  *str);
@@ -867,11 +865,6 @@ static void RebuildToolMenu(class figtoolview *self)
 
 }
 
-static void SetExpertModeProc(class figtoolview  *self, long  val)
-{
-    (self)->SetExpertMode( val);
-}
-
 /* assumes self is input focus */
 static void RepostMenus(class figtoolview  *self)
 {
@@ -1384,7 +1377,7 @@ static void SetArrowProc(class stringtbl  *st, class figtoolview  *self, short  
     if (arrownum >= figtoolv_arrowshape_Inherit && arrownum < figtoolv_arrowsize_Inherit) {
 
 	int ix;
-	short val, res;
+	short val;
 
 	if (!(st)->GetBitOfEntry( accnum)) {
 	    for (ix=figtoolv_arrowshape_Zero; ix<figtoolv_arrowsize_Inherit; ix++) {
@@ -1415,7 +1408,7 @@ static void SetArrowProc(class stringtbl  *st, class figtoolview  *self, short  
     else if (!(arrownum == figtoolv_arrowpos_Head || arrownum == figtoolv_arrowpos_Tail || arrownum == figtoolv_arrowpos_Inherit)) {
 	/* accnum may have been rediddled */
 	int ix;
-	short val, res;
+	short val;
 
 	if (!(st)->GetBitOfEntry( accnum)) {
 	    for (ix=figtoolv_arrow_Zero; ix<self->arrows_num; ix++) {
@@ -2349,7 +2342,7 @@ static void ToggleClosedProc(class figtoolview  *self, long  rock)
     class figview *figv = self->primaryview;
     class figure *fig;
     int ix;
-    long ref, parent, depth;
+    long ref;
     long didclose = 0, didopen = 0;
     class figobj *o;
     class figoplin *plo;
@@ -2529,7 +2522,6 @@ static void NameObject(class figobj  *o, long  ref, class figview  *self, long  
 
 static void ProportAnchorSplot(class figobj  *o, long  ref, class figview  *self, long  rock)
 {
-    long diff1, diff2;
     class figogrp *vg = (o)->GetParent();
     struct rectangle *R = (&(vg)->handlebox);
     long *canon, href;
@@ -2598,8 +2590,6 @@ static void Command_DefaultAnchors(class figtoolview  *self, char  *rock)
 
 static void Command_Name(class figtoolview  *self, char  *rock)
 {
-    class figure *fig = (class figure *)(self->primaryview)->GetDataObject();
-    
     int numsel = (self->primaryview)->GetNumSelected();
 
     if (numsel!=1) {
@@ -2692,6 +2682,8 @@ static void Toolsub_Reshape(class figtoolview  *self, enum view_MouseAction  act
 		}
 	    }
 	    break;
+	default: // filedrop, upmovement, nomouse
+	    break;
     }
 }
 
@@ -2750,6 +2742,8 @@ static void Toolsub_AddAnch(class figtoolview  *self, enum view_MouseAction  act
 	    (fig)->NotifyObservers( figure_DATACHANGED);
 
 	    break;
+	default: // filedrop, upmovement, nomouse
+	    break;
     }
 }
 
@@ -2757,9 +2751,6 @@ static void Toolsub_DelAnch(class figtoolview  *self, enum view_MouseAction  act
 {
     class figobj *o = self->primaryview->objs[oref].o;
     class figure *fig;
-    long atx, aty;
-    struct rectangle *R;
-    class figogrp *vg;
 
     if (!onhandle || ptref==figobj_NULLREF) return;
 
@@ -2781,6 +2772,8 @@ static void Toolsub_DelAnch(class figtoolview  *self, enum view_MouseAction  act
 	    break;
 	case view_LeftUp:
 	case view_RightUp:
+	    break;
+	default: // filedrop, upmovement, nomouse
 	    break;
     }
 }
@@ -2813,6 +2806,8 @@ static void Toolsub_Add(class figtoolview  *self, enum view_MouseAction  action,
 		}
 	    }
 	    break;
+	default: // filedrop, upmovement, nomouse
+	    break;
     }
 }
 
@@ -2843,6 +2838,8 @@ static void Toolsub_Del(class figtoolview  *self, enum view_MouseAction  action,
 		    (fig)->NotifyObservers( figure_DATACHANGED);
 		}
 	    }
+	    break;
+	default: // filedrop, upmovement, nomouse
 	    break;
     }
 }
@@ -2904,6 +2901,8 @@ static void Toolsub_Drag(class figtoolview  *self, enum view_MouseAction  action
 	    fig = (class figure *)(self)->GetDataObject();
 	    (fig)->SetModified();
 	    (fig)->NotifyObservers( figure_DATACHANGED);
+	    break;
+	default: // filedrop, upmovement, nomouse
 	    break;
     }
 }
@@ -3000,6 +2999,8 @@ static void Toolsub_Select(class figtoolview  *self, enum view_MouseAction  acti
 		AdjustToSelection(self);
 		(self->primaryview)->WantUpdate( self->primaryview);
 	    }
+	    break;
+	default: // filedrop, upmovement, nomouse
 	    break;
     }
     

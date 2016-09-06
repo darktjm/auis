@@ -644,7 +644,7 @@ Add_Command( class orgv  *self )
       (self)->Query(  "Enter Node Name: ", "", &reply );
       if ( reply == NULL  ||  *reply == 0 )
 	  break;
-      if ( node = (Tree)->CreateChildNode(  "?", 0, (TreeView )->CurrentNode( ) ) ) {
+      if ( ( node = (Tree)->CreateChildNode(  "?", 0, (TreeView )->CurrentNode( ) ) ) ) {
 	  (Tree)->SetNotificationCode(  tree_NodeCreated );
 	  (Tree)->SetNotificationNode(  node );
 	  (self)->Announce(  "" );
@@ -724,7 +724,7 @@ Plode_Command( class orgv  *self )
   {
   IN(Plode_Command);
   if ( (TreeView )->CurrentNode( ) ) {
-    if ( Exploded = !Exploded ) {
+    if ( ( Exploded = !Exploded ) ) {
       (TreeView)->ExplodeNode(  ExplodedNode = (TreeView )->CurrentNode( ) );
       Alter_Control_Button( self, plode_code, ImplodePhrase );
       (Menu)->SetMask(  ((Menu )->GetMask( ) & ~menu_imploded) | menu_exploded );
@@ -746,7 +746,7 @@ static void
 Fold_Command( class orgv  *self )
   {
   IN(Fold_Command);
-  if ( Fold = !Fold ) {
+  if ( ( Fold = !Fold ) ) {
     (TreeView)->SetTreeAttribute(  treev_NodeConnectorStyle( treev_Fold | NodeConnectorStyle ) );
     Alter_Control_Button( self, fold_code, UnFoldPhrase );
     (Menu)->SetMask(  ((Menu )->GetMask( ) & ~menu_unfolded) | menu_folded );
@@ -833,7 +833,7 @@ static void
 Palette_Command( class orgv  *self )
   {
   IN(Palette_Command);
-  if ( PaletteExposed = !PaletteExposed )
+  if ( ( PaletteExposed = !PaletteExposed ) )
     (Menu)->SetMask(  ((Menu )->GetMask( ) & ~menu_palette_hidden) | menu_palette_exposed );
   else
       (Menu)->SetMask(  ((Menu )->GetMask( ) & ~menu_palette_exposed) | menu_palette_hidden );
@@ -846,7 +846,7 @@ static void
 Description_Command( class orgv  *self )
   {
   IN(Description_Command);
-  if ( DescriptionExposed = !DescriptionExposed ) {
+  if ( ( DescriptionExposed = !DescriptionExposed ) ) {
       (PairView)->VSplit(  TreeView, DescriptionViewScroll, 40, 1 );
       (Menu)->SetMask(  ((Menu )->GetMask( ) &
 			~menu_description_hidden) | menu_description_exposed );
@@ -957,7 +957,6 @@ Tree_Hit( class orgv		  *self, class treev	          *tree_view, struct tree_nod
 static
 void Prepare_Description( class orgv  *self, struct tree_node  *node )
     {
-  FILE *file;
   class text *textp;
 
   IN(Prepare_Description);

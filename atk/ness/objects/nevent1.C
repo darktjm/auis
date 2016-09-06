@@ -70,7 +70,7 @@ ProperPtr(ATK   *ptr, const struct ATKregistryEntry   *type) {
 	class dataobject *dobj;
 	class view *view;
 	long i;
-	boolean issame;
+	boolean issame = FALSE;
 
 	if (ptr == NULL) return ptr;
 	if ((ptr)->IsType( type)) return ptr;

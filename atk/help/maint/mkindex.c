@@ -44,8 +44,7 @@ static int action = 1;
 /*
  * lowercases's a string.
  */
-static char *LowerCase(astring)
-char *astring;
+static char *LowerCase(char *astring)
 {
     char *tp = astring;
 
@@ -59,14 +58,12 @@ char *astring;
 }
 
 
-void AddPrimary(newIndex, key, path)
-struct Index *newIndex;
-char *key, *path;
+static void AddPrimary(struct Index *newIndex, char *key, char *path)
 {
-    char *ap=CURRENTANDREWDIR;
-    int alen=strlen(ap);
+    const char ap[]=CURRENTANDREWDIR;
+    int alen=sizeof(ap) - 1;
     char fullpath[MAXPATHLEN];
-    if(strncmp(path, ap, alen)==0 && strlen(path)>alen && path[alen]=='/') {
+    if(strncmp(path, ap, alen)==0 && path[alen]=='/') {
 	strcpy(fullpath, "$ANDREWDIR");
 	strcat(fullpath, path+alen);
 	index_AddPrimary(newIndex, key, fullpath);
@@ -74,9 +71,7 @@ char *key, *path;
     
 }
 
-static BuildIndex(aindex, srcDirName, targetDirName)
-char *srcDirName, *targetDirName;
-struct Index *aindex;
+static int BuildIndex(struct Index *aindex, char *srcDirName, char *targetDirName)
 {
     DIR *srcDir;
     DIRENT_TYPE *sde;
@@ -110,7 +105,7 @@ struct Index *aindex;
     tfp = targetPath + strlen(targetPath);
     *tfp++ = '/';		/* tfp now points after the trailing / */
 
-    while(sde=readdir(srcDir)) {
+    while((sde=readdir(srcDir))) {
         if (strcmp(sde->d_name, ".") == 0 || strcmp(sde->d_name, "..") == 0)
 	    continue;
         strcpy(sfp, sde->d_name); /* complete the source path */
@@ -147,7 +142,7 @@ struct Index *aindex;
 }
 
 
-void show_usage()
+static void show_usage(void)
 {
     fprintf(stderr,"usage: %s [-n] [-v] input-file destination-index-dir\n", prog);
     fprintf(stderr,"\tinput file contains real-dir referencing-name pairs\n");
@@ -157,11 +152,9 @@ void show_usage()
 
 
 
-main(argc, argv)
-int argc;
-char **argv;
+int main(int argc, char **argv)
 {
-    struct Index *newIndex;
+    struct Index *newIndex = NULL;
     long code, lineNo[FSSIZE];
     FILE *inputFile[FSSIZE], *tfile;
     char *inputName, *destinationName, *tmp;

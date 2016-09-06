@@ -37,6 +37,7 @@ ATK_INTER
 
 class mark : public ATK  {
 public:
+    virtual ~mark() {} /* avoid delete issues */
 	virtual ATKregistryEntry *ATKregistry();
 
 

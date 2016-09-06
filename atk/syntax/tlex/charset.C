@@ -70,7 +70,7 @@ CharsetParse(char  *s)
 	{
 	static char set[256];
 	int c, d;
-	int len, i;
+	unsigned int len, i;
 
 	for (i = 0; i < sizeof(set); i++)
 		set[i] = 0;
@@ -83,7 +83,7 @@ CharsetParse(char  *s)
 		if (c == '-')
 			ErrorA(ERROR, "Bogus '-' in charset", s-1);
 		if (c == '\\') {
-			c = TransEscape(s, &len);
+			c = TransEscape(s, (int *)&len);
 			s += len;
 		}
 		/* c is a char.  Maybe first of range */
@@ -101,7 +101,7 @@ CharsetParse(char  *s)
 				s--;
 			}
 			if (d == '\\') {
-				d = TransEscape(s, &len);
+				d = TransEscape(s, (int *)&len);
 				s += len;
 			}
 		}

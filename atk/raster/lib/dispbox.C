@@ -62,7 +62,9 @@
 #include <dispbox.h>
 #include <rastvaux.h>
 
+#ifdef DB
 static char debug;
+#endif
 void DisplayBoxBlitOverlap(class rasterview  *self, class rasterimage  *pix);
 #if 0
 void DisplayBoxDrawPanHighlight(class rasterview  *self);
@@ -892,7 +894,6 @@ void rasterview_SetPixelBehindDisplayBox(class rasterview  *self, class rasterim
     /* Image is in Expanded Mode. */
     struct rectangle sub;
     struct rectangle *DB = &self->DisplayBox;
-    class graphic *G = (self)->GetDrawable();
     class graphic *pattern = (bit) ? self->BlackPattern : self->WhitePattern;
     long byte = (bit) ? BLACKBYTE : WHITEBYTE;
 

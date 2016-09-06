@@ -252,7 +252,6 @@ ReadOldFormat(class link  *self, FILE  *fp, long  id) {
 link::Read(FILE  *fp, long  id)	{
 	char *buf;
 	int ds_version; 
-	long error;
 	
 	(this)->SetID( (this)->UniqueID());
 

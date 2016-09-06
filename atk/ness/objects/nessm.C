@@ -55,7 +55,6 @@ ATKdefineRegistry(nessm, ATK, nessm::InitializeClass);
 static const char *mousehits(enum view_MouseAction  act);
 static long InsertKey(class ness  *n, class mark  *m, long  pos, char  key);
 static int InsertProcCall(class ness  *n, long  pos, struct proctable_Entry  *proc, long  rock);
-static void DumpActions(struct action  *a);
 static void RegionToPrintable(class ness  *n, long  pos , long  len);
 static struct action *QueueAnswers(class ness  *n, struct action  *look, class mark  *m);
 static void DoConv(class view  *self, long  rock);
@@ -106,7 +105,7 @@ static int InsertProcCall(class ness  *n, long  pos, struct proctable_Entry  *pr
     strcpy(procbuf, procname);
 		
     p=procbuf-1;
-    while(p=strchr(p+1, '-')) *p='_';
+    while((p=strchr(p+1, '-'))) *p='_';
     lastpos=pos;
     (n)->AlwaysInsertCharacters( pos, menutmpl, strlen(menutmpl));
     (n)->AlwaysInsertCharacters( pos, procbuf, strlen(procbuf));
@@ -125,6 +124,7 @@ static int InsertProcCall(class ness  *n, long  pos, struct proctable_Entry  *pr
 }
 
 
+#if 0 /* unused */
 static void DumpActions(struct action  *a) {
     while(a) {
 	printf("a:%p\n",a);
@@ -159,6 +159,7 @@ static void DumpActions(struct action  *a) {
 	a=a->next;
     }
 }
+#endif
 
 #define CNTRL(c) ((c)-'@')
 
@@ -252,9 +253,7 @@ static const char * const choices[]={
 static void DoConv(class view  *self, long  rock) {
     struct action *look=im::GetMacro();
     class ness *n;
-    char ch;
     char nbuf[256], finalname[512], reallyfinalname[512];
-    char *p;
     long pos;
     char *tname;
     long tlen;

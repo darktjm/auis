@@ -220,7 +220,7 @@ PRIVATE HTList *session;	 /* List of control connections in a session */
 **	the error codes.
 **
 */
-PRIVATE void HTFTPParseError ARGS1(HTChunk **, error)
+PRIVATE void HTFTPParseError (HTChunk **error)
 {
     HTChunk *oldtext;
     if (!error || !*error || !(*error)->data) {
@@ -263,7 +263,7 @@ PRIVATE void HTFTPParseError ARGS1(HTChunk **, error)
 **	return code is removed.
 **
 */
-PRIVATE void HTFTPParseWelcome ARGS1(HTChunk **, welcome)
+PRIVATE void HTFTPParseWelcome (HTChunk **welcome)
 {
     HTChunk *oldtext;
     if (!welcome || !*welcome || !(*welcome)->data) {
@@ -306,7 +306,7 @@ PRIVATE void HTFTPParseWelcome ARGS1(HTChunk **, welcome)
 **	states in the login procedure.
 **
 */
-PRIVATE void HTFTPAddWelcome ARGS1(ftp_ctrl_info *, ctrl)
+PRIVATE void HTFTPAddWelcome (ftp_ctrl_info *ctrl)
 {
     if (!ctrl->welcome)				            /* If first time */
 	ctrl->welcome = HTChunkCreate(128);
@@ -330,7 +330,7 @@ PRIVATE void HTFTPAddWelcome ARGS1(ftp_ctrl_info *, ctrl)
  *
  * Thanks to James.W.Matthews@Dartmouth.EDU (James W. Matthews)
  */
-PRIVATE BOOL is_ls_date ARGS1(char *, s)
+PRIVATE BOOL is_ls_date (char *s)
 {
     /* must start with three alpha characget_striters */
     if (!isalpha(*s++) || !isalpha(*s++) || !isalpha(*s++))
@@ -390,7 +390,7 @@ PRIVATE BOOL is_ls_date ARGS1(char *, s)
 **
 **	BUG: Handles US dates only!!!
 */
-PRIVATE int HTStrpMonth ARGS1(char *, month)
+PRIVATE int HTStrpMonth (char *month)
 {
     int ret;
     if (!strncmp(month, "JAN", 3))
@@ -435,7 +435,7 @@ PRIVATE int HTStrpMonth ARGS1(char *, month)
 **
 **	Returns 0 on error.
 */
-PRIVATE time_t HTStrpTime ARGS1(char *, datestr)
+PRIVATE time_t HTStrpTime (char *datestr)
 {
     struct tm *time_info;		    /* Points to static tm structure */
     char *bcol = datestr;			             /* Column begin */
@@ -492,7 +492,7 @@ PRIVATE time_t HTStrpTime ARGS1(char *, datestr)
 **
 **	Returns 0 on error
 */
-PRIVATE time_t HTVMSStrpTime ARGS1(char *, datestr)
+PRIVATE time_t HTVMSStrpTime (char *datestr)
 {
     struct tm *time_info;		    /* Points to static tm structure */
     char *col;
@@ -530,7 +530,7 @@ PRIVATE time_t HTVMSStrpTime ARGS1(char *, datestr)
 **	similar to the Unix way used in HTBrowseDirectory().
 **
 */
-PRIVATE long HTFTPFilePerm ARGS1(char *, permission)
+PRIVATE long HTFTPFilePerm (char *permission)
 {
     char *strptr = permission;
     long mode = 0L;
@@ -584,7 +584,7 @@ PRIVATE long HTFTPFilePerm ARGS1(char *, permission)
 **
 **	Returns YES if OK, NO on error
 */
-PRIVATE BOOL parse_unix_line ARGS2(char *,line, dir_file_info *,f_info)
+PRIVATE BOOL parse_unix_line (char *line, dir_file_info *f_info)
 {
     char *column;
     char *strptr;
@@ -651,7 +651,7 @@ PRIVATE BOOL parse_unix_line ARGS2(char *,line, dir_file_info *,f_info)
 **
 **	Returns YES if OK, NO on error
 */
-PRIVATE BOOL parse_vms_line ARGS2(char *, line, dir_file_info *, f_info)
+PRIVATE BOOL parse_vms_line (char *line, dir_file_info *f_info)
 {
     int i, j;
     long ialloc;
@@ -752,8 +752,8 @@ PRIVATE BOOL parse_vms_line ARGS2(char *, line, dir_file_info *, f_info)
 **      If first_entry is true, this it must be the first name in a directory.
 **	Returns YES if OK, NO on error
 */
-PRIVATE BOOL parse_dir_entry ARGS4(ftp_data_info *, data, char *, entry,
-				   BOOL, first_entry, dir_file_info *, f_info)
+PRIVATE BOOL parse_dir_entry (ftp_data_info *data, char *entry,
+				   BOOL first_entry, dir_file_info *f_info)
 {
     BOOL status = YES;
     switch (data->ctrl->server) {
@@ -825,8 +825,8 @@ PRIVATE BOOL parse_dir_entry ARGS4(ftp_data_info *, data, char *, entry,
 }
 
 
-PRIVATE int HTFTP_get_dir_string ARGS2(HTNetInfo *, data,
-				       dir_file_info *, f_info)
+PRIVATE int HTFTP_get_dir_string (HTNetInfo *data,
+				       dir_file_info *f_info)
 {
     int status = 1;
     int ch;			      /* Must be int in order to contain EOF */
@@ -878,8 +878,8 @@ PRIVATE int HTFTP_get_dir_string ARGS2(HTNetInfo *, data,
 **
 **	Returns 0 on OK, else -1 but does NOT close the connection
 */
-PRIVATE int HTFTP_send_cmd ARGS3(ftp_ctrl_info *, ctrl, char *, cmd,
-				 char *, pars)
+PRIVATE int HTFTP_send_cmd (ftp_ctrl_info *ctrl, char *cmd,
+				 char *pars)
 {
     char *command;
     if (!ctrl && ctrl->sockfd == INVSOC) {
@@ -935,8 +935,8 @@ PRIVATE int HTFTP_send_cmd ARGS3(ftp_ctrl_info *, ctrl, char *, cmd,
 **	Returns the 3 digit return code on OK, else -1 but does NOT close
 **	the control connection.
 */
-PRIVATE int HTFTP_get_response ARGS2(ftp_ctrl_info *, ctrl_info,
-				     HTChunk **, text)
+PRIVATE int HTFTP_get_response (ftp_ctrl_info *ctrl_info,
+				     HTChunk **text)
 {
     int result;				         /* Three-digit decimal code */
     int offset = 0;		      /* Offset for each newline in response */
@@ -1008,7 +1008,7 @@ PRIVATE int HTFTP_get_response ARGS2(ftp_ctrl_info *, ctrl_info,
 **	Closes the data connection and frees memory
 **	Returns 0 if OK, -1 on error
 */
-PRIVATE int HTFTP_close_data_con ARGS1(ftp_data_info *, data)
+PRIVATE int HTFTP_close_data_con (ftp_data_info *data)
 {
     int status = 0;
     if (data) {
@@ -1040,7 +1040,7 @@ PRIVATE int HTFTP_close_data_con ARGS1(ftp_data_info *, data)
 **	then it can be closed and the memory freed.
 **	Returns 0 if OK, -1 on error
 */
-PRIVATE int HTFTP_close_ctrl_con ARGS1(ftp_ctrl_info *, ctrl)
+PRIVATE int HTFTP_close_ctrl_con (ftp_ctrl_info *ctrl)
 {
     int status = 0;
     if (ctrl && (!ctrl->data_cons ||
@@ -1079,7 +1079,7 @@ PRIVATE int HTFTP_close_ctrl_con ARGS1(ftp_ctrl_info *, ctrl)
 **	are pending => they are all removed, so be careful!
 **	Returns 0 if OK, -1 on error
 */
-PRIVATE int HTFTP_abort_ctrl_con ARGS1(ftp_ctrl_info *, ctrl)
+PRIVATE int HTFTP_abort_ctrl_con (ftp_ctrl_info *ctrl)
 {
     int status = 0;
     if (!ctrl) {
@@ -1137,8 +1137,8 @@ PRIVATE int HTFTP_abort_ctrl_con ARGS1(ftp_ctrl_info *, ctrl)
 **	Returns YES if anything BUT the domain and serv_port is specified,
 **	else NO 
 */
-PRIVATE BOOL HTFTP_parse_login ARGS3(char *, url, user_info *, user,
-				     u_short *, serv_port)
+PRIVATE BOOL HTFTP_parse_login (char *url, user_info *user,
+				     u_short *serv_port)
 {
     BOOL status = NO;
     char *login = HTParse(url, "", PARSE_HOST);
@@ -1187,7 +1187,7 @@ PRIVATE BOOL HTFTP_parse_login ARGS3(char *, url, user_info *, user,
 **
 **	Returns YES if type is found, else NO 
 */
-PRIVATE BOOL HTFTP_parse_datatype ARGS2(char *, url, char **, datatype)
+PRIVATE BOOL HTFTP_parse_datatype (char *url, char **datatype)
 {
     BOOL retour = NO;
     char *path = HTParse(url, "", PARSE_PATH);
@@ -1226,7 +1226,7 @@ PRIVATE BOOL HTFTP_parse_datatype ARGS2(char *, url, char **, datatype)
 **	are optional.
 **	If error, NULL is returned.
 */
-PRIVATE ftp_ctrl_info *HTFTP_init_con ARGS2(HTRequest *, req, char *, url)
+PRIVATE ftp_ctrl_info *HTFTP_init_con (HTRequest *req, char *url)
 {
     int status;
     BOOL use_url = NO;	   /* YES if uid and passwd are specified in the URL */
@@ -1442,7 +1442,7 @@ PRIVATE ftp_ctrl_info *HTFTP_init_con ARGS2(HTRequest *, req, char *, url)
 **	master_socket	is socket number if good, else negative.
 **	port_number	is valid if good.
 */
-PRIVATE BOOL get_listen_socket ARGS1(ftp_data_info *, data)
+PRIVATE BOOL get_listen_socket (ftp_data_info *data)
 {
     SockA local_addr;				   /* Binary network address */
     int status = -1;
@@ -1577,7 +1577,7 @@ PRIVATE BOOL get_listen_socket ARGS1(ftp_data_info *, data)
 **
 **	Returns -2 on ERROR, -1 on FAILURE, 0 on SUCCESS.
 */
-PRIVATE int HTFTP_login ARGS1(ftp_ctrl_info *, ctrl)
+PRIVATE int HTFTP_login (ftp_ctrl_info *ctrl)
 {
     enum _state {
 	P_ERROR  = -2,
@@ -1745,7 +1745,7 @@ PRIVATE int HTFTP_login ARGS1(ftp_ctrl_info *, ctrl)
 **
 **	Returns -2 on P_ERROR, -1 on FAILURE, 0 on SUCCESS.
 */
-PRIVATE int HTFTP_logout ARGS1(ftp_ctrl_info *, ctrl)
+PRIVATE int HTFTP_logout (ftp_ctrl_info *ctrl)
 {
     enum _state {
 	P_ERROR  = -2,
@@ -1793,8 +1793,8 @@ PRIVATE int HTFTP_logout ARGS1(ftp_ctrl_info *, ctrl)
  **
  **	Returns -2 on P_ERROR, -1 on FAILURE, 0 on SUCCESS.
  */
-PRIVATE int HTFTP_get_data_con ARGS3(HTRequest *, request,
-				     ftp_data_info *, data, char *, url)
+PRIVATE int HTFTP_get_data_con (HTRequest *request,
+				     ftp_data_info *data, char *url)
 {
     enum _state {
 	P_ERROR = -2,
@@ -1969,8 +1969,8 @@ PRIVATE int HTFTP_get_data_con ARGS3(HTRequest *, request,
 **
 **	Returns -2 on P_ERROR, -1 on FAILURE, 0 on SUCCESS.
 */
-PRIVATE int HTFTP_switch_to_port ARGS2(ftp_data_info *, data,
-				       HTRequest *, 	req)
+PRIVATE int HTFTP_switch_to_port (ftp_data_info *data,
+				       HTRequest *req)
 {
     enum _state {
 	P_ERROR = -2,
@@ -2014,8 +2014,8 @@ PRIVATE int HTFTP_switch_to_port ARGS2(ftp_data_info *, data,
 **
 **	Returns -1 on P_ERROR, 0 if data-connection, 1 if control connection.
 */
-PRIVATE int HTFTP_look_for_data ARGS2(HTRequest *, 	request,
-				      ftp_data_info *, 	data)
+PRIVATE int HTFTP_look_for_data (HTRequest *request,
+				      ftp_data_info *data)
 {
     int status = -1;
     fd_set read_socks;
@@ -2087,7 +2087,7 @@ PRIVATE int HTFTP_look_for_data ARGS2(HTRequest *, 	request,
 **	Thanks to James.W.Matthews@Dartmouth.EDU (James W. Matthews) for making
 **	his code available.
 */
-PRIVATE int HTFTPServerInfo ARGS1(ftp_ctrl_info *, ctrl)
+PRIVATE int HTFTPServerInfo (ftp_ctrl_info *ctrl)
 {
     enum _state {
 	P_ERROR  = -2,
@@ -2221,7 +2221,7 @@ PRIVATE int HTFTPServerInfo ARGS1(ftp_ctrl_info *, ctrl)
 	}
     }
     if (PROT_TRACE) {
-	static char *servers[] = {
+	static const char *servers[] = {
 	    "UNKNOWN",
 	    "GENERIC",
 	    "MACHTEN",
@@ -2255,7 +2255,7 @@ PRIVATE int HTFTPServerInfo ARGS1(ftp_ctrl_info *, ctrl)
 **	Returns relative path name if OK, else current location
 **
 */
-PRIVATE char *HTFTPLocation ARGS2(ftp_ctrl_info *, ctrl, char *, url)
+PRIVATE char *HTFTPLocation (ftp_ctrl_info *ctrl, char *url)
 {
     unsigned char getup = 0;
     char *current;
@@ -2340,8 +2340,8 @@ PRIVATE char *HTFTPLocation ARGS2(ftp_ctrl_info *, ctrl, char *, url)
 **
 **	Returns -2 on P_ERROR, -1 on FAILURE, 0 on SUCCESS.
 */
-PRIVATE int HTFTP_get_dir ARGS3(ftp_ctrl_info *, ctrl, HTRequest *, req,
-				char *, relative)
+PRIVATE int HTFTP_get_dir (ftp_ctrl_info *ctrl, HTRequest *req,
+				char *relative)
 {
     enum _state {
 	P_ERROR  = -2,
@@ -2626,8 +2626,8 @@ PRIVATE int HTFTP_get_dir ARGS3(ftp_ctrl_info *, ctrl, HTRequest *, req,
 **
 **	Returns -2 on P_ERROR, -1 on FAILURE, 0 on SUCCESS.
 */
-PRIVATE int HTFTP_get_file ARGS3(ftp_ctrl_info *, ctrl, HTRequest *, req,
-				 char *, relative)
+PRIVATE int HTFTP_get_file (ftp_ctrl_info *ctrl, HTRequest *req,
+				 char *relative)
 {
     enum _state {
 	P_ERROR  = -2,
@@ -2889,7 +2889,7 @@ PRIVATE int HTFTP_get_file ARGS3(ftp_ctrl_info *, ctrl, HTRequest *, req,
 **
 **    	Returns the welcome message from the login sequence
 */
-PUBLIC HTChunk *HTFTPWelcomeMsg ARGS1(HTNetInfo *, data)
+PUBLIC HTChunk *HTFTPWelcomeMsg (HTNetInfo *data)
 {
     return ((ftp_data_info *) data)->ctrl->welcome;
 }
@@ -2899,7 +2899,7 @@ PUBLIC HTChunk *HTFTPWelcomeMsg ARGS1(HTNetInfo *, data)
 **
 **    	Can we use long listings in HTDirBrw.c?
 */
-PUBLIC BOOL HTFTUseList ARGS1(HTNetInfo *, data)
+PUBLIC BOOL HTFTUseList (HTNetInfo *data)
 {
     return ((ftp_data_info *) data)->ctrl->use_list;
 }
@@ -2913,7 +2913,7 @@ PUBLIC BOOL HTFTUseList ARGS1(HTNetInfo *, data)
 **	independently of start and end session, and then each load runs like
 **	an atomic action.
 */
-PUBLIC void HTFTP_enable_session NOARGS
+PUBLIC void HTFTP_enable_session (void)
 {
     if (session) {
 	if (PROT_TRACE)
@@ -2930,7 +2930,7 @@ PUBLIC void HTFTP_enable_session NOARGS
 **
 **	Returns YES if OK, else NO
 */
-PUBLIC BOOL HTFTP_disable_session NOARGS
+PUBLIC BOOL HTFTP_disable_session (void)
 {
     BOOL status = YES;
     if (!session) {
@@ -2961,7 +2961,7 @@ PUBLIC BOOL HTFTP_disable_session NOARGS
 **	returns		<0		Error has occured
 **			HT_LOADED	OK
 */
-PUBLIC int HTLoadFTP ARGS1(HTRequest *, request)
+PUBLIC int HTLoadFTP (HTRequest *request)
 {
     char *url;
     int status = -1;

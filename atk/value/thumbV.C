@@ -481,6 +481,8 @@ class valueview * thumbV::DoHit( enum view_MouseAction  type,long  x,long  y,lon
 	    tt->string = (this)->GetValueString();
 	    (tt)->SetValue(this->tmpval);
 	    break;
+	default:
+	    break;
     }  
 
     return this;

@@ -177,7 +177,6 @@ public:
 	class tree	*tree;
 	char		*root_pathname;
 	class vector	*uid_uname_map;
-	char		 mycellname[1000];
 	int		 debug;
 };
 

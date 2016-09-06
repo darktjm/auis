@@ -136,12 +136,9 @@ static
 long Read_Body( class org		      *self, FILE			      *file )
       {
   boolean		      done = false;
-  long			      c, count, braces = 0, brackets = 0, status = ok,
-				      description_size, description_length,
-				      description_increment = 32;
+  long			      c, braces = 0, brackets = 0, status = ok;
   char				      string[4096], *ptr, *end_ptr;
-  char			     *description;
-  tree_type_node	      parent = NULL, child = NULL, node;
+  tree_type_node	      parent = NULL, child = NULL, node = NULL;
   class text			     *textp = NULL;
 
   IN(Read_Body);
@@ -250,7 +247,8 @@ long Read_Body( class org		      *self, FILE			      *file )
 long
 org::Write( FILE			      *file, long			       writeID, int			       level )
         {
-  long			      status, id;
+  long			      id;
+  UNUSED long status; /* only used when debugging */
 
   IN(org_Write);
   DEBUGdt(Headerwriteid,this->writeID);
@@ -345,5 +343,5 @@ void Strip( char  *string )
   len = strlen(ptr);
   memmove( string, ptr , len);
   ptr = string + len - 1;
-  while ( *ptr == ' '  ||  *ptr == '\t' && ptr >= string ) *ptr-- = 0;
+  while ( ( *ptr == ' '  ||  *ptr == '\t' ) && ptr >= string ) *ptr-- = 0;
 }

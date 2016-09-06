@@ -38,7 +38,6 @@ ATK_IMPL("tif.H")
 
 typedef	byte RGBvalue;
 
-static	u_long width, height;		/* image width & height */
 static	u_short bitspersample;
 static	u_short samplesperpixel;
 static	u_short photometric;
@@ -143,11 +142,11 @@ int LoadTIFF( class tif  *self, const char  *fname, FILE  *f, int    nc )
       FILE *tmpFile;
       sprintf(seed, "/tmp/.%d", getpid());
       strcpy(tmpName, tmpnam(seed));
-      if(tmpFile = fopen(tmpName, "w")) {
-	  if(buf = (char*) malloc(filesize)) {
+      if((tmpFile = fopen(tmpName, "w"))) {
+	  if((buf = (char*) malloc(filesize))) {
 	      fseek(fp, 0L, 0); /* rewind fp after finding filesize */
-	      if(fread(buf, sizeof(char), filesize, fp) == filesize) {
-		  if(fwrite(buf, sizeof(char), filesize, tmpFile) == filesize) {
+	      if((long)fread(buf, sizeof(char), filesize, fp) == filesize) {
+		  if((long)fwrite(buf, sizeof(char), filesize, tmpFile) == filesize) {
 		      free(buf);
 		      fclose(tmpFile);
 		      filename = tmpName;
@@ -193,7 +192,7 @@ int LoadTIFF( class tif  *self, const char  *fname, FILE  *f, int    nc )
   TIFFGetFieldDefaulted(tif, TIFFTAG_SAMPLESPERPIXEL, &spp);
   if (spp == 1) {
       if((rv = loadPalette(tif, w, h, photo, bps)) >= 0) {
-	  int i;
+	  unsigned int i;
 	  (self)->newRGBImage( w, h, bps);
 	  memmove((self)->Data(), pic, w*h);
 	  (self)->RGBSize() = (self)->RGBUsed() = (1<<bps);
@@ -232,8 +231,6 @@ static int loadPalette(TIFF  *tif, long   w, long   h, int    photo, int    bps)
 /*******************************************/
 static int loadColor(TIFF  *tif, long   w, long   h, int    photo, int    bps, int    nc)
 {
-  int  rv;
-
   /* allocate 24-bit image */
   pic24 = (byte *) malloc(w*h*3);
   if (!pic24) return(-1);
@@ -776,7 +773,6 @@ static int makecmap()
 		PALmap[i] = p;
 #define	CMAP(x)	*p++ = x;
 		switch (bitspersample) {
-			RGBvalue c;
 		case 1:
 			CMAP(i>>7);
 			CMAP((i>>6)&1);

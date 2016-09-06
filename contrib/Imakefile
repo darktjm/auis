@@ -44,19 +44,6 @@ RUNBTN = runbtn
 ZIP = zip
 #endif
 
-#ifdef AMS_DELIVERY_ENV
-POBB = pobbconf
-#endif
-
-#ifdef AMS_ENV
-#ifdef MK_EATMAIL
-EATMAIL = eatmail
-#endif
-#ifdef MK_BATMAIL
-BATMAIL = batmail
-#endif
-#endif /* AMS_ENV */
-
 #if !defined(SGI_4D_ENV) && !SY_OS2 && !defined(linux)
 TM = tm
 #endif
@@ -71,10 +58,6 @@ DEMOS = demos
 
 #ifdef MK_GTEXT
 GESTURES = gestures
-#endif
-
-#ifdef MK_WPEDIT
-WPEDIT = wpedit
 #endif
 
 #ifdef MK_TIME
@@ -99,21 +82,15 @@ CONTRIB_HTML = html
 GOFIG = gofig
 #endif
 
-#ifdef MK_VUI
-VUI = vui
-#endif
-
 #ifdef MK_PREVIEW
 PREVIEW = preview
 #endif
 
-SUBDIRS = $(ALINK) $(BATMAIL) $(BDFFONT) $(CALC) \
+SUBDIRS = $(ALINK) $(BDFFONT) $(CALC) \
 	$(CHAMP) $(CONTRIB_HTML) $(DEMOS) \
-	$(EATMAIL) $(GESTURES) $(GOFIG) $(MIT) \
-	$(PREVIEW) $(RUNBTN) $(TIME) $(TM) $(VUI) \
-	$(WPEDIT) $(ZIP)
-
-EXTRASUBDIRS = ${POBB}
+	$(GESTURES) $(GOFIG) $(MIT) \
+	$(PREVIEW) $(RUNBTN) $(TIME) $(TM) \
+	$(ZIP)
 
 CONTRIBLIBS =  alink bdffont calc champ circlepi clock \
 	gnucompat gofig gtext html lt note preview runbutton sched \

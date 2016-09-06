@@ -24,7 +24,7 @@ PRIVATE HTList * welcome_names = NULL;	/* Welcome.html, index.html etc. */
 /*
 **	Set default file name for welcome page on each directory.
 */
-PUBLIC void HTAddWelcome ARGS1(char *, name)
+PUBLIC void HTAddWelcome (char * name)
 {
     if (name) {
 	char * mycopy = NULL;
@@ -44,10 +44,10 @@ PUBLIC void HTAddWelcome ARGS1(char *, name)
 **	Check if actual filename (split in parts) fulfills
 **	the requirements.
 */
-PRIVATE BOOL multi_match ARGS4(char **, required,
-			       int,	m,
-			       char **, actual,
-			       int,	n)
+PRIVATE BOOL multi_match (char ** required,
+			       int	m,
+			       char ** actual,
+			       int	n)
 {
     int c;
     int i,j;
@@ -89,7 +89,7 @@ PRIVATE BOOL multi_match ARGS4(char **, required,
 **		describing the mathing files.
 **
 */
-PRIVATE HTList * dir_matches ARGS1(char *, path)
+PRIVATE HTList * dir_matches (char * path)
 {
     static char * required[MAX_SUFF+1];
     static char * actual[MAX_SUFF+1];
@@ -174,8 +174,8 @@ PRIVATE HTList * dir_matches ARGS1(char *, path)
 ** On exit:
 **	returns	a newly allocated absolute filepath.
 */
-PRIVATE char * HTGetBest ARGS2(HTRequest *,	req,
-			       char *,		path)
+PRIVATE char * HTGetBest (HTRequest *	req,
+			       char *		path)
 {
     HTList * matches;
     HTList * cur;
@@ -239,7 +239,7 @@ PRIVATE char * HTGetBest ARGS2(HTRequest *,	req,
 
 
 
-PRIVATE int welcome_value ARGS1(char *, name)
+PRIVATE int welcome_value (char * name)
 {
     HTList * cur = welcome_names;
     char * welcome;
@@ -254,7 +254,7 @@ PRIVATE int welcome_value ARGS1(char *, name)
 
 
 
-PRIVATE char * get_best_welcome ARGS1(char *, path)
+PRIVATE char * get_best_welcome (char * path)
 {
     char * best_welcome = NULL;
     int best_value = 0;
@@ -327,9 +327,9 @@ PRIVATE char * get_best_welcome ARGS1(char *, path)
 **	stat_info	  will contain inode information as
 **			  returned by stat().
 */
-PUBLIC char * HTMulti ARGS3(HTRequest *,	req,
-			    char *,		path,
-			    struct stat *,	stat_info)
+PUBLIC char * HTMulti (HTRequest *	req,
+			    char *		path,
+			    struct stat *	stat_info)
 {
     char * new_path = NULL;
     int stat_status = -1;

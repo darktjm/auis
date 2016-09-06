@@ -37,7 +37,7 @@ Library of Common Code</A>.
     int				right_depth;
 } HTBTElement;
 
-typedef int (*HTComparer) PARAMS((void * a, void * b));
+typedef int (*HTComparer) (void * a, void * b);
 
 typedef struct _HTBTree_top {
     HTComparer			compare;
@@ -48,28 +48,28 @@ typedef struct _HTBTree_top {
 </PRE>
 <H2>Create a binary tree given its discrimination
 routine</H2>
-<PRE>extern HTBTree * HTBTree_new PARAMS((HTComparer comp));
+<PRE>extern HTBTree * HTBTree_new (HTComparer comp);
 
 
 
 </PRE>
 <H2>Free storage of the tree but not
 of the objects</H2>
-<PRE>extern void HTBTree_free PARAMS((HTBTree* tree));
+<PRE>extern void HTBTree_free (HTBTree* tree);
 
 
 
 </PRE>
 <H2>Free storage of the tree and of the
 objects</H2>
-<PRE>extern void HTBTreeAndObject_free PARAMS((HTBTree* tree));
+<PRE>extern void HTBTreeAndObject_free (HTBTree* tree);
 
 
 
 </PRE>
 <H2>Add an object to a binary tree</H2>
 <PRE>
-extern void HTBTree_add PARAMS((HTBTree* tree, void * object));
+extern void HTBTree_add (HTBTree* tree, void * object);
 
 
 </PRE>
@@ -90,7 +90,7 @@ if != 0 give next object to the right.
 if none left.
 </DL>
 
-<PRE>extern HTBTElement * HTBTree_next PARAMS((HTBTree* tree, HTBTElement * ele));
+<PRE>extern HTBTElement * HTBTree_next (HTBTree* tree, HTBTElement * ele);
 
 #endif
 </PRE>

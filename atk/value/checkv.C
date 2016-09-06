@@ -83,7 +83,6 @@ static void Drawcheck(class checkv  * self)
     int side;
     int gap;
     struct rectangle r;
-    char ch;
     (self)->SetTransferMode(  graphic_COPY );
 
     if (!self->BlackPattern)
@@ -270,6 +269,8 @@ class valueview * checkv::DoHit( enum view_MouseAction  type,long  x,long  y,lon
 	    break;
 	case view_LeftUp:
 	    (tt)->SetValue(this->tmpval);
+	    break;
+	default:
 	    break;
     }  
 

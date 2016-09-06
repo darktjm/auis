@@ -101,11 +101,6 @@ SUBDIRS = $(SYS_CONFDIR)
 
 MkdirTarget($(DESTDIR)/lib/packages)
 
-#ifdef AFS_ENV
-AFSMAYBE=afs
-RegisterLibraries(afs, AFSBASEDIR,$(AFSBASEDIR),${AFSBASEDIR}/lib/afs/util.a $(AFSAUDITLIB) $(DESLIB) $(AFSBASEDIR)/lib/afs/libprot.a $(AFSBASEDIR)/lib/libubik.a $(AFSBASEDIR)/lib/afs/libcom_err.a $(AFSBASEDIR)/lib/libscrypt.a ${AFSBASEDIR}/lib/afs/util.a  $(AFSAUDITLIB) $(AFSSYSLIB) $(AFSBASEDIR)/lib/librx.a $(AFSBASEDIR)/lib/librxkad.a 	$(AFSBASEDIR)/lib/liblwp.a $(AFSBASEDIR)/lib/afs/libauth.a, $(DESTDIR)/lib/packages)
-#endif
-
 #ifndef MK_JPEG
 JPEGMAYBE=jpeg
 RegisterLibraries(jpeg, JPEGLIBDIR,$(JPEGLIBDIR),$(JPEGLIB),$(DESTDIR)/lib/packages)
@@ -123,14 +118,14 @@ TIFFINANDREW=$(TIFFLIB)
 RegisterLibraries(x,XLIBDIR,$(XLIBDIR),$(XLIBDIR)/libX11.a, $(DESTDIR)/lib/packages)
 
 
-ANDREWLIBS = $(BASEDIR)/lib/libATKDynLoad.a $(BASEDIR)/lib/libATKLink.a $(BASEDIR)/lib/libafs.a $(BASEDIR)/lib/libatkos.a $(BASEDIR)/lib/libcmenu.a $(BASEDIR)/lib/libcparser.a $(BASEDIR)/lib/libcui.a $(BASEDIR)/lib/libcuin.a $(BASEDIR)/lib/libdoload.a $(BASEDIR)/lib/libeli.a $(BASEDIR)/lib/liberrors.a $(BASEDIR)/lib/libindex.a $(JPEGINANDREW) $(BASEDIR)/lib/libmail.a $(BASEDIR)/lib/libmsshr.a $(BASEDIR)/lib/libmssrv.a $(BASEDIR)/lib/libossup.a $(BASEDIR)/lib/librxp.a $(BASEDIR)/lib/libshadows.a $(TIFFINANDREW) $(BASEDIR)/lib/libutil.a $(BASEDIR)/lib/libwpi.a
+ANDREWLIBS = $(BASEDIR)/lib/libATKDynLoad.a $(BASEDIR)/lib/libATKLink.a $(BASEDIR)/lib/libatkos.a $(BASEDIR)/lib/libcmenu.a $(BASEDIR)/lib/libcparser.a $(BASEDIR)/lib/libcui.a $(BASEDIR)/lib/libcuin.a $(BASEDIR)/lib/libdoload.a $(BASEDIR)/lib/libeli.a $(BASEDIR)/lib/liberrors.a $(BASEDIR)/lib/libindex.a $(JPEGINANDREW) $(BASEDIR)/lib/libmail.a $(BASEDIR)/lib/libmsshr.a $(BASEDIR)/lib/libmssrv.a $(BASEDIR)/lib/libossup.a $(BASEDIR)/lib/librxp.a $(BASEDIR)/lib/libshadows.a $(TIFFINANDREW) $(BASEDIR)/lib/libutil.a $(BASEDIR)/lib/libwpi.a
 
 RegisterLibraries(auis, ANDREWDIR,$(BASEDIR), \
 	$(ANDREWLIBS), $(DESTDIR)/lib/packages)
 
 defaults:
 	$(RM) defaults ,defaults
-	echo auis x $(JPEGMAYBE) $(TIFFMAYBE) $(AFSMAYBE)>,defaults
+	echo auis x $(JPEGMAYBE) $(TIFFMAYBE)>,defaults
 	mv ,defaults defaults
 clean::
 	$(RM) defaults ,defaults

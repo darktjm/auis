@@ -30,6 +30,8 @@
 
 #include <util.h>
 
+#include "helpapp.h"
+
 #ifdef MAXHOSTNAMELEN
 #undef MAXHOSTNAMELEN
 #endif /* MAXHOSTNAMELEN */
@@ -51,10 +53,10 @@ static struct sockaddr_in myaddr;
  * send_pack: send a command packet to an existing help instance
  */
 static int 
-send_pack(c, s, sock) 
-char  c;				/* the command char */
-char  *s;			/* the string to send */
-int  sock;			/* the socket to send to */
+send_pack(
+char  c,				/* the command char */
+char  *s,			/* the string to send */
+int  sock)			/* the socket to send to */
  {
      long len;
     /* buf needs to be an array of longs so that it will be
@@ -78,15 +80,15 @@ char *ncproc_GetHelpOn=NULL;
  * start up and start accepting connections and commands from other helps
  */
 void 
-helpapp_ncproc ()
+helpapp_ncproc (void)
 {
     int ns;
     struct sockaddr_in helpaddr;
-    int addrlen;
+    socklen_t addrlen;
     char buf[MAXPATHLEN+1];
-    char errbuf[HNSIZE + 50];
     long len;
 /* 
+    char errbuf[HNSIZE + 50];
 		help_SetAliasesFile(buf+1); 
 		((help::GetInstance())->GetIM())->ExposeWindow(); 
 		sprintf(errbuf, error, buf+1);
@@ -125,12 +127,11 @@ helpapp_ncproc ()
 }
 
 int 
-help_unique()
+help_unique(void)
 {
     int i;
     char *wmHost = NULL, *dpyHost = NULL, displayHost[MAXHOSTNAMELEN], *colon;
     int runningLocally = 0;
-    static FILE *tfile;
     
     if(helpPort==-1) {
 /* lookup the help port, default to the 'right' thing */
@@ -140,18 +141,10 @@ help_unique()
 	    helpPort = htons(HELPSOCK);
     }
     
-#ifdef WM_ENV
-    wmHost = (char *) getenv("WMHOST");
-    if (wmHost == NULL) {
-	wmHost = (char *)malloc(MAXHOSTNAMELEN * sizeof(char));
-	gethostname(wmHost, MAXHOSTNAMELEN);
-	runningLocally = 1;
-    }
-#endif /* WM_ENV */
 #ifdef X11_ENV
     wmHost = (char *)malloc(MAXHOSTNAMELEN * sizeof(char));
     gethostname(wmHost, MAXHOSTNAMELEN);
-    if(dpyHost = (char *) getenv("DISPLAY")) {
+    if((dpyHost = getenv("DISPLAY"))) {
 	strcpy(displayHost, dpyHost);
 	if (*displayHost && (colon = strchr(displayHost, ':')) != NULL) {
 	    *colon = (char)0;

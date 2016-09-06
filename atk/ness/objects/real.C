@@ -169,8 +169,8 @@ realUnary(char  op, unsigned char *iar) {
 	void
 realOther(char  op, unsigned char *iar) {
 	union stackelement *NSP = NSPstore;
-	double x;
-	long l;
+	double x = 0.0;
+	long l = 0;
 	struct dblstkelt *left ;
 
 	/* check arguments */

@@ -62,15 +62,15 @@ struct drawingState {
 #define BOUNDINGBOXSLOPX 40
 #define BOUNDINGBOXSLOPY 40
 
-extern struct pane *SetPaneNum();
-extern int SetPanePtr();
-extern struct selection *SetSelectionNum();
-extern int SetSelectionPtr();
-extern void InitializeBoundingBoxWindow();
-extern void ShrinkBoundingBoxWindow();
-extern void CalculatePaneAndSelection();
-extern void ShowAPane();
-extern void CreateMenuStack();
+extern struct pane *SetPaneNum(struct cmenu *menu, struct drawingState *state, int paneNum);
+extern int SetPanePtr(struct cmenu *menu, struct drawingState *state, struct pane *panePtr);
+extern struct selection *SetSelectionNum(struct cmenu *menu, struct drawingState *state, int selectionNum);
+extern int SetSelectionPtr(struct cmenu *menu, struct drawingState *state, struct selection *selectionPtr);
+extern void CalculatePaneAndSelection(struct cmenu *menu, struct drawingState *state, int x, int y, int *returnPaneNum, int *returnSelNum, struct pane **returnPanePtr, struct selection **returnSelPtr);
+extern void ShowAPane(struct cmenu *menu, struct drawingState *state, struct pane *pane, long x, long y, int position);
+extern void CreateMenuStack(struct cmenu *menu, struct drawingState *state, long x, long y, Window parentWindow);
+extern void DrawMenus(struct cmenu *menu, struct drawingState *state);
+extern void FlipButton(struct cmenu *menu, struct drawingState *state, int paneNum, int selectionNum, struct selection *selectionPtr, int onOrOff);
 
 #define GetPaneNum(state) ((state)->paneNum)
 #define GetPanePtr(state) ((state)->panePtr)

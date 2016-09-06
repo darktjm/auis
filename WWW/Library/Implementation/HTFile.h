@@ -33,14 +33,14 @@ Multiformat Handling
   SPLIT FILENAME TO SUFFIXES
   
  */
-extern int HTSplitFilename PARAMS((char *       s_str,
-                                   char **      s_arr));/*
+extern int HTSplitFilename (char *       s_str,
+                                   char **      s_arr);/*
 
   GET CONTENT DESCRIPTION ACCORDING TO SUFFIXES
   
  */
-extern HTContentDescription * HTGetContentDescription PARAMS((char ** actual,
-                                                              int         n));
+extern HTContentDescription * HTGetContentDescription (char ** actual,
+                                                              int         n);
 
 #define MULTI_SUFFIX ".multi"   /* Extension for scanning formats */
 #define MAX_SUFF 15             /* Maximum number of suffixes for a file *//*
@@ -48,17 +48,17 @@ extern HTContentDescription * HTGetContentDescription PARAMS((char ** actual,
 Convert filenames between local and WWW formats
 
  */
-extern char * HTLocalName PARAMS((CONST char * name));/*
+extern char * HTLocalName (CONST char * name);/*
 
 Make a WWW name from a full local path name
 
  */
-extern char * WWW_nameOfFile PARAMS((const char * name));/*
+extern char * WWW_nameOfFile (const char * name);/*
 
 Generate the name of a cache file
 
  */
-extern char * HTCacheFileName PARAMS((CONST char * name));/*
+extern char * HTCacheFileName (CONST char * name);/*
 
 Define the Representation for a File Suffix
 
@@ -82,27 +82,27 @@ Define the Representation for a File Suffix
 ** Example:  HTSetSuffix(".ps", "application/postscript", "8bit", NULL, 1.0);
 */
 
-extern void HTSetSuffix PARAMS((CONST char *    suffix,
+extern void HTSetSuffix (CONST char *    suffix,
                                CONST char *     representation,
                                CONST char *     encoding,
                                CONST char *     language,
-                               double           quality));
+                               double           quality);
 
-extern void HTAddType PARAMS((CONST char *      suffix,
+extern void HTAddType (CONST char *      suffix,
                               CONST char *      representation,
                               CONST char *      encoding,
-                              double            quality));
+                              double            quality);
 
-extern void HTAddEncoding PARAMS((CONST char *  suffix,
+extern void HTAddEncoding (CONST char *  suffix,
                                   CONST char *  encoding,
-                                  double                quality));
+                                  double                quality);
 
-extern void HTAddLanguage PARAMS((CONST char *  suffix,
+extern void HTAddLanguage (CONST char *  suffix,
                                   CONST char *  language,
-                                  double                quality));
+                                  double                quality);
 
 
-extern void HTFile_deleteSuffixes NOPARAMS;/*
+extern void HTFile_deleteSuffixes (void);/*
 
 Get Representation and Encoding from file name
 
@@ -115,18 +115,18 @@ Get Representation and Encoding from file name
   *pLanguage              The language.
                          
  */
-extern HTFormat HTFileFormat PARAMS((
+extern HTFormat HTFileFormat (
                 CONST char *    filename,
                 HTAtom **       pEncoding,
-                HTAtom **       pLanguage));
+                HTAtom **       pLanguage);
 
 /*
 
 Determine file value from file name
 
  */
-extern double HTFileValue PARAMS((
-                CONST char * filename));
+extern double HTFileValue (
+                CONST char * filename);
 
 /*
 
@@ -144,7 +144,7 @@ Determine write access to a file
    Isn't there a quicker way?
    
  */
-extern BOOL HTEditable PARAMS((CONST char * filename));
+extern BOOL HTEditable (CONST char * filename);
 
 /*
 
@@ -160,8 +160,8 @@ Determine a suitable suffix, given the representation
                          else NULL.
                          
  */
-extern CONST char * HTFileSuffix PARAMS((
-                HTAtom* rep));
+extern CONST char * HTFileSuffix (
+                HTAtom* rep);
 
 
 /*

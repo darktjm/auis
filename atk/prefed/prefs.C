@@ -48,7 +48,6 @@ static boolean freestring(char  *name, long  rock);
 static void freestringlist(class list  *vl);
 static boolean freeall(struct prefdesc  *pd, class prefs  *rock);
 static boolean freegroups(struct prefgroup  *pg, class prefs  *self);
-static boolean AddViews(char  *vname, struct therock  *tr);
 static struct prefdesc *NewPrefDesc(class prefs  *self, const char  *p);
 static boolean CopyViewName(char  *name, class list  *nl);
 static class list *CopyViewList(class list  *vl);
@@ -59,7 +58,6 @@ static boolean FixOrderValues(struct prefdesc  *pd, long  val);
 static class list *HandleViewList(class prefs  *self, char  *buf);
 static boolean FindDesc(struct prefdesc  *pd, struct thedescrock  *rock);
 static boolean ListsEqual(class list  *l1 , class list  *l2);
-static boolean InsertPref(struct prefdesc  *pd, class prefs  *self);
 static void HandlePref(class prefs  *self, struct prefline  *line, int  *order);
 static char *myindex(char  *p, char  ch);
 static char * SetBuf(struct wbuf  *wb, const char  *str);
@@ -85,8 +83,9 @@ static int FindCat(struct prefgroup  *a, char  *b)
     return a->name==b?0:1;
 }
 
-#define STRDUP(x) (x?NewString(x):NULL)
-#define SAVESTR(x) (x?strcache::SaveStr(x):NULL)
+#define STRDUP(x) (x?strdup(x):NULL)
+#define SaveStr strcache::SaveStr
+#define SAVESTR(x) (x?SaveStr(x):NULL)
 #define zfree(xxx) do { if(xxx) { free(xxx); (xxx)=NULL;}} while (0)
 
 	
@@ -112,7 +111,7 @@ static void ApplyHelpStyles(class prefs  *self)
 {
     long i;
     class stylesheet *ss=(self->help)->GetStyleSheet();
-    class style *b=NULL, *bb, *s;
+    class style *b=NULL, *bb = NULL, *s;
     if(ss) {
 	b=(ss)->Find( "subsection");
 	bb=(ss)->Find( "groupname");
@@ -136,7 +135,6 @@ static void ApplyHelpStyles(class prefs  *self)
 prefs::prefs()
 {
     const char *file;
-    FILE *fp2;
     long err, errs=0;
     const char *files;
     char filenamebuf[1025];
@@ -334,22 +332,10 @@ struct therock {
     class prefval *obj;
 };
 
-static boolean AddViews(char  *vname, struct therock  *tr)
-{
-    class prefs *self=tr->self;
-    class prefval *obj=tr->obj;
-    long pos=tr->pos;
-    (self)->AlwaysAddView( pos, vname, obj);
-    (self)->AlwaysInsertCharacters( pos+1, "\n", 1);
-    tr->pos+=2;
-    return TRUE;
-}
-
 static struct prefdesc *NewPrefDesc(class prefs  *self, const char  *p)
 {
     struct prefdesc *result=(struct prefdesc *)malloc(sizeof(struct prefdesc));
     char *q, *mp, *pp;
-    enum prefval_Type type;
     char separators[3];
     separators[0]=separators[1]=separators[2]='\0';
     result->app=NULL;
@@ -389,7 +375,7 @@ static struct prefdesc *NewPrefDesc(class prefs  *self, const char  *p)
 	    strncpy(separators, pp, 2);
 	} else strcpy(separators, ":");
 
-	result->seps=SAVESTR(separators);
+	result->seps=SaveStr(separators);
     }
     free(mp);
     return result;
@@ -511,7 +497,7 @@ struct prefdesc *prefs::DuplicatePref(struct prefdesc  *pd, char  *newapp , char
     (result->obj)->AddObserver( this);
     if(pd->order>=0) {
 	long ipos=(-1);
-	(this->prefsp)->Enumerate((list_efptr)FixOrderValues, (char *)pd->order);
+	(this->prefsp)->Enumerate((list_efptr)FixOrderValues, (char *)(long)pd->order);
 	this->maxorder++;
 	if(pd->app==star || pd->app==NULL) {
 	    result->order=pd->order;
@@ -580,7 +566,6 @@ static class list *HandleViewList(class prefs  *self, char  *buf)
     while(p) {
 	char *q=strchr(p, ' ');
 	const char *vname;
-	long pos=(self)->GetLength();
 	if(q) *q='\0';
 	if(*p!='\0') {
 	    vname=SAVESTR(prefs::TranslateViewName(p));
@@ -638,30 +623,10 @@ static boolean ListsEqual(class list  *l1 , class list  *l2)
 }
 
 
-static boolean InsertPref(struct prefdesc  *pd, class prefs  *self)
-{
-    if(pd->shadow && self->sortby!=prefs_Group) return TRUE;
- 
-    if(self->lastgroup==NULL || (self->lastgroup!=pd->group)) {
-	struct prefgroup *pg;
-	self->lastgroup=pd->group;
-	if((self->categories)->Enumerate((list_efptr)FindCat, (char *)pd->group)) return TRUE;
-	pg=(struct prefgroup *)malloc(sizeof(struct prefgroup));
-	if(pg==NULL) return FALSE;
-	pg->name=pd->group;
-	pg->grouphelp=0;
-	(self->categories)->InsertEnd((char *)pg);
-    }
-    return TRUE;
-/* see code at end of this file... it doesn't get used right now, but might be useful someday... */
-}
-
 static void HandlePref(class prefs  *self, struct prefline  *line, int  *order)
 {
     class prefval *obj=NULL;
-    int len;
     char *p;
-    long lpos;
     struct prefdesc *desc;
     struct thedescrock otherrock;
     boolean newobj=FALSE;
@@ -737,7 +702,6 @@ static void HandlePref(class prefs  *self, struct prefline  *line, int  *order)
     }
     
     if(newobj) {
-	long spos;
 	obj=new prefval;
 	if(obj==NULL) return;
 	if(desc->app!=app) {
@@ -1025,7 +989,6 @@ static boolean ReadPrefLine(class prefs  *self,struct prefline  *line)
 	} else if(buf[0]=='?') {
 	    char *p=myindex(buf, ':'); 
 	    if(p) {
-		class prefval *obj;
 		*p='\0';
 		line->cond=CondBufSet(buf+1);
 		pp=p+1;
@@ -1068,7 +1031,7 @@ static boolean ReadPrefLine(class prefs  *self,struct prefline  *line)
 	    fprintf(stderr, "prefs WARNING: error in description for preference: %s.%s\n", line->app?line->app:"(NULL)", line->name?line->name:"(NULL)");
 	}
 	if(name && line->helppos>=0) {
-	    long len=strlen(name), len2;
+	    long len=strlen(name);
 	    long pos=line->helppos;
 	    AddHelpStyle(self, pos, len, PrefsSubsection);
 	    (self->help)->AlwaysInsertCharacters( pos, name, len);
@@ -1285,8 +1248,6 @@ static boolean PrintPrevLines(char  *line, struct writerock  *rock)
 
 static boolean writeprefs(struct prefdesc  *pd, struct writerock  *rock)
 {
-    class prefs *self=rock->self;
-    FILE *fp=rock->fp;
     char buff[10240];
     rock->buf=buff;
     if(pd->shadow) return TRUE;
@@ -1418,7 +1379,6 @@ long prefs::Write(FILE  *file, long  writeID, int  level)
 static char *ReadLine(class text *self)
 {
     static int bufsize=0;
-    int bp=0;
     static char *buf=NULL;
     
     long pos=(self)->GetFence(); /* use the fence to track our position. */

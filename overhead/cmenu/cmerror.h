@@ -52,4 +52,4 @@
  * cmenu error code and error list definitions.
  */
 extern int _cmErrorCode;
-extern char *_cmErrorList[];
+extern const char * const _cmErrorList[];

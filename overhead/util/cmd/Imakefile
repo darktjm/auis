@@ -8,12 +8,6 @@ NormalObjectRule()
 
 DEFINES=-DAFSBASEDIR=\"$(AFSBASEDIR)\"
 
-#ifdef WHITEPAGES_ENV
-
-ProgramTarget(newbt, newbt.o, $(UTILLIB),${NETLIBS} ${BSDLIB})
-InstallProgram(newbt, $(DESTDIR)/etc)
-#endif /* WHITEPAGES_ENV */
-
 ProgramTarget(pref, pref.o, $(UTILLIB),${NETLIBS} ${BSDLIB})
 InstallProgram(pref, $(DESTDIR)/bin)
 

@@ -61,7 +61,7 @@
 
 #define DEBUG 1 /* ### */
 
-static void DumpStyle(struct textps_style  *ts);
+/* static void DumpStyle(struct textps_style  *ts); */
 static long ParseUnit(long  oper, enum style_Unit  unit);
 static struct textps_style *AllocStyle(struct textps_slurp  *slurp);
 static void FreeStyle(struct textps_style  *ts);
@@ -89,7 +89,7 @@ static void LayoutText(class textview  *txtv, struct textps_layout_history  *his
 static struct textps_simple_layout_state *SimpleLayoutTextInit();
 static void SimpleLayoutTextFinal(struct textps_simple_layout_state *stat);
 static void SimpleLayoutText(struct textps_simple_layout_state *stat, class textview  *txtv, long layoutwidth, char *prependstring, class style *prependstyle);
-static void DumpLayout(struct textps_layout  *ly);
+/* static void DumpLayout(struct textps_layout  *ly); */
 static struct textps_layout_plan *CreateRectLayoutPlan(long width, long height);
 static void CopyLinesToLayout(struct textps_layout **destptr, struct textps_srunlist *destrunlist, struct textps_layout *src, struct textps_srunlist *srcrunlist, long startline, long endline, long colnum, long trimpt);
 static void DeleteLinesFromLayout(struct textps_layout *dest, long endln);
@@ -104,11 +104,10 @@ static void DeleteLayoutPlanProc(const void *rock);
 void textview_DestroyPrintingLayout(class textview  *txtv);
 void textview_DestroyPrintingLayoutPlan(class textview  *txtv);
 
-static struct font_afm *symbolfont = NULL;
 static class atom *A_twocolumns, *A_swapheaders, *A_endnotes, *A_docontents, *A_doindex;
 
 /* called from InitializeClass */
-void textview_InitializePS()
+void textview_InitializePS(void)
 {
     A_twocolumns = atom::Intern("twocolumns");
     A_swapheaders = atom::Intern("swapheaders");
@@ -120,6 +119,7 @@ void textview_InitializePS()
 /* chi is an AGP-encoded value; result is in local (RESOLUTION) units */
 #define ComputeCharWidth(chi, afm, sz) ((long)(print::ComputePSCharWidth(chi, afm, sz)*dRESOLUTION))
 
+#if 0
 static void DumpStyle(struct textps_style  *ts)
 {
     if (ts->pushtype==textps_pushtype_View) {
@@ -132,6 +132,7 @@ static void DumpStyle(struct textps_style  *ts)
 	 printf("  Face: %d; flags: %d\n", ts->fontfaces, ts->miscflags);*/
     }
 }
+#endif
 
 /* compute RESOLUTION units */
 static long ParseUnit(long  oper, enum style_Unit  unit)
@@ -643,7 +644,7 @@ static void SetStyleRun(struct textps_stylerun  *srun, struct textps_style  *ts)
 	    unsigned char let;
 	    strncpy(srun->tabfill, ts->tabfill, MAXTABFILLLEN);
 	    srun->tabfill[MAXTABFILLLEN] = '\0';
-	    for (lx=0, cx=srun->tabfill; let=(unsigned char)(*cx); cx++) {
+	    for (lx=0, cx=srun->tabfill; (let=(unsigned char)(*cx)); cx++) {
 		lx += ComputeCharWidth(srun->encoding[let], srun->afm, srun->fontsize);
 	    }
 	    srun->tabfillwidth = lx;
@@ -921,7 +922,6 @@ static class style *MagicFootnoteStyle(struct textps_slurp *slurp)
 /* txtv may be NULL, in which case add no lexer. */
 static struct textps_slurp *InitWordSlurper(class textview  *txtv)
 {
-    class environment *ex;
     struct textps_slurp *slurp;
     struct textps_lexstate_text *clex;
 
@@ -979,8 +979,8 @@ static void SlurpWord(struct textps_slurp  *slurp)
     struct textps_tmp_word *wordpt;
     int thech;
     boolean nextcharnewline;
-    int breakable;
-    class environment *ex, *nextenv;
+    int breakable = 0;
+    class environment *ex;
     struct textps_lexstate_text *clex;
 
     if (slurp->lexernum < 0) {
@@ -1419,10 +1419,9 @@ static struct textps_line *LayoutOneLine(struct textps_slurp  *slurp, long  colu
     int firstwordat, eattoword, lasttabpos;
     long leftmargin, rightmargin;
     long lineheight, baseline;
-    long wordwidth, wix, linewidth, unbrokenlength;
+    long wordwidth = 0, wix, linewidth, unbrokenlength;
     long widthsofar, extraspace, totalspace;
     enum style_Justification just;
-    boolean wordovermargin, nextcharnewline;
     struct textps_style *linestyle;
     int breakable;
 
@@ -1596,8 +1595,8 @@ static struct textps_line *LayoutOneLine(struct textps_slurp  *slurp, long  colu
     /* adjust right-tabs and center-tabs. */
     {
 	long thistword, nexttword; /* the word which is a tab, or eattoword */
-	long thistab, nexttab; /* a tab number, or -1 */
-	long nextpos, thispos, thisend, thiscenter, moveforward;
+	long thistab; /* a tab number, or -1 */
+	long thispos, thisend, thiscenter, moveforward;
 	enum style_TabAlignment kind; /* style_{{Left,Right}Aligned,CenteredOnTab} */
 	thistword=firstwordat;
 	for (; thistword<eattoword && slurp->tmpwords[thistword].start != wordflag_Tab; thistword++);
@@ -1875,6 +1874,7 @@ static void DestroyLine(struct textps_line  *ln)
     free(ln);
 }
 
+#if 0 /* use commented out */
 static void copy_textps_srunlist(struct textps_srunlist *dest, struct textps_srunlist *src)
 {
     size_t len = sizeof(struct textps_stylerun) * src->num;
@@ -1891,6 +1891,7 @@ static void copy_textps_srunlist(struct textps_srunlist *dest, struct textps_sru
 	dest->r = (struct textps_stylerun *)malloc(sizeof(struct textps_stylerun));
     }
 }
+#endif
 
 static struct textps_simple_layout_state *SimpleLayoutTextInit()
 {
@@ -1909,11 +1910,10 @@ static struct textps_simple_layout_state *SimpleLayoutTextInit()
  prependstring and prependstyle are hacks to get footnotes to work. Note that prependstring will be free()d in the course of LayoutText, but prependstyle will not. */
 static void SimpleLayoutText(struct textps_simple_layout_state *stat, class textview  *txtv, long layoutwidth, char *prependstring, class style *prependstyle)
 {
-    int ix;
     struct textps_slurp *slurp;
     struct textps_layout *ly;
     struct textps_line *ln;
-    boolean lastlineinpara, firstlineinpara;
+    boolean lastlineinpara = 0, firstlineinpara;
     int wordat, breakable, eattoword;
     int newwordat;
     boolean newlastline;
@@ -2072,12 +2072,11 @@ static void FinalizeLayoutState(struct textps_layout_state *lstat)
 /* prependstring and prependstyle are hacks to get footnotes to work. Note that prependstring will be free()d in the course of LayoutText, but prependstyle will not. */
 static void LayoutText(class textview  *txtv, struct textps_layout_history  *history, struct textps_layout_state *lstat)
 {
-    class text *txt = (class text *)(txtv)->GetDataObject();
     int ix;
     struct textps_slurp *slurp;
     struct textps_layout *ly;
     struct textps_line *ln;
-    boolean lastlineinpara, firstlineinpara;
+    boolean lastlineinpara = FALSE, firstlineinpara;
     int wordat, breakable, eattoword;
     int newwordat;
     boolean newlastline;
@@ -2516,6 +2515,7 @@ textps_layout::~textps_layout()
     }
 }
 
+#if 0 /* unused/commented out */
 static void DumpLayout(struct textps_layout  *ly)
 {
     int lx, wx;
@@ -2539,6 +2539,7 @@ static void DumpLayout(struct textps_layout  *ly)
 	printf("\n");
     }
 }
+#endif
 
 textps_layout_history::textps_layout_history()
 {
@@ -2792,9 +2793,6 @@ static void CopyLinesToLayout(struct textps_layout **destptr, struct textps_srun
     long lx, lx2, wx, sx, letsize, letend;
     struct textps_line *destln, *srcln;
     long hgtsofar;
-    struct textps_textviewlist *tvl;
-
-    int ix;
 
     if (*destptr) {
 	dest = (*destptr);
@@ -2909,7 +2907,7 @@ static void PrintColumn(FILE *outfile, struct textps_layout_blonk *blonk, long s
     long pageposx, pageposy;
     int headnum, headflag;
     struct textps_line *tlin;
-    struct textps_stylerun *srun, *tmpsrun;
+    struct textps_stylerun *srun;
 
     lx = startline;
 
@@ -3015,11 +3013,13 @@ static void PrintColumn(FILE *outfile, struct textps_layout_blonk *blonk, long s
 				}
 				break;
 			    case textview_Footnote: {
-				class fnotev *v = tlin->words[wx].inset.u.Footnote;
-				class fnote *fn;
 				if (!blonk)
 				    break; /* footnotes have no effect in non-top-level text objects */
+#if 0
+				class fnotev *v = tlin->words[wx].inset.u.Footnote;
+				class fnote *fn;
 				fn = (class fnote *)(v->GetDataObject());
+#endif
 				}
 				break;
 			    case textview_Header: {

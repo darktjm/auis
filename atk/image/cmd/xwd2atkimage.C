@@ -33,14 +33,14 @@
 
 int main(int  argc, char  **argv)
         {
-    long ret, saveQuality = -1;
+    long saveQuality = -1;
     class xwd *self;
     FILE *f = stdin;
     const char *saveformat = NULL;
     boolean qualityComing = FALSE;
 
     if(argc > 1) {
-	char *arg, *lastarg = NULL;
+	char *arg;
 	while(argc > 1) {
 	    arg = argv[--argc];
 	    switch(*arg) {
@@ -79,7 +79,6 @@ int main(int  argc, char  **argv)
 		    }
 		    break;
 	    }
-	    lastarg = arg;
 	}	
     }
 

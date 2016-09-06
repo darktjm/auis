@@ -231,8 +231,8 @@ PRIVATE FILE *	     output = NULL;
 /*				HELP FUNCTIONS				     */
 /* ------------------------------------------------------------------------- */
 /* tpn util */
-PUBLIC char *getfulladdress ARGS2(CONST char *,           relative_name,
-                                HTParentAnchor *,       here)
+PUBLIC char *getfulladdress (CONST char *           relative_name,
+                                HTParentAnchor *       here)
 {
     char *              full_address = 0;
     int                 result;
@@ -257,7 +257,7 @@ PUBLIC char *getfulladdress ARGS2(CONST char *,           relative_name,
 /*
 ** Get size of the output screen. Stolen from less.
 */
-PRIVATE void scrsize ARGS2(int *, p_height, int *, p_width)
+PRIVATE void scrsize (int *p_height, int *p_width)
 {
       char *s;
       int ioctl();
@@ -287,7 +287,7 @@ PRIVATE void scrsize ARGS2(int *, p_height, int *, p_width)
 **  This function sets up signal handlers. This might not be necessary to
 **  call if the application has its own handlers.
 */
-PRIVATE void SetSignal NOARGS
+PRIVATE void SetSignal (void)
 {
     /* On some systems (SYSV) it is necessary to catch the SIGPIPE signal
     ** when attemting to connect to a remote host where you normally should
@@ -308,7 +308,7 @@ PRIVATE void SetSignal NOARGS
 ** a list of * available commands *in this context*.  * ?? Perhaps this
 ** should be a hypertext page, not included in the history list.
 */
-PRIVATE void help_screen NOARGS {
+PRIVATE void help_screen (void) {
 
     char * current_address = HTAnchor_address((HTAnchor*)HTMainAnchor);
     CONST char * title = HTAnchor_title(HTMainAnchor);
@@ -405,7 +405,7 @@ PRIVATE void help_screen NOARGS {
 **			Clear:  we only get addresses.
 */
 
-PRIVATE void Reference_List ARGS1(BOOL, titles)
+PRIVATE void Reference_List (BOOL titles)
 {
     int cnt;
     int refs = HText_sourceAnchors(HTMainText);
@@ -439,7 +439,7 @@ PRIVATE void Reference_List ARGS1(BOOL, titles)
 **	?? Should have option to display address even when anchor has a title.
 */
 
-PRIVATE void History_List NOARGS {
+PRIVATE void History_List (void) {
 
     int  history_number = 1; 
     printf("\n  Documents you have visited:-\n\n");
@@ -477,7 +477,7 @@ PRIVATE void History_List NOARGS {
 **
 **	Generate the Prompt line and flush it to the user
 */
-PRIVATE void MakeCommandLine ARGS1(BOOL, is_index)
+PRIVATE void MakeCommandLine (BOOL is_index)
 {
     int length_of_prompt = 0;
 
@@ -567,7 +567,7 @@ PRIVATE void MakeCommandLine ARGS1(BOOL, is_index)
 **   the message is passed to stderr.
 **
 */
-PRIVATE void ErrMsg ARGS2(char *, Msg, char *, Str)
+PRIVATE void ErrMsg (char * Msg, char * Str)
 {
     if (TRACE || HTInteractive)
 	fprintf(stderr, "Warning: %s (%s)\n", Msg, Str ? Str : "");
@@ -581,7 +581,7 @@ PRIVATE void ErrMsg ARGS2(char *, Msg, char *, Str)
 **  This function creates a new request structure and adds it to the global
 **  list of active threads
 */
-PRIVATE HTRequest *Thread_new ARGS1(BOOL, Interactive)
+PRIVATE HTRequest *Thread_new (BOOL Interactive)
 {
     HTRequest *newreq = HTRequest_new(); 	     /* Set up a new request */
     if (!reqlist)
@@ -602,7 +602,7 @@ PRIVATE HTRequest *Thread_new ARGS1(BOOL, Interactive)
 **  This function deletes a request structure and takes it out of the list
 **  of active threads.
 */
-PRIVATE void Thread_delete ARGS1(HTRequest *, oldreq)
+PRIVATE void Thread_delete (HTRequest * oldreq)
 {
     if (oldreq) {
 	if (reqlist)
@@ -617,7 +617,7 @@ PRIVATE void Thread_delete ARGS1(HTRequest *, oldreq)
 /*
 **  This function deletes the whole list of active threads.
 */
-PRIVATE void Thread_deleteAll NOARGS
+PRIVATE void Thread_deleteAll (void)
 {
     BOOL first=YES;	      /* We only have one global list of conversions */
     if (reqlist) {
@@ -647,7 +647,7 @@ PRIVATE void Thread_deleteAll NOARGS
 **
 **  Henrik Frystyk 02/03-94
 */
-PRIVATE BOOL SaveOutputStream ARGS2(char *, This, char *, Next)
+PRIVATE BOOL SaveOutputStream (char * This, char * Next)
 {
     FILE *fp;
     char *fname;
@@ -702,7 +702,7 @@ PRIVATE BOOL SaveOutputStream ARGS2(char *, This, char *, Next)
 **	Any Command which works returns from the routine. If nothing
 **	works then a search or error message down at the bottom.
 */
-PUBLIC HTEventState EventHandler ARGS1(HTRequest **, actreq)
+PUBLIC HTEventState EventHandler (HTRequest ** actreq)
 { 
     int  ref_num;
     HTEventState status = EVENT_OK;
@@ -1190,8 +1190,8 @@ PUBLIC HTEventState EventHandler ARGS1(HTRequest **, actreq)
 **
 **	React to the status of the terminated request
 */
-PUBLIC HTEventState HTEventRequestTerminate ARGS2(HTRequest *,	actreq,
-						  int,		status) 
+PUBLIC HTEventState HTEventRequestTerminate (HTRequest *	actreq,
+						  int		status) 
 {
     BOOL is_index = HTAnchor_isIndex(HTMainAnchor);
     if (status == HT_LOADED) {
@@ -1223,7 +1223,7 @@ PUBLIC HTEventState HTEventRequestTerminate ARGS2(HTRequest *,	actreq,
 /*				  MAIN PROGRAM				     */
 /* ------------------------------------------------------------------------- */
 
-int main ARGS2(int, argc, char **, argv)
+int main (int argc, char ** argv)
 {
     int		return_status = 0;	
     int		arg;			       /* Argument number as we scan */

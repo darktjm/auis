@@ -162,6 +162,7 @@ ProcessPix(struct pixelimage *pix)
 ReadInputFile(FILE * InputFile, struct pixelimage *pix)
 {
 	switch (inType) {
+	default:
 	case typePostscript: 
 	case typeUnknown: 
 		return dataobject_BADFORMAT;
@@ -405,6 +406,9 @@ OpenOutputFile()
 			if (strcmp(ext, ".bitmap") != 0)
 				fail("Output file extension for X bitmap files must be \".bitmap\"");
 			break;
+		case typeUnknown:
+			fail("Can't output unknown format");
+		    
 		}
 		return fopen(outname, "w");
 	}
@@ -412,7 +416,7 @@ OpenOutputFile()
 }
 
 
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	FILE *infile, *outfile;
 	long ret;

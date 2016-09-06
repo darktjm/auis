@@ -47,3 +47,4 @@ extern void ReadCell(class table  *T, FILE  *f, char  *buff, char  **cpp, char  
 extern void spread_ClearSelectionBox (class spread  * V );
 extern void InitializeGraphic(class spread  *V);
 
+void spread_ComputeAnchorOffsets(class spread *V, struct rectangle *rect);

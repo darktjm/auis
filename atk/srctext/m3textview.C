@@ -191,11 +191,11 @@ static void asterisk(m3textview *self, char key /* must be char for "&" to work.
 static void m3pragma(m3textview *self, char key /* must be char for "&" to work. */)
 {
     m3text *ct=(m3text *)self->view::dataobject;
-    long openpragma,oldpos=(self)->GetDotPosition();
+    long oldpos=(self)->GetDotPosition();
     if ((self)->ConfirmReadOnly())
 	return;
     (self)->SelfInsert(key);
-    openpragma= (ct)->ReverseBalance((self)->GetDotPosition());
+    (ct)->ReverseBalance((self)->GetDotPosition()); /* tjm - side effect? */
     if (oldpos && ((ct)->GetChar(oldpos-1)=='*') && ((ct)->GetStyle(oldpos-1)==ct->srctext::kindStyle[PRAGMA]))
 	((ct->text::rootEnvironment)->GetEnclosing(oldpos))->SetStyle(FALSE,FALSE);
     (ct)->NotifyObservers(0);

@@ -75,9 +75,9 @@ which MUST BE FREED
 </DL>
 
 <PRE>
-extern char * HTParse  PARAMS((	const char * aName,
+extern char * HTParse  (	const char * aName,
 				const char * relatedName,
-				int wanted));
+				int wanted);
 </PRE>
 
 <H2>HTStrip: Strip white space off a string</H2>
@@ -88,7 +88,7 @@ All trailing white space is OVERWRITTEN
 with zero.
 
 <PRE>
-extern char * HTStrip PARAMS((char * s));
+extern char * HTStrip (char * s);
 </PRE>
 
 <H2>HTSimplify: Simplify a UTL</H2>
@@ -128,7 +128,7 @@ If more than one set of `://' is found (several proxies in cascade) then
 only the part after the last `://' is simplified.
 
 <PRE>
-extern char *HTSimplify PARAMS((char *filename));
+extern char *HTSimplify (char *filename);
 </PRE>
 
 
@@ -148,7 +148,7 @@ will yield aName. The caller is responsible
 for freeing the resulting name later.
 
 <PRE>
-extern char * HTRelative PARAMS((const char * aName, const char *relatedName));
+extern char * HTRelative (const char * aName, const char *relatedName);
 </PRE>
 
 <H2>HTExpand: Expand a Local Host Name Into a Full Domain Name</H2>
@@ -159,8 +159,8 @@ advantage by doing this is that we only have one entry in the host
 case and one entry in the document cache.
 
 <PRE>
-extern char *HTCanon PARAMS ((	char **	filename,
-				char *	host));
+extern char *HTCanon (	char **	filename,
+				char *	host);
 </PRE>
 
 <H2>Prevent Security Holes</H2>
@@ -180,7 +180,7 @@ inclusive.
 </DL>
 
 <PRE>
-extern BOOL HTCleanTelnetString PARAMS((char * str));
+extern BOOL HTCleanTelnetString (char * str);
 </PRE>
 
 <PRE>

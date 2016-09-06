@@ -62,61 +62,61 @@ Public functions
    
  */
 /* Generates the alt-tag */
-extern char * HTIcon_alt_string PARAMS((char * alt,
-                                        BOOL   brackets));
+extern char * HTIcon_alt_string (char * alt,
+                                        BOOL   brackets);
 
 /*
  * General icon binding.  Use this icon if content-type or encoding
  * matches template.
  */
-extern void HTAddIcon PARAMS((char *    url,
+extern void HTAddIcon (char *    url,
                               char *    alt,
-                              char *    type_templ));
+                              char *    type_templ);
 
 
 /*
  * Called from HTConfig.c to build the list of all the AddHref's
  */
-extern void HTAddHref PARAMS((char *    url,
-                              char *    type_templ));
+extern void HTAddHref (char *    url,
+                              char *    type_templ);
 
 
 /*
  * Icon for which no other icon can be used.
  */
-extern void HTAddUnknownIcon PARAMS((char * url,
-                                     char * alt));
+extern void HTAddUnknownIcon (char * url,
+                                     char * alt);
 
 /*
  * Invisible icon for the listing header field to make it aligned
  * with the rest of the listing (this doesn't have to be blank).
  */
-extern void HTAddBlankIcon PARAMS((char * url,
-                                   char * alt));
+extern void HTAddBlankIcon (char * url,
+                                   char * alt);
 
 /*
  * Icon to use for parent directory.
  */
-extern void HTAddParentIcon PARAMS((char * url,
-                                    char * alt));
+extern void HTAddParentIcon (char * url,
+                                    char * alt);
 
 /*
  * Icon to use for a directory.
  */
-extern void HTAddDirIcon PARAMS((char * url,
-                                 char * alt));
+extern void HTAddDirIcon (char * url,
+                                 char * alt);
 
 /*                                                               HTGetIcon()
 ** returns the icon corresponding to content_type or content_encoding.
 */
-extern HTIconNode * HTGetIcon PARAMS((mode_t    mode,
+extern HTIconNode * HTGetIcon (mode_t    mode,
                                       HTFormat  content_type,
-                                      HTFormat  content_encoding));
+                                      HTFormat  content_encoding);
 
 /*
  * returns the HrefNode to get the URL for presentation of a file (indexing)
  */
-extern HTHrefNode * HTGetHref PARAMS(( char *  filename));
+extern HTHrefNode * HTGetHref ( char *  filename);
 
 /*
 
@@ -147,7 +147,7 @@ extern HTHrefNode * HTGetHref PARAMS(( char *  filename));
        compressed.xbm for compressed and gzipped files
       
  */
-extern void HTStdIconInit PARAMS((CONST char * url_prefix));/*
+extern void HTStdIconInit (CONST char * url_prefix);/*
 
  */
 #endif /* HTICONS *//*

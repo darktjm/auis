@@ -245,11 +245,9 @@ ButtonCallBack(class frame  *frame,  class value  *val,
 
 	static void 
 initframe(class frame  *f,   class im  *im)  {
-	class lpair *lp;
 	class value *local_bt;
 	class wbuttonv *local_bv;
 	class lpair *local_lpMain;
-	class buffer *b;
 
 	local_bv = new  wbuttonv;
 	(local_bv)->SetLabel( LABELSTRING);
@@ -263,7 +261,7 @@ initframe(class frame  *f,   class im  *im)  {
 	(im)->SetView(local_lpMain);
 	lpinit();
 	(f)->SetCommandEnable(TRUE);
-	b = (f)->GetBuffer();
+/*	class buffer *b = (f)->GetBuffer(); */
 /*	buffer_SetDefaultObject(b,  NULL); */
 }
 
@@ -287,7 +285,6 @@ webapp::InitializeClass()  {
 
 	boolean 
 webapp::ParseArgs(int  argc,  const char  **argv)  {
-	boolean res;
 	const char **avx = argv;
 
 	// need to pass switches to ezapp & application  -wjh
@@ -305,10 +302,9 @@ webapp::ParseArgs(int  argc,  const char  **argv)  {
 
 	boolean 
 webapp::Start() {
-	boolean res;
 	im::SignalHandler(SIGUSR1,  (im_signalfptr)handlesig,
 			(char *)this);
-	res = (this)->ezapp::Start();
+	(this)->ezapp::Start();
 
 	  /* xxx code here to read in ???*/
 

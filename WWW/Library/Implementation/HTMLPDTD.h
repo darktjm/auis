@@ -230,10 +230,10 @@ Start anchor element
    name and href point to attribute strings or are NULL if the attribute is to be omitted.
    
  */
-extern void HTStartAnchor PARAMS((
+extern void HTStartAnchor (
                 HTStructured * targetstream,
                 CONST char *    name,
-                CONST char *    href));
+                CONST char *    href);
 
 /*
 
@@ -248,10 +248,10 @@ Put image element
    src, alt and align are omitted if they are set to NULL.
    
  */
-extern void HTMLPutImg PARAMS((HTStructured *obj,
+extern void HTMLPutImg (HTStructured *obj,
                                CONST char *src,
                                CONST char *alt,
-                               CONST char *align));
+                               CONST char *align);
 /*
 
 Specify next ID to be used
@@ -260,8 +260,8 @@ Specify next ID to be used
    in the series z1. z2,...
    
  */
-extern void HTNextID PARAMS((HTStructured * targetStream,
-                        CONST char * s));
+extern void HTNextID (HTStructured * targetStream,
+                        CONST char * s);
 
 #endif /* HTMLDTD_H */
 /*

@@ -197,7 +197,6 @@ static void PrintEdges(class table  *T, FILE  *f, int  r)
 void spread_printVal(class table  * T, char *buf, extended_double  *value, const char format, int prec)
 {
     extended_double newvalue;
-    int decpt, sign;
 
     if (IsBogus(value)) {
 	strcpy(buf, ExtractBogus(value));
@@ -309,6 +308,8 @@ static void PrintRow(class spread  *V, FILE  *f, int  r, const char  *processor,
 			fprintf(f, "\t");
 		hadchild = 1;
 		break;
+	    case table_EmptyCell:
+	        break;
 	}
     }
     if(didprint == 0) fprintf(f,"\\&");

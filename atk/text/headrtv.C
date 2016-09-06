@@ -127,7 +127,7 @@ void Year(struct textbuf *tbuf);
 static int findincommalist(char  *list,char  *sn);
 #endif
 static void InstallHeaderVariables();
-static void PrintLine(FILE  *fp,char  *string);
+static void PrintLine(struct textbuf *tbuf, char  *string);
 static char *headrtv_GetInput(class text  *textobj);
 static void DrawBorder(class headrtv  *self,struct rectangle  *vb);
 static class textview *GetTextView(class view  *self);
@@ -153,7 +153,7 @@ static void real_ensure_another(struct textbuf *tbuf, long len)
     tbuf->text = (char *)realloc(tbuf->text, tbuf->size);
 }
 
-#define ensure_another(tbuf, len) ((tbuf->pos+len+3 >= tbuf->size) ? (real_ensure_another(tbuf, len), 0) : 1)
+#define ensure_another(tbuf, len) ((tbuf->pos+len+3 >= (unsigned)tbuf->size) ? (real_ensure_another(tbuf, len), 0) : 1)
 
 /* must already be ensured */
 #define add_on(tbuf, str)  (strcpy((tbuf)->text+(tbuf)->pos, (str)), (tbuf)->pos += strlen(str))
@@ -581,6 +581,8 @@ class view *headrtv::Hit(enum view_MouseAction  action, long  x, long  y, long  
 	    }
 	    (Data(this))->NotifyObservers(0);
 	    break;
+	default:
+	    break;
     }
     return View(this);
 }
@@ -604,6 +606,9 @@ void headrtv::FullUpdate(enum view_UpdateType  type, long  left, long  top, long
 		(this->sections)->InsertView(this,&mvb);
 		(this->sections)->FullUpdate( type, left,top, width, height);
 	    }
+	case view_Remove:
+	case view_MoveNoRedraw:
+	    break;
     }
 }
 

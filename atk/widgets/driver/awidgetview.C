@@ -262,8 +262,8 @@ UpdateBorder(AWidgetView *self, enum view_UpdateType type) {
 	AShadow *border = self->GetBorder();
 	struct rectangle r;
 	self->GetLogicalBounds(&r);
-	if(border && type==view_FullRedraw 
-	    || type==view_LastPartialRedraw) {
+	if(border && (type==view_FullRedraw 
+	    || type==view_LastPartialRedraw)) {
 		border->SetHighlighted(self->GetHasInputFocus());
 		border->SetSensitive(dobj->sensitive);
 		ASlot *selected = dobj->Get(slot_selected);
@@ -409,6 +409,9 @@ AWidgetView::Hit(enum view_MouseAction action,
                 case view_RightFileDrop:
                     // implement filedrops someday... XXX
                     break;
+		case view_UpMovement: /* tjm - unused */
+		case view_NoMouseEvent: /* tjm - unused */
+		    break;
             }
 
             (dobj->mouseAny)(dobj, avalueflex() | this
@@ -713,7 +716,7 @@ AWidgetView::CharVertical(const char c,
 		*descent = ToUnitY(info.height - info.yOriginOffset);
 	return ToUnitY(info.height);
 }
-AFormulaViewAct::AFormulaViewAct(view *v, aaction *a, aaction *w) : bv((ATK *)v), AFormulaAct((ATK *)(v->GetDataObject()), a, w) {
+AFormulaViewAct::AFormulaViewAct(view *v, aaction *a, aaction *w) : AFormulaAct((ATK *)(v->GetDataObject()), a, w), bv((ATK *)v) {
 }
 
 AFormulaViewAct::~AFormulaViewAct() {

@@ -88,7 +88,7 @@ static char tree_debug = 0;
 
 
 ATKdefineRegistry(tree, apt, NULL);
-static tree_type_node Build_Node( class tree	      *self, char	    	      *name, long		       datum );
+static tree_type_node Build_Node( class tree	      *self, const char	    	      *name, long		       datum );
 static char * Ancestry( class tree	      *self, tree_type_node      node, const char		      *separator , char		      *string );
 void tree__SetNodeModified( class tree 	      *self, tree_type_node      node, char		       state );
 boolean tree__NodeModified( class tree	      *self, tree_type_node      node );
@@ -184,7 +184,7 @@ Build_Node( class tree	      *self, const char	    	      *name, long		       da
 
   IN(Build_Node);
   DEBUGst(Name,name);
-  if ( node = (struct tree_node *) calloc( 1, sizeof(struct tree_node) ) )
+  if ( ( node = (struct tree_node *) calloc( 1, sizeof(struct tree_node) ) ) )
     {
     (self)->SetNodeDatum(  node, datum );
     (self)->SetNodeName(  node, name );
@@ -211,7 +211,6 @@ tree::CreateRootNode( const char	    	      *name, long		       datum )
 tree_type_node
 tree::CreateParentNode( const char	    	      *name, long		       datum, tree_type_node      child )
 {
-    class tree *self=this;
   tree_type_node     node = NULL;
 
   IN(tree_CreateParentNode);
@@ -223,14 +222,13 @@ tree::CreateParentNode( const char	    	      *name, long		       datum, tree_ty
 tree_type_node
 tree::CreateChildNode( const char	    	      *name, long		       datum, tree_type_node      parent )
 {
-    class tree *self=this;
   tree_type_node     node = NULL,  prior = NULL;
 
   IN(tree_CreateChildNode);
   if ( parent  &&  (node = Build_Node( this, name, datum )) )
     {
     ParentNode(node) = parent;
-    if ( prior = ChildNode(parent) )
+    if ( ( prior = ChildNode(parent) ) )
       {
       while ( RightNode(prior) )
 	prior = RightNode(prior);
@@ -249,7 +247,6 @@ tree::CreateChildNode( const char	    	      *name, long		       datum, tree_typ
 tree_type_node
 tree::CreateRightNode( const char	    	      *name, long		       datum, tree_type_node      left )
 {
-    class tree *self=this;
   tree_type_node     node = NULL;
 
   IN(tree_CreateRightNode);
@@ -269,7 +266,6 @@ tree::CreateRightNode( const char	    	      *name, long		       datum, tree_typ
 tree_type_node
 tree::CreateLeftNode( const char	    	      *name, long		       datum, tree_type_node      right )
 {
-    class tree *self=this;
   tree_type_node     node = NULL;
 
   IN(tree_CreateLeftNode);
@@ -301,7 +297,7 @@ tree::DestroyNode( tree_type_node      node )
   IN(tree_DestroyNode);
   if ( node  ||  (node = RootNode) )
     { DEBUGst(Name,NodeName(node));
-    if ( child = ChildNode(node) )
+    if ( ( child = ChildNode(node) ) )
       while (child )
 	{
         if ( ChildNode(child) )
@@ -342,7 +338,7 @@ tree::DestroyNodeChildren( tree_type_node      node )
   IN(tree_DestroyNodeChildren);
   if ( node  ||  (node = RootNode) )
     { DEBUGst(Name,NodeName(node));
-    if ( child = ChildNode(node) )
+    if ( ( child = ChildNode(node) ) )
       while (child )
 	{
         if ( ChildNode(child) )
@@ -522,7 +518,6 @@ tree::NodesOfDatum( long		       datum, tree_type_node      node )
 long
 tree::TreeWidth( tree_type_node      node)
 {
-    class tree *self=this;
   long		      width = 0;
 
   IN(tree_TreeWidth);
@@ -535,14 +530,15 @@ long
 tree::TreeHeight( tree_type_node      node)
 {
     class tree *self=this;
-  long		      height = 0, level;
+  long		      height = 0, level, l;
 
   IN(tree_TreeHeight);
   if ( node  ||  (node = RootNode) )
     {
     level = NODELEVEL(node);
-    while ( node  &&  (level = NODELEVEL(node)) >= level )
+    while ( node  &&  (l = NODELEVEL(node)) >= level )
       {
+      level = l;
       if ( level > height )
 	height = level;
       node = NEXTNODE(node);
@@ -561,7 +557,7 @@ tree::NodeLevel(tree_type_node      node )
 
   IN(tree_NodeLevel);
   if ( node  ||  (node = parent = RootNode) )
-    while ( parent = ParentNode(parent) )
+    while ( ( parent = ParentNode(parent) ) )
       level++;
   OUT(tree_NodeLevel);
   return  level;
@@ -578,7 +574,7 @@ tree::NodePosition( tree_type_node      node )
   if ( node  ||  (node = peer = RootNode) )
     {
     position = 1;
-    while ( peer = LeftNode(peer) )
+    while ( ( peer = LeftNode(peer) ) )
       position++;
     }
   DEBUGdt(Position,position);
@@ -610,7 +606,7 @@ tree::NodeIndex( tree_type_node      node )
       sprintf( string, "%ld.%s", (this)->NodePosition(  parent ), temp );
       parent = ParentNode(parent);
       }
-    if ( length = strlen( string ) )
+    if ( ( length = strlen( string ) ) )
       string[length-1] = 0;
       else
       strcpy( string, "0" );
@@ -638,7 +634,6 @@ Ancestry( class tree	      *self, tree_type_node      node, const char		      *s
 char *
 tree::NodeAncestry( tree_type_node      node, const char		      *separator )
 {
-    class tree *self=this;
   char		     *ancestry = NULL;
 
   IN(tree_NodeAncestry);
@@ -653,12 +648,11 @@ tree::NodeAncestry( tree_type_node      node, const char		      *separator )
 boolean
 tree::NodeAncestor( tree_type_node      candidate , tree_type_node      node )
 {
-    class tree *self=this;
   boolean	      ancestor = false;
 
   IN(tree_NodeAncestor);
   if ( candidate  &&  node )
-    while ( node = ParentNode(node) )
+    while ( ( node = ParentNode(node) ) )
       if ( candidate == node )
 	{
 	ancestor = true;
@@ -700,9 +694,9 @@ tree::NextNode(tree_type_node      node )
     {
     if ( ! (next = node->child) )
       if ( ! (next = node->right) )
-	if ( parent = node->parent )
+	if ( ( parent = node->parent ) )
 	  while ( parent )
-	    if ( next = parent->right )
+	    if ( ( next = parent->right ) )
 	      break;
 	    else
 	    parent = parent->parent;
@@ -715,7 +709,6 @@ tree::NextNode(tree_type_node      node )
 tree_type_node
 tree::PriorNode( tree_type_node      node )
 {
-    class tree *self=this;
   tree_type_node     prior = NULL;
 
   IN(tree_PriorNode);
@@ -762,7 +755,6 @@ tree::TreeModified( )
 boolean
 tree::SetNodeName( tree_type_node        node, const char		        *name )
 {
-    class tree *self=this;
   long		        status = ok;
 
   IN(tree_SetNodeName);
@@ -772,9 +764,8 @@ tree::SetNodeName( tree_type_node        node, const char		        *name )
     NodeName(node) = NULL;
     if ( name  &&  *name )
       {
-      if ( NodeName(node) = (char *) malloc( strlen( name ) + 1 ) )
-        strcpy( NodeName(node), name );
-	else  status = failure;
+      if ( ! (NodeName(node) = strdup(name)) )
+	status = failure;
       }
     }
   OUT(tree_SetNodeName);
@@ -784,7 +775,6 @@ tree::SetNodeName( tree_type_node        node, const char		        *name )
 boolean
 tree::SetNodeCaption( tree_type_node          node, const char			  *caption )
 {
-    class tree *self=this;
   IN(tree_SetNodeCaption);
   if ( node )
     {
@@ -803,7 +793,6 @@ tree::SetNodeCaption( tree_type_node          node, const char			  *caption )
 boolean
 tree::SetNodeTitle( tree_type_node         node, const char			 *title )
 {
-    class tree *self=this;
   IN(tree_SetNodeTitle);
   if ( node )
     {
@@ -822,7 +811,6 @@ tree::SetNodeTitle( tree_type_node         node, const char			 *title )
 boolean
 tree::SetNodeDatum( tree_type_node        node, long		         datum )
 {
-    class tree *self=this;
   IN(tree_SetNodeDatum);
   if ( node )
     NodeDatum(node) = datum;
@@ -853,7 +841,6 @@ tree::NodeCount( tree_type_node      node )
 long
 tree::PeerNodeCount( tree_type_node      node )
 {
-    class tree *self=this;
   long		      count = 0;
   tree_type_node     peer;
 
@@ -861,7 +848,7 @@ tree::PeerNodeCount( tree_type_node      node )
   if ( node  &&  ParentNode(node) )
     {
     peer = ChildNode(ParentNode(node));
-    while ( peer = RightNode(peer) )
+    while ( ( peer = RightNode(peer) ) )
       count++;
     }
   OUT(tree_PeerNodeCount);
@@ -872,7 +859,6 @@ tree::PeerNodeCount( tree_type_node      node )
 long
 tree::ChildNodeCount( tree_type_node      node )
 {
-    class tree *self=this;
   long		      count = 0;
 
   IN(tree_ChildNodeCount);
@@ -906,7 +892,6 @@ tree::LeafNodeCount( tree_type_node      node )
 void
 tree::SetDebug( boolean		        state )
 {
-    class tree *self=this;
   IN(tree_SetDebug);
   tree_debug = state;
   OUT(tree_SetDebug);

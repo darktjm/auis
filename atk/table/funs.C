@@ -56,8 +56,6 @@ static void getrow (class table  * T, extended_double  *result, int      r , int
 static void getcol (class table  * T, extended_double  *result, int      r , int      c, int      argc, extended_double  *argv);
 static void fsum (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
 static void fcount (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
-static void fmax (class table  * T, extended_double  *result, int      rr, int      cc, int      argc, extended_double  *argv);
-static void fmin (class table  * T, extended_double  *result, int      rr, int      cc, int      argc, extended_double  *argv);
 static void vlookup (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv);
 static double   iffer (double   x , double   y , double   z);
 static double   false ();
@@ -168,6 +166,7 @@ static void fcount (class table  * T, extended_double  *result, int      rr , in
     MakeStandard(result, (double) (x));
 }
 
+#if 0 /* unused??? need to find out why standard fmin/fmax used instead of this - tjm */
 static void fmax (class table  * T, extended_double  *result, int      rr, int      cc, int      argc, extended_double  *argv)
 {
     double  x = 0;
@@ -259,6 +258,7 @@ static void fmin (class table  * T, extended_double  *result, int      rr, int  
     else
 	eval(T, result, rr, cc, "1/0");
 }
+#endif
 
 static void vlookup (class table  * T, extended_double  *result, int      rr , int      cc, int      argc, extended_double  *argv)
 {

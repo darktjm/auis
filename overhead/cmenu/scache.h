@@ -43,15 +43,9 @@ struct scache_node {
 /* this hash function is pretty poor as far as magic functions go, but it's not too bad... */
 
 
-#if (defined(__STDC__) && !defined(ibm032)) || defined(__cplusplus)
 BEGINCPLUSPLUSPROTOS
 const char *scache_Hold(const char *str);
 void scache_Free(const char *str);
 void scache_Collect(void);
 ENDCPLUSPLUSPROTOS
-#else
-char *scache_Hold();
-void scache_Free();
-void scache_Collect();
-#endif
 #endif

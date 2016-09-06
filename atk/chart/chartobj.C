@@ -566,6 +566,8 @@ chartobj::HitChart( enum view_MouseAction     action, long			     x , long			   
 	shadow = NULL;
 	(this )->UseNormalCursor( );
         break;
+      default:
+	break;
       }
     sprintf( value_string, "%s:  Value = %ld", name, value );
     (this)->Announce(  value_string );
@@ -612,7 +614,7 @@ void Set_Shadows( class chartobj	      *self )
   IN(Set_Shadows);
   width = (ChartWidth / ((count) ? count : 1));
   x = ChartLeft + width/2;
-  if ( excess = (ChartWidth - (width * count)) / 2 )
+  if ( ( excess = (ChartWidth - (width * count)) / 2 ) )
     excess = count / excess;
   DEBUGdt(width,width);
   if (  (ScaleTick > 0) && ((Chart )->ItemValueGreatest( ) % ScaleTick ) )
@@ -748,7 +750,7 @@ void Draw_Horizontal_Labels( class chartobj	  *self, long left, long top, long w
     x_increment = width / (Chart )->ItemCount( );
     x = left + x_increment/2;
     y = top + height/2;
-    if ( excess = (width - (x_increment * (Chart )->ItemCount( ))) / 2 )
+    if ( ( excess = (width - (x_increment * (Chart )->ItemCount( ))) / 2 ) )
       excess = (Chart )->ItemCount( ) / excess;
     while ( chart_item )
       {
@@ -787,7 +789,7 @@ void Draw_Scales( class chartobj	  *self )
 static
 void Draw_Left_Scale( class chartobj	  *self )
     {
-  long			  value, Y, adjust;
+  long			  value = 0, Y, adjust;
   float		  y, y_increment;
   long				  half_y_increment;
   char				  value_string[25];
@@ -820,7 +822,7 @@ void Draw_Left_Scale( class chartobj	  *self )
   sprintf( value_string, "%ld", value );
   (self)->MoveTo(  LeftScaleBarX-5, LeftScaleTop );
   (self)->DrawString(  value_string, RightTop );
-  if ( y_increment = PIXELSPERUNIT * ScaleTick )
+  if ( ( y_increment = PIXELSPERUNIT * ScaleTick ) )
     {
     half_y_increment = y_increment / 2;
     Y = y = LeftScaleTop + y_increment;
@@ -949,15 +951,15 @@ void Print_Left_Scale( class chartobj	  *self )
   (self)->PrintLine(  LeftScaleBarX, LeftScaleBottom, LeftScaleRight, LeftScaleBottom );
 /*  chartobj_FillTrapezoid( self, LeftScaleRight, LeftScaleBottom, ChartWidth,
 				LeftScaleRight, LeftScaleBottom, ChartWidth, DottedGraphic );*/
-  if ( adjust = (value = (Chart)->ItemValueLeast( )) % ScaleTick )
+  if ( ( adjust = (value = (Chart)->ItemValueLeast( )) % ScaleTick ) )
     value -= ScaleTick + adjust;
   sprintf( value_string, "%ld", value );
   (self)->PrintString(  LeftScaleBarX-5, LeftScaleBottom, value_string, RightBottom );
-  if ( adjust = (value = (Chart)->ItemValueGreatest( )) % ScaleTick )
+  if ( ( adjust = (value = (Chart)->ItemValueGreatest( )) % ScaleTick ) )
     value += ScaleTick - adjust;
   sprintf( value_string, "%ld", value );
   (self)->PrintString(  LeftScaleBarX-5, LeftScaleTop, value_string, RightTop );
-  if ( y_increment = PIXELSPERUNIT * ScaleTick )
+  if ( ( y_increment = PIXELSPERUNIT * ScaleTick ) )
     {
     half_y_increment = y_increment / 2;
     y = LeftScaleTop + y_increment;
@@ -970,7 +972,7 @@ void Print_Left_Scale( class chartobj	  *self )
 				    LeftScaleRight, y, ChartWidth, DottedGraphic );*/
       (self)->PrintLine(  LeftScaleBarX, y + half_y_increment,
 				LeftScaleRight - 5, y + half_y_increment );
-      value = value -= ScaleTick;
+      value -= ScaleTick;
       sprintf( value_string, "%ld", value );
       (self)->PrintString(  LeftScaleBarX-5, y, value_string, RightMiddle );
       y += y_increment;

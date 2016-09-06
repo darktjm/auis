@@ -26,8 +26,8 @@ Set up a Stream to a File
    be closed afterwards, then set leave_open = NO.
    
  */
-extern HTStream * HTFWriter_new PARAMS((FILE *  fp,
-                                             BOOL       leave_open));/*
+extern HTStream * HTFWriter_new (FILE *  fp,
+                                             BOOL       leave_open);/*
 
   CONVERTERS
   
@@ -45,7 +45,7 @@ Black Hole Stream
    This stream simply absorbs data without doing anything what so ever.
    
  */
-extern HTStream * HTBlackHole NOPARAMS;/*
+extern HTStream * HTBlackHole (void);/*
 
 Get Local File Name
 
@@ -56,11 +56,11 @@ Get Local File Name
    readable file name.
    
  */
-extern char *HTFWriter_filename PARAMS((char *          path,
+extern char *HTFWriter_filename (char *          path,
                                         char *          url,
                                          CONST char *   suffix,
                                          unsigned int   limit,
-                                         BOOL           flat));/*
+                                         BOOL           flat);/*
 
 The Client Cache
 
@@ -103,13 +103,13 @@ extern int      HTCacheLimit;
   CLEAR A CACHE
   
  */
-extern void HTCacheClear PARAMS((HTList * cache));
+extern void HTCacheClear (HTList * cache);
 /*
 
   TO REMOVE ALL CACHE FILES KNOWN TO THIS SESSION
   
  */
-extern void HTCacheDeleteAll NOPARAMS;/*
+extern void HTCacheDeleteAll (void);/*
 
   STREAM FOR WRITING TO CACHE
   

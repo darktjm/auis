@@ -43,8 +43,7 @@ File_entry *head;
 
 static File_entry *get_file_entry();
 
-int input_getc(fp)
-FILE *fp;
+int input_getc(FILE *fp)
 {
     File_entry *entry = get_file_entry(fp);
 
@@ -53,30 +52,24 @@ FILE *fp;
     return getc(fp);
 }
 
-int input_getchar()
+int input_getchar(void)
 {
     return input_getc(stdin);
 }
 
-void input_ungetc(c, fp)
-int c;
-FILE *fp;
+void input_ungetc(int c, FILE *fp)
 {
     File_entry *entry = get_file_entry(fp);
 
     entry->buf[--entry->buf_pos] = c;
 }
 
-int input_fgetc(fp)
-FILE *fp;
+int input_fgetc(FILE *fp)
 {
     return input_getc(fp);
 }
 
-char *input_fgets(str, n, fp)
-char *str;
-int n;
-FILE *fp;
+char *input_fgets(char *str, int n, FILE *fp)
 {
     File_entry *entry = get_file_entry(fp);
     int num_chars = UNGETC_BUF_SIZE - entry->buf_pos;
@@ -114,8 +107,7 @@ FILE *fp;
     return str;
 }
 
-static File_entry *get_file_entry(fp)
-FILE *fp;
+static File_entry *get_file_entry(FILE *fp)
 {
     File_entry *entry;
 
@@ -138,8 +130,7 @@ FILE *fp;
     return entry;
 }
 
-long input_number(fp)
-FILE *fp;
+long input_number(FILE *fp)
 {
     long num = 0;
     int c, neg = 0;
@@ -158,8 +149,7 @@ FILE *fp;
     return (neg) ? -num : num;
 }
 
-void input_skip_whitespace(fp)
-FILE *fp;
+void input_skip_whitespace(FILE *fp)
 {
     int c;
 
@@ -170,9 +160,7 @@ FILE *fp;
 	input_ungetc(c, fp);
 }
 
-void input_match(s, fp)
-char *s;
-FILE *fp;
+void input_match(char *s, FILE *fp)
 {
     int c;
 
@@ -185,11 +173,7 @@ FILE *fp;
 	input_ungetc(c, fp);
 }
 
-int input_read_up_to(s, n, marker, fp)
-char *s;
-int n;
-int marker;
-FILE *fp;
+int input_read_up_to(char *s, int n, int marker, FILE *fp)
 {
     int c;
 
@@ -209,10 +193,7 @@ FILE *fp;
     return 0;
 }
 
-int input_read_up_to_whitespace(s, n, fp)
-char *s;
-int n;
-FILE *fp;
+int input_read_up_to_whitespace(char *s, int n, FILE *fp)
 {
     int c;
 
@@ -232,11 +213,7 @@ FILE *fp;
     return 0;
 }
 
-int input_read_up_to_one_of(s, n, markers, fp)
-char *s;
-int n;
-char *markers;
-FILE *fp;
+int input_read_up_to_one_of(char *s, int n, char *markers, FILE *fp)
 {
     int c;
 

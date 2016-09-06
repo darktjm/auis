@@ -82,7 +82,7 @@ ATK_IMPL("astring.H")
 //
 	AString &
 AString::ReplaceN(int i, int len, const char *src, int slen) {
-	if (len < 0 || slen < 0 || len + i > used) {
+	if (len < 0 || slen < 0 || len + i > (int)used) {
 		// bogus xxx should have error message
 		return *this;
         }
@@ -94,7 +94,7 @@ AString::ReplaceN(int i, int len, const char *src, int slen) {
 		if (len > 0)
 			memmove(dest, dest+len, taillen);
 	}
-	else if (i == used && used+slen <= space) {
+	else if (i == (int)used && used+slen <= space) {
 		// append 
 		memcpy(dest, src, slen);
 		body[used+slen] = '\0';
@@ -151,7 +151,7 @@ AString::ReplaceN(int i, int len, const char *src, int slen) {
 boolean 
     AString::FoldedEqN(const char *s, int len)  const {
     if(s==NULL) s="";
-    return len <= used && ::FoldedEQn(body, s, len);
+    return len <= (int)used && ::FoldedEQn(body, s, len);
 }
 
 
@@ -162,11 +162,11 @@ boolean
 //
 	int 
 AString::Search(const char *p, int pos) const {
-        if (pos >= used || p==NULL) return -1;
+        if (pos >= (int)used || p==NULL) return -1;
 	char *s = body+pos;
 	int plen = strlen(p);
 	while ((s=strchr(s, *p))) {
-		if (s-body+plen > used) break;
+		if (s-body+plen > (int)used) break;
 		if (strncmp(s, p, plen) == 0)
 			return s - body;
 		else s++;
@@ -179,7 +179,7 @@ AString::Search(const char *p, int pos) const {
 //
 	int 
 AString::FoldedSearch(const char *p, int pos)  const {
-        if (pos >= used || p==NULL) return -1;
+        if (pos >= (int)used || p==NULL) return -1;
 	char p1 = tolower(*p);
 	char P1 = toupper(*p);
 	const char *s = strchr(body+pos, p1);
@@ -209,7 +209,7 @@ AString::FoldedSearch(const char *p, int pos)  const {
 //
 	int 
 AString::RegSearch(const char *pat, int pos, int *len) const {
-	if (pos >= used) return -1;
+	if (pos >= (int)used) return -1;
 	if ( ! pat || ! *pat) return -9;
 
 	static struct SearchPattern *regPat;
@@ -238,8 +238,8 @@ AString::RegSearch(const char *pat, int pos, int *len) const {
 AString::SubstrCpy(char *s, int pos, int len) const {
         if(s==NULL) return NULL;
         if (pos < 0) pos = 0;
-	if (pos > used) pos = used;
-	if (pos+len > used) len = used-pos;
+	if (pos > (int)used) pos = used;
+	if (pos+len > (int)used) len = used-pos;
 	strncpy(s, body+pos, len);
 	s[len] = '\0';
 	return s;

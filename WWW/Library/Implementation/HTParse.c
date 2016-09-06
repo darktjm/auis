@@ -33,7 +33,7 @@ struct struct_parts {
 **	All trailing white space is OVERWRITTEN with zero.
 */
 
-PUBLIC char * HTStrip ARGS1(char *, s)
+PUBLIC char * HTStrip (char *s)
 {
 #define SPACE(c) ((c==' ')||(c=='\t')||(c=='\n')) 
     char * p=s;
@@ -58,7 +58,7 @@ PUBLIC char * HTStrip ARGS1(char *, s)
 **	host, anchor and access may be nonzero if they were specified.
 **	Any which are nonzero point to zero terminated strings.
 */
-PRIVATE void scan ARGS2(char *, name, struct struct_parts *, parts)
+PRIVATE void scan (char *name, struct struct_parts *parts)
 {
     char * after_access;
     char * p;
@@ -161,8 +161,8 @@ PRIVATE void scan ARGS2(char *, name, struct struct_parts *, parts)
 ** On exit,
 **	returns		A pointer to a malloc'd string which MUST BE FREED
 */
-char * HTParse ARGS3(CONST char *, aName, CONST char *, relatedName,
-		     int, wanted)
+char * HTParse (CONST char *aName, CONST char *relatedName,
+		     int wanted)
 {
     char * result = 0;
     char * return_value = 0;
@@ -259,8 +259,8 @@ char * HTParse ARGS3(CONST char *, aName, CONST char *, relatedName,
 **	As strcpy() but guaranteed to work correctly
 **	with overlapping parameters.	AL 7 Feb 1994
 */
-PRIVATE void ari_strcpy ARGS2(char *, to,
-			      char *, from)
+PRIVATE void ari_strcpy (char *to,
+			      char *from)
 {
     char * tmp;
 
@@ -306,7 +306,7 @@ PRIVATE void ari_strcpy ARGS2(char *, to,
 //
 // Returns: A string which might be the old one or a new one.
 */
-PUBLIC char *HTSimplify ARGS1(char *, filename)
+PUBLIC char *HTSimplify (char *filename)
 {
     char *path;
     char *p;
@@ -446,7 +446,7 @@ PUBLIC char *HTSimplify ARGS1(char *, filename)
 **	The caller is responsible for freeing the resulting name later.
 **
 */
-char * HTRelative ARGS2(CONST char *, aName, CONST char *, relatedName)
+char * HTRelative (CONST char *aName, CONST char *relatedName)
 {
     char * result = 0;
     CONST char *p = aName;
@@ -505,7 +505,7 @@ char * HTRelative ARGS2(CONST char *, aName, CONST char *, relatedName)
 **	Return: OK	The position of the current path part of the URL
 **			which might be the old one or a new one.
 */
-PUBLIC char *HTCanon ARGS2 (char **, filename, char *, host)
+PUBLIC char *HTCanon  (char **filename, char *host)
 {
     char *newname = NULL;
     char *port;
@@ -595,7 +595,7 @@ PUBLIC char *HTCanon ARGS2 (char **, filename, char *, host)
  *	returns	YES, if the string was modified.
  *		NO, otherwise.
  */
-PUBLIC BOOL HTCleanTelnetString ARGS1(char *, str)
+PUBLIC BOOL HTCleanTelnetString (char *str)
 {
     char * cur = str;
 

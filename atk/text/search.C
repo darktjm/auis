@@ -475,7 +475,7 @@ static long TryMatch (class simpletext  *d, long  pos, unsigned char **s , int l
     long length = (d)->GetLength();
 
     do {
-	if (c = *(*s)++) {
+	if ((c = *(*s)++)) {
 	    switch (c) {
 		case BPAR:
 		    if ((pos = TryMatch (d, pos, s, 1)) < 0)
@@ -548,7 +548,7 @@ static long TryMatchStr (unsigned char *str, long  pos, long length, unsigned ch
     long bufLen = 0;
 
     do {
-	if (c = *(*s)++) {
+	if ((c = *(*s)++)) {
 	    switch (c) {
 		case BPAR:
 		    if ((pos = TryMatchStr (str, pos, length, s, 1)) < 0)

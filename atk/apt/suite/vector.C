@@ -167,7 +167,6 @@ boolean
 vector::ItemExists( long			  item )
 {
     
-    class vector *self=this;
   if((this)->Subscript(item) != -1) 
     return(TRUE);
   else 

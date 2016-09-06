@@ -72,7 +72,6 @@
 #define MK_TEXT_EXT 1
 #define MK_AUTHORING 1 
 #define MK_AUX_UTILS 1
-#define MK_METAMAIL 1
 #define MK_HTML 1
 
 /* Define WWW_ENV if you want the web browser. */
@@ -81,11 +80,6 @@
 /* Define this if you want to build the contributed software
    (in ./contrib). */
 /* #define CONTRIB_ENV 1 */
-
-/* these are only effective if CONTRIB_ENV and
- 		AMS_ENV are defined */
-#define MK_BATMAIL 1
-#define MK_EATMAIL 1
 
 /* these are only effective if CONTRIB_ENV is defined */
 #define MK_DEMOS 1
@@ -107,27 +101,11 @@
 /* Define this if you have the ndbm(3) package */
 /* #define NDBM_ENV 1 */
 
-/* Defined if you want to build the Andrew Message System (AMS) */
-#define AMS_ENV	1
-
-/* Defined if you use Metamail -- messages uses metamail*/
-#define METAMAIL_ENV 1
-
 /* Defined if you run the Internet domain name resolver */
 #define RESOLVER_ENV	1
 
 /* Defined if building for use with Snap (remote messageservers) */
 /* #define SNAP_ENV    1 */
-
-/* Defined for building with the White Pages */
-/* #define WHITEPAGES_ENV	1 */
-
-/* WHITEPAGES_ENV can be defined without AMS_DELIVERY_ENV or AFS_ENV */
-/* AMS_DELIVERY_ENV and AMS_ENV can NOT be defined without WHITEPAGES_ENV */
-#if (defined(AFS_ENV) || defined(AMS_DELIVERY_ENV)) && ! defined(WHITEPAGES_ENV)
-#define WHITEPAGES_ENV 1
-#endif
-
 
 /* ____________________________________________
 	below here are platform dependent options */

@@ -21,7 +21,7 @@
 #include "HTStream.h"
 
 /* Special Creation: */
-extern HTStructured * HTMLGenerator PARAMS((HTStream * output));
+extern HTStructured * HTMLGenerator (HTStream * output);
 
 #ifndef pyramid
 extern HTConverter HTPlainToHTML;

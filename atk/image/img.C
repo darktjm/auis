@@ -122,7 +122,7 @@ static int Debug = 0;				/* Set to 1 for info */
 static unsigned char *BitRow;			/* working row of bits */
 static int RowRepeat;				/* number of repititons */
 static int RowCount;				/* current row */
-static int ColCount;				/* current column */
+static unsigned int ColCount;			/* current column */
 
 			/* Read file header */
 			/* Write output byte */
@@ -378,7 +378,7 @@ static int IMG_ReadHeader (FILE       *f,IMG_Header  *h)
 static void IMG_WriteByte (unsigned char c,int  cols,unsigned int bpl)
 
             {
-	int i;
+	unsigned int i;
 	unsigned char *ptr;
 	unsigned char *ptr2;
 

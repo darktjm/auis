@@ -39,10 +39,6 @@ DynamicMultiObjectWithExports(lookz,$(EXTRACLASSES),$(OBJS),$(LIBS),,)
 InstallDynamicObjectWithExports(lookz,$(EXTRACLASSES),$(FULLATKDLIBDIR))
 InstallClassFiles($(HFILES))
 
-#ifdef WM_ENV
-WMLIB = $(BASEDIR)/lib/libwm.a
-#endif
-
 TESTLIBS = ${BASEDIR}/lib/atk/libframe.a \
 	${BASEDIR}/lib/atk/libtext.a \
 	${BASEDIR}/lib/atk/libsupviews.a \

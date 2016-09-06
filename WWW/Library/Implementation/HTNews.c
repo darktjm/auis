@@ -71,12 +71,12 @@ PRIVATE int	diagnostic;			/* level: 0=none 2=source */
 
 PUBLIC HTInputSocket *isoc;		/* @@@ non-reentrant */
 
-PUBLIC CONST char * HTGetNewsHost NOARGS
+PUBLIC CONST char * HTGetNewsHost (void)
 {
 	return HTNewsHost;
 }
 
-PUBLIC void HTSetNewsHost ARGS1(CONST char *, value)
+PUBLIC void HTSetNewsHost (CONST char * value)
 {
 	StrAllocCopy(HTNewsHost, value);
 }
@@ -98,7 +98,7 @@ PUBLIC void HTSetNewsHost ARGS1(CONST char *, value)
 **	4.	Compilation time macro DEFAULT_NEWS_HOST
 */
 PRIVATE BOOL initialized = NO;
-PRIVATE BOOL initialize NOARGS
+PRIVATE BOOL initialize (void)
 {
     CONST struct hostent  *phost;	  /* Pointer to host - See netdb.h */
     struct sockaddr_in* sin = &soc_address;
@@ -181,7 +181,7 @@ PRIVATE BOOL initialize NOARGS
 */
 
 
-PRIVATE int response ARGS1(CONST char *,command)
+PRIVATE int response (CONST char *command)
 {
     int result;    
     char * p = response_text;
@@ -247,7 +247,7 @@ PRIVATE int response ARGS1(CONST char *,command)
 **	template must be already un upper case.
 **	unknown may be in upper or lower or mixed case to match.
 */
-PRIVATE BOOL match ARGS2 (CONST char *,unknown, CONST char *,tmplate)
+PRIVATE BOOL match  (CONST char *unknown, CONST char *tmplate)
 {
     CONST char * u = unknown;
     CONST char * t = tmplate;
@@ -265,7 +265,7 @@ PRIVATE BOOL match ARGS2 (CONST char *,unknown, CONST char *,tmplate)
 **	" Tim Berners-Lee <tim@online.cern.ch> "
 **  or	" tim@online.cern.ch ( Tim Berners-Lee ) "
 */
-PRIVATE char * author_name ARGS1 (char *,email)
+PRIVATE char * author_name  (char *email)
 {
     char *s, *e;
     
@@ -288,7 +288,7 @@ PRIVATE char * author_name ARGS1 (char *,email)
 /*	Start anchor element
 **	--------------------
 */
-PRIVATE void start_anchor ARGS1(CONST char *,  href)
+PRIVATE void start_anchor (CONST char *  href)
 {
     BOOL		present[HTML_A_ATTRIBUTES];
     CONST char*		value[HTML_A_ATTRIBUTES];
@@ -307,7 +307,7 @@ PRIVATE void start_anchor ARGS1(CONST char *,  href)
 /*      Start link element
 **      --------------------
 */
-PRIVATE void start_link ARGS2(CONST char *,  href, CONST char *, rev)
+PRIVATE void start_link (CONST char *  href, CONST char * rev)
 {
 #ifdef WHEN_WE_HAVE_HTMLPLUS
 
@@ -339,7 +339,7 @@ PRIVATE void start_link ARGS2(CONST char *,  href, CONST char *, rev)
 **	addr	points to the hypertext refernce address,
 **		terminated by white space, comma, NULL or '>' 
 */
-PRIVATE void write_anchor ARGS2(CONST char *,text, CONST char *,addr)
+PRIVATE void write_anchor (CONST char *text, CONST char *addr)
 {
     char href[LINE_LENGTH+1];
 		
@@ -368,7 +368,7 @@ PRIVATE void write_anchor ARGS2(CONST char *,text, CONST char *,addr)
 ** On exit,
 **	*text	is NOT any more chopped up into substrings.
 */
-PRIVATE void write_anchors ARGS1 (char *,text)
+PRIVATE void write_anchors  (char *text)
 {
     char * start = text;
     char * end;
@@ -390,7 +390,7 @@ PRIVATE void write_anchors ARGS1 (char *,text)
 /*	Abort the connection					abort_socket
 **	--------------------
 */
-PRIVATE void abort_socket NOARGS
+PRIVATE void abort_socket (void)
 {
     if (TRACE) fprintf(TDEST,
 	    "HTNews: EOF on read, closing socket %d\n", s);
@@ -414,7 +414,7 @@ PRIVATE void abort_socket NOARGS
 **	s	Global socket number is OK
 **	HT	Global hypertext object is ready for appending text
 */       
-PRIVATE void read_article NOARGS
+PRIVATE void read_article (void)
 {
 
     char line[LINE_LENGTH+1];
@@ -612,7 +612,7 @@ PRIVATE void read_article NOARGS
 **	RFC 977 specifies that the line "folding" of RFC850 is not used, so we
 **	do not handle it here.
 */        
-PRIVATE void read_list NOARGS
+PRIVATE void read_list (void)
 {
 
     char line[LINE_LENGTH+1];
@@ -689,10 +689,10 @@ PRIVATE void read_list NOARGS
 **	want more than one field.
 **
 */
-PRIVATE void read_group ARGS3(
-  CONST char *,groupName,
-  int,first_required,
-  int,last_required
+PRIVATE void read_group (
+  CONST char *groupName,
+  int first_required,
+  int last_required
 )
 {
     char line[LINE_LENGTH+1];
@@ -962,7 +962,7 @@ PRIVATE void read_group ARGS3(
 /*		Load by name					HTLoadNews
 **		============
 */
-PUBLIC int HTLoadNews ARGS1(HTRequest *,		request)
+PUBLIC int HTLoadNews (HTRequest *		request)
 {
     char * arg = HTAnchor_physical(request->anchor);
     char command[257];			/* The whole command */

@@ -77,12 +77,6 @@
 /* here you could #undef any of the MK_ variables that control
 	the builds in $/atk/Imakefile.  See INSTALL. */
 
-/* If you did not pick up auis4.tar.Z (ams and atkams) 
-	then uncomment: */
-/* 
-#undef AMS_ENV 
-*/
-
 /* If you picked up contrib.tar.Z and you wish to build and install
 	almost all of it, then uncomment the following: */
 /* 
@@ -108,9 +102,6 @@
 /* If there is already a TIFF distribution at your site, #undefine
 	MK_TIFF and set TIFFLIBDIR in site.mcr */
 /* #undef MK_TIFF */
-/* If your site has already installed Metamail, #undef MK_METAMAIL */
-/* #undef MK_METAMAIL */
-
 
 /* Site specific sources   =============== */
 /* If your site wishes to include sources as part of the build
@@ -121,18 +112,3 @@
 #define SITE_ENV 1
 #endif
 */
-
-
-/* AFS  =============== */
-/* Define AFS_ENV if building for use with the 
-	Andrew File System (AFS from Transarc)
- ALSO define AFS30_ENV if you have AFS 3.0 or later
- ALSO define AFS31_ENV if you have AFS 3.1 or later
- and so on
-*/
-/* #define AFS_ENV	1 */
-/* #define AFS30_ENV 1 */
-/* #define AFS31_ENV 1 */
-/* #define AFS32_ENV 1 */
-/* #define AFS33_ENV 1 */
-/* #define AFS_ULTRIX_40 1 */

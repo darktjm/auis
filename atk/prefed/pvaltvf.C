@@ -60,7 +60,6 @@ static struct helprock {
 ATKdefineRegistry(pvaltvf, pvaltvl, pvaltvf::InitializeClass);
 static void helpfunc(struct helprock  *rock, enum message_HelpItem  type, char  *item, long  null);
 static void pvaltvfHelp(class pvaltvf  *self, long  rock);
-static void pvaltvfNop(class pvaltvf  *self, long  rock);
 static void pvaltvfComplete(class pvaltvf  *self, long  rock);
 
 
@@ -89,7 +88,6 @@ static void helpfunc(struct helprock  *rock, enum message_HelpItem  type, char  
 static void pvaltvfHelp(class pvaltvf  *self, long  rock)
 {
     char buf[1024], buf2[1024];
-    boolean good=TRUE;
     class textview *tv=(self)->GetTextView();
     long pos=(tv)->GetDotPosition();
     long end;
@@ -102,7 +100,7 @@ static void pvaltvfHelp(class pvaltvf  *self, long  rock)
     end=(TEXT(self))->Index( pos, '\n', (TEXT(self))->GetLength()-pos);
     if(end<0) end=(TEXT(self))->GetLength();
     
-    if(end-pos>=sizeof(buf)-1) return;
+    if(end-pos>=(int)sizeof(buf)-1) return;
     
     (TEXT(self))->CopySubString( pos, end-pos, buf, FALSE);
 
@@ -117,9 +115,11 @@ static void pvaltvfHelp(class pvaltvf  *self, long  rock)
 }
 
 
+#if 0 /* use commented out below */
 static void pvaltvfNop(class pvaltvf  *self, long  rock)
 {
 }
+#endif
 
 static void pvaltvfComplete(class pvaltvf  *self, long  rock)
 {
@@ -135,7 +135,7 @@ static void pvaltvfComplete(class pvaltvf  *self, long  rock)
     end=(TEXT(self))->Index( pos, '\n', (TEXT(self))->GetLength()-pos);
     if(end<0) end=(TEXT(self))->GetLength();
     
-    if(end-pos>=sizeof(buf)-1) return;
+    if(end-pos>=(int)sizeof(buf)-1) return;
     
     (TEXT(self))->CopySubString( pos, end-pos, buf, FALSE);
 

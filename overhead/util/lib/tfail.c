@@ -33,10 +33,6 @@
 #include <andrewos.h>
 #include <stdio.h>
 #include <errno.h>
-#ifdef AFS_ENV
-#include <afs/param.h>
-#include <afs/errors.h>
-#endif /* AFS_ENV */
 #include <util.h>
 
 int tfail(int errorNumber)
@@ -45,7 +41,6 @@ int tfail(int errorNumber)
 Admittedly, for most of the error conditions described, we can make only a guess about the temporary-ness of an error (EIO? EMFILE? EROFS? EMLINK?), but this is only a rough guess.
 */
 
-    if (vdown(errorNumber)) return 1;
     switch (errorNumber) {
 	case EINTR:
 	case EIO:
@@ -71,12 +66,6 @@ Admittedly, for most of the error conditions described, we can make only a guess
 #ifdef EDQUOT
 	case EDQUOT:
 #endif /* EDQUOT */
-#ifdef AFS_ENV
-	case VSALVAGE:
-	case VOFFLINE:
-	case VBUSY:
-	case VMOVED:
-#endif /* AFS_ENV */
 	    return 1;		/* temporary failures */
 	default:
 	    return 0;		/* all others are permanent failures */

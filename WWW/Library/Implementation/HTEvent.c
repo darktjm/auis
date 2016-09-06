@@ -34,7 +34,7 @@ PRIVATE	fd_set	HTfd_user;		   /* Bit array of sockets from user */
 **	Registers a socket as active for READ together with a callback
 **	function to call when select returns that the socket is pending.
 */
-PUBLIC BOOL HTEventRegister ARGS1(HTEventCallBack *, user_fd)
+PUBLIC BOOL HTEventRegister (HTEventCallBack * user_fd)
 {
     static BOOL done=NO;
     if (!user_fd) {
@@ -59,7 +59,7 @@ PUBLIC BOOL HTEventRegister ARGS1(HTEventCallBack *, user_fd)
 **
 **	Clears the list of registered user sockets and call back functions
 */
-PUBLIC void HTEventCleanup NOARGS
+PUBLIC void HTEventCleanup (void)
 {
     if (UserList) {
 	HTList_delete(UserList);
@@ -77,7 +77,7 @@ PUBLIC void HTEventCleanup NOARGS
 **		YES	If we stay in eventloop
 **		NO	If we return to client application
 */
-PRIVATE BOOL HTEventCheckState ARGS2(HTRequest *, request, HTEventState, ret)
+PRIVATE BOOL HTEventCheckState (HTRequest * request, HTEventState ret)
 {
     switch (ret) {
       case EVENT_TERM:					   /* Ignore it here */
@@ -127,9 +127,9 @@ PRIVATE BOOL HTEventCheckState ARGS2(HTRequest *, request, HTEventState, ret)
 **				(only if it failed with no blocking)
 **		HT_OK		On normal exit
 */
-PUBLIC int HTEventLoop ARGS3(HTRequest *,	homerequest,
-			     HTParentAnchor *,	homeanchor,
-			     CONST char *,	homekeywords)
+PUBLIC int HTEventLoop (HTRequest *	homerequest,
+			     HTParentAnchor *	homeanchor,
+			     CONST char *	homekeywords)
 {
     BOOL user_event = NO;
     int status, selres;

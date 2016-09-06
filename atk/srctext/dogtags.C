@@ -36,6 +36,8 @@ static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1988-1995.  All rig
 #include <buffer.H>
 #include <text.H>
 
+#include "dogtags.h"
+
 static char *makeupper(char  *str)
 {
     char *st;

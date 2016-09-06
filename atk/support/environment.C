@@ -37,15 +37,14 @@ ATK_IMPL("environment.H")
 #define NUMPERBLOCK DESIREDBLOCKSIZE / sizeof(class environment)
 #define BLOCKSIZE NUMPERBLOCK * sizeof(class environment)
 
-static class environment *freeList = NULL;
-static class environment *lastBlock = NULL;
-
-
 ATKdefineRegistry(environment, nestedmark, NULL);
 static long AlterEnvironmentSize(class environment  *self, struct removestruct  *data);
 void environment__Dump(class environment  *self, int  level);
 
 #if 0
+static class environment *freeList = NULL;
+static class environment *lastBlock = NULL;
+
 class environment *environment::Allocate()
 {
 
@@ -85,6 +84,8 @@ environment::~environment()
 	    if(this->data.viewref != NULL)
 		(this->data.viewref)->Destroy();
 	    break;
+	/* why bother with a switch for only one case? */
+	default:  break;
     }
 }
 	
@@ -245,7 +246,6 @@ static long AlterEnvironmentSize(class environment  *self, struct removestruct  
 	    (endPart)->Delete();
 	}
 	else if (pos + self->length > data->pos + data->length)  {
-	    class environment *env;
 	    /* Delete beginning of the environment */
 	    /* Is this split position corect? */
 	    (void)(self)->Split( data->pos - pos + data->length);
@@ -269,7 +269,7 @@ boolean environment::Remove(long  pos, long  length, enum environmenttype  type,
                     {
     class environment *beginenv, *endenv;
     class environment *parentenv;
-    class environment *env, *bottomenv;
+    class environment *env;
     struct removestruct procdata;
     long envpos;
 
@@ -305,8 +305,6 @@ boolean environment::Remove(long  pos, long  length, enum environmenttype  type,
     if(parentenv->parent==NULL)
 	return procdata.anyChange;	/* can't plainer top environment */
 
-    bottomenv=parentenv;
-
     do{
 	env=parentenv;
 	parentenv=(class environment *)parentenv->parent;
@@ -331,5 +329,5 @@ void environment__Dump(class environment  *self, int  level)
 	printf("    ");
     printf("Env %p (%p ^) position: %ld length: %ld ib: %c ie: %c type: %d value %p\n", nself, nself->parent, (self)->Eval(), nself->length, (nself->includeBeginning) ? 'T' : 'F', (nself->includeEnding) ? 'T' : 'F', self->type, self->data.style);
     if (nself->children != NULL)
-        (nself->children)->Enumerate( (tree23int_efptr) environment__Dump, (char *) level + 1);
+        (nself->children)->Enumerate( (tree23int_efptr) environment__Dump, (char *)(long) level + 1);
 }

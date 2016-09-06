@@ -32,7 +32,8 @@ ATK_IMPL("phelpv.H")
 #include <style.H>
 #include <prefs.H>
 #include <strcache.H>
-#define SAVESTR(str) (str?strcache::SaveStr(str):NULL)
+#define SaveStr strcache::SaveStr
+#define SAVESTR(str) (str?SaveStr(str):NULL)
 #include "phelpv.H"
 
 
@@ -97,10 +98,10 @@ static void DoGroupHelp(class phelpv  *self)
 	    long pos=(env)->Eval();
 	    long len=(env)->GetLength();
 
-	    if(len>sizeof(buf)-1) return;
+	    if(len>(int)sizeof(buf)-1) return;
 	    (TEXT(self))->CopySubString( pos, len, buf, FALSE);
 	    rock.self=self;
-	    rock.name=SAVESTR(buf);
+	    rock.name=SaveStr(buf);
 	    (PREFS(self)->categories)->Enumerate( (list_efptr)WarpToGroupHelp, (char *)&rock);
 	}
 
@@ -115,7 +116,8 @@ void phelpv::SetDotPosition(long  pos)
 class view *phelpv::Hit(enum view_MouseAction  action, long  x , long  y , long  clicks)
 {
     class view *result=(this)->textview::Hit( action, x, y, clicks);
-    if(result==(class view *)this && action==view_LeftUp || action==view_RightUp) {
+    /* tjm - unsure if this is the desired grouping (was (a&&b)||c) */
+    if(result==(class view *)this && (action==view_LeftUp || action==view_RightUp)) {
 	long pos=(this)->GetDotPosition();
 	long len=(this)->GetDotLength();
 	(this)->SetDotPosition( pos);

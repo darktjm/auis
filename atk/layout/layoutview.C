@@ -425,7 +425,7 @@ DrawRubberBox(class layoutview  *self)
 
 /* update image */
 
-#define ReallyDrawing(how, updateRect) (updateRect == NULL || how != view_Remove && how != view_MoveNoRedraw)
+#define ReallyDrawing(how, updateRect) (updateRect == NULL || (how != view_Remove && how != view_MoveNoRedraw))
 
 static void
 Update(class layoutview  *self, enum view_UpdateType  how		/* kind of update */, struct rectangle  *updateRect		/* rectangle affected; or NULL for update */, boolean  geometryChanged		/* geometry changed since last update */)
@@ -750,7 +750,7 @@ layoutview::Hit(enum view_MouseAction  action	/* which button; what it did */, l
 	numberOfClicks -= 1;
     }
 
-    if (c != NULL && ((this)->Hitmode() == HIT_EXEC && cVaries(c) || (this)->Hitmode() == HIT_INITIALIZING)) {
+    if (c != NULL && (((this)->Hitmode() == HIT_EXEC && cVaries(c)) || (this)->Hitmode() == HIT_INITIALIZING)) {
 	(this)->SetSelection( c);
 
 	child = (this)->FindSubview( c);
@@ -775,7 +775,7 @@ layoutview::Hit(enum view_MouseAction  action	/* which button; what it did */, l
 
     /* create new component or drag existing one */
 
-    else if (action == view_LeftDown || action == view_RightDown && (this)->Hitmode() == HIT_AUTHORING) {
+    else if ((action == view_LeftDown || action == view_RightDown) && (this)->Hitmode() == HIT_AUTHORING) { // tjm - changed logic
 	c = FindContainingComponent(this, x, y, POINTINGTHRESHHOLD);
 	(this)->SetSelection( c);
 	this->dragx = x;
@@ -804,14 +804,14 @@ layoutview::Hit(enum view_MouseAction  action	/* which button; what it did */, l
 
     /* continue creating or dragging */
 
-    else if ((action == view_RightUp || action == view_RightMovement
+    else if ((action == view_RightUp || action == view_RightMovement // tjm - changed logic
 	       || action == view_LeftUp || action == view_LeftMovement) &&
 	      ((this)->Hitmode() == HIT_CREATING || (this)->Hitmode() == HIT_DRAGGING
-	       || (this)->Hitmode() == HIT_AUTHORING
+	       || (this)->Hitmode() == HIT_AUTHORING)
 	       && (x < this->dragx - MOTIONTHRESHHOLD
 		|| x > this->dragx + MOTIONTHRESHHOLD
 		|| y < this->dragy - MOTIONTHRESHHOLD
-		|| y > this->dragy + MOTIONTHRESHHOLD))) {
+		|| y > this->dragy + MOTIONTHRESHHOLD)) {
 
 	c = (this)->Selection();
 

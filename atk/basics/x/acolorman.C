@@ -175,8 +175,6 @@ static void ProcessColors(Display *dpy) {
 	}
 	++iter;
     }
-    static colorhist_vector oldcolors=NULL;
-    static unsigned int oldbound=0;
     colorhist_vector newcolors=mediancut(chv, colors.GetN(), pixelcount, SCALEDOWN(65535), maxcolors);
     unsigned int upperbound=MIN(colors.GetN(),maxcolors);
     if(newcolors) {
@@ -224,7 +222,6 @@ static void ProcessColors(Display *dpy) {
 			if(defs) {
 			    unsigned int diff, bestDiff=~0;
 			    int bestDef=-1;
-			    int flagged=0;
 			    for(j=0;j<nc;j++) defs[j].flags=0;
 			    retry:
 			      for( j = 0; j < nc; j++ ) {
@@ -280,7 +277,7 @@ static void ProcessColors(Display *dpy) {
 	cme.data.l[2]=0;
 	cme.data.l[3]=0;
 	cme.data.l[4]=0;
-	Status status=XSendEvent(dpy, manager, False, StructureNotifyMask, (XEvent *)&cme);
+	XSendEvent(dpy, manager, False, StructureNotifyMask, (XEvent *)&cme);
     }
     if(defs) free(defs);
 
@@ -621,7 +618,7 @@ static void HandleRequest(XSelectionRequestEvent *sre) {
     reply.selection=sre->selection;
     reply.target=sre->target;
     reply.property=sre->property;
-    Status status=XSendEvent(dpy, reply.requestor, False, NoEventMask, (XEvent *)&reply);
+    XSendEvent(dpy, reply.requestor, False, NoEventMask, (XEvent *)&reply);
 }
 
 static void ClearOldManager(Display *display, Window manager) {
@@ -674,7 +671,7 @@ static Window FindManager(Display *display, Window mywin, Time *tstamp=NULL) {
 	}
 	Atom actual_type_return;
 	int actual_format_return;
-	unsigned long bytes_after_return=0, start=0;
+	unsigned long bytes_after_return=0;
 	unsigned char *prop_return=NULL;
 	unsigned long nitems;
 	int status=XGetWindowProperty(display, mywin, XA_INTEGER, 0, 1, TRUE, XA_INTEGER, &actual_type_return, &actual_format_return, &nitems, &bytes_after_return, &prop_return);
@@ -739,7 +736,7 @@ int main(int argc, char **argv) {
     }
     vclass=visual->c_class;
     bpc=visual->bits_per_rgb;
-    if(visual->map_entries<maxcolors) {
+    if(visual->map_entries<(int)maxcolors) {
 	fprintf(stderr, "acolorman: Visual has only %d colors, a quota of %d was requested.\n", visual->map_entries, maxcolors);
 	maxcolors=visual->map_entries;
     }
@@ -801,7 +798,7 @@ int main(int argc, char **argv) {
     cme.data.l[2]=w;
     cme.data.l[3]=0;
     cme.data.l[4]=0;
-    Status status=XSendEvent(dpy, RootWindow(dpy, DefaultScreen(dpy)), False, StructureNotifyMask, (XEvent *)&cme);
+    XSendEvent(dpy, RootWindow(dpy, DefaultScreen(dpy)), False, StructureNotifyMask, (XEvent *)&cme);
     XSync(dpy, False);
     if(Nerrors>0) {
 	fprintf(stderr, "acolorman: Couldn't get selection, or couldn't notify clients.\n");

@@ -1,3 +1,8 @@
+/* These need cleanup (probably not all used here, and the rest
+ * should be static member functions or methods of the class.
+ * They should definitely not be transferred to the C files, even though
+ * C++ linkage protocol includes type names.
+ */
 extern long eqview_Extender(class eqview  *self, char  *s, char  **stringp, long  code , long  size);
 extern char *eqview_Extendable(class eqview  *self, struct formula  *f , struct formula  *leftf , struct formula  *rightf, enum eqstyle  eqstyle, char  ext1 , char  ext2, long  hang		/* whether to hang (root) or center (paren) */, long  one_part_extender	/* whether extender has only one part */);
 extern struct formula *eqview_Format(class eqview  *self, class eq  *eqptr, struct formula  *leftf , struct formula  *f , struct formula  *rightf, enum eqstyle  eqstyle);

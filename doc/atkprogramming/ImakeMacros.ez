@@ -823,13 +823,6 @@ be passed to the Andrew version of bison to produce the name.[ch] files.
  See the help file for mkparser.}
 
 
-\subsection{FlexOrLexFileRule(file)}
-
-\fieldcontent{Declares \italic{file} to be the base name of a lex file. 
- This is used for those files which need separate versions for flex and the 
-standard unix lex programs.}
-
-
 \subsection{LexWithReplacement(file, string)}
 
 
@@ -1614,7 +1607,7 @@ obsoleted and a new rule introduced.)}
 \subsection{InstallFont(fontname)}
 
 \fieldcontent{Installs the font \italic{fontname} into the appropriate font 
-directory.  (Based on whether WM_ENV, or OPENWIN_ENV are defined.)}
+directory.}
 
 
 \subsection{InstallByPattern(pattern, flags, destdir)}
@@ -1692,22 +1685,6 @@ NormalObjectRule()}
 \fieldcontent{Obsolete.  Generates nothing.}
 
 
-\subsection{OWDECLAREFONT(fontname)}
-
-\fieldcontent{Under OPENWINDOWS_ENV declares that fontname.fb should be 
-built from .bdf files when the all target is invoked.}
-
-\subsection{OWFONTRULE}
-
-\fieldcontent{Under OPENWINDOWS_ENV declares the rule for producing a .fb 
-file from a .bdf file.
-
-}
-\fieldcontent{Used internally only.  OWDECLAREFONT and OWFONTRULE may or 
-may not work.  (They're only used if OPENWINDOWS_ENV is defined which would 
-only ever be done on Suns.)}
-
-
 \subsection{PostDynFlags(dobj, extraclasses, objs, libs, syslibs)}
 
 \subsection{PreDynFlags(dobj, extraclasses, objs, libs, syslibs)}
@@ -1750,12 +1727,6 @@ in Imakefiles.}
 \fieldcontent{Empty as we don't yet support shared libraries on any 
 platforms which require special compilation of such libraries. Referenced 
 in imake.tmpl but not needed.  (I don't think it ever was actually used.)}
-
-
-\subsection{WMFontRule()}
-
-\fieldcontent{Used internally, obsolete since it depends on fdb fonts. 
- Only used when WM_ENV is defined.}
 
 
 \subsection{XFCRULE}

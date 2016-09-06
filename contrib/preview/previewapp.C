@@ -167,9 +167,6 @@ boolean previewapp::Start()
 	struct sigaction termVector;
 	termVector.sa_handler = SIGACTIONHANDLERFUNC(FinishUp);
 	sigemptyset(&termVector.sa_mask);
-#ifdef WM_ENV
-	sigaddset(&termVector.sa_mask, SIGURG);
-#endif
 	if(sigaction(SIGTERM, &termVector, NULL)!=0) {
 	    fprintf(stderr, "preview: sigaction call failed!\n");
 	}

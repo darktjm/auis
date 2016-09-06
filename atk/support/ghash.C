@@ -216,7 +216,7 @@ static boolean EnumProc(struct egg  *e, struct enumerate  *rock)
 
 char *ghash::Enumerate(ghash_efptr  proc,long  rock)
 {
-    char *result;
+    char *result = NULL;
     struct enumerate r;
     int i;
     if(this->buckets==NULL) return NULL;

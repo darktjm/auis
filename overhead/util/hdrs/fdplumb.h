@@ -42,8 +42,6 @@ BEGINCPLUSPLUSPROTOS
 #define fopen dbg_fopen
 #define close dbg_close
 #define fclose dbg_fclose
-#define vclose dbg_vclose
-#define vfclose dbg_vfclose
 #define popen dbg_popen
 #define pclose dbg_pclose
 #define topen dbg_topen

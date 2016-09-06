@@ -26,7 +26,7 @@ int ATKLink::FirstObjectFile() {
     int i=0;
     ResetIterator();
     char *p;
-    while(p=NextArgument()) {
+    while((p=NextArgument())) {
 	int len=strlen(p);
 	if(p[len-1]=='o' && p[len-2]=='.') return i;
 	i++;
@@ -38,7 +38,7 @@ int ATKLink::LastObjectFile() {
     int i=0, lastpos=0;
     ResetIterator();
     char *p;
-    while(p=NextArgument()) {
+    while((p=NextArgument())) {
 	int len=strlen(p);
 	if(p[len-1]=='o' && p[len-2]=='.') return lastpos=i;
 	i++;

@@ -216,7 +216,7 @@ bitsPerPixelAtDepth(Display       *disp, int           /*  scrn */, unsigned int
 
   xf = XListPixmapFormats(disp, &nxf);
   for (a = 0; a < nxf; a++)
-      if (xf[a].depth == depth) {
+      if (xf[a].depth == (int)depth) {
 	  unsigned int bpp=xf[a].bits_per_pixel;
 	  XFree((char *)xf);
 	  return bpp;
@@ -252,7 +252,6 @@ void xddimage::ReProcess() {
     xcolormap *xcmap=*(xcolormap **)cmap;
     if(xcmap==NULL) return;
     CARD32 *indx=NULL;
-    Colormap map=xcmap->XColormap();
     if(xcmap==NULL) return;
     Display *disp;
     int scrn;
@@ -284,8 +283,7 @@ void xddimage::ReProcess() {
 	return;
     }
 
-    byte *srcptr = src->data;
-    int x, y, a;
+    unsigned int x, y, a;
     unsigned int linelen, dpixlen, dbits, ddepth;
     
     ddepth = DefaultDepth(disp, scrn);
@@ -388,17 +386,8 @@ static inline void ReferenceColor(XCMapImageHist &hist, XCMapImageRGB &key, unsi
 
 void xddimage::ProcessWithColorManager(graphic *dest) {
     xcolormap *xcmap=*(xcolormap **)cmap;
-    Colormap map=xcmap->XColormap();
-    xgraphic *xg=(xgraphic *)dest;
     if(xcmap==NULL) return;
-    Display *disp;
-    int scrn;
-    Visual *visual; /* visual to use */
 
-    disp = xg->XDisplay();
-    scrn = DefaultScreen(disp);
-
-    visual = DefaultVisual(disp, scrn);
     image *src=source;
     byte *srcptr = src->data;
     Pixel pixval;
@@ -464,13 +453,11 @@ boolean xddimage::Process(graphic *dest) {
     Visual *visual; /* visual to use */
     Pixel *redvalue, *greenvalue, *bluevalue;
     unsigned int linelen, dpixlen, dbits;
-    int x, y, a, b;
+    unsigned int x, y, a, b;
     unsigned short red, green, blue;
     class xcolor *xc;
-    XColor xcolor;
     unsigned int ddepth; /* depth of the visual to use */
     boolean fit=FALSE;
-    boolean domanager=FALSE;
 
     disp = xg->XDisplay();
     scrn = DefaultScreen(disp);
@@ -478,7 +465,6 @@ boolean xddimage::Process(graphic *dest) {
     visual = DefaultVisual(disp, scrn);
     ddepth = DefaultDepth(disp, scrn);
 
-    xcolor.flags = DoRed | DoGreen | DoBlue;
     redvalue = greenvalue = bluevalue = NULL;
 
     image *realsrc=source;
@@ -587,9 +573,9 @@ boolean xddimage::Process(graphic *dest) {
 		    /* sanity check
 		     */
 
-		    if( (pm.redcolors > visual->map_entries) ||
-			(pm.greencolors > visual->map_entries) ||
-			(pm.bluecolors > visual->map_entries)) {
+		    if( ((int)pm.redcolors > visual->map_entries) ||
+			((int)pm.greencolors > visual->map_entries) ||
+			((int)pm.bluecolors > visual->map_entries)) {
 			// error...
 		    }
 
@@ -969,7 +955,6 @@ void xddimage::ObservedChanged(observable *changed, long change) {
 static int UsePixmapsForImages=-1;
 void xddimage::Draw(graphic *dest, long left, long top, long width, long height, long destLeft, long destTop) {
     xgraphic *xdest=(xgraphic *)dest;
-    xcolormap *xcmap=*(xcolormap **)cmap;
     if(delayedrelease) {
 	delayedrelease->Cancel();
 	delayedrelease=NULL;
@@ -1015,7 +1000,6 @@ void xddimage::Draw(graphic *dest, long left, long top, long width, long height,
 
 void xddimage::Draw(graphic *dest, const struct rectangle *src, long destLeft, long destTop) {
     xgraphic *xdest=(xgraphic *)dest;
-    xcolormap *xcmap=*(xcolormap **)cmap;
     if(delayedrelease) {
 	delayedrelease->Cancel();
 	delayedrelease=NULL;

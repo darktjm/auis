@@ -170,7 +170,7 @@ void tags_finished(int  pid, class view  *view, long  *status)
 	message::DisplayString(view,0,"Rebuild failed");
     else {
 	message::DisplayString(view,0,"Tag file rebuilt.");
-	if (buffer=buffer::FindBufferByName(TBUFNAM)) {
+	if ((buffer=buffer::FindBufferByName(TBUFNAM))) {
 	    (buffer)->ReadFile(TagsFile);
 	}
     }
@@ -202,7 +202,7 @@ void tags_RebuildTagsFile(class view  *view, long  key)
     /*    sprintf(command,"ctags -w -f %s *.c", TagsFile);*/ /* should be able to use -f file */
 
     if ((pid = osi_vfork()) == 0) { /* in child process */
-        execlp("/bin/csh","csh","-f", "-c",command,">>& /dev/console",0);
+        execlp("/bin/csh","csh","-f", "-c",command,">>& /dev/console",(char *)NULL);
 	exit(0);
     }
     im::AddZombieHandler(pid, (im_zombiefptr)tags_finished, (long)view);
@@ -494,9 +494,6 @@ void tags_FindTagCmd(class view  *view,long  key)
 
 void tags_OpenCmd(class view  *view,long  key)
 {
-    char *name;
-    int RecursiveEdit;
-
     if (key != 0) {
 	tags_FindTag(view,(char *)key, FALSE);
     }

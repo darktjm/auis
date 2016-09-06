@@ -522,6 +522,8 @@ class view * valueview::Hit(enum view_MouseAction  type, long  x , long  y , lon
 	  case view_RightUp:
 	      (this)->Dehighlight();
 	      break;
+	  default:
+	      break;
       }
 
     return (this)->DoHit( type, x, y, numberOfClicks);

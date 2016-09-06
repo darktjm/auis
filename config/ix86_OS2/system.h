@@ -98,8 +98,6 @@ install.time::								@@\
 #undef POSIX_ENV
 #define POSIX_ENV 1	/* This is sort of a Posix system. */
 #undef DITROFF_ENV
-#undef AMS_ENV
-#undef MK_WPEDIT
 
 #ifndef In_Imake
 #include <atkproto.h>

@@ -56,14 +56,6 @@
 #include <graphic.H>
 #include <fontdesc.H>
 #include <cursor.H>
-#ifdef WM_ENV
-#include <wws.ih>
-#include <wgraphic.ih>
-#include <wim.ih>
-#include <wcursor.ih>
-#include <wfontd.ih>
-#include <mrl.ih>
-#endif /* WM_ENV */
 
 /* classes that are anyway dynamically loaded by the
 	required classes */

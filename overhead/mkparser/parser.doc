@@ -109,9 +109,9 @@ mkparser to include the appropriate declaration in gggg.h.  The declaration
 in the gggg.y file should be
 
 
-	void gggg_ErrorGuts(/* struct parser *self; 	int severity;
+	void gggg_ErrorGuts(struct parser *self; 	int severity;
 
-			char *severityname;  char *msg */);
+			const char *severityname;  const char *msg);
 
 
 When ErrorGuts is called (severity&~parser_FREEMSG) will have one of the 

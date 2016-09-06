@@ -78,7 +78,7 @@ struct _HTStream {
 /*	Create  a request structure
 **	---------------------------
 */
-PUBLIC HTRequest * HTRequest_new NOARGS
+PUBLIC HTRequest * HTRequest_new (void)
 {
     HTRequest * me = (HTRequest*) calloc(1, sizeof(*me));  /* zero fill */
     if (!me) outofmem(__FILE__, "HTRequest_new()");
@@ -96,7 +96,7 @@ PUBLIC HTRequest * HTRequest_new NOARGS
 **	conversions remain. Everything else is as if it was created from
 **	scratch.
 */
-PUBLIC void HTRequest_clear ARGS1(HTRequest *, req)
+PUBLIC void HTRequest_clear (HTRequest *req)
 {
     HTList *conversions;
     if (!req) {
@@ -118,7 +118,7 @@ PUBLIC void HTRequest_clear ARGS1(HTRequest *, req)
 /*	Delete a request structure
 **	--------------------------
 */
-PUBLIC void HTRequest_delete ARGS1(HTRequest *, req)
+PUBLIC void HTRequest_delete (HTRequest *req)
 {
     if (req) {
 	FREE(req->redirect);
@@ -160,7 +160,7 @@ PRIVATE char * method_names[(int)MAX_METHODS + 1] =
 /*	Get method enum value
 **	---------------------
 */
-PUBLIC HTMethod HTMethod_enum ARGS1(char *, name)
+PUBLIC HTMethod HTMethod_enum (char *name)
 {
     if (name) {
 	int i;
@@ -175,7 +175,7 @@ PUBLIC HTMethod HTMethod_enum ARGS1(char *, name)
 /*	Get method name
 **	---------------
 */
-PUBLIC char * HTMethod_name ARGS1(HTMethod, method)
+PUBLIC char * HTMethod_name (HTMethod method)
 {
     if ((int)method > (int)METHOD_INVALID  && 
 	(int)method < (int)MAX_METHODS)
@@ -188,8 +188,8 @@ PUBLIC char * HTMethod_name ARGS1(HTMethod, method)
 /*	Is method in a list of method names?
 **	-----------------------------------
 */
-PUBLIC BOOL HTMethod_inList ARGS2(HTMethod,	method,
-				  HTList *,	list)
+PUBLIC BOOL HTMethod_inList (HTMethod	method,
+				  HTList *list)
 {
     char * method_name = HTMethod_name(method);
     HTList *cur = list;
@@ -212,7 +212,7 @@ PUBLIC BOOL HTMethod_inList ARGS2(HTMethod,	method,
 /*
 **	Register a Protocol as an active access method
 */
-PUBLIC BOOL HTRegisterProtocol ARGS1(HTProtocol *, protocol)
+PUBLIC BOOL HTRegisterProtocol (HTProtocol *protocol)
 {
     if (!protocols) protocols = HTList_new();
     HTList_addObject(protocols, (void *) protocol);
@@ -224,7 +224,7 @@ PUBLIC BOOL HTRegisterProtocol ARGS1(HTProtocol *, protocol)
 **	Delete the list of registered access methods. This is called from
 **	within HTLibTerminate. Written by Eric Sink, eric@spyglass.com
 */
-PUBLIC void HTDisposeProtocols NOARGS
+PUBLIC void HTDisposeProtocols (void)
 {
     if (protocols) {
 	HTList_delete(protocols);
@@ -238,7 +238,7 @@ PUBLIC void HTDisposeProtocols NOARGS
 **	when the protocol module was registered can be overridden by the
 **	BlockingIO field in the HTRequest structure
 */
-PUBLIC BOOL HTProtocolBlocking ARGS1(HTRequest *, me)
+PUBLIC BOOL HTProtocolBlocking (HTRequest *me)
 {
     if (me) {
 	return (me->BlockingIO || (me->anchor && me->anchor->protocol &&
@@ -260,7 +260,7 @@ PUBLIC BOOL HTProtocolBlocking ARGS1(HTRequest *, me)
 **	Compiling with NO_INIT prevents all known protocols from being forced
 **	in at link time.
 */
-PRIVATE void HTAccessInit NOARGS
+PRIVATE void HTAccessInit (void)
 {
     GLOBALREF HTProtocol HTTP, HTFile, HTTelnet, HTTn3270, HTRlogin;
 #ifndef DECNET
@@ -297,7 +297,7 @@ PRIVATE void HTAccessInit NOARGS
 **	This function initiates the Library and it MUST be called when
 **	starting up an application. See also HTLibTerminate()
 */
-PUBLIC BOOL HTLibInit NOARGS
+PUBLIC BOOL HTLibInit (void)
 {
 #ifdef NO_STDIO						  /* Open trace file */
     if ((TDEST = fopen(TRACE_FILE, "a")) != NULL) {
@@ -357,7 +357,7 @@ PUBLIC BOOL HTLibInit NOARGS
 **	This function frees memory kept by the Library and should be called
 **	before exit of an application (if you are on a PC platform)
 */
-PUBLIC BOOL HTLibTerminate NOARGS
+PUBLIC BOOL HTLibTerminate (void)
 {
     if (TRACE)
 	fprintf(TDEST, "WWWLibTerm.. Cleaning up LIBRARY OF COMMON CODE\n");
@@ -401,7 +401,7 @@ PUBLIC BOOL HTLibTerminate NOARGS
 **		no_proxy="cern.ch,some.domain:8001"
 **
 */
-PRIVATE BOOL override_proxy ARGS1(CONST char *, addr)
+PRIVATE BOOL override_proxy (CONST char *addr)
 {
     CONST char * no_proxy = getenv("no_proxy");
     char * p = NULL;
@@ -482,7 +482,7 @@ PRIVATE BOOL override_proxy ARGS1(CONST char *, addr)
 **			HT_OK			Success
 **
 */
-PRIVATE int get_physical ARGS1(HTRequest *, req)
+PRIVATE int get_physical (HTRequest *req)
 {    
     char * access=0;	/* Name of access method */
     char * addr = HTAnchor_address((HTAnchor*)req->anchor);	/* free me */
@@ -608,7 +608,7 @@ PRIVATE int get_physical ARGS1(HTRequest *, req)
 /*		Get a save stream for a document
 **		--------------------------------
 */
-PUBLIC HTStream *HTSaveStream ARGS1(HTRequest *, request)
+PUBLIC HTStream *HTSaveStream (HTRequest *request)
 {
     HTProtocol * p;
     int status;
@@ -662,7 +662,7 @@ PUBLIC HTStream *HTSaveStream ARGS1(HTRequest *, request)
 **					(telnet sesssion started etc)
 **
 */
-PUBLIC int HTLoad ARGS2(HTRequest *, request, BOOL, keep_error_stack)
+PUBLIC int HTLoad (HTRequest *request, BOOL keep_error_stack)
 {
     char	*arg = NULL;
     HTProtocol	*p;
@@ -708,7 +708,7 @@ PUBLIC int HTLoad ARGS2(HTRequest *, request, BOOL, keep_error_stack)
 **    On Entry,
 **	Status code from load function
 */
-PUBLIC BOOL HTLoadTerminate ARGS2(HTRequest *, request, int, status)
+PUBLIC BOOL HTLoadTerminate (HTRequest * request, int status)
 {
     char * uri = HTAnchor_address((HTAnchor*)request->anchor);
 
@@ -795,8 +795,8 @@ PUBLIC BOOL HTLoadTerminate ARGS2(HTRequest *, request, int, status)
 **			HT_NO_DATA	Success, but no document loaded.
 **					(telnet sesssion started etc)
 */
-PRIVATE int HTLoadDocument ARGS2(HTRequest *,	request,
-				 BOOL,		keep_error_stack)
+PRIVATE int HTLoadDocument (HTRequest *	request,
+				 BOOL	keep_error_stack)
 
 {
     int	        status;
@@ -877,7 +877,7 @@ PRIVATE int HTLoadDocument ARGS2(HTRequest *,	request,
 **					(telnet sesssion started etc)
 */
 
-PUBLIC int HTLoadAbsolute ARGS2(CONST char *,addr, HTRequest*, request)
+PUBLIC int HTLoadAbsolute (CONST char *addr, HTRequest*request)
 {
    HTAnchor * anchor = HTAnchor_findAddress(addr);
    request->anchor = HTAnchor_parent(anchor);
@@ -902,9 +902,9 @@ PUBLIC int HTLoadAbsolute ARGS2(CONST char *,addr, HTRequest*, request)
 **					(telnet sesssion started etc)
 */
 
-PUBLIC int HTLoadToStream ARGS3(CONST char *,	addr,
-				BOOL, 		filter,
-				HTRequest*,	request)
+PUBLIC int HTLoadToStream (CONST char     *addr,
+				BOOL 	   filter,
+				HTRequest *request)
 {
     HTAnchor * anchor = HTAnchor_findAddress(addr);
     request->anchor = HTAnchor_parent(anchor);
@@ -930,9 +930,9 @@ PUBLIC int HTLoadToStream ARGS3(CONST char *,	addr,
 **					(telnet sesssion started etc)
 */
 
-PUBLIC int HTLoadRelative ARGS3(CONST char *,		relative_name,
-				HTParentAnchor *,	here,
-				HTRequest *,		request)
+PUBLIC int HTLoadRelative (CONST char *relative_name,
+				HTParentAnchor *here,
+				HTRequest *request)
 {
     char * 		full_address = 0;
     int       		result;
@@ -969,7 +969,7 @@ PUBLIC int HTLoadRelative ARGS3(CONST char *,		relative_name,
 **					(telnet sesssion started etc)
 */
 
-PUBLIC int HTLoadAnchor ARGS2(HTAnchor*, anchor, HTRequest *, request)
+PUBLIC int HTLoadAnchor (HTAnchor*anchor, HTRequest *request)
 {
     if (!anchor) return HT_ERROR;				  /* No link */
     
@@ -997,8 +997,8 @@ PUBLIC int HTLoadAnchor ARGS2(HTAnchor*, anchor, HTRequest *, request)
 **					(telnet sesssion started etc)
 */
 
-PUBLIC int HTLoadAnchorRecursive ARGS2(HTAnchor*,	anchor,
-				       HTRequest *,	request)
+PUBLIC int HTLoadAnchorRecursive (HTAnchor *anchor,
+				       HTRequest *request)
 {
     if (!anchor) return HT_ERROR;				  /* No link */
     
@@ -1027,15 +1027,15 @@ PUBLIC int HTLoadAnchorRecursive ARGS2(HTAnchor*,	anchor,
 **					(telnet sesssion started etc)
 */
 
-PRIVATE char hex ARGS1(int, i)
+PRIVATE char hex (int i)
 {
     char * hexchars = "0123456789ABCDEF";
     return hexchars[i];
 }
 
-PUBLIC int HTSearch ARGS3(CONST char *,        	keywords,
-			  HTParentAnchor *, 	here,
-			  HTRequest *,		request)
+PUBLIC int HTSearch (CONST char *        	keywords,
+			  HTParentAnchor * 	here,
+			  HTRequest *		request)
 {
 
 #define acceptable \
@@ -1108,9 +1108,9 @@ PUBLIC int HTSearch ARGS3(CONST char *,        	keywords,
 **					(telnet sesssion started etc)
 */
 
-PUBLIC int HTSearchAbsolute ARGS3(CONST char *, 	keywords,
-				  CONST char *, 	indexname,
-				  HTRequest *,		request)
+PUBLIC int HTSearchAbsolute (CONST char * 	keywords,
+				  CONST char * 	indexname,
+				  HTRequest *	request)
 {
     HTParentAnchor * anchor =
     	(HTParentAnchor*) HTAnchor_findAddress(indexname);
@@ -1130,7 +1130,7 @@ PUBLIC int HTSearchAbsolute ARGS3(CONST char *, 	keywords,
 **
 **  The string returned must be freed by the caller
 */
-PUBLIC char * HTFindRelatedName NOARGS
+PUBLIC char * HTFindRelatedName (void)
 {
     char* default_default = NULL;	      /* Parse home relative to this */
     CONST char *host = HTGetHostName(); 
@@ -1197,7 +1197,7 @@ PUBLIC char * HTFindRelatedName NOARGS
 **		4	http://info.cern.ch/default.html
 **
 */
-PUBLIC HTParentAnchor * HTHomeAnchor NOARGS
+PUBLIC HTParentAnchor * HTHomeAnchor (void)
 {
     char * my_home_document = NULL;
     char * home = (char *)getenv(LOGICAL_DEFAULT);
@@ -1287,7 +1287,7 @@ PUBLIC HTParentAnchor * HTHomeAnchor NOARGS
 **						Henrik Frystyk 17/02-94
 */
 
-PUBLIC BOOL HTBindAnchor ARGS2(HTAnchor*, anchor, HTRequest *, request)
+PUBLIC BOOL HTBindAnchor (HTAnchor *anchor, HTRequest *request)
 {
     if (!anchor) return NO;	/* No link */
     

@@ -9,18 +9,6 @@ SCANDIR=scandir.o
 SCANDIR=
 #endif
 
-#if defined(AFS_ENV) && defined(NEED_AFSINATKOS)
-all:: allafs.o
-allafs.o: 
-	chmod +x ./makeafsobj
-	./makeafsobj $(ALLAFS)
-clean::
-	 $(RM) -r tmpdir
-install.time:: allafs.o
-	$(RM) $(DESTDIR)/lib/allafs.o
-	cp allafs.o $(DESTDIR)/lib/allafs.o
-#endif
-
 OBJS=oscommon.o $(SCANDIR) relfunc.o relfunc2.o \
 	$(OSSUPBCOPY) $(OSSUPBZERO) $(OSSUPBCMP) \
 	$(OSSUPINDEX) $(OSSUPRINDEX) \

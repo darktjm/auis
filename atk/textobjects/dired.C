@@ -72,7 +72,7 @@ struct fileinfo *LookupPos(class dired  *self, long  pos);
 static void WrapStyle(class dired  *self, struct fileinfo  *fi, class style  *style);
 static int AnythingProc(struct fileinfo  *fi, long  rock);
 static long EnumProc(struct fileinfo  *fi, struct emargs  *args);
-static char *DoEnumerate(class dired  *self, procedure  proc, long  rock, boolean  all);
+static char *DoEnumerate(class dired  *self, dired_efptr  proc, long  rock, boolean  all);
 
 
 static int CompareFilenameProc(struct fileinfo  *f1 , struct fileinfo  *f2)

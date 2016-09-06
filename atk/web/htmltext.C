@@ -58,6 +58,8 @@ ATK_IMPL("htmltext.H")
 #include <hidden.H>
 #include <htmlform.H>
 
+#include "web.h"
+
 #define saferealloc(A,B) ((A==NULL) ? malloc(B) : realloc(A,B))
 
 // #define PRINTXXX 0
@@ -158,7 +160,7 @@ static void htmltext_OverrideStyles(class stylesheet *ssptr, class stylesheet *t
     for (i = 0, styles = ssptr->styles; i < ssptr->nstyles; i++, styles++)
 	(*styles)->template_c = 0;
     for (i = 0, styles = templateptr->styles; i < templateptr->nstyles; i++, styles++) {
-	if (overridestyle = (ssptr)->Find( (*styles)->name))
+	if ((overridestyle = (ssptr)->Find( (*styles)->name)))
 	     ((*styles))->Copy( overridestyle);
 	else {
 	    overridestyle = new style;
@@ -325,7 +327,7 @@ chgAttributesToCovertStyles(htmltext *txt)  {
 
 static htmltext *targettxt=NULL;
 
-	boolean
+	static boolean
 xferAtts(long rock, text *self, long pos, environment *env)  {
 	htmlenv *targetenv = (htmlenv *)
 			(targettxt->text::rootEnvironment)->
@@ -539,29 +541,6 @@ static const struct symbolmap symboltable[] = {
 
 // SYMBOL TABLE LOOKUP functions
 
-/* comparison routine used by bsearch in LookupSymbolByName */
-	static int
-SymbolCompare(const void *s1, const void *s2) {
-	return strcmp(((struct symbolmap *)s1)->code,
-			((struct symbolmap *)s2)->code);
-}
-
-	static struct symbolmap *
-LookupSymbolByName(char *name) {
-	    static struct symbolmap temp; /* used for compare, and also temporary-use #ascii symbol return struct */
-	    struct symbolmap *tableentry;
-	    temp.code= name;
-	    tableentry= (struct symbolmap *)bsearch(&temp, symboltable, sizeof(symboltable)/sizeof(struct symbolmap), sizeof(struct symbolmap), SymbolCompare);
-	    if (tableentry)
-		return tableentry;
-	    else if (name[0]=='#' && isdigit(name[1])) { /* look for base10 ASCII value */
-		temp.symbol= atoi(name+1);
-		temp.stylename= "";
-		return &temp;
-	    }
-	    return NULL;
-}
-
 	static const struct symbolmap *
 LookupNameBySymbol(char symbol, const char *style) {
     static struct symbolmap temp; /* temporary-use #ascii symbol return struct */
@@ -682,7 +661,6 @@ The codes, meanings, and html tags are
 */
 	static void
 AppendIndentCode(char **pcodex, char code, long val, enum style_Unit Unit) {
-	long halfinch;
 	switch (Unit) {
 	case style_RawDots:	break;
 	case style_Points:	break;
@@ -910,7 +888,7 @@ GetPts(char **codex) {
 	static style *
 CodesToStyle(char *codex) {
 	style *newstyle = new style;
-	long leftindent = 0, rightindent = 0, indentpara = 0, exdentpara = 0;
+	long leftindent = 0, rightindent = 0, indentpara = 0;
 	char colornm[8];
 
 	for ( ; *codex; codex++) {
@@ -1151,6 +1129,12 @@ tagtable[] = {
 };
 
 
+static char *skiptokenchars(const char *s)
+{
+    while (*s && !isspace(*s) && *s != '=') ++s;
+    return (char *)s;
+}
+
 //  TAGINFO and ATTLIST  functions
 
 /* makes a copy of the htmltaginfo struct passed in and returns it */
@@ -1341,7 +1325,6 @@ add_cell(htmltext *txt, table *table, short row, short *column,
 	struct chunk chk;
 
 	const char *rowstr = NULL, *colstr = NULL;
-	int numrow = 0, numcol = 0, counter = 0, inner_ctr = 0;
 
 	while ((*column) <= (table)->NumberOfColumns() &&
 			(table)->IsJoinedToAnother(row-1, *column-1))
@@ -1377,7 +1360,7 @@ add_cell(htmltext *txt, table *table, short row, short *column,
 	}
 
 	/* increase the number of rows if the cell spans rows  */
-	if (rowstr = getatt(taginfo->atts, "rowspan")) {
+	if ((rowstr = getatt(taginfo->atts, "rowspan"))) {
 		row += atoi(rowstr)-1;
 		if (row > (table)->NumberOfRows())
 			(table)->ChangeSize(row,
@@ -1386,7 +1369,7 @@ add_cell(htmltext *txt, table *table, short row, short *column,
 	}
 
 	/* increase the number of rows if the cell spans columns*/
-	if (colstr = getatt(taginfo->atts, "colspan")) {
+	if ((colstr = getatt(taginfo->atts, "colspan"))) {
 		*column = *column + atoi(colstr) -1;
 		if (*column > (table)->NumberOfColumns())
 			(table)->ChangeSize((table)->NumberOfRows(),
@@ -1718,8 +1701,6 @@ list_func(htmltext **ptxtobj, struct htmltaginfo *taginfo,
 				*ppos = end_line(*ptxtobj, *ppos);
 			}
 			else if (taginfo->tagid[1] == 'd') {	/* dd tag */
-				char *tag;
-				viewref *vref = NULL;
 				if (!handled_dt) {
 					*ppos = end_line(*ptxtobj, *ppos);
 			}
@@ -1787,7 +1768,6 @@ static struct table_rock {
     table_rock *next;
 } *table_rocks=NULL;     
 
-extern dataobject *NewFixupText(dataobject *obj);
 static void FixupTable(table *t) {
     int r,c;
     for(r=0;r<t->NumberOfRows();r++) {
@@ -1913,8 +1893,10 @@ table_func(htmltext **ptxtobj, struct htmltaginfo *taginfo,
 
 static htmlform *currentform = NULL;
 
+#if 0 /* use commented out below */
 // global variables for <SELECT> and <OPTION>
 static htmltext *selectattrs = NULL;
+#endif
 
 // <form> creates htmlform object
 // </form> Completes() htmlform
@@ -1924,14 +1906,14 @@ static htmltext *selectattrs = NULL;
 form_func(htmltext **ptxtobj, struct htmltaginfo *taginfo,
 		long *ppos, long *pmode) {
 	char buff[300];
-	const char *tag = buff;
 
 	if ( ! (*pmode & STOP)) {
 		if (currentform != NULL) {
 			// XXX ERROR - form within form
 		}
 		currentform = new htmlform(*ptxtobj, taginfo->atts);
-		tag = build_first_tag(taginfo->atts, taginfo->tagid);
+		/* build_first_tag assigns to tag, so no need to assign again */
+		/* tag = */ build_first_tag(taginfo->atts, taginfo->tagid);
 	}
 	else {
 		currentform->Completed();
@@ -1945,6 +1927,7 @@ form_func(htmltext **ptxtobj, struct htmltaginfo *taginfo,
 //		XXX need to eliminate either hidden blobs
 //		xxx	or eliminate storing attributes in styles
 //	hidden *hiddenobj = insert_hidden(*ptxtobj, ppos);
+//	const char *tag = buff;
 //	if (hiddenobj)
 //		(hiddenobj)->InsertCharacters(0, tag, strlen(tag));
 
@@ -1974,7 +1957,6 @@ static AWidget *selwgt=NULL;
 select_func(htmltext **ptxtobj, struct htmltaginfo *taginfo,
                       long *ppos, long *pmode) {
         static htmltext *selectbase = NULL;
-        long oldmode=0;
 	static long selectpos;
         if (*pmode & SPACE_NEEDED
             && !(*pmode & (RAW_TEXT))) {
@@ -2092,11 +2074,11 @@ textarea_func(htmltext **ptxtobj, struct htmltaginfo *taginfo,
 	static char *
 amp_str(FILE *file, int *plen) {
             
-	static char sym[201], *symx, *symend;
-	int c, len=0;
+	static char sym[201], *symx;
+	int c;
+	unsigned int len=0;
 
 	symx = sym;
-	symend = symx + sizeof(sym) - 2 ;
         *symx++ = '&';
         *symx='\0';
         *plen=1;
@@ -2130,7 +2112,7 @@ amp_str(FILE *file, int *plen) {
         // (as written that could be achieved by proper ordering of the symboltable,
         // but this should also be fixed to avoid a linear lookup...) -robr
         int i=-1;
-        int clen=0;
+        unsigned int clen=0;
         int n=sizeof(symboltable)/sizeof(struct symbolmap);
         do {
             *symx=c;
@@ -2147,10 +2129,10 @@ amp_str(FILE *file, int *plen) {
             // here we know the first len characters match with the entry at [i]
             // so if the strlen of that entry equals len then we are done.
             clen=strlen(symboltable[i].code);
-        } while(len>=sizeof(sym)-2 || len!=clen && GETANDTEST(c,file) && isalpha(c));
+        } while(len>=sizeof(sym)-2 || (len!=clen && GETANDTEST(c,file) && isalpha(c)));
         *symx='\0';
         // found an exact match, return the symbol code.
-        if(i<n && len==clen) {
+        if(i<(int)n && len==clen) {
             sym[0]=symboltable[i].symbol;
             sym[1]='\0';
             if(GETANDTEST(c,file) && c!=';') ungetc(c, file);
@@ -2248,7 +2230,7 @@ handle_tag(htmltext **ptxtobj, FILE *file, char *term, long *ppos,
 	key = &tag[stop ? 1 : 0];
 
 	ptr = skiptokenchars(key);
-	if (ptr-key > sizeof(justtag)-1) /* probably a long SGML
+	if (ptr-key > (int)sizeof(justtag)-1) /* probably a long SGML
 			comment with no spaces; prevent overruns */
 	    ptr = key + sizeof(justtag)-1;
 	strncpy(justtag, key, ptr - key);
@@ -2427,7 +2409,7 @@ htmltext::Read(FILE *file, long id)  {
 	if (id == 0 && fileno(file) >= 0) {
 		/* html file */
 		struct envelt envStack[MAXENVSTACK],
-				*envBegin, *envptr;
+				*envptr;
 		htmlenv *rootenv;
 		long len, mode= 0;
 
@@ -2442,7 +2424,6 @@ htmltext::Read(FILE *file, long id)  {
 			ReadTemplate(this->text::templateName, FALSE);
 
 		envptr= envStack;
-		envBegin= envStack;
 
 		rootenv= (htmlenv *)
 				((htmlenv *)this->text::rootEnvironment)->
@@ -2574,7 +2555,6 @@ write_inset(htmltext *txtobj, dataobject *inset, FILE *file,
 		if (txtobj) ++pos;
 	}
 	else if (inset->IsType("fnote")) {
-		int cmpval;
 		if (!((fnote *)inset)->IsOpen()) {
 			/* copy the fnote(text) inset's contents into an 				htmltext object and write that out */
 			htmltext *htxt= new htmltext;
@@ -2625,7 +2605,7 @@ write_inset(htmltext *txtobj, dataobject *inset, FILE *file,
 			FGColor, BGColor, lk->GetStyle());
 		char *dest = lk->GetRawLink();
 		if (strncmp(dest, "href=", 5)==0) dest +=5;
-		if (*dest == '"') *dest++;
+		if (*dest == '"') dest++;
 		char *last = dest+strlen(dest)-1;
 		if (*last == '"') last--;
 		fprintf(file, "<a href=\"%.*s\"%s>%s</a>",
@@ -2660,7 +2640,7 @@ write_table(htmltext *self, table *table, FILE *file)  {
 	short numcolumns= (table)->NumberOfColumns();
 	struct cell *cell;
 	char *tag=NULL;
-	long tag_len= 0;
+	unsigned long tag_len= 0;
 
 	for (row=0; row<numrows; ++row) {
 	    if (row != 0) fprintf(file, "<tr>\n");
@@ -3076,10 +3056,8 @@ dowrite(htmltext *self, FILE *file, htmlenv *parenv,
 	htmlenv *env= NULL;
 	const char *begin_tag;
 	char c;
-	int Wentry;
 	const struct symbolmap *entry;
 	dataobject *inset;
-	boolean header=FALSE, justasymbol=FALSE;
 
 	pos= parpos;
 	while (pos < endpos) {
@@ -3116,7 +3094,6 @@ dowrite(htmltext *self, FILE *file, htmlenv *parenv,
 
 		const struct write_tbl *WS = NULL;	   // pt to entry or tstyle
 		struct write_tbl tstyle;  // for style w/o entry
-		char *codeletters;	// for style w/o entry
 		int leftx, rightx, midx;
 			// possibles are in range [leftx...rightx], inclusive
 
@@ -3466,8 +3443,8 @@ get_this_dingbat_value(htmltext *self, long pos,
 	void
 htmltext::RenumberList(long pos, enum ListType ltype,
 		htmlenv *env)  {
-	long env_start, env_len, next_env_start,
-		next_env_len, new_len, so_far;
+	long env_start, next_env_start,
+		next_env_len, new_len = 0, so_far;
 	int dingbat_counter= 1;
 	htmlenv *next_env;
 	char dingbat[32];
@@ -3478,7 +3455,6 @@ htmltext::RenumberList(long pos, enum ListType ltype,
 		return;
 
 	env_start= (env)->Eval();
-	env_len= (env)->GetLength();
 	so_far= pos - env_start;
 
 	if (so_far <0) { so_far= 0; pos= env_start;}
@@ -3776,7 +3752,7 @@ htmltext::EnumerateInsets(htmlefptr f, arbval rock) {
 htmltext::AddImage(long pos, const char *file,
                    class attlist  *atts)  {
             image *dat=GetImage(file, atts);
-            htmlenv *imgEnv;
+            htmlenv *imgEnv = NULL;
 	if (dat) {
 		imgEnv= (htmlenv *)AlwaysAddView(pos,
 				"htmlimagev", dat);
@@ -3987,7 +3963,6 @@ image *htmltext::GetImage(const char *file, attlist *atts) {
     buffer *buffer;
     static char *defaultImage= NULL,
     *defaultImageType= NULL;
-    htmlenv *imgEnv= NULL;
 
     if (*file != '/' && *file != '~') {
         buffer= buffer::FindBufferByData(this);
@@ -3996,7 +3971,7 @@ image *htmltext::GetImage(const char *file, attlist *atts) {
             filename= (char *)malloc(strlen(p)+strlen(file)+1);
             strcpy(filename, p);
             if (*file != '/') {
-                if (p= strrchr(filename, '/')) *(p+1)= '\0';
+                if ((p= strrchr(filename, '/'))) *(p+1)= '\0';
                 strcat(filename, file);
                 if (access(filename, R_OK) != 0) {
                     free(filename);

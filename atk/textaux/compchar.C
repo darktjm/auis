@@ -56,19 +56,19 @@ static struct proctable_Entry *nop=NULL,*insertchar=NULL;
 static proctable_fptr textview_SelfInsertCmd=NULL;
 
 static const char leftaccent[]="AEIOUYaeiouy";
-static  const char leftaccentcodes[]={0xc1,0xc9,0xcd,0xd3,0xda,0xdd,0xe1,0xe9, 0xed,0xf3,0xfa,0xfd};
+static  const unsigned char leftaccentcodes[]={0xc1,0xc9,0xcd,0xd3,0xda,0xdd,0xe1,0xe9, 0xed,0xf3,0xfa,0xfd};
 
 static const char rightaccent[]="AEIOUaeiou";
-static  const char rightaccentcodes[]={0xc0,0xc8,0xcc,0xd2,0xd9,0xe0,0xe8,0xec, 0xf2,0xf9};
+static  const unsigned char rightaccentcodes[]={0xc0,0xc8,0xcc,0xd2,0xd9,0xe0,0xe8,0xec, 0xf2,0xf9};
 
 static const char hat[]="AEIOUaeiou";
-static  const char hatcodes[]={0xc2,0xca,0xce,0xd4,0xdb,0xe2,0xea,0xee,0xf4,0xfb};
+static  const unsigned char hatcodes[]={0xc2,0xca,0xce,0xd4,0xdb,0xe2,0xea,0xee,0xf4,0xfb};
 
 static const char tilde[]="ANOano";
-static  const char tildecodes[]={0xc3,0xd1,0xd5,0xe3,0xf1,0xf5};
+static  const unsigned char tildecodes[]={0xc3,0xd1,0xd5,0xe3,0xf1,0xf5};
 
 static const char umlaut[]="AEIOUaeiouy";
-static  const char umlautcodes[]={0xc4,0xcb,0xcf,0xd6,0xdc,0xe4,0xeb,0xef,0xf6, 0xfc,0xff};
+static  const unsigned char umlautcodes[]={0xc4,0xcb,0xcf,0xd6,0xdc,0xe4,0xeb,0xef,0xf6, 0xfc,0xff};
 
 static const char hex[]="0123456789abcdef";
 static const char octal[]="01234567";
@@ -80,9 +80,9 @@ static  char ahotoi(char  *ptr,int  base2);
 static  char parsecode(char  *ptr);
 static void SelfInsertCmd(class textview *tv, char code,char  *style);
 static void compchar_insert(class textview  *tv,char  *ptr);
-static void compchar_modifier(class textview  *tv,char  *ptr,const char  *list,const char *codes);
+static void compchar_modifier(class textview  *tv,char  *ptr,const char  *list,const unsigned char *codes);
 static enum keymap_Types doafter(struct arock  *rock,const char  key,struct proctable_Entry  **ppe,long  *prock);
-static void after(class textview  *tv,const char  *list, const char *codes,char  *ch);
+static void after(class textview  *tv,const char  *list, const unsigned char *codes,char  *ch);
 static void compchar_leftaccentafter(class textview  *tv,char  *rock);
 static void compchar_rightaccentafter(class textview  *tv,char  *rock);
 static void compchar_umlautafter(class textview  *tv,char  *rock);
@@ -103,7 +103,7 @@ static void compchar_nop(class textview  *tv, char  *possibilities);
 static void compchar_compose2(class textview  *tv,char  *ch);
 static long doatkreplacement(class text  *text,long  pos,char  *ascii,struct SARock  *r);
 static void compchar_ATKToASCII(class textview  *tv,long  rock);
-static long doasciireplacement(class text  *text,long  pos, char ch,char  *ascii,struct SARock  *r);
+static long doasciireplacement(class text  *text,long  pos, long ch,char  *ascii,long lr);
 static void compchar_ASCIIToATK(class textview  *tv,long  rock);
 
 
@@ -209,7 +209,7 @@ static void compchar_insert(class textview  *tv,char  *ptr)
 }
 
 /* compchar_modifier: if ptr isn't a valid character assumes it to be a pointer to an argument as provided by an .*init file.  In this case it inserts the character pointed to with the appropriate code as given by list and codes.  If ptr is a valid character then the character before the cursor is changed to the appropriate code as given by list and codes. */
-static void compchar_modifier(class textview  *tv,char  *ptr,const char  *list,const char *codes)
+static void compchar_modifier(class textview  *tv,char  *ptr,const char  *list,const unsigned char *codes)
 {
     class text *t=(class text *)(tv)->GetDataObject();
     /* if given an arg in a  .*init insert it with an accent */
@@ -232,7 +232,7 @@ static void compchar_modifier(class textview  *tv,char  *ptr,const char  *list,c
 	    message::DisplayString(tv,0,"Character not available.");
 	    return;
 	}
-	(t)->ReplaceCharacters(pos, 1, codes+(i-list),1);
+	(t)->ReplaceCharacters(pos, 1, (const char *)codes+(i-list),1);
     }
     (t)->NotifyObservers(observable_OBJECTCHANGED);
 }
@@ -240,7 +240,7 @@ static void compchar_modifier(class textview  *tv,char  *ptr,const char  *list,c
 struct arock {
     class textview *tv;
     const char *list;
-     const char *codes;
+     const unsigned char *codes;
     keystate_fptr oldoverride;
     long oldrock;
 };
@@ -267,7 +267,7 @@ static enum keymap_Types doafter(struct arock  *rock,const char  key,struct proc
 }
 
 /* after: the function which actually handles the work for all the compchar_*after functions, sets doafter as the override function on the textviews keystate, if the override function is already doafter it cancels the operation and if the .*init file so indicated will insert a character. */
-static void after(class textview  *tv,const char  *list, const char *codes,char  *ch)
+static void after(class textview  *tv,const char  *list, const unsigned char *codes,char  *ch)
 {
     struct arock *rock;
     rock=(struct arock *)malloc(sizeof(struct arock));
@@ -696,10 +696,12 @@ static long doasciireplacement(class text  *text,long  pos, long ch,char  *ascii
 	    break;
 	case '!':
 	    r->ask=FALSE;
-	default:
-	    (text)->AlwaysReplaceCharacters( pos, strlen(ascii), (char *)&ch, 1);
+	default: {
+	    char cch = ch;
+	    (text)->AlwaysReplaceCharacters( pos, strlen(ascii), &cch, 1);
 	    if(c=='.') return EOF;
 	    pos++;
+	}
     }
     if(pos>=(text)->GetLength()) pos=(text)->GetLength()-1;
     (r->tv)->SetDotPosition(pos);

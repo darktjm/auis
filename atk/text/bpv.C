@@ -99,7 +99,6 @@ view_DSattributes bpv::DesiredSize(long  width , long  height, enum view_DSpass 
 
 void bpv::Update()
 {
-    class bp *dobj = (class bp *)(this)->GetDataObject();
     this->FullUpdate(view_FullRedraw, 0, 0, 0, 0);
 }
 
@@ -174,7 +173,6 @@ static void RepostMenus(class bpv  *self, boolean force)
 {
     class bp *dobj = (class bp *)(self)->GetDataObject();
     long menumask = 0;
-    long val;
 
     if (dobj->haspagenum)
 	menumask |= ML_pagenumset;

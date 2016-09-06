@@ -72,6 +72,8 @@ ATK_IMPL("helpapp.H")
 #include <helpsys.h>
 #include <helpapp.H>
 
+#include "helpapp.h"
+
 /*---------------------------------------------------------------------------*/
 /*			CONDITIONAL DEBUGGING				     */
 /*---------------------------------------------------------------------------*/
@@ -122,9 +124,6 @@ ATKdefineRegistry(helpapp, application, NULL);
 
 static void  show_usage(class helpapp  *self);
 static void AddPath(const char  *astr);
-extern "C" int help_unique();
-extern "C" void helpapp_ncproc();
-extern int helpSocket;
 
 static void 
 show_usage(class helpapp  *self)
@@ -205,15 +204,6 @@ unique_help(class helpapp  *self)
 	self->helpPort = ts->s_port;
     else
 	self->helpPort = htons(HELPSOCK);
-#ifdef WM_ENV
-    wmHost = (char *) environ::Get("WMHOST");
-    if (wmHost == NULL) {
-	wmHost = (char *)malloc(MAXHOSTNAMELEN * sizeof(char));
-	gethostname(wmHost, MAXHOSTNAMELEN);
-	DEBUG(("ha: wmhost: %s\n",wmHost));
-	runningLocally = 1;
-    }
-#endif /* WM_ENV */
 #ifdef X11_ENV
     wmHost = (char *)malloc(MAXHOSTNAMELEN * sizeof(char));
     gethostname(wmHost, MAXHOSTNAMELEN);

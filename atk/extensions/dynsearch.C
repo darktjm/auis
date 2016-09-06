@@ -130,7 +130,7 @@ static int GetPattern(class textview  *view		/* textview we're using */, class t
             {
 
     char string[MAXSTRING];
-    int pos, len;
+    unsigned int pos, len;
     int useLast = FALSE;
     int lastCmdWasSearch;
     int lastSearchFailed = FALSE;

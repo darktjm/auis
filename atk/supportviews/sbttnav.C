@@ -186,7 +186,7 @@ static void AddGroupMenu(class sbttnav  *self, struct sbutton_prefs  *prefs, int
     char buf[256];
     struct groups *g;
     class menulist *ml;
-    int len=strlen(prefs->name);
+    unsigned int len=strlen(prefs->name);
     
     g=(struct groups *)malloc(sizeof(struct groups));
     if(g==NULL) return;
@@ -296,6 +296,8 @@ boolean sbttnav::Touch(int  ind, enum view_MouseAction  action)
 		((this)->GetIM())->SetWindowCursor( NULL);
 		delete this->cursor;
 	    }
+	default:
+	    break;
 		
     }
     return (this)->sbuttonv::Touch( ind, action);

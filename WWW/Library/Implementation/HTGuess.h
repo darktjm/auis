@@ -27,11 +27,11 @@
 #define HTGuess_new     HTGuessN
 #endif
 
-extern HTStream * HTGuess_new   PARAMS((HTRequest *     req,
+extern HTStream * HTGuess_new   (HTRequest *     req,
                                         void *          param,
                                         HTFormat        input_format,
                                         HTFormat        output_format,
-                                        HTStream *      output_stream));
+                                        HTStream *      output_stream);
 
 
 #endif  /* !HTGUESS_H */

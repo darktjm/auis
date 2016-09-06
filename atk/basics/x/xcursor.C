@@ -154,7 +154,7 @@ void xcursor::Make(class xim  *im)
 	    toss away temp pixmaps, gc, etc. */
 
 	/*      fillChr = cursor->header.cursor.fillChar; */
-	if (this->fillChar >= info->min_char_or_byte2 && this->fillChar <= info->max_char_or_byte2)  {
+	if ((unsigned char)this->fillChar >= info->min_char_or_byte2 && (unsigned char)this->fillChar <= info->max_char_or_byte2)  {
 	    ci = (info->per_char != NULL) ? &(info->per_char[this->fillChar - info->min_char_or_byte2]) : &(info->max_bounds);
 	    /* Note that we use a slightly bigger pixmap so that we have room to create a white outline for a font that is defined right to the edge. Diito for moving the original over a little bit, so that we have room in the larger pixmap to fit the white board on any of the four sides */
 	    width = ci->rbearing - ci->lbearing + 2;

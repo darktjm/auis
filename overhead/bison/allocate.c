@@ -19,16 +19,14 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 
 #include <stdio.h>
+#include <stdlib.h>
 
-extern char *calloc ();
-extern char *realloc ();
 extern void done ();
 
 extern char *program_name;
 
 char *
-xmalloc (n)
-     unsigned n;
+xmalloc (unsigned n)
 {
   char *block;
 
@@ -46,9 +44,7 @@ xmalloc (n)
 }
 
 char *
-xrealloc (block, n)
-     char *block;
-     unsigned n;
+xrealloc (char *block, unsigned n)
 {
   /* Avoid uncertainty about what an arg of 0 will do.  */
   if (n == 0)

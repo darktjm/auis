@@ -229,7 +229,7 @@ public:
 						{ (this)->tables = (t); }
 	inline char TranslateTokenNumber(int x)  
 		{ return ((x)==(-1) ? 0 :     
-		((unsigned)(x) <= this->tables->max_user_token  
+		((short)(x) <= this->tables->max_user_token  
 			? this->tables->translate[x]   
 			: this->tables->num_tokens + this->tables->num_nt)); }
 

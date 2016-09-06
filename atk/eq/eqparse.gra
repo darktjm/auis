@@ -641,7 +641,7 @@ yacc will find on the right side of a rule */
 static struct node {
     const char *fmt;
     struct ptr children[10];
-} *first_node, *next_node, *last_node;
+} *next_node;
  
 static struct node_table {
     struct node *first;
@@ -677,7 +677,6 @@ static char *SnarfStr(int size)
 
 void eq::Parse(FILE *file, long w, long *width, long *height)
 {
-    extern int yydebug;
     class eqparse *eqp=new eqparse;
     if(eqp==NULL) {
 	fprintf(stderr, "Couldn't allocate memory for eqparse.\n");
@@ -871,7 +870,7 @@ static void ptprint(FILE *file, struct ptr *ptr)
 			} else {
 				buf[0]='\0';
 				while(*p) {
-					sprintf(d, "%0.2x", encoding[*p]);
+					sprintf(d, "%02x", encoding[*p]);
 					d=d+strlen(d);
 					p++;
 				}

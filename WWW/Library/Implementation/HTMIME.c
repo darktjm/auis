@@ -87,7 +87,7 @@ struct _HTStream {
 **	and resynchronises on line beginnings.
 */
 
-PRIVATE void HTMIME_put_character ARGS2(HTStream *, me, char, c)
+PRIVATE void HTMIME_put_character (HTStream * me, char c)
 {
     /* This slightly simple conversion just strips CR and turns LF to
     ** newline. On unix LF is \n but on Mac \n is CR for example.
@@ -316,7 +316,7 @@ bad_field_name:				/* Ignore it */
 **
 **	Strings must be smaller than this buffer size.
 */
-PRIVATE void HTMIME_put_string ARGS2(HTStream *, me, CONST char*, s)
+PRIVATE void HTMIME_put_string (HTStream * me, CONST char* s)
 {
     while (me->state != MIME_TRANSPARENT && *s)
 	HTMIME_put_character(me, *s++);
@@ -328,7 +328,7 @@ PRIVATE void HTMIME_put_string ARGS2(HTStream *, me, CONST char*, s)
 /*	Buffer write.  Buffers can (and should!) be big.
 **	------------
 */
-PRIVATE void HTMIME_write ARGS3(HTStream *, me, CONST char *, b, int, l)
+PRIVATE void HTMIME_write (HTStream * me, CONST char * b, int l)
 {
     while (me->state != MIME_TRANSPARENT && l-- > 0)
 	HTMIME_put_character(me, *b++);
@@ -341,7 +341,7 @@ PRIVATE void HTMIME_write ARGS3(HTStream *, me, CONST char *, b, int, l)
 **	-------------------
 **
 */
-PRIVATE int HTMIME_free ARGS1(HTStream *, me)
+PRIVATE int HTMIME_free (HTStream * me)
 {
     if (me->target) (*me->target->isa->_free)(me->target);
     free(me);
@@ -351,7 +351,7 @@ PRIVATE int HTMIME_free ARGS1(HTStream *, me)
 /*	End writing
 */
 
-PRIVATE int HTMIME_abort ARGS2(HTStream *, me, HTError, e)
+PRIVATE int HTMIME_abort (HTStream * me, HTError e)
 {
     if (me->target) (*me->target->isa->abort)(me->target, e);
     free(me);
@@ -378,12 +378,12 @@ PRIVATE CONST HTStreamClass HTMIME =
 **	-------------------------
 */
 
-PUBLIC HTStream* HTMIMEConvert ARGS5(
-	HTRequest *,		request,
-	void *,			param,
-	HTFormat,		input_format,
-	HTFormat,		output_format,
-	HTStream *,		output_stream)
+PUBLIC HTStream* HTMIMEConvert (
+	HTRequest *		request,
+	void *			param,
+	HTFormat		input_format,
+	HTFormat		output_format,
+	HTStream *		output_stream)
 {
     HTStream* me;
     
@@ -399,12 +399,12 @@ PUBLIC HTStream* HTMIMEConvert ARGS5(
     return me;
 }
 
-PUBLIC HTStream* HTNetMIME ARGS5(
-	HTRequest *,		request,
-	void *,			param,
-	HTFormat,		input_format,
-	HTFormat,		output_format,
-	HTStream *,		output_stream)
+PUBLIC HTStream* HTNetMIME (
+	HTRequest *		request,
+	void *			param,
+	HTFormat		input_format,
+	HTFormat		output_format,
+	HTStream *		output_stream)
 {
     HTStream* me = HTMIMEConvert(
     	request, param, input_format, output_format, output_stream);

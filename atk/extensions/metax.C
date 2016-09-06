@@ -70,7 +70,6 @@ static const char *GetProcName(struct proctable_Entry  *pe);
 static boolean myCompletionWork(struct proctable_Entry  *pe, struct result  *data);
 static enum message_CompletionCode mycomplete(char  *partial, long  dummyData /* Just along for the ride... */, char  *buffer, int  bufferSize);
 static long donothing(class view  *vw);
-static proctable_fptr dofunc(char  *func);
 static boolean getfunction(class view  *v,char  *buf,int  size,const char  *prompt,const char  *initial);
 static boolean getarg(class view  *v,char  *arg,int size,const char  *prompt,const char  *initial,long  *result);
 
@@ -93,7 +92,7 @@ static void LoadClass(char  *partial)
 static long match(struct proctable_Entry  *pe,struct helpRock  *h)
 {
     char buf[1024];
-    int len;
+    unsigned int len;
     const char *name=proctable::GetName(pe);
     const char *doc=proctable::GetDocumentation(pe);
     if(!name) name="";
@@ -172,13 +171,6 @@ static long donothing(class view  *vw)
     return 0;
 }
 
-static proctable_fptr dofunc(char *func)
-{
-    struct proctable_Entry *proc = proctable::Lookup(func);
-    if(proc) return proctable::GetFunction(proc);
-    else return (proctable_fptr)donothing;
-}
-
 static boolean getfunction(class view  *v,char  *buf,int  size,const char  *prompt,const char  *initial)
 {
     struct helpRock myrock;
@@ -232,6 +224,7 @@ static void metax1(class view  *tv,long  argument)
 	case keystate_TypeMismatch:
 	    message::DisplayString(im, 0, "Bad command");
 	    break;
+	case keystate_ProcCalled: break;
 	}
     }
     else
@@ -255,6 +248,7 @@ static void metax2(class view  *tv,long  argument)
 	case keystate_TypeMismatch:
 	    message::DisplayString(im, 0, "Bad command");
 	    break;
+	case keystate_ProcCalled: break;
 	}
     }
     else

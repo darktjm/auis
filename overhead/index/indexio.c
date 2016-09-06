@@ -36,9 +36,7 @@
  * Internal routine: given a FILE * and an integer, write the integer in a machine-independent
  * form to the file.  Make sure this works for vaxes as well as normal machines.
  */
-static writeInteger(afile, ai)
-long ai;
-FILE *afile;
+static void writeInteger(FILE *afile, long ai)
 {
     long tc;
 
@@ -56,9 +54,7 @@ FILE *afile;
   * Internal routine: given a FILE * and a record id pointer, write the external representation
   * of the record ID to the file.
   */
-static writeRecordID(afile, arid)
-struct recordID *arid;
-FILE *afile;
+static void writeRecordID(FILE *afile, struct recordID *arid)
 {
     long code;
     long tc;
@@ -88,9 +84,7 @@ FILE *afile;
   * Internal routine: given a FILE * and a pointer to an integer, read the external representation
   * of the integer from the file and return it in the place provided.
   */
-static readInteger(afile, ai)
-long *ai;
-FILE *afile;
+static void readInteger(FILE *afile, long *ai)
 {
     long code;
     long tc;
@@ -113,8 +107,7 @@ FILE *afile;
   * return a pointer to a static recordID structure containing the newly-read
   * recordID.
   */
-static struct recordID *readRecordID(afile)
-FILE *afile;
+static struct recordID *readRecordID(FILE *afile)
 {
     long code;
     long tc;
@@ -148,8 +141,7 @@ FILE *afile;
   * Internal routine: read a set of hash bucket ids from a file (FILE *), and return a hashList *
   * pointer to the newly-created list.
   */
-struct hashList *readHashList(afile)
-FILE *afile;
+static struct hashList *readHashList(FILE *afile)
 {
     long temp;
     struct hashList *tlist, *clist;
@@ -183,9 +175,7 @@ FILE *afile;
   * Internal routine: given a FILE * and a hashList * pointer to a list of hash buckets, write
   * the hash list representation to the file.
   */
-writeHashList(afile, alist)
-FILE *afile;
-struct hashList *alist;
+static void writeHashList(FILE *afile, struct hashList *alist)
 {
     long i;
     long temp, tc;
@@ -207,9 +197,7 @@ struct hashList *alist;
   * Internal routine: Given a FILE * and a hash bucket, write the external representation of
   * the entire hash bucket to the file.
   */
-index_WriteIndex(afile, ab)
-FILE *afile;
-struct indexBucket *ab;
+static void index_WriteIndex(FILE *afile, struct indexBucket *ab)
 {
     struct indexComponent *c;
     writeInteger(afile, ab->nextID);
@@ -237,8 +225,7 @@ struct indexBucket *ab;
 							     * primary and secondary records) from the file, and return a ponter to the struct
   * hashBucket * just created.
   */
-struct indexBucket *index_ReadIndex(afile)
-FILE *afile;
+struct indexBucket *index_ReadIndex(FILE *afile)
 {
     long tc;
     char charBuffer[MAXSTRLENGTH];
@@ -317,9 +304,7 @@ FILE *afile;
 /*
   * Internal routine: Given a pointer to a hash bucket, free it.
   */
-index_FreeIndex(ai, abucket)
-struct Index *ai;
-struct indexBucket *abucket;
+void index_FreeIndex(struct Index *ai, struct indexBucket *abucket)
 {
     struct indexComponent *idx, *nidx;
     struct indexBucket *tbucket, **lbucket;
@@ -359,9 +344,7 @@ struct indexBucket *abucket;
 	    * the index package you are done with this structure by using index_CPut,
 	    * not by freeing it.
 	    */
-struct indexBucket *index_CGetHash(ai, ahash)
-struct Index *ai;
-long ahash;
+struct indexBucket *index_CGetHash(struct Index *ai, long ahash)
 {
     FILE *file;
     struct indexBucket *tb;
@@ -389,9 +372,7 @@ long ahash;
 	    * the index package you are done with this structure by using index_CPut,
 	    * not by freeing it.
 	    */
-struct indexBucket *index_CGet(ai, akey)
-struct Index *ai;
-char *akey;
+struct indexBucket *index_CGet(struct Index *ai, char *akey)
 {
     return index_CGetHash(ai, index_Hash(akey, ai->hashTableSize));
 }
@@ -400,18 +381,14 @@ char *akey;
   * Given an open index file, and a hash bucket obtained from CGet or CGetHash, relinquish
   * the required storage.
   */
-index_CPut(ai, ab)
-struct Index *ai;
-struct indexBucket *ab;
+void index_CPut(struct Index *ai, struct indexBucket *ab)
 {
 }
 
 /*
   * Internal routine to write out a bucket.
   */
-index_CWrite(ai, ab)
-struct Index *ai;
-struct indexBucket *ab;
+void index_CWrite(struct Index *ai, struct indexBucket *ab)
 {
     FILE *tf;
 
@@ -426,8 +403,7 @@ struct indexBucket *ab;
   * Internal routine: Clear out the contents of an index file.  This routine does not
   * delete the directory itself, but does delete all of its contents.
   */
-static Purge(apath)
-char *apath;
+static void Purge(char *apath)
 {
     DIR *td;
     DIRENT_TYPE *tde;
@@ -437,7 +413,7 @@ char *apath;
 
     td = opendir(apath);
     if (!td) return;
-    while(tde=readdir(td)) {
+    while((tde=readdir(td))) {
 	strcpy(buffer, apath);
 	strcat(buffer, "/");
 	strcat(buffer, tde->d_name);
@@ -457,9 +433,7 @@ char *apath;
   * Create a new index file, with the appropriate hash table size.  If the index file
   * already exists, it is cleared out, with any data in the index being lost.
   */
-index_Create(apath, aHashSize)
-char *apath;
-long aHashSize;
+int index_Create(char *apath, long aHashSize)
 {
     char tbuffer[1024], sb[20];
     long i;

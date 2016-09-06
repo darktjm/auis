@@ -268,7 +268,7 @@ tlex::RecentIndent(int  index)  {
 	long x;
 	long indent = 0;
 	long currpos = this->currpos;
-	int c;
+	int c = 0;
 
 	x = this->RecentIndex - 1 + index;
 	while (x < 0) x += tlex_RECENTSIZE;
@@ -560,7 +560,7 @@ tlex::LexFunc(void *lexrock, void *yylval) {
 	const struct tlex_tables *tab = self->lextab;
 	int action;
 	const struct tlex_Recparm *parm;
-	int success;
+	int success = 0;
 	char *tbuf;
 
 	self->tokenvalue = NULL;	/* default value for *yylval */
@@ -611,9 +611,9 @@ tryagain:  /* loop in case encountered whitespace or comment */
 				text[tokpos...tokpos+currlen] */
 		const char *samex;	/* pointer to thongsame elt for *thongx */
 		int currlen;	/* position in *thongx to consider */
-		const char * const *matchx;	/* index of longest recognized thong
+		const char * const *matchx = NULL;	/* index of longest recognized thong
 				 matchx <= thongx */
-		int matchlen;	/* length of *matchx */
+		int matchlen = 0;	/* length of *matchx */
 		int i;
 		int c;		/* currchar */
 

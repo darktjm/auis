@@ -43,7 +43,7 @@ Public Functions
    one run of the program) return the same value for the same given string.
    
  */
-extern HTAtom * HTAtom_for PARAMS((CONST char * string));/*
+extern HTAtom * HTAtom_for (CONST char * string);/*
 
   GET CONTENT OF AN ATOM
   
@@ -59,7 +59,7 @@ extern HTAtom * HTAtom_for PARAMS((CONST char * string));/*
    MIME-types of type text.
    
  */
-extern HTList * HTAtom_templateMatches PARAMS((CONST char * templ));/*
+extern HTList * HTAtom_templateMatches (CONST char * templ);/*
 
   CLEANUP MEMORY
   
@@ -67,7 +67,7 @@ extern HTList * HTAtom_templateMatches PARAMS((CONST char * templ));/*
    HTLibTerminate function.
    
  */
-extern void HTAtom_deleteAll NOPARAMS;
+extern void HTAtom_deleteAll (void);
 
 #endif/*
 

@@ -115,7 +115,6 @@ static void AddDir(const char *path)
 
     FILE *fp=fopen(buf, "r");
     if(fp==NULL) {
-	error:
 	fprintf(stderr, "fixpaths warning: skipping directory %s.\n", path);
 	return;
     }

@@ -63,7 +63,7 @@ typedef enum _HTEventState {
     EVENT_QUIT                                             /* QUIT eventloop */
 } HTEventState;
 
-typedef HTEventState (*HTEventHandler)  PARAMS((HTRequest ** request));
+typedef HTEventState (*HTEventHandler)  (HTRequest ** request);
 
 typedef struct _HTEventCallBack {
     int                 sockfd;
@@ -75,7 +75,7 @@ typedef struct _HTEventCallBack {
    An event handler can be registered using the following function:
    
  */
-extern BOOL HTEventRegister     PARAMS((HTEventCallBack * user_socket));/*
+extern BOOL HTEventRegister     (HTEventCallBack * user_socket);/*
 
   CLEANUP MEMORY
   
@@ -83,7 +83,7 @@ extern BOOL HTEventRegister     PARAMS((HTEventCallBack * user_socket));/*
    elements themselves - only the list!
    
  */
-extern void HTEventCleanup      NOPARAMS;/*
+extern void HTEventCleanup      (void);/*
 
    When select returns one of the sockets registered for user events, for example STDIN,
    as ready for READ then a function of type HTEventHandler is called to figure out what
@@ -106,8 +106,8 @@ Terminate a thread
    load functions in HTAccess.
    
  */
-extern HTEventState HTEventRequestTerminate PARAMS((HTRequest * request,
-                                                    int         status));/*
+extern HTEventState HTEventRequestTerminate (HTRequest * request,
+                                                    int         status);/*
 
    This function can be used to update the history list, hotlist etc.
    
@@ -119,9 +119,9 @@ Eventloop
    document (the home page) and are supposed to make life easier for the client.
    
  */
-extern int HTEventLoop                  PARAMS((HTRequest *     homerequest,
+extern int HTEventLoop                  (HTRequest *     homerequest,
                                         HTParentAnchor *        homeanchor,
-                                        CONST char *            homekeywords));
+                                        CONST char *            homekeywords);
 
 #endif /* HTEvent_H *//*
 

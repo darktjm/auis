@@ -36,11 +36,11 @@ HTML_new: A structured stream to parse HTML
    
    
  */
-extern HTStructured* HTML_new PARAMS((HTRequest * request,
+extern HTStructured* HTML_new (HTRequest * request,
                                         void *   param,
                                         HTFormat input_format,
                                         HTFormat output_format,
-                                        HTStream * output_stream));
+                                        HTStream * output_stream);
 /*
 
   REOPEN
@@ -50,7 +50,7 @@ extern HTStructured* HTML_new PARAMS((HTRequest * request,
    HTML object must be closed once more times than it has been reopened.
    
  */
-extern void HTML_reopen PARAMS((HTStructured * me));/*
+extern void HTML_reopen (HTStructured * me);/*
 
 Converters
 
@@ -70,7 +70,7 @@ typedef enum _HTMLCharacterSet {
         HTML_PC_CP950
 } HTMLCharacterSet;
 
-extern void HTMLUseCharacterSet PARAMS((HTMLCharacterSet i));
+extern void HTMLUseCharacterSet (HTMLCharacterSet i);
 /*
 
 Record error message as a hypertext object
@@ -91,10 +91,10 @@ Record error message as a hypertext object
    a return code like HT_LOADED if object exists else < 0
    
  */
-extern int HTLoadError PARAMS((
+extern int HTLoadError (
         HTRequest *     req,
         int             number,
-        CONST char *    message));
+        CONST char *    message);
 
 /*
 
@@ -156,40 +156,40 @@ Nesting functions
    be manipulated, and SGML regenerated from the style sequence.
    
  */
-extern void HTRegenInit NOPARAMS;
+extern void HTRegenInit (void);
 
-extern void HTRegenCharacter PARAMS((
+extern void HTRegenCharacter (
         char                    c,
         HTNesting *             nesting,
-        HTStructured *          target));
+        HTStructured *          target);
 
-extern  void HTNestingChange PARAMS((
+extern  void HTNestingChange (
         HTStructured*   s,
         HTNesting*              old,
         HTNesting *             newnest,
         HTChildAnchor *         info,
-        CONST char *            aName));
+        CONST char *            aName);
 
-extern HTNesting * HTMLCommonality PARAMS((
+extern HTNesting * HTMLCommonality (
         HTNesting *     s1,
-        HTNesting *     s2));
+        HTNesting *     s2);
 
-extern HTNesting * HTNestElement PARAMS((HTNesting * p, int ele));
-extern /* HTStyle * */ void * HTStyleForNesting PARAMS((HTNesting * n));
+extern HTNesting * HTNestElement (HTNesting * p, int ele);
+extern /* HTStyle * */ void * HTStyleForNesting (HTNesting * n);
 
-extern HTNesting* HTMLAncestor PARAMS((HTNesting * old, int depth));
+extern HTNesting* HTMLAncestor (HTNesting * old, int depth);
 
-extern HTNesting* CopyBranch PARAMS((HTNesting * old, HTNesting * newnest,
-                                     int depth));
+extern HTNesting* CopyBranch (HTNesting * old, HTNesting * newnest,
+                                     int depth);
 
-extern HTNesting * HTInsertLevel PARAMS((HTNesting * old,
+extern HTNesting * HTInsertLevel (HTNesting * old,
                 int     element_number,
-                int     level));
-extern HTNesting * HTDeleteLevel PARAMS((HTNesting * old,
-                int     level));
-extern int HTMLElementNumber PARAMS((HTNesting * s));
-extern int HTMLLevel PARAMS(( HTNesting * s));
-extern HTNesting* HTMLAncestor PARAMS((HTNesting * old, int depth));
+                int     level);
+extern HTNesting * HTDeleteLevel (HTNesting * old,
+                int     level);
+extern int HTMLElementNumber (HTNesting * s);
+extern int HTMLLevel ( HTNesting * s);
+extern HTNesting* HTMLAncestor (HTNesting * old, int depth);
 
 #endif          /* end HTML_H */
 /*

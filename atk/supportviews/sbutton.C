@@ -168,6 +168,9 @@ boolean sbutton::EnsureSize(int  ind)
 		    this->cols=this->count/this->rows;
 		    if(this->count%this->rows) this->cols++;
 		    break;
+	        case sbutton_NoneSet:
+	        case sbutton_ResizeFunction:
+	            break; /* tjm: FIXME: verify required behavior */
 	    }
 	}
 
@@ -915,6 +918,8 @@ void sbutton::SetLayout(int  rows , int  cols, enum sbutton_sizepolicy  policy)
 		break;
 	    case sbutton_ResizeFunction:
 		if(this->resizefunc) this->resizefunc(this, this->resizerock);
+	    case sbutton_NoneSet:
+	        break; /* tjm: FIXME: verify required behavior */
 	}
     }
     (this)->SetModified();
@@ -1068,7 +1073,7 @@ static char *GlomStrings(char  *s , char  *t)
 
     char *r;
 
-    if (r = (char *)malloc(strlen(s)+strlen(t)+1)) {
+    if ((r = (char *)malloc(strlen(s)+strlen(t)+1))) {
 	*r = '\0';
 	strcpy(r,s);
 	free(s);
@@ -1097,7 +1102,7 @@ static char *ReadLine(FILE  *f)
     int i,j;
 
     linehascontrol=FALSE;
-    if (result = (char *)malloc(1)) {
+    if ((result = (char *)malloc(1))) {
 	*result = '\0';
 
 	while (fgets(buf,sizeof(buf),f)) {
@@ -1160,7 +1165,7 @@ static char *EncodeFont(class fontdesc  *font)
     if (myfonttype & fontdesc_Bold) strcpy(type,"b");
     if (myfonttype & fontdesc_Italic) strcpy(type,"i");
     if (myfonttype & fontdesc_Fixed) strcpy(type,"f");
-    if (buf = (char *)malloc(strlen(myfontname)+25)) {
+    if ((buf = (char *)malloc(strlen(myfontname)+25))) {
 	sprintf(buf,"%s%ld%s", myfontname, myfontsize, type);
 	return (buf);
     } else {

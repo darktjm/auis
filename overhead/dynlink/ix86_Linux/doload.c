@@ -27,7 +27,9 @@
 #include <andrewos.h>
 #include <errno.h>
 #include <dlfcn.h>
+#include "doload.h"
 
+#if 0
 static struct dlist {
     long *dtors;
     struct dlist *next;
@@ -44,13 +46,7 @@ static void dodtors() {
 	dtorschain=dtorschain->next;
     }
 }
-
-/* This should be removed, but the machine independent code declares
- * doload_Extension external expecting it to be defined in the machdep
- * code. I suppose one might want to set this to something other than ".do"
- * but for now we will do it the way it has always been done.
- */
-const char doload_extension[] = ".do";
+#endif
 
 int doload_trace=0;		/* nonzero if debugging */
 
@@ -64,23 +60,16 @@ static int dummyfunc(int argc, char **argv) {
  * to do the right thing.
  */
 
-char *doload(inFD, name, bp, lenP, path) /* return pointer to entry point, */
+char *doload( /* return pointer to entry point, */
                                          /* or NULL if error */
-/* UNUSED */ int inFD;			 /* open fd for package */
-char *name;  		/* name of package being loaded */
-char **bp;              /* base address of package */
-long *lenP;		/* size of text segment */
-char *path;		/* Pathname of package being loaded */
+/* UNUSED */ int inFD,			 /* open fd for package */
+char *name,  		/* name of package being loaded */
+char **bp,              /* base address of package */
+long *lenP,		/* size of text segment */
+char *path)		/* Pathname of package being loaded */
 {
     void *status;
-    int status2;
-    long i;
     void (*entry)();
-    char *dummy;
-    char entryname[256];
-    char libpath[MAXPATHLEN];
-    long *ctors;
-    long *dtors;
     
 /* In theory, one might be able to provide the correct values for bp and len,
  * but doindex is going to free the memory associated with a dynamic object
@@ -106,6 +95,8 @@ char *path;		/* Pathname of package being loaded */
         return NULL;
     }
 #if 0 
+    long *ctors;
+    long *dtors;
     ctors = (long *)dlsym(status, "__CTOR_LIST__");
     if(ctors==NULL) {
 	

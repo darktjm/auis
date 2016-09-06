@@ -151,7 +151,6 @@ void pvaltvc::UpdateText(long  val)
     class prefval *pvd=DATA(this);
     class text *pvt=TEXT(this);
     class textview *tv=(this)->GetTextView();
-    char *vs;
     int i;
     long pos=(tv)->GetDotPosition();
     long len=(tv)->GetDotLength();

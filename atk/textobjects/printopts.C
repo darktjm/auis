@@ -326,7 +326,7 @@ class view *printopts::Hit(enum view_MouseAction action, long x, long y, long   
     class environment *env;
     class style *style;
     char *stylename;
-    long textstart, textlen;
+    long textlen;
 
     if (!this->hasInputFocus) {
 	this->WantInputFocus(this);
@@ -544,8 +544,7 @@ static void LoadInitValue(class printopts *self, int onum)
 {
     struct p_option *rec = (&(self->oplist[onum]));
     long value;
-    short gotit;
-    const char *str;
+    const char *str = NULL;
     int strlength;
 
     value = self->opview->GetPrintOption(rec->op->name);

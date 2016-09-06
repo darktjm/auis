@@ -94,7 +94,7 @@ PRIVATE unsigned int HTCacheSize = 0;		    /* Current size of cache */
 **	We can't use errno directly as we have both errno and socerrno. The
 **	result is a static buffer.
 */
-PUBLIC CONST char * HTErrnoString ARGS1(int, errornumber)
+PUBLIC CONST char * HTErrnoString (int errornumber)
 {
 #if defined(NeXT) || defined(THINK_C)
     return strerror(errornumber);
@@ -114,7 +114,7 @@ PUBLIC CONST char * HTErrnoString ARGS1(int, errornumber)
 #ifdef OLD_CODE
 /*	Debug error message
 */
-PUBLIC int HTInetStatus ARGS1(char *, where)
+PUBLIC int HTInetStatus (char *where)
 {
 #ifndef VMS
 
@@ -157,10 +157,10 @@ PUBLIC int HTInetStatus ARGS1(char *, where)
 **	*pstatus    points to status updated iff bad
 */
 
-PUBLIC unsigned int HTCardinal ARGS3
-	(int *,		pstatus,
-	char **,	pp,
-	unsigned int,	max_value)
+PUBLIC unsigned int HTCardinal 
+	(int *		pstatus,
+	char **		pp,
+	unsigned int	max_value)
 {
     unsigned int n=0;
     if ( (**pp<'0') || (**pp>'9')) {	    /* Null string is error */
@@ -187,7 +187,7 @@ PUBLIC unsigned int HTCardinal ARGS3
 **  call if the application has its own handlers.
 */
 #include <signal.h>
-PUBLIC void HTSetSignal NOARGS
+PUBLIC void HTSetSignal (void)
 {
     /* On some systems (SYSV) it is necessary to catch the SIGPIPE signal
     ** when attemting to connect to a remote host where you normally should
@@ -209,7 +209,7 @@ PUBLIC void HTSetSignal NOARGS
 **
 **	Remove the element specified from the cache
 */
-PRIVATE void HTTCPCacheRemoveElement ARGS1(host_info *, element)
+PRIVATE void HTTCPCacheRemoveElement (host_info *element)
 {
     if (!hostcache) {
         if (PROT_TRACE)
@@ -233,7 +233,7 @@ PRIVATE void HTTCPCacheRemoveElement ARGS1(host_info *, element)
 **
 **	Cleans up the memory. Called by HTLibTerminate
 */
-PUBLIC void HTTCPCacheRemoveAll NOARGS
+PUBLIC void HTTCPCacheRemoveAll (void)
 {
     if (hostcache) {
 	HTList *cur = hostcache;
@@ -257,7 +257,7 @@ PUBLIC void HTTCPCacheRemoveAll NOARGS
 **
 **	Removes the corresponding entrance in the cache
 */
-PRIVATE void HTTCPCacheRemoveHost ARGS1(char *, host)
+PRIVATE void HTTCPCacheRemoveHost (char *host)
 {
     HTAtom *hostatom = HTAtom_for(host);
     HTList *cur = hostcache;
@@ -281,7 +281,7 @@ PRIVATE void HTTCPCacheRemoveHost ARGS1(char *, host)
 **
 **	Remove the element with the lowest hit rate
 */
-PRIVATE void HTTCPCacheGarbage NOARGS
+PRIVATE void HTTCPCacheGarbage (void)
 {
     HTList *cur = hostcache;
     host_info *pres, *worst_match = NULL;
@@ -313,8 +313,8 @@ PRIVATE void HTTCPCacheGarbage NOARGS
 **
 **      Returns new element if OK NULL if error
 */
-PRIVATE host_info *HTTCPCacheAddElement ARGS2(HTAtom *, host,
-					      struct hostent *, element)
+PRIVATE host_info *HTTCPCacheAddElement (HTAtom *host,
+					      struct hostent *element)
 {
     host_info *newhost;
     char *addr;
@@ -376,7 +376,7 @@ PRIVATE host_info *HTTCPCacheAddElement ARGS2(HTAtom *, host,
 **	required as we can't expect a lot of data to test on.
 **
 */
-PUBLIC void HTTCPAddrWeights ARGS2(char *, host, time_t, deltatime)
+PUBLIC void HTTCPAddrWeights (char *host, time_t deltatime)
 {
     HTAtom *hostatom = HTAtom_for(host);
     HTList *cur = hostcache;
@@ -440,7 +440,7 @@ PUBLIC void HTTCPAddrWeights ARGS2(char *, host, time_t, deltatime)
 **		it is to be kept.
 */
 
-PUBLIC CONST char * HTInetString ARGS1(SockA *, sin)
+PUBLIC CONST char * HTInetString (SockA *sin)
 {
 #if 0
     /* This dumps core on some Sun systems :-(. The problem is now, that 
@@ -467,8 +467,8 @@ PUBLIC CONST char * HTInetString ARGS1(SockA *, sin)
 **      Returns:	>0 if OK the number of homes are returned
 **		     	-1 if error
 */
-PUBLIC int HTGetHostByName ARGS3(char *, host, SockA *, sin,
-				 BOOL, use_cur)
+PUBLIC int HTGetHostByName (char *host, SockA *sin,
+				 BOOL use_cur)
 {
     HTAtom *hostatom = HTAtom_for(host);
     host_info *pres = NULL;
@@ -531,7 +531,7 @@ PUBLIC int HTGetHostByName ARGS3(char *, host, SockA *, sin,
 **	Get host name of the machine on the other end of a socket.
 **
 */
-PUBLIC char * HTGetHostBySock ARGS1(int, soc)
+PUBLIC char * HTGetHostBySock (int soc)
 {
     struct sockaddr addr;
     int len = sizeof(struct sockaddr);
@@ -579,8 +579,8 @@ PUBLIC char * HTGetHostBySock ARGS1(int, soc)
 ** NOTE:	It is assumed that any portnumber and numeric host address
 **		is given in decimal notation. Separation character is '.'
 */
-PUBLIC int HTParseInet ARGS3(SockA *, sin, CONST char *, str,
-			     BOOL, use_cur)
+PUBLIC int HTParseInet (SockA *sin, CONST char *str,
+			     BOOL use_cur)
 {
     char *host = NULL;
     int status = 0;
@@ -657,7 +657,7 @@ PUBLIC int HTParseInet ARGS3(SockA *, sin, CONST char *, str,
 **	-------------------------------------------
 **
 */
-PRIVATE void get_host_details NOARGS
+PRIVATE void get_host_details (void)
 
 #ifndef MAXHOSTNAMELEN
 #define MAXHOSTNAMELEN 64		/* Arbitrary limit */
@@ -703,7 +703,7 @@ PRIVATE void get_host_details NOARGS
 **
 **	Returns NULL on error, "" if domain name is not found
 */
-PUBLIC CONST char *HTGetDomainName NOARGS
+PUBLIC CONST char *HTGetDomainName (void)
 {
     CONST char *host = HTGetHostName();
     char *domain;
@@ -723,7 +723,7 @@ PUBLIC CONST char *HTGetDomainName NOARGS
 **	If this is not set then the default approach is used using
 **	HTGetHostname().
 */
-PUBLIC void HTSetHostName ARGS1(char *, host)
+PUBLIC void HTSetHostName (char *host)
 {
     if (host && *host) {
 	char *strptr;
@@ -758,7 +758,7 @@ PUBLIC void HTSetHostName ARGS1(char *, host)
 **
 **	Return: hostname on success else NULL
 */
-PUBLIC CONST char * HTGetHostName NOARGS
+PUBLIC CONST char * HTGetHostName (void)
 {
     BOOL got_it = NO;
     FILE *fp;
@@ -865,7 +865,7 @@ PUBLIC CONST char * HTGetHostName NOARGS
 /*
 **	Free the host name. Called from HTLibTerminate
 */
-PUBLIC void HTFreeHostName NOARGS
+PUBLIC void HTFreeHostName (void)
 {
     FREE(hostname);
 }
@@ -877,7 +877,7 @@ PUBLIC void HTFreeHostName NOARGS
 **	HTGetMailAddress(). If the argument is NULL or "" then HTGetMailAddress
 **	returns NULL on a succeding request.
 */
-PUBLIC void HTSetMailAddress ARGS1(char *, address)
+PUBLIC void HTSetMailAddress (char *address)
 {
     if (!address || !*address)
 	StrAllocCopy(mailaddress, "");
@@ -906,7 +906,7 @@ PUBLIC void HTSetMailAddress ARGS1(char *, address)
 **
 **	Returns NULL if error else pointer to static string
 */
-PUBLIC CONST char * HTGetMailAddress NOARGS
+PUBLIC CONST char * HTGetMailAddress (void)
 {
     char *login;
     CONST char *domain;
@@ -966,7 +966,7 @@ PUBLIC CONST char * HTGetMailAddress NOARGS
 /*
 **	Free the mail address. Called from HTLibTerminate
 */
-PUBLIC void HTFreeMailAddress NOARGS
+PUBLIC void HTFreeMailAddress (void)
 {
     FREE(mailaddress);
 }
@@ -983,9 +983,9 @@ PUBLIC void HTFreeMailAddress NOARGS
 **
 **	Returns 0 if OK, -1 on error
 */
-PUBLIC int HTDoConnect ARGS5(HTNetInfo *, net, char *, url,
-			     u_short, default_port, u_long *, addr,
-			     BOOL, use_cur)
+PUBLIC int HTDoConnect (HTNetInfo *net, char *url,
+			     u_short default_port, u_long *addr,
+			     BOOL use_cur)
 {
     int status;
     char *p1 = HTParse(url, "", PARSE_HOST);
@@ -1203,7 +1203,7 @@ PUBLIC int HTDoConnect ARGS5(HTNetInfo *, net, char *, url,
 **		 0		if OK,
 **		 -1		on error
 */
-PUBLIC int HTDoAccept ARGS1(HTNetInfo *, net)
+PUBLIC int HTDoAccept (HTNetInfo *net)
 {
     SockA soc_address;				/* SockA is defined in tcp.h */
     int status;

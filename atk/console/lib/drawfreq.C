@@ -316,19 +316,19 @@ void maketext(class consoleClass  *self, char  *target, struct display  *disp, i
         switch (*t) {
             case '*':
                 v = disp->WhatToDisplay->RawText;
-                while (*s++ = *v++);
+                while ((*s++ = *v++));
                 s--;
                 break;
             case '$':
                 itoa(disp->WhatToDisplay->Value, u);
                 v = u;
-                while (*s++ = *v++);
+                while ((*s++ = *v++));
                 s--;
                 break;
             case '^':
                 itoa(disp->ValueMax, u);
                 v = u;
-                while (*s++ = *v++);
+                while ((*s++ = *v++));
                 s--;
                 break;
             case '\\':
@@ -639,7 +639,7 @@ void AddToLog(class consoleClass  *self,struct display  *disp, boolean  IsClick,
                 AddStringToLog(ErrTxt, logptr);
                 (self)->WantUpdate( self);
                 if (osi_vfork() == 0) {
-                    execl(_SITE_BIN_SH, "sh", "-c", strdum, 0);
+                    execl(_SITE_BIN_SH, "sh", "-c", strdum, (char *)NULL);
                     _exit(0);
                 }
             } else {
@@ -779,12 +779,10 @@ void AddStringToLog(const char  *string, struct RegionLog  *logptr)
             t = s + 1;
 	}
 	else{
-	    if((s - t) == 255){
-		char c = Buffer[(int)(s - t) + 1];
-		strncpy(Buffer, t,(int)(s - t) + 1);
-		Buffer[(int)(s - t) + 1] = '\0';
+	    if((s - t) == sizeof(Buffer) - 1){
+		strncpy(Buffer, t,(int)(s - t));
+		Buffer[(int)(s - t)] = '\0';
 		AddLineToLog(Buffer, logptr);
-		Buffer[(int)(s - t) + 1] = c;
 		t = s;
 	    }
 	}

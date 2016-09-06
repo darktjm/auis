@@ -83,7 +83,7 @@ given a particular set of characteristics */
 ATKdefineRegistry(xfontdesc, fontdesc, xfontdesc::InitializeClass);
 static struct FontSummary *GetFontSummary(class xfontdesc  *self);
 static void AddStyleModifiers(char  *string, int  styles);
-static char *GetNthDash(char  *p, int  cnt);
+static const char *GetNthDash(const char  *p, int  cnt);
 static boolean XExplodeFontName(const char  *fontName, char  *familyName, long  bufSize, long  *fontStyle, long  *fontSize);
 static struct bestfont *ClosestFonts(const char  **possibleNames, int  numNames, const char *desiredFamily, int  desiredSize, int  desiredStyle, int  *numBest, boolean  andyName);
 static XFontStruct *GetClosestFont(class xgraphic  *graphic, const char *matchStr, const char *desiredName, int  desiredSize, int  desiredStyle, boolean  andyName, char *substitute);
@@ -160,7 +160,7 @@ static struct FontSummary *GetFontSummary(class xfontdesc  *self)
      struct FontSummary *tsp;
      XCharStruct *maxChar;
      XFontStruct *fontInfo;
-     int i;
+     unsigned int i;
 
      tsp = &self->summary;	/* for quick reference */
      /* otherwise DescValid is set to true in LoadAndrewFont   
@@ -579,10 +579,6 @@ xfontdesc_LoadXFont(class xfontdesc  * self, class xgraphic  *graphic)
 
     /* Look for close fonts in the x name space. */
     if (font == NULL) {
-        struct bestfont *bestFonts;
-        int numNames;
-        int numBest;
-
 	sprintf(xstyleName, "-*-%s-*-*-*-*-*-*-*-*-*-*-*-*", xfamily);
 	font = GetClosestFont(graphic, xstyleName, xfamily, (desiredSize + fudge), desiredStyle, FALSE, substitute);
     }
@@ -701,7 +697,7 @@ class graphic *xfontdesc::CvtCharToGraphic(class graphic  *graphic2, char  Speci
 /* This is text code extracted from my test suite, not the real stuff */
 
     info = GETXFONT(this, graphic);
-    if (SpecialChar >= info->min_char_or_byte2 && SpecialChar <= info->max_char_or_byte2) {
+    if ((unsigned char)SpecialChar >= info->min_char_or_byte2 && (unsigned char)SpecialChar <= info->max_char_or_byte2) {
 	ci = (info->per_char != NULL) ? &(info->per_char[SpecialChar - info->min_char_or_byte2]) : &(info->max_bounds);
 	width = ci->width;
 	height = info->max_bounds.ascent + info->max_bounds.descent;
@@ -768,7 +764,7 @@ xfontdesc::GetRealFontDesc(class graphic  *graphic2)
 	if((graphic = EnsureGraphic(graphic)) == NULL)
 	    return(NULL);
 	for (		fc = MDFD; 
-			fc != NULL && fc->host != ConnectionNumber((graphic)->XDisplay()); 
+			fc != NULL && (int)fc->host != ConnectionNumber((graphic)->XDisplay()); 
 			fc = fc->next)
 		{}
 	if (fc == NULL)
@@ -799,7 +795,7 @@ short *xfontdesc::WidthTable(class graphic  *graphic2)
 		{
 	XFontStruct *font;
 	short * fontWidthTable;
-	int i;
+	unsigned int i;
 	class xgraphic *graphic=(class xgraphic *)graphic2;
 
 	if (this->widthTable)
@@ -838,7 +834,7 @@ short *xfontdesc::HeightTable(class graphic  *graphic2)
 
 	XFontStruct *font;
 	short * fontHeightTable;
-	int i;
+	unsigned int i;
 	class xgraphic *graphic=(class xgraphic *)graphic2;
 
 	if (this->heightTable)
@@ -915,8 +911,8 @@ void xfontdesc::CharSummary(class graphic  * graphic2, char  LookUpChar, struct 
 	RetValue->ySpacing = 0;
     }
     else {
-	if (LookUpChar<font->min_char_or_byte2 ||
-	    LookUpChar>font->max_char_or_byte2) {
+	if ((unsigned char)LookUpChar<font->min_char_or_byte2 ||
+	    (unsigned char)LookUpChar>font->max_char_or_byte2) {
 	    RetValue->width = 0;
 	    RetValue->height = 0;
 	    RetValue->xOriginOffset = 0;

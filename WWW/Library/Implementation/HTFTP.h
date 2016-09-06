@@ -36,7 +36,7 @@ Public Functions
   ACCESSING FTP-SERVER
   
  */
-extern int  HTLoadFTP PARAMS((HTRequest * request));/*
+extern int  HTLoadFTP (HTRequest * request);/*
 
   ENABLE/DISABLE REUSE OF CONTROL CONNECTIONS ON CLIENT SIDE
   
@@ -48,16 +48,16 @@ extern int  HTLoadFTP PARAMS((HTRequest * request));/*
    CWD.
    
  */
-extern void HTFTP_enable_session NOPARAMS;
-extern BOOL HTFTP_disable_session NOPARAMS;/*
+extern void HTFTP_enable_session (void);
+extern BOOL HTFTP_disable_session (void);/*
 
   VARIOUS FUNCTIONS TO PARSE INFORMATION
   
    Theese functions are necessary in order to keep the internal data structures hidden.
    
  */
-extern HTChunk *HTFTPWelcomeMsg PARAMS ((HTNetInfo *data));
-extern BOOL HTFTUseList PARAMS ((HTNetInfo *data));/*
+extern HTChunk *HTFTPWelcomeMsg (HTNetInfo *data);
+extern BOOL HTFTUseList (HTNetInfo *data);/*
 
 Flags for FTP connections
 

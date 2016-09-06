@@ -33,7 +33,7 @@ PUBLIC CONST char * HTLibraryVersion = VC; /* String for help screen etc */
 /*	Strings of any length
 **	---------------------
 */
-PUBLIC int strcasecomp ARGS2 (CONST char*,a, CONST char *,b)
+PUBLIC int strcasecomp  (CONST char*a, CONST char *b)
 {
 	CONST char *p =a;
 	CONST char *q =b;
@@ -50,7 +50,7 @@ PUBLIC int strcasecomp ARGS2 (CONST char*,a, CONST char *,b)
 /*	With count limit
 **	----------------
 */
-PUBLIC int strncasecomp ARGS3(CONST char*,a, CONST char *,b, int,n)
+PUBLIC int strncasecomp (CONST char*a, CONST char *b, int n)
 {
 	CONST char *p =a;
 	CONST char *q =b;
@@ -70,8 +70,8 @@ PUBLIC int strncasecomp ARGS3(CONST char*,a, CONST char *,b, int,n)
 /*
  * strcasestr(s1,s2) -- like strstr(s1,s2) but case-insensitive.
  */
-PUBLIC char * strcasestr ARGS2(char *,	s1,
-			       char *,	s2)
+PUBLIC char * strcasestr (char *	s1,
+			       char *	s2)
 {
     char * ptr = s1;
 
@@ -106,7 +106,7 @@ PUBLIC char * strcasestr ARGS2(char *,	s1,
 /*	Allocate a new copy of a string, and returns it
 */
 PUBLIC char * HTSACopy
-  ARGS2 (char **,dest, CONST char *,src)
+   (char **dest, CONST char *src)
 {
   if (*dest) free(*dest);
   if (! src)
@@ -122,7 +122,7 @@ PUBLIC char * HTSACopy
 /*	String Allocate and Concatenate
 */
 PUBLIC char * HTSACat
-  ARGS2 (char **,dest, CONST char *,src)
+   (char **dest, CONST char *src)
 {
   if (src && *src) {
     if (*dest) {
@@ -154,7 +154,7 @@ PUBLIC char * HTSACat
 **
 **	returns	a pointer to the first field
 */
-PUBLIC char * HTNextField ARGS1(char **, pstr)
+PUBLIC char * HTNextField (char ** pstr)
 {
     char * p = *pstr;
     char * start;			/* start of field */

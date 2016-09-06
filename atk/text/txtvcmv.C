@@ -39,6 +39,8 @@
 #include <environ.H>
 #include <txtproc.h>
 
+#include "shared.h"
+
 void textview_EndOfWordCmd (class textview  *self);
 void textview_ForwardWordCmd (class textview  *self);
 void textview_BackwardWordCmd (class textview  *self);
@@ -83,9 +85,9 @@ void textview_GoToLineCmd(class textview  *self);
 
 void textview_EndOfWordCmd (class textview  *self)
     {/**/
-    int j, ct, pos, dlen, testType;
+    int j, ct, pos, dlen, testType = 0;
     class text *d;
-    char	c;
+    char	c = 0;
     /****/
     pos = (self)->CollapseDot();
     ct = ((self)->GetIM())->Argument();
@@ -149,7 +151,7 @@ void textview_ForwardWordCmd (class textview  *self)
 		while ( pos < dlen && charType((d)->GetChar( pos)) == testType ) pos++;
 		while ( pos < dlen && charType(c = (d)->GetChar( pos)) == WHITESPACE )
 		{
-		    if ( c == '\n' )
+		    if ( c == '\n' ) {
 			if ( (d)->GetChar( pos + 1) == '\n' )
 			{
 			    /* stop at blank lines */
@@ -162,6 +164,7 @@ void textview_ForwardWordCmd (class textview  *self)
 				/* stop at end of trailing white space */
 				break;
 			    }
+		    }
 		    pos++;
 		}
 	    }
@@ -206,7 +209,7 @@ void textview_BackwardWordCmd (class textview  *self)
 	else
 	{
 	    int testType;
-	    char	c;
+	    char	c = 0;
 
 	    pos--;
 	    while ( pos > 0 && (testType = charType(c = (d)->GetChar( pos))) == WHITESPACE )
@@ -740,7 +743,7 @@ void textview_PreviousLineCmd (class textview  *self  /**/)
 }
 
 /* original textview_NextLineCmd..., now only used for VI mode */
-void textview_VINextLineCmd (class textview  *self /**/)
+static void textview_VINextLineCmd (class textview  *self /**/)
 {
     int npos, j;
     int xpos;
@@ -835,9 +838,6 @@ void textview_VINextLineCmd (class textview  *self /**/)
     (self)->WantUpdate( self);
 }
 
-extern long textview_ExposeRegion(class textview *tv, long pos1, long rlen, class view *inset, const struct rectangle &area, struct rectangle &hit, long &off, long extra);
-extern long textview_LineStart(class textview *tv, long curx, long cury, long xs, long ys, long pos, long *lend=0, long *lheight=0);
-extern void textview_ComputeViewArea(class textview *tv, const struct rectangle &area, long &curx, long &cury, long &xs, long &ys);
 void textview_NextLineCmd (class textview  *self /**/)
 {
     if(self->editor==VI) {
@@ -847,17 +847,14 @@ void textview_NextLineCmd (class textview  *self /**/)
     long npos, i, j;
     int xpos;
     class mark tm;	/* note this mark is not on the document's marker chain */
-    long currentline, pos, lines, nlines, newline, startPos, nlPos, dsize;
-    static int linetomove;
+    long pos, nlPos;
     long curx, cury, xs, ys;
     struct rectangle logical;
     self->GetLogicalBounds(&logical);
     struct formattinginfo info;
     textview_ComputeViewArea(self, logical, curx, cury, xs, ys);
 
-    startPos = (self)->GetDotPosition();
     pos = (self)->CollapseDot();
-    dsize	= (Text(self))->GetLength();
 
     if ((self->imPtr)->GetLastCmd() == lcMove)
 	xpos = self->movePosition;
@@ -1403,7 +1400,6 @@ void textview_ShiftLeftCmd(textview *self, char *arg)
 /* Shift the view right n pixels.  This means the text goes left. */
 void textview_ShiftRightCmd(textview *self, char *arg)
 {
-    extern int textview_SizeOfLongestLineOnScreen(textview *self);	/* should be a method */
     int viewwidth = self->GetLogicalWidth() - ((self->hasApplicationLayer) ? self->bx : self->ebx) * 2;
     int txtwidth = textview_SizeOfLongestLineOnScreen(self);
     if (txtwidth < viewwidth)

@@ -31,15 +31,6 @@
     CMENU = cmenu
 #endif 
 
-#ifdef AMS_ENV
-    AMS = mail
-    ELI = eli
-#endif
-
-#if defined(AFS_ENV) || defined(AMS_DELIVERY_ENV) || defined(WHITEPAGES_ENV)
-    WPUTIL = wputil wpi
-#endif
-
 #ifndef NO_FONTS_ENV
     FONTS = fonts
 #endif 
@@ -52,14 +43,8 @@
     DYNLINK = dynlink
 #endif
 
-    CPPCONVERT = c++conv
-#ifdef CPPCONVERTER_ENV
-    CLASSM = class
-#endif
-
 SUBDIRS = relativize \
         sys \
-	$(CPPCONVERT) \
 	genmake \
 	util \
         external \
@@ -69,13 +54,8 @@ SUBDIRS = relativize \
 	addalias \
 	errors \
 	index \
-	$(CLASSM) \
 	$(DYNLINK) \
-	rxp \
 	mkparser \
-	$(ELI) \
 	$(FONTS) \
 	$(ICONS) \
-	$(CMENU) \
-	$(AMS) \
-	$(WPUTIL)
+	$(CMENU)

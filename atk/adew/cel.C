@@ -360,7 +360,7 @@ long cel::ReadSup(FILE  *file, long  id)
 long cel::ReadFile(FILE  *thisFile)
 {  
     long objectID;
-    long result;
+    long result = 0;
     const char *objectName;
     objectName = filetype::Lookup(thisFile, NULL, &objectID, NULL); /* For now, ignore attributes. */
     if(objectName == NULL) objectName = "text";
@@ -398,7 +398,6 @@ long cel::Read(FILE  *file, long  id)
     boolean begindata;
     char *s;
     long c;
-    class arbiter *master;
     long status;
     char objectname[200];
     const char *ccp;

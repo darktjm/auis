@@ -106,7 +106,7 @@ public:
 
 	inline operator  char *() const  { return body; }
 	inline const char *operator+ (int i) const
-		{ return body+((i>=0&&i<used)?i:used); }
+		{ return body+((i>=0&&i<(int)used)?i:used); }
 	inline char operator[] (int i) const { return *((*this)+i); }
 	inline int Length() const { return used; }
 	inline void Clear() { used = 0; }

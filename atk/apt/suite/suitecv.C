@@ -139,7 +139,7 @@ suitecv::PostKeyState(class keystate  *kstate)
     else (this)->textview::PostKeyState(kstate);
 }
 
-void
+static void
 Update_Caption( class suitecv *self )
 {
     class text *txt = (class text *) ParentItem->dataobject;

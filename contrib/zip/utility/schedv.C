@@ -507,15 +507,7 @@ static
 void Extend_Button( class schedv *self, class suite *suite, struct suite_item  *item, long type, enum view_MouseAction       action, long x, long y, long clicks )
 {
     IN(Extend_Button);
-    switch ( action )
-    {
-	case view_LeftDown:
-
-	    break;
-	case view_RightDown:
-
-	    break;
-    }
+    // unimplemented?
     (self)->WantInputFocus(  self );
     OUT(Extend_Button);
 }
@@ -524,15 +516,7 @@ static
 void Split_Button( class schedv *self, class suite  *suite, struct suite_item *item, long type, enum view_MouseAction       action, long x, long y, long clicks )
 {
     IN(Split_Button);
-    switch ( action )
-    {
-	case view_LeftDown:
-
-	    break;
-	case view_RightDown:
-
-	    break;
-    }
+    // unimplemented?
     (self)->WantInputFocus(  self );
     OUT(Split_Button);
 }
@@ -633,7 +617,8 @@ void Quit_Button( class schedv *self, class suite  *suite, struct suite_item	 *i
 {
     static const char		     * const choices[] =
     {"Cancel", "Save", "Save & Quit", "Quit Anyway", 0};
-    long				       response = 0, result;
+    long				       response = 0;
+    UNUSED long  result; /* only used with debug */
 
     IN(Quit_Button);
     if ( type == suite_ItemObject  &&  action == view_LeftUp )

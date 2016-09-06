@@ -531,13 +531,13 @@ boolean be1be2::Convert(class text  *text)
                 stylename[i++] = isupper(*tp) ? tolower(*tp) : *tp;
                 if (*tp == ',')
                     i = 0;
-                *tp++;
+                tp++;
             }
             stylename[i] = '\0';
 
             /* Create a style in stylesheet, replacing it if it exists */
 
-	    if (stylep = (text->styleSheet)->Find( stylename)) {
+	    if ((stylep = (text->styleSheet)->Find( stylename))) {
 		class style st;
 		stylep=(text->styleSheet)->MakeWritable(stylename);
 		st.Copy(stylep);

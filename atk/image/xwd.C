@@ -275,14 +275,14 @@ extern void flipBits(unsigned char *p, unsigned int len);
 
 void
 loadXYBitmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader   header )
-                { int    dlinelen;       /* length of scan line in data file */
+                { unsigned int    dlinelen;       /* length of scan line in data file */
   int    ilinelen;       /* length of line within image structure */
   int    unit;           /* # of bytes in a bitmap unit */
   int    xoffset;        /* xoffset within line */
-  int    xunits;         /* # of units across the whole scan line */
+  unsigned int    xunits;         /* # of units across the whole scan line */
   int    trailer;        /* # of bytes in last bitmap unit on a line */
   int    shift;          /* # of bits to shift last byte set */
-  int    x, y;           /* horizontal and vertical counters */
+  unsigned int    x, y;           /* horizontal and vertical counters */
   byte  *line;           /* input scan line */
   byte  *dptr, *iptr;    /* image data pointers */
   unsigned long (*loader)(unsigned char *, unsigned int); /* unit loading function */
@@ -345,14 +345,14 @@ loadXYBitmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader   hea
 void
 loadXYPixmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader  header )
                 { int plane;
-  int    dlinelen;       /* length of scan line in data file */
+  unsigned int    dlinelen;       /* length of scan line in data file */
   int    ilinelen;       /* length of line within image structure */
   int    unit;           /* # of bytes in a bitmap unit */
-  int    unitbits;       /* # of bits in a bitmap unit */
+  unsigned int    unitbits;       /* # of bits in a bitmap unit */
   int    unitmask;       /* mask for current bit within current unit */
   int    xoffset;        /* xoffset within data */
-  int    xunits;         /* # of units across the whole scan line */
-  int    x, x2, y;       /* horizontal and vertical counters */
+  unsigned int    xunits;         /* # of units across the whole scan line */
+  unsigned int    x, x2, y;       /* horizontal and vertical counters */
   int    index;          /* index within image scan line */
   byte  *line;           /* input scan line */
   byte  *dptr, *iptr;    /* image data pointers */
@@ -429,11 +429,11 @@ loadXYPixmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader  head
 
 void
 loadZPixmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader  header )
-                { int    dlinelen;       /* length of scan line in data file */
+                { unsigned int    dlinelen;       /* length of scan line in data file */
   int    ilinelen;       /* length of scan line in image file */
   int    depth;          /* depth rounded up to 8-bit value */
   int    pixlen;         /* length of pixel in bytes */
-  int    x, y;           /* horizontal and vertical counters */
+  unsigned int    x, y;           /* horizontal and vertical counters */
   byte  *line;           /* input scan line */
   byte  *dptr, *iptr;    /* image data pointers */
   unsigned long pixmask; /* bit mask within pixel */
@@ -523,9 +523,9 @@ int
 xwd::Load( const char  *fullname, FILE  *fp )
             { FILE      *f;
   XWDHeader  header;
-  int        cmaplen;
+  unsigned int        cmaplen;
   XWDColor  *cmap;
-  int        a;
+  unsigned int        a;
 
   if((f = fp) == 0) {
       if (! (f = fopen(fullname, "r"))) {

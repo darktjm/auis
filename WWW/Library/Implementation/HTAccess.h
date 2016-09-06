@@ -72,8 +72,8 @@ Initializing and Terminating the Library
    that they are used!
    
  */
-extern BOOL HTLibInit NOPARAMS;
-extern BOOL HTLibTerminate NOPARAMS;/*
+extern BOOL HTLibInit (void);
+extern BOOL HTLibTerminate (void);/*
 
 Method Management
 
@@ -100,14 +100,14 @@ typedef enum {
    Gives the enumeration value of the method as a function of the (char *) name.
    
  */
-extern HTMethod HTMethod_enum PARAMS((char * name));/*
+extern HTMethod HTMethod_enum (char * name);/*
 
   GET METHOD STRING
   
    The reverse of HTMethod_enum()
    
  */
-extern char * HTMethod_name PARAMS((HTMethod method));/*
+extern char * HTMethod_name (HTMethod method);/*
 
   VALID METHODS
   
@@ -115,8 +115,8 @@ extern char * HTMethod_name PARAMS((HTMethod method));/*
    module If the method is found it returns YES else NO.
    
  */
-extern BOOL HTMethod_inList PARAMS((HTMethod    method,
-                                    HTList *    list));/*
+extern BOOL HTMethod_inList (HTMethod    method,
+                                    HTList *    list);/*
 
    
    ___________________________________
@@ -147,8 +147,8 @@ extern BOOL HTMethod_inList PARAMS((HTMethod    method,
 **      returns         YES, if filename matches the template.
 **                      NO, otherwise.
 */
-extern BOOL HTAA_templateMatch PARAMS((CONST char * tmplate,
-                                       CONST char * filename));/*
+extern BOOL HTAA_templateMatch (CONST char * tmplate,
+                                       CONST char * filename);/*
 
    
    ___________________________________
@@ -162,7 +162,7 @@ typedef struct _HTNetInfo HTNetInfo;
 /*
 ** Callback to a protocol module
 */
-typedef int (*HTLoadCallBack)   PARAMS((HTRequest *     req));
+typedef int (*HTLoadCallBack)   (HTRequest *     req);
 
 #include "HTAnchor.h"
 #include "HTFormat.h"
@@ -280,8 +280,8 @@ struct _HTRequest {/*
    languages.
    
  */
-    BOOL (* callback ) PARAMS((struct _HTRequest* request,
-                                                void *param));/*
+    BOOL (* callback ) (struct _HTRequest* request,
+                                                void *param);/*
 
    A function to be called back in the event that a file has been saved to disk by
    HTSaveAndCallBack for example.
@@ -401,14 +401,14 @@ Functions to Manipulate a HTRequest Structure
    before being passed to HTAccess, but it will work as is for a simple request.
    
  */
-extern HTRequest * HTRequest_new NOPARAMS;/*
+extern HTRequest * HTRequest_new (void);/*
 
   DELETE REQUEST STRUCTURE
   
    Frees also conversion list hanging from req->conversions.
    
  */
-extern void HTRequest_delete PARAMS((HTRequest * req));/*
+extern void HTRequest_delete (HTRequest * req);/*
 
   CLEAR A REQUEST STRUCTURE
   
@@ -416,7 +416,7 @@ extern void HTRequest_delete PARAMS((HTRequest * req));/*
    using free/new is that the list of conversions is kept.
    
  */
-extern void HTRequest_clear PARAMS((HTRequest * req));/*
+extern void HTRequest_clear (HTRequest * req);/*
 
 Functions for Loading a Document
 
@@ -454,22 +454,22 @@ Functions for Loading a Document
   LOAD A DOCUMENT FROM RELATIVE NAME
   
  */
-extern int HTLoadRelative       PARAMS((CONST char *    relative_name,
+extern int HTLoadRelative       (CONST char *    relative_name,
                                         HTParentAnchor* here,
-                                        HTRequest *     request));/*
+                                        HTRequest *     request);/*
 
   LOAD A DOCUMENT FROM ABSOLUTE NAME
   
  */
-extern int HTLoadAbsolute       PARAMS((CONST char *    addr,
-                                        HTRequest *     request));/*
+extern int HTLoadAbsolute       (CONST char *    addr,
+                                        HTRequest *     request);/*
 
   LOAD A DOCUMENT FROM ABSOLUTE NAME TO A STREAM
   
  */
-extern int HTLoadToStream       PARAMS((CONST char *    addr,
+extern int HTLoadToStream       (CONST char *    addr,
                                         BOOL            filter,
-                                        HTRequest *     request));/*
+                                        HTRequest *     request);/*
 
   LOAD IF NECESSARY, AND SELECT AN ANCHOR
   
@@ -478,10 +478,10 @@ extern int HTLoadToStream       PARAMS((CONST char *    addr,
    that no information is lost having more than one call. See also HTBindAnchor().
    
  */
-extern int HTLoadAnchor         PARAMS((HTAnchor  *     a,
-                                        HTRequest *     request));
-extern int HTLoadAnchorRecursive PARAMS((HTAnchor *     a,
-                                        HTRequest *     request));/*
+extern int HTLoadAnchor         (HTAnchor  *     a,
+                                        HTRequest *     request);
+extern int HTLoadAnchorRecursive (HTAnchor *     a,
+                                        HTRequest *     request);/*
 
   LOAD A DOCUMENT
   
@@ -494,11 +494,11 @@ extern int HTLoadAnchorRecursive PARAMS((HTAnchor *     a,
    previous call.
    
  */
-extern int HTLoad               PARAMS((HTRequest * request,
-                                        BOOL keep_error_stack));/*
+extern int HTLoad               (HTRequest * request,
+                                        BOOL keep_error_stack);/*
 
  */
-extern BOOL HTLoadTerminate     PARAMS((HTRequest * request, int status));/*
+extern BOOL HTLoadTerminate     (HTRequest * request, int status);/*
 
   SEARCH USING RELATIVE URI
   
@@ -506,9 +506,9 @@ extern BOOL HTLoadTerminate     PARAMS((HTRequest * request, int status));/*
    current address and attempts to open the new address.
    
  */
-extern int HTSearch             PARAMS((CONST char *    keywords,
+extern int HTSearch             (CONST char *    keywords,
                                         HTParentAnchor* here,
-                                        HTRequest *     request));/*
+                                        HTRequest *     request);/*
 
   SEARCH USING ABSOLUTE URI
   
@@ -516,9 +516,9 @@ extern int HTSearch             PARAMS((CONST char *    keywords,
    current address and attempts to open the new address.
    
  */
-extern int HTSearchAbsolute     PARAMS((CONST char *    keywords,
+extern int HTSearchAbsolute     (CONST char *    keywords,
                                         CONST char *    indexname,
-                                        HTRequest *     request));/*
+                                        HTRequest *     request);/*
 
 Help Function for Clients to get started
 
@@ -528,7 +528,7 @@ Help Function for Clients to get started
   BIND AN ANCHOR TO A REQUEST STRUCTURE WITHOUT LOADING
   
  */
-extern BOOL HTBindAnchor PARAMS((HTAnchor *anchor, HTRequest *request));/*
+extern BOOL HTBindAnchor (HTAnchor *anchor, HTRequest *request);/*
 
   GENERATE THE ANCHOR FOR THE HOME PAGE
   
@@ -536,7 +536,7 @@ extern BOOL HTBindAnchor PARAMS((HTAnchor *anchor, HTRequest *request));/*
    This is a default algorithm using the WWW_HOME environment variable.
    
  */
-extern HTParentAnchor * HTHomeAnchor NOPARAMS;/*
+extern HTParentAnchor * HTHomeAnchor (void);/*
 
   FIND RELATED NAME
   
@@ -547,7 +547,7 @@ extern HTParentAnchor * HTHomeAnchor NOPARAMS;/*
    howcome@dxcern.cern.ch in order for all clients to take advantage.
    
  */
-extern char *  HTFindRelatedName NOPARAMS;/*
+extern char *  HTFindRelatedName (void);/*
 
 Functions for Posting a Document
 
@@ -564,7 +564,7 @@ Functions for Posting a Document
   returns                 0 if error else a stream to save the object to.
                          
  */
-extern HTStream * HTSaveStream PARAMS((HTRequest * request));/*
+extern HTStream * HTSaveStream (HTRequest * request);/*
 
 Access Method Registration
 
@@ -586,14 +586,14 @@ typedef enum _HTSocBlock {
 typedef struct _HTProtocol {
     char *      name;
     HTSocBlock  block;
-    int         (*load)         PARAMS((HTRequest *     request));
-    HTStream*   (*saveStream)   PARAMS((HTRequest *     request));
-    HTStream*   (*postStream)   PARAMS((HTRequest *     request,
-                                        HTParentAnchor* postTo));
+    int         (*load)         (HTRequest *     request);
+    HTStream*   (*saveStream)   (HTRequest *     request);
+    HTStream*   (*postStream)   (HTRequest *     request,
+                                        HTParentAnchor* postTo);
 } HTProtocol;
 
-extern BOOL HTRegisterProtocol PARAMS((HTProtocol * protocol));
-extern void HTDisposeProtocols NOPARAMS;/*
+extern BOOL HTRegisterProtocol (HTProtocol * protocol);
+extern void HTDisposeProtocols (void);/*
 
   USES PROTOCOL BLOCKING IO
   
@@ -601,7 +601,7 @@ extern void HTDisposeProtocols NOPARAMS;/*
    NON-INTERACTIVE MODE then the function always returns YES;
    
  */
-extern BOOL HTProtocolBlocking  PARAMS((HTRequest *     request));/*
+extern BOOL HTProtocolBlocking  (HTRequest *     request);/*
 
    end
    

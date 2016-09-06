@@ -61,7 +61,7 @@
 **	clash with anything used by the caching system.
 */
 
-PRIVATE BOOL reserved_name ARGS1(char *, url)
+PRIVATE BOOL reserved_name (char * url)
 {
     char * name = strrchr(url, '/');
     char * suff = NULL;
@@ -89,7 +89,7 @@ PRIVATE BOOL reserved_name ARGS1(char *, url)
 /*
 **	Map url to cache file name.
 */
-PRIVATE char * cache_file_name ARGS2(char *, base, char *, url)
+PRIVATE char * cache_file_name (char * base, char * url)
 {
     char * access = NULL;
     char * host = NULL;
@@ -170,7 +170,7 @@ PRIVATE char * cache_file_name ARGS2(char *, base, char *, url)
 **		can rely on fopen(cfn,"w") succeeding.
 **
 */
-PRIVATE BOOL create_cache_place ARGS2(char *, base, char *, cfn)
+PRIVATE BOOL create_cache_place (char * base, char * cfn)
 {
     struct stat stat_info;
     char * cur = NULL;
@@ -274,7 +274,7 @@ struct _HTStream {
 	BOOL			announce;
 	char *			filename;
 	HTRequest *		request;	/* saved for callback */
-	BOOL (*callback) PARAMS((struct _HTRequest * req, void * filename));
+	BOOL (*callback) (struct _HTRequest * req, void * filename);
 	HTCacheItem *		cache;
 };
 
@@ -291,27 +291,27 @@ struct _HTStream {
 **	who wants a black hole.  These black holes don't radiate,
 **	they just absorb data.
 */
-PRIVATE void HTBlackHole_put_character ARGS2(HTStream *, me, char, c)
+PRIVATE void HTBlackHole_put_character (HTStream * me, char c)
 {
     return;
 }
 
-PRIVATE void HTBlackHole_put_string ARGS2(HTStream *, me, CONST char*, s)
+PRIVATE void HTBlackHole_put_string (HTStream * me, CONST char* s)
 {
     return;
 }
 
-PRIVATE void HTBlackHole_write ARGS3(HTStream *, me, CONST char*, s, int, l)
+PRIVATE void HTBlackHole_write (HTStream * me, CONST char* s, int l)
 {
     return;
 }
 
-PRIVATE int HTBlackHole_free ARGS1(HTStream *, me)
+PRIVATE int HTBlackHole_free (HTStream * me)
 {
     return 0;
 }
 
-PRIVATE int HTBlackHole_abort ARGS2(HTStream *, me, HTError, e)
+PRIVATE int HTBlackHole_abort (HTStream * me, HTError e)
 {
     return EOF;
 }
@@ -345,7 +345,7 @@ PRIVATE HTStream HTBlackHoleInstance =
 };
 
 /* Black hole creation */
-PUBLIC HTStream * HTBlackHole NOARGS
+PUBLIC HTStream * HTBlackHole (void)
 {
     if (TRACE)
 	fprintf(TDEST, "BlackHole... Created\n");
@@ -359,12 +359,12 @@ PUBLIC HTStream * HTBlackHole NOARGS
 ** This function is a dummy function that returns the same output stream
 ** as given as a parameter. Henrik 01/03-94
 */
-PUBLIC HTStream* HTThroughLine ARGS5(
-	HTRequest *,		request,
-	void *,			param,
-	HTFormat,		input_format,
-	HTFormat,		output_format,
-	HTStream *,		output_stream)	            /* Only one used */
+PUBLIC HTStream* HTThroughLine (
+	HTRequest *		request,
+	void *			param,
+	HTFormat		input_format,
+	HTFormat		output_format,
+	HTStream *		output_stream)	            /* Only one used */
 {
     return output_stream;
 }
@@ -393,10 +393,10 @@ PUBLIC HTStream* HTThroughLine ARGS5(
    Returns NULL if no filename could be found.
    Henrik 10/03-94
    ------------------------------------------------------------------------- */
-PUBLIC char *HTFWriter_filename ARGS5(char *, path, char *, url,
-				      CONST char *, suffix,
-				      unsigned int, limit,
-				      BOOL, flat)
+PUBLIC char *HTFWriter_filename (char * path, char * url,
+				      CONST char * suffix,
+				      unsigned int limit,
+				      BOOL flat)
 {
 #define HASHTRY 5			   /* Keep this less than 10, please */
     static int primes[HASHTRY] = {31, 37, 41, 43, 47};	      /* Some primes */
@@ -505,7 +505,7 @@ PUBLIC char *HTFWriter_filename ARGS5(char *, path, char *, url,
 **	------------------
 */
 
-PRIVATE void HTFWriter_put_character ARGS2(HTStream *, me, char, c)
+PRIVATE void HTFWriter_put_character (HTStream * me, char c)
 {
     fputc(c, me->fp);
 }
@@ -517,7 +517,7 @@ PRIVATE void HTFWriter_put_character ARGS2(HTStream *, me, char, c)
 **
 **	Strings must be smaller than this buffer size.
 */
-PRIVATE void HTFWriter_put_string ARGS2(HTStream *, me, CONST char*, s)
+PRIVATE void HTFWriter_put_string (HTStream * me, CONST char* s)
 {
     if (*s)				             /* For vms :-( 10/04-94 */
 	fputs(s, me->fp);
@@ -527,7 +527,7 @@ PRIVATE void HTFWriter_put_string ARGS2(HTStream *, me, CONST char*, s)
 /*	Buffer write.  Buffers can (and should!) be big.
 **	------------
 */
-PRIVATE void HTFWriter_write ARGS3(HTStream *, me, CONST char*, s, int, l)
+PRIVATE void HTFWriter_write (HTStream * me, CONST char* s, int l)
 {
     fwrite(s, 1, l, me->fp);
 }
@@ -542,7 +542,7 @@ PRIVATE void HTFWriter_write ARGS3(HTStream *, me, CONST char*, s, int, l)
 **	object is not,
 **	as it takes on an existence of its own unless explicitly freed.
 */
-PRIVATE int HTFWriter_free ARGS1(HTStream *, me)
+PRIVATE int HTFWriter_free (HTStream * me)
 {
     if (me->cache) {
         time_t finish_time;
@@ -573,7 +573,7 @@ PRIVATE int HTFWriter_free ARGS1(HTStream *, me)
 /*	End writing
 */
 
-PRIVATE int HTFWriter_abort ARGS2(HTStream *, me, HTError, e)
+PRIVATE int HTFWriter_abort (HTStream * me, HTError e)
 {
     if (me->leave_open != YES) fclose(me->fp);
     if (me->end_command) {		/* Temp file */
@@ -609,7 +609,7 @@ PRIVATE CONST HTStreamClass HTFWriter = /* As opposed to print etc */
 /*	Subclass-specific Methods
 **	-------------------------
 */
-PUBLIC HTStream* HTFWriter_new ARGS2(FILE *, fp, BOOL, leave_open)
+PUBLIC HTStream* HTFWriter_new (FILE * fp, BOOL leave_open)
 {
     HTStream* me;
     
@@ -645,12 +645,12 @@ PUBLIC HTStream* HTFWriter_new ARGS2(FILE *, fp, BOOL, leave_open)
 **	in case the application is fussy, or so that a generic opener can
 **	be used.
 */
-PUBLIC HTStream* HTSaveAndExecute ARGS5(
-	HTRequest *,		request,
-	void *,			param,
-	HTFormat,		input_format,
-	HTFormat,		output_format,
-	HTStream *,		output_stream)
+PUBLIC HTStream* HTSaveAndExecute (
+	HTRequest *		request,
+	void *			param,
+	HTFormat		input_format,
+	HTFormat		output_format,
+	HTStream *		output_stream)
 
 #ifdef unix
 #define REMOVE_FILE unlink
@@ -726,12 +726,12 @@ PUBLIC HTStream* HTSaveAndExecute ARGS5(
 **	GUI Apps should open local Save panel here really.
 **
 */
-PUBLIC HTStream* HTSaveLocally ARGS5(
-	HTRequest *,		request,
-	void *,			param,
-	HTFormat,		input_format,
-	HTFormat,		output_format,
-	HTStream *,		output_stream)	/* Not used */
+PUBLIC HTStream* HTSaveLocally (
+	HTRequest *		request,
+	void *			param,
+	HTFormat		input_format,
+	HTFormat		output_format,
+	HTStream *		output_stream)	/* Not used */
 
 {
     char *fnam = NULL;
@@ -784,7 +784,7 @@ PUBLIC HTStream* HTSaveLocally ARGS5(
 PUBLIC HTList * HTCache = NULL;
 PUBLIC int	HTCacheLimit = CACHE_LIMIT;
 
-PRIVATE void HTCache_remove ARGS2(HTList *, list, HTCacheItem *, item)
+PRIVATE void HTCache_remove (HTList * list, HTCacheItem * item)
 {
     if (TRACE) fprintf(TDEST, "Cache: Removing %s\n", item->filename);
     HTList_removeObject(list, item);
@@ -814,7 +814,7 @@ PRIVATE void HTCache_remove ARGS2(HTList *, list, HTCacheItem *, item)
 
 
 
-PUBLIC void HTCacheClear ARGS1(HTList *, list)
+PUBLIC void HTCacheClear (HTList * list)
 {
     HTCacheItem * item;
     while ((item = (HTCacheItem *) HTList_objectAt(list, 0)) != NULL) {
@@ -828,7 +828,7 @@ PUBLIC void HTCacheClear ARGS1(HTList *, list)
    ARE updated, but normally this function is for exiting purposes.
    Henrik 09/03-94
    ------------------------------------------------------------------------- */
-PUBLIC void HTCacheDeleteAll NOARGS
+PUBLIC void HTCacheDeleteAll (void)
 {
     HTCacheItem * item;
     while ((item = (HTCacheItem *) HTList_objectAt(HTCache, 0)) != NULL) {
@@ -838,7 +838,7 @@ PUBLIC void HTCacheDeleteAll NOARGS
 
 /*  Remove a file from the cache to prevent too many files from being cached
 */
-PRIVATE void limit_cache ARGS1(HTList * , list)
+PRIVATE void limit_cache (HTList *  list)
 {
     HTList * cur = list;
     HTCacheItem * item;
@@ -861,12 +861,12 @@ PRIVATE void limit_cache ARGS1(HTList * , list)
 **	------------------
 **
 */
-PUBLIC HTStream* HTCacheWriter ARGS5(
-	HTRequest *,		request,
-	void *,			param,
-	HTFormat,		input_format,
-	HTFormat,		output_format,
-	HTStream *,		output_stream)
+PUBLIC HTStream* HTCacheWriter (
+	HTRequest *		request,
+	void *			param,
+	HTFormat		input_format,
+	HTFormat		output_format,
+	HTStream *		output_stream)
 
 {
     char *fnam;
@@ -936,12 +936,12 @@ PUBLIC HTStream* HTCacheWriter ARGS5(
 */
 
 
-PUBLIC HTStream* HTSaveAndCallBack ARGS5(
-	HTRequest *,		request,
-	void *,			param,
-	HTFormat,		input_format,
-	HTFormat,		output_format,
-	HTStream *,		output_stream)
+PUBLIC HTStream* HTSaveAndCallBack (
+	HTRequest *		request,
+	void *			param,
+	HTFormat		input_format,
+	HTFormat		output_format,
+	HTStream *		output_stream)
 {
    HTStream * me;
    

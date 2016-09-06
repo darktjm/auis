@@ -245,6 +245,8 @@ static void WriteCell(struct printlump *lump, FILE *file, int cx, int cy, long x
 		    fprintf(file, "grestore\n");
 	    }
 	    break;
+	case table_EmptyCell:
+	    break;
     }
 }
 
@@ -252,13 +254,12 @@ static void WriteCell(struct printlump *lump, FILE *file, int cx, int cy, long x
 static void WriteRect(FILE *file, class spread *self, int xstart, int ystart, int wid, int hgt)
 {
     class table *tab = (class table *)self->GetDataObject();
-    int ix, iy;
     int cx, cy; /* the cell coordinates under consideration */
     long xpos, ypos, xposstart, yposstart;
     long rowh, colw;
-    boolean joinleft, jointop, black;
+    boolean joinleft, jointop;
     struct printlump lump;
-    int tabsizew, tabsizeh;
+    int tabsizew;
     int cx1, cy1;
     long cx1pos, cy1pos;
 
@@ -276,7 +277,6 @@ static void WriteRect(FILE *file, class spread *self, int xstart, int ystart, in
     lump.setfontyet = FALSE;
 
     tabsizew = tab->NumberOfColumns();
-    tabsizeh = tab->NumberOfRows();
 
     cy = ystart;
     ypos = yposstart;

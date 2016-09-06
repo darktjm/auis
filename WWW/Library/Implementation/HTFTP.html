@@ -46,7 +46,7 @@ Theese are the public functions...
 <H3>Accessing FTP-Server</H3>
 
 <PRE>
-extern int  HTLoadFTP PARAMS((HTRequest * request));
+extern int  HTLoadFTP (HTRequest * request);
 </PRE>
 
 <H3>Enable/Disable Reuse of Control Connections on Client Side</H3>
@@ -59,8 +59,8 @@ when loading several files from the same server in the same directory, but
 changing directory IS supported using FTP-commands CDUP and CWD.
 
 <PRE>
-extern void HTFTP_enable_session NOPARAMS;
-extern BOOL HTFTP_disable_session NOPARAMS;
+extern void HTFTP_enable_session (void);
+extern BOOL HTFTP_disable_session (void);
 </PRE>
 
 <H3>Various Functions to parse information</H3>
@@ -69,8 +69,8 @@ Theese functions are necessary in order to keep the internal data structures
 hidden.
 
 <PRE>
-extern HTChunk *HTFTPWelcomeMsg PARAMS ((HTNetInfo *data));
-extern BOOL HTFTUseList PARAMS ((HTNetInfo *data));
+extern HTChunk *HTFTPWelcomeMsg (HTNetInfo *data);
+extern BOOL HTFTUseList (HTNetInfo *data);
 </PRE>
 
 <H2>Flags for FTP connections</H2>

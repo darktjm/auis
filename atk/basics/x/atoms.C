@@ -63,7 +63,7 @@ static Atom *SetAtoms(Display  *dpy, char  *buf)
 {
     Atom *result;
     char *p;
-    int i;
+    unsigned int i;
     result=(Atom *)malloc(sizeof(Atom)*NUMATOMS);
     if(result==NULL) {
 	fprintf(stderr, "xim: couldn't allocate atom cache for display '%s'\n", XDisplayName(DisplayString(dpy)));
@@ -83,7 +83,7 @@ static Atom *SetAtoms(Display  *dpy, char  *buf)
 
 Atom *xim_SetupAtoms(Display  *dpy, boolean  force)
 {
-    int i;
+    unsigned int i;
     Atom RetAtom;
     int RetFormat;
     unsigned long RetNumItems;

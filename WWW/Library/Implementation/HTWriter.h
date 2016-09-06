@@ -24,10 +24,10 @@
 
 #include "HTStream.h"
 
-extern HTStream * HTWriter_new          PARAMS((SOCKFD soc));
-extern HTStream * HTWriter_newNoClose   PARAMS((SOCKFD soc));
+extern HTStream * HTWriter_new          (SOCKFD soc);
+extern HTStream * HTWriter_newNoClose   (SOCKFD soc);
 
-extern HTStream * HTASCIIWriter         PARAMS((SOCKFD soc));
+extern HTStream * HTASCIIWriter         (SOCKFD soc);
 
 #endif
 /*

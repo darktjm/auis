@@ -165,7 +165,7 @@ static int BuildQuestionLine(char  *buffer , char  *choices)
 
     if(isvers_extranewlines) {
 	char *t;
-	if (t = (char*) strchr(choices, ':')) {
+	if ((t = strchr(choices, ':'))) {
 	    choices = t + 2;
 	}
     }
@@ -183,7 +183,7 @@ static int BuildQuestionLine(char  *buffer , char  *choices)
 	if (!*choices) break;
         *choices++ = '\0';
         *buffer++ = ' ';
-        while (*choices && *choices == ' ' || *choices == '\n')
+        while (*choices && (*choices == ' ' || *choices == '\n'))
             choices++;
     }
     *buffer = '\0';
@@ -199,7 +199,7 @@ void spell::CheckDocument(class textview  *self, long  rock)
 	ATKinit;
 
 
-    int pos = (self)->GetDotPosition(), savePos = pos, saveLength = (self)->GetDotLength(), c;
+    int pos = (self)->GetDotPosition(), savePos = pos, saveLength = (self)->GetDotLength();
     class text *text;
     class mark *tempMark;
     struct process *speller;
@@ -275,10 +275,10 @@ void spell::CheckDocument(class textview  *self, long  rock)
             while (*temp == ' ' || *temp == '\n')
                 temp++;
             fflush(stdout);
-            switch (*temp) {
+	    int flag, maxWord = 0;
+	    char messageBuf[200];
 
-                int flag, maxWord;
-                char messageBuf[200];
+            switch (*temp) {
 
                 case '*': /* Found it. */
                     break;
@@ -303,7 +303,7 @@ void spell::CheckDocument(class textview  *self, long  rock)
 
                         int response;
                         int i;
-                        int len;
+                        unsigned int len;
                         int max;
                         char wordBuf[200];
                         char *word;

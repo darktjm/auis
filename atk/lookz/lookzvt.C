@@ -53,13 +53,6 @@
 #include <graphic.H>
 #include <fontdesc.H>
 #include <cursor.H>
-#ifdef WM_ENV
-#include <wgraphic.ih>
-#include <wim.ih>
-#include <wcursor.ih>
-#include <wfontd.ih>
-#include <mrl.ih>
-#endif /* WM_ENV */
 
 /* classes that are anyway dynamically loaded by the
 	required classes */
@@ -144,13 +137,6 @@ main( int	   argc, char   **argv )
 	graphic_StaticEntry;
 	fontdesc_StaticEntry;
 	cursor_StaticEntry;
-#ifdef WM_ENV
-	wmgraphic_StaticEntry;
-	wmim_StaticEntry;
-	wmcursor_StaticEntry;
-	wmfontdesc_StaticEntry;
-	mrl_StaticEntry;
-#endif /* WM_ENV */
 	dataobject_StaticEntry;
 	event_StaticEntry;
 	filetype_StaticEntry;

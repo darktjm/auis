@@ -503,8 +503,8 @@ VAX/VMS
 #ifdef DECNET
 #include <types.h>  /* for socket.h */
 #include <socket.h>
-#include <dn"
-#include <dnetdb"
+#include <dn>
+#include <dnetdb>
 
 #else /* UCX or WIN */
 #ifdef CADDR_T

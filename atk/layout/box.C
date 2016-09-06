@@ -303,7 +303,7 @@ box::GetModified()
 /* fill in contents */
 
 void
-box::FillInContents(char  *name)
+box::FillInContents(const char  *name)
 {
     class dataobject *newobject;
 

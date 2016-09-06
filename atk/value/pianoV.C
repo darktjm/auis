@@ -336,6 +336,8 @@ printf("m = %d, self->tmpval = %d, v = %d\n",m,this->tmpval,v);
 	case view_LeftUp:
 	    (tt)->SetValue(this->tmpval);
 	    break;
+	default:
+	    break;
     }  
 
     return this;

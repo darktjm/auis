@@ -43,7 +43,7 @@ static void LinkProc(class weblinkview  *self, char  *param);
 //
 	static void
 LinkProc(class weblinkview  *self, char  *param) {
-	char buf[MAXPATHLEN], *p;
+	char buf[MAXPATHLEN];
 	class weblink *l = (class weblink *)(self)->GetDataObject();
 
 	if (param) 
@@ -73,7 +73,6 @@ LinkProc(class weblinkview  *self, char  *param) {
 	boolean
 weblinkview::InitializeClass() {
 	struct proctable_Entry *proc = NULL;
-	struct proctable_Entry *tempProc;
 
 	weblinkview_menulist = new menulist;
 /*

@@ -45,6 +45,8 @@
 ATK_IMPL("prochook.H")
 #include <prochook.H>
 
+#include "nessint.h"
+
 #define BUFLEN 300
 
 
@@ -468,7 +470,6 @@ callLoadFuncval(struct varnode  *var) {
 		else {
 			/* build callnode from builtindef */
 			int i;
-			class nesssym *psym;
 			call = (struct callnode *)malloc(
 						sizeof(struct callnode));
 			call->variety = callBuiltin;
@@ -766,8 +767,6 @@ callCheckProcTable(struct varnode  *varnode, struct exprnode *argtypes) {
 	char modname[BUFLEN];
 	char *dash;
 	struct callnode *call;
-	long nargs, i;
-	struct exprnode *e;
 	struct hack *gack;
 
 	func = varnode->sym;
@@ -1097,12 +1096,11 @@ callCheck (struct callnode  *call, unsigned char *iar, class ness  *ness) {
 	call->variety = callNess;
 	call->where.Nproc = fnode->SysGlobOffset;
 }
-/* #if (sizeof(union argtype) != 4)
-/*	}}}}}}  /* assumption:  union argtype values are four bytes */
-/*		/* If this assumption is false, the offending
-/*		element of the union will have to be removed. */
-/* #endif
- */
+// #if (sizeof(union argtype) != 4)
+//	}}}}}}  /* assumption:  union argtype values are four bytes */
+//		/* If this assumption is false, the offending
+//		element of the union will have to be removed. */
+// #endif
 
 	static union stackelement *
 startPush(union stackelement  *NSP, long  size, TType  hdr, long  v) {
@@ -1355,7 +1353,7 @@ callCheat(unsigned char op, unsigned char *iar, class ness  *ness) {
 	}	break;
 	case 't':	{				/* class */
 		/* arg is string naming the class */
-		struct ATKregistryEntry  *cip;
+		struct ATKregistryEntry  *cip = NULL;
 		if (NSP->s.hdr == seqHdr) {
 			char *s = (NSP->s.v)->ToC();
 			cip = ATK::LoadClass(s);  /* NULL if fail */
@@ -1705,7 +1703,7 @@ ReadTextFileStream(class text  *text, const char *name, FILE  *f, boolean  objok
 	struct attributes *attributes;
 
 	objectType = filetype::Lookup(f, name, &objectID, &attributes);
-	if (objectType != NULL)
+	if (objectType != NULL) {
 		if (ATK::IsTypeByName(objectType, "arbiter")) {
 			/* XXX there is an arbiter wrapped around it */
 			class text *t;
@@ -1747,6 +1745,7 @@ ReadTextFileStream(class text  *text, const char *name, FILE  *f, boolean  objok
 				return dataobject_BADFORMAT;
 			}
 		}
+	}
 	if (attributes != NULL)
 		(text)->SetAttributes( attributes);
 	return (text)->Read( f, objectID);
@@ -2026,6 +2025,7 @@ ness_ExportFunction(ness *self, nesssym *ns, funcnode *fn) {
 	fn->oldcall = keepcall;
 }
 
+#if 0 /* use commented out below */
 	static long 
 ScanForProcs(sym *s, long rock) {
 	libnode *lnode = (libnode *)rock;
@@ -2044,6 +2044,7 @@ ScanForProcs(sym *s, long rock) {
 		ness_ExportFunction(lnode->ness, ns, fn);
 	return 0;
 }
+#endif
 
 	static void 
 ness_ProcHookFunc(ATK *, const avalueflex &aux, 
@@ -2052,7 +2053,7 @@ ness_ProcHookFunc(ATK *, const avalueflex &aux,
 	char fname[MAXNAMLEN+1];
 	char *under;
 	long nmlen;
-	class nesssym *libsym, *funcsym;
+	class nesssym *libsym;
 	struct libnode *libnode;
 	struct libusenode *libuse;
 	boolean found;

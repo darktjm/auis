@@ -338,7 +338,7 @@ RedrawText(class tabrulerview  *self, float  number, boolean  flag)
 static void
 RedrawCommands(class tabrulerview  *self)
 {
-    long x, y, buttony;
+    long x, buttony;
     struct rectangle r;
 
     /*

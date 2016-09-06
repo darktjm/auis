@@ -18,7 +18,7 @@ static HTList * history;	/* List of visited anchors */
 */
 
 void HTHistory_record
-  ARGS1 (HTAnchor *,destination)
+   (HTAnchor *destination)
 {
   if (destination) {
     if (! history)
@@ -32,13 +32,13 @@ void HTHistory_record
 */
 
 BOOL HTHistory_canBacktrack
-  NOARGS
+  (void)
 {
   return (HTList_objectAt (history, 1) != NULL);
 }
 
 HTAnchor * HTHistory_backtrack
-  NOARGS  /* FIXME: Should we add a `sticky' option ? */
+  (void)  /* FIXME: Should we add a `sticky' option ? */
 {
   if (HTHistory_canBacktrack())
     HTList_removeLastObject (history);
@@ -47,7 +47,7 @@ HTAnchor * HTHistory_backtrack
 }
 
 
-PUBLIC HTAnchor * HTHistory_back ARGS1 (HTAnchor *,cur_anch)
+PUBLIC HTAnchor * HTHistory_back  (HTAnchor *cur_anch)
 {
     if (HTHistory_canBacktrack()) {
 	int pos = HTList_indexOf(history, cur_anch);
@@ -57,7 +57,7 @@ PUBLIC HTAnchor * HTHistory_back ARGS1 (HTAnchor *,cur_anch)
 }
 
 
-PUBLIC HTAnchor * HTHistory_forward ARGS1 (HTAnchor *,cur_anch)
+PUBLIC HTAnchor * HTHistory_forward  (HTAnchor *cur_anch)
 {
     int pos = HTList_indexOf(history, cur_anch);
     if (pos <= 0)
@@ -68,7 +68,7 @@ PUBLIC HTAnchor * HTHistory_forward ARGS1 (HTAnchor *,cur_anch)
 
 /*
 
-PUBLIC HTAnchor * HTHistory_delete ARGS1 (HTAnchor *,cur_anch)
+PUBLIC HTAnchor * HTHistory_delete  (HTAnchor *,cur_anch)
 {
     int pos = HTList_indexOf(history, cur_anch);
     if (pos <= 0)
@@ -87,7 +87,7 @@ PUBLIC HTAnchor * HTHistory_delete ARGS1 (HTAnchor *,cur_anch)
 **	Positive offset means go towards most recently added children.
 */
 
-HTAnchor * HTHistory_moveBy ARGS1 (int,offset)
+HTAnchor * HTHistory_moveBy  (int offset)
 {
   HTAnchor * last = (HTAnchor *) HTList_objectAt (history, 1);
   if (! last)
@@ -117,7 +117,7 @@ HTAnchor * HTHistory_moveBy ARGS1 (int,offset)
 }
 
 BOOL HTHistory_canMoveBy
- ARGS1 (int,offset)
+  (int offset)
 {
   HTAnchor * last = (HTAnchor *) HTList_objectAt (history, 1);
   if (! last)
@@ -140,7 +140,7 @@ BOOL HTHistory_canMoveBy
 **		----------------------------
 */
 
-HTAnchor * HTHistory_read ARGS1 (int, number)
+HTAnchor * HTHistory_read  (int number)
 {
     return (HTAnchor *) (HTList_objectAt(history,
 					 HTList_count(history)-number));
@@ -152,7 +152,7 @@ HTAnchor * HTHistory_read ARGS1 (int, number)
 **	This reads the anchor and stores it again in the list, except if last.
 */
 
-HTAnchor * HTHistory_recall ARGS1 (int,number)
+HTAnchor * HTHistory_recall  (int number)
 {
     HTAnchor * destination = (HTAnchor *)
 	HTList_objectAt (history, HTList_count (history) - number);
@@ -168,7 +168,7 @@ HTAnchor * HTHistory_recall ARGS1 (int,number)
 **	for menus, etc.
 (not needed for now. Use canBacktrack, etc.)
 int HTHistory_count
-  NOARGS
+  (void)
 {
   return HTList_count (history);
 }
@@ -182,7 +182,7 @@ int HTHistory_count
 */
 
 void HTHistory_leavingFrom
-  ARGS1 (HTAnchor *,anchor)
+   (HTAnchor *anchor)
 {
   if (HTList_removeLastObject (history))
     HTList_addObject (history, anchor);

@@ -394,20 +394,6 @@ such as CDEBUGFLAGS in site.mcr, or even in the Imakefile itself.
 In the simplest case, copy $/config/site.mcr.tpl to $/config/site.mcr, 
  which results in the following default values.
 
-\indent{
-}\bold{AFSBASEDIR=}	[Default: (empty)] \leftindent{\
-
-
-AFSBASEDIR is the full path to files installed by an AFS installation. 
- (AFS is the Andrew File System distributed by  TransArc 
-<afs-sales+@transarc.com>.  Most installations will not have AFS.) 
-AFSBASEDIR is used only if AFS_ENV is defined; otherwise, it is ignored 
-entirely.  If used, these files are  expected to exist: 
-$(AFSBASEDIR)/include/afs and $(AFSBASEDIR)/lib/afs.  Other specific 
-requirements are listed in the discussion of AFS_ENV and AFS30_ENV in the 
-section describing the *.h files.
-
-}
 Additional definitions are unlikely to change. However, you may want to 
 check these values:
 
@@ -521,13 +507,9 @@ value for XFC is $(XUTILDIR)/bdftosnf.)
 			-I$\{BASEDIR\}/include \
 
 
-			-I$(AFSBASEDIR)/include \
-
-
 			-I$\{XINCDIR\}]
 
-\leftindent{Specifies where compilations should look for include files.  If 
-AFS_ENV is not set, the AFSBASEDIR term is omitted from the default value.}
+\leftindent{Specifies where compilations should look for include files.}
 
 
 \bold{INSTALL=}		[Default: $(BASEDIR\}/etc/install] \
@@ -862,9 +844,7 @@ MK_xyz variables control a group of directories.
 
 The top level build directory tests these xyz_ENV variables:
 
-\leftindent{AMS_ENV   (ams atkams)	[Default: built]
-
-X11_ENV  (xmkfontd)	[Default: built]
+\leftindent{X11_ENV  (xmkfontd)	[Default: built]
 
 WWW_ENV  (WWW)	[Default: built]
 
@@ -879,18 +859,7 @@ variable is defined.  \
 
 
 
-\bold{AMS_ENV#}				[Default: defined]
-
-\indent{AMS_ENV is defined if the Andrew Message System should be built. 
-This is the messages program and related libraries and programs.  This 
-distribution also contains Metamail.  See METAMAIL_ENV.  If you are not 
-installing ams and atkams (the sources from auis4.tar.Z)  then you must 
-undefine AMS_ENV by adding the following line to your $/config/site.h file: 
-
-
-\indent{\typewriter{#undef AMS_ENV}}
-
-}\bold{
+\bold{
 CONTRIB_ENV#}			[Default: not defined]
 
 \indent{CONTRIB_ENV controls the construction of the contributed software 
@@ -964,19 +933,6 @@ variable is tested in $/doc/Imakefile.)}
 \paragraph{3.2.3.2.  Overhead build options}
 
 
-\bold{CPPCONVERTER_ENV#}  [Default: not defined]
-
-\leftindent{If your site has Andrew source code written in C for version 
-6., it can be converted to C++ code for version 8.  #Define 
-CPPCONVERTER_ENV in your site.h file and follow the instructions in 
-$/doc/atkprogramming/Conversion.ez.  As a result of defining this variable 
-two directories will be built
-
-\leftindent{$/overhead/c++conv - the converter
-
-$/overhead/class - the old preprocessor for header files}}
-
-
 \bold{MK_JPEG#} [Default: defined]
 
 \leftindent{If your site has already built a jpeg library, you can prevent 
@@ -995,20 +951,6 @@ building it as part of Andrew by undefining MK_METAMAIL.}
 \leftindent{If your site has already built a tiff library, you can prevent 
 building it as part of Andrew by undefining MK_TIFF.  You must also set 
 TIFFLIBDIR in the site.mcr file.}
-
-
-\bold{WHITEPAGES_ENV#} [Default: not defined]
-
-The white pages facility provides a data base in which to do approximate 
-name matching, as for instance in receiving mail or doing the `finger` 
-command.  To build this facility, #define this variable.  Two directories 
-will be built as a result
-
-\leftindent{\description{wputil - library of data base access code used by 
-tyhe mail system
-
-wpi - an interactive program for users to query/update the data base}}
-
 
 
 \paragraph{3.2.3.3. ATK build options}
@@ -1245,12 +1187,6 @@ To build any of the facilities described here, you must also #define
 CONTRIB_ENV in the site.h file.
 
 
-\bold{MK_BATMAIL#}		[Default:  defined]
-
-\leftindent{Batmail is a gnu-emacs interface to the messages mail/bboard 
-reading system.  (AMS_ENV must also be set to use this package.)
-
-}
 \bold{MK_BDFFONT#}		[Default:  defined]
 
 \leftindent{Bdffont is an editor for font files which are in bdf format.
@@ -1279,14 +1215,6 @@ it.}
 demonstrates how to compute pi by squaring a circle.
 
 }
-\bold{MK_EATMAIL#}		[Default:  defined]
-
-\leftindent{Eatmail consumes mail delivered to standard Unix queues and 
-makes it available to the messages application.  Sites will need this if 
-they are not using AMDS (which most will not).  (AMS_ENV must also be set 
-to use this package.)
-
-}
 \bold{MK_GOFIG#}			[Default:  defined]
 
 \leftindent{Gofig is an inset that manages a diagram of a go game.  It 
@@ -1304,12 +1232,6 @@ construct an interface to ez which is based on mouse gestures.
 \leftindent{Turning on this option allows four further options:
 
 
-\bold{MK_NEOS#} 			[Default:  not defined]
-
-\leftindent{Neos is a system for the electronic submission and grading of 
-papers.  It requires Kerberos.  (Currently it has compilation errors.)
-
-}
 \bold{MK_RTF#}				[Default:  not defined]
 
 \leftindent{2rtf takes an ATK datastream file and produces an RTF file 
@@ -1360,13 +1282,6 @@ disk.}}}
 ASCII-only terminals.
 
 }
-\bold{MK_WPEDIT#}			[Default:  not defined]
-
-\leftindent{Wpedit provides a window interface for editing the user's entry 
-in the white pages.  The same functionality is available in a command line 
-interface as `wpi.`}
-
-
 \bold{MK_ZIP#}				[Default:  not defined]
 
 \leftindent{Zip is an older generation Andrew drawing editor.  It has the 
@@ -1467,10 +1382,7 @@ X.11 Window System.
 
 \bold{AFS_ENV#}				[Default: not defined]
 
-\indent{(Note: if AFS_ENV is defined, then WHITEPAGES_ENV should also be 
-defined. Even if you don't intend to actually use the white pages.)}\bold{
-
-}\indent{AFS_ENV is defined if the Andrew File System is being used. This 
+\indent{AFS_ENV is defined if the Andrew File System is being used. This 
 is a distributed file system available from Transarc Corporation. For more 
 information, please send mail to afs-sales+@transarc.com.   If AFS_ENV is 
 defined, it is assumed that the following files will be available under 
@@ -1482,8 +1394,7 @@ include/afs/auth.h include/afs/errors.h include/afs/prs_fs.h
 include/afs/venus.h include/afs/vice.h include/rx/xdr.h lib/afs/libauth.a 
 lib/afs/libsys.a lib/librx.a lib/liblwp.a
 
-}If RUN_AMDS_ENV is also defined, so that $/contrib/pobbconf will be built, 
-AFSBASEDIR/bin/fs will also be needed.
+}
 
 }
 \bold{AFS30_ENV#}				[Default: not defined]
@@ -1510,20 +1421,6 @@ those listed in the basic AFS_ENV discussion:
 \indent{lib/afs/libdes.a
 
 }}
-\bold{AMS_DELIVERY_ENV#}		[Default: not defined]\bold{
-
-}\indent{AMS_DELIVERY_ENV is defined if the Andrew Message Delivery System 
-is to be built, regardless of whether it is expected to be used locally. 
-Also see RUN_AMDS_ENV in a following section. \
-
-
-
-\bold{Note}: The mail and sendmail programs will not automatically be 
-replaced with the versions that call AMS. You must install these programs 
-by hand after the system has been built successfully. These programs will 
-be built and will be located in $/ams/delivery/\{mail,sendmail\}.
-
-}
 \bold{AMS_SUBSCRIPTIONMAPFILE}#	[Default: ".SubscriptionMap" or ".SubsMap"]
 
 \leftindent{This is the name of one of the files AMS uses to store 
@@ -1576,24 +1473,6 @@ Delivery System, can use the ``ndbm'' package to manage small local
 databases.
 
 }
-\bold{RUN_AMDS_ENV#}			[Default: not defined]
-
-\indent{RUN_AMDS_ENV is defined is the Andrew Message Delivery System is to 
-be run at the site. This option affects only the default option values in 
-mail system configuration, specified in the files 
-$/overhead/util/lib/svcconf.c and $/overhead/mail/lib/mailconf.c, and 
-whether /bin/mail and /usr/lib/sendmail are replaced with stubs that call 
-AMDS. See AMS_DELIVERY_ENV in the previous section for actually building 
-the delivery system.
-
-}
-\bold{WHITEPAGES_ENV#}			[Default: not defined]\bold{
-
-}\indent{WHITEPAGES_ENV is defined if the white pages facility (including 
-phonetic name lookup) is to be built and used by the Andrew Message System.
-
-}
-
 \subsection{3.3  sitevars.h}
 
 

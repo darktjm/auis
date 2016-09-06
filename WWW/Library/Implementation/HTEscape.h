@@ -26,7 +26,7 @@ Encode Unacceptable Characters using %xy
    represented in the form %xy where x and y are two hex digits.
    
  */
-extern char * HTEscape PARAMS((CONST char * str, unsigned char mask));/*
+extern char * HTEscape (CONST char * str, unsigned char mask);/*
 
    The following are valid mask values. The terms are the BNF names in the URI document.
    
@@ -42,7 +42,7 @@ Decode %xy Escaped Characters
    in place, as it will never grow.
    
  */
-extern char * HTUnEscape PARAMS(( char * str));
+extern char * HTUnEscape ( char * str);
 
 
 #endif  /* HTESCAPE_H *//*

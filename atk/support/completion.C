@@ -80,13 +80,13 @@ static enum keymap_Types FileHack(struct fileRock  *rock, long  key, ATK   **ent
 	ATKinit;
 
 
-    int partialCommon, nameLen;
+    unsigned int partialCommon, nameLen;
 
     partialCommon = completion::FindCommon(string, data->partial);
-    if (partialCommon == data->partialLen) { /* Possible to extend complete. */
+    if ((int)partialCommon == data->partialLen) { /* Possible to extend complete. */
         nameLen = strlen(string);
-        if (partialCommon > data->bestLen) { /* This is a completion */
-            data->bestLen = min(data->max, nameLen);
+        if ((int)partialCommon > data->bestLen) { /* This is a completion */
+            data->bestLen = min(data->max, (int)nameLen);
             strncpy(data->best, string, data->bestLen + 1); /* Safe since we left room below... */
             data->code = message_Complete;
         }
@@ -97,7 +97,7 @@ static enum keymap_Types FileHack(struct fileRock  *rock, long  key, ATK   **ent
             if (bestCommon < data->bestLen) {
                 data->bestLen = bestCommon;
                 data->best[data->bestLen] = '\0';
-                if (bestCommon == nameLen)
+                if (bestCommon == (int)nameLen)
                     if (data->code != message_Invalid)
                         data->code = message_CompleteValid;
                     else
@@ -105,17 +105,17 @@ static enum keymap_Types FileHack(struct fileRock  *rock, long  key, ATK   **ent
                 else
                     data->code = message_Valid;
             }
-            else if ((bestCommon == data->bestLen) && ((bestCommon == nameLen) || (data->code == message_Complete)))
+            else if ((bestCommon == data->bestLen) && ((bestCommon == (int)nameLen) || (data->code == message_Complete)))
                     data->code = message_CompleteValid;
         }
     }
     else {
-        if (partialCommon > data->bestLen) { /* Try to getter a longer initial substr. */
-            data->bestLen = min(data->max, partialCommon);
+        if ((int)partialCommon > data->bestLen) { /* Try to getter a longer initial substr. */
+            data->bestLen = min(data->max, (int)partialCommon);
             strncpy(data->best, string, data->bestLen);
             data->best[data->bestLen] = '\0'; /* Safe since we left room below... */
         }
-        if (partialCommon >= data->bestLen)
+        if ((int)partialCommon >= data->bestLen)
             data->code = (partialCommon == strlen(string)) ? message_Complete : message_Invalid;
     }
 }
@@ -127,10 +127,6 @@ static enum keymap_Types FileHack(struct fileRock  *rock, long  key, ATK   **ent
     char *slash, dirbuf[MAXPATHLEN], namebuf[MAXNAMLEN];
     DIR *thisDir;
     DIRENT_TYPE *dirEntry;
-
-#ifdef AFS_ENV
-    boolean inVICE = FALSE;
-#endif /* AFS_ENV */
 
     struct stat statBuf;
 
@@ -162,30 +158,12 @@ static enum keymap_Types FileHack(struct fileRock  *rock, long  key, ATK   **ent
     }
 
 
-#ifdef AFS_ENV /* Enable the wonderous VICE hack... */
-#if 0
-#define VICEMAGICGID 32767
-
-    if ((stat(dirbuf, &statBuf) >= 0) && (statBuf.st_gid == VICEMAGICGID))
-        inVICE = TRUE;
-#else /* 0 */
-    inVICE = IsOnVice(thisDir->dd_fd);
-#endif /* 0 */
-#endif /* AFS_ENV  */
-
     while ((dirEntry = readdir(thisDir)) != NULL) {
         if (completion::FindCommon(namebuf, dirEntry->d_name) == namelen) {
 
             boolean isDirectory = FALSE;
             char fullName[MAXPATHLEN];
 
-#ifdef AFS_ENV
-            if (inVICE) {
-                    if ((dirEntry->d_ino % 2) == 1)
-                        isDirectory = TRUE;
-            }
-            else
-#endif /* AFS_ENV */
             {
                 strcpy(fullName, dirbuf); /* dir is guaranteed to end in a /. */
                 strcat(fullName, dirEntry->d_name);
@@ -238,10 +216,6 @@ static enum message_CompletionCode FileComplete(char  *pathname, long  directory
     struct stat statBuf;
     boolean isDirectory;
 
-#ifdef AFS_ENV
-    boolean inVICE = FALSE;
-#endif /* AFS_ENV */
-
     im::SetProcessCursor(waitCursor);
 
     filetype::CanonicalizeFilename(buffer, pathname, bufferSize);
@@ -289,17 +263,6 @@ static enum message_CompletionCode FileComplete(char  *pathname, long  directory
         return message_Invalid;
     }
 
-#ifdef AFS_ENV /* Enable the wonderous VICE hack... */
-#if 0
-#define VICEMAGICGID 32767
-
-    if ((stat(dir, &statBuf) >= 0) && (statBuf.st_gid == VICEMAGICGID))
-        inVICE = TRUE;
-#else /* 0 */
-    inVICE = IsOnVice(thisDir->dd_fd);
-#endif /* 0 */
-#endif /* AFS_ENV  */
-
     *textBuffer = '\0';
     result.partialLen = strlen(result.partial);
     result.bestLen = 0;
@@ -312,9 +275,6 @@ static enum message_CompletionCode FileComplete(char  *pathname, long  directory
         if (directory) { /* Total hack to get directory completion to work efficiently. */
             if (completion::FindCommon(dirEntry->d_name, result.partial) == 0)
                 continue;
-#ifdef AFS_ENV
-            if (inVICE && (dirEntry->d_ino % 2) == 0)
-#endif /* AFS_ENV */
             {
 
                 char fullName[MAXPATHLEN];
@@ -362,6 +322,7 @@ struct fileRock {
     class keystate *keystate;
 };
 
+#if SY_OS2
 static enum keymap_Types CheckForColon(struct fileRock  *rock, long  key, ATK   **entry, long  *rockP)
 {
     if (key == ':')
@@ -369,11 +330,10 @@ static enum keymap_Types CheckForColon(struct fileRock  *rock, long  key, ATK   
     (rock->keystate)->SetOverride( NULL, 0);
     return keymap_Empty;
 }
+#endif
 
 static enum keymap_Types FileHack(struct fileRock  *rock, long  key, ATK   **entry, long  *rockP)
 {
-    struct fileRock tmpRock;
-
     if (key == '/' || key == '~' || key == '\\') {
         message::DeleteCharacters(rock->view, 0, rock->messageLen);
 	(rock->keystate)->SetOverride( NULL, 0);	

@@ -149,13 +149,13 @@ Public Error Functions
    It always returns a negative value.
    
  */
-extern int HTErrorAdd PARAMS((  HTRequest *     request,
+extern int HTErrorAdd (  HTRequest *     request,
                                 HTErrSeverity   severity,
                                 BOOL            ignore,
                                 int             element,
                                 void *          par,
                                 unsigned int    par_length,
-                                char *          where));/*
+                                char *          where);/*
 
   ADD A SYSTEM ERROR MESSAGE
   
@@ -164,11 +164,11 @@ extern int HTErrorAdd PARAMS((  HTRequest *     request,
    negative value.
    
  */
-extern int HTErrorSysAdd PARAMS(( HTRequest *   request,
+extern int HTErrorSysAdd ( HTRequest *   request,
                                   HTErrSeverity severity,
                                   int           errornumber,
                                   BOOL          ignore,
-                                  char *        syscall));/*
+                                  char *        syscall);/*
 
   IGNORING AN ERROR MESSAGE
   
@@ -177,8 +177,8 @@ extern int HTErrorSysAdd PARAMS(( HTRequest *   request,
    to the list or an arbitrary error refered to by its handle.
    
  */
-extern void HTErrorIgnore PARAMS((HTRequest * request, int handle));
-extern void HTErrorIgnoreLast PARAMS((HTRequest * request));/*
+extern void HTErrorIgnore (HTRequest * request, int handle);
+extern void HTErrorIgnoreLast (HTRequest * request);/*
 
   HANDLING PREFIX FOR LINKS IN ERROR MESSAGE
   
@@ -186,8 +186,8 @@ extern void HTErrorIgnoreLast PARAMS((HTRequest * request));/*
    quite obvious:
    
  */
-extern void HTErrorSetPrefix PARAMS((char *path));
-extern CONST char *HTErrorGetPrefix NOPARAMS;/*
+extern void HTErrorSetPrefix (char *path);
+extern CONST char *HTErrorGetPrefix (void);/*
 
   GENERATING AN ERROR MESSAGE (DEFAULT TO STANDARD ERROR)
   
@@ -202,7 +202,7 @@ extern CONST char *HTErrorGetPrefix NOPARAMS;/*
    any more to use the stream as output for the message.
    
  */
-extern void HTErrorMsg    PARAMS((HTRequest * request));/*
+extern void HTErrorMsg    (HTRequest * request);/*
 
   FREEING AN ERROR LIST
   
@@ -210,7 +210,7 @@ extern void HTErrorMsg    PARAMS((HTRequest * request));/*
    any other time in order to ignore a whole series of errors.
    
  */
-extern void HTErrorFree   PARAMS((HTRequest * request));/*
+extern void HTErrorFree   (HTRequest * request);/*
 
  */
 #endif/*

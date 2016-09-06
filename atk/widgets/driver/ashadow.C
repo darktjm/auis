@@ -233,6 +233,10 @@ color &AShadowColorBlock::operator[](AShadowColors type) {
 	    case AShadowColors_Highlight:
 		col[type]=(*this)[AShadowColors_Foreground];
 		break;
+	    case AShadowColors_Colors: /* tjm - unused */
+	    case AShadowColors_Custom: /* tjm - unused */
+	    case AShadowColors_Transparent: /* tjm - unused */
+		break;
 		
 	}
     }
@@ -303,6 +307,8 @@ AShadowColors AShadow::ShadeForState(AShadowColors s) {
 		case AShadowColors_LabelBG:
 		    s=AShadowColors_InsensitiveLabelBG;
 		    break;
+		default:
+		        break;
 	    }
 	}
 	if(indicator && (Selected()^(armed && FillOnArm()))) {
@@ -313,6 +319,8 @@ AShadowColors AShadow::ShadeForState(AShadowColors s) {
 		case AShadowColors_Background: 
 			s=AShadowColors_SelectedBackground;
 			break;
+		default:
+		        break;
 	    }
 	}
 	if(indicator &&(Selected()^armed)) {
@@ -322,6 +330,8 @@ AShadowColors AShadow::ShadeForState(AShadowColors s) {
 		    break;
 		case AShadowColors_LowerShadow:
 		    s=AShadowColors_UpperShadow;
+		    break;
+		default:
 		    break;
 	    }
 	}
@@ -337,7 +347,7 @@ void AShadow::AllocateShadowColor(AShadowColor &dest) {
 	const char *c=resources->Get(dest.ResourceName(), (char *)0);
 	if(c) dest=c;
     }
-    else ;  // xxx error no color allocated
+    /* else ;  // xxx error no color allocated */
 }
 
 void AShadow::SetArmed(boolean a) {
@@ -774,7 +784,7 @@ void AShadow::InterpretString(const char *src) {
 	
 	char shade[256];
 	char *p=shade;
-	while(p-shade<sizeof(shade)-1 && isalpha(*src)) {
+	while(p-shade<(int)sizeof(shade)-1 && isalpha(*src)) {
 	    *p++=*src;
 	    src++;
 	}
@@ -789,7 +799,7 @@ void AShadow::InterpretString(const char *src) {
 
 	    while(SKIPPABLE(src)) src++;
 
-	    while(p-name<sizeof(name)-1 && isalpha(*src)) {
+	    while(p-name<(int)sizeof(name)-1 && isalpha(*src)) {
 		*p++=*src;
 		src++;
 	    }

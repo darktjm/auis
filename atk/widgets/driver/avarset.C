@@ -262,7 +262,7 @@ AVarSet::WriteLocalData(FILE */* file */) { }
 // compare tail of AString p vs s
 static boolean taileq(AString *p, const char *s) {
     size_t len=strlen(s);
-    if(p->Length()>=len) return 0 ==
+    if(p->Length()>=(int)len) return 0 ==
 	  strcmp((*p)+p->Length()-len, s);
     else return FALSE;
 }
@@ -450,7 +450,7 @@ AVarSet::LocateSlot(ASlot_NameParam name) {
 		if(addedslots[i]->GetName() == name) 
 		    return addedslots[i];
 	ADepender *depender;
-	if(depender=ADepender::Top()) {
+	if((depender=ADepender::Top())) {
 	    for(i=0;i<refedslots.GetN();i++) if(refedslots[i].Name()==name) {
 		refedslots[i].AddDepender(depender, ADepender::TopPart());
 		return NULL;
@@ -619,6 +619,7 @@ fontdesc *AVarSet::GetFont(ASlot_NameParam name, fontdesc *def) {
     if(!val) return def;
     return *val;
 }
+#if 0 /* unused */
 	static boolean
 SlotDumpFunc(AVarSet */* vars */, ASlot *slot, void *rock) {
 	slot->DumpSlot((FILE *)rock);	
@@ -634,6 +635,7 @@ static void DumpVarSet(AVarSet *v) {
 	printf("=== Slots ===\n");
 	v->EnumerateSlots(SlotDumpFunc, stdout);
 }
+#endif
 
 /* $Log: avarset.C,v $
  * Revision 1.33  1996/11/06  20:18:58  robr

@@ -128,7 +128,6 @@ boolean phlumphview::InitializeClass()
 /* call with iconmode==TRUE if you want it iconified. Call with iconmode==FALSE if you want a full phlumph inset with figures and everything. Call with no arguments if you want the default behavior (ie, if you want whatever the user would get if he his esc-tab phlumph in text. */
 phlumphview::phlumphview(boolean iconmode)
 {
-    struct proctable_Entry *proc = NULL;
     ATKinit;
 
     this->IconMode = iconmode;
@@ -268,7 +267,6 @@ void phlumphview::LoseInputFocus()
 static void RepostMenus(class phlumphview  *self, boolean force)
 {
     long menumask = 0;
-    long val;
 
     if (self->IconMode) {
 	if (!self->toolset) 
@@ -340,7 +338,6 @@ void phlumphview::ObservedChanged(class observable  *observed, long  status)
 	if (status==observable_OBJECTDESTROYED) {
 	}
 	else if (status==phlumph_PAGESCHANGED) {
-	    class phlumph *dat = (class phlumph *)observed;
 	    if (this->IconMode) {
 		this->WantUpdate(this);
 	    }
@@ -404,7 +401,6 @@ static void OpenProc(class phlumphview  *self, long  val)
     class im *im;
     class frame *fr;
     class phlumphview *tv;
-    boolean res;
 
     if (!self->IconMode){
 	message::DisplayString(self, 40, "This procedure only applies to iconified phlumphviews.");
@@ -659,7 +655,6 @@ static void InsertPageProc(class phlumphview  *self, long  val)
 static void DeletePageProc(class phlumphview  *self, long  val)
 {
     class phlumph *dat;
-    int pos;
 
     if (self->IconMode){
 	message::DisplayString(self, 40, "This procedure does not apply to iconified phlumphviews.");

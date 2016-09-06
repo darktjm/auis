@@ -130,7 +130,7 @@ extern char ConsoleMessage[];
 /*  */
 int CheckConsoleSocket(FILE  *ConsoleIn, class consoleClass  *self)
         {
-    int j, len;
+    int j;
 
     mydbg(("entering: CheckConsoleSocket\n"));
 

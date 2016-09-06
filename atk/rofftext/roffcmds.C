@@ -335,7 +335,6 @@ void de_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
     char *macro,*existing,*name = strdup(argv[1]);
     char *end = strdup(argv[2]);
     static BUF b = NULL;
-    char *oldValue;
     boolean svCopyMode = self->v_CopyMode;
     BUF svSnarfOutput = self->CurrentDiversion->SnarfOutput;
 
@@ -787,7 +786,7 @@ void Hd_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
     int style = 0;
     int lev;
     char *p;
-    const char *str;
+    const char *str = NULL;
     if (argc < 3) return;
     lev = atoi(argv[1]);
     switch (lev) {

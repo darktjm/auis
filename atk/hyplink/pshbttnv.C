@@ -341,7 +341,7 @@ static void DoSelectionHighlight(class pushbuttonview *self,const char *textl, c
 	int swidth, sheight;
 	long start=self->recsearchsubstart;
 	long slen=self->recsearchsublen;
-	char k;
+
 	my_fontdesc->StringBoundingBox(self->GetDrawable(), textl, &width, &height);
 	tx-=width/2;
 	char buf[start + 1];
@@ -368,16 +368,14 @@ static void DoSelectionHighlight(class pushbuttonview *self,const char *textl, c
 static void LocateHit(class pushbuttonview *pv, const struct rectangle &logical, struct rectangle &hit) {
     struct rectangle Rect=logical, Rect2;
     class pushbutton *b = (class pushbutton *) (pv)->GetDataObject();
-    int bdepth, r2_bot, r_bot;
+    int bdepth;
     int tx = 0;
     const char *textl;
     int style;
     class fontdesc *my_fontdesc;
-    class graphic *my_graphic;
     b=(class pushbutton *)pv->dataobject;
     if (b) {
 	style = (b)->GetStyle();
-	my_graphic = (class graphic *)(pv)->GetDrawable();
 	if (!(my_fontdesc = (b)->GetButtonFont())) {
 	    my_fontdesc= fontdesc::Create(FONT, FONTTYPE, FONTSIZE);
 	}
@@ -434,8 +432,6 @@ static void LocateHit(class pushbuttonview *pv, const struct rectangle &logical,
 		Rect2.left = Rect.left + bdepth;
 		Rect2.width = Rect.width - 2*bdepth;
 		Rect2.height = Rect.height - 2*bdepth;
-		r2_bot = (Rect2.top)+(Rect2.height);
-		r_bot = (Rect.top)+(Rect.height);
 
 		// tx = TEXTPAD + Rect2.left + (Rect2.width / 2);
 		tx=ComputePos(pv, textl, my_fontdesc, Rect2.left, Rect2.width);
@@ -481,7 +477,7 @@ pushbuttonview::FullUpdate(enum view_UpdateType  type, long  left , long  top , 
   int style;
   class fontdesc *my_fontdesc;
   class graphic *my_graphic;
-  struct FontSummary *my_FontSummary;
+  struct FontSummary *my_FontSummary = NULL;
   int redraw;
   boolean cont=FALSE;
   if(GetIM()==NULL) return;
@@ -632,20 +628,6 @@ pushbuttonview::FullUpdate(enum view_UpdateType  type, long  left , long  top , 
 	ty = TEXTPAD + (Rect2.top + my_FontSummary->maxHeight - my_FontSummary->maxBelow);
       }
 
-#ifdef WM_ENV
-      if (((this)->GetIM())->WhichWS()[0] == 'w') {
-          (this)->FillRectSize( Rect.left, Rect.top, bdepth, Rect.height, (this)->GrayPattern( 1, 4));	/* left bar */
-
-          (this)->FillRectSize( Rect.left + Rect.width - bdepth, Rect.top, bdepth, Rect.height, (this)->GrayPattern( 3, 4)); /* right bar */
-
-          (this)->FillTrapezoid( Rect2.left, r2_bot, Rect2.width, Rect.left, r_bot, Rect.width, (this)->GrayPattern( 3, 4)); /* lower trapz */
-
-          (this)->FillTrapezoid( Rect.left, Rect.top, Rect.width, Rect2.left, Rect2.top, Rect2.width, (this)->GrayPattern( 1, 4)); /* upper trapz */
-
-          (this)->FillRect( &Rect2, (this)->GrayPattern(1,2)); /* the middle box */
-      }
-      else
-#endif /* WM_ENV */
       {
           (this)->SetTransferMode( graphic_COPY);
           pushbuttonview_setShade(this, ulshade);
@@ -766,8 +748,8 @@ HighlightButton(class pushbuttonview  *self)
   int style;
   class fontdesc *my_fontdesc;
   class graphic *my_graphic;
-  struct FontSummary *my_FontSummary;
-  int tx, ty;
+  struct FontSummary *my_FontSummary = NULL;
+  int tx, ty = 0;
   short t_op;
   const char *text;
   int bdepth, r2_bot, r_bot;
@@ -893,8 +875,8 @@ UnhighlightButton(class pushbuttonview  *self)
   int style;
   class fontdesc *my_fontdesc;
   class graphic *my_graphic;
-  struct FontSummary *my_FontSummary;
-  int tx, ty;
+  struct FontSummary *my_FontSummary = NULL;
+  int tx, ty = 0;
   short t_op;
   const char *text;
   int bdepth, r2_bot, r_bot;
@@ -1048,7 +1030,7 @@ pushbuttonview::Hit(enum view_MouseAction  action, long  x , long  y, long  numc
 
       UnhighlightButton(this);
       if (litp) {
-	if (wait_cursor = cursor::Create(this)) {
+	if ((wait_cursor = cursor::Create(this))) {
 	  (wait_cursor)->SetStandard( Cursor_Wait);
 	  im::SetProcessCursor(wait_cursor);
 	  ((class pushbutton *) (this)->GetDataObject())->PullTrigger( pushedtrigger);
@@ -1061,6 +1043,8 @@ pushbuttonview::Hit(enum view_MouseAction  action, long  x , long  y, long  numc
     break;
   case view_RightDown:
     (this)->WantInputFocus( this);
+    break;
+  default:
     break;
   }
   return((class view *)this);
@@ -1084,7 +1068,7 @@ pushbuttonview::DesiredSize(long  width, long  height, enum view_DSpass  pass, l
 */
 
   class fontdesc *my_fontdesc;
-  struct FontSummary *my_FontSummary;
+  struct FontSummary *my_FontSummary = NULL;
   class graphic *my_graphic;
   class pushbutton *b = (class pushbutton *) (this)->GetDataObject();
   int style;
@@ -1342,7 +1326,6 @@ static void OutputLabel(FILE  *f, const char  *l)
 
 void pushbuttonview::Print(FILE   *file, const char    *processor, const char    *format, boolean    topLevel)
 {
-    int count;
     class pushbutton *dobj = (class pushbutton *)this->dataobject;
     if (strcmp(processor, "troff") == 0) {
 	/* output to troff */

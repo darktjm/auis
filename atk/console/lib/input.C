@@ -157,8 +157,6 @@ void DebugMenu(class ATK *atkarg_self, char  *rock)
 
 void DoQuit(class ATK *atkarg_self, char  *rock)
 {
-
-	class consoleClass *self=(class consoleClass *)atkarg_self;
     mydbg(("entering: DoQuit\n"));
     KillInitExecProcesses(TRUE);
     exit(0);
@@ -752,7 +750,7 @@ void GetStdConsoles(class menulist  *tempMenulist)
 	len = strlen(TmpBuf);
 	/* load up conlib with appropriate filenames */
 	while (((dp = readdir(dirp)) != NULL) && connum < MAXCONFILES) {
-	    if (DIRENT_NAMELEN(dp) > len) {
+	    if ((int)DIRENT_NAMELEN(dp) > len) {
 		nm  = dp->d_name;
 		len2 = strlen(nm);
 		tail = nm + len2 - len;
@@ -803,7 +801,7 @@ char *GetUserPaths()
     static char *paths = NULL, *start = NULL;
     char *end = NULL;
     static boolean alldone = FALSE;
-    char TmpBuf[MAXPATHLEN];
+    static char TmpBuf[MAXPATHLEN];
     int len;
 
     memset(TmpBuf, 0, MAXPATHLEN);
@@ -824,7 +822,7 @@ char *GetUserPaths()
     strncpy(TmpBuf, start, len);
     TmpBuf[len] = '\0';
     start = end;
-    *start++;
+    start++;
     mydbg(("Leaving GetUserPaths\n"));
     return(TmpBuf);
 }
@@ -875,7 +873,7 @@ void GetExtraConsoles(class menulist  *tempMenulist, const char  *conpath, const
 
 	/* load conlib with appropriate files */
 	while (((dp = readdir(dirp)) != NULL) && connum < MAXCONFILES){
-	    if (DIRENT_NAMELEN(dp) > len) {
+	    if ((int)DIRENT_NAMELEN(dp) > len) {
 		nm = dp->d_name;
 		len2 = strlen(nm);
 		tail = nm + len2 - len;

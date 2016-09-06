@@ -39,7 +39,7 @@ int _cmErrorCode = cmE_NO_ERROR;
 /*
  * _cmErrorList - Global cmenu error code discription strings.
  */
-char *
+const char * const
 _cmErrorList[cmE_CODE_COUNT] = {
     "No error",				/* cmE_NO_ERROR */
     "Menu not initialized",		/* cmE_NOT_INIT */
@@ -56,7 +56,8 @@ _cmErrorList[cmE_CODE_COUNT] = {
     "Unable to create InputOnly window",/* cmE_CREATE_INPUTONLY */
 };
 
-char *cmenuError()
+#if 0 /* unused and undeclared in headers; apparently use array instead */
+const char *cmenuError(void)
 {
     static char message[128];		/* Error message buffer. */
 
@@ -66,4 +67,4 @@ char *cmenuError()
     sprintf(message, "Unknown _cmErrorCode: %d", _cmErrorCode);
     return(message);
 }
-
+#endif

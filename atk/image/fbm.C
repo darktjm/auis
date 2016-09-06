@@ -142,15 +142,15 @@ static FBMFILEHDR phdr;		/* header structure */
  **
  ****/
 
-static int  fbmin_img_width;           /* image width */
-static int  fbmin_img_height;          /* image height */
-static int  fbmin_img_depth;	       /* image depth */
-static int  fbmin_img_bits;	       /* color bits */
-static int  fbmin_img_rowlen;	       /* length of one row of data */
-static int  fbmin_img_plnlen;	       /* length of one plane of data */
-static int  fbmin_img_clrlen;	       /* length of the colormap */
-static int  fbmin_img_aspect;	       /* image aspect ratio */
-static int  fbmin_img_physbits;	       /* physical bits per pixel */
+static unsigned int  fbmin_img_width;           /* image width */
+static unsigned int  fbmin_img_height;          /* image height */
+static unsigned int  fbmin_img_depth;	       /* image depth */
+static unsigned int  fbmin_img_bits;	       /* color bits */
+static unsigned int  fbmin_img_rowlen;	       /* length of one row of data */
+static unsigned int  fbmin_img_plnlen;	       /* length of one plane of data */
+static unsigned int  fbmin_img_clrlen;	       /* length of the colormap */
+static unsigned int  fbmin_img_aspect;	       /* image aspect ratio */
+static unsigned int  fbmin_img_physbits;	       /* physical bits per pixel */
 static char *fbmin_img_title;		/* name of image */
 static char *fbmin_img_credit;		/* credit for image */
 
@@ -292,9 +292,8 @@ int
 fbm::Load( const char  *fullname, FILE  *fp )
             { 
   FILE *f;
-  int x, y, j, k, rowlen, plnlen;
+  unsigned int x, y, j, k, rowlen, plnlen;
   unsigned char *pixptr, *cm;
-  extern int Scrn;
   unsigned char *r, *g, *b;
 
   if((f = fp) == 0) {

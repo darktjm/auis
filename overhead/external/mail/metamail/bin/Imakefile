@@ -1,9 +1,0 @@
-#ifdef sun
-#undef sun
-#endif
-
-SCRIPTS = audiocompose mailserver sendASing showpicture audiosend metasend \
-	showaudio sun-audiof.csh extcompose patch-metamail showexternal \
-	sun2mime.csh getfilename receiveASing showpartial
-
-InstallFiles($(SCRIPTS), $(INSTPROGFLAGS), $(DESTDIR)/bin)

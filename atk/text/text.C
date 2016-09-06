@@ -127,8 +127,6 @@ static int ComingNext(class text  *self, int  pos);
 
 static void AddObj(class text  *self, class dataobject  *obj)
 {
-    long i;
-
     if(self->nobjs>=self->objssize) {
 	long oldsize=self->objssize;
 	self->objssize+=10;
@@ -295,7 +293,7 @@ class viewref *text::InsertObject(long  pos, const char  *name, const char  *vie
 	    viewname = (newobject)->ViewName();
 	/* the viewref will prevent the dataobject from being destroyed until the viewref is destroyed. */
 	(newobject)->UnReference();
-        if (env = (this)->AddView( pos, viewname, newobject))
+        if ((env = (this)->AddView( pos, viewname, newobject)))
             return env->data.viewref;
     }
     return NULL;
@@ -539,7 +537,7 @@ void text::AlwaysReplaceCharacters(long  pos , long  len, const char  *repStr, l
     DoReplaceCharacters(this, pos, len, repStr, repLen, TRUE);
 }
 
-	environment *
+	static environment *
 DoAddView(text *self, long pos, 
 			const char *viewtype, class dataobject *dataobject) {
 	class viewref *newviewref;
@@ -672,7 +670,7 @@ long text::HandleKeyWord(long  pos, char  *keyword, FILE  *file)
         char viewname[200];
         long viewid;
         long objectid,desw,desh;
-        int i;
+        unsigned int i;
         class viewref *newviewref;
         int c;
 
@@ -779,7 +777,7 @@ long text::HandleKeyWord(long  pos, char  *keyword, FILE  *file)
         }
 
         if ((c = getc(file)) != EOF && c == '\n')
-            ;
+	    {}
 
         (this)->ReadTemplate( templatename, FALSE);
 
@@ -887,14 +885,15 @@ class environment *text::AddView(long  pos, const char  *viewtype, class dataobj
 
 static boolean DiscardToEnddata(FILE  *file)
 {
-    int c, i;
+    unsigned int i;
+    int c;
     char buf[20];
 trymore:
     do {
         if ((c = getc(file)) == EOF)
             return FALSE;
     } while (c != '\\');
-haveback:
+
     i = 0;
     while (1) {     /* Read possible keyword */
         if ((c = getc(file)) == EOF)
@@ -1114,6 +1113,8 @@ long text::Write(FILE  *file, long  writeID, int  level)
 	    break;
 	case text_DataStream:
 	    quoteCharacters = TRUE;
+	    break;
+	case text_DefaultWrite: /* tjm: FIXME: what should this do? */
 	    break;
     }
 
@@ -2241,7 +2242,7 @@ WriteStyle(class environment  *env, char  *outp , int  IsOpen, char  *outbuf)
 	    break;
 	}
     }
-    if(s = (char *) malloc(strlen(name) + 1)) {
+    if((s = (char *) malloc(strlen(name) + 1))) {
 	strcpy(s, name);
 
 	while (s) {
@@ -2416,7 +2417,7 @@ long text::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usagety
     unsigned char c;
     long envpos;
     int  retcode;
-    char outbuf[120],*outp,*endp, *temp;
+    char outbuf[120],*outp,*endp;
     char *buf = NULL;
     long bufLen;
     int nextcode;
@@ -2624,7 +2625,7 @@ long text::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usagety
 	char *s;
 	int IsReal;
 	while (levels-- > 0) {
-	    if (s = PopLevel(&IsReal)) {
+	    if ((s = PopLevel(&IsReal))) {
 		terminateNewline = TRUE;
 		fputs("</", file);
 		fputs(s, file);

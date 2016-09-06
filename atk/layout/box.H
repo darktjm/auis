@@ -51,7 +51,7 @@ public:
 
 
   virtual void ToggleDebug();
-  virtual void FillInContents(char *name);
+  virtual void FillInContents(const char *name);
 
 
 

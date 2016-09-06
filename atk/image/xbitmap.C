@@ -150,8 +150,8 @@ xbitmap::Load( const char  *fullname, FILE  *fp)
   char          line[MAX_SIZE];
   char          name_and_type[MAX_SIZE];
   char         *type;
-  unsigned int  value;
-  int           v10p;
+  int           value;
+  int           v10p = 0;
   unsigned int  linelen, dlinelen;
   unsigned int  x, y;
   unsigned int  w = 0, h = 0;

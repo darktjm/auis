@@ -142,7 +142,7 @@ rasterio::WriteRow(FILE  *file, unsigned char *byteaddr, long  nbytes)
 					curcnt -= 16;
 				if (curcnt > 1)
 					fputc(OTHERZERO+curcnt, file), outcnt++;
-				else ;  /* the byte written will represent a single instance */
+				/* else ;  // the byte written will represent a single instance */
 				fputc(hex[curbyte / 16], file),
 				fputc(hex[curbyte & 15], file),
 				outcnt += 2;
@@ -395,8 +395,8 @@ rasterio::ReadImage(FILE  *file			/* where to get bits from */, class pixelimage
 
 	while (! feof(file) && getc(file) != '\\') {};	/* scan for \enddata */
 	if (result == dataobject_NOREADERROR &&
-			fscanf(file, "enddata{raster,%ld", &discardid) != 1
-				|| getc(file) != '}' || getc(file) != '\n') 
+			(fscanf(file, "enddata{raster,%ld", &discardid) != 1
+				|| getc(file) != '}' || getc(file) != '\n'))
 		result = dataobject_MISSINGENDDATAMARKER;
 
 	return result;

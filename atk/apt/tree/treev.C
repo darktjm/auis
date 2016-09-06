@@ -563,7 +563,6 @@ treev::SetDataObject( class dataobject	       *data )
 long
 treev::SetTreeAttribute( long		       attribute , long		       value )
 {
-    class treev *self=this;
   long		      status = ok;
 
   IN(treev_SetTreeAttribute);
@@ -831,7 +830,7 @@ void Check_Dimensions( class treev	      *self, tree_type_node      node )
     PendingUpdate = (treev_updatefptr)Redisplay;
     (self)->WantUpdate(  self );
     }
-  if ( peer = ChildNode(node) )
+  if ( ( peer = ChildNode(node) ) )
     {
     while( peer )
       {
@@ -933,8 +932,6 @@ void Erase_Node_Children( class treev	      *self, struct tree_node   *shadow_no
 static
 void Redisplay_Node_Children( class treev	      *self, struct tree_node   *shadow_node )
       {
-  struct tree_node  *shadow_peer;
-
   IN(Redisplay_Node_Children);
     if(shadow_node) {
       Draw_Background( self );
@@ -971,7 +968,7 @@ treev::ObservedChanged( class observable  *changed, long		       change )
   else
   {
   DEBUGdt(Notification Code,(Tree)->NotificationCode());
-  if ( node = (Tree)->NotificationNode() )
+  if ( ( node = (Tree)->NotificationNode() ) )
     {
     boolean inExplosion = FALSE;
 
@@ -1015,7 +1012,7 @@ treev::ObservedChanged( class observable  *changed, long		       change )
 	  if(parent) {
 	      if((this)->NodeHighlighted(node)) {
 	        (this)->NormalizeNode(node);
-		if(CURRENTNODE = parent) {
+		if((CURRENTNODE = parent)) {
    	          CurrentNodeShadow = NodeShadow(CURRENTNODE);
 		  (this)->HighlightNode(parent);
 		}
@@ -1144,7 +1141,7 @@ treev::Hit( enum view_MouseAction    action, long			    x , long			    y , long	
   if ( (hit = (this)->aptv::Hit(  action, x, y, clicks )) == NULL )
     {
     hit = (class view *) this;
-    if ( node = Which_Node_Hit( this, x, y ) )
+    if ( ( node = Which_Node_Hit( this, x, y ) ) )
     { DEBUGst(Node Name,NodeName(node));
     if ( NodeHitHandler(node) )
       { DEBUG(Specific Node HitHandler Found);
@@ -1582,7 +1579,7 @@ treev::HideNode( struct tree_node   *node )
       if ( (this)->NodeHighlighted(  node ) )
 	{
 	(this)->NormalizeNode(  node );
-	if ( CURRENTNODE = parent )
+	if ( ( CURRENTNODE = parent ) )
 	  {
 	  CurrentNodeShadow = NodeShadow(CURRENTNODE);
 	  (this)->HighlightNode(  parent );
@@ -1590,14 +1587,14 @@ treev::HideNode( struct tree_node   *node )
 	}
       if ( parent )
 	{
-        if ( shadow_node = NodeShadowNode(parent) )
+        if ( ( shadow_node = NodeShadowNode(parent) ) )
 	  {
 	  Hide_Node_Children( this, shadow_node );
 	  Expose_Node_Children( this, shadow_node );
 	  }
 	}
 	else
-          if ( shadow_node = NodeShadowNode(node) )
+          if ( ( shadow_node = NodeShadowNode(node) ) )
 	  {
 	  Hide_Node_Children( this, shadow_node );
 	  GreatestRow = GreatestColumn = 0;
@@ -1625,7 +1622,7 @@ treev::ExposeNode( struct tree_node   *node )
     if ( node )
       {
       ShadowHidden(NodeShadow(node)) = false;
-      if ( parent = PARENTNODE(node) )
+      if ( ( parent = PARENTNODE(node) ) )
         {
 /*===
 need to expose any parents not now exposed, down to node itself
@@ -1734,7 +1731,7 @@ void Print_Tree( class treev	      *self, struct tree_node   *shadow_node )
   if(shadow_node) {
       L = T = 99999; R = B = 0;
       shadow_peer = shadow_node;
-      if ( shadow_parent = PARENTNODE(shadow_node) )
+      if ( ( shadow_parent = PARENTNODE(shadow_node) ) )
 	  parent_shadow = ShadowNodeDatum(shadow_parent);
       while ( shadow_peer )
       {
@@ -1745,7 +1742,7 @@ void Print_Tree( class treev	      *self, struct tree_node   *shadow_node )
 	  Print_Node_Border( self, shadow );
 	  (self)->PrintString(  SC, SM /*===*/-1,
 			    NodeCaptionName(ShadowedNode(shadow)), 0 );
-	  if ( folded = ShadowFolded(shadow) )
+	  if ( ( folded = ShadowFolded(shadow) ) )
 	  {
 	      if ( SL < L )  L = SL - HalfMWidth;
 	      if ( ST < T )  T = ST - HalfMWidth;
@@ -2030,7 +2027,7 @@ x_getinfo( class treev	      *self, struct range	      *total , struct range	   
 static long
 x_whatisat( class treev	      *self, long		       pos , long		       outof )
       {
-  long		      value, coord, extent = GreatestColumn * ColumnWidth;
+  long		      value, coord;
 /*debug=1;*/
   IN(x_whatisat);
   DEBUGlt(Pos,pos);  DEBUGlt(Outof, outof);
@@ -2048,7 +2045,7 @@ x_whatisat( class treev	      *self, long		       pos , long		       outof )
 static void
 x_setframe( class treev	      *self, long		       place , long		       pos , long		       outof )
       {
-  long		      delta, ncols, extent = GreatestColumn * ColumnWidth;
+  long		      extent = GreatestColumn * ColumnWidth;
 /*debug=1;*/
   IN(x_setframe);
   DEBUGdt(Place,place);  DEBUGlt(Pos,pos);  DEBUGlt(Outof,outof );
@@ -2105,7 +2102,7 @@ static
 void Arrange_Horizontal_Tree( class treev	      *self, struct tree_node   *shadow_node, long		       left , long		       top , long		       width , long		       height )
         {
   boolean	      folded = false;
-  long		      L = left, T = top, top_offset,
+  long		      L = left, T = top, top_offset = 0,
 			      peers = 0, column = 0, columns = 1,
 			      row = 0, rows, indent;
   struct node_shadow *shadow;
@@ -2150,7 +2147,7 @@ void Arrange_Horizontal_Tree( class treev	      *self, struct tree_node   *shado
 	    left + (columns * ColumnWidth), top, width, height );
       if ( NodeOrderRowMajor )
 	{
-        if ( row++ )
+        if ( row++ ) {
 	  if ( row > rows  &&  folded )
             {
             row = 1;
@@ -2159,12 +2156,13 @@ void Arrange_Horizontal_Tree( class treev	      *self, struct tree_node   *shado
             }
             else  T += RowHeight;
 	}
+	}
 	else
 	{
 	if ( ! folded  &&  row++ )
 	  T += RowHeight;
 	  else
-	  if ( column++ )
+	  if ( column++ ) {
 	    if ( column > columns )
 	      {
 	      column = 1;
@@ -2172,6 +2170,7 @@ void Arrange_Horizontal_Tree( class treev	      *self, struct tree_node   *shado
 	      L  = left;
 	      }
 	      else  L += ColumnWidth;
+	  }
 	}
       SL = L + HalfMWidth + HorizontalOffset;
       ST = T + HalfMWidth + VerticalOffset;
@@ -2194,7 +2193,7 @@ static
 void Arrange_Vertical_Tree( class treev	      *self, struct tree_node   *shadow_node, long		       left , long		       top , long		       width , long		       height )
         {
   boolean	      folded = false;
-  long		      L = left, T = top, left_offset,
+  long		      L = left, T = top, left_offset = 0,
 			      peers = 0, column = 0, columns,
 			      row = 0, rows = 1, indent;
   struct node_shadow *shadow;
@@ -2239,7 +2238,7 @@ void Arrange_Vertical_Tree( class treev	      *self, struct tree_node   *shadow_
 	    left, top + (rows * RowHeight), width, height );
       if ( NodeOrderRowMajor )
 	{
-        if ( column++ )
+        if ( column++ ) {
 	  if ( column > columns  &&  folded )
             {
             column = 1;
@@ -2248,12 +2247,13 @@ void Arrange_Vertical_Tree( class treev	      *self, struct tree_node   *shadow_
             }
             else  L += ColumnWidth;
 	}
+	}
 	else
 	{
 	if ( ! folded  &&  column++ )
 	  L += ColumnWidth;
 	  else
-	  if ( row++ )
+	  if ( row++ ) {
 	    if ( row > rows )
 	      {
 	      row = 1;
@@ -2261,6 +2261,7 @@ void Arrange_Vertical_Tree( class treev	      *self, struct tree_node   *shadow_
 	      L += ColumnWidth;
 	      }
 	      else  T += RowHeight;
+	  }
 	}
       SL = L + HalfMWidth + HorizontalOffset;
       ST = T + HalfMWidth + VerticalOffset;
@@ -2296,7 +2297,7 @@ Compute_Horizontal_Exploded_SubTree_Heights( class treev	      *self, struct tre
   long		      height = 0;
 
   IN(Compute_Horizontal_Exploded_SubTree_Heights);
-  if ( shadow_peer = ChildNode(shadow_node) )
+  if ( ( shadow_peer = ChildNode(shadow_node) ) )
     while ( shadow_peer )
       {
       height += Compute_Horizontal_Exploded_SubTree_Heights( self, shadow_peer );
@@ -2334,7 +2335,7 @@ void Arrange_Horizontal_Exploded_SubTree( class treev	      *self, struct tree_n
   long		      T = top, H;
 
   IN(Arrange_Horizontal_Exploded_SubTree);
-  if ( shadow_peer = ChildNode(shadow_node) )
+  if ( ( shadow_peer = ChildNode(shadow_node) ) )
     {
     ShadowChildrenColumnCount(ShadowNodeDatum(shadow_node)) = 1;
     GreatestColumn++;
@@ -2363,7 +2364,7 @@ Compute_Vertical_Exploded_SubTree_Widths( class treev	      *self, struct tree_n
   long		      width = 0;
 
   IN(Compute_Vertical_Exploded_SubTree_Widths);
-  if ( shadow_peer = ChildNode(shadow_node) )
+  if ( ( shadow_peer = ChildNode(shadow_node) ) )
     while ( shadow_peer )
       {
       width += Compute_Vertical_Exploded_SubTree_Widths( self, shadow_peer );
@@ -2401,7 +2402,7 @@ void Arrange_Vertical_Exploded_SubTree( class treev	      *self, struct tree_nod
   long		      L = left, W;
 
   IN(Arrange_Vertical_Exploded_SubTree);
-  if ( shadow_peer = ChildNode(shadow_node) )
+  if ( ( shadow_peer = ChildNode(shadow_node) ) )
     {
     ShadowChildrenRowCount(ShadowNodeDatum(shadow_node)) = 1;
     GreatestRow++;
@@ -2463,7 +2464,7 @@ void Draw_Tree( class treev	      *self, struct tree_node   *shadow_node )
   if ( (self )->GetFont( ) != NodeFont )
     (self)->SetFont(  NodeFont );
   shadow_peer = shadow_node;
-  if ( shadow_parent = PARENTNODE(shadow_node) )
+  if ( ( shadow_parent = PARENTNODE(shadow_node) ) )
     parent_shadow = ShadowNodeDatum(shadow_parent);
   while ( shadow_peer )
     {
@@ -2781,7 +2782,7 @@ long Generate_Shadows( class treev	       *self, struct tree_node    *node )
   IN(Generate_Shadows);
   if ( node )
     {
-    if ( shadow = Create_Shadow( self ) )
+    if ( ( shadow = Create_Shadow( self ) ) )
       {
       ShadowedNode(shadow) = node;
       if ( ShadowRootNode )
@@ -2830,7 +2831,7 @@ long Generate_Children_Shadows( class treev	      *self, struct tree_node   *nod
   shadow_node = NodeShadowNode(node);
   while ( (node = NEXTNODE(node))  &&  (node_level = NODELEVEL(node)) > start_level )
     { DEBUGst(Node Name,NodeName(node));  DEBUGdt(Level,node_level);
-    if ( shadow = Create_Shadow( self ) )
+    if ( ( shadow = Create_Shadow( self ) ) )
       {
       ShadowedNode(shadow) = node;
       if ( node_level == current_level )

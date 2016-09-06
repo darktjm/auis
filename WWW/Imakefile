@@ -53,7 +53,6 @@ awww: Library/Implementation/HTAccess.c
 awww: Library/Implementation/HTAccess.h
 awww: Library/Implementation/HTAccess.html
 awww: Library/Implementation/HTAlert.c
-awww: Library/Implementation/HTAlert.c.ori
 awww: Library/Implementation/HTAlert.h
 awww: Library/Implementation/HTAlert.html
 awww: Library/Implementation/HTAnchor.c
@@ -115,7 +114,6 @@ awww: Library/Implementation/HTIcons.c
 awww: Library/Implementation/HTIcons.h
 awww: Library/Implementation/HTIcons.html
 awww: Library/Implementation/HTInit.c
-awww: Library/Implementation/HTInit.c.ori
 awww: Library/Implementation/HTInit.h
 awww: Library/Implementation/HTInit.html
 awww: Library/Implementation/HTList.c

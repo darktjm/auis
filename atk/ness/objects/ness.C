@@ -181,6 +181,9 @@ ATK_IMPL("ness.H")
 #include <prochook.H>
 #include <owatch.H>
 
+/* exactly one place to put all those temporary pointers for node creation */
+struct node *QTnode;
+
 static class ness *NessList = NULL;		/* list of all nesses 
 				(so we can access library) */
 
@@ -217,7 +220,6 @@ static char * LineMsg(class ness  *ness, long  loc , long  len);
 	static void 
 releaseResources(class ness  *self) {
 
-	class nesssym *g, *tg;
 	struct libusenode *tuse;
 
 	neventUnpost(self, debug);	/* remove old postings */
@@ -295,33 +297,14 @@ execute(class ness  *self, const char  *func) {
 ThisUser() {
 
 	const char *login = NULL, *name = NULL;
-	struct CellAuth *thiscell;
 	long uid, n;
 	struct passwd *pw;
 	static char buf[300];
 
-	/* kerberos fails during debugging as of Nov. 92 */
-	if (getenv("MACHSUCKS")) {
-		if ((uid = getuid()) != -1 && (pw = getpwuid(uid)) != NULL) {
-			/* got a name from passwd file */
-			login = (char *)pw->pw_name;
-			name = (char *)pw->pw_gecos;
-		}
-	}
-	else {
-		if ( ! debug) CheckServiceConfiguration();
-		if (debug) {}
-		else if (ThisDomain  && FindCell(ThisDomain, &thiscell) == 0
-				&& (FillInCell(thiscell), thiscell->WpError != -1)) {
-			/* got name from cell */
-			login = (char *)thiscell->UserName;
-			name = (char *)thiscell->PersonName;
-		}
-		else if ((uid = getvuid()) != -1 && (pw = getvpwuid(uid)) != NULL) {
-			/* got a name from passwd file */
-			login = (char *)pw->pw_name;
-			name = (char *)pw->pw_gecos;
-		}
+	if ((uid = getvuid()) != -1 && (pw = getvpwuid(uid)) != NULL) {
+		/* got a name from passwd file */
+		login = (char *)pw->pw_name;
+		name = (char *)pw->pw_gecos;
 	}
 	if (login == NULL)
 		login = "???";
@@ -1016,12 +999,16 @@ cantread:
 	case NotCompiled:
 		callCompLib(libnode);
 		break;
+	default:
+		break;
 	}
 	switch (libnode->status) {
 	case ReadFailed:
 		goto cantread;
 	case CompiledWithError:
 		ness::PrintAllErrors("ness-load Compilation from library");
+		break;
+	default:
 		break;
 	}
 }

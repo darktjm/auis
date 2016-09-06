@@ -23,10 +23,7 @@
 #include <andrewos.h>
 #include <shadows.h>
 
-static void Lighten(br, bg, bb, rr, rg, rb, inc)
-unsigned short br, bg, bb;
-unsigned short *rr, *rg, *rb;
-unsigned short inc;
+static void Lighten(unsigned short br, unsigned short bg, unsigned short bb, unsigned short *rr, unsigned short *rg, unsigned short *rb, unsigned short inc)
 {
     int r, g, b;
     r=((int)inc) + ((int)br);
@@ -40,10 +37,7 @@ unsigned short inc;
     *rb=(unsigned short)b;
 }
 
-static void Darken(br, bg, bb, rr, rg, rb, inc)
-unsigned short br, bg, bb;
-unsigned short *rr, *rg, *rb;
-unsigned short inc;
+static void Darken(unsigned short br, unsigned short bg, unsigned short bb, unsigned short *rr, unsigned short *rg, unsigned short *rb, unsigned short inc)
 {
     int r, g, b;
     r=((int)br) - ((int)inc);
@@ -65,8 +59,7 @@ static unsigned short litedarkenpressed=6553;
 static unsigned short mediumdarkenpressed=3277;
 static unsigned short darklightenpressed=19660;
 
-void shadows_SetPreferences(getint)
-int (*getint)();
+void shadows_SetPreferences(int (*getint)(const char *, int))
 {
     lite=(getint("ShadowsLiteVal", 95)*65535)/100;
     dark=(getint("ShadowsDarkVal", 10)*65535)/100;
@@ -81,10 +74,7 @@ int (*getint)();
     darklightenpressed=(getint("ShadowsDarkLightenPressed", 30)*65535)/100;
 }
 
-void shadows_ComputeColor(br, bg, bb, rr, rg, rb, color)
-unsigned int br, bg, bb;
-unsigned short *rr, *rg, *rb;
-int color;
+void shadows_ComputeColor(unsigned int br, unsigned int bg, unsigned int bb, unsigned short *rr, unsigned short *rg, unsigned short *rb, int color)
 {
     unsigned long lum;
     lum=(30*br/100)+ (59*bg/100) + (11*bb/100);

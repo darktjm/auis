@@ -1979,11 +1979,7 @@ void OneTimeInit(class consoleClass  *self)
     {
 	struct sigvec vec;
     vec.sv_handler = SIGVECHANDLERFUNC(DieGracefully);
-#ifdef WM_ENV
-    vec.sv_mask = 1<<(SIGURG-1);
-#else /* WM_ENV */
     vec.sv_mask = 0;
-#endif /* WM_ENV */
     vec.sv_onstack = FALSE;
     sigvec(SIGTERM, &vec, NULL);
     vec.sv_handler = SIGVECHANDLERFUNC(Reaper);
@@ -1997,9 +1993,6 @@ void OneTimeInit(class consoleClass  *self)
     {
 	struct sigaction vec;
 	sigemptyset(&vec.sa_mask);
-#ifdef WM_ENV
-	sigaddset(&vec.sa_mask, SIGURG);
-#endif
 	vec.sa_handler = SIGACTIONHANDLERFUNC(DieGracefully);
 	sigaction(SIGTERM, &vec, NULL);
 	vec.sa_handler = SIGACTIONHANDLERFUNC(Reaper);
