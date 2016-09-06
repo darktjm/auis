@@ -190,7 +190,7 @@ help::help()
     for(i = 0; i < MAX_TUTORIAL_DIRS; i++) 
 	help_tutorialDirs[i] = NULL;
     i = 0;
-    if(tmp = environ::GetConfiguration(SETUP_TUTORIALDIR)) {
+    if((tmp = environ::GetConfiguration(SETUP_TUTORIALDIR))) {
 	if((colon = strrchr(tmp,':')) == NULL) {
 	    help_tutorialDirs[i] = (char*) malloc(strlen(tmp) + 1);
 	    strcpy(help_tutorialDirs[i],tmp);
@@ -1090,8 +1090,6 @@ static void CompletionSplot(char  *name , char  *original, struct helpdb_complet
 
 static enum message_CompletionCode HelpCompletionProc(char  *string, class help  *self, char  *buffer, int  buffersize)
 {
-    struct helpAlias *ta;
-    int ix, jx;
     char origstr[HNSIZE];
     struct helpdb_completesplot hcsplot;
 

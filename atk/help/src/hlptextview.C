@@ -119,7 +119,7 @@ void hlptextview::GetClickPosition(long  position , long  numberOfClicks, enum v
 		    text = (class text *)(this)->GetDataObject();
 		    if (text) {
 			buf = (text)->GetBuf( textstart, textlen, &textlen);
-			if (buf && textlen < sizeof(topic)) {
+			if (buf && textlen < (int)sizeof(topic)) {
 			    strncpy(topic, buf, textlen);
 			    topic[textlen] = '\0';
 			    this->hyperTopic = TrimWhiteSpace(topic, position-textstart);

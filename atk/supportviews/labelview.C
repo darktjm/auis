@@ -117,7 +117,7 @@ RedrawTable(class labelview  *self)
 	class label *st 
 			= (class label *)self->dataobject;
 	struct rectangle r;
-	int x, y, oldwidth;
+	int x, y;
 	
 	(self)->SetTransferMode( graphic_COPY);
 	(self)->GetLogicalBounds( &r);
@@ -131,7 +131,7 @@ RedrawTable(class labelview  *self)
 	    r.height -= 2;
 	    (self)->DrawRect(&r);
 #if 0
-	    oldwidth = (self)->GetLineWidth();
+	    int oldwidth = (self)->GetLineWidth();
 	    (self)->SetLineWidth( 2);
 	    (self)->SetLineWidth( oldwidth);
 #endif

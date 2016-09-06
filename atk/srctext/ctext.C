@@ -149,7 +149,7 @@ ctext::ctext()
  * matched; strconst *must* be a constant string, so that sizeof works
  */
 #define backwardMatch(self,pos,strConst) \
-    (pos>=cstrlen(strConst)-1 && match(self,pos-(cstrlen(strConst)-1)+1,strConst))
+    (pos>=(int)cstrlen(strConst)-1 && match(self,pos-(cstrlen(strConst)-1)+1,strConst))
 
 #define match(self,pos,str) ((pos==0 || !(self)->IsTokenChar((self)->GetChar(pos-1))) && !(self)->IsTokenChar((self)->GetChar(pos+cstrlen(str))) && (self)->DoMatch(pos,str,cstrlen(str)))
 
@@ -484,7 +484,7 @@ int ctext::Indentation(long pos)
 		/* nothing */
 		break;
 	    case 'f': /* if */
-		if((onestatement || elseCatch>0) && backwardMatch(this,pos,"if"))
+		if((onestatement || elseCatch>0) && backwardMatch(this,pos,"if")) {
 		    if(elseCatch==0)
 			if(parensFollowedBy==-1)
 			    return CurrentIndent(pos) +levelExtra +labelExtra;
@@ -492,28 +492,30 @@ int ctext::Indentation(long pos)
 			    return CurrentIndent(pos) +levelExtra +this->srctext::contIndent;
 		    else if(--elseCatch==0)
 			return CurrentIndent(pos); /* line else up with if */
+		}
 		savedPos=pos;
 		break;
 	    case 'o': /* do */
-		if(onestatement && backwardMatch(this,pos,"do"))
+		if(onestatement && backwardMatch(this,pos,"do")) {
 		    if(savedPos==-1)
 			return CurrentIndent(pos)+levelExtra+labelExtra;
 		    else
 			return CurrentIndent(pos) +levelExtra +this->srctext::contIndent;
+		}
 		savedPos=pos;
 		break;
 	    case 'e': /* else, case or while */
-		if(backwardMatch(this,pos,"case"))
+		if(backwardMatch(this,pos,"case")) {
 		    if(!onestatement || colonFollowedBy==-1)
 			return CurrentIndent(pos) + this->switchLevelIndent - (this->switchLevelIndent - this->switchLabelUndent) +labelExtra;
 		    else
 			return CurrentIndent(pos) + (this->switchLevelIndent - this->switchLabelUndent) + this->srctext::contIndent;
-		else if(onestatement && backwardMatch(this,pos,"while"))
+		} else if(onestatement && backwardMatch(this,pos,"while")) {
 		    if(parensFollowedBy==-1)
 			return CurrentIndent(pos) +levelExtra +labelExtra;
 		    else
 			return CurrentIndent(pos) +levelExtra +this->srctext::contIndent;
-		else if(backwardMatch(this,pos,"else"))
+		} else if(backwardMatch(this,pos,"else")) {
 		    if(onestatement)
 			if(savedPos==-1)
 			    return CurrentIndent(pos) +levelExtra +labelExtra;
@@ -524,30 +526,34 @@ int ctext::Indentation(long pos)
 			if(elseCatch>0)
 			    ++elseCatch;
 		    }
+		}
 		savedPos=pos;
 		break;
 	    case 'r':
-		if(onestatement && backwardMatch(this,pos,"for"))
+		if(onestatement && backwardMatch(this,pos,"for")) {
 		    if(parensFollowedBy==-1)
 			return CurrentIndent(pos) +levelExtra +labelExtra;
 		    else
 			return CurrentIndent(pos) +levelExtra +this->srctext::contIndent;
+		}
 		savedPos=pos;
 		break;
 	    case 'h':
-		if(onestatement && backwardMatch(this,pos,"switch"))
+		if(onestatement && backwardMatch(this,pos,"switch")) {
 		    if(parensFollowedBy==-1)
 			return CurrentIndent(pos) +switchLevelExtra +labelExtra;
 		    else
 			return CurrentIndent(pos) +switchLevelExtra +this->srctext::contIndent;
+		}
 		savedPos=pos;
 		break;
 	    case 't':
-		if(backwardMatch(this,pos,"default") && !IsTokenChar(GetChar(pos+2)))
+		if(backwardMatch(this,pos,"default") && !IsTokenChar(GetChar(pos+2))) {
 		    if(!onestatement || colonFollowedBy==-1)
 			return CurrentIndent(pos) + this->switchLevelIndent - (this->switchLevelIndent - this->switchLabelUndent) + labelExtra;
 		    else
 			return CurrentIndent(pos) + (this->switchLevelIndent - this->switchLabelUndent) + this->srctext::contIndent;
+		}
 		savedPos=pos;
 		break;
 	    case ',':

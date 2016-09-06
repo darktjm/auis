@@ -50,7 +50,7 @@ typedef struct _HTAcceptNode {
 **   the data structure hidden (it is NOT a joke!)
 **   Henrik 14/03-94
 */
-PUBLIC void HTFormatDelete ARGS1(HTRequest *, request)
+PUBLIC void HTFormatDelete (HTRequest * request)
 {
     if (request && request->conversions) {
 	HTList *cur = request->conversions;
@@ -75,14 +75,14 @@ PUBLIC void HTFormatDelete ARGS1(HTRequest *, request)
 **	maxbytes:	A limit on the length acceptable as input (0 infinite)
 **	maxsecs:	A limit on the time user will wait (0 for infinity)
 */
-PUBLIC void HTSetPresentation ARGS7(
-	HTList *,	conversions,
-	CONST char *, 	representation,
-	CONST char *, 	command,
-	CONST char *, 	test_command,  /* HWL 27/9/94: mailcap functionality */
-	double,		quality,
-	double,		secs, 
-	double,		secs_per_byte)
+PUBLIC void HTSetPresentation (
+	HTList *	conversions,
+	CONST char * 	representation,
+	CONST char * 	command,
+	CONST char * 	test_command,  /* HWL 27/9/94: mailcap functionality */
+	double		quality,
+	double		secs, 
+	double		secs_per_byte)
 {
     HTPresentation * pres = (HTPresentation *)malloc(sizeof(HTPresentation));
     if (pres == NULL) outofmem(__FILE__, "HTSetPresentation");
@@ -105,14 +105,14 @@ PUBLIC void HTSetPresentation ARGS7(
 /*	Define a built-in function for a content-type
 **	---------------------------------------------
 */
-PUBLIC void HTSetConversion ARGS7(
-	HTList *,	conversions,
-	CONST char *, 	representation_in,
-	CONST char *, 	representation_out,
-	HTConverter*,	converter,
-	double,		quality,
-	double,		secs, 
-	double,		secs_per_byte)
+PUBLIC void HTSetConversion (
+	HTList *	conversions,
+	CONST char * 	representation_in,
+	CONST char * 	representation_out,
+	HTConverter*	converter,
+	double		quality,
+	double		secs, 
+	double		secs_per_byte)
 {
     HTPresentation * pres = (HTPresentation *)malloc(sizeof(HTPresentation));
     if (pres == NULL) outofmem(__FILE__, "HTSetPresentation");
@@ -134,7 +134,7 @@ PUBLIC void HTSetConversion ARGS7(
 **	is also a LOCAL conversion list associated with each HTRequest
 **	structure. Written by Eric Sink, eric@spyglass.com
 */
-PUBLIC void HTDisposeConversions NOARGS
+PUBLIC void HTDisposeConversions (void)
 {
     if (HTConversions) {
 	HTList_delete(HTConversions);
@@ -143,9 +143,9 @@ PUBLIC void HTDisposeConversions NOARGS
 }
 
 
-PUBLIC void HTAcceptEncoding ARGS3(HTList *,	list,
-				   char *,	enc,
-				   double,	quality)
+PUBLIC void HTAcceptEncoding (HTList *	list,
+				   char *	enc,
+				   double	quality)
 {
     HTAcceptNode * node;
     char * cur;
@@ -163,9 +163,9 @@ PUBLIC void HTAcceptEncoding ARGS3(HTList *,	list,
 }
 
 
-PUBLIC void HTAcceptLanguage ARGS3(HTList *,	list,
-				   char *,	lang,
-				   double,	quality)
+PUBLIC void HTAcceptLanguage (HTList *	list,
+				   char *	lang,
+				   double	quality)
 {
     HTAcceptNode * node;
 
@@ -180,8 +180,8 @@ PUBLIC void HTAcceptLanguage ARGS3(HTList *,	list,
 }
 
 
-PRIVATE BOOL wild_match ARGS2(HTAtom *,	tmplate,
-			      HTAtom *,	actual)
+PRIVATE BOOL wild_match (HTAtom *	tmplate,
+			      HTAtom *	actual)
 {
     char *t, *a, *st, *sa;
     BOOL match = NO;
@@ -212,8 +212,8 @@ PRIVATE BOOL wild_match ARGS2(HTAtom *,	tmplate,
 /*
  * Added by takada@seraph.ntt.jp (94/04/08)
  */
-PRIVATE BOOL lang_match ARGS2(HTAtom *,	tmplate,
-			      HTAtom *,	actual)
+PRIVATE BOOL lang_match (HTAtom *	tmplate,
+			      HTAtom *	actual)
 {
     char *t, *a, *st, *sa;
     BOOL match = NO;
@@ -245,8 +245,8 @@ PRIVATE BOOL lang_match ARGS2(HTAtom *,	tmplate,
 
 
 
-PRIVATE double type_value ARGS2(HTAtom *,	content_type,
-			       HTList *,	accepted)
+PRIVATE double type_value (HTAtom *	content_type,
+			       HTList *	accepted)
 {
     HTList * cur = accepted;
     HTPresentation * pres;
@@ -265,8 +265,8 @@ PRIVATE double type_value ARGS2(HTAtom *,	content_type,
 }
 
 
-PRIVATE double lang_value ARGS2(HTAtom *,	language,
-			       HTList *,	accepted)
+PRIVATE double lang_value (HTAtom *	language,
+			       HTList *	accepted)
 {
     HTList * cur = accepted;
     HTAcceptNode * node;
@@ -300,8 +300,8 @@ PRIVATE double lang_value ARGS2(HTAtom *,	language,
 }
 
 
-PRIVATE double encoding_value ARGS2(HTAtom *,	encoding,
-				   HTList *,	accepted)
+PRIVATE double encoding_value (HTAtom *	encoding,
+				   HTList *	accepted)
 {
     HTList * cur = accepted;
     HTAcceptNode * node;
@@ -326,10 +326,10 @@ PRIVATE double encoding_value ARGS2(HTAtom *,	encoding,
 }
 
 
-PUBLIC BOOL HTRank ARGS4(HTList *, possibilities,
-			 HTList *, accepted_content_types,
-			 HTList *, accepted_languages,
-			 HTList *, accepted_encodings)
+PUBLIC BOOL HTRank (HTList * possibilities,
+			 HTList * accepted_content_types,
+			 HTList * accepted_languages,
+			 HTList * accepted_encodings)
 {
     int accepted_cnt = 0;
     HTList * accepted;
@@ -422,7 +422,7 @@ PUBLIC BOOL HTRank ARGS4(HTList *, possibilities,
 **	many parsers, and on PCs and Macs we should not duplicate
 **	the static buffer area.
 */
-PUBLIC HTInputSocket * HTInputSocket_new ARGS1 (SOCKFD, file_number)
+PUBLIC HTInputSocket * HTInputSocket_new  (SOCKFD file_number)
 {
     HTInputSocket *isoc = (HTInputSocket *)calloc(1, sizeof(*isoc));
     if (!isoc) outofmem(__FILE__, "HTInputSocket_new");
@@ -433,7 +433,7 @@ PUBLIC HTInputSocket * HTInputSocket_new ARGS1 (SOCKFD, file_number)
 
 /* This should return HT_INTERRUPTED if interrupted BUT the connection
    MUST not be closed */ 
-PUBLIC int HTInputSocket_getCharacter ARGS1(HTInputSocket*, isoc)
+PUBLIC int HTInputSocket_getCharacter (HTInputSocket* isoc)
 {
     int ch;
     do {
@@ -461,14 +461,14 @@ PUBLIC int HTInputSocket_getCharacter ARGS1(HTInputSocket*, isoc)
     return FROMASCII(ch);
 }
 
-PUBLIC void HTInputSocket_free ARGS1(HTInputSocket *, me)
+PUBLIC void HTInputSocket_free (HTInputSocket * me)
 {
     if (me) free(me);
 }
 
 
-PUBLIC char * HTInputSocket_getBlock ARGS2(HTInputSocket*,	isoc,
-					   int *,		len)
+PUBLIC char * HTInputSocket_getBlock (HTInputSocket*	isoc,
+					   int *		len)
 {
     if (isoc->input_pointer >= isoc->input_limit) {
 	int status = NETREAD(isoc->input_file_number,
@@ -498,7 +498,7 @@ PUBLIC char * HTInputSocket_getBlock ARGS2(HTInputSocket*,	isoc,
 }
 
 
-PRIVATE int fill_in_buffer ARGS1(HTInputSocket *, isoc)
+PRIVATE int fill_in_buffer (HTInputSocket * isoc)
 {
     if (isoc) {
 	int status;
@@ -522,9 +522,9 @@ PRIVATE int fill_in_buffer ARGS1(HTInputSocket *, isoc)
 }
 
 
-PRIVATE void ascii_cat ARGS3(char **,	linep,
-			     char *,	start,
-			     char *,	end)
+PRIVATE void ascii_cat (char **	linep,
+			     char *	start,
+			     char *	end)
 {
     if (linep && start && end && start <= end) {
 	char *ptr;
@@ -548,8 +548,8 @@ PRIVATE void ascii_cat ARGS3(char **,	linep,
 }
 
 
-PRIVATE char * get_some_line ARGS2(HTInputSocket *,	isoc,
-				   BOOL,		unfold)
+PRIVATE char * get_some_line (HTInputSocket *	isoc,
+				   BOOL		unfold)
 {
     if (!isoc)
 	return NULL;
@@ -611,20 +611,20 @@ PRIVATE char * get_some_line ARGS2(HTInputSocket *,	isoc,
 }
 
 /* The returned string must be freed by the caller */
-PUBLIC char * HTInputSocket_getLine ARGS1(HTInputSocket *, isoc)
+PUBLIC char * HTInputSocket_getLine (HTInputSocket * isoc)
 {
     return get_some_line(isoc, NO);
 }
 
 /* The returned string must be freed by the caller */
-PUBLIC char * HTInputSocket_getUnfoldedLine ARGS1(HTInputSocket *, isoc)
+PUBLIC char * HTInputSocket_getUnfoldedLine (HTInputSocket * isoc)
 {
     return get_some_line(isoc, YES);
 }
 
 
-PRIVATE BOOL better_match ARGS2(HTFormat, f,
-				HTFormat, g)
+PRIVATE BOOL better_match (HTFormat f,
+				HTFormat g)
 {
     CONST char *p, *q;
 
@@ -653,11 +653,11 @@ PRIVATE BOOL better_match ARGS2(HTFormat, f,
 **	On succes, request->error_block is set to YES so no more error
 **	messages to the stream as the stream might be of any format.
 */
-PUBLIC HTStream * HTStreamStack ARGS5(HTFormat,		rep_in,
-				      HTFormat,		rep_out,
-				      HTStream *,	output_stream,
-				      HTRequest *,	request,
-				      BOOL,		guess)
+PUBLIC HTStream * HTStreamStack (HTFormat		rep_in,
+				      HTFormat		rep_out,
+				      HTStream *	output_stream,
+				      HTRequest *	request,
+				      BOOL		guess)
 {
     HTList * conversion[2];
     int which_list;
@@ -738,12 +738,12 @@ PUBLIC HTStream * HTStreamStack ARGS5(HTFormat,		rep_in,
 ** On entry,
 **	length	The size of the data to be converted
 */
-PUBLIC double HTStackValue ARGS5(
-	HTList *,		theseConversions,
-	HTFormat,		rep_in,
-	HTFormat,		rep_out,
-	double,			initial_value,
-	long int,		length)
+PUBLIC double HTStackValue (
+	HTList *		theseConversions,
+	HTFormat		rep_in,
+	HTFormat		rep_out,
+	double			initial_value,
+	long int		length)
 {
     int which_list;
     HTList* conversion[2];
@@ -794,9 +794,9 @@ PUBLIC double HTStackValue ARGS5(
 **   RETURNS the number of bytes transferred.
 **
 */
-PUBLIC int HTCopy ARGS2(
-	SOCKFD,			file_number,
-	HTStream*,		sink)
+PUBLIC int HTCopy (
+	SOCKFD			file_number,
+	HTStream*		sink)
 {
     HTStreamClass targetClass;    
     HTInputSocket * isoc;
@@ -851,9 +851,9 @@ PUBLIC int HTCopy ARGS2(
 **
 **
 */
-PUBLIC void HTFileCopy ARGS2(
-	FILE *,			fp,
-	HTStream*,		sink)
+PUBLIC void HTFileCopy (
+	FILE *			fp,
+	HTStream*		sink)
 {
     HTStreamClass targetClass;    
     char input_buffer[INPUT_BUFFER_SIZE];
@@ -893,9 +893,9 @@ PUBLIC void HTFileCopy ARGS2(
 **	
 **	Character handling is now of type int, Henrik, May 09-94
 */
-PUBLIC void HTCopyNoCR ARGS2(
-	SOCKFD,			file_number,
-	HTStream*,		sink)
+PUBLIC void HTCopyNoCR (
+	SOCKFD			file_number,
+	HTStream*		sink)
 {
     HTStreamClass targetClass;
     HTInputSocket * isoc;   
@@ -932,10 +932,10 @@ PUBLIC void HTCopyNoCR ARGS2(
 
 /* The parameter to this function and HTParsefile should be HTRequest */
 
-PUBLIC int HTParseSocket ARGS3(
-	HTFormat,		rep_in,
-	SOCKFD,			file_number,
-	HTRequest *,		request)
+PUBLIC int HTParseSocket (
+	HTFormat		rep_in,
+	SOCKFD			file_number,
+	HTRequest *		request)
 {
     HTStream * stream;
     HTStreamClass targetClass;    
@@ -985,10 +985,10 @@ PUBLIC int HTParseSocket ARGS3(
 **   when the format is textual.
 **
 */
-PUBLIC int HTParseFile ARGS3(
-	HTFormat,		rep_in,
-	FILE *,			fp,
-	HTRequest *,		request)
+PUBLIC int HTParseFile (
+	HTFormat		rep_in,
+	FILE *			fp,
+	HTRequest *		request)
 {
     HTStream * stream;
     HTStreamClass targetClass;    
@@ -1026,7 +1026,7 @@ PUBLIC int HTParseFile ARGS3(
 **	The (CR,LF) sequenc when found is changed to a '\n' character,
 **	the internal C representation of a new line.
 */
-PRIVATE void NetToText_put_character ARGS2(HTStream *, me, char, c)
+PRIVATE void NetToText_put_character (HTStream * me, char c)
 {
     if (me->had_cr) {
         if (c==LF) {
@@ -1042,7 +1042,7 @@ PRIVATE void NetToText_put_character ARGS2(HTStream *, me, char, c)
 	me->sink->isa->put_character(me->sink, c);		   /* normal */
 }
 
-PRIVATE void NetToText_put_string ARGS2(HTStream *, me, CONST char *, s)
+PRIVATE void NetToText_put_string (HTStream * me, CONST char * s)
 {    
     CONST char *p=s;
     while (*p) {
@@ -1065,7 +1065,7 @@ PRIVATE void NetToText_put_string ARGS2(HTStream *, me, CONST char *, s)
 }
 
 
-PRIVATE void NetToText_put_block ARGS3(HTStream *, me, CONST char*, s, int, l)
+PRIVATE void NetToText_put_block (HTStream * me, CONST char* s, int l)
 {
     CONST char *p=s;
     while (l-- > 0) {
@@ -1087,14 +1087,14 @@ PRIVATE void NetToText_put_block ARGS3(HTStream *, me, CONST char*, s, int, l)
 	me->sink->isa->put_block(me->sink, s, p-s);
 }
 
-PRIVATE int NetToText_free ARGS1(HTStream *, me)
+PRIVATE int NetToText_free (HTStream * me)
 {
     me->sink->isa->_free(me->sink);		/* Close rest of pipe */
     free(me);
     return 0;
 }
 
-PRIVATE int NetToText_abort ARGS2(HTStream *, me, HTError, e)
+PRIVATE int NetToText_abort (HTStream * me, HTError e)
 {
     me->sink->isa->abort(me->sink,e);		/* Abort rest of pipe */
     free(me);
@@ -1110,7 +1110,7 @@ PRIVATE HTStreamClass NetToTextClass = {
     NetToText_put_block
 };
 
-PUBLIC HTStream * HTNetToText ARGS1(HTStream *, sink)
+PUBLIC HTStream * HTNetToText (HTStream * sink)
 {
     HTStream* me = (HTStream *) calloc(1, sizeof(*me));
     if (me == NULL) outofmem(__FILE__, "NetToText");
@@ -1137,7 +1137,7 @@ PUBLIC HTStream * HTNetToText ARGS1(HTStream *, sink)
 **    		HT_INTERRUPTED 	if interrupted
 **     		HT_WOULD_BLOCK  if read would block
 */
-PUBLIC int HTInputSocket_read ARGS2(HTInputSocket *, isoc, HTStream *, target)
+PUBLIC int HTInputSocket_read (HTInputSocket * isoc, HTStream * target)
 {
     int b_read;
 

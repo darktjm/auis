@@ -269,7 +269,7 @@ static struct hashf *LookupLib(char  *name)
 static boolean dolibsinrf=FALSE;
 static boolean dodefsinrf=TRUE;
 static boolean doclassesinrf=TRUE;
-void processMainFile(FILE *mainfp) {
+static void processMainFile(FILE *mainfp) {
     if(mainfp) {
 	char libToRegister[MAXPATHLEN];
 	char *p;
@@ -337,7 +337,7 @@ static void ProcessLib(struct hashf *lib) {
 	fprintf(stderr, "genstatl: Warning couldn't open refs file %s\n", lib->pathname);
 	exit(-1);
     }
-    while(wbuf=GetWord(fp2)) {
+    while((wbuf=GetWord(fp2))) {
 	struct hasht *st;
 	st=LookupClass(wbuf);
 	if(st) st->needed=1;
@@ -401,7 +401,7 @@ static long ProcessReferences(FILE *fp)
 {
     long refs=1;
     char *wbuf;
-    while(wbuf=GetWord(fp)) {
+    while((wbuf=GetWord(fp))) {
 	if(wbuf[0]=='=') break;
 	refs=ProcessName(wbuf, refs);
     }
@@ -1012,7 +1012,7 @@ static int DoLibraries(int argc, char **argv) {
 	    }
 	    strcpy(liblist, argv[0]);
 	} else {
-	    if(strlen(liblist)+len+1>liblistsize) {
+	    if((int)strlen(liblist)+len+1>liblistsize) {
 		liblistsize+=MAX(len+1, 1024);
 		liblist=(char *)realloc(liblist, liblistsize);
 		if(liblist==NULL) {
@@ -1036,7 +1036,6 @@ static void MakeLibrary(FILE *ifp, const char *odir, const char * const *objects
     
     if(libdirs!=NULL) {
 	fprintf(ifp, "LOCAL_SHARED_LIB_PATH=\\\n");
-	const char **p=libdirs;
 	int i;
 	for(i=0;i<libdirsc;i++) {
 	    fprintf(ifp, "\tATK_SHARED_LIB_DIR(%s)%s\n", libdirs[i], i<libdirsc-1?" \\":"");
@@ -1062,7 +1061,6 @@ static void MakeDynObj(FILE *ifp, const char *odir, const char * const *objects,
     
     if(libdirs!=NULL) {
 	fprintf(ifp, "LOCAL_SHARED_LIB_PATH=\\\n");
-	const char **p=libdirs;
 	int i;
 	for(i=0;i<libdirsc;i++) {
 	    fprintf(ifp, "\tATK_SHARED_LIB_DIR(%s)%s\n", libdirs[i], i<libdirsc-1?" \\":"");
@@ -1093,7 +1091,7 @@ static void AtLeastTwo(int argc, char **argv)
     };
 }
 
-int DoExtraClasses(int argc, char **argv, char **extras)
+static int DoExtraClasses(int argc, char **argv, char **extras)
 {
     int args=0;
     while(argc && *argv && argv[0][0]!='-') {
@@ -1335,7 +1333,7 @@ int main(int argc, char **argv)
 	    doatklib=0;
 	}
 	strcpy(buf, executablename);
-	if (p = strchr(buf, '.'))
+	if ((p = strchr(buf, '.')))
 	    *p = '\0';	/* remove file extension (if any) */
 	strcat(buf, "app");
 	ProcessName(buf, 1);

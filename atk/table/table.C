@@ -458,7 +458,7 @@ void table::InsertData (class table  * T, Chunk  chunk)
     iscombined = 1;
     for (r = 0; r < nrows && iscombined == 1; r++) {
 	for (c = 0; c < ncols && iscombined == 1; c++) {
-	    if (r > 0 && !(this)->IsJoinedAbove( r+r0, c+c0) || c > 0 && !(this)->IsJoinedToLeft( r+r0, c+c0))
+	    if ((r > 0 && !(this)->IsJoinedAbove( r+r0, c+c0)) || (c > 0 && !(this)->IsJoinedToLeft( r+r0, c+c0)))
 		iscombined = 0;
 	}
     }
@@ -673,7 +673,7 @@ void RemoveCellView(class table  *T,struct cell  *c,class view  *v)
 	free(vl);
     } else {
 	struct viewlist *last=vl;
-	while(vl=vl->next) {
+	while((vl=vl->next)) {
 	    if(vl->child==v) {
 		last->next=vl->next;
 		free(vl);
@@ -718,7 +718,7 @@ void DestroyCell(class table  *T, struct cell  *oldcell)
 		(oldcell->interior.ImbeddedObject.data)->Destroy();
 		oldcell->interior.ImbeddedObject.data = NULL;
 	    }
-	    while (vl = oldcell->interior.ImbeddedObject.views) {
+	    while ((vl = oldcell->interior.ImbeddedObject.views)) {
 		if (table_debug)
 		    printf("**MISUSE** removing imbedded view ref by %p\n", vl);
 		    (vl->child)->UnlinkTree();
@@ -730,6 +730,8 @@ void DestroyCell(class table  *T, struct cell  *oldcell)
 	    if (table_debug)
 		printf("imbedded remove complete\n");
 	    
+	    break;
+	case table_EmptyCell:
 	    break;
     }
     oldcell->format = GENERALFORMAT;

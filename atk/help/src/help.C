@@ -86,7 +86,7 @@ ATK_IMPL("help.H")
 #include <sys/param.h>
 
 #include <index.h>
-#include <regexp.h> /* use the reg expression routines in overhead */
+#include <regex.h>
 
 #include <helpsys.h>
 #include <help.h>
@@ -180,7 +180,6 @@ static int safesystem(char  *acmd);
 static int  mysystem(char  *acmd);
 char * LowerCase(char  *astring);
 static char * MapParens(char  *s);
-static char * sindex(char  *big , char  *small);
 void  AddHistoryItem (class help  *self, int  marcp			/* is this a bookmark? */, int  flash			/* should we expose the history panel? */);
 static int  ShowFile(class help  *self, const char  *afilename	/* the file */, int  amoreFlag			/* put "(more)" in the titlebar?
 				   TRUE - yes, FALSE - no,
@@ -306,7 +305,7 @@ mysystem(char  *acmd)
     else if (pid == 0) {
         /* child, next close window mgr's fd, so that parent window can be killed */
         for(pid = 3; pid < FDTABLESIZE(); pid++) close(pid);
-        execl("/bin/sh", "sh", "-c", acmd, NULL);
+        execl("/bin/sh", "sh", "-c", acmd, (char *)NULL);
         _exit(127);
 	/*NOTREACHED*/
     }
@@ -350,25 +349,6 @@ MapParens(char  *s)
     return s;
 }
 
-
-/*
- * stolen from libcs.  Returns the index of string small in big, 0 otherwise
- */
-static char *
-sindex(char  *big , char  *small) 
-{
-    char *bp, *bp1, *sp;
-    char c = *small++;
-
-    if (c==0) return(0);
-    for (bp=big;  *bp;  bp++)
-	if (*bp == c) {
-	    for (sp=small,bp1=bp+1;   *sp && *sp == *bp1++;  sp++)
-		;
-	    if (*sp==0) return(bp);
-	}
-    return 0;
-}
 
 /*
  * add an item to the history buffer
@@ -1035,7 +1015,7 @@ ShowTutorial(class help  *self)
     static char tbuffer[MAXPATHLEN];
     const char *tmp = NULL;
 
-    if(tmp = FindEntryInDirs(help_tutorialDirs,self->info->name,TUTORIAL_EXT)) {
+    if((tmp = FindEntryInDirs(help_tutorialDirs,self->info->name,TUTORIAL_EXT))) {
 	strcpy(tbuffer,tmp);
 	self->info->flags &= ~MENU_SwitchTutorialMenu; /* turn off menu item */
 	SetupMenus(self->info);
@@ -1159,7 +1139,7 @@ EnsurePanelListSize()
     if(help_panelList || (help_panelList = (char**)calloc(help_panelListSize,sizeof(char*))))
 	if(help_panelIndex >= (help_panelListSize-1)) {
 	    help_panelListSize *= 2;
-	    if(help_panelList = (char**) realloc(help_panelList,sizeof(char*) * help_panelListSize)) {
+	    if((help_panelList = (char**) realloc(help_panelList,sizeof(char*) * help_panelListSize))) {
 		int i;
 
 		for(i = help_panelIndex; i < help_panelListSize; i++)
@@ -1738,7 +1718,8 @@ FilterPanel(class help  *self, long  rock)
     char buf[255];
     char lbuf[255];
     struct panel_Entry *pe, *list;
-    regexp *pattern;    /* used to store compiled version of expression */
+    regex_t pattern;    /* used to store compiled version of expression */
+    int regerr;
 
     /* if rock == sort && self->oldpanel, punt */
     /* if rock == resort && self->oldpanel, OK */
@@ -1761,18 +1742,21 @@ FilterPanel(class help  *self, long  rock)
 	list = self->listPanel->panelList;
     else
 	list = self->tmpanel->panelList;
-    
-    pattern = reg_comp(buf); /* compile the pattern and save the results */
-    if (pattern == NULL) {
-	ERRORBOX(self->info->view, "Sorry; filter pattern was not understood");
+
+    /* compile the pattern and save the results */
+    if((regerr = regcomp(&pattern, buf, REG_EXTENDED|REG_NOSUB))) { /* tjm - was basic */
+	strcpy(buf, "Sorry; filter pattern was not understood: ");
+	regerror(regerr, &pattern, buf + strlen(buf), sizeof(buf) - strlen(buf));
+	regfree(&pattern);	/* return the space */
+	ERRORBOX(self->info->view, buf);
 	return;
     } else {
 	for (pe = list; pe != NULL; pe = pe->next) {
-	    if (reg_exec(pattern, pe->tag) != 0)
+	    if (regexec(&pattern, pe->tag, 0, NULL, 0) != 0)
 		AddToPanelList(pe->tag);
 	}
 	DEBUG(("done\n"));
-	free(pattern);	/* return the space */
+	regfree(&pattern);	/* return the space */
     }
     if(help_panelIndex == 0){
 	char bbuf[512];

@@ -409,8 +409,6 @@ class aptv *self=this;
 class fontdesc *
 aptv::BuildFont( const char		       *font_name, long	       *height )
         {
-class aptv *self=this;
-
   class fontdesc    *font = NULL;
   char			      family[257];
   long			      style, size;
@@ -423,7 +421,7 @@ class aptv *self=this;
   font = fontdesc::Create( family, style, size );
   if ( height  &&  (this )->GetIM( ) )
     {
-    if ( summary = (font)->FontSummary(  (this )->GetDrawable( ) ) )
+    if ( ( summary = (font)->FontSummary(  (this )->GetDrawable( ) ) ) )
       *height = summary->maxHeight;
       else  *height = 0;
     }
@@ -481,8 +479,6 @@ Parent_AptView( class aptv	       *self )
 void
 aptv::ShrinkView( class aptv	       *apt_view )
       {
-class aptv *self=this;
-
   IN(aptv_ShrinkView);
   /* NOP */
   OUT(aptv_ShrinkView);
@@ -491,8 +487,6 @@ class aptv *self=this;
 void
 aptv::ExpandView( class aptv	       *apt_view )
       {
-class aptv *self=this;
-
   IN(aptv_ExpandView);
   /* NOP */
   OUT(aptv_ExpandView);
@@ -514,7 +508,7 @@ class aptv *self=this;
     OriginalWidth = Width(Outer);
     OriginalHeight = Height(Outer);
 ===*/
-    if ( parent = Parent_AptView( this ) )
+    if ( ( parent = Parent_AptView( this ) ) )
       (parent)->ShrinkView(  this );
       else
       (this)->WantNewSize(  this );
@@ -534,7 +528,7 @@ class aptv *self=this;
     {
     DEBUG(Expand);
     Shrunk = false;
-    if ( parent = Parent_AptView( this ) )
+    if ( ( parent = Parent_AptView( this ) ) )
       (parent)->ExpandView(  this );
       else
       (this)->WantNewSize(  this );
@@ -625,8 +619,6 @@ class aptv *self=this;
 boolean
 aptv::Within( long		       x , long		       y, struct rectangle   *bounds )
         {
-class aptv *self=this;
-
   char		      status = 0;
 
   IN(aptv_Within);
@@ -683,6 +675,7 @@ class aptv *self=this;
       case  view_LeftMovement:
 
         break;
+      default:
       case  view_LeftUp:
 
         break;
@@ -1126,8 +1119,6 @@ class aptv *self=this;
 void
 aptv::SetPrintFont( const char		      *font_name )
       {
-class aptv *self=this;
-
   char			      family[257], style_name[3];
   long			      style, size;
 
@@ -1148,8 +1139,6 @@ class aptv *self=this;
 void
 aptv::ResetPrintFont( )
     {
-class aptv *self=this;
-
   IN(aptv_ResetPrintFont);
 /*===*/
   OUT(aptv_ResetPrintFont);
@@ -1385,8 +1374,6 @@ class aptv *self=this;
 void
 aptv::DrawBoundedString( const char		      *string, class fontdesc    *font, struct rectangle   *bounds, long		       x , long		       y , long		       mode )
             {
-class aptv *self=this;
-
   IN(aptv_DrawBoundedString);
   if ( string  &&  *string )
     {
@@ -1399,8 +1386,6 @@ class aptv *self=this;
 void
 aptv::ClearBoundedString( char		      *string, class fontdesc    *font, struct rectangle   *bounds, long		       x , long		       y , long		       mode )
             {
-class aptv *self=this;
-
   IN(aptv_ClearBoundedString);
   if ( string  &&  *string )
     {
@@ -1511,8 +1496,6 @@ void Draw_Enclosures( class aptv	      *self )
 long
 aptv::Query( const char		       *query , const char		       *default_response , char		       **response )
       {
-class aptv *self=this;
-
   long		      status = ok;
   static char		      buffer[512];
 
@@ -1533,8 +1516,6 @@ class aptv *self=this;
 long
 aptv::QueryFileName( const char		      *query, char		     **response )
         {
-class aptv *self=this;
-
   enum message_CompletionCode  result;
   static char				path[258];
   static char				buffer[513];
@@ -1566,7 +1547,7 @@ class aptv *self=this;
       if(*(tmp = buffer + strlen(buffer) - 1) == '.') {
 	  if((*(tmp-1) == '.') && (*(tmp-2) == '/')) {
 	      *(tmp-2) = '\0';
-	      if(tmp = (char*)strrchr(buffer,'/')) 
+	      if((tmp = (char*)strrchr(buffer,'/')))
 		  *tmp = '\0';
 	  }
 	  else if(*(tmp-1) == '/') 
@@ -1615,7 +1596,7 @@ aptv::QueryDirectoryName( const char		      *query, char		     **response )
       if(*(tmp = buffer+strlen(buffer)-1) == '.') {
 	  if((*(tmp-1) == '.') && (*(tmp-2) == '/')) {
 	      *(tmp-2) = '\0';
-	      if(tmp = (char*)strrchr(buffer,'/')) 
+	      if((tmp = (char*)strrchr(buffer,'/')))
 		  *tmp = '\0';
 	  }
 	  else if(*(tmp-1) == '/') 
@@ -1634,8 +1615,6 @@ aptv::QueryDirectoryName( const char		      *query, char		     **response )
 long
 aptv::Announce( const char		       *message )
       {
-class aptv *self=this;
-
   long		      status = ok;
 
   IN(aptv_Announce);

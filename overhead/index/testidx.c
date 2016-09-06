@@ -28,18 +28,13 @@
 #include <andrewos.h> /* sys/types.h sys/file.h */
 #include "index.h"
 
-static listerproc(ai, ac, arock)
-struct Index *ai;
-struct indexComponent *ac;
-char *arock;
+static void listerproc(struct Index *ai, struct indexComponent *ac, char *arock)
 {
     if ((long) arock != 17) printf("arock was trashed\n");
     printf("Record keyed by %s\n", ac->name);
 }
 
-main(argc, argv)
-int argc;
-char **argv;
+int main(int argc, char **argv)
 {
     if (argc < 2) return printf("test: usage is 'test <opcode> <operands>\n");
     if (!strcmp(argv[1], "cr")) {

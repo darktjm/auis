@@ -297,7 +297,7 @@ static int FinishDirMove( class bushv	     *self, tree_type_node     tn );
 static class view * TreeHitHandler( class bushv		     *self, class treev		     *tree_view, tree_type_node	      node, long			      object, enum view_MouseAction      action, long			      x , long			      y , long			      numClicks );
 static class view * ControlHitHandler( class bushv		     *self, class suite		     *suite, struct suite_item	     *item, long			      object, enum view_MouseAction      action, long			      x , long			      y , long			      numClicks );
 static const char * FileSuffix( const char    *file_name );
-static const char * FileType( const char	     *file_name );
+static const char * FileType( char	     *file_name );
 long SortByName( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
 long SortBySuffix( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
 long SortBySize( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
@@ -704,7 +704,7 @@ FileType( char *file_name )
   {
   static const char * const suffixes[] = {"BAK","CKP",0};
   const char * const *suffix_ptr;
-  char	    *suffix;
+  char *suffix;
 
   suffix = strrchr(file_name,'.');
   if(!suffix) return(file_name + strlen(file_name));
@@ -1259,10 +1259,8 @@ IssueError( class bushv  *self, const char  *what , const char  *where, boolean 
   static const char * const question[] = { "Continue", NULL };
 
   IN(IssueError);
-  if(errno > 0 && errno <= sys_nerr) 
+  if(errno != 0)
     sprintf(msg,"ERROR %s '%s': %s", what, where, strerror(errno) );
-  else if(errno != 0)
-    sprintf(msg,"ERROR %s '%s': (Invalid System Error-code '%d')", what, where, errno );
   else
     sprintf(msg,"ERROR %s '%s'", what, where);
   if(overlay) message::MultipleChoiceQuestion(self,100,msg,0,&result,question,NULL);
@@ -1278,7 +1276,7 @@ DoDestroy( class bushv  *self, tree_type_node  tn, struct Dir_Entry  *Entry, int
 
   IN(DoDestroy);
   if(self && tn && Entry) {
-    if(status = (BUSH)->DestroyEntry(tn,Entry)) 
+    if((status = (BUSH)->DestroyEntry(tn,Entry)))
       IssueError(self,"Destroying",Entry->name,overlay);
   }
   OUT(DoDestroy);
@@ -1300,7 +1298,7 @@ PerformDestroy( class bushv  *self )
     if(!current_node) return;
     switch(self->object) {
 	case nodes_object:
-	    if(tn = Parent(current_node)) {
+	    if((tn = Parent(current_node))) {
 		for(i=0;i<DirEntriesCount(tn);i++)
 		    if(DirEntryType(tn,i).dir  &&
 		       strcmp(DirName(current_node),DirEntryName(tn,i)) == 0) {
@@ -1668,7 +1666,7 @@ SetEditor( class bushv	 *self )
     struct suite_item	*editorItem = NULL;
     char		 editorCaption[64];
 
-    if(editorItem = (ControlView)->ItemOfDatum((long int) &editor_data)) {
+    if((editorItem = (ControlView)->ItemOfDatum((long int) &editor_data))) {
       sprintf(editorCaption,"Editor: %s",EditorProgram);
       (ControlView)->ChangeItemAttribute( editorItem, suite_ItemCaption(editorCaption));
     }
@@ -1716,6 +1714,7 @@ DetermineSortHandler( class bushv *self, tree_type_node tn )
 
   IN(DetermineSortHandler);
   switch(SortMode) {
+    default:
     case by_name:    sorter =  (suite_sortfptr) SortByName;    break;
     case by_size:    sorter =  (suite_sortfptr) SortBySize;    break;
     case by_date:    sorter =  (suite_sortfptr) SortByDate;    break;
@@ -1746,7 +1745,7 @@ DoAutoRescan( class bushv  *self )
 	  PerformRescan(self);
 	  if(Object == entries_object)
 	      for(i = 0; i < count; i++) {
-		  if(item = (EntriesView)->ItemOfName( names[i]))
+		  if((item = (EntriesView)->ItemOfName( names[i])))
 		      (EntriesView)->HighlightItem( item);
 		  free(names[i]);
 		  names[i] = NULL;
@@ -1798,7 +1797,7 @@ PushToEntry( class bushv  *self )
   sprintf(file_name, "%s/%s", DirPath(CurrNode), CurrEntry->name);
   sprintf(msg, "reading '%s'", file_name);
   Announce(msg);
-  if(EntryFilep = fopen(file_name, "r")) {
+  if((EntryFilep = fopen(file_name, "r"))) {
     if(!(objectName = filetype::Lookup(EntryFilep, file_name,
 				       &objectID, &attrs)))
       objectName = "text";
@@ -2099,7 +2098,7 @@ PerformSort( class bushv  *self )
 	    SortDir(self, CurrNode);
 	    (self)->RetractCursor( Cursor);
 	}
-	if(sortItem = (ControlView)->ItemOfDatum( (long int) &sort_data))
+	if((sortItem = (ControlView)->ItemOfDatum( (long int) &sort_data)))
 	    (ControlView)->ChangeItemAttribute( sortItem, suite_ItemCaption(sortCaption));
     }
     ClearMessageLine();
@@ -2200,7 +2199,7 @@ PerformRename( class bushv  *self )
       if(msg_status || !strcmp(response,DirName(CurrNode))) return;
       sprintf(msg,"Directory '%s' renamed to '",DirName(CurrNode));
       strcpy(tmp_path,DirPath(CurrNode));
-      if(tmp = strrchr(tmp_path,'/')) *tmp = '\0';
+      if((tmp = strrchr(tmp_path,'/'))) *tmp = '\0';
       if(!(BUSH)->RenameDir(CurrNode,tmp_path,response)) {
         (TREE)->SetNodeName(CurrNode,DirName(CurrNode));
 	SetTreeNotificationData(self,CurrNode,tree_NodeNameChanged);
@@ -2300,7 +2299,7 @@ static int
 bushv_WriteToFile( class bushv   *self, char		 *filename )
     {
   char		 realName[MAXPATHLEN],tempFilename[MAXPATHLEN];
-  char		*originalFilename = NULL, *endString, *basename;
+  char		*originalFilename = NULL, *endString;
   int		 closeCode, errorCode, originalMode, fd, counter = 1;
   FILE		*outFile;
   struct stat	 statBuf;
@@ -2322,7 +2321,7 @@ bushv_WriteToFile( class bushv   *self, char		 *filename )
     sprintf(endString,".%d",counter++);
 #else /* USESHORTFILENAMES */
   strcpy(tempFilename,filename);
-  basename = strrchr(tempFilename,'/');
+  char *basename = strrchr(tempFilename,'/');
   if(!basename) basename = tempFilename;
   else basename++;
   if(strlen(basename) > 8) basename[8] = '\0';
@@ -2345,19 +2344,11 @@ bushv_WriteToFile( class bushv   *self, char		 *filename )
     closeCode = -1;
   }
   else {
-#ifdef AFS_ENV
-    if((closeCode = vclose(fileno(outFile))) < 0) /* stdio can trash errno. */
-      errorCode = errno; /* Protect it from the fclose below. */
-    else if(originalFilename != NULL)
-      if((closeCode = rename(filename, originalFilename)) < 0)
-        errorCode = errno;
-#else /* AFS_ENV */
     if((closeCode = close(fileno(outFile))) < 0) /* stdio can trash errno. */
       errorCode = errno; /* Protect it from the fclose below. */
     else if(originalFilename != NULL)
       if((closeCode = rename(filename, originalFilename)) < 0)
         errorCode = errno;
-#endif /* AFS_ENV */
     fclose(outFile); /* Free stdio resources. */
     if(closeCode >= 0) { /* Reset readonly mode. */
       struct attributes attributes;
@@ -2568,7 +2559,7 @@ UpdateDetailCaption( class bushv		     *self )
   struct suite_item	    *detailItem = NULL;
   char			     newCaption[16];
 
-  if(detailItem = (ControlView)->ItemOfDatum((long int) &detail_data)) {
+  if((detailItem = (ControlView)->ItemOfDatum((long int) &detail_data))) {
     strcpy(newCaption, "Detail: ");
     if(Detail) strcat(newCaption, "on");
     else strcat(newCaption, "off");
@@ -2585,7 +2576,6 @@ EntriesPageUp( class bushv  *self )
 	if((first = (EntriesView)->FirstVisible()) != NULL && (last = (EntriesView)->LastVisible()) != NULL && first != last) {
 	    int f = (EntriesView)->ItemAttribute( first, suite_itemposition);
 	    int l = (EntriesView)->ItemAttribute( last, suite_itemposition);
-	    int total = (EntriesView)->ItemCount();
 	    int span = l - f, n;
 
 	    n = (f - span > 0 ? f - span : 1);

@@ -543,7 +543,7 @@ int print::ProcessView(class view  *v, int  print, int  dofork ,
 #endif
 #endif /* hp9000s300 */
 	if (osi_vfork() == 0) {
-	    int pg,fd;
+	    int fd;
 	    int numfds = FDTABLESIZE();
 
 	    close(0);
@@ -552,7 +552,7 @@ int print::ProcessView(class view  *v, int  print, int  dofork ,
 	    for (fd = 3; fd < numfds; fd++)
 		close(fd);
 	    NEWPGRP();
-	    execlp("/bin/sh", "sh", "-c", PrintCommand, 0);
+	    execlp("/bin/sh", "sh", "-c", PrintCommand, (char *)NULL);
 	    exit(0);
 	}
     }
@@ -856,7 +856,7 @@ boolean print::LookUpColor(const char  *colname, double  *rval , double  *gval ,
     /* generate hash key and lowercase version of name */
     key = 0;
     for (cx = colname, dx = lowercolor; 
-	  *cx && dx - lowercolor < sizeof(lowercolor)-1; 
+	  *cx && dx - lowercolor < (int)sizeof(lowercolor)-1; 
 	  cx++) {
 	*dx = (isupper(*cx)) ? tolower(*cx) : *cx;
 	key += *dx++;

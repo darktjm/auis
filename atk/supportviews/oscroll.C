@@ -112,7 +112,6 @@ static boolean thumbScroll;
 #undef MAX
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
-#define ABS(a) ((a) < 0 ? -(a) : (a))
 #define SWAP(a,b) (temp)=(a);(a)=(b);(b)=(temp)
 
 
@@ -473,7 +472,9 @@ static void set_frame(class oscroll  *self, int  side, int  posn, long  coord)
     scroll_setframefptr real_setframe;
     int type = Type[side];
     int realposn = posn;
+#ifdef DB
     static int old[scroll_SIDES][2]; /* Type x {posn, coord} */
+#endif
 
     if(!emulation) {
 	/* NORMAL SCROLLBARS */
@@ -498,8 +499,10 @@ static void set_frame(class oscroll  *self, int  side, int  posn, long  coord)
 	get_interface(self, type);
 
 
+#ifdef DB
 	old[side][0] = posn;
 	old[side][1] = coord;
+#endif
 
 	DEBUG(("end: %d %d\n",
 	       self->desired.bar[type].seen.end,
@@ -1688,17 +1691,12 @@ void oscroll::WantUpdate(class view  *requestor)
  */
 static void RepeatEvent(class oscroll  *self)
 {
-    struct scrollbar *cur = NULL;
     static long lastcoord = 0;
     
 
     if (lastcoord == 0)
 	lastcoord = self->hitcoord;
     
-    if (self->side != -1) {
-        cur = &self->current.bar[Type[self->side]];
-    }
-
     if (current_end_state != 0) {
 	endzone(self, self->side, (current_end_state == INTOPZONE ?
 				   scroll_TOPENDZONE : scroll_BOTTOMENDZONE),
@@ -1768,7 +1766,7 @@ class view *normal_scroll__Hit(class oscroll  *self, enum view_MouseAction  acti
     int posn = 0, status,side = 0, delta, i, endzones;
     long coord = 0, temp, y1, y2;
     struct scrollbar *cur = NULL, *des = NULL;
-    long logicalTop, logicalHeight, logicalPos;
+    long logicalTop = 0, logicalHeight = 0, logicalPos = 0;
 
     if (action == view_LeftDown || action == view_RightDown) {
 	if (self->button != NEITHER)
@@ -2026,7 +2024,7 @@ class view *motif_scroll__Hit(class oscroll  *self, enum view_MouseAction  actio
     int posn = 0, status, side = 0, delta, i, endzones;
     long coord = 0, temp, y1, y2;
     struct scrollbar *cur = NULL, *des = NULL;
-    long logicalTop, logicalHeight, logicalPos;
+    long logicalTop = 0, logicalHeight = 0, logicalPos = 0;
     static int last_hit_side = 0;
 
     if (action == view_LeftDown || action == view_RightDown) {
@@ -2272,7 +2270,7 @@ class view *motif_scroll__Hit(class oscroll  *self, enum view_MouseAction  actio
     current_end_state = 0;
 
     if ((&self->desired.bar[Type[last_hit_side]])->endzones)
-	DEBUG(("last hit side %d\n",last_hit_side));
+	{DEBUG(("last hit side %d\n",last_hit_side));}
     draw_endzones(self, last_hit_side, bar_height(self, last_hit_side),
 		   current_end_state);
 

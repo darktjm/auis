@@ -208,7 +208,6 @@ static long CopySelected(class suiteev  *self, class suite  *suite, struct suite
 static void Copy(class suiteev  *self);
 static struct suite_item * NthAfter(class suiteev  *self, struct suite_item  *start, long  numToSkip);
 static struct suite_item * NthPrior(class suiteev  *self, struct suite_item  *start, long  numToSkip);
-static struct suite_item * NPixelsAfter(class suiteev  *self, struct suite_item  *start, long  pix , long  *numToSkip);
 static struct suite_item * NPixelsPrior(class suiteev  *self, struct suite_item  *start, long  pix , long  *numToSkip);
 static void DrawGutterLines(class suiteev  *self);
 static long ResetItemBreaks(class suite  *self, class suite  *suite, struct suite_item  *item, long  datum);
@@ -310,7 +309,7 @@ Copy(class suiteev  *self)
   class im *im = NULL;
 
   IN(Copy);
-  if(im = (self)->GetIM()) {
+  if((im = (self)->GetIM())) {
     CutFile = (im)->ToCutBuffer();
     (Suite)->Apply((suite_applyfptr)CopySelected,(long)Suite,(long)CutFile);
     (im)->CloseToCutBuffer(CutFile);
@@ -352,7 +351,6 @@ suiteev::suiteev()
 
 suiteev::~suiteev()
 {
-    class suiteev *self=this;
 	ATKinit;
 
   if(this->menulistp) 
@@ -406,6 +404,7 @@ NthPrior(class suiteev  *self, struct suite_item  *start, long  numToSkip)
   return(item);
 }
 
+#if 0
 static struct suite_item *
 NPixelsAfter(class suiteev  *self, struct suite_item  *start, long  pix , long  *numToSkip)
       {
@@ -429,6 +428,7 @@ NPixelsAfter(class suiteev  *self, struct suite_item  *start, long  pix , long  
   OUT(NPixelsAfter);
   return(item);
 }
+#endif
 
 static struct suite_item *
 NPixelsPrior(class suiteev  *self, struct suite_item  *start, long  pix , long  *numToSkip)
@@ -467,8 +467,8 @@ DrawGutterLines(class suiteev  *self)
   {
   struct suite_item *item = FirstVisible;
   long i;
-  long numToDo, numToSkip, last, first;
-  long Offset, clearLeft, clearTop;
+  long numToDo, numToSkip = 0, last, first;
+  long Offset/*, clearLeft, clearTop */;
 
   IN(DrawGutterLines);
   if(Items && ITEM(0) && FirstVisible ) {
@@ -487,7 +487,9 @@ DrawGutterLines(class suiteev  *self)
 		  (self)->DrawLineTo( ContainerLeft + ContainerWidth, Top + Height + Offset);
 		  item = NthAfter(self, item, numToSkip);
 	      }
+#if 0 /* not used unless code enabled below */
 	      clearTop = LastVisible->bounds.top + LastVisible->bounds.height;
+#endif
 	  }
 	  if(ColumnLine) {
 	      if(RowMajor)
@@ -502,7 +504,9 @@ DrawGutterLines(class suiteev  *self)
 		  (self)->DrawLineTo( Left + Width + Offset, Top + ContainerHeight);
 		  item = NthAfter(self, item, numToSkip);
 	      }
-	      clearLeft = LastVisible->bounds.left + LastVisible->bounds.width; 
+#if 0 /* not used unless code enabled below */
+	      clearLeft = LastVisible->bounds.left + LastVisible->bounds.width;
+#endif
 	  }
 #if 0
 	  (self)->SetBGColorCell( SuiteBackground);
@@ -571,7 +575,6 @@ suiteev::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  w
 const void *
 suiteev::GetInterface(const char  *type)
 {
-    class suiteev *self=this;
     IN(suiteev_GetInterface);
     if(!strcmp(type, "scroll,vertical"))
 	return(&vertInterface);
@@ -612,24 +615,27 @@ endzone(class suiteev  *self, int  zone, enum view_MouseAction  action)
 	    if(zone == scroll_BOTTOMENDZONE) {
 		numVisible = (self)->NumberExposed();
 		if((LastItem = ITEM((Items)->Count() - 1)) != LastVisible) {
-		    if(Matrix)
+		    if(Matrix) {
 			if(numVisible > (VisibleRows * VisibleColumns)) {
 			    EndOffset = (VisibleRows * VisibleColumns) - 1;
 			    NewFirstVisible = NthPrior(self, LastItem, EndOffset);
 			}
 			else NewFirstVisible = ITEM(0);
-		    else if(SingleRow)
+		    }
+		    else if(SingleRow) {
 			if(numVisible > VisibleColumns) {
 			    EndOffset = VisibleColumns - 1;
 			    NewFirstVisible = NthPrior(self, LastItem, EndOffset);
 			}
 			else NewFirstVisible = ITEM(0);
-		    else if(SingleColumn)
+		    }
+		    else if(SingleColumn) {
 			if(numVisible > VisibleRows) {
 			    EndOffset = VisibleRows - 1;
 			    NewFirstVisible = NthPrior(self, LastItem, EndOffset);
 			}
 			else NewFirstVisible = ITEM(0);
+		    }
 		}
 	    }
 	    else if(zone == scroll_TOPENDZONE) /* obviously */
@@ -824,7 +830,7 @@ suiteev::ShrinkWrap( long				      width , long				      height )
 	for(i = 0 ; i < numLines ; i++) {
 	  end = FALSE;
 	  while(!end) {
-	    if(nl = (char*)strchr(head,'\n')) 
+	    if((nl = (char*)strchr(head,'\n')))
 	      *nl = '\0';
 	    else {
 	      nl = head + strlen(head);
@@ -901,7 +907,7 @@ PlaceItems( class suiteev	     *self, struct rectangle		     *rect, long				    
   AggrigateLeft = Ax = left + XGutterSize;
   AggrigateTop = Ay = top + YGutterSize;
   i = (Items)->Subscript((long)FirstVisible);
-  while(item = ITEM(i++))
+  while((item = ITEM(i++)))
     if(Exposed(item)) {
       newlineHeight = (item_CaptionFont)->FontSummary( (Suite)->GetDrawable())->newlineHeight;
       itemIndex++;
@@ -970,7 +976,7 @@ PlaceItems( class suiteev	     *self, struct rectangle		     *rect, long				    
 	Y_LeftOvers = height - (numleftOvers * itemHeight);
 	if(Y_LeftOvers < 0) Y_LeftOvers = 0;
     }
-    while(item = ITEM(i++))
+    while((item = ITEM(i++)))
       if(Exposed(item)) {
 	  if(X_LeftOvers > leftOverIndex) X_epsilon = 1;
 	  else X_epsilon = 0;
@@ -1001,7 +1007,7 @@ DetermineVisibleListItems( class suiteev  *self, long  height )
 
     IN(DetermineVisibleListItems);
     i = (Items)->Subscript((long) FirstVisible);
-    while(item = ITEM(i++)) {
+    while((item = ITEM(i++))) {
 	newlineHeight = (item_CaptionFont)->FontSummary( (Suite)->GetDrawable())->newlineHeight;
 	count++;
 	sum += (TwiceBorderSize + YGutterSize + (((self)->LineCount( item_Caption) + BreakCount(item)) *  (newlineHeight + 2)));
@@ -1138,10 +1144,11 @@ suiteev::Arrange( struct rectangle	 *rect )
       else NumVisible = numItems;
     }
     else {
-      if(Scroll) 
+      if(Scroll) {
 	if((NumVisible = width/minWidth) == 0)
           NumVisible = 1;
 	else NumVisible = numItems;
+      }
       width -= ((NumVisible+1) * XGutterSize);
       itemWidth = width/NumVisible;
     }
@@ -1176,7 +1183,7 @@ suiteev::DrawItems( struct rectangle  *rect )
 	return;
     CheckForNewFirstVisible(this);
     i = (Items)->Subscript((long) FirstVisible);
-    while(item = ITEM(i++))
+    while((item = ITEM(i++)))
 	if(Exposed(item)) {
 	    ItemFullUpdate(this, item, view_FullRedraw, 0, 0, 0, 0);
 	    if(item == LastVisible) 
@@ -1195,7 +1202,7 @@ EraseItems( class suiteev  *self )
     if(!Items || !ITEM(0) || !FirstVisible) 
 	return;
     i = (Items)->Subscript((long)FirstVisible);
-    while(item = ITEM(i++))
+    while((item = ITEM(i++)))
 	if(Exposed(item)) {
 	    (self)->ItemClear(item);	    
 	    if(item == LastVisible) 
@@ -1250,7 +1257,7 @@ suiteev::NumberExposed( )
   struct suite_item *item = NULL;
 
   if(Items && ITEM(0))
-    while(item = ITEM(index++))
+    while((item = ITEM(index++)))
       if(Exposed(item)) i++;
   return(i);
 }
@@ -1277,7 +1284,7 @@ suiteev::WhichItem( long  x , long  y )
     if(Items && ITEM(0)) {
 	CheckForNewFirstVisible(this);
 	i = (Items)->Subscript((long) FirstVisible);
-	while(item = ITEM(i++))
+	while((item = ITEM(i++)))
 	    if(WithinRect(x, y, &Bounds)) {
 		if(Exposed(item) && Active(item)) 
 		    return(item);
@@ -1320,6 +1327,7 @@ suiteev_HandleExclusiveHit( class suiteev  *self, struct suite_item  *item, enum
 		(self)->ItemHighlight( item);
 	    }
 	    break;
+	default:
 	case view_RightUp:  break;
 	case view_RightMovement:
 	    if(LastHit != item) {
@@ -1355,7 +1363,7 @@ suiteev_HighlightFirstToLast( class suiteev  *self, struct suite_item  *first, s
 	boolean lastFound = FALSE;
 	int f, l, i = 0;
 
-	while(item = ITEM(i++)) {
+	while((item = ITEM(i++))) {
 	    if(last == item) {
 		lastFound = TRUE;
 		break;
@@ -1382,7 +1390,7 @@ suiteev_HighlightFirstToLast( class suiteev  *self, struct suite_item  *first, s
 		}
 	}
 	if(item)
-	    while(item = ITEM(i++))
+	    while((item = ITEM(i++)))
 		if(Exposed(item) && Active(item) && Highlighted(item)) {
 		    (self)->ItemNormalize( item);
 		}
@@ -1409,6 +1417,7 @@ suiteev_HandleInclusiveHit( class suiteev  *self, struct suite_item  *item, enum
 	    break;
 	case view_RightUp:
 	case view_LeftUp:
+	default:
 	    break;
 	case view_RightMovement:
 	    if(LastHit != item) 
@@ -1553,7 +1562,6 @@ void ItemFullUpdate( class suiteev  *self, struct suite_item  *item, enum	view_U
 void
 suiteev::ItemUpdate( struct suite_item  *item )
 {
-    class suiteev *self=this;
   IN(suiteev_ItemUpdate);
   if(item->viewobject && item->dataobject) {
       (item->viewobject)->Update();
@@ -1611,7 +1619,6 @@ suiteev::ItemClear( struct suite_item  *item )
 void
 suiteev::ItemBlackOut( struct suite_item  *item )
 {
-    class suiteev *self=this;
   struct rectangle *r;
 
   IN(suiteev_ItemBlackOut);
@@ -1629,8 +1636,6 @@ suiteev::ItemBlackOut( struct suite_item  *item )
 void
 suiteev::ItemHighlightReverseVideo( struct suite_item  *item, boolean  border )
 {
-    class suiteev *self=this;
-
   IN(suiteev_ItemHighlightReverseVideo);
   if(item_BorderStyle & suite_Rectangle)
     (this)->ItemBlackOut( item);
@@ -1640,7 +1645,6 @@ suiteev::ItemHighlightReverseVideo( struct suite_item  *item, boolean  border )
 void
 suiteev::ItemHighlightBorder( struct suite_item  *item )
 {
-    class suiteev *self=this;
   IN(suiteev_ItemHighlightBorder);
   (this)->DrawItemBorder( item);
   OUT(suiteev_ItemHighlightBorder);
@@ -1649,7 +1653,6 @@ suiteev::ItemHighlightBorder( struct suite_item  *item )
 void
 suiteev::ItemHighlightCaptionBoldItalic( struct suite_item  *item )
 {
-    class suiteev *self=this;
   IN(suiteev_ItemHighlightCaptionBoldItalic);
   item->captionfonttype = fontdesc_Bold | fontdesc_Italic;
   item->captionfont = NULL;
@@ -1659,7 +1662,6 @@ suiteev::ItemHighlightCaptionBoldItalic( struct suite_item  *item )
 void
 suiteev::ItemHighlightCaptionBold( struct suite_item  *item )
 {
-    class suiteev *self=this;
   IN(suiteev_ItemHighlightCaptionBold);
   item->captionfonttype = fontdesc_Bold;
   item->captionfont = NULL;
@@ -1669,7 +1671,6 @@ suiteev::ItemHighlightCaptionBold( struct suite_item  *item )
 void
 suiteev::ItemHighlightCaptionItalic( struct suite_item  *item )
 {
-    class suiteev *self=this;
   IN(suiteev_ItemHighlightCaptionItalic);
   item->captionfonttype = fontdesc_Italic;
   item->captionfont = NULL;
@@ -1679,7 +1680,6 @@ suiteev::ItemHighlightCaptionItalic( struct suite_item  *item )
 void
 suiteev::ItemNormalize( struct suite_item  *item )
 {
-    class suiteev *self=this;
   IN(suiteev_ItemNormalize);
   if(item_AccessType & suite_ReadWrite) return;
   (this)->ItemClear( item);
@@ -1738,8 +1738,9 @@ suiteev::ItemDrawCaption( struct suite_item  *item )
 {
     class suiteev *self=this;
   long captionwidth = 0, captionheight = 0, totalWidth = 0;
-  long X = 0, Y = 0, SubStringIndex = 0;
-  unsigned tMode = graphic_COPY, placement = 0;
+  long X = 0, Y = 0;
+  short tMode = graphic_COPY;
+  unsigned placement = 0;
   unsigned alignment = item_CaptionAlignment;
   long pos = 0, i = 0, j = 0, numLines = 0;
   char *tmp = NULL, *head = NULL, save;
@@ -1914,11 +1915,12 @@ suiteev::ItemDrawTitle( struct suite_item  *item )
     class suiteev *self=this;
   long x = 0, y = 0, count = 0;
   char *tmp = NULL, *head = NULL;
-  unsigned tMode = graphic_COPY, alignment = 0;
+  short tMode = graphic_COPY;
+  unsigned alignment = 0;
   unsigned placement = graphic_BETWEENTOPANDBOTTOM;
   int titlewidth = 0, titleheight = 0;
   long titleLines = 0;
-  int newlineHeight;
+  int newlineHeight = 0;
 
   IN(suiteev_ItemDrawTitle);
   item->titlefont = fontdesc::Create(item_TitleFontName, item_TitleFontType, item_TitleFontSize);
@@ -1952,7 +1954,7 @@ suiteev::ItemDrawTitle( struct suite_item  *item )
       y = TitleRect.top + TitleRect.height - titleheight + newlineHeight/2;
     else y = TitleRect.top + (TitleRect.height - titleheight)/2 + newlineHeight/2;
     for( count = 0; (count < titleLines) && (head != '\0'); count++) {
-      if(tmp = (char*) strchr(head,'\n')) *tmp = (char)0;
+      if((tmp = (char*) strchr(head,'\n'))) *tmp = (char)0;
       (this)->MoveTo( x, y + (newlineHeight * count));
       (this)->DrawString( head, placement);
       if(tmp) {
@@ -1974,7 +1976,6 @@ suiteev::ItemDrawTitle( struct suite_item  *item )
 void
 suiteev::ItemHighlight( struct suite_item  *item )
 {
-    class suiteev *self=this;
   IN(suiteev_ItemHighlight);
   if( (item_HighlightStyle & suite_None) || 
       (item_AccessType & suite_ReadWrite)) 
@@ -2005,7 +2006,6 @@ suiteev::ItemHighlight( struct suite_item  *item )
 void
 suiteev::ItemClearCaption( struct suite_item  *item )
 {
-    class suiteev *self=this;
   IN(suiteev_ItemClearCaption);
   if(item_Caption) 
       (this)->ItemDrawCaption( item);
@@ -2015,8 +2015,6 @@ suiteev::ItemClearCaption( struct suite_item  *item )
 void
 suiteev::ItemShade( struct suite_item  *item )
 {
-    class suiteev *self=this;
-  short int shade = 0;
   IN(suiteev_ItemShade);
   item->mode &= ~item_Active;
   item->mode &= ~item_Normalized;
@@ -2042,7 +2040,7 @@ suiteev::Locate( long  x , long  y )
   IN(suiteev_Locate);
   if(Items && ITEM(0) && (i = (Items)->Subscript((long) FirstVisible)) != -1) {
     if(!x) 
-      while(item = ITEM(i)) {
+      while((item = ITEM(i))) {
 	realTop = Top - (YGutterOffset/2);
 	realHeight = Height + YGutterOffset;
 	if((Suite)->ItemExposed( item) &&
@@ -2054,7 +2052,7 @@ suiteev::Locate( long  x , long  y )
 	else i++;
       }
     else if(!y)
-      while(item = ITEM(i)) {
+      while((item = ITEM(i))) {
 	realLeft = Left - (XGutterOffset/2);
 	realWidth = Width + XGutterOffset;
 	if((Suite)->ItemExposed( item) &&
@@ -2070,8 +2068,6 @@ suiteev::Locate( long  x , long  y )
 void
 suiteev::DrawItemBorder( struct suite_item  *item )
 {
-    class suiteev *self=this;
-  long i = 0;
   struct rectangle *rect = NULL;
 
   IN(suiteev_DrawItemBorder);
@@ -2257,7 +2253,7 @@ suiteev::MaxStringSize( long  *width , long  *height )
   int numLines = 0;
 
   IN(::MaxStringSize);
-  while(item = ITEM(i++))
+  while((item = ITEM(i++)))
     if(Exposed(item)) {
       if(item_Caption) {
 	numLines = (this)->LineCount( item_Caption) + BreakCount(item);
@@ -2286,7 +2282,6 @@ suiteev::MaxStringSize( long  *width , long  *height )
 long
 suiteev::LineCount( char  *str )
 {
-    class suiteev *self=this;
   long number = 1;
   char *tmp = str;
 
@@ -2376,7 +2371,7 @@ suiteev::LinkTree(class view  *parent)
 	if(Items && ITEM(0)) {
 	    CheckForNewFirstVisible(this);
 	    i = (Items)->Subscript((long) FirstVisible);
-	    while(item = ITEM(i++))
+	    while((item = ITEM(i++)))
 		if(Exposed(item)) {
 		    if(Active(item)) { 
 			if(item_AccessType & suite_ReadWrite)

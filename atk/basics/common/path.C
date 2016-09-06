@@ -583,13 +583,6 @@ static long SetNewHome(char  *shortPathName, const char  *name, const char  *cel
 	strcat(shortPathName, name);
 	addedLen += strlen(name);
     }
-#ifdef AFS_ENV
-    if (cell != NULL) {
-	strcat(shortPathName, "@");
-	strcat(shortPathName, cell);
-	addedLen += strlen(cell) + 1;
-    }
-#endif /* AFS_ENV */
     strcpy(newHome->shortPath, shortPathName);
     newHome->shortLength = strlen(shortPathName);
 
@@ -615,17 +608,8 @@ char *path::TruncatePath(char  *frompath, char  *result, long  limit, boolean  t
     static char passwdName[100];
     static char passwdDir[MAXPATHLEN];
     static int passwdDirLen;
-#ifdef AFS_ENV
-    static char cellPasswdName[100];
-    static char cellPasswdDir[MAXPATHLEN];
-    static int cellPasswdDirLen;
-#endif /* AFS_ENV */
     static boolean gotBaseInfo = FALSE;
     static boolean CheckOwnerHome = FALSE;
-#ifdef AFS_ENV
-    static char lastCellName[MAXPATHLEN];
-    static char thisCell[MAXPATHLEN];
-#endif /* AFS_ENV */
     
     if (frompath == NULL) {
         return NULL;
@@ -638,10 +622,6 @@ char *path::TruncatePath(char  *frompath, char  *result, long  limit, boolean  t
 	if (homeDir != NULL) {
 	    SetNewHome(shortName, NULL, NULL, homeDir, strlen(homeDir));
 	}
-#ifdef AFS_ENV
-	thisCell[0] = '\0';
-	GetCurrentWSCell(thisCell, MAXPATHLEN);
-#endif /* AFS_ENV */
 	CheckOwnerHome = environ::GetProfileSwitch("CheckOwnerHome", TRUE);
 	gotBaseInfo = TRUE;
     }
@@ -660,10 +640,6 @@ char *path::TruncatePath(char  *frompath, char  *result, long  limit, boolean  t
         char *slash;
         struct homestruct *aHome;
         boolean hitCache = FALSE;
-#ifdef AFS_ENV
-        boolean gotCell;
-        char cellName[MAXPATHLEN];
-#endif /* AFS_ENV */
 
 
         for (aHome = homes; aHome != NULL; aHome = aHome->next) {
@@ -679,11 +655,6 @@ char *path::TruncatePath(char  *frompath, char  *result, long  limit, boolean  t
         if (!hitCache) {
 
 	    strcpy(tmpPath, pathp);
-
-#ifdef AFS_ENV
-            gotCell = !GetCellFromFileName(tmpPath, cellName, MAXPATHLEN);
-#endif /* AFS_ENV */
-
             len = strlen(tmpPath);
             slash = &tmpPath[len];
             while (len > 1 && tmpPath[len-1] == '/') {
@@ -695,11 +666,7 @@ char *path::TruncatePath(char  *frompath, char  *result, long  limit, boolean  t
 		/* Have more than the root directory */
 		*slash = '\0';
 		if (CheckOwnerHome && stat(tmpPath, &buf) == 0) {
-		    if (buf.st_uid != lastUID
-#ifdef AFS_ENV
-			|| strcmp(cellName, lastCellName) != 0
-#endif /* AFS_ENV */
-			) {
+		    if (buf.st_uid != lastUID) {
 			passwd = getpwuid(buf.st_uid);
 			if (passwd != NULL) {
 			    strcpy(passwdDir, passwd->pw_dir);
@@ -709,22 +676,6 @@ char *path::TruncatePath(char  *frompath, char  *result, long  limit, boolean  t
 			else {
 			    passwdName[0] = '\0';
 			}
-#ifdef AFS_ENV
-			if (gotCell) {
-			    struct passwd *cellpasswd;
-
-			    cellpasswd = getcpwuid(buf.st_uid, cellName);
-			    if (cellpasswd != NULL) {
-				strcpy(cellPasswdDir, cellpasswd->pw_dir);
-				strcpy(cellPasswdName, cellpasswd->pw_name);
-				cellPasswdDirLen = strlen(cellPasswdDir);
-			    }
-			    else {
-				cellPasswdName[0] = '\0';
-			    }
-			}
-			strcpy(lastCellName, cellName);
-#endif /* AFS_ENV */
 			lastUID = buf.st_uid;
 		    }
 
@@ -732,12 +683,6 @@ char *path::TruncatePath(char  *frompath, char  *result, long  limit, boolean  t
 			maxLen -= SetNewHome(shorter, passwdName, NULL, passwdDir, passwdDirLen);
 			pathp += passwdDirLen;
 		    }
-#ifdef AFS_ENV
-		    else if (cellPasswdName[0] != '\0' && strncmp(tmpPath, cellPasswdDir, cellPasswdDirLen) == 0 && (tmpPath[cellPasswdDirLen] == '/' || tmpPath[cellPasswdDirLen] == '\0')) {
-			maxLen -= SetNewHome(shorter, cellPasswdName, cellName, cellPasswdDir, cellPasswdDirLen);
-			pathp += cellPasswdDirLen;
-		    }
-#endif /* AFS_ENV */
 		}
             }
         }
@@ -832,42 +777,20 @@ static void HandleCellTwiddle(const char  *fromString, char  *toString)
     }
     else {
 	long pos;
-#ifdef AFS_ENV
-	long endpos;
-#endif /* AFS_ENV */
 	char name[MAXPATHLEN];
 	char cellName[MAXPATHLEN];
 	char *cn = cellName;
 
 	for (pos = 1; fromString[pos] != '\0' && fromString[pos] != '/'; pos++) {
-#ifdef AFS_ENV
-	    if (fromString[pos] == '@') {
-
-		for (endpos = pos + 1; fromString[endpos] != '\0' && fromString[endpos] != '/'; endpos++) {
-		    *cn++ = fromString[endpos];
-		}
-		*cn = '\0';
-		break;
-	    }
-#endif /* AFS_ENV */
 	}
 
 	strncpy(name, &fromString[1], pos - 1);
 	name[pos -1] = '\0';
 	if (cn == cellName) {
 	    passwd = getpwnam(name);
-#ifdef AFS_ENV
-	    if (passwd == NULL) {
-		passwd = getvpwnam(name);
-	    }
-#endif /* AFS_ENV */
 	    p = pos;
 	}
 	else {
-#ifdef AFS_ENV
-	    passwd = getcpwnam(name, cellName);
-	    p = endpos;
-#endif /*AFS_ENV */
 	}
 
 	if (passwd != NULL) {
@@ -1053,11 +976,6 @@ boolean path::Scan(boolean  statEverything)
     long nextdir = 0;
     long len;
     boolean noProblems = FALSE;
-#ifdef AFS_ENV
-    boolean inVICE = FALSE;
-    boolean statIsSillyMakeThemDirs = FALSE;
-    boolean statIsSillyMakeThemFiles = FALSE;
-#endif /* AFS_ENV */
 
     if (this->filepath == NULL || (stat(this->filepath, &statBuf) != 0)) {
         FreeFilesAndDirs(this);
@@ -1093,33 +1011,12 @@ boolean path::Scan(boolean  statEverything)
                     len++;
                 }
 
-#ifdef AFS_ENV
-                inVICE = IsOnVice(thisDir->dd_fd);
-                statIsSillyMakeThemDirs = 
-                  (strcmp(fullName, "/usr/") == 0) || 
-                  (strcmp(fullName, "/afs/") == 0);
-                statIsSillyMakeThemFiles = strcmp(fullName, "/etc/") == 0;
-#endif /* AFS_ENV  */
 
                 filePart = &fullName[len];
                 while ((dirEntry = readdir(thisDir)) != NULL) {
                     boolean isdirectory = FALSE;
                     char *name = dirEntry->d_name;
 
-#ifdef AFS_ENV /* Use the wonderous VICE hack ... */
-                    if (statIsSillyMakeThemDirs) {
-                        isdirectory = TRUE;
-                    }
-                    else if (statIsSillyMakeThemFiles) {
-                        isdirectory = FALSE;
-                    }
-                    else if (inVICE && !statEverything) {
-                        if ((dirEntry->d_ino % 2) == 1) {
-                            isdirectory = TRUE;
-                        }
-                    }
-                    else
-#endif /* AFS_ENV */
                     {
                         strcpy(filePart, name);
                         stat(fullName, &statBuf);

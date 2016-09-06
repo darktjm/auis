@@ -37,29 +37,32 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <errno.h>
+#include <stdarg.h>
 
 #define MAXLOCKTRIES 	15
 #define TEXTALLOCSTEP	5000
 #define LINESALLOCSTEP	200
 
-char *prog;
+static const char *prog;
 
-err(f,a,b)
-char *f,*a,*b;
+static void err(const char *f,...)
 {
+    va_list ap;
+    va_start(ap, f);
     char buf[1000];
-    sprintf(buf,f,a,b);
+    vsprintf(buf,f,ap);
     strcat(buf,"\n");
     write(2,buf,strlen(buf));
     exit(10);
 }
 
-syserr(f,a,b,c)
-char *f,*a,*b,*c;
+static void syserr(const char *f,...)
 {
     char buf[1000];
+    va_list ap;
 
-    sprintf(buf,f,a,b,c);
+    va_start(ap, f);
+    vsprintf(buf,f,ap);
 
     if(errno!=0)
 	perror(buf);
@@ -71,15 +74,12 @@ char *f,*a,*b,*c;
     exit(9);
 }
 
-qsLineCompare(l1,l2)
-char **l1, **l2;
+static int qsLineCompare(const void *l1,const void *l2)
 {
-    return strcmp(*l1,*l2);
+    return strcmp(*(const char **)l1,*(const char **)l2);
 }
 
-char **readFromLines(fromFile,numP)
-char *fromFile;
-int *numP;
+static char **readFromLines(const char *fromFile,int *numP)
 {
     FILE *fp;
     int fromLinesLen=0, fromLinesMax=LINESALLOCSTEP;
@@ -123,15 +123,14 @@ int *numP;
 
     fclose(fp);
 
-    qsort((char *)fromLines,fromLinesLen,sizeof(char *),qsLineCompare);
+    qsort(fromLines,fromLinesLen,sizeof(char *),qsLineCompare);
 
     *numP=fromLinesLen;
 
     return fromLines;
 }
 
-int strcmpFirstField(s1,s2)
-char *s1, *s2;
+static int strcmpFirstField(const char *s1,const char *s2)
 {
     while(*s1==*s2 && isgraph(*s1))
 	s1++, s2++;
@@ -144,9 +143,7 @@ char *s1, *s2;
 	return *s1-*s2;
 }
 
-int main(argc,argv)
-int argc;
-char **argv;
+int main(int argc,const char * const *argv)
 {
     int fd;
     FILE *newFp, *oldFp;

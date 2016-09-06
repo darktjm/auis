@@ -71,7 +71,6 @@ static const struct types typearray[] = {
 
 
 ATKdefineRegistry(lsetview, lpair, lsetview::InitializeClass);
-static int lookuptype(char  *ty);
 static class view *makeview(class lsetview  *self,class lset  *ls);
 void lsetview_SetMode(class lsetview  *self,int  mode);
 static void initkids(class lsetview  *self,class lset  *ls);
@@ -89,15 +88,6 @@ void lsetview_Paste(class lsetview  *self);
 static void lsetview_SplitVert(class lsetview  *self);
 static void lsetview_SplitHorz(class lsetview  *self);
 
-
-static int lookuptype(char  *ty)
-{
-    const struct types *tp;
-    for(tp = typearray;tp->val != 0; tp++)
-	if(*ty == *tp->str && strcmp(ty,tp->str) == 0)
-	    return tp->val;
-    return 0;
-}
 
 static class view *makeview(class lsetview  *self,class lset  *ls)
 {

@@ -77,19 +77,19 @@ struct htmlatts *attlist::GetAttribute(const char *name)
     return (struct htmlatts *) Enumerate(IsAttrib, name);
 }
 
-char *skipwhitespace(const char *s)
+static char *skipwhitespace(const char *s)
 {
     while (*s && isspace(*s)) ++s;
     return (char *)s;
 }
 
-char *skiptokenchars(const char *s)
+static char *skiptokenchars(const char *s)
 {
     while (*s && !isspace(*s) && *s != '=') ++s;
     return (char *)s;
 }
 
-char *skipstring(const char *s)
+static char *skipstring(const char *s)
 {
     while (*s && *s != '"') ++s;
     return (char *)s;
@@ -146,7 +146,7 @@ char *attlist::MakeIntoString()
     /* let's find out how much space we need */
     len = 1;	/* start out at 1 to account for the end of string char */
     Start();
-    while (temp=(struct htmlatts *) Data()) {
+    while ((temp=(struct htmlatts *) Data())) {
 	if (temp->value && strlen(temp->value) > 0)
 	    len += strlen(temp->name) + strlen(temp->value) +2/* space and = */ +(2*!!temp->quoted)/* quotes */;
 	else
@@ -163,7 +163,7 @@ char *attlist::MakeIntoString()
     /* fill the tag */
     attributes[0] = '\0';
     Start();
-    while (temp=(struct htmlatts *)Data()) {
+    while ((temp=(struct htmlatts *)Data())) {
 	if (attributes[0]) strcat(attributes, " ");
 	strcat(attributes, temp->name);
 	if (temp->value && strlen(temp->value) > 0) {
@@ -177,7 +177,7 @@ char *attlist::MakeIntoString()
 }
 
 
-boolean ClearAtts(char *attsneak, char *rock)
+static boolean ClearAtts(char *attsneak, char *rock)
 {
     struct htmlatts *attrib= (struct htmlatts *)attsneak;
     if (attrib->name) free((char *)attrib->name);

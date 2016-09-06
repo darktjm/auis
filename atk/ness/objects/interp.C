@@ -278,7 +278,6 @@ SigHandler(int) {
 */
 	void
 initializeEnvt() {
-	short i;
 	static boolean Initialized = FALSE;
 	if (Initialized) 
 		return;
@@ -502,20 +501,15 @@ stackArg(union  argType  *arg, TType  type) {
 }
 #endif
 
-#define FETCHADDR(iar) (iar+=4, fetchaddr(iar-4))
+#define FETCHADDR(iar) (iar+=sizeof(void *), fetchaddr(iar-sizeof(void *)))
 	static struct callnode *
 fetchaddr(unsigned char *iar) {
-	union {
-		struct callnode *call;
-		unsigned long symloc;
-	} pcall;
-	unsigned char c0, c1, c2, c3;
-	c0 = *iar++;	/* hi end */
-	c1 = *iar++;
-	c2 = *iar++;
-	c3 = *iar++;	/* lo end */
-	pcall.symloc = (c0 << 24) | (c1 << 16) | (c2 << 8) | c3;
-	return pcall.call;
+	unsigned long symloc = 0, i;
+	for(i = 0; i < sizeof(void *); i++) {
+		symloc <<= 8;
+		symloc += *iar++;
+	}
+	return (struct callnode *)symloc;
 }
 
 
@@ -548,6 +542,14 @@ QueryReadOnly(class ness  *ness, class simpletext  *s,
 		}
 	}
 	RunError(msg, iar);
+}
+
+/* this is a separate function to avoid many "variable <x> may be clobbered" warnings */
+/* hopefully the compiler won't just in-line the code and ignore the clobberings */
+/* I really ought to change this to use C++ exceptions - tjm */
+static int my_setjmp(void)
+{
+    return setjmp(ExecutionExit);
 }
 
 	static long
@@ -599,7 +601,7 @@ interpretNess(short  func, ATK  *arg, class ness  *ness) {
 	long objlen = (ObjectCode)->GetLength();
 	long nextiar;		/* beginning of func */
 	long lengthgotten;
-	long CondCode;		/* set by compares; tested by branches
+	long CondCode = 0;		/* set by compares; tested by branches
 					0: EQ    1:GT   -1:LT   -2:error */
 	SIGNAL_RETURN_TYPE (*oldBus)(int)=NULL, (*oldSeg)(int)=NULL; 
 				/* save signal hndlrs */
@@ -644,8 +646,8 @@ interpretNess(short  func, ATK  *arg, class ness  *ness) {
 	gocount = 0;
 	osi_GetTimes(&starttime);
 
-	if ((exitcode=setjmp(ExecutionExit)) != 0) {
-		struct errornode *msg;
+	if ((exitcode=my_setjmp()) != 0) {
+		struct errornode *msg = NULL;
 
 		/* return here from longjmp after execution terminates
 			 either an error or normal end of execution */
@@ -653,7 +655,7 @@ interpretNess(short  func, ATK  *arg, class ness  *ness) {
 		/* reset the destination of the error longjmp
 				(in case popValue fails) */
 /* printf("ExitCode: %d\n", exitcode); */
-		if (setjmp(ExecutionExit) == 0) {
+		if (my_setjmp() == 0) {
 			/* setjmp returns 0 when first called */
 			InterpretationInProgress = NULL;
 
@@ -1084,7 +1086,7 @@ brancher: {
 	}	break;
 	case 't':	{	/* compare strings */
 		long i, j, k;
-		long len, ilen, jlen, d;
+		long len, ilen, jlen, d = 0;
 		class simpletext *itext, *jtext;
 		class nessmark *left, *right;
 
@@ -1270,27 +1272,18 @@ brancher: {
 	}	break;
 	case 'C':	{	/* call an unknown function on the object atop stack */
 			/* operand is four bytes giving address of a callnode  */
-		union {
-			struct callnode *call;
-			unsigned long symloc;
-		} pcall;
-		unsigned char c0, c1, c2, c3;
-		c0 = *iar++;	/* hi end */
-		c1 = *iar++;
-		c2 = *iar++;
-		c3 = *iar++;	/* lo end */
-		pcall.symloc = (c0 << 24) | (c1 << 16) | (c2 << 8) | c3;
+		struct callnode *call = FETCHADDR(iar);
 
 		NSPstore = NSP;
-		if (pcall.call->variety == callSym)
+		if (call->variety == callSym)
 			/* go find out what is being called and check arg types
-				This will CHANGE pcall.call->variety */
-			callCheck(pcall.call, iar-5, ness);
+				This will CHANGE call->variety */
+			callCheck(call, iar-sizeof(void *)-1, ness);
 
 		/* now execute function as C code or Ness code */
-		if (pcall.call->variety == callNess) {
+		if (call->variety == callNess) {
 			PrevAddr = iar;
-			nextiar = ness_Globals[pcall.call->where.Nproc].e.s.v->
+			nextiar = ness_Globals[call->where.Nproc].e.s.v->
 						GetPos();
 			iar = (unsigned char *)(ObjectCode)->GetBuf( 
 					nextiar, 1, &lengthgotten);
@@ -1298,7 +1291,7 @@ brancher: {
 		else {
 			/* callC, callPE, callGet, callSet, 
 				callMethod, callClProc */
-			callCfunc(pcall.call, iar-5, ness);
+			callCfunc(call, iar-1-sizeof(void *), ness);
 			NSP = NSPstore;
 		}
 	}	break;
@@ -1320,7 +1313,7 @@ brancher: {
 		NSP = NSPstore;
 	}	break;
 	case 'G':	 {	/* make inset have input focus */
-		class view *v;
+		class view *v = NULL;
 		if (NSP->p.hdr != ptrHdr || NSP->p.v == NULL 
 				|| ! (NSP->p.v)->IsType( viewClass)) 
 			 RunError(":Arg was not a pointer to a view", iar-1);
@@ -1528,7 +1521,6 @@ brancher: {
 	}	break;
 	case 'Q':  {	/* return from function call */
 		long eltsize;
-		class simpletext *oldtext;
 		union stackelement *tsp = NSP,
 			*targ = (union stackelement *)(((unsigned long)FramePtr) 
 					+ sizeof(struct frameelt)
@@ -1607,7 +1599,7 @@ brancher: {
 		}
 	}	break;
 	case 'S':	{	/* get current selection as a marker */
-		class textview *v;
+		class textview *v = NULL;
 		unsigned char *opiar = iar-1;
 		unsigned char op = *iar++;
 		if (NSP->p.hdr != ptrHdr ||  
@@ -1647,7 +1639,6 @@ brancher: {
 		unsigned char *opiar = iar-1;
 		unsigned char op = *iar++;
 		struct ptrstkelt *src, *dest;
-		long t;
 		switch (op) {
 		case 'k':		/* load from ness_Globals */
 			src = GLOBADDR(p);
@@ -1842,7 +1833,7 @@ brancher: {
 
 	case 'Y':	{	/*  setcurrentselection(textview, mark) */
 		struct ptrstkelt *p;
-		class textview *t;
+		class textview *t = NULL;
 		class nessmark *n = FETCHMARK(NSP);
 		p = (struct ptrstkelt *)(&(&NSP->s)[1]);
 		if (p->hdr != ptrHdr  ||

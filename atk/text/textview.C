@@ -104,9 +104,7 @@ static void hsetframe(textview *self, long position, long numerator, long denomi
 static void hendzone(textview *self, int end, enum view_MouseAction action);
 static long hwhatisat(textview *self, long numerator, long denominator);	
 
-extern void textview_DestroyPrintingLayout(class textview  *txtv);
-extern void textview_DestroyPrintingLayoutPlan(class textview  *txtv);
-extern void textview_InitializePS();
+#include "shared.h"
 
 static const struct scrollfns scrollInterface = {(scroll_getinfofptr)getinfo, (scroll_setframefptr)setframe, (scroll_endzonefptr)endzone, (scroll_whatfptr)whatisat};
 static const struct scrollfns hscrollInterface = {(scroll_getinfofptr)hgetinfo,
@@ -436,9 +434,9 @@ boolean textview_PrevCharIsNewline(class text *self, long pos)
     return FALSE;			
 }
 
-long textview_LineStart(class textview *tv, long curx, long cury, long xs, long ys, long pos, long *lend=NULL, long *lheight=0) {
+long textview_LineStart(class textview *tv, long curx, long cury, long xs, long ys, long pos, long *lend, long *lheight) {
     struct formattinginfo info;
-    long p2=ReverseNewline(Text(tv), pos), p3;
+    long p2=ReverseNewline(Text(tv), pos);
     long height;
     class mark *lob=new mark;
     if(lob==NULL) return pos;
@@ -650,11 +648,10 @@ void textview_ComputeViewArea(class textview *tv, const struct rectangle &area, 
 }
 
 long textview_ExposeRegion(class textview *tv, long pos1, long rlen, class view *inset, const struct rectangle &area, struct rectangle &hit, long &off, long extra) {
-    struct formattinginfo info;
     if(pos1>Text(tv)->GetLength()) pos1=Text(tv)->GetLength();
     long pos2=pos1+rlen-1; // could be <pos1!
     if(pos2>Text(tv)->GetLength()) pos2=Text(tv)->GetLength();
-    long bx, by, curx, cury, xs, ys;
+    long curx, cury, xs, ys;
     long pos;
     long p1;
     long totalscroll=0;
@@ -910,12 +907,11 @@ void textviewInterface::Absolute(long totalx, long x, long totaly, long y) {
 	double pos=((double)y/totaly)*(Text(tv)->GetLength());
 	long tpos, rpos;
 	long lend=0;
-	long curx, cury, xs, ys, off, extra, height=0;
-	struct rectangle lb, hit;
+	long curx, cury, xs, ys, off, height=0;
+	struct rectangle lb;
 	if(pos<0.0) pos=0.0;
 	tpos=(long)pos;
 	tv->GetLogicalBounds(&lb);
-	extra=lb.height/2;
 	textview_ComputeViewArea(tv, lb, curx, cury, xs, ys);
 	rpos=textview_LineStart(tv, curx, cury, xs, ys, tpos, &lend, &height);
 	if(y<=0) off=0;
@@ -978,7 +974,7 @@ void textviewInterface::Shift(scroll_Direction dir) {
 	    if (tob==NULL) return;
 	    tob->SetPos(newpos);
 	    long th=0;
-	    long height = tv->LineRedraw( textview_GetHeight, tob, 0, 0, 0, 0, FALSE, NULL, &th, &info);
+	    tv->LineRedraw( textview_GetHeight, tob, 0, 0, 0, 0, FALSE, NULL, &th, &info);
 	    delete tob;
 	    if(dist>th && dist>30) {
 		scrollback(tv, th);
@@ -1035,7 +1031,7 @@ void textviewInterface::Extreme(scroll_Direction dir) {
 	tv->SetTopPosition(0);
     } else if(dir == scroll_Down) {
 	long len=Text(tv)->GetLength();
-	long lend, lheight, off;
+	long lend, lheight;
 	long curx, cury, xs, ys;
 	struct rectangle lb;
 	tv->GetLogicalBounds(&lb);
@@ -1319,7 +1315,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
     int line;
     int textLength = (Text(self))->GetLength();
     int curx, cury, height, force, cStart, cEnd, mStart, mLength, csx;
-    int csy, csh, csb, cex, cey, ceh, ceb, ysleft, xs, ys, t,stopline,redrawline;
+    int csy, csh, csb, cex, cey, ceh, ceb, ysleft, xs, ys, stopline,redrawline;
     boolean cursorVisible = 0;
     boolean changed;
     int cont;		/* force continuation of redraw */
@@ -1330,7 +1326,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
     struct point tempDstOrigin;	/* Temps for graphics operations */
     struct formattinginfo info;
     long textheight;
-    long bx, by, bxm;
+    long bx, by;
     style *globalStyle;
 
     if(self->force) {
@@ -2433,11 +2429,12 @@ void textview::ReceiveInputFocus()
     this->keystate->next = NULL;
     (this->menus)->SetMask( textview_NoMenus);
     (this)->PostKeyState( this->keystate);
-    if ( this->editor == VI )
+    if ( this->editor == VI ) {
 	if ( this->viMode == COMMAND )
 	    message::DisplayString(this, 0, "Command Mode");
         else
 	    message::DisplayString(this, 0, "Input Mode");
+    }
     (this)->WantUpdate( this);
 }
 
@@ -2475,8 +2472,6 @@ void textview::SetDotPosition(long  newPosition)
 
 void textview::SetDotLength(long  newLength)
 {
-    class im *im=(this)->GetIM();
-
     if (newLength < 0)
 	newLength = 0;
     HandleSelection(this, newLength, TRUE);
@@ -3139,17 +3134,13 @@ static void scrollback(class textview *tv,long target) {
 
 static void scrollforward(class textview *tv, long target) {
     long pos=tv->GetTopPosition();
-    long dist=0, lines=0;
-    long newpos;
+    long dist=0;
     long off;
-    struct linedesc *line;
-    long npos=pos;
     class mark *tob=new mark;
     struct formattinginfo info;
     long height, curx, cury, xs, ys, ysleft;
-    long top;
     class text *t=Text(tv);
-    long textheight=0,textheight2;
+    long /*textheight=0,*/textheight2;
     struct rectangle vb;
     tv->GetLogicalBounds(&vb);
     textview_ComputeViewArea(tv, vb, curx, cury, xs, ys);
@@ -3171,7 +3162,9 @@ static void scrollforward(class textview *tv, long target) {
 	tob->SetLength(0);
 	height = tv->LineRedraw( textview_GetHeight, tob, curx, cury, xs, ysleft, FALSE, NULL, &textheight2, &info);
 	if(dist+height>target) break;
+#if 0
 	textheight=textheight2;
+#endif
 	dist+=height;
 	pos+=info.lineLength;
     }
@@ -3253,7 +3246,7 @@ static void CalculateLineHeight(class textview  *self, unsigned short *cw=NULL, 
 view_DSattributes textview::DesiredSize(long  width , long  height, enum view_DSpass  pass, long  *desiredwidth , long  *desiredheight)
 {
     class mark *tm;
-    long  len, txheight,totheight,curx,cury,xs,ys = 0,maxlines,newwidth,sw;
+    long  len, txheight,totheight,curx,cury,xs,ys = 0,newwidth;
     struct formattinginfo info;
     long bx, by, bxm;
     unsigned short lh, cw;
@@ -3315,7 +3308,6 @@ view_DSattributes textview::DesiredSize(long  width , long  height, enum view_DS
         width=fwidth;
     }
     
-    sw = width;
     totheight = 0;
     cury = by;
     curx = bxm;
@@ -3385,8 +3377,8 @@ view_DSattributes textview::DesiredSize(long  width , long  height, enum view_DS
 void textview::GetOrigin(long  width, long  height, long  *originX, long  *originY)
 {
     struct formattinginfo info;
-    long cury=(hasApplicationLayer ? by : eby);
-    long txheight=(this)->LineRedraw( textview_GetHeight, this->top, 0, 0, width,
+    /* long cury=(hasApplicationLayer ? by : eby); */
+    (this)->LineRedraw( textview_GetHeight, this->top, 0, 0, width,
                         height, 0, NULL, NULL, &info);
     *originY = info.lineAbove + (hasApplicationLayer ? by : eby);
     /* *originY = height - txheight + info.lineAbove - cury; */
@@ -3418,7 +3410,6 @@ struct textv_viewfind {
 
 static boolean findviewsplot(struct textv_viewfind *result, class text *text, long pos, class environment *env)
 {
-    char *foo;
     class viewref *vr;
     class view *v;
 
@@ -3748,7 +3739,7 @@ long textview::GetPrintOption(class atom *popt)
 	gotit = this->GetDataObject()->Get(popt, &A_printoption, &value);
 	if (!gotit) {
 	    const char *str;
-	    if (str = environ::Get("PrintContents")) {
+	    if ((str = environ::Get("PrintContents"))) {
 		value = !(*str == 'n' || *str == 'N');
 	    }
 	    else
@@ -3760,7 +3751,7 @@ long textview::GetPrintOption(class atom *popt)
 	gotit = this->GetDataObject()->Get(popt, &A_printoption, &value);
 	if (!gotit) {
 	    const char *str;
-	    if (str = environ::Get("PrintIndex")) {
+	    if ((str = environ::Get("PrintIndex"))) {
 		value = !(*str == 'n' || *str == 'N');
 	    }
 	    else
@@ -3772,7 +3763,7 @@ long textview::GetPrintOption(class atom *popt)
 	gotit = this->GetDataObject()->Get(popt, &A_printoption, &value);
 	if (!gotit) {
 	    const char *str;
-	    if (str = environ::Get("Endnotes")) {
+	    if ((str = environ::Get("Endnotes"))) {
 		value = !(*str == 'n' || *str == 'N');
 	    }
 	    else
@@ -3784,7 +3775,7 @@ long textview::GetPrintOption(class atom *popt)
 	gotit = this->GetDataObject()->Get(popt, &A_printoption, &value);
 	if (!gotit) {
 	    const char *str;
-	    if (str = environ::Get("Duplex")) {
+	    if ((str = environ::Get("Duplex"))) {
 		value = !(*str == 'n' || *str == 'N');
 	    }
 	    else
@@ -3823,7 +3814,6 @@ struct view_printoptlist *textview::PrintOptions()
 
 boolean  textview::InitializeClass()
     {
-    extern int drawtxtv_tabscharspaces;
     A_boolean = atom::Intern("boolean");
     A_printoption = atom::Intern("printoption");
 
@@ -4032,7 +4022,7 @@ static void DoCopySelection(class textview  *self, FILE  *cutFile, long  pos , l
     (d->rootEnvironment)->GetInnerMost( pos);
     nextChange = (d->rootEnvironment)->GetNextChange( pos);
 
-    if (UseDataStream = ((nextChange <= len|| stringmatch(d,pos,"\\begindata")) && (d)->GetExportEnvironments()))
+    if ((UseDataStream = ((nextChange <= len|| stringmatch(d,pos,"\\begindata")) && (d)->GetExportEnvironments())))
 	fprintf(cutFile, "\\begindata{%s, %d}\n",
 		(d)->GetCopyAsText() ? "text": (d)->GetTypeName(),
 		/* d->header.dataobject.id */ 999999);

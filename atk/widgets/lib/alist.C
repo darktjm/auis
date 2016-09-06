@@ -101,7 +101,7 @@ AList::~AList() {
     delete notselected;
 }
 
-AList::AList() : selectionFormula(this), selCountAct(SelCount, this), itemsAct(Items, this), stateFormula(this), rowsAct(Rows, this), countAct(Count, this) {
+AList::AList() : rowsAct(Rows, this), selCountAct(SelCount, this), itemsAct(Items, this), countAct(Count, this), selectionFormula(this), stateFormula(this) {
     ATKinit;
 
     SLOT(itemCount);

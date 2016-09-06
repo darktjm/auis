@@ -93,14 +93,14 @@ struct _HTStyle {
 
 /*	Create a new style
 */
-PUBLIC HTStyle* HTStyleNew NOARGS
+PUBLIC HTStyle* HTStyleNew (void)
 {
     return (HTStyle *)calloc(1, sizeof(HTStyle));
 }
 
 /*	Create a new style with a name
 */
-PUBLIC HTStyle* HTStyleNewNamed ARGS1 (CONST char *,name)
+PUBLIC HTStyle* HTStyleNewNamed  (CONST char *,name)
 {
     HTStyle * self = HTStyleNew();
     StrAllocCopy(self->name, name);
@@ -110,7 +110,7 @@ PUBLIC HTStyle* HTStyleNewNamed ARGS1 (CONST char *,name)
 
 /*	Free a style
 */
-PUBLIC HTStyle * HTStyleFree ARGS1 (HTStyle *,self)
+PUBLIC HTStyle * HTStyleFree  (HTStyle *,self)
 {
     if (self->name) free(self->name);
     if (self->SGMLTag) free(self->SGMLTag);
@@ -124,7 +124,7 @@ PUBLIC HTStyle * HTStyleFree ARGS1 (HTStyle *,self)
 
 #ifdef HTML2_ONLY
 
-PUBLIC HTStyle * HTModfyStyle ARGS3(
+PUBLIC HTStyle * HTModfyStyle (
 	   HTStyle *, old,
 	   void *, nesting,
            int, element_number)
@@ -152,7 +152,7 @@ PUBLIC HTStyle * HTModfyStyle ARGS3(
 
 /*	Searching for styles:
 */
-HTStyle * HTStyleNamed ARGS2 (HTStyleSheet *,self, CONST char *,name)
+HTStyle * HTStyleNamed  (HTStyleSheet *,self, CONST char *,name)
 {
     HTStyle * scan;
     for (scan=self->styles; scan; scan=scan->next)
@@ -166,7 +166,7 @@ HTStyle * HTStyleNamed ARGS2 (HTStyleSheet *,self, CONST char *,name)
 /*	Add a style to a sheet
 **	----------------------
 */
-HTStyleSheet * HTStyleSheetAddStyle ARGS2
+HTStyleSheet * HTStyleSheetAddStyle 
   (HTStyleSheet *,self, HTStyle *,style)
 {
     style->next = 0;		/* The style will go on the end */
@@ -183,7 +183,7 @@ HTStyleSheet * HTStyleSheetAddStyle ARGS2
 
 /*	Remove the given object from a style sheet if it exists
 */
-HTStyleSheet * HTStyleSheetRemoveStyle ARGS2
+HTStyleSheet * HTStyleSheetRemoveStyle 
   (HTStyleSheet *,self, HTStyle *,style)
 {
     if (self->styles == style) {
@@ -204,7 +204,7 @@ HTStyleSheet * HTStyleSheetRemoveStyle ARGS2
 /*	Create new style sheet
 */
 
-HTStyleSheet * HTStyleSheetNew NOARGS
+HTStyleSheet * HTStyleSheetNew (void)
 {
     HTStyleSheet * self = (HTStyleSheet *)malloc(sizeof(*self));
 
@@ -219,7 +219,7 @@ HTStyleSheet * HTStyleSheetNew NOARGS
 
 /*	Free off a style sheet pointer
 */
-HTStyleSheet * HTStyleSheetFree ARGS1 (HTStyleSheet *,self)
+HTStyleSheet * HTStyleSheetFree  (HTStyleSheet *,self)
 {
     HTStyle * style;
     while((style=self->styles)!=0) {

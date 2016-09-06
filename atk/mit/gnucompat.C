@@ -548,7 +548,7 @@ static void enumerate (class textview  *self, long  key)
 	}
 	else {
 	    (void) (self)->GetStyleInformation( &sv, pos, NULL);
-	    if (sv.CurLeftMargin == left && sv.CurIndentation == indent)
+	    if (sv.CurLeftMargin == left && sv.CurIndentation == indent) {
 		if ((count = parse_num (txt, pos, end, &cur_num)) > 0) {
 		    if (found_the_number) {
 			if (the_number != cur_num) {
@@ -587,6 +587,7 @@ static void enumerate (class textview  *self, long  key)
 		    modified = 1;
 		    the_number++;
 		}
+	    }
 	}
 	if (one_only) break;
 	/* go to end of paragraph */

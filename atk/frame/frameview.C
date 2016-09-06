@@ -58,7 +58,7 @@ ATKdefineRegistry(frameview, textview, frameview::InitializeClass);
 static int CalculateLineHeight(class frameview  *self);
 static void EraseMessage(class frameview  *self);
 static void CleanMessageState (class frameview  *self);
-static enum keymap_Types KeyEraseMessage(class frameview  *self, long  key, ATK   *entry, long  *rockP);
+static enum keymap_Types KeyEraseMessage(long s, long  key, struct proctable_Entry **entry, long  *rockP);
 static void TransientMessage(class frameview  *self, const char  *message);
 static long Punt(ATK *self, long  key);
 static void CompletionMessage(class frameview  *self, enum message_CompletionCode  code);
@@ -513,7 +513,6 @@ static void HelpWork(struct helpRock  *helpRock, enum message_HelpItem  helpType
 void frameview::Help(long  key)
 {
     class framemessage *messageLine = this->messageLine;
-    class buffer *LastBuffer;
 
     /* For now, there is no help for frames without buffers. */
 
@@ -591,7 +590,7 @@ void frameview::Help(long  key)
                 (helpDoc)->AddStyle( 0, helpRock.insertPos, boldStyle);
 	    }
 
-            LastBuffer = (messageLine->frame)->SetHelpBuffer(
+            /* class buffer *LastBuffer = */ (messageLine->frame)->SetHelpBuffer(
                 helpBuffer, FALSE);
 	/*    if ((messageLine->realBuffer == NULL))
 		messageLine->realBuffer = LastBuffer;

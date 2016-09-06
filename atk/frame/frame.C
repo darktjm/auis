@@ -611,12 +611,13 @@ void frame::SetBuffer(class buffer  *buffer, boolean  setInputFocus)
 	    (this)->VFixed( this->childView, this->messageView, (this->messageView)->GetLogicalHeight(), ResizableMessageLine);
 	    if(inputFocus || targetView) {
 		(this)->SetReturnFocus( inputFocus==NULL ? targetView : inputFocus);
-		if (setInputFocus)
+		if (setInputFocus) {
 		    if (inputFocus == NULL) {
 			if(targetView) (targetView)->WantInputFocus( targetView);
 		    } else {
 			(inputFocus)->WantInputFocus( inputFocus);
 		    }
+		}
 	    }
 #if 1
         }
@@ -905,7 +906,7 @@ static void SetTitle(class frame  *self)
 	    if (self->buffer != NULL){
 		if((self->buffer)->GetScratch())
 		    self->dataModified = FALSE;
-		else if (self->dataModified = ((self->buffer)->GetWriteVersion() < ((self->buffer)->GetData())->GetModified())) {
+		else if ((self->dataModified = ((self->buffer)->GetWriteVersion() < ((self->buffer)->GetData())->GetModified()))) {
 		    --maxLen; /* Make room for '*' */
 		}
 		if ((self->buffer)->GetReadOnly()) {
@@ -1009,7 +1010,7 @@ frame::Hit(enum view_MouseAction  action, long  x , long  y , long  nclicks)
 	if (this->commandEnable && (action == view_LeftFileDrop || action == view_RightFileDrop)) {
 	    char **files;
 	    int i;
-	    class buffer *b;
+	    class buffer *b = NULL;
 	    class frame *f;
 	    class view *v=this;
 	    class im *im = (this)->GetIM();
@@ -1610,7 +1611,7 @@ void frame::WantUpdate(class view  *v)
     }
 }
 /* destroywindowlater() performs the WindowManager-requested window destroy operation AFTER the im is back in its event loop -RSK*/
-void destroywindowlater(void *pdata, long time)
+static void destroywindowlater(void *pdata, long time)
 {
     framecmds::DeleteWindow((frame *)pdata);
 }

@@ -40,7 +40,7 @@ Library of Common Code</A>.
 #include "HTAccess.h"
 
 typedef struct _HTExtParseStruct HTExtParseStruct;
-typedef void (*CallClient) PARAMS((struct _HTExtParseStruct *me));
+typedef void (*CallClient) (struct _HTExtParseStruct *me);
 struct _HTExtParseStruct {
 	CallClient	call_client;
 #if 0
@@ -54,16 +54,16 @@ struct _HTExtParseStruct {
 	HTRequest *	request;      /* the request structure */
 };
 
-/*extern HTStream * HTExtParse PARAMS((void (*CallMeArg)()));*/
+/*extern HTStream * HTExtParse (void (*CallMeArg)());*/
 
-/* extern void HTExtParse PARAMS((HTExtParseStruct * eps)); */
+/* extern void HTExtParse (HTExtParseStruct * eps); */
 
-extern HTStream* HTExtParse PARAMS((
+extern HTStream* HTExtParse (
 	HTRequest *		request,
 	void *			param,
 	HTFormat		input_format,
 	HTFormat		output_format,
-	HTStream *		output_stream));
+	HTStream *		output_stream);
 
 
 #endif

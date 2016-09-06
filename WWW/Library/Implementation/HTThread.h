@@ -26,7 +26,7 @@ Initiation
    currently done in the private HTAccessInit function.
    
  */
-extern BOOL HTThreadInit        NOPARAMS;/*
+extern BOOL HTThreadInit        (void);/*
 
    NOTE It is VERY important that this one is called before the first request, as
    otherwise the socket bit arrays are uninitialized.
@@ -38,8 +38,8 @@ Registration of a Thread
    deletion of the HTNetInfo data structure.
    
  */
-extern void HTThread_new        PARAMS((HTNetInfo * new_net));
-extern int  HTThread_clear      PARAMS((HTNetInfo * old_net));/*
+extern void HTThread_new        (HTNetInfo * new_net);
+extern int  HTThread_clear      (HTNetInfo * old_net);/*
 
 Get Bit-arrays for Select()
 
@@ -47,7 +47,7 @@ Get Bit-arrays for Select()
    registered for READ and WRITE.
    
  */
-extern int HTThreadGetFDInfo    PARAMS((fd_set * read, fd_set * write));/*
+extern int HTThreadGetFDInfo    (fd_set * read, fd_set * write);/*
 
 Registration of the State of a Socket
 
@@ -70,19 +70,19 @@ typedef enum _HTThreadAction {
 } HTThreadAction;/*
 
  */
-extern void HTThreadState PARAMS((SOCKFD sockfd, HTThreadAction action));/*
+extern void HTThreadState (SOCKFD sockfd, HTThreadAction action);/*
 
    This function makes life easier if you want to mark all sockets as interrupted.
    
  */
-extern void HTThreadMarkIntrAll PARAMS((CONST fd_set * fd_user));/*
+extern void HTThreadMarkIntrAll (CONST fd_set * fd_user);/*
 
 Is a Thread Interrupted?
 
    This function returns YES if the socket is registered as interrupted
    
  */
-extern BOOL HTThreadIntr        PARAMS((SOCKFD sockfd));/*
+extern BOOL HTThreadIntr        (SOCKFD sockfd);/*
 
 Any Threads Registered?
 
@@ -90,7 +90,7 @@ Any Threads Registered?
    sockets. Otherwise it returns NO.
    
  */
-extern BOOL HTThreadActive      NOPARAMS;/*
+extern BOOL HTThreadActive      (void);/*
 
 Select an Active Thread
 
@@ -98,8 +98,8 @@ Select an Active Thread
    one of them and finds the correseponding request structure.
    
  */
-extern HTRequest *HTThread_getRequest   PARAMS((CONST fd_set * fd_read,
-                                                CONST fd_set * fd_write));
+extern HTRequest *HTThread_getRequest   (CONST fd_set * fd_read,
+                                                CONST fd_set * fd_write);
 
 #endif/*
 

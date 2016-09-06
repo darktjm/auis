@@ -45,15 +45,15 @@ Library of Common Code</A>.
 
 <H3>Split Filename to suffixes</H3>
 <PRE>
-extern int HTSplitFilename PARAMS((char *	s_str,
-				   char **	s_arr));
+extern int HTSplitFilename (char *	s_str,
+				   char **	s_arr);
 </PRE>
 
 <H3>Get Content Description According to Suffixes</H3>
 
 <PRE>
-extern HTContentDescription * HTGetContentDescription PARAMS((char ** actual,
-							      int	  n));
+extern HTContentDescription * HTGetContentDescription (char ** actual,
+							      int	  n);
 
 #define MULTI_SUFFIX ".multi"   /* Extension for scanning formats */
 #define MAX_SUFF 15		/* Maximum number of suffixes for a file */
@@ -62,19 +62,19 @@ extern HTContentDescription * HTGetContentDescription PARAMS((char ** actual,
 <H2>Convert filenames between local and WWW formats</H2>
 
 <PRE>
-extern char * HTLocalName PARAMS((CONST char * name));
+extern char * HTLocalName (CONST char * name);
 </PRE>
 
 <H2>Make a WWW name from a full local path name</H2>
 
 <PRE>
-extern char * WWW_nameOfFile PARAMS((const char * name));
+extern char * WWW_nameOfFile (const char * name);
 </PRE>
 
 <H2>Generate the name of a cache file</H2>
 
 <PRE>
-extern char * HTCacheFileName PARAMS((CONST char * name));
+extern char * HTCacheFileName (CONST char * name);
 </PRE>
 
 <H2><A NAME="z1">Define the Representation for a File Suffix</A></H2>
@@ -105,27 +105,27 @@ the quality of such files (0.0..1.0)
 ** Example:  HTSetSuffix(".ps", "application/postscript", "8bit", NULL, 1.0);
 */
 
-extern void HTSetSuffix PARAMS((CONST char *	suffix,
+extern void HTSetSuffix (CONST char *	suffix,
 			       CONST char *	representation,
 			       CONST char *	encoding,
 			       CONST char *	language,
-			       double		quality));
+			       double		quality);
 
-extern void HTAddType PARAMS((CONST char *	suffix,
+extern void HTAddType (CONST char *	suffix,
 			      CONST char *	representation,
 			      CONST char *	encoding,
-			      double		quality));
+			      double		quality);
 
-extern void HTAddEncoding PARAMS((CONST char *	suffix,
+extern void HTAddEncoding (CONST char *	suffix,
 				  CONST char *	encoding,
-				  double		quality));
+				  double		quality);
 
-extern void HTAddLanguage PARAMS((CONST char *	suffix,
+extern void HTAddLanguage (CONST char *	suffix,
 				  CONST char *	language,
-				  double		quality));
+				  double		quality);
 
 
-extern void HTFile_deleteSuffixes NOPARAMS;
+extern void HTFile_deleteSuffixes (void);
 </PRE>
 
 <H2>Get Representation and Encoding from file name</H2>
@@ -143,18 +143,18 @@ NAME="z2" HREF="#z1">HTSetSuffix</A> .
 <DD> The language.
 </DL>
 
-<PRE>extern HTFormat HTFileFormat PARAMS((
+<PRE>extern HTFormat HTFileFormat (
 		CONST char * 	filename,
 		HTAtom ** 	pEncoding,
-		HTAtom **	pLanguage));
+		HTAtom **	pLanguage);
 
 
 </PRE>
 <H2>Determine file value from file name</H2>
 <PRE>
 
-extern double HTFileValue PARAMS((
-		CONST char * filename));
+extern double HTFileValue (
+		CONST char * filename);
 
 
 </PRE>
@@ -171,7 +171,7 @@ and can be written to.
 <H3>Bugs</H3>Isn't there a quicker way?
 <PRE>
 
-extern BOOL HTEditable PARAMS((CONST char * filename));
+extern BOOL HTEditable (CONST char * filename);
 
 
 </PRE>
@@ -191,8 +191,8 @@ string if one has been found, else
 NULL.
 </DL>
 
-<PRE>extern CONST char * HTFileSuffix PARAMS((
-		HTAtom* rep)); 
+<PRE>extern CONST char * HTFileSuffix (
+		HTAtom* rep); 
 
 
 

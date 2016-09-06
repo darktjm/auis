@@ -54,12 +54,12 @@
 extern struct TableStruct *Table;
 /* extern struct FileStackStruct *FileStack; */
 
-int offset(), roffset();
+int offset(char *string, char character);
+int roffset(char *string, char character);
 void AbsorbSpace();
 char *makelower();
 
-char *makelower(instruction)
-     char *instruction;
+char *makelower(char *instruction)
 {
   int i;
   
@@ -89,8 +89,7 @@ void TempPrintList()
 }
 */
 
-int offset(string, character)
-     char *string, character;
+int offset(char *string, char character)
 {
   char *loc;
 
@@ -101,8 +100,7 @@ int offset(string, character)
 }
 
 
-int roffset(string, character)
-     char *string, character;
+int roffset(char *string, char character)
 {
   char *loc;
 
@@ -113,7 +111,7 @@ int roffset(string, character)
 }
 
 
-void usage()
+void usage(void)
 {
   fprintf(stderr, "\nUsage:  %s %s\n\n", me,
 	 "[ezfile [rtffile]] [-t transtable] [-e stderrfile]");
@@ -121,7 +119,7 @@ void usage()
 }  
 
 
-void CloseFiles()
+void CloseFiles(void)
 {
   fputc('}', fout);
 
@@ -132,7 +130,7 @@ void CloseFiles()
 }
 
 
-void AbsorbSpace()
+void AbsorbSpace(void)
 {
   int in;
   char ch;
@@ -148,7 +146,7 @@ void AbsorbSpace()
     }
 }
 
-void AbsorbNewlines()
+void AbsorbNewlines(void)
 /* doesn't handle putting in the proper number of "\par"'s. */
 {
   int in;
@@ -167,7 +165,7 @@ void AbsorbNewlines()
     }
 }
 
-void Newlines()
+void Newlines(void)
 {
    int n = 0;
    int k;

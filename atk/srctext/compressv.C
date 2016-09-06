@@ -220,7 +220,7 @@ boolean compressv::InitializeClass()
 }
 
 /* engulfBoxes snags any compress insets that are butted up against the ends of the specified region, and includes them in the region */
-void engulfBoxes(text *txt, long *ppos, long *plen)
+static void engulfBoxes(text *txt, long *ppos, long *plen)
 {
     while (compress::IsThere(txt,*ppos-1) || ((txt)->GetChar(*ppos-1)=='\n' && compress::IsThere(txt,*ppos-2))) {
 	--*ppos;
@@ -230,7 +230,7 @@ void engulfBoxes(text *txt, long *ppos, long *plen)
 	++*plen;
 }
 
-boolean getLinesFromUser(textview *self, char *rString, const char *prompt, long *pfirst, long *plast)
+static boolean getLinesFromUser(textview *self, char *rString, const char *prompt, long *pfirst, long *plast)
 {
     text *txt=(text *)(self)->GetDataObject();
     char range[32];

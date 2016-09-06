@@ -26,16 +26,4 @@ class htmlenv : public environment {
     class attlist* attribs;
 };
 
-static char *skipwhitespace(char *s)
-{
-    while (*s && isspace(*s)) ++s;
-    return s;
-}
-
-static char *skiptokenchars(char *s)
-{
-    while (*s && !isspace(*s) && *s != '=') ++s;
-    return s;
-}
-
 #endif /* _htmlenv_H_ */

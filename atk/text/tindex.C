@@ -138,10 +138,13 @@ static boolean skipnewlines(class text  *d,long  *pos,long  *len)
 }
 static void printindex(class view  *self, char *usepsstr)
 {
+#if 0
     boolean useps;
+#endif
     int pmode;
 
     pmode = (int)(long)usepsstr;
+#if 0
     if (pmode >= 0 && pmode < 256) {
 #ifdef PSPRINTING_ENV
 	useps = TRUE;
@@ -155,15 +158,19 @@ static void printindex(class view  *self, char *usepsstr)
 	else
 	    useps = TRUE;
     }
+#endif
 
     tindex::PrintIndex((class view *) getrealview(self), pmode);
 }
 static void previewindex(class view  *self, char *usepsstr)
 {
+#if 0
     boolean useps;
+#endif
     int pmode;
 
     pmode = (int)(long)usepsstr;
+#if 0
     if (pmode >= 0 && pmode < 256) {
 #ifdef PSPRINTING_ENV
 	useps = TRUE;
@@ -177,6 +184,7 @@ static void previewindex(class view  *self, char *usepsstr)
 	else
 	    useps = TRUE;
     }
+#endif
 
     tindex::PreviewIndex((class view *) getrealview(self), pmode);
 }
@@ -534,7 +542,7 @@ class text *tindex::BuildIndexText(struct textps_locatag *taglist)
     class environment *env;
     long pos, pos2;
     long rangebeg, rangeend;
-    char buf[128], curchar, thischar, *curterm, *cursubterm;
+    char buf[128], curchar, thischar, *curterm;
     int ix, jx, kx, kkx, len;
 
     if (!res)

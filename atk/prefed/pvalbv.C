@@ -59,12 +59,9 @@ pvalbv::~pvalbv()
 
 class view *pvalbv::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
-    class view *ret;
-    boolean val;
-
     if(action==view_LeftDown) this->activated=(this)->GetSButton()->activated;
 
-    ret=(this)->pvalsbv::Hit( action, x, y, numberOfClicks);
+    (this)->pvalsbv::Hit( action, x, y, numberOfClicks);
     
     if((DATA(this))->GetValue()==NULL) return (class view *)this;
 

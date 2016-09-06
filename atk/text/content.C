@@ -85,7 +85,6 @@ static int indexstyle(const char  *name);
 static struct content_chapentry *addindexentry(class content  *self,long  pos,long  len,struct content_chapentry  **base);
 static struct content_chapentry *insertentry(class content  *self,long  pos,long  len,struct content_chapentry  **base);
 static void NoteStyle(class content  *self,long  pos,long  len,class style  *style);
-static void doshuffle(class content  *self);
 static void checknewline(class content  *self,struct content_chapentry  *cp);
 static boolean updatemark(class text  *d,class mark  *m,boolean  nonum);
 static void mod(class content  *self,struct content_chapentry  **base,boolean  nonum);
@@ -329,7 +328,7 @@ static int number(class content  *self,const char  *string,struct content_chapen
 /*	denumber(self,cp); */
 	pos = (cp->rem)->GetPos();
 	end =  (cp->rem)->GetPos() + (cp->rem)->GetLength() ;
-	for(npos = pos; npos <end && ((c = (src)->GetChar(npos)) == '\t') || c == ' ' || c == '\n'; npos++) ;
+	for(npos = pos; npos <end && (((c = (src)->GetChar(npos)) == '\t') || c == ' ' || c == '\n'); npos++) ;
 	if(npos == end && pos + 1 < npos){
 	    npos = pos + 1;
 	    c = (src)->GetChar(npos);
@@ -737,11 +736,13 @@ static void NoteStyle(class content  *self,long  pos,long  len,class style  *sty
 	 */
     }
 }
+#if 0
 static void doshuffle(class content  *self)
 {
     /* punt for now */
  /*   content_reinit(self);  */
 }
+#endif
 static void checknewline(class content  *self,struct content_chapentry  *cp)
 {
     /* punt for now */

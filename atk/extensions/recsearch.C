@@ -67,7 +67,7 @@ static void DoRecSearch(class im  *self, class view *start, char *givenstr)
     char defSrchString[SRCHSTRLEN], messageBuf[120];
     const char *tp;
     const char *prompt;
-    int pos = 0, gf;
+    int gf;
     boolean defaultExists = FALSE;
     boolean res;
 

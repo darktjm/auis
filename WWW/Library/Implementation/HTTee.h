@@ -16,7 +16,7 @@
  */
 #include "HTStream.h"
 
-extern HTStream * HTTee PARAMS((HTStream* s1, HTStream* s2));
+extern HTStream * HTTee (HTStream* s1, HTStream* s2);
 /*
 
    End of definition  */

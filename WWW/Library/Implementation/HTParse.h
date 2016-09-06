@@ -59,9 +59,9 @@ HTParse:  Parse a URI relative to another URI
   returns                 A pointer to a malloc'd string which MUST BE FREED
                          
  */
-extern char * HTParse  PARAMS(( const char * aName,
+extern char * HTParse  ( const char * aName,
                                 const char * relatedName,
-                                int wanted));/*
+                                int wanted);/*
 
 HTStrip: Strip white space off a string
 
@@ -72,7 +72,7 @@ HTStrip: Strip white space off a string
    All trailing white space is OVERWRITTEN with zero.
    
  */
-extern char * HTStrip PARAMS((char * s));/*
+extern char * HTStrip (char * s);/*
 
 HTSimplify: Simplify a UTL
 
@@ -117,7 +117,7 @@ HTSimplify: Simplify a UTL
    after the last `://' is simplified.
    
  */
-extern char *HTSimplify PARAMS((char *filename));/*
+extern char *HTSimplify (char *filename);/*
 
 HTRelative:  Make Relative (Partial) URI
 
@@ -135,7 +135,7 @@ HTRelative:  Make Relative (Partial) URI
    name later.
    
  */
-extern char * HTRelative PARAMS((const char * aName, const char *relatedName));/*
+extern char * HTRelative (const char * aName, const char *relatedName);/*
 
 HTExpand: Expand a Local Host Name Into a Full Domain Name
 
@@ -144,8 +144,8 @@ HTExpand: Expand a Local Host Name Into a Full Domain Name
    have one entry in the host case and one entry in the document cache.
    
  */
-extern char *HTCanon PARAMS ((  char ** filename,
-                                char *  host));/*
+extern char *HTCanon (  char ** filename,
+                                char *  host);/*
 
 Prevent Security Holes
 
@@ -160,7 +160,7 @@ Prevent Security Holes
   returns                 YES, if the string was modified.      NO, otherwise.
                          
  */
-extern BOOL HTCleanTelnetString PARAMS((char * str));/*
+extern BOOL HTCleanTelnetString (char * str);/*
 
  */
 #endif  /* HTPARSE_H *//*

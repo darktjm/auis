@@ -416,7 +416,7 @@ static long backwardSkipDelimited(modtext *self, long pos, char beg, char end)
 static long matchend(modtext *self, long pos, int fornext)
 {
     int count=1, curr_indent;
-    Dict *word2;
+    Dict *word2 = NULL;
     char buff[256];
 
     while((count>0)&&(--pos>=0)) {
@@ -462,7 +462,7 @@ static int backwardFirstnonwhitespace(modtext *self, long pos)
 }
 
 /* should only get called with one of the following in word:  MODULE, PROCEDURE, BEGIN, VAR, TYPE, CONST */
-int backwardFindProcIndent(modtext *self, long pos, Dict *word)
+static int backwardFindProcIndent(modtext *self, long pos, Dict *word)
 {
     char buff[256], ch;
     Dict *word2;
@@ -509,7 +509,7 @@ int modtext::Indentation(long pos)
 {       
     char buff[256], ch;
     Dict *word;
-    long i,j,k,count,savcount;
+    long i,j,k;
     int indent=0;
     long oldj,temppos, len =GetLength();
 

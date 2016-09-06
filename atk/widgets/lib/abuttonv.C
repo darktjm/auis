@@ -88,6 +88,7 @@ void AButtonv::Init() {
 }
 // see abuttonv.H for the macros used below...
 START_ABUTTONV_MOUSE_METHOD(Arm) {
+    (void)dself; (void)num_clicks; (void)x; (void)y; /* unused */
     if((!Armed())!=(!within)) {
 	SetArmed(within);
     }
@@ -96,11 +97,13 @@ START_ABUTTONV_MOUSE_METHOD(Arm) {
 END_ABUTTONV_MOUSE_METHOD();
 
 START_ABUTTON_MOUSE_FUNC(Disarm) {
+    (void)num_clicks; (void)action; (void)within; (void)x; (void)y; /* unused */
     vself->SetArmed(FALSE);
 }
 END_ABUTTON_MOUSE_FUNC();
 
 START_ABUTTON_MOUSE_FUNC(Activate) {
+    (void)num_clicks; (void)action; /* unused */
     Disarm(self, aux, in, out);
     if(within) {
         // call activateCallback, if any
@@ -134,6 +137,7 @@ START_ABUTTON_MOUSE_FUNC(Activate) {
 END_ABUTTON_MOUSE_FUNC();
 
 START_ABUTTON_CALLBACK_FUNC(Toggle) {
+    (void)vself; /* unused */
     self->SetSet(!self->Set());
 }
 END_ABUTTON_CALLBACK_FUNC();
@@ -141,6 +145,7 @@ END_ABUTTON_CALLBACK_FUNC();
 ASlot_NAME(sibling);
 ASlot_NAME(set);
 START_ABUTTON_CALLBACK_FUNC(RadioToggle) {
+    (void)vself; /* unused */
     if(self->Set()) return;
     self->SetSet(TRUE);
     AWidget *wgt=(AWidget *)self->GetATK(slot_sibling, class_AButton);
@@ -165,6 +170,7 @@ static boolean Init() {
 #define AButtonv_BorderType AShadow_Highlight|AShadow_Default|AShadow_Plain
 
 START_ABUTTONV_CALLBACK_METHOD(WantUpdateMethod) {
+    (void)dself; /* unused */
     WantUpdate(this);
 }
 END_ABUTTONV_CALLBACK_METHOD();
@@ -320,6 +326,7 @@ START_ABUTTONV_CALLBACK_METHOD(LabelMethod) {
 END_ABUTTONV_CALLBACK_METHOD();
 
 START_ABUTTONV_CALLBACK_METHOD(BorderMethod) {
+    (void)dself; /* unused */
     layout.Validate();
     struct rectangle bounds;
     GetLogicalBounds(&bounds);
@@ -382,8 +389,8 @@ lformula(this, &lact, &updateact),
 bformula(this, &bact, &updateact),
 iformula(this, &iact, &updateact),
 layout(this, &layoutact, &updateact),
-size(this, &sizeact),
-scaleFormula(this, &scaleact)
+scaleFormula(this, &scaleact),
+size(this, &sizeact)
 {
     ATKinit;
     highlighted=FALSE;
@@ -535,7 +542,7 @@ void AButtonv::LabelDimensions(long &w, long &h, long *below) {
 	interior.height-=(long)(((long)b->marginHeight*2 +
 	  (long)b->marginTop +
 	  (long)b->marginBottom) * ((double)b->scaleHeight)/uyscale);
-	view_DSattributes result=label->DesiredSize(interior.width, interior.height, pass, &w, &h);
+	label->DesiredSize(interior.width, interior.height, pass, &w, &h);
     }
 }
 
@@ -742,7 +749,6 @@ boolean AButtonv::RecSrchReplace(class dataobject *txt, long pos, long srclen) {
     }
     char *buf;
     const char *ts;
-    long start, len;
     simpletext *srctext;
 
     if(!txt->IsType(class_simpletext)) {
@@ -751,8 +757,6 @@ boolean AButtonv::RecSrchReplace(class dataobject *txt, long pos, long srclen) {
     }
     srctext=(simpletext *)txt;
     ts=b->text;
-    start=rsstart;
-    len=rslen;
     buf=(char *)malloc(strlen(ts)-rslen+srclen+2);
     strncpy(buf,ts,(size_t)rsstart);
     srctext->CopySubString(pos, srclen, buf+rsstart, FALSE);
@@ -853,7 +857,6 @@ void *AButtonv::GetPSPrintInterface(const char *printtype)
 void AButtonv::GetPrintOrigin(long w, long h, long *xoff, long *yoff) {
     CheckLabelView(FALSE);
     CheckIndicator();
-    AButton *dobj = (AButton *)(this->GetDataObject());
     if(label) {
 	    label->GetPrintOrigin(w, h, xoff, yoff);
     } else {

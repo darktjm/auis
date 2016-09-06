@@ -44,7 +44,7 @@ ATKdefineRegistry(mark, ATK, NULL);
 class mark *mark::Allocate()
 {
 
-    static int lastIndex = NUMPERBLOCK; /* Force a block malloc on first call. */
+    static unsigned int lastIndex = NUMPERBLOCK; /* Force a block malloc on first call. */
 
     if (freeMarks) {
         class mark *tempMark = freeMarks;
@@ -115,7 +115,7 @@ void mark::UpdateMarks(long  pos, long  size)
 			(mark)->SetLength( (mark)->GetLength() + tsize);
 		    }
 		}
-		else if (tpos < (mark)->GetPos() || tpos == (mark)->GetPos() && ! (mark)->IncludeBeginning())
+		else if (tpos < (mark)->GetPos() || (tpos == (mark)->GetPos() && ! (mark)->IncludeBeginning()))
 		    (mark)->SetPos( (mark)->GetPos() + tsize);
 		else {
 		    (mark)->SetLength( (mark)->GetLength() + tsize);

@@ -107,9 +107,8 @@ AndrewSetup File}}}}
 
 \indent{Some AndrewSetup options require that certain Andrew build options 
 be included at compilation.  Andrew build options define certain 
-environments, such as the availability of AFS (AFS_ENV), the desire to 
-build the White Pages (WP_ENV), and the intention to run AMDS, the AMS 
-Delivery System (RUN_AMDS_ENV).  For example, if the system is compiled 
+environments, such as the availability of AFS (AFS_ENV).  For example, if
+the system is compiled 
 without the "AFS_ENV" option, then special calls to the Andrew File System 
 cannot be made.  Subsequently turning on an AndrewSetup option that says 
 that the Andrew File System is running will not have any effect, because 
@@ -228,179 +227,6 @@ This specifies the directory where local files and programs exist on your
 system.
 
 }
-\italic{Venus: boolean}
-
-\leftindent{Default: yes
-
-"Yes" specifies that the workstation is running the Andrew Cache Manager 
-and that Console expects to get its error messages and mariner information 
-via UDP sockets.  "No" specifies that the workstation is running a process 
-venus and that Console expects to get its error messages and mariner 
-information via TCP sockets.
-
-}
-\italic{ThisDomain: string
-
-}\leftindent{Default: ^
-
-This gives the fully qualified internet domain name to which all options in 
-the AndrewSetup file apply.   ThisDomain can be set to a text string in the 
-form of a fully qualified internet domain name, or to one of three special 
-characters.  The character "*" will be replaced by the fully qualified 
-domain name of the workstation (see ThisDomainSuffix, below).  The 
-character "&" will be replaced by the name of the AFS cell to which the 
-workstation belongs if AFS is running; otherwise, it will be replaced by 
-the fully qualified domain name of the workstation (see ThisDomainSuffix, 
-below).  The character "^" will be replaced by the cell name if AFS is 
-running and either the option AMS_DefaultToAFSCellMail is set to "yes" or 
-AMS_LocalMailSystemExists is set to "no".  Otherwise, "^" will be replaced 
-by the workstation name (see ThisDomainSuffix, below).  In all three cases, 
-the workstation name will be obtained as the result of the gethostname(2) 
-system call, which should be a fully-qualified domain name.
-
-
-}\italic{ThisDomainSuffix: string
-
-}\leftindent{Default: none
-
-When AMS or the WP wants to know the fully-qualified domain name of the 
-current workstation, including when it's figuring out what ThisDomain is, 
-it generates that full domain name as follows.  First it issues the 
-gethostname(2) system call.  Then it builds a candidate suffix for that 
-name, first by looking for the AndrewSetup variable ThisDomainSuffix 
-(default value: none), and then, if that wasn't found and the compile-time 
-variable GETDOMAIN_ENV is set, by issuing the getdomainname(2) system call. 
- If the result of that search for a suffix results in a non-null name that 
-is also neither the single-character string ``.'' nor a name that is 
-already the suffix of the gethostname(2) result, the suffix is appended to 
-the gethostname(2) result to generate the full domain name of the 
-workstation.
-
-
-Thus, for example, in systems in which gethostname(2) is not set to the 
-fully-qualified domain name of a workstation, ThisDomainSuffix may be set 
-to the necessary domain-system qualifier.  For example, if on 
-zeus.toaster.com gethostname(2) returns ``zeus'', ThisDomainSuffix may be 
-set to ``toaster.com''.  If the getdomainname(2) result is undesirable in 
-this context (for example, if the domain name to which it refers has little 
-to do with the internet domain system), its use may be disabled either by 
-undefining GETDOMAIN_ENV or by setting ThisDomainSuffix to the 
-one-character string ``.''.
-
-
-}\italic{AMS_UseWP: boolean
-
-}\leftindent{Default: see Note
-
-"Yes" specifies that the White Pages are to be used for user id to login 
-name translation, and for cross-cell versions of getcpw*, and getvpw*. 
- "No" specifies that the White Pages are not to be used.
-
-\bold{Note:}  If compiled with WHITEPAGES_ENV then the default is "yes." 
- If compiled without WHITEPAGES_ENV the default is "no" and cannot be set 
-to "yes."}
-
-
-\italic{ThisDomainWPDirectory: string
-
-}\leftindent{Default: none
-
-Normally, the White Pages database for some domain DOMAINNAME (often 
-ThisDomain) is found in directory
-
-	/afs/DOMAINNAME/service/wp
-
-Sites that have wanted to use the White Pages without using AFS have had to 
-fabricate this path name on their systems.  However, as a special case, the 
-Andrew installer may set the ThisDomainWPDirectory to be the name of the 
-directory in which the White Pages for domain ThisDomain may be found.
-
-}
-\italic{AMS_OnAIX: boolean
-
-}\leftindent{Default: no
-
-"No" specifies that the AIX variant of the UNIX operating system is not 
-being used.  "Yes" specifies that AIX is being used.}
-
-
-\italic{AMS_NonAMSDelivery: boolean
-
-}\leftindent{Default: see Note
-
-"No" specifies that ThisDomain is running the AMS delivery system.  "Yes" 
-specifies that ThisDomain is not running the AMS delivery system.  This 
-option is used by Console to determine where to monitor new mail.  On a 
-system that runs AMS delivery, Console monitors a Mailbox directory.  On a 
-system that doesn't run AMS delivery, Console monitors a mail file.
-
-\bold{Note:} If compiled with RUN_AMDS_ENV the default is "no".  If 
-compiled without RUN_AMDS_ENV the default is "yes" and cannot be changed to 
-"no".}
-
-
-\italic{AMS_LocalMailSystemExists: boolean}\leftindent{
-
-Default: see Note
-
-"Yes" specifies that an AFS client machine runs its own mail system that is 
-separate from the mail system of the AFS cell to which it is connected. 
-This option can be "yes" even if the AFS cell runs AMS delivery, as long as 
-the AFS client retains its own mail system to interpret local mail 
-addresses.   "No" specifies that the AFS client does not run a separate 
-mail system.
-
-\bold{Note:} If ThisDomain is set to the AFS client name, and the client 
-name is different from the cell name, or if AMS_NonViceHost is "yes", then 
-the default is "yes".  Otherwise, the default is "no".}
-
-\leftindent{
-}}\indent{\italic{AMS_DefaultToAFSCellMail: boolean}\leftindent{
-
-Default: see Note
-
-This option tells AMS whether to use a user's workstation authentication or 
-the AFS authentication in the connected cell to find the location where a 
-user receives and files mail when the user has not specified an *.AMSHome 
-preference.  Preferences are read from the first file found on the 
-following list: $HOME/preferences, $HOME/.preferences,  $HOME/.Xdefaults.
-
-}}\indent{\indent{\bold{Note: } If compiled with RUN_AMDS_ENV, the default 
-is yes.  If compiled without RUN_AMDS_ENV  the default is "no". \
-
-
-\leftindent{
-}}}\leftindent{\italic{AMS_WSRunsQueuemail: boolean}\leftindent{
-
-Default: see Note
-
-"Yes" specifies that local workstations run a queuemail daemon.  "No" 
-specifies that local workstations do not run a queuemail daemon.  This 
-option can be used to speed-up delivery of mail from a workstation 
-connected to a cell that is not running AMS delivery for a user whose AMS 
-Home is a cell that runs AMS delivery.
-
-\bold{Note:} If compiled with RUN_AMDS_ENV, the default is "yes", if 
-compiled without RUN_AMDS_ENV, the default is "no".
-
-}
-\italic{AMS_ThisDomainAuthFromWS: boolean}
-
-\indent{Default: see Note
-
-"Yes" specifies that, when a user sends a message from a workstation whose 
-name is different from \italic{ThisDomain}, the user will be identified as 
-"userid@\italic{ThisDomain"} in the "From: " line of the message.   If the 
-system is compiled with AFS_ENV, the user will be identified as 
-"userid@\italic{ThisDomain}" even if he is not authenticated in 
-\italic{ThisDomain}.    "No" specifies that the user must be authenticated 
-in \italic{ThisDomain} to be identified as "userid@\italic{ThisDomain}" in 
-the "From: " line of a message.
-
-\bold{Note:} If compiled with AFS_ENV, the default is "no".  If compiled 
-without AFS_ENV, the default is "yes".
-
-}
 \italic{Print.NonAndrew: boolean}
 
 \indent{Default: no
@@ -415,34 +241,7 @@ outstanding printing requests.  \
 }
 }\bigger{\section{	6.  Andrew File System Configuration}\leftindent{
 
-}}\leftindent{
-\italic{AMS_NonViceHost: boolean
-
-}\leftindent{Default: see Note
-
- "Yes" specifies that the Andrew File System is not is use.  "No" specifies 
-that the Andrew File System is in use.  If AMS_NonViceHost is "no", then an 
-experiment is performed at runtime to ensure that the pioctl() system call 
-doesn't generate a SIGSYS signal.  If it does, the AMS_NonViceHost is set 
-to "yes".
-
-\bold{Note:} If compiled with AFS_ENV the default is "no" and can be 
-changed to "yes."  If compiled without AFS_ENV the default is "yes" and 
-cannot be changed to "no".}
-
-
-\italic{ViceFile: pathname
-
-}\leftindent{Default: see Note
-
-This specifies the name of a file guaranteed to be in the Andrew File 
-System, if you are using it.
-
-\bold{Note}:  If the file /usr/vice/etc/cacheinfo is present, the default 
-is the contents of this file up to the first colon.  If 
-/usr/vice/etc/cacheinfo is not present, the default is "/afs".}
-
-}
+}}
 \section{\bigger{	7.  Printing Configuration\leftindent{
 
 }}}
@@ -582,110 +381,7 @@ should "try to" keep all file names under 14 characters.  "No" specifies
 that they should not try to keep file names short, and probably won't.}
 
 
-\italic{AMS_UsersAreGrownups: boolean
-
-}\leftindent{Default: no
-
-"No" specifies that the Andrew Message System should try to force people to 
-read the "networks-access" help file, which contains hints on network mail 
-etiquette and warnings about chain letters and solicitations, before 
-allowing them to send external mail. "Yes" specifies that no restrictions 
-on access to external networks are enforced by the Andrew Message System.}
-
-
-\italic{AMS_UsersHandleFormatting: boolean}\indent{
-
-}\leftindent{Default: see Note
-
-"Yes" specifies that users in ThisDomain can be expected to receive 
-ATK-formatted mail without complaint.  "No" specifies that local users 
-cannot receive ATK-formatted mail without complaint.
-
-\bold{Note}: If compiled with RUN_AMDS_ENV, the default is "yes".  If 
-compiled without RUN_AMDS_ENV, the default is "no".
-
-}
-\italic{AMS_DevConsoleIsSacred: boolean
-
-}\leftindent{Default: no
-
-"Yes" specifies that the Andrew Message System should not try to send its 
-error messages to /dev/console as a last resort.  "No" specifies that the 
-Andrew Message System may try to send its messages to /dev/console as a 
-last resort.}
-
-
-\italic{WPIUpdateReqAddr: string}
-
-\indent{Default: see Note
-
-This string is the mailing address to which automatic White Pages change 
-requests are submitted.
-
-\bold{Note:} If compiled with CMU_ENV, the default is 
-"wd00+WPI-UPDATE-REQUEST@andrew.cmu.edu".  If not compiled with CMU_ENV, 
-the default is "postmaster".
-
-}
-\italic{MessagesBugAddress: string
-
-}\leftindent{Default: see Note
-
-This string is the mailing address to which automatic bug reports from the 
-Messages program should be directed.  If it is null, the option to send a 
-bug report will not appear.
-
-\bold{Note:} If compiled with CMU_ENV the default is 
-"postman+auto-messages-bugs@andrew.cmu.edu".  If compiled without CMU_ENV 
-the default is "postmaster".}
-
-
-\italic{WelcomeMailFile: pathname
-
-}\leftindent{Default: $\{ANDREWDIR\}/lib/Hello
-
-This specifies the name of the file that contains a piece of mail that can 
-be given to each new user of the system as his or her first piece of mail. 
-A multi-media message is provided, and installed in the appropriate place, 
-with the standard Andrew distribution.   This mail is placed in a user's 
-Mailbox or mailfile when the mail folder is created.
-
-}
-\italic{AMS_OnlyMail: boolean
-
-}\leftindent{Default: see Note
-
-"No" specifies that reading of anything other than mail (e.g. bboards) is 
-not prohibited.  "Yes" specifies that use of the Andrew Message System to 
-read anything other than mail should be prohibited.
-
-\bold{Note:} If compiled with RUN_AMDS_ENV the default is "no".  If 
-compiled without RUN_AMDS_ENV, the default is "yes". \
-
-
-
-}}\indent{\italic{AMS_InitialDeathKnell:  integer}
-
-\indent{Default: 1800
-
-Specifies the initial time limit in seconds for the messageserver's 
-DeathKnell value.  In this case, the default is thirty minutes. The 
-DeathKnell value is the length of time in seconds that a messageserver can 
-be inactive before it times out.
-
-}
-\italic{AMS_MaximumDeathKnell: integer}
-
-\indent{Default: 3600
-
-Specifies the maximum time limit in seconds for the DeathKnell.  In this 
-case, the default is one hour. The DeathKnell can be set by the user who 
-starts the messageserver, by using the ms.deathknell preference option. 
- This preference option may be set to any length of time less than or equal 
-to the AMS_MaximumDeathKnell.
-
-}
-}\bigger{\section{	10.  Bulletin Board Database}
+\bigger{\section{	10.  Bulletin Board Database}
 
 }
 \leftindent{\italic{LocalBboardRoot: pathname
@@ -733,16 +429,11 @@ The previous value of the OfficialBboardRoot before it was last moved.}
 
 \italic{DefaultMSPath: pathname}
 
-\leftindent{Default: see Note
+\leftindent{Default: "$MAIL"
 
 Specifies the default path giving the roots of all the message trees a user 
 will be able to see.  Users can override this with their *.mspath 
 preference.
-
-\bold{Note:} If compiled with RUN_AMDS_ENV the default is 
-"$MAIL:$OFFICIAL:$LOCAL:$EXTERNAL".  If compiled without RUN_AMDS_ENV the 
-default is "$MAIL".}
-
 
 \italic{RequiredSubsFile: pathname}
 
@@ -966,15 +657,14 @@ validated local addresses will be written as the pw_name value. }\
 
 \italic{AMS_GecosHacks: boolean
 
-}\leftindent{Default: see Note
+}\leftindent{Default: "yes"
 
 "No" specifies that the entire pw_gecos field of a line in /etc/passwd is 
 considered to be a user name when validating local addresses.  "Yes" 
 specifies that the AMS will try to understand the pw_gecos field and 
 extract a user name from it, using the standard BSD or SystemV conventions.
 
-\bold{Note:} If compiled with RUN_AMDS_ENV the default is "no".  If 
-compiled without RUN_AMDS_ENV the default is "yes".   Note also that if 
+\bold{Note:} If 
  /etc/passwd is configured in standard Berkeley or SystemV formats, the 
 pw_gecos field may contain information besides a user name.  \
 
@@ -982,15 +672,12 @@ pw_gecos field may contain information besides a user name.  \
 }}\indent{
 }\indent{\italic{ AMS_AliasesValidation: boolean}}\indent{
 
-\indent{Default: see Note
+\indent{Default: "yes"
 
 "Yes" specifies that /usr/lib/aliases may be used for local validation. 
  "No" specifies that /usr/lib/aliases is not used for local validation.  If 
 this option is "yes", validation via /usr/lib/aliases is always tried 
 before other validation mechanisms.
-
-\bold{Note: } If compiled with RUN_AMDS_ENV, the default is "no".  if 
-compiled without RUN_AMDS_ENV, the default is "yes".
 
 }}\indent{\indent{
 }}The next three options are used to determine how local addresses are 
@@ -1004,27 +691,19 @@ following options whose value is greater than 0.
 
 \leftindent{\italic{AMS_WPValidation: integer
 
-}\leftindent{Default: see Note
+}\leftindent{Default: "0"
 
 A value greater than 0 specifies that the White Pages may be used in local 
 name validation.  0 specifies that the White Pages will not be used in 
 local name validation.
 
-\bold{Note: } If compiled with RUN_AMDS_ENV the default is "1".  If 
-compiled without RUN_AMDS_ENV the default is "0."}
-
-
 \italic{AMS_PasswdValidation: integer
 
-}\leftindent{Default: see Note
+}\leftindent{Default: "1"
 
 A value greater than 0  specifies that /etc/passwd may be used for local 
 validation. "0" specifies that /etc/passwd is not used for local 
 validation.  \
-
-
-\bold{Note:}  If compiled with RUN_AMDS_ENV the default is "0".  If 
-compiled without RUN_AMDS_ENV the default is "1."}
 
 
 \italic{AMS_LocalDatabaseValidation: integer
@@ -1064,34 +743,6 @@ Some other delivery system
 running.
 
 
-\italic{PostmasterName: string
-
-}\leftindent{Default: "postman"
-
-This string is the userid of the postmaster account.
-
-\bold{Note:} This option is not relevant unless compiled with both AFS_ENV 
-and RUN_AMDS_ENV.
-
-
-}\italic{PostmasterTitle: string}
-
-\indent{Default: Postmaster
-
-This specifies the title for the system postmaster.  This value is used in 
-generating certain mail headers for automatically-generated error report 
-messages.
-
-}
-\italic{PostmasterMailbox: pathname}
-
-\indent{Default: /afs/andrew.cmu.edu/usr0/postman/Mailbox
-
-This specifies the pathname for the local postmaster's mail dropoff 
-directory.  PostmasterMailbox is used to receive automatically-generated 
-error report messages.
-
-}
 \italic{LocalQueue: pathname}
 
 \indent{Default: /usr/spool/ViceMsgQueue

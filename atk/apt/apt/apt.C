@@ -252,7 +252,6 @@ void
 apt::SetAreaTitle( const char			      *title, long			       area )
         {
   const char				     *titles[2];
-	class apt *self=this;
 
   IN(apt_SetAreaTitle);
   titles[0] = title;
@@ -306,7 +305,6 @@ void
 apt::SetAreaLegend( const char			      *legend, long			       area )
         {
   const char				     *legends[2];
-	class apt *self=this;
 
   IN(apt_SetAreaLegend);
   legends[0] = legend;
@@ -381,7 +379,7 @@ apt::ReadObject( FILE			      *file, long			       id, apt_readfptr reader )
   char				      line[256 + 1];
 
   IN(apt_ReadObject);
-  if ( Id = id )
+  if ( ( Id = id ) )
     {
     Fields = (struct apt_fields *)
 			malloc( sizeof(struct apt_fields) );
@@ -578,7 +576,6 @@ apt::ParseFieldContent( const char			      *string )
   const char		     *s = string, *s2;
   char *t;
   long			      i, length;
-	class apt *self=this;
 
   IN(apt_ParseFieldContent);
   DEBUGst(String,string);
@@ -613,7 +610,6 @@ apt::ParseFieldContents( const char			      *string )
   struct apt_field_contents *contents;
   char			     *s, *s2, *t;
   long			      i = 0, length = 0;
-	class apt *self=this;
 
   IN(apt_ParseFieldContents);
   DEBUGst(String,string);

@@ -114,7 +114,7 @@ char *ATKArgv::SystemString(boolean quote) {
     char *p, *q;
     if(error) return NULL;
     ResetIterator();
-    while(p=NextArgument()) {
+    while((p=NextArgument())) {
 	// a simple conservative estimate.
 	newsize+=1+quote?strlen(p)*2:strlen(p);
     }
@@ -126,7 +126,7 @@ char *ATKArgv::SystemString(boolean quote) {
     if(buf==NULL) return NULL;
     ResetIterator();
     q=buf;
-    while(p=NextArgument()) {
+    while((p=NextArgument())) {
 	if(q!=buf) *q++=' ';
 	while(*p) {
 	    if(quote && !isalnum(*p)) *q++='\\';

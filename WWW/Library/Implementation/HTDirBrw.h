@@ -103,9 +103,9 @@ extern int HTDirMaxDescrLength;/*
   FUNCTIONS FOR DIRECTORY BROWSING ON LOCAL UNIX SYSTEM
   
  */
-extern int HTBrowseDirectory PARAMS((
+extern int HTBrowseDirectory (
                 HTRequest *     req,
-                char *          directory));/*
+                char *          directory);/*
 
   FUNCTIONS FOR DIRECTORY BROWSING FROM OTHER SOURCES
   
@@ -133,13 +133,13 @@ Where do FTP Directory Listings get input?
       1 if succes and more to read
       
  */
-typedef int (*HTDirLineInput) PARAMS((HTNetInfo *, dir_file_info *));/*
+typedef int (*HTDirLineInput) (HTNetInfo *, dir_file_info *);/*
 
  */
-extern int HTFTPBrowseDirectory PARAMS((
+extern int HTFTPBrowseDirectory (
                 HTRequest *     req,
                 char *          directory,
-                HTDirLineInput  input));/*
+                HTDirLineInput  input);/*
 
  */
 #endif /* HTDIRBRW *//*

@@ -37,25 +37,25 @@ struct _HTList {
 #define HTList_objectAt                 HTLiObAt
 #endif
 
-extern HTList * HTList_new NOPARAMS;
-extern void     HTList_delete PARAMS((HTList *me));
+extern HTList * HTList_new (void);
+extern void     HTList_delete (HTList *me);
 /*
 
   ADD OBJECT TO START OF LIST
   
  */
-extern void     HTList_addObject PARAMS((HTList *me, void *newObject));
+extern void     HTList_addObject (HTList *me, void *newObject);
 
 
-extern BOOL     HTList_removeObject PARAMS((HTList *me, void *oldObject));
-extern void *   HTList_removeLastObject PARAMS((HTList *me));
-extern void *   HTList_removeFirstObject PARAMS((HTList *me));
+extern BOOL     HTList_removeObject (HTList *me, void *oldObject);
+extern void *   HTList_removeLastObject (HTList *me);
+extern void *   HTList_removeFirstObject (HTList *me);
 #define         HTList_isEmpty(me) (me ? me->next == NULL : YES)
-extern int      HTList_count PARAMS((HTList *me));
-extern int      HTList_indexOf PARAMS((HTList *me, void *object));
+extern int      HTList_count (HTList *me);
+extern int      HTList_indexOf (HTList *me, void *object);
 #define         HTList_lastObject(me) \
   (me && me->next ? me->next->object : NULL)
-extern void *   HTList_objectAt PARAMS((HTList *me, int position));
+extern void *   HTList_objectAt (HTList *me, int position);
 /*
 
   TRAVERSE LIST

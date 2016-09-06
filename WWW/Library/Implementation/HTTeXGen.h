@@ -25,7 +25,7 @@ Conversion Module
    The conversion module is defined as
    
  */
-extern HTStructured * HTTeXGenerator PARAMS((HTStream * output));/*
+extern HTStructured * HTTeXGenerator (HTStream * output);/*
 
  */
 #endif/*

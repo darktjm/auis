@@ -68,7 +68,7 @@ BEGIN(LINECOMMENT);
 [A-Za-z_][0-9A-Za-z_]*		return(refs_Name);
 .				return(refs_Other);
 %%
-int refs_TokWhitespace()
+int refs_TokWhitespace(void)
 {
     /* convert an escaped newline into a space */	
     if(yytext[0]=='\\'){
@@ -79,7 +79,7 @@ int refs_TokWhitespace()
     return (refs_WhiteSpace);
 }
 
-void resetlexer() {
+void resetlexer(void) {
 yy_init=1;
 yyrestart(yyin);
 }

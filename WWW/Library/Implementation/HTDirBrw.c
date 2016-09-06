@@ -122,7 +122,7 @@ PRIVATE char *HTDirSpace = NULL;
 **	Writes the file permissions into strptr.
 **	ISN'T THERE A FASTER METHOD???
 */
-PRIVATE void FilePerm ARGS2(mode_t, mode, char *, strptr)
+PRIVATE void FilePerm (mode_t mode, char * strptr)
 {
     if ((mode & S_IFMT) == S_IFREG)
 	*strptr++ = '-';
@@ -174,7 +174,7 @@ PRIVATE void FilePerm ARGS2(mode_t, mode, char *, strptr)
 **	Centers str_in into str_out expecting str_out having size length
 **	inclusive the terminating '\0'. The output string MUST be long enough.
 */
-PRIVATE void CenterStr ARGS3(char *, str_out, char *, str_in, int, length)
+PRIVATE void CenterStr (char *str_out, char *str_in, int length)
 {
     char *inptr = str_in;
     char *outptr = str_out + (length-strlen(str_in))/2;
@@ -189,7 +189,7 @@ PRIVATE void CenterStr ARGS3(char *, str_out, char *, str_in, int, length)
 /*								LeftStr()
 **	Like CenterStr(), but result is left-justified.
 */
-PRIVATE void LeftStr ARGS3(char *, str_out, char *, str_in, int, length)
+PRIVATE void LeftStr (char * str_out, char * str_in, int length)
 {
     char *inptr = str_in;
     char *outptr = str_out;
@@ -203,7 +203,7 @@ PRIVATE void LeftStr ARGS3(char *, str_out, char *, str_in, int, length)
 /*								RightStr()
 **	Like CenterStr(), but result is right-justified.
 */
-PRIVATE void RightStr ARGS3(char *, str_out, char *, str_in, int, length)
+PRIVATE void RightStr (char * str_out, char * str_in, int length)
 {
     char *inptr = str_in;
     char *outptr = str_out + length - strlen(str_in) - 1;
@@ -215,7 +215,7 @@ PRIVATE void RightStr ARGS3(char *, str_out, char *, str_in, int, length)
 /* 							     	ItoA()
 **	Converts a positive int to a string backwards starting at start+len-1.
 */
-PRIVATE void ItoA ARGS3(unsigned int, n, char *, start, char, len)
+PRIVATE void ItoA (unsigned int n, char * start, char len)
 {
     char *sptr = start+len-1;
     do {
@@ -232,7 +232,7 @@ PRIVATE void ItoA ARGS3(unsigned int, n, char *, start, char, len)
  *	Therefore I output only until 999, and then start using the
  *	next unit.  This doesn't work wrong, it's just a feature.
  */
-PRIVATE void HTDirSize ARGS3(unsigned long, n, char *, start, char, len)
+PRIVATE void HTDirSize (unsigned long n, char * start, char len)
 {
     double size = n/1024.0;
     if (n < 1000) {
@@ -258,7 +258,7 @@ PRIVATE void HTDirSize ARGS3(unsigned long, n, char *, start, char, len)
 /* 							     	KeyFree()
 **	Frees the contents of the key structure AND the key it self
 */
-PRIVATE void  KeyFree ARGS1(HTDirKey *, key)
+PRIVATE void  KeyFree (HTDirKey * key)
 {
     if (key->key != key->filename)
 	FREE(key->key);
@@ -272,7 +272,7 @@ PRIVATE void  KeyFree ARGS1(HTDirKey *, key)
 /* 							     DirFileInfoClear()
 **	Frees the contents of the dir_file_info structure and puts ints to 0
 */
-PRIVATE void  DirFileInfoClear ARGS1(dir_file_info *, file_info)
+PRIVATE void  DirFileInfoClear (dir_file_info * file_info)
 {
     FREE(file_info->f_name);
     file_info->f_mode = 0L;
@@ -287,7 +287,7 @@ PRIVATE void  DirFileInfoClear ARGS1(dir_file_info *, file_info)
 /* 							     	DirAbort()
 **	Goes through the whole tree and frees whatever is left.
 */
-PRIVATE void  DirAbort ARGS1(HTBTree *, tree)
+PRIVATE void  DirAbort (HTBTree * tree)
 {
     HTBTElement *next_node = HTBTree_next(tree, NULL);
 
@@ -304,7 +304,7 @@ PRIVATE void  DirAbort ARGS1(HTBTree *, tree)
 **    	return values are reversed, so it returns >0 if a<b, 0 if a==b
 **    	and <0 if a>b 
 */
-PRIVATE long HTDirLintCmp ARGS2(unsigned long **, a, unsigned long **, b)
+PRIVATE long HTDirLintCmp (unsigned long ** a, unsigned long ** b)
 {
     return (long) (**b)-(**a);
 }
@@ -313,7 +313,7 @@ PRIVATE long HTDirLintCmp ARGS2(unsigned long **, a, unsigned long **, b)
 /* 								HTDirStrCmp()
 **	Acts like strcmp but operates on pointers to pointers.
 */
-PRIVATE long HTDirStrCmp ARGS2(char **, a, char **, b)
+PRIVATE long HTDirStrCmp (char ** a, char ** b)
 {
     return (int) strcmp(*a, *b);
 }
@@ -322,7 +322,7 @@ PRIVATE long HTDirStrCmp ARGS2(char **, a, char **, b)
 /* 							    HTDirStrCaseCmp()
 **	Acts like ctrcasecomp but operates on pointers to pointers.
 */
-PRIVATE long HTDirStrCaseCmp ARGS2(char **, a, char **, b)
+PRIVATE long HTDirStrCaseCmp (char ** a, char ** b)
 {
     return (int) strcasecomp(*a, *b);
 }
@@ -332,7 +332,7 @@ PRIVATE long HTDirStrCaseCmp ARGS2(char **, a, char **, b)
 **	Finds the lenght of the body part of the key and generates a
 **	header line used in HTDirOutTop().
 */
-PRIVATE char *InitBody NOARGS
+PRIVATE char *InitBody (void)
 {
     char *topstr = NULL;
     PRIVATE char *header[] = {
@@ -421,8 +421,8 @@ PRIVATE char *InitBody NOARGS
 **
 **    Puts out the message to default output.
 */
-PRIVATE void HTDirOutMessage ARGS2(HTStructured *, target,
-				   HTChunk *, message)
+PRIVATE void HTDirOutMessage (HTStructured * target,
+				   HTChunk * message)
 {
     if (!message || !message->data)
 	return;
@@ -437,8 +437,8 @@ PRIVATE void HTDirOutMessage ARGS2(HTStructured *, target,
 **
 **  If a README file exists, then it is inserted into the document here.
 */
-PRIVATE void HTDirOutReadme ARGS2(HTStructured *, target,
-				  CONST char *, localname)
+PRIVATE void HTDirOutReadme (HTStructured * target,
+				  CONST char * localname)
 { 
     FILE *fp;
     int ch;
@@ -471,11 +471,11 @@ PRIVATE void HTDirOutReadme ARGS2(HTStructured *, target,
 **    This gives the TITLE and H1 header, and also a link
 **    to the parent directory if appropriate.
 */
-PRIVATE void HTDirOutTop ARGS5(HTStructured *, target,
-			       HTAnchor *, anchor,
-			       char *, top_body,
-			       char *, directory,
-			       HTChunk *, message)
+PRIVATE void HTDirOutTop (HTStructured * target,
+			       HTAnchor * anchor,
+			       char * top_body,
+			       char * directory,
+			       HTChunk * message)
 {
     char *logical = HTAnchor_address(anchor);
     char *path = HTParse(logical, "", PARSE_PATH + PARSE_PUNCTUATION);
@@ -601,8 +601,8 @@ PRIVATE void HTDirOutTop ARGS5(HTStructured *, target,
 **	If filename is anchor and filename is longer than HTMaxFileLength,
 **	the body columns are shifted to the right
 */
-PRIVATE void HTDirOutList ARGS4(HTStructured *, target, HTBTree *, bt,
-				char *, pathtail, char *, directory)
+PRIVATE void HTDirOutList (HTStructured * target, HTBTree * bt,
+				char * pathtail, char * directory)
 {
     char *escaped = NULL;	      		 	  /* Used for anchor */
     char *tail = NULL;
@@ -715,10 +715,10 @@ PRIVATE void HTDirOutList ARGS4(HTStructured *, target, HTBTree *, bt,
 **
 **    This function outputs the last part of the directory listings
 */
-PRIVATE void HTDirOutBottom ARGS4(HTStructured *, target,
-				  unsigned int, files,
-				  char *, directory,
-				  HTChunk *, message)
+PRIVATE void HTDirOutBottom (HTStructured * target,
+				  unsigned int files,
+				  char * directory,
+				  HTChunk * message)
 {
     char *outstr;
 
@@ -766,7 +766,7 @@ PRIVATE void HTDirOutBottom ARGS4(HTStructured *, target,
 **
 **	Returns < 0 on error, HT_LOADED on succes
 */
-PUBLIC int HTBrowseDirectory ARGS2(HTRequest *, req, char *, directory)
+PUBLIC int HTBrowseDirectory (HTRequest * req, char * directory)
 {
     char *pathname = NULL;
     int  pathend;
@@ -1137,8 +1137,8 @@ cleanup:
 **
 **	Returns < 0 on error, HT_LOADED on succes
 */
-PUBLIC int HTFTPBrowseDirectory ARGS3(HTRequest *, req, char *, directory,
-				      HTDirLineInput, input)
+PUBLIC int HTFTPBrowseDirectory (HTRequest * req, char * directory,
+				      HTDirLineInput input)
 {
     int status;
     char *tail = NULL;

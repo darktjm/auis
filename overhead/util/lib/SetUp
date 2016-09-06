@@ -108,9 +108,8 @@ AndrewSetup File}}}}
 
 \indent{Some AndrewSetup options require that certain Andrew build options 
 be included at compilation.  Andrew build options define certain 
-environments, such as the availability of AFS (AFS_ENV), the desire to 
-build the White Pages (WP_ENV), and the intention to run AMDS, the AMS 
-Delivery System (RUN_AMDS_ENV).  For example, if the system is compiled 
+environments, such as the availability of AFS (AFS_ENV).  For example, if
+the system is compiled 
 without the "AFS_ENV" option, then special calls to the Andrew File System 
 cannot be made.  Subsequently turning on an AndrewSetup option that says 
 that the Andrew File System is running will not have any effect, because 
@@ -289,35 +288,7 @@ undefining GETDOMAIN_ENV or by setting ThisDomainSuffix to the
 one-character string ``.''.
 
 
-}\italic{AMS_UseWP: boolean
-
-}\leftindent{Default: see Note
-
-"Yes" specifies that the White Pages are to be used for user id to login 
-name translation, and for cross-cell versions of getcpw*, and getvpw*. 
- "No" specifies that the White Pages are not to be used.
-
-\bold{Note:}  If compiled with WHITEPAGES_ENV then the default is "yes." 
- If compiled without WHITEPAGES_ENV the default is "no" and cannot be set 
-to "yes."}
-
-
-\italic{ThisDomainWPDirectory: string
-
-}\leftindent{Default: none
-
-Normally, the White Pages database for some domain DOMAINNAME (often 
-ThisDomain) is found in directory
-
-	/afs/DOMAINNAME/service/wp
-
-Sites that have wanted to use the White Pages without using AFS have had to 
-fabricate this path name on their systems.  However, as a special case, the 
-Andrew installer may set the ThisDomainWPDirectory to be the name of the 
-directory in which the White Pages for domain ThisDomain may be found.
-
-}
-\italic{AMS_OnAIX: boolean
+}\italic{AMS_OnAIX: boolean
 
 }\leftindent{Default: no
 

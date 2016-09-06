@@ -43,7 +43,6 @@ ATK_IMPL("prefval.H")
 
 
 ATKdefineRegistry(prefval, dataobject, NULL);
-static char *strsave(char  *str);
 static boolean EnsureListSize(class prefval  *self, int  n);
 static boolean EnsureChoiceListSize(class prefval  *self, int  n);
 static boolean appproc(class prefval  *self, FILE  *fp, char  *buf);
@@ -842,7 +841,7 @@ static char *GlomStrings(char  *s , char  *t)
 
     char *r;
 
-    if (r = (char *)malloc(strlen(s)+strlen(t)+1)) {
+    if ((r = (char *)malloc(strlen(s)+strlen(t)+1))) {
 	*r = '\0';
 	strcpy(r,s);
 	free(s);
@@ -871,7 +870,7 @@ static char *ReadLine(FILE  *f)
     int i,j;
 
     linehascontrol=FALSE;
-    if (result = (char *)malloc(1)) {
+    if ((result = (char *)malloc(1))) {
 	*result = '\0';
 
 	while (fgets(buf,sizeof(buf),f)) {

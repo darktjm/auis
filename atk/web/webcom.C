@@ -60,13 +60,16 @@ ATKdefineRegistry(webcom,  observable,  webcom::InitializeClass);
 static const char *guessimgtype(class webcom  *self, const char  *url);
 static void loadimg(class image  *dat, class webcom  *self, int  status);
 static void hweb(FILE  *f,  void  *td);
-static void eweb(FILE  *f,  void  *td);
 static FILE *setuppipes();
 static int webcom_countpending();
 static void webcom_RemovePending(class webcom  *self);
 static void webcom_AddPending(class webcom  *self);
 static void endwait(struct wev  *w, long);
+#if 0
+#ifdef GUESSAHEAD
 static int mystrncmp(char  *a, char  *b, int  n);
+#endif
+#endif
 static void webcom_DoCallback(class webcom  *self, int  value);
 static void webcom_Que(class webcom  *self, webcom_cbptr proc,
 		void *rock);
@@ -90,7 +93,7 @@ void webcom::ReadContext(FILE  *fp, int  id)  {
 
 	void 
 webcom::SetContext(char  *begin) {
-	int len = strlen(begin);
+	unsigned int len = strlen(begin);
 	if (this->context != NULL){
 		if (strlen(this->context) > len){
 			free(this->context);
@@ -113,7 +116,6 @@ webcom::getfullname(char  *name) {
 
 	static const char *
 guessimgtype(class webcom  *self, const char  *url)  {
-	char *p;
 	if ((self)->Status() & WEBCOM_Loaded){
 		if (self->mimetype == xbm)  return "xbitmap";
                 if (self->mimetype == gif)  return "gif";
@@ -121,6 +123,7 @@ guessimgtype(class webcom  *self, const char  *url)  {
         }
 #if 0
         else {
+		char *p;
 #ifdef GUESSAHEAD
 		p = strrchr(url, '.');
 		if (p != NULL){
@@ -182,13 +185,8 @@ loadimg(class image  *dat, class webcom  *self, int  status)  {
 
 	class image * 
 webcom::getimage (char  *url, char  *type)  {
-	char *b, *e, *t, *s, *ltype;
 	const char *gtype;
-	FILE *f;
 	class image* dat;
-	char obuf[1024];
-	char command[1024];
-	int result;
 	class webcom *new_c;
 	new_c = webcom::Create(url, this, 0, NULL);
 	if (new_c == NULL) return NULL;
@@ -668,7 +666,7 @@ webcom::Create(const char  *url, class webcom  *parent, int  flags, const char *
                 fprintf(stderr, "web: Couldn't write %s for posting.\n", w->postfile);
                 return w;
             }
-            int wb=fwrite(postdata, 1, strlen(postdata), fp);
+            unsigned int wb=fwrite(postdata, 1, strlen(postdata), fp);
             if(wb<strlen(postdata)) {
                 fprintf(stderr, "web: Short write of %s for posting.\n", w->postfile);
                 return w;
@@ -783,7 +781,7 @@ webcom::Wait(class view  *v)  {
 		w.inwait = 1;
 		w.e = im::EnqueueEvent((event_fptr)endwait, 
 				(char *)&w, event_SECtoTU(1));
-		while(INPROMPT || w.inwait == 1 
+		while((INPROMPT || w.inwait == 1) // tjm - not sure if this is what was intended (was a || (b && c))
 				&& (this->status&
 				(WEBCOM_LoadFailed|WEBCOM_Loaded))
 					 == 0){
@@ -798,6 +796,8 @@ webcom::Wait(class view  *v)  {
 	return WEBCOM_LOADERROR;
 }
 
+#if 0
+#ifdef GUESSAHEAD
 	static int 
 mystrncmp(char  *a, char  *b, int  n)  {
 	while(n-- > 0){
@@ -806,6 +806,8 @@ mystrncmp(char  *a, char  *b, int  n)  {
 	}
 	return 0;
 }
+#endif
+#endif
 
 	class web *
 webcom::GetWeb()  {
@@ -1014,7 +1016,6 @@ webcom_CheckQue()  {
 	void 
 webcom::Load(webcom_cbptr proc, void *rock)  {
 	static char fname[L_tmpnam];
-	char *s;
 	char *local_url = (this->url)->Name();
 	if (INPROMPT) webcom_Que(this, proc, rock);
 	
@@ -1035,7 +1036,6 @@ webcom::Load(webcom_cbptr proc, void *rock)  {
 		errfile=NULL;
 	    }
 	}	
-	s = local_url;
 	static unsigned long cnt=1;
 	reqid=cnt;
 	// file://localhost
@@ -1106,7 +1106,7 @@ void webcom::EncodeForURL(flex &url, const char *fragment) {
                 strcpy(r, "%0D%0A");
             } else {
                 char *r=url.Insert(url.GetN(), 3);
-                sprintf(r, "%%%0.2X",*p);
+                sprintf(r, "%%%02X",*p);
             }
         }
         p++;

@@ -88,8 +88,8 @@ PRIVATE HTList *server_table	= NULL;	/* Browser's info about servers	     */
 **			the function HTAAServer_delete(), which also
 **			frees the node itself.
 */
-PRIVATE HTAAServer *HTAAServer_new ARGS2(CONST char*,	hostname,
-					 int,		portnumber)
+PRIVATE HTAAServer *HTAAServer_new (CONST char*	hostname,
+					 int		portnumber)
 {
     HTAAServer *server;
 
@@ -124,7 +124,7 @@ PRIVATE HTAAServer *HTAAServer_new ARGS2(CONST char*,	hostname,
 */
 #ifdef NOT_NEEDED_IT_SEEMS
 PRIVATE void HTAASetup_delete();	/* Forward */
-PRIVATE void HTAAServer_delete ARGS1(HTAAServer *, killme)
+PRIVATE void HTAAServer_delete (HTAAServer *killme)
 {
     if (killme) {
 	HTList *cur1 = killme->setups;
@@ -163,8 +163,8 @@ PRIVATE void HTAAServer_delete ARGS1(HTAAServer *, killme)
 **			representing the looked-up server.
 **			NULL, if not found.
 */
-PRIVATE HTAAServer *HTAAServer_lookup ARGS2(CONST char *, hostname,
-					    int,	  portnumber)
+PRIVATE HTAAServer *HTAAServer_lookup (CONST char * hostname,
+					    int	  portnumber)
 {
     if (hostname) {
 	HTList *cur = server_table;
@@ -208,9 +208,9 @@ PRIVATE HTAAServer *HTAAServer_lookup ARGS2(CONST char *, hostname,
 **			document tree.
 **			
 */
-PRIVATE HTAASetup *HTAASetup_lookup ARGS3(CONST char *, hostname,
-					  int,		portnumber,
-					  CONST char *, docname)
+PRIVATE HTAASetup *HTAASetup_lookup (CONST char * hostname,
+					  int		portnumber,
+					  CONST char * docname)
 {
     HTAAServer *server;
     HTAASetup *setup;
@@ -269,10 +269,10 @@ PRIVATE HTAASetup *HTAASetup_lookup ARGS3(CONST char *, hostname,
 **	returns		a new HTAASetup node, and also adds it as
 **			part of the HTAAServer given as parameter.
 */
-PRIVATE HTAASetup *HTAASetup_new ARGS4(HTAAServer *,	server,
-				       char *,		tmplate,
-				       HTList *,	valid_schemes,
-				       HTAssocList **,	scheme_specifics)
+PRIVATE HTAASetup *HTAASetup_new (HTAAServer *	server,
+				       char *		tmplate,
+				       HTList *	valid_schemes,
+				       HTAssocList **	scheme_specifics)
 {
     HTAASetup *setup;
 
@@ -304,7 +304,7 @@ PRIVATE HTAASetup *HTAASetup_new ARGS4(HTAAServer *,	server,
 **	returns		nothing.
 */
 #ifdef NOT_NEEDED_IT_SEEMS
-PRIVATE void HTAASetup_delete ARGS1(HTAASetup *, killme)
+PRIVATE void HTAASetup_delete (HTAASetup *killme)
 {
     int scheme;
 
@@ -335,8 +335,8 @@ PRIVATE void HTAASetup_delete ARGS1(HTAASetup *, killme)
 ** ON EXIT:
 **	returns		nothing.
 */
-PRIVATE void HTAASetup_updateSpecifics ARGS2(HTAASetup *,	setup,
-					     HTAssocList **,	specifics)
+PRIVATE void HTAASetup_updateSpecifics (HTAASetup *	setup,
+					     HTAssocList **	specifics)
 {
     int scheme;
 
@@ -366,8 +366,8 @@ PRIVATE void HTAASetup_updateSpecifics ARGS2(HTAASetup *,	setup,
 ** ON EXIT:
 **	returns		the realm.  NULL, if not found.
 */
-PRIVATE HTAARealm *HTAARealm_lookup ARGS2(HTList *,	realm_table,
-					  CONST char *, realmname)
+PRIVATE HTAARealm *HTAARealm_lookup (HTList *	realm_table,
+					  CONST char * realmname)
 {
     if (realm_table && realmname) {
 	HTList *cur = realm_table;
@@ -398,10 +398,10 @@ PRIVATE HTAARealm *HTAARealm_lookup ARGS2(HTList *,	realm_table,
 ** ON EXIT:
 **	returns		the created realm.
 */
-PRIVATE HTAARealm *HTAARealm_new ARGS4(HTList *,	realm_table,
-				       CONST char *,	realmname,
-				       CONST char *,	username,
-				       CONST char *,	password)
+PRIVATE HTAARealm *HTAARealm_new (HTList *	realm_table,
+				       CONST char *	realmname,
+				       CONST char *	username,
+				       CONST char *	password)
 {
     HTAARealm *realm;
 
@@ -444,7 +444,7 @@ PRIVATE HTAARealm *HTAARealm_new ARGS4(HTList *,	realm_table,
 **	returned by AA package needs to (or should) be freed.
 **
 */
-PRIVATE char *compose_Basic_auth ARGS1(HTRequest *, req)
+PRIVATE char *compose_Basic_auth (HTRequest * req)
 {
     static char *result = NULL;	/* Uuencoded presentation, the result */
     char *cleartext = NULL;	/* Cleartext presentation */
@@ -514,7 +514,7 @@ PRIVATE char *compose_Basic_auth ARGS1(HTRequest *, req)
 ** ON EXIT:
 **	returns	the authentication scheme to use.
 */
-PRIVATE HTAAScheme HTAA_selectScheme ARGS1(HTAASetup *, setup)
+PRIVATE HTAAScheme HTAA_selectScheme (HTAASetup * setup)
 {
     HTAAScheme scheme;
     if (setup && setup->valid_schemes) {
@@ -548,7 +548,7 @@ PRIVATE HTAAScheme HTAA_selectScheme ARGS1(HTAASetup *, setup)
 **
 **		   "Basic AkRDIhEF8sdEgs72F73bfaS=="
 */
-PUBLIC BOOL HTAA_composeAuth ARGS1(HTRequest *, req)
+PUBLIC BOOL HTAA_composeAuth (HTRequest * req)
 {
     char *auth_string = NULL;
     static char *docname;
@@ -667,7 +667,7 @@ PUBLIC BOOL HTAA_composeAuth ARGS1(HTRequest *, req)
 **	returns	YES or NO
 **
 */
-PUBLIC BOOL HTPasswordDialog ARGS1(HTRequest *,	req)
+PUBLIC BOOL HTPasswordDialog (HTRequest *	req)
 {
     if (!req || !req->setup || !req->realm || !req->dialog_msg) {
 	HTAlert("HTPasswordDialog() called with an illegal parameter");
@@ -723,7 +723,7 @@ PUBLIC BOOL HTPasswordDialog ARGS1(HTRequest *,	req)
 **	returns		YES, if dialog box was popped up.
 **			NO, on failure.
 */
-PUBLIC BOOL HTAA_retryWithAuth ARGS1(HTRequest *,	req)
+PUBLIC BOOL HTAA_retryWithAuth (HTRequest *	req)
 {
     int len;
     char *realmname;
@@ -837,7 +837,7 @@ PUBLIC BOOL HTAA_retryWithAuth ARGS1(HTRequest *,	req)
 ** ON EXIT:
 **	returns		nothing.
 */
-PUBLIC void HTAACleanup ARGS1(HTRequest *, req)
+PUBLIC void HTAACleanup (HTRequest * req)
 {
     if (req) {
 	FREE(req->authorization);

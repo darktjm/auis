@@ -462,7 +462,7 @@ long pcompch::EnumerateComposites(char  key,pcompch_ecfptr  func,long  rock)
     while(next) {
 	struct composites_s *this_c=next;
 	next=this_c->next;
-	if(result=func(key,this_c,rock)) return result;
+	if((result=func(key,this_c,rock))) return result;
     }
     return 0;
 }

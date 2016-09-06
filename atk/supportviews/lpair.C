@@ -210,8 +210,6 @@ void lpair::FullUpdate(enum view_UpdateType  type, long	 left, long	 top, long	 
 }
 
 
-#define ABS(x) ((x) > 0 ? (x) : -(x))
-
 class view *lpair::Hit(enum view_MouseAction  action, long	 x , long	 y, long	 numberOfClicks)
 {
 
@@ -234,7 +232,7 @@ class view *lpair::Hit(enum view_MouseAction  action, long	 x , long	 y, long	 n
 
 	if (this->ismoving) {
 		if ((action == view_RightUp || action == view_LeftUp)) {
-			if (!this->maybeZero)
+			if (!this->maybeZero) {
 				if (this->typex == lpair_VERTICAL) {
 					x = max(x, BARWIDTH + GRAVITY);
 					x = min(x,
@@ -245,6 +243,7 @@ class view *lpair::Hit(enum view_MouseAction  action, long	 x , long	 y, long	 n
 					y = min(y,
 					    (this)->GetLogicalHeight() - BARWIDTH - GRAVITY);
 				}
+			}
 
 			if ((abs(this->lasthit - dim) > BARWIDTH + GRAVITY)) {
 				if (this->typex == lpair_VERTICAL)
@@ -262,11 +261,12 @@ class view *lpair::Hit(enum view_MouseAction  action, long	 x , long	 y, long	 n
 					this->objsize[1] = (this)->GetLogicalHeight() - y;
 				else
 					this->objsize[0] = y;
-				if (this->sizeform == lpair_PERCENTAGE)
+				if (this->sizeform == lpair_PERCENTAGE) {
 					if (this->objsize[1] > 100)
 						this->objsize[1] = 100;
 					else if (this->objsize[1] < 0)
 						this->objsize[1] = 0;
+				}
 				this->needsfull = 3;
 				(this)->WantUpdate( this);
 			}
@@ -308,12 +308,11 @@ void lpair::WantUpdate(class view  *requestor)
 	/* If we are about to FullUpdate the view requesting an update, throw away the
  * request. This prevents views from getting updates before FullUpdates.
  */
-	if (this->parent != NULL && 
-	    !((this->needsfull & 1) && this->obj[0] != NULL && 
-	    (requestor)->IsAncestor( this->obj[0]) || 
-	    (this->needsfull & 2) && this->obj[1] != NULL && 
-	    (requestor)->IsAncestor( this->obj[1])) && 
-	    this->parent != NULL)
+	if (this->parent != NULL &&
+	    !(((this->needsfull & 1) && this->obj[0] != NULL &&
+	       (requestor)->IsAncestor( this->obj[0])) ||
+	      ((this->needsfull & 2) && this->obj[1] != NULL &&
+		  (requestor)->IsAncestor( this->obj[1]))))
 		(this->parent)->WantUpdate( requestor);
 }
 
@@ -426,7 +425,7 @@ static void lpair_ResetDimensions(class lpair  *self)
 	y = 0;
 	for (i = 0; i < 2; i++) { /* Loop over the two halves of the lpair. */
 		child = (class view *) self->obj[i];
-		if (child != NULL)
+		if (child != NULL) {
 			if (self->typex == lpair_VERTICAL) {
 				rectangle_SetRectSize(&enclosingRect, x, y, self->objcvt[i], (self)->GetLogicalHeight());
 				(child)->InsertView( self, &enclosingRect);
@@ -437,6 +436,7 @@ static void lpair_ResetDimensions(class lpair  *self)
 				(child)->InsertView( self, &enclosingRect);
 				y += self->objcvt[i] + 2 * BARWIDTH + 1;
 			}
+		}
 	}
 }
 
@@ -654,7 +654,6 @@ void lpair::InitChildren()
 
 boolean lpair::RecSearch(struct SearchPattern *pat, boolean toplevel)
 {
-    boolean res;
     class view *v;
     int ai;
 
@@ -676,7 +675,6 @@ boolean lpair::RecSearch(struct SearchPattern *pat, boolean toplevel)
 
 boolean lpair::RecSrchResume(struct SearchPattern *pat)
 {
-    boolean res;
     class view *v;
     int ai;
 
@@ -741,7 +739,7 @@ void lpair::RecSrchExpose(const struct rectangle &logical,struct rectangle &hit)
     y = 0;
     for (i = 0; i < 2; i++) { /* Loop over the two halves of the lpair. */
      child = (class view *) obj[i];
-     if (child != NULL)
+     if (child != NULL) {
 	 if (typex == lpair_VERTICAL) {
 	     rectangle_SetRectSize(&enclosingRect, x, y, objcvt[i], logical.height);
 	     if(child==v) {
@@ -764,6 +762,7 @@ void lpair::RecSrchExpose(const struct rectangle &logical,struct rectangle &hit)
 	     }
 	     y += objcvt[i] + 2 * BARWIDTH + 1;
 	 }
+     }
     }
 }
 

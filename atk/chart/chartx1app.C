@@ -121,6 +121,6 @@ static int Query( const char			      *topic )
   char			      response[255];
 
   printf( "Enter %s: ", topic );
-  gets( response );
+  fgets( response, sizeof(response), stdin );
   return  atoi( response );
   }

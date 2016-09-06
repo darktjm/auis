@@ -231,7 +231,7 @@ mysystem(const char  *acmd)
     else if (pid == 0) {
         /* child, next close window mgr's fd, so that parent window can be killed */
         for(pid = 3; pid < FDTABLESIZE(); pid++) close(pid);
-        execl("/bin/sh", "sh", "-c", acmd, NULL);
+        execl("/bin/sh", "sh", "-c", acmd, (char *)NULL);
         _exit(127);
 	/*NOTREACHED*/
     }
@@ -613,7 +613,7 @@ int helpdb::SetupHelp(struct cache  *c, const char  *aname, int  strip			/* whet
 	DEBUG(("db: alias: %s\n", alias));
 	if (alias[0] == '#') {
 	    char msg[256];
-	    sprintf(msg, "Running command: %0.230s", &alias[1]);
+	    sprintf(msg, "Running command: %.230s", &alias[1]);
 	    im::SetProcessCursor(waitCursor);
 	    message::DisplayString(c->view, 0, msg);
 	    im::ForceUpdate();

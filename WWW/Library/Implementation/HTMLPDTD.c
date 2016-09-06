@@ -450,9 +450,9 @@ struct _HTStructured {
 	/* ... */
 };
 
-PUBLIC void HTStartAnchor ARGS3(HTStructured *, obj,
-		CONST char *,  name,
-		CONST char *,  href)
+PUBLIC void HTStartAnchor (HTStructured * obj,
+		CONST char *  name,
+		CONST char *  href)
 {
     BOOL		present[HTML_A_ATTRIBUTES];
     CONST char*		value[HTML_A_ATTRIBUTES];
@@ -482,10 +482,10 @@ PUBLIC void HTStartAnchor ARGS3(HTStructured *, obj,
 **
 **	Hopefully as usefull as HTStartAnchor. Henrik 23/03-94
 */
-PUBLIC void HTMLPutImg ARGS4(HTStructured *, obj,
-			     CONST char *, src,
-			     CONST char *, alt,
-			     CONST char *, align)
+PUBLIC void HTMLPutImg (HTStructured * obj,
+			     CONST char * src,
+			     CONST char * alt,
+			     CONST char * align)
 {
     BOOL		present[HTML_IMG_ATTRIBUTES];
     CONST char*		value[HTML_IMG_ATTRIBUTES];
@@ -512,8 +512,8 @@ PUBLIC void HTMLPutImg ARGS4(HTStructured *, obj,
 }
 
 
-PUBLIC void HTNextID ARGS2(HTStructured *, obj,
-		CONST char *,	next_one)
+PUBLIC void HTNextID (HTStructured * obj,
+		CONST char *	next_one)
 {
     BOOL		present[HTML_NEXTID_ATTRIBUTES];
     CONST char*		value[HTML_NEXTID_ATTRIBUTES];

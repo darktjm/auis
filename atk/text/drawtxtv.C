@@ -58,7 +58,6 @@ static class graphic *pat;
 /* the max number of pixels a char can overhang its bounding box */
 #define MAXOVERHANG 4
 
-extern class environment *textview_PrevCharIsNewline(class text *t, long pos);
 static long StringWidth(short  *widths, unsigned char *s);
 static void CharToOctal(unsigned char *s, char  c);
 static long GetNextTabPosition(class textview  *v, int  width, struct text_statevector  *sv, struct formattinginfo  *info);
@@ -74,6 +73,7 @@ static void DrawChangeBar(class textview  *self,struct formattinginfo  *info,lon
 static void DrawStringNoTabs(class textview  *self, unsigned char *s, int  ctrl);
 static void drawcontinued(class textview  *self,struct formattinginfo  *info,long  by);
 
+#include "shared.h"
 
 static long StringWidth(short  *widths, unsigned char *s)
 {
@@ -464,6 +464,9 @@ static void ComputeStyleItem(class textview  *self, long  startPos , long  endPo
             case environment_View:
                 strcpy((char*)tp, "</view>");
                 break;
+	    case environment_None:
+	    case environment_Any:
+	        break; /* tjm - FIXME: what should this do? */
 	}
         newPixels += StringWidth(exposeStylesWidths, tp);
         while (*tp) {
@@ -499,6 +502,9 @@ static void ComputeStyleItem(class textview  *self, long  startPos , long  endPo
                     strcat((char*)tp, (te->data.viewref->dataObject)->GetTypeName());
                 strcat((char*)tp, "\">");
                 break;
+	    case environment_None:
+	    case environment_Any:
+	        break; /* tjm - FIXME: what should this do? */
         }
         newPixels += StringWidth(exposeStylesWidths, tp);
         while (*tp) {
@@ -1134,7 +1140,7 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
 {
     class text *text = Text(this);
     long zapMe;
-    int k, lli, delta, zapPos = 0, foundSpaces = 0, pos, by, bx = 0;
+    int k, lli, delta, zapPos = 0, foundSpaces = 0, pos, by = 0, bx = 0;
     unsigned char *sPtr;
     boolean isBlack = FALSE;
     class fontdesc *fontID = (this)->GetFont();
@@ -1142,7 +1148,7 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
     struct lineitem *tt, *tlp;
     int leftmost, leftmostchar;
     int currentBump;
-    char *color = NULL, *bgcolor=NULL;
+    char *color = NULL;
     const char *rcolor = NULL;
     long c1, c2, c3;
     const char *rbgcolor = NULL;
@@ -1552,9 +1558,11 @@ long textview::LineRedraw(enum textview_LineRedrawType  type, class mark  *curre
 
                         (this)->GetBackgroundColor(&rbgcolor, &bc1, &bc2, &bc3);
                         if(rbgcolor != NULL){
+#if 0 /* unused */
                             if (strcmp(tt->ti_bgcolor,rbgcolor) == 0)
  /* foreground  already set*/
                                 bgcolor = tt->ti_bgcolor;
+#endif
                             strncpy(cbgbuf,rbgcolor,64);
                             cbgbuf[63] = '\0';
                             rbgcolor = cbgbuf;

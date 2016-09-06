@@ -61,18 +61,18 @@ parser_GetCurrentparser(void) {
 }
 
 	void
-parser_ErrorGuts(struct parser *self, int severity, char *severityname, char *msg)
+parser_ErrorGuts(struct parser *self, int severity, const char *severityname, const char *msg)
 {
 	if(self->errorfunc) 
 		self->errorfunc(self, severity, severityname, msg);
 	else {
 		fprintf(stderr, "%s  %s\n", severityname, msg);
 		if (severity & parser_FREEMSG)
-			free(msg);
+			free((char *)msg);
 	}
 }
 
-	void 
+	static void 
 parser_Init(struct parser *self)
 {
 	self->tables = NULL;
@@ -85,7 +85,7 @@ parser_Init(struct parser *self)
 }
 
 	struct parser *
-parser_New() {
+parser_New(void) {
 	struct parser *self = (struct parser *)malloc(sizeof(struct parser));
 	if(self == NULL) 
 		return NULL;
@@ -100,7 +100,7 @@ parser_Destroy(struct parser *self)
 }
 
 	void 
-parser_Error(struct parser *self, int severity, char *msg)
+parser_Error(struct parser *self, int severity, const char *msg)
 {
 	int tsev = severity & (~parser_FREEMSG);
 	const char *name;
@@ -124,10 +124,7 @@ parser_Error(struct parser *self, int severity, char *msg)
 		handler(rock, char *word, int tokennumber) 
 */
 	void 
-parser_EnumerateReservedWords(self, handler, rock)
-	struct parser *self;
-	parser_enumresfptr handler;
-	void *rock;
+parser_EnumerateReservedWords(struct parser *self, parser_enumresfptr handler, void *rock)
 {
 	int i, nnames;
 	char **names;
@@ -168,9 +165,7 @@ parser_EnumerateReservedWords(self, handler, rock)
 	Typical strings:  "function", "setID", "tokNULL", "'a'", "\":=\""  
 */
 	int 
-parser_TokenNumberFromName(self, name)
-	struct parser *self;
-	char *name;
+parser_TokenNumberFromName(struct parser *self, char *name)
 {
 	int i, nnames, nmlen = strlen(name);
 	char **names;
@@ -182,7 +177,7 @@ parser_TokenNumberFromName(self, name)
 		if (*tnm == '\'' || *tnm == '\"') {
 			/* maybe client omitted quotes */
 			if (strncmp(name, tnm+1, nmlen) == 0 &&
-				nmlen == strlen(tnm) - 2)
+				nmlen == (int)strlen(tnm) - 2)
 				return i;
 		}
 	}
@@ -212,13 +207,11 @@ parser_TokenNumberFromName(self, name)
 	if no character follows the \, return \ and length of zero
 */
 	int 
-parser_TransEscape(buf, plen)
-	char  *buf;
-	int  *plen;
+parser_TransEscape(char  *buf, int  *plen)
 {
-	static char esctab[]
+	static const char esctab[]
 	  = "r\rn\nf\ft\tb\bv\v\"\"\'\'\\\\?\177e\033E\033R\rN\nF\fT\tB\bV\v";
-	char *cx;
+	const char *cx;
 	int val, len;
 
 	if (*buf == '\0') {
@@ -313,11 +306,7 @@ static char newstate [9][21] = {
 /*10 accept */
 };
 	int 
-parser_ParseNumber(buf, plen, intval, dblval)
-	char  *buf;
-	long  *plen;
-	long  *intval;
-	double  *dblval;
+parser_ParseNumber(char  *buf, long  *plen, long  *intval, double  *dblval)
 {
 	long val;
 	int len;
@@ -348,7 +337,7 @@ parser_ParseNumber(buf, plen, intval, dblval)
 	while (1) {
 		x = (x < '+' || x > 'x')  ?  20  :  xlate[x - '+'];
 		oldstate = currstate;
-		currstate = newstate[oldstate][x];
+		currstate = newstate[(unsigned char)oldstate][x];
 		if (currstate > 8) break;
 
 				/* accumulate value */
@@ -399,11 +388,7 @@ parser_ParseNumber(buf, plen, intval, dblval)
 
 
 	static void 
-debugstate(desc, state, pendtok, errorstate)
-	struct parser_tables *desc;
-	int state;
-	int pendtok;
-	int errorstate;
+debugstate(struct parser_tables *desc, 	int state, int pendtok, int errorstate)
 {
 	if (pendtok == NOTOK)
 		printf("(%d,--)", state);
@@ -418,20 +403,14 @@ debugstate(desc, state, pendtok, errorstate)
 }
 
 	static void 
-debugshift(desc, tact)
-	struct parser_tables  *desc;
-	int  tact;
+debugshift(struct parser_tables  *desc, int  tact)
 {
 	printf(":   shift to state %d\n", tact);
 	fflush(stdout);
 }
 
 	static void 
-debugreduce(desc, rule, revealedstate, newstate)
-	struct parser_tables *desc;
-	int rule;
-	int revealedstate;
-	int newstate;
+debugreduce(struct parser_tables *desc, int rule, int revealedstate, int newstate)
 {
 	int i;
 	printf(":   reduce   %d->%d\n", revealedstate, newstate);
@@ -451,25 +430,20 @@ debugreduce(desc, rule, revealedstate, newstate)
 }
 
 	static void 
-debugflush(desc, state)
-	struct parser_tables  *desc;
-	int  state;
+debugflush(struct parser_tables  *desc, int  state)
 {
 	printf("\t\tpop state %d\n", state);
 	fflush(stdout);
 }
 
 	static void 
-debugnewline() {
+debugnewline(void) {
 	printf("\n");
 	fflush(stdout);
 }
 
 	int 
-parser_Parse(self, lexer, lexrock)
-	struct parser *self;
-	parser_lexerfptr lexer;
-	void *lexrock;
+parser_Parse(struct parser *self, parser_lexerfptr lexer, void *lexrock)
 {
 	struct parser_tables *desc = self->tables;
 	int x, tact;	/* temps */

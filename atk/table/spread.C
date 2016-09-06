@@ -266,7 +266,6 @@ void spread::ComputeSizes() {
             rh=0;
         }
         for (c = t->NumberOfColumns()-1; c >= 0; c--) {
-            static view *tc=NULL;
             if (!(t->col[c].flags&FLAG_DEFAULT_SIZE)) continue; //  width explicitly set
             if(t->IsJoinedToAnother(r,c)) continue; // accounted for in the base cell.
             cell = t->GetCell( r, c);
@@ -522,7 +521,6 @@ void spread::Print(FILE  * f, const char  *proc /* processor */, const char  *fo
 
 /* full update when window changes */
 
-extern void spread_ComputeAnchorOffsets(class spread *V, struct rectangle *rect);
 void spread::FullUpdate(enum view_UpdateType  how, long  left , long  top , long  width , long  height)
 {
     struct rectangle cliprect;
@@ -866,7 +864,6 @@ void spread::ExposeChild(class view *v)
     struct cell *curc;
     struct chunk chunk;
     class table *d;
-    struct rectangle child;
     
     d = MyTable(this);
     height = d->NumberOfRows();

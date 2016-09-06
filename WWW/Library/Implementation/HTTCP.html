@@ -51,11 +51,11 @@ HTDoConnect measures the time to do the connection and updates the
 calculated weights in the cache of visited hosts.
 
 <PRE>
-extern int HTDoConnect PARAMS((	HTNetInfo  	*net,
+extern int HTDoConnect (	HTNetInfo  	*net,
 				char		*url,
 			     	u_short		default_port,
 			    	u_long 		*addr,
-				BOOL		use_cur));
+				BOOL		use_cur);
 </PRE>
 
 <H3>Passive Connection Establishment</H3>
@@ -64,7 +64,7 @@ This function makes a non-blocking accept on a port and polls every second
 until MAX_ACCEPT_POLL is reached.
 
 <PRE>
-extern int HTDoAccept PARAMS((HTNetInfo *net));
+extern int HTDoAccept (HTNetInfo *net);
 </PRE>
 
 <A NAME="hostcache"><H2>Caching Hosts Names</H2></A>
@@ -88,7 +88,7 @@ On every connect to a multihomed host, the average connect time is updated
 exponentially for all the entries.
 
 <PRE>
-extern void HTTCPAddrWeights PARAMS((char * host, time_t deltatime));
+extern void HTTCPAddrWeights (char * host, time_t deltatime);
 </PRE>
 
 <H3>Cleanup the Memory</H3>
@@ -97,7 +97,7 @@ This function is called from <A
 HREF="HTAccess.html#Library">HTLibTerminate</A>.
 
 <PRE>
-extern void HTTCPCacheRemoveAll NOPARAMS;
+extern void HTTCPCacheRemoveAll (void);
 </PRE>
 
 <H3>Control Variables</H3>
@@ -116,7 +116,7 @@ pass the error number as a parameter as we on some platforms get
 different codes from sockets and local file access.
 
 <PRE>
-extern CONST char * HTErrnoString PARAMS((int errornumber));
+extern CONST char * HTErrnoString (int errornumber);
 </PRE>
 
 <H3>Parse a Cardinal Value</H3>
@@ -136,9 +136,9 @@ extern CONST char * HTErrnoString PARAMS((int errornumber));
 ** 	*pstatus points to status updated iff bad
 */
 
-extern unsigned int HTCardinal PARAMS((int *		pstatus,
+extern unsigned int HTCardinal (int *		pstatus,
 				       char **		pp,
-				       unsigned int	max_value));
+				       unsigned int	max_value);
 </PRE>
 
 <A NAME="DNS"><H2>Internet Name Server Functions</H2></A>
@@ -154,7 +154,7 @@ pointer returned points to static memory which must be copied if it is to be
 kept.
 
 <PRE>
-extern CONST char * HTInetString PARAMS((struct sockaddr_in * sin));
+extern CONST char * HTInetString (struct sockaddr_in * sin);
 </PRE>
 
 <H3>Parse an internet node address and port</H3>
@@ -167,9 +167,9 @@ address field. <P>
 On exit *sin is filled in. If no port is specified in str, that field is left
 unchanged in *sin. On success, the number of homes on the host is returned.
 <PRE>
-extern int HTParseInet PARAMS((	struct sockaddr_in *	sin,
+extern int HTParseInet (	struct sockaddr_in *	sin,
 			       	CONST char *		str,
-				BOOL			use_cur));
+				BOOL			use_cur);
 </PRE>
 
 <H3>Name of a Machine on the Other Side of a Socket</H3>
@@ -181,7 +181,7 @@ reasons this is not the case. <P>
 this is now used to find you own host name, see <A HREF="HTTCP.html#HTGetHostName">HTGetHostName()</A></EM>
 
 <PRE>
-extern char * HTGetHostBySock PARAMS((int soc));
+extern char * HTGetHostBySock (int soc);
 </PRE>
 
 <H3>Host address retuned for specified host name</H3>
@@ -192,7 +192,7 @@ to the Domain Name Server is minimized. If OK and single homed host then
 it returns 0 but if it is a multi-homed host then 1 is returned.
 
 <PRE>
-extern int HTGetHostByName PARAMS((char *host, SockA *sin, BOOL use_cur));
+extern int HTGetHostByName (char *host, SockA *sin, BOOL use_cur);
 </PRE>
 
 
@@ -202,7 +202,7 @@ This function returns a CONET char pointer to a static location containing
 the name of this host or NULL if not available.
 
 <PRE>
-extern CONST char * HTGetHostName NOPARAMS;
+extern CONST char * HTGetHostName (void);
 </PRE>
 
 
@@ -215,7 +215,7 @@ the change is done before the first call to HTGetMailAddress() then this
 function will use the new host and domain name.
 
 <PRE>
-extern void HTSetHostName PARAMS((char * host));
+extern void HTSetHostName (char * host);
 </PRE>
 
 <H3>Cleanup Memory</H3>
@@ -223,7 +223,7 @@ extern void HTSetHostName PARAMS((char * host));
 Called from <A HREF="HTAccess.html#Library">HTLibTerminate</A>
 
 <PRE>
-extern void HTFreeHostName NOPARAMS;
+extern void HTFreeHostName (void);
 </PRE>
 
 <H3>Get Domain Name of This Machine</H3>
@@ -233,7 +233,7 @@ HTGetHostName() function. Changing the domain name requires a call to
 HTSetHostname().
 
 <PRE>
-extern CONST char *HTGetDomainName NOPARAMS;
+extern CONST char *HTGetDomainName (void);
 </PRE>
 
 
@@ -245,7 +245,7 @@ one of the current host name so different values can be assigned. The default
 value is &lt;USER&gt;@hostname where hostname is as returned by HTGetHostName().
 
 <PRE>
-extern CONST char * HTGetMailAddress NOPARAMS;
+extern CONST char * HTGetMailAddress (void);
 </PRE>
 
 
@@ -255,7 +255,7 @@ This function overwrites any other value of current mail address. This might
 be set by the user to change the value in the  <A HREF="http://info.cern.ch/hypertext/WWW/Protocols/HTTP/HTRQ_Headers.html#from">From field</A> in the <A HREF="http://info.cern.ch/hypertext/WWW/Protocols/HTTP/HTTP2.html">HTTP Protocol</A>.
 
 <PRE>
-extern void HTSetMailAddress PARAMS((char * address));
+extern void HTSetMailAddress (char * address);
 </PRE>
 
 <H3>Free Memory</H3>
@@ -263,7 +263,7 @@ extern void HTSetMailAddress PARAMS((char * address));
 Called by <A HREF="HTAccess.html#Library">HTLibTerminate</A>
 
 <PRE>
-extern void HTFreeMailAddress NOPARAMS;
+extern void HTFreeMailAddress (void);
 </PRE>
 
 <H2>Signal Handling</H2>
@@ -273,7 +273,7 @@ application does not have its own signal handling.
 
 <PRE>
 #ifdef WWWLIB_SIG
-extern void HTSetSignal NOPARAMS;
+extern void HTSetSignal (void);
 #endif
 
 #endif   /* HTTCP_H */

@@ -66,7 +66,6 @@ DrawOpen(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay,
     long handle_height;
     long tx, ty, tw, th; /* "T"itle coordinate space */
     struct FontSummary * titlesummary;
-    short * titlefontwidths;
     const char * title;
     
     if (self->neednewsize) {
@@ -90,7 +89,6 @@ DrawOpen(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay,
     if (self->titlefont == (class fontdesc *)0)
 	self->titlefont = fontdesc::Create(TITLEFONT, TITLESTYLE, TITLEPTS);
     titlesummary = (self->titlefont)->FontSummary( self->drawable);
-    titlefontwidths = (self->titlefont)->WidthTable( self->drawable);
 
     /* get the title and calculate its width */
     title = ((class icon *) self->dataobject)->GetTitle();
@@ -231,7 +229,7 @@ long string_width(const char  * string, class fontdesc  * font, class graphic  *
     short * widthtable, totalwidth = 0;
     widthtable = (font)->WidthTable( graphic);
     while (*string) 
-	totalwidth = totalwidth + widthtable[*string++];
+	totalwidth = totalwidth + widthtable[(unsigned char)*string++];
     return(totalwidth);
 }
 
@@ -426,10 +424,10 @@ iconview::Hit(enum view_MouseAction  action, long  x, long  y, long  clicks)
 	    x -= this->cx;
 	    y -= this->cy;
 	    return (this->child)->Hit( action, x, y, clicks);
-	} else {
+	} else {     /* tjm - unsure if this is the desired grouping (was (a&&b)||c) */
 	    if (y < this->cy
-		&& action == view_LeftUp
-		|| action == view_RightUp) {
+		&& ((action == view_LeftUp)
+		|| action == view_RightUp)) {
 		class view *v;
 		(this)->Close();
 		v = (class view *) this;
@@ -629,8 +627,6 @@ void iconview::RecSrchExpose(const struct rectangle &logical, struct rectangle &
      long cx, cy, cw, ch; /* my "C"hilds coordinate space */
       long handle_height;
       struct FontSummary * titlesummary;
-      short * titlefontwidths;
-      const char * title;
 
       if (this->child) {
 	  if (!this->isopen)
@@ -644,8 +640,6 @@ void iconview::RecSrchExpose(const struct rectangle &logical, struct rectangle &
 	  if (this->titlefont == (class fontdesc *)0)
 	      this->titlefont = fontdesc::Create(TITLEFONT, TITLESTYLE, TITLEPTS);
 	  titlesummary = (this->titlefont)->FontSummary( this->drawable);
-
-	  title = ((class icon *) this->dataobject)->GetTitle();
 
 	  handle_height = MIN(titlesummary->newlineHeight + 2, h);
 

@@ -209,7 +209,7 @@ int setprofilestring(const char *prog, const char *pref, const char *val)
 	    fputs(LineBuf, newW);
     }
 
-    if (vfclose(newW)) {
+    if (fclose(newW)) {
 	fclose(oldR);
 	fclose(newR);
 	unlink(newProfileFileName);

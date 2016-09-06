@@ -689,7 +689,7 @@ void textview::DoCopyRegion(long  pos , long  len, boolean  appendFlag, boolean 
     nextChange = (d->rootEnvironment)->GetNextChange( pos);
 
     cutFile = ((this)->GetIM())->ToCutBuffer();
-    if (UseDataStream = ((nextChange <= len|| stringmatch(d,pos,"\\begindata")) && (d)->GetExportEnvironments()))
+    if ((UseDataStream = ((nextChange <= len|| stringmatch(d,pos,"\\begindata")) && (d)->GetExportEnvironments())))
 	fprintf(cutFile, "\\begindata{%s, %d}\n",
 		copyAsText ? "text": (d)->GetTypeName(),
 		/* d->header.dataobject.id */ 999999);
@@ -1133,7 +1133,7 @@ void textview_TwiddleCmd (class textview  *self)
     /* The order of the following is kind of important */
 
     env1 = (class environment *)(text->rootEnvironment)->GetInnerMost( pos - 2);
-    if (env1 != NULL)
+    if (env1 != NULL) {
         if (env1->type != environment_View)
             env1 = NULL;
         else {
@@ -1141,9 +1141,10 @@ void textview_TwiddleCmd (class textview  *self)
             env1->data.viewref = NULL;  /* Protect viewref from Delete */
             (env1)->Delete();
         }
+    }
 
     env2 = (class environment *)(text->rootEnvironment)->GetInnerMost( pos - 1);
-    if (env2 != NULL)
+    if (env2 != NULL) {
         if (env2->type != environment_View)
             env2 = NULL;
         else {
@@ -1151,6 +1152,7 @@ void textview_TwiddleCmd (class textview  *self)
             env2->data.viewref = NULL;  /* Protect viewref from Delete */
             (env2)->Delete();
         }
+    }
 
     if (env1 != NULL)
         (text->rootEnvironment)->WrapView(
@@ -1229,7 +1231,7 @@ void textview_BackKillWordCmd (class textview  *self)
 
 static void yankDeleteWord (class textview  *self, int		 action, proctable_fptr moveFunction)
             { 
-    int i, ct, pos, npos, cutpos;
+    int i, ct, pos = 0, npos, cutpos;
     boolean	backward = FALSE;
     FILE	*cutFile;
     class text *text;
@@ -1607,7 +1609,7 @@ void textview_QuoteCmd(class textview  *self)
     if (tc >= '0' && tc <= '7') {
         char c1 = ((self)->GetIM())->GetCharacter() - '0',
              c2 = ((self)->GetIM())->GetCharacter() - '0';
-        tc = ((tc - '0' << 3) + c1 << 3) + c2;
+        tc = ((((tc - '0') << 3) + c1) << 3) + c2;
     }
     where = (self)->GetDotPosition();
     (self)->PrepareInsertion( tc == '\n');

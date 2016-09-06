@@ -213,13 +213,14 @@ ASlot::Default()
 	return *this; 
 }
 
+/*
 // Write()  -  write to file a line with the string value for the slot
 //
 //	process value:  
 //		precede newlines with \
 //		chop lines greater than 80 bytes by inserting \\\newline
 //		make \ into \\
-//
+*/
 	void 
 ASlot::Write(FILE *fp) const {
         Check();
@@ -237,7 +238,7 @@ ASlot::Write(FILE *fp) const {
 	ASlot *
 ASlot::Read(FILE *fp) {
 	AString dest, slotname, slottype;
-	int c;
+	int c = EOF;
 
 	// read slotname
 	while(!feof(fp) 
@@ -269,12 +270,12 @@ ASlot::Read(FILE *fp) {
 		dest << (char)c;
 	if(feof(fp) || c == EOF) return NULL;
 
-	
+	/*
 	// xxx unprocess the value:  
 	//	\newline->newline
 	//	\\\newline->empty
 	//	\\->\
-
+        */
 	// process value and put in new slot
 	if(res->EatString((char *)dest)) {
 		if(slotname.Length())
@@ -340,7 +341,6 @@ ASlot::EatString(const char *src) {
 	// get tag, if any
 	char tag[20], *tx = tag;
 	const char *sx = src;
-	int i = 0;
 	while (isspace(*sx)) sx++;
 	while (isupper(*sx) && tx < tag+sizeof(tag)-1) 
 		*tx++ = *sx++;
@@ -1044,7 +1044,7 @@ ASlotFunction::ASlotFunction(atom *n, aaction *s) {
 ASlotFunction::Default() {
 	if (IsDefault()) return *this;
 	if (GetFlags(isowner)) {
-		delete val.obj;
+		free(val.obj); /* tjm - can't delete if not real object -- should it be ATK? */
 		DisableFlags(isowner);
 	}
 	pe = NULL;
@@ -1234,7 +1234,7 @@ ASlotDataObj::ReadValue(const char *src) {
 	for (bex = begindata; *bex && getc(f) == *bex; bex++) {}
 	if (*bex) goto fail;
 	for (objx = objname; ; 
-			objx += (objx-objname<sizeof(objname)-2)?1:0)
+			objx += (objx-objname<(int)sizeof(objname)-2)?1:0)
 		if (feof(f) || (*objx=getc(f)) == ',' || *objx == '\n')
 			break;
 	if (*objx != ',') goto fail;
@@ -1382,7 +1382,7 @@ ASlot &ASlotFont::operator=(CONST ASlot *s) {
 		fontname = NewString(
 				(char *)((ASlotFont *)s)->fontname);
 	}
-	else;	// (here Assign does nothing and gives an error message)
+	/* else;	// (here Assign does nothing and gives an error message) */
 	Assign(s);
 	return *this;
 }
@@ -1505,7 +1505,7 @@ ASlot &ASlotColor::operator=(CONST ASlot *s) {
     if(s->IsType(this)) {
 	icolor *src=(icolor *)&((color &)*s);
 	if(src) src->Reference();
-    } else;	// (here Assign does nothing and gives an error message)
+    } /* else;	// (here Assign does nothing and gives an error message) */
     Assign(s);
     return *this;
 }

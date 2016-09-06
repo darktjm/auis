@@ -234,4 +234,6 @@ struct textps_simple_layout_state {
     struct textps_layout *footnotes;
 };
 
+extern void textview_InitializePS(void);
+
 #endif   /* _txtvps_H */

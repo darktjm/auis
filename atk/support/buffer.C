@@ -759,19 +759,6 @@ int buffer::WriteToFile(char  *filename, long  flags)
 	/* This is so that we preserve the modes of the original */
 	/* file, un-modified by umask. */
 	if (fileExists) chmod(filename, originalMode);
-#ifdef AFS_ENV
-	if (flags & buffer_ReliableWrite) { /* Go for the expensive but safe operation. */
-	    if ((closeCode = vclose(fileno(outFile))) < 0) /* stdio can trash errno. */
-		errorCode = errno; /* Protect it from the fclose below. */
-	    else
-		if (originalFilename != NULL)
-		    if ((closeCode = rename(filename, originalFilename)) < 0)
-			errorCode = errno;
-	}
-	else /* Fast and loose. */
-	    if ((closeCode = close(fileno(outFile))) < 0) /* stdio can trash errno. */
-		errorCode = errno; /* Protect it from the fclose below. */
-#else /* AFS_ENV */
 	if ((closeCode = close(fileno(outFile))) < 0) /* stdio can trash errno. */
 	    errorCode = errno; /* Protect it from the fclose below. */
 	else
@@ -779,7 +766,6 @@ int buffer::WriteToFile(char  *filename, long  flags)
 		if ((closeCode = rename(filename, originalFilename)) < 0)
 		    errorCode = errno;
 }
-#endif /* AFS_ENV */
 	fclose(outFile); /* Free stdio resources. */
 #if 0
 	/* This code resets the readonly flag based on the file

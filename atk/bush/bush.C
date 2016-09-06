@@ -56,24 +56,12 @@ END-SPECIFICATION  ************************************************************/
 struct map_item { 
   int	 uid;
   char	*uname;
-  char	*ucell;
 };
 
 #include <andrewos.h>
 ATK_IMPL("bush.H")
 
 #include <pwd.h>
-#ifdef AFS_ENV
-#include <afs/param.h>
-#include <util.h>		    /*getv*(), getc*() routine family*/
-#ifdef WHITEPAGES_ENV
-#include <wp.h>			    /*White Pages*/
-#endif /* WHITEPAGES_ENV */
-#include <netinet/in.h>	    /* For AFS 3.2 */
-#include <afs/vice.h>
-#include <afs/venus.h>
-#endif /* AFS_ENV */
-
 #include <dataobject.H>
 #include <filetype.H>
 #include <im.H>
@@ -85,7 +73,6 @@ ATK_IMPL("bush.H")
 #define	GivenDirName		    (self->given_dir_name)
 #define	RootPath		    (self->root_pathname)
 #define	UidUnameMap		    (self->uid_uname_map)
-#define	MyCellName		    (self->mycellname)
 #define	Debug			    (self->debug)
 #define	TREE			    ((self)->tree)
 #define	Root			    ((TREE)->RootNode())
@@ -136,17 +123,10 @@ ATK_IMPL("bush.H")
 
 tree_Specification DirTree[] = {tree_Order(tree_PreOrder), 0};
 
-const char			baseName[] = "/afs"; /*Pathname to give to pioctl()*/
-#define	MAX_PIOCTL_BUFF_SIZE	1000
- 
-
-
 ATKdefineRegistry(bush, apt, NULL);
 static int ExtractNodePath( class bush     *self, const char		   *source , char		   **path );
 static int ExtractNodeName( char		 *source, char	        **name );
-static const char * gethomecell( class bush   *self, const char		 *filename );
-static const char * getcell( class bush   *self, const char		 *filename );
-static const char * getname( class bush   *self, int   	  uid, const char		 *cell );
+static const char * getname( class bush   *self, int   	  uid);
 
 static int
 NodeFilter(SCANDIRSELARG_TYPE *dir )
@@ -209,7 +189,6 @@ bush::bush( )
   *GivenDirName = 0;
   Debug = 0;
   UidUnameMap = vector::Create(30,3);
-  MyCellName[0] = '\0';
   THROWONFAILURE((TRUE));
 }
 
@@ -318,7 +297,6 @@ bush::InitTree( const char		 *root_path )
       return;
   }
   else {
-      gethomecell(this,baseName);
     root = (TREE)->CreateRootNode(rootDir->name,(long)rootDir);
     rootDir->tn = root;
     AllocNameSpace(RootPath,&rootDir->path);
@@ -329,101 +307,12 @@ bush::InitTree( const char		 *root_path )
 }
 
 static const char *
-gethomecell( class bush   *self, const char		 *filename )
-{
-#ifdef AFS_ENV
-#if 0
-    struct ViceIoctl	 blob;
-  int			 outcome;
-
-  blob.in_size  = sizeof(baseName);
-  blob.in       = baseName;
-  blob.out_size = MAX_PIOCTL_BUFF_SIZE;
-  blob.out      = MyCellName;
-  
-  outcome = pioctl(baseName,VIOC_GET_PRIMARY_CELL,&blob,1);
-  if(outcome) {
-    blob.in_size  = sizeof(baseName);
-    blob.in       = baseName;
-    blob.out_size = MAX_PIOCTL_BUFF_SIZE;
-    blob.out      = MyCellName;
-
-    outcome = pioctl(baseName,VIOC_GET_WS_CELL,&blob,1);
-    if(outcome) 
-      sprintf(MyCellName,"%s","andrew.cmu.edu");
-    return(MyCellName);
-  }
-#else
-  char *home=environ::GetHome(NULL);
-  if(home && GetCellFromFileName(home, MyCellName, sizeof(MyCellName))==0) return MyCellName;
-  if(GetCurrentWSCell(MyCellName, sizeof(MyCellName))==0) return MyCellName;  
-#endif
-#endif /* AFS_ENV */
-  return(NULL);
-}
-
-static const char *
-getcell( class bush   *self, const char		 *filename )
-    {
-#ifdef AFS_ENV
-  static char		 residence[MAX_PIOCTL_BUFF_SIZE];
-#if 0
-  struct ViceIoctl	 blob;
-
-  blob.in_size  = sizeof(filename);
-  blob.in       = filename;
-  blob.out_size = MAX_PIOCTL_BUFF_SIZE;
-  blob.out      = residence;
-
-  if(pioctl(filename,VIOC_FILE_CELL_NAME,&blob,1))
-    return(MyCellName);
-  return(residence);
-#else
-  if(GetCellFromFileName(filename, residence, sizeof(residence))==0) return residence;
-  else return "";
-#endif
-#else
-  return("");
-#endif /* AFS_ENV */
-}
-
-static const char *
-getname( class bush   *self, int   	  uid, const char		 *cell )
+getname( class bush   *self, int   	  uid)
       {
   int		     i = 0;
   struct map_item  *item = NULL;
   char			    *uname = NULL;
   struct passwd    *pw = NULL;
-#ifdef AFS_ENV
-  for( i = 0 ; i < (UidUnameMap)->Count() ; i++ ) {
-    item = (struct map_item*)(UidUnameMap)->Item(i);
-    if((uid == item->uid) && cell && item->ucell && !strcmp(cell,item->ucell)) {
-      uname = item->uname;
-      break;
-    }
-  }
-  if(!uname) {
-    if(pw = (struct passwd *) getcpwuid(uid,cell)) {
-      item = (struct map_item*)calloc(1,sizeof(struct map_item));
-      item->uid = uid;
-      AllocNameSpace(pw->pw_name,&item->uname);
-      AllocNameSpace(cell,&item->ucell);
-      (UidUnameMap)->AddItem((long)item);
-      uname = item->uname;
-    }
-    else {
-      char	    uid_str[200];
-
-      item = (struct map_item*)calloc(1,sizeof(struct map_item));
-      item->uid = uid;
-      sprintf(uid_str,"%u@%s",uid,cell);
-      AllocNameSpace(uid_str,&item->uname);
-      AllocNameSpace(cell,&item->ucell);
-      (UidUnameMap)->AddItem((long)item);
-      uname = item->uname;
-    }
-  }
-#else /* AFS_ENV */
   for( i = 0 ; i < (UidUnameMap)->Count() ; i++ ) {
     item = (struct map_item*)(UidUnameMap)->Item(i);
     if(uid == item->uid) {
@@ -436,7 +325,6 @@ getname( class bush   *self, int   	  uid, const char		 *cell )
       item = (struct map_item*)calloc(1,sizeof(struct map_item));
       item->uid = uid;
       AllocNameSpace(pw->pw_name,&item->uname);
-      AllocNameSpace("",&item->ucell);
       (UidUnameMap)->AddItem((long)item);
       uname = item->uname;
     }
@@ -447,12 +335,10 @@ getname( class bush   *self, int   	  uid, const char		 *cell )
       item->uid = uid;
       sprintf(uid_str,"%u",uid);
       AllocNameSpace(uid_str,&item->uname);
-      AllocNameSpace("",&item->ucell);
       (UidUnameMap)->AddItem((long)item);
       uname = item->uname;
     }
   }
-#endif /* AFS_ENV */
   return(uname);
 }
 
@@ -530,7 +416,7 @@ bush::ScanDir( tree_type_node tn )
 	}
 #endif /* S_IFLNK */
 	else DirEntryType(tn,i).filevar = TRUE;
-	AllocNameSpace(getname(this,stats.st_uid,getcell(this,fullEntryName)),
+	AllocNameSpace(getname(this,stats.st_uid),
 		       &DirEntryOwner(tn,i));
 	DirEntryTimeStamp(tn,i) = stats.st_mtime;
 	DirEntrySize(tn,i) = stats.st_size;

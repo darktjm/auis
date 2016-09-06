@@ -79,11 +79,12 @@ void rawtextview::ReceiveInputFocus()
     PostKeyState((this->raw_state)->AddBefore(this->textview::keystate)); /* Yech, this makes no sense to me, but works */
     PostMenus(this->raw_menus);
     (this->raw_menus)->SetMask(textview_NoMenus);
-    if (GetEditor() == VI)
+    if (GetEditor() == VI) {
 	if (GetVIMode() == COMMAND)
 	    message::DisplayString(this, 0, "Command Mode");
 	else
 	    message::DisplayString(this, 0, "Input Mode");
+    }
     WantUpdate(this);
 }
 

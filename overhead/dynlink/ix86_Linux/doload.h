@@ -43,8 +43,6 @@ typedef enum doload_mode_enum {
 	Fix			/* .. converting .o to .do file */
 } doload_mode;
 
-extern int doload_trace;
-
 #define doload_extension ".do"
 
 extern int doload_trace;

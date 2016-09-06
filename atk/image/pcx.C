@@ -151,7 +151,6 @@ pcx::Load( const char  *fullname, FILE  *fp )
             {
     FILE *f;
     unsigned char pcxhd[128];
-    int cnt, b;
     int xmin;
     int xmax;
     int ymin;

@@ -90,9 +90,9 @@ void textview_DownInsertEnvironmentCmd(class textview  *self);
 void textview_LeftInsertEnvironmentCmd(class textview  *self);
 void textview_RightInsertEnvCmd(class textview  *self);
 static boolean StyleCompletionWork(class style  *style, struct result  *data);
-static enum message_CompletionCode StyleComplete(char  *partial, class stylesheet  *styleSheet, char  *resultStr, int  resultSize);
+static enum message_CompletionCode StyleComplete(char  *partial, long ss, char  *resultStr, int  resultSize);
 static boolean StyleHelpWork(class style  *style, struct helpData  *helpData);
-static void StyleHelp(char  *partial, class stylesheet  *styleSheet, int  (*helpTextFunction)(), long  helpTextRock);
+static void StyleHelp(char  *partial, long ss, message_workfptr helpTextFunction, long  helpTextRock);
 void textview_InsertEnvironment(class textview  *self, const char  *sName);
 void InitializeMod();
 
@@ -225,7 +225,7 @@ void textview::DeleteCharacters(long  pos, long  len)
 static class environment *AddNewEnvironment(class textview  *self, class stylesheet  *ss, class environment  *env, struct InsertStack  *insert)
 {
     class style *style = NULL;
-    class environment *newEnv;
+    class environment *newEnv = NULL;
 
     if (insert-> next != NULL) {
 	env = AddNewEnvironment(self, ss, env, insert->next);
@@ -415,10 +415,10 @@ void textview::PrepareInsertion(boolean  insertingNewLine)
 class environment *textview::GetEnclosingEnvironment(long  pos)
 {
     class environment *te;
+#ifdef IGNORE_STYLEFLAGS_AT_STARTOFPARAGRAPH
     long lastCmd = (this->imPtr)->GetLastCmd();
     class text *d = Text(this);
 
-#ifdef IGNORE_STYLEFLAGS_AT_STARTOFPARAGRAPH
     if (lastCmd != lcNewLine
 	 && (pos == 0
 	     || (d)->GetChar( pos - 1) == '\n')) {
@@ -903,7 +903,7 @@ static void DoDisplayInsertEnvironment(class textview  *self)
 {
     class text *d = Text(self);
     const char *cp;
-    char *p;
+    char *p = NULL;
     char outstr[1000];
 
     if (self->insertEnvironment == d->rootEnvironment && self->insertStack == NULL) {
@@ -915,7 +915,6 @@ static void DoDisplayInsertEnvironment(class textview  *self)
 	struct InsertStack *st;
 	class environment *env;
 	const char *name;
-	char *s;
 
 	p = &outstr[999];
 	*p = '\0';
@@ -959,7 +958,7 @@ static void DoDisplayInsertEnvironment(class textview  *self)
 	strncpy(p, "Current Insertion Style", 23);
 	cp = p;
     }
-    message::DisplayString(self, 0, p);
+    message::DisplayString(self, 0, cp);
 
 #if 0
     if (self->insertStack != NULL) {
@@ -1128,7 +1127,7 @@ static boolean StyleHelpWork(class style  *style, struct helpData  *helpData)
     char *r;
 
     if (completion::FindCommon(helpData->partial,
-       (style)->GetName()) == strlen(helpData->partial)) {
+       (style)->GetName()) == (int)strlen(helpData->partial)) {
         const char *menuName;
 	
 	strippedMenuName[0] = '\0';

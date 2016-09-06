@@ -13,10 +13,6 @@ SCRIBETEXT = scribetext
 RTF_DIRS = 2rtf rtf2
 #endif
 
-#ifdef MK_NEOS
-NEOS_DIRS = neos fxlib
-#endif
-
 #ifdef MK_STROFFET
 STROFFET = annot
 #endif
@@ -30,8 +26,4 @@ SCRIBETEXT = scribetext
 RTF_DIRS = 2rtf rtf2
 #endif
 
-#ifdef NEOS_ENV
-NEOS_DIRS = neos fxlib
-#endif
-
-SUBDIRS = $(SCRIBETEXT) $(RTF_DIRS) $(NEOS_DIRS) $(STROFFET)
+SUBDIRS = $(SCRIBETEXT) $(RTF_DIRS) $(STROFFET)

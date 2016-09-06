@@ -60,7 +60,8 @@ ATK_IMPL("pintv.H")
 
 #define TEXT_VIEWREFCHAR '\377'
 
-#define SAVESTR(str) (str?strcache::SaveStr(str):NULL)
+#define SaveStr strcache::SaveStr
+#define SAVESTR(str) (str?SaveStr(str):NULL)
 #define TEXT(tv) ((class text *)(tv)->GetDataObject())
 #define PREFS(pv) ((class prefs *)(pv)->GetDataObject())
 #define RFOLDEDEQ(x,y) ((x)==(y))
@@ -219,7 +220,7 @@ pintv::pintv()
     
     this->cat_sel=this->pref_sel=NULL;
 
-    currlabp=SAVESTR(currlab);
+    currlabp=SaveStr(currlab);
     
     this->category=currlabp;
     if(this->category==NULL) {
@@ -343,13 +344,13 @@ void pintv::FullUpdate(enum view_UpdateType  type, long  left , long  top , long
     (this)->GetVisualBounds( &bounds);
     if(this->redosizes) {
 	long dw=bounds.width, dh=40;
-	view_DSattributes vdsa=(this->buttons)->DesiredSize( bounds.width, bounds.height, view_WidthSet, &dw, &dh);
+	(this->buttons)->DesiredSize( bounds.width, bounds.height, view_WidthSet, &dw, &dh);
 	this->redosizes=FALSE;
 	if(dh<bounds.height) {
 	    (this)->GetObjSize( 1)=dh;	
 	    ((class lpair *)this)->needsfull=TRUE;
 	}
-	vdsa=(this->catlabel)->DesiredSize( bounds.width, bounds.height, view_WidthSet, &dw, &dh);
+	(this->catlabel)->DesiredSize( bounds.width, bounds.height, view_WidthSet, &dw, &dh);
 	if(dh<bounds.height-(this)->GetObjSize( 1)) {
 	    (this->leftpair)->GetObjSize( 0)=dh;
 	    (this->rightpair)->GetObjSize( 0)=dh;
@@ -412,7 +413,7 @@ static class viewref *InsertObject(class text  *self, long  pos, const char  *na
         /* is this needed? dictionary_Insert(NULL, (char *) newobject->id, (char *) newobject); */
         if (viewname == NULL || *viewname == '\0')
 	    viewname = (newobject)->ViewName();
-        if (env = AddView(self, pos, viewname, newobject))
+        if ((env = AddView(self, pos, viewname, newobject)))
             return env->data.viewref;
     }
     return NULL;
@@ -655,13 +656,13 @@ static struct sbutton_list blistd[]=
 };
 
 
-enum {
+enum Choices {
     None,
     CPUType,
     MachName,
     EnvVar,
     Cancel
-} Choices;
+};
 
 static const char * const choices[]={
     "Always",
@@ -676,9 +677,9 @@ static const char * const choices[]={
 static boolean getcondition(class pintv  *self, char  **current)
 {
     long result;
-    int num=0;
-    const char *prompt;
-    char *newcond, *def=NULL;
+    Choices num=None;
+    const char *prompt = NULL;
+    char *def=NULL;
     char buf[1024];
     static char defbuf[1024];
 
@@ -872,7 +873,6 @@ static void duplicate(class pintv  *self, class sbutton  *sb, struct prefdesc  *
     class prefs *prefs=PREFS(self);
     char buf[1024];
     struct prefdesc *pd2;
-    char *cond;
     
     if(message::AskForString(self, 100,"New preference for which application?", NULL, buf, sizeof(buf))<0) {
 	message::DisplayString(self, 0, "Cancelled!");
@@ -915,7 +915,7 @@ static void changeapp(class pintv  *self, class sbutton  *sb, struct prefdesc  *
 	message::DisplayString(self, 30, "Such a preference for that application already exists!");
 	return;
     }
-    pd->app=SAVESTR(buf);
+    pd->app=SaveStr(buf);
     (pd->obj)->SetAppName( pd->app);
 
     FixPref(self, pd);
@@ -997,7 +997,6 @@ static boolean AddInstances(struct prefdesc  *pd, struct addrock  *rock)
     if(INCLUDE(self, pd, self->autolist)) {
 	static const char editors[]="Current Setting (";
 	static const char comments[]="Comments";
-	static const char def[]=" (";
 	class text *pt=TEXT(self->cpref);
 	class style *bold=rock->bold;
 	struct sbutton_prefs *prefs=rock->prefs;
@@ -1181,9 +1180,7 @@ static void UpdateCPref(class pintv  *self)
 {
     class text *ct=TEXT(self->cpref);
     class stylesheet *ss;
-    class style *prefstyle;
     struct addrock rock;
-    class environment *rt;
 #ifdef TIMEY
     struct timeval a,b;
 
@@ -1267,7 +1264,7 @@ class view *pintv::Hit(enum view_MouseAction  action, long  x, long  y, long  nu
 	this->cat_sel=SelectLine(this->categories, this->cat_sel, TRUE);
 	if(this->cat_sel==NULL) return (class view *)this;
 	(TEXT(this->categories))->CopySubString( (this->cat_sel)->Eval(), (this->cat_sel)->GetLength(), buf, FALSE);
-	this->category=SAVESTR(buf);	
+	this->category=SaveStr(buf);	
 	UpdatePrefs(this);
 	this->pref=NULL;
 	if(this->autolist) UpdateCPref(this);
@@ -1277,7 +1274,7 @@ class view *pintv::Hit(enum view_MouseAction  action, long  x, long  y, long  nu
 	this->pref_sel=SelectLine(this->preferences, this->pref_sel, TRUE);
 	if(this->pref_sel==NULL) return (class view *)this;
 	(TEXT(this->preferences))->CopySubString( (this->pref_sel)->Eval(), (this->pref_sel)->GetLength(), buf, FALSE);
-	this->pref=SAVESTR(buf);
+	this->pref=SaveStr(buf);
 	if(this->autolist) {
 	    MoveCPref(this);
 	} else UpdateCPref(this);
@@ -1311,7 +1308,6 @@ static boolean VerifyPrefSanity(struct prefdesc  *pd2, class pintv  *self)
 static boolean CheckSanity(struct prefdesc  *pd, class pintv  *self)
 {
     if(pd->order>=0 && (pd->app==NULL || pd->app[0]=='\0' || (pd->app[0]=='*' && pd->app[1]=='\0'))) {
-	long pos=self->errors ? (self->errors)->GetLength() : 0;
 	self->cpd=pd;
 	self->newerrors=FALSE;
 	(PREFS(self)->prefsp)->Enumerate((list_efptr)VerifyPrefSanity, (char *)self);

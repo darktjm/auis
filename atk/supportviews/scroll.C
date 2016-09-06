@@ -131,10 +131,8 @@ static struct sbutton_info thebutton={
 ATKdefineRegistry(scroll, view, scroll::InitializeClass);
 static void draw_arrow(class scroll  *self, int  side, struct rectangle  *r, int  dir, boolean  lit);
 static long bar_height(class scroll  *self, int  side);
-static void set_frame(class scroll  *self, int  side, long posn, long  coord);
 static void endzone(class scroll  *self, int  side, int  end, enum view_MouseAction  action);
-static long what_is_at(class scroll  *self, int  side, long coord);
-static void calc_desired(class scroll  *self);
+/* static void calc_desired(class scroll  *self); */
 static void draw_elevator(class scroll  *self, int  side);
 static void draw_dot(class scroll  *self, int  side);
 static void move_elevator(class scroll  *self, int  side);
@@ -681,14 +679,14 @@ static long bar_height(class scroll  *self, int  side)
 
 static boolean barrects(class scroll  *self, int  side, struct rectangle  *boxrect , struct rectangle  *topbuttonrect , struct rectangle  *botbuttonrect, const struct rectangle &childrect, const struct rectangle &fullinterior, struct scrollstate &desired)
 {
-    long x1, x2, y1, y2;
-    long tx1, tx2, ty1, ty2;
-    long bx1, bx2, by1, by2;
+    long x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+    long tx1 = 0, tx2 = 0, ty1 = 0, ty2 = 0;
+    long bx1 = 0, bx2 = 0, by1 = 0, by2 = 0;
     long w, h;
     int c=2;
     long tezl=self->endzoneLength + self->buttonSpace;
     boolean result=TRUE;
-    long height;
+    long height = 0;
     
     while(c--) {
 	switch(side) {
@@ -1020,6 +1018,7 @@ void scroll::GetOrigin(long width, long height, long * originX, long * originY) 
     *originY+=cr.top;
 }
 
+#if 0 /* does nothing useful */
 static void calc_desired(class scroll  *self)
 {
     int i, exists[scroll_TYPES];
@@ -1032,7 +1031,7 @@ static void calc_desired(class scroll  *self)
             exists[Type[i]] = 1;
 
 }
-
+#endif
 
 
 
@@ -1430,13 +1429,13 @@ void scroll::FullUpdate(enum view_UpdateType  type, long  left , long  top , lon
 	case view_LastPartialRedraw:
 	    if(this->child) (this->child)->FullUpdate( type, (this->child)->EnclosedXToLocalX( left),  (this->child)->EnclosedYToLocalY(top), width, height);			      
 	    if(this->si) this->si->UpdateRegions(*this);
-	    calc_desired(this);
+	    /* calc_desired(this); */
 	    draw_everything(this);
 	    break;
 	case view_FullRedraw:
 	    if(this->child) (this->child)->FullUpdate( view_FullRedraw, r.left, r.top, r.width, r.height);			      
 	    if(this->si) this->si->UpdateRegions(*this);
-	    calc_desired(this);
+	    /* calc_desired(this); */
 	    draw_everything(this);
 	    break;
 	default: ;
@@ -1468,7 +1467,7 @@ void scroll::Update()
 
     if(this->si) this->si->UpdateRegions(*this);
     
-    calc_desired(this);
+    /* calc_desired(this); */
 
     if (this->current.location != this->desired.location || this->force_full_update) {
 	(this)->EraseVisualRect();
@@ -1547,7 +1546,6 @@ static void RepeatScroll(class scroll  *self, long  cTime)
 static void endzone(class scroll  *self, int  side, int  end, enum view_MouseAction  action)
 {
     int type = Type[side];
-    int typedEnd;
     if(action!=view_LeftDown && action!=view_RightDown) return;
     
     if(self->si==NULL) return;
@@ -1628,6 +1626,8 @@ static void HandleEndZone(class scroll  *self, enum view_MouseAction  action, lo
 	case view_RightUp:
 	    /* the code in scroll_Hit will handle canceling the event */
 	    if(self->lastbuttonstate) draw_arrow(self, self->side, r, dir, self->lastbuttonstate=FALSE);
+	default:
+	    break;
     }
     endzone(self, self->side, self->mousestate, action);
 }
@@ -1659,8 +1659,8 @@ static boolean CheckEndZones(class scroll  *self, enum view_MouseAction  action,
 
     for(i=0;i<scroll_SIDES;i++)
 	if((self->desired.location & (1<<i))) {
-	    int dir;
-	    struct rectangle *r;
+	    int dir=1;
+	    struct rectangle *r = NULL;
 	    if(PTINRECT(&self->topbutton[i], x, y)) {
 		r = &self->topbutton[i];
 		dir=1;
@@ -1702,9 +1702,10 @@ static void HandleThumbing(class scroll  *self, enum view_MouseAction  action, l
     long stype=self->side>0?Type[self->side]:scroll_VERT;
     
     long top=(Type[self->side]==scroll_VERT)?self->regions[scroll_Elevator]->rect[stype].top:self->regions[scroll_Elevator]->rect[stype].left;
+#if 0
     long bot=(Type[self->side]==scroll_VERT)?self->regions[scroll_Elevator]->rect[stype].top+self->regions[scroll_Elevator]->rect[stype].height:self->regions[scroll_Elevator]->rect[stype].left+self->regions[scroll_Elevator]->rect[stype].width;
+#endif
     long dbeg=top;
-    long dend=bot;
     long lheight=(Type[self->side]==scroll_VERT)?self->interiors[self->side].height:self->interiors[self->side].width;
 
     cur = &self->current.bar[Type[self->side]];
@@ -1734,14 +1735,10 @@ static void HandleThumbing(class scroll  *self, enum view_MouseAction  action, l
 	    dbeg=posn/* -self->seenLength/2 */;
 	    if (dbeg<0) {
 		dbeg=0;
-		dend = MIN(lheight, dbeg + self->seenLength);
 	    }
 	    else if (dbeg > lheight) {
 		dbeg= lheight;
-		dend = dbeg;
 	    }
-	    else
-		dend = MIN(lheight, dbeg + self->seenLength);
 	    for (i = 0; i < scroll_SIDES; i++)  {
 		if ((location & (1<<i)) && Type[i] == Type[self->side])  {
 		    if (self->si && self->thumbScroll && (self->lastaction==view_LeftDown || (self->emulation && self->lastaction==view_RightDown)))  {
@@ -1764,8 +1761,11 @@ static void HandleThumbing(class scroll  *self, enum view_MouseAction  action, l
 	else if (dbeg > lheight) {
 	    dbeg = lheight;
 	}
-	if(self->si) if(Type[self->side]==scroll_VERT) self->si->Absolute(0,0,lheight,dbeg);
-	else self->si->Absolute(lheight,dbeg, 0, 0);
+	if(self->si) {
+	    if(Type[self->side]==scroll_VERT)
+		self->si->Absolute(0,0,lheight,dbeg);
+	    else self->si->Absolute(lheight,dbeg, 0, 0);
+	}
 	im::ForceUpdate();
     }
 }

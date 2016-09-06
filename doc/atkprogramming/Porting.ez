@@ -2591,16 +2591,6 @@ distributed allsys.h file, it is defined in the platform-dependent system.h
 file for all Suns, for Vax BSD, and for Vax Ultrix version 3.0 and later.
 
 }
-\bold{RELEASE2_ENV}			[Default: not defined]
-
-\bold{
-}\indent{RELEASE2_ENV controls the use of some X.V11R2 specific files. By 
-default, this is undefined (which then assumes an X11 release 3, 4, or 5 
-environment). This only affects which font compiler (fc versus bdftosnf) is 
-used, how aliases for fonts are generated, and some workarounds for early 
-bugs in the Xlib region code.
-
-}
 \subsection{config/system_type/system.mcr}
 
 See config/protosys.mcr.
@@ -2666,8 +2656,6 @@ XBASEDIR in your definition of XUTILDIR
 
 
 \bold{XFC}			[Default:
-
-	RELEASE2_ENV implies $(XSRCDIR)/fonts/compiler/fc,
 
 	FONTS_TO_PCF_ENV implies $(XBASEDIR)/$(XBINDIR)/bdftopcf,
 

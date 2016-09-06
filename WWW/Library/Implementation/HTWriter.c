@@ -34,7 +34,7 @@ struct _HTStream {
 **	----------------------------------
 */
 
-PRIVATE void flush ARGS1(HTStream *, me)
+PRIVATE void flush (HTStream * me)
 {
     char *read_pointer 	= me->buffer;
     char *write_pointer = me->write_pointer;
@@ -70,7 +70,7 @@ PRIVATE void flush ARGS1(HTStream *, me)
 **	------------------
 */
 
-PRIVATE void HTWriter_put_character ARGS2(HTStream *, me, char, c)
+PRIVATE void HTWriter_put_character (HTStream * me, char c)
 {
     if (me->write_pointer == &me->buffer[BUFFER_SIZE]) flush(me);
     *me->write_pointer++ = c;
@@ -83,7 +83,7 @@ PRIVATE void HTWriter_put_character ARGS2(HTStream *, me, char, c)
 **
 **	Strings must be smaller than this buffer size.
 */
-PRIVATE void HTWriter_put_string ARGS2(HTStream *, me, CONST char*, s)
+PRIVATE void HTWriter_put_string (HTStream * me, CONST char* s)
 {
     int l = strlen(s);
     if (me->write_pointer + l > &me->buffer[BUFFER_SIZE]) flush(me);
@@ -95,7 +95,7 @@ PRIVATE void HTWriter_put_string ARGS2(HTStream *, me, CONST char*, s)
 /*	Buffer write.  Buffers can (and should!) be big.
 **	------------
 */
-PRIVATE void HTWriter_write ARGS3(HTStream *, me, CONST char*, s, int, l)
+PRIVATE void HTWriter_write (HTStream * me, CONST char* s, int l)
 {
  
     CONST char *read_pointer 	= s;
@@ -131,7 +131,7 @@ PRIVATE void HTWriter_write ARGS3(HTStream *, me, CONST char*, s, int, l)
 **	Note that the SGML parsing context is freed, but the created object is not,
 **	as it takes on an existence of its own unless explicitly freed.
 */
-PRIVATE int HTWriter_free ARGS1(HTStream *, me)
+PRIVATE int HTWriter_free (HTStream * me)
 {
     flush(me);
     if (!me->leave_open)
@@ -140,7 +140,7 @@ PRIVATE int HTWriter_free ARGS1(HTStream *, me)
     return 0;
 }
 
-PRIVATE int HTWriter_abort ARGS2(HTStream *, me, HTError, e)
+PRIVATE int HTWriter_abort (HTStream * me, HTError e)
 {
     HTWriter_free(me);
     return EOF;
@@ -164,7 +164,7 @@ PRIVATE CONST HTStreamClass HTWriter = /* As opposed to print etc */
 **	-------------------------
 */
 
-PUBLIC HTStream* HTWriter_new ARGS1(SOCKFD, soc)
+PUBLIC HTStream* HTWriter_new (SOCKFD soc)
 {
     HTStream* me = (HTStream*)calloc(1,sizeof(*me));
     if (me == NULL) outofmem(__FILE__, "HTWriter_new");
@@ -178,7 +178,7 @@ PUBLIC HTStream* HTWriter_new ARGS1(SOCKFD, soc)
     return me;
 }
 
-PUBLIC HTStream* HTWriter_newNoClose ARGS1(SOCKFD, soc)
+PUBLIC HTStream* HTWriter_newNoClose (SOCKFD soc)
 {
     HTStream * me = HTWriter_new(soc);
     if (me) me->leave_open = YES;
@@ -190,7 +190,7 @@ PUBLIC HTStream* HTWriter_newNoClose ARGS1(SOCKFD, soc)
 **	-------------------------
 */
 
-PUBLIC HTStream* HTASCIIWriter ARGS1(SOCKFD, soc)
+PUBLIC HTStream* HTASCIIWriter (SOCKFD soc)
 {
     HTStream* me = (HTStream*)calloc(1,sizeof(*me));
     if (me == NULL) outofmem(__FILE__, "HTML_new");

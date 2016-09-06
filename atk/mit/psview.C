@@ -107,11 +107,6 @@ static class keymap *psviewKeyMap;
 
 
 ATKdefineRegistry(psview, iconview, psview::InitializeClass);
-static void Close(class psview  *v,long  l);
-static void ps_open(class psview  *v,long  l);
-static void closeall(class view  *v,long  l);
-static void openall(class view  *v,long  l);
-static void insert(class textview  *tv,long  l);
 static void update_dpstextview(class psview  *self);
 static void inchsize(class psview  *self);
 static void pixelsize(class psview  *self);
@@ -121,38 +116,6 @@ static void edit(class psview  *self, long  rock);
 #endif /* DPS_ENV */
 static void autobounds(class psview  *self, long  rock);
 
-
-static void
-Close(class psview  *v,long  l)
-{
-    (v)->Close();
-}
-static void
-ps_open(class psview  *v,long  l)
-{
-    (v)->Open();
-}
-static void
-closeall(class view  *v,long  l)
-{
-    iconview::CloseRelated(v);
-}
-static void
-openall(class view  *v,long  l)
-{
-    iconview::OpenRelated(v);
-}
-
-static void
-insert(class textview  *tv,long  l)
-{
-    class text *t;
-    long pos;
-    t = (class text *) (tv)->GetDataObject();
-    pos = (tv)->GetDotPosition() + (tv)->GetDotLength();
-    tv->currentViewreference = (t)->InsertObject( pos,"ps", NULL);
-    (t)->NotifyObservers(0);
-}
 
 static void update_dpstextview(class psview  *self)
      {
@@ -387,8 +350,8 @@ void psview::PostMenus(class menulist  *menulist)
 boolean
 psview::InitializeClass()
     {
-    struct ATKregistryEntry  *textviewtype = ATK::LoadClass("textview");
-    struct ATKregistryEntry  *viewtype = ATK::LoadClass("view");
+    ATK::LoadClass("textview");
+    ATK::LoadClass("view");
 
     psviewMenus = new menulist;
     psviewKeyMap =  new keymap;
@@ -433,7 +396,6 @@ psview::Print(FILE    *file, const char	 *processor, const char	 *format, boolea
 {
     class ps *psobj;
     class text *textobject;
-    char *text;
     const char * const *psx;
     /* char *line = (char *)malloc(BUFSIZ); */
     long c, pos = 0, textlength = 0;
@@ -499,7 +461,6 @@ void psview::PrintPSRect(FILE *file, long logwidth, long logheight, struct recta
 {
     class ps *psobj;
     class text *textobject;
-    char *text;
     const char * const *psx;
     /* char *line = (char *)malloc(BUFSIZ); */
     long c, pos = 0, textlength = 0;

@@ -464,8 +464,7 @@ void ezapp::ReadInitFile()
 
 static void GotoLine(class text  *text, class textview  *view, int  line)
 {
-    int argument, pos, endpos;
-    int count;
+    int pos, endpos;
 
     pos = (text)->GetPosForLine( line);
     (view)->SetDotPosition( pos);
@@ -483,7 +482,7 @@ static void GotoLine(class text  *text, class textview  *view, int  line)
 static boolean LoadProcClass(char *partial)
 {
     char class_c[100];
-    int i;
+    unsigned int i;
     for(i = 0; (i < strlen(partial)) && (partial[i] != '-'); i++) class_c[i] = partial[i];
     if(i <= 99) {
 	class_c[i]= '\0';
@@ -535,6 +534,7 @@ static void runProcInWindow(ezapp *self, view *v, char *pname)
 		sprintf(error, "Bad command '%s'.", pname);
 		message::DisplayString(v, 0, error);
 		break;
+	    case keystate_ProcCalled: break;
 	}
     else {
 	sprintf(error,"Unknown procedure '%s'.", pname);

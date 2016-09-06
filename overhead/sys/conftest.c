@@ -149,60 +149,6 @@ int main (int argc, const char **argv)
 	OneProb = 0;
     }
 
-/* RUN_AMDS_ENV => AMS_DELIVERY_ENV */
-#ifdef RUN_AMDS_ENV
-#ifndef AMS_DELIVERY_ENV
-    printf("RUN_AMDS_ENV is defined, but AMS_DELIVERY_ENV is not.\n");
-    printf("Either define AMS_DELIVERY_ENV or undefine RUN_AMDS_ENV .\n");
-    OneProb = 1;
-#endif /* AMS_DELIVERY_ENV */
-#endif /* RUN_AMDS_ENV */
-
-/* AMS_DELIVERY_ENV => AMS_ENV */
-#ifdef AMS_DELIVERY_ENV
-#ifndef AMS_ENV
-    printf("AMS_DELIVERY_ENV is defined, but AMS_ENV is not.\n");
-    printf("Either define AMS_ENV or undefine AMS_DELIVERY_ENV .\n");
-    OneProb = 1;
-#endif /* AMS_ENV */
-#endif /* AMS_DELIVERY_ENV */
-
-/* AMS_ENV => MK_AUX_UTILS || MK_DATACAT */
-#ifdef AMS_ENV
-#if !(defined MK_AUX_UTILS || defined MK_DATACAT)
-    printf("AMS_ENV is defined, but both MK_AUX_UTILS and MK_DATACAT are not.\n");
-    printf("Either define either MK_AUX_UTILS or MK_DATACAT, or else undefine AMS_ENV .\n");
-    OneProb = 1;
-#endif /* !(defined MK_AUX_UTILS || defined MK_DATACAT) */
-#endif /* AMS_ENV */
-
-/* AFS_ENV => WHITEPAGES_ENV */
-#ifdef AFS_ENV
-#ifndef WHITEPAGES_ENV
-    printf("AFS_ENV is defined, but WHITEPAGES_ENV is not.\n");
-    printf("Either define WHITEPAGES_ENV or undefine AFS_ENV .\n");
-    OneProb = 1;
-#endif /* WHITEPAGES_ENV */
-#endif /* AFS_ENV */
-
-/* AMS_DELIVERY_ENV => WHITEPAGES_ENV */
-#ifdef AMS_DELIVERY_ENV
-#ifndef WHITEPAGES_ENV
-    printf("AMS_DELIVERY_ENV is defined, but WHITEPAGES_ENV is not.\n");
-    printf("Either define WHITEPAGES_ENV or undefine AMS_DELIVERY_ENV .\n");
-    OneProb = 1;
-#endif /* WHITEPAGES_ENV */
-#endif /* AMS_DELIVERY_ENV */
-
-/* AFS30_ENV => AFS_ENV */
-#ifdef AFS30_ENV
-#ifndef AFS_ENV
-    printf("AFS30_ENV is defined, but AFS_ENV is not.\n");
-    printf("Either define AFS_ENV or undefine AFS30_ENV .\n");
-    OneProb = 1;
-#endif /* AFS_ENV */
-#endif /* AFS30_ENV */
-
 /* DEBUG_MALLOC_ENV => ANDREW_MALLOC_ENV */
 #ifdef DEBUG_MALLOC_ENV
 #ifndef ANDREW_MALLOC_ENV
@@ -223,11 +169,9 @@ int main (int argc, const char **argv)
 #endif /* FONTS_TO_BDF_ENV */
 
 #ifndef X11_ENV
-#ifndef WM_ENV
-    printf("Neither X11_ENV nor WM_ENV is defined.\n");
+    printf("X11_ENV is not defined.\n");
     printf("ATK won't build for you.\n");
     OneProb = 1;
-#endif /* WM_ENV */
 #endif /* X11_ENV */
 
     if (OneProb != 0) {

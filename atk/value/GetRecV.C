@@ -73,7 +73,7 @@ GetRecV::GetRecV()
 
     this->x = this->y = this ->width = this->height = 0;
     this->tmpval = NULL;
-    this->lasty =this->lastx = this->firsty = this->lasty = 0;
+    this->firstx =this->lastx = this->firsty = this->lasty = 0;
     THROWONFAILURE( TRUE);
 }
 
@@ -161,7 +161,6 @@ void GetRecV::DrawNewValue( )
     (this)->DrawRect(&(this->tmpval->child));
 
 }
-#define ABS(A) (((A) > 0) ? (A): -(A))
 #define CREC(rec,self) rectangle_SetRectSize(&rec,MIN(self->firstx,self->lastx),MIN(self->firsty,self->lasty),ABS(self->firstx - self->lastx),ABS(self->firsty - self->lasty))
 #define OutBounds(SELF,X,Y)((X  + rectangle_Left(&(SELF->tmpval->parent))> rectangle_Width(&(SELF->tmpval->parent))) || (Y + rectangle_Top(&(SELF->tmpval->parent)))> rectangle_Height(&(SELF->tmpval->parent)))
 class valueview * GetRecV::DoHit( enum view_MouseAction  type,long  x,long  y,long  hits )
@@ -202,6 +201,8 @@ class valueview * GetRecV::DoHit( enum view_MouseAction  type,long  x,long  y,lo
 	    if(type ==  view_LeftMovement) break;
 	    CREC((this->tmpval->child),this);
 	    (tt)->SetValue((long)this->tmpval);
+	    break;
+	default:
 	    break;
     }
 

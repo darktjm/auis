@@ -26,7 +26,7 @@ struct _HTStream {
 	HTExtParseStruct *      eps;
 };
 
-PRIVATE void HTExtParse_put_character ARGS2(HTStream *, me, char, c)
+PRIVATE void HTExtParse_put_character (HTStream * me, char c)
 {
     while ((me->eps->used + 1) > me->eps->length) {
 	me->eps->length += INPUT_BUFFER_SIZE;
@@ -36,7 +36,7 @@ PRIVATE void HTExtParse_put_character ARGS2(HTStream *, me, char, c)
     me->eps->used++;
 }
 
-PRIVATE void HTExtParse_put_string ARGS2(HTStream *, me, CONST char*, s)
+PRIVATE void HTExtParse_put_string (HTStream * me, CONST char* s)
 {
     int l = strlen(s);
 
@@ -50,7 +50,7 @@ PRIVATE void HTExtParse_put_string ARGS2(HTStream *, me, CONST char*, s)
     me->eps->used += l;
 }
 
-PRIVATE void HTExtParse_write ARGS3(HTStream *, me, CONST char*, s, int, l)
+PRIVATE void HTExtParse_write (HTStream * me, CONST char* s, int l)
 {
     while ((me->eps->used + l) > me->eps->length) {
 	me->eps->length += INPUT_BUFFER_SIZE;
@@ -65,7 +65,7 @@ PRIVATE void HTExtParse_write ARGS3(HTStream *, me, CONST char*, s, int, l)
 }
 
 
-PRIVATE int HTExtParse_free ARGS1(HTStream *, me)
+PRIVATE int HTExtParse_free (HTStream * me)
 {
     if (TRACE) fprintf(TDEST, "HTExtParse_free\n");
     me->eps->finished = YES;
@@ -75,7 +75,7 @@ PRIVATE int HTExtParse_free ARGS1(HTStream *, me)
     return 0;
 }
 
-PRIVATE int HTExtParse_abort ARGS2(HTStream *, me, HTError, e)
+PRIVATE int HTExtParse_abort (HTStream * me, HTError e)
 {
     if (TRACE)
 	fprintf(TDEST, "HTExtParse_abort\n");
@@ -100,16 +100,16 @@ PRIVATE CONST HTStreamClass HTExtParseClass =
 }; 
 
 /*
-extern void SetBufferPt PARAMS((char * p, int l));
-extern void GiveReadStatus PARAMS((char * p, int l));
+extern void SetBufferPt (char * p, int l);
+extern void GiveReadStatus (char * p, int l);
 */
 
-PUBLIC HTStream* HTExtParse ARGS5(
-	HTRequest *,		request,
-	void *,			param,
-	HTFormat,		input_format,
-	HTFormat,		output_format,
-	HTStream *,		output_stream)
+PUBLIC HTStream* HTExtParse (
+	HTRequest *		request,
+	void *			param,
+	HTFormat		input_format,
+	HTFormat		output_format,
+	HTStream *		output_stream)
 {
     HTStream* me;
   

@@ -57,10 +57,12 @@ static struct proctable_Entry *switchobjproc = NULL;
 ATKdefineRegistry(pagev, view, pagev::InitializeClass);
 static void SetCurrentView(class pagev  *self,char  *name);
 static boolean CheckRightSwitchee(class pagev  *self, boolean  *NeedFullRedraw,struct page_switchee  *cp);
-static void AddSwitchee(class pagev  *self);
 static void NextSwitchee(class pagev  *self);
 static void SwitchObject(class pagev  *self, struct page_switchee  *swin /* really a long */);
+#if 0
+static void AddSwitchee(class pagev  *self);
 static void AddSwitcheeFromFile(class pagev  *self);
+#endif
 static void PasteSwitchee(class pagev  *self);
 
 
@@ -77,7 +79,7 @@ boolean pagev::InitializeClass()
     (pagev_keymap)->BindToKey( "^X^N", proc, 0);
     (pagev_menulist)->AddToML(
 	"Flip~95,Flip Page~90", proc, 0, 0);
-/*
+#if 0
     proc = proctable_DefineProc("pagev-add-page",
 	AddSwitchee, &pagev_classinfo, NULL,
 	"Adds a new thing for the page to switch to.");
@@ -91,7 +93,7 @@ boolean pagev::InitializeClass()
     keymap_BindToKey(pagev_keymap, "^X5", proc, 0);
     menulist_AddToML(pagev_menulist,
 	"page~95,Insert File~92", proc, NULL, 0);
-*/
+#endif
     proc = proctable::DefineProc("pagev-paste",
 	(proctable_fptr)PasteSwitchee, &pagev_ATKregistry_ , NULL,
 	"Pastes a switchee from the cut-buffer");
@@ -322,6 +324,7 @@ void pagev::WantInputFocus(class view  *v)
     (this)->view::WantInputFocus( v);
 }
 
+#if 0
 static void AddSwitchee(class pagev  *self)
 {
     char ObjName[150], ViewName[150], Label[150];
@@ -364,6 +367,7 @@ static void AddSwitchee(class pagev  *self)
  /*   NextSwitchee(self);
     page_NotifyObservers(sw, observable_OBJECTCHANGED); */
 }
+#endif
 
 static void NextSwitchee(class pagev  *self)
 {
@@ -388,6 +392,7 @@ static void SwitchObject(class pagev  *self, struct page_switchee  *swin /* real
 	"SwitchObject called for nonexistent object.");
 }
 
+#if 0
 static void AddSwitcheeFromFile(class pagev  *self)
 {
     char FileName[150], ViewName[150], Label[150], *ObjName;
@@ -445,6 +450,7 @@ static void AddSwitcheeFromFile(class pagev  *self)
     }
     (sw)->SetNowPlaying( d);
 }
+#endif
 static void PasteSwitchee(class pagev  *self)
 {
     char FileName[150], ViewName[150], Label[150], *ObjName;

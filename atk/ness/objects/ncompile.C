@@ -301,9 +301,8 @@ compileForLocation(class ness  *ness, long  pos , long  len, unsigned long  objl
 */
 	nesssym_scopeType
 compNewScope() {
-	nesssym_scopeType newscope;
 	if (curComp->scopex+1 >=
- 			(sizeof(curComp->scopes)/sizeof(curComp->scopes[0]))) {
+ 			(int)(sizeof(curComp->scopes)/sizeof(curComp->scopes[0]))) {
 		/* XXX compiler errror */
 		ReportError(":disastrous compile error: scope stack overflow", 0);
 		return curComp->scopes[curComp->scopex];
@@ -330,7 +329,7 @@ compPopScope() {
 	void
 compPushScope(nesssym_scopeType  scope) {
 	if (curComp->scopex+1 >= 
-			(sizeof(curComp->scopes)/sizeof(curComp->scopes[0]))) {
+			(int)(sizeof(curComp->scopes)/sizeof(curComp->scopes[0]))) {
 		ReportError(":disastrous compile error: scope stack overflow", 0);
 		return;
 	}

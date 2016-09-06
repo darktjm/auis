@@ -183,7 +183,7 @@ with the form:
 	void
 ThongOut(FILE  *f)
 	{
-	int len, tlen;
+	int len = 0, tlen;
 	int index;
 	struct line *tx;
 	char *es;

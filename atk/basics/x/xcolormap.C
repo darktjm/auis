@@ -75,7 +75,8 @@ void xcolormap::ExplodePixelMasks(xcolormap_pixelmap *pm, unsigned long red_mask
 }
 
 static void DirectColorCube(xcolormap *xcmap) {
-    int cubesize, samples;
+    unsigned int samples = 2;
+    int cubesize;
     Display *disp;
     class xcolor *xc;
     if (xcmap == NULL)
@@ -94,7 +95,7 @@ static void DirectColorCube(xcolormap *xcmap) {
 	    i=mincolors/2;
 	} else {
 	    for(i=mincolors;i>=2;i--) {
-		if(i*i*i<=cubesize) break;
+		if(i*i*i<=(unsigned int)cubesize) break;
 	    }
 	}
     }
@@ -121,7 +122,7 @@ static void DirectColorCube(xcolormap *xcmap) {
     }
     unsigned int maxcolor=samples-1;
     for(i=0;i<samples;i++) {
-	if(xc = xcmap->pixels[i] = (xcolor *)(xcmap)->AllocExact( i*65535/maxcolor, i*65535/maxcolor, i*65535/maxcolor, TRUE)) {
+	if((xc = xcmap->pixels[i] = (xcolor *)(xcmap)->AllocExact( i*65535/maxcolor, i*65535/maxcolor, i*65535/maxcolor, TRUE))) {
 	    xcmap->redramp[i]=xc->PixelRef() & pm.red_mask;
 	    xcmap->greenramp[i]=xc->PixelRef() & pm.green_mask;
 	    xcmap->blueramp[i]=xc->PixelRef() & pm.blue_mask;
@@ -132,7 +133,7 @@ static void DirectColorCube(xcolormap *xcmap) {
 static void NormalColorCube(xcolormap *xcmap) {
     unsigned short i, ri, gi, bi;
     long cubesize;
-    unsigned short samples;
+    unsigned short samples = 2;
     static int cubics[] = {216, 125, 64, 27, 8, -1};
     long realcubesize = -1;
     boolean approx=FALSE;
@@ -299,7 +300,7 @@ static Window FindManager(Display *display, Window mywin, Atom *AtomCache, Time 
 	}
 	Atom actual_type_return;
 	int actual_format_return;
-	unsigned long bytes_after_return=0, start=0;
+	unsigned long bytes_after_return=0;
 	unsigned char *prop_return=NULL;
 	unsigned long nitems;
 	int status=XGetWindowProperty(display, mywin, XA_INTEGER, 0, 1, TRUE, XA_INTEGER, &actual_type_return, &actual_format_return, &nitems, &bytes_after_return, &prop_return);
@@ -429,7 +430,7 @@ static inline unsigned int ColorDistance(unsigned short r, unsigned short g, uns
 
 xcolor *xcolormap::FindClosest(unsigned short r, unsigned short g, unsigned short b)
 {
-    xcolor *tmp, *best;
+    xcolor *tmp, *best = NULL;
     unsigned short R, G, B;
     Screen *s = DefaultScreenOfDisplay(XDisplay());
     int i = -1, nc = CellsOfScreen(s), bestDef = -1;
@@ -437,7 +438,7 @@ xcolor *xcolormap::FindClosest(unsigned short r, unsigned short g, unsigned shor
     XColor *defs=NULL;
 
     if(nc<=1024) {
-	if( defs = (XColor *) calloc(nc, sizeof(XColor)) ) {
+	if( ( defs = (XColor *) calloc(nc, sizeof(XColor)) ) ) {
 	    for( i = 0; i < nc; i++ ) defs[i].pixel = i;
 	    XQueryColors(XDisplay(), XColormap(), defs, nc);
 	    for( i = 0; i < nc; i++ ) {
@@ -450,7 +451,7 @@ xcolor *xcolormap::FindClosest(unsigned short r, unsigned short g, unsigned shor
 	}
     }
     retry:
-    for( i = 0; i < colors.GetN(); i++ ) {
+    for( i = 0; i < (int)colors.GetN(); i++ ) {
 	tmp = (class xcolor *) colors[i];
 	(tmp)->GetRGB(R, G, B);
 	diff = ColorDistance(R, G, B, r, g, b);
@@ -689,6 +690,8 @@ static void DelayedStartManager(void *pd, long) {
 	case xcolormap_PromptStart:
 	    PromptAndStart(self);
 	    break;
+	case xcolormap_ManualStart:
+	    break; /* tjm - FIXME: what should be done here? */
     }
 }
     
@@ -1008,7 +1011,7 @@ CARD32 *xcolormap::MapImageColors(RGBMap *map) {
     if(pending || imagecolorcount!=imagepixelcount || imagecolors==NULL || imagepixels==NULL) return NULL;
     CARD32 *pixels=(CARD32 *)malloc(sizeof(CARD32)*map->used);
     if(pixels==NULL) return NULL;
-    int i,j;
+    unsigned int i,j;
     for(i=0;i<map->used;i++) {
 	CARD32 minpixel=0;
 	unsigned long mindist=~0;
@@ -1034,7 +1037,7 @@ RGBMap *xcolormap::MapImageColorsToMap(RGBMap *map) {
 	rgb->red = (Intensity *)malloc(sizeof(Intensity) * size);
 	rgb->green = (Intensity *)malloc(sizeof(Intensity) * size);
 	rgb->blue = (Intensity *)malloc(sizeof(Intensity) * size);
-	int i,j;
+	unsigned int i,j;
 	for(i=0;i<map->used;i++) {
 	    unsigned long mindist=~0;
 	    for(j=0;j<imagecolorcount;j++) {
@@ -1203,7 +1206,6 @@ static void HandleSelection(xcolormap *self, XSelectionEvent *se) {
 	Atom type;
 	int format;
 	unsigned long nitems;
-	unsigned char *buf=NULL;
 	flex fbuf;
 	int status=MyGetProperty(dpy, se->requestor, se->property, False, XA_ATOM, &type, &format, &nitems, fbuf);
 	if(status!=Success || type!=XA_ATOM) {

@@ -328,7 +328,7 @@ RelLinkProc(class ATK  *aself, char  *param) {
 URLLinkProc(class ATK  *aself, char  *param) {
 	class linkview *self=(class linkview *)aself;
 
-	char buf[MAXPATHLEN], *p;
+	char buf[MAXPATHLEN];
 	class link *l = (class link *)(self)->GetDataObject();
 
 	if (param != NULL) 
@@ -347,7 +347,7 @@ URLLinkProc(class ATK  *aself, char  *param) {
 VarLinkProc(class ATK  *aself, char  *param) {
 	class linkview *self=(class linkview *)aself;
 
-	char buf[MAXPATHLEN], *p;
+	char buf[MAXPATHLEN];
 	class link *l = (class link *)(self)->GetDataObject();
 
 	if (param != NULL) 

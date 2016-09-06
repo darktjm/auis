@@ -4,4 +4,4 @@
 \* ********************************************************************** */
 #define	IHaveSubdirs
 
-SUBDIRS = adobe programs andy
+SUBDIRS = adobe programs

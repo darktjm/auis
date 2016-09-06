@@ -216,6 +216,14 @@ static void dynstr_copy(struct dynstr  *dest , struct dynstr  *src)
     dest->used = src->used;
 }
 
+/* this is a separate function to avoid a "variable <x> may be clobbered" warning */
+/* hopefully the compiler won't just in-line the code and ignore the clobberings */
+/* I really ought to change this to use C++ exceptions - tjm */
+static int my_setjmp(void)
+{
+    return setjmp(jmpenv);
+}
+
 static void dosearch(class textview  *tv, int  forwardp)
 {
     FILE *tmp_file;
@@ -249,7 +257,7 @@ static void dosearch(class textview  *tv, int  forwardp)
 	return;
     }
     
-    if (setjmp(jmpenv)) {
+    if (my_setjmp()) {
 	dynstr_destroy(&pattern);
 	dynstr_destroy(&prompt);
 	statestack_destroy(&stack);
@@ -614,7 +622,7 @@ static void dosearch(class textview  *tv, int  forwardp)
     if (dynstr_empty(&pattern))
 	goto emptypatternstate;
     compiled = NULL;
-    if (compileerr = search::CompilePattern(pattern.text, (struct SearchPattern **)&compiled))
+    if ((compileerr = search::CompilePattern(pattern.text, (struct SearchPattern **)&compiled)))
 	goto partialstate;
     if (StackTop->failurep)
 	goto failurestate;

@@ -51,6 +51,7 @@ AOptionMenuv::~AOptionMenuv() {
 
 ATK_CLASS(textview);
 START_VIEW_MOUSE_METHOD(ButtonHitMethod, AOptionMenu, AOptionMenuv) {
+    (void)num_clicks; (void)within; /* unused */
     if(dself->Source()==NULL) {
         text *txt=new text;
         dself->SetSource(txt);
@@ -93,6 +94,7 @@ AOptionCardv::~AOptionCardv() {
 
 
 START_VIEW_MOUSE_METHOD(CardHitMethod, AButton, AOptionCardv) {
+    (void)dself; (void)num_clicks; (void)within; /* unused */
     if(action==view_LeftUp || action==view_RightUp) GetIM()->VanishWindow();
     view *v=Label();
     if(v==NULL || !v->IsType(class_textview)) return;

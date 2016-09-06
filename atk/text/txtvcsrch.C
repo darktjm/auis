@@ -56,7 +56,8 @@ void textview_QueryReplaceCmd(class textview  *self);
 long skipToNextBalanceSymbol(class text *doc, long pos, int direction);
 void textview_BalanceCmd(class textview  *self);
 
-    
+
+/* tjm - will move later */
 extern long textview_ExposeRegion(class textview *tv, long pos1, long rlen, class view *inset, const struct rectangle &area, struct rectangle &hit, long &off, long extra);
 
 int textview_SearchCmd(class textview  *self, char *arg)
@@ -234,7 +235,7 @@ void textview_QueryReplaceCmd(class textview  *self)
     boolean keepRunning = TRUE;
     boolean returnPosition = TRUE;
     struct SearchPattern *lastPattern = NULL;
-    char *prompt = NULL;
+    const char *prompt = NULL;
     const char *searchError = NULL;
     char casedString[SRCHSTRLEN];
     char promptBuf[SRCHSTRLEN +20];
@@ -432,7 +433,7 @@ long skipToNextBalanceSymbol(class text *doc, long pos, int direction)
 {
     /* skip to next paren, bracket, or brace.
      * Search direction specified in "direction" */
-    int thischar, nextChar;
+    int thischar;
     static const char opens[] = "({[", closes[] = ")}]";
     long docLength = (doc)->GetLength();
     long limit= (direction==FORWARD) ? docLength : 0;
@@ -443,7 +444,6 @@ long skipToNextBalanceSymbol(class text *doc, long pos, int direction)
     while ( pos != limit ) {
 	pos += increment;
 	thischar = (doc)->GetChar( pos);
-	nextChar = (pos == limit) ? 0 : (doc)->GetChar( pos + increment);
 
 	if (strchr(opens, thischar)!=NULL || strchr(closes, thischar)!=NULL)
 	    return pos;
@@ -460,7 +460,7 @@ static long balance(class text *doc, long pos)
     const char *parentype;
     struct paren_node *parenstack = NULL;
     static const char opens[] = "({[", closes[] = ")}]";
-    const char *closeTable, *openTable;
+    const char *closeTable = closes, *openTable = opens;
 
     if ( pos <= 0  || pos >= (doc)->GetLength() )
 	return EOF;

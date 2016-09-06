@@ -81,8 +81,8 @@ cleans up memory kept by the Library when about to exit the
 application. It is highly recommended that they are used!
 
 <PRE>
-extern BOOL HTLibInit NOPARAMS;
-extern BOOL HTLibTerminate NOPARAMS;
+extern BOOL HTLibInit (void);
+extern BOOL HTLibTerminate (void);
 </PRE>
 
 <A NAME="Methods"><H2>Method Management</H2></A>
@@ -113,7 +113,7 @@ typedef enum {
 Gives the enumeration value of the method as a function of the (char *) name.
 
 <PRE>
-extern HTMethod HTMethod_enum PARAMS((char * name));
+extern HTMethod HTMethod_enum (char * name);
 </PRE>
 
 <H3>Get Method String</H3>
@@ -121,7 +121,7 @@ extern HTMethod HTMethod_enum PARAMS((char * name));
 The reverse of <I>HTMethod_enum()</I>
 
 <PRE>
-extern char * HTMethod_name PARAMS((HTMethod method));
+extern char * HTMethod_name (HTMethod method);
 </PRE>
 
 <H3>Valid Methods</H3>
@@ -131,8 +131,8 @@ This functions searches the list of valid methods for a given anchor, see
 YES else NO.
 
 <PRE>
-extern BOOL HTMethod_inList PARAMS((HTMethod	method,
-				    HTList *	list));
+extern BOOL HTMethod_inList (HTMethod	method,
+				    HTList *	list);
 </PRE>
 
 <HR>
@@ -162,8 +162,8 @@ extern BOOL HTMethod_inList PARAMS((HTMethod	method,
 **	returns		YES, if filename matches the template.
 **			NO, otherwise.
 */
-extern BOOL HTAA_templateMatch PARAMS((CONST char * tmplate, 
-				       CONST char * filename));
+extern BOOL HTAA_templateMatch (CONST char * tmplate, 
+				       CONST char * filename);
 </PRE>
 
 <HR>
@@ -178,7 +178,7 @@ typedef struct _HTNetInfo HTNetInfo;
 /*
 ** Callback to a protocol module
 */
-typedef int (*HTLoadCallBack)	PARAMS((HTRequest *	req));
+typedef int (*HTLoadCallBack)	(HTRequest *	req);
 
 #include "HTAnchor.h"
 #include <A
@@ -310,8 +310,8 @@ The list of (human) language values acceptable in the response. The default
 is all languages.
 
 <PRE>
-    BOOL (*<A NAME="z9"> callback</A> ) PARAMS((struct _HTRequest* request,
-						void *param));
+    BOOL (*<A NAME="z9"> callback</A> ) (struct _HTRequest* request,
+						void *param);
 </PRE>
 
 A function to be called back in the event that a file has been saved
@@ -445,19 +445,19 @@ added before being passed to HTAccess,
 but it will work as is for a simple
 request.
 <PRE>
-extern HTRequest * HTRequest_new NOPARAMS;
+extern HTRequest * HTRequest_new (void);
 </PRE>
 
 <H3>Delete request structure</H3>Frees also conversion list hanging
 from req->conversions.
 <PRE>
-extern void HTRequest_delete PARAMS((HTRequest * req));
+extern void HTRequest_delete (HTRequest * req);
 </PRE>
 
 <H3>Clear a request structure</H3>
 Clears a request structure so that it can be reused. The only thing that differs from using free/new is that the list of conversions is kept.
 <PRE>
-extern void HTRequest_clear PARAMS((HTRequest * req));
+extern void HTRequest_clear (HTRequest * req);
 </PRE>
 
 <A NAME="LoadDoc"><H2>Functions for Loading a Document</H2></A>
@@ -504,24 +504,24 @@ There are also some functions to help the client getting started with
 <A NAME="Relative"><H3>Load a document from relative name</H3></A>
 
 <PRE>
-extern int HTLoadRelative	PARAMS((CONST char * 	relative_name,
+extern int HTLoadRelative	(CONST char * 	relative_name,
 					HTParentAnchor*	here,
-					HTRequest *	request));
+					HTRequest *	request);
 </PRE>
 
 <A NAME="Absolute"></A><H3>Load a document from absolute name</H3>
 
 <PRE>
-extern int HTLoadAbsolute	PARAMS((CONST char *	addr,
-					HTRequest *	request));
+extern int HTLoadAbsolute	(CONST char *	addr,
+					HTRequest *	request);
 </PRE>
 
 <H3>Load a document from absolute name to a stream</H3>
 
 <PRE>
-extern int HTLoadToStream	PARAMS((CONST char * 	addr,
+extern int HTLoadToStream	(CONST char * 	addr,
 					BOOL 		filter,
-					HTRequest *	request));
+					HTRequest *	request);
 </PRE>
 
 <A NAME="Anchor"><H3>Load if necessary, and select an anchor</H3></A>
@@ -532,10 +532,10 @@ stack in the request structure so that no information is lost having
 more than one call. See also <A HREF="#BindAnchor">HTBindAnchor()</A>.
 
 <PRE>
-extern int HTLoadAnchor		PARAMS((HTAnchor  * 	a,
-					HTRequest *	request));
-extern int HTLoadAnchorRecursive PARAMS((HTAnchor *	a,
-					HTRequest *	request));
+extern int HTLoadAnchor		(HTAnchor  * 	a,
+					HTRequest *	request);
+extern int HTLoadAnchorRecursive (HTAnchor *	a,
+					HTRequest *	request);
 </PRE>
 
 <H3>Load a Document</H3>
@@ -550,12 +550,12 @@ If <CODE>keep_error_stack</CODE> is YES then the error (or info) stack
 is not cleared from the previous call.
 
 <PRE>
-extern int HTLoad		PARAMS((HTRequest * request,
-					BOOL keep_error_stack));
+extern int HTLoad		(HTRequest * request,
+					BOOL keep_error_stack);
 </PRE>
 
 <PRE>
-extern BOOL HTLoadTerminate	PARAMS((HTRequest * request, int status));
+extern BOOL HTLoadTerminate	(HTRequest * request, int status);
 </PRE>
 
 <A NAME="RelSearch"><H3>Search Using Relative URI</H3></A>
@@ -564,9 +564,9 @@ Performs a search on word given by the user. Adds the search words to
 the end of the current address and attempts to open the new address.
 
 <PRE>
-extern int HTSearch		PARAMS((CONST char *	keywords,
+extern int HTSearch		(CONST char *	keywords,
 					HTParentAnchor*	here,
-					HTRequest *	request));
+					HTRequest *	request);
 </PRE>
 
 <A NAME="AbsSearch"><H3>Search using Absolute URI</H3></A>
@@ -576,9 +576,9 @@ to the end of the current address and attempts to open the new
 address.
 
 <PRE>
-extern int HTSearchAbsolute	PARAMS((CONST char *	keywords,
+extern int HTSearchAbsolute	(CONST char *	keywords,
 					CONST char * 	indexname,
-					HTRequest *	request));
+					HTRequest *	request);
 </PRE>
 
 
@@ -591,7 +591,7 @@ not mandatory to use - but they make life easier!
 loading</H3></A>
 
 <PRE>
-extern BOOL HTBindAnchor PARAMS((HTAnchor *anchor, HTRequest *request));
+extern BOOL HTBindAnchor (HTAnchor *anchor, HTRequest *request);
 </PRE>
 
 <A NAME="HomePage"><H3>Generate the Anchor for the Home Page</H3></A>
@@ -601,7 +601,7 @@ program first runs. This is a default algorithm using the
 <CODE>WWW_HOME</CODE> environment variable.
 
 <PRE>
-extern HTParentAnchor * HTHomeAnchor NOPARAMS;
+extern HTParentAnchor * HTHomeAnchor (void);
 </PRE>
 
 <H3>Find Related Name</H3>
@@ -615,7 +615,7 @@ moved here by howcome@dxcern.cern.ch in order for all clients to take
 advantage. <P>
 
 <PRE>
-extern char *  HTFindRelatedName NOPARAMS;
+extern char *  HTFindRelatedName (void);
 </PRE>
 
 <A NAME="PostDoc"><H2>Functions for Posting a Document</H2></A>
@@ -639,7 +639,7 @@ to save the object to.
 </DL>
 
 <PRE>
-extern HTStream * HTSaveStream PARAMS((HTRequest * request));
+extern HTStream * HTSaveStream (HTRequest * request);
 </PRE>
 
 
@@ -666,14 +666,14 @@ typedef enum _HTSocBlock {
 typedef struct _HTProtocol {
     char *	name;
     HTSocBlock	block;	
-    int		(*load)		PARAMS((HTRequest *	request));
-    HTStream*	(*saveStream)	PARAMS((HTRequest *	request));
-    HTStream* 	(*postStream)	PARAMS((HTRequest *	request,
-					HTParentAnchor* postTo));
+    int		(*load)		(HTRequest *	request);
+    HTStream*	(*saveStream)	(HTRequest *	request);
+    HTStream* 	(*postStream)	(HTRequest *	request,
+					HTParentAnchor* postTo);
 } HTProtocol;
 
-extern BOOL HTRegisterProtocol PARAMS((HTProtocol * protocol));
-extern void HTDisposeProtocols NOPARAMS;
+extern BOOL HTRegisterProtocol (HTProtocol * protocol);
+extern void HTDisposeProtocols (void);
 </PRE>
 
 <H3>Uses Protocol Blocking IO</H3>
@@ -683,7 +683,7 @@ A small function to make life easier. Returns <CODE>YES</CODE> or
 the function always returns YES;
 
 <PRE>
-extern BOOL HTProtocolBlocking	PARAMS((HTRequest *	request));
+extern BOOL HTProtocolBlocking	(HTRequest *	request);
 </PRE>
 
 end

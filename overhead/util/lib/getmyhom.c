@@ -32,16 +32,17 @@
 #define NULL 0
 #endif
 
-static char *myhome = NULL;
+static const char *myhome = NULL;
 
 const char *getMyHome(void)
 /* Like gethome(NULL): a less general version that gets only my own home directory, not anybody's.  Will fail if the environment variable isn't set. */
 {
     const char *h;
 
-    if (myhome[0] == '\0') {
+    if (!myhome) {
 	h = getenv("HOME");
 	if (h != NULL) myhome = strdup(h);
+	else myhome = "";
     }
     return (myhome);
 }

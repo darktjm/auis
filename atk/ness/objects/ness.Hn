@@ -85,10 +85,14 @@ inline long ExtendShortSign(long x) {return (((x) ^ 0x8000) - 0x8000);}
 
 /* nodeclass.h - global definition for the nodeclass system 
 	 static to avoid global namespace pollution. */
-/* TJM - having this here is worse than global namespace pollution: */
-/*       it creates QTnode everywhere that uses ness */
-/* same is true of all the crap that gets added to ness.H in general */
-static struct node *QTnode;
+/*
+ * TJM - having this static is worse than global namespace pollution:
+ *       it creates QTnode everywhere that uses ness
+ *       So, instead, live with the "global namespace pollution"
+ *       Most of the stuff in this header really needs to be moved to a
+ *       local/private header, anyway.  What a mess.
+ */
+extern struct node *QTnode;
 
 
 /* error.h  --  declarations for error handling routines */

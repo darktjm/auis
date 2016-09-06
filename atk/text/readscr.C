@@ -79,7 +79,7 @@ static struct StackItem {
 
 
 ATKdefineRegistry(readscr, ATK, NULL);
-static void goshdarn(char  *errmsg);
+static void goshdarn(const char  *errmsg);
 static int textfix(class text  *d, int  len);
 static void linefix(class text  *d);
 static int scribefix(class text  *d);
@@ -140,7 +140,7 @@ int readscr::PrintFile(char  *filename , class textview  *tv, class text  *d, co
     || (fd = open(filename, (TrashWhenDone ? osi_O_READLOCK : O_RDONLY), 0444)) < 0) {
 	return(1);
     }
-    if (TrashWhenDone && osi_ExclusiveLockNoBlock(fd)
+    if ((TrashWhenDone && osi_ExclusiveLockNoBlock(fd))
      || (read(fd, s, statbuf.st_size) != statbuf.st_size)
      || ((d)->AlwaysInsertCharacters( 0, s, statbuf.st_size), 
         (readscr::Begin(d, 0, statbuf.st_size, 1, Version, 1)) != d)
@@ -460,7 +460,7 @@ static int shortscribe(class text  *d, char  *shortcommand)
     else if (strcmp(shortcommand, "u") == 0) strcpy(sname, "underline");
     else strcpy(sname, shortcommand);
 
-    if (tempstyle = (d->styleSheet)->Find( sname)) {
+    if ((tempstyle = (d->styleSheet)->Find( sname))) {
 	Mode = NORM;
 	if (startenv(delim, tempstyle)) {
 	    return(1);

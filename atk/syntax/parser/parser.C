@@ -147,7 +147,7 @@ parser::EnumerateReservedWords(parser_enumresfptr handler, void *rock) {
 */
 	 int
 parser::TokenNumberFromName(const char  *name) {
-	int i, nnames, nmlen = strlen(name);
+	unsigned int i, nnames, nmlen = strlen(name);
 	const char * const *names;
 	nnames = this->tables->num_tokens;
 	names = this->tables->names;
@@ -316,7 +316,7 @@ parser::ParseNumber(const char  *buf, long  *plen , long  *intval, double  *dblv
 	while ( 1 ) {
 		x = (x < '+' || x > 'x')  ?  20  :  xlate[x - '+'];
 		oldstate = currstate;
-		currstate = newstate[oldstate][x];
+		currstate = newstate[(unsigned char)oldstate][x];
 		if (currstate > 8) break;
 
 		/* accumulate value */

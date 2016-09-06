@@ -325,7 +325,7 @@ sunraster::Load( const char  *fullname, FILE  *fp )
   /*
    *  Handle color...
    */
-  if (mapsize = memToVal(header.maplen, 4)) {
+  if ((mapsize = memToVal(header.maplen, 4))) {
     map = (byte *) malloc(mapsize);
     if (fread(map, sizeof(byte), mapsize, f) < mapsize) {
       return(-1);

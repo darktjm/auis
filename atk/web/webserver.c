@@ -31,24 +31,22 @@
 
 #include <webparms.h>
 
+#include "webserver.h"
+
 	void 
-webaccept(f, viewforclient)
-	FILE  *f;
-	void (*viewforclient)();
+webaccept(FILE  *f, void (*viewforclient)(char *))
 {
-	char c;
-	FILE *fp, *ofp;
-	int fromlen, cnt;
-	char hostname[64];
-	struct hostent *hp;
+	FILE *fp;
+	int cnt;
+	socklen_t fromlen;
 	char buf[2560], *cp;
-	int i,  s,  ns,  len;
-	struct sockaddr_un saun,  fsaun;
+	int s,  ns;
+	struct sockaddr_un fsaun;
 
 	s = fileno(f);
 /*	im::RemoveFileHandler(f);		??? WHY ??? xxx  */
 
-	ns = accept(s,  &fsaun,  &fromlen);
+	ns = accept(s,  (struct sockaddr *)&fsaun,  &fromlen);
 	if (ns < 0) {
 		perror("server: accept");
 		return;  
@@ -96,15 +94,9 @@ webaccept(f, viewforclient)
 }
 
 	int 
-weblisten() {
-	char c;
-	FILE *fp, *ofp;
-	int fromlen, cnt;
-	char hostname[64];
-	struct hostent *hp;
-	char buf[2560], *cp;
-	int i,  s,  ns,  len;
-	struct sockaddr_un saun,  fsaun;
+weblisten(void) {
+	int s,  len;
+	struct sockaddr_un saun;
 
 	/*
 	 * Get a socket to work with.  This socket will
@@ -134,7 +126,7 @@ weblisten() {
 	unlink(ADDRESS);
 	len = sizeof(saun.sun_family) + strlen(saun.sun_path) + 1;
 
-	if (bind(s,  &saun,  len) < 0) {
+	if (bind(s,  (struct sockaddr *)&saun,  len) < 0) {
 		perror("server: bind");
 		return(1);
 	}
@@ -157,8 +149,7 @@ weblisten() {
 
 	int 
 webclient(char  *buf, int  timeout, char  *rbuf, int  size)  {
-	char c, *eb;
-	FILE *fp, *ofp;
+	FILE *ofp;
 	int i,  s,  len, res, del;
 	struct sockaddr_un saun;
 	
@@ -195,7 +186,7 @@ webclient(char  *buf, int  timeout, char  *rbuf, int  size)  {
 	i = i * 100;
 	del = 0;
 	for(i = 0; 1; i++) {
-		res = connect(s,  &saun,  len);
+		res = connect(s,  (struct sockaddr *)&saun,  len);
 		if (res >= 0) break;
 		if (i == timeout)
 			return (-2);

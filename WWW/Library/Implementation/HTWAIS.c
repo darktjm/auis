@@ -118,7 +118,7 @@ struct _HTStream {
 */
 /* modified from Jonny G's version in ui/question.c */
 
-void showDiags ARGS2(
+void showDiags (
 	HTStream *, 		target,
 	diagnosticRecord **, 	d)
 {
@@ -142,7 +142,7 @@ void showDiags ARGS2(
 PRIVATE BOOL acceptable[256];
 PRIVATE BOOL acceptable_inited = NO;
 
-PRIVATE void init_acceptable NOARGS
+PRIVATE void init_acceptable (void)
 {
     unsigned int i;
     char * good = 
@@ -160,7 +160,7 @@ PRIVATE void init_acceptable NOARGS
 **	returns		nil if error
 **			pointer to malloced string (must be freed) if ok
 */
-char * WWW_from_archie ARGS1 (char *, file)
+char * WWW_from_archie  (char *, file)
 {
     char * end;
     char * result;
@@ -188,9 +188,9 @@ char * WWW_from_archie ARGS1 (char *, file)
 **			pointer to malloced string (must be freed) if ok
 */
 PRIVATE char hex [17] = "0123456789ABCDEF";
-extern char from_hex PARAMS((char a));			/* In HTWSRC @@ */
+extern char from_hex (char a);			/* In HTWSRC @@ */
 
-PRIVATE char * WWW_from_WAIS ARGS1(any *, docid)
+PRIVATE char * WWW_from_WAIS (any *, docid)
 
 {
     static unsigned char buf[BIG];
@@ -292,7 +292,7 @@ PRIVATE char * WWW_from_WAIS ARGS1(any *, docid)
 **	docid->size	is valid
 **	docid->bytes	is malloced and must later be freed.
 */
-PRIVATE any * WAIS_from_WWW ARGS2 (any *, docid, char *, docname)
+PRIVATE any * WAIS_from_WWW  (any *, docid, char *, docname)
 {
     char *z; 	/* Output pointer */
     char *sor;	/* Start of record - points to size field. */
@@ -435,7 +435,7 @@ PRIVATE any * WAIS_from_WWW ARGS2 (any *, docid, char *, docname)
 **	--------------------------------------
 */
 
-PRIVATE void output_text_record ARGS4(
+PRIVATE void output_text_record (
     HTStream *,			target,
     WAISDocumentText *,		record,
     boolean,			quote_string_quotes,
@@ -481,7 +481,7 @@ PRIVATE void output_text_record ARGS4(
  * displays either a text record or a set of headlines.
  */
 void
-display_search_response ARGS4(
+display_search_response (
     HTStructured *,		target,
     SearchResponseAPDU *,	response,
     char *,			database,
@@ -650,7 +650,7 @@ display_search_response ARGS4(
 **	returns		<0		Error has occured
 **			HT_LOADED	OK
 */
-PUBLIC int HTLoadWAIS ARGS1(HTRequest * , request)
+PUBLIC int HTLoadWAIS (HTRequest * , request)
 
 #define MAX_KEYWORDS_LENGTH 4000
 #define MAX_SERVER_LENGTH 1000

@@ -88,7 +88,6 @@ struct osi_Times {unsigned long int Secs; unsigned long int USecs;};
 
 #define HAS_SYSEXITS 1
 
-#define NOMETAMAIL 1
 #define POSIX_ENV 1
 
 #endif /* !In_Imake */

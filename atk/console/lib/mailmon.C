@@ -49,11 +49,7 @@ extern char MyHomeDir[];
 
 
 
-#ifdef AMS_DELIVERY_ENV
-boolean UseNonAndrewMail = FALSE;
-#else /* AMS_DELIVERY_ENV */
 boolean UseNonAndrewMail = TRUE;
-#endif /* AMS_DELIVERY_ENV */
 
 #ifdef ANDREW_PRINTING_ENV
 boolean UseNonAndrewPrint = FALSE;

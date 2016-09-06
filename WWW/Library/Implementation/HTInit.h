@@ -31,15 +31,15 @@ MIME Type Conversions
    example, the latter is used when Line Mode Browser is started in Non-Interactive mode.
    
  */
-extern void HTFormatInit PARAMS((HTList * conversions));
-extern void HTFormatInitNIM PARAMS((HTList * conversions));/*
+extern void HTFormatInit (HTList * conversions);
+extern void HTFormatInitNIM (HTList * conversions);/*
 
 File Suffix Setup
 
    This functions defines a basic set of file suffixes and the corresponding MIME types.
    
  */
-extern void HTFileInit NOPARAMS;
+extern void HTFileInit (void);
 #endif/*
 
    End of HTInit Module. */

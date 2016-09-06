@@ -86,9 +86,7 @@ extern GetDiskStats(); /* */
 #define min(a, b) (((a) <= (b)) ? (a) : (b))
 
 
-main(argc, argv)
-int argc;
-char **argv;
+int main(int argc, char **argv)
 {
     int GVMPollFreq = 0, DiskPollFreq = 0, UsersID = 0;
     int time1 = 0, time2 = 0, sleepTime = 0;
@@ -97,7 +95,7 @@ char **argv;
 	sendval(("%d:%d\n", PARSE_ERR_1, 0));
 	exit(-1);
     }
-    *argv++;
+    argv++;
     UsersID = atoi(*argv++);
     if ((GVMPollFreq = atoi(*argv++)) < 1){
 	sendval(("%d:%d\n", PARSE_ERR_2, 0));

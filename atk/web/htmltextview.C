@@ -61,7 +61,9 @@ static void makeList(htmltextview *self, enum ListType listtype);
 static void addItem(htmltextview *self, long rock);
 static void newlineAddItem(htmltextview *self, long rock);
 static void setTargetLink(frame *frame, long param);
+#if 0
 static void setSourceLink(htmltextview *self, long param);
+#endif
 static void addLink(htmltextview *self, long rock);
 static void addTarget(htmltextview *self, long rock);
 static void showAttributes(htmltextview *self);
@@ -236,13 +238,12 @@ void showComments(htmltextview *self, long viewcomments)
 }
 
 /* given a position or a starting environment, this finds the first list environment */
-htmlenv *first_list_env(htmltextview *self, long pos, enum ListType *type, htmlenv *start_env)
+static htmlenv *first_list_env(htmltextview *self, long pos, enum ListType *type, htmlenv *start_env)
 {
-    htmltext *txtobj= (htmltext *)(self)->GetDataObject();
     htmlenv *env;
     long o=0, u=0, d=0;
     style *style;
-    const char *sname;
+    const char *sname = NULL;
     if (start_env) env= (htmlenv *)(start_env)->GetParent();
     else env= (htmlenv *)(self)->GetInsertEnvironment(pos);
 
@@ -282,7 +283,7 @@ void fixList(htmltextview *self, long rock)
 static void insert_dingbats(htmlenv *curr_env, htmltext *txtobj, long pos, long *plength, int sublist, enum ListType ltype)
 {
     long chars_sofar=0, j=0, env_len, old_len, env_pos=0, nxt_chg;
-    int cmpval;
+    int cmpval = 0;
     char c, prev;
     long dingbat_length;
     htmlenv *env=NULL;
@@ -363,7 +364,7 @@ void makeList(htmltextview *self, enum ListType listtype)
     htmlenv *env=NULL, *temp_env=NULL;
     style *list_style;
     const char *list_name;
-    boolean SibEndFlag, SibBeginFlag;
+    boolean SibEndFlag = TRUE, SibBeginFlag = TRUE;
     enum ListType Sibltype;
 
     if ((self)->ConfirmReadOnly()) return;
@@ -381,7 +382,7 @@ void makeList(htmltextview *self, enum ListType listtype)
 	    message::DisplayString(self, 0, "Unrecognized list type; must pass 'unordered', 'ordered', or 'definition' as a parameter.");
 	    return;
 	}
-    }
+    } else list_name= "unknown"; // never reached?
     /* find or create necessary style */
     list_style= ((ht)->GetStyleSheet())->Find(list_name);
     if (!list_style) {
@@ -456,7 +457,7 @@ void makeList(htmltextview *self, enum ListType listtype)
     (ht)->NotifyObservers(0);
 }
 
-void endTerm(htmltextview *self, long rock)
+static void endTerm(htmltextview *self, long rock)
 {
     htmltext *ht= (htmltext *)(self)->GetDataObject();
     long pos= (self)->CollapseDot();
@@ -550,10 +551,8 @@ void addItem(htmltextview *self, long rock)
 
 void newlineAddItem(htmltextview *self, long rock)
 {
-    htmltext *ht= (htmltext *)(self)->GetDataObject();
     long pos= (self)->CollapseDot();
     htmlenv *env;
-    boolean found= FALSE, begflg, endflg;
     int count= ((self)->GetIM())->Argument();
     ((self)->GetIM())->ClearArg(); /* don't want textview-insert-newline to see it */
 
@@ -572,9 +571,19 @@ void newlineAddItem(htmltextview *self, long rock)
     }
 }
 
+static char *skipwhitespace(const char *s)
+{
+    while (*s && isspace(*s)) ++s;
+    return (char *)s;
+}
+
+static char *skiptokenchars(const char *s)
+{
+    while (*s && !isspace(*s) && *s != '=') ++s;
+    return (char *)s;
+}
 
 static mark *sourcemark= NULL;
-static class linkview *autolink_source= NULL;
 
 /* XXX- not totally completed.  can only set a link WITHIN a file, until a non-AFS URL can be associated with a buffer */
 void setTargetLink(frame *frame, long param)
@@ -634,10 +643,10 @@ void setTargetLink(frame *frame, long param)
 	pos= (tar_hv)->GetDotPosition();
 	len= (tar_hv)->GetDotLength();
 
-	if (env= (htmlenv *)(rootenv)->GetInnerMost(pos)) {
+	if ((env= (htmlenv *)(rootenv)->GetInnerMost(pos))) {
 	    first_env= env;
 	    while (env != rootenv) {
-		if (value= (env)->GetAttribValue("id"))
+		if ((value= (env)->GetAttribValue("id")))
 		    break;
 		env= (htmlenv *)(env)->GetParent();
 	    }
@@ -645,7 +654,7 @@ void setTargetLink(frame *frame, long param)
 		printf("id = %ld [%s]\n", i, value);
 	    else {
 		char newatts[128];
-		long len;  int rc;  
+		int rc;
 		rc= message::AskForString(tar_hv, 0, "No id found at target. Enter one to be added there. id = ", NULL, newatts, sizeof(newatts));
 		if (rc < 0) return;
 
@@ -676,6 +685,7 @@ void setTargetLink(frame *frame, long param)
     sourcemark= NULL;
 }
 
+#if 0
 /* sets the link from an anchor to destination */
 void setSourceLink(htmltextview *self, long param)
 {
@@ -726,6 +736,7 @@ void setSourceLink(htmltextview *self, long param)
     sourcemark= (hto)->CreateMark(pos, len);
 
 }
+#endif
 
 
 void addLink(htmltextview *self, long rock)
@@ -798,12 +809,12 @@ void addTarget(htmltextview *self, long rock)
 }
 
 
-int displayAtts(htmltextview *self, htmlenv *env, htmlenv *rootenv)
+static int displayAtts(htmltextview *self, htmlenv *env, htmlenv *rootenv)
 {
     attlist *atts;
     char newatts[1024], *s, *label;
-    const char *sname;
-    int rc;
+    const char *sname = NULL;
+    int rc = -1;
     if (env && env!=rootenv) {
 	s= ((env)->GetAttribs())->MakeIntoString();
 
@@ -863,7 +874,7 @@ void showAttributes(htmltextview *self)
 
     /*    if (im_GetLastCmd(textview_GetIM(self)) == textview_lcCommand(textview_lcDisplayEnvironment)) { */
     if (dis_pos == cur_pos && dis_len == cur_len) {
-	if (env= (htmlenv *)self->textview::displayEnvironment)
+	if ((env= (htmlenv *)self->textview::displayEnvironment))
 	    rc= displayAtts(self, env, rootenv);
     } else {
 	env= rootenv;
@@ -886,7 +897,7 @@ void showAttributes(htmltextview *self)
 	do  {
 	    if (cur_pos==(env)->Eval() && cur_len<=(env)->GetLength())
 		break;
-	} while (env=(htmlenv *)(env)->GetParent());
+	} while ((env=(htmlenv *)(env)->GetParent()));
 	if (!env) env= (htmlenv *)(rootenv)->GetInnerMost(cur_pos);
 	if (env && env!=rootenv)
 	    rc= displayAtts(self, env, rootenv);
@@ -1020,35 +1031,6 @@ htmltextview::~htmltextview()
     return;
 }
 
-
-void lookforid(htmltextview *self, long param)
-{
-    htmltext *hto= (htmltext *)(self)->GetDataObject();
-    long len= (hto)->GetLength(), val_len, pos;
-    char id[64], *begin, *end, *value=NULL;
-    int rc;
-    char *lookfor= (char *)param;
-
-    if (!lookfor) {
-	rc= message::AskForString(self, 0, "id = ", NULL, id, sizeof(id));
-	if (rc < 0) return;
-
-	begin= skipwhitespace(id);
-	if (*begin == '\0') return;
-	end= skiptokenchars(begin);
-	val_len= end-begin;
-	value= (char *) malloc (val_len+1);
-	strncpy(value, begin, val_len); value[val_len]= '\0';
-
-	lookfor= value;
-    }
-    pos= (hto)->FindDestId(lookfor);
-    (self)->SetDotPosition(pos);
-    (self)->SetDotLength(0);
-    (self)->SetTopPosition(pos);
-
-    if (value) free(value);
-}
 
 view *htmltextview::Hit(enum view_MouseAction action, long x, long y, long numberOfClicks) {
     view *vptr;

@@ -62,8 +62,7 @@ int STUniqueID(), STDelete(), STCopy(), STSymbol(), STNOP(), STStrip(),
   STStupidstrip(), STVerbatim(), STItemize(), STBlankspace(),
   STLabel(), STRef(), STTsymbol(), STValue();
 
-FP AssignFunc(ezword)
-     char *ezword;      
+FP AssignFunc(char *ezword)
 {
   if(!ULstrcmp(ezword, "delete"))
     return(STDelete);
@@ -137,14 +136,12 @@ FP AssignFunc(ezword)
   return(STNOP);
 }
 
-int STUniqueID()
+int STUniqueID(void)
 {
   return(++Token);
 }
 
-int STDevice(command, tofind)
-     char *command;
-     int tofind;
+int STDevice(char *command, int tofind)
 {
   char ch, device[TMP_SIZE];
   int in;
@@ -178,41 +175,31 @@ int STDevice(command, tofind)
 }
 
 
-int STDelete(command, tofind)
-     char *command;
-     int tofind;
+int STDelete(char *command, int tofind)
 {
   ParseText(tofind, "", "", NORMAL, NOP);
 }
 
   
-int STNOP(command, tofind)
-     char *command;
-     int tofind;
+int STNOP(char *command, int tofind)
 {
 }
 
 
-int STCopy(command, tofind)
-     char *command;
-     int tofind;
+int STCopy(char *command, int tofind)
 {
   fputs(command, fout);
 }
 
 
-int STStrip(command, tofind)
-     char *command;
-     int tofind;
+int STStrip(char *command, int tofind)
 {
   ParseText(tofind, "", "", NORMAL, PRINTTOFILE);
 }
 
 
 
-int STStupidstrip(command, tofind)
-     char *command;
-     int tofind;
+int STStupidstrip(char *command, int tofind)
 {
   char ch;
   int in;
@@ -235,9 +222,7 @@ int STStupidstrip(command, tofind)
 }
 
 
-int STSymbol(command, tofind)
-     char *command;
-     int tofind;
+int STSymbol(char *command, int tofind)
 {
   int token;
 
@@ -249,9 +234,7 @@ int STSymbol(command, tofind)
 }
 
 
-int STItemize(command, tofind)
-     char *command;
-     int tofind;
+int STItemize(char *command, int tofind)
 {
   fputs("\\itemize{", fout);
 
@@ -260,17 +243,13 @@ int STItemize(command, tofind)
   fputs("}\n", fout);
 }
 
-int STError(command, tofind)
-     char *command;
-     int tofind;
+int STError(char *command, int tofind)
 {
   fprintf(ferr, "* Unknown error!\n* %s: unknown error in input file.\n", me);
 }
 
 
-int STFootnote(command, tofind)
-     char *command;
-     int tofind;
+int STFootnote(char *command, int tofind)
 {
   int token;
 
@@ -287,9 +266,7 @@ int STFootnote(command, tofind)
 }
 
 
-int STBegin(command, tofind)
-     char *command;
-     int tofind;
+int STBegin(char *command, int tofind)
 {
   char ch, *instruction, *makelower();
   int in;
@@ -340,9 +317,7 @@ int STBegin(command, tofind)
 }
 
 
-int STEnd(command, tofind)
-     char *command;
-     int tofind;
+int STEnd(char *command, int tofind)
 {
   char ch, *instruction, *makelower();
   int in;
@@ -379,9 +354,7 @@ int STEnd(command, tofind)
 }
 
 
-int STCaps(command, tofind)
-     char *command;
-     int tofind;
+int STCaps(char *command, int tofind)
 {
   fputs("\\smaller{", fout);
 
@@ -391,9 +364,7 @@ int STCaps(command, tofind)
 }
 
 
-int STTilde(command, tofind)
-     char *command;
-     int tofind;
+int STTilde(char *command, int tofind)
 {
   /* ABSORB EVERYTHING UNTIL THE NEXT PRINTABLE CHARACTER */
 
@@ -417,9 +388,7 @@ int STTilde(command, tofind)
 }
 
 
-int STInclude(command, tofind)
-     char *command;
-     int tofind;
+int STInclude(char *command, int tofind)
 {
   char ch, instruction[TMP_SIZE];
   int in, accessible, readable;
@@ -466,9 +435,7 @@ int STInclude(command, tofind)
 }
 
 
-int STChapter(command, tofind)
-     char *command;
-     int tofind;
+int STChapter(char *command, int tofind)
 {
   int token;
 
@@ -482,9 +449,7 @@ int STChapter(command, tofind)
 
 
 
-int STDefine(command, tofind)
-     char *command;
-     int tofind;
+int STDefine(char *command, int tofind)
 {
   int in, nomoreflag=FALSE;
   char ch, *instruction, *makelower();
@@ -533,9 +498,7 @@ int STDefine(command, tofind)
 }
 
 
-int STNewpage(command, tofind)
-     char *command;
-     int tofind;
+int STNewpage(char *command, int tofind)
 {
   char ch, *instruction, *makelower();
   int in, times, token;
@@ -573,9 +536,7 @@ int STNewpage(command, tofind)
   AbsorbNewlines();
 }
 
-int STLabel(command, tofind)
-     char *command;
-     int tofind;
+int STLabel(char *command, int tofind)
 {
   char ch, *codeword;
   int in, token;
@@ -613,9 +574,7 @@ int STLabel(command, tofind)
     }
 }
   
-int STRef(command, tofind)
-     char *command;
-     int tofind;
+int STRef(char *command, int tofind)
 {
   char ch, *codeword;
   int in, token;
@@ -659,9 +618,7 @@ int STRef(command, tofind)
     }
 }
 
-int STTsymbol(command, tofind)
-     char *command;
-     int tofind;
+int STTsymbol(char *command, int tofind)
 {
   if(!strcmp(command, "zts"))
     fputs("\\formatnote{\\\\(ts}", fout);
@@ -671,9 +628,7 @@ int STTsymbol(command, tofind)
 }
 
   
-int STVerbatim(command, tofind)
-     char *command;
-     int tofind;
+int STVerbatim(char *command, int tofind)
 {
   verbatim++;
   ParseText(tofind, "", "", NORMAL, PRINTTOFILE);
@@ -681,9 +636,7 @@ int STVerbatim(command, tofind)
 }
 
 
-int STBlankspace(command, tofind)
-     char *command;
-     int tofind;
+int STBlankspace(char *command, int tofind)
 {
 char ch, *quan, *qual, *combined, quality;
 int in;
@@ -740,9 +693,7 @@ else
 fprintf(fout, "\\formatnote{.sp %lf%c}\n", quantity, quality);
 }
   
-int STValue(command, tofind)
-     char *command;
-     int tofind;
+int STValue(char *command, int tofind)
 {
   char *instruction, ch;
   int in;

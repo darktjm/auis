@@ -68,6 +68,9 @@ public:
 
     inline long GetData() { return (this->data); }
 
+    /* avoid delete issues */
+    virtual ~tree23int() {}
+
     tree23int();
 #if 0
 	static class tree23int * Allocate()  ;

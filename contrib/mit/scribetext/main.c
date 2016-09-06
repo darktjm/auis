@@ -65,9 +65,7 @@ void usage(), CloseFiles(), MakeTable(), TempPrintList(), ParseMain(),
   int ExecuteSpecial();
   char *GetInstruction();
   
-main(argc, argv)
-     int argc;
-     char *argv[];
+int main(int argc, char *argv[])
 {
   char filein[TMP_SIZE], fileout[TMP_SIZE], filetrans[TMP_SIZE], 
   fileerr[TMP_SIZE], datestamp[TMP_SIZE];
@@ -154,10 +152,7 @@ main(argc, argv)
 }
 
 
-FILE *FileProcess(prompt, filename, mode)
-     char *prompt;
-     char *filename;
-     char *mode;
+FILE *FileProcess(char *prompt, char *filename, char *mode)
 {
   int accessible, readable, len;
   FILE *fpt;
@@ -272,7 +267,7 @@ FILE *FileProcess(prompt, filename, mode)
 }
 
 
-void MakeTable()
+void MakeTable(void)
 {
   TABLE tmp;
   char ch, *scribeword, ezword[TMP_SIZE], *makelower();  
@@ -405,8 +400,7 @@ void MakeTable()
 }
 
 
-void SetupEnvironment(rootfile)
-     char *rootfile;
+void SetupEnvironment(char *rootfile)
 {
   void AddValue();
   char *username, *wd, *trimroot, *fullman;
@@ -449,8 +443,7 @@ void SetupEnvironment(rootfile)
 
 }
 
-void AddValue(name, value)
-     char *name, *value;
+void AddValue(char *name, char *value)
 {
   VALUES tmp;
 

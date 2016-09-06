@@ -159,7 +159,6 @@ GetLine(FILE  *f, boolean  deblank)
 parseClines(FILE  *f)
 	{
 	int firstindent;	/* indent of first line */
-	char *cx;
 	struct line *result, *last, *tl;
 
 	firstindent = InputText - InputBuffer;
@@ -281,7 +280,7 @@ ParseLine(FILE  *fin, struct line  *hdr)
 		}
 		return TRUE;
 	case CHAR:
-		type = "char *";
+		type = "const char *";
 		if (*kx == '*') {
 			/* advance past '*' */
 			bx = kx+1;

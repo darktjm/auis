@@ -297,7 +297,7 @@ struct listitem * chlist::FindItem(const char  *str)
 
 struct listitem * chlist::FindItemByIndex(unsigned long  index)
 {
-    if (index < this->numitems) {
+    if (index < (unsigned)this->numitems) {
         return (&this->ItemList[index]);
     }
     return NULL;
@@ -417,7 +417,7 @@ long chlist::GetRegionInfoForPosition(long  index, long  position, long  *size, 
     struct listitem *item = &this->ItemList[index];
     long itemPosition = item->loc;
     long len;
-    long itemLen, regionSize, regionOffset, regionID;
+    long itemLen, regionSize = 0, regionOffset = 0, regionID;
 
     if (index < this->numitems - 1) {
 	itemLen = this->ItemList[index + 1].loc - item->loc - 1;

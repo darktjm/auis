@@ -95,7 +95,6 @@ static void KeepOldCopy(class pintv  *self, long  curtime)
     char buf[1024];
     char error[1500];
     class cursor *busy, *old=NULL;
-    int close_err=0;
     FILE *fp=NULL;
     old=im::GetProcessCursor();
     message::DisplayString(self, 100, "Make sure you have a backup copy of your preferences.\nYou may not like how the preferences\n editor re-formats them.\n The preferences editor is still experimental,\nit may corrupt your preferences under some situations.\nIf this happens please let us know.");
@@ -120,14 +119,7 @@ static void KeepOldCopy(class pintv  *self, long  curtime)
 	}	    
 	errno=0;
 	(prefs)->WritePlain( fp, im::GetWriteID(), 0);
-#ifdef AFS_ENV
-	if(ferror(fp)) close_err=(-1);
-	else close_err=vclose(fileno(fp));
-	fclose(fp);
-	if(close_err!=0)
-#else
 	if((fclose(fp))!=0)
-#endif
 	{
 	    sprintf(error, "Failed to save old preferences in %s.", buf);
 	    message::DisplayString(self, 100, error);

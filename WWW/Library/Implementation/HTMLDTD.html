@@ -109,10 +109,10 @@ stream object.<P>
 name and href point to attribute
 strings or are NULL if the attribute
 is to be omitted.
-<PRE>extern void HTStartAnchor PARAMS((
+<PRE>extern void HTStartAnchor (
 		HTStructured * targetstream,
 		CONST char *  	name,
-		CONST char *  	href));
+		CONST char *  	href);
 
 
 #endif /* HTMLDTD_H */
@@ -123,7 +123,7 @@ is to be omitted.
 for specifying the next ID to be
 used by an editor in the series z1.
 z2,...
-<PRE>extern void HTNextID PARAMS((HTStructured * targetStream, int n));
+<PRE>extern void HTNextID (HTStructured * targetStream, int n);
 
 </PRE>End of module definition</BODY>
 </HTML>

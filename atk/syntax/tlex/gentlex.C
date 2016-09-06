@@ -107,7 +107,7 @@ Escapify(const char  *s, int  *plen)
 		{
 	static char escaped[200];
 	char *ex;
-	for (ex = escaped; ex-escaped < sizeof(escaped) - 2 && *s; s++) {
+	for (ex = escaped; (unsigned)(ex-escaped) < sizeof(escaped) - 2 && *s; s++) {
 		switch(*s) {
 		case '\'':
 		case '\"':

@@ -73,13 +73,8 @@ void web::ImbedTextInTable(table *t, chunk *c) {
 
 image *web::GetImage(const char *file, attlist *atts) {
 
-    long objectID = 0;
     class image* dat;
-    char* filename;
     struct htmlatts *hw, *hh;
-    char type[64], *lfile;
-    class htmlenv *imgEnv= NULL;
-    FILE *f;
 
     if (this->webcomp == NULL) 
         (this)->SetWebcom( new webcom);
@@ -152,7 +147,6 @@ mybuffer_ReadFile(class buffer  *self, char  *filename)  {
 	struct stat stbuf;
 	struct attributes *attributes;
 	struct attributes *tempAttribute;
-	char foo[1024];
 	filetype::CanonicalizeFilename(realName, filename, 
 				sizeof(realName) - 1);
 	filename = realName;
@@ -213,14 +207,13 @@ mybuffer_ReadFile(class buffer  *self, char  *filename)  {
 	void 
 web::SetWebcom(class webcom  *c) {
 	class buffer *buf;
-	int res;
 	this->webcomp  = c;
 	(c)->SetWeb(this);
 	if ((c)->Status() & WEBCOM_Loaded) {
 		(this)->ClearCompletely();
 		(this)->ReadTemplate("html", FALSE);
 		buf = buffer::FindBufferByData(this);
-		res = mybuffer_ReadFile(buf, (c)->GetTmpName());
+		mybuffer_ReadFile(buf, (c)->GetTmpName());
 	}
 }
 

@@ -186,7 +186,7 @@ public:
     the event of an Update, the queue is executed.  In the event of a
     FullUpdate, the queue is cleared, and the valueview is simply
     drawn from scratch.
-
+  */
  /* This comment generated <<Wed Jul  1 01:58:25 1987>> so look to the */
  /* source file date.  Remember, all comments are LIES */
 

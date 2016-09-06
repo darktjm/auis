@@ -49,7 +49,7 @@ struct _HTStream {
 };
 
 
-PRIVATE BOOL is_html ARGS1(char *, buf)
+PRIVATE BOOL is_html (char * buf)
 {
     char * p = strchr(buf,'<');
 
@@ -78,7 +78,7 @@ PRIVATE BOOL is_html ARGS1(char *, buf)
     me->req->content_encoding = HTAtom_for(t)
 
 
-PRIVATE BOOL header_and_flush ARGS1(HTStream *, me)
+PRIVATE BOOL header_and_flush (HTStream * me)
 {
     if (PROT_TRACE)
 	fprintf(TDEST,"GUESSING.... text=%d newlines=%d ctrl=%d high=%d\n",
@@ -162,7 +162,7 @@ PRIVATE BOOL header_and_flush ARGS1(HTStream *, me)
 }
 
 
-PRIVATE void HTGuess_put_character ARGS2(HTStream *, me, char, c)
+PRIVATE void HTGuess_put_character (HTStream * me, char c)
 {
     if (me->discard) return;
     if (me->target) PUT_CHAR(c);
@@ -184,7 +184,7 @@ PRIVATE void HTGuess_put_character ARGS2(HTStream *, me, char, c)
     }
 }
 
-PRIVATE void HTGuess_put_string ARGS2(HTStream *, me, CONST char*, s)
+PRIVATE void HTGuess_put_string (HTStream * me, CONST char* s)
 {
     if (me->discard) return;
     if (me->target) PUT_STRING(s);
@@ -196,7 +196,7 @@ PRIVATE void HTGuess_put_string ARGS2(HTStream *, me, CONST char*, s)
     }
 }
 
-PRIVATE void HTGuess_put_block ARGS3(HTStream *, me, CONST char*, b, int, l)
+PRIVATE void HTGuess_put_block (HTStream * me, CONST char* b, int l)
 {
     if (me->discard) return;
     while (!me->target && l > 0) {
@@ -207,7 +207,7 @@ PRIVATE void HTGuess_put_block ARGS3(HTStream *, me, CONST char*, b, int, l)
     if (l > 0) PUT_BLOCK(b,l);
 }
 
-PRIVATE int HTGuess_free ARGS1(HTStream *, me)
+PRIVATE int HTGuess_free (HTStream * me)
 {
     if (!me->discard && !me->target)
 	header_and_flush(me);
@@ -217,7 +217,7 @@ PRIVATE int HTGuess_free ARGS1(HTStream *, me)
     return 0;
 }
 
-PRIVATE int HTGuess_abort ARGS2(HTStream *, me, HTError, e)
+PRIVATE int HTGuess_abort (HTStream * me, HTError e)
 {
     if (me->target)
 	(*me->target->isa->abort)(me,e);
@@ -241,11 +241,11 @@ PRIVATE CONST HTStreamClass HTGuessClass =
 
 
 
-PUBLIC HTStream * HTGuess_new ARGS5(HTRequest *,	req,
-				    void *,		param,
-				    HTFormat,		input_format,
-				    HTFormat,		output_format,
-				    HTStream *,		output_stream)
+PUBLIC HTStream * HTGuess_new (HTRequest *	req,
+				    void *		param,
+				    HTFormat		input_format,
+				    HTFormat		output_format,
+				    HTStream *		output_stream)
 {
     HTStream * me = (HTStream*)calloc(1,sizeof(HTStream));
     if (!me) outofmem(__FILE__, "HTGuess_new");

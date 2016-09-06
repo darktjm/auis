@@ -70,6 +70,8 @@ END-SPECIFICATION  ************************************************************/
 #include  <chart.H>
 #include  <chartv.H>
 
+#include "chart.h"
+
 #define  add_code		    1
 #define  delete_code		    2
 #define  sort_ascend_value_code	    3
@@ -99,7 +101,6 @@ void Hide_Palette( class chartv	   *self );
 class view * Palette_Hit( class chartv	   *self, class suite		   *suite, struct suite_item	   *item, long			    type, enum view_MouseAction    action, long			    x , long			    y , long			    clicks );
 long Palette_Titles_Handler( class chartv	   *self, class suite		   *suite, struct suite_item	   *item, long			    action );
 void Activate_Viewer( class chartv	  *self );
-static void Passivate( class chartv	  *self, long			   code );
 static void Activate( class chartv	  *self, long			   code );
 
 static suite_Specification		add_button[] =
@@ -650,11 +651,6 @@ void Activate_Viewer( class chartv	  *self )
   Activate( self, delete_code );
   Activate( self, print_code );
   Activate( self, save_code );
-  }
-
-static void Passivate( class chartv	  *self, long			   code )
-      {
-  (ControlSuite)->PassivateItem(  (ControlSuite)->ItemOfDatum(  code ) );
   }
 
 static void Activate( class chartv	  *self, long			   code )

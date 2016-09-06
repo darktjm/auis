@@ -33,6 +33,7 @@
 #include <X11/Xutil.h>
 #include <X11/Xatom.h>
 #include <X11/keysym.h>
+#include <X11/XKBlib.h> /* tjm - not sure how to tag this, and don't want to add XKB_ENV */
 #include <errprntf.h>
 #include "menubar.h"
 #include <scache.h>
@@ -103,7 +104,7 @@ static struct tmenu *FindMenu(struct menubar  *mb,const char *title);
 static struct titem *FindItem(struct tmenu  *t,const char  *name);
 static void UpdateGeometry(struct menubar  *mb);
 static struct tmenu *CreateMenu(struct menubar  *mb,const char *title,int  prio);
-static struct titem *AddItem(struct menubar  *mb,struct tmenu  *t,const char *item,int  prio,int  submenu,const void *data);
+static struct titem *AddItem(struct menubar  *mb,struct tmenu  *t,const char *item,int  prio,int  submenu,const char *data);
 static int mcomp(struct tmenu  **a,struct tmenu  **b);
 static void SelectRegion(struct menubar  *mb,Window  win,struct gcs  *gcs,int  x,int  y,int  w,int  h);
 static void UnSelectRegion(struct menubar  *mb, Window  win, struct gcs  *gcs, int  x , int  y , int  w , int  h);
@@ -307,7 +308,7 @@ static struct titem *AddItem(struct menubar  *mb,struct tmenu  *t,const char *it
     int width=XTextWidth(mb->mbi->prefs->itemfont,item,strlen(item)) + ((t->prio==MOREMENUPRIORITY)?mb->mbi->prefs->iconfont->max_bounds.lbearing + mb->mbi->prefs->iconfont->max_bounds.rbearing +10:0);
 
     t->groupcount=0;
-    if(i = FindItem(t,item)) {
+    if((i = FindItem(t,item))) {
 	i->keys=NULL;
 	if(!ISSUBMENU(i) && i->data && mb->mbi->FreeItem) mb->mbi->FreeItem((void *)i->data);
 	if(submenu) i->flags |= SUBMENUFLAG;
@@ -567,7 +568,7 @@ void mb_RefitMenubar(struct menubar  *mb)
 
 	mb->menus[i]->mx=x;
 
-	if((mb->menus[i]->nitems || i==0) && (x + mb->menus[i]->mw + HSPACE(mb, mb->menus[i]) + mb->morewidth <= mb->mbi->w - SHADOWWIDTH(mb) - 2 && !fullflag  || mb->menus[i]->prio==MOREMENUPRIORITY)) {
+	if((mb->menus[i]->nitems || i==0) && ((x + mb->menus[i]->mw + HSPACE(mb, mb->menus[i]) + mb->morewidth <= (int)mb->mbi->w - SHADOWWIDTH(mb) - 2 && !fullflag)  || mb->menus[i]->prio==MOREMENUPRIORITY)) {
 	    fitflag=True;
 	    if(mb->menus[i]!=mb->moremenu) mb->lastvm=i;
 	    mb->menus[i]->next=NULL;
@@ -1161,8 +1162,8 @@ static void DoMenuLoop(struct menubar  *mb, Bool  track)
 		x=be->x_root-mb->mbi->x;
 		y=be->y_root-mb->mbi->y;
 		trackingmotion=True;
-		if(be->window==mb->mbi->client)
-		    if(be->y>=mb->mbi->h || be->y<0 || be->x<0 || be->x>=mb->mbi->w) {
+		if(be->window==mb->mbi->client) {
+		    if(be->y>=(int)mb->mbi->h || be->y<0 || be->x<0 || be->x>=(int)mb->mbi->w) {
 			if(mb->lasteventin) mb->lasteventin->lastitem=(-1);
 			exitmenus=True;
 			continue;
@@ -1179,6 +1180,7 @@ static void DoMenuLoop(struct menubar  *mb, Bool  track)
 			    }
 			}
 		    }
+		}
 	    case MotionNotify:
 		if(!trackingmotion) continue;
 		/* this looks silly but we shouldn't count on the ButtonEvent and MotionEvent structures remaining compatible... */
@@ -1215,7 +1217,7 @@ static void DoMenuLoop(struct menubar  *mb, Bool  track)
 		
 	    case ButtonRelease:
 		trackingmotion=False;
-		if(be->window==mb->mbi->client && be->y<mb->mbi->prefs->menubarheight && be->y>=0 && be->x>=0 && be->x<mb->mbi->w && be->button==mb->mbi->prefs->holdbutton) {
+		if(be->window==mb->mbi->client && be->y<mb->mbi->prefs->menubarheight && be->y>=0 && be->x>=0 && be->x<(int)mb->mbi->w && be->button==mb->mbi->prefs->holdbutton) {
 		    mb->lasteventin=mb->lastmenu;
 		    if(mb->lastmenu) SelectItem(mb, mb->lastmenu, 0, 1);
 		} else {
@@ -1230,7 +1232,11 @@ static void DoMenuLoop(struct menubar  *mb, Bool  track)
 		struct tmenu *lm=mb->lastmenu;
 		if(!lm) continue;
 		while(lm->next) lm=lm->next;
+#if 0 /* tjm - not sure how to tag this, and don't want to add XKB_ENV */
 		switch(XKeycodeToKeysym(mb->mbi->dpy, ke->keycode, 0)) {
+#else
+		switch(XkbKeycodeToKeysym(mb->mbi->dpy, ke->keycode, 0, 0)) {
+#endif
 		    case XK_G:
 		    case XK_g:
 		    case XK_Escape:
@@ -1284,8 +1290,11 @@ static void DoMenuLoop(struct menubar  *mb, Bool  track)
 				if(c<0) c=mb->nmenus-1;
 			    } while(mb->menus[c]->nitems==0 && c!=j);
 			    BringUpMenu(mb, c);
-			    if(mb->lastmenu) if(mb->lastmenu==mb->moremenu) SelectItem(mb, mb->lastmenu, mb->lastmenu->nitems-1, -1);
-			    else SelectItem(mb, mb->lastmenu, 0, 1);
+			    if(mb->lastmenu) {
+				if(mb->lastmenu==mb->moremenu)
+				    SelectItem(mb, mb->lastmenu, mb->lastmenu->nitems-1, -1);
+				else SelectItem(mb, mb->lastmenu, 0, 1);
+			    }
 			}
 			break;
 		    case XK_Return:

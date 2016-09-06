@@ -54,13 +54,13 @@
 
 extern TABLE Table;
 extern FILESTACK FileStack;
-int offset(), roffset();
+int offset(char *string, char character);
+int roffset(char *string, char character);
 void AbsorbSpace(), AbsorbWhiteSpace();
 char *makelower();
 
 
-char *makelower(instruction)
-     char *instruction;
+char *makelower(char *instruction)
 {
   int i;
   
@@ -74,7 +74,7 @@ char *makelower(instruction)
 }
   
 /* For Development Use Only:  Comment Out for Final Production */
-void TempPrintList()
+void TempPrintList(void)
 {
   TABLE tmp=Table;
 
@@ -90,8 +90,7 @@ void TempPrintList()
 }
 
 
-int offset(string, character)
-     char *string, character;
+int offset(char *string, char character)
 {
   char *loc;
 
@@ -102,8 +101,7 @@ int offset(string, character)
 }
 
 
-int roffset(string, character)
-     char *string, character;
+int roffset(char *string, char character)
 {
   char *loc;
 
@@ -114,7 +112,7 @@ int roffset(string, character)
 }
 
 
-void usage()
+void usage(void)
 {
   fprintf(stderr, "\nUsage:  %s %s\n\n", me,
 	 "[rtffile [ezfile]] [-t transtable] [-e stderrfile]");
@@ -122,7 +120,7 @@ void usage()
 }  
 
 
-void CloseFiles()
+void CloseFiles(void)
 {
   fprintf(fout, "\n\\enddata{text, %d}\n", MasterToken);
 
@@ -133,7 +131,7 @@ void CloseFiles()
 }
 
 
-void AbsorbSpace()
+void AbsorbSpace(void)
 {
   int in;
   char ch;
@@ -150,7 +148,7 @@ void AbsorbSpace()
 }
 
 
-void AbsorbNewlines()
+void AbsorbNewlines(void)
 {
   int in;
   char ch;
@@ -169,7 +167,7 @@ void AbsorbNewlines()
 }
 
 
-void AbsorbWhiteSpace()
+void AbsorbWhiteSpace(void)
 {
   int in;
   char ch;
@@ -187,8 +185,7 @@ void AbsorbWhiteSpace()
     }
 }
 
-reverse(s)
-char s[];
+int reverse(char s[])
 {
     int c, i, j;
     for(i=0, j=strlen(s)-1; i<j; i++, j--)
@@ -199,9 +196,7 @@ char s[];
     }
 }
 
-itoa(n, s)
-int n;
-char s[];
+int itoa(int n, char s[])
 {
     int i, sign;
     if ((sign=n) < 0)
@@ -216,7 +211,7 @@ char s[];
     reverse(s);
 }
 
-void CloseBraces()
+void CloseBraces(void)
 {
    for(; Levels>0; Levels--)
       fputc('}', fout);

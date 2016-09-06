@@ -210,7 +210,7 @@ static void CBResetFunc (AWidget *self,
 			const avalueflex &in, 
 			avalueflex &out) {
 	
-	int fx;
+	unsigned int fx;
 	struct htmlatts *attx;
 	const char *cval;
         text *textarea, *ttxt;
@@ -357,12 +357,10 @@ htmlform::AddNode(AWidget *f, attlist *a,
 // create and add node for <INPUT ...>
 	AWidget *
 htmlform::AddInputNode(attlist *atts) {
-	AWidget *w;
-	long cols;
+	AWidget *w = NULL;
 	struct htmlatts *attx;
 	const char *cval;
 	text *wtext;
-	ASlot *tslot;
 
 	// get type field from atts
 	attx = atts->GetAttribute("type");
@@ -458,6 +456,9 @@ htmlform::AddInputNode(attlist *atts) {
 		w->Set(slot_activateCallback, &CBReset);
 		break;
 
+	case htmlform_Select: // tjm - what to do?
+	case htmlform_TextArea: // tjm - what to do?
+		break;
 	}
 	AddNode(w, atts, tx->tag);
 	return w;
@@ -574,7 +575,7 @@ void htmlform::ApplyOptionAttrs(attlist *atts) {
 //		if there are no other text fields
 	void 
 htmlform::Completed() {
-	int i;
+	unsigned int i;
 	int nother = 0;
 	struct wdgnode *firstintext = NULL;
 
@@ -682,7 +683,6 @@ const char *htmlform::Submission(web *wd, webview *wv) {
         wdgnode *wn=&fields[i];
         const char *name=GetName(i);
         const char *value=GetValue(i);
-        boolean set=TRUE;
         if(wn->tag==htmlform_Select) {
             if(EncodeSelect(wn, name, query, separator)) separator=TRUE;
         } else {
@@ -730,6 +730,8 @@ const char *htmlform::Submission(web *wd, webview *wv) {
                 case htmlform_TextArea:
                     value=wn->wgt->Get(slot_value, value);
                     break;
+		case htmlform_Select: // tjm - what to do?
+		case htmlform_InHidden: // tjm - what to do?
                     break;
             }
             if(separator) {
@@ -744,8 +746,8 @@ const char *htmlform::Submission(web *wd, webview *wv) {
     }
     *query.Append()='\0';
     size_t dummy;
-    if(FOLDEDEQ(method, "get")) webview::VisitWeb(wv, query.GetBuf(0, query.GetN(), &dummy));
-    else if(FOLDEDEQ(method, "post")) webview::VisitWeb(wv, act, WEBCOM_Post, query.GetBuf(0, query.GetN(), &dummy));
+    if(get) webview::VisitWeb(wv, query.GetBuf(0, query.GetN(), &dummy));
+    else if(post) webview::VisitWeb(wv, act, WEBCOM_Post, query.GetBuf(0, query.GetN(), &dummy));
     else {
         return "Unsupported submission method.";
     }
@@ -762,7 +764,7 @@ NextColon(text *t, int loc) {
 }
 
 // write a line for each option/value pair
-	void
+	static void
 WriteSelectOptions(FILE *file, text *options, text *values) {
 	int optstart, optend, valstart, valend;
 	   // xyzstart is index of first char of option or vlaue
@@ -818,7 +820,6 @@ XXX we need WriteID for writing insets (see TextArea, below)
 	void 
 htmlform::WriteTaggedText(FILE *file, AWidget *w) {
 	struct wdgnode *wn = FindNodeByWidget(w);
-	htmltext **opts;
 
 	switch (wn->tag) {
 	case htmlform_InText:

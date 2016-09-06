@@ -38,7 +38,7 @@
  */
 #ifndef HTAABROW_H
 #define HTAABROW_H
-                /* BOOL, PARAMS, ARGS */
+                /* BOOL, ARGS */
 #include "HTAAUtil.h"           /* Common parts of AA */
 #include "HTList.h"
 #include "HTAssoc.h"
@@ -131,7 +131,7 @@ Routines for Browser Side Recording of AA Info
 **
 **                 "Basic AkRDIhEF8sdEgs72F73bfaS=="
 */
-extern BOOL HTAA_composeAuth PARAMS((HTRequest * req));
+extern BOOL HTAA_composeAuth (HTRequest * req);
 
 
 /* BROWSER PUBLIC                                       HTAA_retryWithAuth()
@@ -163,7 +163,7 @@ extern BOOL HTAA_composeAuth PARAMS((HTRequest * req));
 **      returns         YES, if dialog box was popped up.
 **                      NO, on failure.
 */
-extern BOOL HTAA_retryWithAuth PARAMS((HTRequest *      req));
+extern BOOL HTAA_retryWithAuth (HTRequest *      req);
 
 
 /* PUPLIC                                               HTAA_cleanup()
@@ -178,7 +178,7 @@ extern BOOL HTAA_retryWithAuth PARAMS((HTRequest *      req));
 ** ON EXIT:
 **      returns         nothing.
 */
-extern void HTAACleanup PARAMS((HTRequest *req));/*
+extern void HTAACleanup (HTRequest *req);/*
 
 Enabling Gateway httpds to Forward Authorization
 
@@ -188,9 +188,9 @@ Enabling Gateway httpds to Forward Authorization
    somebody elses previous authorization information.
    
  */
-extern void HTAAForwardAuth_set PARAMS((CONST char * scheme_name,
-                                        CONST char * scheme_specifics));
-extern void HTAAForwardAuth_reset NOPARAMS;/*
+extern void HTAAForwardAuth_set (CONST char * scheme_name,
+                                        CONST char * scheme_specifics);
+extern void HTAAForwardAuth_reset (void);/*
 
  */
 #endif  /* NOT HTAABROW_H *//*

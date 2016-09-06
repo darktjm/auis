@@ -86,15 +86,15 @@ BEGINCPLUSPLUSPROTOS
 #define ERR_WARNING 4
 #define ERR_MONITOR 6
 #define ERR_DEBUG 9
-#ifndef __STDC__
-#include <varargs.h>
-int safefprintf(va_alist);
-int errprintf(va_alist);
-#else
 #include <stdarg.h>
-int safefprintf(FILE *fp, ...);
-int errprintf(const char *application, ...);
+#ifdef __GNUC__
+__attribute__((format(printf,2,3)))
 #endif
+int safefprintf(FILE *fp, const char *control, ...);
+#ifdef __GNUC__
+__attribute__((format(printf,5,6)))
+#endif
+int errprintf(const char *application, int type, const char *log, const char *id, const char *format, ...);
+int errprintv(const char *application, int type, const char *log, const char *id, const char *format, va_list ap);
 ENDCPLUSPLUSPROTOS
-
 

@@ -43,8 +43,6 @@ OBJS = consoleClass.o \
 	timemon.o \
 	update.o \
 	updfreq.o \
-	venusmon.o \
-	venmonf.o \
 	vmmon.o \
 	vmmonf.o \
 	consoleapp.o \

@@ -869,7 +869,7 @@ static boolean FrameFinder(class frame  *frame, struct finderInfo  *info)
     if (info->otherFrame != NULL && info->bestFrame != NULL)
 	return TRUE;
     (frame)->GetVisualBounds( &bogus);
-    if (!rectangle_IsEmptyRect(&bogus))
+    if (!rectangle_IsEmptyRect(&bogus)) {
         if ((frame)->GetBuffer() == info->myBuffer) {
             info->bestFrame = frame;
             return FALSE;
@@ -878,6 +878,7 @@ static boolean FrameFinder(class frame  *frame, struct finderInfo  *info)
             info->otherFrame = frame;
             return FALSE;
         }
+    }
     return FALSE;
 }
 

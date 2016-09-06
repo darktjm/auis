@@ -222,6 +222,8 @@ boolean figogrp::Reshape(enum view_MouseAction  action, class figview  *v, long 
 		(this)->RecomputeBounds();
 		(this)->SetModified();
 		break;
+	    default:
+		break;
 	}
 	return TRUE;
     }
@@ -246,6 +248,8 @@ boolean figogrp::Reshape(enum view_MouseAction  action, class figview  *v, long 
 		(this)->Reconfigure();
 		(this)->RecomputeBounds();
 		(this)->SetModified();
+		break;
+	    default:
 		break;
 	}
 	return TRUE;

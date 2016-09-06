@@ -91,8 +91,7 @@ void CloseFiles(), AbsorbSpace();
 long int ParseText();
 
 
-void ParseMain(Filein, Fileout)
-     char *Filein, *Fileout;
+void ParseMain(char *Filein, char *Fileout)
 /*
  *
  *  Handle standard beginning to all rtf files.  Make main
@@ -128,9 +127,9 @@ void ParseMain(Filein, Fileout)
   printf("* Finished processing %ld lines of %s.\n", CurrLine, Filein);
 }
 
+extern int ReplaceText(char *instruction, int mode, int transform, char tofind);
 
-long int ParseText(tofind, transform, action)
-     int tofind, transform, action;
+long int ParseText(int tofind, int transform, int action)
 /*
  *
  *  tofind:     used to tell when this recursion of
@@ -150,7 +149,7 @@ long int ParseText(tofind, transform, action)
    char ch, instruction[TMP_SIZE], tmp_instruction[TMP_SIZE], *GetInstruction(), *makelower();
    struct TableStruct *tmp, *FindNode();
    struct StyleStackStruct *stytmp;
-   int Execute(), ReplaceText(), in;
+   int Execute(), in;
 
    while((in = fgetc(fin)) != tofind)
    {
@@ -286,9 +285,7 @@ long int ParseText(tofind, transform, action)
 }
 
 
-struct TableStruct *FindNode(field, string)
-     int field;
-     char *string;
+struct TableStruct *FindNode(int field, char *string)
 /*
  *
  *  Look up string in internal translation table.
@@ -325,7 +322,7 @@ struct TableStruct *FindNode(field, string)
   exit(0);
 }
 
-char *GetInstruction()
+char *GetInstruction(void)
 /*
  *
  *  Read in commands that occur after "\".
@@ -364,9 +361,7 @@ char *GetInstruction()
 }
 
 
-int Execute(instruction, transform)
-     char *instruction;
-     int transform;
+int Execute(char *instruction, int transform)
 /*
  *
  *  Handle instruction read by GetInstruction() accordingly.
@@ -413,9 +408,7 @@ int Execute(instruction, transform)
 }
 
 
-int ReplaceText(instruction, mode, transform, tofind)
-     char *instruction, tofind;
-     int mode, transform;
+int ReplaceText(char *instruction, int mode, int transform, char tofind)
 /*
  *
  *  Make simple replacement of text if ezword was not

@@ -54,7 +54,6 @@ void spread_PartialUpdate(class spread  * V, enum view_UpdateType  how, struct r
 void spread_InvertRectangle(class spread  * V, int  left , int  top , int  width , int  height);
 static void SmashSelection (class spread  * V);
 void spread_ClearSelectionBox (class spread  * V );
-static void Flush(class spread  * V);
 static void updateCells(class spread  * V, int  zapped, enum view_UpdateType  how, struct rectangle  *updateClipRect);
 static void updateString (class spread  * V, char  justification, const char  *string, struct rectangle  *cellBounds);
 static void  updateValue (class spread  * V, extended_double  *value, char  format, int  precision, struct rectangle  *cellBounds);
@@ -211,8 +210,6 @@ static void NotifyKids(class spread  * V, enum view_UpdateType  how, struct rect
 
 void spread_update_FullUpdate(class spread  * V, enum view_UpdateType  how, struct rectangle  *updateClipRect)
 {
-    struct FontSummary *fs;
-
     if (V->grayPix == NULL)
 	InitializeGraphic(V);
 
@@ -342,11 +339,6 @@ void spread_ClearSelectionBox (class spread  * V )
     }
 }
 
-static void Flush(class spread  * V)
-{
-    (V)->FlushGraphics();
-}
-
 static void updateCells(class spread  * V, int  zapped, enum view_UpdateType  how, struct rectangle  *updateClipRect)
 {
     class table *T = MyTable(V);
@@ -411,7 +403,6 @@ static void updateValue (class spread  * V, extended_double  *value, char  forma
     class table *T = MyTable(V);
     long     x, y;
     double val;
-    int decpt, sign;
     int rightshim;
     char    buf[1030], *p;
     int adjustedprecision = precision + 1;

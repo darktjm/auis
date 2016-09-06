@@ -205,7 +205,6 @@ static void TypescriptReturnCommand (class typescript  *tv );
 static void  TypescriptReturnAndPositionCommand(class typescript  *self, long  data);
 static void typescript_HandleMenus(class typescript  *self, long  data);
 static void TypescriptZapCommand(class typescript  *tv);
-static void GrabCommandHere(class typescript  *tv , long  where);
 static void GrabCommand(class typescript    *tv, class text  *fromText, long  start, long  end);
 static void GrabLastCommand (class typescript  *tv);
 static void GrabNextCommand (class typescript    *tv);
@@ -301,10 +300,6 @@ doprint(class typescript  *self, int  porp)
 	message::DisplayString(self, 0, "Preview window should appear soon.");
 }
 
-#ifndef AFS_ENV
-#define vclose(x) close(x)
-#endif
-
 static void
 typescript_SaveAs(class typescript  *self)
 {
@@ -319,7 +314,7 @@ typescript_SaveAs(class typescript  *self)
 	failed++;
     else {
 	(TEXT(self))->Write( f, im::GetWriteID(), 0); 
-	if(vclose(fileno(f)) < 0) 
+	if(fclose(f) < 0) 
 	    failed++;
     }
     if(failed) {
@@ -377,10 +372,10 @@ typescriptAddSearchMenu()
 {
     struct proctable_Entry *tempProc;
 
-    if(tempProc = proctable::Lookup("textview-search"))
+    if((tempProc = proctable::Lookup("textview-search")))
         (typescriptMenus)->AddToML( "Search/Spell~20,Forward~10", tempProc, 0, 0);
 
-    if(tempProc = proctable::Lookup("textview-reverse-search"))
+    if((tempProc = proctable::Lookup("textview-reverse-search")))
         (typescriptMenus)->AddToML( "Search/Spell~20,Backward~11", tempProc, 0, 0);
 }
 
@@ -872,36 +867,6 @@ TypescriptZapCommand(class typescript  *tv)
 }
 
 static void
-GrabCommandHere(class typescript  *tv , long  where)
-{
-    int i;
-    long start, size,len;
-    class environment *te;
-
-    i = where;
-    if(i <0 ) i = 0;
-    te = MyEnvinfo(TEXT(tv), i);
-    if(te->data.style != staticBoldStyle) 
-	return;
-    /* here we are in the command's bold region */
-    start = (te)->Eval();
-    size = te->length;
-    /* now compute the next place to start */
-    SetCmdSize(size);
-    /* now copy the bits out */
-    (TEXT(tv))->CopySubString( start, size , cmd, FALSE);
-    if((len = (tv)->GetDotLength()) > 0)
-/* deletecharacters will check the fence for us */
-	(TEXT(tv))->DeleteCharacters( (tv)->GetDotPosition(), len);
-    start = (TEXT(tv))->GetLength();
-    (TEXT(tv))->InsertCharacters( start, cmd, size);
-    (tv)->SetDotPosition( start);
-    (tv)->SetDotLength( size);
-    (tv)->FrameDot( start);
-    (TEXT(tv))->NotifyObservers( 0);
-}
-
-static void
 GrabCommand(class typescript    *tv, class text  *fromText, long  start, long  end)
 {
     long size, len, pos;
@@ -1112,7 +1077,7 @@ ReadFromProcess(FILE  *f, class typescript  *td)
 	     putc(c, odf);
 	if(((c == StartMagicChar) || (c == EndMagicChar)) && !td->pipescript) {
 	    cpos = i;
-	    if(input = ReadDirName(td, f, bp, &cpos)) {
+	    if((input = ReadDirName(td, f, bp, &cpos))) {
 		bp = input;
 		i = cpos;
 	    }
@@ -1128,7 +1093,7 @@ ReadFromProcess(FILE  *f, class typescript  *td)
             *bp = c;
 	    if(((*bp == StartMagicChar) || (*bp == EndMagicChar)) && !td->pipescript) {
 		cpos = i;
-		if(input = ReadDirName(td, f, bp, &cpos)) {
+		if((input = ReadDirName(td, f, bp, &cpos))) {
 		    bp = input;
 		    i = cpos;
 		    if(i == 0) 
@@ -1313,11 +1278,6 @@ typescript::typescript()
 
     int pid;
     const char **arglist = NULL;
-#if POSIX_ENV || defined(SGI_4D_ENV)
-    int pgrp = getpgrp();
-#else
-    int pgrp = getpgrp(0);
-#endif
     int ptyChannel;
     int masterChannel;
     char ptyname[64];
@@ -1814,7 +1774,6 @@ static void
 typescriptAddtypescriptMenus()
 {
     struct proctable_Entry *tempProc;
-    struct ATKregistryEntry  *classInfo = &typescript_ATKregistry_ ;
 
     tempProc = proctable::Lookup("typescript-yank");
     (ssmap)->BindToKey( "\031", tempProc, 0);
@@ -1859,70 +1818,70 @@ typescript::InitializeClass()
 
 /* Initialize our pointers to textview command routines. */
     ATK::LoadClass("textview"); /* Make sure the textview is loaded first. */
-    if(tempProc = proctable::Lookup("textview-line-to-top")) {
+    if((tempProc = proctable::Lookup("textview-line-to-top"))) {
         proctable::ForceLoaded(tempProc);
         textview_LineToTop = proctable::GetFunction(tempProc);
     }
     else
         textview_LineToTop = (proctable_fptr)typescript_NoTextviewKey;
 
-    if(tempProc = proctable::Lookup("textview-end-of-text")) {
+    if((tempProc = proctable::Lookup("textview-end-of-text"))) {
         textview_EndOfTextCmd = proctable::GetFunction(tempProc);
     }
     else
         textview_EndOfTextCmd = (proctable_fptr)typescript_NoTextviewKey;
 
-    if(tempProc = proctable::Lookup("textview-self-insert"))
+    if((tempProc = proctable::Lookup("textview-self-insert")))
         textview_SelfInsertCmd = proctable::GetFunction(tempProc);
     else
         textview_SelfInsertCmd = (proctable_fptr)typescript_NoTextviewKey;
 
-    if(tempProc = proctable::Lookup("textview-digit"))
+    if((tempProc = proctable::Lookup("textview-digit")))
         textview_DigitCmd = proctable::GetFunction(tempProc);
     else
         textview_DigitCmd = (proctable_fptr)typescript_NoTextviewKey;
 
-    if(tempProc = proctable::Lookup("textview-beginning-of-line"))
+    if((tempProc = proctable::Lookup("textview-beginning-of-line")))
         textview_BeginningOfLineCmd = proctable::GetFunction(tempProc);
     else
         textview_BeginningOfLineCmd = (proctable_fptr)typescript_NoTextviewKey;
 
-    if(tempProc = proctable::Lookup("textview-end-of-line"))
+    if((tempProc = proctable::Lookup("textview-end-of-line")))
         textview_EndOfLineCmd = proctable::GetFunction(tempProc);
     else
         textview_EndOfLineCmd = (proctable_fptr)typescript_NoTextviewKey;
 
-    if(tempProc = proctable::Lookup("textview-yank"))
+    if((tempProc = proctable::Lookup("textview-yank")))
         textview_YankCmd = proctable::GetFunction(tempProc);
     else
         textview_YankCmd = (proctable_fptr)typescript_NoTextviewKey;
 
-    if(tempProc = proctable::Lookup("textview-rotate-backward-paste"))
+    if((tempProc = proctable::Lookup("textview-rotate-backward-paste")))
         textview_BackwardsRotatePasteCmd = proctable::GetFunction(tempProc);
     else
         textview_BackwardsRotatePasteCmd = (proctable_fptr)typescript_NoTextviewKey;
 
-    if(tempProc = proctable::Lookup("textview-rotate-paste"))
+    if((tempProc = proctable::Lookup("textview-rotate-paste")))
         textview_RotatePasteCmd = proctable::GetFunction(tempProc);
     else
         textview_RotatePasteCmd = (proctable_fptr)typescript_NoTextviewKey;
 
-    if(tempProc = proctable::Lookup("textview-delete-next-character"))
+    if((tempProc = proctable::Lookup("textview-delete-next-character")))
         textview_DeleteCmd = proctable::GetFunction(tempProc);
     else
         textview_DeleteCmd = (proctable_fptr)typescript_NoTextviewKey;
 
-    if(tempProc = proctable::Lookup("textview-copy-region"))
+    if((tempProc = proctable::Lookup("textview-copy-region")))
         typescript_CopyRegionCmd = proctable::GetFunction(tempProc);
     else
         typescript_CopyRegionCmd = (proctable_fptr)typescript_NoTextviewKey;
 
-    if(tempProc = proctable::Lookup("textview-zap-region"))
+    if((tempProc = proctable::Lookup("textview-zap-region")))
         typescript_ZapRegionCmd = proctable::GetFunction(tempProc);
     else
         typescript_ZapRegionCmd = (proctable_fptr)typescript_NoTextviewKey;
 
-    if(tempProc	= proctable::Lookup("textview-delete-previous-character")    )
+    if((tempProc	= proctable::Lookup("textview-delete-previous-character")    ) )
         textview_RuboutCmd = proctable::GetFunction(tempProc);
     else
         textview_RuboutCmd = (proctable_fptr)typescript_NoTextviewKey;
@@ -2031,7 +1990,6 @@ class view *
 typescript::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
     class view *v;
-    class im *im;
     int i;
     char *p;
 

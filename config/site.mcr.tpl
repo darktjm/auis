@@ -31,22 +31,6 @@
 */
 
 
-/* AFSBASEDIR is the full path to files installed by an AFS
-	installation.  (AFS is the Andrew File System distributed by 
-	TransArc.  Most installations will not have AFS.)
-	AFSBASEDIR is used only if AFS_ENV is defined;
-	otherwise, it is ignored entirely.  If used, these files are 
-	expected to exist: $(AFSBASEDIR)/include/afs and
-	$(AFSBASEDIR)/lib/afs. 
-*/
-AFSBASEDIR = 
-
-/* If your AFS protection server relies on the MIT Athena
- 	Kerberos  library, set KRBLIB to name where the Kerberos
-	library lives. */
-/* KRBLIB =  */
-
-
 /* XINCDIR must be the parent of the X11 include directory.
 	That is $(XINCDIR)/X11/ contains X.h 
 	and the other X include files. 
@@ -117,14 +101,12 @@ TIFFLIBDIR=$(BASEDIR)/lib
      CC = /usr/local/bin/gcc
      CPPC = /usr/local/bin/g++
 
-     /* when AFSBASEDIR and XINCDIR are the same, use only one in INCLUDES */
      INCLUDES =  -I$(BASEDIR)/include \
-         -I$(BASEDIR)/include/atk -I$(AFSBASEDIR)/include
+         -I$(BASEDIR)/include/atk
 
      /* OR add an includes directory for the resolver */
      INCLUDES =  -I${BASEDIR}/include  \
         -I$(BASEDIR)/include/atk \
-        -I$(AFSBASEDIR)/include/res \
-        -I$(AFSBASEDIR)/include  -I$(XINCDIR)
+        -I$(XINCDIR)
 
 #endif /* 0 */

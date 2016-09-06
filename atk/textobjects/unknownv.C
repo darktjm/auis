@@ -62,7 +62,7 @@ static long SaveRaw(ATK   *aself, long  rock)
 	    /* write out the data verbatim! */
 	while(pos<(dself->odata)->GetLength()) {
 	    char *buf=(dself->odata)->GetBuf( pos, (dself->odata)->GetLength()-pos, &len);
-	    if(len==0 || fwrite(buf, 1, len, fp)!=len) {
+	    if(len==0 || (long)fwrite(buf, 1, len, fp)!=len) {
 		message::DisplayString(self, 100, "There was an error writing out the data.");
 		return 0;
 	    }
@@ -121,7 +121,6 @@ static void ExecuteRecovery(class unknownv *self) {
     }
     char buf[1024];
     while(1) {
-	long len;
 	int res;
 	buf[0]='\0';
 	res=completion::GetFilename(self, "Filename for recovered file:", "/tmp/", buf, sizeof(buf), FALSE, FALSE);

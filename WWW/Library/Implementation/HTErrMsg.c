@@ -31,7 +31,7 @@
 **
 **	This function might be overwritten by a smart server or client.
 */
-PUBLIC void HTErrorMsg ARGS1(HTRequest *, request)
+PUBLIC void HTErrorMsg (HTRequest * request)
 {
     HTList *cur = request->error_stack;
     BOOL highest = YES;

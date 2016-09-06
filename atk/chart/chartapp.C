@@ -139,9 +139,9 @@ chartapp::Start( )
   long				  id, status = true;
 
   (this )->application::Start( );
-  if ( Chart = chart::Create( data_specification, (char *) this ) )
+  if ( ( Chart = chart::Create( data_specification, (char *) this ) ) )
     (Chart)->SetDebug(  debug );
-  if ( ChartView = chartv::Create( view_specification, (char *) this ) )
+  if ( ( ChartView = chartv::Create( view_specification, (char *) this ) ) )
     (ChartView)->SetDebug(  debug );
   if ( Chart  &&  ChartView )
     {
@@ -159,7 +159,7 @@ chartapp::Start( )
       {
       (Chart)->SetChartAttribute(  chart_FileName(Source) );
       (Frame)->SetTitle(  Source );
-      if ( file = fopen( Source, "r" ) )
+      if ( ( file = fopen( Source, "r" ) ) )
         {
         filetype::Lookup( file, Source, &id, 0 );
         (Chart)->Read(  file, id );

@@ -908,6 +908,8 @@ boolean figoplin::Reshape(enum view_MouseAction  action, class figview  *v, long
 		(this)->RecomputeBounds();
 		(this)->SetModified();
 		break;
+	    default:
+		break;
 	}
 	return TRUE;
     }
@@ -932,6 +934,8 @@ boolean figoplin::Reshape(enum view_MouseAction  action, class figview  *v, long
 		::MoveHandle(this, x, y, ptref);
 		(this)->RecomputeBounds();
 		(this)->SetModified();
+		break;
+	    default:
 		break;
 	}
 	return TRUE;
@@ -1005,6 +1009,8 @@ boolean figoplin::AddParts(enum view_MouseAction  action, class figview  *v, lon
 	case view_LeftUp:
 	case view_RightUp:
 	    return (this)->Reshape(action, v, x, y, TRUE, this->rock);
+	default:
+	    break;
     }
     return FALSE;
 }
@@ -1059,6 +1065,8 @@ boolean figoplin::DeleteParts(enum view_MouseAction  action, class figview  *v, 
 	    }
 	    (this)->RecomputeBounds();
 	    (this)->SetModified();
+	    break;
+	default:
 	    break;
     }
     return TRUE;

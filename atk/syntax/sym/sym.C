@@ -145,7 +145,7 @@ hash(const char *name)
 static class sym**
 lookup(const char *name, long  scope, boolean  *found)
 {
-    class sym **s, **start = table+hash(name);
+    class sym **s = NULL, **start = table+hash(name);
 
     while (scope != SCOPE_NULL) {
 

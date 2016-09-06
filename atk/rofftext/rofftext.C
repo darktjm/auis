@@ -82,7 +82,6 @@ boolean Is_BOL(class rofftext  *self);
 void Set_BOL(class rofftext  *self);
 void DestroyContext(IC  c);
 static Trickle topen(class rofftext  *self,char  *filename,FILE  *f,char  *s);
-static void tclose(class rofftext  *self,Trickle  t);
 static int g(class rofftext  *self,Trickle  t);
 void ung(class rofftext  *self,int  c,Trickle  t);
 void tpush(class rofftext  *self,Trickle  t,const char  *filename,FILE  *f,const char  *s,boolean  push,int  argc,const char  * const argv[]);
@@ -91,8 +90,6 @@ static void special(class rofftext  *self,Trickle  t);
 static void setfont(class rofftext  *self,Trickle  t);
 static void setbase(class rofftext  *self, int  inc	/* up: 1; down: -1 */);
 static void getwidth(class rofftext  *self,Trickle  t);
-static void getsym(class rofftext  *self, Trickle  t, char  *str);
-static void dohmove(class rofftext  *self,Trickle  t);
 static int munchmove(class rofftext  *self,Trickle  t);
 static void getname(class rofftext  *self,Trickle  t,char  *name);
 static int getsize(class rofftext  *self,Trickle  t);
@@ -256,11 +253,6 @@ static Trickle topen(class rofftext  *self,char  *filename,FILE  *f,char  *s)
     }
     return t;
 }
-
-static void tclose(class rofftext  *self,Trickle  t)
-{
-}
-
 
 /* Get a character from the trickle */
 
@@ -545,6 +537,7 @@ static void getwidth(class rofftext  *self,Trickle  t)
     tpush(self,t,NULL,NULL,temp,FALSE,0,NULL);
 }
 
+#ifdef TROFF_TAGS_ENV
 /* get alpha characters up to white space */
 static void getsym(class rofftext  *self, Trickle  t, char  *str)
 {
@@ -560,7 +553,9 @@ static void getsym(class rofftext  *self, Trickle  t, char  *str)
     ung(self,c,t);
 
 }
+#endif
 
+#if 0
 static void dohmove(class rofftext  *self,Trickle  t)
 {
     static BUF Buffer = NULL;
@@ -586,6 +581,7 @@ static void dohmove(class rofftext  *self,Trickle  t)
     temp[i] = '\0';
     tpush(self,t,NULL,NULL,temp,FALSE,0,NULL);
 }
+#endif
 
 /* munch requests for movement */
 
@@ -910,7 +906,7 @@ void DoBreak(class rofftext  *self)
         self->CurrentDiversion->OutputDone = 0;
         self->v_MultiSpace = FALSE;
         if (self->CurrentDiversion->NoSpaceMode)
-            DEBUG(1, (stderr, "Break: turning off no-space-mode - "));
+            { DEBUG(1, (stderr, "Break: turning off no-space-mode - ")); }
         self->CurrentDiversion->NoSpaceMode = FALSE;
         DEBUG(1, (stderr,"<<BREAK>>"));
 
@@ -1662,7 +1658,7 @@ long rofftext::Read(FILE  *file,long  id)
 
     if ((this->EndMacros)->Size()>0) {
         struct trap *t;
-        while(t = (struct trap *)(this->EndMacros)->Pop()) {
+        while((t = (struct trap *)(this->EndMacros)->Pop())) {
             cmd = (cmdfptr)(long)(this->Commands)->Lookup(t->macro);
             this->Nullarg[0] = t->macro;
             if (cmd)

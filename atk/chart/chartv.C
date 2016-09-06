@@ -94,6 +94,7 @@ ATK_IMPL("chartv.H")
 #include  <apts.H>
 #include  <aptv.H>
 
+#include "chart.h"
 
 static   class menulist	 *class_menulist;
 static   class keymap		 *class_keymap;
@@ -506,8 +507,8 @@ void Initialize( class chartv      *self )
     }
   if ( moniker )
     {
-    if ( ChartViewer = (class chartobj *)
-	ATK::NewObject( (Chart)->ModuleName(  moniker ) ) )
+    if ( ( ChartViewer = (class chartobj *)
+	ATK::NewObject( (Chart)->ModuleName(  moniker ) ) ) )
       { DEBUG(Created);
       Initialized = true;
       (ChartViewer)->SetDebug(  chartv_debug );
@@ -612,7 +613,7 @@ chartv_Add_Command( class chartv      *self )
     (self)->Query(  "Enter Name: ", "", &reply );
     if ( reply == NULL  ||  *reply == 0 )
       break;
-    if ( item = (Chart)->CreateItem(  reply, 0 ) )
+    if ( ( item = (Chart)->CreateItem(  reply, 0 ) ) )
       {
       (self)->Query(  "Enter Value: ", "", &reply );
       (self)->Announce(  "" );
@@ -668,8 +669,8 @@ void chartv_ReChart( class chartv      *self, char		      *moniker )
     bounds.height = Height;
     if ( prior_viewer )
       (ChartViewer)->GetEnclosedBounds(  &bounds );
-    if ( ChartViewer = (class chartobj *)
-	ATK::NewObject( (Chart)->ModuleName(  moniker ) ) )
+    if ( ( ChartViewer = (class chartobj *)
+	ATK::NewObject( (Chart)->ModuleName(  moniker ) ) ) )
       { DEBUGst(Created,moniker);
       (ChartViewer)->SetDebug(  chartv_debug );
       (ChartViewer)->SetDataObject(  Chart );
@@ -722,7 +723,7 @@ chartv_Print_Command( class chartv      *self )
   chart_file_name = (char *) (Chart)->ChartAttribute(  chart_filename );
   sprintf( msg, "Printing '%s' ...", chart_file_name );
   (self)->Announce(  "Printing ..." );
-  if ( file = fopen( file_name, "w" ) )
+  if ( ( file = fopen( file_name, "w" ) ) )
     {
     (ChartViewer)->Print(  file, "PostScript", "PostScript", 1 );
     fclose( file );
@@ -788,7 +789,7 @@ chartv_Save_Command( class chartv      *self )
       }
     if ( status == ok )
       {
-      if ( file = fopen( file_name, "w" ) )
+      if ( ( file = fopen( file_name, "w" ) ) )
         { DEBUG(File Opened);
         (Chart)->Write(  file, im::GetWriteID()+1/*===*/, 0 );
         fclose( file );

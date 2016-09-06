@@ -912,7 +912,7 @@ SearchOp(unsigned char op, unsigned char *opiar	/* iar of the opcode */) {
 
 	/* these definitions are global because GDB can't get at local decls. */
 
-	class nessmark *pat, *subject;
+	class nessmark *pat = NULL, *subject;
 	boolean boolval;
 	long intval;
 	double realval;

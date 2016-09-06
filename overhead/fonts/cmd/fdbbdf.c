@@ -60,10 +60,19 @@ static int Coffset = 0;
 * 
  */
 
-#define MAX(A,B) ((A > B)? A:B)
 #include <stdio.h>
+
+static void usage(const char *s);
+static void initlst(void);
+static const char *lookup(const char *s, int *i);
+static void hexout(const char *c, FILE *f);
+static void PrintHeader(FILE *fout, int count);
+static void writechar(FILE *fout);
+static int fontcount(FILE *f);
+static void fontcvt(FILE *fin,FILE *fout,int count);
+
 #define otherwise break; case
-static char *names[] = {
+static const char * const names[] = {
     "magic ",
     "fontname ",
     "familyname ",
@@ -108,7 +117,7 @@ static char *names[] = {
 #define facecodes 19
 #define LSTSIZE 20
 struct st {
-	char *s;
+	const char *s;
 	short len;
 };
 static struct st lst[LSTSIZE],*endlst;
@@ -116,19 +125,18 @@ static char comments[2048];
 static int maskflag = 0;
 static int padflag = 0;
 int padsize,ypad;
-static used[256];
+static int used[256];
 int HeaderPrinted = 0;
 int minChar;
 
-usage(s)
-char *s;
+static void usage(const char *s)
 {
 	fprintf(stderr,"usage: %s [-mask] [-Soffset] [filename]  \n",s);
 	exit(1);
 }
-initlst(){
+static void initlst(void){
 	struct st *lstp;
-	char **c;
+	const char * const *c;
 	*comments = '\0';
 	for (c =names,lstp = lst; **c != '\0'; c++,lstp++){
 		lstp->s = *c;
@@ -137,9 +145,8 @@ initlst(){
 	endlst = lstp;
 }
 
-printdummys(ed,fout)
-int ed;
-FILE *fout;
+#if 0 /* unused */
+static void printdummys(int ed, FILE *fout)
 /* Writes out blank definitions for undefined characters */
 {
     int i;
@@ -152,8 +159,8 @@ FILE *fout;
 	}
     }
 }
-main(argc,argv)
-char *argv[];
+#endif
+int main(int argc,char *argv[])
 {
     int i,count;FILE *f;
     initlst();
@@ -185,13 +192,14 @@ char *argv[];
 	    exit(-2);
 	}
     }
-    fontcvt(stdin,stdout);
+    /* tjm - this will break with pipes */
+    count = fontcount(stdin);
+    rewind(stdin);
+    fontcvt(stdin,stdout,count);
     exit(0);
 }
 
-char *lookup(s,i)
-char *s;
-int *i;
+static const char *lookup(const char *s, int *i)
 {
 	struct st *lstp;
 	for(lstp = lst; lstp != endlst; lstp++){
@@ -201,8 +209,8 @@ int *i;
 		}
 	}
 	for(lstp = lst; lstp != endlst; lstp++){
-		char *p = lstp->s;
-		char *q = s;
+		const char *p = lstp->s;
+		const char *q = s;
 
 		while (*p != '\0' && *q != '\0' && ((isupper(*p) ? tolower(*p) : *p)) == ((isupper(*q) ? tolower(*q) : *q)))  {
 		    p++;
@@ -216,17 +224,15 @@ int *i;
 	*i = -1;
 	return(NULL);
 }
-hexout(c,f)
-char *c;
-FILE *f;
+static void hexout(const char *c, FILE *f)
 {
 	int w = 0;
 	while(*c != '\0'){
 	    if(*c == '\n')break;
 	    else if(maskflag) putc('0',f);
 	    else {
-		if(isupper(*c)) *c = tolower(*c);
-		putc(*c,f);
+		char C = isupper(*c) ? tolower(*c) : *c;
+		putc(C,f);
 	    }
 	    c++;w++;
 	}
@@ -236,9 +242,7 @@ FILE *f;
 }
 static int psize,maxnwx,maxnwy,maxntosx,maxntosy,maxwtoex,maxwtoey,maxwbx,maxwby,maxnewlx,maxnewly,nicons;
 
-PrintHeader(fout,count)
-FILE *fout;
-int count;
+static void PrintHeader(FILE *fout, int count)
 {
 	if(padflag ){
 		int size = MAX( maxwtoex + maxnwx,maxntosy + maxnwy) ; 
@@ -262,8 +266,7 @@ int count;
 	HeaderPrinted = 1;
 }
 static int cvt,spx,spy,orx,ory,bx,by; 
-writechar(fout)
-FILE *fout;
+static void writechar(FILE *fout)
 /* writes the character information */
 {
 if(padflag && bx > 0){
@@ -281,13 +284,12 @@ fprintf(fout,"BBX %d %d %d %d\n",bx,by,-orx ,ory - by );
 fprintf(fout,"BITMAP\n");
 }
 
-fontcount(f)
-FILE *f;
+static int fontcount(FILE *f)
 {
     char buf[256];
     int result,count = 0;
     int cvt;
-    char *ss;
+    const char *ss;
 
     minChar = 256;
     while((fgets(buf,256,f)) != NULL){
@@ -306,12 +308,11 @@ FILE *f;
     }
     return count;
 }
-fontcvt(fin,fout,count)
-FILE *fin,*fout;
-int count;
+static void fontcvt(FILE *fin,FILE *fout,int count)
 /* Font Conversion filter */
 {
-	char buf[256],*ss;
+	char buf[256];
+	const char *ss;
 	int result,foundchar = 0;
 	char cc[256];
 	int i;
@@ -354,10 +355,11 @@ int count;
 			sscanf(ss,"%d,%d",&maxnewlx,&maxnewly);
 		otherwise Comment:
 			{
-			char *c;
-			for(c = ss; *c != '\0'; c++) 
-				if(*c == '\n') *c = ' ';
-			strcat(comments,ss);
+			const char *c;
+			char *d;
+			for(c = ss, d = comments + strlen(comments); *c != '\0'; c++)
+				*d++ = *c == '\n' ? ' ' : *c;
+			*d = 0;
 			}
 		otherwise  NIcons :
 			sscanf(ss,"%d",&nicons);

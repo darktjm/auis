@@ -89,7 +89,7 @@ void Add2Buf(BUF  b,int  c)
         b->size += b->blocksize;
         temp = (char *)realloc(b->begin,b->size);
         if (temp == NULL)
-            DEBUG(1, (stderr,"rofftext: HELP! Buffer couldn't grow!\n"));
+            { DEBUG(1, (stderr,"rofftext: HELP! Buffer couldn't grow!\n")); }
         b->end = (temp + b->size - 1);
         b->ptr = (b->ptr - b->begin + temp);
         b->begin = temp;

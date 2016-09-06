@@ -186,6 +186,7 @@ AmenuLabel &AmenuLabel::SetFont(const char *f) {
 	GetModPrefs(this);
 	sbutton::GetFont(prefs)=fontdesc::Create(buf, style, size);
     }
+    return *this;
 }
     
 AmenuLabel &AmenuLabel::SetPrefs(struct sbutton_prefs *p) {
@@ -359,7 +360,7 @@ void AmenuEntry::ComputeSize(view *vw, long *labelw, long *leftw, long *rightw, 
 	if(lh>*h) *h=lh;
     } else *labelw=*h=0;
     *leftw=0;
-    int i;
+    unsigned int i;
     for(i=0;i<left.GetN();i++) ComputeGraphicSize(left[i].ptr, vw, leftw, h);
     for(i=0;i<right.GetN();i++) ComputeGraphicSize(right[i].ptr, vw, rightw, h);
     
@@ -408,13 +409,13 @@ void AmenuEntry::Draw(view *vw, const rectangle *bounds, const rectangle *labelb
     {
 	long right=labelbounds->left;
 	left.Sort();
-	for(int i=0;i<left.GetN();i++) DrawLeft(left[i].ptr, vw, bounds, damaged, &right, sensitive, selected);
+	for(unsigned int i=0;i<left.GetN();i++) DrawLeft(left[i].ptr, vw, bounds, damaged, &right, sensitive, selected);
     }
     
     {
 	long left=labelbounds->left + labelbounds->width;
 	right.Sort();
-	for(int i=0;i<right.GetN();i++) DrawRight(right[i].ptr, vw, bounds, damaged,  &left, sensitive, selected);
+	for(unsigned int i=0;i<right.GetN();i++) DrawRight(right[i].ptr, vw, bounds, damaged,  &left, sensitive, selected);
     }
 }
 
@@ -595,7 +596,6 @@ view_DSattributes AmenuCardv::DesiredSize(long  width, long  height, enum view_D
 void AmenuCardv::FullUpdate(enum view_UpdateType type, long left, long top, long width, long height) {
     if(type!=view_FullRedraw && type!=view_LastPartialRedraw) return;
     AmenuCard *c=(AmenuCard *)GetDataObject();
-    AmenuEntry *f;
     if(c==NULL) return;
     AmenuCard &cr=*c;
     rectangle bounds, enclosed, label;
@@ -799,7 +799,6 @@ void AmenuOptionv::Update() {
    
 class view *AmenuOptionv::Hit (enum view_MouseAction action, long x, long y, long numberOfClicks) {
     if(action==view_LeftDown || action==view_RightUp) {
-	class im *i=GetIM();
 	if(card==NULL) card=new AmenuOptionCardv;
 	if(card)  {
 	    card->SetDataObject(GetDataObject());

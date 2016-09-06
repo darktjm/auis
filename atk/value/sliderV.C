@@ -612,6 +612,8 @@ class valueview * sliderV::DoHit( enum view_MouseAction  type,long  x,long  y,lo
 	    tt->string = (this)->GetValueString();
 	    (tt)->SetValue(this->tmpval);
 	    break;
+	default:
+	    break;
     }  
 
     return this;

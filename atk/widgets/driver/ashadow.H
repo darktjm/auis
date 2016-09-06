@@ -223,7 +223,7 @@ class AShadow {
         if(scaleFormula) scaleFormula->Validate();
     }
   public:
-    inline AShadow(AWidgetView *v=NULL, AVarSet *d=NULL, AFormula *sFormula=NULL) : background(AShadowColors_Background), scb(v, d), resources(d), armed(FALSE), selected(FALSE), sensitive(TRUE), def(TRUE), highlighted(TRUE), fillOnArm(TRUE), dirty(TRUE), standard(TRUE), indicator(TRUE), uxscale(1.0), uyscale(1.0), scaleFormula(sFormula) {
+    inline AShadow(AWidgetView *v=NULL, AVarSet *d=NULL, AFormula *sFormula=NULL) : scaleFormula(sFormula), uxscale(1.0), uyscale(1.0), background(AShadowColors_Background), scb(v, d), resources(d), armed(FALSE), selected(FALSE), sensitive(TRUE), def(TRUE), highlighted(TRUE), fillOnArm(TRUE), dirty(TRUE), standard(TRUE), indicator(TRUE) {
     }
     static AShadow *Create(AWidgetView *v=NULL, AVarSet *d=NULL, 
 		unsigned char flags

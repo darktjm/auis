@@ -100,7 +100,7 @@ static void FixPixelPanning(class figview  *self);
 static void DoRedraws(class figview  *self, struct rectangle  *ux, struct rectangle  *uy, struct rectangle  *dr, long  diffx , long  diffy);
 static void DoBlit(class figview  *self, long  diffx , long  diffy);
 static boolean TEI_Splot(class figobj  *o, long  ref, class figure  *self, long  *vv);
-static void EnumSelSplot(class figview  *self, class figure  *fig, long  grp, void  (*func)(), long  rock);
+static void EnumSelSplot(class figview  *self, class figure  *fig, long  grp, figview_esfptr func, long  rock);
 static void AbortObjectProc(class figview  *self, long  rock);
 static void FocusUpProc(class figview  *self, long  rock);
 static void FocusDownProc(class figview  *self, long  rock);
@@ -234,8 +234,6 @@ boolean figview::InitializeClass()
 figview::figview()
 {
 	ATKinit;
-
-    int hx;
 
     this->Menus = (EmbeddedMenus)->DuplicateML( this);
     this->Keystate = keystate::Create(this, EmbeddedKeymap);
@@ -819,7 +817,7 @@ static void RectToPix(class figview  *self, struct rectangle  *dest , struct rec
 If recterased is TRUE, we can assume that the drawing area has been erased already. */
 static void RedrawView(class figview  *self, boolean  recterased)
 {
-    struct rectangle B, foc;
+    struct rectangle B;
     struct rectangle inrec;
     class figure *fig 
       = (class figure *)(self)->GetDataObject();
@@ -1087,7 +1085,7 @@ static void UpdateCache(class figview  *self, boolean  needfull )
     class dataobject *dobj;
     short needup;
     class figure *fig = (class figure *)(self)->GetDataObject();
-    struct rectangle inrec, *tmprec;
+    struct rectangle inrec;
     class figobj *o;
 
     if (fig->objs_size > self->objs_size) {
@@ -1205,7 +1203,7 @@ static void UpdateCache(class figview  *self, boolean  needfull )
 		    self->objs[ix].knownselected = FALSE;
 
 		/* add bbox of object and of old image */
-		if (needup != 2)
+		if (needup != 2) {
 		    if (self->objs[ix].drawnselected == 0) {
 			if (!self->objs[ix].ignorevbox) {
 			    rectangle_UnionRect(&self->MustEraseRect, &self->MustEraseRect, &(self->objs[ix].vbox));
@@ -1214,6 +1212,7 @@ static void UpdateCache(class figview  *self, boolean  needfull )
 		    else {
 			rectangle_UnionRect(&self->MustEraseRect, &self->MustEraseRect, &(self->objs[ix].vselbox));
 		    }
+		}
 
 		RectToPix(self, &self->objs[ix].vbox, (o)->GetBounds( self), figview_SpotRad);
 		self->objs[ix].ignorevbox = ((o)->IsGroup());
@@ -1488,7 +1487,7 @@ static void DoRedraws(class figview  *self, struct rectangle  *ux, struct rectan
     
 static void DoBlit(class figview  *self, long  diffx , long  diffy)
 {
-    struct rectangle s, ux, uy, vr;
+    struct rectangle s, ux, uy;
     struct point d;
     class region *vb = self->tmpregion;
     int border;
@@ -1733,6 +1732,8 @@ class view *figview::Hit(enum view_MouseAction  action, long  x , long  y , long
 		/*figview_WantUpdate(self, self);
 		im_ForceUpdate();*/
 		(this)->Update(); /* morally equivalent to the two lines above, and a tad faster */
+		break;
+	    default: // filedrop, UpMovement, NoMouseEvent
 		break;
 	}
     }
@@ -2015,7 +2016,7 @@ static void FocusDownProc(class figview  *self, long  rock)
 
 static void FocusLeftProc(class figview  *self, long  rock)
 {
-    long old, ref, fref;
+    long old, ref, fref = 0;
     long count;
     class figogrp *paro;
     class figure *fig = (class figure *)(self)->GetDataObject();
@@ -2143,7 +2144,6 @@ static void CutSelProc(class figview  *self, long  rock)
     int ix;
     FILE *fp;
     class figobj *this_c;
-    class dataobject *dobj;
     struct point tmppt;
 
     long cutbuf_writeid = im::GetWriteID();
@@ -2186,8 +2186,6 @@ static void CopySelProc(class figview  *self, long  rock)
     class figure *fig = (class figure *)(self)->GetDataObject();
     long ref;
     FILE *fp;
-    class figobj *this_c;
-    class dataobject *dobj;
     struct point tmppt;
 
     long cutbuf_writeid = im::GetWriteID();
@@ -2244,8 +2242,6 @@ static void RotatePasteProc(class figview  *self, long  rock)
     long ref;
     int ix;
     class figobj *this_c;
-    class dataobject *dobj;
-    struct point tmppt;
 
     if (!fig) return;
     if ((fig)->GetReadOnly()) {
@@ -2279,7 +2275,7 @@ static void PasteSelProc(class figview  *self, long  rock)
     char namebuf[100];
 #define LINELENGTH (250)
     char buf[LINELENGTH+1];
-    int c, ix;
+    int ix;
     long foc, count1, count2, offx, offy, snap, tid;
     class figogrp *o;
     struct point tmppt;
@@ -2357,7 +2353,6 @@ static void ShowPrintAreaProc(class figview  *self, long  rock /* 0 for off, 1 f
 {
     long wpts, hpts, swap;
     class figure *fig = (class figure *)(self)->GetDataObject();
-    struct rectangle *rtmp;
 
     if (rock) {
 	if (rock==2 && !self->ShowPrintArea)
@@ -2480,7 +2475,7 @@ static void SetPrintScaleProc(class figview  *self, long  rock)
 static void ReadZipProc(class figview  *self, long  rock)
 {
     int res;
-    long count1, count2, ix;
+    long count1 = 0, count2 = 0, ix;
     double ratio;
     char buffer[296], obuffer[296], scbuffer[32];
     char *ctmp;

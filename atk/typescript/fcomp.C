@@ -418,7 +418,6 @@ void CompleteTokenWork(class typescript  *ts, boolean  forward)
     }
     else {
 	char unquotedCmd[MAXPATHLEN];
-	long len = (ts->cmdStart)->GetLength();
 
 	for (beginToken = pos - 1; beginToken >= begincmd && (c = (theText)->GetChar( beginToken)) != '<' && c != '>' && ! isspace(c); beginToken--) {
 	}
@@ -434,7 +433,7 @@ void CompleteTokenWork(class typescript  *ts, boolean  forward)
     }
 
     if (strlen(cmd) != 0) {
-        if (patcode = search::CompilePattern(cmd, &pattern)) {
+        if ((patcode = search::CompilePattern(cmd, &pattern))) {
 	    message::DisplayString(ts, 0, patcode);
 	    return;
         }
@@ -546,7 +545,7 @@ void CompleteCmdWork(class typescript  *ts, boolean  forward)
     }
     else {
 	char unquotedCmd[MAXPATHLEN];
-	long len = (ts->cmdStart)->GetLength();
+	unsigned long len = (ts->cmdStart)->GetLength();
 
 	if (len >= sizeof(unquotedCmd) - 1) {
 	    len = sizeof(unquotedCmd) -1;
@@ -558,7 +557,7 @@ void CompleteCmdWork(class typescript  *ts, boolean  forward)
     }
 
     if (strlen(cmd) != 0) {
-        if (patcode = search::CompilePattern(cmd, &pattern)) {
+        if ((patcode = search::CompilePattern(cmd, &pattern))) {
 	    message::DisplayString(ts, 0, patcode);
 	    return;
         }

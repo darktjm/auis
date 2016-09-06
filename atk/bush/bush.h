@@ -67,16 +67,6 @@ END-SPECIFICATION  ************************************************************/
 #endif
 
 #include <errno.h>
-#ifdef AFS_ENV
-#include <afs/param.h>
-#include <util.h>		    /*getv*(), getc*() routine family*/
-#ifdef WHITEPAGES_ENV
-#include <wp.h>			    /*White Pages*/
-#endif /* WHITEPAGES_ENV */
-#include <netinet/in.h>	    /* For AFS 3.2 */
-#include <afs/vice.h>
-#include <afs/venus.h>
-#endif /* AFS_ENV */
 #include <apt.h>
 
 

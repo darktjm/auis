@@ -79,12 +79,12 @@ void RingAlarm(class consoleClass  *self, int  Op , int  indexed)
         if (RingingAlarm == FALSE){
             RingingAlarm = TRUE;
 	    BufPtr = Numbers[ALARM].RawText;
-            while(*BufPtr != ':') *BufPtr++;/* Alarm: */
-            *BufPtr++;
-            while(*BufPtr != ':') *BufPtr++;/* 12:00 */
-            *BufPtr++;
-            while(*BufPtr != ':') *BufPtr++;/* AM: */
-	    *BufPtr++;
+            while(*BufPtr != ':') BufPtr++;/* Alarm: */
+            BufPtr++;
+            while(*BufPtr != ':') BufPtr++;/* 12:00 */
+            BufPtr++;
+            while(*BufPtr != ':') BufPtr++;/* AM: */
+	    BufPtr++;
 	    InitPstrings();
 	    sprintf(Pstring1, "%s", Numbers[CLOCKALL].RawText);
 	    sprintf(Pstring3, "%s", BufPtr);

@@ -255,7 +255,6 @@ static void Process(class framemessage  *self, char  *bufout, int  bufoutSize)
 
 int framemessage::AskForString(int  priority, const char  *prompt , const char  *defaultString , char  *bufout, int  bufoutSize /* Is actual sizeof bufout including NUL. */)
                 {
-    char *qanswer=NULL;
     struct owatch_data *checkit=NULL;
     if ((this)->Asking())
         return ERROR;
@@ -497,8 +496,8 @@ static char *KludgePrompt(const char  *prompt, long  defaultChoice, const char  
 
 int framemessage::MultipleChoiceQuestion(int  priority, const char  *prompt, long  defaultChoice, long  *result, const char  * const *choices, const char  *abbrevKeys)
                             {
-    struct owatch_data *checkit=NULL;
 #ifdef THISCODEWORKS /* This is saracastic I assume (i.e. really should be #if 0). */
+    struct owatch_data *checkit=NULL;
     char *tempPrompt;
 #endif /* THISCODEWORKS  */
 

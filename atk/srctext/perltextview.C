@@ -392,12 +392,13 @@ class keystate *perltextview::PrependKeyState()
 static void startLineComment(perltextview *self, char key, long before, long after)
 {
     perltext *ct=(perltext *)self->view::dataobject;
-    if (!(ct)->GetStyle(before))
+    if (!(ct)->GetStyle(before)) {
 	if ('$'!= (ct)->GetChar(before-1))
 	    (ct)->WrapStyleNow(before,after-before, ct->srctext::linecomment_style, FALSE,TRUE);
 	else
 	    if (before+1 < after)
 		(ct)->WrapStyleNow(before+1,after-before, ct->srctext::linecomment_style, FALSE,TRUE);
+    }
     (self)->SetDotPosition(after);
     (self)->FrameDot(after);
     (ct)->NotifyObservers(0);

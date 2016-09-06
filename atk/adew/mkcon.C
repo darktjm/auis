@@ -114,31 +114,29 @@ static const char Insetbase[] =
 static const char Controlbase[] =
 "HFILES = %s.H\n";
 
-void ws(struct stf  *s,FILE  *f);
-boolean justcomments(struct stf  *s);
-void writemerge(struct stf  *o,struct stf  *n,FILE  *f);
-struct stf *newstf(struct stf  *old);
-void writestr(FILE  *fi,FILE  *fo,char  *name);
-long createchfile(char  *src,char  *classn,char  *name);
-struct stf *makestf(char  *buf);
-char *getf(FILE  *f,char  *s,char  *buf,char  *s1,char  *s2);
-boolean keycmp(char  *s1,char  *s2);
-void setbro(struct stf  *s1,struct stf  *s2);
+static void ws(struct stf  *s,FILE  *f);
+static boolean justcomments(struct stf  *s);
+static void writemerge(struct stf  *o,struct stf  *n,FILE  *f);
+static struct stf *newstf(struct stf  *old);
+static void writestr(FILE  *fi,FILE  *fo,const char  *name);
+static long createchfile(char  *src,char  *classn,char  *name);
+static struct stf *makestf(char  *buf);
+static char *getf(FILE  *f,const char  *s,char  *buf,char  *s1,char  *s2);
+static boolean keycmp(char  *s1,char  *s2);
+static void setbro(struct stf  *s1,struct stf  *s2);
 static FILE *tryopen(char  *name,boolean  *renamed,char  **s1,char  **s2);
-boolean process(FILE  *oldf,char  *name);
-void usage(char  *s);
-void writeinset(char  *iname,char  *src,char  *cls,char  *func);
-char *ps(char  *s);
-int main(int argc,char  *argv[]);
+static boolean process(FILE  *oldf,char  *name);
+static void usage(char  *s);
+static char *ps(char  *s);
 
 
-void ws(struct stf  *s,FILE  *f)
+static void ws(struct stf  *s,FILE  *f)
 {
     char *c;
     for(c = s->begin; c < s->end; c++)
 	putc(*c,f);
 }
-boolean justcomments(struct stf  *s)
+static boolean justcomments(struct stf  *s)
 {
     char *c;
     int incomment = FALSE;
@@ -152,7 +150,7 @@ boolean justcomments(struct stf  *s)
     }
     return TRUE;
 }
-void writemerge(struct stf  *o,struct stf  *n,FILE  *f)
+static void writemerge(struct stf  *o,struct stf  *n,FILE  *f)
 {
     for(;n != NULL; n = n->next){
 	if(n->bro) {
@@ -173,7 +171,7 @@ void writemerge(struct stf  *o,struct stf  *n,FILE  *f)
 	fprintf(f,"\n#endif /* UNUSED_USER_CODE */\n");
     }
 }
-struct stf *newstf(struct stf  *old)
+static struct stf *newstf(struct stf  *old)
 {
     struct stf *new_c;
     new_c =  (struct stf *) (malloc(sizeof (struct stf)));
@@ -182,7 +180,7 @@ struct stf *newstf(struct stf  *old)
     new_c->bro = new_c->next = NULL;
     return new_c;
 }
-void writestr(FILE  *fi,FILE  *fo,const char  *name)
+static void writestr(FILE  *fi,FILE  *fo,const char  *name)
 {
     int c;
     fprintf(fo,"static char %s[] = {\"\\\n",name);
@@ -193,7 +191,7 @@ void writestr(FILE  *fi,FILE  *fo,const char  *name)
     }
     fprintf(fo,"\"};\n");
 }
-long createchfile(char  *src,char  *classn,char  *name)
+static long createchfile(char  *src,char  *classn,char  *name)
 {
     FILE *oldf,*newf;
     sprintf(name,"%s.fh",classn);
@@ -211,7 +209,7 @@ long createchfile(char  *src,char  *classn,char  *name)
     fclose(newf);
     return 0;
 }
-struct stf *makestf(char  *buf)
+static struct stf *makestf(char  *buf)
 {
     struct stf *start, *new_c;
     char *c;
@@ -240,11 +238,10 @@ struct stf *makestf(char  *buf)
     new_c->end = c;
     return start;
 }				
-char *getf(FILE  *f,const char  *s,char  *buf,char  *s1,char  *s2)
+static char *getf(FILE  *f,const char  *s,char  *buf,char  *s1,char  *s2)
 {
     static char ending[1024];
     char *c,*cp;
-    struct MapEntryStruct *mp;
     int s2len = 0;
     if(s2 != NULL) s2len = strlen(s2);
     for(c = buf;fgets(c,2048,f) != NULL; ){
@@ -284,14 +281,14 @@ char *getf(FILE  *f,const char  *s,char  *buf,char  *s1,char  *s2)
     return(NULL);
 }
 
-boolean keycmp(char  *s1,char  *s2)
+static boolean keycmp(char  *s1,char  *s2)
 {
     while(*s1++ == *s2){
 	if(*s2++ == '\n') return TRUE;
     }
     return FALSE;
 }
-void setbro(struct stf  *s1,struct stf  *s2)
+static void setbro(struct stf  *s1,struct stf  *s2)
 {
     struct stf *ss2,*ss1;
     for(ss1 = s1 ; ss1 != NULL; ss1 = ss1->next){
@@ -310,7 +307,7 @@ static FILE *tryopen(char  *name,boolean  *renamed,char  **s1,char  **s2)
 {
     char buf[1024],*p;
     FILE *f;
-    int len;
+    unsigned int len;
     *renamed = FALSE;
     p = strrchr(name,'.');
     *s1 = *s2 = NULL;
@@ -353,7 +350,7 @@ static FILE *tryopen(char  *name,boolean  *renamed,char  **s1,char  **s2)
     return NULL;
 }
 	    
-boolean process(FILE  *oldf,char  *name)
+static boolean process(FILE  *oldf,char  *name)
 {
     static char oldb[64000], newb[64000];
     FILE *newf;
@@ -393,17 +390,13 @@ boolean process(FILE  *oldf,char  *name)
 }
 
 
-void usage(char  *s)
+static void usage(char  *s)
 {
     fprintf(stderr,"usage: %s <-C ClassName(:oldclassname)> <-F FunctionName> <-T Title> <-O ShellScriptName> <-M> <-I> <-V Viewname(:oldviewname)> <-W> <-Help> <Filename>\n",s);
     exit(1);
 }
-void writeinset(char  *iname,char  *src,char  *cls,char  *func)
-{
-    
-}
 static char makefile[MAXPATHLEN];
-char *ps(char  *s)
+static char *ps(char  *s)
 {
     char *c;
     if((c = strchr(s,':')) != NULL) 
@@ -622,13 +615,13 @@ int main(int argc, char  *argv[])
 		else {
 		    sprintf(bv,"%sv",bb);
 		}
-		fprintf(f,Insetbase,bb,bv,bb,bv);
+		fprintf(f,Insetbase,bb,bv);
 		strcpy(bv2,bv);
 		strcat(bv2, ".o");
 		fprintf(f,Imakebase,bb,bv, bb, bv2,bb,bb,bv2);
 	    }
 	    else  {
-		fprintf(f,Controlbase,bb,bb);
+		fprintf(f,Controlbase,bb);
 		fprintf(f,Imakebase,bb,"",bb,"",bb,bb,"");
 	    }
 	    fclose(f);
@@ -637,7 +630,7 @@ int main(int argc, char  *argv[])
 	if(access(cmd,R_OK) == -1 &&
 	   ((f = fopen(cmd,"w")) != NULL)){
 	    printf("Creating %s shellscript\n",cmd);
-	    fprintf(f,shellbase,bb);
+	    fprintf(f,shellbase);
 	    fclose(f);
 	    chmod(cmd,0755);
 	}

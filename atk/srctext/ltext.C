@@ -92,19 +92,17 @@ ltext::ltext()
     this->Indents = NULL;
 
     if (!spref) {
-	s = (char *)malloc(strlen("defun:2,defmacro:2,defconstant:1,defstruct:1,let:1,let*:1,do:2,if:1"));
-	strcpy(s,"defun:2,defmacro:2,defconstant:1,defstruct:1,let:1,let*:1,do:2,if:1");
+	s = strdup("defun:2,defmacro:2,defconstant:1,defstruct:1,let:1,let*:1,do:2,if:1");
     } else {
-	s = (char *)malloc(strlen(spref));
-	strcpy(s,spref);
+	s = strdup(spref);
     }
     while (isspace(*s)) ++s;
     copy = s;
-    while (t = copy) {
-	if (copy = strchr(t, ',')) {
+    while ((t = copy)) {
+	if ((copy = strchr(t, ','))) {
 	    *copy++ = '\0';
 	}
-	if (t2=strchr(t, ':')) *t2++ = '\0';
+	if ((t2=strchr(t, ':'))) *t2++ = '\0';
 	addindent(this, t, t2 ? atoi(t2) : 1);
     }
 
@@ -370,29 +368,6 @@ long ltext::ReverseBlance(long pos, int type)
 	return EOF;
 }
 
-static long nextline(ltext *self, long pos)
-{
-    /* Returns the start of the line following this one, or EOF if this line doesn't end. */
-    int c;
-
-    while ((c = (self)->GetChar(pos)) != EOF && c != '\n')
-	++pos;
-
-    if (c == EOF)
-	return EOF;
-    else
-	return pos+1;
-}
-
-static boolean inmark(mark *mark, long pos)
-{
-    /* Returns true if the pos is inside the mark. */
-    if (pos < (mark)->GetPos() || pos > (mark)->GetEndPos())
-	return FALSE;
-    else
-	return TRUE;
-}
-
 static long findsexpr(ltext *self, long pos, long limit)
 {
     /* Returns the start of the next sexpr before limit. Takes into account comments and ws. */
@@ -498,7 +473,7 @@ int ltext::Indentation(long pos)
     /* Determine the name of the function. Note: it is impossible for skipexpr to return a position on this line or further. This is because ReverseBalance would not have passed over this sexpr it was not totally before the start of this line. */
     functionend = skipsexpr(this, functionstart, linestart);
     args = -1;
-    if (functionend - functionstart < sizeof(buf)) {
+    if (functionend - functionstart < (int)sizeof(buf)) {
 	/* Don't bother if the ``function'' is real long, cause then it's probably not a function */
 	ptr = buf;
 	for (pos = functionstart; pos < functionend; ++pos)

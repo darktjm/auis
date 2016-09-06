@@ -43,8 +43,8 @@ HTPrompt and HTPromptPassword: Display a message and get the input
                          
  */
                 
-extern char * HTPrompt PARAMS((CONST char * Msg, CONST char * deflt));
-extern char * HTPromptPassword PARAMS((CONST char * Msg));
+extern char * HTPrompt (CONST char * Msg, CONST char * deflt);
+extern char * HTPromptPassword (CONST char * Msg);
 /*
 
 HTPromptUsernameAndPassword: Get both username and password
@@ -68,9 +68,9 @@ HTPromptUsernameAndPassword: Get both username and password
                          NOT freed!
                          
  */
-extern void HTPromptUsernameAndPassword PARAMS((CONST char *    Msg,
+extern void HTPromptUsernameAndPassword (CONST char *    Msg,
                                                 char **         username,
-                                                char **         password));
+                                                char **         password);
 /*
 
 Display a message, don't wait for input
@@ -80,7 +80,7 @@ Display a message, don't wait for input
   Msg                     String to be displayed.
                          
  */
-extern void HTAlert PARAMS((CONST char * Msg));
+extern void HTAlert (CONST char * Msg);
 
 /*
 
@@ -91,7 +91,7 @@ Display a progress message for information (and diagnostics) only
    The input is a list of parameters for printf.
    
  */
-extern void HTProgress PARAMS((CONST char * Msg));
+extern void HTProgress (CONST char * Msg);
 
 /*
 
@@ -107,7 +107,7 @@ Display a message, then wait for 'yes' or 'no'.
                          FALSE otherwise.
                          
  */
-extern BOOL HTConfirm PARAMS ((CONST char * Msg));
+extern BOOL HTConfirm (CONST char * Msg);
 
 #endif/*
 

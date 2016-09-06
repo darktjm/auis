@@ -26,7 +26,7 @@
 #endif
 PUBLIC BOOL HTInteractive=YES;		    /* Any prompts from the Library? */
 
-PUBLIC void HTAlert ARGS1(CONST char *, Msg)
+PUBLIC void HTAlert (CONST char * Msg)
 {
 #ifdef NeXTStep
     NXRunAlertPanel(NULL, "%s", NULL, NULL, NULL, Msg);
@@ -36,13 +36,13 @@ PUBLIC void HTAlert ARGS1(CONST char *, Msg)
 }
 
 
-PUBLIC void HTProgress ARGS1(CONST char *, Msg)
+PUBLIC void HTProgress (CONST char * Msg)
 {
     fprintf(TDEST, "WWW9  %s ...\n", Msg);
 }
 
 
-PUBLIC BOOL HTConfirm ARGS1(CONST char *, Msg)
+PUBLIC BOOL HTConfirm (CONST char * Msg)
 {
   char Reply[4];	/* One more for terminating NULL -- AL */
   char *URep;
@@ -73,7 +73,7 @@ PUBLIC BOOL HTConfirm ARGS1(CONST char *, Msg)
 /*	Prompt for answer and get text back. Reply text is either NULL on
 **	error or a dynamic string which the caller must free.
 */
-PUBLIC char * HTPrompt ARGS2(CONST char *, Msg, CONST char *, deflt)
+PUBLIC char * HTPrompt (CONST char * Msg, CONST char * deflt)
 {
     char Tmp[200];
     char * rep = 0;
@@ -93,7 +93,7 @@ PUBLIC char * HTPrompt ARGS2(CONST char *, Msg, CONST char *, deflt)
 /*	Prompt for password without echoing the reply. Reply text is
 **	either NULL on error or a dynamic string which the caller must free.
 */
-PUBLIC char * HTPromptPassword ARGS1(CONST char *, Msg)
+PUBLIC char * HTPromptPassword (CONST char * Msg)
 {
     static char result[MAXPASSWDLEN],*c;
     *result = '\0';
@@ -128,9 +128,9 @@ PUBLIC char * HTPromptPassword ARGS1(CONST char *, Msg)
 **	are NOT freed.
 **	
 */
-PUBLIC void HTPromptUsernameAndPassword ARGS3(CONST char *,	Msg,
-					      char **,		username,
-					      char **,		password)
+PUBLIC void HTPromptUsernameAndPassword (CONST char *	Msg,
+					      char **		username,
+					      char **		password)
 {
     char Tmp[200];
     char * rep = 0;

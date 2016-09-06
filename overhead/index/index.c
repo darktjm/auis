@@ -31,11 +31,7 @@
 #include "index.h"
 
 /* given an index and a record id, copy out key into abuffer, a buffer of max size alen */
-index_GetKey(ai, arid, abuffer, alen)
-struct Index *ai;
-struct recordID *arid;
-char *abuffer;
-long alen;
+int index_GetKey(struct Index *ai, struct recordID *arid, char *abuffer, long alen)
 {
     struct indexBucket *tb;
     struct indexComponent *tc;
@@ -55,11 +51,7 @@ long alen;
 }
 
 /* given an index and a record id, copy out data into abuffer, a buffer of max size alen */
-long index_GetData(ai, arid, abuffer, alen)
-struct Index *ai;
-struct recordID *arid;
-char *abuffer;
-long alen;
+long index_GetData(struct Index *ai, struct recordID *arid, char *abuffer, long alen)
 {
     struct indexBucket *tb;
     struct indexComponent *tc;
@@ -81,9 +73,7 @@ long alen;
 /* internal routine: given a bucket, tell if there are any references from a secondary
     * record the given record id.
     */
-static index_RecordInUse(ab, arid)
-struct indexBucket *ab;
-struct recordID *arid;
+static int index_RecordInUse(struct indexBucket *ab, struct recordID *arid)
 {
     struct indexComponent *tc;
     for(tc = ab->list; tc; tc=tc->next) {
@@ -96,9 +86,7 @@ struct recordID *arid;
   * Internal routine: given a bucket, return a pointer to the named primary record, or null
   * if none exist.
       */
-struct indexComponent *index_FindID(ab, arid)
-struct indexBucket *ab;
-struct recordID *arid;
+struct indexComponent *index_FindID(struct indexBucket *ab, struct recordID *arid)
 {
     struct indexComponent *tc;
     for(tc = ab->list; tc; tc=tc->next) {
@@ -111,9 +99,7 @@ struct recordID *arid;
   * Internal routine: given a bucket pointer and a record id, generate the next unique
   * record id for records placed in that bucket.
       */
-static index_GenerateKey(ab, arid)
-struct indexBucket *ab;
-struct recordID *arid;
+static void index_GenerateKey(struct indexBucket *ab, struct recordID *arid)
 {
     arid->word1 = ab->hashIndex;
     arid->word2 = ab->nextID++;
@@ -124,10 +110,7 @@ struct recordID *arid;
   * This routine always creates a new record, even if there is already a primary record
       * with the same key.
       */
-index_AddPrimary(ai, akey, adata)
-struct Index *ai;
-char *akey;
-char *adata;
+int index_AddPrimary(struct Index *ai, char *akey, char *adata)
 {
     struct indexBucket *tb;
     struct indexComponent *tc;
@@ -151,10 +134,7 @@ char *adata;
   * Given an index, a record id of a primary record and a new key, this function
   * creates a new secondary record pointing to the named primary record.
   */
-index_AddSecondary(ai, arid, akey)
-struct Index *ai;
-char *akey;
-struct recordID *arid;
+int index_AddSecondary(struct Index *ai, struct recordID *arid, char *akey)
 {
     struct indexBucket *tb;
     struct indexComponent *tc;
@@ -187,13 +167,13 @@ struct recordID *arid;
     return 0;
 }
 
+static void index_PurgeBucket (struct Index *ai, long ahash, struct recordID *arid);
+
 /*
   * Given an index and a primary record id, this routine deletes the record and all secondary
   * records pointing to the specified primary id.
   */
-index_DeletePrimary(ai, arid)
-struct Index *ai;
-struct recordID *arid;
+int index_DeletePrimary(struct Index *ai, struct recordID *arid)
 {
     struct indexBucket *tb;
     struct indexComponent *tc;
@@ -234,10 +214,7 @@ struct recordID *arid;
   * Internal routine: given an index, a record id and a hash bucket, purge the bucket of all
   * references to the speicfied record id.
   */
-index_PurgeBucket (ai, ahash, arid)
-struct Index *ai;
-long ahash;
-struct recordID *arid;
+static void index_PurgeBucket (struct Index *ai, long ahash, struct recordID *arid)
 {
     struct indexComponent *tc, *nc;
     struct indexBucket *tb;
@@ -260,10 +237,7 @@ struct recordID *arid;
   * Given an index, a primary record's record id, and a key, delete the secondary record
 	 * with the specified key that refers to the given primary record id.
 	 */
-index_DeleteSecondary(ai, arid, akey)
-struct Index *ai;
-char *akey;
-struct recordID *arid;
+int index_DeleteSecondary(struct Index *ai, struct recordID *arid, char *akey)
 {
     struct indexComponent *tc, *nc;
     struct indexComponent **lc;
@@ -303,14 +277,12 @@ struct recordID *arid;
   * Internal routine: compute the hash for a string, given a hash table size (usually
 									       * found in the index structure).
 	*/
-long index_Hash(astring, hashSize)
-short hashSize;
-char *astring;
+long index_Hash(char *astring, short hashSize)
 {
     long aval;
     short tc;
     aval = 0;
-    while (tc  = *astring++) {
+    while ((tc  = *astring++)) {
 	aval *= 173;
 	aval += tc;
     }
@@ -325,10 +297,7 @@ char *astring;
       * a standard I/O FILE * for the file.  If opening for writing, the new file will be created
 	  * if necessary, and truncated.
 	      */
-FILE *index_HashOpen(ai, ahash, awrite)
-struct Index *ai;
-long awrite;
-long ahash;
+FILE *index_HashOpen(struct Index *ai, long ahash, long awrite)
 {
     char tpath[1024];
     char tbuffer[20];
@@ -343,10 +312,7 @@ long ahash;
   * Given an index, enumerate all of the records in the index.  Takes an index, a proc and
   * a rock, and calls the proc with the index, the record (struct indexComponent) and rock.
   */
-void index_Enumerate(ai, aproc, arock)
-struct Index *ai;
-index_efptr aproc;
-char *arock;
+void index_Enumerate(struct Index *ai, index_efptr aproc, char *arock)
 {
     long i;
     struct indexBucket *tb;
@@ -366,8 +332,7 @@ char *arock;
       * The pathname is the pathname of the directory containing all of the hash bucket
       * and version number files.
       */
-struct Index *index_Open(apath)
-const char *apath;
+struct Index *index_Open(const char *apath)
 {
     DIR *td;
     DIRENT_TYPE *tde;
@@ -380,7 +345,7 @@ const char *apath;
 	return (struct Index *) 0;
     }
     foundFlag = 0;
-    while(tde=readdir(td)) {
+    while((tde=readdir(td))) {
 	if (tde->d_name[0] == 'V') {
 	    /* found the version number file */
 	    if (foundFlag) {
@@ -411,8 +376,7 @@ const char *apath;
 /*
   * Close an open index file, freeing all associated files.
   */
-void index_Close(ai)
-struct Index *ai;
+void index_Close(struct Index *ai)
 {
     struct indexBucket *tb, *nb;
     for(tb=ai->blist;tb;tb=nb) {
@@ -431,9 +395,7 @@ struct Index *ai;
   * primary records having the specified key.  This recordSet must be freed, using
   * recordset_Free, when the caller is finished with it.
   */
-struct recordSet *index_GetPrimarySet(ai, akey)
-struct Index *ai;
-char *akey;
+struct recordSet *index_GetPrimarySet(struct Index *ai, char *akey)
 {
     struct indexBucket *tb;
     struct indexComponent *tlist;
@@ -454,9 +416,7 @@ char *akey;
   * records (primary or secondary) having the specified key.  This recordSet must be freed, using
   * recordset_Free, when the caller is finished with it.
   */
-struct recordSet *index_GetAnySet(ai, akey)
-struct Index *ai;
-char *akey;
+struct recordSet *index_GetAnySet(struct Index *ai, char *akey)
 {
     struct indexBucket *tb;
     struct indexComponent *tlist;
@@ -476,8 +436,7 @@ char *akey;
   * Quasi-internal routine (if you need it, you need it): produces a dupm of an open index
   * on standard output.  Very useful for debugging things.
       */
-index_Dump(ai)
-struct Index *ai;
+void index_Dump(struct Index *ai)
 {
     struct indexBucket *tb;
     struct indexComponent *tc;

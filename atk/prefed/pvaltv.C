@@ -149,10 +149,7 @@ void pvaltv::UpdateText(long  val)
 void pvaltv::UpdateValue()
 {
     class text *pvt=TEXT(this);
-    int i;
-    long len=(pvt)->GetLength();
-    int max=(DATA(this))->GetListMax();
-    int size=(DATA(this))->GetListSize();
+    unsigned long len=(pvt)->GetLength();
     char buf[1024];
     (pvt)->CopySubString( 0, len>sizeof(buf)-1?sizeof(buf)-1:len, buf, FALSE);
     (DATA(this))->SetFromPreferenceString( buf);

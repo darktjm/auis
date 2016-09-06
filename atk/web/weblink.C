@@ -145,8 +145,6 @@ weblink::ReplaceTextWithLinks(class text *ptext,
 	char * 
 weblink::warpToURL(char  *url, view  *v)  {
 	ATKinit;
-	char *fname = NULL;
-	frame *f;
 
 /*
 	if (v == NULL) {
@@ -154,6 +152,7 @@ weblink::warpToURL(char  *url, view  *v)  {
 			"ERROR,  no view passwd to warp func\n");
 		return NULL;
 	}
+	frame *f;
 	f = getframe(v);
 	if (f == NULL || frame_VisitFile == NULL) {
 		fprintf(stdout, 
@@ -172,8 +171,7 @@ weblink::warpToURLinText(class text *ptext,
 	ATKinit;
 	int tlen;
 	mark *m;
-	weblink *w;
-	char buf[1024], *fname;
+	char buf[1024];
 	int lenset;
 
 	if (len == 0) {
@@ -245,7 +243,7 @@ weblink::InitializeClass()  {
 			ATK::LoadClass("view");
 	struct proctable_Entry *tempProc;
 	ATK::LoadClass("frame");
-	if (tempProc = proctable::Lookup("frame-visit-file"))
+	if ((tempProc = proctable::Lookup("frame-visit-file")))
 		frame_VisitFile = proctable::GetFunction(tempProc);
 	proctable::DefineProc("weblink-ReplaceText", 
 			(proctable_fptr)weblink_replacetext, 

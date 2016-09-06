@@ -57,14 +57,13 @@ static boolean boxview_debug=0;
 
 
 ATKdefineRegistry(boxview, view, boxview::InitializeClass);
-void ReplaceChild(class boxview  *self, class view  *child			/* child to be replaced */, const char  *dataname				/* name of replacement dataobject */);
 void InitChild(class boxview  *self);
 void Update(class boxview  *self, enum view_UpdateType  how		/* kind of update */, struct rectangle  *updateRect		/* rectangle affected; or NULL for update */, boolean  contentsChanged		/* contents changed since last update */);
 void RequestUpdate(class boxview  *self);
 
 
-void
-ReplaceChild(class boxview  *self, class view  *child			/* child to be replaced */, char  *dataname				/* name of replacement dataobject */)
+static void
+ReplaceChild(class boxview  *self, class view  *child			/* child to be replaced */, const char  *dataname				/* name of replacement dataobject */)
 {
     char foo[81];
 

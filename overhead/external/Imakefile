@@ -28,4 +28,4 @@
 #define IHaveSubdirs 
 
 
-SUBDIRS = image mail  
+SUBDIRS = image

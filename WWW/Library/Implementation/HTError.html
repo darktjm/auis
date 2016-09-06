@@ -169,13 +169,13 @@ extern HTErrorMsgInfo error_info[];
 This function adds an error message to the error_stack list in the HTRequest
 structure. It always returns a negative value.
 <PRE>
-extern int HTErrorAdd PARAMS((	HTRequest * 	request,
+extern int HTErrorAdd (	HTRequest * 	request,
 			    	HTErrSeverity 	severity,
 			    	BOOL		ignore,
 			     	int		element,
 			     	void *		par,
 			     	unsigned int	par_length,
-			     	char *		where));
+			     	char *		where);
 </PRE>
 
 <H3>Add a System Error Message</H3>
@@ -185,11 +185,11 @@ or equivalent and adds it to the error_stack list in the HTRequest
 structure. It always returns a negative value.
 
 <PRE>
-extern int HTErrorSysAdd PARAMS(( HTRequest * 	request,
+extern int HTErrorSysAdd ( HTRequest * 	request,
 				  HTErrSeverity	severity,
 				  int		errornumber,
 				  BOOL		ignore,
-				  char *	syscall));
+				  char *	syscall);
 </PRE>
 
 <H3>Ignoring an Error Message</H3>
@@ -200,8 +200,8 @@ it on for the latest error appended to the list or an arbitrary error
 refered to by its handle.
 
 <PRE>
-extern void HTErrorIgnore PARAMS((HTRequest * request, int handle));
-extern void HTErrorIgnoreLast PARAMS((HTRequest * request));
+extern void HTErrorIgnore (HTRequest * request, int handle);
+extern void HTErrorIgnoreLast (HTRequest * request);
 </PRE>
 
 <H3>Handling Prefix for Links in Error Message</H3>
@@ -210,8 +210,8 @@ Two functions handle the URL prefix of the links inside the error
 message. They are quite obvious:
 
 <PRE>
-extern void HTErrorSetPrefix PARAMS((char *path));
-extern CONST char *HTErrorGetPrefix NOPARAMS;
+extern void HTErrorSetPrefix (char *path);
+extern CONST char *HTErrorGetPrefix (void);
 </PRE>
 
 <H3>Generating an Error Message (default to standard error)</H3>
@@ -228,7 +228,7 @@ If a stream <EM>has</EM> been put up (and maybe taken down again) inside the
 Library, then request-&gt;error_block has been set to YES. This indicates that
 it is NOT possible any more to use the stream as output for the message.
 <PRE>
-extern void HTErrorMsg    PARAMS((HTRequest * request));
+extern void HTErrorMsg    (HTRequest * request);
 </PRE>
 
 <H3>Freeing an Error List</H3>
@@ -236,7 +236,7 @@ extern void HTErrorMsg    PARAMS((HTRequest * request));
 This is normally done when the HTRequest structure is freed but it might be 
 done at any other time in order to ignore a whole series of errors.
 <PRE>
-extern void HTErrorFree   PARAMS((HTRequest * request));
+extern void HTErrorFree   (HTRequest * request);
 </PRE>
 
 <PRE>

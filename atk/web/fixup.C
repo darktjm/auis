@@ -5,10 +5,13 @@
 #include <environment.H>
 #include <view.H>
 
+#include "web.h"
+
 #ifndef TEXTVIEWREFCHAR
 #define TEXTVIEWREFCHAR ((unsigned char)255)
 #endif
 
+#if 0 /* unused */
 static void DestroyCell(class table  *T, struct cell  *oldcell)
 {
     struct viewlist *vl;
@@ -26,7 +29,7 @@ static void DestroyCell(class table  *T, struct cell  *oldcell)
 		(oldcell->interior.ImbeddedObject.data)->Destroy();
 		oldcell->interior.ImbeddedObject.data = NULL;
 	    }
-	    while (vl = oldcell->interior.ImbeddedObject.views) {
+	    while ((vl = oldcell->interior.ImbeddedObject.views)) {
 		    (vl->child)->UnlinkTree();
 		    (vl->child)->Destroy();
 		/* end of misuse */
@@ -34,6 +37,8 @@ static void DestroyCell(class table  *T, struct cell  *oldcell)
 		    free((char *) vl);
 	    }
 	    
+	    break;
+	case table_EmptyCell: // nothing to do
 	    break;
     }
     oldcell->format = GENERALFORMAT;
@@ -69,7 +74,7 @@ static void TableImbedObject (table *self, dataobject *obj, Chunk  chunk)
     (self)->SetModified();
 }
 
-dataobject *HTMLTextFixupText(text *src) {
+static dataobject *HTMLTextFixupText(text *src) {
     long count=0;
     dataobject *result=src;
     table *tbl=NULL;
@@ -126,7 +131,7 @@ dataobject *HTMLTextFixupText(text *src) {
     if(count==0) return src;
     return result?result:src;
 }
-
+#endif
 
 dataobject *NewFixupText(dataobject *obj) {
     ATK_CLASS(text);

@@ -1094,7 +1094,6 @@ void rasterview::PrintPSRect(FILE *outfile, long logwidth, long logheight, struc
     long vleft, vtop, vwidth, vheight;
     long partoffx, partoffy;
     double xdscale, ydscale;
-    long wpts, hpts;  /* image dimensions in points */
     long row, rowbytes;
     void *buf;
 
@@ -1104,10 +1103,6 @@ void rasterview::PrintPSRect(FILE *outfile, long logwidth, long logheight, struc
     }
 
     rectangle_GetRectSize(&this->ViewSelection, &left, &top, &width, &height);
-
-    /* yes, we're repeating the calculations from above. */
-    wpts = (width * ras->xScale + (raster_UNITSCALE/2)) / raster_UNITSCALE;
-    hpts = (height * ras->yScale + (raster_UNITSCALE/2)) / raster_UNITSCALE;
 
     xdscale = ((double) ras->xScale) / ((double)raster_UNITSCALE);
     ydscale = ((double) ras->yScale) / ((double)raster_UNITSCALE);
@@ -1678,7 +1673,6 @@ void rasterview_DrawPanHighlight(class rasterview  *self, short  g)
 */
 static void DrawTarget(class rasterview  *self, long  x , long  y)
 {
-    class graphic *G = (self)->GetDrawable();
     struct rectangle VB;
     struct rectangle PH;
     long w, h;

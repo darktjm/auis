@@ -75,7 +75,6 @@ void wrapv::InitChildren()
 void wrapv::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
 {
     struct rectangle r;
-    int i;
     
     if(this->intv) {
 	(this)->GetLogicalBounds( &r);

@@ -147,7 +147,6 @@ void figoflow::ObservedChanged(class observable  *obs, long  status)
 void figoflow::Draw(class figview  *v) 
 {
     long x, y, w, h;
-    char *col;
     char buf[32];
 
     if ((this)->PosW() >= 0) {

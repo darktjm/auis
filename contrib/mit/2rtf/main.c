@@ -169,10 +169,7 @@ int main(int argc, const char *argv[])
 }
 
 
-FILE *FileProcess(prompt, filename, mode)
-     char *prompt;
-     char *filename;
-     char *mode;
+FILE *FileProcess(char *prompt, char *filename, char *mode)
 /*
  *
  *  Return a pointer to the file associated with filename,
@@ -317,7 +314,7 @@ FILE *FileProcess(prompt, filename, mode)
 }
 
 
-void MakeTable()
+void MakeTable(void)
 /*
  *
  *  Create internal translation table by reading in ftrans.
@@ -441,8 +438,7 @@ void MakeTable()
 }
 
 
-void SetupEnvironment(rootfile)
-     char *rootfile;
+void SetupEnvironment(char *rootfile)
 /*
  *
  *  This adds a bunch of values.  I'm not sure why, because
@@ -491,8 +487,7 @@ void SetupEnvironment(rootfile)
 
 }
 
-void AddValue(name, value)
-     char *name, *value;
+void AddValue(char *name, char *value)
 /*
  *
  *  This adds a value to Values.
@@ -528,7 +523,7 @@ void AddValue(name, value)
     }
 }
 
-void InitStateVector()
+void InitStateVector(void)
 /*
  *
  *  This procedure initializes all the parts of the

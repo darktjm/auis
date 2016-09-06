@@ -68,7 +68,7 @@ chunk,
 </DL>
 
 <PRE>
-extern HTChunk * HTChunkCreate PARAMS((int growby));
+extern HTChunk * HTChunkCreate (int growby);
 
 
 </PRE>
@@ -87,7 +87,7 @@ HTChunkCreate()
 </DL>
 
 <PRE>
-extern void HTChunkFree PARAMS((HTChunk * ch));
+extern void HTChunkFree (HTChunk * ch);
 
 
 </PRE>
@@ -106,7 +106,7 @@ HTChunkCreate()
 </DL>
 
 <PRE>
-extern void HTChunkClear PARAMS((HTChunk * ch));
+extern void HTChunkClear (HTChunk * ch);
 
 
 </PRE>
@@ -128,7 +128,7 @@ HTChunkCreate()
 </DL>
 
 <PRE>
-extern void HTChunkEnsure PARAMS((HTChunk * ch, int s));
+extern void HTChunkEnsure (HTChunk * ch, int s);
 
 
 </PRE>
@@ -148,7 +148,7 @@ HTChunkCreate()
 <DD> Is one character bigger
 </DL>
 
-<PRE>extern void HTChunkPutc PARAMS((HTChunk * ch, char c));
+<PRE>extern void HTChunkPutc (HTChunk * ch, char c);
 
 </PRE>
 <H2>Append a string to a  chunk</H2>
@@ -170,7 +170,7 @@ string to be appended
 
 <PRE>
 
-extern void HTChunkPuts PARAMS((HTChunk * ch, const char *str));
+extern void HTChunkPuts (HTChunk * ch, const char *str);
 
 
 </PRE>
@@ -192,7 +192,7 @@ HTChunkCreate()
 
 <PRE>
 
-extern void HTChunkTerminate PARAMS((HTChunk * ch));
+extern void HTChunkTerminate (HTChunk * ch);
 
 #endif
 

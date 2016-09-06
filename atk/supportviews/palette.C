@@ -278,7 +278,7 @@ void palette::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
                     (this)->DrawString( item->u.str.str, graphic_BETWEENLEFTANDRIGHT | graphic_BETWEENTOPANDBASELINE);
                     break;
             }
-            if (item->selected = item->new_selected) {
+            if ((item->selected = item->new_selected)) {
                 (this)->SetTransferMode( graphic_INVERT);
                 (this)->FillRectSize( item->x, item->y, item->w,   item->h, black);
                 (this)->SetTransferMode( graphic_COPY);
@@ -334,32 +334,36 @@ class view *palette::Hit(enum view_MouseAction  action, long  x , long  y , long
         case view_RightDown:
             switch (this->loc) {
                 case palette_LEFT:
-                    if (x > this->border)
+                    if (x > this->border) {
                         if (this->child != NULL)
                             return (this->child)->Hit( action, (x - this->border - 1), y, numclicks);
                         else
                             return (class view *)this;
+		    }
                     break;
                 case palette_TOP:
-                    if (y > this->border)
+                    if (y > this->border) {
                         if (this->child != NULL)
                             return (this->child)->Hit( action, x, (y - this->border - 1), numclicks);
                         else
                             return (class view *)this;
+		    }
                     break;
                 case palette_RIGHT:
-                    if (x <= this->border)
+                    if (x <= this->border) {
                         if (this->child != NULL)
                             return (this->child)->Hit( action, x, y, numclicks);
                         else
                             return (class view *)this;
                     break;
+		    }
                 case palette_BOTTOM:
-                    if (y <= this->border)
+                    if (y <= this->border) {
                         if (this->child != NULL)
                             return (this->child)->Hit( action, x, y, numclicks);
                         else
                             return (class view *)this;
+		    }
                     break;
                 default:
                     if (this->child != NULL)

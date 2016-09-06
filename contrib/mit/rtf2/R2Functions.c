@@ -99,8 +99,7 @@ FP AssignFunc();
 char *GetInstruction();
 int R2UniqueID(), R2Delete(), R2Symbol(), R2NOP(), R2Footnote(), R2Caps(), R2SCaps(), R2Newpage(), R2Par(), R2FontDefine(), R2Margl(), R2Margr(), R2Font(), R2StyleSheet(), R2Plain(), R2Size(), R2Index(), R2Hidden(), R2Header(), R2Field(), R2Tab(), R2Current(), R2Indent(), R2Pard(), R2TabChange();
 
-FP AssignFunc(ezword)
-     char *ezword;
+FP AssignFunc(char *ezword)
 /*
  *
  *  Function that returns a pointer to the function
@@ -143,7 +142,7 @@ FP AssignFunc(ezword)
   return(R2NOP);
 }
 
-int R2UniqueID()
+int R2UniqueID(void)
 /*
  *
  *  Function that returns a unique id number.
@@ -153,10 +152,7 @@ int R2UniqueID()
   return(++Token);
 }
 
-int R2Delete(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Delete(char *command, int numdel, int tofind)
 /*
  *
  *  Function that parses all of the text associated with COMMAND
@@ -169,10 +165,7 @@ int R2Delete(command, numdel, tofind)
 }
 
   
-int R2NOP(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2NOP(char *command, int numdel, int tofind)
 /*
  *
  *  NOP function.
@@ -182,8 +175,7 @@ int R2NOP(command, numdel, tofind)
     return CONTINUE;
 }
 
-static int hex_digit_value(c)
-    int c;
+static int hex_digit_value(int c)
 {
     if (c >= 'a' && c <= 'f')
 	return 10 + c - 'a';
@@ -193,10 +185,7 @@ static int hex_digit_value(c)
 	return c - '0';
 }
 
-int R2Symbol(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Symbol(char *command, int numdel, int tofind)
 /*
  *
  *  Reads a 2 digit hex number from the input, and writes
@@ -217,10 +206,7 @@ int R2Symbol(command, numdel, tofind)
 
      
 
-int R2Error(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Error(char *command, int numdel, int tofind)
 /*
  *
  *  Notification of errors.
@@ -232,10 +218,7 @@ int R2Error(command, numdel, tofind)
 }
 
 
-int R2Footnote(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Footnote(char *command, int numdel, int tofind)
 /*
  *
  *  Processes footnotes.  Writes required info to output file,
@@ -263,7 +246,7 @@ int R2Footnote(command, numdel, tofind)
 }
 
 
-int R2Begin()
+int R2Begin(void)
 /*
  *
  *  Handles the occurence of a { during parsing of text.  If an
@@ -312,10 +295,7 @@ int R2Begin()
   ParseText('}', NORMAL, PRINTTOFILE);
 }
 
-int R2FontDefine(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2FontDefine(char *command, int numdel, int tofind)
 /*
  *
  *  Reads in the font table from the input file, and stores
@@ -376,10 +356,7 @@ int R2FontDefine(command, numdel, tofind)
   return CONTINUE;
 }
 
-int R2Caps(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Caps(char *command, int numdel, int tofind)
 /*
  *
  *  Converts input text to all capitals in the output file.
@@ -390,10 +367,7 @@ int R2Caps(command, numdel, tofind)
   return CONTINUE;
 }
 
-int R2SCaps(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2SCaps(char *command, int numdel, int tofind)
 /*
  *
  *  Converts input text to all small capitals in the output file.
@@ -408,10 +382,7 @@ int R2SCaps(command, numdel, tofind)
   return CONTINUE;
 }
 
-int R2Newpage(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Newpage(char *command, int numdel, int tofind)
 /*
  *
  *  Handles page breaks.
@@ -427,10 +398,7 @@ int R2Newpage(command, numdel, tofind)
   return CONTINUE;
 }
 
-int R2Margl(command, numdel, tofind)
-   char *command;
-   int numdel;
-   int tofind;
+int R2Margl(char *command, int numdel, int tofind)
 /*
  *
  *  Change left margin.
@@ -446,10 +414,7 @@ int R2Margl(command, numdel, tofind)
 }
 
 
-int R2Margr(command, numdel, tofind)
-   char *command;
-   int numdel;
-   int tofind;
+int R2Margr(char *command, int numdel, int tofind)
 /*
  *
  *  Change right margin.
@@ -464,10 +429,7 @@ int R2Margr(command, numdel, tofind)
      return CONTINUE;
 }
 
-int R2Par(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Par(char *command, int numdel, int tofind)
 /*
  *
  *  Handle par command.  This function should be called for the
@@ -518,10 +480,7 @@ int R2Par(command, numdel, tofind)
    return CONTINUE;
 }
 
-int R2Font(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Font(char *command, int numdel, int tofind)
 /*
  *
  *  Handle font changes within the input file by using the
@@ -568,8 +527,7 @@ int R2Font(command, numdel, tofind)
    return CONTINUE;
 }
 
-int GetAttr(from, p1, p2, p3, p4)
-     char *from, *p1, *p2, *p3, *p4;
+int GetAttr(char *from, char *p1, char *p2, char *p3, char *p4)
 /*
  *
  *  Get the 4 attributes associated with the command in
@@ -688,10 +646,7 @@ int GetAttr(from, p1, p2, p3, p4)
 }
 
 
-int R2StyleSheet(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2StyleSheet(char *command, int numdel, int tofind)
 /*
  *
  *  Process the style sheet declaration in the input file by
@@ -749,10 +704,7 @@ int R2StyleSheet(command, numdel, tofind)
    return CONTINUE;
 }
 
-int R2Plain(command, numdel, tofind)
-   char *command;
-   int numdel;
-   int tofind;
+int R2Plain(char *command, int numdel, int tofind)
 /*
  *
  *  Process the plain command in the input file by closing
@@ -765,10 +717,7 @@ int R2Plain(command, numdel, tofind)
    return CONTINUE;
 }
 
-int R2Size(command, numdel, tofind)
-   char *command;
-   int numdel;
-   int tofind;
+int R2Size(char *command, int numdel, int tofind)
 /*
  *
  *  Handle changes in the font size.
@@ -800,10 +749,7 @@ int R2Size(command, numdel, tofind)
    return(tofind);
 }
 
-int R2Hidden(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Hidden(char *command, int numdel, int tofind)
 /*
  *
  *  Handles hidden text for annotations.  Currently only
@@ -991,10 +937,7 @@ int R2Hidden(command, numdel, tofind)
    return CONTINUE;
 }
 
-int R2Index(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Index(char *command, int numdel, int tofind)
 /*
  *
  *  Handles index entries.  Due to the nature of rtf, it
@@ -1121,10 +1064,7 @@ int R2Index(command, numdel, tofind)
    return CONTINUE;
 }
 
-int R2Field(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Field(char *command, int numdel, int tofind)
 /*
  *
  *  Handle fields only by finding \fldrslt and copying
@@ -1138,10 +1078,7 @@ int R2Field(command, numdel, tofind)
    return CONTINUE;
 }
 
-int R2Header(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Header(char *command, int numdel, int tofind)
 /*
  *
  *  Handle headers and footers.  Breaks up left, center,
@@ -1212,10 +1149,7 @@ int R2Header(command, numdel, tofind)
    return CONTINUE;
 }
 
-int R2Tab(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Tab(char *command, int numdel, int tofind)
 /*
  *
  *  Handle tabs.  If flag is set, then we are dealing
@@ -1233,10 +1167,7 @@ int R2Tab(command, numdel, tofind)
    return CONTINUE;
 }
 
-int R2Current(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Current(char *command, int numdel, int tofind)
 /*
  *
  *  Handle current date & time, as well as pagenumber.
@@ -1280,10 +1211,7 @@ int R2Indent(command, numdel, tofind)
 }
 */
 
-int R2Indent(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Indent(char *command, int numdel, int tofind)
 /*
  *
  *  Handle local indentation.  Rounding to LeftIndent and
@@ -1324,10 +1252,7 @@ int R2Indent(command, numdel, tofind)
    return CONTINUE;
 }
 
-int R2Pard(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2Pard(char *command, int numdel, int tofind)
 /*
  *
  *  Reset default paragraph specifications.
@@ -1361,10 +1286,7 @@ int R2Pard(command, numdel, tofind)
 }
 
 
-int R2TabChange(command, numdel, tofind)
-     char *command;
-     int numdel;
-     int tofind;
+int R2TabChange(char *command, int numdel, int tofind)
 /*
  *
  *  Handle local tab changes.

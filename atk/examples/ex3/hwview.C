@@ -112,6 +112,8 @@ class view *helloworldview::Hit(enum view_MouseAction  action,long  x,long  y,lo
 		this->HaveDownTransition=TRUE;
 		(this)->WantInputFocus(this);
 		break;
+	    default:
+		break;
 	}
 
     (this)->WantUpdate(this);

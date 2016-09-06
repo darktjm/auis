@@ -88,7 +88,7 @@ int main(int argc, char **argv);
 
 
 	static void 
-SkipComment() {
+SkipComment(void) {
 	int c;
 	boolean SawStar = FALSE;
 	putc('*', outf);
@@ -114,7 +114,7 @@ SkipString(char  d	/* the close delimiter */) {
 
 
 	static void
-PutToken()  {
+PutToken(void)  {
 	fprintf(outf, "%s", CurTok);
 }
 
@@ -125,7 +125,7 @@ PutToken()  {
 	Note that numeric values are treated with each digit as a token.
 */
 	static boolean
-GetToken() {
+GetToken(void) {
 	int c;
 	char *cx;
 	while ((c = getc(inf)) != EOF)  {
@@ -163,7 +163,7 @@ GetToken() {
 }
 
 	static void
-PutNodeClass() {
+PutNodeClass(void) {
 	int c;
 
 	char fields[30][100];	/* max of 30 field names of 100 chars each */

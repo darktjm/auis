@@ -198,7 +198,6 @@ boolean spread::RecSrchReplace(class dataobject *srcdobj, long srcpos, long srcl
 
     return TRUE;
 }
-extern void spread_ComputeAnchorOffsets(class spread *V, struct rectangle *rect);
 
 void spread::RecSrchExpose(const struct rectangle &logical, struct rectangle &hit) {
     /* ComputeSizes will do the LinkTree and InsertView on any children. */

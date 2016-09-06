@@ -25,6 +25,8 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
+#include <util.h>
+#include "xim.h"
 
 /* Define USEGETSERV if you want wmclient to look up service names
    in /etc/services.  We wire them in here for speed. */
@@ -32,13 +34,7 @@
 #define CONSPORT	2018		/* to avoid getservbyname calls */
 #endif /* USEGETSERV */
   
-#ifdef ANSI_COMPILER
 void xim_EstablishConsole(char  * xhost, char *progname)
-#else
-void xim_EstablishConsole(xhost, progname)
-char *xhost;
-char *progname;
-#endif
 {
     int i;
     char tmpHostName[255];

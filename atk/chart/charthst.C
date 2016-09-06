@@ -192,6 +192,8 @@ charthst::HitChart( enum view_MouseAction       action, long			       x , long		
 	(this )->UseNormalCursor( );
 	y_offset = 0;
         break;
+      default:
+        break;
       }
     sprintf( value_string, "%s:  Value = %ld", name, value );
     (this)->Announce(  value_string );
@@ -213,7 +215,7 @@ charthst::DrawChart( )
   width = (Width / ((count) ? count : 1)) - 1;
   DEBUGdt(width,width);
   left = Left;
-  if ( excess = (Width - ((width + 1) * count)) / 2 )
+  if (( excess = (Width - ((width + 1) * count)) / 2 ))
     excess = count / excess;
   DEBUGdt(excess,excess);
   while ( shadow )
@@ -249,7 +251,7 @@ charthst::PrintChart( )
      malloc( sizeof(struct aptv_path) + 5 * sizeof(struct aptv_point) );
   width = (Width / ((count) ? count : 1)) - 1;
   left = Left;
-  if ( excess = (Width - ((width + 1) * count)) / 2 )
+  if ( ( excess = (Width - ((width + 1) * count)) / 2 ) )
     excess = count / excess;
   (this)->SetPrintLineWidth(  1 );
   path->count = 5;

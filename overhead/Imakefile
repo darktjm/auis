@@ -31,15 +31,6 @@
     CMENU = cmenu
 #endif 
 
-#ifdef AMS_ENV
-    AMS = mail
-    ELI = eli
-#endif
-
-#if defined(AFS_ENV) || defined(AMS_DELIVERY_ENV) || defined(WHITEPAGES_ENV)
-    WPUTIL = wputil wpi
-#endif
-
 #ifndef NO_FONTS_ENV
     FONTS = fonts
 #endif 
@@ -64,11 +55,7 @@ SUBDIRS = relativize \
 	errors \
 	index \
 	$(DYNLINK) \
-	rxp \
 	mkparser \
-	$(ELI) \
 	$(FONTS) \
 	$(ICONS) \
-	$(CMENU) \
-	$(AMS) \
-	$(WPUTIL)
+	$(CMENU)

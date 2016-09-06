@@ -65,7 +65,6 @@ static void SelectAtPos(class panel  *self, long  pos);
 static void KeyDispatch(class panel  *self, long  rock);
 static void ProcNext(long  rock, class panel  *self, char  c);
 static void ProcPrev(long  rock, class panel  *self, char  c);
-static void AddLabels( class panel		 *self );
 
 
 static void DestroyPanelList(struct panel_Entry  *pe)
@@ -449,22 +448,6 @@ void panel::FreeAllTags()
         for(;e != NULL;e = (this)->EntryNext(e))
             if((tag = (this)->EntryTag(e)) != NULL)
                 free(tag);
-}
-
-static void
-AddLabels( class panel		 *self )
-  {
-  static char		 answer[100];
-
-  while(1) {
-      *answer = '\0';
-    if(message::AskForString(self,0,"Labels : ",NULL,answer,
-			     sizeof(answer)) == -1)
-	break;
-    if((*answer == '\0') || !strcmp(answer,""))
-	break;
-    (self)->Add(answer,0,FALSE);
-  }
 }
 
 void

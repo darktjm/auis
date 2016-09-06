@@ -65,11 +65,12 @@ void hiddenview::ReceiveInputFocus()
 	(this->hid_menus)->SetMask( (this->hid_menus)->GetMask() & ~hiddenview_FullScreenMenus);
     PostKeyState((this->hid_state)->AddBefore(this->textview::keystate)); /* Yech, this makes no sense to me, but works */
     PostMenus(NULL);
-    if (GetEditor() == VI)
+    if (GetEditor() == VI) {
 	if (GetVIMode() == COMMAND)
 	    message::DisplayString(this, 0, "Command Mode");
 	else
 	    message::DisplayString(this, 0, "Input Mode");
+    }
     WantUpdate(this);
 }
 

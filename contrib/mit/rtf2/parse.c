@@ -59,8 +59,7 @@ void CloseFiles(), AbsorbSpace();
 long int ParseText();
 char *GetInstruction(), *makelower();
 
-void ParseMain(Filein, Fileout)
-     char *Filein, *Fileout;
+void ParseMain(char *Filein, char *Fileout)
 /*
  *
  *  Takes care of the beginning of the input and output files.
@@ -178,9 +177,9 @@ void ParseMain(Filein, Fileout)
   printf("* Finished processing %ld lines of %s.\n", CurrLine, Filein);
 }
 
+int ReplaceText(char *instruction, int mode, char tofind);
 
-long int ParseText(tofind, transform, action)
-     int tofind, transform, action;
+long int ParseText(int tofind, int transform, int action)
 /*
  *
  *  Actually goes through the input file, character by
@@ -203,7 +202,7 @@ long int ParseText(tofind, transform, action)
 {
   char ch, instruction[TMP_SIZE], tmp_instruction[TMP_SIZE];
   TABLE tmp, FindNode();
-  int Execute(), ReplaceText(), in, braces=0;
+  int Execute(), in, braces=0;
 
   while((in = fgetc(fin)) != tofind)
     {
@@ -287,9 +286,7 @@ long int ParseText(tofind, transform, action)
 }
 
 
-TABLE FindNode(field, string)
-     int field;
-     char *string;
+TABLE FindNode(int field, char *string)
 /*
  *
  *  Look up command in table created from the trans file.
@@ -327,8 +324,7 @@ TABLE FindNode(field, string)
 }
 
 
-int ExecuteSpecial(character)
-     char character;
+int ExecuteSpecial(char *character)
 /*
  *
  *  Handle special rtf characters.
@@ -356,7 +352,7 @@ int ExecuteSpecial(character)
 }
 
 
-char *GetInstruction()
+char *GetInstruction(void)
 /*
  *
  *  Read command in from the input file.
@@ -396,8 +392,7 @@ char *GetInstruction()
 
 
 
-int Execute(instruction)
-     char *instruction;
+int Execute(char *instruction)
 /*
  *
  *  Read in the delimiter associated with INSTRUCTION,
@@ -465,9 +460,7 @@ int Execute(instruction)
 }
 
 
-int ReplaceText(instruction, mode, tofind)
-     char *instruction, tofind;
-     int mode;
+int ReplaceText(char *instruction, int mode, char tofind)
 /*
  *
  *  If the INSTRUCTION is naked, write the instruction to

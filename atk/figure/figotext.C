@@ -62,7 +62,6 @@ static void TwiddleCharsProc(class figotext  *self, int  rock);
 static void InsertProc(class figotext  *self, int  rock);
 static void DeleteProc(class figotext  *self, int  rock);
 static void MoveHandle(class figotext  *self, long  x , long  y , long  ptref);
-static boolean StringMatch(char  *str1 , char  *str2);
 
 
 boolean figotext::InitializeClass()
@@ -168,10 +167,9 @@ void figotext::RecomputeBounds()
 {   
     long x, y, w, h, texw, texh;
     struct rectangle altrec;
-    long x0, y0;
+    long x0 = 0, y0;
     char *fam;
     long size, style, textpos;
-    int ix;
 
     fam = ((this)->GetVAttributes())->GetFontFamily( (this)->GetIVAttributes());
     size = ((this)->GetVAttributes())->GetFontSize( (this)->GetIVAttributes());
@@ -327,7 +325,7 @@ void figotext::Draw(class figview  *v)
 {
     long gray, count;
     const char *fam, *col, *cx, *cxend;
-    long size, style, textpos, grapos, grax;
+    long size, style, textpos, grapos = 0, grax;
     struct rectangle *rec = (this)->GetBounds( v);
     class region *viewclip;
     struct rectangle bb;
@@ -664,7 +662,6 @@ static void InsertProc(class figotext  *self, int  rock)
 {
     int ix;
     int len = strlen(self->text);
-    char *ch;
 
     if (self->dotpos == (-1))
 	return;
@@ -734,9 +731,7 @@ static void MoveHandle(class figotext  *self, long  x , long  y , long  ptref)
 
 boolean figotext::AddParts(enum view_MouseAction  action, class figview  *v, long  x , long  y , boolean  handle, long  ptref)
 {
-    int ix;
     int len = strlen(this->text);
-    char *ch;
     
     if (action==view_LeftDown) {
 
@@ -795,6 +790,8 @@ boolean figotext::Reshape(enum view_MouseAction  action, class figview  *v, long
 	    ::MoveHandle(this, x, y, ptref);
 	    (this)->RecomputeBounds();
 	    (this)->SetModified();
+	    break;
+	default: // filedrop, upmovement, nomouse
 	    break;
     }
     return TRUE;
@@ -869,7 +866,7 @@ void figotext::WriteBody(FILE  *fp)
 long figotext::ReadBody(FILE  *fp, boolean  recompute)
 {
     int	ix; 
-    int count, ch;
+    int count, ch = 0;
     long tmp1, tmp2;
 
 #define LINELENGTH (250)
@@ -919,36 +916,12 @@ long figotext::ReadBody(FILE  *fp, boolean  recompute)
     return dataobject_NOREADERROR;
 }
 
-static boolean StringMatch(char  *str1 , char  *str2)
-{
-    char c1, c2;
-
-    if (str1==NULL && str2==NULL)
-	return TRUE; 
-    if (str1==NULL || str2==NULL)
-	return TRUE; 
-    while (!(*str1=='\0' && *str2=='\0')) {
-	if ((c1=(*str1)) != (c2=(*str2))) {
-	    if (isupper(c1))
-		c1 = tolower(c1);
-	    if (isupper(c2))
-		c2 = tolower(c2);
-	    if (c1 != c2)
-		return FALSE;
-	}
-	str1++;
-	str2++;
-    }
-    return TRUE;
-}
-
 void figotext::PrintObject(class figview  *v, FILE  *file, const char  *prefix, boolean newstyle)
 {
     int ix, ch, count;
-    char *fam, *psfam, fontname[256];
+    char *fam, fontname[256];
     long size, style, textpos;
-    long x, y, w, h;
-    long shad, lw;
+    long x, y;
     const char *col;
     const char *posmod;
     double rcol, bcol, gcol;

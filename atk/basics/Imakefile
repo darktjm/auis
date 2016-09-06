@@ -4,8 +4,4 @@
 \* ********************************************************************** */
 #define	IHaveSubdirs
 
-#ifdef WM_ENV
-WM = wm
-#endif /* WM_ENV */
-
-SUBDIRS =  common x ${WM} lib
+SUBDIRS =  common x lib

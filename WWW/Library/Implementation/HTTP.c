@@ -105,7 +105,7 @@ struct _HTStream {
 **
 **      Returns 0 on OK, else -1
 */
-PRIVATE int HTTPCleanup ARGS1(HTRequest *, request)
+PRIVATE int HTTPCleanup (HTRequest * request)
 {
     http_info *http;
     int status = 0;
@@ -146,8 +146,8 @@ PRIVATE int HTTPCleanup ARGS1(HTRequest *, request)
 **
 **      Note: The function does NEVER close the connection
 */
-PRIVATE int HTTPSendRequest ARGS3(HTRequest *, request,
-				  http_info *, http, char *, url)
+PRIVATE int HTTPSendRequest (HTRequest * request,
+				  http_info * http, char * url)
 {
     int status = 0;
 
@@ -301,7 +301,7 @@ PRIVATE int HTTPSendRequest ARGS3(HTRequest *, request,
 }
 
 
-PRIVATE BOOL HTTPAuthentication ARGS1(HTRequest *, request)
+PRIVATE BOOL HTTPAuthentication (HTRequest * request)
 {
     HTAAScheme scheme;
     HTList *valid_schemes = HTList_new();
@@ -345,7 +345,7 @@ PRIVATE BOOL HTTPAuthentication ARGS1(HTRequest *, request)
 **	appropiate error message and decides whether we should expect data
 **	or not.
 */
-PRIVATE void HTTPResponse ARGS1(HTStream *, me)
+PRIVATE void HTTPResponse (HTStream * me)
 {
     switch (me->status) {
 
@@ -479,7 +479,7 @@ PRIVATE void HTTPResponse ARGS1(HTStream *, me)
 **		200:	 Use `output_stream' in HTRequest structure
 **		else:	 Use `output_flush' in HTRequest structure
 */
-PRIVATE void flush ARGS1(HTStream *, me)
+PRIVATE void flush (HTStream * me)
 {
     HTRequest *req = me->request;
     me->transparent = YES;				/* Only do this once */
@@ -526,7 +526,7 @@ PRIVATE void flush ARGS1(HTStream *, me)
     }
 }
 
-PRIVATE void HTTPStatus_put_character ARGS2(HTStream *, me, char, c)
+PRIVATE void HTTPStatus_put_character (HTStream * me, char c)
 {
     if (me->transparent)
 	PUTC(c);
@@ -557,21 +557,21 @@ PRIVATE void HTTPStatus_put_character ARGS2(HTStream *, me, char, c)
     }
 }
 
-PRIVATE void HTTPStatus_put_string ARGS2(HTStream *, me, CONST char*, s)
+PRIVATE void HTTPStatus_put_string (HTStream * me, CONST char* s)
 {
     while (!me->transparent && *s)
 	HTTPStatus_put_character(me, *s++);
     if (*s) PUTS(s);
 }
 
-PRIVATE void HTTPStatus_put_block ARGS3(HTStream *, me, CONST char*, b, int, l)
+PRIVATE void HTTPStatus_put_block (HTStream * me, CONST char* b, int l)
 {
     while (!me->transparent && l-- > 0)
 	HTTPStatus_put_character(me, *b++);
     if (l > 0) PUTBLOCK(b, l);
 }
 
-PRIVATE int HTTPStatus_free ARGS1(HTStream *, me)
+PRIVATE int HTTPStatus_free (HTStream * me)
 {
     int status = me->status;
     HTTPResponse(me);					   /* Get next state */
@@ -583,7 +583,7 @@ PRIVATE int HTTPStatus_free ARGS1(HTStream *, me)
     return status;	     /* Return the HTTP status value - 0 if HTTP 0.9 */
 }
 
-PRIVATE int HTTPStatus_abort ARGS2(HTStream *, me, HTError, e)
+PRIVATE int HTTPStatus_abort (HTStream * me, HTError e)
 {
     if (me->target)
 	ABORT_TARGET;
@@ -606,8 +606,8 @@ PRIVATE CONST HTStreamClass HTTPStatusClass =
     HTTPStatus_put_block
 };
 
-PUBLIC HTStream * HTTPStatus_new ARGS2(HTRequest *, request,
-				       http_info *, http)
+PUBLIC HTStream * HTTPStatus_new (HTRequest * request,
+				       http_info * http)
 {
     HTStream * me = (HTStream *) calloc(1, sizeof(HTStream));
     if (!me) outofmem(__FILE__, "HTTPStatus_new");
@@ -634,7 +634,7 @@ PUBLIC HTStream * HTTPStatus_new ARGS2(HTRequest *, request,
 **			HT_LOADED	if return status 200 OK
 **			HT_NO_DATA	if return status 204 No Response
 */
-PUBLIC int HTLoadHTTP ARGS1 (HTRequest *, request)
+PUBLIC int HTLoadHTTP  (HTRequest * request)
 {
     int status = HT_ERROR;
     char *url;				  /* Gets initialized on every entry */

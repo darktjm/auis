@@ -44,7 +44,7 @@
 - find out and possibly remove additional CMU/MIT-specific crap
   - figure out what "AFS integration" means
   - find out what AMS is/does and maybe drop it
-  - remove all packages available elsewhere; e.g. metamail, rpc, jpeg, tiff
+  - remove all packages available elsewhere; e.g. peg, tiff
     (making sure there is no afs/atk "enhancement" first)
 - build improvements
   - make it possible to build w/o simultaneous install

@@ -95,7 +95,7 @@ oldRF::ReadRow(FILE  *file			/* where to get bytes from */, unsigned char *row		
 	unsigned char savebyte;
 
 	savebyte = *(row+W-1);		/* save last byte */
-	if (fread(row, W, 1, file) < 0) /* read the bytes */
+	if (fread(row, W, 1, file) < 1) /* read the bytes */
 		return dataobject_PREMATUREEOF;  /* report error, if any */
 
 	/* convert colors */
@@ -141,7 +141,7 @@ oldRF::ReadImage(FILE  *file		/* where to get bits from */, class pixelimage  *p
 	unsigned char *where;		/* where to store next row */
 	long row, W;		/* count rows;  byte length of row */
 
-	if (fread(&hdr, 14, 1, file) < 0)   /* read the header */
+	if (fread(&hdr, 14, 1, file) < 1)   /* read the header */
 		  return dataobject_PREMATUREEOF;
 
 	if (hdr.Magic == RasterMagic) {

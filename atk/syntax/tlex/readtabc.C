@@ -115,7 +115,7 @@ ScanToken(char  *cx, char  *sub)
 	if (isalnum(UNSIGN(*cx))) {
 		bx = cx;
 		while (isalnum(UNSIGN(*cx))) cx++;
-		if (cx-bx > sizeof(buff)-1) 
+		if ((unsigned)(cx-bx) > sizeof(buff)-1) 
 			cx = bx + sizeof(buff)-1;
 		strncpy(buff, bx, cx-bx);
 		buff[cx-bx] = '\0';

@@ -110,55 +110,6 @@ the file in EZ without losing the EZ format directive.
 Compiling the RTF translators is optional.  You must set RTF_ENV = 1 in your 
 site.h file.
 
-
-\section{Networked Educational Online System
-
-}
-The neos directory contains ATK applications that enable people to compose 
-documents in EZ and then click the mouse on command buttons to exchange the 
-files over a special, classroom oriented file service.  These applications 
-have been in use for several years in a couple "Electronic" sections of 
-writing classes at MIT.  For a fuller description of neos, read the file 
-WHAT_IS_NEOS.
-
-
-Since the applications are useless without the server, the server is included 
-in the \bold{fxlib} directory.  The trouble is that the fxlib hierarchy uses 
-the MIT Athena standard for Imakefiles.  You must hand tool the fxlib hierarcy 
-and compile it before you compile neos.  This may pose some problems:  you 
-need libkrb.a libdes.a and libcom_err.a.
-
-
-If you don't have kerberos version 4 running at your site, there's no point in 
-bringing up the fx server.  You'd be better off reading the spec and writing 
-for yourself a simple program that obeys the Application Programmer Interface 
-to store and retrieve the different classes of files with the different access 
-control lists.
-
-
-The com_err library is included here for your convenience but is also included 
-in the Athena, and AFS distributions, so you could (and probably should) avoid 
-compiling this one.  (No point in duplicating what you already have.)  The 
-distribution placed here uses the Athena imake rules without explicitly saying 
-so.  Sorry for the lousy integration...
-
-
-If you have the kerberos, des, com_err libraries, then you just have to follow 
-the README files and build fxlib.  When these libraries are built, the build 
-of neos will succeed.
-
-
-Building neos is controlled by the NEOS_ENV define in your site.h file.
-
-
-By the next distribution, I hope to have a smoother integration of the fxlib 
-stuff into the Andrew hierarchy.
-
-
-For a limited time, I will respond to email queries for help in setting up 
-NEOS.  Write to me at wdc@athena.mit.edu.
-
-
 Share and Enjoy,
 
 Bill Cattey

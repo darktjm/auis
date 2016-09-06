@@ -79,12 +79,12 @@ void AText::CommonInit() {
     stateFormula.Validate();
 }
 
-void ATextValue(ASlot *slot, const avalueflex &aux, const avalueflex &in, avalueflex &out) {
+static void ATextValue(ASlot *slot, const avalueflex &aux, const avalueflex &in, avalueflex &out) {
     AText *at=(AText *)aux[0].ATKObject();
     if(at->Source()) {
         text *t=at->Source();
         static flex local;
-        if(t->GetLength()+1>local.GetN()) {
+        if(t->GetLength()+1>(int)local.GetN()) {
             local.Insert(local.GetN(), t->GetLength()+1-local.GetN());
         }
         size_t dummy;
@@ -98,7 +98,7 @@ void ATextValue(ASlot *slot, const avalueflex &aux, const avalueflex &in, avalue
 }
 
 static atom_def type("avalue_u");
-void ATextSourceAssign(ASlot *slot, const avalueflex &aux, const avalueflex &in, avalueflex &out) {
+static void ATextSourceAssign(ASlot *slot, const avalueflex &aux, const avalueflex &in, avalueflex &out) {
     AText *at=(AText *)aux[0].ATKObject();
     text *ot=at->Source();
     if(ot) ot->RemoveObserver(at);
@@ -107,7 +107,7 @@ void ATextSourceAssign(ASlot *slot, const avalueflex &aux, const avalueflex &in,
     if(nt) nt->AddObserver(at);    
 }
 
-void ATextValueAssign(ASlot *slot, const avalueflex &aux, const avalueflex &in, avalueflex &out) {
+static void ATextValueAssign(ASlot *slot, const avalueflex &aux, const avalueflex &in, avalueflex &out) {
     AText *at=(AText *)aux[0].ATKObject();
     avalue_u *val=(avalue_u *)in[0].VoidPtr(type);
     slot->UseOnlyFromAnAssignFunction(val);
@@ -123,12 +123,12 @@ void ATextValueAssign(ASlot *slot, const avalueflex &aux, const avalueflex &in, 
     at->SetObserveTextChanges(TRUE);
 }
 
-AText::AText() : sourceAct(ATextSourceAssign, this), valueAct(ATextValue, this), valueAssignAct(ATextValueAssign, this), stateFormula(this) {
+AText::AText() : stateFormula(this), sourceAct(ATextSourceAssign, this), valueAct(ATextValue, this), valueAssignAct(ATextValueAssign, this) {
     ATKinit;
     CommonInit();
 }
 
-AText::AText(const char *txt) : sourceAct(ATextSourceAssign, this), valueAct(ATextValue, this), valueAssignAct(ATextValueAssign, this), stateFormula(this)  {
+AText::AText(const char *txt) : stateFormula(this), sourceAct(ATextSourceAssign, this), valueAct(ATextValue, this), valueAssignAct(ATextValueAssign, this)  {
     ATKinit;
     value=(char *)txt;
     CommonInit();

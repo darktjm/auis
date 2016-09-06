@@ -185,8 +185,6 @@ long textflowview::BuildPlan(struct textps_layout_plan **planptr, long pagewidth
 
 void *textflowview::GetPSPrintInterface(const char *printtype)
 {
-    static struct textview_insetdata dat;
-
     /* this thing doesn't print at all, by itself. */
 
     return NULL;

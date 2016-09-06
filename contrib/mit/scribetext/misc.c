@@ -52,12 +52,12 @@
 
 extern TABLE Table;
 extern FILESTACK FileStack;
-int offset(), roffset();
+extern int offset(char *string, char character);
+extern int roffset(char *string, char character);
 void AbsorbSpace();
 char *makelower();
 
-char *makelower(instruction)
-     char *instruction;
+char *makelower(char *instruction)
 {
   int i;
   
@@ -71,7 +71,7 @@ char *makelower(instruction)
 }
   
 
-void TempPrintList()
+void TempPrintList(void)
 {
   TABLE tmp=Table;
 
@@ -87,8 +87,7 @@ void TempPrintList()
 }
 
 
-int offset(string, character)
-     char *string, character;
+int offset(char *string, char character)
 {
   char *loc;
 
@@ -99,8 +98,7 @@ int offset(string, character)
 }
 
 
-int roffset(string, character)
-     char *string, character;
+int roffset(char *string, char character)
 {
   char *loc;
 
@@ -111,7 +109,7 @@ int roffset(string, character)
 }
 
 
-void usage()
+void usage(void)
 {
   fprintf(stderr, "\nUsage:  %s %s\n\n", me,
 	 "[scribefile [ezfile]] [-t transtable] [-e stderrfile]");
@@ -119,7 +117,7 @@ void usage()
 }  
 
 
-void CloseFiles()
+void CloseFiles(void)
 {
   fprintf(fout, "\\enddata{text, %d}\n", MasterToken);
 
@@ -130,7 +128,7 @@ void CloseFiles()
 }
 
 
-void AbsorbSpace()
+void AbsorbSpace(void)
 {
   int in;
   char ch;
@@ -147,7 +145,7 @@ void AbsorbSpace()
 }
 
 
-void AbsorbNewlines()
+void AbsorbNewlines(void)
 {
   int in;
   char ch;
@@ -166,8 +164,7 @@ void AbsorbNewlines()
 }
 
 
-void PushFile(filename)
-     char *filename;
+void PushFile(char *filename)
 {
   FILESTACK new;
 
@@ -193,7 +190,7 @@ CurrLine=1;
 }
 
 
-int PopFile()
+int PopFile(void)
 {
   fclose(fin);
   

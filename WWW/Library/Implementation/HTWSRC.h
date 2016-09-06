@@ -35,9 +35,9 @@ Escaping Strings
    the caller.
    
  */
-extern char * HTDeSlash PARAMS((CONST char * str));
+extern char * HTDeSlash (CONST char * str);
 
-extern char * HTEnSlash PARAMS((CONST char * str));
+extern char * HTEnSlash (CONST char * str);
 
 #endif
 /*

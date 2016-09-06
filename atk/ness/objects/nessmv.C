@@ -1,6 +1,6 @@
 /* 
 	Copyright Carnegie Mellon University 1992, 1993 - All Rights Reserved
-
+*/
 /*
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
@@ -200,7 +200,6 @@ static char *GetName(class ness  *n) {
     
 static long match(class ness  *n,struct helpRock  *h) {
     char buf[1024];
-    int len;
     char *name=GetName(n);
     if(name==NULL) return 0;
     printf("blah:'%s'\n",name);
@@ -215,7 +214,6 @@ static long match(class ness  *n,struct helpRock  *h) {
 
 static void helpProc(char  *partial, struct helpRock  *myrock,
 		message_workfptr  HelpWork, long  rock) {
-    class text *t=myrock->text;
     class ness *n=ness::GetList();
     if(!HelpWork) return;
     (*HelpWork)(rock,
@@ -348,7 +346,7 @@ static const char * const appendchoices[]={
 static void Append(class nessmv  *self, long  rock) {
     char buf[1024];
     char *filename=NULL;
-    class buffer *b, *ob;
+    class buffer *b;
     ATK  *data;
     class ness *dest, *src=(class ness *)(self)->GetDataObject();
     class ness *n=ness::GetList();

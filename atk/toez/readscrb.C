@@ -172,7 +172,7 @@ with passthru set.
 #include <style.H>
 #include <fontdesc.H>
 
-
+#include <stdarg.h>
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
@@ -248,13 +248,10 @@ static struct stylemap *LatestEndMap = NULL;
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 boolean ReadScribeFromFileToDoc(FILE  *f , class text  *doc , int  pos , void  (*errhandler)(long, char *));
-static void Error();
-static void Error0(const char  *msg );
-static void Error1(const char  *msg , const char  *a );
-static void Error2(const char  *msg , const char  *a , const char  *b );
-static void Error3(const char  *msg , const char  *a , const char  *b , const char  *c );
-static void Error4(const char  *msg , const char  *a , const char  *b , const char  *c , const char  *d );
-static void Error5(const char  *msg , const char  *a , const char  *b , const char  *c , const char  *d , const char  *e );
+#ifdef __GNUC__
+__attribute__((format(printf,1,2)))
+#endif
+static void Error(const char *, ...);
 static void InitCharType ();
 static char * CollectWord(int  *len );
 static int IsReserved (char *word );
@@ -300,29 +297,15 @@ ReadScribeFromFileToDoc(FILE  *f , class text  *doc , int  pos , void  (*errhand
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 	static void
-Error()
+Error(const char *msg, ...)
 {
+	va_list ap;
+	va_start(ap, msg);
+	vsprintf(ErrBuf, msg, ap);
+	va_end(ap);
 	error(LineNo, ErrBuf);
 	HadError = TRUE;
 }
-	static void
-Error0(const char  *msg ) 
-	{	sprintf (ErrBuf, msg);   Error();   }
-	static void
-Error1(const char  *msg , const char  *a ) 
-	{	sprintf (ErrBuf, msg, a);   Error();   }
-	static void
-Error2(const char  *msg , const char  *a , const char  *b ) 
-	{	sprintf (ErrBuf, msg, a, b);   Error();   }
-	static void
-Error3(const char  *msg , const char  *a , const char  *b , const char  *c ) 
-	{	sprintf (ErrBuf, msg, a, b, c);   Error();   }
-	static void
-Error4(const char  *msg , const char  *a , const char  *b , const char  *c , const char  *d ) 
-	{	sprintf (ErrBuf, msg, a, b, c, d);   Error();   }
-	static void
-Error5(const char  *msg , const char  *a , const char  *b , const char  *c , const char  *d , const char  *e ) 
-	{	sprintf (ErrBuf, msg, a, b, c, d, e);   Error();   }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
@@ -390,9 +373,9 @@ InitCharType ()
 	static const char other[] = "0123456789%#";
 		/* '.' '-' '&' ought to be in other, but they are valid as @. @- @& */
 	for (i=256; i; )				 CharType[--i] = 0;
-	for (i=strlen(lower); i; )		 CharType[lower[--i]] = 1;
-	for (i=strlen(upper); i; )		 CharType[upper[--i]] = 1;
-	for (i=strlen(other); i; )		 CharType[other[--i]] = 1;
+	for (i=strlen(lower); i; )		 CharType[(unsigned char)lower[--i]] = 1;
+	for (i=strlen(upper); i; )		 CharType[(unsigned char)upper[--i]] = 1;
+	for (i=strlen(other); i; )		 CharType[(unsigned char)other[--i]] = 1;
 }
 
 	static char *
@@ -403,7 +386,7 @@ CollectWord(int  *len )
 	int cnt = 100;
 	SaveWhiteSpace();
 	c = nextch;
-	while (cnt-- && CharType[c]) {
+	while (cnt-- && CharType[(unsigned char)c]) {
 		*wx++ = (isupper(c)) ? tolower(c) : c;
 		c = getnextch();
 	}
@@ -603,7 +586,7 @@ appendtobuf(char  *buf,long  buflen,boolean  doit)
 				scanning = FALSE;
 				break;
 			}
-			else /* FALL THROUGH */;
+			// else /* FALL THROUGH */;
 		default:
 			if (doit) pout(nextch);
 			if(buf){
@@ -714,7 +697,7 @@ DoText()
 				c = nextch;
 				break;
 			}
-			else /* FALL THROUGH */;
+			/* else // FALL THROUGH */;
 		default:
 			ouch(c);
 			c = getnextch();
@@ -809,7 +792,7 @@ DoAt()
 				LineStartCommand = TRUE;
 			endc=ScribeDelimiter(&tc);
 			if (endc == ' ') {
-				Error0 ("No environment name after @begin; ignoring it");
+				Error ("No environment name after @begin; ignoring it");
 				OutputWhiteSpace();
 				break;
 			}
@@ -841,7 +824,7 @@ DoAt()
 			else {
 				if (nextch != ',') {
 					C1[0] = tc;  C2[0] = nextch;  C3[0] = endc;
-					Error4("after @begin%s%s, '%s' should be '%s' or ','", 
+					Error("after @begin%s%s, '%s' should be '%s' or ','", 
 						C1, word, C2, C3);
 				}
 				OpenEnvt(passStyle, 'e', '@'); 
@@ -852,7 +835,7 @@ DoAt()
 				while (getnextch() != endc) {
 					if (nextch == '@') {
 						C1[0] = tc;  C2[0] = endc;
-						Error3("found '@' inside \"@begin%s%s, ... %s\"", 
+						Error("found '@' inside \"@begin%s%s, ... %s\"", 
 								C1, word, C2);
 						break;
 					}
@@ -874,7 +857,7 @@ DoAt()
 		case endNUMBER:
 			endc = ScribeDelimiter(&tc);
 			if (endc == ' ') {
-				Error0("No environment name after @end");
+				Error("No environment name after @end");
 				CloseEnvt('e', word);
 				OutputWhiteSpace();
 				break;
@@ -887,14 +870,14 @@ DoAt()
 			SaveWhiteSpace();
 			if (strcmp((currMap[endsp]->s)->GetName(), word) != 0) {
 				C1[0] = tc;  C2[0] = nextch;
-				Error3("@end%s%s%s does not match @begin",
+				Error("@end%s%s%s does not match @begin",
 						C1, word, C2);
 			}
 			if (nextch == endc) 
 				getnextch();
 			else {
 				C1[0] = nextch;  C2[0] = endc;
-				Error2("after @end, '%s' should be '%s'", 
+				Error("after @end, '%s' should be '%s'", 
 						C1, C2);
 			}
 			CloseEnvt('e', word);
@@ -954,7 +937,7 @@ DoAt()
 				getnextch();	/* skip terminating delimiter */
 			else {
 				C1[0] = endc;
-				Error1("Missing %s after @index", C1);
+				Error("Missing %s after @index", C1);
 			}
 			break;
 		case labelNUMBER:
@@ -985,7 +968,7 @@ DoAt()
 			getnextch();	/* skip terminating delimiter */
 		    else {
 			C1[0] = endc;
-			Error1("Missing %s after @index", C1);
+			Error("Missing %s after @index", C1);
 		    }
 		    break;
 		case ientryNUMBER:
@@ -1089,13 +1072,13 @@ CloseEnvt( char c, char *word)
 		}
 		currMap[endsp]->len = DocPos - currMap[endsp]->pos;
 		C1[0] = scribeEnd[endsp];
-		Error2("Missing '%s' detected by %s", C1,
+		Error("Missing '%s' detected by %s", C1,
 				(char *)(c == 'z' ? "end of file" : "@end"));
 		endsp--;
 	}
 	endsp = 0;
 	if (c == 'e') 
-		Error0("Excess @end");
+		Error("Excess @end");
 }
 
 	static void

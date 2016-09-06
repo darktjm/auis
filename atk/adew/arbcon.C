@@ -103,7 +103,6 @@ static boolean setupcel(class cel  *cl);
 #ifdef NOTUSED
 static void CopyText(class text  *dst,class text  *src);
 #endif /* NOTUSED */
-static class celview *currentcelview(struct classheader  *ClassID);
 static boolean isarbcon(class celview  *cv);
 static void setobview(class arbcon  *self,const char  *str,boolean  docopy);
 static void addobview(class view  *v);
@@ -422,13 +421,6 @@ void arbcon_Create(){
     strcpy(foo,ARBCONNAME);
     NewWindow(foo,0,FALSE);
 }
-class celview *arbcon::currentcelview()
-{
-	ATKinit;
-
-    if(Gself == NULL) return NULL;
-    return Gself->currentcelviewval;
-}
 void arbcon::SetCurrentArbiterview(class arbiterview  *ab)
 {
 	ATKinit;
@@ -689,11 +681,6 @@ void arbcon::EditCurrentCelview()
     (Gself->ArbTextEdit)->SetString(Gself->arr);
     (Gself->ArbTextEdit)->SetArraySize(0);
     ((class view *)Gself->ArbTextEditView)->WantInputFocus( Gself->ArbTextEditView);
-}
-static class celview *currentcelview(struct classheader  *ClassID)
-{
-    if(Gself == NULL) return NULL;
-    return Gself->currentcelviewval;
 }
 void arbcon::AddCel(class arbiterview  *arb,class cel  *cl,boolean  notify)
 {
@@ -1110,7 +1097,6 @@ static boolean dolistfile(class arbcon  *self,const char  *s)
 }
 static boolean createGself(class arbcon  *self)
 {   /* initialization code */
-    FILE *f;
     const char *p;
     char *m;
     struct ATKregistryEntry  *viewtype = ATK::LoadClass("view");

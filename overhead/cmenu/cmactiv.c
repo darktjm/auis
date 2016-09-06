@@ -55,10 +55,7 @@ struct activationState {
 /* This function defines all events which are meaningful to the cmenuActivate
  * procedure's event loop.
  */
-static Bool SuitableEvent(display, event, args)
-    Display *display;
-    XEvent *event;
-    char *args; /* Should be void * */
+static Bool SuitableEvent(Display *display, XEvent *event, char *args /* should be void * */)
 {
 
     struct activationState *state = (struct activationState *) args;
@@ -81,10 +78,7 @@ static Bool SuitableEvent(display, event, args)
 /* This function defines all events which should be cleared from the queue
  * when we are done.
  */
-static Bool DiscardableEvents(display, event, args)
-    Display *display;
-    XEvent *event;
-    char *args; /* Should be void * */
+static Bool DiscardableEvents(Display *display, XEvent *event, char *args /* should be void * */)
 {
 
     struct activationState *state = (struct activationState *) args;
@@ -105,14 +99,11 @@ static Bool DiscardableEvents(display, event, args)
 }
 #endif /* ATTEMPTSAVEUNDERS */
 
-static int HandlePress(menu, buttonEvent, state)
-    struct cmenu *menu;
-    XButtonEvent *buttonEvent;
-    struct activationState *state;
+static int HandlePress(struct cmenu *menu, XButtonEvent *buttonEvent, struct activationState *state)
 {
 
-    if (buttonEvent->button == state->buttonName) {
-        if (!state->doublePress && (buttonEvent->time - state->startTime) <= menu->gMenuData->clickInterval) {
+    if ((int)buttonEvent->button == state->buttonName) {
+        if (!state->doublePress && (int)(buttonEvent->time - state->startTime) <= menu->gMenuData->clickInterval) {
             state->doublePress = TRUE;
         }	    
         else { /* Take down the menus and return status. */
@@ -125,10 +116,7 @@ static int HandlePress(menu, buttonEvent, state)
     return(0);
 }
 
-static void HandleMovement(menu, motionEvent, state)
-    struct cmenu *menu;
-    XMotionEvent *motionEvent;
-    struct activationState *state;
+static void HandleMovement(struct cmenu *menu, XMotionEvent *motionEvent, struct activationState *state)
 {
 
     struct drawingState *drawingState = &state->drawingState;
@@ -206,10 +194,7 @@ static void HandleMovement(menu, motionEvent, state)
     SetSelectionPtrAndNum(drawingState, selectionPtr, selectionNum);
 }
 
-static void EventLoop(menu, display, state)
-    struct cmenu *menu;
-    Display *display;
-    struct activationState *state;
+static void EventLoop(struct cmenu *menu, Display *display, struct activationState *state)
 {
 
     XEvent events[2];
@@ -256,18 +241,12 @@ static void EventLoop(menu, display, state)
 }
 
 int
-cmenu_Activate(menu, menuEvent, data, backgroundType, background)
-    struct cmenu *menu;
-    XButtonEvent *menuEvent;
-    long *data;
-    int backgroundType;
-    long background;
+cmenu_Activate(struct cmenu *menu, XButtonEvent *menuEvent, long *data, int backgroundType, long background)
 {
 
     int ret_val;			/* Return value. */
 
     Display *display = menu->gMenuData->dpy;
-    XEvent event;			/* X input event. */
     struct activationState state;       /* Packaged state for passing to subroutines. */
 
     /*

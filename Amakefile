@@ -27,10 +27,6 @@ Copyright Carnegie Mellon University 1991, 1996  - All Rights Reserved
 
 #define	IHaveSubdirs
 
-#ifdef	AMS_ENV
-AMS = ams atkams
-#endif /* AMS_ENV */
-
 #ifdef X11_ENV
 MKFONTDIR = xmkfontd
 #endif /* X11_ENV */
@@ -69,7 +65,7 @@ DIRS = $(DESTDIR)  \
 	$(DESTDIR)/doc/MAIL \
 	$(DESTDIR)/help 
 
-SUBDIRS = ossupport inst config overhead atk $(AMS) $(WWW) $(CONTRIB) $(SITE) $(MEGA) $(MKFONTDIR) $(HELP) doc
+SUBDIRS = ossupport inst config overhead atk $(WWW) $(CONTRIB) $(SITE) $(MEGA) $(MKFONTDIR) $(HELP) doc
 
 depend::
 	@echo 'Checking that BASEDIR is not the location of the source files.'

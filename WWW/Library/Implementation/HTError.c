@@ -97,13 +97,13 @@ PUBLIC HTErrorMsgInfo error_info[HTERR_ELEMENTS] = {
 **
 **	Returns always HT_ERROR
 */
-PUBLIC int HTErrorAdd ARGS7(HTRequest *, 	request,
-			    HTErrSeverity, 	severity,
-			    BOOL,		ignore,
-			    int,		element,
-			    void *,		par,
-			    unsigned int,	par_length,
-			    char *,		where)
+PUBLIC int HTErrorAdd (HTRequest * 	request,
+			    HTErrSeverity 	severity,
+			    BOOL		ignore,
+			    int		element,
+			    void *		par,
+			    unsigned int	par_length,
+			    char *		where)
 {
     HTErrorInfo *newError;
     if (!request) {
@@ -159,11 +159,11 @@ PUBLIC int HTErrorAdd ARGS7(HTRequest *, 	request,
 **
 **	Returns always HT_ERROR
 */
-PUBLIC int HTErrorSysAdd ARGS5(HTRequest *, 	request,
-			       HTErrSeverity, 	severity,
-			       int,		errornumber,
-			       BOOL,		ignore,
-			       char *,		syscall)
+PUBLIC int HTErrorSysAdd (HTRequest * 	request,
+			       HTErrSeverity 	severity,
+			       int		errornumber,
+			       BOOL		ignore,
+			       char *		syscall)
 {
     if (!request) {
 	if (TRACE) fprintf(TDEST, "HTErrorSys.. Bad argument!\n");
@@ -187,7 +187,7 @@ PUBLIC int HTErrorSysAdd ARGS5(HTRequest *, 	request,
 **
 **	Free the whole error stack from the HTRequest structure.
 */
-PUBLIC void HTErrorFree ARGS1(HTRequest *, request)
+PUBLIC void HTErrorFree (HTRequest * request)
 {
     HTList *cur = request->error_stack;
     HTErrorInfo *pres;
@@ -208,7 +208,7 @@ PUBLIC void HTErrorFree ARGS1(HTRequest *, request)
 **	Turns on the `ignore' flag for the error with the current handle in 
 **	the error list. If the list is empty, nothing is done.
 */
-PUBLIC void HTErrorIgnore ARGS2(HTRequest *, request, int, handle)
+PUBLIC void HTErrorIgnore (HTRequest * request, int handle)
 {
     BOOL found = NO;
     HTList *cur;
@@ -248,7 +248,7 @@ PUBLIC void HTErrorIgnore ARGS2(HTRequest *, request, int, handle)
 **	Turns on the `ignore' flag for the most recent error entered the
 **	error list. If the list is empty, nothing is done.
 */
-PUBLIC void HTErrorIgnoreLast ARGS1(HTRequest *, request)
+PUBLIC void HTErrorIgnoreLast (HTRequest * request)
 {
     HTList *cur;
     HTErrorInfo *pres;
@@ -275,7 +275,7 @@ PUBLIC void HTErrorIgnoreLast ARGS1(HTRequest *, request)
 **
 **	Sets the prefix for error URLs in the error message
 */
-PUBLIC void HTErrorSetPrefix ARGS1(char *, path)
+PUBLIC void HTErrorSetPrefix (char * path)
 {
     if (path && *path)
 	StrAllocCopy(HTErrorPrefix, path);
@@ -286,7 +286,7 @@ PUBLIC void HTErrorSetPrefix ARGS1(char *, path)
 **
 **	Gets the prefix for error URLs in the error message
 */
-PUBLIC CONST char *HTErrorGetPrefix NOARGS
+PUBLIC CONST char *HTErrorGetPrefix (void)
 {
     return HTErrorPrefix;
 }

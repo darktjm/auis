@@ -49,7 +49,7 @@ struct _HTStream {
 **	------------------
 */
 
-PRIVATE void HTomime_put_character ARGS2(HTStream *, me, char, c)
+PRIVATE void HTomime_put_character (HTStream *me, char c)
 {
     (*me->target->isa->put_character)( me->target,  c);
 }
@@ -60,13 +60,13 @@ PRIVATE void HTomime_put_character ARGS2(HTStream *, me, char, c)
 **	---------------
 **
 */
-PRIVATE void HTomime_put_string ARGS2(HTStream *, me, CONST char*, s)
+PRIVATE void HTomime_put_string (HTStream *me, CONST char *s)
 {
     (*me->target->isa->put_string) ( me->target, s);
 }
 
 
-PRIVATE void HTomime_write ARGS3(HTStream *, me, CONST char*, s, int, l)
+PRIVATE void HTomime_write (HTStream *me, CONST char *s, int l)
 {
     (*me->target->isa->put_block) ( me->target,  s,  l);
 }
@@ -79,7 +79,7 @@ PRIVATE void HTomime_write ARGS3(HTStream *, me, CONST char*, s, int, l)
 **	Note that the SGML parsing context is freed, but the created object is not,
 **	as it takes on an existence of its own unless explicitly freed.
 */
-PRIVATE int HTomime_free ARGS1(HTStream *, me)
+PRIVATE int HTomime_free (HTStream *me)
 {
     if (PROT_TRACE) {
 	printf("HTtmime: ..... In free\n");
@@ -92,7 +92,7 @@ PRIVATE int HTomime_free ARGS1(HTStream *, me)
 /*	End writing
 */
 
-PRIVATE int HTomime_abort ARGS2(HTStream *, me, HTError, e)
+PRIVATE int HTomime_abort (HTStream *me, HTError e)
 {
     if (PROT_TRACE) {
 	printf("HTtmime: ..... In Abort\n");
@@ -118,12 +118,12 @@ PUBLIC CONST HTStreamClass HTomime =
 /*		New object
 **		----------
 */
-PUBLIC HTStream* HTomimePresent ARGS5(
-	HTRequest *,		request,
-	void *,			param,
-	HTFormat,		input_format,
-	HTFormat,		output_format,
-	HTStream *,		output_stream)
+PUBLIC HTStream* HTomimePresent (
+	HTRequest *		request,
+	void *			param,
+	HTFormat		input_format,
+	HTFormat		output_format,
+	HTStream *		output_stream)
 {
     char buf[1024];
     HTStream* me = (HTStream*)malloc(sizeof(*me));

@@ -76,7 +76,7 @@ static long nextInset(srctext *self, long pos, long len)
     long VRCpos;
     TryNextVRC: ; /* jump back here if the ViewRefChar wasn't REALLY an inset */
     VRCpos= (self)->Index(pos, TEXT_VIEWREFCHAR, len);
-    if (VRCpos>=0)
+    if (VRCpos>=0) {
 	/* make sure it's not just a plain ol' \377 char */
 	if (((environment *)(self->text::rootEnvironment)->GetInnerMost(VRCpos))->type == environment_View)
 	    return VRCpos;
@@ -84,6 +84,7 @@ static long nextInset(srctext *self, long pos, long len)
 	    pos= VRCpos+1;
 	    goto TryNextVRC;
 	}
+    }
     return -1;
 }
 
@@ -302,12 +303,12 @@ void srctext::BuildTable(const char *classname, Dict *hashTable[], const Dict wo
 	++wordPtr;
     }
     /* add user-defined keywords (from "preferences" file) to hash table */
-    sprintf(profilename,"%s_userdef\0", classname);
+    sprintf(profilename,"%s_userdef", classname);
     preflist= environ::GetProfile(profilename);
     if (preflist && preflist[0])
 	PutPrefStringIntoHashTable(hashTable, preflist, USRDEF);
     /* add uppercase-words (from "preferences" file) to hash table */
-    sprintf(profilename,"%s_uppercase\0", classname);
+    sprintf(profilename,"%s_uppercase", classname);
     preflist= environ::GetProfile(profilename);
     if (preflist && preflist[0])
 	PutPrefStringIntoHashTable(hashTable, preflist, UPRCSE);
@@ -541,7 +542,7 @@ static boolean DiscardToEnddata(FILE *file)
 	if ((c= getc(file)) == EOF)
 	    return FALSE;
     } while (c != '\\');
-    haveback: ;
+
     i = 0;
     while (1) {     /* Read possible keyword */
 	if ((c= getc(file)) == EOF)
@@ -550,7 +551,7 @@ static boolean DiscardToEnddata(FILE *file)
 	    goto trymore;   /* Just a quoted char */
 	if (c == '{')       /* End of keyword */
 	    break;
-	if (i < sizeof (buf) - 1)
+	if (i < (int)sizeof (buf) - 1)
 	    buf[i++] = c;
     }
     buf[i] = '\0';
@@ -1456,23 +1457,25 @@ int srctext::NextTabStop(int curcol)
 {
     int nextMultiple=((int)(curcol/this->tabSize)+1) * this->tabSize;
     int tabnum=0;
-    if (this->numTabStops < 1)
+    if (this->numTabStops < 1) {
 	/* there ARE no tab stops */
 	if (this->tabSize>0)
 	    return nextMultiple;
 	else
 	    /* tabSize was *disabled*, so just move 1 space */
 	    return curcol+1;
+    }
     /* find next tab stop */
     while (tabnum < this->numTabStops && this->tabStop[tabnum] <= curcol)
 	++tabnum;
-    if (tabnum >= this->numTabStops)
+    if (tabnum >= this->numTabStops) {
 	/* reached the end of the tab stops */
 	if (this->tabSize > 0)
 	    return nextMultiple;
 	else
 	    /* tabSize was *disabled*, so jump to next line */
 	    return 0;
+    }
     /* return next multiple of tabSize, or next tab stop, whichever is closest */
     if (this->tabStop[tabnum] <= nextMultiple || this->tabSize < 1)
 	return this->tabStop[tabnum];

@@ -1085,7 +1085,7 @@ void style::WriteAttr(FILE  *fp)
     char newfontfamily[200], newName[200], newcparent[200];
     struct tabentry **tabchanges;
 
-    static const char AttrD[] = "\nattr:[%s %s %s %d]";
+    static const char AttrD[] = "\nattr:[%s %s %s %ld]";
     static const char AttrS[] = "\nattr:[%s %s %s %s]";
 
     (this)->GetNewLeftMargin( &newmargin, &operand, &unit);
@@ -1114,7 +1114,7 @@ void style::WriteAttr(FILE  *fp)
 
     newjust = (enum style_Justification) (this)->GetJustification();
     if (newjust != style_PreviousJustification)
-	fprintf(fp, AttrD, AttributeAlias[(int) style_JustificationAttr], JustificationAlias[(int) newjust], OptypeAlias[(int) style_Points], 0);
+	fprintf(fp, AttrD, AttributeAlias[(int) style_JustificationAttr], JustificationAlias[(int) newjust], OptypeAlias[(int) style_Points], 0L);
 
     (this)->GetNewInterlineSpacing( &newspacing, &operand, &unit);
     if (newspacing != style_InterlineSpacing || operand != 0 || unit != style_Points)
@@ -1322,7 +1322,7 @@ void style::WriteAttr(FILE  *fp)
     (this)->GetFontFamily(
       newfontfamily, sizeof (newfontfamily));
     if (newfontfamily[0] != '\0')
-	fprintf(fp, AttrD, AttributeAlias[(int) style_FontFamilyAttr], newfontfamily, OptypeAlias[(int) style_RawDots], 0);
+	fprintf(fp, AttrD, AttributeAlias[(int) style_FontFamilyAttr], newfontfamily, OptypeAlias[(int) style_RawDots], 0L);
 
     (this)->GetFontSize( &newfsize, &operand);
     if (newfsize != style_PreviousFontSize || operand != 0)
@@ -1330,19 +1330,19 @@ void style::WriteAttr(FILE  *fp)
 
     (this)->GetCounterName( newName);
     if (newName[0] != '\0') {
-	fprintf(fp, AttrD, AttributeAlias[(int) style_CounterNameAttr], newName, OptypeAlias[(int) style_RawDots], 0);
+	fprintf(fp, AttrD, AttributeAlias[(int) style_CounterNameAttr], newName, OptypeAlias[(int) style_RawDots], 0L);
 
 	(this)->GetCounterParent( newcparent);
 	if (newcparent[0] != '\0')
-	    fprintf(fp, AttrD, AttributeAlias[(int) style_CounterParentAttr], newcparent, OptypeAlias[(int) style_RawDots], 0);
+	    fprintf(fp, AttrD, AttributeAlias[(int) style_CounterParentAttr], newcparent, OptypeAlias[(int) style_RawDots], 0L);
 
 	newscope = (enum style_Scope) (this)->GetCounterScope();
 	if (newscope != style_GlobalScope)
-	    fprintf(fp, AttrD, AttributeAlias[(int) style_CounterScopeAttr], ScopeAlias[(int) newscope], OptypeAlias[(int) style_Points], 0);
+	    fprintf(fp, AttrD, AttributeAlias[(int) style_CounterScopeAttr], ScopeAlias[(int) newscope], OptypeAlias[(int) style_Points], 0L);
 
 	newposition = (enum style_Position) (this)->GetCounterPosition();
 	if (newposition != style_EnvironmentCtr)
-	    fprintf(fp, AttrD, AttributeAlias[(int) style_CounterPositionAttr], PositionAlias[(int) newposition], OptypeAlias[(int) style_Points], 0);
+	    fprintf(fp, AttrD, AttributeAlias[(int) style_CounterPositionAttr], PositionAlias[(int) newposition], OptypeAlias[(int) style_Points], 0L);
 
 	operand = (this)->GetCounterInitialValue();
 	if (operand != 0)
@@ -1547,6 +1547,8 @@ long style::ReadAttr(FILE  *fp)
 		case style_BottomMarginAttr:
                     (this)->SetNewBottomMargin( newmargin, operand, (enum style_Unit)unit);
                     break;
+		default: /* lots of unhandled cases */
+		    break;
 	    }
 	    break;
 

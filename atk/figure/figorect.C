@@ -447,6 +447,8 @@ boolean figorect::Reshape(enum view_MouseAction  action, class figview  *v, long
 	    (this)->RecomputeBounds();
 	    (this)->SetModified();
 	    break;
+	default:
+	    break;
     }
     return TRUE;
 }

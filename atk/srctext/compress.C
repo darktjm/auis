@@ -107,7 +107,7 @@ long compress::GetLineForPos(long pos)
 
 /* quickAddView is a ripoff of text_AlwaysAddView, but with all but the bare necessities ripped out of it. It also changes env_WRAPView to env_INSERTView, which is a zillion times faster, but doesn't allow nesting. */
 /* text_AlwaysInsertFile calls dictionary_Insert. I have no idea what that does. I don't call it when I insert a compress object/view, and it seems to work OK, so I just left it out. -RSK*/
-environment *quickAddView(text *self, long pos, const char *viewtype, compress *compressobj)
+static environment *quickAddView(text *self, long pos, const char *viewtype, compress *compressobj)
 {
     viewref *newviewref=viewref::Create(viewtype, (dataobject *)compressobj);
     char c=TEXT_VIEWREFCHAR;

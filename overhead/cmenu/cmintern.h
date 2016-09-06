@@ -98,13 +98,13 @@ struct cmenudata  {
  */
 struct selection {
     struct selection *next; /* All selections on a pane are on a doubly linked list. */
-    char *label;            /* Text of item. */
+    const char *label;            /* Text of item. */
     short labelWidth;        /* Dimensions of above label. Used for calculating pane size efficiently. */
     short labelLength;       /* This one can probably be eliminated... */
     long data;              /* Data to return if this item is selected. Should be void *. */
     short priority;         /* For sorting. */
     short groupPriority;    /* For finding out where spaces go. */
-    char *keys;		    /* the keys equivalent to the menu selection */
+    const char *keys;		    /* the keys equivalent to the menu selection */
     short	keysWidth;	    /* the width of the key string. */
     char active;            /* TRUE if this item is selectable. Inactive items appear grayed out. */
 };
@@ -112,7 +112,7 @@ struct selection {
 /* A single pane or card of a menu stack. */
 struct pane {
     struct pane *next;          /* All panes on a cmenu are on a doubly linked list. */
-    char *label;                /* Card title. */
+    const char *label;                /* Card title. */
     int labelWidth;            /* Dimensions of above title. Used for efficient calculation of stack size. */
     int maxSelectionWidth;      /* Maximum of selection widths from cmSelect data structures for this pane. */
     struct selection *selections;    /* Linked list of selections on this pane. */
@@ -132,11 +132,10 @@ struct cmenu  {
     cmenu_FreeFunction freeFunction;        /* Function to call on selection data when selection is freed. */
 };
 
-extern struct cmenu *cmenuCreate();
-extern int AddPane();
-extern int AddSelection();
-extern int DeletePane();
-extern int DeleteSelection();
+extern struct pane *PaneNumToPtr(struct cmenu *menu, int paneNum);
+extern int PanePtrToNum(struct cmenu *menu, struct pane *panePtr);
+extern struct selection *SelectionNumToPtr(struct cmenu *menu, struct pane *panePtr, int selectionNum);
+extern int SelectionPtrToNum(struct cmenu *menu, struct pane *panePtr, struct selection *selectionPtr);
 
 /* Wired in constants. */
 

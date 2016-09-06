@@ -52,7 +52,6 @@
 #define SHORTAPPSUFFIX "a"
 
 static void usage();
-static void initClass();
 static char *leaf(char  *path);
 static void stripSuffix(char  *buf,const char  *suffix);
 extern void doStaticLoads();
@@ -61,14 +60,6 @@ static void usage()
 {
     fprintf(stderr,"usage:\t%s [-npdD] {-l classname} appclass args...\n",RUNAPP);
     exit(-1);
-}
-
-static void initClass()
-{
-    char *classPath;
-    
-    classPath = (char *) AndrewDir(ATKDLIBDIR);
-  /*  ATK_Init(classPath); */
 }
 
 static char *leaf(char  *path)
@@ -95,7 +86,7 @@ static void stripSuffix(char  *buf,const char  *suffix)
 	*end='\0';
 }
 
-main(int  argc,char  **argv)
+int main(int  argc,char  **argv)
 {
 #ifdef NEED_ATKINIFINI
     ATK_DoIniFini();
@@ -131,7 +122,6 @@ main(int  argc,char  **argv)
     setrlimit (RLIMIT_DATA, &rl);
     }
 #endif
-    initClass();
 
     argv[0] = leaf(argv[0]); /* Canonicalize the name of the application so we don't have to worry about it anywhere else... */
 

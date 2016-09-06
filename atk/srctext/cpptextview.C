@@ -110,7 +110,7 @@ static void slash(cpptextview *self, char key)
 	    /* wrap a new style */
 	    long start=oldpos-1;
 	    while (--start>0) {
-		if ((ct)->GetChar(start)=='*')
+		if ((ct)->GetChar(start)=='*') {
 		    if ((ct)->GetChar(start-1)=='/') {
 			/* found start of comment, wrap style */
 			if ((ct)->GetStyle(start) && (ct)->GetStyle(start)!=ct->srctext::comment_style)
@@ -124,6 +124,7 @@ static void slash(cpptextview *self, char key)
 		    } else if ((ct)->GetChar(start+1)=='/')
 			/* uh-oh, found another end of comment! */
 			break;
+		}
 	    }
 	}
     else if (oldpos && (ct)->GetChar(oldpos-1)=='/' && !(ct)->GetStyle(oldpos-1) && !(ct)->InString(pos))

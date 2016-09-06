@@ -82,7 +82,7 @@
  */
 
 /* space for the default dialog box answer */
-static long answer;
+static UNUSED long answer; /* tjm - fixme - needed for ERRORBOX only */
 
 /* default choice for the dialog box */
 static const char * const defchoices[] =

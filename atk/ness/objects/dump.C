@@ -114,7 +114,6 @@ printstaddr(FILE  *f, union stackelement  *a, union stackelement  *NSP) {
 	void
 dumpStack(FILE  *f, union stackelement  *NSP)  {
 	union stackelement *tsp, *newtsp;
-	ATK *bo;
 	long i, pos, len;
 	class nessmark *m;
 	class simpletext *t;
@@ -563,14 +562,13 @@ dumpObjectCode(FILE  *file, long  offset) {
 			sylcnt++;
 		    }	break;
 		case callnd: {
-			unsigned char c0, c1, c2, c3;
+			unsigned long a = 0, j;
 			struct callnode *cnode;
-			c0 = (text)->GetUnsignedChar( i);
-			c1 = (text)->GetUnsignedChar( i+1);
-			c2 = (text)->GetUnsignedChar( i+2);
-			c3 = (text)->GetUnsignedChar( i+3);
-			cnode = (struct callnode *)
-				((c0<<24) | (c1 << 16) | (c2 << 8) | c3);
+			for(j = 0; j < sizeof(void *); j++) {
+				a <<= 8;
+				a += (unsigned long)(text)->GetUnsignedChar( i + j);
+			}
+			cnode = (struct callnode *)a;
 			if (cnode != NULL) {
 				fprintf(file, "%s:%s", 
 					callvarietyname[(long)cnode->variety],
@@ -578,7 +576,7 @@ dumpObjectCode(FILE  *file, long  offset) {
 			}
 			else 
 				fprintf(file, "callnode(NULL)");
-			i += 4;
+			i += sizeof(void *);
 			sylcnt += 3;
 		}	break;
 		case srch:

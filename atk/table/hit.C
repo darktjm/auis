@@ -112,7 +112,7 @@ void SetCurrentCell (class spread  * V, Chunk  chunk, boolean expose)
 }
 
 
-void extendCurrentCell(class spread  * V, Chunk  chunk)
+static void extendCurrentCell(class spread  * V, Chunk  chunk)
 {
     int x0, x1, y0, y1, x2, y2, x3, y3;
 
@@ -356,6 +356,8 @@ class view * MouseHit (class spread  * V, enum view_MouseAction  action, long  x
 	}
 	break;
 
+    default: // filedrop, upmovement, nomouse
+	break;
     }
     return V;
 }
@@ -501,16 +503,18 @@ static void EnterCellName (class spread  * V, Chunk  chunk)
 	printf("EnterCellName entered, status = %d\n", V->bufferstatus);
     rbuf[0] = 0;
     cbuf[0] = 0;
-    if (chunk->TopRow != V->selection.TopRow)
+    if (chunk->TopRow != V->selection.TopRow) {
 	if (chunk->TopRow > V->selection.TopRow)
 	    sprintf (rbuf, "+%d", chunk->TopRow - V->selection.TopRow);
 	else
 	    sprintf (rbuf, "-%d", V->selection.TopRow - chunk->TopRow);
-    if (chunk->LeftCol != V->selection.LeftCol)
+    }
+    if (chunk->LeftCol != V->selection.LeftCol) {
 	if (chunk->LeftCol > V->selection.LeftCol)
 	    sprintf (cbuf, "+%d", chunk->LeftCol - V->selection.LeftCol);
 	else
 	    sprintf (cbuf, "-%d", V->selection.LeftCol - chunk->LeftCol);
+    }
     sprintf (buf, "[r%s,c%s]", rbuf, cbuf);
     i = message::GetCurrentString (V, keybuff, sizeof keybuff);
     if (debug)

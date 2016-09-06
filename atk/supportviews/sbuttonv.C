@@ -176,7 +176,6 @@ static void MyOldComputeColor(class view  *self, struct sbutton_prefs  *prefs, d
 static void MyOldSetShade(class view  *self, struct sbutton_prefs  *prefs, double  *foreground , double  *background, int  color)
 {
     double result[3];
-    int style=DEFAULTSTYLE(prefs->style);
     
     if(prefs->colors[color]) (self)->SetForegroundColor( prefs->colors[color], 0, 0, 0);
     else {
@@ -251,9 +250,7 @@ static void MyNewComputeColor(class view  *self, struct sbutton_prefs  *prefs,do
 }
 static void MyNewSetShade(class view  *self, struct sbutton_prefs  *prefs, double  *foreground , double  *background, int  color)
 {
-    double pct;
     double result[3];
-    int style=DEFAULTSTYLE(prefs->style);
     
     if(prefs->colors[color]) (self)->SetForegroundColor( prefs->colors[color], 0, 0, 0);
     else {
@@ -619,7 +616,6 @@ void sbuttonv::InteriorBGColor(class view  *self, struct sbutton_prefs  *prefs, 
 {
 	ATKinit;
 
-    double topshade;
     double fore[3], back[3];
     struct sbuttonv_view_info vi;
     int style;
@@ -1276,8 +1272,8 @@ boolean sbuttonv::Touch(int  ind, enum view_MouseAction  action)
     if(action!=view_LeftUp && action!=view_RightUp) return TRUE;
     w1=owatch::Create(this);
     w2=owatch::Create(b);
-    if (ind>=0 && ind<b->count && BUTTONS(this)[ind].lit && (this->activebuttons&sbuttonv_LEFTBUTTON) || (action==view_RightUp && this->activebuttons&sbuttonv_RIGHTBUTTON)) {
-	if (wait_cursor = cursor::Create(this)) {
+    if (ind>=0 && ind<b->count && BUTTONS(this)[ind].lit && ((this->activebuttons&sbuttonv_LEFTBUTTON) || (action==view_RightUp && this->activebuttons&sbuttonv_RIGHTBUTTON))) {
+	if ((wait_cursor = cursor::Create(this))) {
 	    (wait_cursor)->SetStandard( Cursor_Wait);
 	    im::SetProcessCursor(wait_cursor);
 	    (b)->Actuate( this->lastbutton);
@@ -1359,6 +1355,8 @@ class view *sbuttonv::Hit(enum view_MouseAction  action, long  x , long  y, long
 		}
 		}
 		break;
+	    default:
+	        break;
 	}
     }
     return((class view *)this);
@@ -1424,7 +1422,7 @@ view_DSattributes sbuttonv::DesiredSize(long  width, long  height, enum view_DSp
     long maxheight=0;
     long maxwidth=0;
     class fontdesc *my_fontdesc;
-    struct FontSummary *my_FontSummary;
+    struct FontSummary *my_FontSummary = NULL;
     class graphic *my_graphic;
     class sbutton *b = (this)->ButtonData();
     int style;
@@ -1508,7 +1506,7 @@ void sbuttonv::GetOrigin(long  width , long  height, long  *originX , long  *ori
   class graphic *my_graphic;
   class sbutton *b = (this)->ButtonData();
   int style, bdepth;
-  long maxheight, maxbelow=0;
+  long maxheight=0, maxbelow=0;
   struct sbutton_prefs *prefs=b->count?(b)->GetPrefs( b->count-1):NULL;
 
   /* This only really makes sense if there is only one button... should I check and do something different if there is more than one button?  this should at least still do the right thing for one button. */

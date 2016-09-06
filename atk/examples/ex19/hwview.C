@@ -380,6 +380,8 @@ class view *helloworldview::Hit(enum view_MouseAction  action,long  x,long  y,lo
 		((this)->GetIM())->SetWindowCursor(activeCursor);
 		(this)->WantInputFocus(this);
 		break;
+	    default:
+		break;
 	}
 
     (hw)->NotifyObservers(0);

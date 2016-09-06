@@ -72,7 +72,7 @@ static void  output(char  *buf,int  *n,int  *np)
     if(np > n + 2) qsort((char *)n,np - n,sizeof(int),QSORTFUNC(cmp));
     if((lc = (char *)strchr(buf,DCHAR)) != NULL && lc[1] == DCHAR &&
 	lc[2] != ' ' && lc[2] != '\0'){
-	int len = lc - buf;
+	unsigned int len = lc - buf;
 	if((strlen(lbuf) == len) && strncmp(lbuf,buf,(len)) == 0){
 	    buf = lc + 2;
 	}
@@ -121,7 +121,11 @@ int main(int  argc,char  *argv[])
     *lbuf = '\0';
     np = num;
     begin = rbuf + 4; /* skip over "ix: " */
-    while(gets(rbuf) != NULL){
+    while(fgets(rbuf,sizeof(rbuf),stdin) != NULL){
+	rbuf[sizeof(rbuf)-1] = 0;
+	end = buf + strlen(rbuf);
+	if(end > rbuf && end[-1] == '\n')
+	    end[-1] = 0;
 	end = strrchr(rbuf,'\t');
 	if(end == NULL) continue;
 	for(c = end ; isspace(*c) && c > rbuf; c--)

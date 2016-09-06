@@ -67,12 +67,12 @@ typedef struct _socket_buffer {
    parameter.
    
  */
-extern HTInputSocket* HTInputSocket_new PARAMS((SOCKFD file_number));/*
+extern HTInputSocket* HTInputSocket_new (SOCKFD file_number);/*
 
   FREE AN INPUT BUFFER
   
  */
-extern void HTInputSocket_free PARAMS((HTInputSocket * isoc));/*
+extern void HTInputSocket_free (HTInputSocket * isoc);/*
 
 Read from the Network
 
@@ -93,8 +93,8 @@ typedef enum _HTSocketEOL {
     EOL_SLF
 } HTSocketEOL;
 
-extern int HTInputSocket_read   PARAMS((HTInputSocket * isoc,
-                                        HTStream * target));/*
+extern int HTInputSocket_read   (HTInputSocket * isoc,
+                                        HTStream * target);/*
 
 Convert Net ASCII to local representation
 
@@ -103,7 +103,7 @@ Convert Net ASCII to local representation
    As usual, pass its output stream to it when creating it.
    
  */
-extern HTStream * HTNetToText PARAMS ((HTStream * sink));/*
+extern HTStream * HTNetToText (HTStream * sink);/*
 
 The HTFormat types
 
@@ -198,18 +198,18 @@ typedef struct _HTContentDescription {
     double      quality;
 } HTContentDescription;
 
-extern void HTAcceptEncoding PARAMS((HTList *   list,
+extern void HTAcceptEncoding (HTList *   list,
                                      char *     enc,
-                                     double     quality));/*
+                                     double     quality);/*
 
 Registration of Accepted Content Languages
 
    This function is not currently used.
    
  */
-extern void HTAcceptLanguage PARAMS((HTList *   list,
+extern void HTAcceptLanguage (HTList *   list,
                                      char *     lang,
-                                     double     quality));/*
+                                     double     quality);/*
 
 Registration of Accepted Converters and Presenters
 
@@ -225,11 +225,11 @@ Registration of Accepted Converters and Presenters
  */
 #include "HTAccess.h"                   /* Required for HTRequest definition */
 
-typedef HTStream * HTConverter  PARAMS((HTRequest *     request,
+typedef HTStream * HTConverter  (HTRequest *     request,
                                         void *          param,
                                         HTFormat        input_format,
                                         HTFormat        output_format,
-                                        HTStream *      output_stream));/*
+                                        HTStream *      output_stream);/*
 
    Both converters and presenters are set up in a list which is used by the StreamStack
    module to find the best way to pass the information to the user.
@@ -275,13 +275,13 @@ extern HTList * HTConversions;/*
   maxsecs                A limit on the time user will wait (0 for infinity)
                          
  */
-extern void HTSetPresentation   PARAMS((HTList *        conversions,
+extern void HTSetPresentation   (HTList *        conversions,
                                         CONST char *    representation,
                                         CONST char *    command,
                                         CONST char *    test_command,
                                         double          quality,
                                         double          secs,
-                                        double          secs_per_byte));/*
+                                        double          secs_per_byte);/*
 
   REGISTER A CONVERTER
   
@@ -300,13 +300,13 @@ extern void HTSetPresentation   PARAMS((HTList *        conversions,
   maxsecs                A limit on the time user will wait (0 for infinity)
                          
  */
-extern void HTSetConversion     PARAMS((HTList *        conversions,
+extern void HTSetConversion     (HTList *        conversions,
                                         CONST char *    rep_in,
                                         CONST char *    rep_out,
                                         HTConverter *   converter,
                                         double          quality,
                                         double          secs,
-                                        double          secs_per_byte));/*
+                                        double          secs_per_byte);/*
 
   SET UP DEFAULT PRESENTERS AND CONVERTERS
   
@@ -317,13 +317,13 @@ extern void HTSetConversion     PARAMS((HTList *        conversions,
    application to do
    
  */
-extern void HTFormatInit        PARAMS((HTList * conversions));/*
+extern void HTFormatInit        (HTList * conversions);/*
 
    This function also exists in a version where no presenters are initialized. This is
    intended for Non Interactive Mode, e.g., in the Line Mode Browser.
    
  */
-extern void HTFormatInitNIM     PARAMS((HTList * conversions));/*
+extern void HTFormatInitNIM     (HTList * conversions);/*
 
   REMOVE PRESENTATIONS AND CONVERSIONS
   
@@ -331,13 +331,13 @@ extern void HTFormatInitNIM     PARAMS((HTList * conversions));/*
    HTRequest structure.
    
  */
-extern void HTFormatDelete      PARAMS((HTRequest * request));/*
+extern void HTFormatDelete      (HTRequest * request);/*
 
    This function cleans up the GLOBAL list of converters. The function is called from
    HTLibTerminate.
    
  */
-extern void HTDisposeConversions NOPARAMS;/*
+extern void HTDisposeConversions (void);/*
 
 Ranking of Accepted Formats
 
@@ -345,10 +345,10 @@ Ranking of Accepted Formats
    found as a function of the accept headers sent in the client request.
    
  */
-extern BOOL HTRank PARAMS((HTList * possibilities,
+extern BOOL HTRank (HTList * possibilities,
                            HTList * accepted_content_types,
                            HTList * accepted_content_languages,
-                           HTList * accepted_content_encodings));/*
+                           HTList * accepted_content_encodings);/*
 
 HTStreamStack
 
@@ -361,11 +361,11 @@ HTStreamStack
    the first few bytes of the stream.
    
  */
-extern HTStream * HTStreamStack PARAMS((HTFormat        rep_in,
+extern HTStream * HTStreamStack (HTFormat        rep_in,
                                         HTFormat        rep_out,
                                         HTStream *      output_stream,
                                         HTRequest *     request,
-                                        BOOL            guess));/*
+                                        BOOL            guess);/*
 
   FIND THE COST OF A FILTER STACK
   
@@ -374,11 +374,11 @@ extern HTStream * HTStreamStack PARAMS((HTFormat        rep_in,
  */
 #define NO_VALUE_FOUND  -1e20           /* returned if none found */
 
-extern double HTStackValue      PARAMS((HTList *        conversions,
+extern double HTStackValue      (HTList *        conversions,
                                         HTFormat        format_in,
                                         HTFormat        format_out,
                                         double          initial_value,
-                                        long int        length));/*
+                                        long int        length);/*
 
    
    ___________________________________
@@ -394,8 +394,8 @@ HTCopy:  Copy a socket to a stream
    has been generated by HTStreamStack. Returns the number of bytes transferred.
    
  */
-extern int HTCopy       PARAMS((SOCKFD          file_number,
-                                HTStream *      sink));/*
+extern int HTCopy       (SOCKFD          file_number,
+                                HTStream *      sink);/*
 
 HTFileCopy:  Copy a file to a stream
 
@@ -403,9 +403,9 @@ HTFileCopy:  Copy a file to a stream
    has been generated by HTStreamStack. It is currently called by HTParseFile
    
  */
-extern void HTFileCopy PARAMS((
+extern void HTFileCopy (
         FILE*                   fp,
-        HTStream*               sink));
+        HTStream*               sink);
 
         /*
 
@@ -414,9 +414,9 @@ HTCopyNoCR: Copy a socket to a stream, stripping CR characters.
    It is slower than HTCopy .
    
  */
-extern void HTCopyNoCR PARAMS((
+extern void HTCopyNoCR (
         SOCKFD                  file_number,
-        HTStream*               sink));
+        HTStream*               sink);
 
 /*
 
@@ -426,10 +426,10 @@ HTParseSocket: Parse a socket given its format
    the copy routines above.  Returns HT_LOADED if succesful, <0 if not.
    
  */
-extern int HTParseSocket PARAMS((
+extern int HTParseSocket (
         HTFormat        format_in,
         SOCKFD          file_number,
-        HTRequest *     request));
+        HTRequest *     request);
 /*
 
 HTParseFile: Parse a File through a file pointer
@@ -438,16 +438,16 @@ HTParseFile: Parse a File through a file pointer
    HTFileCopy .  Returns HT_LOADED if succesful, <0 if not.
    
  */
-extern int HTParseFile PARAMS((
+extern int HTParseFile (
         HTFormat        format_in,
         FILE            *fp,
-        HTRequest *     request));
+        HTRequest *     request);
 /*
 
   GET NEXT CHARACTER FROM BUFFER
   
  */
-extern int HTInputSocket_getCharacter PARAMS((HTInputSocket* isoc));/*
+extern int HTInputSocket_getCharacter (HTInputSocket* isoc);/*
 
   READ BLOCK FROM INPUT SOCKET
   
@@ -455,13 +455,13 @@ extern int HTInputSocket_getCharacter PARAMS((HTInputSocket* isoc));/*
    may have changed). Buffer is not NULL-terminated.
    
  */
-extern char * HTInputSocket_getBlock PARAMS((HTInputSocket * isoc,
-                                                  int *           len));
+extern char * HTInputSocket_getBlock (HTInputSocket * isoc,
+                                                  int *           len);
 
-extern char * HTInputSocket_getLine PARAMS((HTInputSocket * isoc));
-extern char * HTInputSocket_getUnfoldedLine PARAMS((HTInputSocket * isoc));
-extern char * HTInputSocket_getStatusLine PARAMS((HTInputSocket * isoc));
-extern BOOL   HTInputSocket_seemsBinary PARAMS((HTInputSocket * isoc));
+extern char * HTInputSocket_getLine (HTInputSocket * isoc);
+extern char * HTInputSocket_getUnfoldedLine (HTInputSocket * isoc);
+extern char * HTInputSocket_getStatusLine (HTInputSocket * isoc);
+extern BOOL   HTInputSocket_seemsBinary (HTInputSocket * isoc);
 
 #endif
 /*

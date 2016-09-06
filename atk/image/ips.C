@@ -70,6 +70,7 @@ static double paperSize[7][2] = { { 8.500, 11.000},   /* US NORMAL */
 				  { 3.875,  4.875},   /* 4 by 5 */
 				  { 0.945,  1.417}};  /* 35mm (24x36) */
 
+#if 0 /* unused */
 /* size of l+r margin and t+b margin.  image is centered */
 static double margins[7][2] = { { 1.000, 1.000},   /* US NORMAL */
 				{ 1.000, 1.000},   /* A4 */
@@ -78,12 +79,12 @@ static double margins[7][2] = { { 1.000, 1.000},   /* US NORMAL */
 				{ 1.000, 1.000},   /* B-size */
 				{ 0.275, 0.275},   /* 4 by 5 */
 				{ 0.078, 0.078}};  /* 35mm (24x36) */
+#endif
 
 /* RANGE forces a to be in the range b..c (inclusive) */
 #define RANGE(a,b,c) { if ((a) < (b)) (a) = (b);  if ((a) > (c)) (a) = (c); }
 
 static void setScale( class imagev  *self, int  xscale , int  yscale );
-static void centerImage();
 void writePS( class imagev  *self, FILE  *fp, int  *wpts , int  *hpts, int  toplevel );
 static int rle_encode(byte  *scanline , byte  *rleline, int  wide);
 static void psColorImage(FILE  *fp, boolean usereg);
@@ -134,8 +135,9 @@ static void setScale( class imagev  *self, int  xscale , int  yscale )
 }
 
 
+#if 0 /* unused */
 /***************************************************/
-static void centerImage()
+static void centerImage(void)
 {
   pos_inx = psizex/2 - sz_inx/2;
   pos_iny = psizey/2 - sz_iny/2;
@@ -144,6 +146,7 @@ static void centerImage()
   pos_inx = floor(pos_inx * 1000.0 + 0.5) / 1000.0;
   pos_iny = floor(pos_iny * 1000.0 + 0.5) / 1000.0;
 }
+#endif
 
 
 /***************************************************/
@@ -152,7 +155,7 @@ void writePS( class imagev  *self, FILE  *fp, int  *wpts , int  *hpts, int  topl
     class image *imagep = (class image *) (self)->GetDataObject();
     class image *new_c = new image;
     int i, j, q, err, rpix, gpix, bpix, nc;
-    int iw, ih, ox, oy, slen, lwidth, bits, colorps, w, h;
+    int iw, ih, ox, oy, slen, lwidth, bits, colorps = 1, w, h;
     byte *inpix, rmap[256], gmap[256], bmap[256];
     boolean rle = TRUE;
 
@@ -293,8 +296,8 @@ void writePS( class imagev  *self, FILE  *fp, int  *wpts , int  *hpts, int  topl
        if (rle) {   /* write colormap and rle-colormapped image funct */
 	   psColorMap(fp, colorps, nc, rmap, gmap, bmap);
 	   if (toplevel == imagev_REGISTERED_POSTSCRIPT) {
-	       print::PSRegisterDef((char *)defname, "0");
-	       print::PSRegisterHeader((char *)defname, (print_header_fptr)psRleCmapImage, (void *)colorps);
+	       print::PSRegisterDef(defname, "0");
+	       print::PSRegisterHeader(defname, (print_header_fptr)psRleCmapImage, (void *)(long)colorps);
 	   }
 	   else
 	       psRleCmapImage(fp, colorps);

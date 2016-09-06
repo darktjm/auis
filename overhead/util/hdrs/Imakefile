@@ -26,12 +26,7 @@
 */
 
 
-#ifdef WHITEPAGES_ENV
-InstallMultiple(bt.h btint.h btwp.h wp.h, $(INSTINCFLAGS), $(DESTDIR)/include)
-#endif /* WHITEPAGES_ENV */
-
-
-InstallMultiple(apioctl.h fdplumb.h fdplumbi.h profile.h svcconf.h tokens.h truth.h util.h unscribe.h ansitext.h mathaux.h units.h, $(INSTINCFLAGS), $(DESTDIR)/include)
+InstallMultiple(fdplumb.h fdplumbi.h profile.h svcconf.h truth.h util.h unscribe.h ansitext.h mathaux.h units.h, $(INSTINCFLAGS), $(DESTDIR)/include)
 
 
 /*

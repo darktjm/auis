@@ -157,7 +157,6 @@ boolean cpptext::ReflowComment(long pos)
 	/* this line contains a separate comment that might be appropriate to flow with the previous comment */
 	style *commenttype=GetStyle(skipws+1);
 	if (commenttype==this->srctext::linecomment_style) {
-	    int startcol=CurrentColumn(startcomment);
 	    if (is_whitespace(GetChar(startcomment+2)) && GetStyle(pos-1)==commenttype && (GetEnvironment(pos-1))->GetLength() > 2) {
 		/* this is a flowable double-slash comment and there's a double-slash comment on the previous line too (len>2); flow them together */
 		int spaces=1;
@@ -491,7 +490,7 @@ void cpptext::BackwardCheckLabel(long pos)
  * matched; strconst *must* be a constant string, so that sizeof works
  */
 #define backwardMatch(self,pos,strConst) \
-    (pos>=cstrlen(strConst)-1 && match(self,pos-(cstrlen(strConst)-1)+1,strConst))
+    (pos>=(int)cstrlen(strConst)-1 && match(self,pos-(cstrlen(strConst)-1)+1,strConst))
 
 #define match(self,pos,str) ((pos==0 || !(self)->IsTokenChar((self)->GetChar(pos-1))) && !(self)->IsTokenChar((self)->GetChar(pos+cstrlen(str))) && (self)->DoMatch(pos,str,cstrlen(str)))
 
@@ -604,7 +603,7 @@ int cpptext::Indentation(long pos)
 		/* nothing */
 		break;
 	    case 'f': /* if */
-		if((onestatement || elseCatch>0) && backwardMatch(this,pos,"if"))
+		if((onestatement || elseCatch>0) && backwardMatch(this,pos,"if")) {
 		    if(elseCatch==0)
 			if(parensFollowedBy==-1)
 			    return CurrentIndent(pos) +levelExtra +labelExtra;
@@ -612,14 +611,16 @@ int cpptext::Indentation(long pos)
 			    return CurrentIndent(pos) +levelExtra +this->srctext::contIndent;
 		    else if(--elseCatch==0)
 			return CurrentIndent(pos); /* line else up with if */
+		}
 		savedPos=pos;
 		break;
 	    case 'o': /* do */
-		if(onestatement && backwardMatch(this,pos,"do"))
+		if(onestatement && backwardMatch(this,pos,"do")) {
 		    if(savedPos==-1)
 			return CurrentIndent(pos)+levelExtra+labelExtra;
 		    else
 			return CurrentIndent(pos) +levelExtra +this->srctext::contIndent;
+		}
 		savedPos=pos;
 		break;
 	    case 'e': /* else, case or while */
@@ -633,7 +634,7 @@ int cpptext::Indentation(long pos)
 			return CurrentIndent(pos) +levelExtra +labelExtra;
 		    else
 			return CurrentIndent(pos) +levelExtra +this->srctext::contIndent;
-		else if(backwardMatch(this,pos,"else"))
+		else if(backwardMatch(this,pos,"else")) {
 		    if(onestatement)
 			if(savedPos==-1)
 			    return CurrentIndent(pos) +levelExtra +labelExtra;
@@ -644,22 +645,25 @@ int cpptext::Indentation(long pos)
 			if(elseCatch>0)
 			    ++elseCatch;
 		    }
+		}
 		savedPos=pos;
 		break;
 	    case 'r':
-		if(onestatement && backwardMatch(this,pos,"for"))
+		if(onestatement && backwardMatch(this,pos,"for")) {
 		    if(parensFollowedBy==-1)
 			return CurrentIndent(pos) +levelExtra +labelExtra;
 		    else
 			return CurrentIndent(pos) +levelExtra +this->srctext::contIndent;
+		}
 		savedPos=pos;
 		break;
 	    case 'h':
-		if(onestatement && backwardMatch(this,pos,"switch"))
+		if(onestatement && backwardMatch(this,pos,"switch")) {
 		    if(parensFollowedBy==-1)
 			return CurrentIndent(pos) +switchLevelExtra +labelExtra;
 		    else
 			return CurrentIndent(pos) +switchLevelExtra +this->srctext::contIndent;
+		}
 		savedPos=pos;
 		break;
 	    case 's':
@@ -668,11 +672,12 @@ int cpptext::Indentation(long pos)
 		savedPos=pos;
 		break;
 	    case 't':
-		if(backwardMatch(this,pos,"default") && !IsTokenChar(GetChar(pos+2)))
+		if(backwardMatch(this,pos,"default") && !IsTokenChar(GetChar(pos+2))) {
 		    if(!onestatement || colonFollowedBy==-1)
 			return CurrentIndent(pos) + this->ctext::switchLevelIndent - (this->ctext::switchLevelIndent - this->ctext::switchLabelUndent) + labelExtra;
 		    else
 			return CurrentIndent(pos) + (this->ctext::switchLevelIndent - this->ctext::switchLabelUndent) + this->srctext::contIndent;
+		}
 		savedPos=pos;
 		break;
 	    case ',':

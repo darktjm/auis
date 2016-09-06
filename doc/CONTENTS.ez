@@ -190,21 +190,7 @@ Top Level Directories
 
 	All the supported Andrew classes
 
-		other than the  mail system
-
 	See subdirectories list below
-
-
-./ams
-
-	Andrew Message System  -  Mail transport system
-
-	based on Transarc's Andrew File System
-
-
-./atkams
-
-	The 'messages' program.
 
 
 ./WWW
@@ -463,10 +449,6 @@ Details for selected subordinate directories
 
 	Example programs from Nataniel Borenstein's book
 
-./contrib/batmail
-
-	Emacs interface to the AMS mail delivery system
-
 ./contrib/bdffont
 
 	Editor for fonts in bdf format
@@ -484,8 +466,6 @@ Details for selected subordinate directories
 ./contrib/demos
 
 ./contrib/demos/circlepi
-
-./contrib/eatmail
 
 ./contrib/gestures/gestsrc
 
@@ -519,18 +499,6 @@ Details for selected subordinate directories
 
 	An object for adding annotations to text
 
-./contrib/mit/com_err
-
-./contrib/mit/fxlib
-
-	Library of tools for exchanging papers
-
-	and comments between students and faculty.
-
-./contrib/mit/neos
-
-	"Operating system" used by fxlib
-
 ./contrib/mit/rtf2
 
 	Converts RTF to Andrew format
@@ -547,10 +515,6 @@ Details for selected subordinate directories
 
 ./contrib/runbtn
 
-./contrib/snap2
-
-	Implements a separate process for mail access
-
 ./contrib/srctext
 
 	Source text editors for various languages
@@ -560,12 +524,6 @@ Details for selected subordinate directories
 ./contrib/time
 
 ./contrib/tm
-
-./contrib/vui
-
-./contrib/vui/doc
-
-./contrib/wpedit
 
 ./contrib/zip
 
@@ -612,12 +570,6 @@ Details for selected subordinate directories
 
 	Dynamic linking and loading for C++
 
-./overhead/eli
-
-	Lisp package used in FLAMES
-
-	Part of 'messages' and AMS
-
 ./overhead/errors
 
 	Error handling function, 'errprintf'
@@ -629,10 +581,6 @@ Details for selected subordinate directories
 ./overhead/external/image/tiff
 
 	Tiff image library
-
-./overhead/external/mail/metamail
-
-	Nathaniel Borenstein's metamail handler for MIME
 
 ./overhead/fonts/cmd
 
@@ -661,16 +609,6 @@ Details for selected subordinate directories
 ./overhead/grefs
 
 ./overhead/index
-
-./overhead/mail
-
-./overhead/mail/cmd
-
-./overhead/mail/hdrs
-
-./overhead/mail/lib
-
-./overhead/mail/testing
 
 ./overhead/malloc
 
@@ -747,8 +685,7 @@ System Components
 
 }
 The major parts of the distribution consists of: underlying libraries and 
-programs (overhead), the Andrew Toolkit (atk), the Andrew Message System 
-(ams), the mail user agent "messages" (atkams), and the Andrew 
+programs (overhead), the Andrew Toolkit (atk), and the Andrew 
 Documentation. In addition, we also include a collection of contributed 
 Andrew insets.
 
@@ -778,10 +715,6 @@ uniform way
 
 \bold{class} - an object-oriented C language preprocessor used by ATK
 
-\bold{rxp} - a regular-expression package used in ELI
-
-\bold{eli} - the ``embedded lisp interpreter'' used by AMS
-
 \bold{conv} - several conversion programs for sites which have used earlier 
 versions of the Andrew distribution.
 
@@ -789,13 +722,7 @@ versions of the Andrew distribution.
 
 \bold{xicons} - a small collection of icons for use under X window managers
 
-\bold{\bold{cmenu} - }the ATK stack-of-cards X11 menu package\bold{
-
-mail} - library of AMS functions
-
-\bold{wputil} - programs and data to initialize and build a White Pages
-
-\bold{wpi} - allows mail-basd updates to White Pages entries
+\bold{\bold{cmenu} - }the ATK stack-of-cards X11 menu package
 
 \bold{bison} - parser generator
 
@@ -804,8 +731,7 @@ mail} - library of AMS functions
 \bold{dynlink} - dynamic linking module \
 
 
-\bold{external} - files imported from external locations such as image and 
-metamail
+\bold{external} - files imported from external locations such as image
 
 \bold{genstatl} - generate a statically linked runapp
 
@@ -962,37 +888,7 @@ Example Programs}
 service
 
 
-\subsection{2.2.3	AMS}
-
-
-\indent{\description{\bold{delivery} - the fundamental programs in AMDS 
-that manage mail queues and deliver mail
-
-\bold{demo} - builds a multi-media folder that you can use as an AMS/ATK 
-demo
-
-\bold{doc} - AMS documentation of all sorts
-
-\bold{flames} - ELI application that handles new messages interpretively
-
-\bold{libs} - libraries used in building AMS user agent programs
-
-\bold{ms} - the RPC veneer over the lower-level parts of those AMS 
-libraries, making the MessageServer process
-
-\bold{msclients} - AMS user agent programs
-
-\bold{utils} - useful programs in managing AMDS installations
-
-}}
-\subsection{2.2.4	ATKAMS}
-
-
-\indent{\description{\bold{messages} - our flagship AMS program; 
-multi-media mail and bboards
-
-
-}}\subsection{2.2.5	Contrib}
+\subsection{2.2.3	Contrib}
 
 
 Among other things, you will find:
@@ -1009,9 +905,6 @@ Among other things, you will find:
 \bold{champ} - a calendar program
 
 \bold{demos }- an Andrew demo
-
-\bold{\bold{eatmail} }- a program which transfers mail from 
-/usr/spool/mail/\{uid\} into separate files in \{uid\}'s Mailbox directory
 
 \bold{gestures} - a gesture-based text view
 

@@ -60,7 +60,8 @@
 #define DOT	020000
 #define COLON	040000
 
-short   charclass[128] =
+/* tjm - FIXME: 128 chars only */
+const short   charclass[128] =
 {
     0, 0, 0, 0, 0, 0, 0, 0,
     0, BLANK, 0, 0, 0, 0, 0, 0,
@@ -80,9 +81,9 @@ short   charclass[128] =
     LOWER, LOWER, LOWER, 0, 0, 0, 0, 0
 };
 
-#define skipb(x) while(charclass[*(x)]&BLANK) (x)++
+#define skipb(x) while(charclass[(unsigned char)*(x)]&BLANK) (x)++
 
-#define getop(x,class_c) (charclass[*(x)]&(class_c)?*(x)++:0)
+#define getop(x,class_c) (charclass[(unsigned char)*(x)]&(class_c)?*(x)++:0)
 
 
      
@@ -93,7 +94,7 @@ struct jbstruct {
 };
 static struct jbstruct *jbs = NULL;
 
-static void Exception (int sig);
+static void ExceptionFunc (int sig);
 static double standardize(extended_double  *x);
 void  eval (class table  * T, extended_double  *result, int      r , int      c, char    *input);
 static void expr (class table  * T, extended_double  *result, const char  **inptr, int      r , int      c);
@@ -177,7 +178,7 @@ static double relexpr(class table  *T, const char  **inptr, int      r , int    
 
     x = aexpr (T, inptr, r, c);
     skipb(*inptr);
-    while (op = getop (*inptr, CMPOP)) {
+    while ((op = getop (*inptr, CMPOP))) {
 	op2 = getop (*inptr, CMPOP);
 	y = aexpr (T, inptr, r, c);
 	skipb(*inptr);
@@ -212,7 +213,7 @@ static double aexpr (class table  *T, const char  **inptr, int      r , int     
 
     x = term (T, inptr, r, c);
     skipb(*inptr);
-    while (op = getop (*inptr, ADDOP)) {
+    while ((op = getop (*inptr, ADDOP))) {
 	y = term (T, inptr, r, c);
 	if (op == '+')
 	    x += y;
@@ -230,7 +231,7 @@ static double term (class table  * T, const char  **inptr, int      r , int     
 
     x = factor (T, inptr, r, c);
     skipb(*inptr);
-    while (op = getop (*inptr, MULOP)) {
+    while ((op = getop (*inptr, MULOP))) {
 	y = factor (T, inptr, r, c);
 	if (op == '*')
 	    x *= y;
@@ -247,7 +248,7 @@ static double factor (class table  * T, const char  **inptr, int      r , int   
     double x, y;
 
     skipb(*inptr);
-    if (op = getop (*inptr, ADDOP)) {
+    if ((op = getop (*inptr, ADDOP))) {
 	skipb(*inptr);
 	x = factor (T, inptr, r, c);
 	if (op == '-') {
@@ -257,7 +258,7 @@ static double factor (class table  * T, const char  **inptr, int      r , int   
     else
 	x = fatom (T, inptr, r, c);
     skipb(*inptr);
-    if (op = getop (*inptr, EXPOP)) {
+    if ((op = getop (*inptr, EXPOP))) {
 	y = factor (T, inptr, r, c);
 	x = pow(x, y);
 	skipb(*inptr);
@@ -303,11 +304,11 @@ static double fatom (class table  * T, const char  **inptr, int      rr , int   
 	if (!getop (*inptr, RPAREN))
 	    syntaxError(/*") expected" */);
 
-    } else if (c = getop (*inptr, UPPER | LOWER)) {
+    } else if ((c = getop (*inptr, UPPER | LOWER))) {
 	p = *inptr - 1;
 	h = c & ~CASEBIT;
 	count = 0;
-	while (c = getop (*inptr, UPPER | LOWER | DIGIT))
+	while ((c = getop (*inptr, UPPER | LOWER | DIGIT)))
 	    h = (h * 65599 + (c & ~CASEBIT)) & 0xffff;
 	length = *inptr - p;
 	skipb(*inptr);
@@ -343,25 +344,25 @@ static double fatom (class table  * T, const char  **inptr, int      rr , int   
 	} /* if LPAREN */
 	x = funcall (T, rr, cc, p, length, h, args, count);
 
-    } else if (c = getop (*inptr, DIGIT)) {
+    } else if ((c = getop (*inptr, DIGIT))) {
 	x = DigitToDouble (c);
-	while (c = getop (*inptr, DIGIT))
+	while ((c = getop (*inptr, DIGIT)))
 	    x = x * 10.0 + DigitToDouble (c);
-	if (c = getop (*inptr, DOT)) {
+	if ((c = getop (*inptr, DOT))) {
 	    y = 1.0;
-	    while (c = getop (*inptr, DIGIT))
+	    while ((c = getop (*inptr, DIGIT)))
 		x += (y *= 0.1) * DigitToDouble (c);
 	}
 	if (getop (*inptr, PERCENT))
 	    x *= 0.01;
 
-    } else if (c = getop (*inptr, DOT)) {
+    } else if ((c = getop (*inptr, DOT))) {
 	x = 0.0;
 	y = 1.0;
 	if (!(c = getop (*inptr, DIGIT)))
 	    syntaxError(/*"Decimal point without number" */ );
 	x += (y *= 0.1) * DigitToDouble (c);
-	while (c = getop (*inptr, DIGIT))
+	while ((c = getop (*inptr, DIGIT)))
 	    x += (y *= 0.1) * DigitToDouble (c);
 	if (getop (*inptr, PERCENT))
 	    x *= 0.01;
@@ -397,7 +398,7 @@ void enterfun (const char      *name, double  (*fptr)(), int      argc)
     p -> length = strlen (name);
     p -> argc = argc;
     p -> f = fptr;
-    while (c = *name++)
+    while ((c = *name++))
 	h = (h * 65599 + (c & ~CASEBIT)) & 0xffff;
     q = htable + (h & HASHMASK);
     while ((*q) != &sentinal)
@@ -429,7 +430,7 @@ static double funcall (class table  * T, int      rr , int      cc, const char  
 	if (p -> length != length)
 	    continue;
 	for (s = p -> name, t = name; *s; s++, t++)
-	    if (!(*s == *t || isupper (*t) && *s == tolower (*t)))
+	    if (!(*s == *t || (isupper (*t) && *s == tolower (*t))))
 		goto NEXT;
 	break;
 NEXT: 	;
@@ -593,7 +594,7 @@ static int trydate (const char    *input)
     char    name[20];
     char   *p = name;
     skipb(input);
-    while (c = getop (input, DIGIT))
+    while ((c = getop (input, DIGIT)))
 	day = day * 10 + c - '0';
     skipb(input);
     while (p - name < 18 && (*p = getop (input, UPPER | LOWER))) {
@@ -603,14 +604,15 @@ static int trydate (const char    *input)
     }
     *p = 0;
     for (i = 1; i <= 12; i++) {
-	if (!strncmp (name, monthname[i], p - name))
+	if (!strncmp (name, monthname[i], p - name)) {
 	    if (month)
 		return 0;
 	    else
 		month = i;
+	}
     }
     skipb(input);
-    while (c = getop (input, DIGIT))
+    while ((c = getop (input, DIGIT)))
 	year = year * 10 + c - '0';
     skipb(input);
     if (*input)

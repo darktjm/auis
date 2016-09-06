@@ -174,7 +174,7 @@ chartlin::PrintChart( )
   DEBUGdt(ItemCount,count);
   width = (Width / ((count) ? count : 1));
   left = Left + width/2;
-  if ( excess = (Width - (width * count)) / 2 )
+  if ( ( excess = (Width - (width * count)) / 2 ) )
     excess = count / excess;
   (this)->SetPrintLineWidth(  1 );
   (this)->SetPrintGrayLevel(  0.0 );

@@ -115,39 +115,39 @@ typedef struct _HTStructuredClass{
 
         char*  name;                            /* Just for diagnostics */
 
-        int (*_free) PARAMS((
-                HTStructured*   me));
+        int (*_free) (
+                HTStructured*   me);
 
-        int (*abort) PARAMS((
+        int (*abort) (
                 HTStructured*   me,
-                HTError         e));
+                HTError         e);
                 
-        void (*put_character) PARAMS((
+        void (*put_character) (
                 HTStructured*   me,
-                char            ch));
+                char            ch);
                                 
-        void (*put_string) PARAMS((
+        void (*put_string) (
                 HTStructured*   me,
-                CONST char *    str));
+                CONST char *    str);
                 
-        void (*put_block) PARAMS((
+        void (*put_block) (
                 HTStructured*   me,
                 CONST char *    str,
-                int             len));
+                int             len);
                 
-        void (*start_element) PARAMS((
+        void (*start_element) (
                 HTStructured*   me,
                 int             element_number,
                 CONST BOOL*             attribute_present,
-                CONST char**            attribute_value));
+                CONST char**            attribute_value);
                 
-        void (*end_element) PARAMS((
+        void (*end_element) (
                 HTStructured*   me,
-                int             element_number));
+                int             element_number);
 
-        void (*put_entity) PARAMS((
+        void (*put_entity) (
                 HTStructured*   me,
-                int             entity_number));
+                int             entity_number);
                 
 } HTStructuredClass;
 /*
@@ -157,7 +157,7 @@ Find a Tag by Name
    Returns a pointer to the tag within the DTD.
    
  */
-extern HTTag * SGMLFindTag PARAMS((CONST SGML_dtd* dtd, CONST char * string));
+extern HTTag * SGMLFindTag (CONST SGML_dtd* dtd, CONST char * string);
 
 /*
 
@@ -166,7 +166,7 @@ Find a Attribute by Name
    Returns the number of the atribute or -1 if failure.
    
  */
-extern int SGMLFindAttribute PARAMS((HTTag* tag, CONST char * string));
+extern int SGMLFindAttribute (HTTag* tag, CONST char * string);
 
 /*
 
@@ -183,9 +183,9 @@ Create an SGML parser
 */
 
 
-extern HTStream* SGML_new PARAMS((
+extern HTStream* SGML_new (
         CONST SGML_dtd *                dtd,
-        HTStructured *          target));
+        HTStructured *          target);
 
 extern CONST HTStreamClass SGMLParser;
 

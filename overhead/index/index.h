@@ -117,6 +117,23 @@ struct recordSet {
     struct recordID *data;
 };
 
+extern void index_HashAdd(struct hashList *alist, long ahash);
+extern int index_HashRemove(struct hashList *alist, long ahash);
+extern int index_HashPresent(struct hashList *alist, long ahash);
+extern void index_FreeHL(struct hashList *alist);
+
+extern int index_Create(char *apath, long aHashSize);
+extern void index_CWrite(struct Index *ai, struct indexBucket *ab);
+extern void index_CPut(struct Index *ai, struct indexBucket *ab);
+extern void index_FreeIndex(struct Index *ai, struct indexBucket *abucket);
+
+extern int index_GetKey(struct Index *ai, struct recordID *arid, char *abuffer, long alen);
+extern int index_AddPrimary(struct Index *ai, char *akey, char *adata);
+extern int index_AddSecondary(struct Index *ai, struct recordID *arid, char *akey);
+extern int index_DeletePrimary(struct Index *ai, struct recordID *arid);
+extern int index_DeleteSecondary(struct Index *ai, struct recordID *arid, char *akey);
+extern void index_Dump(struct Index *ai);
+
 typedef void (*index_efptr)(struct Index *ai, struct indexComponent *tc, char *arock);
 extern struct indexBucket *index_CGet(struct Index  *ai, char  *akey);
 extern struct hashList *index_NewHL();
@@ -130,10 +147,11 @@ extern struct indexBucket *index_ReadIndex(FILE  *afile);
 extern struct indexBucket *index_CGetHash(struct Index  *ai, long  ahash);
 extern struct indexBucket *index_CGet(struct Index  *ai, char  *akey);
 extern struct recordSet *recordset_New(int asize);
-extern long index_Hash(char  *astring, int  hashSize);
-void index_Enumerate(struct Index *ai, index_efptr aproc, char *arock);
-long index_GetData(struct Index *ai, struct recordID *arid, char *abuffer, long alen);
-void recordset_Free(struct recordSet *aset);
+extern long index_Hash(char  *astring, short  hashSize);
+extern void index_Enumerate(struct Index *ai, index_efptr aproc, char *arock);
+extern long index_GetData(struct Index *ai, struct recordID *arid, char *abuffer, long alen);
+extern void recordset_Free(struct recordSet *aset);
+extern void recordset_Add(struct recordSet *aset, struct recordID *arid);
 ENDCPLUSPLUSPROTOS
  
 #endif

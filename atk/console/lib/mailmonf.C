@@ -83,9 +83,6 @@ void CheckMail(class consoleClass  *self, int  requested);
 void CheckDirectories(class consoleClass  *self);
 int CheckPrint(class consoleClass  *self);
 void CheckOutgoingMail(class consoleClass  *self);
-#ifdef AMS_DELIVERY_ENV
-void PrefetchMailFiles(class consoleClass  *self, char  *MailboxDir, int  requested);
-#endif /* AFS_ENV */
 void ParseMail(class consoleClass  *self, char  *fname, int  requested);
 
 
@@ -108,14 +105,14 @@ int CheckDir(class consoleClass  *self, char  *Name, int  *LastModTime , int  La
 		*f = '\0'; /* change * to NUL */
 		f = (char *)strrchr(NewName, '/'); /* find last '/' */
 		*f = '\0'; /* NewName is now just a dir path */
-		*f++; /* f is now the prefix */
+		f++; /* f is now the prefix */
 	    }
 	    else{
 		if (*(f - 1) == '/'){
 		    /* suffix given */
 		    WildCard = SUFFIX;
 		    *f = '\0'; /* NewName is now just a dir path */
-		    *f++; /* f is now the suffix */
+		    f++; /* f is now the suffix */
 		}
 		else{
 		    *f = ' ';
@@ -223,11 +220,6 @@ void CheckMail(class consoleClass  *self, int  requested)
         ReportInternalError(self, ErrTxt);
         DoMailChecking = FALSE;
     }
-#ifdef AMS_DELIVERY_ENV
-    if ((Numbers[MAIL].Value != value || requested) && !UseNonAndrewMail) {
-	PrefetchMailFiles(self, envmail, requested);
-    }
-#endif /* AMS_DELIVERY_ENV */
     NewValue(self, &Numbers[MAIL], value, NULL, FALSE);
 }
 
@@ -384,51 +376,6 @@ void CheckOutgoingMail(class consoleClass  *self)
     closedir(dp);
     NewValue(self,&Numbers[OUTGOINGMAIL], goingoutct, NULL, FALSE);
 }
-
-#ifdef AMS_DELIVERY_ENV
-void PrefetchMailFiles(class consoleClass  *self, char  *MailboxDir, int  requested)
-{
-    DIR *dp;
-    struct dirent *dirent;
-    char fullname[1+MAXPATHLEN], *s, ErrTxt[256];
-
-    mydbg(("entering: PrefetchMailFiles\n"));
-    if(!NonViceHost){
-	if ((dp = opendir(MailboxDir)) == NULL) {
-	    ReportInternalError(self, "console: Cannot open your mailbox to prefetch mail");
-	    return;
-	}
-	strcpy(fullname, MailboxDir);
-	strcat(fullname, "/");
-	s = fullname + strlen(fullname);
-	while ((dirent = readdir(dp)) != NULL) {
-	    if (dirent->d_name[0] == '.'){
-		if((strcmp(dirent->d_name, "."))&&(strcmp(dirent->d_name, ".."))){
-		    sprintf(ErrTxt, "ERROR: Non-Mail-File: (%s) in Mailbox", dirent->d_name);
-		    ReportInternalError(self, ErrTxt);
-		}
-		continue;
-	    }
-	    strcpy(s, dirent->d_name); /* appends it to path prefix */
-	    if (CheckMyMail){
-		ParseMail(self, fullname, requested);
-	    }
-#ifdef AFS_ENV
-	    else {
-		if (VenusFetch(fullname)) {
-		    if ((errno != ENOENT) && (errno != EBUSY) && (errno != EACCES) && (errno != EWOULDBLOCK)){
-			sprintf(ErrTxt, "console: Cannot pre-fetch your new mail %s (error %d); sorry...", fullname, errno);
-			ReportInternalError(self, ErrTxt);
-		    }
-		}
-	    }
-#endif /* AFS_ENV */
-	}
-	closedir(dp);
-	return;
-    }
-}
-#endif /* AMS_DELIVERY_ENV */
 
 void ParseMail(class consoleClass  *self, char  *fname, int  requested)
 {

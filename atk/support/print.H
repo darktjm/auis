@@ -151,8 +151,8 @@ class print : public ATK  {
 		{ papersize_w = width; papersize_h = height; }
 	inline void GetPaperSize(int *width, int *height) 
 		{ *width = papersize_w; *height = papersize_h; }
-	inline void SetFileName(char *fnm) { filename = NewString(fnm); }
-	inline char *GetFileName() { return filename; }
+	inline void SetFileName(const char *fnm) { filename = NewString(fnm); }
+	inline const char *GetFileName() { return filename; }
 	inline void SetTitle(const char *tnm) { title = NewString(tnm); }
 	inline const char *GetTitle() { return title; }
 

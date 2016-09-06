@@ -324,7 +324,7 @@ long rexxtext::CheckComment(long start)
 
 void rexxtext::RedoStyles()
 {
-    long last_comment=0, newpos, posn, len=GetLength();
+    long newpos, posn, len=GetLength();
     int prev=0, c='\n', parens=0;
     char buff[256];
     Dict *word;
@@ -338,7 +338,7 @@ void rexxtext::RedoStyles()
 		break;
 	    case '*':
 		if (prev=='/')
-		    last_comment= posn= CheckComment(posn-1);
+		    posn= CheckComment(posn-1);
 		break;
 	    case '(':
 		++parens;
@@ -374,10 +374,10 @@ int rexxtext::Indentation(long pos) /* WRN, Oct.92 */
 {
     long savedPos=(-1), len=GetLength(), newpos, elseIndent=-1;
     char buff[256], ch, initbuff[256];
-    int statementCount=0, wordCount=0, endCatch=0, elseCatch=0, openParens=0;
+    int statementCount=0, wordCount=0, endCatch=0, elseCatch=0;
     short keywordVal=0;
     boolean addingElse= FALSE, addingEnd=FALSE, addingThen=FALSE,
-    check=FALSE, sawThen=FALSE, sawElse=FALSE, sawNewLine=FALSE;
+    check=FALSE, sawThen=FALSE, sawNewLine=FALSE;
 
     /* avoid potential problems with first line of file */
     if (pos<1)
@@ -399,7 +399,7 @@ int rexxtext::Indentation(long pos) /* WRN, Oct.92 */
 	addingThen=TRUE;
 
     pos = backwardSkipJunk(this,pos-1,FALSE);
-    if (ch=GetChar(pos) == '\n') {
+    if ((ch=GetChar(pos)) == '\n') {
 	pos = backwardSkipJunk(this,pos-1,FALSE);
 	newpos=pos;
 	if ((ch=GetChar(newpos--)) == ',') {
@@ -499,7 +499,7 @@ int rexxtext::Indentation(long pos) /* WRN, Oct.92 */
 		if ((keywordVal & BEGIN_BIT) || sawNewLine) {
 		    if (!check)			 {
 			if (keywordVal & IF_BIT) {
-			    if (endCatch <= 0 && --elseCatch <= 0)
+			    if (endCatch <= 0 && --elseCatch <= 0) {
 				if (addingElse || addingThen)
 				    return CurrentIndent(pos);
 				else if (sawThen && wordCount) {
@@ -508,16 +508,18 @@ int rexxtext::Indentation(long pos) /* WRN, Oct.92 */
 				    check = TRUE;
 				} else
 				    return CurrentIndent(pos) + this->srctext::levelIndent;
+			    }
 			    sawThen=FALSE;
 			} else if (keywordVal & ELSE_BIT) {
 			    if (endCatch <= 0)
 				++elseCatch;
 			} else if (keywordVal & WHEN_BIT) {
-			    if (endCatch <= 0)
+			    if (endCatch <= 0) {
 				if (addingThen || (sawThen && wordCount))
 				    return CurrentIndent(pos);
 				else
 				    return CurrentIndent(pos) + this->srctext::levelIndent;
+			    }
 			    sawThen = FALSE;			      
 			} else if (keywordVal & OTHERWISE_BIT) {
 			    if (endCatch <=0)
@@ -527,7 +529,7 @@ int rexxtext::Indentation(long pos) /* WRN, Oct.92 */
 			} else if (keywordVal & END_BIT) {
 			    ++endCatch;
 			} else if (keywordVal & START_BIT) {
-			    if (--endCatch <= 0)
+			    if (--endCatch <= 0) {
 				if (addingEnd)
 				    return CurrentIndent(pos);
 				else if (endCatch == 0) {
@@ -537,6 +539,7 @@ int rexxtext::Indentation(long pos) /* WRN, Oct.92 */
 				    }
 				} else if (elseCatch <= 0)
 				    return CurrentIndent(pos) + this->srctext::levelIndent;
+			    }
 			} else if (elseCatch <= 0  &&  endCatch <= 0) {
 			    check = TRUE;
 			    savedPos=pos;

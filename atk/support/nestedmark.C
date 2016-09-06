@@ -115,7 +115,7 @@ class nestedmark *splitOffRight(class nestedmark  *self,int  rpos)
 	int pos=(node)->Eval(),
 	    len=child->length;
 
-	if(pos+len>rpos)
+	if(pos+len>rpos) {
 	    if(pos >= rpos){
 		(node)->Delete();
 		child->position= (right->children)->Insert( pos-rpos, (long) child);
@@ -128,7 +128,8 @@ class nestedmark *splitOffRight(class nestedmark  *self,int  rpos)
 		halfchild->length=len-child->length;
 		halfchild->position= (right->children)->Insert( 0, (long) halfchild);
 		halfchild->parent=right;
-	    }		
+	    }
+	}
 	node=nextnode;
     }
 
@@ -287,10 +288,11 @@ void nestedmark::Update(long  pos, long  length)
 	    if (up == NULL) up = this;
 	    while (up)  {
 		tpos = (up)->Eval();
-		if (pos >= tpos && pos < tpos+up->length)
+		if (pos >= tpos && pos < tpos+up->length) {
 		    if (pos-tsize > tpos + up->length)
 			up->length = pos-tpos;
 		    else up->length += tsize;
+		}
 		if (up->length == 0)  {
 		    tp = up;
                     up = up->parent;

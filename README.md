@@ -1,10 +1,12 @@
-Andrew User Interface System
-============================
+Andrew Toolkit
+==============
 
 This is my slightly cleaned up version of the Andrew User Interface
 System (http://www.cs.cmu.edu/~AUIS/), formerly known as the Andrew
 Toolkit (ATK), known mostly for its editor, ez, whose main appeal was
-the ability to embed documents of different types in each other.
+the ability to embed documents of different types in each other.  I
+have since removed one of its biggest non-ATK components, AMS, so I've
+changed the name back to Andrew Toolkit.
 
 If you are looking for the original AUIS README, look at
 doc/README.ez.  Yes, you'll need a working ez to read this properly.
@@ -15,7 +17,7 @@ this file to its original checkin.  Similarly, the files Porting, FAQ
 and INSTALL were removed as they can be rebuilt from their ez source
 using ez2ascii.
 
-To build this on Linux, just run "make World" in the top-level
+To build this on Linux, just run "make MFLAGS= World" in the top-level
 directory, with /usr/local/auis writable by the user executing this
 command.  Edit config/site.h if you don't like my installation
 directory.  If need the original INSTALL instructions, see
@@ -54,11 +56,42 @@ So far, the following incompatibilities have been introduced:
    compatible with the old org.  However, the old org was buggy as hell,
    so this is not a real problem.
 
+ - I have removed AMS, and anything related ("White Pages", various
+   mail utilities, AMS delivery).  A modern email client/server
+   without imap support?  Well, having native atk/ez support is
+   nice, and the AFS integration was probably nice when at CMU, but
+   it's not worth trying to keep this crufty beast alive.  This
+   includes "White pages" support (obsoleted by pervasive use of
+   LDAP) and AFS support.  I did build AMS without AFS and White
+   Pages support before tossing it, so if you're really interested,
+   you can start from just before I chucked it.  While mostly unrelated,
+   I have also removed metamail, since there are better ways to get it
+   (other than the AMS hacks, but since I'm chucking AMS anyway...)
+
+ - No AFS support.  Mostly a hack, anyway. The only useful things I
+   can think of are directory permission and file flush semantics,
+   neither of which is that important with any of the supplied
+   apps.  Like the above, I actually removed the code, so that I don't
+   have to deal with it when doing mass updates.
+
  - I have removed the ch files and tools required to convert out-of-tree
    pre-C++ code to C++.  Since I am unaware of any such code, this does
    not bother me.  The last checkin before I deleted it may be usable if
    this is a problem, but since I never compiled the associated code,
    it probably doesn't compile and/or work.
+
+ - I have removed FlexOrLexFileRule(file); only flex should be supported.
+   This means that any project using this rule must rename file.flex
+   to file.l, and remove file.lex.  Maintaining two versions, one of
+   which will likely never be used, is stupid.  Just force people to
+   install flex (even in the cases where old-stlye lex is superior).
+   Note that flex-generated scanners are essentially public domain, so
+   this does not cause any licensing issues.  See the bottom 3 lines
+   of flex's "COPYING".
+
+ - I have removed NEOS (contrib/mit).  I doubt it's in use any more,
+   and I don't feel like maintaining it (just updating to krb4 would
+   take way too much effort).
 
 In any case, what I intend to do with this is in the tjm-todo file,
 but to repeat the main point:
@@ -73,7 +106,10 @@ but to repeat the main point:
 
   - link-clean: ensure that all exported symbols are defined in a
     header, and all imported symbols come from a header (i.e., no extern
-    in C files).
+    in C files).  Also, any symbols not meant to be exported must be
+    declared static.  Unfortunately, there is no easy, portable way to
+    avoid exporting symbols from a library which are only shared between
+    members of the library.
 
   - make it as warning-clean as possible with the strictest set of
     warnings I can manage.
@@ -109,3 +145,10 @@ So far, what I've done is:
     issues and general code ugliness.
 
   - Fixed bugs in bush as well, and made it usable as a dired replacement
+
+Don't expect any of the ams stuff to work; I am wary of even trying to
+test it, as it access the network.  I may some day add the white page
+stuff to the code to build and clean, but again, there will be no
+testing.  Similarly, once I figure out what AFS support actually is, I
+might enable it and clean it up (not sure why user-level apps need to
+know what filesystem you're using, but what do I know?).

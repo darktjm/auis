@@ -57,14 +57,12 @@ void ATKOLinkI::ArgumentsDone() {
 }
 
 int ATKOLinkI::Test() {
-    char *p, *base;
-    long len;
-    char buf[MAXPATHLEN+1];
-    return 0;
 #if 0
+    char *p;
+
     /* since this process doesn't have all the needed symbols we can't test the object just by loading it.  Probably the only real test would be to do a static link of all the objects and libraries (including crt0.o).... -rr2b */
     ResetIterator();
-    while(p=NextArgument()) {
+    while((p=NextArgument())) {
 	if(p[0]=='-' && p[1]=='o' && p[2]=='\0') {
 	    p=NextArgument();
 	    break;

@@ -586,7 +586,7 @@ static void suck_char_metrics(char **ppt, struct font_afm *res, char *keywd) {
     char name[260];
     int aseval = (-1);
     double xval = 0.0, yval = 0.0;
-    int ix, ch, symflag;
+    int ix, ch;
 
     name[0] = '\0';
 
@@ -1062,7 +1062,7 @@ printp_IsEmptyPSHashTable(afm_font_hashtable  *tab) {
 	return FALSE;
 }
 
-void printp_EnumeratePSHashTable(afm_font_hashtable *tab, 
+static void printp_EnumeratePSHashTable(afm_font_hashtable *tab,
 		void (*splot)(char *nam, void *dat, void *rock), 
 		void *rock) {
     struct afm_font_hashnode *tmp;
@@ -1333,7 +1333,6 @@ boolean print::LookUpPSFont(char  *result, short  **encoding, class fontdesc  *f
 
     if (fd) {
 	family = (fd)->GetFontFamily();
-	size = (fd)->GetFontSize();
 	style = (fd)->GetFontStyle();
     }
 
@@ -1466,13 +1465,11 @@ void print::GeneratePSWord(FILE  *outfile, char  *buf, int  len, double  xpos, s
     int ix, px;
     int ch, chi, chs, nump;
     boolean firstword = TRUE;
-    boolean anyletters;
     int symbolfontindex;
     int defsused; /* 1==tCmp, 2==tW, 4==tY */
     defsused = (2|4); /* always */
 
     fprintf(outfile, "(");
-    anyletters = FALSE;
     for (ix=0; ix<len; ix++) {
 	ch = (unsigned char)(buf[ix]);
 	chi = encoding[ch];
@@ -1484,7 +1481,6 @@ void print::GeneratePSWord(FILE  *outfile, char  *buf, int  len, double  xpos, s
 	    if (nump==0) {
 		/* normal char chi */
 		GeneratePSLetter(outfile, chi);
-		anyletters = TRUE;
 	    }
 	    else if (nump==print_SymbolChar) {
 		/* char afm->ch[chi].u.symbolchar, in the Symbol font */
@@ -1506,7 +1502,6 @@ void print::GeneratePSWord(FILE  *outfile, char  *buf, int  len, double  xpos, s
 		fprintf(outfile, ") show grestore\n");
 		fprintf(outfile, "%g 0 rmoveto\n(", 
 			AFMToPS(symbolfont->ch[chs].x, fontsize));
-		anyletters = FALSE;
 	    }
 	    else {
 		/* composite */
@@ -1525,7 +1520,6 @@ void print::GeneratePSWord(FILE  *outfile, char  *buf, int  len, double  xpos, s
 		}
 
 		fprintf(outfile, "%g 0 rmoveto\n(", AFMToPS(afm->ch[chi].x, fontsize));
-		anyletters = FALSE;
 	    }
 	}
     }
@@ -1652,7 +1646,7 @@ static const char *SquishAFMFileName(const char *orig)
 {
     static char result[MAXLEN+1];
     int total[MAXLEN];
-    int ix, val, oval;
+    int ix, val;
 
     for (ix=0; ix<MAXLEN; ix++)
 	total[ix] = 0;

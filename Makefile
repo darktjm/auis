@@ -80,8 +80,6 @@ SYS_CONFDIR = ix86_Linux
 
 DASHL=-L
 
-        KRBLIB =
-
         BASEDIR = /usr/local/auis
         DESTDIR = ${BASEDIR}
 
@@ -220,7 +218,7 @@ CPPDEPINCLUDES="`$(CC) -v  2>&1 | sed -n -e 's@Reading specs from \\(.*\\)gcc-li
 
 GNUEMACS=/usr/local/bin/gnu-emacs
 
-        UTILLIB = $(BASEDIR)/lib/libutil.a $(BASEDIR)/lib/libafs.a
+        UTILLIB = $(BASEDIR)/lib/libutil.a
         PRSLIB =
 
 ATKDLIBDIRM="/lib/atk"
@@ -267,8 +265,6 @@ LEXLIB = -lfl
 LEX = flex
 SHARED_LIB_PATH=-Wl,-R,/usr/local/auis/lib/atk:$(DESTDIR)/lib/atk:$(BASEDIR)/lib/atk
 ATKLIBLDARGS=$(CPPSTDLIB) $(GCCLIB) $(SHARED_LIB_PATH)
-
-AFSBASEDIR =
 
     XUTILDIR = /usr/bin
 
@@ -400,8 +396,6 @@ tags::
 # The following comes from the local Imakefile
 # ##################################################
 
-AMS = ams atkams
-
 MKFONTDIR = xmkfontd
 
 CONTRIB = contrib
@@ -410,9 +404,11 @@ HELP = helpindex
 
 WWW = WWW
 
+MEGA = megarunapp
+
 DIRS = $(DESTDIR)  	$(DESTDIR)/bin 	$(DESTDIR)/config 	$(DESTDIR)/etc 	$(DESTDIR)/include 	$(DESTDIR)/lib 	$(DESTDIR)/lib/prs 	$(DESTDIR)/doc 	$(DESTDIR)/doc/ADMINISTRATOR 	$(DESTDIR)/doc/DEVELOPER 	$(DESTDIR)/doc/PROGRAMMER 	$(DESTDIR)/doc/MAIL 	$(DESTDIR)/help
 
-SUBDIRS = ossupport inst config overhead atk $(AMS) $(WWW) $(CONTRIB) $(SITE) $(MEGA) $(MKFONTDIR) $(HELP) doc
+SUBDIRS = ossupport inst config overhead atk $(WWW) $(CONTRIB) $(SITE) $(MEGA) $(MKFONTDIR) $(HELP) doc
 
 depend::
 	@echo 'Checking that BASEDIR is not the location of the source files.'
@@ -483,40 +479,40 @@ all:: $(OBJS)
 Makefiles:: Makefile
 
 All::
-	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \
-	for i in $(SUBDIRS) $(EXTRASUBDIRS); do \
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; *) set -e;; esac; \
+	res=0; 	for i in $(SUBDIRS) $(EXTRASUBDIRS); do \
 	    (cd $$i; echo "making" "(`pwd`)"; \
-		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) All || exit 1 ) || exit 1; done)
+		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) All ); res=$$((res+$$?)); done; exit $$res)
 
 dependAll::
-	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \
-	for i in $(SUBDIRS) $(EXTRASUBDIRS); do \
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; *) set -e;; esac; \
+	res=0; 	for i in $(SUBDIRS) $(EXTRASUBDIRS); do \
 	    (cd $$i; echo "depend/making" "(`pwd`)"; \
-		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) dependAll || exit 1 ) || exit 1; done)
+		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) dependAll ); res=$$((res+$$?)); done; exit $$res)
 
 Install::
-	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \
-	for i in $(SUBDIRS); do \
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; *) set -e;; esac; \
+	res=0; 	for i in $(SUBDIRS); do \
 	    (cd $$i; echo "installing" "(`pwd`)"; \
-		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) Install || exit 1 ) || exit 1; done)
+		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) Install ); res=$$((res+$$?)); done; exit $$res)
 
 Doc::
-	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \
-	for i in $(SUBDIRS); do \
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; *) set -e;; esac; \
+	res=0; 	for i in $(SUBDIRS); do \
 	    (cd $$i; echo "installing docs" "(`pwd`)"; \
-		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) Doc || exit 1 ) || exit 1; done)
+		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) Doc ); res=$$((res+$$?)); done; exit $$res)
 
 Aliases::
-	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \
-	for i in $(SUBDIRS); do \
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; *) set -e;; esac; \
+	res=0; 	for i in $(SUBDIRS); do \
 	    (cd $$i; echo "installing aliases" "(`pwd`)"; \
-		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) Aliases || exit 1 ) || exit 1; done)
+		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) Aliases ); res=$$((res+$$?)); done; exit $$res)
 
 dependInstall::
-	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \
-	for i in $(SUBDIRS); do \
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; *) set -e;; esac; \
+	res=0; 	for i in $(SUBDIRS); do \
 	    (cd $$i; echo "building (dependInstall)" "(`pwd`)"; \
-		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) dependInstall || exit 1 ) || exit 1; done)
+		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) dependInstall ); res=$$((res+$$?)); done; exit $$res)
 
 World::
 	@case '$(MFLAGS)' in *[ik]*) set +e;; esac; \
@@ -527,10 +523,10 @@ World::
 	done
 
 World::
-	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \
-	for i in $(SUBDIRS); do \
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; *) set -e;; esac; \
+	res=0; 	for i in $(SUBDIRS); do \
 	    (cd $$i; echo "building (World)" "(`pwd`)"; \
-		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) World || exit 1 ) || exit 1; done)
+		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) World ); res=$$((res+$$?)); done; exit $$res)
 
 Makefiles:: subMakefiles
 subMakefiles::
@@ -549,16 +545,16 @@ subdirMakefile:
 	cat .depends >>Makefile
 
 Clean::
-	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \
-	for i in $(SUBDIRS) $(EXTRASUBDIRS); do \
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; *) set -e;; esac; \
+	res=0; 	for i in $(SUBDIRS) $(EXTRASUBDIRS); do \
 	    (cd $$i; echo "cleaning" "(`pwd`)"; \
-		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) Clean || exit 1 ) || exit 1; done)
+		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) Clean ); res=$$((res+$$?)); done; exit $$res)
 
 Tidy::
-	@(case '$(MFLAGS)' in *[ik]*) set +e;; esac; \
-	for i in $(SUBDIRS) $(EXTRASUBDIRS); do \
+	@(case '$(MFLAGS)' in *[ik]*) set +e;; *) set -e;; esac; \
+	res=0; 	for i in $(SUBDIRS) $(EXTRASUBDIRS); do \
 	    (cd $$i; echo "tidying" "(`pwd`)"; \
-		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) Tidy || exit 1 ) || exit 1; done)
+		$(MAKE) $(MFLAGS) DESTDIR=$(DESTDIR) Tidy ); res=$$((res+$$?)); done; exit $$res)
 
 tags::
 	@case '$(MFLAGS)' in *[ik]*) set +e;; esac; \

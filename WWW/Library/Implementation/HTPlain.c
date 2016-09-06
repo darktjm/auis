@@ -48,7 +48,7 @@ struct _HTStream {
 **	------------------
 */
 
-PRIVATE void HTPlain_put_character ARGS2(HTStream *, me, char, c)
+PRIVATE void HTPlain_put_character (HTStream * me, char c)
 {
     HText_appendCharacter(me->text, c);
 }
@@ -59,13 +59,13 @@ PRIVATE void HTPlain_put_character ARGS2(HTStream *, me, char, c)
 **	---------------
 **
 */
-PRIVATE void HTPlain_put_string ARGS2(HTStream *, me, CONST char*, s)
+PRIVATE void HTPlain_put_string (HTStream * me, CONST char* s)
 {
     HText_appendText(me->text, s);
 }
 
 
-PRIVATE void HTPlain_write ARGS3(HTStream *, me, CONST char*, s, int, l)
+PRIVATE void HTPlain_write (HTStream * me, CONST char* s, int l)
 {
     CONST char* p;
     CONST char* e = s+l;
@@ -80,7 +80,7 @@ PRIVATE void HTPlain_write ARGS3(HTStream *, me, CONST char*, s, int, l)
 **	Note that the SGML parsing context is freed, but the created object is not,
 **	as it takes on an existence of its own unless explicitly freed.
 */
-PRIVATE int HTPlain_free ARGS1(HTStream *, me)
+PRIVATE int HTPlain_free (HTStream * me)
 {
     free(me);
     return 0;
@@ -89,7 +89,7 @@ PRIVATE int HTPlain_free ARGS1(HTStream *, me)
 /*	End writing
 */
 
-PRIVATE int HTPlain_abort ARGS2(HTStream *, me, HTError, e)
+PRIVATE int HTPlain_abort (HTStream * me, HTError e)
 {
     HTPlain_free(me);
     return EOF;
@@ -112,12 +112,12 @@ PUBLIC CONST HTStreamClass HTPlain =
 /*		New object
 **		----------
 */
-PUBLIC HTStream* HTPlainPresent ARGS5(
-	HTRequest *,		request,
-	void *,			param,
-	HTFormat,		input_format,
-	HTFormat,		output_format,
-	HTStream *,		output_stream)
+PUBLIC HTStream* HTPlainPresent (
+	HTRequest *		request,
+	void *			param,
+	HTFormat		input_format,
+	HTFormat		output_format,
+	HTStream *		output_stream)
 {
 
     HTStream* me = (HTStream*)malloc(sizeof(*me));

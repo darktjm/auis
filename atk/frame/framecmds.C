@@ -424,7 +424,7 @@ saveAllWork(class buffer  *buffer, struct saveTheWorldRock  *returnBuf)
  * direction of being conservative by returning FALSE if there are 
  * modified buffers without files.
  */
-boolean
+static boolean
 saveTheWorld(class frame  *outputFrame)
     {
     struct saveTheWorldRock returnCode;
@@ -613,7 +613,7 @@ static void frame_RecursiveVisitWork(class frame  *self)
 }
 
 /* Allows you to visit a file and then pop back to the current buffer. */
-void frame_RecursiveVisitFile(class frame  *self)
+static void frame_RecursiveVisitFile(class frame  *self)
     {
     frame_SaveExcursion(self, (excursionfptr)frame_RecursiveVisitWork);
 }
@@ -628,7 +628,7 @@ static void myKeyboardProcessor()
 }
  
 /* A recursive edit... Plain, simple, and useless. */
-void frame_RecursiveEdit(class frame  *self)
+static void frame_RecursiveEdit(class frame  *self)
     {
     frame_SaveExcursion(self, (excursionfptr)myKeyboardProcessor);
 }
@@ -651,7 +651,7 @@ static const char * const lastWindowChoices[] = {
 #define lastWindow_CANCEL 0
 #define lastWindow_QUIT   1
 
-void frame_DeleteWindow(class frame  *self)
+static void frame_DeleteWindow(class frame  *self)
     {
     long count = 0;
 
@@ -697,7 +697,7 @@ void framecmds::DeleteWindow(class frame  *self)
 }
 
 
-void frame_ExitRecursiveEdit(class frame  *self)
+static void frame_ExitRecursiveEdit(class frame  *self)
     {
     if (im::KeyboardLevel() <= 1)
         message::DisplayString(self, 0, "Not in recursive edit");
@@ -760,7 +760,7 @@ void frame_Exit(class frame  *self)
     im::KeyboardExit();
 }
 
-void frame_NewWindow(class frame  *self)
+static void frame_NewWindow(class frame  *self)
     {
     class buffer *buffer;
     class frame *newFrame;
@@ -782,7 +782,7 @@ void frame_NewWindow(class frame  *self)
     (newFrame)->SetCommandEnable( TRUE);
 
     if((window = im::Create(host)) == NULL) {
-	if(host && (*host != (char)0))
+	if(*host != (char)0)
 	    fprintf(stderr,"Could not create new window on host %s.\n", host);
 	else
 	    fprintf(stderr,"Could not create new window.\n");
@@ -838,7 +838,7 @@ static boolean BufferHelpWork(class buffer  *buffer, struct helpData  *helpData)
     char infoBuffer[1024];
 
     if (completion::FindCommon(helpData->partial,
-       (buffer)->GetName()) == strlen(helpData->partial)) {
+       (buffer)->GetName()) == (int)strlen(helpData->partial)) {
         const char *modStatus;
         char sizeBuf[16];
         const char *className;
@@ -902,7 +902,7 @@ static boolean FindFirstBuffer(class buffer  *tryBuffer , class buffer  *cannotM
     return (tryBuffer != cannotMatchBuffer);
 }
 
-void frame_OldBuffer(class frame  *self)
+static void frame_OldBuffer(class frame  *self)
     {
 
     char bufferName[100], prompt[256];
@@ -935,7 +935,7 @@ void frame_OldBuffer(class frame  *self)
     message::DisplayString(self, 0, "Done.");
 }
 
-void frame_VisitBuffer(class frame  *self)
+static void frame_VisitBuffer(class frame  *self)
     {
     char bufferName[100], prompt[100 + sizeof("Visit buffer [] : ") - 1];
     class buffer *buffer;
@@ -996,7 +996,7 @@ static void ListBuffersWork(class text  *helpDoc, long  dummyData, char  *buffer
     (helpDoc)->InsertCharacters( initPos + inc, "\n", 1);
 }
 
-void frame_ListBuffers(class frame  *self, long  key)
+static void frame_ListBuffers(class frame  *self, long  key)
         {
 
     class buffer *helpBuffer = (self)->GetHelpBuffer();
@@ -1060,7 +1060,7 @@ void frame_ListBuffers(class frame  *self, long  key)
     }
 }
 
-void frame_DropBuffer(class frame  *self)
+static void frame_DropBuffer(class frame  *self)
     {
     class buffer *b = (self)->GetBuffer();
     class im *im = (self)->GetIM();
@@ -1140,10 +1140,10 @@ static void DeleteABuffer(class frame *self, buffer *targetBuffer) {
     message::DisplayString(self, 0, "Done.");
 }
 
-void frame_DeleteBufferPrompt(class frame  *self)
+static void frame_DeleteBufferPrompt(class frame  *self)
     {
     buffer *thisBuffer, *targetBuffer;
-    char bufferName[100], *defaultName, prompt[356];
+    char bufferName[100], *defaultName = NULL, prompt[356];
 
     thisBuffer = (self)->GetBuffer();
     if (thisBuffer != NULL)
@@ -1165,7 +1165,7 @@ void frame_DeleteBufferPrompt(class frame  *self)
    DeleteABuffer(self, targetBuffer);
 }
 
-long frame_DeleteThisBuffer(ATK *f, long rock)
+static long frame_DeleteThisBuffer(ATK *f, long rock)
 {
     frame *self=(frame *)f;
     struct buffer *thisBuffer;
@@ -1362,7 +1362,7 @@ int frame_VisitNamedFile(class frame  *self, const char  *filename, boolean  new
         class frame *newFrame;
         class im *window;
 
-        if ((newFrame = new frame) != NULL)
+        if ((newFrame = new frame) != NULL) {
             if ((window = im::Create(NULL)) != NULL) {
                 (newFrame)->SetCommandEnable( TRUE);
                 (window)->SetView( newFrame);
@@ -1375,6 +1375,7 @@ int frame_VisitNamedFile(class frame  *self, const char  *filename, boolean  new
 		fprintf(stderr,"Could not create new window.\n");
                 (newFrame)->Destroy();
 	    }
+	}
     }
 
     (self)->SetBuffer( buffer, TRUE);
@@ -1382,7 +1383,7 @@ int frame_VisitNamedFile(class frame  *self, const char  *filename, boolean  new
 }
 
 /* like frame_VisitFilePrompting, but won't prompt if arg is non-NULL */
-int frame_VisitAFile(class frame  *self, char  *arg , const char  *prompt, boolean  newWindow)
+static int frame_VisitAFile(class frame  *self, char  *arg , const char  *prompt, boolean  newWindow)
             {
     if (isString(arg))
 	return frame_VisitNamedFile(self, arg, newWindow, FALSE);
@@ -1390,19 +1391,19 @@ int frame_VisitAFile(class frame  *self, char  *arg , const char  *prompt, boole
 	return frame_VisitFilePrompting(self, prompt, newWindow, FALSE);
 }
 
-int frame_VisitFile(class frame  *self, char  *arg)
+static int frame_VisitFile(class frame  *self, char  *arg)
         {
     return frame_VisitAFile(self, arg, "Visit file: ",
 				    ((self)->GetIM())->ArgProvided());
 }
 
-int frame_VisitRawFile(class frame  *self, char  *arg)
+static int frame_VisitRawFile(class frame  *self, char  *arg)
         {
     return frame_VisitFilePrompting(self, "Visit file (raw mode): ",
 				    ((self)->GetIM())->ArgProvided(), TRUE);
 }
 
-int frame_VisitFileNewWindow(class frame  *self, char  *arg)
+static int frame_VisitFileNewWindow(class frame  *self, char  *arg)
         {
     return frame_VisitAFile(self, arg, "Visit file: ", TRUE);
 }
@@ -1462,7 +1463,7 @@ static int frame_ReadFile(class frame  *self, long  key)
 }
 
 
-int frame_SaveFile(class frame  *self, long  key)
+static int frame_SaveFile(class frame  *self, long  key)
 {
     class buffer *buffer = (self)->GetBuffer();
 
@@ -1480,7 +1481,7 @@ int frame_SaveFile(class frame  *self, long  key)
  * WriteStyle attribute.
  */
 
-int frame_WritePlainestFile(class frame  *self)
+static int frame_WritePlainestFile(class frame  *self)
 {
     class buffer *buffer = (self)->GetBuffer();
     class dataobject *contents;
@@ -1535,12 +1536,12 @@ int frame_WriteFile(class frame  *self)
 }
 
 
-void frame_SaveAll(class frame  *self, long  key)
+static void frame_SaveAll(class frame  *self, long  key)
         {
     (void)saveTheWorld(self);
 }
 
-char *frame_pwd(class frame  *self, long  key)
+static char *frame_pwd(class frame  *self, long  key)
         {
 
     static char wd[MAXPATHLEN];
@@ -1552,7 +1553,7 @@ char *frame_pwd(class frame  *self, long  key)
     return wd;
 }
 
-boolean frame_cd (class frame  *self, char  *arg)
+static boolean frame_cd (class frame  *self, char  *arg)
         {
 
     char newdir[MAXPATHLEN];
@@ -1577,7 +1578,7 @@ boolean frame_cd (class frame  *self, char  *arg)
     }
 }
 
-void frame_PrintCmd(class frame  *self, char *usepsstr)
+static void frame_PrintCmd(class frame  *self, char *usepsstr)
 {
     class buffer *buf;
     boolean useps;
@@ -1620,7 +1621,7 @@ void frame_PrintCmd(class frame  *self, char *usepsstr)
     im::SetProcessCursor(NULL);
 }
 
-void frame_PreviewCmd(class frame  *self, char *usepsstr)
+static void frame_PreviewCmd(class frame  *self, char *usepsstr)
 {
     class buffer *buf;
     boolean useps;
@@ -1663,7 +1664,7 @@ void frame_PreviewCmd(class frame  *self, char *usepsstr)
     im::SetProcessCursor(NULL);
 }
 
-void frame_SetPrinter(class frame  *self)
+static void frame_SetPrinter(class frame  *self)
 {
     const char *currentPrinter, *defaultPrinter;
     char answer[256], prompt[sizeof("Current printer is . Set printer to []: ") + 128];
@@ -1694,7 +1695,7 @@ void frame_SetPrinter(class frame  *self)
 }
 
 /* Finds the frame immediately before the one passed in as the rock (nextFrame). */
-int FindFrame(class frame  *frame , class frame  *nextFrame)
+static int FindFrame(class frame  *frame , class frame  *nextFrame)
 {
     if (frame->next == nextFrame || frame->next == NULL)
         return TRUE;
@@ -1708,7 +1709,7 @@ static boolean FirstFrame(class frame  *frame, long  rock)
     return (frame->GetIM()) ? TRUE : FALSE;
 }
 
-void frame_PreviousWindow(class frame  *self)
+static void frame_PreviousWindow(class frame  *self)
 {
     class frame *desiredFrame;
     do  {
@@ -1719,7 +1720,7 @@ void frame_PreviousWindow(class frame  *self)
         ((desiredFrame)->GetIM( ))->SetWMFocus();
 }
 
-void frame_NextWindow(class frame  *self)
+static void frame_NextWindow(class frame  *self)
 {
     class frame *desiredFrame= self;
     do  {
@@ -1731,14 +1732,14 @@ void frame_NextWindow(class frame  *self)
 	((desiredFrame)->GetIM())->SetWMFocus();
 }
 
-void frame_HideWindow(class frame  *self)
+static void frame_HideWindow(class frame  *self)
     {
 
     ((self)->GetIM())->HideWindow();
     frame_NextWindow(self);
 }
 
-void frame_ExposeWindow(class frame  *self)
+static void frame_ExposeWindow(class frame  *self)
     {
 
     ((self)->GetIM( ))->ExposeWindow();
@@ -1753,14 +1754,14 @@ static boolean HideWindow(class frame  *frame)
     return FALSE;
 }
 
-void frame_SingleWindow(class frame  *self)
+static void frame_SingleWindow(class frame  *self)
     {
 
     frame::Enumerate((frame_effptr)HideWindow, 0);
     frame_ExposeWindow(self);
 }
 
-void frame_SetBufferModified(class frame  *self)
+static void frame_SetBufferModified(class frame  *self)
     {
 
     long version;

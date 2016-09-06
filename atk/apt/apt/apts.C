@@ -120,10 +120,11 @@ apts::CompareStrings( const char			  *s1 , const char			  *s2 )
     if ( c1 != c2 )
       break;
     } while ( c1 );
-  if ( c1 != c2 )
+  if ( c1 != c2 ) {
     if ( c1 > c2 )
       result = 1;
       else result = -1;
+  }
   OUT(apts_CompareStrings);
   return  result;
   }
@@ -162,7 +163,7 @@ apts::StripString( char			  *string )
     {
     while ( *source == ' '  ||  *source == '\t'  ||  *source == '\n' )  source++;
     if ( source != cursor )
-      { while ( *cursor++ = *source++ ) ; cursor--; }
+      { while ( ( *cursor++ = *source++ ) ) ; cursor--; }
       else
       cursor = string + strlen( string );
     while ( *(--cursor) == ' '  ||  *cursor == '\t'  ||  *cursor == '\n')  *cursor = 0;
@@ -184,10 +185,10 @@ apts::CaptureString( const char			  *source , char			  **target )
     *target = NULL;
     if ( *source )
       {
-      if ( *target = cursor = (char *) malloc( strlen( source ) + 1 ) )
+      if ( ( *target = cursor = (char *) malloc( strlen( source ) + 1 ) ) )
 	{
 	while ( *source == ' '  ||  *source == '\t'  ||  *source == '\n' )  source++;
-	while ( *cursor++ = *source++ ) ;
+	while ( ( *cursor++ = *source++ ) ) ;
 	cursor--;
 	while ( *(--cursor) == ' '  ||  *cursor == '\t'  ||  *cursor == '\n')  *cursor = 0;
 	}
@@ -278,7 +279,7 @@ apts::YearMonthDay( long			  *year , long			  *month , long			  *day )
   *year = time_units->tm_year + 1900;
   *month = time_units->tm_mon + 1;
   *day = time_units->tm_mday;
-  if ( *year % 4 == 0  &&  *year % 100 != 0  ||  *year % 400 == 0 )
+  if ( (*year % 4 == 0  &&  *year % 100 != 0)  ||  *year % 400 == 0 )
     leap = 1;
     else leap = 0;
   OUT(apts_YearMonthDay);
@@ -291,7 +292,7 @@ apts::DaysInMonth( long			   year , long			   month )
   long			  leap;
 
   IN(apts_DaysInMonth);
-  if ( year % 4 == 0  &&  year % 100 != 0  ||  year % 400 == 0 )
+  if ( (year % 4 == 0  &&  year % 100 != 0)  ||  year % 400 == 0 )
     leap = 1;
     else leap = 0;
   OUT(apts_DaysInMonth);
@@ -304,12 +305,12 @@ apts::WeekDayOffset( long			   year , long			   month , long			   day )
   long			  i, leap, years, offset = day;
 
   IN(apts_WeekDayOffset);
-  leap = year % 4 == 0  &&  year % 100 != 0  ||  year % 400 == 0;
+  leap = (year % 4 == 0  &&  year % 100 != 0)  ||  year % 400 == 0;
   offset++; /*===hack*/
   for ( i = 1; i < month; i++ )
     offset += days_per_month[leap][i];
   for ( years = 1980; years < year; years++ )
-    offset += 365 + (years % 4 == 0  &&  years % 100 != 0  ||  years % 400 == 0);
+    offset += 365 + ((years % 4 == 0  &&  years % 100 != 0)  ||  years % 400 == 0);
   offset = offset % 7;
   OUT(apts_WeekDayOffset);
   return  offset;

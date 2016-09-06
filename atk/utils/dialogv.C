@@ -47,7 +47,7 @@ ATK_IMPL("dialogv.H")
 
 ATKdefineRegistry(dialogv, view, dialogv::InitializeClass);
 static void HitFunc(class sbutton  *self, class dialogv  *rock, int  button, long  brock);
-static void ConfigureFunc(class im  *self, long  rock , long  customrock, class im  *parent, long  *x , long  *y, unsigned long  *w , unsigned long  *h);
+static void ConfigureFunc(class im  *self, long  rock , long  customrock, class im  *parent, int  *x , int  *y, unsigned int *w , unsigned int  *h);
 static void Interface(class sbutton  *b, struct dialogv::HitRock  *rock, int  ind, long  brock);
 
 
@@ -279,7 +279,6 @@ view_DSattributes dialogv::DesiredSize(long  width, long  height, enum view_DSpa
     long dummy;
     long  oldheight;
     class dialog *d=(class dialog *)(this)->GetDataObject();
-    int style;
     
     this->didsizeonce=TRUE;
     
@@ -289,8 +288,6 @@ view_DSattributes dialogv::DesiredSize(long  width, long  height, enum view_DSpa
 	return (view_DSattributes) (view_HeightFlexible | view_WidthFlexible);
     }
 
-    style=(d)->GetStyle();
-    
     if(width<0 || width>32767) width=((class view *)this)->parent?(((class view *)this)->parent)->GetLogicalWidth(): 500;
     
     

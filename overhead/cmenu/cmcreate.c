@@ -26,23 +26,18 @@
 */
 
 #include <andrewos.h>
+#include <util.h>
 #include <X11/Xlib.h>
 #include <cmintern.h>
 #include <crsrimg.h>
 #include <wormimg.h>
 #include <shadows.h>
 
-char *getprofile();
-int getprofileswitch();
-
 #define FONTHEIGHT(f) (f->max_bounds.ascent + f->max_bounds.descent)
 
 static struct cmenudata *menuDataList = NULL;
 
-static Window GetMenuWindow(display, parent, dp)
-Display *display;
-Window parent;
-struct cmenudata *dp;
+static Window GetMenuWindow(Display *display, Window parent, struct cmenudata *dp)
 {
 
     XSetWindowAttributes xswa;
@@ -91,10 +86,7 @@ struct cmenudata *dp;
 			  ((dp->useSaveUnder) ? CWSaveUnder : 0) | CWEventMask | CWCursor, &xswa);
 }
 
-static int GetGCs(dp, window, def_env)
-struct cmenudata *dp;
-Window window;
-char *def_env;
+static int GetGCs(struct cmenudata *dp, Window window, const char *def_env)
 {
     Display *display = dp->dpy;    
     GC tempgc;
@@ -114,10 +106,10 @@ char *def_env;
     0xAAAAAAAA
     };
     unsigned long tileOrStipple = 0;
-    unsigned long color;
+    unsigned long color = 0;
     int colorDisplay = FALSE;
     int newshadows=getprofileswitch("UseNewShadows", TRUE);
-    XColor grayColor, foreColor, backColor, topshadowColor, bottomshadowColor, exact, keysColor;
+    XColor grayColor, foreColor, backColor, topshadowColor, bottomshadowColor, keysColor;
 
     newshadows=getprofileswitch("PopupUseNewShadows", newshadows);
     foreColor.pixel=BlackPixel(display, DefaultScreen(display));
@@ -315,16 +307,13 @@ error:
     return -1;
 }
 
-static int GetDisplayInfo(dpy, menu, def_env)
-Display *dpy;
-struct cmenu *menu;
-char *def_env;
+static int GetDisplayInfo(Display *dpy, struct cmenu *menu, const char *def_env)
 {
 
     struct cmenudata *dp;
     Window rootWindow;
-    char *def_val;
-    char *fontName;
+    const char *def_val;
+    const char *fontName;
     boolean iscolor = FALSE;
     boolean motif_default = FALSE;
 
@@ -412,7 +401,7 @@ char *def_env;
 	strcpy(dp->backgroundColor,def_val);
     }
     else {
-	char *col = "white";
+	const char *col = "white";
 	if (dp->motifMenus && iscolor) col = "gray75";
 	dp->backgroundColor = (char*)malloc(strlen(col)+1);
 	strcpy(dp->backgroundColor,col);
@@ -558,11 +547,11 @@ error:
       return -1;
 }
 
-struct cmenu *cmenu_Create(dpy, parent, def_env, freeFunction)
-Display *dpy;		/* Display structure pointer. */
-Window parent;		/* Window ID of the menu's parent window. */
-const char *def_env;	/* X Defaults program environment name. */
-void (*freeFunction)();
+struct cmenu *cmenu_Create(
+Display *dpy,		/* Display structure pointer. */
+Window parent,		/* Window ID of the menu's parent window. */
+const char *def_env,	/* X Defaults program environment name. */
+cmenu_FreeFunction freeFunction)
 {
 
     struct cmenu *menu;

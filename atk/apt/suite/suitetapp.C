@@ -572,7 +572,7 @@ suitetapp::Start( )
   ((class suite*)test_view)->SetDebug(TRUE);
   text_data = new text;
   (text_data)->InsertCharacters( 0, instructions, sizeof(instructions) - 1);
-  if (file = fopen("suiteta.c", "r")) {
+  if ((file = fopen("suiteta.c", "r"))) {
       filetype::Lookup(file, (char *) 0, &id, 0);
       (text_data)->Read( file, id);
       fclose(file);

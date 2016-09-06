@@ -177,6 +177,8 @@ boolean urlbuttonview::Touch(int ind, enum view_MouseAction action)
 	case view_LeftDown:
 	    OpenURL(b->GetURL());
 	    break;
+	default:
+	    break;
     }
     return FALSE;
 }

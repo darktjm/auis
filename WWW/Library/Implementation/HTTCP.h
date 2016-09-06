@@ -40,11 +40,11 @@ Connection Management
    visited hosts.
    
  */
-extern int HTDoConnect PARAMS(( HTNetInfo       *net,
+extern int HTDoConnect ( HTNetInfo       *net,
                                 char            *url,
                                 u_short         default_port,
                                 u_long          *addr,
-                                BOOL            use_cur));/*
+                                BOOL            use_cur);/*
 
   PASSIVE CONNECTION ESTABLISHMENT
   
@@ -52,7 +52,7 @@ extern int HTDoConnect PARAMS(( HTNetInfo       *net,
    MAX_ACCEPT_POLL is reached.
    
  */
-extern int HTDoAccept PARAMS((HTNetInfo *net));/*
+extern int HTDoAccept (HTNetInfo *net);/*
 
 Caching Hosts Names
 
@@ -74,14 +74,14 @@ Caching Hosts Names
    exponentially for all the entries.
    
  */
-extern void HTTCPAddrWeights PARAMS((char * host, time_t deltatime));/*
+extern void HTTCPAddrWeights (char * host, time_t deltatime);/*
 
   CLEANUP THE MEMORY
   
    This function is called from HTLibTerminate.
    
  */
-extern void HTTCPCacheRemoveAll NOPARAMS;/*
+extern void HTTCPCacheRemoveAll (void);/*
 
   CONTROL VARIABLES
   
@@ -98,7 +98,7 @@ System Description of Error Message
    local file access.
    
  */
-extern CONST char * HTErrnoString PARAMS((int errornumber));/*
+extern CONST char * HTErrnoString (int errornumber);/*
 
   PARSE A CARDINAL VALUE
   
@@ -117,9 +117,9 @@ extern CONST char * HTErrnoString PARAMS((int errornumber));/*
 **      *pstatus points to status updated iff bad
 */
 
-extern unsigned int HTCardinal PARAMS((int *            pstatus,
+extern unsigned int HTCardinal (int *            pstatus,
                                        char **          pp,
-                                       unsigned int     max_value));/*
+                                       unsigned int     max_value);/*
 
 Internet Name Server Functions
 
@@ -132,7 +132,7 @@ Internet Name Server Functions
    points to static memory which must be copied if it is to be kept.
    
  */
-extern CONST char * HTInetString PARAMS((struct sockaddr_in * sin));/*
+extern CONST char * HTInetString (struct sockaddr_in * sin);/*
 
   PARSE AN INTERNET NODE ADDRESS AND PORT
   
@@ -144,9 +144,9 @@ extern CONST char * HTInetString PARAMS((struct sockaddr_in * sin));/*
    in *sin. On success, the number of homes on the host is returned.
    
  */
-extern int HTParseInet PARAMS(( struct sockaddr_in *    sin,
+extern int HTParseInet ( struct sockaddr_in *    sin,
                                 CONST char *            str,
-                                BOOL                    use_cur));/*
+                                BOOL                    use_cur);/*
 
   NAME OF A MACHINE ON THE OTHER SIDE OF A SOCKET
   
@@ -157,7 +157,7 @@ extern int HTParseInet PARAMS(( struct sockaddr_in *    sin,
    host name, see HTGetHostName()
    
  */
-extern char * HTGetHostBySock PARAMS((int soc));/*
+extern char * HTGetHostBySock (int soc);/*
 
   HOST ADDRESS RETUNED FOR SPECIFIED HOST NAME
   
@@ -167,7 +167,7 @@ extern char * HTGetHostBySock PARAMS((int soc));/*
    multi-homed host then 1 is returned.
    
  */
-extern int HTGetHostByName PARAMS((char *host, SockA *sin, BOOL use_cur));/*
+extern int HTGetHostByName (char *host, SockA *sin, BOOL use_cur);/*
 
   GET NAME OF THIS MACHINE
   
@@ -175,7 +175,7 @@ extern int HTGetHostByName PARAMS((char *host, SockA *sin, BOOL use_cur));/*
    this host or NULL if not available.
    
  */
-extern CONST char * HTGetHostName NOPARAMS;/*
+extern CONST char * HTGetHostName (void);/*
 
   SET NAME OF THIS MACHINE
   
@@ -186,14 +186,14 @@ extern CONST char * HTGetHostName NOPARAMS;/*
    function will use the new host and domain name.
    
  */
-extern void HTSetHostName PARAMS((char * host));/*
+extern void HTSetHostName (char * host);/*
 
   CLEANUP MEMORY
   
    Called from HTLibTerminate
    
  */
-extern void HTFreeHostName NOPARAMS;/*
+extern void HTFreeHostName (void);/*
 
   GET DOMAIN NAME OF THIS MACHINE
   
@@ -201,7 +201,7 @@ extern void HTFreeHostName NOPARAMS;/*
    HTGetHostName() function. Changing the domain name requires a call to  HTSetHostname().
    
  */
-extern CONST char *HTGetDomainName NOPARAMS;/*
+extern CONST char *HTGetDomainName (void);/*
 
   GET USER MAIL ADDRESS
   
@@ -211,7 +211,7 @@ extern CONST char *HTGetDomainName NOPARAMS;/*
    hostname is as returned by HTGetHostName().
    
  */
-extern CONST char * HTGetMailAddress NOPARAMS;/*
+extern CONST char * HTGetMailAddress (void);/*
 
   SET USER MAIL ADDRESS
   
@@ -219,14 +219,14 @@ extern CONST char * HTGetMailAddress NOPARAMS;/*
    the user to change the value in the  From field in the HTTP Protocol.
    
  */
-extern void HTSetMailAddress PARAMS((char * address));/*
+extern void HTSetMailAddress (char * address);/*
 
   FREE MEMORY
   
    Called by HTLibTerminate
    
  */
-extern void HTFreeMailAddress NOPARAMS;/*
+extern void HTFreeMailAddress (void);/*
 
 Signal Handling
 
@@ -235,7 +235,7 @@ Signal Handling
    
  */
 #ifdef WWWLIB_SIG
-extern void HTSetSignal NOPARAMS;
+extern void HTSetSignal (void);
 #endif
 
 #endif   /* HTTCP_H *//*

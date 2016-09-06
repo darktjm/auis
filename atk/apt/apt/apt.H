@@ -215,7 +215,6 @@ Initial revision
 #ifndef DEBUG
 /* char    debug; */
 #ifdef  DB
-#ifdef ANSI_CPP
 #define  IN( x )	    if ( debug ) printf( ">" #x "\n" );
 #define  OUT( x )	    if ( debug ) printf( "<" #x "\n" );
 #define  DEBUG( y )	    if ( debug ) printf( " %s\n", #y );
@@ -229,21 +228,6 @@ Initial revision
 #define  DEBUGgt( t, y )    if ( debug ) printf( " "#t": %g\n", y );
 #define  DEBUGx( y )	    if ( debug ) printf( " %x\n", y );
 #define  DEBUGxt( t, y )    if ( debug ) printf( " "#t": %x\n", y );
-#else /* __STDC__ */
-#define  IN( x )	    if ( debug ) printf( ">x\n" );
-#define  OUT( x )	    if ( debug ) printf( "<x\n" );
-#define  DEBUG( y )	    if ( debug ) printf( " %s\n", "y" );
-#define  DEBUGc( y )	    if ( debug ) printf( " '%c'\n", "y" );
-#define  DEBUGct( t, y )    if ( debug ) printf( " t: '%c'\n", y );
-#define  DEBUGs( y )	    if ( debug ) printf( " '%s'\n", "y" );
-#define  DEBUGst( t, y )    if ( debug ) printf( " t: '%s'\n", y );
-#define  DEBUGd( y )	    if ( debug ) printf( " %d\n", y );
-#define  DEBUGdt( t, y )    if ( debug ) printf( " t: %d\n", y );
-#define  DEBUGlt( t, y )    if ( debug ) printf( " t: %D\n", y );
-#define  DEBUGgt( t, y )    if ( debug ) printf( " t: %g\n", y );
-#define  DEBUGx( y )	    if ( debug ) printf( " %x\n", y );
-#define  DEBUGxt( t, y )    if ( debug ) printf( " t: %x\n", y );
-#endif /* __STDC__ */
 #else
 #define  IN( x )
 #define  OUT( x )

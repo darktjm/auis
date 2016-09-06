@@ -39,7 +39,7 @@ form <CODE>%xy</CODE> where <CODE>x</CODE> and <CODE>y</CODE> are two
 hex digits.
 
 <PRE>
-extern char * HTEscape PARAMS((CONST char * str, unsigned char mask));
+extern char * HTEscape (CONST char * str, unsigned char mask);
 </PRE>
 
 The following are valid mask values. The terms are the BNF names in
@@ -59,7 +59,7 @@ acsii hex code for character 16x+y. The string is converted in place,
 as it will never grow.
 
 <PRE>
-extern char * HTUnEscape PARAMS(( char * str));
+extern char * HTUnEscape ( char * str);
 
 
 #endif	/* HTESCAPE_H */

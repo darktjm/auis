@@ -58,8 +58,7 @@ extern int STUniqueID();
 void CloseFiles(), AbsorbSpace();
 long int ParseText();
 
-void ParseMain(Filein, Fileout)
-     char *Filein, *Fileout;
+void ParseMain(char *Filein, char *Fileout)
 {
   int token;
   
@@ -92,15 +91,15 @@ void ParseMain(Filein, Fileout)
   printf("* Finished processing %ld lines of %s.\n", CurrLine, Filein);
 }
 
+extern int ExecuteSpecial(char character);
+int ReplaceText(char *instruction, int mode, char tofind);
 
-long int ParseText(tofind, prepend, append, transform, action)
-     int tofind, transform, action;
-     char *prepend, *append;
+long int ParseText(int tofind, char *prepend, char *append, int transform, int action)
 {
   char ch, ch2, *instruction, *tmp_instruction, 
   *GetInstruction(), *makelower();
   TABLE tmp, FindNode();
-  int Execute(), ReplaceText(), i, in, in2, counter;
+  int Execute(), i, in, in2, counter;
   long int tempcurrline;
 
   instruction = (char *) calloc (TMP_SIZE, sizeof(char));
@@ -206,9 +205,7 @@ return(CurrLine++);
 }
 
 
-TABLE FindNode(field, string)
-     int field;
-     char *string;
+TABLE FindNode(int field, char *string)
 {
   TABLE tmp=Table;
 
@@ -241,8 +238,7 @@ TABLE FindNode(field, string)
 }
 
 
-int ExecuteSpecial(character)
-     char character;
+int ExecuteSpecial(char character)
 {
   TABLE tmp;
   char string[2];
@@ -265,7 +261,7 @@ int ExecuteSpecial(character)
 }
 
 
-char *GetInstruction()
+char *GetInstruction(void)
 {
   char character, *instruction;
   int in;
@@ -300,8 +296,7 @@ char *GetInstruction()
 
 
 
-int Execute(instruction)
-     char *instruction;
+int Execute(char *instruction)
 {
   TABLE tmp;
   char ch, close;
@@ -354,9 +349,7 @@ int Execute(instruction)
 }
 
 
-int ReplaceText(instruction, mode, tofind)
-     char *instruction, tofind;
-     int mode;
+int ReplaceText(char *instruction, int mode, char tofind)
 {
   if(mode & NAKED)
     {

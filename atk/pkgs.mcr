@@ -185,12 +185,6 @@ DIRLIBS(APPS,apps,)
 /*  enforce required builds			*/
 /* ================================= */
 
-#if defined(AMS_ENV) && !defined(MK_APT)
-#define MK_APT
-#endif
-#if defined(AMS_ENV) && !defined(MK_ORG)
-#define MK_ORG
-#endif
 #if !defined(MK_APT) && (defined(MK_BUSH) || defined(MK_APT) || defined(MK_ZIP))
 #define MK_APT
 #endif

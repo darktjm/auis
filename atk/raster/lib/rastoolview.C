@@ -1127,6 +1127,8 @@ static void Tool_SolidRect(class rastoolview  *self, enum view_MouseAction  acti
 	    FillRectangle(self, self->rockx, self->rocky, self->lastx, self->lasty, self->pattern);
 	    (pix)->NotifyObservers( raster_BITSCHANGED);
 	    break;
+	default:
+	    break;
     }
 }
 
@@ -1157,6 +1159,8 @@ static void Tool_SolidCircle(class rastoolview  *self, enum view_MouseAction  ac
 	    DrawCircle(self->primaryview, self->rockx, self->rocky, self->lastx, ZRPATTERN_INVERT, ZRBRUSH_PIXEL);
 	    FillCircle(self, self->rockx, self->rocky, rad, self->pattern);
 	    (pix)->NotifyObservers( raster_BITSCHANGED);
+	    break;
+	default:
 	    break;
     }
 }
@@ -1193,6 +1197,8 @@ static void Tool_SolidEllipse(class rastoolview  *self, enum view_MouseAction  a
 	    FillEllipse(self, self->rockx, self->rocky, xrad, yrad, self->pattern);
 	    (pix)->NotifyObservers( raster_BITSCHANGED);
 	    break;
+	default:
+	    break;
     }
 }
 
@@ -1214,6 +1220,8 @@ static void Tool_Paint(class rastoolview  *self, enum view_MouseAction  action, 
 	    (pix)->NotifyObservers( raster_BITSCHANGED);
 	    break;
 	case view_LeftUp: 
+	    break;
+	default:
 	    break;
     }
 }
@@ -1241,6 +1249,8 @@ static void Tool_Line(class rastoolview  *self, enum view_MouseAction  action, l
 	    DrawLine(self->primaryview, self->rockx, self->rocky, x, y, self->pattern, self->brush);
 	    pix = ((class raster *)self->primaryobj)->GetPix();
 	    (pix)->NotifyObservers( raster_BITSCHANGED);
+	    break;
+	default:
 	    break;
     }
 }
@@ -1273,6 +1283,8 @@ static void Tool_Circle(class rastoolview  *self, enum view_MouseAction  action,
 	    DrawCircle(self->primaryview, self->rockx, self->rocky, rad, self->pattern, self->brush);
 	    pix = ((class raster *)self->primaryobj)->GetPix();
 	    (pix)->NotifyObservers( raster_BITSCHANGED);
+	    break;
+	default:
 	    break;
     }
 }
@@ -1312,6 +1324,8 @@ static void Tool_Ellipse(class rastoolview  *self, enum view_MouseAction  action
 	    pix = ((class raster *)self->primaryobj)->GetPix();
 	    (pix)->NotifyObservers( raster_BITSCHANGED);
 	    break;
+	default:
+	    break;
     }
 }
 
@@ -1341,12 +1355,13 @@ static void Tool_Rectangle(class rastoolview  *self, enum view_MouseAction  acti
 	    pix = ((class raster *)self->primaryobj)->GetPix();
 	    (pix)->NotifyObservers( raster_BITSCHANGED);
 	    break;
+	default:
+	    break;
     }
 }
 
 static void Tool_Text(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks)
 {
-    class rasterimage *pix;
     struct rectangle *VS, *sel;
     long w, h;
 
@@ -1419,6 +1434,8 @@ static void Tool_Text(class rastoolview  *self, enum view_MouseAction  action, l
 		(self->primaryview)->OverlayInset( "text");
 	    }
 	    RepostMenus(self);
+	    break;
+	default:
 	    break;
     }
 }
@@ -1640,6 +1657,8 @@ static void Tool_Paste(class rastoolview  *self, enum view_MouseAction  action, 
 
 	    RepostMenus(self);
 	    break;
+	default:
+	    break;
     }
 }
 
@@ -1692,14 +1711,13 @@ static void FloodSplot(class rastoolview  *self)
     class rasterimage *fillpix = self->fillpix;
     long wid = (pix)->GetWidth();
     long hgt = (pix)->GetHeight();
-    long xp, yp, startu, startd;
-    long xmin, xmax, ymin, ymax;
-    int wallu, walld;
+    long xp, yp, startu = 0, startd = 0;
+    long xmax, ymin, ymax;
+    int wallu = 0, walld = 0;
     struct span *tmp;
     int bit;
     int numpoints = 0;
 
-    xmin = wid;
     ymin = hgt;
     xmax = -1;
     ymax = -1;
@@ -1746,7 +1764,6 @@ static void FloodSplot(class rastoolview  *self)
 	}
 	if (yp>ymax) ymax = yp;
 	if (yp<ymin) ymin = yp;
-	if (xp<xmax) xmin = xp;
 	for (; xp<wid && (fillpix)->GetPixel( xp, yp)==bit; xp++) {
 	    int tbit;
 	    if (self->pattern==ZRPATTERN_INVERT)
@@ -1833,6 +1850,8 @@ static void Tool_SprayPaint(class rastoolview  *self, enum view_MouseAction  act
 	case view_LeftUp:
 	    self->rock = 0;
 	    break;
+	default:
+	    break;
     }
 }
 
@@ -1879,6 +1898,8 @@ static void Tool_CurvePaint(class rastoolview  *self, enum view_MouseAction  act
 
 	case view_LeftUp:
 	    self->rock = 0;
+	    break;
+	default:
 	    break;
     }
 }

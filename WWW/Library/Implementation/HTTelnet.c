@@ -37,7 +37,7 @@
 **	-----------------------------------------------------
 **	Function taken from Mosaic's HTTelnet.c.
 */
-PRIVATE void make_system_secure ARGS1(char *, str)
+PRIVATE void make_system_secure (char * str)
 {
 	char *ptr1, *ptr2;
 
@@ -80,7 +80,7 @@ PRIVATE void make_system_secure ARGS1(char *, str)
 /*	Telnet or "rlogin" access
 **	-------------------------
 */
-PRIVATE int remote_session ARGS2(char *, access, char *, host)
+PRIVATE int remote_session (char * access, char * host)
 {
 	char * user = host;
 	char * hostname = strchr(host, '@');
@@ -245,7 +245,7 @@ PRIVATE int remote_session ARGS2(char *, access, char *, host)
 **			(See WWW.h)
 **
 */
-PRIVATE int HTLoadTelnet ARGS1(HTRequest *, request)
+PRIVATE int HTLoadTelnet (HTRequest * request)
 {
     char * access;
     CONST char * addr = HTAnchor_physical(request->anchor);

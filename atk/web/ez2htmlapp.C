@@ -614,6 +614,8 @@ ConvertInsets(htmltext *htxt, long pos, htmlenv *env,
 		}
 		wh = whatt;
 	}	break;
+	case ez2html_NOGIFS:
+		break;
 	}
 
 	// replace inset at pos with image object for gif
@@ -633,7 +635,7 @@ ConvertInsets(htmltext *htxt, long pos, htmlenv *env,
 	image *dat = new gif;
 	if ( ! dat) 
 		return FALSE;
-	/* dat->Load(nmbuf);	/* the gut of GetImage (not really needed) */
+	/* dat->Load(nmbuf);	// the gut of GetImage (not really needed) */
 
 	htmlenv *ienv = (htmlenv *)htxt->AlwaysReplaceWithView(pos, 1,
 				"htmlimagev", dat);
@@ -665,8 +667,8 @@ ManageGifFiles(ez2htmlapp *self, htmltext* htxt) {
 
 	// scan directory pathbuf for files named outFileNm.NNN.gif 
 	dir = opendir(pathbuf);
-	while (fileent=readdir(dir)) {
-		char c, *dot = fileent->d_name+nmlen;
+	while ((fileent=readdir(dir))) {
+		char *dot = fileent->d_name+nmlen;
 		if (*dot != '.') continue;
 		if (strncmp(self->outFileNm, fileent->d_name, nmlen) 
 					!= 0)
@@ -693,6 +695,9 @@ ManageGifFiles(ez2htmlapp *self, htmltext* htxt) {
 				self->gifDir, fileent->d_name);
 			remove(pathbuf);
 			break;
+		case ez2html_REUSEGIFS: // already done
+		case ez2html_NOGIFS:    // nothing to do
+		        break;
 		}
 		if ( ! deleting && val > insetctr) 
 			insetctr = val;
@@ -794,7 +799,7 @@ ConvertAndWrite(ez2htmlapp *self, htmltext *htxt) {
 	struct content_chapentry *e;
 	enum {First, Middle, Last} which = First;
 	char nmbuf[3][300];
-	char *prevnm, *currnm, *nextnm, *oldprevnm;
+	char *prevnm = nmbuf[0], *currnm = nmbuf[1], *nextnm = nmbuf[2], *oldprevnm;
 	htmltext thtxt;
 	AString s;
 	int estartloc = 0, elen;		// portion of htxt defined by e
@@ -998,7 +1003,6 @@ addtodoomedlist(htmlenv *env, enum style_actions action) {
 */
 	static boolean 
 markforcleanup(long dummy, text *txt, long pos, environment *env) {
-	boolean destroyStyle=FALSE, destroyText=FALSE;
 	const char *name;
 	if (env->type != environment_Style)
 		return FALSE; /* "Next!" */
@@ -1055,8 +1059,6 @@ cleanupmarked(htmltext *txt) {
 	struct envlist *elist= doomedenvs;
 	while (elist) {
 		htmlenv *env= elist->env;
-		const char *stylename= 
-				(env->data.style)->GetName();
 		long pos = env->Eval(), len = env->GetLength();
 		if (elist->action & (action_REMOVE 
 					| action_REMOVEPARENTS))
@@ -1129,8 +1131,7 @@ cleanupmarked(htmltext *txt) {
 					by a nested **topic** style! */
 				/* turn contents of env into a 
 					HREF= attribute of htenv */
-				char *realtopic= (char *)malloc(len+1), 
-					*href= (char *)malloc(4+1);
+				char *realtopic= (char *)malloc(len+1);
 				int i;
 				for (i=0; i<len; ++i)
 					*(realtopic+i)= txt->GetChar(pos+i);

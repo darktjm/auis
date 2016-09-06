@@ -149,8 +149,11 @@ boolean ezprintapp::ParseArgs (int  argc, const char  **argv)
     int i;
     int ix;
     const char *DocumentName, *c, *printargs, *outputfile;
-    FILE *ofile,*f;
+    FILE *f;
+#if 0 // use if0'd out below
+    FILE *ofile;
     boolean indexflag;
+#endif
     class dataobject *d = NULL;
     class view *v = NULL;
     const char *objectName,*viewName;
@@ -171,7 +174,10 @@ boolean ezprintapp::ParseArgs (int  argc, const char  **argv)
     const char *ScribeVersion = NULL;
     const char *printer = NULL;
     const char *currentfile;
+#if 0 // use if0'd out below
     indexflag = FALSE;
+    ofile = stdout;
+#endif
     boolean docontents=FALSE;
     boolean enumcontents=FALSE;
     boolean printendnotes=FALSE;
@@ -184,7 +190,7 @@ boolean ezprintapp::ParseArgs (int  argc, const char  **argv)
     DocumentName = NULL;
     outputfile = NULL;
     quiet = FALSE;
-    ofile = stdout; f = NULL;
+    f = NULL;
     progname = argv[0];
     ff = (class view *) ATK::NewObject("frame");
 
@@ -199,7 +205,9 @@ boolean ezprintapp::ParseArgs (int  argc, const char  **argv)
 		case 'i':
 		case 'I':
 		    environ::Put("IndexOnly",NULL);
+#if 0 // use if0'd out below
 		    indexflag = TRUE;
+#endif
 		    break;
 		case 'e':
 		    if(argv[i][2] != '\0')

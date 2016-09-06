@@ -43,16 +43,6 @@ ATK_IMPL("xbm.H")
 #include <dataobject.H>
 #include <xbm.H>
 
-#if !defined(vax)
-/*
- * Macros for number representation conversion.
- */
-#define	ntohl(x)	(x)
-#define	ntohs(x)	(x)
-#define	htonl(x)	(x)
-#define	htons(x)	(x)
-#endif
-
 /* 
  Here is a sample X  bitmap file.  The last two defines -- for the "hot spot" for cursor tracking -- may be omitted in some files:
 
@@ -67,7 +57,7 @@ static char smiley_bits[] = {
 
 The following table is for bit-order conversion -- the low-order bits of the bitmap bytes are actually the leftmost pixels */
 
-static char flipbits[256] = {
+static const unsigned char flipbits[256] = {
     0x00,0x80,0x40,0xc0,0x20,0xa0,0x60,0xe0,0x10,0x90,0x50,0xd0,0x30,0xb0,0x70,0xf0,
     0x08,0x88,0x48,0xc8,0x28,0xa8,0x68,0xe8,0x18,0x98,0x58,0xd8,0x38,0xb8,0x78,0xf8,
     0x04,0x84,0x44,0xc4,0x24,0xa4,0x64,0xe4,0x14,0x94,0x54,0xd4,0x34,0xb4,0x74,0xf4,
@@ -160,7 +150,7 @@ long xbm::ReadImage(FILE  *file		, class pixelimage  *pix	)
 
 {
 unsigned char *location;
-long width, height, byte, value,bytewidth, i;
+long width = 0, height = 0, byte, value,bytewidth, i;
 char name[64], bits[64], *t;
 
     if (initialized == FALSE) initHexTable();
@@ -266,7 +256,7 @@ void xbm::WriteImage(FILE  *file		, class pixelimage  *pix, struct rectangle  *s
 
 	if ( i % bytewidth == (bytewidth - 1) &&
 	    0 < width % 16 && 8 >= width % 16)
-	    *location++;
+	    location++;
     }
     fprintf(file,"};");
     fprintf(file,"\n");
