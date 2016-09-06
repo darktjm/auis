@@ -72,10 +72,7 @@ extern void fatals ();
 
 
 bool
-bits_equal (L, R, n)
-BSet L;
-BSet R;
-int n;
+bits_equal (BSet L, BSet R, int n)
 {
   int i;
 
@@ -87,8 +84,7 @@ int n;
 
 
 int
-nbits (i)
-unsigned i;
+nbits (unsigned i)
 {
   int count = 0;
 
@@ -101,9 +97,7 @@ unsigned i;
 
 
 int
-bits_size (S, n)
-BSet S;
-int n;
+bits_size (BSet S, int n)
 {
   int i, count = 0;
 
@@ -113,7 +107,7 @@ int n;
 }
 
 void
-reduce_grammar ()
+reduce_grammar (void)
 {
   bool reduced;
 
@@ -174,9 +168,7 @@ reduce_grammar ()
  */
 
 static bool 
-useful_production (i, N)
-int  i;
-BSet N;
+useful_production (int  i, BSet N)
 {
   rule  r;
   short n;
@@ -197,7 +189,7 @@ BSet N;
 /* Remember that rules are 1-origin, symbols are 0-origin. */
 
 static void 
-useless_nonterminals ()
+useless_nonterminals (void)
 {
   BSet Np, Ns;
   int  i, n;
@@ -254,7 +246,7 @@ useless_nonterminals ()
 }
 
 static void 
-inaccessable_symbols ()
+inaccessable_symbols (void)
 {
   BSet  Vp, Vs, Pp;
   int   i, n;
@@ -353,7 +345,7 @@ inaccessable_symbols ()
 }
 
 static void 
-reduce_grammar_tables ()
+reduce_grammar_tables (void)
 {
 /* This is turned off because we would need to change the numbers
    in the case statements in the actions file.  */
@@ -482,7 +474,7 @@ reduce_grammar_tables ()
 }
 
 static void 
-print_results ()
+print_results (void)
 {
   int   i;
 /*  short j; JF unused */
@@ -532,7 +524,7 @@ print_results ()
 }
 
 void 
-dump_grammar ()
+dump_grammar (void)
 {
   int i;
   rule r;
@@ -569,7 +561,7 @@ dump_grammar ()
 
 
 static void 
-print_notices ()
+print_notices (void)
 {
   extern int fixed_outfiles;
 

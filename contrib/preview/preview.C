@@ -773,7 +773,7 @@ static void DoPrintCmd(class preview  *self ,int  page)
    open(self->DviFileName, O_RDONLY, 0);
 
    /* now execute the printcommand */
-   execlp("/bin/sh", "sh", "-c", PrintCommand, 0);
+   execlp("/bin/sh", "sh", "-c", PrintCommand, (char *)NULL);
    exit(0);
 
 }

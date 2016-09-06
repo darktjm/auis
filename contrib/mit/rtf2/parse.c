@@ -334,7 +334,7 @@ int ExecuteSpecial(char *character)
   TABLE tmp;
   char string[2];
   
-  sprintf(string, "%c", character);
+  sprintf(string, "%c", *character);
   
   tmp = FindNode(RTFCOLUMN, string);
   
@@ -342,7 +342,7 @@ int ExecuteSpecial(char *character)
     {
       fprintf(ferr, "* Fatal error:\n* %s: %s\n%s%c%s\n%s\n%s\n",        me,
 	      "  Defective translation table:  ~", 
-	      "  RTFchars entry promises meaning for \"", character, "\",",
+	      "  RTFchars entry promises meaning for \"", *character, "\",",
 	      "  but there is no corresponding entry.",
 	      "  Program terminating.");
       exit(0);

@@ -122,7 +122,7 @@ int make_socket(int  port)
     return(desc);
 }
 
-int OpenConsoleSocket()
+int OpenConsoleSocket(void)
     {
     struct hostent *hent;
     int flags;
@@ -158,7 +158,7 @@ int OpenConsoleSocket()
 boolean WasUDPAction = FALSE;
 char ConsoleMessage[MESSAGESIZE+100] = "";
 extern int ConsoleSocket;
-int FakeCheckConsoleSocket()
+int FakeCheckConsoleSocket(void)
 {
     int j;
     socklen_t len;

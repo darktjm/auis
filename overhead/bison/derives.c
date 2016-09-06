@@ -33,7 +33,7 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 short **derives;
 
 void
-set_derives()
+set_derives(void)
 {
   int i;
   int lhs;
@@ -82,7 +82,7 @@ set_derives()
 }
 
 void
-free_derives()
+free_derives(void)
 {
   FREE(derives[ntokens]);
   FREE(derives + ntokens);

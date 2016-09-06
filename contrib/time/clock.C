@@ -271,12 +271,13 @@ clock__ReadDataPart(class clock  *self, FILE  *fp)
 
   if ((buf = ReadLine(fp)) == NULL)
     return(dataobject_PREMATUREEOF);
-  if ((self->options.fontfamily = (char *)malloc(201*sizeof(char))) == NULL)
+  char *ff;
+  if ((self->options.fontfamily = ff = (char *)malloc(201*sizeof(char))) == NULL)
     return(dataobject_OBJECTCREATIONFAILED);
   if (sscanf(buf, "labels, %d, %d, %200s",	
 	     &(self->options.num_labels),
 	     &(self->options.fontface),
-	     self->options.fontfamily) < 3)
+	     ff) < 3)
     return(dataobject_PREMATUREEOF);
   free(buf);
 

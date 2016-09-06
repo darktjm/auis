@@ -60,7 +60,7 @@ double se_th_rolloff = SE_TH_ROLLOFF;
 double invcos2();
 
 FV
-FvAlloc()
+FvAlloc(void)
 {
 	FV fv;
 	
@@ -70,16 +70,14 @@ FvAlloc()
 	return fv;
 }
 void
-FvFree(fv)
-FV fv;
+FvFree(FV fv)
 {
 	FreeVector(fv->y);
 	free((char *) fv);
 }
 
 void
-FvInit(fv)
-FV fv;
+FvInit(FV fv)
 {
 	int i;
 
@@ -96,8 +94,7 @@ FV fv;
 }
 
 void
-FvAddPoint(fv, x, y, t)
-FV fv; int x, y; long t;
+FvAddPoint(FV fv, int x, int y, long t)
 {
 	double dx1, dy1, magsq1;
 	double th, absth, d;
@@ -106,7 +103,7 @@ FV fv; int x, y; long t;
 #endif
 
 	++fv->npoints;
-	ZZ('F') printf("FVAddPoint[%d] (%d,%d,%d) ", fv->npoints, x,y,t);
+	ZZ('F') printf("FVAddPoint[%d] (%d,%d,%ld) ", fv->npoints, x,y,t);
 
 	if(fv->npoints == 1) {
 		fv->starttime = fv->endtime = t;
@@ -176,8 +173,7 @@ FV fv; int x, y; long t;
 }
 
 Vector
-FvCalc(fv)
-FV fv;
+FvCalc(FV fv)
 {
 	double bblen, selen, factor;
 
@@ -229,8 +225,7 @@ FV fv;
 */
 
 double
-invcos2(m)
-double m;
+invcos2(double m)
 {
 	double x = m < 0 ? -sqrt(-m) : sqrt(m);
 	double y = sqrt( 1.0 - x * x);	/* y = sin (acos(x)) */

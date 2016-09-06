@@ -32,8 +32,7 @@ bucket *lastsymbol;
 
 
 int
-hash(key)
-char *key;
+hash(char *key)
 {
   char *cp;
   int k;
@@ -49,8 +48,7 @@ char *key;
 
 
 char *
-copys(s)
-char *s;
+copys(char *s)
 {
   int i;
   char *cp;
@@ -67,7 +65,7 @@ char *s;
 
 
 void
-tabinit()
+tabinit(void)
 {
 /*   int i; JF unused */
 
@@ -79,8 +77,7 @@ tabinit()
 
 
 bucket *
-getsym(key)
-char *key;
+getsym(char *key)
 {
   int hashval;
   bucket *bp;
@@ -127,7 +124,7 @@ char *key;
 
 
 void
-free_symtab()
+free_symtab(void)
 {
   int i;
   bucket *bp,*bptmp;/* JF don't use ptr after free */

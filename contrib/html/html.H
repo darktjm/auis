@@ -47,17 +47,17 @@ public:
     virtual void ChangeIndexable(int flag);
 
     virtual void AddLink(long pos, long len, char* uri);
-    virtual void AddEntity(long pos, long len, char* name, char* vars);
+    virtual void AddEntity(long pos, long len, const char* name, char* vars);
       virtual void AddImage(long *pos, char* path);
     virtual char* GetAnchorDest(long pos)  ;
     virtual void GetAttributeList(class environment* env, char** list, int* count);
-    virtual void ChangeAttribute(class view* tv, class environment* env, char* attr, char* value);
+    virtual void ChangeAttribute(class view* tv, class environment* env, const char* attr, char* value);
     virtual class environment*  GetEntityEnvironment(long pos, class environment* env)  ;
-    virtual char* GetAttribute(class environment* env, char* attr)  ;
-    virtual boolean TagItem(long pos, long len, char* text, char* styleName, class style* extra)  ;
+    virtual char* GetAttribute(class environment* env, const char* attr)  ;
+    virtual boolean TagItem(long pos, long len, const char* text, const char* styleName, class style* extra)  ;
     virtual int UntagItem(long pos)  ;
       virtual boolean HasErrors()  ;
-      virtual void Inform(char*msg);
+      virtual void Inform(const char*msg);
 
   
     

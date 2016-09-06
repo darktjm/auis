@@ -62,9 +62,15 @@ the full agreement.
 
 char	*recog_myalloc();	/* Do not call this function directly */
 char *recog_scopy();
-void	recog_debug();	/* printf on stderr -
+#ifdef __GNUC__
+__attribute__((format(printf,1,2)))
+#endif
+void	recog_debug(const char *a, ...);	/* printf on stderr -
 			   setting DebugFlag = 0 turns off debugging */
-void	recog_error();	/* printf on stderr, then dies */
+#ifdef __GNUC__
+__attribute__((format(printf,1,2),noreturn))
+#endif
+void	recog_error(const char *a, ...);	/* printf on stderr, then dies */
 #if 0
 int	ucstrcmp();	/* strcmp, upper case = lower case */
 #endif

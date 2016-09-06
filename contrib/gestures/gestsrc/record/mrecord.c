@@ -70,9 +70,9 @@ struct point {
 	int	path, x, y, t;	
 } p[MAXPOINTS];
 
-tcmp(p1,p2) struct point *p1,*p2; { return p1->t - p2->t; }
+int tcmp(struct point *p1,struct point *p2) { return p1->t - p2->t; }
 
-doit()
+void doit(void)
 {
 	int button;
 	int i;
@@ -202,7 +202,7 @@ top:
 	}
 }
 
-init2()
+void init2(void)
 {
 	REGIONinit2();
 
@@ -213,7 +213,7 @@ init2()
 	GDEVmenuitem("Quit", "q");
 }
 
-init1()
+void init1(void)
 {
 	REGIONinit();
 }
@@ -233,7 +233,7 @@ char 	**argv;
 double	rho = 1.0;
 
 char *
-fetcharg(c)
+fetcharg(int c)
 {
 	int i;
 	char *r;
@@ -250,9 +250,7 @@ fetcharg(c)
 	return NULL;
 }
 
-main(ac, av)
-int ac;
-char **av;
+int main(int ac, char **av)
 {
 	char *r;
 	char *outfilename = "gesture.in";

@@ -41,6 +41,7 @@ the full agreement.
 #include <andrewos.h>
 #include "util.h"
 #include <stdio.h>
+#include <stdarg.h>
 #include <ctype.h>
 
 /*
@@ -48,8 +49,7 @@ the full agreement.
  */
 
 char *
-recog_myalloc(nitems, itemsize, typename)
-char *typename;
+recog_myalloc(int nitems, int itemsize, char *typename)
 {
 	unsigned int bytes = nitems * itemsize;
 	char *p = malloc(bytes);
@@ -64,8 +64,7 @@ char *typename;
  */
 
 char *
-recog_scopy(s)
-char *s;
+recog_scopy(char *s)
 {
 	char *p = allocate(strlen(s) + 1, char);
 	(void) strcpy(p, s);
@@ -78,10 +77,12 @@ char *s;
 
 /*VARARGS1*/
 void
-recog_error(a, b, c, d, e, f, g)
-char *a;
+recog_error(const char *a, ...)
 {
-	fprintf(stderr, a, b, c, d, e, f, g);
+	va_list ap;
+	va_start(ap, a);
+	vfprintf(stderr, a, ap);
+	va_end(ap);
 	fprintf(stderr, "\n");
 	exit(1);
 }
@@ -93,19 +94,20 @@ char *a;
 int	DebugFlag = 1;
 
 void
-recog_debug(a, b, c, d, e, f, g)
-char *a;
+recog_debug(const char *a, ...)
 {
+	va_list ap;
+	va_start(ap, a);
 	if(DebugFlag)
-		fprintf(stderr, a, b, c, d, e, f, g);
+		vfprintf(stderr, a, ap);
+	va_end(ap);
 }
 
 #define	upper(c)	(islower(c) ? toupper(c) : (c))
 
 #if 0
 int
-ucstrcmp(s1, s2)
-char *s1, *s2;
+ucstrcmp(char *s1, char *s2)
 {
 	int i;
 
@@ -119,7 +121,7 @@ char *s1, *s2;
 #define NSTRINGS 3
 
 char *
-recog_tempstring()
+recog_tempstring(void)
 {
 	static char strings[NSTRINGS][100];
 	static int index;

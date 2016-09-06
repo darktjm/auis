@@ -32,7 +32,7 @@ char *nullable;
 
 
 void
-set_nullable()
+set_nullable(void)
 {
   short *r;
   short *s1;
@@ -130,7 +130,7 @@ set_nullable()
 
 
 void
-free_nullable()
+free_nullable(void)
 {
   FREE(nullable + ntokens);
 }

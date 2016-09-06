@@ -55,8 +55,7 @@ typedef	struct array_header *Array;
 
 
 Vector
-NewVector(r)
-int r;
+NewVector(int r)
 {
 	struct array_header *a;
 	Vector v;
@@ -72,15 +71,14 @@ int r;
 #ifdef CHECK
 	if(HEADER(v) != (struct array_header *) a ||
 	   NDIMS(v) != 1 || NROWS(v) != r || NCOLS(v) != 1)
-	    	printf("NewVector error: v=%x H: %x,%x  D:%d,%d  R:%d,%d  C:%d,%d\n", v,  HEADER(v), a,  NDIMS(v), 1,  NROWS(v), r, NCOLS(v), 1);
+	    	printf("NewVector error: v=%p H: %p,%p  D:%d,%d  R:%d,%d  C:%d,%d\n", v,  HEADER(v), a,  NDIMS(v), 1,  NROWS(v), r, NCOLS(v), 1);
 #endif
 
 	return v;
 }
 
 Matrix
-NewMatrix(r, c)
-int r, c;
+NewMatrix(int r, int c)
 {
 	struct array_header *a = (struct array_header *)
 	   allocate(sizeof(struct array_header) + r * sizeof(double *), char);
@@ -97,15 +95,13 @@ int r, c;
 }
 
 void
-FreeVector(v)
-Vector v;
+FreeVector(Vector v)
 {
 	free(HEADER(v));
 }
 
 void
-FreeMatrix(m)
-Matrix m;
+FreeMatrix(Matrix m)
 {
 	int i;
 
@@ -115,8 +111,7 @@ Matrix m;
 }
 
 Vector
-VectorCopy(v)
-Vector v;
+VectorCopy(Vector v)
 {
 	Vector r = NewVector(NROWS(v));
 	int i;
@@ -127,8 +122,7 @@ Vector v;
 }
 
 Matrix
-MatrixCopy(m)
-Matrix m;
+MatrixCopy(Matrix m)
 {
 	Matrix r = NewMatrix(NROWS(m), NCOLS(m));
 	int i, j;
@@ -143,8 +137,7 @@ Matrix m;
 
 
 void
-ZeroVector(v)
-Vector v;
+ZeroVector(Vector v)
 {
 	int i;
 	for(i = 0; i < NROWS(v); i++) v[i] = 0.0;
@@ -152,8 +145,7 @@ Vector v;
 
 
 void
-ZeroMatrix(m)
-Matrix m;
+ZeroMatrix(Matrix m)
 {
 	int i, j;
 	for(i = 0; i < NROWS(m); i++)
@@ -162,9 +154,7 @@ Matrix m;
 }
 
 void
-FillMatrix(m, fill)
-Matrix m;
-double fill;
+FillMatrix(Matrix m, double fill)
 {
 	int i, j;
 	for(i = 0; i < NROWS(m); i++)
@@ -173,8 +163,7 @@ double fill;
 }
 
 double
-InnerProduct(v1, v2)
-Vector v1, v2;
+InnerProduct(Vector v1, Vector v2)
 {
 	double result = 0;
 	int n = NROWS(v1);
@@ -187,8 +176,7 @@ Vector v1, v2;
 }
 
 void
-MatrixMultiply(m1, m2, prod)
-Matrix m1, m2, prod;
+MatrixMultiply(Matrix m1, Matrix m2, Matrix prod)
 {
 	int i, j, k;
 	double sum;
@@ -218,10 +206,7 @@ Compute result = v'm where
 */
 
 void
-VectorTimesMatrix(v, m, prod)
-Vector v;
-Matrix m;
-Vector prod;
+VectorTimesMatrix(Vector v, Matrix m, Vector prod)
 {
 	int i, j;
 
@@ -240,9 +225,7 @@ Vector prod;
 }	
 
 void
-ScalarTimesVector(s, v, product)
-double s;
-Vector v, product;
+ScalarTimesVector(double s, Vector v, Vector product)
 {
 	int n = NROWS(v);
 
@@ -255,9 +238,7 @@ Vector v, product;
 }
 
 void
-ScalarTimesMatrix(s, m, product)
-double s;
-Matrix m, product;
+ScalarTimesMatrix(double s, Matrix m, Matrix product)
 {
 	int i, j;
 
@@ -277,9 +258,7 @@ Matrix m, product;
  */
 
 double
-QuadraticForm(v, m)
-Vector v;
-Matrix m;
+QuadraticForm(Vector v, Matrix m)
 {
 	int i, j, n;
 	double result = 0;
@@ -327,8 +306,7 @@ int	DebugInvertMatrix = 0;
 #define _abs(x) ((x)>=0 ? (x) : -(x))
 
 double
-InvertMatrix(ym, rm)
-Matrix ym, rm;
+InvertMatrix(Matrix ym, Matrix rm)
 {
 	int i, j, k;
 	double det, biga, recip_biga, hold;
@@ -454,9 +432,7 @@ Matrix ym, rm;
 #include "bitvector.h"
 
 Vector
-SliceVector(v, rowmask)
-Vector v;
-BitVector rowmask;
+SliceVector(Vector v, BitVector rowmask)
 {
 	int i, ri;
 
@@ -468,9 +444,7 @@ BitVector rowmask;
 }
 
 Matrix
-SliceMatrix(m, rowmask, colmask)
-Matrix m;
-BitVector rowmask, colmask;
+SliceMatrix(Matrix m, BitVector rowmask, BitVector colmask)
 {
 	int i, ri, j, rj;
 
@@ -490,11 +464,7 @@ BitVector rowmask, colmask;
 }
 
 Matrix
-DeSliceMatrix(m, fill, rowmask, colmask, r)
-Matrix m;
-double fill;
-BitVector rowmask, colmask;
-Matrix r;
+DeSliceMatrix(Matrix m, double fill, BitVector rowmask, BitVector colmask, Matrix r)
 {
 	int i, ri, j, rj;
 
@@ -513,9 +483,7 @@ Matrix r;
 }
 
 void
-OutputVector(f, v)
-FILE *f;
-Vector v;
+OutputVector(FILE *f, Vector v)
 {
 	int i;
 	fprintf(f, " V %d   ", NROWS(v));
@@ -525,8 +493,7 @@ Vector v;
 }
 
 Vector
-InputVector(f)
-FILE *f;
+InputVector(FILE *f)
 {
 	Vector v;
 	int i;
@@ -545,8 +512,7 @@ FILE *f;
 }
 
 void
-OutputMatrix(f, m)
-Matrix m;
+OutputMatrix(FILE *f, Matrix m)
 {
 	int i, j;
 	fprintf(f, " M %d %d\n", NROWS(m), NCOLS(m));
@@ -558,8 +524,7 @@ Matrix m;
 }
 
 Matrix
-InputMatrix(f)
-FILE *f;
+InputMatrix(FILE *f)
 {
 	Matrix m;
 	int i, j;
@@ -579,8 +544,7 @@ FILE *f;
 }
 
 double
-InvertSingularMatrix(m, inv)
-Matrix m, inv;
+InvertSingularMatrix(Matrix m, Matrix inv)
 {
 	int i, j, k;
 	BitVector mask;
@@ -681,24 +645,20 @@ found:
 
 /* You can fairly confidently ignore the compiler warnings after here */
 
-void
-PrintVector(v, s,a1,a2,a3,a4,a5,a6,a7,a8)
-Vector v;
-char *s; int a1,a2,a3,a4,a5,a6,a7,a8;
+static void
+vPrintVector(Vector v, const char *s,va_list ap)
 {
 	int i;
-	printf(s,a1,a2,a3,a4,a5,a6,a7,a8);
+	vprintf(s,ap);
 	for(i = 0; i < NROWS(v); i++) printf(" %8.4f", v[i]);
 	printf("\n");
 }
 
-void
-PrintMatrix(m, s,a1,a2,a3,a4,a5,a6,a7,a8)
-Matrix m;
-char *s; int a1,a2,a3,a4,a5,a6,a7,a8;
+static void
+vPrintMatrix(Matrix m, const char *s,va_list ap)
 {
 	int i, j;
-	printf(s,a1,a2,a3,a4,a5,a6,a7,a8);
+	vprintf(s,ap);
 	for(i = 0; i < NROWS(m);  i++) {
 		for(j = 0; j < NCOLS(m); j++)
 			printf(" %8.4f", m[i][j]);
@@ -706,14 +666,34 @@ char *s; int a1,a2,a3,a4,a5,a6,a7,a8;
 	}
 }
 
-PrintArray(a, s,a1,a2,a3,a4,a5,a6,a7,a8)
-Array a;
-char *s; int a1,a2,a3,a4,a5,a6,a7,a8;
+void PrintVector(Vector v, const char *fmt, ...)
 {
-	switch(NDIMS(a)) {
-	case 1: PrintVector((Vector) a, s,a1,a2,a3,a4,a5,a6,a7,a8); break;
-	case 2: PrintMatrix((Matrix) a, s,a1,a2,a3,a4,a5,a6,a7,a8); break;
-	default: recog_error("PrintArray");
-	}
+    va_list ap;
+    va_start(ap, fmt);
+    vPrintVector(v, fmt, ap);
+    va_end(ap);
 }
 
+
+void PrintMatrix(Matrix m, const char *fmt, ...)
+{
+    va_list ap;
+    va_start(ap, fmt);
+    vPrintMatrix(m, fmt, ap);
+    va_end(ap);
+}
+
+
+#if 0
+static void PrintArray(Array a, const char *, ...)
+{
+	va_list ap;
+	va_start(ap, s);
+	switch(NDIMS(a)) {
+	case 1: vPrintVector((Vector) a, s,ap); break;
+	case 2: vPrintMatrix((Matrix) a, s,ap); break;
+	default: recog_error("PrintArray");
+	}
+	va_end(ap);
+}
+#endif

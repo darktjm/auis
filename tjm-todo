@@ -6,7 +6,6 @@
   - enable scroll wheel
   - continuous update when dragging bar
 - fix lack of updates when resizing windows
-- fix pseudo-tty allocation to use ptmx (overhead/util/lib/getpty.c)
 - fix contrib/tm to use termios, etc.
 - tests all apps, all insets, all docs, etc.
   - squash any crashes
@@ -42,12 +41,12 @@
   - remove any unsupportable code (i.e., old UNIX, DOS, OS/2)
   - remove any functions which duplicate standard functions (e.g. strdup)
 - find out and possibly remove additional CMU/MIT-specific crap
-  - figure out what "AFS integration" means
-  - find out what AMS is/does and maybe drop it
   - remove all packages available elsewhere; e.g. peg, tiff
     (making sure there is no afs/atk "enhancement" first)
 - build improvements
   - make it possible to build w/o simultaneous install
+    It's possible to do "make Makefiles; make All", but some places depend
+      on libs/headers from previous dirs to be installed
   - make it possible to use -k and -j
   - don't always regenerate deps, and clean up dep generation
   - maybe just switch to cmake

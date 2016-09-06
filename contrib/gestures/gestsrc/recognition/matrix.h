@@ -78,8 +78,14 @@ Vector	NewVector();	/* int r; (number of rows) */
 Matrix	NewMatrix();	/* int r, c; (number of rows, number of columns) */
 void	FreeVector();	/* Vector v; */
 void	FreeMatrix();	/* Matrix m; */
-void	PrintVector();	/* Vector v; char *fmt; any a1,a2,a3,a4,a5,a6,a7,a8 */
-void	PrintMatrix();	/* Matrix m; char *fmt; any a1,a2,a3,a4,a5,a6,a7,a8 */
+#ifdef __GNUC__
+__attribute__((format(printf,2,3)))
+#endif
+void	PrintVector(Vector v, const char *fmt, ...);
+#ifdef __GNUC__
+__attribute__((format(printf,2,3)))
+#endif
+void	PrintMatrix(Matrix m, const char *fmt, ...);
 double	InnerProduct();	/* Vector v1, v2 */
 void	MatrixMultiply(); /* Matrix m1, m2, prod; */
 void	VectorTimesMatrix(); /* Vector v; Matrix m; Vector prod; */

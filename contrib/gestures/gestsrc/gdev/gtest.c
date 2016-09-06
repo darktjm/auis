@@ -49,14 +49,12 @@ static	char  	*Tests = NULL;
 int	argc;
 char 	**argv;
 
-int input_test();
-int output_test();
-int menu_test();
-int draw_test();
+void input_test();
+void output_test();
+void menu_test();
+void draw_test();
 
-main(ac, av)
-int ac;
-char **av;
+int main(int ac, char **av)
 {
 	argc = ac;
 	argv = av;
@@ -67,11 +65,10 @@ char **av;
 	DoTest('i', input_test);
 	DoTest('d', draw_test);
 	GDEVstop();
+	return 0;
 }
 
-DoTest(c, test)
-int c;
-int (*test)();
+void DoTest(int c, void (*test)(void))
 {
 	if(Tests == NULL || strchr(Tests, c)) {
 		(*test)();
@@ -92,7 +89,7 @@ int (*test)();
 #define    RIGHT_UP		  	013
 
 char *
-fetcharg(c)
+fetcharg(int c)
 {
 	int i;
 	char *r;
@@ -109,7 +106,7 @@ fetcharg(c)
 	return NULL;
 }
 
-init()
+void init(void)
 {
 	char *r;
 
@@ -150,7 +147,7 @@ init()
 	init_mouse();
 }
 
-init_mouse()
+void init_mouse(void)
 {
 	char rv[3];
 
@@ -178,7 +175,7 @@ init_mouse()
 
 }
 
-Wait()
+void Wait(void)
 {
 	int c;
 	int button;
@@ -212,7 +209,7 @@ Wait()
 /* ------------------- tests ------------------------ */
 
 
-output_test()
+void output_test(void)
 {
 	int width, height;
 	int xincr, yincr;
@@ -250,13 +247,13 @@ output_test()
 	GDEVseti("thickness", 1);
 }
 
-input_test()
+void input_test(void)
 {
 	printf("-------- Input Test ---------\n");
 }
 
 
-menu_test()
+void menu_test(void)
 {
 	printf("-------- Menu Test ---------\n");
 
@@ -265,7 +262,7 @@ menu_test()
 	GDEVmenuitem("Quit", "q");
 }
 
-draw_test()
+void draw_test(void)
 {
 	int x, y;
 	int lx, ly;

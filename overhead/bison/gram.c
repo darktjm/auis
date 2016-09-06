@@ -53,6 +53,6 @@ int error_token_number;
    when the file in question contains data definitions only.  */
 
 void
-dummy()
+dummy(void)
 {
 }

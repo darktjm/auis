@@ -64,8 +64,7 @@ struct dll
 
 static
 Dll
-DllNull(datasize)
-int datasize;
+DllNull(int datasize)
 {
 	Dll h = allocate(1, struct dll);
 	h->next = h->prev = h;
@@ -74,9 +73,7 @@ int datasize;
 }
 
 void
-DllInsertElement(h, d)
-Dll h;
-DllElement d;
+DllInsertElement(Dll h, DllElement d)
 {
 	d->next = h;
 	d->prev = h->prev;
@@ -86,9 +83,7 @@ DllElement d;
 
 static
 DllElement
-DllInsertData(h, data)
-Dll h;
-Pointer data;
+DllInsertData(Dll h, Pointer data)
 {
 	DllElement d = (Dll) recog_myalloc(1, sizeof(struct dll)
 				- sizeof(h->u) + h->u.datasize, "Dll");
@@ -107,9 +102,7 @@ Pointer data;
 
 static
 void
-DllDeleteElement(h, d)
-Dll h;
-DllElement d;
+DllDeleteElement(Dll h, DllElement d)
 {
 	d->prev->next = d->next;
 	d->next->prev = d->prev;
@@ -152,9 +145,7 @@ struct checkpoint_record {
 #endif
 
 Set
-EmptySet(when_added, when_deleted, groupleader)
-void (*when_added)(), (*when_deleted)();
-Set groupleader;
+EmptySet(void (*when_added)(Set, DllElement, Pointer), void (*when_deleted)(Set, DllElement, Pointer), Set groupleader)
 {
 	Set s = allocate(1, struct set);
 	Set ss;
@@ -187,9 +178,7 @@ Set groupleader;
 #endif
 
 Element
-AddElement(s, data)
-Set s;
-Pointer data;
+AddElement(Set s, Pointer data)
 {
 	LogRecord lr;
 	DllElement d;
@@ -204,9 +193,7 @@ Pointer data;
 }
 
 void
-DeleteElement(s, e)
-Set s;
-Element e;
+DeleteElement(Set s, Element e)
 {
 	LogRecord lr;
 
@@ -219,9 +206,7 @@ Element e;
 }
 
 void
-DumpSet(s, pf)
-Set s;
-void (*pf)();
+DumpSet(Set s, void (*pf)(Pointer))
 {
 	DllElement d;
 	LogRecord *lr;
@@ -256,8 +241,7 @@ void (*pf)();
 }
 
 VersionNumber
-CheckpointSetGroup(groupleader)
-Set groupleader;
+CheckpointSetGroup(Set groupleader)
 {
 	
 	LogRecord lr;
@@ -275,12 +259,11 @@ Set groupleader;
 	return lr.u.version;
 }
 
+static void UndoSet(Set s, VersionNumber v);
+
 void
-UndoSetGroup(groupleader, v)
-Set groupleader;
-VersionNumber v;
+UndoSetGroup(Set groupleader, VersionNumber v)
 {
-	void UndoSet();
 	DllElement d;
 
 	if(groupleader->group == NULL)
@@ -297,9 +280,7 @@ VersionNumber v;
 
 static
 void
-UndoSet(s, v)
-Set s;
-VersionNumber v;
+UndoSet(Set s, VersionNumber v)
 {
 	LogRecord *lr;
 	DllElement d;
@@ -327,10 +308,7 @@ VersionNumber v;
 }
 
 void
-Map(s, fp, arg)
-Set s;
-void (*fp)();
-Pointer arg;
+Map(Set s, void (*fp)(DllElement, Pointer), Pointer arg)
 {
 
 	DllElement d;
@@ -341,10 +319,7 @@ Pointer arg;
 }
 
 void
-MapE(s, fp, arg)
-Set s;
-void (*fp)();
-Pointer arg;
+MapE(Set s, void (*fp)(DllElement, Pointer), Pointer arg)
 {
 
 	DllElement d;
@@ -355,15 +330,13 @@ Pointer arg;
 }
 
 Pointer
-ElementPointer(e)
-Element e;
+ElementPointer(Element e)
 {
 	return DLL_DATA(Pointer, (Set) NULL, e);
 }
 
 Element
-AnElement(s)
-Set s;
+AnElement(Set s)
 {
 	if(DLL_EMPTY(s->set))
 		return NULL;
@@ -383,15 +356,13 @@ void		DiscardOldVersions();	/* VersionNumber */
 
 
 void
-IterateSet(s)
-Set s;
+IterateSet(Set s)
 {
 	s->cur_ptr = DLL_FIRST(s->set);
 }
 
 Element
-NextElement(s)
-Set s;
+NextElement(Set s)
 {
 	Element e;
 	e = s->cur_ptr;

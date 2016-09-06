@@ -41,9 +41,7 @@ the full agreement.
 #include "bitvector.h"
 
 int
-bitcount(max, bv)
-int max;
-BitVector bv;
+bitcount(int max, BitVector bv)
 {
 	int i, count;
 
@@ -54,8 +52,7 @@ BitVector bv;
 }
 
 char *
-BitVectorToString(max, bv)
-BitVector bv;
+BitVectorToString(int max, BitVector bv)
 {
 	char *string = recog_tempstring();
 	int i;
@@ -68,16 +65,13 @@ BitVector bv;
 
 
 void
-StringToBitVector(string, max, bv)
-char *string;
-int max;
-BitVector bv;
+StringToBitVector(char *string, int max, BitVector bv)
 {
 	int i;
 
 	if(strlen(string) != max)
 		recog_error("StringToBitVector: strlen(%s)=%d != %d",
-			string, strlen(string), max);
+			string, (int)strlen(string), max);
 
 	for(i = 0; i < max; i++)
 		if(string[i] != '-')
@@ -87,8 +81,7 @@ BitVector bv;
 }
 
 
-SetBitVector(v)
-BitVector v;
+void SetBitVector(BitVector v)
 {
 	int nints = INTS_PER_VECTOR;
 
@@ -97,9 +90,7 @@ BitVector v;
 }
 
 
-ClearBitVector(nints, v)
-int nints;
-BitVector v;
+void ClearBitVector(int nints, BitVector v)
 {
 
 	while(--nints >= 0)
@@ -107,9 +98,7 @@ BitVector v;
 }
 
 
-AssignBitVector(nints, v1, v2)
-int nints;
-BitVector v1, v2;
+void AssignBitVector(int nints, BitVector v1, BitVector v2)
 {
 
 	while(--nints >= 0)
@@ -117,9 +106,7 @@ BitVector v1, v2;
 }
 
 int
-BitVectorDeQ(max, v)
-int max;
-BitVector v;
+BitVectorDeQ(int max, BitVector v)
 {
 	int i;
 	for(i = 0; i < max; i++)
@@ -132,10 +119,7 @@ BitVector v;
 }
 
 int *
-BitVectorOr(v, v1, v2, ipv)
-int *v;
-int *v1, *v2;
-int ipv;
+BitVectorOr(int *v, int *v1, int *v2, int ipv)
 {
 	int *vv = v;
 	do
@@ -145,10 +129,7 @@ int ipv;
 }
 
 int *
-BitVectorAnd(v, v1, v2, ipv)
-int *v;
-int *v1, *v2;
-int ipv;
+BitVectorAnd(int *v, int *v1, int *v2, int ipv)
 {
 	int *vv = v;
 	do
@@ -158,9 +139,7 @@ int ipv;
 }
 
 int
-BitVectorNoBitsSet(v, ipv)
-int *v;
-int ipv;
+BitVectorNoBitsSet(int *v, int *ipv)
 {
 	do
 		if(*v++) return 0;

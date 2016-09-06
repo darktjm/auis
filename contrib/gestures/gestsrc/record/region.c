@@ -44,7 +44,7 @@ the full agreement.
 #include "region.h"
 
 void
-REGIONinit()
+REGIONinit(void)
 {
 
 	GDEVinit(NULL);
@@ -57,8 +57,7 @@ char	name[100];
 int	current = 1;
 
 void
-setrecordfile(filename)
-char *filename;
+setrecordfile(char *filename)
 {
 	char *p, *endp;
 	int i;
@@ -91,7 +90,7 @@ char *filename;
 }
 
 void
-REGIONinit2()
+REGIONinit2(void)
 {
 	char rv[3];
 

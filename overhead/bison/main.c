@@ -42,9 +42,7 @@ extern void output(), done();
 
 /* VMS complained about using `int'.  */
 int
-main(argc, argv)
-int argc;
-char *argv[];
+main(int argc, char *argv[])
 {
   program_name = argv[0];
   failure = 0;
@@ -97,8 +95,7 @@ char *argv[];
 	either c itself, or the corresponding \ddd code
 */
 	char *
-printable_version(c)
-	char c;
+printable_version(char c)
 {
 	static char buf[10];
 	if (c < ' ' || c >= '\177') {
@@ -115,8 +112,7 @@ printable_version(c)
 	return ptr to internal memory containing the string 
 */
 	char *
-int_to_string(i)
-	int i;
+int_to_string(int i)
 {
 	static char buf[20];
 	sprintf(buf, "%d", i);
@@ -126,8 +122,7 @@ int_to_string(i)
 /* print the message `s' for a fatal error
 */
 	void
-fatal(s)
-	char *s;
+fatal(char *s)
 {
 	extern char *infile;
 
@@ -143,8 +138,7 @@ fatal(s)
 	and incorporate string `x1'
 */
 	void
-fatals(fmt, x1)
-	char *fmt, *x1;
+fatals(char *fmt, char *x1)
 {
 	char buffer[200];
 	sprintf(buffer, fmt, x1);
@@ -154,8 +148,7 @@ fatals(fmt, x1)
 /* print a warning message 's'
 */
 	void
-warn(s)
-	char *s;
+warn(char *s)
 {
 	extern char *infile;
 
@@ -172,9 +165,7 @@ warn(s)
 	The message is given by the format `fmt'
 */
 	void
-warni(fmt, x1)
-	char *fmt;
-	int x1;
+warni(char *fmt, int x1)
 {
 	char buffer[200];
 	sprintf(buffer, fmt, x1);
@@ -185,8 +176,7 @@ warni(fmt, x1)
 	The message is given by the format `fmt'
 */
 	void
-warns(fmt, x1)
-	char *fmt, *x1;
+warns(char *fmt, char *x1)
 {
 	char buffer[200];
 	sprintf(buffer, fmt, x1);
@@ -197,8 +187,7 @@ warns(fmt, x1)
 	The message is given by the format `fmt'
 */
 	void
-warnss(fmt, x1, x2)
-	char *fmt, *x1, *x2;
+warnss(char *fmt, char *x1, char *x2)
 {
 	char buffer[200];
 	sprintf(buffer, fmt, x1, x2);
@@ -209,8 +198,7 @@ warnss(fmt, x1, x2)
 	The message is given by the format `fmt'
 */
 	void
-warnsss(fmt, x1, x2, x3)
-	char *fmt, *x1, *x2, *x3;
+warnsss(char *fmt, char *x1, char *x2, char *x3)
 {
 	char buffer[200];
 	sprintf(buffer, fmt, x1, x2, x3);
@@ -221,8 +209,7 @@ warnsss(fmt, x1, x2, x3)
 	instances of whatever is denoted by the string`s'
 */
 	void
-toomany(s)
-	char *s;
+toomany(char *s)
 {
 	char buffer[200];
 	/* JF new msg */
@@ -233,8 +220,7 @@ toomany(s)
 /* abort for an internal error denoted by string `s'
 */
 	void
-berror(s)
-	char *s;
+berror(char *s)
 {
 	fprintf(stderr, "internal error, %s\n", s);
 	abort();

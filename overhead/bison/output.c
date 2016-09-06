@@ -199,7 +199,7 @@ YYLTYPE *yylsp;\n{\n  switch (n)\n{"
 
 
 void
-output_headers()
+output_headers(void)
 {
   if (semantic_parser)
     fprintf(fguard, GUARDSTR, attrsfile);
@@ -228,7 +228,7 @@ output_headers()
 
 
 void
-output_trailers()
+output_trailers(void)
 {
   if (semantic_parser)
       fprintf(fguard, "\n    }\n}\n");
@@ -245,7 +245,7 @@ output_trailers()
 
 
 void
-output()
+output(void)
 {
   int c;
 
@@ -288,7 +288,7 @@ output()
 
 
 void
-output_token_translations()
+output_token_translations(void)
 {
   int i, j;
 /*   short *sp; JF unused */
@@ -332,7 +332,7 @@ output_token_translations()
 
 
 void
-output_gram()
+output_gram(void)
 {
   int i;
   int j;
@@ -397,7 +397,7 @@ output_gram()
 
 
 void
-output_stos()
+output_stos(void)
 {
   int i;
   int j;
@@ -427,7 +427,7 @@ output_stos()
 
 
 void
-output_rule_data()
+output_rule_data(void)
 {
   int i;
   int j;
@@ -602,7 +602,7 @@ output_rule_data()
 
 
 void
-output_defines()
+output_defines(void)
 {
   fprintf(ftable, "\n\n#define\tYYFINAL\t\t%d\n", final_state);
   fprintf(ftable, "#define\tYYFLAG\t\t%d\n", MINSHORT);
@@ -614,7 +614,7 @@ output_defines()
 /* compute and output yydefact, yydefgoto, yypact, yypgoto, yytable and yycheck.  */
 
 void
-output_actions()
+output_actions(void)
 {
   nvectors = nstates + nvars;
 
@@ -651,7 +651,7 @@ output_actions()
    is saved for putting into yytable later.  */
 
 void
-token_actions()
+token_actions(void)
 {
   int i;
   int j;
@@ -701,8 +701,7 @@ token_actions()
    a token gets to handle it.  */
 
 int
-action_row(state)
-int state;
+action_row(int state)
 {
   int i;
   int j;
@@ -865,8 +864,7 @@ int state;
 
 
 void
-save_row(state)
-int state;
+save_row(int state)
 {
   int i;
   int count;
@@ -910,7 +908,7 @@ int state;
    is saved for putting into yytable later.  */
 
 void
-goto_actions()
+goto_actions(void)
 {
   int i;
   int j;
@@ -949,8 +947,7 @@ goto_actions()
 
 
 int
-default_goto(symbol)
-int symbol;
+default_goto(int symbol)
 {
   int i;
   int m;
@@ -987,9 +984,7 @@ int symbol;
 
 
 void
-save_column(symbol, default_state)
-int symbol;
-int default_state;
+save_column(int symbol, int default_state)
 {
   int i;
   int m;
@@ -1037,7 +1032,7 @@ int default_state;
    the actions and gotos information into yytable. */
 
 void
-sort_actions()
+sort_actions(void)
 {
   int i;
   int j;
@@ -1073,7 +1068,7 @@ sort_actions()
 
 
 void
-pack_table()
+pack_table(void)
 {
   int i;
   int place;
@@ -1122,8 +1117,7 @@ pack_table()
 
 
 int
-matching_state(vector)
-int vector;
+matching_state(int vector)
 {
   int i;
   int j;
@@ -1163,8 +1157,7 @@ int vector;
 
 
 int
-pack_vector(vector)
-int vector;
+pack_vector(int vector)
 {
   int i;
   int j;
@@ -1233,7 +1226,7 @@ int vector;
    and the vectors whose elements index the portion starts */
 
 void
-output_base()
+output_base(void)
 {
   int i;
   int j;
@@ -1284,7 +1277,7 @@ output_base()
 
 
 void
-output_table()
+output_table(void)
 {
   int i;
   int j;
@@ -1316,7 +1309,7 @@ output_table()
 
 
 void
-output_check()
+output_check(void)
 {
   int i;
   int j;
@@ -1350,7 +1343,7 @@ output_check()
 /* copy the parser code into the ftable file at the end.  */
 
 void
-output_parser()
+output_parser(void)
 {
   int c;
 #ifdef DONTDEF
@@ -1427,7 +1420,7 @@ output_parser()
 }
 
 void
-output_program()
+output_program(void)
 {
   int c;
   extern int lineno;
@@ -1445,7 +1438,7 @@ output_program()
 
 
 void
-free_itemsets()
+free_itemsets(void)
 {
   core *cp,*cptmp;
 
@@ -1459,7 +1452,7 @@ free_itemsets()
 
 
 void
-free_shifts()
+free_shifts(void)
 {
   shifts *sp,*sptmp;/* JF derefrenced freed ptr */
 
@@ -1473,7 +1466,7 @@ free_shifts()
 
 
 void
-free_reductions()
+free_reductions(void)
 {
   reductions *rp,*rptmp;/* JF fixed freed ptr */
 

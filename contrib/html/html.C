@@ -78,9 +78,9 @@
 #include <htmlview.H>
 #include <html.H>
 
-#define NEED_STRING_PROTO
+#include "html.h"
 
-extern char versionString[];
+#define NEED_STRING_PROTO
 
 /* 
  * The InitializeClass() is here to parse the mapping file which translates 
@@ -140,27 +140,27 @@ enum entityCodeEnum {
 
 ATKdefineRegistry(html, text, html::InitializeClass);
 char* html_MagicToString(char * x,int * len);
-char* html_StringToMagic(char * str);
-static void  storeVar(class style * style, char * key, char * value);
+const char* html_StringToMagic(const char * str);
+static void  storeVar(class style * style, const char * key, char * value);
 static void addVars(class style * style, char * vars);
 char* html_StyleToVariables(class style * style);
 static void ChangeTitle(class html * self, struct entityElement * ep, char * buf, long  len);
 static void ChangeIndexable(class html * self, struct entityElement * ep, char * buf, long  len);
-static struct entityMapping* getEntityMapping(char * string);
+static const struct entityMapping* getEntityMapping(const char * string);
 static void  popEntity(class html * self);
-static struct entityElement* pushEntity(class html * self, long * pos, struct entityMapping * em, char * name, char * vars, int  force);
+static struct entityElement* pushEntity(class html * self, long * pos, const struct entityMapping * em, const char * name, char * vars, int  force);
 static struct entityElement* entityPeek(class html * self);
 static struct entityElement* withinEntity(class html * self, enum entityCodeEnum  code);
 static struct entityElement* withinEntityClass(class html * self, enum entityCodeEnum  code);
 int html_FindEntity(char * buf, long * pos, char * entity, char * vars);
 static void closeEntity(class html * self, struct entityElement * ep, long * pos, int  force);
 static void maybeDisplay(class html * self, long * pos, char * buf, long * inlen);
-static int newpar(class html * self, struct entityMapping * eMapping, long  pos);
+static int newpar(class html * self, const struct entityMapping * eMapping, long  pos);
 static void hrule(class html * self, long * pos);
 static int  fixStyles(long  rock, class text * self, long  pos, class environment * curenv);
 static void writeHeader(class html * self, FILE * file);
 static void  PutsRange(class html * self, char  *p, FILE  *fp, char  *ep);
-static char* getHTML(class style * style);
+static const char* getHTML(class style * style);
 static char* outputNewlines(int  newlines, int  parImplied, int  brImplied, char * outp);
 int html_StyleToCodes(class style * style);
 static char* findLocalFile(char * path, char * relativeRoot);
@@ -182,8 +182,8 @@ static char* findLocalFile(char * path, char * relativeRoot);
 
 typedef void (*html_EntityFptr)(class html * self, struct entityElement * ep, char * buf, long  len);
 /* And this is how they look... */
-struct entityMapping {
-    char* string;
+static const struct entityMapping {
+    const char* string;
     enum entityCodeEnum code;
     int flags;
     html_EntityFptr fn; /* Function to call when environment ends */
@@ -245,13 +245,13 @@ struct entityMapping {
     { 0 }
 };
 
-struct entityMapping noEntity = { 0, entityEmpty, entFlagsUnknown };
+const struct entityMapping noEntity = { 0, entityEmpty, entFlagsUnknown };
 
 struct styleMapping {
-    char* styleName;	
-    char* entityName;
+    const char* styleName;	
+    const char* entityName;
 };
-struct styleMapping stylemap[] = {
+static const struct styleMapping stylemap[] = {
     { "address", "address" },
     { "anchor",  "a" },
     { "header1", "h1" },
@@ -284,7 +284,7 @@ struct entityElement {
     long length;
     long data;
     class style* style;
-    struct entityMapping* em;
+    const struct entityMapping* em;
     struct entityElement* prev;
 };
 
@@ -301,15 +301,15 @@ static struct keylist* keyList = 0;
 #define htmlPartialEntity 1
 #define htmlNoEntity      2
 
-static char* whiteSpace = " \t\n";
-static char* parBreakString = "\n\n<p>";
-static char* breakString = "<br>\n";
+static const char whiteSpace[] = " \t\n";
+static const char parBreakString[] = "\n\n<p>";
+static const char breakString[] = "<br>\n";
 
 static char errbuf[200]; /* A string buffer to temporarily play with error messages */
 static const char errString[] = "\nErrors encountered while reading document:\n\n";
 
 /* This is the name of the attribute attached to the styles */
-static char* styleHTMLCodes = "htmlcodes";
+static const char styleHTMLCodes[] = "htmlcodes";
 
 /* ------------------------------------------------------------------------ */
 /*  Management and utility routines for the magic mappings                   */
@@ -320,9 +320,9 @@ static char* styleHTMLCodes = "htmlcodes";
  * special characters to html entities 
  */
 struct HTMLMagicMapping {
-    char* magicstring;
+    const char* magicstring;
     int magiclen;
-    char* string;
+    const char* string;
 };
 static struct HTMLMagicMapping HTMLDefaultCharMap[] = {
     { "<", 1, "lt" },
@@ -339,7 +339,7 @@ html::InitializeClass()
 {
     struct HTMLMagicMapping* HTMLCharMap = 0;
     struct HTMLMagicMapping* hmap;
-    char* HTMLMagicFile;
+    const char* HTMLMagicFile;
     int mapcount = 64; 
     char* hmstr;
     FILE* fp;
@@ -372,16 +372,13 @@ html::InitializeClass()
 		    }
 		    estr = strtok(0, " \t\n");
 		    if (estr) {
-		        int ml = strlen(mstr);
-		        hmap->magicstring = (char*)malloc(ml+1);
-		        hmap->string = (char*)malloc(strlen(estr)+1);
+		        hmap->magicstring = strdup(mstr);
+		        hmap->string = strdup(estr);
 		        if (!(hmap->magicstring && hmap->string)) {
 			    fclose(fp);
 			    return FALSE;
 		        }
-		        strcpy(hmap->magicstring, mstr);
-		        strcpy(hmap->string, estr);
-		        hmap->magiclen=ml;
+		        hmap->magiclen=strlen(mstr);
 		        hmap++,mc++;
 		        if (mc==mapcount) {
 			    /* Stop here. Broken magic file*/
@@ -435,8 +432,8 @@ html_MagicToString(char * x,int * len)
  * If it is, then the "magic" string which the html translates to is returned.
  * else 0 is returned
  */
-char*
-html_StringToMagic(char * str)
+const char*
+html_StringToMagic(const char * str)
 {
     struct HTMLMagicMapping* hm;
     for (hm = HTMLCharMap; hm && hm->magicstring; hm++) {
@@ -450,7 +447,7 @@ html_StringToMagic(char * str)
 /*
 */
 void
-html::Inform(char * msg)
+html::Inform(const char * msg)
 {
     class text* errtext;
     static char buf[256];
@@ -492,29 +489,31 @@ html::HasErrors()
 /* Attach a variable assignment to a style */
 /* If the value is NULL, then empty string ("") is placed as value */
 static void 
-storeVar(class style * style, char * key, char * value)
+storeVar(class style * style, const char * key, char * value)
 {
     struct keylist* k = keyList;
+    char buf[strlen(key)+1];
     char* s;
-    for (s = key; s && *s; s++) {
+    strcpy(buf, key);
+    for (s = buf; s && *s; s++) {
 	if (isupper(*s)) {
 	    *s = tolower(*s);
 	}
     }
 
-    for (k = keyList; k && (strcmp(k->name, key)!=0) ; k = k->next)
+    for (k = keyList; k && (strcmp(k->name, buf)!=0) ; k = k->next)
 	;
 
     if (!k) {
 	/* Record the key for later use... */
 	struct keylist* nk = (struct keylist*) malloc(sizeof(struct keylist));
 	if (nk) {
-	    strcpy(nk->name, key);
+	    strcpy(nk->name, buf);
 	    nk->next = keyList;
 	    keyList = nk;
 	}
     }
-    (style)->AddAttribute( key, value ? value : "");
+    (style)->AddAttribute( buf, value ? value : "");
 }
 
 /* Parse a variable list from a tag calling storeVar on all the variables */
@@ -610,7 +609,7 @@ html::AddLink(long  inpos, long  len, char * uri)
 {
     long pos = inpos;
     char vars[256];
-    struct entityMapping* em;
+    const struct entityMapping* em;
     struct entityElement* ep;
 
     em = getEntityMapping("a"); /* Get the stuff about this */
@@ -640,7 +639,7 @@ html::GetAnchorDest(long  pos)
 }
 
 char*
-html::GetAttribute(class environment * env, char * attr)
+html::GetAttribute(class environment * env, const char * attr)
 {
     if (env->type != environment_Style) {
 	return 0;
@@ -650,7 +649,7 @@ html::GetAttribute(class environment * env, char * attr)
 }
 
 void
-html::ChangeAttribute(class view * tv, class environment * env, char * attr, char * value)
+html::ChangeAttribute(class view * tv, class environment * env, const char * attr, char * value)
 {
     char cb[256];
     char* ptr;
@@ -712,8 +711,7 @@ html::GetAttributeList(class environment * env, char * list[], int * count)
 	s = (env->data.style)->GetAttribute( k->name);
 	if (s) {
 	    /* We have a valid variable attached to this style. Dump it */
-		list[*count] = (char*)malloc(strlen(k->name)+1);
-		strcpy(list[*count], k->name);
+		list[*count] = strdup(k->name);
 		(*count)++;
 	}
     }
@@ -748,10 +746,10 @@ ChangeIndexable(class html * self, struct entityElement * ep, char * buf, long  
 /* ------------------------------------------------------------------------ */
 
 /* getEntityCode: take a string, do a lookup and return the code */
-static struct entityMapping*
-getEntityMapping(char * string)
+static const struct entityMapping*
+getEntityMapping(const char * string)
 {
-    struct entityMapping* b;
+    const struct entityMapping* b;
     for (b = basicEntities; b->string; b++) {
 	if (strcmp(b->string, string) == 0) {
 	    return b;
@@ -777,9 +775,9 @@ popEntity(class html * self)
  * when the end of the entity is known
  */
 static struct entityElement*
-pushEntity(class html * self, long * pos, struct entityMapping * em, char * name, char * vars, int  force)
+pushEntity(class html * self, long * pos, const struct entityMapping * em, const char * name, char * vars, int  force)
 {   
-    char* string;
+    const char* string;
     char buf[256];
     struct entityElement* e;
     class environment *env;
@@ -802,7 +800,7 @@ pushEntity(class html * self, long * pos, struct entityMapping * em, char * name
 	    if (!withinEntity(self, entityHead) || force) {
 		class style* thisStyle;
 		/* We find the stylename no matter what, as it's useful */
-		struct styleMapping* sm = stylemap;
+		const struct styleMapping* sm = stylemap;
 		for (; sm && sm->styleName && strcmp(sm->entityName, name)!=0; sm++) {
 		    /* empty loop */;
 				}
@@ -1008,10 +1006,10 @@ static void closeEntity(class html * self, struct entityElement * ep, long * pos
 }
 
 void
-html::AddEntity(long  pos, long  len, char * name, char * vars)
+html::AddEntity(long  pos, long  len, const char * name, char * vars)
 {   
     /* Map name to style */
-    struct entityMapping* em = getEntityMapping(name);
+    const struct entityMapping* em = getEntityMapping(name);
     if (em == 0) {
 	return;
     }
@@ -1148,7 +1146,7 @@ maybeDisplay(class html * self, long * pos, char * buf, long * inlen)
     s = buf;
     while (s && len && (s = strchr(s, '&'))) {
 	char* endtok = strchr(s, ';');
-	char* newstring;
+	const char* newstring;
 	char c;
 	if (s > (buf + len)) {
 	    /* Past the limit */
@@ -1158,7 +1156,7 @@ maybeDisplay(class html * self, long * pos, char * buf, long * inlen)
 	    c = *endtok;
 	    *endtok++='\0';
 	    newstring = html_StringToMagic(s+1);
-	    if (newstring != '\0') {
+	    if (newstring != 0) {
 		int x;
 		/* We need to adjust length as we're about to replace chars */
 		x = (strlen(s+1) + 2)-(strlen(newstring)) ;
@@ -1183,7 +1181,7 @@ maybeDisplay(class html * self, long * pos, char * buf, long * inlen)
 /* Output a paragraph break or a small line break */
 /* Calling this will only output newlines if the entityMapping indicates that it is a good time to do this */
 static int
-newpar(class html * self, struct entityMapping * eMapping, long  pos) 
+newpar(class html * self, const struct entityMapping * eMapping, long  pos) 
 {
     char c;
     long xpos;
@@ -1248,7 +1246,7 @@ html::AddImage(long * pos, char * file)	/*  */
 	} else {
 	    /* This is all a bit of a frig to get something reasonable instead of a 200x200 blank */
 	    if (!defaultImage[0]) {
-		char*s = environ::GetProfile("defaultImage");
+		const char*s = environ::GetProfile("defaultImage");
 		if (s) {
 		    strcpy(defaultImage, s);
 		}
@@ -1303,7 +1301,7 @@ html::ReadSubString(long  startPos, FILE * file, int  quoteCharacters)
     long pos = 0;
     long myPos = startPos;
     char* s;
-    struct entityMapping* eMapping;
+    const struct entityMapping* eMapping;
     struct entityElement* ep;
 
     buf[0]='\0';
@@ -1438,7 +1436,7 @@ html::Write(FILE * file, long  id, int  level)
 }
 
 /* Take a style and produce the html entity name which corresponds to it */
-static char*
+static const char*
 getHTML(class style * style)
 {
     char* s = (style)->GetAttribute( "html");
@@ -1446,7 +1444,7 @@ getHTML(class style * style)
 	return s;
     } else {
 	/* Check our mapping table */
-	struct styleMapping* sm = stylemap;
+	const struct styleMapping* sm = stylemap;
 	for (; sm && sm->styleName; sm++) {
 	    if (strcmp(style->name, sm->styleName) == 0) {
 		return sm->entityName;
@@ -1460,10 +1458,10 @@ char*
 html::EnvStart(char * outp, class style * style, int * parImply, int * brImply, int * newlines)
 {
     char* temp;
-    char* name;
+    const char* name;
     char* vars;
     char* s;
-    struct entityMapping* em;
+    const struct entityMapping* em;
 
     s = (style)->GetAttribute( "htmladornment");
     if (s) {
@@ -1518,8 +1516,8 @@ html::EnvStart(char * outp, class style * style, int * parImply, int * brImply, 
 char*
 html::EnvEnd(char * outp, class style * style, int * parImply, int * brImply)
 {
-    char* temp;
-    char* s;
+    const char* temp;
+    const char* s;
     int code;
 
     if ((s = (style)->GetAttribute( "htmladornment"))) {
@@ -1558,7 +1556,7 @@ html::EnvEnd(char * outp, class style * style, int * parImply, int * brImply)
 static char*
 outputNewlines(int  newlines, int  parImplied, int  brImplied, char * outp)
 {
-    char* temp;
+    const char* temp;
     if (newlines >= 2) {
 	if (!parImplied) {
 	    for(temp = parBreakString; *temp; temp++){
@@ -1783,7 +1781,7 @@ html::WriteSubString(long  pos, long  len, FILE * file, int  quoteCharacters)
 
 /* Make the (pos,len) region a list item, with a tagged bit inserted at the start */
 boolean
-html::TagItem(long  pos , long  len, char * text, char * itemS, class style * extraStyle)
+html::TagItem(long  pos , long  len, const char * text, const char * itemS, class style * extraStyle)
 {
     class environment *env;
     int tlen = strlen(text);
@@ -1938,8 +1936,8 @@ static char*
 findLocalFile(char * path, char * relativeRoot)
 {
     static char buf[256];
-    char* s;
-    char* ptr = buf;
+    const char* s;
+    const char* ptr;
 
     if (*path == '/') {
 	ptr = environ::GetProfile("webPath");
@@ -1962,9 +1960,10 @@ findLocalFile(char * path, char * relativeRoot)
 	return 0;
     } else {
 	/* Relative pathname, use current buffer */
+	char *sl;
 	strcpy(buf, relativeRoot);
-	if (s = strrchr(buf, '/')) {
-	    s[1] = '\0';
+	if (sl = strrchr(buf, '/')) {
+	    sl[1] = '\0';
 	} else {
 	    /* Bizarreness happening! */
 	    return 0;

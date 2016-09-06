@@ -47,16 +47,16 @@ static	struct lines { int x1, y1, x2, y2; } line[NLINES];
 static	int	npoints;
 static	struct point { int x, y; } point[NPOINTS];
 
-Sreset() { Greset(); }
-Serase() { Gerase(); }
+void Sreset(void) { Greset(); }
+void Serase(void) { Gerase(); }
 
-Greset()
+void Greset(void)
 {
 	nlines = 0;
 	npoints = 0;
 }
 
-Gerase()	/* just redraws, assumes XOR */
+void Gerase(void)	/* just redraws, assumes XOR */
 {
 	int i;
 
@@ -70,8 +70,7 @@ Gerase()	/* just redraws, assumes XOR */
 	GDEVflush();
 }
 
-Gpoint(x, y)
-int x, y;
+void Gpoint(int x, int y)
 {
 	if(npoints >= NPOINTS)
 		recog_error("Gpoint");
@@ -84,8 +83,7 @@ int x, y;
 	npoints++;
 }
 
-Gline(x1, y1, x2, y2)
-int x1, y1, x2, y2;
+void Gline(int x1, int y1, int x2, int y2)
 {
 	if(nlines >= NLINES)
 		recog_error("Gline");

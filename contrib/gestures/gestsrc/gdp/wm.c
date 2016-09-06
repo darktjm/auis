@@ -40,14 +40,13 @@ the full agreement.
 #include <stdio.h>
 
 void
-WmClear()
+WmClear(void)
 {
 	GDEVstart();
 }
 
 void
-WmInit(program)
-char *program;
+WmInit(char *program)
 {
 	GDEVinit(NULL);
 	GDEVsets("currentfunction", "xor");
@@ -56,18 +55,18 @@ char *program;
 	WmClear();
 }
 
-WmFlush()
+void WmFlush(void)
 {
 	GDEVflush();
 }
 
 void
-EraseOn()
+EraseOn(void)
 { /* GDEVsets("currentcolor", "white"); */
 }
 
 void
-EraseOff()
+EraseOff(void)
 {
 	/* GDEVsets("currentcolor", "black"); */
 }

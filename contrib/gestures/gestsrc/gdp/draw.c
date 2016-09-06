@@ -50,20 +50,18 @@ int	DrawDebug = 0;
 #define stat mystat
 
 static void
-dmpo(o)
-Object o;
+dmpo(Object o)
 {
 	printf("	-(");
 	DumpObject(o);
 }
 
-DumpObject(o)
-Object o;
+void DumpObject(Object o)
 {
 	int i;
 	struct dope *d = &dope[(int) o->type];
 
-	printf("%s <%x> ", d->name, o);
+	printf("%s <%p> ", d->name, o);
 	for(i = 0; i < d->npoints; i++)
 		printf(" (%d,%d)", 
 			o->point[i].x,
@@ -77,8 +75,7 @@ Object o;
 
 static
 Bool
-Drawable(o)
-Object o;
+Drawable(Object o)
 {
 	int i;
 	struct dope *d = &dope[(int) o->type];
@@ -93,8 +90,7 @@ Object o;
 
 static
 void
-ReallyDraw(o)
-Object o;
+ReallyDraw(Object o)
 {
 	D printf("ReallyDraw("), DumpObject(o);   /* debug */
 	if(Drawable(o)) {
@@ -107,8 +103,7 @@ Object o;
 /* ObjEqual does a straight bit compare */
 
 Bool
-ObjEqual(o1, o2)
-Object o1, o2;
+ObjEqual(Object o1, Object o2)
 {
 	return ! memcmp( (char *) o1, (char *) o2, sizeof(struct object));
 }
@@ -118,8 +113,7 @@ Object o1, o2;
 #define	CACHESIZE	1024
 
 static int
-hash(o)
-Object o;
+hash(Object o)
 {
 	return  (unsigned) (o->point[0].x + o->point[0].y +
 		o->point[1].x + o->point[1].y +
@@ -142,14 +136,13 @@ static struct {
 	int	collisions;
 } stat;
 
-CacheStats()
+void CacheStats(void)
 {
 	printf("%d new %d hits %d collisions %d flushes\n",
 	stat.flushes, stat.news, stat.hits, stat.collisions);
 }
 
-CacheFlush(fcn)
-void (*fcn)(/* Object */);
+void CacheFlush(void (*fcn)(Object))
 {
 	struct cache *c;
 
@@ -169,8 +162,7 @@ void (*fcn)(/* Object */);
 #define	C_HIT		2
 
 int
-CacheEnter(o)
-Object o;
+CacheEnter(Object o)
 {
 	int h = hash(o);
 	struct cache *r = &cache[h];
@@ -198,16 +190,14 @@ Object o;
 }
 
 void
-Erase(o)
-Object o;
+Erase(Object o)
 {
 	D printf("Erase ");
 	Draw(o);
 }
 
 void
-Draw(o)
-Object o;
+Draw(Object o)
 {
 	D printf("Draw("), DumpObject(o);   /* debug */
 	if(o->type == SetOfObjects)
@@ -229,7 +219,7 @@ Object o;
 }
 
 void
-DrawSync()
+DrawSync(void)
 {
 	Object o;
 
@@ -240,7 +230,7 @@ DrawSync()
 }
 
 
-DrawClear()
+void DrawClear(void)
 {
 	Object o;
 	CacheFlush(NULL);
@@ -250,16 +240,14 @@ DrawClear()
 /*-----------------------------------------------------------------*/
 
 void
-LineDraw(o)
-Object o;
+LineDraw(Object o)
 {
 	/* printf("<%d %d %d %d> ", o->point[0].x, o->point[0].y, o->point[1].x, o->point[1].y); fflush(stdout); */
 	GDEVline(o->point[0].x, o->point[0].y, o->point[1].x, o->point[1].y);
 }
 
 void
-LineTransform(o, t)
-Object o;
+LineTransform(Object o, Transformation t)
 {
 	ApplyTran(o->point[0].x, o->point[0].y, t,
 		&o->point[0].x, &o->point[0].y);
@@ -268,8 +256,7 @@ Object o;
 }
 
 void
-RectDraw(o)
-Object o;
+RectDraw(Object o)
 {
 	int x1 = o->point[0].x, y1 = o->point[0].y;
 	int x2 = o->point[1].x, y2 = o->point[1].y;
@@ -283,9 +270,7 @@ Object o;
 }
 
 void
-RectTransform(o, t)
-Object o;
-Transformation t;
+RectTransform(Object o, Transformation t)
 {
 	ApplyTran(o->point[0].x, o->point[0].y, t,
 		&o->point[0].x, &o->point[0].y);
@@ -297,29 +282,25 @@ Transformation t;
 
 
 void
-TextDraw(o)
-Object o;
+TextDraw(Object o)
 {
 	GDEVtext(o->point[0].x, o->point[0].y, "text");
 }
 
 void
-TextTransform(o, t)
-Object o;
-Transformation t;
+TextTransform(Object o, Transformation t)
 {
 	ApplyTran(o->point[0].x, o->point[0].y, t,
 		&o->point[0].x, &o->point[0].y);
 }
 
 void
-CircleDraw(o)
-Object o;
+CircleDraw(Object o)
 {
 #define NSEGS   16
 #define	SHIFT	8
 #define FACTOR	(1<<SHIFT)
-	static called;
+	static int called = 0;
 	static int _x[NSEGS+1], _y[NSEGS+1];
 	int i;
 	int x = o->point[0].x, y = o->point[0].y, r = o->point[1].x;
@@ -339,9 +320,7 @@ Object o;
 }
 
 void
-CircleTransform(o, t)
-Object o;
-Transformation t;
+CircleTransform(Object o, Transformation t)
 {
 	ApplyTran(o->point[0].x, o->point[0].y, t,
 		&o->point[0].x, &o->point[0].y);
@@ -349,8 +328,7 @@ Transformation t;
 }
 
 int
-DistanceToPoint(x1, y1, x2, y2)
-int x1, y1, x2, y2;
+DistanceToPoint(int x1, int y1, int x2, int y2)
 {
 	int dx = x2 - x1, dy = y2 - y1;
 	return dx * dx + dy * dy;
@@ -384,8 +362,7 @@ int x1, y1, x2, y2;
 
 static
 int
-DistanceToLineSeg(x, y, xa, ya, xb, yb)
-int x, y, xa, ya, xb, yb;
+DistanceToLineSeg(int x, int y, int xa, int ya, int xb, int yb)
 {
 	int xba = xb - xa, yba = yb - ya;
 	double kp;
@@ -405,24 +382,20 @@ int x, y, xa, ya, xb, yb;
 }
 
 int
-LineDistance(o, x, y)
-Object o;
+LineDistance(Object o, int x, int y)
 {
 	return DistanceToLineSeg(x, y, o->point[0].x, o->point[0].y,
 				    o->point[1].x, o->point[1].y);
 }
 
 static int
-min(a, b)
-int a, b;
+min(int a, int b)
 {
 	return a < b ? a : b;
 }
 
 int
-RectDistance(o, x, y)
-Object o;
-int x, y;
+RectDistance(Object o, int x, int y)
 {
 	int x1 = o->point[0].x, y1 = o->point[0].y;
 	int x2 = o->point[1].x, y2 = o->point[1].y;
@@ -436,17 +409,13 @@ int x, y;
 }
 
 int
-TextDistance(o, x, y)
-Object o;
-int x, y;
+TextDistance(Object o, int x, int y)
 {
 	return DistanceToPoint(x, y, o->point[0].x, o->point[0].y);
 }
 
 int
-CircleDistance(o, x, y)
-Object o;
-int x, y;
+CircleDistance(Object o, int x, int y)
 {
 	int dx = o->point[0].x - x, dy = o->point[0].y - y;
 	double c =  dx * dx + dy * dy;
@@ -455,8 +424,7 @@ int x, y;
 }
 
 int
-inrec(x, y, x1, y1, x2, y2)
-int x, y, x1, y1, x2, y2;
+inrec(int x, int y, int x1, int y1, int x2, int y2)
 {
 	int t;
 	if(x1 > x2) t = x1, x1 = x2, x2 = t;
@@ -465,16 +433,13 @@ int x, y, x1, y1, x2, y2;
 }
 
 void
-SetDraw(o)
-Object o;
+SetDraw(Object o)
 {
 	Map(o->subobjects, Draw, NULL);
 }
 
 void
-SetTransform(o, t)
-Object o;
-Transformation t;
+SetTransform(Object o, Transformation t)
 {
 	void Transform();
 
@@ -487,9 +452,7 @@ struct size {
 };
 
 static void
-sizem(o, s)
-Object o;
-struct size *s;
+sizem(Object o, struct size *s)
 {
 	int d = Distance(o, s->x, s->y);
 	if(d < s->min_d)
@@ -498,9 +461,7 @@ struct size *s;
 }
 
 int
-SetDistance(o, x, y)
-Object o;
-int x, y;
+SetDistance(Object o, int x, int y)
 {
 	struct size s;
 

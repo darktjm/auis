@@ -22,4 +22,6 @@
  * OF THIS SOFTWARE.
  */
 
+#include "html.h"
+
 const char versionString[] = "HTML-Text $Revision$";

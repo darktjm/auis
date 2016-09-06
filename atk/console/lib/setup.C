@@ -1410,7 +1410,7 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 			newchild[1] = -1;
 		    if ((*newchild = osi_vfork()) == 0) {
 			NEWPGRP();
-			execl(_SITE_BIN_SH, "sh", "-c", TokenBuf, 0);
+			execl(_SITE_BIN_SH, "sh", "-c", TokenBuf, (char *)NULL);
 			_exit(0);
 		    }
 		    if (*newchild == -1)
