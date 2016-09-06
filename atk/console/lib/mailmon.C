@@ -47,7 +47,7 @@
 
 extern char MyHomeDir[];
 
-
+static int NewMsgs(FILE  *mf);
 
 boolean UseNonAndrewMail = TRUE;
 
@@ -57,28 +57,10 @@ boolean UseNonAndrewPrint = FALSE;
 boolean UseNonAndrewPrint = TRUE;
 #endif /* ANDREW_PRINTING_ENV */
 
-#ifdef AFS_ENV
-boolean NonViceHost = FALSE;
-boolean NonAFSDHost = FALSE;
-#else /* AFS_ENV */
-boolean NonViceHost = TRUE;
-boolean NonAFSDHost = TRUE;
-#endif /* AFS_ENV */
-
 boolean CheckMyMail = FALSE;
 
 char OutgoingDir[MAXPATHLEN];
 int OutgoingAge = 3600; /* seconds until we notice delayed outgoing mail */
-
-void SetMailEnv();
-void InitMail(class consoleClass  *self);
-void InitDirectories();
-void SetPrintEnv();
-void InitPrint(class consoleClass  *self);
-int AbortPrintChecking(class consoleClass  *self, const char  *text);
-int NonAndrewCheckMail(class consoleClass  *self, char  *Name, int  *LastModTime , int  LastValue);
-int NewMsgs(FILE  *mf);
-
 
 void SetMailEnv()
 {
@@ -236,7 +218,7 @@ void InitPrint(class consoleClass  *self)
 }
 
 
-int AbortPrintChecking(class consoleClass  *self, char  *text)
+int AbortPrintChecking(class consoleClass  *self, const char  *text)
         {
     mydbg(("entering: AbortPrintChecking\n"));
     ReportInternalError(self, text);
@@ -277,7 +259,7 @@ int NonAndrewCheckMail(class consoleClass  *self, char  *Name, int  *LastModTime
 	return(LastValue);
     }
     if ((fp = fopen(Name, "r")) == NULL) {
-	sprintf(ErrTxt, "console:  Cannot open file %s, Problem with Vice?", Name);
+	sprintf(ErrTxt, "console:  Cannot open file %s", Name);
 	ReportInternalError(self, ErrTxt);
 	*LastModTime = 0;
 	return(-1);
@@ -292,7 +274,7 @@ int NonAndrewCheckMail(class consoleClass  *self, char  *Name, int  *LastModTime
 
 /* Mail checker -- see how many messages in a BSD mail file are new. */
 
-int NewMsgs(FILE  *mf)
+static int NewMsgs(FILE  *mf)
     {
     int LastLineBlank, inhead = 0, newCount;
     boolean EOMChar = FALSE; /* Do I have to check for a specific charater */

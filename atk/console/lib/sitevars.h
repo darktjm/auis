@@ -79,9 +79,6 @@
 #endif /* hpux */
 
 #define _SITE_CONSOLE_SOCKET 2018 /* udp */
-#define _SITE_VENUS_ITC_SOCKET 2106 /* tcp */
-#define _SITE_VENUS_ITC_SOCKET_ALT 2107 /* tcp */
-#define _SITE_MARINER_SOCKET 2106 /* udp *//* was venus socket */
 
 #define _SITE_SCM "cluster1.fs.andrew.cmu.edu"
 /* above for vopcon */

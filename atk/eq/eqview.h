@@ -34,7 +34,7 @@ extern void eqview_Paste(class eqview  *self);
 extern void eqview_Exit();
 extern void eqview_DumpAndWrite(class eqview  *self);
 extern void eqview_doc();
-extern void eqview_DoSpecial(class eqview  *self, char  *s);
+extern void eqview_DoSpecial(class eqview  *self, const char  *s);
 extern void eqview_Special(class eqview  *self, char  c);
 extern void eqview_SuperScript(class eqview  *self);
 extern void eqview_SubScript(class eqview  *self);

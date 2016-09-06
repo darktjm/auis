@@ -70,12 +70,11 @@ extern char Pstring1[256], Pstring2[256], Pstring3[256], Pstring4[MAXPATHLEN];
 
 
 /* EXTENSION(simple, 1, and 2) get set for:
-    vopcon files in: ../cmd/viceop.c
     console files in: ../cmd/notop.c
 */
-extern char EXTENSION[];
-extern char EXTENSION1[];
-extern char EXTENSION2[];
+extern const char EXTENSION[];
+extern const char EXTENSION1[];
+extern const char EXTENSION2[];
 
 #define MAXPATHLENGTH 1024
 #define MAXMENUCARD 6
@@ -203,7 +202,7 @@ char *TitleFromFile(char  *fname, boolean  IncludeVersion)
 }
 
 
-extern char *RealProgramName;
+extern const char RealProgramName[];
 /* consoleName gets referenced in setup.c, in  SetupFromConsole...
     I did this to avoid changing the calling parameters to the proc in setup. */
 char *consoleName;
@@ -232,10 +231,6 @@ void ReadNewConsoleFile(class ATK *atkarg_self, char  *rock)
     InitializeInstruments(self);
     if (Numbers[ERRORS].RawText != Nullity && Numbers[ERRORS].RawText)
         Numbers[ERRORS].RawText[0] = '\0';
-    if (Numbers[MARINEROTHER].RawText != Nullity && Numbers[ERRORS].RawText)
-        Numbers[MARINEROTHER].RawText[0] = '\0';
-    if (Numbers[MARINERFETCH].RawText != Nullity && Numbers[ERRORS].RawText)
-        Numbers[MARINERFETCH].RawText[0] = '\0';
     im::SetProgramName(RealProgramName);
     ((self)->GetIM())->SetTitle( TitleFromFile (ConFile, TRUE));
     (self->stdMenulist)->ChainBeforeML( self->userMenulist, (long)self->userMenulist);
@@ -698,8 +693,6 @@ void GetStdItems(class menulist  *tempMenulist)
     menuProc = proctable::DefineProc("console-debug", (proctable_fptr)DebugMenu, are, 0, "dummy.");
     (tempMenulist)->AddToML( "Expert Options~90, Turn Off Debugging~90", menuProc, 0, DEB_ON_MASK);
     (tempMenulist)->AddToML( "Expert Options~90, Turn On Debugging~90", menuProc, 0, DEB_OFF_MASK);
-    menuProc = proctable::DefineProc("console-venus-novelty", (proctable_fptr)VenusNovelty, are, 0, "dummy.");
-    (tempMenulist)->AddToML( "Expert Options~90, Venus Novelty~10", menuProc, FALSE, EXP_MASK);
     menuProc = proctable::DefineProc("console-debug", (proctable_fptr)DebugMenu, are , 0, "dummy.");
     (tempMenulist)->AddToML( "Expert Options~90, Turn Off Debugging~90", menuProc, 0, DEB_ON_MASK);
     (tempMenulist)->AddToML( "Expert Options~90, Turn On Debugging~90", menuProc, 0, DEB_OFF_MASK);

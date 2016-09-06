@@ -52,16 +52,6 @@
 #include <errno.h>
 #include <ctype.h>
 #include <sys/ioctl.h>
-#ifdef AFS_ENV
-#include <netinet/in.h>
-#include <afs/param.h>
-#include <afs/vice.h>
-#include <afs/errors.h>
-#include <afs/prs_fs.h>
-#define bool_t int
-#include <afs/afsint.h>
-#include <afs/venus.h>
-#endif /* AFS_ENV */
 
 #include <util.h>
 
@@ -69,7 +59,7 @@ extern int LastDirMod[], OutgoingAge;
 extern char MyHomeDir[];
 extern char *PrintDirName, OutgoingDir[];
 extern int PrintDirModTime;
-extern boolean UseNonAndrewPrint, UseNonAndrewMail, NonViceHost, NonAFSDHost, CheckMyMail;
+extern boolean UseNonAndrewPrint, UseNonAndrewMail, CheckMyMail;
 
 
 
@@ -153,7 +143,7 @@ int CheckDir(class consoleClass  *self, char  *Name, int  *LastModTime , int  La
 	return(LastValue);
     }
     if ((dp = opendir(NewName)) == NULL) {
-	sprintf(ErrTxt, "console: Cannot open directory '%s'; problem with AFS?", NewName);
+	sprintf(ErrTxt, "console: Cannot open directory '%s'", NewName);
 	ReportInternalError(self, ErrTxt);
 	*LastModTime = 0;
 	return(-1);
@@ -211,7 +201,7 @@ void CheckMail(class consoleClass  *self, int  requested)
         if (value<0 && errno != ENOENT) iserror=1;
     } else {
         value = CheckDir(self, envmail, &LastMailMod, Numbers[MAIL].Value);
-        if (value < 0 && !IsViceError(errno)) iserror = 1;
+        if (value < 0) iserror = 1;
         if (OutgoingDir[0]) CheckOutgoingMail(self);
     }
     if (iserror) {
@@ -234,15 +224,12 @@ void CheckDirectories(class consoleClass  *self)
             val = CheckDir(self, Numbers[i].RawText, &LastDirMod[i-DIRECTORY1],
                            Numbers[i].Value);
             if (Numbers[i].Value < 0) {
-                if (!IsViceError(errno)) {
+                {
 		    sprintf(ErrTxt, "console: Monitoring of %s terminated (%s)", Numbers[i].RawText, strerror(errno));
                     ReportInternalError(self, ErrTxt);
                     free(Numbers[i].RawText);
                     Numbers[i].RawText = Nullity;
                     Numbers[i].IsDisplaying = FALSE;
-                } else {
-		    sprintf(ErrTxt, "console: Temporary failure to check %s", Numbers[i].RawText);
-                    ReportInternalError(self, ErrTxt);
                 }
             }
             NewValue(self, &Numbers[i], val, NULL, FALSE);
@@ -264,12 +251,6 @@ int CheckPrint(class consoleClass  *self)
 	SetPrintEnv();
     }
     if (stat(PrintDirName, &dirstatbuf) == -1) {
-        if (IsViceError(errno)) {
-	    sprintf(ErrTxt, "console:  Cannot stat directory %s: cannot check print queue now.", PrintDirName);
-	    ReportInternalError(self, ErrTxt);
-            PrintDirModTime = 0;
-            return(-1);
-	}
 	sprintf(ErrTxt, "console:  Printing monitor terminated (%s)", strerror(errno));
         return AbortPrintChecking(self, ErrTxt);
     }
@@ -331,12 +312,6 @@ void CheckOutgoingMail(class consoleClass  *self)
 
     mydbg(("entering: CheckOutgoingMail\n"));
     if (stat(OutgoingDir, &statbuf) == -1) {
-        if (IsViceError(errno)) {
-	    sprintf(ErrTxt, "console:  Cannot stat directory %s: cannot check outgoing mail now.", OutgoingDir);
-	    ReportInternalError(self, ErrTxt);
-            OutgoingModTime = 0;
-            return;
-        }
         /* BOGUS -- this should get put back when outgoing directories are universal */
         /* 	ReportInternalError(self, sprintf(ErrTxt, "console: terminated monitoring of outgoing mail (%s)", strerror(errno))); */
         OutgoingDir[0] = '\0';

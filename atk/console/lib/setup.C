@@ -76,13 +76,10 @@ extern int DynamicXmin,
     DynamicYmin,
     DynamicYmax,
     OutgoingAge;
-extern char EXTENSION[];
+extern const char EXTENSION[];
 
 
-extern char OtherVenusStr[],
-    FetchVenusStr[],
-    FinishedVenusStr[],
-    PrimaryErrorBuffer[];
+extern char PrimaryErrorBuffer[];
 
 /* MAXCHILDPIDS is from console.h */
 int	children[MAXCHILDPIDS] = { -1 };
@@ -203,8 +200,6 @@ static struct FuncStruct FuncParse[] = {
         "ndstatin", "$ network disk in.",  NDSTATIN,
         "ndstatout", "$ network disk out.",  NDSTATOUT,
         "ndstaterr", "$ network disk errors.",  NDSTATERR,
-        "marinerfetch", "!@#MARINERFETCH: ",  MARINERFETCH,
-        "marinerother", "*",  MARINEROTHER,
         "clockhours", "!@#FULLTIME: ",  CLOCKHOURS,
         "clockhourfifths", "!@#FULLTIME: ",  CLOCKHOURFIFTHS,
         "clockminutes", "!@#FULLTIME: ",  CLOCKMINUTES,
@@ -226,9 +221,6 @@ static struct FuncStruct FuncParse[] = {
         "printqueue", "!@#PRINTSTATUS: yes",  PRINTQUEUE,
         "printsent", "$ file(s) have been shipped but not yet printed.",  PRINTSENT,
         "printerrors", "$ file(s) have not been printed due to errors.",  PRINTERRORS,
-        "marinerfinished", "*",  MARINERFINISHED,
-        "vicepersonal", "Your AFS quota is $% full",   VICEPERSONAL,
-        "vicepartition", "Your AFS partition is $% full",   VICEPARTITION,
         "netresponses", "Netresponses not implemented yet...",  NETRESPONSES,
         "udpidle", "There have been no UDP messages for $ seconds.",  UDPIDLE,
         "unauthenticated", "Your AFS connection has expired; use 'klog' to reconnect.",  UNAUTHENTICATED,
@@ -449,8 +441,8 @@ static const char * const OptionTable[] =  {
 #define FLAG_EXTERNALERRORFILE 77
 	"dynamicrectangle",
 #define FLAG_DYNAMICRECTANGLE 78
-	"venuspollperiod",
-#define FLAG_VENUSPOLLPERIOD 79
+	"",
+// 79 unused
 	"updatealways",
 #define FLAG_ALWAYSUPDATE 80
 	"initexec",
@@ -816,7 +808,7 @@ static char *lcfilename(char  *s				/* source string */)
 
 
 
-extern char *RealProgramName;
+extern const char RealProgramName[];
 
 /* | mask = turn on, & ~mask = turn off */
 #define	STD_MASK	0   /* standard menulist */
@@ -1111,7 +1103,7 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
     mydbg(("Entering: SetupFromConsoleFile(self, %d)\n", IsStartup));
     sprintf(DEFAULTFILE, "%s", "fudgenut.con");
     HideIt = FALSE;
-    DiskPollFreq = VenusPollFreq = VenusPollCt = DiskPollCt = MailPollFreq = MailPollCt = DirPollFreq = PrintPollFreq = PrintPollCt = DirPollCt = WindowPollFreq = WindowPollCt = 60;
+    DiskPollFreq = DiskPollCt = MailPollFreq = MailPollCt = DirPollFreq = PrintPollFreq = PrintPollCt = DirPollCt = WindowPollFreq = WindowPollCt = 60;
     OutgoingAge = 3600;
     ClockPollFreq = ClockPollCt = VMPollFreq = VMPollCt = 2;
     NetPollFreq = NetPollCt = 60;
@@ -1547,10 +1539,6 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 		VMPollFreq = atoi(GetNextToken(self, TRUE, pfd, &lineno, TRUE));
 		VMPollCt = VMPollFreq + 1;
 		break;
-	    case FLAG_VENUSPOLLPERIOD:
-		VenusPollFreq = atoi(GetNextToken(self, TRUE, pfd, &lineno, TRUE));
-		VenusPollCt = VenusPollFreq + 1;
-		break;
 	    case FLAG_WINDOWPOLLPERIOD:
 		WindowPollFreq = atoi(GetNextToken(self, TRUE, pfd, &lineno, TRUE));
 		WindowPollCt = WindowPollFreq + 1;
@@ -1850,9 +1838,6 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
     }
     DoMailChecking = Numbers[MAIL].IsDisplaying;
     DoTroubleChecking = Numbers[TROUBLE].IsDisplaying;
-    DoVenusChecking = Numbers[VICEPERSONAL].IsDisplaying
-      || Numbers[VICEPARTITION].IsDisplaying
-      || Numbers[UNAUTHENTICATED].IsDisplaying;
     DoNetChecking = Numbers[NETRESPONSES].IsDisplaying;
     DoCheckClock = Numbers[CLOCKHOURS].IsDisplaying
       || Numbers[CLOCKHOURFIFTHS].IsDisplaying
@@ -1861,9 +1846,6 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
       || Numbers[CLOCKALL].IsDisplaying
       || Numbers[DATE].IsDisplaying
       || Numbers[UDPIDLE].IsDisplaying;
-    DoVenusMonitoring = DoVenusMonitoring || Numbers[MARINERFETCH].IsDisplaying
-      || Numbers[MARINEROTHER].IsDisplaying || Numbers[MARINERFINISHED].IsDisplaying
-      || Numbers[VICEPERSONAL].IsDisplaying || Numbers[VICEPARTITION].IsDisplaying;
 
     FontCount = 0;
     inc = 2;
@@ -1888,9 +1870,6 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
     if (!IsStartup) {
 	SetStandardCursor(self, Cursor_Arrow);
     }
-    Numbers[MARINEROTHER].RawText = OtherVenusStr;
-    Numbers[MARINERFETCH].RawText = FetchVenusStr;
-    Numbers[MARINERFINISHED].RawText = FinishedVenusStr;
     self->userMenulist = PrepareUserMenus(self, ATK::LoadClass("consoleClass"));
     (self)->WantUpdate( self);
 

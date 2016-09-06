@@ -32,7 +32,7 @@
  * -This program collects all the monitoring information you might
  * -ever want, and lets you configure it in a single instrument
  * -console in a very flexible way.  It is intended to supersede
- * -clock, gvmstat, mariner, wdf, ttyscript, and probably a bunch
+ * -clock, gvmstat, wdf, ttyscript, and probably a bunch
  * -of other stuff as well.
  *
  */
