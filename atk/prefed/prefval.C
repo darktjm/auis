@@ -61,6 +61,10 @@ static int compare_choices(int  *i1 , int  *i2);
 static char *GlomStrings(char  *s , char  *t);
 static char *ReadLine(FILE  *f);
 
+static char *strsave(const char *s)
+{
+    return s ? strdup(s) : NULL;
+}
 
 void prefval::FreeValue(struct prefval_value  *v)
 { /* presumably vlue was cpied in using CopyValue, so safe to un-const */
@@ -90,19 +94,19 @@ void prefval::CopyValue(struct prefval_value  *v1 , struct prefval_value  *v2)
     (this)->FreeValue( v1);
     switch((this)->GetType()) {
 	case prefval_Filename:
-	    v1->v.fval=strdup(v2->v.fval);
+	    v1->v.fval=strsave(v2->v.fval);
 	    break;
 	case prefval_Directory:
-	    v1->v.dval=strdup(v2->v.dval);
+	    v1->v.dval=strsave(v2->v.dval);
 	    break;
 	case prefval_String:
-	    v1->v.sval=strdup(v2->v.sval);
+	    v1->v.sval=strsave(v2->v.sval);
 	    break;
 	case prefval_Font:
-	    v1->v.fontval=strdup(v2->v.fontval);
+	    v1->v.fontval=strsave(v2->v.fontval);
 	    break;
 	case prefval_Color:
-	    v1->v.cval=strdup(v2->v.cval);
+	    v1->v.cval=strsave(v2->v.cval);
 	    break;
 	default: 
 	    *v1 = (*v2);
@@ -538,7 +542,7 @@ void prefval::SetFromPreferenceString(const char  *str)
 {
     (this)->ClearValues();
     if(this->separator) {
-	char *sstr = strdup(str), *b=sstr;
+	char *sstr = strsave(str), *b=sstr;
 	char *p;
 	int i=0;
 	
@@ -654,21 +658,21 @@ long prefval::Write(FILE  *file, long  writeID, int  level)
 void prefval::SetAppName(const char  *name)
 {
     zfree(this->appname);
-    this->appname=strdup(name);
+    this->appname=strsave(name);
     (this)->SetModified();
 }
 
 void prefval::SetPrefName(const char  *name)
 {
     zfree(this->prefname);
-    this->prefname=strdup(name);
+    this->prefname=strsave(name);
     (this)->SetModified();
 }
 
 void prefval::SetSeparator(const char  *name)
 {
     zfree(this->separator);
-    this->separator=strdup(name);
+    this->separator=strsave(name);
     (this)->SetModified();
 }
 
@@ -790,7 +794,7 @@ void prefval::SortChoices()
     }
 
     for(i=0;i<listsize;i++) {
-	::choices[i]=strdup(this->choices[i]);
+	::choices[i]=strsave(this->choices[i]);
 	(this)->InitValue( ::cvalues+i);
 	(this)->CopyValue( ::cvalues+i, this->cvalues+i);
 	indices[i]=i;
@@ -817,7 +821,7 @@ void prefval::SortChoices()
 void prefval::SetCondition(char  *cond)
 {
     zfree(this->condition);
-    this->condition=strdup(cond);
+    this->condition=strsave(cond);
     (this)->SetModified();
 }
 
