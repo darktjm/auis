@@ -90,7 +90,7 @@ So far, the following incompatibilities have been introduced:
    of flex's "COPYING".
 
  - I have removed NEOS (contrib/mit).  I doubt it's in use any more,
-   and I don't feel like maintaining it (just updating to krb4 would
+   and I don't feel like maintaining it (just updating to krb5 would
    take way too much effort).
 
 In any case, what I intend to do with this is in the tjm-todo file,
@@ -132,7 +132,7 @@ So far, what I've done is:
 
   - Removed all warnings related to string literals not being constant
 
-  - Cleaned up warnings in much of overhead and atk/basics directories
+  - Cleaned up warnings in much of overhead and atk directories
   
   - Removed pervasive incorrect use of "it's"
 
@@ -145,10 +145,3 @@ So far, what I've done is:
     issues and general code ugliness.
 
   - Fixed bugs in bush as well, and made it usable as a dired replacement
-
-Don't expect any of the ams stuff to work; I am wary of even trying to
-test it, as it access the network.  I may some day add the white page
-stuff to the code to build and clean, but again, there will be no
-testing.  Similarly, once I figure out what AFS support actually is, I
-might enable it and clean it up (not sure why user-level apps need to
-know what filesystem you're using, but what do I know?).

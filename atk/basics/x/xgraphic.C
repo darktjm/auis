@@ -2040,6 +2040,7 @@ void xgraphic_LocalSetClippingRect(class xgraphic  * self ,struct xgraphic_Updat
 			   (self)->XFillGC(),
 			   /* Clip origin */0,0,XRect,/* Num Rects */1,
 			   YXBanded);
+	if (regionDebug) printf("LocalSetClip: finished with clip and visual: x %ld, y %ld, width %ld, height %ld\n", rectangle_Left(&Temp), rectangle_Top(&Temp), rectangle_Width(&Temp), rectangle_Height(&Temp));
     }
     else {
 	class region *clipRegion;
@@ -2057,6 +2058,9 @@ void xgraphic_LocalSetClippingRect(class xgraphic  * self ,struct xgraphic_Updat
 
 	if (self->clippingRegion != NULL)  {
 	    (clipRegion)->IntersectRegion( self->clippingRegion, clipRegion);
+	    if (regionDebug)
+		self->clippingRegion->GetBoundingBox(&Temp);
+	    if (regionDebug) printf("LocalSetClip: clip: x %ld, y %ld, width %ld, height %ld\n", rectangle_Left(&Temp), rectangle_Top(&Temp), rectangle_Width(&Temp), rectangle_Height(&Temp));
 	}
 
 	/* map it to physical space (X coordinates) */
@@ -2064,14 +2068,25 @@ void xgraphic_LocalSetClippingRect(class xgraphic  * self ,struct xgraphic_Updat
 	(clipRegion)->OffsetRegion( physical_LogicalXToGlobalX(self, 0),
 			    physical_LogicalYToGlobalY(self, 0));
 
-	if (regionDebug) printf("LocalSetClip: finished with clip and visual: x %ld, y %ld, width %ld, height %ld\n", rectangle_Left(&Temp), rectangle_Top(&Temp), rectangle_Width(&Temp), rectangle_Bottom(&Temp));
+	if (regionDebug)
+	    clipRegion->GetBoundingBox(&Temp);
 
+	if (regionDebug) printf("LocalSetClip: finished with clip and visual: x %ld, y %ld, width %ld, height %ld\n", rectangle_Left(&Temp), rectangle_Top(&Temp), rectangle_Width(&Temp), rectangle_Height(&Temp));
 
 	if (regionDebug) printf("LocalSetClip: Using block %p\n", updateBlk);
 
 	if (regionDebug) printf("localsetclip: region counter in update block %ld, region %p\n", updateBlk->RegionCounter, updateBlk->updateRegionInUse);
 
-	if (updateBlk->updateRegionInUse) {
+	if (regionDebug && updateBlk->updateRegionInUse) {
+	    XClipBox(updateBlk->updateRegionInUse, XRect);
+	    printf("LocalSetClip: update region bounds %dx%d@%d,%d\n", XRect->width, XRect->height, XRect->x, XRect->y);
+	}
+	/* many objects change appearance outside of the "updateRegionInUse" on resize */
+	/* e.g. borders need to be removed inside, and redrawn in new positions */
+	/* e.g. text which wraps needs to be redrawn to new boundaries */
+	/* for now, just update the whole region instead of just what was exposed */
+	/* for non-resize updates, this is expensive, but I see no immediate easy fix */
+	if (0 && updateBlk->updateRegionInUse) {
 	    /* Intersect it with the update region */
 	    XIntersectRegion((clipRegion)->GetRegionData(),
 			     updateBlk->updateRegionInUse,
@@ -2079,14 +2094,9 @@ void xgraphic_LocalSetClippingRect(class xgraphic  * self ,struct xgraphic_Updat
 	    /* Set clipping rectangles */
 
 	    if (regionDebug){
-		XRectangle fakeRect;
-
 		printf("localsetclip: setting clip rect to intersected form\n");
-		printf("xim:about to test for region equality\n");
-		fakeRect.x = fakeRect.y = 0;
-		fakeRect.width = fakeRect.height = 32000;
-		XClipBox((clipRegion)->GetRegionData(),&fakeRect);
-		printf("xgraphic: clipbox of final clipping region is %d, %d, %d, %d\n", fakeRect.x, fakeRect.y, fakeRect.width, fakeRect.height);
+		XClipBox((clipRegion)->GetRegionData(),XRect);
+		printf("xgraphic: clipbox of final clipping region is %d, %d, %d, %d\n", XRect->x, XRect->y, XRect->width, XRect->height);
 	    }
 	}
 
