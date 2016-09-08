@@ -137,7 +137,7 @@ struct tlex_ErrorRecparm {
 
 
 struct tlex_tables {
-	const struct tlex_Recparm * const *rectbl;
+	struct tlex_Recparm * const *rectbl;
 			/* array describing possible actions */
 	const short *action;	/* action for each initial character
 			if value has tlex_ACTTHONG set,
@@ -148,7 +148,7 @@ struct tlex_tables {
 				with value as token number */
 	int hichar;	/* action has elements for 0...hichar */
 	int defaultaction;	/* action for characters above hichar */
-	const struct tlex_Recparm *reservedwordparm;
+	struct tlex_Recparm *reservedwordparm;
 				/* points to a recparm struct for
 				handling reserved words */
 	const char * const *thongtbl;	/* points to sorted array of thong strings

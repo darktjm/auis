@@ -544,14 +544,6 @@ QueryReadOnly(class ness  *ness, class simpletext  *s,
 	RunError(msg, iar);
 }
 
-/* this is a separate function to avoid many "variable <x> may be clobbered" warnings */
-/* hopefully the compiler won't just in-line the code and ignore the clobberings */
-/* I really ought to change this to use C++ exceptions - tjm */
-static int my_setjmp(void)
-{
-    return setjmp(ExecutionExit);
-}
-
 	static long
 ness_stkeltsize(union stackelement *s) {
 	switch(s->i.hdr) {
@@ -646,8 +638,8 @@ interpretNess(short  func, ATK  *arg, class ness  *ness) {
 	gocount = 0;
 	osi_GetTimes(&starttime);
 
-	if ((exitcode=my_setjmp()) != 0) {
-		struct errornode *msg = NULL;
+	if ((exitcode=setjmp(ExecutionExit)) != 0) {
+		struct errornode * volatile msg = NULL;
 
 		/* return here from longjmp after execution terminates
 			 either an error or normal end of execution */
@@ -655,7 +647,7 @@ interpretNess(short  func, ATK  *arg, class ness  *ness) {
 		/* reset the destination of the error longjmp
 				(in case popValue fails) */
 /* printf("ExitCode: %d\n", exitcode); */
-		if (my_setjmp() == 0) {
+		if (setjmp(ExecutionExit) == 0) {
 			/* setjmp returns 0 when first called */
 			InterpretationInProgress = NULL;
 
@@ -967,7 +959,7 @@ brancher: {
 		FILE *f;
 		char *s;
 		char fullName[MAXPATHLEN+1];
-		const char *fname;
+		const char * volatile fname;
 		long val;
 		unsigned char subop = *iar++;	/* a - ATK;   r - raw */
 
@@ -1690,14 +1682,14 @@ brancher: {
 				to the call on this operator, so the contents can
 				be returned as the value of the writefile */
 		unsigned char op = *iar++;
-		class nessmark *contents;
-		ATK  *obj;
+		class nessmark * volatile contents;
+		ATK  * volatile obj;
 		class text *t, *tempt;
 		char *s;
 		FILE *f;
 		long pos, len;
 		char fullName[MAXPATHLEN+1];
-		struct ptrstkelt *p;
+		struct ptrstkelt * volatile p;
 
 		/* (assume seqstkelt at top;  check later) */
 		if (op != 'o') {

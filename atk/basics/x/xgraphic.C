@@ -1136,9 +1136,11 @@ void xgraphic::FillRgn(class region  * Rgn,class graphic *Tile)
 	/* Step 4 - offset by physical coordinates */
 	(tmpRegion)->OffsetRegion( physical_LogicalXToGlobalX(this,0), physical_LogicalYToGlobalY(this,0));
 
+#if 0  // disable updateRegionInUse; see comments in xgraphic_LocalSetClippingRect below for why
 	/* Step 4a Check for compounding update regions */
 	curBlock = xgraphic_FindUpdateBlock((this)->XDisplay(), (this)->XWindow());
 	if (curBlock->updateRegionInUse) XIntersectRegion(tmpRegion->regionData, curBlock->updateRegionInUse, tmpRegion->regionData);
+#endif
 
 	/* Step 5 - installing clipping rectangles */
 	XSetRegion((this)->XDisplay(), (this)->XFillGC(), tmpRegion->regionData);

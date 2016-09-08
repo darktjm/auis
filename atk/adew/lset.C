@@ -266,6 +266,7 @@ putchar(c);
 	    *buf++ = c;
 	}
     }
+    *buf = 0; /* valgrind says libc is scanning for a terminator, for some reason */
     sscanf(cbuf,"%d %d %d %ld %ld %ld %ld\n" ,&(this->type),&(this->pct),&(this->application),
 	 &did,&lid,&rid,&textpending);
     cp = strchr(cbuf,'\n'); cp++;

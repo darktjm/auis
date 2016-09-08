@@ -559,7 +559,7 @@ tlex::LexFunc(void *lexrock, void *yylval) {
 
 	const struct tlex_tables *tab = self->lextab;
 	int action;
-	const struct tlex_Recparm *parm;
+	struct tlex_Recparm *parm;
 	int success = 0;
 	char *tbuf;
 

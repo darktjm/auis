@@ -123,6 +123,7 @@ figotext::figotext()
     this->text_size = 8;
     this->text = (char *)malloc(this->text_size * sizeof(char));
     this->textdirty = TRUE;
+    this->yoffset = 0;
     this->dotpos = (-1);
     this->excessx = 0;
     this->excessy = 0;
