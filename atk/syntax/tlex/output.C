@@ -113,7 +113,7 @@ WriteClass(FILE  *fout, struct line  *hdr)
 	}
 
 	/* output struct variables and initial values */
-	fprintf(fout, "static const struct %s_type %s = {\n", 
+	fprintf(fout, "static struct %s_type %s = {\n", 
 			hdr->u.h.structname, hdr->u.h.structname);
 	for (elt = hdr->u.h.decls; elt; elt = elt->next) {
 		if (*elt->u.d.val == '$') {
@@ -154,12 +154,12 @@ WriteRectbl(FILE  *f)
 	int i;
 	const char *comma;
 
-	fprintf(f, "\nstatic const struct tlex_Recparm *(%s_recparmtbl[]) = {", 
+	fprintf(f, "\nstatic struct tlex_Recparm * const (%s_recparmtbl[]) = {", 
 			Prefix);
 
 	comma = "";	/* no comma before the first entry */
 	for (lx = Classes, i = 0; lx; lx = lx->next, i++) {
-		fprintf(f, "%s\n\t(const struct tlex_Recparm *)&%s",
+		fprintf(f, "%s\n\t(struct tlex_Recparm *)&%s",
 			comma, lx->u.h.structname);
 		comma = ",";
 	}
@@ -198,7 +198,7 @@ WriteActions(FILE  *f)
 			Escapify(buf, NULL));
 	}
 
-	fprintf(f, "\nstatic short %s_actiontbl[] = {", Prefix);
+	fprintf(f, "\nstatic const short %s_actiontbl[] = {", Prefix);
 	for (i = 0; i <= HiChar; i++) {
 		if (i % 8 == 0) {
 			char b[2];
@@ -258,7 +258,7 @@ fprintf(fout, "\t/* int hichar; */	%d,\n", (int)(unsigned char)HiChar);
 fprintf(fout, "\t/* int defaultaction;*/	%d,\n", defaultaction);
 fprintf(fout, "\t/* reservedwordparm;*/	");
 if (ResWordHandler)
-	fprintf(fout, "(const struct tlex_Recparm *)&%s,\n",
+	fprintf(fout, "(struct tlex_Recparm *)&%s,\n",
 			ResWordHandler->u.h.structname);
 else 
 	fprintf(fout, "NULL,\n");

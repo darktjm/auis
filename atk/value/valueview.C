@@ -65,7 +65,7 @@ void valueview__GetCenter( class valueview  * self, long  * x , long  * y );
 
 static void LookupParameters(class valueview  * self)
      {
-  struct resourceList parameters[4];
+  struct resourceList parameters[4] = {};
   parameters[0].name = AL_background;
   parameters[0].type = A_graphic;
   parameters[1].name = AL_border;
