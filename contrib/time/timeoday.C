@@ -542,7 +542,7 @@ GlomStrings(char  *s , char  *t)
 
   char *r;
 
-  if (r = (char *)malloc(strlen(s)+strlen(t)+1)) {
+  if ((r = (char *)malloc(strlen(s)+strlen(t)+1))) {
     *r = '\0';
     strcpy(r,s);
     free(s);
@@ -573,7 +573,7 @@ ReadLine(FILE  *f)
   int i,j;
 
   
-  if (result = (char *)malloc(1)) {
+  if ((result = (char *)malloc(1))) {
     *result = '\0';
 
     while (fgets(buf,sizeof(buf),f)) {
@@ -637,7 +637,7 @@ EncodeFont(class timeoday  *self)
   if (myfonttype & fontdesc_Bold) strcpy(type,"b");
   if (myfonttype & fontdesc_Italic) strcpy(type,"i");
   if (myfonttype & fontdesc_Fixed) strcpy(type,"f");
-  if (buf = (char *)malloc(strlen(myfontname)+25)) {
+  if ((buf = (char *)malloc(strlen(myfontname)+25))) {
     sprintf(buf,"%s%ld%s", myfontname, myfontsize, type);
     return (buf);
   } else {
