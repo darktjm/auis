@@ -89,7 +89,7 @@ white
 \enddata{link,6769328}
 \view{linkview,6769328,3,0,0}
 
-Plain-text version of doc/README.ez\
+Plain-text version of doc/ADMINISTRATOR/README.ez\
 \enddata{text,6768592}
 ]
     bin
@@ -122,9 +122,6 @@ Directory to add to $PATH for most functionality.\
       andrewdirs
       arb
       atkatoms
-      audiocompose
-      audiosend
-      batmail
       bdffont
       [0
 \begindata{text,6773072}
@@ -143,7 +140,6 @@ Directory to add to $PATH for most functionality.\
 
 \enddata{text,6774480}
 ]
-      bglisp
       bison
       bush
       [0
@@ -176,8 +172,6 @@ Directory to add to $PATH for most functionality.\
       convertraster
       createcon
       createinset
-      cui
-      cuin
       datacat
       [0
 \begindata{text,6780400}
@@ -187,7 +181,6 @@ Directory to add to $PATH for most functionality.\
 
 \enddata{text,6780400}
 ]
-      eatmail
       eq
       [0
 \begindata{text,6781712}
@@ -197,7 +190,6 @@ Directory to add to $PATH for most functionality.\
 
 \enddata{text,6781712}
 ]
-      extcompose
       ez
       [0
 \begindata{text,6783184}
@@ -247,10 +239,10 @@ Directory to add to $PATH for most functionality.\
 
 \enddata{text,6788592}
 ]
+      gdp
       genmake
       genstatl
       gentlex
-      getfilename
       getstats
       help
       [0
@@ -299,25 +291,11 @@ Directory to add to $PATH for most functionality.\
 
 \enddata{text,6796080}
 ]
-      mailserver
-      mailto
-      mailto-hebrew
-      messages
-      [0
-\begindata{text,6797648}
-\textdsversion{12}
-\template{default}
-\bold{runapp} link: \bold{messagesapp}
-
-\enddata{text,6797648}
-]
-      messagesn
-      metamail
-      metasend
       mkbrowse
       mkparser
       mkparserclass
       mkurlbutton
+      mrecord
       mmencode
       nessrun
       [0
@@ -337,7 +315,6 @@ Directory to add to $PATH for most functionality.\
 
 \enddata{text,6801040}
 ]
-      patch-metamail
       pipescript
       [0
 \begindata{text,6802352}
@@ -377,12 +354,7 @@ Directory to add to $PATH for most functionality.\
 
 \enddata{text,6806288}
 ]
-      readmail
-      receiveASing
       recover
-      richtext
-      richtoatk
-      robin
       rofftext
       [0
 \begindata{text,6808400}
@@ -472,19 +444,6 @@ dataclass arg passed in.\
 \enddata{text,6818896}
 ]
       scribetext
-      sendASing
-      sendmail
-      sendmessage
-      sendmessagen
-      sendnews
-      showaudio
-      showexternal
-      shownonascii
-      showpartial
-      showpicture
-      splitmail
-      sun2mime.csh
-      sun-audiof.csh
       sys
       table
       [0
@@ -513,8 +472,6 @@ dataclass arg passed in.\
 
 \enddata{text,6824448}
 ]
-      vui
-      vuin
       web
       [0
 \begindata{text,6825888}
@@ -1066,28 +1023,6 @@ white
 }\enddata{text,6867200}
 ]
       {
-      SetUp
-      [0
-\begindata{text,6868928}
-\textdsversion{12}
-\begindata{link,6869664}
-4
-${ANDREWDIR}/doc/SetUp
-0
-0
-V
-\begindata{link,6869664}
-Datastream version: 2
-SetUp
-2
-
-black
-white
-\enddata{link,6869664}
-\enddata{link,6869664}
-\view{linkview,6869664,27,0,0\
-}\enddata{text,6868928}
-]
       CONTENTS.ez
       [0
 \begindata{text,6870656}
@@ -1330,6 +1265,28 @@ white
 \enddata{link,6888944}
 \view{linkview,6888944,38,0,0\
 }\enddata{text,6888272}
+]
+        SetUp
+        [0
+\begindata{text,6868928}
+\textdsversion{12}
+\begindata{link,6869664}
+4
+${ANDREWDIR}/doc/ADMINISTRATOR/SetUp
+0
+0
+V
+\begindata{link,6869664}
+Datastream version: 2
+SetUp
+2
+
+black
+white
+\enddata{link,6869664}
+\enddata{link,6869664}
+\view{linkview,6869664,27,0,0\
+}\enddata{text,6868928}
 ]
         samples
         [0
@@ -2413,28 +2370,6 @@ white
 \view{linkview,6975296,87,0,0\
 }\enddata{text,6974560}
 ]
-        Dict.CKP
-        [0
-\begindata{text,6976304}
-\textdsversion{12}
-\begindata{link,6977040}
-4
-${ANDREWDIR}/doc/AtkTour/Dict.CKP
-0
-0
-V
-\begindata{link,6977040}
-Datastream version: 2
-Dict.CKP
-2
-
-black
-white
-\enddata{link,6977040}
-\enddata{link,6977040}
-\view{linkview,6977040,88,0,0\
-}\enddata{text,6976304}
-]
         Focus
         [0
 \begindata{text,6978048}
@@ -2522,28 +2457,6 @@ white
 \enddata{link,6984016}
 \view{linkview,6984016,92,0,0\
 }\enddata{text,6983280}
-]
-        Media.CKP
-        [0
-\begindata{text,6985024}
-\textdsversion{12}
-\begindata{link,6985760}
-4
-${ANDREWDIR}/doc/AtkTour/Media.CKP
-0
-0
-V
-\begindata{link,6985760}
-Datastream version: 2
-Media.CKP
-2
-
-black
-white
-\enddata{link,6985760}
-\enddata{link,6985760}
-\view{linkview,6985760,93,0,0\
-}\enddata{text,6985024}
 ]
         Menu
         [0
@@ -2854,2672 +2767,6 @@ white
 \enddata{link,7010256}
 \view{linkview,7010256,107,0,0\
 }\enddata{text,7009520}
-]
-        }
-      inprogram/vui/help
-      [0
-\begindata{text,7011264}
-\textdsversion{12}
-\begindata{link,7012000}
-4
-${ANDREWDIR}/doc/inprogram/vui/help
-0
-0
-V
-\begindata{link,7012000}
-Datastream version: 2
-inprogram/vui/help
-2
-
-black
-white
-\enddata{link,7012000}
-\enddata{link,7012000}
-\view{linkview,7012000,108,0,0\
-}\enddata{text,7011264}
-]
-        {
-        dataentry.hlp
-        [0
-\begindata{text,7013008}
-\textdsversion{12}
-\begindata{link,7013744}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/dataentry.hlp
-0
-0
-V
-\begindata{link,7013744}
-Datastream version: 2
-dataentry.hlp
-2
-
-black
-white
-\enddata{link,7013744}
-\enddata{link,7013744}
-\view{linkview,7013744,109,0,0\
-}\enddata{text,7013008}
-]
-        filedata.hlp
-        [0
-\begindata{text,7014832}
-\textdsversion{12}
-\begindata{link,7015504}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/filedata.hlp
-0
-0
-V
-\begindata{link,7015504}
-Datastream version: 2
-filedata.hlp
-2
-
-black
-white
-\enddata{link,7015504}
-\enddata{link,7015504}
-\view{linkview,7015504,110,0,0\
-}\enddata{text,7014832}
-]
-        mainpanel.hlp
-        [0
-\begindata{text,7016592}
-\textdsversion{12}
-\begindata{link,7017264}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/mainpanel.hlp
-0
-0
-V
-\begindata{link,7017264}
-Datastream version: 2
-mainpanel.hlp
-2
-
-black
-white
-\enddata{link,7017264}
-\enddata{link,7017264}
-\view{linkview,7017264,111,0,0\
-}\enddata{text,7016592}
-]
-        msgentry.hlp
-        [0
-\begindata{text,7018352}
-\textdsversion{12}
-\begindata{link,7019024}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/msgentry.hlp
-0
-0
-V
-\begindata{link,7019024}
-Datastream version: 2
-msgentry.hlp
-2
-
-black
-white
-\enddata{link,7019024}
-\enddata{link,7019024}
-\view{linkview,7019024,112,0,0\
-}\enddata{text,7018352}
-]
-        multchoice.hlp
-        [0
-\begindata{text,7020112}
-\textdsversion{12}
-\begindata{link,7020784}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/multchoice.hlp
-0
-0
-V
-\begindata{link,7020784}
-Datastream version: 2
-multchoice.hlp
-2
-
-black
-white
-\enddata{link,7020784}
-\enddata{link,7020784}
-\view{linkview,7020784,113,0,0\
-}\enddata{text,7020112}
-]
-        pcm0.hlp
-        [0
-\begindata{text,7021872}
-\textdsversion{12}
-\begindata{link,7022544}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm0.hlp
-0
-0
-V
-\begindata{link,7022544}
-Datastream version: 2
-pcm0.hlp
-2
-
-black
-white
-\enddata{link,7022544}
-\enddata{link,7022544}
-\view{linkview,7022544,114,0,0\
-}\enddata{text,7021872}
-]
-        pcm10.hlp
-        [0
-\begindata{text,7023632}
-\textdsversion{12}
-\begindata{link,7024304}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm10.hlp
-0
-0
-V
-\begindata{link,7024304}
-Datastream version: 2
-pcm10.hlp
-2
-
-black
-white
-\enddata{link,7024304}
-\enddata{link,7024304}
-\view{linkview,7024304,115,0,0\
-}\enddata{text,7023632}
-]
-        pcm11.hlp
-        [0
-\begindata{text,7025392}
-\textdsversion{12}
-\begindata{link,7026064}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm11.hlp
-0
-0
-V
-\begindata{link,7026064}
-Datastream version: 2
-pcm11.hlp
-2
-
-black
-white
-\enddata{link,7026064}
-\enddata{link,7026064}
-\view{linkview,7026064,116,0,0\
-}\enddata{text,7025392}
-]
-        pcm12.hlp
-        [0
-\begindata{text,7027152}
-\textdsversion{12}
-\begindata{link,7027824}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm12.hlp
-0
-0
-V
-\begindata{link,7027824}
-Datastream version: 2
-pcm12.hlp
-2
-
-black
-white
-\enddata{link,7027824}
-\enddata{link,7027824}
-\view{linkview,7027824,117,0,0\
-}\enddata{text,7027152}
-]
-        pcm13.hlp
-        [0
-\begindata{text,7028912}
-\textdsversion{12}
-\begindata{link,7029584}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm13.hlp
-0
-0
-V
-\begindata{link,7029584}
-Datastream version: 2
-pcm13.hlp
-2
-
-black
-white
-\enddata{link,7029584}
-\enddata{link,7029584}
-\view{linkview,7029584,118,0,0\
-}\enddata{text,7028912}
-]
-        pcm14.hlp
-        [0
-\begindata{text,7030672}
-\textdsversion{12}
-\begindata{link,7031344}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm14.hlp
-0
-0
-V
-\begindata{link,7031344}
-Datastream version: 2
-pcm14.hlp
-2
-
-black
-white
-\enddata{link,7031344}
-\enddata{link,7031344}
-\view{linkview,7031344,119,0,0\
-}\enddata{text,7030672}
-]
-        pcm15.hlp
-        [0
-\begindata{text,7032432}
-\textdsversion{12}
-\begindata{link,7033104}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm15.hlp
-0
-0
-V
-\begindata{link,7033104}
-Datastream version: 2
-pcm15.hlp
-2
-
-black
-white
-\enddata{link,7033104}
-\enddata{link,7033104}
-\view{linkview,7033104,120,0,0\
-}\enddata{text,7032432}
-]
-        pcm16.hlp
-        [0
-\begindata{text,7034192}
-\textdsversion{12}
-\begindata{link,7034864}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm16.hlp
-0
-0
-V
-\begindata{link,7034864}
-Datastream version: 2
-pcm16.hlp
-2
-
-black
-white
-\enddata{link,7034864}
-\enddata{link,7034864}
-\view{linkview,7034864,121,0,0\
-}\enddata{text,7034192}
-]
-        pcm17.hlp
-        [0
-\begindata{text,7035952}
-\textdsversion{12}
-\begindata{link,7036624}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm17.hlp
-0
-0
-V
-\begindata{link,7036624}
-Datastream version: 2
-pcm17.hlp
-2
-
-black
-white
-\enddata{link,7036624}
-\enddata{link,7036624}
-\view{linkview,7036624,122,0,0\
-}\enddata{text,7035952}
-]
-        pcm18.hlp
-        [0
-\begindata{text,7037712}
-\textdsversion{12}
-\begindata{link,7038384}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm18.hlp
-0
-0
-V
-\begindata{link,7038384}
-Datastream version: 2
-pcm18.hlp
-2
-
-black
-white
-\enddata{link,7038384}
-\enddata{link,7038384}
-\view{linkview,7038384,123,0,0\
-}\enddata{text,7037712}
-]
-        pcm19.hlp
-        [0
-\begindata{text,7039472}
-\textdsversion{12}
-\begindata{link,7040144}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm19.hlp
-0
-0
-V
-\begindata{link,7040144}
-Datastream version: 2
-pcm19.hlp
-2
-
-black
-white
-\enddata{link,7040144}
-\enddata{link,7040144}
-\view{linkview,7040144,124,0,0\
-}\enddata{text,7039472}
-]
-        pcm1.hlp
-        [0
-\begindata{text,7041232}
-\textdsversion{12}
-\begindata{link,7041904}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm1.hlp
-0
-0
-V
-\begindata{link,7041904}
-Datastream version: 2
-pcm1.hlp
-2
-
-black
-white
-\enddata{link,7041904}
-\enddata{link,7041904}
-\view{linkview,7041904,125,0,0\
-}\enddata{text,7041232}
-]
-        pcm20.hlp
-        [0
-\begindata{text,7042992}
-\textdsversion{12}
-\begindata{link,7043664}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm20.hlp
-0
-0
-V
-\begindata{link,7043664}
-Datastream version: 2
-pcm20.hlp
-2
-
-black
-white
-\enddata{link,7043664}
-\enddata{link,7043664}
-\view{linkview,7043664,126,0,0\
-}\enddata{text,7042992}
-]
-        pcm21.hlp
-        [0
-\begindata{text,7044752}
-\textdsversion{12}
-\begindata{link,7045424}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm21.hlp
-0
-0
-V
-\begindata{link,7045424}
-Datastream version: 2
-pcm21.hlp
-2
-
-black
-white
-\enddata{link,7045424}
-\enddata{link,7045424}
-\view{linkview,7045424,127,0,0\
-}\enddata{text,7044752}
-]
-        pcm22.hlp
-        [0
-\begindata{text,6751072}
-\textdsversion{12}
-\begindata{link,6751744}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm22.hlp
-0
-0
-V
-\begindata{link,6751744}
-Datastream version: 2
-pcm22.hlp
-2
-
-black
-white
-\enddata{link,6751744}
-\enddata{link,6751744}
-\view{linkview,6751744,128,0,0\
-}\enddata{text,6751072}
-]
-        pcm23.hlp
-        [0
-\begindata{text,6752832}
-\textdsversion{12}
-\begindata{link,7052016}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm23.hlp
-0
-0
-V
-\begindata{link,7052016}
-Datastream version: 2
-pcm23.hlp
-2
-
-black
-white
-\enddata{link,7052016}
-\enddata{link,7052016}
-\view{linkview,7052016,129,0,0\
-}\enddata{text,6752832}
-]
-        pcm24.hlp
-        [0
-\begindata{text,7053104}
-\textdsversion{12}
-\begindata{link,7053776}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm24.hlp
-0
-0
-V
-\begindata{link,7053776}
-Datastream version: 2
-pcm24.hlp
-2
-
-black
-white
-\enddata{link,7053776}
-\enddata{link,7053776}
-\view{linkview,7053776,130,0,0\
-}\enddata{text,7053104}
-]
-        pcm25.hlp
-        [0
-\begindata{text,7054864}
-\textdsversion{12}
-\begindata{link,7055536}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm25.hlp
-0
-0
-V
-\begindata{link,7055536}
-Datastream version: 2
-pcm25.hlp
-2
-
-black
-white
-\enddata{link,7055536}
-\enddata{link,7055536}
-\view{linkview,7055536,131,0,0\
-}\enddata{text,7054864}
-]
-        pcm26.hlp
-        [0
-\begindata{text,7056624}
-\textdsversion{12}
-\begindata{link,7057296}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm26.hlp
-0
-0
-V
-\begindata{link,7057296}
-Datastream version: 2
-pcm26.hlp
-2
-
-black
-white
-\enddata{link,7057296}
-\enddata{link,7057296}
-\view{linkview,7057296,132,0,0\
-}\enddata{text,7056624}
-]
-        pcm27.hlp
-        [0
-\begindata{text,7058384}
-\textdsversion{12}
-\begindata{link,7059056}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm27.hlp
-0
-0
-V
-\begindata{link,7059056}
-Datastream version: 2
-pcm27.hlp
-2
-
-black
-white
-\enddata{link,7059056}
-\enddata{link,7059056}
-\view{linkview,7059056,133,0,0\
-}\enddata{text,7058384}
-]
-        pcm28.hlp
-        [0
-\begindata{text,7060144}
-\textdsversion{12}
-\begindata{link,7060816}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm28.hlp
-0
-0
-V
-\begindata{link,7060816}
-Datastream version: 2
-pcm28.hlp
-2
-
-black
-white
-\enddata{link,7060816}
-\enddata{link,7060816}
-\view{linkview,7060816,134,0,0\
-}\enddata{text,7060144}
-]
-        pcm29.hlp
-        [0
-\begindata{text,7061856}
-\textdsversion{12}
-\begindata{link,7062592}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm29.hlp
-0
-0
-V
-\begindata{link,7062592}
-Datastream version: 2
-pcm29.hlp
-2
-
-black
-white
-\enddata{link,7062592}
-\enddata{link,7062592}
-\view{linkview,7062592,135,0,0\
-}\enddata{text,7061856}
-]
-        pcm2.hlp
-        [0
-\begindata{text,7063680}
-\textdsversion{12}
-\begindata{link,7064352}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm2.hlp
-0
-0
-V
-\begindata{link,7064352}
-Datastream version: 2
-pcm2.hlp
-2
-
-black
-white
-\enddata{link,7064352}
-\enddata{link,7064352}
-\view{linkview,7064352,136,0,0\
-}\enddata{text,7063680}
-]
-        pcm30.hlp
-        [0
-\begindata{text,7065440}
-\textdsversion{12}
-\begindata{link,7066112}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm30.hlp
-0
-0
-V
-\begindata{link,7066112}
-Datastream version: 2
-pcm30.hlp
-2
-
-black
-white
-\enddata{link,7066112}
-\enddata{link,7066112}
-\view{linkview,7066112,137,0,0\
-}\enddata{text,7065440}
-]
-        pcm31.hlp
-        [0
-\begindata{text,7067200}
-\textdsversion{12}
-\begindata{link,7067872}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm31.hlp
-0
-0
-V
-\begindata{link,7067872}
-Datastream version: 2
-pcm31.hlp
-2
-
-black
-white
-\enddata{link,7067872}
-\enddata{link,7067872}
-\view{linkview,7067872,138,0,0\
-}\enddata{text,7067200}
-]
-        pcm32.hlp
-        [0
-\begindata{text,7068960}
-\textdsversion{12}
-\begindata{link,7069632}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm32.hlp
-0
-0
-V
-\begindata{link,7069632}
-Datastream version: 2
-pcm32.hlp
-2
-
-black
-white
-\enddata{link,7069632}
-\enddata{link,7069632}
-\view{linkview,7069632,139,0,0\
-}\enddata{text,7068960}
-]
-        pcm33.hlp
-        [0
-\begindata{text,7070720}
-\textdsversion{12}
-\begindata{link,7071392}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm33.hlp
-0
-0
-V
-\begindata{link,7071392}
-Datastream version: 2
-pcm33.hlp
-2
-
-black
-white
-\enddata{link,7071392}
-\enddata{link,7071392}
-\view{linkview,7071392,140,0,0\
-}\enddata{text,7070720}
-]
-        pcm34.hlp
-        [0
-\begindata{text,7072480}
-\textdsversion{12}
-\begindata{link,7073152}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm34.hlp
-0
-0
-V
-\begindata{link,7073152}
-Datastream version: 2
-pcm34.hlp
-2
-
-black
-white
-\enddata{link,7073152}
-\enddata{link,7073152}
-\view{linkview,7073152,141,0,0\
-}\enddata{text,7072480}
-]
-        pcm35.hlp
-        [0
-\begindata{text,7074240}
-\textdsversion{12}
-\begindata{link,7074912}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm35.hlp
-0
-0
-V
-\begindata{link,7074912}
-Datastream version: 2
-pcm35.hlp
-2
-
-black
-white
-\enddata{link,7074912}
-\enddata{link,7074912}
-\view{linkview,7074912,142,0,0\
-}\enddata{text,7074240}
-]
-        pcm36.hlp
-        [0
-\begindata{text,7076000}
-\textdsversion{12}
-\begindata{link,7076672}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm36.hlp
-0
-0
-V
-\begindata{link,7076672}
-Datastream version: 2
-pcm36.hlp
-2
-
-black
-white
-\enddata{link,7076672}
-\enddata{link,7076672}
-\view{linkview,7076672,143,0,0\
-}\enddata{text,7076000}
-]
-        pcm37.hlp
-        [0
-\begindata{text,7077760}
-\textdsversion{12}
-\begindata{link,7078432}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm37.hlp
-0
-0
-V
-\begindata{link,7078432}
-Datastream version: 2
-pcm37.hlp
-2
-
-black
-white
-\enddata{link,7078432}
-\enddata{link,7078432}
-\view{linkview,7078432,144,0,0\
-}\enddata{text,7077760}
-]
-        pcm38.hlp
-        [0
-\begindata{text,7079520}
-\textdsversion{12}
-\begindata{link,7080192}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm38.hlp
-0
-0
-V
-\begindata{link,7080192}
-Datastream version: 2
-pcm38.hlp
-2
-
-black
-white
-\enddata{link,7080192}
-\enddata{link,7080192}
-\view{linkview,7080192,145,0,0\
-}\enddata{text,7079520}
-]
-        pcm39.hlp
-        [0
-\begindata{text,7081280}
-\textdsversion{12}
-\begindata{link,7081952}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm39.hlp
-0
-0
-V
-\begindata{link,7081952}
-Datastream version: 2
-pcm39.hlp
-2
-
-black
-white
-\enddata{link,7081952}
-\enddata{link,7081952}
-\view{linkview,7081952,146,0,0\
-}\enddata{text,7081280}
-]
-        pcm3.hlp
-        [0
-\begindata{text,7083040}
-\textdsversion{12}
-\begindata{link,7083712}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm3.hlp
-0
-0
-V
-\begindata{link,7083712}
-Datastream version: 2
-pcm3.hlp
-2
-
-black
-white
-\enddata{link,7083712}
-\enddata{link,7083712}
-\view{linkview,7083712,147,0,0\
-}\enddata{text,7083040}
-]
-        pcm40.hlp
-        [0
-\begindata{text,7084800}
-\textdsversion{12}
-\begindata{link,7085472}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm40.hlp
-0
-0
-V
-\begindata{link,7085472}
-Datastream version: 2
-pcm40.hlp
-2
-
-black
-white
-\enddata{link,7085472}
-\enddata{link,7085472}
-\view{linkview,7085472,148,0,0\
-}\enddata{text,7084800}
-]
-        pcm41.hlp
-        [0
-\begindata{text,7086560}
-\textdsversion{12}
-\begindata{link,7087232}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm41.hlp
-0
-0
-V
-\begindata{link,7087232}
-Datastream version: 2
-pcm41.hlp
-2
-
-black
-white
-\enddata{link,7087232}
-\enddata{link,7087232}
-\view{linkview,7087232,149,0,0\
-}\enddata{text,7086560}
-]
-        pcm42.hlp
-        [0
-\begindata{text,7088320}
-\textdsversion{12}
-\begindata{link,7088992}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm42.hlp
-0
-0
-V
-\begindata{link,7088992}
-Datastream version: 2
-pcm42.hlp
-2
-
-black
-white
-\enddata{link,7088992}
-\enddata{link,7088992}
-\view{linkview,7088992,150,0,0\
-}\enddata{text,7088320}
-]
-        pcm43.hlp
-        [0
-\begindata{text,7090080}
-\textdsversion{12}
-\begindata{link,7090752}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm43.hlp
-0
-0
-V
-\begindata{link,7090752}
-Datastream version: 2
-pcm43.hlp
-2
-
-black
-white
-\enddata{link,7090752}
-\enddata{link,7090752}
-\view{linkview,7090752,151,0,0\
-}\enddata{text,7090080}
-]
-        pcm44.hlp
-        [0
-\begindata{text,7091840}
-\textdsversion{12}
-\begindata{link,7092512}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm44.hlp
-0
-0
-V
-\begindata{link,7092512}
-Datastream version: 2
-pcm44.hlp
-2
-
-black
-white
-\enddata{link,7092512}
-\enddata{link,7092512}
-\view{linkview,7092512,152,0,0\
-}\enddata{text,7091840}
-]
-        pcm45.hlp
-        [0
-\begindata{text,7093600}
-\textdsversion{12}
-\begindata{link,7094272}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm45.hlp
-0
-0
-V
-\begindata{link,7094272}
-Datastream version: 2
-pcm45.hlp
-2
-
-black
-white
-\enddata{link,7094272}
-\enddata{link,7094272}
-\view{linkview,7094272,153,0,0\
-}\enddata{text,7093600}
-]
-        pcm46.hlp
-        [0
-\begindata{text,7095360}
-\textdsversion{12}
-\begindata{link,7096032}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm46.hlp
-0
-0
-V
-\begindata{link,7096032}
-Datastream version: 2
-pcm46.hlp
-2
-
-black
-white
-\enddata{link,7096032}
-\enddata{link,7096032}
-\view{linkview,7096032,154,0,0\
-}\enddata{text,7095360}
-]
-        pcm47.hlp
-        [0
-\begindata{text,7097120}
-\textdsversion{12}
-\begindata{link,7097792}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm47.hlp
-0
-0
-V
-\begindata{link,7097792}
-Datastream version: 2
-pcm47.hlp
-2
-
-black
-white
-\enddata{link,7097792}
-\enddata{link,7097792}
-\view{linkview,7097792,155,0,0\
-}\enddata{text,7097120}
-]
-        pcm48.hlp
-        [0
-\begindata{text,7098880}
-\textdsversion{12}
-\begindata{link,7099552}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm48.hlp
-0
-0
-V
-\begindata{link,7099552}
-Datastream version: 2
-pcm48.hlp
-2
-
-black
-white
-\enddata{link,7099552}
-\enddata{link,7099552}
-\view{linkview,7099552,156,0,0\
-}\enddata{text,7098880}
-]
-        pcm49.hlp
-        [0
-\begindata{text,7100640}
-\textdsversion{12}
-\begindata{link,7101312}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm49.hlp
-0
-0
-V
-\begindata{link,7101312}
-Datastream version: 2
-pcm49.hlp
-2
-
-black
-white
-\enddata{link,7101312}
-\enddata{link,7101312}
-\view{linkview,7101312,157,0,0\
-}\enddata{text,7100640}
-]
-        pcm4.hlp
-        [0
-\begindata{text,7102400}
-\textdsversion{12}
-\begindata{link,7103072}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm4.hlp
-0
-0
-V
-\begindata{link,7103072}
-Datastream version: 2
-pcm4.hlp
-2
-
-black
-white
-\enddata{link,7103072}
-\enddata{link,7103072}
-\view{linkview,7103072,158,0,0\
-}\enddata{text,7102400}
-]
-        pcm50.hlp
-        [0
-\begindata{text,7104160}
-\textdsversion{12}
-\begindata{link,7104832}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm50.hlp
-0
-0
-V
-\begindata{link,7104832}
-Datastream version: 2
-pcm50.hlp
-2
-
-black
-white
-\enddata{link,7104832}
-\enddata{link,7104832}
-\view{linkview,7104832,159,0,0\
-}\enddata{text,7104160}
-]
-        pcm51.hlp
-        [0
-\begindata{text,7105920}
-\textdsversion{12}
-\begindata{link,7106592}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm51.hlp
-0
-0
-V
-\begindata{link,7106592}
-Datastream version: 2
-pcm51.hlp
-2
-
-black
-white
-\enddata{link,7106592}
-\enddata{link,7106592}
-\view{linkview,7106592,160,0,0\
-}\enddata{text,7105920}
-]
-        pcm52.hlp
-        [0
-\begindata{text,7107680}
-\textdsversion{12}
-\begindata{link,7108352}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm52.hlp
-0
-0
-V
-\begindata{link,7108352}
-Datastream version: 2
-pcm52.hlp
-2
-
-black
-white
-\enddata{link,7108352}
-\enddata{link,7108352}
-\view{linkview,7108352,161,0,0\
-}\enddata{text,7107680}
-]
-        pcm53.hlp
-        [0
-\begindata{text,7109440}
-\textdsversion{12}
-\begindata{link,7110112}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm53.hlp
-0
-0
-V
-\begindata{link,7110112}
-Datastream version: 2
-pcm53.hlp
-2
-
-black
-white
-\enddata{link,7110112}
-\enddata{link,7110112}
-\view{linkview,7110112,162,0,0\
-}\enddata{text,7109440}
-]
-        pcm54.hlp
-        [0
-\begindata{text,7111200}
-\textdsversion{12}
-\begindata{link,7111872}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm54.hlp
-0
-0
-V
-\begindata{link,7111872}
-Datastream version: 2
-pcm54.hlp
-2
-
-black
-white
-\enddata{link,7111872}
-\enddata{link,7111872}
-\view{linkview,7111872,163,0,0\
-}\enddata{text,7111200}
-]
-        pcm55.hlp
-        [0
-\begindata{text,7112960}
-\textdsversion{12}
-\begindata{link,7113632}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm55.hlp
-0
-0
-V
-\begindata{link,7113632}
-Datastream version: 2
-pcm55.hlp
-2
-
-black
-white
-\enddata{link,7113632}
-\enddata{link,7113632}
-\view{linkview,7113632,164,0,0\
-}\enddata{text,7112960}
-]
-        pcm56.hlp
-        [0
-\begindata{text,7114720}
-\textdsversion{12}
-\begindata{link,7115392}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm56.hlp
-0
-0
-V
-\begindata{link,7115392}
-Datastream version: 2
-pcm56.hlp
-2
-
-black
-white
-\enddata{link,7115392}
-\enddata{link,7115392}
-\view{linkview,7115392,165,0,0\
-}\enddata{text,7114720}
-]
-        pcm57.hlp
-        [0
-\begindata{text,7116480}
-\textdsversion{12}
-\begindata{link,7117152}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm57.hlp
-0
-0
-V
-\begindata{link,7117152}
-Datastream version: 2
-pcm57.hlp
-2
-
-black
-white
-\enddata{link,7117152}
-\enddata{link,7117152}
-\view{linkview,7117152,166,0,0\
-}\enddata{text,7116480}
-]
-        pcm58.hlp
-        [0
-\begindata{text,7118240}
-\textdsversion{12}
-\begindata{link,7118912}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm58.hlp
-0
-0
-V
-\begindata{link,7118912}
-Datastream version: 2
-pcm58.hlp
-2
-
-black
-white
-\enddata{link,7118912}
-\enddata{link,7118912}
-\view{linkview,7118912,167,0,0\
-}\enddata{text,7118240}
-]
-        pcm59.hlp
-        [0
-\begindata{text,7120000}
-\textdsversion{12}
-\begindata{link,7120672}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm59.hlp
-0
-0
-V
-\begindata{link,7120672}
-Datastream version: 2
-pcm59.hlp
-2
-
-black
-white
-\enddata{link,7120672}
-\enddata{link,7120672}
-\view{linkview,7120672,168,0,0\
-}\enddata{text,7120000}
-]
-        pcm5.hlp
-        [0
-\begindata{text,7121760}
-\textdsversion{12}
-\begindata{link,7122432}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm5.hlp
-0
-0
-V
-\begindata{link,7122432}
-Datastream version: 2
-pcm5.hlp
-2
-
-black
-white
-\enddata{link,7122432}
-\enddata{link,7122432}
-\view{linkview,7122432,169,0,0\
-}\enddata{text,7121760}
-]
-        pcm60.hlp
-        [0
-\begindata{text,7123520}
-\textdsversion{12}
-\begindata{link,7124192}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm60.hlp
-0
-0
-V
-\begindata{link,7124192}
-Datastream version: 2
-pcm60.hlp
-2
-
-black
-white
-\enddata{link,7124192}
-\enddata{link,7124192}
-\view{linkview,7124192,170,0,0\
-}\enddata{text,7123520}
-]
-        pcm61.hlp
-        [0
-\begindata{text,7125280}
-\textdsversion{12}
-\begindata{link,7125952}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm61.hlp
-0
-0
-V
-\begindata{link,7125952}
-Datastream version: 2
-pcm61.hlp
-2
-
-black
-white
-\enddata{link,7125952}
-\enddata{link,7125952}
-\view{linkview,7125952,171,0,0\
-}\enddata{text,7125280}
-]
-        pcm62.hlp
-        [0
-\begindata{text,7127040}
-\textdsversion{12}
-\begindata{link,7127712}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm62.hlp
-0
-0
-V
-\begindata{link,7127712}
-Datastream version: 2
-pcm62.hlp
-2
-
-black
-white
-\enddata{link,7127712}
-\enddata{link,7127712}
-\view{linkview,7127712,172,0,0\
-}\enddata{text,7127040}
-]
-        pcm63.hlp
-        [0
-\begindata{text,7128800}
-\textdsversion{12}
-\begindata{link,7129472}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm63.hlp
-0
-0
-V
-\begindata{link,7129472}
-Datastream version: 2
-pcm63.hlp
-2
-
-black
-white
-\enddata{link,7129472}
-\enddata{link,7129472}
-\view{linkview,7129472,173,0,0\
-}\enddata{text,7128800}
-]
-        pcm64.hlp
-        [0
-\begindata{text,7130560}
-\textdsversion{12}
-\begindata{link,7131232}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm64.hlp
-0
-0
-V
-\begindata{link,7131232}
-Datastream version: 2
-pcm64.hlp
-2
-
-black
-white
-\enddata{link,7131232}
-\enddata{link,7131232}
-\view{linkview,7131232,174,0,0\
-}\enddata{text,7130560}
-]
-        pcm65.hlp
-        [0
-\begindata{text,7132320}
-\textdsversion{12}
-\begindata{link,7132992}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm65.hlp
-0
-0
-V
-\begindata{link,7132992}
-Datastream version: 2
-pcm65.hlp
-2
-
-black
-white
-\enddata{link,7132992}
-\enddata{link,7132992}
-\view{linkview,7132992,175,0,0\
-}\enddata{text,7132320}
-]
-        pcm66.hlp
-        [0
-\begindata{text,7134080}
-\textdsversion{12}
-\begindata{link,7134752}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm66.hlp
-0
-0
-V
-\begindata{link,7134752}
-Datastream version: 2
-pcm66.hlp
-2
-
-black
-white
-\enddata{link,7134752}
-\enddata{link,7134752}
-\view{linkview,7134752,176,0,0\
-}\enddata{text,7134080}
-]
-        pcm67.hlp
-        [0
-\begindata{text,7135840}
-\textdsversion{12}
-\begindata{link,7136512}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm67.hlp
-0
-0
-V
-\begindata{link,7136512}
-Datastream version: 2
-pcm67.hlp
-2
-
-black
-white
-\enddata{link,7136512}
-\enddata{link,7136512}
-\view{linkview,7136512,177,0,0\
-}\enddata{text,7135840}
-]
-        pcm68.hlp
-        [0
-\begindata{text,7137600}
-\textdsversion{12}
-\begindata{link,7138272}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm68.hlp
-0
-0
-V
-\begindata{link,7138272}
-Datastream version: 2
-pcm68.hlp
-2
-
-black
-white
-\enddata{link,7138272}
-\enddata{link,7138272}
-\view{linkview,7138272,178,0,0\
-}\enddata{text,7137600}
-]
-        pcm69.hlp
-        [0
-\begindata{text,7139360}
-\textdsversion{12}
-\begindata{link,7140032}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm69.hlp
-0
-0
-V
-\begindata{link,7140032}
-Datastream version: 2
-pcm69.hlp
-2
-
-black
-white
-\enddata{link,7140032}
-\enddata{link,7140032}
-\view{linkview,7140032,179,0,0\
-}\enddata{text,7139360}
-]
-        pcm6.hlp
-        [0
-\begindata{text,7141120}
-\textdsversion{12}
-\begindata{link,7141792}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm6.hlp
-0
-0
-V
-\begindata{link,7141792}
-Datastream version: 2
-pcm6.hlp
-2
-
-black
-white
-\enddata{link,7141792}
-\enddata{link,7141792}
-\view{linkview,7141792,180,0,0\
-}\enddata{text,7141120}
-]
-        pcm70.hlp
-        [0
-\begindata{text,7142880}
-\textdsversion{12}
-\begindata{link,7143552}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm70.hlp
-0
-0
-V
-\begindata{link,7143552}
-Datastream version: 2
-pcm70.hlp
-2
-
-black
-white
-\enddata{link,7143552}
-\enddata{link,7143552}
-\view{linkview,7143552,181,0,0\
-}\enddata{text,7142880}
-]
-        pcm71.hlp
-        [0
-\begindata{text,7144640}
-\textdsversion{12}
-\begindata{link,7145312}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm71.hlp
-0
-0
-V
-\begindata{link,7145312}
-Datastream version: 2
-pcm71.hlp
-2
-
-black
-white
-\enddata{link,7145312}
-\enddata{link,7145312}
-\view{linkview,7145312,182,0,0\
-}\enddata{text,7144640}
-]
-        pcm72.hlp
-        [0
-\begindata{text,7146400}
-\textdsversion{12}
-\begindata{link,7147072}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm72.hlp
-0
-0
-V
-\begindata{link,7147072}
-Datastream version: 2
-pcm72.hlp
-2
-
-black
-white
-\enddata{link,7147072}
-\enddata{link,7147072}
-\view{linkview,7147072,183,0,0\
-}\enddata{text,7146400}
-]
-        pcm73.hlp
-        [0
-\begindata{text,7148160}
-\textdsversion{12}
-\begindata{link,7148832}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm73.hlp
-0
-0
-V
-\begindata{link,7148832}
-Datastream version: 2
-pcm73.hlp
-2
-
-black
-white
-\enddata{link,7148832}
-\enddata{link,7148832}
-\view{linkview,7148832,184,0,0\
-}\enddata{text,7148160}
-]
-        pcm74.hlp
-        [0
-\begindata{text,7149920}
-\textdsversion{12}
-\begindata{link,7150592}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm74.hlp
-0
-0
-V
-\begindata{link,7150592}
-Datastream version: 2
-pcm74.hlp
-2
-
-black
-white
-\enddata{link,7150592}
-\enddata{link,7150592}
-\view{linkview,7150592,185,0,0\
-}\enddata{text,7149920}
-]
-        pcm75.hlp
-        [0
-\begindata{text,7151680}
-\textdsversion{12}
-\begindata{link,7152352}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm75.hlp
-0
-0
-V
-\begindata{link,7152352}
-Datastream version: 2
-pcm75.hlp
-2
-
-black
-white
-\enddata{link,7152352}
-\enddata{link,7152352}
-\view{linkview,7152352,186,0,0\
-}\enddata{text,7151680}
-]
-        pcm76.hlp
-        [0
-\begindata{text,7153440}
-\textdsversion{12}
-\begindata{link,7154112}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm76.hlp
-0
-0
-V
-\begindata{link,7154112}
-Datastream version: 2
-pcm76.hlp
-2
-
-black
-white
-\enddata{link,7154112}
-\enddata{link,7154112}
-\view{linkview,7154112,187,0,0\
-}\enddata{text,7153440}
-]
-        pcm77.hlp
-        [0
-\begindata{text,7155200}
-\textdsversion{12}
-\begindata{link,7155872}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm77.hlp
-0
-0
-V
-\begindata{link,7155872}
-Datastream version: 2
-pcm77.hlp
-2
-
-black
-white
-\enddata{link,7155872}
-\enddata{link,7155872}
-\view{linkview,7155872,188,0,0\
-}\enddata{text,7155200}
-]
-        pcm78.hlp
-        [0
-\begindata{text,7156960}
-\textdsversion{12}
-\begindata{link,7157632}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm78.hlp
-0
-0
-V
-\begindata{link,7157632}
-Datastream version: 2
-pcm78.hlp
-2
-
-black
-white
-\enddata{link,7157632}
-\enddata{link,7157632}
-\view{linkview,7157632,189,0,0\
-}\enddata{text,7156960}
-]
-        pcm79.hlp
-        [0
-\begindata{text,7158720}
-\textdsversion{12}
-\begindata{link,7159392}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm79.hlp
-0
-0
-V
-\begindata{link,7159392}
-Datastream version: 2
-pcm79.hlp
-2
-
-black
-white
-\enddata{link,7159392}
-\enddata{link,7159392}
-\view{linkview,7159392,190,0,0\
-}\enddata{text,7158720}
-]
-        pcm7.hlp
-        [0
-\begindata{text,7160480}
-\textdsversion{12}
-\begindata{link,7161152}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm7.hlp
-0
-0
-V
-\begindata{link,7161152}
-Datastream version: 2
-pcm7.hlp
-2
-
-black
-white
-\enddata{link,7161152}
-\enddata{link,7161152}
-\view{linkview,7161152,191,0,0\
-}\enddata{text,7160480}
-]
-        pcm80.hlp
-        [0
-\begindata{text,7162240}
-\textdsversion{12}
-\begindata{link,7162912}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm80.hlp
-0
-0
-V
-\begindata{link,7162912}
-Datastream version: 2
-pcm80.hlp
-2
-
-black
-white
-\enddata{link,7162912}
-\enddata{link,7162912}
-\view{linkview,7162912,192,0,0\
-}\enddata{text,7162240}
-]
-        pcm81.hlp
-        [0
-\begindata{text,7164000}
-\textdsversion{12}
-\begindata{link,7164672}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm81.hlp
-0
-0
-V
-\begindata{link,7164672}
-Datastream version: 2
-pcm81.hlp
-2
-
-black
-white
-\enddata{link,7164672}
-\enddata{link,7164672}
-\view{linkview,7164672,193,0,0\
-}\enddata{text,7164000}
-]
-        pcm82.hlp
-        [0
-\begindata{text,7165760}
-\textdsversion{12}
-\begindata{link,7166432}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm82.hlp
-0
-0
-V
-\begindata{link,7166432}
-Datastream version: 2
-pcm82.hlp
-2
-
-black
-white
-\enddata{link,7166432}
-\enddata{link,7166432}
-\view{linkview,7166432,194,0,0\
-}\enddata{text,7165760}
-]
-        pcm83.hlp
-        [0
-\begindata{text,7167520}
-\textdsversion{12}
-\begindata{link,7168192}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm83.hlp
-0
-0
-V
-\begindata{link,7168192}
-Datastream version: 2
-pcm83.hlp
-2
-
-black
-white
-\enddata{link,7168192}
-\enddata{link,7168192}
-\view{linkview,7168192,195,0,0\
-}\enddata{text,7167520}
-]
-        pcm84.hlp
-        [0
-\begindata{text,7169280}
-\textdsversion{12}
-\begindata{link,7169952}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm84.hlp
-0
-0
-V
-\begindata{link,7169952}
-Datastream version: 2
-pcm84.hlp
-2
-
-black
-white
-\enddata{link,7169952}
-\enddata{link,7169952}
-\view{linkview,7169952,196,0,0\
-}\enddata{text,7169280}
-]
-        pcm85.hlp
-        [0
-\begindata{text,7171040}
-\textdsversion{12}
-\begindata{link,7171712}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm85.hlp
-0
-0
-V
-\begindata{link,7171712}
-Datastream version: 2
-pcm85.hlp
-2
-
-black
-white
-\enddata{link,7171712}
-\enddata{link,7171712}
-\view{linkview,7171712,197,0,0\
-}\enddata{text,7171040}
-]
-        pcm86.hlp
-        [0
-\begindata{text,7172800}
-\textdsversion{12}
-\begindata{link,7173472}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm86.hlp
-0
-0
-V
-\begindata{link,7173472}
-Datastream version: 2
-pcm86.hlp
-2
-
-black
-white
-\enddata{link,7173472}
-\enddata{link,7173472}
-\view{linkview,7173472,198,0,0\
-}\enddata{text,7172800}
-]
-        pcm87.hlp
-        [0
-\begindata{text,7174560}
-\textdsversion{12}
-\begindata{link,7175232}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm87.hlp
-0
-0
-V
-\begindata{link,7175232}
-Datastream version: 2
-pcm87.hlp
-2
-
-black
-white
-\enddata{link,7175232}
-\enddata{link,7175232}
-\view{linkview,7175232,199,0,0\
-}\enddata{text,7174560}
-]
-        pcm88.hlp
-        [0
-\begindata{text,7176320}
-\textdsversion{12}
-\begindata{link,7176992}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm88.hlp
-0
-0
-V
-\begindata{link,7176992}
-Datastream version: 2
-pcm88.hlp
-2
-
-black
-white
-\enddata{link,7176992}
-\enddata{link,7176992}
-\view{linkview,7176992,200,0,0\
-}\enddata{text,7176320}
-]
-        pcm89.hlp
-        [0
-\begindata{text,7178080}
-\textdsversion{12}
-\begindata{link,7178752}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm89.hlp
-0
-0
-V
-\begindata{link,7178752}
-Datastream version: 2
-pcm89.hlp
-2
-
-black
-white
-\enddata{link,7178752}
-\enddata{link,7178752}
-\view{linkview,7178752,201,0,0\
-}\enddata{text,7178080}
-]
-        pcm8.hlp
-        [0
-\begindata{text,7179840}
-\textdsversion{12}
-\begindata{link,7180512}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm8.hlp
-0
-0
-V
-\begindata{link,7180512}
-Datastream version: 2
-pcm8.hlp
-2
-
-black
-white
-\enddata{link,7180512}
-\enddata{link,7180512}
-\view{linkview,7180512,202,0,0\
-}\enddata{text,7179840}
-]
-        pcm90.hlp
-        [0
-\begindata{text,7181600}
-\textdsversion{12}
-\begindata{link,7182272}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm90.hlp
-0
-0
-V
-\begindata{link,7182272}
-Datastream version: 2
-pcm90.hlp
-2
-
-black
-white
-\enddata{link,7182272}
-\enddata{link,7182272}
-\view{linkview,7182272,203,0,0\
-}\enddata{text,7181600}
-]
-        pcm91.hlp
-        [0
-\begindata{text,7183360}
-\textdsversion{12}
-\begindata{link,7184032}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm91.hlp
-0
-0
-V
-\begindata{link,7184032}
-Datastream version: 2
-pcm91.hlp
-2
-
-black
-white
-\enddata{link,7184032}
-\enddata{link,7184032}
-\view{linkview,7184032,204,0,0\
-}\enddata{text,7183360}
-]
-        pcm92.hlp
-        [0
-\begindata{text,7185120}
-\textdsversion{12}
-\begindata{link,7185792}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm92.hlp
-0
-0
-V
-\begindata{link,7185792}
-Datastream version: 2
-pcm92.hlp
-2
-
-black
-white
-\enddata{link,7185792}
-\enddata{link,7185792}
-\view{linkview,7185792,205,0,0\
-}\enddata{text,7185120}
-]
-        pcm93.hlp
-        [0
-\begindata{text,7186880}
-\textdsversion{12}
-\begindata{link,7187552}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm93.hlp
-0
-0
-V
-\begindata{link,7187552}
-Datastream version: 2
-pcm93.hlp
-2
-
-black
-white
-\enddata{link,7187552}
-\enddata{link,7187552}
-\view{linkview,7187552,206,0,0\
-}\enddata{text,7186880}
-]
-        pcm94.hlp
-        [0
-\begindata{text,7188640}
-\textdsversion{12}
-\begindata{link,7189312}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm94.hlp
-0
-0
-V
-\begindata{link,7189312}
-Datastream version: 2
-pcm94.hlp
-2
-
-black
-white
-\enddata{link,7189312}
-\enddata{link,7189312}
-\view{linkview,7189312,207,0,0\
-}\enddata{text,7188640}
-]
-        pcm9.hlp
-        [0
-\begindata{text,7190400}
-\textdsversion{12}
-\begindata{link,7191072}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/pcm9.hlp
-0
-0
-V
-\begindata{link,7191072}
-Datastream version: 2
-pcm9.hlp
-2
-
-black
-white
-\enddata{link,7191072}
-\enddata{link,7191072}
-\view{linkview,7191072,208,0,0\
-}\enddata{text,7190400}
-]
-        subscriptn.hlp
-        [0
-\begindata{text,7192160}
-\textdsversion{12}
-\begindata{link,7192832}
-4
-${ANDREWDIR}/doc/inprogram/vui/help/subscriptn.hlp
-0
-0
-V
-\begindata{link,7192832}
-Datastream version: 2
-subscriptn.hlp
-2
-
-black
-white
-\enddata{link,7192832}
-\enddata{link,7192832}
-\view{linkview,7192832,209,0,0\
-}\enddata{text,7192160}
-]
-        }
-      MAIL
-      [0
-\begindata{text,7193920}
-\textdsversion{12}
-\begindata{link,7194592}
-4
-${ANDREWDIR}/doc/MAIL
-0
-0
-V
-\begindata{link,7194592}
-Datastream version: 2
-MAIL
-2
-
-black
-white
-\enddata{link,7194592}
-\enddata{link,7194592}
-\view{linkview,7194592,210,0,0\
-}\enddata{text,7193920}
-]
-        {
-        AMS.ovr
-        [0
-\begindata{text,7195584}
-\textdsversion{12}
-\begindata{link,7196320}
-4
-${ANDREWDIR}/doc/MAIL/AMS.ovr
-0
-0
-V
-\begindata{link,7196320}
-Datastream version: 2
-AMS.ovr
-2
-
-black
-white
-\enddata{link,7196320}
-\enddata{link,7196320}
-\view{linkview,7196320,211,0,0\
-}\enddata{text,7195584}
-]
-        Bboards.ins
-        [0
-\begindata{text,7197328}
-\textdsversion{12}
-\begindata{link,7198064}
-4
-${ANDREWDIR}/doc/MAIL/Bboards.ins
-0
-0
-V
-\begindata{link,7198064}
-Datastream version: 2
-Bboards.ins
-2
-
-black
-white
-\enddata{link,7198064}
-\enddata{link,7198064}
-\view{linkview,7198064,212,0,0\
-}\enddata{text,7197328}
-]
-        Bboards.ovr
-        [0
-\begindata{text,7199072}
-\textdsversion{12}
-\begindata{link,7199808}
-4
-${ANDREWDIR}/doc/MAIL/Bboards.ovr
-0
-0
-V
-\begindata{link,7199808}
-Datastream version: 2
-Bboards.ovr
-2
-
-black
-white
-\enddata{link,7199808}
-\enddata{link,7199808}
-\view{linkview,7199808,213,0,0\
-}\enddata{text,7199072}
-]
-        CuiLib.pgr
-        [0
-\begindata{text,7200816}
-\textdsversion{12}
-\begindata{link,7201552}
-4
-${ANDREWDIR}/doc/MAIL/CuiLib.pgr
-0
-0
-V
-\begindata{link,7201552}
-Datastream version: 2
-CuiLib.pgr
-2
-
-black
-white
-\enddata{link,7201552}
-\enddata{link,7201552}
-\view{linkview,7201552,214,0,0\
-}\enddata{text,7200816}
-]
-        Flames.pgr
-        [0
-\begindata{text,7202560}
-\textdsversion{12}
-\begindata{link,7203296}
-4
-${ANDREWDIR}/doc/MAIL/Flames.pgr
-0
-0
-V
-\begindata{link,7203296}
-Datastream version: 2
-Flames.pgr
-2
-
-black
-white
-\enddata{link,7203296}
-\enddata{link,7203296}
-\view{linkview,7203296,215,0,0\
-}\enddata{text,7202560}
-]
-        Intrface.ins
-        [0
-\begindata{text,7204304}
-\textdsversion{12}
-\begindata{link,7205040}
-4
-${ANDREWDIR}/doc/MAIL/Intrface.ins
-0
-0
-V
-\begindata{link,7205040}
-Datastream version: 2
-Intrface.ins
-2
-
-black
-white
-\enddata{link,7205040}
-\enddata{link,7205040}
-\view{linkview,7205040,216,0,0\
-}\enddata{text,7204304}
-]
-        libcalls.idx
-        [0
-\begindata{text,7206048}
-\textdsversion{12}
-\begindata{link,7206784}
-4
-${ANDREWDIR}/doc/MAIL/libcalls.idx
-0
-0
-V
-\begindata{link,7206784}
-Datastream version: 2
-libcalls.idx
-2
-
-black
-white
-\enddata{link,7206784}
-\enddata{link,7206784}
-\view{linkview,7206784,217,0,0\
-}\enddata{text,7206048}
-]
-        libcalls.pgr
-        [0
-\begindata{text,7207792}
-\textdsversion{12}
-\begindata{link,7208528}
-4
-${ANDREWDIR}/doc/MAIL/libcalls.pgr
-0
-0
-V
-\begindata{link,7208528}
-Datastream version: 2
-libcalls.pgr
-2
-
-black
-white
-\enddata{link,7208528}
-\enddata{link,7208528}
-\view{linkview,7208528,218,0,0\
-}\enddata{text,7207792}
-]
-        MsgSrvr.ovr
-        [0
-\begindata{text,7209536}
-\textdsversion{12}
-\begindata{link,7210272}
-4
-${ANDREWDIR}/doc/MAIL/MsgSrvr.ovr
-0
-0
-V
-\begindata{link,7210272}
-Datastream version: 2
-MsgSrvr.ovr
-2
-
-black
-white
-\enddata{link,7210272}
-\enddata{link,7210272}
-\view{linkview,7210272,219,0,0\
-}\enddata{text,7209536}
-]
-        MsgSrvr.pgr
-        [0
-\begindata{text,7211280}
-\textdsversion{12}
-\begindata{link,7212016}
-4
-${ANDREWDIR}/doc/MAIL/MsgSrvr.pgr
-0
-0
-V
-\begindata{link,7212016}
-Datastream version: 2
-MsgSrvr.pgr
-2
-
-black
-white
-\enddata{link,7212016}
-\enddata{link,7212016}
-\view{linkview,7212016,220,0,0\
-}\enddata{text,7211280}
-]
-        NonUnix.adm
-        [0
-\begindata{text,7213024}
-\textdsversion{12}
-\begindata{link,7213760}
-4
-${ANDREWDIR}/doc/MAIL/NonUnix.adm
-0
-0
-V
-\begindata{link,7213760}
-Datastream version: 2
-NonUnix.adm
-2
-
-black
-white
-\enddata{link,7213760}
-\enddata{link,7213760}
-\view{linkview,7213760,221,0,0\
-}\enddata{text,7213024}
-]
-        NonUnix.ins
-        [0
-\begindata{text,7214768}
-\textdsversion{12}
-\begindata{link,7215504}
-4
-${ANDREWDIR}/doc/MAIL/NonUnix.ins
-0
-0
-V
-\begindata{link,7215504}
-Datastream version: 2
-NonUnix.ins
-2
-
-black
-white
-\enddata{link,7215504}
-\enddata{link,7215504}
-\view{linkview,7215504,222,0,0\
-}\enddata{text,7214768}
-]
-        NonUnix.ovr
-        [0
-\begindata{text,7216512}
-\textdsversion{12}
-\begindata{link,7217248}
-4
-${ANDREWDIR}/doc/MAIL/NonUnix.ovr
-0
-0
-V
-\begindata{link,7217248}
-Datastream version: 2
-NonUnix.ovr
-2
-
-black
-white
-\enddata{link,7217248}
-\enddata{link,7217248}
-\view{linkview,7217248,223,0,0\
-}\enddata{text,7216512}
-]
-        procs.doc
-        [0
-\begindata{text,7218256}
-\textdsversion{12}
-\begindata{link,7218992}
-4
-${ANDREWDIR}/doc/MAIL/procs.doc
-0
-0
-V
-\begindata{link,7218992}
-Datastream version: 2
-procs.doc
-2
-
-black
-white
-\enddata{link,7218992}
-\enddata{link,7218992}
-\view{linkview,7218992,224,0,0\
-}\enddata{text,7218256}
-]
-        programs.pgr
-        [0
-\begindata{text,7220000}
-\textdsversion{12}
-\begindata{link,7220736}
-4
-${ANDREWDIR}/doc/MAIL/programs.pgr
-0
-0
-V
-\begindata{link,7220736}
-Datastream version: 2
-programs.pgr
-2
-
-black
-white
-\enddata{link,7220736}
-\enddata{link,7220736}
-\view{linkview,7220736,225,0,0\
-}\enddata{text,7220000}
-]
-        regexp.doc
-        [0
-\begindata{text,7221744}
-\textdsversion{12}
-\begindata{link,7222480}
-4
-${ANDREWDIR}/doc/MAIL/regexp.doc
-0
-0
-V
-\begindata{link,7222480}
-Datastream version: 2
-regexp.doc
-2
-
-black
-white
-\enddata{link,7222480}
-\enddata{link,7222480}
-\view{linkview,7222480,226,0,0\
-}\enddata{text,7221744}
-]
-        Spec.pgr
-        [0
-\begindata{text,7223488}
-\textdsversion{12}
-\begindata{link,7224224}
-4
-${ANDREWDIR}/doc/MAIL/Spec.pgr
-0
-0
-V
-\begindata{link,7224224}
-Datastream version: 2
-Spec.pgr
-2
-
-black
-white
-\enddata{link,7224224}
-\enddata{link,7224224}
-\view{linkview,7224224,227,0,0\
-}\enddata{text,7223488}
-]
-        types.pgr
-        [0
-\begindata{text,7225232}
-\textdsversion{12}
-\begindata{link,7225968}
-4
-${ANDREWDIR}/doc/MAIL/types.pgr
-0
-0
-V
-\begindata{link,7225968}
-Datastream version: 2
-types.pgr
-2
-
-black
-white
-\enddata{link,7225968}
-\enddata{link,7225968}
-\view{linkview,7225968,228,0,0\
-}\enddata{text,7225232}
 ]
         }
       PROGRAMMER
@@ -6997,28 +4244,6 @@ white
 \view{linkview,7346160,295,0,0\
 }\enddata{text,7345424}
 ]
-        HowToPC.d
-        [0
-\begindata{text,7347248}
-\textdsversion{12}
-\begindata{link,7347920}
-4
-${ANDREWDIR}/doc/PROGRAMMER/HowToPC.d
-0
-0
-V
-\begindata{link,7347920}
-Datastream version: 2
-HowToPC.d
-2
-
-black
-white
-\enddata{link,7347920}
-\enddata{link,7347920}
-\view{linkview,7347920,296,0,0\
-}\enddata{text,7347248}
-]
         image.doc
         [0
 \begindata{text,7348928}
@@ -7854,28 +5079,6 @@ white
 \enddata{link,7414352}
 \view{linkview,7414352,334,0,0\
 }\enddata{text,7413616}
-]
-        PanelsNMenus.d
-        [0
-\begindata{text,7415360}
-\textdsversion{12}
-\begindata{link,7416096}
-4
-${ANDREWDIR}/doc/PROGRAMMER/PanelsNMenus.d
-0
-0
-V
-\begindata{link,7416096}
-Datastream version: 2
-PanelsNMenus.d
-2
-
-black
-white
-\enddata{link,7416096}
-\enddata{link,7416096}
-\view{linkview,7416096,335,0,0\
-}\enddata{text,7415360}
 ]
         parser.doc
         [0
@@ -8802,50 +6005,6 @@ white
 \view{linkview,7489632,377,0,0\
 }\enddata{text,7488896}
 ]
-        vopcon.doc
-        [0
-\begindata{text,7490640}
-\textdsversion{12}
-\begindata{link,7491376}
-4
-${ANDREWDIR}/doc/PROGRAMMER/vopcon.doc
-0
-0
-V
-\begindata{link,7491376}
-Datastream version: 2
-vopcon.doc
-2
-
-black
-white
-\enddata{link,7491376}
-\enddata{link,7491376}
-\view{linkview,7491376,378,0,0\
-}\enddata{text,7490640}
-]
-        VuiInternals.d
-        [0
-\begindata{text,7492384}
-\textdsversion{12}
-\begindata{link,7493120}
-4
-${ANDREWDIR}/doc/PROGRAMMER/VuiInternals.d
-0
-0
-V
-\begindata{link,7493120}
-Datastream version: 2
-VuiInternals.d
-2
-
-black
-white
-\enddata{link,7493120}
-\enddata{link,7493120}
-\view{linkview,7493120,379,0,0\
-}\enddata{text,7492384}
-]
         WidgetUser.d
         [0
 \begindata{text,7494208}
@@ -9145,9 +6304,6 @@ directory, plus a few config files.\
       aexelink
       afmmangle
       alibexp
-      amsdemo
-      ams_genid
-      arpadate
       awww
       bison.hairy
       [0
@@ -9197,7 +6353,6 @@ white
 Bison config file: parser boilerplate code\
 \enddata{text,7522896}
 ]
-      decode_id
       fixpaths
       [0
 \begindata{text,7524768}
@@ -9261,7 +6416,6 @@ white
 Part of old ATK library content parser \bold{genrefs}.\
 \enddata{text,7530032}
 ]
-      gendemo
       genrefs
       [0
 \begindata{text,7531936}
@@ -9360,30 +6514,6 @@ compatible \bold{nm} and name mangling scheme, and still misses indirect
 dependencies.\
 \enddata{text,7538704}
 ]
-      initscreen
-      [0
-\begindata{text,7544384}
-\textdsversion{12}
-\begindata{link,7545008}
-4
-${ANDREWDIR}/etc/initscreen
-0
-0
-V
-\begindata{link,7545008}
-Datastream version: 2
-initscreen
-2
-
-black
-white
-\enddata{link,7545008}
-\enddata{link,7545008}
-\view{linkview,7545008,399,0,0}
-
-batmail config file\
-\enddata{text,7544384}
-]
       install
       [0
 \begindata{text,7546016}
@@ -9393,83 +6523,10 @@ coreutils' install.
 
 \enddata{text,7546016}
 ]
-      intro
-      [0
-\begindata{text,7546880}
-\textdsversion{12}
-\begindata{link,7547616}
-4
-${ANDREWDIR}/etc/intro
-0
-0
-V
-\begindata{link,7547616}
-Datastream version: 2
-intro
-2
-
-black
-white
-\enddata{link,7547616}
-\enddata{link,7547616}
-\view{linkview,7547616,400,0,0}
-
-batmail config file\
-\enddata{text,7546880}
-]
-      intro.small
-      [0
-\begindata{text,7548608}
-\textdsversion{12}
-\begindata{link,7549344}
-4
-${ANDREWDIR}/etc/intro.small
-0
-0
-V
-\begindata{link,7549344}
-Datastream version: 2
-intro.small
-2
-
-black
-white
-\enddata{link,7549344}
-\enddata{link,7549344}
-\view{linkview,7549344,401,0,0}
-
-batmail config file\
-\enddata{text,7548608}
-]
-      mailcap
-      [0
-\begindata{text,7550352}
-\textdsversion{12}
-\begindata{link,7551088}
-4
-${ANDREWDIR}/etc/mailcap
-0
-0
-V
-\begindata{link,7551088}
-Datastream version: 2
-mailcap
-2
-
-black
-white
-\enddata{link,7551088}
-\enddata{link,7551088}
-\view{linkview,7551088,402,0,0}
-
-metamail config file\
-\enddata{text,7550352}
-]
       mkatklib
       mkatkshlib
       mkdynmain
       mkindex
-      nns
       relativize
       Warning.gif
       [0
@@ -12951,15 +10008,9 @@ Help text for \bold{help} command.
       2rtf.help
       adew.help
       adirs.help
-      ams.help
       asmtext.help
       atk.help
-      audiocompose.help
-      audiosend.help
-      batmail.1
-      bboards.help
       bdffont.help
-      bglisp.help
       bshproc.help
       buffer.help
       bush.help
@@ -12978,7 +10029,6 @@ Help text for \bold{help} command.
       cnclass.help
       cntproc.help
       color.help
-      commands.gos
       compile.help
       comproc.help
       console.help
@@ -12990,16 +10040,6 @@ Help text for \bold{help} command.
       crossrf.help
       ctext.help
       ctrproc.help
-      cuiclss.help
-      cuicust.help
-      cuiedit.help
-      cuifltr.help
-      cui.help
-      cuipref.help
-      cuiqr.help
-      cui.tutr
-      cuiwiz.help
-      cuixprt.help
       cutbuf.help
       datacat.help
       desproc.help
@@ -13008,12 +10048,10 @@ Help text for \bold{help} command.
       dogtags.help
       drdproc.help
       dsrproc.help
-      eli.help
       eq.help
       ermproc.help
       erprintf.help
       evnts.help
-      extcompose.help
       ez2ascii.help
       ez2html.help
       ez2ps.help
@@ -13032,33 +10070,26 @@ Help text for \bold{help} command.
       fad.help
       fadproc.help
       figure.help
-      files.both
-      flames.help
       fnote.help
-      folders.help
       fontprob.help
       frmproc.help
       ftrproc.help
       gemacscp.help
       gemacsdf.help
-      gendemo.help
       genmake.help
       genstatl.help
       geomtry.help
-      getfilename.help
       gofig.help
       gsearch.help
       gsrproc.help
-      hdmagic.help
       headertxt.help
       help.aliases
       help.help
       helpkys.help
       hlpproc.help
       hlptext.help
-      hooks.gnu
-      hooks.gos
       htmltext.help
+      htmlview.help
       idltext.help
       image.help
       improc.help
@@ -13078,43 +10109,26 @@ Help text for \bold{help} command.
       ltext.help
       m3text.help
       macros.help
-      mailcap.help
-      mail.help
-      mailto-hebrew.help
-      mailto.help
-      mcommands.gos
       menubar.help
       menus.help
-      metamail.help
-      metasend.help
       metax.help
-      mime.help
       mkbrowse.help
-      mmencode.help
       motif.help
-      msalses.help
-      msgproc.help
-      msgs.help
-      msgskys.help
       mtext.help
       mttproc.help
       ness.help
       note.help
-      options.help
       org.help
       orgproc.help
       oscroll.help
-      overview.gnu
       panner.help
       parse.help
-      patch-metamail.help
       perltext.help
       ppm2atk.help
       prefed.help
       prefs.help
       prefs.tutr
       preview.help
-      privbb.help
       procs.help
       prog.help
       prvproc.help
@@ -13128,7 +10142,6 @@ Help text for \bold{help} command.
       rawtext.help
       relativiz.help
       rexxtext.help
-      richtext.help
       rofftxt.help
       rstproc.help
       rtf2.help
@@ -13139,20 +10152,13 @@ Help text for \bold{help} command.
       scroll.help
       search.help
       select.help
-      sendmsg.help
       setup.help
-      showaudio.help
-      showexternal.help
-      shownonascii.help
-      showpartial.help
-      showpicture.help
       spellck.help
-      splitmail.help
       splproc.help
       srctext.help
       steproc.help
       stlproc.help
-      subordr.help
+      stroffet.help
       sys.help
       table.help
       tags.help
@@ -13171,12 +10177,7 @@ Help text for \bold{help} command.
       unknown.help
       urlbutton.help
       valproc.help
-      variables.gnu
-      variables.gos
       vi.help
-      vopcon.help
-      vui.help
-      vui.tutr
       wrtstmp.help
       xwd2atk.help
       zip.help
@@ -13210,6 +10211,28 @@ subdirectories are in include path).\
 \enddata{text,7873904}
 ]
       {
+        ATKDoLoad.H
+        [0
+\begindata{text,8195808}
+\textdsversion{12}
+\begindata{link,8196544}
+4
+${ANDREWDIR}/include/ATKDoLoad.H
+0
+0
+V
+\begindata{link,8196544}
+Datastream version: 2
+ATKDoLoad.H
+2
+
+black
+white
+\enddata{link,8196544}
+\enddata{link,8196544}
+\view{linkview,8196544,736,0,0\
+}\enddata{text,8195808}
+]
       aconcat.h
       [0
 \begindata{text,7875984}
@@ -13355,28 +10378,6 @@ white
 \view{linkview,7886528,560,0,0\
 }\enddata{text,7885792}
 ]
-      apioctl.h
-      [0
-\begindata{text,7887536}
-\textdsversion{12}
-\begindata{link,7888272}
-4
-${ANDREWDIR}/include/apioctl.h
-0
-0
-V
-\begindata{link,7888272}
-Datastream version: 2
-apioctl.h
-2
-
-black
-white
-\enddata{link,7888272}
-\enddata{link,7888272}
-\view{linkview,7888272,561,0,0\
-}\enddata{text,7887536}
-]
       atkos.h
       [0
 \begindata{text,7889280}
@@ -13420,28 +10421,6 @@ white
 \enddata{link,7891760}
 \view{linkview,7891760,563,0,0\
 }\enddata{text,7891024}
-]
-      ckndbm.h
-      [0
-\begindata{text,7892768}
-\textdsversion{12}
-\begindata{link,7893504}
-4
-${ANDREWDIR}/include/ckndbm.h
-0
-0
-V
-\begindata{link,7893504}
-Datastream version: 2
-ckndbm.h
-2
-
-black
-white
-\enddata{link,7893504}
-\enddata{link,7893504}
-\view{linkview,7893504,564,0,0\
-}\enddata{text,7892768}
 ]
       cmenu.h
       [0
@@ -13508,94 +10487,6 @@ white
 \enddata{link,7898736}
 \view{linkview,7898736,567,0,0\
 }\enddata{text,7898000}
-]
-      dropoff.h
-      [0
-\begindata{text,7899744}
-\textdsversion{12}
-\begindata{link,7900480}
-4
-${ANDREWDIR}/include/dropoff.h
-0
-0
-V
-\begindata{link,7900480}
-Datastream version: 2
-dropoff.h
-2
-
-black
-white
-\enddata{link,7900480}
-\enddata{link,7900480}
-\view{linkview,7900480,568,0,0\
-}\enddata{text,7899744}
-]
-      eglbvars.h
-      [0
-\begindata{text,7901488}
-\textdsversion{12}
-\begindata{link,7902224}
-4
-${ANDREWDIR}/include/eglbvars.h
-0
-0
-V
-\begindata{link,7902224}
-Datastream version: 2
-eglbvars.h
-2
-
-black
-white
-\enddata{link,7902224}
-\enddata{link,7902224}
-\view{linkview,7902224,569,0,0\
-}\enddata{text,7901488}
-]
-      elifns.h
-      [0
-\begindata{text,7903232}
-\textdsversion{12}
-\begindata{link,7903968}
-4
-${ANDREWDIR}/include/elifns.h
-0
-0
-V
-\begindata{link,7903968}
-Datastream version: 2
-elifns.h
-2
-
-black
-white
-\enddata{link,7903968}
-\enddata{link,7903968}
-\view{linkview,7903968,570,0,0\
-}\enddata{text,7903232}
-]
-      eli.h
-      [0
-\begindata{text,7904976}
-\textdsversion{12}
-\begindata{link,7905712}
-4
-${ANDREWDIR}/include/eli.h
-0
-0
-V
-\begindata{link,7905712}
-Datastream version: 2
-eli.h
-2
-
-black
-white
-\enddata{link,7905712}
-\enddata{link,7905712}
-\view{linkview,7905712,571,0,0\
-}\enddata{text,7904976}
 ]
       errprntf.h
       [0
@@ -13773,50 +10664,6 @@ white
 \view{linkview,7919664,579,0,0\
 }\enddata{text,7918928}
 ]
-      mailconf.h
-      [0
-\begindata{text,7920672}
-\textdsversion{12}
-\begindata{link,7921408}
-4
-${ANDREWDIR}/include/mailconf.h
-0
-0
-V
-\begindata{link,7921408}
-Datastream version: 2
-mailconf.h
-2
-
-black
-white
-\enddata{link,7921408}
-\enddata{link,7921408}
-\view{linkview,7921408,580,0,0\
-}\enddata{text,7920672}
-]
-      mail.h
-      [0
-\begindata{text,7922416}
-\textdsversion{12}
-\begindata{link,7923152}
-4
-${ANDREWDIR}/include/mail.h
-0
-0
-V
-\begindata{link,7923152}
-Datastream version: 2
-mail.h
-2
-
-black
-white
-\enddata{link,7923152}
-\enddata{link,7923152}
-\view{linkview,7923152,581,0,0\
-}\enddata{text,7922416}
-]
       mathaux.h
       [0
 \begindata{text,7924160}
@@ -13838,28 +10685,6 @@ white
 \enddata{link,7924896}
 \view{linkview,7924896,582,0,0\
 }\enddata{text,7924160}
-]
-      parseadd.h
-      [0
-\begindata{text,7925904}
-\textdsversion{12}
-\begindata{link,7926640}
-4
-${ANDREWDIR}/include/parseadd.h
-0
-0
-V
-\begindata{link,7926640}
-Datastream version: 2
-parseadd.h
-2
-
-black
-white
-\enddata{link,7926640}
-\enddata{link,7926640}
-\view{linkview,7926640,583,0,0\
-}\enddata{text,7925904}
 ]
       presite.h
       [0
@@ -13904,50 +10729,6 @@ white
 \enddata{link,7930128}
 \view{linkview,7930128,585,0,0\
 }\enddata{text,7929392}
-]
-      qmail.h
-      [0
-\begindata{text,7931136}
-\textdsversion{12}
-\begindata{link,7931872}
-4
-${ANDREWDIR}/include/qmail.h
-0
-0
-V
-\begindata{link,7931872}
-Datastream version: 2
-qmail.h
-2
-
-black
-white
-\enddata{link,7931872}
-\enddata{link,7931872}
-\view{linkview,7931872,586,0,0\
-}\enddata{text,7931136}
-]
-      regexp.h
-      [0
-\begindata{text,7932880}
-\textdsversion{12}
-\begindata{link,7933616}
-4
-${ANDREWDIR}/include/regexp.h
-0
-0
-V
-\begindata{link,7933616}
-Datastream version: 2
-regexp.h
-2
-
-black
-white
-\enddata{link,7933616}
-\enddata{link,7933616}
-\view{linkview,7933616,587,0,0\
-}\enddata{text,7932880}
 ]
       scache.h
       [0
@@ -14103,28 +10884,6 @@ white
 \view{linkview,7945824,594,0,0\
 }\enddata{text,7945088}
 ]
-      tokens.h
-      [0
-\begindata{text,7946832}
-\textdsversion{12}
-\begindata{link,7947568}
-4
-${ANDREWDIR}/include/tokens.h
-0
-0
-V
-\begindata{link,7947568}
-Datastream version: 2
-tokens.h
-2
-
-black
-white
-\enddata{link,7947568}
-\enddata{link,7947568}
-\view{linkview,7947568,595,0,0\
-}\enddata{text,7946832}
-]
       truth.h
       [0
 \begindata{text,7948576}
@@ -14213,338 +10972,6 @@ white
 \view{linkview,7954544,599,0,0\
 }\enddata{text,7953808}
 ]
-      ams
-      [0
-\begindata{text,7955552}
-\textdsversion{12}
-\begindata{link,7956288}
-4
-${ANDREWDIR}/include/ams
-0
-0
-V
-\begindata{link,7956288}
-Datastream version: 2
-ams
-2
-
-black
-white
-\enddata{link,7956288}
-\enddata{link,7956288}
-\view{linkview,7956288,600,0,0\
-}\enddata{text,7955552}
-]
-        {
-        ams.h
-        [0
-\begindata{text,7957296}
-\textdsversion{12}
-\begindata{link,7958032}
-4
-${ANDREWDIR}/include/ams/ams.h
-0
-0
-V
-\begindata{link,7958032}
-Datastream version: 2
-ams.h
-2
-
-black
-white
-\enddata{link,7958032}
-\enddata{link,7958032}
-\view{linkview,7958032,601,0,0\
-}\enddata{text,7957296}
-]
-        amsvers.h
-        [0
-\begindata{text,7959040}
-\textdsversion{12}
-\begindata{link,7959776}
-4
-${ANDREWDIR}/include/ams/amsvers.h
-0
-0
-V
-\begindata{link,7959776}
-Datastream version: 2
-amsvers.h
-2
-
-black
-white
-\enddata{link,7959776}
-\enddata{link,7959776}
-\view{linkview,7959776,602,0,0\
-}\enddata{text,7959040}
-]
-        cui.h
-        [0
-\begindata{text,7960784}
-\textdsversion{12}
-\begindata{link,7961520}
-4
-${ANDREWDIR}/include/ams/cui.h
-0
-0
-V
-\begindata{link,7961520}
-Datastream version: 2
-cui.h
-2
-
-black
-white
-\enddata{link,7961520}
-\enddata{link,7961520}
-\view{linkview,7961520,603,0,0\
-}\enddata{text,7960784}
-]
-        cuimach.h
-        [0
-\begindata{text,7962528}
-\textdsversion{12}
-\begindata{link,7963264}
-4
-${ANDREWDIR}/include/ams/cuimach.h
-0
-0
-V
-\begindata{link,7963264}
-Datastream version: 2
-cuimach.h
-2
-
-black
-white
-\enddata{link,7963264}
-\enddata{link,7963264}
-\view{linkview,7963264,604,0,0\
-}\enddata{text,7962528}
-]
-        cuiprotos.h
-        [0
-\begindata{text,7964272}
-\textdsversion{12}
-\begindata{link,7965008}
-4
-${ANDREWDIR}/include/ams/cuiprotos.h
-0
-0
-V
-\begindata{link,7965008}
-Datastream version: 2
-cuiprotos.h
-2
-
-black
-white
-\enddata{link,7965008}
-\enddata{link,7965008}
-\view{linkview,7965008,605,0,0\
-}\enddata{text,7964272}
-]
-        cuivers.h
-        [0
-\begindata{text,7966016}
-\textdsversion{12}
-\begindata{link,7966752}
-4
-${ANDREWDIR}/include/ams/cuivers.h
-0
-0
-V
-\begindata{link,7966752}
-Datastream version: 2
-cuivers.h
-2
-
-black
-white
-\enddata{link,7966752}
-\enddata{link,7966752}
-\view{linkview,7966752,606,0,0\
-}\enddata{text,7966016}
-]
-        errlvls.h
-        [0
-\begindata{text,7967760}
-\textdsversion{12}
-\begindata{link,7968496}
-4
-${ANDREWDIR}/include/ams/errlvls.h
-0
-0
-V
-\begindata{link,7968496}
-Datastream version: 2
-errlvls.h
-2
-
-black
-white
-\enddata{link,7968496}
-\enddata{link,7968496}
-\view{linkview,7968496,607,0,0\
-}\enddata{text,7967760}
-]
-        hdrparse.h
-        [0
-\begindata{text,7969504}
-\textdsversion{12}
-\begindata{link,7970240}
-4
-${ANDREWDIR}/include/ams/hdrparse.h
-0
-0
-V
-\begindata{link,7970240}
-Datastream version: 2
-hdrparse.h
-2
-
-black
-white
-\enddata{link,7970240}
-\enddata{link,7970240}
-\view{linkview,7970240,608,0,0\
-}\enddata{text,7969504}
-]
-        mserrno.h
-        [0
-\begindata{text,7971248}
-\textdsversion{12}
-\begindata{link,7971984}
-4
-${ANDREWDIR}/include/ams/mserrno.h
-0
-0
-V
-\begindata{link,7971984}
-Datastream version: 2
-mserrno.h
-2
-
-black
-white
-\enddata{link,7971984}
-\enddata{link,7971984}
-\view{linkview,7971984,609,0,0\
-}\enddata{text,7971248}
-]
-        ms.h
-        [0
-\begindata{text,7972992}
-\textdsversion{12}
-\begindata{link,7973728}
-4
-${ANDREWDIR}/include/ams/ms.h
-0
-0
-V
-\begindata{link,7973728}
-Datastream version: 2
-ms.h
-2
-
-black
-white
-\enddata{link,7973728}
-\enddata{link,7973728}
-\view{linkview,7973728,610,0,0\
-}\enddata{text,7972992}
-]
-        msprotos.h
-        [0
-\begindata{text,7974736}
-\textdsversion{12}
-\begindata{link,7975472}
-4
-${ANDREWDIR}/include/ams/msprotos.h
-0
-0
-V
-\begindata{link,7975472}
-Datastream version: 2
-msprotos.h
-2
-
-black
-white
-\enddata{link,7975472}
-\enddata{link,7975472}
-\view{linkview,7975472,611,0,0\
-}\enddata{text,7974736}
-]
-        msshrprotos.h
-        [0
-\begindata{text,7976480}
-\textdsversion{12}
-\begindata{link,7977216}
-4
-${ANDREWDIR}/include/ams/msshrprotos.h
-0
-0
-V
-\begindata{link,7977216}
-Datastream version: 2
-msshrprotos.h
-2
-
-black
-white
-\enddata{link,7977216}
-\enddata{link,7977216}
-\view{linkview,7977216,612,0,0\
-}\enddata{text,7976480}
-]
-        msvers.h
-        [0
-\begindata{text,7978224}
-\textdsversion{12}
-\begindata{link,7978960}
-4
-${ANDREWDIR}/include/ams/msvers.h
-0
-0
-V
-\begindata{link,7978960}
-Datastream version: 2
-msvers.h
-2
-
-black
-white
-\enddata{link,7978960}
-\enddata{link,7978960}
-\view{linkview,7978960,613,0,0\
-}\enddata{text,7978224}
-]
-        snapams.h
-        [0
-\begindata{text,7979968}
-\textdsversion{12}
-\begindata{link,7980704}
-4
-${ANDREWDIR}/include/ams/snapams.h
-0
-0
-V
-\begindata{link,7980704}
-Datastream version: 2
-snapams.h
-2
-
-black
-white
-\enddata{link,7980704}
-\enddata{link,7980704}
-\view{linkview,7980704,614,0,0\
-}\enddata{text,7979968}
-]
-        }
       atk
       [0
 \begindata{text,7981712}
@@ -14765,72 +11192,6 @@ white
 \enddata{link,7998144}
 \view{linkview,7998144,624,0,0\
 }\enddata{text,7997408}
-]
-        ams.H
-        [0
-\begindata{text,7999152}
-\textdsversion{12}
-\begindata{link,7999888}
-4
-${ANDREWDIR}/include/atk/ams.H
-0
-0
-V
-\begindata{link,7999888}
-Datastream version: 2
-ams.H
-2
-
-black
-white
-\enddata{link,7999888}
-\enddata{link,7999888}
-\view{linkview,7999888,625,0,0\
-}\enddata{text,7999152}
-]
-        amsn.H
-        [0
-\begindata{text,8000896}
-\textdsversion{12}
-\begindata{link,8001632}
-4
-${ANDREWDIR}/include/atk/amsn.H
-0
-0
-V
-\begindata{link,8001632}
-Datastream version: 2
-amsn.H
-2
-
-black
-white
-\enddata{link,8001632}
-\enddata{link,8001632}
-\view{linkview,8001632,626,0,0\
-}\enddata{text,8000896}
-]
-        amsutil.H
-        [0
-\begindata{text,8002640}
-\textdsversion{12}
-\begindata{link,8003376}
-4
-${ANDREWDIR}/include/atk/amsutil.H
-0
-0
-V
-\begindata{link,8003376}
-Datastream version: 2
-amsutil.H
-2
-
-black
-white
-\enddata{link,8003376}
-\enddata{link,8003376}
-\view{linkview,8003376,627,0,0\
-}\enddata{text,8002640}
 ]
         aoption.H
         [0
@@ -15931,28 +12292,6 @@ white
 \enddata{link,8093648}
 \view{linkview,8093648,677,0,0\
 }\enddata{text,8092912}
-]
-        captions.H
-        [0
-\begindata{text,8094656}
-\textdsversion{12}
-\begindata{link,8095392}
-4
-${ANDREWDIR}/include/atk/captions.H
-0
-0
-V
-\begindata{link,8095392}
-Datastream version: 2
-captions.H
-2
-
-black
-white
-\enddata{link,8095392}
-\enddata{link,8095392}
-\view{linkview,8095392,678,0,0\
-}\enddata{text,8094656}
 ]
         cel.H
         [0
@@ -17208,28 +13547,6 @@ white
 \view{linkview,8194800,735,0,0\
 }\enddata{text,8194064}
 ]
-        ATKDoLoad.H
-        [0
-\begindata{text,8195808}
-\textdsversion{12}
-\begindata{link,8196544}
-4
-${ANDREWDIR}/include/atk/ATKDoLoad.H
-0
-0
-V
-\begindata{link,8196544}
-Datastream version: 2
-ATKDoLoad.H
-2
-
-black
-white
-\enddata{link,8196544}
-\enddata{link,8196544}
-\view{linkview,8196544,736,0,0\
-}\enddata{text,8195808}
-]
         dynsearch.H
         [0
 \begindata{text,8197552}
@@ -18176,50 +14493,6 @@ white
 \view{linkview,8274608,779,0,0\
 }\enddata{text,8273872}
 ]
-        folders.H
-        [0
-\begindata{text,8275616}
-\textdsversion{12}
-\begindata{link,8276352}
-4
-${ANDREWDIR}/include/atk/folders.H
-0
-0
-V
-\begindata{link,8276352}
-Datastream version: 2
-folders.H
-2
-
-black
-white
-\enddata{link,8276352}
-\enddata{link,8276352}
-\view{linkview,8276352,780,0,0\
-}\enddata{text,8275616}
-]
-        foldertreev.H
-        [0
-\begindata{text,8277360}
-\textdsversion{12}
-\begindata{link,8278096}
-4
-${ANDREWDIR}/include/atk/foldertreev.H
-0
-0
-V
-\begindata{link,8278096}
-Datastream version: 2
-foldertreev.H
-2
-
-black
-white
-\enddata{link,8278096}
-\enddata{link,8278096}
-\view{linkview,8278096,781,0,0\
-}\enddata{text,8277360}
-]
         fontdesc.H
         [0
 \begindata{text,8279104}
@@ -18704,6 +14977,50 @@ white
 \view{linkview,8316464,803,0,0\
 }\enddata{text,8315728}
 ]
+        gtext.H
+        [0
+\begindata{text,8315728}
+\textdsversion{12}
+\begindata{link,8316464}
+4
+${ANDREWDIR}/include/atk/gtext.H
+0
+0
+V
+\begindata{link,8316464}
+Datastream version: 2
+gtext.H
+2
+
+black
+white
+\enddata{link,8316464}
+\enddata{link,8316464}
+\view{linkview,8316464,803,0,0\
+}\enddata{text,8315728}
+]
+        gtextv.H
+        [0
+\begindata{text,8315728}
+\textdsversion{12}
+\begindata{link,8316464}
+4
+${ANDREWDIR}/include/atk/gtextv.H
+0
+0
+V
+\begindata{link,8316464}
+Datastream version: 2
+gtextv.H
+2
+
+black
+white
+\enddata{link,8316464}
+\enddata{link,8316464}
+\view{linkview,8316464,803,0,0\
+}\enddata{text,8315728}
+]
         hash.H
         [0
 \begindata{text,8317472}
@@ -19100,6 +15417,28 @@ white
 \view{linkview,8347856,821,0,0\
 }\enddata{text,8347120}
 ]
+        html.H
+        [0
+\begindata{text,8347120}
+\textdsversion{12}
+\begindata{link,8347856}
+4
+${ANDREWDIR}/include/atk/html.H
+0
+0
+V
+\begindata{link,8347856}
+Datastream version: 2
+html.H
+2
+
+black
+white
+\enddata{link,8347856}
+\enddata{link,8347856}
+\view{linkview,8347856,821,0,0\
+}\enddata{text,8347120}
+]
         htmlimagev.H
         [0
 \begindata{text,8348864}
@@ -19157,6 +15496,28 @@ V
 \begindata{link,8353088}
 Datastream version: 2
 htmltextview.H
+2
+
+black
+white
+\enddata{link,8353088}
+\enddata{link,8353088}
+\view{linkview,8353088,824,0,0\
+}\enddata{text,8352352}
+]
+        htmlview.H
+        [0
+\begindata{text,8352352}
+\textdsversion{12}
+\begindata{link,8353088}
+4
+${ANDREWDIR}/include/atk/htmlview.H
+0
+0
+V
+\begindata{link,8353088}
+Datastream version: 2
+htmlview.H
 2
 
 black
@@ -19892,50 +16253,6 @@ white
 \view{linkview,8410640,857,0,0\
 }\enddata{text,8409904}
 ]
-        mailobj.H
-        [0
-\begindata{text,8411648}
-\textdsversion{12}
-\begindata{link,8412384}
-4
-${ANDREWDIR}/include/atk/mailobj.H
-0
-0
-V
-\begindata{link,8412384}
-Datastream version: 2
-mailobj.H
-2
-
-black
-white
-\enddata{link,8412384}
-\enddata{link,8412384}
-\view{linkview,8412384,858,0,0\
-}\enddata{text,8411648}
-]
-        mailobjv.H
-        [0
-\begindata{text,8413392}
-\textdsversion{12}
-\begindata{link,8414128}
-4
-${ANDREWDIR}/include/atk/mailobjv.H
-0
-0
-V
-\begindata{link,8414128}
-Datastream version: 2
-mailobjv.H
-2
-
-black
-white
-\enddata{link,8414128}
-\enddata{link,8414128}
-\view{linkview,8414128,859,0,0\
-}\enddata{text,8413392}
-]
         mantext.H
         [0
 \begindata{text,8415136}
@@ -20156,50 +16473,6 @@ white
 \view{linkview,8431568,869,0,0\
 }\enddata{text,8430832}
 ]
-        messagesapp.H
-        [0
-\begindata{text,8432576}
-\textdsversion{12}
-\begindata{link,8433312}
-4
-${ANDREWDIR}/include/atk/messagesapp.H
-0
-0
-V
-\begindata{link,8433312}
-Datastream version: 2
-messagesapp.H
-2
-
-black
-white
-\enddata{link,8433312}
-\enddata{link,8433312}
-\view{linkview,8433312,870,0,0\
-}\enddata{text,8432576}
-]
-        messages.H
-        [0
-\begindata{text,8434320}
-\textdsversion{12}
-\begindata{link,8435056}
-4
-${ANDREWDIR}/include/atk/messages.H
-0
-0
-V
-\begindata{link,8435056}
-Datastream version: 2
-messages.H
-2
-
-black
-white
-\enddata{link,8435056}
-\enddata{link,8435056}
-\view{linkview,8435056,871,0,0\
-}\enddata{text,8434320}
-]
         messitem.H
         [0
 \begindata{text,8436064}
@@ -20221,28 +16494,6 @@ white
 \enddata{link,8436800}
 \view{linkview,8436800,872,0,0\
 }\enddata{text,8436064}
-]
-        messwind.H
-        [0
-\begindata{text,8437808}
-\textdsversion{12}
-\begindata{link,8438544}
-4
-${ANDREWDIR}/include/atk/messwind.H
-0
-0
-V
-\begindata{link,8438544}
-Datastream version: 2
-messwind.H
-2
-
-black
-white
-\enddata{link,8438544}
-\enddata{link,8438544}
-\view{linkview,8438544,873,0,0\
-}\enddata{text,8437808}
 ]
         metax.H
         [0
@@ -20507,28 +16758,6 @@ white
 \enddata{link,8459472}
 \view{linkview,8459472,885,0,0\
 }\enddata{text,8458736}
-]
-        nbutterv.H
-        [0
-\begindata{text,8460480}
-\textdsversion{12}
-\begindata{link,8461216}
-4
-${ANDREWDIR}/include/atk/nbutterv.H
-0
-0
-V
-\begindata{link,8461216}
-Datastream version: 2
-nbutterv.H
-2
-
-black
-white
-\enddata{link,8461216}
-\enddata{link,8461216}
-\view{linkview,8461216,886,0,0\
-}\enddata{text,8460480}
 ]
         ness.H
         [0
@@ -20815,28 +17044,6 @@ white
 \enddata{link,8257584}
 \view{linkview,8257584,899,0,0\
 }\enddata{text,8256848}
-]
-        options.H
-        [0
-\begindata{text,8258592}
-\textdsversion{12}
-\begindata{link,8259328}
-4
-${ANDREWDIR}/include/atk/options.H
-0
-0
-V
-\begindata{link,8259328}
-Datastream version: 2
-options.H
-2
-
-black
-white
-\enddata{link,8259328}
-\enddata{link,8259328}
-\view{linkview,8259328,900,0,0\
-}\enddata{text,8258592}
 ]
         orgapp.H
         [0
@@ -22796,28 +19003,6 @@ white
 \view{linkview,8643936,989,0,0\
 }\enddata{text,8643200}
 ]
-        sendmessage.H
-        [0
-\begindata{text,8644944}
-\textdsversion{12}
-\begindata{link,8645680}
-4
-${ANDREWDIR}/include/atk/sendmessage.H
-0
-0
-V
-\begindata{link,8645680}
-Datastream version: 2
-sendmessage.H
-2
-
-black
-white
-\enddata{link,8645680}
-\enddata{link,8645680}
-\view{linkview,8645680,990,0,0\
-}\enddata{text,8644944}
-]
         shared.h
         [0
 \begindata{text,8646688}
@@ -23126,6 +19311,50 @@ white
 \view{linkview,8670096,1004,0,0\
 }\enddata{text,8669360}
 ]
+        stroffet.H
+        [0
+\begindata{text,8669360}
+\textdsversion{12}
+\begindata{link,8670096}
+4
+${ANDREWDIR}/include/atk/stroffet.H
+0
+0
+V
+\begindata{link,8670096}
+Datastream version: 2
+stroffet.H
+2
+
+black
+white
+\enddata{link,8670096}
+\enddata{link,8670096}
+\view{linkview,8670096,1004,0,0\
+}\enddata{text,8669360}
+]
+        stroffetview.H
+        [0
+\begindata{text,8669360}
+\textdsversion{12}
+\begindata{link,8670096}
+4
+${ANDREWDIR}/include/atk/stroffetview.H
+0
+0
+V
+\begindata{link,8670096}
+Datastream version: 2
+stroffetview.H
+2
+
+black
+white
+\enddata{link,8670096}
+\enddata{link,8670096}
+\view{linkview,8670096,1004,0,0\
+}\enddata{text,8669360}
+]
         strtblview.H
         [0
 \begindata{text,8671104}
@@ -23346,28 +19575,6 @@ white
 \view{linkview,8687536,1014,0,0\
 }\enddata{text,8686800}
 ]
-        t822view.H
-        [0
-\begindata{text,8688544}
-\textdsversion{12}
-\begindata{link,8689280}
-4
-${ANDREWDIR}/include/atk/t822view.H
-0
-0
-V
-\begindata{link,8689280}
-Datastream version: 2
-t822view.H
-2
-
-black
-white
-\enddata{link,8689280}
-\enddata{link,8689280}
-\view{linkview,8689280,1015,0,0\
-}\enddata{text,8688544}
-]
         table.H
         [0
 \begindata{text,8690288}
@@ -23455,28 +19662,6 @@ white
 \enddata{link,8696256}
 \view{linkview,8696256,1019,0,0\
 }\enddata{text,8695520}
-]
-        text822.H
-        [0
-\begindata{text,8697264}
-\textdsversion{12}
-\begindata{link,8698000}
-4
-${ANDREWDIR}/include/atk/text822.H
-0
-0
-V
-\begindata{link,8698000}
-Datastream version: 2
-text822.H
-2
-
-black
-white
-\enddata{link,8698000}
-\enddata{link,8698000}
-\view{linkview,8698000,1020,0,0\
-}\enddata{text,8697264}
 ]
         textflow.H
         [0
@@ -24335,28 +20520,6 @@ white
 \enddata{link,8769104}
 \view{linkview,8769104,1059,0,0\
 }\enddata{text,8768368}
-]
-        vopconapp.H
-        [0
-\begindata{text,8770112}
-\textdsversion{12}
-\begindata{link,8770848}
-4
-${ANDREWDIR}/include/atk/vopconapp.H
-0
-0
-V
-\begindata{link,8770848}
-Datastream version: 2
-vopconapp.H
-2
-
-black
-white
-\enddata{link,8770848}
-\enddata{link,8770848}
-\view{linkview,8770848,1060,0,0\
-}\enddata{text,8770112}
 ]
         vutils.H
         [0
@@ -25657,28 +21820,228 @@ white
 }\enddata{text,8873008}
 ]
         }
-      zip
+      gestures
       [0
-\begindata{text,8874752}
+\begindata{text,8873008}
 \textdsversion{12}
-\begindata{link,8875488}
+\begindata{link,8873744}
 4
-${ANDREWDIR}/include/zip
+${ANDREWDIR}/include/atk/gestures
 0
 0
 V
-\begindata{link,8875488}
+\begindata{link,8873744}
 Datastream version: 2
-zip
+gestures
 2
 
 black
 white
-\enddata{link,8875488}
-\enddata{link,8875488}
-\view{linkview,8875488,1120,0,0\
-}\enddata{text,8874752}
+\enddata{link,8873744}
+\enddata{link,8873744}
+\view{linkview,8873744,1119,0,0\
+}\enddata{text,8873008}
 ]
+        {
+        args.h
+        [0
+\begindata{text,8873008}
+\textdsversion{12}
+\begindata{link,8873744}
+4
+${ANDREWDIR}/include/gestures/args.h
+0
+0
+V
+\begindata{link,8873744}
+Datastream version: 2
+args.h
+2
+
+black
+white
+\enddata{link,8873744}
+\enddata{link,8873744}
+\view{linkview,8873744,1119,0,0\
+}\enddata{text,8873008}
+]
+        bitvector.h
+        [0
+\begindata{text,8873008}
+\textdsversion{12}
+\begindata{link,8873744}
+4
+${ANDREWDIR}/include/gestures/bitvector.h
+0
+0
+V
+\begindata{link,8873744}
+Datastream version: 2
+bitvector.h
+2
+
+black
+white
+\enddata{link,8873744}
+\enddata{link,8873744}
+\view{linkview,8873744,1119,0,0\
+}\enddata{text,8873008}
+]
+        bool.h
+        [0
+\begindata{text,8873008}
+\textdsversion{12}
+\begindata{link,8873744}
+4
+${ANDREWDIR}/include/gestures/bool.h
+0
+0
+V
+\begindata{link,8873744}
+Datastream version: 2
+bool.h
+2
+
+black
+white
+\enddata{link,8873744}
+\enddata{link,8873744}
+\view{linkview,8873744,1119,0,0\
+}\enddata{text,8873008}
+]
+        fv.h
+        [0
+\begindata{text,8873008}
+\textdsversion{12}
+\begindata{link,8873744}
+4
+${ANDREWDIR}/include/gestures/fv.h
+0
+0
+V
+\begindata{link,8873744}
+Datastream version: 2
+fv.h
+2
+
+black
+white
+\enddata{link,8873744}
+\enddata{link,8873744}
+\view{linkview,8873744,1119,0,0\
+}\enddata{text,8873008}
+]
+        gdev.h
+        [0
+\begindata{text,8873008}
+\textdsversion{12}
+\begindata{link,8873744}
+4
+${ANDREWDIR}/include/gestures/gdev.h
+0
+0
+V
+\begindata{link,8873744}
+Datastream version: 2
+gdev.h
+2
+
+black
+white
+\enddata{link,8873744}
+\enddata{link,8873744}
+\view{linkview,8873744,1119,0,0\
+}\enddata{text,8873008}
+]
+        matrix.h
+        [0
+\begindata{text,8873008}
+\textdsversion{12}
+\begindata{link,8873744}
+4
+${ANDREWDIR}/include/gestures/matrix.h
+0
+0
+V
+\begindata{link,8873744}
+Datastream version: 2
+matrix.h
+2
+
+black
+white
+\enddata{link,8873744}
+\enddata{link,8873744}
+\view{linkview,8873744,1119,0,0\
+}\enddata{text,8873008}
+]
+        sc.h
+        [0
+\begindata{text,8873008}
+\textdsversion{12}
+\begindata{link,8873744}
+4
+${ANDREWDIR}/include/gestures/sc.h
+0
+0
+V
+\begindata{link,8873744}
+Datastream version: 2
+sc.h
+2
+
+black
+white
+\enddata{link,8873744}
+\enddata{link,8873744}
+\view{linkview,8873744,1119,0,0\
+}\enddata{text,8873008}
+]
+        util.h
+        [0
+\begindata{text,8873008}
+\textdsversion{12}
+\begindata{link,8873744}
+4
+${ANDREWDIR}/include/gestures/util.h
+0
+0
+V
+\begindata{link,8873744}
+Datastream version: 2
+util.h
+2
+
+black
+white
+\enddata{link,8873744}
+\enddata{link,8873744}
+\view{linkview,8873744,1119,0,0\
+}\enddata{text,8873008}
+]
+        zdebug.h
+        [0
+\begindata{text,8873008}
+\textdsversion{12}
+\begindata{link,8873744}
+4
+${ANDREWDIR}/include/gestures/zdebug.h
+0
+0
+V
+\begindata{link,8873744}
+Datastream version: 2
+zdebug.h
+2
+
+black
+white
+\enddata{link,8873744}
+\enddata{link,8873744}
+\view{linkview,8873744,1119,0,0\
+}\enddata{text,8873008}
+]
+        }
       }
     lib
     [0
@@ -25727,28 +22090,6 @@ white
 \enddata{link,8879056}
 \view{linkview,8879056,1122,0,0\
 }\enddata{text,8878432}
-]
-      atkaliases
-      [0
-\begindata{text,8880064}
-\textdsversion{12}
-\begindata{link,8880800}
-4
-${ANDREWDIR}/lib/atkaliases
-0
-0
-V
-\begindata{link,8880800}
-Datastream version: 2
-atkaliases
-2
-
-black
-white
-\enddata{link,8880800}
-\enddata{link,8880800}
-\view{linkview,8880800,1123,0,0\
-}\enddata{text,8880064}
 ]
       atkvers.num
       [0
@@ -25838,28 +22179,6 @@ white
 \view{linkview,8887776,1127,0,0\
 }\enddata{text,8887040}
 ]
-      Hello
-      [0
-\begindata{text,8888784}
-\textdsversion{12}
-\begindata{link,8889520}
-4
-${ANDREWDIR}/lib/Hello
-0
-0
-V
-\begindata{link,8889520}
-Datastream version: 2
-Hello
-2
-
-black
-white
-\enddata{link,8889520}
-\enddata{link,8889520}
-\view{linkview,8889520,1128,0,0\
-}\enddata{text,8888784}
-]
       help.overviews
       [0
 \begindata{text,8890512}
@@ -25904,22 +22223,59 @@ white
 \view{linkview,8892992,1130,0,0\
 }\enddata{text,8892256}
 ]
+      html.init
+      [0
+\begindata{text,8890512}
+\textdsversion{12}
+\begindata{link,8891248}
+4
+${ANDREWDIR}/lib/html.init
+0
+0
+V
+\begindata{link,8891248}
+Datastream version: 2
+html.init
+2
+
+black
+white
+\enddata{link,8891248}
+\enddata{link,8891248}
+\view{linkview,8891248,1129,0,0\
+}\enddata{text,8890512}
+]
+      htmlmagic
+      [0
+\begindata{text,8890512}
+\textdsversion{12}
+\begindata{link,8891248}
+4
+${ANDREWDIR}/lib/htmlmagic
+0
+0
+V
+\begindata{link,8891248}
+Datastream version: 2
+htmlmagic
+2
+
+black
+white
+\enddata{link,8891248}
+\enddata{link,8891248}
+\view{linkview,8891248,1129,0,0\
+}\enddata{text,8890512}
+]
       libafs.a
       libATKDynLoad.a
       libATKLink.a
       libatkos.a
       libcmenu.a
       libcparser.a
-      libcui.a
-      libcuin.a
-      libeli.a
       liberrors.a
       libindex.a
       libjpeg.a
-      libmail.a
-      libmsshr.a
-      libmssrv.a
-      librxp.a
       libshadows.a
       libtiff.a
       libutil.a
@@ -26432,8 +22788,12 @@ white
         gofig.rf
         gsearch.lt
         gsearch.rf
+        gtext.lt
+        gtext.rf
         help.lt
         help.rf
+        html.lt
+        html.rf
         htmltext.lt
         htmltext.rf
         imagev.lt
@@ -26448,9 +22808,6 @@ white
         libAButtonv.so
         libAList.so
         libAListv.so
-        libamsn.so
-        libams.so
-        libamsutil.so
         libAOptionCardv.so
         libAOptionMenu.so
         libAOptionMenuv.so
@@ -26482,7 +22839,6 @@ white
         libcalccon.so
         libcalc.so
         libcalcv.so
-        libcaptions.so
         libcel.so
         libcelview.so
         libchamp.so
@@ -26541,8 +22897,6 @@ white
         libfiller.so
         libfillerview.so
         libfilter.so
-        libfolders.so
-        libfoldertreev.so
         libfourwayV.so
         libframe.so
         libgentext.so
@@ -26552,6 +22906,8 @@ white
         libgofig.so
         libgofigview.so
         libgsearch.so
+        libgtext.so
+        libgtextv.so
         libhelpapp.so
         libhelpcon.so
         libhelpdb.so
@@ -26567,8 +22923,10 @@ white
         libhtmlenv.so
         libhtmlform.so
         libhtmlimagev.so
+        libhtml.so
         libhtmltext.so
         libhtmltextview.so
+        libhtmlview.so
         libicon.so
         libiconview.so
         libidltext.so
@@ -26594,16 +22952,11 @@ white
         libm3text.so
         libm3textview.so
         libmac.so
-        libmailobj.so
-        libmailobjv.so
         libmantext.so
         libmbuttonv.so
         libmcidas.so
         libmenterstrV.so
         libmentertext.so
-        libmessagesapp.so
-        libmessages.so
-        libmesswind.so
         libmetax.so
         libmetextview.so
         libmmtext.so
@@ -26613,7 +22966,6 @@ white
         libmonthview.so
         libmtext.so
         libmtextview.so
-        libnbutterv.so
         libnessmark.so
         libnessm.so
         libnessmv.so
@@ -26624,7 +22976,6 @@ white
         libnoteview.so
         liboldRF.so
         libonoffV.so
-        liboptions.so
         liborgapp.so
         liborg.so
         liborgv.so
@@ -26707,7 +23058,6 @@ white
         libschedapp.so
         libsched.so
         libschedv.so
-        libsendmessage.so
         libsliderstrV.so
         libsliderV.so
         libspell.so
@@ -26716,6 +23066,8 @@ white
         libsrctextview.so
         libssliderv.so
         libstringV.so
+        libstroffet.so
+        libstroffetview.so
         libsuitecv.so
         libsuiteev.so
         libsuite.so
@@ -26725,11 +23077,9 @@ white
         libsupport.so
         libsupviews.so
         libsym.so
-        libt822view.so
         libtable.so
         libtabrulerview.so
         libtags.so
-        libtext822.so
         libtextaux.so
         libtextintv.so
         libtextobjs.so
@@ -26798,8 +23148,6 @@ white
         lookz.rf
         lt.lt
         lt.rf
-        messages.lt
-        messages.rf
         metax.lt
         metax.rf
         ness.lt
@@ -26830,6 +23178,8 @@ white
         spell.rf
         srctext.lt
         srctext.rf
+        stroffet.lt
+        stroffet.rf
         suite.lt
         suite.rf
         support.lt
@@ -27087,342 +23437,6 @@ white
 }\enddata{text,8718192}
 ]
         }
-      el
-      [0
-\begindata{text,8719936}
-\textdsversion{12}
-\begindata{link,8720672}
-4
-${ANDREWDIR}/lib/el
-0
-0
-V
-\begindata{link,8720672}
-Datastream version: 2
-el
-2
-
-black
-white
-\enddata{link,8720672}
-\enddata{link,8720672}
-\view{linkview,8720672,1161,0,0\
-}\enddata{text,8719936}
-]
-        {
-        batmail.el
-        [0
-\begindata{text,8721664}
-\textdsversion{12}
-\begindata{link,8722400}
-4
-${ANDREWDIR}/lib/el/batmail.el
-0
-0
-V
-\begindata{link,8722400}
-Datastream version: 2
-batmail.el
-2
-
-black
-white
-\enddata{link,8722400}
-\enddata{link,8722400}
-\view{linkview,8722400,1162,0,0\
-}\enddata{text,8721664}
-]
-        prompt.el
-        [0
-\begindata{text,8723408}
-\textdsversion{12}
-\begindata{link,8724144}
-4
-${ANDREWDIR}/lib/el/prompt.el
-0
-0
-V
-\begindata{link,8724144}
-Datastream version: 2
-prompt.el
-2
-
-black
-white
-\enddata{link,8724144}
-\enddata{link,8724144}
-\view{linkview,8724144,1163,0,0\
-}\enddata{text,8723408}
-]
-        }
-      eli
-      [0
-\begindata{text,8725152}
-\textdsversion{12}
-\begindata{link,8725888}
-4
-${ANDREWDIR}/lib/eli
-0
-0
-V
-\begindata{link,8725888}
-Datastream version: 2
-eli
-2
-
-black
-white
-\enddata{link,8725888}
-\enddata{link,8725888}
-\view{linkview,8725888,1164,0,0\
-}\enddata{text,8725152}
-]
-        {
-        elilib.eli
-        [0
-\begindata{text,8726880}
-\textdsversion{12}
-\begindata{link,8727616}
-4
-${ANDREWDIR}/lib/eli/elilib.eli
-0
-0
-V
-\begindata{link,8727616}
-Datastream version: 2
-elilib.eli
-2
-
-black
-white
-\enddata{link,8727616}
-\enddata{link,8727616}
-\view{linkview,8727616,1165,0,0\
-}\enddata{text,8726880}
-]
-        flames.eli
-        [0
-\begindata{text,8728624}
-\textdsversion{12}
-\begindata{link,8729360}
-4
-${ANDREWDIR}/lib/eli/flames.eli
-0
-0
-V
-\begindata{link,8729360}
-Datastream version: 2
-flames.eli
-2
-
-black
-white
-\enddata{link,8729360}
-\enddata{link,8729360}
-\view{linkview,8729360,1166,0,0\
-}\enddata{text,8728624}
-]
-        ints.eli
-        [0
-\begindata{text,8730368}
-\textdsversion{12}
-\begindata{link,8731104}
-4
-${ANDREWDIR}/lib/eli/ints.eli
-0
-0
-V
-\begindata{link,8731104}
-Datastream version: 2
-ints.eli
-2
-
-black
-white
-\enddata{link,8731104}
-\enddata{link,8731104}
-\view{linkview,8731104,1167,0,0\
-}\enddata{text,8730368}
-]
-        lists.eli
-        [0
-\begindata{text,9027200}
-\textdsversion{12}
-\begindata{link,9027936}
-4
-${ANDREWDIR}/lib/eli/lists.eli
-0
-0
-V
-\begindata{link,9027936}
-Datastream version: 2
-lists.eli
-2
-
-black
-white
-\enddata{link,9027936}
-\enddata{link,9027936}
-\view{linkview,9027936,1168,0,0\
-}\enddata{text,9027200}
-]
-        mapcar.eli
-        [0
-\begindata{text,9028944}
-\textdsversion{12}
-\begindata{link,9029680}
-4
-${ANDREWDIR}/lib/eli/mapcar.eli
-0
-0
-V
-\begindata{link,9029680}
-Datastream version: 2
-mapcar.eli
-2
-
-black
-white
-\enddata{link,9029680}
-\enddata{link,9029680}
-\view{linkview,9029680,1169,0,0\
-}\enddata{text,9028944}
-]
-        misc.eli
-        [0
-\begindata{text,9030688}
-\textdsversion{12}
-\begindata{link,9031424}
-4
-${ANDREWDIR}/lib/eli/misc.eli
-0
-0
-V
-\begindata{link,9031424}
-Datastream version: 2
-misc.eli
-2
-
-black
-white
-\enddata{link,9031424}
-\enddata{link,9031424}
-\view{linkview,9031424,1170,0,0\
-}\enddata{text,9030688}
-]
-        strings.eli
-        [0
-\begindata{text,9032432}
-\textdsversion{12}
-\begindata{link,9033168}
-4
-${ANDREWDIR}/lib/eli/strings.eli
-0
-0
-V
-\begindata{link,9033168}
-Datastream version: 2
-strings.eli
-2
-
-black
-white
-\enddata{link,9033168}
-\enddata{link,9033168}
-\view{linkview,9033168,1171,0,0\
-}\enddata{text,9032432}
-]
-        }
-      flames
-      [0
-\begindata{text,9034176}
-\textdsversion{12}
-\begindata{link,9034912}
-4
-${ANDREWDIR}/lib/flames
-0
-0
-V
-\begindata{link,9034912}
-Datastream version: 2
-flames
-2
-
-black
-white
-\enddata{link,9034912}
-\enddata{link,9034912}
-\view{linkview,9034912,1172,0,0\
-}\enddata{text,9034176}
-]
-        {
-        bbd.flames
-        [0
-\begindata{text,9035904}
-\textdsversion{12}
-\begindata{link,9036640}
-4
-${ANDREWDIR}/lib/flames/bbd.flames
-0
-0
-V
-\begindata{link,9036640}
-Datastream version: 2
-bbd.flames
-2
-
-black
-white
-\enddata{link,9036640}
-\enddata{link,9036640}
-\view{linkview,9036640,1173,0,0\
-}\enddata{text,9035904}
-]
-        flib.flames
-        [0
-\begindata{text,9037648}
-\textdsversion{12}
-\begindata{link,9038384}
-4
-${ANDREWDIR}/lib/flames/flib.flames
-0
-0
-V
-\begindata{link,9038384}
-Datastream version: 2
-flib.flames
-2
-
-black
-white
-\enddata{link,9038384}
-\enddata{link,9038384}
-\view{linkview,9038384,1174,0,0\
-}\enddata{text,9037648}
-]
-        msvc.flames
-        [0
-\begindata{text,9039392}
-\textdsversion{12}
-\begindata{link,9040128}
-4
-${ANDREWDIR}/lib/flames/msvc.flames
-0
-0
-V
-\begindata{link,9040128}
-Datastream version: 2
-msvc.flames
-2
-
-black
-white
-\enddata{link,9040128}
-\enddata{link,9040128}
-\view{linkview,9040128,1175,0,0\
-}\enddata{text,9039392}
-]
-        }
       genstatl
       [0
 \begindata{text,9041136}
@@ -27491,6 +23505,54 @@ white
 }\enddata{text,9044624}
 ]
         }
+      gestures
+      [0
+\begindata{text,9046368}
+\textdsversion{12}
+\begindata{link,9047104}
+4
+${ANDREWDIR}/lib/gestures
+0
+0
+V
+\begindata{link,9047104}
+Datastream version: 2
+gestures
+2
+
+black
+white
+\enddata{link,9047104}
+\enddata{link,9047104}
+\view{linkview,9047104,1179,0,0\
+}\enddata{text,9046368}
+]
+        {
+        gest.cl
+        [0
+\begindata{text,9046368}
+\textdsversion{12}
+\begindata{link,9047104}
+4
+${ANDREWDIR}/lib/gestures/gest.cl
+0
+0
+V
+\begindata{link,9047104}
+Datastream version: 2
+gest.cl
+2
+
+black
+white
+\enddata{link,9047104}
+\enddata{link,9047104}
+\view{linkview,9047104,1179,0,0\
+}\enddata{text,9046368}
+]
+        libgdev.a
+        librecog.a
+        }
       help.index
       [0
 \begindata{text,9046368}
@@ -27516,7 +23578,6 @@ white
         {
         H0
         H1
-        H10
         H2
         H3
         H4
@@ -27525,75 +23586,8 @@ white
         H7
         H8
         H9
+        H10
         V11.1
-        }
-      ml
-      [0
-\begindata{text,9049648}
-\textdsversion{12}
-\begindata{link,9050384}
-4
-${ANDREWDIR}/lib/ml
-0
-0
-V
-\begindata{link,9050384}
-Datastream version: 2
-ml
-2
-
-black
-white
-\enddata{link,9050384}
-\enddata{link,9050384}
-\view{linkview,9050384,1180,0,0\
-}\enddata{text,9049648}
-]
-        {
-        batmail.ml
-        [0
-\begindata{text,9051376}
-\textdsversion{12}
-\begindata{link,9052112}
-4
-${ANDREWDIR}/lib/ml/batmail.ml
-0
-0
-V
-\begindata{link,9052112}
-Datastream version: 2
-batmail.ml
-2
-
-black
-white
-\enddata{link,9052112}
-\enddata{link,9052112}
-\view{linkview,9052112,1181,0,0\
-}\enddata{text,9051376}
-]
-        prompt.ml
-        [0
-\begindata{text,9053120}
-\textdsversion{12}
-\begindata{link,9053856}
-4
-${ANDREWDIR}/lib/ml/prompt.ml
-0
-0
-V
-\begindata{link,9053856}
-Datastream version: 2
-prompt.ml
-2
-
-black
-white
-\enddata{link,9053856}
-\enddata{link,9053856}
-\view{linkview,9053856,1182,0,0\
-}\enddata{text,9053120}
-]
         }
       ness
       [0
@@ -28724,28 +24718,6 @@ white
 }\enddata{text,9142048}
 ]
         {
-        atkams
-        [0
-\begindata{text,9143792}
-\textdsversion{12}
-\begindata{link,9144528}
-4
-${ANDREWDIR}/lib/packages/atkams
-0
-0
-V
-\begindata{link,9144528}
-Datastream version: 2
-atkams
-2
-
-black
-white
-\enddata{link,9144528}
-\enddata{link,9144528}
-\view{linkview,9144528,1234,0,0\
-}\enddata{text,9143792}
-]
         auis
         [0
 \begindata{text,9145536}
@@ -29102,28 +25074,6 @@ white
 \view{linkview,9172416,1250,0,0\
 }\enddata{text,9171680}
 ]
-        eli.pr
-        [0
-\begindata{text,9173424}
-\textdsversion{12}
-\begindata{link,9174160}
-4
-${ANDREWDIR}/lib/prs/eli.pr
-0
-0
-V
-\begindata{link,9174160}
-Datastream version: 2
-eli.pr
-2
-
-black
-white
-\enddata{link,9174160}
-\enddata{link,9174160}
-\view{linkview,9174160,1251,0,0\
-}\enddata{text,9173424}
-]
         ezdiff.pr
         [0
 \begindata{text,9175168}
@@ -29203,6 +25153,28 @@ V
 \begindata{link,9181136}
 Datastream version: 2
 gofig.pr
+2
+
+black
+white
+\enddata{link,9181136}
+\enddata{link,9181136}
+\view{linkview,9181136,1255,0,0\
+}\enddata{text,9180400}
+]
+        gest.pr
+        [0
+\begindata{text,9180400}
+\textdsversion{12}
+\begindata{link,9181136}
+4
+${ANDREWDIR}/lib/prs/gest.pr
+0
+0
+V
+\begindata{link,9181136}
+Datastream version: 2
+gest.pr
 2
 
 black
@@ -29343,28 +25315,6 @@ white
 \enddata{link,9191600}
 \view{linkview,9191600,1261,0,0\
 }\enddata{text,9190864}
-]
-        messages.pr
-        [0
-\begindata{text,9192608}
-\textdsversion{12}
-\begindata{link,9193344}
-4
-${ANDREWDIR}/lib/prs/messages.pr
-0
-0
-V
-\begindata{link,9193344}
-Datastream version: 2
-messages.pr
-2
-
-black
-white
-\enddata{link,9193344}
-\enddata{link,9193344}
-\view{linkview,9193344,1262,0,0\
-}\enddata{text,9192608}
 ]
         ness.pr
         [0
@@ -30735,28 +26685,6 @@ white
 \enddata{link,9304512}
 \view{linkview,9304512,1324,0,0\
 }\enddata{text,9303776}
-]
-        messages.tpl
-        [0
-\begindata{text,9305520}
-\textdsversion{12}
-\begindata{link,9306256}
-4
-${ANDREWDIR}/lib/tpls/messages.tpl
-0
-0
-V
-\begindata{link,9306256}
-Datastream version: 2
-messages.tpl
-2
-
-black
-white
-\enddata{link,9306256}
-\enddata{link,9306256}
-\view{linkview,9306256,1325,0,0\
-}\enddata{text,9305520}
 ]
         mmtext.tpl
         [0
@@ -32130,15 +28058,10 @@ white
       fonts.alias
       fonts.dir
       gofont10.pcf
-      heb6x13.pcf
-      heb8x13B.pcf
-      heb8x13.pcf
       icon12.pcf
       indice12.pcf
       kalfnt12.pcf
       mailft12.pcf
-      msgs10.pcf
-      msgs14.pcf
       shape10.pcf
       sym10.pcf
       sym12b.pcf
@@ -32162,52 +28085,6 @@ white
       zipicn20.pcf
       zipshd16.pcf
       ziptop10.pcf
-      }
-    .MESSAGES
-    [0
-\begindata{text,9419968}
-\textdsversion{12}
-\begindata{link,9420704}
-4
-${ANDREWDIR}/.MESSAGES
-0
-0
-V
-\begindata{link,9420704}
-Datastream version: 2
-.MESSAGES
-2
-
-black
-white
-\enddata{link,9420704}
-\enddata{link,9420704}
-\view{linkview,9420704,1387,0,0\
-}\enddata{text,9419968}
-]
-      {
-      .SubscriptionMap
-      [0
-\begindata{text,9421696}
-\textdsversion{12}
-\begindata{link,9422432}
-4
-${ANDREWDIR}/.MESSAGES/SubscriptionMap
-0
-0
-V
-\begindata{link,9422432}
-Datastream version: 2
-SubscriptionMap
-2
-
-black
-white
-\enddata{link,9422432}
-\enddata{link,9422432}
-\view{linkview,9422432,1388,0,0\
-}\enddata{text,9421696}
-]
       }
     }
 

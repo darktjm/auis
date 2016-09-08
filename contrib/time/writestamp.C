@@ -51,7 +51,6 @@ ATKdefineRegistry(writestamp, timeoday, writestamp::InitializeClass);
 static void WriteLine(FILE  *f, char  *l);
 static char * GlomStrings(char  *s , char  *t);
 static char * ReadLine(FILE  *f);
-static char * EncodeFont(class writestamp  *self);
 
 
 boolean
@@ -194,7 +193,7 @@ GlomStrings(char  *s , char  *t)
 
   char *r;
 
-  if (r = (char *)malloc(strlen(s)+strlen(t)+1)) {
+  if ((r = (char *)malloc(strlen(s)+strlen(t)+1))) {
     *r = '\0';
     strcpy(r,s);
     free(s);
@@ -225,7 +224,7 @@ ReadLine(FILE  *f)
   int i,j;
 
   
-  if (result = (char *)malloc(1)) {
+  if ((result = (char *)malloc(1))) {
     *result = '\0';
 
     while (fgets(buf,sizeof(buf),f)) {
@@ -265,34 +264,4 @@ ReadLine(FILE  *f)
        of the data stream.  Ooops. */
   } /* if (result = ... ) */
   return(NULL);
-}
-
-
-static char *
-EncodeFont(class writestamp  *self)
-{
-/*
-  Returns a string representing the name of the font for this object.
-  (BUG) I shouldn't have to do this function, it should be a method
-  of the fontdesc object.  In any case, I handle only Bold, Italic,
-  and fixed styles.
-*/
-
-  char *buf, type[15];
-  long myfonttype, myfontsize;
-  char *myfontname;
-
-  *type = '\0';
-  myfontname = ((self)->GetFont())->GetFontFamily();
-  myfontsize = ((self)->GetFont())->GetFontSize();
-  myfonttype = ((self)->GetFont())->GetFontStyle();
-  if (myfonttype & fontdesc_Bold) strcpy(type,"b");
-  if (myfonttype & fontdesc_Italic) strcpy(type,"i");
-  if (myfonttype & fontdesc_Fixed) strcpy(type,"f");
-  if (buf = (char *)malloc(strlen(myfontname)+25)) {
-    sprintf(buf,"%s%ld%s", myfontname, myfontsize, type);
-    return (buf);
-  } else {
-    return(NULL);
-  }
 }

@@ -5,7 +5,7 @@
 - scrolling fixes:
   - enable scroll wheel
   - continuous update when dragging bar
-- fix lack of updates when resizing windows
+- fix lack of updates when resizing windows (partially done)
 - fix contrib/tm to use termios, etc.
 - tests all apps, all insets, all docs, etc.
   - squash any crashes

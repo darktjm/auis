@@ -26,7 +26,7 @@
 */
 
 
-HELP = console.help vopcon.help lacc.help \
+HELP = console.help lacc.help \
 	laccqr.help cnclass.help ermproc.help \
 	inpproc.help lgvproc.help erprintf.help
 
@@ -41,4 +41,4 @@ InstallHelpAlias(lgvproc, logvproc logview)
 InstallHelpAlias(cnclass, conclass)
 InstallHelpAlias(erprintf, errprintf)
 
-InstallDocs (console.doc vopcon.doc, ${DESTDIR}/doc/PROGRAMMER)
+InstallDocs (console.doc, ${DESTDIR}/doc/PROGRAMMER)

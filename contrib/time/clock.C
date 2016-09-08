@@ -332,8 +332,7 @@ clock::Read(FILE  *fp, long  id)
 /*
   Read in the object from the file.
 */
-  char *buf, buf2[255];
-  long result;
+  char *buf;
   
   (this)->SetID( (this)->UniqueID());
 
@@ -421,7 +420,7 @@ GlomStrings(char  *s , char  *t)
 
   char *r;
 
-  if (r = (char *)malloc(strlen(s)+strlen(t)+1)) {
+  if ((r = (char *)malloc(strlen(s)+strlen(t)+1))) {
     *r = '\0';
     strcpy(r,s);
     free(s);
@@ -452,7 +451,7 @@ ReadLine(FILE  *f)
   int i,j;
 
   
-  if (result = (char *)malloc(1)) {
+  if ((result = (char *)malloc(1))) {
     *result = '\0';
 
     while (fgets(buf,sizeof(buf),f)) {
