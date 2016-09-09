@@ -125,7 +125,7 @@ fad::fad()
 	this->initializedfonts = 1;
 	this->readonly = 0;this->currentfont = NULL;
 	this->fp = NULL; this->lp = NULL;this ->pltnum = 0;
-	this->ox = 0; this->oy = 0;
+	this->ox = 0; this->oy = 0; this->w = 0; this->h = 0;
 	this->desw = MAXWIDTH; this ->desh = STARTHEIGHT;
 	strcpy(this->labelfontname,"andy12");
 	this->labelfont = my_DefineFont("andy12");

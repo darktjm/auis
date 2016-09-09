@@ -525,7 +525,7 @@ static double   fmodulo (double   x , double   y)
 
 static double   fpi ()
 {
-    return 3.141592653589794;
+    return M_PI;
 }
 
 static double fround (double   x , double   yy)

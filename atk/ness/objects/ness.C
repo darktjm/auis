@@ -155,7 +155,6 @@ ATK_IMPL("ness.H")
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#include <svcconf.h>
 #include <util.h>
 
 #include <dataobject.H>

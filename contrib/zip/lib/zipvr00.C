@@ -676,10 +676,10 @@ void zipprint::Draw_Arc( long x_center , long y_center, long x_radius , long  y_
         }
       theta = atan2( 1.0 * ((y_center - y_start) ? (y_center - y_start) : 1),
 		     1.0 * ((x_start - x_center) ? (x_start - x_center) : 1) );
-      start_angle = 360.0 * (theta / (2.0 * 3.14159));
+      start_angle = 360.0 * (theta / (2.0 * M_PI));
       theta = atan2( 1.0 * ((y_center - y_end) ? (y_center - y_end) : 1),
 		     1.0 * ((x_end - x_center) ? (x_end - x_center) : 1 ) );
-      end_angle = 360.0 * (theta / (2.0 * 3.14159));
+      end_angle = 360.0 * (theta / (2.0 * M_PI));
       fprintf( PrintFile, "%s", zipprint_Line_Attributes_String( self ));
       fprintf( PrintFile, format, PrintPrefix,
         x_center/100.0, y_center/100.0, x_scale, -y_scale,

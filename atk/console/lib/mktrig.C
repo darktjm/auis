@@ -36,9 +36,6 @@
 
 #include <andrewos.h>
 #include <math.h>
-#ifndef PI
-#define PI 3.14159265
-#endif
 
 int main();
 
@@ -47,7 +44,7 @@ int main() {
     int i;
     double f,g;
 
-    f = 180.0/PI;
+    f = 180.0/M_PI;
     printf("int SineMult[] = {\n");
     for (i=0; i<430; ++i) {
 	g = (double) i / f;

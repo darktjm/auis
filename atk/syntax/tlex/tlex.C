@@ -325,7 +325,7 @@ ScanNumber(class tlex  *self, struct tlex_NumberRecparm  *parm)
 		{
 	long len;
 	int success;
-	union {double d; long i[2];} treal;
+	double treal;
 	long tlen, got;
 
 	tlen = self->currpos - self->tokpos;  /* usually : 1 */
@@ -336,7 +336,7 @@ ScanNumber(class tlex  *self, struct tlex_NumberRecparm  *parm)
 	tlen = (self->text)->GetLength() - self->tokpos;
 	success = parser::ParseNumber(
 			(self->text)->GetBuf( self->tokpos, tlen, &got),
-			&len, &parm->intval, &treal.d);
+			&len, &parm->intval, &treal);
 	if (success == 0) {
 		(self)->Error( "Error ends number");
 		parm->intval = -999;
@@ -355,13 +355,17 @@ ScanNumber(class tlex  *self, struct tlex_NumberRecparm  *parm)
 	(self)->BackUp( -len);
 		DEBUG(("        Number.  pos after: %d\n", self->currpos));
 	(self)->EndToken();	/* set tokend */
-	parm->realval = treal.d;
+	parm->realval = treal;
 	parm->IsInt = (success != 2);
-	if (success == 2)
+	if (success == 2) {
 		/* double value */
-		sprintf(self->tokenbuffer, "0x%lx%lx",
-				treal.i[0], treal.i[1]);
-	else
+		/* probably never read, since it was broken in previous versions */
+		/* (i.e., two hex numbers next to each other w/o separator) */
+		/* even more broken w/ 64-bit longs, since it assumed that */
+		/* sizeof(double) == 2*sizeof(long) */
+		/* %a is exact, but it's also C99/Single UNIX 3 */
+		sprintf(self->tokenbuffer, "%a", treal);
+	} else
 		sprintf(self->tokenbuffer, "0x%lx", parm->intval);
 
 	if (parm->handler)

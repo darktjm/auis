@@ -597,8 +597,8 @@ void textview_SelectRegionCmd(class textview  *self)
 	mark = i;
     }
     /* Now assume that mark <= dot */
-    (self)->SetDotLength(dot-mark);
     (self)->SetDotPosition(mark);
+    (self)->SetDotLength(dot-mark);
     (self)->WantUpdate( self);
 }
 

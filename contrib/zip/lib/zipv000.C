@@ -228,8 +228,7 @@ zipview::Ensure_Line_Attributes( zip_type_figure		 figure )
     if ( pattern ) (self)->SetLineDash(  pattern, offset, dashtype );
     else
     {
-/*      zipview_GetLineDash( self, &pattern, &offset, &dashtype );
-      if ( pattern ) free( pattern ); */
+      (self)->GetLineDash( NULL, NULL, &dashtype );
       if ( dashtype != graphic_LineSolid )
         (self)->SetLineDash(  NULL, 0, graphic_LineSolid );
     }

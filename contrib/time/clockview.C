@@ -37,13 +37,11 @@
 #include <view.H>
 #include <util.h>
 
-#undef PI
 #undef MIN
 /* Defined constants and macros */
 #define MENUTITLE "Clock %s,%s"
-#define PI (double)3.14159265358979
-#define HOURSTORADIANS(x) ((15.0-(x))/6.0*PI)
-#define MINUTESTORADIANS(x) ((75.0-(x))/30.0*PI)
+#define HOURSTORADIANS(x) ((15.0-(x))/6.0*M_PI)
+#define MINUTESTORADIANS(x) ((75.0-(x))/30.0*M_PI)
 #define MIN(a,b) ((a)<(b)?(a):(b))
 
 /* External Declarations */
@@ -335,26 +333,26 @@ PlotLabels(class clockview  *self, double  theta, int  radius, const char  *labe
       (self)->MoveTo( x1, y1);
     } else {
       /* Canonicalize theta */
-      while (theta>2*PI) theta = theta-2*PI;
-      if (theta<0) theta = theta+2*PI;
+      while (theta>2*M_PI) theta = theta-2*M_PI;
+      if (theta<0) theta = theta+2*M_PI;
 
-      if ((theta < PI/4.0) || (theta >= 7.0*PI/4.0)) {
+      if ((theta < M_PI/4.0) || (theta >= 7.0*M_PI/4.0)) {
 	x1 = max_radius;
 	y1 = (long)(max_radius*tan(theta));
-      } else if ((theta >= PI/4.0) && (theta < 3.0*PI/4.0)) {
-	x1 = (long)(-max_radius*tan(theta-PI/2.0));
+      } else if ((theta >= M_PI/4.0) && (theta < 3.0*M_PI/4.0)) {
+	x1 = (long)(-max_radius*tan(theta-M_PI/2.0));
 	y1 = max_radius;
-      } else if ((theta >= 3.0*PI/4.0) && (theta < 5.0*PI/4.0)) {
+      } else if ((theta >= 3.0*M_PI/4.0) && (theta < 5.0*M_PI/4.0)) {
 	x1 = -max_radius;
-	y1 = (long)(-max_radius*tan(theta-PI));
+	y1 = (long)(-max_radius*tan(theta-M_PI));
       } else {
 	y1 = -max_radius;
-	x1 = (long)(max_radius*tan(theta-3.0*PI/2.0));
+	x1 = (long)(max_radius*tan(theta-3.0*M_PI/2.0));
       }
       x1 = x0 + x1;
       y1 = y0 - y1;
-      x2 = (long)((x1) + (max_radius*((double)radius/-100.0*cos(theta+PI))));
-      y2 = (long)((y1) - (max_radius*((double)radius/-100.0*sin(theta+PI))));
+      x2 = (long)((x1) + (max_radius*((double)radius/-100.0*cos(theta+M_PI))));
+      y2 = (long)((y1) - (max_radius*((double)radius/-100.0*sin(theta+M_PI))));
       (self)->MoveTo( x2, y2);
     }
   }
@@ -394,26 +392,26 @@ PlotPoints(class clockview  *self, double  theta, int  radius , int  thickness, 
       y2 = (long)((y0) - (max_radius*sin(theta)));
     } else {
       /* Canonicalize theta */
-      while (theta>2*PI) theta = theta-2*PI;
-      if (theta<0) theta = theta+2*PI;
+      while (theta>2*M_PI) theta = theta-2*M_PI;
+      if (theta<0) theta = theta+2*M_PI;
 
-      if ((theta < PI/4.0) || (theta >= 7.0*PI/4.0)) {
+      if ((theta < M_PI/4.0) || (theta >= 7.0*M_PI/4.0)) {
 	x1 = max_radius;
 	y1 = (long)(max_radius*tan(theta));
-      } else if ((theta >= PI/4.0) && (theta < 3.0*PI/4.0)) {
-	x1 = (long)(-max_radius*tan(theta-PI/2.0));
+      } else if ((theta >= M_PI/4.0) && (theta < 3.0*M_PI/4.0)) {
+	x1 = (long)(-max_radius*tan(theta-M_PI/2.0));
 	y1 = max_radius;
-      } else if ((theta >= 3.0*PI/4.0) && (theta < 5.0*PI/4.0)) {
+      } else if ((theta >= 3.0*M_PI/4.0) && (theta < 5.0*M_PI/4.0)) {
 	x1 = -max_radius;
-	y1 = (long)(-max_radius*tan(theta-PI));
+	y1 = (long)(-max_radius*tan(theta-M_PI));
       } else {
 	y1 = -max_radius;
-	x1 = (long)(max_radius*tan(theta-3.0*PI/2.0));
+	x1 = (long)(max_radius*tan(theta-3.0*M_PI/2.0));
       }
       x1 = x0 + x1;
       y1 = y0 - y1;
-      x2 = (long)((x1) + (max_radius*((double)radius/-100.0*cos(theta+PI))));
-      y2 = (long)((y1) - (max_radius*((double)radius/-100.0*sin(theta+PI))));
+      x2 = (long)((x1) + (max_radius*((double)radius/-100.0*cos(theta+M_PI))));
+      y2 = (long)((y1) - (max_radius*((double)radius/-100.0*sin(theta+M_PI))));
     }
     (self)->MoveTo( x1, y1);
   }
@@ -466,7 +464,7 @@ Redraw(class clockview  *self)
     if (num) { \
       int i; \
       for (i = 0; i < (num); ++i) { \
-	(func)(self, PI/2.0 - ((double)i)/((double)(num))*2.0*PI, (where)*(options->tick_length), what, options->border_shape); \
+	(func)(self, M_PI/2.0 - ((double)i)/((double)(num))*2.0*M_PI, (where)*(options->tick_length), what, options->border_shape); \
       } \
     }
 
