@@ -505,6 +505,7 @@ static void eqview_FormatExtendable(class eqview  *self, struct formula  *leftf 
 
     /* if (!f->string) how gets zeroed? */
 	f->string = (char *) malloc(EXSTRINGSIZE);
+    f->string[0] = 0;
 
     switch (f->symbol->what) {
     case EX_BAR:

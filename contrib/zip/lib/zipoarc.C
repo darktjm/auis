@@ -213,11 +213,11 @@ long Draw( class zipoarc		  *self, zip_type_figure		   figure, zip_type_pane		  
       x = window_x_points(0) - window_x_point;
       y = window_y_point - window_y_points(0);
       theta = atan2( y, x);
-      start_angle = (short) (angle = -(360.0 * (theta / (2.0 * 3.14159))) + 90.0);
+      start_angle = (short) (angle = -(360.0 * (theta / (2.0 * M_PI))) + 90.0);
       x = window_x_points(1) - window_x_point;
       y = window_y_point - window_y_points(1);
       theta = atan2( y, x );
-      offset_angle = (short) ((-(360.0 * (theta / (2.0 * 3.14159))) + 90.0) - angle);
+      offset_angle = (short) ((-(360.0 * (theta / (2.0 * M_PI))) + 90.0) - angle);
       if ( offset_angle <= 0 )  offset_angle += 360;
       (self->view_object)->DrawArcSize(  left, top, width, height, start_angle, offset_angle );
       (self->view_object)->MoveTo(  window_x_points(1), window_y_points(1) );

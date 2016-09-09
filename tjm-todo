@@ -1,11 +1,11 @@
-- org/treev: unfolded expands to left & right, but doesn't shift left
-  side if needed (i.e., left is severely cut off) if lots of items,
-  and lots of blank space to right (similar for horizontal, but for some
-  reason it allows moving scrollbar into negative area)
+- org/treev: unfolded expands size, but doesn't shift tree to right
+  if needed (i.e., left is severely cut off).  Also doesn't shift tree down
+  for horizontal arrangement, but for some reason it allows moving scrollbar
+  into negative area)
 - scrolling fixes:
   - enable scroll wheel
   - continuous update when dragging bar
-- fix lack of updates when resizing windows (partially done)
+- fix lack of updates when resizing windows
 - fix contrib/tm to use termios, etc.
 - tests all apps, all insets, all docs, etc.
   - squash any crashes
@@ -17,8 +17,14 @@
   - remove all warnings
   - remove externs in c files
   - remove all statics in header files, if possible (gads, help.h is awful)
-  - remove type casts if possible
   - constify pointers if possible
+    It's usually better to make structures const by default and cast them to
+    non-const when known to be malloc'd than the other way around
+      e.g. ErrorGuts() -> only cast if explicit free flag given
+    The only exception is when one statically allocated structure uses
+    constants, but all else is malloc'd.
+      e.g. filetype.C: mapEntry.fileExtension
+  - remove type casts if possible
     There's almost never a good reason to cast pointers (well, in C++,
     you have to cast void * to the destination type, but that's it).
       gcc has no "flag all explicit casts" warning flag.
@@ -32,12 +38,6 @@
       -Wfloat-conversion
       -Wint-to-pointer-cast (on by default)
       -Wpointer-to-int-cast (on by default)
-    It's usually better to make structures const by default and cast them to
-    non-const when known to be malloc'd than the other way around
-      e.g. ErrorGuts() -> only cast if explicit free flag given
-    The only exception is when one statically allocated structure uses
-    constants, but all else is malloc'd.
-      e.g. filetype.C: mapEntry.fileExtension
   - remove any unsupportable code (i.e., old UNIX, DOS, OS/2)
   - remove any functions which duplicate standard functions (e.g. strdup)
 - find out and possibly remove additional CMU/MIT-specific crap
@@ -47,7 +47,8 @@
   - make it possible to build w/o simultaneous install
     It's possible to do "make Makefiles; make All", but some places depend
       on libs/headers from previous dirs to be installed
-  - make it possible to use -k and -j
+  - make it possible to use -k and -j (-k mostly works now)
+  - fix corruption of flags (empty flags become -- eventually)
   - don't always regenerate deps, and clean up dep generation
   - maybe just switch to cmake
 - fix UniquiID() and friends:

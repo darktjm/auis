@@ -69,14 +69,10 @@ TranslateTran(Transformation t, int x, int y)
 	return t;
 }
 
-/* man 3 sin | grep 'pi =' */
-
-#define 	PI 	3.1415926535897932384626433
-
 Transformation
 RotateTran(Transformation t, int theta)
 {
-	double rad = (PI/180.0) * theta;
+	double rad = (M_PI/180.0) * theta;
 	return RotateCosSinTran(t, cos(rad), sin(rad));
 }
 

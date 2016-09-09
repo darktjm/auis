@@ -24,19 +24,12 @@ InstallFile(prefs.def, $(INSTMANFLAGS), ${DESTDIR}/lib)
 
 #ifdef FUNCTION_INDEX_ENV
 
-FilesList:
-	${RM} ,FilesList
-	(cd ..; find . -type f \! -name "*.o" \! -name "*.lt" \! -name "*.rf" \! -name "*.exp" \! -name "install.[td][io]*" \! -name "Makefile*" \! -name "Imakefile.*" \! -name ".depends" \! -name "forceit" -print | awk '{ FS = "/"; fnm = $$(NF); FS = " "; print fnm "\t" substr($$0, 1, length($$0) - length(fnm)) }') | sort > ,FilesList
-	${RM} FilesList
-	 mv ,FilesList FilesList
-
 FunctionIndex:
 	${RM} ,FunctionIndex
 	(cd ..; $(BASEDIR)/etc/getnms) > ,FunctionIndex
 	${RM} FunctionIndex
 	mv ,FunctionIndex FunctionIndex
 
-InstallFile(FilesList,${INSTMANFLAGS},${DESTDIR}/doc/PROGRAMMER)
 InstallFile(FunctionIndex,${INSTMANFLAGS},${DESTDIR}/doc/PROGRAMMER)
 
 #endif /* FUNCTION_INDEX_ENV */

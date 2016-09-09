@@ -236,7 +236,7 @@ long Draw( class zipopolygon  *self, zip_type_figure   figure, zip_type_pane   p
     if ( sides % 2 )
       { DEBUG(Odd);
       even = false;
-      theta = -1.57079;
+      theta = -M_PI/2;
       }
 #if (defined(MACH) && defined(i386))
     radius = calltosavecompile(pane,figure,self);
@@ -248,7 +248,7 @@ long Draw( class zipopolygon  *self, zip_type_figure   figure, zip_type_pane   p
     DEBUGdt(X,points[0].x);
     points[0].y = points[sides].y = window_y_point - ((even) ? 0 : radius);
     DEBUGdt(Y,points[0].y);
-    angle = (2.0 * 3.14159) / sides;  DEBUGgt(Angle,angle);
+    angle = (2.0 * M_PI) / sides;  DEBUGgt(Angle,angle);
     for ( i = 1; i < sides; i++ )
       {
       theta += angle;  DEBUGgt(Theta,theta);
@@ -314,11 +314,11 @@ zipopolygon::Print_Object( zip_type_figure figure, zip_type_pane pane )
   if ( (status = (this->data_object)->Allocate_Figure_Points_Vector(  &points )) == zip_ok )
     {
     points->zip_points_count = 0;
-    angle = (2.0 * 3.14159) / sides;
+    angle = (2.0 * M_PI) / sides;
     if ( sides % 2 )
       {
       even = false;
-      theta = -1.57079;
+      theta = -M_PI/2;
       }
     for ( pc = 0; pc < sides - 1  &&  status == zip_ok; pc++ )
       {

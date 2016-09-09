@@ -3914,28 +3914,6 @@ white
 \view{linkview,7319936,280,0,0\
 }\enddata{text,7319200}
 ]
-        FilesList
-        [0
-\begindata{text,7320944}
-\textdsversion{12}
-\begindata{link,7321680}
-4
-${ANDREWDIR}/doc/PROGRAMMER/FilesList
-0
-0
-V
-\begindata{link,7321680}
-Datastream version: 2
-FilesList
-2
-
-black
-white
-\enddata{link,7321680}
-\enddata{link,7321680}
-\view{linkview,7321680,281,0,0\
-}\enddata{text,7320944}
-]
         filetype.doc
         [0
 \begindata{text,7322688}
@@ -4661,28 +4639,6 @@ white
 \enddata{link,7381088}
 \view{linkview,7381088,315,0,0\
 }\enddata{text,7380352}
-]
-        mailsys.d
-        [0
-\begindata{text,7382176}
-\textdsversion{12}
-\begindata{link,7382848}
-4
-${ANDREWDIR}/doc/PROGRAMMER/mailsys.d
-0
-0
-V
-\begindata{link,7382848}
-Datastream version: 2
-mailsys.d
-2
-
-black
-white
-\enddata{link,7382848}
-\enddata{link,7382848}
-\view{linkview,7382848,316,0,0\
-}\enddata{text,7382176}
 ]
         mark.doc
         [0
@@ -10795,28 +10751,6 @@ white
 \enddata{link,7938848}
 \view{linkview,7938848,590,0,0\
 }\enddata{text,7938112}
-]
-      svcconf.h
-      [0
-\begindata{text,7939856}
-\textdsversion{12}
-\begindata{link,7940592}
-4
-${ANDREWDIR}/include/svcconf.h
-0
-0
-V
-\begindata{link,7940592}
-Datastream version: 2
-svcconf.h
-2
-
-black
-white
-\enddata{link,7940592}
-\enddata{link,7940592}
-\view{linkview,7940592,591,0,0\
-}\enddata{text,7939856}
 ]
       system.h
       [0

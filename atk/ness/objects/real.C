@@ -130,7 +130,7 @@ realUnary(char  op, unsigned char *iar) {
 			s -= 139/(51840*p);
 			p *= x-1;
 			s -= 571 / (248832 * p);
-			NSP->d.v = log(2*3.1415926535/2)
+			NSP->d.v = log(2*M_PI/2) // tjm - wtf?
 				- log(x-1)/2  +  x * log(x-1) + log(s);
 		}	break;
 #endif /* ! SY_U5x && ! SY_AIXx && !defined(VAX_ENV) && !defined(PMAX_ENV) */

@@ -734,8 +734,6 @@ void preview::DviToDisplay()
 * 								       *
 \********************************************************************* */
 
-#undef PI
-#define	PI	3.141592654
 #define	hmot(n)		self->LogicalX += n
 #define	hgoto(n)	self->LogicalX = n
 #define vgoto(n)	 	self->LogicalY = n

@@ -371,9 +371,6 @@ void DrawBarGraph(class consoleClass  *self, int  Op, struct display  *disp)
     }
 }
 
-#undef PI
-#define PI 3.14159265
-
 void itoa(int  n,char  s[])
 {
     int i, sign;

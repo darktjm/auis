@@ -79,7 +79,7 @@ timeodayview::InitializeClass()
   char temp[250];
   struct proctable_Entry *proc = NULL;
   char menutitlefmt[200];
-  char procname[200];
+  static char procname[200];
 
   timeodayview_menulist = new menulist;
   
