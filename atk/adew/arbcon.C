@@ -1375,6 +1375,7 @@ void arbcon::ObservedChanged(class observable  * observed,long  status)
 #else /*  DESTROYFAILS */
   	(this)->Destroy();  
 #endif /*  DESTROYFAILS */
+	return;  /* w/o this, no wonder DESTROY sometimes FAILS */
     }
 /* user code ends here for ObservedChanged */
     if (status == observable_OBJECTDESTROYED) {

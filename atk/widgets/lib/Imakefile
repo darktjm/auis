@@ -36,6 +36,8 @@ WIDGETS =  Button.wgt CheckButton.wgt ImageMap.wgt \
 		List.wgt Password.wgt PopupList.wgt RadioButton.wgt \
 		ScrollingList.wgt TextResponse.wgt PushButton.wgt Text.wgt \
 		OptionCard.wgt OptionMenu.wgt
+FIGURES =	ScrollingList.fig Other.fig Selector.fig \
+		ButtonOff.fig CheckButton.fig ImageMap.fig List.fig RadioButton.fig
 
 LOCALINCLUDES = -I../driver
 

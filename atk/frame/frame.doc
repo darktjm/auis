@@ -217,7 +217,7 @@ of the window containing the frame.}
 
 \begindata{link,539692536}
 Datastream version: 3
-$ANDREWDIR/doc/atk/frame/framemsg.doc
+$ANDREWDIR/doc/PROGRAMMER/framemsg.doc
 0
 0
 \begindata{link,539692536}
@@ -235,7 +235,7 @@ and a companion setting method
 
 \begindata{link,539693064}
 Datastream version: 3
-$ANDREWDIR/doc/atk/frame/framev.doc
+$ANDREWDIR/doc/PROGRAMMER/framev.doc
 0
 0
 \begindata{link,539693064}

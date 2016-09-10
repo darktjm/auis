@@ -54,6 +54,7 @@
 - fix UniquiID() and friends:
   - try not to renumber everything every modification; messes up svn diff
   - try to limit to 32 bits to retain compatibility with older systems
+- pass unknown keys up the view hierarchy (e.g. pgup within inset often fails)
 
 Long-term:
   - more image::WriteNative overrides (at least 1 full-color lossless)
@@ -67,3 +68,6 @@ Long-term:
   - make entire beast literate
   - undo
   - freedesktop.org integration
+  - look at removed mail-related stuff to see if anything useful got deleted
+    (e.g. ez2ascii claims descendence from messages)
+  - look at auis-6.3.1 to see if anything useful got dropped in 8.0

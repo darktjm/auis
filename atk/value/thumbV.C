@@ -275,28 +275,18 @@ void thumbV::LookupParameters()
 {
     const char * fontname;
     long fontsize,diff;
-    struct resourceList parameters[10];
-
-    parameters[0].name = AL_label;
-    parameters[0].type = A_string;
-    parameters[1].name = AL_bodyfont;
-    parameters[1].type = A_string;
-    parameters[2].name = AL_bodyfont_size;
-    parameters[2].type = A_long;
-    parameters[3].name = AL_max_value;
-    parameters[3].type = A_long;
-    parameters[4].name = AL_min_value;
-    parameters[4].type = A_long;
-    parameters[5].name = AL_increment;
-    parameters[5].type = A_long;
-    parameters[6].name = AL_forecolor;
-    parameters[6].type = A_string;
-    parameters[7].name = AL_backcolor;
-    parameters[7].type = A_string;
-    parameters[8].name = AL_immediate;
-    parameters[8].type = A_string;
-    parameters[9].name = NULL;
-    parameters[9].type = NULL;
+    static struct resourceList parameters[] = {
+	{ AL_label, A_string }, /* 0 */
+	{ AL_bodyfont, A_string }, /* 1 */
+	{ AL_bodyfont_size, A_long }, /* 2 */
+	{ AL_max_value, A_long }, /* 3 */
+	{ AL_min_value, A_long }, /* 4 */
+	{ AL_increment, A_long }, /* 5 */
+	{ AL_forecolor, A_string }, /* 6 */
+	{ AL_backcolor, A_string }, /* 7 */
+	{ AL_immediate, A_string }, /* 8 */
+	{ NULL, NULL }
+    };
 
     (this)->GetManyParameters( parameters, NULL, NULL);
 

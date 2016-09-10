@@ -796,11 +796,11 @@ static void DestroySubviews(class spread  * V,class table  *T)
 
 spread::~spread ()
 {
-	ATKinit;
     finalizing=TRUE;
     if (rowInfo)
 	free(rowInfo);
     DestroySubviews(this,MyTable(this));
+    delete menulistp;
 }
 
 void spread::LinkTree(class view  * parent)

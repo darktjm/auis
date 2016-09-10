@@ -2,7 +2,7 @@
 designHeight:(Int) 23
 designWidth:(Int) 61
 
-screenImage: (Figure) FILE:/afs/cs.cmu.edu/project/atk-1/wjh/w/lib/Other.fig:$(HOME)/w/lib/Other.fig
+screenImage: (Figure) FILE:$(ANDREWDIR)/lib/widgets/Other.fig
 
 borderWidth: (Int) 2
 borderColor: (String) black

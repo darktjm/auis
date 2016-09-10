@@ -3,7 +3,7 @@
 \template{default}
 \begindata{link,538510248}
 Datastream version: 3
-$ANDREWDIR/doc/atk/ness/nessuser.doc
+$ANDREWDIR/doc/PROGRAMMER/nessuser.doc
 0
 0
 \begindata{link,538510248}
@@ -21,62 +21,62 @@ to other Ness-related documentation
 
 \begindata{link,538512344}
 Datastream version: 3
-$ANDREWDIR/doc/atk/adew/Overview.doc
+$ANDREWDIR/doc/PROGRAMMER/AdewOverview.doc
 0
 0
 \begindata{link,538512344}
 Datastream version: 2
-Overview
+AdewOverview
 2
 
 black
 white
 \enddata{link,538512344}
 \enddata{link,538512344}
-\view{linkview,538512344,1,0,0}Overview.doc - overview of Adew, a 
+\view{linkview,538512344,1,0,0}AdewOverview.doc - overview of Adew, a 
 multimedia interface builder for andrew
 
 
 \begindata{link,538512792}
 Datastream version: 3
-$ANDREWDIR/doc/atk/FuncLoc
+$ANDREWDIR/doc/PROGRAMMER/FunctionIndex
 0
 0
 \begindata{link,538512792}
 Datastream version: 2
-FuncLoc
+FunctionIndex
 2
 
 black
 white
 \enddata{link,538512792}
 \enddata{link,538512792}
-\view{linkview,538512792,2,0,0}FunctionLocator - Listing of library 
+\view{linkview,538512792,2,0,0}FunctionIndex - Listing of library 
 functions and their destination location
 
 
 \begindata{link,538513256}
 Datastream version: 3
-$ANDREWDIR/doc/atk/progenv.doc
+$ANDREWDIR/doc/DEVELOPER/AndrewProgramming.ez
 0
 0
 \begindata{link,538513256}
 Datastream version: 2
-progenv
+AndrewProgramming
 2
 
 black
 white
 \enddata{link,538513256}
 \enddata{link,538513256}
-\view{linkview,538513256,3,0,0}progenv.doc - programming environment 
+\view{linkview,538513256,3,0,0}AndrewProgramming.ez - programming environment 
 including conventions, method definition and use, class mechanism and 
 debugging techniques (incomplete)
 
 
 \begindata{link,538513816}
 Datastream version: 3
-$ANDREWDIR/doc/atk/basics/app.doc
+$ANDREWDIR/doc/PROGRAMMER/app.doc
 0
 0
 \begindata{link,538513816}
@@ -93,45 +93,9 @@ provides a set of facilities to create an application program and provides
 the methods needed to communication wtih runapp
 
 
-\begindata{link,538514264}
-Datastream version: 3
-$ANDREWDIR/doc/atk/fonts.doc
-0
-0
-\begindata{link,538514264}
-Datastream version: 2
-fonts
-2
-
-black
-white
-\enddata{link,538514264}
-\enddata{link,538514264}
-\view{linkview,538514264,5,0,0}fonts.doc - discussion of font usage \
-
-
-
-\begindata{link,538514808}
-Datastream version: 3
-$ANDREWDIR/doc/atk/atkvers/atkvers.doc
-0
-0
-\begindata{link,538514808}
-Datastream version: 2
-atkvers
-2
-
-black
-white
-\enddata{link,538514808}
-\enddata{link,538514808}
-\view{linkview,538514808,6,0,0}atkvers.doc - discussion of ATK version 
-numbering
-
-
 \begindata{link,538515208}
 Datastream version: 3
-$ANDREWDIR/doc/atk/basics/bind.doc
+$ANDREWDIR/doc/PROGRAMMER/bind.doc
 0
 0
 \begindata{link,538515208}
@@ -148,7 +112,7 @@ white
 
 \begindata{link,538515800}
 Datastream version: 3
-$ANDREWDIR/doc/atk/basics/cursor.doc
+$ANDREWDIR/doc/PROGRAMMER/cursor.doc
 0
 0
 \begindata{link,538515800}
@@ -166,7 +130,7 @@ specify the look of the mouse cursor
 
 \begindata{link,538516248}
 Datastream version: 3
-$ANDREWDIR/doc/atk/basics/environ.doc
+$ANDREWDIR/doc/PROGRAMMER/environ.doc
 0
 0
 \begindata{link,538516248}
@@ -185,7 +149,7 @@ white
 
 \begindata{link,538516792}
 Datastream version: 3
-/afs/cs/misc/atk/@sys/beta/doc/atk/prefed/writing-pr.doc
+$ANDREWDIR/doc/PROGRAMMER/writing-pr.doc
 0
 0
 \begindata{link,538516792}
@@ -205,7 +169,7 @@ describe available preferences
 
 \begindata{link,538517320}
 Datastream version: 3
-/afs/cs/misc/atk/@sys/beta/doc/atk/help/help-maint.doc
+$ANDREWDIR/doc/PROGRAMMER/help-maint.doc
 0
 0
 \begindata{link,538517320}
@@ -222,7 +186,7 @@ white
 
 \begindata{link,538517912}
 Datastream version: 3
-$ANDREWDIR/doc/atk/syntax/parser.doc
+$ANDREWDIR/doc/PROGRAMMER/parser.doc
 0
 0
 \begindata{link,538517912}
@@ -239,25 +203,24 @@ white
 
 \begindata{link,538518312}
 Datastream version: 3
-$ANDREWDIR/doc/atk/syntax/parserclass.doc
+$ANDREWDIR/doc/PROGRAMMER/prsclass.doc
 0
 0
 \begindata{link,538518312}
 Datastream version: 2
-parserclass
+prsclass
 2
 
 black
 white
 \enddata{link,538518312}
 \enddata{link,538518312}
-\view{linkview,538518312,13,0,0}parserclass.doc - C++ version of parser 
-driver code
+\view{linkview,538518312,13,0,0}prsclass.doc - C++ version of parser driver code
 
 
 \begindata{link,538518888}
 Datastream version: 3
-$ANDREWDIR/doc/atk/syntax/sym.doc
+$ANDREWDIR/doc/PROGRAMMER/sym.doc
 0
 0
 \begindata{link,538518888}
@@ -275,7 +238,7 @@ a symbol table that uses hash coding
 
 \begindata{link,538519288}
 Datastream version: 3
-$ANDREWDIR/doc/atk/syntax/tlex.doc
+$ANDREWDIR/doc/PROGRAMMER/tlex.doc
 0
 0
 \begindata{link,538519288}
@@ -295,7 +258,7 @@ object
 
 \begindata{link,538519928}
 Datastream version: 3
-$ANDREWDIR/doc/atk/examples/examples.doc
+$ANDREWDIR/examples/doc/examples.doc
 0
 0
 \begindata{link,538519928}
@@ -314,7 +277,7 @@ atk/examples/directory contents plus links to other example documents.  \
 
 \begindata{link,538520408}
 Datastream version: 3
-$ANDREWDIR/doc/atk/support/dict.doc
+$ANDREWDIR/doc/PROGRAMMER/dict.doc
 0
 0
 \begindata{link,538520408}
@@ -332,7 +295,7 @@ dictionary
 
 \begindata{link,538520952}
 Datastream version: 3
-$ANDREWDIR/doc/atk/support/mark.doc
+$ANDREWDIR/doc/PROGRAMMER/mark.doc
 0
 0
 \begindata{link,538520952}
@@ -349,7 +312,7 @@ procedures for creating marks and using them
 
 \begindata{link,538521352}
 Datastream version: 3
-/afs/andrew.cmu.edu/usr22/susan/docs/nstdmark.doc
+$ANDREWDIR/doc/PROGRAMMER/nstdmark.doc
 0
 0
 \begindata{link,538521352}
@@ -366,7 +329,7 @@ class procedures for creating nested marks
 
 \begindata{link,538521976}
 Datastream version: 3
-/afs/andrew.cmu.edu/usr22/susan/docs/print.doc
+$ANDREWDIR/doc/PROGRAMMER/print.doc
 0
 0
 \begindata{link,538521976}

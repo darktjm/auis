@@ -3,7 +3,7 @@
 \template{default}
 \begindata{link,539981208}
 Datastream version: 3
-$ANDREWDIR/doc/atk/extensions/deskey.doc
+$ANDREWDIR/doc/PROGRAMMER/deskey.doc
 0
 0
 \begindata{link,539981208}
@@ -21,7 +21,7 @@ keys to an .*init file
 
 \begindata{link,539981576}
 Datastream version: 3
-$ANDREWDIR/doc/atk/extensions/dsearch.doc
+$ANDREWDIR/doc/PROGRAMMER/dsearch.doc
 0
 0
 \begindata{link,539981576}
@@ -39,7 +39,7 @@ dynsearch, a dynamic searching tools
 
 \begindata{link,539981976}
 Datastream version: 3
-$ANDREWDIR/doc/atk/extensions/ezdiff.doc
+$ANDREWDIR/doc/PROGRAMMER/ezdiff.doc
 0
 0
 \begindata{link,539981976}
@@ -57,7 +57,7 @@ ezdiff, an interactive diff package for ez
 
 \begindata{link,540053400}
 Datastream version: 3
-$ANDREWDIR/doc/atk/extensions/filter.doc
+$ANDREWDIR/doc/PROGRAMMER/filter.doc
 0
 0
 \begindata{link,540053400}
@@ -75,7 +75,7 @@ filter, (NO HELP ON FILTER)
 
 \begindata{link,540055432}
 Datastream version: 3
-$ANDREWDIR/doc/atk/extensions/isearch.doc
+$ANDREWDIR/doc/PROGRAMMER/isearch.doc
 0
 0
 \begindata{link,540055432}
@@ -93,7 +93,7 @@ isearch, an incremental search tools
 
 \begindata{link,540055832}
 Datastream version: 3
-$ANDREWDIR/doc/atk/extensions/spell.doc
+$ANDREWDIR/doc/PROGRAMMER/spell.doc
 0
 0
 \begindata{link,540055832}
@@ -111,7 +111,7 @@ spell, a spell-checking tools
 
 \begindata{link,540056328}
 Datastream version: 3
-$ANDREWDIR/doc/atk/extensions/tags.doc
+$ANDREWDIR/doc/PROGRAMMER/tags.doc
 0
 0
 \begindata{link,540056328}
@@ -130,7 +130,7 @@ within program source files
 
 \begindata{link,540056680}
 Datastream version: 3
-$ANDREWDIR/doc/atk/rofftext/rofftext.doc
+$ANDREWDIR/doc/PROGRAMMER/rofftext.doc
 0
 0
 \begindata{link,540056680}
@@ -149,7 +149,7 @@ styled atk-format text
 
 \begindata{link,540080808}
 Datastream version: 3
-$ANDREWDIR/doc/atk/support/complete.doc
+$ANDREWDIR/doc/PROGRAMMER/complete.doc
 0
 0
 \begindata{link,540080808}

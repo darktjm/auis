@@ -725,6 +725,7 @@ celview::celview()
     this->rarb = NULL;
     this->AddAppLayer = FALSE;
     this->script = NULL;
+    this->level = 0;
     (this->menus)->SetMask(1);
     THROWONFAILURE( TRUE);
 }
@@ -1240,6 +1241,11 @@ void celview::LinkTree(class view  *parent)
     if(this->child){
 	(this->child)->LinkTree(this);
     }
+    // Note: this->arb may be an arbiterview being deleted, currently
+    // executing ~celview, which means that it is no longer an
+    // arbiterview.  Thus a dummy DeleteCell() is needed in cellview
+    // to avoid crash here or below (the actual functionality of DeleteCall()
+    // has already been executed in ~arbiterview as needed)
     if(parent == NULL){
 	if(this->arb != NULL) {
 	    (this->arb)->DeleteCell(this);

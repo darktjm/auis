@@ -72,6 +72,11 @@ bpv::bpv()
     THROWONFAILURE( TRUE);
 }
 
+bpv::~bpv()
+{
+    delete this->Menus;
+}
+
 void bpv::SetDataObject(class dataobject *dobj)
 {
     class bp *bpob = (class bp *)dobj;

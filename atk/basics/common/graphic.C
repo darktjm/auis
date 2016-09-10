@@ -686,9 +686,8 @@ char		*oldDash = this->lineDashPattern;
 
     this->lineDashType = dashType;
     this->lineDashOffset = dashOffset;
-    if ( dashPattern && ( this->lineDashPattern = (char *)malloc( strlen( dashPattern ) + 1 )))
+    if ( dashPattern && ( this->lineDashPattern = strdup( dashPattern ) ))
     {
-      strcpy( this->lineDashPattern, dashPattern );
       if ( oldDash ) free( oldDash );
     }
     else this->lineDashPattern = oldDash;
@@ -1224,6 +1223,10 @@ graphic::~graphic()
     if (this->visualRegion) {
 	delete this->visualRegion;
     }
+    if (this->lineDashPattern) {
+	free(this->lineDashPattern);
+    }
+
 }
 
 void

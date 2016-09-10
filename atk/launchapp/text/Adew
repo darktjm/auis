@@ -132,7 +132,7 @@ For more information, please see the overview and tutorial documents.
 \center{\
 \begindata{link,538459144}
 Datastream version: 3
-/afs/cs/misc/atk/@sys/alpha/doc/atk/adew/Overview.doc
+$ANDREWDIR/doc/PROGRAMMER/AdewOverview.doc
 0
 0
 \begindata{link,538459144}
@@ -147,7 +147,7 @@ white
 \view{linkview,538459144,23,0,0} 
 \begindata{link,538459672}
 Datastream version: 3
-/afs/cs/misc/atk/@sys/alpha/doc/atk/adew/Tutorial.doc
+$ANDREWDIR/doc/PROGRAMMER/AdewTutorial.doc
 0
 0
 \begindata{link,538459672}
@@ -168,7 +168,7 @@ white
 \center{\
 \begindata{link,538460296}
 Datastream version: 3
-/afs/cs/misc/atk/@sys/alpha/doc/atk/adew/RefMan.doc
+$ANDREWDIR/doc/PROGRAMMER/AdewReference.doc
 0
 0
 \begindata{link,538460296}

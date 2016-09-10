@@ -150,20 +150,14 @@ void stringV::LookupParameters()
 {
     const char * fontname;
     long fontsize;
-    struct resourceList parameters[7];
-
-    parameters[0].name = AL_label;
-    parameters[0].type = A_string;
-    parameters[1].name = AL_bodyfont;
-    parameters[1].type = A_string;
-    parameters[2].name = AL_bodyfont_size;
-    parameters[2].type = A_long;
-    parameters[3].name = AL_forecolor;
-    parameters[3].type = A_string;
-    parameters[4].name = AL_backcolor;
-    parameters[4].type = A_string;
-    parameters[5].name = NULL;
-    parameters[5].type = NULL;
+    static struct resourceList parameters[] = {
+	{ AL_label, A_string }, /* 0 */
+	{ AL_bodyfont, A_string }, /* 1 */
+	{ AL_bodyfont_size, A_long }, /* 2 */
+	{ AL_forecolor, A_string }, /* 3 */
+	{ AL_backcolor, A_string }, /* 4 */
+	{ NULL, NULL }
+    };
 
     (this)->GetManyParameters( parameters, NULL, NULL);
 
