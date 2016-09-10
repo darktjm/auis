@@ -845,8 +845,7 @@ static boolean ReadAFMFile(FILE *infl, const char *nameexpected,
 		    PRINTD(("afm: FontName was not what was expected\n"));
 		    return FALSE;
 		}
-		res->fontname = (char *)malloc(strlen(keywd)+1);
-		strcpy(res->fontname, keywd);
+		res->fontname = strdup(keywd);
 		break;
 	    case afmkey_FontBBox:
 		res->fontbbox_l = suck_num_keywd(&pt);
@@ -1037,8 +1036,7 @@ printp_InsertInPSHashTable(afm_font_hashtable *tab, const char *name,
 
     res = (struct afm_font_hashnode *)malloc(sizeof(struct afm_font_hashnode));
 
-    res->name = (char *)malloc(strlen(name)+1);
-    strcpy(res->name, name);
+    res->name = strdup(name);
     res->data = dat;
     res->next = tab->tab[buk];
     res->chain = NULL;
@@ -1576,8 +1574,7 @@ void print::PSRegisterDef(const char  *procname, const char  *defstring)
     print_EnsureClassInitialized();
     if ( ! current_print)  return;
 
-    tmp = (char *)malloc(strlen(defstring)+1);
-    strcpy(tmp, defstring);
+    tmp = strdup(defstring);
 
     printp_InsertInPSHashTable(current_print->defsregistered,
 		procname, tmp, NULL);

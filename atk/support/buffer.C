@@ -279,8 +279,7 @@ void buffer::SetName(const char  *bufferName)
         {
     if (this->bufferName != NULL)
         free(this->bufferName);
-    this->bufferName = (char *)malloc(strlen(bufferName) + 1);
-    strcpy(this->bufferName, bufferName);
+    this->bufferName = strdup(bufferName);
     (this)->NotifyObservers( 0);
 }
 
@@ -844,11 +843,8 @@ void buffer::SetDefaultViewname(const char  *name)
     if(this->viewname != NULL)
 	free(this->viewname);
     if(name == NULL) this->viewname = NULL;
-    else {
-	this->viewname = (char *)malloc(strlen(name) + 1);
-	if(this->viewname == NULL) return;
-	strcpy(this->viewname, name);
-    }
+    else
+	this->viewname = strdup(name);
 }
 
 void buffer::SetDestroyData(boolean  destroy)

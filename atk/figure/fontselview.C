@@ -80,7 +80,7 @@ static void InsertSize(class fontselview  *self, short  val);
 static void SetSizeProc(class stringtbl  *st, class fontselview  *self, short  accnum);
 static void SetStyleProc(class stringtbl  *st, class fontselview  *self, short  accnum);
 static void SetFamilyProc(class stringtbl  *st, class fontselview  *self, short  accnum);
-static char *CopyString(char  *str);
+static char *CopyString(const char  *str);
 
 
 boolean fontselview::InitializeClass()
@@ -97,8 +97,7 @@ fontselview::fontselview()
     class strtblview *tlv;
 
     this->showdefault = FALSE;
-    this->defaultstring = (char *)malloc(strlen(DEFAULTDEFAULT)+1);
-    strcpy(this->defaultstring, DEFAULTDEFAULT);
+    this->defaultstring = strdup(DEFAULTDEFAULT);
 
     this->familynum = fontselv_family_Zero;
     this->sizenum = fontselv_size_Zero+2; /* 12 points */
@@ -516,16 +515,8 @@ void fontselview::ShowExtraOption()
     this->familyextra = (this->familytbl)->AddString( this->defaultstring);
 }
 
-static char *CopyString(char  *str)
+static char *CopyString(const char  *str)
 {
-    char *tmp;
-
-    if (str==NULL)
-	return NULL;
-    tmp = (char *)malloc(strlen(str)+1);
-    if (!tmp)
-	return NULL;
-    strcpy(tmp, str);
-    return tmp;
+    return str ? strdup(str) : NULL;
 }
 

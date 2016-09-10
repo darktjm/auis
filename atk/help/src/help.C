@@ -236,10 +236,7 @@ static char *
 CopyString(char  *as)
 {
     char *tp;
-    tp = (char*) malloc(strlen(as)+1);
-    if (!tp)
-	return NULL;
-    strcpy(tp, as);
+    tp = strdup(as);
     return tp;
 }
 
@@ -365,8 +362,7 @@ AddHistoryItem (class help  *self, int  marcp			/* is this a bookmark? */, int  
     ent->pos = ((class textview *)c->view)->GetDotPosition(),
     ent->top = ((class textview *)c->view)->GetTopPosition(),
     ent->sellen = ((class textview *)c->view)->GetDotLength(),
-    ent->fname = (char *) malloc (strlen(c->histent) + 1);
-    strcpy(ent->fname, c->histent);
+    ent->fname = strdup(c->histent);
 
     if (marcp == help_HE_HISTORY) { /* normal history add */
 	
@@ -1545,11 +1541,10 @@ static char *
 AddToPanelList(char  *s)
 {
     if(EnsurePanelListSize()) {
-	if(!(help_panelList[help_panelIndex] = (char*)malloc(strlen(s) + 1))) {
+	if(!(help_panelList[help_panelIndex] = strdup(s))) {
 	    fprintf(stderr,"Couldn't allocate enough memory!\n");
 	    return(NULL);
 	}
-	strcpy(help_panelList[help_panelIndex], s);
 	help_panelIndex++;
 	return help_panelList[(help_panelIndex - 1)];
     }

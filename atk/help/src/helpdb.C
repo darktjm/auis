@@ -457,10 +457,8 @@ void helpdb::ReadAliasesFile(const char  *aname)
 	    ta = (struct helpAlias *) malloc(sizeof (struct helpAlias));
 	    ta->next = allAliases;
 	    allAliases = ta;
-	    ta->original = (char *) malloc(strlen(original)+1);
-	    strcpy(ta->original, original);
-	    ta->alias = (char *) malloc(strlen(alias)+1);
-	    strcpy(ta->alias, alias);
+	    ta->original = strdup(original);
+	    ta->alias = strdup(alias);
 	}
 	fclose(tf);
     }
@@ -839,8 +837,7 @@ static struct helpFile *SetupHelpAux(const char  *aname, int  strip			/* whether
         if (!Match(aname, usethis, 0))
 	    continue;
         t = (struct helpFile *) malloc (sizeof(struct helpFile));
-        t->fileName = (char *) malloc(strlen(usethis) + 1);
-        strcpy(t->fileName, usethis);
+        t->fileName = strdup(usethis);
 
         /* now, thread on the list in order based on actual file name */
         ComputeMetric(t);

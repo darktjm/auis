@@ -599,9 +599,8 @@ static void SetPrinterType (char  *printertype, class view *v)
     
     str = environ::GetProfile("print.spoolpath");
     if (str)  {
-	char *SpoolPath=(char *)malloc(strlen(str)+1);
+	SpoolPath=strdup(str);
 	if (SpoolPath==NULL) return;
-	strcpy(SpoolPath, str);
     }
     
     if (strchr(currentprinter, '/') != 0) {
@@ -641,6 +640,7 @@ static void SetPrinterType (char  *printertype, class view *v)
 	    p++;
 	}
     }
+    if (str) free((char *)SpoolPath);
 
     if (RealSpoolDir) {
 	FILE *tfile;

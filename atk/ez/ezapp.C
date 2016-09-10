@@ -157,7 +157,12 @@ static boolean FindCkpBuffer(class buffer  *bufferp, struct bestbuffer  *best)
     return FALSE;
 }
 
-#define view_Visible(view) (!rectangle_IsEmptyRect(&(((class graphic *) view)->visualBounds)))
+static int view_Visible(view *v)
+{
+    struct rectangle rect;
+    v->GetVisualBounds(&rect);
+    return !rectangle_IsEmptyRect(&rect);
+}
 
 static boolean CkpMessage(class view  *applicationView , class view  *targetView , class view  *inputFocusView, char  *message)
         {

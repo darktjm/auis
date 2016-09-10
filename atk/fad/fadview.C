@@ -844,10 +844,8 @@ void KeyIn(class fadview  *self,long  cr)
 		fp=(cp)->setpoint(vec->p1->x,vec->p1->y,NEW,self->f->f);
 		lp=(cp)->setpoint(vec->p2->x,vec->p2->y,NEW,self->f->f);	
 		nv = (cp)->setvector(fp,lp,self->f->f);
-		if(vec->label){
-		    nv->label = (char *)malloc(strlen( vec->label) + 1);
-		    strcpy(nv->label,vec->label);
-		}
+		if(vec->label)
+		    nv->label = strdup( vec->label);
 		nv->mode = vec->mode;
 	    }
 	    (self)->nextframe(cp);

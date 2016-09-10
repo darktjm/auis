@@ -1642,8 +1642,7 @@ SetSaveFormat( class imagev *self, long  rock )
 
     if(message::MultipleChoiceQuestion(self, 100, prompt, 0, &result, choices, NULL) == -1)
 	return;
-    if((choice = (char *) malloc(strlen(choices[result]) + 1))) {
-	strcpy(choice, choices[result]);
+    if((choice = strdup(choices[result]))) {
 	(image)->SetSaveFormatString(choice);    
 	if(self->scaled)
 	    (self->scaled)->SetSaveFormatString(choice);

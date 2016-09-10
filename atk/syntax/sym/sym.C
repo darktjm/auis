@@ -340,8 +340,7 @@ sym::Define(const char *name, class sym  *proto, sym_ScopeType  scope)
 	newSym = (proto == NULL) ? (new sym) : (class sym *)proto->NewFromObject();
 	++noOfEntries;
 
-	newSym->name = (char *)malloc(strlen(name)+1);
-	strcpy(newSym->name, name);
+	newSym->name = strdup(name);
 	newSym->scope = scope;
 	newSym->next = *loc;
 	newSym->intable= TRUE;
@@ -407,8 +406,7 @@ sym::Locate(const char  *name, class sym  *proto, sym_ScopeType  scope, boolean 
 	newSym = (proto == NULL) ? (new sym) : (class sym *)proto->NewFromObject();
 	++noOfEntries;
 
-	newSym->name = (char *)malloc(strlen(name)+1);
-	strcpy(newSym->name, name);
+	newSym->name = strdup(name);
 	newSym->scope = scope;
 	newSym->next = *loc;
 	newSym->intable = TRUE;

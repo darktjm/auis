@@ -911,8 +911,7 @@ TitleSectionWidth( class suite  *self )
 
   IN(TitleSectionWidth);
   if(TitleCaption) {
-    tmp = title = (char*) malloc(strlen(TitleCaption) + 1);
-    strcpy(title,TitleCaption);
+    tmp = title = strdup(TitleCaption);
     numLines = NumberLines(TitleCaption);
     for (i = 0 ; i < numLines ; i++) {
       if((newline = (char*) strrchr(tmp,'\n'))) {
@@ -1274,11 +1273,8 @@ AllocNameSpace( char  **target , const char  *source )
     free(*target);
     *target = NULL;
   }
-  if(source && *source) {
-    *target = (char *) malloc(strlen(source) + 1);
-    if(*target) 
-	strcpy(*target,source);
-  }
+  if(source && *source)
+    *target = strdup(source);
   else *target = NULL;
 }
     

@@ -65,10 +65,8 @@ wbuttonv::FullUpdate( enum view_UpdateType  type,
 	void 
 wbuttonv::SetLabel(const char  *label)  {
 	if (this->wlabel) free(this->wlabel);
-	if (label) {
-		this->wlabel = (char *)malloc(strlen(label) + 1);
-		strcpy(this->wlabel, label);
-	}
+	if (label)
+		this->wlabel = strdup(label);
 	else this->wlabel = NULL;
 	this->needinit = TRUE;
 	(this)->WantUpdate(this);

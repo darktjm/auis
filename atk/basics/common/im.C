@@ -909,8 +909,7 @@ void im::SetDefaultServerHost(const char  *value  )
 
     char *buffer;
 
-    buffer = (char *)malloc(strlen(value) + 1);
-    strcpy(buffer, value);
+    buffer = strdup(value);
     if (defaultServerHost != NULL)  {
 	free(defaultServerHost);
     }
@@ -1847,8 +1846,7 @@ void im::PostDefaultHandler(const char  *handlerName, ATK   *handler)
         else
             free(this_c->name);
 
-        this_c->name = (char *)malloc(strlen(handlerName)+1);
-        strcpy(this_c->name, handlerName);
+        this_c->name = strdup(handlerName);
         this_c->handler = handler;
     }
 }
@@ -3482,8 +3480,7 @@ void im::SetTitle(const char  *title)
 	this->title = NULL;
     }
     if (title != NULL)  {
-	this->title = (char *) malloc(strlen(title) + 1);
-	strcpy(this->title, title);
+	this->title = strdup(title);
     }
     if (this->LogFile != NULL) WriteLogEntry(this, log_TITLE, title);
 }
@@ -3503,8 +3500,7 @@ void im::SetProgramName(const char  *name)
 	initialProgramName = NULL;
     }
     if (name != NULL)  {
-	initialProgramName = (char *) malloc(strlen(name) + 1);
-	strcpy(initialProgramName, name);
+	initialProgramName = strdup(name);
 	/* Used for reading the preferences file */
 	environ::SetProgramName(name);
 
@@ -3847,9 +3843,8 @@ void im::RecordAnswer(const char  *answer)
     if(a!=NULL) {
 	a->im=NULL;
 	a->type=im_AnswerEvent;
-	if(answer) a->v.answer=(char *)malloc(strlen(answer)+1);
+	if(answer) a->v.answer=strdup(answer);
 	else a->v.answer=NULL;
-	if(a->v.answer!=NULL) strcpy(a->v.answer, answer);
 	enqAction(&Record, a);
     }
 }
@@ -3937,9 +3932,8 @@ void im::QueueAnswer(char  *answer)
     if(a!=NULL) {
 	a->im=NULL;
 	a->type=im_AnswerEvent;
-	if(answer!=NULL) a->v.answer=(char *)malloc(strlen(answer)+1);
+	if(answer!=NULL) a->v.answer=strdup(answer);
 	else a->v.answer=NULL;
-	if(a->v.answer!=NULL) strcpy(a->v.answer, answer);
 	enqAction(&AnswerQueue, a);
     }
 }

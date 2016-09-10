@@ -867,10 +867,8 @@ void frame::SetTitle(const char  *title)
     if (this->title != NULL)
         free(this->title);
 
-    if (title != NULL) {
-        this->title = (char *) malloc(strlen(title) + 1);
-        strcpy(this->title, title);
-    }
+    if (title != NULL)
+        this->title = strdup(title);
     else
         this->title = NULL;
 

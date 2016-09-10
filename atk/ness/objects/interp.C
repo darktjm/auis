@@ -1230,6 +1230,7 @@ brancher: {
 					+ sizeof(struct frameelt) 
 					+ (unsigned long)*iar++);
 		Bload:
+		    printf("%d\n", (int)src->hdr);
 			if (src->hdr != boolHdr)
 				RunError(":tried to load non-Boolean value", opiar);
 			NSPushSpace(boolstkelt); 

@@ -1367,8 +1367,7 @@ typescript::typescript()
 	return;
     }
     
-    this->progname =  (char *)malloc(strlen(*arglist) + 1);
-    strcpy(this->progname, *arglist);
+    this->progname =  strdup(*arglist);
     if(!GetPtyandName(&masterChannel, &ptyChannel, ptyname, sizeof(ptyname))) {
 	printf("Can't connect subchannel\n");
 	THROWONFAILURE( FALSE);
@@ -1377,9 +1376,7 @@ typescript::typescript()
 
     this->SubChannel = masterChannel;
     this->SlaveChannel = ptyChannel;
-    this->ptyname = (char *)malloc(strlen(ptyname) + 1);
-    if(this->ptyname)
-	strcpy(this->ptyname, ptyname);
+    this->ptyname = strdup(ptyname);
 
 #if !defined(POSIX_ENV) || defined(sun)
     /* On non-SunOS POSIX systems we do not put the pty into REMOTE mode.
@@ -2141,11 +2138,8 @@ typescript::SetTitle(const char  *title)
 {
     if(this->title != NULL)
 	free(this->title);
-    if(title || *title != '\0') {
-	this->title = (char*) malloc(strlen(title) + 1);
-	if(this->title)
-	    strcpy(this->title, title);
-    }
+    if(title || *title != '\0')
+	this->title = strdup(title);
     else
 	this->title = NULL;
 }

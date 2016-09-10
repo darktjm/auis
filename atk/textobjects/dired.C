@@ -114,17 +114,14 @@ static class list *DirIntoList(char  *dname, boolean  longMode , boolean  dotFil
 
         fi = (struct fileinfo *) malloc(sizeof (struct fileinfo));
 
-        fi->fileName = (char *)malloc(strlen(dp->d_name) + 1);
-        strcpy(fi->fileName, dp->d_name);
+        fi->fileName = strdup(dp->d_name);
 
         if (longMode) {
             char buf[256];
             LongModeLine(dname, fi->fileName, buf);
-            fi->dispName = (char *)malloc(strlen(buf) + 1);
-            strcpy(fi->dispName, buf);
+            fi->dispName = strdup(buf);
         } else {
-            fi->dispName = (char *)malloc(strlen(fi->fileName) + 1);
-            strcpy(fi->dispName, fi->fileName);
+            fi->dispName = strdup(fi->fileName);
         }
 
         fi->pos = fi->len = 0;
@@ -294,8 +291,7 @@ long dired::SetDir(const char  *dname)
 
     if (this->dir != NULL)
         free(this->dir);
-    this->dir = (char *)malloc(strlen(newDir) + 1);
-    strcpy(this->dir, newDir);
+    this->dir = strdup(newDir);
 
     if (this->flist != NULL)
         DestroyList(this->flist);

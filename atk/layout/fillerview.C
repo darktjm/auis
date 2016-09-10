@@ -98,9 +98,8 @@ addInset(char  *newposs)
     for (n = 0; Insets[n] != NULL; n++)
 	if (strcmp(Insets[n], newposs) == 0)
 	    return;
-    b = (char *)malloc(strlen(newposs)+1);
+    b = strdup(newposs);
     assert(b != NULL);
-    strcpy(b, newposs);
     Insets = (char **)realloc((char *)Insets, (n+2)*sizeof (char *));
     assert(Insets != NULL);
     Insets[n] = b;

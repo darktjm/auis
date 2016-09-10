@@ -45,8 +45,7 @@ fontsample::fontsample()
 {
 	ATKinit;
 
-    this->teststring = (char *)malloc(strlen(INITTESTSTRING)+1);
-    strcpy(this->teststring, INITTESTSTRING);
+    this->teststring = strdup(INITTESTSTRING);
     this->dirty = TRUE;
     this->fdesc = NULL;
 
@@ -107,8 +106,7 @@ class view *fontsample::Hit(enum view_MouseAction  action, long  x , long  y , l
 void fontsample::SetString(char  *val)
 {
     free(this->teststring);
-    this->teststring = (char *)malloc(strlen(val)+1);
-    strcpy(this->teststring, val);
+    this->teststring = strdup(val);
 }
 
 class fontdesc *fontsample::GetFontDesc()

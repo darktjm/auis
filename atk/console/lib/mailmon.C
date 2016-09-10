@@ -83,8 +83,7 @@ void SetMailEnv()
 	    sprintf(buff, "%s/%s", MyHomeDir, _SITE_MAILBOX);
 	}
     }
-    envmail = (char *)malloc(strlen(buff) + 1);
-    strcpy(envmail, buff);
+    envmail = strdup(buff);
     if (needsFreed) free(buff);
     CheckMyMail = environ::GetProfileSwitch("console.mailfrom", FALSE);
 }
@@ -180,8 +179,7 @@ void SetPrintEnv()
                 sprintf (buff, "%s/%s", printer_directory, printer_name);
 #else /* hpux  */
 		needsFreed = TRUE;
-		buff = (char *)malloc(strlen(_SITE_NON_ANDREW_PRINTDIR) + 1);
-		strcpy(buff, _SITE_NON_ANDREW_PRINTDIR);
+		buff = strdup(_SITE_NON_ANDREW_PRINTDIR);
 #endif /* hpux  */
 	    }
 	    else{
@@ -192,8 +190,7 @@ void SetPrintEnv()
 	    pdir = buff;
 	}
     }
-    PrintDirName = (char *)malloc(strlen(pdir) + 1);
-    strcpy(PrintDirName, pdir);
+    PrintDirName = strdup(pdir);
     if (needsFreed) free(buff);
 }
 

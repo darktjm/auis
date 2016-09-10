@@ -1,3 +1,11 @@
+- valgrind access hit with dragon.zip (incomplete raster bits?)
+- valgrind access hit with letter.tpl (scrollbar too small for buttons?)
+- clock.help: hit at spread.C:296
+- letter.tpl/date.n: says dateGotten not bool, even though it is
+  also, recompiling after error crashes
+- need play module to either work or ignore
+- pagedown eventually stops working (e.g. 2rtf) (and doesn't move cursor?)
+- questionaire.msg ice cream question doesn't do anything
 - org/treev: unfolded expands size, but doesn't shift tree to right
   if needed (i.e., left is severely cut off).  Also doesn't shift tree down
   for horizontal arrangement, but for some reason it allows moving scrollbar

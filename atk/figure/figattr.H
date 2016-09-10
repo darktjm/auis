@@ -136,12 +136,12 @@ class figattr : public  dataobject  {
       inline void SetRRectCorner(long val)  { ((this)->rrectcorner = (val), (this)->active |= ((unsigned long)1<<figattr_RRectCorner)); }
       inline long GetRRectCorner(class figattr *def)  { return (((this))->IsActive( figattr_RRectCorner) ? ((this)->rrectcorner) : ((def)->rrectcorner)); }
 
-      inline void SetColorVal(const char *val)  { (((this)->color ? (free((this)->color), 1) : 0), (this)->color = (char *)malloc(1+strlen(val)), strcpy((this)->color, (val))); }
+      inline void SetColorVal(const char *val)  { if((this)->color) free((this)->color); (this)->color = strdup(val); }
       inline const char  * GetColorVal()  { return ((this)->color); }
       inline void SetColor(const char *val)  { ((this)->SetColorVal( val), (this)->active |= ((unsigned long)1<<figattr_Color)); }
       inline const char *GetColor(class figattr *def)  { return (((this))->IsActive( figattr_Color) ? ((this)->color) : ((def)->color)); }
 
-      inline void SetFontFamilyVal(const char *val)  { (((this)->fontfamily ? (free((this)->fontfamily), 1) : 0), (this)->fontfamily = (char *)malloc(1+strlen(val)), strcpy((this)->fontfamily, (val))); }
+      inline void SetFontFamilyVal(const char *val)  { if((this)->fontfamily) free((this)->fontfamily); (this)->fontfamily = strdup(val); }
       inline char  * GetFontFamilyVal()  { return ((this)->fontfamily); }
       inline void SetFontFamily(const char *val)  { ((this)->SetFontFamilyVal( val), (this)->active |= ((unsigned long)1<<figattr_FontFamily)); }
       inline char *GetFontFamily(class figattr *def)  { return (((this))->IsActive( figattr_FontFamily) ? ((this)->fontfamily) : ((def)->fontfamily)); }

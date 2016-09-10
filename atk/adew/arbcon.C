@@ -926,9 +926,8 @@ static void addobview(class view  *v)
 	 message::DisplayString(NULL,0,buf);
 	 return;
      }
-     m  = (char *)malloc(strlen(buf) + 1);
+     m  = strdup(buf);
      if (m == NULL) return;
-     strcpy(m,buf);
      Gself->vwcount = appendlist(Gself->vwlist,Gself->vwcount,m,FALSE);
      (Gself->Arbobviewlist)->SetNotify(FALSE);
      (Gself->Arbobviewlist)->SetArraySize(Gself->vwcount);
@@ -1116,8 +1115,7 @@ static boolean createGself(class arbcon  *self)
     self->vwcount = 0;
 
     if((p = environ::GetProfile("ObViewList"))!= NULL){
-	if((m = (char *)malloc(strlen(p)+ 1)) == NULL) return FALSE;
-	strcpy(m,p);
+	if((m = strdup(p)) == NULL) return FALSE;
 	self->vwcount =appendlist(self->vwlist,self->vwcount,m,FALSE);
     }
     if((p = environ::GetProfile("ObViewFile"))!= NULL){
@@ -1131,8 +1129,7 @@ static boolean createGself(class arbcon  *self)
 	    else dflist = defaultvwlist;
 	}
 	if(dflist != NULL){
-	    if((m = (char *)malloc(strlen(dflist)+ 1)) == NULL) return FALSE;
-	    strcpy(m,dflist);
+	    if((m = strdup(dflist)) == NULL) return FALSE;
 	    self->vwcount =appendlist(self->vwlist,self->vwcount,m,FALSE);
 	}
     }

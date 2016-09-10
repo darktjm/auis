@@ -344,8 +344,7 @@ application::ReadInitFile()
 	    sprintf(buffer, "%s/global.%sinit", thisStr, name);
 	    if ((initp)->Load( buffer, this->errorProc, (long) this->errorRock, this->forceload) >= 0) {
 		HadGlobalNameInit = TRUE;
-		if((localLib = (char*) malloc(strlen(thisStr) + 1)))
-		    strcpy((char *)localLib, thisStr);
+		localLib = strdup(thisStr);
 		break;
 	    }
 	    thisStr = nextStr;

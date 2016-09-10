@@ -234,8 +234,7 @@ ExtractNodePath( class bush *self, const char *source, char **path )
       }
   }
   len = strlen(source);
-  if(!status && (*path = (char*)malloc(strlen(source)+1))) {
-    strcpy(*path,source);
+  if(!status && (*path = strdup(source))){
     if ((len > 1) && (*path)[len - 1] == '/')
         (*path)[len - 1] = (char) 0;
   }
@@ -255,9 +254,7 @@ ExtractNodeName( char	*source, char **name )
 	  source[len-1] = (char) 0;
       if((ptr = (char *)strrchr(source, '/')) && *(source + 1) != '\0')
 	  source = ++ptr;
-      if((*name = (char *)malloc(strlen(source) + 1)))
-	  strcpy(*name, source);
-      else
+      if(!(*name = strdup(source)))
 	  status = -1;
   }
   else status = -1;

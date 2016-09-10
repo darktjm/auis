@@ -198,8 +198,7 @@ static void MakeReport(struct repCookie  *cookie, enum message_HelpItem  itemtyp
     long widthinpix;
 
     if (acceptitem(cookie, item, itemtype)) {
-	cookie->report[cookie->count] = (char*)malloc(strlen(item) + 1);
-        strcpy(cookie->report[cookie->count++], item);
+	cookie->report[cookie->count++] = strdup(item);
 	widthinpix = (cookie->font)->StringSize( (class graphic*) cookie->ts, item, NULL, NULL);
 	if(widthinpix > cookie->maxwidthinpix) {
 	    cookie->maxwidthinpix = widthinpix;

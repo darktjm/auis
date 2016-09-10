@@ -341,7 +341,7 @@ ResetOrigin(class ness  *self) {
 	long now = time(0);
 	if (self->Origin != NULL) free(self->Origin);
 	neworigin = udate(self, NiceTime(now), ThisUser());
-	self->Origin = strcpy((char *)malloc(strlen(neworigin) + 1), neworigin);
+	self->Origin = strdup(neworigin);
 	self->IsNowOriginator = TRUE;
 }
 
@@ -464,8 +464,7 @@ ness::SetFilename(const char  *name) {
 	if(name) {
 		filetype::CanonicalizeFilename(buf, name, sizeof(buf)-1);
 		buf[sizeof(buf)-1]='\0';
-		this->filename=(char *)malloc(strlen(buf)+1);
-		if(this->filename!=NULL) strcpy(this->filename,buf);
+		this->filename=strdup(buf);
 	} else this->filename=NULL;
 }
 
@@ -538,7 +537,7 @@ ness::Read(FILE  *file, long  id) {
 		char *neworigin;
 		neworigin = udate(this, "unknown date",
 						"????: Unknown User");
-		this->Origin = strcpy((char *)malloc(strlen(neworigin)+1), neworigin);
+		this->Origin = strdup(neworigin);
 		this->IsNowOriginator = FALSE;
 	}
 	this->OriginalModValue = (this)->GetModified();
@@ -582,7 +581,7 @@ ness::HandleKeyWord(long  pos, char  *keyword, FILE  *file) {
 		}
 		*bx = '\0';
 		while (c != EOF && (c = getc(file)) != '\n') {}
-		this->Origin = strcpy((char *)malloc(strlen(buf)+1), buf);
+		this->Origin = strdup(buf);
 		if (1 != sscanf(this->Origin, "%ld", &this->syntaxlevel))
 			this->syntaxlevel = UNSPECIFIEDSYNTAXLEVEL;
 		this->IsNowOriginator = FALSE;

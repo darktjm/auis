@@ -128,13 +128,11 @@ static struct mlitem *mlitem_New(const char  *s1 , const char  *s2)
   struct mlitem *ml;
   ml = (struct mlitem *) malloc(sizeof(struct mlitem));
   if (s1 && *s1) {
-    ml->oldname = (char *) malloc(strlen(s1) + 1);
-    strcpy(ml->oldname,s1);
+    ml->oldname = strdup(s1);
   } else 
     ml->oldname = NULL;
   if (s2 && *s2) {
-    ml->newname = (char *) malloc(strlen(s2) + 1);
-    strcpy(ml->newname,s2);
+    ml->newname = strdup(s2);
   } else 
     ml->newname = NULL;
   ml->state = MLITEM_UNDEF;
@@ -172,8 +170,7 @@ static struct mpitem *mpitem_New(char  *str)
 {
   struct mpitem *mp;
   mp = (struct mpitem *) malloc(sizeof(struct mpitem));
-  mp->name = (char *) malloc(strlen(str) + 1);
-  strcpy(mp->name,str);
+  mp->name = strdup(str);
   mp->next = NULL;
   mp->ml = NULL;
   mp->load = MPITEM_LOAD;
@@ -435,8 +432,7 @@ static void copyItems(class menulist  *menulist)
         struct itemlist *thisItem;
 
         thisItem = (struct itemlist *) malloc(sizeof(struct itemlist));
-        thisItem->string = (char *) malloc(strlen(traverse->string) + 1);
-        strcpy(thisItem->string, traverse->string);
+        thisItem->string = strdup(traverse->string);
         thisItem->proc = traverse->proc;
         thisItem->functionData = traverse->functionData;
 	thisItem->enableMask = traverse->enableMask;
@@ -509,8 +505,7 @@ void menulist::AddToML(const char  *string, struct proctable_Entry  *menuProc, l
 
     if (thisItem == NULL) {
         thisItem = (struct itemlist *) malloc(sizeof(struct itemlist));
-        thisItem->string = (char *) malloc(strlen(string) + 1);
-        strcpy(thisItem->string, string);
+        thisItem->string = strdup(string);
         link = TRUE;
     }
     thisItem->proc = menuProc;

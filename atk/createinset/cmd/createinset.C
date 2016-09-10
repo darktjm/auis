@@ -264,9 +264,7 @@ int main(int argc, char **argv)
 		sprintf(x, "user id %ld", uid);
 		username = x;
 	}
-	else username = (char *)strcpy(
-			(char *)malloc(strlen(passwd->pw_name)), 
-			passwd->pw_name );
+	else username = strdup(passwd->pw_name);
 
 	insetname = NULL;
 	for (i = 1; i < argc; i++) {

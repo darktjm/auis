@@ -256,8 +256,7 @@ void srctext::HashInsert(Dict *hashTable[], const Dict *word)
     if (word!=NULL) {
 	hashval= HASH(word->stng);
 	bucket= (Dict *)malloc(sizeof(Dict));
-	bucket->stng= (char *)malloc(strlen(word->stng)+1);
-	strcpy((char *)bucket->stng,word->stng);
+	bucket->stng= strdup(word->stng);
 	bucket->val= word->val;
 	bucket->kind= word->kind;
 	bucket->next= hashTable[hashval];

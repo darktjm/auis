@@ -289,10 +289,8 @@ class ezdiff *ezdiff::Create(class buffer  *buf1,class buffer  *buf2,char  *diff
 	    self = new ezdiff;
 	    self->buf[0] = buf1;
 	    self->buf[1] = buf2;
-	    self->bname[0] = (char *)malloc(strlen((buf1)->GetName()) + 1);
-	    strcpy(self->bname[0],(buf1)->GetName());
-	    self->bname[1] = (char *)malloc(strlen((buf2)->GetName()) + 1);
-	    strcpy(self->bname[1],(buf2)->GetName());
+	    self->bname[0] = strdup((buf1)->GetName());
+	    self->bname[1] = strdup((buf2)->GetName());
 	    self->numbufs = 2;
 	    if (ezdiff_setupmarkers(self,fnm) == -1)
 	    {

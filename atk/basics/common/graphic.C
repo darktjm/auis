@@ -992,19 +992,15 @@ void graphic::SetDefaultColors(const char  *foreground, const char  *background)
 
     if (foregroundColorName != NULL)
 	free(foregroundColorName);
-    if (foreground != NULL && *foreground && ((tempString = (char *) malloc(strlen(foreground) + 1)) != NULL)) {
-	strcpy(tempString, foreground);
+    if (foreground != NULL && *foreground && (tempString = strdup(foreground)) != NULL)
 	foregroundColorName = tempString;
-    }
     else
 	foregroundColorName = NULL;
 
     if (backgroundColorName != NULL)
 	free(backgroundColorName);
-    if (background != NULL && *background && ((tempString = (char *) malloc(strlen(background) + 1)) != NULL)) {
-	strcpy(tempString, background);
+    if (background != NULL && *background && (tempString = strdup(background)) != NULL)
 	backgroundColorName = tempString;
-    }
     else
 	backgroundColorName = NULL;
     if(foregroundColorName) fg=foregroundColorName;

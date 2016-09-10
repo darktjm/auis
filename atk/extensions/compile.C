@@ -350,8 +350,7 @@ static void compile_SetCommand(char  *command)
         compileCommand = (char *)defaultCommand; /* not freed if default */
         return;
     }
-    compileCommand = (char *) malloc(strlen(command) + 1);
-    strcpy(compileCommand, command);
+    compileCommand = strdup(command);
 }
 
 static boolean SaveModifiedBuffer(class buffer  *buffer, class view  *messageView)

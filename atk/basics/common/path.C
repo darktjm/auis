@@ -119,8 +119,7 @@ static void SetPath(class path  *self, char  *filepath)
  
     if (filepath != NULL) {
         /* SHOULD CACHE THESE THINGS */
-        self->filepath = (char *) malloc(strlen(filepath) + 1);
-        strcpy(self->filepath, filepath);
+        self->filepath = strdup(filepath);
     }
     else {
         self->filepath = NULL;
@@ -1035,8 +1034,7 @@ boolean path::Scan(boolean  statEverything)
                                 dirsalloced *= 2;
                                 this->dirs = (char **) realloc(this->dirs, dirsalloced * sizeof(char *));
                             }
-                            this->dirs[nextdir] = (char *) malloc(strlen(name) + 1);
-                            strcpy(this->dirs[nextdir], name);
+                            this->dirs[nextdir] = strdup(name);
                             nextdir++;
                         }
                     }
@@ -1050,8 +1048,7 @@ boolean path::Scan(boolean  statEverything)
                             filesalloced *= 2;
                             this->files = (char **) realloc(this->files, filesalloced * sizeof(char *));
                         }
-                        this->files[nextfile] = (char *) malloc(strlen(name) + 1);
-                        strcpy(this->files[nextfile], name);
+                        this->files[nextfile] = strdup(name);
                         nextfile++;
                     }
                 }

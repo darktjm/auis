@@ -198,6 +198,7 @@ stringtbl::AddString(const char  *s)
 	    if(*s == '\\' || *s == '{' || *s == '}')	/* delete backslashes, left brackets, and right brackets */
 		continue;
 	    *t++ = *s;
+	    len--;
 	}
         *t = 0; /* and terminate it ! */
 	if ((i=FindString(this, p, 0)) >= 0) {
