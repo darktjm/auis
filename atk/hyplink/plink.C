@@ -64,8 +64,7 @@ void plink::SetTag(char  *newtag)
 
     if (this->tag) free(this->tag);
     if (newtag) {
-	this->tag = (char *)malloc(1+strlen(newtag));
-	strcpy(this->tag, newtag);
+	this->tag = strdup(newtag);
     } else {
 	this->tag = NULL;
     }
@@ -186,7 +185,6 @@ static char *GlomStrings(char  *s , char  *t)
     char *r;
 
     r = (char *)malloc(strlen(s)+strlen(t)+1);
-    *r = '\0';
     strcpy(r,s);
     free(s);
     strcat(r,t);

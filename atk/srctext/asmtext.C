@@ -58,8 +58,7 @@ static void setReindentFilterName(asmtext *self, const char *name)
 {
     if (self->reindentFilterName!=NULL)
 	free(self->reindentFilterName);
-    self->reindentFilterName= (char *)malloc(strlen(name)+1);
-    strcpy(self->reindentFilterName, name);
+    self->reindentFilterName= strdup(name);
 }
 
 void asmtext::SetAttributes(struct attributes *atts)

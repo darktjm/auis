@@ -193,15 +193,7 @@ void figattr::CopyData(class figattr  *src, unsigned long  mask)
 
 static char *CopyString(const char  *str)
 {
-    char *tmp;
-
-    if (str==NULL)
-	return NULL;
-    tmp = (char *)malloc(strlen(str)+1);
-    if (!tmp)
-	return NULL;
-    strcpy(tmp, str);
-    return tmp;
+    return str ? strdup(str) : NULL;
 }
 
 /* does not use /begindata /enddata convention */

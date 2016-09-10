@@ -261,8 +261,7 @@ static class menulist *GetButtonlist(class init  *init, const char  *className, 
         ;
     if (menus == NULL) {
         menus = (struct menus *) malloc(sizeof(struct menus));
-        menus->class_c = (char *) malloc(strlen(className) + 1);
-        strcpy(menus->class_c, className);
+        menus->class_c = strdup(className);
         menus->menulist = new menulist;
         menus->inherit = inheritFlag;
         menus->next = init->buttons;
@@ -372,11 +371,9 @@ static void BindFunction(class init  *init, char  **args, boolean  forceLoad, en
     if (*function != '\0') {
 /* proctable_DefineProc does not allocate storage for its arguments... */
 /* neither does it free them, so this is a leak */
-        tempString = (char *) malloc(strlen(function) + 1);
-        strcpy(tempString, function);
+        tempString = strdup(function);
         function = tempString;
-        tempString = (char *) malloc(strlen(loadClass) + 1);
-        strcpy(tempString, loadClass);
+        tempString = strdup(loadClass);
         loadClass = tempString;
         proc = proctable::DefineProc(function, NULL, NULL, loadClass, NULL);
 
@@ -395,8 +392,7 @@ static void BindFunction(class init  *init, char  **args, boolean  forceLoad, en
 
         char *tempString;
 
-        tempString = (char *) malloc(strlen(parameterString) + 1);
-        strcpy(tempString, parameterString);
+        tempString = strdup(parameterString);
         parameterString = tempString;
     }
  */

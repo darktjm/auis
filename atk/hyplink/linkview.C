@@ -183,7 +183,7 @@ linkview::linkview() {
 }
 
 linkview::~linkview() {
-	ATKinit;
+	delete this->ml;
 	return;
 }
 

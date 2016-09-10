@@ -117,11 +117,7 @@ static char * Stabilize(char  *s);
 static char *
 Stabilize(char  *s)
 {
-    char *result=s?(char *)malloc(strlen(s)+1):NULL;
-    if (result) {
-	strcpy(result, s);
-    }
-    return result;
+    return s?strdup(s):NULL;
 }
 
 

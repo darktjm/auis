@@ -21,7 +21,7 @@ Enjoy ! \
 
 \begindata{link,537698056}
 Datastream version: 3
-$ANDREWDIR/doc/progtools.d
+$ANDREWDIR/doc/PROGRAMMER/progtools.d
 0
 0
 \begindata{link,537698056}
@@ -36,27 +36,9 @@ white
 \view{linkview,537698056,0,0,0}Programming Tools
 
 
-\begindata{link,537698696}
-Datastream version: 3
-$ANDREWDIR/doc/mailsys.d
-0
-0
-\begindata{link,537698696}
-Datastream version: 2
-Mail System
-2
-
-black
-white
-\enddata{link,537698696}
-\enddata{link,537698696}
-\view{linkview,537698696,1,0,0}Mail System \
-
-
-
 \begindata{link,537699144}
 Datastream version: 3
-$ANDREWDIR/doc/insets.d
+$ANDREWDIR/doc/PROGRAMMER/insets.d
 0
 0
 \begindata{link,537699144}
@@ -73,7 +55,7 @@ white
 
 \begindata{link,538444824}
 Datastream version: 3
-$ANDREWDIR/doc/pinsets.d
+$ANDREWDIR/doc/PROGRAMMER/pinsets.d
 0
 0
 \begindata{link,538444824}
@@ -90,7 +72,7 @@ white
 
 \begindata{link,538445176}
 Datastream version: 3
-$ANDREWDIR/doc/texttools.d
+$ANDREWDIR/doc/PROGRAMMER/texttools.d
 0
 0
 \begindata{link,538445176}

@@ -70,8 +70,7 @@ static class atom *CreateAtom(const char  *name, int  index)
     struct alist *l;
 
     a = new atom;
-    a->name = (char*) malloc(strlen(name) + 1);
-    (void) strcpy(a->name, name);
+    a->name = strdup(name);
 
     l = (struct alist *) malloc(sizeof (struct alist));
     l->atom = a;

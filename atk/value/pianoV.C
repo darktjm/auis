@@ -224,16 +224,12 @@ void pianoV::LookupParameters()
 {
     const char * fontname;
     long fontsize;
-    struct resourceList parameters[7];
-
-    parameters[0].name = AL_label;
-    parameters[0].type = A_string;
-    parameters[1].name = AL_bodyfont;
-    parameters[1].type = A_string;
-    parameters[2].name = AL_bodyfont_size;
-    parameters[2].type = A_long;
-    parameters[3].name = NULL;
-    parameters[3].type = NULL;
+    static struct resourceList parameters[] = {
+	{ AL_label, A_string }, /* 0 */
+	{ AL_bodyfont, A_string }, /* 1 */
+	{ AL_bodyfont_size, A_long }, /* 2 */
+	{ NULL, NULL }
+    };
 
     (this)->GetManyParameters( parameters, NULL, NULL);
 

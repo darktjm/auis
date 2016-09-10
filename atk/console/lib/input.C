@@ -874,8 +874,7 @@ void GetExtraConsoles(class menulist  *tempMenulist, const char  *conpath, const
 		    *tail = '\0';
 		    conlib[connum].path = (char *) malloc(strlen(conpath) + len2 + strlen(copyOfEXTENSION) + 3);
 		    sprintf(conlib[connum].path, "%s/%s.%s", conpath, nm, copyOfEXTENSION);
-		    conlib[connum].confile = (char *) malloc(len2 + 1);
-		    strcpy(conlib[connum].confile, nm);
+		    conlib[connum].confile = strdup(nm);
 		    mydbg(("conlib[%ld]: %s\n", connum, conlib[connum].confile));
 		    ++connum;
 		}
@@ -927,10 +926,8 @@ void SetStartUpConsole(char  *path, char  *ConFile)
     /* These mallocs could be space leaks since there's no checking, 
          need to check for zeroth element initialization (is it NULL),
          i.e. can we compare the path to NULL safely? */
-    conlib[0].path = (char *)malloc(strlen(path) + 1);
-    strcpy(conlib[0].path, path);
-    conlib[0].confile = (char *) malloc(strlen(ConFile) + 1);
-    strcpy(conlib[0].confile, ConFile);
+    conlib[0].path = strdup(path);
+    conlib[0].confile = strdup(ConFile);
     mydbg(("Leaving: SetStartUpConsole(%s, %s)\n", path, ConFile));
 }
 
@@ -957,21 +954,19 @@ void FindStartUpConsole(char  *ConFile, boolean  IsStartUp)
 	haspath = TRUE;
 	e = strrchr(ConFile, '/');
 	e++;
-	confile = (char *)malloc(strlen(e) + 1);
+	confile = strdup(e);
 	if (confile == NULL) {
 	    fprintf(stderr, "FATAL ERROR: cannot allocate memory for confile; in input.FindStartUpConsole...\n");
 	    fflush(stderr);
 	    exit(-1);
 	}
-	strcpy(confile, e);
     } else {
-	confile = (char *)malloc(strlen(ConFile) + 1);
+	confile = strdup(ConFile);
 	if (confile == NULL) {
 	    fprintf(stderr, "FATAL ERROR: cannot allocate memory for confile; in input.FindStartUpConsole...\n");
 	    fflush(stderr);
 	    exit(-1);
 	}
-	strcpy(confile, ConFile);
     }
 
     if (haspath){

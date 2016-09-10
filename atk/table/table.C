@@ -240,11 +240,9 @@ class table * table::SetName (const char  * name)
 	this->NextTable = table_List;
 	table_List = this;
     }
-    this->tablename = (char *)malloc (strlen (name) + 1);
+    this->tablename = strdup (name);
     if (this->tablename == NULL)
 	printf("Out of memory for table name\n");
-    else
-	strcpy (this->tablename, name);
     return this;
 }
 
@@ -623,21 +621,19 @@ static void CreateCell (class table  *T, struct cell  *newcell , struct cell  *o
 	newcell->celltype = oldcell->celltype;
 	switch (newcell->celltype) {
 	    case table_TextCell:
-		newcell->interior.TextCell.textstring = (char *) malloc (strlen (oldcell->interior.TextCell.textstring) + 1);
+		newcell->interior.TextCell.textstring = strdup (oldcell->interior.TextCell.textstring);
 		if (newcell->interior.TextCell.textstring == NULL) {
 		    newcell->celltype = table_EmptyCell;
 		    break;
 		}
-		strcpy (newcell->interior.TextCell.textstring, oldcell->interior.TextCell.textstring);
 		newcell->lastcalc = ++(T->timeStamper);
 		break;
 	    case table_ValCell:
-		newcell->interior.ValCell.formula = (char *) malloc (strlen (oldcell->interior.ValCell.formula) + 1);
+		newcell->interior.ValCell.formula = strdup (oldcell->interior.ValCell.formula);
 		if (newcell->interior.ValCell.formula == NULL) {
 		    newcell->celltype = table_EmptyCell;
 		    break;
 		}
-		strcpy (newcell->interior.ValCell.formula, oldcell->interior.ValCell.formula);
 		newcell->interior.ValCell.value = oldcell->interior.ValCell.value;
 		newcell->lastcalc = 0;
 		break;

@@ -249,8 +249,7 @@ static int ReadMessFile(const char  *filename, boolean  executeImmediately)
 		mess = messitem_Create(s1,s2,where);
 	      else {
 		free(mess->newmess);
-		mess->newmess = (char *) malloc(strlen(s2) + 1);
-		strcpy(mess->newmess,s2);
+		mess->newmess = strdup(s2);
 	      }
 	    }
 

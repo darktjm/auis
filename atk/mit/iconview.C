@@ -563,8 +563,7 @@ iconview__SetIconFontname (class iconview  * self,char  *name)
   {
      self->iconfont = (class fontdesc *)0; /* force replacement */
      if (self->iconfontname) free (self->iconfontname);
-     self->iconfontname = (char *)malloc(strlen(name) +1);
-     bcopy (name, self->iconfontname, strlen(name));
+     self->iconfontname = strdup(name);
 }
 #endif 
 

@@ -446,8 +446,7 @@ class aptv *self=this;
     ShrinkIconFont = (this)->BuildFont(  icon_font_name, NULL );
   if ( title  &&  *title )
     {
-    ShrinkTitle = (char *) malloc( strlen( title ) + 1 );
-    strcpy( ShrinkTitle, title );
+    ShrinkTitle = strdup( title );
     if ( title_font_name  &&  *title_font_name )
       {
       ShrinkTitleFont = (this)->BuildFont(  title_font_name, &height );

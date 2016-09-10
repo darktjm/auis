@@ -152,8 +152,7 @@ void textview::PrepareDeletion(long  pos, long  len)
 		if (styleName != NULL) {
 		    struct InsertStack *p = (struct InsertStack *) malloc(sizeof(struct InsertStack));
 
-		    p->name = (char *) malloc(strlen(styleName) + 1);
-		    strcpy(p->name, styleName);
+		    p->name = strdup(styleName);
 		    p->next = this->insertStack;
 		    this->insertStack = p;
 		}
@@ -488,12 +487,11 @@ void textview::AddStyleToInsertStack(char  *styleName)
 
     p = (struct InsertStack *) malloc(sizeof(struct InsertStack));
     if (p != NULL) {
-	p->name = (char *) malloc(strlen(styleName) + 1);
+	p->name = strdup(styleName);
 	if (p->name == NULL) {
 	    free(p);
 	    return;
 	}
-	strcpy(p->name, styleName);
 	p->next = this->insertStack;
 	this->insertStack = p;
     }

@@ -227,10 +227,8 @@ void stylesheetInternal::SetTemplateName(char  *templateName)
 
     if (templateName == NULL)
 	this->templateName = NULL;
-    else {
-	this->templateName = (char *) malloc(strlen(templateName)+ 1);
-	strcpy(this->templateName, templateName);
-    }
+    else
+	this->templateName = strdup(templateName);
     this->version++;
 }
 

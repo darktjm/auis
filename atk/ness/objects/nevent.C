@@ -775,9 +775,8 @@ PostMenuEvent(class ness  *ness, struct objnode  *onode, struct eventnode  *enod
 		else (onode->obj)->SetMenulist( onode->menulist);
 	}
 	sprintf(name, "%ld", (long)enode);
-	enode->rock=(char *)malloc(strlen(name)+1);
+	enode->rock=strdup(name);
 	if(enode->rock) {
-	    strcpy(enode->rock, name);
 	/* add the key sequence to the keymap */
 		   (onode->menulist)->AddToML( enode->spec, onode->menupe, (long)enode->rock, 0);
 		   enode->enabled = TRUE;
@@ -818,9 +817,8 @@ PostKeysEvent(class ness  *ness, struct objnode  *onode, struct eventnode  *enod
 	}
 
 	sprintf(name, "%ld", (long)enode);
-	enode->rock=(char *)malloc(strlen(name)+1);
+	enode->rock=strdup(name);
 	if(enode->rock) {
-	    strcpy(enode->rock, name);
 	    /* add the key sequence to the keymap */
 	    (onode->keymap)->BindToKey( enode->spec, onode->keype, 
 			(long)enode->rock);

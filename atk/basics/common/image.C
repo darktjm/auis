@@ -303,8 +303,7 @@ image::image( )
     this->lastModified = (this)->GetModified();
     if(!(saveformat = environ::GetProfile("imagesaveformat")))
 	saveformat = "gif";
-    this->saveformatstring = (char *) malloc(strlen(saveformat) + 1);
-    strcpy(this->saveformatstring, saveformat);
+    this->saveformatstring = strdup(saveformat);
     THROWONFAILURE((TRUE));
 }
 
@@ -408,8 +407,7 @@ image::GetImageData(FILE  *file)
     else {
 	if(this->saveformatstring)
 	    free(this->saveformatstring);
-	this->saveformatstring = (char *) malloc(strlen(format) + 1);
-	strcpy(this->saveformatstring, format);
+	this->saveformatstring = strdup(format);
     }
 
     /* open temp files */
@@ -2416,7 +2414,7 @@ image::SetSaveFormatString( const char  *format )
     if(format && *format != (char) 0) {
 	const char *src;
 	char *dest;
-	this->saveformatstring = (char *) malloc(strlen(format) + 1);
+	this->saveformatstring = strdup(format);
 	for( src = format, dest = this->saveformatstring; *src ;)
 	    *dest++ = tolower(*src++);
 	*dest = (char)0;

@@ -550,8 +550,7 @@ boolean be1be2::Convert(class text  *text)
 
             /* Put it in the style index-to-name map */
 
-            BE1map[BE1mapIndex] = (char *)malloc(1 + strlen(stylename));
-            strcpy(BE1map[BE1mapIndex], stylename);
+            BE1map[BE1mapIndex] = strdup(stylename);
 
             /* Now fill in the state vector change list */
 
@@ -577,8 +576,7 @@ boolean be1be2::Convert(class text  *text)
                         i++;
                     }
                     parmbuffer[i] = '\0';
-                    tp = (char *)malloc(1 + strlen(parmbuffer));
-                    strcpy(tp, parmbuffer);
+                    tp = strdup(parmbuffer);
                     opparm = (long) tp;
                 } else {
                     int tval;

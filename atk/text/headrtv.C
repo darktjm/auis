@@ -303,13 +303,11 @@ static void InstallHeaderVariables()
 	    return;
 	}
 
-	p=(char *)malloc(strlen(headervars)+1);
+	p=strdup(headervars);
 	if(!p) return;
-	strcpy((char *)p,headervars);
     } else {
-	p = (char *)malloc(1);
+	p = strdup("");
 	if (!p) return;
-	p[0] = '\0';
     }
     hvars=(const char **)malloc(sizeof(char *)*(DEFAULTHEADERVARS+count));
     if(!hvars) return;

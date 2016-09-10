@@ -228,11 +228,7 @@ void text::SetBaseTemplateName(const char  *name)
 {
     if(this->templateName != NULL) free(this->templateName);
     if(name==NULL) this->templateName=NULL;
-    else {
-	this->templateName=(char *)malloc(strlen(name)+1);
-	if(this->templateName==NULL) return;
-	strcpy(this->templateName, name);
-    }
+    else this->templateName=strdup(name);
 }
 
 
@@ -263,8 +259,7 @@ void text::SetAttributes(struct attributes  *attributes)
         if (strcmp(attributes->key, "template") == 0) {
             if (this->templateName != NULL)
                 free(this->templateName);
-            this->templateName = (char *) malloc(strlen(attributes->value.string) + 1);
-            strcpy(this->templateName, attributes->value.string);
+            this->templateName = strdup(attributes->value.string);
             (this)->ReadTemplate( this->templateName, ((this)->GetLength() == 0)); 
 	}
 	else if (strcmp(attributes->key, "datastream") == 0) {
@@ -2231,7 +2226,7 @@ char *
 WriteStyle(class environment  *env, char  *outp , int  IsOpen, char  *outbuf)
 {
     const char *name = env->data.style->name;
-    char *temp, *s, *comma, *dum, negation[50];
+    char *temp, *s, *p, *comma, *dum, negation[50];
     int i, IsReal=1, len;
 
     for (i=0; TranslateStyleFrom[i] != NULL; ++i) {
@@ -2242,9 +2237,7 @@ WriteStyle(class environment  *env, char  *outp , int  IsOpen, char  *outbuf)
 	    break;
 	}
     }
-    if((s = (char *) malloc(strlen(name) + 1))) {
-	strcpy(s, name);
-
+    if((s = p = strdup(name))) {
 	while (s) {
 	    comma = (char *) strchr(s, ',');
 	    if (comma) *comma = (char)0;
@@ -2268,7 +2261,7 @@ WriteStyle(class environment  *env, char  *outp , int  IsOpen, char  *outbuf)
 		s = ++comma;
 	    } else s = NULL;
 	}
-	free(s);
+	free(p);
     }
     return(outp);
 }
@@ -2276,8 +2269,7 @@ WriteStyle(class environment  *env, char  *outp , int  IsOpen, char  *outbuf)
 static void PushLevel(char  *s, int  pos , int  len , int  IsReal)
 {
     struct stk *tmp = (struct stk *) malloc(sizeof(struct stk));
-    char *cp = (char *)malloc(1+strlen(s));
-    strcpy(cp, s);
+    char *cp = strdup(s);
     tmp->item = cp;
     tmp->IsReal = IsReal;
     tmp->pos = pos;

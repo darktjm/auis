@@ -1384,8 +1384,7 @@ static char *PrintLump(void *rock, class style **styptr)
     }
 
     tx = dobj->GetSafeText();
-    res = (char *)malloc(strlen(tx)+1);
-    strcpy(res, tx);
+    res = strdup(tx);
     return res;
 }
 

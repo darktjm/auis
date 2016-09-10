@@ -102,8 +102,7 @@ void attlist::MakeFromString(const char *str)
 
     if (!str) return;
 
-    copy = (char *) malloc (strlen(str) + 1);
-    strcpy(copy, str);
+    copy = strdup(str);
 
     name = end = copy;
     while (*name) {

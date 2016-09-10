@@ -5,7 +5,7 @@
 
 \begindata{link,538429352}
 Datastream version: 3
-$ANDREWDIR/doc/atk/chart/ChartPG.doc
+$ANDREWDIR/doc/PROGRAMMER/ChartPG.doc
 0
 0
 \begindata{link,538429352}
@@ -22,7 +22,7 @@ white
 
 \begindata{link,538435176}
 Datastream version: 3
-$ANDREWDIR/doc/atk/eq/eq.doc
+$ANDREWDIR/doc/PROGRAMMER/eq.doc
 0
 0
 \begindata{link,538435176}
@@ -39,7 +39,7 @@ and printing
 
 \begindata{link,538435624}
 Datastream version: 3
-$ANDREWDIR/doc/atk/eq/eqv.doc
+$ANDREWDIR/doc/PROGRAMMER/eqv.doc
 0
 0
 \begindata{link,538435624}
@@ -57,7 +57,7 @@ equation inset
 
 \begindata{link,539333928}
 Datastream version: 3
-$ANDREWDIR/doc/atk/fad/fad.doc
+$ANDREWDIR/doc/PROGRAMMER/fad.doc
 0
 0
 \begindata{link,539333928}
@@ -75,7 +75,7 @@ which creates and views simple animation
 
 \begindata{link,539342584}
 Datastream version: 3
-$ANDREWDIR/doc/atk/layout.doc
+$ANDREWDIR/doc/PROGRAMMER/layout.doc
 0
 0
 \begindata{link,539342584}
@@ -93,7 +93,7 @@ layoutview
 
 \begindata{link,539342984}
 Datastream version: 3
-$ANDREWDIR/doc/atk/linkinset/Link.d
+$ANDREWDIR/doc/PROGRAMMER/Link.d
 0
 0
 \begindata{link,539342984}
@@ -110,7 +110,7 @@ white
 
 \begindata{link,539343480}
 Datastream version: 3
-$ANDREWDIR/doc/atk/org/OrgPG.doc
+$ANDREWDIR/doc/PROGRAMMER/OrgPG.doc
 0
 0
 \begindata{link,539343480}
@@ -128,7 +128,7 @@ links to other org examples
 
 \begindata{link,539345416}
 Datastream version: 3
-$ANDREWDIR/doc/atk/raster/raster.doc
+$ANDREWDIR/doc/PROGRAMMER/raster.doc
 0
 0
 \begindata{link,539345416}
@@ -146,7 +146,7 @@ raster
 
 \begindata{link,539345864}
 Datastream version: 3
-$ANDREWDIR/doc/atk/basics/image.doc
+$ANDREWDIR/doc/PROGRAMMER/image.doc
 0
 0
 \begindata{link,539345864}
@@ -165,7 +165,7 @@ internal image class structure
 
 \begindata{link,539346440}
 Datastream version: 3
-$ANDREWDIR/doc/atk/basics/imagev.doc
+$ANDREWDIR/doc/PROGRAMMER/imagev.doc
 0
 0
 \begindata{link,539346440}
@@ -187,7 +187,7 @@ panning/scrolling
 
 \begindata{link,539346840}
 Datastream version: 3
-$ANDREWDIR/doc/atk/table/spread.doc
+$ANDREWDIR/doc/PROGRAMMER/spread.doc
 0
 0
 \begindata{link,539346840}
@@ -205,7 +205,7 @@ spread
 
 \begindata{link,539347352}
 Datastream version: 3
-$ANDREWDIR/doc/atk/table.doc
+$ANDREWDIR/doc/PROGRAMMER/table.doc
 0
 0
 \begindata{link,539347352}

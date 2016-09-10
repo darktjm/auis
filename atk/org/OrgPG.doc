@@ -680,7 +680,7 @@ Other examples include: \
 
 \begindata{link,539692296}
 Datastream version: 3
-$ANDREWDIR/doc/atk/org/example1.org
+$ANDREWDIR/doc/PROGRAMMER/example1.org
 0
 0
 \begindata{link,539692296}
@@ -696,7 +696,7 @@ white
 
 \begindata{link,539814312}
 Datastream version: 3
-$ANDREWDIR/doc/atk/org/example2.org
+$ANDREWDIR/doc/PROGRAMMER/example2.org
 0
 0
 \begindata{link,539814312}
@@ -712,7 +712,7 @@ white
 
 \begindata{link,539814920}
 Datastream version: 3
-$ANDREWDIR/doc/atk/org/example3.org
+$ANDREWDIR/doc/PROGRAMMER/example3.org
 0
 0
 \begindata{link,539814920}

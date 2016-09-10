@@ -710,8 +710,7 @@ void prefval::SetChoices(int  nchoices, char  **choices, struct prefval_value  *
     this->clistsize=nchoices;
 
     for(i=0;i<nchoices;i++) {
-	this->choices[i]=(char *)malloc(strlen(choices[i])+1);
-	if(this->choices[i]) strcpy(this->choices[i], choices[i]);
+	this->choices[i]=strdup(choices[i]);
 	(this)->CopyValue( this->cvalues+i, tvalues+i);
     }
     (this)->SetModified();
@@ -722,8 +721,7 @@ void prefval::SetChoice(int  which, char  *choice, struct prefval_value  *tvalue
     if(!EnsureChoiceListSize(this, which)) return;
     
     if(choice) {
-	this->choices[which]=(char *)malloc(strlen(choice)+1);
-	if(this->choices[which]) strcpy(this->choices[which], choice);
+	this->choices[which]=strdup(choice);
     } else this->choices[which]=NULL;
     
     (this)->CopyValue( this->cvalues+which, tvalue);
@@ -846,7 +844,6 @@ static char *GlomStrings(char  *s , char  *t)
     char *r;
 
     if ((r = (char *)malloc(strlen(s)+strlen(t)+1))) {
-	*r = '\0';
 	strcpy(r,s);
 	free(s);
 	strcat(r,t);

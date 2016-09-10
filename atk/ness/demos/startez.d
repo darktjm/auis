@@ -47,11 +47,21 @@ extend "Button" on mouse "any"
 
 	if mouseaction = mouseleftup then
 
-		andy := system("echo $$ANDREWDIR");
+		andy := system("andrewdirs andrewdir");
+
+		if first(andy) /= "/" then 
+
+			andy := system("echo $$ANDREWDIR");
+
+		end if;
 
 		if first(andy) /= "/" then 
 
 			andy := "/usr/andrew";
+
+		else -- strip \\n from system() result
+
+			andy := extent(andy, start(last(andy)));
 
 		end if;
 
@@ -61,7 +71,7 @@ extend "Button" on mouse "any"
 
 		system(" ez " ~ andy 
 
-			~ "/lib/ness/demos/Birth.db "
+			~ "/doc/AtkTour/Birth "
 
 			~ " </dev/null  >/dev/null 2>&1 &");
 

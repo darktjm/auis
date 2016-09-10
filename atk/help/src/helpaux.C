@@ -192,26 +192,23 @@ help::help()
     i = 0;
     if((tmp = environ::GetConfiguration(SETUP_TUTORIALDIR))) {
 	if((colon = strrchr(tmp,':')) == NULL) {
-	    help_tutorialDirs[i] = (char*) malloc(strlen(tmp) + 1);
-	    strcpy(help_tutorialDirs[i],tmp);
+	    help_tutorialDirs[i] = strdup(tmp);
 	}
 	else {
 	    while(colon && (colon != '\0')) {
-		help_tutorialDirs[i] = (char*) malloc(strlen(tmp) + 1);
+		help_tutorialDirs[i] = (char*) malloc((int)(colon - tmp) + 1);
 		memcpy(help_tutorialDirs[i],tmp,(int)(colon - tmp));
 		help_tutorialDirs[i][(int)(colon - tmp)] = 0;
 		tmp = colon + 1;
 		colon = strrchr(tmp,':');
 		i++;
 	    }
-	    help_tutorialDirs[i] = (char*) malloc(strlen(tmp) + 1);
-	    strcpy(help_tutorialDirs[i],tmp);
+	    help_tutorialDirs[i] = strdup(tmp);
 	}
     }
     else {
 	tmp = environ::AndrewDir(DEFAULT_TUTORIALDIR);
-	help_tutorialDirs[i] = (char*) malloc(strlen(tmp) + 1);
-	strcpy(help_tutorialDirs[i],tmp);
+	help_tutorialDirs[i] = strdup(tmp);
     }
 
     im::SetProcessCursor((class cursor *) NULL);

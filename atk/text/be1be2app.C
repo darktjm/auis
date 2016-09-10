@@ -58,10 +58,8 @@ boolean be1be2app::ParseArgs(int  argc, const char  **argv)
     if ((this)->application::ParseArgs( argc, argv) == FALSE)
         return FALSE;
 
-    for (fileCount = 0, i = 1; i < argc; i++) {
-        fileList[fileCount] = (char *)malloc(strlen(argv[i]) + 1);
-        strcpy(fileList[fileCount++], argv[i]);
-    }
+    for (fileCount = 0, i = 1; i < argc; i++)
+        fileList[fileCount++] = strdup(argv[i]);
 
     return TRUE;
 }

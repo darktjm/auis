@@ -850,8 +850,7 @@ void view::SetPrintOption(struct view_printopt *vopt, long newval)
 	    short gotit = dobj->Get(vopt->name, &A_printoption, &oldval);
 	    if (gotit && oldval)
 		free((char *)oldval);
-	    str = (char *)malloc(1+strlen((char *)newval));
-	    strcpy(str, (char *)newval);
+	    str = strdup((char *)newval);
 	    dobj->Put(vopt->name, A_printoption, (long)str);
 	}
 	else

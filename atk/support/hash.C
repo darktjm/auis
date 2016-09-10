@@ -91,8 +91,7 @@ void hash::Store(const char  *key,const char  *value)
     int bucket = (*this->hashfunc)(key);
     struct egg *egg = (struct egg *)malloc(sizeof(struct egg));
 
-    egg->key = (char *)malloc(strlen(key)+1);
-    strcpy(egg->key,key);
+    egg->key = strdup(key);
     egg->value = value;
 
     if (this->buckets[bucket] == NULL)

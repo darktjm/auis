@@ -599,7 +599,7 @@ Other Adew documents include: \
 	\
 \begindata{link,540376984}
 Datastream version: 3
-$ANDREWDIR/doc/atk/adew/RefMan.doc
+$ANDREWDIR/doc/PROGRAMMER/AdewReference.doc
 0
 0
 \begindata{link,540376984}
@@ -616,7 +616,7 @@ white
 	\
 \begindata{link,540214056}
 Datastream version: 3
-$ANDREWDIR/doc/atk/adew/Tutorial.doc
+$ANDREWDIR/doc/PROGRAMMER/AdewTutorial.doc
 0
 0
 \begindata{link,540214056}

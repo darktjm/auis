@@ -639,8 +639,7 @@ webcom::Cancel(const char  *buf){
 		self->status |= WEBCOM_LoadFailed;
 		if(self->file) unlink(self->file);
 		if(self->errfile) unlink(self->errfile);
-		self->context = (char *)malloc(strlen(buf) + 1);
-		strcpy(self->context, buf);
+		self->context = strdup(buf);
 	}
 	message::DisplayString(NULL, 0, buf);
 	im::ForceUpdate();

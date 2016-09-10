@@ -740,8 +740,7 @@ void SetConsoleLib()
     libnum = 0;
     BasicLib = LocalLib = UserLib = -1;
     tmpbuf = environ::AndrewDir("/lib/consoles");
-    libpaths[libnum] = (char *) malloc(strlen(tmpbuf) + 1);
-    strcpy(libpaths[libnum], tmpbuf);
+    libpaths[libnum] = strdup(tmpbuf);
     errno = ENOTDIR;
     if (stat(libpaths[libnum], &statBuf) == 0 && (statBuf.st_mode & S_IFMT) == S_IFDIR) {
 	BasicLib = libnum;
@@ -756,8 +755,7 @@ void SetConsoleLib()
 #else
     tmpbuf = environ::LocalDir("/lib/consoles");
 #endif
-    libpaths[libnum] = (char *) malloc(strlen(tmpbuf) + 1);
-    strcpy(libpaths[libnum], tmpbuf);
+    libpaths[libnum] = strdup(tmpbuf);
     errno = ENOTDIR;
     if (stat(libpaths[libnum], &statBuf) == 0 && (statBuf.st_mode & S_IFMT) == S_IFDIR) {
 	LocalLib = libnum;
@@ -771,8 +769,7 @@ void SetConsoleLib()
 	if (libnum >= MAXLIBS) {
 	    arrgh(("Console: Cannot have more than %d CONSOLELIB paths.  Ignoring ones starting with %s.\n", MAXLIBS - 2, tmp));
 	}
-	libpaths[libnum] = (char *) malloc(strlen(tmp) + 1);
-	strcpy(libpaths[libnum], tmp);
+	libpaths[libnum] = strdup(tmp);
 	errno = ENOTDIR;
 	if (stat(libpaths[libnum], &statBuf) == 0 && (statBuf.st_mode & S_IFMT) == S_IFDIR) {
 	    ++libnum;
@@ -917,13 +914,12 @@ static char *FindConsoleInPaths(char  *theTypeInPtr)
 		free(theName);
 		theName = NULL;
 	    }
-	    theName = (char *)malloc(strlen(theTypeInPtr) + 1);
+	    theName = strdup(theTypeInPtr);
 	    if (theName == NULL) {
 		fprintf(stderr, "\nFATAL ERROR: couldn't allocate memory in %s!\n", RealProgramName);
 		fflush(stderr);
 		return(NULL);
 	    }
-	    strcpy(theName, theTypeInPtr);
 	}
 	openStatus = FALSE;
 	if(hasPath == FALSE) {
@@ -1222,8 +1218,7 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 	    case FLAG_STATUSSERVER:
 		/* for Vopcon to choose which server machine to use */
 		TokenBuf = GetNextToken(self, FALSE, pfd, &lineno, TRUE);
-		StatusServer = (char *) malloc(1 + strlen(TokenBuf));
-		strcpy(StatusServer, TokenBuf);
+		StatusServer = strdup(TokenBuf);
 		break;
 	    case FLAG_NEWINSTRUMENT:
 		if (!InstrumentFound){
@@ -1437,8 +1432,7 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 	    case FLAG_LEFTLABEL:
 	    case FLAG_BOTTOMLABEL:
 		TokenBuf = GetNextToken(self, FALSE, pfd, &lineno, TRUE);
-		thisdisp->label = (char *) malloc(1 + strlen(TokenBuf));
-		strcpy(thisdisp->label, TokenBuf);
+		thisdisp->label = strdup(TokenBuf);
 		switch (findex) {
 		    case FLAG_RIGHTLABEL:
 			thisdisp->IsLabelling = RIGHT_LABEL;
@@ -1475,8 +1469,7 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 		break;
 	    case FLAG_LABELFONT:
 		TokenBuf = GetNextToken(self, FALSE, pfd, &lineno, TRUE);
-		thisdisp->NameOfLabelFont = (char *) malloc(1 + strlen(TokenBuf));
-		strcpy(thisdisp->NameOfLabelFont, TokenBuf);
+		thisdisp->NameOfLabelFont = strdup(TokenBuf);
 		if (!IsStartup) {
 		    thisdisp->Labelfont = SetupFont(thisdisp->NameOfLabelFont);
 		}
@@ -1484,8 +1477,7 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 	    case FLAG_ICONFONT:
 	    case FLAG_TEXTFONT:
 		TokenBuf = GetNextToken(self, TRUE, pfd, &lineno, TRUE);
-		thisdisp->NameOfTextFont = (char *) malloc(1 + strlen(TokenBuf));
-		strcpy(thisdisp->NameOfTextFont, TokenBuf);
+		thisdisp->NameOfTextFont = strdup(TokenBuf);
 		if (!IsStartup) {
 		    thisdisp->Textfont = SetupFont(thisdisp->NameOfTextFont);
 		}
@@ -1495,8 +1487,7 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 		/* Falls through */
 	    case FLAG_TEXT:
 		TokenBuf = GetNextToken(self, FALSE, pfd, &lineno, TRUE);
-		thisdisp->disptext = (char *) malloc(1 + strlen(TokenBuf));
-		strcpy(thisdisp->disptext, TokenBuf);
+		thisdisp->disptext = strdup(TokenBuf);
 		thisdisp->IsTexting = TRUE;
 		thisdisp->ParseDisplayText = NeedsParsed(thisdisp->disptext);
 		break;
@@ -1573,8 +1564,7 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 		break;
 	    case FLAG_INITSTRING:
 		TokenBuf = GetNextToken(self, FALSE, pfd, &lineno, TRUE);
-		thisdisp->WhatToDisplay->RawText = (char *) malloc(1 + strlen(TokenBuf));
-		strcpy(thisdisp->WhatToDisplay->RawText, TokenBuf);
+		thisdisp->WhatToDisplay->RawText = strdup(TokenBuf);
 		break;
 	    case FLAG_SCALEFACTOR:
 		ScaleFactor = atoi(GetNextToken(self, TRUE, pfd, &lineno, TRUE));
@@ -1623,8 +1613,7 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 		break;
 	    case FLAG_LEFTCLICKSTRING:
 		TokenBuf = GetNextToken(self, FALSE, pfd, &lineno, TRUE);
-		thisdisp->ClickStringLeft = (char *) malloc(1 + strlen(TokenBuf));
-		strcpy(thisdisp->ClickStringLeft, TokenBuf);
+		thisdisp->ClickStringLeft = strdup(TokenBuf);
 		break;
 	    case FLAG_EXTERNALNAME:
 		if (++ExternalsInUse >= NUMEXTERNALS) {
@@ -1638,10 +1627,9 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 		    break;
 		}
 		TokenBuf = GetNextToken(self, FALSE, pfd, &lineno, TRUE);
-		thisdisp->WhatToDisplay->ExtName = (char *) malloc(1 + strlen(TokenBuf));
+		thisdisp->WhatToDisplay->ExtName = strdup(TokenBuf);
 		thisdisp->WhatToDisplay->RawText = (char *) malloc(256);
 		memset(thisdisp->WhatToDisplay->RawText, 0, 256);
-		strcpy((char *)thisdisp->WhatToDisplay->ExtName, TokenBuf);
 		break;
 	    case FLAG_HIGHLIGHTBOXMIN:
 		thisdisp->FlashStyle = 1;
@@ -1705,11 +1693,9 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 		}
 		IntrnlVars[i].InUse = TRUE;
 		TokenBuf = GetNextToken(self, FALSE, pfd, &lineno, TRUE);
-		IntrnlVars[i].turnoff = (char *) malloc(1 + strlen(TokenBuf));
-		strcpy(IntrnlVars[i].turnoff, TokenBuf);
+		IntrnlVars[i].turnoff = strdup(TokenBuf);
 		TokenBuf = GetNextToken(self, FALSE, pfd, &lineno, TRUE);
-		IntrnlVars[i].turnon = (char *) malloc(1 + strlen(TokenBuf));
-		strcpy(IntrnlVars[i].turnon, TokenBuf);
+		IntrnlVars[i].turnon = strdup(TokenBuf);
 		break;
 	    case FLAG_ALARMRECTANGLE:
 		BogusInt = atoi(GetNextToken(self, TRUE, pfd, &lineno, TRUE));

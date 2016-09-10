@@ -590,9 +590,7 @@ void style::SetName(const char  *name)
     if (this->name != NULL)
         free(this->name);
     if (name == NULL) name=unknownstyle;
-    this->name = (char *)malloc(strlen(name) + 1);
-    if(this->name==NULL) return;
-    strcpy(this->name, name);
+    this->name = strdup(name);
 }
 
 const char *style::GetName()
@@ -606,11 +604,8 @@ void style::SetMenuName(const char  *menuName)
         free(this->menuName);
     if (menuName == NULL)
         this->menuName = NULL;
-    else {
-	this->menuName = (char *)malloc(strlen(menuName)+ 1);
-	if(this->menuName==NULL) return;
-        strcpy(this->menuName, menuName);
-    }
+    else
+	this->menuName = strdup(menuName);
 }
 
 const char *style::GetMenuName()
@@ -762,8 +757,7 @@ void style::SetFontFamily(const char  *NewFont)
     if (NewFont == NULL || NewFont[0] == '\0')
         this->FontFamily = NULL;
     else 
-        this->FontFamily = (char *)malloc(strlen(NewFont) + 1),
-        strcpy(this->FontFamily, NewFont);
+        this->FontFamily = strdup(NewFont);
 }
 
 void style::GetFontFamily(char  *FontName, int  bufsize)
@@ -817,8 +811,7 @@ void style::SetCounterName(char  *NewName)
     if (NewName == NULL || NewName[0] == '\0')
 	this->CounterName = NULL;
     else
-        this->CounterName = (char *)malloc(strlen(NewName) + 1),
-	strcpy(this->CounterName, NewName);
+        this->CounterName = strdup(NewName);
 }
 
 void style::GetCounterName(char  *RetrievedName)
@@ -837,8 +830,7 @@ void style::SetCounterParent(char  *NewParent)
     if (NewParent == NULL || NewParent[0] == '\0')
 	this->CounterParent = NULL;
     else
-	this->CounterParent = (char *)malloc(strlen(NewParent) + 1),
-	strcpy(this->CounterParent, NewParent);
+	this->CounterParent = strdup(NewParent);
 }
 
 void style::GetCounterParent(char  *RetrievedParent)
@@ -870,8 +862,7 @@ void style::AddCounterStyle(char  *NewStyle)
           realloc((char *) this->CounterStyles,
             (this->NumCounterStyles + 1) * sizeof(char *));
 
-    this->CounterStyles[this->NumCounterStyles] = (char *) malloc(strlen(NewStyle) + 1);
-    strcpy(this->CounterStyles[this->NumCounterStyles], NewStyle);
+    this->CounterStyles[this->NumCounterStyles] = strdup(NewStyle);
 
     this->NumCounterStyles++;
 }
@@ -884,8 +875,7 @@ void style::GetCounterStyles(long  *RefNumStyles, char  ***RefStyleStrings)
     *RefStyleStrings = (char **) malloc(this->NumCounterStyles * sizeof(char *));
 
     for (i = 0;i < this->NumCounterStyles; i++) {
-        (*RefStyleStrings)[i] = (char *)    malloc(strlen(this->CounterStyles[i]) + 1);
-        strcpy((*RefStyleStrings)[i], this->CounterStyles[i]);
+        (*RefStyleStrings)[i] = strdup(this->CounterStyles[i]);
     }
 }
 
@@ -957,10 +947,8 @@ void style::AddAttribute(const char  * NewAttributeName, const char  * NewAttrib
     char * tmpValue;
 
     tmpAtom = atom::Intern(NewAttributeName);
-    if(NewAttributeValue) {
-        tmpValue = (char *) malloc(strlen(NewAttributeValue)+1);
-	(void) strcpy(tmpValue,NewAttributeValue);
-    }
+    if(NewAttributeValue)
+        tmpValue = strdup(NewAttributeValue);
     else tmpValue = NULL;
     if (!this->AdditionalAttributes) this->AdditionalAttributes = new Namespace;
     if(this->AdditionalAttributes)    (this->AdditionalAttributes)->SetValue(tmpAtom, (long) tmpValue);

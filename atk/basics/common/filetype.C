@@ -376,8 +376,8 @@ char *filetype::Lookup(FILE  *file, const char  *filename, long  *objectID, stru
 		    /* use asmtext with static attribute to recognize comment delimiters, for ksh, csh, bsh, etc */
 		    /* note that this will be freed, since it's newAttributes */
 		    static struct attributes shellcommentdelimatt;
-		    shellcommentdelimatt.key= strdup("bang-comment");
-		    shellcommentdelimatt.value.string= strdup("#");
+		    shellcommentdelimatt.key= "bang-comment";
+		    shellcommentdelimatt.value.string= "#";
 		    shellcommentdelimatt.next= newAttributes;
 		    newAttributes= &shellcommentdelimatt;
 		    targetObject= "asmtext";

@@ -686,9 +686,8 @@ char		*oldDash = this->lineDashPattern;
 
     this->lineDashType = dashType;
     this->lineDashOffset = dashOffset;
-    if ( dashPattern && ( this->lineDashPattern = (char *)malloc( strlen( dashPattern ) + 1 )))
+    if ( dashPattern && ( this->lineDashPattern = strdup( dashPattern ) ))
     {
-      strcpy( this->lineDashPattern, dashPattern );
       if ( oldDash ) free( oldDash );
     }
     else this->lineDashPattern = oldDash;
@@ -993,19 +992,15 @@ void graphic::SetDefaultColors(const char  *foreground, const char  *background)
 
     if (foregroundColorName != NULL)
 	free(foregroundColorName);
-    if (foreground != NULL && *foreground && ((tempString = (char *) malloc(strlen(foreground) + 1)) != NULL)) {
-	strcpy(tempString, foreground);
+    if (foreground != NULL && *foreground && (tempString = strdup(foreground)) != NULL)
 	foregroundColorName = tempString;
-    }
     else
 	foregroundColorName = NULL;
 
     if (backgroundColorName != NULL)
 	free(backgroundColorName);
-    if (background != NULL && *background && ((tempString = (char *) malloc(strlen(background) + 1)) != NULL)) {
-	strcpy(tempString, background);
+    if (background != NULL && *background && (tempString = strdup(background)) != NULL)
 	backgroundColorName = tempString;
-    }
     else
 	backgroundColorName = NULL;
     if(foregroundColorName) fg=foregroundColorName;
@@ -1224,6 +1219,10 @@ graphic::~graphic()
     if (this->visualRegion) {
 	delete this->visualRegion;
     }
+    if (this->lineDashPattern) {
+	free(this->lineDashPattern);
+    }
+
 }
 
 void

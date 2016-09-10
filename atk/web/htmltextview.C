@@ -619,8 +619,7 @@ void setTargetLink(frame *frame, long param)
 	message::DisplayString(frame, 50, "Can only sourcelink to buffers on files.");
 	return;
     } 
-    name= (char *)malloc(strlen(fn) +1);
-    strcpy(name, fn);
+    name= strdup(fn);
     printf("the file name for the target of the link = [%s]\n", name);
 
     src_hto= (htmltext*)(sourcemark)->GetObject();
@@ -793,8 +792,7 @@ void addTarget(htmltextview *self, long rock)
 	    strcpy(newname, oldname);
 	    if (message::AskForString(self, 0, "New name for anchor target: ", newname, newname, sizeof(newname)) < 0)
 		return; /* cancelled */
-	    nameAtt->value= (char *)malloc(strlen(newname) +1);
-	    strcpy((char *)nameAtt->value, newname);
+	    nameAtt->value= strdup(newname);
 	}
     } else {
 	/* get name, wrap anchortarget style, set name of anchortarget style */

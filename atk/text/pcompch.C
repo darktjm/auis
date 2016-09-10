@@ -256,12 +256,11 @@ static boolean scancomposites(char  *ptr,long  line)
 	    return FALSE;
 	}
 	if(troffmagic[code]) free(troffmagic[code]);
-	troffmagic[code]=(char *)malloc(strlen(ptr2)+1);
+	troffmagic[code]=strdup(ptr2);
 	if(!troffmagic[code]) {
 	    scanerr("Memory error in line %ld\n",*ptr,new_c,line);
 	    return FALSE;
 	}
-	strcpy(troffmagic[code],ptr2);
 	ptr2=end;
     } else if (*ptr2=='!') ptr2++;
     
@@ -278,12 +277,11 @@ static boolean scancomposites(char  *ptr,long  line)
 	    if(*end) *end++='\0';
 	    if(*ptr2) {
 		if(asciimagic[code]) free(asciimagic[code]);
-		asciimagic[code]=(char *)malloc(strlen(ptr2)+1);
+		asciimagic[code]=strdup(ptr2);
 		if(!asciimagic[code]) {
 		    scanerr("Memory error in line %ld\n",*ptr,new_c,line);
 		    return FALSE;
 		}
-		strcpy(asciimagic[code],ptr2);
 	    }
 	} else if(*ptr2=='!') ptr2++;
     }

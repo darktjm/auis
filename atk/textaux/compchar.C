@@ -153,8 +153,6 @@ static void SelfInsertCmd(class textview *tv, char code,char  *style)
     char *tmpl;
     textview_SelfInsertCmd(tv,code);
     if(style[0]) {
-	char *tstyle=(char *)malloc(strlen(style)+1);
-	if(!tstyle) return;
 	if(!s) {
 	    message::DisplayString(tv,0,"No styles available.\n");
 	    return;
@@ -162,7 +160,8 @@ static void SelfInsertCmd(class textview *tv, char code,char  *style)
 	pos2=(tv)->GetDotPosition();
 	if(pos2<=pos) return;
 	
-	strcpy(tstyle,style);
+	char *tstyle=strdup(style);
+	if(!tstyle) return;
 	tmpl=strchr(tstyle,',');
 	if(tmpl) {
 	    tmpl2=tmpl+1;

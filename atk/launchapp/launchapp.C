@@ -278,9 +278,7 @@ launchapp::launchapp()
 	  malloc(this->numbuttons * (sizeof (class text *)))))
 	THROWONFAILURE( (FALSE));
     if(tourFile) {
-	if((this->TourFile = (char *) malloc(strlen(tourFile) + 1)) != NULL)
-	    strcpy(this->TourFile, tourFile);
-	else {
+	if((this->TourFile = strdup(tourFile)) == NULL) {
 	    printf("Can't allocate enough memory; exitting.");
 	    THROWONFAILURE((FALSE));
 	}

@@ -781,10 +781,7 @@ tree::SetNodeCaption( tree_type_node          node, const char			  *caption )
     if ( NodeCaption(node) )   free( NodeCaption(node) );
     NodeCaption(node) = NULL;
     if ( caption  &&  *caption )
-      {
-      NodeCaption(node) = (char *) malloc( strlen( caption ) + 1 );
-      strcpy( NodeCaption(node), caption );
-      }
+      NodeCaption(node) = strdup( caption );
     }
   OUT(tree_SetNodeCaption);
   return  TRUE;
@@ -799,10 +796,7 @@ tree::SetNodeTitle( tree_type_node         node, const char			 *title )
     if ( NodeTitle(node) )   free( NodeTitle(node) );
     NodeTitle(node) = NULL;
     if ( title  &&  *title )
-      {
-      NodeTitle(node) = (char *) malloc( strlen( title ) + 1 );
-      strcpy( NodeTitle(node), title );
-      }
+      NodeTitle(node) = strdup( title );
     }
   OUT(tree_SetNodeTitle);
   return  TRUE;

@@ -102,6 +102,8 @@ class celview: public view {
 
 
       virtual ~celview();
+      // needed during deletion of arbiterview <sigh>
+      virtual void DeleteCell(class celview *cv) { }
 
       celview();
       static int ResourceListToString(char *str,struct resourceList *rl)  ;

@@ -276,8 +276,7 @@ apt::SetAreaSpreadTitle( const char			     **titles, long			       count , long	
     TitlesAnchor(area) = (char **)calloc( count + 1, sizeof(char *) );
     while ( i < count  &&  *titles )
       { DEBUGst(Title,*titles);
-      Titles(area,i) = (char *) malloc( strlen( *titles ) + 1 );
-      strcpy( Titles(area,i), *titles );
+      Titles(area,i) = strdup( *titles );
       i++;
       titles++;
       }
@@ -295,8 +294,7 @@ apt::SetAreaTitleFontName( const char			      *font_name, long			       area )
   if ( font_name  &&  *font_name )
     {
     DEBUGst(TitleFontName,font_name);
-    TitleFontName(area) = (char *) malloc( strlen( font_name ) + 1 );
-    strcpy( TitleFontName(area), font_name );
+    TitleFontName(area) = strdup( font_name );
     }
   OUT(apt_SetAreaTitleFontName);
   }
@@ -329,8 +327,7 @@ apt::SetAreaSpreadLegend( const char			     **legends, long			       count , lon
     while ( i < count  &&  *legends )
       {
       DEBUGst(Legend,*legends);
-      Legends(area,i) = (char *) malloc( strlen( *legends ) + 1 );
-      strcpy( Legends(area,i), *legends );
+      Legends(area,i) = strdup( *legends );
       i++;
       legends++;
       }
@@ -348,8 +345,7 @@ apt::SetAreaLegendFontName( const char			      *font_name, long			       area )
   if ( font_name  &&  *font_name )
     {
     DEBUGst(LegendFontName,font_name);
-    LegendFontName(area) = (char *) malloc( strlen( font_name ) + 1 );
-    strcpy( LegendFontName(area), font_name );
+    LegendFontName(area) = strdup( font_name );
     }
   OUT(apt_SetAreaLegendFontName);
   }
@@ -451,8 +447,7 @@ long Assign_String( class apt		      *self, const char			      *prefix , const c
     DEBUG(Satisfied);
     status = 1;
     if ( *target )  free( *target );
-    *target = (char *) malloc( strlen( source ) + 1 );
-    strcpy( *target, source );
+    *target = strdup( source );
     }
   OUT(Assign_String);
   return status;
@@ -556,14 +551,12 @@ void Parse_Field( class apt		      *self, const char			      *line, struct apt_f
   DEBUGst(Given-Line,line);
   while ( *line  &&  *line != ' ' )  *t++ = *line++;
   *t = 0;
-  field->name = (char *) malloc( strlen( work ) + 1 );
-  strcpy( (char *)field->name, work );
+  field->name = strdup( work );
   while ( *line  &&  *line == ' ' )  line++;
   t = work;
   while ( *line  &&  *line != '\n' )  *t++ = *line++;
   *t = 0;
-  field->content = (char *) malloc( strlen( work ) + 1 );
-  strcpy( (char *)field->content, work );
+  field->content = strdup( work );
   OUT(Parse_Field);
   }
 

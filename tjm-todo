@@ -1,3 +1,11 @@
+- valgrind access hit with dragon.zip (incomplete raster bits?)
+- valgrind access hit with letter.tpl (scrollbar too small for buttons?)
+- clock.help: hit at spread.C:296
+- letter.tpl/date.n: says dateGotten not bool, even though it is
+  also, recompiling after error crashes
+- need play module to either work or ignore
+- pagedown eventually stops working (e.g. 2rtf) (and doesn't move cursor?)
+- questionaire.msg ice cream question doesn't do anything
 - org/treev: unfolded expands size, but doesn't shift tree to right
   if needed (i.e., left is severely cut off).  Also doesn't shift tree down
   for horizontal arrangement, but for some reason it allows moving scrollbar
@@ -54,6 +62,7 @@
 - fix UniquiID() and friends:
   - try not to renumber everything every modification; messes up svn diff
   - try to limit to 32 bits to retain compatibility with older systems
+- pass unknown keys up the view hierarchy (e.g. pgup within inset often fails)
 
 Long-term:
   - more image::WriteNative overrides (at least 1 full-color lossless)
@@ -67,3 +76,6 @@ Long-term:
   - make entire beast literate
   - undo
   - freedesktop.org integration
+  - look at removed mail-related stuff to see if anything useful got deleted
+    (e.g. ez2ascii claims descendence from messages)
+  - look at auis-6.3.1 to see if anything useful got dropped in 8.0

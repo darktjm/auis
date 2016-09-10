@@ -1145,8 +1145,7 @@ copy_taginfo(struct htmltaginfo *info)  {
 	newinfo->thestyle = info->thestyle;
 	newinfo->startpos = info->startpos;
 	newinfo->anchorcode = info->anchorcode;
-	newinfo->tagid = (char *) malloc (strlen(info->tagid)+1);
-	strcpy(newinfo->tagid, info->tagid);
+	newinfo->tagid = strdup(info->tagid);
 	newinfo->atts = (info->atts)->CopyAttributes();
 	return newinfo;
 }
@@ -4017,9 +4016,7 @@ image *htmltext::GetImage(const char *file, attlist *atts) {
                         type= "jpeg";
                     }
                 }
-                defaultImageType = (char *)
-                  malloc (strlen(type)+1);
-                strcpy(defaultImageType,type);
+                defaultImageType = strdup(type);
             } // end initing defaultimage
             if (defaultImage &&
                 (dat= (image*)ATK::NewObject(

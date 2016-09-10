@@ -64,8 +64,7 @@ class viewref *viewref::Create(const char  *viewType, class dataobject  *dataObj
     class viewref *newvr;
     
     if ((newvr = new viewref))  {
-	if ((newvr->viewType = (char *) malloc(strlen(viewType)+1)))  {
-	    strcpy(newvr->viewType, viewType);
+	if ((newvr->viewType = strdup(viewType))) {
 	    newvr->dataObject = dataObject;
 	    (dataObject)->Reference();
 	    return newvr;

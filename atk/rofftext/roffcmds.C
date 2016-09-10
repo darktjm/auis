@@ -895,9 +895,8 @@ void Tag_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[
     /* fix up references later */
     /* argv[1] is "G", because the command is actually .TAG */
     if (argc < 3) return;
-    tag = malloc(strlen(argv[2])+1);
+    tag = strdup(argv[2]);
     if (tag == NULL) return;
-    strcpy(tag, argv[2]);
     if (self->tag_count >= MAX_TAG) return;
     count = self->tag_count++;
     self->tags[count].tag = tag;
@@ -915,9 +914,8 @@ void Tag_ref(class rofftext  *self,Trickle  t, char  *sym)
     char taglabel[100];
     /* tag being referred to -- put in a button */
     /* need to do SetPos to put in destination */
-    tag = malloc(strlen(sym)+1);
+    tag = strdup(sym);
     if (tag == NULL) return;
-    strcpy(tag, sym);
     if (self->tag_count >= MAX_TAG) return;
     if (self->filename != NULL) strcpy(filename, self->filename);
     else if (ATK::IsTypeByName((self)->GetTypeName(), "mmtext")) {

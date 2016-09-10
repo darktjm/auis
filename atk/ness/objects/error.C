@@ -215,7 +215,7 @@ HasLoc(class nesssym  *s, long  loc) {
 	class nessmark *resmark = 
 		ness_Globals[nesssym_NGetINode(s, funcnode)->
 				SysGlobOffset].e.s.v;
-	return (loc >= (resmark)->GetPos()  
+	return (resmark &&  loc >= (resmark)->GetPos()  
 			&&  loc < (resmark)->GetEndPos());
 }
 

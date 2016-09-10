@@ -60,26 +60,18 @@ void mbuttonv::LookupParameters()
      {
   const char * fontname;
   long fontsize;
-  struct resourceList parameters[8];
   char *plc;
   class buttonV *bv = (class buttonV *) this;
-
-  parameters[0].name = AL_label;
-  parameters[0].type = A_string;
-  parameters[1].name = AL_bodyfont;
-  parameters[1].type = A_string;
-  parameters[2].name = AL_bodyfont_size;
-  parameters[2].type = A_long;
-  parameters[3].name = AL_placement;
-  parameters[3].type = A_string;
-  parameters[4].name = AL_forecolor;
-  parameters[4].type = A_string;
-  parameters[5].name = AL_backcolor;
-  parameters[5].type = A_string;
-  parameters[6].name = AL_style;
-  parameters[6].type = A_string;
-  parameters[7].name = NULL;
-  parameters[7].type = NULL;
+  static struct resourceList parameters[] = {
+	{ AL_label, A_string }, /* 0 */
+	{ AL_bodyfont, A_string }, /* 1 */
+	{ AL_bodyfont_size, A_long }, /* 2 */
+	{ AL_placement, A_string }, /* 3 */
+	{ AL_forecolor, A_string }, /* 4 */
+	{ AL_backcolor, A_string }, /* 5 */
+	{ AL_style, A_string }, /* 6 */
+	{ NULL, NULL }
+  };
 
   (this)->GetManyParameters( parameters, NULL, NULL);
 

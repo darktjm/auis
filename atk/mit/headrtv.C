@@ -262,9 +262,8 @@ static void InstallHeaderVariables()
 	    return;
 	}
 
-	p=(char *)malloc(strlen(headervars)+1);
+	p=strdup(headervars);
 	if(!p) return;
-	strcpy(p,headervars);
     } else {
 	p = (char *)malloc(1);
 	if (!p) return;

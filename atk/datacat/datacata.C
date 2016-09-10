@@ -508,8 +508,7 @@ void datacata::SetOutputFile(const char  *filename /* NULL for stdout */)
     if (!filename)
 	this->ofilename = NULL;
     else {
-	this->ofilename = (char *)malloc(strlen(filename)+1);
-	strcpy(this->ofilename, filename);
+	this->ofilename = strdup(filename);
     }
 }
 

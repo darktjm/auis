@@ -158,8 +158,7 @@ struct fontnamedesc *fontdesc::GetFontNameDesc(char  *fontName)
     tp->next = allFontNames;
     allFontNames = tp;
     tp->fontList = NULL;
-    tp->name = (char *) malloc(strlen(fontName) + 1);
-    strcpy(tp->name, fontName);
+    tp->name = strdup(fontName);
     return tp;
 }
 

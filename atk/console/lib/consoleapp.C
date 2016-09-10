@@ -137,8 +137,7 @@ boolean consoleapp::ParseArgs(int  argc,const char  **argv)
 		fprintf(stderr,"%s: only one console at a time\n", (this)->GetName());
 		return FALSE;
 	    }
-	    this->consoleName = (char *)malloc(strlen(*argv)+1);
-	    strcpy(this->consoleName, *argv);
+	    this->consoleName = strdup(*argv);
 	}
 
     return TRUE;

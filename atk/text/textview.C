@@ -2690,9 +2690,13 @@ long textview::Locate(long  x, long  y, class view  **foundView)
     long pos;
     long by, bx, bxm;
 
-    if(this->aLines > end && this->lines[end].containsView) end++; 
     if (foundView)
         *foundView = NULL;
+
+    if(!end)
+	return textLength;
+
+    if(this->aLines > end && this->lines[end].containsView) end++; 
 
     if (y < this->lines[0].y)   /* Tamper with clicks in top margin */
         y = this->lines[0].y;

@@ -179,7 +179,7 @@ tabs::Add(long  pos, enum style_TabAlignment  op)
     /* Find out what tab is before the destination spot */
     PrevTab = FindPrevTab(this, pos);
     /* If there is already a tab at pos, then let's just overwrite it */
-    if (PrevTab >= 0 && this->Positions[PrevTab] == pos)
+    if (PrevTab >= 0 && PrevTab < num && this->Positions[PrevTab] == pos)
 	/* There is one at this spot */ {
 	if (this->Types[PrevTab] == (long) op) {
 	    /* But no change... */

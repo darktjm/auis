@@ -108,7 +108,7 @@ if you want to write scripts.}
   \indexi{ \
 \begindata{link,538545928}
 Datastream version: 3
-$ANDREWDIR/doc/atk/ness/nesstut.doc
+$ANDREWDIR/doc/PROGRAMMER/nesstut.doc
 0
 0
 \begindata{link,538545928}
@@ -130,7 +130,7 @@ description of the demonstration programs in $ANDREWDIR/lib/ness/demos.}
  \
 \begindata{link,538546792}
 Datastream version: 3
-$ANDREWDIR/doc/atk/ness/nessauth.doc
+$ANDREWDIR/doc/PROGRAMMER/nessauth.doc
 0
 0
 \begindata{link,538546792}
@@ -152,7 +152,7 @@ applications, or run stand-alone programs.
  \
 \begindata{link,538547736}
 Datastream version: 3
-$ANDREWDIR/doc/atk/ness/nessman.doc
+$ANDREWDIR/doc/PROGRAMMER/nessman.doc
 0
 0
 \begindata{link,538547736}
@@ -174,7 +174,7 @@ programs, statements, expressions, and so on.
  \
 \begindata{link,538548440}
 Datastream version: 3
-$ANDREWDIR/doc/atk/ness/nessfunc.doc
+$ANDREWDIR/doc/PROGRAMMER/nessfunc.doc
 0
 0
 \begindata{link,538548440}
@@ -196,7 +196,7 @@ including those in $ANDREWDIR/lib/ness/.
  \
 \begindata{link,538549336}
 Datastream version: 3
-$ANDREWDIR/doc/atk/ness/nesshack.doc
+$ANDREWDIR/doc/PROGRAMMER/nesshack.doc
 0
 0
 \begindata{link,538549336}
@@ -220,7 +220,7 @@ use of them;  using Ness objects directly from other applications;
 }\
 \begindata{link,538549992}
 Datastream version: 3
-$ANDREWDIR/doc/atk/ness/rexf.doc
+$ANDREWDIR/doc/PROGRAMMER/rexf.doc
 0
 0
 \begindata{link,538549992}
