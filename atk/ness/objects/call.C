@@ -1570,11 +1570,10 @@ callCheckLib(char *fun, struct funcnode  **fnode) {
 	if (libsym == NULL) 
 		return NotRead;		/* no such library file */
 	libnode = nesssym_NGetINode(libsym, libnode);
-	static ness *n=new ness;
-	static long id=im::GetWriteID();
-	n->compilationid=id;
-	
-	if (libnode->useid != n->compilationid) {
+
+	ness *n = curComp ? curComp->ness : NULL;
+
+	if (n && libnode->useid != n->compilationid) {
 		/* add it to the list of libraries used by ness now being compiled*/
 		libnode->useid = n->compilationid;
 
@@ -2085,9 +2084,16 @@ ness_ProcHookFunc(ATK *, const avalueflex &aux,
 				found = TRUE;
 				break;
 			}
-		if ( ! found) 
+		if ( ! found) {
 			// append to list of libs used by current ness
 			libuseList = libusenode_Create(libnode, libuseList);
+			// initialize it.  It would be better to defer
+			// this until a function from the library is
+			// called, but I don't feel like implementing that
+			// at this time
+			// Actually, this may crash, for all I know - tjm
+			callInitSubTree(libnode->ness);
+		}
 	}
 
 	if (libnode->status != OK) 
