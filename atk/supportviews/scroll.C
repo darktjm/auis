@@ -1658,7 +1658,8 @@ static boolean CheckEndZones(class scroll  *self, enum view_MouseAction  action,
     if(action!=view_LeftDown && action!=view_RightDown) return FALSE;
 
     for(i=0;i<scroll_SIDES;i++)
-	if((self->desired.location & (1<<i))) {
+	if((self->desired.location & (1<<i)) &&
+	   self->desired.bar[Type[i]].endzones) {
 	    int dir=1;
 	    struct rectangle *r = NULL;
 	    if(PTINRECT(&self->topbutton[i], x, y)) {

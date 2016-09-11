@@ -290,10 +290,10 @@ void spread::ComputeSizes() {
 
             // now account for any width & height provided by joined cells.
             int i;
-            for (i = r + 1; r < t->NumberOfRows() && t->IsJoinedAbove( i, c); i++) {
+            for (i = r + 1; i < t->NumberOfRows() && t->IsJoinedAbove( i, c); i++) {
                 dHeight -= rowInfo[i].computedHeight;
             }
-            for (i = c + 1; c < t->NumberOfColumns() && t->IsJoinedToLeft( i, c); i++) {
+            for (i = c + 1; i < t->NumberOfColumns() && t->IsJoinedToLeft( i, c); i++) {
                 dWidth -= colInfo[i].computedWidth;
             }
 
