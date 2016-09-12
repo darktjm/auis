@@ -34,10 +34,8 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #include "gram.h"
 #include "machine.h"
 #include "new.h"
+#include "proto.h"
 
-
-extern char   **tags;		/* reader.c */
-extern int      verboseflag;	/* getargs.c */
 static int      statisticsflag;	/* XXXXXXX */
 
 #ifndef TRUE
@@ -61,14 +59,16 @@ static int      nuseful_productions, nuseless_productions,
                 nuseful_nonterminals, nuseless_nonterminals;
 
 
-static void useless_nonterminals();
-static void inaccessable_symbols();
-static void reduce_grammar_tables();
-static void print_results();
-static void print_notices();
-void dump_grammar();
-
-extern void fatals ();
+static bool bits_equal(BSet L, BSet R, int n);
+static int nbits(unsigned i);
+static int bits_size(BSet S, int n);
+static bool useful_production(int i, BSet N);
+static void useless_nonterminals(void);
+static void inaccessable_symbols(void);
+static void reduce_grammar_tables(void);
+static void print_results(void);
+/* static void dump_grammar(void); */ /* unused */
+static void print_notices(void);
 
 
 bool
@@ -192,7 +192,7 @@ static void
 useless_nonterminals (void)
 {
   BSet Np, Ns;
-  int  i, n;
+  int  i;
 
   /*
    * N is set as built.  Np is set being built this iteration. P is set
@@ -219,7 +219,6 @@ useless_nonterminals (void)
    * in this set will appear in the final grammar.
    */
 
-  n = 0;
   while (1)
     {
       for (i = WORDSIZE(nvars) - 1; i >= 0; i--)
@@ -249,7 +248,7 @@ static void
 inaccessable_symbols (void)
 {
   BSet  Vp, Vs, Pp;
-  int   i, n;
+  int   i;
   short t;
   rule  r;
 
@@ -287,7 +286,6 @@ inaccessable_symbols (void)
 
   SETBIT(V, start_symbol);
 
-  n = 0;
   while (1)
     {
       for (i = WORDSIZE(nsyms) - 1; i >= 0; i--)
@@ -523,6 +521,7 @@ print_results (void)
     fprintf(foutput, "\n\n");
 }
 
+#if 0 /* use commented out above */
 void 
 dump_grammar (void)
 {
@@ -558,13 +557,11 @@ dump_grammar (void)
     }
   fprintf(foutput, "\n\n");
 }
-
+#endif
 
 static void 
 print_notices (void)
 {
-  extern int fixed_outfiles;
-
   if (fixed_outfiles && nuseless_productions)
     fprintf(stderr, "%d rules never reduced\n", nuseless_productions);
 

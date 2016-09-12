@@ -119,6 +119,8 @@ zipopath::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
 	  }
 	}
       break;
+    default:
+      break;
     }
   OUT(zipopath::Build_Object);
   return  status;
@@ -575,7 +577,7 @@ boolean			status = FALSE;
 boolean
 zipopath::Contains( zip_type_figure		 figure, zip_type_pane			 pane, zip_type_pixel			 x, zip_type_pixel			 y )
 {
-long				x1, y1, x2, y2, i, j = 0, count = 0;
+long				i, j = 0, count = 0;
 boolean			status = FALSE;
 zip_type_point_pair		p1, p2, p3, p4;
 

@@ -253,4 +253,4 @@ struct text_statevector {
 };
 
 
-struct text_statevector State;
+extern struct text_statevector State;

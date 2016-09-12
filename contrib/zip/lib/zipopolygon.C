@@ -144,7 +144,7 @@ zipopolygon::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   a
 	}
       break;
     case view_LeftUp:
-      if ( figure = CurrentFigure )
+      if ( ( figure = CurrentFigure ) )
 	{
 	DEBUGdt(Radius,figure_x_points(0));
 	DEBUGdt(Sides,figure_y_points(0));
@@ -174,6 +174,8 @@ zipopolygon::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   a
 	figure_y_points(0) = sides;
 	(this->view_object)->Draw_Figure(  figure, pane );
 	}
+      break;
+    default:
       break;
     }
   OUT(zipopolygon::Build_Object);
@@ -218,7 +220,7 @@ long Draw( class zipopolygon  *self, zip_type_figure   figure, zip_type_pane   p
   long				  status = zip_ok, i,
 					  sides, radius;
   unsigned char			pattern = 0, shade,
-                                          allocated = false, width;
+                                          allocated = false;
   short			  even = true;
   struct point				  point_vector[9];
   struct point			 *points = point_vector;

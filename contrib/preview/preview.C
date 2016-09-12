@@ -665,7 +665,6 @@ static void normalize(char  *s)
 
 static void DoPrintCmd(class preview  *self ,int  page)	
 {
-   int processid;
    Preview_Line PrintCommandFormat;
    Preview_Line PrintCommand;
    const char *p;
@@ -766,7 +765,6 @@ static void DoPrintCmd(class preview  *self ,int  page)
 
    /* To avoid dieing when the parent quits; reset process
 	group id; set it to processid to be unique */
-   processid = getpid();
    NEWPGRP();
    /* form the print command */
    close(0);

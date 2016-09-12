@@ -67,7 +67,6 @@ struct bdffont_fontchar bdffont_ReadCharDefn;
 ATKdefineRegistry(bdffont, dataobject, NULL);
 static unsigned char  bdflex_ComposeByte(char  c1 , char  c2);
 void bdffont_EnsureDefns(class bdffont  *self, long  num);
-static void parseerror(class parse  *p, int  s, char  *m);
 static void WriteCharacter(FILE  *file, struct bdffont_fontchar  *defn);
 static long bdffont_AppendProperty(char  **props, long  length, const char  *p, long  psize, long  v);
 static long FilterPropertiesOut(class bdffont  *self, char  **props);
@@ -156,8 +155,6 @@ void bdffont_EnsureDefns(class bdffont  *self, long  num)
 
 bdffont::bdffont()
 {
-    int i;
-
     this->version = (char *)bdffont_FONT_VERSION; /* never freed */
     this->comments = (char *)bdffont_COMMENT; /* never freed */
     this->fontname = NULL;
@@ -349,7 +346,7 @@ static const char * const keys[]= {
 };
 
 
-enum keyvals FindKey(const char *key)
+static enum keyvals FindKey(const char *key)
 {
     int i=0;
     const char * const *p=keys;
@@ -613,7 +610,6 @@ static long ReadIt(class bdffont *self, FILE *file) {
 		break;
 	    case ENDFONT:
 		return 0;
-		break;
 	    case DEFAULT_CHAR:
 		AddProperty(self, &propsize,  key, value);
 		self->defaultchar=atol(value);
@@ -666,7 +662,7 @@ static long ReadIt(class bdffont *self, FILE *file) {
 		break;
 	    case WEIGHT_NAME:
 		{
-		int i;
+		unsigned int i;
 		char *p=Tokenize(&value);
 		char *q;
 		if(*p=='"') p++;
@@ -686,10 +682,10 @@ static long ReadIt(class bdffont *self, FILE *file) {
 		continue;
 	}
     }
+    return 0; /* tjm - FIXME: should return a short file error or something */
 }
 long bdffont::Read(FILE  *file, long  id)
 {
-    int severity;
     long read_status;
     this->activedefns = 0;
     this->defaultchar = -1;
@@ -1014,7 +1010,7 @@ static long FilterPropertiesOut(class bdffont  *self, char  **props)
 	const char *facename;
 
 	count++;
-	facename = (self->fontface < sizeof(FaceNames)
+	facename = (self->fontface < (int)sizeof(FaceNames)
 			? FaceNames[self->fontface]
 			: FaceNames[0]);
 	*props = (char *)

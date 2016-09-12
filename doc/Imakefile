@@ -4,6 +4,7 @@ SUBDIRS = mkbrowse atkprogramming
 
 README: README.ez
 	ExecuteFromBASEDIR(ez2ascii README.ez > README)
+CleanTarget(README)
 
 InstallFile(README, $(INSTMANFLAGS), ${DESTDIR})
 InstallDocs(README.ez, ${DESTDIR}/doc/ADMINISTRATOR)
@@ -18,7 +19,7 @@ prefs.def: ${DESTDIR}/lib/prs
 	$(RM) prefs.def
 	ExecuteFromBASEDIR(datacat ${DESTDIR}/lib/prs/${STARPR} > prefs.def )
 InstallFile(prefs.def, $(INSTMANFLAGS), ${DESTDIR}/lib)
-
+CleanTarget(prefs.def)
 #endif
 
 
@@ -31,5 +32,5 @@ FunctionIndex:
 	mv ,FunctionIndex FunctionIndex
 
 InstallFile(FunctionIndex,${INSTMANFLAGS},${DESTDIR}/doc/PROGRAMMER)
-
+CleanTarget(FunctionIndex)
 #endif /* FUNCTION_INDEX_ENV */

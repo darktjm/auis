@@ -69,6 +69,8 @@ END-SPECIFICATION  ************************************************************/
 #include "zipobject.H"
 #include "zipiff00.h"
 
+#define PaneViewObj (self->view_object)
+
 static void Clear_Pane_Mark_Areas( class zipedit		  *self, zip_type_pane		   pane );
 static void Draw_Pane_Coordinate_Marks( class zipedit		  *self, zip_type_pane		   pane );
 static void Draw_Pane_Coordinate_Ticks( class zipedit		  *self, zip_type_pane		   pane );
@@ -115,13 +117,12 @@ zipedit::Draw_Pane_Coordinates( zip_type_pane		   pane )
 
 long zipedit::Draw_Pane_Grid( zip_type_pane	   pane )
 {
-    long			  i, j, k, point_spacing;
-    float		  X, Y, GX, GY, point_delta_SMSD;
-    float		    grid_factor, delta;
-    long                   X_int, Y_int, r, c;
+    long			  i, j, k;
+    float		  X, Y, point_delta_SMSD;
+    float		    delta;
+    long                   X_int, Y_int;
     float		  SM, SD, point_delta,L, T, R, B;
     float			  x_center, y_center;
-    long                          n;
     class fontdesc		 *current_font = (this->view_object)->GetFont( );
    char				  big_dot = 'C';
    class graphic	 *black = (this->view_object)->BlackPattern( );;
@@ -133,7 +134,6 @@ long zipedit::Draw_Pane_Grid( zip_type_pane	   pane )
 	if (pane->zip_pane_edit->zip_pane_edit_coordinate_grid == 0)
 	    pane->zip_pane_edit->zip_pane_edit_coordinate_grid = 1;
     Compute_Pane_Coordinate_Deltas( self, pane );
-    point_spacing = pane->zip_pane_edit->zip_pane_edit_mark_point_spacing;
     point_delta = pane->zip_pane_edit->zip_pane_edit_mark_point_delta;
     (this->view_object)->Set_Clip_Area(  pane,
 	 PaneLeft + pane->zip_pane_border_thickness + 2,
@@ -158,12 +158,11 @@ long zipedit::Draw_Pane_Grid( zip_type_pane	   pane )
     x_center = pane->zip_pane_x_origin + pane->zip_pane_x_offset;
     y_center = pane->zip_pane_y_origin - pane->zip_pane_y_offset;
     (this->view_object)->SetTransferMode(  graphic_BLACK );
-	grid_factor = pane->zip_pane_edit->zip_pane_edit_coordinate_grid; 
-
 	/* Do the center dot */
 	(this->view_object)->MoveTo(  (long)x_center, (long)y_center );
 	(this->view_object)->DrawText(  &big_dot, 1, 0 );
 
+/*    long                          n; */
 	/*==	if (x_center > y_center)
 
 	    n = (long)(x_center / delta ) + 1;

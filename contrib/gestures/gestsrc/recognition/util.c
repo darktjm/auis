@@ -48,8 +48,8 @@ the full agreement.
  * Function used by allocation macro
  */
 
-char *
-recog_myalloc(int nitems, int itemsize, char *typename)
+void *
+recog_myalloc(int nitems, int itemsize, const char *typename)
 {
 	unsigned int bytes = nitems * itemsize;
 	char *p = malloc(bytes);
@@ -64,7 +64,7 @@ recog_myalloc(int nitems, int itemsize, char *typename)
  */
 
 char *
-recog_scopy(char *s)
+recog_scopy(const char *s)
 {
 	char *p = allocate(strlen(s) + 1, char);
 	(void) strcpy(p, s);

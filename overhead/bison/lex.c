@@ -36,30 +36,8 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #include "symtab.h"
 #include "lex.h"
 #include "new.h"
-
-/* flags set by % directives */
-extern int definesflag;    	/* for -d */
-extern int toknumflag;   	/* for -k */
-extern int noparserflag;	/* for -n */
-extern int fixed_outfiles;  	/* for -y */
-extern int nolinesflag;    	/* for -l */
-extern int rawtoknumflag;	/* for -r */
-extern int verboseflag;	/* for -v */
-extern int debugflag;  		/* for -t */
-extern char *spec_name_prefix; 	/* for -p */
-extern char *spec_file_prefix;	/* for -b */
-/*spec_outfile is declared in files.h  	/* for -o */
-
-extern int lineno;
-extern int translations;
-
-int parse_percent_token();
-
-/* functions from main.c */
-extern char *printable_version();
-extern void fatal();
-extern void warni();
-extern void warn();
+#include "gram.h"
+#include "proto.h"
 
 /* Buffer for storing the current token.  */
 char *token_buffer;
@@ -73,6 +51,9 @@ int numval;
 static int unlexed;		/* these two describe a token to be reread */
 static bucket *unlexed_symval;	/* by the next call to lex */
 
+static char *grow_token_buffer(char *p);
+static int safegetc(FILE *f);
+static int literalchar(char **pp, int *pcode, char term);
 
 void
 init_lex(void)
@@ -163,7 +144,7 @@ skip_white_space(void)
 }
 
 /* do a getc, but give error message if EOF encountered */
-int
+static int
 safegetc(FILE *f)
 {
   int c = getc(f);
@@ -178,7 +159,7 @@ safegetc(FILE *f)
    return 1 unless the character is an unescaped `term' or \n
 	report error for \n
 */
-int
+static int
 literalchar(char **pp, int *pcode, char term)
 {
   int c;
@@ -255,7 +236,7 @@ literalchar(char **pp, int *pcode, char term)
 	}
       else
 	{
-		warni ("unknown escape sequence: `\\' followed by `%s'", 
+		warns ("unknown escape sequence: `\\' followed by `%s'", 
 				printable_version(c));
 		code = '?';
 	}
@@ -490,8 +471,8 @@ lex(void)
 	% directives.  A setflag value causes the named flag to be
 	set.  A retval action returns the code.
 */
-struct percent_table_struct {
-	char *name;
+static struct percent_table_struct {
+	const char *name;
 	void *setflag; 
 	int retval;
 } percent_table[] = {
@@ -533,8 +514,8 @@ struct percent_table_struct {
 /* These would be acceptable, but they do not affect processing */
 	{"verbose", &verboseflag, NOOP},	/* -v */
 	{"debug", &debugflag, NOOP},	/* -t */
-/*	{"help", <print usage stmt>, NOOP},	/* -h */
-/*	{"version", <print version number> ,  NOOP},	/* -V */
+/*	{"help", <print usage stmt>, NOOP}, */	/* -h */
+/*	{"version", <print version number> ,  NOOP}, */	/* -V */
 #endif
 
 	{NULL, NULL, ILLEGAL}

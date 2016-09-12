@@ -307,7 +307,7 @@ void zipedit::Align_Pane( zip_type_pane		   pane )
         pane->zip_pane_y_offset = y_offset;
         zipview_Set_Pane_Scale( this->view_object, pane, scale );
         stream->zip_stream_pseudo_x_offset = pseudo_x;
-        stream->zip_stream_pseudo_y_offset = pseudo_y;
+        stream->zip_stream_pseudo_y_offset = pseudo_y; */
 /*=== investigate args
         zip_Adjust_Image_Point_Suite( Data, stream->zip_stream_image_anchor, NULL,
                                       pseudo_x, pseudo_y, true );
@@ -370,7 +370,7 @@ zipedit_Handle_Shade_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane
     transparent = (self->data_object)->Figure(  "ZIP-SHADE-TRANSPARENT" );
     (self->view_object)->Clear_Figure(   selector, pane );
     (self->view_object)->Hide_Figure(   transparent, pane );
-    if ( ptr = (char *) index( figure->zip_figure_name, '=' ) )
+    if ( ( ptr = (char *) index( figure->zip_figure_name, '=' ) ) )
       { DEBUG(Change Shade);
       shade = atoi( ++ptr );
       DEBUGdt(Shade,shade);
@@ -397,7 +397,7 @@ zipedit_Handle_Shade_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane
 	}
       }
     figure = NULL;
-    while ( figure = zipedit_Next_Selected_Figure( self, EditingPane(pane), figure ) )
+    while ( ( figure = zipedit_Next_Selected_Figure( self, EditingPane(pane), figure ) ) )
       if ( Change_Shade( self, EditingPane(pane), figure, shade ) )
 	changed = true;
     if ( changed )
@@ -405,7 +405,7 @@ zipedit_Handle_Shade_Palette_Hit( class zipedit		  *self, zip_type_pane		   pane
       Show_Enclosure( self, EditingPane(pane) );
       (self->view_object)->Draw_Pane(  EditingPane(pane) );
       figure = NULL;
-      while ( figure = zipedit_Next_Selected_Figure( self, EditingPane(pane), figure ))
+      while ( ( figure = zipedit_Next_Selected_Figure( self, EditingPane(pane), figure )) )
         (self)->Highlight_Figure_Points(  figure, EditingPane(pane));
       Show_Enclosure( self, EditingPane(pane) );
       }
@@ -468,11 +468,12 @@ Figure_Palette_LBDT( class zipedit		  *self, zip_type_pane		   icon_pane, int			
       (*self->keyboard_processor)( KeyboardAnchor, pane, 0, view_NoMouseEvent, 0, 0, 0 );
     zipedit_Cancel_Enclosure( self, pane );
     zipedit_Hide_Selection_Menu( self );
-    if ( CurrentFigure )
+    if ( CurrentFigure ) {
       if ( SelectionLevel >= ImageSelection )
       (self)->Normalize_Image_Points(  CurrentImage, pane );
       else
       (self)->Normalize_Figure_Points(  CurrentFigure, pane );
+    }
     SelectionLevel = 0;
     (self)->Set_Pane_Highlight_Icon(  pane, zip_figure_point_icon );
 
@@ -984,7 +985,7 @@ zipedit_Handle_Font_Family_Selection( class zipedit	      *self, zip_type_pane	 
     {
     (self->view_object)->Clear_Pane(  pane );
     figure = (self->data_object)->Figure(  "font_catalog_family" );
-    if ( FontFamily = ! FontFamily )
+    if ( ( FontFamily = ! FontFamily ) )
 	{
 	(self->data_object)->Set_Figure_Text(  figure, "Sans" );
 	}
@@ -1166,7 +1167,7 @@ void Set_Sample( class zipedit	      *self, zip_type_pane	       pane, boolean		
   EditingPane(pane)->zip_pane_current_mode = figure->zip_figure_mode;
   (self->view_object)->Display_Pane(  pane );
   figure = NULL;
-  while ( figure = zipedit_Next_Selected_Figure( self, EditingPane(pane), figure ) )
+  while ( ( figure = zipedit_Next_Selected_Figure( self, EditingPane(pane), figure ) ) )
     if ( Change_Figure_Font_And_Mode( self, EditingPane(pane), figure,
 		EditingPane(pane)->zip_pane_current_font, FontHorizontal | FontVertical ) )
       changed = true;

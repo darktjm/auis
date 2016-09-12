@@ -25,8 +25,10 @@
 
 #include <stdio.h>
 #include <ctype.h>
-
-char *memchr();
+#include <string.h>
+#include <stdlib.h>
+#define IN_INPUT_C 1
+#include "input.h"
 
 #define UNGETC_BUF_SIZE 1024
 
@@ -39,9 +41,9 @@ struct file_entry {
     File_entry *next;
 };
 
-File_entry *head;
+static File_entry *head;
 
-static File_entry *get_file_entry();
+static File_entry *get_file_entry(FILE *fp);
 
 int input_getc(FILE *fp)
 {
@@ -160,7 +162,7 @@ void input_skip_whitespace(FILE *fp)
 	input_ungetc(c, fp);
 }
 
-void input_match(char *s, FILE *fp)
+void input_match(const char *s, FILE *fp)
 {
     int c;
 
@@ -213,7 +215,7 @@ int input_read_up_to_whitespace(char *s, int n, FILE *fp)
     return 0;
 }
 
-int input_read_up_to_one_of(char *s, int n, char *markers, FILE *fp)
+int input_read_up_to_one_of(char *s, int n, const char *markers, FILE *fp)
 {
     int c;
 

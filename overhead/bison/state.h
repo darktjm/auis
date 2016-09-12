@@ -130,8 +130,28 @@ typedef
   reductions;
 
 
-
+/* LR0.c */
 extern int nstates;
+extern int final_state;
 extern core *first_state;
 extern shifts *first_shift;
 extern reductions *first_reduction;
+extern core **state_table;
+extern void generate_states(void);
+
+/* lalr.c */
+extern int tokensetsize;
+extern short *lookaheads;
+extern short *LAruleno;
+extern unsigned *LA;
+extern short *accessing_symbol;
+extern char *consistent;
+extern core **state_table;
+extern shifts **shift_table;
+extern reductions **reduction_table;
+extern short *goto_map;
+extern short *from_state;
+extern short *to_state;
+
+/* conflicts.c */
+extern errs **err_table;

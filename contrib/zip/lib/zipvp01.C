@@ -69,7 +69,9 @@ END-SPECIFICATION  ************************************************************/
 #include "zipprint.H"
 #include "zipobject.H"
 
+#undef Data
 #define	 Data			      (self->zipobject::data_object)
+#undef View
 #define	 View			      (self)
 
 

@@ -50,18 +50,11 @@
 #include <ctype.h>
 #include "scribetext.h"
 
-extern TABLE Table;
-extern FILESTACK FileStack;
-extern int offset(char *string, char character);
-extern int roffset(char *string, char character);
-void AbsorbSpace();
-char *makelower();
-
 char *makelower(char *instruction)
 {
   int i;
   
-  for(i=0; i<strlen(instruction); i++)
+  for(i=0; i<(int)strlen(instruction); i++)
     {
       if(isupper(instruction[i]))
 	instruction[i] = tolower(instruction[i]);
@@ -71,6 +64,7 @@ char *makelower(char *instruction)
 }
   
 
+#if 0 /* unused */
 void TempPrintList(void)
 {
   TABLE tmp=Table;
@@ -85,6 +79,7 @@ void TempPrintList(void)
       tmp = tmp-> next;
     }
 }
+#endif
 
 
 int offset(char *string, char character)

@@ -80,26 +80,59 @@
  *  $
 */
 
+#include <andrewos.h>
 #include <stdio.h>
 #include <sys/file.h>
 #include <ctype.h>
+#include <util.h>
 #include "2rtf.h"
 #include "input.h"
 
-extern char *makelower();
-extern struct TableStruct *Table;
-extern struct IdStackStruct *IdStack;
-extern struct StyleStackStruct *Style;
-struct TableStruct *FindNode();
-void CloseFiles();
-long int ParseText();
-FP AssignFunc();
-char *GetInstruction();
-int RSLMargin(), RSRMargin(), RSTMargin(), RSBMargin(), RSIndent(), RSIpSpacing(), RSAbove(), RSBelow(), RSIlSpacing(), RSFontFamily(), RSFontSize(), RSFontScript(), RSTabChange(), RSFontFace(), RSJustify();
-int RNOP(), RDelete(), RError(), RBegin(), RDSVer(), REnd(), RText(), RAnnotation(), RFootnote(), RSkip(), RTitle(), RNewpage(), RTable(), RHeader(), RSize(), RFont(), RTemplate(), RIndent(), RIndex(), RStyleMain(), RScript(), RLeft(), RMajorHeading(), RHeading(), RSubHeading(), RChapter(), RSection(), RSubSection(), RParagraph(), RCaption(), RQuotation(), RDescription(), RExample(), RDisplay(), RVerbatim();
+static int RDelete(const char *command, int transform, int tofind);
+static int RNOP(const char *command, int transform, int tofind);
+/* static int RError(const char *command, int transform, int tofind); */
+static int RBegin(const char *command, int transform, int tofind);
+static int REnd(const char *command, int transform, int tofind);
+static int RDSVer(const char *command, int transform, int tofind);
+static int RText(const char *command, int transform, int tofind);
+static int RAnnotation(const char *command, int transform, int tofind);
+static int RFootnote(const char *command, int transform, int tofind);
+static int RSkip(const char *command, int transform, int tofind);
+static int RTitle(const char *command, int transform, int tofind);
+static int RNewpage(const char *command, int transform, int tofind);
+static int RHeader(const char *command, int transform, int tofind);
+static int RSize(const char *command, int transform, int tofind);
+static int RScript(const char *command, int transform, int tofind);
+static int RFont(const char *command, int transform, int tofind);
+static int RTemplate(const char *command, int transform, int tofind);
+static int RLeft(const char *command, int transform, int tofind);
+static int RIndent(const char *command, int transform, int tofind);
+static int RIndex(const char *command, int transform, int tofind);
+static int RStyleMain(const char *command, int transform, int tofind);
+static int RMajorHeading(const char *command, int transform, int tofind);
+static int RHeading(const char *command, int transform, int tofind);
+static int RSubHeading(const char *command, int transform, int tofind);
+static int RChapter(const char *command, int transform, int tofind);
+static int RSection(const char *command, int transform, int tofind);
+static int RSubSection(const char *command, int transform, int tofind);
+static int RParagraph(const char *command, int transform, int tofind);
+static int RCaption(const char *command, int transform, int tofind);
+static int RQuotation(const char *command, int transform, int tofind);
+static int RDescription(const char *command, int transform, int tofind);
+static int RExample(const char *command, int transform, int tofind);
+static int RDisplay(const char *command, int transform, int tofind);
+static int RVerbatim(const char *command, int transform, int tofind);
 
+static void RStyleConvert(char *p1, char *p2, char *p3, char *p4, struct StyleStackStruct *tmp);
+static int Delimeter(char *units, char *n);
 
-FP AssignFunc(char *rtfword)
+struct func_words
+{
+   const char *word;
+   int (*fname)(const char *command, int transform, int tofind);
+};
+
+FP AssignFunc(const char *rtfword)
 /*
  *
  *  Function that returns a pointer to the function
@@ -146,7 +179,7 @@ FP AssignFunc(char *rtfword)
   return(RNOP);
 }
 
-int RDelete(char *command, int transform, int tofind)
+static int RDelete(const char *command, int transform, int tofind)
 /*
  *
  *  Function that parses all of the text associated with COMMAND
@@ -159,7 +192,7 @@ int RDelete(char *command, int transform, int tofind)
 }
 
   
-int RNOP(char *command, int transform, int tofind)
+static int RNOP(const char *command, int transform, int tofind)
 /*
  *
  *  NOP function.
@@ -169,7 +202,8 @@ int RNOP(char *command, int transform, int tofind)
     return CONTINUE;
 }
 
-int RError(char *command, int transform, int tofind)
+#if 0 /* unused */
+static int RError(const char *command, int transform, int tofind)
 /*
  *
  *  Notification of errors.
@@ -177,9 +211,11 @@ int RError(char *command, int transform, int tofind)
  */
 {
   fprintf(ferr, "* Unknown error!\n* %s: unknown error in input file.\n", me);
+  return CONTINUE; /* presumably; was nothing - tjm */
 }
+#endif
 
-int RBegin(char *command, int transform, int tofind)
+static int RBegin(const char *command, int transform, int tofind)
 /*
  *
  *  On encountering a \begindata in the ez document, set up
@@ -228,7 +264,7 @@ int RBegin(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int REnd(char *command, int transform, int tofind)
+static int REnd(const char *command, int transform, int tofind)
 /*
  *
  *  On encountering an \enddata in the ez document, check to
@@ -269,7 +305,7 @@ int REnd(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RDSVer(char *command, int transform, int tofind)
+static int RDSVer(const char *command, int transform, int tofind)
 /*
  *
  *  Check for correct TextDSVersion.
@@ -286,7 +322,7 @@ int RDSVer(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RText(char *command, int transform, int tofind)
+static int RText(const char *command, int transform, int tofind)
 /*
  *
  *  Process text normally for a text data object.
@@ -297,7 +333,7 @@ int RText(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RAnnotation(char *command, int transform, int tofind)
+static int RAnnotation(const char *command, int transform, int tofind)
 /*
  *
  *  Process text for an annotation object by converting it
@@ -305,14 +341,12 @@ int RAnnotation(char *command, int transform, int tofind)
  *
  */
 {
-   int a, b, c;
-
    /* fscanf(fin, "%d %d %d", &a, &b, &c); */
-   a = input_number(fin);
+   /* a = */ input_number(fin);
    input_skip_whitespace(fin);
-   b = input_number(fin);
+   /* b = */ input_number(fin);
    input_skip_whitespace(fin);
-   c = input_number(fin);
+   /* c = */ input_number(fin);
 
    fputs("{\\v ", fout);
    ParseText(tofind, NORMAL, PRINTTOFILE);
@@ -320,7 +354,7 @@ int RAnnotation(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RFootnote(char *command, int transform, int tofind)
+static int RFootnote(const char *command, int transform, int tofind)
 /*
  *
  *  Process footnote data object.
@@ -334,7 +368,7 @@ int RFootnote(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RSkip(char *command, int transform, int tofind)
+static int RSkip(const char *command, int transform, int tofind)
 /*
  *
  *  Used for unknown commands, or commands that do nothing
@@ -347,7 +381,7 @@ int RSkip(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RTitle(char *command, int transform, int tofind)
+static int RTitle(const char *command, int transform, int tofind)
 /*
  *
  *  Used for the title in an annotation.  This is scripted
@@ -361,7 +395,7 @@ int RTitle(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RNewpage(char *command, int transform, int tofind)
+static int RNewpage(const char *command, int transform, int tofind)
 /*
  *
  *  Handle page break data object.
@@ -373,7 +407,7 @@ int RNewpage(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RHeader(char *command, int transform, int tofind)
+static int RHeader(const char *command, int transform, int tofind)
 /*
  *
  *  Handle Headertext data objects - ParseText() with transform
@@ -383,9 +417,8 @@ int RHeader(char *command, int transform, int tofind)
  *
  */
 {
-   char type[TMP_SIZE], ch;
+   char type[TMP_SIZE];
    int header = 0;
-   int active;
 
    /* fscanf(fin, "\nwhere:%s\n", type); */
    input_skip_whitespace(fin);
@@ -398,7 +431,7 @@ int RHeader(char *command, int transform, int tofind)
 
    /* fscanf(fin, "active:%d\n", &active); */
    input_match("active:", fin);
-   active = input_number(fin);
+   /* active = */ input_number(fin);
    input_skip_whitespace(fin);
 
    CurrLine += 3;
@@ -411,17 +444,7 @@ int RHeader(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RTable(char *command, int transform, int tofind)
-/*
- *
- *  Handle processing tables.
- *
- */
-{
-    return CONTINUE;
-}
-
-int RSize(char *command, int transform, int tofind)
+static int RSize(const char *command, int transform, int tofind)
 /*
  *
  *  Handle changes in font sizes.  Increase or decrease
@@ -447,7 +470,7 @@ int RSize(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RScript(char *command, int transform, int tofind)
+static int RScript(const char *command, int transform, int tofind)
 /*
  *
  *  Handle changes in script location.  Increase of decrease
@@ -476,7 +499,7 @@ int RScript(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RFont(char *command, int transform, int tofind)
+static int RFont(const char *command, int transform, int tofind)
 /*
  *
  *  Handle changes in fonts.  New York is the default
@@ -509,7 +532,7 @@ int RFont(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RTemplate(char *command, int transform, int tofind)
+static int RTemplate(const char *command, int transform, int tofind)
 /*
  *
  *  Currently checks if the template is default.  If
@@ -529,7 +552,7 @@ int RTemplate(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RLeft(char *command, int transform, int tofind)
+static int RLeft(const char *command, int transform, int tofind)
 /*
  *
  *  Handle changes in the left margin.
@@ -573,7 +596,7 @@ int RLeft(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RIndent(char *command, int transform, int tofind)
+static int RIndent(const char *command, int transform, int tofind)
 /*
  *
  *  Handle calls to indent by checking with the left
@@ -624,7 +647,7 @@ int RIndent(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RIndex(char *command, int transform, int tofind)
+static int RIndex(const char *command, int transform, int tofind)
 /*
  *
  *  Handle visible and invisible index entries.  For
@@ -649,7 +672,7 @@ int RIndex(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RStyleDefine(char *style_sheet)
+static int RStyleDefine(char *style_sheet)
 /*
  *
  *  Parse through the attributes of a style, and use
@@ -749,7 +772,7 @@ int RStyleDefine(char *style_sheet)
    return CONTINUE;
 }
 
-int RStyleMain(char *command, int transform, int tofind)
+static int RStyleMain(const char *command, int transform, int tofind)
 /*
  *
  *  Should only be called for the first occurence of
@@ -769,7 +792,7 @@ int RStyleMain(char *command, int transform, int tofind)
    if(done)
    {
       RDelete(command, transform, tofind);
-      return;
+      return CONTINUE; /* presumably; was nothing - tjm */
    }
    else
       done = 1;
@@ -835,7 +858,7 @@ int RStyleMain(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RStyleApply(struct StyleStackStruct *tmp)
+void RStyleApply(struct StyleStackStruct *tmp)
 /*
  *
  *  Called when a style is encountered inside the document,
@@ -1007,7 +1030,29 @@ int RStyleApply(struct StyleStackStruct *tmp)
        fprintf(fout, "\\par\\pard\\li%ld\\ri%ld ", State.CurLeftMargin, State.CurRightMargin);
 }
 
-int RStyleConvert(char *p1, char *p2, char *p3, char *p4, struct StyleStackStruct *tmp)
+static void RSLMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+static void RSRMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+static void RSTMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+static void RSBMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+static void RSIndent(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+static void RSIpSpacing(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+static void RSAbove(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+static void RSBelow(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+static void RSIlSpacing(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+static void RSFontFamily(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+static void RSFontSize(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+static void RSFontScript(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+static void RSTabChange(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+static void RSFontFace(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+static void RSJustify(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+
+struct sfunc_words
+{
+   const char *word;
+   void (*fname)(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp);
+};
+
+static void RStyleConvert(char *p1, char *p2, char *p3, char *p4, struct StyleStackStruct *tmp)
 /*
  *
  *  Call the function that handles the particular type
@@ -1015,7 +1060,7 @@ int RStyleConvert(char *p1, char *p2, char *p3, char *p4, struct StyleStackStruc
  *
  */
 {
-   static struct func_words Attribs[15] = {
+   static struct sfunc_words Attribs[15] = {
       {"LeftMargin",		RSLMargin},
       {"RightMargin",		RSRMargin},
       {"TopMargin",		RSTMargin},
@@ -1042,7 +1087,7 @@ int RStyleConvert(char *p1, char *p2, char *p3, char *p4, struct StyleStackStruc
       }
 }
 
-int Delimeter(char *units, char *n)
+static int Delimeter(char *units, char *n)
 /*
  *
  *  Convert the delimeter from whatever it is into twips
@@ -1054,7 +1099,7 @@ int Delimeter(char *units, char *n)
 {
    struct divider
    {
-       char *name;
+       const char *name;
        float div;
    };
    static struct divider types[UNITS] = {
@@ -1080,7 +1125,7 @@ int Delimeter(char *units, char *n)
    return(numdel);
 }
 
-int RSLMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
+static void RSLMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
 /*
  *
  *   ConstantMargin
@@ -1107,7 +1152,7 @@ int RSLMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *t
    }
 }
 
-int RSRMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
+static void RSRMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
 /*
  *
  *   ConstantMargin
@@ -1134,7 +1179,7 @@ int RSRMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *t
    }
 }
 
-int RSTMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
+static void RSTMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
 /*
  *
  *   ConstantMargin
@@ -1152,7 +1197,7 @@ int RSTMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *t
 
 }
 
-int RSBMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
+static void RSBMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
 /*
  *
  *   ConstantMargin
@@ -1170,7 +1215,7 @@ int RSBMargin(char *basis, char *unit, char *operand, struct StyleStackStruct *t
 
 }
 
-int RSIndent(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
+static void RSIndent(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
 /*
  *
  *   ConstantMargin
@@ -1196,7 +1241,7 @@ int RSIndent(char *basis, char *unit, char *operand, struct StyleStackStruct *tm
    }
 }
 
-int RSIpSpacing(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
+static void RSIpSpacing(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
 {
    int numdel;
 
@@ -1205,7 +1250,7 @@ int RSIpSpacing(char *basis, char *unit, char *operand, struct StyleStackStruct 
 
 }
 
-int RSAbove(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
+static void RSAbove(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
 /*
  *
  *   ConstantMargin
@@ -1222,7 +1267,7 @@ int RSAbove(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp
    sprintf(tmp->string, "%s\\sb%d ", tmp->string, numdel);
 }
 
-int RSBelow(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
+static void RSBelow(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
 /*
  *
  *   ConstantMargin
@@ -1239,7 +1284,7 @@ int RSBelow(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp
    sprintf(tmp->string, "%s\\sa%d ", tmp->string, numdel);
 }
 
-int RSIlSpacing(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
+static void RSIlSpacing(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
 /*
  *
  *   ConstantMargin
@@ -1256,7 +1301,7 @@ int RSIlSpacing(char *basis, char *unit, char *operand, struct StyleStackStruct 
    sprintf(tmp->string, "%s\\sl%d ", tmp->string, numdel);
 }
 
-int RSFontFamily(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
+static void RSFontFamily(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
 {
    static struct FontStruct type[FTSIZE] = {
        {"Andy",		    NEW_YORK},
@@ -1278,7 +1323,7 @@ int RSFontFamily(char *basis, char *unit, char *operand, struct StyleStackStruct
    }
 }
 
-int RSFontSize(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
+static void RSFontSize(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
 /*
  *
  *   PreviousFontSize
@@ -1303,7 +1348,7 @@ int RSFontSize(char *basis, char *unit, char *operand, struct StyleStackStruct *
    }
 }
 
-int RSFontScript(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
+static void RSFontScript(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
 /*
  *
  *   PreviousScriptMovement
@@ -1339,7 +1384,7 @@ int RSFontScript(char *basis, char *unit, char *operand, struct StyleStackStruct
    }
 }
 
-int RSTabChange(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
+static void RSTabChange(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
 {
    static struct style_words type[TSIZE] = {
        {"LeftAligned",		"tx"},
@@ -1365,7 +1410,7 @@ int RSTabChange(char *basis, char *unit, char *operand, struct StyleStackStruct 
    }
 }
 
-int RSFontFace(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
+static void RSFontFace(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
 {
    static struct style_words type[FSIZE] = {
        {"Plain",	"plain"},
@@ -1385,7 +1430,7 @@ int RSFontFace(char *basis, char *unit, char *operand, struct StyleStackStruct *
    }
 }
 
-int RSJustify(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
+static void RSJustify(char *basis, char *unit, char *operand, struct StyleStackStruct *tmp)
 {
    static struct style_words type[JSIZE] = {
        {"LeftJustified",		"ql"},
@@ -1407,7 +1452,7 @@ int RSJustify(char *basis, char *unit, char *operand, struct StyleStackStruct *t
    }
 }
 
-int RMajorHeading(char *command, int transform, int tofind)
+static int RMajorHeading(const char *command, int transform, int tofind)
 /*
  *
  *  Handle MajorHeading style.
@@ -1427,7 +1472,7 @@ int RMajorHeading(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RHeading(char *command, int transform, int tofind)
+static int RHeading(const char *command, int transform, int tofind)
 /*
  *
  *  Handle Heading style.
@@ -1440,7 +1485,7 @@ int RHeading(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RSubHeading(char *command, int transform, int tofind)
+static int RSubHeading(const char *command, int transform, int tofind)
 /*
  *
  *  Handle SubHeading style.
@@ -1453,7 +1498,7 @@ int RSubHeading(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RChapter(char *command, int transform, int tofind)
+static int RChapter(const char *command, int transform, int tofind)
 /*
  *
  *  Handle Chapter style.
@@ -1473,7 +1518,7 @@ int RChapter(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RSection(char *command, int transform, int tofind)
+static int RSection(const char *command, int transform, int tofind)
 /*
  *
  *  Handle Section style.
@@ -1493,7 +1538,7 @@ int RSection(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RSubSection(char *command, int transform, int tofind)
+static int RSubSection(const char *command, int transform, int tofind)
 /*
  *
  *  Handle SubSection style.
@@ -1506,7 +1551,7 @@ int RSubSection(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RParagraph(char *command, int transform, int tofind)
+static int RParagraph(const char *command, int transform, int tofind)
 /*
  *
  *  Handle Paragraph style.
@@ -1519,7 +1564,7 @@ int RParagraph(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RCaption(char *command, int transform, int tofind)
+static int RCaption(const char *command, int transform, int tofind)
 /*
  *
  *  Handle Caption style.
@@ -1532,7 +1577,7 @@ int RCaption(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RQuotation(char *command, int transform, int tofind)
+static int RQuotation(const char *command, int transform, int tofind)
 /*
  *
  *  Handle Quotation style.
@@ -1545,7 +1590,7 @@ int RQuotation(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RDescription(char *command, int transform, int tofind)
+static int RDescription(const char *command, int transform, int tofind)
 /*
  *
  *  Handle Description style.
@@ -1558,7 +1603,7 @@ int RDescription(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RExample(char *command, int transform, int tofind)
+static int RExample(const char *command, int transform, int tofind)
 /*
  *
  *  Handle Example style.
@@ -1571,7 +1616,7 @@ int RExample(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RDisplay(char *command, int transform, int tofind)
+static int RDisplay(const char *command, int transform, int tofind)
 /*
  *
  *  Handle Display style.
@@ -1584,7 +1629,7 @@ int RDisplay(char *command, int transform, int tofind)
    return CONTINUE;
 }
 
-int RVerbatim(char *command, int transform, int tofind)
+static int RVerbatim(const char *command, int transform, int tofind)
 /*
  *
  *  Handle Verbatim style.

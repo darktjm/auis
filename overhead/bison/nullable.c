@@ -26,7 +26,7 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #include "types.h"
 #include "gram.h"
 #include "new.h"
-
+#include "proto.h"
 
 char *nullable;
 

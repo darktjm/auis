@@ -3,6 +3,8 @@
 #include "refs.h"
 static int refs_TokWhitespace(void);
 #define ECHO (void)fwrite(yytext, yyleng, 1, stderr);
+#define YY_NO_UNPUT 1
+#define YY_NO_INPUT 1
 %}
 %x COMMENT
 %x STRING

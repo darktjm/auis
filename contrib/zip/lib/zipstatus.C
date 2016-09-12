@@ -481,7 +481,7 @@ zipstatus::Acknowledge_Figure_Status_Message( zip_type_figure		   figure )
 static char *
 Format_Image_Status_Message ( class zipstatus		  *self, zip_type_image		   image )
       {
-  char					  msg[1001];
+  static char				  msg[1001];
 /*===
   char				 *facility_name;
   char					  facility_msg[101];
@@ -528,7 +528,7 @@ zipstatus::Acknowledge_Image_Status_Message( zip_type_image		   image )
 static char *
 Format_Pane_Status_Message ( class zipstatus		  *self, zip_type_pane		   pane)
       {
-  char					  msg[1001];
+  static char				  msg[1001];
 /*===
   char				 *facility_name;
   char					  facility_msg[101];

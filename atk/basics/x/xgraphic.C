@@ -1140,6 +1140,8 @@ void xgraphic::FillRgn(class region  * Rgn,class graphic *Tile)
 	/* Step 4a Check for compounding update regions */
 	curBlock = xgraphic_FindUpdateBlock((this)->XDisplay(), (this)->XWindow());
 	if (curBlock->updateRegionInUse) XIntersectRegion(tmpRegion->regionData, curBlock->updateRegionInUse, tmpRegion->regionData);
+#else
+	curBlock = NULL;
 #endif
 
 	/* Step 5 - installing clipping rectangles */

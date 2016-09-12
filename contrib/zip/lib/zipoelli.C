@@ -122,7 +122,7 @@ zipoelli::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
 	}
       break;
     case view_LeftUp:
-      if ( figure = pane->zip_pane_current_figure )
+      if ( ( figure = pane->zip_pane_current_figure ) )
         {
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zip_default );
 	if ( figure_x_points(0) == 0  ||  figure_y_points(0) == 0 )
@@ -137,7 +137,7 @@ zipoelli::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
 	}
         break;
     case view_LeftMovement:
-      if ( figure = pane->zip_pane_current_figure )
+      if ( ( figure = pane->zip_pane_current_figure ) )
 	{
 	(this->view_object)->Draw_Figure(  figure, pane );
 	if ( X == figure->zip_figure_point.zip_point_x )
@@ -148,6 +148,8 @@ zipoelli::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
         (this)->Set_Object_Point(  figure, zip_figure_auxiliary_point + 1, 0, Y );
 	(this->view_object)->Draw_Figure(  figure, pane );
 	}
+      break;
+    default:
       break;
     }
   OUT(zipoelli::Build_Object);

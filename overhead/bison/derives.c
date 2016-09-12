@@ -28,7 +28,7 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #include "new.h"
 #include "types.h"
 #include "gram.h"
-
+#include "proto.h"
 
 short **derives;
 
@@ -96,8 +96,6 @@ print_derives()
 {
   int i;
   short *sp;
-
-  extern char **tags;
 
   printf("\n\n\nDERIVES\n\n");
 

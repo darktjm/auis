@@ -51,12 +51,9 @@
 #include <ctype.h>
 #include "scribetext.h"
 
-extern TABLE Table;
-
-extern int STUniqueID();
-
-void CloseFiles(), AbsorbSpace();
-long int ParseText();
+static void ExecuteSpecial(char character);
+static char *GetInstruction(void);
+static int Execute(char *instruction);
 
 void ParseMain(char *Filein, char *Fileout)
 {
@@ -91,15 +88,11 @@ void ParseMain(char *Filein, char *Fileout)
   printf("* Finished processing %ld lines of %s.\n", CurrLine, Filein);
 }
 
-extern int ExecuteSpecial(char character);
-int ReplaceText(char *instruction, int mode, char tofind);
-
-long int ParseText(int tofind, char *prepend, char *append, int transform, int action)
+long int ParseText(int tofind, const char *prepend, const char *append, int transform, int action)
 {
-  char ch, ch2, *instruction, *tmp_instruction, 
-  *GetInstruction(), *makelower();
-  TABLE tmp, FindNode();
-  int Execute(), i, in, in2, counter;
+  char ch, ch2, *instruction, *tmp_instruction;
+  TABLE tmp;
+  int i, in, in2, counter;
   long int tempcurrline;
 
   instruction = (char *) calloc (TMP_SIZE, sizeof(char));
@@ -238,7 +231,7 @@ TABLE FindNode(int field, char *string)
 }
 
 
-int ExecuteSpecial(char character)
+static void ExecuteSpecial(char character)
 {
   TABLE tmp;
   char string[2];
@@ -261,7 +254,7 @@ int ExecuteSpecial(char character)
 }
 
 
-char *GetInstruction(void)
+static char *GetInstruction(void)
 {
   char character, *instruction;
   int in;
@@ -292,11 +285,12 @@ char *GetInstruction(void)
 	  "End of file reached.");
   
   CloseFiles();
+  exit(1);
 }
 
 
 
-int Execute(char *instruction)
+static int Execute(char *instruction)
 {
   TABLE tmp;
   char ch, close;
@@ -346,10 +340,11 @@ int Execute(char *instruction)
 	  exit(0);
 	}
     }
+    return 0; /* only needs to not be POP_JOB - tjm */
 }
 
 
-int ReplaceText(char *instruction, int mode, char tofind)
+void ReplaceText(const char *instruction, int mode, char tofind)
 {
   if(mode & NAKED)
     {

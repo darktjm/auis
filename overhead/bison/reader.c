@@ -37,6 +37,7 @@ The entry point is reader().  */
 #include "lex.h"
 #include "gram.h"
 #include "machine.h"
+#include "proto.h"
 
 #define	LTYPESTR	"\n" \
     "#ifndef YYLTYPE\n" \
@@ -57,57 +58,7 @@ The entry point is reader().  */
     "\n"
 
 /* Number of slots allocated (but not necessarily used yet) in `rline'  */
-int rline_allocated;
-
-extern char *program_name;
-extern int definesflag;
-extern int nolinesflag;
-extern int noparserflag;
-extern int rawtoknumflag;
-extern bucket *symval;
-extern int numval;
-extern int expected_conflicts;
-extern char *token_buffer;
-
-extern void init_lex();
-extern void tabinit();
-extern void output_headers();
-extern void output_trailers();
-extern void free_symtab();
-extern void open_extra_files();
-extern char *int_to_string();
-extern void fatal();
-extern void fatals();
-extern void warn();
-extern void warni();
-extern void warns();
-extern void warnss();
-extern void warnsss();
-extern void unlex();
-extern void done();
-
-extern int skip_white_space();
-extern int parse_percent_token();
-extern int lex();
-
-void reader_output_yylsp();
-void read_declarations();
-void copy_definition();
-void parse_token_decl();
-void parse_start_decl();
-void parse_type_decl();
-void parse_assoc_decl();
-void parse_union_decl();
-void parse_expect_decl();
-void parse_thong_decl();
-void copy_action();
-void readgram();
-void record_rule_line();
-void packsymbols();
-void output_token_defines();
-void packgram();
-int read_signed_integer();
-static int get_type();
+static int rline_allocated;
 
 typedef
   struct symbol_list
@@ -119,11 +70,33 @@ typedef
   symbol_list;
 
 
+static void skip_to_char(int target);
+static void read_declarations(void);
+static void copy_definition(void);
+static void parse_token_decl(int what_is, int what_is_not);
+static void parse_thong_decl(void);
+static void parse_start_decl(void);
+static void parse_type_decl(void);
+static void parse_assoc_decl(int assoc);
+static void parse_union_decl(void);
+static void parse_expect_decl(void);
+static char *get_type_name(int n, symbol_list *rule);
+static void copy_guard(symbol_list *rule, int stack_offset);
+static void copy_action(symbol_list *rule, int stack_offset);
+static bucket *gensym(void);
+static void readgram(void);
+static void record_rule_line(void);
+/* static int get_type(void); */ /* unused */
+static void packsymbols(void);
+static void output_token_defines(FILE *file);
+static void packgram(void);
+static int read_signed_integer(FILE *stream);
+
 
 int lineno;
-symbol_list *grammar;
-int start_flag;
-bucket *startval;
+static symbol_list *grammar;
+static int start_flag;
+static bucket *startval;
 char **tags;
 int *user_toknums;
 
@@ -141,8 +114,6 @@ static bucket *errtoken;
 
 /* Nonzero if any action or guard uses the @n construct.  */
 static int yylsp_needed;
-
-extern char *version_string;
 
 
 static void
@@ -335,7 +306,7 @@ read_declarations (void)
       else
 	{
 		char buff[100];
-		sprintf(buff, "unknown character: %c", printable_version(c)); 
+		sprintf(buff, "unknown character: %s", printable_version(c)); 
 		warn(buff);
 		skip_to_char('%');
 	}
@@ -939,7 +910,7 @@ parse_expect_decl(void)
 char *
 get_type_name(int n, symbol_list *rule)
 {
-  static char *msg = "invalid $ value";
+  static const char msg[] = "invalid $ value";
 
   int i;
   symbol_list *rp;
@@ -1150,7 +1121,7 @@ copy_guard(symbol_list *rule, int stack_offset)
 	      continue;
 	    }
 	  else
-	    warni("$%s is invalid", printable_version(c));
+	    warns("$%s is invalid", printable_version(c));
 
 	  break;
 
@@ -1164,7 +1135,7 @@ copy_guard(symbol_list *rule, int stack_offset)
 	    }
 	  else
 	    {
-	      warni("@%s is invalid", printable_version(c));
+	      warns("@%s is invalid", printable_version(c));
 	      n = 1;
 	    }
 
@@ -1370,7 +1341,7 @@ copy_action(symbol_list *rule, int stack_offset)
 		  continue;
 		}
 	      else
-		warni("$%s is invalid", printable_version(c));
+		warns("$%s is invalid", printable_version(c));
 
 	      break;
 
@@ -1445,7 +1416,7 @@ void
 readgram(void)
 {
   int t;
-  bucket *lhs;
+  bucket *lhs = NULL;
   symbol_list *p;
   symbol_list *p1;
   bucket *bp;
@@ -1748,6 +1719,7 @@ record_rule_line (void)
 }
 
 
+#if 0 /* use #ifd out above */
 /* read in a %type declaration and record its information for get_type_name to access */
 /* this is unused.  it is only called from the #if 0 part of readgram */
 static int
@@ -1794,7 +1766,7 @@ get_type(void)
 	}
     }
 }
-
+#endif
 
 
 /* assign symbol numbers, and write definition of token names into fdefines.
@@ -1811,7 +1783,7 @@ packsymbols(void)
   /* int lossage = 0; JF set but not used */
 
   tags = NEW2(nsyms + 1, char *);
-  tags[0] = "$";
+  tags[0] = (char *)"$";  /* tjm - not sure if this is safe */
   user_toknums = NEW2(nsyms + 1, int);
   user_toknums[0] = 0;
 

@@ -51,19 +51,11 @@
 #include "2rtf.h"
 #include "input.h"
 
-extern struct TableStruct *Table;
-/* extern struct FileStackStruct *FileStack; */
-
-int offset(char *string, char character);
-int roffset(char *string, char character);
-void AbsorbSpace();
-char *makelower();
-
 char *makelower(char *instruction)
 {
   int i;
   
-  for(i=0; i<strlen(instruction); i++)
+  for(i=0; instruction[i]; i++)
     {
       if(isupper(instruction[i]))
 	instruction[i] = tolower(instruction[i]);
@@ -168,8 +160,7 @@ void AbsorbNewlines(void)
 void Newlines(void)
 {
    int n = 0;
-   int k;
-   char ch, tmp_instruction[TMP_SIZE];
+   char ch;
 
    CurrLine++;
    while(1)

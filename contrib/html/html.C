@@ -669,7 +669,7 @@ html::ChangeAttribute(class view * tv, class environment * env, const char * att
 	/* Check to see if this modification should trigger any callback */
 	strcpy(cb, "callback:");
 	strcat(cb, attr);
-	if (ptr = (env->data.style)->GetAttribute( cb)) {
+	if ((ptr = (env->data.style)->GetAttribute( cb))) {
 	    /* Now we use the proctable to call the callback */
 	    /* This code is taken from the metax class */
 	    struct proctable_Entry *proc;
@@ -685,6 +685,8 @@ html::ChangeAttribute(class view * tv, class environment * env, const char * att
 		    case keystate_TypeMismatch:
 			message::DisplayString(im, 0, "Bad command");
 			break;
+		    case keystate_ProcCalled:
+		        break;
 		}
 	    } else {
 		message::DisplayString(im, 0, "Do nothing");
@@ -1226,7 +1228,6 @@ hrule(class html * self, long * pos)
 void
 html::AddImage(long * pos, char * file)	/*  */
 {
-    long objectID = 0;
     class image* dat;
     char* filename;
     class buffer* buf;
@@ -1240,7 +1241,7 @@ html::AddImage(long * pos, char * file)	/*  */
     }
 
     /* XXX: Hardcoded to use GIF. Fix up sometime (How? Requires fix of image class) */
-    if (dat = (class image*) ATK::NewObject("gif")) {
+    if ((dat = (class image*) ATK::NewObject("gif"))) {
 	if (filename) {
 	    (dat)->Load( filename, NULL);
 	} else {
@@ -1302,7 +1303,7 @@ html::ReadSubString(long  startPos, FILE * file, int  quoteCharacters)
     long myPos = startPos;
     char* s;
     const struct entityMapping* eMapping;
-    struct entityElement* ep;
+    struct entityElement* ep = NULL;
 
     buf[0]='\0';
     *vars = '\0';
@@ -1457,7 +1458,6 @@ getHTML(class style * style)
 char*
 html::EnvStart(char * outp, class style * style, int * parImply, int * brImply, int * newlines)
 {
-    char* temp;
     const char* name;
     char* vars;
     char* s;
@@ -1602,7 +1602,7 @@ html::WriteSubString(long  pos, long  len, FILE * file, int  quoteCharacters)
     char c;
     long envpos;
 
-    char outbuf[180],*outp,*endp,*temp;
+    char outbuf[180],*outp,*endp;
     char *buf = NULL;
     long bufLen;
 
@@ -1962,7 +1962,7 @@ findLocalFile(char * path, char * relativeRoot)
 	/* Relative pathname, use current buffer */
 	char *sl;
 	strcpy(buf, relativeRoot);
-	if (sl = strrchr(buf, '/')) {
+	if ((sl = strrchr(buf, '/'))) {
 	    sl[1] = '\0';
 	} else {
 	    /* Bizarreness happening! */

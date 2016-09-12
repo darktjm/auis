@@ -129,6 +129,8 @@ zipocapt::Build_Object( zip_type_pane pane, enum view_MouseAction action, long x
     case view_LeftUp:
     case view_LeftMovement:
       break;
+    default:
+      break;
     }
   OUT(zipocapt_Build_Object);
   return  status;
@@ -249,7 +251,7 @@ long Draw( class zipocapt		  *self, zip_type_figure		   figure, zip_type_pane		 
   if ( figure->zip_figure_image->zip_image_text )
     text = figure->zip_figure_image->zip_image_text;
   else
-  if ( text = (self->data_object)->Superior_Image_Text(  figure->zip_figure_image->zip_image_superior ) )
+  if ( ( text = (self->data_object)->Superior_Image_Text(  figure->zip_figure_image->zip_image_superior ) ) )
     {}
   else
   if ( figure->zip_figure_image->zip_image_stream->zip_stream_text )
@@ -347,7 +349,7 @@ zipocapt::Print_Object( zip_type_figure figure, zip_type_pane	 pane )
   if ( figure->zip_figure_image->zip_image_text )
     text = figure->zip_figure_image->zip_image_text;
   else
-  if ( text = (this->data_object)->Superior_Image_Text(  figure->zip_figure_image->zip_image_superior ) )
+  if ( ( text = (this->data_object)->Superior_Image_Text(  figure->zip_figure_image->zip_image_superior ) ) )
     {}
   else
   if ( figure->zip_figure_image->zip_image_stream->zip_stream_text )

@@ -148,7 +148,7 @@ zipview::Which_Stream( long	 x , long  y )
   zip_type_pane		  pane;
 
   IN(zip_Which_Stream);
-  if ( (pane = (self)->Which_Pane(  x, y )) )
+  if ( (pane = (self)->Which_Pane(  x, y )) ) {
     if ( pane->zip_pane_attributes.zip_pane_attribute_stream_source )
       stream = pane->zip_pane_source.zip_pane_stream;
     else
@@ -157,6 +157,7 @@ zipview::Which_Stream( long	 x , long  y )
     else
     if ( pane->zip_pane_attributes.zip_pane_attribute_figure_source )
       stream = pane->zip_pane_source.zip_pane_figure->zip_figure_image->zip_image_stream;
+  }
   ZIP_STATUS(this->data_object);
   OUT(zip_Which_Stream);
   return stream;

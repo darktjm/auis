@@ -54,11 +54,7 @@ If LA[l, i] and LA[l, j] are both 1 for i != j, it is a conflict.
 #include "state.h"
 #include "new.h"
 #include "gram.h"
-
-
-extern short **derives;
-extern char *nullable;
-
+#include "proto.h"
 
 int tokensetsize;
 short *lookaheads;
@@ -73,24 +69,22 @@ short *goto_map;
 short *from_state;
 short *to_state;
 
-short **transpose();
-void set_state_table();
-void set_accessing_symbol();
-void set_shift_table();
-void set_reduction_table();
-void set_maxrhs();
-void initialize_LA();
-void set_goto_map();
-void initialize_F();
-void build_relations();
-void add_lookback_edge();
-void compute_FOLLOWS();
-void compute_lookaheads();
-void digraph();
-void traverse();
-
-extern void toomany();
-extern void berror();
+static void set_state_table(void);
+static void set_accessing_symbol(void);
+static void set_shift_table(void);
+static void set_reduction_table(void);
+static void set_maxrhs(void);
+static void initialize_LA(void);
+static void set_goto_map(void);
+static int map_goto(int state, int symbol);
+static void initialize_F(void);
+static void build_relations(void);
+static void add_lookback_edge(int stateno, int ruleno, int gotono);
+static short **transpose(short **R_arg, int n);
+static void compute_FOLLOWS(void);
+static void compute_lookaheads(void);
+static void digraph(short **relation);
+static void traverse(int i);
 
 static int infinity;
 static int maxrhs;
@@ -256,7 +250,7 @@ initialize_LA(void)
     {
       if (!consistent[i])
 	{
-	  if (rp = reduction_table[i])
+	  if ((rp = reduction_table[i]))
 	    for (j = 0; j < rp->nreds; j++)
 	      *np++ = rp->rules[j];
 	}
@@ -334,7 +328,7 @@ set_goto_map(void)
 
 /*  Map_goto maps a state/symbol pair into its numeric representation.	*/
 
-int
+static int
 map_goto(int state, int symbol)
 {
   int high;

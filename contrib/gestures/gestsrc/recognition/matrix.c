@@ -329,7 +329,7 @@ InvertMatrix(Matrix ym, Matrix rm)
 				rm[i][j] = ym[i][j];
 
 
-	if(DebugInvertMatrix) PrintMatrix(rm, "Inverting (det=%g)\n", det);
+	if(DebugInvertMatrix) PrintMatrix(rm, "Inverting\n");
 
     /* Allocate permutation vectors for l and m, with the same origin
        as the matrix. */
@@ -353,7 +353,7 @@ InvertMatrix(Matrix ym, Matrix rm)
 
 		if(DebugInvertMatrix) 
 			if(biga == 0.0)
-				PrintMatrix(m, "found zero biga = %g\n", biga);
+				PrintMatrix(rm, "found zero biga = %g\n", biga);
 
 		/* Interchange rows */
 		i = l[k];

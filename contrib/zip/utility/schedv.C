@@ -280,7 +280,7 @@ schedv::FullUpdate( enum view_UpdateType type, long left , long  top , long  wid
 static
 void Initialize( class schedv *self )
 {
-    const char *reply;
+    const UNUSED char *reply; // used with DB=1
 
     IN(Initialize);
     (ZipView)->LinkTree(  self );
@@ -352,6 +352,8 @@ schedv::Hit( enum view_MouseAction action, long  x , long y , long clicks )
 		    if ( PreviousSlotFigure )
 			Normalize_Previous_Slot_Figure( this );
 		break;
+	    default:
+	        break;
 	}
     }
     }
@@ -370,7 +372,7 @@ void Handle_Slot_Hit( class schedv *self, zip_type_figure slot_figure )
     CurrentSlotFigure = slot_figure;
     DEBUGst(Slot Figure Name,(Zip)->Figure_Name(slot_figure));
     sprintf( string, "%sText", (Zip)->Figure_Name(  slot_figure) );
-    if ( text_figure = (Zip)->Figure(  string ) )
+    if ( ( text_figure = (Zip)->Figure(  string ) ) )
     {  DEBUGst(Text Figure Name,(Zip)->Figure_Name(text_figure));
     CurrentTextFigure = text_figure;
     shade = (Zip)->Figure_Shade(  slot_figure );
@@ -441,7 +443,7 @@ void Move_Slot( class schedv *self, zip_type_figure slot_figure )
 	{
 	    DEBUGst(Slot Figure Name,(Zip)->Figure_Name(slot_figure));
 	    sprintf( string, "%sText", (Zip)->Figure_Name(  slot_figure) );
-	    if ( text_figure = (Zip)->Figure(  string ) )
+	    if ( ( text_figure = (Zip)->Figure(  string ) ) )
 	    {  DEBUGst(Text Figure Name,(Zip)->Figure_Name(text_figure));
 	    Modified = true;
 	/* Copy into Target from Previous  */  

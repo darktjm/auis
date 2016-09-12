@@ -129,7 +129,7 @@ zipotrap::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
 	}
       break;
     case view_LeftUp:
-      if ( figure = CurrentFigure )
+      if ( ( figure = CurrentFigure ) )
         {
 	if ( figure_x_point == 0  ||  figure_y_point == 0 )
 	  {
@@ -150,6 +150,8 @@ zipotrap::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
 	(this->view_object)->Draw_Figure(  CurrentFigure, pane );
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zip_default );
 	}
+      break;
+    default:
       break;
     }
   OUT(zipotrap::Build_Object);
@@ -198,7 +200,7 @@ long Draw( class zipotrap *self, zip_type_figure figure, zip_type_pane pane )
 					  SD = pane->zip_pane_stretch_divisor;
 
   IN(Draw);
-  if ( shade = (self->data_object)->Contextual_Figure_Shade(  figure ))
+  if ( ( shade = (self->data_object)->Contextual_Figure_Shade(  figure )))
     {
     if ( (shade = ('0' + ((shade + 10) / 10)) - 1) > '9' )  shade = '9';
     graphic = (self->view_object)->Define_Graphic(  (self->data_object)->Define_Font(  ShadeFontName, NULL ), shade );    X1 = window_x_points(0);
@@ -242,7 +244,7 @@ zipotrap::Print_Object( zip_type_figure figure, zip_type_pane  pane )
   int					  i;
 
   IN(zipotrap::Print_Object);
-  if ( pattern = (this->data_object)->Contextual_Figure_Pattern(  figure ) )
+  if ( ( pattern = (this->data_object)->Contextual_Figure_Pattern(  figure ) ) )
   {
       long x1,y1,x2,y2,xlen,ylen;
 

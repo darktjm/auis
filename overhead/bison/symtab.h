@@ -52,8 +52,10 @@ typedef
     }
   bucket;
 
-
-extern bucket **symtab;
+/* symtab.c */
 extern bucket *firstsymbol;
-
-extern bucket *getsym();
+extern void tabinit(void);
+extern bucket *getsym(const char *key);
+extern void free_symtab(void);
+/* lex.c */
+extern bucket *symval;

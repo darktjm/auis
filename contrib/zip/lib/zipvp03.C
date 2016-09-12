@@ -75,17 +75,14 @@ END-SPECIFICATION  ************************************************************/
 #include "zipobject.H"
 
 
+#undef Data
 #define	 Data			      (self->zipobject::data_object)
+#undef View
 #define	 View			      (self)
+#undef Edit
 #define	 Edit			      (self->edit_object)
 
-#define  PaneLeft		      ((self)->Pane_Left(  pane ))
-#define  PaneTop		      ((self)->Pane_Top(  pane ))
-#define  PaneWidth		      ((self)->Pane_Width(  pane ))
-#define  PaneHeight		      ((self)->Pane_Height(  pane ))
-#define  PaneBottom		      ((self)->Pane_Bottom(  pane ))
-#define  PaneRight		      ((self)->Pane_Right(  pane ))
-
+#define PaneViewObj self
 
 static int Show_Pane( class zipview		  *self, zip_type_pane		   pane, long				   action );
 static int Pane_Suite_Member( class zipview		  *self, zip_type_pane		   major_pane, zip_type_pane		   candidate_pane );
@@ -179,7 +176,7 @@ Show_Pane( class zipview		  *self, zip_type_pane		   pane, long				   action )
         {
         status = (self)->Clear_Pane(  pane ); /*=== missing  pane-source ===*/
         }
-      if ( status == zip_ok )
+      if ( status == zip_ok ) {
         if ( pane->zip_pane_border_thickness )
           zipview_Draw_Pane_Border( self, pane );
 	  else
@@ -191,6 +188,7 @@ Show_Pane( class zipview		  *self, zip_type_pane		   pane, long				   action )
 		 && self->states.editing)
               (Edit)->Draw_Pane_Grid(  pane );
 	  }
+      }
       if ( status == zip_ok  &&  pane->zip_pane_cursor_glyph )
         (self)->Post_Pane_Cursor(  pane, pane->zip_pane_cursor_glyph );
       (self )->FlushGraphics( );

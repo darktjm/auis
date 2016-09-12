@@ -137,7 +137,7 @@ ziporect::Build_Object( zip_type_pane   pane, enum view_MouseAction  action , lo
 	}
       break;
     case view_LeftUp:
-      if ( figure = CurrentFigure )
+      if ( ( figure = CurrentFigure ) )
 	{
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zip_default );
 	if ( figure_x_point == figure_x_points(0)  &&
@@ -158,6 +158,8 @@ ziporect::Build_Object( zip_type_pane   pane, enum view_MouseAction  action , lo
         (this)->Set_Object_Point(  CurrentFigure,	zip_figure_auxiliary_point, X, Y );
 	(this->view_object)->Draw_Figure(  CurrentFigure, pane );
 	}
+      break;
+    default:
       break;
     }
   OUT(ziporect::Build_Object);

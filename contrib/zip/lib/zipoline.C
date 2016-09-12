@@ -113,7 +113,7 @@ zipoline::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
 	}
       break;
     case view_LeftUp:
-      if ( figure = CurrentFigure )
+      if ( ( figure = CurrentFigure ) )
         {
 	if ( figure_x_point == figure_x_points(0)  &&
 	     figure_y_point == figure_y_points(0) )
@@ -132,6 +132,8 @@ zipoline::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
 	(this->view_object)->Draw_Figure(  CurrentFigure, pane );
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zip_default );
 	}
+      break;
+    default:
       break;
     }
   OUT(zipoline::Build_Object);
@@ -166,7 +168,6 @@ static
 long Draw( class zipoline		  *self, zip_type_figure		   figure, zip_type_pane		   pane )
         {
   long				  status = zip_ok;
-  unsigned char		  width;
 
   IN(Draw);
   if ( (self->view_object)->Ensure_Line_Attributes(  figure ) == zip_ok )

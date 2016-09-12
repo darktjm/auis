@@ -19,6 +19,7 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 
 /* comments for these variables are in gram.h  */
+#include "gram.h"
 
 int nitems;
 int nrules;
@@ -48,11 +49,3 @@ int semantic_parser;
 int pure_parser;
 
 int error_token_number;
-
-/* This is to avoid linker problems which occur on VMS when using GCC,
-   when the file in question contains data definitions only.  */
-
-void
-dummy(void)
-{
-}

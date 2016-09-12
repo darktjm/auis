@@ -86,8 +86,6 @@ zipobject::Destroy_Object( zip_type_figure		   object )
 void
 zipobject::Set_Data_Object( class zip *data_object )
       {
-  class zipobject *self=this;
-
   IN(zipobject::Set_Data_Object);
   this->data_object = data_object;
   OUT(zipobject::Set_Data_Object);
@@ -96,8 +94,6 @@ zipobject::Set_Data_Object( class zip *data_object )
 void
 zipobject::Set_View_Object( class zipview *view_object )
       {
-  class zipobject *self=this;
-
   IN(zipobject::Set_View_Object);
   this->view_object = view_object;
   OUT(zipobject::Set_View_Object);
@@ -106,7 +102,6 @@ zipobject::Set_View_Object( class zipview *view_object )
 void
 zipobject::Set_Edit_Object( class zipedit	          *edit_object )
       {
-  class zipobject *self=this;
   IN(zipobject::Set_Edit_Object);
   this->edit_object = edit_object;
   OUT(zipobject::Set_Edit_Object);
@@ -115,8 +110,6 @@ zipobject::Set_Edit_Object( class zipedit	          *edit_object )
 void
 zipobject::Set_Print_Object( class zipprint	          *print_object )
       {
-  class zipobject *self=this;
-  class zipprint *zipprint = (class zipprint *) print_object;
   IN(zipobject::Set_Print_Object);
   this->print_object = print_object;
   OUT(zipobject::Set_Print_Object);

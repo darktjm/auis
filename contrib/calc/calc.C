@@ -138,7 +138,7 @@ void Reader( class calc	    	      *self )
   struct apt_field	     *field;
 
   IN(Reader);
-  while ( field = (self )->ReadObjectField( ) )
+  while ( ( field = (self )->ReadObjectField( ) ) )
     {
     if ( strcmp( "Value", field->name ) == 0 )
        sscanf( field->content, "%lf", &self->value );

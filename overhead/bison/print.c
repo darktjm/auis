@@ -25,29 +25,13 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #include "files.h"
 #include "gram.h"
 #include "state.h"
+#include "proto.h"
 
-
-extern char **tags;
-extern int nstates;
-extern short *accessing_symbol;
-extern core **state_table;
-extern shifts **shift_table;
-extern errs **err_table;
-extern reductions **reduction_table;
-extern char *consistent;
-extern char any_conflicts;
-extern char *conflicts;
-extern int final_state;
-
-extern void conflict_log();
-extern void verbose_conflict_log();
-extern void print_reductions();
-
-void print_token();
-void print_state();
-void print_core();
-void print_actions();
-void print_grammar();
+/* static void print_token(int extnum, int token); */ /* unused */
+static void print_state(int state);
+static void print_core(int state);
+static void print_actions(int state);
+static void print_grammar(void);
 
 void
 terse(void)
@@ -76,11 +60,13 @@ verbose(void)
 }
 
 
+#if 0 /* unused */
 void
 print_token(int extnum, int token)
 {
   fprintf(foutput, " type %d is %s\n", extnum, tags[token]);
 }
+#endif
 
 
 void
@@ -233,10 +219,10 @@ print_actions(int state)
     }
 }
 
-#define END_TEST(end) \
+#define END_TEST(end) do {\
   if (column + strlen(buffer) > (end))					 \
     { fprintf (foutput, "%s\n   ", buffer); column = 3; buffer[0] = 0; } \
-  else
+} while(0)
 
 void
 print_grammar(void)

@@ -111,60 +111,7 @@ YYNTBASE = ntokens.
 #include "files.h"
 #include "gram.h"
 #include "state.h"
-
-
-extern int debugflag;
-extern int nolinesflag;
-extern int noparserflag;
-extern int toknumflag;
-
-extern char **tags;
-extern int *user_toknums;
-extern int tokensetsize;
-extern int final_state;
-extern core **state_table;
-extern shifts **shift_table;
-extern errs **err_table;
-extern reductions **reduction_table;
-extern short *accessing_symbol;
-extern unsigned *LA;
-extern short *LAruleno;
-extern short *lookaheads;
-extern char *consistent;
-extern short *goto_map;
-extern short *from_state;
-extern short *to_state;
-
-void output_token_translations();
-void output_gram();
-void output_stos();
-void output_rule_data();
-void output_defines();
-void output_actions();
-void token_actions();
-void save_row();
-void goto_actions();
-void save_column();
-void sort_actions();
-void pack_table();
-void output_base();
-void output_table();
-void output_check();
-void output_parser();
-void output_program();
-void free_itemset();
-void free_shifts();
-void free_reductions();
-void free_itemsets();
-int action_row();
-int default_goto();
-int matching_state();
-int pack_vector();
-
-extern void berror();
-extern void fatals();
-extern char *int_to_string();
-extern void reader_output_yylsp();
+#include "proto.h"
 
 static int nvectors;
 static int nentries;
@@ -182,6 +129,30 @@ static short *check;
 static int lowzero;
 static int high;
 
+static void output_token_translations(void);
+static void output_gram(void);
+static void output_stos(void);
+static void output_rule_data(void);
+static void output_defines(void);
+static void output_actions(void);
+static void token_actions(void);
+static int action_row(int state);
+static void save_row(int state);
+static void goto_actions(void);
+static int default_goto(int symbol);
+static void save_column(int symbol, int default_state);
+static void sort_actions(void);
+static void pack_table(void);
+static int matching_state(int vector);
+static int pack_vector(int vector);
+static void output_base(void);
+static void output_table(void);
+static void output_check(void);
+static void output_parser(void);
+static void output_program(void);
+static void free_itemsets(void);
+static void free_shifts(void);
+static void free_reductions(void);
 
 
 #define	GUARDSTR	"\n#include \"%s\"\nextern int yyerror;\n\
@@ -706,8 +677,8 @@ action_row(int state)
   int i;
   int j;
   int k;
-  int m;
-  int n;
+  int m = lookaheads[state];
+  int n = lookaheads[state + 1];
   int count;
   int default_rule;
   int nreds;
@@ -1163,7 +1134,7 @@ pack_vector(int vector)
   int j;
   int k;
   int t;
-  int loc;
+  int loc = 0;
   int ok;
   short *from;
   short *to;
@@ -1402,7 +1373,7 @@ output_parser(void)
 
       /* now write out the line... */
       for (; c != '\n' && c != EOF; c = getc(fpars))
-	if (write_line)
+	if (write_line) {
 	  if (c == '$')
 	    {
 	      /* `$' in the parser file indicates where to put the actions.
@@ -1413,6 +1384,7 @@ output_parser(void)
 	    }
 	  else
 	    putc(c, ftable);
+	}
       if (c == EOF)
 	break;
       putc(c, ftable);
@@ -1423,7 +1395,6 @@ void
 output_program(void)
 {
   int c;
-  extern int lineno;
 
   if (!nolinesflag)
     fprintf(ftable, "#line %d \"%s\"\n", lineno, infile);

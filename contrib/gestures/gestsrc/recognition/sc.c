@@ -55,6 +55,7 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 /* IBM defines this in math.h */
 double exp();
 #endif
+static void FixClassifier(sClassifier sc, Matrix avgcov);
 
 #define	EPS	(1.0e-6)	/* for singular matrix check */
 sClassifier
@@ -310,7 +311,7 @@ MahalanobisDistance(Vector v, Vector u, Matrix sigma)
 	return result;
 }
 
-void FixClassifier(sClassifier sc, Matrix avgcov)
+static void FixClassifier(sClassifier sc, Matrix avgcov)
 {
 	int i;
 	double det;

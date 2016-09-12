@@ -27,12 +27,7 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #include "new.h"
 #include "gram.h"
 #include "state.h"
-
-
-extern char *nullable;
-extern short *itemset;
-extern short *itemsetend;
-
+#include "proto.h"
 
 int nstates;
 int final_state;
@@ -40,20 +35,18 @@ core *first_state;
 shifts *first_shift;
 reductions *first_reduction;
 
-int get_state();
-core *new_state();
-
-void new_itemsets();
-void append_states();
-void initialize_states();
-void save_shifts();
-void save_reductions();
-void augment_automaton();
-void insert_start_shift();
-extern void initialize_closure();
-extern void closure();
-extern void finalize_closure();
-extern void toomany();
+static void allocate_itemsets(void);
+static void allocate_storage(void);
+static void free_storage(void);
+static void new_itemsets(void);
+static void append_states(void);
+static int get_state(int symbol);
+static core *new_state(int symbol);
+static void initialize_states(void);
+static void save_shifts(void);
+static void save_reductions(void);
+static void augment_automaton(void);
+static void insert_start_shift(void);
 
 static core *this_state;
 static core *last_state;
@@ -73,7 +66,7 @@ static short *kernel_items;
 /* hash table for states, to recognize equivalent ones.  */
 
 #define	STATE_TABLE_SIZE	1009
-static core **state_table;
+static core **lr0_state_table;
 
 
 
@@ -129,7 +122,7 @@ allocate_storage(void)
 
   shiftset = NEW2(nsyms, short);
   redset = NEW2(nrules + 1, short);
-  state_table = NEW2(STATE_TABLE_SIZE, core *);
+  lr0_state_table = NEW2(STATE_TABLE_SIZE, core *);
 }
 
 
@@ -142,7 +135,7 @@ free_storage(void)
   FREE(kernel_base);
   FREE(kernel_end);
   FREE(kernel_items);
-  FREE(state_table);
+  FREE(lr0_state_table);
 }
 
 
@@ -309,7 +302,7 @@ get_state(int symbol)
 
   key = key % STATE_TABLE_SIZE;
 
-  sp = state_table[key];
+  sp = lr0_state_table[key];
 
   if (sp)
     {
@@ -345,7 +338,7 @@ get_state(int symbol)
     }
   else      /* bucket is empty */
     {
-      state_table[key] = sp = new_state(symbol);
+      lr0_state_table[key] = sp = new_state(symbol);
     }
 
   return (sp->number);

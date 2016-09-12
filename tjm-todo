@@ -40,12 +40,21 @@
   - squash any crashes
   - run valgrind on as much as possible
   - fix example docs to document C++-style code
-  - find out purpose of every file installed in auis, and document
+  - find out purpose of every file installed in auis, and document.
+    - maybe switch to doxygen for API docs, since it's designed for C++
+    - separate docs for C++ API, .atkinit/bind commands, ness, prefs, apps
+    - get rid of all that stub documentation
 - general cleanup:
   - get rid of csh usage for scripts (sh is better)
   - remove all warnings
   - remove externs in c files
   - remove all statics in header files, if possible (gads, help.h is awful)
+  - Unfortunately, there is no easy, portable way to avoid exporting
+    symbols from a library which are only shared between members of
+    the library.  Then again, I could probably just add gcc-specific
+    methods if gcc is detected (like I did with UNUSED and format
+    attributes).  Or, I could put the symbols in a namespace named
+    after the library, which would at least alleviate namespace pollution.
   - constify pointers if possible
     It's usually better to make structures const by default and cast them to
     non-const when known to be malloc'd than the other way around
@@ -69,8 +78,11 @@
       -Wpointer-to-int-cast (on by default)
   - remove any unsupportable code (i.e., old UNIX, DOS, OS/2)
   - remove any functions which duplicate standard functions (e.g. strdup)
+  - much of it is C++.  It might be a good idea to look for and remove
+    Cisms where C++ does it differently (and presumably the same or better)
+    (note that unlike some idiots, I don't consider cpp macros to be C-only)
 - find out and possibly remove additional CMU/MIT-specific crap
-  - remove all packages available elsewhere; e.g. peg, tiff
+  - remove all packages available elsewhere; e.g. jpeg, tiff
     (making sure there is no afs/atk "enhancement" first)
 - build improvements
   - make it possible to build w/o simultaneous install
@@ -97,6 +109,24 @@ Long-term:
   - make entire beast literate
   - undo
   - freedesktop.org integration
+  - move from included bison to standard bison instead of cleaning it up
   - look at removed mail-related stuff to see if anything useful got deleted
     (e.g. ez2ascii claims descendence from messages)
   - look at auis-6.3.1 to see if anything useful got dropped in 8.0
+  - see if there is an atk repository in /afs/andrew.cmu.edu/ with more
+    recent changes to 8.x
+  - maybe give the sourceforge atk project another chance and try
+    harder to see if there is anything worth salvaging
+    - jdm (Journeyman's Development Manager)? undoumented crap
+    - mrtools? undocumented crap
+    - AIX-specific "ToolChat" support? whatever.
+    - Yet Another Crappy Build System - ugh, forget it
+    - REXX and perl code within ez?  Not worth it.  If I replace ness
+      with anything, it'll be lua.
+    - given the renaming and moving shit around, it's hard to tell if
+      they actually fixed any bugs, and probably more effort to refind
+      and refix the bugs than to try to figure out what changed.
+  - maybe reformat into a slightly less ugly coding style.  I fixed a
+    few bugs due to bad if/else indentation, and I hate the indentation
+    style used in general.  However, unless I can find a tool to do this
+    without too much aggravation (GNU indent ain't it), this will wait.

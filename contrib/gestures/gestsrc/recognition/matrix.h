@@ -74,10 +74,10 @@ struct array_header {
 typedef double **Matrix;
 typedef double *Vector;
 
-Vector	NewVector();	/* int r; (number of rows) */
-Matrix	NewMatrix();	/* int r, c; (number of rows, number of columns) */
-void	FreeVector();	/* Vector v; */
-void	FreeMatrix();	/* Matrix m; */
+Vector	NewVector(int r);	/* (number of rows) */
+Matrix	NewMatrix(int r, int c);	/* (number of rows, number of columns) */
+void	FreeVector(Vector v);
+void	FreeMatrix(Matrix m);
 #ifdef __GNUC__
 __attribute__((format(printf,2,3)))
 #endif
@@ -86,21 +86,23 @@ void	PrintVector(Vector v, const char *fmt, ...);
 __attribute__((format(printf,2,3)))
 #endif
 void	PrintMatrix(Matrix m, const char *fmt, ...);
-double	InnerProduct();	/* Vector v1, v2 */
-void	MatrixMultiply(); /* Matrix m1, m2, prod; */
-void	VectorTimesMatrix(); /* Vector v; Matrix m; Vector prod; */
-void	ScalarTimesVector(); /* double s; Vector v; Vector prod; */
-double	QuadraticForm(); /* Vector v; Matrix m; (computes v'mv) */
-double	InvertMatrix();	/* Matrix input_matrix, result_matrix (returns det) */
-Vector	SliceVector();	/* Vector v; BitVector rowmask */
-Matrix	SliceMatrix();	/* Matrix m; Bitvector rowmask, colmask; */
-Vector	VectorCopy();	/* Vector v; */
-Matrix	MatrixCopy();	/* Matrix m; */
-Vector	InputVector();	/* FILE *f; */
-Matrix	InputMatrix();	/* FILE *f; */
+double	InnerProduct(Vector v1, Vector v2);
+void	MatrixMultiply(Matrix m1, Matrix m2, Matrix prod);
+void	VectorTimesMatrix(Vector v, Matrix m, Vector prod);
+void	ScalarTimesVector(double s, Vector v, Vector prod);
+double	QuadraticForm(Vector v, Matrix m); /* (computes v'mv) */
+double	InvertMatrix(Matrix input_matrix, Matrix result_matrix);	/* (returns det) */
+#include "bitvector.h"
+Vector	SliceVector(Vector v, BitVector rowmask);
+Matrix	SliceMatrix(Matrix m, BitVector rowmask, BitVector colmask);
+Vector	VectorCopy(Vector v);
+Matrix	MatrixCopy(Matrix m);
+#include <stdio.h>
+Vector	InputVector(FILE *f);
+Matrix	InputMatrix(FILE *f);
 
-double	InvertSingularMatrix();	/* Matrix input, result (returns det) */
-Matrix  DeSliceMatrix(); /* Matrix m, double fill, BitVector rowmask, colmask;
-				Matrix result */
-void	ZeroMatrix();	/* Matrix m; */
-void	FillMatrix();	/* Matrix m; double fill; */
+double	InvertSingularMatrix(Matrix input, Matrix result); /* (returns det) */
+Matrix  DeSliceMatrix(Matrix m, double fill, BitVector rowmask, BitVector colmask, Matrix result);
+void	ZeroMatrix(Matrix m);
+void	FillMatrix(Matrix m, double fill);
+void	ZeroVector(Vector v);

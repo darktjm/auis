@@ -132,8 +132,8 @@ zipprint::Set_View_Object( class zipview	      *view_object )
   class zipprint *self=this;
   IN(zipprint_Set_View_Object);
   this->view_object = view_object;
-  if ( Printing =
-		(zip_type_printing) calloc( 1, sizeof(struct zip_printing) ) )
+  if ( ( Printing =
+		(zip_type_printing) calloc( 1, sizeof(struct zip_printing) ) ) )
     {
     Printing->zip_printing_resolution = zip_printing_resolution_default; 
     Printing->zip_printing_width_percent  = 100;
@@ -401,7 +401,6 @@ Print_Inferior_Image( class zipprint	        *self, zip_type_image	         imag
 long
 zipprint::Print_Stream( zip_type_stream		 stream, zip_type_pane		 pane )
         {
-  class zipprint *self=this;
   long	  status = zip_ok;
 
   IN(zipprint_Print_Stream);

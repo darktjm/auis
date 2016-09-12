@@ -51,6 +51,7 @@ defaults:
 	echo atk>,defaults
 	mv ,defaults defaults
 InstallFile(defaults,$(INSTINCFLAGS),$(DESTDIR)/lib/packages/atk)
+CleanTarget(defaults)
 
 libs.all: Imakefile pkgs.mcr
 	$(RM) ,libs.all

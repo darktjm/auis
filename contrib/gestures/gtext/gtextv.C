@@ -267,7 +267,6 @@ class view *gtextv::Hit(enum view_MouseAction  action, long  x, long  y , long  
                {
   int i;
   class view *temp;
-  int transfer;
   long ts_timer;
   char *class_c;
   struct rectangle VisualRect;

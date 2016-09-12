@@ -472,13 +472,13 @@ void Initialize( class ltv  *self )
     (ZipView)->Set_Pane_Stream(  ForegroundPane, StreamLocal = self->data->foreground_stream );
     (ZipView)->Set_Pane_Object_Width(  ForegroundPane, BackgroundWidth );
     (ZipView)->Set_Pane_Object_Height(  ForegroundPane, BackgroundHeight );
-    if ( IMAGE = (Zip)->Image(  "Chains" ) )
+    if ( ( IMAGE = (Zip)->Image(  "Chains" ) ) )
     { DEBUG(Chains Image Exists);
     }
     else
     { DEBUG(Chains Image Non-Existant);
     root_image = (Zip)->Image(  "ZIP_ROOT_IMAGE" );
-    if ( status = (Zip)->Create_Inferior_Image(  &IMAGE, "Chains", StreamLocal, root_image ) )
+    if ( ( status = (Zip)->Create_Inferior_Image(  &IMAGE, "Chains", StreamLocal, root_image ) ) )
     { DEBUG(ERROR -- Create Chains Image);
 /*===*/printf("ERROR -- Failed to create Chains Image (Status %ld)\n",status );
     }
@@ -590,6 +590,8 @@ ltv::Hit( enum view_MouseAction action, long  x , long  y , long clicks )
 		}
 		(ZipView )->Use_Normal_Pane_Cursors( );
 		break;
+	    default:
+		break;
 	}
     }
     }
@@ -603,7 +605,7 @@ void Build_Chain( class ltv *self, enum view_MouseAction action, long	x , long y
     long		      X, Y, status = 0;
     long neighbor = 0;
     zip_type_figure	      neighbor_figure;
-    zip_type_point	      neighbor_x, neighbor_y;
+    zip_type_point	      neighbor_x = 0, neighbor_y = 0;
     long			      neighbor_point;
     char			      msg[512], *reply;
 
@@ -622,7 +624,7 @@ void Build_Chain( class ltv *self, enum view_MouseAction action, long	x , long y
 	    Build = false;
 	    InitialX = x;  InitialY = y;
 	    Clear_Chain_Names( self );
-	    if ( status = (Zip)->Create_Figure(  &Figure, NULL, zip_poly_line_figure, IMAGE, NULL ) )
+	    if ( ( status = (Zip)->Create_Figure(  &Figure, NULL, zip_poly_line_figure, IMAGE, NULL ) ) )
 	    { DEBUGdt(ERROR,status);
 	    Figure = NULL;
 	    }
@@ -678,6 +680,8 @@ void Build_Chain( class ltv *self, enum view_MouseAction action, long	x , long y
 		    }
 	    }
 	    break;
+	default:
+	    break;
     }
     if ( status == 0  &&  Figure )
     {
@@ -729,7 +733,7 @@ void Modify_Chain( class ltv *self, enum view_MouseAction action, long	 x , long
 	    down_x = x;  down_y = y;
 	    (ZipView)->Set_Pane_Cursor(  ForegroundPane, invisible_cursor, "aptcsr20" );
 	    (ZipView)->Announce(  " " );
-	    if ( Point = /*===zipv==*/Which_Figure_Point( self, Figure, ForegroundPane, x, y ) )
+	    if (( Point = /*===zipv==*/Which_Figure_Point( self, Figure, ForegroundPane, x, y ) ))
 	    {
 		Modifying = Modified = true;
 		Show_Chain_Names( self );
@@ -756,6 +760,8 @@ void Modify_Chain( class ltv *self, enum view_MouseAction action, long	 x , long
 	    Modifying = false;
 	    if ( abs(x - down_x) < tolerance  &&  abs(y - down_y) < tolerance )
 	    {X = down_X;  Y = down_Y;}
+	    break;
+	default:
 	    break;
     }
     if ( status == 0  &&  Figure  &&  Point )
@@ -812,6 +818,8 @@ void Track_Enclosure( class ltv *self, enum view_MouseAction action, long x , lo
 		    EnclosureHeight = abs(EnclosureHeight);
 		}
 	    }
+	    break;
+	default:
 	    break;
     }
     Draw_Enclosure( self );
@@ -871,9 +879,9 @@ long Neighbor( class ltv *self, zip_type_pixel x , zip_type_pixel y, zip_type_fi
 
     IN(Neighbor);
     *point = 0;
-    if ( *figure = (ZipView)->Which_Pane_Figure(  x, y, ForegroundPane ) )
+    if ( ( *figure = (ZipView)->Which_Pane_Figure(  x, y, ForegroundPane ) ) )
     { DEBUGst(Near Figure,(*figure)->zip_figure_name);
-    if ( *point = Which_Figure_Point( self, *figure, ForegroundPane, x, y ) )
+    if ( ( *point = Which_Figure_Point( self, *figure, ForegroundPane, x, y ) ) )
     {
 /*===zipview_Figure_Point...*/
 	if ( *point == 1 )
@@ -1172,7 +1180,7 @@ Rename_Exception( class ltv  *self, char *facility, long  status  )
      {
 	 strcpy( msg, TentativeName );
 	 DEBUGst(Original Chain-name,msg);
-	 if ( ptr = strchr( msg, '[' ) )
+	 if ( ( ptr = strchr( msg, '[' ) ) )
 	     *ptr = 0;
 	 while ( duplicate )
 	 {
@@ -1269,7 +1277,7 @@ void Split_Chain_Name( class ltv *self, zip_type_figure  figure, char		     **ri
     *left_name = left;
     *right_name = right;
     strcpy( full, figure->zip_figure_name );
-    if ( comma = strchr( full, ',' ) )
+    if ( ( comma = strchr( full, ',' ) ) )
     {
 	*comma = 0;
 	strcpy( right, full );
@@ -1292,8 +1300,9 @@ static void
 Lighten_Background_Command( class ltv  *self )
 {
     IN(Lighten_Background_Command);
-    if ( BackgroundLight == 0 )
+    if ( BackgroundLight == 0 ) {
 	if ( WMWM ) BackgroundLight = '4';  else BackgroundLight = '6';
+    }
     if ( BackgroundLight > '1'  &&  BackgroundLight < '9' )
     {
 	if ( WMWM )
@@ -1429,7 +1438,8 @@ Quit_Command( class ltv  *self )
 {
     static const char	     * const choices[] =
     {"Cancel", "Save", "Save & Quit", "Quit Anyway", 0};
-    long			      response = 0, result;
+    long			      response = 0;
+    long UNUSED result; // used with DB=1
 
     IN(Quit_Command);
     if ( Modified )

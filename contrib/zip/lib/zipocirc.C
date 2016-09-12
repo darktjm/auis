@@ -121,7 +121,7 @@ zipocirc::Build_Object( zip_type_pane pane, enum view_MouseAction action, long	 
 	}
       break;
     case view_LeftUp:
-      if ( figure = CurrentFigure )
+      if ( ( figure = CurrentFigure ) )
         {
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zip_default );
 	if ( figure_x_points(0) == 0 )
@@ -135,7 +135,7 @@ zipocirc::Build_Object( zip_type_pane pane, enum view_MouseAction action, long	 
 	}
 	break;
     case view_LeftMovement:
-      if ( figure = CurrentFigure )
+      if ( ( figure = CurrentFigure ) )
 	{
 	(this->view_object)->Draw_Figure(  figure, pane );
         if ( abs( X - figure_x_point ) < abs( Y - figure_y_point ) )
@@ -146,6 +146,8 @@ zipocirc::Build_Object( zip_type_pane pane, enum view_MouseAction action, long	 
 		zip_figure_auxiliary_point, radial_point, 0 );
 	(this->view_object)->Draw_Figure(  CurrentFigure, pane );
 	}
+      break;
+    default:
       break;
     }
   OUT(zipocirc::Build_Object);
@@ -493,7 +495,7 @@ zipocirc::Contains( zip_type_figure		 figure, zip_type_pane		 pane, zip_type_pix
         
   {
   boolean			status = FALSE;
-  long				x_radius, y_radius, x_origin, y_origin, result, tolerance;
+  long				x_radius, y_radius, x_origin, y_origin, result;
 
   IN( zipocirc::Contains )
   x_origin = window_x_point;

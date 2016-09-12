@@ -23,18 +23,17 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #include "new.h"
 #include "symtab.h"
 #include "gram.h"
+#include "proto.h"
 
-
-bucket **symtab;
+static bucket **symtab;
 bucket *firstsymbol;
-bucket *lastsymbol;
+static bucket *lastsymbol;
 
 
-
-int
-hash(char *key)
+static int
+hash(const char *key)
 {
-  char *cp;
+  const char *cp;
   int k;
 
   cp = key;
@@ -47,18 +46,12 @@ hash(char *key)
 
 
 
-char *
-copys(char *s)
+static char *
+copys(const char *s)
 {
-  int i;
-  char *cp;
   char *result;
 
-  i = 1;
-  for (cp = s; *cp; cp++)
-    i++;
-
-  result = xmalloc((unsigned int)i);
+  result = xmalloc((unsigned int)strlen(s) + 1);
   strcpy(result, s);
   return (result);
 }
@@ -77,7 +70,7 @@ tabinit(void)
 
 
 bucket *
-getsym(char *key)
+getsym(const char *key)
 {
   int hashval;
   bucket *bp;
