@@ -75,6 +75,8 @@ END-SPECIFICATION  ************************************************************/
 #include "zipprint.h"
 #include "zipprint.H"
 
+#define PaneViewObj (self->view_object)
+
 long Highlight_Pane_Points( class zipedit		  *self, zip_type_pane		   pane );
 long Normalize_Pane_Points( class zipedit		  *self, zip_type_pane		   pane );
 static int Delete_Inferior_Image( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane );

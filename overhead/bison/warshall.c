@@ -21,12 +21,12 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #include <stdio.h>
 #include "andrewos.h"
 #include "machine.h"
-
+#include "proto.h"
 
 /* given n by n matrix of bits R, modify its contents
    to be the transive closure of what was given.  */
 
-void
+static void
 TC(unsigned *R, int n)
 {
   int rowsize;

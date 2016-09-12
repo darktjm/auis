@@ -745,6 +745,7 @@ PRIVATE void HTDirOutBottom (HTStructured * target,
 
 
 #ifdef GOT_READ_DIR
+#include <time.h>
 /*						    	HTBrowseDirectory()
 **	This function scrolls through the directory file given and
 **	generates an HTML-object. It uses the global variables:

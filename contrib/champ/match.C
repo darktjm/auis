@@ -284,7 +284,7 @@ static int YearLengths[] = {353, 354, 355, 383, 384, 385};
 /* A table defining the type of year for every year from 5730 (1969-70) to 5780 (2019-2020)
     as indices into the HebrewMonthLenghts arrays (recall there are 6 types of years */
 
-static char YearTypes[] = {
+static unsigned char YearTypes[] = {
 /* 5730 */    3, 1, 2, 3, 2, 1, 5, 0, 4, 2,
 /* 5740 */    2, 3, 1, 2, 5, 1, 3, 2, 1, 3,
 /* 5750 */    2, 1, 5, 0, 2, 4, 2, 3, 1, 2,

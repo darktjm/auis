@@ -104,14 +104,6 @@ static void Clear_Font( class zipedit	      *self, zip_type_pane	       pane );
 static void Set_Constraints( class zipedit	      *self, zip_type_pane	       pane, zip_type_pixel	       x  , zip_type_pixel	       y, zip_type_point	      *X , zip_type_point	      *Y );
 
 
-extern int zipedit_Handle_Font_Family_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action, long  x , long y , long clicks );
-extern int zipedit_Handle_Font_Height_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action, long x , long              y , long clicks );
-extern int zipedit_Handle_Font_Italic_Selection( class zipedit  *self, zip_type_pane pane, enum view_MouseAction action , long x , long y , long  clicks );
-extern int zipedit_Handle_Font_Bold_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , long x , long  y , long clicks );
-extern int zipedit_Handle_Font_Sample_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , long x , long y , long clicks );
-extern int zipedit_Handle_Figure_Palette_Hit( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , int x , int  y , int clicks );
-extern int zipedit_Handle_Shade_Palette_Hit( class zipedit *self, zip_type_pane pane, enum view_MouseAction  action , long x , long y , long clicks );
-
 int
 zipedit::Accept_Hit( zip_type_pane	hit_pane, enum view_MouseAction   action , long x , long y , long clicks )
 {
@@ -309,11 +301,12 @@ Handle_Edit_Selection( class zipedit		  *self, zip_type_pane		   pane, enum view
     {
     DEBUG(Build Pending);
     zipedit_Cancel_Enclosure( self, pane );
-    if ( CurrentFigure )
+    if ( CurrentFigure ) {
       if ( SelectionLevel >= ImageSelection )
         (self)->Normalize_Image_Points(  CurrentImage, pane );
         else
         (self)->Normalize_Figure_Points(  CurrentFigure, pane );
+    }
     SelectionLevel = 0;
     (self)->Set_Pane_Highlight_Icon(  pane, zip_figure_point_icon );
 
@@ -379,7 +372,7 @@ Edit_Modification_LBDT( class zipedit *self, zip_type_pane pane, zip_type_pixel 
     long			      status = zip_ok;
     zip_type_figure	      figure = NULL;
     long			      point = 0;
-    struct timeval		      dummy_time, dummy_zone;
+    struct timeval		      dummy_time;
     static long			      prior_time, this_time;
 
     IN(Edit_Modification_LBDT);
@@ -523,11 +516,12 @@ Edit_Modification_LBDM( class zipedit *self, zip_type_pane pane, zip_type_pixel 
 	Set_Constraints( self, pane, x, y, &X, &Y );
 	if ( abs(X - LastPointX)  ||  abs(Y - LastPointY) )
 	{
-	    if ( pane->zip_pane_edit->zip_pane_edit_beginning )
+	    if ( pane->zip_pane_edit->zip_pane_edit_beginning ) {
 		if ( SelectionLevel >= ImageSelection )
 		    (self)->Normalize_Image_Points(  CurrentImage, pane );
 		else
 		    (self)->Normalize_Figure_Points(  CurrentFigure, pane );
+	    }
 	    (View)->Set_Pane_Painting_Mode(  pane, zipview_paint_inverted );
 	    switch ( SelectionLevel )
 	    {
@@ -713,7 +707,7 @@ void Duplicate_Selection( class zipedit	      *self, zip_type_pane	       pane, 
   peer_figure = CurrentImage->zip_image_figure_anchor;
   while ( peer_figure  &&  peer_figure->zip_figure_next )
     peer_figure = peer_figure->zip_figure_next;
-  while ( original_figure = zipedit_Next_Selected_Figure( self, PANE, original_figure ) )
+  while ( ( original_figure = zipedit_Next_Selected_Figure( self, PANE, original_figure ) ) )
     { DEBUGst(Duplicating Figure-name,original_figure->zip_figure_name );
     (self)->Normalize_Figure_Points(  original_figure, pane );
     (Data)->Create_Figure(  &new_figure, NULL, original_figure->zip_figure_type,
@@ -1077,7 +1071,7 @@ static
 void Set_Constraints( class zipedit	      *self, zip_type_pane	       pane, zip_type_pixel	       x  , zip_type_pixel	       y, zip_type_point	      *X , zip_type_point	      *Y )
           {
   double		      point_offset, point_delta;
-    double gsize = 1.0, SM, SD;
+    double gsize = 1.0;
 
   IN(Set_Constraints);
   *X = (View)->X_Pixel_To_Point(  pane, NULL, x );

@@ -87,8 +87,8 @@ lt::Read_Visuals( char *foreground , char *background )
     strcpy( this->foreground_stream_name, foreground );
     strcpy( this->background_raster_name, background );
     DEBUGst(Stream-name,this->foreground_stream_name);
-    if ( status = (this->zipp)->Open_Stream( &this->foreground_stream,
-					   this->foreground_stream_name, 0 ) )
+    if ( ( status = (this->zipp)->Open_Stream( &this->foreground_stream,
+					   this->foreground_stream_name, 0 ) ) )
     { DEBUG(Open Failure);
     if ( status ==  zip_system_status_value_boundary + ENOENT )
     { DEBUG(Non-existent);
@@ -101,7 +101,7 @@ lt::Read_Visuals( char *foreground , char *background )
 	status = (this->zipp)->Read_Stream(  this->foreground_stream );
     if ( status == zip_ok )
     {
-	if ( file = fopen( this->background_raster_name, "r" ) )
+	if ( ( file = fopen( this->background_raster_name, "r" ) ) )
 	{
 	    if ( (this->rasterp)->Read(  file, 12345 ) )
 	    { DEBUG(ERROR Reading Raster);

@@ -231,15 +231,15 @@ PRIVATE FILE *	     output = NULL;
 /*				HELP FUNCTIONS				     */
 /* ------------------------------------------------------------------------- */
 /* tpn util */
-PUBLIC char *getfulladdress (CONST char *           relative_name,
-                                HTParentAnchor *       here)
+PRIVATE char *getfulladdress (CONST char *           relative_name,
+                                HTAnchor *       here)
 {
     char *              full_address = 0;
     int                 result;
     char *              mycopy = 0;
     char *              stripped = 0;
     char *              current_address =
-                                HTAnchor_address((HTAnchor*)here);
+                                HTAnchor_address(here);
 
     StrAllocCopy(mycopy, relative_name);
 
@@ -864,10 +864,10 @@ PUBLIC HTEventState EventHandler (HTRequest ** actreq)
 		(*actreq)->output_stream = HTFWriter_new(fp,NO );
 		(*actreq)->output_format = WWW_MIME ;
 		loadstat = HTLoadAbsolute(fullname, *actreq);
-		tpnanchors[offset] =  (*actreq)->anchor;
+		tpnanchors[offset] =  (HTAnchor *)(*actreq)->anchor;
 
 		/* following should be deleated is no problems are found */
-		p = HTAnchor_address( (*actreq)->anchor);
+		p = HTAnchor_address( (HTAnchor *)(*actreq)->anchor);
 		if(strcmp(p,fullname) != 0) 
 		    printf("^^ problem %s != %s\n",p,fullname);
 		free(p);

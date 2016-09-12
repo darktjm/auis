@@ -80,16 +80,16 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
 #include "2rtf.h"
 #include "input.h"
 
-extern struct TableStruct *Table;
-extern struct StyleStackStruct *Style;
-
-void CloseFiles(), AbsorbSpace();
-long int ParseText();
-
+static struct TableStruct *FindNode(int field, char *string);
+static char *GetInstruction(void);
+static int Execute(char *instruction, int transform);
+static void ReplaceText(char *instruction, int mode, int transform, char tofind);
 
 void ParseMain(char *Filein, char *Fileout)
 /*
@@ -127,8 +127,6 @@ void ParseMain(char *Filein, char *Fileout)
   printf("* Finished processing %ld lines of %s.\n", CurrLine, Filein);
 }
 
-extern int ReplaceText(char *instruction, int mode, int transform, char tofind);
-
 long int ParseText(int tofind, int transform, int action)
 /*
  *
@@ -146,10 +144,10 @@ long int ParseText(int tofind, int transform, int action)
  *
  */
 {
-   char ch, instruction[TMP_SIZE], tmp_instruction[TMP_SIZE], *GetInstruction(), *makelower();
-   struct TableStruct *tmp, *FindNode();
+   char ch, tmp_instruction[TMP_SIZE];
+   struct TableStruct *tmp;
    struct StyleStackStruct *stytmp;
-   int Execute(), in;
+   int in;
 
    while((in = fgetc(fin)) != tofind)
    {
@@ -285,7 +283,7 @@ long int ParseText(int tofind, int transform, int action)
 }
 
 
-struct TableStruct *FindNode(int field, char *string)
+static struct TableStruct *FindNode(int field, char *string)
 /*
  *
  *  Look up string in internal translation table.
@@ -322,7 +320,7 @@ struct TableStruct *FindNode(int field, char *string)
   exit(0);
 }
 
-char *GetInstruction(void)
+static char *GetInstruction(void)
 /*
  *
  *  Read in commands that occur after "\".
@@ -330,7 +328,7 @@ char *GetInstruction(void)
  */
 {
   char character, *instruction;
-  int in, n;
+  int in;
 
   instruction = (char *) calloc (TMP_SIZE, sizeof(char));
 
@@ -358,10 +356,11 @@ char *GetInstruction(void)
 	  "End of file reached.");
   
   CloseFiles();
+  exit(1);
 }
 
 
-int Execute(char *instruction, int transform)
+static int Execute(char *instruction, int transform)
 /*
  *
  *  Handle instruction read by GetInstruction() accordingly.
@@ -369,7 +368,7 @@ int Execute(char *instruction, int transform)
  */
 {
   struct TableStruct *tmp;
-  char ch, close;
+  char ch;
 
   tmp = FindNode(EZCOLUMN, instruction);
 
@@ -408,7 +407,7 @@ int Execute(char *instruction, int transform)
 }
 
 
-int ReplaceText(char *instruction, int mode, int transform, char tofind)
+static void ReplaceText(char *instruction, int mode, int transform, char tofind)
 /*
  *
  *  Make simple replacement of text if ezword was not

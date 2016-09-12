@@ -69,7 +69,7 @@ StringToBitVector(char *string, int max, BitVector bv)
 {
 	int i;
 
-	if(strlen(string) != max)
+	if((int)strlen(string) != max)
 		recog_error("StringToBitVector: strlen(%s)=%d != %d",
 			string, (int)strlen(string), max);
 

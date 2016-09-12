@@ -87,7 +87,7 @@ zip::Create_Figure( zip_type_figure	      *figure, const char			      *name, uns
   IN(zip_Create_Figure);
   if ( image )
     {
-    if ( *figure = (zip_type_figure) calloc( 1, sizeof(struct zip_figure) ) )
+    if ( ( *figure = (zip_type_figure) calloc( 1, sizeof(struct zip_figure) ) ) )
       {
       (*figure)->zip_figure_image = image;
       (*figure)->zip_figure_image->zip_image_stream->
@@ -124,7 +124,6 @@ zip::Create_Figure( zip_type_figure	      *figure, const char			      *name, uns
 long
 zip::Destroy_Figure( zip_type_figure	       figure )
       {
-    class zip *self=this;
   int			      status = zip_ok;
 
   IN(zip_Destroy_Figure);
@@ -427,8 +426,7 @@ zip::Set_Figure_Line_Dash( zip_type_figure		 figure, const char				 *pattern, in
       {
 	  if ( pattern )
             {
-	      if ( figure->zip_figure_line_dash_pattern = (char *) malloc( strlen( pattern ) + 1 ))
-		  strcpy( figure->zip_figure_line_dash_pattern, pattern );
+	      figure->zip_figure_line_dash_pattern = strdup( pattern );
 	      figure->zip_figure_line_dash_offset = offset;
 	      figure->zip_figure_line_dash_type = type;
 	    }

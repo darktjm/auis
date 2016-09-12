@@ -153,6 +153,8 @@ boolean runbuttonview::Touch(int ind, enum view_MouseAction action)
 	case view_LeftDown:
 	    b->ExecuteCommand(this);
 	    break;
+	default:
+	    break;
     }
     return FALSE;
 }

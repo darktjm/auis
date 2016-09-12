@@ -670,7 +670,6 @@ RedrawView(gofigview  *self) {
 		for (i = 0; yhoshi[i]>=0; i++) 
 			self->yhoshi |= 1<<yhoshi[i];
 
-		int lthick = self->linethickness;
 		static struct stone hstone = {0, 0, 0, '/', 0};
 		for (i = 0; xhoshi[i]>=0; i++) 
 			for (j = 0; yhoshi[j]>=0; j++) {
@@ -812,6 +811,7 @@ actionmenus(enum actionopts a, char *c) {
 	case  Alternate: *c = 'A';  return "Gofig,Black-White%s~10";
 	case  White: *c = 'W';  return "Gofig,White%s~12";
 	case  Black: *c = 'B';  return "Gofig,Black%s~14";
+        default:
 	case  Empty: *c = 'E';  return "Gofig,Empty%s~16";
 	case  Select: *c = 'S';  return "Gofig,Select Only%s~18";
 	}
@@ -821,6 +821,7 @@ notemenus(enum noteopts a, char *c) {
 	switch (a) {
 	case  Letter: *c = 'a';  return "Gofig,Auto a b c ...%s~20";
 	case  Number: *c = '0';  return "Gofig,Auto 1 2 3 ...%s~22";
+	default:
 	case  None: *c = '-';  return "Gofig,No Auto Notes%s~24";
 	}
 };
@@ -1089,7 +1090,7 @@ SetPrintSize(gofigview *self, int code) {
 	gofig *dobj = (gofig *)self->dataobject;
 	char buffer[20];
 	char prompt[50];
-	double newcolwidth, pwidth, pheight;
+	double newcolwidth;
 
 	long wpts, hpts;
 	self->DesiredPrintSize( pagew, pageh, view_NoSet, &wpts, &hpts );
@@ -1918,7 +1919,6 @@ GeneratePostScript(FILE *file, gofig *dobj, const char *prefix, int wpts, int hp
 			prefix, height, width );	
 
 	int i, j;
-	int startend, stopend;
 	unsigned edges;
 	dobj->getedges( & edges );
 	float leftlim, rightlim, toplim, botlim;

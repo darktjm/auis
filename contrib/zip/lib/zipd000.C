@@ -96,7 +96,7 @@ zip::Contextual_Figure_Pattern( zip_type_figure	   figure )
   if ( figure->zip_figure_image->zip_image_fill.zip_image_pattern )
     pattern = figure->zip_figure_image->zip_image_fill.zip_image_pattern;
   else
-  if ( pattern = (this)->Superior_Image_Pattern(  figure->zip_figure_image->zip_image_superior ) )
+  if ( ( pattern = (this)->Superior_Image_Pattern(  figure->zip_figure_image->zip_image_superior ) ) )
     {}
   else
   if ( figure->zip_figure_image->zip_image_stream->zip_stream_fill.zip_stream_pattern )
@@ -117,7 +117,7 @@ zip::Contextual_Figure_Shade( zip_type_figure	   figure )
   if ( figure->zip_figure_image->zip_image_fill.zip_image_shade )
     shade = figure->zip_figure_image->zip_image_fill.zip_image_shade;
   else
-  if ( shade = (this)->Superior_Image_Shade(  figure->zip_figure_image->zip_image_superior ) )
+  if ( ( shade = (this)->Superior_Image_Shade(  figure->zip_figure_image->zip_image_superior ) ) )
     {}
   else
   if ( figure->zip_figure_image->zip_image_stream->zip_stream_fill.zip_stream_shade )
@@ -246,7 +246,7 @@ zip::Contextual_Figure_Line_Color( zip_type_figure	     figure, double		     *re
       *blue = color->blue;
   }
   else
-  if ( color = (this)->Superior_Image_Line_Color(  figure->zip_figure_image->zip_image_superior ))
+  if ( ( color = (this)->Superior_Image_Line_Color(  figure->zip_figure_image->zip_image_superior )))
     {
       *red = color->red;
       *green = color->green;
@@ -285,7 +285,7 @@ zip::Contextual_Figure_FillFG_Color( zip_type_figure	     figure, double		     *
       *blue = color->blue;
   }
   else
-  if ( color = (this)->Superior_Image_FillFG_Color(  figure->zip_figure_image->zip_image_superior ))
+  if ( ( color = (this)->Superior_Image_FillFG_Color(  figure->zip_figure_image->zip_image_superior )))
     {
       *red = color->red;
       *green = color->green;
@@ -325,7 +325,7 @@ zip::Contextual_Figure_FillBG_Color( zip_type_figure	     figure, double		     *
       *blue = color->blue;
   }
   else
-  if ( color = (this)->Superior_Image_FillBG_Color(  figure->zip_figure_image->zip_image_superior ))
+  if ( ( color = (this)->Superior_Image_FillBG_Color(  figure->zip_figure_image->zip_image_superior )) )
     {
       *red = color->red;
       *green = color->green;
@@ -373,18 +373,15 @@ zip::Define_Font( const char *font_name, short             	  *font_index )
         }
     if ( font == NULL )
       {
-      if ( Fonts = (zip_type_fonts)
+      if ( ( Fonts = (zip_type_fonts)
 	    realloc( Fonts, sizeof(struct zip_fonts) +
 	    ((Fonts->zip_fonts_count + 1) *
-		 sizeof(struct zip_fonts_table)) ) )
+		 sizeof(struct zip_fonts_table)) ) ) )
         {
         if ( font_index )  *font_index = loop_index;
-        if ( Fonts->zip_fonts_vector[Fonts->zip_fonts_count].
-		 zip_fonts_table_name = (char*) malloc( strlen( font_name ) + 1 ) )
+        if ( ( Fonts->zip_fonts_vector[Fonts->zip_fonts_count].
+		 zip_fonts_table_name = strdup( font_name ) ) )
 	  {
-          strcpy( Fonts->
-		     zip_fonts_vector[Fonts->zip_fonts_count].
-		      zip_fonts_table_name, font_name );
 	  fontdesc::ExplodeFontName( font_name, family_name, sizeof( family_name ),
 				  &font_style, &font_size );
           font = Fonts->zip_fonts_vector[Fonts->zip_fonts_count].
@@ -456,7 +453,6 @@ zip::Try_Stream_Exception_Handler( zip_type_stream	       stream )
 int
 zip::Try_general_Exception_Handler( )
     {
-  class zip *self=this;
   IN(zip::Try_general_Exception_Handler);
   if ( generalExceptionHandler )
     {
@@ -552,19 +548,19 @@ unsigned int palloc_destroy_pool (pool_type  *pool);
 int palloc_create_pool (pool_type  **pool, unsigned int expected_size)
         {
 /*===
-    /* allocate the pool discriptor including the first block !/
+    /! allocate the pool discriptor including the first block !/
 
     *pool = (pool_type *) malloc (sizeof(pool_type)+expected_size);
 
-    /* verify that the allocation was sucessful, return if not !/
+    /! verify that the allocation was sucessful, return if not !/
     if (*pool == 0) {
 	return (-1);
     }
 
-     /* initialize the pool descriptor !/
+     /! initialize the pool descriptor !/
 
     (*pool)->block_size = (expected_size > 4000) ? (expected_size / 4) :
-         1000;  /* the minimum additional block is 1000 bytes !/
+         1000;  /! the minimum additional block is 1000 bytes !/
 
     (*pool)->current_block = &((*pool)->first_block);
 
@@ -572,7 +568,7 @@ int palloc_create_pool (pool_type  **pool, unsigned int expected_size)
 
     (*pool)->space_left_in_current_block = expected_size;
 
-    /* initialize first block !/
+    /! initialize first block !/
 
     (*pool)->first_block.next_block = 0;
 ===*/
@@ -583,20 +579,20 @@ unsigned char *palloc (pool_type  *pool, unsigned int size)
         {
 return (unsigned char *) malloc( (size + 3) & (~3) );
 /*===
-    unsigned char *chunk; /* holds address of allocated chunk !/
+    unsigned char *chunk; /! holds address of allocated chunk !/
 
-/* force size to be a multiple of 4 for alignment !/
+/! force size to be a multiple of 4 for alignment !/
     size = (size + 3) & (~3);
-    /* check for available space !/
+    /! check for available space !/
     if (size > pool->space_left_in_current_block) {
-	/* not enough space left- go get another block and chain it on !/
+	/! not enough space left- go get another block and chain it on !/
 	if (size > pool->block_size) {
-	    pool->block_size = size; /* adjust block size so chunk will just
+	    pool->block_size = size; /! adjust block size so chunk will just
 	        fit. This should not happen, but just in case ... !/
 	}
 	(pool->current_block)->next_block = (struct block *) malloc (
 	    sizeof (struct block *) + pool->block_size);
-	/* verify that the allocation was sucessful, return is not !/
+	/! verify that the allocation was sucessful, return is not !/
 	if ((pool->current_block)->next_block == 0) {
 	    return (0);
 	}
@@ -605,7 +601,7 @@ return (unsigned char *) malloc( (size + 3) & (~3) );
         pool->pos_in_current_block = &((pool->current_block)->body[0]);
         pool->space_left_in_current_block = pool->block_size;
     }
-    /* allocate chunk and increment stuff !/
+    /! allocate chunk and increment stuff !/
     chunk = pool->pos_in_current_block;
     pool->pos_in_current_block += size;
     pool->space_left_in_current_block -= size;
@@ -619,11 +615,11 @@ unsigned int palloc_destroy_pool (pool_type  *pool)
     struct block *this_block;
     struct block *next_block;
 
-    /* set up for scan and free pool descriptor which includes the first block !/
+    /! set up for scan and free pool descriptor which includes the first block !/
     this_block = pool->first_block.next_block;
    free (pool);
 
-    /* free each of the blocks !/
+    /! free each of the blocks !/
    
     while (this_block != 0) {
 	next_block = this_block->next_block;
@@ -839,6 +835,7 @@ int symtab_find (symtab_type  *symtab, unsigned char *symbol, struct user_data  
     return (rc);
 }
 
+#if 0 /* unused */
 /********************\
 * 		     *
 * symtab_scan_reset  *
@@ -881,6 +878,7 @@ int symtab_scan_next (symtab_type  *symtab, unsigned char **symbol, struct user_
     }
  return (rc);
 }
+#endif
 
 
 /*************************************************************\

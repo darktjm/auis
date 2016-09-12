@@ -201,7 +201,7 @@ zip::Create_Inferior_Image( struct zip_image	     **image, const char			      *n
       {
       if ( superior_ptr )
         {
-        if ( image_ptr = superior_ptr->zip_image_inferior )
+        if ( ( image_ptr = superior_ptr->zip_image_inferior ) )
 	  {
 	  while ( image_ptr->zip_image_peer )
             image_ptr = image_ptr->zip_image_peer;
@@ -215,7 +215,7 @@ zip::Create_Inferior_Image( struct zip_image	     **image, const char			      *n
         }
         else /* Superior is Null */
         {
-        if ( image_ptr = stream->zip_stream_image_anchor )
+        if ( ( image_ptr = stream->zip_stream_image_anchor ) )
 	  {
   	  while ( image_ptr->zip_image_peer )
             image_ptr = image_ptr->zip_image_peer;
@@ -380,7 +380,7 @@ int Propagate_Image_Stream_Ptr( class zip		      *self, zip_type_image	       im
   superior_image = image->zip_image_superior;
   image->zip_image_superior = NULL;
   image_ptr = image;
-  while ( image_ptr = (self)->Next_Image(  image_ptr ) )
+  while ( ( image_ptr = (self)->Next_Image(  image_ptr ) ) )
     {
     image_ptr->zip_image_stream = image->zip_image_stream;
     }
@@ -604,8 +604,7 @@ zip::Set_Image_Line_Dash( zip_type_image		 image, char				 *pattern, int				 off
       {
 	  if ( pattern )
             {
-	      if ( image->zip_image_line_dash_pattern = (char *) malloc( strlen( pattern ) + 1 ))
-		  strcpy( image->zip_image_line_dash_pattern, pattern );
+	      image->zip_image_line_dash_pattern = strdup( pattern );
 	      image->zip_image_line_dash_offset = offset;
 	      image->zip_image_line_dash_type = type;
 	    }

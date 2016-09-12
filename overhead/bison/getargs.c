@@ -25,6 +25,7 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #include "getopt.h"
 #include "andrewos.h"
 #include "files.h"
+#include "proto.h"
 
 int verboseflag;
 int definesflag;
@@ -35,14 +36,8 @@ int toknumflag = 0;
 int rawtoknumflag = 0;
 char *spec_name_prefix; /* for -p.  */
 char *spec_file_prefix; /* for -b. */
-extern int fixed_outfiles;/* for -y */
   
-extern char *program_name;
-extern char *version_string;
-
-extern void warns();	/* main.c */
-
-struct option longopts[] =
+static struct option longopts[] =
 {
   {"debug", 0, &debugflag, 1},
   {"defines", 0, &definesflag, 1},
@@ -62,7 +57,7 @@ struct option longopts[] =
   {0, 0, 0, 0}
 };
 
-void
+static void
 usage (FILE *stream)
 {
   fprintf (stream,

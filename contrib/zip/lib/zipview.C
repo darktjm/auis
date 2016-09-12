@@ -102,14 +102,13 @@ END-SPECIFICATION  ************************************************************/
 
 static boolean debug=TRUE;
 #define	 Data			      (self->data_object)
+#undef View
 #define	 View			      self
 #define	 Editor			      self->edit_object
 #define	 Printer		      self->print_object
 #define	 DataObjects(i)		      ((Data->objects)[i])
-#define	 Objects(i)		      ((self->objects)[i])
 #define	 Pane			      self->pane
 #define  PanningPrecision	      self->panning_precision
-#define  CurrentPane		      self->current_pane
 #define  CurrentPage		      self->current_page
 #define	 Edge			      self->edge
 #define  Block			      self->block
@@ -119,10 +118,6 @@ static boolean debug=TRUE;
 #define  BlockWidth		      self->block.width
 #define  Editing		      self->states.editing
 #define  FirstTime		      self->states.first_time
-#define  Abeyant		      self->states.abeyant
-#define  Application		      self->states.application
-#define  Action			      self->action
-#define  Menu			      self->menu
 #define  Keystate		      self->keystatep
 #define  Cursor			      self->cursor
 #define	 MouseAction		      self->mouse_action
@@ -393,7 +388,6 @@ zipview::DesiredSize( long			       given_width , long			       given_height,
           {
   view_DSattributes     result = view_WidthFlexible |
 					       view_HeightFlexible;
-  class zipview *self=this;
   IN(zipview_DesiredSize);
   DEBUGdt( Given Width, given_width);
   DEBUGdt( Given Height, given_height);
@@ -578,7 +572,7 @@ zipview::Hit( enum view_MouseAction       action, long			       x , long			     
       (Editor)->Accept_Hit(  pane, action, x, y, clicks );
       }
     else
-    if ( figure = (this)->Within_Which_Figure(  x, y ) )
+    if ( ( figure = (this)->Within_Which_Figure(  x, y ) ) )
       {  DEBUG(Within a Figure);
       if ( !InputFocus  ||  action == view_LeftDown )
         view = (Objects(figure->zip_figure_type))->Object_Hit( 
@@ -613,7 +607,7 @@ zipview::Hit( enum view_MouseAction       action, long			       x , long			     
       view = (class view *) this;
       (Editor)->Accept_Hit(  pane, action, x, y, clicks );
       }
-      else  DEBUG(No Pane ::Hit);
+      else  { DEBUG(No Pane ::Hit); }
     }
   MouseAction = view_NoMouseEvent;
   OUT(zipview_Hit );
@@ -909,7 +903,7 @@ Print_To_File_Command( class zipview        *self )
   if ( (self)->Query(  "Enter Print-File Name: ", NULL, &reply ) == zip_ok  &&
        reply  &&  *reply )
     {
-    if ( file = fopen( reply, "w" ) )
+    if ( ( file = fopen( reply, "w" ) ) )
       {
       sprintf( msg, "Generating PostScript Print-File '%s'", reply );
       (self)->Announce(  msg );
@@ -1013,7 +1007,6 @@ static void
 Set_Print_Size_Command(class zipview      *self)
 {
     char request[150], *answer = NULL;
-    char w[5], h[5];
     float width, height, aspect;
     long status;
 
@@ -1353,6 +1346,8 @@ void Pending_Hit( class zipview	    *self )
 	(self)->Terminate_Panning(  Pane, MouseX, MouseY, 0, 0, 1 );
 	Highlight_View( self );
 	break;
+      default:
+	break;
       }
   OUT(Pending_Hit);
   }
@@ -1519,7 +1514,6 @@ void Normalize_View( class zipview	      *self )
 static
 void Prepare_Default_Pane( class zipview	       *self )
     {
-  long			      status = zip_ok;
   char				      pane_name[257];
   static int			      pane_number = 1;
 
@@ -1540,9 +1534,9 @@ void Prepare_Default_Pane( class zipview	       *self )
   (self)->Set_Pane_Object_Height(  Pane, self->data_object->object_height = (self)->Pane_Height( Pane) );
 
   if ( Data->page_count )
-    status = (self)->Set_Pane_Image(  Pane, (self->data_object)->Image(  "ZIP_PAGE_IMAGE_001" ) );
+    /* status = */ (self)->Set_Pane_Image(  Pane, (self->data_object)->Image(  "ZIP_PAGE_IMAGE_001" ) );
     else
-    status = (self)->Set_Pane_Stream(  Pane, self->data_object->stream );
+    /* status = */ (self)->Set_Pane_Stream(  Pane, self->data_object->stream );
   OUT(Prepare_Default_Pane);
   }
 
@@ -1557,10 +1551,10 @@ Prepare_Default_Stream( class zipview	       *self )
 
   IN(Prepare_Default_Stream);
   sprintf( stream_name, "ZipView-Created-Stream-%02d", stream_number++ );
-  if ( status = (Data)->Create_Stream(  &self->data_object->stream, stream_name, zip_default ) )
+  if ( ( status = (Data)->Create_Stream(  &self->data_object->stream, stream_name, zip_default ) ) )
     {DEBUGdt( ZipView ERROR: Create-Stream Status, status);}
 
-  if ( status = (Data)->Set_Stream_Source(  self->data_object->stream, source ) )
+  if ( ( status = (Data)->Set_Stream_Source(  self->data_object->stream, source ) ) )
   {DEBUGdt( ZipView ERROR: Set-Stream-Source Status, status);}
 
   /* Set the stream extrema based on the print size since anything outside

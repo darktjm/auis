@@ -100,8 +100,6 @@ show_usage(gofigapp  *self)
 	boolean 
 gofigapp::ParseArgs(int  argc, const char  **argv)
 			{
-	char *name;
-
 	/* application::ParseArgs() passes across the "runapp" and its switches,
 		leaving "gofiga" as the first arg. 
 		The following switches are also processed and removed:  
@@ -150,7 +148,6 @@ gofigapp::Start()
 			though it is not necessary */
 
 	buffer *newbuf;
-	char tempName[100];
 	frame *newfrm;
 	im *im;
 	view *v;

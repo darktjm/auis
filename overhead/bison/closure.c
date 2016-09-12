@@ -53,18 +53,14 @@ Frees itemset, ruleset and internal data.
 #include "machine.h"
 #include "new.h"
 #include "gram.h"
+#include "proto.h"
 
-
-extern short **derives;
-extern char **tags;
-
-void set_fderives();
-void set_firsts();
-
-extern void RTC();
+static void set_fderives(void);
+static void set_firsts(void);
 
 short *itemset;
 short *itemsetend;
+
 static unsigned *ruleset;
 
 /* internal data.  See comments before set_fderives and set_firsts.  */
@@ -96,7 +92,7 @@ initialize_closure(int n)
    for each nonterminal.  For example, if symbol 5 can be derived as
    the sequence of symbols 8 3 20, and one of the rules for deriving
    symbol 8 is rule 4, then the [5 - ntokens, 4] bit in fderives is set.  */
-void
+static void
 set_fderives(void)
 {
   unsigned *rrow;
@@ -156,7 +152,7 @@ set_fderives(void)
    For example, if some rule expands symbol 5 into the sequence of symbols 8 3 20,
    the symbol 8 can be the beginning of the data for symbol 5,
    so the bit [8 - ntokens, 5 - ntokens] in firsts is set. */
-void
+static void
 set_firsts(void)
 {
   unsigned *row;

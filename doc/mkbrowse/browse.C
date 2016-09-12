@@ -125,8 +125,9 @@ static void ShowSubClasses(clist *t,int depth)
 int main(int argc, char **argv) {
     char classname[1024];
     int tok;
-    int i;
     char *p;
+    if(argc > 1)
+	usage();
     tok=NextToken();
     while(!done) {
 	switch(tok) {
@@ -178,7 +179,7 @@ int main(int argc, char **argv) {
     }
     {
 	clist **sortedlist=new clist *[entries], *TempEntry, *lasttop=NULL;
-	int i=entries, index;
+	int i=entries;
 	for(TempEntry = classes; TempEntry;) {
 	    i--;
 	    sortedlist[i]=TempEntry;

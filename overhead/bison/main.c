@@ -24,21 +24,15 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #include <stdio.h>
 #include "andrewos.h"
 #include "machine.h"	/* JF for MAXSHORT */
-
-extern	int lineno;
-extern	int verboseflag;
+#include "state.h"
+#include "files.h"
+#include "proto.h"
 
 /* Nonzero means failure has been detected; don't write a parser file.  */
-int failure;
+static int failure;
 
 /* The name this program was run with, for messages. */
 char *program_name;
-
-extern void getargs(), openfiles(), reader(), reduce_grammar();
-extern void set_derives(), set_nullable(), generate_states();
-extern void lalr(), initialize_conflicts(), verbose(), terse();
-extern void output(), done();
-
 
 /* VMS complained about using `int'.  */
 int
@@ -122,10 +116,8 @@ int_to_string(int i)
 /* print the message `s' for a fatal error
 */
 	void
-fatal(char *s)
+fatal(const char *s)
 {
-	extern char *infile;
-
 	if (infile == 0)
 		fprintf(stderr, "fatal error: %s\n", s);
 	else
@@ -138,7 +130,7 @@ fatal(char *s)
 	and incorporate string `x1'
 */
 	void
-fatals(char *fmt, char *x1)
+fatals(const char *fmt, const char *x1)
 {
 	char buffer[200];
 	sprintf(buffer, fmt, x1);
@@ -148,10 +140,8 @@ fatals(char *fmt, char *x1)
 /* print a warning message 's'
 */
 	void
-warn(char *s)
+warn(const char *s)
 {
-	extern char *infile;
-
 	failure = 1;
 
 	if (infile == 0)
@@ -165,7 +155,7 @@ warn(char *s)
 	The message is given by the format `fmt'
 */
 	void
-warni(char *fmt, int x1)
+warni(const char *fmt, int x1)
 {
 	char buffer[200];
 	sprintf(buffer, fmt, x1);
@@ -176,7 +166,7 @@ warni(char *fmt, int x1)
 	The message is given by the format `fmt'
 */
 	void
-warns(char *fmt, char *x1)
+warns(const char *fmt, const char *x1)
 {
 	char buffer[200];
 	sprintf(buffer, fmt, x1);
@@ -187,7 +177,7 @@ warns(char *fmt, char *x1)
 	The message is given by the format `fmt'
 */
 	void
-warnss(char *fmt, char *x1, char *x2)
+warnss(const char *fmt, const char *x1, const char *x2)
 {
 	char buffer[200];
 	sprintf(buffer, fmt, x1, x2);
@@ -198,7 +188,7 @@ warnss(char *fmt, char *x1, char *x2)
 	The message is given by the format `fmt'
 */
 	void
-warnsss(char *fmt, char *x1, char *x2, char *x3)
+warnsss(const char *fmt, const char *x1, const char *x2, const char *x3)
 {
 	char buffer[200];
 	sprintf(buffer, fmt, x1, x2, x3);
@@ -209,7 +199,7 @@ warnsss(char *fmt, char *x1, char *x2, char *x3)
 	instances of whatever is denoted by the string`s'
 */
 	void
-toomany(char *s)
+toomany(const char *s)
 {
 	char buffer[200];
 	/* JF new msg */
@@ -220,7 +210,7 @@ toomany(char *s)
 /* abort for an internal error denoted by string `s'
 */
 	void
-berror(char *s)
+berror(const char *s)
 {
 	fprintf(stderr, "internal error, %s\n", s);
 	abort();

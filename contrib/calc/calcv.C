@@ -317,9 +317,10 @@ calcv::FullUpdate( enum view_UpdateType	 type, long		       left , long		       
         {
         W = ((AreaSpecW(i) * (Width-4)) / 100);
         H = ((AreaSpecH(i) * (Height-4)) / 100);
-        if ( AreaShape(i) == circle )
+        if ( AreaShape(i) == circle ) {
 	  if ( W > H )  W = H;
 	  else if ( H > W )  H = W;
+	}
         AreaWidth(i)  = W - 2;
         AreaHeight(i) = H - 2;
         AreaLeft(i) = L + (((AreaSpecX(i) * (Width-4))  / 100) - W/2);
@@ -397,7 +398,7 @@ class view *
 calcv::Hit( enum view_MouseAction  action, long		       x , long		       y , long		       clicks )
         {
     class calcv *self=this;
-  class view	     *hit;
+  class view	     *hit = NULL;
   long		      which;
 
   IN(calcv_Hit );
@@ -417,6 +418,8 @@ calcv::Hit( enum view_MouseAction  action, long		       x , long		       y , lon
             break;
           case  view_LeftUp:
             break;
+	  default:
+	    break;
         }
       }
   OUT(calcv_Hit );
@@ -462,7 +465,6 @@ void Printer( class calcv	      *self )
 void
 calcv::Print( FILE		      *file, const char		      *processor, const char		      *format, boolean	       level )
             {
-    class calcv *self=this;
   IN(calcv_Print);
   (this)->PrintObject(  file, processor, format, level, (aptv_printfptr)Printer );
   OUT(calcv_Print);

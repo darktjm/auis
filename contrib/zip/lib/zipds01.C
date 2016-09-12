@@ -314,7 +314,7 @@ zip::Parse_Figure_Attributes( zip_type_figure	       figure )
   char			      c, first, second;
   unsigned char			      element = 1;
   char				     *attribute_ptr,  pattern[10];
-  short			cap;
+  short			cap = 0; // init to shut gcc up
   double			red, green, blue;
 
   IN(zip::Parse_Figure_Attributes);
@@ -528,7 +528,7 @@ Parse_Stream_Image_Beginning( class zip *self )
 	zip_ok ) {
 	if ( (status = Extract_Attribute( self, &ptr )) == zip_ok ) {
 	    status = Parse_Image_Attributes( self );
-	    if ( status == zip_ok  &&  ptr )
+	    if ( status == zip_ok  &&  ptr ) {
 		if ( (status = (self)->Set_Image_Name(  Image, ptr )) == zip_duplicate_image_name ) {
 		    int		  suffix = 0;
 		    char		 *new_name = NULL;
@@ -550,6 +550,7 @@ Parse_Stream_Image_Beginning( class zip *self )
 			if ( page_count > self->page_count )
 			    self->page_count = page_count;
 		    }
+	    }
 	}
     }
     OUT(Parse_Stream_Image_Beginning);
@@ -576,7 +577,7 @@ Parse_Stream_Image_Ending( class zip		      *self )
 static int
 Parse_Image_Attributes( class zip		      *self )
     {
-  short			cap;
+  short			cap = 0; // init to shut gcc up
   boolean		      end_of_attributes;
   int			      status = zip_ok, offset;
   char				     *attribute_ptr, pattern[10];
@@ -734,14 +735,8 @@ Extract_Attribute( class zip		      *self, char			     **attribute_ptr )
   *counter = 0;
   if ( counter == buffer + zip_default_buffer_size )
     status = zip_insufficient_figure_space;
-  else if ( *attribute_ptr = (char *) malloc( strlen( buffer ) + 1 ) )
+  else if ( ( *attribute_ptr = strdup( buffer ) ) )
     {
-    counter = buffer;
-    while ( *counter )
-      { /*+++ Two statements because of HC bug on "++" +++*/
-      *( *attribute_ptr + ( counter - buffer) ) = *counter; counter++;
-      }
-    *( *attribute_ptr + ( counter - buffer ) ) = 0;
     DEBUGst( Extracted Attribute,*attribute_ptr);
     }
     else status = zip_insufficient_figure_space;
@@ -860,7 +855,7 @@ long Parse_Presentation_Parameter( class zip		      *self )
 
   IN(Parse_Presentation_Parameter);
   Extract_Attribute( self, &token );
-  if ( ptr = token )
+  if ( ( ptr = token ) )
     {
     while ( *ptr  &&  *ptr != ' '  &&  *ptr != '\t'  &&  *ptr != '\n' )
       ptr++;

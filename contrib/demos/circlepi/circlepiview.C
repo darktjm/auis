@@ -262,8 +262,6 @@ circlepiview::Hit(enum view_MouseAction  action, long  x , long  y, long  numcli
   Handle the button event.  Currently, semantics are:
   left up  --  receive input focus (to post menus)
 */
-    class circlepi *b = (class circlepi *) (this)->GetDataObject();  
-
     switch (action) {
       case view_LeftUp:
 	(this)->WantInputFocus(this);

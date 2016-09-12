@@ -222,7 +222,7 @@ class view*
 htmlview::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfClicks)
 {
     class html* html = (class html*) this->view::dataobject;
-    long pos, len;
+    long pos;
     char* s;
     class view* retv = (this)->textview::Hit( action, x, y, numberOfClicks);
     /* Modified based on comments from Tom Neuendorffer, 28/04/94 */
@@ -232,7 +232,7 @@ htmlview::Hit(enum view_MouseAction  action, long  x, long  y, long  numberOfCli
     if (retv == (class view*) this && 
 	(action==view_LeftDown || action==view_RightDown)) {
 	pos = (this)->GetDotPosition();
-	if (s = (html)->GetAnchorDest( pos)) {
+	if ((s = (html)->GetAnchorDest( pos))) {
 	    message::DisplayString(this, 0, s);
 	} else {
 	    message::DisplayString(this, 0, "");
@@ -275,7 +275,7 @@ htmlview_EditAttributes(class htmlview * self, long  key)
     }
 
     (html)->GetAttributeList( self->styleInQuestion, choices, &count);
-    for (i = 0; i < sizeof(editOptions); i++) {
+    for (i = 0; i < (int)(sizeof(editOptions) / sizeof(editOptions[0])); i++) {
 	choices[count+i] = (char *)editOptions[i]; // only frees up to count
     }
     startEnv = self->styleInQuestion;
@@ -300,7 +300,7 @@ htmlview_EditAttributes(class htmlview * self, long  key)
 		(html)->ChangeAttribute( self, self->styleInQuestion, answer, s);
 		/* Rebuild the options */
 		(html)->GetAttributeList( self->styleInQuestion, choices, &count);
-		for (i = 0; i < sizeof(editOptions); i++) {
+		for (i = 0; i < (int)(sizeof(editOptions) / sizeof(editOptions[0])); i++) {
 		    choices[count+i] = (char *)editOptions[i]; // only frees up to count
 		}
 	    }
@@ -321,7 +321,7 @@ htmlview_EditAttributes(class htmlview * self, long  key)
 
 	    /* build the new list */
 	    (html)->GetAttributeList( self->styleInQuestion, choices, &count);
-	    for (i = 0; i < sizeof(editOptions); i++) {
+	    for (i = 0; i < (int)(sizeof(editOptions) / sizeof(editOptions[0])); i++) {
 		choices[count+i] = (char *)editOptions[i]; // only frees up to count
 	    }
 	    (self)->SetDotPosition( (self->styleInQuestion)->Eval());
@@ -369,7 +369,6 @@ void
 htmlview_AddImage(class htmlview * self, long  key)
 {
     class html* html = (class html *)self->view::dataobject;
-    class environment* env;
     char ename[MAXPATHLEN];
     static char vars[256];
     long pos;
@@ -388,17 +387,16 @@ htmlview_AddImage(class htmlview * self, long  key)
 void
 htmlview_SetImage(class htmlview * self, long  key)
 {
-    class html* html = (class html *)self->view::dataobject;
-    long pos = (self)->GetDotPosition();
-    char* newsrc;
-
     printf("in SetImage()\n");
     if (!self->styleInQuestion) {
 	message::DisplayString(self, 0, "This callback should be used only when editing attributes");
 	return;
     }
+#if 0
+    char* newsrc;
     printf("Getting attribute\n");
     newsrc = (html)->GetAttribute( self->styleInQuestion, "src");
+#endif
 
     printf("Going for update\n");
 
@@ -569,7 +567,7 @@ htmlview_makeList (class htmlview  *self, char * listStyleName)
 {
     class html* html = (class html *)self->view::dataobject;
     struct text_statevector sv;
-    long dot, pos, npos, count, tlen, len, end, origLen;
+    long dot, pos, npos, len, end, origLen;
     long startPos, itemPos;
     long cur, indent, left;
     int one_only = 0, modified = 0;
@@ -641,7 +639,7 @@ htmlview_makeList (class htmlview  *self, char * listStyleName)
 	    npos--;
 
 	/* See if the previous paragraph begins with a tag'd item. */
-	if (datum = lookAtFn(html, npos, pos, &datum)) {
+	if ((datum = lookAtFn(html, npos, pos, &datum))) {
 	    oldList = 1;
 	}
     }
@@ -662,7 +660,7 @@ htmlview_makeList (class htmlview  *self, char * listStyleName)
 	(void) (self)->GetStyleInformation( &sv, pos, NULL);
 	if (sv.CurLeftMargin == left && sv.CurIndentation == indent) {
 	    /* Do the line function... */
-	    if (diff = lineFn(html, &pos, &end, &datum)) {
+	    if ((diff = lineFn(html, &pos, &end, &datum))) {
 		/* They did it themselves */
 		itemPos = -1;
 	    } else {
@@ -715,7 +713,6 @@ void htmlview_unlistify (class htmlview  *self, long  key)
     int pos, count, len, end;
     long cur, indent, left;
     int one_only = 0, modified = 0;
-    int cur_num;
 
     if (ConfirmReadOnly(self, html)) {
         return;
@@ -750,7 +747,7 @@ void htmlview_unlistify (class htmlview  *self, long  key)
 	else {
 	    (void) (self)->GetStyleInformation( &sv, pos, NULL);
 	    if (sv.CurLeftMargin == left && sv.CurIndentation == indent)
-		if (count = (html)->UntagItem( pos)) {
+		if ((count = (html)->UntagItem( pos))) {
 		    end -= count;
 		    len -= count;
 		    modified = 1;
@@ -780,7 +777,7 @@ htmlview_modifyList(class htmlview * self, long  key)
 	message::DisplayString(self, 0, "Need to use Edit Attributes to call this");
 	return;
     }
-    if (ptr = (html)->GetAttribute( self->styleInQuestion, "compact")) {
+    if ((ptr = (html)->GetAttribute( self->styleInQuestion, "compact"))) {
 	/* style_SetNewInterlineSpacing(self->styleInQuestion->data.style, style_InterlineSpacing, -2, style_Points); */
     } else {
 	/* style_SetNewInterlineSpacing(self->styleInQuestion->data.style, style_InterlineSpacing, 0, style_Points); */

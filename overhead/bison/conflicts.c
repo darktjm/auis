@@ -27,28 +27,19 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #include "files.h"
 #include "gram.h"
 #include "state.h"
+#include "proto.h"
 
-
-extern char **tags;
-extern int tokensetsize;
-extern char *consistent;
-extern short *accessing_symbol;
-extern shifts **shift_table;
-extern unsigned *LA;
-extern short *LAruleno;
-extern short *lookaheads;
-extern int verboseflag;
-
-void set_conflicts();
-void resolve_sr_conflict();
-void flush_shift();
-void log_resolution();
-void total_conflicts();
-void count_sr_conflicts();
-void count_rr_conflicts();
+static void set_conflicts(int state);
+static void resolve_sr_conflict(int state, int lookaheadnum);
+static void flush_shift(int state, int token);
+static void log_resolution(int state, int LAno, int token, const char *resolution);
+static void total_conflicts(void);
+static void count_sr_conflicts(int state);
+static void count_rr_conflicts(int state);
+/* static void finalize_conflicts(void); */ /* unused */
 
 char any_conflicts;
-char *conflicts;
+static char *conflicts;
 errs **err_table;
 int expected_conflicts;
 
@@ -80,7 +71,7 @@ initialize_conflicts(void)
 }
 
 
-void
+static void
 set_conflicts(int state)
 {
   int i;
@@ -289,7 +280,7 @@ flush_shift(int state, int token)
 
 
 void
-log_resolution(int state, int LAno, int token, char *resolution)
+log_resolution(int state, int LAno, int token, const char *resolution)
 {
   fprintf(foutput,
 	  "Conflict in state %d between rule %d and token %s resolved as %s.\n",
@@ -364,8 +355,6 @@ verbose_conflict_log(void)
 void
 total_conflicts(void)
 {
-  extern int fixed_outfiles;
-
   if (src_total == expected_conflicts && rrc_total == 0)
     return;
 
@@ -737,6 +726,7 @@ print_reductions(int state)
 }
 
 
+#if 0 /* unused */
 void
 finalize_conflicts(void)
 {
@@ -744,3 +734,4 @@ finalize_conflicts(void)
   FREE(shiftset);
   FREE(lookaheadset);
 }
+#endif

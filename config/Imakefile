@@ -53,6 +53,8 @@ system.tmp: MacroIncludeFile
 	-e 's;SYSTEM_H_FILE =.*;SYSTEM_H_FILE = system.h;g' \
 	MacroIncludeFile > system.tmp
 
+CleanTarget(platform.tmp system.tmp)
+
 #if !SY_OS2
 install.time:: 
 	(cd $(DESTDIR)/config; \

@@ -174,6 +174,8 @@ zipoplin::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   acti
 
 	}
       break;
+    default:
+      break;
     }
   (this->view_object)->Set_Pane_Painting_Mode(  pane, zip_default );
   OUT(zipoplin::Build_Object);

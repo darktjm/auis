@@ -69,7 +69,6 @@ HISTORY
 END-SPECIFICATION  ************************************************************/
 
 #include <andrewos.h>
-#include "zipedit.h"
 #include "rect.h"
 #include "graphic.H"
 #include "view.H"
@@ -89,6 +88,7 @@ END-SPECIFICATION  ************************************************************/
 #include "zipobject.H"
 #include "zipedit.H"
 #include "zipview.H"
+#include "zipedit.h"
 
 static boolean debug=TRUE;
 static class menulist		     *class_menulist;
@@ -501,7 +501,7 @@ To_Front_Command( class zipedit	       *self )
 
   while ( peer_figure  &&  peer_figure->zip_figure_next )
     peer_figure = peer_figure->zip_figure_next;
-  while ( figure = zipedit_Next_Selected_Figure( self, PANE, figure ) )
+  while ( ( figure = zipedit_Next_Selected_Figure( self, PANE, figure ) ) )
     {
     if ( figure != peer_figure )
       {
@@ -529,7 +529,7 @@ To_Rear_Command( class zipedit	       *self )
   zip_type_figure	      figure = NULL,
 				      peer_figure = NULL;
 
-  while ( figure = zipedit_Next_Selected_Figure( self, PANE, figure ) )
+  while ( ( figure = zipedit_Next_Selected_Figure( self, PANE, figure ) ) )
     {
     if ( figure != peer_figure )
       {
@@ -635,14 +635,14 @@ int Insert_File_By_Name( class zipedit	      *self, char			      *name )
     {
     DEBUG( Open_Stream Successful);
     (View)->Announce(  "Done" );
-    if ( status = (Data)->Read_Stream(  Data->stream ) )
+    if ( ( status = (Data)->Read_Stream(  Data->stream ) ) )
     {
     DEBUG( Read_Stream Failed);
     sprintf( msg, "ZipEdit ERROR: Failed to Insert '%s'", full_name );
     (View)->Announce(  msg );
     }
     else
-    if ( status = (View)->Set_Pane_Stream(  PANE, Data->stream ) )
+    if ( ( status = (View)->Set_Pane_Stream(  PANE, Data->stream ) ) )
       {
       DEBUGdt( ZipEdit ERROR: Set_Pane_Stream Status, status);
       }
@@ -943,7 +943,7 @@ Page_New_Command( self )
       else
       {
       zip_Create_Figure( Data, &page_figure, "ZIP_PAGE_FIGURE_001",
-		         zip_rectangle_figure/*===!/, page_image, NULL );
+		         zip_rectangle_figure*//*===!/, page_image, NULL );
       zip_Set_Figure_Point( Data, page_figure, zip_figure_origin_point,
 			    root_image->zip_image_stream->zip_stream_least_x,
 			    root_image->zip_image_stream->zip_stream_greatest_y );
@@ -970,7 +970,7 @@ Page_New_Command( self )
 	    Pane->zip_pane_current_stream, root_image );
     sprintf( page_name, "ZIP_PAGE_FIGURE_%03d", Data->page_count );
     zip_Create_Figure( Data, &page_figure, page_name,
-		       zip_rectangle_figure/*===!/, page_image, NULL );
+		       zip_rectangle_figure*//*===!/, page_image, NULL );
     zip_Set_Figure_Point( Data, page_figure, zip_figure_origin_point,-1000,1400 );
     zip_Set_Figure_Point( Data, page_figure, zip_figure_auxiliary_point, 1000,-1400 );
     zipview_Display_Image( View, page_image, Pane );
@@ -1231,7 +1231,7 @@ void Pending_Palettes( class zipedit	    *self, zip_type_pane	     pane )
   long			    mask = (Menu )->GetMask( );
 
   IN(Pending_Palettes);
-  if ( PalettesExposed = ! PalettesExposed )
+  if ( ( PalettesExposed = ! PalettesExposed ) )
     {
     (self)->Expose_Palettes(  pane );
     mask = (mask & ~menu_palettes_expose) | menu_palettes_hide;
@@ -1253,7 +1253,7 @@ void Pending_Coordinates( class zipedit	    *self, zip_type_pane	     pane )
   long			    mask = (Menu )->GetMask( );
 
   IN(Pending_Coordinates);
-  if ( CoordinatesExposed = ! CoordinatesExposed )
+  if ( ( CoordinatesExposed = ! CoordinatesExposed ) )
     {
     (self)->Expose_Pane_Coordinates(  pane );
     mask = (mask & ~menu_coordinates_expose) | menu_coordinates_hide;
@@ -1275,7 +1275,7 @@ void Pending_Grid( class zipedit	    *self, zip_type_pane	     pane )
   long			    mask = (Menu )->GetMask( );
 
   IN(Pending_Grid);
-  if ( GridExposed = ! GridExposed )
+  if ( ( GridExposed = ! GridExposed ))
     {
     (self)->Expose_Pane_Grid(  pane );
     mask = (mask & ~menu_grid_expose) | menu_grid_hide | menu_size_grid;
@@ -1298,7 +1298,7 @@ void Pending_Constrain( class zipedit	    *self, zip_type_pane	     pane )
   long			    mask = (Menu )->GetMask( );
 
   IN(Pending_Constrain);
-  if ( PointsConstrained = ! PointsConstrained )
+  if ( ( PointsConstrained = ! PointsConstrained ) )
     {
     (self)->Constrain_Points( pane );
     mask = (mask & ~menu_points_constrain) | menu_points_unconstrain;
@@ -1500,11 +1500,12 @@ void zipedit_Reset_Editing_Selection( class zipedit	       *self, zip_type_pane	
   IN(zipedit_Reset_Editing_Selection);
   BuildPending = 0;
   Building = true;
-  if ( CurrentFigure )
+  if ( CurrentFigure ) {
     if ( SelectionLevel >= ImageSelection )
       (self)->Normalize_Image_Points(  CurrentImage, pane );
       else
       (self)->Normalize_Figure_Points(  CurrentFigure, pane );
+  }
   CurrentFigure = NULL;
   SelectionLevel = 0;
   (View)->Set_Pane_Cursor(  pane, 'A', CursorFontName );

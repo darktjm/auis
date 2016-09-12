@@ -723,11 +723,11 @@ zipview::Set_Pane_Auxiliary_Stream( zip_type_pane		   pane, zip_type_stream		   
        }
     if ( !status )
       {
-      if ( new_c = (zip_type_pane_auxiliary_stream) 
-	  	    calloc( 1,sizeof(struct zip_pane_auxiliary_stream)) )
+      if ( ( new_c = (zip_type_pane_auxiliary_stream) 
+	  	    calloc( 1,sizeof(struct zip_pane_auxiliary_stream)) ) )
         {
         new_c->zip_pane_auxiliary_stream_ptr = stream;
-        if ( old = pane->zip_pane_auxiliary_stream )
+        if ( ( old = pane->zip_pane_auxiliary_stream ) )
       	  {
     	    while ( old->zip_pane_auxiliary_stream_next )
 	    old = old->zip_pane_auxiliary_stream_next;
@@ -1160,7 +1160,7 @@ long Assign_Pane_Stream_Attributes( class zipview		  *self, zip_type_pane		   pa
     pane->zip_pane_attributes.zip_pane_attribute_stream_source = true;
     pane->zip_pane_source.zip_pane_stream =
 	pane->zip_pane_current_stream = stream;
-    if ( pane->zip_pane_current_image = stream->zip_stream_image_anchor )
+    if ( ( pane->zip_pane_current_image = stream->zip_stream_image_anchor ) )
       pane->zip_pane_current_figure = stream->zip_stream_image_anchor->
 					zip_image_figure_anchor;
     Compute_Pane_Stream_Stretch_Factors( self, pane, stream );

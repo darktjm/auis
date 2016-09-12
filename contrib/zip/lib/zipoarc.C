@@ -59,8 +59,6 @@ END-SPECIFICATION  ************************************************************/
 
 /*LIBS: -lm
 */
-static char two = 2; /* To quieten Compiler */
-
 ATKdefineRegistry(zipoarc, zipobject, NULL);
 static long Draw( class zipoarc		  *self, zip_type_figure		   figure, zip_type_pane		   pane );
 static void Set_Points( zip_type_figure		   figure, float			   x_center , float			   y_center , float			   x_radius , float			   y_radius, 		float			   xs_delta , float			   ys_delta , float			   xe_delta , float			   ye_delta );
@@ -123,9 +121,9 @@ zipoarc::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   actio
 	}
       break;
     case view_LeftUp:
-      if ( figure = pane->zip_pane_current_figure )
+      if ( ( figure = pane->zip_pane_current_figure ) )
         {
-	if ( figure_x_points(two) == 0  ||  figure_y_points(two) == 0 )
+	if ( figure_x_points(2) == 0  ||  figure_y_points(2) == 0 )
 	  {
 	  (this->edit_object)->Delete_Figure(  figure, pane );
           break;
@@ -133,7 +131,7 @@ zipoarc::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   actio
 	}
       /* Fall-thru */
     case view_LeftMovement:
-      if ( figure = pane->zip_pane_current_figure )
+      if ( ( figure = pane->zip_pane_current_figure ) )
 	{
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zipview_paint_inverted );
 	(this->view_object)->Draw_Figure(  figure, pane );
@@ -153,11 +151,13 @@ zipoarc::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   actio
 			figure_y_point = Y_origin;
 	/* End */	figure_x_points(1) = X;
 			figure_y_points(1) = Y;
-	/* Radii */	figure_x_points(two) = abs(X_start - X);
-			figure_y_points(two) = abs(Y_start - Y);
+	/* Radii */	figure_x_points(2) = abs(X_start - X);
+			figure_y_points(2) = abs(Y_start - Y);
 	(this->view_object)->Draw_Figure(  figure, pane );
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zip_default );
 	}
+      break;
+    default:
       break;
     }
   OUT(zipoarc::Build_Object);
@@ -196,15 +196,14 @@ long Draw( class zipoarc		  *self, zip_type_figure		   figure, zip_type_pane		  
   long				  left, top, width, height;
   short			  start_angle, offset_angle;
   double			  theta, angle, x, y;
-  unsigned char		  lwidth;
 
   IN(Draw); /*=== CLEAN UP THIS OLD MIGRATORY MESS... ===*/
   if ( (self->view_object)->Ensure_Line_Attributes(  figure ) == zip_ok )
     {
     x_radius = abs( (self->view_object)->X_Point_To_Pixel(  pane, figure,
-     figure_x_point + figure_x_points(two) ) - window_x_point );
+     figure_x_point + figure_x_points(2) ) - window_x_point );
     y_radius = abs( (self->view_object)->Y_Point_To_Pixel(  pane, figure,
-     figure_y_point + figure_y_points(two) ) - window_y_point );
+     figure_y_point + figure_y_points(2) ) - window_y_point );
     if ( x_radius  &&  y_radius )
       {
       left =  window_x_point - x_radius;
@@ -239,8 +238,8 @@ zipoarc::Print_Object( zip_type_figure		   figure, zip_type_pane		   pane )
   IN(zipoarc::Print_Object);
   x = print_x_point;
   y = print_y_point;
-  xlen = print_x_lengths(two);
-  ylen = print_y_lengths(two);
+  xlen = print_x_lengths(2);
+  ylen = print_y_lengths(2);
   x0 = print_x_points(0);
   y0 = print_y_points(0);
   x1 = print_x_points(1);
@@ -392,8 +391,8 @@ void Set_Points( zip_type_figure		   figure, float			   x_center , float			   y_
   figure_y_points(0) = (long) ((y_center + y_radius) - ys_delta);
   figure_x_points(1) = (long) ((x_center - x_radius) + xe_delta);
   figure_y_points(1) = (long) ((y_center + y_radius) - ye_delta);
-  figure_x_points(two) = (long) abs(x_radius);
-  figure_y_points(two) = (long) abs(y_radius);
+  figure_x_points(2) = (long) abs(x_radius);
+  figure_y_points(2) = (long) abs(y_radius);
   }
 
 long
@@ -419,16 +418,16 @@ zipoarc::Set_Object_Point( zip_type_figure		   figure, int				   point, zip_type
         figure_y_points(0) = y;
         figure_x_points(1) = x;	/* End */
         figure_y_points(1) = y;
-        figure_x_points(two) = figure_y_points(two) = 0;	/* Radii */
+        figure_x_points(2) = figure_y_points(2) = 0;	/* Radii */
 	}
   x_radius = abs( x - figure_x_point );
   y_radius = abs( y - figure_y_point );
   X2 = figure_x_point;
-  X1 = X2 - figure_x_points(two);
-  X3 = X2 + figure_x_points(two);
+  X1 = X2 - figure_x_points(2);
+  X3 = X2 + figure_x_points(2);
   Y2 = figure_y_point;
-  Y1 = Y2 + figure_y_points(two);
-  Y3 = Y2 - figure_y_points(two);
+  Y1 = Y2 + figure_y_points(2);
+  Y3 = Y2 - figure_y_points(2);
   XS = figure_x_points(0);
   YS = figure_y_points(0);
   XE = figure_x_points(1);
@@ -449,25 +448,25 @@ zipoarc::Set_Object_Point( zip_type_figure		   figure, int				   point, zip_type
         break;
       case zip_figure_auxiliary_point:	    /* 2 -- Start X/Y */
 	theta = atan2( 1.0 * (y - Y2), 1.0 * (x - X2) );
-	figure_x_points(0) = (long) (X2 + (figure_x_points(two) * cos( theta )));
-	figure_y_points(0) = (long) (Y2 + (figure_y_points(two) * sin( theta )));
+	figure_x_points(0) = (long) (X2 + (figure_x_points(2) * cos( theta )));
+	figure_y_points(0) = (long) (Y2 + (figure_y_points(2) * sin( theta )));
 	break;
       case zip_figure_auxiliary_point + 1:  /* 3 -- End X/Y */
 	theta = atan2( 1.0 * (y - Y2), 1.0 * (x - X2) );
-	figure_x_points(1) = (long) (X2 + (figure_x_points(two) * cos( theta )));
-	figure_y_points(1) = (long) (Y2 + (figure_y_points(two) * sin( theta )));
+	figure_x_points(1) = (long) (X2 + (figure_x_points(2) * cos( theta )));
+	figure_y_points(1) = (long) (Y2 + (figure_y_points(2) * sin( theta )));
 	break;
       case zip_figure_auxiliary_point + 2:  /* 4 --  3 O'Clock */
       case zip_figure_auxiliary_point + 4:  /* 6 --  9 O'Clock */
 	figure_x_points(0) = (long) ((X2 - x_radius) + XS_delta);
 	figure_x_points(1) = (long) ((X2 - x_radius) + XE_delta);
-	figure_x_points(two) = (long) x_radius;
+	figure_x_points(2) = (long) x_radius;
 	break;
       case zip_figure_auxiliary_point + 3:  /* 5 --  6 O'Clock */
       case zip_figure_auxiliary_point + 5:  /* 7 -- 12 O'Clock */
 	figure_y_points(0) = (long) ((Y2 + y_radius) - YS_delta);
 	figure_y_points(1) = (long) ((Y2 + y_radius) - YE_delta);
-	figure_y_points(two) = (long) y_radius;
+	figure_y_points(2) = (long) y_radius;
 	break;
       case zip_figure_auxiliary_point + 6:  /* 8  -- Upper-Left  */
 	Set_Points( figure, X3 - x_radius, Y3 + y_radius,
@@ -524,12 +523,12 @@ zipoarc::Adjust_Object_Point_Suite( zip_type_figure		   figure, zip_type_point		
 static
 void Compute_Handle_Positions( class zipoarc		  *self, zip_type_figure		   figure, zip_type_pane		   pane, zip_type_pixel		  *X1 , zip_type_pixel		  *X2 , zip_type_pixel		  *X3 , zip_type_pixel		  *Y1 , zip_type_pixel		  *Y2 , zip_type_pixel		  *Y3, zip_type_pixel		  *XS , zip_type_pixel		  *YS , zip_type_pixel		  *XE , zip_type_pixel		  *YE )
           {
-  *X1 = (self->view_object)->X_Point_To_Pixel(  pane, figure, figure_x_point - figure_x_points(two) );
+  *X1 = (self->view_object)->X_Point_To_Pixel(  pane, figure, figure_x_point - figure_x_points(2) );
   *X2 = window_x_point;
-  *X3 = (self->view_object)->X_Point_To_Pixel(  pane, figure, figure_x_point + figure_x_points(two) );
-  *Y1 = (self->view_object)->Y_Point_To_Pixel(  pane, figure, figure_y_point + figure_y_points(two) );
+  *X3 = (self->view_object)->X_Point_To_Pixel(  pane, figure, figure_x_point + figure_x_points(2) );
+  *Y1 = (self->view_object)->Y_Point_To_Pixel(  pane, figure, figure_y_point + figure_y_points(2) );
   *Y2 = window_y_point;
-  *Y3 = (self->view_object)->Y_Point_To_Pixel(  pane, figure, figure_y_point - figure_y_points(two) );
+  *Y3 = (self->view_object)->Y_Point_To_Pixel(  pane, figure, figure_y_point - figure_y_points(2) );
   *XS = (self->view_object)->X_Point_To_Pixel(  pane, figure, figure_x_points(0) );
   *YS = (self->view_object)->Y_Point_To_Pixel(  pane, figure, figure_y_points(0) );
   *XE = (self->view_object)->X_Point_To_Pixel(  pane, figure, figure_x_points(1) );

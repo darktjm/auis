@@ -143,23 +143,46 @@ typedef struct FontStruct
   struct FontStruct *next;
 } *FONT;
 
+typedef int (*FP)(const char *command, int numdel, int tofind);
+
 struct func_words
 {
-   char *word;
-   int (*fname)();
+   const char *word;
+   FP fname;
 };
 
-typedef int (*FP)();
+extern FONT Font;
+extern TABLE Table;
+extern VALUES Values;
 
-char *me, *RTFchars;
+extern char *me, *RTFchars;
 
-int Token, MasterToken, errno, TextDSVersion;
-int PopFile(), RTFverceiling, CharSet, Levels, FontSize;
-int flag, left_indented, right_indented, fnote, tabs;
-double LeftMargin, RightMargin;
-long int CurrLine;
+extern int Token, MasterToken, TextDSVersion;
+extern int RTFverceiling, CharSet, Levels, FontSize;
+extern int flag, left_indented, right_indented, fnote, tabs;
+extern double LeftMargin, RightMargin;
+extern long int CurrLine;
 
-FILE *fin, *fout, *ftrans, *ferr;
+extern FILE *fin, *fout, *ftrans, *ferr;
 
-void PushFile();
-
+/* misc.c */
+extern char *makelower(char *instruction);
+extern int offset(const char *string, char character); /* unused */
+extern int roffset(const char *string, char character);
+extern void usage(void);
+extern void CloseFiles(void);
+extern void AbsorbSpace(void);
+extern void AbsorbNewlines(void); /* unused */
+extern void AbsorbWhiteSpace(void);
+extern void itoa(int n, char s[]);
+extern void CloseBraces(void);
+/* parse.c */
+extern void ParseMain(char *Filein, char *Fileout);
+extern long int ParseText(int tofind, int transform, int action);
+extern TABLE FindNode(int field, char *string);
+extern char *GetInstruction(void);
+extern int Execute(char *instruction);
+/* R2Functions.c */
+extern FP AssignFunc(const char *ezword);
+extern int R2UniqueID(void); /* unused */
+extern void R2Begin(void);

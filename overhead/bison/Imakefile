@@ -5,8 +5,8 @@
 PFILE = bison.simple
 PFILE1 = bison.hairy
 
-DEFINES  =  -DXPFILE='((char*)AndrewDir('\"/etc/$(PFILE)\"'))' \
-	 -DXPFILE1='((char*)AndrewDir('\"/etc/$(PFILE1)\"'))'
+DEFINES  =  -DXPFILE='(AndrewDir('\"/etc/$(PFILE)\"'))' \
+	 -DXPFILE1='(AndrewDir('\"/etc/$(PFILE1)\"'))'
 
 OBJECTS = LR0.o allocate.o closure.o conflicts.o derives.o files.o	\
 	  getargs.o getopt.o getopt1.o gram.o lalr.o lex.o		\

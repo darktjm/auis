@@ -93,6 +93,8 @@
 #define NOP 2
 
 
+typedef int (*FP)(const char *command, int tofind);
+
 typedef struct TableStruct
 {
   char *scribeword;
@@ -100,7 +102,7 @@ typedef struct TableStruct
   union
     {
       char *word;
-      int (*fun)();
+      FP fun;
       char quote;
     } ez;
   struct TableStruct *next;
@@ -109,8 +111,8 @@ typedef struct TableStruct
 
 typedef struct ValuesStruct
 {
-  char *name;
-  char *value;
+  const char *name;
+  const char *value;
   struct ValuesStruct *next;
 } *VALUES;
 
@@ -122,13 +124,31 @@ typedef struct FileStackStruct
 } *FILESTACK;
 
 
-typedef int (*FP)();
+extern char *me, *Scribechars, *Scribeopendelimiters, *Scribeclosedelimiters;
 
-char *me, *Scribechars, *Scribeopendelimiters, *Scribeclosedelimiters;
+extern int Token, MasterToken, verbatim, TextDSVersion;
+extern long int CurrLine;
 
-int Token, MasterToken, errno, verbatim, TextDSVersion, PopFile();
-long int CurrLine;
+extern FILE *fin, *fout, *ftrans, *ferr;
 
-FILE *fin, *fout, *ftrans, *ferr;
-
-void PushFile();
+/* main.c */
+extern TABLE Table;
+extern FILESTACK FileStack;
+/* misc.c */
+extern char *makelower(char *instruction);
+extern int offset(char *string, char character);
+extern int roffset(char *string, char character);
+extern void usage(void);
+extern void CloseFiles(void);
+extern void AbsorbSpace(void);
+extern void AbsorbNewlines(void);
+extern void PushFile(char *filename);
+extern int PopFile(void);
+/* parse.c */
+extern void ParseMain(char *Filein, char *Fileout);
+extern long int ParseText(int tofind, const char *prepend, const char *append, int transform, int action);
+extern TABLE FindNode(int field, char *string);
+extern void ReplaceText(const char *instruction, int mode, char tofind);
+/* STFunctions.c */
+extern FP AssignFunc(const char *ezword);
+extern int STUniqueID(void);

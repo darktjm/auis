@@ -160,7 +160,7 @@ zipoimbed::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   act
       break;
     case view_LeftUp:
       (this->view_object)->Set_Pane_Cursor(  pane, 'B', CursorFontName );
-      if ( figure = CurrentFigure )
+      if ( ( figure = CurrentFigure ) )
 	{
 	if ( figure_x_point == figure_x_points(0)  &&
 	     figure_y_point == figure_y_points(0) )
@@ -191,6 +191,8 @@ zipoimbed::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   act
 	(this->view_object)->Draw_Figure(  CurrentFigure, pane );
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zip_default );
 	}
+      break;
+    default:
       break;
     }
   OUT(zipoimbed::Build_Object);
@@ -250,7 +252,7 @@ zipoimbed::Read_Object_Stream( zip_type_figure		   figure, FILE				  *file, long
   DEBUGst(Line,line);
   if ( strncmp( line, "begindata", 9 ) == 0 )
     { DEBUG(Begindata OK);
-    if ( s = (char *) index( line, '{' ) )
+    if ( ( s = (char *) index( line, '{' ) ) )
       { DEBUG(LP OK);
       t = name;  s++;
       while ( *s != ',' )  *t++ = *s++;  *t = 0;
@@ -298,11 +300,11 @@ long Load_Object( class zipoimbed		  *self, zip_type_figure		   figure, const ch
     (self->view_object)->Announce(  msg );
     }
   figure->zip_figure_datum.zip_figure_anchor = NULL;
-  if ( data_object = (class dataobject *) ATK::NewObject( name ) )
+  if ( ( data_object = (class dataobject *) ATK::NewObject( name ) ))
     { DEBUG(DataObject Loaded);
     view_name = (data_object )->ViewName( );
     DEBUGst(ViewName,view_name);
-    if ( view_object = (class view *) ATK::NewObject( view_name ) )
+    if ( ( view_object = (class view *) ATK::NewObject( view_name ) ) )
       { DEBUG(ViewObject Loaded);
       figure->zip_figure_datum.zip_figure_anchor = (char *) calloc( 1, sizeof(struct imbed) );
       imbed = (struct imbed *) figure->zip_figure_datum.zip_figure_anchor;

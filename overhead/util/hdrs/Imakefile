@@ -48,5 +48,6 @@ andrdir.h:	$(DESTDIR)/include/system.h ./genhdr$(EXEEXT)
 	./genhdr$(EXEEXT) > andrdir.h1
 	-rm -f andrdir.h
 	mv andrdir.h1 andrdir.h
+CleanTarget(andrdir.h)
 
 InstallFile(andrdir.h, $(INSTINCFLAGS), $(DESTDIR)/include)

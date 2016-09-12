@@ -34,9 +34,11 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 #include <stdio.h>
 #include "andrewos.h"
+#include "util.h"
 #include "files.h"
 #include "new.h"
 #include "gram.h"
+#include "proto.h"
 
 FILE *finput = NULL;
 FILE *foutput = NULL;
@@ -57,43 +59,25 @@ char *tabfile;
 char *attrsfile;
 char *guardfile;
 char *actfile;
-char *tmpattrsfile;
-char *tmptabfile;
-char *tmpdefsfile;
+static char *tmpattrsfile;
+static char *tmptabfile;
+static char *tmpdefsfile;
 
-extern int noparserflag;
+static FILE *tryopen(const char *name, const char *mode);
 
-extern char	*mktemp();	/* So the compiler won't complain */
-extern char	*getenv();
-extern void	perror();
-FILE	*tryopen();	/* This might be a good idea */
-void done();
-
-extern char *program_name;
-extern int verboseflag;
-extern int definesflag;
 int fixed_outfiles = 0;
 
 
-char*
-stringappend(char *string1, int end1, char *string2)
+static char*
+stringappend(const char *string1, int end1, const char *string2)
 {
   char *ostring;
-  char *cp, *cp1;
-  int i;
-
-  cp = string2;  i = 0;
-  while (*cp++) i++;
+  int i = strlen(string2);
 
   ostring = NEW2(i+end1+1, char);
 
-  cp = ostring;
-  cp1 = string1;
-  for (i = 0; i < end1; i++)
-    *cp++ = *cp1++;
-
-  cp1 = string2;
-  while (*cp++ = *cp1++) ;
+  memcpy(ostring, string1, end1);
+  strcpy(ostring + end1, string2);
 
   return ostring;
 }
@@ -104,16 +88,18 @@ stringappend(char *string1, int end1, char *string2)
 void
 openfiles(void)
 {
-  char *name_base;
+  const char *name_base;
+#ifdef MSDOS
   char *cp;
+#endif
   char *filename;
   int base_length;
   int short_base_length;
 
 #if defined (VMS) & !defined (__VMS_POSIX)
-  char *tmp_base = "sys$scratch:b_";
+  const char *tmp_base = "sys$scratch:b_";
 #else
-  char *tmp_base = "/tmp/b.";
+  const char *tmp_base = "/tmp/b.";
 #endif
   int tmp_len;
 
@@ -154,14 +140,14 @@ openfiles(void)
       base_length = short_base_length + 4;
       name_base = (char *) xmalloc (base_length + 1);
       /* Append `.tab'.  */
-      strcpy (name_base, spec_file_prefix);
+      strcpy ((char *)name_base, spec_file_prefix);
 #ifdef VMS
-      strcat (name_base, "_tab");
+      strcat ((char *)name_base, "_tab");
 #else
-      strcat (name_base, ".tab");
+      strcat ((char *)name_base, ".tab");
 #endif
 #ifdef MSDOS
-      strlwr (name_base);
+      strlwr ((char *)name_base);
 #endif /* MSDOS */
     }
   else
@@ -292,7 +278,10 @@ open_extra_files(void)
 {
   FILE *ftmp;
   int c;
-  char *filename, *cp;
+  char *filename;
+#ifdef MSDOS
+  char *cp;
+#endif
 
   if (fparser)
     fclose(fparser);
@@ -329,8 +318,8 @@ open_extra_files(void)
 
 	/* JF to make file opening easier.  This func tries to open file
 	   NAME with mode MODE, and prints an error message if it fails. */
-FILE *
-tryopen(char *name, char *mode)
+static FILE *
+tryopen(const char *name, const char *mode)
 {
   FILE	*ptr;
 

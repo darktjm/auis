@@ -136,7 +136,7 @@ Redraw(class timeodayview  *self)
   class timeoday *b = (class timeoday *) (self)->GetDataObject();
   struct rectangle rect;
   char *tod;
-  struct FontSummary *my_FontSummary;
+  struct FontSummary *my_FontSummary = NULL;
   class fontdesc *my_fontdesc;
   class graphic *my_graphic;
   long new_width, new_height;
@@ -220,7 +220,7 @@ timeodayview::DesiredSize(long  width, long  height, enum view_DSpass  pass, lon
 
   class fontdesc *my_fontdesc;
   class graphic *my_graphic;
-  struct FontSummary *my_FontSummary;
+  struct FontSummary *my_FontSummary = NULL;
   class timeoday *b = (class timeoday *) (this)->GetDataObject();
 
   my_graphic = (class graphic *)(this)->GetDrawable();

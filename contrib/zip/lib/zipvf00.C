@@ -251,7 +251,7 @@ zipview::Which_Figure( zip_type_pixel		   x , zip_type_pixel		   y )
   zip_type_pane		  pane;
   class zipview *self=this;
   IN(zipview::Which_Figure);
-  if ( pane = (self)->Which_Pane(  x, y ) )
+  if ( ( pane = (self)->Which_Pane(  x, y ) ) )
     {
     DEBUGst(Pane-name,pane->zip_pane_name);
     figure = ::Which_Figure( self, x, y, pane );

@@ -582,7 +582,7 @@ static void DeviceControl(class preview  *self)
 				  break;
 			  }
 		  }
-		  self->DviFonts[com] = value + 2;
+		  self->DviFonts[(unsigned char)com] = value + 2;
 	       }
 	       break;
 	 case 'H': 
@@ -767,7 +767,7 @@ static void drawwig(class preview  *self,char  *s)	/* draw wiggly line */
     char    temp[50],
            *p;
     p = s;
-    for (N = 2; (p = getstr (p, temp)) != NULL && N < sizeof (xc) / sizeof (xc[0]); N++) {
+    for (N = 2; (p = getstr (p, temp)) != NULL && N < (int)(sizeof (xc) / sizeof (xc[0])); N++) {
 	xc[N] = atoi (temp);
 	p = getstr (p, temp);
 	yc[N] = atoi (temp);

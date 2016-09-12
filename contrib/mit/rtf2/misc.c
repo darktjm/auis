@@ -52,19 +52,11 @@
 #include "rtf2.h"
 #include "input.h"
 
-extern TABLE Table;
-extern FILESTACK FileStack;
-int offset(char *string, char character);
-int roffset(char *string, char character);
-void AbsorbSpace(), AbsorbWhiteSpace();
-char *makelower();
-
-
 char *makelower(char *instruction)
 {
   int i;
   
-  for(i=0; i<strlen(instruction); i++)
+  for(i=0; i<(int)strlen(instruction); i++)
     {
       if(isupper(instruction[i]))
 	instruction[i] = tolower(instruction[i]);
@@ -72,7 +64,8 @@ char *makelower(char *instruction)
 
   return(instruction);
 }
-  
+
+#if 0 /* unused */
 /* For Development Use Only:  Comment Out for Final Production */
 void TempPrintList(void)
 {
@@ -88,11 +81,12 @@ void TempPrintList(void)
       tmp = tmp-> next;
     }
 }
+#endif
 
 
-int offset(char *string, char character)
+int offset(const char *string, char character)
 {
-  char *loc;
+  const char *loc;
 
   loc = strchr(string, character);
 
@@ -101,9 +95,9 @@ int offset(char *string, char character)
 }
 
 
-int roffset(char *string, char character)
+int roffset(const char *string, char character)
 {
-  char *loc;
+  const char *loc;
 
   loc = strrchr(string, character);
 
@@ -185,7 +179,7 @@ void AbsorbWhiteSpace(void)
     }
 }
 
-int reverse(char s[])
+static void reverse(char s[])
 {
     int c, i, j;
     for(i=0, j=strlen(s)-1; i<j; i++, j--)
@@ -196,7 +190,7 @@ int reverse(char s[])
     }
 }
 
-int itoa(int n, char s[])
+void itoa(int n, char s[])
 {
     int i, sign;
     if ((sign=n) < 0)

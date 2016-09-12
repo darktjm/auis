@@ -47,22 +47,35 @@
 */
 
 #include <andrewos.h>
+#include <util.h>
 #include "scribetext.h"
 
-extern TABLE Table;
-TABLE FindNode();
-void CloseFiles();
-long int ParseText();
-extern int offset();
-FP AssignFunc();
-char *GetInstruction(), *STGreek();
-int STUniqueID(), STDelete(), STCopy(), STSymbol(), STNOP(), STStrip(), 
-  STDevice(), STFootnote(), STBegin(), STEnd(), STCenter(), STCaps(),
-  STTilde(), STInclude(), STChapter(), STDefine(), STNewpage(),
-  STStupidstrip(), STVerbatim(), STItemize(), STBlankspace(),
-  STLabel(), STRef(), STTsymbol(), STValue();
+static int STDevice(const char *command, int tofind);
+static int STDelete(const char *command, int tofind);
+static int STNOP(const char *command, int tofind);
+/* static int STCopy(const char *command, int tofind); */
+static int STStrip(const char *command, int tofind);
+static int STStupidstrip(const char *command, int tofind);
+static int STSymbol(const char *command, int tofind);
+static int STItemize(const char *command, int tofind);
+/* static int STError(const char *command, int tofind); */
+static int STFootnote(const char *command, int tofind);
+static int STBegin(const char *command, int tofind);
+static int STEnd(const char *command, int tofind);
+static int STCaps(const char *command, int tofind);
+static int STTilde(const char *command, int tofind);
+static int STInclude(const char *command, int tofind);
+static int STChapter(const char *command, int tofind);
+static int STDefine(const char *command, int tofind);
+static int STNewpage(const char *command, int tofind);
+static int STLabel(const char *command, int tofind);
+static int STRef(const char *command, int tofind);
+static int STTsymbol(const char *command, int tofind);
+static int STVerbatim(const char *command, int tofind);
+static int STBlankspace(const char *command, int tofind);
+static int STValue(const char *command, int tofind);
 
-FP AssignFunc(char *ezword)
+FP AssignFunc(const char *ezword)
 {
   if(!ULstrcmp(ezword, "delete"))
     return(STDelete);
@@ -141,7 +154,7 @@ int STUniqueID(void)
   return(++Token);
 }
 
-int STDevice(char *command, int tofind)
+static int STDevice(const char *command, int tofind)
 {
   char ch, device[TMP_SIZE];
   int in;
@@ -172,34 +185,41 @@ int STDevice(char *command, int tofind)
 	      "from within the specific");
       printf("  Andrew application.\n");
     }
+    return 0; /* only needs to not be POP_JOB - tjm */
 }
 
 
-int STDelete(char *command, int tofind)
+static int STDelete(const char *command, int tofind)
 {
   ParseText(tofind, "", "", NORMAL, NOP);
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
   
-int STNOP(char *command, int tofind)
+static int STNOP(const char *command, int tofind)
 {
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
 
-int STCopy(char *command, int tofind)
+#if 0 /* unused */
+static int STCopy(const char *command, int tofind)
 {
   fputs(command, fout);
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
+#endif
 
 
-int STStrip(char *command, int tofind)
+static int STStrip(const char *command, int tofind)
 {
   ParseText(tofind, "", "", NORMAL, PRINTTOFILE);
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
 
 
-int STStupidstrip(char *command, int tofind)
+static int STStupidstrip(const char *command, int tofind)
 {
   char ch;
   int in;
@@ -219,10 +239,11 @@ int STStupidstrip(char *command, int tofind)
       else
 	fputc(ch, fout);
     }
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
 
-int STSymbol(char *command, int tofind)
+static int STSymbol(const char *command, int tofind)
 {
   int token;
 
@@ -231,25 +252,30 @@ int STSymbol(char *command, int tofind)
   fprintf(fout, "\\begindata{acc_%s, %d}\n\\enddata{aac_%s, %d}\n",
 	  command, token, command, token);
   fprintf(fout, "\\view{aac_%s, %d, 0, 0, 0}", command, token);
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
 
-int STItemize(char *command, int tofind)
+static int STItemize(const char *command, int tofind)
 {
   fputs("\\itemize{", fout);
 
   ParseText(tofind, "\\symbol{7}\t", "", NORMAL, PRINTTOFILE);
 
   fputs("}\n", fout);
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
-int STError(char *command, int tofind)
+#if 0 /* unused */
+static int STError(const char *command, int tofind)
 {
   fprintf(ferr, "* Unknown error!\n* %s: unknown error in input file.\n", me);
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
+#endif
 
 
-int STFootnote(char *command, int tofind)
+static int STFootnote(const char *command, int tofind)
 {
   int token;
 
@@ -263,10 +289,11 @@ int STFootnote(char *command, int tofind)
 
   fprintf(fout, "\\\n\\enddata{fnote,%d}\n\\view{fnotev,%d,3,0,0}}",
 	  token, token);
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
 
-int STBegin(char *command, int tofind)
+static int STBegin(const char *command, int tofind)
 {
   char ch, *instruction, *makelower();
   int in;
@@ -314,10 +341,11 @@ int STBegin(char *command, int tofind)
       else
 	  return(tmp->ez.fun(instruction, POP_JOB));
     }
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
 
-int STEnd(char *command, int tofind)
+static int STEnd(const char *command, int tofind)
 {
   char ch, *instruction, *makelower();
   int in;
@@ -348,30 +376,32 @@ int STEnd(char *command, int tofind)
     {
       printf("* Scribe environment @%s not recognized...\n", instruction);
       fprintf(fout, "@end(%s)", instruction);
+      return 0; /* only needs to not be POP_JOB - tjm */
     }
   else
     return(POP_JOB);
 }
 
 
-int STCaps(char *command, int tofind)
+static int STCaps(const char *command, int tofind)
 {
   fputs("\\smaller{", fout);
 
   ParseText(tofind, "", "", CAPS, PRINTTOFILE);
 
   fputc('}', fout);
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
 
-int STTilde(char *command, int tofind)
+static int STTilde(const char *command, int tofind)
 {
   /* ABSORB EVERYTHING UNTIL THE NEXT PRINTABLE CHARACTER */
 
   char ch;
   int in;
   
-  while(in = fgetc(fin) != EOF)
+  while((in = fgetc(fin) != EOF))
     {
       ch = (char) in;
       if(ch != '\n' && ch != '\r')
@@ -385,10 +415,11 @@ int STTilde(char *command, int tofind)
       fprintf(ferr, "* Error!\n* %s: End of file reached after @~ command\n", me);
       CloseFiles();
     }
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
 
-int STInclude(char *command, int tofind)
+static int STInclude(const char *command, int tofind)
 {
   char ch, instruction[TMP_SIZE];
   int in, accessible, readable;
@@ -432,10 +463,11 @@ int STInclude(char *command, int tofind)
       printf("* Finished incorporating %ld lines of %s\n",  tempcurrline,
 	     instruction);
     }
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
 
-int STChapter(char *command, int tofind)
+static int STChapter(const char *command, int tofind)
 {
   int token;
 
@@ -445,11 +477,12 @@ int STChapter(char *command, int tofind)
 	  "\\begindata{bp,%d}\n\\enddata{bp,%d}\n\\view{bpv,%d,1,0,0}\n",
 	  token, token, token);
   ReplaceText("chapter", WORD, tofind);
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
 
 
-int STDefine(char *command, int tofind)
+static int STDefine(const char *command, int tofind)
 {
   int in, nomoreflag=FALSE;
   char ch, *instruction, *makelower();
@@ -495,10 +528,11 @@ int STDefine(char *command, int tofind)
   printf("* @%s command encountered.  All future occurences of\n", command);
   printf("  @%s will be deleted.\n", instruction);
 
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
 
-int STNewpage(char *command, int tofind)
+static int STNewpage(const char *command, int tofind)
 {
   char ch, *instruction, *makelower();
   int in, times, token;
@@ -534,9 +568,10 @@ int STNewpage(char *command, int tofind)
     }
 
   AbsorbNewlines();
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
-int STLabel(char *command, int tofind)
+static int STLabel(const char *command, int tofind)
 {
   char ch, *codeword;
   int in, token;
@@ -561,7 +596,7 @@ int STLabel(char *command, int tofind)
   if(!strcmp(codeword, ""))
     {
       printf("* No codeword specified with %s.  Ignoring.\n", command);
-      return(0);
+      return 0; /* only needs to not be POP_JOB - tjm */
     }
   else
     {
@@ -572,9 +607,10 @@ int STLabel(char *command, int tofind)
       fprintf(fout, "%s\\\n\\enddata{texttag,%d}\n\\view{texttagv,%d,0,0,0}}",
 	      codeword, token, token);
     }
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
   
-int STRef(char *command, int tofind)
+static int STRef(const char *command, int tofind)
 {
   char ch, *codeword;
   int in, token;
@@ -599,7 +635,7 @@ int STRef(char *command, int tofind)
   if(!strcmp(codeword, ""))
     {
       printf("* No codeword specified with %s.  Ignoring.\n", command);
-      return(0);
+      return 0; /* only needs to not be POP_JOB - tjm */
     }
   else
     {
@@ -616,9 +652,10 @@ int STRef(char *command, int tofind)
       fprintf(fout, "\\\n\\enddata{textref,%d}\n\\view{textrefv,%d,0,0,0}}",
 	      token, token);
     }
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
-int STTsymbol(char *command, int tofind)
+static int STTsymbol(const char *command, int tofind)
 {
   if(!strcmp(command, "zts"))
     fputs("\\formatnote{\\\\(ts}", fout);
@@ -628,15 +665,16 @@ int STTsymbol(char *command, int tofind)
 }
 
   
-int STVerbatim(char *command, int tofind)
+static int STVerbatim(const char *command, int tofind)
 {
   verbatim++;
   ParseText(tofind, "", "", NORMAL, PRINTTOFILE);
   verbatim--;
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
 
 
-int STBlankspace(char *command, int tofind)
+static int STBlankspace(const char *command, int tofind)
 {
 char ch, *quan, *qual, *combined, quality;
 int in;
@@ -687,13 +725,14 @@ else if(!ULstrncmp(qual, "line", 4))
 else
   {
     printf("* Unit of measurement %s not recognized:\n", qual);
-    return(0);
+    return 0;
   }
 
 fprintf(fout, "\\formatnote{.sp %lf%c}\n", quantity, quality);
+return 0; /* only needs to not be POP_JOB - tjm */
 }
   
-int STValue(char *command, int tofind)
+static int STValue(const char *command, int tofind)
 {
   char *instruction, ch;
   int in;
@@ -716,9 +755,7 @@ int STValue(char *command, int tofind)
 	}
       sprintf(instruction, "%s%c", instruction, ch);
     }
-
-
-
+  return 0; /* only needs to not be POP_JOB - tjm */
 }
     
 

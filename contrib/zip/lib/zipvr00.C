@@ -289,7 +289,6 @@ void zipprint::Set_Line_Width( long	line_width )
 long zipprint::Ensure_Line_Attributes( zip_type_figure		 figure )
 {
   class zipprint *self=this;
-  unsigned char		lwidth;
   long				status = zip_ok;
   char					*pattern = NULL;
   int					offset;
@@ -322,7 +321,7 @@ zipprint_Line_Attributes_String( class zipprint	          *self )
   static char			string[300];
   char				temp[100];
   const char		       *p;
-  short				cap, join;
+  short				cap = 0, join = 0; /* init to shut gcc up */
 
     switch ( Printing->zip_printing_line_cap )
     {

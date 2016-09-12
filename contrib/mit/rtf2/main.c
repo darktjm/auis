@@ -47,30 +47,35 @@
 */
 
 #include <andrewos.h>
+#include <util.h>
 #include <stdio.h>
 #include <sys/file.h>  /* access() */
 #ifdef POSIX_ENV
 #include <unistd.h>
 #endif
-#include <sys/errno.h>
+#include <errno.h>
 #include "rtf2.h"
 #include "input.h"
 
-char *AndrewDir();
-
 TABLE Table=NULL;
 VALUES Values=NULL;
-FILESTACK FileStack=NULL;
 FONT Font=NULL;
-char *Filein, *Fileout;
+static char *Filein, *Fileout;
 double LeftMargin = .75;
 double RightMargin = 6.5;
 
-  static char *GetInstruction();
-  static FILE *FileProcess();
-  static int ExecuteSpecial();
-  static long int ParseText();
-  static void usage(), CloseFiles(), MakeTable(), TempPrintList(), ParseMain();
+char *me, *RTFchars;
+
+int Token, MasterToken, TextDSVersion;
+int RTFverceiling, CharSet, Levels, FontSize;
+int flag, left_indented, right_indented, fnote, tabs;
+long int CurrLine;
+
+FILE *fin, *fout, *ftrans, *ferr;
+
+static FILE *FileProcess(const char *prompt, char *filename, const char *mode);
+static void MakeTable(void);
+/* static void AddValue(char *name, char *value); */ /* use commented out */
 
 int main(int argc, const char *argv[])
 /*
@@ -83,7 +88,7 @@ int main(int argc, const char *argv[])
  */
 {
   char filein[TMP_SIZE], fileout[TMP_SIZE], filetrans[TMP_SIZE], 
-  fileerr[TMP_SIZE], datestamp[TMP_SIZE];
+  fileerr[TMP_SIZE];
   int i, CommandErr=FALSE, OptionErr=FALSE;
 
 /* void SetupEnvironment();*/
@@ -175,7 +180,7 @@ int main(int argc, const char *argv[])
 }
 
 
-FILE *FileProcess(char *prompt, char *filename, char *mode)
+static FILE *FileProcess(const char *prompt, char *filename, const char *mode)
 /*
  *
  *  Return a pointer to the file associated with filename,
@@ -209,8 +214,8 @@ FILE *FileProcess(char *prompt, char *filename, char *mode)
 {
   int accessible, readable, len;
   FILE *fpt;
-  char *filename2, *fullspec, number[20], *getenv(),
-  instruction[TMP_SIZE];
+  char *filename2 = NULL, number[20], instruction[TMP_SIZE];
+  const char *fullspec;
 
   if(!strcmp(filename, "") && !strcmp(mode, "t"))
   {
@@ -223,8 +228,9 @@ FILE *FileProcess(char *prompt, char *filename, char *mode)
       }
       else
       {
-	  filename = (char *) malloc((strlen(fullspec) + 1)*sizeof(char));
-	  strcpy(filename, fullspec);
+	  filename2 = (char *) malloc((strlen(fullspec) + 1)*sizeof(char));
+	  strcpy(filename2, fullspec);
+	  filename = filename2;
       }
   }
 
@@ -236,14 +242,17 @@ FILE *FileProcess(char *prompt, char *filename, char *mode)
 	    {
 	      len = roffset(filename, '.');
 	      filename2 = (char *) malloc ((len + 8) * sizeof(char));
-	      filename[len] = '\0';
+	      memcpy(filename2, filename, len);
+	      filename2[len] = '\0';
 	    }	 
 	}
       else
+	{
 	filename2 = (char *) malloc ((strlen(filename) + 8) * sizeof(char));
+	strcpy(filename2, filename);
+	}
 
-      filename2 = strcat(filename, ".ez");
-      filename = (char *) malloc((strlen(filename2) + 1) * sizeof(char));
+      strcat(filename2, ".ez");
       filename = filename2;
 
       accessible = access(filename, F_OK);
@@ -317,11 +326,14 @@ FILE *FileProcess(char *prompt, char *filename, char *mode)
       strcpy(Fileout, filename);
     }
 
+  if(filename2)
+	free(filename2);
+
   return(fpt);
 }
 
 
-void MakeTable(void)
+static void MakeTable(void)
 /*
  *
  *  Create internal translation table by reading in ftrans.
@@ -329,8 +341,7 @@ void MakeTable(void)
  */
 {
   TABLE tmp;
-  char ch, *rtfword, ezword[TMP_SIZE], *makelower();  
-  extern FP AssignFunc();
+  char ch, *rtfword, ezword[TMP_SIZE];  
   int in, len, rtfc=0, dsv=0, rtfvc=0;
 
   rtfword = (char *) calloc(TMP_SIZE, sizeof(char));
@@ -464,7 +475,6 @@ void MakeTable(void)
 void SetupEnvironment(rootfile)
      char *rootfile;
 {
-  void AddValue();
   char *username, *wd, *getlogin(), *getwd(), *trimroot, *fullman;
 
   Go through all predefined string fields and define them
@@ -482,7 +492,6 @@ void SetupEnvironment(rootfile)
   AddValue("username", username);
 
   }
-*/
 
 void AddValue(char *name, char *value)
 {
@@ -514,3 +523,4 @@ void AddValue(char *name, char *value)
       Values = tmp;
     }
 }
+*/

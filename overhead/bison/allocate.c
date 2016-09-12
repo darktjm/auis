@@ -21,11 +21,10 @@ the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.  */
 #include <stdio.h>
 #include <stdlib.h>
 
-extern void done ();
+#include "new.h"
+#include "proto.h"
 
-extern char *program_name;
-
-char *
+void *
 xmalloc (unsigned n)
 {
   char *block;
@@ -43,8 +42,8 @@ xmalloc (unsigned n)
   return (block);
 }
 
-char *
-xrealloc (char *block, unsigned n)
+void *
+xrealloc (void *block, unsigned n)
 {
   /* Avoid uncertainty about what an arg of 0 will do.  */
   if (n == 0)

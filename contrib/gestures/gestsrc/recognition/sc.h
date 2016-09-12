@@ -1,5 +1,4 @@
 /***********************************************************************
-/***********************************************************************
 
 sc.h - creates classifiers from feature vectors of examples, as well as
    classifying example feature vectors.
@@ -85,3 +84,4 @@ sClassDope	sClassify();		/* sc, y */
 sClassDope	sClassifyAD();		/* sc, y, double *ap; double *dp */
 sClassDope	sClassNameLookup();	/* sc, classname */
 double		MahalanobisDistance();	/* Vector v, u; Matrix sigma */
+void sDumpClassifier(sClassifier sc);

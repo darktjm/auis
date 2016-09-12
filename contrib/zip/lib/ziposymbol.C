@@ -280,6 +280,8 @@ ziposymbol::Build_Object( zip_type_pane pane, enum view_MouseAction action, long
 	(this->view_object)->Draw_Figure(  CurrentFigure, pane );
 	}
       break;
+    default:
+      break;
     }
   OUT(ziposymbol_Build_Object);
   return  status;
@@ -370,7 +372,7 @@ long Draw( class ziposymbol *self, zip_type_figure figure, zip_type_pane  pane )
     }
     else
     {
-    if ( algorithm = Symbol_Algorithm( self, figure ) )
+    if ( ( algorithm = Symbol_Algorithm( self, figure ) ) )
       {
       if ( (self->view_object )->GetTransferMode( ) != transfer_mode )
         (self->view_object)->SetTransferMode(  transfer_mode );
@@ -416,7 +418,7 @@ ziposymbol::Print_Object( zip_type_figure figure, zip_type_pane pane )
     height = -height;
     y_factor = -1;
     }
-  if ( algorithm = Symbol_Algorithm( this, figure ) )
+  if ( ( algorithm = Symbol_Algorithm( this, figure ) ) )
     Draw_Symbol( this, figure, pane, algorithm, left, top, width, height,
 	       x_factor, y_factor, true );
     else  status = zip_failure;
@@ -462,7 +464,7 @@ long Draw_Symbol( class ziposymbol  *self, zip_type_figure  figure, zip_type_pan
     (self->print_object)->Set_Line_Width(  1 );
    else   if ( (self->view_object )->GetLineWidth( ) != LineWidth )
     (self->view_object)->SetLineWidth(  LineWidth );
-  while ( operator_c = *algorithm )
+  while ( ( operator_c = *algorithm ) )
     {
     DEBUGct(Operator,operator_c);
     if ( operator_c != '(' )
@@ -599,11 +601,12 @@ long Draw_Symbol( class ziposymbol  *self, zip_type_figure  figure, zip_type_pan
         algorithm = Number( self, algorithm, &n );
 	n = (long) (n * M);
 	DEBUGdt(Radius,n);
-	if ( n > 0 )
+	if ( n > 0 ) {
 	  if ( print )
 	    (self->print_object)->Draw_Circle(  x, y, n );
 	    else
 	    (self->view_object)->DrawOvalSize(  x - n, y - n, n<<1, n<<1 );
+	}
 	break;
       case 'D':  DEBUG(DrawTo);
 	if ( print )
@@ -618,7 +621,7 @@ long Draw_Symbol( class ziposymbol  *self, zip_type_figure  figure, zip_type_pan
         algorithm = Number( self, algorithm, &m );
 	m = (long) (m * D);
 	DEBUGdt(Y-Radius,m);
-	if ( m > 0  &&  n > 0 )
+	if ( m > 0  &&  n > 0 ) {
 	  if ( print )
 	    (self->print_object)->Draw_Ellipse(  x, y, n, m );
 	    else
@@ -627,6 +630,7 @@ long Draw_Symbol( class ziposymbol  *self, zip_type_figure  figure, zip_type_pan
 	      (self->view_object)->FillOvalSize(  x-n, y-m, n<<1, m<<1, GrayGraphic );
 	    (self->view_object)->DrawOvalSize(  x-n, y-m, n<<1, m<<1 );
 	    }
+	}
 	break;
       case 'F':  DEBUG(SetFont);
 	algorithm++;
@@ -647,7 +651,7 @@ long Draw_Symbol( class ziposymbol  *self, zip_type_figure  figure, zip_type_pan
       case 'G':  DEBUG(GrayGraphic);
 	GrayShade = LastNumber;
 	DEBUGdt(GrayShade,GrayShade);
-	if ( !print )
+	if ( !print ) {
 	 if ( GrayShade > 0 &&  GrayShade <= 100 )
 	  {
 	  if ( (shade = ('0' + ((GrayShade + 10) / 10)) - 1) > '9' )  shade = '9';
@@ -660,6 +664,7 @@ long Draw_Symbol( class ziposymbol  *self, zip_type_figure  figure, zip_type_pan
 	  GrayGraphic = NULL;
 	  GrayShade = 0;
 	  }
+	}
 	break;
       case 'I':  DEBUG(Incorporate);
 	{
@@ -1012,7 +1017,7 @@ long Open_File( class ziposymbol		  *self, struct symbol_set		  *set )
   (self->view_object)->Announce(  buffer );
   sprintf( buffer, "%s/%s", set->set_path, set->set_name );
   errno = 0;
-  if ( set->set_file = fopen( buffer, "r" ) )
+  if ( ( set->set_file = fopen( buffer, "r" ) ) )
     status = zip_ok;
     else
     {
@@ -1024,7 +1029,7 @@ long Open_File( class ziposymbol		  *self, struct symbol_set		  *set )
 	errno = 0;
 	sprintf( buffer, "%s/%s", SymbolLibraries->zip_paths_vector[i], set->set_name );
 	DEBUGst(Trying,buffer);
-	if ( set->set_file = fopen( buffer, "r" ) )
+	if ( ( set->set_file = fopen( buffer, "r" ) ) )
 	  { DEBUG(Success);
 	  status = zip_ok;
 	  break;
@@ -1054,9 +1059,8 @@ Identify_Paths( class ziposymbol	      *self, zip_type_paths	      *paths_ptr )
     if ( (zippath_profile = (char *) environ::GetProfile( "ZipSymbolPaths" ))  ||
          (zippath_profile = (char *) environ::GetProfile( "ZipSymbolPath" )) )
       {
-      if ( zippath_string = (char *) malloc( strlen( zippath_profile ) + 1 ) )
+      if ( ( zippath_string = strdup( zippath_profile ) ) )
         {
-        strcpy( zippath_string, zippath_profile );
 	DEBUGst(Path-string,zippath_string);
         while ( *zippath_string != '\0'  &&  (*paths_ptr)->zip_paths_count < 10 )
           {
@@ -1077,8 +1081,8 @@ Identify_Paths( class ziposymbol	      *self, zip_type_paths	      *paths_ptr )
 	}
 	else status = zip_insufficient_stream_space;
       }
-    if ( (*paths_ptr)->zip_paths_vector[(*paths_ptr)->zip_paths_count] =
-         strdup( symbol_library_path ) )
+    if ( ( (*paths_ptr)->zip_paths_vector[(*paths_ptr)->zip_paths_count] =
+         strdup( symbol_library_path ) ) )
     {
       (*paths_ptr)->zip_paths_count++;
     }
@@ -1136,9 +1140,9 @@ Symbol_Algorithm( class ziposymbol		  *self, zip_type_figure		   figure )
       old_name += 2;
       }
     DEBUGst(Used Symbol-set-name,string);
-    if ( symbol_vector = Symbol_Set_Vector( self, string ) )
+    if ( ( symbol_vector = Symbol_Set_Vector( self, string ) ) )
       {
-      if ( CurrentSymbolSet = Symbol_Set( self, string ) )
+      if ( ( CurrentSymbolSet = Symbol_Set( self, string ) ) )
 	{
         if ( *s == ';' )    s++;
         t = string;

@@ -60,8 +60,8 @@ the full agreement.
 
 #define	STREQ(a,b)	( ! strcmp(a,b) )
 
-char	*recog_myalloc();	/* Do not call this function directly */
-char *recog_scopy();
+void	*recog_myalloc(int nitems, int itemsize, const char *typename);	/* Do not call this function directly */
+char *recog_scopy(const char *s);
 #ifdef __GNUC__
 __attribute__((format(printf,1,2)))
 #endif

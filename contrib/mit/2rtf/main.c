@@ -46,31 +46,38 @@
 */
 
 #include <andrewos.h>
+#include <util.h>
 #include <stdio.h>
 #include <sys/file.h>  /* access() */
 #ifdef POSIX_ENV
 #include <unistd.h>
 #endif
-#include <sys/errno.h>
+#include <errno.h>
 #include "2rtf.h"
 #include "input.h"
 
-char *AndrewDir();
-
 struct TableStruct *Table=NULL;
-struct ValuesStruct *Values=NULL;
+static struct ValuesStruct *Values=NULL;
 /* struct FileStackStruct *FileStack=NULL; */
 struct IdStackStruct *IdStack=NULL;
 struct StyleStackStruct *Style=NULL;
 
-char *Filein, *Fileout;
+char *me;
 
-static char *GetInstruction();
-static FILE *FileProcess();
-static int ExecuteSpecial();
-static long int ParseText();
-static void usage(), CloseFiles(), MakeTable(), TempPrintList(), ParseMain(),
-     SetupEnvironment(), InitStateVector();
+int paragraph, TextDSVersion, RTFVersion;
+long int CurrLine;
+
+FILE *fin, *fout, *ftrans, *ferr;
+
+static char *Filein, *Fileout;
+
+struct text_statevector State;
+
+static FILE *FileProcess(const char *prompt, char *filename, const char *mode);
+static void MakeTable(void);
+static void SetupEnvironment(char *rootfile);
+static void AddValue(const char *name, const char *value);
+static void InitStateVector(void);
 
 int main(int argc, const char *argv[])
 /*
@@ -83,7 +90,7 @@ int main(int argc, const char *argv[])
  */
 {
   char filein[TMP_SIZE], fileout[TMP_SIZE], filetrans[TMP_SIZE], 
-  fileerr[TMP_SIZE], datestamp[TMP_SIZE];
+  fileerr[TMP_SIZE];
   int i, CommandErr=FALSE, OptionErr=FALSE;
 
   /*  Get date and time into char *datestamp as quick as posssible */
@@ -169,7 +176,7 @@ int main(int argc, const char *argv[])
 }
 
 
-FILE *FileProcess(char *prompt, char *filename, char *mode)
+FILE *FileProcess(const char *prompt, char *filename, const char *mode)
 /*
  *
  *  Return a pointer to the file associated with filename,
@@ -203,8 +210,8 @@ FILE *FileProcess(char *prompt, char *filename, char *mode)
 {
   int accessible, readable, len;
   FILE *fpt;
-  char *filename2, *fullspec, number[20], *getenv(),
-  instruction[TMP_SIZE];
+  char *filename2, number[20], instruction[TMP_SIZE];
+  const char *fullspec;
 
   if(!strcmp(filename, "") && !strcmp(mode, "t"))
   {
@@ -229,15 +236,15 @@ FILE *FileProcess(char *prompt, char *filename, char *mode)
 	  if(!ULstrcmp(rindex(filename, '.'), ".ez"))
 	    {
 	      len = roffset(filename, '.');
-	      filename2 = (char *) malloc ((len + 8) * sizeof(char));
+	      filename2 = (char *) malloc ((len + 8));
 	      filename[len] = '\0';
 	    }	 
 	}
       else
-	filename2 = (char *) malloc ((strlen(filename) + 8) * sizeof(char));
+	filename2 = (char *) malloc ((strlen(filename) + 8));
 
       filename2 = strcat(filename, ".rtf");
-      filename = (char *) malloc((strlen(filename2) + 1) * sizeof(char));
+      filename = (char *) malloc((strlen(filename2) + 1));
       filename = filename2;
 
       accessible = access(filename, F_OK);
@@ -301,12 +308,12 @@ FILE *FileProcess(char *prompt, char *filename, char *mode)
 
   if(!strcmp(mode, "r"))
     {
-      Filein = (char *) malloc((strlen(filename) + 1) * sizeof(char));
+      Filein = (char *) malloc((strlen(filename) + 1));
       strcpy(Filein, filename);
     }
   else if(!strcmp(mode, "w"))
     {
-      Fileout = (char *) malloc((strlen(filename) + 1) * sizeof(char));
+      Fileout = (char *) malloc((strlen(filename) + 1));
       strcpy(Fileout, filename);
     }
 
@@ -322,9 +329,8 @@ void MakeTable(void)
  */
 {
   struct TableStruct *tmp;
-  char ch, *ezword, rtfword[TMP_SIZE], *makelower();  
-  extern FP AssignFunc();
-  int in, len, rv = 0, dsv=0;
+  char ch, *ezword, rtfword[TMP_SIZE];
+  int in, rv = 0, dsv=0;
 
   ezword = (char *) calloc(TMP_SIZE, sizeof(char));
 
@@ -356,8 +362,6 @@ void MakeTable(void)
 
       if(rtfword[0]=='~')
 	{
-	  len = strlen(ezword) + 1;
-
           if(!strcmp(rtfword, "~RTFVersion"))
             {
               RTFVersion = atoi(ezword);
@@ -446,7 +450,6 @@ void SetupEnvironment(char *rootfile)
  *
  */
 {
-  void AddValue();
   char *username, *wd, *trimroot, *fullman;
 
   /*  Go through all predefined string fields and define them
@@ -456,9 +459,9 @@ void SetupEnvironment(char *rootfile)
       genericdevice, manuscript, rootfiledate, site, sitename, time,
       timestamp, username, scribeversion and scribetextversion */
 
-  wd = (char *) malloc(1024 * sizeof(char));
-  trimroot = (char *) malloc(1024 * sizeof(char));
-  fullman = (char *) malloc(1024 * sizeof(char));
+  wd = (char *) malloc(1024);
+  trimroot = (char *) malloc(1024);
+  fullman = (char *) malloc(1024);
 
   AddValue("device", "PostScript");
   AddValue("devicename",  "PostScript Page Description Language");
@@ -472,7 +475,7 @@ void SetupEnvironment(char *rootfile)
      time, timestamp, and username */
 
   username=getlogin();
-  wd = getwd(wd);
+  getcwd(wd, 1024);
 
   if(rootfile[0]=='/')
     fullman = rootfile;
@@ -487,7 +490,7 @@ void SetupEnvironment(char *rootfile)
 
 }
 
-void AddValue(char *name, char *value)
+void AddValue(const char *name, const char *value)
 /*
  *
  *  This adds a value to Values.
@@ -502,12 +505,10 @@ void AddValue(char *name, char *value)
   tmp->name = name;
   if (value == NULL) 
     {
-      tmp->value = (char *) malloc (sizeof(char));
-      tmp->value[0] = '\0';
+      tmp->value = "";
     }
   else
     {
-      tmp->value = (char *) calloc(strlen(value) + 1, sizeof(char));
       tmp->value = value;
     }
 

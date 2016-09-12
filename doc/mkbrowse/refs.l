@@ -1,11 +1,15 @@
 %{
+#include <andrewos.h>
 #include "refs.h"
+static int refs_TokWhitespace(void);
 #undef YY_INPUT
 #define YY_INPUT(buf,result,max_size) \
 { \
      int c = getc(yyin); \
      result = (c == EOF) ? YY_NULL : (buf[0] = c, 1); \
 }
+#define YY_NO_UNPUT 1
+#define YY_NO_INPUT 1
 %}
 %x COMMENT
 %x STRING
@@ -21,6 +25,7 @@ virtual[^A-Z0-9a-z_]		yyless(yyleng-1);return(refs_Inheritance);
 #define[^A_Z0-9a-z_]		yyless(yyleng-1);return(refs_Define);
 #include[^A-Z0-9a-z_]		yyless(yyleng-1);return(refs_Include);
 ATKdefineRegistry[^A-Z0-9a-z_]			yyless(yyleng-1);return(refs_ATKdefineRegistry);
+ATKdefineRegistryNoInit[^A-Z0-9a-z_]			yyless(yyleng-1);return(refs_ATKdefineRegistry);
 extern[^A-Z0-9a-z_]		yyless(yyleng-1);return(refs_Extern);
 ATKregistryEntry[^A-Z0-9a-z_]			yyless(yyleng-1);return(refs_ATKregistryEntry);
 [A-Za-z][0-9A-Za-z]*_ATKregistry_[^A-Z0-9a-z_]	yyless(yyleng-1);return(refs_ATKregistry_);
@@ -68,7 +73,7 @@ BEGIN(LINECOMMENT);
 [A-Za-z_][0-9A-Za-z_]*		return(refs_Name);
 .				return(refs_Other);
 %%
-int refs_TokWhitespace(void)
+static int refs_TokWhitespace(void)
 {
     /* convert an escaped newline into a space */	
     if(yytext[0]=='\\'){

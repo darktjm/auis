@@ -402,17 +402,11 @@ zipview::Which_Image( long				   x , long				   y )
   class zipview *self=this;
 
   IN(zippview_Which_Image);
-  if ( figure = (self)->Which_Figure(  x, y ) )
+  if ( ( figure = (self)->Which_Figure(  x, y ) ) )
     image = figure->zip_figure_image;
   ZIP_STATUS(this->data_object);
   OUT(zippview_Which_Image);
   return image;
-  }
-
-zip_type_image
-Within_Which_Image( class zipview		  *self, long				   x , long				   y )
-      {
-return zip_ok;
   }
 
 boolean

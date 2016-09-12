@@ -534,7 +534,7 @@ PRIVATE void HTFWriter_write (HTStream * me, CONST char* s, int l)
 
 
 
-
+#include <time.h>
 /*	Free an HTML object
 **	-------------------
 **

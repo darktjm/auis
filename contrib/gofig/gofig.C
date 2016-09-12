@@ -294,7 +294,7 @@ parsediagram(gofig *self, FILE *f) {
 	self->setdimensions( 0, 0 );
 
 	row = 0;
-	maxcols = 0;
+	cols = maxcols = 0;
 	while (TRUE) {
 		/* read the lines of the data stream */
 		if ((fgets( s, MAXFILELINE + 2, f )) == 0) {
@@ -356,7 +356,7 @@ gofig::Read( FILE *file, long id ) {
 	/* delete all stones */
 	setdimensions( 0, 0 );
 
-	int v, w, h, p, e,  r, c, ch;
+	int v, w, h, p, e,  r, c;
 	/* read header line */
 	if (fscanf( file, " %d %d %d %d %d ",
 			&v, &w, &h, &p, &e) != 5) 
@@ -578,7 +578,6 @@ gofig::deletestone( int row, int col ) {
 */
 	static long
 converttext(textview *txtv, long c) {
-	char buf[100];  /* board must be in first 100 bytes of line */
 	int prefixlen = -1;
 	gofig *newfig = new gofig;
 	text *txt = (text *)txtv->GetDataObject();

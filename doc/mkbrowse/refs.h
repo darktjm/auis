@@ -32,7 +32,7 @@ refs_LASTTYPE
 
 #include <atkproto.h>
 BEGINCPLUSPLUSPROTOS
-#ifdef ANSI_COMPILER
+extern void resetlexer(void);
 int refs_TokUnput(int tok);
 int refs_TokComment(void);
 int refs_TokString(void);
@@ -42,17 +42,6 @@ int refs_TokLineComment(void);
 extern int yylook(void);
 extern int yywrap(void);
 extern int yylex(void);
-#else
-int refs_TokUnput();
-int refs_TokComment();
-int refs_TokString();
-int refs_TokCharacter();
-int refs_TokWhiteSpace();
-int refs_TokLineComment();
-extern int yylook();
-extern int yywrap();
-extern int yylex();
-#endif
 ENDCPLUSPLUSPROTOS
 
 extern FILE *yyin, *yyout;

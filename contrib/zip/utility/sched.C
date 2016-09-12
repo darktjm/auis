@@ -62,14 +62,14 @@ sched::Create( char *stream_name )
     long			      status;
 
     IN(sched_Create);
-    if ( self = new sched )
+    if ( ( self = new sched ) )
     {
 	if ( stream_name  &&  *stream_name )
 	{
 	    strcpy( self->stream_name, stream_name );
 	    DEBUGst(Stream-name,self->stream_name);
-	    if ( status = (self->zipp)->Open_Stream( &self->stream,
-						   self->stream_name, 0 ) )
+	    if ( ( status = (self->zipp)->Open_Stream( &self->stream,
+						   self->stream_name, 0 ) ) )
 	    { DEBUG(Open Failure);
 	    printf( "Schedule: Unable to Open %s\n", self->stream_name );
 	    }
@@ -88,7 +88,7 @@ sched::sched( )
     IN(sched_InitializeObject);
     this->stream = NULL;
     *this->stream_name = 0;
-    if ( this->zipp = new zip )
+    if ( ( this->zipp = new zip ) )
 	status = true;
     OUT(sched_InitializeObject);
     THROWONFAILURE(status);

@@ -336,7 +336,7 @@ long runbutton::Read(FILE  *fp, long  id)
 		 * in the command_buffer pointed to by cmd.
 		 * A command can span many lines of text.
 		 */
-		if (cmd - command_buffer + len >= sizeof(command_buffer)) {
+		if (cmd - command_buffer + len >= (int)sizeof(command_buffer)) {
 		    /* It won't fit in our buffer. */
 		    return dataobject_BADFORMAT;
 		}
@@ -378,7 +378,6 @@ long runbutton::Write(FILE  *fp, long  id, int  level)
     const char *cmd = GetCommandString();
     const char *lbl = GetLabelString();
     const char *quotecmd, *quotelabel, *p;
-    char savechar;
     int len;
     long uniqueid = UniqueID();
 
@@ -615,7 +614,7 @@ static char *getarg(char  *startpos, char  **nextpos)
 		*arg++ = *src++;
 	} else
 	    *arg++ = *src++;
-	if (arg - arg_buf >= sizeof(arg_buf))
+	if (arg - arg_buf >= (int)sizeof(arg_buf))
 	    break;	/* out of space. Silently truncate! */
     }
     *arg = '\0';

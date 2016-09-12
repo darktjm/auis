@@ -127,8 +127,8 @@ struct TableStruct
 
 struct ValuesStruct
 {
-  char *name;
-  char *value;
+  const char *name;
+  const char *value;
   struct ValuesStruct *next;
 };
 
@@ -143,14 +143,8 @@ struct FileStackStruct
 
 struct FontStruct
 {
-  char *name;
+  const char *name;
   int num;
-};
-
-struct func_words
-{
-   char *word;
-   int (*fname)();
 };
 
 struct IdStackStruct
@@ -172,15 +166,35 @@ struct StyleStackStruct
 
 struct style_words
 {
-   char *ezword;
-   char *rtfword;
+   const char *ezword;
+   const char *rtfword;
 };
 
-typedef int (*FP)();
+typedef int (*FP)(const char *command, int transform, int tofind);
 
-char *me;
+extern char *me;
 
-int errno, paragraph, TextDSVersion, RTFVersion;
-long int CurrLine;
+extern int paragraph, TextDSVersion, RTFVersion;
+extern long int CurrLine;
 
-FILE *fin, *fout, *ftrans, *ferr;
+extern FILE *fin, *fout, *ftrans, *ferr;
+
+/* 2RFunctions.c */
+extern FP AssignFunc(const char *rtfword);
+extern void RStyleApply(struct StyleStackStruct *tmp);
+/* main.c */
+extern struct TableStruct *Table;
+extern struct IdStackStruct *IdStack;
+extern struct StyleStackStruct *Style;
+/* misc.c */
+extern char *makelower(char *instruction);
+extern int offset(char *string, char character); /* unused */
+extern int roffset(char *string, char character);
+extern void usage(void);
+extern void CloseFiles(void);
+extern void AbsorbSpace(void); /* unused */
+extern void AbsorbNewlines(void);
+extern void Newlines(void);
+/* parse.c */
+extern void ParseMain(char *Filein, char *Fileout);
+extern long int ParseText(int tofind, int transform, int action);

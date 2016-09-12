@@ -44,9 +44,9 @@ extern char *spec_name_prefix; /* for -a, from getargs.c */
 extern char *spec_file_prefix;
 
 extern char *infile;
-extern char *outfile;
-extern char *defsfile;
-extern char *tabfile;
+extern char *outfile; /* unused */
+extern char *defsfile; /* unused */
+extern char *tabfile; /* unused */
 extern char *attrsfile;
-extern char *guardfile;
-extern char *actfile;
+extern char *guardfile; /* unused */
+extern char *actfile; /* unused */

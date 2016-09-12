@@ -141,7 +141,7 @@ zip::Write_Figure( struct zip_figure	      *figure )
 				     halo[2]       = "?";
   int			     pseudo_x=0, pseudo_y=0;
   char			    *p;
-  short		    c;
+  short		    c = 0; // init to shut gcc up
 
   IN(zip::Write_Figure);
   if ( ! figure->zip_figure_state.zip_figure_state_deleted )
@@ -318,8 +318,8 @@ Write_Image_Beginning( class zip		      *self, zip_type_image	       image )
       {
   FILE			     *file =
 	image->zip_image_stream->zip_stream_file;
-  int			      status = zip_ok, new_line = 0;
-  short			c;
+  int			      status = zip_ok;
+  short			c = 0; // init to shut gcc up
   char				*p;
 
   IN(Write_Image_Beginning);

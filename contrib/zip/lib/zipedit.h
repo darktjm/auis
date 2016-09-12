@@ -125,12 +125,12 @@ END-SPECIFICATION  ************************************************************/
 #define  Multiplier		((pane)->zip_pane_stretch_zoom_multiplier)
 #define  Divisor		((pane)->zip_pane_stretch_divisor)
 
-#define  PaneLeft		((self->view_object)->Pane_Left( pane ))
-#define  PaneRight		((self->view_object)->Pane_Right( pane ))
-#define  PaneTop		((self->view_object)->Pane_Top( pane ))
-#define  PaneBottom		((self->view_object)->Pane_Bottom( pane ))
-#define  PaneWidth		((self->view_object)->Pane_Width( pane ))
-#define  PaneHeight		((self->view_object)->Pane_Height( pane ))
+#define  PaneLeft		((PaneViewObj)->Pane_Left( pane ))
+#define  PaneRight		((PaneViewObj)->Pane_Right( pane ))
+#define  PaneTop		((PaneViewObj)->Pane_Top( pane ))
+#define  PaneBottom		((PaneViewObj)->Pane_Bottom( pane ))
+#define  PaneWidth		((PaneViewObj)->Pane_Width( pane ))
+#define  PaneHeight		((PaneViewObj)->Pane_Height( pane ))
 
 #define ZIP_double_click_parameter  500
 #define ZIP_motion_factor 1 /*===*/
@@ -221,5 +221,13 @@ END-SPECIFICATION  ************************************************************/
 #define  PointSelection			1
 #define  FigureSelection		2
 #define  ImageSelection			3
+
+extern int zipedit_Handle_Font_Family_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action, long  x , long y , long clicks );
+extern int zipedit_Handle_Font_Height_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action, long x , long              y , long clicks );
+extern int zipedit_Handle_Font_Italic_Selection( class zipedit  *self, zip_type_pane pane, enum view_MouseAction action , long x , long y , long  clicks );
+extern int zipedit_Handle_Font_Bold_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , long x , long  y , long clicks );
+extern int zipedit_Handle_Font_Sample_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , long x , long y , long clicks );
+extern int zipedit_Handle_Figure_Palette_Hit( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , int x , int  y , int clicks );
+extern int zipedit_Handle_Shade_Palette_Hit( class zipedit *self, zip_type_pane pane, enum view_MouseAction  action , long x , long y , long clicks );
 
 #endif /* _zipedit_h_ */

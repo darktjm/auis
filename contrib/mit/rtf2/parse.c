@@ -51,13 +51,8 @@
 #include "rtf2.h"
 #include "input.h"
 
-extern TABLE Table;
-
-/*extern int R2UniqueID();*/
-
-void CloseFiles(), AbsorbSpace();
-long int ParseText();
-char *GetInstruction(), *makelower();
+static int ExecuteSpecial(char *character);
+static int ReplaceText(char *instruction, int mode, char tofind);
 
 void ParseMain(char *Filein, char *Fileout)
 /*
@@ -177,8 +172,6 @@ void ParseMain(char *Filein, char *Fileout)
   printf("* Finished processing %ld lines of %s.\n", CurrLine, Filein);
 }
 
-int ReplaceText(char *instruction, int mode, char tofind);
-
 long int ParseText(int tofind, int transform, int action)
 /*
  *
@@ -202,7 +195,7 @@ long int ParseText(int tofind, int transform, int action)
 {
   char ch, instruction[TMP_SIZE], tmp_instruction[TMP_SIZE];
   TABLE tmp, FindNode();
-  int Execute(), in, braces=0;
+  int in;
 
   while((in = fgetc(fin)) != tofind)
     {
@@ -220,7 +213,7 @@ long int ParseText(int tofind, int transform, int action)
 	  else if(ch==':')
 	    fputs("++", fout);
 	  else if(strchr(RTFchars, ch))
-	    ExecuteSpecial(ch);
+	    ExecuteSpecial(&ch);
 	  else
 	    {
 	      /* rtf commands */
@@ -324,7 +317,7 @@ TABLE FindNode(int field, char *string)
 }
 
 
-int ExecuteSpecial(char *character)
+static int ExecuteSpecial(char *character)
 /*
  *
  *  Handle special rtf characters.
@@ -388,6 +381,7 @@ char *GetInstruction(void)
 	  "End of file reached.");
   
   CloseFiles();
+  exit(1);
 }
 
 
@@ -410,7 +404,7 @@ int Execute(char *instruction)
   lettersaintover = 1;
   unaryminusfound = 0;
 
-  for(i=0; i<strlen(instruction); i++)
+  for(i=0; i<(int)strlen(instruction); i++)
        {
 	 if(((isalpha(instruction[i])) || (strchr(RTFchars, instruction[i]) && instruction[i]!='-') || (!strcmp(instruction, "-"))) && lettersaintover)
 
@@ -431,7 +425,7 @@ int Execute(char *instruction)
 	  printf("* %s: Invalid character '%c' in RTF command %s\n", me,
 		 instruction[i], instruction);
 	  printf("%s", "                                          ");
-	  for(j=0; j<(strlen(me) + i); j++)
+	  for(j=0; j<((int)strlen(me) + i); j++)
 	    putchar(' ');
 	  putchar('\n');
 	  exit(0);
@@ -442,7 +436,10 @@ int Execute(char *instruction)
   tmp = FindNode(RTFCOLUMN, alphastring);
 
   if(tmp->mode & QUOTEDCHAR)
+    {
     fputc(tmp->ez.quote, fout);
+    return CONTINUE; /* presumably; was nothing - tjm */
+    }
   else if(tmp->mode & NAKED)
     {
       if(!(tmp->mode & COMMAND))
@@ -460,7 +457,7 @@ int Execute(char *instruction)
 }
 
 
-int ReplaceText(char *instruction, int mode, char tofind)
+static int ReplaceText(char *instruction, int mode, char tofind)
 /*
  *
  *  If the INSTRUCTION is naked, write the instruction to
@@ -470,8 +467,6 @@ int ReplaceText(char *instruction, int mode, char tofind)
  *
  */
 {
-  int i;
-
   if(mode & NAKED)
     {
       fprintf(fout, "\n\\%s", instruction);      

@@ -70,9 +70,10 @@ END-SPECIFICATION  ************************************************************/
 #include "zipprint.H"
 #include "zipobject.H"
 
+#undef Data
 #define  Data			(self->zipobject::data_object
+#undef View
 #define  View			(self)
-#define  Objects(i)		((self->objects)[i])
 #define  PaneExceptionHandler	(self->pane_exception_handler)
 
 void zipview_Mark_Pane_Exposed( class zipview		  *self, zip_type_pane		   pane );
@@ -126,7 +127,6 @@ class fontdesc *
 zipview::Contextual_Figure_Font( zip_type_figure		   figure )
       {
   class fontdesc		 *font;
-  class zipview *self=this;
 
   IN(zipview::Contextual_Figure_Font);
   if ( figure->zip_figure_font )
@@ -137,7 +137,7 @@ zipview::Contextual_Figure_Font( zip_type_figure		   figure )
     font = this->data_object->fonts->zip_fonts_vector
 	[figure->zip_figure_image->zip_image_font].zip_fonts_table_font;
   else
-  if ( font = (this->data_object)->Superior_Image_Font(  figure->zip_figure_image->zip_image_superior ) )
+  if ( ( font = (this->data_object)->Superior_Image_Font(  figure->zip_figure_image->zip_image_superior ) ) )
     {}
   else
   if ( figure->zip_figure_image->zip_image_stream->zip_stream_font )
@@ -157,7 +157,7 @@ zipview::Select_Contextual_Figure_Font( zip_type_figure		   figure )
   class zipview *self=this;
 
   IN(zipview::Select_Contextual_Figure_Font);
-  if ( font = (self)->Contextual_Figure_Font(  figure ) )
+  if ( ( font = (self)->Contextual_Figure_Font(  figure ) ) )
     (self)->SetFont(  font );
   DEBUGxt(Font,font);
   OUT(zipview::Select_Contextual_Figure_Font);

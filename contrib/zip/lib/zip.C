@@ -262,11 +262,11 @@ zip::Read( FILE			      *file, long			       id )
   IN(zip_Read);
   if ( (status = Generate_Temp_File( this, file, &generated_file_name )) == zip_ok )
     {
-    if ( status = (this)->Open_Stream(  &STREAM, generated_file_name, zip_default ) )
+    if ( ( status = (this)->Open_Stream(  &STREAM, generated_file_name, zip_default ) ) )
       { DEBUGdt(Open Status,status);
       status = dataobject_BADFORMAT;
       }
-    if ( status = (this)->Read_Stream(  STREAM ) )
+    if ( ( status = (this)->Read_Stream(  STREAM ) ) )
       { DEBUGdt(Read Status,status);
       status = dataobject_BADFORMAT;
       }
@@ -281,7 +281,7 @@ extern long zip_Enparse_Stream(class zip *self, struct zip_stream *stream);
 long
 zip::Write( FILE			      *file, long			       id, int 			       level )
           {
-  long			      status;
+  long UNUSED		      status; /* used only if DB=1 */
 
   IN(zip_Write);
   DEBUGdt( Headerwriteid, this->writeID );

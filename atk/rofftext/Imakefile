@@ -46,12 +46,11 @@ roffutil.o:	num.tlc num.H
 Parser(num,none)
 num.tlc:	num.tlx num.C
 	ExecuteFromDESTDIR(gentlex num.tlx num.C)
+CleanTarget(num.tlc)
 
 tmac.m: tmac.mm
 	tr "~" "\7" <tmac.mm >tmac.m
-
-clean:: 
-	rm -f tmac.m
+CleanTarget(tmac.m)
 
 InstallClassFiles($(HFILES))
 

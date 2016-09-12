@@ -69,7 +69,7 @@ long *lenP,		/* size of text segment */
 char *path)		/* Pathname of package being loaded */
 {
     void *status;
-    void (*entry)();
+    void (*entry)() = NULL;
     
 /* In theory, one might be able to provide the correct values for bp and len,
  * but doindex is going to free the memory associated with a dynamic object

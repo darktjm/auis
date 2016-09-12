@@ -472,6 +472,7 @@ class figobj *figure::EnumerateObjectGroup(long  grp, struct rectangle  *area, b
     }
     else if (allowoverlap)  {
 	for (ix=first; ix!=figure_NULLREF; ix=this->objs[ix].next) {
+	    this_c=this->objs[ix].o;
 	    rectangle_IntersectRect(&tmp, area, (this_c)->GetBounds( NULL));
 	    if (!rectangle_IsEmptyRect(&tmp)) {
 		res = (*callfun)(this_c, ix, this, rock);

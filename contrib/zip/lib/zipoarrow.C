@@ -167,7 +167,7 @@ zipoarrow::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   act
 	}
       break;
     case view_LeftUp:
-      if ( figure = CurrentFigure )
+      if ( ( figure = CurrentFigure ) )
 	{
 	if ( figure_x_point == figure_x_points(0)  &&
 	     figure_y_point == figure_y_points(0) )
@@ -192,6 +192,8 @@ zipoarrow::Build_Object( zip_type_pane		   pane, enum view_MouseAction				   act
 	(this->view_object)->Draw_Figure(  CurrentFigure, pane );
 	(this->view_object)->Set_Pane_Painting_Mode(  pane, zip_default );
 	}
+      break;
+    default:
       break;
     }
   OUT(zipoarrow::Build_Object);
@@ -225,7 +227,6 @@ static
 int Draw( class zipoarrow		  *self, zip_type_figure		   figure, zip_type_pane		   pane )
         {
   long				  status = zip_ok;
-  unsigned char		  width;
 
   IN(Draw);
   if ( (self->view_object)->Ensure_Line_Attributes(  figure ) == zip_ok )
@@ -283,6 +284,7 @@ void Draw_Basic_Body( class zipoarrow		  *self, zip_type_figure		   figure, zip_
           {
   long				  i;
 
+  *current_x = *current_y = 0;
   (self->view_object)->MoveTo(  *prior_x = window_x_point, *prior_y = window_y_point );
   for ( i = 0; i < figure->zip_figure_points->zip_points_count; i++ )
     {

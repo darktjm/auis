@@ -137,7 +137,7 @@ zip::Close_Stream( struct zip_stream	      *stream )
       auxiliary = pane->zip_pane_auxiliary_stream;
       while ( auxiliary )
 	{
-	auxiliary_next = auxiliary->zip_pane_auxiliary_stream_next;
+	auxiliary_next = auxiliary->zip_pane_auxiliary_stream_next; */
 /*===
 	if ( auxiliary->zip_pane_auxiliary_stream_ptr == stream )
 	  zip_Reset_Pane_Auxiliary_Stream( this, pane, stream );
@@ -315,8 +315,7 @@ zip::Set_Stream_Line_Dash( zip_type_stream		 stream, char				 *pattern, int				 
       {
 	  if ( pattern )
             {
-	      if ( stream->zip_stream_line_dash_pattern = (char *) malloc( strlen( pattern ) + 1 ))
-		  strcpy( stream->zip_stream_line_dash_pattern, pattern );
+	      stream->zip_stream_line_dash_pattern = strdup( pattern );
 	      stream->zip_stream_line_dash_offset = offset;
 	      stream->zip_stream_line_dash_type = type;
 	    }
@@ -501,7 +500,7 @@ zip::Set_Stream_Source( zip_type_stream	       stream, const char			      *sourc
     stream->zip_stream_image_anchor->zip_image_inferior = NULL;
     strcpy(temp_name, "/tmp/ZIPXXXXXX");
     strcat(mktemp(temp_name), ".zip");
-    if ( temp_file = fopen( temp_name, "w+" ) )
+    if ( ( temp_file = fopen( temp_name, "w+" ) ) )
       { DEBUG(Open OK);
       if ( fwrite( source, 1, strlen( source ), temp_file ) )
 	{ DEBUG(Write OK);
@@ -749,8 +748,8 @@ Open_Alternate( class zip		      *self, zip_type_stream	       stream, const cha
   DEBUGst(B -- stream-file-name      ,stream->zip_stream_file_name);
   DEBUGst(B -- stream-file-path      ,stream->zip_stream_file_path);
   DEBUGst(B -- stream-file-full-name ,stream->zip_stream_file_full_name);
-  if ( stream->zip_stream_file =
-              fopen( stream->zip_stream_file_full_name, open_mode_flags ) )
+  if ( ( stream->zip_stream_file =
+              fopen( stream->zip_stream_file_full_name, open_mode_flags ) ) )
     {
     DEBUGst(Successful open of, stream->zip_stream_file_full_name );
     strcpy( stream->zip_stream_file_path, path );
@@ -836,12 +835,12 @@ Identify_Paths( class zip		      *self, zip_type_paths	      *paths_ptr )
 	}
 	else status = zip_insufficient_stream_space;
       }
-    if ( (*paths_ptr)->zip_paths_vector[(*paths_ptr)->zip_paths_count] =
-         strdup(zip_default_path ) )
+    if ( ( (*paths_ptr)->zip_paths_vector[(*paths_ptr)->zip_paths_count] =
+         strdup(zip_default_path ) ) )
       (*paths_ptr)->zip_paths_count++;
       else status = zip_insufficient_stream_space;
-    if ( (*paths_ptr)->zip_paths_vector[(*paths_ptr)->zip_paths_count] =
-         strdup( zip_default_path_alternate ) )
+    if ( ( (*paths_ptr)->zip_paths_vector[(*paths_ptr)->zip_paths_count] =
+         strdup( zip_default_path_alternate ) ) )
       (*paths_ptr)->zip_paths_count++;
       else status = zip_insufficient_stream_space;
     }

@@ -117,7 +117,7 @@ zipofcapt::Build_Object( zip_type_pane pane, enum view_MouseAction action, long 
 	}
       break;
     case view_LeftUp:
-      if ( figure = CurrentFigure )
+      if ( ( figure = CurrentFigure ) )
 	{
 	if ( figure_x_point == figure_x_points(0)  &&
 	     figure_y_point == figure_y_points(0) )
@@ -138,6 +138,8 @@ zipofcapt::Build_Object( zip_type_pane pane, enum view_MouseAction action, long 
 	if ( action != view_LeftUp )
 	  (this->edit_object)->Highlight_Figure_Points(  CurrentFigure, pane );
 	}
+      break;
+    default:
       break;
     }
   OUT(zipofcapt::Build_Object);
@@ -258,7 +260,7 @@ long Draw( class zipofcapt		  *self, zip_type_figure		   figure, zip_type_pane		
   if ( figure->zip_figure_image->zip_image_text )
     text = figure->zip_figure_image->zip_image_text;
   else
-  if ( text = (self->data_object)->Superior_Image_Text(  figure->zip_figure_image->zip_image_superior ) )
+  if ( ( text = (self->data_object)->Superior_Image_Text(  figure->zip_figure_image->zip_image_superior ) ) )
     {}
   else
   if ( figure->zip_figure_image->zip_image_stream->zip_stream_text )
