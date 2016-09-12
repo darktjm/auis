@@ -1109,8 +1109,7 @@ void bdffont::SetFontName(const char  *fn)
     }
 
     if (fn) {
-	this->fontname = (char *) malloc(strlen(fn) + 1);
-	strcpy(this->fontname, fn);
+	this->fontname = strdup(fn);
     }
 } /* bdffont__SetFontName */
 
@@ -1122,8 +1121,7 @@ void bdffont::SetFontFamily(const char  *fn)
     }
 
     if (fn) {
-	this->fontfamily = (char *) malloc(strlen(fn) + 1);
-	strcpy(this->fontfamily, fn);
+	this->fontfamily = strdup(fn);
     }
 } /* bdffont__SetFontFamily */
 

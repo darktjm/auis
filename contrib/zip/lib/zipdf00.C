@@ -237,11 +237,10 @@ name, figure->zip_figure_image->zip_image_stream->zip_stream_name,duplicate->zip
         }
         else
         {
-        if ( (figure->zip_figure_name = (char *) malloc( strlen( name ) + 1 )) == NULL )
+        if ( (figure->zip_figure_name = strdup( name ) ) == NULL )
           status = zip_insufficient_figure_space;
           else
           {
-          strcpy( figure->zip_figure_name, name );
           symtab_add( figure->zip_figure_image->zip_image_stream->zip_stream_symbol_table,
 		    (unsigned char *) figure->zip_figure_name, (struct user_data  *) figure );
           }
@@ -271,11 +270,10 @@ zip::Set_Figure_Text( zip_type_figure figure, const char *text )
     DEBUGst(Given Text,text);
     DEBUGst(Figure Name,figure->zip_figure_name);
     SetStreamModified;
-    if ( text )
-      if ( (figure->zip_figure_datum.zip_figure_text = (char *) malloc( strlen( text ) + 1 )) != NULL )
-        strcpy( figure->zip_figure_datum.zip_figure_text, text );
-        else
+    if ( text ) {
+      if ( (figure->zip_figure_datum.zip_figure_text = strdup( text ) ) == NULL )
         status = zip_insufficient_figure_space;
+    }
       else figure->zip_figure_datum.zip_figure_text = NULL;
     }
     else

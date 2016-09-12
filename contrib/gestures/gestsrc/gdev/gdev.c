@@ -603,10 +603,9 @@ cbufputs(const char *s, Cclass cclass)
 static char *
 scopy(char *s)
 {
-	char *p = malloc((unsigned) strlen(s) + 1);
+	char *p = strdup(s);
 	if(p == NULL)
 		GDEVerror("scopy");
-	(void) strcpy(p, s);
 	return p;
 }
 

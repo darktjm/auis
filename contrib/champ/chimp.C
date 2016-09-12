@@ -73,9 +73,8 @@ long chimp::Read(FILE  *fp, long  id)
 	    struct comment *cm, *nextcm;
 
 	    cm = (struct comment *) malloc(sizeof(struct comment));
-	    if (cm) cm->line = (char *)malloc(1+strlen(LineBuf));
+	    if (cm) cm->line = strdup(LineBuf);
 	    if (cm && cm->line) {
-		strcpy(cm->line, LineBuf);
 		cm->next = NULL;
 		for (nextcm = this->comment; nextcm && nextcm->next; nextcm = nextcm->next) {
 		    ;

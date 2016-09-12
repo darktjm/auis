@@ -932,15 +932,13 @@ PUBLIC int HTBrowseDirectory (HTRequest * req, char * directory)
 	    if (keyptr) {	             /* Use content of keyptr as key */
 		if ((nodekey->key = (void *) malloc(sizeof keyptr)) == NULL ||
 		    (nodekey->filename =
-		     (char *) malloc(strlen(dirbuf->d_name)+1)) == NULL)
+		     strdup(dirbuf->d_name)) == NULL)
 		    outofmem(__FILE__, "HTFileBrowseDirectory");
 		memcpy(nodekey->key, keyptr, sizeof keyptr);
-		strcpy(nodekey->filename, dirbuf->d_name);
 	    } else {				/* Use dirbuf->d_name as key */
 		if ((nodekey->key =
-		     (void *) malloc(strlen(dirbuf->d_name)+1)) == NULL)
+		     strdup(dirbuf->d_name)) == NULL)
 		    outofmem(__FILE__, "HTFileBrowseDirectory");
-		strcpy((char *) nodekey->key, dirbuf->d_name);
 		nodekey->filename = (char *) nodekey->key;
 	    }
 
@@ -1220,9 +1218,8 @@ PUBLIC int HTFTPBrowseDirectory (HTRequest * req, char * directory,
 
 	    /* Generate key entry in nodekey */
 	    if ((nodekey->key =
-		 (void *) malloc(strlen(file_info.f_name)+1)) == NULL)
+		 strdup(file_info.f_name)) == NULL)
 		outofmem(__FILE__, "HTFTPBrowseDirectory");
-	    strcpy((char *) nodekey->key, file_info.f_name);
 	    nodekey->filename = (char *) nodekey->key;
 
 	    /* Update current max filename length */

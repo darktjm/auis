@@ -228,8 +228,7 @@ static FILE *FileProcess(const char *prompt, char *filename, const char *mode)
       }
       else
       {
-	  filename2 = (char *) malloc((strlen(fullspec) + 1)*sizeof(char));
-	  strcpy(filename2, fullspec);
+	  filename2 = strdup(fullspec);
 	  filename = filename2;
       }
   }
@@ -241,14 +240,14 @@ static FILE *FileProcess(const char *prompt, char *filename, const char *mode)
 	  if(!ULstrcmp(rindex(filename, '.'), ".rtf"))
 	    {
 	      len = roffset(filename, '.');
-	      filename2 = (char *) malloc ((len + 8) * sizeof(char));
+	      filename2 = (char *) malloc ((len + 8));
 	      memcpy(filename2, filename, len);
 	      filename2[len] = '\0';
 	    }	 
 	}
       else
 	{
-	filename2 = (char *) malloc ((strlen(filename) + 8) * sizeof(char));
+	filename2 = (char *) malloc ((strlen(filename) + 8));
 	strcpy(filename2, filename);
 	}
 
@@ -317,13 +316,11 @@ static FILE *FileProcess(const char *prompt, char *filename, const char *mode)
 
   if(!strcmp(mode, "r"))
     {
-      Filein = (char *) malloc((strlen(filename) + 1) * sizeof(char));
-      strcpy(Filein, filename);
+      Filein = strdup(filename);
     }
   else if(!strcmp(mode, "w"))
     {
-      Fileout = (char *) malloc((strlen(filename) + 1) * sizeof(char));
-      strcpy(Fileout, filename);
+      Fileout = strdup(filename);
     }
 
   if(filename2)
@@ -378,7 +375,7 @@ static void MakeTable(void)
 
 	  if(!strcmp(ezword, "~RTFchars"))
 	    {
-	      RTFchars = (char *) malloc (len * sizeof(char));
+	      RTFchars = (char *) malloc (len);
 	      strcpy(RTFchars, rtfword);
 	      rtfc = 1;
 	    }
@@ -483,7 +480,7 @@ void SetupEnvironment(rootfile)
   Take care of title, subject, author, operator, keywords, versionz, doccomm, vernz, creatim, revtim, printim, buptim, edminsz, yrz, moz, dyz, hrz, minz, nofpagesz, nofwordsz, nofcharsz, idz
 
 
-  trimroot = (char *) malloc(1024 * sizeof(char));
+  trimroot = (char *) malloc(1024);
 
   trimroot = &rootfile[roffset(rootfile, '/')];
   AddValue("title", trimroot);

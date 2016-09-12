@@ -146,12 +146,10 @@ char *label, *viewname;
     if (viewname == NULL) viewname = dataobject_ViewName(d);
     if (viewname == NULL) viewname = "view";
     sw->d = d;
-    sw->label = malloc(1+strlen(label));
+    sw->label = strdup(label);
     if (sw->label == NULL) return(FALSE);
-    strcpy(sw->label, label);
-    sw->viewname = malloc(1+strlen(viewname));
+    sw->viewname = strdup(viewname);
     if (sw->viewname == NULL) return(FALSE);
-    strcpy(sw->viewname, viewname);
     sw->next = NULL;
 
     /* find right place to put it */

@@ -56,15 +56,3 @@ void *erealloc(void *old, long newsize)
 		   "Realloc failed");
   return(tmp_ptr);
 }
-
-
-char *CopyString(const char *old)
-{
-  /* Returns a newly emalloc'd copy of the string.
-     Errors from emalloc are passed up. */
-  char *tmp_ptr = emalloc(strlen(old)+1);
-  if(tmp_ptr)
-     strcpy(tmp_ptr, old);
-  return(tmp_ptr);
-}
-

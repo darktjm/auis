@@ -154,8 +154,8 @@ ziposymbol::ziposymbol( )
   if ( symbol_library_path == NULL )
   {
     const char *p = environ::AndrewDir( "/lib/zip/symbols" );
-    if ( p && ( symbol_library_path = ( char * ) malloc( strlen( p ) + 1 )))
-	strcpy( symbol_library_path, p );
+    if ( p )
+	symbol_library_path = strdup( p );
   }
   DEBUGst(LibPath,symbol_library_path);
   OUT(ziposymbol_InitializeObject);

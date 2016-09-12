@@ -217,13 +217,12 @@ struct eventnode *readdateintoeventnode(char  *Buf)
 	return(NULL);
     }
     bcopy(&ds, &newevent->ds, sizeof(struct datespec));
-    newevent->event = (char *) malloc(1+strlen(event));
+    newevent->event = strdup(event);
     if (!newevent->event) {
 	free(newevent);
 	printf("Out of Memory\n");
 	return(NULL);
     }
-    strcpy(newevent->event, event);
     newevent->flagged = 0;
     return(newevent);
 }

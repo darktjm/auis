@@ -159,22 +159,20 @@ So far, what I've done is:
     with all the ness or view every part of every document, so I'm
     continuing to find and fix issues as I do that.
 
-  - Removed all printf/scanf format warnings in code I was able to
-    compile.  This was the main step needed to allow saving/loading
-    files, since sizeof(int) != sizeof(long).
-
-  - Removed all warnings related to string literals not being constant
-
-  - Cleaned up warnings in much of overhead and atk directories
-
-  - Removed pervasive incorrect use of "it's"
+  - Cleaned up warnings in everything remaining after the big deletes,
+    except for atk/console, contrib/gestures, and contrib/tm.  Note
+    that the main thing that made most things work was printf/scanf
+    warning removal, as most of the code assumed sizeof(int) ==
+    sizeof(long) == sizeof(void *).  Some such assumptions still exist,
+    and require manual location and removal.
 
   - Started on documentation, partly in the form of an org file.  I
     will probably abandon this document eventually and make something
-    better
+    better.
 
   - Fixed org so that it actually almost works.  I don't think org
     was production-ready even in '97.  It still has some usability
     issues and general code ugliness.
 
-  - Fixed bugs in bush as well, and made it usable as a dired replacement
+  - Fixed bugs in bush as well, and made it usable as a dired
+    replacement.

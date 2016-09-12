@@ -175,8 +175,7 @@ FILE *FileProcess(const char *prompt, char *filename, const char *mode)
       }
       else
       {
-	  filename = (char *) malloc((strlen(fullspec) + 1)*sizeof(char));
-	  strcpy(filename, fullspec);
+	  filename = strdup(fullspec);
       }
   }
 
@@ -259,13 +258,11 @@ FILE *FileProcess(const char *prompt, char *filename, const char *mode)
 
   if(!strcmp(mode, "r"))
     {
-      Filein = (char *) malloc((strlen(filename) + 1));
-      strcpy(Filein, filename);
+      Filein = strdup(filename);
     }
   else if(!strcmp(mode, "w"))
     {
-      Fileout = (char *) malloc((strlen(filename) + 1));
-      strcpy(Fileout, filename);
+      Fileout = strdup(filename);
     }
 
   return(fpt);

@@ -70,10 +70,7 @@ buttview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  
 	txt = (b)->GetText();
 	if (this->lasttext != NULL) free(this->lasttext);
 	if (txt != NULL) {
-	    this->lasttext = (char *)malloc(1+strlen(txt));
-	    if (this->lasttext != NULL) {
-		strcpy(this->lasttext, txt);
-	    }
+	    this->lasttext = strdup(txt);
 	} else {
 	    this->lasttext = NULL;
 	}

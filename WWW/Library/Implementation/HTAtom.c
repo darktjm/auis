@@ -66,9 +66,8 @@ PUBLIC HTAtom * HTAtom_for (CONST char * string)
     */
     a = (HTAtom *)malloc(sizeof(*a));
     if (a == NULL) outofmem(__FILE__, "HTAtom_for");
-    a->name = (char *)malloc(strlen(string)+1);
+    a->name = strdup(string);
     if (a->name == NULL) outofmem(__FILE__, "HTAtom_for");
-    strcpy(a->name, string);
     a->next = hash_table[hash];		/* Put onto the head of list */
     hash_table[hash] = a;
 /*    if (TRACE) fprintf(TDEST, "HTAtom: New atom %p for `%s'\n", a, string); */

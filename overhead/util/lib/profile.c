@@ -113,8 +113,7 @@ openprofile(const char *filename, const char *defaultname, int savefname)
 	}
 
 	if (savefname && firstProfileFileName == NULL)  {
-	    firstProfileFileName = (char *) malloc(strlen(tmpFileName) + 1);
-	    strcpy(firstProfileFileName, tmpFileName);
+	    firstProfileFileName = strdup(tmpFileName);
 	}
 
 	if ((cl = (struct configurelist *) ReadConfigureFile(tmpFileName)) != NULL)  {
@@ -122,8 +121,7 @@ openprofile(const char *filename, const char *defaultname, int savefname)
 		if (profileFileName != NULL)  {
 		    free(profileFileName);
 		}
-		profileFileName = (char *) malloc(strlen(tmpFileName) + 1);
-		strcpy(profileFileName, tmpFileName);
+		profileFileName = strdup(tmpFileName);
 	    }
 	    free(pl0);
 	    return cl;

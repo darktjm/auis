@@ -383,7 +383,6 @@ GlomStrings(char  *s , char  *t)
   char *r;
 
   r = (char *)malloc(strlen(s)+strlen(t)+1);
-  *r = '\0';
   strcpy(r,s);
   free(s);
   strcat(r,t);

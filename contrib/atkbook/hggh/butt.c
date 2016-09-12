@@ -103,8 +103,7 @@ struct butt *self;
 char *txt;
 {
     if (self->text) free(self->text);
-    self->text = malloc(1+strlen(txt));
-    strcpy(self->text, txt);
+    self->text = strdup(txt);
     butt_WantUpdate(self, self);
 }
 

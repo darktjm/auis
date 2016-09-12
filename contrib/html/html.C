@@ -583,9 +583,8 @@ html::ChangeTitle(const char * name)
     if (this->title)  {
 	free(this->title);
     }
-    this->title = (char*) malloc(strlen(name)+1);
+    this->title = strdup(name);
     if (this->title) {
-	strcpy(this->title, name);
 	if (buf) {
 	    (buf)->SetName( this->title);
 	}

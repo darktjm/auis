@@ -146,11 +146,10 @@ boolean runbutton::InitializeClass()
 	}
         /* Now we know how many paths exist. */
 	runbutton::runPath = (char **)malloc(sizeof(char *) * runbutton::numPaths);
-	cmd = (char *)malloc(strlen(runbutton::commandPath)+1);
+	cmd = strdup(runbutton::commandPath);
 	if (cmd == NULL || runbutton::runPath == NULL)
 	    return FALSE;
 	/* Split a copy of the string into paths. */
-	strcpy(cmd, runbutton::commandPath);
 	p = cmd;
 	i = 0;
 	runbutton::numPaths = 0;

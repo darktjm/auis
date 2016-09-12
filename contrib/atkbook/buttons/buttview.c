@@ -74,10 +74,7 @@ long left, top, width, height;
 	txt = butt_GetText(b);
 	if (self->lasttext != NULL) free(self->lasttext);
 	if (txt != NULL) {
-	    self->lasttext = malloc(1+strlen(txt));
-	    if (self->lasttext != NULL) {
-		strcpy(self->lasttext, txt);
-	    }
+	    self->lasttext = strdup(txt);
 	} else {
 	    self->lasttext = NULL;
 	}

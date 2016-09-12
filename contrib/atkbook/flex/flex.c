@@ -109,11 +109,9 @@ char *viewname;
 
     d2 = (struct dataobject *) class_NewObject("flex");
     if (d == NULL || d2 == NULL) return(FALSE);
-    n1 = malloc(1+strlen(viewname));
-    n2 = malloc(9);
+    n1 = strdup(viewname);
+    n2 = strdup("flexview");
     if (n1 == NULL || n2 == NULL) return(FALSE);
-    strcpy(n1, viewname);
-    strcpy(n2, "flexview");
     self->left = d;
     self->right = d2;
     self->lvname = n1;
@@ -230,9 +228,8 @@ boolean IsLeft;
     thisname = &LineBuf[6];
     s = index(thisname, '}');
     if (s) *s = '\0';
-    s = malloc(1+strlen(thisname));
+    s = strdup(thisname);
     if (!s) return(dataobject_OBJECTCREATIONFAILED);
-    strcpy(s, thisname);
     if (IsLeft) {
 	self->lvname = s;
 	self->left = newob;

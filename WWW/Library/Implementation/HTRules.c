@@ -75,22 +75,20 @@ PUBLIC int HTAddRule (HTRuleOp		op,
     temp = (rule *)malloc(sizeof(*temp));
     if (temp==NULL) 
 	outofmem(__FILE__, "HTAddRule"); 
-    pPattern = (char *)malloc(strlen(pattern)+1);
+    pPattern = strdup(pattern);
     if (pPattern==NULL) 
 	outofmem(__FILE__, "HTAddRule"); 
     if (equiv) {		/* Two operands */
-	char *	pEquiv = (char *)malloc(strlen(equiv)+1);
+	char *	pEquiv = strdup(equiv);
 	if (pEquiv==NULL) 
 	    outofmem(__FILE__, "HTAddRule"); 
         temp->equiv = pEquiv;
-        strcpy(pEquiv, equiv);
     } else {
         temp->equiv = 0;
     }
     temp->pattern = pPattern;
     temp->op = op;
 
-    strcpy(pPattern, pattern);
     if (TRACE) {
        if (equiv)
           fprintf(TDEST, "Rule: For `%s' op %d `%s'\n", pattern, op, equiv);
@@ -207,10 +205,9 @@ PUBLIC char * HTTranslate (CONST char * required)
 			current = temp;			/* Use this */
 
 		    } else {	/* No insertion point */
-			char * temp = (char *)malloc(strlen(r->equiv)+1);
+			char * temp = strdup(r->equiv);
 			if (temp==NULL) 
 			    outofmem(__FILE__, "HTTranslate"); /* NT & AS */
-			strcpy(temp, r->equiv);
     			if (PROT_TRACE)
 			    fprintf(TDEST, "For `%s' using `%s'\n", current,
 				    temp);
