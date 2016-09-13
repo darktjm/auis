@@ -119,10 +119,8 @@ int index_AddPrimary(struct Index *ai, char *akey, char *adata)
     tc->primary = 1;
     index_GenerateKey(tb, &tc->id);
     tc->hashes = index_NewHL();
-    tc->name = (char *) malloc(1+strlen(akey));
-    strcpy(tc->name, akey);
-    tc->data = (char *) malloc(1+strlen(adata));
-    strcpy(tc->data, adata);
+    tc->name = strdup(akey);
+    tc->data = strdup(adata);
     tb->modified = 1;
     tc->next = tb->list;
     tb->list = tc;
@@ -144,8 +142,7 @@ int index_AddSecondary(struct Index *ai, struct recordID *arid, char *akey)
     tc = (struct indexComponent *) malloc(sizeof (struct indexComponent));
     tc->primary = 0;
     rset(tc->id, *arid);
-    tc->name = (char *) malloc(1+strlen(akey));
-    strcpy(tc->name, akey);
+    tc->name = strdup(akey);
     tb->modified = 1;
     tc->next = tb->list;
     tb->list = tc;
@@ -365,8 +362,7 @@ struct Index *index_Open(const char *apath)
 	return (struct Index *) 0;
     }
     ti = (struct Index *) malloc (sizeof (struct Index));
-    ti->pathName = (char *) malloc(strlen(apath) + 1);
-    strcpy(ti->pathName, apath);
+    ti->pathName = strdup(apath);
     ti->hashTableSize = htSize;
     ti->version = version;
     ti->blist = (struct indexBucket *) 0;

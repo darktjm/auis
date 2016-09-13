@@ -66,37 +66,31 @@ the full agreement.
 
 
 typedef struct set *Set;
-typedef struct dll *Element;
-typedef char *Pointer;
+typedef struct dll *Element, *DllElement;
+typedef void *Pointer;
 typedef int VersionNumber;
 
-Set	EmptySet();	/* void (*when_added)(Set, Element, Pointer),
-			   void (*when_deleted)(Set, Element, Pointer)
-			   Set groupleader;
-			   */
+extern Set EmptySet(void (*when_added)(Set, DllElement, Pointer), void (*when_deleted)(Set, DllElement, Pointer), Set groupleader);
 
-Element	AddElement();		/* Set, Pointer */
-void	DeleteElement();	/* Set, Element */
-void	Map();			/* Set, function(Pointer), Pointer*/
-void	MapE();			/* Set, function(Element), Pointer*/
-Pointer	ElementPointer();	/* Element */
-Element	AnElement();		/* Set */
+extern Element AddElement(Set s, Pointer data);
+extern void DeleteElement(Set s, Element e);
+extern void Map(Set s, void (*fp)(DllElement, Pointer), Pointer arg);
+extern void MapE(Set s, void (*fp)(DllElement, Pointer), Pointer arg);
+extern Pointer ElementPointer(Element e);
 
 /* undo functions */
 
 /* functions with Sets in their name take an arrays of sets, followed by
    a count of how may sets are in the array */
 
-VersionNumber	CheckpointSetGroup();	/* Set groupleader; */
-void		UndoSetGroup();		/* Set groupleader; VersionNumber v; */
-
-void	DiscardOldVersions();	/* Set, VersionNumber */
+extern VersionNumber CheckpointSetGroup(Set groupleader);
+extern void UndoSetGroup(Set groupleader, VersionNumber v);
 
 /* debugging */
 
-void	DumpSet();		/* Set, PrintPointerFunction(Pointer) */
+void DumpSet(Set s, void (*pf)(Pointer));
 
 
-void	IterateSet();		/* Set */
-Element	NextElement();		/* Set */
-
+extern void IterateSet(Set s);
+extern Element NextElement(Set s);
+extern Element AnElement(Set s);

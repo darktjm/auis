@@ -37,7 +37,10 @@ the full agreement.
 #include "iobject.h"
 #include <gestures/matrix.h>
 #include "transform.h"
+#include "state.h"
 #include <stdio.h>
+#include <gestures/gdev.h>
+#include "proto.h"
 
 #define	EtoO(e)	( (Object) ElementPointer(e))
 
@@ -53,8 +56,8 @@ StEmptySet(void)
 	return EmptySet(NULL, NULL, Objs);
 }
 
-static void object_added(Set s, Element e, Object o);
-static void object_deleted(Set s, Element e, Object o);
+static void object_added(Set s, Element e, Pointer p);
+static void object_deleted(Set s, Element e, Pointer p);
 
 void
 StInit(void)
@@ -75,7 +78,7 @@ DrawBottomLine(void)
 }
 
 void
-StBottomLine(char *string)
+StBottomLine(const char *string)
 {
 	DrawBottomLine();  /* Erases old bottom line */
 	strncpy(bottom_line, string, LINESIZE);
@@ -83,13 +86,16 @@ StBottomLine(char *string)
 }
 
 
+static void mDraw(DllElement e, Pointer p)
+{
+    Draw((Object)e);
+}
+
 void
 StRedraw(void)
 {
-	void Draw();
-
 	DrawClear();
-	Map(Objs, Draw, NULL);
+	Map(Objs, mDraw, NULL);
 	DrawBottomLine();
 	WmFlush();
 }
@@ -98,7 +104,7 @@ Element
 StNewObj(ObjectType t)
 {
 	Object o = CreateObject(t);
-	return AddElement(Objs, o);
+	return AddElement(Objs, (Pointer)o);
 }
 
 void
@@ -111,7 +117,7 @@ Element
 StCopyElement(Element e)
 {
 	Object o = CopyObject(EtoO(e));
-	return AddElement(Objs, o);
+	return AddElement(Objs, (Pointer)o);
 }
 
 
@@ -123,15 +129,17 @@ StDelete(Element e)
 
 static
 void
-object_added(Set s, Element e, Object o)
+object_added(Set s, Element e, Pointer p)
 {
+	Object o = (Object)p;
 	Draw(o);
 }
 
 static
 void
-object_deleted(Set s, Element e, Object o)
+object_deleted(Set s, Element e, Pointer p)
 {
+	Object o = (Object)p;
 	Erase(o);
 }
 
@@ -160,7 +168,7 @@ static int _x, _y, _min_d;
 static Element _min_e;
 
 static void
-sizem(Element e)
+sizem(Element e, Pointer p)
 {
 	int d = Distance(EtoO(e), _x, _y);
 	if(d < _min_d) {
@@ -222,7 +230,7 @@ StEdit(Element e, Object *oldo)
 	/* printf("StEdit old=%x, copy=%x\n", EtoO(e), o); */
 
 	DeleteElement(Objs, e);
-	return AddElement(Objs, o);
+	return AddElement(Objs, (Pointer)o);
 /*
 	return e;
 */
@@ -238,6 +246,7 @@ void StUndo(void)
 	UndoSetGroup(Objs, lastckp);
 }
 
+#if 0
 static void
 CopySetHelp(Set s)
 {
@@ -250,20 +259,21 @@ CopySetHelp(Set s)
 	printf("."); fflush(stdout);
 	DeleteElement(s, e);
 	CopySetHelp(s);
-	AddElement(s, o);
+	AddElement(s, (Pointer)o);
 }
+#endif
 
 static void
-copysethelp(Object o, Set s)
+copysethelp(DllElement e, Pointer p)
 {
-	AddElement(s, CopyObject(o));
+	AddElement((Set)p, (Pointer)CopyObject((Object)e));
 }
 
 Set
 CopySet(Set s)
 {
 	Set new = EmptySet(NULL, NULL, Objs);
-	Map(s, copysethelp, new);
+	Map(s, copysethelp, (Pointer)new);
 	return new;
 }
 
@@ -273,12 +283,14 @@ void StHighlight(Element e, int highlight)
 	ObjHighlight(EtoO(e), highlight);
 }
 
-void StErase(Element e)
+#if 0
+static void StErase(Element e)
 {
 	Erase(EtoO(e));
 }
 
-void StDraw(Element e)
+static void StDraw(Element e)
 {
 	Draw(EtoO(e));
 }
+#endif

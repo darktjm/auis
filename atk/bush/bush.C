@@ -281,6 +281,7 @@ bush::InitTree( const char		 *root_path )
       printf("bush: directory '%s' does not exist or cannot be searched.\n",
 	       RootPath);
       free(RootPath);
+      RootPath = NULL;
       im::GetDirectory(GivenDirName);
       AllocNameSpace(GivenDirName,&RootPath);
   }

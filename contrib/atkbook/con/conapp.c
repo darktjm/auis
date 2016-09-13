@@ -161,9 +161,8 @@ char **argv;
 		self->filenames = (char **) realloc(self->filenames,(self->filenamesallocated * sizeof (char *)));
 		if (!self->filenames) return(FALSE);
 	    }
-	    self->filenames[self->filenamesused] = malloc(1+strlen(argv[i]));
+	    self->filenames[self->filenamesused] = strdup(argv[i]);
 	    if (!self->filenames[self->filenamesused]) return(FALSE);
-	    strcpy(self->filenames[self->filenamesused], argv[i]);
 	    ++self->filenamesused;
 	}
     }

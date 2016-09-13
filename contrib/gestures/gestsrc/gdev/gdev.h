@@ -61,13 +61,13 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 /* generic address of variables and functions */
 
-typedef char *Pointer;
+typedef void *Pointer;
 
 /* Functions */
 
 /* initialization, flushing, and exiting */
 
-int	GDEVinit();		/* char *device;   Opens a new window, making
+int GDEVinit(char *device);	/* Opens a new window, making
 				   it the current output window.
 				   Call this function before
 				   any of the others.  Uses GDEV env var,
@@ -78,15 +78,15 @@ int	GDEVinit();		/* char *device;   Opens a new window, making
 				   GDEVcurrentoutput();
 				   */
 
-void	GDEVcurrentoutput();	/* int window;  make window the current output
+void GDEVcurrentoutput(int w);	/* make window the current output
 				   window - subsequent calls to other GDEV
 				   functions refer to this window */
 
-void	GDEVstart();		/* Clears the current window, starts a new page */
-void	GDEVflush();		/* outputs current page of current window */
-void	GDEVstop();		/* Cleanup before exiting program */
+void GDEVstart(void);		/* Clears the current window, starts a new page */
+void GDEVflush(void);		/* outputs current page of current window */
+void GDEVstop(void);		/* Cleanup before exiting program */
 
-void	GDEV00topleft();  	/* normally GDEV believes that the window
+void GDEV00topleft(void);  	/* normally GDEV believes that the window
 				   is a cartesian plane with 0,0 at the bottom
 				   left.  Calling this function makes 0,0
 				   the top left of the screen */
@@ -95,24 +95,24 @@ void	GDEV00topleft();  	/* normally GDEV believes that the window
 /* displaying graphics and text */
 
 
-void	GDEVpoint(); 	/* int x, y; */
-void	GDEVline();	/* int x1, y1, x2, y2; */
-void	GDEVrect(); 	/* int x1, y1, x2, y2; */
-void	GDEVtext();	/* int x1, y1; char *str; */
+void GDEVpoint(int x, int y);
+void GDEVline(int x1, int y1, int x2, int y2);
+void GDEVrect(int x1, int y1, int x2, int y2);
+void GDEVtext(int x1, int y1, const char *str);
 
-void	GDEVsetdim();	/* int width, height  - sets dimentions, but it may
+void GDEVsetdim(int x, int y);	/* - sets dimentions, but it may
 				be ignored */
-void	GDEVgetdim();	/* int *width, *height;  returns screen size */
+void GDEVgetdim(int *x, int *y);	/* returns screen size */
 
 /* input */
 
-int	GDEVgetchar();	/* returns the next input character.  Normally
+int GDEVgetchar(void);	/* returns the next input character.  Normally
 			   this is the next character typed at the keyboard,
 			   but it may also be part of a menu string,
 			   mouse string, or redisplay request.  Returns EOF
 			   on EOF */
 
-char	*GDEVgets();	/* char *line;
+char *GDEVgets(char *line);	/*
 			   returns the next line of input.  Menu strings,
 			   mouse strings, and redisplay requests will not
 			   be returned until the next GDEVgetchar call */
@@ -132,7 +132,7 @@ next call ^B (i.e. \001 then \002).
 	GDEVmenuitem("print", NULL);
 */
 
-void	GDEVmenuitem();	/* char *item; char *return; */
+void GDEVmenuitem(const char *label, const char *retval);
 
 
 /* mouse */
@@ -165,18 +165,18 @@ void	GDEVmenuitem();	/* char *item; char *return; */
 
 #define	MOUSE_EVENT(button, action)	((button) | (action))
 
-void	GDEVmouse();	/* int event; char *retval */
-void	GDEVgetXYT();	/* int *xp, *yp; int *timep; 
+void GDEVmouse(int event, char *retval);
+void GDEVgetXYT(int *xp, int *yp, int *timep); /*
 				   Any of these can be NULL if the application
 				   is not interested in them */
 
-void	GDEVwindowchanged(); /* char *retval ;
+void GDEVwindowchanged(char *retval); /*
 			    Whenever input comes in from a window it did not
 			    previously come in from, this string is returned,
 			    followed by a single character indicated which
 			    window  */
 
-void	GDEVrefresh();	/* char *retval;
+void GDEVrefresh(char *retval); /*
 			   When, for whatever reason, the screen needs to be
 			   redrawn, GDEVgetchar() will return the passed 
 			   string.  Call GDEVrefresh(NULL) if you're not
@@ -187,22 +187,22 @@ void	GDEVrefresh();	/* char *retval;
 			   the first GDEVstart.
 			   */
 
-void	GDEVrefresh_function();	/* int (*function)();
+void GDEVrefresh_function(int (*fcn)(void)); /*
 			   Arranges for function to be called whenever
 			   the screen needs to be refreshed.  This is
 			   independent of the characters returned by
 			   GDEVrefresh */
 
-void	GDEVtimeout();		/* int msec; char *retval; 
+void GDEVtimeout(int msec, const char *retval); /*
 			    Arranges for "retval" to be returned (by IOgetchar)
 			    if no input (from select time) arrives for more
 			    than msec milliseconds.  Use NULL for retval
 			    to restore IOgetchar to its blocking behavior
 				*/
 
-int	GDEVseti();	/* char *variable; int value */
-int	GDEVsetd();	/* char *variable; double value */
-int	GDEVsets();	/* char *variable, *value */
+int GDEVseti(const char *variable, int value);
+int GDEVsetd(const char *variable, double value);
+int GDEVsets(const char *variable, const char *value);
 			/* This routine is for device specific functions.
 			   Each device will recognize some variables used to
 			   control various things - other devices will ignore
@@ -216,20 +216,23 @@ int	GDEVsets();	/* char *variable, *value */
  */
 
 
-int	GDEVrecord();	/* char *file; 
+int GDEVrecord(char *file); /*
 				starts recording, returning 0 iff file couldnt
 				be opened */
-void	GDEVstoprecording();	/* stops the recording, closing and flusing
+void GDEVstoprecording(void);	/* stops the recording, closing and flusing
 				   the output file.  The output file will
 				   be automatically closed and flushed upon
 				   exit */
 
 
-int	GDEVplay();	/* char *file;
+int GDEVplay(char *file); /*
 				plays back a file, return 0 iff it couldn't
 				be opened.  GDEVgetchar (and GDEVgets) will
 				return the same string of characters as they
 				did before */
+
+int GDEVcurrenttime(void);
+
 #endif /* _GDEV_ */
 
 extern int gdevdebug;

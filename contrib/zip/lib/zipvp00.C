@@ -163,7 +163,7 @@ Allocate_Pane_Object( class zipview		  *self, zip_type_pane		  *pane, const char
   if (
      (*pane = (zip_type_pane) calloc( 1, sizeof(struct zip_pane) ) ) == NULL
       ||
-     ((*pane)->zip_pane_name = (char *) malloc( strlen( pane_name ) + 1 )) == NULL
+     ((*pane)->zip_pane_name = strdup( pane_name ) ) == NULL
       ||
      (pane_link = (zip_type_pane_chain) calloc( 1, sizeof(struct zip_pane_chain))) == NULL
      )
@@ -182,7 +182,6 @@ Allocate_Pane_Object( class zipview		  *self, zip_type_pane		  *pane, const char
 	}
       prior_link = prior_link->zip_pane_chain_next;
       }
-    strcpy( (*pane)->zip_pane_name, pane_name );
     (*pane)->zip_pane_scale = 1.0;
     (*pane)->zip_pane_x_flip = 1;
     (*pane)->zip_pane_y_flop = 1;

@@ -165,8 +165,7 @@ zipedit::Expose_Palettes( zip_type_pane	       pane )
       container->zip_pane_source.zip_pane_stream = NULL;
       sprintf( container_full_name, "%s-CONTAINER-%02d",
 	       pane->zip_pane_name, container_number );
-      container->zip_pane_name = (char *) malloc( strlen( container_full_name ) + 1 );
-      strcpy( container->zip_pane_name, container_full_name );
+      container->zip_pane_name = strdup( container_full_name );
       DEBUG(Name Set);
       if ( (PalettePanes = (struct zip_pane_palettes *)
 		calloc( 1, sizeof(struct zip_pane_palettes) +

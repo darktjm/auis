@@ -57,10 +57,7 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include "gdp.h"
 #include <math.h>
 #include <stdio.h>
-#ifndef _IBMR2
-/* IBM defines this in math.h */
-double sqrt();
-#endif
+#include "proto.h"
 
 #define	C_LINE		'l'
 #define	C_RECT		'r'
@@ -91,29 +88,27 @@ double sqrt();
 #define	NO_MODIFY	00
 #define	MODIFY		02
 
-void	LinePointHandler();
-void	RectPointHandler();
-void	CirclePointHandler();
-void	TextHandler();
-void	MoveHandler();
-void	RotateHandler();
-void	RotateHandler2();
-void	SelectHandler();
-void	DeleteHandler();
-void	PackHandler();
-void	PackHandler2();
-void	DpQuit();
-void	DpDebug();
-void	StUndo();
-void	CacheStats();
-
 typedef struct command *Command;
 
-struct command {
+static void LinePointHandler(Command c, int xdown, int ydown);
+static void RectPointHandler(Command c, int xdown, int ydown);
+static void CirclePointHandler(Command c, int xdown, int ydown);
+static void TextHandler(Command c, int xdown, int ydown);
+static void MoveHandler(Command c, int xdown, int ydown);
+static void RotateHandler(Command c, int xdown, int ydown);
+static void RotateHandler2(Command c, int xdown, int ydown);
+static void SelectHandler(Command c, int xdown, int ydown);
+static void DeleteHandler(Command c, int xdown, int ydown);
+static void PackHandler(Command c, int xdown, int ydown);
+static void PackHandler2(Command c, int xdown, int ydown);
+static void DpQuit(void);
+static void DpDebug(void);
+
+static struct command {
 	int	command;
-	char	*name;
+	const char	*name;
 	int	flags;
-	void	(*handler)();
+	void	(*handler)(/* Command c, int xdown, int ydown */); /* tjm - need to do this, but too many (void)s and mostly harmless */
 	int	arg;
 }  commands[] = {
 	{ C_LINE, "line",	MODE | MODIFY,	LinePointHandler, (int)Line },
@@ -167,7 +162,7 @@ DpInit(void)
 	GDEVmouse(MOUSE_EVENT(RIGHT_BUTTON, DOWN_MOVEMENT), rv);
 }
 
-void
+static void
 DpDebug(void)
 {
 	extern int DrawDebug;
@@ -176,7 +171,7 @@ DpDebug(void)
 	printf("DrawDebug = %d\n", DrawDebug);
 }
 
-void
+static void
 DpQuit(void)
 {
 	(void) system("stty echo -cbreak");	/* too lazy to ioctl */
@@ -195,7 +190,7 @@ Lookup(int chr)
 	return NULL;
 }
 
-void
+static void
 GetNextMouseEvent(int *whichp, int *xp, int *yp)
 {
 	int chr;
@@ -208,11 +203,13 @@ GetNextMouseEvent(int *whichp, int *xp, int *yp)
 	GgetXYT(xp, yp, NULL);
 }
 
-int
+static int
 IsUpEvent(int which)
 {
 	return which == LEFT_UP || which == RIGHT_UP;
 }
+
+static void mainloop(void);
 
 int main(int argc, char **argv)
 {
@@ -228,7 +225,7 @@ int main(int argc, char **argv)
 	mainloop();
 }
 
-void mainloop(void)
+static void mainloop(void)
 {
 	Command command = &commands[0], c;
 	int chr;
@@ -243,7 +240,7 @@ void mainloop(void)
 
 		c = (chr == '.' ? command : Lookup(chr));
 		if(c == NULL) {
-			if(chr != '\n');
+			if(chr != '\n')
 				printf("%c: Unknown command\n", chr);
 			continue;
 		}
@@ -265,7 +262,7 @@ void mainloop(void)
 	}
 }
 
-void
+static void
 LinePointHandler(Command c, int xdown, int ydown)
 {
 	int which, x, y;
@@ -281,7 +278,7 @@ LinePointHandler(Command c, int xdown, int ydown)
 }
 
 
-void
+static void
 RectPointHandler(Command c, int xdown, int ydown)
 {
 	int which, x, y;
@@ -297,7 +294,7 @@ RectPointHandler(Command c, int xdown, int ydown)
 	} while( ! IsUpEvent(which));
 }
 
-void
+static void
 CirclePointHandler(Command c, int xdown, int ydown)
 {
 	int which, x, y;
@@ -313,7 +310,7 @@ CirclePointHandler(Command c, int xdown, int ydown)
 	} while( ! IsUpEvent(which));
 }
 
-void
+static void
 TextHandler(Command c, int xdown, int ydown)
 {
 }
@@ -343,7 +340,7 @@ WaitForPick(/* in out */ int *xdownp, /* in out */ int *ydownp)
 	}
 }
 
-void
+static void
 MoveHandler(Command c, int xdown, int ydown)
 {
 	int x, y, which;
@@ -376,7 +373,7 @@ static int
 GenRotate(Transformation t, int x1, int y1, int x2, int y2, int scalekind)
 {
 	int dx, dy;
-	double ihyp;
+	double ihyp = 1.0;
 
 	dx = x2 - x1;
 	dy = y2 - y1;
@@ -394,7 +391,7 @@ GenRotate(Transformation t, int x1, int y1, int x2, int y2, int scalekind)
 }
 
 
-void
+static void
 RotateHandler(Command c, int xdown, int ydown)
 {
 	int x, y, which;
@@ -435,16 +432,16 @@ RotateHandler(Command c, int xdown, int ydown)
 			printf("Can't pick center as rotate point\n");
 			return;
 	}
-	ComposeTran(t_to_origin_and_undo_angle, t_to_origin, t_temp1);
+	(void)ComposeTran(t_to_origin_and_undo_angle, t_to_origin, t_temp1);
 
 	do {
 		GetNextMouseEvent(&which, &x, &y);
 		if(GenRotate(t_rotate, xcenter, ycenter, x, y,
 			c->command == C_ROTATE ? UNITY : MAGNIFY) ) {
 
-			ComposeTran(t_temp2, t_to_origin_and_undo_angle,
+			(void)ComposeTran(t_temp2, t_to_origin_and_undo_angle,
 						t_rotate);
-			ComposeTran(t_temp1, t_temp2, t_from_origin);
+			(void)ComposeTran(t_temp1, t_temp2, t_from_origin);
 
 			StReplaceObject(e, save);
 			StTransform(e, t_temp1);
@@ -457,7 +454,7 @@ RotateHandler(Command c, int xdown, int ydown)
 
 #define ROTATETHRESH	(8*8)
 
-void
+static void
 RotateHandler2(Command c, int xdown, int ydown)
 {
 	int x, y, which;
@@ -513,16 +510,16 @@ RotateHandler2(Command c, int xdown, int ydown)
 			printf("Can't pick center as rotate point\n");
 			return;
 	}
-	ComposeTran(t_to_origin_and_undo_angle, t_to_origin, t_temp1);
+	(void)ComposeTran(t_to_origin_and_undo_angle, t_to_origin, t_temp1);
 
 	do {
 		GetNextMouseEvent(&which, &x, &y);
 		if(GenRotate(t_rotate, xcenter, ycenter, x, y,
 			c->command == C_ROTATE ? UNITY : MAGNIFY) ) {
 
-			ComposeTran(t_temp2, t_to_origin_and_undo_angle,
+			(void)ComposeTran(t_temp2, t_to_origin_and_undo_angle,
 						t_rotate);
-			ComposeTran(t_temp1, t_temp2, t_from_origin);
+			(void)ComposeTran(t_temp1, t_temp2, t_from_origin);
 
 			StReplaceObject(e, save);
 			StTransform(e, t_temp1);
@@ -532,12 +529,12 @@ RotateHandler2(Command c, int xdown, int ydown)
 }
 
 
-void
+static void
 SelectHandler(Command c, int xdown, int ydown)
 {
 }
 
-void
+static void
 DeleteHandler(Command c, int xdown, int ydown)
 {
 	Element e;
@@ -550,7 +547,7 @@ DeleteHandler(Command c, int xdown, int ydown)
 	}
 }
 
-void
+static void
 PackHandler(Command c, int xdown, int ydown)
 {
 	Element newe, e;
@@ -568,7 +565,7 @@ PackHandler(Command c, int xdown, int ydown)
 	}
 }
 
-void
+static void
 PackHandler2(Command c, int xdown, int ydown)
 {
 	Element newe, e;

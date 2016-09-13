@@ -43,7 +43,7 @@ the full agreement.
 #include <math.h>
 #include "util.h"
 #include "matrix.h"
-
+#include "proto.h"
 
 typedef	struct array_header *Array;
 

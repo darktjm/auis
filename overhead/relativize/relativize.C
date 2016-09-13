@@ -28,12 +28,7 @@
 /* Define this function here so that this can be compiled before everything else. */
 static char *NewString(char *str)
 {
-    char *result;
-    if(str==NULL) return NULL;
-    result=(char *)malloc(strlen(str)+1);
-    if(result==NULL) return result;
-    strcpy(result, str);
-    return result;
+    return str ? strdup(str) : NULL;
 }
 struct dontlist {
     char *path;

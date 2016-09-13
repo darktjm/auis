@@ -717,8 +717,7 @@ static char *readDir(class termulator  *self,char  *buf,long  len)
 	    }
 	}
 
-	self->cwd=(char *)malloc(strlen(self->parseBuf)+1);
-	strcpy(self->cwd,self->parseBuf);
+	self->cwd=strdup(self->parseBuf);
 
 	self->parseLen=0;
 

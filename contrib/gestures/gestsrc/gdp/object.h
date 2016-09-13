@@ -48,9 +48,12 @@ typedef	enum {
 } ObjectType;
 
 
-Object	CreateObject();		/* ObjectType */
-
-Bool	UpdatePoint();		/* Object; int which_point; int x, y; */
-
-Object	CopyObject();
-void	FreeObject();
+extern Object CreateObject(ObjectType type);
+extern Bool UpdatePoint(Object o, int which, int x, int y);
+extern Bool AddSubObject(Object o, Object subo);
+extern Object CopyObject(Object old);
+extern void FreeObject(Object o);
+#include "transform.h"
+extern void Transform(Object o, Transformation t);
+extern int Distance(Object o, int x, int y);
+extern void ObjHighlight(Object o, int highlight);

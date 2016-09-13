@@ -38,6 +38,7 @@ the full agreement.
 #include <gestures/util.h>
 #include <gestures/gdev.h>
 #include <stdio.h>
+#include "proto.h"
 
 void
 WmClear(void)
@@ -60,6 +61,7 @@ void WmFlush(void)
 	GDEVflush();
 }
 
+#if 0
 void
 EraseOn(void)
 { /* GDEVsets("currentcolor", "white"); */
@@ -70,3 +72,4 @@ EraseOff(void)
 {
 	/* GDEVsets("currentcolor", "black"); */
 }
+#endif

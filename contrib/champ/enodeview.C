@@ -74,12 +74,11 @@ static void ButtHit(class enodeview  *self, int  buttcode, class butter  *butter
 		message::DisplayString(self, 10, "Out of memory!");
 		return;
 	    }
-	    adden->event = (char *)malloc(1+strlen(buf));
+	    adden->event = strdup(buf);
 	    if (!adden->event) {
 		message::DisplayString(self, 10, "Out of memory!");
 		return;
 	    }
-	    strcpy(adden->event, buf);
 	    adden->flagged = 0;
 	    adden->next = NULL;
 	    adden->ds.calsys = CALSYS_GREGORIAN;

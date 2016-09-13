@@ -257,8 +257,7 @@ struct indexBucket *index_ReadIndex(FILE *afile)
 		ti = (struct indexComponent *) malloc(sizeof(struct indexComponent));
 		ti->next = enchilada;
 		enchilada = ti;
-		ti->name = (char *) malloc(strlen(charBuffer) + 1);
-		strcpy(ti->name, charBuffer);
+		ti->name = strdup(charBuffer);
 		ti->hashes = tlist;
 		ti->primary = 1;
 		rset(ti->id, *idp);
@@ -267,8 +266,7 @@ struct indexBucket *index_ReadIndex(FILE *afile)
 		    if (tc == 0) break;
 		}
 		charBuffer[MAXSTRLENGTH-1] = '\000';	    
-		ti->data = (char *) malloc(strlen(charBuffer) + 1);
-		strcpy(ti->data, charBuffer);
+		ti->data = strdup(charBuffer);
 		break;
 
 	    case ISECONDARY:
@@ -282,8 +280,7 @@ struct indexBucket *index_ReadIndex(FILE *afile)
 		ti = (struct indexComponent *) malloc(sizeof(struct indexComponent));
 		ti->next = enchilada;
 		enchilada = ti;
-		ti->name = (char *) malloc(strlen(charBuffer) + 1);
-		strcpy(ti->name, charBuffer);
+		ti->name = strdup(charBuffer);
 		ti->primary = 0;
 		rset(ti->id, *idp);
 		break;

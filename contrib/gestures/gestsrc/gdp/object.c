@@ -50,7 +50,7 @@ struct dope dope[] = {
 	{ SetOfObjects, "set", 0, AlwaysOK, SetDraw, SetTransform, SetDistance },
 };
 
-#define NDOPE	(sizeof(dope)/sizeof(dope[0]))
+#define NDOPE	((int)(sizeof(dope)/sizeof(dope[0])))
 
 Object
 CreateObject(ObjectType type)
@@ -101,16 +101,7 @@ AddSubObject(Object o, Object subo)
 	if(o->type != SetOfObjects)
 		return FALSE;
 	Draw(subo);
-	(void) AddElement(o->subobjects, subo);
-	return TRUE;
-}
-
-Bool
-AddText(Object o, char *s)
-{
-	Erase(o);
-	o->text = recog_scopy(s);
-	Draw(o);
+	(void) AddElement(o->subobjects, (Pointer)subo);
 	return TRUE;
 }
 
@@ -174,6 +165,10 @@ Distance(Object o, int x, int y)
 
 /* ---------------- object manipulation ----------- */
 
+static void mObjHighlight(DllElement e, Pointer p)
+{
+    ObjHighlight((Object)e, (int)(long)p);
+}
 
 void ObjHighlight(Object o, int highlight)
 {
@@ -190,7 +185,7 @@ void ObjHighlight(Object o, int highlight)
 
 	if(o->type == SetOfObjects) {
 		depth++;
-		Map(o->subobjects, ObjHighlight, highlight);
+		Map(o->subobjects, mObjHighlight, (Pointer)(long)highlight);
 		depth--;
 	} else {
 		o->highlight = highlight;

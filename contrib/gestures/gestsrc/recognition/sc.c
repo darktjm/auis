@@ -50,11 +50,9 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include "stdio.h"
 #include "math.h"
 #include "zdebug.h"
+#include "proto.h"
 
-#ifndef _IBMR2
-/* IBM defines this in math.h */
-double exp();
-#endif
+static sClassDope sAddClass(sClassifier sc, char *classname);
 static void FixClassifier(sClassifier sc, Matrix avgcov);
 
 #define	EPS	(1.0e-6)	/* for singular matrix check */

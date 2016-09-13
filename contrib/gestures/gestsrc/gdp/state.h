@@ -30,16 +30,26 @@ the full agreement.
  *  $
 */
 
-void StInit();
-void StRedraw();
-Element StNewObj();	/* ObjectType t; */
-void StDelete(); 	/* Element e; */
-void StUpdatePoint();	/* Element e; int point_number, x, y; */
-void StMove();		/* Element e; int x, y; */
-void StTransform();	/* Element e; Transformation t */
-Element StPick();	/* int x, y */
-Element StEdit();	/* Element e; */
-Element StCopyElement();/* Element e; */
+extern void StInit(void);
+
+extern void StRedraw(void);
+extern Element StNewObj(ObjectType t);
+extern void StDelete(Element e);
+extern void StUpdatePoint(Element e, int point_number, int x, int y);
+extern void StMove(Element e, int x, int y);
+extern void StTransform(Element e, Transformation t);
+extern Element StPick(int x, int y);
+extern Element StEdit(Element e, Object *oldo);
+extern Element StCopyElement(Element e);
 
 
-Set CopySet();
+extern Set CopySet(Set s);
+
+extern Set StEmptySet(void);
+extern void StBottomLine(const char *string);
+extern void StAddSubObject(Element e, Element sube);
+extern void StReplaceObject(Element e, Object s);
+extern void StCheckpoint(void);
+extern void StUndo(void);
+extern void StHighlight(Element e, int highlight);
+

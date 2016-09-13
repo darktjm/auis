@@ -274,9 +274,8 @@ PRIVATE char * WWW_from_WAIS (any *, docid)
     if (PROT_TRACE) fprintf(TDEST, "HTLoadWAIS.. WWW form of id: %s\n", buf); 
     {
         char *result;
-	if ((result = (char *) malloc((int) strlen(buf)+1)) == NULL)
+	if ((result = strdup(buf)) == NULL)
 	    outofmem(__FILE__, "WWW_from_WAIS");
-	strcpy(result, buf);
 	return result;
     }
 } /* WWW_from_WAIS */

@@ -35,6 +35,9 @@ the full agreement.
 #include <math.h>
 #include "util.h"
 #include <gestures/bool.h>
+#include <gestures/gdev.h>
+#include <gestures/util.h>
+#include "proto.h"
 
 #define	NLINES	50
 #define	NPOINTS	500
@@ -47,16 +50,19 @@ static	struct lines { int x1, y1, x2, y2; } line[NLINES];
 static	int	npoints;
 static	struct point { int x, y; } point[NPOINTS];
 
+static void Greset(void);
+static void Gerase(void);
+
 void Sreset(void) { Greset(); }
 void Serase(void) { Gerase(); }
 
-void Greset(void)
+static void Greset(void)
 {
 	nlines = 0;
 	npoints = 0;
 }
 
-void Gerase(void)	/* just redraws, assumes XOR */
+static void Gerase(void)	/* just redraws, assumes XOR */
 {
 	int i;
 

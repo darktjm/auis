@@ -467,11 +467,10 @@ image->zip_image_stream->zip_stream_name);
         }
         else
         {
-        if ( (image->zip_image_name = (char *)malloc( strlen( name ) + 1 )) == NULL )
+        if ( (image->zip_image_name = strdup( name ) ) == NULL )
           status = zip_insufficient_image_space;
           else
           {
-          strcpy( image->zip_image_name, name );
           symtab_add( image->zip_image_stream->zip_stream_symbol_table,
   		    (unsigned char *) image->zip_image_name, (struct user_data  *) image );
           }
@@ -501,11 +500,10 @@ zip::Set_Image_Text( struct zip_image *image, const char *text )
     DEBUGst( Given Text,text);
     DEBUGst( Image Name,image->zip_image_name);
     SetStreamModified;
-    if ( text )
-      if ( (image->zip_image_text = (char *) malloc( strlen( text ) + 1 )) != NULL )
-        strcpy( image->zip_image_text, text );
-        else
+    if ( text ) {
+      if ( (image->zip_image_text = strdup( text ) ) == NULL )
         status = zip_insufficient_image_space;
+    }
       else image->zip_image_text = NULL;
     }
     else  status = zip_image_non_existent;

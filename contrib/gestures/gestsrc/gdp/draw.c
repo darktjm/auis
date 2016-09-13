@@ -36,27 +36,28 @@ the full agreement.
 #include "object.h"
 #include "iobject.h"
 #include <gestures/matrix.h>
+#include <gestures/gdev.h>
 #include "transform.h"
 #include <stdio.h>
 #include <math.h>
-#ifndef _IBMR2
-/* IBM defines this in math.h */
-double sqrt();
-#endif
+#include "proto.h"
 
 int	DrawDebug = 0;
 #define	D if(DrawDebug)
 
 #define stat mystat
 
+static void DumpObject(Object o);
+
 static void
-dmpo(Object o)
+dmpo(DllElement _o, Pointer ign)
 {
+	Object o = (Object)_o;  /* I guess */
 	printf("	-(");
 	DumpObject(o);
 }
 
-void DumpObject(Object o)
+static void DumpObject(Object o)
 {
 	int i;
 	struct dope *d = &dope[(int) o->type];
@@ -102,7 +103,7 @@ ReallyDraw(Object o)
 
 /* ObjEqual does a straight bit compare */
 
-Bool
+static Bool
 ObjEqual(Object o1, Object o2)
 {
 	return ! memcmp( (char *) o1, (char *) o2, sizeof(struct object));
@@ -127,7 +128,7 @@ static struct cache {
 	struct	object	o;
 } cache[CACHESIZE];
 
-struct	cache headspace = { &headspace, &headspace }, *head = &headspace;
+static struct	cache headspace = { &headspace, &headspace }, *head = &headspace;
 
 static struct {
 	int	flushes;
@@ -142,7 +143,7 @@ void CacheStats(void)
 	stat.flushes, stat.news, stat.hits, stat.collisions);
 }
 
-void CacheFlush(void (*fcn)(Object))
+static void CacheFlush(void (*fcn)(Object))
 {
 	struct cache *c;
 
@@ -161,7 +162,7 @@ void CacheFlush(void (*fcn)(Object))
 #define	C_COLLISION	1
 #define	C_HIT		2
 
-int
+static int
 CacheEnter(Object o)
 {
 	int h = hash(o);
@@ -221,8 +222,6 @@ Draw(Object o)
 void
 DrawSync(void)
 {
-	Object o;
-
 	D printf("DrawSync..");   /* debug */
 	CacheFlush(ReallyDraw);
 	WmFlush();
@@ -232,7 +231,6 @@ DrawSync(void)
 
 void DrawClear(void)
 {
-	Object o;
 	CacheFlush(NULL);
 	WmClear();
 }
@@ -423,19 +421,20 @@ CircleDistance(Object o, int x, int y)
 	return (int) (d * d);
 }
 
-int
-inrec(int x, int y, int x1, int y1, int x2, int y2)
+static void mdraw(DllElement e, Pointer p)
 {
-	int t;
-	if(x1 > x2) t = x1, x1 = x2, x2 = t;
-	if(y1 > y2) t = y1, y1 = y2, y2 = t;
-	return x1 <= x && x <= x2 && y1 <= y && y <= y2;
+    Draw((Object)e);
 }
 
 void
 SetDraw(Object o)
 {
-	Map(o->subobjects, Draw, NULL);
+	Map(o->subobjects, mdraw, NULL);
+}
+
+static void mtransform(DllElement e, Pointer p)
+{
+    Transform((Object)e, (Transformation)p);
 }
 
 void
@@ -443,7 +442,7 @@ SetTransform(Object o, Transformation t)
 {
 	void Transform();
 
-	Map(o->subobjects, Transform, t);
+	Map(o->subobjects, mtransform, (Pointer)t);
 }
 
 struct size {
@@ -452,8 +451,10 @@ struct size {
 };
 
 static void
-sizem(Object o, struct size *s)
+sizem(DllElement e, Pointer p)
 {
+	Object o = (Object)e;
+	struct size *s = (struct size *)p;
 	int d = Distance(o, s->x, s->y);
 	if(d < s->min_d)
 		s->min_d = d;

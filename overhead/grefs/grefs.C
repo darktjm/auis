@@ -243,12 +243,11 @@ static void DoInclude(char *file, int current)
     }
     p->next=files;
     files=p;
-    p->path=(char *)malloc(strlen(file)+1);
+    p->path=strdup(file);
     if(p->path==NULL) {
 	fprintf(stderr, "out of memory.\n");
 	exit(-1);
     }
-    strcpy(p->path, file);
     if(fp==NULL) {
 	if(verbose) {
 	    perror(pathopen_realpath);

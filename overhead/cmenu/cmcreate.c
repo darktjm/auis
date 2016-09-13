@@ -340,8 +340,7 @@ static int GetDisplayInfo(Display *dpy, struct cmenu *menu, const char *def_env)
     dp = (struct cmenudata *) malloc(sizeof(struct cmenudata));
 
     dp->dpy = dpy;
-    dp->def_env = (char *) malloc(strlen(def_env) + 1);
-    strcpy(dp->def_env, def_env);
+    dp->def_env = strdup(def_env);
 
     /*
       * Get the RootWindow and default pixel colors.
@@ -376,50 +375,36 @@ static int GetDisplayInfo(Display *dpy, struct cmenu *menu, const char *def_env)
     }
     
     if ((def_val = getprofile("PopupForegroundColor")) != NULL ||
-	(def_val = XGetDefault(dpy, def_env, "MenuForeground")) != NULL) {
-	dp->foregroundColor = (char*)malloc(strlen(def_val)+1);
-	strcpy(dp->foregroundColor,def_val);
-    }
-    else {
-	dp->foregroundColor = (char*)malloc(strlen("black")+1);
-	strcpy(dp->foregroundColor,"black");
-    }
+	(def_val = XGetDefault(dpy, def_env, "MenuForeground")) != NULL)
+	dp->foregroundColor = strdup(def_val);
+    else
+	dp->foregroundColor = strdup("black");
 
     if ((def_val = getprofile("PopupKeysColor")) != NULL ||
-	(def_val = XGetDefault(dpy, def_env, "MenuKeys")) != NULL) {
-	dp->keysColor = (char*)malloc(strlen(def_val)+1);
-	strcpy(dp->keysColor,def_val);
-    }
-    else {
-	dp->keysColor = (char*)malloc(strlen(dp->foregroundColor)+1);
-	strcpy(dp->keysColor, dp->foregroundColor);
-    }
+	(def_val = XGetDefault(dpy, def_env, "MenuKeys")) != NULL)
+	dp->keysColor = strdup(def_val);
+    else
+	dp->keysColor = strdup(dp->foregroundColor);
     
     if ((def_val = getprofile("PopupBackgroundColor")) != NULL ||
-	(def_val = XGetDefault(dpy, def_env, "MenuBackground")) != NULL) {
-	dp->backgroundColor = (char*)malloc(strlen(def_val)+1);
-	strcpy(dp->backgroundColor,def_val);
-    }
+	(def_val = XGetDefault(dpy, def_env, "MenuBackground")) != NULL)
+	dp->backgroundColor = strdup(def_val);
     else {
 	const char *col = "white";
 	if (dp->motifMenus && iscolor) col = "gray75";
-	dp->backgroundColor = (char*)malloc(strlen(col)+1);
-	strcpy(dp->backgroundColor,col);
+	dp->backgroundColor = strdup(col);
     }
 
     if ((def_val = getprofile("PopupTopShadowColor")) != NULL ||
-	(def_val = XGetDefault(dpy, def_env, "MenuTopShadowColor")) != NULL) {
-	dp->topshadowColor = (char*)malloc(strlen(def_val)+1);
-	strcpy(dp->topshadowColor,def_val);
-    }
+	(def_val = XGetDefault(dpy, def_env, "MenuTopShadowColor")) != NULL)
+	dp->topshadowColor = strdup(def_val);
     else {
 	dp->topshadowColor = NULL;
     }
 
     if ((def_val = getprofile("PopupBottomShadowColor")) != NULL ||
 	(def_val = XGetDefault(dpy, def_env, "MenuBottomShadowColor")) != NULL) {
-	dp->bottomshadowColor = (char*)malloc(strlen(def_val)+1);
-	strcpy(dp->bottomshadowColor,def_val);
+	dp->bottomshadowColor = strdup(def_val);
     }
     else {
 	dp->bottomshadowColor = NULL;

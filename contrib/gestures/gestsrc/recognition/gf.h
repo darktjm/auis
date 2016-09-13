@@ -1,3 +1,5 @@
+#ifndef _gf_h_
+#define _gf_h_
 /***********************************************************************
 
 gf.h - read and write gesture classifier files
@@ -55,4 +57,9 @@ struct gesturefile  {
 
 #define ClassName(g)	(classname[(g)->classindex])
 
+/* gf.c */
 extern char *classname[];
+extern int ClassEnter(char *name);
+extern GestureFile ReadGestureFile(char *infilename);
+extern void WriteGesture(FILE *outfile, Gesture g, char *classname);
+#endif

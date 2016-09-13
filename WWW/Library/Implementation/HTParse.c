@@ -266,10 +266,9 @@ PRIVATE void ari_strcpy (char *to,
 
     if (!to || !from) return;
 
-    tmp = (char*)malloc(strlen(from)+1);
+    tmp = strdup(from);
     if (!tmp) outofmem(__FILE__, "my_strcpy");
 
-    strcpy(tmp, from);
     strcpy(to, tmp);
     free(tmp);
 }

@@ -210,7 +210,7 @@ FILE *FileProcess(const char *prompt, char *filename, const char *mode)
 {
   int accessible, readable, len;
   FILE *fpt;
-  char *filename2, number[20], instruction[TMP_SIZE];
+  char number[20], instruction[TMP_SIZE];
   const char *fullspec;
 
   if(!strcmp(filename, "") && !strcmp(mode, "t"))
@@ -224,8 +224,7 @@ FILE *FileProcess(const char *prompt, char *filename, const char *mode)
       }
       else
       {
-	  filename = (char *) malloc((strlen(fullspec) + 1)*sizeof(char));
-	  strcpy(filename, fullspec);
+	  filename = strdup(fullspec);
       }
   }
 
@@ -236,16 +235,11 @@ FILE *FileProcess(const char *prompt, char *filename, const char *mode)
 	  if(!ULstrcmp(rindex(filename, '.'), ".ez"))
 	    {
 	      len = roffset(filename, '.');
-	      filename2 = (char *) malloc ((len + 8));
 	      filename[len] = '\0';
 	    }	 
 	}
-      else
-	filename2 = (char *) malloc ((strlen(filename) + 8));
 
-      filename2 = strcat(filename, ".rtf");
-      filename = (char *) malloc((strlen(filename2) + 1));
-      filename = filename2;
+      strcat(filename, ".rtf");
 
       accessible = access(filename, F_OK);
       if(!accessible)
@@ -308,13 +302,11 @@ FILE *FileProcess(const char *prompt, char *filename, const char *mode)
 
   if(!strcmp(mode, "r"))
     {
-      Filein = (char *) malloc((strlen(filename) + 1));
-      strcpy(Filein, filename);
+      Filein = strdup(filename);
     }
   else if(!strcmp(mode, "w"))
     {
-      Fileout = (char *) malloc((strlen(filename) + 1));
-      strcpy(Fileout, filename);
+      Fileout = strdup(filename);
     }
 
   return(fpt);

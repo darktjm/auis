@@ -42,17 +42,22 @@ the full agreement.
 #include "gdev.h"
 #include "args.h"
 
-extern	int	gdevdebug;
 static	int	NoWait = 0;
 static	char  	*Tests = NULL;
 
-int	argc;
-char 	**argv;
+static int	argc;
+static char 	**argv;
 
-void input_test();
-void output_test();
-void menu_test();
-void draw_test();
+static void input_test(void);
+static void output_test(void);
+static void menu_test(void);
+static void draw_test(void);
+
+static void DoTest(int c, void (*test)(void));
+static char *fetcharg(int c);
+static void init(void);
+static void init_mouse(void);
+static void Wait(void);
 
 int main(int ac, char **av)
 {
@@ -68,7 +73,7 @@ int main(int ac, char **av)
 	return 0;
 }
 
-void DoTest(int c, void (*test)(void))
+static void DoTest(int c, void (*test)(void))
 {
 	if(Tests == NULL || strchr(Tests, c)) {
 		(*test)();
@@ -88,7 +93,7 @@ void DoTest(int c, void (*test)(void))
 #define    RIGHT_MOVE		  	012
 #define    RIGHT_UP		  	013
 
-char *
+static char *
 fetcharg(int c)
 {
 	int i;
@@ -106,7 +111,7 @@ fetcharg(int c)
 	return NULL;
 }
 
-void init(void)
+static void init(void)
 {
 	char *r;
 
@@ -147,7 +152,7 @@ void init(void)
 	init_mouse();
 }
 
-void init_mouse(void)
+static void init_mouse(void)
 {
 	char rv[3];
 
@@ -175,7 +180,7 @@ void init_mouse(void)
 
 }
 
-void Wait(void)
+static void Wait(void)
 {
 	int c;
 	int button;
@@ -209,7 +214,7 @@ void Wait(void)
 /* ------------------- tests ------------------------ */
 
 
-void output_test(void)
+static void output_test(void)
 {
 	int width, height;
 	int xincr, yincr;
@@ -247,13 +252,13 @@ void output_test(void)
 	GDEVseti("thickness", 1);
 }
 
-void input_test(void)
+static void input_test(void)
 {
 	printf("-------- Input Test ---------\n");
 }
 
 
-void menu_test(void)
+static void menu_test(void)
 {
 	printf("-------- Menu Test ---------\n");
 
@@ -262,10 +267,10 @@ void menu_test(void)
 	GDEVmenuitem("Quit", "q");
 }
 
-void draw_test(void)
+static void draw_test(void)
 {
 	int x, y;
-	int lx, ly;
+	int lx = -1, ly = -1;
 	int button;
 	int c;
 
@@ -281,7 +286,8 @@ void draw_test(void)
 			case RIGHT_DOWN:
 				return;
 			case LEFT_MOVE:
-				GDEVline(x, y, lx, ly);
+				if(lx != -1 && ly != -1)
+					GDEVline(x, y, lx, ly);
 				GDEVflush();
 				/* fall into .. */
 			case LEFT_DOWN:

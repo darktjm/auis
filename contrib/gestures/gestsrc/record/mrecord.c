@@ -58,27 +58,27 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 #define MAXPOINTS 10000
 
-FILE *outfile;
-static char *classname = "";
+static FILE *outfile;
+static const char *classname = "";
 
-int	Erase = 1;
-int	number = 1;
-int single = 0;
+static int	Erase = 1;
+static int	number = 1;
+static int single = 0;
 
-int np;
-struct point {
+static int np;
+static struct point {
 	int	path, x, y, t;	
 } p[MAXPOINTS];
 
-int tcmp(struct point *p1,struct point *p2) { return p1->t - p2->t; }
+static int tcmp(const void *p1, const void *p2) { return ((struct point *)p1)->t - ((struct point *)p2)->t; }
 
-void doit(void)
+static void doit(void)
 {
 	int button;
 	int i;
-	int x, y, lx, ly;
+	int x, y, lx = -1, ly = -1;
 	int path;
-	long t, st;
+	int t, st;
 	int cur, pnp;
 	int done;
 
@@ -111,13 +111,14 @@ top:
 			np++;
 			/*
 			if(t == 0 && path != 0)
-				np--;	/* ignore 1st point of all
+				np--; *//* ignore 1st point of all
 						but 1st path */
 			switch(button) {
 			case RIGHT_DOWN:
 				return;
 			case LEFT_MOVE:
-				GDEVline(x, y, lx, ly);
+				if(lx != -1 && ly != -1)
+					GDEVline(x, y, lx, ly);
 				/* GDEVflush(); */
 				lx = x; ly = y;
 				break;
@@ -202,7 +203,7 @@ top:
 	}
 }
 
-void init2(void)
+static void init2(void)
 {
 	REGIONinit2();
 
@@ -213,7 +214,7 @@ void init2(void)
 	GDEVmenuitem("Quit", "q");
 }
 
-void init1(void)
+static void init1(void)
 {
 	REGIONinit();
 }
@@ -223,16 +224,14 @@ void init1(void)
 
 #include <gestures/args.h>
 
-extern	int	gdevdebug;
-extern	int	Erase;
-int	verbose = 0;
+static int	verbose = 0;
 
-int	argc;
-char 	**argv;
+static int	argc;
+static char 	**argv;
 
-double	rho = 1.0;
+static double	rho = 1.0;
 
-char *
+static char *
 fetcharg(int c)
 {
 	int i;
@@ -253,7 +252,7 @@ fetcharg(int c)
 int main(int ac, char **av)
 {
 	char *r;
-	char *outfilename = "gesture.in";
+	const char *outfilename = "gesture.in";
 
 	argc = ac;
 	argv = av;

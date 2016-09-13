@@ -46,7 +46,7 @@ OBJS = abbrpath.o andrwdir.o \
 	foldedeq.o fpacheck.o fselect.o gtime.o \
 	fwrtallc.o getaddr.o gethome.o getla.o \
 	getmyhom.o getpty.o hname.o lcappend.o lineprom.o \
-	localdir.o newstr.o nicetime.o \
+	localdir.o nicetime.o \
 	procstuf.o profile.o readlink.o \
 	setprof.o t2open.o tfail.o times.o \
 	titles.o topen.o \
@@ -64,7 +64,7 @@ OBJS = abbrpath.o andrwdir.o \
 	foldedeq.o fpacheck.o fselect.o gtime.o \
 	fwrtallc.o getaddr.o gethome.o getla.o \
 	getmyhom.o getpty.o hname.o lcappend.o lineprom.o \
-	localdir.o newstr.o nicetime.o \
+	localdir.o nicetime.o \
 	procstuf.o profile.o readlink.o \
 	setprof.o t2open.o tfail.o times.o \
 	titles.o topen.o \

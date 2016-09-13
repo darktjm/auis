@@ -286,10 +286,8 @@ extern int ULstlmatch (const char  *big,const char  *small );          /* Return
                                         * arg1 match arg2, ignoring alpha
                                         * case, else 0. */
 
-/* newstr.o */
-extern char *NewString(const char  *srcptr);           /* Return a dynamically-allocated copy
-                                        * of the single arg string, or 0 if
-                                        * allocation fails. */
+/* formerly newstr.o */
+#define NewString strdup
 #define FREESTRINGVAR(s)   \
 		((s) = (char *)((s) ? (free(s), NULL) : NULL))
                                         /* Deallocate value from NewString.
@@ -412,7 +410,7 @@ extern EH_environment *_error_handler_env;
 
 extern void *emalloc(long  size);
 extern void *erealloc(void  *old, long  newsize);
-extern char *CopyString(const char *old);
+#define CopyString strdup
 
 /*
   Module definitions:

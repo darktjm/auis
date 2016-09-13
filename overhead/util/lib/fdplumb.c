@@ -107,8 +107,7 @@ void RegisterOpenFile(int fd, const char *path, int Code)
 	    fprintf(stderr, "<critical:fdplumb>File descriptor replaced!  Did you close %s? (%d, %s, %d)", OpenedFileNames[fd], fd, path, Code);
 	    free(OpenedFileNames[fd]);
 	}
-	OpenedFileNames[fd] = malloc(1+strlen(path));
-	strcpy(OpenedFileNames[fd], path);
+	OpenedFileNames[fd] = strdup(path);
 	OpenCodes[fd] = Code;
     }
 }

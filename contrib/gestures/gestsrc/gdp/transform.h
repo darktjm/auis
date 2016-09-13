@@ -1,3 +1,5 @@
+#ifndef _transform_h_
+#define _transform_h_
 /***********************************************************************
 
 Copyright (C) 1991 Dean Rubine
@@ -30,18 +32,19 @@ the full agreement.
  *  $
 */
 
-
+#include <gestures/matrix.h>
 typedef Matrix Transformation;
 
-Transformation	AllocTran();	/* Only call which allocs mem */
-Transformation	IdentityTran();	/* Transformation t;  sets t to identity */
-Transformation	TranslateTran();/* Transformation t; int x, y; */
-Transformation	RotateTran();	/* Transformation t; int degrees; */
-Transformation	RotateCosSinTran(); /* Transformation t; double a*cosine,a*sine;*/
-Transformation	ScaleTran(); 	/* Transformation t; double dilation; */
+extern Transformation AllocTran(void);	/* Only call which allocs mem */
+extern Transformation IdentityTran(Transformation t);	/* sets t to identity */
+extern Transformation TranslateTran(Transformation t, int x, int y);
+extern Transformation RotateTran(Transformation t, int theta);
+extern Transformation RotateCosSinTran(Transformation t, double c, double s);
+extern Transformation ScaleTran(Transformation t, double dilation);
 
-void	ApplyTran(); 		/* int x, y; Transformation t; int *xp, *yp; */
+extern void ApplyTran(int x, int y, Transformation t, int *xp, int *yp);
 #define	ComposeTran(r, a, b) 	/* Transformation r, a, b;  r = a o b */ \
 			(MatrixMultiply((a), (b), (r)), (r))
-double	TransScale();		/* Transformation t; */
+extern double TransScale(Transformation t);
 
+#endif

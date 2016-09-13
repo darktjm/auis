@@ -112,9 +112,8 @@ PUBLIC char * HTSACopy
   if (! src)
     *dest = NULL;
   else {
-    *dest = (char *) malloc (strlen(src) + 1);
+    *dest = strdup(src);
     if (*dest == NULL) outofmem(__FILE__, "HTSACopy");
-    strcpy (*dest, src);
   }
   return *dest;
 }
@@ -131,7 +130,7 @@ PUBLIC char * HTSACat
       if (*dest == NULL) outofmem(__FILE__, "HTSACat");
       strcpy (*dest + length, src);
     } else {
-      *dest = (char *) malloc (strlen(src) + 1);
+      *dest = strdup(src);
       if (*dest == NULL) outofmem(__FILE__, "HTSACat");
       strcpy (*dest, src);
     }

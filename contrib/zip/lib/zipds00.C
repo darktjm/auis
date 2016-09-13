@@ -814,9 +814,8 @@ Identify_Paths( class zip		      *self, zip_type_paths	      *paths_ptr )
     if ( (zippath_profile = (char *) environ::GetProfile( "zippaths" ))  ||
          (zippath_profile = (char *) environ::GetProfile( "zippath" )) )
       {
-      if ( (zippath_string = (char *) malloc( strlen( zippath_profile ) + 1 )) != NULL )
+      if ( (zippath_string = strdup( zippath_profile ) ) != NULL )
         {
-        strcpy( zippath_string, zippath_profile );
         zippath_string--;
         while ( *++zippath_string != '\0'  &&  (*paths_ptr)->zip_paths_count < 100 )
           {

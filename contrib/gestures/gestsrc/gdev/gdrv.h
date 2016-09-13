@@ -161,13 +161,17 @@ the full agreement.
 
 /* functions */
 
-void	GDRV00topleft(); /* int H; a driver should call this function during
+typedef	void (*Function)();
+
+void GDRV00topleft(int w); /* a driver should call this function during
 			    initialization if it thinks 0,0 is the top
 			    left of the window, else 0,0 is bottom left */
-void	GDRVvar_fcn();	/* H, char *varname; int (*function)(); Pointer arg; */
-void	GDRVvar_addr();	/* H, char *varname; Pointer address; */
-void	GDRVfdnotify(); /* int fd; int (*function)(); */
-void	GDRVmouse(); 	/* H, int event; int x, y; */
-void	GDRVrefresh();	/* H */
-void	GDRVmenu();	/* H, int retval; */
+void GDRVvar_fcn(int w, const char *varname, Function function, Pointer arg);
+void GDRVvar_addr(int w, const char *varname, Pointer address);
+void GDRVfdnotify(int fd, Function function);
+void GDRVmouse(int w, int event, int x, int y, int thetime);
+void GDRVrefresh(int w);
+void GDRVmenu(int w, int retval);
 
+void GDRVputc(int c);
+void GDRVwindow(int w);
