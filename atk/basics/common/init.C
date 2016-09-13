@@ -125,10 +125,7 @@ static struct keys *GetKeyFromKeystate(class init  *self, class keystate  *keyst
 static ATK  *CheckML(class menulist  *menulist, char  *class_c, boolean  inherit);
 static char *MapFile(const char  *filename, long  *fileLength );
 static int ReadFile(class init  *init, const char  *filename, boolean  executeImmediately);
-#ifdef __GNUC__
-__attribute__((format(printf,1,2)))
-#endif
-static void ErrorMsg(const char  *msg, ...);
+static PRINTF_LIKE(1,2) void ErrorMsg(const char  *msg, ...);
 
 
 init::init()

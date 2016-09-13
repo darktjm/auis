@@ -51,6 +51,7 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include <string.h>
 #include <sys/types.h>
 #include <sys/time.h>
+#include "x11r4.h"
 
 
 /*
@@ -68,17 +69,14 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 int gdevdebug = 0;
 
-static char *mouse_event();
-#ifdef __GNUC__
-__attribute((format(printf,2,3)))
-#endif
-static char *appendf(char *s, char *f, ...);
-#ifdef __GNUC__
-__attribute((format(printf,1,2)))
-#endif
-void GDEVerror(char *a, ...);
-static char *chr();
-static char *chrs();
+static char *mouse_event(int event);
+static PRINTF_LIKE(2,3) char *appendf(char *s, const char *f, ...);
+static void PRINTF_LIKE(1,2) GDEVerror(const char *a, ...);
+static char *chr(int r);
+static char *chrs(const char *s);
+static void hardcopy(int);
+static void hardcopydone(void);
+static void hardcopyinit(void);
 
 #define VERSION		1
 
@@ -95,45 +93,15 @@ static	int fileversion = VERSION;
  *	X
  */
 
-static void GDEVnull(void) { }	/* Used for functions not supplied */
-
-Pointer	POOFinit();
-int	POOFstart(), POOFflush(), POOFstop(),
-	POOFline(), POOFpoint(), POOFrect(), POOFtext(),
-	POOFsetdim(), POOFgetdim();
-
-Pointer	PSinit();
-int	PSstart(), PSflush(), PSstop(),
-	PSline(), PSpoint(), PSrect(), PStext(),
-	PSsetdim(), PSgetdim();
-
-Pointer	DPinit();
-int	DPstart(), DPflush(), DPstop(),
-	DPline(), DPpoint(), DPrect(), DPtext(),
-	DPsetdim(), DPgetdim();
-
-Pointer	XDEVinit();
-int	XDEVstart(), XDEVflush(), XDEVstop(),
-	XDEVline(), XDEVpoint(), XDEVrect(), XDEVtext(),
-	XDEVsetdim(), XDEVgetdim(),
-	XDEVmenuitem(), XDEVmouseinterest();
-
-Pointer	X11init();
-int	X11start(), X11flush(), X11stop(),
-	X11line(), X11point(), X11rect(), X11text(),
-	X11setdim(), X11getdim(),
-	X11menuitem(), X11mouseinterest();
-
 typedef struct alist *Alist, ListElem;
-typedef	int (*Function)();
 
-struct dev {
-	char *name;
+static struct dev {
+	const char *name;
 	Pointer (*init)();
-	int (*start)(), (*flush)(), (*stop)();
-	int (*line)(), (*point)(), (*rect)(), (*text)();
-	int (*setdim)(), (*getdim)();
-	int (*menuitem)(), (*mouseinterest)(); 
+	void (*start)(), (*flush)(), (*stop)();
+	void (*line)(), (*point)(), (*rect)(), (*text)();
+	void (*setdim)(), (*getdim)();
+	void (*menuitem)(), (*mouseinterest)(); 
 	/*--------------------*/
 	/* per driver runtime information (not initialized) */
 	Alist	variable_functions;  /* Assoc variable (string) numbers with
@@ -149,42 +117,6 @@ struct dev {
 		X11line, X11point, X11rect, X11text,
 		X11setdim, X11getdim,
 		X11menuitem, X11mouseinterest,
-	},
-#endif
-
-#ifdef PS
-	{ "ps",
-		PSinit, PSstart, PSflush, PSstop,
-		PSline, PSpoint, PSrect, PStext,
-		PSsetdim, PSgetdim, 
-		GDEVnull, GDEVnull,
-	},
-#endif
-
-#ifdef POOF
-	{ "poof",
-		POOFinit, POOFstart, POOFflush, POOFstop,
-		POOFline, POOFpoint, POOFrect, POOFtext,
-		POOFsetdim, POOFgetdim, 
-		GDEVnull, GDEVnull,
-	},
-#endif
-
-#ifdef DP
-	{ "dp",
-		DPinit, DPstart, DPflush, DPstop,
-		DPline, DPpoint, DPrect, DPtext,
-		DPsetdim, DPgetdim, 
-		GDEVnull, GDEVnull,
-	},
-#endif
-
-#ifdef XDEV
-	{ "X",
-		XDEVinit, XDEVstart, XDEVflush, XDEVstop,
-		XDEVline, XDEVpoint, XDEVrect, XDEVtext,
-		XDEVsetdim, XDEVgetdim,
-		XDEVmenuitem, XDEVmouseinterest,
 	},
 #endif
 
@@ -299,7 +231,7 @@ GDEVinit(char *device)
 }
 
 static struct window *
-Gwindow(int w, char *s)
+GDwindow(int w, const char *s)
 {
 	if(w < 0 ||  w >= nwindows) {
 		printf("%s: no such window %d\n", s, w);
@@ -312,7 +244,7 @@ void
 GDEVcurrentoutput(int w)
 {
 	if(! inhardcopy)
-		CurOut = Gwindow(w, "GDEVcurrentoutput");
+		CurOut = GDwindow(w, "GDEVcurrentoutput");
 }
 
 static void GDEVsetmaxy(void);
@@ -370,7 +302,7 @@ GDEVrect(int x1, int y1, int x2, int y2)
 }
 
 void
-GDEVtext(int x1, int y1, char *str)
+GDEVtext(int x1, int y1, const char *str)
 {
 	(*CurOut->dev->text)(CurOut->handle, x1, TRANSFORM_Y(y1), str);
 }
@@ -441,7 +373,7 @@ void cbufinit(void)
 	Chead = Ctail = cbuf;
 }
 
-void cbufwindow(int w)
+static void cbufwindow(int w)
 {
 	static int lastwin = -2;
 
@@ -457,6 +389,7 @@ void cbufwindow(int w)
 
 #define	nextcp(cp)	(((cp) == &cbuf[CBUFSIZE-1]) ? ((cp) = cbuf) : ++(cp))
 
+#if 0
 static int
 cbufempty(void)
 {
@@ -465,6 +398,7 @@ cbufempty(void)
 
 	return Chead == Ctail;
 }
+#endif
 
 static int
 cbufgetc(Cclass classes)
@@ -513,7 +447,7 @@ cbufputc(int c, Cclass cclass)
 	if(gdevdebug)
 		printf(">%s ", chr(c)), fflush(stdout);
 	if(c == hardcopychar && cclass == C_TYPED && hardcopyout) {
-		hardcopy();
+		hardcopy(0);
 		return;
 	}
 	if(recordfile != NULL)
@@ -561,34 +495,6 @@ cbufgeti(void)
 }
 
 
-static
-void cbufputd(double d)
-{
-	char *p = (char *) &d;
-	int i = sizeof(d);
-
-	while(--i >= 0)
-		cbufputc(*p++, C_DOUBLE);
-}
-
-static double
-cbufgetd(void)
-{
-	double d = 0;
-	char *p = (char *) &d;
-	int i = sizeof(d);
-	int c;
-
-	while(--i >= 0) {
-		if((c = cbufgetc(C_DOUBLE)) == C_NOCHARSPENDING) {
-			printf("Error getting double off cbuf!\n");
-			break;
-		}
-		*p++ = c;
-	}
-	return d;
-}
-
 static void
 cbufputs(const char *s, Cclass cclass)
 {
@@ -601,7 +507,7 @@ cbufputs(const char *s, Cclass cclass)
 
 
 static char *
-scopy(char *s)
+scopy(const char *s)
 {
 	char *p = strdup(s);
 	if(p == NULL)
@@ -616,7 +522,7 @@ struct alist {
 	Alist		next;
 	union {
 		char 		*string;
-		char 		**stringp;
+		const char 	**stringp;
 		int		*intp;
 		double		*doublep;
 		Pointer		pointer;
@@ -626,7 +532,7 @@ struct alist {
 };
 
 #if 1
-Alist __alist;
+static Alist __alist;
 #define	LookupInt(alist, tag, enterflag) \
 	( __alist = _lookupint(&alist, tag, enterflag), \
 	gdevdebug > 1 ? \
@@ -644,7 +550,7 @@ Alist __alist;
 #define	LookupString(alist, s, enterflag) _lookupstring(&alist, s, enterflag)
 #endif
 
-static Alist _makenew();
+static Alist _makenew(Alist *alistp, int enterflag);
 
 static Alist
 _lookupint(Alist *alistp, int tag, int enterflag /* if TRUE, make new entry if tag not found */)
@@ -659,7 +565,7 @@ _lookupint(Alist *alistp, int tag, int enterflag /* if TRUE, make new entry if t
 }
 
 static Alist
-_lookupstring(Alist *alistp, char *s, int enterflag /* if TRUE, make new entry if tag not found */)
+_lookupstring(Alist *alistp, const char *s, int enterflag /* if TRUE, make new entry if tag not found */)
 {
 	Alist l;
 
@@ -699,7 +605,7 @@ _makenew(Alist *alistp, int enterflag)
 static	Alist string_numbers;	      /* Assoc strings with numbers */
 
 static int
-StringToInt(char *s)
+StringToInt(const char *s)
 {
 	static int uid = 0;
 
@@ -711,8 +617,7 @@ StringToInt(char *s)
 
 /* uncomment this out if anyone ever has to use this function
 static char *
-IntToString(i)
-int i;
+IntToString(int i)
 {
 	Alist a = LookupInt(string_numbers, i, FALSE);
 	if(a == NULL)
@@ -796,9 +701,7 @@ typedef	struct fd_set {
 #define	TIMEVAL_NULL	((struct timeval *) 0)
 
 static	struct timeval	*timeout_interval;
-static	char 		*timeout_retval;
-
-char *bits();
+static	const char 	*timeout_retval;
 
 static
 void GDEVselect(int waitflag)
@@ -900,7 +803,8 @@ GDEVgetchar(void)
 	return GDEVgetc(C_ANY);
 }
 
-int
+#if 0
+static int
 GDEVcharswaiting(void)
 {
 	if( ! cbufempty() )
@@ -912,6 +816,7 @@ GDEVcharswaiting(void)
 		return TRUE;
 	return FALSE;
 }
+#endif
 
 char *
 GDEVgets(char *line)
@@ -974,7 +879,7 @@ GDEVstoprecording(void)
 /* menus */
 
 void
-GDEVmenuitem(char *label, char *retval)
+GDEVmenuitem(const char *label, const char *retval)
 {
 	Alist item, rv;
 	int found = TRUE;
@@ -1010,7 +915,7 @@ void
 GDRVmenu(int w, int retval)
 {
 	Alist rv;
-	struct window *gwin = Gwindow(w, "GDRVmenu");
+	struct window *gwin = GDwindow(w, "GDRVmenu");
 
 	if(gdevdebug)
 		printf("GDRVmenu([win %d] %d)\n", w, retval);
@@ -1046,7 +951,7 @@ void
 GDRVmouse(int w, int event, int x, int y, int thetime)
 {
 	Alist rv;
-	struct window *gwin = Gwindow(w, "GDRVmouse");
+	struct window *gwin = GDwindow(w, "GDRVmouse");
 
 	if(gdevdebug)
 		printf("GDRVmouse([win %d] %s, %d, %d[%d])\n", 
@@ -1105,7 +1010,7 @@ GDEVrefresh_function(int (*fcn)(void))
 void
 GDRVrefresh(int w)
 {
-	struct window *gwin = Gwindow(w, "GDRVrefresh");
+	struct window *gwin = GDwindow(w, "GDRVrefresh");
 
 	/* If we wanted to we could eliminate duplicate refreshes */
 	if(gdevdebug)
@@ -1117,7 +1022,7 @@ GDRVrefresh(int w)
 }
 
 void
-GDEVtimeout(int msec, char *retval)
+GDEVtimeout(int msec, const char *retval)
 {
 	static struct timeval timer;
 	timeout_retval = retval;
@@ -1136,37 +1041,39 @@ GDEVtimeout(int msec, char *retval)
 	int v = StringToInt(variable);  			\
 	Alist a; 						\
 	a = LookupInt(CurOut->dev->variable_functions, v, FALSE);  	\
-	if(a && a->data1.function)					\
-	  return (* a->data1.function)(CurOut->handle, variable,	\
+	if(a && a->data1.function) {					\
+	  (* a->data1.function)(CurOut->handle, variable,		\
 						     value, a->data2);	\
+	  return 0;							\
+	}								\
 	a = LookupInt(CurOut->dev->variable_pointers, v, FALSE);  	\
 	if(a && a->data1.elem)						\
 		(* a->data1.elem) = value; 				\
 	return 0;
 
 int
-GDEVseti(char *variable, int value)
+GDEVseti(const char *variable, int value)
 {
 	GDEVset(intp);
 }
 
 int
-GDEVsetd(char *variable, double value)
+GDEVsetd(const char *variable, double value)
 {
 	GDEVset(doublep);
 }
 
 int
-GDEVsets(char *variable, char *value)
+GDEVsets(const char *variable, const char *value)
 {
 	GDEVset(stringp);
 }
 
 void
-GDRVvar_fcn(int w, char *varname, Function function, Pointer arg)
+GDRVvar_fcn(int w, const char *varname, Function function, Pointer arg)
 {
 	int i = StringToInt(varname);
-	struct window *gwin = Gwindow(w, "GDRVvar_fcn");
+	struct window *gwin = GDwindow(w, "GDRVvar_fcn");
 
 	Alist a = LookupInt(gwin->dev->variable_functions, i, TRUE); 
 	a->tag = i;
@@ -1175,10 +1082,10 @@ GDRVvar_fcn(int w, char *varname, Function function, Pointer arg)
 }
 
 void
-GDRVvar_addr(int w, char *varname, Pointer address)
+GDRVvar_addr(int w, const char *varname, Pointer address)
 {
 	int i = StringToInt(varname);
-	struct window *gwin = Gwindow(w, "GDRVvar_fcn");
+	struct window *gwin = GDwindow(w, "GDRVvar_fcn");
 	Alist a = LookupInt(gwin->dev->variable_pointers, i, TRUE); 
 
 	a->tag = i;
@@ -1186,7 +1093,7 @@ GDRVvar_addr(int w, char *varname, Pointer address)
 }
 
 /*VARARGS1*/
-void GDEVerror(char *a, ...)
+static void GDEVerror(const char *a, ...)
 {
 	va_list ap;
 	va_start(ap, a);
@@ -1214,7 +1121,7 @@ mouse_event(int event)
 
 /*VARARGS2*/
 static char *
-appendf(char *s, char *f, ...)
+appendf(char *s, const char *f, ...)
 {
 	va_list ap;
 	va_start(ap, f);
@@ -1236,7 +1143,7 @@ chr(int r)
 }
 
 static char *
-chrs(char *s)
+chrs(const char *s)
 {
 	static char buf[100];
 	buf[0] = '\0';
@@ -1265,7 +1172,7 @@ GDEV00topleft(void)
 void
 GDRV00topleft(int w)
 {
-	Gwindow(w, "GDRV00topleft")->dev->drv_thinks_y_at_top = TRUE;
+	GDwindow(w, "GDRV00topleft")->dev->drv_thinks_y_at_top = TRUE;
 }
 
 
@@ -1292,7 +1199,7 @@ GDEVcurrenttime(void)
 
 static struct window *savedwindow;
 
-void hardcopy(void)
+static void hardcopy(int sig)
 {
 	if(!hardcopyout || !CurOut) {
 		printf("hardcopy() ignored\n");
@@ -1312,7 +1219,7 @@ void hardcopy(void)
 	}
 }
 
-void hardcopydone(void)
+static void hardcopydone(void)
 {
 	if(inhardcopy) {
 		inhardcopy = FALSE;
@@ -1322,7 +1229,7 @@ void hardcopydone(void)
 	}
 }
 
-void hardcopyinit(void)
+static void hardcopyinit(void)
 {
 	static int called = 0;
 	char *p;

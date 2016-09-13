@@ -37,6 +37,7 @@ the full agreement.
 #include "bitvector.h"
 #include "matrix.h"
 #include "gf.h"
+#include "proto.h"
 
 #define MAXCLASSES 200
 char *classname[MAXCLASSES];

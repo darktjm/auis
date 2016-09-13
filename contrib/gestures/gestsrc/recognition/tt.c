@@ -73,16 +73,22 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include "fv.h"
 #include "args.h"
 #include "zdebug.h"
+#include "proto.h"
 
 char _zdebug_flag[128];
 double kludge[128];
-int nclosest = 0;
+static int nclosest = 0;
 
-GestureFile traingf, evalgf;
-char *trainfilename, *evalfilename;
+static GestureFile traingf, evalgf;
+static char *trainfilename, *evalfilename;
 
-sClassifier sC;
-char *classifierfilename;
+static sClassifier sC;
+static char *classifierfilename;
+
+static void Train(void);
+static void Eval(void);
+static void ArgLoop(int argc, char **argv);
+static void Loop(void);
 
 int main(int argc, char **argv)
 {
@@ -140,7 +146,7 @@ int main(int argc, char **argv)
 	Z('L') Loop();
 }
 
-void Train(void)
+static void Train(void)
 {
 	Gesture g;
 	Gpoint p;
@@ -155,7 +161,7 @@ void Train(void)
 			FvAddPoint(fv, p->x, p->y, p->t);
 		g->y = FvCalc(fv);
 		Z('f') PrintVector(g->y, "%s: ", g->examplename);
-		sAddExample(sC, ClassName(g), g->y, g->examplename);
+		sAddExample(sC, ClassName(g), g->y);
 
 	}
 	sDoneAdding(sC);
@@ -163,7 +169,7 @@ void Train(void)
 	if(nclosest > 0) sDistances(sC, nclosest);
 }
 
-void Eval(void)
+static void Eval(void)
 {
 	Gesture g;
 	Gpoint p;
@@ -209,16 +215,16 @@ void Eval(void)
 		printf("No examples to evaluate!\n");
 }
 
-void ArgLoop(int argc, char **argv)
+static void ArgLoop(int argc, char **argv)
 {
 	ARGLOOP
 		STRINGARG('c')	classifierfilename = p;	ENDSTRINGARG
 		STRINGARG('e')	evalfilename = p;	ENDSTRINGARG
 		STRINGARG('t')	trainfilename = p;	ENDSTRINGARG
 
-		STRINGARG('Z')	while(*p) _zdebug_flag[*p++]++; ENDSTRINGARG
-		STRINGARG('z')	while(*p) _zdebug_flag[*p++]--; ENDSTRINGARG
-		STRINGARG('K')	kludge[*p] = atof(p+1); ENDSTRINGARG
+		STRINGARG('Z')	while(*p) _zdebug_flag[(unsigned char)*p++]++; ENDSTRINGARG
+		STRINGARG('z')	while(*p) _zdebug_flag[(unsigned char)*p++]--; ENDSTRINGARG
+		STRINGARG('K')	kludge[(unsigned char)*p] = atof(p+1); ENDSTRINGARG
 		STRINGARG('C')	nclosest = atoi(p);	ENDSTRINGARG
 			
 		BADARG
@@ -227,7 +233,7 @@ void ArgLoop(int argc, char **argv)
 		ENDBADARG
 	ENDARGLOOP
 
-	{ extern double se_th_rolloff, dist_sq_threshold;
+	{
 	  int i, j, z;
 
 	for(i = z = 0; i < 128; i++) {
@@ -244,7 +250,7 @@ void ArgLoop(int argc, char **argv)
 	}
 }
 
-void Loop(void)
+static void Loop(void)
 {
 	char line[100];
 	char *args[10], argspace[10][50];
@@ -254,7 +260,8 @@ void Loop(void)
 	for(;;) {
 
 		printf("New args: ");
-		gets(line);
+		fgets(line, sizeof(line) - 1, stdin);
+	        line[sizeof(line) - 1] = 0;
 		for(i = 0; i < 10; i++) args[i] = argspace[i];
 		strcpy(args[0], "tt");
 		argc = sscanf(line, "%s %s %s %s %s %s %s %s %s",

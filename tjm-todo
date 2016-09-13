@@ -32,6 +32,11 @@
   if needed (i.e., left is severely cut off).  Also doesn't shift tree down
   for horizontal arrangement, but for some reason it allows moving scrollbar
   into negative area)
+- printing doesn't really work right:
+  - crashes on cleanup (e.g. AndrewProgramming.ez)
+  - wrong ps filename (maybe due to crash on cleanup): .n instead of .ps
+  - TOC is a nasty mess
+  - preview never starts up
 - scrolling fixes:
   - enable scroll wheel
 - fix lack of updates when resizing windows

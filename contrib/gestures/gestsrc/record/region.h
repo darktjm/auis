@@ -44,3 +44,5 @@ the full agreement.
 #define    RIGHT_MOVE		  	012
 #define    RIGHT_UP		  	013
 
+extern void REGIONinit(void);
+extern void REGIONinit2(void);

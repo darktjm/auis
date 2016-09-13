@@ -87,14 +87,8 @@ BEGINCPLUSPLUSPROTOS
 #define ERR_MONITOR 6
 #define ERR_DEBUG 9
 #include <stdarg.h>
-#ifdef __GNUC__
-__attribute__((format(printf,2,3)))
-#endif
-int safefprintf(FILE *fp, const char *control, ...);
-#ifdef __GNUC__
-__attribute__((format(printf,5,6)))
-#endif
-int errprintf(const char *application, int type, const char *log, const char *id, const char *format, ...);
+int PRINTF_LIKE(2,3) safefprintf(FILE *fp, const char *control, ...);
+int PRINTF_LIKE(5,6) errprintf(const char *application, int type, const char *log, const char *id, const char *format, ...);
 int errprintv(const char *application, int type, const char *log, const char *id, const char *format, va_list ap);
 ENDCPLUSPLUSPROTOS
 

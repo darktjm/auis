@@ -1,3 +1,5 @@
+#ifndef _sc_h_
+#define _sc_h_
 /***********************************************************************
 
 sc.h - creates classifiers from feature vectors of examples, as well as
@@ -73,15 +75,17 @@ struct sclassifier {
 	Matrix		invavgcov; /* inverse covariance matrix */
 };
 
-sClassifier	sNewClassifier();
-sClassifier	sRead();		/* FILE *f */
-void		sWrite();		/* FILE *f; sClassifier sc; */
-void	 	sFreeClassifier();	/* sc */
-void		sAddExample();		/* sc, char *classname; Vector y */
-void		sRemoveExample();	/* sc, classname, y */
-void		sDoneAdding();		/* sc */
-sClassDope	sClassify();		/* sc, y */
-sClassDope	sClassifyAD();		/* sc, y, double *ap; double *dp */
-sClassDope	sClassNameLookup();	/* sc, classname */
-double		MahalanobisDistance();	/* Vector v, u; Matrix sigma */
-void sDumpClassifier(sClassifier sc);
+/* sc.c */
+extern sClassifier sNewClassifier(void);
+extern void sFreeClassifier(sClassifier sc);
+extern sClassDope sClassNameLookup(sClassifier sc, char *classname);
+extern void sAddExample(sClassifier sc, char *classname, Vector y);
+extern void sDoneAdding(sClassifier sc);
+extern sClassDope sClassify(sClassifier sc, Vector fv);
+extern sClassDope sClassifyAD(sClassifier sc, Vector fv, double *ap, double *dp);
+extern double MahalanobisDistance(Vector v, Vector u, Matrix sigma);
+extern void sDumpClassifier(sClassifier sc);
+extern void sWrite(FILE *outfile, sClassifier sc);
+extern sClassifier sRead(FILE *infile);
+extern void sDistances(sClassifier sc, int nclosest);
+#endif

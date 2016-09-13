@@ -47,7 +47,8 @@ addfiletype .tif tif
 addfiletype .html htmltext "template=html"
 addfiletype .letter text "template=letter"
 addfiletype .memo text "template=memo"
-
+# for champ
+addfiletype .champ chimp
 
 addmenu textview-insert-inset-here "Media,Equation~1" textview textview noinherit "eq"
 addmenu textview-insert-inset-here "Media,Header/Footer~2" textview textview noinherit "header"

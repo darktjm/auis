@@ -55,6 +55,7 @@ the full agreement.
 	currentcolor  "white" or "black"
  */
 
+#include <andrewos.h>
 #include <stdio.h>
 #include "gdrv.h"
 #include <math.h>
@@ -62,7 +63,7 @@ the full agreement.
 #include <X11/Xutil.h>
 #include <X11/Xos.h>
 #include <stdarg.h>
-
+#include "x11r4.h"
 
 #ifdef BUFFERLINES	/* buffer up lines before calling XDraw, needs -loldX */
 #	include <X11/X10.h>
@@ -84,12 +85,11 @@ the full agreement.
 
 #define MENU_EVENT	MOUSE_EVENT(MIDDLE_BUTTON, DOWN_TRANSITION)
 
-typedef int COORD;
-
-#ifdef __GNUC__
-__attribute__((format(printf,1,2)))
-#endif
-void xerror(char *a, ...);
+struct menubutton;
+static void DoMenu(struct menubutton *mb);
+static void PRINTF_LIKE(1,2) xerror(const char *a, ...);
+static char *X11GetDefault(const char *program, const char *name);
+static void X11updateGC(Gwindow w);
 
 /* statics */
 
@@ -102,7 +102,7 @@ void xerror(char *a, ...);
 
 #define	NVERTEX	10240
 
-int linecalls = 0;
+static int linecalls = 0;
 
 #define	NWINDOWS	10
 static int nwindows = 0;
@@ -115,11 +115,11 @@ static Window root_id;
 static unsigned long black_pixel, white_pixel;
 static XGCValues values_struct;
 
-typedef struct gwindow {
+struct gwindow {
 	Window win;
 	int gdevhandle;
-	char *program;
-	char *font;
+	const char *program;
+	const char *font;
 	COORD height, width;
 	int xcorner, ycorner;
 	/* FontInfo *wfontinfo; */
@@ -130,8 +130,8 @@ typedef struct gwindow {
 	int  thickness;
 	int  xlineshift, ylineshift;
 	int linetype;
-	char *Xgeometry;
-	char *Xdefault;
+	const char *Xgeometry;
+	const char *Xdefault;
 #ifdef BUFFER
 	Vertex *vertex;
 	int curvertex;
@@ -145,16 +145,16 @@ typedef struct gwindow {
 		short	*widths;
 	} alternatefont[NALTERNATEFONTS];
 	GC gc;
-} *Gwindow;
+};
 
 static struct gwindow initialw = {
-	NULL,				/* win */
+	0,				/* win */
 	-1,				/* gdevhandle */
 	"xdev",				/* program */
 	"timrom12b",			/* font */
 	INIT_HEIGHT, INIT_WIDTH,		/* height, width */	
 	INIT_XCORNER, INIT_YCORNER,		/* xcorner, ycorner */
-	/* NULL,				/* wfontinfo */
+	/* NULL, */				/* wfontinfo */
 	ExposureMask | KeyPressMask,	/* inputmask */
 	0,				/* pane */
 	0,				/* currentcolor */
@@ -176,7 +176,7 @@ static void lineflush(Gwindow w);
 static struct gwindow window[NWINDOWS];
 
 static
-void X11currentcolor(Gwindow w, char *var, char *value, char *arg)
+void X11currentcolor(Gwindow w, const char *var, const char *value, const char *arg)
 {
 	lineflush(w);
 	if(DisplayPlanes(display, screen_id) == 1) {	/* monochrome */
@@ -199,7 +199,7 @@ void X11currentcolor(Gwindow w, char *var, char *value, char *arg)
 }
 
 static
-void X11currentfunction(Gwindow w, char *var, char *value, char *arg)
+void X11currentfunction(Gwindow w, const char *var, const char *value, const char *arg)
 {
 	lineflush(w);
 	switch(value[0]) {
@@ -210,7 +210,7 @@ void X11currentfunction(Gwindow w, char *var, char *value, char *arg)
 }
 
 static
-void X11currentlinetype(Gwindow w, char *var, char *value, char *arg)
+void X11currentlinetype(Gwindow w, const char *var, const char *value, const char *arg)
 {
 	lineflush(w);
 	switch(value[0]) {
@@ -224,7 +224,7 @@ void X11currentlinetype(Gwindow w, char *var, char *value, char *arg)
 
 
 static
-X11currentcursor(Gwindow w, char *var, char *value, char *arg)
+X11currentcursor(Gwindow w, const char *var, const char *value, const char *arg)
 {
 	/* printf("cursor = %d\n", value); */
 	XDefineCursor(w->win, (long)value);
@@ -232,7 +232,7 @@ X11currentcursor(Gwindow w, char *var, char *value, char *arg)
 #endif
 
 static
-void X11thickness(Gwindow w, char *var, char *value, char *arg)
+void X11thickness(Gwindow w, const char *var, const char *value, const char *arg)
 {
 	lineflush(w);
 
@@ -243,21 +243,21 @@ void X11thickness(Gwindow w, char *var, char *value, char *arg)
 }
 
 
+#ifdef HUH
 static
-void X11map(Gwindow w, char *var, char *value, char *arg)
+void X11map(Gwindow w, const char *var, const char *value, const char *arg)
 {
 	XMapWindow(display, w->win);
 }
 
 static
-void X11unmap(Gwindow w, char *var, char *value, char *arg)
+void X11unmap(Gwindow w, const char *var, const char *value, const char *arg)
 {
 	XUnmapWindow(display, w->win);
 }
 
-#ifdef HUH
 static int
-X11stringwidth(Gwindow w, char *var, char *value, char *arg)
+X11stringwidth(Gwindow w, const char *var, const char *value, const char *arg)
 {
 	static short _widths[128];
 	short *widths = _widths;
@@ -304,13 +304,13 @@ computewidths(FontInfo *fontinfo, short *widths)
 }
 
 static int
-X11stringheight(Gwindow w, char *var, char *value, char *arg)
+X11stringheight(Gwindow w, const char *var, const char *value, const char *arg)
 {
 	return w->wfontinfo->height;
 }
 
 static
-X11eventstring(Gwindow w, char *var, char *value, char *arg)
+X11eventstring(Gwindow w, const char *var, const char *value, const char *arg)
 {
 	switch(*value) {
 	case 'c': case 'C':
@@ -328,14 +328,14 @@ X11eventstring(Gwindow w, char *var, char *value, char *arg)
 #endif
 
 static
-void X11program(Gwindow w, char *var, char *value, char *arg)
+void X11program(Gwindow w, const char *var, const char *value, char *arg)
 {
 	w->program = value;
 
 	if(w->win) {
 		int argc = 1; char *argv[1];
 		static XSizeHints z;
-		argv[0] = w->program;
+		argv[0] = (char *)w->program; /* not actually modified */
 		z.flags = 0;
 		if(w->xcorner != INIT_XCORNER || w->ycorner != INIT_YCORNER) {
 			z.x = w->xcorner, z.y = w->ycorner;
@@ -351,7 +351,7 @@ void X11program(Gwindow w, char *var, char *value, char *arg)
 }
 
 static
-void X11font(Gwindow w, char *var, char *value, char *arg)
+void X11font(Gwindow w, const char *var, const char *value, const char *arg)
 {
 	w->font = value;
 }
@@ -380,7 +380,7 @@ char *var, *value, *arg;
 
 /* if a text string begins (first char) with value, use current font */
 static
-void X11assignfont(Gwindow w, char *var, char *value, char *arg)
+void X11assignfont(Gwindow w, const char *var, const char *value, const char *arg)
 {
 	struct alternatefont *af =
 		&w->alternatefont[w->nalternatefonts - 1];
@@ -391,13 +391,13 @@ void X11assignfont(Gwindow w, char *var, char *value, char *arg)
 }
 
 static
-void X11Xgeometry(Gwindow w, char *var, char *value, char *arg)
+void X11Xgeometry(Gwindow w, const char *var, const char *value, const char *arg)
 {
 	w->Xgeometry = value;
 }
 
 static
-void X11Xdefault(Gwindow w, char *var, char *value, char *arg)
+void X11Xdefault(Gwindow w, const char *var, const char *value, const char *arg)
 {
 	w->Xdefault = value;
 }
@@ -482,8 +482,8 @@ X11init(int gdevhandle)
 			xerror("could not open display!");
 
 		screen_id = DefaultScreen(display);
-		/* root_id = DefaultRootWindow(display); /* works ! */
-		/* root_id = RootWindowOfScreen(screen_id); /* doesn't work */
+		/* root_id = DefaultRootWindow(display); */ /* works ! */
+		/* root_id = RootWindowOfScreen(screen_id); */ /* doesn't work */
 		root_id = RootWindow(display, screen_id);  /* works! */
 		black_pixel = BlackPixel(display, screen_id);
 		white_pixel = WhitePixel(display, screen_id);
@@ -571,22 +571,15 @@ void X11getsizes(Gwindow w)
 void X11start(Gwindow w)
 {
 	if(w->win == 0) {
-		char *X11GetDefault();
 		int x = w->xcorner, y = w->ycorner;
 		unsigned int width = w->width, height = w->height;
-		int r = 0;
 		if(w->Xgeometry == NULL)
-			w->Xgeometry = X11GetDefault(w->program, "Geometry");
+			w->Xgeometry = X11GetDefault(w->program, (char *)"Geometry");
 		if(w->Xgeometry != NULL)
-			r = XParseGeometry(w->Xgeometry, &x, &y, &width, &height);
+			XParseGeometry(w->Xgeometry, &x, &y, &width, &height);
 /*
    My twm seems to ignore X and Y in CreateSimpleWindow, but I can't figure out
    why.  All I know is that I really hate X.
-*/
-/*
-		printf("'%s' r=%x  x=%d y=%d, width=%d height=%d\n",
-			w->Xgeometry? w->Xgeometry : "NULL", r,
-			x, y, width, height);
 */
 
 		w->win = XCreateSimpleWindow(display, root_id,
@@ -605,7 +598,7 @@ void X11start(Gwindow w)
 		  p = X11GetDefault(w->program, "foreground");
 		  if(p) X11currentcolor(w, "currentcolor",  p, NULL);
 		  p = X11GetDefault(w->program, "thickness");
-		  if(p) X11thickness(w, "thickness", atoi(p), NULL);
+		  if(p) X11thickness(w, "thickness", (void *)atol(p), NULL);
 		}
 
 		w->gc = XCreateGC(display, w->win, 0L, &values_struct);
@@ -773,13 +766,13 @@ void X11rect(Gwindow w, COORD x, COORD y, COORD x2, COORD y2)
 void X11text(Gwindow w, COORD x, COORD y, char *text)
 {
 	int xoff = 0, yoff = -15;
-	struct alternatefont *af;
 
 #ifdef DEBUG
 	printf("text %d %d %s\n", x, y, text);
 #endif
 
 #ifdef HUH
+	struct alternatefont *af;
 	int fid;
 	fid = w->wfontinfo->id;
 	for(af = &w->alternatefont[0];
@@ -870,7 +863,7 @@ void X11menuitem(Gwindow w, char *itemname, int retval, int addflag)
 
 void X11mouseinterest(Gwindow w, int event)
 {
-	int oldmask = w->inputmask;
+	unsigned long oldmask = w->inputmask;
 
 	if(event & DOWN_TRANSITION)
 		w->inputmask |= ButtonPressMask;
@@ -1023,7 +1016,7 @@ static void X11event(XEvent *xe, struct menubutton *menubuttonp)
   else printf("Funny X event %d (0x%x)\n", xe->type, xe->type);
 }
 
-void DoMenu(struct menubutton *mb)
+static void DoMenu(struct menubutton *mb)
 {
 #ifdef HUH
         Gwindow w = X11LookupGwindow(mb->win);
@@ -1081,7 +1074,7 @@ void DoMenu(struct menubutton *mb)
 }
 
 /*VARARGS1*/
-void xerror(char *a, ...)
+static void xerror(const char *a, ...)
 {
 	va_list ap;
 	va_start(ap, a);
@@ -1110,8 +1103,8 @@ void xerror(char *a, ...)
  */
 
 
-char *
-X11GetDefault(char *program, char *name)
+static char *
+X11GetDefault(const char *program, const char *name)
 {
 	char n[200], *r;
 
@@ -1121,12 +1114,12 @@ X11GetDefault(char *program, char *name)
 	return r;
 }
 
-void X11updateGC(Gwindow w)
+static void X11updateGC(Gwindow w)
 {
 	if(w->gc == NULL)	/* window not created yet */
 		return;
 	values_struct.line_width = w->thickness;
-	/* values_struct.line_width = 20;	/* debug */
+	/* values_struct.line_width = 20; */	/* debug */
 	values_struct.line_style = w->linetype;
 	if(w->currentfunction == GXinvert &&
 	   DisplayPlanes(display, screen_id) != 1) {
@@ -1137,7 +1130,7 @@ void X11updateGC(Gwindow w)
 	}
 	else {
 		values_struct.function = w->currentfunction;
-		/* values_struct.function = GXcopy; /* debug */
+		/* values_struct.function = GXcopy; */ /* debug */
 		values_struct.foreground = w->currentcolor;
 		values_struct.background = white_pixel;
 	}

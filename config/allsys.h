@@ -284,6 +284,12 @@ typedef int (*procedure)();
 
 #ifdef __GNUC__
 #define UNUSED __attribute__((__unused__))
+#define PRINTF_LIKE(f,a) __attribute__((__format__(printf,f,a)))
+#define SCANF_LIKE(f,a) __attribute__((__format__(scanf,f,a)))
+#define EXIT_LIKE __attribute__((__noreturn__))
 #else
 #define UNUSED /* UNUSED */
+#define PRINTF_LIKE(f,a)
+#define SCANF_LIKE(f,a)
+#define EXIT_LIKE /* NORETURN */
 #endif

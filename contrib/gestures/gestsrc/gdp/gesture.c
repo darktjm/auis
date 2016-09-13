@@ -45,21 +45,26 @@ the full agreement.
 #include "gdp.h"
 #include <gestures/gdev.h>
 #include <gestures/zdebug.h>
-
+#include "proto.h"
 
 char _zdebug_flag[128];
 
-sClassifier fullclassifier;		/* full recognizer */
-sClassifier doneclassifier;	/* ambigous/unambiguous classifier */
+static sClassifier fullclassifier;		/* full recognizer */
+static sClassifier doneclassifier;	/* ambigous/unambiguous classifier */
 
-extern	int	gdevdebug;
+static int	argc;
+static char 	**argv;
 
-int	argc;
-char 	**argv;
+static void init3(void);
+static int Unambiguous(FV fv);
+static int ClassifyFv(void);
+static void Xat(int x, int y, int eps);
+static int ClassifyVector(Vector y);
+static void Gfake(void);
 
-double	rho = 1.0;
+static double	rho = 1.0;
 
-char *
+static char *
 fetcharg(int c)
 {
 	int i;
@@ -77,8 +82,8 @@ fetcharg(int c)
 	return NULL;
 }
 
-int timeout = 300;
-int eagerness = 0;
+static int timeout = 300;
+static int eagerness = 0;
 
 void GESTUREinit(int ac, char **av)
 {
@@ -106,8 +111,8 @@ void GESTUREinit(int ac, char **av)
 		STRINGARG('p')	rho = atof(p);		ENDSTRINGARG
 		STRINGARG('t')	timeout = atoi(p);	ENDSTRINGARG
 		STRINGARG('e')	eagerness = atoi(p);	ENDSTRINGARG
-		STRINGARG('Z')	while(*p) _zdebug_flag[*p++]++; ENDSTRINGARG
-		STRINGARG('z')	while(*p) _zdebug_flag[*p++]--; ENDSTRINGARG
+		STRINGARG('Z')	while(*p) _zdebug_flag[(unsigned char)*p++]++; ENDSTRINGARG
+		STRINGARG('z')	while(*p) _zdebug_flag[(unsigned char)*p++]--; ENDSTRINGARG
 			
 		BADARG
 			recog_error("Usage: gdp [ -Z flags ] [ -G ] [ -P ] [ -c ]  [ -p rho ] [ -t timeout-in-msec ] [ -e eagerness ] full-classifier-file [stop-classifier-file]");
@@ -136,14 +141,14 @@ void GESTUREinit(int ac, char **av)
 
 static FV fv;
 
-void init3(void)
+static void init3(void)
 {
 	fv = FvAlloc(0);
 }
 
 
 #define	TIMEOUT_CHAR	'T'
-char	timeout_string[] = { TIMEOUT_CHAR, '\0' };
+static const char	timeout_string[] = { TIMEOUT_CHAR, '\0' };
 
 #define	G_NORMAL_CHAR		0
 #define	G_MOUSE_STILL_DOWN	1
@@ -155,7 +160,7 @@ char	timeout_string[] = { TIMEOUT_CHAR, '\0' };
 static	int	Gx, Gy, Gt;	/* first point of gesture */
 static	int	Lx, Ly, Lt = 0;	/* last point of gesture */
 
-int
+static int
 read_gesture(int *chr)
 {
 
@@ -167,7 +172,7 @@ read_gesture(int *chr)
 #define is_escape(c)	((c)=='q' || c=='n' || c==EOF)
 	/* State machine for input */
 
-newgesture:
+/* newgesture: */
 
 	Sreset();
 	GDEVtimeout(0, NULL);
@@ -187,7 +192,7 @@ mouse_down:
 	Lx = x, Ly = y;
 	goto set_time_then_charwait;
 
-charwait_then_set_time:
+/* charwait_then_set_time: */
 	GDEVtimeout(0, NULL);
 	c = GDEVgetchar();
 	GDEVtimeout(timeout, timeout_string);
@@ -248,10 +253,11 @@ classifynow:
 	/* goto charwait_then_set_time; */
 
 escape:
+	*chr = 0; // what??
 	return G_MOUSE_UP; // what??  this is a guess - tjm
 }
 
-int
+static int
 ClassifyFv(void)
 {
 	Vector v;
@@ -260,7 +266,7 @@ ClassifyFv(void)
 	return ClassifyVector(v);
 }
 
-int
+static int
 ClassifyVector(Vector y)
 {
 	sClassDope cd;
@@ -275,7 +281,7 @@ ClassifyVector(Vector y)
 	}
 }
 
-void Xat(int x, int y, int eps)
+static void Xat(int x, int y, int eps)
 {
 	Gline(x-eps, y-eps, x+eps, y+eps);
 	Gline(x-eps, y+eps, x+eps, y-eps);
@@ -294,7 +300,7 @@ GESTUREcharacter(int c)
 static int peek[NPEEK];
 static int npeek = 0;
 
-int Gpop(void)
+static int Gpop(void)
 {
 	int i, r;
 
@@ -380,7 +386,7 @@ GgetXYT(int *xp, int *yp, int *tp)
 		GDEVgetXYT(xp, yp, tp);
 }
 
-void Gfake(void)
+static void Gfake(void)
 {
 	/* if(Gfaking) recog_error("Gfaking"); */
 	Gfaking = 1;
@@ -388,7 +394,7 @@ void Gfake(void)
 
 /*----------------------------------------------------------------------*/
 
-int Unambiguous(FV fv)
+static int Unambiguous(FV fv)
 {
 	Vector y;
 	sClassDope cd;

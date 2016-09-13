@@ -84,37 +84,9 @@
 	ThreshHold 85)
 
 @Instrument(
-	Function VicePersonal,
-	DisplayType SignalTrouble,
-	ThreshHold 95)
-
-@Instrument(
-	Function VicePartition,
-	DisplayType SignalTrouble,
-	ThreshHold 99)
-
-@Instrument(
 	Function Errors,
 	DisplayType LogError,
 	Text "*")
-
-@Instrument(
-	Function MarinerFetch,
-	DisplayType Indicator,
-	Xmin 91, Xmax 100, Ymin 16, Ymax 39,
-	IconFont "con10",
-	Icon "I",
-	HighlightInvertMin 1,
-	HighlightInvertMax 9999,
-	NoBlank)
-
-@Instrument(
-	Function MarinerFetch,
-	DisplayType Indicator,
-	Xmin 91, Xmax 100, Ymin 39, Ymax 53,
-	ThreshHold 1,
-	HighlightInvertMin 1,
-	HighlightInvertMax 9999)
 
 @Instrument(
 	Function Mail,

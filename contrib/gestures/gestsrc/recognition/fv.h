@@ -1,3 +1,5 @@
+#ifndef _fv_h_
+#define _fv_h_
 /***********************************************************************
 
 fv.h - Creates a feature vector, useful for gesture classification,
@@ -156,3 +158,4 @@ struct fv {
 	Vector		y;		/* Actual feature vector */
 };
 
+#endif

@@ -51,12 +51,12 @@ REGIONinit(void)
 	GDEVsets("program", "gsink");
 }
 
+#if 0
 /* char	*template = "out.%d.rec"; */
-char	*template = NULL;
-char	name[100];
-int	current = 1;
+static char	*template = NULL;
+static int	current = 1;
 
-void
+static void
 setrecordfile(char *filename)
 {
 	char *p, *endp;
@@ -88,6 +88,7 @@ setrecordfile(char *filename)
 
 	template = fname;
 }
+#endif
 
 void
 REGIONinit2(void)

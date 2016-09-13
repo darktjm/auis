@@ -62,18 +62,9 @@ the full agreement.
 
 void	*recog_myalloc(int nitems, int itemsize, const char *typename);	/* Do not call this function directly */
 char *recog_scopy(const char *s);
-#ifdef __GNUC__
-__attribute__((format(printf,1,2)))
-#endif
-void	recog_debug(const char *a, ...);	/* printf on stderr -
+void PRINTF_LIKE(1,2) recog_debug(const char *a, ...);	/* printf on stderr -
 			   setting DebugFlag = 0 turns off debugging */
-#ifdef __GNUC__
-__attribute__((format(printf,1,2),noreturn))
-#endif
-void	recog_error(const char *a, ...);	/* printf on stderr, then dies */
-#if 0
-int	ucstrcmp();	/* strcmp, upper case = lower case */
-#endif
+void PRINTF_LIKE(1,2) EXIT_LIKE recog_error(const char *a, ...);	/* printf on stderr, then dies */
 char	*recog_tempstring();	/* returns a pointer to space that will reused soon */
 
 /*

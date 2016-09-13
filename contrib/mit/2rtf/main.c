@@ -210,7 +210,7 @@ FILE *FileProcess(const char *prompt, char *filename, const char *mode)
 {
   int accessible, readable, len;
   FILE *fpt;
-  char *filename2, number[20], instruction[TMP_SIZE];
+  char number[20], instruction[TMP_SIZE];
   const char *fullspec;
 
   if(!strcmp(filename, "") && !strcmp(mode, "t"))
@@ -235,7 +235,6 @@ FILE *FileProcess(const char *prompt, char *filename, const char *mode)
 	  if(!ULstrcmp(rindex(filename, '.'), ".ez"))
 	    {
 	      len = roffset(filename, '.');
-	      filename2 = (char *) malloc ((len + 8));
 	      filename[len] = '\0';
 	    }	 
 	}

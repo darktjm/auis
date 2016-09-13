@@ -1,3 +1,5 @@
+#ifndef _matrix_h_
+#define _matrix_h_
 /***********************************************************************
 
 matrix.h - matrix operations
@@ -55,6 +57,8 @@ to doubles (in the case of a Matrix).
 Vectors and matrices are collectively called "arrays" herein.
 */
 
+#include <andrewos.h>
+
 #define HEADER(a)	( ((struct array_header *) a) - 1 )
 
 #define	NDIMS(a)	(HEADER(a)->ndims)
@@ -78,14 +82,8 @@ Vector	NewVector(int r);	/* (number of rows) */
 Matrix	NewMatrix(int r, int c);	/* (number of rows, number of columns) */
 void	FreeVector(Vector v);
 void	FreeMatrix(Matrix m);
-#ifdef __GNUC__
-__attribute__((format(printf,2,3)))
-#endif
-void	PrintVector(Vector v, const char *fmt, ...);
-#ifdef __GNUC__
-__attribute__((format(printf,2,3)))
-#endif
-void	PrintMatrix(Matrix m, const char *fmt, ...);
+void PRINTF_LIKE(2,3) PrintVector(Vector v, const char *fmt, ...);
+void PRINTF_LIKE(2,3) PrintMatrix(Matrix m, const char *fmt, ...);
 double	InnerProduct(Vector v1, Vector v2);
 void	MatrixMultiply(Matrix m1, Matrix m2, Matrix prod);
 void	VectorTimesMatrix(Vector v, Matrix m, Vector prod);
@@ -106,3 +104,4 @@ Matrix  DeSliceMatrix(Matrix m, double fill, BitVector rowmask, BitVector colmas
 void	ZeroMatrix(Matrix m);
 void	FillMatrix(Matrix m, double fill);
 void	ZeroVector(Vector v);
+#endif

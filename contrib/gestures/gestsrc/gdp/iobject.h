@@ -47,34 +47,29 @@ struct object {
 	char		highlight;
 };
 
-void	Erase(), Draw();
-void	EraseOn(), EraseOff();
+extern void Erase(Object o);
+extern void Draw(Object o);
+extern void LineDraw(Object o);
+extern void LineTransform(Object o, Transformation t);
+extern void RectDraw(Object o);
+extern void RectTransform(Object o, Transformation t);
+extern void TextDraw(Object o);
+extern void TextTransform(Object o, Transformation t);
+extern void CircleDraw(Object o);
+extern void CircleTransform(Object o, Transformation t);
+extern int LineDistance(Object o, int x, int y);
+extern int RectDistance(Object o, int x, int y);
+extern int TextDistance(Object o, int x, int y);
+extern int CircleDistance(Object o, int x, int y);
+extern void SetDraw(Object o);
+extern void SetTransform(Object o, Transformation t);
+extern int SetDistance(Object o, int x, int y);
 
-void	LineDraw();
-void	LineTransform();
-int	LineDistance();
-
-void	RectDraw();
-void	RectTransform();
-int	RectDistance();
-
-void	TextDraw();
-void	TextTransform();
-int	TextDistance();
-
-void	CircleDraw();
-void	CircleTransform();
-int	CircleDistance();
-
-void	SetDraw();
-void	SetTransform();
-int	SetDistance();
-
-Bool	AlwaysOK(), AlwaysBad(), VlinePoint();
+Bool	AlwaysOK(void), AlwaysBad(void), VlinePoint(Object o, int which);
 
 extern struct dope {
 	ObjectType	type;
-	char		*name;
+	const char	*name;
 	int		npoints;
 	Bool		(*point)();
 	void		(*draw)();

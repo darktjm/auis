@@ -1,3 +1,5 @@
+#ifndef _bitvector_h_
+#define _bitvector_h_
 /***********************************************************************
 
 bitvector.h - some macros for dealing with bitvectors
@@ -233,11 +235,15 @@ typedef int BV_TYPE_NAME[1];
 #define	AND(v, v1, v2) ( BitVectorAnd((v), (v1), (v2), INTS_PER_VECTOR) )
 #define	NO_BITS_SET(v)	( BitVectorNoBitsSet( (v), INTS_PER_VECTOR ) )
 
-int bitcount();	/* max, bv */
-char *BitVectorToString(); /* max, bv */
-void StringToBitVector(); /* string, max, bv */
-int BitVectorDeQ();	  /* element = BitVectorDeQ(max, bv); */
-
-int *BitVectorOr();
-int *BitVectorAnd();
-int BitVectorNoBitsSet();
+/* bitvector.c */
+extern int bitcount(int max, BitVector bv);
+extern char *BitVectorToString(int max, BitVector bv);
+extern void StringToBitVector(char *string, int max, BitVector bv);
+extern void SetBitVector(BitVector v);
+extern void ClearBitVector(int nints, BitVector v);
+extern void AssignBitVector(int nints, BitVector v1, BitVector v2);
+extern int BitVectorDeQ(int max, BitVector v);
+extern int *BitVectorOr(int *v, int *v1, int *v2, int ipv);
+extern int *BitVectorAnd(int *v, int *v1, int *v2, int ipv);
+extern int BitVectorNoBitsSet(int *v, int ipv);
+#endif

@@ -5796,6 +5796,11 @@ Sets the default display for the applications windows.  The syntax shown
 here (host:0.0) is for X, other window systems may use other formats.
 
 
+-fl
+
+Force loading of init files even if some errors occur.
+
+
 -fg foregroundcolor
 
 Sets the default foreground color.

@@ -47,9 +47,9 @@ struct dll
 	DllElement	next;
 	DllElement	prev;
 	union {
-		char	c[sizeof(int)];
+		char	c[sizeof(long)];
 		int	datasize;
-		char	*p;
+		void	*p;
 	} u;
 };
 
@@ -58,6 +58,7 @@ struct dll
 #define	DLL_NEXT(h, d)		((d)->next)
 #define	DLL_PREV(h, d)		((d)->prev)
 #define	DLL_DATA(type, h, d)	(* (type *) (d)->u.c)
+#define	DLL_PTR(type, h, d)	((type) (d)->u.p)
 #define	DLL_END(h, d)		((h) == (d))
 
 #define	DLL_EMPTY(h)		((h)->next == (h))
@@ -72,7 +73,7 @@ DllNull(int datasize)
 	return h;
 }
 
-void
+static void
 DllInsertElement(Dll h, DllElement d)
 {
 	d->next = h;
@@ -202,7 +203,7 @@ DeleteElement(Set s, Element e)
 	lr.u.operand = e;
 	DllInsertData(s->log, (Pointer) &lr);
 	if(s->when_deleted)
-		(*s->when_deleted)(s, e, DLL_DATA(Pointer, s->set, e));
+		(*s->when_deleted)(s, e, DLL_PTR(Pointer, s->set, e));
 }
 
 void
@@ -214,7 +215,7 @@ DumpSet(Set s, void (*pf)(Pointer))
 	printf("set: { ");
 	for(d = DLL_FIRST(s->set); ! DLL_END(s->set, d);
 		d = DLL_NEXT(s->set, d))
-			(*pf)(DLL_DATA(Pointer, s->set, d)), printf(" ");
+			(*pf)(DLL_PTR(Pointer, s->set, d)), printf(" ");
 	printf("}\n");
 
 	printf("log: {\n");
@@ -224,12 +225,12 @@ DumpSet(Set s, void (*pf)(Pointer))
 			switch(lr->operation) {
 			case OP_INSERT:
 				printf("	Insert ");
-				(*pf)(DLL_DATA(Pointer, s->set, lr->u.operand));
+				(*pf)(DLL_PTR(Pointer, s->set, lr->u.operand));
 				printf("\n");
 				break;
 			case OP_DELETE:
 				printf("	Delete ");
-				(*pf)(DLL_DATA(Pointer, s->set, lr->u.operand));
+				(*pf)(DLL_PTR(Pointer, s->set, lr->u.operand));
 				printf("\n");
 				break;
 			case OP_CHECKPOINT:
@@ -254,7 +255,7 @@ CheckpointSetGroup(Set groupleader)
 	lr.u.version = groupleader->v++;
 	for(d = DLL_FIRST(groupleader->group); ! DLL_END(groupleader->group, d);
 	     d = DLL_NEXT(groupleader->group, d))
-		DllInsertData(DLL_DATA(Set, groupleader->group, d)->log,
+		DllInsertData(DLL_PTR(Set, groupleader->group, d)->log,
 				(Pointer) &lr);
 	return lr.u.version;
 }
@@ -275,7 +276,7 @@ UndoSetGroup(Set groupleader, VersionNumber v)
 
 	for(d = DLL_FIRST(groupleader->group); ! DLL_END(groupleader->group, d);
 	    d = DLL_NEXT(groupleader->group, d))
-		UndoSet(DLL_DATA(Set, groupleader->group, d), v);
+		UndoSet(DLL_PTR(Set, groupleader->group, d), v);
 }
 
 static
@@ -294,7 +295,7 @@ UndoSet(Set s, VersionNumber v)
 				break;
 
 			case OP_DELETE:
-				AddElement(s, DLL_DATA(Pointer, s->set,
+				AddElement(s, DLL_PTR(Pointer, s->set,
 					lr->u.operand) );
 				break;
 
@@ -315,7 +316,7 @@ Map(Set s, void (*fp)(DllElement, Pointer), Pointer arg)
 
 	for(d = DLL_FIRST(s->set); ! DLL_END(s->set, d);
 		d = DLL_NEXT(s->set, d))
-			(*fp)(DLL_DATA(Pointer, s->set, d), arg);
+			(*fp)(DLL_PTR(DllElement, s->set, d), arg);
 }
 
 void
@@ -332,7 +333,7 @@ MapE(Set s, void (*fp)(DllElement, Pointer), Pointer arg)
 Pointer
 ElementPointer(Element e)
 {
-	return DLL_DATA(Pointer, (Set) NULL, e);
+	return DLL_PTR(Pointer, (Set) NULL, e);
 }
 
 Element

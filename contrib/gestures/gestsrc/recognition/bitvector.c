@@ -139,7 +139,7 @@ BitVectorAnd(int *v, int *v1, int *v2, int ipv)
 }
 
 int
-BitVectorNoBitsSet(int *v, int *ipv)
+BitVectorNoBitsSet(int *v, int ipv)
 {
 	do
 		if(*v++) return 0;

@@ -248,10 +248,7 @@ static struct stylemap *LatestEndMap = NULL;
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 boolean ReadScribeFromFileToDoc(FILE  *f , class text  *doc , int  pos , void  (*errhandler)(long, char *));
-#ifdef __GNUC__
-__attribute__((format(printf,1,2)))
-#endif
-static void Error(const char *, ...);
+static PRINTF_LIKE(1,2) void Error(const char *, ...);
 static void InitCharType ();
 static char * CollectWord(int  *len );
 static int IsReserved (char *word );
