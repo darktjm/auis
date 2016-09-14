@@ -41,7 +41,7 @@ InstallOptionalATKLibrary(ezprint, $(DESTDIR)/lib/atk)
 
 InstallClassFiles($(HFILES))
 
-InstallFileToFile(prscribe.csh,${INSTPROGFLAGS},${DESTDIR}/bin/printscribe)
+InstallFileToFile(prscribe.sh,${INSTPROGFLAGS},${DESTDIR}/bin/printscribe)
 
 DependTarget()
 

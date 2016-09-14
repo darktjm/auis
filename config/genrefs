@@ -1,16 +1,15 @@
-#!/bin/csh -f
+#!/bin/sh
 # limitations:  assumes that this library will contain only the
 # references and definitions included in the specified .o files.
 # the libraries specified are only used by genstatl to generate
 # an appropriate link line. (ATK libraries may be omitted.)
-set nm = $1
-set libname = $2
-set basedir = $3
-set objs = ($4)
-set libs = ($5)
-echo $libs>$libname.lt
-if ($status != 0) then
+nm="$1"
+libname="$2"
+basedir="$3"
+objs=($4)
+libs=($5)
+if ! echo $libs>$libname.lt; then
 	echo "genrefs: Couldn't store library dependency list."
-	exit(-1)
-endif
+	exit 1
+fi
 exec $nm $objs |awk -f $basedir/etc/gen.awk>$libname.rf

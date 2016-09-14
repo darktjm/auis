@@ -859,16 +859,6 @@ install.time:: files							@@\
 		$(INSTALL) mode $$i dest/$$c ) done) 
 
 #ifdef SCOunix 
-#define InstallCshScript(file, dest)				        @@\
-install.time:: file						        @@\
-	$(RM) /tmp/,file					        @@\
-	/bin/echo \: "\n/bin/csh -f -s csh \$$* << '==EOF=='\nshift" >
-/tmp/,file	@@\
-	cat file >> /tmp/,file						@@\
-	/bin/echo "==EOF==" >> /tmp/,file				@@\
-	$(INSTALL) $(INSTAPROGFLAGS) /tmp/,file dest			@@\
-	$(RM) /tmp/,file 
-
 #define InstallShScript(file, dest)					@@\
 install.time:: file							@@\
 	$(RM) /tmp/file							@@\
@@ -878,9 +868,6 @@ install.time:: file							@@\
 	$(RM) /tmp/,file 
 #else /* SCOunix */ 
 #define InstallShScript(file, dest)					@@\
-InstallFileToFile(file, $(INSTPROGFLAGS), dest) 
-
-#define InstallCshScript(file, dest)					@@\
 InstallFileToFile(file, $(INSTPROGFLAGS), dest) 
 #endif /* SCOunix */ 
 

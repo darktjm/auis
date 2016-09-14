@@ -9,7 +9,7 @@
 \section{What genmake is
 
 }\leftindent{
-Genmake is a  \helptopic{csh}  script that can be used to facilitate 
+Genmake is a script that can be used to facilitate 
 transforming an Imakefile into a Makefile.
 
 }
@@ -97,9 +97,7 @@ Select (highlight) one of the italicized names and choose "Show Help on
 Selected Word" from the pop-up menu to see the help file for:
 
 
-\leftindent{\italic{\helptopic{csh}}
-
-\italic{\helptopic{imake}}
+\leftindent{\italic{\helptopic{imake}}
 
 \italic{\helptopic{make}}}
 

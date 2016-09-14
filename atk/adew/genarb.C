@@ -27,15 +27,8 @@
 
 #include <andrewos.h>
 #include <stdio.h>
-#define CMD_STR "#! /bin/csh -f\n" \
-"if ($?ANDREWDIR) then\n" \
-"exec ez $1  $ANDREWDIR/lib/arbiters/Arb\n" \
-"else\n" \
-"exec ez $1  %s/lib/arbiters/Arb\n" \
-"endif\n"
-
-int main(int  argc, char  *argv[]);
-
+#define CMD_STR "#!/bin/sh\n" \
+                "exec ez \"$@\" \"${ANDREWDIR:-%s}/lib/arbiters/Arb\"\n"
 
 int
 main(int  argc, char  *argv[])

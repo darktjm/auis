@@ -561,7 +561,7 @@ static void startProc(class tmview  *self)
     tm->inpView=self;
 
     if(shell==NULL)
-	shell="/bin/csh";
+	shell="/bin/sh";
 
 #define processExists(pid) (kill(pid,0)!=-1 || errno!=ESRCH)
 

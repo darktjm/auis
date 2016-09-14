@@ -239,9 +239,6 @@ CDEBUGFLAGS=	:hp700_90/system.mcr:
 CDEBUGFLAGS=	:sun4_41/system.mcr:
 
 
-set CFILES=`/bin/ls *.c`	:depend.csh:
-
-
 CFLAGS = $(COMPILERFLAGS) $(CDEBUGFLAGS) $(ALL_INCLUDES) $(ALL_DEFINES)	
 :imake.tmpl:
 
@@ -293,9 +290,6 @@ CPPC = xlC -qlanglvl=extended	:rs_aix3/system.mcr:
 CPPC_DEFINES = $(STD_CPPC_DEFINES) $(DEFINES)	:imake.tmpl:
 
 
-set CPPFILES=`/bin/ls *.C`	:depend.csh:
-
-
 CPPFLAGS = $(COMPILERFLAGS) $(CDEBUGFLAGS) $(CPPINCLUDES) $(ALL_INCLUDES) 
 $(CPPC_DEFINES)	:imake.tmpl:
 
@@ -305,24 +299,7 @@ CRT0PATH = /lib/crt0.o	:allsys.mcr:
 CRT0PATH = /usr/cs/lib/crt0.o	:allsys.mcr:
 
 
-CSHELL = /bin/csh	:allsys.mcr:
-
-
-set DEFINES=" "	:depend.csh:
-
-set DEFINES="$3"	:depend.csh:
-
-
-set DEPEND=$1	:depend.csh:
-
-
-set DEPENDS=.depends	:depend.csh:
-
-
-set C_DEPENDS=/tmp/Dep2_$$	:depend.csh:
-
-
-DEPENDSCRIPT = $(TOP)/config/depend.csh	:allsys.mcr:
+DEPENDSCRIPT = $(TOP)/config/depend	:allsys.mcr:
 
 
 DESLIB = $(AFSBASEDIR)/lib/libdes.a	:imake.tmpl:
@@ -419,8 +396,6 @@ Imakefile.lib	:imake.tmpl:
 IMAKE_RUNAPPCMD = $(IMAKE) -Timake.tmpl -I. -I$(IRULESRC) -s Makefile.run 
 -f Imakefile.run	:imake.tmpl:
 
-
-set INCLUDES="$2"	:depend.csh:
 
 INCLUDES =  -I$\{BASEDIR\}/include/atk -I$\{BASEDIR\}/include 
 -I$(AFSBASEDIR)/include -I$\{XINCDIR\}	:allsys.mcr:
@@ -829,9 +804,6 @@ TMPDYNEXT=$(DYNEXT)	:hp700_90/system.mcr:
 TMPDYNEXT=+	:ix86_Linux/system.mcr:
 
 TMPDYNEXT=-	:ix86_Linux/system.mcr:
-
-
-set TMP_MKFILE=/tmp/Dep1_$$	:depend.csh:
 
 
 TOP = TOPDIR	:allsys.mcr:

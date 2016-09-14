@@ -1,4 +1,4 @@
-#!/bin/csh
+#!/bin/sh
 ## ###################################################################### ##
 ##         Copyright IBM Corporation 1988,1991 - All Rights Reserved      ##
 ##        For full copyright information see:'andrew/config/COPYRITE'     ##
@@ -23,28 +23,36 @@
 # 
 #  $
 
-# Usage:  openwin.csh dirname
-#
-echo "converting fonts in $1 to OpenWindows format"
-cd $1
-if ($#argv == 2) then
-	set builder = $2
-else
-	if ( $?OPENWINHOME ) then
-		set builder = $(OPENWINHOME)/bin/bldfamily
-	else
-		if ( -e /usr/openwin/bin ) then
-			set builder = /usr/openwin/bin/bldfamily
-		else
-			set builder = bldfamily
-		endif
-	endif
-endif
 
-if ( -e ../X11fonts/fonts.alias ) then
-	awk '{printf("/%s /%s _FontDirectorySYN\n",$1,$2)}' <../X11fonts/fonts.alias >Synonyms.list
-endif
+################################################
+if [ $# -lt 2 -o $# -gt 3 ]; then
+	echo 'usage: depends ${DEPEND} ${INCLUDES} [${DEFINES}]'
+	exit 1
+fi
+################################################
+DEPEND="$1"
+INCLUDES="$2"
+DEFINES="${3}"
 
-${builder} -f 200
-echo "Done converting to OpenWindows font format."
-exit(0)
+################################################
+any=
+for x in *.[cC]; do
+  case "$x" in
+     '*.[cC]')
+	echo "No Dependencies to Check...continuing...."
+	exit 0 ;;
+  esac
+  break
+done
+################################################
+C_DEPENDS=/tmp/Dep2_$$
+DEPENDS=.depends
+trap "rm -f $C_DEPENDS ${C_DEPENDS}.bak" 0
+################################################
+mv Makefile Makefile.BAK
+sed -n -e '1,/##### DEPENDENCY LINE - DO NOT DELETE #####/p' Makefile.BAK > Makefile
+################################################
+>${C_DEPENDS}
+${DEPEND} -s "##### DEPENDENCY LINE - DO NOT DELETE #####" -- ${DEFINES} -- ${INCLUDES} -f ${C_DEPENDS} *.[cC]
+
+sed -e 's/##### DEPENDENCY LINE - DO NOT DELETE #####//g' ${C_DEPENDS} >> Makefile

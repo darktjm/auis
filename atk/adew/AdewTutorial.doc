@@ -630,36 +630,36 @@ The following will walk you through the creation of a dynamic object.
  Before you begin there is one important step.  By default, EZ will only 
 load dynamic objects from the system directory.  You have to tell it to 
 load objects from one of your own directories if that is what you plan to 
-do (and it is).  To set this up place the following in your ~/.cshrc:
+do (and it is).  To set this up place the following in your ~/.profile:
 
 
-if  ($?CLASSPATH) then \
+if [ -n "$CLASSPATH" ]; then \
 
 
-	setenv CLASSPATH $\{CLASSPATH\}:. \
+	export CLASSPATH="$\{CLASSPATH\}:." \
 
 
-else if ($?ANDREWDIR) then \
+elif [ -n "$ANDREWDIR" ]; then \
 
 
-	setenv CLASSPATH $\{ANDREWDIR\}/dlib/atk:. \
+	export CLASSPATH="$\{ANDREWDIR\}/dlib/atk:." \
 
 
 else \
 
 
-	setenv CLASSPATH $ANDREWDIR/dlib/atk:. \
+	export ANDREWDIR=/usr/andrew \
 
 
-	setenv ANDREWDIR /usr/andrew
+	export CLASSPATH="$ANDREWDIR/dlib/atk:."
 
-endif \
+fi \
 
 
 
-Now type "source ~/.cshrc".  Since .cshrc is always executed when the 
-cshell starts up, this only has to be done once.  (This assumes you run the 
-cshell.) \
+Now type ". ~/.profile".  Since .profile is always executed when the 
+shell starts up, this only has to be done once.  (This assumes you run a 
+standard shell.) \
 
 
 
@@ -1260,7 +1260,7 @@ machine type and local configuration:
 
 making dependencies
 
-./../../../andy/config/depend.csh /usr/local/bin/makedepend /usr/amos 
+./../../../andy/config/depend /usr/local/bin/makedepend /usr/amos 
 //usr/include/X11  "hc" /usr/amos/bin/class "-I.  -I/usr/amos/include/atk 
 -I/usr/amos/include -I//usr/include/X11"
 

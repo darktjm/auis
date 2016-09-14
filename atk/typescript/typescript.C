@@ -419,7 +419,7 @@ AnounceDeath(class typescript  *self)
     const char *shell = environ::Get("SHELL");
 
     if(shell == NULL) 
-	shell = "/bin/csh";
+	shell = "/bin/sh";
     if(ISPIPESCRIPT(self)) {
 	sprintf(buf, "EOF on pipe");
 	message::DisplayString(self, 15, buf);
@@ -1343,7 +1343,7 @@ typescript::typescript()
 	if (shell)
 	    DefaultArgList[0] = shell;
 	else
-	    DefaultArgList[0] = "/bin/csh";
+	    DefaultArgList[0] = "/bin/sh";
 	arglist = DefaultArgList;
     }
     this->ChopLines = TRUE;

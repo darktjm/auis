@@ -159,12 +159,12 @@ So far, what I've done is:
     with all the ness or view every part of every document, so I'm
     continuing to find and fix issues as I do that.
 
-  - Cleaned up warnings in everything remaining after the big deletes,
-    except for atk/console, contrib/gestures, and contrib/tm.  Note
-    that the main thing that made most things work was printf/scanf
-    warning removal, as most of the code assumed sizeof(int) ==
-    sizeof(long) == sizeof(void *).  Some such assumptions still exist,
-    and require manual location and removal.
+  - Cleaned up warnings in everything remaining after the big
+    deletes, except for atk/console and contrib/tm.  Note that the
+    main thing that made most things work was printf/scanf warning
+    removal, as most of the code assumed sizeof(int) ==
+    sizeof(long) == sizeof(void *) == 4.  Some such assumptions still
+    exist, and require manual location and removal.
 
   - Started on documentation, partly in the form of an org file.  I
     will probably abandon this document eventually and make something
@@ -176,3 +176,19 @@ So far, what I've done is:
 
   - Fixed bugs in bush as well, and made it usable as a dired
     replacement.
+
+  - Removed all uses of csh.  Some systems don't even install csh
+    any more.  Even tcsh is far superceded by zsh and other
+    sh-variants. Note that in a few cases, this means I assume
+    /bin/sh is a POSIX-compliant sh.  Back when I still had access
+    to non-Linux UNIX, this was not the case everywhere, even on
+    systems that had a POSIX sh (e.g. Solaris).  At the time, I
+    detected that situation and re-execed with a POSIX sh. I'm not
+    going to do that here, though, so if you try to run one of
+    these scripts on one of those systems, tough.  At least I
+    avoided the convenience of array variables, which, while
+    suppported in at least three major POSIX-sh variants (ksh,
+    bash, zsh), is not standard, and isn't supported by at least
+    one known POSIX-sh variant (busybox).  I didn't make the scripts
+    any more robust than they already were:  don't use spaces in file
+    names.

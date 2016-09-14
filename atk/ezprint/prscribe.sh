@@ -1,4 +1,4 @@
-#!/bin/csh -f
+#!/bin/sh
 ## ###################################################################### ##
 ##         Copyright IBM Corporation 1988,1991 - All Rights Reserved      ##
 ##        For full copyright information see:'andrew/config/COPYRITE'     ##
@@ -29,19 +29,18 @@
 # Ezprint understands most of the same arguments as printscribe, but the
 #   -d changes to a -z, sigh...
 
-set DELETE=""
-set PASSTHRU=""
+DELETE=""
+PASSTHRU=""
 
-while ($#argv > 0)
-    switch($1)
-	case -d:
-	    set DELETE="-z"
-	    breaksw
-	default:
-	    set PASSTHRU="$PASSTHRU $1"
-	    breaksw
-    endsw
-    shift
-end
+for x; do
+    case "$x" in
+	-d)
+	    DELETE="-z"
+	    ;;
+	*)
+	    PASSTHRU="$PASSTHRU $x"
+	    ;;
+    esac
+done
 
 exec ezprint $DELETE $PASSTHRU

@@ -226,12 +226,11 @@ preferences can have the following:
 \leftindent{\bold{Environment variables.}  A section of a name having the 
 form $XXX will be replaced with the value of the environment variable XXX, 
 if there is one.  (If there isn't one, the $XXX is left intact in the 
-name.)  To set an environment variable in the csh, use the command
+name.)  To set an environment variable in sh, use the command
 
-	setenv XXX value
+	export XXX=value
 
-For other shells, see their documentation.  WARNING:  If XXX is in your 
-environment, You cannot have a file or directory named $XXX.
+For other shells, see their documentation.
 
 
 \bold{Initial /../ } Some systems allow names beginning with /../xxx to 

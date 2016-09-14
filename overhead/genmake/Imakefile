@@ -8,7 +8,7 @@ genmake::  genmake.proto
 	$(RM) genmake
 	$(CP) genmake.proto genmake
 
-InstallCshScript(genmake, $(DESTDIR)/bin/genmake)
+InstallShScript(genmake, $(DESTDIR)/bin/genmake)
 InstallDocs($(DOC), $(DESTDIR)/help)
 
 CleanTarget(genmake)

@@ -26,34 +26,3 @@ install.time:: libatkos.a
 install.time:: atkos.h
 	$(RM) $(DESTDIR)/include/atkos.h
 	cp atkos.h $(DESTDIR)/include/atkos.h
-
-#if defined(hpux)
-#define IHaveSubdirs
-SUBDIRS = hpx
-#else
-#if defined(sys_rt_aix3)
-#define IHaveSubdirs
-SUBDIRS = aix3
-#else
-#if defined(SOLARIS)
-#define IHaveSubdirs
-SUBDIRS = solaris
-#else
-#if defined(sys_telmat)
-#define IHaveSubdirs
-SUBDIRS = telmat
-#else
-#if defined(SCOunix)
-#define IHaveSubdirs
-SUBDIRS = scox
-#else
-#if SY_OS2
-#define IHaveSubdirs
-SUBDIRS = os2
-#endif
-#endif
-#endif
-#endif
-#endif
-#endif
-

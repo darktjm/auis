@@ -27,7 +27,7 @@
 
 
 HELP = console.help lacc.help \
-	laccqr.help cnclass.help ermproc.help \
+	laccqr.help ermproc.help \
 	inpproc.help lgvproc.help erprintf.help
 
 
@@ -38,7 +38,6 @@ InstallHelpAlias(console, consoles)
 InstallHelpAlias(ermproc, errmonf errmonfproc)
 InstallHelpAlias(inpproc, inputproc)
 InstallHelpAlias(lgvproc, logvproc logview)
-InstallHelpAlias(cnclass, conclass)
 InstallHelpAlias(erprintf, errprintf)
 
 InstallDocs (console.doc, ${DESTDIR}/doc/PROGRAMMER)

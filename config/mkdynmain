@@ -1,4 +1,4 @@
-#!/bin/csh -f
+#!/bin/sh
 # Copyright 1994 Carnegie Mellon University All rights reserved.
 #  $Disclaimer: 
 # Permission to use, copy, modify, and distribute this software and its 
@@ -26,39 +26,39 @@
 echo "#include <andrewos.h>"
 echo "#include <ATK.H>"
 
-if "$argv[1]" == "-ctor" then
+if [ "x$1" = "x-ctor" ]; then
 	shift
-	if "$argv[1]" == "-main" then	
+	if [ "x$1" = "x-main" ]; then	
 		shift
-		echo "int main() { ; }"
-	endif
+		echo "int main() { return 0; }"
+	fi
 	echo "class ATKRegisterClass { public:"
 	echo "inline ATKRegisterClass(ATKregistryEntry *reg) {"
 	echo "	ATK::RegisterClass(reg); }"
-	echo "inline ~ATKRegisterClass() { ; }"
+	echo "inline ~ATKRegisterClass() { }"
 	echo "};"
-	foreach name ($argv)
+	for name; do
 		echo "extern ATKregistryEntry ${name}_ATKregistry_;"
 		echo "static ATKRegisterClass ${name}$$_(&${name}_ATKregistry_);"
-	end
+	done
 else
-if "$argv[1]" == "-" then
+if [ "x$1" = "x-" ]; then
 	shift
-	set main = $argv[1]
+	main=$1
 	shift
 else
-	set main = main
-endif
+	main=main
+fi
 
-foreach name ($argv)
+for name; do
 echo "extern ATKregistryEntry ${name}_ATKregistry_;"
-end
+done
 
 echo 'extern "C" '"int $main(int argc, char **argv) {"
-foreach name($argv)
+for name; do
 echo "ATKregister($name);"
-end
+done
 
 echo "return 0;"
 echo "}"
-endif
+fi

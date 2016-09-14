@@ -83,26 +83,26 @@ workstation running the X window system and some window manager.  \
 The ANDREWDIR, CLASSPATH, and PATH environment variables control your 
 access to the AUIS system.  In /afs/cs.cmu.edu, the AUIS binaries are 
 located in the misc/.atk tree.  To utilize AUIS for one login session, type 
-these commands in a csh:
+these commands in a standard shell:
 
-	setenv ANDREWDIR /afs/cs/misc/atk/@sys/omega
+	export ANDREWDIR=/afs/cs/misc/atk/@sys/omega
 
-	setenv CLASSPATH $ANDREWDIR/dlib/atk
+	export CLASSPATH=$ANDREWDIR/dlib/atk
 
-	setenv PATH $ANDREWDIR/bin:$PATH \
+	export PATH=$ANDREWDIR/bin:$PATH \
 
 
 In /afs/andrew.cmu.edu/, the AUIS software is in /usr/local so the first of 
 the above lines should be:
 
-	setenv ANDREWDIR /usr/local
+	export ANDREWDIR=/usr/local
 
 In other environments, the setting of ANDREWDIR may vary;  sometimes it is 
 /usr/andrew.
 
 
 To have AUIS available everytime you log in, add the three lines above to 
-your ~/.cshrc file.
+your ~/.profile file.
 
 
 
@@ -286,10 +286,8 @@ operating system commands.
 
 Commands that you enter in Typescript get passed along to the shell, a 
 program that interprets commands for the operating system.  You do not have 
-to know more about the shell in order to use Typescript.  However, if you 
-would \italic{like} to know more about the shell, you can look at the 
-\bold{\typewriter{csh}} help document.  Typescript can be used as a front 
-end to other programs in addition to the shell.   }\
+to know more about the shell in order to use Typescript.  Typescript can be 
+used as a front end to other programs in addition to the shell.   }\
 
 
 

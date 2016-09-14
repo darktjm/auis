@@ -52,7 +52,7 @@ InstallDynamicObject(note,$(EXTRACLASSES), $(DESTDIR)/lib/atk)
 CPPProgramTarget(ez2ascii, ez2ascii.o, ${UTILLIB}, ${BSDLIB})
 InstallProgram(ez2ascii, ${DESTDIR}/bin)
 
-InstallCshScript(ez2ps, $(DESTDIR)/bin)
+InstallShScript(ez2ps, $(DESTDIR)/bin)
 
 InstallDocs(psinset.help, ${DESTDIR}/help)
 InstallDocs(note.help, ${DESTDIR}/help)

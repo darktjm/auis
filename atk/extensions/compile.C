@@ -199,7 +199,7 @@ static struct process *StartProcess(const char  *command, FILE  **inputFile , FI
 
 	NEWPGRP();
 	
-        execlp("/bin/csh", "csh", "-cf", command, (char *)NULL);
+        execlp("/bin/sh", "sh", "-c", command, (char *)NULL);
         exit(0);
     }
 

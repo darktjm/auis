@@ -79,24 +79,16 @@ InstallFileToFile(allsys.mcr, $(INSTINCFLAGS), $(DESTDIR)/config/allsys.mcr)
 InstallFileToFile(site.mcr, $(INSTINCFLAGS), $(DESTDIR)/config/site.mcr)
 InstallFileToFile(andrew.rls, $(INSTINCFLAGS), $(DESTDIR)/config/andrew.rls)
 InstallFileToFile(site.rls, $(INSTINCFLAGS), $(DESTDIR)/config/site.rls)
-InstallCshScript(depend.csh, $(DESTDIR)/config/depend.csh)
-InstallCshScript(loginstall, $(DESTDIR)/config/loginstall)
-#if SY_OS2
-InstallShScript(mkdynmain.sh, $(DESTDIR)/etc)
-#else
-InstallCshScript(mkdynmain, $(DESTDIR)/etc)
-#endif
+InstallShScript(depend, $(DESTDIR)/config/depend)
+InstallShScript(loginstall, $(DESTDIR)/config/loginstall)
+InstallShScript(mkdynmain, $(DESTDIR)/etc)
 InstallFileToFile(COPYRITE, $(INSTINCFLAGS), $(DESTDIR)/config/COPYRITE)
 InstallFileToFile(COPYRITE.bls, $(INSTINCFLAGS), $(DESTDIR)/config/COPYRITE.bls)
 InstallFileToFile(COPYRITE.att, $(INSTINCFLAGS), $(DESTDIR)/config/COPYRITE.att)
 InstallFileToFile(COPYRITE.img, $(INSTINCFLAGS), $(DESTDIR)/config/COPYRITE.img)
 
-#if SY_OS2
-InstallFileToFile(mkatklib.sh, $(INSTPROGFLAGS), $(DESTDIR)/etc)
-#else
 InstallFileToFile(mkatklib, $(INSTPROGFLAGS), $(DESTDIR)/etc)
-#endif
-InstallCshScript(genrefs, $(DESTDIR)/etc)
+InstallShScript(genrefs, $(DESTDIR)/etc)
 InstallFileToFile(gen.awk, $(INSTINCFLAGS), $(DESTDIR)/etc)
 
 SUBDIRS = $(SYS_CONFDIR)

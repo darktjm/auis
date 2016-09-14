@@ -216,16 +216,16 @@ as listed below.  They can be transferred and expanded individually.  The
 first two alone install a viable Andrew system.
 
 
-The following commands to csh will extract the sources from the tar.gz 
+The following commands to sh will extract the sources from the tar.gz 
 files:
 
 
-	\typewriter{% foreach f (auis1 auis2 auis3 auis4 contrib doc)
+	\typewriter{> for f in auis1 auis2 auis3 auis4 contrib doc; do
 
-	? gunzip < $f.tar.gz | tar -xvf - \
+	 gzip -dc $f.tar.gz | tar -xvf - \
 
 
-	? end}
+	 done}
 
 
 (gunzip is available from the Free Software Foundation,  ftp to 
