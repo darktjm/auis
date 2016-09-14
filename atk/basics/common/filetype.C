@@ -373,7 +373,7 @@ char *filetype::Lookup(FILE  *file, const char  *filename, long  *objectID, stru
 		else if (strstr(shellname, "rexx"))
 		    targetObject= "rexxtext";
 		else if (strstr(shellname, "sh")) {
-		    /* use asmtext with static attribute to recognize comment delimiters, for ksh, csh, bsh, etc */
+		    /* use asmtext with static attribute to recognize comment delimiters, for ksh, zsh, bsh, etc */
 		    /* note that this will be freed, since it's newAttributes */
 		    static struct attributes shellcommentdelimatt;
 		    shellcommentdelimatt.key= "bang-comment";
@@ -381,7 +381,7 @@ char *filetype::Lookup(FILE  *file, const char  *filename, long  *objectID, stru
 		    shellcommentdelimatt.next= newAttributes;
 		    newAttributes= &shellcommentdelimatt;
 		    targetObject= "asmtext";
-		    /*XXX- eventually, write a csh and ksh and bsh source view, and use those dataobjects instead */
+		    /*XXX- eventually, write a zsh and ksh and bsh source view, and use those dataobjects instead */
 		}
 		break; }
 	    case 'G': { /* "GIF87" or "GIF89"? */

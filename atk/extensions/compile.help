@@ -104,7 +104,7 @@ the following command at the prompt:
 \example{egrep -n foo_Bletch *.c
 
 }
-Since the command is processed by /bin/csh before processing, the wildcards 
+Since the command is processed by /bin/sh before processing, the wildcards 
 will be expanded appropriately. Another useful idiom is to prefix the command 
 with a cd to execute in another directory:
 

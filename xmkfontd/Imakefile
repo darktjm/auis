@@ -27,42 +27,12 @@
 
 #ifndef NO_FONTS_ENV
 
-#ifdef FONTS_TO_PCF_ENV
 FONTEXT = .pcf
-#else
-FONTEXT = .snf
-#endif
 
 install.time::
 	${RM} ${DESTDIR}/X11fonts/fonts.dir
 	${XMKFONTDIR} $(DESTDIR)/X11fonts
 
-#if SY_AIX221
-install.time::
-	./aixrt.csh ${DESTDIR}/X11fonts .rtx
-#else /* SY_AIX221 */
-
-#ifdef ISO80_FONTS_ENV
 InstallFileToFile(non-auis.alias,${INSTINCFLAGS},${DESTDIR}/X11fonts/fonts.alias)
-#else  /* ISO80_FONTS_ENV */
-install.time::
-	./mkfntdir.csh ${DESTDIR}/X11fonts $(FONTEXT)
-
-#ifdef SCOunix
-install.time::
-	awk -e '{ print $$2 "	" $$1 }' < ${DESTDIR}/X11fonts/fonts.alias > /tmp/fonts.alias
-	mv /tmp/fonts.alias ${DESTDIR}/X11fonts/fonts.alias
-#endif /* SCOunix */
-
-#endif /* ISO80_FONTS_ENV */
-
-#endif /* SY_AIX221 */
-
-#if defined(OPENWINDOWS_ENV)
-install.time::
-	${RM} ${DESTDIR}/Xnewsfonts/Synonyms.list
-	${RM} ${DESTDIR}/Xnewsfonts/Families.list
-	./openwin.csh ${DESTDIR}/Xnewsfonts ${BLDFAMILY}
-#endif /* OPENWINDOWS_ENV */
 
 #endif /* NO_FONTS_ENV */

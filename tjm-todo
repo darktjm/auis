@@ -50,7 +50,6 @@
     - separate docs for C++ API, .atkinit/bind commands, ness, prefs, apps
     - get rid of all that stub documentation
 - general cleanup:
-  - get rid of csh usage for scripts (sh is better)
   - remove all warnings
   - remove externs in c files
   - remove all statics in header files, if possible (gads, help.h is awful)

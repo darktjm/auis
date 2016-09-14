@@ -518,7 +518,7 @@ FileName(char  *path)
   Returns the filename portion of path (i.e.: strips leading
   directories and any extensions--unless the filename begins
   with a '.', in which case it strips the extensions after the 
-  first '.' [so: ".cshrc" and ".cshrc.BAK" maps to ".cshrc"]);
+  first '.' [so: ".zshrc" and ".zshrc.BAK" maps to ".zshrc"]);
   Warning:  destructively modifies the string path!
 */
   char *r, *s;

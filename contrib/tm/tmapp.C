@@ -109,7 +109,7 @@ boolean tmapp::Start()
 	static const char *args[2];
 	args[0]=environ::Get("SHELL");
 	if(args[0]==NULL)
-	    args[0]="/bin/csh";
+	    args[0]="/bin/sh";
 	args[1]=NULL;
 	this->args=args;
     }

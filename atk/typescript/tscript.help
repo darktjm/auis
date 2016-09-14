@@ -18,8 +18,7 @@ operating system commands.
 In most cases, the commands that you enter in Typescript get passed along 
 to the shell, a program that interprets commands for the operating system. 
  You do not have to know more about the shell in order to use Typescript. 
- However, if you would \italic{like} to know more about the shell, you can 
-look at the \italic{\helptopic{csh}} (C-shell) help document.  Typescript 
+  Typescript 
 can be used as a front end to other programs as well, not just the shell. 
   See the Quick Reference section for details.}
 
@@ -394,8 +393,6 @@ Select (highlight) one of the italicized names and choose "Show Help on
 Selected Word" from the pop-up menu to see the help file for:
 
 \leftindent{
-\italic{\helptopic{csh}}   (more about the UNIX c-shell)
-
 \italic{\helptopic{typescript-keys}}   (keybindings for Typescript)
 
 }

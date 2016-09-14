@@ -23,26 +23,36 @@
 # 
 #  $
 
-TOP=$1
-DESTDIR=$2
-INSTALL=$3
-FLAGS="$4 $5 $6"
-FILE=$7
-DEST=$8
-PWD=`pwd | sed -e 's;/afs.*itcobjects/;;'`
 
-$INSTALL $FLAGS $FILE $DEST
-STAT=$?
-if [ $STAT = 0 ]; then
-	if [ -d $DEST ]; then
-		echo "|`date`|$PWD/$FILE|$DEST/$FILE|" | sed -e 's;//;/;g' >> $DESTDIR/doc/InstallLog
-	else
-		echo "|`date`|$PWD/$FILE|$DEST|" >> $DESTDIR/doc/InstallLog
-	fi
+################################################
+if [ $# -lt 2 -o $# -gt 3 ]; then
+	echo 'usage: depends ${DEPEND} ${INCLUDES} [${DEFINES}]'
+	exit 1
 fi
-exit $STAT
+################################################
+DEPEND="$1"
+INCLUDES="$2"
+DEFINES="${3}"
 
+################################################
+any=
+for x in *.[cC]; do
+  case "$x" in
+     '*.[cC]')
+	echo "No Dependencies to Check...continuing...."
+	exit 0 ;;
+  esac
+  break
+done
+################################################
+C_DEPENDS=/tmp/Dep2_$$
+DEPENDS=.depends
+trap "rm -f $C_DEPENDS ${C_DEPENDS}.bak" 0
+################################################
+mv Makefile Makefile.BAK
+sed -n -e '1,/##### DEPENDENCY LINE - DO NOT DELETE #####/p' Makefile.BAK > Makefile
+################################################
+>${C_DEPENDS}
+${DEPEND} -s "##### DEPENDENCY LINE - DO NOT DELETE #####" -- ${DEFINES} -- ${INCLUDES} -f ${C_DEPENDS} *.[cC]
 
-
-
-
+sed -e 's/##### DEPENDENCY LINE - DO NOT DELETE #####//g' ${C_DEPENDS} >> Makefile

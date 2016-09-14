@@ -7,8 +7,8 @@
 \section{What rawtext is
 
 }\leftindent{
-Rawtext was designed for editing files such as \italic{.login}, 
-\italic{.cshrc}, \italic{.ezinit}, \italic{preferences}, and other files 
+Rawtext was designed for editing files such as \italic{.login},
+\italic{.profile}, \italic{.ezinit}, \italic{preferences}, and other files 
 that the operating system expects to be plain, "raw" text, with no style 
 information or ATK datastream tokens (\\begindata, etc) in them.
 
@@ -21,7 +21,7 @@ in \italic{.ezinit} or \italic{global.ezinit} as being "rawtext".  For
 example:
 
 
-	addfiletype .cshrc rawtext
+	addfiletype .profile rawtext
 
 }
 \section{Special keys

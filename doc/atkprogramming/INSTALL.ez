@@ -444,12 +444,6 @@ directory.
 C++ compiler to use.}
 
 
-\bold{CSHELL=}		[Default: /bin/csh] \bold{\
-
-
-}\indent{CSHELL specifies the path to the C shell.
-
-}
 \bold{DESTDIR=}		[Default: $(BASEDIR)] \bold{\
 
 

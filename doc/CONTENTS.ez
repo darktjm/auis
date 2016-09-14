@@ -770,7 +770,7 @@ and ISO Latin-1 input
 \bold{extensions} - many user support packages, include gnu-search and 
 meta-x
 
-\bold{typescript} - a flexible csh window (not TERMCAP)
+\bold{typescript} - a flexible shell window (not TERMCAP)
 
 \bold{apps} - the core application executable
 

@@ -385,17 +385,17 @@ takes a list of class names and looks for the files which the Andrew
 Toolkit  would dynamically load in response to the names.  Each argument is 
 expanded if it is aliased, and searched for along the dynamic class path, 
 \smaller{CLASSPATH}.  Both aliases and path are taken from the user's 
-\italic{.cshrc} file.  The following is the recommended class path for 
-inclusion in a \italic{.cshrc}.: \
+\italic{.profile} file.  The following is the recommended class path for 
+inclusion in a \italic{.profile}.: \
 
 
 
-\programexample{\leftindent{setenv CLASSPATH .:$ANDREWDIR/lib/atk}
+\programexample{\leftindent{export CLASSPATH=".:$ANDREWDIR/lib/atk"}
 
 }
 With this class path, the Andrew Toolkit dynamic object search will look in 
 the \italic{current directory} and in $ANDREWDIR/\italic{lib/atk}.  If you 
-do not have a class path defined in your \italic{.cshrc}, you will probably 
+do not have a class path defined in your \italic{.profile}, you will probably 
 want to define one.  The class path defaults to 
 $ANDREWDIR\italic{/lib/atk}.  \indexi{Class path++Default}
 

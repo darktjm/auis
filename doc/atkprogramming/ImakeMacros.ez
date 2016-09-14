@@ -1072,12 +1072,6 @@ $(DESTDIR)/$(FONTDESTX)}
 \fieldcontent{Installs the sh script \italic{file} into \italic{destdir}.}
 
 
-\subsection{InstallCshScript(file, destdir)}
-
-\fieldcontent{Installs the csh script \italic{file} as \italic{destdir/file}.
-
-}
-
 \section{3.4 Little-Used Installation Rules}
 
 

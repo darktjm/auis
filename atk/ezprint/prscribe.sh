@@ -1,6 +1,9 @@
 #!/bin/sh
-# Copyright 1994 Carnegie Mellon University All rights reserved.
-#  $Disclaimer: 
+## ###################################################################### ##
+##         Copyright IBM Corporation 1988,1991 - All Rights Reserved      ##
+##        For full copyright information see:'andrew/config/COPYRITE'     ##
+## ###################################################################### ##
+# $Disclaimer: 
 # Permission to use, copy, modify, and distribute this software and its 
 # documentation for any purpose and without fee is hereby granted, provided 
 # that the above copyright notice appear in all copies and that both that 
@@ -19,46 +22,25 @@
 # WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 # 
 #  $
-# Output a file defining a main function which registers each
-# of the named classes.
-# usage: mkdynmain class1 class2 etc....
 
-echo "#include <andrewos.h>"
-echo "#include <ATK.H>"
+#
+# Backward compatibility -- a program that acts like the old printscribe,
+#   but calls ezprint to do the real work.
+# Ezprint understands most of the same arguments as printscribe, but the
+#   -d changes to a -z, sigh...
 
-if [ "x$1" = "x-ctor" ]; then
-	shift
-	if [ "x$1" = "x-main" ]; then	
-		shift
-		echo "int main() { return 0; }"
-	fi
-	echo "class ATKRegisterClass { public:"
-	echo "inline ATKRegisterClass(ATKregistryEntry *reg) {"
-	echo "	ATK::RegisterClass(reg); }"
-	echo "inline ~ATKRegisterClass() { }"
-	echo "};"
-	for name; do
-		echo "extern ATKregistryEntry ${name}_ATKregistry_;"
-		echo "static ATKRegisterClass ${name}$$_(&${name}_ATKregistry_);"
-	done
-else
-if [ "x$1" = "x-" ]; then
-	shift
-	main=$1
-	shift
-else
-	main=main
-fi
+DELETE=""
+PASSTHRU=""
 
-for name; do
-echo "extern ATKregistryEntry ${name}_ATKregistry_;"
+for x; do
+    case "$x" in
+	-d)
+	    DELETE="-z"
+	    ;;
+	*)
+	    PASSTHRU="$PASSTHRU $x"
+	    ;;
+    esac
 done
 
-echo 'extern "C" '"int $main(int argc, char **argv) {"
-for name; do
-echo "ATKregister($name);"
-done
-
-echo "return 0;"
-echo "}"
-fi
+exec ezprint $DELETE $PASSTHRU

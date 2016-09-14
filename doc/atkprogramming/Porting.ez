@@ -2107,7 +2107,7 @@ When a dynamic object is loaded (attached to a running process), its
 entrypoint is looked up and called.  This entrypoint is often called main. 
  The main function registers the classes which were  included in the object 
 and causes any constructors for global and static C++ objects to be called. 
- config/mkdynmain is a csh script provided to generate the main function.
+ config/mkdynmain is a script provided to generate the main function.
 
 
 To set up mkdynmain:
@@ -2716,13 +2716,6 @@ check these values:
 
 \bold{
 }\indent{SHELL specifies the path to the Bourne shell.
-
-}
-\bold{CSHELL}		[Default: /bin/csh] \
-
-
-\bold{
-}\indent{CSHELL specifies the path to the C shell.
 
 }
 \bold{CC}			[Default: cc] \

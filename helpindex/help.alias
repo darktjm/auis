@@ -46,7 +46,6 @@ a.out				a
 a.out.5				a
 break				sh
 cfree				malloc
-dirs				csh
 dysize				ctime
 errno				perror
 eval				sh
@@ -75,8 +74,7 @@ set				sh
 setmallocchecklevel		malloc
 setpwnam			getpwent
 shift				sh
-setenv				csh
-shell				csh
+shell				sh
 tell				lseek
 trap				sh
 type				cat

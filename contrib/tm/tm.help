@@ -21,11 +21,9 @@ cbreak modes.
 
 In most cases, the commands that you enter in Tm get passed along to the 
 shell, a program that interprets commands for the UNIX operating system. 
- You do not have to know more about the shell in order to use Tm.  However, 
-if you would \italic{like} to know more about the shell, you can look at 
-the \italic{\helptopic{csh}} (C-shell) help document.  Tm can be used as a 
-front end to other programs as well, not just the shell.   See the Quick 
-Reference section for details.\bold{ }\
+ You do not have to know more about the shell in order to use Tm.  Tm can 
+be used as a front end to other programs as well, not just the shell.   
+See the Quick Reference section for details.\bold{ }\
 
 
 }
@@ -347,11 +345,11 @@ window associated with it disappears.
 
 
 Preferences in tm are prefixed with the name of the application, not "tm". 
- Since the default application is csh, you will probably want to prefix 
-your preferences with "csh."  For instance:
+ Since the default application is your shell, you will probably want to 
+prefix your preferences with your shell name, e.g. "sh."  For instance:
 
 
-\bold{\italic{csh}}\bold{\italic{.shmenu: }}\
+\bold{\italic{zsh}}\bold{\italic{.shmenu: }}\
 
 
 \leftindent{You can reset this preference with the path to your own shell 
@@ -368,9 +366,7 @@ Select (highlight) one of the italicized names and choose "Show Help on
 Selected Word" from the pop-up menu to see the help file for:
 
 \leftindent{
-\italic{\helptopic{csh}}                   (more about the c-shell)
-
-\helptopic{\italic{t}\italic{m-keys}}            (keybindings for tm)
+\helptopic{\italic{tm-keys}}            (keybindings for tm)
 
 \italic{\helptopic{typescript}
 

@@ -73,8 +73,6 @@ DASHL=-L
 #if !SY_OS2
         SHELL = /bin/sh
 #endif
-        CSHELL = /bin/csh
-
         CC = gcc
         CPPC = g++
         LOCALDIR = DEFAULT_LOCALDIR_ENV
@@ -146,7 +144,7 @@ MKDYNMAIN = $(BASEDIR)/etc/mkdynmain
 INCLUDES =  -I${BASEDIR}/include/atk -I${BASEDIR}/include -I${XINCDIR}
 
 
-        DEPENDSCRIPT = $(TOP)/config/depend.csh
+        DEPENDSCRIPT = $(TOP)/config/depend
         IRULESRC = $(TOP)/config
         FDBWM = $(BASEDIR)/bin/fdbwm
         FDBBDF = $(BASEDIR)/bin/fdbbdf

@@ -1,70 +1,61 @@
-#!/bin/csh -f
-set noglob
-set nonomatch
-set archive = yes
-set shared = no
-set result = 0
-set expprog = ()
-if ("$1" == "-as") then
+#!/bin/sh
+set -o noglob
+archive=yes
+shared=no
+result=0
+expprog=
+if [ "x$1" = "x-as" ]; then
 	shift
-	set shared = yes
-else if ("$1" == "-s") then
-		shift
-		set archive = no
-		set shared = yes
-	endif
-endif
+	shared=yes
+elif [ "x$1" = "x-s" ]; then
+	shift
+	archive=no
+	shared=yes
+fi
 
- if("$argv[1]" == "-d") then
-	shift
-	set expprog = ( $argv[1] $expprog)
-	shift
-endif
+if [ "x$1" = "x-d" ]; then
+	expprog="$2"
+	shift 2
+fi
 
-set name = $1
-shift
-set basedir = $1 
-shift
-set linkprefix = "$1"
-shift
-if ($archive == yes) then
+name="$1"
+basedir="$2"
+linkprefix="$3"
+shift 3
+if [ $archive = yes ]; then
 	echo "making archive lib"$name.a	
 	rm -f lib$name.a
-	set list = ()
-	foreach ename ($argv:q)
-	        if ("$ename:e" == "o") then 
-   	             set list = ($ename $list)
-  	      endif
-	end
-	ar clq lib$name.a $list
-	if ($status != 0) then
+	list=  #list=()
+	for ename in "$@"; do
+	      if [ "${ename##*.}" == "o" ]; then 
+   	             list="$ename $list" #list=("$ename" "${list[@]}") 
+  	      fi
+	done
+	#if ! ar clq lib$name.a "${list[@]}"; then
+	if ! ar clq lib$name.a $list; then
 		echo "Couldn't create archive library for $name."
-		set result = -1
-	endif
-	ranlib lib$name.a
-	if ($status != 0) then
+		result=1
+	fi
+	if ! ranlib lib$name.a; then
 		echo "Couldn't ranlib archive library for $name."
-		set result = -1
-	endif
-endif
-if ($shared == yes) then
-	if !(-x $basedir/etc/mkatkshlib) then
+		result=1
+	fi
+fi
+if [ $shared = yes ]; then
+	if [ ! -x $basedir/etc/mkatkshlib ]; then
 		echo "Couldn't find $basedir/etc/mkatkshlib or it wasn't executable."
 		echo "Perhaps ATK or the OS doesn't support shared libraries on this system?"
-		exit -1
-	endif
-	$basedir/etc/mkatkshlib $name $basedir "$linkprefix" $*
-	if ($status != 0) then
+		exit 1
+	fi
+	if ! $basedir/etc/mkatkshlib $name $basedir "$linkprefix" "$@"; then
 		echo "Couldn't create shared library for $name."
-		@ result = $result - 2
-	endif
-endif
-if ($#expprog != 0) then
-	$expprog $name $basedir "$linkprefix" $*
-	if ($status != 0) then
+		result=$((result + 2))
+	fi
+fi
+if [ -n "$expprog" ]; then
+	if ! $expprog $name $basedir "$linkprefix" "$@"; then
 		echo "$expprog failed for $name."
-		@ result = $result - 4
-	endif
-	shift expprog
-endif
+		result=$((result + 4))
+	fi
+fi
 exit $result

@@ -201,8 +201,9 @@ void tags_RebuildTagsFile(class view  *view, long  key)
 
     /*    sprintf(command,"ctags -w -f %s *.c", TagsFile);*/ /* should be able to use -f file */
 
+    strcat(command, ">/dev/console 2>&1");
     if ((pid = osi_vfork()) == 0) { /* in child process */
-        execlp("/bin/csh","csh","-f", "-c",command,">>& /dev/console",(char *)NULL);
+        execlp("/bin/sh","sh","-c",command,(char *)NULL);
 	exit(0);
     }
     im::AddZombieHandler(pid, (im_zombiefptr)tags_finished, (long)view);

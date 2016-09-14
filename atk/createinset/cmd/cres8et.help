@@ -156,10 +156,10 @@ the command line:
 
 4.  In order to utilize the new .do files, you need to tell the dynamic 
 loader where to find them.  This is done with a CLASSPATH; the lines in 
-your ~/.cshrc would look something like this:
+your ~/.profile (or equivalent) would look something like this:
 
 
-	setenv CLASSPATH /usr/me/dest/dlib:/usr/andrew/dlib/atk
+	export CLASSPATH=/usr/me/dest/dlib:/usr/andrew/dlib/atk
 
 
 5.  To get the files installed, the full command would be
