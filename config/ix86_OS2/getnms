@@ -1,2 +1,0 @@
-#! /bin/sh
-find . -name "*.o" -exec /usr/ucb/nm -og '{}' \; | awk '/ T / {print ($0);}'

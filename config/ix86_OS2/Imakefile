@@ -1,6 +1,0 @@
-
-InstallShScript(getnms, $(DESTDIR)/etc)
-InstallFileToFile(mkatkshlib, $(INSTPROGFLAGS), $(DESTDIR)/etc)
-InstallFileToFile(dllalias, $(INSTPROGFLAGS), $(DESTDIR)/etc)
-InstallFileToFile(installdll, $(INSTPROGFLAGS), $(DESTDIR)/etc)
-InstallFileToFile(installapp, $(INSTPROGFLAGS), $(DESTDIR)/etc)
