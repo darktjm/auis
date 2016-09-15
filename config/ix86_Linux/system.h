@@ -534,10 +534,15 @@ ENDCPLUSPLUSPROTOS
 #undef SIGSET_TYPE
 #define SIGSET_TYPE sigset_t
 
+#undef MANDIR
+#define MANDIR "/usr/share/man"
+
 #undef TMACMANFILE
-#define TMACMANFILE "/usr/lib/groff/tmac/tmac.an"
+#define TMACMANFILE "/usr/share/groff/current/tmac/an.tmac"
 #undef TMACPREFIX
-#define TMACPREFIX "/usr/lib/groff/tmac/tmac."
+#define TMACPREFIX "/usr/share/groff/current/tmac/"
+#undef TMACSUFFIX
+#define TMACSUFFIX ".tmac"
 
 #undef FILE_HAS_IO
 #define FILE_HAS_IO(f) ((f)->_IO_read_end - (f)->_IO_read_ptr)

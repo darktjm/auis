@@ -35,6 +35,7 @@ LIBS =  $(UTILLIB)
 
 NormalObjectRule()
 NormalATKRule()
+NormalHelpRule()
 
 DynamicMultiObject(bdffont,bdffontv,bdffont.o bdffontv.o,$(LIBS),,)
 InstallDynamicObject(bdffont,bdffontv,$(FULLATKDLIBDIR))

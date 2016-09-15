@@ -8,5 +8,6 @@ ProgramTarget(scribetext, main.o parse.o misc.o STFunctions.o, ${UTILLIB}, )
 InstallProgram(scribetext, $(DESTDIR)/bin)
 InstallFile(scribe.trans, $(INSTINCFLAGS), $(DESTDIR)/lib)
 InstallDocs(scribetxt.help, $(DESTDIR)/help)
+InstallHelpAlias(scribetxt, scribetext)
 
 DependTarget()

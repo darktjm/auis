@@ -159,6 +159,9 @@
 #undef TMACPREFIX
 #define TMACPREFIX "/usr/lib/tmac/tmac."
 
+#undef TMACSUFFIX
+#define TMACSUFFIX ""
+
 #undef SIGSET_TYPE
 #define SIGSET_TYPE sigset_t
 

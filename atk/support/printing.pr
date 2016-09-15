@@ -41,13 +41,17 @@
 #~type string
 #~views string
 #~help
-These three preferences (PreviewCommand, PSCPrintCommand, and PrintCommand) allow the user to specify what command to run when printing/previewing.  The preview command states what to run when asking to preview a file.  The pscprintcommand is used when asking to print a postscript file, and the printcommand is normally used when asking to print a ditroff output file.  The default values for these preferences vary from site to site.
+These four preferences (PSCPreviewCommand, PreviewCommand, PSCPrintCommand, and PrintCommand) allow the user to specify what command to run when printing/previewing.  The preview command states what to run when asking to preview a file.  The pscprintcommand is used when asking to print a postscript file, and the printcommand is normally used when asking to print a ditroff output file.  The default values for these preferences vary from site to site.
+Note that if you use GNU roff, you are better off using a PostScript previewer, such as gv:
+  grops >/tmp/gps.$$; gv /tmp/gps.$$; rm /tmp/gps.$$
 #~endhelp
-PreviewCommand:
+PSCPreviewCommand: cat >/dev/null; gv /tmp/%s.n
 
-PSCPrintCommand:
+PreviewCommand: xditview -
 
-PrintCommand:
+PSCPrintCommand: lpr
+
+PrintCommand: lpr -n
 
 #~type string
 #~views string
@@ -56,7 +60,7 @@ Specifies a pipeline of formatting programs for producing output for preview or 
 
 Add this preference only when you need to include one of the troff pre-processors (e.g. pic, eqn, tbl) in your formatting pipeline.  Troff, or any one of the troff pre-processors which has a -T switch, should use $PRINTERTYPE to automatically select an output device type appropriate for the printer you have chosen.
 #~endhelp
-formatcommand: troff  -T$PRINTERTYPE /tmp/%s.n |
+formatcommand: eqn -T$PRINTERTYPE /tmp/%s.n  | troff -T$PRINTERTYPE - |
 
 #~shadow
 Printer:

@@ -13,6 +13,7 @@ HELPFILES = ness.help macros.help
  *	ExecuteFromDESTDIR (nessrun present.n $*.d)
  */
 
+NormalHelpRule()
 
 InstallDocs(${DOCFILES}, $(DESTDIR)/doc/PROGRAMMER)
 InstallDocs(${HELPFILES}, $(DESTDIR)/help)

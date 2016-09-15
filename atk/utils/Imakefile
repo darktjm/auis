@@ -33,6 +33,7 @@ LIBS = $(BASEDIR)/lib/libutil.a
 DependTarget()
 NormalObjectRule()
 NormalATKRule()
+NormalHelpRule()
 
 ATKLibrary(atkutils, $(OBJS), $(LIBS), $(BSDLIB),)
 InstallATKLibrary(atkutils, ${DESTDIR}/lib/atk)

@@ -62,10 +62,9 @@ DIRS = $(DESTDIR)  \
 	$(DESTDIR)/doc/ADMINISTRATOR \
 	$(DESTDIR)/doc/DEVELOPER \
 	$(DESTDIR)/doc/PROGRAMMER \
-	$(DESTDIR)/doc/MAIL \
 	$(DESTDIR)/help 
 
-SUBDIRS = ossupport inst config overhead atk $(WWW) $(CONTRIB) $(SITE) $(MEGA) $(MKFONTDIR) $(HELP) doc
+SUBDIRS = ossupport inst config overhead atk $(WWW) $(CONTRIB) $(SITE) $(MEGA) $(MKFONTDIR) doc $(HELP)
 
 depend::
 	@echo 'Checking that BASEDIR is not the location of the source files.'

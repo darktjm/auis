@@ -27,6 +27,7 @@
 
 NormalObjectRule()
 NormalATKRule()
+NormalHelpRule()
 
 DependTarget()
 

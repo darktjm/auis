@@ -32,15 +32,21 @@
   if needed (i.e., left is severely cut off).  Also doesn't shift tree down
   for horizontal arrangement, but for some reason it allows moving scrollbar
   into negative area)
+- org/bush/treev: kb navigation of nodes, printing (outline?)
+- hyperlink: don't update label if label isn't default (or at least
+  allow undo of label change)
 - printing doesn't really work right:
   - crashes on cleanup (e.g. AndrewProgramming.ez)
   - wrong ps filename (maybe due to crash on cleanup): .n instead of .ps
   - TOC is a nasty mess
   - preview never starts up
-- scrolling fixes:
-  - enable scroll wheel
+- enable mouse scroll wheel
+- add help-type hyperlink or other help button of some sort
+  - maybe just make ez's help view help by default
 - fix lack of updates when resizing windows
 - fix contrib/tm to use termios, etc.
+- fix console for modern Linux
+- org doesn't mark entire doc as modified when doc inset is modified
 - tests all apps, all insets, all docs, etc.
   - squash any crashes
   - run valgrind on as much as possible
@@ -96,12 +102,13 @@
   - fix corruption of flags (empty flags become -- eventually)
   - don't always regenerate deps, and clean up dep generation
   - maybe just switch to cmake
-- fix UniquiID() and friends:
+- fix UniqueID() and friends:
   - try not to renumber everything every modification; messes up svn diff
   - try to limit to 32 bits to retain compatibility with older systems
 - pass unknown keys up the view hierarchy (e.g. pgup within inset often fails)
 
 Long-term:
+  - view/adjust styling boundaries (aka view source)?
   - more image::WriteNative overrides (at least 1 full-color lossless)
   - add support for png and/or imagemagick or some other wrapper library
     and make png default instead of gif

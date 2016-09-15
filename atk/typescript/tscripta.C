@@ -152,11 +152,10 @@ boolean typescriptapp::Start()
 	    }
 	}
     }
+    /* note: typescript::typescript closes df */
     this->ss = typescript::Create(this->argv,df,this->filemenu);
     if (ss == NULL)
 	return FALSE;
-    if (df != NULL)
-	fclose(df);
 
     if (this->font != NULL) {
 

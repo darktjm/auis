@@ -32,6 +32,7 @@
 
 
 #include <andrewos.h>
+#include <util.h>
 ATK_IMPL("rofftextapp.H")
 #include <rofftextapp.H>
 #include <text.H>
@@ -76,10 +77,10 @@ static void show_usage(class rofftextapp  *self)
 "	-w: print message about badly formed numbers\n"
 "	-n: pretend to be nroff (default)\n"
 "	-t: pretend to be troff\n"
-"	-m file: read in %sfile as a macro file\n"
+"	-m file: read in %sfile%s as a macro file\n"
 "	-o file: set output file to 'file'.  Default is standard output\n"
 "	- : use standard input as the file input\n"
-"	file: read in these files\n", TMACPREFIX);
+"	file: read in these files\n", TMACPREFIX, TMACSUFFIX);
 }
     
 
@@ -87,7 +88,6 @@ boolean rofftextapp::ParseArgs(int  argc,const char  **argv)
 {
     char temp2[128];
     const char *andrewdir;
-    boolean slash = FALSE;
 
     if(!(this)->application::ParseArgs(argc,argv))
 	return FALSE;
@@ -122,15 +122,11 @@ boolean rofftextapp::ParseArgs(int  argc,const char  **argv)
 		GETARGSTR(temp);
 		switch(*temp) {
 		    case 'm':
-			if((andrewdir = getenv("ANDREWDIR")) == NULL)
-			    andrewdir = "/usr/andrew";
-			else if(andrewdir[strlen(andrewdir) - 1] == '/')
-			    slash = TRUE;
-			sprintf(temp2,"%s%slib/tmac/tmac.%s", andrewdir, 
-				(slash ? "" : "/"), temp);
+		        andrewdir = AndrewDir("/lib/tmac");
+			sprintf(temp2,"%s/tmac.%s", andrewdir, temp);
 			break;
 		    default:
-			sprintf(temp2,"%s%s", TMACPREFIX, temp);
+			sprintf(temp2,"%s%s%s", TMACPREFIX, temp, TMACSUFFIX);
 			break;
 		}
 		this->macrofile = strdup(temp2);

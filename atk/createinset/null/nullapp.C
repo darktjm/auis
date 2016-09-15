@@ -99,8 +99,6 @@ show_usage(class nullapp  *self)
 	boolean 
 nullapp::ParseArgs(int  argc, const char  **argv)
 			{
-	char *name;
-
 	/* application::ParseArgs() passes across the "runapp" and its switches,
 		leaving "nulla" as the first arg. 
 		The following switches are also processed and removed:  
@@ -130,7 +128,7 @@ nullapp::ParseArgs(int  argc, const char  **argv)
 		was set to start debugging */
 
 	if ( ! (this)->GetFork())
-		printf("Args parsed.  dobj @ 0x%lx\n", this->dobj);
+		printf("Args parsed.  dobj @ 0x%p\n", this->dobj);
 
 	return TRUE;
 }
@@ -149,7 +147,6 @@ nullapp::Start()
 			though it is not necessary */
 
 	class buffer *buffer;
-	char tempName[100];
 	class frame *frm;
 	class im *im;
 	class view *v;
@@ -182,7 +179,7 @@ nullapp::Start()
 		else val = dataobject_NOREADERROR;
 
 		if (val != dataobject_NOREADERROR) {
-			fprintf(stderr, "Input file is corrupted (%d): %s\n",
+			fprintf(stderr, "Input file is corrupted (%ld): %s\n",
 					 val, this->inputfile);
 			return FALSE;
 		}
@@ -225,7 +222,7 @@ nullapp::Start()
 	(v)->WantInputFocus( v);
 
 	if ( ! (this)->GetFork())
-		printf("Focussed.  nullv @ 0x%lx  im @ 0x%lx   frame @ 0x%lx\n", 
+		printf("Focussed.  nullv @ 0x%p  im @ 0x%p   frame @ 0x%p\n", 
 				v, im, frm);
 
 	return TRUE;

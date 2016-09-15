@@ -24,6 +24,7 @@ DependTarget()
 
 NormalObjectRule()
 NormalATKRule()
+NormalHelpRule()
 
 InstallLink(runapp,${DESTDIR}/bin/image)
 

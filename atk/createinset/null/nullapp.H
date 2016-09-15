@@ -45,7 +45,7 @@ public:
 	nullapp();
 	virtual ~nullapp();
 
-	char *inputfile;
+	const char *inputfile;
 	class null *dobj;
 };
 

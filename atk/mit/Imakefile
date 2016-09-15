@@ -54,6 +54,8 @@ InstallProgram(ez2ascii, ${DESTDIR}/bin)
 
 InstallShScript(ez2ps, $(DESTDIR)/bin)
 
+NormalHelpRule()
+
 InstallDocs(psinset.help, ${DESTDIR}/help)
 InstallDocs(note.help, ${DESTDIR}/help)
 InstallDocs(ez2ascii.help ez2ps.help, $(DESTDIR)/help)

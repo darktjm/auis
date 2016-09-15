@@ -82,19 +82,14 @@ CONTRIB_HTML = html
 GOFIG = gofig
 #endif
 
-#ifdef MK_PREVIEW
-PREVIEW = preview
-#endif
-
 SUBDIRS = $(ALINK) $(BDFFONT) $(CALC) \
 	$(CHAMP) $(CONTRIB_HTML) $(DEMOS) \
 	$(GESTURES) $(GOFIG) $(MIT) \
-	$(PREVIEW) $(RUNBTN) $(TIME) $(TM) \
-	$(ZIP)
+	$(RUNBTN) $(TIME) $(TM) $(ZIP)
 
 CONTRIBLIBS =  alink bdffont calc champ circlepi clock \
-	gnucompat gofig gtext html lt note preview runbutton sched \
-	termulator timeoday vutils wpeditapp zip
+	gnucompat gofig gtext html lt note runbutton sched \
+	termulator timeoday vutils zip
 
 RegisterLibPackage(contrib,ANDREWDIR, \
 		lib/atk/lib,.$(ATKLIBEXTM),  \

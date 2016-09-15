@@ -36,16 +36,6 @@ copies seven files to it from /usr/andrew/lib/null/, changing file names
 and contents to reflect the chosen inset name.}
 
 
-\section{Warning}
-
-
-\leftindent{The \italic{insetname} should be nine (9) letters or fewer. 
- Although there may be some good psychological reasons for short names, 
-there is a technical reason as well:  a file named \italic{insetname.help 
-} is generated and some systems do not support file names longer than 
-fourteen letters.}
-
-
 \section{Files Installed
 
 }\leftindent{
@@ -62,13 +52,17 @@ creates directory ./\italic{inset} and installs the following files in it:
 
 	Imakefile	  controls the -make- program
 
-	\italic{inset}.ch	  class header file for data object
+	\italic{inset}.H	  class header file for data object
 
-	\italic{inset}.c	  implementation of data object
+	\italic{inset}.C	  implementation of data object
 
-	\italic{inset}v.ch	  class header for view
+	\italic{inset}view.H	  class header for view
 
-	\italic{inset}v.c	  implementation of the view
+	\italic{inset}view.C	  implementation of the view
+
+	\italic{inset}app.H	  class header for standalone app
+
+	\italic{inset}app.C	  implementation of the standalone app
 
 	\italic{inset}vt.c	  test driver for the view
 

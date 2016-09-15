@@ -14,6 +14,7 @@ TestProgramTarget(testmenu, testmenu.o, libcmenu.a $(XLIBDIR)/libX11.a,${SUPLIBS
 
 DependTarget()
 
+NormalHelpRule()
 InstallDocs(cmenu.help, $(DESTDIR)/help)
 InstallDocs(shadows.pr, $(DESTDIR)/lib/prs)
 InstallHelpAlias(cmenu, cmenus)

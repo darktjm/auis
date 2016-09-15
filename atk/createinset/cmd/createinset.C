@@ -283,8 +283,6 @@ int main(int argc, char **argv)
 	}
 	if (insetname == NULL  ||  *insetname == '\0') 
 		usage();
-	if (strlen(insetname) > 9) 
-		printf(" ######## Warning.  Inset name should be 9 or fewer letters.  ########");
 
 	checkerrno("getwd", getwd(cwd) != 0);
 	printf("Create directory %s/%s [n] ? ", cwd, insetname);
