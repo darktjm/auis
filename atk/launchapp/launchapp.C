@@ -98,7 +98,6 @@ static struct buttoninfo { /* pid is modified below */
     {"tour", "Tour of Andrew", DoTour, 0},
     {"ez", "Multimedia editor", DoEz, 0},
     {"help", "On-line documentation reader", DoHelp, 0},
-    {"messages", "Mail, bboard, and news reader", DoMessages, 0},
     {"typescript", "Unix shell interface", DoTypescript, 0},
     {"console", "Machine performance monitor", DoConsole, 0},
     {"bush", "Filesystem browser", DoBush, 0},

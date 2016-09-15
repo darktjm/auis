@@ -36,7 +36,7 @@ PUBLIC void HTFormatInit (HTList * c)
     HTSetPresentation(c,"*/*", 			"open %s", 	NULL, 0.05, 0.0, 0.0); 
 #else
     if (getenv("DISPLAY")) {	/* Must have X11 */
-	HTSetPresentation(c,"application/postscript", "ghostview %s",	NULL, 1.0, 3.0, 0.0);
+	HTSetPresentation(c,"application/postscript", "gv %s",	NULL, 1.0, 3.0, 0.0);
 	HTSetPresentation(c,"image/gif", 		"xv %s",	NULL, 1.0, 3.0, 0.0);
 	HTSetPresentation(c,"image/x-tiff", 	"xv %s",	NULL, 1.0, 3.0, 0.0);
 	HTSetPresentation(c,"image/jpeg", 	"xv %s",	NULL, 1.0, 3.0, 0.0);

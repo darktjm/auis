@@ -33,6 +33,7 @@ OBJS = parser.o
 HFILES = parser.H
 NormalObjectRule()
 NormalATKRule()
+NormalHelpRule()
 
 DynamicMultiObjectWithExports(parser,,$(OBJS),,,)
 InstallDynamicObjectWithExports(parser,, ${FULLATKDLIBDIR})

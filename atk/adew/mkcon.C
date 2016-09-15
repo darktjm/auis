@@ -59,7 +59,7 @@ static const char defstring[] =
 "	the shell script created with -O.\n"
 "-M \n"
 "	Forces the creation of a new Imakefile, even if one already exists.\n"
-"	The old Makefile is moved to Makefile.old\n"
+"	The old Imakefile is moved to Imakefile.old\n"
 "-I \n"
 "	Creates an inset rather than a controller. The callbacks and pointers\n"
 "	will be placed in the view. The -C argument will specify the name of\n"
@@ -638,7 +638,7 @@ int main(int argc, char  *argv[])
 	    if( src != NULL && 
 	       ((f = fopen(sname,"w")) != NULL)){
 		printf("Creating %s shellscript\n",sname);
-		fprintf(f,"runadew");
+		fputs("#!/bin/sh\nrunadew",f);
 		if(title){
 		    fprintf(f," -T\"%s\"",title);
 		}

@@ -143,8 +143,8 @@ static char  debug;      /* This debug switch is toggled with ESC-^D-D */
 	/*	$$$ you could provide a method in this module which sets -debug-
 		Then nullvt.c could call it to set this debug from the -d switch */
 #define DEBUG(s) {if (debug) {printf s ; fflush(stdout);}}
-#define ENTER(r) DEBUG(("Enter %s(0x%lx)\n", Stringize(r), this))
-#define LEAVE(r) DEBUG(("Leave %s(0x%lx)\n", Stringize(r), this))
+#define ENTER(r) DEBUG(("Enter %s(0x%p)\n", Stringize(r), this))
+#define LEAVE(r) DEBUG(("Leave %s(0x%p)\n", Stringize(r), this))
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - *\
  *
@@ -182,8 +182,8 @@ static void
 ComputeArea(class nullview  *self)
 {
 	long minwidth, minheight;
-	char *tail;
-	char *c = "W";
+	const char *tail;
+	const char *c = "W";
 	class graphic *g;
 	class fontdesc *fd;
 	struct FontSummary *FS;
@@ -205,7 +205,7 @@ ComputeArea(class nullview  *self)
 		/* if c is multiple lines, the size must be computed by
 			adding the sizes of each line */
 		while (tail) {
-			char *tend = strchr(tail, '\n');
+			const char *tend = strchr(tail, '\n');
 			long w, h;
 			if (tend) {
 				(fd)->TextSize( g, tail, tend-tail, &w, &h);
@@ -237,7 +237,7 @@ ComputeArea(class nullview  *self)
 
 	self->sizeknown = TRUE;
 
-	DEBUG(("ComputeArea: %d x %d   (cnt: %d)\n", 
+	DEBUG(("ComputeArea: %ld x %ld   (cnt: %ld)\n", 
 			self->DesiredWidth, self->DesiredHeight, cnt));
 }
 
@@ -303,7 +303,7 @@ void RedrawView(class nullview  *self, enum view_UpdateType  type,long left,long
 
 	rectangle_GetRectSize(&r, &left, &top, &width, &height);
 		/* we shamelessly utilize the parameters as locals */
-	DEBUG(("RedrawView(%d) in [%d, %d, %d, %d]\n", type, left, top, width, height));
+	DEBUG(("RedrawView(%d) in [%ld, %ld, %ld, %ld]\n", type, left, top, width, height));
 		/* we have to subtract one from 
 			right and bottom to get inside the rectangle */
 	if (! self->HasInputFocus)  {
@@ -521,7 +521,7 @@ nullview::LoseInputFocus()
 	void 
 nullview::FullUpdate(enum view_UpdateType   type, long   left , long   top , long   width , long   height)
 {
-	DEBUG(("FullUpdate(%d, %d, %d, %d, %d)\n", type, left, top, width, height));
+	DEBUG(("FullUpdate(%d, %ld, %ld, %ld, %ld)\n", type, left, top, width, height));
 	if (type == view_Remove  
 			||  (this)->GetLogicalWidth() == 0 
 			|| (this)->GetLogicalHeight() == 0) {
@@ -545,7 +545,7 @@ nullview::FullUpdate(enum view_UpdateType   type, long   left , long   top , lon
 
 		this->wpattern = (this)->WhitePattern();
 		this->bpattern = (this)->BlackPattern();
-		DEBUG(("Drawable: 0x%lx   White: 0x%lx   Black: 0x%lx\n",
+		DEBUG(("Drawable: 0x%p   White: 0x%p   Black: 0x%p\n",
 			(this)->GetDrawable(), 
 			this->wpattern, this->bpattern));
 	}
@@ -575,7 +575,7 @@ nullview::Hit(enum view_MouseAction   action, long   x , long   y , long   num_c
 {
 	class null *dobj
 		= (class null *)this->dataobject;
-DEBUG(("Hit at (%d, %d) type %d\n", x, y, action));
+DEBUG(("Hit at (%ld, %ld) type %d\n", x, y, action));
 	if (action == view_NoMouseEvent)
 		return (class view *)this;
 	if (! this->OnScreen) return NULL;
@@ -635,7 +635,7 @@ LEAVE(::Hit);
 	view_DSattributes
 nullview::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *desiredWidth, long  *desiredHeight) 
 {
-	DEBUG(("DesiredSize(...%d, %d, %d...)\n", width, height, pass));
+	DEBUG(("DesiredSize(...%ld, %ld, %d...)\n", width, height, pass));
 
 	ComputeArea(this);	/* set self->DesiredArea/Width/Height */
 
@@ -652,7 +652,7 @@ nullview::DesiredSize(long  width, long  height, enum view_DSpass  pass, long  *
 		*desiredHeight = height;
 	}
 
-	DEBUG(("Leave DesiredSize: %d x %d\n", *desiredWidth, *desiredHeight));
+	DEBUG(("Leave DesiredSize: %ld x %ld\n", *desiredWidth, *desiredHeight));
 	return view_HeightFlexible | view_WidthFlexible;
 }
 
@@ -732,7 +732,7 @@ nullview::Print(FILE   *file, const char    *processor, const char    *format, b
 		if (topLevel)
 			texttroff::EndDoc(file);
 	}
-#endif texttroff_HASPBPE	/* use this until new texttroff is everywhere */
+#endif /* texttroff_HASPBPE */	/* use this until new texttroff is everywhere */
 }
 
 /* GetPSPrintInterface, PrintPSDoc and PrintPSRect are used by the new printing mechanism. */
@@ -768,11 +768,11 @@ nullview::PrintPSRect(FILE *file, long logwidth, long logheight, struct rectangl
     print::PSRegisterDef("nullBlot", "{ moveto %% use coords from call\n 10 0 rlineto\n 0 -7 rlineto\n -10 0 rlineto\n fill\n}");
 
     /* draw a line */
-    fprintf(file, "newpath %d 0 moveto 0 %d lineto 0.5 setlinewidth stroke \t\n", logwidth, logheight);		/* draw diagonal line */
+    fprintf(file, "newpath %ld 0 moveto 0 %ld lineto 0.5 setlinewidth stroke \t\n", logwidth, logheight);		/* draw diagonal line */
 
     /* draw the dots */
     for (dot = (dobj)->GetFirstDot(); dot != NULL; dot = (dobj)->GetNextDot( dot)) {
-	fprintf(file, "%d %d nullBlot\n",
+	fprintf(file, "%ld %ld nullBlot\n",
 		(dobj)->GetDotX( dot),
 		logheight - (dobj)->GetDotY( dot));
     }

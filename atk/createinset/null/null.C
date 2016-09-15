@@ -199,7 +199,7 @@ null::Read(FILE   *file, long   id)
 			*nl = '\0';	/* delete newline*/
 
 		/* $$$ process an input line of the data stream */
-		sscanf(s, "%d %d", &x, &y);
+		sscanf(s, "%ld %ld", &x, &y);
 		(this)->AddDot( x, y);
 
 	}
@@ -210,7 +210,7 @@ null::Read(FILE   *file, long   id)
 	len = strlen("\\enddata{null,");
 	if (result == dataobject_NOREADERROR &&
 			( strncmp(s, "\\enddata{null,", len) != 0
-			  || sscanf(s+len, "%d}\n", &eid) != 1
+			  || sscanf(s+len, "%ld}\n", &eid) != 1
 			  || eid != sid
 			) ) 
 		result = dataobject_MISSINGENDDATAMARKER;
@@ -242,14 +242,14 @@ null::Write(FILE   *file, long   writeID, int   level)
 		/* new instance of write, do it */
 		struct dotlist *d;
 		this->writeID = writeID;
-		sprintf(head, "data{%s, %d}\n", (this)->GetTypeName(), id);
+		sprintf(head, "data{%s, %ld}\n", (this)->GetTypeName(), id);
 		fprintf(file, "\\begin%s", head);
 
 
 		/* $$$ output lines of data stream */
 		for (d = (this)->GetFirstDot();  d != NULL; 
 				d = (this)->GetNextDot( d))  
-			fprintf(file, "%d %d\n", (this)->GetDotX( d),
+			fprintf(file, "%ld %ld\n", (this)->GetDotX( d),
 					(this)->GetDotY( d));
 
 

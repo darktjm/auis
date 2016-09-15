@@ -118,10 +118,93 @@ Directory to add to $PATH for most functionality.\
 ]
       {
       2rtf
+      [0
+\begindata{text,6799232}
+\textdsversion{12}
+An ATK to RTF converter.  See 
+\begindata{link,6799968}
+4
+${ANDREWDIR}/help/2rtf.help
+0
+0
+V
+\begindata{link,6799968}
+Datastream version: 2
+2rtf's on-line help
+2
+
+black
+white
+\enddata{link,6799968}
+\enddata{link,6799968}
+\view{linkview,6799968,5,0,0\
+}\enddata{text,6799232}
+]
       acolorman
+      [0
+\begindata{text,6800976}
+\textdsversion{12}
+X11 color reservation manager for non-TrueColor visuals (e.g. 256-color 
+DirectColor).  FIXME: there is no documentation for this anywhere.
+
+\enddata{text,6800976}
+]
       andrewdirs
+      [0
+\begindata{text,6802048}
+\textdsversion{12}
+Display standard directories.  See 
+\begindata{link,6802672}
+4
+${ANDREWDIR}/help/adirs.help
+0
+0
+V
+\begindata{link,6802672}
+Datastream version: 2
+andrewdirs' on-line help
+2
+
+black
+white
+\enddata{link,6802672}
+\enddata{link,6802672}
+\view{linkview,6802672,6,0,0\
+}\enddata{text,6802048}
+]
       arb
+      [0
+\begindata{text,6803696}
+\textdsversion{12}
+Starts up ez with the arbcon window, for ATK visual application 
+development.  For more information, see 
+\begindata{link,6804640}
+4
+${ANDREWDIR}/doc/PROGRAMMER/AdewOverview.doc
+0
+0
+V
+\begindata{link,6804640}
+Datastream version: 2
+AdewOverview
+2
+
+black
+white
+\enddata{link,6804640}
+\enddata{link,6804640}
+\view{linkview,6804640,7,0,0\
+}\enddata{text,6803696}
+]
       atkatoms
+      [0
+\begindata{text,6805728}
+\textdsversion{12}
+X11 initialization helper.  FIXME: there is no documentation for this 
+anywhere.
+
+\enddata{text,6805728}
+]
       bdffont
       [0
 \begindata{text,6773072}
@@ -129,7 +212,24 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{ezapp} on \bold{bdffont} object
 
-\enddata{text,6773072}
+Display and edit bdf font files.  See 
+\begindata{link,6807696}
+4
+${ANDREWDIR}/help/bdffont.help
+0
+0
+V
+\begindata{link,6807696}
+Datastream version: 2
+bdffont's on-line help
+2
+
+black
+white
+\enddata{link,6807696}
+\enddata{link,6807696}
+\view{linkview,6807696,8,0,0\
+}\enddata{text,6773072}
 ]
       be1be2
       [0
@@ -138,15 +238,115 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{be1be2app} ("static", from \typewriter{libtext.so})
 
+Converts files from BE1 (apparently a codename for an ancient version of 
+atk/ez documents) to BE2 (apparently a codename for the current version of 
+atk/ez documents).
+
+Usage: \bold{be1be2} [\italic{appargs}] \italic{files}
+
+For each given file, the output file is the same, but with any 
+\typewriter{.d}, if present, stripped, and \typewriter{.ez} appended. 
+ Standard app arguments are supported; for now, these are only documented 
+in the documentation for application::ParseArgs in 
+\begindata{link,6810000}
+4
+${ANDREWDIR}/doc/DEVELOPER/AndrewProgramming.ez
+0
+0
+V
+\begindata{link,6810000}
+Datastream version: 2
+AndrewProgramming
+2
+
+black
+white
+\enddata{link,6810000}
+\enddata{link,6810000}
+\view{linkview,6810000,9,0,0}.   Since this tool is non-graphical, only the 
+\typewriter{-d} standard argument makes any sense.
+
+
 \enddata{text,6774480}
 ]
       bison
+      [0
+\begindata{text,6813360}
+\textdsversion{12}
+\template{default}
+Parser generator for C.  A fork of an ancient version of FSF \bold{bison}, 
+with a few added features that were never pushed upstream, and as such, are 
+only present here.  These features are currently required for 
+\bold{mkparser} and the ATK parsers which use it.  Its documentation is in 
+man/info format, as for most FSF software, so it can't be read easily with 
+\bold{ez}.  See the installed documentation directory 
+(\
+\begindata{link,6814800}
+4
+${ANDREWDIR}/doc/syntax
+0
+0
+V
+\begindata{link,6814800}
+Datastream version: 2
+syntax
+2
+
+black
+white
+\enddata{link,6814800}
+\enddata{link,6814800}
+\view{linkview,6814800,10,0,0}) for more documentation.  You should 
+probably not run this executable manually.\
+\enddata{text,6813360}
+]
       bush
       [0
 \begindata{text,6776080}
 \textdsversion{12}
 \template{default}
 \bold{runapp} link: \bold{bushapp}
+
+Usage: \bold{bush} [\italic{appargs}] [\italic{directory}]
+
+Creates a \bold{bush} object and displays a view on that object.  The 
+\bold{bush} is rooted on \italic{directory} if given; otherwise, it is 
+rooted on the current directory.  Some additional documentation is 
+available in 
+\begindata{link,6818176}
+4
+${ANDREWDIR}/help/bush.help
+0
+0
+V
+\begindata{link,6818176}
+Datastream version: 2
+bush's on-line help
+2
+
+black
+white
+\enddata{link,6818176}
+\enddata{link,6818176}
+\view{linkview,6818176,11,0,0}.  Standard app arguments are supported; for 
+now, these are only documented in the documentation for 
+application::ParseArgs in 
+\begindata{link,6819904}
+4
+${ANDREWDIR}/doc/DEVELOPER/AndrewProgramming.ez
+0
+0
+V
+\begindata{link,6819904}
+Datastream version: 2
+AndrewProgramming
+2
+
+black
+white
+\enddata{link,6819904}
+\enddata{link,6819904}
+\view{linkview,6819904,12,0,0}
 
 \enddata{text,6776080}
 ]
@@ -157,9 +357,89 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{chartapp}
 
-\enddata{text,6777264}
+Usage: \bold{chart} [\italic{appargs}] [\typewriter{-D}] [\italic{file}]
+
+Creates a \bold{chart} object and displays a view on that object.   If 
+\italic{file} is specified, that is loaded into the chart object.  The 
+\typewriter{-D} flag is for debugging only.  Some additional documentation 
+is available in 
+\begindata{link,6822784}
+4
+${ANDREWDIR}/help/chart.help
+0
+0
+V
+\begindata{link,6822784}
+Datastream version: 2
+chart's on-line help
+2
+
+black
+white
+\enddata{link,6822784}
+\enddata{link,6822784}
+\view{linkview,6822784,13,0,0}.  Standard app arguments are supported; for 
+now, these are only documented in the documentation for 
+application::ParseArgs in 
+\begindata{link,6824752}
+4
+${ANDREWDIR}/doc/DEVELOPER/AndrewProgramming.ez
+0
+0
+V
+\begindata{link,6824752}
+Datastream version: 2
+AndrewProgramming
+2
+
+black
+white
+\enddata{link,6824752}
+\enddata{link,6824752}
+\view{linkview,6824752,14,0,0\
+}\enddata{text,6777264}
 ]
       chump
+      [0
+\begindata{text,6825488}
+\textdsversion{12}
+\template{default}
+Check for events in ~/events.champ.   See 
+ \
+\begindata{link,6826112}
+4
+${ANDREWDIR}/help/chump.help
+0
+0
+V
+\begindata{link,6826112}
+Datastream version: 2
+chump's on-line help
+2
+
+black
+white
+\enddata{link,6826112}
+\enddata{link,6826112}
+\view{linkview,6826112,15,0,0} as well as the 
+\begindata{link,6826944}
+4
+${ANDREWDIR}/help/champ.help
+0
+0
+V
+\begindata{link,6826944}
+Datastream version: 2
+champ overview
+2
+
+black
+white
+\enddata{link,6826944}
+\enddata{link,6826944}
+\view{linkview,6826944,16,0,0\
+}\enddata{text,6825488}
+]
       console
       [0
 \begindata{text,6778576}
@@ -167,11 +447,180 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{consoleapp}
 
-\enddata{text,6778576}
+Run the Andrew system monitoring console.  Additional documentation is 
+available in 
+\begindata{link,6829008}
+4
+${ANDREWDIR}/help/console.help
+0
+0
+V
+\begindata{link,6829008}
+Datastream version: 2
+console's on-line help
+2
+
+black
+white
+\enddata{link,6829008}
+\enddata{link,6829008}
+\view{linkview,6829008,17,0,0\
+}\enddata{text,6778576}
 ]
       convertraster
+      [0
+\begindata{text,6829936}
+\textdsversion{12}
+Converts supported raster formats.  Anything that can be read in as a 
+raster image can be converted to anything that raster images support 
+writing.  Better to use ImageMagick or the Utah Raster Toolkit or some 
+other more capable package, since this supports so few image formats.  See 
+\begindata{link,6830912}
+4
+${ANDREWDIR}/help/convras.help
+0
+0
+V
+\begindata{link,6830912}
+Datastream version: 2
+its on-line help
+2
+
+black
+white
+\enddata{link,6830912}
+\enddata{link,6830912}
+\view{linkview,6830912,18,0,0} for more information.\
+\enddata{text,6829936}
+]
       createcon
+      [0
+\begindata{text,6831920}
+\textdsversion{12}
+\template{default}
+Create skeleton C code for controllers edited with \bold{arb}.
+
+Usage: \bold{createcon} [\italic{args}] [\italic{src}]
+
+\italic{args} are from:
+
+\indent{\typewriter{-C} 
+\italic{ClassName}[\typewriter{:}\italic{oldclassname}] \
+
+
+\indent{Sets the name of the class for \bold{createcon} to create.  If the 
+source file contains a control button view, it will default to the class 
+given there.  If an old classname is given, it will merge in the 
+information from that file}
+
+\typewriter{-F} \italic{FunctionName}
+
+\indent{Sets the name of the initialzation function.  If the source file 
+contains a control button view, it will default to the function given 
+there.  If used with \typewriter{-I}, 
+\italic{classname}_\italic{FunctionName} will be used as the initialization 
+method, which will default to \italic{classname}_InitApp.}
+
+\typewriter{-O} \italic{ShellScriptName} \
+
+
+\indent{Tells \bold{createcon} to create a shell script that will use 
+\bold{runadew} to run the application in stand-alone mode.}
+
+\typewriter{-T} \italic{Title} \
+
+
+\indent{Sets the title to use when the application is run stand alone with 
+the shell script created with \typewriter{-O}.}
+
+\typewriter{-M}
+
+\indent{Forces the creation of a new \typewriter{Imakefile}, even if one 
+already exists.  The old \typewriter{Imakefile} is moved to 
+\typewriter{Imakefile.old} (and any existing \typewriter{Makefile} is moved 
+to \typewriter{Makefile.old}).}
+
+\typewriter{-I} \
+
+
+\indent{Creates an inset rather than a controller. The callbacks and 
+pointers will be placed in the view. The \typewriter{-C} argument will 
+specify the name of the dataobject to create. Control buttons are supported 
+but unnecessary.}
+
+\typewriter{-V} \italic{Viewname}[\typewriter{:}\italic{oldviewname}]
+
+\indent{If \typewriter{-I} is specified, \typewriter{-V} can be used to 
+specify the name of the view to create.  By default, a 'v' will be appended 
+to the dataobject name.  If an old viewname is given, it will merge in the 
+information from that file}
+
+\typewriter{-W}
+
+\indent{If \typewriter{-I} is specified, \typewriter{-W} will indicate that 
+the datastream describing the object will be written when the file 
+containing the object is saved. }\
+
+
+\typewriter{-A} \italic{command}
+
+\indent{This utility uses \bold{awk} to perform some work.  You can 
+override the command used here (by default \typewriter{awk -f 
+$\{ANDREWDIR\}/lib/arbiters/conpros.awk} when not creating insets, or 
+\typewriter{awk -f $\{ANDREWDIR\}/lib/arbiters/instpros.awk} otherwise)}
+
+\typewriter{-H}
+
+\indent{Display help message.}}
+
+
+For more details, see the 
+\begindata{link,6848400}
+4
+${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
+0
+0
+V
+\begindata{link,6848400}
+Datastream version: 2
+AdewReference
+2
+
+black
+white
+\enddata{link,6848400}
+\enddata{link,6848400}
+\view{linkview,6848400,19,0,0}.\
+\enddata{text,6831920}
+]
       createinset
+      [0
+\begindata{text,6849184}
+\textdsversion{12}
+\template{default}
+Copies a sample inset implementation into a new subdirectory.
+
+Usage: \bold{createinset} \italic{basename}
+
+For more information, see the 
+\begindata{link,6850448}
+4
+${ANDREWDIR}/help/cres8et.help
+0
+0
+V
+\begindata{link,6850448}
+Datastream version: 2
+createinset on-line help
+2
+
+black
+white
+\enddata{link,6850448}
+\enddata{link,6850448}
+\view{linkview,6850448,20,0,0\
+}\enddata{text,6849184}
+]
       datacat
       [0
 \begindata{text,6780400}
@@ -179,7 +628,27 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{datacatapp}
 
-\enddata{text,6780400}
+Concatenate atk/ez documents by inserting them into a text document 
+(appending newlines if needed to ensure subsequent documents are on a new 
+line).  Also supports optional explicit "include" directives.  For more 
+information, see the 
+\begindata{link,6852752}
+4
+${ANDREWDIR}/help/datacat.help
+0
+0
+V
+\begindata{link,6852752}
+Datastream version: 2
+datacat on-line help
+2
+
+black
+white
+\enddata{link,6852752}
+\enddata{link,6852752}
+\view{linkview,6852752,21,0,0\
+}\enddata{text,6780400}
 ]
       eq
       [0
@@ -188,7 +657,23 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{ezapp} on \bold{eq} object
 
-\enddata{text,6781712}
+\begindata{link,6854784}
+4
+${ANDREWDIR}/help/eq.help
+0
+0
+V
+\begindata{link,6854784}
+Datastream version: 2
+eq
+2
+
+black
+white
+\enddata{link,6854784}
+\enddata{link,6854784}
+\view{linkview,6854784,22,0,0\
+}\enddata{text,6781712}
 ]
       ez
       [0
@@ -197,9 +682,46 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{ezapp}
 
-\enddata{text,6783184}
+\begindata{link,6856928}
+4
+${ANDREWDIR}/help/ez.help
+0
+0
+V
+\begindata{link,6856928}
+Datastream version: 2
+ez
+2
+
+black
+white
+\enddata{link,6856928}
+\enddata{link,6856928}
+\view{linkview,6856928,23,0,0\
+}\enddata{text,6783184}
 ]
       ez2ascii
+      [0
+\begindata{text,6857856}
+\textdsversion{12}
+\begindata{link,6858528}
+4
+${ANDREWDIR}/help/ez2ascii.help
+0
+0
+V
+\begindata{link,6858528}
+Datastream version: 2
+ez2ascii
+2
+
+black
+white
+\enddata{link,6858528}
+\enddata{link,6858528}
+\view{linkview,6858528,24,0,0\
+}\enddata{text,6857856}
+]
       ez2html
       [0
 \begindata{text,6784496}
@@ -207,10 +729,55 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{ez2htmlapp}
 
-\enddata{text,6784496}
+\begindata{link,6860656}
+4
+${ANDREWDIR}/help/ez2html.help
+0
+0
+V
+\begindata{link,6860656}
+Datastream version: 2
+ez2html
+2
+
+black
+white
+\enddata{link,6860656}
+\enddata{link,6860656}
+\view{linkview,6860656,25,0,0\
+}\enddata{text,6784496}
 ]
       ez2ps
+      [0
+\begindata{text,6861584}
+\textdsversion{12}
+\begindata{link,6862256}
+4
+${ANDREWDIR}/help/ez2ps.help
+0
+0
+V
+\begindata{link,6862256}
+Datastream version: 2
+ez2ps
+2
+
+black
+white
+\enddata{link,6862256}
+\enddata{link,6862256}
+\view{linkview,6862256,26,0,0\
+}\enddata{text,6861584}
+]
       ezpostprocess
+      [0
+\begindata{text,6863264}
+\textdsversion{12}
+?? Used to post-process troff output for cross-references before printing. 
+ Override with troffpostprocessor preference. ??
+
+\enddata{text,6863264}
+]
       ezprint
       [0
 \begindata{text,6785936}
@@ -218,7 +785,23 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{ezprintapp}
 
-\enddata{text,6785936}
+\begindata{link,6865344}
+4
+${ANDREWDIR}/help/ezprint.help
+0
+0
+V
+\begindata{link,6865344}
+Datastream version: 2
+ezprint
+2
+
+black
+white
+\enddata{link,6865344}
+\enddata{link,6865344}
+\view{linkview,6865344,27,0,0\
+}\enddata{text,6785936}
 ]
       fad
       [0
@@ -227,9 +810,35 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{ezapp} on \bold{fad} object
 
-\enddata{text,6787120}
+\begindata{link,6867488}
+4
+${ANDREWDIR}/help/fad.help
+0
+0
+V
+\begindata{link,6867488}
+Datastream version: 2
+fad
+2
+
+black
+white
+\enddata{link,6867488}
+\enddata{link,6867488}
+\view{linkview,6867488,28,0,0\
+}\enddata{text,6787120}
 ]
       fdbbdf
+      [0
+\begindata{text,6868576}
+\textdsversion{12}
+Converter from old Andrew Window System font format to X11 bdf format. 
+ Produces some bugs in output; probably ought to delete this along with all 
+fdb fonts.  Note that the supplied fdb fonts have all already been 
+converted, and can safely be deleted.
+
+\enddata{text,6868576}
+]
       figure
       [0
 \begindata{text,6788592}
@@ -237,13 +846,108 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{ezapp} on \bold{figure} object
 
-\enddata{text,6788592}
+\begindata{link,6870960}
+4
+${ANDREWDIR}/help/figure.help
+0
+0
+V
+\begindata{link,6870960}
+Datastream version: 2
+figure
+2
+
+black
+white
+\enddata{link,6870960}
+\enddata{link,6870960}
+\view{linkview,6870960,29,0,0\
+}\enddata{text,6788592}
 ]
       gdp
+      [0
+\begindata{text,6872048}
+\textdsversion{12}
+??? Drawing program used for gesture recognition module.  Undocumented. ???
+
+\enddata{text,6872048}
+]
       genmake
+      [0
+\begindata{text,6872848}
+\textdsversion{12}
+\template{default}
+Run \bold{imake} on the \typewriter{Imakefile} in an ATK project directory 
+to create a \typewriter{Makefile}.  For more information, see 
+\begindata{link,6874336}
+4
+${ANDREWDIR}/help/genmake.help
+0
+0
+V
+\begindata{link,6874336}
+Datastream version: 2
+genmake's on-line help
+2
+
+black
+white
+\enddata{link,6874336}
+\enddata{link,6874336}
+\view{linkview,6874336,30,0,0\
+}\enddata{text,6872848}
+]
       genstatl
+      [0
+\begindata{text,6875424}
+\textdsversion{12}
+\begindata{link,6875984}
+4
+${ANDREWDIR}/help/genstatl.help
+0
+0
+V
+\begindata{link,6875984}
+Datastream version: 2
+genstatl
+2
+
+black
+white
+\enddata{link,6875984}
+\enddata{link,6875984}
+\view{linkview,6875984,31,0,0\
+}\enddata{text,6875424}
+]
       gentlex
+      [0
+\begindata{text,6876992}
+\textdsversion{12}
+\begindata{link,6877728}
+4
+${ANDREWDIR}/doc/PROGRAMMER/tlex.doc
+0
+0
+V
+\begindata{link,6877728}
+Datastream version: 2
+tlex
+2
+
+black
+white
+\enddata{link,6877728}
+\enddata{link,6877728}
+\view{linkview,6877728,32,0,0\
+}\enddata{text,6876992}
+]
       getstats
+      [0
+\begindata{text,6878736}
+\textdsversion{12}
+?? Used by console to obtain system statistics ??\
+\enddata{text,6878736}
+]
       help
       [0
 \begindata{text,6790576}
@@ -251,7 +955,25 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{helpapp}
 
-\enddata{text,6790576}
+Start help browser on given topic or point running browser to topic. 
+ \
+\begindata{link,6880720}
+4
+${ANDREWDIR}/help/help.help
+0
+0
+V
+\begindata{link,6880720}
+Datastream version: 2
+help
+2
+
+black
+white
+\enddata{link,6880720}
+\enddata{link,6880720}
+\view{linkview,6880720,33,0,0\
+}\enddata{text,6790576}
 ]
       image
       [0
@@ -261,15 +983,40 @@ Directory to add to $PATH for most functionality.\
 \bold{runapp} link: \bold{ezapp} on \bold{image} object ("static", from 
 \typewriter{libbasics.so})
 
-\enddata{text,6791760}
+\begindata{link,6883184}
+4
+${ANDREWDIR}/help/image.help
+0
+0
+V
+\begindata{link,6883184}
+Datastream version: 2
+image
+2
+
+black
+white
+\enddata{link,6883184}
+\enddata{link,6883184}
+\view{linkview,6883184,34,0,0\
+}\enddata{text,6791760}
 ]
       indexpro
+      [0
+\begindata{text,6884112}
+\textdsversion{12}
+?? filter to run on roff to generate index? ??
+
+\enddata{text,6884112}
+]
       launch
       [0
 \begindata{text,6793552}
 \textdsversion{12}
 \template{default}
 \bold{runapp} link: \bold{launchapp}
+
+Starts a new-user style app called Launcher.  Undocumented.
 
 \enddata{text,6793552}
 ]
@@ -280,7 +1027,39 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{ezapp} on \bold{layout} object
 
-\enddata{text,6794736}
+\begindata{link,6887376}
+4
+${ANDREWDIR}/help/layout.help
+0
+0
+V
+\begindata{link,6887376}
+Datastream version: 2
+layout
+2
+
+black
+white
+\enddata{link,6887376}
+\enddata{link,6887376}
+\view{linkview,6887376,35,0,0} 
+\begindata{link,6888368}
+4
+${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
+0
+0
+V
+\begindata{link,6888368}
+Datastream version: 2
+AdewReference
+2
+
+black
+white
+\enddata{link,6888368}
+\enddata{link,6888368}
+\view{linkview,6888368,36,0,0\
+}\enddata{text,6794736}
 ]
       lt
       [0
@@ -289,14 +1068,107 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{ltapp}
 
+Part of zip.  Undocumented.
+
 \enddata{text,6796080}
 ]
       mkbrowse
+      [0
+\begindata{text,6890368}
+\textdsversion{12}
+\begindata{link,6891040}
+4
+${ANDREWDIR}/help/mkbrowse.help
+0
+0
+V
+\begindata{link,6891040}
+Datastream version: 2
+mkbrowse
+2
+
+black
+white
+\enddata{link,6891040}
+\enddata{link,6891040}
+\view{linkview,6891040,37,0,0}
+
+
+\enddata{text,6890368}
+]
       mkparser
+      [0
+\begindata{text,6892048}
+\textdsversion{12}
+\begindata{link,6892784}
+4
+${ANDREWDIR}/doc/PROGRAMMER/parser.doc
+0
+0
+V
+\begindata{link,6892784}
+Datastream version: 2
+parser
+2
+
+black
+white
+\enddata{link,6892784}
+\enddata{link,6892784}
+\view{linkview,6892784,38,0,0\
+}\enddata{text,6892048}
+]
       mkparserclass
+      [0
+\begindata{text,6893792}
+\textdsversion{12}
+\begindata{link,6894528}
+4
+${ANDREWDIR}/doc/PROGRAMMER/prsclass.doc
+0
+0
+V
+\begindata{link,6894528}
+Datastream version: 2
+prsclass
+2
+
+black
+white
+\enddata{link,6894528}
+\enddata{link,6894528}
+\view{linkview,6894528,39,0,0\
+}\enddata{text,6893792}
+]
       mkurlbutton
+      [0
+\begindata{text,6895616}
+\textdsversion{12}
+\begindata{link,6896288}
+4
+${ANDREWDIR}/help/urlbutton.help
+0
+0
+V
+\begindata{link,6896288}
+Datastream version: 2
+urlbutton
+2
+
+black
+white
+\enddata{link,6896288}
+\enddata{link,6896288}
+\view{linkview,6896288,40,0,0\
+}\enddata{text,6895616}
+]
       mrecord
-      mmencode
+      [0
+\begindata{text,6897296}
+\textdsversion{12}
+??? Part of gesture recognition module.  Undocumented. ???\
+\enddata{text,6897296}
+]
       nessrun
       [0
 \begindata{text,6799856}
@@ -304,7 +1176,25 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{nessrunapp}
 
-\enddata{text,6799856}
+Run a headless ness script. 
+ \
+\begindata{link,6899280}
+4
+${ANDREWDIR}/help/ness.help
+0
+0
+V
+\begindata{link,6899280}
+Datastream version: 2
+ness
+2
+
+black
+white
+\enddata{link,6899280}
+\enddata{link,6899280}
+\view{linkview,6899280,41,0,0\
+}\enddata{text,6799856}
 ]
       org
       [0
@@ -313,7 +1203,23 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{orgapp}
 
-\enddata{text,6801040}
+\begindata{link,6901264}
+4
+${ANDREWDIR}/help/org.help
+0
+0
+V
+\begindata{link,6901264}
+Datastream version: 2
+org
+2
+
+black
+white
+\enddata{link,6901264}
+\enddata{link,6901264}
+\view{linkview,6901264,42,0,0\
+}\enddata{text,6801040}
 ]
       pipescript
       [0
@@ -322,10 +1228,87 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{pipescriptapp}
 
-\enddata{text,6802352}
+Suck stdin into a text 
+inset.\
+\begindata{link,6903248}
+4
+${ANDREWDIR}/help/pscript.help
+0
+0
+V
+\begindata{link,6903248}
+Datastream version: 2
+pscript
+2
+
+black
+white
+\enddata{link,6903248}
+\enddata{link,6903248}
+\view{linkview,6903248,43,0,0\
+}\enddata{text,6802352}
 ]
       ppm2atkimage
+      [0
+\begindata{text,6904176}
+\textdsversion{12}
+\begindata{link,6904848}
+4
+${ANDREWDIR}/help/ppm2atk.help
+0
+0
+V
+\begindata{link,6904848}
+Datastream version: 2
+ppm2atk
+2
+
+black
+white
+\enddata{link,6904848}
+\enddata{link,6904848}
+\view{linkview,6904848,44,0,0\
+}\enddata{text,6904176}
+]
       pref
+      [0
+\begindata{text,6905856}
+\textdsversion{12}
+\template{default}
+Get or set a preference value.
+
+Usage: \bold{pref} [\typewriter{-p} \italic{programname}] 
+[\typewriter{-sbi}] \italic{preferencename} [\italic{default}|\italic{value}]
+
+\indent{\typewriter{-p} \italic{programname}
+
+\indent{The program name key used for preference set/lookup.  Default: 
+\typewriter{pf} (not \typewriter{pref}!).  If the preferencename has a dot, 
+the text before the dot overrides the programname.}
+
+\typewriter{-s}
+
+\indent{Set the preference to the given \italic{value}.  Modifies 
+\typewriter{~/.preferences}.}
+
+\typewriter{-b}
+
+\indent{Retrieve the value as a boolean, and display as 
+\typewriter{true}/\typewriter{false}.}
+
+\typewriter{-i}
+
+\indent{Retrieve and display the value as an integer}}
+
+
+If a \italic{default} is given, that is displayed if the preference does 
+not exist.  If not given, the default for booleans is \typewriter{false} 
+and integers is \typewriter{0}.  Strings will display nothing if not set 
+and no default is given (this is not the same as an empty string, which 
+will display a newline).  Preferences are read from all the same sources as 
+an ATK application, including system-wide preferences and X resources.\
+\enddata{text,6905856}
+]
       prefed
       [0
 \begindata{text,6803792}
@@ -333,18 +1316,27 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{prefedapp}
 
-\enddata{text,6803792}
-]
-      preview
-      [0
-\begindata{text,6804976}
-\textdsversion{12}
-\template{default}
-\bold{runapp} link: \bold{previewapp}
+Launch preference editor on given preference file 
+(\typewriter{~/.preferences} by default).
 
-\enddata{text,6804976}
+\begindata{link,6915280}
+4
+${ANDREWDIR}/help/prefed.help
+0
+0
+V
+\begindata{link,6915280}
+Datastream version: 2
+prefed
+2
+
+black
+white
+\enddata{link,6915280}
+\enddata{link,6915280}
+\view{linkview,6915280,45,0,0\
+}\enddata{text,6803792}
 ]
-      printscribe
       raster
       [0
 \begindata{text,6806288}
@@ -352,9 +1344,48 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{ezapp} on \bold{raster} object
 
-\enddata{text,6806288}
+\begindata{link,9933072}
+4
+${ANDREWDIR}/help/raster.help
+0
+0
+V
+\begindata{link,9933072}
+Datastream version: 2
+raster
+2
+
+black
+white
+\enddata{link,9933072}
+\enddata{link,9933072}
+\view{linkview,9933072,1247,0,0\
+}\enddata{text,6806288}
 ]
       recover
+      [0
+\begindata{text,10212640}
+\textdsversion{12}
+Utility for recovering unknown 
+insets.\
+\begindata{link,9946976}
+4
+${ANDREWDIR}/help/unknown.help
+0
+0
+V
+\begindata{link,9946976}
+Datastream version: 2
+unknown
+2
+
+black
+white
+\enddata{link,9946976}
+\enddata{link,9946976}
+\view{linkview,9946976,1249,0,0\
+}\enddata{text,10212640}
+]
       rofftext
       [0
 \begindata{text,6808400}
@@ -362,9 +1393,50 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{rofftextapp}
 
+Attempts to convert roff source to an ATK 
+document.\
+\begindata{link,9886096}
+4
+${ANDREWDIR}/help/rofftxt.help
+0
+0
+V
+\begindata{link,9886096}
+Datastream version: 2
+rofftxt
+2
+
+black
+white
+\enddata{link,9886096}
+\enddata{link,9886096}
+\view{linkview,9886096,1250,0,0}.  It's really bad at doing man pages.\
 \enddata{text,6808400}
 ]
       rtf2
+      [0
+\begindata{text,9832784}
+\textdsversion{12}
+Convert RTF to ATK.  Probably not very good with modern RTF 
+output.\
+\begindata{link,10213904}
+4
+${ANDREWDIR}/help/rtf2.help
+0
+0
+V
+\begindata{link,10213904}
+Datastream version: 2
+rtf2
+2
+
+black
+white
+\enddata{link,10213904}
+\enddata{link,10213904}
+\view{linkview,10213904,1252,0,0\
+}\enddata{text,9832784}
+]
       runadew
       [0
 \begindata{text,6809712}
@@ -372,14 +1444,46 @@ Directory to add to $PATH for most functionality.\
 \template{default}
 \bold{runapp} link: \bold{runadewapp}
 
-\enddata{text,6809712}
+\begindata{link,10413408}
+4
+${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
+0
+0
+V
+\begindata{link,10413408}
+Datastream version: 2
+AdewReference
+2
+
+black
+white
+\enddata{link,10413408}
+\enddata{link,10413408}
+\view{linkview,10413408,1255,0,0\
+}\enddata{text,6809712}
 ]
       runapp
       [0
 \begindata{text,6810896}
 \textdsversion{12}
 \template{default}
-Launcher for application objects.
+Launcher for application objects.  For more information, see 
+\begindata{link,10393152}
+4
+${ANDREWDIR}/help/runapp.help
+0
+0
+V
+\begindata{link,10393152}
+Datastream version: 2
+runapp's on-line help
+2
+
+black
+white
+\enddata{link,10393152}
+\enddata{link,10393152}
+\view{linkview,10393152,1253,0,0}.
 
 
 Unless otherwise specified, runs an application class with the program 
@@ -441,10 +1545,62 @@ dataclass arg passed in.\
 \template{default}
 \bold{runapp} link: \bold{schedapp}
 
+Usage: sched [\typewriter{-d}] [\italic{filename}]
+
+Part of zip: a simple schedule view of one week, 8:00a-6:00p.  Set 
+\typewriter{-d} for debug. Might be more useful if there were actually any 
+docs, instead of just a sample schedule that formats badly on-screen.  Note 
+that it loads the sample schedule, itcCR.scd, if no file name given.\
 \enddata{text,6818896}
 ]
       scribetext
+      [0
+\begindata{text,10362416}
+\textdsversion{12}
+Apparently low-quality scribe-to-atk 
+converter.\
+\begindata{link,10794960}
+4
+${ANDREWDIR}/help/scribetxt.help
+0
+0
+V
+\begindata{link,10794960}
+Datastream version: 2
+scribetxt
+2
+
+black
+white
+\enddata{link,10794960}
+\enddata{link,10794960}
+\view{linkview,10794960,1274,0,0\
+}\enddata{text,10362416}
+]
       sys
+      [0
+\begindata{text,9940192}
+\textdsversion{12}
+Print Andrew's idea of what system you're 
+running.\
+\begindata{link,10840560}
+4
+${ANDREWDIR}/help/sys.help
+0
+0
+V
+\begindata{link,10840560}
+Datastream version: 2
+sys
+2
+
+black
+white
+\enddata{link,10840560}
+\enddata{link,10840560}
+\view{linkview,10840560,1275,0,0\
+}\enddata{text,9940192}
+]
       table
       [0
 \begindata{text,6821920}
@@ -452,7 +1608,23 @@ dataclass arg passed in.\
 \template{default}
 \bold{runapp} link: \bold{ezapp} on \bold{table} object
 
-\enddata{text,6821920}
+\begindata{link,10960256}
+4
+${ANDREWDIR}/help/table.help
+0
+0
+V
+\begindata{link,10960256}
+Datastream version: 2
+table
+2
+
+black
+white
+\enddata{link,10960256}
+\enddata{link,10960256}
+\view{linkview,10960256,1277,0,0\
+}\enddata{text,6821920}
 ]
       toez
       [0
@@ -461,7 +1633,27 @@ dataclass arg passed in.\
 \template{default}
 \bold{runapp} link: \bold{toezapp}
 
-\enddata{text,6823264}
+Convert scribe and roff files to ATK text.  Uses rofftext for roff, and its 
+own scribe-to-atk implementation for scribe.  The documentation claims 
+support for plain-text, but I don't see it in the 
+code.\
+\begindata{link,11138560}
+4
+${ANDREWDIR}/help/toez.help
+0
+0
+V
+\begindata{link,11138560}
+Datastream version: 2
+toez
+2
+
+black
+white
+\enddata{link,11138560}
+\enddata{link,11138560}
+\view{linkview,11138560,1279,0,0\
+}\enddata{text,6823264}
 ]
       typescript
       [0
@@ -470,7 +1662,31 @@ dataclass arg passed in.\
 \template{default}
 \bold{runapp} link: \bold{typescriptapp}
 
-\enddata{text,6824448}
+Kind of stupid terminal emulator for executing shell, etc. within ATK 
+environment.  Note that in zsh, you need to disable colors and:
+
+ 	set +o zle
+
+	PROMPT=%
+
+ \
+\begindata{link,11217664}
+4
+${ANDREWDIR}/help/tscript.help
+0
+0
+V
+\begindata{link,11217664}
+Datastream version: 2
+tscript
+2
+
+black
+white
+\enddata{link,11217664}
+\enddata{link,11217664}
+\view{linkview,11217664,1281,0,0\
+}\enddata{text,6824448}
 ]
       web
       [0
@@ -478,6 +1694,9 @@ dataclass arg passed in.\
 \textdsversion{12}
 \template{default}
 \bold{runapp} link: \bold{webapp}
+
+Simple web browser application.  Doesn't seem to actually work (and likely 
+never will).  No documentation available.
 
 \enddata{text,6825888}
 ]
@@ -498,6 +1717,30 @@ reason fails often.\
 \enddata{text,6827072}
 ]
       xwd2atkimage
+      [0
+\begindata{text,11327728}
+\textdsversion{12}
+Attempts to convert xwd output to an ATK-compatible image format.  Note 
+that it doesn't work for current xwd. 
+ \
+\begindata{link,10953584}
+4
+${ANDREWDIR}/help/xwd2atk.help
+0
+0
+V
+\begindata{link,10953584}
+Datastream version: 2
+xwd2atk
+2
+
+black
+white
+\enddata{link,10953584}
+\enddata{link,10953584}
+\view{linkview,10953584,1283,0,0\
+}\enddata{text,11327728}
+]
       zip
       [0
 \begindata{text,6829232}
@@ -505,7 +1748,23 @@ reason fails often.\
 \template{default}
 \bold{runapp} link: \bold{ezapp} on \bold{zip} object
 
-\enddata{text,6829232}
+\begindata{link,10844976}
+4
+${ANDREWDIR}/help/zip.help
+0
+0
+V
+\begindata{link,10844976}
+Datastream version: 2
+zip
+2
+
+black
+white
+\enddata{link,10844976}
+\enddata{link,10844976}
+\view{linkview,10844976,1284,0,0\
+}\enddata{text,6829232}
 ]
       }
     config
@@ -600,8 +1859,10 @@ black
 white
 \enddata{link,6836448}
 \enddata{link,6836448}
-\view{linkview,6836448,8,0,0\
-}\enddata{text,6835712}
+\view{linkview,6836448,8,0,0}
+
+Imake configuration macros.\
+\enddata{text,6835712}
 ]
       andrewos.h
       [0
@@ -776,26 +2037,45 @@ same as IBM
 
 \enddata{text,6848016}
 ]
-      depend.csh
+      depend
       [0
 \begindata{text,6849760}
 \textdsversion{12}
 \begindata{link,6850496}
 4
-${ANDREWDIR}/config/depend.csh
+${ANDREWDIR}/config/depend
 0
 0
 V
 \begindata{link,6850496}
 Datastream version: 2
-depend.csh
+depend
 2
 
 black
 white
 \enddata{link,6850496}
 \enddata{link,6850496}
-\view{linkview,6850496,16,0,0\
+\view{linkview,6850496,16,0,0}
+
+Helper script used by build system to attach the results of the dependency 
+builder onto the Makefile.  Currently, the only supported dep builder is 
+\begindata{link,6960336}
+4
+${ANDREWDIR}/etc/gccmakedep
+0
+0
+V
+\begindata{link,6960336}
+Datastream version: 2
+gccmakedep
+2
+
+black
+white
+\enddata{link,6960336}
+\enddata{link,6960336}
+\view{linkview,6960336,58,0,0\
 }\enddata{text,6849760}
 ]
       imake.tmpl
@@ -817,8 +2097,11 @@ black
 white
 \enddata{link,6852240}
 \enddata{link,6852240}
-\view{linkview,6852240,17,0,0\
-}\enddata{text,6851504}
+\view{linkview,6852240,17,0,0}
+
+The main Makefile skeleton; used by the build system.
+
+\enddata{text,6851504}
 ]
       loginstall
       [0
@@ -861,8 +2144,11 @@ black
 white
 \enddata{link,6855728}
 \enddata{link,6855728}
-\view{linkview,6855728,19,0,0\
-}\enddata{text,6854992}
+\view{linkview,6855728,19,0,0}
+
+Platform-dependent parts of the Makefile skeleton; used by the build system.
+
+\enddata{text,6854992}
 ]
       presite.h
       [0
@@ -996,8 +2282,10 @@ black
 white
 \enddata{link,6866192}
 \enddata{link,6866192}
-\view{linkview,6866192,25,0,0\
-}\enddata{text,6865456}
+\view{linkview,6866192,25,0,0}
+
+System-dependent parts of the Makefile skeleton; used by the build system.\
+\enddata{text,6865456}
 ]
       }
     doc
@@ -6347,6 +7635,12 @@ using its required link arguments as the paths to "fix".\
 \enddata{text,7524768}
 ]
       gccmakedep
+      [0
+\begindata{text,7409264}
+\textdsversion{12}
+Dependency generator for the build system.\
+\enddata{text,7409264}
+]
       gen.awk
       [0
 \begindata{text,7530032}
@@ -10167,8 +11461,8 @@ subdirectories are in include path).\
 \enddata{text,7873904}
 ]
       {
-        ATKDoLoad.H
-        [0
+      ATKDoLoad.H
+      [0
 \begindata{text,8195808}
 \textdsversion{12}
 \begindata{link,8196544}

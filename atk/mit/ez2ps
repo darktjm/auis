@@ -23,7 +23,11 @@
 PASSTHRU=""
 
 roff=troff
+t=psc
+post=psdit
 type ditroff >/dev/null && roff=ditroff
+# assume troff == groff if groff present
+type groff >/dev/null && t=ps post=grops
 
 while [ $# -gt 0 ]; do
     case "$1" in
@@ -53,14 +57,14 @@ while [ $# -gt 0 ]; do
                 echo ez2ps: Last two args should be files.
                 exit 1
             elif [ $# = 2 ]; then
-                exec ezprint -q -t $PASSTHRU $1 | eqn  | $roff -Tpsc | psdit > ${2}
+                exec ezprint -q -t $PASSTHRU $1 | eqn  | $roff -T$t | $post > ${2}
                 exit 0
             elif [ $# = 1 ]; then
-                exec ezprint -q -t $PASSTHRU $1 | eqn  | $roff -Tpsc | psdit
+                exec ezprint -q -t $PASSTHRU $1 | eqn  | $roff -T$t | $post
                 exit 0
             fi
     esac
     shift
 done
 
-exec ezprint -q -s -t  $PASSTHRU | eqn  | $roff -Tpsc | psdit
+exec ezprint -q -s -t  $PASSTHRU | eqn  | $roff -T$t | $post

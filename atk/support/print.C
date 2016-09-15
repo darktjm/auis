@@ -51,96 +51,6 @@ print *print::current_print = NULL;
 static const char *print_formatcommand, *print_pscformatcommand, *print_printcommand, *print_previewcommand, *print_pscprintcommand, *print_pscpreviewcommand;
 static const char *print_spoolpath, *print_spooldir, *print_printertype;
 
-/* The following ifndefs allow these defines to be set from the site.h file 
-  They should probably all be set from site.h, but the following allows for backward compatibility */
-
-#ifdef CMU_ENV
-#ifndef print_FORMATCOMMAND
-#define print_FORMATCOMMAND "eqn -T$PRINTERTYPE /tmp/%s.n  | troff -T$PRINTERTYPE - |" 
-#endif
-#ifndef print_PSCFORMATCOMMAND
-#define print_PSCFORMATCOMMAND "cat /tmp/%s.n |" 
-#endif
-#ifndef print_PRINTCOMMAND
-#define print_PRINTCOMMAND " print -T dvi -O %s"  
-#endif
-#ifndef print_PSCPRINTCOMMAND
-#define print_PSCPRINTCOMMAND " print -T native -O %s"  
-#endif
-#ifndef print_PREVIEWCOMMAND
-#define print_PREVIEWCOMMAND " preview -o %s"  
-#endif
-#ifndef print_PSCPREVIEWCOMMAND
-#define print_PSCPREVIEWCOMMAND "cat > /dev/null; ghostview /tmp/%s.n"  
-#endif
-#ifndef print_SPOOLPATH
-#define print_SPOOLPATH "/afs/andrew.cmu.edu/common/printing/spool/" 
-#endif
-#ifndef print_SPOOLDIR
-#define print_SPOOLDIR "plum" 
-#endif
-#ifndef print_PRINTERTYPE
-#define print_PRINTERTYPE "psc" 
-#endif
-#else /* CMU_ENV */
-#if 0 /*IBM032_ENV*/
-#ifndef print_FORMATCOMMAND
-#define print_FORMATCOMMAND "cat /tmp/%s.n | /usr/ibm/eqn | /usr/ibm/troff -T3812 -t |" /* overridden by the profile 'formatcommand' entry */
-#endif
-#ifndef print_PSCFORMATCOMMAND
-#define print_PSCFORMATCOMMAND "cat /tmp/%s.n |" 
-#endif
-#ifndef print_PRINTCOMMAND
-#define print_PRINTCOMMAND "/usr/ucb/lpr -n -Ppp; rm -f /tmp/%s.n; rm -f /tmp/%s.n.dvi "  /* if overridden by the profile 'printcommand' entry, the troff file (usually /tmp/%s.n) won't be automatically deleted . Overriding will also cause any print arguments passed to the print command to be  ignored. */
-#endif
-#ifndef print_PSCPRINTCOMMAND
-#define print_PSCPRINTCOMMAND "/usr/ucb/lpr -Ppp; rm -f /tmp/%s.n; rm -f /tmp/%s.n.dvi "
-#endif
-#ifndef print_PREVIEWCOMMAND
-#define print_PREVIEWCOMMAND " preview -o %s"  /* if overridden by the profile 'previewcommand' entry, the troff file (usually /tmp/%s.n) won't be automatically deleted  */
-#endif
-#ifndef print_PSCPREVIEWCOMMAND
-#define print_PSCPREVIEWCOMMAND "cat > /dev/null; ghostview /tmp/%s.n"  
-#endif
-#ifndef print_SPOOLPATH
-#define print_SPOOLPATH "/usr/spool/" /* overridden by the profile 'print.spoolpath' entry */
-#endif
-#ifndef print_SPOOLDIR
-#define print_SPOOLDIR "pp" /* overridden by the environment variables 'PRINTER', 'LPDEST' or the profile 'print.printer' entry */
-#endif
-#ifndef print_PRINTERTYPE
-#define print_PRINTERTYPE "ibm3812" /* overridden by the contents of the file '.PrinterType' in the printer spool directory */
-#endif
-#else /* IBM032_ENV */
-#ifdef EXPRES
-#ifndef print_FORMATCOMMAND
-#define print_FORMATCOMMAND "eqn -T$PRINTERTYPE /tmp/%s.n | troff -T$PRINTERTYPE - |" 
-#endif
-#ifndef print_PSCFORMATCOMMAND
-#define print_PSCFORMATCOMMAND "cat /tmp/%s.n |" 
-#endif
-#ifndef print_PRINTCOMMAND
-#define print_PRINTCOMMAND " lpr -n"  
-#endif
-#ifndef print_PSCPRINTCOMMAND
-#define print_PSCPRINTCOMMAND " lpr"
-#endif
-#ifndef print_PREVIEWCOMMAND
-#define print_PREVIEWCOMMAND " preview -o %s"  
-#endif
-#ifndef print_PSCPREVIEWCOMMAND
-#define print_PSCPREVIEWCOMMAND "cat > /dev/null; ghostview /tmp/%s.n"  
-#endif
-#ifndef print_SPOOLPATH
-#define print_SPOOLPATH "/usr/spool/" 
-#endif
-#ifndef print_SPOOLDIR
-#define print_SPOOLDIR "lpr" 
-#endif
-#ifndef print_PRINTERTYPE
-#define print_PRINTERTYPE "psc" 
-#endif
-#else /* EXPRES */
 /* following ifndefs allow these to be set from the site.h file */
 #ifndef print_FORMATCOMMAND
 #define print_FORMATCOMMAND "eqn -T$PRINTERTYPE /tmp/%s.n  | troff -T$PRINTERTYPE - |" 
@@ -155,10 +65,10 @@ static const char *print_spoolpath, *print_spooldir, *print_printertype;
 #define print_PSCPRINTCOMMAND " lpr"
 #endif
 #ifndef print_PREVIEWCOMMAND
-#define print_PREVIEWCOMMAND " preview -o %s"  
+#define print_PREVIEWCOMMAND " xditview -"
 #endif
 #ifndef print_PSCPREVIEWCOMMAND
-#define print_PSCPREVIEWCOMMAND "cat > /dev/null; ghostview /tmp/%s.n"  
+#define print_PSCPREVIEWCOMMAND "cat >/dev/null; gv /tmp/%s.n"  
 #endif
 #ifndef print_SPOOLPATH
 #define print_SPOOLPATH "/usr/spool/" 
@@ -167,11 +77,8 @@ static const char *print_spoolpath, *print_spooldir, *print_printertype;
 #define print_SPOOLDIR "lpr" 
 #endif
 #ifndef print_PRINTERTYPE
-#define print_PRINTERTYPE "psc" 
+#define print_PRINTERTYPE "ps"
 #endif
-#endif  /* EXPRES */
-#endif /* IBM032_ENV */
-#endif /* CMU_ENV */
 /* The following strings are use for processing the ATK generated index */
 
 #ifndef DIVERTPLAINTROFF

@@ -22,7 +22,7 @@ improved error checking capabilities for reading grammars.  \
 
 Documents installed in: $ANDREWDIR/doc/syntax/bison.*
 
-Source directory:  overhead/bision}
+Source directory:  overhead/bison}
 
 
 \subsection{Parser (C)}
@@ -34,7 +34,7 @@ and multiple parses can be in progress simultaneously.  \
 
 
 
-Documents installed in: $ANDREWDIR/doc/syntax/parser.doc
+Documents installed in: $ANDREWDIR/doc/PROGRAMMER/parser.doc
 
 Source directory:  overhead/mkparser}\leftindent{
 
@@ -47,7 +47,7 @@ Source directory:  overhead/mkparser}\leftindent{
 described by the Bison input grammar.}\leftindent{
 
 
-Documents installed in: $ANDREWDIR/doc/syntax/prsclass.doc
+Documents installed in: $ANDREWDIR/doc/PROGRAMMER/prsclass.doc
 
 Source directory:  atk/syntax/parser
 
@@ -59,7 +59,7 @@ Source directory:  atk/syntax/parser
 
 
 
-Documents installed in: $ANDREWDIR/doc/syntax/sym.doc
+Documents installed in: $ANDREWDIR/doc/PROGRAMMER/sym.doc
 
 Source directory:  atk/syntax/sym}
 
@@ -77,7 +77,7 @@ numbers necessary. \
 
 
 
-Documents installed in: $ANDREWDIR/doc/syntax/tlex.doc
+Documents installed in: $ANDREWDIR/doc/PROGRAMMER/tlex.doc
 
 Source directory:  atk/syntax/tlex}
 

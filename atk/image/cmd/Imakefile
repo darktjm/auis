@@ -12,6 +12,7 @@ DependTarget()
 
 NormalObjectRule()
 NormalATKRule()
+NormalHelpRule()
 
 Runapp(xwd2atkimage,-m $(XWDOBJS) -a -c @imagev)
 Runapp(ppm2atkimage,-m $(PPMOBJS) -a -c @imagev)
