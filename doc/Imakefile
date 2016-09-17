@@ -10,7 +10,14 @@ InstallFile(README, $(INSTMANFLAGS), ${DESTDIR})
 InstallDocs(README.ez, ${DESTDIR}/doc/ADMINISTRATOR)
 InstallDocs(FAQ.ez, ${DESTDIR}/doc/ADMINISTRATOR)
 InstallDocs(CONTENTS.ez, ${DESTDIR}/doc)
+InstallDocs(COPYRITE,${DESTDIR}/doc)
+InstallDocs(COPYRITE.bls,${DESTDIR}/doc)
+InstallDocs(COPYRITE.att,${DESTDIR}/doc)
+InstallDocs(COPYRITE.img,${DESTDIR}/doc)
 
+install.time:: 
+	$(RM) $(DESTDIR)/COPYRITE
+	$(LN) doc/COPYRITE $(DESTDIR)/COPYRITE
 
 #if defined(MK_PREFS) || defined(MK_AUX_UTILS)
 

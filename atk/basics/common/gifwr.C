@@ -1,6 +1,6 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 /*****************************************************************
  * Portions of this code Copyright (C) 1989 by Michael Mauldin.

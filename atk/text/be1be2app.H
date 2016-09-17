@@ -3,7 +3,7 @@ ATK_INTER
 #define _be1be2app_H_
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 /*
  * BE1 to BE2 conversion utility

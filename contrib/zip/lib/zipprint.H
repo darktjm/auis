@@ -2,7 +2,7 @@
 #define _zipprint_H_
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 
 /*
@@ -29,7 +29,7 @@
 
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988

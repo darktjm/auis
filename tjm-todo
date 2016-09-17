@@ -33,6 +33,8 @@
   for horizontal arrangement, but for some reason it allows moving scrollbar
   into negative area)
 - org/bush/treev: kb navigation of nodes, printing (outline?)
+- sometimes, bush's ^X^C action is to quit without confirmation
+  (maybe has to do with bush not setting change flag correctly as well)
 - hyperlink: don't update label if label isn't default (or at least
   allow undo of label change)
 - printing doesn't really work right:
@@ -42,7 +44,7 @@
   - preview never starts up
 - enable mouse scroll wheel
 - add help-type hyperlink or other help button of some sort
-  - maybe just make ez's help view help by default
+  - add support for loading files directly in help, instead of just indexed
 - fix lack of updates when resizing windows
 - fix contrib/tm to use termios, etc.
 - fix console for modern Linux
@@ -100,7 +102,7 @@
       on libs/headers from previous dirs to be installed
   - make it possible to use -k and -j (-k mostly works now)
   - fix corruption of flags (empty flags become -- eventually)
-  - don't always regenerate deps, and clean up dep generation
+  - distclean target that removes .depends and Makefile
   - maybe just switch to cmake
 - fix UniqueID() and friends:
   - try not to renumber everything every modification; messes up svn diff

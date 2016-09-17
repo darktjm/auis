@@ -7,7 +7,7 @@ ATK_INTER
 		Provides class registry
 
  	Copyright Carnegie Mellon, 1996 - All Rights Reserved
-	For full copyright information see: andrew/config/COPYRITE 
+	For full copyright information see: andrew/doc/COPYRITE 
 	$Disclaimer: 
 // Permission to use, copy, modify, and distribute this software and its 
 // documentation for any purpose and without fee is hereby granted, provided 

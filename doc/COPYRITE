@@ -6,11 +6,11 @@ Copyright Carnegie Mellon University 1991, 1996  - All Rights Reserved
 
 The following also have copyright to portions of this code. 
 
-Bell South  	See config/COPYRITE.bls
-AT&T		See config/COPYRITE.att
+Bell South  	See doc/COPYRITE.bls
+AT&T		See doc/COPYRITE.att
 Michael Mauldin, John Bradley, Kirk L. Johnson, Jim Frost, Mark Majhor, 
 Paul Haeberli, Tim Northrup, Massachusetts Institute of Technology
-		See config/COPYRITE.img
+		See doc/COPYRITE.img
 
 ############################################################################
 

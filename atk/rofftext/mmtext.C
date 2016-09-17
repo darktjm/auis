@@ -1,6 +1,6 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 
 /*
@@ -27,7 +27,7 @@
 
 /* ********************************************************************** *\
  *         Copyright AT&T Bell Laboratories - All Rights Reserved         *
- *        For full copyright information see:'andrew/config/COPYRITE.att' *
+ *        For full copyright information see:'andrew/doc/COPYRITE.att' *
 \* ********************************************************************** */
 
 /* mmtext: link to rofftext -mm. */

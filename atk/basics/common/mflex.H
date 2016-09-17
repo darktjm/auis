@@ -2,7 +2,7 @@
 #define _mflex_H_
 /* ********************************************************************** *\
  *	   Copyright Carnegie Mellon, 1995 - All Rights Reserved
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 /*
 	$Disclaimer: 

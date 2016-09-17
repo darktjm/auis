@@ -2,7 +2,7 @@
 #define _zipiff00_h_
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1989 - All Rights Reserved      *
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 
 /*

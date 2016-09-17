@@ -1,6 +1,6 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 
 /* Additions to this list should be supplemented by additions to the corresponding lists in getstats.c and  getstatsob.c */

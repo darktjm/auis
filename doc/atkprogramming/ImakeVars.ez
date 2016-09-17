@@ -896,8 +896,8 @@ System:
 
 \leftindent{Copyright Carnegie Mellon University 1996 - All Rights Reserved
 
-Additional copyright information can be found in config/COPYRITE.bls, 
-config/COPYRITE.att, and config/COPYRITE.img in both the source and 
+Additional copyright information can be found in doc/COPYRITE.bls, 
+doc/COPYRITE.att, and doc/COPYRITE.img in both the source and 
 destination areas. This product includes software developed by the
 
 University of California, Berkeley and its contributors.}

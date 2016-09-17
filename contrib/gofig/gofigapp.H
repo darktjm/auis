@@ -2,7 +2,7 @@
 #define _gofigapp_H_
 /* ********************************************************************** *\
  *         Copyright Carnegie Mellon University, 1992 - All Rights Reserved      *
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 
 /*

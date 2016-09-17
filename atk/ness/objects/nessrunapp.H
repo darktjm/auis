@@ -3,7 +3,7 @@ ATK_INTER
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1991 - All Rights Reserved      *
 	Copyright Carnegie Mellon University 1992, 1993 - All Rights Reserved
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 
 /*
