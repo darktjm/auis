@@ -29,7 +29,7 @@ public:
       
 	virtual ~fancy();
     
-       char * ViewName()  ;
+       const char * ViewName()  ;
 };
 
 #endif /* _fancy_H_ */

@@ -29,7 +29,7 @@ public:
       
 	virtual ~conview();
     
-       enum view_DSattributes DesiredSize(long width, long height,
+       view_DSattributes DesiredSize(long width, long height,
 	enum view_DSpass pass, long *dWidth,
 	long *dheight)  ;
        void FullUpdate(enum view_UpdateType type, long left,

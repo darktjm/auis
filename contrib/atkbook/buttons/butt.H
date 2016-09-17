@@ -29,9 +29,9 @@ public:
       
 	virtual ~butt();
     
-      virtual void SetText(char *txt);
+      virtual void SetText(const char *txt);
     
-      inline char  * GetText() { return (this->text); }
+      inline const char  * GetText() { return (this->text); }
     
       char *text;
 };

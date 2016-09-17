@@ -16,31 +16,39 @@ DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER
 IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
 OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 \* ***************************************************** */
-#include <flex.eh>
-#include <dataobj.ih>
-#include <message.ih>
-#include <lpair.ih>
+#include <andrewos.h>
+#include <flexd.H>
+#include <dataobject.H>
+#include <message.H>
+#include <lpair.H>
 
-extern char *index();
 
-boolean flex__InitializeObject(classID, self)
-struct classheader *classID;
-struct flex *self;
+
+
+ATKdefineRegistry(flexd, dataobject, NULL);
+static int ReadOneObject(class flexd  *self, FILE  *fp, boolean  IsLeft);
+static void ResetToInitialState(class flexd *self);
+
+
+flexd::flexd()
 {
-    self->left = NULL;
-    self->right = NULL;
-    self->lvname = NULL;
-    self->rvname = NULL; 
-    self->porf = lpair_PERCENTAGE;
-    self->vorh = lpair_VERTICAL;
-    self->pct = 50;
-    self->movable = 1;
-    return TRUE;
+    this->left = NULL;
+    this->right = NULL;
+    this->lvname = NULL;
+    this->rvname = NULL; 
+    this->porf = lpair_PERCENTAGE;
+    this->vorh = lpair_VERTICAL;
+    this->pct = 50;
+    this->movable = 1;
+    THROWONFAILURE( TRUE);
 }
 
-void flex__FinalizeObject(c, self)
-struct classheader *c;
-struct flex *self;
+flexd::~flexd()
+{
+    ResetToInitialState(this);
+}
+
+static void ResetToInitialState(class flexd *self)
 {
     if (self->lvname) {
 	free(self->lvname);
@@ -51,113 +59,99 @@ struct flex *self;
 	self->rvname = NULL;
     }
     if (self->left) {
-	dataobject_Destroy(self->left);
+	(self->left)->Destroy();
 	self->left = NULL;
     }
     if (self->right) {
-	dataobject_Destroy(self->right);
+	(self->right)->Destroy();
 	self->right = NULL;
     }
 }
 
-void flex__DeleteObjects(self)
-struct flex *self;
+void flexd::DeleteObjects()
 {
-    flex_FinalizeObject(self);
+    ResetToInitialState(this);
     /* reset everything to initial state */
-    self->porf = lpair_PERCENTAGE;
-    self->vorh = lpair_VERTICAL;
-    self->pct = 50;
-    self->movable = 1;
+    this->porf = lpair_PERCENTAGE;
+    this->vorh = lpair_VERTICAL;
+    this->pct = 50;
+    this->movable = 1;
 }
 
-void flex__SetDisplayParams(self, porf, vorh, movable, pct)
-struct flex *self;
-int porf, vorh, movable, pct;
+void flexd::SetDisplayParams(int  porf , int  vorh , int  movable , int  pct)
 {
-    if ((porf != self->porf) || (vorh != self->vorh)
-	 || (movable != self->movable)
-	 || (pct != self->pct)) {
-	self->porf = porf;
-	self->vorh = vorh;
-	self->movable = movable;
-	self->pct = pct;
+    if ((porf != this->porf) || (vorh != this->vorh)
+	 || (movable != this->movable)
+	 || (pct != this->pct)) {
+	this->porf = porf;
+	this->vorh = vorh;
+	this->movable = movable;
+	this->pct = pct;
     }
 }
 
-void flex__ToggleParts(self)
-struct flex *self;
+void flexd::ToggleParts()
 {
     char *name;
-    struct dataobject *d;
+    class dataobject *d;
 
-    d = self->left;
-    self->left = self->right;
-    self->right = d;
-    name = self->lvname;
-    self->lvname = self->rvname;
-    self->rvname = name;
+    d = this->left;
+    this->left = this->right;
+    this->right = d;
+    name = this->lvname;
+    this->lvname = this->rvname;
+    this->rvname = name;
 }
 
-boolean flex__InsertObject (self, d, viewname)
-struct flex *self;
-struct dataobject *d;
-char *viewname;
+boolean flexd::InsertObject (class dataobject  *d, const char  *viewname)
 {
-    struct dataobject *d2;
+    class dataobject *d2;
     char *n1, *n2;
 
-    d2 = (struct dataobject *) class_NewObject("flex");
+    d2 = (class dataobject *) ATK::NewObject("flexd");
     if (d == NULL || d2 == NULL) return(FALSE);
     n1 = strdup(viewname);
     n2 = strdup("flexview");
     if (n1 == NULL || n2 == NULL) return(FALSE);
-    self->left = d;
-    self->right = d2;
-    self->lvname = n1;
-    self->rvname = n2;
+    this->left = d;
+    this->right = d2;
+    this->lvname = n1;
+    this->rvname = n2;
     return(TRUE);
 }
 
-long flex__Write(self,fp ,writeid,level)
-struct flex *self;
-FILE *fp;
-long writeid;
-int level;
+long flexd::Write(FILE  *fp ,long  writeid,int  level)
 {
-    if (flex_GetWriteID(self) != writeid) {
-	flex_SetWriteID(self, writeid);
+    if ((this)->GetWriteID() != writeid) {
+	(this)->SetWriteID( writeid);
 
 	fprintf(fp,"\\begindata{%s,%ld}\n",
-		class_GetTypeName(self),
-		flex_GetID(self));
-	fprintf(fp, "$ %d %d %d %d\n", self->porf,
-		self->vorh, self->movable, self->pct);
-	if(self->left == NULL){
+		(this)->GetTypeName(),
+		(this)->GetID());
+	fprintf(fp, "$ %d %d %d %d\n", this->porf,
+		this->vorh, this->movable, this->pct);
+	if(this->left == NULL){
 	    fprintf(fp, "\\ObjectEmpty\n");
 	} else {
-	    dataobject_Write(self->left,fp,writeid,level+1);
-	    fprintf(fp, "\\view{%s}\n", self->lvname);
+	    (this->left)->Write(fp,writeid,level+1);
+	    fprintf(fp, "\\view{%s}\n", this->lvname);
 	}
-	if(self->right == NULL){
+	if(this->right == NULL){
 	    fprintf(fp, "\\ObjectEmpty\n");
 	} else {
-	    dataobject_Write(self->right,
+	    (this->right)->Write(
 			     fp, writeid,
 			     level+1);
-	    fprintf(fp, "\\view{%s}\n", self->rvname);
+	    fprintf(fp, "\\view{%s}\n", this->rvname);
 	}
 	fprintf(fp,"\\enddata{%s,%ld}\n",
-		class_GetTypeName(self),
-		flex_GetID(self));
+		(this)->GetTypeName(),
+		(this)->GetID());
     }
-    return flex_GetID(self);
+    return (this)->GetID();
 }
 
-long flex__Read(self, fp, id)
-struct flex *self;
-FILE *fp;
-long id;
+long flexd::Read(FILE  *fp, long  id)
 {
     int status;
     char LineBuf[250];
@@ -165,28 +159,25 @@ long id;
     if (fgets(LineBuf, sizeof(LineBuf)-1, fp) == NULL) {
 	return(dataobject_PREMATUREEOF);
     }
-    sscanf(LineBuf, "$ %d %d %d %d\n", &(self->porf),
-	    &(self->vorh), &(self->movable), &(self->pct));
-    status = ReadOneObject(self, fp, TRUE);
+    sscanf(LineBuf, "$ %d %d %d %d\n", &(this->porf),
+	    &(this->vorh), &(this->movable), &(this->pct));
+    status = ReadOneObject(this, fp, TRUE);
     if (status != dataobject_NOREADERROR) return status;
-    status = ReadOneObject(self, fp, FALSE);
+    status = ReadOneObject(this, fp, FALSE);
     if (status != dataobject_NOREADERROR) return status;
     while (fgets(LineBuf, sizeof(LineBuf)-1, fp) != NULL) {
-	if (!strncmp(LineBuf, "\\enddata{flex", 13)) {
+	if (!strncmp(LineBuf, "\\enddata{flexd", 13)) {
 	    return dataobject_NOREADERROR;
 	}
     }
     return(dataobject_PREMATUREEOF);
 }
 
-static ReadOneObject(self, fp, IsLeft)
-struct flex *self;
-FILE *fp;
-boolean IsLeft;
+static int ReadOneObject(class flexd  *self, FILE  *fp, boolean  IsLeft)
 {
     char LineBuf[250], *s, *obidstr, *thisname;
     int status, obid;
-    struct dataobject *newob = NULL;
+    class dataobject *newob = NULL;
 
     if (fgets(LineBuf, sizeof(LineBuf)-1, fp) == NULL) {
 	return(dataobject_PREMATUREEOF);
@@ -212,9 +203,9 @@ boolean IsLeft;
     if (!s) return(dataobject_BADFORMAT);
     *s = '\0';
     obid = atoi(obidstr);
-    if ((newob = (struct dataobject *)
-	  class_NewObject(thisname)))  {
-	status = dataobject_Read(newob, fp, obid);
+    if ((newob = (class dataobject *)
+	  ATK::NewObject(thisname)))  {
+	status = (newob)->Read( fp, obid);
 	if (status != dataobject_NOREADERROR) return status;
     } else {
 	return(dataobject_OBJECTCREATIONFAILED);

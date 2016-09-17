@@ -25,16 +25,16 @@
  *  $
 */
 
-OBJS = flex.o flexview.o
+OBJS = flexd.o flexview.o
 
-HFILES = flex.H flexview.H
+HFILES = flexd.H flexview.H
 
 NormalObjectRule()
 NormalATKRule()
 
-ATKLibraryTarget(flex, $(OBJS), $(BASEDIR)/lib/atk/libbasics.a,)
+ATKLibrary(flexd, $(OBJS),,,)
 
-RunappWithLibrary(ez,flex,flexrun, -r .)
+RunappWithLibrary(flexd,flexd, -a -c ezapp -r .)
 
 DependTarget()
 

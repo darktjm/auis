@@ -127,7 +127,7 @@ long switcher::Read(FILE  *fp, long  id)
 }
 
 
-boolean switcher::AddObject(class dataobject  *d, char  *label , char  *viewname)
+boolean switcher::AddObject(class dataobject  *d, const char  *label , const char  *viewname)
 {
     struct switchee *sw, *swtmp;
 
@@ -202,7 +202,7 @@ boolean switcher::SetNowPlaying(class dataobject  *d)
     return(FALSE);
 }
 
-char *switcher::ViewName()
+const char *switcher::ViewName()
 {
     return("switview"); 
     /* Two cheers for short file names */

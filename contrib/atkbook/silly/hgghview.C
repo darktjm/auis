@@ -46,8 +46,9 @@ static void ToggleLpairViews(class hgghview  *self, long  ignored, class butt  *
 static void ChangeFromShortList(class hgghview  *self, long  param);
 static void ChangeFromLongList(class hgghview  *self, long  param);
 static void HelpChoice(char  *partial, long  dummy , message_workfptr  helpTextFunction,  long  helpTextRock);
-static enum message_CompletionCode CompleteChoice(char  *part , long  dummy , char  *buf, long  size);
-static int matchct(char  *s1 , char  *s2);
+static enum message_CompletionCode CompleteChoice(char  *part , long  dummy , char  *buf, int  size);
+
+static int matchct(const char  *s1 , const char  *s2);
 
 
 boolean hgghview::InitializeClass()
@@ -165,7 +166,7 @@ static void ToggleLpairViews(class hgghview  *self, long  ignored, class butt  *
 static void ChangeFromShortList(class hgghview  *self, long  param)
 {
     long result;
-    static char *ShortList[] = {
+    static const char * const ShortList[] = {
 	"hello",
 	"goodbye",
 	"kick me",
@@ -197,7 +198,7 @@ static void ChangeFromLongList(class hgghview  *self, long  param)
     }
 }
 
-static char  *LongList[] = {
+static const char  * const LongList[] = {
     "red",
     "yellow",
     "blue",
@@ -220,14 +221,14 @@ static void HelpChoice(char  *partial, long  dummy, message_workfptr  helpTextFu
 {
     int i, len;
     len = strlen(partial);
-    for (i=0; i<LONGLISTSIZE;++i) {
+    for (i=0; i<(int)LONGLISTSIZE;++i) {
 	if (!strncmp(partial, LongList[i], len)) {
 	    (*helpTextFunction)(helpTextRock,
 		message_HelpListItem, LongList[i], NULL);
 	}
     }
 }
-static enum message_CompletionCode CompleteChoice(char  *part , long  dummy , char  *buf, long  size)
+static enum message_CompletionCode CompleteChoice(char  *part , long  dummy , char  *buf, int  size)
 {
     int matches = 0, i, plen, minmatch = -1, minmatchlen, newct;
     int DidMatch[LONGLISTSIZE];
@@ -240,7 +241,7 @@ static enum message_CompletionCode CompleteChoice(char  *part , long  dummy , ch
     /* First, go through marking (in DidMatch) which ones
       match at all, keeping track of the shortest match
       in minmatch/minmatchlen. */
-    for (i=0; i<LONGLISTSIZE; ++i) {
+    for (i=0; i<(int)LONGLISTSIZE; ++i) {
 	DidMatch[i] = !strncmp(partial, LongList[i], plen);
 	if (DidMatch[i]) {
 	    ++matches;
@@ -264,7 +265,7 @@ static enum message_CompletionCode CompleteChoice(char  *part , long  dummy , ch
 	    string before returning message_Invalid */
 	int bestmatch = 0, dum;
 
-	for (i=0; i<LONGLISTSIZE; ++i) {
+	for (i=0; i<(int)LONGLISTSIZE; ++i) {
 	    dum = matchct(partial, LongList[i]);
 	    if (dum > bestmatch) {
 		bestmatch = dum;
@@ -288,14 +289,14 @@ static enum message_CompletionCode CompleteChoice(char  *part , long  dummy , ch
 	int lim = (minmatchlen > size) ? size : minmatchlen;
 	strncpy(buf, LongList[minmatch], lim);
 	buf[lim] = '\0';
-	if (minmatchlen == strlen(LongList[minmatch])) {
+	if (minmatchlen == (int)strlen(LongList[minmatch])) {
 	    return(message_CompleteValid);
 	}
 	return(message_Valid);
     }
 }
 
-static int matchct(char  *s1 , char  *s2)
+static int matchct(const char  *s1 , const char  *s2)
 {
     int ans = 0;
     while (*s1 && (*s1++ == *s2++)) ++ans;

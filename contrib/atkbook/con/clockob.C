@@ -23,8 +23,8 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include <contimer.H>
 
 static class contimer *clockob_contimer;
-static char *Days[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-static char *Months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+static const char * const Days[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+static const char * const Months[] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 static struct tm *LatestLocalTime;
 
 
@@ -138,7 +138,7 @@ clockob::HandleDataLine(char  *line)
 
 void clockob::GetStringToDisplay(char  *buf, int  len, boolean  IsClick)
 {
-    char *dt = (this)->GetDisplayTemplate();
+    const char *dt = (this)->GetDisplayTemplate();
 
     if (dt == NULL || *dt == '!' || IsClick) {
 	int hr;

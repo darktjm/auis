@@ -31,12 +31,12 @@ public:
     
        long Read(FILE *fp, long id)  ;
        long Write(FILE *fp, long writeID, int level)  ;
-       char * ViewName()  ;
+       const char * ViewName()  ;
     
       virtual void SetNumval(long num);
-      virtual void SetStrval(char *str);
+      virtual void SetStrval(const char *str);
       /* SetStrval doesn't make a new copy of the string */
-      virtual void SetDisplayTemplate(char *displaytemplate);
+      virtual void SetDisplayTemplate(const char *displaytemplate);
       /* SetDisplayTemplate makes a new copy of the string */
       virtual void SetDisplayMin(int min);
       virtual void SetDisplayMax(int max);
@@ -46,14 +46,14 @@ public:
       virtual void WriteState(FILE *fp);
     
       inline long   GetNumval() { return (this->numval); }
-      inline char  * GetStrval() { return (this->strval); }
-      inline char  * GetDisplayTemplate() { return (this->DisplayTemplate); }
+      inline const char  * GetStrval() { return (this->strval); }
+      inline const char  * GetDisplayTemplate() { return (this->DisplayTemplate); }
       inline int   GetDisplayMin() { return (this->displaymin); }
       inline int   GetDisplayMax() { return (this->displaymax); }
       inline boolean  GetBoxed() { return (this->Boxed); }
     
       long numval;
-      char *strval;
+      const char *strval;
       int displaymin, displaymax;
       /* (The min & max for things like EKG graphs) */
       boolean Boxed; /* Draw a box or not? */

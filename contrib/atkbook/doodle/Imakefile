@@ -32,9 +32,9 @@ HFILES = dood.H doodview.H
 NormalObjectRule()
 NormalATKRule()
 
-ATKLibraryTarget(dood, $(OBJS), $(BASEDIR)/lib/atk/libbasics.a,)
+ATKLibrary(dood, $(OBJS),,,)
 
-RunappWithLibrary(ez,dood,doodrun, -r .)
+RunappWithLibrary(dood,dood, -a -c ezapp -r .)
 
 DependTarget()
 

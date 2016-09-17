@@ -34,9 +34,9 @@ LOCALINCLUDES = -I../buttons
 NormalObjectRule()
 NormalATKRule()
 
-ATKLibraryTarget(hggh, $(OBJS), $(BASEDIR)/lib/atk/libbasics.a,)
+ATKLibrary(hggh, $(OBJS),,,)
 
-RunappWithLibrary(ez,hggh,hgghrun, -r . -r ../buttons -c @butt)
+RunappWithLibrary(hggh,hggh, -c ezapp -r . -r ../buttons -c @butt)
 
 DependTarget()
 

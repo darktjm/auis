@@ -1,3 +1,5 @@
+#ifndef _conapp_H_
+#define _conapp_H_
 /* **************************************************** *\
 Copyright 1989 Nathaniel S. Borenstein
 Permission to use, copy, modify, and distribute this software and its
@@ -16,29 +18,16 @@ DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER
 IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
 OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 \* ***************************************************** */
-class butt: view {
-    overrides:
-      FullUpdate(enum view_UpdateType type, long left, long top,
-		  long width, long height);
-      Update();
-      Hit (enum view_MouseAction action, long x, long y,
-	    long numberOfClicks) returns struct view *;
-    classprocedures:
-      InitializeObject(struct butt *self) returns boolean;
-      FinalizeObject(struct butt *self);
-    methods:
-      SetText(char *txt);
-      SetButtonFont(struct fontdesc *f);
-      SetHitFunction(procedure HitFunction);
-      SetRocks(char *r1, int r2);
-    data:
-      char *text;
-      int (*HitFunction)();
-      /* The four parameters to the HitFunction are
-	long rock1, long rock2, struct butt * self,
-	and enum view_MouseAction action */
-      long rock1, rock2;
-      struct fontdesc *myfontdesc;
-      struct cursor *mycursor;
-};
+#include <application.H>
+class conapp: public application {
+public:
+      virtual ATKregistryEntry *ATKregistry();
+      conapp();
+      boolean Start();
+      boolean ParseArgs(int argc,char *argv[]);
 
+      int desiredheight, desiredwidth;
+      char **filenames;
+      int filenamesused, filenamesallocated;
+};
+#endif

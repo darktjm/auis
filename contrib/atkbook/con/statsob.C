@@ -88,7 +88,7 @@ statsob::~statsob()
 
 void statsob::SetStatPart(int  which)
 {
-    static char *DefaultDisplayTemplates[] = {
+    static const char * const DefaultDisplayTemplates[] = {
 	"<nothing>",
 	"The CPU load is $%.",
 	"The IO load is $%.",

@@ -32,9 +32,11 @@ HFILES = fancy.H fancier.H fontanim.H
 NormalObjectRule()
 NormalATKRule()
 
-ATKLibraryTarget(fancy, $(OBJS), $(BASEDIR)/lib/atk/libbasics.a,)
+ATKLibrary(fancy, $(OBJS),,,)
 
-RunappWithLibrary(ez,fancy,fancyrun, -r .)
+RunappWithLibrary(fancy,fancy, -a -c ezapp -r .)
+RunappWithLibrary(fancier,fancy, -a -c ezapp -r .)
+RunappWithLibrary(fontanim,fancy, -a -c ezapp -r .)
 
 DependTarget()
 

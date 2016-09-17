@@ -72,7 +72,7 @@ void
 butt::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  width , long  height)
 {
     struct rectangle Rect;
-    char *dtext;
+    const char *dtext;
 
     (this)->GetLogicalBounds( &Rect);
     (this)->SetFont( this->myfontdesc);
@@ -90,7 +90,7 @@ butt::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  widt
 }
 
 void
-butt::SetText(char  *txt)
+butt::SetText(const char  *txt)
 {
     if (this->text) free(this->text);
     this->text = strdup(txt);

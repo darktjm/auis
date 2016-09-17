@@ -18,7 +18,7 @@ OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 \* ***************************************************** */
 #include <andrewos.h>
 #include <flexview.H>
-#include <flex.H>
+#include <flexd.H>
 #include <dataobject.H>
 #include <im.H>
 #include <view.H>
@@ -120,13 +120,13 @@ flexview::~flexview()
 
 void flexview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  width,long  height)
 {
-    class flex *flex = (class flex *)
+    class flexd *flexd = (class flexd *)
       (this)->GetDataObject();
 
-    if (flex && flex->right) {
+    if (flexd && flexd->right) {
 	if ((this->rightview != NULL) || CreateViews(this)) {
-	    if ((this->oldleftdata != flex->left)
-		|| (this->oldrightdata != flex->right)) {
+	    if ((this->oldleftdata != flexd->left)
+		|| (this->oldrightdata != flexd->right)) {
 		ResetViews(this);
 	    }
 	    (this)->lpair::FullUpdate(type,left,
@@ -139,23 +139,23 @@ void flexview::FullUpdate(enum view_UpdateType  type,long  left,long  top,long  
 
 void flexview::Update()
 {
-    class flex *flex = (class flex *)
+    class flexd *flexd = (class flexd *)
       (this)->GetDataObject();
 
-    if (flex && flex->right) {
+    if (flexd && flexd->right) {
 	if (this->rightview || CreateViews(this)) {
 	    int porf, vorh, movable;
 
-	    if ((this->oldleftdata != flex->left)
-		|| (this->oldrightdata != flex->right)) {
+	    if ((this->oldleftdata != flexd->left)
+		|| (this->oldrightdata != flexd->right)) {
 		ResetViews(this);
 	    }
 	    (this)->GetLPState( &porf,
 				    &vorh, &movable);
-	    if ((porf != flex->porf) || (vorh != flex->vorh)
-		|| (movable != flex->movable)) {
-		(this)->SetLPState( flex->porf,
-			flex->vorh, flex->movable);
+	    if ((porf != flexd->porf) || (vorh != flexd->vorh)
+		|| (movable != flexd->movable)) {
+		(this)->SetLPState( flexd->porf,
+			flexd->vorh, flexd->movable);
 	    }
 	    (this)->lpair::Update();
 	}
@@ -179,10 +179,10 @@ static void DrawMe(class flexview  *self)
 class view *flexview::Hit(enum view_MouseAction  action,long  x ,long  y ,long  numberOfClicks)
 {
     class view *v;
-    class flex *flex = (class flex *)
+    class flexd *flexd = (class flexd *)
       (this)->GetDataObject();
 
-    if (flex && this->rightview) {
+    if (flexd && this->rightview) {
 	v = (this)->lpair::Hit(action,x,y,numberOfClicks);
 	if (v == (class view *) this) {
 	    int porf, vorh, movable, pct;
@@ -193,9 +193,9 @@ class view *flexview::Hit(enum view_MouseAction  action,long  x ,long  y ,long  
 	    } else {
 		pct = (this)->GetObjSize( 1);
 	    }
-	    (flex)->SetDisplayParams( porf, vorh,
+	    (flexd)->SetDisplayParams( porf, vorh,
 				      movable, pct);
-	    (flex)->NotifyObservers(
+	    (flexd)->NotifyObservers(
 			observable_OBJECTCHANGED);
 	}
 	return(v);
@@ -232,7 +232,7 @@ void flexview::PostMenus(class menulist  *ml)
     (this)->lpair::PostMenus( myml);
 }
 
-enum view_DSattributes flexview::DesiredSize(long  width , long  height, enum view_DSpass  pass, long  *desiredwidth , long  *desiredheight)
+view_DSattributes flexview::DesiredSize(long  width , long  height, enum view_DSpass  pass, long  *desiredwidth , long  *desiredheight)
 { 
     if (this->rightview) {
 	return((this)->lpair::DesiredSize( width, height, pass,
@@ -245,39 +245,39 @@ enum view_DSattributes flexview::DesiredSize(long  width , long  height, enum vi
 
 static boolean CreateViews(class flexview  *self)
 {
-    class flex *flex = (class flex *)
+    class flexd *flexd = (class flexd *)
       (self)->GetDataObject();
 
     self->leftview = (class view *)
-      ATK::NewObject(flex->lvname);
+      ATK::NewObject(flexd->lvname);
     if (self->leftview == NULL) return(FALSE);
-    (self->leftview)->SetDataObject( flex->left);
+    (self->leftview)->SetDataObject( flexd->left);
     self->rightview = (class view *)
-      ATK::NewObject(flex->rvname);
+      ATK::NewObject(flexd->rvname);
     if (self->rightview == NULL) return(FALSE);
-    (self->rightview)->SetDataObject( flex->right);
+    (self->rightview)->SetDataObject( flexd->right);
     (self)->SetUp( self->leftview, self->rightview,
-	flex->pct, flex->porf, flex->vorh, flex->movable);
-    (self)->SetLPState( flex->porf, flex->vorh,
-	flex->movable);
+	flexd->pct, flexd->porf, flexd->vorh, flexd->movable);
+    (self)->SetLPState( flexd->porf, flexd->vorh,
+	flexd->movable);
     (self->leftview)->WantInputFocus( self->leftview);
-    self->oldleftdata = flex->left;
-    self->oldrightdata = flex->right;
+    self->oldleftdata = flexd->left;
+    self->oldrightdata = flexd->right;
     return(TRUE);
 }
 
 static void ResetViews(class flexview  *self)
 {
-    class flex *flex = (class flex *)
+    class flexd *flexd = (class flexd *)
       (self)->GetDataObject();
     class view *oldfocus;
 
-    if (self->oldleftdata == flex->right) {
+    if (self->oldleftdata == flexd->right) {
 	oldfocus = ((self)->GetIM())->GetInputFocus();
 	(self)->SetNth( 0, self->leftview);
 	(self)->SetNth( 1, self->rightview);
-	self->oldleftdata = flex->left;
-	self->oldrightdata = flex->right;
+	self->oldleftdata = flexd->left;
+	self->oldrightdata = flexd->right;
 	(self)->WantUpdate( self);
 	if (oldfocus != NULL) {
 	    (oldfocus)->WantInputFocus( oldfocus);
@@ -287,9 +287,10 @@ static void ResetViews(class flexview  *self)
 
 static void InsertObject(class flexview  *self)
 {
-    char objname[250], *defaultviewname, viewname[250];
+    char objname[250], viewname[250];
+    const char *defaultviewname;
     class dataobject *d;
-    class flex *flex;
+    class flexd *flexd;
 
     if (self->rightview) {
 	message::DisplayString(self, 10,
@@ -297,7 +298,7 @@ static void InsertObject(class flexview  *self)
 	return;
     }
     if (message::AskForString(self, 10,
-		"Data object to insert: ", "flex",
+		"Data object to insert: ", "flexd",
 		objname, sizeof(objname)) < 0) {
 	message::DisplayString(self, 10, "Cancelled.");
 	return;
@@ -313,36 +314,36 @@ static void InsertObject(class flexview  *self)
 	defaultviewname, viewname, sizeof(viewname)) < 0) {
 	return;
     }
-    flex = (class flex *) (self)->GetDataObject();
-    if (!(flex)->InsertObject( d, viewname)) {
+    flexd = (class flexd *) (self)->GetDataObject();
+    if (!(flexd)->InsertObject( d, viewname)) {
 	message::DisplayString(self, 10,
 		"Could not insert object -- sorry.");
 	return;
     }
-    (flex)->NotifyObservers( observable_OBJECTCHANGED);
+    (flexd)->NotifyObservers( observable_OBJECTCHANGED);
 }
 
 static void DeleteObjects(class flexview  *self)
 {
     char Prompt[256];
     long result;
-    static char *Choices[] = {
+    static const char * const Choices[] = {
 	"Delete both sub-objects", "Cancel", NULL};
-    class flex *flex;
+    class flexd *flexd;
 
     if (!self->rightview) {
 	message::DisplayString(self, 10,
 		"There is nothing to delete!");
 	return;
     }
-    flex = (class flex *)
+    flexd = (class flexd *)
       (self)->GetDataObject();
     sprintf(Prompt,
 	 "This pair contains a %s on a %s and a %s on a %s.",
 	 (self->leftview)->GetTypeName(),
-	 (flex->left)->GetTypeName(),
+	 (flexd->left)->GetTypeName(),
 	 (self->rightview)->GetTypeName(),
-	 (flex->right)->GetTypeName());
+	 (flexd->right)->GetTypeName());
     if (message::MultipleChoiceQuestion(self, 50, Prompt, 1,
 	 &result, Choices, NULL) < 0) return;
     if (result != 0 && result != 1) return;
@@ -356,8 +357,8 @@ static void DeleteObjects(class flexview  *self)
     self->leftview = self->rightview = NULL;
     self->oldleftdata = NULL;
     self->oldrightdata = NULL;
-    (flex)->DeleteObjects();
-    (flex)->NotifyObservers( observable_OBJECTCHANGED);
+    (flexd)->DeleteObjects();
+    (flexd)->NotifyObservers( observable_OBJECTCHANGED);
     (self)->WantUpdate( self);
     (self)->WantInputFocus( self);
 }
@@ -365,39 +366,39 @@ static void DeleteObjects(class flexview  *self)
 static void AlterPair(class flexview  *self)
 {
     class view *v;
-    char *QVec[8];
+    const char *QVec[8];
     long result;
-    class flex *flex = (class flex *)
+    class flexd *flexd = (class flexd *)
       (self)->GetDataObject();
 
-    if (!flex || !self->rightview) {
+    if (!flexd || !self->rightview) {
 	message::DisplayString(self, 10,
 		"You don't have anything to alter here yet.");
 	return;
     }
     QVec[0] = "Nothing";
     QVec[1] = "Toggle two views";
-    if (flex->vorh == lpair_HORIZONTAL) {
+    if (flexd->vorh == lpair_HORIZONTAL) {
 	QVec[2] = "Make split vertical";
     } else {
 	QVec[2] = "Make split horizontal";
     }
-    if (flex->porf == lpair_PERCENTAGE) {
+    if (flexd->porf == lpair_PERCENTAGE) {
 	QVec[3] = "Keep sizes split by percentages";
     } else {
 	QVec[3] = "Make sizes split by percentages";
     }
-    if (flex->porf == lpair_TOPFIXED) {
+    if (flexd->porf == lpair_TOPFIXED) {
 	QVec[4] = "Keep top part fixed size";
     } else {
 	QVec[4] = "Make top part fixed size";
     }
-    if (flex->porf == lpair_BOTTOMFIXED) {
+    if (flexd->porf == lpair_BOTTOMFIXED) {
 	QVec[5] = "Keep bottom part fixed size";
     } else {
 	QVec[5] = "Make bottom part fixed size";
     }
-    if (flex->movable) {
+    if (flexd->movable) {
 	QVec[6] = "Make split not movable";
     } else {
 	QVec[6] = "Make split movable";
@@ -410,29 +411,29 @@ static void AlterPair(class flexview  *self)
 	case 0:
 	    return; /* Doing nothing */
 	case 1:
-	    (flex)->ToggleParts();
-	    (flex)->NotifyObservers(
+	    (flexd)->ToggleParts();
+	    (flexd)->NotifyObservers(
 			observable_OBJECTCHANGED);
 	    v = self->leftview;
 	    self->leftview = self->rightview;
 	    self->rightview = v;
 	    break;
 	case 2:
-	    flex->vorh = !flex->vorh;
+	    flexd->vorh = !flexd->vorh;
 	    break;
 	case 3:
-	    flex->porf = lpair_PERCENTAGE;
+	    flexd->porf = lpair_PERCENTAGE;
 	    break;
 	case 4:
-	    flex->porf = lpair_TOPFIXED;
+	    flexd->porf = lpair_TOPFIXED;
 	    break;
 	case 5:
-	    flex->porf = lpair_BOTTOMFIXED;
+	    flexd->porf = lpair_BOTTOMFIXED;
 	    break;
 	case 6:
-	    flex->movable = !flex->movable;
+	    flexd->movable = !flexd->movable;
 	    break;
     }
-    (flex)->NotifyObservers( observable_OBJECTCHANGED);
+    (flexd)->NotifyObservers( observable_OBJECTCHANGED);
 }
 

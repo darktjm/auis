@@ -32,9 +32,9 @@ HFILES = hwapp.H
 NormalObjectRule()
 NormalATKRule()
 
-ATKLibraryTarget(hw, $(OBJS), $(BASEDIR)/lib/atk/libbasics.a,)
+ATKLibrary(hw, $(OBJS),,,)
 
-RunappWithLibrary(hw,hw,exrun, -r .)
+RunappWithLibrary(hw,hw, -r .)
 
 DependTarget()
 

@@ -32,9 +32,9 @@ HFILES = hgghapp.H butt.H
 NormalObjectRule()
 NormalATKRule()
 
-ATKLibraryTarget(hggh, $(OBJS), $(BASEDIR)/lib/atk/libbasics.a,)
+ATKLibrary(hggh, $(OBJS),,,)
 
-RunappWithLibrary(hggh,hggh,hgghrun, -r .)
+RunappWithLibrary(hggh,hggh, -r .)
 
 DependTarget()
 
