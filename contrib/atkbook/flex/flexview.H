@@ -39,7 +39,7 @@ public:
 	    long numberOfClicks)  ;
        void PostKeyState(class keystate *keystate);
        void PostMenus(class menulist *ml);
-       enum view_DSattributes DesiredSize(long width, long height,
+       view_DSattributes DesiredSize(long width, long height,
 		   enum view_DSpass pass,
 		   long *dWidth, long *dheight)
 	 ;

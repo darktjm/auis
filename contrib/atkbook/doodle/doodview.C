@@ -83,6 +83,8 @@ doodview::Hit(enum view_MouseAction  action, long  x , long  y , long  numclicks
 		this->lastuphitY = y;
 		DrawMyRect(this, graphic_BLACK, IsUpHit);
 		break;
+	    default: // nomouseevent upmovement *filedrop
+		break;
     }
     return((class view *) this);
 }

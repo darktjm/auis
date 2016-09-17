@@ -48,7 +48,9 @@ conob::~conob()
 
 void conob::GetStringToDisplay(char  *buf, int  len, boolean  IsClick)
 {
-    char *templateptr, *t, *end, NumBuf[25], *str_val;
+    const char *templateptr;
+    char *end, NumBuf[25];
+    const char *str_val, *t;
 
     if (this->strval == NULL) {
 	str_val = "<no value>";
@@ -69,7 +71,7 @@ void conob::GetStringToDisplay(char  *buf, int  len, boolean  IsClick)
 		break;
 	    case '$':
 		/* copy over numeric value */
-		sprintf(NumBuf, "%d", this->numval);
+		sprintf(NumBuf, "%ld", this->numval);
 		for (t=NumBuf; *t && (buf<end); ++t) {
 		    *buf++ = *t;
 		}
@@ -148,7 +150,7 @@ void conob::HandleDataLine(char  *line)
     fprintf(stderr, "Ignoring unrecognized data: %s\n", line);
 }
 
-char *conob::ViewName()
+const char *conob::ViewName()
 {
     return("conview"); /* overrides default for subclasses */
 }
@@ -158,12 +160,12 @@ void conob::SetNumval(long  num)
     this->numval = num;
 }
 
-void conob::SetStrval(char  *str)
+void conob::SetStrval(const char  *str)
 {
     this->strval = str;
 }
 
-void conob::SetDisplayTemplate(char  *dt)
+void conob::SetDisplayTemplate(const char  *dt)
 {
     char *s;
 
@@ -174,8 +176,6 @@ void conob::SetDisplayTemplate(char  *dt)
 	this->DisplayTemplate = NULL;
 	return;
     }
-    s = index(dt, '\n');
-    if (s) *s = NULL; /* End templates at newlines */
     if (this->DisplayTemplate == NULL) {
 	this->DisplayTemplate = (char *)malloc(1+strlen(dt));
     } else {
@@ -184,6 +184,8 @@ void conob::SetDisplayTemplate(char  *dt)
     }
     if (this->DisplayTemplate != NULL) {
 	strcpy(this->DisplayTemplate, dt);
+	s = index(this->DisplayTemplate, '\n');
+	if (s) *s = NULL; /* End templates at newlines */
     }
 }
 

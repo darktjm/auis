@@ -96,7 +96,9 @@ So far, the following incompatibilities have been introduced:
  - No AFS support.  Mostly a hack, anyway. The only useful things I
    can think of are directory permission and file flush semantics,
    neither of which is that important with any of the supplied
-   apps.  Like AMS above, I actually removed the code, so that I don't
+   apps.  Actually, I guess the console app does AFS status monitoring
+   as well, but I'm not going to set up a dummy AFS cell just to test
+   it.  Like AMS above, I actually removed the code, so that I don't
    have to deal with it when doing mass updates.
 
  - I have removed the ch files and tools required to convert out-of-tree
@@ -117,6 +119,9 @@ So far, the following incompatibilities have been introduced:
  - I have removed NEOS (contrib/mit).  I doubt it's in use any more,
    and I don't feel like maintaining it (just updating to krb5 would
    take way too much effort).
+
+ - I have removed all support for fbd font files (both the converter
+   and the fbd-format orignals of the Andrew fonts).
 
 Goals
 -----
@@ -166,9 +171,12 @@ So far, what I've done is:
     sizeof(long) == sizeof(void *) == 4.  Some such assumptions still
     exist, and require manual location and removal.
 
-  - Started on documentation, partly in the form of an org file.  I
-    will probably abandon this document eventually and make something
-    better.
+  - Started on documentation, now in a plain ez text file instead
+    of org (org seemed nifty, but it can't print and you can't
+    assign styles to node labels and the app is in general not
+    very user-friendly). If I don't get cracking on the latex
+    output, I'll probably abandon this as well in favor of a plain
+    latex document.
 
   - Fixed org so that it actually almost works.  I don't think org
     was production-ready even in '97.  It still has some usability

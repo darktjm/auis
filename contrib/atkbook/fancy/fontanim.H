@@ -29,7 +29,7 @@ public:
       
 	virtual ~fontanim();
     
-       char * ViewName()  ;
+       const char * ViewName()  ;
     
       class style *bold, *italic, *currentstyle;
       class environment *myenv;

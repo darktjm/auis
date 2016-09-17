@@ -37,7 +37,7 @@ butt::~butt()
 }
 
 void
-butt::SetText(char  *txt)
+butt::SetText(const char  *txt)
 {
     if (this->text) free(this->text);
     this->text = strdup(txt);

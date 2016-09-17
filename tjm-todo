@@ -108,6 +108,13 @@
   - try not to renumber everything every modification; messes up svn diff
   - try to limit to 32 bits to retain compatibility with older systems
 - pass unknown keys up the view hierarchy (e.g. pgup within inset often fails)
+- build (and clean up) atkbook examples, or chuck them
+  - most build and run OK now; need to install somewhere maybe
+  - con: use getstats from atk/console.  Builds OK, but not sure what it does
+  - flex: builds OK.  Not sure what it does
+    - renamed dataobject to flexd to avoid conflict
+    - seems to want to be renamed flexpair for compatibility with con
+  - switcher: builds OK.  Not sure what it does
 
 Long-term:
   - view/adjust styling boundaries (aka view source)?
@@ -126,6 +133,12 @@ Long-term:
   - look at removed mail-related stuff to see if anything useful got deleted
     (e.g. ez2ascii claims descendence from messages)
   - look at auis-6.3.1 to see if anything useful got dropped in 8.0
+    - rdemo service: probably not worth looking at
+    - class system: don't want to touch it
+    - overhead/conv: ancient and useless
+    - contrib/parsec: maybe
+    - atk/music: only because it's referenced by other docs & demos
+    - no patience to check big common dirs for missing individuals
   - see if there is an atk repository in /afs/andrew.cmu.edu/ with more
     recent changes to 8.x
   - maybe give the sourceforge atk project another chance and try

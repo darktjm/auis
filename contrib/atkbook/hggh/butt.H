@@ -38,7 +38,7 @@ public:
       
 	virtual ~butt();
     
-      virtual void SetText(char *txt);
+      virtual void SetText(const char *txt);
       virtual void SetButtonFont(class fontdesc *f);
       virtual void SetHitFunction(butt_hit_fptr HitFunction);
       virtual void SetRocks(void *r1, void *r2);

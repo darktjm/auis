@@ -39,10 +39,10 @@ public:
     
        long Read (FILE *file, long id)  ;
        long Write (FILE *file, long writeid, int level)  ;
-       char * ViewName()  ;
+       const char * ViewName()  ;
     
-      virtual boolean AddObject(class dataobject *d, char *label,
-		 char *viewname)  ;
+      virtual boolean AddObject(class dataobject *d, const char *label,
+		 const char *viewname)  ;
       virtual boolean DeleteObject(class dataobject *d)  ;
       virtual boolean SetNowPlaying(class dataobject *d)  ;
     

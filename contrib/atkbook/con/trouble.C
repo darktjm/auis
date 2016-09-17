@@ -104,7 +104,7 @@ void trouble::GetStringToDisplay(char  *buf, int  buflen, boolean  IsClick)
 {
     int i, buffilled;
     boolean SawTrouble = FALSE;
-    char *dt = (this)->GetDisplayTemplate();
+    const char *dt = (this)->GetDisplayTemplate();
 
     if (!IsClick && dt != NULL && *dt != '!') {
 	(this)->conob::GetStringToDisplay( buf, buflen, IsClick);

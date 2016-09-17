@@ -58,7 +58,7 @@ buttview::FullUpdate(enum view_UpdateType  type, long  left , long  top , long  
     struct rectangle Rect;
     class butt *b = (class butt *)
       (this)->GetDataObject();
-    char *txt = NULL;
+    const char *txt = NULL;
 
     (this)->GetLogicalBounds( &Rect);
     (this)->EraseRect( &Rect);
@@ -88,7 +88,7 @@ buttview::Update()
     class butt *b = (class butt *)
       (this)->GetDataObject();
     boolean HasChanged = FALSE;
-    char *btext = (b)->GetText();
+    const char *btext = (b)->GetText();
 
     if (btext == NULL) {
 	if (this->lasttext != NULL) HasChanged = TRUE;

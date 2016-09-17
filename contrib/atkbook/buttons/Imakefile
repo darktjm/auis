@@ -32,7 +32,7 @@ HFILES = butt.H buttview.H
 NormalObjectRule()
 NormalATKRule()
 
-ATKLibraryTarget(butt, $(OBJS), $(BASEDIR)/lib/atk/libbasics.a,)
+ATKLibrary(butt, $(OBJS),,,)
 
 DependTarget()
 

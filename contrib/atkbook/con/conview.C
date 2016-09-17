@@ -41,7 +41,7 @@ conview::~conview()
     }
 }
 
-enum view_DSattributes conview::DesiredSize(long  width , long  height, enum view_DSpass  pass, long  *desiredwidth , long  *desiredheight)
+view_DSattributes conview::DesiredSize(long  width , long  height, enum view_DSpass  pass, long  *desiredwidth , long  *desiredheight)
 
 {
     *desiredwidth = 200;

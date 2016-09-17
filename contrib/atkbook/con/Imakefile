@@ -25,18 +25,18 @@
  *  $
 */
 
-OBJS = clockob.o clocksec.o clogview.o conob.o contimer.o conview.o disk1.o ekgview.o statsob.o trouble.o
+OBJS = clockob.o clocksec.o clogview.o conob.o conapp.o contimer.o conview.o disk1.o ekgview.o statsob.o trouble.o
 
 HFILES = clockob.H clocksec.H clogview.H conob.H contimer.H conview.H disk1.H ekgview.H statsob.H trouble.H
+
+LOCALINCLUDES = -I../flex
 
 NormalObjectRule()
 NormalATKRule()
 
-ATKLibraryTarget(con, $(OBJS), $(BASEDIR)/lib/atk/libbasics.a,)
+ATKLibrary(con, $(OBJS),,,)
 
-RunappWithLibrary(ez,con,conrun, -r .)
-
-ProgramTarget(getstats, getstats.o, , )
+RunappWithLibrary(con,con, -r . -r ../flex -c @flexd)
 
 DependTarget()
 

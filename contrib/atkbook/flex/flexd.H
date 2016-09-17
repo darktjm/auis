@@ -1,3 +1,5 @@
+#ifndef _flexd_H_
+#define _flexd_H_
 /* **************************************************** *\
 Copyright 1989 Nathaniel S. Borenstein
 Permission to use, copy, modify, and distribute this software and its
@@ -16,48 +18,29 @@ DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER
 IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING
 OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 \* ***************************************************** */
-#include <hwapp.eh>
-#include <im.ih>
-#include <text.ih>
-#include <textv.ih>
+#include <dataobject.H>
+class flexd : public  dataobject  {
+public:
+	virtual ATKregistryEntry *ATKregistry();
 
-boolean hwapp__InitializeObject(c, self)
-struct classheader *c;
-struct hwapp *self;
-{
-    self->t = NULL;
-    self->tv = NULL;
-    hwapp_SetMajorVersion(self, 1);
-    hwapp_SetMinorVersion(self, 0);
-    return(TRUE);
-}
+    
+      
+	flexd();
+      
+	virtual ~flexd();
+    
+       long Read (FILE *file, long id)  ;
+       long Write (FILE *file, long writeid, int level)  ;
+    
+      virtual void SetDisplayParams(int porf, int vorh, int movable, int pct);
+      virtual boolean InsertObject (class dataobject *d, const char *viewname);
+      virtual void ToggleParts();
+      virtual void DeleteObjects();
+    
+      class dataobject *left,*right;
+      char *lvname, *rvname;
+      boolean movable;
+      int vorh, porf, pct;
+};
 
-void hwapp__FinalizeObject(c, self)
-struct classheader *c;
-struct hwapp *self;
-{
-    if (self->t != NULL) text_Destroy(self->t);
-    if (self->tv != NULL) textview_Destroy(self->tv);
-}
-
-boolean hwapp__Start(self)
-struct hwapp *self;
-{
-    struct im *im = im_Create(NULL);
-
-    self->t = text_New();
-    self->tv = textview_New();
-    if (self->t == NULL || self->tv == NULL) return(FALSE);
-    textview_SetDataObject(self->tv, self->t);
-    text_InsertCharacters(self->t, 0, "Hello world.", 12); 
-    im_SetView(im, self->tv);
-    textview_WantInputFocus(self->tv, self->tv);
-    return(TRUE);
-}
-
-struct text * hwapp__GetText(self)
-struct hwapp *self;
-{
-    return(self->t);
-}
-
+#endif /* _flexd_H_ */

@@ -32,9 +32,9 @@ HFILES = hw.H hwview.H
 NormalObjectRule()
 NormalATKRule()
 
-ATKLibraryTarget(hw, $(OBJS), $(BASEDIR)/lib/atk/libbasics.a,)
+ATKLibrary(hw, $(OBJS),,,)
 
-RunappWithLibrary(ez,hw,hwrun, -r .)
+RunappWithLibrary(hw,hw, -c ezapp -r .)
 
 DependTarget()
 

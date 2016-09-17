@@ -32,7 +32,7 @@ public:
       
 	virtual ~hwargapp();
     
-      char *whattosay;
+      const char *whattosay;
 };
 
 #endif /* _hwargapp_H_ */

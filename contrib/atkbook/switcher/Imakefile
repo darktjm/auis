@@ -32,9 +32,9 @@ HFILES = switcher.H switview.H
 NormalObjectRule()
 NormalATKRule()
 
-ATKLibraryTarget(switcher, $(OBJS), $(BASEDIR)/lib/atk/libbasics.a,)
+ATKLibrary(switcher, $(OBJS),,,)
 
-RunappWithLibrary(ez,switcher,switrun, -r . -c @raster)
+RunappWithLibrary(switcher,switcher, -a -c ezapp -r . -c @raster)
 
 DependTarget()
 
