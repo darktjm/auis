@@ -41,7 +41,7 @@ made there, I won't even bother.
 Legal Information
 -----------------
 
-AUIS is copyrighted material; see the COPYRITE files in config/ for
+AUIS is copyrighted material; see the COPYRITE files in doc/ for
 details on that.  Any changes I made are not assigned to the Andrew
 Consortium, IBM, or anyone else, but instead are released in the
 public domain.  That is, the product I'm making here is a cumulative

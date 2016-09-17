@@ -22,7 +22,7 @@ MFLAGS=
 #  $
 */
 
-/* For full copyright information see:'andrew/config/COPYRITE' */
+/* For full copyright information see:'andrew/doc/COPYRITE' */
 
 #define In_Imake 1
 /* The next two lines need to be kept in sync */

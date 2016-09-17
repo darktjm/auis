@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Based on printscribe which is a Copyright IBM utility.
-# For full copyright information see 'andrew/config/COPYRITE'
+# For full copyright information see 'andrew/doc/COPYRITE'
 
 # discover if we should act like a filter, or emit
 # files.  Output filenames are the input filename with .PS appended

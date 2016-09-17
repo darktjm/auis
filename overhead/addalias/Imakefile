@@ -1,10 +1,12 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 
 NormalObjectRule()
+NormalHelpRule()
 ProgramTarget(addalias,addalias.o,,${SUPLIBS} ${LIBS} ${BSDLIB})
 InstallProgram(addalias,$(DESTDIR)/etc)
-MkdirTarget($(DESTDIR)/help)
+InstallDocs(addalias.help, $(DESTDIR)/help)
+
 DependTarget()

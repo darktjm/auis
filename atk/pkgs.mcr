@@ -1,6 +1,6 @@
 /* ********************************************************************** *\
  *	Copyright Carnegie Mellon, 1996
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 
 /*

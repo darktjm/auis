@@ -14,7 +14,7 @@ static char alogo_bits[] = {
    0x00, 0x00, 0xf0, 0x01, 0x00, 0x00, 0xe0, 0x00};
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1994 - All Rights Reserved      *
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 
 /*

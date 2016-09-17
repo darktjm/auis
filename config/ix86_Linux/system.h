@@ -1,6 +1,6 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 
 /*
@@ -54,20 +54,6 @@ All #includes should be prsent exactly as they are in this file, unless otherwis
 #undef FAILEXIT
 #define FAILEXIT test $$? -eq 0 || exit 1
 #endif
-
-/* If the system provides shared libraries and you have implemented a means to build
- ATK libraries as shared (by implementing mkatkshlib), then HAVE_SHARED_LIBRARIES
- should be defined and INSTALL_SHLIB_SUPPORT should be defined as an Imakefile
- fragment which will install any files needed to support shared libraries, these files
- should be kept in the source tree in config/system-type-name.  (In particular at least
- mkatkshlib should be installed.) */
-/* #define HAVE_SHARED_LIBRARIES 1 
-#ifdef In_Imake
-#define INSTALL_SHLIB_SUPPORT() @@\
-InstallFileToFile(hp700_90/mkatkshlib, $(INSTPROGFLAGS), $(DESTDIR)/etc)
-#endif
-*/
-
 
 /* The SY_ macros should hopefully become obsolete fairly soon, in the mean time you should
  uncomment one of the macros below which most closely describes your system.  In general
@@ -587,20 +573,6 @@ ENDCPLUSPLUSPROTOS
  
 #include <site.h>
 
-#ifndef USE_ELF
-#ifdef In_Imake
-#undef DYNPOSTEXTRA
-#define DYNPOSTEXTRA
-#define DynamicPreLinkCommand(dobj,extraclasses,objs,libs,syslibs) $(BASEDIR)/etc/alibexp dobj $(BASEDIR) $(BASEDIR)/etc/relativize --- objs libs syslibs;
-
-#undef InstallATKExportsTarget
-#define InstallATKExportsTarget(target,name,dest) @@\
-target:: name.exp @@\
-	$(INSTALL) $(INSTINCFLAGS) name.exp dest/name.exp
-#endif
-#define HAVE_DYNAMIC_LOADING 1
-#define HAVE_DYNAMIC_INTERLINKING 1
-#else
 #define HAVE_DYNAMIC_LOADING 1
 #define HAVE_DYNAMIC_INTERLINKING 1
 #define HAVE_SHARED_LIBRARIES 1
@@ -623,7 +595,6 @@ InstallATKExportsTarget(install.time,name,dest)
 #define ATKLIBEXT "so"
 #define ATKDYNEXT "so"
 #define ATKDYNPREFIX "lib"
-#endif
 
 #endif	/* SYSTEM_H */
  

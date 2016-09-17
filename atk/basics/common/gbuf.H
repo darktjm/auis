@@ -3,7 +3,7 @@ ATK_INTER
 #define _gbuf_H_
 /* ********************************************************************** *\
  *         Copyright Carnegie Mellon University 1993 - All Rights Reserved 
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 /*
 	$Disclaimer: 

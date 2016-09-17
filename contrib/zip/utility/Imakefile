@@ -1,6 +1,6 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 OBJS = lt.o ltapp.o ltv.o sched.o schedapp.o schedv.o
 HFILES = lt.H ltapp.H ltv.H sched.H schedapp.H schedv.H

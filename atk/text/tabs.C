@@ -1,6 +1,6 @@
 /* ********************************************************************** *\
  *         Copyright MIT 1990 - All Rights Reserved      *
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 
 /*

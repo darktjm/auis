@@ -1,6 +1,6 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 
 /*
@@ -27,7 +27,6 @@
 
 #define IHaveSubdirs
 
-InstallFileToFile(COPYRITE,${INSTINCFLAGS},${DESTDIR})
 InstallFileToFile(andyenv.h,${INSTINCFLAGS},${DESTDIR}/include/andyenv.h)
 InstallFileToFile(${SYSTEM_H_FILE},${INSTINCFLAGS},${DESTDIR}/include/system.h)
 InstallFileToFile(atkproto.h,$(INSTINCFLAGS),$(DESTDIR)/include/atkproto.h)
@@ -55,18 +54,14 @@ system.tmp: MacroIncludeFile
 
 CleanTarget(platform.tmp system.tmp)
 
-#if !SY_OS2
 install.time:: 
 	(cd $(DESTDIR)/config; \
-	${RM} andrewos.h andyenv.h system.h allsys.h site.h presite.h aconcat.h; \
-	$(LN) ../include/andrewos.h andrewos.h; \
-	$(LN) ../include/andyenv.h andyenv.h; \
+	${RM} system.h allsys.h site.h presite.h aconcat.h; \
 	$(LN) ../include/system.h system.h; \
 	$(LN) ../include/allsys.h allsys.h; \
 	$(LN) ../include/presite.h presite.h; \
 	$(LN) ../include/site.h site.h; \
 	$(LN) ../include/aconcat.h aconcat.h; )
-#endif
 
 InstallFileToFile(imake.tmpl, $(INSTINCFLAGS), $(DESTDIR)/config/imake.tmpl)
 InstallFileToFile(platform.tmp, $(INSTINCFLAGS), $(DESTDIR)/config/platform.tmpl)
@@ -80,12 +75,7 @@ InstallFileToFile(site.mcr, $(INSTINCFLAGS), $(DESTDIR)/config/site.mcr)
 InstallFileToFile(andrew.rls, $(INSTINCFLAGS), $(DESTDIR)/config/andrew.rls)
 InstallFileToFile(site.rls, $(INSTINCFLAGS), $(DESTDIR)/config/site.rls)
 InstallShScript(depend, $(DESTDIR)/config/depend)
-InstallShScript(loginstall, $(DESTDIR)/config/loginstall)
 InstallShScript(mkdynmain, $(DESTDIR)/etc)
-InstallFileToFile(COPYRITE, $(INSTINCFLAGS), $(DESTDIR)/config/COPYRITE)
-InstallFileToFile(COPYRITE.bls, $(INSTINCFLAGS), $(DESTDIR)/config/COPYRITE.bls)
-InstallFileToFile(COPYRITE.att, $(INSTINCFLAGS), $(DESTDIR)/config/COPYRITE.att)
-InstallFileToFile(COPYRITE.img, $(INSTINCFLAGS), $(DESTDIR)/config/COPYRITE.img)
 
 InstallFileToFile(mkatklib, $(INSTPROGFLAGS), $(DESTDIR)/etc)
 InstallShScript(genrefs, $(DESTDIR)/etc)

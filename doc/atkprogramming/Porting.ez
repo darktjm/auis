@@ -626,7 +626,7 @@ config/<platform>/system.h and edit it as you go.)
 
  *         Copyright IBM Corporation 1988,1994 - All Rights Reserved      *
 
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 
 \\* ********************************************************************** 
 */}

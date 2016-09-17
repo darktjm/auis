@@ -6,7 +6,7 @@ ATK_INTER
     htmlform.H - an object for managing a form in an html file 
 
 	Copyright Carnegie Mellon University, 1996 - All rights reserved. 
-	For full copyright information see: andrew/config/COPYRITE
+	For full copyright information see: andrew/doc/COPYRITE
 
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 

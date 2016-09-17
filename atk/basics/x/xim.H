@@ -3,11 +3,11 @@ ATK_INTER
 #define _xim_H_
 /* ********************************************************************** *\
   *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
-  *        For full copyright information see:'andrew/config/COPYRITE'     *
+  *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 /* ********************************************************************** *\
  *	   Copyright Carnegie Mellon, 1996 - All Rights Reserved
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 
 /*

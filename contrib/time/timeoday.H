@@ -2,7 +2,7 @@
 #define _timeoday_H_
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1991 - All Rights Reserved           *
- *        For full copyright information see:'andrew/config/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'     *
 \* ********************************************************************** */
 
 /*

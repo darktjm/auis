@@ -22,7 +22,7 @@ WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  $
 */
 
-/* For full copyright information see:'andrew/config/COPYRITE' */
+/* For full copyright information see:'andrew/doc/COPYRITE' */
 
 XCOMM 
 XCOMM  The following is from the allsys.mcr file, and may be over-ridden
@@ -70,9 +70,7 @@ DASHL=-L
 /* To generate debugger symbol tables, use -g instead of -O.  */
         CDEBUGFLAGS = -O
 
-#if !SY_OS2
         SHELL = /bin/sh
-#endif
         CC = gcc
         CPPC = g++
         LOCALDIR = DEFAULT_LOCALDIR_ENV
@@ -117,12 +115,8 @@ DASHL=-L
         DYN_LINK_LIB = -ldl
 #endif 
 
-/* The Lex library macro.  System that define FLEX_ENV now: i386_Linux, i386_BSD */
-#ifdef FLEX_ENV
+/* The Lex library macro.  All systems should now use flex. */
 LEXLIB = -lfl
-#else
-LEXLIB = -ll
-#endif
 
 /* uncomment this if your make program has MAKEFLAGS but not MFLAGS */
 /* #define ConstructMFLAGS */
@@ -207,14 +201,6 @@ JPEGLIBDIR=$(BASEDIR)/lib
 TIFFLIBDIR=$(BASEDIR)/lib
         TIFFLIB = $(TIFFLIBDIR)/libtiff.a
 
-#ifdef mips 
-ASMPP_CC = $(CC) -E
-AS_FLAGS = -nocpp
-#else		/* mips */
-#ifdef SCOunix
-ASMPP_CC = $(CPP)
-AS_FLAGS =
-#else		/* SCOunix */
 #ifdef GNU_ENV
 ASMPP_CC = $(CPP)
 AS_FLAGS =
@@ -222,20 +208,6 @@ AS_FLAGS =
 ASMPP_CC = $(CC) -E
 AS_FLAGS =
 #endif		/* GNU_ENV */
-#endif		/* SCOunix */
-#endif		/* mips */
-
-/* obsolete
-#define SelectATKLib(name) @@\
-Concat(lib,name)=Concat(lib,name).a @@\
-Concat(name,XXX)=$(Concat(lib,name)) @@\
-Concat(OptionalLib,name)=install.time
-#define DeSelectATKLib(name) @@\
-Concat(lib,name) =  @@\
-Concat(name,XXX) = Concat(name,XXX) @@\
-Concat(OptionalLib,name)=Concat(install.lib,name)
-#include <libs.mcr>
-*/
 
 /* the directories where the lists of packages and their location variables are stored */
 LOCALPACKAGEDIRS=

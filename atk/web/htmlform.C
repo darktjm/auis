@@ -2,7 +2,7 @@
 	htmlform.C - keep track of the nodes in an html <FORM>
 
 	Copyright Carnegie Mellon, 1996 - All Rights Reserved
-	For full copyright information see: andrew/config/COPYRITE
+	For full copyright information see: andrew/doc/COPYRITE
 
 	$Disclaimer: 
  * Permission to use, copy, modify, and distribute this software and its 
