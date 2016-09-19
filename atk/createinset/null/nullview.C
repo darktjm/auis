@@ -1,120 +1,14 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *	   Copyright Carnegie Mellon, 1992 - All Rights Reserved
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *	   Copyright Carnegie Mellon, 1992 - All Rights Reserved          *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/*
-	$Disclaimer: 
- * Permission to use, copy, modify, and distribute this software and its 
- * documentation for any purpose and without fee is hereby granted, provided 
- * that the above copyright notice appear in all copies and that both that 
- * copyright notice and this permission notice appear in supporting 
- * documentation, and that the name of IBM not be used in advertising or 
- * publicity pertaining to distribution of the software without specific, 
- * written prior permission. 
- *                         
- * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
- * TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
- * HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
- * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
- * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
- * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- *  $
-*/
-
-/* nullv.c	
+/* nullview.C
 
 	The view module for the null dataobject
 
 */
-
-/*
- *   $Log: nullview.C,v $
- * Revision 1.13  1995/02/09  22:46:21  Zarf
- * Added methods for new printing mechanism
- *
- * Revision 1.12  1995/01/31  01:58:56  wjh
- * removed include of <strings.h>
- * (unneeded since this is done by andrewos.h)
- *
- * Revision 1.11  1994/11/30  20:42:06  rr2b
- * Start of Imakefile cleanup and pragma implementation/interface hack for g++
- *
- * Revision 1.10  1994/08/11  02:53:14  rr2b
- * The great gcc-2.6.0 new fiasco, new class foo -> new foo
- *
- * Revision 1.9  1994/03/21  16:59:25  rr2b
- * bzero->memset
- * bcopy->memmove
- * index->strchr
- * rindex->strrchr
- * some mktemp->tmpnam
- *
- * Revision 1.8  1994/03/19  03:06:48  rr2b
- * Fixed to use this instead of self when drawing
- * the dots.
- * BUILD
- *
- * Revision 1.7  1994/03/12  22:42:52  rr2b
- * Removed second argument to Stringize, an empty string may not be stringized
- *
- * Revision 1.6  1994/02/15  18:15:54  wjh
- * changed blobs to circles
- *
- * Revision 1.5  1993/10/20  16:30:47  rr2b
- * Added use of stringize for traditional vs ANSI compatibility.
- *
- * Revision 1.4  1993/09/28  04:52:23  rr2b
- * Fixed view_DSattributes to be an int not an enum.
- *
- * Revision 1.3  1993/06/17  21:56:58  rr2b
- * Weird... honest, it compiled before..
- * Anyway, added a cast on the second argument to ChainBeforeML.
- *
- * Revision 1.2  1993/06/05  00:32:29  rr2b
- * Converted to C++
- *
- * Revision 1.1  1993/06/04  23:26:51  rr2b
- * Initial revision
- *
- * Revision 1.6  1992/12/15  21:32:24  rr2b
- * more disclaimerization fixing
- *
- * Revision 1.5  1992/12/14  20:40:31  rr2b
- * disclaimerization
- *
- * Revision 1.4  1992/06/22  21:48:52  wjh
- * test for NULL in getting fontdesc
- * made blobs chartreuse on color displays
- * removed extraneous clearing of screen in _ClearRectangle
- * check for NULLs in InitializeClass
- * give a default desiredSize
- * .
- *
- * Revision 1.3  1991/09/12  16:11:44  bobg
- * Update copyright notice and rcsid
- *
- * Revision 1.2  1989/12/12  15:00:08  ghoti
- * sync with MIT tape
- *
- * Revision 1.2  89/12/05  11:33:39  xguest
- * change instances of nullv to nullview
- * 
- * Revision 1.1  89/12/04  20:28:25  xguest
- * Initial revision
- * 
- * Revision 1.1  89/07/31  15:35:20  wjh
- * Initial revision
- * 
- *  
- * Revision 1.0  88/05/14  15:40:34  wjh
- * Copied from /usr/andrew/lib/genericinset
- */
-
 
 #include <andrewos.h>
 ATK_IMPL("nullview.H")
@@ -132,7 +26,7 @@ ATK_IMPL("nullview.H")
 #include <rect.h>
 #include <texttroff.H>
 
-/* $$$ include xxx.ih for any other file for which there is below a call to xxx_routine() */
+/* $$$ include headers for all external references (don't use extern!) */
 
 /* include headers for the data object and THIS view */
 #include <null.H>

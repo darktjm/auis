@@ -1,37 +1,12 @@
 #ifndef _andrew_index_h_
 #define _andrew_index_h_
- /* C++ified by magic !@#%&@#$ */
-#include <atkproto.h>
-BEGINCPLUSPLUSPROTOS
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/*
-	$Disclaimer: 
- * Permission to use, copy, modify, and distribute this software and its 
- * documentation for any purpose and without fee is hereby granted, provided 
- * that the above copyright notice appear in all copies and that both that 
- * copyright notice and this permission notice appear in supporting 
- * documentation, and that the name of IBM not be used in advertising or 
- * publicity pertaining to distribution of the software without specific, 
- * written prior permission. 
- *                         
- * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
- * TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
- * HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
- * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
- * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
- * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- *  $
-*/
-
-
- 
+/** \addtogroup libindex libindex.a
+ * @{ */
 
 /*
  * here are the various record headers.  Records come in two major types, the 
@@ -53,6 +28,9 @@ BEGINCPLUSPLUSPROTOS
  * Each hash bucket contains a set of primary and secondary records whose keys
  * hash to the appropriate bucket.
  */
+
+#include <atkproto.h>
+BEGINCPLUSPLUSPROTOS
 
 #define MAXSTRLENGTH		1024		/* max string size */
 #define INDEXVERSION		1
@@ -135,7 +113,6 @@ extern int index_DeleteSecondary(struct Index *ai, struct recordID *arid, char *
 extern void index_Dump(struct Index *ai);
 
 typedef void (*index_efptr)(struct Index *ai, struct indexComponent *tc, char *arock);
-extern struct indexBucket *index_CGet(struct Index  *ai, char  *akey);
 extern struct hashList *index_NewHL();
 extern struct indexComponent *index_FindID(struct indexBucket  *ab, struct recordID  *arid);
 extern FILE *index_HashOpen(struct Index  *ai, long  ahash, long  awrite);
@@ -152,6 +129,7 @@ extern void index_Enumerate(struct Index *ai, index_efptr aproc, char *arock);
 extern long index_GetData(struct Index *ai, struct recordID *arid, char *abuffer, long alen);
 extern void recordset_Free(struct recordSet *aset);
 extern void recordset_Add(struct recordSet *aset, struct recordID *arid);
+/** @} */
 ENDCPLUSPLUSPROTOS
  
 #endif

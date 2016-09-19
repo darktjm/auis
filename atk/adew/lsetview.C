@@ -1,29 +1,7 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
-/*
-	$Disclaimer: 
-// Permission to use, copy, modify, and distribute this software and its 
-// documentation for any purpose and without fee is hereby granted, provided 
-// that the above copyright notice appear in all copies and that both that 
-// copyright notice and this permission notice appear in supporting 
-// documentation, and that the name of IBM not be used in advertising or 
-// publicity pertaining to distribution of the software without specific, 
-// written prior permission. 
-//                         
-// THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
-// TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
-// MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
-// HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
-// DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
-// DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
-// OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
-// WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-// 
-//  $
-*/
 
 #include <andrewos.h> /* strings.h */
 ATK_IMPL("lsetview.H")
@@ -72,7 +50,7 @@ static const struct types typearray[] = {
 
 ATKdefineRegistry(lsetview, lpair, lsetview::InitializeClass);
 static class view *makeview(class lsetview  *self,class lset  *ls);
-void lsetview_SetMode(class lsetview  *self,int  mode);
+static void lsetview_SetMode(class lsetview  *self,int  mode);
 static void initkids(class lsetview  *self,class lset  *ls);
 static void dolink(class lsetview  *self);
 static boolean objecttest(class lsetview   *self,const char  *name,const char  *desiredname);
@@ -81,10 +59,10 @@ static void lsetview_PlaceCel(class lsetview  *self);
 static void lsetview_PlaceValue(class lsetview  *self);
 static void lsetview_DestroyView(class lsetview  *self);
 static int lsetview_PlaceView(class lsetview  *self);
-void lsetview_DeleteMode(class lsetview  *self);
-void lsetview_UnsplitParent(class lsetview  *self);
-int lsetview_ReadView(class lsetview  *self);
-void lsetview_Paste(class lsetview  *self);
+static void lsetview_DeleteMode(class lsetview  *self);
+static void lsetview_UnsplitParent(class lsetview  *self);
+static int lsetview_ReadView(class lsetview  *self);
+static void lsetview_Paste(class lsetview  *self);
 static void lsetview_SplitVert(class lsetview  *self);
 static void lsetview_SplitHorz(class lsetview  *self);
 
@@ -118,7 +96,7 @@ static class view *makeview(class lsetview  *self,class lset  *ls)
     }
     return NULL;
 }
-void lsetview_SetMode(class lsetview  *self,int  mode)
+static void lsetview_SetMode(class lsetview  *self,int  mode)
 {
 self->mode = mode;
 }
@@ -344,14 +322,14 @@ printf("Still in Place View\n");
     (ls)->NotifyObservers(0);
     return 0;
 }
-void lsetview_DeleteMode(class lsetview  *self)
+static void lsetview_DeleteMode(class lsetview  *self)
 {
   self->mode = lsetview_Initialized;
     (self)->WantUpdate(self);
     message::DisplayString(self, 0, "Click on lset to delete");
     DeleteMode = self;
 }
-void lsetview_UnsplitParent(class lsetview  *self)
+static void lsetview_UnsplitParent(class lsetview  *self)
 {
     if(self->child || self->mode == lsetview_IsSplit) return;
     if(self->parent && (self)->IsType(self->parent)){
@@ -360,7 +338,7 @@ void lsetview_UnsplitParent(class lsetview  *self)
     }
 }
 
-int lsetview_ReadView(class lsetview  *self)
+static int lsetview_ReadView(class lsetview  *self)
 {
 /* prompt for dataobject */
 
@@ -397,7 +375,7 @@ void lsetview::ReadFile(FILE  *thisFile,const char  *iname)
     if(ls->dobj != NULL) (ls->dobj)->Read(thisFile,objectID);
     (ls)->NotifyObservers(0);
 }
-void lsetview_Paste(class lsetview  *self)
+static void lsetview_Paste(class lsetview  *self)
 {
     FILE *pasteFile;
     if(self->child || self->mode == lsetview_IsSplit) return;

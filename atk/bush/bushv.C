@@ -1,29 +1,7 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1989 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
-/*
-	$Disclaimer: 
- * Permission to use, copy, modify, and distribute this software and its 
- * documentation for any purpose and without fee is hereby granted, provided 
- * that the above copyright notice appear in all copies and that both that 
- * copyright notice and this permission notice appear in supporting 
- * documentation, and that the name of IBM not be used in advertising or 
- * publicity pertaining to distribution of the software without specific, 
- * written prior permission. 
- *                         
- * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
- * TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
- * HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
- * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
- * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
- * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- *  $
-*/
 
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
@@ -104,7 +82,7 @@ ATK_IMPL("bushv.H")
 #define bushv_EntriesMenus			    (1<<9)
 
 #define	DEFAULTCKPINTERVAL			    120
-int CkpInterval;
+static int CkpInterval;
 
 static const char * const sorts[] = { "name", 
 			     "size", 
@@ -356,7 +334,7 @@ static void EntriesPageUp( class bushv  *self );
 static void EntriesPageDown( class bushv  *self );
 
 
-suite_Specification control_spec[] = {
+static const suite_Specification control_spec[] = {
     suite_TitleCaption( "Bush: A FileSystem Browser" ),
     suite_TitlePlacement( suite_Top ),
     suite_TitleCaptionFontName( "AndySans10" ),
@@ -387,7 +365,7 @@ suite_Specification control_spec[] = {
     0
 };
 
-suite_Specification entries_spec[] = {
+static const suite_Specification entries_spec[] = {
     suite_TitleCaption( "Entries" ),
     suite_TitleBorderSize( 2 ),
     suite_TitleBorderStyle( suite_Rectangle ),
@@ -410,7 +388,7 @@ suite_Specification entries_spec[] = {
     0
 };
 
-treev_Specification tree_spec[] = {
+static const treev_Specification tree_spec[] = {
     treev_NodeConnectorStyle( treev_Fold | treev_DogLeg ), 
     treev_NodeFiligree( treev_DropShadow ),
     treev_NodeHighlightStyle( treev_Invert ),

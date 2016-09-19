@@ -1,29 +1,7 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
-/*
-	$Disclaimer: 
-// Permission to use, copy, modify, and distribute this software and its 
-// documentation for any purpose and without fee is hereby granted, provided 
-// that the above copyright notice appear in all copies and that both that 
-// copyright notice and this permission notice appear in supporting 
-// documentation, and that the name of IBM not be used in advertising or 
-// publicity pertaining to distribution of the software without specific, 
-// written prior permission. 
-//                         
-// THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
-// TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
-// MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
-// HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
-// DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
-// DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
-// OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
-// WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-// 
-//  $
-*/
 
 /**********************************\
 **                                **
@@ -454,8 +432,8 @@ static suite_Specification *test_suites[] = {
   0
 };
 
-long current_test = 0, last_test = 20;
-class suite *current_suite;
+static long current_test = 0, last_test = 20;
+static class suite *current_suite;
 
 static suite_Specification test_suite[] = {
   suite_TitleCaption( "Test Suite" ),
@@ -528,10 +506,10 @@ static suite_Specification button_suite[] = {
   0
 };
 
-class lpair *pair, *triple;
-class text *text_data;
-class textview *text_view;
-class view *button_view, *test_view;
+static class lpair *pair, *triple;
+static class text *text_data;
+static class textview *text_view;
+static class view *button_view, *test_view;
 
 static int suiteta_debug = 0;
 #define debug suiteta_debug

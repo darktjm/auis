@@ -1,29 +1,8 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/*
-	$Disclaimer: 
- * Permission to use, copy, modify, and distribute this software and its 
- * documentation for any purpose and without fee is hereby granted, provided 
- * that the above copyright notice appear in all copies and that both that 
- * copyright notice and this permission notice appear in supporting 
- * documentation, and that the name of IBM not be used in advertising or 
- * publicity pertaining to distribution of the software without specific, 
- * written prior permission. 
- *                         
- * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
- * TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
- * HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
- * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
- * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
- * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- *  $
-*/
 #ifndef	SYSTEM_H
 #define	SYSTEM_H
 
@@ -438,12 +417,12 @@ Macros:
 #include <sys/flock.h>
 
  osi_ExclusiveLockNoBlock tries to get a lock, and returns immediately
- if it is unable to get the lock.
+ if it is unable to get the lock. */
 #define osi_ExclusiveLockNoBlock(fid)	lockf((fid), F_TLOCK, 0)
-osi_UnLock unlocks the file.
+/* osi_UnLock unlocks the file. */
 #define osi_UnLock(fid)			lockf((fid), F_ULOCK, 0)
- */
-#define NEED_LOCKF 1
+
+#undef NEED_LOCKF
 
 /* osi_O_READLOCK is the mode needed in the open flags in order
  for locking to be done. */
@@ -474,7 +453,7 @@ struct osi_Times {unsigned long int Secs; unsigned long int USecs;};
 
 #define HAS_GETTIMEOFDAY 1
 BEGINCPLUSPLUSPROTOS
-extern int osi_GetTimes(struct osi_Times *p);
+extern int osi_GetTimes(struct osi_Times *p); /* in libutil.a */
 ENDCPLUSPLUSPROTOS
 
 /* More BSD-isms,  if your system has setlinebuf in libc you can remove this line. */

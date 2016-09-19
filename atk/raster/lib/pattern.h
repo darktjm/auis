@@ -1,27 +1,4 @@
-
-
-/*
-	$Disclaimer: 
- * Permission to use, copy, modify, and distribute this software and its 
- * documentation for any purpose and without fee is hereby granted, provided 
- * that the above copyright notice appear in all copies and that both that 
- * copyright notice and this permission notice appear in supporting 
- * documentation, and that the name of IBM not be used in advertising or 
- * publicity pertaining to distribution of the software without specific, 
- * written prior permission. 
- *                         
- * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
- * TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
- * HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
- * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
- * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
- * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- *  $
-*/
-char patternnames[ZRPATTERNS_NUM][16] = {
+static const char patternnames[ZRPATTERNS_NUM][16] = {
     "PATTERNS:",
     "(invert)",
     "black", 
@@ -40,7 +17,7 @@ char patternnames[ZRPATTERNS_NUM][16] = {
     "big checks"
 };
 
-unsigned char patternlist[ZRPATTERNS_NUM][8] = {
+static const unsigned char patternlist[ZRPATTERNS_NUM][8] = {
     {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, 
     {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, 
 
@@ -64,7 +41,7 @@ unsigned char patternlist[ZRPATTERNS_NUM][8] = {
 };
 
 
-char brushnames[ZRBRUSHES_NUM][16] = {
+static const char brushnames[ZRBRUSHES_NUM][16] = {
     "BRUSHES:",
     "point",
     "spot 2",
@@ -81,7 +58,7 @@ char brushnames[ZRBRUSHES_NUM][16] = {
     "short slant",
 };
 
-unsigned char brushlist[ZRBRUSHES_NUM][16] = {
+static const unsigned char brushlist[ZRBRUSHES_NUM][16] = {
     {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, 
 
     {0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00},

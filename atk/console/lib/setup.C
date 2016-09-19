@@ -1,29 +1,7 @@
 /* ********************************************************************** *\
  *	   Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
-/*
-	$Disclaimer: 
- * Permission to use, copy, modify, and distribute this software and its 
- * documentation for any purpose and without fee is hereby granted, provided 
- * that the above copyright notice appear in all copies and that both that 
- * copyright notice and this permission notice appear in supporting 
- * documentation, and that the name of IBM not be used in advertising or 
- * publicity pertaining to distribution of the software without specific, 
- * written prior permission. 
- *                         
- * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
- * TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
- * HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
- * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
- * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
- * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- *  $
-*/
 
 /* 
  ***************************************************************
@@ -68,28 +46,27 @@ extern int Pposx, Pposy;
 extern char Pstring1[256], Pstring2[256], Pstring3[256], Pstring4[MAXPATHLEN];
 
 static struct display VirginDisplay;
-class fontdesc *icon12font,
+static class fontdesc *icon12font,
     *console10font;
-int BogusInt; /* for storing values for AlarmRect which are now ignored */
+static int BogusInt; /* for storing values for AlarmRect which are now ignored */
 extern int DynamicXmin,
     DynamicXmax,
     DynamicYmin,
     DynamicYmax,
     OutgoingAge;
-extern const char EXTENSION[];
 
 
 extern char PrimaryErrorBuffer[];
 
 /* MAXCHILDPIDS is from console.h */
-int	children[MAXCHILDPIDS] = { -1 };
-int	theGetstatsPid = -1;
+NO_DLL_EXPORT int	children[MAXCHILDPIDS] = { -1 };
+NO_DLL_EXPORT int	theGetstatsPid = -1;
 
-boolean	HideIt = FALSE,
+NO_DLL_EXPORT boolean	HideIt = FALSE,
     ParsingError,
     LogErrorsExternally;
-FILE	*ExternalLogFP = NULL;
-char	ParsingErrorText[128];
+NO_DLL_EXPORT FILE	*ExternalLogFP = NULL;
+NO_DLL_EXPORT char	ParsingErrorText[128];
 extern int	ForceErrorMonitoring;
 
 
@@ -1085,12 +1062,12 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 {
     struct display *thisdisp;
     int            *newchild;
-    char           *s, *tmp = NULL;
+    char           *tmp = NULL;
     const char     *TokenBuf, *string;
     char            *theTypeInPtr = NULL;
     char            DEFAULTFILE[50]; 
     FILE          *pfd = NULL;
-    int             RawXmin, RawXmax, RawYmin, RawYmax, RowHeight, ColWidth, findex, inc, i, mask, Rows, Columns, Machines, j;
+    int             RawXmin, RawXmax, RawYmin, RawYmax, RowHeight, ColWidth, findex, inc, i, Rows, Columns, Machines, j;
     int lineno = 0;
     boolean InstrumentFound = FALSE;
     boolean triedOnce = FALSE;
@@ -1917,7 +1894,7 @@ void PostParseArgs(char  *name)
     /* arrgh(("Initializing %s (%s%s); please wait...\n", RealProgramName, ConFile, CONSOLE_VERSION)); */
 }
 
-char MyHomeDir[MAXPATHLEN] = "";
+NO_DLL_EXPORT char MyHomeDir[MAXPATHLEN] = "";
 
 void OneTimeInit(class consoleClass  *self)
 {

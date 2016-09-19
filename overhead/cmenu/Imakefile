@@ -1,6 +1,6 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 NormalObjectRule()
 LibraryTarget(libcmenu.a, cmactiv.o cmcreate.o cmdraw.o cmerror.o cmmanip.o scache.o)

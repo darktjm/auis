@@ -1,29 +1,7 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
-/*
-	$Disclaimer: 
-// Permission to use, copy, modify, and distribute this software and its 
-// documentation for any purpose and without fee is hereby granted, provided 
-// that the above copyright notice appear in all copies and that both that 
-// copyright notice and this permission notice appear in supporting 
-// documentation, and that the name of IBM not be used in advertising or 
-// publicity pertaining to distribution of the software without specific, 
-// written prior permission. 
-//                         
-// THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
-// TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
-// MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
-// HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
-// DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
-// DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
-// OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
-// WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-// 
-//  $
-*/
 
 #include <andrewos.h>
 #define AUXMODULE 1
@@ -94,7 +72,7 @@ static void CharToOctal(unsigned char *s, char  c)
     *s = '\0';
 }
 
-int drawtxtv_tabscharspaces = 8;
+NO_DLL_EXPORT int drawtxtv_tabscharspaces = 8;
 
 static long GetNextTabPosition(class textview  *v, int  width, struct text_statevector  *sv, struct formattinginfo  *info)
 {
@@ -388,8 +366,8 @@ static void AllocateLineItem(class textview  *self, class text  *text, long  pos
  * state: has no style lineitem at its end.
  */
 
-class fontdesc *exposeStylesFont = NULL;
-short *exposeStylesWidths = NULL;
+static class fontdesc *exposeStylesFont = NULL;
+static short *exposeStylesWidths = NULL;
 /* This definitely should be in the view */
 #define NCXS 50
 

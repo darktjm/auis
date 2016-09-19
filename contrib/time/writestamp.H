@@ -2,7 +2,7 @@
 #define _writestamp_H_
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1991 - All Rights Reserved           *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 /* #include <time.h> */
 #include <fontdesc.H>

@@ -1,29 +1,7 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
-/*
-	$Disclaimer: 
-// Permission to use, copy, modify, and distribute this software and its 
-// documentation for any purpose and without fee is hereby granted, provided 
-// that the above copyright notice appear in all copies and that both that 
-// copyright notice and this permission notice appear in supporting 
-// documentation, and that the name of IBM not be used in advertising or 
-// publicity pertaining to distribution of the software without specific, 
-// written prior permission. 
-//                         
-// THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
-// TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
-// MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
-// HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
-// DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
-// DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
-// OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
-// WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-// 
-//  $
-*/
 
 #define UNSET 0
 #define FUDGE 2
@@ -72,7 +50,7 @@ ATK_IMPL("celview.H")
 static class atom *UNSETFLAG;
 #define RESIZING FALSE
 #define DRAWING FALSE
-class menulist *celviewMenus;
+static class menulist *celviewMenus;
 static class keymap *celviewKeyMap;
 #define DataObject(A) (A->dataobject)
 #define Cel(A) ((class cel *) DataObject(A))
@@ -95,12 +73,12 @@ static void UpdateCursors(class celview  *self);
 static void UpdateDrawing(class celview  *self);
 static void initchild(class celview  *self);
 static char * trunc(char  *c);
-void celview_ReadFile(class celview  *self,FILE  *thisFile,char  *iname);
+static void celview_ReadFile(class celview  *self,FILE  *thisFile,char  *iname);
 static void celview_Paste(class celview  *self);
 static void celview_PromptForFile(class celview  *self);
 static void InitNow(class celview  *self);
 static void drawshadow(class celview  *self,struct rectangle  *r);
-void celview__SetDrawing(class celview  *self,long  key);
+static void celview__SetDrawing(class celview  *self,long  key);
 static void SetVisible(class celview  *self);
 static void SetInvisible(class celview  *self);
 static boolean objecttest(class celview   *self,const char  *name,const char  *desiredname);
@@ -431,7 +409,7 @@ static char * trunc(char  *c)
 	return cp;
     return c;
 }
-void celview_ReadFile(class celview  *self,FILE  *thisFile,char  *iname)
+static void celview_ReadFile(class celview  *self,FILE  *thisFile,char  *iname)
 {
     long objectID;
     const char *objectName;
@@ -742,7 +720,7 @@ void celview::SetResizing(long  key)
 	this->mode = celview_DoFull;
     (this)->WantUpdate(this);
 }
-void celview__SetDrawing(class celview  *self,long  key)
+static void celview__SetDrawing(class celview  *self,long  key)
 {
     self->drawing = !self->drawing;
     (self)->WantUpdate(self);

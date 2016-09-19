@@ -1,24 +1,4 @@
-/* Copyright 1993 Carnegie Mellon University All rights reserved.
-  $Disclaimer: 
- * Permission to use, copy, modify, and distribute this software and its 
- * documentation for any purpose and without fee is hereby granted, provided 
- * that the above copyright notice appear in all copies and that both that 
- * copyright notice and this permission notice appear in supporting 
- * documentation, and that the name of IBM not be used in advertising or 
- * publicity pertaining to distribution of the software without specific, 
- * written prior permission. 
- *                         
- * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
- * TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
- * HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
- * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
- * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
- * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- *  $
-*/
+/* Copyright 1993 Carnegie Mellon University All rights reserved. */
 #define IN_ATKOS_LIB 1
 #include <system.h>
 /* systems needing this should have the following in system.h:
@@ -34,7 +14,14 @@ P_tmpdir can be defined as something else if needed.
 
 #include "atkos.h"
 
+#if (!defined(NEED_ANSI_TMPFILES) && \
+     !defined(NEED_UTIMES) && \
+     !defined(NEED_RANDOM_MAPPED_TO_RAND48) && \
+     !defined(NEED_INSREMQUE) && \
+     !defined(NEED_LOCKF) && \
+     !defined(NEED_ATKINIFINI))
 long atkos_dummy_variable_for_ar=99;
+#endif
 
 #ifdef NEED_ATKINIFINI
 

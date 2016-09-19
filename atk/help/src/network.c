@@ -1,24 +1,4 @@
-/* Copyright 1993 Carnegie Mellon University All rights reserved.
-  $Disclaimer: 
- * Permission to use, copy, modify, and distribute this software and its 
- * documentation for any purpose and without fee is hereby granted, provided 
- * that the above copyright notice appear in all copies and that both that 
- * copyright notice and this permission notice appear in supporting 
- * documentation, and that the name of IBM not be used in advertising or 
- * publicity pertaining to distribution of the software without specific, 
- * written prior permission. 
- *                         
- * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
- * TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
- * HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
- * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
- * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
- * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- *  $
- */
+/* Copyright 1993 Carnegie Mellon University All rights reserved. */
 #include <andrewos.h>
 #include <netdb.h>
 #include <sys/socket.h>
@@ -39,8 +19,8 @@
 
 #define	IPPORT_HELPNAME	"andrewhelp"
 
-int helpSocket=(-1);
-int helpPort=(-1);
+NO_DLL_EXPORT int helpSocket=(-1);
+NO_DLL_EXPORT int helpPort=(-1);
 extern struct helpDir *helpsearchDirs;
 extern int help_newWindow;
 extern char *help_indexName;
@@ -72,10 +52,10 @@ int  sock)			/* the socket to send to */
      return write(sock, ((char *)buf), len);
  }
 
-char *ncproc_AddSearchDir=NULL;
-char *ncproc_SetIndex=NULL;
-char *ncproc_SetAliasesFile=NULL;
-char *ncproc_GetHelpOn=NULL;
+NO_DLL_EXPORT char *ncproc_AddSearchDir=NULL;
+NO_DLL_EXPORT char *ncproc_SetIndex=NULL;
+NO_DLL_EXPORT char *ncproc_SetAliasesFile=NULL;
+NO_DLL_EXPORT char *ncproc_GetHelpOn=NULL;
 /*
  * start up and start accepting connections and commands from other helps
  */

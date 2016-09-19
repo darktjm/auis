@@ -1,29 +1,7 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
-/*
-	$Disclaimer: 
-// Permission to use, copy, modify, and distribute this software and its 
-// documentation for any purpose and without fee is hereby granted, provided 
-// that the above copyright notice appear in all copies and that both that 
-// copyright notice and this permission notice appear in supporting 
-// documentation, and that the name of IBM not be used in advertising or 
-// publicity pertaining to distribution of the software without specific, 
-// written prior permission. 
-//                         
-// THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
-// TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
-// MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
-// HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
-// DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
-// DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
-// OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
-// WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-// 
-//  $
-*/
 
 /*
  * draweqv.c
@@ -98,17 +76,17 @@ not enough space after sin, sum
  * eqstyles
  */
 
-enum eqstyle enscript[] = { S_EQSTYLE, S_EQSTYLE, SS_EQSTYLE, SS_EQSTYLE };
-enum eqstyle enpile[] = { T_EQSTYLE, S_EQSTYLE, SS_EQSTYLE, SS_EQSTYLE };
+static const enum eqstyle enscript[] = { S_EQSTYLE, S_EQSTYLE, SS_EQSTYLE, SS_EQSTYLE };
+static const enum eqstyle enpile[] = { T_EQSTYLE, S_EQSTYLE, SS_EQSTYLE, SS_EQSTYLE };
 
 
 /*
  * Equations
  */
 
-struct pos zero = { 0, 0 };
-struct pos small = { -10000, -10000 };
-struct pos large = { 10000, 10000 };
+static const struct pos zero = { 0, 0 };
+static const struct pos small = { -10000, -10000 };
+static const struct pos large = { 10000, 10000 };
 
 
 /*
@@ -117,7 +95,7 @@ struct pos large = { 10000, 10000 };
  * as described below.
  */
 
-enum space spacing[(int)MAX_genre][(int)MAX_genre] = {
+static const enum space spacing[(int)MAX_genre][(int)MAX_genre] = {
     /*		ORD	OP	BIN	REL	OPEN	CLOSE	PUNCT	INNER */
     /* ORD */	NOSPC,	THIN,	CMED,	CTHICK,	NOSPC,	NOSPC,	NOSPC,	CTHIN,
     /* OP */	THIN,	THIN,	EQBAD,	CTHICK,	NOSPC,	NOSPC,	NOSPC,	CTHIN,
@@ -135,7 +113,7 @@ enum space spacing[(int)MAX_genre][(int)MAX_genre] = {
     [(int)spacing[(int)((left)->symbol->genre)][(int)((right)->symbol->genre)]] \
     [(int)(eqstyle)]
 
-int h_space[(int)MAX_space][(int)MAX_eqstyle] = {
+static const int h_space[(int)MAX_space][(int)MAX_eqstyle] = {
     /*				d	t	s	ss */
     /* EQBAD, */			0,	0,	0,	0,	
     /* NOSPC */			0,	0,	0,	0,	
@@ -148,10 +126,10 @@ int h_space[(int)MAX_space][(int)MAX_eqstyle] = {
 };
 
 /* Vertical spacing.  Usage: v_thin_space[eqstyle] */
-int v_thin_space[(int)MAX_eqstyle] = { 2, 2, 1, 1 };
-int v_thick_space[(int)MAX_eqstyle] = { 10, 3, 1, 1 };
+static const int v_thin_space[(int)MAX_eqstyle] = { 2, 2, 1, 1 };
+static const int v_thick_space[(int)MAX_eqstyle] = { 10, 3, 1, 1 };
 
-long exHeightTable[] = {
+static const long exHeightTable[] = {
       0,   0,   0,   0,   0,   0,   0,   0,
       0,   0,   0,   0,   0,   0,   0,   0,
      -2,  -4,  -5,  -8, -13,  -2,   0,   0,
@@ -226,13 +204,13 @@ static struct {
     fonts[(int)t][(int)s].font : \
     (fonts[(int)t][(int)s].font = fontdesc::Create(fonts[(int)t][(int)s].fontfamily, fonts[(int)t][(int)s].fontstyle, fonts[(int)t][(int)s].fontsize)))
 
-int eqstyle_sup[MAX_eqstyle];			/* y superscript positions */
-int eqstyle_top[MAX_eqstyle];			/* top of most characters */
-int eqstyle_big_sup[MAX_eqstyle];		/* offset for sup for big ops */
-int eqstyle_sub[MAX_eqstyle];			/* y subscript positions */
-int eqstyle_axis[MAX_eqstyle];			/* y axis positions */
-int eqstyle_min_paren[MAX_eqstyle] = { 2, 2, 1, 0 };/* smallest paren per eqstyle */
-int have_eqstyle[MAX_eqstyle] = { 0, 0, 0, 0 };	/* have above been computed? */
+static int eqstyle_sup[MAX_eqstyle];			/* y superscript positions */
+static int eqstyle_top[MAX_eqstyle];			/* top of most characters */
+static int eqstyle_big_sup[MAX_eqstyle];		/* offset for sup for big ops */
+static int eqstyle_sub[MAX_eqstyle];			/* y subscript positions */
+static int eqstyle_axis[MAX_eqstyle];			/* y axis positions */
+static int eqstyle_min_paren[MAX_eqstyle] = { 2, 2, 1, 0 };/* smallest paren per eqstyle */
+static int have_eqstyle[MAX_eqstyle] = { 0, 0, 0, 0 };	/* have above been computed? */
 
 static void InitFont(class eqview  *self, enum eqstyle  eqstyle)
 {

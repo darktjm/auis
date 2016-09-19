@@ -1,31 +1,6 @@
-/*LIBS: -lm
-*/
-
-/*
-	$Disclaimer: 
-// Permission to use, copy, modify, and distribute this software and its 
-// documentation for any purpose and without fee is hereby granted, provided 
-// that the above copyright notice appear in all copies and that both that 
-// copyright notice and this permission notice appear in supporting 
-// documentation, and that the name of IBM not be used in advertising or 
-// publicity pertaining to distribution of the software without specific, 
-// written prior permission. 
-//                         
-// THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
-// TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
-// MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
-// HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
-// DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
-// DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
-// OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
-// WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-// 
-//  $
-*/
-
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
 #include <andrewos.h>
@@ -43,10 +18,10 @@ ATK_IMPL("table.H")
 
 /* globals for entire package */
 
-class table * table_List;	/* root of list of all tables */
+static class table * table_List;	/* root of list of all tables */
 
-char table_debug;			/* nonzero if debugging */
-int table_DefaultPrecision;		/* precision when none provided */
+static char table_debug;			/* nonzero if debugging */
+NO_DLL_EXPORT int table_DefaultPrecision;		/* precision when none provided */
 
 /* initialize entire class */
 
@@ -1085,7 +1060,9 @@ static const char   * const monthname[] = {
     "July", "August", "September", "October", "November", "December"
 };
 
-int     daysinmonth[] = {
+extern NO_DLL_EXPORT const int daysinmonth[];
+
+const int     daysinmonth[] = {
     31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 };
 

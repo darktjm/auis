@@ -29,6 +29,18 @@ InstallFile(prefs.def, $(INSTMANFLAGS), ${DESTDIR}/lib)
 CleanTarget(prefs.def)
 #endif
 
+#ifdef MK_DOXYDOC
+latex/hierarchy.tex: $(shell find $(DESTDIR)/include -type f) doxyfile doxy_preproc
+	$(RM) -rf latex html
+	sed -e 's#$${ANDREWDIR}#$(DESTDIR)#g' < doxyfile | doxygen -
+
+ATK-API.pdf: latex/hierarchy.tex
+	(cd latex; make)
+	$(CP) latex/refman.pdf ATK-API.pdf
+
+InstallFile(ATK-API.pdf,${INSTMANFLAGS},${DESTDIR}/doc/PROGRAMMER)
+CleanTarget(-r latex html doxygen*.tmp ATK-API.pdf)
+#endif
 
 #ifdef FUNCTION_INDEX_ENV
 
@@ -41,3 +53,4 @@ FunctionIndex:
 InstallFile(FunctionIndex,${INSTMANFLAGS},${DESTDIR}/doc/PROGRAMMER)
 CleanTarget(FunctionIndex)
 #endif /* FUNCTION_INDEX_ENV */
+

@@ -1,27 +1,6 @@
 /* 
  *	Copyright Carnegie Mellon University, 1996 - All Rights Reserved
  *	For full copyright information see:'andrew/doc/COPYRITE' 
-
-	$Disclaimer: 
-# Permission to use, copy, modify, and distribute this software and its 
-# documentation for any purpose and without fee is hereby granted, provided 
-# that the above copyright notice appear in all copies and that both that 
-# copyright notice and this permission notice appear in supporting 
-# documentation, and that the name of IBM not be used in advertising or 
-# publicity pertaining to distribution of the software without specific, 
-# written prior permission. 
-#                         
-# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
-# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
-# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
-# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
-# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
-# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
-# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
-# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-# 
-#  $
-
 */
 
 /* template for site.h
@@ -92,6 +71,7 @@
 #define MK_CONTRIB_HTML 1
 #define MK_STROFFET 1
 #define MK_GTEXT 1
+#define MK_DOXYDOC 1
 
 /* If you are programming in Andrew, you may want:
 	Examples: a set of program examples.

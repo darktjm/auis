@@ -1,29 +1,7 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
-/*
-	$Disclaimer: 
- * Permission to use, copy, modify, and distribute this software and its 
- * documentation for any purpose and without fee is hereby granted, provided 
- * that the above copyright notice appear in all copies and that both that 
- * copyright notice and this permission notice appear in supporting 
- * documentation, and that the name of IBM not be used in advertising or 
- * publicity pertaining to distribution of the software without specific, 
- * written prior permission. 
- *                         
- * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
- * TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
- * HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
- * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
- * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
- * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- *  $
-*/
 
 /**  SPECIFICATION -- External Facility Suite  *********************************
 
@@ -68,7 +46,7 @@ ATK_IMPL("chartapp.H")
 #include  <chartv.H>
 #include  <chartapp.H>
 
-int chartapp_debug = 0;
+static int chartapp_debug = 0;
 
 #define debug chartapp_debug
 
@@ -78,12 +56,12 @@ int chartapp_debug = 0;
 #define  Im		    (self->imp)
 #define  Source		    (self->source)
 
-chart_Specification	    data_specification[] =
+static chart_Specification	    data_specification[] =
   {
   0
   };
 
-chartv_Specification	    view_specification[] =
+static chartv_Specification	    view_specification[] =
   {
   0
   };

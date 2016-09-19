@@ -2,7 +2,7 @@
 #define _writestampview_H_
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1991 - All Rights Reserved           *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 #include <stdio.h>
 #include <menulist.H>

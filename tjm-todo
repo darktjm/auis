@@ -22,6 +22,8 @@
       ness finishes.  That's a lot of work for little benefit.  Another
       option would be to just crash more obviously when an in-progress
       script deletes itself or the item it's executing for.
+- adew crashes a lot just doing the tutorial
+- arbcon sometimes loses everything in the lower areas or side panels
 - recompiling some ness code after error crashes (found playing w/ letter.tmpl)
   not yet easily reproducable
 - need play module to either work or ignore (atk/music was dropped in 8.0)

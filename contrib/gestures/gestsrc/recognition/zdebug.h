@@ -9,6 +9,9 @@ it under the terms of the GNU General Public License. See ../COPYING for
 the full agreement.
 
 **********************************************************************/
+/** \addtogroup librecog librecog.a
+ * @{ */
+/* note: not defined in librecog, but must be defined by librecog users */
 
 extern char _zdebug_flag[];
 
@@ -18,3 +21,4 @@ extern char _zdebug_flag[];
 #define ZZZZ(f) if(_zdebug_flag[f] >= 4)
 
 extern double kludge[];
+/** @} */

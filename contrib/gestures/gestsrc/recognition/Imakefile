@@ -1,6 +1,6 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 OBJS = sc.o fv.o gf.o util.o matrix.o bitvector.o
 INCFILES = bool.h util.h bitvector.h fv.h sc.h matrix.h zdebug.h

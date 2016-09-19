@@ -1,28 +1,7 @@
 /* Copyright IBM Corporation 1988,1991 - All Rights Reserved */
-MFLAGS=
-/*
-	$Disclaimer: 
-# Permission to use, copy, modify, and distribute this software and its 
-# documentation for any purpose and without fee is hereby granted, provided 
-# that the above copyright notice appear in all copies and that both that 
-# copyright notice and this permission notice appear in supporting 
-# documentation, and that the name of IBM not be used in advertising or 
-# publicity pertaining to distribution of the software without specific, 
-# written prior permission. 
-#                         
-# THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
-# TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
-# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
-# HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
-# DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
-# DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
-# OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
-# WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-# 
-#  $
-*/
-
 /* For full copyright information see:'andrew/doc/COPYRITE' */
+
+MFLAGS=
 
 #define In_Imake 1
 /* The next two lines need to be kept in sync */
@@ -61,7 +40,7 @@ AEXELINK=$(BASEDIR)/etc/aexelink
 TMPDYNEXT=-
 SYS_DYNDIR=ix86_LinuxAout
 #else /* USE_ELF */
-DYNLINKPROG = $(LINKPREFIX) gcc -shared
+DYNLINKPROG = $(LINKPREFIX) gcc -shared -Wl,--exclude-libs=ALL
 POSTDYNFLAGS=
 PREDYNFLAGS=
 DYN_LINK_LIB=-ldl

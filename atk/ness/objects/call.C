@@ -1,30 +1,8 @@
 #define NESS_INTERNALS
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
-	Copyright Carnegie Mellon University 1992, 1993 - All Rights Reserved 
+ *  Copyright Carnegie Mellon University 1992, 1993 - All Rights Reserved *
 \* ********************************************************************** */
-
-/*
-	$Disclaimer: 
- * Permission to use, copy, modify, and distribute this software and its 
- * documentation for any purpose and without fee is hereby granted, provided 
- * that the above copyright notice appear in all copies and that both that 
- * copyright notice and this permission notice appear in supporting 
- * documentation, and that the name of IBM not be used in advertising or 
- * publicity pertaining to distribution of the software without specific, 
- * written prior permission. 
- *                         
- * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
- * TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
- * HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
- * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
- * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
- * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- *  $
-*/
 
 #include <andrewos.h>
 #include <filetype.H>
@@ -52,7 +30,7 @@ ATK_IMPL("prochook.H")
 
 
 /* defining occurrence for declaration in ness.hn */
-const char * const callvarietyname[] = {
+/* NO_DLL_EXPORT */ const char * const callvarietyname[] = {
 	"callC",
 	"callPE",
 	"callSym",
@@ -67,7 +45,7 @@ const char * const callvarietyname[] = {
 };
 
 static struct libnode *LibList = NULL;
-nesssym_scopeType LibScope = nesssym_GLOBAL;
+NO_DLL_EXPORT nesssym_scopeType LibScope = nesssym_GLOBAL;
 
 /* {{fields name and defn should be unsigned char, but the Sun considers
 	character constants to be *signed* (bletch) }} */
@@ -2108,7 +2086,7 @@ ness_ProcHookFunc(ATK *, const avalueflex &aux,
 //		ScanForProcs, (long)libnode);
 }
 
-	ness_ProcHookType 
+NO_DLL_EXPORT 	ness_ProcHookType 
 ness_ProcHook(ness_ProcHookFunc, 0L, avalue::cstring, 
 	avalue::voidatom);
 
