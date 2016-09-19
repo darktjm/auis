@@ -11685,731 +11685,123 @@ white
 
 \section{libafs.a}
 
-lcstring.o T lcstring
-
-ucstring.o T ucstring
+Symbols defined in util.h.
 
 
 
 \section{libATKDynLoad.a}
 
-doloadi.o T ATKDoLoad
+Symbols defined in ATKDoLoad.H.
 
-doload.o T doload
+doload.o T doload       private
 
-doload.o B doload_trace
+doload.o B doload_trace private
 
 
 
 \section{libATKLink.a}
 
-ATKArgv.o class ATKArgv
+ATKArgv.o class ATKArgv  private? ATKArgv.H not installed
 
-ATKSymTab.o V DW.ref.__gxx_personality_v0
+ATKSymTab.o class ATKSymList  private? ATKSymTab.H not installed
 
-ATKSymTab.o class ATKSymList
+ATKSymTab.o class ATKSymTab   private? ATKSymTab.H not installed
 
-ATKSymTab.o class ATKSymTab
-
-ATKLink.o class ATKLink
+ATKLink.o class ATKLink  private? ATKLink.H not installed
 
 
 
 \section{libatkos.a}
 
-oscommon.o D atkos_dummy_variable_for_ar
+Symbols defined in atkos.h.
 
-relfunc.o T ATKUseExportsFiles(char*, char*, char*)
-
-relfunc2.o T ATKMinimizeLibs(char*, char*, char*)
+oscommon.o D atkos_dummy_variable_for_ar  private
 
 
 
 \section{libcmenu.a}
 
-cmactiv.o T cmenu_Activate
+Symbols defined in headers: cmenu.h, cmerror.h, scache.h.
 
-cmcreate.o T cmenu_Create
+cmdraw.o T CalculatePaneAndSelection private cmdraw.h
 
-cmdraw.o T CalculatePaneAndSelection
+cmdraw.o T CreateMenuStack private cmdraw.h
 
-cmdraw.o T CreateMenuStack
+cmdraw.o T DrawMenus private cmdraw.h
 
-cmdraw.o T DrawMenus
+cmdraw.o T FlipButton private cmdraw.h
 
-cmdraw.o T FlipButton
+cmdraw.o T SetPaneNum private cmdraw.h
 
-cmdraw.o T SetPaneNum
+cmdraw.o T SetPanePtr private cmdraw.h
 
-cmdraw.o T SetPanePtr
+cmdraw.o T SetSelectionNum private cmdraw.h
 
-cmdraw.o T SetSelectionNum
+cmdraw.o T SetSelectionPtr private cmdraw.h
 
-cmdraw.o T SetSelectionPtr
+cmdraw.o T ShowAPane private cmdraw.h
 
-cmdraw.o T ShowAPane
+cmmanip.o T PaneNumToPtr private cmintern.h
 
-cmerror.o B _cmErrorCode
+cmmanip.o T PanePtrToNum private cmintern.h
 
-cmerror.o D _cmErrorList
+cmmanip.o T SelectionNumToPtr private cmintern.h
 
-cmmanip.o T cmenu_AddPane
-
-cmmanip.o T cmenu_AddSelection
-
-cmmanip.o T cmenu_DeletePane
-
-cmmanip.o T cmenu_DeleteSelection
-
-cmmanip.o T cmenu_Destroy
-
-cmmanip.o T cmenu_GetActive
-
-cmmanip.o T cmenu_SetActive
-
-cmmanip.o T PaneNumToPtr
-
-cmmanip.o T PanePtrToNum
-
-cmmanip.o T SelectionNumToPtr
-
-cmmanip.o T SelectionPtrToNum
-
-scache.o T scache_Collect
-
-scache.o T scache_Free
-
-scache.o T scache_Hold
+cmmanip.o T SelectionPtrToNum private cmintern.h
 
 
 
 \section{libcparser.a}
 
-cparser.o T parser_Destroy
-
-cparser.o T parser_EnumerateReservedWords
-
-cparser.o T parser_Error
-
-cparser.o T parser_ErrorGuts
-
-cparser.o T parser_GetCurrentparser
-
-cparser.o T parser_New
-
-cparser.o T parser_Parse
-
-cparser.o T parser_ParseNumber
-
-cparser.o T parser_SetDebug
-
-cparser.o T parser_TokenNumberFromName
-
-cparser.o T parser_TransEscape
+Symbols defined in cparser.h.
 
 
 
 \section{liberrors.a}
 
-errprntf.o T errprintf
-
-errprntf.o T errprintv
-
-errprntf.o T safefprintf
+Symbols defined in errprntf.h.
 
 
 
 \section{libindex.a}
 
-index.o T index_AddPrimary
-
-index.o T index_AddSecondary
-
-index.o T index_Close
-
-index.o T index_DeletePrimary
-
-index.o T index_DeleteSecondary
-
-index.o T index_Dump
-
-index.o T index_Enumerate
-
-index.o T index_FindID
-
-index.o T index_GetAnySet
-
-index.o T index_GetData
-
-index.o T index_GetKey
-
-index.o T index_GetPrimarySet
-
-index.o T index_Hash
-
-index.o T index_HashOpen
-
-index.o T index_Open
-
-indexio.o T index_CGet
-
-indexio.o T index_CGetHash
-
-indexio.o T index_CPut
-
-indexio.o T index_Create
-
-indexio.o T index_CWrite
-
-indexio.o T index_FreeIndex
-
-indexio.o T index_ReadIndex
-
-rcordset.o T index_FreeHL
-
-rcordset.o T index_HashAdd
-
-rcordset.o T index_HashPresent
-
-rcordset.o T index_HashRemove
-
-rcordset.o T index_NewHL
-
-rcordset.o T recordset_Add
-
-rcordset.o T recordset_Free
-
-rcordset.o T recordset_New
+Symbols defined in index.h.
 
 
 
 \section{libjpeg.a}
 
-jcmaster.o T jpeg_compress
-
-jcdeflts.o T j_add_quant_table
-
-jcdeflts.o T j_c_defaults
-
-jcdeflts.o T j_monochrome_default
-
-jcdeflts.o T j_quality_scaling
-
-jcdeflts.o T j_set_quality
-
-jccolor.o T jselccolor
-
-jcexpand.o T jselexpand
-
-jchuff.o T jselchuffman
-
-jcmcu.o T jselcmcu
-
-jcpipe.o T jselcpipeline
-
-jcsample.o T jseldownsample
-
-jfwddct.o T j_fwd_dct
-
-jwrjfif.o T jselwjfif
-
-jrdgif.o T jselrgif
-
-jrdppm.o T jselrppm
-
-jrdtarga.o T jselrtarga
-
-jdmaster.o T jpeg_decompress
-
-jddeflts.o T j_d_defaults
-
-jbsmooth.o T jselbsmooth
-
-jdcolor.o T jseldcolor
-
-jdhuff.o T jseldhuffman
-
-jdmcu.o T jseldmcu
-
-jdpipe.o T jseldpipeline
-
-jdsample.o T jselupsample
-
-jquant1.o T jsel1quantize
-
-jquant2.o T jsel2quantize
-
-jrevdct.o T j_rev_dct
-
-jrdjfif.o T jselrjfif
-
-jwrgif.o T jselwgif
-
-jwrppm.o T jselwppm
-
-jwrtarga.o T jselwtarga
-
-jutils.o T jcopy_block_row
-
-jutils.o T jcopy_sample_rows
-
-jutils.o T jround_up
-
-jutils.o T jzero_far
-
-jerror.o T jselerror
-
-jmemmgr.o T jselmemmgr
-
-jmemsys.o T jfree_small
-
-jmemsys.o T jget_small
-
-jmemsys.o T jmem_available
-
-jmemsys.o T jmem_init
-
-jmemsys.o T jmem_term
-
-jmemsys.o T jopen_backing_store
+Supplied version of jpeg library.  It is too old to be easily 
+replaced with a system jpeg library.  Installed headers are jconfig.h, 
+jinclude.h, jpegdata.h.  I didn't bother checking if all symbols 
+exported by this library are in the headers, or vice-versa.
 
 
 
 \section{libshadows.a}
 
-shadows.o T shadows_ComputeColor
-
-shadows.o T shadows_SetPreferences
+shadows.h
 
 
 
 \section{libtiff.a}
 
-tif_fax3.o T Fax3Decode2DRow
-
-tif_fax3.o T Fax3Encode2DRow
-
-tif_fax3.o T Fax3PutEOL
-
-tif_fax3.o R TIFFFax1DAction
-
-tif_fax3.o R TIFFFax1DNextState
-
-tif_fax3.o R TIFFFax2DMode
-
-tif_fax3.o R TIFFFax2DNextState
-
-tif_fax3.o R TIFFFaxBlackCodes
-
-tif_fax3.o R TIFFFaxUncompAction
-
-tif_fax3.o R TIFFFaxUncompNextState
-
-tif_fax3.o R TIFFFaxWhiteCodes
-
-tif_fax3.o T TIFFInitCCITTFax3
-
-tif_fax3.o T TIFFModeCCITTFax3
-
-tif_fax4.o T TIFFInitCCITTFax4
-
-tif_aux.o T TIFFGetFieldDefaulted
-
-tif_aux.o T TIFFVGetFieldDefaulted
-
-tif_ccittrle.o T TIFFInitCCITTRLE
-
-tif_ccittrle.o T TIFFInitCCITTRLEW
-
-tif_close.o T TIFFClose
-
-tif_compat.o T TIFFGetFileSize
-
-tif_compress.o T TIFFNoRowDecode
-
-tif_compress.o T TIFFNoRowEncode
-
-tif_compress.o T TIFFNoStripDecode
-
-tif_compress.o T TIFFNoStripEncode
-
-tif_compress.o T TIFFNoTileDecode
-
-tif_compress.o T TIFFNoTileEncode
-
-tif_compress.o T TIFFSetCompressionScheme
-
-tif_dir.o T TIFFDefaultDirectory
-
-tif_dir.o T TIFFFreeDirectory
-
-tif_dir.o T _TIFFgetfield
-
-tif_dir.o T TIFFGetField
-
-tif_dir.o T TIFFSetDirectory
-
-tif_dir.o T TIFFSetField
-
-tif_dir.o T TIFFVGetField
-
-tif_dir.o T TIFFVSetField
-
-tif_dirinfo.o R tiffDataWidth
-
-tif_dirinfo.o D tiffFieldInfo
-
-tif_dirinfo.o T TIFFFieldWithTag
-
-tif_dirinfo.o T TIFFFindFieldInfo
-
-tif_dirread.o T TIFFReadDirectory
-
-tif_dirwrite.o T TIFFWriteDirectory
-
-tif_dumpmode.o T TIFFInitDumpMode
-
-tif_error.o T TIFFError
-
-tif_error.o T TIFFSetErrorHandler
-
-tif_getimage.o T TIFFReadRGBAImage
-
-tif_jpeg.o T TIFFInitJPEG
-
-tif_flush.o T TIFFFlush
-
-tif_flush.o T TIFFFlushData
-
-tif_lzw.o T TIFFInitLZW
-
-tif_next.o T TIFFInitNeXT
-
-tif_open.o T TIFFCurrentDirectory
-
-tif_open.o T TIFFCurrentRow
-
-tif_open.o T TIFFCurrentStrip
-
-tif_open.o T TIFFCurrentTile
-
-tif_open.o T TIFFFdOpen
-
-tif_open.o T TIFFFileName
-
-tif_open.o T TIFFFileno
-
-tif_open.o T TIFFGetMode
-
-tif_open.o T TIFFIsTiled
-
-tif_open.o T TIFFOpen
-
-tif_open.o T TIFFScanlineSize
-
-tif_packbits.o T TIFFInitPackBits
-
-tif_print.o T TIFFPrintDirectory
-
-tif_read.o T TIFFReadBufferSetup
-
-tif_read.o T TIFFReadEncodedStrip
-
-tif_read.o T TIFFReadEncodedTile
-
-tif_read.o T TIFFReadRawStrip
-
-tif_read.o T TIFFReadRawTile
-
-tif_read.o T TIFFReadScanline
-
-tif_read.o T TIFFReadTile
-
-tif_strip.o T TIFFComputeStrip
-
-tif_strip.o T TIFFNumberOfStrips
-
-tif_strip.o T TIFFStripSize
-
-tif_strip.o T TIFFVStripSize
-
-tif_swab.o R TIFFBitRevTable
-
-tif_swab.o R TIFFNoBitRevTable
-
-tif_swab.o T TIFFReverseBits
-
-tif_swab.o T TIFFSwabArrayOfLong
-
-tif_swab.o T TIFFSwabArrayOfShort
-
-tif_swab.o T TIFFSwabLong
-
-tif_swab.o T TIFFSwabShort
-
-tif_thunder.o T TIFFInitThunderScan
-
-tif_tile.o T TIFFCheckTile
-
-tif_tile.o T TIFFComputeTile
-
-tif_tile.o T TIFFNumberOfTiles
-
-tif_tile.o T TIFFTileRowSize
-
-tif_tile.o T TIFFTileSize
-
-tif_tile.o T TIFFVTileSize
-
-tif_version.o R TIFFVersion
-
-tif_warning.o T TIFFSetWarningHandler
-
-tif_warning.o T TIFFWarning
-
-tif_write.o T TIFFFlushData1
-
-tif_write.o T TIFFWriteEncodedStrip
-
-tif_write.o T TIFFWriteEncodedTile
-
-tif_write.o T TIFFWriteRawStrip
-
-tif_write.o T TIFFWriteRawTile
-
-tif_write.o T TIFFWriteScanline
+Supplied version of tiff library.  It is too old to be easily 
+replaced with a system tiff library.  Installed headers are tiff.h, 
+tiffio.h.  I didn't bother checking if all symbols 
+exported by this library are in the headers, or vice-versa.
 
 
 
 \section{libutil.a}
 
-abbrpath.o T ap_Shorten
+Symbols defined in util.h, unscribe.h.
 
-abbrpath.o T ap_ShortenAlso
+fdplumb.o T RegisterCloseFile  private
 
-abbrpath.o T ap_ShortenAlsoTo
+fdplumb.o T RegisterOpenFile  private
 
-abbrpath.o T ap_ShortenTo
-
-andrwdir.o T AndrewDir
-
-andydir.o T AndyDir
-
-config.o D conf_ConfigErrno
-
-config.o D conf_ConfigNames
-
-config.o D conf_ConfigUsed
-
-config.o T FreeConfigureList
-
-config.o T GetConfig
-
-config.o T GetConfiguration
-
-config.o C ProgramName
-
-config.o T ReadConfigureFile
-
-config.o T ReadConfigureLine
-
-config.o T ReadStringConfig
-
-desym.o T DeSymLink
-
-errhdlr.o C EH_Error_Msg
-
-errhdlr.o T emalloc
-
-errhdlr.o T erealloc
-
-errhdlr.o C _error_handler_env
-
-fdplumb.o T dbg_close
-
-fdplumb.o T dbg_creat
-
-fdplumb.o T dbg_dup
-
-fdplumb.o T dbg_dup2
-
-fdplumb.o T dbg_fclose
-
-fdplumb.o T dbg_fopen
-
-fdplumb.o T dbg_open
-
-fdplumb.o T dbg_pipe
-
-fdplumb.o T dbg_socket
-
-fdplumb.o T dbg_socketpair
-
-fdplumb.o T fdplumb_SpillGuts
-
-fdplumb.o T fdplumb_SpillGutsToFile
-
-fdplumb.o T RegisterCloseFile
-
-fdplumb.o T RegisterOpenFile
-
-fdplumb3.o T dbg_pclose
-
-fdplumb3.o T dbg_popen
-
-fdplumb4.o T dbg_qclose
-
-fdplumb4.o T dbg_qopen
-
-fdplumb4.o T dbg_tclose
-
-fdplumb4.o T dbg_topen
-
-fdplumb5.o T dbg_t2close
-
-fdplumb5.o T dbg_t2open
-
-fdplumb6.o T dbg_closedir
-
-fdplumb6.o T dbg_opendir
-
-findfile.o T findfileinpath
-
-foldedeq.o T FoldedEQ
-
-foldedeq.o T FoldedEQn
-
-foldedeq.o T FoldedWildEQ
-
-foldedeq.o R FoldTRT
-
-foldedeq.o T lc_strcmp
-
-foldedeq.o T lc_strncmp
-
-fpacheck.o T fpacheck
-
-fselect.o T fselect
-
-gtime.o T gtime
-
-fwrtallc.o T fwriteallchars
-
-getaddr.o T getaddr
-
-gethome.o T gethome
-
-getla.o T getla
-
-getla.o T getla_ShutDown
-
-getmyhom.o T getMyHome
-
-getpty.o T GetPty
-
-getpty.o T GetPtyandName
-
-hname.o T GetHostDomainName
-
-lcappend.o T LCappend
-
-lineprom.o T BE2LinePromote
-
-lineprom.o T BE2LinePromoteEnd
-
-lineprom.o T BE2LinePromoteInit
-
-localdir.o T LocalDir
-
-nicetime.o T NiceTime
-
-procstuf.o T argvtostr
-
-procstuf.o T statustostr
-
-procstuf.o T strtoargv
-
-profile.o T addstringprofile
-
-profile.o T GetFirstProfileFileName
-
-profile.o T getprofile
-
-profile.o T GetProfileFileName
-
-profile.o T getprofileint
-
-profile.o T getprofileswitch
-
-profile.o T profileentryexists
-
-profile.o T refreshprofile
-
-setprof.o T setprofilestring
-
-t2open.o T t2close
-
-t2open.o T t2open
-
-tfail.o T tfail
-
-times.o T osi_GetTimes
-
-titles.o T SetInitialArgs
-
-titles.o T SetProcTitle
-
-topen.o T qclose
-
-topen.o T qopen
-
-topen.o T tclose
-
-topen.o T topen
-
-uerror.o T UnixError
-
-ulsindex.o T ULsindex
-
-ulstlmat.o T ULstlmatch
-
-ulstrcmp.o T ULstrcmp
-
-ulstrcmp.o T ULstrncmp
-
-usignal.o T UnixSignal
-
-writeall.o T writeall
-
-unscribe.o T PrintMaybeFoldQuotingFormatting
-
-unscribe.o T PrintQuotingFormatting
-
-unscribe.o D Styles
-
-unscribe.o T UnScribe
-
-unscribe.o T UnScribeAbort
-
-unscribe.o T UnScribeFlush
-
-unscribe.o T UnScribeInit
-
-encode.o T char64
-
-encode.o T from64
-
-encode.o T fromqp
-
-encode.o T hexchar
-
-encode.o T output64chunk
-
-encode.o T to64
-
-system.o T os_system
-
-xbasedir.o T XLibDir
+times.o T osi_GetTimes  system.h
 
 
 
@@ -19524,133 +18916,38 @@ white
 
 \section{libgdev.a}
 
-gdev.o T GDEV00topleft
+Symbols defined in gestures/gdev.h, gestures/gdrv.h.
 
-gdev.o T GDEVcurrentoutput
+x11r4.o T X11flush  private x11r4.h
 
-gdev.o T GDEVcurrenttime
+x11r4.o T X11getdim  private x11r4.h
 
-gdev.o B gdevdebug
+x11r4.o T X11init  private x11r4.h
 
-gdev.o T GDEVflush
+x11r4.o T X11line  private x11r4.h
 
-gdev.o T GDEVgetchar
+x11r4.o T X11menuitem  private x11r4.h
 
-gdev.o T GDEVgetdim
+x11r4.o T X11mouseinterest  private x11r4.h
 
-gdev.o T GDEVgets
+x11r4.o T X11point  private x11r4.h
 
-gdev.o T GDEVgetXYT
+x11r4.o T X11rect  private x11r4.h
 
-gdev.o T GDEVinit
+x11r4.o T X11setdim  private x11r4.h
 
-gdev.o T GDEVline
+x11r4.o T X11start  private x11r4.h
 
-gdev.o T GDEVmenuitem
+x11r4.o T X11stop  private x11r4.h
 
-gdev.o T GDEVmouse
-
-gdev.o T GDEVplay
-
-gdev.o T GDEVpoint
-
-gdev.o T GDEVrecord
-
-gdev.o T GDEVrect
-
-gdev.o T GDEVrefresh
-
-gdev.o T GDEVrefresh_function
-
-gdev.o T GDEVsetd
-
-gdev.o T GDEVsetdim
-
-gdev.o T GDEVseti
-
-gdev.o T GDEVsets
-
-gdev.o T GDEVstart
-
-gdev.o T GDEVstop
-
-gdev.o T GDEVstoprecording
-
-gdev.o T GDEVtext
-
-gdev.o T GDEVtimeout
-
-gdev.o T GDEVwindowchanged
-
-gdev.o T GDRV00topleft
-
-gdev.o T GDRVfdnotify
-
-gdev.o T GDRVmenu
-
-gdev.o T GDRVmouse
-
-gdev.o T GDRVputc
-
-gdev.o T GDRVrefresh
-
-gdev.o T GDRVvar_addr
-
-gdev.o T GDRVvar_fcn
-
-gdev.o T GDRVwindow
-
-x11r4.o T X11flush
-
-x11r4.o T X11getdim
-
-x11r4.o T X11init
-
-x11r4.o T X11line
-
-x11r4.o T X11menuitem
-
-x11r4.o T X11mouseinterest
-
-x11r4.o T X11point
-
-x11r4.o T X11rect
-
-x11r4.o T X11setdim
-
-x11r4.o T X11start
-
-x11r4.o T X11stop
-
-x11r4.o T X11text
+x11r4.o T X11text  private x11r4.h
 
 
 
 \section{librecog.a}
 
-sc.o T MahalanobisDistance
-
-sc.o T sAddExample
-
-sc.o T sClassify
-
-sc.o T sClassifyAD
-
-sc.o T sClassNameLookup
-
-sc.o T sDistances
-
-sc.o T sDoneAdding
-
-sc.o T sDumpClassifier
-
-sc.o T sFreeClassifier
-
-sc.o T sNewClassifier
-
-sc.o T sRead
-
-sc.o T sWrite
+Symbols defined in gestures/matrix.h, gestures/sc.h, 
+gestures/zdebug.h.  [note: still in progress]
 
 fv.o D dist_sq_threshold
 
@@ -19676,71 +18973,15 @@ gf.o T ReadGestureFile
 
 gf.o T WriteGesture
 
-util.o D DebugFlag
-
-util.o T recog_debug
-
-util.o T recog_error
-
-util.o T recog_myalloc
-
-util.o T recog_scopy
-
-util.o T recog_tempstring
+util.o D DebugFlag private proto.h
 
 matrix.o B DebugInvertMatrix
-
-matrix.o T DeSliceMatrix
-
-matrix.o T FillMatrix
-
-matrix.o T FreeMatrix
-
-matrix.o T FreeVector
-
-matrix.o T InnerProduct
-
-matrix.o T InputMatrix
-
-matrix.o T InputVector
-
-matrix.o T InvertMatrix
-
-matrix.o T InvertSingularMatrix
-
-matrix.o T MatrixCopy
-
-matrix.o T MatrixMultiply
-
-matrix.o T NewMatrix
-
-matrix.o T NewVector
 
 matrix.o T OutputMatrix
 
 matrix.o T OutputVector
 
-matrix.o T PrintMatrix
-
-matrix.o T PrintVector
-
-matrix.o T QuadraticForm
-
 matrix.o T ScalarTimesMatrix
-
-matrix.o T ScalarTimesVector
-
-matrix.o T SliceMatrix
-
-matrix.o T SliceVector
-
-matrix.o T VectorCopy
-
-matrix.o T VectorTimesMatrix
-
-matrix.o T ZeroMatrix
-
-matrix.o T ZeroVector
 
 bitvector.o T AssignBitVector
 

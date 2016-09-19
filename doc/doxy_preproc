@@ -1,0 +1,19 @@
+#!/bin/sh
+# add every file to a group to force all symbols to be "documented"
+# add a \file directive to every file to force all files into PDF
+# strip out gcc attributes (doxygen doesn't understand them)
+hasgr=
+fgrep -i '\addtogroup' "$1" >/dev/null && hasgr=y
+h="${1##*include/}"
+g=`echo ${h%.[hH]} | tr /.- ___`
+test -n "$hasgr" || echo "/** \\addtogroup $g $h
+* @{ */"
+echo "/** \\file $h */"
+sed -e '/#define/!{
+    s/PRINTF_LIKE([^)]*)//g
+    s/SCANF_LIKE([^)]*)//g
+    s/EXIT_LIKE / /g
+    s/NO_DLL_EXPORT / /g
+    s/ UNUSED / /g
+    }' "$@"
+test -n "$hasgr" || echo '/** @} */'

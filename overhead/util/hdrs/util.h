@@ -1,39 +1,17 @@
-/* C++ified by magic !@#%&@#$ */
-#include <atkproto.h>
-BEGINCPLUSPLUSPROTOS
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
-/*
-	$Disclaimer: 
- * Permission to use, copy, modify, and distribute this software and its 
- * documentation for any purpose and without fee is hereby granted, provided 
- * that the above copyright notice appear in all copies and that both that 
- * copyright notice and this permission notice appear in supporting 
- * documentation, and that the name of IBM not be used in advertising or 
- * publicity pertaining to distribution of the software without specific, 
- * written prior permission. 
- *                         
- * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
- * TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
- * HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
- * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
- * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
- * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- *  $
-*/
-
-
 #ifndef _UTIL_H_
 #define _UTIL_H_ 1
                                  
+/** \addtogroup libutil libutil.a
+ *  Miscellaneous C utility functions.
+ *  @{ */
 
 #include <andrewos.h>
+
+BEGINCPLUSPLUSPROTOS
 
 /* fdplumb*.c */
 extern int fdplumb_SpillGuts(void);
@@ -102,12 +80,6 @@ extern int lc_strncmp(const char *a, const char *b, int n);
 /* lcappend.c */
 void LCappend(char *s1, const char *s2);
 
-/* lcstring.c */
-char *lcstring(char *d, const char *s, int n);
-
-/* ucstring.c */
-char *ucstring(char *d, const char *s, int n);
-
 /* getla.c */
 extern double getla(int index);
 extern void getla_ShutDown(void);
@@ -120,13 +92,6 @@ extern const char *getMyHome(void);
 
 /* hname.c */
 extern int GetHostDomainName(char  *buf , int  buflen);	/* works like gethostname() but extends with getdomainname() if necessary. */
-
-struct configurelist {
-    char           *programName;
-    char           *key;
-    char           *value;
-    struct configurelist *next;
-};
 
 /* andrwdir.c */
 extern const char *AndrewDir(const char *suffix);
@@ -149,6 +114,14 @@ extern char ProgramName[];
 #endif
 extern const char *conf_ConfigNames[conf_NumConfigNames + 1];
 extern int conf_ConfigUsed, conf_ConfigErrno;
+
+struct configurelist {
+    char           *programName;
+    char           *key;
+    char           *value;
+    struct configurelist *next;
+};
+
 #define CONFIG_EOF -1
 #define CONFIG_FOUNDENTRY 0
 #define CONFIG_BADENTRY 1
@@ -293,9 +266,6 @@ extern int ULstlmatch (const char  *big,const char  *small );          /* Return
                                         /* Deallocate value from NewString.
                                         *  Set variable to NULL. */
 
-extern void FreeString(char *srcptr);		/* Deallocate
-                                        * string from NewString.  */
-
 /* uerror.c */
 extern const char *UnixError(int	 errorNumber);           /* Pass it an errno value and it
                                         * returns a static (canned) string
@@ -344,11 +314,7 @@ extern int fromqp(FILE *, FILE *);
 		      "There are %d elements.\n"),
 	  n); */
 
-
 /* errhdlr.c */
-#ifndef ERRHDLR_H
-#define ERRHDLR_H
-
 #include <setjmp.h>
 #include <sys/param.h>
 
@@ -420,9 +386,19 @@ extern void *erealloc(void  *old, long  newsize);
 #define EH_module_prs 1
 #define EH_module_alq 2
 
-#endif /* ERRHDLR_H */
+/** @} */
 
-#endif /* _UTIL_H_ */
+/** \addtogroup libafs libafs.a
+ * @{ */
+
+/* lcstring.c */
+char *lcstring(char *d, const char *s, int n);
+
+/* ucstring.c */
+char *ucstring(char *d, const char *s, int n);
 
 ENDCPLUSPLUSPROTOS
- 
+
+/** @} */
+
+#endif /* _UTIL_H_ */

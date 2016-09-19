@@ -3,7 +3,7 @@ ATK_INTER
 #define _deskey_H_
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 /* deskey.H -- EZ package to describe key sequences.
  * David Nichols

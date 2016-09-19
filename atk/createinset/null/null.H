@@ -3,37 +3,12 @@ ATK_INTER
 #define _null_H_
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *	   Copyright Carnegie Mellon, 1992 - All Rights Reserved
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *	   Copyright Carnegie Mellon, 1992 - All Rights Reserved          *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
 /*
-	$Disclaimer: 
-// Permission to use, copy, modify, and distribute this software and its 
-// documentation for any purpose and without fee is hereby granted, provided 
-// that the above copyright notice appear in all copies and that both that 
-// copyright notice and this permission notice appear in supporting 
-// documentation, and that the name of IBM not be used in advertising or 
-// publicity pertaining to distribution of the software without specific, 
-// written prior permission. 
-//                         
-// THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
-// TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
-// MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
-// HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
-// DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
-// DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
-// OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
-// WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-// 
-//  $
-*/
-
-
- 
-
-/*
-null.ch
+null.H
 
 	null data object
 
@@ -47,47 +22,11 @@ null.ch
 	for the coordinates is the upper left corner of the rectangle.
 
 */
-/*
- *    $Log: null.H,v $
-// Revision 1.4  1994/11/30  20:42:06  rr2b
-// Start of Imakefile cleanup and pragma implementation/interface hack for g++
-//
-// Revision 1.3  1993/06/10  20:24:39  rr2b
-// Great atk_inited removal.
-//
- * Revision 1.2  1993/06/05  00:32:29  rr2b
- * Converted to C++
- *
- * Revision 1.1  1993/06/04  23:26:51  rr2b
- * Initial revision
- *
-*Revision 1.4  1992/12/14  20:40:31  rr2b
-*disclaimerization
-*
-Revision 1.3  1992/06/22  21:48:52  wjh
-added types in function declaractions
-.MARKER
-revised description of __Read
-.
-
-Revision 1.2  1991/09/12  19:30:59  bobg
-Update copyright notice
-
-Revision 1.1  1989/07/31  15:34:54  wjh
-Initial revision
-
- *
- * Revision 1.0  88/05/14  15:40:32  wjh
- * Copied from /usr/andrew/lib/genericinset
- */
-
-
-
 
 /* status values for NotifyObservers */
 #define null_DATACHANGED 1
 
-/* $$$ declare any structs that will be needed */
+/* $$$ declare any structs that will be needed by users */
 struct dotlist {
 	long x, y;
 	struct dotlist *next;

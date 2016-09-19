@@ -3,7 +3,7 @@ ATK_INTER
 #define _ezprintapp_H_
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 #include <application.H>
 class ezprintapp : public  application {

@@ -1,6 +1,6 @@
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
- *        For full copyright information see:'andrew/doc/COPYRITE'     *
+ *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
 HELPS = atk.help color.help geomtry.help insets.help procs.help prog.help tour.help

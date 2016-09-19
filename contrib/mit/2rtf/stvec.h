@@ -30,63 +30,6 @@
  with the appropriate changes to the rest of 2rtf.
  */
 
-/*
-	$Disclaimer: 
- * Permission to use, copy, modify, and distribute this software and its 
- * documentation for any purpose and without fee is hereby granted, provided 
- * that the above copyright notice appear in all copies and that both that 
- * copyright notice and this permission notice appear in supporting 
- * documentation, and that the name of IBM not be used in advertising or 
- * publicity pertaining to distribution of the software without specific, 
- * written prior permission. 
- *                         
- * THE COPYRIGHT HOLDERS DISCLAIM ALL WARRANTIES WITH REGARD 
- * TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF 
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ANY COPYRIGHT 
- * HOLDER BE LIABLE FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL 
- * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, 
- * DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE 
- * OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION 
- * WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- * 
- *  $Disclaimer: This software is part of version 5.2.0 of the 
- * Andrew User Interface System and is the 
- * property of IBM, Carnegie Mellon University, 
- * and the other copyright holders.  The source 
- * code of this version is for the sole use of 
- * members of the Andrew Consortium with 
- * memberships extending into calendar year 
- * 1993.  This source code is not to be distributed 
- * to non-members of the consortium nor beyond 
- * a fifty-mile radius from the membership address.  
- * Binary object code compiled or derived from 
- * these sources is not to be distributed to non-
- * members.  Members may have additional 
- * distribution rights granted by prior written 
- * permission of Carnegie Mellon University.
- * 
- * IBM, CARNEGIE MELLON UNIVERSITY, 
- * AND THE OTHER COPYRIGHT HOLDERS
- *  DISCLAIM ALL WARRANTIES WITH 
- * REGARD TO THIS SOFTWARE, INCLUDING 
- * ALL IMPLIED WARRANTIES OF MERCHANT-
- * ABILITY AND FITNESS. IN 
- * NO EVENT SHALL  IBM, CARNEGIE 
- * MELLON UNIVERSITY, OR ANY OTHER 
- * COPYRIGHT HOLDER BE LIABLE FOR 
- * ANY SPECIAL, INDIRECT OR CONSE-
- * QUENTIAL DAMAGES OR ANY DAMAGES 
- * WHATSOEVER RESULTING FROM LOSS OF
- * USE, DATA OR PROFITS, WHETHER IN AN
- * ACTION OF CONTRACT, NEGLIGENCE OR
- * OTHER TORTIOUS ACTION, ARISING OUT 
- * OF OR IN CONNECTION WITH THE USE OR
- * PERFORMANCE OF THIS SOFTWARE.
- *  $
- *  $
-*/
-
-
 enum style_Attribute {
     style_LeftMarginAttr=0,
     style_RightMarginAttr=1,

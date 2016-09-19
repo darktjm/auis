@@ -29,17 +29,18 @@ InstallFile(prefs.def, $(INSTMANFLAGS), ${DESTDIR}/lib)
 CleanTarget(prefs.def)
 #endif
 
-/* No, I will not bother with #ifdef DOXYGEN_ENV or some such */
-latex/hierarchy.tex: $(shell find $(DESTDIR)/include -type f) doxyfile add_group
+#ifdef MK_DOXYDOC
+latex/hierarchy.tex: $(shell find $(DESTDIR)/include -type f) doxyfile doxy_preproc
 	$(RM) -rf latex html
 	sed -e 's#$${ANDREWDIR}#$(DESTDIR)#g' < doxyfile | doxygen -
 
-refman.pdf: latex/hierarchy.tex
+ATK-API.pdf: latex/hierarchy.tex
 	(cd latex; make)
-	$(CP) latex/refman.pdf .
+	$(CP) latex/refman.pdf ATK-API.pdf
 
-InstallFile(refman.pdf,${INSTMANFLAGS},${DESTDIR}/doc/PROGRAMMER)
-CleanTarget(-r latex html doxygen*.tmp refman.pdf)
+InstallFile(ATK-API.pdf,${INSTMANFLAGS},${DESTDIR}/doc/PROGRAMMER)
+CleanTarget(-r latex html doxygen*.tmp ATK-API.pdf)
+#endif
 
 #ifdef FUNCTION_INDEX_ENV
 
