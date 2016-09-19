@@ -105,7 +105,7 @@ ATK_IMPL("rasterview.H")
 #include <dispbox.h>
 #include <rastvaux.h>
 
-boolean rasterview_debug=FALSE;
+NO_DLL_EXPORT boolean rasterview_debug=FALSE;
 static boolean RastersInitiallyShrunk = FALSE;
 
 

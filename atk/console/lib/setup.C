@@ -68,28 +68,27 @@ extern int Pposx, Pposy;
 extern char Pstring1[256], Pstring2[256], Pstring3[256], Pstring4[MAXPATHLEN];
 
 static struct display VirginDisplay;
-class fontdesc *icon12font,
+static class fontdesc *icon12font,
     *console10font;
-int BogusInt; /* for storing values for AlarmRect which are now ignored */
+static int BogusInt; /* for storing values for AlarmRect which are now ignored */
 extern int DynamicXmin,
     DynamicXmax,
     DynamicYmin,
     DynamicYmax,
     OutgoingAge;
-extern const char EXTENSION[];
 
 
 extern char PrimaryErrorBuffer[];
 
 /* MAXCHILDPIDS is from console.h */
-int	children[MAXCHILDPIDS] = { -1 };
-int	theGetstatsPid = -1;
+NO_DLL_EXPORT int	children[MAXCHILDPIDS] = { -1 };
+NO_DLL_EXPORT int	theGetstatsPid = -1;
 
-boolean	HideIt = FALSE,
+NO_DLL_EXPORT boolean	HideIt = FALSE,
     ParsingError,
     LogErrorsExternally;
-FILE	*ExternalLogFP = NULL;
-char	ParsingErrorText[128];
+NO_DLL_EXPORT FILE	*ExternalLogFP = NULL;
+NO_DLL_EXPORT char	ParsingErrorText[128];
 extern int	ForceErrorMonitoring;
 
 
@@ -1085,12 +1084,12 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 {
     struct display *thisdisp;
     int            *newchild;
-    char           *s, *tmp = NULL;
+    char           *tmp = NULL;
     const char     *TokenBuf, *string;
     char            *theTypeInPtr = NULL;
     char            DEFAULTFILE[50]; 
     FILE          *pfd = NULL;
-    int             RawXmin, RawXmax, RawYmin, RawYmax, RowHeight, ColWidth, findex, inc, i, mask, Rows, Columns, Machines, j;
+    int             RawXmin, RawXmax, RawYmin, RawYmax, RowHeight, ColWidth, findex, inc, i, Rows, Columns, Machines, j;
     int lineno = 0;
     boolean InstrumentFound = FALSE;
     boolean triedOnce = FALSE;
@@ -1917,7 +1916,7 @@ void PostParseArgs(char  *name)
     /* arrgh(("Initializing %s (%s%s); please wait...\n", RealProgramName, ConFile, CONSOLE_VERSION)); */
 }
 
-char MyHomeDir[MAXPATHLEN] = "";
+NO_DLL_EXPORT char MyHomeDir[MAXPATHLEN] = "";
 
 void OneTimeInit(class consoleClass  *self)
 {

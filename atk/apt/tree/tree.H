@@ -28,7 +28,7 @@ ATK_INTER
 //  $
 */
 
-/**  SPECIFICATION -- External Facility Suite  *********************************
+/***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Tree Data-Class
 
@@ -122,7 +122,7 @@ public:
 
 
 
-  /**  Methods Dealing with Tree as a Whole  **/
+  /***  Methods Dealing with Tree as a Whole  **/
 
   virtual long SetTreeAttribute( long attribute_code, long attribute_value );
   virtual long TreeAttribute( long attribute_code )				 ;
@@ -132,7 +132,7 @@ public:
   virtual boolean TreeModified()						 ;
   virtual void SetDebug( boolean state );
 
-  /**  Methods Dealing with Individual Nodes  **/
+  /***  Methods Dealing with Individual Nodes  **/
 
   virtual struct tree_node * CreateRootNode( const char *name, long datum )			 ;
   virtual struct tree_node * CreateParentNode( const char *name, long datum, struct tree_node *child ) 
@@ -197,7 +197,7 @@ public:
 
 
 
-  static class tree * Create(tree_Specification	         *specification, class dataobject     *anchor );
+  static class tree * Create(const tree_Specification	         *specification, class dataobject     *anchor );
   
 	tree();
   

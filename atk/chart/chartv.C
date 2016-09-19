@@ -99,7 +99,7 @@ ATK_IMPL("chartv.H")
 static   class menulist	 *class_menulist;
 static   class keymap		 *class_keymap;
 
-boolean chartv_debug = 0;
+static boolean chartv_debug = 0;
 #define debug chartv_debug
 
 

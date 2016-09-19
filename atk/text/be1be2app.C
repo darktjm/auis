@@ -41,9 +41,9 @@ ATK_IMPL("be1be2app.H")
  * Obtain list of input files
  */
 
-const char progName[] = "be1be2";
-char *fileList[1000];
-int fileCount;
+static const char progName[] = "be1be2";
+static char *fileList[1000];
+static int fileCount;
 
 
 ATKdefineRegistry(be1be2app, application, NULL);

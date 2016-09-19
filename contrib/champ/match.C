@@ -28,7 +28,7 @@
 #include <andrewos.h>  /* time.h */
 #include <champ.h>
 
-int MonthLengths[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+static const int MonthLengths[] = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 #ifndef TESTINGHEBREW
 void ClearAllFlaggedEvents();

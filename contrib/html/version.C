@@ -22,6 +22,7 @@
  * OF THIS SOFTWARE.
  */
 
+#include <andrewos.h>
 #include "html.h"
 
-const char versionString[] = "HTML-Text $Revision$";
+/* NO_DLL_EXPORT */ const char versionString[] = "HTML-Text $Revision$";

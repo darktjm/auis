@@ -486,7 +486,7 @@ extern int console_InitStats(class consoleClass  *self);
 extern void InitializeGetStats(class consoleClass *self);
 extern void InitDirectories();
 
-extern const char RealProgramName[];
-extern const char EXTENSION[];
-extern const char EXTENSION1[];
-extern const char EXTENSION2[];
+NO_DLL_EXPORT extern const char RealProgramName[];
+NO_DLL_EXPORT extern const char EXTENSION[];
+NO_DLL_EXPORT extern const char EXTENSION1[];
+NO_DLL_EXPORT extern const char EXTENSION2[];

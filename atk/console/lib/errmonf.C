@@ -55,7 +55,7 @@ extern boolean NonAFSDHost;
 extern u_long ThisHostAddr;
 
 #define ERRBUFSIZE 300
-char PrimaryErrorBuffer[ERRBUFSIZE];
+NO_DLL_EXPORT char PrimaryErrorBuffer[ERRBUFSIZE];
 
 /* ****************************************************************
  * CheckErrorsIn -- checks the /dev/console channel, if it exists.

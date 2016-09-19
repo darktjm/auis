@@ -8,7 +8,7 @@ shift
 echo "making lib"$name.so
 rm -f lib$name.so shr.o
 echo "Creating shared object."
-if ! $linkprefix gcc -shared -o lib$name.so "$@"; then
+if ! $linkprefix gcc -Wl,--exclude-libs=ALL -shared -o lib$name.so "$@"; then
 	echo Could not create shared library: lib$name.so
 	exit 1
 fi

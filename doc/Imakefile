@@ -29,6 +29,17 @@ InstallFile(prefs.def, $(INSTMANFLAGS), ${DESTDIR}/lib)
 CleanTarget(prefs.def)
 #endif
 
+/* No, I will not bother with #ifdef DOXYGEN_ENV or some such */
+latex/hierarchy.tex: $(shell find $(DESTDIR)/include -type f) doxyfile add_group
+	$(RM) -rf latex html
+	sed -e 's#$${ANDREWDIR}#$(DESTDIR)#g' < doxyfile | doxygen -
+
+refman.pdf: latex/hierarchy.tex
+	(cd latex; make)
+	$(CP) latex/refman.pdf .
+
+InstallFile(refman.pdf,${INSTMANFLAGS},${DESTDIR}/doc/PROGRAMMER)
+CleanTarget(-r latex html doxygen*.tmp refman.pdf)
 
 #ifdef FUNCTION_INDEX_ENV
 
@@ -41,3 +52,4 @@ FunctionIndex:
 InstallFile(FunctionIndex,${INSTMANFLAGS},${DESTDIR}/doc/PROGRAMMER)
 CleanTarget(FunctionIndex)
 #endif /* FUNCTION_INDEX_ENV */
+

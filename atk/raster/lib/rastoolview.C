@@ -78,13 +78,13 @@ static void CallPasteModeProc(class stringtbl  *st, class rastoolview  *self, sh
 static void SetPatternProc(class stringtbl  *st, class rastoolview  *self, short  accnum);
 static void SetBrushProc(class stringtbl  *st, class rastoolview  *self, short  accnum);
 static void SetToolProc(class stringtbl  *st, class rastoolview  *self, short  accnum);
-static void DrawLine(class rasterview  *rself, long  x0 , long  y0 , long  x1 , long  y1, unsigned char *pattern, unsigned char *brush);
-static void DrawCircle(class rasterview  *rself, long  x0 , long  y0 , long  rad, unsigned char *pattern , unsigned char *brush);
-static void DrawEllipse(class rasterview  *rself, long  x0 , long  y0, long  xrad , long  yrad /* both must be >= 0 */, unsigned char *pattern , unsigned char *brush);
-static void FillRectangle(class rastoolview  *self, long  x0 , long  y0, long  wid , long  hgt, unsigned char *pattern);
-static void FillCircle(class rastoolview  *self, long  x0 , long  y0, long  rad, unsigned char *pattern);
-static void FillEllipse(class rastoolview  *self, long  x0 , long  y0, long  xrad , long  yrad /* both must be >= 0 */, unsigned char *pattern);
-static void DrawRectangle(class rasterview  *rself, long  x0 , long  y0, long  wid , long  hgt, unsigned char *pattern , unsigned char *brush);
+static void DrawLine(class rasterview  *rself, long  x0 , long  y0 , long  x1 , long  y1, const unsigned char *pattern, const unsigned char *brush);
+static void DrawCircle(class rasterview  *rself, long  x0 , long  y0 , long  rad, const unsigned char *pattern , const unsigned char *brush);
+static void DrawEllipse(class rasterview  *rself, long  x0 , long  y0, long  xrad , long  yrad /* both must be >= 0 */, const unsigned char *pattern , const unsigned char *brush);
+static void FillRectangle(class rastoolview  *self, long  x0 , long  y0, long  wid , long  hgt, const unsigned char *pattern);
+static void FillCircle(class rastoolview  *self, long  x0 , long  y0, long  rad, const unsigned char *pattern);
+static void FillEllipse(class rastoolview  *self, long  x0 , long  y0, long  xrad , long  yrad /* both must be >= 0 */, const unsigned char *pattern);
+static void DrawRectangle(class rasterview  *rself, long  x0 , long  y0, long  wid , long  hgt, const unsigned char *pattern , const unsigned char *brush);
 static void Tool_SolidRect(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
 static void Tool_SolidCircle(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
 static void Tool_SolidEllipse(class rastoolview  *self, enum view_MouseAction  action, long  x , long  y , long  numclicks);
@@ -747,7 +747,7 @@ static void SetToolProc(class stringtbl  *st, class rastoolview  *self, short  a
     (self)->NotifyObservers(0); 
 }
 
-static void DrawLine(class rasterview  *rself, long  x0 , long  y0 , long  x1 , long  y1, unsigned char *pattern, unsigned char *brush)
+static void DrawLine(class rasterview  *rself, long  x0 , long  y0 , long  x1 , long  y1, const unsigned char *pattern, const unsigned char *brush)
 {
     int dx, dy, x, y, d, incr_str, incr_diag;
 
@@ -911,7 +911,7 @@ static void DrawLine(class rasterview  *rself, long  x0 , long  y0 , long  x1 , 
 }
 
 /* draw a circle with midpoint algorithm */
-static void DrawCircle(class rasterview  *rself, long  x0 , long  y0 , long  rad, unsigned char *pattern , unsigned char *brush)
+static void DrawCircle(class rasterview  *rself, long  x0 , long  y0 , long  rad, const unsigned char *pattern , const unsigned char *brush)
 {
     int d, x, y;
 
@@ -959,7 +959,7 @@ static void DrawCircle(class rasterview  *rself, long  x0 , long  y0 , long  rad
 }
 
 /* draw an ellipse with midpoint algorithm */
-static void DrawEllipse(class rasterview  *rself, long  x0 , long  y0, long  xrad , long  yrad /* both must be >= 0 */, unsigned char *pattern , unsigned char *brush)
+static void DrawEllipse(class rasterview  *rself, long  x0 , long  y0, long  xrad , long  yrad /* both must be >= 0 */, const unsigned char *pattern , const unsigned char *brush)
 {
     int d, x, y;
 
@@ -1010,7 +1010,7 @@ static void DrawEllipse(class rasterview  *rself, long  x0 , long  y0, long  xra
     (rself)->BrushSetPixel( x0+x, y0, pattern, brush);
 }
 
-static void FillRectangle(class rastoolview  *self, long  x0 , long  y0, long  wid , long  hgt, unsigned char *pattern)
+static void FillRectangle(class rastoolview  *self, long  x0 , long  y0, long  wid , long  hgt, const unsigned char *pattern)
 {
     class rasterimage *pix = ((class raster *)self->primaryobj)->GetPix();
     int ix, iy;
@@ -1036,7 +1036,7 @@ static void FillRectangle(class rastoolview  *self, long  x0 , long  y0, long  w
 	}
 }
 
-static void FillCircle(class rastoolview  *self, long  x0 , long  y0, long  rad, unsigned char *pattern)
+static void FillCircle(class rastoolview  *self, long  x0 , long  y0, long  rad, const unsigned char *pattern)
 {
     class rasterimage *pix = ((class raster *)self->primaryobj)->GetPix();
     int ix, iy;
@@ -1056,7 +1056,7 @@ static void FillCircle(class rastoolview  *self, long  x0 , long  y0, long  rad,
     }
 }
 
-static void FillEllipse(class rastoolview  *self, long  x0 , long  y0, long  xrad , long  yrad /* both must be >= 0 */, unsigned char *pattern)
+static void FillEllipse(class rastoolview  *self, long  x0 , long  y0, long  xrad , long  yrad /* both must be >= 0 */, const unsigned char *pattern)
 {
     class rasterimage *pix = ((class raster *)self->primaryobj)->GetPix();
     int ix, iy;
@@ -1080,7 +1080,7 @@ static void FillEllipse(class rastoolview  *self, long  x0 , long  y0, long  xra
     }
 }
 
-static void DrawRectangle(class rasterview  *rself, long  x0 , long  y0, long  wid , long  hgt, unsigned char *pattern , unsigned char *brush)
+static void DrawRectangle(class rasterview  *rself, long  x0 , long  y0, long  wid , long  hgt, const unsigned char *pattern , const unsigned char *brush)
 {
     if (wid<0) {
 	x0 += wid;

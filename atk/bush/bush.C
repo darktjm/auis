@@ -121,7 +121,7 @@ ATK_IMPL("bush.H")
 
 #define	AllocNameSpace(s,t)	    apts::CaptureString(s,t)
 
-tree_Specification DirTree[] = {tree_Order(tree_PreOrder), 0};
+static const tree_Specification DirTree[] = {tree_Order(tree_PreOrder), 0};
 
 ATKdefineRegistry(bush, apt, NULL);
 static int ExtractNodePath( class bush     *self, const char		   *source , char		   **path );

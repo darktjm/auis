@@ -26,10 +26,10 @@
 ATK_IMPL("except.H")
 #include <except.H>
 
-except_HandlerContext_p except_CurrentContext = NULL;
-except_Exception except_ExceptionID = NULL;
-char *except_ExceptionValue = NULL;
-except_UncaughtExceptionHandler except_UncaughtHandler = NULL;
+static except_HandlerContext_p except_CurrentContext = NULL;
+static except_Exception except_ExceptionID = NULL;
+static char *except_ExceptionValue = NULL;
+static except_UncaughtExceptionHandler except_UncaughtHandler = NULL;
 
 
 ATKdefineRegistry(except, ATK, NULL);

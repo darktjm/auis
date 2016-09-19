@@ -442,7 +442,7 @@ suite::LoseInputFocus( )
 }
 
 class suite *
-suite::Create( suite_Specification  *suitep, long  anchor )
+suite::Create( const suite_Specification  *suitep, long  anchor )
 {
 	ATKinit;
  class suite *self = NULL;

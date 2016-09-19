@@ -40,8 +40,8 @@ struct resourceTree_s
   class Namespace * children;
 };
 
-struct resourceTree_s * resourceTree;
-class Namespace * converters;
+static struct resourceTree_s * resourceTree;
+static class Namespace * converters;
 
 
 /****************************************************************/

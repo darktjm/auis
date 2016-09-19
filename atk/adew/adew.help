@@ -58,16 +58,60 @@ can play back an enclosed tune.}
 }\section{Learning more about ADEW}
 
 \leftindent{
-There are three documents in $ANDREWDIR/doc/atk/adew which will assist you 
+There are three documents in $ANDREWDIR/doc/PROGRAMMER which will assist you 
 in learning about ADEW.  They are:
 
 
-Overview.d
+\begindata{link,12560288}
+4
+${ANDREWDIR}/doc/PROGRAMMER/AdewOverview.doc
+0
+0
+V
+\begindata{link,12560288}
+Datastream version: 2
+AdewOverview.doc
+2
 
-Tutorial.d
+black
+white
+\enddata{link,12560288}
+\enddata{link,12560288}
+\view{linkview,12560288,25318,0,0}
 
-RefMan.d
+\begindata{link,12560289}
+4
+${ANDREWDIR}/doc/PROGRAMMER/AdewTutorial.doc
+0
+0
+V
+\begindata{link,12560289}
+Datastream version: 2
+AdewTutorial.doc
+2
 
+black
+white
+\enddata{link,12560289}
+\enddata{link,12560289}
+\view{linkview,12560289,25319,0,0}
+
+\begindata{link,12560290}
+4
+${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
+0
+0
+V
+\begindata{link,12560290}
+Datastream version: 2
+AdewReference.doc
+2
+
+black
+white
+\enddata{link,12560290}
+\enddata{link,12560290}
+\view{linkview,12560290,25320,0,0}
 
 The Tutorial is a good place to start if you are interested in learning and 
 actually creating a sample program.

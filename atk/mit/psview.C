@@ -91,7 +91,7 @@
 #define VIEW_MODE 0x2
 #endif /* DPS_ENV */
 
-class menulist *psviewMenus;
+static class menulist *psviewMenus;
 static class keymap *psviewKeyMap;
 
 #define DisplayAndReturn(self, String) {message::DisplayString(self, 0, String); return;}

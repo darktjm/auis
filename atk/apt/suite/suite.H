@@ -28,7 +28,7 @@ ATK_INTER
 //  $
 */
 
-/**  SPECIFICATION -- External Facility Suite  *********************************
+/***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Suite-object
 
@@ -388,7 +388,7 @@ public:
 	suite();
 	
 	virtual ~suite();
-	static class suite * Create( suite_Specification *suite_Spec,long anchor)  ;
+	static class suite * Create( const suite_Specification *suite_Spec,long anchor)  ;
 
     
 
@@ -546,7 +546,7 @@ public:
 };
 
 
-/**  SPECIFICATION -- External Facility Suite  *********************************
+/***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Suite-object
 

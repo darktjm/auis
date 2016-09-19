@@ -89,7 +89,7 @@ static void parsepragmat(class ness  * self, char  *prag);
 
 
 
-struct compilation *curComp = NULL;	/* compilation in progress */
+NO_DLL_EXPORT struct compilation *curComp = NULL;	/* compilation in progress */
 
 static struct compilation *Idle = NULL;
 static class nesssym *proto;

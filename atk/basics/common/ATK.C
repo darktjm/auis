@@ -146,7 +146,7 @@ int &ATK::DynamicLoadTrace()
 #ifdef HAVE_DYNAMIC_LOADING
 #include <ATKDoLoad.H>
 
-struct ATKregistryEntry *(*ATKDynamicLoader)(const char *name, boolean trace)=ATK::DynamicLoad;
+static struct ATKregistryEntry *(*ATKDynamicLoader)(const char *name, boolean trace)=ATK::DynamicLoad;
 
 static char dynpathopen_realpath[MAXPATHLEN+1];
 static int dynpathopen(const char  *path, const char  *fpath)

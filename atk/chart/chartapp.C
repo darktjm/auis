@@ -68,7 +68,7 @@ ATK_IMPL("chartapp.H")
 #include  <chartv.H>
 #include  <chartapp.H>
 
-int chartapp_debug = 0;
+static int chartapp_debug = 0;
 
 #define debug chartapp_debug
 
@@ -78,12 +78,12 @@ int chartapp_debug = 0;
 #define  Im		    (self->imp)
 #define  Source		    (self->source)
 
-chart_Specification	    data_specification[] =
+static chart_Specification	    data_specification[] =
   {
   0
   };
 
-chartv_Specification	    view_specification[] =
+static chartv_Specification	    view_specification[] =
   {
   0
   };

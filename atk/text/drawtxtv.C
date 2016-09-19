@@ -94,7 +94,7 @@ static void CharToOctal(unsigned char *s, char  c)
     *s = '\0';
 }
 
-int drawtxtv_tabscharspaces = 8;
+NO_DLL_EXPORT int drawtxtv_tabscharspaces = 8;
 
 static long GetNextTabPosition(class textview  *v, int  width, struct text_statevector  *sv, struct formattinginfo  *info)
 {
@@ -388,8 +388,8 @@ static void AllocateLineItem(class textview  *self, class text  *text, long  pos
  * state: has no style lineitem at its end.
  */
 
-class fontdesc *exposeStylesFont = NULL;
-short *exposeStylesWidths = NULL;
+static class fontdesc *exposeStylesFont = NULL;
+static short *exposeStylesWidths = NULL;
 /* This definitely should be in the view */
 #define NCXS 50
 

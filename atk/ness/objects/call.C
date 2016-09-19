@@ -52,7 +52,7 @@ ATK_IMPL("prochook.H")
 
 
 /* defining occurrence for declaration in ness.hn */
-const char * const callvarietyname[] = {
+/* NO_DLL_EXPORT */ const char * const callvarietyname[] = {
 	"callC",
 	"callPE",
 	"callSym",
@@ -67,7 +67,7 @@ const char * const callvarietyname[] = {
 };
 
 static struct libnode *LibList = NULL;
-nesssym_scopeType LibScope = nesssym_GLOBAL;
+NO_DLL_EXPORT nesssym_scopeType LibScope = nesssym_GLOBAL;
 
 /* {{fields name and defn should be unsigned char, but the Sun considers
 	character constants to be *signed* (bletch) }} */
@@ -2108,7 +2108,7 @@ ness_ProcHookFunc(ATK *, const avalueflex &aux,
 //		ScanForProcs, (long)libnode);
 }
 
-	ness_ProcHookType 
+NO_DLL_EXPORT 	ness_ProcHookType 
 ness_ProcHook(ness_ProcHookFunc, 0L, avalue::cstring, 
 	avalue::voidatom);
 

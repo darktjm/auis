@@ -100,7 +100,7 @@ void rasterview::SetPixel(class raster  *ras, long  x , long  y, int  bit)
 /* the following method replicates code from rasterview__SetPixel(). This is just to improve the speed. Any changes to __SetPixel() should be added to  __PatternSetPixel() also. */
 
 /* like rasterview_SetPixel(), but uses an 8x8 pattern instead of solid black or white. If pattern is NULL, invert the pixel. */
-void rasterview::PatternSetPixel(long  x , long  y, unsigned char *pattern)
+void rasterview::PatternSetPixel(long  x , long  y, const unsigned char *pattern)
 {
     class rasterimage *pix;
     struct rectangle SR;
@@ -143,7 +143,7 @@ void rasterview::PatternSetPixel(long  x , long  y, unsigned char *pattern)
 }
 
 /* draws up to 64 pixels according to an 8x8 brush. If the brush is NULL, draw just one pixel. Uses rasterview_PatternSetPixel(). */
-void rasterview::BrushSetPixel(long  x , long  y, unsigned char *pattern, unsigned char *brush)
+void rasterview::BrushSetPixel(long  x , long  y, const unsigned char *pattern, const unsigned char *brush)
 {
     if (!brush) {
 	(this)->PatternSetPixel( x, y, pattern);

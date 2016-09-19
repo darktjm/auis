@@ -41,12 +41,12 @@
 
 #include <txtproc.h>
 
-long lcKill;
-long lcYank;
-long lcMove;
-long lcDisplayEnvironment;
-long lcInsertEnvironment;
-long lcNewLine;
+NO_DLL_EXPORT long lcKill;
+NO_DLL_EXPORT long lcYank;
+NO_DLL_EXPORT long lcMove;
+NO_DLL_EXPORT long lcDisplayEnvironment;
+NO_DLL_EXPORT long lcInsertEnvironment;
+NO_DLL_EXPORT long lcNewLine;
 
 void textview_NOOPCmd (class textview  *self);
 int charType(char  c);

@@ -31,7 +31,7 @@
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
 
-/**  SPECIFICATION -- External Facility Suite  *********************************
+/***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	Zip Subroutine Library Image Objects Header
 

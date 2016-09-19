@@ -69,7 +69,7 @@ ATK_IMPL("chartstk.H")
 #include "chartstk.H"
 #include <ctype.h>
 
-boolean chartstk_debug = FALSE;
+static boolean chartstk_debug = FALSE;
 #define debug chartstk_debug
 
 #define  Screen			1

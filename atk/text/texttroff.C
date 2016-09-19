@@ -152,7 +152,7 @@ static long latestVS;
 static long extraVS;
 static long currentSpread;
 static long latestSpread;
-struct content_chapentry *lastcentry;
+static struct content_chapentry *lastcentry;
 
 static class style *defaultStyle = NULL;
 static int textLevel = -1;	/* For generating proper .ev argument */
@@ -199,7 +199,7 @@ static struct {
 };
 
 static int endnotes;
-class content *con;
+static class content *con;
 static boolean addindex;
 #define ModBits 4
 #define FaceCodeBits 4

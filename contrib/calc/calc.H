@@ -59,7 +59,7 @@ Initial revision
 
 */
 
-/**  SPECIFICATION -- External Facility Suite  *********************************
+/***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Calc Data-object
 

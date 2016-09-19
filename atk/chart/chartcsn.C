@@ -69,7 +69,7 @@ ATK_IMPL("chartcsn.H")
 #include "chartcsn.H"
 #include <ctype.h>
 
-boolean chartscn_debug = 0;
+static boolean chartscn_debug = 0;
 #define debug chartscn_debug
 
 #define  Screen			1

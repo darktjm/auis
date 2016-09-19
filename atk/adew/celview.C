@@ -72,7 +72,7 @@ ATK_IMPL("celview.H")
 static class atom *UNSETFLAG;
 #define RESIZING FALSE
 #define DRAWING FALSE
-class menulist *celviewMenus;
+static class menulist *celviewMenus;
 static class keymap *celviewKeyMap;
 #define DataObject(A) (A->dataobject)
 #define Cel(A) ((class cel *) DataObject(A))
@@ -95,12 +95,12 @@ static void UpdateCursors(class celview  *self);
 static void UpdateDrawing(class celview  *self);
 static void initchild(class celview  *self);
 static char * trunc(char  *c);
-void celview_ReadFile(class celview  *self,FILE  *thisFile,char  *iname);
+static void celview_ReadFile(class celview  *self,FILE  *thisFile,char  *iname);
 static void celview_Paste(class celview  *self);
 static void celview_PromptForFile(class celview  *self);
 static void InitNow(class celview  *self);
 static void drawshadow(class celview  *self,struct rectangle  *r);
-void celview__SetDrawing(class celview  *self,long  key);
+static void celview__SetDrawing(class celview  *self,long  key);
 static void SetVisible(class celview  *self);
 static void SetInvisible(class celview  *self);
 static boolean objecttest(class celview   *self,const char  *name,const char  *desiredname);
@@ -431,7 +431,7 @@ static char * trunc(char  *c)
 	return cp;
     return c;
 }
-void celview_ReadFile(class celview  *self,FILE  *thisFile,char  *iname)
+static void celview_ReadFile(class celview  *self,FILE  *thisFile,char  *iname)
 {
     long objectID;
     const char *objectName;
@@ -742,7 +742,7 @@ void celview::SetResizing(long  key)
 	this->mode = celview_DoFull;
     (this)->WantUpdate(this);
 }
-void celview__SetDrawing(class celview  *self,long  key)
+static void celview__SetDrawing(class celview  *self,long  key)
 {
     self->drawing = !self->drawing;
     (self)->WantUpdate(self);

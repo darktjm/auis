@@ -29,7 +29,7 @@ ATK_INTER
 */
 
 
-/**  SPECIFICATION -- External Facility Suite  *********************************
+/***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Chart Data-object
 
@@ -106,7 +106,7 @@ public:
 
 
 
-  /**  Methods Dealing with Chart as a Whole  **/
+  /***  Methods Dealing with Chart as a Whole  **/
 
   virtual long SetChartAttribute( long attribute, long value )			 ;
   virtual long ChartAttribute( long attribute_code )			 ;
@@ -118,7 +118,7 @@ public:
   virtual const char * ModuleName( const char *moniker )				 ;
   virtual void SetDebug( boolean state );
 
-  /**  Methods Dealing with Individual Items  **/
+  /***  Methods Dealing with Individual Items  **/
 
   virtual long SetItemAttribute( struct chart_item *item, long attribute, long value )
 							 ;

@@ -71,7 +71,7 @@ ATK_IMPL("charthst.H")
 #include <ctype.h>
 #define  Data			    ((class chart *)(self)->chartobj::data_object)
 
-boolean charthst_debug = 0;
+static boolean charthst_debug = 0;
 
 #define debug charthst_debug
 

@@ -97,7 +97,7 @@ ATK_IMPL("chart.H")
 #define  NextItem(x)		     ((x)->next)
 
 
-boolean chart_debug = 0;
+static boolean chart_debug = 0;
 
 
 ATKdefineRegistry(chart, apt, NULL);

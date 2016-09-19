@@ -104,7 +104,7 @@ ATK_IMPL("bushv.H")
 #define bushv_EntriesMenus			    (1<<9)
 
 #define	DEFAULTCKPINTERVAL			    120
-int CkpInterval;
+static int CkpInterval;
 
 static const char * const sorts[] = { "name", 
 			     "size", 
@@ -356,7 +356,7 @@ static void EntriesPageUp( class bushv  *self );
 static void EntriesPageDown( class bushv  *self );
 
 
-suite_Specification control_spec[] = {
+static const suite_Specification control_spec[] = {
     suite_TitleCaption( "Bush: A FileSystem Browser" ),
     suite_TitlePlacement( suite_Top ),
     suite_TitleCaptionFontName( "AndySans10" ),
@@ -387,7 +387,7 @@ suite_Specification control_spec[] = {
     0
 };
 
-suite_Specification entries_spec[] = {
+static const suite_Specification entries_spec[] = {
     suite_TitleCaption( "Entries" ),
     suite_TitleBorderSize( 2 ),
     suite_TitleBorderStyle( suite_Rectangle ),
@@ -410,7 +410,7 @@ suite_Specification entries_spec[] = {
     0
 };
 
-treev_Specification tree_spec[] = {
+static const treev_Specification tree_spec[] = {
     treev_NodeConnectorStyle( treev_Fold | treev_DogLeg ), 
     treev_NodeFiligree( treev_DropShadow ),
     treev_NodeHighlightStyle( treev_Invert ),

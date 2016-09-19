@@ -1,0 +1,5 @@
+#!/bin/sh
+echo '/** \addtogroup A All Headers
+* @{ */'
+cat "$@"
+echo '/** @} */'

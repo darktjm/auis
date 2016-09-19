@@ -118,7 +118,7 @@ mclock()
 static sClassifier fullclassifier;
 static sClassifier doneclassifier;
 static FV fvb;
-char _zdebug_flag[128];
+NO_DLL_EXPORT char _zdebug_flag[128];
 
 
 

@@ -99,32 +99,32 @@ ATK_IMPL("help.H")
 /*---------------------------------------------------------------------------*/
 
 /* the new menu and key states */
-class keymap *Help_Map;
-class menulist *Help_Menus;
+NO_DLL_EXPORT class keymap *Help_Map;
+NO_DLL_EXPORT class menulist *Help_Menus;
 
-char *help_tutorialDirs[MAX_TUTORIAL_DIRS];
-char help_changesDir[MAXPATHLEN];
+NO_DLL_EXPORT char *help_tutorialDirs[MAX_TUTORIAL_DIRS];
+NO_DLL_EXPORT char help_changesDir[MAXPATHLEN];
 
 #define USE_PRINTOPTS /* used to be in contrib, but now we should always use it. */
 
 /* a list of instances of help */
-struct self_help *help_ego = (struct self_help *)NULL;
+NO_DLL_EXPORT struct self_help *help_ego = (struct self_help *)NULL;
 
-class cursor *help_waitCursor; /* the watch cursor */
+NO_DLL_EXPORT class cursor *help_waitCursor; /* the watch cursor */
 
-char **help_panelList = NULL; /* used for enumerating across the help index */
-int help_panelIndex = 0, help_panelListSize = help_MAXPANEL;
+NO_DLL_EXPORT char **help_panelList = NULL; /* used for enumerating across the help index */
+NO_DLL_EXPORT int help_panelIndex = 0, help_panelListSize = help_MAXPANEL;
 
 /* hooks to textview and frame procs */
-proctable_fptr help_textSearch = NULL;
-proctable_fptr help_textRevSearch = NULL;
-proctable_fptr help_textSearchAgain = NULL;
-proctable_fptr help_textCopyRegion = NULL;
-proctable_fptr help_textPageDown = NULL;
-proctable_fptr help_textPageUp = NULL;
-proctable_fptr help_frameSetPrinter = NULL;
+NO_DLL_EXPORT proctable_fptr help_textSearch = NULL;
+NO_DLL_EXPORT proctable_fptr help_textRevSearch = NULL;
+NO_DLL_EXPORT proctable_fptr help_textSearchAgain = NULL;
+NO_DLL_EXPORT proctable_fptr help_textCopyRegion = NULL;
+NO_DLL_EXPORT proctable_fptr help_textPageDown = NULL;
+NO_DLL_EXPORT proctable_fptr help_textPageUp = NULL;
+NO_DLL_EXPORT proctable_fptr help_frameSetPrinter = NULL;
 #ifdef USE_PRINTOPTS
-proctable_fptr help_poptPostWindow = NULL;
+NO_DLL_EXPORT proctable_fptr help_poptPostWindow = NULL;
 #endif
 
 static int packedString[] = {037, 036, 0, 0};
@@ -136,7 +136,7 @@ struct filterinfo {
     int *magic;
     boolean possible;
 };
-struct filterinfo filters[] = { /* possible field modified below */
+static struct filterinfo filters[] = { /* possible field modified below */
     {"zcat", 3, compressedString, 0},
     {"pcat", 4, packedString, 0},
     {"gunzip", 4, gzippedString, 0},
@@ -1996,7 +1996,7 @@ static struct bind_Description helpBindings[] = {
  * to menus and keys, and adds a default filetype so that all files will have
  * at least the default template when they are displayed.
  */
-    boolean help_class_inited=FALSE;
+NO_DLL_EXPORT   boolean help_class_inited=FALSE;
 boolean 
 help::InitializeClass()
 {

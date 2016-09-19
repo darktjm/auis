@@ -23,6 +23,7 @@
  * console. 
  */
 
+#include <andrewos.h>
 #include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -97,7 +98,7 @@ float sleeptime = 5;
  * Main procedure. Contains loop which displays tasks, and then
  * sleeps/waits for input
  ********************************************************************/
-int top_main(void)
+void top_main(void)
 {
   static int initted = 0;
   static struct ps_proc_head *ph;
@@ -121,11 +122,8 @@ int top_main(void)
  ********************************************************************/
 void show_procs(struct ps_proc_head *ph, unsigned int maxcmd)
 {
-  struct ps_proc *this,*best;
-  int count,top;
-  int index,best_index;
   float elapsed_time;
-  unsigned int main_mem;
+  UNUSED unsigned int main_mem;
 
 
   /* get the process info */

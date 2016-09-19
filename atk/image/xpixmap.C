@@ -76,8 +76,8 @@ ATK_IMPL("xpixmap.H")
 /* SUPPRESS 560 */
 
 static char host[256];
-Display *Disp; /* X display, null if in "identify" mode */
-int      Scrn; /* X screen number */
+static Display *Disp; /* X display, null if in "identify" mode */
+static int      Scrn; /* X screen number */
 
 #define XPM_FORMAT 1
 

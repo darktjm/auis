@@ -35,9 +35,6 @@ ATK_IMPL("windowsystem.H")
 #include <windowsystem.H>
 
 
-struct windowsysteminfo *windowSystem;
-
-
 ATKdefineRegistry(windowsystem, ATK, NULL);
 
 class cursor *windowsystem::CreateCursor()

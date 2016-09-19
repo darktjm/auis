@@ -87,8 +87,8 @@ consoleapp::~consoleapp()
 /*
  * These 3 routines are the heart of the consoleapp interface
  */
-int ForceErrorMonitoring = FALSE;
-int InhibitErrorMonitoring = FALSE;
+NO_DLL_EXPORT int ForceErrorMonitoring = FALSE;
+NO_DLL_EXPORT int InhibitErrorMonitoring = FALSE;
 
 boolean consoleapp::ParseArgs(int  argc,const char  **argv)
 {

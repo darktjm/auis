@@ -1,9 +1,9 @@
 extern boolean textview_PrevCharIsNewline(class text *t, long pos);
-extern int drawtxtv_tabscharspaces;
+NO_DLL_EXPORT extern int drawtxtv_tabscharspaces;
 extern int textview_SizeOfLongestLineOnScreen(textview *self);
 extern int textview_SizeOfLongestLineOnScreen(textview *self);	/* should be a method */
-extern long lcInsertEnvironment;
-extern long lcNewLine;
+NO_DLL_EXPORT extern long lcInsertEnvironment;
+NO_DLL_EXPORT extern long lcNewLine;
 extern long textview_ExposeRegion(class textview *tv, long pos1, long rlen, class view *inset, const struct rectangle &area, struct rectangle &hit, long &off, long extra);
 extern long textview_LineStart(class textview *tv, long curx, long cury, long xs, long ys, long pos, long *lend=NULL, long *lheight=NULL);
 extern void textview_ComputeViewArea(class textview *tv, const struct rectangle &area, long &curx, long &cury, long &xs, long &ys);

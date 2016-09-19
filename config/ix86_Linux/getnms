@@ -1,2 +1,9 @@
 #! /bin/sh
-find . -name "*.o" -exec nm -og '{}' \; | awk '/ T / {print ($0);}'
+auisdir=${0%/*/*}
+dir=${1:-$auisdir}
+filt=cat
+type c++filt >/dev/null 2>&1 && filt=c++filt
+(
+  find $dir -name "*.a" -exec nm -og '{}' \; | awk '/ T / {print ($0);}'
+  find $dir -name "*.so" -exec nm -Dog '{}' \; | awk '/ T / {print ($0);}'
+) | sed "s%${dir%/}/%%" | $filt

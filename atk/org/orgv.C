@@ -243,7 +243,7 @@ static treev_Specification specification[] = {
 #define  node_border_code    12
 #define  node_connector_code 13
 
-boolean Orgv_Debug = 0;
+static boolean Orgv_Debug = 0;
 #define debug Orgv_Debug
 
 

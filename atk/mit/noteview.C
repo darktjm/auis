@@ -46,7 +46,7 @@
 #define TITLESTYLE fontdesc_Plain
 #define TITLEPTS 12
 
-class menulist *noteviewMenus;
+static class menulist *noteviewMenus;
 static class keymap *noteviewKeyMap;
 
 

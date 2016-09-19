@@ -46,9 +46,9 @@
 /* Search command statics. */
 
 #define SRCHSTRLEN 100
-struct SearchPattern *lastPattern = NULL;
+static struct SearchPattern *lastPattern = NULL;
 static char searchString[SRCHSTRLEN] = "";
-boolean forwardSearch = TRUE; /* TRUE if last search was forward. */
+static boolean forwardSearch = TRUE; /* TRUE if last search was forward. */
 
 void textview_SearchAgain(class textview  *self);
 void textview_SearchAgainOppositeCmd(class textview  *self);

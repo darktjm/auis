@@ -180,7 +180,7 @@ static class text *ScribeDoc = NULL;	/* has Scribe.tpl */
 static class stylesheet *ScribeSheet;	/* stylesheet for ScribeDoc */
   
 
-struct stylemap {
+static struct stylemap {
 	class style *s;
 	long pos, len;
 	struct stylemap *next;
@@ -457,7 +457,7 @@ OutputWhiteSpace()
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-class style *iStyle, *bStyle, *uStyle, *inxiStyle, *passStyle;
+static class style *iStyle, *bStyle, *uStyle, *inxiStyle, *passStyle;
 
 	static class style *
 createStyle(const char  *name , const char  *mnm)

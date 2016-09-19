@@ -4,7 +4,7 @@ extern void help_aux_Print(class help  *self);
 extern void help_aux_NewHelp(class help  *self, long  type		/* help_ON 			if Help On... */);
 extern void help_aux_AddBookmark(class help  *self);
 extern void help_aux_AddSearchDir(class help  *self);
-extern boolean help_class_inited;
+extern NO_DLL_EXPORT boolean help_class_inited;
 #undef ATKinit
 #define ATKinit if(!help_class_inited) InitializeClass()
 extern void  AddHistoryItem (class help  *self, int  marcp			/* is this a bookmark? */, int  flash			/* should we expose the history panel? */);

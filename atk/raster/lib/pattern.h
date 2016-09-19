@@ -21,7 +21,7 @@
  * 
  *  $
 */
-char patternnames[ZRPATTERNS_NUM][16] = {
+static const char patternnames[ZRPATTERNS_NUM][16] = {
     "PATTERNS:",
     "(invert)",
     "black", 
@@ -40,7 +40,7 @@ char patternnames[ZRPATTERNS_NUM][16] = {
     "big checks"
 };
 
-unsigned char patternlist[ZRPATTERNS_NUM][8] = {
+static const unsigned char patternlist[ZRPATTERNS_NUM][8] = {
     {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, 
     {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, 
 
@@ -64,7 +64,7 @@ unsigned char patternlist[ZRPATTERNS_NUM][8] = {
 };
 
 
-char brushnames[ZRBRUSHES_NUM][16] = {
+static const char brushnames[ZRBRUSHES_NUM][16] = {
     "BRUSHES:",
     "point",
     "spot 2",
@@ -81,7 +81,7 @@ char brushnames[ZRBRUSHES_NUM][16] = {
     "short slant",
 };
 
-unsigned char brushlist[ZRBRUSHES_NUM][16] = {
+static const unsigned char brushlist[ZRBRUSHES_NUM][16] = {
     {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, 
 
     {0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00},

@@ -49,18 +49,18 @@ extern char MyHomeDir[];
 
 static int NewMsgs(FILE  *mf);
 
-boolean UseNonAndrewMail = TRUE;
+NO_DLL_EXPORT boolean UseNonAndrewMail = TRUE;
 
 #ifdef ANDREW_PRINTING_ENV
-boolean UseNonAndrewPrint = FALSE;
+NO_DLL_EXPORT boolean UseNonAndrewPrint = FALSE;
 #else /* ANDREW_PRINTING_ENV */
-boolean UseNonAndrewPrint = TRUE;
+NO_DLL_EXPORT boolean UseNonAndrewPrint = TRUE;
 #endif /* ANDREW_PRINTING_ENV */
 
-boolean CheckMyMail = FALSE;
+NO_DLL_EXPORT boolean CheckMyMail = FALSE;
 
-char OutgoingDir[MAXPATHLEN];
-int OutgoingAge = 3600; /* seconds until we notice delayed outgoing mail */
+NO_DLL_EXPORT char OutgoingDir[MAXPATHLEN];
+NO_DLL_EXPORT int OutgoingAge = 3600; /* seconds until we notice delayed outgoing mail */
 
 void SetMailEnv()
 {
@@ -124,7 +124,7 @@ void InitMail(class consoleClass  *self)
     }
 }
 
-int LastDirMod[LASTDIRECTORY-DIRECTORY1+2];
+NO_DLL_EXPORT int LastDirMod[LASTDIRECTORY-DIRECTORY1+2];
 
 void InitDirectories()
 {
@@ -136,8 +136,8 @@ void InitDirectories()
     }
 }
 
-char *PrintDirName;
-int PrintDirModTime;
+NO_DLL_EXPORT char *PrintDirName;
+NO_DLL_EXPORT int PrintDirModTime;
 
 void SetPrintEnv()
 {

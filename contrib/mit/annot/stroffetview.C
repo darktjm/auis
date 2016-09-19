@@ -46,7 +46,7 @@
 #define TITLESTYLE fontdesc_Plain
 #define TITLEPTS 12
 
-class menulist *stroffetviewMenus;
+static class menulist *stroffetviewMenus;
 static class keymap *stroffetviewKeyMap;
 
 

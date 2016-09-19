@@ -39,7 +39,7 @@
 #include <sys/ioctl.h>
 #include <signal.h>
 
-int DynamicXmin, DynamicXmax, DynamicYmin, DynamicYmax, XGrowthRange, YGrowthRange;
+NO_DLL_EXPORT int DynamicXmin, DynamicXmax, DynamicYmin, DynamicYmax, XGrowthRange, YGrowthRange;
 
 
 

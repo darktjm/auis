@@ -34,28 +34,28 @@
 
 /* Below is taken from original console.c -- ghoti */
 
-ConLibType conlib[MAXCONFILES];
-char *libpaths[MAXLIBS];
+NO_DLL_EXPORT ConLibType conlib[MAXCONFILES];
+NO_DLL_EXPORT char *libpaths[MAXLIBS];
 
-long libnum = 0;
-long connum = 0;
-long BasicLib = -1;
-long LocalLib = -1;
-long UserLib = -1;
+NO_DLL_EXPORT long libnum = 0;
+NO_DLL_EXPORT long connum = 0;
+NO_DLL_EXPORT long BasicLib = -1;
+NO_DLL_EXPORT long LocalLib = -1;
+NO_DLL_EXPORT long UserLib = -1;
 
-char ConFile[1024] = "";
-int MYDEBUGGING = FALSE;
-struct fontdesc *FontsAvail[MAXNUMFONTS];
-const char *AvailFontNames[MAXNUMFONTS] = { "" };
-int AvailFontPts[MAXNUMFONTS];
-int FontCount = 0;
-int ExternalsInUse = 0;
-FILE *ErrorsIn, *ConsoleIn;
-char ErrTxt[256] = "";
-char Nullity[] = "";
-char *StatusServer = NULL; /* for vopcon server machine */
-int ScaleFactor = 100;
-int VMPollCt = 1,
+NO_DLL_EXPORT char ConFile[1024] = "";
+NO_DLL_EXPORT int MYDEBUGGING = FALSE;
+NO_DLL_EXPORT struct fontdesc *FontsAvail[MAXNUMFONTS];
+NO_DLL_EXPORT const char *AvailFontNames[MAXNUMFONTS] = { "" };
+NO_DLL_EXPORT int AvailFontPts[MAXNUMFONTS];
+NO_DLL_EXPORT int FontCount = 0;
+NO_DLL_EXPORT int ExternalsInUse = 0;
+NO_DLL_EXPORT FILE *ErrorsIn, *ConsoleIn;
+NO_DLL_EXPORT char ErrTxt[256] = "";
+NO_DLL_EXPORT char Nullity[] = "";
+NO_DLL_EXPORT char *StatusServer = NULL; /* for vopcon server machine */
+NO_DLL_EXPORT int ScaleFactor = 100;
+NO_DLL_EXPORT int VMPollCt = 1,
     DiskPollCt = 1,
     MailPollCt = 1,
     PrintPollCt = 1,
@@ -64,26 +64,26 @@ int VMPollCt = 1,
     NetPollCt = 1,
     ClockPollCt = 1,
     FPAPollCt = 1;
-boolean ErrorInputPending = FALSE;
-boolean ConsoleSocketInputPending = FALSE;
-boolean WindowInputPending = FALSE;
-int LastMailMod= 0;
-boolean DidInitGVM = FALSE,
+NO_DLL_EXPORT boolean ErrorInputPending = FALSE;
+NO_DLL_EXPORT boolean ConsoleSocketInputPending = FALSE;
+NO_DLL_EXPORT boolean WindowInputPending = FALSE;
+NO_DLL_EXPORT int LastMailMod= 0;
+NO_DLL_EXPORT boolean DidInitGVM = FALSE,
     DidInitPrinting = FALSE,
     DidInitNet = FALSE,
     DidInitErrLog = FALSE;
-char *envmail = NULL;
-char FontFamily[20] = "andysans";
-struct RegionLog RegionLogs[NUMREGIONLOGS + 1] = {NULL};
-struct InternalVariable IntrnlVars[NUMINTERNALVARIABLES + 1];
-struct datum Numbers[DisplayTypeCount + 1];
-struct display *VeryFirstDisplay;
-struct fontdesc *PromptFont;
-struct fontdesc *EventFont;
-char PromptFontName[50] = "andysans10";
+NO_DLL_EXPORT char *envmail = NULL;
+NO_DLL_EXPORT char FontFamily[20] = "andysans";
+NO_DLL_EXPORT struct RegionLog RegionLogs[NUMREGIONLOGS + 1] = {NULL};
+NO_DLL_EXPORT struct InternalVariable IntrnlVars[NUMINTERNALVARIABLES + 1];
+NO_DLL_EXPORT struct datum Numbers[DisplayTypeCount + 1];
+NO_DLL_EXPORT struct display *VeryFirstDisplay;
+NO_DLL_EXPORT struct fontdesc *PromptFont;
+NO_DLL_EXPORT struct fontdesc *EventFont;
+NO_DLL_EXPORT char PromptFontName[50] = "andysans10";
 
 
-display_pdffptr prefunctions[] = {
+NO_DLL_EXPORT display_pdffptr prefunctions[] = {
     NULL,
     NULL,
     NULL,
@@ -104,7 +104,7 @@ display_pdffptr prefunctions[] = {
 
 
 
-display_dffptr functions[] = {
+NO_DLL_EXPORT display_dffptr functions[] = {
     (display_dffptr)DrawDebug,
     (display_dffptr)DrawDebug,
     (display_dffptr)DrawEKGGraph,
@@ -123,7 +123,7 @@ display_dffptr functions[] = {
     (display_dffptr)DrawNothing
 };
 
-int DefaultErrorPriority = 4,
+NO_DLL_EXPORT int DefaultErrorPriority = 4,
     HighestPriority = 4,
     Period = 1,
     MinHeight = 500,
@@ -139,7 +139,7 @@ int DefaultErrorPriority = 4,
     NetPollFreq = 60,
     ClockPollFreq = 2,
     FPAPollFreq = 3600;
-boolean DoTroubleChecking = FALSE,
+NO_DLL_EXPORT boolean DoTroubleChecking = FALSE,
     DoVMStat = FALSE,
     DoDiskFreeStat = FALSE,
     DoMailChecking = FALSE,
@@ -162,9 +162,8 @@ boolean DoTroubleChecking = FALSE,
     RingingAlarm = FALSE;
 
 /* added to handle expanded path names  --MKM */
-char *xPaths[MAXCONSOLEPATHS] = { (char *) NULL };
-char *xNames[MAXCONSOLEPATHS] = { (char *) NULL };
-char *ConLib[MAXCONSOLES] = { NULL };
-int ConNum = 0;
-int IntVarCount[NUMINTERNALVARIABLES + 1];
-
+NO_DLL_EXPORT char *xPaths[MAXCONSOLEPATHS] = { (char *) NULL };
+NO_DLL_EXPORT char *xNames[MAXCONSOLEPATHS] = { (char *) NULL };
+NO_DLL_EXPORT char *ConLib[MAXCONSOLES] = { NULL };
+NO_DLL_EXPORT int ConNum = 0;
+NO_DLL_EXPORT int IntVarCount[NUMINTERNALVARIABLES + 1];

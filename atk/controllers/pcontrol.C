@@ -66,7 +66,7 @@ struct nh {
     char *note;
     float freq;
 };
-float arr[61];
+static float arr[61];
 
 ATKdefineRegistry(pcontrol, ATK, pcontrol::InitializeClass);
 void setbl(struct spk_blk  *b,float  freq);

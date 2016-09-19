@@ -92,7 +92,7 @@ inline long ExtendShortSign(long x) {return (((x) ^ 0x8000) - 0x8000);}
  *       Most of the stuff in this header really needs to be moved to a
  *       local/private header, anyway.  What a mess.
  */
-extern struct node *QTnode;
+NO_DLL_EXPORT extern struct node *QTnode;
 
 
 /* error.h  --  declarations for error handling routines */
@@ -204,15 +204,15 @@ The Ness run-time environment has these components:
 /* each of the following are initialized (in interp.c) 
 	to point to the value needed for IsType() */
 
-extern struct ATKregistryEntry *celClass;
-extern struct ATKregistryEntry *textClass;
-extern struct ATKregistryEntry *textviewClass;
-extern struct ATKregistryEntry *dataobjectClass;
-extern struct ATKregistryEntry *lpairClass;
-extern struct ATKregistryEntry *viewClass;
-extern struct ATKregistryEntry *celviewClass;
-extern struct ATKregistryEntry *valueviewClass;
-extern struct ATKregistryEntry *imClass;
+NO_DLL_EXPORT extern struct ATKregistryEntry *celClass;
+NO_DLL_EXPORT extern struct ATKregistryEntry *textClass;
+NO_DLL_EXPORT extern struct ATKregistryEntry *textviewClass;
+NO_DLL_EXPORT extern struct ATKregistryEntry *dataobjectClass;
+NO_DLL_EXPORT extern struct ATKregistryEntry *lpairClass;
+NO_DLL_EXPORT extern struct ATKregistryEntry *viewClass;
+NO_DLL_EXPORT extern struct ATKregistryEntry *celviewClass;
+NO_DLL_EXPORT extern struct ATKregistryEntry *valueviewClass;
+NO_DLL_EXPORT extern struct ATKregistryEntry *imClass;
 
 extern class simpletext *ObjectCode;	
 	/* the compiled bytecode for the functions */
@@ -320,10 +320,10 @@ union stackelement {
 	 NSLowEnd points to the bottom most word in the stack.
 	 NSHiEnd points one past the topmost word in the stack
 */
-extern union stackelement *NSPstore, *NSPbase, *NSLowEnd, *NSHiEnd;
-extern long NSSize;		/* the number of words in the stack. */
+NO_DLL_EXPORT extern union stackelement *NSPstore, *NSPbase, *NSLowEnd, *NSHiEnd;
+NO_DLL_EXPORT extern long NSSize;		/* the number of words in the stack. */
 #define InitialNSSize 5000  /* initial size allocated to stack */
-extern struct frameelt *FramePtr;	/* points to current stack frame */
+NO_DLL_EXPORT extern struct frameelt *FramePtr;	/* points to current stack frame */
 
 
 /* ness_Globals
@@ -351,9 +351,9 @@ struct globelt {
 	union stackelement e;
 };
     
-extern struct globelt *ness_Globals;
-extern TGlobRef ness_GlobFree;
-extern long ness_GlobSize;
+NO_DLL_EXPORT extern struct globelt *ness_Globals;
+NO_DLL_EXPORT extern TGlobRef ness_GlobFree;
+NO_DLL_EXPORT extern long ness_GlobSize;
 
 #define NSPushSpace(type) (NSPstore=NSP=(union stackelement *)(((unsigned long)NSP) - sizeof(struct type)))
 #define NSPopSpace(type) (NSPstore=NSP=(union stackelement *)(((unsigned long)NSP) + sizeof(struct type)))
@@ -407,7 +407,7 @@ struct compilation {
 					recent statement starts in source */
 };
 
-extern struct compilation *curComp;
+NO_DLL_EXPORT extern struct compilation *curComp;
 
 /* definitions of various flavors of nodes */
 
@@ -548,7 +548,7 @@ flag_library			file in a directory on nesspath   libnode
 #define Tshrt	((Texpr) 11)	/* short  	(Tlong) */
 #define Tchr	((Texpr) 12)	/* char   	(Tlong) */
 
-extern const char * const TypeName[];  /* see gen.c */
+NO_DLL_EXPORT extern const char * const TypeName[];  /* see gen.c */
 
 
 /* call.hn -  definitions for nesscomp function call routines */
@@ -568,8 +568,8 @@ struct builtindef {
 
 enum callvariety {callC, callPE, callSym, callNess, callBuiltin, 
 		callMethod, callClProc, callGet, callSet, callNone};
-extern const char * const callvarietyname[];
-extern nesssym_scopeType LibScope;
+NO_DLL_EXPORT extern const char * const callvarietyname[];
+NO_DLL_EXPORT extern nesssym_scopeType LibScope;
 
 #define MAXARGS  12
 struct callnode {
@@ -612,8 +612,7 @@ nodeclass libusenode {
 
 /* gen.hn  -  definitions for nesscomp */
 
-extern boolean predcond;
-extern struct predstatenode *pssp;   /* (used in compile.c) */
+NO_DLL_EXPORT extern struct predstatenode *pssp;   /* (used in compile.c) */
 
 #define predEQ	0
 #define predNE	1
@@ -887,7 +886,7 @@ union stackelement * popValue(union stackelement  *NSP);
 extern struct errornode *
 interpretNess(short  func, ATK  *arg, class ness  *ness);
 extern	void ness_InitInterp(ness *) ;
-extern atom_def ness_booleanatom;
+NO_DLL_EXPORT extern atom_def ness_booleanatom;
 extern boolean ness_StackArgs(const avalueflex &args) ;
 extern size_t ness_InitArgMarks() ;
 extern void ness_ClearArgMarks(size_t bottom);

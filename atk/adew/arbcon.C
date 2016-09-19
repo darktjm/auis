@@ -83,7 +83,7 @@ static class arbiterview *OwnArb;
 #define VWLISTFILE  environ::AndrewDir("/lib/arbiters/viewlist")
 static const char defaultvwlist[] = "text,fad,table,eq,raster,lookz,lset,page,ness,zip,link,chomp,calc,bush,chart,value bargraphV,value fourwayV,value sliderV,value thumbV,value buttonV,"
 "value onoffV,value sliderstrV,value thumbstrV,value controlV,value pianoV,value stringV,value enterstrV,value menterstrV,value clicklistV,arbiter" ;
-class menulist *arbconMenus;
+static class menulist *arbconMenus;
 static class atom *atta[7];
 
 ATKdefineRegistry(arbcon, observable, arbcon::InitializeClass);
@@ -97,7 +97,7 @@ static void SetName(class celview  *cv,class arbiterview  *abv,const char  *name
 static long findstring(class text  *txt,const char  *str);
 static void handleclicks(class arbcon  *self,class cltextview  *ct,long  *position, long  *numberOfClicks, enum view_MouseAction  *action, long  *startLeft, long  *startRight, long  *leftPos, long  *rightPos,long  which,long  type);
 static void NewWindow(const char  *filename,int  bflags,boolean  AddArb);
-void arbcon_Create();
+static void arbcon_Create();
 static void addtypes(class cel  *cl);
 static boolean setupcel(class cel  *cl);
 #ifdef NOTUSED
@@ -127,7 +127,7 @@ static void ArbApplicationChoiceCallBack(class arbcon  *self,class value  *val,l
 static void ArbobviewlistCallBack(class arbcon  *self,class value  *val,long  r1,long  r2);
 static void ArbTextEditCallBack(class arbcon  *self,class value  *val,long  r1,long  r2);
 static void initself(class arbcon  *self,class view  *v);
-void arbcon_copycon(class view  *v,long  dat);
+static void arbcon_copycon(class view  *v,long  dat);
 
 
 static void DoCopy(class arbcon  *self,boolean  clear)
@@ -415,7 +415,7 @@ static void NewWindow(const char  *filename,int  bflags,boolean  AddArb)
 	fprintf(stderr,"Could not allocate enough memory.\n");
     }
 }
-void arbcon_Create(){
+static void arbcon_Create(){
     char foo[1024];
     if(Gself) return;
     strcpy(foo,ARBCONNAME);
@@ -1335,7 +1335,7 @@ static void initself(class arbcon  *self,class view  *v)
 	if(self->ArbTextEdit) (self->ArbTextEdit)->AddCallBackObserver( self,(value_fptr)ArbTextEditCallBack,0);
 	if(self->ArbTextEditView) ((class view *)self->ArbTextEditView)->AddObserver(self);
 }
-void arbcon_copycon(class view  *v,long  dat)
+static void arbcon_copycon(class view  *v,long  dat)
  {
 class arbcon *self;
 if((self = FindSelf(v)) == NULL) return;

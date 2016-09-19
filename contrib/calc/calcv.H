@@ -51,7 +51,7 @@ Initial revision
 
 */
 
-/**  SPECIFICATION -- External Facility Suite  *********************************
+/***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Calcv Data-object
 

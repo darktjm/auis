@@ -290,9 +290,11 @@ typedef int (*procedure)();
 #define PRINTF_LIKE(f,a) __attribute__((__format__(printf,f,a)))
 #define SCANF_LIKE(f,a) __attribute__((__format__(scanf,f,a)))
 #define EXIT_LIKE __attribute__((__noreturn__))
+#define NO_DLL_EXPORT __attribute__((visibility("hidden")))
 #else
 #define UNUSED /* UNUSED */
 #define PRINTF_LIKE(f,a)
 #define SCANF_LIKE(f,a)
 #define EXIT_LIKE /* NORETURN */
+#define NO_DLL_EXPORT
 #endif

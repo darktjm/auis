@@ -28,7 +28,7 @@ ATK_INTER
 //  $
 */
 
-/**  SPECIFICATION -- External Facility Suite  *********************************
+/***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Pie Chart View-object
 

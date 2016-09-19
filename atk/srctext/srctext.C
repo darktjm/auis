@@ -194,7 +194,7 @@ void srctext::SetupStyles()
 /* redundant code, copied from eza.c, to determine checkpointing status */
 static long CkpInterval; /* How often to run Checkpoint routine. */
 #define DEFAULTCKPINTERVAL 30 /* Default for CkpInterval. */
-long CkpLatency; /* The minimum amount of time to wait to checkpoint a buffer. */
+static long CkpLatency; /* The minimum amount of time to wait to checkpoint a buffer. */
 #define DEFAULTCKPLATENCY 4 /* Default for CkpLatency. */
 /**/
 

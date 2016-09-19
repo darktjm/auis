@@ -77,7 +77,7 @@ ATK_IMPL("chartobj.H")
 #include "chartv.H"
 #include <ctype.h>
 
-boolean chartobj_debug = 0;
+static boolean chartobj_debug = 0;
 
 #define debug chartobj_debug
 

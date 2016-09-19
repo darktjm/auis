@@ -61,7 +61,7 @@ AEXELINK=$(BASEDIR)/etc/aexelink
 TMPDYNEXT=-
 SYS_DYNDIR=ix86_LinuxAout
 #else /* USE_ELF */
-DYNLINKPROG = $(LINKPREFIX) gcc -shared
+DYNLINKPROG = $(LINKPREFIX) gcc -shared -Wl,--exclude-libs=ALL
 POSTDYNFLAGS=
 PREDYNFLAGS=
 DYN_LINK_LIB=-ldl

@@ -95,7 +95,7 @@ $Log: zipefc00.h,v $
  * 
 */
 
-/**  SPECIFICATION -- External Facility Suite  *********************************
+/***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	Zip Subroutine Library Symbolic Status Values
 

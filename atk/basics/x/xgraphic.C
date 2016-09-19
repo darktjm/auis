@@ -65,11 +65,11 @@ struct xgraphic_GrayBlock {
     class xgraphic * graphic_shades[17];
 };
 
-struct image_prefs {
+static struct image_prefs {
     boolean alwaysUsePrivateCmap;
     boolean alwaysFitFixed;
     boolean alwaysDither;
-} imagePrefs;
+} imagePrefs = {};
 
 static struct xgraphic_GrayBlock * grayBlockHeader = NULL;
 

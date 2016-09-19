@@ -34,7 +34,7 @@
 #include <util.h>
 #include <errno.h>
 
-struct eventnode *RootEventNode = NULL;
+NO_DLL_EXPORT struct eventnode *RootEventNode = NULL;
 
 static void ResolveTildes(char    *in , char    *out);
 int ReadDatesFromChampPath(const char  *champpath);

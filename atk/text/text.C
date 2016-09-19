@@ -2196,7 +2196,7 @@ void text::ObservedChanged (class observable  *changed, long  value)
     return NULL;
 }
 
-struct stk {
+static struct stk {
     char *item;
     int IsReal;
     struct stk *next, *prev;

@@ -47,9 +47,9 @@ extern int SineMult[], CosineMult[];
 
 
 
-boolean REVSCROLL = FALSE;
+static boolean REVSCROLL = FALSE;
 
-const char * const ErrorParseTable[] = {
+static const char * const ErrorParseTable[] = {
     "!@#TROUBLE:",
 #define ERRFLAG_TROUBLE 0
         "!@#ERRORTROUBLE:",

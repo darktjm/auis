@@ -1,0 +1,61 @@
+DOXYFILE_ENCODING      = UTF-8
+
+INPUT                  = ${ANDREWDIR}/include
+INPUT_ENCODING         = UTF-8
+RECURSIVE              = YES
+FILE_PATTERNS          = *.h *.H
+
+PROJECT_NAME           = "Andrew Toolkit"
+PROJECT_BRIEF          = The Andrew User Interface System
+PROJECT_LOGO           = ${ANDREWDIR}/lib/xicons/alogo.icon
+ALWAYS_DETAILED_SEC    = YES
+INLINE_INHERITED_MEMB  = YES
+STRIP_FROM_PATH        = ${ANDREWDIR}
+STRIP_FROM_INC_PATH    = ${ANDREWDIR}/include ${ANDREWDIR}/include/atk
+JAVADOC_AUTOBRIEF      = YES
+TAB_SIZE               = 8
+#OPTIMIZE_OUTPUT_FOR_C  = YES
+EXTENSION_MAPPING      = C=C++ H=C++
+LOOKUP_CACHE_SIZE      = 1
+CASE_SENSE_NAMES       = YES
+# not sure what this does, but it sounds like something I want
+SHOW_GROUPED_MEMB_INC  = YES
+INLINE_INFO            = NO
+SORT_MEMBER_DOCS       = NO
+SORT_BRIEF_DOCS        = NO
+SORT_MEMBERS_CTORS_1ST = YES
+SORT_GROUP_NAMES       = NO
+SORT_BY_SCOPE_NAME     = NO
+MAX_INITIALIZER_LINES  = 0
+SHOW_USED_FILES        = YES
+SHOW_FILES             = YES
+SHOW_NAMESPACES        = YES
+WARN_NO_PARAMDOC       = YES
+# probably want to do this to put some blurb in front
+#USE_MDFILE_AS_MAINPAGE =
+
+SOURCE_BROWSER         = YES
+REFERENCES_LINK_SOURCE = YES
+SOURCE_TOOLTIPS        = NO
+VERBATIM_HEADERS       = NO
+LATEX_SOURCE_CODE      = YES
+
+# I prefer PDF docs, but doxygen is more focused on HTML, so PDF is crap
+GENERATE_HTML          = YES
+GENERATE_LATEX         = YES
+PAPER_TYPE             = letter
+
+# probably need to find any preproc functions that create classes and add here
+MACRO_EXPANSION        = YES
+EXPAND_ONLY_PREDEF     = YES
+EXPAND_AS_DEFINED      = DEFINE_OFLEX_CLASS DEFINE_OFLEX_ITER DEFINE_OFLEX_CONST_ITER \
+                         DEFINE_MFLEX_SORTER DEFINE_MFLEX_CLASS DEFINE_MFLEX_CLASS_ITER \
+			 BEGINCPLUSPLUSPROTOS ENDCPLUSPLUSPROTOS
+
+SKIP_FUNCTION_MACROS   = NO
+
+# disables warnings, but actually includes all symbols as it should
+#EXTRACT_ALL = YES
+
+# this sort of forces it by adding every file to a group
+INPUT_FILTER           = ./add_group

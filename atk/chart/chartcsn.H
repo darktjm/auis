@@ -28,7 +28,7 @@ ATK_INTER
 //  $
 */
 
-/**  SPECIFICATION -- External Facility Suite  *********************************
+/***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Cartesian Chart View-object
 

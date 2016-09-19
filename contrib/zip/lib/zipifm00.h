@@ -32,7 +32,7 @@
 /* Information Technology Center		   Carnegie-Mellon University */
 
 
-/**  SPECIFICATION -- Internal Facility Suite  *********************************
+/***  SPECIFICATION -- Internal Facility Suite  *********************************
 
 TITLE	Zip Figure X
 

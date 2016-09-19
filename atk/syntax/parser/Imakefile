@@ -42,7 +42,7 @@ InstallClassFiles($(HFILES))
 InstallShScript(mkparserclass, $(DESTDIR)/bin/mkparserclass)
 InstallDocs(prsclass.doc, ${DESTDIR}/doc/PROGRAMMER)
 InstallDocs(parse.help, ${DESTDIR}/help)
-InstallHelpAlias(parse.help, parser bison mkparser parserclass sym symbol tlex lexer mkparserclass grammar token tokens)
+InstallHelpAlias(parse.help, parser bison mkparser parserclass sym symbol tlex gentlex lexer mkparserclass grammar token tokens)
 
 foo.C foo.H: mkparserclass Imakefile
 testparser.o: foo.H

@@ -1904,7 +1904,7 @@ framecmd_Interact(class frame  *self)
 	im::KeyboardProcessor();
 }
 
-static struct bind_Description framecmdDefaultBindings[]={
+static const struct bind_Description framecmdDefaultBindings[]={
     {"frame-exit", "\030\003", 0, "Quit~99", 0,     frame_DefaultMenus, (proctable_fptr)frame_Exit, 
     "Exit editor.  If any buffer is modified ask for confirmation."},
 #if !RCH_ENV
@@ -1916,7 +1916,7 @@ static struct bind_Description framecmdDefaultBindings[]={
     NULL
 };
 
-static struct bind_Description framecmdBindings[]={
+static const struct bind_Description framecmdBindings[]={
 
     /* the functions called by these first few check their second argument.
 	If it is a pointer, it is assumed to point to a character string
@@ -2032,7 +2032,7 @@ static struct bind_Description framecmdBindings[]={
 		"Hides all other windows and expands the current window."},
     NULL
 };
-struct proctable_DescriptionWithType procswithframearg[] = {
+static struct proctable_DescriptionWithType procswithframearg[] = {
 	{"frame-visit-file", NULL, NULL, NULL, NULL, proctable_Long},
 		/* returns 0 or greater for success */
 	{"frame-visit-file-new-window", NULL, NULL, NULL, NULL, proctable_Long},
@@ -2051,7 +2051,7 @@ struct proctable_DescriptionWithType procswithframearg[] = {
 	NULL
 };
 
-struct proctable_DescriptionWithType procswithrandomarg[] = {
+static const struct proctable_DescriptionWithType procswithrandomarg[] = {
 	{"framecmds-interact", (proctable_fptr)framecmd_Interact, NULL, 
 		"Ness-callable: interact with user", 
 		"framecmds", proctable_Void},

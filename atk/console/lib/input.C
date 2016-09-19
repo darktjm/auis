@@ -72,9 +72,6 @@ extern char Pstring1[256], Pstring2[256], Pstring3[256], Pstring4[MAXPATHLEN];
 /* EXTENSION(simple, 1, and 2) get set for:
     console files in: ../cmd/notop.c
 */
-extern const char EXTENSION[];
-extern const char EXTENSION1[];
-extern const char EXTENSION2[];
 
 #define MAXPATHLENGTH 1024
 #define MAXMENUCARD 6
@@ -205,7 +202,7 @@ char *TitleFromFile(char  *fname, boolean  IncludeVersion)
 extern const char RealProgramName[];
 /* consoleName gets referenced in setup.c, in  SetupFromConsole...
     I did this to avoid changing the calling parameters to the proc in setup. */
-char *consoleName;
+NO_DLL_EXPORT char *consoleName;
 
 void ReadNewConsoleFile(class ATK *atkarg_self, char  *rock)
 {
@@ -471,7 +468,7 @@ void TurnOffAlarm(class ATK *atkarg_self, char  *rock)
 }
 
 
-int LastX = 0, LastY = 0, MovingX;
+static int LastX = 0, LastY = 0, MovingX;
 /* 
  * MovingX is 1 if X boundary is being moved, 0 if y is
  * being moved, and -1 if the right click was not near

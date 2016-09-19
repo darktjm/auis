@@ -25,7 +25,7 @@
  *  $
 */
 
-int chartmap_debug = 0;
+static int chartmap_debug = 0;
 
 #define debug chartmap_debug
 

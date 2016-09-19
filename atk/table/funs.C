@@ -46,7 +46,7 @@
 #define e_TRUE 1.0
 #define e_FALSE 0.0
 
-extern int daysinmonth[];
+NO_DLL_EXPORT extern const int daysinmonth[];
 
 
 #define false myfalse

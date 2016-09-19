@@ -47,10 +47,10 @@ static int kidpid;
 static FILE *inf, *outf; // * errf
 #define QUESIZE 512
 #define MAXPEND 2
-class webcom *que[QUESIZE], **st, **en;
+static class webcom *que[QUESIZE], **st, **en;
 #define nextque(A) ((A + 1 >= que + QUESIZE)?que:A + 1)
-class webcom *firstcom;
-class webcom *startpending;
+static class webcom *firstcom;
+static class webcom *startpending;
 static char lastcontext[1024]; /* bogus */
 static int INPROMPT;
 static class event *web_event;

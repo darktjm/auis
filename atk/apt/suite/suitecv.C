@@ -84,7 +84,7 @@ void suitecv_InsertNLCmd( class suitecv  *self, long  key );
 
 
 static class keymap *KeyMap;
-struct bind_Description Bindings[] = {
+static const struct bind_Description Bindings[] = {
     {"suitecv-insert-newline","\015",0,NULL,0,0,(proctable_fptr)suitecv_InsertNLCmd,
 	"Insert a newline character","suitecv"},NULL};
 

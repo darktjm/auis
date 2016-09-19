@@ -42,10 +42,10 @@
   1.) ../lib/input.c
   2.) ../lib/setup.c
 */
-const char RealProgramName[] = "Console";
-const char EXTENSION[] = "con";
-const char EXTENSION1[] = "console";
-const char EXTENSION2[] = "Console";
+/* NO_DLL_EXPORT */ const char RealProgramName[] = "Console";
+/* NO_DLL_EXPORT */ const char EXTENSION[] = "con";
+/* NO_DLL_EXPORT */ const char EXTENSION1[] = "console";
+/* NO_DLL_EXPORT */ const char EXTENSION2[] = "Console";
 
 
 void ChooseColumns(int  numcol)

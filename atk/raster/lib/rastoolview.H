@@ -103,9 +103,9 @@ public:
       short toolacc[ZRTOOLS_NUM];
       class lpair *lpair1, *lpair2, *lpair3;
       int patternnum;
-      unsigned char *pattern;
+      const unsigned char *pattern;
       int brushnum;
-      unsigned char *brush;
+      const unsigned char *brush;
       long pastemode;
       int pastemodenum;
 

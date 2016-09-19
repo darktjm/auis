@@ -35,62 +35,62 @@ ATKdefineRegistry(suitex1app, application, NULL);
 
 class view * Flavor_Choice( class suitex1app  *self, class suite  *suite, struct suite_item  *item, int type, view_MouseAction action, long x, long y, long clicks );
 
-static suite_Specification vanilla[] = {
+static const suite_Specification vanilla[] = {
     suite_ItemCaption( "   Vanilla" ),
     suite_ItemTitleCaption( "Flavor 1:" ),
     0
 };
 
-static suite_Specification strawberry[] = {
+static const suite_Specification strawberry[] = {
     suite_ItemCaption( "   Strawberry" ),
     suite_ItemTitleCaption( "Flavor 2:" ),
     0
 };
 
-static suite_Specification chocolate[] = {
+static const suite_Specification chocolate[] = {
     suite_ItemCaption( "   Chocolate" ),
     suite_ItemTitleCaption( "Flavor 3:" ),
     0
 };
 
-static suite_Specification grape[] = {
+static const suite_Specification grape[] = {
     suite_ItemCaption( "   Grape" ),
     suite_ItemTitleCaption( "Flavor 4:" ),
     0
 };
 
-static suite_Specification fudge[] = {
+static const suite_Specification fudge[] = {
     suite_ItemCaption( "   Fudge" ),
     suite_ItemTitleCaption( "Flavor 5:" ),
     0
 };
 
-static suite_Specification licorice[] = {
+static const suite_Specification licorice[] = {
     suite_ItemCaption( "   Licorice" ),
     suite_ItemTitleCaption( "Flavor 6:" ),
     0
 };
 
-static suite_Specification caramel[] = {
+static const suite_Specification caramel[] = {
     suite_ItemCaption( "   Caramel" ),
     suite_ItemTitleCaption( "Flavor 7:" ),
     0
 };
 
-static suite_Specification lemon[] = {
+static const suite_Specification lemon[] = {
     suite_ItemCaption( "   Lemon" ),
     suite_ItemTitleCaption( "Flavor 8:" ),
     0
 };
 
-static suite_Specification orange[] = {
+static const suite_Specification orange[] = {
     suite_ItemCaption( "   Orange" ),
     suite_ItemTitleCaption( "Flavor 9:" ),
     0
 };
 
 
-suite_Specification flavors[] = {
+static const suite_Specification flavors[] = {
     suite_HitHandler( Flavor_Choice ),
     suite_Item(vanilla),
     suite_Item(strawberry), 

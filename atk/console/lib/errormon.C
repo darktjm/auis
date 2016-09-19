@@ -81,11 +81,11 @@ extern int ForceErrorMonitoring, InhibitErrorMonitoring;
   
 
 
-int ConsoleSocket;
-int SubChannel;
-char ptyname[30];
-char ThisHostName[256]="";
-u_long ThisHostAddr;
+NO_DLL_EXPORT int ConsoleSocket;
+NO_DLL_EXPORT int SubChannel;
+NO_DLL_EXPORT char ptyname[30];
+NO_DLL_EXPORT char ThisHostName[256]="";
+NO_DLL_EXPORT u_long ThisHostAddr;
 
 #define MAXERRORRESTARTS 2
 

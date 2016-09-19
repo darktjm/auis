@@ -32,15 +32,19 @@ if [ "x$1" = "x-ctor" ]; then
 		shift
 		echo "int main() { return 0; }"
 	fi
+	for name; do
+		echo "extern ATKregistryEntry ${name}_ATKregistry_;"
+	done
+	echo "namespace {"
 	echo "class ATKRegisterClass { public:"
 	echo "inline ATKRegisterClass(ATKregistryEntry *reg) {"
 	echo "	ATK::RegisterClass(reg); }"
 	echo "inline ~ATKRegisterClass() { }"
 	echo "};"
 	for name; do
-		echo "extern ATKregistryEntry ${name}_ATKregistry_;"
-		echo "static ATKRegisterClass ${name}$$_(&${name}_ATKregistry_);"
+		echo "static ATKRegisterClass ${name}$$_(&::${name}_ATKregistry_);"
 	done
+	echo "}"
 else
 if [ "x$1" = "x-" ]; then
 	shift

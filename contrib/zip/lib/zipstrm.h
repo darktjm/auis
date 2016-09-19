@@ -75,7 +75,7 @@
  * 
 */
 
-/**  SPECIFICATION -- External Facility Suite  *********************************
+/***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	Zip Subroutine Library Stream Objects Header
 

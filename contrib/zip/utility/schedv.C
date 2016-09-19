@@ -109,7 +109,7 @@ static void Quit_Button( class schedv *self, class suite *suite, struct suite_it
 static void Debug_Command( class schedv  *self );
 static void Quit_Command( class schedv *self );
 
-static struct bind_Description	 menu[] = {
+static const struct bind_Description	 menu[] = {
 {   "schedv-quit",		"\033q",    0,	    "Quit~99",		0,  0,
     (proctable_fptr) Quit_Command,		"Quit",		    NULL},
 {   "schedv-debug",		"\033z",    0,	    "DEBUG~88",		0,  0,
@@ -118,44 +118,44 @@ NULL
 };
 
 
-suite_Specification  extend_button[] =  {
+static const suite_Specification  extend_button[] =  {
   suite_ItemCaption( "Extend" ),
   suite_ItemHitHandler( Extend_Button ),
   0
 };
 
-suite_Specification  split_button[] = {
+static const suite_Specification  split_button[] = {
   suite_ItemCaption( "Split" ),
   suite_ItemHitHandler( Split_Button ),
   0
 };
 
-suite_Specification  clear_button[] = {
+static const suite_Specification  clear_button[] = {
   suite_ItemCaption( "Clear" ),
   suite_ItemHitHandler( Clear_Button ),
   0
 };
 
-suite_Specification  save_button[] = {
+static const suite_Specification  save_button[] = {
   suite_ItemCaption( "Save" ),
   suite_ItemHitHandler( Save_Button ),
   0
 };
 
-suite_Specification print_button[] = {
+static const suite_Specification print_button[] = {
   suite_ItemCaption( "Print" ),
   suite_ItemHitHandler( Print_Button ),
   0
 };
 
-suite_Specification quit_button[] =
+static const suite_Specification quit_button[] =
   {
   suite_ItemCaption( "Quit" ),
   suite_ItemHitHandler( Quit_Button ),
   0
 };
 
-suite_Specification control_buttons[] = {
+static const suite_Specification control_buttons[] = {
   suite_ItemCaptionFontName( "andysans10b" ),
 /*===
   suite_Item( extend_button ),

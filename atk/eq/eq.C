@@ -152,8 +152,8 @@ long eq::InsertTokens(long  pos, const char  *s)
 }
 
 /* generally useful.  Initialized in eqview_InitializeClass. */
-const struct symbol *eq_zilch;
-const struct symbol *eq_root;
+NO_DLL_EXPORT const struct symbol *eq_zilch;
+NO_DLL_EXPORT const struct symbol *eq_root;
 
 /*
  * Take account of zilches when inserting.

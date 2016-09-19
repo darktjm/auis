@@ -34,7 +34,14 @@ P_tmpdir can be defined as something else if needed.
 
 #include "atkos.h"
 
+#if (!defined(NEED_ANSI_TMPFILES) && \
+     !defined(NEED_UTIMES) && \
+     !defined(NEED_RANDOM_MAPPED_TO_RAND48) && \
+     !defined(NEED_INSREMQUE) && \
+     !defined(NEED_LOCKF) && \
+     !defined(NEED_ATKINIFINI))
 long atkos_dummy_variable_for_ar=99;
+#endif
 
 #ifdef NEED_ATKINIFINI
 

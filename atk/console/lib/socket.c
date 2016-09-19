@@ -40,8 +40,8 @@
 extern char *inet_ntoa(unsigned long addr);
 #endif
 extern char ThisHostName[];
-struct sockaddr_in ConsoleAddr;
-u_long ThisHostAddr;
+NO_DLL_EXPORT struct sockaddr_in ConsoleAddr;
+NO_DLL_EXPORT u_long ThisHostAddr;
 
 static void maptolower(char  *str)
 {
@@ -155,8 +155,8 @@ int OpenConsoleSocket(void)
 }
 
 #define MESSAGESIZE 1500
-boolean WasUDPAction = FALSE;
-char ConsoleMessage[MESSAGESIZE+100] = "";
+NO_DLL_EXPORT boolean WasUDPAction = FALSE;
+NO_DLL_EXPORT char ConsoleMessage[MESSAGESIZE+100] = "";
 extern int ConsoleSocket;
 int FakeCheckConsoleSocket(void)
 {

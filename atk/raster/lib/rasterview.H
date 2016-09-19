@@ -113,8 +113,8 @@ public:
 	virtual void CopySelection();
 	virtual void DestroyToolset();
 	virtual void SetPixel(class raster *ras, long x, long y, int bit); 
-	virtual void BrushSetPixel(long x, long y, unsigned char *pattern, unsigned char *brush); 
-	virtual void PatternSetPixel(long x, long y, unsigned char *pattern); 
+	virtual void BrushSetPixel(long x, long y, const unsigned char *pattern, const unsigned char *brush);
+	virtual void PatternSetPixel(long x, long y, const unsigned char *pattern); 
 /* --- added 6/14/92 --- */
 	virtual void ImprintInset(long function);
 	virtual void RemoveInset();

@@ -69,5 +69,5 @@ class ness_ProcHookType : public ness_ProcHookType_Base {
 
 };
 
-extern ness_ProcHookType ness_ProcHook;
+NO_DLL_EXPORT extern ness_ProcHookType ness_ProcHook;
 #endif

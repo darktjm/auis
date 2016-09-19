@@ -74,7 +74,7 @@ ATK_IMPL("chartlin.H")
 #include <ctype.h>
 #define  Data			    ((class chart *)(self)->chartobj::data_object)
 
-boolean chartlin_debug = 0;
+static boolean chartlin_debug = 0;
 #define debug chartlin_debug
 
 

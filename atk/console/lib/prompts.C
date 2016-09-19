@@ -35,8 +35,8 @@
 #include <console.h>
 #include <sys/param.h>
 
-int Pposx, Pposy;
-char Pstring1[256] = "", Pstring2[256] = "", Pstring3[256] = "", Pstring4[MAXPATHLEN] = "";
+NO_DLL_EXPORT int Pposx, Pposy;
+NO_DLL_EXPORT char Pstring1[256] = "", Pstring2[256] = "", Pstring3[256] = "", Pstring4[MAXPATHLEN] = "";
 
 
 void ClearRectangle(class consoleClass  *self, struct rectangle  *clpRect, short  Op1, class graphic  *Op2);

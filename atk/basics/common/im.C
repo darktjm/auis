@@ -3991,7 +3991,7 @@ static char keybinding[100];
 static char keysbuf[100];
 static int pos=0;
 static class keymap **kmv=NULL;
-int kmvc=0;
+static int kmvc=0;
 
 #define ROCKSEQUAL(rock, rstring, rock2) ((rock==rock2) || (rstring && isString((char*)rock2) && strcmp((char*)rock,(char*)rock2)==0))
 

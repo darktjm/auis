@@ -95,7 +95,7 @@ boolean tree__NodeModified( class tree	      *self, tree_type_node      node );
 
 
 class tree *
-tree::Create( tree_Specification	         *specification, class dataobject     *anchor )
+tree::Create( const tree_Specification	         *specification, class dataobject     *anchor )
         {
   class tree		*self;
 

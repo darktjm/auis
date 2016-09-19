@@ -76,7 +76,7 @@ static class fontdesc *bold, *italic;
 
 ATKdefineRegistry(helloworldview, view, helloworldview::InitializeClass);
 
-void drawHW(class helloworldview  *hwv);
+static void drawHW(class helloworldview  *hwv);
 static void Center(class helloworldview  *hwv, long  rock);
 static void Invert(class helloworldview  *hwv, long  rock);
 static void relocate(class helloworldview  *hwv,long  rock);
@@ -107,7 +107,7 @@ void helloworldview::DeleteApplicationLayer(class view *v)
     (scrollbar)->Destroy();
 }
 
-void drawHW(class helloworldview  *hwv)
+static void drawHW(class helloworldview  *hwv)
 {
     (hwv)->MoveTo(
 			   hwv->x-hwv->frameX,hwv->y-hwv->frameY);

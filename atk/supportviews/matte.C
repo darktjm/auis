@@ -54,7 +54,7 @@ ATK_IMPL("matte.H")
 #define RESIZING TRUE
 #define DRAWING FALSE
 
-class menulist *matteMenus;
+static class menulist *matteMenus;
 static class keymap *matteKeyMap;
 
 

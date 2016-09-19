@@ -71,7 +71,7 @@ ATK_IMPL("orgapp.H")
 #include  <orgv.H>
 #include  <orgapp.H>
 
-boolean orgapp_debug = FALSE;
+static boolean orgapp_debug = FALSE;
 #define debug orgapp_debug
 
 #define  Org		    (self->org_data_object)

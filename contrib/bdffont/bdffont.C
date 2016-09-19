@@ -56,7 +56,7 @@
 #include <mathaux.h>
 #include <util.h>
 
-struct bdffont_fontchar bdffont_ReadCharDefn;
+NO_DLL_EXPORT struct bdffont_fontchar bdffont_ReadCharDefn;
 
 
 /* declarations for parser */

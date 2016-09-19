@@ -220,7 +220,7 @@ void valueview::FullUpdate( enum view_UpdateType  type, long  x, long  y, long  
 }
 #define MAXPAR 36
 static struct resourceList par[MAXPAR];
-int setpar = 0;
+static int setpar = 0;
 void valueview::GetManyParameters( struct resourceList  * resources, class atomlist  * name, class atomlist  * class_c )
 {
     (this)->view::GetManyParameters(  resources, name, class_c );

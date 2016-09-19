@@ -159,7 +159,7 @@
 static class nesssym *ForwardFuncs = NULL;   
 
 /* defining instance for declaration in ness.hn */
-const char * const TypeName[/* Texpr */] = {
+/* NO_DLL_EXPORT */ const char * const TypeName[/* Texpr */] = {
 	"list-end", 
 	"integer", 
 	"boolean", 

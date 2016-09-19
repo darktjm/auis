@@ -1,1 +1,1 @@
-extern const char versionString[];
+NO_DLL_EXPORT extern const char versionString[];

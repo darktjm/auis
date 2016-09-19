@@ -208,27 +208,27 @@
 
 /* defining instances of globals  from envt.h */
 
-class simpletext *ObjectCode = NULL;	/* the compiled bytecode for the functions */
+NO_DLL_EXPORT class simpletext *ObjectCode = NULL;	/* the compiled bytecode for the functions */
 
-struct globelt *ness_Globals = NULL;
-TGlobRef ness_GlobFree = 0;
-long ness_GlobSize = 0;
+NO_DLL_EXPORT struct globelt *ness_Globals = NULL;
+NO_DLL_EXPORT TGlobRef ness_GlobFree = 0;
+NO_DLL_EXPORT long ness_GlobSize = 0;
 
-struct frameelt *FramePtr = NULL;	/* points to current stack frame */
-union stackelement *NSPstore = NULL, 
+NO_DLL_EXPORT struct frameelt *FramePtr = NULL;	/* points to current stack frame */
+NO_DLL_EXPORT union stackelement *NSPstore = NULL, 
 		*NSPbase = NULL, *NSLowEnd = NULL, *NSHiEnd = NULL;
-long NSSize = InitialNSSize;		/* the number of words in the stack. */
+NO_DLL_EXPORT long NSSize = InitialNSSize;		/* the number of words in the stack. */
 /* long nArgsGiven = 0;		number of arguments on stack when interpreter is called */
-struct ATKregistryEntry  *celClass = NULL;
-struct ATKregistryEntry  *textClass = NULL;
-struct ATKregistryEntry  *textviewClass = NULL;
-struct ATKregistryEntry  *dataobjectClass = NULL;
-struct ATKregistryEntry  *lpairClass = NULL;
-struct ATKregistryEntry  *viewClass = NULL;
-struct ATKregistryEntry  *celviewClass = NULL;
-struct ATKregistryEntry  *valueviewClass = NULL;
-struct ATKregistryEntry  *imClass = NULL;
-class ness *InterpretationInProgress = NULL;	/* used in ness.c */
+NO_DLL_EXPORT struct ATKregistryEntry  *celClass = NULL;
+NO_DLL_EXPORT struct ATKregistryEntry  *textClass = NULL;
+NO_DLL_EXPORT struct ATKregistryEntry  *textviewClass = NULL;
+NO_DLL_EXPORT struct ATKregistryEntry  *dataobjectClass = NULL;
+NO_DLL_EXPORT struct ATKregistryEntry  *lpairClass = NULL;
+NO_DLL_EXPORT struct ATKregistryEntry  *viewClass = NULL;
+NO_DLL_EXPORT struct ATKregistryEntry  *celviewClass = NULL;
+NO_DLL_EXPORT struct ATKregistryEntry  *valueviewClass = NULL;
+NO_DLL_EXPORT struct ATKregistryEntry  *imClass = NULL;
+NO_DLL_EXPORT class ness *InterpretationInProgress = NULL;	/* used in ness.c */
 
 static jmp_buf ExecutionExit;
 static unsigned char *iarStore;
@@ -370,7 +370,7 @@ popValue(union stackelement  *NSP) {
 }
 
 
-atom_def ness_booleanatom("boolean");
+NO_DLL_EXPORT atom_def ness_booleanatom("boolean");
 
 
 size_t ness_InitArgMarks() {

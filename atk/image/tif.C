@@ -56,8 +56,8 @@ static	byte **BWmap;
 static	byte **PALmap;
 
 static long filesize;
-byte r[256], g[256], b[256];
-byte *pic, *pic24;
+static byte r[256], g[256], b[256];
+static byte *pic, *pic24;
 
 typedef void (*tileContigRoutine)
     (byte*, u_char*, RGBvalue*, u_long, u_long, int, int);

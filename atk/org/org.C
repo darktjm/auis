@@ -73,7 +73,7 @@ static tree_Specification specification[] = {
   0
 };
 
-boolean Org_Debug = 0;
+static boolean Org_Debug = 0;
 #define debug Org_Debug
 
 ATKdefineRegistry(org, apt, NULL);

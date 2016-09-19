@@ -106,7 +106,7 @@ ATK_IMPL("treev.H")
 #include  <treev.H>
 #include <atom.H>
 
-int treev_debug = 0;
+static int treev_debug = 0;
 
 struct treev_instance
   {
@@ -468,11 +468,11 @@ static void treev_RestoreColors(class treev  *self)
 
 
 class treev *
-treev::Create( treev_Specification		  *specification, class view		  *anchor )
+treev::Create( const treev_Specification		  *specification, class view		  *anchor )
         {
   class treev		 *self;
   long			  mode = 0;
-  treev_Specification		 *spec = specification;
+  const treev_Specification		 *spec = specification;
   static boolean		  bypass_scroll = false;
 
   IN(treev_Create);

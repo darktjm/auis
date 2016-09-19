@@ -38,10 +38,9 @@ ATK_IMPL("helloworld.H")
 
 
 ATKdefineRegistry(helloworld, dataobject, NULL);
-class dataobject *createInitialDobj();
 
 
-class dataobject *createInitialDobj()
+static class dataobject *createInitialDobj()
 {
     class text *theText=new text;
     class style *bold=new style,*italic=new style;

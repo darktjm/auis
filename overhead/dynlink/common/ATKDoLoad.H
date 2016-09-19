@@ -22,6 +22,3 @@
 
 extern "C" int (*ATKDoLoad(const char *path, int trace))(int argc, char **argv);
 
-struct ATKregistryEntry;
-extern struct ATKregistryEntry *(*ATKDynamicLoader)(const char *name, boolean trace);
-

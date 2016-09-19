@@ -84,7 +84,7 @@ ATK_IMPL("helpapp.H")
  * -DDEBUGGING.  Debugging output is toggled by existance/nonexistance
  * of the environment variable HELPAPPDEBUG.
  */
-int HELPAPPDEBUG = 0;
+NO_DLL_EXPORT int HELPAPPDEBUG = 0;
 #undef DEBUG
 #define DEBUG(arg)  if (HELPAPPDEBUG != 0) { printf arg; fflush(stdout); }
 #else
@@ -102,19 +102,19 @@ static struct sockaddr_in myaddr;
 static int helpSocket = -1;
 #endif
 
-const char *help_helpKey="";	/* the topic */
+NO_DLL_EXPORT const char *help_helpKey="";	/* the topic */
 static int moreMode=FALSE;	/* use the termcap-based interface? */
 static int listMode=FALSE;	/* just list files? */
 static int print=FALSE;		/* in termcap-based mode, prompt for printing? */
-int help_newWindow=FALSE;	/* force a new help window? */
+NO_DLL_EXPORT int help_newWindow=FALSE;	/* force a new help window? */
 static int noDefault=FALSE;	/* use a default file or not? */
-const char *help_indexName=NULL;	/* alternative index file? */
-const char *help_aliasName=NULL;	/* additional index file? */
+NO_DLL_EXPORT const char *help_indexName=NULL;	/* alternative index file? */
+NO_DLL_EXPORT const char *help_aliasName=NULL;	/* additional index file? */
 /* list of addition search directories */
-struct helpDir *helpsearchDirs=(struct helpDir *)NULL;
+NO_DLL_EXPORT struct helpDir *helpsearchDirs=(struct helpDir *)NULL;
 static const char error[] = "Sorry; no help available on '%s'.";
 
-class help *helpobj;		/* global help object for ncproc use */
+NO_DLL_EXPORT class help *helpobj;		/* global help object for ncproc use */
 
 /*
  * usage statement

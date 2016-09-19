@@ -44,7 +44,7 @@ struct templatelist  {
     boolean hasText;
 };
 
-struct templatelist *tlHead = NULL;
+static struct templatelist *tlHead = NULL;
 
 static struct templatelist *FindTemplate(class stylesheet  *ssptr);
 static struct templatelist *text_AddTemplate(class stylesheet  *ssptr);

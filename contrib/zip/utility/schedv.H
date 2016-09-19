@@ -28,7 +28,7 @@
 */
 
 
-/**  SPECIFICATION -- External Facility Suite  *********************************
+/***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Sched View-object Specification
 

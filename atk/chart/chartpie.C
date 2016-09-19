@@ -67,7 +67,7 @@ ATK_IMPL("chartpie.H")
 #include <ctype.h>
 #define  Data			    ((class chart *)(self)->chartobj::data_object)
 
-int chartpie_debug = 0;
+static int chartpie_debug = 0;
 
 #define debug chartpie_debug
 

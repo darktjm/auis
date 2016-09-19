@@ -25,7 +25,7 @@
  *  $
 */
 
-/**  SPECIFICATION -- External Facility Suite  *********************************
+/***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	Bush Internal Symbolics
 

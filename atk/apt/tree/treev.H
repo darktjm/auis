@@ -28,7 +28,7 @@ ATK_INTER
 //  $
 */
 
-/**  SPECIFICATION -- External Facility Suite  *********************************
+/***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Tree View-Class
 
@@ -183,7 +183,7 @@ public:
 
 
 
-  /**  Methods Dealing with Tree as a Whole  **/
+  /***  Methods Dealing with Tree as a Whole  **/
 
   virtual long SetTreeAttribute( long attribute_code, long value )			 ;
   virtual long TreeAttribute( long attribute_code )				 ;
@@ -191,7 +191,7 @@ public:
   virtual void SetHitHandler( treev_hitfptr handler, class view *anchor );
   virtual void SetDebug( boolean state );
 
-  /**  Methods Dealing with Individual Nodes  **/
+  /***  Methods Dealing with Individual Nodes  **/
 
   virtual void ExposeNode( struct tree_node *node );
   virtual boolean NodeExposed( struct tree_node *node )				 ;
@@ -213,7 +213,7 @@ public:
 
 
 
-  static class treev * Create(treev_Specification *treev_Spec, class view *anchor )		 ;
+  static class treev * Create(const treev_Specification *treev_Spec, class view *anchor )		 ;
   
 	treev();
   

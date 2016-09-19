@@ -172,7 +172,7 @@ static long const pagew = 612, pageh = 792;	  /* 8.5*11 */
 	/* this paper size is used only as arguments to DesiredPrintSize, so it
 	will suffice for most reasonable page sizes */
 
-char *BoardColor;	/* name of board color from preferences */
+static char *BoardColor;	/* name of board color from preferences */
 
 static fontdesc *Font20;
 
@@ -792,7 +792,7 @@ RedrawView(gofigview  *self) {
  *
 \* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-struct proctable_Entry *DoNothingProc, *SetClickProc, *SetNoteProc;
+static struct proctable_Entry *DoNothingProc, *SetClickProc, *SetNoteProc;
 
 
 	static void

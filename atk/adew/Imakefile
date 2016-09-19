@@ -68,7 +68,7 @@ NormalHelpRule()
 InstallDocs($(DOCS), $(DESTDIR)/doc/PROGRAMMER)
 InstallDocs(adew.help lstproc.help, $(DESTDIR)/help)
 InstallDocs(adew.pr, ${DESTDIR}/lib/prs)
-InstallHelpAlias(adew, ado lset arb arbcon createcon value controllers)
+InstallHelpAlias(adew, ado lset arb arbcon createcon value controllers runadew)
 InstallHelpAlias(lstproc, lsetproc lsetprocs)
 
 CPPProgramTarget(createcon, mkcon.o, ${UTILLIB} , $(SYS_LIBS) ${BSDLIB} ${NETLIBS} ${SUPLIBS})

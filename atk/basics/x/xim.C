@@ -283,7 +283,7 @@ struct seldata {
     int refs;
 };
 
-int cursordebug =  0;
+NO_DLL_EXPORT int cursordebug =  0;
 static int regionDebug = 0;
 static boolean useBackingStore = TRUE;
 static boolean translatemenus = TRUE;
@@ -307,7 +307,7 @@ struct mouseStatus {
     class xim *xim;
 };
 
-struct mouseStatus *Mice = NULL;
+static struct mouseStatus *Mice = NULL;
 static long MouseHysteresis = 50;	/* (milliseconds) delay in sending a down button */
 
 static boolean mousedebug = FALSE;
@@ -711,7 +711,7 @@ SetWMProperties(class xim  *self, boolean  nameChanged , boolean  iconic)
 
 static int FirstTimeThrough = TRUE;
 
-long ATKXErrors = 0;
+NO_DLL_EXPORT long ATKXErrors = 0;
 
 static int XErrorsToConsole(Display *DisplayPtr, XErrorEvent *ErrorBlock)
 {

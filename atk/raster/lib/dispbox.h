@@ -40,7 +40,7 @@ void rasterview_DrawHighlightBehindDisplayBox(class rasterview  *self, class gra
 void rasterview_DisplayBoxHideOverlappingHighlight(class rasterview  *self, class graphic  *G, class rasterimage  *pix);
 void rasterview_SetPixelBehindDisplayBox(class rasterview  *self, class rasterimage  *pix, long  x , long  y, boolean  bit);
 
-extern boolean rasterview_debug;
+NO_DLL_EXPORT extern boolean rasterview_debug;
 #define Debug(s) {printf s ; fflush(stdout);}
 #define DEBUG(s) {if (rasterview_debug) {printf s ; fflush(stdout);}}
 #define ENTER(r) DEBUG(("Enter %s(0x%p)\n", Stringize(r), self))

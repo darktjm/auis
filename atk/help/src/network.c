@@ -39,8 +39,8 @@
 
 #define	IPPORT_HELPNAME	"andrewhelp"
 
-int helpSocket=(-1);
-int helpPort=(-1);
+NO_DLL_EXPORT int helpSocket=(-1);
+NO_DLL_EXPORT int helpPort=(-1);
 extern struct helpDir *helpsearchDirs;
 extern int help_newWindow;
 extern char *help_indexName;
@@ -72,10 +72,10 @@ int  sock)			/* the socket to send to */
      return write(sock, ((char *)buf), len);
  }
 
-char *ncproc_AddSearchDir=NULL;
-char *ncproc_SetIndex=NULL;
-char *ncproc_SetAliasesFile=NULL;
-char *ncproc_GetHelpOn=NULL;
+NO_DLL_EXPORT char *ncproc_AddSearchDir=NULL;
+NO_DLL_EXPORT char *ncproc_SetIndex=NULL;
+NO_DLL_EXPORT char *ncproc_SetAliasesFile=NULL;
+NO_DLL_EXPORT char *ncproc_GetHelpOn=NULL;
 /*
  * start up and start accepting connections and commands from other helps
  */

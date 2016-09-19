@@ -34,12 +34,12 @@ ATK_IMPL("fnote.H")
 #include <stylesheet.H>
 #include <fnote.H>
 
-class fnote **stack , **endstack;
-class text *tmptext;
-long notecount;
-boolean donumber;
-class style *Style = NULL;
-class style *HStyle = NULL;
+static class fnote **stack , **endstack;
+static class text *tmptext;
+static long notecount;
+static boolean donumber;
+static class style *Style = NULL;
+static class style *HStyle = NULL;
 #define BACKWARD 0
 #define FORWARD 1
 #define NOPROCESS 2

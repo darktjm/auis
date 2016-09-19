@@ -30,7 +30,7 @@ ATK_INTER
 
 
 
-extern int table_DefaultPrecision;
+NO_DLL_EXPORT extern int table_DefaultPrecision;
 
 /* table.ch - table data object definition and interface */
 

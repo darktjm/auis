@@ -67,7 +67,7 @@ static long flipBegCnt;
 static long flipEndCnt;
 static long flipBegMax = 0;
 static long flipEndMax = 0;
-class mark *insertMark = NULL;
+static class mark *insertMark = NULL;
 
 
 static class environment *AddNewEnvironment(class textview  *self, class stylesheet  *ss, class environment  *env, struct InsertStack  *insert);

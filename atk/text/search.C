@@ -43,7 +43,7 @@ ATK_IMPL("search.H")
 /* array to fold upper case to lower case 
 Now modified to handle the iso 8859 char set  # 1 */
 
- unsigned char searchFoldTRT[256] = {
+static const unsigned char searchFoldTRT[256] = {
 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, ' ', '!', '"', '#', '$', '%',
 '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4',
@@ -66,7 +66,7 @@ struct SearchPattern {
     short size, used;
     unsigned char *body;
 };
-int MatchLength;
+static int MatchLength;
 
 /* Special operators in the search pattern. */
 #define STAR 0200	/* what follows may be repeated zero or more times */

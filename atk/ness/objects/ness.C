@@ -181,7 +181,7 @@ ATK_IMPL("ness.H")
 #include <owatch.H>
 
 /* exactly one place to put all those temporary pointers for node creation */
-struct node *QTnode;
+NO_DLL_EXPORT struct node *QTnode;
 
 static class ness *NessList = NULL;		/* list of all nesses 
 				(so we can access library) */

@@ -28,7 +28,7 @@
 
  
 
-int SineMult[] = {
+NO_DLL_EXPORT int SineMult[] = {
 	0,
 	174,
 	348,
@@ -461,7 +461,7 @@ int SineMult[] = {
 	9335,
 };
 
-int CosineMult[] = {
+NO_DLL_EXPORT int CosineMult[] = {
 	9999,
 	9998,
 	9993,

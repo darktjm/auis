@@ -133,7 +133,7 @@ ATK_IMPL("apt.H")
 #include <apt.H>
 #include <apts.H>
 
-int apt_debug = 0;
+static int apt_debug = 0;
 #define debug apt_debug
 
 #define	 Title(p)	 	    (self->titles[p].strings)[0]

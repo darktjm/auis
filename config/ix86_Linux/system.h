@@ -438,12 +438,12 @@ Macros:
 #include <sys/flock.h>
 
  osi_ExclusiveLockNoBlock tries to get a lock, and returns immediately
- if it is unable to get the lock.
+ if it is unable to get the lock. */
 #define osi_ExclusiveLockNoBlock(fid)	lockf((fid), F_TLOCK, 0)
-osi_UnLock unlocks the file.
+/* osi_UnLock unlocks the file. */
 #define osi_UnLock(fid)			lockf((fid), F_ULOCK, 0)
- */
-#define NEED_LOCKF 1
+
+#undef NEED_LOCKF
 
 /* osi_O_READLOCK is the mode needed in the open flags in order
  for locking to be done. */

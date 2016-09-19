@@ -43,10 +43,10 @@ ATK_IMPL("table.H")
 
 /* globals for entire package */
 
-class table * table_List;	/* root of list of all tables */
+static class table * table_List;	/* root of list of all tables */
 
-char table_debug;			/* nonzero if debugging */
-int table_DefaultPrecision;		/* precision when none provided */
+static char table_debug;			/* nonzero if debugging */
+NO_DLL_EXPORT int table_DefaultPrecision;		/* precision when none provided */
 
 /* initialize entire class */
 
@@ -1085,7 +1085,9 @@ static const char   * const monthname[] = {
     "July", "August", "September", "October", "November", "December"
 };
 
-int     daysinmonth[] = {
+extern NO_DLL_EXPORT const int daysinmonth[];
+
+const int     daysinmonth[] = {
     31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 };
 

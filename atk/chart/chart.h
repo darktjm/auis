@@ -26,7 +26,7 @@
 */
 
 
-/**  SPECIFICATION -- External Facility Suite  *********************************
+/***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Chart View Internal Symbolics
 

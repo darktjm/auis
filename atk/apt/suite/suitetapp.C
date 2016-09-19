@@ -454,8 +454,8 @@ static suite_Specification *test_suites[] = {
   0
 };
 
-long current_test = 0, last_test = 20;
-class suite *current_suite;
+static long current_test = 0, last_test = 20;
+static class suite *current_suite;
 
 static suite_Specification test_suite[] = {
   suite_TitleCaption( "Test Suite" ),
@@ -528,10 +528,10 @@ static suite_Specification button_suite[] = {
   0
 };
 
-class lpair *pair, *triple;
-class text *text_data;
-class textview *text_view;
-class view *button_view, *test_view;
+static class lpair *pair, *triple;
+static class text *text_data;
+static class textview *text_view;
+static class view *button_view, *test_view;
 
 static int suiteta_debug = 0;
 #define debug suiteta_debug
