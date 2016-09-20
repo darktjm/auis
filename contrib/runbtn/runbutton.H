@@ -1,5 +1,8 @@
 #ifndef _runbutton_H_
 #define _runbutton_H_
+/** \addtogroup librunbutton librunbutton.so
+ *  A dynamically loadable ATK class file.  Contains runbutton, runbuttonview.
+ * @{ */
 /*
  * runbtn -- runbutton
  *
@@ -40,5 +43,5 @@ class runbutton : public  sbutton {
     static int numPaths;
     static char **runPath;
 };
-
+/** @} */
 #endif /* _runbutton_H_ */

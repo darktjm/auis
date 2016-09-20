@@ -1,6 +1,8 @@
 /* Copyright 1996 Carnegie Mellon University All rights reserved. */
 
 #include <awidget.H>
+/** \addtogroup libawidget
+ * @{ */
 
 class AWgtFig : public AWidget {
   public:
@@ -24,3 +26,4 @@ class AWgtFig : public AWidget {
 	// If True, mouse hits are passed to viewer.
 	// otherwise call one of Mouse{Left,Right}{Down,Move,Up}
 };
+/** @} */

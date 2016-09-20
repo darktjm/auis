@@ -4,7 +4,12 @@
 #include <awidget.H>
 #include <fontdesc.H>
 #include <aaction.H>
-
+/** \addtogroup libAButton libAButton.so
+ *  A dynamically loadable ATK class file.  Contains AText, ATextv,
+ *  AOptionCardv, AOptionMenuv, AOptionMenu, AList, AListv, AButton,
+ *  AButtonv.  Also contains AOptionSourceFormula, AButtonSizeFormula,
+ *  ATextSizeFormula, but these are not linked.
+ * @{ */
 #define ABUTTON_INHERIT_FontFamily (1<<15)
 #define ABUTTON_INHERIT_FontSize (1<<14)
 class AButtonv;
@@ -167,4 +172,5 @@ class AButton : public AWidget {
         return borderType;
     }
 };
+/** @} */
 #endif

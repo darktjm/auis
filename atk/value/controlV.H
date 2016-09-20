@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libvalue
+ * @{ */
 #include <buttonV.H>
 class controlV : public  buttonV{
 public:
@@ -27,6 +29,5 @@ public:
       const char *function;
       boolean autoinit,needsinit;
 };
-
-
+/** @} */
 #endif /* _controlV_H_ */

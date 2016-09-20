@@ -22,7 +22,8 @@ along with this program (in ../COPYING); if not, write to the Free
 Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ***********************************************************************/
-
+/** \addtogroup librecog
+ * @{ */
 /*
  FV - computes and stores single-path feature vectors
  */
@@ -48,11 +49,11 @@ typedef struct fv *FV;		/* During gesture collection, an FV holds
 				   all intermediate results used in the
 				   calculation of a single feature vector */
 
-FV	FvAlloc();	/* */
-void	FvFree();	/* Fv fv */
-void	FvInit();	/* FV fv */
-void	FvAddPoint();	/* FV fv; int x, y; long time; */
-Vector	FvCalc();	/* FV fv;  */
+extern FV FvAlloc(void);
+extern void FvFree(FV fv);
+extern void FvInit(FV fv);
+extern void FvAddPoint(FV fv, int x, int y, long t);
+extern Vector FvCalc(FV fv);
 
 /* 
   These functions are used as follows:
@@ -133,5 +134,5 @@ struct fv {
 
 	Vector		y;		/* Actual feature vector */
 };
-
+/** @} */
 #endif

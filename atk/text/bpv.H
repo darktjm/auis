@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 #include <view.H>
 
 class bpv: public  view {
@@ -31,6 +33,5 @@ class bpv: public  view {
       boolean NowBig;
       class menulist *Menus;
 };
-
-
+/** @} */
 #endif /* _bpv_H_ */

@@ -2,6 +2,8 @@
 #define _AMENU_H
 ATK_INTER
 /* Copyright 1995 Carnegie Mellon University All rights reserved. */
+/** \addtogroup libsupviews
+ * @{ */
 #include <andrewos.h>
 #include <rect.h>
 #include <dataobject.H>
@@ -211,6 +213,5 @@ class AmenuOptionv : public view {
     AmenuOptionCardv *card;
     popupwin *win;
 };
-
-    
+/** @} */
 #endif

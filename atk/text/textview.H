@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 #include <mark.H>
 #include <menulist.H>
 #include <keystate.H>
@@ -435,6 +437,5 @@ class textview : public  view {
 /* VI mode values  FAS */
 #define	COMMAND	0
 #define INPUT	1
-
-
+/** @} */
 #endif /* _textview_H_ */

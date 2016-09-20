@@ -1,6 +1,10 @@
 #ifndef UNITS_H
 #define UNITS_H
 
+/** \addtogroup libutil
+ * @{
+ */
+
 #define units_PICASperINCH	(6.0)
 #define units_POINTSperINCH	(72.0)
 #define units_MILSperINCH	(1000.0)
@@ -35,5 +39,7 @@
 	(units_FAHRENHEITperCELSIUS * (cel) + 32.0)
 #define units_FAHRENHEITinCELSIUS(fah) \
 	(units_CELSIUSperFAHRENHEIT * ((fah) - 32.0))
+
+/** @} */
 
 #endif

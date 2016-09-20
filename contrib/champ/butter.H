@@ -4,7 +4,8 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libchamp
+ * @{ */
 #include <dataobject.H>
 #include <view.H>
 class butter;
@@ -34,6 +35,5 @@ public:
       class fontdesc *myfontdesc;
       class cursor *mycursor;
 };
-
-
+/** @} */
 #endif /* _butter_H_ */

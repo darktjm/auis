@@ -1,6 +1,8 @@
 #ifndef _AVarSet_H_
 #define _AVarSet_H_
 ATK_INTER
+/** \addtogroup libawidget
+ * @{ */
 /* ***************************************************
  *	   Copyright Carnegie Mellon, 1995 - All Rights Reserved
  *        For full copyright information see:'andrew/doc/COPYRITE'
@@ -321,4 +323,5 @@ class AVarSet : public  dataobject
  * Revision 1.0  95/09/05  16:23:22  wjh
  * Copied from /afs/cs/misc/atk/@sys/alpha/lib/null
 */
+/** @} */
 #endif /* _AVarSet_H_ */

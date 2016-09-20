@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 /* A hash table
  *
  */
@@ -63,5 +65,5 @@ public:
     ghash_copykeyfptr copyKey;
     ghash_comparekeyfptr compKey;
 };
-
+/** @} */
 #endif /* _ghash_H_ */

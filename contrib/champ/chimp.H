@@ -4,6 +4,8 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libchamp
+ * @{ */
 struct comment {
     char *line;
     struct comment *next;
@@ -24,5 +26,5 @@ public:
       class enode *en;
       struct comment *comment;
 };
-
+/** @} */
 #endif /* _chimp_H_ */

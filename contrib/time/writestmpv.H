@@ -7,7 +7,8 @@
 #include <stdio.h>
 #include <menulist.H>
 #include <cursor.H>
-
+/** \addtogroup libtimeoday
+ * @{ */
 #include <timeodayview.H>
 class writestampview: public  timeodayview {
 public:
@@ -24,5 +25,5 @@ public:
 	virtual ~writestampview();
 };
 
-
+/** @} */
 #endif /* _writestampview_H_ */

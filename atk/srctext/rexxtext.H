@@ -1,5 +1,7 @@
 #ifndef _rexxtext_H_
 #define _rexxtext_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File rexxtext.H created by R S Kemmetmueller
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -37,5 +39,5 @@ class rexxtext: public srctext {
     static boolean InitializeClass();
     rexxtext();
 };
-
+/** @} */
 #endif /* _rexxtext_H_ */

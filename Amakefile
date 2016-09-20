@@ -84,8 +84,8 @@ DEST_OPENWIN = $(DESTDIR)/FONTDEST_OPENWIN
 MkdirTarget($(DEST_OPENWIN))
 #endif
 
- IMAKE_CMD = $(IMAKE) -f Amakefile -Timake.tmpl -I. -I$(IRULESRC) -s Makefile
-Makefile::Amakefile
+ IMAKE_CMD = $(IMAKE) -f Amakefile -Timake.tmpl -I. -I$(IRULESRC) -s makefile
+makefile::Amakefile
 	$(IMAKE_CMD) -DTOPDIR=$(TOP) ; \
 	touch .depends; \
-	cat .depends >>Makefile
+	cat .depends >>makefile

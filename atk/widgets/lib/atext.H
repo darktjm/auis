@@ -6,6 +6,8 @@ ATK_INTER
 #include <fontdesc.H>
 #include <aaction.H>
 #include <aformula.H>
+/** \addtogroup libAButton
+ * @{ */
 DEFINE_AACTION_FUNC_CLASS(ATextSlotAct,ASlot);
 #define AText_SingleLine 1
 #define AText_MultiLine 2
@@ -258,6 +260,6 @@ class AText : public AWidget {
         return doingTextValue;
     }
 };
-
+/** @} */
 #endif
 

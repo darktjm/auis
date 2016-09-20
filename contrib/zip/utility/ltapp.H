@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup liblt
+ * @{ */
 #include <application.H>
 class ltapp : public  application {
 public:
@@ -24,5 +26,5 @@ public:
   char				 trace_raster_name[512];
 
 };
-
+/** @} */
 #endif /* _ltapp_H_ */

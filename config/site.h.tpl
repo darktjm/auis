@@ -2,7 +2,8 @@
  *	Copyright Carnegie Mellon University, 1996 - All Rights Reserved
  *	For full copyright information see:'andrew/doc/COPYRITE' 
 */
-
+/** \addtogroup config
+ * @{ */
 /* template for site.h
 
 	To install Andrew, copy this file to 
@@ -91,3 +92,4 @@
 #define SITE_ENV 1
 #endif
 */
+/** @} */

@@ -5,7 +5,10 @@ ATK_INTER
  *         Copyright IBM Corporation 1991 - All Rights Reserved           *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libatkutils libatkutils.so
+ *  A statically loadable ATK class file.  Contains dialog, dialogv,
+ *  strinput.
+ * @{ */
 #include <sbutton.H>
 #define dialog_DS_VERSION 5
 
@@ -46,6 +49,5 @@ public:
     class sbutton *buttons;
     struct sbutton_prefs *prefs;
 };
-
-
+/** @} */
 #endif /* _dialog_H_ */

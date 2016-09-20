@@ -6,6 +6,9 @@
 #include <atkproto.h>
 BEGINCPLUSPLUSPROTOS
 
+/** \addtogroup libutil
+ * @{ */
+
 #define FDLEAK_OPENCODE_OPEN 1
 #define FDLEAK_OPENCODE_FOPEN 2
 #define FDLEAK_OPENCODE_POPEN 3
@@ -20,6 +23,8 @@ BEGINCPLUSPLUSPROTOS
 
 void RegisterOpenFile(int fd, const char *path, int Code);
 void RegisterCloseFile(int fd);
+
+/** @} */
 
 ENDCPLUSPLUSPROTOS
 

@@ -1,5 +1,7 @@
 #ifndef _srctextview_H_
 #define _srctextview_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File srctextview.H created by R L Quinn
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -56,5 +58,5 @@ class srctextview: public textview {
     class keystate *src_state;
     class menulist *src_menus;    
 };
-
+/** @} */
 #endif /* _srctextview_H_ */

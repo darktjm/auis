@@ -3,7 +3,8 @@
 #ifndef _ATextV_H_
 #define _ATextV_H_
 ATK_INTER
-
+/** \addtogroup libAButton
+ * @{ */
 #include <awidgetview.H>
 #include <ashadow.H>
 #include <fontdesc.H>
@@ -150,5 +151,5 @@ WIDGET_FUNC_AND_METHOD_CLASS(AText,ATextv);
 
 #define START_ATEXTV_CALLBACK_METHOD(name) START_VIEW_CALLBACK_METHOD(name,AText,ATextv)
 #define END_ATEXTV_CALLBACK_METHOD() END_CALLBACK_METHOD()
-
+/** @} */
 #endif /* _AtextV_H_ */

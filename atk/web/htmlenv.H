@@ -1,5 +1,7 @@
 #ifndef _htmlenv_H_
 #define _htmlenv_H_
+/** \addtogroup libhtmltext
+ * @{ */
 /* File htmlenv.H created by Ward Nelson
       (c) Copyright IBM Corp 1995.  All rights reserved.
 
@@ -25,5 +27,5 @@ class htmlenv : public environment {
 
     class attlist* attribs;
 };
-
+/** @} */
 #endif /* _htmlenv_H_ */

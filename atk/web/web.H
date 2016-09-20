@@ -2,7 +2,8 @@
 #ifndef _web_H_
 #define _web_H_
 ATK_INTER
-
+/** \addtogroup libhtmltext
+ * @{ */
 #define web_Limit 1
 #define web_IncludeContext 2
 #define web_ISMAP 4
@@ -30,5 +31,5 @@ public:
         image *GetImage(const char *file, attlist *atts);
 	webcom *webcomp;
 };
-
+/** @} */
 #endif /* _web_H_ */

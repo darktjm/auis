@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libvalue
+ * @{ */
 #include <sliderV.H>
 class bargraphV : public  sliderV {
 public:
@@ -20,6 +22,5 @@ public:
 
 	long lasttop;
 };
-
-
+/** @} */
 #endif /* _bargraphV_H_ */

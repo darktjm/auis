@@ -5,6 +5,8 @@ ATK_INTER
 #include <fontdesc.H>
 #include <rect.h>
 
+/** \addtogroup libvalue
+ * @{ */
 #include <valueview.H>
 class checkv : public  valueview
 {
@@ -37,5 +39,5 @@ public:
   long x,y,width,height;
   char *foreground,*background;
 };
-
+/** @} */
 #endif /* _checkv_H_ */

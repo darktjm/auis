@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 /* List object
  * for Graph Editor
  */
@@ -124,5 +126,5 @@ public:
     long size;
     glist_destroyfptr DestroyProc;
 };
-
+/** @} */
 #endif /* _glist_H_ */

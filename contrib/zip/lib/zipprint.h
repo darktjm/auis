@@ -4,7 +4,8 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libzip
+ * @{ */
 /* zipefr00.h	Zip  Subroutine Library Printing Objects Header			*/
 /* Author	TC Peters & RM LeVine					        */
 /* Information Technology Center		   Carnegie-Mellon University   */
@@ -93,5 +94,5 @@ struct zip_printing
 
 #define  zipprint_Printing_Shade( Print )\
 	(Printing->zip_printing_shade)
-
+/** @} */
 #endif /* _zipprint_h_*/

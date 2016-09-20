@@ -1,7 +1,8 @@
 ATK_INTER
 #ifndef _AWidgetView_H_
 #define _AWidgetView_H_
-
+/** \addtogroup libawidget
+ * @{ */
 /*
 awidgetview.H
 
@@ -163,4 +164,5 @@ class AFormulaViewAct : public AFormulaAct {
  * Revision 1.0  95/09/05  16:23:22  wjh
  * Copied from /afs/cs/misc/atk/@sys/alpha/lib/null
  */
+/** @} */
 #endif /* _AWidgetView_H_ */

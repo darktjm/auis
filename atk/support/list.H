@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 /*
  * Generic Linked List / Stack / Queue datatype
  *
@@ -88,5 +90,5 @@ public:
 
     struct list_Entry *trav;
 };
-
+/** @} */
 #endif /* _list_H_ */

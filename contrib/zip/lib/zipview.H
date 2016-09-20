@@ -4,6 +4,8 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libzip
+ * @{ */
 
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
@@ -343,5 +345,5 @@ public:
   long				 current_page;
   long				 panning_precision;
 };
-
+/** @} */
 #endif /* _zipview_H_ */

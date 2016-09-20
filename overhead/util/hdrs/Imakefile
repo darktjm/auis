@@ -3,7 +3,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-InstallMultiple(fdplumb.h fdplumbi.h profile.h truth.h util.h unscribe.h ansitext.h mathaux.h units.h, $(INSTINCFLAGS), $(DESTDIR)/include)
+InstallMultiple(fdplumb.h fdplumbi.h truth.h util.h unscribe.h ansitext.h units.h, $(INSTINCFLAGS), $(DESTDIR)/include)
 
 
 /*

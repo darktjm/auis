@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 struct content_chapentry {
     class mark *rem,*loc;
     struct content_chapentry *next;
@@ -44,7 +46,5 @@ class content : public  text {
       boolean doindent,isindented;
       int chapcount;
 };
-
- 
-
+/** @} */
 #endif /* _content_H_ */

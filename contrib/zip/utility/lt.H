@@ -5,6 +5,9 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup liblt liblt.so
+ *  A dynamically loadable ATK class file.  Contains ltapp, lt, ltv.
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The LightTable Data-object Specification
@@ -41,5 +44,5 @@ public:
   long				      id;
 };
 
-
+/** @} */
 #endif /* _lt_H_ */

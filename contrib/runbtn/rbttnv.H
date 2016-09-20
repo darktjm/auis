@@ -1,5 +1,7 @@
 #ifndef _runbuttonview_H_
 #define _runbuttonview_H_
+/** \addtogroup librunbutton
+ * @{ */
 /*
  * runbtnv -- runbuttonview
  *
@@ -48,5 +50,5 @@ class runbuttonview : public sbuttonv {
     static keymap *sKeyMap;
     static runbuttonview *rbViewList;	// list of views.
 };
-
+/** @} */
 #endif /* _runbuttonview_H_ */

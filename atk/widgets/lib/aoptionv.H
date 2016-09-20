@@ -2,7 +2,8 @@
 #define _AOPTIONV_H_
 ATK_INTER
 /* Copyright 1996 Carnegie Mellon University All rights reserved. */
-
+/** \addtogroup libAButton
+ * @{ */
 #include <abuttonv.H>
 #include <aaction.H>
 class popupwin;
@@ -67,4 +68,5 @@ WIDGET_VIEW_METHOD_CLASS(AButton,AOptionCardv);
 inline AOptionSourceFormula::~AOptionSourceFormula() {
     if(observed) observed->RemoveObserver(av);
 }
+/** @} */
 #endif

@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libzip
+ * @{ */
 /* zipefc00.h	Zip Subroutine Library Symbolic Status Values		      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -142,5 +144,5 @@ END-SPECIFICATION  ************************************************************/
 
 
 #define  zip_highest_status_value		31
-
+/** @} */
 #endif /* _zipefc00_h_ */

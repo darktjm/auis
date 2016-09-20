@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 /* complete.H
  * Class header for message line completion support module.
  */
@@ -37,5 +39,5 @@ public:
 	static void FileHelp(const char *partialPath, long dummyData, message_workfptr helpTextFunction, long helpTextRock);
         static enum message_CompletionCode FileComplete(char *pathname, boolean directory, char *buffer, int bufferSize)  ;
 };
-
+/** @} */
 #endif /* _completion_H_ */

@@ -3,6 +3,8 @@ ATK_INTER
 #ifndef _scrolling_H_
 #define _scrolling_H_
 
+/** \addtogroup libsupviews
+ * @{ */
 #include <andrewos.h>
 #include <point.h>
 #include <rect.h>
@@ -195,6 +197,6 @@ class ScrollRegionEndzone : public ScrollRegion {
     void Draw(class scroll &scroll, int stype, view_UpdateType type, const struct rectangle &damaged);
     void Update(class scroll &scroll, int stype);
 };
-
+/** @} */
 #endif
 

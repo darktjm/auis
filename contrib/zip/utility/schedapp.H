@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsched
+ * @{ */
 #include <application.H>
 class schedapp : public  application {
 public:
@@ -22,5 +24,5 @@ public:
   char				 stream_name[512];
 
 };
-
+/** @} */
 #endif /* _schedapp_H_ */

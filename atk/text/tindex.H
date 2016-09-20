@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 #include <ATK.H>
 class tindex : public ATK  {
   public:
@@ -22,6 +24,5 @@ class tindex : public ATK  {
     static int StyleNameIndexLevel(const char *stylename);
     static class text *BuildIndexText(struct textps_locatag *taglist);
 };
-
-
+/** @} */
 #endif /* _tindex_H_ */

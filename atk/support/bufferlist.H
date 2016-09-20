@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 #include <observable.H>
 
 typedef boolean (*bufferlist_efptr)(class buffer *b, long d);
@@ -43,5 +45,5 @@ public:
 	struct listentry *head;
 };
 
-
+/** @} */
 #endif /* _bufferlist_H_ */

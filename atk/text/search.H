@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 #define search_VERSION 1
 
 #include <ATK.H>
@@ -23,5 +25,5 @@ public:
     static int GetMatchLength()  ;
     static char * GetQuotedSearchString(char *string, char *resString, long resStrLen)  ;
 };
-
+/** @} */
 #endif /* _search_H_ */

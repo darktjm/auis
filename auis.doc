@@ -10288,6 +10288,13 @@ white
 
 \section{lib}
 
+This directory contains the binary ATK classes built from the 
+examples.  See lib/atk for details about what sort of files to 
+expect.  Each shared object is named after the example (e.g. 
+\typewriter{ex3} for example 3).  It contains all classes defined 
+in that example (helloworld, helloworldview, helloworldapp).  Since it 
+is not named after any included class, and has no links for included 
+classes, it is only statically loadable.
 \begindata{link,14487888}
 4
 ${ANDREWDIR}/examples/lib
@@ -10304,410 +10311,6 @@ white
 \enddata{link,14487888}
 \enddata{link,14487888}
 \view{linkview,14487888,25792,0,0}
-
-
-
-\subsection{ex1.lt}
-
-
-
-\subsection{ex1.rf}
-
-
-
-\subsection{ex2.lt}
-
-
-
-\subsection{ex2.rf}
-
-
-
-\subsection{ex3.lt}
-
-
-
-\subsection{ex3.rf}
-
-
-
-\subsection{ex4.lt}
-
-
-
-\subsection{ex4.rf}
-
-
-
-\subsection{ex5.lt}
-
-
-
-\subsection{ex5.rf}
-
-
-
-\subsection{ex6.lt}
-
-
-
-\subsection{ex6.rf}
-
-
-
-\subsection{ex7.lt}
-
-
-
-\subsection{ex7.rf}
-
-
-
-\subsection{ex8.lt}
-
-
-
-\subsection{ex8.rf}
-
-
-
-\subsection{ex9.lt}
-
-
-
-\subsection{ex9.rf}
-
-
-
-\subsection{ex10.lt}
-
-
-
-\subsection{ex10.rf}
-
-
-
-\subsection{ex11.lt}
-
-
-
-\subsection{ex11.rf}
-
-
-
-\subsection{ex12.lt}
-
-
-
-\subsection{ex12.rf}
-
-
-
-\subsection{ex13.lt}
-
-
-
-\subsection{ex13.rf}
-
-
-
-\subsection{ex14.lt}
-
-
-
-\subsection{ex14.rf}
-
-
-
-\subsection{ex15.lt}
-
-
-
-\subsection{ex15.rf}
-
-
-
-\subsection{ex16.lt}
-
-
-
-\subsection{ex16.rf}
-
-
-
-\subsection{ex17.lt}
-
-
-
-\subsection{ex17.rf}
-
-
-
-\subsection{ex18.lt}
-
-
-
-\subsection{ex18.rf}
-
-
-
-\subsection{ex19.lt}
-
-
-
-\subsection{ex19.rf}
-
-
-
-\subsection{libex1.so}
-
-helloworldapp_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex2.so}
-
-helloworldapp_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex3.so}
-
-helloworldapp_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex4.so}
-
-helloworldapp_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex5.so}
-
-helloworldapp_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex6.so}
-
-helloworldapp_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex7.so}
-
-helloworldapp_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex8.so}
-
-helloworldapp_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex9.so}
-
-helloworldapp_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex10.so}
-
-helloworldapp_ATKregistry_
-
-helloworld_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworld
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex11.so}
-
-helloworldapp_ATKregistry_
-
-helloworld_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworld
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex12.so}
-
-helloworldapp_ATKregistry_
-
-helloworld_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworld
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex13.so}
-
-helloworldapp_ATKregistry_
-
-helloworld_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworld
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex14.so}
-
-helloworldapp_ATKregistry_
-
-class helloworldapp
-
-
-
-\subsection{libex15.so}
-
-helloworldapp_ATKregistry_
-
-class helloworldapp
-
-
-
-\subsection{libex16.so}
-
-helloworldapp_ATKregistry_
-
-helloworld_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworld
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex17.so}
-
-helloworldapp_ATKregistry_
-
-helloworld_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworld
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex18.so}
-
-helloworldapp_ATKregistry_
-
-helloworld_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworld
-
-class helloworldapp
-
-class helloworldview
-
-
-
-\subsection{libex19.so}
-
-helloworldapp_ATKregistry_
-
-helloworld_ATKregistry_
-
-helloworldview_ATKregistry_
-
-class helloworld
-
-class helloworldapp
-
-class helloworldview
 
 \begindata{bp,13331872}
 Version 2
@@ -11795,13 +11398,9 @@ exported by this library are in the headers, or vice-versa.
 
 \section{libutil.a}
 
-Symbols defined in util.h, unscribe.h.
-
-fdplumb.o T RegisterCloseFile  private
-
-fdplumb.o T RegisterOpenFile  private
-
-times.o T osi_GetTimes  system.h
+Symbols defined in util.h, unscribe.h, fdplumbi.h (and one in 
+system.h).  Note that fdplumbi.h is technically private.  Also, in 
+order to actually use the fdplumb functions, you must include fdplumb.h.
 
 
 
@@ -12298,6 +11897,7 @@ n 0
 \view{bpv,7792064,26586,0,0}
 \chapter{$\{ANDREWDIR\}/lib/atk}
 
+The 
 \begindata{link,10555952}
 4
 ${ANDREWDIR}/lib/atk
@@ -12314,423 +11914,61 @@ white
 \enddata{link,10555952}
 \enddata{link,10555952}
 \view{linkview,10555952,26362,0,0}
-
-
-
-\section{AButton.lt}
-
-
-
-\section{AButton.rf}
-
-
-
-\section{apt.lt}
-
-
-
-\section{apt.rf}
-
-
-
-\section{arbiter.lt}
-
-
-
-\section{arbiter.rf}
-
-
-
-\section{atkutils.lt}
-
-
-
-\section{atkutils.rf}
-
-
-
-\section{awidget.lt}
-
-
-
-\section{awidget.rf}
-
-
-
-\section{basics.lt}
-
-
-
-\section{basics.rf}
-
-
-
-\section{bdffont.lt}
-
-
-
-\section{bdffont.rf}
-
-
-
-\section{bush.lt}
-
-
-
-\section{bush.rf}
-
-
-
-\section{calc.lt}
-
-
-
-\section{calc.rf}
-
-
-
-\section{champ.lt}
-
-
-
-\section{champ.rf}
-
-
-
-\section{chart.lt}
-
-
-
-\section{chart.rf}
-
-
-
-\section{circlepi.lt}
-
-
-
-\section{circlepi.rf}
-
-
-
-\section{clock.lt}
-
-
-
-\section{clock.rf}
-
-
-
-\section{compile.lt}
-
-
-
-\section{compile.rf}
-
-
-
-\section{consoleapp.lt}
-
-
-
-\section{consoleapp.rf}
-
-
-
-\section{datacata.lt}
-
-
-
-\section{datacata.rf}
-
-
-
-\section{deskey.lt}
-
-
-
-\section{deskey.rf}
-
-
-
-\section{dynsearch.lt}
-
-
-
-\section{dynsearch.rf}
-
-
-
-\section{eq.lt}
-
-
-
-\section{eq.rf}
-
-
-
-\section{ezdiff.lt}
-
-
-
-\section{ezdiff.rf}
-
-
-
-\section{ez.lt}
-
-
-
-\section{ezprintapp.lt}
-
-
-
-\section{ezprintapp.rf}
-
-
-
-\section{ez.rf}
-
-
-
-\section{fad.lt}
-
-
-
-\section{fad.rf}
-
-
-
-\section{figure.lt}
-
-
-
-\section{figure.rf}
-
-
-
-\section{filter.lt}
-
-
-
-\section{filter.rf}
-
-
-
-\section{frame.lt}
-
-
-
-\section{frame.rf}
-
-
-
-\section{gofig.lt}
-
-
-
-\section{gofig.rf}
-
-
-
-\section{gsearch.lt}
-
-
-
-\section{gsearch.rf}
-
-
-
-\section{gtext.lt}
-
-
-
-\section{gtext.rf}
-
-
-
-\section{help.lt}
-
-
-
-\section{help.rf}
-
-
-
-\section{html.lt}
-
-
-
-\section{html.rf}
-
-
-
-\section{htmltext.lt}
-
-
-
-\section{htmltext.rf}
-
-
-
-\section{imagev.lt}
-
-
-
-\section{imagev.rf}
-
-
-
-\section{incsearch.lt}
-
-
-
-\section{incsearch.rf}
-
-
-
-\section{launchapp.lt}
-
-
-
-\section{launchapp.rf}
-
-
-
-\section{layout.lt}
-
-
-
-\section{layout.rf}
+ directory contains the ATK shared objects.  Each shared object
+contains one or more ATK classes.  The shared object file is named 
+after only one of those classes, referred to in this description as the 
+primary class.  For each shared object, three or more files exist.  
+First is the shared object itself, named in a system-dependent manner
+based on the primary class (e.g. 
+\typewriter{lib}\italic{primary}\typewriter{.so} on ELF systems).  In 
+addition, soft links to that file named for any other ATK classes 
+defined in the object are made, named similarly (e.g. 
+\typewriter{lib}\italic{secondary}\typewriter{.so} on ELF systems).  
+Next is a file containing extra linker options needed when statically 
+linking this  object into an executable (note that by statically this 
+means using the system load-linker rather than the ATK dynamic object 
+loader; the OS may still consider this dynamic linking).  Finally 
+there is a file containing dependency information for this shared 
+object.  It contains a list of classes defined in the object (primary 
+first, one per line), followed by a separator (three equals signs on a 
+line), follwed by a list of all classes used (one per line).
+directly or indirectly.  The latter two files are only used when 
+linking in objects during compilation.  They are named 
+\italic{primary}\typewriter{.lt} and \italic{primary}\typewriter{.rf}, 
+respectively.  The documentation for these classes is in the API 
+documentation.  For each class in a shared object, the class itself as 
+well as all methods and data defined by the object and the ATK data 
+structure \italic{class}\typewriter{_ATKregistry_} is present.  Note 
+that the naming convention of using the first defined ("primary") 
+class need not be adhered to for objects which are only meant to be 
+statically loaded (e.g. basics, atkutils).  Such objects also 
+have no links from object names to the base object file.  
+For more details, see the docs for 
+\begindata{link,7375905}
+4
+${ANDREWDIR}/help/genstatl.help
+0
+0
+V
+\begindata{link,7375905}
+Datastream version: 2
+genstatl
+2
+
+black
+white
+\enddata{link,7375905}
+\enddata{link,7375905}
+\view{linkview,7375905,25343,0,0}.
 
 
 
 \section{libAButton.so}
 
-AButton_ATKregistry_
-
-class AButton
-
-AButtonSizeFormula_ATKregistry_
-
-class AButtonSizeFormula
-
-AButtonv_ATKregistry_
-
-class AButtonv
-
-AList_ATKregistry_
-
-class AList
-
-AListv_ATKregistry_
-
-class AListv
-
-AOptionCardv_ATKregistry_
-
-class AOptionCardv
-
-AOptionMenu_ATKregistry_
-
-class AOptionMenu
-
-AOptionMenuv_ATKregistry_
-
-class AOptionMenuv
-
-AOptionSourceFormula_ATKregistry_
-
-class AOptionSourceFormula
-
-AText_ATKregistry_
-
-class AText
-
-ATextSizeFormula_ATKregistry_
-
-class ATextSizeFormula
-
-ATextv_ATKregistry_
-
-class AButtonAct
-
-class ATextv
-
-class AListSlotAct
-
-class ATextSlotAct
-
-class AListvTextAct
-
-class AOptionSlotAct
-
-class AListvMethodAct
-
-class ATextvMethodAct
-
-class AButtonvMethodAct
-
-class AListStateFormula
-
-class ATextStateFormula
-
-class AListSelectedItems
-
-class ATextvStateFormula
-
-class AListvMethodActBase
-
-class ATextvMethodActBase
-
-class AButtonvMethodActBase
-
-class AListSelectionFormula
-
-class AOptionCardvMethodAct
-
-class AOptionMenuvMethodAct
-
-class AOptionCardvMethodActBase
-
-class AOptionMenuvMethodActBase
-
-class AListvTextviewStateFormula
-
 class AShadowLayers [dup - OFLEX]
 
 class avalueflex_base [dup - OFLEX]
 
-
-
-\section{libAButtonv.so}
-
-link to libAButton.so
-
-
-\section{libAList.so}
-
-link to libAButton.so
-
-
-\section{libAListv.so}
-
-link to libAButton.so
-
-
-\section{libAOptionCardv.so}
-
-link to libAButton.so
-
-
-\section{libAOptionMenu.so}
-
-link to libAButton.so
-
-
-\section{libAOptionMenuv.so}
-
-link to libAButton.so
 
 
 \section{libapt.so}
@@ -12817,42 +12055,6 @@ class wincelview
 link to libarbiter.so
 
 
-\section{libasmtext.so}
-
-link to libsrctext.so
-
-
-\section{libasmtextview.so}
-
-link to libsrctext.so
-
-
-\section{libAText.so}
-
-link to libAButton.so
-
-
-\section{libATextv.so}
-
-link to libAButton.so
-
-
-\section{libatkutils.so}
-
-dialog_ATKregistry_
-
-class dialog
-
-dialogv_ATKregistry_
-
-class dialogv
-
-strinput_ATKregistry_
-
-class strinput
-
-
-
 \section{libattlist.so}
 
 link to libhtmltext.so
@@ -12860,131 +12062,12 @@ link to libhtmltext.so
 
 \section{libawidget.so}
 
-ADepender_ATKregistry_
-
-class ADepender
-
-ADependerPlaceHolder_ATKregistry_
-
-class ADependerPlaceHolder
-
-AFormulaAct_ATKregistry_
-
-class AFormulaAct
-
-AFormula_ATKregistry_
-
-class AFormula
-
-AFormulaSlot_ATKregistry_
-
-class AFormulaSlot
-
-AFormulaViewAct_ATKregistry_
-
-class AFormulaViewAct
-
-ASlotATK_ATKregistry_
-
-class ASlotATK
-
-ASlot_ATKregistry_
-
-class ASlot
-
-ASlotBool_ATKregistry_
-
-class ASlotBool
-
-ASlotColor_ATKregistry_
-
-class ASlotColor
-
-ASlotDataObj_ATKregistry_
-
-class ASlotDataObj
-
-ASlotFigure_ATKregistry_
-
-class ASlotFigure
-
-ASlotFile_ATKregistry_
-
-class ASlotFile
-
-ASlotFont_ATKregistry_
-
-class ASlotFont
-
-ASlotFunction_ATKregistry_
-
-class ASlotFunction
-
-ASlotInt_ATKregistry_
-
-class ASlotInt
-
-ASlotPtr_ATKregistry_
-
-class ASlotPtr
-
-ASlotReal_ATKregistry_
-
-class ASlotReal
-
-ASlotString_ATKregistry_
-
-class ASlotString
-
-AVarSet_ATKregistry_
-
-class AVarSet
-
-AWgtFig_ATKregistry_
-
-class AWgtFig
-
-AWgtFigView_ATKregistry_
-
-class AWgtFigView
-
-AWidget_ATKregistry_
-
-class AWidget
-
-AWidgetView_ATKregistry_
-
-class AWidgetView
-
-class AShadowColor
-
-class AShadowLayer
-
-class AShadowColorBlock
-
-class AShadow
-
-class AString
-
-class ASlot_Flex
-
-class AShadowLayers [dup - OFLEX]
+class AShadowLayers [dup - OFLEX] [primary source]
 
 class avalueflex_base [dup - OFLEX]
 
-class AVarSetPathSegs
+class AVarSetPathSegs - should be private
 
-class ASlotFunctionAct
-
-class ASlot_PlaceHolderFlex
-
-class ASHook
-
-
-
-\section{libbargraphV.so}
-
-link to libvalue.so
 
 
 \section{libbasics.so}
@@ -13415,21 +12498,9 @@ class icolormap
 
 \section{libbdffont.so}
 
-bdffont_ATKregistry_
-
-class bdffont
-
-bdffontv_ATKregistry_
-
-class bdffontv
+The following should be private:
 
 T bdffont_EnsureDefns(bdffont*, long)
-
-
-
-\section{libbdffontv.so}
-
-link to libbdffont.so
 
 
 \section{libbox.so}
@@ -13480,41 +12551,9 @@ T FormatEntriesInfo(bushv*, tree_node*)
 link to libbush.so
 
 
-\section{libbutter.so}
-
-link to libchamp.so
-
-
-\section{libbutterview.so}
-
-link to libchamp.so
-
-
-\section{libbuttonV.so}
-
-link to libvalue.so
-
-
 \section{libcalccon.so}
 
 link to libpcontrol.so
-
-
-\section{libcalc.so}
-
-calc_ATKregistry_
-
-class calc
-
-calcv_ATKregistry_
-
-class calcv
-
-
-
-\section{libcalcv.so}
-
-link to libcalc.so
 
 
 \section{libcel.so}
@@ -13529,49 +12568,7 @@ link to libarbiter.so
 
 \section{libchamp.so}
 
-butter_ATKregistry_
-
-class butter
-
-butterview_ATKregistry_
-
-class butterview
-
-champ_ATKregistry_
-
-class champ
-
-chimp_ATKregistry_
-
-class chimp
-
-chimpview_ATKregistry_
-
-class chimpview
-
-chomp_ATKregistry_
-
-class chomp
-
-chompview_ATKregistry_
-
-class chompview
-
-enode_ATKregistry_
-
-class enode
-
-enodeview_ATKregistry_
-
-class enodeview
-
-month_ATKregistry_
-
-class month
-
-monthview_ATKregistry_
-
-class monthview
+Following should be private:
 
 T IncrementDate(tm*)
 
@@ -13717,70 +12714,12 @@ link to libchart.so
 link to libchart.so
 
 
-\section{libcheckv.so}
-
-link to libvalue.so
-
-
-\section{libchimp.so}
-
-link to libchamp.so
-
-
-\section{libchimpview.so}
-
-link to libchamp.so
-
-
-\section{libchomp.so}
-
-link to libchamp.so
-
-
-\section{libchompview.so}
-
-link to libchamp.so
-
-
 \section{libcirclepi.so}
 
-circlepi_ATKregistry_
-
-class circlepi
-
-circlepiview_ATKregistry_
-
-class circlepiview
+Following symbol should be private:
 
 T inside_circle(double, double)
 
-
-
-\section{libcirclepiview.so}
-
-link to libcirclepi.so
-
-
-\section{libclicklistV.so}
-
-link to libvalue.so
-
-
-\section{libclock.so}
-
-clock_ATKregistry_
-
-class clock
-
-clockview_ATKregistry_
-
-class clockview
-
-
-
-\section{libclockview.so}
-
-link to libclock.so
 
 
 \section{libcmuwm.so}
@@ -13794,16 +12733,6 @@ compile_ATKregistry_
 
 class compile
 
-
-
-\section{libcompress.so}
-
-link to libsrctext.so
-
-
-\section{libcompressv.so}
-
-link to libsrctext.so
 
 
 \section{libconsoleapp.so}
@@ -14085,31 +13014,6 @@ T SetupTics(consoleClass*, int, int, int, int, int, int, int, int)
 link to libconsoleapp.so
 
 
-\section{libcontrolV.so}
-
-link to libvalue.so
-
-
-\section{libcpptext.so}
-
-link to libsrctext.so
-
-
-\section{libcpptextview.so}
-
-link to libsrctext.so
-
-
-\section{libctext.so}
-
-link to libsrctext.so
-
-
-\section{libctextview.so}
-
-link to libsrctext.so
-
-
 \section{libdatacata.so}
 
 datacata_ATKregistry_
@@ -14142,26 +13046,6 @@ T dynsearch_SearchAgain(textview*)
 
 T dynsearch_SearchAgainOpposite(textview*)
 
-
-
-\section{libenode.so}
-
-link to libchamp.so
-
-
-\section{libenodeview.so}
-
-link to libchamp.so
-
-
-\section{libenterstrV.so}
-
-link to libvalue.so
-
-
-\section{libentertext.so}
-
-link to libvalue.so
 
 
 \section{libeq.so}
@@ -14263,11 +13147,6 @@ class eqparse
 link to libeq.so
 
 
-\section{libetextview.so}
-
-link to libvalue.so
-
-
 \section{libez2htmlapp.so}
 
 link to libhtmltext.so
@@ -14330,11 +13209,6 @@ link to libfad.so
 \section{libfbm.so}
 
 link to libimagev.so
-
-
-\section{libfcomp.so}
-
-link to libtypescript.so
 
 
 \section{libfigure.so}
@@ -14449,11 +13323,6 @@ class filter
 
 
 
-\section{libfourwayV.so}
-
-link to libvalue.so
-
-
 \section{libframe.so}
 
 frame_ATKregistry_
@@ -14493,11 +13362,6 @@ T frame_VisitFilePrompting(frame*, char const*, int, int)
 link to libness.so
 
 
-\section{libGetRecV.so}
-
-link to libvalue.so
-
-
 \section{libgnucompat.so}
 
 link to libnote.so
@@ -14510,27 +13374,12 @@ link to libgofig.so
 
 \section{libgofig.so}
 
-gofigapp_ATKregistry_
-
-class gofigapp
-
-gofig_ATKregistry_
-
-class gofig
-
-gofigview_ATKregistry_
-
-class gofigview
+All these should be private:
 
 T makegap(gflex*, int, int)
 
 class gflex
 
-
-
-\section{libgofigview.so}
-
-link to libgofig.so
 
 
 \section{libgsearch.so}
@@ -14539,23 +13388,6 @@ gsearch_ATKregistry_
 
 class gsearch
 
-
-
-\section{libgtext.so}
-
-gtext_ATKregistry_
-
-class gtext
-
-gtextv_ATKregistry_
-
-class gtextv
-
-
-
-\section{libgtextv.so}
-
-link to libgtext.so
 
 
 \section{libhelpapp.so}
@@ -14646,11 +13478,6 @@ link to libhtmltext.so
 link to libhtmltext.so
 
 
-\section{libhlptext.so}
-
-link to libsrctext.so
-
-
 \section{libhlptextview.so}
 
 link to libhelp.so
@@ -14681,20 +13508,9 @@ link to libhtmltext.so
 link to libhtmltext.so
 
 
-\section{libhtmlimagev.so}
-
-link to libhtmltext.so
-
-
 \section{libhtml.so}
 
-html_ATKregistry_
-
-class html
-
-htmlview_ATKregistry_
-
-class htmlview
+All these should be private:
 
 T lineBullet(html*, long*, long*, int*)
 
@@ -14746,95 +13562,13 @@ T htmlview_EditAttributes(htmlview*, long)
 
 \section{libhtmltext.so}
 
-attlist_ATKregistry_
-
-class attlist
-
-ez2htmlapp_ATKregistry_
-
-class ez2htmlapp
-
-hidden_ATKregistry_
-
-class hidden
-
-hiddenview_ATKregistry_
-
-class hiddenview
-
-hr_ATKregistry_
-
-class hr
-
-hrv_ATKregistry_
-
-class hrv
-
-htablev_ATKregistry_
-
-class htablev
-
-htmlenv_ATKregistry_
-
-class htmlenv
-
-htmlform_ATKregistry_
-
-class htmlform
-
-htmlimagev_ATKregistry_
-
-class htmlimagev
-
-htmltext_ATKregistry_
-
-class htmltext
-
-htmltextview_ATKregistry_
-
-class htmltextview
-
-urlbutton_ATKregistry_
-
-class urlbutton
-
-urlbuttonview_ATKregistry_
-
-class urlbuttonview
-
-wbuttonv_ATKregistry_
-
-class wbuttonv
+Following should be private:
 
 T webaccept
 
-webapp_ATKregistry_
-
-class webapp
-
-web_ATKregistry_
-
-class web
-
 T webclient
 
-webcom_ATKregistry_
-
-class webcom
-
-weblink_ATKregistry_
-
-class weblink
-
-weblinkview_ATKregistry_
-
-class weblinkview
-
 T weblisten
-
-webview_ATKregistry_
-
-class webview
 
 T NewFixupText(dataobject*)
 
@@ -14850,16 +13584,6 @@ class fieldlist
 
 
 
-\section{libhtmltextview.so}
-
-link to libhtmltext.so
-
-
-\section{libhtmlview.so}
-
-link to libhtml.so
-
-
 \section{libicon.so}
 
 link to libnote.so
@@ -14868,16 +13592,6 @@ link to libnote.so
 \section{libiconview.so}
 
 link to libnote.so
-
-
-\section{libidltext.so}
-
-link to libsrctext.so
-
-
-\section{libidltextview.so}
-
-link to libsrctext.so
 
 
 \section{libimagev.so}
@@ -15087,52 +13801,6 @@ link to libarbiter.so
 link to libarbiter.so
 
 
-\section{libltapp.so}
-
-link to liblt.so
-
-
-\section{libltext.so}
-
-link to libsrctext.so
-
-
-\section{libltextview.so}
-
-link to libsrctext.so
-
-
-\section{liblt.so}
-
-ltapp_ATKregistry_
-
-class ltapp
-
-lt_ATKregistry_
-
-class lt
-
-ltv_ATKregistry_
-
-class ltv
-
-
-
-\section{libltv.so}
-
-link to liblt.so
-
-
-\section{libm3text.so}
-
-link to libsrctext.so
-
-
-\section{libm3textview.so}
-
-link to libsrctext.so
-
-
 \section{libmac.so}
 
 link to libimagev.so
@@ -15143,24 +13811,9 @@ link to libimagev.so
 link to librofftext.so
 
 
-\section{libmbuttonv.so}
-
-link to libvalue.so
-
-
 \section{libmcidas.so}
 
 link to libimagev.so
-
-
-\section{libmenterstrV.so}
-
-link to libvalue.so
-
-
-\section{libmentertext.so}
-
-link to libvalue.so
 
 
 \section{libmetax.so}
@@ -15171,44 +13824,9 @@ class metax
 
 
 
-\section{libmetextview.so}
-
-link to libvalue.so
-
-
 \section{libmmtext.so}
 
 link to librofftext.so
-
-
-\section{libmodtext.so}
-
-link to libsrctext.so
-
-
-\section{libmodtextview.so}
-
-link to libsrctext.so
-
-
-\section{libmonth.so}
-
-link to libchamp.so
-
-
-\section{libmonthview.so}
-
-link to libchamp.so
-
-
-\section{libmtext.so}
-
-link to libsrctext.so
-
-
-\section{libmtextview.so}
-
-link to libsrctext.so
 
 
 \section{libnessmark.so}
@@ -15574,11 +14192,6 @@ link to libnote.so
 link to libraster.so
 
 
-\section{libonoffV.so}
-
-link to libvalue.so
-
-
 \section{liborgapp.so}
 
 link to liborg.so
@@ -15620,14 +14233,6 @@ link to libarbiter.so
 link to libraster.so
 
 
-\section{libparser.so}
-
-parser_ATKregistry_
-
-class parser
-
-
-
 \section{libpbm.so}
 
 link to libimagev.so
@@ -15666,34 +14271,14 @@ T setbl(spk_blk*, float)
 link to libimagev.so
 
 
-\section{libperltext.so}
-
-link to libsrctext.so
-
-
-\section{libperltextview.so}
-
-link to libsrctext.so
-
-
 \section{libphelpv.so}
 
 link to libprefs.so
 
 
-\section{libpianoV.so}
-
-link to libvalue.so
-
-
 \section{libpintv.so}
 
 link to libprefs.so
-
-
-\section{libpipescriptapp.so}
-
-link to libtypescript.so
 
 
 \section{libplink.so}
@@ -15833,16 +14418,6 @@ link to libnote.so
 \section{libpsview.so}
 
 link to libnote.so
-
-
-\section{libptext.so}
-
-link to libsrctext.so
-
-
-\section{libptextview.so}
-
-link to libsrctext.so
 
 
 \section{libpushbutton.so}
@@ -16057,32 +14632,12 @@ link to libraster.so
 link to libraster.so
 
 
-\section{librawtext.so}
-
-link to libsrctext.so
-
-
-\section{librawtextview.so}
-
-link to libsrctext.so
-
-
 \section{librecsearch.so}
 
 recsearch_ATKregistry_
 
 class recsearch
 
-
-
-\section{librexxtext.so}
-
-link to libsrctext.so
-
-
-\section{librexxtextview.so}
-
-link to libsrctext.so
 
 
 \section{librofftextapp.so}
@@ -16092,21 +14647,7 @@ link to librofftext.so
 
 \section{librofftext.so}
 
-mantext_ATKregistry_
-
-class mantext
-
-mmtext_ATKregistry_
-
-class mmtext
-
-rofftextapp_ATKregistry_
-
-class rofftextapp
-
-rofftext_ATKregistry_
-
-class rofftext
+Following should be private:
 
 T BeginStyle(rofftext*, char const*)
 
@@ -16281,23 +14822,6 @@ class num
 link to libarbiter.so
 
 
-\section{librunbutton.so}
-
-runbutton_ATKregistry_
-
-class runbutton
-
-runbuttonview_ATKregistry_
-
-class runbuttonview
-
-
-
-\section{librunbuttonview.so}
-
-link to librunbutton.soclass runbutton
-
-
 \section{libs.all}
 
 \begindata{link,11187424}
@@ -16318,42 +14842,6 @@ white
 \view{linkview,11187424,26363,0,0}
 
 
-\section{libschedapp.so}
-
-link to libsched.so
-
-
-\section{libsched.so}
-
-schedapp_ATKregistry_
-
-class schedapp
-
-sched_ATKregistry_
-
-class sched
-
-schedv_ATKregistry_
-
-class schedv
-
-
-
-\section{libschedv.so}
-
-link to libsched.so
-
-
-\section{libsliderstrV.so}
-
-link to libvalue.so
-
-
-\section{libsliderV.so}
-
-link to libvalue.so
-
-
 \section{libspell.so}
 
 spell_ATKregistry_
@@ -16362,128 +14850,9 @@ class spell
 
 
 
-\section{libspread.so}
-
-link to libtable.so
-
-
 \section{libsrctext.so}
 
-asmtext_ATKregistry_
-
-class asmtext
-
-asmtextview_ATKregistry_
-
-class asmtextview
-
-compress_ATKregistry_
-
-class compress
-
-compressv_ATKregistry_
-
-class compressv
-
-cpptext_ATKregistry_
-
-class cpptext
-
-cpptextview_ATKregistry_
-
-class cpptextview
-
-ctext_ATKregistry_
-
-class ctext
-
-ctextview_ATKregistry_
-
-class ctextview
-
-hlptext_ATKregistry_
-
-class hlptext
-
-idltext_ATKregistry_
-
-class idltext
-
-idltextview_ATKregistry_
-
-class idltextview
-
-ltext_ATKregistry_
-
-class ltext
-
-ltextview_ATKregistry_
-
-class ltextview
-
-m3text_ATKregistry_
-
-class m3text
-
-m3textview_ATKregistry_
-
-class m3textview
-
-modtext_ATKregistry_
-
-class modtext
-
-modtextview_ATKregistry_
-
-class modtextview
-
-mtext_ATKregistry_
-
-class mtext
-
-mtextview_ATKregistry_
-
-class mtextview
-
-perltext_ATKregistry_
-
-class perltext
-
-perltextview_ATKregistry_
-
-class perltextview
-
-ptext_ATKregistry_
-
-class ptext
-
-ptextview_ATKregistry_
-
-class ptextview
-
-rawtext_ATKregistry_
-
-class rawtext
-
-rawtextview_ATKregistry_
-
-class rawtextview
-
-rexxtext_ATKregistry_
-
-class rexxtext
-
-rexxtextview_ATKregistry_
-
-class rexxtextview
-
-srctext_ATKregistry_
-
-class srctext
-
-srctextview_ATKregistry_
-
-class srctextview
+The following should be private:
 
 T compressLines(textview*, char*)
 
@@ -16505,36 +14874,9 @@ T MakeSureNotOverstrikingView(rawtext*, long, long)
 
 
 
-\section{libsrctextview.so}
-
-link to libsrctext.so
-
-
 \section{libssliderv.so}
 
 link to libprefs.so
-
-
-\section{libstringV.so}
-
-link to libvalue.so
-
-
-\section{libstroffet.so}
-
-stroffet_ATKregistry_
-
-class stroffet
-
-stroffetview_ATKregistry_
-
-class stroffetview
-
-
-
-\section{libstroffetview.so}
-
-link to libstroffet.so
 
 
 \section{libsuitecv.so}
@@ -16634,85 +14976,7 @@ link to libimagev.so
 
 \section{libsupport.so}
 
-buffer_ATKregistry_
-
-class buffer
-
-bufferlist_ATKregistry_
-
-class bufferlist
-
-completion_ATKregistry_
-
-class completion
-
-dictionary_ATKregistry_
-
-class dictionary
-
-environment_ATKregistry_
-
-class environment
-
-except_ATKregistry_
-
-class except
-
-ghash_ATKregistry_
-
-class ghash
-
-glist_ATKregistry_
-
-class glist
-
-hash_ATKregistry_
-
-class hash
-
-list_ATKregistry_
-
-class list
-
-mark_ATKregistry_
-
-class mark
-
-nestedmark_ATKregistry_
-
-class nestedmark
-
-print_ATKregistry_
-
-class print
-
-rectlist_ATKregistry_
-
-class rectlist
-
-strcache_ATKregistry_
-
-class strcache
-
-style_ATKregistry_
-
-class style
-
-stylesheet_ATKregistry_
-
-class stylesheet
-
-stylesheetInternal_ATKregistry_
-
-class stylesheetInternal
-
-tree23int_ATKregistry_
-
-class tree23int
-
-viewref_ATKregistry_
-
-class viewref
+The following should be private:
 
 T printp_init()
 
@@ -16728,97 +14992,11 @@ class stylesheet_maplist
 
 \section{libsupviews.so}
 
-AmenuCard_ATKregistry_
-
-class AmenuCard
-
-AmenuCardv_ATKregistry_
-
-class AmenuCardv
-
-AmenuOption_ATKregistry_
-
-class AmenuOption
+The following should be private:
 
 AmenuOptionCardv_ATKregistry_
 
 class AmenuOptionCardv
-
-AmenuOptionv_ATKregistry_
-
-class AmenuOptionv
-
-bpair_ATKregistry_
-
-class bpair
-
-label_ATKregistry_
-
-class label
-
-labelview_ATKregistry_
-
-class labelview
-
-lpair_ATKregistry_
-
-class lpair
-
-lprruler_ATKregistry_
-
-class lprruler
-
-lprrulerview_ATKregistry_
-
-class lprrulerview
-
-matte_ATKregistry_
-
-class matte
-
-oscroll_ATKregistry_
-
-class oscroll
-
-palette_ATKregistry_
-
-class palette
-
-panner_ATKregistry_
-
-class panner
-
-popupwin_ATKregistry_
-
-class popupwin
-
-sbttnav_ATKregistry_
-
-class sbttnav
-
-sbutton_ATKregistry_
-
-class sbutton
-
-sbuttonv_ATKregistry_
-
-class sbuttonv
-
-scrollandpanner_ATKregistry_
-
-class scrollandpanner
-
-scroll_ATKregistry_
-
-class scroll
-
-stringtbl_ATKregistry_
-
-class stringtbl
-
-strtblview_ATKregistry_
-
-class strtblview
 
 T motif_DrawBorder(view*, long, long, long, long, graphic*, graphic*, graphic*, int)
 
@@ -16832,39 +15010,9 @@ T motif_scroll__Update(oscroll*)
 
 T normal_scroll__Update(oscroll*)
 
-class AmenuEntry
-
-class AmenuLabel
-
-class AmenuEntries
-
-class AmenuGraphic
-
 class popupwinfunc
 
-class ScrollRegion
-
-class AmenuAuxlabels
-
-class AmenuEntrylist
-
 class avalueflex_base [dup - OFLEX]
-
-class ScrollInterface
-
-class ScrollRegionDot
-
-class AmenuAuxlabels_base
-
-class AmenuEntrylist_base
-
-class ScrollRegionEndzone
-
-class ScrollRegionElevator
-
-class ScrollInterfaceClassic
-
-class AmenuSep
 
 class democlass
 
@@ -16872,13 +15020,7 @@ class democlass
 
 \section{libsym.so}
 
-sym_ATKregistry_
-
-class sym
-
-toksym_ATKregistry_
-
-class toksym
+The following should be private:
 
 T printdata(sym*)
 
@@ -16886,13 +15028,7 @@ T printdata(sym*)
 
 \section{libtable.so}
 
-spread_ATKregistry_
-
-class spread
-
-table_ATKregistry_
-
-class table
+The following should be private:
 
 T GetFormula(spread*, chunk*, char**)
 
@@ -17057,18 +15193,6 @@ T nextField(text*, long)
 
 
 
-\section{libtextaux.so}
-
-compchar_ATKregistry_
-
-class compchar
-
-contentv_ATKregistry_
-
-class contentv
-
-
-
 \section{libtextintv.so}
 
 link to libprefs.so
@@ -17076,37 +15200,7 @@ link to libprefs.so
 
 \section{libtextobjs.so}
 
-chlist_ATKregistry_
-
-class chlist
-
-chlistview_ATKregistry_
-
-class chlistview
-
-dired_ATKregistry_
-
-class dired
-
-diredview_ATKregistry_
-
-class diredview
-
-panel_ATKregistry_
-
-class panel
-
-printopts_ATKregistry_
-
-class printopts
-
-unknown_ATKregistry_
-
-class unknown
-
-unknownv_ATKregistry_
-
-class unknownv
+The following should be private:
 
 T LookupFile(dired*, char const*)
 
@@ -17118,97 +15212,7 @@ T LookupPos(dired*, long)
 
 \section{libtext.so}
 
-be1be2app_ATKregistry_
-
-class be1be2app
-
-be1be2_ATKregistry_
-
-class be1be2
-
-bp_ATKregistry_
-
-class bp
-
-bpv_ATKregistry_
-
-class bpv
-
-cltextview_ATKregistry_
-
-class cltextview
-
-content_ATKregistry_
-
-class content
-
-fnote_ATKregistry_
-
-class fnote
-
-fnotev_ATKregistry_
-
-class fnotev
-
-header_ATKregistry_
-
-class header
-
-headrtv_ATKregistry_
-
-class headrtv
-
-pcompch_ATKregistry_
-
-class pcompch
-
-readscr_ATKregistry_
-
-class readscr
-
-search_ATKregistry_
-
-class search
-
-simpletext_ATKregistry_
-
-class simpletext
-
-tabs_ATKregistry_
-
-class tabs
-
-text_ATKregistry_
-
-class text
-
-textref_ATKregistry_
-
-class textref
-
-textrefv_ATKregistry_
-
-class textrefv
-
-texttag_ATKregistry_
-
-class texttag
-
-texttagv_ATKregistry_
-
-class texttagv
-
-texttroff_ATKregistry_
-
-class texttroff
-
-textview_ATKregistry_
-
-class textview
-
-tindex_ATKregistry_
-
-class tindex
+The following should be private:
 
 T OutputName(char*)
 
@@ -17612,22 +15616,8 @@ T TimeofDay(textbuf*)
 
 class textps_layout
 
-class textps_layout_plan
-
 class textps_layout_history
 
-class textviewInterface
-
-
-
-\section{libthumbstrV.so}
-
-link to libvalue.so
-
-
-\section{libthumbV.so}
-
-link to libvalue.so
 
 
 \section{libtif.so}
@@ -17635,42 +15625,9 @@ link to libvalue.so
 link to libimagev.so
 
 
-\section{libtimeoday.so}
-
-timeoday_ATKregistry_
-
-class timeoday
-
-timeodayview_ATKregistry_
-
-class timeodayview
-
-writestamp_ATKregistry_
-
-class writestamp
-
-writestampview_ATKregistry_
-
-class writestampview
-
-
-
-\section{libtimeodayview.so}
-
-link to libtimeoday.so
-
-
 \section{libtitextv.so}
 
 link to libprefs.so
-
-
-\section{libtlex.so}
-
-tlex_ATKregistry_
-
-class tlex
-
 
 
 \section{libtoezapp.so}
@@ -17711,32 +15668,9 @@ T tree__SetNodeModified(tree*, tree_node*, char)
 link to libtree.so
 
 
-\section{libtypescriptapp.so}
-
-link to libtypescript.so
-
-
 \section{libtypescript.so}
 
-fcomp_ATKregistry_
-
-class fcomp
-
-pipescriptapp_ATKregistry_
-
-class pipescriptapp
-
-typescriptapp_ATKregistry_
-
-class typescriptapp
-
-typescript_ATKregistry_
-
-class typescript
-
-typetext_ATKregistry_
-
-class typetext
+The following should be private:
 
 T SaveCommand(typescript*)
 
@@ -17760,123 +15694,9 @@ T typescript_NoTextviewKey(typescript*, long)
 
 
 
-\section{libtypetext.so}
-
-link to libtypescript.so
-
-
-\section{libupdateq.so}
-
-link to libvalue.so
-
-
-\section{liburlbutton.so}
-
-link to libhtmltext.so
-
-
-\section{liburlbuttonview.so}
-
-link to libhtmltext.so
-
-
 \section{libvalue.so}
 
-bargraphV_ATKregistry_
-
-class bargraphV
-
-buttonV_ATKregistry_
-
-class buttonV
-
-checkv_ATKregistry_
-
-class checkv
-
-clicklistV_ATKregistry_
-
-class clicklistV
-
-controlV_ATKregistry_
-
-class controlV
-
-enterstrV_ATKregistry_
-
-class enterstrV
-
-entertext_ATKregistry_
-
-class entertext
-
-etextview_ATKregistry_
-
-class etextview
-
-fourwayV_ATKregistry_
-
-class fourwayV
-
-GetRecV_ATKregistry_
-
-class GetRecV
-
-mbuttonv_ATKregistry_
-
-class mbuttonv
-
-menterstrV_ATKregistry_
-
-class menterstrV
-
-mentertext_ATKregistry_
-
-class mentertext
-
-metextview_ATKregistry_
-
-class metextview
-
-onoffV_ATKregistry_
-
-class onoffV
-
-pianoV_ATKregistry_
-
-class pianoV
-
-sliderstrV_ATKregistry_
-
-class sliderstrV
-
-sliderV_ATKregistry_
-
-class sliderV
-
-stringV_ATKregistry_
-
-class stringV
-
-thumbstrV_ATKregistry_
-
-class thumbstrV
-
-thumbV_ATKregistry_
-
-class thumbV
-
-updateq_ATKregistry_
-
-class updateq
-
-value_ATKregistry_
-
-class value
-
-valueview_ATKregistry_
-
-class valueview
+The following should be private:
 
 T fourwaysort(buttonV_rl*, buttonV_rl*)
 
@@ -17902,11 +15722,6 @@ T locateHit(pianoV*, int, int)
 
 
 
-\section{libvalueview.so}
-
-link to libvalue.so
-
-
 \section{libvector.so}
 
 link to libsuite.so
@@ -17917,41 +15732,6 @@ link to libsuite.so
 link to libnote.so
 
 
-\section{libwbuttonv.so}
-
-link to libhtmltext.so
-
-
-\section{libwebapp.so}
-
-link to libhtmltext.so
-
-
-\section{libwebcom.so}
-
-link to libhtmltext.so
-
-
-\section{libweblink.so}
-
-link to libhtmltext.so
-
-
-\section{libweblinkview.so}
-
-link to libhtmltext.so
-
-
-\section{libweb.so}
-
-link to libhtmltext.so
-
-
-\section{libwebview.so}
-
-link to libhtmltext.so
-
-
 \section{libwincelview.so}
 
 link to libarbiter.so
@@ -17960,16 +15740,6 @@ link to libarbiter.so
 \section{libwrapv.so}
 
 link to libprefs.so
-
-
-\section{libwritestamp.so}
-
-link to libtimeoday.so
-
-
-\section{libwritestampv.so}
-
-link to libtimeoday.so
 
 
 \section{libxbitmap.so}
@@ -17997,111 +15767,13 @@ link to libraster.so
 link to libimagev.so
 
 
-\section{libzipedit.so}
-
-link to libzip.so
-
-
-\section{libzipoarc.so}
-
-link to libzip.so
-
-
-\section{libzipoarrow.so}
-
-link to libzip.so
-
-
-\section{libzipobject.so}
-
-link to libzip.so
-
-
-\section{libzipocapt.so}
-
-link to libzip.so
-
-
-\section{libzipocirc.so}
-
-link to libzip.so
-
-
-\section{libzipoelli.so}
-
-link to libzip.so
-
-
-\section{libzipofcapt.so}
-
-link to libzip.so
-
-
-\section{libzipoimbed.so}
-
-link to libzip.so
-
-
-\section{libzipoline.so}
-
-link to libzip.so
-
-
-\section{libzipopath.so}
-
-link to libzip.so
-
-
-\section{libzipoplin.so}
-
-link to libzip.so
-
-
-\section{libzipopolygon.so}
-
-link to libzip.so
-
-
-\section{libziporang.so}
-
-link to libzip.so
-
-
-\section{libziporect.so}
-
-link to libzip.so
-
-
-\section{libziposymbol.so}
-
-link to libzip.so
-
-
-\section{libzipotrap.so}
-
-link to libzip.so
-
-
-\section{libzipprint.so}
-
-link to libzip.so
-
-
 \section{libzip.so}
 
-T symtab_add(symtab_type*, unsigned char*, user_data*)
-
-T symtab_find(symtab_type*, unsigned char*, user_data**)
+All these (and maybe a few more) should be private:
 
 T Delete_Stream(zipedit*, zip_stream*, zip_pane*)
 
-T symtab_create(symtab_type**, int)
-
-T symtab_delete(symtab_type*, unsigned char*)
-
 T Show_Enclosure(zipedit*, zip_pane*)
-
-T symtab_destroy(symtab_type*)
 
 T Undelete_Stream(zipedit*, zip_stream*, zip_pane*)
 
@@ -18197,20 +15869,6 @@ T zipedit_Prepare_Editing_Control(zipedit*, zip_pane*)
 
 T zipedit_Reset_Editing_Selection(zipedit*, zip_pane*)
 
-T zipedit_Handle_Shade_Palette_Hit(zipedit*, zip_pane*, view_MouseAction, long, long, long)
-
-T zipedit_Handle_Figure_Palette_Hit(zipedit*, zip_pane*, view_MouseAction, int, int, int)
-
-T zipedit_Handle_Font_Bold_Selection(zipedit*, zip_pane*, view_MouseAction, long, long, long)
-
-T zipedit_Handle_Font_Family_Selection(zipedit*, zip_pane*, view_MouseAction, long, long, long)
-
-T zipedit_Handle_Font_Height_Selection(zipedit*, zip_pane*, view_MouseAction, long, long, long)
-
-T zipedit_Handle_Font_Italic_Selection(zipedit*, zip_pane*, view_MouseAction, long, long, long)
-
-T zipedit_Handle_Font_Sample_Selection(zipedit*, zip_pane*, view_MouseAction, long, long, long)
-
 T zipview_Compute_Pane_Stretch_Factors(zipview*, zip_pane*)
 
 T zipprint_Write_Print_Datastream_Header(zipprint*)
@@ -18220,380 +15878,6 @@ T zipprint_Write_Print_Datastream_Trailer(zipprint*)
 T palloc(pool_type*, unsigned int)
 
 T strhash(char*, unsigned int)
-
-zip_ATKregistry_
-
-class zip
-
-zipedit_ATKregistry_
-
-class zipedit
-
-zipoarc_ATKregistry_
-
-class zipoarc
-
-zipoarrow_ATKregistry_
-
-class zipoarrow
-
-zipobject_ATKregistry_
-
-class zipobject
-
-zipocapt_ATKregistry_
-
-class zipocapt
-
-zipocirc_ATKregistry_
-
-class zipocirc
-
-zipoelli_ATKregistry_
-
-class zipoelli
-
-zipofcapt_ATKregistry_
-
-class zipofcapt
-
-zipoimbed_ATKregistry_
-
-class zipoimbed
-
-zipoline_ATKregistry_
-
-class zipoline
-
-zipopath_ATKregistry_
-
-class zipopath
-
-zipoplin_ATKregistry_
-
-class zipoplin
-
-zipopolygon_ATKregistry_
-
-class zipopolygon
-
-ziporang_ATKregistry_
-
-class ziporang
-
-ziporect_ATKregistry_
-
-class ziporect
-
-ziposymbol_ATKregistry_
-
-class ziposymbol
-
-zipotrap_ATKregistry_
-
-class zipotrap
-
-zipprint_ATKregistry_
-
-class zipprint
-
-zipstatus_ATKregistry_
-
-class zipstatus
-
-zipview_ATKregistry_
-
-class zipview
-
-
-
-\section{libzipstatus.so}
-
-link to libzip.so
-
-
-\section{libzipview.so}
-
-link to libzip.so
-
-
-\section{link.lt}
-
-
-
-\section{link.rf}
-
-
-
-\section{lookz.lt}
-
-
-
-\section{lookz.rf}
-
-
-
-\section{lt.lt}
-
-
-
-\section{lt.rf}
-
-
-
-\section{metax.lt}
-
-
-
-\section{metax.rf}
-
-
-
-\section{ness.lt}
-
-
-
-\section{ness.rf}
-
-
-
-\section{note.lt}
-
-
-
-\section{note.rf}
-
-
-
-\section{org.lt}
-
-
-
-\section{org.rf}
-
-
-
-\section{parser.lt}
-
-
-
-\section{parser.rf}
-
-
-
-\section{pcontrol.lt}
-
-
-
-\section{pcontrol.rf}
-
-
-
-\section{prefs.lt}
-
-
-
-\section{prefs.rf}
-
-
-
-\section{preview.lt}
-
-
-
-\section{preview.rf}
-
-
-
-\section{raster.lt}
-
-
-
-\section{raster.rf}
-
-
-
-\section{recsearch.lt}
-
-
-
-\section{recsearch.rf}
-
-
-
-\section{rofftext.lt}
-
-
-
-\section{rofftext.rf}
-
-
-
-\section{runbutton.lt}
-
-
-
-\section{runbutton.rf}
-
-
-
-\section{sched.lt}
-
-
-
-\section{sched.rf}
-
-
-
-\section{spell.lt}
-
-
-
-\section{spell.rf}
-
-
-
-\section{srctext.lt}
-
-
-
-\section{srctext.rf}
-
-
-
-\section{stroffet.lt}
-
-
-
-\section{stroffet.rf}
-
-
-
-\section{suite.lt}
-
-
-
-\section{suite.rf}
-
-
-
-\section{support.lt}
-
-
-
-\section{support.rf}
-
-
-
-\section{supviews.lt}
-
-
-
-\section{supviews.rf}
-
-
-
-\section{sym.lt}
-
-
-
-\section{sym.rf}
-
-
-
-\section{table.lt}
-
-
-
-\section{table.rf}
-
-
-
-\section{tags.lt}
-
-
-
-\section{tags.rf}
-
-
-
-\section{textaux.lt}
-
-
-
-\section{textaux.rf}
-
-
-
-\section{text.lt}
-
-
-
-\section{textobjs.lt}
-
-
-
-\section{textobjs.rf}
-
-
-
-\section{text.rf}
-
-
-
-\section{timeoday.lt}
-
-
-
-\section{timeoday.rf}
-
-
-
-\section{tlex.lt}
-
-
-
-\section{tlex.rf}
-
-
-
-\section{toezapp.lt}
-
-
-
-\section{toezapp.rf}
-
-
-
-\section{tree.lt}
-
-
-
-\section{tree.rf}
-
-
-
-\section{typescript.lt}
-
-
-
-\section{typescript.rf}
-
-
-
-\section{value.lt}
-
-
-
-\section{value.rf}
-
-
-
-\section{zip.lt}
-
-
-
-\section{zip.rf}
 
 \begindata{bp,14290720}
 Version 2
@@ -18947,19 +16231,10 @@ x11r4.o T X11text  private x11r4.h
 \section{librecog.a}
 
 Symbols defined in gestures/matrix.h, gestures/sc.h, 
-gestures/zdebug.h.  [note: still in progress]
+gestures/fv.h, gestures/zdebug.h.
+Remainder should be private (currently in proto.h private header).
 
 fv.o D dist_sq_threshold
-
-fv.o T FvAddPoint
-
-fv.o T FvAlloc
-
-fv.o T FvCalc
-
-fv.o T FvFree
-
-fv.o T FvInit
 
 fv.o T invcos2
 
@@ -18982,26 +16257,6 @@ matrix.o T OutputMatrix
 matrix.o T OutputVector
 
 matrix.o T ScalarTimesMatrix
-
-bitvector.o T AssignBitVector
-
-bitvector.o T bitcount
-
-bitvector.o T BitVectorAnd
-
-bitvector.o T BitVectorDeQ
-
-bitvector.o T BitVectorNoBitsSet
-
-bitvector.o T BitVectorOr
-
-bitvector.o T BitVectorToString
-
-bitvector.o T ClearBitVector
-
-bitvector.o T SetBitVector
-
-bitvector.o T StringToBitVector
 
 \begindata{bp,13994048}
 Version 2

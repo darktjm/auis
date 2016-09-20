@@ -2,6 +2,8 @@
 #define _POPUPWIN_H_
 ATK_INTER
 /* Copyright 1995 Carnegie Mellon University All rights reserved. */
+/** \addtogroup libsupviews
+ * @{ */
 #include <view.H>
 #include <keystate.H>
 
@@ -32,5 +34,5 @@ class popupwin : public view {
     keystate *lks;
     view *v;
 };
-
+/** @} */
 #endif

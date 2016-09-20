@@ -5,7 +5,8 @@ BEGINCPLUSPLUSPROTOS
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup liberrors liberrors.a
+/** \addtogroup liberrors liberrors
+ * Library for printing consistent error messages.
  * @{ */
  
 
@@ -65,7 +66,6 @@ BEGINCPLUSPLUSPROTOS
 #define ERR_WARNING 4
 #define ERR_MONITOR 6
 #define ERR_DEBUG 9
-#include <stdarg.h>
 int PRINTF_LIKE(2,3) safefprintf(FILE *fp, const char *control, ...);
 int PRINTF_LIKE(5,6) errprintf(const char *application, int type, const char *log, const char *id, const char *format, ...);
 int errprintv(const char *application, int type, const char *log, const char *id, const char *format, va_list ap);

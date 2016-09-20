@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 #define MAXCHAR 127
 #define BADCHAR MAXCHAR+1
 
@@ -37,5 +39,5 @@ public:
     static char * CharacterToTroff( char ch, class environment *env,  class textview *tv)  ;
     static  char * StringToTroff( char *str,char *buf, long bufsize, class environment *env,class textview *tv)  ;
 };
-
+/** @} */
 #endif /* _pcompch_H_ */

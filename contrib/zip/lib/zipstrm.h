@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libzip
+ * @{ */
 /* zipefs00.h	Zip Subroutine Library Stream Objects Header		      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -282,5 +284,5 @@ struct zip_stream_chain
   zip_type_stream_chain				  zip_stream_chain_next;
   zip_type_stream				  zip_stream_chain_ptr;
   };
-
+/** @} */
 #endif /* _zipstrm_h_ */

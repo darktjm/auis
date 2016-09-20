@@ -6,6 +6,13 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupviews libsupviews.so
+ *  A statically loadable ATK class file.  Contains bpair, label, labelview,
+ *  lpair, lprruler, lprrulerview, matte, oscroll, palette, panner, sbttnav,
+ *  sbutton, sbuttonv, scroll, scrollandpanner, stringtbl, strtblview,
+ *  AmenuCard, AmenuCardv, AmenuOption, AmenuOptionv, AmenuOptionCardv,
+ *  popupwin.
+ * @{ */
 /*
 bpair.H
 
@@ -35,5 +42,5 @@ public:
 	virtual ~bpair();
 
 };
-
+/** @} */
 #endif /* _bpair_H_ */

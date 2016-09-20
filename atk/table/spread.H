@@ -6,7 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/* spread.ch - table view definition and interface */
+/** \addtogroup libtable
+ * @{ */
+/* spread.H - table view definition and interface */
 #define spread_VERSION 1
 
 /* internal dimensions */
@@ -140,8 +142,8 @@ class spread: public  view {
       struct rectangle crect;
       boolean sizescached;
 };
-
-/* end of spread.ch */
+/** @} */
+/* end of spread.H */
 
 
 #endif /* _spread_H_ */

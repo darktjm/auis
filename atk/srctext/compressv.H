@@ -1,5 +1,7 @@
 #ifndef _compressv_H_
 #define _compressv_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File compressv.ch created by R S Kemmetmueller
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -30,5 +32,5 @@ class compressv: public view {
     class text *parenttext;
     class textview *parentview;
 };
-
+/** @} */
 #endif /* _compressv_H_ */

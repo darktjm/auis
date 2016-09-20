@@ -7,7 +7,8 @@
 /* #include <time.h> */
 #include <fontdesc.H>
 #include <event.H>
-
+/** \addtogroup libtimeoday
+ * @{ */
 #include <timeoday.H>
 class writestamp: public  timeoday {
 public:
@@ -27,6 +28,5 @@ public:
        long ReadDataPart(FILE *fp)  ;
        void UpdateTime();
 };
-
-
+/** @} */
 #endif /* _writestamp_H_ */

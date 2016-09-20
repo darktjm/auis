@@ -1,6 +1,8 @@
 ATK_INTER
 #ifndef _mbuttonv_H_
 #define _mbuttonv_H_
+/** \addtogroup libvalue
+ * @{ */
 #include <buttonV.H>
 class mbuttonv: public buttonV {
 public:
@@ -15,5 +17,5 @@ public:
 	static boolean InitializeClass();
 
 };
-
+/** @} */
 #endif /* _mbuttonv_H_ */

@@ -1,7 +1,8 @@
 ATK_INTER
 #ifndef _htmlform_H_
 #define _htmlform_H_
-
+/** \addtogroup libhtmltext
+ * @{ */
 /* 
     htmlform.H - an object for managing a form in an html file 
 
@@ -111,5 +112,5 @@ class htmlform: public ATK {
         htmltext *containingtext;
         attlist *atts;
 };
-
+/** @} */
 #endif /* _htmlform_H_ */

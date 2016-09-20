@@ -1,14 +1,23 @@
 #!/bin/sh
 # add every file to a group to force all symbols to be "documented"
 # add a \file directive to every file to force all files into PDF
-# strip out gcc attributes (doxygen doesn't understand them)
+# add old tiff and jpeg crap to a mostly ignored group
+# strip out gcc attributes (not defined unless proper headers included)
 hasgr=
 fgrep -i '\addtogroup' "$1" >/dev/null && hasgr=y
 h="${1##*include/}"
-g=`echo ${h%.[hH]} | tr /.- ___`
-test -n "$hasgr" || echo "/** \\addtogroup $g $h
-* @{ */"
-echo "/** \\file $h */"
+case "$h" in
+   tiff*)    echo "/** \\addtogroup tiff libtiff
+ *  The standard TIFF library (very old; obsolete, but used by ATK).  Do not use for new projects.
+ * @{ */" ;;
+  j*)    echo "/** \\addtogroup jpeg libjpeg
+ *  The standard jpeg library (very old; obsolete, but used by ATK).  Do not use for new projects.
+ * @{ */" ;;
+ *) g=`echo ${h%.[hH]} | tr /.- ___`
+    test -n "$hasgr" || echo "/** \\addtogroup $g $h
+ * @{ */"
+ echo "/** \\file $h */" ;;
+esac
 sed -e '/#define/!{
     s/PRINTF_LIKE([^)]*)//g
     s/SCANF_LIKE([^)]*)//g

@@ -4,7 +4,8 @@
  *         Copyright IBM Corporation 1991 - All Rights Reserved           *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libclock
+ * @{ */
 #include <stdio.h>
 #include <clock.H>
 #include <menulist.H>
@@ -40,5 +41,5 @@ public:
   long last_options_timestamp;
 };
 
-
+/** @} */
 #endif /* _clockview_H_ */

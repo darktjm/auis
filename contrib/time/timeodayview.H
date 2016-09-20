@@ -8,7 +8,8 @@
 #include <stdio.h>
 #include <menulist.H>
 #include <cursor.H>
-
+/** \addtogroup libtimeoday
+ * @{ */
 #include <view.H>
 class timeodayview: public  view {
 public:
@@ -41,5 +42,5 @@ public:
   long last_width, last_height;
 };
 
-
+/** @} */
 #endif /* _timeodayview_H_ */

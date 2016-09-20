@@ -5,7 +5,8 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1989 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libvalue
+ * @{ */
 #include <dataobject.H>
 #include <view.H>
 typedef void (*updateq_fptr)(class view *);
@@ -30,6 +31,5 @@ public:
  class view * view;
  struct fp_queue * queue;
 };
-
-
+/** @} */
 #endif /* _updateq_H_ */

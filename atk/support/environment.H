@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 #define environment_VERSION 1
 
 union environmentcontents {
@@ -52,5 +54,5 @@ public:
     enum environmenttype type;
     union environmentcontents data;
 };
-
+/** @} */
 #endif /* _environment_H_ */

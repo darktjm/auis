@@ -5,7 +5,8 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libtext
+ * @{ */
 #include <fnotev.H>
 
 class textrefv: public  fnotev {
@@ -25,6 +26,5 @@ public:
     char *cref;
     long loc;
 };
-
-
+/** @} */
 #endif /* _textrefv_H_ */

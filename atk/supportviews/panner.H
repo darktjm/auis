@@ -7,6 +7,8 @@ ATK_INTER
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
 
+/** \addtogroup libsupviews
+ * @{ */
 
 #include <rect.h>
 
@@ -51,5 +53,5 @@ public:
       long rockx, rocky, isatx, isaty;
       class cursor *cursors[panner_NumberOfCursors];
 };
-
+/** @} */
 #endif /* _panner_H_ */

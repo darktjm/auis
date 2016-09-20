@@ -5,7 +5,8 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libtextobjs
+ * @{ */
 /*
  * Return status values for StartNewDir
  */
@@ -39,5 +40,5 @@ public:
     class keystate *keystate;
     class menulist *menulist;
 };
-
+/** #} */
 #endif /* _diredview_H_ */

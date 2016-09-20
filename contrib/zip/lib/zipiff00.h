@@ -4,7 +4,8 @@
  *         Copyright IBM Corporation 1988,1989 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libzip
+ * @{ */
 /* zipiff00.h	Zip Figure Visual Manipulator -- Header File			      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -110,5 +111,5 @@ END-SPECIFICATION  ************************************************************/
 #define  HighlightPoints \
 	    (pane->zip_pane_state.zip_pane_state_points_highlighted  || \
 	     figure->zip_figure_state.zip_figure_state_points_highlighted)
-
+/** @} */
 #endif /* _zipiff00_h_ */

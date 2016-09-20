@@ -4,7 +4,8 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libzip
+ * @{ */
 /* zipedit.h	Internal Macros						      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -207,5 +208,5 @@ extern int zipedit_Handle_Font_Bold_Selection( class zipedit *self, zip_type_pan
 extern int zipedit_Handle_Font_Sample_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , long x , long y , long clicks );
 extern int zipedit_Handle_Figure_Palette_Hit( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , int x , int  y , int clicks );
 extern int zipedit_Handle_Shade_Palette_Hit( class zipedit *self, zip_type_pane pane, enum view_MouseAction  action , long x , long y , long clicks );
-
+/** @} */
 #endif /* _zipedit_h_ */

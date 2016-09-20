@@ -3,6 +3,8 @@
 /* File attlist.H created by Ward Nelson
    (c) Copyright IBM Corp 1995.  All rights reserved.  */
 
+/** \addtogroup libhtmltext
+ * @{ */
 struct htmlatts {
     const char *name;
     const char *value;
@@ -45,5 +47,5 @@ class attlist : public list {
 
 /* cistrcmp is a case-insensitive strcmp, used mainly to match up attribute names (which are not case-sensitive) */
 #define cistrcmp strcasecmp
-
+/** @} */
 #endif /* _attlist_H_ */

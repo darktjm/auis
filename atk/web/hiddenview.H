@@ -1,5 +1,7 @@
 #ifndef _hiddenview_H_
 #define _hiddenview_H_
+/** \addtogroup libhtmltext
+ * @{ */
 /* File hiddenview.H created by Ward Nelson
       (c) Copyright IBM Corp 1995.  All rights reserved. 
 
@@ -31,5 +33,5 @@ class hiddenview : public textview {
     static keymap *hid_Map;
     static menulist *hid_Menus;
 };
-
+/** @} */
 #endif /* _hiddenview_H_ */

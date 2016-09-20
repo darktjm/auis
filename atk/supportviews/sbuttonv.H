@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupviews
+ * @{ */
 /*
   Trigger:  "buttonpushed"
      called when the user lets up on the pushbutton over the pushbutton.
@@ -122,6 +124,5 @@ public:
     long drawcount;
     boolean drawmatte;
 };
-
-
+/** @} */
 #endif /* _sbuttonv_H_ */

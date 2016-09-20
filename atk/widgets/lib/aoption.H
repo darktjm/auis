@@ -1,7 +1,8 @@
 #ifndef _AOPTION_H_
 #define _AOPTION_H_
 /* Copyright 1996 Carnegie Mellon University All rights reserved. */
-
+/** \addtogroup libAButton
+ * @{ */
 #include <abutton.H>
 #include <alist.H>
 #include <text.H>
@@ -66,4 +67,5 @@ class AOptionMenu : public  AButton {
         return selected;
     }
 };
+/** @} */
 #endif

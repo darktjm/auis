@@ -5,8 +5,7 @@
 
 OBJS = mantext.o mmtext.o roffchrs.o roffcmds.o roffstyl.o rofftext.o \
 	rofftextapp.o roffutil.o num.o
-HFILES = mantext.H mmtext.H rofftext.H rofftextapp.H roffcmds.h roffstyl.h \
-	rofftext.h roffutil.h
+HFILES = mantext.H mmtext.H rofftext.H rofftextapp.H
 
 
 NormalObjectRule()

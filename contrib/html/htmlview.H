@@ -23,7 +23,8 @@
  * ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE 
  * OF THIS SOFTWARE.
  */
-
+/** \addtogroup libhtml
+ * @{ */
 
 #include <textview.H>
 class htmlview : public  textview {
@@ -49,5 +50,5 @@ public:
     class menulist* menus;
     class environment* styleInQuestion; /* When editing styles, this is the selected env */
 };
-
+/** @} */
 #endif /* _htmlview_H_ */

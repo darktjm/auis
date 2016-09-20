@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtypescript
+ * @{ */
 #include <application.H>
 class typescriptapp : public  application {
 public:
@@ -30,6 +32,5 @@ public:
     const char *font ;
     const char **argv;
  };
-
-
+/** @} */
 #endif /* _typescriptapp_H_ */

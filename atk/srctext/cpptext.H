@@ -1,5 +1,7 @@
 #ifndef _cpptext_H_
 #define _cpptext_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File cpptext.H created by R L Quinn
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -36,5 +38,5 @@ class cpptext: public ctext {
     boolean inClassDef;
     int acsctrlOutdent;
 };
-
+/** @} */
 #endif /* _cpptext_H_ */

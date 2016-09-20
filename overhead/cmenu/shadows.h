@@ -1,5 +1,6 @@
 /* Copyright 1992 Carnegie Mellon University All rights reserved. */
-/** \addtogroup libshadows libshadows.a
+/** \addtogroup libshadows libshadows
+ * Support library for adding 3D shading to graphics.
  * @{ */
 
 #include <atkproto.h>

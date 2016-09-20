@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtypescript
+ * @{ */
 #include <application.H>
 class pipescriptapp : public application {
 public:
@@ -26,6 +28,5 @@ public:
     const char *font ;
     char **argv;
 };
-
-
+/** @} */
 #endif /* _pipescriptapp_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupviews
+ * @{ */
 /*
 label.H
 
@@ -88,6 +90,5 @@ public:
 	int flags;		/* justification and whether boxed, as per above */
 	class fontdesc *font;	/* the font */
 };
-
-
+/** @} */
 #endif /* _label_H_ */

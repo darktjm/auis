@@ -1,5 +1,7 @@
 #ifndef _urlbuttonview_H_
 #define _urlbuttonview_H_
+/** \addtogroup libhtmltext
+ * @{ */
 /*
  * urlbtnv -- urlbuttonview
  *
@@ -44,5 +46,5 @@ class urlbuttonview : public sbuttonv {
     static menulist *s_ml;
     static keymap *s_km;
 };
-
+/** @} */
 #endif /* _urlbuttonview_H_ */

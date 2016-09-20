@@ -5,7 +5,13 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1989 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libvalue libvalue.so
+ *  A dynamically loadable ATK class file.  Contains value, valueview,
+ *  GetRecV, bargraphV, buttonV, checkv, clicklistV, controlV, enterstrV,
+ *  entertext, etextview, fourwayV, mbuttonv, menterstrV, mentertext,
+ *  metextview, onoffV, pianoV, sliderV, sliderstrV, stringV, thumbV,
+ *  thumbstrV, updateq.
+ * @{ */
 #define value_ROCK1 1
 #define value_ROCK2 2 
 #define value_STRING 3
@@ -83,5 +89,5 @@ public:
   the call back is invoked
   callBack( self, observed, observed rock, observers rock );
 */
-
+/** @} */
 #endif /* _value_H_ */

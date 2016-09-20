@@ -4,11 +4,13 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libchamp
+ * @{ */
 #include <dataobject.H>
 class chomp: public  dataobject {
 public:
 	virtual ATKregistryEntry *ATKregistry();
 
 };
-
+/** @} */
 #endif /* _chomp_H_ */

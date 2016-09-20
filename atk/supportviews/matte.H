@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupviews
+ * @{ */
 #include <view.H>
 
 class matte : public  view {
@@ -68,5 +70,5 @@ public:
     int drawing, OldMode, sizepending;
     boolean childhasfocus;
 };
-
+/** @} */
 #endif /* _matte_H_ */

@@ -1,7 +1,8 @@
 #ifndef _ALIST_H_
 #define _ALIST_H_
 /* Copyright 1996 Carnegie Mellon University All rights reserved. */
-
+/** \addtogroup libAButton
+ * @{ */
 #include <atext.H>
 #include <mflex.H>
 
@@ -134,5 +135,5 @@ class AList :public AText {
         return (AListSelectedItem *)(void *)selectedItems;
     }
 };
-
+/** @} */
 #endif /* _ALIST_H_ */

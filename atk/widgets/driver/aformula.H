@@ -3,6 +3,8 @@
 /* Copyright 1996 Carnegie Mellon University All rights reserved. */
 ATK_INTER
 
+/** \addtogroup libawidget
+ * @{ */
 union avalue_u;
 class ASlot;
 #include <ATK.H>
@@ -254,5 +256,5 @@ class AFormulaSlot : public AFormula {
     virtual void Evaluate();
     virtual void WantUpdate(ADependerKey key=0);
 };
-
+/** @} */
 #endif

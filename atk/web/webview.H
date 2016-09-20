@@ -2,7 +2,8 @@
 #ifndef _webview_H_
 #define _webview_H_
 ATK_INTER
-
+/** \addtogroup libhtmltext
+ * @{ */
 #include <htmltextview.H>
 class webview: public htmltextview {
 public:
@@ -37,5 +38,5 @@ public:
                              a remote controller (as with hotlists) */
         view *mouseFocus;
 };
-
+/** @} */
 #endif /* _webview_H_ */

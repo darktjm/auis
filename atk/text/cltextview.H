@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 #define cltextview_PREPROCESS 0
 #define cltextview_POSTPROCESS 1
 
@@ -43,5 +45,5 @@ struct cltextview_observer
   cltextview_hitfptr callBack;
   long rock;
 };
-
+/** @} */
 #endif /* _cltextview_H_ */

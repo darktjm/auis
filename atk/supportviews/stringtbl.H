@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupviews
+ * @{ */
 /*
 stringtbl.H
 
@@ -116,6 +118,5 @@ public:
 	short accmap[32];	/* the accession number for each entry */
 	boolean ContainsInitialStrings;	/* TRUE until client first changes table */
 };
-
-
+/** @} */
 #endif /* _stringtbl_H_ */

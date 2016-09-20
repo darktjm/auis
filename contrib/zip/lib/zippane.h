@@ -4,7 +4,8 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libzip
+ * @{ */
 /* zipefp00.h	Zip Subroutine Library Pane Objects Header		      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -232,5 +233,5 @@ struct ZIP_edit_client_data
   char				  foreground_panning;
   char				  foreground_pinning;
   };
-
+/** @} */
 #endif /* _zippane_h */

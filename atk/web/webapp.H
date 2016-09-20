@@ -2,7 +2,8 @@
 #ifndef _webapp_H_
 #define _webapp_H_
 ATK_INTER
-
+/** \addtogroup libhtmltext
+ * @{ */
 
 #include <mflex.H>
 
@@ -36,5 +37,5 @@ public:
 	class wbuttonv *bv;
 	class lpair *lpMain;
 };
-
+/** @} */
 #endif /* _webapp_H_ */

@@ -3,7 +3,8 @@
 #ifndef _wbuttonv_H_
 #define _wbuttonv_H_
 ATK_INTER
-
+/** \addtogroup libhtmltext
+ * @{ */
 #include <buttonV.H>
 class wbuttonv: public buttonV{
 public:
@@ -20,5 +21,5 @@ public:
 	char *wlabel;
 	int needinit;
 };
-
+/** @} */
 #endif /* _wbuttonv_H_ */

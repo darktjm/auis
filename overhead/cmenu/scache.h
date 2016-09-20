@@ -6,7 +6,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libcmenu libcmenu.a
+/** \addtogroup libcmenu
  * @{ */
 
 struct scache_el {

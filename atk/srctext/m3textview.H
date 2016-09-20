@@ -1,5 +1,7 @@
 #ifndef _m3textview_H_
 #define _m3textview_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File m3textview.H created by R L Quinn
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -20,5 +22,5 @@ class m3textview: public modtextview {
     class keystate *m3_state;
     class menulist *m3_menus;    
 };
-
+/** @} */
 #endif /* _m3textview_H_ */

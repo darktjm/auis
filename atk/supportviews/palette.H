@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupviews
+ * @{ */
 enum palette_location {palette_LEFT = 0, palette_TOP = 1, palette_RIGHT = 2, palette_BOTTOM = 3};
 
 enum palette_autoselect {palette_NONE = 0, palette_TOGGLE = 1, palette_FOLLOWMOUSE = 2, palette_EXCLUSIVE = 3};
@@ -99,5 +101,5 @@ inline void palette::SetRock(struct palette_item *item, long newrock) { ((item)-
 inline boolean palette::GetAutoSelect(struct palette_item *item) { return ((item)->autoselect); }
 inline void palette::SetAutoSelect(struct palette_item *item, enum palette_autoselect sel) { ((item)->autoselect = (sel)); }
 inline boolean palette::Selected(struct palette_item *item) { return ((item)->selected); }
-
+/** @} */
 #endif /* _palette_H_ */

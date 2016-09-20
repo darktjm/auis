@@ -1,6 +1,9 @@
 #ifndef ANSITEXT_H
 #define ANSITEXT_H
 
+/** \addtogroup libutil
+ * @{ */
+
 #define ansitext_BaseFactor		(2.0)
 #define ansitext_AscenderFactor		(1.0)
 #define ansitext_DescenderFactor	(1.0)
@@ -17,5 +20,7 @@
 	((((spacing) / 4.0) - (1.0 / 6.0)) * (fontsize))
 
 #define ansitext_SlantFontSlope		(2.5)
+
+/** @} */
 
 #endif

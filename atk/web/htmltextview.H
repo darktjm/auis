@@ -1,5 +1,7 @@
 #ifndef _htmltextview_H_
 #define _htmltextview_H_
+/** \addtogroup libhtmltext
+ * @{ */
 /* File htmltextv.H created by Ward Nelson
        (c) Copyright IBM Corp 1995.  All rights reserved. 
 
@@ -32,5 +34,5 @@ class htmltextview: public textview {
     class menulist *html_menus;
     boolean DisplayingHref;
 };
-
+/** @} */
 #endif /* _htmltextview_H_ */

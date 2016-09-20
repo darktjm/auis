@@ -2,7 +2,8 @@
 #ifndef _weblink_H_
 #define _weblink_H_
 ATK_INTER
-
+/** \addtogroup libhtmltext
+ * @{ */
 class text;
 
 #include <link.H>
@@ -21,5 +22,5 @@ public:
 	static void warpToURLinText(class text *ptext, 
 		long pos, long len, class view *v) ;
 };
-
+/** @} */
 #endif /* _weblink_H_ */

@@ -3,6 +3,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 #ifndef TEXTSTATEVECTOR_DEFINED
 #define TEXTSTATEVECTOR_DEFINED
 
@@ -34,6 +36,5 @@ struct text_statevector {
     char *CurColor; /* Color for  text */
     char *CurBGColor;
 };
-
-
+/* @} */
 #endif /* TEXTSTATEVECTOR_DEFINED */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 #define nestedmark_VERSION 1
 
 /* FreeTree: recursively frees the tree starting at self.
@@ -67,5 +69,5 @@ public:
 };
 
 #define nestedmark_UNRELATED -999999999
-
+/** @} */
 #endif /* _nestedmark_H_ */

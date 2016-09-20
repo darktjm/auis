@@ -1,5 +1,7 @@
 #ifndef _rexxtextview_H_
 #define _rexxtextview_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File rexxtextview.H created by R S Kemmetmueller
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -21,5 +23,5 @@ class rexxtextview: public srctextview {
     class keystate *rexx_state;
     class menulist *rexx_menus;
 };
-
+/** @} */
 #endif /* _rexxtextview_H_ */

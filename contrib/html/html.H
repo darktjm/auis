@@ -24,7 +24,9 @@
  * ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE 
  * OF THIS SOFTWARE.
  */
-
+/** \addtogroup libhtml libhtml.so
+ *  A dynamically loadable ATK class file.  Contains html, htmlview.
+ * @{ */
 #include <mark.H>
 
 #include <text.H>
@@ -89,5 +91,5 @@ public:
       class style* itemStyle;
 };
 
-
+/** @} */
 #endif /* _html_H_ */

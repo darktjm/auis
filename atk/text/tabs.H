@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 /* Nick Williams, August 1990 */
 
 /* tabs are a package. 
@@ -41,5 +43,5 @@ public:
     int number;
     int links;
 };
-
+/** @} */
 #endif /* _tabs_H_ */

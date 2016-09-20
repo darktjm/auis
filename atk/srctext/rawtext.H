@@ -1,5 +1,7 @@
 #ifndef _rawtext_H_
 #define _rawtext_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File rawtext.ch created by R S Kemmetmueller
    (c) Copyright IBM Corp.  1992-1995.  All rights reserved.
 
@@ -35,5 +37,5 @@ public:
     boolean NewlineEOF;
     boolean OverstrikeMode; /*RSK92overstrike*/ /*ideally, this should be associated with the view; unfortunately, the view is not known to srctext_InsertCharacters, which is where the overstriking is being done*/
 };
-
+/** @} */
 #endif /* _rawtext_H_ */

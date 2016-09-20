@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libvalue
+ * @{ */
 #include <updateq.H>
 
 enum valueview_MouseStates
@@ -215,8 +217,5 @@ public:
   corresponding Draw_____ function.
 
 */
-
-
-
-
+/** @} */
 #endif /* _valueview_H_ */

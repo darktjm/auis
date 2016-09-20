@@ -8,7 +8,10 @@ ATK_INTER
 
 NO_DLL_EXPORT extern int table_DefaultPrecision;
 
-/* table.ch - table data object definition and interface */
+/** \addtogroup libtable libtable.so
+ *  A dynamically loadable ATK class file.  Contains table, spread.
+ * @{ */
+/* table.H - table data object definition and interface */
 
 #define table_VERSION 1
 #define SafeFromNull(s) (((s) != NULL) ? (s) : "(null)")
@@ -203,7 +206,6 @@ public:
     boolean inGetModified;		/* recursion loop stopper for GetModified */
     boolean readonly;
 };
-
-/* end of table.ch */
-
+/** @} */
 #endif /* _table_H_ */
+/* end of table.H */

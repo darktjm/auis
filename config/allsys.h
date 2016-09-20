@@ -4,6 +4,9 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libatkos
+ * @{ */
+
 #include <aconcat.h>
 
 /* 
@@ -264,16 +267,4 @@ typedef int (*procedure)();
 #define	SY_U5x	(SY_U51 || SY_U52 || SY_U53)
 #define	SY_AIXx	(SY_AIX11 || SY_AIX12 || SY_AIX221 || SY_AIX3 || SY_AIX4)
 
-#ifdef __GNUC__
-#define UNUSED __attribute__((__unused__))
-#define PRINTF_LIKE(f,a) __attribute__((__format__(printf,f,a)))
-#define SCANF_LIKE(f,a) __attribute__((__format__(scanf,f,a)))
-#define EXIT_LIKE __attribute__((__noreturn__))
-#define NO_DLL_EXPORT __attribute__((visibility("hidden")))
-#else
-#define UNUSED /* UNUSED */
-#define PRINTF_LIKE(f,a)
-#define SCANF_LIKE(f,a)
-#define EXIT_LIKE /* NORETURN */
-#define NO_DLL_EXPORT
-#endif
+/** @} */

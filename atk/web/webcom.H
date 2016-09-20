@@ -2,7 +2,8 @@
 #ifndef _webcom_H_
 #define _webcom_H_
 ATK_INTER
-
+/** \addtogroup libhtmltext
+ * @{ */
 #include <atom.H>
 
 
@@ -129,5 +130,5 @@ public:
         boolean reload;
         char *postfile;
 };
-
+/** @} */
 #endif /* _webcom_H_ */

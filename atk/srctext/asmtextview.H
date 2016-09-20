@@ -1,5 +1,7 @@
 #ifndef _asmtextview_H_
 #define _asmtextview_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File asmtextview.H created by R S Kemmetmueller
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -25,5 +27,5 @@ class asmtextview: public srctextview {
     class keystate *asm_state;
     class menulist *asm_menus;    
 };
-
+/** @} */
 #endif /* _asmtextview_H_ */

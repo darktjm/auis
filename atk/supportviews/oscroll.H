@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupviews
+ * @{ */
 #include <point.h>
 
 /* the arrows in the arrow array */
@@ -140,5 +142,5 @@ void motif_DrawBorder();
 #define TD_FGPAT(self)	((self)->GrayPattern(TD_FGPATVAL,16))
 #define TD_BGPAT(self)	((self)->GrayPattern(TD_BGPATVAL,16))
 #define TD_BACKPAT(self) ((self)->GrayPattern(TD_BACKPATVAL,16))
-
+/** @} */
 #endif /* _oscroll_H_ */

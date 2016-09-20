@@ -1,6 +1,8 @@
 ATK_INTER
 #ifndef _scrollandpanner_H_
 #define _scrollandpanner_H_
+/** \addtogroup libsupviews
+ * @{ */
 /* scpanner.ch - scrollbar / panner box view */
 
 /*
@@ -32,5 +34,5 @@ public:
       class panner *pannerp;
 
 };
-
+/** @} */
 #endif /* _scrollandpanner_H_ */

@@ -4,6 +4,10 @@
  *         Copyright IBM Corporation 1991 - All Rights Reserved           *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libtimeoday libtimeoday.so
+ *  A dynamically loadable ATK class file.  Contains timeoday, timeodayview,
+ *  writestamp, writestampview.
+ * @{ */
 
 #include <fontdesc.H>
 #include <event.H>
@@ -48,5 +52,5 @@ public:
       class fontdesc *myfontdesc;
 };
 
-
+/** @} */
 #endif /* _timeoday_H_ */

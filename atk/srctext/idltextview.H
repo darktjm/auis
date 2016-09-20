@@ -1,5 +1,7 @@
 #ifndef _idltextview_H_
 #define _idltextview_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File idltextview.H created by R S Kemmetmueller
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -20,5 +22,5 @@ class idltextview: public cpptextview {
     class keystate *idl_state;
     class menulist *idl_menus;
 };
-
+/** @} */
 #endif /* _idltextview_H_ */

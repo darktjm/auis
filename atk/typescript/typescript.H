@@ -6,6 +6,10 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtypescript libtypescript.so
+ *  A dynamically loadable ATK class file.  Contains typescript,
+ *  typescriptapp, pipescriptapp, typetext, fcomp.
+ * @{ */
 #define READONLYMAX 65
 
 /* Typescript menu masks. */
@@ -68,5 +72,5 @@ public:
     class text *cmdText;
     long lastCmdPos;
 };
-
+/** @} */
 #endif /* _typescript_H_ */

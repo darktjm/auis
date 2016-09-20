@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupviews
+ * @{ */
 /*
 strtblview.H
 
@@ -93,5 +95,5 @@ public:
 	class graphic  *WhitePattern;	/*		. . . on different displays */
 
 };
-
+/** @} */
 #endif /* _strtblview_H_ */

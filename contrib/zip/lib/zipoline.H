@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libzip
+ * @{ */
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -46,5 +48,5 @@ public:
    long Hide_Object_Points( zip_type_figure object, zip_type_pane pane );
    boolean Contains( zip_type_figure figure, zip_type_pane pane, zip_type_pixel x,  zip_type_pixel y );
   };
-
+/** @} */
 #endif /* _zipoline_H_ */

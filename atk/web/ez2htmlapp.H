@@ -8,7 +8,8 @@
 #ifndef _ez2htmlapp_H_
 #define _ez2htmlapp_H_
 ATK_INTER
-
+/** \addtogroup libhtmltext
+ * @{ */
 enum gifmode {
 	ez2html_NOGIFS, 	// use [ ... WAS HERE]
 	ez2html_GIFIFY,		// create new gifs
@@ -44,5 +45,5 @@ class ez2htmlapp : public application {
     boolean Split;		// T if split to sections
     int splitctr;  		// last used .NNN.html value for splitting
 };
-
+/** @} */
 #endif /* _ez2htmlapp_H_ */

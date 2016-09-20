@@ -6,6 +6,9 @@
 #ifndef	SYSTEM_H
 #define	SYSTEM_H
 
+/** \addtogroup libatkos
+ * @{ */
+
 /* This first section contains definitions and includes which should be present for both
  C, C++ source files and for Imakefiles.
 All #includes should be prsent exactly as they are in this file, unless otherwise
@@ -442,6 +445,10 @@ Macros:
 #define	osi_setjmp  setjmp
 #define	osi_longjmp longjmp
 
+/** @} */
+/* This one function is in libutil.  It should probably go into libatkos. */
+/** \addtogroup libutil
+ * @{ */
 /* Make a time standard, see the ATK Coding Standards document */
 struct osi_Times {unsigned long int Secs; unsigned long int USecs;};
 /* Set one of the above with a call to osi_GetTimes(&foo) */
@@ -455,6 +462,9 @@ struct osi_Times {unsigned long int Secs; unsigned long int USecs;};
 BEGINCPLUSPLUSPROTOS
 extern int osi_GetTimes(struct osi_Times *p); /* in libutil.a */
 ENDCPLUSPLUSPROTOS
+/** @} */
+/** \addtogroup libatkos
+ * @{ */
 
 /* More BSD-isms,  if your system has setlinebuf in libc you can remove this line. */
 #define setlinebuf(file) setvbuf(file, NULL, _IOLBF, BUFSIZ)
@@ -574,6 +584,8 @@ InstallATKExportsTarget(install.time,name,dest)
 #define ATKLIBEXT "so"
 #define ATKDYNEXT "so"
 #define ATKDYNPREFIX "lib"
+
+/** @} */
 
 #endif	/* SYSTEM_H */
  
