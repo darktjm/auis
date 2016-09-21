@@ -3,6 +3,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 /* attribs.h
  * Declartion of a property list like structure for data object attribute
  * propagation. Used by the filetype module and the dataobject_SetAttributes
@@ -24,5 +26,5 @@ struct attributes {
     } value;
 };
 ENDCPLUSPLUSPROTOS
+/** @} */
 #endif /* ATTRIBUTES_DEFINED */
-

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupviews
+ * @{ */
 struct groups {
     struct sbutton_prefs *prefs;
     class menulist *ml;
@@ -37,6 +39,5 @@ public:
     int dragging;
     class cursor *cursor;
 };
-
-
+/** @} */
 #endif /* _sbttnav_H_ */

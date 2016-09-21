@@ -20,7 +20,8 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ***********************************************************************/
 
-/** \addtogroup libgdev libgdev.a
+/** \addtogroup libgdev gestures/libgdev
+ * Device-independent grpahics interface for use with gesture recognizer.
  * @{ */
 /*
  * gdev.h - header for device independent graphics interface.
@@ -217,4 +218,3 @@ extern int gdevdebug;
 
 /** @} */
 #endif /* _GDEV_ */
-

@@ -6,6 +6,8 @@ ATK_INTER
  *	Copyright Carnegie Mellon University, 1996                        *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup liblink
+ * @{ */
 #include <pshbttnv.H>
 class linkview: public  pushbuttonview {
 public:
@@ -24,6 +26,5 @@ public:
  
 	class menulist *ml;
 };
-
-
+/** @} */
 #endif /* _linkview_H_ */

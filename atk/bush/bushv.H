@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbush
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Bush View-object
@@ -92,7 +94,5 @@ public:
     boolean			 top_level_inset;
     int				 debug;
 };
-
-
-
+/** @} */
 #endif /* _bushv_H_ */

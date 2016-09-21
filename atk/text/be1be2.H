@@ -5,7 +5,8 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libtext
+ * @{ */
 /*
  * BE1 to BE2 conversion package
  */
@@ -36,5 +37,5 @@ public:
     static boolean Convert(class text *text)  ;
 
 };
-
+/** @} */
 #endif /* _be1be2_H_ */

@@ -6,7 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/* layoutview.ch - layout view definition and interface */
+/** \addtogroup liblayout
+ * @{ */
+/* layoutview.H - layout view definition and interface */
 #define layoutview_VERSION 1
 
 /* list of views (of a dataobject) */
@@ -128,7 +130,6 @@ public:
 	int granularity;		    /* resolution for object placement */
 };
 
-/* end of layoutview.ch */
-
-
+/* end of layoutview.H */
+/** @} */
 #endif /* _layoutview_H_ */

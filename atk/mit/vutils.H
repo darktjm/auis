@@ -18,6 +18,8 @@
  * warranty.
  *************************************************/
 
+/** \addtogroup libnote
+ * @{ */
 #include <ATK.H>
 class vutils : public ATK  {
 public:
@@ -29,5 +31,5 @@ public:
 	static boolean atk_inited;
 
 };
-
+/** @} */
 #endif /* _vutils_H_ */

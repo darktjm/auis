@@ -6,6 +6,10 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup liblookz liblookz.so
+ *  A dynamically loadable ATK class file.  Contains lookz, lookzview,
+ *  tabrulerview.
+ * @{ */
 /*
 lookz.H
 
@@ -68,6 +72,5 @@ public:
 	boolean canClose;
 	class text *text;
 };
-
-
+/** @} */
 #endif /* _lookz_H_ */

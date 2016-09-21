@@ -5,7 +5,8 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libatkutils
+ * @{ */
 /* Changed June 1990 njw */
 /* A simple string input view, with a fenced prompt */
 
@@ -41,5 +42,5 @@ public:
   class textview *textv;
   char *prompt;
 };
-
+/** @} */
 #endif /* _strinput_H_ */

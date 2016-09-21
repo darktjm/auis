@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 /* msghndlr.H
  * Definition of a msghandler object for use by message handlers.
  *
@@ -37,5 +39,5 @@ public:
         virtual boolean Asking()  ;
 	virtual void Advice(enum message_Preference pref) ;
 };
-
+/** @} */
 #endif /* _msghandler_H_ */

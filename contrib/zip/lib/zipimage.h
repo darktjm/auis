@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libzip
+ * @{ */
 /* zipefi00.h	Zip Subroutine Library Image Objects Header		      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -115,5 +117,5 @@ struct zip_image
   zip_type_figure				  zip_image_figure_anchor;
   char						 *zip_image_client_data;
   };
-
+/** @} */
 #endif /* _zipimage_h_ */

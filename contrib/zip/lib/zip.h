@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libzip
+ * @{ */
 /* zip.h	Zip Subroutine Library general Header			      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -198,4 +200,5 @@ struct zip_fonts
   zip_type_font					  zip_fonts_vector[1];
   };
 #define apt_MM_Compare(x,y) ULstrcmp(x,y)
+/** @} */
 #endif /* _zip_h_ */

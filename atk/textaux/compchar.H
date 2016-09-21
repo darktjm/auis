@@ -6,6 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtextaux libtextaux.so
+ *  A statically loadable ATK class file.  Contains compchar, contentv.
+ * @{ */
 #include <ATK.H>
 
 class compchar : public ATK  {
@@ -17,5 +20,5 @@ public:
 	static boolean InitializeClass();
 
 };
-
+/** @} */
 #endif /* _compchar_H_ */

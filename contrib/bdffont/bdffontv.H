@@ -1,7 +1,8 @@
 #ifndef _bdffontv_H_
 #define _bdffontv_H_
-/* bdffontv.ch  -  view for font editor for bdf files */
-
+/* bdffontv.H  -  view for font editor for bdf files */
+/** \addtogroup libbdffont
+ * @{ */
 /*
 	Copyright Carnegie Mellon University 1991, 1992 - All rights reserved
 */
@@ -71,5 +72,5 @@ public:
 	class chlistview *charencodingV;
 	class chlistview *charextentV;
 };
-
+/** @} */
 #endif /* _bdffontv_H_ */

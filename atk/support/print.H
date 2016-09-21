@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 /* The following defines are to be used as the second argument to print_ProcessView 
 	or the first argument to GetPrintCmd */
 
@@ -147,5 +149,5 @@ class print : public ATK  {
 	print *next_earlier;
 	static print *current_print;	// head of chain linked by next_earlier
 };
-
+/** @} */
 #endif /* _print_H_ */

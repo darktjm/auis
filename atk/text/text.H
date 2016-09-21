@@ -6,6 +6,12 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext libtext.so
+ *  A statically loadable ATK class file.  Contains text, textview, be1be2,
+ *  be1be2app, bp, bpv, cltextview, content, fnote, fnotev, pcompch, readscr,
+ *  search, simpletext, tabs, textref, textrefv, texttag, texttagv, texttroff,
+ *  tindex, headrtv, header.
+ * @{ */
 #define text_VERSION 1
 
 enum textwritestyle {text_DefaultWrite, text_NoDataStream, text_DataStream};
@@ -97,5 +103,5 @@ class text: public  simpletext {
     class dataobject **objs;
     long nobjs, objssize;
 };
-
+/** @} */
 #endif /* _text_H_ */

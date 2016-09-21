@@ -4,7 +4,8 @@
  *     Copyright Carnegie Mellon University, 1992 - All Rights Reserved   *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libgofig
+ * @{ */
 /* version number  */
 #define MAJORVERSION 1
 #define MINORVERSION 6
@@ -25,5 +26,5 @@ public:
 	const char *inputfile;
 	class gofig *dobj;
 };
-
+/** @} */
 #endif /* _gofigapp_H_ */

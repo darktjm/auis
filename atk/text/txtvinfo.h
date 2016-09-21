@@ -3,6 +3,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 #include <txtstvec.h>
 
 /* Redisplay structure giving font and position info in a large buffer. */
@@ -114,4 +116,4 @@ struct formattinginfo  {
 #define	WHITESPACE	0
 #define	WORD		1
 #define	SPECIAL		2
-
+/** @} */

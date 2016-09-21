@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _mac_H_
 #define _mac_H_
-/* mac.ch - class description for interface from MACpaint format to image */
+/** \addtogroup libimagev
+ * @{ */
+/* mac.H - class description for interface from MACpaint format to image */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -19,5 +21,5 @@ public:
   
     static int Ident( const char *fullname )  ;
 };
-
+/** @} */
 #endif /* _mac_H_ */

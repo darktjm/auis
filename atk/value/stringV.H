@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libvalue
+ * @{ */
 #include <fontdesc.H>
 #include <rect.h>
 
@@ -44,5 +46,5 @@ public:
    bodyfont		string		Defaults to "andytype"
    bodyfont-size	long		Defaults to 10
 */
-
+/** @} */
 #endif /* _stringV_H_ */

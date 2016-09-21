@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupviews
+ * @{ */
 /* lpair.H
  * class header file for lpair view.
  *
@@ -84,5 +86,5 @@ class lpair: public view {
        boolean recsearchvalid;
        int recsearchchild;
 };
-
+/** @} */
 #endif /* _lpair_H_ */

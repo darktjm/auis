@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #define region_PROGRAMMERVERSION 2
 
 #include <ATK.H>
@@ -49,6 +51,5 @@ public:
 
     struct _XRegion * regionData; /* really XRegion, but I don't want to include all of X just to get the typedef */
 };
-
-
+/** @} */
 #endif /* _region_H_ */

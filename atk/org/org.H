@@ -6,6 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup liborg liborg.so
+ *  A dynamically loadable ATK class file.  Contains org, orgv, orgapp.
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Org Data-Class
@@ -68,5 +71,5 @@ public:
 
   class tree		  	 *tree_data_object;
   };
-
+/** @} */
 #endif /* _org_H_ */

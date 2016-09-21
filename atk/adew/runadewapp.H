@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libarbiter
+ * @{ */
 struct runadewapp_fileList {
     struct runadewapp_fileList *next;
     const char *filename;
@@ -37,5 +39,5 @@ public:
 	const char *title, *cls,*func;
 	const char *objectname;
 	};
-
+/** @} */
 #endif /* _runadewapp_H_ */

@@ -4,6 +4,8 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libchamp
+ * @{ */
 #include <dataobject.H>
 class month: public dataobject {
 public:
@@ -21,5 +23,5 @@ public:
     
       int mon, year;
 };
-
+/** @} */
 #endif /* _month_H_ */

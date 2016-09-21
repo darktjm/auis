@@ -6,6 +6,12 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport libsupport.so
+ *  A statically loadable ATK class file.  Contains buffer, bufferlist,
+ *  completion, dictionary, environment, except, ghash, glist, hash, list,
+ *  mark, nestedmark, print, rectlist, strcache, style, stylesheet,
+ *  stylesheetInternal, tree23int, viewref.
+ * @{ */
 struct bufferContents { /* May not have to be in this file. */
     class view *bufferView; /* The actual view that is looking at the data object. */
     class view *bufferInputFocus; /* The view that is taking input. */
@@ -118,5 +124,5 @@ public:
 	boolean clobberSymlink;	/* TRUE means replace symlinks when writing */
         char *viewname;
 };
-
+/** @} */
 #endif /* _buffer_H_ */

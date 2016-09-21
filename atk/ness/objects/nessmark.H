@@ -6,6 +6,8 @@ ATK_INTER
 	Copyright Carnegie Mellon University 1993 - All Rights Reserved
 \* ********************************************************************** */
 
+/** \addtogroup libness
+ * @{ */
 #include <simpletext.H>
 
 #include <mark.H>
@@ -95,6 +97,5 @@ public:
 		(this)->AttachToText( (this)->GetText());
 	}
 };
-
-
+/** @} */
 #endif /* _nessmark_H_ */

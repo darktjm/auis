@@ -1,8 +1,9 @@
 #ifndef _cparser_H_
 #define _cparser_H_
-/*	parser.ch: headers for parser class  */
+/*	parser.h: headers for parser class  */
 
-/** \addtogroup libcparser libcparser.a
+/** \addtogroup libcparser libcparser
+ * Support library for the C parser generator (mkparse).
  * @{ */
 
 /*
@@ -10,7 +11,7 @@
 */
 
 #ifndef NULL
-#define NULL 0
+#define NULL 0UL
 #endif
 
 /* a semantic action routine is the C code in braces, {...}, in grammar rules.

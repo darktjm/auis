@@ -3,6 +3,8 @@ ATK_INTER
 #define _textintv_H_
 /* Copyright 1992 by the Andrew Toolkit Consortium and Carnegie Mellon University. All rights Reserved. */
 
+/** \addtogroup libprefs
+ * @{ */
 #include <wrapv.H>
 class textintv : public  wrapv {
 public:
@@ -20,5 +22,5 @@ public:
     virtual void SetDotPosition(long pos);
 
 };
-
+/** @} */
 #endif /* _textintv_H_ */

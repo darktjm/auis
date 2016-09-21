@@ -9,6 +9,8 @@ ATK_INTER
 \* ********************************************************************** */
 
  
+/** \addtogroup libpcontrol
+ * @{ */
 /* user code ends here for HeaderInfo */
 #include <ATK.H>
 class helpcon : public ATK  {
@@ -45,6 +47,5 @@ public:
 	class arbiterview *arbv;
 	class helpcon *next;
 };
-
-
+/** @} */
 #endif /* _helpcon_H_ */

@@ -6,6 +6,8 @@
 #ifndef _GENTLEX_H_
 #define _GENTLEX_H_
 
+/** \addtogroup libtlex
+ * @{ */
 #ifndef TRUE
 #define boolean int
 #define TRUE 1
@@ -155,7 +157,7 @@ struct tlex_tables {
 */
 #define tlex_ACCEPT (-1)
 #define tlex_IGNORE (-2)
-
+/** @} */
 #endif
 
  

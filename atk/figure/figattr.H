@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _figattr_H_
 #define _figattr_H_
-/* figattr.ch - attributes for fig objects */
+/** \addtogroup libfigure
+ * @{ */
+/* figattr.H - attributes for fig objects */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -178,5 +180,5 @@ class figattr : public  dataobject  {
       long arrow;
       long linestyle;
 };
-
+/** @} */
 #endif /* _figattr_H_ */

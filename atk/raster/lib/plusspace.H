@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libraster
+ * @{ */
 /*  plusspc.H
 
 	plusspace package
@@ -38,6 +40,5 @@ public:
 		*/
 
 };
-
-
+/** @} */
 #endif /* _plusspace_H_ */

@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _tif_H_
 #define _tif_H_
-/* tif.ch - class description for interface from Tagged Image File Format to image */
+/** \addtogroup libimagev
+ * @{ */
+/* tif.H - class description for interface from Tagged Image File Format to image */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -19,6 +21,5 @@ public:
   
     static int Ident( const char *fullname )  ;
 };
-
-
+/** @} */
 #endif /* _tif_H_ */

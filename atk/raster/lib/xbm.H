@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libraster
+ * @{ */
 /*  xbm.H
 
         xbm package
@@ -38,6 +40,5 @@ public:
     /* Write an X Window Dump  to 'file' from  subrectangle 'sub' of pixelimage 'pix'  */
 
 };
-
-
+/** @} */
 #endif /* _xbm_H_ */

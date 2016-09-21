@@ -1,7 +1,9 @@
 #ifndef _bdffont_H_
 #define _bdffont_H_
-/* bdffont.ch - font editor for bdf format fonts */
-
+/* bdffont.H - font editor for bdf format fonts */
+/** \addtogroup libbdffont libbdffont.so
+ *  A dynamically loadable ATK class file.  Contains bdffont, bdffontv
+ * @{ */
 #include <units.h>
 
 /* value for NotifyObservers when bdffont__Write is called */
@@ -128,5 +130,5 @@ public:
 	long defns_size;
 	long lastcharloaded;
 };
-
+/** @} */
 #endif /* _bdffont_H_ */

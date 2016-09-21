@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libvalue
+ * @{ */
 #define mentertext_BUFCHANGEDFLAG 10101
 #include <text.H>
 class mentertext : public  text {
@@ -41,5 +43,5 @@ public:
     class style *Style;
     boolean needswrap;
 };
-
+/** @} */
 #endif /* _mentertext_H_ */

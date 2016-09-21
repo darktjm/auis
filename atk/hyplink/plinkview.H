@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup liblink
+ * @{ */
 #include <linkview.H>
 
 class plinkview  : public  linkview  {
@@ -25,5 +27,5 @@ class plinkview  : public  linkview  {
 
       class menulist *pml;
 };
-
+/** @} */
 #endif /* _plinkview_H_ */

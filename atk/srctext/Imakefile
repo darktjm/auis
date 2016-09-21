@@ -30,10 +30,15 @@ HFILES = asmtext.H asmtextview.H \
 	cpptext.H cpptextview.H \
 	ctext.H ctextview.H \
 	hlptext.H \
+	idltext.H idltextview.H \
+	ltext.H ltextview.H \
 	m3text.H m3textview.H \
 	modtext.H modtextview.H \
 	mtext.H mtextview.H \
+	perltext.H perltextview.H \
+	ptext.H ptextview.H \
 	rawtext.H rawtextview.H \
+	rexxtext.H rexxtextview.H \
 	srctext.H srctextview.H
 
 EXTRACLASSES = asmtext \

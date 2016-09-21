@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libvalue
+ * @{ */
 #include <buttonV.H>
 class menterstrV : public  buttonV {
 public:
@@ -25,6 +27,5 @@ public:
     class mentertext *etext;
     class metextview *etextview;
 };
-
-
+/** @} */
 #endif /* _menterstrV_H_ */

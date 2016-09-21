@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #include <fontdesc.H>
 class xfontdesc : public  fontdesc {
 public:
@@ -33,5 +35,5 @@ public:
 	static boolean InitializeClass();
 
 };
-
+/** @} */
 #endif /* _xfontdesc_H_ */

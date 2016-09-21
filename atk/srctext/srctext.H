@@ -1,6 +1,13 @@
 #ifndef _srctext_H_
 #define _srctext_H_
-/* File srctext.ch created by R L Quinn
+/** \addtogroup libsrctext libsrctext.so
+ *  A dynamically loadable ATK class file.  Contains srctext, srctextview,
+ *  cpptextview, ctext, ctextview, hlptext, idltext, idltextview, ltext,
+ *  ltextview, m3text, m3textview, modtext, modtextview, mtext, mtextview,
+ *  perltext, perltextview, ptext, ptextview, rawtext, rawtextview,
+ *  rexxtext, rexxtextview
+ * @{ */
+/* File srctext.H created by R L Quinn
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
    srctext: a text subclass specialized for dealing with source code. */
@@ -149,5 +156,5 @@ inline char *makeupper(char *str)
     }
     return st;
 }
-
+/** @} */
 #endif /* _srctext_H_ */

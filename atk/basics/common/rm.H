@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #include <atomlist.H>
 
 struct resourceList
@@ -47,5 +49,5 @@ public:
 
 /* conversion routines are called Convert( fromrock, outputrock )
    they should return FALSE (0) if the conversion fails */
-
+/** @} */
 #endif /* _rm_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 /* environ.H
  * Class declarations for environment and preference maodule.
  *
@@ -40,5 +42,5 @@ public:
 	static void AddStringProfile(const char *str);  /* Add a preference to the running environment. */
 	static void ExpandEnvVars(char *to, const char *from, int maxsize);
 };
-
+/** @} */
 #endif /* _environ_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup librofftext
+ * @{ */
 /* mmtext.ch: link to rofftext -mm */
 
 #include <mark.H>
@@ -29,5 +31,5 @@ public:
     class mark **lineMark;
     char filename[500];
 };
-
+/** @} */
 #endif /* _mmtext_H_ */

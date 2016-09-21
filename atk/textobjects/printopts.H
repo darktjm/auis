@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtextobjs
+ * @{ */
 struct p_option {
     struct view_printopt *op;
     class environment *env, *ansenv;
@@ -47,5 +49,5 @@ class printopts  : public  textview {
 
     class environment *hitenv; /* temporary, used in mouse tracking */
 };
-
+/** @} */
 #endif /* _printopts_H_ */

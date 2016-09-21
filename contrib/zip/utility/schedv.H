@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsched
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Sched View-object Specification
@@ -55,5 +57,5 @@ public:
    long				     initial_x_pixel, initial_y_pixel;
    unsigned char		     wm_type;
 };
-
+/** @} */
 #endif /* _schedv_H_ */

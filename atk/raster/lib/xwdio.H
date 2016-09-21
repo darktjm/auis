@@ -5,8 +5,9 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
-/*  xwdio.ch
+/** \addtogroup libraster
+ * @{ */
+/*  xwdio.H
 
         xwdio package
 
@@ -47,6 +48,5 @@ public:
     /* Write an X Window Dump  to 'file' from  subrectangle 'sub' of pixelimage 'pix'  */
 
 };
-
-
+/** @{ */
 #endif /* _xwdio_H_ */

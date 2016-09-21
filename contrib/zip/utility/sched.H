@@ -5,6 +5,9 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsched libsched.so
+ *  A dynamically loadable ATK class file.  Contains sched, schedv, schedapp.
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Sched Data-object Specification
@@ -37,5 +40,5 @@ public:
   long				      id;
 };
 
-
+/** @} */
 #endif /* _sched_H_ */

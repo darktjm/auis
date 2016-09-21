@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 #include <view.H>
 
 class fnotev: public  view {
@@ -47,6 +49,5 @@ class fnotev: public  view {
     const char *displaystr;
     struct  fontdesc_charInfo *ci;
 };
-
-
+/** @} */
 #endif /* _fnotev_H_ */

@@ -2,6 +2,8 @@
 #define _AWgtFigView_H_
 ATK_INTER
 /* Copyright 1996 Carnegie Mellon University All rights reserved. */
+/** \addtogroup libawidget
+ * @{ */
 
 #include <awidgetview.H>
 #include <figview.H>
@@ -48,4 +50,5 @@ class AWgtFigView : public AWidgetView {
 	void ReceiveInputFocus();
 	void LoseInputFocus();
 };
+/** @} */
 #endif /* _AWgtFigView_H_ */

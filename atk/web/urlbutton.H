@@ -1,5 +1,7 @@
 #ifndef _urlbutton_H_
 #define _urlbutton_H_
+/** \addtogroup libhtmltext
+ * @{ */
 /*
  * urlbutton
  *
@@ -33,5 +35,5 @@ class urlbutton : public sbutton {
     char *current_url;
     boolean has_label;
 };
-
+/** @} */
 #endif /* _urlbutton_H_ */

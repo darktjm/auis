@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup liborg
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Org View-Class
@@ -151,5 +153,5 @@ Revision 1.8  89/08/23  15:39:33  tom
 Revise to Version 1.0
 
 */
-
+/** @} */
 #endif /* _orgv_H_ */

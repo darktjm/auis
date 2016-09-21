@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libvalue
+ * @{ */
 #define entertext_BUFCHANGEDFLAG 10101
 #include <text.H>
 class entertext : public  text {
@@ -34,5 +36,5 @@ public:
     class style *Style;
     boolean needswrap;
 };
-
+/** @} */
 #endif /* _entertext_H_ */

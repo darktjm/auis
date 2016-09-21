@@ -7,7 +7,8 @@ it under the terms of the GNU General Public License. See ../COPYING for
 the full agreement.
 
 **********************************************************************/
-
+/** \addtogroup libgdev
+ * @{ */
 /*
  * Argument processing macros
  * I got tired of rethinking this everytime,
@@ -73,3 +74,4 @@ nextarg:;						\
 #define	BADARG		default:
 #define ENDBADARG	break;
 
+/** @} */

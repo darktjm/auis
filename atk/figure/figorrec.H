@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _figorrec_H_
 #define _figorrec_H_
-/* figorrec.ch - fig element object: rounded rectangle */
+/** \addtogroup libfigure
+ * @{ */
+/* figorrec.H - fig element object: rounded rectangle */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -24,5 +26,5 @@ public:
        void Draw(class figview *v); 
        void Sketch(class figview *v); 
 };
-
+/** @} */
 #endif /* _figorrec_H_ */

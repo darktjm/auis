@@ -3,6 +3,12 @@ ATK_INTER
 #define _prefs_H_
 /* Copyright 1992 by the Andrew Toolkit Consortium and Carnegie Mellon University All rights Reserved. */
 
+/** \addtogroup libprefs libprefs.so
+ *  A dynamically loadable ATK class file.  Contains prefs, prefsv,
+ *  phelpv, pintv, prefedapp, prefsbv, prefval, pvalbv, pvalcv, pvalfv,
+ *  pvalsbv, pvalslv, pvaltv, pvaltvc, pvaltvf, pvaltvfc, pvaltvl, ssliderv,
+ *  textintv, titextv, wrapv.
+ * @{ */
 #include <list.H>
 #include <prefval.H>
 #include <mark.H>
@@ -124,5 +130,5 @@ public:
     long maxorder;
     boolean selfmod;
 };
-
+/** @} */
 #endif /* _prefs_H_ */

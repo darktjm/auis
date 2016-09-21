@@ -8,6 +8,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
  
+/** \addtogroup libpcontrol
+ * @{ */
 /* user code ends here for HeaderInfo */
 #include <observable.H>
 class calccon : public  observable  {
@@ -74,6 +76,5 @@ public:
 	class arbiterview *arbv;
 	class calccon *next;
 };
-
-
+/** @} */
 #endif /* _calccon_H_ */

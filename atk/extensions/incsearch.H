@@ -6,6 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libincsearch libincsearch.so
+ *  A dynamically loadable ATK class file.  Contains incsearch.
+ * @{ */
 #include <ATK.H>
 
 class incsearch : public ATK  {
@@ -17,5 +20,5 @@ public:
 	static boolean InitializeClass();
 
 };
-
+/** @} */
 #endif /* _incsearch_H_ */

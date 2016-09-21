@@ -6,7 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/* keymap.ch -- A class that provides mappings of keys to procedures.
+/** \addtogroup libbasics
+ * @{ */
+/* keymap.H -- A class that provides mappings of keys to procedures.
 December, 1986 */
 
 /* Number of entries in a keymap.  Should be power of two. */
@@ -61,5 +63,5 @@ public:
     } table;
     boolean sparsep;
 };
-
+/** @} */
 #endif /* _keymap_H_ */

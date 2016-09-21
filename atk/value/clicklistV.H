@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libvalue
+ * @{ */
 #include <stringV.H>
 class clicklistV : public  stringV {
 public:
@@ -27,6 +29,5 @@ public:
     char *choice;
     boolean choicechanged;
 };
-
-
+/** @} */
 #endif /* _clicklistV_H_ */

@@ -6,6 +6,10 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtextobjs libtextobjs.so
+ *  A statically loadable ATK class file.  Contains chlist, chlistview,
+ *  dired, diredview, panel, unknown, unknownv, printopts.
+ * @{ */
 #include <style.H>
 #include <environment.H>
 #include <text.H>
@@ -134,5 +138,5 @@ public:
     struct panel_Entry *highlightEntry;
     class environment *highlightEnv;
 };
-
+/** @} */
 #endif /* _panel_H_ */

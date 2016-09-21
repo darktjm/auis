@@ -5,6 +5,10 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libnote libnote.so
+ *  A dynamically loadable ATK class file.  Contains note, noteview,
+ *  icon, iconview, ps, psview, gnucompat, vutils.
+ * @{ */
 #include <icon.H>
 class note : public  icon {
 public:
@@ -22,6 +26,5 @@ public:
 
  
 };
-
-
+/** @} */
 #endif /* _note_H_ */

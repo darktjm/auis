@@ -5,6 +5,9 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libchamp
+ * @{ */
+
 #include <view.H>
 class monthview: public view {
 public:
@@ -42,5 +45,5 @@ public:
       int pendingtop;
       int firstpendingtop;
 };
-
+/** @} */
 #endif /* _monthview_H_ */

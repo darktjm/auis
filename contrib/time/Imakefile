@@ -21,7 +21,7 @@ DependTarget()
 DynamicMultiObject(clock,clockview,clock.o clockview.o,$(LIBS), $(DYNMATHLIB),)
 DynamicMultiObject(timeoday,timeodayview writestamp writestampview,writestamp.o writestmpv.o timeoday.o timeodayview.o,$(LIBS), $(DYNMATHLIB),)
 InstallDynamicObject(clock,clockview,$(FULLATKDLIBDIR))
-InstallDynamicObject(timeoday,timeodayview writestamp writestampv,$(FULLATKDLIBDIR))
+InstallDynamicObject(timeoday,timeodayview writestamp writestampview,$(FULLATKDLIBDIR))
 OptionalATKLibrary(time, $(OBJS), $(LIBS), $(LIBMATHLIB),)
 InstallOptionalATKLibrary(time, $(DESTDIR)/lib/atk)
 

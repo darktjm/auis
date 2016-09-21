@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 #include <text.H>
 
 class fnote: public  text {
@@ -47,6 +49,5 @@ public:
    class style *vstyle , *hstyle;
    boolean open;
 };
-
-
+/** @} */
 #endif /* _fnote_H_ */

@@ -1,5 +1,7 @@
 #ifndef _rawtextview_H_
 #define _rawtextview_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File rawtextview.H created by R S Kemmetmueller
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -19,5 +21,5 @@ class rawtextview: public textview {
     class keystate *raw_state;
     class menulist *raw_menus;    
 };
-
+/** @} */
 #endif /* _rawtextview_H_ */

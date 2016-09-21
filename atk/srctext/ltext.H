@@ -1,5 +1,7 @@
 #ifndef _ltext_H_
 #define _ltext_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File ltext.H
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -27,5 +29,5 @@ class ltext: public srctext {
 
     struct indenter *Indents;
 };
-
+/** @} */
 #endif /* _ltext_H_ */

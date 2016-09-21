@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupviews
+ * @{ */
 /*
 lprruler.H
 
@@ -51,6 +53,5 @@ public:
 
 
 };
-
-
+/** @} */
 #endif /* _lprruler_H_ */

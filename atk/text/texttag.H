@@ -5,6 +5,8 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libtext
+ * @{ */
 #include <fnote.H>
 
 class texttag : public fnote {
@@ -16,6 +18,5 @@ public:
 
 	virtual char * GetTag(long size, char * buf)  ;
 };
-
-
+/** @} */
 #endif /* _texttag_H_ */

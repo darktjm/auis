@@ -3,7 +3,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libcmenu libcmenu.a
+/** \addtogroup libcmenu libcmenu
+ * Library to support display and control of X11 popup menus.
  * @{ */
 
 #include <atkproto.h>

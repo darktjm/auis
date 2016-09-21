@@ -1,5 +1,7 @@
 #ifndef _ctextview_H_
 #define _ctextview_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File ctextview.H created by R L Quinn
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -22,5 +24,5 @@ class ctextview: public srctextview {
     class keystate *c_state;
     class menulist *c_menus;
 };
-
+/** @} */
 #endif /* _ctextview_H_ */

@@ -1,7 +1,8 @@
 #ifndef _ALISTV_H_
 #define _ALISTV_H_
 /* Copyright 1996 Carnegie Mellon University All rights reserved. */
-
+/** \addtogroup libAButton
+ * @{ */
 #include <atextv.H>
 #include <alist.H>
 
@@ -50,5 +51,5 @@ class AListv :public ATextv {
 };
 
 WIDGET_FUNC_AND_METHOD_CLASS(AList,AListv);
-
+/** @} */
 #endif /* _ALISTV_H_ */

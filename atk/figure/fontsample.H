@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _fontsample_H_
 #define _fontsample_H_
-/* fontsamp.ch - font sample view */
+/** \addtogroup libfigure
+ * @{ */
+/* fontsamp.H - font sample view */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -40,5 +42,5 @@ public:
       boolean dirty;
       class fontdesc *fdesc;
 };
-
+/** @} */
 #endif /* _fontsample_H_ */

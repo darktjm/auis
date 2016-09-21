@@ -5,6 +5,9 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libcompile libcompile.so
+ *  A dynamically loadable ATK class file.  Contains compile.
+ * @{ */
 #include <ATK.H>
 
 class compile : public ATK  {
@@ -16,5 +19,5 @@ public:
 	static boolean InitializeClass();
 
 };
-
+/** @} */
 #endif /* _compile_H_ */

@@ -6,6 +6,8 @@
 #ifndef _ATKDEBUG_H
 #define _ATKDEBUG_H
 
+/** \addtogroup libbasics
+ * @{ */
 class ATKdebug {
   public:
     static void Traceback();	// dump traceback to stderr
@@ -21,7 +23,7 @@ class ATKdebug {
     // This is a helper function not intended for mortals to use...
     static void MallocInit();
 };
-
+/** @} */
 #endif /* _ATKDEBUG_H */
 
 

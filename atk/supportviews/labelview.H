@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupviews
+ * @{ */
 /*
 labelview.H
 
@@ -80,5 +82,5 @@ public:
 	boolean inverted;			/* TRUE if image is supposed to be inverted */
 	long minwidth, minheight;		/* minimum width and height of the text */
 };
-
+/** @} */
 #endif /* _labelview_H_ */

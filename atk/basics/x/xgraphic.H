@@ -11,6 +11,8 @@ ATK_INTER
 #include <rect.h>
 #include <region.H>
 
+/** \addtogroup libbasics
+ * @{ */
 #define xgraphic_PROGRAMMERVERSION	1
 #include <image.H>
 
@@ -161,5 +163,5 @@ public:
     boolean flipforstipple;
     boolean haveMapInfo;
 };
-
+/** @} */
 #endif /* _xgraphic_H_ */

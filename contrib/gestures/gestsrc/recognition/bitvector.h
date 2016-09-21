@@ -1,5 +1,7 @@
 #ifndef _bitvector_h_
 #define _bitvector_h_
+/** \addtogroup librecog
+ * @{ */
 /***********************************************************************
 
 bitvector.h - some macros for dealing with bitvectors
@@ -223,4 +225,5 @@ extern int BitVectorDeQ(int max, BitVector v);
 extern int *BitVectorOr(int *v, int *v1, int *v2, int ipv);
 extern int *BitVectorAnd(int *v, int *v1, int *v2, int ipv);
 extern int BitVectorNoBitsSet(int *v, int ipv);
+/** @} */
 #endif

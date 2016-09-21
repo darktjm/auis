@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _mcidas_H_
 #define _mcidas_H_
-/* mcidas.ch - class description for interface from MCIDAS format to image */
+/** \addtogroup libimagev
+ * @{ */
+/* mcidas.H - class description for interface from MCIDAS format to image */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -19,5 +21,5 @@ public:
   
     static int Ident( const char *fullname )  ;
 };
-
+/** @} */
 #endif /* _mcidas_H_ */

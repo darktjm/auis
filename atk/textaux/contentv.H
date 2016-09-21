@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtextaux
+ * @{ */
 #include <textview.H>
 
 class contentv : public  textview  {
@@ -28,5 +30,5 @@ inline void SetSourceView(class textview *vw) { this->srcview = vw; }
     class menulist *menus;
     class textview *srcview;
 };
-
+/** @} */
 #endif /* _contentv_H_ */

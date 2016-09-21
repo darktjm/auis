@@ -4,6 +4,9 @@ ATK_INTER
 #ifndef _parser_H_
 #define _parser_H_
 
+/** \addtogroup libparser libparser.so
+ *  A dynamically loadable ATK class file.  Contains parser.
+ * @{ */
 /*	parser.H: headers for parser class  */
 
 /*
@@ -228,5 +231,5 @@ public:
 	int nerrors;		/* number of errors encountered */
 	int maxSeverity;	/* greatest severity error encountered */
 };
-
+/** @} */
 #endif /* _parser_H_ */

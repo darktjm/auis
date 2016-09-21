@@ -6,6 +6,10 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup librofftext librofftext.so
+ *  A dynamically loadable ATK class file.  Contains rofftext, rofftextapp,
+ *  mmtext, mantext.
+ * @{ */
 /* rofftext - translate troff/nroff to ATK text object
  *
  */
@@ -294,5 +298,5 @@ public:
     boolean PrintWarnings;
     class text *textm;  /* text to use for actually inserting chars and etc */
 };
-
+/** @} */
 #endif /* _rofftext_H_ */

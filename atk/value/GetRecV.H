@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libvalue
+ * @{ */
 #include <rect.h>
 
 struct GetRecV_recpair {
@@ -38,7 +40,5 @@ public:
    long lastx,lasty,firstx,firsty;
    struct GetRecV_recpair *tmpval;
 };
-
-
-
+/** @} */
 #endif /* _GetRecV_H_ */

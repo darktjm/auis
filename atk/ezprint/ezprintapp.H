@@ -5,6 +5,9 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libezprintapp libezprintapp.so
+ *  A dynamically loadable ATK class file.  Contains ezprintapp.
+ * @{ */
 #include <application.H>
 class ezprintapp : public  application {
 public:
@@ -18,5 +21,5 @@ public:
 	 int Run()  ;
          void ReadInitFile();
 };
-
+/** @} */
 #endif /* _ezprintapp_H_ */

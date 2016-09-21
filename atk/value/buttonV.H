@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libvalue
+ * @{ */
 #include <fontdesc.H>
 #include <sbutton.H>
 
@@ -73,5 +75,5 @@ public:
    bodyfont		string		Defaults to "andytype"
    bodyfont-size	long		Defaults to 10
 */
-
+/** @} */
 #endif /* _buttonV_H_ */

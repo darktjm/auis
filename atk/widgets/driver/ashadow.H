@@ -3,6 +3,8 @@
 #define _AShadow_H_
 ATK_INTER
 
+/** \addtogroup libawidget
+ * @{ */
 
 #include <atom.H>
 #include <color.H>
@@ -428,4 +430,5 @@ class AShadow {
        return uyscale;
    }
 };
+/** @} */
 #endif /* _AShadow_H_ */

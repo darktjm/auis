@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup liblink
+ * @{ */
 #include <link.H>
 
 class plink : public link {
@@ -27,5 +29,5 @@ class plink : public link {
 
       char *tag;
 };
-
+/** @} */
 #endif /* _plink_H_ */

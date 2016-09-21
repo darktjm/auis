@@ -3,6 +3,8 @@ ATK_INTER
 #define _pvalslv_H_
 /* Copyright 1992 by the Andrew Toolkit Consortium and Carnegie Mellon University All rights Reserved. */
 
+/** \addtogroup libprefs
+ * @{ */
 #include <ssliderv.H>
 class pvalslv : public  ssliderv {
 public:
@@ -22,5 +24,5 @@ public:
 
 
 };
-
+/** @} */
 #endif /* _pvalslv_H_ */

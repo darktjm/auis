@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _figoell_H_
 #define _figoell_H_
-/* figoell.ch - fig element object: ellipse */
+/** \addtogroup libfigure
+ * @{ */
+/* figoell.H - fig element object: ellipse */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -25,5 +27,5 @@ public:
        void Draw(class figview *v); 
        void Sketch(class figview *v); 
 };
-
+/** @} */
 #endif /* _figoell_H_ */

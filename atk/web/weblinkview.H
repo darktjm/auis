@@ -1,7 +1,8 @@
 #ifndef _weblinkview_H_
 #define _weblinkview_H_
 ATK_INTER
-
+/** \addtogroup libhtmltext
+ * @{ */
 #include <linkview.H>
 class weblinkview: public  linkview{
 public:
@@ -22,6 +23,5 @@ public:
  
   class menulist *ml;
 };
-
-
+/** @} */
 #endif /* _weblinkview_H_ */

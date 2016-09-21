@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libzip
+ * @{ */
 /* zipifm00.h	Internal Macros						      */
 /* Author	TC Peters & RM LeVine					      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -49,5 +51,5 @@ END-SPECIFICATION  ************************************************************/
 
 #define ZIP_Select_Pane_Font( obj, pane )\
 	(obj->view_object)->SetFont( obj->data_object->fonts->zip_fonts_vector[pane->zip_pane_font].zip_fonts_table_font )
-
+/** @} */
 #endif /* _zipifm00_h_ */

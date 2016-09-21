@@ -4,6 +4,8 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libchamp
+ * @{ */
 #include <view.H>
 class chompview: public  view {
 public:
@@ -27,5 +29,5 @@ public:
       class monthview *mv1, *mv2;
       class scroll *s;
 };
-
+/** @} */
 #endif /* _chompview_H_ */

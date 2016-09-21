@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libvalue
+ * @{ */
 #include <textview.H>
 class etextview: public textview {
 public:
@@ -29,5 +31,5 @@ public:
     boolean ClearOnRIF,ResetOnLIF;
     class valueview *valueview;
 };
-
+/** @} */
 #endif /* _etextview_H_ */

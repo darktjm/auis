@@ -38,7 +38,6 @@ arb:	$(DESTDIR)/include/system.h ./genarb$(EXEEXT)
 clean:: ; $(RM) arb
 
 InstallFile(arb, $(INSTPROGFLAGS), $(DESTDIR)/bin)
-InstallFile(adew.h, ${INSTINCFLAGS}, ${DESTDIR}/include/atk)
 InstallRunappAPP(runadew)
 
 NormalHelpRule()

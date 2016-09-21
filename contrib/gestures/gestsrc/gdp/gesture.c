@@ -121,7 +121,7 @@ static FV fv;
 
 static void init3(void)
 {
-	fv = FvAlloc(0);
+	fv = FvAlloc();
 }
 
 
@@ -165,7 +165,7 @@ mouse_down:
 	GDEVgetXYT(&x, &y, &t);
 	Gx = x; Gy = y; Gt = t;
 	if(button != LEFT_DOWN) ERROR(("mouse_down %o\n", button));
-	FvAddPoint(fv, x, y, (long) t, 0);
+	FvAddPoint(fv, x, y, (long) t);
 	Gpoint(x, y);
 	Lx = x, Ly = y;
 	goto set_time_then_charwait;
@@ -200,7 +200,7 @@ mouse:
 	goto dispatch;
 
 newpoint:
-	FvAddPoint(fv, x, y, (long) t, 0);
+	FvAddPoint(fv, x, y, (long) t);
 	Gpoint(x, y);
 	Lx = x; Ly = y;
 	GDEVflush();
@@ -209,7 +209,7 @@ newpoint:
 	goto charwait;
 
 lastpoint:
-	FvAddPoint(fv, x, y, (long) t, 0);
+	FvAddPoint(fv, x, y, (long) t);
 	Gpoint(x, y);
 	GDEVflush();
 	Lx = x; Ly = y;

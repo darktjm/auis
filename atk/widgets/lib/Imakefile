@@ -8,7 +8,7 @@
 
 OBJS = abutton.o abuttonv.o alist.o alistv.o \
 		aoption.o aoptionv.o atext.o atextv.o
-HFILES =  abuttonv.H abutton.H alist.H atext.H aoption.H aoptionv.H
+HFILES =  abuttonv.H abutton.H alist.H alistv.H atext.H atextv.H aoption.H aoptionv.H
 ADDCLASSES = AButtonv AText ATextv AList AListv \
 		AOptionMenu AOptionMenuv AOptionCardv
 WIDGETS =  Button.wgt CheckButton.wgt ImageMap.wgt \

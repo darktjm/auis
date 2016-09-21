@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libvalue
+ * @{ */
 #include <fontdesc.H>
 #include <rect.h>
 
@@ -61,5 +63,5 @@ public:
   min-value		long		dafaults to 0
   increment		float		defaults to 1.0
 */
-
+/** @} */
 #endif /* _sliderV_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 /* Simple text conatins a string of text that can be manipulated.
  * The string is maintained in two section divided by a gap.
  * Position is always given referring to the next character.
@@ -100,5 +102,5 @@ class simpletext: public dataobject {
     int DOSfile;
     boolean checkDOSFormat;
 };
-
+/** @} */
 #endif /* _simpletext_H_ */

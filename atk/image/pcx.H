@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _pcx_H_
 #define _pcx_H_
-/* pcx.ch - class description for interface from PCX format to image */
+/** \addtogroup libimagev
+ * @{ */
+/* pcx.H - class description for interface from PCX format to image */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -19,5 +21,5 @@ public:
   
     static int Ident( const char *fullname )  ;
 };
-
+/** @} */
 #endif /* _pcx_H_ */

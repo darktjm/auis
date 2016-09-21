@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libraster
+ * @{ */
 /*  paint.H
 
 	paint package
@@ -45,6 +47,5 @@ public:
 		/* Write the subraster 'sub' image to 'file' from 'pix' */
 
 };
-
-
+/** @} */
 #endif /* _paint_H_ */

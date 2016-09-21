@@ -3,6 +3,8 @@
 #define _AString_H_
 ATK_INTER
 
+/** \addtogroup libawidget
+ * @{ */
 /* 
 	astring.H  -  headers for the String class
 
@@ -175,4 +177,5 @@ public:
 	static const char *itoa (long i);
 	static const char *dtoa (double d);
 };
+/** @} */
 #endif /* _AString_H_ */

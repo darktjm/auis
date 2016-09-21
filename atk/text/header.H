@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 #define header_HEADER 0
 #define header_FOOTER 1
 
@@ -44,5 +46,5 @@ public:
     class text *texts[header_TEXTS];
     boolean active[header_TEXTS];
 };
-
+/** @} */
 #endif /* _header_H_ */

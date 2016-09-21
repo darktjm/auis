@@ -3,6 +3,8 @@
 #define _ASlot_H_
 ATK_INTER
 
+/** \addtogroup libawidget
+ * @{ */
 /* 
 	ASlot and derived classes form a family of types and slots
 	for AWidget attributes.  The design permits a typed attribute 
@@ -931,5 +933,5 @@ class ASlotColor : public ASlot {
 
 // END of EPILOGUE
 
-
+/** @} */
 #endif  /* _ASlot_H_ */

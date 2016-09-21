@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libatkutils
+ * @{ */
 #include <view.H>
 
 	typedef void (*dialogv_choicefptr)(long rock, int ind, long brock);
@@ -78,6 +80,5 @@ public:
     int lastchoice;
     boolean *cont;
 };
-
-
+/** @} */
 #endif /* _dialogv_H_ */

@@ -4,6 +4,8 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libcalc
+ * @{ */
 
 /*  $Log: calcv.H,v $
  * Revision 1.1  1993/05/29  15:33:56  rr2b
@@ -123,5 +125,5 @@ public:
   char			  operand_1[25], operand_2[25];
   char			  pending_op;
   };
-
+/** @} */
 #endif /* _calcv_H_ */

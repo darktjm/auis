@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libnote
+ * @{ */
 #include <iconview.H>
 class noteview : public  iconview
 {
@@ -25,5 +27,5 @@ public:
  
 	class menulist *menus;
 };
-
+/** @} */
 #endif /* _noteview_H_ */

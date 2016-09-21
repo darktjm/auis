@@ -1,3 +1,5 @@
+/** \addtogroup librecog
+ * @{ */
 typedef int Bool;
 
 #ifndef TRUE
@@ -6,3 +8,4 @@ typedef int Bool;
 #	define FALSE	0
 
 #endif
+/** @} */

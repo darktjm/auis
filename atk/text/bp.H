@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
  
+/** \addtogroup libtext
+ * @{ */
 #include <dataobject.H>
 
 #define bp_DATACHANGED 1
@@ -25,6 +27,5 @@ class bp : public  dataobject  {
       boolean haspagenum; /* flag whether this page break specifies the next page's number */
       long pagenum; /* page number of next page, if haspagenum is TRUE */
 };
-
-
+/** @} */
 #endif /* _bp_H_ */

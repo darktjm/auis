@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _xwd_H_
 #define _xwd_H_
-/* xwd.ch - class description for interface from X Window Dump format to image */
+/** \addtogroup libimagev
+ * @{ */
+/* xwd.H - class description for interface from X Window Dump format to image */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -19,5 +21,5 @@ public:
   
     static int Ident( const char *fullname )  ;
 };
-
+/** @} */
 #endif /* _xwd_H_ */

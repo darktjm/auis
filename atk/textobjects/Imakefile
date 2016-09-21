@@ -4,7 +4,7 @@
 \* ********************************************************************** */
 
 OBJS = chlist.o chlistview.o dired.o diredview.o panel.o unknown.o unknownv.o printopts.o
-HFILES = chlist.H chlistview.H dired.H diredview.H panel.H printopts.H
+HFILES = chlist.H chlistview.H dired.H diredview.H panel.H printopts.H unknown.H unknownv.H
 LIBS = $(UTILLIB) $(SUPLIBS) 
 
 NormalObjectRule()

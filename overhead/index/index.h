@@ -5,7 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libindex libindex.a
+/** \addtogroup libindex libindex
+ * A library for storing an on-disk hash table.
  * @{ */
 
 /*

@@ -6,6 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libgsearch libgsearch.so
+ *  A dynamically loadable ATK class file.  Contains gsearch.
+ * @{ */
 #include <ATK.H>
 
 class gsearch : public ATK  {
@@ -17,5 +20,5 @@ public:
 	static boolean InitializeClass();
 
 };
-
+/** @} */
 #endif /* _gsearch_H_ */

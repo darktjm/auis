@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 /* filetype.h
  * Declarations for the filetype package.
  *
@@ -35,5 +37,5 @@ class filetype : public ATK {
 
     static void CanonicalizeFilename(char *canonicalName, const char *name, int maxSize);
 };
-
+/** @} */
 #endif /* _filetype_H_ */

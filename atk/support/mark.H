@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 #define mark_VERSION 1
 
 #include <ATK.H>
@@ -53,5 +55,5 @@ public:
     char includeBeginning;
     char includeEnding;
 };
-
+/** @} */
 #endif /* _mark_H_ */

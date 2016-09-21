@@ -5,5 +5,10 @@
 
 #ifndef	_ANDREWENV_
 #define _ANDREWENV_
+/** \addtogroup libatkos
+ * @{ */
+/** \file andyenv.h
+ * Old version of andrewos.h; now just an alias */
 #include <andrewos.h>
+/** @} */
 #endif /* _ANDREWENV_ */

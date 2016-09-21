@@ -1,11 +1,13 @@
 ATK_INTER
 #ifndef _fbm_H_
 #define _fbm_H_
-/* fbm.ch - class description for interface FBM format to image */
+/* fbm.H - class description for interface FBM format to image */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
 
+/** \addtogroup libimagev
+ * @{ */
 #include <image.H>
 class fbm : public  image {
 public:
@@ -19,5 +21,5 @@ public:
   
     static int Ident( const char *fullname )  ;
 };
-
+/** @} */
 #endif /* _fbm_H_ */

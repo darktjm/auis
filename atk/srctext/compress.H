@@ -1,5 +1,7 @@
 #ifndef _compress_H_
 #define _compress_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File compress.ch created by R S Kemmetmueller
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -33,5 +35,5 @@ class compress: public text {
 
     long lines, loc;
 };
-
+/** @} */
 #endif /* _compress_H_ */

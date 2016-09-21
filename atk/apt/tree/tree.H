@@ -6,6 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtree libtree.so
+ *  A dynamically loadable ATK class file.  Contains tree, treev.
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Tree Data-Class
@@ -192,7 +195,5 @@ public:
   void (*FreeNodeDatum)(tree_type_node node, void *user);
   void *fnd_user;
   };
-
-
-
+/** @} */
 #endif /* _tree_H_ */

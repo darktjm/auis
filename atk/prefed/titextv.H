@@ -3,6 +3,8 @@ ATK_INTER
 #define _titextv_H_
 /* Copyright 1992 by the Andrew Toolkit Consortium and Carnegie Mellon University. All rights Reserved. */
 
+/** \addtogroup libprefs
+ * @{ */
 #include <textview.H>
 class titextv : public  textview  {
 public:
@@ -22,5 +24,5 @@ public:
    class textintv *intv;
    long lastpos;
 };
-
+/** @} */
 #endif /* _titextv_H_ */

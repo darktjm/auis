@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup librofftext
+ * @{ */
 /* rofftext application */
 
 #include <application.H>
@@ -32,5 +34,5 @@ public:
         boolean BeCompletelyBogus;
         boolean PrintWarnings;
 };
-
+/** @} */
 #endif /* _rofftextapp_H_ */

@@ -3,6 +3,8 @@
 ATK_INTER
 /* Copyright 1995 Carnegie Mellon University All rights reserved. */
 
+/** \addtogroup libbasics
+ * @{ */
 #include <andrewos.h>
 
 #include <atom.H>
@@ -349,4 +351,5 @@ return (type)a->VoidPtr(Concat(avalue_atom_,name)); \
 
 DEFINE_OFLEX_CONST_ITER(avalueflex,avalue);
 DEFINE_OFLEX_ITER(avalueflex, avalue);
+/** @} */
 #endif /* _AVALUE_H */

@@ -4,6 +4,8 @@ ATK_INTER
 /* Copyright 1995 Carnegie Mellon University All rights reserved. */
 
 
+/** \addtogroup libbasics
+ * @{ */
 #include <ddimage.H>
 class graphic;
 class xgraphic;
@@ -93,6 +95,5 @@ class xddimage : public iddimage {
     Pixmap pixmap;
     boolean pixok;
 };
-
- 
+/** @} */ 
 #endif /* _xddimage_H_ */

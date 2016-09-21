@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupviews
+ * @{ */
 /*
 lprrulerview.H
 
@@ -117,5 +119,5 @@ public:
 
 	short icony;			/* baseline for icons */
 };
-
+/** @} */
 #endif /* _lprrulerview_H_ */

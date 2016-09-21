@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 /* A string cache
  *
  */
@@ -31,5 +33,5 @@ public:
      char * Rename(char *key, char *new_c)  ;
 
 };
-
+/** @} */
 #endif /* _strcache_H_ */

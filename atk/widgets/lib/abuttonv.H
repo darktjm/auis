@@ -3,7 +3,8 @@
 #ifndef _AButtonV_H_
 #define _AButtonV_H_
 ATK_INTER
-
+/** \addtogroup libAButton
+ * @{ */
 #include <awidgetview.H>
 #include <ashadow.H>
 #include <fontdesc.H>
@@ -139,5 +140,5 @@ WIDGET_FUNC_AND_METHOD_CLASS(AButton,AButtonv);
 
 #define START_ABUTTONV_CALLBACK_METHOD(name) START_VIEW_CALLBACK_METHOD(name,AButton,AButtonv)
 #define END_ABUTTONV_CALLBACK_METHOD() END_CALLBACK_METHOD()
-
+/** @} */
 #endif /* _AButtonV_H_ */

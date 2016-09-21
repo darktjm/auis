@@ -3,6 +3,8 @@ ATK_INTER
 #define _pvaltv_H_
 /* Copyright 1992 by the Andrew Toolkit Consortium and Carnegie Mellon University. All rights Reserved. */
 
+/** \addtogroup libprefs
+ * @{ */
 #include <textintv.H>
 class pvaltv : public  textintv {
 public:
@@ -30,5 +32,5 @@ public:
     class keystate *ks;
     class menulist *menulistp;
 };
-
+/** @} */
 #endif /* _pvaltv_H_ */

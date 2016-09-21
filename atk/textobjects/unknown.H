@@ -2,7 +2,8 @@ ATK_INTER
 #ifndef _unknown_H_
 #define _unknown_H_
 /* Copyright 1994 Carnegie Mellon University All rights reserved. */
-
+/** \addtogroup libtextobjs
+ * @{ */
 #include <text.H>
 class unknown : public  text {
 public:
@@ -25,6 +26,5 @@ public:
     class text *odata;
     boolean wrapped;
 };
-
-
+/** @} */
 #endif /* _unknown_H_ */

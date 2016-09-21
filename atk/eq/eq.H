@@ -6,6 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libeq libeq.so
+ *  A dynamically loadable ATK class file.  Contains eq, eqview.
+ * @{ */
 /*
  * eq.H
  * class header file for eq.
@@ -170,5 +173,5 @@ enum space {		/* Knuth:	Description:			     */
 extern const struct symbol *eq_zilch;
 extern const struct symbol *eq_root;
 
-
+/** @} */
 #endif /* _eq_H_ */

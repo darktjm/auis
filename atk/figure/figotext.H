@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _figotext_H_
 #define _figotext_H_
-/* figotext.ch - fig element object: text */
+/** \addtogroup libfigure
+ * @{ */
+/* figotext.H - fig element object: text */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -66,5 +68,5 @@ class figotext : public  figobj {
       short buildstate;
       class figview *buildview;
 };
-
+/** @} */
 #endif /* _figotext_H_ */

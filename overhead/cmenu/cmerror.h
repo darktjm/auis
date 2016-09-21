@@ -3,7 +3,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libcmenu libcmenu.a
+/** \addtogroup libcmenu
  * @{ */
 
 /* Some of the values in this file are obsolete. Take them with a grain of salt. */

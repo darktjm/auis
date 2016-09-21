@@ -5,6 +5,8 @@ ATK_INTER
 /*
 	Copyright Carnegie Mellon University 1994 - All rights reserved
 */
+/** \addtogroup libfigure
+ * @{ */
 #include <figure.H>
 
 class textflow : public figure {
@@ -16,5 +18,5 @@ class textflow : public figure {
 
       virtual const char *ViewName();
 };
-
+/** @} */
 #endif /* _textflow_H_ */

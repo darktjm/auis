@@ -5,7 +5,7 @@
 #ifndef _UTIL_H_
 #define _UTIL_H_ 1
                                  
-/** \addtogroup libutil libutil.a
+/** \addtogroup libutil libutil
  *  Miscellaneous C utility functions.
  *  @{ */
 
@@ -388,7 +388,8 @@ extern void *erealloc(void  *old, long  newsize);
 
 /** @} */
 
-/** \addtogroup libafs libafs.a
+/** \addtogroup libafs libafs
+ *  Miscellaneous C utility functions; formerly from AFS.
  * @{ */
 
 /* lcstring.c */

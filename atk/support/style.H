@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 #include <namespace.H>
 
 #define style_VERSION   1
@@ -482,5 +484,5 @@ class style : public ATK {
 
     class Namespace *AdditionalAttributes;
 };
-
+/** @} */
 #endif /* _style_H_ */

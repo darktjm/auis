@@ -6,6 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libez libez.so
+ *  A statically loadable ATK class file.  Contains ezapp.
+ * @{ */
 struct ezapp_fileList {
     struct ezapp_fileList *next;
     const char *filename;
@@ -45,5 +48,5 @@ public:
 	const char *defaultObject;
 	const char *ezTitle;
 };
-
+/** @} */
 #endif /* _ezapp_H_ */

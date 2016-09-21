@@ -1,5 +1,7 @@
 #ifndef _ptext_H_
 #define _ptext_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File ptext.H
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -31,5 +33,5 @@ class ptext: public srctext {
     /* Variables used to control the indenting style. */
     int caseLevelIndent, slashAsteriskComments, idStyle;
 };
-
+/** @} */
 #endif /* _ptext_H_ */

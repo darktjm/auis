@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libapt
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Apt View-object
@@ -268,5 +270,5 @@ Revision 1.1  89/04/28  17:45:48  tom
 Initial revision
 
 */
-
+/** @} */
 #endif /* _aptv_H_ */

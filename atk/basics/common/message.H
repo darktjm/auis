@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 /* message.H
  * Classprocedures to interface to message handlers.
  *
@@ -67,5 +69,5 @@ public:
         static int SetCursorPos(class view *view, int pos)  ;
         static boolean Asking(class view *view)  ;
 };
-
+/** @} */
 #endif /* _message_H_ */

@@ -1,6 +1,9 @@
 ATK_INTER
 #ifndef _tlex_H_
 #define _tlex_H_
+/** \addtogroup libtlex libtlex.so
+ *  A dynamically loadable ATK class file.  Contains tlex.
+ * @{ */
 /* tlex.H - lexical analyzer which reads from ATK text  */
 /*
 	Copyright Carnegie Mellon University 1992, 1994 - All rights reserved
@@ -233,5 +236,5 @@ public:
 	long RecentLen[tlex_RECENTSIZE];
 	int RecentIndex;
 };
-
+/** @} */
 #endif /* _tlex_H_ */

@@ -47,7 +47,6 @@ BIG CHANGES
 #include <bdffontv.H>
 
 #include <ansitext.h>
-#include <mathaux.h>
 
 #include <buffer.H>
 #include <frame.H>
@@ -80,6 +79,10 @@ BIG CHANGES
 
 
 
+/* note: alternates:
+ * <C99: (long)round(x)
+ * C99:  lround(x)
+ */
 #define RoundUp(x) ((long) ((x) + 0.5))
 
 static long bdffontv_DefaultPointSize = 12;
@@ -1413,8 +1416,8 @@ GetNewFontParameters(class bdffontv  *self, long  time	/* ignored */)
 	(fontinfo)->SetPointSize( ptsize);
 	(fontinfo)->SetResolution( res, res);
 	size = (fontinfo)->ComputeFontSize();
-	dheight = /*mathaux_*/RoundUp(ansitext_ComputeAscent(size));
-	descent = /*mathaux_*/RoundUp(ansitext_ComputeDescent(size));
+	dheight = RoundUp(ansitext_ComputeAscent(size));
+	descent = RoundUp(ansitext_ComputeDescent(size));
 	(fontinfo)->SetFontAscent( dheight);
 	(fontinfo)->SetFontDescent( descent);
 	(fontinfo)->SetBoundingBox( dwidth, dheight+descent, 0, -descent);

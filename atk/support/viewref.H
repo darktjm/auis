@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 #define viewref_VERSION 1
 
 #include <observable.H>
@@ -35,5 +37,5 @@ public:
     }
  
 };
-
+/** @} */
 #endif /* _viewref_H_ */

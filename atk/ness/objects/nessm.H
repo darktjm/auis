@@ -6,7 +6,8 @@ ATK_INTER
 #ifndef _nessm_H_
 #define _nessm_H_
 
-
+/** \addtogroup libness
+ * @{ */
 #include <ATK.H>
 class nessm : public ATK  {
 public:
@@ -15,5 +16,5 @@ public:
 	static boolean InitializeClass();
 	static boolean atk_inited;
 };
-
+/** @} */
 #endif /* _nessm_H_ */

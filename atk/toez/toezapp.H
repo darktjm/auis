@@ -6,6 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtoezapp libtoezapp.so
+ *  A dynamically loadable ATK class file.  Contains toezapp.
+ * @{ */
 /* toandrew application */
 
 #include <application.H>
@@ -38,5 +41,5 @@ public:
 	boolean HelpMode;	/* ensures \n atop page */
 	boolean BeCompletelyBogus;  /* only used in toandya */
 };
-
+/** @} */
 #endif /* _toezapp_H_ */

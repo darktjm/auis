@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _figobj_H_
 #define _figobj_H_
-/* figobj.ch - fig element object */
+/** \addtogroup libfigure
+ * @{ */
+/* figobj.H - fig element object */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -148,5 +150,5 @@ class figobj : public  dataobject  {
       struct figobj_Attachment *vas;
       boolean anyattachmentsactive;
 };
-
+/** @} */
 #endif /* _figobj_H_ */

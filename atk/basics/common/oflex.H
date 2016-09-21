@@ -4,6 +4,8 @@
 #include <mflex.H>
 #include <new>
 
+/** \addtogroup libbasics
+ * @{ */
 class oflex : public mflex {
   protected:
     virtual void MemCpy(char *dest, char *src, size_t bytelength);
@@ -179,6 +181,6 @@ class Concat(name,_citer) { \
 	else return FALSE; \
     } \
 }
-	
+/** @} */
 #endif
 

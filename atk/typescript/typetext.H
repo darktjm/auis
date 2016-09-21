@@ -5,7 +5,8 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libtypescript
+ * @{ */
 /* typetext.H
  * Class header for a basic fenced view.
  *
@@ -26,6 +27,5 @@ public:
 
 int hashandler;
 };
-
-
+/** @} */
 #endif /* _typetext_H_ */

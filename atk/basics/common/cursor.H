@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #include <rect.h>
 
 #include <ATK.H>
@@ -69,6 +71,5 @@ public:
 
 
 #define	Cursor_TABLELEN			26
-
-
+/** @} */
 #endif /* _cursor_H_ */

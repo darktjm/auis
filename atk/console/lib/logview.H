@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libconsoleapp
+ * @{ */
 #include <textview.H>
 class logview : public  textview {
 public:
@@ -24,5 +26,5 @@ public:
 
     class menulist *menu;
 };
-
+/** @} */
 #endif /* _logview_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 #include <ATK.H>
 
 class readscr : public ATK  {
@@ -19,5 +21,5 @@ public:
     static int PrintFile(char *filename, class textview *tv, class text *t, const char *version, int TrashWhenDone)  ;
 
 };
-
+/** @} */
 #endif /* _readscr_H_ */

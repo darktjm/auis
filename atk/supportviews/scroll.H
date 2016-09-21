@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupviews
+ * @{ */
 #include <point.h>
 
 #define scroll_VERSION 1
@@ -221,6 +223,5 @@ public:
     const struct scrollfns *fns[scroll_TYPES];
     boolean customsi;
 };
-  
-
+/** @} */
 #endif /* _scroll_H_ */

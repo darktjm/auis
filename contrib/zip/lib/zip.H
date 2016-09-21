@@ -4,7 +4,13 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libzip libzip.so
+ *  A dynamically loadable ATK class file.  Contains zip, zipview,
+ *  zipstatus, zipprint, zipobject, zipotrap, ziposymbol, ziporect,
+ *  ziporang, zipopolygon, zipoplin, zipopath, zipoline, zipoimbed,
+ *  zipofcapt, zipoelli, zipocirc, zipocapt, zipoarrow, zipoarc,
+ *  zipedit
+ * @{ */
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -239,5 +245,5 @@ public:
   long				(*message_writer)(class zip *, char *);
   long				(*message_clearer)(class zip *);
 };
-
+/** @} */
 #endif /* _zip_H_ */

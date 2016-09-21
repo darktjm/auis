@@ -1,5 +1,7 @@
 #ifndef _asmtext_H_
 #define _asmtext_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File asmtext.H created by R S Kemmetmueller
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -30,5 +32,5 @@ class asmtext: public srctext {
     char bangComments[MAX_BANGCHARS+1];
     char *reindentFilterName;
 };
-
+/** @} */
 #endif /* _asmtext_H_ */

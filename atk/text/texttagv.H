@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtext
+ * @{ */
 #include <fnotev.H>
 
 class texttagv: public  fnotev {
@@ -22,6 +24,5 @@ public:
     
 	texttagv();
 };
-
-
+/** @} */
 #endif /* _texttagv_H_ */

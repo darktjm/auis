@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libeq
+ * @{ */
 /*
  * eqv.H
  * class header file for eqv.
@@ -81,5 +83,5 @@ class eqview : public  view {
 };
 
 #define Eq(self) ((class eq *) ((self)->dataobject))
-
+/** @} */
 #endif /* _eqview_H_ */

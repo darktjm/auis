@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 #define rectlist_VERSION 1
 
 #include <ATK.H>
@@ -30,5 +32,5 @@ public:
     static void InvertRectangles(class view *vPtr, spotcolor *spots=NULL);
     static struct rectangle &Bounds();
 };
-
+/** @} */
 #endif /* _rectlist_H_ */

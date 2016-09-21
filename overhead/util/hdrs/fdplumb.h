@@ -14,6 +14,9 @@ BEGINCPLUSPLUSPROTOS
 #include <sys/socket.h>
 #include <util.h>
 
+/** \addtogroup libutil
+ * @{ */
+
 #define open dbg_open
 #define fopen dbg_fopen
 #define close dbg_close
@@ -36,6 +39,8 @@ BEGINCPLUSPLUSPROTOS
 #endif
 #define opendir dbg_opendir
 #define closedir dbg_closedir
+
+/** @} */
 
 ENDCPLUSPLUSPROTOS
 

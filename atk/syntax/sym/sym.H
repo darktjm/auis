@@ -5,6 +5,9 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
 \* ********************************************************************** */
 
+/** \addtogroup libsym libsym.so
+ *  A dynamically loadable ATK class file.  Contains sym, toksym.
+ * @{ */
 /* sym.c
  *
  * A sym object is an entry in a symbol table.  Each symbol has associated with it a uniqe
@@ -154,6 +157,5 @@ public:
 	class sym *next;		/* used for handling collisions in hash table */
 	boolean intable; /* whether this sym has been put in the table or not */
 };
-
-
+/** @} */
 #endif /* _sym_H_ */

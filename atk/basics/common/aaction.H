@@ -2,6 +2,8 @@
 #define _AACTION_H_
 /* Copyright 1995 Carnegie Mellon University All rights reserved. */
 
+/** \addtogroup libbasics
+ * @{ */
 #include <andrewos.h>
 #include <avalue.H>
 
@@ -175,5 +177,6 @@ static Concat(name,TargetAct) act(&target::name,auxvalues); \
 	proctable::DefineAction(procname,&act,  \
 		Concat(name,TargetClass),NULL,doc); \
 }
+/** @} */
 #endif
 

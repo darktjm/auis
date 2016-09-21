@@ -6,6 +6,10 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libconsoleapp libconsoleapp.so
+ *  A dynamically loadable ATK class file.  Contains consoleapp,
+ *  consoleClass, logview.
+ * @{ */
 #include <application.H>
 class consoleapp : public  application {
 public:
@@ -23,5 +27,5 @@ public:
     
         char *consoleName;
 };
-
+/** @} */
 #endif /* _consoleapp_H_ */

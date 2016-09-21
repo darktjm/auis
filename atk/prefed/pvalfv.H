@@ -3,6 +3,8 @@ ATK_INTER
 #define _pvalfv_H_
 /* Copyright 1992 by the Andrew Toolkit Consortium and Carnegie Mellon University. All rights Reserved. */
 
+/** \addtogroup libprefs
+ * @{ */
 #include <pvalsbv.H>
 class pvalfv : public  pvalsbv {
 public:
@@ -16,6 +18,5 @@ public:
 
      void UpdateSButton();
 };
-
-
+/** @} */
 #endif /* _pvalfv_H_ */

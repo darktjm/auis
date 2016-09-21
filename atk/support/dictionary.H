@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 #include <ATK.H>
 
 class dictionary : public ATK  {
@@ -24,7 +26,5 @@ public:
 	static boolean InitializeClass();
 
 };
-
-
-
+/** @} */
 #endif /* _dictionary_H_ */

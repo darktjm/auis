@@ -12,7 +12,7 @@
 #include <text.H>
 
 #include <ansitext.h>
-#include <mathaux.h>
+#include <limits.h>
 #include <util.h>
 
 NO_DLL_EXPORT struct bdffont_fontchar bdffont_ReadCharDefn;
@@ -172,6 +172,10 @@ bdffont::~bdffont()
 #define bdffont_DefaultOriginX	(0)
 #define bdffont_DefaultOriginY	(0)
 
+/* note: alternates:
+ * <C99: (long)round(x)
+ * C99:  lround(x)
+ */
 #define RoundUp(x) ((long) ((x) + 0.5))
 
 /* pts in points, resx/y in dots per inch */
@@ -189,8 +193,8 @@ class bdffont *bdffont::CreateNewFont(long  pts, long  resx, long  resy)
 
     fontsize = (self)->ComputeFontSize();
 
-    self->ascent = /*mathaux_*/RoundUp(ansitext_ComputeAscent(fontsize));
-    self->descent = /*mathaux_*/RoundUp(ansitext_ComputeDescent(fontsize));
+    self->ascent = RoundUp(ansitext_ComputeAscent(fontsize));
+    self->descent = RoundUp(ansitext_ComputeDescent(fontsize));
     (self)->SetBoundingBox(
 			    bdffont_DefaultWidth, bdffont_DefaultHeight,
 			    bdffont_DefaultOriginX, bdffont_DefaultOriginY);
@@ -1168,8 +1172,8 @@ static void RecomputeFontExtent(class bdffont  *self)
     defn = &self->defns[0];
     limit = &self->defns[self->defns_size];
 
-    self->bbw = mathaux_MININT;
-    self->bbh = mathaux_MININT;
+    self->bbw = INT_MIN;
+    self->bbh = INT_MIN;
     while (defn < limit) {
 	if (bdffont_IsActive(defn)) {
 	    bdffont_GetExtent(defn, &w, &h);
@@ -1195,8 +1199,8 @@ static void RecomputeFontOrigin(class bdffont  *self)
     defn = &self->defns[0];
     limit = &self->defns[self->defns_size];
 
-    self->bbx = mathaux_MAXINT;
-    self->bby = mathaux_MAXINT;
+    self->bbx = INT_MAX;
+    self->bby = INT_MAX;
     while (defn < limit) {
 	if (bdffont_IsActive(defn)) {
 	    bdffont_GetOrigin(defn, &x, &y);

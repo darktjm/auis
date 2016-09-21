@@ -3,6 +3,8 @@
 #ifndef _gentext_H_
 #define _gentext_H_
 ATK_INTER
+/** \addtogroup libness
+ * @{ */
 /* gentext.H
 
 	Generate text from template.	
@@ -179,6 +181,5 @@ public:
 	static gentext * Create(const char *source);
 		/* creates a gentext using the argument as template */
 };
-
-
+/** @} */
 #endif /* _gentext_H_ */

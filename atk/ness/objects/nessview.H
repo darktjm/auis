@@ -6,6 +6,8 @@ ATK_INTER
 	Copyright Carnegie Mellon University 1992, 1993 - All Rights Reserved
 \* ********************************************************************** */
 
+/** \addtogroup libness
+ * @{ */
 #include <scroll.H>
 #include <textview.H>
 
@@ -65,5 +67,5 @@ public:
 	boolean justscanned;	/* if most recent compile was a scan */
 	textviewInterface *ti;
 };
-
+/** @} */
 #endif /* _nessview_H_ */

@@ -6,6 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libezdiff libezdiff.so
+ *  A dynamically loadable ATK class file.  Contains ezdiff.
+ * @{ */
 #include <observable.H>
 
 class ezdiff : public observable {
@@ -30,5 +33,5 @@ class ezdiff : public observable {
     class ezdiff *next;
     boolean asking;
 };
-
+/** @} */
 #endif /* _ezdiff_H_ */

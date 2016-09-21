@@ -9,7 +9,7 @@ it under the terms of the GNU General Public License. See ../COPYING for
 the full agreement.
 
 **********************************************************************/
-/** \addtogroup librecog librecog.a
+/** \addtogroup librecog
  * @{ */
 /* note: not defined in librecog, but must be defined by librecog users */
 

@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _figospli_H_
 #define _figospli_H_
-/* figospli.ch - fig element object: spline */
+/** \addtogroup libfigure
+ * @{ */
+/* figospli.H - fig element object: spline */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -39,5 +41,5 @@ static class figospli * Create(struct point *pointlist, long numpoints, boolean 
       struct point *tmppts;
       int tmppts_size;
 };
-
+/** @} */
 #endif /* _figospli_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 struct updateitem {
     class view *view;
     struct updateitem *next;
@@ -31,5 +33,5 @@ public:
 
     struct updateitem *updates;
 };
-
+/** @} */
 #endif /* _updatelist_H_ */

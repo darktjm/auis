@@ -4,7 +4,9 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libstroffet libstroffet.so
+ *  A dynamically loadable ATK class file.  Contains stroffet, stroffetview.
+ * @{ */
 #include <icon.H>
 class stroffet : public  icon {
 public:
@@ -23,5 +25,5 @@ public:
  
 };
 
-
+/** @} */
 #endif /* _stroffet_H_ */

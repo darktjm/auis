@@ -4,6 +4,8 @@ ATK_INTER
 /* Copyright 1995 Carnegie Mellon University All rights reserved. */
 
 
+/** \addtogroup libbasics
+ * @{ */
 #include <observable.H>
 #include <graphic.H>
 #include <image.H>
@@ -193,6 +195,5 @@ class ddimage {
 	if(di) di->RemoveObserver(observed);
     }
 };
-
- 
+/** @} */ 
 #endif /* _ddimage_H_ */

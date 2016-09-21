@@ -5,6 +5,8 @@ ATK_INTER
  *     Copyright IBM Corporation 1988,1991, 1993 - All Rights Reserved    *
 \* ********************************************************************** */
 
+/** \addtogroup libsym
+ * @{ */
 /* toksym.ch
  *
  * A toksym object is a subclass of sym.  Its adds four fields:
@@ -96,6 +98,5 @@ public:
 	union infotype info;	/* type dependent */
 
 };
-
-
+/** @} */
 #endif /* _toksym_H_ */

@@ -5,6 +5,8 @@
 #include <observable.H>
 #include <atom.H>
 
+/** \addtogroup libbasics
+ * @{ */
 struct ddcolor_list;
 class ddcolor;
 class colormap;
@@ -149,5 +151,5 @@ class colormap : public observable {
     virtual void Free(ddcolor *dc);
     ddcolors colors;
 };
+/** @} */
 #endif /* _color_H_ */
-

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libapt
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Apt Tool Set
@@ -90,5 +92,5 @@ Revision 1.1  89/05/18  20:31:13  tom
 Initial revision
 
 */
-
+/** @} */
 #endif /* _apts_H_ */

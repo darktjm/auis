@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libraster
+ * @{ */
 #define	ZRTOOLS_NUM	(17)
 #define	ZRCMDS_NUM	(6)
 #define ZRPASTEMODES_NUM (4)
@@ -100,5 +102,5 @@ public:
       boolean unpaste;
       class dataobject *primaryobj;
 };
-
+/** @} */
 #endif /* _rastoolview_H_ */

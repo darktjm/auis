@@ -1,5 +1,7 @@
 #ifndef _hrv_H_
 #define _hrv_H_
+/** \addtogroup libhtmltext
+ * @{ */
 /* File hrv.H created by Ward Nelson
     (c) Copyright IBM Corp 1995.  All rights reserved. 
 
@@ -20,5 +22,5 @@ class hrv: public view {
 
     class textview *parentview;
 };
-
+/** @} */
 #endif /* _hrv_H_ */

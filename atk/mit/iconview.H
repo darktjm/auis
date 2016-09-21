@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libnote
+ * @{ */
 #include <view.H>
 class iconview : public  view
 {
@@ -61,5 +63,5 @@ class iconview : public  view
     short neednewsize;
     class iconview *next;
 };
-
+/** @} */
 #endif /* _iconview_H_ */

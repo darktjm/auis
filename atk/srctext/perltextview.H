@@ -1,5 +1,7 @@
 #ifndef _perltextview_H_
 #define _perltextview_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File perltextview.H created by W R Nelson
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -22,5 +24,5 @@ class perltextview: public srctextview {
     class keystate *perl_state;
     class menulist *perl_menus;
 };
-
+/** @} */
 #endif /* _perltextview_H_ */

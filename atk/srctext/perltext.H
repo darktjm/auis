@@ -1,5 +1,7 @@
 #ifndef _perltext_H_
 #define _perltext_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File perltext.H created by W R Nelson
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -39,5 +41,5 @@ class perltext: public srctext {
     static boolean InitializeClass();
     perltext();
 };
-
+/** @} */
 #endif /* _perltext_H_ */

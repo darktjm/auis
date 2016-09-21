@@ -3,6 +3,8 @@ ATK_INTER
 #define _prefval_H_
 /* Copyright 1992 by the Andrew Toolkit Consortium and Carnegie Mellon University All rights Reserved. */
 
+/** \addtogroup libprefs
+ * @{ */
 enum prefval_Type {
     prefval_None,
     prefval_Integer,
@@ -121,5 +123,5 @@ public:
     boolean isdefault;
     long low, high;
 };
-
+/** @} */
 #endif /* _prefval_H_ */

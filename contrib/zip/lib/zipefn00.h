@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libzip
+ * @{ */
 /* zipefn00.h	Zip Subroutine Library Symbolic Facility-names		      */
 /* Author	TC Peters						      */
 /* Information Technology Center		   Carnegie-Mellon University */
@@ -176,6 +178,6 @@ END-SPECIFICATION  ************************************************************/
 
 
 #define zip_highest_stream_facility_name		80	/* Highest Stream-facility name defined */
-
+/** @} */
 
 #endif /* _zipefn00_h_ */

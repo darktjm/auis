@@ -1,5 +1,7 @@
 #ifndef _hlptext_H_
 #define _hlptext_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File hlptext.H created by R S Kemmetmueller
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -14,5 +16,5 @@ class hlptext: public text {
 
     hlptext();
 };
-
+/** @} */
 #endif /* _hlptext_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtree
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Tree View-Class
@@ -201,5 +203,5 @@ public:
 
   struct treev_instance		     *instance;
   };
-
+/** @} */
 #endif /* _treev_H_ */

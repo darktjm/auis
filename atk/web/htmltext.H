@@ -1,7 +1,12 @@
 #ifndef _htmltext_H_
 #define _htmltext_H_
 ATK_INTER
-
+/** \addtogroup libhtmltext libhtmltext.so
+ *  A dynamically loadable ATK class file.  Contains htmltext, htmltextview,
+ *  attlist, ez2htmlapp, hidden, hiddenview, hr, hrv, htablev, htmlenv,
+ *  htmlform, htmlimagev, urlbutton, urlbuttonview, wbuttonv, webapp,
+ *  webcom, weblink, weblinkview, web, webview.
+ * @{ */
 /* File htmltext.H created by Ward Nelson
        (c) Copyright IBM Corp 1995.  All rights reserved. 
 
@@ -105,5 +110,5 @@ class htmltext: public text {
     boolean readonly;
     char *title;
 };
-
+/** @} */
 #endif /* _htmltext_H_ */

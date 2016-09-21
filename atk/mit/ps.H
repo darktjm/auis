@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libnote
+ * @{ */
 #include <icon.H>
 class ps: public  icon {
 public:
@@ -31,6 +33,5 @@ public:
     long pwidth;
     long pheight;
 };
-
-
+/** @} */
 #endif /* _ps_H_ */

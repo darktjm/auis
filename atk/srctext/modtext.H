@@ -1,5 +1,7 @@
 #ifndef _modtext_H_
 #define _modtext_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File modtext.H created by R L Quinn
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -59,5 +61,5 @@ class modtext: public srctext {
     boolean outdentPreproc;
     int nestedprocindent;
 };
-
+/** @} */
 #endif /* _modtext_H_ */

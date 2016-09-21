@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 /* X implementation of the windowsystem class.
  */
 
@@ -30,5 +32,5 @@ public:
 	virtual iddimage *CreateDDImage(image *i, colormap **map);
 
 };
-
+/** @} */
 #endif /* _xws_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
  /* 
   *	pixelimg.H
   */
@@ -172,5 +174,5 @@ public:
 #define	pixelimage_BLACK	0xFF
 #define	pixelimage_INVERT	((~pixelimage_DEST)&0xFF)
 
-
+/** @} */
 #endif /* _pixelimage_H_ */

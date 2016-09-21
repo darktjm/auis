@@ -5,7 +5,8 @@ ATK_INTER
  *         Copyright IBM Corporation 1991 - All Rights Reserved           *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libtext
+ * @{ */
 #include <header.H>
 #include <view.H>
 class headrtv: public  view {
@@ -40,5 +41,5 @@ class headrtv: public  view {
       class lpair *sections;
       class textview *textvs[header_TEXTS];
 };
-
+/** @} */
 #endif /* _headrtv_H_ */

@@ -1,5 +1,7 @@
 #ifndef _hidden_H_
 #define _hidden_H_
+/** \addtogroup libhtmltext
+ * @{ */
 /* File hidden.H created by Ward Nelson
       (c) Copyright IBM Corp 1995.  All rights reserved. 
 
@@ -23,5 +25,5 @@ class hidden : public htmltext {
 
     enum visibility Visibility;
 };
-
+/** @} */
 #endif /* _hidden_H_ */

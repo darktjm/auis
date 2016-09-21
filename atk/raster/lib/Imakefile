@@ -8,8 +8,7 @@ OBJS = heximage.o oldRF.o paint.o plusspace.o rasterio.o xbm.o xwdio.o \
 	cmuwm.o dispbox.o raster.o rasterimage.o rasterview.o rastoolview.o \
 	rastvaux.o rastvauy.o
 HFILES = heximage.H oldRF.H paint.H plusspace.H rasterio.H xbm.H xwdio.H \
-	cmuwm.H raster.H rasterimage.H rasterview.H rastoolview.H dispbox.h \
-	pattern.h rastvaux.h
+	cmuwm.H raster.H rasterimage.H rasterview.H rastoolview.H
 
 LIBS = $(BASEDIR)/lib/libutil.a 
 

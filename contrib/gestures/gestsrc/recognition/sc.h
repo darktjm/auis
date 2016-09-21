@@ -23,7 +23,8 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 ***********************************************************************/
 
-/** \addtogroup librecog librecog.a
+/** \addtogroup librecog gestures/librecog
+ * Gesture recognizer library.
  * @{ */
 
 

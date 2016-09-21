@@ -1,4 +1,5 @@
-
+/** \addtogroup libatkos
+ * @{ */
 /* Sigh..., unfortunately if your cpp lies all you can do is add -DUnixCPP or -DANSI_CPP to the imake command, or edit this file... -rr2b */
 
 /*
@@ -35,3 +36,4 @@
 #define Stringize(a) "a"
 #endif
 #endif
+/** @} */

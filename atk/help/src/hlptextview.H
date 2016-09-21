@@ -5,7 +5,8 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libhelp
+ * @{ */
 #include <textview.H>
 class hlptextview: public  textview {
 public:
@@ -37,5 +38,5 @@ public:
     char *hyperTopic;		    /* Non-NULL if checkForHyperlinks & we found one. */
     enum view_MouseAction action;   /* Action that set hyperTopic */
 };
-
+/** @} */
 #endif /* _hlptextview_H_ */

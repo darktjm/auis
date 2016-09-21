@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 /* stylesht.H
  * class header file for stylesht.
  *
@@ -168,4 +170,5 @@ class stylesheet : public  observable {
     class menulist *styleMenu;		/* current menulist for the styles */
     stylesheet_maplist *mapstyles;
 };
+/** @} */
 #endif /* _stylesheet_H_ */

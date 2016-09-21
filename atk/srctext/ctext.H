@@ -1,5 +1,7 @@
 #ifndef _ctext_H_
 #define _ctext_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File ctext.H created by R L Quinn
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -34,5 +36,5 @@ class ctext: public srctext {
     int braceIndent, switchLabelUndent, switchLevelIndent;
     boolean outdentPreproc;
 };
-
+/** @} */
 #endif /* _ctext_H_ */

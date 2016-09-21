@@ -4,7 +4,8 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libzip
+ * @{ */
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -52,5 +53,5 @@ public:
    boolean Contains( zip_type_figure figure, zip_type_pane pane, zip_type_pixel x, zip_type_pixel y );
   };
 
-
+/** @} */
 #endif /* _ziporect_H_ */

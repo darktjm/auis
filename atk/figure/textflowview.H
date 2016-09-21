@@ -6,6 +6,8 @@ ATK_INTER
 	Copyright Carnegie Mellon University 1994 - All rights reserved
 */
 
+/** \addtogroup libfigure
+ * @{ */
 #include <figview.H>
 
 class textflowview : public figview {
@@ -21,5 +23,5 @@ class textflowview : public figview {
 
       virtual long BuildPlan(struct textps_layout_plan **planptr, long pagewidth, long pageheight);
 };
-
+/** @} */
 #endif /* _textflowview_H_ */

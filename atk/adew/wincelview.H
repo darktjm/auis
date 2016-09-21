@@ -5,7 +5,8 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libarbiter
+ * @{ */
 #include <view.H>
 class wincelview: public  view {
 public:
@@ -23,6 +24,5 @@ public:
     class celview *celviewp;
     class im *window;
 };
-
-
+/** @} */
 #endif /* _wincelview_H_ */

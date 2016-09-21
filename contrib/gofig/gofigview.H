@@ -4,7 +4,8 @@
  *	   Copyright Carnegie Mellon, 1994 - All Rights Reserved          *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libgofig
+ * @{ */
 /*
 gofigv.H
 
@@ -87,5 +88,5 @@ public:
 	int previousrow, previouscol;		/* most recent mouse coords */
 		/* previousrow and stonewheredown.row may be -1 */
 };
-
+/** @} */
 #endif /* _gofigview_H_ */

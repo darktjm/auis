@@ -1,5 +1,7 @@
 #ifndef _idltext_H_
 #define _idltext_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File idltext.H created by R S Kemmetmueller
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -13,5 +15,5 @@ class idltext: public cpptext {
     static boolean InitializeClass();
     idltext();
 };
-
+/** @} */
 #endif /* _idltext_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupviews
+ * @{ */
 #include <rect.h>
 
 #define DS_VERSION 10 /* datastream version */
@@ -193,6 +195,5 @@ public:
     struct sbutton_prefs *prefs; /* the default set of preferences to use */
     struct sbutton_prefs *matteprefs; /* the prefs to use for the matte */
 };
-
-
+/** @} */
 #endif /* _sbutton_H_ */

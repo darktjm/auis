@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _cmuwm_H_
 #define _cmuwm_H_
-/* cmuwm.ch - class description for ATK raster interface to image */
+/** \addtogroup libraster
+ * @{ */
+/* cmuwm.H - class description for ATK raster interface to image */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -19,5 +21,5 @@ public:
   
     static int Ident( const char *fullname )  ;
 };
-
+/** @} */
 #endif /* _cmuwm_H_ */

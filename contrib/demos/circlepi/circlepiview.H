@@ -4,7 +4,8 @@
  *         Copyright IBM Corporation 1991 - All Rights Reserved           *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup libcirclepi
+ * @{ */
 #include <view.H>
 class circlepiview: public  view {
 public:
@@ -33,5 +34,5 @@ public:
     class menulist *ml;
 };
 
-
+/** @} */
 #endif /* _circlepiview_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup liblookz
+ * @{ */
 /*
 lookzview.H
 
@@ -89,5 +91,5 @@ public:
 	boolean NeedsUnpack;	/* specifically for change to stylesheet (via another lookz) */
 	boolean OnScreen;
 };
-
+/** @} */
 #endif /* _lookzview_H_ */

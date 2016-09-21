@@ -2,7 +2,8 @@
 #ifndef ATKOS_H
 #define ATKOS_H 1
 
-/** \addtogroup libatkos libatkos.a
+/** \addtogroup libatkos libatkos
+ * Low-level functions for OS support.
  * @{ */
 
 #include <stdio.h> /* needed so that we can declare Andrew_tmpfile. */

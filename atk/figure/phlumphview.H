@@ -6,6 +6,8 @@ ATK_INTER
 	Copyright Carnegie Mellon University 1994 - All rights reserved
 */
 
+/** \addtogroup libfigure
+ * @{ */
 #include <view.H>
 
 class phlumphview : public view {
@@ -43,5 +45,5 @@ class phlumphview : public view {
     class textflowview *curview;
     int lastwidth, lastheight;
 };
-
+/** @} */
 #endif /* _phlumphview_H_ */

@@ -1,5 +1,7 @@
 /* File viewholderv.H created by Jon Tollefson at 12:37:43 on Thu Jan 19 1995. */
 /* Copyright 1995 Carnegie Mellon University All rights reserved. */
+/** \addtogroup libbasics
+ * @{ */
 /*
  Tool: viewholder
 
@@ -38,8 +40,7 @@ class viewholderv: public view {
     /****************************************************************************/	
   private:
 };
-
-
+/** @} */
 #endif /* _VIEWHOLDERV_H */
 
 /* Change Log
@@ -56,5 +57,3 @@ class viewholderv: public view {
  *
  *
  */
-
-

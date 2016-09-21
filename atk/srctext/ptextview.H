@@ -1,5 +1,7 @@
 #ifndef _ptextview_H_
 #define _ptextview_H_
+/** \addtogroup libsrctext
+ * @{ */
 /* File ptextview.H
    (c) Copyright IBM Corp.  1988-1995.  All rights reserved.
 
@@ -23,5 +25,5 @@ class ptextview: public srctextview {
     class keystate *c_state;
     class menulist *c_menus;    
 };
-
+/** @} */
 #endif /* _ptextview_H_ */

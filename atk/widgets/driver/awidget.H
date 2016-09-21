@@ -12,6 +12,13 @@ ATK_INTER
 	\begindata \enddata.  Contained is an avarset object.
 */
 
+/** \addtogroup libawidget libawidget.so
+ *  A statically loadable ATK class file.  Contains AWidget.  Also contains
+ *  ASlot, ASlotInt, ASlotReal, ASlotString, ASlotFile, ASlotPtr, ASlotATK
+ *  ASlotFunction, ASlotDataObj, ASlotFigure, ASlotFont, ASlotBool,
+ *  ASlotColor, AVarSet, AWidgetView, AFormulaViewAct, AWgtFig, AWgtFigView,
+ *  ADepender, ADependerPlaceHolder, AFormula, AFormulaAct, AFormulaSlot.
+ * @{ */
 /* status values for NotifyObservers */
 #define awidget_DATACHANGED 1
 
@@ -226,5 +233,5 @@ long num_clicks=in[5].Integer();
  * Copied from /afs/cs/misc/atk/@sys/alpha/lib/null
  */
 
-
+/** @} */
 #endif /* _AWidget_H_ */

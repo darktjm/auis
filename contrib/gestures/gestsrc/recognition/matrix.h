@@ -12,7 +12,7 @@ the full agreement.
 
 **********************************************************************/
 
-/** \addtogroup librecog librecog.a
+/** \addtogroup librecog
  * @{ */
 
 /*

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 #define tree23int_VERSION 1
 
 #include <ATK.H>
@@ -58,6 +60,5 @@ public:
     short nKids;
     class tree23int *kid[3];
 };
-
-
+/** @} */
 #endif /* _tree23int_H_ */

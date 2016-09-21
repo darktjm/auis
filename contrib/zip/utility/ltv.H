@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup liblt
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The LightTable View-object Specification
@@ -76,5 +78,5 @@ public:
    unsigned char		     wm_type;
    char				     tentative[512];
 };
-
+/** @} */
 #endif /* _ltv_H_ */

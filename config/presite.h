@@ -1,4 +1,5 @@
-
+/** \addtogroup config
+ * @{ */
 /* Platform and compiler options */
 
 
@@ -26,3 +27,4 @@ or
 /* 
 #define SOLARIS 1
 */
+/** @} */

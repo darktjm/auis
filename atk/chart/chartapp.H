@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libchart
+ * @{ */
 #include <application.H>
 
 /*
@@ -82,5 +84,5 @@ public:
     class im				   *imp;
     class frame			   *framep;
   };
-
+/** @} */
 #endif /* _chartapp_H_ */

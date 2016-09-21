@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libarbiter
+ * @{ */
 #define lsetview_UnInitialized 0
 #define lsetview_MakeHorz 1
 #define lsetview_MakeVert 2
@@ -59,6 +61,5 @@ public:
     class text *pdoc;
     int revision;
 };
-
-
+/** @} */
 #endif /* _lsetview_H_ */

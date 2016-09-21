@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #include <color.H>
 #include <X11/X.h>
 #include <X11/Xlib.h>
@@ -29,5 +31,5 @@ class xcolor : public  ddcolor {
     XColor tcolor;
     boolean valid;
 };
-
+/** @} */
 #endif /* _xcolor_H_ */

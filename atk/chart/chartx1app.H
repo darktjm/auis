@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libchart
+ * @{ */
 /*****************************************\
 
   Chart Programming Guide --  Example #1
@@ -28,5 +30,5 @@ public:
     class im				   *imp;
     class frame			   *framep;
   };
-
+/** @} */
 #endif /* _chartx1app_H_ */

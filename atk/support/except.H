@@ -4,6 +4,8 @@ ATK_INTER
 
 #include <setjmp.h>
 
+/** \addtogroup libsupport
+ * @{ */
 typedef char *except_Exception;
 
 typedef boolean (*except_UncaughtExceptionHandler)();
@@ -196,5 +198,5 @@ public:
 	{ t _rval = e; except::ResetContext(_except_routinecontext); return _rval; }
 #define except_return \
 	{ except::ResetContext(_except_routinecontext); return; }
-
+/** @} */
 #endif /* _except_H_ */

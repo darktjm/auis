@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsupport
+ * @{ */
 /* A hash table
  *
  */
@@ -41,5 +43,5 @@ public:
     class glist *buckets[hash_BUCKETS];
     hash_hashfptr hashfunc;
 };
-
+/** @} */
 #endif /* _hash_H_ */

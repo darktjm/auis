@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsuite
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Suite-object
@@ -94,5 +96,5 @@ Revision 1.1  89/04/28  20:26:19  tom
 Initial revision
 
 */
-
+/** @} */
 #endif /* _suitecv_H_ */

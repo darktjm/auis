@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libvalue
+ * @{ */
 #define fourwayv_NUMLABELS 4
 #include <buttonV.H>
 class fourwayV : public  buttonV
@@ -23,5 +25,5 @@ public:
    void LookupParameters();
 
 };
-
+/** @} */
 #endif /* _fourwayV_H_ */
