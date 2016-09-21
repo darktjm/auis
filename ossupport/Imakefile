@@ -4,16 +4,8 @@
 \* ********************************************************************** */
 
 LOCALINCLUDES=-I../config -I../config/$(SYS_CONFDIR)
-#ifdef NEED_SCANDIR
-SCANDIR=scandir.o
-#else
-SCANDIR=
-#endif
 
-OBJS=oscommon.o $(SCANDIR) relfunc.o relfunc2.o \
-	$(OSSUPBCOPY) $(OSSUPBZERO) $(OSSUPBCMP) \
-	$(OSSUPINDEX) $(OSSUPRINDEX) \
-	$(OSSUPUCSTRING)	$(OSSUPLCSTRING)
+OBJS=oscommon.o relfunc.o relfunc2.o
 
 NormalObjectRule()
 MkdirTarget($(DESTDIR) $(DESTDIR)/lib $(DESTDIR)/include  $(DESTDIR)/etc)

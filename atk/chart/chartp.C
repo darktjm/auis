@@ -124,13 +124,6 @@ static suite_Specification		pie_button[] =
   0
   };
 
-/*suite_Specification		map_button[] =
-  {
-  suite_ItemCaption("Map"),
-  suite_ItemDatum(map_code),
-  NULL
-  };
-*/
 static suite_Specification		stack_button[] =
   {
   suite_ItemCaption("Stack"),

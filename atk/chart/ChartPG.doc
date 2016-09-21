@@ -544,8 +544,6 @@ chart_Cartesian
 
 chart_Polar
 
-chart_Map
-
 chart_xxx}}}
 
 
@@ -2034,12 +2032,6 @@ Displays data collection as Dot-chart.  Dots may be connected.
 
 
 Displays data collection as Stacked-Histogram-chart.
-
-
-\bold{\sans{chartmap}}
-
-
-Displays data collection as Map-chart.
 
 
 \bold{\sans{chartcsn}}

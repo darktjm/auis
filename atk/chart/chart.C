@@ -485,7 +485,6 @@ static const struct chart_monikers	monikers[] = /*===MUST BE DYNAMIC*/
 {"Dot","chartdot"},
 {"Line","chartlin"},
 {"Cartesian","chartcsn"},
-{"Map","chartmap"},
 {"Stack","chartstk"},
 {0,0}
 };

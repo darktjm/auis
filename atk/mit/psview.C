@@ -16,7 +16,7 @@
 
 */
 
-#include <andrewos.h>		/* for DPS_ENV */
+#include <andrewos.h>
 #include <stdio.h>
 #include <signal.h>
 
@@ -38,17 +38,6 @@
 #include <message.H>
 #include <search.H>
 
-#ifdef DPS_ENV
-#include <dpstextview.H>
-#include <X11/X.h>
-#include <X11/Xlib.h>
-#include <xgraphic.H>
-#ifdef DisplayString
-#undef DisplayString
-#endif
-#endif /* DPS_ENV */
-
-
 #define DEBUG 1
 #ifdef DEBUG
 #define DBG(x) fprintf(stderr, "%s\n", (x))
@@ -63,11 +52,6 @@
 #define TITLEFONT "andysans"
 #define TITLESTYLE fontdesc_Plain
 #define TITLEPTS 12
-
-#ifdef DPS_ENV
-#define EDIT_MODE 0x1
-#define VIEW_MODE 0x2
-#endif /* DPS_ENV */
 
 static class menulist *psviewMenus;
 static class keymap *psviewKeyMap;
@@ -88,32 +72,11 @@ ATKdefineRegistry(psview, iconview, psview::InitializeClass);
 static void update_dpstextview(class psview  *self);
 static void inchsize(class psview  *self);
 static void pixelsize(class psview  *self);
-#ifdef DPS_ENV
-static void display(class psview  *self, long  rock);
-static void edit(class psview  *self, long  rock);
-#endif /* DPS_ENV */
 static void autobounds(class psview  *self, long  rock);
 
 
 static void update_dpstextview(class psview  *self)
      {
-#ifdef DPS_ENV
-    class ps *psobj = (class ps *)(self)->GetDataObject();
-    long w = (psobj)->GetPixelWidth();
-    long h = (psobj)->GetPixelHeight();
-    double dpi_x, dpi_y;
-    long pix_w, pix_h;
-    class xgraphic *xgr=(class xgraphic *)(self)->GetDrawable();
-
-    if (!(self->interpret) || xgr==NULL) return;
-    dpi_x = (xgr)->GetHorizontalResolution();
-    dpi_y = (xgr)->GetVerticalResolution();
-    pix_w = w / 72.0 * dpi_x;
-    pix_h = h / 72.0 * dpi_y;
-    ((class dpstextview *)(((class iconview *)self)->child))->SetDesired( pix_w, pix_h);
-
-#endif /* DPS_ENV */
-
     return;
 } /* update_dpstextview */
 
@@ -199,40 +162,6 @@ static void pixelsize(class psview  *self)
 }
 
 
-#ifdef DPS_ENV
-static void display(class psview  *self, long  rock)
-          {
-    class ps *psobj = (class ps *)(self)->GetDataObject();
-    long w = (psobj)->GetPixelWidth();
-    long h = (psobj)->GetPixelHeight();
-
-    self->interpret = !0;
-
-    if((self->menus)->SetMask( ((self->menus)->GetMask() & ~EDIT_MODE) | VIEW_MODE)) {
-	(self)->PostMenus( NULL);
-    }
-    (self)->SetChild( "dpstextview");
-    update_dpstextview(self);
-} /* display */
-
-static void edit(class psview  *self, long  rock)
-          {
-    class style * ds;
-
-    self->interpret = 0;
-
-    if((self->menus)->SetMask( ((self->menus)->GetMask() & ~VIEW_MODE) | EDIT_MODE)) {
-	(self)->PostMenus( NULL);
-    }
-    (self)->SetChild( "textview");
-    ds = ((class textview *)
-				  self->bottomview)->GetDefaultStyle();
-    (ds)->SetFontFamily( "AndyType");
-    (ds)->SetFontSize( style_ConstantFontSize, 10);
-
-} /* edit */
-#endif /* DPS_ENV */
-
 static void autobounds(class psview  *self, long  rock)
           {
     class textview *tvobj = (class textview *)(((class iconview *)self)->bottomview);
@@ -304,10 +233,6 @@ static void autobounds(class psview  *self, long  rock)
 static struct bind_Description psviewBindings[]={
     {"psview-set-inch-size", NULL, 0, "PostScript,Set Inch Size~10", 0, 0, (proctable_fptr)inchsize, "Set print size in inches", NULL},
     {"psview-set-point-size", NULL, 0, "PostScript,Set Point Size~11", 0, 0, (proctable_fptr)pixelsize, "Set print size in points", NULL},
-#ifdef DPS_ENV
-    {"psview-edit", NULL, 0, "PostScript,Edit~1", 0, VIEW_MODE, (proctable_fptr)edit, "Edit the PostScript", NULL},
-    {"psview-display", NULL, 0, "PostScript,View~1", 0, EDIT_MODE, (proctable_fptr)display, "Display the PostScript as an image", NULL},
-#endif /* DPS_ENV */
     {"psview-autobound", NULL, 0, "PostScript,Scan for bounds~20", 0, 0, (proctable_fptr)autobounds, "Suck out the bounding box information and use it to set our bounds", NULL},
     NULL
 };
@@ -530,11 +455,6 @@ psview::SetDataObject(class dataobject  * dobj)
     (this)->iconview::SetDataObject(dobj);
 
 
-#ifdef DPS_ENV
-    if((this->menus)->SetMask( ((this->menus)->GetMask() & ~VIEW_MODE) | EDIT_MODE)) {
-	(this)->PostMenus( NULL);
-    }
-#endif /* DPS_ENV */
     ds = ((class textview *)
 				 this->bottomview)->GetDefaultStyle();
     (ds)->SetFontFamily( "AndyType");

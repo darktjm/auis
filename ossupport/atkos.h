@@ -12,12 +12,6 @@ extern void ATKUseExportsFiles(char *arg, char *dot, char *slash);
 extern void ATKMinimizeLibs(char *arg, char *dot, char *slash);
 
 BEGINCPLUSPLUSPROTOS
-#ifdef NEED_SCANDIR
-int scandir(const char *dir, struct dirent ***namelist,
-              int (*select)(const struct dirent *),
-              int (*compar)(const struct dirent **, const struct dirent **));
-int alphasort(const struct dirent **a, const struct dirent **b);
-#endif
 
 #ifdef NEED_ATKINIFINI
 extern void ATK_DoIniFini();

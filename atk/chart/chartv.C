@@ -156,8 +156,6 @@ static struct bind_Description	    view_menu[] =
 /*===
   { "chartv-ReChart", "",   0,	"ReChart~10,Cartesian~5",
     (long)"Cartesian",	menu_default,	ReChart_Command,"ReChart To Cartesian" },
-  { "chartv-ReChart", "",   0,	"ReChart~10,Map~10",
-    (long)"Map",	menu_default, ReChart_Command,	"ReChart To Map" },
   { "chartv-ReChart", "",   0,	"ReChart~10,Stack~11",
     (long)"Stack",	menu_default,	ReChart_Command,"ReChart To Stack" },
 ===*/

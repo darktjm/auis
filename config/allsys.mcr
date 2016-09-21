@@ -216,14 +216,6 @@ CPPDEPINCLUDES="`$(CC) -v  2>&1 | sed -n -e 's@Reading specs from \\(.*\\)gcc-li
 
 GNUEMACS=/usr/local/bin/gnu-emacs
 
-#ifdef NEED_BSDMEMSTRFUNCS
-OSSUPBCOPY=bcopy.o
-OSSUPBZERO=bzero.o
-OSSUPBCMP=bcmp.o
-OSSUPINDEX=index.o
-OSSUPRINDEX=rindex.o
-#endif
-
         UTILLIB = $(BASEDIR)/lib/libutil.a
         PRSLIB =
 

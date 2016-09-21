@@ -34,6 +34,14 @@ NormalObjectRule()
 NormalATKRule()
 EXTRACLASSES=consoleClass logview
 
+mktrig.h: mktrig
+	./mktrig >mktrig.h
+
+# makedeps does this, but better to be safe
+draw.o: mktrig.h
+
+ProgramTarget(mktrig, mktrig.o, ,-lm)
+
 DynamicMultiObject(consoleapp,$(EXTRACLASSES), $(OBJS), $(LIBS), -lm $(BSDLIB),)
 InstallDynamicObject(consoleapp,$(EXTRACLASSES), $(FULLATKDLIBDIR))
 

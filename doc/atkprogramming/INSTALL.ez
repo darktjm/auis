@@ -1286,17 +1286,6 @@ zooming in to the base drawing.}
 
 \subsection{3.2.4 site.h - X11 and Fonts}
 
-\indent{
-}\bold{DPS_ENV#}				[Default: not defined]
-
-\indent{DPS_ENV should be defined if your systems support the Display 
-PostScript extension to X Windows. IBM's X.V11R3 server product, DEC's 
-DecWindows product, and Sun's Solaris 2.3 all have this extension, while 
-the MIT servers typically do not. Defining this variable will cause some 
-code to attempt to link against the DPS libraries. It will also cause some 
-code to attempt to contact the DPS extension of an X server at runtime.
-
-}
 \bold{FONTS_TO_BDF_ENV#} 		[Default: not defined]
 
 \indent{FONTS_TO_BDF_ENV controls whether or not the Andrew fonts will be 

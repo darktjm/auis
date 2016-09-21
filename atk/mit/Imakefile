@@ -3,29 +3,16 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'   
 \* ********************************************************************** */
 
-#ifdef DPS_ENV
-#if defined(SGI_4D_ENV) || defined(PMAX_ENV)
-DPSCLIENTLIBS = -ldps -lXext -lX11
-#else
-DPSCLIENTLIBS = -ldps -lX11
-#endif
-
-LOCALINCLUDES = -I/usr/include/DPS -I$(XINCDIR)/X11 -I/usr/include/X11
-DPSOBJ =  dpstextview.o
-DPSH =  dpstextview.H
-DPSTXTV = dpstextview
-#endif
-
 OBJS = note.o icon.o ps.o noteview.o iconview.o psview.o \
-      gnucompat.o vutils.o $(DPSOBJ)
+      gnucompat.o vutils.o
 IHFILES = note.H icon.H ps.H noteview.H iconview.H psview.H \
-      gnucompat.H vutils.H  $(DPSH)
+      gnucompat.H vutils.H 
 EXTRACLASSES=icon ps noteview iconview psview  \
-      gnucompat vutils $(DPSTXTV) 
+      gnucompat vutils
 
 InstallClassFiles(${IHFILES})
 
-DynamicMultiObject(note, $(EXTRACLASSES), $(OBJS), , $(DPSCLIENTLIBS) $(DYNMATHLIB),)
+DynamicMultiObject(note, $(EXTRACLASSES), $(OBJS), , $(DYNMATHLIB),)
 InstallDynamicObject(note,$(EXTRACLASSES), $(DESTDIR)/lib/atk)
 
 CPPProgramTarget(ez2ascii, ez2ascii.o, ${UTILLIB}, ${BSDLIB})

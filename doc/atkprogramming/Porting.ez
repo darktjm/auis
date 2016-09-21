@@ -2364,18 +2364,7 @@ fourth release (X11R4). This information is needed because release 4
 defines some new variable types and makes use of ANSI C function prototypes.
 
 
-}\bold{DPS_ENV}				[Default: not defined]
-
-
-\indent{DPS_ENV should be defined if your systems support the Display 
-PostScript extension to X Windows. IBM's Xv11r3 server product and DEC's 
-DecWindows product both have this extension, while the MIT servers 
-typically do not. Defining this variable will cause some code to attempt to 
-link against the DPS libraries. It will also cause some code to attempt to 
-contact the DPS extension of an X server at runtime.
-
-}
-\bold{ANDREW_MALLOC_ENV}	[Default: defined]
+}\bold{ANDREW_MALLOC_ENV}	[Default: defined]
 
 \bold{
 }\indent{ANDREW_MALLOC_ENV, if defined, causes the Andrew Toolkit memory 
