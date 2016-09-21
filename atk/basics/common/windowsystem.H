@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 /* Window system package.
  * Provides an abstraction for dealing with multiple window management systems
  * using a singe executable.
@@ -36,5 +38,5 @@ public:
 	virtual boolean HandleFiles(long WaitTime, boolean beCheap)  ;
 	virtual iddimage *CreateDDImage(image *i, colormap **map);
 };
-
+/** @} */
 #endif /* _windowsystem_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libchart
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Line Chart View-object
@@ -90,5 +92,5 @@ Revision 1.1  89/05/04  19:59:10  tom
 Initial revision
 
 */
-
+/** @} */
 #endif /* _chartlin_H_ */

@@ -3,6 +3,8 @@ ATK_INTER
 #define _wrapv_H_
 /* Copyright 1992 by the Andrew Toolkit Consortium and Carnegie Mellon University. All rights Reserved. */
 
+/** \addtogroup libprefs
+ * @{ */
 #include <view.H>
 class wrapv : public  view {
 public:
@@ -43,5 +45,5 @@ public:
    class view *tv;
    class view *intv;
 };
-
+/** @} */
 #endif /* _wrapv_H_ */

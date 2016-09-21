@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libframe
+ * @{ */
 /* framecmd.H
  * A vestigial class to make static loading of framecmds optional.
  *
@@ -24,5 +26,5 @@ public:
 
         static void DeleteWindow(class frame *self);
 };
-
+/** @} */
 #endif /* _framecmds_H_ */

@@ -6,7 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/* fillerview.ch - filler view definition and interface */
+/** \addtogroup liblayout
+ * @{ */
+/* fillerview.H - filler view definition and interface */
 #define fillerview_VERSION 1
 
 /* Interface definition */
@@ -42,7 +44,6 @@ public:
 	int hitindex;
 };
 
-/* end of fillerview.ch */
-
-
+/* end of fillerview.H */
+/** @} */
 #endif /* _fillerview_H_ */

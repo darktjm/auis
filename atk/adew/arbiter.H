@@ -6,6 +6,11 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libarbiter libarbiter.so
+ *  A dynamically loadable ATK class file.  Contains arbiter, arbiterview,
+ *  arbcon, cel, celview, lset, lsetview, page, pagev, runadewapp,
+ *  wincelview.
+ * @{ */
 #include <cel.H>
 class arbiter : public  cel {
 public:
@@ -32,5 +37,5 @@ public:
 
 	class cel *first;
 };
-
+/** @} */
 #endif /* _arbiter_H_ */

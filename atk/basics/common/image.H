@@ -26,6 +26,8 @@ ATK_INTER
  * USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+/** \addtogroup libbasics
+ * @{ */
 typedef unsigned long  Pixel;     /* what X thinks a pixel is */
 typedef unsigned short Intensity; /* what X thinks an RGB intensity is */
 typedef unsigned char  byte;      /* byte type */
@@ -185,5 +187,5 @@ public:
 
 #define image_NEW (1<<5)
 #define image_CHANGED (1<<6)
-
+/** @} */
 #endif /* _image_H_ */

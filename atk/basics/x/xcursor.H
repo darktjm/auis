@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 /* 
  *	cursor.ch
  */
@@ -38,5 +40,5 @@ public:
 	class xim *im;
 	boolean valid;
 };
-
+/** @} */
 #endif /* _xcursor_H_ */

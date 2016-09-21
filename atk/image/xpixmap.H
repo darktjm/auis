@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _xpixmap_H_
 #define _xpixmap_H_
-/* xpixmap.ch - class description for interface from Xpixmap format to image */
+/** \addtogroup libimagev
+ * @{ */
+/* xpixmap.H - class description for interface from Xpixmap format to image */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -17,5 +19,5 @@ public:
      long WriteNative( FILE *file, const char *filename )  ;
      int Load( const char *fullname, FILE *fp )  ;
 };
-
+/** @} */
 #endif /* _xpixmap_H_ */

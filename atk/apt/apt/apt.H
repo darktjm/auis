@@ -6,6 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libapt libapt.so
+ *  A dynamically loadable ATK class file.  Contains apt, apts, aptv.
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Apt Data-object
@@ -239,5 +242,5 @@ static UNUSED float	    	  elapsed_time;
 #define  apt_PrintTimer(x)	  {gettimeofday( &tod, &tzone );\
 			  elapsed_time = ((tod.tv_sec * 1000) + (tod.tv_usec / 1000)) - elapsed_time;\
 			  printf( "%s -- %0.2g Seconds\n", "x", elapsed_time/1000 );}
-  
+/** @} */  
 #endif /* _apt_H_ */

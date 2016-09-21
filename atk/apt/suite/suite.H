@@ -6,6 +6,10 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsuite libsuite.so
+ *  A dynamically loadable ATK class file.  Contains suite, suitecv,
+ *  suiteev, suitetapp, suitex1app, vector.
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Suite-object
@@ -710,5 +714,5 @@ END-SPECIFICATION  ************************************************************/
  * Initial revision
  * 
 */
-
+/** @} */
 #endif /* _suite_H_ */

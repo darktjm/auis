@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libraster
+ * @{ */
 /*  oldrf.H
 
 	oldRF package
@@ -47,6 +49,5 @@ public:
 		/* Write a raster image to 'file' from 'pix'  */
 
 };
-
-
+/** @} */
 #endif /* _oldRF_H_ */

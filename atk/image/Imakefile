@@ -10,7 +10,7 @@ OBJS = faces.o fbm.o imagev.o img.o mac.o mcidas.o pbm.o pcx.o \
 EXTRACLASSES = faces fbm img mac mcidas pbm pcx \
 	xbitmap xwd tif sunraster xpixmap
 
-HFILES = colormapv.H colorv.H faces.H fbm.H imagev.H \
+HFILES = /* colormapv.H colorv.H */ faces.H fbm.H imagev.H \
 	img.H mac.H mcidas.H pbm.H pcx.H \
 	xbitmap.H xwd.H tif.H sunraster.H xpixmap.H
 

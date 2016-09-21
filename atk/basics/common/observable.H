@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #define observable_VERSION 1
 
 #include <traced.H>
@@ -90,6 +92,5 @@ public:
 
 #define observable_OBJECTDESTROYED -1
 #define observable_OBJECTCHANGED 0
-
-
+/** @} */
 #endif /* _observable_H_ */

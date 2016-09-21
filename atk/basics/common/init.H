@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 /* init.H
  * Class header file for initialization file reader.
  *
@@ -51,5 +53,5 @@ public:
 	int version;
 	struct menus *buttons;	// using menulist for now.
 };
-
+/** @} */
 #endif /* _init_H_ */

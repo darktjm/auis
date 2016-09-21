@@ -5,6 +5,9 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libfilter libfilter.so
+ *  A dynamically loadable ATK class file.  Contains filter.
+ * @{ */
 /* filter the textview selection region through a command
  */
 
@@ -19,5 +22,5 @@ public:
 	static boolean InitializeClass();
 
 };
-
+/** @} */
 #endif /* _filter_H_ */

@@ -6,7 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/* proctbl.ch -- A module that manages a mapping from strings to procedure pointers.
+/** \addtogroup libbasics
+ * @{ */
+/* proctbl.H -- A module that manages a mapping from strings to procedure pointers.
 December, 1986 */
 
 enum proctable_type {
@@ -126,4 +128,5 @@ inline enum proctable_type proctable::GetReturnType(const struct proctable_Entry
 inline const char *proctable::GetModule(const struct proctable_Entry * self)		{ return ((self)->module); }
 inline const char *proctable::GetDocumentation(const struct proctable_Entry * self) 	{ return ((self)->doc); }
 inline aaction *proctable::GetAction(const struct proctable_Entry * self) 	{ return ((self)->act); }
+/** @} */
 #endif /* _proctable_H_ */

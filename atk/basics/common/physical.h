@@ -3,6 +3,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 /* Include file for cooridnate conversions */
 
 long physical_LogicalPtToGlobalX(struct graphic  * CoordinateSystem,struct point  * LogicalPoint );
@@ -15,3 +17,4 @@ long physical_GlobalXToLogicalX(struct graphic  * CoordinateSystem,long  Physica
 long physical_GlobalYToLogicalY(struct graphic  * CoordinateSystem,long  PhysicalY );
 void physical_LogicalToGlobalRect(struct graphic  * CoordinateSystem,struct rectangle  * TempRect );
 void physical_GlobalToLogicalRect(struct graphic  * CoordinateSystem,struct rectangle  * TempRect );
+/** @} */

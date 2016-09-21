@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #include <image.H>
 
 class jpeg : public  image {
@@ -33,6 +35,5 @@ public:
     
       int saveQuality;
 };
-
-
+/** @} */
 #endif /* _jpeg_H_ */

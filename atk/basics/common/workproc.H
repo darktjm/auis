@@ -2,6 +2,8 @@
 #define _WORKPROC_H_
 ATK_INTER
 /* Copyright 1996 Carnegie Mellon University All rights reserved. */
+/** \addtogroup libbasics
+ * @{ */
 #include <observable.H>
 class event;
 
@@ -41,5 +43,5 @@ class WorkProc : public observable {
       return exitstatus;
     }
 };
-
+/** @} */
 #endif

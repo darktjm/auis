@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup liblookz
+ * @{ */
 #define  tabrulerview_PROGRAMMERVERSION    1
 
 #define tabrulerview_NoValue (-999<<16)
@@ -73,5 +75,5 @@ virtual ATKregistryEntry *ATKregistry();
     int mul; /* Used to scale the ruler to pretend it's real... */
     int div;
 };
-
+/** @} */
 #endif /* _tabrulerview_H_ */

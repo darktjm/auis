@@ -6,6 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libdatacata libdatacata.so
+ *  A dynamically loadable ATK class file.  Contains datacata.
+ * @{ */
 #define datacata_IncludeNo (0)
 #define datacata_IncludeYes (1)
 #define datacata_IncludeRecursive (2)
@@ -47,5 +50,5 @@ public:
       int LockAndDelete;
       char *ofilename;
 };
-
+/** @} */
 #endif /* _datacata_H_ */

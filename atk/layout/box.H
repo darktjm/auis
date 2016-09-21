@@ -6,7 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/* box.ch - box data object definition and interface */
+/** \addtogroup liblayout
+ * @{ */
+/* box.H - box data object definition and interface */
 
 #include <rect.h>
 
@@ -47,6 +49,6 @@ public:
   class dataobject *contents;		    /* contained object */
 };
 
-/* end of box.ch */
-
+/* end of box.H */
+/** @} */
 #endif /* _box_H_ */

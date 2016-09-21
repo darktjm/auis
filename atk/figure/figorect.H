@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _figorect_H_
 #define _figorect_H_
-/* figorect.ch - fig element object: rectangle */
+/** \addtogroup libfigure
+ * @{ */
+/* figorect.H - fig element object: rectangle */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -45,5 +47,5 @@ public:
       long w, h;  /* may be negative */
       boolean dummysymmetry; 
 };
-
+/** @} */
 #endif /* _figorect_H_ */

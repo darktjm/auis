@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #define XIM_GETLOC_FIXED 1
 /* im.H
  * Class header file for the interface manager.
@@ -495,5 +497,5 @@ struct im_GlobalDataType {
 				 * converted to esc, then foo */
 
 #endif /* INTERACTION_MANAGER */
-
+/** @} */
 #endif /* _im_H_ */

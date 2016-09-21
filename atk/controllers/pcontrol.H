@@ -9,6 +9,10 @@ ATK_INTER
 
 /* user code ends here for HeaderInfo */
 
+/** \addtogroup libpcontrol libpcontrol.so
+ *  A dynamically loadable ATK class file.  Contains pcontrol, calccon,
+ *  helpcon.
+ * @{ */
 #include <ATK.H>
 class pcontrol : public ATK  {
 public:
@@ -87,5 +91,5 @@ public:
 	class view *v;
 	class pcontrol *next;
 };
-
+/** @} */
 #endif /* _pcontrol_H_ */

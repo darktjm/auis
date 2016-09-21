@@ -6,6 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libmetax libmetax.so
+ *  A dynamically loadable ATK class file.  Contains metax.
+ * @{ */
 /* metax package for ATK by Rob Ryan March 19, 1989 */
 
 #include <ATK.H>
@@ -19,5 +22,5 @@ public:
 	static boolean InitializeClass();
 
 };
-
+/** @} */
 #endif /* _metax_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbush
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	Bush Application
@@ -56,5 +58,5 @@ public:
     const char	   **argv;
     int		     debug;
 };
-
+/** @} */
 #endif /* _bushapp_H_ */

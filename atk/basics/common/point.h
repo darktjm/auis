@@ -7,6 +7,8 @@
 
 #define POINT_DEFINED
 
+/** \addtogroup libbasics
+ * @{ */
 #include <atkproto.h>
 BEGINCPLUSPLUSPROTOS
 
@@ -37,5 +39,5 @@ boolean point_ArePtsEqual(struct point  * LHS,struct point  * RHS );
 struct point * point_CreatePoint(long  InitX , long  InitY);
 
 ENDCPLUSPLUSPROTOS
-
+/** @} */
 #endif /* POINT_DEFINED */

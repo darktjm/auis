@@ -7,6 +7,8 @@
 
 #define RECTANGLE_DEFINED
 
+/** \addtogroup libbasics
+ * @{ */
 #include <atkproto.h>
 BEGINCPLUSPLUSPROTOS
 
@@ -72,6 +74,6 @@ struct rectangle * rectangle_CreateRectSides(long  left,long  top,long  right, l
 struct rectangle * rectangle_Duplicate(struct rectangle  * Rect );
 
 ENDCPLUSPLUSPROTOS
-
+/** @} */
 #endif /* RECTANGLE_DEFINED */
 

@@ -6,9 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-
- 
-
+/** \addtogroup libarbiter
+ * @{ */
 #define celview_UnInitialized 0
 #define celview_MakeHorz 1
 #define celview_MakeVert 2
@@ -112,6 +111,5 @@ class celview: public view {
       boolean TopLevel;
       boolean AddAppLayer; /* Add an application layer, regardless of flag in cel */
 };
-
-
+/** @} */
 #endif /* _celview_H_ */

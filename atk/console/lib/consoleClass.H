@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libconsoleapp
+ * @{ */
 #define consoleClass_VERSION 1
 #define BOXINTERVAL 10
 
@@ -34,5 +36,5 @@ public:
     long menuMask;
     boolean is_visible;
 };
-
+/** @} */
 #endif /* _consoleClass_H_ */

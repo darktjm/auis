@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _sunraster_H_
 #define _sunraster_H_
-/* sunraster.ch - class description for interface from Sun raster format to image */
+/** \addtogroup libimagev
+ * @{ */
+/* sunraster.H - class description for interface from Sun raster format to image */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -19,5 +21,5 @@ public:
   
     static int Ident( const char *fullname )  ;
 };
-
+/** @} */
 #endif /* _sunraster_H_ */

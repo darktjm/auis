@@ -7,6 +7,9 @@ ATK_INTER
 \* ********************************************************************** */
 #include <ATK.H>
 
+/** \addtogroup libdynsearch libdynsearch.so
+ *  A dynamically loadable ATK class file.  Contains dynsearch.
+ * @{ */
 class dynsearch : public ATK  {
 public:
 	virtual ATKregistryEntry *ATKregistry();
@@ -16,5 +19,5 @@ public:
 	static boolean InitializeClass();
 
 };
-
+/** @} */
 #endif /* _dynsearch_H_ */

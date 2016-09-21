@@ -3,6 +3,8 @@ ATK_INTER
 #define _phelpv_H_
 /* Copyright 1992 by Carnegie Mellon University All rights Reserved. */
 
+/** \addtogroup libprefs
+ * @{ */
 #include <textview.H>
 class phelpv : public  textview  {
 public:
@@ -27,5 +29,5 @@ public:
 
     class prefs *prefs;
 };
-
+/** @} */
 #endif /* _phelpv_H_ */

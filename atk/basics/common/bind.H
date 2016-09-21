@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #include <ATK.H>
 #include <proctable.H>
 
@@ -40,5 +42,5 @@ public:
     static void BindList(const struct bind_Description *bl, class keymap *km, class menulist *ml, const struct ATKregistryEntry  *type);
     static void BindList(const struct bind_ActionDescription *bl, class keymap *km, class menulist *ml, const struct ATKregistryEntry  *type);
 };
-
+/** @} */
 #endif /* _bind_H_ */

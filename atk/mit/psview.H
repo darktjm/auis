@@ -6,6 +6,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libnote
+ * @{ */
 #include <iconview.H>
 class psview : public  iconview
 {
@@ -31,5 +33,5 @@ class psview : public  iconview
     class menulist *menus;
     int interpret;
 };
-
+/** @} */
 #endif /* _psview_H_ */

@@ -3,6 +3,8 @@ ATK_INTER
 #define _traced_H_
 /* Copyright 1992 Andrew Toolkit Consortium, Carnegie Mellon University */
 
+/** \addtogroup libbasics
+ * @{ */
 #include <ATK.H>
 
 class traced : public ATK  {
@@ -21,5 +23,5 @@ public:
 
 	unsigned long refcount;
 };
-
+/** @} */
 #endif /* _traced_H_ */

@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _fontselview_H_
 #define _fontselview_H_
-/* fontselv.ch - font selection inset view */
+/** \addtogroup libfigure
+ * @{ */
+/* fontselv.H - font selection inset view */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -58,5 +60,5 @@ public:
       int sizenum;
 
 };
-
+/** @} */
 #endif /* _fontselview_H_ */

@@ -5,6 +5,8 @@ ATK_INTER
  *	   Copyright Carnegie Mellon, 1996 - All Rights Reserved          *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libbasics
+ * @{ */
 #include <mflex.H>
 #include <oflex.H>
 #include <util.h>
@@ -295,4 +297,5 @@ return *this; \
       else return FALSE; \
   } \
 }
+/** @} */
 #endif

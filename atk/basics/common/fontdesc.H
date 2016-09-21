@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #define fontdesc_All	-1
 #define fontdesc_Plain	0
 #define fontdesc_Bold	1
@@ -102,5 +104,5 @@ public:
     class fontdesc *next;
     unsigned char charValid[fontdesc_NumIcons / 8];
 };
-
+/** @} */
 #endif /* _fontdesc_H_ */

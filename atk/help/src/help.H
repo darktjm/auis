@@ -6,8 +6,12 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libhelp libhelp.so
+ *  A dynamically loadable ATK class file.  Contains help, hlptextview,
+ *  helpdb, helpapp.
+ * @{ */
 /*---------------------------------------------------------------------------*/
-/*	MODULE: help.ch							     */
+/*	MODULE: help.H							     */
 /*		Subclass of view, includes all major lookup and display      */
 /*		routines.						     */
 /*---------------------------------------------------------------------------*/
@@ -91,5 +95,5 @@ public:
 
     boolean showing;
 };
-
+/** @} */
 #endif /* _help_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #include <atom.H>
 #include <namespace.H>
 
@@ -66,5 +68,5 @@ public:
 #define dataobject_MISSINGENDDATAMARKER 3
 #define	dataobject_OBJECTCREATIONFAILED	4
 #define dataobject_BADFORMAT 5
-
+/** @} */
 #endif /* _dataobject_H_ */

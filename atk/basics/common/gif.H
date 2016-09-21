@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics libbasics.so
+ * @{ */
 #include <image.H>
 
 class gif : public  image {
@@ -20,5 +22,5 @@ public:
   
     static int Ident( const char *fullname )  ;
 };
-
+/** @} */
 #endif /* _gif_H_ */

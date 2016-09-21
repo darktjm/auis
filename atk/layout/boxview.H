@@ -6,7 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/* boxview.ch - box view definition and interface */
+/** \addtogroup liblayout
+ * @{ */
+/* boxview.H - box view definition and interface */
 #define boxview_VERSION 1
 
 
@@ -49,8 +51,8 @@ public:
 	long lastUpdate;		    /* modification timestamp of last update */
 	class view *child;		    /* view of contents */
 };
-
-/* end of boxview.ch */
+/** @} */
+/* end of boxview.H */
 
 
 #endif /* _boxview_H_ */

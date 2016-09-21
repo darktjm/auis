@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libfad
+ * @{ */
 #include <fad.H>
 #include <view.H>
 class fadview : public  view {
@@ -58,5 +60,5 @@ struct aniinfo *anobj;
 class event *nextevent;
 boolean updatedue;
 };
-
+/** @} */
 #endif /* _fadview_H_ */

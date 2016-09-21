@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _figtoolview_H_
 #define _figtoolview_H_
-/* figtoolv.ch - drawing editor toolset */
+/** \addtogroup libfigure
+ * @{ */
+/* figtoolv.H - drawing editor toolset */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -124,5 +126,5 @@ class figtoolview  : public  lpair {
     int snapgridunit;
     int snapgrid;
 };
-
+/** @} */
 #endif /* _figtoolview_H_ */

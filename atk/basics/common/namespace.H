@@ -6,10 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/*
- *
- */
-
+/** \addtogroup libbasics
+ * @{ */
 #include <atom.H>
 
 
@@ -54,7 +52,5 @@ public:
   struct namespace_entry * nspace;
   short nspaceSize;
 };
-
-
-
+/** @} */
 #endif /* _namespace_H_ */

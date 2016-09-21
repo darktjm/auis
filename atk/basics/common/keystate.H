@@ -6,7 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/* keystate.ch -- A class that keep track of partially evaluated sequences of keystrokes.
+/** \addtogroup libbasics
+ * @{ */
+/* keystate.H -- A class that keep track of partially evaluated sequences of keystrokes.
 December, 1986 */
 
 
@@ -66,6 +68,5 @@ public:
     keystate_fptr function; /* Override function to trap keystrokes. */
     long functionData; /* Rock for the override function. */
 };
-
-
+/** @} */
 #endif /* _keystate_H_ */

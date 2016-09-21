@@ -3,6 +3,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #define mb_FullRedraw 0
 #define mb_Update 1
 #define mb_Exposed 2
@@ -146,3 +148,4 @@ void mb_InitWindows(struct mbinit  *mbi,Window  client);
 void mb_Finalize(struct mbinit  *mbi);
 void mb_Destroy(struct menubar  *mb);
 struct menubar *mb_Create(struct mbinit  *mbi, const char  *maintitle , const char  *moretitle, const void *data, menubar_menufptr func);
+/** @} */

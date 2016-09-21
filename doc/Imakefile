@@ -2,6 +2,7 @@
 
 SUBDIRS = mkbrowse atkprogramming
 
+all::README
 README: README.ez
 	ExecuteFromBASEDIR(ez2ascii README.ez > README)
 CleanTarget(README)
@@ -21,6 +22,7 @@ install.time::
 
 #if defined(MK_PREFS) || defined(MK_AUX_UTILS)
 
+all::prefs.def
 STARPR = *.pr
 prefs.def: ${DESTDIR}/lib/prs
 	$(RM) prefs.def
@@ -30,20 +32,21 @@ CleanTarget(prefs.def)
 #endif
 
 #ifdef MK_DOXYDOC
-latex/hierarchy.tex: $(shell find $(DESTDIR)/include -type f) doxyfile doxy_preproc
-	$(RM) -rf latex html
+all::ATK-API.pdf
+dox/latex/hierarchy.tex: $(shell find $(DESTDIR)/include -type f) doxyfile doxy_preproc
+	$(RM) -rf dox
 	sed -e 's#$${ANDREWDIR}#$(DESTDIR)#g' < doxyfile | doxygen -
 
-ATK-API.pdf: latex/hierarchy.tex
-	(cd latex; make)
-	$(CP) latex/refman.pdf ATK-API.pdf
+ATK-API.pdf: dox/latex/hierarchy.tex
+	(cd dox/latex; make)
+	$(CP) dox/latex/refman.pdf ATK-API.pdf
 
 InstallFile(ATK-API.pdf,${INSTMANFLAGS},${DESTDIR}/doc/PROGRAMMER)
-CleanTarget(-r latex html doxygen*.tmp ATK-API.pdf)
+CleanTarget(-r dox ATK-API.pdf)
 #endif
 
 #ifdef FUNCTION_INDEX_ENV
-
+all::FunctionIndex
 FunctionIndex:
 	${RM} ,FunctionIndex
 	(cd ..; $(BASEDIR)/etc/getnms) > ,FunctionIndex

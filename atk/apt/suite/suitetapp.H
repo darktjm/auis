@@ -5,6 +5,8 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libsuite
+ * @{ */
 #include <application.H>
 class suitetapp : public  application 
   {
@@ -15,5 +17,5 @@ public:
     boolean Start()				     ;
     boolean ParseArgs( int argc, const char **argv )	     ;
   };
-
+/** @} */
 #endif /* _suitetapp_H_ */

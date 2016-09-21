@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libchart
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Chart View-object
@@ -164,5 +166,5 @@ public:
 
   struct chartv_instance     *instance;
   };
-
+/** @} */
 #endif /* _chartv_H_ */

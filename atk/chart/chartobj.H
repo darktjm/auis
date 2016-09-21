@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libchart
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Chart View-object Abstract-class
@@ -142,5 +144,5 @@ public:
   short				  baseline;
   boolean			  suppress_scales, suppress_labels, suppress_grids;
   };
-
+/** @} */
 #endif /* _chartobj_H_ */

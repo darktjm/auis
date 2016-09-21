@@ -10,6 +10,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 /* im.ch
  * Class header file for the interface manager.
  *
@@ -176,5 +178,5 @@ public:
 	boolean pointer_grabbed;
 	class xim *od_parent, *od_child;
 };
-
+/** @} */
 #endif /* _xim_H_ */

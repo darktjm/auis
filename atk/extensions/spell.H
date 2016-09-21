@@ -5,6 +5,9 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libspell libspell.so
+ *  A dynamically loadable ATK class file.  Contains spell.
+ * @{ */
 #include <ATK.H>
 
 class spell : public ATK  {
@@ -17,5 +20,5 @@ public:
 	static boolean InitializeClass();
 
 };
-
+/** @} */
 #endif /* _spell_H_ */

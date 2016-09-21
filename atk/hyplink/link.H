@@ -6,7 +6,12 @@ ATK_INTER
  *	Copyright Carnegie Mellon, 1996                                   *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-
+/** \addtogroup liblink liblink.so
+ *  A dynamically loadable ATK class file.  Contains link, linkview,
+ *  pushbutton, pushbuttonview, plink, plinkview.  Note that the C++
+ *  class name for link is linkclass (but the ATK descriptor is still
+ *  link).
+ * @{ */
 #define link linkclass
 
 enum link_type {
@@ -55,6 +60,5 @@ public:
 	int new_ds;
 #endif
 };
-
-
+/** @} */
 #endif /* _link_H_ */

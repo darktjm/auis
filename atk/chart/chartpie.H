@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libchart
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Pie Chart View-object
@@ -85,5 +87,5 @@ Revision 1.1  1989/04/28  22:44:45  tom
 Initial revision
 
 */
-
+/** @} */
 #endif /* _chartpie_H_ */

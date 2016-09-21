@@ -10,6 +10,19 @@ ATK_INTER
 	For full copyright information see: andrew/doc/COPYRITE 
 */
 
+/** \addtogroup libbasics libbasics.so
+ *  A statically loadable ATK class file.  Contains application, atom,
+ *  atomlist, bind, cursor, dataobject, environ, event, filetype, fontdesc,
+ *  graphic, im, init, keymap, keystate, menulist, message, messitem,
+ *  msghandler, Namespace, observable, path, pixelimage, proctable,
+ *  region, rm, updatelist, view, windowsystem, colormap, image, gif, jpeg,
+ *  traced, owatch, ATK, rastio, aaction, multiact, viewholderv, iddimage,
+ *  WorkProc, xws, xim, xcursor, xfontdesc, xcolormap, xgraphic, xddimage.
+ *  xddimage_draw is there as well, although it isn't technically exported.
+ *  This is the base library for ATK, so it contains a lot more underneath,
+ *  as well; it is one of the few objects which export C and C++ functions
+ *  directly.  Note that environ's C++ class is named environclass.
+ * @{ */
 #define THROWONFAILURE(x) do { if(!(x)) ATKConstructorFailure(); return; } while (0)
 #ifndef boolean /* if somebody wants to use a macro for boolean, let them. */
 typedef int boolean;
@@ -210,5 +223,5 @@ public:
 };
 #define ATK_CLASS(class) \
 	static ATK_def Concat(class_,class) (Stringize(class))
-
+/** @} */
 #endif /* _ATK_H */

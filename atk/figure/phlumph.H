@@ -5,6 +5,8 @@ ATK_INTER
 /*
 	Copyright Carnegie Mellon University 1994 - All rights reserved
 */
+/** \addtogroup libfigure
+ * @{ */
 #include <dataobject.H>
 
 #define phlumph_AtEnd (-1)
@@ -41,5 +43,5 @@ class phlumph : public dataobject {
 	    return this->pagelist[num];
     };
 };
-
+/** @} */
 #endif /* _phlumph_H_ */

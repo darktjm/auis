@@ -3,6 +3,8 @@ ATK_INTER
 #define _prefsv_H_
 /* Copyright 1992 by the Andrew Toolkit Consortium and Carnegie Mellon University All rights Reserved. */
 
+/** \addtogroup libprefs
+ * @{ */
 #include <textview.H>
 class prefsv : public  textview  {
 public:
@@ -26,5 +28,5 @@ public:
     class keystate *ks;
     class menulist *menulistp;
 };
-
+/** @} */
 #endif /* _prefsv_H_ */

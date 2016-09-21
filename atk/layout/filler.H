@@ -6,7 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/* filler.ch - filler data object definition and interface */
+/** \addtogroup liblayout
+ * @{ */
+/* filler.H - filler data object definition and interface */
 
 #include <rect.h>
 
@@ -25,6 +27,6 @@ public:
 
 };
 
-/* end of filler.ch */
-
+/* end of filler.H */
+/** @} */
 #endif /* _filler_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup liblink
+ * @{ */
 /*
   Ooops.  I screwed up.
 
@@ -94,6 +96,5 @@ public:
 #endif /* PL8 */
 
 };
-
-
+/** @} */
 #endif /* _pushbutton_H_ */

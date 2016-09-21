@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libarbiter
+ * @{ */
 #define arbiterview_SEPCHAR ':'
 
 #include <celview.H>
@@ -66,6 +68,5 @@ public:
     arbiterview_hfptr handler;
     long hrock;
 };
-
-
+/** @} */
 #endif /* _arbiterview_H_ */

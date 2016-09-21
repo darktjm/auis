@@ -5,7 +5,10 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-/* tags.ch -- class header file for tags package */
+/** \addtogroup libtags libtags.so
+ *  A dynamically loadable ATK class file.  Contains tags.
+ * @{ */
+/* tags.H -- class header file for tags package */
 
 #include <ATK.H>
 
@@ -18,5 +21,5 @@ public:
 	static boolean InitializeClass();
 
 };
-
+/** @} */
 #endif /* _tags_H_ */

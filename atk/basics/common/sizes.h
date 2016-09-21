@@ -4,11 +4,13 @@
 \* ********************************************************************** */
 #ifndef TransportableSizesDefined
 #define TransportableSizesDefined
+/** \addtogroup libbasics
+ * @{ */
 #include <atkproto.h>
 BEGINCPLUSPLUSPROTOS
 typedef	long int16;
 typedef	long int32;
 typedef	short int8;
 ENDCPLUSPLUSPROTOS
+/** @} */
 #endif /* TransportableSizesDefined */
-

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libsuite
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Vector-object
@@ -110,5 +112,5 @@ Revision 1.1  1989/04/28  20:26:46  tom
 Initial revision
 
 */
-
+/** @} */
 #endif /* _vector_H_ */

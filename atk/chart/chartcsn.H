@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libchart
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Cartesian Chart View-object
@@ -86,5 +88,5 @@ Revision 1.1  1989/04/28  22:44:35  tom
 Initial revision
 
 */
-
+/** @} */
 #endif /* _chartcsn_H_ */

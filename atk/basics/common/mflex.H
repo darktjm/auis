@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 /*    mflex.H
 
  mflex - object for storing  mflexible array of simple  multi-byte structs or values.
@@ -204,6 +206,5 @@ class Concat(name,_iter) { \
 	else return FALSE; \
     } \
 }
-
-	
+/** @} */
 #endif /* _mflex_H_ */

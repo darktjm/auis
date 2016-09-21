@@ -1,11 +1,13 @@
 ATK_INTER
 #ifndef _img_H_
 #define _img_H_
-/* img.ch - class description for interface from IMG format to image */
+/* img.H - class description for interface from IMG format to image */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
 
+/** \addtogroup libimagev
+ * @{ */
 #include <image.H>
 class img : public  image {
 public:
@@ -19,5 +21,5 @@ public:
   
     static int Ident( const char *fullname )  ;
 };
-
+/** @} */
 #endif /* _img_H_ */

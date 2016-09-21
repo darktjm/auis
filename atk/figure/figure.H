@@ -1,7 +1,16 @@
 ATK_INTER
 #ifndef _figure_H_
 #define _figure_H_
-/* figure.ch - drawing data object */
+/** \addtogroup libfigure libfigure.so
+ *  A statically loadable ATK class file.  Contains figure, figattr, figio,
+ *  figobj, figoell, figogrp, figoins, figoplin, figorect, figorrec,
+ *  figospli, figotext, figoflow, figtoolview, figview, fontsample,
+ *  fontsel, fontselview, textflowview, textflow, phlumphview, phlumph.
+ *  Note that while the object name is frame, which matches the primary
+ *  class name, none of the others are linked, so this is really for
+ *  static loading only.
+ * @{ */
+/* figure.H - drawing data object */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -101,6 +110,5 @@ public:
       double printscalex, printscaley;
       boolean PrintLandscape;
 };
-
-
+/** @} */
 #endif /* _figure_H_ */

@@ -13,7 +13,7 @@ NESSOBJS =  ness.o  ncompile.o   ${INTERPOBJS}
 HFILES = ness.H nessview.H nessmark.H \
         nessm.H nessmv.H nessrunapp.H gentext.H
 EXTRACLASSES=nessview nessmark nessm nessmv \
-        nessrunapp gentext
+        nessrunapp gentext nesssym
 OBJS = ${NESSOBJS} nesssym.o nessview.o nessmark.o \
         nessm.o  nessmv.o nessrunapp.o gentext.o
 

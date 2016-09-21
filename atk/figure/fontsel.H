@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _fontsel_H_
 #define _fontsel_H_
-/* fontsel.ch - font selection inset dataobject */
+/** \addtogroup libfigure
+ * @{ */
+/* fontsel.H - font selection inset dataobject */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -53,5 +55,5 @@ public:
 
       long active;
 };
-
+/** @} */
 #endif /* _fontsel_H_ */

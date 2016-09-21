@@ -1,8 +1,6 @@
 #ifndef _gnucompat_H_
 #define _gnucompat_H_
 
- 
-
 /*************************************************
  * Copyright (C) 1990 by the Massachusetts Institute of Technology
  * Permission to use, copy, modify, distribute, and sell this
@@ -18,6 +16,8 @@
  * warranty.
  *************************************************/
 
+/** \addtogroup libnote
+ * @{ */
 #include <ATK.H>
 class gnucompat : public ATK  {
 public:
@@ -29,5 +29,5 @@ public:
 	static boolean atk_inited;
 
 };
-
+/** @} */
 #endif /* _gnucompat_H_ */

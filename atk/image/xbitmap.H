@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _xbitmap_H_
 #define _xbitmap_H_
-/* xbitmap.ch - class description for interface from Xbitmap format to image */
+/** \addtogroup libimagev
+ * @{ */
+/* xbitmap.H - class description for interface from Xbitmap format to image */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -19,5 +21,5 @@ public:
   
     static int Ident( const char *fullname )  ;
 };
-
+/** @} */
 #endif /* _xbitmap_H_ */

@@ -6,6 +6,11 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libraster libraster.so
+ *  A dynamically loadable ATK class file.  Contains raster, rasterview,
+ *  pheximage, oldRF, paint, plusspace, rasterio, xbm, xwdio, cmuwm,
+ *  rasterimage, rastoolview.
+ * @{ */
 /*
 
 	A raster  refers to a rasterimage containing the raw bits.  It can specify
@@ -95,6 +100,5 @@ public:
 
 	long xScale, yScale;	/* scaling for printing */
 };
-
-
+/** @} */
 #endif /* _raster_H_ */

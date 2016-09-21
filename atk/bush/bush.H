@@ -6,6 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbush libbush.so
+ *  A dynamically loadable ATK class file.  Contains bush, bushv, bushapp.
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Bush Data-object
@@ -157,5 +160,5 @@ public:
 	class vector	*uid_uname_map;
 	int		 debug;
 };
-
+/** @} */
 #endif /* _bush_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #include <ATK.H>
 
 class atom : public ATK  {
@@ -49,5 +51,5 @@ class atom_def {
 	return a;
     }
 };
-
+/** @} */
 #endif /* _atom_H_ */

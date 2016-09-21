@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libraster
+ * @{ */
 /*
  * P_R_P_Q_# (C) COPYRIGHT IBM CORPORATION 1987, 1988
  * LICENSED MATERIALS - PROPERTY OF IBM
@@ -63,6 +65,5 @@ public:
 		/* Write a raster image to 'file' from 'pix'  */
 
 };
-
-
+/** @} */
 #endif /* _rasterio_H_ */

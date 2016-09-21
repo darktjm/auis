@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libarbiter
+ * @{ */
 #include <atom.H>
 #include <namespace.H>
 
@@ -104,5 +106,5 @@ public:
     class cel *chain;
     class arbiter *ab;
 };
-
+/** @} */
 #endif /* _cel_H_ */

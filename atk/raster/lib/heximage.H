@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libraster
+ * @{ */
 /*  heximage.H
 
 	heximage package
@@ -53,6 +55,5 @@ public:
 			to print the subraster 'sub' of 'pix' */
 
 };
-
-
+/** @} */
 #endif /* _heximage_H_ */

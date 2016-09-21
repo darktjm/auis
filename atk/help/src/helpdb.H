@@ -12,6 +12,8 @@ ATK_INTER
 /*		matching algorithms.					     */
 /*---------------------------------------------------------------------------*/
 
+/** \addtogroup libhelp
+ * @{ */
 #include <index.h>
 #include <ATK.H>
 typedef void (*helpdb_efptr)(char *alias, char *orig, char *ptr);
@@ -34,5 +36,5 @@ public:
 	static void EnumerateAll(helpdb_efptr proc, char *rock);
 	static void PrintSearchDirs();
 };
-
+/** @} */
 #endif /* _helpdb_H_ */

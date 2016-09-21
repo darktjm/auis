@@ -1,5 +1,7 @@
 /* Copyright 1992 by the Andrew Consortium and Carnegie Mellon University. All rights reserved. */
 
+/** \addtogroup libbasics
+ * @{ */
 extern Atom *xim_SetupAtoms(Display *dpy, boolean force);
 
 
@@ -80,4 +82,4 @@ extern Atom *xim_SetupAtoms(Display *dpy, boolean force);
 #define ac_ATK_DEALLOCATE ATOMCREF(atoms_ATK_DEALLOCATE)
 #define ac_ATK_EVALUATE ATOMCREF(atoms_ATK_EVALUATE)
 #define ac_PIXEL ATOMCREF(atoms_PIXEL)
-
+/** @} */

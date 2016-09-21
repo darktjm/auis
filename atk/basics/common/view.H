@@ -7,6 +7,8 @@ ATK_INTER
  * 	For full copyright information see:'andrew/doc/COPYRITE'          *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #define view_VERSION 1
 
 enum view_UpdateType  {
@@ -488,7 +490,5 @@ public:
 //  virtual char *DescriptionObject(char *format, long rock);
 //  virtual enum view_DescriberErrs Describe(char*format,FILE*file,long rock);
 
-
+/** @} */
 #endif /* _view_H_ */
-
-

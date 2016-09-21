@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 /* Generic application
  */
 
@@ -77,5 +79,5 @@ public:
 private:
 	void SaveInitArgv(int argc, const char **argv);
 };
-
+/** @} */
 #endif /* _application_H_ */

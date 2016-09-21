@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 /* menulist.H
  * Class header file for menulist package.
  *
@@ -85,5 +87,5 @@ public:
 	long installVersion;			/* version displayed in wm */
 	class im *curIM;			/* the one we displayed in last */
 };
-
+/** @} */
 #endif /* _menulist_H_ */

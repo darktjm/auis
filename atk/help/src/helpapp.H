@@ -13,6 +13,8 @@ ATK_INTER
 /*		on a socket to listen for new help connections.	             */
 /*---------------------------------------------------------------------------*/
 
+/** \addtogroup libhelp
+ * @{ */
 #include <application.H>
 class helpapp : public  application {
 public:
@@ -31,6 +33,5 @@ public:
       class frame *framep;
       class help *helpobj;
 };
-
-
+/** @} */
 #endif /* _helpapp_H_ */

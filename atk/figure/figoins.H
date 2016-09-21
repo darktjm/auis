@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _figoins_H_
 #define _figoins_H_
-/* figoins.ch - fig element object: inset */
+/** \addtogroup libfigure
+ * @{ */
+/* figoins.H - fig element object: inset */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -36,5 +38,5 @@ public:
       boolean moribund;
       boolean paste;
 };
-
+/** @} */
 #endif /* _figoins_H_ */

@@ -5,6 +5,8 @@ ATK_INTER
  *	   Copyright Carnegie Mellon, 1994-1995 - All Rights Reserved     *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libbasics
+ * @{ */
 /*    flex.H
 
 	flex - object for storing a flexible array of structs or values
@@ -151,6 +153,5 @@ class flex
      *gotlenp may be anywhere in  1 ... getn()-i */
 
 };
-
-
+/** @} */
 #endif /* _flex_H_ */

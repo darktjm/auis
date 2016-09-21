@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _pbm_H_
 #define _pbm_H_
-/* pbm.ch - class description for interface from PBM format to image */
+/** \addtogroup libimagev
+ * @{ */
+/* pbm.H - class description for interface from PBM format to image */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -19,5 +21,5 @@ public:
   
     static int Ident( const char *fullname )  ;
 };
-
+/** @} */
 #endif /* _pbm_H_ */

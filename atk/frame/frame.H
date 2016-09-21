@@ -6,6 +6,12 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libframe libframe.so
+ *  A statically loadable ATK class file.  Contains frame, frameview,
+ *  framecmds, framemessage, helptextview.  Note that while the object
+ *  name is frame, which matches the primary class name, none of the others
+ *  are linked, so this is really for static loading only.
+ * @{ */
 #define frame_VERSION 1
 
 #define frame_MUSTANSWER -1
@@ -138,5 +144,5 @@ public:
 	class view *returnFocus;
 	class buffer *deleteTarget;
 };
-
+/** @} */
 #endif /* _frame_H_ */

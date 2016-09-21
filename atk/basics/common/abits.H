@@ -2,6 +2,8 @@
 #define _abits_H_
 /* Copyright 1995 Carnegie Mellon University All rights reserved. */
 
+/** \addtogroup libbasics
+ * @{ */
 // The number of bits in the smallest addressable unit (the character).
 #ifndef ABITS_BITS_PER_CHAR
 #define ABITS_BITS_PER_CHAR 8
@@ -191,6 +193,6 @@ class abitarray {
 	return n;
     }
 };
-
+/** @} */
 #endif
 

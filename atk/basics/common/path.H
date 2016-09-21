@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 /*
 The path class is for caching information about a pathname --
 whether or not it names a directory, and if so, what the 
@@ -64,5 +66,5 @@ public:
     long numFiles;
     long numDirs;
 };
-
+/** @} */
 #endif /* _path_H_ */

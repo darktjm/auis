@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libnote
+ * @{ */
 #define icon_TitleChanged 34935	/* random integers... */
 #define icon_SizeChanged 1894
 #define icon_ChildChanged 2435
@@ -38,5 +40,5 @@ public:
     long width, height;
     char * title;
 };
-
+/** @} */
 #endif /* _icon_H_ */

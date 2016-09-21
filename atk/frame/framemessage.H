@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libframe
+ * @{ */
 /* framemsg.H
  * Class for the frame's message line abstraction.
  *
@@ -70,5 +72,5 @@ public:
         char punt;
         char hasDefault; /* TRUE if defaultString in nonNULL. */
 };
-
+/** @} */
 #endif /* _framemessage_H_ */

@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _figogrp_H_
 #define _figogrp_H_
-/* figogrp.ch - fig element object: group */
+/** \addtogroup libfigure
+ * @{ */
+/* figogrp.H - fig element object: group */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -63,5 +65,5 @@ public:
       boolean doconstraints;
       struct rectangle handlebox;
 };
-
+/** @} */
 #endif /* _figogrp_H_ */

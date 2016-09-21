@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libarbiter
+ * @{ */
 #define STRING 1
 #define LONG 2
 #define FLOAT 3
@@ -40,5 +42,5 @@ public:
     class text *pdoc;
     int revision;
 };
-
+/** @} */
 #endif /* _lset_H_ */

@@ -6,7 +6,11 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/* layout.ch - layout data object definition and interface */
+/** \addtogroup liblayout liblayout.so
+ *  A dynamically loadable ATK class file.  Contains layout, layoutview,
+ *  box, boxview, filler, fillerview.
+ * @{ */
+/* layout.H - layout data object definition and interface */
 
 #define layout_VERSION 1
 /* component data structure */
@@ -81,6 +85,6 @@ public:
   int inGetModified;			    /* recursion protection switch */
 };
 
-/* end of layout.ch */
-
+/* end of layout.H */
+/** @} */
 #endif /* _layout_H_ */

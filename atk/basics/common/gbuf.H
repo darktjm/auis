@@ -5,6 +5,8 @@ ATK_INTER
  *      Copyright Carnegie Mellon University 1993 - All Rights Reserved   *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libbasics
+ * @{ */
 /* gbuf - general buffer package
 	implements a buffer whose size adapts to its contents
 	and which permits insertion at any point
@@ -58,6 +60,5 @@ public:
 	long holds;	/* number of outstanding GetBuffer calls */
 	char *buf;	/* pointer to the buffer itself */
 };
-
-
+/** @} */
 #endif /* _gbuf_H_ */

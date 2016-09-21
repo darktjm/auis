@@ -3,6 +3,8 @@ ATK_INTER
 	Copyright Carnegie Mellon University 1992, 1993 - All Rights Reserved
 */
 
+/** \addtogroup libness
+ * @{ */
 #ifndef _nessmv_H_
 #define _nessmv_H_
 
@@ -22,6 +24,5 @@ public:
 
 	class menulist *ml;
 };
-
-
+/** @} */
 #endif /* _nessmv_H_ */

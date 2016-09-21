@@ -3,6 +3,8 @@ ATK_INTER
 #define _pintv_H_
 /* Copyright 1992 by the Andrew Toolkit Consortium and Carnegie Mellon University. All rights Reserved. */
 
+/** \addtogroup libprefs
+ * @{ */
 #include <lpair.H>
 class pintv : public  lpair {
 public:
@@ -59,5 +61,5 @@ public:
     boolean autolist;
     boolean lockdown;
 };
-
+/** @} */
 #endif /* _pintv_H_ */

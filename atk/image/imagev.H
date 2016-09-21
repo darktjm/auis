@@ -1,11 +1,15 @@
 ATK_INTER
 #ifndef _imagev_H_
 #define _imagev_H_
-/* imagev.ch - class description for view on images */
+/* imagev.H - class description for view on images */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
 
+/** \addtogroup libimagev libimagev.so
+ *  A dynamically loadable ATK class file.  Contains imagev, faces, fbm,
+ *  img, mac, mcidas, pbm, pcx, xbitmap, xwd, tif, sunraster, xpixmap
+ * @{ */
 #include <rect.h>
  
 enum image_fileType {
@@ -125,5 +129,5 @@ class imagev : public  view {
     boolean click_to_draw, click_skip_update;
     ddimage dimage;
 };
-
+/** @} */
 #endif /* _imagev_H_ */

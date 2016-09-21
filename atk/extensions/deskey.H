@@ -5,6 +5,9 @@ ATK_INTER
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
+/** \addtogroup libdeskey libdeskey.so
+ *  A dynamically loadable ATK class file.  Contains deskey.
+ * @{ */
 /* deskey.H -- EZ package to describe key sequences.
  * David Nichols
  * September, 1987 
@@ -21,5 +24,5 @@ public:
 	static boolean InitializeClass();
 
 };
-
+/** @} */
 #endif /* _deskey_H_ */

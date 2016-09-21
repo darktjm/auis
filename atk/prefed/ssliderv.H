@@ -3,6 +3,8 @@ ATK_INTER
 #define _ssliderv_H_
 /* Copyright 1992 by the Andrew Toolkit Consortium and Carnegie Mellon University All rights Reserved. */
 
+/** \addtogroup libprefs
+ * @{ */
 #include <scroll.H>
 class ssliderv : public  scroll {
 public:
@@ -28,5 +30,5 @@ public:
 
 
 };
-
+/** @} */
 #endif /* _ssliderv_H_ */

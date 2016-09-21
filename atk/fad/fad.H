@@ -6,6 +6,9 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libfad libfad.so
+ *  A dynamically loadable ATK class file.  Contains fad, fadview.
+ * @{ */
 #ifndef FAD_DEFS
 #define FAD_DEFS
 #define fad_NEWFAD 10000
@@ -86,5 +89,5 @@ public:
     class cursor *cursor;
     char mode;
 };
-
+/** @} */
 #endif /* _fad_H_ */

@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libchart
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Dot Chart View-object
@@ -90,5 +92,5 @@ Revision 1.1  89/04/28  22:44:37  tom
 Initial revision
 
 */
-
+/** @} */
 #endif /* _chartdot_H_ */

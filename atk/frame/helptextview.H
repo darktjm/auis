@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libframe
+ * @{ */
 #include <textview.H>
 
 class helptextview : public  textview {
@@ -26,6 +28,5 @@ public:
       class cursor *myCursor;
 
 };
-
-
+/** @} */
 #endif /* _helptextview_H_ */

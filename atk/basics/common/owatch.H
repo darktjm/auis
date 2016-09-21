@@ -3,6 +3,8 @@ ATK_INTER
 #define _owatch_H_
 /* Copyright 1992 Carnegie Mellon University, All rights reserved. */
 
+/** \addtogroup libbasics
+ * @{ */
 struct owatch_data {
     class observable *obj;
     boolean alive;
@@ -27,5 +29,5 @@ public:
     static boolean CheckAndDelete(struct owatch_data *d)  ;
 
 };
-
+/** @} */
 #endif /* _owatch_H_ */

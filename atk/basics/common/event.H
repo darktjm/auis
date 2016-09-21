@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #define event_VERSION 1
 
 #include <ATK.H>
@@ -42,6 +44,5 @@ public:
 #define event_USECtoTU(x) ((x)>>6)
 #define event_MSECtoTU(x) (((x)*(1000>>3))>>3)
 #define event_ENDOFTIME 2000000000
-
-
+/** @} */
 #endif /* _event_H_ */

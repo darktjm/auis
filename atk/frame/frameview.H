@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libframe
+ * @{ */
 #define frameview_VERSION 1
 
 #include <textview.H>
@@ -54,6 +56,5 @@ public:
 	boolean dynamicsize;
 	long minlines;
 };
-
-
+/** @} */
 #endif /* _frameview_H_ */

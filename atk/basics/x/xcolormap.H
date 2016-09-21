@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #include <X11/Xutil.h>
 #include <X11/Xmd.h>
 #include <color.H>
@@ -210,6 +212,5 @@ class xcolormap  : public  colormap  {
 
     boolean evalpending;
 };
-
-
+/** @} */
 #endif /* _xcolormap_H_ */

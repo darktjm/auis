@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libarbiter
+ * @{ */
 /* The following may be use in place of a specific position  
 	in the methods taking position arguments below  */
 #define page_CURRENT		 -1
@@ -65,5 +67,5 @@ public:
       struct page_switchee *FirstSwitchee, *NowPlaying;
       boolean PostMenusFlag,executingGetModified;
 };
-
+/** @} */
 #endif /* _page_H_ */

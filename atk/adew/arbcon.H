@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libarbiter
+ * @{ */
 /* user code begins here for HeaderInfo */
 /* user code ends here for HeaderInfo */
 #include <observable.H>
@@ -73,6 +75,5 @@ static void InitArbiters();
 	class arbiterview *arbv;
 	class arbcon *next;
 };
-
-
+/** @} */
 #endif /* _arbcon_H_ */

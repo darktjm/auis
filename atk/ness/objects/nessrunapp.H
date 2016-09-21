@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libness
+ * @{ */
 #ifndef _nessrunapp_H_
 #define _nessrunapp_H_
 
@@ -25,5 +27,5 @@ public:
 	class ness *theNess;
 	boolean dump;
 };
-
+/** @} */
 #endif /* _nessrunapp_H_ */

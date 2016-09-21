@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _figoplin_H_
 #define _figoplin_H_
-/* figoplin.ch - fig element object: polyline */
+/** \addtogroup libfigure
+ * @{ */
+/* figoplin.H - fig element object: polyline */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -66,5 +68,5 @@ class figoplin : public  figobj {
       long rockx, rocky, lastx, lasty, cenx, ceny;
       long rock;
 };
-
+/** @} */
 #endif /* _figoplin_H_ */

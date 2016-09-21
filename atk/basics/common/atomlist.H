@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libbasics
+ * @{ */
 #include <atom.H>
 
 struct atoms 
@@ -48,5 +50,5 @@ public:
 
     struct atoms *atoms;
 };
-
+/** @} */
 #endif /* _atomlist_H_ */

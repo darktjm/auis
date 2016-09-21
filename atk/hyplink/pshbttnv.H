@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup liblink
+ * @{ */
 /*
   Trigger:  "buttonpushed"
      called when the user lets up on the pushbutton over the pushbutton.
@@ -64,6 +66,5 @@ class pushbuttonview: public  view {
       boolean recsearchvalid;		/* was last RecSearch successful? */
       struct rectangle crect;
 };
-
-
+/** @} */
 #endif /* _pushbuttonview_H_ */

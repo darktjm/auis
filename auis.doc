@@ -11965,102 +11965,17 @@ white
 
 \section{libAButton.so}
 
+The following should be dealt with somehow:
+
 class AShadowLayers [dup - OFLEX]
 
 class avalueflex_base [dup - OFLEX]
 
 
 
-\section{libapt.so}
-
-apt_ATKregistry_
-
-class apt
-
-apts_ATKregistry_
-
-class apts
-
-aptv_ATKregistry_
-
-class aptv
-
-
-
-\section{libapts.so}
-
-link to libapt.so
-
-
-\section{libaptv.so}
-
-link to libapt.so
-
-
-\section{libarbcon.so}
-
-link to libarbiter.so
-
-
-\section{libarbiter.so}
-
-arbcon_ATKregistry_
-
-class arbcon
-
-arbiter_ATKregistry_
-
-class arbiter
-
-arbiterview_ATKregistry_
-
-class arbiterview
-
-cel_ATKregistry_
-
-class cel
-
-celview_ATKregistry_
-
-class celview
-
-lset_ATKregistry_
-
-class lset
-
-lsetview_ATKregistry_
-
-class lsetview
-
-page_ATKregistry_
-
-class page
-
-pagev_ATKregistry_
-
-class pagev
-
-runadewapp_ATKregistry_
-
-class runadewapp
-
-wincelview_ATKregistry_
-
-class wincelview
-
-
-
-\section{libarbiterview.so}
-
-link to libarbiter.so
-
-
-\section{libattlist.so}
-
-link to libhtmltext.so
-
-
 \section{libawidget.so}
+
+The following should be dealt with somehow:
 
 class AShadowLayers [dup - OFLEX] [primary source]
 
@@ -12072,277 +11987,17 @@ class AVarSetPathSegs - should be private
 
 \section{libbasics.so}
 
-aaction_ATKregistry_
+The follosing should be dealt with somehow:
 
-class aaction
+class avalueflex_base [dup - OFLEX] - defined here
 
-application_ATKregistry_
-
-class application
-
-ATK_ATKregistry_
-
-class ATK
-
-atom_ATKregistry_
-
-class atom
-
-atomlist_ATKregistry_
-
-class atomlist
-
-bind_ATKregistry_
-
-class bind
-
-colormap_ATKregistry_
-
-class colormap
-
-cursor_ATKregistry_
-
-class cursor
-
-dataobject_ATKregistry_
-
-class dataobject
-
-environ_ATKregistry_
-
-event_ATKregistry_
-
-class event
-
-filetype_ATKregistry_
-
-class filetype
-
-fontdesc_ATKregistry_
-
-class fontdesc
-
-gif_ATKregistry_
-
-class gif
-
-graphic_ATKregistry_
-
-class graphic
-
-iddimage_ATKregistry_
-
-class iddimage
-
-image_ATKregistry_
-
-class image
-
-im_ATKregistry_
-
-class im
-
-init_ATKregistry_
-
-class init
-
-jpeg_ATKregistry_
-
-class jpeg
-
-keymap_ATKregistry_
-
-class keymap
-
-keystate_ATKregistry_
-
-class keystate
-
-menulist_ATKregistry_
-
-class menulist
-
-message_ATKregistry_
-
-class message
-
-messitem_ATKregistry_
-
-class messitem
-
-msghandler_ATKregistry_
-
-class msghandler
-
-multiact_ATKregistry_
-
-class multiact
-
-Namespace_ATKregistry_
-
-class Namespace
-
-observable_ATKregistry_
-
-class observable
-
-owatch_ATKregistry_
-
-class owatch
-
-path_ATKregistry_
-
-class path
-
-pixelimage_ATKregistry_
-
-class pixelimage
-
-T point_AddPt
-
-T point_ArePtsEqual
-
-T point_CreatePoint
-
-T point_OffsetPoint
-
-T point_SetX
-
-T point_SetY
-
-T point_SubPt
-
-proctable_ATKregistry_
-
-class proctable
-
-rastio_ATKregistry_
-
-class rastio
-
-T rectangle_CreateRectCorners
-
-T rectangle_CreateRectSides
-
-T rectangle_CreateRectSize
-
-T rectangle_Duplicate
-
-T rectangle_EmptyRect
-
-T rectangle_InsetRect
-
-T rectangle_IntersectRect
-
-T rectangle_IsEmptyRect
-
-T rectangle_IsEnclosedBy
-
-T rectangle_IsEqualRect
-
-T rectangle_IsPtInRect
-
-T rectangle_OffsetRect
-
-T rectangle_PtToAngle
-
-T rectangle_SetBottom
-
-T rectangle_SetHeight
-
-T rectangle_SetLeft
-
-T rectangle_SetRectCorners
-
-T rectangle_SetRectSides
-
-T rectangle_SetRight
-
-T rectangle_SetTop
-
-T rectangle_SetWidth
-
-T rectangle_UnionRect
-
-region_ATKregistry_
-
-class region
-
-rm_ATKregistry_
-
-class rm
-
-traced_ATKregistry_
-
-class traced
-
-updatelist_ATKregistry_
-
-class updatelist
-
-view_ATKregistry_
-
-class view
-
-viewholderv_ATKregistry_
-
-class viewholderv
-
-windowsystem_ATKregistry_
-
-class windowsystem
-
-WorkProc_ATKregistry_
-
-class WorkProc
-
-xcolormap_ATKregistry_
-
-class xcolormap
-
-xcursor_ATKregistry_
-
-class xcursor
-
-xddimage_ATKregistry_
-
-class xddimage
+The following should be private:
 
 xddimage_draw_ATKregistry_
 
 class xddimage_draw
 
-xfontdesc_ATKregistry_
-
-class xfontdesc
-
-xgraphic_ATKregistry_
-
-class xgraphic
-
-xim_ATKregistry_
-
-class xim
-
-T xim_EstablishConsole
-
-xws_ATKregistry_
-
-class xws
-
-T doMemToVal(unsigned char*, unsigned int)
-
-T doValToMem(unsigned long, unsigned char*, unsigned int)
-
-T mb_Destroy(menubar*)
-
-T mb_SetKeys(menubar*, char const*, char const*, char*)
-
 T sendXImage(xgraphic*, XImageInfo*, int, int, int, int, unsigned int, unsigned int)
-
-T mb_Activate(menubar*, long, long)
-
-T mb_Finalize(mbinit*)
 
 T FindResource(atomlist*, atoms*, atomlist*, atoms*, resourceTree_s**)
 
@@ -12350,33 +12005,15 @@ T LookupCursor(_XDisplay*, xfontdesc*, int)
 
 T NewFullTable()
 
-T doMemToValLSB(unsigned char*, unsigned int)
-
-T doValToMemLSB(unsigned long, unsigned char*, unsigned int)
-
 T imageToXImage(xgraphic*, image*, unsigned int, unsigned int)
 
 T TryConversion(resourceTree_s*, atom*, long*)
 
-T mb_InitWindows(mbinit*, unsigned long)
-
 T PostResourceAt(resourceTree_s*, atomlist*, long, atom*)
-
-T xim_SetupAtoms(_XDisplay*, int)
 
 T im__PlayActions(im*, action*)
 
-T mb_AddSelection(menubar*, char const*, int, char const*, int, int, void const*)
-
-T mb_RefitMenubar(menubar*)
-
 T CompareFileNames(char**, char**)
-
-T mb_RedrawMenubar(menubar*, int)
-
-T mb_SetGetDefault(char const* (*)(_XDisplay*, char const*))
-
-T mb_SetItemStatus(menubar*, char const*, char const*, int)
 
 T PrintMallocTable(im*, long)
 
@@ -12386,45 +12023,15 @@ T FindManyResources(resourceList*, atomlist*, atoms*, atomlist*, atoms*, resourc
 
 T xgraphicGrayShade(xgraphic*, long)
 
-T mb_DeleteSelection(menubar*, char const*, char const*)
-
-T mb_HandleConfigure(mbinit*, menubar*, long, long)
-
-T mb_KeyboardActivate(menubar*)
-
-T mb_GetPrefsForDisplay(_XDisplay*, XColor*, XColor*)
-
 T xgraphic_FindGrayBlock(_XDisplay*, int)
 
 T xgraphic_FindUpdateBlock(_XDisplay*, unsigned long)
-
-T physical_GlobalXToLogicalX(graphic*, long)
-
-T physical_GlobalYToLogicalY(graphic*, long)
-
-T physical_LogicalXToGlobalX(graphic*, long)
-
-T physical_LogicalYToGlobalY(graphic*, long)
-
-T physical_LogicalPtToGlobalX(graphic*, point*)
-
-T physical_LogicalPtToGlobalY(graphic*, point*)
-
-T physical_GlobalPtToLogicalPt(graphic*, point*)
-
-T physical_GlobalToLogicalRect(graphic*, rectangle*)
-
-T physical_LogicalPtToGlobalPt(graphic*, point*)
-
-T physical_LogicalToGlobalRect(graphic*, rectangle*)
 
 T xgraphic_LocalSetClippingRect(xgraphic*, xgraphic_UpdateBlock*)
 
 T Patom(atom*)
 
 T Plist(atomlist*)
-
-T mb_Init(_XDisplay*, XColor*, XColor*, void (*)(XExposeEvent*, long*), long*, void (*)(void*))
 
 T Convertp(Namespace*, Namespace*, int)
 
@@ -12434,65 +12041,13 @@ T WriteGIF(_IO_FILE*, unsigned char*, int, int, unsigned char*, unsigned char*, 
 
 T InitState(keystate*)
 
-T mb_Create(mbinit*, char const*, char const*, void const*, void (*)(menubar*, void const*, void const*))
-
 class ATK_aliases
 
-class avalue_init
-
-class color
-
-class avalue
-
-class icolor
-
-class ddimage
-
-class ATKdebug
-
-class ATKregistryEntry
-
-class avalueflex
-
-class environclass
+class incrsc
 
 class incrsc_flex1
 
 class incrsc_flex2
-
-class multiact_list
-
-class XCMapColorReq
-
-class icolormap_base
-
-class XCMapImageHist
-
-class avalueflex_base [dup - OFLEX]
-
-class XCMapImageHist_flex1
-
-class XCMapImageHist_flex2
-
-class flex
-
-class AHash
-
-class mflex
-
-class oflex
-
-class incrsc
-
-class xcolor
-
-class ddcolor
-
-class xcolors
-
-class ddcolors
-
-class icolormap
 
 
 
@@ -12503,34 +12058,9 @@ The following should be private:
 T bdffont_EnsureDefns(bdffont*, long)
 
 
-\section{libbox.so}
-
-link to liblayout.so
-
-
-\section{libboxview.so}
-
-link to liblayout.so
-
-
-\section{libbushapp.so}
-
-link to libbush.so
-
-
 \section{libbush.so}
 
-bushapp_ATKregistry_
-
-class bushapp
-
-bush_ATKregistry_
-
-class bush
-
-bushv_ATKregistry_
-
-class bushv
+The following should be private:
 
 T SortByDate(bushv*, suite*, suite_item*, suite_item*)
 
@@ -12544,26 +12074,6 @@ T SortBySuffix(bushv*, suite*, suite_item*, suite_item*)
 
 T FormatEntriesInfo(bushv*, tree_node*)
 
-
-
-\section{libbushv.so}
-
-link to libbush.so
-
-
-\section{libcalccon.so}
-
-link to libpcontrol.so
-
-
-\section{libcel.so}
-
-link to libarbiter.so
-
-
-\section{libcelview.so}
-
-link to libarbiter.so
 
 
 \section{libchamp.so}
@@ -12590,86 +12100,9 @@ T matchdate(tm*, datespec*)
 
 
 
-\section{libchartapp.so}
-
-link to libchart.so
-
-
-\section{libchartcsn.so}
-
-link to libchart.so
-
-
-\section{libchartdot.so}
-
-link to libchart.so
-
-
-\section{libcharthst.so}
-
-link to libchart.so
-
-
-\section{libchartlin.so}
-
-link to libchart.so
-
-
-\section{libchartobj.so}
-
-link to libchart.so
-
-
-\section{libchartpie.so}
-
-link to libchart.so
-
-
 \section{libchart.so}
 
-chartapp_ATKregistry_
-
-class chartapp
-
-chart_ATKregistry_
-
-class chart
-
-chartcsn_ATKregistry_
-
-class chartcsn
-
-chartdot_ATKregistry_
-
-class chartdot
-
-charthst_ATKregistry_
-
-class charthst
-
-chartlin_ATKregistry_
-
-class chartlin
-
-chartobj_ATKregistry_
-
-class chartobj
-
-chartpie_ATKregistry_
-
-class chartpie
-
-chartstk_ATKregistry_
-
-class chartstk
-
-chartv_ATKregistry_
-
-class chartv
-
-chartx1app_ATKregistry_
-
-class chartx1app
+The following should be private:
 
 T Palette_Hit(chartv*, suite*, suite_item*, long, view_MouseAction, long, long, long)
 
@@ -12699,21 +12132,6 @@ T Printer(chartobj*, _IO_FILE*, char*, char*, int, void (*)(aptv*))
 
 
 
-\section{libchartstk.so}
-
-link to libchart.so
-
-
-\section{libchartv.so}
-
-link to libchart.so
-
-
-\section{libchartx1app.so}
-
-link to libchart.so
-
-
 \section{libcirclepi.so}
 
 Following symbol should be private:
@@ -12722,36 +12140,13 @@ T inside_circle(double, double)
 
 
 
-\section{libcmuwm.so}
-
-link to libraster.so
-
-
-\section{libcompile.so}
-
-compile_ATKregistry_
-
-class compile
-
-
-
 \section{libconsoleapp.so}
+
+The following should be private:
 
 T Bind
 
-consoleapp_ATKregistry_
-
-class consoleapp
-
-consoleClass_ATKregistry_
-
-class consoleClass
-
 T FakeCheckConsoleSocket
-
-logview_ATKregistry_
-
-class logview
 
 T make_socket
 
@@ -13009,24 +12404,9 @@ T SetupTics(consoleClass*, int, int, int, int, int, int, int, int)
 
 
 
-\section{libconsoleClass.so}
-
-link to libconsoleapp.so
-
-
-\section{libdatacata.so}
-
-datacata_ATKregistry_
-
-class datacata
-
-
-
 \section{libdeskey.so}
 
-deskey_ATKregistry_
-
-class deskey
+The following should be private:
 
 T makePrefix(char*, char*, int)
 
@@ -13038,9 +12418,7 @@ T describeBinding(char*, int, int, proctable_Entry*, _IO_FILE*, long)
 
 \section{libdynsearch.so}
 
-dynsearch_ATKregistry_
-
-class dynsearch
+The following should be private:
 
 T dynsearch_SearchAgain(textview*)
 
@@ -13050,13 +12428,7 @@ T dynsearch_SearchAgainOpposite(textview*)
 
 \section{libeq.so}
 
-eq_ATKregistry_
-
-class eq
-
-eqview_ATKregistry_
-
-class eqview
+The following should be private:
 
 T eqview_Bar(eqview*)
 
@@ -13142,54 +12514,9 @@ class eqparse
 
 
 
-\section{libeqview.so}
-
-link to libeq.so
-
-
-\section{libez2htmlapp.so}
-
-link to libhtmltext.so
-
-
-\section{libezdiff.so}
-
-ezdiff_ATKregistry_
-
-class ezdiff
-
-
-
-\section{libezprintapp.so}
-
-ezprintapp_ATKregistry_
-
-class ezprintapp
-
-
-
-\section{libez.so}
-
-ezapp_ATKregistry_
-
-class ezapp
-
-
-
-\section{libfaces.so}
-
-link to libimagev.so
-
-
 \section{libfad.so}
 
-fad_ATKregistry_
-
-class fad
-
-fadview_ATKregistry_
-
-class fadview
+The following should be private:
 
 T HaltAnimation(fadview*)
 
@@ -13201,149 +12528,17 @@ T queup(fadview*)
 
 
 
-\section{libfadview.so}
-
-link to libfad.so
-
-
-\section{libfbm.so}
-
-link to libimagev.so
-
-
 \section{libfigure.so}
 
-figattr_ATKregistry_
-
-class figattr
-
-figio_ATKregistry_
-
-class figio
-
-figobj_ATKregistry_
-
-class figobj
-
-figoell_ATKregistry_
-
-class figoell
-
-figoflow_ATKregistry_
-
-class figoflow
-
-figogrp_ATKregistry_
-
-class figogrp
-
-figoins_ATKregistry_
-
-class figoins
-
-figoplin_ATKregistry_
-
-class figoplin
-
-figorect_ATKregistry_
-
-class figorect
-
-figorrec_ATKregistry_
-
-class figorrec
-
-figospli_ATKregistry_
-
-class figospli
-
-figotext_ATKregistry_
-
-class figotext
-
-figtoolview_ATKregistry_
-
-class figtoolview
-
-figure_ATKregistry_
-
-class figure
-
-figview_ATKregistry_
-
-class figview
-
-fontsample_ATKregistry_
-
-class fontsample
-
-fontsel_ATKregistry_
-
-class fontsel
-
-fontselview_ATKregistry_
-
-class fontselview
-
-phlumph_ATKregistry_
-
-class phlumph
-
-phlumphview_ATKregistry_
-
-class phlumphview
-
-textflow_ATKregistry_
-
-class textflow
-
-textflowview_ATKregistry_
-
-class textflowview
+The following should be private:
 
 T figoflow_OrderFlows(figobj*, long, figure*, long*)
 
 
 
-\section{libfiller.so}
-
-link to liblayout.so
-
-
-\section{libfillerview.so}
-
-link to liblayout.so
-
-
-\section{libfilter.so}
-
-filter_ATKregistry_
-
-class filter
-
-
-
 \section{libframe.so}
 
-frame_ATKregistry_
-
-class frame
-
-framecmds_ATKregistry_
-
-class framecmds
-
-framemessage_ATKregistry_
-
-class framemessage
-
-frameview_ATKregistry_
-
-class frameview
-
-helptextview_ATKregistry_
-
-class helptextview
+The following should be private:
 
 T frame_Exit(frame*)
 
@@ -13357,21 +12552,6 @@ T frame_VisitFilePrompting(frame*, char const*, int, int)
 
 
 
-\section{libgentext.so}
-
-link to libness.so
-
-
-\section{libgnucompat.so}
-
-link to libnote.so
-
-
-\section{libgofigapp.so}
-
-link to libgofig.so
-
-
 \section{libgofig.so}
 
 All these should be private:
@@ -13382,50 +12562,13 @@ class gflex
 
 
 
-\section{libgsearch.so}
-
-gsearch_ATKregistry_
-
-class gsearch
-
-
-
-\section{libhelpapp.so}
-
-link to libhelp.so
-
-
-\section{libhelpcon.so}
-
-link to libpcontrol.so
-
-
-\section{libhelpdb.so}
-
-link to libhelp.so
-
-
 \section{libhelp.so}
 
-helpapp_ATKregistry_
-
-class helpapp
+The following should be private:
 
 T helpapp_ncproc
 
-help_ATKregistry_
-
-class help
-
-helpdb_ATKregistry_
-
-class helpdb
-
 T help_unique
-
-hlptextview_ATKregistry_
-
-class hlptextview
 
 T SetupMenus(cache*)
 
@@ -13461,51 +12604,6 @@ T NextHelp(help*)
 
 T LowerCase(char*)
 
-
-
-\section{libheximage.so}
-
-link to libraster.so
-
-
-\section{libhidden.so}
-
-link to libhtmltext.so
-
-
-\section{libhiddenview.so}
-
-link to libhtmltext.so
-
-
-\section{libhlptextview.so}
-
-link to libhelp.so
-
-
-\section{libhr.so}
-
-link to libhtmltext.so
-
-
-\section{libhrv.so}
-
-link to libhtmltext.so
-
-
-\section{libhtablev.so}
-
-link to libhtmltext.so
-
-
-\section{libhtmlenv.so}
-
-link to libhtmltext.so
-
-
-\section{libhtmlform.so}
-
-link to libhtmltext.so
 
 
 \section{libhtml.so}
@@ -13584,69 +12682,9 @@ class fieldlist
 
 
 
-\section{libicon.so}
-
-link to libnote.so
-
-
-\section{libiconview.so}
-
-link to libnote.so
-
-
 \section{libimagev.so}
 
-faces_ATKregistry_
-
-class faces
-
-fbm_ATKregistry_
-
-class fbm
-
-imagev_ATKregistry_
-
-class imagev
-
-img_ATKregistry_
-
-class img
-
-mac_ATKregistry_
-
-class mac
-
-mcidas_ATKregistry_
-
-class mcidas
-
-pbm_ATKregistry_
-
-class pbm
-
-pcx_ATKregistry_
-
-class pcx
-
-sunraster_ATKregistry_
-
-class sunraster
-
-tif_ATKregistry_
-
-class tif
-
-xbitmap_ATKregistry_
-
-class xbitmap
-
-xpixmap_ATKregistry_
-
-class xpixmap
-
-xwd_ATKregistry_
-
-class xwd
+The following should be private:
 
 T DrawBorder(imagev*, rectangle*, rectangle*)
 
@@ -13662,58 +12700,19 @@ T writePS(imagev*, _IO_FILE*, int*, int*, int)
 
 T LoadTIFF(tif*, char const*, _IO_FILE*, int)
 
-class imagevInterface
-
-
-
-\section{libimg.so}
-
-link to libimagev.so
 
 
 \section{libincsearch.so}
 
-incsearch_ATKregistry_
-
-class incsearch
+The following should be private:
 
 T strappend(char*, char const*, int, int)
 
 
 
-\section{liblaunchapp.so}
-
-launchapp_ATKregistry_
-
-class launchapp
-
-
-
 \section{liblayout.so}
 
-box_ATKregistry_
-
-class box
-
-boxview_ATKregistry_
-
-class boxview
-
-filler_ATKregistry_
-
-class filler
-
-fillerview_ATKregistry_
-
-class fillerview
-
-layout_ATKregistry_
-
-class layout
-
-layoutview_ATKregistry_
-
-class layoutview
+The following should be private:
 
 T RequestUpdate(boxview*)
 
@@ -13723,62 +12722,9 @@ T InitChild(boxview*)
 
 
 
-\section{liblayoutview.so}
-
-link to liblayout.so
-
-
-\section{liblink.so}
-
-link_ATKregistry_
-
-linkview_ATKregistry_
-
-class linkview
-
-plink_ATKregistry_
-
-class plink
-
-plinkview_ATKregistry_
-
-class plinkview
-
-pushbutton_ATKregistry_
-
-class pushbutton
-
-pushbuttonview_ATKregistry_
-
-class pushbuttonview
-
-class linkclass
-
-
-
-\section{liblinkview.so}
-
-link to liblink.so
-
-
-\section{liblogview.so}
-
-link to libconsoleapp.so
-
-
 \section{liblookz.so}
 
-lookz_ATKregistry_
-
-class lookz
-
-lookzview_ATKregistry_
-
-class lookzview
-
-tabrulerview_ATKregistry_
-
-class tabrulerview
+The following should be private:
 
 T CheckDelStyle(style*, text*, int, environment*)
 
@@ -13786,102 +12732,10 @@ T FindClosestTab(tabrulerview*, long)
 
 
 
-\section{liblookzview.so}
-
-link to liblookz.so
-
-
-\section{liblset.so}
-
-link to libarbiter.so
-
-
-\section{liblsetview.so}
-
-link to libarbiter.so
-
-
-\section{libmac.so}
-
-link to libimagev.so
-
-
-\section{libmantext.so}
-
-link to librofftext.so
-
-
-\section{libmcidas.so}
-
-link to libimagev.so
-
-
-\section{libmetax.so}
-
-metax_ATKregistry_
-
-class metax
-
-
-
-\section{libmmtext.so}
-
-link to librofftext.so
-
-
-\section{libnessmark.so}
-
-link to libness.so
-
-
-\section{libnessm.so}
-
-link to libness.so
-
-
-\section{libnessmv.so}
-
-link to libness.so
-
-
-\section{libnessrunapp.so}
-
-link to libness.so
-
-
 \section{libness.so}
 
-gentext_ATKregistry_
-
-class gentext
-
-ness_ATKregistry_
-
-class ness
-
-nessmark_ATKregistry_
-
-class nessmark
-
-nessm_ATKregistry_
-
-class nessm
-
-nessmv_ATKregistry_
-
-class nessmv
-
-nessrunapp_ATKregistry_
-
-class nessrunapp
-
-nesssym_ATKregistry_
-
-class nesssym
-
-nessview_ATKregistry_
-
-class nessview
+I'm just going to guess that all of the following should be private.  
+In any case, ness.Hn needs splitting into private and public symbols.
 
 T errorsynch(long)
 
@@ -14137,44 +12991,9 @@ class amarkt
 
 
 
-\section{libnessview.so}
-
-link to libness.so
-
-
 \section{libnote.so}
 
-gnucompat_ATKregistry_
-
-class gnucompat
-
-icon_ATKregistry_
-
-class icon
-
-iconview_ATKregistry_
-
-class iconview
-
-note_ATKregistry_
-
-class note
-
-noteview_ATKregistry_
-
-class noteview
-
-ps_ATKregistry_
-
-class ps
-
-psview_ATKregistry_
-
-class psview
-
-vutils_ATKregistry_
-
-class vutils
+The following should be private:
 
 T string_width(char const*, fontdesc*, graphic*)
 
@@ -14182,75 +13001,9 @@ T back_to_start(text*, int)
 
 
 
-\section{libnoteview.so}
-
-link to libnote.so
-
-
-\section{liboldRF.so}
-
-link to libraster.so
-
-
-\section{liborgapp.so}
-
-link to liborg.so
-
-
-\section{liborg.so}
-
-orgapp_ATKregistry_
-
-class orgapp
-
-org_ATKregistry_
-
-class org
-
-orgv_ATKregistry_
-
-class orgv
-
-
-
-\section{liborgv.so}
-
-link to liborg.so
-
-
-\section{libpage.so}
-
-link to libarbiter.so
-
-
-\section{libpagev.so}
-
-link to libarbiter.so
-
-
-\section{libpaint.so}
-
-link to libraster.so
-
-
-\section{libpbm.so}
-
-link to libimagev.so
-
-
 \section{libpcontrol.so}
 
-calccon_ATKregistry_
-
-class calccon
-
-helpcon_ATKregistry_
-
-class helpcon
-
-pcontrol_ATKregistry_
-
-class pcontrol
+The following should be private:
 
 T displayval(calccon*)
 
@@ -14266,131 +13019,9 @@ T setbl(spk_blk*, float)
 
 
 
-\section{libpcx.so}
-
-link to libimagev.so
-
-
-\section{libphelpv.so}
-
-link to libprefs.so
-
-
-\section{libpintv.so}
-
-link to libprefs.so
-
-
-\section{libplink.so}
-
-link to liblink.so
-
-
-\section{libplinkview.so}
-
-link to liblink.so
-
-
-\section{libplusspace.so}
-
-link to libraster.so
-
-
-\section{libprefedapp.so}
-
-link to libprefs.so
-
-
-\section{libprefsbv.so}
-
-link to libprefs.so
-
-
 \section{libprefs.so}
 
-phelpv_ATKregistry_
-
-class phelpv
-
-pintv_ATKregistry_
-
-class pintv
-
-prefedapp_ATKregistry_
-
-class prefedapp
-
-prefs_ATKregistry_
-
-class prefs
-
-prefsbv_ATKregistry_
-
-class prefsbv
-
-prefsv_ATKregistry_
-
-class prefsv
-
-prefval_ATKregistry_
-
-class prefval
-
-pvalbv_ATKregistry_
-
-class pvalbv
-
-pvalcv_ATKregistry_
-
-class pvalcv
-
-pvalfv_ATKregistry_
-
-class pvalfv
-
-pvalsbv_ATKregistry_
-
-class pvalsbv
-
-pvalslv_ATKregistry_
-
-class pvalslv
-
-pvaltv_ATKregistry_
-
-class pvaltv
-
-pvaltvc_ATKregistry_
-
-class pvaltvc
-
-pvaltvf_ATKregistry_
-
-class pvaltvf
-
-pvaltvfc_ATKregistry_
-
-class pvaltvfc
-
-pvaltvl_ATKregistry_
-
-class pvaltvl
-
-ssliderv_ATKregistry_
-
-class ssliderv
-
-textintv_ATKregistry_
-
-class textintv
-
-titextv_ATKregistry_
-
-class titextv
-
-wrapv_ATKregistry_
-
-class wrapv
+The following should be private:
 
 T pintv_EditAsText(pintv*, sbutton*, long)
 
@@ -14400,145 +13031,9 @@ T pintv_GetReportEvent(long)
 
 
 
-\section{libprefsv.so}
-
-link to libprefs.so
-
-
-\section{libprefval.so}
-
-link to libprefs.so
-
-
-\section{libps.so}
-
-link to libnote.so
-
-
-\section{libpsview.so}
-
-link to libnote.so
-
-
-\section{libpushbutton.so}
-
-link to liblink.so
-
-
-\section{libpushbuttonview.so}
-
-link to liblink.so
-
-
-\section{libpvalbv.so}
-
-link to libprefs.so
-
-
-\section{libpvalcv.so}
-
-link to libprefs.so
-
-
-\section{libpvalfv.so}
-
-link to libprefs.so
-
-
-\section{libpvalsbv.so}
-
-link to libprefs.so
-
-
-\section{libpvalslv.so}
-
-link to libprefs.so
-
-
-\section{libpvaltvc.so}
-
-link to libprefs.so
-
-
-\section{libpvaltvfc.so}
-
-link to libprefs.so
-
-
-\section{libpvaltvf.so}
-
-link to libprefs.so
-
-
-\section{libpvaltvl.so}
-
-link to libprefs.so
-
-
-\section{libpvaltv.so}
-
-link to libprefs.so
-
-
-\section{librasterimage.so}
-
-link to libraster.so
-
-
-\section{librasterio.so}
-
-link to libraster.so
-
-
 \section{libraster.so}
 
-cmuwm_ATKregistry_
-
-class cmuwm
-
-heximage_ATKregistry_
-
-class heximage
-
-oldRF_ATKregistry_
-
-class oldRF
-
-paint_ATKregistry_
-
-class paint
-
-plusspace_ATKregistry_
-
-class plusspace
-
-raster_ATKregistry_
-
-class raster
-
-rasterimage_ATKregistry_
-
-class rasterimage
-
-rasterio_ATKregistry_
-
-class rasterio
-
-rasterview_ATKregistry_
-
-class rasterview
-
-rastoolview_ATKregistry_
-
-class rastoolview
-
-xbm_ATKregistry_
-
-class xbm
-
-xwdio_ATKregistry_
-
-class xwdio
+Following should be private:
 
 T PanCommand(rasterview*, long)
 
@@ -14620,29 +13115,6 @@ T rasterview_DrawHighlightBehindDisplayBox(rasterview*, graphic*, int)
 
 T rasterview_DisplayBoxHideOverlappingHighlight(rasterview*, graphic*, rasterimage*)
 
-
-
-\section{librasterview.so}
-
-link to libraster.so
-
-
-\section{librastoolview.so}
-
-link to libraster.so
-
-
-\section{librecsearch.so}
-
-recsearch_ATKregistry_
-
-class recsearch
-
-
-
-\section{librofftextapp.so}
-
-link to librofftext.so
 
 
 \section{librofftext.so}
@@ -14817,39 +13289,6 @@ class num
 
 
 
-\section{librunadewapp.so}
-
-link to libarbiter.so
-
-
-\section{libs.all}
-
-\begindata{link,11187424}
-4
-${ANDREWDIR}/libs/atk/libs.all
-0
-0
-V
-\begindata{link,11187424}
-Datastream version: 2
-libs.all
-2
-
-black
-white
-\enddata{link,11187424}
-\enddata{link,11187424}
-\view{linkview,11187424,26363,0,0}
-
-
-\section{libspell.so}
-
-spell_ATKregistry_
-
-class spell
-
-
-
 \section{libsrctext.so}
 
 The following should be private:
@@ -14874,46 +13313,9 @@ T MakeSureNotOverstrikingView(rawtext*, long, long)
 
 
 
-\section{libssliderv.so}
-
-link to libprefs.so
-
-
-\section{libsuitecv.so}
-
-link to libsuite.so
-
-
-\section{libsuiteev.so}
-
-link to libsuite.so
-
-
 \section{libsuite.so}
 
-suite_ATKregistry_
-
-class suite
-
-suitecv_ATKregistry_
-
-class suitecv
-
-suiteev_ATKregistry_
-
-class suiteev
-
-suitetapp_ATKregistry_
-
-class suitetapp
-
-suitex1app_ATKregistry_
-
-class suitex1app
-
-vector_ATKregistry_
-
-class vector
+The following should be private (and possibly more in suite.H):
 
 T First_Test(suitetapp*, suite*, suite_item*, long, view_MouseAction, long, long, long)
 
@@ -14955,23 +13357,6 @@ T Next_Test(suitetapp*, suite*, suite_item*, long, view_MouseAction, long, long,
 
 T Quit_Test(suitetapp*, suite*, suite_item*, long, view_MouseAction, long, long, long)
 
-class color_state
-
-
-
-\section{libsuitetapp.so}
-
-link to libsuite.so
-
-
-\section{libsuitex1app.so}
-
-link to libsuite.so
-
-
-\section{libsunraster.so}
-
-link to libimagev.so
 
 
 \section{libsupport.so}
@@ -15158,16 +13543,9 @@ T WriteCell(table*, _IO_FILE*, cell*, char**, int)
 
 
 
-\section{libtabrulerview.so}
-
-link to liblookz.so
-
-
 \section{libtags.so}
 
-tags_ATKregistry_
-
-class tags
+The following should be private:
 
 T firstField(text*, long)
 
@@ -15191,11 +13569,6 @@ T tags_RebuildTagsFile(view*, long)
 
 T nextField(text*, long)
 
-
-
-\section{libtextintv.so}
-
-link to libprefs.so
 
 
 \section{libtextobjs.so}
@@ -15620,40 +13993,17 @@ class textps_layout_history
 
 
 
-\section{libtif.so}
-
-link to libimagev.so
-
-
-\section{libtitextv.so}
-
-link to libprefs.so
-
-
 \section{libtoezapp.so}
 
-toezapp_ATKregistry_
-
-class toezapp
+The following should be private:
 
 T ReadScribeFromFileToDoc(_IO_FILE*, text*, int, void (*)(long, char*))
 
 
 
-\section{libtoksym.so}
-
-link to libsym.so
-
-
 \section{libtree.so}
 
-tree_ATKregistry_
-
-class tree
-
-treev_ATKregistry_
-
-class treev
+The following should be private:
 
 T Node_Shadow_Node(treev*, tree_node*)
 
@@ -15661,11 +14011,6 @@ T tree__NodeModified(tree*, tree_node*)
 
 T tree__SetNodeModified(tree*, tree_node*, char)
 
-
-
-\section{libtreev.so}
-
-link to libtree.so
 
 
 \section{libtypescript.so}
@@ -15720,51 +14065,6 @@ T metextview_ReturnCommand(metextview*)
 
 T locateHit(pianoV*, int, int)
 
-
-
-\section{libvector.so}
-
-link to libsuite.so
-
-
-\section{libvutils.so}
-
-link to libnote.so
-
-
-\section{libwincelview.so}
-
-link to libarbiter.so
-
-
-\section{libwrapv.so}
-
-link to libprefs.so
-
-
-\section{libxbitmap.so}
-
-link to libimagev.so
-
-
-\section{libxbm.so}
-
-link to libraster.so
-
-
-\section{libxpixmap.so}
-
-link to libimagev.so
-
-
-\section{libxwdio.so}
-
-link to libraster.so
-
-
-\section{libxwd.so}
-
-link to libimagev.so
 
 
 \section{libzip.so}
@@ -15878,6 +14178,28 @@ T zipprint_Write_Print_Datastream_Trailer(zipprint*)
 T palloc(pool_type*, unsigned int)
 
 T strhash(char*, unsigned int)
+
+
+
+\section{libs.all}
+
+\begindata{link,11187424}
+4
+${ANDREWDIR}/libs/atk/libs.all
+0
+0
+V
+\begindata{link,11187424}
+Datastream version: 2
+libs.all
+2
+
+black
+white
+\enddata{link,11187424}
+\enddata{link,11187424}
+\view{linkview,11187424,26363,0,0} lists the shared objects statically 
+loaded into the default (minmal) \bold{runapp}.
 
 \begindata{bp,14290720}
 Version 2

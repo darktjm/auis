@@ -6,6 +6,8 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libarbiter
+ * @{ */
 struct pagev_switcheroo {
     struct page_switchee *switchee;
     class view *v;
@@ -45,5 +47,5 @@ public:
       class menulist *ml;
       struct pagev_switcheroo *Firstswitcheroo, *NowPlaying;
 };
-
+/** @} */
 #endif /* _pagev_H_ */

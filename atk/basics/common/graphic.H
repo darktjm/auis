@@ -2,6 +2,8 @@ ATK_INTER
 #ifndef _graphic_H_
 #define _graphic_H_
 
+/** \addtogroup libbasics libbasics.so
+ * @{ */
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
@@ -373,7 +375,5 @@ controllable way to limit drawing commands. It is in local coordinates,
 but is usually null (no explicit clipping).
 
 */
-
-
-
+/** @} */
 #endif /* _graphic_H_ */

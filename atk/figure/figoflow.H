@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _figoflow_H_
 #define _figoflow_H_
-/* figoflow.ch - fig element object: text flow unit */
+/** \addtogroup libfigure
+ * @{ */
+/* figoflow.H - fig element object: text flow unit */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -28,5 +30,5 @@ class figoflow : public  figorect {
     long figmodified;
     long order;
 };
-
+/** @} */
 #endif /* _figoflow_H_ */

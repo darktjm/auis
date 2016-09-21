@@ -1,7 +1,9 @@
 ATK_INTER
 #ifndef _figview_H_
 #define _figview_H_
-/* figv.ch - drawing object view */
+/** \addtogroup libfigure
+ * @{ */
+/* figview.H - drawing object view */
 /*
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
@@ -217,6 +219,5 @@ class figview  : public  view {
       boolean recsearchvalid;		/* was last RecSearch successful? */
       class view *recsearchchild;		/* child in which last RecSearch found something */
 };
-
-
+/** @} */
 #endif /* _figview_H_ */

@@ -6,7 +6,11 @@ ATK_INTER
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-
+/** \addtogroup libchart libchart.so
+ *  A dynamically loadable ATK class file.  Contains chart, chartv,
+ *  chartapp, chartobj, chartdot, chartpie, chartx1app, charthst,
+ *  chartstk, chartcsn, chartlin.
+ * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
 
 TITLE	The Chart Data-object
@@ -200,5 +204,5 @@ public:
 #define  chart_titleviewobjectname	    38
 
 #define  chart_type			    40
-
+/** @} */
 #endif /* _chart_H_ */

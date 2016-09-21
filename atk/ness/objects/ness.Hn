@@ -5,6 +5,11 @@
 	Copyright Carnegie Mellon University 1992, 1993 - All Rights Reserved
 \* ********************************************************************** */
 
+/** \addtogroup libness libness.so
+ *  A dynamically loadable ATK class file.  Contains ness, nessview,
+ *  nessmark, nessm, nessmv, nessrunapp, gentext.  Also contains nesssym,
+ *  but no link for it.
+ * @{ */
 /*
 ness.H		ness data object
 
@@ -1050,4 +1055,5 @@ PushMark(class nessmark *src) {
 
 #define PUSHMARK(m) (PushMark(m), NSP = NSPstore, NSP->s.v)
 #endif
+/** @} */
 #endif /* _ness_H_ */
