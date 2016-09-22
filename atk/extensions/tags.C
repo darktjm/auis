@@ -54,17 +54,17 @@ static class frame *FindByView(class view  *view);
 static void checkFileName();
 static class buffer *tags_OpenBuffer(const char  *filename);
 static class buffer *tags_OpenTagsBuffer(const char  *name);
-void tags_finished(int  pid, class view  *view, long  *status);
-void tags_RebuildTagsFile(class view  *view, long  key);
-long nextField(class text  *doc, long  pos);
-int firstField(class text  *doc,long  pos);
-char *getFunction(class text  *doc,long  pos);
-class view *TagsCreateWindow(class buffer  *buffer );
-void tags_FindTag (class view  *view, char  *tag, int  RecursiveEdit);
-void tags_GotoTagCmd(class view  *view,long  key);
-void tags_FindTagCmd(class view  *view,long  key);
-void tags_OpenCmd(class view  *view,long  key);
-void tags_LoadTagFileCmd(class view  *view,long  key);
+static void tags_finished(int  pid, class view  *view, long  *status);
+static void tags_RebuildTagsFile(class view  *view, long  key);
+static long nextField(class text  *doc, long  pos);
+static int firstField(class text  *doc,long  pos);
+static char *getFunction(class text  *doc,long  pos);
+static class view *TagsCreateWindow(class buffer  *buffer );
+static void tags_FindTag (class view  *view, char  *tag, int  RecursiveEdit);
+static void tags_GotoTagCmd(class view  *view,long  key);
+static void tags_FindTagCmd(class view  *view,long  key);
+static void tags_OpenCmd(class view  *view,long  key);
+static void tags_LoadTagFileCmd(class view  *view,long  key);
 
 
 static boolean ViewEqual(class frame  *frame, class view  *view)
@@ -137,7 +137,7 @@ static class buffer *tags_OpenTagsBuffer(const char  *name)
 /*
  * Zombie handler for completion of the 'tags' command.
  */
-void tags_finished(int  pid, class view  *view, long  *status)
+static void tags_finished(int  pid, class view  *view, long  *status)
 {
     int exit_status;
     class buffer *buffer;
@@ -154,7 +154,7 @@ void tags_finished(int  pid, class view  *view, long  *status)
     }
 }
 
-void tags_RebuildTagsFile(class view  *view, long  key)
+static void tags_RebuildTagsFile(class view  *view, long  key)
 
 {
     int pid;
@@ -190,7 +190,7 @@ void tags_RebuildTagsFile(class view  *view, long  key)
 
 /* skips over to the next field separated by blanks & tabs */
 
-long nextField(class text  *doc, long  pos)
+static long nextField(class text  *doc, long  pos)
 
 {
     char c;
@@ -207,7 +207,7 @@ long nextField(class text  *doc, long  pos)
 /* returns true if pos is in the first field
    fields are separated by blanks & tabs */
 
-int firstField(class text  *doc,long  pos)
+static int firstField(class text  *doc,long  pos)
 
 {
     char c = (doc)->GetChar(pos);
@@ -224,7 +224,7 @@ int firstField(class text  *doc,long  pos)
 
 /* gets the function name at the dot */
 
-char *getFunction(class text  *doc,long  pos)
+static char *getFunction(class text  *doc,long  pos)
 {
     char c;
     static char name[256];
@@ -240,7 +240,7 @@ char *getFunction(class text  *doc,long  pos)
     return name;
 }
 
-class view *TagsCreateWindow(class buffer  *buffer )
+static class view *TagsCreateWindow(class buffer  *buffer )
 {
     class frame *frame;
     class im *newIM;
@@ -261,7 +261,7 @@ class view *TagsCreateWindow(class buffer  *buffer )
 
 /* Most of the work is done here. */
 
-void tags_FindTag (class view  *view, char  *tag, int  RecursiveEdit)
+static void tags_FindTag (class view  *view, char  *tag, int  RecursiveEdit)
 
 {
     char find[255];
@@ -450,7 +450,7 @@ void tags_FindTag (class view  *view, char  *tag, int  RecursiveEdit)
     /*im_ForceUpdate();*/  /*isn't this bogus? */
 }
 
-void tags_GotoTagCmd(class view  *view,long  key)
+static void tags_GotoTagCmd(class view  *view,long  key)
 {
     static char name[256];
     int RecursiveEdit= !((view)->GetIM())->ArgProvided() && environ::GetProfileSwitch("TagRecursiveEdit", TRUE);
@@ -461,7 +461,7 @@ void tags_GotoTagCmd(class view  *view,long  key)
     tags_FindTag(view,name,RecursiveEdit);
 }
 
-void tags_FindTagCmd(class view  *view,long  key)
+static void tags_FindTagCmd(class view  *view,long  key)
 {
     char *name;
     int RecursiveEdit= !((view)->GetIM())->ArgProvided() && environ::GetProfileSwitch("TagRecursiveEdit", TRUE);
@@ -471,7 +471,7 @@ void tags_FindTagCmd(class view  *view,long  key)
     tags_FindTag(view,name,RecursiveEdit);
 }
 
-void tags_OpenCmd(class view  *view,long  key)
+static void tags_OpenCmd(class view  *view,long  key)
 {
     if (key != 0) {
 	tags_FindTag(view,(char *)key, FALSE);
@@ -479,7 +479,7 @@ void tags_OpenCmd(class view  *view,long  key)
 
 }
 
-void tags_LoadTagFileCmd(class view  *view,long  key)
+static void tags_LoadTagFileCmd(class view  *view,long  key)
 {
     class buffer *buffer, *tbuf;
     static char name[MAXPATHLEN+1];

@@ -29,8 +29,8 @@ ATK_IMPL("calccon.H")
 #define DIV 4
 
 ATKdefineRegistry(calccon, observable, calccon::InitializeClass);
-void displayval(class calccon  *self);
-void clear(class calccon  *self);
+static void displayval(class calccon  *self);
+static void clear(class calccon  *self);
 static class calccon *FindSelf(class view  *v);
 static void calcCallBack(class calccon  *self,class value  *val,long  r1,long  r2);
 static void valenterCallBack(class calccon  *self,class value  *val,long  r1,long  r2);
@@ -38,10 +38,10 @@ static void decimalCallBack(class calccon  *self,class value  *val,long  r1,long
 static void digitCallBack(class calccon  *self,class value  *val,long  r1,long  r2);
 static void outputCallBack(class calccon  *self,class value  *val,long  r1,long  r2);
 static void initself(class calccon  *self,class view  *v);
-void calccon_clear(class view  *v,long  dat);
+static void calccon_clear(class view  *v,long  dat);
 
 
-void displayval(class calccon  *self)
+static void displayval(class calccon  *self)
 {
 if(self->error){
     (self->output)->SetString("Error");
@@ -50,7 +50,7 @@ if(self->error){
 sprintf(self->buf,"%12.6g",self->val);
 (self->output)->SetString(self->buf);
 }
-void clear(class calccon  *self)
+static void clear(class calccon  *self)
 {
 self->val = 0.0;
 self->saveval = 0.0;
@@ -297,7 +297,7 @@ static void initself(class calccon  *self,class view  *v)
 	if(self->calc_3) (self->calc_3)->AddCallBackObserver( self,(value_fptr)calcCallBack,3);
 	if(self->calc_3View) (self->calc_3View)->AddObserver(self);
 }
-void calccon_clear(class view  *v,long  dat)
+static void calccon_clear(class view  *v,long  dat)
  {
 class calccon *self;
 if((self = FindSelf(v)) == NULL) return;

@@ -46,7 +46,7 @@ typedef void (*tileSeparateRoutine)
     (byte*, u_char*, u_char*, u_char*, RGBvalue*, u_long, u_long, int, int);
 
 ATKdefineRegistry(tif, image, NULL);
-int LoadTIFF( class tif  *self, const char  *fname, FILE  *f, int    nc );
+static int LoadTIFF( class tif  *self, const char  *fname, FILE  *f, int    nc );
 static int loadPalette(TIFF  *tif, long   w, long   h, int    photo, int    bps);
 static int loadColor(TIFF  *tif, long   w, long   h, int    photo, int    bps, int    nc);
 static void _TIFFerr(const char  *module, const char  *fmt, va_list  ap);
@@ -54,7 +54,7 @@ static void _TIFFwarn(const char  *module, const char  *fmt, va_list  ap);
 static int loadImage(TIFF  *tif, u_long  rwidth , u_long  rheight, byte  *raster, int  stop);
 static int checkcmap(int  n, u_short  *r , u_short  *g , u_short  *b);
 static int gt(TIFF  *tif, int  w , int  h, u_char  *raster);
-u_long setorientation(TIFF  *tif, u_long  h);
+static u_long setorientation(TIFF  *tif, u_long  h);
 static int gtStripContig(TIFF  *tif, byte  *raster, RGBvalue  *Map, u_long  h , u_long  w, int  bpp);
 static int gtStripSeparate(TIFF  *tif, byte  *raster, RGBvalue  *Map, u_long  h , u_long  w, int  bpp);
 static int makebwmap();
@@ -93,7 +93,7 @@ tif::Load( const char  *fullname, FILE  *fp )
 
 
 /*******************************************/
-int LoadTIFF( class tif  *self, const char  *fname, FILE  *f, int    nc )
+static int LoadTIFF( class tif  *self, const char  *fname, FILE  *f, int    nc )
                 /*******************************************/
 {
   TIFF *tif;
@@ -428,7 +428,7 @@ int gt(TIFF  *tif, int  w , int  h, u_char  *raster)
 	return (e);
 }
 
-u_long
+static u_long
 setorientation(TIFF  *tif, u_long  h)
 		{
 	u_long y;

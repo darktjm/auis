@@ -230,11 +230,11 @@ typedef struct {
 				   entries */
 } symtab_type;
 
-int symtab_add (symtab_type  *symtab, unsigned char *symbol, struct user_data  *data);
-int symtab_delete( symtab_type  *symtab, unsigned char *symbol );
-int symtab_create (symtab_type  **symtab, int  expected_size);
-void symtab_destroy( symtab_type	          *symtab );
-int symtab_find (symtab_type  *symtab, unsigned char *symbol, struct user_data  **data);
+extern NO_DLL_EXPORT int symtab_add (symtab_type  *symtab, unsigned char *symbol, struct user_data  *data);
+extern NO_DLL_EXPORT int symtab_delete( symtab_type  *symtab, unsigned char *symbol );
+extern NO_DLL_EXPORT int symtab_create (symtab_type  **symtab, int  expected_size);
+extern NO_DLL_EXPORT void symtab_destroy( symtab_type	          *symtab );
+extern NO_DLL_EXPORT int symtab_find (symtab_type  *symtab, unsigned char *symbol, struct user_data  **data);
 
 typedef  struct zip_stream			 *zip_type_stream;
 

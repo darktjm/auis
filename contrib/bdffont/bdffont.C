@@ -25,7 +25,7 @@ NO_DLL_EXPORT struct bdffont_fontchar bdffont_ReadCharDefn;
 
 ATKdefineRegistry(bdffont, dataobject, NULL);
 static unsigned char  bdflex_ComposeByte(char  c1 , char  c2);
-void bdffont_EnsureDefns(class bdffont  *self, long  num);
+static void bdffont_EnsureDefns(class bdffont  *self, long  num);
 static void WriteCharacter(FILE  *file, struct bdffont_fontchar  *defn);
 static long bdffont_AppendProperty(char  **props, long  length, const char  *p, long  psize, long  v);
 static long FilterPropertiesOut(class bdffont  *self, char  **props);
@@ -82,7 +82,7 @@ bdflex_ComposeByte(char  c1 , char  c2)
 } /* bdflex_ComposeByte */
 
 
-void bdffont_EnsureDefns(class bdffont  *self, long  num)
+static void bdffont_EnsureDefns(class bdffont  *self, long  num)
 {
     int ix;
     long old;

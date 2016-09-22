@@ -75,10 +75,10 @@ static long Assign_Pane_Image_Attributes( class zipview		  *self, zip_type_pane	
 static long Assign_Pane_Figure_Attributes( class zipview		  *self, zip_type_pane		   pane, zip_type_figure		   figure );
 static void Mark_Pane_Objects_Unexposed( class zipview		  *self, zip_type_pane		   pane );
 static void Mark_Pane_Image_Unexposed( class zipview		  *self, zip_type_pane		   pane, zip_type_image		   image );
-long zipview_Recoordinate_Panes( class zipview		  *self );
+extern NO_DLL_EXPORT long zipview_Recoordinate_Panes( class zipview		  *self );
 static void Coordinate_Block_Pane( class zipview		  *self, zip_type_pane		   pane );
 static void Coordinate_Nested_Pane( class zipview		  *self, zip_type_pane		   pane );
-void zipview_Compute_Pane_Stretch_Factors( class zipview		  *self, zip_type_pane		   pane );
+extern NO_DLL_EXPORT void zipview_Compute_Pane_Stretch_Factors( class zipview		  *self, zip_type_pane		   pane );
 static void Compute_Pane_Stream_Stretch_Factors( class zipview		  *self, zip_type_pane		   pane, zip_type_stream		   stream );
 static void Compute_Pane_Image_Stretch_Factors( class zipview		  *self, zip_type_pane		   pane, zip_type_image		   image );
 static void Compute_Pane_Figure_Stretch_Factors( class zipview		  *self, zip_type_pane		   pane, zip_type_figure		   figure );

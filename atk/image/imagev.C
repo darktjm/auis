@@ -83,7 +83,7 @@ static class cursor *waitCursor;
 ATKdefineRegistry(imagev, view, imagev::InitializeClass);
 
 static void PostCursor( class imagev  *self, int  type );
-void DrawBorder( class imagev  *self, struct rectangle  *outer , struct rectangle  *inner );
+static void DrawBorder( class imagev  *self, struct rectangle  *outer , struct rectangle  *inner );
 void GetScreenCoordinates( class imagev  *self, struct rectangle  *pixRect );
 static const char * imageTypeName(enum image_fileType  type);
 static class image * image_Import( const char  *filename, enum image_fileType  type );
@@ -333,7 +333,7 @@ static const struct sbutton_info thebutton = {
 		   rectangle_Height(SrcRect))
 
 
-void
+static void
 DrawBorder( class imagev  *self, struct rectangle  *outer , struct rectangle  *inner )
 {
     if(self->bordersize==0) {

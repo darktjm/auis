@@ -180,7 +180,7 @@ static long Display_Processor( class zipedit	      *self, zip_type_pane	       p
 static void Background_Command( class zipedit	      *self );
 static void Hide_Background_Command( class zipedit	      *self );
 static void Expose_Background_Command( class zipedit	      *self );
-void zipedit_Display_Background_Pane( class zipedit	      *self, zip_type_pane	       pane );
+extern NO_DLL_EXPORT void zipedit_Display_Background_Pane( class zipedit	      *self, zip_type_pane	       pane );
 static void Lighten_Background( class zipedit	      *self );
 static void Lighten_Background_Command( class zipedit	      *self );
 static void Darken_Background_Command( class zipedit	      *self );
@@ -189,8 +189,8 @@ static void Unselect_Background_Command( class zipedit	      *self );
 static void Build_Menu();
 static void Accept_Character( class zipedit	      *self, char			       c );
 static void Pending_Delete( class zipedit	     *self, zip_type_pane	      pane );
-void zipedit_Expose_Selection_Menu( class zipedit	    *self );
-void zipedit_Hide_Selection_Menu( class zipedit	    *self );
+extern NO_DLL_EXPORT void zipedit_Expose_Selection_Menu( class zipedit	    *self );
+extern NO_DLL_EXPORT void zipedit_Hide_Selection_Menu( class zipedit	    *self );
 static void Pending_Palettes( class zipedit	    *self, zip_type_pane	     pane );
 static void Pending_Coordinates( class zipedit	    *self, zip_type_pane	     pane );
 static void Pending_Grid( class zipedit	    *self, zip_type_pane	     pane );
@@ -199,9 +199,9 @@ static void Pending_Double_Grid( class zipedit	    *self, zip_type_pane	     pan
 static void Pending_Redisplay( class zipedit	    *self, zip_type_pane	     pane );
 static void Pending_Redraw( class zipedit	    *self, zip_type_pane	     pane );
 static void Pending_Halve_Grid( class zipedit	    *self, zip_type_pane	     pane );
-int zipedit_Prepare_Editing_Control( class zipedit		  *self, zip_type_pane		   pane );
-int zipedit_Reset_Editing_Control( class zipedit		  *self, zip_type_pane		   pane );
-void zipedit_Reset_Editing_Selection( class zipedit	       *self, zip_type_pane		   pane );
+extern NO_DLL_EXPORT int zipedit_Prepare_Editing_Control( class zipedit		  *self, zip_type_pane		   pane );
+extern NO_DLL_EXPORT int zipedit_Reset_Editing_Control( class zipedit		  *self, zip_type_pane		   pane );
+extern NO_DLL_EXPORT void zipedit_Reset_Editing_Selection( class zipedit	       *self, zip_type_pane		   pane );
 
 
 boolean 

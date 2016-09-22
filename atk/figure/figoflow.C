@@ -16,7 +16,7 @@ ATK_IMPL("figoflow.H")
 static class fontdesc *ClassFontDesc;
 
 ATKdefineRegistry(figoflow, figorect, figoflow::InitializeClass);
-boolean figoflow_OrderFlows(struct figobj *o, long ref, struct figure *self, long *rock);
+static boolean figoflow_OrderFlows(struct figobj *o, long ref, struct figure *self, long *rock);
 
 boolean figoflow::InitializeClass()
 {
@@ -89,7 +89,7 @@ enum figobj_HitVal figoflow::HitMe(long  x , long  y, long  delta, long  *ptref)
 }
 
 static ATKregistryEntry *figoflow_reg = NULL;
-boolean figoflow_OrderFlows(struct figobj *o, long ref, struct figure *self, long *rock)
+static boolean figoflow_OrderFlows(struct figobj *o, long ref, struct figure *self, long *rock)
 {
     if (o->IsType(figoflow_reg)) {
 	class figoflow *flo = (class figoflow *)o;

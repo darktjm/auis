@@ -55,18 +55,18 @@ END-SPECIFICATION  ************************************************************/
 
 #define PaneViewObj (self->view_object)
 
-long Highlight_Pane_Points( class zipedit		  *self, zip_type_pane		   pane );
-long Normalize_Pane_Points( class zipedit		  *self, zip_type_pane		   pane );
+static long Highlight_Pane_Points( class zipedit		  *self, zip_type_pane		   pane );
+static long Normalize_Pane_Points( class zipedit		  *self, zip_type_pane		   pane );
 static int Delete_Inferior_Image( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane );
 static int Undelete_Inferior_Image( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane );
-int Highlight_Inferior_Image_Points( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane );
+static int Highlight_Inferior_Image_Points( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane );
 static int Normalize_Inferior_Image_Points( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane );
-long Delete_Stream( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
-long Undelete_Stream( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
-long Highlight_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
-long Normalize_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
-long Hide_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
-long Expose_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
+static long Delete_Stream( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
+static long Undelete_Stream( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
+static long Highlight_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
+static long Normalize_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
+static long Hide_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
+static long Expose_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
 static boolean Ratify_Highlighting( class zipedit		  *self, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y );
 static boolean Ratify_Normalizing( class zipedit		  *self, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y );
 
@@ -86,13 +86,13 @@ zipedit::Set_Pane_Highlight_Icon( zip_type_pane		   pane, char				   icon )
   return status;
   }
 
-long
+static long
 Highlight_Pane_Points( class zipedit		  *self, zip_type_pane		   pane )
       {
 return zip_ok;
   }
 
-long
+static long
 Normalize_Pane_Points( class zipedit		  *self, zip_type_pane		   pane )
       {
 return zip_ok;
@@ -584,7 +584,7 @@ zipedit::Highlight_Image_Points( zip_type_image		   image, zip_type_pane		   pan
   }
 
 
-int
+static int
 Highlight_Inferior_Image_Points( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane )
         {
   zip_type_figure		  figure_ptr;
@@ -706,37 +706,37 @@ zipedit::Expose_Image_Points( zip_type_image		   image, zip_type_pane		   pane )
   }
 
 
-long
+static long
 Delete_Stream( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
         {
 return zip_ok;
   }
 
-long
+static long
 Undelete_Stream( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
         {
 return zip_ok;
   }
 
-long
+static long
 Highlight_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
         {
 return zip_ok;
   }
 
-long
+static long
 Normalize_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
         {
 return zip_ok;
   }
 
-long
+static long
 Hide_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
         {
 return zip_ok;
   }
 
-long
+static long
 Expose_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
         {
 return zip_ok;

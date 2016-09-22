@@ -65,9 +65,9 @@ END-SPECIFICATION  ************************************************************/
 static int Show_Pane( class zipview		  *self, zip_type_pane		   pane, long				   action );
 static int Pane_Suite_Member( class zipview		  *self, zip_type_pane		   major_pane, zip_type_pane		   candidate_pane );
 static int Draw_Auxiliary_Streams( class zipview		  *self, zip_type_pane		   pane );
-void zipview_Draw_Pane_Border( class zipview		  *self, zip_type_pane		   pane );
-int zipview_Preserve_Overlay( class zipview		  *self, zip_type_pane		   pane );
-int zipview_Restore_Overlay( class zipview		  *self, zip_type_pane		   pane );
+static void zipview_Draw_Pane_Border( class zipview		  *self, zip_type_pane		   pane );
+static int zipview_Preserve_Overlay( class zipview		  *self, zip_type_pane		   pane );
+extern NO_DLL_EXPORT int zipview_Restore_Overlay( class zipview		  *self, zip_type_pane		   pane );
 
 extern void zipview_Compute_Pane_Stretch_Factors( class zipview      *self, zip_type_pane             pane );
 
@@ -356,7 +356,7 @@ Draw_Auxiliary_Streams( class zipview		  *self, zip_type_pane		   pane )
   return status;
   }
 
-void zipview_Draw_Pane_Border( class zipview		  *self, zip_type_pane		   pane )
+static void zipview_Draw_Pane_Border( class zipview		  *self, zip_type_pane		   pane )
       {
   class graphic		 *graphic;
   int				  thickness =
@@ -507,7 +507,7 @@ zipview::Expose_Pane( zip_type_pane		   pane )
   return status;
   }
 
-int
+static int
 zipview_Preserve_Overlay( class zipview		  *self, zip_type_pane		   pane )
 {
     IN(zipview_Preserve_Overlay);

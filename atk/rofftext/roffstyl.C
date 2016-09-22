@@ -21,15 +21,15 @@
  *  This is a no-no on SPARC.
  */
 
-void WriteText(class rofftext  *self);
+static void WriteText(class rofftext  *self);
 int ChangeStyle(class rofftext  *self,int  id,const char  *st);
-void CloseStyle(class rofftext  *self);
+static void CloseStyle(class rofftext  *self);
 int BeginStyle(class rofftext  *self,const char  *st);
 void EndStyle(class rofftext  *self,int  ID);
 void CloseAllStyles(class rofftext  *self);
 
 
-void WriteText(class rofftext  *self)
+static void WriteText(class rofftext  *self)
 {
     (self)->Write(stdout,(long)self,1);
 }
@@ -74,7 +74,7 @@ int ChangeStyle(class rofftext  *self,int  id,const char  *st)
 
 /* close innermost style */
 
-void CloseStyle(class rofftext  *self)
+static void CloseStyle(class rofftext  *self)
 {
     DEBUG(1, (stderr,"Closing style %d (%d to %d, length %d)\n", self->stack->ID, self->stack->pos, self->pos, (self->pos - self->stack->pos)));
 

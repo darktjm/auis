@@ -15,7 +15,7 @@
 #include <math.h>
 /* get type of tab stop (Left, Right, Center, None) */
 
-void spread_printVal(class table  * T, char *buf, extended_double  *value, char format, int prec);
+void NO_DLL_EXPORT spread_printVal(class table  * T, char *buf, extended_double  *value, char format, int prec);
 
 static char TabType(class table  *T, int  r , int  c);
 static int NeedNewTabs(class table  *T, int  r);

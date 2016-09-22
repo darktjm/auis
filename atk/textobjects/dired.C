@@ -44,9 +44,9 @@ static int InsTextProc(struct fileinfo  *fi, class dired  *dired);
 static void ListIntoText(class dired  *self, class list  *list);
 static void SetupStyles(class dired  *self);
 static int FindNameProc(struct fileinfo  *fi, const char  *name);
-struct fileinfo *LookupFile(class dired  *self, const char  *name);
+static struct fileinfo *LookupFile(class dired  *self, const char  *name);
 static int FindPosProc(struct fileinfo  *fi, long  pos);
-struct fileinfo *LookupPos(class dired  *self, long  pos);
+static struct fileinfo *LookupPos(class dired  *self, long  pos);
 static void WrapStyle(class dired  *self, struct fileinfo  *fi, class style  *style);
 static int AnythingProc(struct fileinfo  *fi, long  rock);
 static long EnumProc(struct fileinfo  *fi, struct emargs  *args);
@@ -290,7 +290,7 @@ static int FindNameProc(struct fileinfo  *fi, const char  *name)
     return (strcmp(fi->fileName, name) != 0);
 }
 
-struct fileinfo *LookupFile(class dired  *self, const char  *name)
+static struct fileinfo *LookupFile(class dired  *self, const char  *name)
 {
     if (self->flist == NULL)
         return NULL;
@@ -303,7 +303,7 @@ static int FindPosProc(struct fileinfo  *fi, long  pos)
     return (pos < fi->pos || pos > fi->pos + fi->len);
 }
 
-struct fileinfo *LookupPos(class dired  *self, long  pos)
+static struct fileinfo *LookupPos(class dired  *self, long  pos)
 {
     if (self->flist == NULL)
         return NULL;

@@ -35,6 +35,7 @@ ATK_IMPL("htmlform.H")
 ATKdefineRegistryNoInit(htmlform, ATK);
 
 // for callbacks from widgets
+class NO_DLL_EXPORT formCB;
 DEFINE_AACTION_FUNC_CLASS(formCB, AWidget);
 
 

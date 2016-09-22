@@ -52,21 +52,21 @@ static proctable_fptr typescript_GrabLastCmd;
 
 
 ATKdefineRegistry(fcomp, ATK, fcomp::InitializeClass);
-void CompleteFname(class typescript  *ts, long  key);
+static void CompleteFname(class typescript  *ts, long  key);
 static void GatherStats(struct helpstat  *rock, enum message_HelpItem  itemtype, char  *item, long  dummy /* along for the ride */);
 static void MakeReport(struct repCookie  *cookie, enum message_HelpItem  itemtype, char  *item, long  dummy /* along for the ride */);
 static char * SaveLastCommand(class typescript  *td);
 static int mystrcmp(char  **s1,char  **s2);
-void PossibleCompletions(class typescript  *ts, long  key);
-void CompleteTokenWork(class typescript  *ts, boolean  forward);
-void CompleteTokenForward(class typescript  *ts, long  key);
-void CompleteTokenBackward(class typescript  *ts, long  key);
-void CompleteCmdWork(class typescript  *ts, boolean  forward);
-void CompleteCmdForward(class typescript  *ts, long  key);
-void CompleteCmdBackward(class typescript  *ts, long  key);
+static void PossibleCompletions(class typescript  *ts, long  key);
+static void CompleteTokenWork(class typescript  *ts, boolean  forward);
+static void CompleteTokenForward(class typescript  *ts, long  key);
+static void CompleteTokenBackward(class typescript  *ts, long  key);
+static void CompleteCmdWork(class typescript  *ts, boolean  forward);
+static void CompleteCmdForward(class typescript  *ts, long  key);
+static void CompleteCmdBackward(class typescript  *ts, long  key);
 
 
-void CompleteFname(class typescript  *ts, long  key)
+static void CompleteFname(class typescript  *ts, long  key)
 {
     long pos;
     long fname;
@@ -226,7 +226,7 @@ mystrcmp(char  **s1,char  **s2)
   else return(0);
 }
 
-void PossibleCompletions(class typescript  *ts, long  key)
+static void PossibleCompletions(class typescript  *ts, long  key)
 {
     long pos;
     class text *theText = Text(ts);
@@ -361,7 +361,7 @@ static long lastmatch;
 static long beginToken;
 static long endToken;
 
-void CompleteTokenWork(class typescript  *ts, boolean  forward)
+static void CompleteTokenWork(class typescript  *ts, boolean  forward)
 {
     long pos;
     class text *theText = Text(ts);
@@ -487,18 +487,18 @@ void CompleteTokenWork(class typescript  *ts, boolean  forward)
     ((ts)->GetIM())->SetLastCmd( tokenSearchCmd);
 }
 
-void CompleteTokenForward(class typescript  *ts, long  key)
+static void CompleteTokenForward(class typescript  *ts, long  key)
 {
     CompleteTokenWork(ts, TRUE);
 }
 
-void CompleteTokenBackward(class typescript  *ts, long  key)
+static void CompleteTokenBackward(class typescript  *ts, long  key)
 {
     CompleteTokenWork(ts, FALSE);
 }
 
 
-void CompleteCmdWork(class typescript  *ts, boolean  forward)
+static void CompleteCmdWork(class typescript  *ts, boolean  forward)
 {
     long pos;
     class text *theText;
@@ -592,12 +592,12 @@ void CompleteCmdWork(class typescript  *ts, boolean  forward)
     ((ts)->GetIM())->SetLastCmd( searchCmd);
 }
 
-void CompleteCmdForward(class typescript  *ts, long  key)
+static void CompleteCmdForward(class typescript  *ts, long  key)
 {
     CompleteCmdWork(ts, TRUE);
 }
 
-void CompleteCmdBackward(class typescript  *ts, long  key)
+static void CompleteCmdBackward(class typescript  *ts, long  key)
 {
     CompleteCmdWork(ts, FALSE);
 }

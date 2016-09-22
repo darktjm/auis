@@ -40,7 +40,7 @@ static struct impair *list;
 static int endnotes = FALSE;
 
 ATKdefineRegistry(fnotev, view, fnotev::InitializeClass);
-void initci(class fnotev  *self);
+static void initci(class fnotev  *self);
 #if 0
 fnotev_FindLoc(class fnotev  *self,class text  *parent);
 #endif
@@ -51,7 +51,7 @@ ismyenv(class fnotev  *self,class text  *d,long  pos,class environment  *env);
 #endif
 
 
-void initci(class fnotev  *self)
+static void initci(class fnotev  *self)
 {
     if((self)->GetDrawable() != NULL){
 	(self->fd)->CharSummary((self)->GetDrawable(),*(self->displaystr),&(self->ci[0]));

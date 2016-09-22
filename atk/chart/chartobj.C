@@ -200,7 +200,7 @@ ATKdefineRegistry(chartobj, aptv, NULL);
 static void Generate_Shadows( class chartobj	    *self );
 static void Set_Shadows( class chartobj	      *self );
 static void Free_Shadows( class chartobj	      *self );
-void Printer( class chartobj	      *self, FILE			      *file, char			      *processor, char			      *format, boolean		       level, aptv_printfptr printer );
+static void Printer( class chartobj	      *self, FILE			      *file, char			      *processor, char			      *format, boolean		       level, aptv_printfptr printer );
 static void Draw_Labels( class chartobj	  *self );
 static void Draw_Horizontal_Labels( class chartobj	  *self, long left, long top, long width, long height );
 static void Draw_Vertical_Labels( class chartobj	  *self, long left, long top, long width, long height );
@@ -655,7 +655,7 @@ chartobj::WhichItem( long			       x , long			       y )
   return  shadow;
   }
 
-void
+static void
 Printer( class chartobj	      *self, FILE			      *file, char			      *processor, char			      *format, boolean		       level, aptv_printfptr printer )
             {
   IN(Printer);

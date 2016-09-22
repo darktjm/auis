@@ -48,5 +48,5 @@ public:
     /* Write an X Window Dump  to 'file' from  subrectangle 'sub' of pixelimage 'pix'  */
 
 };
-/** @{ */
+/** @} */
 #endif /* _xwdio_H_ */

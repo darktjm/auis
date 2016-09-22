@@ -11,6 +11,7 @@ ATK_IMPL("popupwin.H");
 static boolean InitializeClass();
 ATKdefineRegistry(popupwin, view, InitializeClass);
 
+class NO_DLL_EXPORT popupwinfunc;
 DEFINE_AACTION_FUNC_CLASS(popupwinfunc,popupwin);
 
 static void RetractProc(popupwin *p,  const avalueflex &aux, const avalueflex &in, avalueflex &out) {

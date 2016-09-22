@@ -62,7 +62,6 @@ static void DoHelp(class launchapp  *self, class pushbutton  *b, long  rock);
 static void DoTour(class launchapp  *self, class pushbutton  *b, long  rock);
 static void DoEz(class launchapp  *self, class pushbutton  *b, long  rock);
 static void DoConsole(class launchapp  *self, class pushbutton  *b, long  rock);
-static void DoMessages(class launchapp  *self, class pushbutton  *b, long  rock);
 static void DoTypescript(class launchapp  *self, class pushbutton  *b, long  rock);
 static void DoBush(class launchapp  *self, class pushbutton  *b, long  rock);
 static void DoExit(class launchapp  *self, class pushbutton  *b, long  rock);
@@ -214,14 +213,6 @@ static void DoConsole(class launchapp  *self, class pushbutton  *b, long  rock)
     args[0]=Bin("console");
     
     Do("Console", self->framep, rock, args);
-}
-
-static void DoMessages(class launchapp  *self, class pushbutton  *b, long  rock)
-{
-    static const char *args[] = {"messages", "-d", NULL};
-
-    args[0]=Bin("messages");
-    Do("Messages", self->framep, rock, args);
 }
 
 static void DoTypescript(class launchapp  *self, class pushbutton  *b, long  rock)

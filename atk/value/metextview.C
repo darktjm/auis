@@ -17,12 +17,12 @@ ATK_IMPL("metextview.H")
 #define Text(A) ((class mentertext *)(A->dataobject))
 
 ATKdefineRegistry(metextview, textview, metextview::InitializeClass);
-void metextview_CancelCommand(class metextview  *self );
-void metextview_ReturnCommand(class metextview  *self );
-void metextview_ClearCommand(class metextview  *self );
+static void metextview_CancelCommand(class metextview  *self );
+static void metextview_ReturnCommand(class metextview  *self );
+static void metextview_ClearCommand(class metextview  *self );
 
 
-void metextview_CancelCommand(class metextview  *self )
+static void metextview_CancelCommand(class metextview  *self )
 {
     class mentertext *txt = Text(self);
     if((txt)->Changed()){
@@ -30,7 +30,7 @@ void metextview_CancelCommand(class metextview  *self )
 	(txt)->NotifyObservers(0);
     }
 }
-void metextview_ReturnCommand(class metextview  *self )
+static void metextview_ReturnCommand(class metextview  *self )
 {
     long np;
     char resp[64];
@@ -55,7 +55,7 @@ void metextview_ReturnCommand(class metextview  *self )
 	}
     }
 }
-void metextview_ClearCommand(class metextview  *self )
+static void metextview_ClearCommand(class metextview  *self )
 {
     class mentertext *txt = Text(self);
     (txt)->Clear();

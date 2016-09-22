@@ -109,10 +109,10 @@ struct cmenu  {
     cmenu_FreeFunction freeFunction;        /* Function to call on selection data when selection is freed. */
 };
 
-extern struct pane *PaneNumToPtr(struct cmenu *menu, int paneNum);
-extern int PanePtrToNum(struct cmenu *menu, struct pane *panePtr);
-extern struct selection *SelectionNumToPtr(struct cmenu *menu, struct pane *panePtr, int selectionNum);
-extern int SelectionPtrToNum(struct cmenu *menu, struct pane *panePtr, struct selection *selectionPtr);
+extern NO_DLL_EXPORT struct pane *PaneNumToPtr(struct cmenu *menu, int paneNum);
+extern NO_DLL_EXPORT int PanePtrToNum(struct cmenu *menu, struct pane *panePtr);
+extern NO_DLL_EXPORT struct selection *SelectionNumToPtr(struct cmenu *menu, struct pane *panePtr, int selectionNum);
+extern NO_DLL_EXPORT int SelectionPtrToNum(struct cmenu *menu, struct pane *panePtr, struct selection *selectionPtr);
 
 /* Wired in constants. */
 

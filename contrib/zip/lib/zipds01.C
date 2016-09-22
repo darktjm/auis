@@ -52,7 +52,7 @@ static  zip_type_figure		      figure;
 static  char			      msg[512];
 static  int			      position;
 
-long zip_Deparse_Stream( class zip		      *self, zip_type_stream	       stream_object );
+extern NO_DLL_EXPORT long zip_Deparse_Stream( class zip		      *self, zip_type_stream	       stream_object );
 static int Substitute_Referenced_Stream( class zip		      *self );
 static int Parse_Figure_Unit_Attributes( class zip		      *self, zip_type_figure	       figure );
 static int Parse_Stream_Figure( class zip		      *self );

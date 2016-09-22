@@ -35,7 +35,7 @@ struct gesturefile  {
 #define ClassName(g)	(classname[(g)->classindex])
 
 /* gf.c */
-extern char *classname[];
+extern NO_DLL_EXPORT char *classname[];
 extern int ClassEnter(char *name);
 extern GestureFile ReadGestureFile(char *infilename);
 extern void WriteGesture(FILE *outfile, Gesture g, char *classname);

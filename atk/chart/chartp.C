@@ -73,12 +73,12 @@ END-SPECIFICATION  ************************************************************/
 #define  right_title_code	   25
 
 static long Initialize_Palette( class chartv	  *self );
-void Destroy_Palette( class chartv	   *self );
-void Expose_Palette( class chartv	   *self );
-void Hide_Palette( class chartv	   *self );
-class view * Palette_Hit( class chartv	   *self, class suite		   *suite, struct suite_item	   *item, long			    type, enum view_MouseAction    action, long			    x , long			    y , long			    clicks );
-long Palette_Titles_Handler( class chartv	   *self, class suite		   *suite, struct suite_item	   *item, long			    action );
-void Activate_Viewer( class chartv	  *self );
+NO_DLL_EXPORT void Destroy_Palette( class chartv	   *self );
+NO_DLL_EXPORT void Expose_Palette( class chartv	   *self );
+NO_DLL_EXPORT void Hide_Palette( class chartv	   *self );
+static class view * Palette_Hit( class chartv	   *self, class suite		   *suite, struct suite_item	   *item, long			    type, enum view_MouseAction    action, long			    x , long			    y , long			    clicks );
+static long Palette_Titles_Handler( class chartv	   *self, class suite		   *suite, struct suite_item	   *item, long			    action );
+NO_DLL_EXPORT void Activate_Viewer( class chartv	  *self );
 static void Activate( class chartv	  *self, long			   code );
 
 static suite_Specification		add_button[] =
@@ -460,7 +460,7 @@ Initialize_Palette( class chartv	  *self ) /*=== CONVERT TO REAL FORM ===*/
   return  status;
   }
 
-void Destroy_Palette( class chartv	   *self )
+NO_DLL_EXPORT void Destroy_Palette( class chartv	   *self )
     {
   if ( ControlSuite )	        (ControlSuite )->Destroy();
   if ( TitleSuite )		(TitleSuite )->Destroy();
@@ -472,7 +472,7 @@ void Destroy_Palette( class chartv	   *self )
   if ( SortForm )		(SortForm )->Destroy();
   }
 
-void
+NO_DLL_EXPORT void
 Expose_Palette( class chartv	   *self )
     {
   IN(Expose_Palette);
@@ -492,7 +492,7 @@ Expose_Palette( class chartv	   *self )
   OUT(Expose_Palette);
   }
 
-void
+NO_DLL_EXPORT void
 Hide_Palette( class chartv	   *self )
     {
   IN(Hide_Palette);
@@ -508,7 +508,7 @@ Hide_Palette( class chartv	   *self )
   OUT(Hide_Palette);
   }
 
-class view *
+static class view *
 Palette_Hit( class chartv	   *self, class suite		   *suite, struct suite_item	   *item, long			    type, enum view_MouseAction    action, long			    x , long			    y , long			    clicks )
               {
   char				   msg[512];
@@ -587,7 +587,7 @@ Palette_Hit( class chartv	   *self, class suite		   *suite, struct suite_item	  
   return ((class view*)NULL);
   }
 
-long
+static long
 Palette_Titles_Handler( class chartv	   *self, class suite		   *suite, struct suite_item	   *item, long			    action )
           {
   char			  *title;
@@ -617,7 +617,7 @@ Palette_Titles_Handler( class chartv	   *self, class suite		   *suite, struct su
   return 0;
   }
 
-void Activate_Viewer( class chartv	  *self )
+NO_DLL_EXPORT void Activate_Viewer( class chartv	  *self )
     {
   Activate( self, delete_code );
   Activate( self, print_code );

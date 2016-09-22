@@ -3,22 +3,22 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-void DisplayBoxBlitOverlap(class rasterview  *self, class rasterimage  *pix);
-void DisplayBoxBlitOverlap(class rasterview  *self, class rasterimage  *pix);
+extern NO_DLL_EXPORT void DisplayBoxBlitOverlap(class rasterview  *self, class rasterimage  *pix);
+extern NO_DLL_EXPORT void DisplayBoxBlitOverlap(class rasterview  *self, class rasterimage  *pix);
 #if 0
-void DisplayBoxDrawPanHighlight(class rasterview  *self);
+extern NO_DLL_EXPORT void DisplayBoxDrawPanHighlight(class rasterview  *self);
 #endif /* 0 */
-void rasterview_DisplayBoxWritePixImageFull(class rasterview  *self, class graphic  *G, class rasterimage  *pix);
-void rasterview_DisplayBoxWritePixImage(class rasterview  *self, class graphic  *G);
-void rasterview_DisplayBoxHide(class rasterview  *self);
-void rasterview_DisplayBoxDrawHighlight(class rasterview  *self, class graphic  *G);
-void rasterview_DisplayBoxDrawHighlightGray(class rasterview  *self, class graphic  *G);
-void rasterview_DisplayBoxHideHighlight(class rasterview  *self, class graphic  *G);
-void rasterview_DrawHighlightBehindDisplayBox(class rasterview  *self, class graphic  *G, boolean  gray);
-void rasterview_DisplayBoxHideOverlappingHighlight(class rasterview  *self, class graphic  *G, class rasterimage  *pix);
-void rasterview_SetPixelBehindDisplayBox(class rasterview  *self, class rasterimage  *pix, long  x , long  y, boolean  bit);
+extern NO_DLL_EXPORT void rasterview_DisplayBoxWritePixImageFull(class rasterview  *self, class graphic  *G, class rasterimage  *pix);
+extern NO_DLL_EXPORT void rasterview_DisplayBoxWritePixImage(class rasterview  *self, class graphic  *G);
+extern NO_DLL_EXPORT void rasterview_DisplayBoxHide(class rasterview  *self);
+extern NO_DLL_EXPORT void rasterview_DisplayBoxDrawHighlight(class rasterview  *self, class graphic  *G);
+extern NO_DLL_EXPORT void rasterview_DisplayBoxDrawHighlightGray(class rasterview  *self, class graphic  *G);
+extern NO_DLL_EXPORT void rasterview_DisplayBoxHideHighlight(class rasterview  *self, class graphic  *G);
+extern NO_DLL_EXPORT void rasterview_DrawHighlightBehindDisplayBox(class rasterview  *self, class graphic  *G, boolean  gray);
+extern NO_DLL_EXPORT void rasterview_DisplayBoxHideOverlappingHighlight(class rasterview  *self, class graphic  *G, class rasterimage  *pix);
+extern NO_DLL_EXPORT void rasterview_SetPixelBehindDisplayBox(class rasterview  *self, class rasterimage  *pix, long  x , long  y, boolean  bit);
 
-NO_DLL_EXPORT extern boolean rasterview_debug;
+extern NO_DLL_EXPORT boolean rasterview_debug;
 #define Debug(s) {printf s ; fflush(stdout);}
 #define DEBUG(s) {if (rasterview_debug) {printf s ; fflush(stdout);}}
 #define ENTER(r) DEBUG(("Enter %s(0x%p)\n", Stringize(r), self))

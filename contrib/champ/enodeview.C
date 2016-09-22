@@ -27,7 +27,7 @@ static const char * const BooleanChoices[] = {"Yes", "No", NULL};
 ATKdefineRegistry(enodeview, lpair, NULL);
 
 static void ButtHit(class enodeview  *self, int  buttcode, class butter  *butter, enum view_MouseAction  action);
-void ResetButterTexts(class enodeview  *self);
+static void ResetButterTexts(class enodeview  *self);
 
 
 static void ButtHit(class enodeview  *self, int  buttcode, class butter  *butter, enum view_MouseAction  action)
@@ -372,7 +372,7 @@ void enodeview::ObservedChanged(class observable  *changed, long  value)
     ResetButterTexts(this);
 }
 
-void ResetButterTexts(class enodeview  *self)
+static void ResetButterTexts(class enodeview  *self)
 {
     char Buf[50];
     const char *mystr;

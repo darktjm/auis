@@ -225,7 +225,7 @@ static struct stylemap *LatestEndMap = NULL;
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-boolean ReadScribeFromFileToDoc(FILE  *f , class text  *doc , int  pos , void  (*errhandler)(long, char *));
+extern NO_DLL_EXPORT boolean ReadScribeFromFileToDoc(FILE  *f , class text  *doc , int  pos , void  (*errhandler)(long, char *));
 static PRINTF_LIKE(1,2) void Error(const char *, ...);
 static void InitCharType ();
 static char * CollectWord(int  *len );

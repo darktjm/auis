@@ -50,7 +50,6 @@ static const struct types typearray[] = {
 
 ATKdefineRegistry(lsetview, lpair, lsetview::InitializeClass);
 static class view *makeview(class lsetview  *self,class lset  *ls);
-static void lsetview_SetMode(class lsetview  *self,int  mode);
 static void initkids(class lsetview  *self,class lset  *ls);
 static void dolink(class lsetview  *self);
 static boolean objecttest(class lsetview   *self,const char  *name,const char  *desiredname);
@@ -59,7 +58,6 @@ static void lsetview_PlaceCel(class lsetview  *self);
 static void lsetview_PlaceValue(class lsetview  *self);
 static void lsetview_DestroyView(class lsetview  *self);
 static int lsetview_PlaceView(class lsetview  *self);
-static void lsetview_DeleteMode(class lsetview  *self);
 static void lsetview_UnsplitParent(class lsetview  *self);
 static int lsetview_ReadView(class lsetview  *self);
 static void lsetview_Paste(class lsetview  *self);
@@ -95,10 +93,6 @@ static class view *makeview(class lsetview  *self,class lset  *ls)
 	return self->child;
     }
     return NULL;
-}
-static void lsetview_SetMode(class lsetview  *self,int  mode)
-{
-self->mode = mode;
 }
 class lsetview *lsetview::Create(int  level,class lset  *d,class view  *parent)
     {
@@ -322,6 +316,7 @@ printf("Still in Place View\n");
     (ls)->NotifyObservers(0);
     return 0;
 }
+#if 0 /* use commented out below */
 static void lsetview_DeleteMode(class lsetview  *self)
 {
   self->mode = lsetview_Initialized;
@@ -329,6 +324,7 @@ static void lsetview_DeleteMode(class lsetview  *self)
     message::DisplayString(self, 0, "Click on lset to delete");
     DeleteMode = self;
 }
+#endif
 static void lsetview_UnsplitParent(class lsetview  *self)
 {
     if(self->child || self->mode == lsetview_IsSplit) return;

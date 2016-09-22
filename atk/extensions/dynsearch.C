@@ -32,8 +32,8 @@ ATKdefineRegistry(dynsearch, ATK, dynsearch::InitializeClass);
 static void dynsearch_SearchForward(class textview  *view);
 static void dynsearch_SearchReverse(class textview  *view);
 static int GetPattern(class textview  *view		/* textview we're using */, class text  *text		/* and doc */, int  direction			/* direction of the search */);
-void dynsearch_SearchAgain(class textview  *self);
-void dynsearch_SearchAgainOpposite(class textview  *self);
+static void dynsearch_SearchAgain(class textview  *self);
+static void dynsearch_SearchAgainOpposite(class textview  *self);
 
 
 static void dynsearch_SearchForward(class textview  *view)
@@ -168,7 +168,7 @@ static int GetPattern(class textview  *view		/* textview we're using */, class t
     return 0;
 }
 
-void dynsearch_SearchAgain(class textview  *self)
+static void dynsearch_SearchAgain(class textview  *self)
 {
     class text *d = (class text *)(self)->GetDataObject();
     long	savePos, pos;
@@ -203,7 +203,7 @@ void dynsearch_SearchAgain(class textview  *self)
         message::DisplayString(self, 0, "Must have searched at least once to search again.");
 }
 
-void dynsearch_SearchAgainOpposite(class textview  *self)
+static void dynsearch_SearchAgainOpposite(class textview  *self)
 {
     if (lastDirection == FORWARD) {
 	lastDirection = REVERSE;

@@ -89,7 +89,7 @@ ATKdefineRegistry(zip, dataobject, zip::InitializeClass);
 static long Check_Image( class zip		      *self, zip_type_image	       image, long			       modified );
 static void Write_View_Info( class zip		      *self, FILE			      *file );
 static void Write_Object_Info( class zip		      *self, FILE			      *file );
-void Write_PrintSize_Info( class zip		      *self, FILE			      *file );
+static void Write_PrintSize_Info( class zip		      *self, FILE			      *file );
 static long Generate_Temp_File( class zip		      *self, FILE			      *file, char			     **generated_file_name );
 static long Init_Message_Writer( class zip		      *self, char			      *msg );
 static long Init_Message_Clearer( class zip		      *self );
@@ -326,7 +326,7 @@ void Write_Object_Info( class zip *self, FILE *file )
     fprintf( file, "%%ObjectHeight %ld\n", self->object_height );
   }
 
-void Write_PrintSize_Info( class zip *self, FILE *file )
+static void Write_PrintSize_Info( class zip *self, FILE *file )
 {
     /* Encode print size as a presentation parameter */
 

@@ -102,7 +102,7 @@ LEXLIB = -lfl
         CLASS = ${BASEDIR}/bin/class
 
 #ifdef HAVE_DYNAMIC_LOADING
-DYNEXELIBS = $(BASEDIR)/lib/libATKDynLoad.a $(BASEDIR)/lib/libATKLink.a
+DYNEXELIBS = $(BASEDIR)/lib/libATKDynLoad.a
 #else
 DYNEXELIBS =
 #endif

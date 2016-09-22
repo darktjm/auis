@@ -53,6 +53,7 @@ XXX Woe betide us if an option contains a colon.
 
 
 #include <mflex.H>
+class NO_DLL_EXPORT fieldlist;
 DEFINE_MFLEX_CLASS(fieldlist, struct wdgnode, 10)
 	// to iterate through the nodes of `form' use code like
 	//	int i;

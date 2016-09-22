@@ -43,8 +43,8 @@ static class atom *  A_string;
 
 ATKdefineRegistry(pianoV, valueview, pianoV::InitializeClass);
 static void CarveFonts(class pianoV  * self);
-int locateHit(class pianoV  * self,int  x,int  y);
-void parselabels(class pianoV  * self,char  *chr);
+static int locateHit(class pianoV  * self,int  x,int  y);
+static void parselabels(class pianoV  * self,char  *chr);
 static void Drawpiano(class pianoV  * self,boolean  full);
 
 
@@ -58,7 +58,7 @@ static void CarveFonts(class pianoV  * self)
 static int masks[] = {1,2,4,8,16,32,64,128,256,512,1024,2048,4096 };
 static int wn[] = { 1,3,5,6,8,10,12,-1};
 static int bn[] = { 2,4,0,7,9,11,-1, 0 };
-int locateHit(class pianoV  * self,int  x,int  y)
+static int locateHit(class pianoV  * self,int  x,int  y)
 {
     int hy,*ip;
     float wid,place;
@@ -78,7 +78,7 @@ int locateHit(class pianoV  * self,int  x,int  y)
     return(*ip);
 }
 
-void parselabels(class pianoV  * self,char  *chr)
+static void parselabels(class pianoV  * self,char  *chr)
 { 
     int i,j;
     for(i = 0 ; i < pianov_NUMLABELS; i++){

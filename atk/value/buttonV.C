@@ -74,7 +74,7 @@ static boolean clearrl(struct buttonV_rl  *rl,class buttonV  *self);
 static boolean vsetrec(struct buttonV_rl  *rl,class buttonV  *self);
 static boolean wsetrec(struct buttonV_rl  *rl,class buttonV  *self);
 static void calcRec(class buttonV  * self);
-int fourwaysort(struct buttonV_rl  *rl1,struct buttonV_rl  *rl2);
+static int fourwaysort(struct buttonV_rl  *rl1,struct buttonV_rl  *rl2);
 static void DrawButton(class buttonV  * self,struct buttonV_rl  *rl,long  left,long  top,long  width,long  height,boolean  borderonly,boolean  blit);
 static boolean enclosed(struct buttonV_rl  *rl,long  x,long  y);
 static boolean drl(struct buttonV_rl  *rl,class buttonV  *self);
@@ -163,7 +163,7 @@ static void calcRec(class buttonV  * self)
 	(self->listp)->Enumerate((list_efptr)wsetrec,(char *)self);
     }
 }
-int fourwaysort(struct buttonV_rl  *rl1,struct buttonV_rl  *rl2)
+static int fourwaysort(struct buttonV_rl  *rl1,struct buttonV_rl  *rl2)
 {
    if(rl1->key == 3 && rl2->key == 2) return -1;
     else if (rl2->key == 3 && rl1->key == 2) return 1;

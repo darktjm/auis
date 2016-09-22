@@ -58,7 +58,7 @@ ATK_IMPL("suitecv.H")
 
 
 ATKdefineRegistry(suitecv, textview, suitecv::InitializeClass);
-void suitecv_InsertNLCmd( class suitecv  *self, long  key );
+static void suitecv_InsertNLCmd( class suitecv  *self, long  key );
 
 
 static class keymap *KeyMap;
@@ -93,7 +93,7 @@ suitecv::~suitecv( )
 	ATKinit;
 }
 
-void
+static void
 suitecv_InsertNLCmd( class suitecv  *self, long  key )
         {
 #if 0

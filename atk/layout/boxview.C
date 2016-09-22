@@ -35,9 +35,9 @@ static boolean boxview_debug=0;
 
 
 ATKdefineRegistry(boxview, view, boxview::InitializeClass);
-void InitChild(class boxview  *self);
-void Update(class boxview  *self, enum view_UpdateType  how		/* kind of update */, struct rectangle  *updateRect		/* rectangle affected; or NULL for update */, boolean  contentsChanged		/* contents changed since last update */);
-void RequestUpdate(class boxview  *self);
+static void InitChild(class boxview  *self);
+static void Update(class boxview  *self, enum view_UpdateType  how		/* kind of update */, struct rectangle  *updateRect		/* rectangle affected; or NULL for update */, boolean  contentsChanged		/* contents changed since last update */);
+static void RequestUpdate(class boxview  *self);
 
 
 static void
@@ -70,7 +70,7 @@ ReplaceChild(class boxview  *self, class view  *child			/* child to be replaced 
 
 /* initialize child view corresponding to box contents */
 
-void
+static void
 InitChild(class boxview  *self)
 {
     const char *subviewname;			/* name for new view */
@@ -163,7 +163,7 @@ boxview::DrawBox()
 
 /* update image */
 
-void
+static void
 Update(class boxview  *self, enum view_UpdateType  how		/* kind of update */, struct rectangle  *updateRect		/* rectangle affected; or NULL for update */, boolean  contentsChanged		/* contents changed since last update */)
 {
     class region *updateRegion;	/* region for this update */
@@ -282,7 +282,7 @@ boxview::Hit(enum view_MouseAction  action		/* which button; what it did */, lon
 
 /* update request */
 
-void
+static void
 RequestUpdate(class boxview  *self)
 {
     if (boxview_debug)

@@ -33,7 +33,7 @@
 
 #include <gflextype.h>
 
-class gflex
+class NO_DLL_EXPORT gflex
 {
 
 	int n;	/* number of actual elements stored */
@@ -43,7 +43,7 @@ class gflex
 			/* elts points to a malloced array. 
 			  elements are stored in  [0] ... [gaploc-1]
 			  and [gaploc+size-n] ... [size-1] */
-	friend void makegap( gflex *f, int i, int len );
+	void makegap( int i, int len );
 
 public:
 

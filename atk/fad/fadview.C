@@ -88,18 +88,18 @@ static int CurrentFrame(class fadview  *self);
 static class fontdesc *my_DefineFont(const char  *fname);
 static void UpdateCursor(class fadview  *self);
 static void fontinit(class fad  *cp);
-void HaltAnimation(class fadview  *self);
-void queup(class fadview  *self);
+static void HaltAnimation(class fadview  *self);
+static void queup(class fadview  *self);
 static void dodoan(class fadview  *self);
 static boolean DoAnimation(class fadview  *self);
-boolean doan(struct aniinfo  *anobj);
+static boolean doan(struct aniinfo  *anobj);
 static int recalc(class fadview  *self);
 static void picset(class fadview  *self,int  flag);
 static void clearfad(class fadview  *self);
 static void AddMenus(class fadview  *self,class menulist  *ml,struct proctable_Entry  *menuProc);
 static void KeyIn(class fadview  *self,long  cr);
 static void nameframe(class fadview  *self);
-boolean QueueAnimation(class fadview  *self,enum view_MouseAction  action,long  mousex ,long  mousey);
+static boolean QueueAnimation(class fadview  *self,enum view_MouseAction  action,long  mousex ,long  mousey);
 static void drawlist(class fadview  *self,class fad  *cpic);
 static void getlist(class fadview  *self,struct fadpoint  *ppt);
 static int seticon(class fadview  *self);
@@ -202,7 +202,7 @@ static void fontinit(class fad  *cp)
     }
     if(cp->currentfont == NULL && cp->initializedfonts > 1) cp->currentfont = cp->fontpt[cp->initializedfonts - 1] ;
 }
-void HaltAnimation(class fadview  *self)
+static void HaltAnimation(class fadview  *self)
 {
     if(self->nextevent){
 	(self->nextevent)->Cancel();
@@ -289,7 +289,7 @@ void fadview::aniframe(int  framecount,int  startat,int  gofor,int  mtm)
     (this)->WantUpdate(this);
 }
 
-void queup(class fadview  *self)
+static void queup(class fadview  *self)
 {
 	class fad *cp = findpic(self);
 	self->nextevent = im::EnqueueEvent((event_fptr)dodoan,(char *)self,event_MSECtoTU(cp->frtime));
@@ -401,7 +401,7 @@ static boolean DoAnimation(class fadview  *self)
     return FALSE;
  /*    */
 }
-boolean doan(struct aniinfo  *anobj)
+static boolean doan(struct aniinfo  *anobj)
 {
     class fadview *self;
     struct fad_frame *lf,*sf;
@@ -911,7 +911,7 @@ static void nameframe(class fadview  *self)
     sprintf(frs,"at frame #%d",CurrentFrame(self));
     TellUser(self, frs);
 }
-boolean QueueAnimation(class fadview  *self,enum view_MouseAction  action,long  mousex ,long  mousey)
+static boolean QueueAnimation(class fadview  *self,enum view_MouseAction  action,long  mousex ,long  mousey)
 {
     struct fadpoint *pt;
     struct fadvector *vc;

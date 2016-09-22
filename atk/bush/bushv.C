@@ -276,11 +276,11 @@ static class view * TreeHitHandler( class bushv		     *self, class treev		     *
 static class view * ControlHitHandler( class bushv		     *self, class suite		     *suite, struct suite_item	     *item, long			      object, enum view_MouseAction      action, long			      x , long			      y , long			      numClicks );
 static const char * FileSuffix( const char    *file_name );
 static const char * FileType( char	     *file_name );
-long SortByName( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
-long SortBySuffix( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
-long SortBySize( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
-long SortByDate( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
-long SortByType( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
+static long SortByName( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
+static long SortBySuffix( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
+static long SortBySize( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
+static long SortByDate( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
+static long SortByType( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 );
 static void GetPreferredEditors( class bushv  *self );
 static void GetPreferredFonts( class bushv	 *self );
 static void GetPreferences( class bushv	 *self );
@@ -302,7 +302,7 @@ static int HandleModifiedObject( class bushv	     *self );
 static void PerformExit( class bushv	 *self );
 static void SwitchDirectory( class bushv	     *self );
 static void SetEditor( class bushv	 *self );
-char * FormatEntriesInfo( class bushv  *self, tree_type_node  tn );
+static char * FormatEntriesInfo( class bushv  *self, tree_type_node  tn );
 static suite_sortfptr DetermineSortHandler( class bushv		 *self, tree_type_node	  tn );
 static void DoAutoRescan( class bushv		  *self );
 static void PushToEntries( class bushv	       *self );
@@ -698,7 +698,7 @@ FileType( char *file_name )
   return(suffix);
 }
 
-long
+static long
 SortByName( class bushv *self, class suite *suite, struct suite_item *e1, struct suite_item *e2 )
       {
   struct Dir_Entry	*a = NULL, *b = NULL;
@@ -715,7 +715,7 @@ SortByName( class bushv *self, class suite *suite, struct suite_item *e1, struct
   return(0);
 }
 
-long int
+static long int
 SortBySuffix( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 )
       {
   struct Dir_Entry	*a = NULL, *b = NULL;
@@ -738,7 +738,7 @@ SortBySuffix( class bushv		 *self, class suite		 *suite, struct suite_item     *
   return(0);
 }
 
-long int
+static long int
 SortBySize( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 )
       {
   struct Dir_Entry	*a = NULL, *b = NULL;
@@ -753,7 +753,7 @@ SortBySize( class bushv		 *self, class suite		 *suite, struct suite_item     *e1
   return(0);
 }
 
-long int
+static long int
 SortByDate( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 )
       {
   struct Dir_Entry	*a = NULL, *b = NULL;
@@ -768,7 +768,7 @@ SortByDate( class bushv		 *self, class suite		 *suite, struct suite_item     *e1
   return(0);
 }
 
-long int
+static long int
 SortByType( class bushv		 *self, class suite		 *suite, struct suite_item     *e1, struct suite_item     *e2 )
       {
   struct Dir_Entry	*a = NULL, *b = NULL;
@@ -1668,7 +1668,7 @@ bushv::PostKeyState( class keystate *kstate )
   OUT(bushv_KeyState);
 }
 
-char *
+static char *
 FormatEntriesInfo( class bushv  *self, tree_type_node  tn )
 {
   static char entries_info[257];

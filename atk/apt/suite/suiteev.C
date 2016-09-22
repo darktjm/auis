@@ -203,13 +203,13 @@ static char * WalkBackwardBlackSpace( class suiteev	 *self, struct suite_item	 *
 static void PlaceItems( class suiteev	     *self, struct rectangle		     *rect, long				      rows , long				      cols , long				      numleftOvers, long				      itemWidth , long				      itemHeight );
 static void DetermineVisibleListItems( class suiteev  *self, long  height );
 static void EraseItems( class suiteev  *self );
-void suiteev_HandleExclusiveHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y, long  numberOfClicks );
-void suiteev_HighlightFirstToLast( class suiteev  *self, struct suite_item  *first, struct suite_item  *last );
-void suiteev_HandleInclusiveHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numberOfClicks );
-void suiteev_HandleToggleHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numberOfClicks );
+static void suiteev_HandleExclusiveHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y, long  numberOfClicks );
+static void suiteev_HighlightFirstToLast( class suiteev  *self, struct suite_item  *first, struct suite_item  *last );
+static void suiteev_HandleInclusiveHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numberOfClicks );
+static void suiteev_HandleToggleHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numberOfClicks );
 static void ItemFullUpdate( class suiteev  *self, struct suite_item  *item, enum	view_UpdateType  type, long  left , long  top , long  width , long  height );
 static void ItemPlaceCaption( class suiteev  *self, struct suite_item  *item, long  captionwidth, long  captionheight, unsigned  *place );
-void ItemPlaceTitle(class suiteev  *self, struct suite_item  *item, long  titlewidth , long  titleheight, int  newlineHeight);
+static void ItemPlaceTitle(class suiteev  *self, struct suite_item  *item, long  titlewidth , long  titleheight, int  newlineHeight);
 static void ReadWriteHandler( long  anchor, class suite  *suite, struct suite_item  *item );
 static void MaxSubStringSize( class suiteev  *self, struct suite_item  *item, char  *str, class fontdesc  *font,  int *w ,  int *h );
 static long MaxListSubStringWidth( class suiteev  *self, struct suite_item  *item, char  *str, class fontdesc  *font );
@@ -1283,7 +1283,7 @@ SetViewColors(				\
   item_ForegroundColor,			\
   item_BackgroundColor )
 
-void
+static void
 suiteev_HandleExclusiveHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y, long  numberOfClicks )
           {
     IN(suiteev_HandleExclusiveHit);
@@ -1330,7 +1330,7 @@ suiteev_HandleExclusiveHit( class suiteev  *self, struct suite_item  *item, enum
     OUT(suiteev_HandleExclusiveHit);
 }
 
-void
+static void
 suiteev_HighlightFirstToLast( class suiteev  *self, struct suite_item  *first, struct suite_item  *last )
       {
     IN(suiteev_HighlightFirstToLast);
@@ -1374,7 +1374,7 @@ suiteev_HighlightFirstToLast( class suiteev  *self, struct suite_item  *first, s
     OUT(suiteev_HighlightFirstToLast);
 }
 
-void
+static void
 suiteev_HandleInclusiveHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numberOfClicks )
         {
     IN(suiteev_HandleInclusiveHit);
@@ -1408,7 +1408,7 @@ suiteev_HandleInclusiveHit( class suiteev  *self, struct suite_item  *item, enum
     OUT(suiteev_HandleInclusiveHit);
 }
 
-void
+static void
 suiteev_HandleToggleHit( class suiteev  *self, struct suite_item  *item, enum view_MouseAction  action, long  x , long  y , long  numberOfClicks )
         {
     IN(suiteev_HandleToggleHit);
@@ -1812,7 +1812,7 @@ suiteev::ItemDrawCaption( struct suite_item  *item )
 }
 
 
-void
+static void
 ItemPlaceTitle(class suiteev  *self, struct suite_item  *item, long  titlewidth , long  titleheight, int  newlineHeight)
         {
   unsigned char titleplacement = item_TitlePlacement;

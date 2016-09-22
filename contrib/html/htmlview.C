@@ -67,27 +67,27 @@ static class menulist *Menus;
 static const char bulletChars[] = "*+";
 ATKdefineRegistry(htmlview, textview, htmlview::InitializeClass);
 static boolean ConfirmReadOnly(class htmlview  *self, class html * html);
-void htmlview_SetTitle(class htmlview * self, long  key);
-void htmlview_SetIndex(class htmlview * self, long  key);
-void htmlview_SetLink(class htmlview * self, long  key);
-void htmlview_EditAttributes(class htmlview * self, long  key);
-void htmlview_AddRandom(class htmlview * self, long  key);
-void htmlview_AddImage(class htmlview * self, long  key);
-void htmlview_SetImage(class htmlview * self, long  key);
-void htmlview_AddHrule(class htmlview * self, long  key);
+static void htmlview_SetTitle(class htmlview * self, long  key);
+static void htmlview_SetIndex(class htmlview * self, long  key);
+static void htmlview_SetLink(class htmlview * self, long  key);
+static void htmlview_EditAttributes(class htmlview * self, long  key);
+static void htmlview_AddRandom(class htmlview * self, long  key);
+static void htmlview_AddImage(class htmlview * self, long  key);
+static void htmlview_SetImage(class htmlview * self, long  key);
+static void htmlview_AddHrule(class htmlview * self, long  key);
 static int parse_num (class html  *html, int  start , int  end , int  *numret);
-int checkEnumerate(class html * html, long  pos, long  end, int * the_number);
-const char* stringEnumerate(int * the_number /* datum1 */);
-int lineEnumerate(class html * html, long * pos, long * end, int * the_number	 );
-int checkBullet(class html * html, long  pos, long  end, int * datum);
+static int checkEnumerate(class html * html, long  pos, long  end, int * the_number);
+static const char* stringEnumerate(int * the_number /* datum1 */);
+static int lineEnumerate(class html * html, long * pos, long * end, int * the_number	 );
+static int checkBullet(class html * html, long  pos, long  end, int * datum);
 static const char* stringBullet(int * datum);
-int lineBullet(class html * html, long * pos, long * end, int * datum);
-int checkGlossary(class html * html, long  pos, long  end, int * datum);
+static int lineBullet(class html * html, long * pos, long * end, int * datum);
+static int checkGlossary(class html * html, long  pos, long  end, int * datum);
 static const char* stringGlossary( int * datum);
-int lineGlossary(class html * html, long * pos, long * end, int * datum);
-void  htmlview_makeList (class htmlview  *self, char * listStyleName);
-void htmlview_unlistify (class htmlview  *self, long  key);
-void htmlview_modifyList(class htmlview * self, long  key);
+static int lineGlossary(class html * html, long * pos, long * end, int * datum);
+static void  htmlview_makeList (class htmlview  *self, char * listStyleName);
+static void htmlview_unlistify (class htmlview  *self, long  key);
+static void htmlview_modifyList(class htmlview * self, long  key);
 
 /* These are bindings to commands only, not the menu bits themselves */
 /* Place the menu entry for these commands in the stylesheet */
@@ -169,7 +169,7 @@ htmlview::PostMenus(class menulist * menulist)
     (this)->textview::PostMenus( this->menus);
 }
 
-void
+static void
 htmlview_SetTitle(class htmlview * self, long  key)
 {
     char reply[80];
@@ -182,7 +182,7 @@ htmlview_SetTitle(class htmlview * self, long  key)
     message::DisplayString(self, 0, "Done.");
 }
 
-void
+static void
 htmlview_SetIndex(class htmlview * self, long  key)
 {
     char reply[80];
@@ -196,7 +196,7 @@ htmlview_SetIndex(class htmlview * self, long  key)
     message::DisplayString(self, 0, "Done.");
 }
 
-void
+static void
 htmlview_SetLink(class htmlview * self, long  key)
 {
     long pos, len;
@@ -248,7 +248,7 @@ static const char* const editOptions[] = {
     0
 };
 
-void
+static void
 htmlview_EditAttributes(class htmlview * self, long  key)
 {
     long pos, len;
@@ -343,7 +343,7 @@ htmlview_EditAttributes(class htmlview * self, long  key)
 }
 
 
-void
+static void
 htmlview_AddRandom(class htmlview * self, long  key)
 {
     class html* html = (class html *)self->view::dataobject;
@@ -365,7 +365,7 @@ htmlview_AddRandom(class htmlview * self, long  key)
     (html)->AddEntity( pos, len, ename, 0);
 }
 
-void
+static void
 htmlview_AddImage(class htmlview * self, long  key)
 {
     class html* html = (class html *)self->view::dataobject;
@@ -384,7 +384,7 @@ htmlview_AddImage(class htmlview * self, long  key)
     (html)->AddEntity( pos, 1L, "img", vars);
 }
 
-void
+static void
 htmlview_SetImage(class htmlview * self, long  key)
 {
     printf("in SetImage()\n");
@@ -405,7 +405,7 @@ htmlview_SetImage(class htmlview * self, long  key)
     message::DisplayString(self, 0, "Sorry, image updates not yet implemented");
 }
 
-void
+static void
 htmlview_AddHrule(class htmlview * self, long  key)
 {
     class html* html = (class html*) self->view::dataobject;
@@ -448,7 +448,7 @@ static int parse_num (class html  *html, int  start , int  end , int  *numret)
 }
 
 
-int
+static int
 checkEnumerate(class html * html, long  pos, long  end, int * the_number)
 {
     int num;
@@ -461,7 +461,7 @@ checkEnumerate(class html * html, long  pos, long  end, int * the_number)
 }
 
 
-const char*
+static const char*
 stringEnumerate(int * the_number /* datum1 */)
 {
     static char numstring[16];
@@ -474,7 +474,7 @@ stringEnumerate(int * the_number /* datum1 */)
  * beginning of the list (i.e., we're redoing the numbers),
  * then we should check the number is correct and fix it if not
  */
-int
+static int
 lineEnumerate(class html * html, long * pos, long * end, int * the_number	 ) 
 {
     int count;
@@ -500,7 +500,7 @@ lineEnumerate(class html * html, long * pos, long * end, int * the_number	 )
     }
 }
 
-int
+static int
 checkBullet(class html * html, long  pos, long  end, int * datum)
 {
     if (strchr(bulletChars, (html)->GetChar( pos))) {
@@ -518,13 +518,13 @@ stringBullet(int * datum)
     return "*\t";
 }
 
-int
+static int
 lineBullet(class html * html, long * pos, long * end, int * datum)
 {
     return checkBullet(html, *pos, *end, datum);
 }
 
-int
+static int
 checkGlossary(class html * html, long  pos, long  end, int * datum)
 {
     /* Need to check if the line has a glossary term at this point. */
@@ -537,7 +537,7 @@ stringGlossary(int * datum)
     return "";
 }
 
-int
+static int
 lineGlossary(class html * html, long * pos, long * end, int * datum)
 {
     return 0;
@@ -562,7 +562,7 @@ const struct listCompileTable {
     { 0 }
 };
 
-void 
+static void 
 htmlview_makeList (class htmlview  *self, char * listStyleName)
 {
     class html* html = (class html *)self->view::dataobject;
@@ -706,7 +706,7 @@ htmlview_makeList (class htmlview  *self, char * listStyleName)
 }
 
 
-void htmlview_unlistify (class htmlview  *self, long  key)
+static void htmlview_unlistify (class htmlview  *self, long  key)
 {
     class html *html = (class html *)self->view::dataobject;
     struct text_statevector sv;
@@ -768,7 +768,7 @@ void htmlview_unlistify (class htmlview  *self, long  key)
 }
 
 
-void
+static void
 htmlview_modifyList(class htmlview * self, long  key)
 {
     class html *html = (class html *)self->view::dataobject;

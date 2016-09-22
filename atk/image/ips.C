@@ -63,7 +63,7 @@ static double margins[7][2] = { { 1.000, 1.000},   /* US NORMAL */
 #define RANGE(a,b,c) { if ((a) < (b)) (a) = (b);  if ((a) > (c)) (a) = (c); }
 
 static void setScale( class imagev  *self, int  xscale , int  yscale );
-void writePS( class imagev  *self, FILE  *fp, int  *wpts , int  *hpts, int  toplevel );
+extern NO_DLL_EXPORT void writePS( class imagev  *self, FILE  *fp, int  *wpts , int  *hpts, int  toplevel );
 static int rle_encode(byte  *scanline , byte  *rleline, int  wide);
 static void psColorImage(FILE  *fp, boolean usereg);
 static void psColorMap(FILE  *fp, int  color , int  nc, byte  *rmap , byte  *gmap , byte  *bmap);

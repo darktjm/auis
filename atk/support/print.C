@@ -77,7 +77,7 @@ static void normalize(char  *s);
 static void SetPrinterType (char  *printertype, class view *v);
 static int ColorHash(const char  *key);
 static boolean ParseHexColor(char  *colbuffer, double  *rval , double  *gval , double  *bval);
-void print_EnsureClassInitialized();
+void NO_DLL_EXPORT print_EnsureClassInitialized();
 
 extern void printp_init();
 

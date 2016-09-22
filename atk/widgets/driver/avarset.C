@@ -13,6 +13,7 @@ ATK_IMPL("avarset.H")
 
 ATKdefineRegistryNoInit(AVarSet, dataobject);
 
+class NO_DLL_EXPORT AVarSetPathSegs;
 DEFINE_MFLEX_CLASS(AVarSetPathSegs,char *,5);
 
 AVarSet::AVarSet() {

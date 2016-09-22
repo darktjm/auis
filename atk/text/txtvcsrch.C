@@ -31,7 +31,7 @@ static boolean forwardSearch = TRUE; /* TRUE if last search was forward. */
 void textview_SearchAgain(class textview  *self);
 void textview_SearchAgainOppositeCmd(class textview  *self);
 void textview_QueryReplaceCmd(class textview  *self);
-long skipToNextBalanceSymbol(class text *doc, long pos, int direction);
+static long skipToNextBalanceSymbol(class text *doc, long pos, int direction);
 void textview_BalanceCmd(class textview  *self);
 
 
@@ -407,7 +407,7 @@ struct paren_node {
     struct paren_node *next;
 };
 
-long skipToNextBalanceSymbol(class text *doc, long pos, int direction)
+static long skipToNextBalanceSymbol(class text *doc, long pos, int direction)
 {
     /* skip to next paren, bracket, or brace.
      * Search direction specified in "direction" */

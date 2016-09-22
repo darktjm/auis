@@ -1,5 +1,5 @@
-extern int helpSocket;
+extern NO_DLL_EXPORT int helpSocket;
 BEGINCPLUSPLUSPROTOS
-extern int  help_unique(void);
-extern void helpapp_ncproc (void);
+extern NO_DLL_EXPORT int  help_unique(void);
+extern NO_DLL_EXPORT void helpapp_ncproc (void);
 ENDCPLUSPLUSPROTOS

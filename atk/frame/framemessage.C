@@ -48,7 +48,7 @@ static void Process(class framemessage  *self, char  *buffer, int  bufferSize);
 #ifdef THISCODEWORKS
 static char *KludgePrompt(const char  *prompt, long  defaultChoice, const char  * const choices[], const char  *abbrevKeys);
 #endif /* THISCODEWORKS */
-void CancelNoExit(class framemessage  *self);
+static void CancelNoExit(class framemessage  *self);
 
 
 framemessage::framemessage()
@@ -539,7 +539,7 @@ int framemessage::MultipleChoiceQuestion(int  priority, const char  *prompt, lon
 #endif /* THISCODEWORKS */
 }
 
-void CancelNoExit(class framemessage  *self)
+static void CancelNoExit(class framemessage  *self)
 {
     if ((self)->Asking()) {
 	self->punt = TRUE;

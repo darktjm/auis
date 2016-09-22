@@ -5,7 +5,6 @@ OBJS=ATKArgv.o  ATKSymTab.o  ATKLink.o
 LibraryTarget(libATKLink.a, $(OBJS))
 LibraryTarget(libATKELink.a, ATKELink.o)
 LibraryTarget(libATKOLink.a, ATKOLink.o)
-InstallLibrary(libATKLink.a, $(DESTDIR)/lib)
 InstallFile(ATKDoLoad.H, $(INSTINCFLAGS), $(DESTDIR)/include)
 
 

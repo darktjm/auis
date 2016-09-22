@@ -66,7 +66,7 @@ static void RedrawText(class tabrulerview  *self, float  number, boolean  flag);
 static void RedrawCommands(class tabrulerview  *self);
 static void RedrawPark(class tabrulerview  *self);
 static void RedrawIcons(class tabrulerview   *self);
-int FindClosestTab(class tabrulerview  *self, long  pos);
+static int FindClosestTab(class tabrulerview  *self, long  pos);
 
 
 static boolean
@@ -647,7 +647,7 @@ tabrulerview::GetValues(class tabs  **tabs)
     *tabs = this->tabs;
 }
 
-int
+static int
 FindClosestTab(class tabrulerview  *self, long  pos)
 {
     int i;

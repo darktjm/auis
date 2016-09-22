@@ -50,13 +50,13 @@ static boolean skipnewlines(class text  *d,long  *pos,long  *len);
 static void printindex(class view  *self, char *usepsstr);
 static void previewindex(class view  *self, char *usepsstr);
 static void tindex_IndexTermCmd(class view  *v);
-void tindex_ReadIndexFile(class view  *v);
-void tindex_WriteIndexFile(class view  *v);
+static void tindex_ReadIndexFile(class view  *v);
+static void tindex_WriteIndexFile(class view  *v);
 static void tindex_FudgeFonts(class text  *txt,const char  *name , int  ftype);
-void tindex_MakeIndexPlain(class view  *v);
-void tindex_MakeIndexItalic(class view  *v);
-void tindex_HideInvIndex(class view  *v);
-void tindex_ExposeInvIndex(class view  *v);
+static void tindex_MakeIndexPlain(class view  *v);
+static void tindex_MakeIndexItalic(class view  *v);
+static void tindex_HideInvIndex(class view  *v);
+static void tindex_ExposeInvIndex(class view  *v);
 static boolean isindexenv(class content  *self,class text  *text,long  pos,class environment  *env);
 static void skipchapnumber(class text  *d,long  *pos,long  *len);
 static boolean writeindex(FILE  *f,class text  *text,long  pos,class environment  *env);
@@ -228,7 +228,7 @@ static void tindex_IndexTermCmd(class view  *v)
 	(d)->NotifyObservers(0);
     }
 }
-void tindex_ReadIndexFile(class view  *v)
+static void tindex_ReadIndexFile(class view  *v)
 {
     /* Prompt for an index term and call index_IndexTerm */
     FILE *f;
@@ -256,7 +256,7 @@ void tindex_ReadIndexFile(class view  *v)
 	(d)->NotifyObservers(0);
     }
 }
-void tindex_WriteIndexFile(class view  *v)
+static void tindex_WriteIndexFile(class view  *v)
 {
     /* Prompt for an index term and call index_IndexTerm */
     FILE *f;
@@ -300,25 +300,25 @@ static void tindex_FudgeFonts(class text  *txt,const char  *name , int  ftype)
     (txt)->RegionModified(0,(txt)->GetLength());
     (txt)->NotifyObservers(0);
 }
-void tindex_MakeIndexPlain(class view  *v)
+static void tindex_MakeIndexPlain(class view  *v)
 {
     class textview *self;
     if((self = getrealview(v)) == NULL) return ;
     tindex_FudgeFonts(Text(self),"index",fontdesc_Plain);
 }
-void tindex_MakeIndexItalic(class view  *v)
+static void tindex_MakeIndexItalic(class view  *v)
 {
     class textview *self;
     if((self = getrealview(v)) == NULL) return ;
     tindex_FudgeFonts(Text(self),"index",fontdesc_Italic);
 }
-void tindex_HideInvIndex(class view  *v)
+static void tindex_HideInvIndex(class view  *v)
 {
     class textview *self;
     if((self = getrealview(v)) == NULL) return ;
     tindex_FudgeFonts(Text(self),"indexi", tindex_HIDDEN);
 }
-void tindex_ExposeInvIndex(class view  *v)
+static void tindex_ExposeInvIndex(class view  *v)
 {
     class textview *self;
     if((self = getrealview(v)) == NULL) return ;

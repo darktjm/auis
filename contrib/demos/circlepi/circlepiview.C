@@ -29,7 +29,7 @@ static class menulist *vmenulist = NULL;
 
 
 ATKdefineRegistry(circlepiview, view, circlepiview::InitializeClass);
-int inside_circle(double  x,double  y);
+static int inside_circle(double  x,double  y);
 static void step(class circlepiview  *self  , double  x , double  y , double  side, double  *inside , double  *outside, int  depth , int  depth_limit);
 static void LimitProc(class circlepiview  *self, long  param);
 
@@ -134,7 +134,7 @@ circlepiview::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
   }
 }
 
-int inside_circle(double  x,double  y)
+static int inside_circle(double  x,double  y)
      {
   return((x*x + y*y) <= 1.0);
 }

@@ -47,8 +47,8 @@ struct nh {
 static float arr[61];
 
 ATKdefineRegistry(pcontrol, ATK, pcontrol::InitializeClass);
-void setbl(struct spk_blk  *b,float  freq);
-void play(char  *buf,int  Speed);
+static void setbl(struct spk_blk  *b,float  freq);
+static void play(char  *buf,int  Speed);
 static class pcontrol *FindSelf(class view  *v);
 static void replayCallBack(class pcontrol  *self,class value  *val,long  r1,long  r2);
 static void kbCallBack(class pcontrol  *self,class value  *val,long  r1,long  r2);
@@ -63,10 +63,10 @@ static void undoCallBack(class pcontrol  *self,class value  *val,long  r1,long  
 static void restCallBack(class pcontrol  *self,class value  *val,long  r1,long  r2);
 static void SaveCallBack(class pcontrol  *self,class value  *val,long  r1,long  r2);
 static void initself(class pcontrol  *self,class view  *v);
-void pcontrol_start(class view  *v,long  dat);
+static void pcontrol_start(class view  *v,long  dat);
 
 
-void setbl(struct spk_blk  *b,float  freq)
+static void setbl(struct spk_blk  *b,float  freq)
 {
 #if defined (sys_rt_r3) || defined (sys_rt_aos4)
     if (freq < 23) {
@@ -100,7 +100,7 @@ void setbl(struct spk_blk  *b,float  freq)
 #endif /* defined (sys_rt_r3) || defined (sys_rt_aos4) */
 }
 static int sp = 0;
-void play(char  *buf,int  Speed)
+static void play(char  *buf,int  Speed)
 {
 #if defined (sys_rt_r3) || defined (sys_rt_aos4)
     char *note;
@@ -391,7 +391,7 @@ static void initself(class pcontrol  *self,class view  *v)
 	self->kb_1 = (class value *)arbiterview::GetNamedObject(v,"kb-1");
 	if(self->kb_1) (self->kb_1)->AddCallBackObserver( self,(value_fptr)kbCallBack,1);
 }
-void pcontrol_start(class view  *v,long  dat)
+static void pcontrol_start(class view  *v,long  dat)
  {
 class pcontrol *self;
 if((self = FindSelf(v)) == NULL) return;

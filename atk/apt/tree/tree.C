@@ -68,8 +68,8 @@ static char tree_debug = 0;
 ATKdefineRegistry(tree, apt, NULL);
 static tree_type_node Build_Node( class tree	      *self, const char	    	      *name, long		       datum );
 static char * Ancestry( class tree	      *self, tree_type_node      node, const char		      *separator , char		      *string );
-void tree__SetNodeModified( class tree 	      *self, tree_type_node      node, char		       state );
-boolean tree__NodeModified( class tree	      *self, tree_type_node      node );
+static void tree__SetNodeModified( class tree 	      *self, tree_type_node      node, char		       state );
+static boolean tree__NodeModified( class tree	      *self, tree_type_node      node );
 
 
 class tree *
@@ -695,7 +695,7 @@ tree::PriorNode( tree_type_node      node )
   return  prior;
   }
 
-void
+static void
 tree__SetNodeModified( class tree 	      *self, tree_type_node      node, char		       state )
         {
   IN(tree_SetNodeModified);
@@ -704,7 +704,7 @@ tree__SetNodeModified( class tree 	      *self, tree_type_node      node, char		
   OUT(tree_SetNodeModified);
   }
 
-boolean
+static boolean
 tree__NodeModified( class tree	      *self, tree_type_node      node )
       {
   IN(tree_NodeModified);

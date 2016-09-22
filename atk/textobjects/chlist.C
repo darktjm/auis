@@ -9,7 +9,7 @@ ATK_IMPL("chlist.H")
 
 
 ATKdefineRegistry(chlist, text, NULL);
-void Clear(class chlist  *self);
+static void Clear(class chlist  *self);
 
 
 chlist::chlist()
@@ -25,7 +25,7 @@ chlist::chlist()
     THROWONFAILURE((TRUE));
 }
 
-void Clear(class chlist  *self)
+static void Clear(class chlist  *self)
 {
     long i, j;
     struct listitem *item;

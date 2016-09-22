@@ -21,7 +21,7 @@ static keymap *raw_Map;
 static menulist *raw_Menus;
 
 ATKdefineRegistry(rawtextview, textview, rawtextview::InitializeClass);
-void toggleOverstrike(rawtextview  *self,long  key);
+static void toggleOverstrike(rawtextview  *self,long  key);
 
 static struct bind_Description rawtextBindings[]={
     {"rawtextview-toggle-overstrike-mode", "\033\034",0, NULL,0,0, (proctable_fptr) toggleOverstrike, "Turn overstrike mode on or off."}, /*RSK92overstrike*/
@@ -69,7 +69,7 @@ void rawtextview::ReceiveInputFocus()
 }
 
 /*RSK92overstrike*/
-void toggleOverstrike(rawtextview  *self,long  key)
+static void toggleOverstrike(rawtextview  *self,long  key)
 {
     rawtext *d = (rawtext *)self->view::dataobject;
     if ((d)->IsInOverstrikeMode()) {

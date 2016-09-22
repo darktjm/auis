@@ -168,7 +168,7 @@ static void AnounceDeath(class typescript  *self);
 static class environment * GetCommandEnv(class typescript  *self, long  pos, long  *start , long  *end);
 static void  typescript_RuboutCmd(class typescript  *self);
 static void MaintainLastEnv(class typescript  *td );
-void SaveCommand(class typescript  *td);
+static void SaveCommand(class typescript  *td);
 static void TypescriptLeftCommand(class typescript  *tsv );
 static void  TypescriptEndOfLineCommand(class typescript  *tsv );
 static void TypescriptEOTCommand(class typescript    *tv );
@@ -203,7 +203,7 @@ static void  Typescript_SelfInsertCmd(class typescript  *self, long  a);
 static void  Typescript_DigitCmd(class typescript  *self, long  a);
 static void typescript_BackwardsRotatePasteCmd(class typescript  *self);
 static void typescript_RotatePasteCmd(class typescript  *self);
-void  typescript_NoTextviewKey(class typescript  *self, long  key);
+static void  typescript_NoTextviewKey(class typescript  *self, long  key);
 static void typescript_DragCwdCmd(class typescript  *self);
 static void typescript_ResetTTY(class typescript  *self);
 static void typescriptAddtypescriptMenus();
@@ -494,7 +494,7 @@ MaintainLastEnv(class typescript  *td )
 
 }
 
-void
+static void
 SaveCommand(class typescript  *td)
 {
     long len, spos;
@@ -1717,7 +1717,7 @@ typescript_RotatePasteCmd(class typescript  *self)
 }
 
 /* What to do when the textview hasn't defined something... */
-void 
+static void 
 typescript_NoTextviewKey(class typescript  *self, long  key)
 {
     message::DisplayString(self, 0, "Could not execute command. Failure in looking up textview command.");

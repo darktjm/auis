@@ -60,7 +60,7 @@ void Tag_fixup(class rofftext  *self );
 void PM_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]);
 void PA_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]);
 void tl_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]);
-int SortTraps(struct trap  *trap1,struct trap  *trap2);
+static int SortTraps(struct trap  *trap1,struct trap  *trap2);
 void wh_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]);
 void sp_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]);
 void sv_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]);
@@ -1021,7 +1021,7 @@ void tl_cmd(class rofftext  *self,Trickle  t,boolean  br,int  argc,char  *argv[]
 
 }
 
-int SortTraps(struct trap  *trap1,struct trap  *trap2)
+static int SortTraps(struct trap  *trap1,struct trap  *trap2)
 {
     if (trap1->loc > trap2->loc)
         return 1;

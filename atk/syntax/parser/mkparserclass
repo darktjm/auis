@@ -40,10 +40,13 @@ tmpfile=/tmp/makepC$$
 trap "rm -f ${tmpfile}*" 0 1 2 15 
 
 #generate class declaration file $tmpfile.classdecl
+
+# class is private, because all current uses are private
+
 cat <<EOF > $tmpfile.classdecl
 #line 48 "mkparserclass"
 #include <parser.H>
-class ${prefix} : public parser {
+class NO_DLL_EXPORT ${prefix} : public parser {
 public:
 	${prefix}();
 EOF
