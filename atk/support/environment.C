@@ -17,7 +17,7 @@ ATK_IMPL("environment.H")
 
 ATKdefineRegistry(environment, nestedmark, NULL);
 static long AlterEnvironmentSize(class environment  *self, struct removestruct  *data);
-void environment__Dump(class environment  *self, int  level);
+/* static void environment__Dump(class environment  *self, int  level); */
 
 #if 0
 static class environment *freeList = NULL;
@@ -298,7 +298,8 @@ boolean environment::Remove(long  pos, long  length, enum environmenttype  type,
     return procdata.anyChange;
 }
 
-void environment__Dump(class environment  *self, int  level)
+#if 0
+static void environment__Dump(class environment  *self, int  level)
         {
     class nestedmark *nself = (class nestedmark *) self;
     int i = level;
@@ -309,3 +310,4 @@ void environment__Dump(class environment  *self, int  level)
     if (nself->children != NULL)
         (nself->children)->Enumerate( (tree23int_efptr) environment__Dump, (char *)(long) level + 1);
 }
+#endif

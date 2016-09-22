@@ -14,7 +14,7 @@ static UNUSED const char ibmid[] = "(c) Copyright IBM Corp.  1992-1995.  All rig
 
 
 ATKdefineRegistry(rawtext, text, NULL);
-boolean MakeSureNotOverstrikingView(class rawtext  *d, long  pos , long  len);
+static boolean MakeSureNotOverstrikingView(class rawtext  *d, long  pos , long  len);
 
 
 rawtext::rawtext()
@@ -69,7 +69,7 @@ boolean rawtext::JustInsertCharacters(long  pos,const char  *str,long  len)
 
 /*RSK91overstrike: mostly snagged from Patch10's ConfirmViewDeletion in atk/text/txtvcmod.c*/
 #define TEXT_VIEWREFCHAR '\377'
-boolean MakeSureNotOverstrikingView(class rawtext  *d, long  pos , long  len)
+static boolean MakeSureNotOverstrikingView(class rawtext  *d, long  pos , long  len)
 {
     boolean hasViews;
     class environment *env;

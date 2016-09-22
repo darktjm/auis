@@ -16,10 +16,9 @@ static class tabs *DefaultTabs = NULL;
 
 
 ATKdefineRegistry(tabs, ATK, NULL);
-int FindPrevTab(class tabs  *tabs, long  pos);
 
 
-int
+static int
 FindPrevTab(class tabs  *tabs, long  pos)
 /* Post: returns...
  *	-1 if no tabs

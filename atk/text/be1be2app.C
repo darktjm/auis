@@ -25,7 +25,7 @@ static int fileCount;
 
 
 ATKdefineRegistry(be1be2app, application, NULL);
-char *OutputName(char  *inputName);
+static char *OutputName(char  *inputName);
 static void Convert(char  *fileName);
 
 
@@ -46,7 +46,7 @@ boolean be1be2app::ParseArgs(int  argc, const char  **argv)
  * Ruotines to convert one file
  */
 
-char *OutputName(char  *inputName)
+static char *OutputName(char  *inputName)
 {
     static char outName[256];
     int i;

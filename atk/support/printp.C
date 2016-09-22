@@ -49,7 +49,7 @@ struct genheader {
     const void *rock;
 };
 
-void printp_init();
+void NO_DLL_EXPORT printp_init();
 
 
 static int lookup_afmkey(char *keywd, const struct afm_keyword *wordlist,int defval);

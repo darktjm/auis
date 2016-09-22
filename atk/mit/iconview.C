@@ -52,9 +52,9 @@ static void DrawOpen(class iconview  * self, enum view_UpdateType  type, long  a
 static void DrawClosed(class iconview  * self, enum view_UpdateType  type, long  ax, long  ay, long  aw, long  ah  /* area "A"ffected by this fullupdate */);
 static void SlayChild(class iconview  * self);
 static void AdoptNewChild(class iconview  * self,class icon  * dobj);
-long string_width(const char  * string, class fontdesc  * font, class graphic  * graphic);
+static long string_width(const char  * string, class fontdesc  * font, class graphic  * graphic);
 #if 0
-void iconview__SetIconFontname (class iconview  * self,char  *name);
+static void iconview__SetIconFontname (class iconview  * self,char  *name);
 #endif 
 
 
@@ -224,7 +224,7 @@ void AdoptNewChild(class iconview  * self,class icon  * dobj)
 }
 
 
-long string_width(const char  * string, class fontdesc  * font, class graphic  * graphic)
+static long string_width(const char  * string, class fontdesc  * font, class graphic  * graphic)
 {
     short * widthtable, totalwidth = 0;
     widthtable = (font)->WidthTable( graphic);
@@ -558,7 +558,7 @@ iconview::SetIconFont(const char  * iconfont,int  iconstyle,int  iconpts)
 }
 
 #if 0
-void
+static void
 iconview__SetIconFontname (class iconview  * self,char  *name)
   {
      self->iconfont = (class fontdesc *)0; /* force replacement */

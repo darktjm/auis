@@ -31,7 +31,7 @@ ATK_IMPL("sbttnav.H")
 /* Global Variables */
 static class menulist *sbmenulist = NULL;
 
-static struct proctable_Entry *scpe=NULL, *lcpe=NULL, *triggerpe=NULL, *bdeletepe=NULL, *gdeletepe=NULL, *renamepe=NULL, *bgpe=NULL, *labelpe=NULL, *fontpe=NULL, *stylepe=NULL, *colorpe=NULL, *dpe=NULL;
+static struct proctable_Entry *scpe=NULL, *lcpe=NULL, *triggerpe=NULL, *gdeletepe=NULL, *renamepe=NULL, *bgpe=NULL, *labelpe=NULL, *fontpe=NULL, *stylepe=NULL, *colorpe=NULL, *dpe=NULL;
 
 
 ATKdefineRegistry(sbttnav, sbuttonv, sbttnav::InitializeClass);

@@ -1439,6 +1439,7 @@ space_func(htmltext **ptxtobj, struct htmltaginfo *taginfo,
 	}
 	return 0;
 }
+	class NO_DLL_EXPORT htmlfontstack;
         DEFINE_MFLEX_CLASS(htmlfontstack,style *,5);
         static htmlfontstack fontstack;
 static long font_func(htmltext **ptxtobj, struct htmltaginfo *taginfo, long *ppos, long *pmode) {

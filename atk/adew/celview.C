@@ -78,7 +78,6 @@ static void celview_Paste(class celview  *self);
 static void celview_PromptForFile(class celview  *self);
 static void InitNow(class celview  *self);
 static void drawshadow(class celview  *self,struct rectangle  *r);
-static void celview__SetDrawing(class celview  *self,long  key);
 static void SetVisible(class celview  *self);
 static void SetInvisible(class celview  *self);
 static boolean objecttest(class celview   *self,const char  *name,const char  *desiredname);
@@ -719,11 +718,6 @@ void celview::SetResizing(long  key)
     if(this->mode == celview_HasView)
 	this->mode = celview_DoFull;
     (this)->WantUpdate(this);
-}
-static void celview__SetDrawing(class celview  *self,long  key)
-{
-    self->drawing = !self->drawing;
-    (self)->WantUpdate(self);
 }
 void celview::PostMenus(class menulist  *menulistp)
 {

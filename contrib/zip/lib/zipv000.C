@@ -54,8 +54,8 @@ END-SPECIFICATION  ************************************************************/
 #define  View			(self)
 #define  PaneExceptionHandler	(self->pane_exception_handler)
 
-void zipview_Mark_Pane_Exposed( class zipview		  *self, zip_type_pane		   pane );
-void zipview_Mark_Pane_Hidden( class zipview		  *self, zip_type_pane		   pane );
+extern NO_DLL_EXPORT void zipview_Mark_Pane_Exposed( class zipview		  *self, zip_type_pane		   pane );
+extern NO_DLL_EXPORT void zipview_Mark_Pane_Hidden( class zipview		  *self, zip_type_pane		   pane );
 
 
 class graphic *

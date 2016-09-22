@@ -69,7 +69,7 @@ recog_error(const char *a, ...)
  * print a message if DebugFlag is non-zero
  */
 
-int	DebugFlag = 1;
+NO_DLL_EXPORT int	DebugFlag = 1;
 
 void
 recog_debug(const char *a, ...)

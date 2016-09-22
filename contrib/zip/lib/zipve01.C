@@ -52,7 +52,7 @@ END-SPECIFICATION  ************************************************************/
 static void Clear_Pane_Mark_Areas( class zipedit		  *self, zip_type_pane		   pane );
 static void Draw_Pane_Coordinate_Marks( class zipedit		  *self, zip_type_pane		   pane );
 static void Draw_Pane_Coordinate_Ticks( class zipedit		  *self, zip_type_pane		   pane );
-long Compute_Pane_Coordinate_Deltas( class zipedit		  *self, zip_type_pane		   pane );
+extern NO_DLL_EXPORT long Compute_Pane_Coordinate_Deltas( class zipedit		  *self, zip_type_pane		   pane );
 
 
 long

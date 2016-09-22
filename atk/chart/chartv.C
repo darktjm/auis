@@ -86,13 +86,13 @@ ATKdefineRegistry(chartv, aptv, chartv::InitializeClass);
 static long SetChartAttribute( class chartv      *self, long		       attribute , long		       value );
 static long ChangeChartAttribute( class chartv      *self, long		       attribute , long		       value );
 static void Initialize( class chartv      *self );
-void chartv_Add_Command( class chartv      *self );
-void chartv_Delete_Command( class chartv      *self );
-void chartv_ReChart( class chartv      *self, char		      *moniker );
-void chartv_ReChart_Command( class chartv      *self, char		      *moniker );
-void chartv_Print_Command( class chartv      *self );
+static void chartv_Add_Command( class chartv      *self );
+static void chartv_Delete_Command( class chartv      *self );
+static void chartv_ReChart( class chartv      *self, char		      *moniker );
+static void chartv_ReChart_Command( class chartv      *self, char		      *moniker );
+static void chartv_Print_Command( class chartv      *self );
 static void chartv_Sort_Command( class chartv      *self, long		       datum );
-void chartv_Save_Command( class chartv      *self );
+static void chartv_Save_Command( class chartv      *self );
 static void DEBUG_Command( class chartv      *self );
 static void chartv_Palette_Command( class chartv      *self );
 static void chartv_Quit_Command( class chartv      *self );
@@ -156,8 +156,6 @@ static struct bind_Description	    view_menu[] =
 /*===
   { "chartv-ReChart", "",   0,	"ReChart~10,Cartesian~5",
     (long)"Cartesian",	menu_default,	ReChart_Command,"ReChart To Cartesian" },
-  { "chartv-ReChart", "",   0,	"ReChart~10,Map~10",
-    (long)"Map",	menu_default, ReChart_Command,	"ReChart To Map" },
   { "chartv-ReChart", "",   0,	"ReChart~10,Stack~11",
     (long)"Stack",	menu_default,	ReChart_Command,"ReChart To Stack" },
 ===*/
@@ -578,7 +576,7 @@ chartv::PrintCmd()
     chartv_Print_Command(this);
 }
 
-void
+static void
 chartv_Add_Command( class chartv      *self )
     {
   char			     *reply;
@@ -612,7 +610,7 @@ chartv_Add_Command( class chartv      *self )
   OUT(Add_Command);
   }
 
-void
+static void
 chartv_Delete_Command( class chartv      *self )
     {
   IN(Delete_Command);
@@ -631,7 +629,7 @@ chartv_Delete_Command( class chartv      *self )
 
 extern void Activate_Viewer(class chartv *);
 
-void chartv_ReChart( class chartv      *self, char		      *moniker )
+static void chartv_ReChart( class chartv      *self, char		      *moniker )
       {
   struct rectangle	      bounds;
   class chartobj   *prior_viewer = ChartViewer;
@@ -680,7 +678,7 @@ void chartv_ReChart( class chartv      *self, char		      *moniker )
     }
   OUT(ReChart);
   }
-void
+static void
 chartv_ReChart_Command( class chartv      *self, char		      *moniker )
       {
   IN(ReChart_Command);
@@ -689,7 +687,7 @@ chartv_ReChart_Command( class chartv      *self, char		      *moniker )
   OUT(ReChart_Command);
   }
 
-void
+static void
 chartv_Print_Command( class chartv      *self )
     {
   FILE		     *file;
@@ -726,7 +724,7 @@ chartv_Sort_Command( class chartv      *self, long		       datum )
   OUT(chartv_Sort_Command);
   }
 
-void
+static void
 chartv_Save_Command( class chartv      *self )
     {
   char			      msg[512],

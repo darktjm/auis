@@ -20,7 +20,7 @@ P_tmpdir can be defined as something else if needed.
      !defined(NEED_INSREMQUE) && \
      !defined(NEED_LOCKF) && \
      !defined(NEED_ATKINIFINI))
-long atkos_dummy_variable_for_ar=99;
+NO_DLL_EXPORT long atkos_dummy_variable_for_ar=99;
 #endif
 
 #ifdef NEED_ATKINIFINI

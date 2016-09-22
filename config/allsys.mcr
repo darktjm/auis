@@ -102,7 +102,7 @@ LEXLIB = -lfl
         CLASS = ${BASEDIR}/bin/class
 
 #ifdef HAVE_DYNAMIC_LOADING
-DYNEXELIBS = $(BASEDIR)/lib/libATKDynLoad.a $(BASEDIR)/lib/libATKLink.a
+DYNEXELIBS = $(BASEDIR)/lib/libATKDynLoad.a
 #else
 DYNEXELIBS =
 #endif
@@ -215,14 +215,6 @@ CPPDEPINCLUDES="`$(CC) -v  2>&1 | sed -n -e 's@Reading specs from \\(.*\\)gcc-li
 #endif
 
 GNUEMACS=/usr/local/bin/gnu-emacs
-
-#ifdef NEED_BSDMEMSTRFUNCS
-OSSUPBCOPY=bcopy.o
-OSSUPBZERO=bzero.o
-OSSUPBCMP=bcmp.o
-OSSUPINDEX=index.o
-OSSUPRINDEX=rindex.o
-#endif
 
         UTILLIB = $(BASEDIR)/lib/libutil.a
         PRSLIB =

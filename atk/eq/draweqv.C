@@ -152,9 +152,9 @@ static void ZeroSpacing();
 #endif /* NOTUSED ? */
 static void InitFont(class eqview  *self, enum eqstyle  eqstyle);
 static void eqview_FormatSimple(class eqview  *self, struct formula  *f			/* printable equation */, enum eqstyle  eqstyle			/* in what eqstyle */);
-long eqview_Extender(class eqview  *self, char  *s, char  **stringp, long  code , long  size);
+static long eqview_Extender(class eqview  *self, char  *s, char  **stringp, long  code , long  size);
 static void eqview_Zero(struct formula  *f);
-char *eqview_Extendable(class eqview  *self, struct formula  *f , struct formula  *leftf , struct formula  *rightf, enum eqstyle  eqstyle, char  ext1 , char  ext2, long  hang		/* whether to hang (root) or center (paren) */, long  one_part_extender	/* whether extender has only one part */);
+static char *eqview_Extendable(class eqview  *self, struct formula  *f , struct formula  *leftf , struct formula  *rightf, enum eqstyle  eqstyle, char  ext1 , char  ext2, long  hang		/* whether to hang (root) or center (paren) */, long  one_part_extender	/* whether extender has only one part */);
 static void eqview_FormatExtendable(class eqview  *self, struct formula  *leftf , struct formula  *f , struct formula  *rightf, enum eqstyle  eqstyle);
 static void eqview_MinMax(struct formula  *f);
 static struct formula *eqview_FormatGroup(class eqview  *self, class eq  *eqptr, struct formula  *f, enum eqstyle  eqstyle);
@@ -308,7 +308,7 @@ static struct {
     : (exfont[(int)n].font = fontdesc::Create(exfont[(int)n].fontfamily, exfont[(int)n].fontstyle, exfont[(int)n].fontsize)))
 
 
-long eqview_Extender(class eqview  *self, char  *s, char  **stringp, long  code , long  size)
+static long eqview_Extender(class eqview  *self, char  *s, char  **stringp, long  code , long  size)
 {
     int i, left=size;
     for (i=0; i<EX_NEXTENDERS; i++) {
@@ -349,7 +349,7 @@ static void eqview_Zero(struct formula  *f)
  * Find the dimensions of an extendable atom
  */
 
-char *eqview_Extendable(class eqview  *self, struct formula  *f , struct formula  *leftf , struct formula  *rightf, enum eqstyle  eqstyle, char  ext1 , char  ext2, long  hang		/* whether to hang (root) or center (paren) */, long  one_part_extender	/* whether extender has only one part */)
+static char *eqview_Extendable(class eqview  *self, struct formula  *f , struct formula  *leftf , struct formula  *rightf, enum eqstyle  eqstyle, char  ext1 , char  ext2, long  hang		/* whether to hang (root) or center (paren) */, long  one_part_extender	/* whether extender has only one part */)
 {
     struct fontdesc_charInfo info;
     struct FontSummary *summary;

@@ -38,7 +38,7 @@ static void DNV(class valueview  * self);
 static void DBV(class valueview  * self);
 static void DH(class valueview  * self);
 static void DDH(class valueview  * self);
-void valueview__GetCenter( class valueview  * self, long  * x , long  * y );
+static void valueview__GetCenter( class valueview  * self, long  * x , long  * y );
 
 
 static void LookupParameters(class valueview  * self)
@@ -525,7 +525,7 @@ void valueview::Dehighlight( )
 
 
 
-void valueview__GetCenter( class valueview  * self, long  * x , long  * y )
+static void valueview__GetCenter( class valueview  * self, long  * x , long  * y )
           {
   /* this controls the location of a label. */
   *x = self->x + (self->width >> 1);

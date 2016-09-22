@@ -178,9 +178,6 @@ awww: Library/Implementation/HTUU.h
 awww: Library/Implementation/HTUU.html
 awww: Library/Implementation/HTUtils.h
 awww: Library/Implementation/HTUtils.html
-awww: Library/Implementation/HTWAIS.c
-awww: Library/Implementation/HTWAIS.h
-awww: Library/Implementation/HTWAIS.html
 awww: Library/Implementation/HTWSRC.c
 awww: Library/Implementation/HTWSRC.h
 awww: Library/Implementation/HTWSRC.html

@@ -1,6 +1,8 @@
 - valgrind access hit with dragon.zip - may be bug in XPutImage, or perhaps
   the way xgraphic abuses CreateImage() to create a template image and
   fills in the values manually
+- for some reason, doing a full clean deletes Imakefile from examples
+  ex2, ex5, ex8, ex19.
 - lots of valgrind access hits with letter.tpl
   - parser::ParseNumber (317)
     There is no end sentinel on GetBuf() returns, so to fix, either:

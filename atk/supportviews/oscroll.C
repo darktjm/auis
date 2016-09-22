@@ -153,14 +153,14 @@ static void move_elevator(class oscroll  *self, int  side);
 static void  normal_full_update(class oscroll  *self, enum view_UpdateType  type, long  left , long  top , long  width , long  height);
 static void motif_full_update(class oscroll  *self, enum view_UpdateType  type, long  left , long  top , long  width , long  height);
 static void full_update(class oscroll  *self, enum view_UpdateType  type, long  left , long  top , long  width , long  height);
-void normal_scroll__Update(class oscroll  *self);
-void motif_scroll__Update(class oscroll  *self);
+static void normal_scroll__Update(class oscroll  *self);
+static void motif_scroll__Update(class oscroll  *self);
 static void RepeatEvent(class oscroll  *self);
 static void RepeatScroll(class oscroll  *self, long  cTime);
-class view *normal_scroll__Hit(class oscroll  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks);
-class view *motif_scroll__Hit(class oscroll  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks);
-void motif_Draw3dBorder(class view  *v, long  x1 , long  y1 , long  x2 , long  y2, boolean  sense			/* "innie" or "outtie" */, class graphic  *fillp		/* center fill pattern, NULL for none */);
-void motif_DrawBorder(class view  *v, long  x1 , long  y1 , long  x2 , long  y2		/* enclosing coords */, class graphic  *lt , class graphic  *dk , class graphic  *fillp /* patterns for light, dark and center */, int  depth			/* depth of border */);
+static class view *normal_scroll__Hit(class oscroll  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks);
+static class view *motif_scroll__Hit(class oscroll  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks);
+static void motif_Draw3dBorder(class view  *v, long  x1 , long  y1 , long  x2 , long  y2, boolean  sense			/* "innie" or "outtie" */, class graphic  *fillp		/* center fill pattern, NULL for none */);
+static void motif_DrawBorder(class view  *v, long  x1 , long  y1 , long  x2 , long  y2		/* enclosing coords */, class graphic  *lt , class graphic  *dk , class graphic  *fillp /* patterns for light, dark and center */, int  depth			/* depth of border */);
 
 
 boolean oscroll::InitializeClass()
@@ -1558,7 +1558,7 @@ void oscroll::FullUpdate(enum view_UpdateType  type, long  left , long  top , lo
     full_update(this, type, left, top, width, height);
 }
 
-void normal_scroll__Update(class oscroll  *self)
+static void normal_scroll__Update(class oscroll  *self)
 {
     int i;
     long l, t, w, h;
@@ -1602,7 +1602,7 @@ void normal_scroll__Update(class oscroll  *self)
     }
 }
 
-void motif_scroll__Update(class oscroll  *self)
+static void motif_scroll__Update(class oscroll  *self)
 {
     int i;
     long l, t, w, h;
@@ -1739,7 +1739,7 @@ static void RepeatScroll(class oscroll  *self, long  cTime)
 }
 
 
-class view *normal_scroll__Hit(class oscroll  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks)
+static class view *normal_scroll__Hit(class oscroll  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks)
 {
     int posn = 0, status,side = 0, delta, i, endzones;
     long coord = 0, temp, y1, y2;
@@ -1997,7 +1997,7 @@ class view *normal_scroll__Hit(class oscroll  *self, enum view_MouseAction  acti
     return (class view *)self;
 }
 
-class view *motif_scroll__Hit(class oscroll  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks)
+static class view *motif_scroll__Hit(class oscroll  *self, enum view_MouseAction  action, long  x , long  y , long  num_clicks)
 {
     int posn = 0, status, side = 0, delta, i, endzones;
     long coord = 0, temp, y1, y2;
@@ -2338,7 +2338,7 @@ void oscroll::UnlinkNotification(class view  *unlinkedTree)
 
 /* The 3-D drawing routines */
 
-void motif_Draw3dBorder(class view  *v, long  x1 , long  y1 , long  x2 , long  y2, boolean  sense			/* "innie" or "outtie" */, class graphic  *fillp		/* center fill pattern, NULL for none */)
+static void motif_Draw3dBorder(class view  *v, long  x1 , long  y1 , long  x2 , long  y2, boolean  sense			/* "innie" or "outtie" */, class graphic  *fillp		/* center fill pattern, NULL for none */)
 {
     motif_DrawBorder(v, x1, y1, x2, y2,
 	       (sense) ? (v)->GrayPattern( TD_BGPATVAL, 16) :
@@ -2350,7 +2350,7 @@ void motif_Draw3dBorder(class view  *v, long  x1 , long  y1 , long  x2 , long  y
 }
     
 
-void motif_DrawBorder(class view  *v, long  x1 , long  y1 , long  x2 , long  y2		/* enclosing coords */, class graphic  *lt , class graphic  *dk , class graphic  *fillp /* patterns for light, dark and center */, int  depth			/* depth of border */)
+static void motif_DrawBorder(class view  *v, long  x1 , long  y1 , long  x2 , long  y2		/* enclosing coords */, class graphic  *lt , class graphic  *dk , class graphic  *fillp /* patterns for light, dark and center */, int  depth			/* depth of border */)
 {
 
     long left, top, width, height;

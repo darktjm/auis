@@ -137,7 +137,7 @@ static void  UpdateDocument(class lookzview  *self);
 static boolean FindCardName(class style  *s, char  *nm);
 static char * NewMenuName(class lookzview  *lv, char  *name);
 static void  AddStyle(class lookzview  *self);
-boolean CheckDelStyle(class style  *sty, class text  *txt, int  level, class environment  *env);
+static boolean CheckDelStyle(class style  *sty, class text  *txt, int  level, class environment  *env);
 static void DeleteStyle(class lookzview  *self);
 static void SetBGcolor(class lookzview  *self);
 static void SetROBGcolor(class lookzview  *self);
@@ -2034,7 +2034,7 @@ AddStyle(class lookzview  *self)
  * We return TRUE when the given environment uses the style we are
  * deleting.
  */
-boolean CheckDelStyle(class style  *sty, class text  *txt, int  level, class environment  *env)
+static boolean CheckDelStyle(class style  *sty, class text  *txt, int  level, class environment  *env)
 {
     return (env != NULL && env->type == environment_Style && env->data.style == sty);
 }

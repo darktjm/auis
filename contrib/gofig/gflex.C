@@ -56,7 +56,7 @@ memmove( ELTTYPE *dest, ELTTYPE *src, int len) {
 /* move the gap to start at position i and have at least length len 
 */
 	void
-makegap( gflex *f, int i, int len ) {
+gflex::makegap( int i, int len ) {
 
 #ifdef objectsinelts
 	const int esize = 1;
@@ -64,30 +64,30 @@ makegap( gflex *f, int i, int len ) {
 	const int esize = sizeof(ELTTYPE);
 #endif /* objectsinelts */
 
-	if (len > f->gaplen) {
+	if (len > gaplen) {
 		/* have to make elts array bigger */
-		int newsize = /* itrunc */( 1.4*(f->n+f->gaplen) );
-		if (newsize < len+f->n) 
-			newsize = /* itrunc */( 1.2*(len+f->n) );
+		int newsize = /* itrunc */( 1.4*(n+gaplen) );
+		if (newsize < len+n) 
+			newsize = /* itrunc */( 1.2*(len+n) );
 		ELTTYPE *telts = 
 				(ELTTYPE *)malloc(newsize * esize);
-		const int newgaplen = newsize - f->n;
+		const int newgaplen = newsize - n;
 
 		/* not using realloc() because 
 			will use = to copy when ELTTYPE is a class 
 			Moreover, this way we avoid double copy to move gap. */
 
-		if (i < f->gaploc) {
+		if (i < gaploc) {
 			/* gap is too far right.  Move:
 				part before new gap
 				part to be moved to follow the gap
 				part after the old gap
 			*/
-			memcpy( telts, f->elts, i*esize );
-			memcpy( telts+i+newgaplen, f->elts+i, (f->gaploc-i)*esize );
-			memcpy( telts+f->gaploc+newgaplen,
-					f->elts+f->gaploc+f->gaplen,
-					(f->n-f->gaploc)*esize );
+			memcpy( telts, elts, i*esize );
+			memcpy( telts+i+newgaplen, elts+i, (gaploc-i)*esize );
+			memcpy( telts+gaploc+newgaplen,
+					elts+gaploc+gaplen,
+					(n-gaploc)*esize );
 		}
 		else {
 			/* gap is ok or too far left. Move: 
@@ -95,29 +95,29 @@ makegap( gflex *f, int i, int len ) {
 				part to precede the new gap (if any)
 				part to be after gap
 			*/
-			memcpy( telts, f->elts, f->gaploc*esize );
-			if (f->gaploc < i)
-				memcpy(  telts+f->gaploc,
-					f->elts+f->gaploc+f->gaplen,
-					(i-f->gaploc)*esize );
-			memcpy( telts+i+newgaplen, f->elts+i+f->gaplen, 
-					(f->n-i)*esize );
+			memcpy( telts, elts, gaploc*esize );
+			if (gaploc < i)
+				memcpy(  telts+gaploc,
+					elts+gaploc+gaplen,
+					(i-gaploc)*esize );
+			memcpy( telts+i+newgaplen, elts+i+gaplen, 
+					(n-i)*esize );
 		}
-		free( (void *)f->elts );
-		f->elts = telts;
-		f->gaplen = newgaplen;
+		free( (void *)elts );
+		elts = telts;
+		gaplen = newgaplen;
 	}
-	else if (i < f->gaploc) {
+	else if (i < gaploc) {
 		/* move gap to the left (move segment previously before gap) */
-		memmove( f->elts+f->gaplen+i, f->elts+i, 
-				(f->gaploc - i)*esize );
+		memmove( elts+gaplen+i, elts+i, 
+				(gaploc - i)*esize );
 	}
-	else if (i > f->gaploc) {
+	else if (i > gaploc) {
 		/* move gap to the right (move segment previously after gap) */
-		memmove( f->elts+f->gaploc, f->elts+f->gaplen+f->gaploc, 
-				(i - f->gaploc)*esize );
+		memmove( elts+gaploc, elts+gaplen+gaploc, 
+				(i - gaploc)*esize );
 	}
-	f->gaploc = i;
+	gaploc = i;
 }
 
 
@@ -167,7 +167,7 @@ gflex::operator[]( int i )  /* throw(int) */ {
 gflex::insert( int i, int len )  {
 	if (i < 0) i = 0;
 	if (i > n) i = n;
-	makegap( this, i, len );
+	makegap( i, len );
 	n += len;  gaplen -= len;
 	int loc = gaploc;
 	gaploc += len;
@@ -189,7 +189,7 @@ gflex::erase( int i, int len ) {
 	if (i <= gaploc && i+len >= gaploc) 
 		gaploc = i;	/* erasure straddles gap; just extend gap */
 	else 
-		makegap( this, i, 0 );	/* move so i'th elt is after gap */
+		makegap( i, 0 );	/* move so i'th elt is after gap */
 	n -= len;  
 	gaplen += len;
 
@@ -244,13 +244,13 @@ gflex::getbuf( int i, int len, int *gotlenp ) {
 	else if (gaploc-i < len/2) {
 		/* the portion before the gap is less than that after, 
 			so move the gap to i */
-		makegap( this, i, gaplen );
+		makegap( i, gaplen );
 		*gotlenp = n-i;
 		return &elts[i+gaplen]; /* buffer is after gap */
 	}
 	else {
 		/* the portion after the gap is smaller. move it */
-		makegap( this, i+len, gaplen );
+		makegap( i+len, gaplen );
 		*gotlenp = gaploc - i;
 		return &elts[i];	/* buffer is before gap */
 	}

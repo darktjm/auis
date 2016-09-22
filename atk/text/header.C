@@ -25,7 +25,7 @@ static class style *header_promptStyle;
 
 
 ATKdefineRegistry(header, dataobject, header::InitializeClass);
-void header_SetPrompt(class text  *textobj, const char  *string);
+static void header_SetPrompt(class text  *textobj, const char  *string);
 static long header_FencedWrite(class text  *textobj, FILE  *file, long  writeID, int  level);
 
 
@@ -50,7 +50,7 @@ const char *header::ViewName()
     return "headrtv";
 }
 
-void header_SetPrompt(class text  *textobj, const char  *string)
+static void header_SetPrompt(class text  *textobj, const char  *string)
 {
     int x, l;
     class environment *newenv;

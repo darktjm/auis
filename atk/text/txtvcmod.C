@@ -38,7 +38,7 @@ static int autocut_mode = -1;	/* uninitialized */
 
 int textview_GetNextNonSpacePos(class textview  *self, int  pos);
 void textview_AddSpaces(class textview  *self, long  pos, long  startPos, long  len);
-boolean ConfirmViewDeletion(class textview  *self, long  pos , long  len);
+static boolean ConfirmViewDeletion(class textview  *self, long  pos , long  len);
 boolean ConfirmReadOnly(class textview  *self);
 void textview_SelfInsertCmd(class textview  *self, char  a);
 void textview_DeleteWordCmd (class textview  *self);
@@ -141,7 +141,7 @@ void textview_AddSpaces(class textview  *self, long  pos, long  startPos, long  
     }
 }
 	
-boolean ConfirmViewDeletion(class textview  *self, long  pos , long  len)
+static boolean ConfirmViewDeletion(class textview  *self, long  pos , long  len)
 {
     class text *d;
     boolean hasViews;

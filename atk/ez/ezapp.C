@@ -241,8 +241,6 @@ bufferDirectory(class buffer  *buffer, char  *dir			/* Output: At least MAXPATHL
     }
 }
 
-extern int frame_VisitNamedFile(class frame *f, const char *file, boolean b1, boolean b2);
-
 /* Not static so it can be used from eza.c */
 static int VisitFilePrompting(class frame  *self, const char  *prompt, boolean  newWindow, boolean  rawMode)
                 {
@@ -263,7 +261,7 @@ static int VisitFilePrompting(class frame  *self, const char  *prompt, boolean  
 	self->SetBuffer( buffer, /*FALSE was silly -RSK*/TRUE);
 	return 0;
     }
-    return frame_VisitNamedFile(self, filename, newWindow, rawMode);
+    return self->VisitNamedFile(filename, newWindow, rawMode);
 }
 static void Startup(class frame  *frame)
     {

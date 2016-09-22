@@ -15,21 +15,18 @@
 #include <andrewos.h>
 #include <math.h>
 
-int main();
-
-
 int main() {
     int i;
     double f,g;
 
     f = 180.0/M_PI;
-    printf("int SineMult[] = {\n");
+    printf("NO_DLL_EXPORT int SineMult[] = {\n");
     for (i=0; i<430; ++i) {
 	g = (double) i / f;
 	printf("\t%d,\n", (int) (sin(g) * 10000));
     }
     printf("};\n\n");
-    printf("int CosineMult[] = {\n");
+    printf("NO_DLL_EXPORT int CosineMult[] = {\n");
     for (i=0; i<430; ++i) {
 	g = (double) i / f;
 	printf("\t%d,\n", (int) (cos(g) * 10000));

@@ -264,6 +264,7 @@ struct stylesheet_mapentry {
     style *oldstyle, *newstyle;
 };
 
+class NO_DLL_EXPORT stylesheet_maplist;
 DEFINE_MFLEX_CLASS(stylesheet_maplist,stylesheet_mapentry,10);
 
 void stylesheet::Copy(stylesheet *dest) {

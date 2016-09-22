@@ -24,12 +24,12 @@ static char LastString[MAXSTRING] = {0};
 
 
 ATKdefineRegistry(incsearch, ATK, incsearch::InitializeClass);
-void strappend(char  *dst , const char  *src, int  ch , int  len);
+static void strappend(char  *dst , const char  *src, int  ch , int  len);
 static boolean dosearch(class textview  *tv, class text  *txt, class mark  *pos, const char  *string , boolean  forwardp, boolean  contForward, boolean  contBackward, const char  *errmsg);
 static long incsearchf(ATK *tva, long  key);
 
 
-void strappend(char  *dst , const char  *src, int  ch , int  len)
+static void strappend(char  *dst , const char  *src, int  ch , int  len)
 {
     /* copy as much of the source as we can. */
     while (--len > 0 && (*dst = *src++) != '\0')

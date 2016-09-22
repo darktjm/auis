@@ -56,14 +56,14 @@ END-SPECIFICATION  ************************************************************/
 static void Extract_Stream_Name( class zip		      *self, const char			      *name, char			     **stream_name );
 static void Extract_Stream_File_Name( class zip		      *self, const char			      *name, char			     **file_name );
 static void Extract_Stream_File_Path( class zip		      *self, const char			      *name, char			     **path_name );
-int zip_Open_Stream_File( class zip		      *self, zip_type_stream	       stream, long			       open_mode );
+extern NO_DLL_EXPORT int zip_Open_Stream_File( class zip		      *self, zip_type_stream	       stream, long			       open_mode );
 static int Open_Via_Alternate_Paths( class zip		      *self, zip_type_stream	       stream, const char  *			      mode );
 static int Open_Alternate( class zip		      *self, zip_type_stream	       stream, const char  *			      open_mode_flags, const char			      *path );
-int zip_Close_Stream_File( class zip		      *self, zip_type_stream	       stream );
+extern NO_DLL_EXPORT int zip_Close_Stream_File( class zip		      *self, zip_type_stream	       stream );
 static void Reset_Stream_File_Open_States( class zip		      *self, zip_type_stream	       stream );
 static int Identify_Paths( class zip		      *self, zip_type_paths	      *paths_ptr );
 static int Allocate_Stream_Object( class zip		      *self, zip_type_stream	      *stream, const char			      *name );
-int zip_Set_Stream_File_Name( class zip		      *self, zip_type_stream	       stream, const char			      *name );
+extern NO_DLL_EXPORT int zip_Set_Stream_File_Name( class zip		      *self, zip_type_stream	       stream, const char			      *name );
 static int Deallocate_Stream_Object( class zip		      *self, zip_type_stream	       stream );
 static int Deallocate_Stream_Resources( class zip		      *self, zip_type_stream	       stream );
 

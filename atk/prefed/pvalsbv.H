@@ -24,5 +24,5 @@ public:
 
     virtual void UpdateSButton();
 };
-/** @{ */
+/** @} */
 #endif /* _pvalsbv_H_ */

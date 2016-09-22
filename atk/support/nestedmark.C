@@ -21,7 +21,7 @@ static long ncrlength;
 ATKdefineRegistry(nestedmark, ATK, NULL);
 static void DoFreeTree(class nestedmark  *self);
 static void FilterProc(class nestedmark  *self, struct filterstruct  *data, class tree23int  *t, class tree23int  *which  );
-class nestedmark *splitOffRight(class nestedmark  *self,int  rpos);
+static class nestedmark *splitOffRight(class nestedmark  *self,int  rpos);
 
 
 nestedmark::~nestedmark() {
@@ -74,7 +74,7 @@ static void FilterProc(class nestedmark  *self, struct filterstruct  *data, clas
 	self->parent = data->fpparent;
 }
 
-class nestedmark *splitOffRight(class nestedmark  *self,int  rpos)
+static class nestedmark *splitOffRight(class nestedmark  *self,int  rpos)
 {
     class tree23int *node;
     class nestedmark *right=(self)->NewButSimilar();

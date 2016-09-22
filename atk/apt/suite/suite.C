@@ -222,7 +222,7 @@ static struct suite_item* AllocItem();
 static void FinalizeItem( struct suite_item  *item );
 static void SetSortRoutine( class suite  *self );
 static long SortStub( struct suite_item  **item1, struct suite_item  **item2 );
-void CheckForNewFirstVisible( class suite  *self );
+static void CheckForNewFirstVisible( class suite  *self );
 static long AlphasortAscend( struct suite_item  **item1 , struct suite_item  **item2 );
 static long NumericAscend( struct suite_item  **item1 , struct suite_item  **item2 );
 static long AlphasortDescend( struct suite_item  **item1 , struct suite_item  **item2 );
@@ -1153,7 +1153,7 @@ SortStub( struct suite_item  **item1, struct suite_item  **item2 )
   return status;
 }
 
-void
+static void
 CheckForNewFirstVisible( class suite  *self )
     {
     if(NewFirstVisible) {

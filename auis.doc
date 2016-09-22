@@ -59,7 +59,10 @@ configuration commands if an app-specific file isn't present (locally
 \italic{app}.
 
 	First found of:  \typewriter{preferences .preferences .%defaults} for 
-configuration parameters
+configuration parameters.
+
+	\typewriter{.shmenu} for entries in the custom (shell command) 
+menu in \bold{typescript}.
 
 
 The files directly under \typewriter{$\{ANDREWDIR\}} are:
@@ -10288,13 +10291,7 @@ white
 
 \section{lib}
 
-This directory contains the binary ATK classes built from the 
-examples.  See lib/atk for details about what sort of files to 
-expect.  Each shared object is named after the example (e.g. 
-\typewriter{ex3} for example 3).  It contains all classes defined 
-in that example (helloworld, helloworldview, helloworldapp).  Since it 
-is not named after any included class, and has no links for included 
-classes, it is only statically loadable.
+The 
 \begindata{link,14487888}
 4
 ${ANDREWDIR}/examples/lib
@@ -10310,7 +10307,13 @@ black
 white
 \enddata{link,14487888}
 \enddata{link,14487888}
-\view{linkview,14487888,25792,0,0}
+\view{linkview,14487888,25792,0,0} directory contains the binary 
+ATK classes built from the examples.  See lib/atk for details about 
+what sort of files to expect.  Each shared object is named after 
+the example (e.g. \typewriter{ex3} for example 3).  It contains all 
+classes defined in that example (helloworld, helloworldview,
+helloworldapp).  Since it is not named after any included class, and 
+has no links for included classes, it is only statically loadable.
 
 \begindata{bp,13331872}
 Version 2
@@ -10337,715 +10340,2841 @@ white
 \enddata{link,13332640}
 \view{linkview,13332640,25794,0,0} directory contains help files for 
 \bold{help} command.  Note that the index and config files reside in 
-\typewriter{$\{ANDREWDIR\}/lib}.
-
-
-
-\section{2rtf.help}
-
-
-
-\section{adew.help}
-
-
-
-\section{adirs.help}
-
-
-
-\section{asmtext.help}
-
-
-
-\section{atk.help}
-
-
-
-\section{bdffont.help}
-
-
-
-\section{bshproc.help}
-
-
-
-\section{buffer.help}
-
-
-
-\section{bush.help}
-
-
-
-\section{calc.help}
-
-
-
-\section{calndrs.help}
-
-
-
-\section{calproc.help}
-
-
-
-\section{champ.help}
-
-
-
-\section{chart.help}
-
-
-
-\section{chimp.help}
-
-
-
-\section{chtproc.help}
-
-
-
-\section{chump.help}
-
-
-
-\section{circpi.help}
-
-
-
-\section{cjpeg.help}
-
-
-
-\section{clock.help}
-
-
-
-\section{cmenu.help}
-
-
-
-\section{cnclass.help}
-
-
-
-\section{cntproc.help}
-
-
-
-\section{color.help}
-
-
-
-\section{compile.help}
-
-
-
-\section{comproc.help}
-
-
-
-\section{console.help}
-
-
-
-\section{content.help}
-
-
-
-\section{convras.help}
-
-
-
-\section{cpchar.help}
-
-
-
-\section{cpptext.help}
-
-
-
-\section{cres8et.help}
-
-
-
-\section{crossrf.help}
-
-
-
-\section{ctext.help}
-
-
-
-\section{ctrproc.help}
-
-
-
-\section{cutbuf.help}
-
-
-
-\section{datacat.help}
-
-
-
-\section{desproc.help}
-
-
-
-\section{dialogs.help}
-
-
-
-\section{djpeg.help}
-
-
-
-\section{dogtags.help}
-
-
-
-\section{drdproc.help}
-
-
-
-\section{dsrproc.help}
-
-
-
-\section{eq.help}
-
-
-
-\section{ermproc.help}
-
-
-
-\section{erprintf.help}
-
-
-
-\section{evnts.help}
-
-
-
-\section{ez2ascii.help}
-
-
-
-\section{ez2html.help}
-
-
-
-\section{ez2ps.help}
-
-
-
-\section{ezcomm.help}
-
-
-
-\section{ezdiff.help}
-
-
-
-\section{ezdproc.help}
-
-
-
-\section{ezext.help}
-
-
-
-\section{ez.help}
-
-
-
-\section{ezkeys.help}
-
-
-
-\section{ezpretty.help}
-
-
-
-\section{ezprint.help}
-
-
-
-\section{ezproc.help}
-
-
-
-\section{ezps.help}
-
-
-
-\section{ezstyle.help}
-
-
-
-\section{eztroff.help}
-
-
-
-\section{fad.help}
-
-
-
-\section{fadproc.help}
-
-
-
-\section{figure.help}
-
-
-
-\section{fnote.help}
-
-
-
-\section{fontprob.help}
-
-
-
-\section{frmproc.help}
-
-
-
-\section{ftrproc.help}
-
-
-
-\section{gemacscp.help}
-
-
-
-\section{gemacsdf.help}
-
-
-
-\section{genmake.help}
-
-
-
-\section{genstatl.help}
-
-
-
-\section{geomtry.help}
-
-
-
-\section{gofig.help}
-
-
-
-\section{gsearch.help}
-
-
-
-\section{gsrproc.help}
-
-
-
-\section{headertxt.help}
-
-
-
-\section{help.aliases}
-
-
-
-\section{help.help}
-
-
-
-\section{helpkys.help}
-
-
-
-\section{hlpproc.help}
-
-
-
-\section{hlptext.help}
-
-
-
-\section{htmltext.help}
-
-
-
-\section{htmlview.help}
-
-
-
-\section{idltext.help}
-
-
-
-\section{image.help}
-
-
-
-\section{improc.help}
-
-
-
-\section{initfls.help}
-
-
-
-\section{inpproc.help}
-
-
-
-\section{insets.help}
-
-
-
-\section{isrproc.help}
-
-
-
-\section{lacc.help}
-
-
-
-\section{laccqr.help}
-
-
-
-\section{layout.help}
-
-
-
-\section{lgvproc.help}
-
-
-
-\section{linkins.help}
-
-
-
-\section{link.intro}
-
-
-
-\section{lkzproc.help}
-
-
-
-\section{lookz.help}
-
-
-
-\section{lstproc.help}
-
-
-
-\section{ltext.help}
-
-
-
-\section{m3text.help}
-
-
-
-\section{macros.help}
-
-
-
-\section{menubar.help}
-
-
-
-\section{menus.help}
-
-
-
-\section{metax.help}
-
-
-
-\section{mkbrowse.help}
-
-
-
-\section{motif.help}
-
-
-
-\section{mtext.help}
-
-
-
-\section{mttproc.help}
-
-
-
-\section{ness.help}
-
-
-
-\section{note.help}
-
-
-
-\section{org.help}
-
-
-
-\section{orgproc.help}
-
-
-
-\section{oscroll.help}
-
-
-
-\section{panner.help}
-
-
-
-\section{parse.help}
-
-
-
-\section{perltext.help}
-
-
-
-\section{ppm2atk.help}
-
-
-
-\section{prefed.help}
-
-
-
-\section{prefs.help}
-
-
-
-\section{prefs.tutr}
-
-
-
-\section{preview.help}
-
-
-
-\section{procs.help}
-
-
-
-\section{prog.help}
-
-
-
-\section{prvproc.help}
-
-
-
-\section{pscript.help}
-
-
-
-\section{pshbttn.help}
-
-
-
-\section{psinset.help}
-
-
-
-\section{ptext.help}
-
-
-
-\section{qryrplc.help}
-
-
-
-\section{raster.help}
-
-
-
-\section{rasters.help}
-
-
-
-\section{rawtext.help}
-
-
-
-\section{relativiz.help}
-
-
-
-\section{rexxtext.help}
-
-
-
-\section{rofftxt.help}
-
-
-
-\section{rstproc.help}
-
-
-
-\section{rtf2.help}
-
-
-
-\section{runapp.help}
-
-
-
-\section{runbutton.help}
-
-
-
-\section{sbutton.help}
-
-
-
-\section{scribetxt.help}
-
-
-
-\section{scroll.help}
-
-
-
-\section{search.help}
-
-
-
-\section{select.help}
-
-
-
-\section{setup.help}
-
-
-
-\section{spellck.help}
-
-
-
-\section{splproc.help}
-
-
-
-\section{srctext.help}
-
-
-
-\section{steproc.help}
-
-
-
-\section{stlproc.help}
-
-
-
-\section{stroffet.help}
-
-
-
-\section{sys.help}
-
-
-
-\section{table.help}
-
-
-
-\section{tags.help}
-
-
-
-\section{tblproc.help}
-
-
-
-\section{text.help}
-
-
-
-\section{tgsproc.help}
-
-
-
-\section{timeday.help}
-
-
-
-\section{tindex.help}
-
-
-
-\section{tmplts.help}
-
-
-
-\section{toez.help}
-
-
-
-\section{tour.help}
-
-
-
-\section{tsckeys.help}
-
-
-
-\section{tscript.help}
-
-
-
-\section{txtproc.help}
-
-
-
-\section{typproc.help}
-
-
-
-\section{unknown.help}
-
-
-
-\section{urlbutton.help}
-
-
-
-\section{valproc.help}
-
-
-
-\section{vi.help}
-
-
-
-\section{wrtstmp.help}
-
-
-
-\section{xwd2atk.help}
-
-
-
-\section{zip.help}
-
-
-
-\section{zipproc.help}
+\typewriter{$\{ANDREWDIR\}/lib}.  Help is currently available on the 
+following topics:
+
+
+\begindata{link,1}
+4
+${ANDREWDIR}/help/2rtf.help
+0
+0
+V
+\begindata{link,1}
+Datastream version: 2
+2rtf
+2
+
+black
+white
+\enddata{link,1}
+\enddata{link,1}
+\view{linkview,1,1001,0,0} \begindata{link,2}
+4
+${ANDREWDIR}/help/adew.help
+0
+0
+V
+\begindata{link,2}
+Datastream version: 2
+adew
+2
+
+black
+white
+\enddata{link,2}
+\enddata{link,2}
+\view{linkview,2,1002,0,0}
+ \begindata{link,3}
+4
+${ANDREWDIR}/help/adirs.help
+0
+0
+V
+\begindata{link,3}
+Datastream version: 2
+adirs
+2
+
+black
+white
+\enddata{link,3}
+\enddata{link,3}
+\view{linkview,3,1003,0,0}
+ \begindata{link,4}
+4
+${ANDREWDIR}/help/asmtext.help
+0
+0
+V
+\begindata{link,4}
+Datastream version: 2
+asmtext
+2
+
+black
+white
+\enddata{link,4}
+\enddata{link,4}
+\view{linkview,4,1004,0,0}
+ \begindata{link,5}
+4
+${ANDREWDIR}/help/atk.help
+0
+0
+V
+\begindata{link,5}
+Datastream version: 2
+atk
+2
+
+black
+white
+\enddata{link,5}
+\enddata{link,5}
+\view{linkview,5,1005,0,0}
+ \begindata{link,6}
+4
+${ANDREWDIR}/help/bdffont.help
+0
+0
+V
+\begindata{link,6}
+Datastream version: 2
+bdffont
+2
+
+black
+white
+\enddata{link,6}
+\enddata{link,6}
+\view{linkview,6,1006,0,0}
+ \begindata{link,7}
+4
+${ANDREWDIR}/help/bshproc.help
+0
+0
+V
+\begindata{link,7}
+Datastream version: 2
+bshproc
+2
+
+black
+white
+\enddata{link,7}
+\enddata{link,7}
+\view{linkview,7,1007,0,0}
+ \begindata{link,8}
+4
+${ANDREWDIR}/help/buffer.help
+0
+0
+V
+\begindata{link,8}
+Datastream version: 2
+buffer
+2
+
+black
+white
+\enddata{link,8}
+\enddata{link,8}
+\view{linkview,8,1008,0,0}
+ \begindata{link,9}
+4
+${ANDREWDIR}/help/bush.help
+0
+0
+V
+\begindata{link,9}
+Datastream version: 2
+bush
+2
+
+black
+white
+\enddata{link,9}
+\enddata{link,9}
+\view{linkview,9,1009,0,0}
+ \begindata{link,10}
+4
+${ANDREWDIR}/help/calc.help
+0
+0
+V
+\begindata{link,10}
+Datastream version: 2
+calc
+2
+
+black
+white
+\enddata{link,10}
+\enddata{link,10}
+\view{linkview,10,1010,0,0}
+ \begindata{link,11}
+4
+${ANDREWDIR}/help/calndrs.help
+0
+0
+V
+\begindata{link,11}
+Datastream version: 2
+calndrs
+2
+
+black
+white
+\enddata{link,11}
+\enddata{link,11}
+\view{linkview,11,1011,0,0}
+ \begindata{link,12}
+4
+${ANDREWDIR}/help/calproc.help
+0
+0
+V
+\begindata{link,12}
+Datastream version: 2
+calproc
+2
+
+black
+white
+\enddata{link,12}
+\enddata{link,12}
+\view{linkview,12,1012,0,0}
+ \begindata{link,13}
+4
+${ANDREWDIR}/help/champ.help
+0
+0
+V
+\begindata{link,13}
+Datastream version: 2
+champ
+2
+
+black
+white
+\enddata{link,13}
+\enddata{link,13}
+\view{linkview,13,1013,0,0}
+ \begindata{link,14}
+4
+${ANDREWDIR}/help/chart.help
+0
+0
+V
+\begindata{link,14}
+Datastream version: 2
+chart
+2
+
+black
+white
+\enddata{link,14}
+\enddata{link,14}
+\view{linkview,14,1014,0,0}
+ \begindata{link,15}
+4
+${ANDREWDIR}/help/chimp.help
+0
+0
+V
+\begindata{link,15}
+Datastream version: 2
+chimp
+2
+
+black
+white
+\enddata{link,15}
+\enddata{link,15}
+\view{linkview,15,1015,0,0}
+ \begindata{link,16}
+4
+${ANDREWDIR}/help/chtproc.help
+0
+0
+V
+\begindata{link,16}
+Datastream version: 2
+chtproc
+2
+
+black
+white
+\enddata{link,16}
+\enddata{link,16}
+\view{linkview,16,1016,0,0}
+ \begindata{link,17}
+4
+${ANDREWDIR}/help/chump.help
+0
+0
+V
+\begindata{link,17}
+Datastream version: 2
+chump
+2
+
+black
+white
+\enddata{link,17}
+\enddata{link,17}
+\view{linkview,17,1017,0,0}
+ \begindata{link,18}
+4
+${ANDREWDIR}/help/circpi.help
+0
+0
+V
+\begindata{link,18}
+Datastream version: 2
+circpi
+2
+
+black
+white
+\enddata{link,18}
+\enddata{link,18}
+\view{linkview,18,1018,0,0}
+ \begindata{link,19}
+4
+${ANDREWDIR}/help/cjpeg.help
+0
+0
+V
+\begindata{link,19}
+Datastream version: 2
+cjpeg
+2
+
+black
+white
+\enddata{link,19}
+\enddata{link,19}
+\view{linkview,19,1019,0,0}
+ \begindata{link,20}
+4
+${ANDREWDIR}/help/clock.help
+0
+0
+V
+\begindata{link,20}
+Datastream version: 2
+clock
+2
+
+black
+white
+\enddata{link,20}
+\enddata{link,20}
+\view{linkview,20,1020,0,0}
+ \begindata{link,21}
+4
+${ANDREWDIR}/help/cmenu.help
+0
+0
+V
+\begindata{link,21}
+Datastream version: 2
+cmenu
+2
+
+black
+white
+\enddata{link,21}
+\enddata{link,21}
+\view{linkview,21,1021,0,0}
+ \begindata{link,22}
+4
+${ANDREWDIR}/help/cnclass.help
+0
+0
+V
+\begindata{link,22}
+Datastream version: 2
+cnclass
+2
+
+black
+white
+\enddata{link,22}
+\enddata{link,22}
+\view{linkview,22,1022,0,0}
+ \begindata{link,23}
+4
+${ANDREWDIR}/help/cntproc.help
+0
+0
+V
+\begindata{link,23}
+Datastream version: 2
+cntproc
+2
+
+black
+white
+\enddata{link,23}
+\enddata{link,23}
+\view{linkview,23,1023,0,0}
+ \begindata{link,24}
+4
+${ANDREWDIR}/help/color.help
+0
+0
+V
+\begindata{link,24}
+Datastream version: 2
+color
+2
+
+black
+white
+\enddata{link,24}
+\enddata{link,24}
+\view{linkview,24,1024,0,0}
+ \begindata{link,25}
+4
+${ANDREWDIR}/help/compile.help
+0
+0
+V
+\begindata{link,25}
+Datastream version: 2
+compile
+2
+
+black
+white
+\enddata{link,25}
+\enddata{link,25}
+\view{linkview,25,1025,0,0}
+ \begindata{link,26}
+4
+${ANDREWDIR}/help/comproc.help
+0
+0
+V
+\begindata{link,26}
+Datastream version: 2
+comproc
+2
+
+black
+white
+\enddata{link,26}
+\enddata{link,26}
+\view{linkview,26,1026,0,0}
+ \begindata{link,27}
+4
+${ANDREWDIR}/help/console.help
+0
+0
+V
+\begindata{link,27}
+Datastream version: 2
+console
+2
+
+black
+white
+\enddata{link,27}
+\enddata{link,27}
+\view{linkview,27,1027,0,0}
+ \begindata{link,28}
+4
+${ANDREWDIR}/help/content.help
+0
+0
+V
+\begindata{link,28}
+Datastream version: 2
+content
+2
+
+black
+white
+\enddata{link,28}
+\enddata{link,28}
+\view{linkview,28,1028,0,0}
+ \begindata{link,29}
+4
+${ANDREWDIR}/help/convras.help
+0
+0
+V
+\begindata{link,29}
+Datastream version: 2
+convras
+2
+
+black
+white
+\enddata{link,29}
+\enddata{link,29}
+\view{linkview,29,1029,0,0}
+ \begindata{link,30}
+4
+${ANDREWDIR}/help/cpchar.help
+0
+0
+V
+\begindata{link,30}
+Datastream version: 2
+cpchar
+2
+
+black
+white
+\enddata{link,30}
+\enddata{link,30}
+\view{linkview,30,1030,0,0}
+ \begindata{link,31}
+4
+${ANDREWDIR}/help/cpptext.help
+0
+0
+V
+\begindata{link,31}
+Datastream version: 2
+cpptext
+2
+
+black
+white
+\enddata{link,31}
+\enddata{link,31}
+\view{linkview,31,1031,0,0}
+ \begindata{link,32}
+4
+${ANDREWDIR}/help/cres8et.help
+0
+0
+V
+\begindata{link,32}
+Datastream version: 2
+cres8et
+2
+
+black
+white
+\enddata{link,32}
+\enddata{link,32}
+\view{linkview,32,1032,0,0}
+ \begindata{link,33}
+4
+${ANDREWDIR}/help/crossrf.help
+0
+0
+V
+\begindata{link,33}
+Datastream version: 2
+crossrf
+2
+
+black
+white
+\enddata{link,33}
+\enddata{link,33}
+\view{linkview,33,1033,0,0}
+ \begindata{link,34}
+4
+${ANDREWDIR}/help/ctext.help
+0
+0
+V
+\begindata{link,34}
+Datastream version: 2
+ctext
+2
+
+black
+white
+\enddata{link,34}
+\enddata{link,34}
+\view{linkview,34,1034,0,0}
+ \begindata{link,35}
+4
+${ANDREWDIR}/help/ctrproc.help
+0
+0
+V
+\begindata{link,35}
+Datastream version: 2
+ctrproc
+2
+
+black
+white
+\enddata{link,35}
+\enddata{link,35}
+\view{linkview,35,1035,0,0}
+ \begindata{link,36}
+4
+${ANDREWDIR}/help/cutbuf.help
+0
+0
+V
+\begindata{link,36}
+Datastream version: 2
+cutbuf
+2
+
+black
+white
+\enddata{link,36}
+\enddata{link,36}
+\view{linkview,36,1036,0,0}
+ \begindata{link,37}
+4
+${ANDREWDIR}/help/datacat.help
+0
+0
+V
+\begindata{link,37}
+Datastream version: 2
+datacat
+2
+
+black
+white
+\enddata{link,37}
+\enddata{link,37}
+\view{linkview,37,1037,0,0}
+ \begindata{link,38}
+4
+${ANDREWDIR}/help/desproc.help
+0
+0
+V
+\begindata{link,38}
+Datastream version: 2
+desproc
+2
+
+black
+white
+\enddata{link,38}
+\enddata{link,38}
+\view{linkview,38,1038,0,0}
+ \begindata{link,39}
+4
+${ANDREWDIR}/help/dialogs.help
+0
+0
+V
+\begindata{link,39}
+Datastream version: 2
+dialogs
+2
+
+black
+white
+\enddata{link,39}
+\enddata{link,39}
+\view{linkview,39,1039,0,0}
+ \begindata{link,40}
+4
+${ANDREWDIR}/help/djpeg.help
+0
+0
+V
+\begindata{link,40}
+Datastream version: 2
+djpeg
+2
+
+black
+white
+\enddata{link,40}
+\enddata{link,40}
+\view{linkview,40,1040,0,0}
+ \begindata{link,41}
+4
+${ANDREWDIR}/help/dogtags.help
+0
+0
+V
+\begindata{link,41}
+Datastream version: 2
+dogtags
+2
+
+black
+white
+\enddata{link,41}
+\enddata{link,41}
+\view{linkview,41,1041,0,0}
+ \begindata{link,42}
+4
+${ANDREWDIR}/help/drdproc.help
+0
+0
+V
+\begindata{link,42}
+Datastream version: 2
+drdproc
+2
+
+black
+white
+\enddata{link,42}
+\enddata{link,42}
+\view{linkview,42,1042,0,0}
+ \begindata{link,43}
+4
+${ANDREWDIR}/help/dsrproc.help
+0
+0
+V
+\begindata{link,43}
+Datastream version: 2
+dsrproc
+2
+
+black
+white
+\enddata{link,43}
+\enddata{link,43}
+\view{linkview,43,1043,0,0}
+ \begindata{link,44}
+4
+${ANDREWDIR}/help/eq.help
+0
+0
+V
+\begindata{link,44}
+Datastream version: 2
+eq
+2
+
+black
+white
+\enddata{link,44}
+\enddata{link,44}
+\view{linkview,44,1044,0,0}
+ \begindata{link,45}
+4
+${ANDREWDIR}/help/ermproc.help
+0
+0
+V
+\begindata{link,45}
+Datastream version: 2
+ermproc
+2
+
+black
+white
+\enddata{link,45}
+\enddata{link,45}
+\view{linkview,45,1045,0,0}
+ \begindata{link,46}
+4
+${ANDREWDIR}/help/erprintf.help
+0
+0
+V
+\begindata{link,46}
+Datastream version: 2
+erprintf
+2
+
+black
+white
+\enddata{link,46}
+\enddata{link,46}
+\view{linkview,46,1046,0,0}
+ \begindata{link,47}
+4
+${ANDREWDIR}/help/evnts.help
+0
+0
+V
+\begindata{link,47}
+Datastream version: 2
+evnts
+2
+
+black
+white
+\enddata{link,47}
+\enddata{link,47}
+\view{linkview,47,1047,0,0}
+ \begindata{link,48}
+4
+${ANDREWDIR}/help/ez2ascii.help
+0
+0
+V
+\begindata{link,48}
+Datastream version: 2
+ez2ascii
+2
+
+black
+white
+\enddata{link,48}
+\enddata{link,48}
+\view{linkview,48,1048,0,0}
+ \begindata{link,49}
+4
+${ANDREWDIR}/help/ez2html.help
+0
+0
+V
+\begindata{link,49}
+Datastream version: 2
+ez2html
+2
+
+black
+white
+\enddata{link,49}
+\enddata{link,49}
+\view{linkview,49,1049,0,0}
+ \begindata{link,50}
+4
+${ANDREWDIR}/help/ez2ps.help
+0
+0
+V
+\begindata{link,50}
+Datastream version: 2
+ez2ps
+2
+
+black
+white
+\enddata{link,50}
+\enddata{link,50}
+\view{linkview,50,1050,0,0}
+ \begindata{link,51}
+4
+${ANDREWDIR}/help/ezcomm.help
+0
+0
+V
+\begindata{link,51}
+Datastream version: 2
+ezcomm
+2
+
+black
+white
+\enddata{link,51}
+\enddata{link,51}
+\view{linkview,51,1051,0,0}
+ \begindata{link,52}
+4
+${ANDREWDIR}/help/ezdiff.help
+0
+0
+V
+\begindata{link,52}
+Datastream version: 2
+ezdiff
+2
+
+black
+white
+\enddata{link,52}
+\enddata{link,52}
+\view{linkview,52,1052,0,0}
+ \begindata{link,53}
+4
+${ANDREWDIR}/help/ezdproc.help
+0
+0
+V
+\begindata{link,53}
+Datastream version: 2
+ezdproc
+2
+
+black
+white
+\enddata{link,53}
+\enddata{link,53}
+\view{linkview,53,1053,0,0}
+ \begindata{link,54}
+4
+${ANDREWDIR}/help/ezext.help
+0
+0
+V
+\begindata{link,54}
+Datastream version: 2
+ezext
+2
+
+black
+white
+\enddata{link,54}
+\enddata{link,54}
+\view{linkview,54,1054,0,0}
+ \begindata{link,55}
+4
+${ANDREWDIR}/help/ez.help
+0
+0
+V
+\begindata{link,55}
+Datastream version: 2
+ez
+2
+
+black
+white
+\enddata{link,55}
+\enddata{link,55}
+\view{linkview,55,1055,0,0}
+ \begindata{link,56}
+4
+${ANDREWDIR}/help/ezkeys.help
+0
+0
+V
+\begindata{link,56}
+Datastream version: 2
+ezkeys
+2
+
+black
+white
+\enddata{link,56}
+\enddata{link,56}
+\view{linkview,56,1056,0,0}
+ \begindata{link,57}
+4
+${ANDREWDIR}/help/ezpretty.help
+0
+0
+V
+\begindata{link,57}
+Datastream version: 2
+ezpretty
+2
+
+black
+white
+\enddata{link,57}
+\enddata{link,57}
+\view{linkview,57,1057,0,0}
+ \begindata{link,58}
+4
+${ANDREWDIR}/help/ezprint.help
+0
+0
+V
+\begindata{link,58}
+Datastream version: 2
+ezprint
+2
+
+black
+white
+\enddata{link,58}
+\enddata{link,58}
+\view{linkview,58,1058,0,0}
+ \begindata{link,59}
+4
+${ANDREWDIR}/help/ezproc.help
+0
+0
+V
+\begindata{link,59}
+Datastream version: 2
+ezproc
+2
+
+black
+white
+\enddata{link,59}
+\enddata{link,59}
+\view{linkview,59,1059,0,0}
+ \begindata{link,60}
+4
+${ANDREWDIR}/help/ezps.help
+0
+0
+V
+\begindata{link,60}
+Datastream version: 2
+ezps
+2
+
+black
+white
+\enddata{link,60}
+\enddata{link,60}
+\view{linkview,60,1060,0,0}
+ \begindata{link,61}
+4
+${ANDREWDIR}/help/ezstyle.help
+0
+0
+V
+\begindata{link,61}
+Datastream version: 2
+ezstyle
+2
+
+black
+white
+\enddata{link,61}
+\enddata{link,61}
+\view{linkview,61,1061,0,0}
+ \begindata{link,62}
+4
+${ANDREWDIR}/help/eztroff.help
+0
+0
+V
+\begindata{link,62}
+Datastream version: 2
+eztroff
+2
+
+black
+white
+\enddata{link,62}
+\enddata{link,62}
+\view{linkview,62,1062,0,0}
+ \begindata{link,63}
+4
+${ANDREWDIR}/help/fad.help
+0
+0
+V
+\begindata{link,63}
+Datastream version: 2
+fad
+2
+
+black
+white
+\enddata{link,63}
+\enddata{link,63}
+\view{linkview,63,1063,0,0}
+ \begindata{link,64}
+4
+${ANDREWDIR}/help/fadproc.help
+0
+0
+V
+\begindata{link,64}
+Datastream version: 2
+fadproc
+2
+
+black
+white
+\enddata{link,64}
+\enddata{link,64}
+\view{linkview,64,1064,0,0}
+ \begindata{link,65}
+4
+${ANDREWDIR}/help/figure.help
+0
+0
+V
+\begindata{link,65}
+Datastream version: 2
+figure
+2
+
+black
+white
+\enddata{link,65}
+\enddata{link,65}
+\view{linkview,65,1065,0,0}
+ \begindata{link,66}
+4
+${ANDREWDIR}/help/fnote.help
+0
+0
+V
+\begindata{link,66}
+Datastream version: 2
+fnote
+2
+
+black
+white
+\enddata{link,66}
+\enddata{link,66}
+\view{linkview,66,1066,0,0}
+ \begindata{link,67}
+4
+${ANDREWDIR}/help/fontprob.help
+0
+0
+V
+\begindata{link,67}
+Datastream version: 2
+fontprob
+2
+
+black
+white
+\enddata{link,67}
+\enddata{link,67}
+\view{linkview,67,1067,0,0}
+ \begindata{link,68}
+4
+${ANDREWDIR}/help/frmproc.help
+0
+0
+V
+\begindata{link,68}
+Datastream version: 2
+frmproc
+2
+
+black
+white
+\enddata{link,68}
+\enddata{link,68}
+\view{linkview,68,1068,0,0}
+ \begindata{link,69}
+4
+${ANDREWDIR}/help/ftrproc.help
+0
+0
+V
+\begindata{link,69}
+Datastream version: 2
+ftrproc
+2
+
+black
+white
+\enddata{link,69}
+\enddata{link,69}
+\view{linkview,69,1069,0,0}
+ \begindata{link,70}
+4
+${ANDREWDIR}/help/gemacscp.help
+0
+0
+V
+\begindata{link,70}
+Datastream version: 2
+gemacscp
+2
+
+black
+white
+\enddata{link,70}
+\enddata{link,70}
+\view{linkview,70,1070,0,0}
+ \begindata{link,71}
+4
+${ANDREWDIR}/help/gemacsdf.help
+0
+0
+V
+\begindata{link,71}
+Datastream version: 2
+gemacsdf
+2
+
+black
+white
+\enddata{link,71}
+\enddata{link,71}
+\view{linkview,71,1071,0,0}
+ \begindata{link,72}
+4
+${ANDREWDIR}/help/genmake.help
+0
+0
+V
+\begindata{link,72}
+Datastream version: 2
+genmake
+2
+
+black
+white
+\enddata{link,72}
+\enddata{link,72}
+\view{linkview,72,1072,0,0}
+ \begindata{link,73}
+4
+${ANDREWDIR}/help/genstatl.help
+0
+0
+V
+\begindata{link,73}
+Datastream version: 2
+genstatl
+2
+
+black
+white
+\enddata{link,73}
+\enddata{link,73}
+\view{linkview,73,1073,0,0}
+ \begindata{link,74}
+4
+${ANDREWDIR}/help/geomtry.help
+0
+0
+V
+\begindata{link,74}
+Datastream version: 2
+geomtry
+2
+
+black
+white
+\enddata{link,74}
+\enddata{link,74}
+\view{linkview,74,1074,0,0}
+ \begindata{link,75}
+4
+${ANDREWDIR}/help/gofig.help
+0
+0
+V
+\begindata{link,75}
+Datastream version: 2
+gofig
+2
+
+black
+white
+\enddata{link,75}
+\enddata{link,75}
+\view{linkview,75,1075,0,0}
+ \begindata{link,76}
+4
+${ANDREWDIR}/help/gsearch.help
+0
+0
+V
+\begindata{link,76}
+Datastream version: 2
+gsearch
+2
+
+black
+white
+\enddata{link,76}
+\enddata{link,76}
+\view{linkview,76,1076,0,0}
+ \begindata{link,77}
+4
+${ANDREWDIR}/help/gsrproc.help
+0
+0
+V
+\begindata{link,77}
+Datastream version: 2
+gsrproc
+2
+
+black
+white
+\enddata{link,77}
+\enddata{link,77}
+\view{linkview,77,1077,0,0}
+ \begindata{link,78}
+4
+${ANDREWDIR}/help/headertxt.help
+0
+0
+V
+\begindata{link,78}
+Datastream version: 2
+headertxt
+2
+
+black
+white
+\enddata{link,78}
+\enddata{link,78}
+\view{linkview,78,1078,0,0}
+ \begindata{link,79}
+4
+${ANDREWDIR}/help/help.aliases
+0
+0
+V
+\begindata{link,79}
+Datastream version: 2
+help.al
+2
+
+black
+white
+\enddata{link,79}
+\enddata{link,79}
+\view{linkview,79,1079,0,0}
+ \begindata{link,80}
+4
+${ANDREWDIR}/help/help.help
+0
+0
+V
+\begindata{link,80}
+Datastream version: 2
+help
+2
+
+black
+white
+\enddata{link,80}
+\enddata{link,80}
+\view{linkview,80,1080,0,0}
+ \begindata{link,81}
+4
+${ANDREWDIR}/help/helpkys.help
+0
+0
+V
+\begindata{link,81}
+Datastream version: 2
+helpkys
+2
+
+black
+white
+\enddata{link,81}
+\enddata{link,81}
+\view{linkview,81,1081,0,0}
+ \begindata{link,82}
+4
+${ANDREWDIR}/help/hlpproc.help
+0
+0
+V
+\begindata{link,82}
+Datastream version: 2
+hlpproc
+2
+
+black
+white
+\enddata{link,82}
+\enddata{link,82}
+\view{linkview,82,1082,0,0}
+ \begindata{link,83}
+4
+${ANDREWDIR}/help/hlptext.help
+0
+0
+V
+\begindata{link,83}
+Datastream version: 2
+hlptext
+2
+
+black
+white
+\enddata{link,83}
+\enddata{link,83}
+\view{linkview,83,1083,0,0}
+ \begindata{link,84}
+4
+${ANDREWDIR}/help/htmltext.help
+0
+0
+V
+\begindata{link,84}
+Datastream version: 2
+htmltext
+2
+
+black
+white
+\enddata{link,84}
+\enddata{link,84}
+\view{linkview,84,1084,0,0}
+ \begindata{link,85}
+4
+${ANDREWDIR}/help/htmlview.help
+0
+0
+V
+\begindata{link,85}
+Datastream version: 2
+htmlview
+2
+
+black
+white
+\enddata{link,85}
+\enddata{link,85}
+\view{linkview,85,1085,0,0}
+ \begindata{link,86}
+4
+${ANDREWDIR}/help/idltext.help
+0
+0
+V
+\begindata{link,86}
+Datastream version: 2
+idltext
+2
+
+black
+white
+\enddata{link,86}
+\enddata{link,86}
+\view{linkview,86,1086,0,0}
+ \begindata{link,87}
+4
+${ANDREWDIR}/help/image.help
+0
+0
+V
+\begindata{link,87}
+Datastream version: 2
+image
+2
+
+black
+white
+\enddata{link,87}
+\enddata{link,87}
+\view{linkview,87,1087,0,0}
+ \begindata{link,88}
+4
+${ANDREWDIR}/help/improc.help
+0
+0
+V
+\begindata{link,88}
+Datastream version: 2
+improc
+2
+
+black
+white
+\enddata{link,88}
+\enddata{link,88}
+\view{linkview,88,1088,0,0}
+ \begindata{link,89}
+4
+${ANDREWDIR}/help/initfls.help
+0
+0
+V
+\begindata{link,89}
+Datastream version: 2
+initfls
+2
+
+black
+white
+\enddata{link,89}
+\enddata{link,89}
+\view{linkview,89,1089,0,0}
+ \begindata{link,90}
+4
+${ANDREWDIR}/help/inpproc.help
+0
+0
+V
+\begindata{link,90}
+Datastream version: 2
+inpproc
+2
+
+black
+white
+\enddata{link,90}
+\enddata{link,90}
+\view{linkview,90,1090,0,0}
+ \begindata{link,91}
+4
+${ANDREWDIR}/help/insets.help
+0
+0
+V
+\begindata{link,91}
+Datastream version: 2
+insets
+2
+
+black
+white
+\enddata{link,91}
+\enddata{link,91}
+\view{linkview,91,1091,0,0}
+ \begindata{link,92}
+4
+${ANDREWDIR}/help/isrproc.help
+0
+0
+V
+\begindata{link,92}
+Datastream version: 2
+isrproc
+2
+
+black
+white
+\enddata{link,92}
+\enddata{link,92}
+\view{linkview,92,1092,0,0}
+ \begindata{link,93}
+4
+${ANDREWDIR}/help/lacc.help
+0
+0
+V
+\begindata{link,93}
+Datastream version: 2
+lacc
+2
+
+black
+white
+\enddata{link,93}
+\enddata{link,93}
+\view{linkview,93,1093,0,0}
+ \begindata{link,94}
+4
+${ANDREWDIR}/help/laccqr.help
+0
+0
+V
+\begindata{link,94}
+Datastream version: 2
+laccqr
+2
+
+black
+white
+\enddata{link,94}
+\enddata{link,94}
+\view{linkview,94,1094,0,0}
+ \begindata{link,95}
+4
+${ANDREWDIR}/help/layout.help
+0
+0
+V
+\begindata{link,95}
+Datastream version: 2
+layout
+2
+
+black
+white
+\enddata{link,95}
+\enddata{link,95}
+\view{linkview,95,1095,0,0}
+ \begindata{link,96}
+4
+${ANDREWDIR}/help/lgvproc.help
+0
+0
+V
+\begindata{link,96}
+Datastream version: 2
+lgvproc
+2
+
+black
+white
+\enddata{link,96}
+\enddata{link,96}
+\view{linkview,96,1096,0,0}
+ \begindata{link,97}
+4
+${ANDREWDIR}/help/linkins.help
+0
+0
+V
+\begindata{link,97}
+Datastream version: 2
+linkins
+2
+
+black
+white
+\enddata{link,97}
+\enddata{link,97}
+\view{linkview,97,1097,0,0}
+ \begindata{link,98}
+4
+${ANDREWDIR}/help/link.intro
+0
+0
+V
+\begindata{link,98}
+Datastream version: 2
+link.
+2
+
+black
+white
+\enddata{link,98}
+\enddata{link,98}
+\view{linkview,98,1098,0,0}
+ \begindata{link,99}
+4
+${ANDREWDIR}/help/lkzproc.help
+0
+0
+V
+\begindata{link,99}
+Datastream version: 2
+lkzproc
+2
+
+black
+white
+\enddata{link,99}
+\enddata{link,99}
+\view{linkview,99,1099,0,0}
+ \begindata{link,100}
+4
+${ANDREWDIR}/help/lookz.help
+0
+0
+V
+\begindata{link,100}
+Datastream version: 2
+lookz
+2
+
+black
+white
+\enddata{link,100}
+\enddata{link,100}
+\view{linkview,100,1100,0,0}
+ \begindata{link,101}
+4
+${ANDREWDIR}/help/lstproc.help
+0
+0
+V
+\begindata{link,101}
+Datastream version: 2
+lstproc
+2
+
+black
+white
+\enddata{link,101}
+\enddata{link,101}
+\view{linkview,101,1101,0,0}
+ \begindata{link,102}
+4
+${ANDREWDIR}/help/ltext.help
+0
+0
+V
+\begindata{link,102}
+Datastream version: 2
+ltext
+2
+
+black
+white
+\enddata{link,102}
+\enddata{link,102}
+\view{linkview,102,1102,0,0}
+ \begindata{link,103}
+4
+${ANDREWDIR}/help/m3text.help
+0
+0
+V
+\begindata{link,103}
+Datastream version: 2
+m3text
+2
+
+black
+white
+\enddata{link,103}
+\enddata{link,103}
+\view{linkview,103,1103,0,0}
+ \begindata{link,104}
+4
+${ANDREWDIR}/help/macros.help
+0
+0
+V
+\begindata{link,104}
+Datastream version: 2
+macros
+2
+
+black
+white
+\enddata{link,104}
+\enddata{link,104}
+\view{linkview,104,1104,0,0}
+ \begindata{link,105}
+4
+${ANDREWDIR}/help/menubar.help
+0
+0
+V
+\begindata{link,105}
+Datastream version: 2
+menubar
+2
+
+black
+white
+\enddata{link,105}
+\enddata{link,105}
+\view{linkview,105,1105,0,0}
+ \begindata{link,106}
+4
+${ANDREWDIR}/help/menus.help
+0
+0
+V
+\begindata{link,106}
+Datastream version: 2
+menus
+2
+
+black
+white
+\enddata{link,106}
+\enddata{link,106}
+\view{linkview,106,1106,0,0}
+ \begindata{link,107}
+4
+${ANDREWDIR}/help/metax.help
+0
+0
+V
+\begindata{link,107}
+Datastream version: 2
+metax
+2
+
+black
+white
+\enddata{link,107}
+\enddata{link,107}
+\view{linkview,107,1107,0,0}
+ \begindata{link,108}
+4
+${ANDREWDIR}/help/mkbrowse.help
+0
+0
+V
+\begindata{link,108}
+Datastream version: 2
+mkbrowse
+2
+
+black
+white
+\enddata{link,108}
+\enddata{link,108}
+\view{linkview,108,1108,0,0}
+ \begindata{link,109}
+4
+${ANDREWDIR}/help/motif.help
+0
+0
+V
+\begindata{link,109}
+Datastream version: 2
+motif
+2
+
+black
+white
+\enddata{link,109}
+\enddata{link,109}
+\view{linkview,109,1109,0,0}
+ \begindata{link,110}
+4
+${ANDREWDIR}/help/mtext.help
+0
+0
+V
+\begindata{link,110}
+Datastream version: 2
+mtext
+2
+
+black
+white
+\enddata{link,110}
+\enddata{link,110}
+\view{linkview,110,1110,0,0}
+ \begindata{link,111}
+4
+${ANDREWDIR}/help/mttproc.help
+0
+0
+V
+\begindata{link,111}
+Datastream version: 2
+mttproc
+2
+
+black
+white
+\enddata{link,111}
+\enddata{link,111}
+\view{linkview,111,1111,0,0}
+ \begindata{link,112}
+4
+${ANDREWDIR}/help/ness.help
+0
+0
+V
+\begindata{link,112}
+Datastream version: 2
+ness
+2
+
+black
+white
+\enddata{link,112}
+\enddata{link,112}
+\view{linkview,112,1112,0,0}
+ \begindata{link,113}
+4
+${ANDREWDIR}/help/note.help
+0
+0
+V
+\begindata{link,113}
+Datastream version: 2
+note
+2
+
+black
+white
+\enddata{link,113}
+\enddata{link,113}
+\view{linkview,113,1113,0,0}
+ \begindata{link,114}
+4
+${ANDREWDIR}/help/org.help
+0
+0
+V
+\begindata{link,114}
+Datastream version: 2
+org
+2
+
+black
+white
+\enddata{link,114}
+\enddata{link,114}
+\view{linkview,114,1114,0,0}
+ \begindata{link,115}
+4
+${ANDREWDIR}/help/orgproc.help
+0
+0
+V
+\begindata{link,115}
+Datastream version: 2
+orgproc
+2
+
+black
+white
+\enddata{link,115}
+\enddata{link,115}
+\view{linkview,115,1115,0,0}
+ \begindata{link,116}
+4
+${ANDREWDIR}/help/oscroll.help
+0
+0
+V
+\begindata{link,116}
+Datastream version: 2
+oscroll
+2
+
+black
+white
+\enddata{link,116}
+\enddata{link,116}
+\view{linkview,116,1116,0,0}
+ \begindata{link,117}
+4
+${ANDREWDIR}/help/panner.help
+0
+0
+V
+\begindata{link,117}
+Datastream version: 2
+panner
+2
+
+black
+white
+\enddata{link,117}
+\enddata{link,117}
+\view{linkview,117,1117,0,0}
+ \begindata{link,118}
+4
+${ANDREWDIR}/help/parse.help
+0
+0
+V
+\begindata{link,118}
+Datastream version: 2
+parse
+2
+
+black
+white
+\enddata{link,118}
+\enddata{link,118}
+\view{linkview,118,1118,0,0}
+ \begindata{link,119}
+4
+${ANDREWDIR}/help/perltext.help
+0
+0
+V
+\begindata{link,119}
+Datastream version: 2
+perltext
+2
+
+black
+white
+\enddata{link,119}
+\enddata{link,119}
+\view{linkview,119,1119,0,0}
+ \begindata{link,120}
+4
+${ANDREWDIR}/help/ppm2atk.help
+0
+0
+V
+\begindata{link,120}
+Datastream version: 2
+ppm2atk
+2
+
+black
+white
+\enddata{link,120}
+\enddata{link,120}
+\view{linkview,120,1120,0,0}
+ \begindata{link,121}
+4
+${ANDREWDIR}/help/prefed.help
+0
+0
+V
+\begindata{link,121}
+Datastream version: 2
+prefed
+2
+
+black
+white
+\enddata{link,121}
+\enddata{link,121}
+\view{linkview,121,1121,0,0}
+ \begindata{link,122}
+4
+${ANDREWDIR}/help/prefs.help
+0
+0
+V
+\begindata{link,122}
+Datastream version: 2
+prefs
+2
+
+black
+white
+\enddata{link,122}
+\enddata{link,122}
+\view{linkview,122,1122,0,0}
+ \begindata{link,123}
+4
+${ANDREWDIR}/help/prefs.tutr
+0
+0
+V
+\begindata{link,123}
+Datastream version: 2
+prefs
+2
+
+black
+white
+\enddata{link,123}
+\enddata{link,123}
+\view{linkview,123,1123,0,0}
+ \begindata{link,124}
+4
+${ANDREWDIR}/help/preview.help
+0
+0
+V
+\begindata{link,124}
+Datastream version: 2
+preview
+2
+
+black
+white
+\enddata{link,124}
+\enddata{link,124}
+\view{linkview,124,1124,0,0}
+ \begindata{link,125}
+4
+${ANDREWDIR}/help/procs.help
+0
+0
+V
+\begindata{link,125}
+Datastream version: 2
+procs
+2
+
+black
+white
+\enddata{link,125}
+\enddata{link,125}
+\view{linkview,125,1125,0,0}
+ \begindata{link,126}
+4
+${ANDREWDIR}/help/prog.help
+0
+0
+V
+\begindata{link,126}
+Datastream version: 2
+prog
+2
+
+black
+white
+\enddata{link,126}
+\enddata{link,126}
+\view{linkview,126,1126,0,0}
+ \begindata{link,127}
+4
+${ANDREWDIR}/help/prvproc.help
+0
+0
+V
+\begindata{link,127}
+Datastream version: 2
+prvproc
+2
+
+black
+white
+\enddata{link,127}
+\enddata{link,127}
+\view{linkview,127,1127,0,0}
+ \begindata{link,128}
+4
+${ANDREWDIR}/help/pscript.help
+0
+0
+V
+\begindata{link,128}
+Datastream version: 2
+pscript
+2
+
+black
+white
+\enddata{link,128}
+\enddata{link,128}
+\view{linkview,128,1128,0,0}
+ \begindata{link,129}
+4
+${ANDREWDIR}/help/pshbttn.help
+0
+0
+V
+\begindata{link,129}
+Datastream version: 2
+pshbttn
+2
+
+black
+white
+\enddata{link,129}
+\enddata{link,129}
+\view{linkview,129,1129,0,0}
+ \begindata{link,130}
+4
+${ANDREWDIR}/help/psinset.help
+0
+0
+V
+\begindata{link,130}
+Datastream version: 2
+psinset
+2
+
+black
+white
+\enddata{link,130}
+\enddata{link,130}
+\view{linkview,130,1130,0,0}
+ \begindata{link,131}
+4
+${ANDREWDIR}/help/ptext.help
+0
+0
+V
+\begindata{link,131}
+Datastream version: 2
+ptext
+2
+
+black
+white
+\enddata{link,131}
+\enddata{link,131}
+\view{linkview,131,1131,0,0}
+ \begindata{link,132}
+4
+${ANDREWDIR}/help/qryrplc.help
+0
+0
+V
+\begindata{link,132}
+Datastream version: 2
+qryrplc
+2
+
+black
+white
+\enddata{link,132}
+\enddata{link,132}
+\view{linkview,132,1132,0,0}
+ \begindata{link,133}
+4
+${ANDREWDIR}/help/raster.help
+0
+0
+V
+\begindata{link,133}
+Datastream version: 2
+raster
+2
+
+black
+white
+\enddata{link,133}
+\enddata{link,133}
+\view{linkview,133,1133,0,0}
+ \begindata{link,134}
+4
+${ANDREWDIR}/help/rasters.help
+0
+0
+V
+\begindata{link,134}
+Datastream version: 2
+rasters
+2
+
+black
+white
+\enddata{link,134}
+\enddata{link,134}
+\view{linkview,134,1134,0,0}
+ \begindata{link,135}
+4
+${ANDREWDIR}/help/rawtext.help
+0
+0
+V
+\begindata{link,135}
+Datastream version: 2
+rawtext
+2
+
+black
+white
+\enddata{link,135}
+\enddata{link,135}
+\view{linkview,135,1135,0,0}
+ \begindata{link,136}
+4
+${ANDREWDIR}/help/relativiz.help
+0
+0
+V
+\begindata{link,136}
+Datastream version: 2
+relativiz
+2
+
+black
+white
+\enddata{link,136}
+\enddata{link,136}
+\view{linkview,136,1136,0,0}
+ \begindata{link,137}
+4
+${ANDREWDIR}/help/rexxtext.help
+0
+0
+V
+\begindata{link,137}
+Datastream version: 2
+rexxtext
+2
+
+black
+white
+\enddata{link,137}
+\enddata{link,137}
+\view{linkview,137,1137,0,0}
+ \begindata{link,138}
+4
+${ANDREWDIR}/help/rofftxt.help
+0
+0
+V
+\begindata{link,138}
+Datastream version: 2
+rofftxt
+2
+
+black
+white
+\enddata{link,138}
+\enddata{link,138}
+\view{linkview,138,1138,0,0}
+ \begindata{link,139}
+4
+${ANDREWDIR}/help/rstproc.help
+0
+0
+V
+\begindata{link,139}
+Datastream version: 2
+rstproc
+2
+
+black
+white
+\enddata{link,139}
+\enddata{link,139}
+\view{linkview,139,1139,0,0}
+ \begindata{link,140}
+4
+${ANDREWDIR}/help/rtf2.help
+0
+0
+V
+\begindata{link,140}
+Datastream version: 2
+rtf2
+2
+
+black
+white
+\enddata{link,140}
+\enddata{link,140}
+\view{linkview,140,1140,0,0}
+ \begindata{link,141}
+4
+${ANDREWDIR}/help/runapp.help
+0
+0
+V
+\begindata{link,141}
+Datastream version: 2
+runapp
+2
+
+black
+white
+\enddata{link,141}
+\enddata{link,141}
+\view{linkview,141,1141,0,0}
+ \begindata{link,142}
+4
+${ANDREWDIR}/help/runbutton.help
+0
+0
+V
+\begindata{link,142}
+Datastream version: 2
+runbutton
+2
+
+black
+white
+\enddata{link,142}
+\enddata{link,142}
+\view{linkview,142,1142,0,0}
+ \begindata{link,143}
+4
+${ANDREWDIR}/help/sbutton.help
+0
+0
+V
+\begindata{link,143}
+Datastream version: 2
+sbutton
+2
+
+black
+white
+\enddata{link,143}
+\enddata{link,143}
+\view{linkview,143,1143,0,0}
+ \begindata{link,144}
+4
+${ANDREWDIR}/help/scribetxt.help
+0
+0
+V
+\begindata{link,144}
+Datastream version: 2
+scribetxt
+2
+
+black
+white
+\enddata{link,144}
+\enddata{link,144}
+\view{linkview,144,1144,0,0}
+ \begindata{link,145}
+4
+${ANDREWDIR}/help/scroll.help
+0
+0
+V
+\begindata{link,145}
+Datastream version: 2
+scroll
+2
+
+black
+white
+\enddata{link,145}
+\enddata{link,145}
+\view{linkview,145,1145,0,0}
+ \begindata{link,146}
+4
+${ANDREWDIR}/help/search.help
+0
+0
+V
+\begindata{link,146}
+Datastream version: 2
+search
+2
+
+black
+white
+\enddata{link,146}
+\enddata{link,146}
+\view{linkview,146,1146,0,0}
+ \begindata{link,147}
+4
+${ANDREWDIR}/help/select.help
+0
+0
+V
+\begindata{link,147}
+Datastream version: 2
+select
+2
+
+black
+white
+\enddata{link,147}
+\enddata{link,147}
+\view{linkview,147,1147,0,0}
+ \begindata{link,148}
+4
+${ANDREWDIR}/help/setup.help
+0
+0
+V
+\begindata{link,148}
+Datastream version: 2
+setup
+2
+
+black
+white
+\enddata{link,148}
+\enddata{link,148}
+\view{linkview,148,1148,0,0}
+ \begindata{link,149}
+4
+${ANDREWDIR}/help/spellck.help
+0
+0
+V
+\begindata{link,149}
+Datastream version: 2
+spellck
+2
+
+black
+white
+\enddata{link,149}
+\enddata{link,149}
+\view{linkview,149,1149,0,0}
+ \begindata{link,150}
+4
+${ANDREWDIR}/help/splproc.help
+0
+0
+V
+\begindata{link,150}
+Datastream version: 2
+splproc
+2
+
+black
+white
+\enddata{link,150}
+\enddata{link,150}
+\view{linkview,150,1150,0,0}
+ \begindata{link,151}
+4
+${ANDREWDIR}/help/srctext.help
+0
+0
+V
+\begindata{link,151}
+Datastream version: 2
+srctext
+2
+
+black
+white
+\enddata{link,151}
+\enddata{link,151}
+\view{linkview,151,1151,0,0}
+ \begindata{link,152}
+4
+${ANDREWDIR}/help/steproc.help
+0
+0
+V
+\begindata{link,152}
+Datastream version: 2
+steproc
+2
+
+black
+white
+\enddata{link,152}
+\enddata{link,152}
+\view{linkview,152,1152,0,0}
+ \begindata{link,153}
+4
+${ANDREWDIR}/help/stlproc.help
+0
+0
+V
+\begindata{link,153}
+Datastream version: 2
+stlproc
+2
+
+black
+white
+\enddata{link,153}
+\enddata{link,153}
+\view{linkview,153,1153,0,0}
+ \begindata{link,154}
+4
+${ANDREWDIR}/help/stroffet.help
+0
+0
+V
+\begindata{link,154}
+Datastream version: 2
+stroffet
+2
+
+black
+white
+\enddata{link,154}
+\enddata{link,154}
+\view{linkview,154,1154,0,0}
+ \begindata{link,155}
+4
+${ANDREWDIR}/help/sys.help
+0
+0
+V
+\begindata{link,155}
+Datastream version: 2
+sys
+2
+
+black
+white
+\enddata{link,155}
+\enddata{link,155}
+\view{linkview,155,1155,0,0}
+ \begindata{link,156}
+4
+${ANDREWDIR}/help/table.help
+0
+0
+V
+\begindata{link,156}
+Datastream version: 2
+table
+2
+
+black
+white
+\enddata{link,156}
+\enddata{link,156}
+\view{linkview,156,1156,0,0}
+ \begindata{link,157}
+4
+${ANDREWDIR}/help/tags.help
+0
+0
+V
+\begindata{link,157}
+Datastream version: 2
+tags
+2
+
+black
+white
+\enddata{link,157}
+\enddata{link,157}
+\view{linkview,157,1157,0,0}
+ \begindata{link,158}
+4
+${ANDREWDIR}/help/tblproc.help
+0
+0
+V
+\begindata{link,158}
+Datastream version: 2
+tblproc
+2
+
+black
+white
+\enddata{link,158}
+\enddata{link,158}
+\view{linkview,158,1158,0,0}
+ \begindata{link,159}
+4
+${ANDREWDIR}/help/text.help
+0
+0
+V
+\begindata{link,159}
+Datastream version: 2
+text
+2
+
+black
+white
+\enddata{link,159}
+\enddata{link,159}
+\view{linkview,159,1159,0,0}
+ \begindata{link,160}
+4
+${ANDREWDIR}/help/tgsproc.help
+0
+0
+V
+\begindata{link,160}
+Datastream version: 2
+tgsproc
+2
+
+black
+white
+\enddata{link,160}
+\enddata{link,160}
+\view{linkview,160,1160,0,0}
+ \begindata{link,161}
+4
+${ANDREWDIR}/help/timeday.help
+0
+0
+V
+\begindata{link,161}
+Datastream version: 2
+timeday
+2
+
+black
+white
+\enddata{link,161}
+\enddata{link,161}
+\view{linkview,161,1161,0,0}
+ \begindata{link,162}
+4
+${ANDREWDIR}/help/tindex.help
+0
+0
+V
+\begindata{link,162}
+Datastream version: 2
+tindex
+2
+
+black
+white
+\enddata{link,162}
+\enddata{link,162}
+\view{linkview,162,1162,0,0}
+ \begindata{link,163}
+4
+${ANDREWDIR}/help/tmplts.help
+0
+0
+V
+\begindata{link,163}
+Datastream version: 2
+tmplts
+2
+
+black
+white
+\enddata{link,163}
+\enddata{link,163}
+\view{linkview,163,1163,0,0}
+ \begindata{link,164}
+4
+${ANDREWDIR}/help/toez.help
+0
+0
+V
+\begindata{link,164}
+Datastream version: 2
+toez
+2
+
+black
+white
+\enddata{link,164}
+\enddata{link,164}
+\view{linkview,164,1164,0,0}
+ \begindata{link,165}
+4
+${ANDREWDIR}/help/tour.help
+0
+0
+V
+\begindata{link,165}
+Datastream version: 2
+tour
+2
+
+black
+white
+\enddata{link,165}
+\enddata{link,165}
+\view{linkview,165,1165,0,0}
+ \begindata{link,166}
+4
+${ANDREWDIR}/help/tsckeys.help
+0
+0
+V
+\begindata{link,166}
+Datastream version: 2
+tsckeys
+2
+
+black
+white
+\enddata{link,166}
+\enddata{link,166}
+\view{linkview,166,1166,0,0}
+ \begindata{link,187}
+4
+${ANDREWDIR}/help/tscript.help
+0
+0
+V
+\begindata{link,187}
+Datastream version: 2
+tscript
+2
+
+black
+white
+\enddata{link,187}
+\enddata{link,187}
+\view{linkview,187,1187,0,0}
+ \begindata{link,188}
+4
+${ANDREWDIR}/help/txtproc.help
+0
+0
+V
+\begindata{link,188}
+Datastream version: 2
+txtproc
+2
+
+black
+white
+\enddata{link,188}
+\enddata{link,188}
+\view{linkview,188,1188,0,0}
+ \begindata{link,189}
+4
+${ANDREWDIR}/help/typproc.help
+0
+0
+V
+\begindata{link,189}
+Datastream version: 2
+typproc
+2
+
+black
+white
+\enddata{link,189}
+\enddata{link,189}
+\view{linkview,189,1189,0,0}
+ \begindata{link,190}
+4
+${ANDREWDIR}/help/unknown.help
+0
+0
+V
+\begindata{link,190}
+Datastream version: 2
+unknown
+2
+
+black
+white
+\enddata{link,190}
+\enddata{link,190}
+\view{linkview,190,1190,0,0}
+ \begindata{link,191}
+4
+${ANDREWDIR}/help/urlbutton.help
+0
+0
+V
+\begindata{link,191}
+Datastream version: 2
+urlbutton
+2
+
+black
+white
+\enddata{link,191}
+\enddata{link,191}
+\view{linkview,191,1191,0,0}
+ \begindata{link,192}
+4
+${ANDREWDIR}/help/valproc.help
+0
+0
+V
+\begindata{link,192}
+Datastream version: 2
+valproc
+2
+
+black
+white
+\enddata{link,192}
+\enddata{link,192}
+\view{linkview,192,1192,0,0}
+ \begindata{link,193}
+4
+${ANDREWDIR}/help/vi.help
+0
+0
+V
+\begindata{link,193}
+Datastream version: 2
+vi
+2
+
+black
+white
+\enddata{link,193}
+\enddata{link,193}
+\view{linkview,193,1193,0,0}
+ \begindata{link,194}
+4
+${ANDREWDIR}/help/wrtstmp.help
+0
+0
+V
+\begindata{link,194}
+Datastream version: 2
+wrtstmp
+2
+
+black
+white
+\enddata{link,194}
+\enddata{link,194}
+\view{linkview,194,1194,0,0}
+ \begindata{link,195}
+4
+${ANDREWDIR}/help/xwd2atk.help
+0
+0
+V
+\begindata{link,195}
+Datastream version: 2
+xwd2atk
+2
+
+black
+white
+\enddata{link,195}
+\enddata{link,195}
+\view{linkview,195,1195,0,0}
+ \begindata{link,196}
+4
+${ANDREWDIR}/help/zip.help
+0
+0
+V
+\begindata{link,196}
+Datastream version: 2
+zip
+2
+
+black
+white
+\enddata{link,196}
+\enddata{link,196}
+\view{linkview,196,1196,0,0}
+ \begindata{link,197}
+4
+${ANDREWDIR}/help/zipproc.help
+0
+0
+V
+\begindata{link,197}
+Datastream version: 2
+zipproc
+2
+
+black
+white
+\enddata{link,197}
+\enddata{link,197}
+\view{linkview,197,1197,0,0}
 
 \begindata{bp,13343120}
 Version 2
@@ -11123,7 +13252,9 @@ black
 white
 \enddata{link,10663584}
 \enddata{link,10663584}
-\view{linkview,10663584,26335,0,0}
+\view{linkview,10663584,26335,0,0} is a configuration file for the 
+\bold{2rtf} program.  It describes what ez commands are translated 
+into when converting to RTF.
 
 
 \section{atkvers.num}
@@ -11143,7 +13274,10 @@ black
 white
 \enddata{link,10641968}
 \enddata{link,10641968}
-\view{linkview,10641968,26336,0,0}
+\view{linkview,10641968,26336,0,0} contains the release version number 
+of the Andrew User Interface System.  Note that although many changes 
+have been made since 8.0, this will probably remain 8.0 until I decide 
+to tag a release.
 
 
 \section{global.ezinit}
@@ -11163,7 +13297,10 @@ black
 white
 \enddata{link,10642912}
 \enddata{link,10642912}
-\view{linkview,10642912,26337,0,0}
+\view{linkview,10642912,26337,0,0} is an ATK initialization file which is 
+read in when the editing command \bold{ez} is invoked.  The presence of 
+\typewriter($\{HOME\}/.ezinit} overrides rather than supplements this, 
+but an \typewriter{include} directive can be used to merge this in.
 
 
 \section{gnu.atkinit}
@@ -11183,7 +13320,9 @@ black
 white
 \enddata{link,10643936}
 \enddata{link,10643936}
-\view{linkview,10643936,26338,0,0}
+\view{linkview,10643936,26338,0,0} is an ATK initialization file which 
+is meant to be \typewriter{include}d into 
+\typewriter{$\{HOME\}/.ezinit} to make ez more like GNU emacs.
 
 
 \section{gnu.prf}
@@ -11203,7 +13342,10 @@ black
 white
 \enddata{link,10644880}
 \enddata{link,10644880}
-\view{linkview,10644880,26339,0,0}
+\view{linkview,10644880,26339,0,0} is a preferences file which is 
+meant to be inserted verbatim into a suitable user preference file 
+(usually \typewriter{$\{HOME\}/.preferences}) to make the ez editor 
+more like GNU emacs.
 
 
 \section{help.overviews}
@@ -11223,7 +13365,9 @@ black
 white
 \enddata{link,10646144}
 \enddata{link,10646144}
-\view{linkview,10646144,26340,0,0}
+\view{linkview,10646144,26340,0,0} is a configuration file for the 
+on-line help system.  It provides a list of overview topics, commonly 
+displayed in the upper-right panel.
 
 
 \section{help.programs}
@@ -11243,7 +13387,9 @@ black
 white
 \enddata{link,10647088}
 \enddata{link,10647088}
-\view{linkview,10647088,26341,0,0}
+\view{linkview,10647088,26341,0,0} is a configuration file for the 
+on-line help system.  It provides a list of program names (topics), 
+commonly  displayed in the lower-right panel.
 
 
 \section{html.init}
@@ -11263,7 +13409,11 @@ black
 white
 \enddata{link,10648080}
 \enddata{link,10648080}
-\view{linkview,10648080,26342,0,0}
+\view{linkview,10648080,26342,0,0} is an ATK initialization file which 
+is meant to be \typewriter{include}d into 
+\typewriter{$\{HOME\}/.ezinit} to provide better support for the 
+\sansserif{html} inset.
+
 
 
 \section{htmlmagic}
@@ -11283,48 +13433,61 @@ black
 white
 \enddata{link,10649056}
 \enddata{link,10649056}
-\view{linkview,10649056,26343,0,0}
+\view{linkview,10649056,26343,0,0} is a translation table used by the 
+\sansserif{html} inset to convert between entity names and ISO-Latin-1 
+characters.  It consists of a line with the number of entries, 
+followed by tab-separated pairs with the character on the left, and the 
+entity name on the right, one pair per line.  This file also supports 
+comments with a hash symbol on the left.
 
 
 \section{libafs.a}
 
-Symbols defined in util.h.
+Symbols defined in util.h.  See the API documentation for libafs.  This 
+library is a prime candidate for removal, and absorbtion into libutil.
 
 
 
 \section{libATKDynLoad.a}
 
-Symbols defined in ATKDoLoad.H.
+Symbols defined in ATKDoLoad.H.  See the API documentation for 
+libATKDynLoad.
 
-doload.o T doload       private
+The following symbols should be private, but .a-style archives do not 
+support this feature.  However, GNU \bold{ld}'s 
+\typewriter{--exclude-libs=ALL} at least prevents re-exporting (of 
+any symbols) in shared objects.
 
-doload.o B doload_trace private
+doload.o T doload
 
-
-
-\section{libATKLink.a}
-
-ATKArgv.o class ATKArgv  private? ATKArgv.H not installed
-
-ATKSymTab.o class ATKSymList  private? ATKSymTab.H not installed
-
-ATKSymTab.o class ATKSymTab   private? ATKSymTab.H not installed
-
-ATKLink.o class ATKLink  private? ATKLink.H not installed
+doload.o B doload_trace
 
 
 
 \section{libatkos.a}
 
-Symbols defined in atkos.h.
+Symbols defined in atkos.h.  See the API documentation for libatkos.
 
-oscommon.o D atkos_dummy_variable_for_ar  private
+The only reason the following symbol is present at all is that 
+apparantly some versions of \bold{ar} don't like empty object files.  
+In any case, it should be private, but .a-style archives do not 
+support this feature.  However, GNU \bold{ld}'s 
+\typewriter{--exclude-libs=ALL} at least prevents re-exporting (of 
+any symbols) in shared objects.
+
+oscommon.o D atkos_dummy_variable_for_ar
 
 
 
 \section{libcmenu.a}
 
-Symbols defined in headers: cmenu.h, cmerror.h, scache.h.
+Symbols defined in headers: cmenu.h, cmerror.h, scache.h.  See the API 
+documentation for libcmenu.
+
+The following symbols should be private, but .a-style archives do not 
+support this feature.  However, GNU \bold{ld}'s 
+\typewriter{--exclude-libs=ALL} at least prevents re-exporting (of 
+any symbols) in shared objects.
 
 cmdraw.o T CalculatePaneAndSelection private cmdraw.h
 
@@ -11356,19 +13519,19 @@ cmmanip.o T SelectionPtrToNum private cmintern.h
 
 \section{libcparser.a}
 
-Symbols defined in cparser.h.
+Symbols defined in cparser.h.  See the API documentation for libcparaser.
 
 
 
 \section{liberrors.a}
 
-Symbols defined in errprntf.h.
+Symbols defined in errprntf.h.  See the API documentation for liberrors.
 
 
 
 \section{libindex.a}
 
-Symbols defined in index.h.
+Symbols defined in index.h.  See the API documentation for libindex.
 
 
 
@@ -11377,13 +13540,14 @@ Symbols defined in index.h.
 Supplied version of jpeg library.  It is too old to be easily 
 replaced with a system jpeg library.  Installed headers are jconfig.h, 
 jinclude.h, jpegdata.h.  I didn't bother checking if all symbols 
-exported by this library are in the headers, or vice-versa.
+exported by this library are in the headers, or vice-versa.  There is 
+no additional documentation for this library.
 
 
 
 \section{libshadows.a}
 
-shadows.h
+Symbols defined in shadows.h.  See the API documentation for libshadows.
 
 
 
@@ -11392,7 +13556,8 @@ shadows.h
 Supplied version of tiff library.  It is too old to be easily 
 replaced with a system tiff library.  Installed headers are tiff.h, 
 tiffio.h.  I didn't bother checking if all symbols 
-exported by this library are in the headers, or vice-versa.
+exported by this library are in the headers, or vice-versa.  There is 
+no additional documentation for this library.
 
 
 
@@ -11400,7 +13565,8 @@ exported by this library are in the headers, or vice-versa.
 
 Symbols defined in util.h, unscribe.h, fdplumbi.h (and one in 
 system.h).  Note that fdplumbi.h is technically private.  Also, in 
-order to actually use the fdplumb functions, you must include fdplumb.h.
+order to actually use the fdplumb functions, you must include
+fdplumb.h.  See the API documentation for libutil.
 
 
 
@@ -11421,7 +13587,11 @@ black
 white
 \enddata{link,10655120}
 \enddata{link,10655120}
-\view{linkview,10655120,26344,0,0}
+\view{linkview,10655120,26344,0,0} is a configuration file for the 
+preferences editor, \bold{prefed}.  It is a concatenation of all 
+available \typewriter{.pr} files in \typewriter{${ANDREWDIR\}/lib/prs}, 
+which should list, describe and  indicate defaults for all available 
+preferences.  It is currently missing a few.
 
 
 \section{rtf2.trans}
@@ -11441,7 +13611,9 @@ black
 white
 \enddata{link,10656064}
 \enddata{link,10656064}
-\view{linkview,10656064,26345,0,0}
+\view{linkview,10656064,26345,0,0} is a configuration file for the 
+\bold{rtf2} program.  It describes what RTF commands are translated 
+into when converting to ez text.
 
 
 \section{scribe.trans}
@@ -11461,7 +13633,9 @@ black
 white
 \enddata{link,10657168}
 \enddata{link,10657168}
-\view{linkview,10657168,26346,0,0}
+\view{linkview,10657168,26346,0,0} is a configuration file for the 
+\bold{scribetext} program.  It describes what scribe commands are translated 
+into when converting to ez text.
 
 
 \section{shmenu}
@@ -11481,7 +13655,12 @@ black
 white
 \enddata{link,10658112}
 \enddata{link,10658112}
-\view{linkview,10658112,26347,0,0}
+\view{linkview,10658112,26347,0,0} is the default custom menu added to 
+all \bold{typescript} sessions.  It may be overridden by 
+\typewriter{$\{HOME\}/.shmenu}.  Each line is a menu descriptor, 
+followed by a colon, followed by a command to execute when this menu 
+entry is selected.  This command is a shell command, not an ATK 
+command.
 
 
 \section{special.ezinit}
@@ -11501,7 +13680,11 @@ black
 white
 \enddata{link,10659120}
 \enddata{link,10659120}
-\view{linkview,10659120,26348,0,0}
+\view{linkview,10659120,26348,0,0} is an ATK initialization file which 
+is meant to be \typewriter{include}d into 
+\typewriter{$\{HOME\}/.ezinit}.  It contains miscellaneous enhancements 
+from MIT users.
+
 \begindata{bp,7793632}
 Version 2
 n 0
@@ -11524,127 +13707,10 @@ black
 white
 \enddata{link,10560496}
 \enddata{link,10560496}
-\view{linkview,10560496,26349,0,0}
-
-
-
-\section{BookmankDemi}
-
-
-
-\section{BookmankLight}
-
-
-
-\section{CAxnmankDemiIt}
-
-
-
-\section{clmeskBoldItal}
-
-
-
-\section{Courier}
-
-
-
-\section{CourierkBold}
-
-
-
-\section{Helvetica}
-
-
-
-\section{HelveticakBold}
-
-
-
-\section{HourierkObliqu}
-
-
-
-\section{jbxjwinokBoldI}
-
-
-
-\section{JkczCXvwdekDem}
-
-
-
-\section{JvantGardekDem}
-
-
-
-\section{LkczCXvwdekBoo}
-
-
-
-\section{LvantGardekBoo}
-
-
-
-\section{OxLMnerkBoldOb}
-
-
-
-\section{PalatinokBold}
-
-
-
-\section{PalatinokRoman}
-
-
-
-\section{PpHetzxdLzelkl}
-
-
-
-\section{PpHetzxurySchl}
-
-
-
-\section{PpHlyoFDuySchl}
-
-
-
-\section{PpHutAuIrySchl}
-
-
-
-\section{SalatinokItali}
-
-
-
-\section{Symbol}
-
-
-
-\section{TimeskBold}
-
-
-
-\section{TimeskItalic}
-
-
-
-\section{TimeskRoman}
-
-
-
-\section{VpAtpankLightI}
-
-
-
-\section{wgxEvOncakBold}
-
-
-
-\section{YzqveticakObli}
-
-
-
-\section{ZapfDingbats}
+\view{linkview,10560496,26349,0,0} is a directory containing font 
+metrics for PostScript fonts used by ATK when printing.  Since the 
+list of supported fonts is hard-coded, there is no point in messing 
+with these files.
 
 \begindata{bp,14566368}
 Version 2
@@ -11981,8 +14047,6 @@ class AShadowLayers [dup - OFLEX] [primary source]
 
 class avalueflex_base [dup - OFLEX]
 
-class AVarSetPathSegs - should be private
-
 
 
 \section{libbasics.so}
@@ -12048,95 +14112,6 @@ class incrsc
 class incrsc_flex1
 
 class incrsc_flex2
-
-
-
-\section{libbdffont.so}
-
-The following should be private:
-
-T bdffont_EnsureDefns(bdffont*, long)
-
-
-\section{libbush.so}
-
-The following should be private:
-
-T SortByDate(bushv*, suite*, suite_item*, suite_item*)
-
-T SortByName(bushv*, suite*, suite_item*, suite_item*)
-
-T SortBySize(bushv*, suite*, suite_item*, suite_item*)
-
-T SortByType(bushv*, suite*, suite_item*, suite_item*)
-
-T SortBySuffix(bushv*, suite*, suite_item*, suite_item*)
-
-T FormatEntriesInfo(bushv*, tree_node*)
-
-
-
-\section{libchamp.so}
-
-Following should be private:
-
-T IncrementDate(tm*)
-
-T ResetButterTexts(enodeview*)
-
-T TranslateTmToHebrew(tm*, hebrewdatespec*)
-
-T IterateFlaggedEvents(int (*)(eventnode*, long), long)
-
-T ClearAllFlaggedEvents()
-
-T readdateintoeventnode(char*)
-
-T FlagEventsMatchingDate(tm*)
-
-T ReadDatesFromChampPath(char const*)
-
-T matchdate(tm*, datespec*)
-
-
-
-\section{libchart.so}
-
-The following should be private:
-
-T Palette_Hit(chartv*, suite*, suite_item*, long, view_MouseAction, long, long, long)
-
-T Hide_Palette(chartv*)
-
-T chartv_ReChart(chartv*, char*)
-
-T Expose_Palette(chartv*)
-
-T Activate_Viewer(chartv*)
-
-T Destroy_Palette(chartv*)
-
-T chartv_Add_Command(chartv*)
-
-T chartv_Save_Command(chartv*)
-
-T chartv_Print_Command(chartv*)
-
-T chartv_Delete_Command(chartv*)
-
-T chartv_ReChart_Command(chartv*, char*)
-
-T Palette_Titles_Handler(chartv*, suite*, suite_item*, long)
-
-T Printer(chartobj*, _IO_FILE*, char*, char*, int, void (*)(aptv*))
-
-
-
-\section{libcirclepi.so}
-
-Following symbol should be private:
-
-T inside_circle(double, double)
 
 
 
@@ -12404,331 +14379,11 @@ T SetupTics(consoleClass*, int, int, int, int, int, int, int, int)
 
 
 
-\section{libdeskey.so}
-
-The following should be private:
-
-T makePrefix(char*, char*, int)
-
-T describeKeymap(keymap*, char*, int, _IO_FILE*, long)
-
-T describeBinding(char*, int, int, proctable_Entry*, _IO_FILE*, long)
-
-
-
-\section{libdynsearch.so}
-
-The following should be private:
-
-T dynsearch_SearchAgain(textview*)
-
-T dynsearch_SearchAgainOpposite(textview*)
-
-
-
-\section{libeq.so}
-
-The following should be private:
-
-T eqview_Bar(eqview*)
-
-T eqview_Cut(eqview*)
-
-T eqview_doc()
-
-T eqview_Dot(eqview*)
-
-T eqview_Copy(eqview*)
-
-T eqview_Exit()
-
-T eqview_Root(eqview*)
-
-T eqview_Close(eqview*, char)
-
-T eqview_Paste(eqview*)
-
-T eqview_Prime(eqview*)
-
-T eqview_Format(eqview*, eq*, formula*, formula*, formula*, eqstyle)
-
-T eqview_lbrace(eqview*)
-
-T eqview_MoveUp(eqview*)
-
-T eqview_String(eqview*, char const*)
-
-T eqview_WriteC(eqview*)
-
-T eqview_Default(eqview*, char)
-
-T eqview_Special(eqview*, char)
-
-T eqview_WritePS(eqview*)
-
-T eqview_Extender(eqview*, char*, char**, long, long)
-
-T eqview_Fraction(eqview*)
-
-T eqview_MoveDown(eqview*)
-
-T eqview_WriteDvi(eqview*)
-
-T eqview_WriteEqn(eqview*)
-
-T eqview_DoSpecial(eqview*, char const*)
-
-T eqview_MoveRight(eqview*, eq*, long, long)
-
-T eqview_MoveToEnd(eqview*)
-
-T eqview_SubScript(eqview*)
-
-T eqview_Extendable(eqview*, formula*, formula*, formula*, eqstyle, char, char, long, long)
-
-T eqview_InitKeyMap(ATKregistryEntry*, menulist**, menulist**)
-
-T eqview_WriteTroff(eqview*)
-
-T eqview_AboveScript(eqview*)
-
-T eqview_BelowScript(eqview*)
-
-T eqview_MoveForward(eqview*)
-
-T eqview_SuperScript(eqview*)
-
-T eqview_DumpAndWrite(eqview*)
-
-T eqview_MoveBackward(eqview*)
-
-T eqview_DeleteForward(eqview*)
-
-T eqview_DeleteBackward(eqview*)
-
-T eqview_MoveToBeginning(eqview*)
-
-T eqview_CR(eqview*)
-
-class eqparse
-
-
-
-\section{libfad.so}
-
-The following should be private:
-
-T HaltAnimation(fadview*)
-
-T QueueAnimation(fadview*, view_MouseAction, long, long)
-
-T doan(aniinfo*)
-
-T queup(fadview*)
-
-
-
-\section{libfigure.so}
-
-The following should be private:
-
-T figoflow_OrderFlows(figobj*, long, figure*, long*)
-
-
-
-\section{libframe.so}
-
-The following should be private:
-
-T frame_Exit(frame*)
-
-T CancelNoExit(framemessage*)
-
-T frame_WriteFile(frame*)
-
-T frame_VisitNamedFile(frame*, char const*, int, int)
-
-T frame_VisitFilePrompting(frame*, char const*, int, int)
-
-
-
-\section{libgofig.so}
-
-All these should be private:
-
-T makegap(gflex*, int, int)
-
-class gflex
-
-
-
-\section{libhelp.so}
-
-The following should be private:
-
-T helpapp_ncproc
-
-T help_unique
-
-T SetupMenus(cache*)
-
-T SetupPanel(int, char const*, panel*, char const* const*)
-
-T HistoryHelp(help*, history_entry*, panel*)
-
-T SetupLpairs(help*)
-
-T OverviewHelp(help*, char*, panel*)
-
-T AddHistoryItem(help*, int, int)
-
-T help_aux_Print(help*)
-
-T help_GetHelpOn(help*, char const*, long, int, char const*)
-
-T help_aux_NewHelp(help*, long)
-
-T init_hlptextview(hlptextview*)
-
-T FreePanelListData()
-
-T help_aux_ExitProc(help*)
-
-T help_aux_AddBookmark(help*)
-
-T help_aux_AddSearchDir(help*)
-
-T ToggleProgramListSize(help*, long)
-
-T NextHelp(help*)
-
-T LowerCase(char*)
-
-
-
-\section{libhtml.so}
-
-All these should be private:
-
-T lineBullet(html*, long*, long*, int*)
-
-T checkBullet(html*, long, long, int*)
-
-T lineGlossary(html*, long*, long*, int*)
-
-T checkGlossary(html*, long, long, int*)
-
-T lineEnumerate(html*, long*, long*, int*)
-
-T checkEnumerate(html*, long, long, int*)
-
-T html_FindEntity(char*, long*, char*, char*)
-
-T stringEnumerate(int*)
-
-T htmlview_SetLink(htmlview*, long)
-
-T html_StyleToCodes(style*)
-
-T htmlview_AddHrule(htmlview*, long)
-
-T htmlview_AddImage(htmlview*, long)
-
-T htmlview_makeList(htmlview*, char*)
-
-T htmlview_SetImage(htmlview*, long)
-
-T htmlview_SetIndex(htmlview*, long)
-
-T htmlview_SetTitle(htmlview*, long)
-
-T html_MagicToString(char*, int*)
-
-T html_StringToMagic(char const*)
-
-T htmlview_AddRandom(htmlview*, long)
-
-T htmlview_unlistify(htmlview*, long)
-
-T htmlview_modifyList(htmlview*, long)
-
-T html_StyleToVariables(style*)
-
-T htmlview_EditAttributes(htmlview*, long)
-
-
-
 \section{libhtmltext.so}
 
-Following should be private:
-
-T webaccept
-
-T webclient
-
-T weblisten
-
-T NewFixupText(dataobject*)
-
-class htmlfontstack
+Following should be dealt with somehow:
 
 class avalueflex_base [dup - OFLEX]
-
-class webapp_histlist
-
-class formCB
-
-class fieldlist
-
-
-
-\section{libimagev.so}
-
-The following should be private:
-
-T DrawBorder(imagev*, rectangle*, rectangle*)
-
-T loadZPixmap(xwd*, char const*, _IO_FILE*, XWDHeader)
-
-T loadXYBitmap(xwd*, char const*, _IO_FILE*, XWDHeader)
-
-T loadXYPixmap(xwd*, char const*, _IO_FILE*, XWDHeader)
-
-T setorientation(tiff*, unsigned long)
-
-T writePS(imagev*, _IO_FILE*, int*, int*, int)
-
-T LoadTIFF(tif*, char const*, _IO_FILE*, int)
-
-
-
-\section{libincsearch.so}
-
-The following should be private:
-
-T strappend(char*, char const*, int, int)
-
-
-
-\section{liblayout.so}
-
-The following should be private:
-
-T RequestUpdate(boxview*)
-
-T Update(boxview*, view_UpdateType, rectangle*, int)
-
-T InitChild(boxview*)
-
-
-
-\section{liblookz.so}
-
-The following should be private:
-
-T CheckDelStyle(style*, text*, int, environment*)
-
-T FindClosestTab(tabrulerview*, long)
 
 
 
@@ -12991,1193 +14646,11 @@ class amarkt
 
 
 
-\section{libnote.so}
-
-The following should be private:
-
-T string_width(char const*, fontdesc*, graphic*)
-
-T back_to_start(text*, int)
-
-
-
-\section{libpcontrol.so}
-
-The following should be private:
-
-T displayval(calccon*)
-
-T calccon_clear(view*, long)
-
-T pcontrol_start(view*, long)
-
-T play(char*, int)
-
-T clear(calccon*)
-
-T setbl(spk_blk*, float)
-
-
-
-\section{libprefs.so}
-
-The following should be private:
-
-T pintv_EditAsText(pintv*, sbutton*, long)
-
-T pintv_GetKeepEvent(long)
-
-T pintv_GetReportEvent(long)
-
-
-
-\section{libraster.so}
-
-Following should be private:
-
-T PanCommand(rasterview*, long)
-
-T ReadRaster(rasterview*, raster*, char*)
-
-T ToolCommand(rasterview*, long)
-
-T TouchUpCommand(rasterview*, long)
-
-T WriteFileCommand(rasterview*)
-
-T MatExtendPossible(rasterview*)
-
-T DisplayBoxBlitOverlap(rasterview*, rasterimage*)
-
-T rasterview_CenterCommand(rasterview*, long)
-
-T rasterview_FindFrameHelp(frame*, im*)
-
-T rasterview_RealPostMenus(rasterview*)
-
-T rasterview_RotateCommand(rasterview*, long)
-
-T rasterview_ZoomInCommand(rasterview*, long)
-
-T rasterview_DisplayBoxHide(rasterview*)
-
-T rasterview_ZoomOutCommand(rasterview*, long)
-
-T rasterview_KillToolsetProc(rasterview*, char*)
-
-T rasterview_MakeToolsetProc(rasterview*, char*)
-
-T rasterview_RemoveInsetProc(rasterview*, char*)
-
-T rasterview_ResizeInsetProc(rasterview*, char*)
-
-T rasterview_ToggleCoordProc(rasterview*, char*)
-
-T rasterview_CorrectHighlight(rasterview*)
-
-T rasterview_CurrentDirectory(rasterview*, char*)
-
-T rasterview_DrawPanHighlight(rasterview*, short)
-
-T rasterview_ImprintInsetProc(rasterview*, long)
-
-T rasterview_OverlayInsetProc(rasterview*, char const*)
-
-T rasterview_ViewHideHighlight(rasterview*)
-
-T rasterview_ZoomToVisualBounds(rasterview*, long, long)
-
-T rasterview_CenterViewSelection(rasterview*)
-
-T rasterview_RegionSelectCommand(rasterview*, long)
-
-T rasterview_MoveDisplayBoxCommand(rasterview*, long)
-
-T rasterview_UpdateZoomedSelection(rasterview*, long, long)
-
-T rasterview_FinishMovingDisplayBox(rasterview*, long, long)
-
-T rasterview_DisplayBoxDrawHighlight(rasterview*, graphic*)
-
-T rasterview_DisplayBoxHideHighlight(rasterview*, graphic*)
-
-T rasterview_DisplayBoxWritePixImage(rasterview*, graphic*)
-
-T rasterview_SetPixelBehindDisplayBox(rasterview*, rasterimage*, long, long, int)
-
-T rasterview_ReflectChangesInExpansion(rasterview*, rectangle*)
-
-T rasterview_DisplayBoxDrawHighlightGray(rasterview*, graphic*)
-
-T rasterview_DisplayBoxWritePixImageFull(rasterview*, graphic*, rasterimage*)
-
-T rasterview_DrawHighlightBehindDisplayBox(rasterview*, graphic*, int)
-
-T rasterview_DisplayBoxHideOverlappingHighlight(rasterview*, graphic*, rasterimage*)
-
-
-
-\section{librofftext.so}
-
-Following should be private:
-
-T BeginStyle(rofftext*, char const*)
-
-T CloseStyle(rofftext*)
-
-T EvalString(rofftext*, char*, int*, int, int*, int*)
-
-T PopEnviron(rofftext*)
-
-T ChangeStyle(rofftext*, int, char const*)
-
-T PushEnviron(rofftext*, int)
-
-T putregister(rofftext*, char const*, int, RegFmt, int, int)
-
-T PopDiversion(rofftext*)
-
-T PushDiversion(rofftext*)
-
-T SetTempIndent(rofftext*, int)
-
-T CloseAllStyles(rofftext*)
-
-T CreateEnvirons(rofftext*)
-
-T DestroyContext(InputContext*)
-
-T CreateDiversion(rofftext*, diversionLevel*)
-
-T DestroyEnvirons(rofftext*)
-
-T DestroyDiversion(rofftext*, diversionLevel*)
-
-T get(rofftext*, trickle*)
-
-T put(rofftext*, int)
-
-T ung(rofftext*, int, trickle*)
-
-T Scan(rofftext*, trickle*, char const*)
-
-T tpush(rofftext*, trickle*, char const*, _IO_FILE*, char const*, int, int, char const* const*)
-
-T af_cmd(rofftext*, trickle*, int, int, char**)
-
-T am_cmd(rofftext*, trickle*, int, int, char**)
-
-T as_cmd(rofftext*, trickle*, int, int, char**)
-
-T bp_cmd(rofftext*, trickle*, int, int, char**)
-
-T br_cmd(rofftext*, trickle*, int, int, char**)
-
-T Bu_cmd(rofftext*, trickle*, int, int, char**)
-
-T c0_cmd(rofftext*, trickle*, int, int, char**)
-
-T c1_cmd(rofftext*, trickle*, int, int, char**)
-
-T ce_cmd(rofftext*, trickle*, int, int, char**)
-
-T Ce_cmd(rofftext*, trickle*, int, int, char**)
-
-T Ct_cmd(rofftext*, trickle*, int, int, char**)
-
-T da_cmd(rofftext*, trickle*, int, int, char**)
-
-T de_cmd(rofftext*, trickle*, int, int, char**)
-
-T di_cmd(rofftext*, trickle*, int, int, char**)
-
-T ds_cmd(rofftext*, trickle*, int, int, char**)
-
-T el_cmd(rofftext*, trickle*, int, int, char**)
-
-T Et_cmd(rofftext*, trickle*, int, int, char**)
-
-T ev_cmd(rofftext*, trickle*, int, int, char**)
-
-T ex_cmd(rofftext*, trickle*, int, int, char**)
-
-T fi_cmd(rofftext*, trickle*, int, int, char**)
-
-T Fn_cmd(rofftext*, trickle*, int, int, char**)
-
-T ft_cmd(rofftext*, trickle*, int, int, char**)
-
-T Gc_cmd(rofftext*, trickle*, int, int, char**)
-
-T getarg(rofftext*, trickle*, char*, int, int)
-
-T Hd_cmd(rofftext*, trickle*, int, int, char**)
-
-T ie_cmd(rofftext*, trickle*, int, int, char**)
-
-T if_cmd(rofftext*, trickle*, int, int, char**)
-
-T ig_cmd(rofftext*, trickle*, int, int, char**)
-
-T in_cmd(rofftext*, trickle*, int, int, char**)
-
-T Is_BOL(rofftext*)
-
-T it_cmd(rofftext*, trickle*, int, int, char**)
-
-T NewBuf()
-
-T nf_cmd(rofftext*, trickle*, int, int, char**)
-
-T nr_cmd(rofftext*, trickle*, int, int, char**)
-
-T ns_cmd(rofftext*, trickle*, int, int, char**)
-
-T PA_cmd(rofftext*, trickle*, int, int, char**)
-
-T PM_cmd(rofftext*, trickle*, int, int, char**)
-
-T Ps_cmd(rofftext*, trickle*, int, int, char**)
-
-T rm_cmd(rofftext*, trickle*, int, int, char**)
-
-T rr_cmd(rofftext*, trickle*, int, int, char**)
-
-T rs_cmd(rofftext*, trickle*, int, int, char**)
-
-T so_cmd(rofftext*, trickle*, int, int, char**)
-
-T sp_cmd(rofftext*, trickle*, int, int, char**)
-
-T sv_cmd(rofftext*, trickle*, int, int, char**)
-
-T ti_cmd(rofftext*, trickle*, int, int, char**)
-
-T tl_cmd(rofftext*, trickle*, int, int, char**)
-
-T tr_cmd(rofftext*, trickle*, int, int, char**)
-
-T wh_cmd(rofftext*, trickle*, int, int, char**)
-
-T Add2Buf(MagicBuf*, int)
-
-T DoBreak(rofftext*)
-
-T DoMacro(rofftext*, trickle*, int, int, char**)
-
-T FreeBuf(MagicBuf*)
-
-T Set_BOL(rofftext*)
-
-T EndStyle(rofftext*, int)
-
-T getstring(rofftext*, char const*)
-
-T InitChars(rofftext*)
-
-T InsertTbl(rofftext*, trickle*)
-
-T putstring(rofftext*, char const*, char const*)
-
-T SetIndent(rofftext*, int)
-
-T SortTraps(trap*, trap*)
-
-T WriteText(rofftext*)
-
-class num
-
-
-
-\section{libsrctext.so}
-
-The following should be private:
-
-T compressLines(textview*, char*)
-
-T decompressAll(textview*, long)
-
-T compressRegion(textview*, long)
-
-T decompressLines(textview*, char*)
-
-T styleStringDelim(perltextview*, char)
-
-T toggleOverstrike(rawtextview*, long)
-
-T dogtags_substitute(text*)
-
-T dogtags_substituteregion(text*, long*, long*)
-
-T MakeSureNotOverstrikingView(rawtext*, long, long)
-
-
-
-\section{libsuite.so}
-
-The following should be private (and possibly more in suite.H):
-
-T First_Test(suitetapp*, suite*, suite_item*, long, view_MouseAction, long, long, long)
-
-T Prior_Test(suitetapp*, suite*, suite_item*, long, view_MouseAction, long, long, long)
-
-T Change_Test(suitetapp*)
-
-T Name_Choice(suitetapp*, suite*, suite_item*, long, view_MouseAction, long, long, long)
-
-T Number_Test(suitetapp*, suite*, suite_item*, long, view_MouseAction, long, long, long)
-
-T Alphabet_Sort(suitetapp*, suite*, suite_item*, long, view_MouseAction, long, long, long)
-
-T Flavor_Choice(suitex1app*, suite*, suite_item*, int, view_MouseAction, long, long, long)
-
-T ItemPlaceTitle(suiteev*, suite_item*, long, long, int)
-
-T RW_Hit_Handler(suitetapp*, suite*, suite_item*, long, view_MouseAction, long, long, long)
-
-T suitecv_InsertNLCmd(suitecv*, long)
-
-T Text_Object_Handler(suitetapp*, suite*, suite_item*, long)
-
-T CheckForNewFirstVisible(suite*)
-
-T suiteev_HandleToggleHit(suiteev*, suite_item*, view_MouseAction, long, long, long)
-
-T TextView_Object_Handler(suitetapp*, suite*, suite_item*, long)
-
-T suiteev_HandleExclusiveHit(suiteev*, suite_item*, view_MouseAction, long, long, long)
-
-T suiteev_HandleInclusiveHit(suiteev*, suite_item*, view_MouseAction, long, long, long)
-
-T suiteev_HighlightFirstToLast(suiteev*, suite_item*, suite_item*)
-
-T Last_Test(suitetapp*, suite*, suite_item*, long, view_MouseAction, long, long, long)
-
-T Next_Test(suitetapp*, suite*, suite_item*, long, view_MouseAction, long, long, long)
-
-T Quit_Test(suitetapp*, suite*, suite_item*, long, view_MouseAction, long, long, long)
-
-
-
-\section{libsupport.so}
-
-The following should be private:
-
-T printp_init()
-
-T splitOffRight(nestedmark*, int)
-
-T environment__Dump(environment*, int)
-
-T print_EnsureClassInitialized()
-
-class stylesheet_maplist
-
-
-
 \section{libsupviews.so}
 
-The following should be private:
-
-AmenuOptionCardv_ATKregistry_
-
-class AmenuOptionCardv
-
-T motif_DrawBorder(view*, long, long, long, long, graphic*, graphic*, graphic*, int)
-
-T motif_scroll__Hit(oscroll*, view_MouseAction, long, long, long)
-
-T motif_Draw3dBorder(view*, long, long, long, long, int, graphic*)
-
-T normal_scroll__Hit(oscroll*, view_MouseAction, long, long, long)
-
-T motif_scroll__Update(oscroll*)
-
-T normal_scroll__Update(oscroll*)
-
-class popupwinfunc
+The following should be dealt with somehow:
 
 class avalueflex_base [dup - OFLEX]
-
-class democlass
-
-
-
-\section{libsym.so}
-
-The following should be private:
-
-T printdata(sym*)
-
-
-
-\section{libtable.so}
-
-The following should be private:
-
-T GetFormula(spread*, chunk*, char**)
-
-T k_TellUser(spread*, char const*)
-
-T m_separate(spread*, char)
-
-T rangeLimit(table*, chunk*)
-
-T WriteASCII(table*, _IO_FILE*, chunk*, int)
-
-T WriteTroff(spread*, _IO_FILE*, char const*, char const*, int)
-
-T DefineMenus(menulist*, keymap*, menulist*, keymap*, ATKregistryEntry*)
-
-T DestroyCell(table*, cell*)
-
-T m_drawedges(spread*, char)
-
-T m_precision(spread*, char)
-
-T syntaxError()
-
-T TellFormula(spread*)
-
-T CompareChunk(chunk*, chunk*)
-
-T k_AreYouSure(spread*, char const*)
-
-T k_DefineKeys(keymap*, keymap*, ATKregistryEntry*)
-
-T MakeStandard(extended_double_struct*, double)
-
-T m_eraseedges(spread*, char)
-
-T m_writeTroff(spread*, char)
-
-T spread_Width(spread*, int, int)
-
-T spread_Height(spread*, int, int)
-
-T IgnoreObserved(table*)
-
-T m_resetheights(spread*, char)
-
-T RemoveCellView(table*, cell*, view*)
-
-T SetCurrentCell(spread*, chunk*, int)
-
-T ComputeRowSizes(spread*)
-
-T k_WantToDiscard(spread*)
-
-T spread_printVal(table*, char*, extended_double_struct*, char, int)
-
-T ResetCurrentCell(spread*)
-
-T InitializeGraphic(spread*)
-
-T k_SetMessageState(spread*, int)
-
-T spread_FindSubview(spread*, cell*)
-
-T spread_PartialUpdate(spread*, view_UpdateType, rectangle*)
-
-T spread_WantHighlight(spread*)
-
-T spread_InvertRectangle(spread*, int, int, int, int)
-
-T spread_ScrollLogically(spread*, long, long, long, long, rectangle*)
-
-T spread_ClearSelectionBox(spread*)
-
-T spread_update_FullUpdate(spread*, view_UpdateType, rectangle*)
-
-T spread_ComputeAnchorOffsets(spread*, rectangle*)
-
-T eval(table*, extended_double_struct*, int, int, char const*)
-
-T idate(int, int, int)
-
-T m_cut(spread*, char)
-
-T rcref(table*, extended_double_struct*, int, int, int)
-
-T m_copy(spread*, char)
-
-T m_lock(spread*, char)
-
-T m_read(spread*, char)
-
-T AddCols(spread*, int, int)
-
-T AddRows(spread*, int, int)
-
-T isrange(extended_double_struct*)
-
-T m_imbed(spread*, char)
-
-T m_paste(spread*, char)
-
-T m_write(spread*, char)
-
-T enterfun(char const*, double (*)(), int)
-
-T m_format(spread*, char)
-
-T MouseHit(spread*, view_MouseAction, long, long, long)
-
-T m_rename(spread*, char)
-
-T ReadCell(table*, _IO_FILE*, char*, char**, char*, cell*)
-
-T CopyChunk(chunk*, chunk*)
-
-T enterfuns()
-
-T k_AskUser(spread*, char const*, char const*, char*, int)
-
-T MakeBogus(extended_double_struct*, char const*)
-
-T m_combine(spread*, char)
-
-T ReadASCII(table*, _IO_FILE*)
-
-T WriteCell(table*, _IO_FILE*, cell*, char**, int)
-
-
-
-\section{libtags.so}
-
-The following should be private:
-
-T firstField(text*, long)
-
-T getFunction(text*, long)
-
-T tags_FindTag(view*, char*, int)
-
-T tags_OpenCmd(view*, long)
-
-T tags_finished(int, view*, long*)
-
-T tags_FindTagCmd(view*, long)
-
-T tags_GotoTagCmd(view*, long)
-
-T TagsCreateWindow(buffer*)
-
-T tags_LoadTagFileCmd(view*, long)
-
-T tags_RebuildTagsFile(view*, long)
-
-T nextField(text*, long)
-
-
-
-\section{libtextobjs.so}
-
-The following should be private:
-
-T LookupFile(dired*, char const*)
-
-T Clear(chlist*)
-
-T LookupPos(dired*, long)
-
-
-
-\section{libtext.so}
-
-The following should be private:
-
-T OutputName(char*)
-
-T WriteStyle(environment*, char*, int, char*)
-
-T FindPrevTab(tabs*, long)
-
-T ConvertStyle(style*, long, long, long, long)
-
-T InitializeMod()
-
-T GetCurrentTime()
-
-T textview_UpCmd(textview*)
-
-T ConfirmReadOnly(textview*)
-
-T header_SetPrompt(text*, char const*)
-
-T textview_DownCmd(textview*)
-
-T textview_ExchCmd(textview*)
-
-T textview_JoinCmd(textview*)
-
-T textview_LookCmd(ATK*, long)
-
-T textview_MyLfCmd(textview*)
-
-T textview_NOOPCmd(textview*)
-
-T textview_YankCmd(textview*)
-
-T textview_DigitCmd(textview*, char)
-
-T textview_GetSpace(textview*, int)
-
-T textview_GetToCol(textview*, int)
-
-T textview_LastPage(textview*)
-
-T textview_NextPage(textview*)
-
-T textview_QuoteCmd(textview*)
-
-T textview_AddSpaces(textview*, long, long, long)
-
-T textview_CtrlAtCmd(textview*)
-
-T textview_DeleteCmd(textview*)
-
-T textview_IndentCmd(textview*)
-
-T textview_LineStart(textview*, long, long, long, long, long, long*, long*)
-
-T textview_RuboutCmd(textview*)
-
-T textview_SearchCmd(textview*, char*)
-
-T TwentyFourHourTime(textbuf*)
-
-T ConfirmViewDeletion(textview*, long, long)
-
-T DoReplaceCharacters(text*, long, long, char const*, long, int)
-
-T textview_BalanceCmd(textview*)
-
-T textview_ForwardCmd(textview*)
-
-T textview_InsertFile(textview*)
-
-T textview_objecttest(textview*, char const*, char const*)
-
-T textview_PlainerCmd(textview*, char*)
-
-T textview_RSearchCmd(textview*, char*)
-
-T textview_ToggleCase(textview*, long)
-
-T textview_TwiddleCmd(textview*)
-
-T tindex_HideInvIndex(view*)
-
-T textview_BackwardCmd(textview*)
-
-T textview_CursorToTop(textview*, long)
-
-T textview_GlitchUpCmd(textview*)
-
-T textview_GoToLineCmd(textview*)
-
-T textview_InsertNLCmd(textview*)
-
-T textview_KillLineCmd(textview*)
-
-T textview_MySoftLfCmd(textview*)
-
-T textview_NextLineCmd(textview*)
-
-T textview_OpenLineCmd(textview*)
-
-T textview_PlainestCmd(textview*)
-
-T textview_PutAfterCmd(textview*)
-
-T textview_SearchAgain(textview*)
-
-T textview_UnindentCmd(textview*)
-
-T textview_ViDeleteCmd(textview*)
-
-T textview_YankLineCmd(textview*)
-
-T textview_YankWordCmd(textview*)
-
-T tindex_ReadIndexFile(view*)
-
-T textview_CursorToLine(textview*, long)
-
-T textview_EndOfLineCmd(textview*)
-
-T textview_EndOfParaCmd(textview*)
-
-T textview_EndOfTextCmd(textview*)
-
-T textview_EndOfWordCmd(textview*)
-
-T textview_ExposeRegion(textview*, long, long, view*, rectangle const&, rectangle&, long&, long)
-
-T textview_ExtendEndCmd(textview*)
-
-T textview_InitializePS()
-
-T textview_LineToTopCmd(textview*)
-
-T textview_PutBeforeCmd(textview*)
-
-T textview_ShiftHomeCmd(textview*, char*)
-
-T textview_ShiftLeftCmd(textview*, char*)
-
-T textview_ViCommandCmd(textview*, long)
-
-T textview_ZapRegionCmd(textview*)
-
-T tindex_ExposeInvIndex(view*)
-
-T tindex_MakeIndexPlain(view*)
-
-T tindex_WriteIndexFile(view*)
-
-T textview_AppendNextCut(textview*)
-
-T textview_ChangeLineCmd(textview*)
-
-T textview_ChangeWordCmd(textview*)
-
-T textview_CheckSpelling(textview*)
-
-T textview_CopyRegionCmd(textview*)
-
-T textview_DeleteWordCmd(textview*)
-
-T textview_GlitchDownCmd(textview*)
-
-T textview_GrabReference(textview*, long)
-
-T textview_LowercaseWord(textview*, long)
-
-T textview_NextScreenCmd(textview*)
-
-T textview_OpenFootnotes(textview*)
-
-T textview_PrevScreenCmd(textview*)
-
-T textview_RuboutWordCmd(textview*)
-
-T textview_SelfInsertCmd(textview*, char)
-
-T textview_ShiftRightCmd(textview*, char*)
-
-T textview_ShowStylesCmd(textview*)
-
-T textview_UppercaseWord(textview*, long)
-
-T textview_ViGlitchUpCmd(textview*)
-
-T textview_ViYankLineCmd(textview*)
-
-T textview_YankWSWordCmd(textview*)
-
-T tindex_MakeIndexItalic(view*)
-
-T skipToNextBalanceSymbol(text*, long, int)
-
-T textview_CapitalizeWord(textview*, long)
-
-T textview_ChangeTemplate(textview*)
-
-T textview_CloseFootnotes(textview*)
-
-T textview_CursorToBottom(textview*, long)
-
-T textview_CursorToCenter(textview*, long)
-
-T textview_EndOfWSWordCmd(textview*)
-
-T textview_ExtendBeginCmd(textview*)
-
-T textview_ForwardParaCmd(textview*)
-
-T textview_ForwardWordCmd(textview*)
-
-T textview_InsertAtEndCmd(textview*)
-
-T textview_InsertFootnote(textview*)
-
-T textview_InsertInsetCmd(textview*, long)
-
-T textview_MITKillLineCmd(textview*)
-
-T textview_PlaceReference(textview*, long)
-
-T textview_ReplaceCharCmd(textview*)
-
-T textview_RotatePasteCmd(textview*)
-
-T textview_StartOfParaCmd(textview*)
-
-T textview_ToggleReadOnly(textview*)
-
-T textview_WriteFootnotes(textview*)
-
-T textview_BackKillWordCmd(textview*)
-
-T textview_BackwardParaCmd(textview*)
-
-T textview_BackwardWordCmd(textview*)
-
-T textview_ComputeViewArea(textview*, rectangle const&, long&, long&, long&, long&)
-
-T textview_DeleteWSWordCmd(textview*)
-
-T textview_ForeKillWordCmd(textview*)
-
-T textview_InitEmacsKeyMap(ATKregistryEntry*, menulist**)
-
-T textview_InsertPageBreak(textview*)
-
-T textview_PreviousLineCmd(textview*)
-
-T textview_QueryReplaceCmd(textview*)
-
-T textview_SelectRegionCmd(textview*)
-
-T textview_ToggleEditorCmd(textview*)
-
-T textview_ToggleViModeCmd(textview*)
-
-T textview_ViDeleteLineCmd(textview*)
-
-T textview_ViGlitchDownCmd(textview*)
-
-T textview_ExtendForwardCmd(textview*)
-
-T textview_ForwardWSWordCmd(textview*)
-
-T textview_GotoParagraphCmd(textview*)
-
-T textview_OpenLineAfterCmd(textview*)
-
-T textview_WhatParagraphCmd(textview*)
-
-T textview_YankEndOfWordCmd(textview*)
-
-T textview_BackwardWSWordCmd(textview*)
-
-T textview_ExposeStyleEditor(textview*)
-
-T textview_ExtendBackwardCmd(textview*)
-
-T textview_InsertEnvironment(textview*, char const*)
-
-T textview_KillWhiteSpaceCmd(textview*)
-
-T textview_NextScreenMoveCmd(textview*)
-
-T textview_OpenLineBeforeCmd(textview*)
-
-T textview_PlainInsertEnvCmd(textview*)
-
-T textview_PrevCharIsNewline(text*, long)
-
-T textview_PrevScreenMoveCmd(textview*)
-
-T textview_RightInsertEnvCmd(textview*)
-
-T textview_SubstituteCharCmd(textview*)
-
-T textview_ToggleColorStyles(textview*)
-
-T textview_ToggleLineDisplay(textview*, char*)
-
-T textview_BeginningOfLineCmd(textview*)
-
-T textview_BeginningOfTextCmd(textview*)
-
-T textview_ChangeSelectionCmd(textview*)
-
-T textview_DeleteEndOfWordCmd(textview*)
-
-T textview_GetNextNonSpacePos(textview*, int)
-
-T textview_ToggleExposeStyles(textview*)
-
-T textview_YankEndOfWSWordCmd(textview*)
-
-T textview_ChangeRestOfLineCmd(textview*)
-
-T textview_ForwardBeginWordCmd(textview*)
-
-T textview_get_hshift_interval(textview*)
-
-T textview_YankBackwardWordCmd(textview*)
-
-T textview_DeleteEndOfWSWordCmd(textview*)
-
-T textview_ExtendForwardLineCmd(textview*)
-
-T textview_InsertAtBeginningCmd(textview*)
-
-T textview_InsertSoftNewLineCmd(textview*)
-
-T textview_DeleteBackwardWordCmd(textview*)
-
-T textview_DestroyPrintingLayout(textview*)
-
-T textview_ExtendBackwardLineCmd(textview*)
-
-T textview_ForwardBeginWSWordCmd(textview*)
-
-T textview_InitViInputModeKeyMap(ATKregistryEntry*, menulist**)
-
-T textview_YankBackwardWSWordCmd(textview*)
-
-T textview_BeginningOfNextLineCmd(textview*)
-
-T textview_ExtendForwardScreenCmd(textview*)
-
-T textview_SearchAgainOppositeCmd(textview*)
-
-T textview_UpInsertEnvironmentCmd(textview*)
-
-T textview_BackwardsRotatePasteCmd(textview*)
-
-T textview_BeginningOfFirstWordCmd(textview*)
-
-T textview_DeleteBackwardWSWordCmd(textview*)
-
-T textview_ExtendBackwardScreenCmd(textview*)
-
-T textview_InitViCommandModeKeyMap(ATKregistryEntry*, menulist**)
-
-T textview_DisplayInsertEnvironment(textview*)
-
-T textview_DownInsertEnvironmentCmd(textview*)
-
-T textview_LeftInsertEnvironmentCmd(textview*)
-
-T textview_DestroyPrintingLayoutPlan(textview*)
-
-T textview_SizeOfLongestLineOnScreen(textview*)
-
-T textview_BeginningOfPreviousLineCmd(textview*)
-
-T Day(textbuf*)
-
-T Date(textbuf*)
-
-T Page(textbuf*)
-
-T Time(textbuf*)
-
-T Year(textbuf*)
-
-T Blank(textbuf*)
-
-T Date2(textbuf*)
-
-T Month(textbuf*)
-
-T initci(fnotev*)
-
-T charType(char)
-
-T GetStyle(fnote*, text*, int)
-
-T ShortYear(textbuf*)
-
-T TimeofDay(textbuf*)
-
-class textps_layout
-
-class textps_layout_history
-
-
-
-\section{libtoezapp.so}
-
-The following should be private:
-
-T ReadScribeFromFileToDoc(_IO_FILE*, text*, int, void (*)(long, char*))
-
-
-
-\section{libtree.so}
-
-The following should be private:
-
-T Node_Shadow_Node(treev*, tree_node*)
-
-T tree__NodeModified(tree*, tree_node*)
-
-T tree__SetNodeModified(tree*, tree_node*, char)
-
-
-
-\section{libtypescript.so}
-
-The following should be private:
-
-T SaveCommand(typescript*)
-
-T CompleteFname(typescript*, long)
-
-T CompleteCmdWork(typescript*, int)
-
-T CompleteTokenWork(typescript*, int)
-
-T CompleteCmdForward(typescript*, long)
-
-T CompleteCmdBackward(typescript*, long)
-
-T PossibleCompletions(typescript*, long)
-
-T CompleteTokenForward(typescript*, long)
-
-T CompleteTokenBackward(typescript*, long)
-
-T typescript_NoTextviewKey(typescript*, long)
-
-
-
-\section{libvalue.so}
-
-The following should be private:
-
-T fourwaysort(buttonV_rl*, buttonV_rl*)
-
-T parselabels(pianoV*, char*)
-
-T mentertext_GetBufP(mentertext*, char*)
-
-T valueview__GetCenter(valueview*, long*, long*)
-
-T etextview_ClearCommand(etextview*)
-
-T etextview_CancelCommand(etextview*)
-
-T etextview_ReturnCommand(etextview*)
-
-T metextview_ClearCommand(metextview*)
-
-T metextview_CancelCommand(metextview*)
-
-T metextview_ReturnCommand(metextview*)
-
-T locateHit(pianoV*, int, int)
-
-
-
-\section{libzip.so}
-
-All these (and maybe a few more) should be private:
-
-T Delete_Stream(zipedit*, zip_stream*, zip_pane*)
-
-T Show_Enclosure(zipedit*, zip_pane*)
-
-T Undelete_Stream(zipedit*, zip_stream*, zip_pane*)
-
-T Hide_Stream_Points(zipedit*, zip_stream*, zip_pane*)
-
-T palloc_create_pool(pool_type**, unsigned int)
-
-T zip_Deparse_Stream(zip*, zip_stream*)
-
-T zip_Enparse_Stream(zip*, zip_stream*)
-
-T palloc_destroy_pool(pool_type*)
-
-T Expose_Stream_Points(zipedit*, zip_stream*, zip_pane*)
-
-T Write_PrintSize_Info(zip*, _IO_FILE*)
-
-T zip_Open_Stream_File(zip*, zip_stream*, long)
-
-T Highlight_Pane_Points(zipedit*, zip_pane*)
-
-T Normalize_Pane_Points(zipedit*, zip_pane*)
-
-T zip_Close_Stream_File(zip*, zip_stream*)
-
-T zipedit_Enclose_Figure(zipedit*, zip_figure*, zip_pane*)
-
-T Highlight_Stream_Points(zipedit*, zip_stream*, zip_pane*)
-
-T Normalize_Stream_Points(zipedit*, zip_stream*, zip_pane*)
-
-T zipedit_Hide_BL_Palette(zipedit*, zip_pane*)
-
-T zipedit_Hide_BR_Palette(zipedit*, zip_pane*)
-
-T zipedit_Hide_TL_Palette(zipedit*, zip_pane*)
-
-T zipedit_Hide_TR_Palette(zipedit*, zip_pane*)
-
-T zipview_Restore_Overlay(zipview*, zip_pane*)
-
-T zipedit_Cancel_Enclosure(zipedit*, zip_pane*)
-
-T zip_Set_Stream_File_Name(zip*, zip_stream*, char const*)
-
-T zipview_Draw_Pane_Border(zipview*, zip_pane*)
-
-T zipview_Mark_Pane_Hidden(zipview*, zip_pane*)
-
-T zipview_Preserve_Overlay(zipview*, zip_pane*)
-
-T zipedit_Expose_BL_Palette(zipedit*, zip_pane*)
-
-T zipedit_Expose_BR_Palette(zipedit*, zip_pane*)
-
-T zipedit_Expose_TL_Palette(zipedit*, zip_pane*)
-
-T zipedit_Expose_TR_Palette(zipedit*, zip_pane*)
-
-T zipedit_Hide_Font_Palette(zipedit*, zip_pane*)
-
-T zipview_Mark_Pane_Exposed(zipview*, zip_pane*)
-
-T zipedit_Hide_Shade_Palette(zipedit*, zip_pane*)
-
-T zipview_Recoordinate_Panes(zipview*)
-
-T zipedit_Expose_Font_Palette(zipedit*, zip_pane*)
-
-T zipedit_Hide_Figure_Palette(zipedit*, zip_pane*)
-
-T zipedit_Hide_Selection_Menu(zipedit*)
-
-T zipedit_Redisplay_Edit_Pane(zipedit*, zip_pane*)
-
-T zipedit_Expose_Shade_Palette(zipedit*, zip_pane*)
-
-T zipedit_Next_Selected_Figure(zipedit*, zip_pane*, zip_figure*)
-
-T zipedit_Expose_Figure_Palette(zipedit*, zip_pane*)
-
-T zipedit_Expose_Selection_Menu(zipedit*)
-
-T zipedit_Reset_Editing_Control(zipedit*, zip_pane*)
-
-T Compute_Pane_Coordinate_Deltas(zipedit*, zip_pane*)
-
-T Highlight_Inferior_Image_Points(zipedit*, zip_image*, zip_pane*)
-
-T zipedit_Display_Background_Pane(zipedit*, zip_pane*)
-
-T zipedit_Prepare_Editing_Control(zipedit*, zip_pane*)
-
-T zipedit_Reset_Editing_Selection(zipedit*, zip_pane*)
-
-T zipview_Compute_Pane_Stretch_Factors(zipview*, zip_pane*)
-
-T zipprint_Write_Print_Datastream_Header(zipprint*)
-
-T zipprint_Write_Print_Datastream_Trailer(zipprint*)
-
-T palloc(pool_type*, unsigned int)
-
-T strhash(char*, unsigned int)
 
 
 
@@ -14185,7 +14658,7 @@ T strhash(char*, unsigned int)
 
 \begindata{link,11187424}
 4
-${ANDREWDIR}/libs/atk/libs.all
+${ANDREWDIR}/lib/atk/libs.all
 0
 0
 V
@@ -14522,7 +14995,14 @@ white
 
 \section{libgdev.a}
 
-Symbols defined in gestures/gdev.h, gestures/gdrv.h.
+Symbols defined in gestures/gdev.h, gestures/gdrv.h.  See the API 
+documentation for gestures/libgdev.
+
+The following symbols should be private, but .a-style archives do not 
+support this feature.  However, GNU \bold{ld}'s 
+\typewriter{--exclude-libs=ALL} at least prevents re-exporting (of 
+any symbols) in shared objects.
+
 
 x11r4.o T X11flush  private x11r4.h
 
@@ -14553,8 +15033,13 @@ x11r4.o T X11text  private x11r4.h
 \section{librecog.a}
 
 Symbols defined in gestures/matrix.h, gestures/sc.h, 
-gestures/fv.h, gestures/zdebug.h.
-Remainder should be private (currently in proto.h private header).
+gestures/fv.h, gestures/zdebug.h.  See the API 
+documentation for gestures/librecog.
+
+The following symbols should be private, but .a-style archives do not 
+support this feature.  However, GNU \bold{ld}'s 
+\typewriter{--exclude-libs=ALL} at least prevents re-exporting (of 
+any symbols) in shared objects.
 
 fv.o D dist_sq_threshold
 

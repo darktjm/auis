@@ -460,6 +460,7 @@ void AmenuEntry::Dispatch() {
 
 ATKdefineRegistryNoInit(AmenuCard, dataobject);
 
+class NO_DLL_EXPORT democlass;
 DEFINE_AACTION_FUNC_CLASS(democlass,AmenuCard);
 static void demofunc(AmenuCard *obj, const avalueflex &aux, const avalueflex &in, avalueflex &out) {
     printf("obj:%p\n", obj);
@@ -690,9 +691,9 @@ AmenuOptionv::AmenuOptionv() {
     card=NULL;
     win=NULL;
 }
-class AmenuOptionCardv : public AmenuCardv {
+class NO_DLL_EXPORT AmenuOptionCardv : public AmenuCardv {
   public:
-    virtual ATKregistryEntry *ATKregistry();
+//    virtual ATKregistryEntry *ATKregistry();
     class view * Hit (enum view_MouseAction action, long x, long y, long numberOfClicks)  ;
 };
 
@@ -701,8 +702,10 @@ AmenuOptionv::~AmenuOptionv() {
     card->Destroy();
 }
 
-
-ATKdefineRegistryNoInit(AmenuOptionCardv,AmenuCardv);
+// There is no way to make this "private" using the macro
+// The only reason to use this at all is in case someone inspects the
+// type, and expects the ATK type info to be accurate.
+//ATKdefineRegistryNoInit(AmenuOptionCardv,AmenuCardv);
 
 class view *AmenuOptionCardv::Hit(enum view_MouseAction action, long x, long y, long numberOfClicks) {
     view *ret=this;

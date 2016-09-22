@@ -31,10 +31,10 @@ static keymap *c_Map;
 static menulist *c_Menus;
 
 ATKdefineRegistry(compressv, view, compressv::InitializeClass);
-void compressLines(textview *self, char *rString);
-void decompressLines(textview *self, char *rString);
-void compressRegion(textview *self, long rock);
-void decompressAll(textview *self, long rock);
+static void compressLines(textview *self, char *rString);
+static void decompressLines(textview *self, char *rString);
+static void compressRegion(textview *self, long rock);
+static void decompressAll(textview *self, long rock);
 
 static struct bind_Description compressBindings[]={
     {"compressv-compress-lines",NULL,0, NULL,0,0, (proctable_fptr)compressLines, "Compresses lines in the specified range (or selected region) into a box; will prompt if none specified."},
@@ -230,7 +230,7 @@ static boolean getLinesFromUser(textview *self, char *rString, const char *promp
     return TRUE;
 }
 
-void compressLines(textview *self, char *rString)
+static void compressLines(textview *self, char *rString)
 {
     text *txt=(text *)(self)->GetDataObject();
     long mod=(txt)->GetModified();
@@ -252,7 +252,7 @@ void compressLines(textview *self, char *rString)
     (txt)->NotifyObservers(0);
 }
 
-void decompressLines(textview *self, char *rString)
+static void decompressLines(textview *self, char *rString)
 {
     text *txt=(text *)(self)->GetDataObject();
     long mod=(txt)->GetModified();
@@ -291,7 +291,7 @@ void decompressLines(textview *self, char *rString)
     (txt)->NotifyObservers(0);
 }
 
-void compressRegion(textview *self, long rock)
+static void compressRegion(textview *self, long rock)
 {
     text *txt=(text *)(self)->GetDataObject();
     long mod=(txt)->GetModified();
@@ -303,7 +303,7 @@ void compressRegion(textview *self, long rock)
     }
 }
 
-void decompressAll(textview *self, long rock)
+static void decompressAll(textview *self, long rock)
 {
     text *txt=(text *)(self)->GetDataObject();
     long mod=(txt)->GetModified();

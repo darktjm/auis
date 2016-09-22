@@ -201,12 +201,12 @@ END-SPECIFICATION  ************************************************************/
 #define  FigureSelection		2
 #define  ImageSelection			3
 
-extern int zipedit_Handle_Font_Family_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action, long  x , long y , long clicks );
-extern int zipedit_Handle_Font_Height_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action, long x , long              y , long clicks );
-extern int zipedit_Handle_Font_Italic_Selection( class zipedit  *self, zip_type_pane pane, enum view_MouseAction action , long x , long y , long  clicks );
-extern int zipedit_Handle_Font_Bold_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , long x , long  y , long clicks );
-extern int zipedit_Handle_Font_Sample_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , long x , long y , long clicks );
-extern int zipedit_Handle_Figure_Palette_Hit( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , int x , int  y , int clicks );
-extern int zipedit_Handle_Shade_Palette_Hit( class zipedit *self, zip_type_pane pane, enum view_MouseAction  action , long x , long y , long clicks );
+extern NO_DLL_EXPORT int zipedit_Handle_Font_Family_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action, long  x , long y , long clicks );
+extern NO_DLL_EXPORT int zipedit_Handle_Font_Height_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action, long x , long              y , long clicks );
+extern NO_DLL_EXPORT int zipedit_Handle_Font_Italic_Selection( class zipedit  *self, zip_type_pane pane, enum view_MouseAction action , long x , long y , long  clicks );
+extern NO_DLL_EXPORT int zipedit_Handle_Font_Bold_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , long x , long  y , long clicks );
+extern NO_DLL_EXPORT int zipedit_Handle_Font_Sample_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , long x , long y , long clicks );
+extern NO_DLL_EXPORT int zipedit_Handle_Figure_Palette_Hit( class zipedit *self, zip_type_pane pane, enum view_MouseAction action , int x , int  y , int clicks );
+extern NO_DLL_EXPORT int zipedit_Handle_Shade_Palette_Hit( class zipedit *self, zip_type_pane pane, enum view_MouseAction  action , long x , long y , long clicks );
 /** @} */
 #endif /* _zipedit_h_ */

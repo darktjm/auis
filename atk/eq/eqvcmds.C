@@ -41,48 +41,6 @@ const char eqview_cut_suffix[] = "} } ";
  * the screen eventually via the update mechanism.
  */
 
-void eqview_Default(class eqview  *self, char  c);
-void eqview_WriteC(class eqview  *self);
-void eqview_WritePS(class eqview  *self);
-void eqview_WriteEqn(class eqview  *self);
-void eqview_WriteTroff(class eqview  *self);
-void eqview_WriteDvi(class eqview  *self);
-long eqview_MoveRight(class eqview  *self, class eq  *eqptr, long  i , long  x);
-void eqview_MoveForward(class eqview  *self);
-void eqview_MoveBackward(class eqview  *self);
-void eqview_MoveToBeginning(class eqview  *self);
-void eqview_MoveToEnd(class eqview  *self);
-void eqview_DeleteBackward(class eqview  *self);
-void eqview_DeleteForward(class eqview  *self);
-void eqview_CR(class eqview  *self);
-void eqview_MoveUp(class eqview  *self);
-void eqview_MoveDown(class eqview  *self);
-void eqview_Bar(class eqview  *self);
-void eqview_Dot(class eqview  *self);
-void eqview_Prime(class eqview  *self);
-#ifdef notdef
-void eqview_Open(class eqview  *self, char  c);
-#endif /* notdef */
-void eqview_Close(class eqview  *self, char  c);
-void eqview_Cut(class eqview  *self);
-void eqview_Copy(class eqview  *self);
-void eqview_Paste(class eqview  *self);
-void eqview_Exit();
-void eqview_DumpAndWrite(class eqview  *self);
-void eqview_doc();
-void eqview_DoSpecial(class eqview  *self, const char  *s);
-void eqview_Special(class eqview  *self, char  c);
-void eqview_SuperScript(class eqview  *self);
-void eqview_SubScript(class eqview  *self);
-void eqview_AboveScript(class eqview  *self);
-void eqview_BelowScript(class eqview  *self);
-void eqview_String(class eqview  *self, const char  *s);
-void eqview_Root(class eqview  *self);
-void eqview_Fraction(class eqview  *self);
-void eqview_lbrace(class eqview  *self);
-class keymap *eqview_InitKeyMap(struct eqview_ATKregistry_   *classInfo, class menulist  **eqviewMenus , class menulist  **eqviewCutMenus);
-
-
 void eqview::Changed(enum changed  changed)
 {
     if ((int)changed > (int)this->changed)
@@ -93,7 +51,7 @@ void eqview::Changed(enum changed  changed)
  * Self-insert, basically
  */
 
-void eqview_Default(class eqview  *self, char  c)
+static void eqview_Default(class eqview  *self, char  c)
 {
     static char s[2] = " ";
     long pos, len, added;
@@ -116,22 +74,24 @@ void eqview_Default(class eqview  *self, char  c)
  * Parse-based output
  */
 
-void eqview_WriteC(class eqview  *self)
+static void eqview_WriteC(class eqview  *self)
 {
     (Eq(self))->Parse( stdout, 'c');
 }
 
-void eqview_WritePS(class eqview  *self)
+#if 0 /* commented out below */
+static void eqview_WritePS(class eqview  *self)
 {
     (Eq(self))->Parse( stdout, 'p');
 }
+#endif
 
-void eqview_WriteEqn(class eqview  *self)
+static void eqview_WriteEqn(class eqview  *self)
 {
     (Eq(self))->Parse( stdout, 'e');
 }
 
-void eqview_WriteTroff(class eqview  *self)
+static void eqview_WriteTroff(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     FILE *file = popen("eqn", "w");
@@ -139,7 +99,7 @@ void eqview_WriteTroff(class eqview  *self)
     pclose(file);
 }
 
-void eqview_WriteDvi(class eqview  *self)
+static void eqview_WriteDvi(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     FILE *file = popen("eqn | troff", "w");
@@ -148,7 +108,7 @@ void eqview_WriteDvi(class eqview  *self)
 }
 
 /*
-void eqview_PreviewMe(self)
+static void eqview_PreviewMe(self)
 struct eqview *self;
 {
     struct eq *eqptr = Eq(self);
@@ -162,7 +122,7 @@ struct eqview *self;
 }
 */
 /*
-void eqview_PrintMe(self)
+static void eqview_PrintMe(self)
 struct eqview *self;
 {
     struct eq *eqptr = Eq(self);
@@ -176,7 +136,7 @@ struct eqview *self;
 }
 */
 /*
-void eqview_WriteOutFile(self)
+static void eqview_WriteOutFile(self)
 struct eqview *self;
 {
     struct eq *eqptr = Eq(self);
@@ -211,7 +171,7 @@ struct eqview *self;
 }
 */
 /*
-void eqview_Save(self)
+static void eqview_Save(self)
 struct eqview *self;
 {
     struct eq *eqptr = Eq(self);
@@ -235,7 +195,7 @@ struct eqview *self;
 }
 */
 /*
-void eqview_ReadInFile(self)
+static void eqview_ReadInFile(self)
 struct eqview *self;
 {
     struct eq *eqptr = Eq(self);
@@ -281,7 +241,7 @@ struct eqview *self;
  * i points to a begin group.
  */
 
-long eqview_MoveRight(class eqview  *self, class eq  *eqptr, long  i , long  x)
+static long eqview_MoveRight(class eqview  *self, class eq  *eqptr, long  i , long  x)
 {
     int n = (eqptr)->FindEndGroup( i+1), closest = 0, distance = 1000000, j;
     for (j = i+1;  j<=n;  j++) {
@@ -302,7 +262,7 @@ long eqview_MoveRight(class eqview  *self, class eq  *eqptr, long  i , long  x)
     return closest;
 }
 
-void eqview_MoveForward(class eqview  *self)
+static void eqview_MoveForward(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     long n = (eqptr)->Size(), i, pos, len;
@@ -334,7 +294,7 @@ void eqview_MoveForward(class eqview  *self)
     (self)->Changed( EQVIEW_caret);
 }
 
-void eqview_MoveBackward(class eqview  *self)
+static void eqview_MoveBackward(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     int i, pos, len;
@@ -370,7 +330,7 @@ void eqview_MoveBackward(class eqview  *self)
     (self)->Changed( EQVIEW_caret);
 }
 
-void eqview_MoveToBeginning(class eqview  *self)
+static void eqview_MoveToBeginning(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     int pos, len;
@@ -392,7 +352,7 @@ void eqview_MoveToBeginning(class eqview  *self)
     (self)->Changed( EQVIEW_caret);
 }
 
-void eqview_MoveToEnd(class eqview  *self)
+static void eqview_MoveToEnd(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     int pos, len;
@@ -411,7 +371,7 @@ void eqview_MoveToEnd(class eqview  *self)
     (self)->Changed( EQVIEW_caret);
 }
 
-void eqview_DeleteBackward(class eqview  *self)
+static void eqview_DeleteBackward(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     int pos, len, start, stop;
@@ -447,7 +407,7 @@ void eqview_DeleteBackward(class eqview  *self)
     (self)->Changed( EQVIEW_eq);
 }
 
-void eqview_DeleteForward(class eqview  *self)
+static void eqview_DeleteForward(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     int pos, len, start, stop;
@@ -484,7 +444,7 @@ void eqview_DeleteForward(class eqview  *self)
     (self)->Changed( EQVIEW_eq);
 }
 
-void eqview_CR(class eqview  *self)
+static void eqview_CR(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     long i, pos, len, added, n = (eqptr)->Size();;
@@ -507,7 +467,7 @@ void eqview_CR(class eqview  *self)
     (self)->Changed( EQVIEW_eq);
 }
 
-void eqview_MoveUp(class eqview  *self)
+static void eqview_MoveUp(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     long i;
@@ -575,7 +535,7 @@ void eqview_MoveUp(class eqview  *self)
     (self)->Changed( EQVIEW_caret);
 }
 
-void eqview_MoveDown(class eqview  *self)
+static void eqview_MoveDown(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     long i;
@@ -660,7 +620,7 @@ void eqview_MoveDown(class eqview  *self)
  * Diacritical marks
  */
 
-void eqview_Bar(class eqview  *self)
+static void eqview_Bar(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     long pos, len, start, stop;
@@ -683,7 +643,7 @@ void eqview_Bar(class eqview  *self)
     (self)->Changed( EQVIEW_eq);
 }
 
-void eqview_Dot(class eqview  *self)
+static void eqview_Dot(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     long n, pos, len, added = 0;
@@ -708,7 +668,7 @@ void eqview_Dot(class eqview  *self)
     (self)->Changed( EQVIEW_eq);
 }
 
-void eqview_Prime(class eqview  *self)
+static void eqview_Prime(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     long n, pos, len, added = 0;
@@ -738,7 +698,7 @@ void eqview_Prime(class eqview  *self)
  */
 
 #ifdef notdef
-void eqview_Open(class eqview  *self, char  c)
+static void eqview_Open(class eqview  *self, char  c)
 {
     class eq *eqptr = Eq(self);
     long pos, len, added;
@@ -758,7 +718,7 @@ void eqview_Open(class eqview  *self, char  c)
 }
 #endif /* notdef */
 
-void eqview_Close(class eqview  *self, char  c)
+static void eqview_Close(class eqview  *self, char  c)
 {
     class eq *eqptr = Eq(self);
     long pos, len, added, level = 0, i, matched = 0;
@@ -827,7 +787,7 @@ void eqview_Close(class eqview  *self, char  c)
  * the cut buffer.
  */
 
-void eqview_Cut(class eqview  *self)
+static void eqview_Cut(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     long pos, len;
@@ -850,7 +810,7 @@ void eqview_Cut(class eqview  *self)
     (self)->Changed( EQVIEW_eq);
 }
 
-void eqview_Copy(class eqview  *self)
+static void eqview_Copy(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     long pos, len;
@@ -875,7 +835,7 @@ void eqview_Copy(class eqview  *self)
  * but the two are inconsistent wrt scripted zilches.
  */
 
-void eqview_Paste(class eqview  *self)
+static void eqview_Paste(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     int i;
@@ -957,20 +917,22 @@ void eqview_Paste(class eqview  *self)
     (self)->Changed( EQVIEW_eq);
 }
 
+#if 0 /* commented out below */
 /*
  * Perhaps this should go away
  */
 
-void eqview_Exit()
+static void eqview_Exit()
 {
     exit(0);
 }
+#endif
 
 /*
  * For debugging
  */
 
-void eqview_DumpAndWrite(class eqview  *self)
+static void eqview_DumpAndWrite(class eqview  *self)
 {
     FILE *file;
     class eq *eqptr = Eq(self);
@@ -983,14 +945,16 @@ void eqview_DumpAndWrite(class eqview  *self)
     (eqptr)->Dump( "/tmp/eq");
 }
 
+#if 0 /* use commented out below */
 /*
  * Online documentation
  */
 
-void eqview_doc()
+static void eqview_doc()
 {
     printf("not yet\n");
 }
+#endif
 
 /*
  * Special symbols prefixed with ESC
@@ -1000,7 +964,7 @@ void eqview_doc()
  * Called as a result of eqview_Special
  */
 
-void eqview_DoSpecial(class eqview  *self, const char  *s)
+static void eqview_DoSpecial(class eqview  *self, const char  *s)
 {
     long pos, len, added;
 
@@ -1176,7 +1140,7 @@ static void EqHelpProc(char  *partialKeyword, class eqview  *rock, message_workf
 }
 
 
-void eqview_Special(class eqview  *self, char  c)
+static void eqview_Special(class eqview  *self, char  c)
 {
     char name[100];
     long code;
@@ -1195,7 +1159,7 @@ void eqview_Special(class eqview  *self, char  c)
 }
 
 /*
-void eqview_Punt(self)
+static void eqview_Punt(self)
 struct eqview *self;
 {
     message_DisplayString(self, 0, "Bad command.");
@@ -1207,7 +1171,7 @@ struct eqview *self;
  * Scripts
  */
 
-void eqview_SuperScript(class eqview  *self)
+static void eqview_SuperScript(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     long pos, len, n;
@@ -1222,7 +1186,7 @@ void eqview_SuperScript(class eqview  *self)
     (self)->Changed( EQVIEW_eq);
 }
 
-void eqview_SubScript(class eqview  *self)
+static void eqview_SubScript(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     long pos, len, n;
@@ -1237,7 +1201,7 @@ void eqview_SubScript(class eqview  *self)
     (self)->Changed( EQVIEW_eq);
 }
 
-void eqview_AboveScript(class eqview  *self)
+static void eqview_AboveScript(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     long pos, len, n;
@@ -1252,7 +1216,7 @@ void eqview_AboveScript(class eqview  *self)
     (self)->Changed( EQVIEW_eq);
 }
 
-void eqview_BelowScript(class eqview  *self)
+static void eqview_BelowScript(class eqview  *self)
 {
     class eq *eqptr = Eq(self);
     long pos, len, n;
@@ -1272,7 +1236,7 @@ void eqview_BelowScript(class eqview  *self)
  * There should be a third parameter to keymap-called routines!
  */
 
-void eqview_String(class eqview  *self, const char  *s)
+static void eqview_String(class eqview  *self, const char  *s)
 {
     long pos, len, added;
 
@@ -1290,7 +1254,7 @@ void eqview_String(class eqview  *self, const char  *s)
     (self)->Changed( EQVIEW_eq);
 }
 
-void eqview_Root(class eqview  *self)
+static void eqview_Root(class eqview  *self)
 {
     long pos;
 
@@ -1299,7 +1263,7 @@ void eqview_Root(class eqview  *self)
     (self)->SetDotPosition( pos-2);
 }
 
-void eqview_Fraction(class eqview  *self)
+static void eqview_Fraction(class eqview  *self)
 {
     long pos;
 
@@ -1308,7 +1272,7 @@ void eqview_Fraction(class eqview  *self)
     (self)->SetDotPosition( pos-7);
 }
 
-void eqview_lbrace(class eqview  *self)
+static void eqview_lbrace(class eqview  *self)
 {
     eqview_String(self, "lbrace");
 }

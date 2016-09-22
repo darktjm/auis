@@ -59,9 +59,9 @@ typedef void (*cmdfptr)(class rofftext  *self,Trickle  t,boolean  br,int  argc,c
 ATKdefineRegistry(rofftext, text, rofftext::InitializeClass);
 void SetIndent(class rofftext  *self,int  u);
 void SetTempIndent(class rofftext  *self,int  u);
-boolean Is_BOL(class rofftext  *self);
+static boolean Is_BOL(class rofftext  *self);
 void Set_BOL(class rofftext  *self);
-void DestroyContext(IC  c);
+static void DestroyContext(IC  c);
 static Trickle topen(class rofftext  *self,char  *filename,FILE  *f,char  *s);
 static int g(class rofftext  *self,Trickle  t);
 void ung(class rofftext  *self,int  c,Trickle  t);
@@ -158,7 +158,7 @@ void SetTempIndent(class rofftext  *self,int  u)
 }
 /* set and check for beginning of line */
 
-boolean Is_BOL(class rofftext  *self)
+static boolean Is_BOL(class rofftext  *self)
 {
     return self->v_BOL;
 }
@@ -172,7 +172,7 @@ void Set_BOL(class rofftext  *self)
 
 /* destroy an input context structure */
 
-void DestroyContext(IC  c)
+static void DestroyContext(IC  c)
 {
     free(c);
 }

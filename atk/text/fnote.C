@@ -29,7 +29,7 @@ static class style *HStyle = NULL;
 
 
 ATKdefineRegistry(fnote, text, fnote::InitializeClass);
-class style *GetStyle(class fnote  *self,class text  *txt,int  openflag);
+static class style *GetStyle(class fnote  *self,class text  *txt,int  openflag);
 static boolean doupdate(class fnote  *self,class text  *text,long  pos,class environment  *env);
 static boolean copy(class fnote  *self,class text  *text);
 static boolean open(class fnote  *self,class text  *text);
@@ -39,7 +39,7 @@ typedef boolean (*doallcb)(class fnote *self, class text *t);
 static void DoAll(class text  *text, doallcb callBack,int  order);
 
 
-class style *GetStyle(class fnote  *self,class text  *txt,int  openflag)
+static class style *GetStyle(class fnote  *self,class text  *txt,int  openflag)
 {
     class style *Style = NULL;
     if(txt != self->parenttext){

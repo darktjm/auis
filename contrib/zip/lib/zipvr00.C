@@ -155,8 +155,8 @@ static const char				  ZIP_postscript_header2[] =
 
 
 
-int zipprint_Write_Print_Datastream_Header( class zipprint	          *self );
-int zipprint_Write_Print_Datastream_Trailer( class zipprint	          *self );
+extern NO_DLL_EXPORT int zipprint_Write_Print_Datastream_Header( class zipprint	          *self );
+extern NO_DLL_EXPORT int zipprint_Write_Print_Datastream_Trailer( class zipprint	          *self );
 static char * zipprint_Line_Attributes_String( class zipprint	          *self );
 
 

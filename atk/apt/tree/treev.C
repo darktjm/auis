@@ -411,7 +411,7 @@ static void Draw_Node_Title( class treev	       *self, struct node_shadow  *shad
 static void Draw_Node_Border( class treev	       *self, struct node_shadow  *shadow );
 static void Draw_Node_Connector( class treev	       *self, struct node_shadow  *shadow , struct node_shadow  *parent_shadow );
 static struct node_shadow * Node_Shadow( class treev	      *self, struct tree_node   *node );
-tree_type_node Node_Shadow_Node( class treev	      *self, struct tree_node   *node );
+static tree_type_node Node_Shadow_Node( class treev	      *self, struct tree_node   *node );
 static struct node_shadow * Create_Shadow( class treev	       *self );
 static long Generate_Shadows( class treev	       *self, struct tree_node    *node );
 static long Generate_Children_Shadows( class treev	      *self, struct tree_node   *node );
@@ -2710,7 +2710,7 @@ Node_Shadow( class treev	      *self, struct tree_node   *node )   /*=== might w
   return  shadow;
   }
 
-tree_type_node
+static tree_type_node
 Node_Shadow_Node( class treev	      *self, struct tree_node   *node )   /*=== might want to optimize !!! ===*/
       {
   struct tree_node  *candidate, *shadow_node = NULL;

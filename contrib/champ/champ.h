@@ -38,14 +38,14 @@ struct eventnode {
 
 typedef int (*champ_ifefptr)(struct eventnode *e, long rock);
 extern struct eventnode *RootEventNode;
-extern void ClearAllFlaggedEvents();
-extern void IterateFlaggedEvents(champ_ifefptr proc, long  rock);
-extern int FlagEventsMatchingDate(struct tm  *date);
-extern int matchdate(struct tm  *date, struct datespec  *spec);
-extern void IncrementDate(struct tm  *d);
-extern void TranslateTmToHebrew(struct tm  *date, struct hebrewdatespec  *hebdate);
-extern int ReadDatesFromChampPath(const char  *champpath);
-extern struct eventnode *readdateintoeventnode(char  *Buf);
+extern NO_DLL_EXPORT void ClearAllFlaggedEvents();
+extern NO_DLL_EXPORT void IterateFlaggedEvents(champ_ifefptr proc, long  rock);
+extern NO_DLL_EXPORT int FlagEventsMatchingDate(struct tm  *date);
+extern NO_DLL_EXPORT int matchdate(struct tm  *date, struct datespec  *spec);
+extern NO_DLL_EXPORT void IncrementDate(struct tm  *d);
+extern NO_DLL_EXPORT void TranslateTmToHebrew(struct tm  *date, struct hebrewdatespec  *hebdate);
+extern NO_DLL_EXPORT int ReadDatesFromChampPath(const char  *champpath);
+extern NO_DLL_EXPORT struct eventnode *readdateintoeventnode(char  *Buf);
 
 #define CHAMPERR_NOERR 0
 #define CHAMPERR_BADFORMAT 1

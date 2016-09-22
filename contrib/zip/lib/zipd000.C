@@ -47,7 +47,7 @@ END-SPECIFICATION  ************************************************************/
 #define	 Data this
 
 static int ZIP_Default_Exception_Handler( class zip	    	  *self );
-int strhash (char  *string, unsigned int size);
+static int strhash (char  *string, unsigned int size);
 
 
 struct zip_color_values *
@@ -519,11 +519,11 @@ typedef struct {
     struct block first_block;
 } pool_type;
 
-int palloc_create_pool (pool_type  **pool, unsigned int expected_size);
-unsigned char *palloc (pool_type  *pool, unsigned int size);
-unsigned int palloc_destroy_pool (pool_type  *pool);
+static int palloc_create_pool (pool_type  **pool, unsigned int expected_size);
+static unsigned char *palloc (pool_type  *pool, unsigned int size);
+static unsigned int palloc_destroy_pool (pool_type  *pool);
 
-int palloc_create_pool (pool_type  **pool, unsigned int expected_size)
+static int palloc_create_pool (pool_type  **pool, unsigned int expected_size)
         {
 /*===
     /! allocate the pool discriptor including the first block !/
@@ -553,7 +553,7 @@ int palloc_create_pool (pool_type  **pool, unsigned int expected_size)
     return (0);
 }
 
-unsigned char *palloc (pool_type  *pool, unsigned int size)
+static unsigned char *palloc (pool_type  *pool, unsigned int size)
         {
 return (unsigned char *) malloc( (size + 3) & (~3) );
 /*===
@@ -587,7 +587,7 @@ return (unsigned char *) malloc( (size + 3) & (~3) );
 ===*/
 }
 
-unsigned int palloc_destroy_pool (pool_type  *pool)
+static unsigned int palloc_destroy_pool (pool_type  *pool)
     {
 /*===
     struct block *this_block;
@@ -873,7 +873,7 @@ int symtab_scan_next (symtab_type  *symtab, unsigned char **symbol, struct user_
 * 							      *
 \*************************************************************/
 
-int strhash (char  *string, unsigned int size)
+static int strhash (char  *string, unsigned int size)
     
 {
     unsigned int    temp_sum = 0;

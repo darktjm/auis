@@ -17,11 +17,9 @@ enum image_fileType {
   pbm_imageType,			/* Portable Bit Map (PBM, PGM, PPM) */
   sunraster_imageType,			/* Sun Rasterfile */
   gif_imageType,			/* GIF Image */
-  rle_imageType,			/* Utah RLE Image */
   xwd_imageType,			/* X Window Dump */
   xbitmap_imageType,			/* X Bitmap */
   xpixmap_imageType,			/* X Pixmap */
-  g3_imageType,				/* G3 FAX Image */
   fbm_imageType,			/* FBM Image */
   pcx_imageType,			/* PC Paintbrush Image */
   img_imageType,			/* GEM Bit Image */

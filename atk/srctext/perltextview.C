@@ -28,7 +28,7 @@ static keymap *perl_Map;
 static menulist *perl_Menus;
 
 ATKdefineRegistry(perltextview, srctextview, perltextview::InitializeClass);
-void styleStringDelim(perltextview *self, char key);
+static void styleStringDelim(perltextview *self, char key);
 static void startLineComment(perltextview *self, char key, long before, long after);
 
 static struct bind_Description perltextBindings[]={
@@ -238,7 +238,7 @@ static void check_sub(perltextview *self, long pos)
 }
 
 
-void styleStringDelim(perltextview *self, char key)
+static void styleStringDelim(perltextview *self, char key)
 {
     perltext *ct=(perltext *)self->view::dataobject;
     long pos, newpos, startpos, stringpos=0, beforeInsert, afterInsert, len; 

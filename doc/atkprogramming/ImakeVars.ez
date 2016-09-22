@@ -317,7 +317,7 @@ DOTDOTIMAKE_CMD = $(IMAKE) -Timake.tmpl -I. -I../$(IRULESRC) -s Makefile
 
 DYNEXELIBS =	:allsys.mcr:
 
-DYNEXELIBS = $(BASEDIR)/lib/libATKDynLoad.a $(BASEDIR)/lib/libATKLink.a	
+DYNEXELIBS = $(BASEDIR)/lib/libATKDynLoad.a
 :allsys.mcr:
 
 

@@ -42,12 +42,12 @@ static int transferLine(FILE  *f1, FILE  *f2, boolean  really);
 static int removeOverridden(int  sort);
 static void describeAllKeys(class im  *im, int  sort);
 static long describeAllProcEntries(class im  *im);
-void describeBinding(char  *bind,int  len,int  runKey /* if == -1, not part of a run */,struct proctable_Entry  *pte,FILE  *f, long  mapno);
-void describeKeymap(class keymap  *map,char  *bind,int  len,FILE  *f, long  mapno);
+static void describeBinding(char  *bind,int  len,int  runKey /* if == -1, not part of a run */,struct proctable_Entry  *pte,FILE  *f, long  mapno);
+static void describeKeymap(class keymap  *map,char  *bind,int  len,FILE  *f, long  mapno);
 static void describeKeys(class im  *im, FILE  *f);
 static void describeProcEntry(struct proctable_Entry  *pe, FILE  *f);
 static const char *getProcDoc(struct proctable_Entry  *pte);
-void makePrefix(char  *buf ,char  *keys,int  len);
+static void makePrefix(char  *buf ,char  *keys,int  len);
 static int parseFile(FILE  *f, FILE  *d);
 static void parseBindFile(FILE  *f, FILE  *d);
 static void parseProcFile(FILE  *f, FILE  *d);
@@ -405,7 +405,7 @@ static long describeAllProcEntries(class im  *im)
 /* mapno - is an incremented number representing which keymap the entry is from
   this is used on the other end of the processing to eliminate those bindings which
   were overridden */
-void describeBinding(char  *bind,int  len,int  runKey /* if == -1, not part of a run */,struct proctable_Entry  *pte,FILE  *f, long  mapno)
+static void describeBinding(char  *bind,int  len,int  runKey /* if == -1, not part of a run */,struct proctable_Entry  *pte,FILE  *f, long  mapno)
 {
     char keys[50];
 
@@ -423,7 +423,7 @@ void describeBinding(char  *bind,int  len,int  runKey /* if == -1, not part of a
 }
 
 /* recursive function to go through entire active keymap */
-void describeKeymap(class keymap  *map,char  *bind,int  len,FILE  *f, long  mapno)
+static void describeKeymap(class keymap  *map,char  *bind,int  len,FILE  *f, long  mapno)
 {
     int key, runKey = -1;
     enum keymap_Types lastKeyType=keymap_Empty;
@@ -534,7 +534,7 @@ static const char *getProcDoc(struct proctable_Entry  *pte)
 
 
 
-void makePrefix(char  *buf ,char  *keys,int  len)
+static void makePrefix(char  *buf ,char  *keys,int  len)
 {
     while(len-- > 0){
 	sprintf(buf, "%s-", charToPrintable(*keys++));

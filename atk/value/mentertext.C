@@ -20,7 +20,7 @@ ATK_IMPL("mentertext.H")
 
 ATKdefineRegistry(mentertext, text, NULL);
 static void checkstyles(class mentertext  *self);
-int mentertext_GetBufP(class mentertext  *self,char  *buf);
+static int mentertext_GetBufP(class mentertext  *self,char  *buf);
 
 
 mentertext::mentertext()
@@ -46,7 +46,7 @@ static void checkstyles(class mentertext  *self)
 	(self->Style)->AddNewFontFace( fontdesc_Bold);
     }
 }
-int mentertext_GetBufP(class mentertext  *self,char  *buf)
+static int mentertext_GetBufP(class mentertext  *self,char  *buf)
 {
     long i,fin,elen,count;
     class environment *newenv;

@@ -63,11 +63,11 @@ static jmp_buf trap;
 ATKdefineRegistry(framecmds, ATK, framecmds::InitializeClass);
 
 typedef void (*excursionfptr)(class frame *self);
-void frame_Exit(class frame  *self);
+static void frame_Exit(class frame  *self);
 static int LocalReadFile(class frame  *self, const char  *fname, boolean  preserveBuffer);
-int frame_VisitFilePrompting(class frame  *self, const char  *prompt, boolean  newWindow, boolean  rawMode);
-int frame_VisitNamedFile(class frame  *self, const char  *filename, boolean  newWindow, boolean  rawMode);
-int frame_WriteFile(class frame  *self);
+static int frame_VisitFilePrompting(class frame  *self, const char  *prompt, boolean  newWindow, boolean  rawMode);
+extern NO_DLL_EXPORT int frame_VisitNamedFile(class frame  *self, const char  *filename, boolean  newWindow, boolean  rawMode);
+static int frame_WriteFile(class frame  *self);
 
 static SIGNAL_RETURN_TYPE SigHandler(int sig) {longjmp(trap, 1);}
 

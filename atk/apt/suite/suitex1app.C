@@ -13,7 +13,7 @@ ATK_IMPL("suitex1app.H")
 
 ATKdefineRegistry(suitex1app, application, NULL);
 
-class view * Flavor_Choice( class suitex1app  *self, class suite  *suite, struct suite_item  *item, int type, view_MouseAction action, long x, long y, long clicks );
+static class view * Flavor_Choice( class suitex1app  *self, class suite  *suite, struct suite_item  *item, int type, view_MouseAction action, long x, long y, long clicks );
 
 static const suite_Specification vanilla[] = {
     suite_ItemCaption( "   Vanilla" ),
@@ -110,7 +110,7 @@ suitex1app::Start( )
     return(TRUE);
 }
 
-class view *
+static class view *
 Flavor_Choice( class suitex1app  *self, class suite  *suite, struct suite_item  *item, int  type, view_MouseAction action, long x, long y, long clicks )
 {
     char msg[100];

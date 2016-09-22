@@ -108,7 +108,7 @@ static void insert(class sym  *self);
 static void resizeTable();
 static void resizeArray(long  **a , long  from , long  to);
 static void removeScopeFromScopes(sym_ScopeType  scope);
-void printdata(class sym  *self);
+static void printdata(class sym  *self);
 
 
 static long
@@ -523,7 +523,7 @@ sym::printtable()
 }
 
 
-void printdata(class sym  *self)
+static void printdata(class sym  *self)
 {
     if (self == NULL)
 	printf("NULL\n");

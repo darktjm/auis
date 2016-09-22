@@ -23,6 +23,6 @@ typedef enum doload_mode_enum {
 
 #define doload_extension ".do"
 
-extern int doload_trace;
+extern NO_DLL_EXPORT int doload_trace;
 
-extern char *doload(int fd, char *name, char **bp, long *len, char *path);
+extern NO_DLL_EXPORT char *doload(int fd, char *name, char **bp, long *len, char *path);

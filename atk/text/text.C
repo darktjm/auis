@@ -80,7 +80,7 @@ static long text_ListObjects(class text  *self, class dataobject  **list, long  
 static long text_ListObjects(class text  *self, class dataobject  **list, long  size);
 #endif /* !0 */
 static void ClearStyles(class text  *self);
-boolean DoReplaceCharacters(class text  *self, long  pos , long  len, const char  *repStr, long  repLen, boolean  alwaysp);
+static boolean DoReplaceCharacters(class text  *self, long  pos , long  len, const char  *repStr, long  repLen, boolean  alwaysp);
 static int ParseInteger(FILE  *file,long  *id);
 static boolean DiscardToEnddata(FILE  *file);
 #ifdef CHECK_BE1
@@ -95,7 +95,7 @@ static void WrapStyle(class text  *self,class environment  *curenv,long  pos);
 static void  CopySurroundingStyles(class text  *self, long  pos, class environment  *curenv);
 static void PlayTabs(struct text_statevector  *sv , struct text_statevector  *oldsv, class style  * styleptr);
 static void PlayStyle(struct text_statevector  *sv, class style  *styleptr);
-char * WriteStyle(class environment  *env, char  *outp , int  IsOpen, char  *outbuf);
+static char * WriteStyle(class environment  *env, char  *outp , int  IsOpen, char  *outbuf);
 static void PushLevel(char  *s, int  pos , int  len , int  IsReal);
 static char *PopLevel(int  *IsReal);
 static void DeleteStyleNode(struct stk  *styleNode);
@@ -482,7 +482,7 @@ void text::LengthChanged(long  pos, long  len)
     (this->rootEnvironment)->Update( pos, len);
 }
 
-boolean DoReplaceCharacters(class text  *self, long  pos , long  len, const char  *repStr, long  repLen, boolean  alwaysp)
+static boolean DoReplaceCharacters(class text  *self, long  pos , long  len, const char  *repStr, long  repLen, boolean  alwaysp)
 {
     class environment *environment;
 
@@ -2200,7 +2200,7 @@ const char * const TranslateStyleTo[] = {
     NULL
 };
 
-char *
+static char *
 WriteStyle(class environment  *env, char  *outp , int  IsOpen, char  *outbuf)
 {
     const char *name = env->data.style->name;

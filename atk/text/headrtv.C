@@ -88,18 +88,18 @@ struct textbuf {
 };
 
 ATKdefineRegistry(headrtv, view, headrtv::InitializeClass);
-struct tm *GetCurrentTime();
-void TwentyFourHourTime(struct textbuf *tbuf);
-void Blank(struct textbuf *tbuf);
-void Date(struct textbuf *tbuf);
-void Date2(struct textbuf *tbuf);
-void Day(struct textbuf *tbuf);
-void Month(struct textbuf *tbuf);
-void Page(struct textbuf *tbuf);
-void ShortYear(struct textbuf *tbuf);
-void TimeofDay(struct textbuf *tbuf);
-void Time(struct textbuf *tbuf);
-void Year(struct textbuf *tbuf);
+static struct tm *GetCurrentTime();
+static void TwentyFourHourTime(struct textbuf *tbuf);
+static void Blank(struct textbuf *tbuf);
+static void Date(struct textbuf *tbuf);
+static void Date2(struct textbuf *tbuf);
+static void Day(struct textbuf *tbuf);
+static void Month(struct textbuf *tbuf);
+static void Page(struct textbuf *tbuf);
+static void ShortYear(struct textbuf *tbuf);
+static void TimeofDay(struct textbuf *tbuf);
+static void Time(struct textbuf *tbuf);
+static void Year(struct textbuf *tbuf);
 #if 0
 static int findincommalist(char  *list,char  *sn);
 #endif
@@ -114,7 +114,7 @@ static void newline(class headrtv  *tv,long  rock);
 #endif
 
 
-struct tm *GetCurrentTime() {
+static struct tm *GetCurrentTime() {
     time_t t=time(0);
     return localtime(&t);
 }
@@ -138,7 +138,7 @@ static void real_ensure_another(struct textbuf *tbuf, long len)
 
 static char strbuf[256];
 
-void TwentyFourHourTime(struct textbuf *tbuf)
+static void TwentyFourHourTime(struct textbuf *tbuf)
 {
     struct tm *lt=GetCurrentTime();
     sprintf(strbuf, "%d:%s%d", lt->tm_hour, (lt->tm_min>9)?"":"0", lt->tm_min);
@@ -146,12 +146,12 @@ void TwentyFourHourTime(struct textbuf *tbuf)
     add_on(tbuf, strbuf);
 }
 
-void Blank(struct textbuf *tbuf)
+static void Blank(struct textbuf *tbuf)
 {
     /* do nothing */
 }
 
-void Date(struct textbuf *tbuf)
+static void Date(struct textbuf *tbuf)
 {
     struct tm *lt=GetCurrentTime();
     sprintf(strbuf, "%s %d, %d", months[lt->tm_mon], lt->tm_mday,BASEYEAR+lt->tm_year);
@@ -159,7 +159,7 @@ void Date(struct textbuf *tbuf)
     add_on(tbuf, strbuf);
 }
 
-void Date2(struct textbuf *tbuf)
+static void Date2(struct textbuf *tbuf)
 {
     struct tm *lt=GetCurrentTime();
     sprintf(strbuf, " %d %s %d",lt->tm_mday, months[lt->tm_mon], BASEYEAR+lt->tm_year);
@@ -167,28 +167,28 @@ void Date2(struct textbuf *tbuf)
     add_on(tbuf, strbuf);
 }
 
-void Day(struct textbuf *tbuf)
+static void Day(struct textbuf *tbuf)
 {
     struct tm *lt=GetCurrentTime();
     ensure_another(tbuf, 16);
     add_on(tbuf, day[lt->tm_wday]);
 }
 
-void Month(struct textbuf *tbuf)
+static void Month(struct textbuf *tbuf)
 {
     struct tm *lt=GetCurrentTime();
     ensure_another(tbuf, 16);
     add_on(tbuf, months[lt->tm_mon]);
 }
 
-void Page(struct textbuf *tbuf)
+static void Page(struct textbuf *tbuf)
 {
     ensure_another(tbuf, 6);
     add_on(tbuf, "\\\\n%");
     printline_haspage = TRUE;
 }
 
-void ShortYear(struct textbuf *tbuf)
+static void ShortYear(struct textbuf *tbuf)
 {
     struct tm *lt=GetCurrentTime();
     sprintf(strbuf, "%d", lt->tm_year);
@@ -196,7 +196,7 @@ void ShortYear(struct textbuf *tbuf)
     add_on(tbuf, strbuf);
 }
 
-void TimeofDay(struct textbuf *tbuf)
+static void TimeofDay(struct textbuf *tbuf)
 {
     struct tm *lt=GetCurrentTime();
     boolean am=TRUE;
@@ -211,7 +211,7 @@ void TimeofDay(struct textbuf *tbuf)
     add_on(tbuf, strbuf);
 }
 
-void Time(struct textbuf *tbuf)
+static void Time(struct textbuf *tbuf)
 {
     time_t t=time(0);
     char *ct=ctime(&t),*i;
@@ -221,7 +221,7 @@ void Time(struct textbuf *tbuf)
     add_on(tbuf, ct);
 }
 
-void Year(struct textbuf *tbuf)
+static void Year(struct textbuf *tbuf)
 {
     struct tm *lt=GetCurrentTime();
     sprintf(strbuf, "%d", BASEYEAR+lt->tm_year);

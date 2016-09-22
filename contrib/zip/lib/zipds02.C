@@ -102,7 +102,7 @@ END-SPECIFICATION  ************************************************************/
 #define	 Data			      (this)
 #define	 Objects(i)		    ((self->objects)[i])
 
-long zip_Enparse_Stream( class zip		      *self, struct zip_stream	      *stream );
+extern NO_DLL_EXPORT long zip_Enparse_Stream( class zip		      *self, struct zip_stream	      *stream );
 static int Write_Inferior_Image( class zip		      *self, zip_type_image	       image );
 static int Write_Image_Beginning( class zip		      *self, zip_type_image	       image );
 static int Write_Image_Ending( class zip		      *self, zip_type_image	       image );

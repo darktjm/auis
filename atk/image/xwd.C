@@ -142,9 +142,9 @@ typedef struct {
 
 ATKdefineRegistry(xwd, image, NULL);
 static int isXWD(const char       *name, FILE       *f, XWDHeader  *header);
-void loadXYBitmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader   header );
-void loadXYPixmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader  header );
-void loadZPixmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader  header );
+static void loadXYBitmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader   header );
+static void loadXYPixmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader  header );
+static void loadZPixmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader  header );
 
 
 static int isXWD(const char       *name, FILE       *f, XWDHeader  *header)
@@ -254,7 +254,7 @@ xwd::Ident( const char  *fullname )
 
 extern void flipBits(unsigned char *p, unsigned int len);
 
-void
+static void
 loadXYBitmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader   header )
                 { unsigned int    dlinelen;       /* length of scan line in data file */
   int    ilinelen;       /* length of line within image structure */
@@ -323,7 +323,7 @@ loadXYBitmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader   hea
  * build the destination.  1-bit images are handled by XYBitmap.
  */
 
-void
+static void
 loadXYPixmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader  header )
                 { int plane;
   unsigned int    dlinelen;       /* length of scan line in data file */
@@ -408,7 +408,7 @@ loadXYPixmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader  head
  * you gotta problem.  1-bit images are handled by XYBitmap.
  */
 
-void
+static void
 loadZPixmap( class xwd  *self, const char  *fullname, FILE  *f, XWDHeader  header )
                 { unsigned int    dlinelen;       /* length of scan line in data file */
   int    ilinelen;       /* length of scan line in image file */

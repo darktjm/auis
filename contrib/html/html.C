@@ -120,11 +120,11 @@ enum entityCodeEnum {
 };
 
 ATKdefineRegistry(html, text, html::InitializeClass);
-char* html_MagicToString(char * x,int * len);
-const char* html_StringToMagic(const char * str);
+static char* html_MagicToString(char * x,int * len);
+static const char* html_StringToMagic(const char * str);
 static void  storeVar(class style * style, const char * key, char * value);
 static void addVars(class style * style, char * vars);
-char* html_StyleToVariables(class style * style);
+static char* html_StyleToVariables(class style * style);
 static void ChangeTitle(class html * self, struct entityElement * ep, char * buf, long  len);
 static void ChangeIndexable(class html * self, struct entityElement * ep, char * buf, long  len);
 static const struct entityMapping* getEntityMapping(const char * string);
@@ -133,7 +133,7 @@ static struct entityElement* pushEntity(class html * self, long * pos, const str
 static struct entityElement* entityPeek(class html * self);
 static struct entityElement* withinEntity(class html * self, enum entityCodeEnum  code);
 static struct entityElement* withinEntityClass(class html * self, enum entityCodeEnum  code);
-int html_FindEntity(char * buf, long * pos, char * entity, char * vars);
+static int html_FindEntity(char * buf, long * pos, char * entity, char * vars);
 static void closeEntity(class html * self, struct entityElement * ep, long * pos, int  force);
 static void maybeDisplay(class html * self, long * pos, char * buf, long * inlen);
 static int newpar(class html * self, const struct entityMapping * eMapping, long  pos);
@@ -143,7 +143,7 @@ static void writeHeader(class html * self, FILE * file);
 static void  PutsRange(class html * self, char  *p, FILE  *fp, char  *ep);
 static const char* getHTML(class style * style);
 static char* outputNewlines(int  newlines, int  parImplied, int  brImplied, char * outp);
-int html_StyleToCodes(class style * style);
+static int html_StyleToCodes(class style * style);
 static char* findLocalFile(char * path, char * relativeRoot);
 
 
@@ -392,7 +392,7 @@ html::InitializeClass()
  * which represents that character.  len is set to the length of the return
  * string.
  */  
-char*
+static char*
 html_MagicToString(char * x,int * len)
 {
     struct HTMLMagicMapping* hm;
@@ -413,7 +413,7 @@ html_MagicToString(char * x,int * len)
  * If it is, then the "magic" string which the html translates to is returned.
  * else 0 is returned
  */
-const char*
+static const char*
 html_StringToMagic(const char * str)
 {
     struct HTMLMagicMapping* hm;
@@ -527,7 +527,7 @@ addVars(class style * style, char * vars)
     }
 }
 
-char*
+static char*
 html_StyleToVariables(class style * style)
 {
     /* XXX: We don't watch to see if buf is overrun! */
@@ -888,7 +888,7 @@ withinEntityClass(class html * self, enum entityCodeEnum  code)
   set to the character position at which the token should take effect.
   Note: The following routine is destructive to buf.
  */
-int
+static int
 html_FindEntity(char * buf, long * pos, char * entity, char * vars)
 {
     char* s;
@@ -1794,7 +1794,7 @@ html::TagItem(long  pos , long  len, const char * text, const char * itemS, clas
     return TRUE;
 }
 
-int
+static int
 html_StyleToCodes(class style * style)
 {
     char* s = (style)->GetAttribute( styleHTMLCodes);

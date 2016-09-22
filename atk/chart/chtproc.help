@@ -36,8 +36,6 @@ ReChart To Line;  "ReChart~10,Line~4"
 
 ReChart To Cartesian;   "ReChart~10,Cartesian~5"
 
-ReChart To Map;  "ReChart~10,Map~10"
-
 ReChart To Stack;  "ReChart~10,Stack~11"
 
 

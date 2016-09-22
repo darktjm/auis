@@ -29,7 +29,7 @@ OBJS = abbrpath.o andrwdir.o \
 	titles.o topen.o \
 	uerror.o ulsindex.o ulstlmat.o ulstrcmp.o \
 	usignal.o /* verbose.o obsolete since it cannot be ported to ANSI C */  \
-	writeall.o ossup.o osasm.o unscribe.o \
+	writeall.o osasm.o unscribe.o \
 	encode.o system.o xbasedir.o
 XCOMM  systypes.o
 #else

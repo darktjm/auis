@@ -124,9 +124,6 @@ public:
 /* Fake a get view routine. */
 #define oscroll_GetView scroll_GetScrollee
 
-void motif_Draw3dBorder();
-void motif_DrawBorder();
-
 /* package of routines for doing 3-D boxes and stuff like that */
 
 #define TD_DEPTH 	2	/* width of 3d border */

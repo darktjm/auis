@@ -37,9 +37,6 @@ ATK_IMPL("imagev.H")
 #include <sunraster.H>
 #include <gif.H>
 #include <tif.H>
-#ifdef THISWORKS
-#include <rle.H>
-#endif
 #include <xwd.H>
 #include <xbitmap.H>
 #include <xpixmap.H>
@@ -86,7 +83,7 @@ static class cursor *waitCursor;
 ATKdefineRegistry(imagev, view, imagev::InitializeClass);
 
 static void PostCursor( class imagev  *self, int  type );
-void DrawBorder( class imagev  *self, struct rectangle  *outer , struct rectangle  *inner );
+static void DrawBorder( class imagev  *self, struct rectangle  *outer , struct rectangle  *inner );
 void GetScreenCoordinates( class imagev  *self, struct rectangle  *pixRect );
 static const char * imageTypeName(enum image_fileType  type);
 static class image * image_Import( const char  *filename, enum image_fileType  type );
@@ -152,10 +149,6 @@ static struct bind_Description imagevBindings[] = {
 
 #ifdef THESEWORK
   {"imagev-import-faces", NULL, faces_imageType, "Import~30, FACES~18", faces_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) (proctable_fptr) Import_Cmd, "Import a faces image."},
-
-  {"imagev-import-rle", NULL, rle_imageType, "Import~30, RLE~19", rle_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a rle image."},
-
-  {"imagev-import-g3", NULL, g3_imageType, "Import~30, G3~20", g3_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a g3 FAX image."},
 
   {"imagev-import-fbm", NULL, fbm_imageType, "Import~30, FBM~21", fbm_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a fbm image."},
 
@@ -340,7 +333,7 @@ static const struct sbutton_info thebutton = {
 		   rectangle_Height(SrcRect))
 
 
-void
+static void
 DrawBorder( class imagev  *self, struct rectangle  *outer , struct rectangle  *inner )
 {
     if(self->bordersize==0) {
@@ -696,9 +689,6 @@ imageTypeName(enum image_fileType  type)
 	    break;
 	case tif_imageType:
 	    objName = "tif";
-	    break;
-	case rle_imageType:
-	    objName = "rle";
 	    break;
 	case xwd_imageType:
 	    objName = "xwd";

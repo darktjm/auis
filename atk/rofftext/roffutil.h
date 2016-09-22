@@ -19,20 +19,20 @@ struct evalstrdata {
 
 /* #ifndef AIX */
 /* utilities for rofftext */
-extern void Add2Buf(BUF b, int c);
-extern BUF NewBuf();
-extern void CreateEnvirons(struct rofftext  *self);
-extern void DestroyEnvirons(struct rofftext  *self);
-extern void PushEnviron(struct rofftext  *self,int  env);
-extern void PopEnviron(struct rofftext  *self);
-extern struct diversionLevel *CreateDiversion(struct rofftext  *self,struct diversionLevel  *c);
-extern void DestroyDiversion(struct rofftext  *self,struct diversionLevel  *d);
-extern void PushDiversion(struct rofftext  *self);
-extern void PopDiversion(struct rofftext  *self);
-extern const char *getstring(struct rofftext  *self,const char  *name);
+extern NO_DLL_EXPORT void Add2Buf(BUF b, int c);
+extern NO_DLL_EXPORT BUF NewBuf();
+extern NO_DLL_EXPORT void CreateEnvirons(struct rofftext  *self);
+extern NO_DLL_EXPORT void DestroyEnvirons(struct rofftext  *self);
+extern NO_DLL_EXPORT void PushEnviron(struct rofftext  *self,int  env);
+extern NO_DLL_EXPORT void PopEnviron(struct rofftext  *self);
+extern NO_DLL_EXPORT struct diversionLevel *CreateDiversion(struct rofftext  *self,struct diversionLevel  *c);
+extern NO_DLL_EXPORT void DestroyDiversion(struct rofftext  *self,struct diversionLevel  *d);
+extern NO_DLL_EXPORT void PushDiversion(struct rofftext  *self);
+extern NO_DLL_EXPORT void PopDiversion(struct rofftext  *self);
+extern NO_DLL_EXPORT const char *getstring(struct rofftext  *self,const char  *name);
 /* #endif // AIX */
 
-extern void FreeBuf(BUF  b);
-extern void EvalString(class rofftext *self, char *str, 
+extern NO_DLL_EXPORT void FreeBuf(BUF  b);
+extern NO_DLL_EXPORT void EvalString(class rofftext *self, char *str, 
 	int *result, int scale, boolean *absolute, boolean *relative);
-extern void InitChars(class rofftext *self);
+extern NO_DLL_EXPORT void InitChars(class rofftext *self);

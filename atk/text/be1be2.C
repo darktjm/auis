@@ -86,7 +86,7 @@ ATK_IMPL("be1be2.H")
 
 ATKdefineRegistry(be1be2, ATK, NULL);
 static long CVDots(long  amt, enum style_Unit  unit);
-boolean ConvertStyle(class style  *self, long  attr , long  opcode , long  optype , long  opparm);
+static boolean ConvertStyle(class style  *self, long  attr , long  opcode , long  optype , long  opparm);
 
 
 boolean be1be2::CheckBE1(class text  *text)
@@ -159,7 +159,7 @@ static long CVDots(long  amt, enum style_Unit  unit)
     return 0;
 }
 
-boolean ConvertStyle(class style  *self, long  attr , long  opcode , long  optype , long  opparm)
+static boolean ConvertStyle(class style  *self, long  attr , long  opcode , long  optype , long  opparm)
 {
     boolean retVal = TRUE;
 

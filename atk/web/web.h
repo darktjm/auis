@@ -1,1 +1,1 @@
-extern dataobject *NewFixupText(dataobject *obj);
+extern NO_DLL_EXPORT dataobject *NewFixupText(dataobject *obj);

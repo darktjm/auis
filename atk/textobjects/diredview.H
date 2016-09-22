@@ -40,5 +40,5 @@ public:
     class keystate *keystate;
     class menulist *menulist;
 };
-/** #} */
+/** @} */
 #endif /* _diredview_H_ */

@@ -49,7 +49,7 @@
 
 ATKdefineRegistry(gnucompat, ATK, gnucompat::InitializeClass);
 static boolean ConfirmReadOnly(class textview  *self, class text  *txt);
-int back_to_start (class text  *txt, int  pos);
+static int back_to_start (class text  *txt, int  pos);
 static void gcparafill (class textview  *self, long  key);
 static int is_itemp (class text  *txt, int  start , int  end);
 static void insertBullets (class textview  *self, long  key);
@@ -80,7 +80,7 @@ static boolean ConfirmReadOnly(class textview  *self, class text  *txt)
 /* unless we are at the end of the buffer, in which case */
 /* we point at the end of the buffer even though it be whitespace */
 
-int back_to_start (class text  *txt, int  pos)
+static int back_to_start (class text  *txt, int  pos)
 {
     int cur;
 

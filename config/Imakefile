@@ -80,7 +80,7 @@ TIFFINANDREW=$(TIFFLIB)
 RegisterLibraries(x,XLIBDIR,$(XLIBDIR),$(XLIBDIR)/libX11.a, $(DESTDIR)/lib/packages)
 
 
-ANDREWLIBS = $(BASEDIR)/lib/libATKDynLoad.a $(BASEDIR)/lib/libATKLink.a $(BASEDIR)/lib/libatkos.a $(BASEDIR)/lib/libcmenu.a $(BASEDIR)/lib/libcparser.a $(BASEDIR)/lib/libcui.a $(BASEDIR)/lib/libcuin.a $(BASEDIR)/lib/libdoload.a $(BASEDIR)/lib/libeli.a $(BASEDIR)/lib/liberrors.a $(BASEDIR)/lib/libindex.a $(JPEGINANDREW) $(BASEDIR)/lib/libmail.a $(BASEDIR)/lib/libmsshr.a $(BASEDIR)/lib/libmssrv.a $(BASEDIR)/lib/libossup.a $(BASEDIR)/lib/librxp.a $(BASEDIR)/lib/libshadows.a $(TIFFINANDREW) $(BASEDIR)/lib/libutil.a $(BASEDIR)/lib/libwpi.a
+ANDREWLIBS = $(BASEDIR)/lib/libATKDynLoad.a $(BASEDIR)/lib/libatkos.a $(BASEDIR)/lib/libcmenu.a $(BASEDIR)/lib/libcparser.a $(BASEDIR)/lib/libcui.a $(BASEDIR)/lib/libcuin.a $(BASEDIR)/lib/libdoload.a $(BASEDIR)/lib/libeli.a $(BASEDIR)/lib/liberrors.a $(BASEDIR)/lib/libindex.a $(JPEGINANDREW) $(BASEDIR)/lib/libmail.a $(BASEDIR)/lib/libmsshr.a $(BASEDIR)/lib/libmssrv.a $(BASEDIR)/lib/libossup.a $(BASEDIR)/lib/librxp.a $(BASEDIR)/lib/libshadows.a $(TIFFINANDREW) $(BASEDIR)/lib/libutil.a $(BASEDIR)/lib/libwpi.a
 
 RegisterLibraries(auis, ANDREWDIR,$(BASEDIR), \
 	$(ANDREWLIBS), $(DESTDIR)/lib/packages)
