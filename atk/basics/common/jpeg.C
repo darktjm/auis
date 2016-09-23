@@ -28,13 +28,12 @@
  */
 #include <andrewos.h>
 ATK_IMPL("jpeg.H")
-#include <setjmp.h>
 #include <image.H>
 #include <jpeg.H>
-#include <jinclude.h>
+#include <jpeglib.h>
+#include <setjmp.h>
 
 static int pWIDE, pHIGH;
-static byte r[256],g[256],b[256];
 static byte *pic = NULL;
 
 static int colorType, quality;
@@ -44,28 +43,18 @@ static byte *image8, *image24;
 static byte *CurImagePtr;
 static byte *pic24 = NULL;
 static long filesize;
-static jmp_buf jmpState;
-static external_methods_ptr emethods;
-
+struct my_error_mgr {
+  struct jpeg_error_mgr pub;
+  jmp_buf jmpState;
+};
 
 ATKdefineRegistry(jpeg, image, NULL);
 
-static void xv_jpeg_monitor_decompress(decompress_info_ptr  cinfo, long  loopcnt , long  looplimit);
-static void xv_jpeg_monitor_compress(compress_info_ptr  cinfo, long  loopcnt , long  looplimit);
-static void d_ui_method_selection(decompress_info_ptr  cinfo);
-static void output_init (decompress_info_ptr  cinfo);
-static void put_color_map (decompress_info_ptr  cinfo, int  num_colors, JSAMPARRAY  colormap);
-static void put_pixel_rows (decompress_info_ptr  cinfo, int  num_rows, JSAMPIMAGE  pixel_data);
-static void output_term (decompress_info_ptr  cinfo);
-static void jselwxv(decompress_info_ptr  cinfo);
-static void JPEG_Message (const char  *msgtext);
-static void JPEG_Error (const char  *msgtext);
+static void xv_jpeg_monitor(j_common_ptr  cinfo);
+static void d_ui_method_selection(j_decompress_ptr  cinfo);
+static void output_init (j_decompress_ptr  cinfo);
 int LoadJFIF(class jpeg  *jpeg, char  *fname, FILE  *f);
-static void c_ui_method_selection(compress_info_ptr  cinfo);
-static void input_init (compress_info_ptr  cinfo);
-static void get_input_row(compress_info_ptr  cinfo, JSAMPARRAY         pixel_row);
-static void input_term (compress_info_ptr  cinfo);
-static void jselrxv(compress_info_ptr  cinfo);
+static void input_init (j_compress_ptr  cinfo);
 static int writeJFIF(FILE  *fp);
 
 
@@ -86,7 +75,7 @@ jpeg::WriteNative(FILE  *file, const char  *filename)
     numColors = nc = (this)->RGBUsed();
   /* see if we can open the output file before proceeding */
     if(!(fp = file) &&
-       !(fp = fopen(filename, "w"))) {
+       !(fp = fopen(filename, "wb"))) {
 	printf("jpeg: couldn't open file %s\n", filename);
        return(-1);
     }
@@ -123,61 +112,45 @@ jpeg::WriteNative(FILE  *file, const char  *filename)
 /********* JPEG DECOMPRESSION FUNCTIONS **********/
 
 /**************************************************/
-static void xv_jpeg_monitor_decompress(decompress_info_ptr  cinfo, long  loopcnt , long  looplimit)
+static void xv_jpeg_monitor(j_common_ptr  cinfo)
 {
 #ifdef FOO  
   int a,b;
   double percent;
+  struct jpeg_progress_mgr progress = cinfo->progress;
 
-  a = cinfo->completed_passes;
-  b = cinfo->total_passes;
+  a = progress->completed_passes;
+  b = progress->total_passes;
 
-  percent = ((a + ((double) loopcnt / looplimit)) / (double) b) * 100.0;
-
-  fprintf(stderr,"jpeg: %lf done.  loop: %ld, %ld  pass: %d, %d\n",
-	  percent, loopcnt, looplimit, a, b);
-#endif
-}
-static void xv_jpeg_monitor_compress(compress_info_ptr  cinfo, long  loopcnt , long  looplimit)
-{
-#ifdef FOO  
-  int a,b;
-  double percent;
-
-  a = cinfo->completed_passes;
-  b = cinfo->total_passes;
-
-  percent = ((a + ((double) loopcnt / looplimit)) / (double) b) * 100.0;
+  percent = ((a + ((double) progress->pass_counter / progress->pass_limit)) / (double) b) * 100.0;
 
   fprintf(stderr,"jpeg: %lf done.  loop: %ld, %ld  pass: %d, %d\n",
-	  percent, loopcnt, looplimit, a, b);
+	  percent, progress->pass_counter, progress->pass_limit, a, b);
 #endif
 }
 
 static void
-d_ui_method_selection(decompress_info_ptr  cinfo)
+d_ui_method_selection(j_decompress_ptr  cinfo)
 {
   /* select output colorspace & quantization parameters */
-  if (cinfo->jpeg_color_space == CS_GRAYSCALE) {
-      cinfo->out_color_space = CS_GRAYSCALE;
+  if (cinfo->jpeg_color_space == JCS_GRAYSCALE) {
+      cinfo->out_color_space = JCS_GRAYSCALE;
       cinfo->quantize_colors = FALSE;
   }
   else {
-      cinfo->out_color_space = CS_RGB;
+      cinfo->out_color_space = JCS_RGB;
   }
-
-  jselwxv(cinfo);
 }
 
 
 /**************************************************/
 static void
-output_init (decompress_info_ptr  cinfo)
+output_init (j_decompress_ptr  cinfo)
 {
   pWIDE = cinfo->image_width;
   pHIGH = cinfo->image_height;
 
-  if (cinfo->out_color_space == CS_GRAYSCALE || 
+  if (cinfo->out_color_space == JCS_GRAYSCALE || 
       cinfo->quantize_colors == TRUE) {
     pic = (byte *) malloc(pWIDE * pHIGH);
     CurImagePtr = pic;
@@ -188,160 +161,75 @@ output_init (decompress_info_ptr  cinfo)
   }
 }
 
-
 /**************************************************/
-static void
-put_color_map (decompress_info_ptr  cinfo, int  num_colors, JSAMPARRAY  colormap)
+static void JPEG_Error(j_common_ptr cinfo)
 {
-  int i;
-  numColors = num_colors;
-  for (i = 0; i < num_colors; i++) {
-      r[i] = GETJSAMPLE(colormap[0][i]);
-      g[i] = GETJSAMPLE(colormap[1][i]);
-      b[i] = GETJSAMPLE(colormap[2][i]);
-  }
-}
-
-static void
-put_pixel_rows (decompress_info_ptr  cinfo, int  num_rows, JSAMPIMAGE  pixel_data)
-{
-  JSAMPROW ptr0, ptr1, ptr2;
-  long col;
-  long width = cinfo->image_width;
-  int row;
-  static unsigned int totrows = 0;
-
-  if (cinfo->out_color_space == CS_GRAYSCALE || 
-      cinfo->quantize_colors == TRUE) {
-      for (row = 0; row < num_rows; row++) {
-	  ptr0 = pixel_data[0][row];
-	  for (col = width; col > 0; col--) {
-	      *CurImagePtr++ = GETJSAMPLE(*ptr0++);
-	  }
-	  totrows++;
-      }
-  }
-  else {
-      for (row = 0; row < num_rows; row++) {
-	  ptr0 = pixel_data[0][row];
-	  ptr1 = pixel_data[1][row];
-	  ptr2 = pixel_data[2][row];
-	  for (col = width; col > 0; col--) {
-	      *CurImagePtr++ = GETJSAMPLE(*ptr0++);
-	      *CurImagePtr++ = GETJSAMPLE(*ptr1++);
-	      *CurImagePtr++ = GETJSAMPLE(*ptr2++);
-	  }
-	  totrows++;
-      }
-  }
-}
-
-static void output_term (decompress_info_ptr  cinfo)
-{
-}
-
-static void jselwxv(decompress_info_ptr  cinfo)
-     {
-  cinfo->methods->output_init = output_init;
-  cinfo->methods->put_color_map = put_color_map;
-  cinfo->methods->put_pixel_rows = put_pixel_rows;
-  cinfo->methods->output_term = output_term;
-}
-
-static void JPEG_Message (const char  *msgtext)
-{
-  char tempstr[200];
-
-  sprintf(tempstr, msgtext,
-	  emethods->message_parm[0], emethods->message_parm[1],
-	  emethods->message_parm[2], emethods->message_parm[3],
-	  emethods->message_parm[4], emethods->message_parm[5],
-	  emethods->message_parm[6], emethods->message_parm[7]);
-}
-
-
-/**************************************************/
-static void JPEG_Error (const char  *msgtext)
-{
-  char tempstr[200];
-  
-  sprintf(tempstr, msgtext,
-	  emethods->message_parm[0], emethods->message_parm[1],
-	  emethods->message_parm[2], emethods->message_parm[3],
-	  emethods->message_parm[4], emethods->message_parm[5],
-	  emethods->message_parm[6], emethods->message_parm[7]);
-  fprintf(stderr, "%s\n", tempstr);
-  (*emethods->free_all) ();	/* clean up memory allocation */
-  longjmp(jmpState,1);
+  cinfo->err->output_message(cinfo);
+  longjmp(((struct my_error_mgr *)cinfo)->jmpState, 1);
 }
 
 /*******************************************/
 int
-jpeg::Load( const char  *fname, FILE  *f )
+jpeg::Load( const char * volatile fname, FILE * volatile f )
 /*******************************************/
 {
-  /* These three structs contain JPEG parameters and working data.
-   * They must survive for the duration of parameter setup and one
-   * call to jpeg_decompress; typically, making them local data in the
-   * calling routine is the best strategy.
-   */
-  struct Decompress_info_struct cinfo;
-  struct Decompress_methods_struct dc_methods;
-  struct External_methods_struct e_methods;
+  struct jpeg_decompress_struct cinfo = {};
+  struct my_error_mgr jerr;
+  struct jpeg_progress_mgr prog;
+  JSAMPROW row_pointer[1];
+  int row_stride;
 
   numColors = 0;
   pWIDE = pHIGH = 0;
   pic = image8 = image24 = pic24 = CurImagePtr = NULL;
   /* Set up the input file */
 
-  if((cinfo.input_file = f) == NULL && fname &&
-       (cinfo.input_file = fopen(fname, "r")) == NULL) {
+  if(f)
+    fname = NULL;
+  else if(!fname || !(f = fopen(fname, "rb"))) {
       fprintf(stderr, "Couldn't open jpeg file %s.\n", fname);
       return(-1);
   }
-  
-  long filepos=ftell(cinfo.input_file);
+
+  long filepos=ftell(f);
   /* figure out the file size (for Informational Purposes Only) */
-  fseek(cinfo.input_file, 0L, 2);
-  filesize = ftell(cinfo.input_file);
-  fseek(cinfo.input_file, filepos, 0);
+  fseek(f, 0L, 2);
+  filesize = ftell(f);
+  fseek(f, filepos, 0);
 
   /* Set up longjmp for error recovery out of JPEG_Error */
-  if(setjmp(jmpState)) {
-    if(!f) fclose(cinfo.input_file);	/* close input file */
+  if(setjmp(jerr.jmpState)) {
+    jpeg_destroy_decompress(&cinfo);
+    if(fname) fclose(f);	/* close input file */
     return(-1);		/* no further cleanup needed */
   }
 
-  cinfo.output_file = NULL;	/* if no actual output file involved */
+  jerr.pub.error_exit = JPEG_Error; /* provide my own error/message rtns */
+  jerr.pub.trace_level = 0;	/* no tracing, thank you */
 
-  /* Initialize the system-dependent method pointers. */
-  cinfo.methods  = &dc_methods;
-  cinfo.emethods = &e_methods;
-  emethods = &e_methods;	/* save struct addr for possible access */
-
-  e_methods.error_exit = JPEG_Error; /* provide my own error/message rtns */
-  e_methods.trace_message = JPEG_Message;
-  e_methods.trace_level = 0;	/* no tracing, thank you */
-  e_methods.num_warnings = 0;	/* no warnings emitted yet */
-  e_methods.first_warning_level = 0; /* display first corrupt-data warning */
-  e_methods.more_warning_level = 3; /* but suppress additional ones */
-  jselmemmgr(&e_methods);	/* memory allocation routines */
-  dc_methods.d_ui_method_selection = d_ui_method_selection;
-
-  /* Set up default JPEG parameters. */
-  j_d_defaults(&cinfo, TRUE);
+  cinfo.err = jpeg_std_error(&jerr.pub);
+  jpeg_create_decompress(&cinfo);
 
   /* set up our progress-monitoring function */
-  cinfo.methods->progress_monitor = xv_jpeg_monitor_decompress;
-  
-  /* Set up to read a JFIF or baseline-JPEG file. */
-  /* A smarter UI would inspect the first few bytes of the input file */
-  /* to determine its type. */
-  jselrjfif(&cinfo);
+  prog.progress_monitor = xv_jpeg_monitor;
+  cinfo.progress = &prog;
+
+  jpeg_stdio_src(&cinfo, f);
+
+  /* set defaults based on JFIF header */
+  jpeg_read_header(&cinfo, TRUE);
+  output_init(&cinfo);
+  d_ui_method_selection(&cinfo);
 
   /* Do it! */
-  jpeg_decompress(&cinfo);
-
+  jpeg_start_decompress(&cinfo);
+  row_stride = cinfo.output_width * cinfo.output_components;
+  while(cinfo.output_scanline < cinfo.output_height) {
+    row_pointer[0] = &CurImagePtr[cinfo.output_scanline * row_stride];
+    (void) jpeg_read_scanlines(&cinfo, row_pointer, 1);
+  }
+  jpeg_finish_decompress(&cinfo);
+  
   if (pic24) {
       (this)->newTrueImage( cinfo.image_width, cinfo.image_height);
       memmove((this)->Data(), pic24, 3 * cinfo.image_width * cinfo.image_height);
@@ -350,12 +238,12 @@ jpeg::Load( const char  *fname, FILE  *f )
   else {
       unsigned int i, w = cinfo.image_width, h = cinfo.image_height;
 
-      if(cinfo.out_color_space == CS_GRAYSCALE)
+      if(cinfo.out_color_space == JCS_GRAYSCALE)
 	  (this)->newGreyImage( w, h, cinfo.data_precision);
       else
 	  (this)->newRGBImage( w, h, cinfo.data_precision);
       memmove((this)->Data(), pic, w * h);
-      if(cinfo.out_color_space == CS_GRAYSCALE) {
+      if(cinfo.out_color_space == JCS_GRAYSCALE) {
 	  (this)->RGBUsed() = (this)->RGBSize() = numColors = 256;
 	  for(i = 0; i < numColors-1; i++)
 	      (this)->RedPixel( i) =
@@ -364,16 +252,17 @@ jpeg::Load( const char  *fname, FILE  *f )
       }
       else {
 	  for(i = 0; i < numColors; i++) {
-	      (this)->RedPixel( i) = r[i] << 8;
-	      (this)->GreenPixel( i) = g[i] << 8;
-	      (this)->BluePixel( i) = b[i] << 8;
+	      (this)->RedPixel( i) = cinfo.colormap[0][i] << 8;
+	      (this)->GreenPixel( i) = cinfo.colormap[1][i] << 8;
+	      (this)->BluePixel( i) = cinfo.colormap[2][i] << 8;
 	  }
 	  (this)->RGBUsed() = (this)->RGBSize() = numColors;
       }
       free(pic);
   }
+  jpeg_destroy_decompress(&cinfo);
   /* Close input file */
-  if(!f) fclose(cinfo.input_file);
+  if(fname) fclose(f);
 
   /* Got it! */
   return 0;
@@ -383,26 +272,17 @@ jpeg::Load( const char  *fname, FILE  *f )
 /********* JPEG COMPRESSION FUNCTIONS **********/
 
 /**************************************************/
-static void c_ui_method_selection(compress_info_ptr  cinfo)
-{
-  /* If the input is gray scale, generate a monochrome JPEG file. */
-  if (cinfo->in_color_space == CS_GRAYSCALE)
-    j_monochrome_default(cinfo);
-}
-
-
-/**************************************************/
-static void input_init (compress_info_ptr  cinfo)
+static void input_init (j_compress_ptr  cinfo)
 {
   int w,h;
   if (colorType == IGREYSCALE) {
     cinfo->input_components = 1;
-    cinfo->in_color_space = CS_GRAYSCALE;
+    cinfo->in_color_space = JCS_GRAYSCALE;
     CurImagePtr = image8;
   }
   else {
     cinfo->input_components = 3;
-    cinfo->in_color_space = CS_RGB;
+    cinfo->in_color_space = JCS_RGB;
     CurImagePtr = image24;
   }
 
@@ -414,88 +294,48 @@ static void input_init (compress_info_ptr  cinfo)
 }
 
 
-/**************************************************/
-static void get_input_row(compress_info_ptr  cinfo, JSAMPARRAY         pixel_row)
-{
-  JSAMPROW ptr0, ptr1, ptr2;
-  long col;
-  static unsigned int totrows = 0;
-
-  if (cinfo->input_components == 1) {
-    ptr0 = pixel_row[0];
-    for (col = cinfo->image_width; col > 0; col--) {
-      *ptr0++ = *CurImagePtr++;
-    }
-    totrows++;
-  }
-  else {
-    ptr0 = pixel_row[0];
-    ptr1 = pixel_row[1];
-    ptr2 = pixel_row[2];
-    for (col = cinfo->image_width; col > 0; col--) {
-      *ptr0++ = *CurImagePtr++;
-      *ptr1++ = *CurImagePtr++;
-      *ptr2++ = *CurImagePtr++;
-    }
-    totrows++;
-  }
-}
-
-
-/**************************************************/
-static void input_term (compress_info_ptr  cinfo)
-{
-  /* no work required */
-}
-
-
-/**************************************************/
-static void jselrxv(compress_info_ptr  cinfo)
-{
-  cinfo->methods->input_init = input_init;
-  cinfo->methods->get_input_row = get_input_row;
-  cinfo->methods->input_term = input_term;
-}
-
-
-
 /*******************************************/
 static int writeJFIF(FILE  *fp)
 {
   int retval;
-  struct Compress_info_struct cinfo;
-  struct Compress_methods_struct c_methods;
-  struct External_methods_struct e_methods;
-
-  
-  /* Initialize the system-dependent method pointers. */
-  cinfo.methods  = &c_methods;
-  cinfo.emethods = &e_methods;
+  struct jpeg_compress_struct cinfo = {};
+  JSAMPROW row_pointer[1];
+  int row_stride;
+  struct my_error_mgr jerr;
+  struct jpeg_progress_mgr prog;
 
   /* Set up longjmp for error recovery out of JPEG_Error */
-  if((retval = setjmp(jmpState)))
+  if((retval = setjmp(jerr.jmpState))) {
+    jpeg_destroy_compress(&cinfo);
     return retval;		/* no further cleanup needed */
+  }
 
-  e_methods.error_exit = JPEG_Error; /* provide my own error/message rtns */
-  e_methods.trace_message = JPEG_Message;
-  e_methods.trace_level = 0;	/* no tracing, thank you */
-  jselmemmgr(&e_methods);	/* memory allocation routines */
-  c_methods.c_ui_method_selection = c_ui_method_selection;
+  jerr.pub.error_exit = JPEG_Error; /* provide my own error/message rtns */
+  jerr.pub.trace_level = 0;	/* no tracing, thank you */
+
+  cinfo.err = jpeg_std_error(&jerr.pub);
+  jpeg_create_compress(&cinfo);
 
 /* set up our progress-monitoring function */
-  cinfo.methods->progress_monitor = xv_jpeg_monitor_compress;
+  prog.progress_monitor = xv_jpeg_monitor;
+  cinfo.progress = &prog;
 
 /* Select input and output */
-  cinfo.input_file  = NULL;
-  cinfo.output_file = fp;       /* already open */
+  input_init(&cinfo);
+  jpeg_stdio_dest(&cinfo, fp);
 
-  j_c_defaults(&cinfo, quality, FALSE);
-  jselrxv(&cinfo);		/* we'll be reading from memory */
-  jselwjfif(&cinfo);		/* and writing to JFIF file format */
+  jpeg_set_defaults(&cinfo);
+  jpeg_set_quality(&cinfo, quality, FALSE);
 
   /* Do it! */
-  jpeg_compress(&cinfo);
-  
+  jpeg_start_compress(&cinfo, TRUE);
+  row_stride = cinfo.input_components * cinfo.image_width;
+  while(cinfo.next_scanline < cinfo.image_height) {
+    row_pointer[0] = &CurImagePtr[cinfo.next_scanline * row_stride];
+    jpeg_write_scanlines(&cinfo, row_pointer, 1);
+  }
+  jpeg_finish_compress(&cinfo);
+  jpeg_destroy_compress(&cinfo);
   return 0;
 }
 

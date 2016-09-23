@@ -30,7 +30,7 @@ BASELIBDIR = $(BASEDIR)/lib
 DEBUGLIBS=/usr/local/lib/libtb.a /usr/contrib/lib/malloc/libdbmalloc.a
 #endif
 
-LIBS =$(BASELIBDIR)/libcmenu.a $(BASELIBDIR)/libshadows.a $(BASELIBDIR)/libjpeg.a  $(BASELIBDIR)/liberrors.a $(DYNEXELIBS) $(UTILLIB)
+LIBS =$(BASELIBDIR)/libcmenu.a $(BASELIBDIR)/libshadows.a $(JPEGLIB)  $(BASELIBDIR)/liberrors.a $(DYNEXELIBS) $(UTILLIB)
 
 ATKLibrary(basics, $(OBJS), $(LIBS),  -L$(XLIBDIR) -lX11 $(DEBUGLIBS) $(LIBMATHLIB),)
 InstallATKLibrary(basics, $(DESTDIR)/lib/atk)
