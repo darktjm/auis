@@ -73,7 +73,7 @@ RegisterLibraries(auis, ANDREWDIR,$(BASEDIR), \
 
 defaults:
 	$(RM) defaults ,defaults
-	echo auis x jpeg tiff>,defaults
+	echo auis x >,defaults
 	mv ,defaults defaults
 clean::
 	$(RM) defaults ,defaults

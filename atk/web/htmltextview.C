@@ -802,8 +802,7 @@ static int displayAtts(htmltextview *self, htmlenv *env, htmlenv *rootenv)
 	else if (env->environment::type == environment_View) {  /* view */
 	    sname= ((dataobject *) env->environment::data.viewref->dataObject)->GetTypeName();
 	    if (ATK::IsTypeByName(sname, "img")) sname= "img";
-	    else if (ATK::IsTypeByName(sname, "gif")) sname= "img";
-	    else if (ATK::IsTypeByName(sname, "jpeg")) sname= "img";
+	    else if (ATK::IsTypeByName(sname, "imageio")) sname= "img";
 	    else if (ATK::IsTypeByName(sname, "hr")) sname= "hr";
 	    else if (ATK::IsTypeByName(sname, "table")) sname= "table";
 	    else if (ATK::IsTypeByName(sname, "fnote")) sname= "fnote";

@@ -12,8 +12,6 @@
 char *AndrewDirStr=NULL;
 char *XLibDirStr=NULL;
 const char *AFSBaseDirStr=NULL;
-const char *JpegLibDirStr=NULL;
-const char *TiffLibDirStr=NULL;
 
 char builddir[MAXPATHLEN+1];
 char *buildpath=NULL;
@@ -466,10 +464,6 @@ static char *TranslatePath(const char *q)
 	strcpy(filebuf, XLibDirStr);
     } else if(strncmp(q, "AFSBASEDIR", 10)==0) {
 	strcpy(filebuf, AFSBaseDirStr);
-    } else if(strncmp(q, "JPEGLIBDIR", 10)==0) {
-	strcpy(filebuf, JpegLibDirStr);
-    } else if(strncmp(q, "TIFFLIBDIR", 10)==0) {
-	strcpy(filebuf, TiffLibDirStr);
     } else {
 	char *v;
 	v=getenv(q);
@@ -1112,10 +1106,6 @@ int main(int argc, char **argv)
     AFSBaseDirStr=getenv("AFSBASEDIR");
     if(AFSBaseDirStr==NULL) AFSBaseDirStr=AFSBASEDIR;
     AFSBaseDirStr=NewString(AFSBaseDirStr);
-    JpegLibDirStr=getenv("JPEGLIBDIR");
-    if(JpegLibDirStr) JpegLibDirStr=JPEGLIBDIR;
-    TiffLibDirStr=getenv("TIFFLIBDIR");
-    if(TiffLibDirStr) TiffLibDirStr=TIFFLIBDIR;
     
     orderfilename=NewString( AndrewDir("/lib/genstatl/liborder"));
 

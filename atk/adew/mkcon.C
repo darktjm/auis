@@ -50,7 +50,6 @@ static const char defstring[] =
 
 #define AWKPROG AndrewDir("/lib/arbiters/conpros.awk")
 #define INSETAWKPROG AndrewDir("/lib/arbiters/instpros.awk")
-#define MAKEFILE  (const char *) AndrewDir("/lib/arbiters/makefile.arb") 
 #define START "* user code begins here for "
 #define END "* user code ends here for "
 #define STARTCHAR '/'
@@ -369,7 +368,6 @@ static void usage(char  *s)
     fprintf(stderr,"usage: %s <-C ClassName(:oldclassname)> <-F FunctionName> <-T Title> <-O ShellScriptName> <-M> <-I> <-V Viewname(:oldviewname)> <-W> <-Help> <Filename>\n",s);
     exit(1);
 }
-static char makefile[MAXPATHLEN];
 static char *ps(char  *s)
 {
     char *c;
@@ -394,7 +392,6 @@ int main(int argc, char  *argv[])
 	fprintf(stderr, "SecurityConsciousness does not permit createcon to run.\n");
 	exit(-1);
     }
-    strcpy(makefile,MAKEFILE);
     sprintf(defaultawk,"awk -f %s",AWKPROG);
     awkprog = defaultawk;
     title = sname = src = cls = viewname = NULL;

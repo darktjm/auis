@@ -317,6 +317,7 @@ image::Duplicate( class image  *target )
     (target)->Height() = (this)->Height();
     (target)->Pixlen() = (this)->Pixlen();
     (target)->Depth() = (this)->Depth();
+    target->saveformatstring = strdup(this->saveformatstring);
     target->jpegSaveQuality = (this)->GetJPEGSaveQuality();
 
     if((target)->Data())
@@ -426,7 +427,7 @@ image::GetImageData(FILE  *file)
     /* decompress/load file */
     {
 	class image *savedimage;
-	if(!(savedimage = (class image *) ATK::NewObject(format))) {
+	if(!(savedimage = (class image *) ATK::NewObject("imageio"))) {
 	    fclose(tmpFile2);
 	    fprintf(stderr, "image: couldn't get new object of type %s.\n", format);
 	    return(-1);
@@ -550,7 +551,7 @@ image::SendImageData(FILE  *file)
     if(this->Data()) {
 
 	if((this)->GetModified() > this->lastModified || this->origData == NULL) {
-	    class image *savedimage = (class image *) ATK::NewObject(this->saveformatstring);
+	    class image *savedimage = (class image *) ATK::NewObject("imageio");
 	    FILE *tmpFile; 
 
 	    if((tmpFile = tmpfile())) {
@@ -2286,48 +2287,40 @@ image::Halftone( )
   return(this);
 }
 
-static int tmpfilectr = 0;
-
 long image::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usagetype, char  *boundary)
 {
     FILE *tmpfp;
-    char Fnam[1000];
-    class imageio *gifp = new imageio;
+    class imageio *imgp = new imageio;
 
+    const char *type = imgp->SaveFormatString();
     if(this->writeID == writeID)  return(this->id);
     this->writeID = writeID;
 
-    fprintf(file, "\n--%s\nContent-type: image/png\nContent-Transfer-Encoding: base64\n\n", boundary);
-    sprintf(Fnam, "/tmp/image.%d.%d.png", getpid(), tmpfilectr++);
-    if(!(tmpfp = fopen(Fnam, "w"))) {
-	(gifp)->Destroy();
+    fprintf(file, "\n--%s\nContent-type: image/%s\nContent-Transfer-Encoding: base64\n\n", boundary, type);
+    if(!(tmpfp = tmpfile())) {
+	(imgp)->Destroy();
 	return(0);
     }
-    if((this)->Data()) (this)->Duplicate( (class image *) gifp);
+    if((this)->Data()) (this)->Duplicate( (class image *) imgp);
     else {
-	gifp->newRGBImage(1, 1, 8);
-	gifp->RedPixel(0)=gifp->GreenPixel(0)=gifp->BluePixel(0)=65535;
-	gifp->RedPixel(1)=gifp->GreenPixel(1)=gifp->BluePixel(1)=0;
-	gifp->RGBUsed()=2;
-	if(gifp->Data()) *(gifp->Data())=0;
+	imgp->newRGBImage(1, 1, 8);
+	imgp->RedPixel(0)=imgp->GreenPixel(0)=imgp->BluePixel(0)=65535;
+	imgp->RedPixel(1)=imgp->GreenPixel(1)=imgp->BluePixel(1)=0;
+	imgp->RGBUsed()=2;
+	if(imgp->Data()) *(imgp->Data())=0;
     }
-    fclose(tmpfp);
-    gifp->WriteNative( NULL, Fnam);
-    (gifp)->Destroy();
-    if(!(tmpfp = fopen(Fnam, "r"))) {
-	unlink(Fnam);
-	return(0);
-    }
+    imgp->WriteNative( tmpfp, NULL);
+    (imgp)->Destroy();
+    fflush(tmpfp);
+    rewind(tmpfp);
     to64(tmpfp, file);
     fclose(tmpfp);
-    unlink(Fnam);
     return(this->id);
 }
 
 boolean
 image::ReadOtherFormat(FILE  *file, char  *fmt, char  *encoding, char  *desc)
 {
-    char TmpFile[250];
     FILE *tmpfp = NULL;
     int code;
 
@@ -2344,25 +2337,19 @@ image::ReadOtherFormat(FILE  *file, char  *fmt, char  *encoding, char  *desc)
     /* Need to decode base64 or q-p here */
     if (!strncmp(encoding, "base64", 6)
 	 || !strncmp(encoding, "quoted-printable", 16)) {
-	sprintf(TmpFile, "/tmp/image.%d.%d.png", getpid(), tmpfilectr++);
-	tmpfp = fopen(TmpFile, "w");
+	tmpfp = tmpfile();
 	if (!tmpfp) return(FALSE);
 	if (!strncmp(encoding, "base64", 6)) {
 	    from64(file, tmpfp);
 	} else {
 	    fromqp(file, tmpfp);
 	}
-	fclose(tmpfp);
-	tmpfp = fopen(TmpFile, "r");
-	if (!tmpfp) return(FALSE);
-	file = tmpfp;
+	fflush(tmpfp);
+	rewind(tmpfp);
     } else return FALSE;
 
-    code = (this)->Read( file, -1);
-    if (tmpfp) {
-	fclose(tmpfp);
-	unlink(TmpFile); 
-    }
+    code = (this)->Read( tmpfp, -1);
+    fclose(tmpfp);
     if (code == dataobject_NOREADERROR) {
 	return(TRUE);
     } else {

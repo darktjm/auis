@@ -69,7 +69,7 @@ long imageio::WriteNative(FILE  *file, const char  *filename)
 
     MagickSetImageCompressionQuality(wand, this->saveQuality);
     if(file) {
-	MagickSetImageFormat(wand, "png"); // default?
+	MagickSetImageFormat(wand, this->SaveFormatString());
 	ret = MagickWriteImageFile(wand, file);
     } else
 	ret = MagickWriteImage(wand, filename);

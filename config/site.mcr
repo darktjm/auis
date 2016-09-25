@@ -41,7 +41,8 @@ The values shown here are the defaults. */
 
 /* CDEBUGFLAGS are passed to C compilations.  */
 /* To generate debugger symbol tables, use -g instead of -O.  */
-        CDEBUGFLAGS = -g3 -O2 -fPIC -D_XOPEN_SOURCE -D_DEFAULT_SOURCE -Wmissing-declarations -Wold-style-definition -Wextra -Wno-unused-parameter -Wmissing-declarations -Wno-unused-result -Wno-missing-field-initializers -Wwrite-strings -march=athlon64 -msse3 -msse3 -pipe -Wall
+COPT = -O2
+        CDEBUGFLAGS = -g3 $(COPT) -fPIC -D_XOPEN_SOURCE -D_DEFAULT_SOURCE -Wmissing-declarations -Wold-style-definition -Wextra -Wno-unused-parameter -Wmissing-declarations -Wno-unused-result -Wno-missing-field-initializers -Wwrite-strings -march=athlon64 -msse3 -msse3 -pipe -Wall
 
 /* Check and Set the RESOLVELIB to the full path name
 	of libresolv.a.  It may be in the 4.3 distribution, the

@@ -703,9 +703,9 @@ long cel::InitDefault()
     }
     if(this->defaultStream){
 	strcpy(fnm, "/tmp/celXXXXXX");
-	mktemp(fnm);
+	int fd = mkstemp(fnm);
 	/* need to generate tmpfile name */
-	if((f = fopen(fnm,"w")) == NULL){
+	if(fd < 0 || (f = fdopen(fd,"w")) == NULL){
 	    fputs("Can't write init file for cel in /tmp\n",stderr);
 	    fflush(stderr);
 	    this->count--;

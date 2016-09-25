@@ -1,7 +1,6 @@
 #!/bin/sh
 # add every file to a group to force all symbols to be "documented"
 # add a \file directive to every file to force all files into PDF
-# add old tiff and jpeg crap to a mostly ignored group
 # strip out gcc attributes (not defined unless proper headers included)
 hasgr=
 fgrep -i '\addtogroup' "$1" >/dev/null && hasgr=y

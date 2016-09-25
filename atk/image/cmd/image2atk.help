@@ -1,0 +1,99 @@
+\begindata{text,6761408}
+\textdsversion{12}
+\template{help}
+\majorheading{image2atk: convert an image file to ATK image format
+
+}
+\section{Overview
+
+}
+The \typewriter{image2atk} program is a filter that converts between 
+various widely-used image formats and the ATK image format.  The output of 
+this filter is an ATK image datastream suitable for inclusion in an ATK 
+document or viewing with EZ.
+
+
+\section{Quick Reference}
+
+
+\typewriter{% image2atk -gif foo.ppm > foo.img
+
+}
+\subsection{Arguments:}
+
+
+\indent{-gif		specifies that the resulting ATK image be saved as GIF
+
+-jpeg		specifies that the resulting ATK image be saved as  JPEG JFIF
+
+-png		specifies that the resulting ATK image be saved as PNG (default) \
+
+
+-qN		specifies the save-quality parameter to the JPEG compressor, where N 
+is a value between 0 and 100.
+
+
+Any argument to ppm2atkimage that doesn't begin with the dash character 
+('-') is considered to be the name of the input file.  If multiple files 
+are listed, only the last one in the list is used.  If no file is 
+specified, input is read from the standard input.
+
+}\section{
+Save Formats
+
+}
+The ATK image class can save image data in one of three different native 
+formats: PNG, GIF & JPEG JFIF.  \
+
+
+
+\leftindent{The PNG representation is a lossless format that can handle 
+almost any standard image format.  Previous versions of Andrew did not 
+support this format, so that is the only reason to choose anything other 
+than this default.
+
+
+The GIF representation uses a run-length encoding that makes it very 
+efficient for storing particular types of images.  Run-length encoding 
+(rle) is a compression technique that takes advantage of regions of 
+constant color by gathering them together and representing them as a 
+intensity:count pairs.  So, rle is best applied to drawings, cartoons, and 
+images with few different colors (<= 256).
+
+
+The JPEG JFIF representation is best suited for another class of images, 
+those with many closelt seperated colors as would be generated from a photo 
+of a real world scene.  Further, JPEG compression is parameterized on a 
+quality value (0-100) that is used to specify a compression/quality 
+tradeoff.  You can get significant savings in image file size by lowering 
+the quality value, while still retaining a realistic looking image that is 
+often indistingishable from the original.
+
+}
+The image view class allows you to specify which save format to use for a 
+particular image or you can employ the \bold{ImageSavedFormat} preference, 
+which can have a value of either \bold{png}, \bold{gif} or \bold{jpeg}. 
+ Furthermore, when the JPEG format is chosen, you can also set the 
+save-quality parameter via the image view or employ the 
+\bold{ImageSaveQuality} preference option.
+
+
+\section{Program Author}
+
+\leftindent{
+}\indent{Gary W. Keim (gk5g+@andrew.cmu.edu) - original
+
+Thomas J. Moore (darktjm@gmail.com) - conversion to generic imageio
+
+}
+\section{Related tools}  \
+
+
+
+Select (highlight) one of the italicized names and choose "Show Help on 
+Selected Word" from the pop-up menu to see the help file for:
+
+
+\leftindent{\helptopic{image}
+
+}\enddata{text,6761408}

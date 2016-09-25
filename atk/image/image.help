@@ -109,7 +109,7 @@ than one concurrently installed map\
 with the Show True option.  
 
 
-\typewriter{Set Save Quality }- Image data can be stored in either GIF or 
+\typewriter{Set Save Quality }- Image data can be stored in either PNG, GIF or 
 JPEG JFIF format file, encoded for mail-safe transport and surrounded with 
 the normal ATK datastream keywords.  One of the nice features of JPEG is 
 that it provides parameterization to the compression-quality tradeoff.  You 
@@ -124,57 +124,16 @@ The \italic{Import} menu card contains a list of foreign image formats that
 can be imported into the ATK image format:
 
 
-\leftindent{\typewriter{\typewriter{Sunraster}} - Load a Sun raster image 
-file.
+\leftindent{\typewriter{\typewriter{Almost Any}} - Load a variety of 
+common image file formats.  The format is determined from the name and 
+contents of the image file.  The exact list of supported formats is 
+site dependent.  However, at the minimum, it includes PNG, GIF, JPEG, TIFF,
+PCX, Sun rasters, PBM, PNM, X bitmap, X pixmap, 
 
 
-\typewriter{GIF} - Load a 
-GIF\footnote{\
-\begindata{fnote,538692104}
-\textdsversion{12}
-\define{underline
-menu:[Font~1,Underline~41]
-attr:[Flags Underline Int Set]}
- \underline{G}raphics \underline{I}nterchange \underline{F}ormat (tm) \
-\enddata{fnote,538692104}
-\view{fnotev,538692104,9,0,0}}  image file.
 
+ATK Raster - Load an ATK raster image (cmuwm).
 
-\typewriter{\typewriter{Xbitmap}} - Load an X bitmap image file.
-
-
-\typewriter{TIFF} - Load a 
-TIFF\footnote{\
-\begindata{fnote,538692360}
-\textdsversion{12}
-\define{underline
-menu:[Font~1,Underline~41]
-attr:[Flags Underline Int Set]}
- \underline{T}agged \underline{I}mage \underline{F}ile \underline{F}ormat\
-\enddata{fnote,538692360}
-\view{fnotev,538692360,10,0,0}}  file.
-
-
-\typewriter{\typewriter{Xpixmap}} - Load an X Pixmap image file.
-
-
-JPEG - Load a 
-JPEG\footnote{\
-\begindata{fnote,538692616}
-\textdsversion{12}
-\define{underline
-menu:[Font~1,Underline~41]
-attr:[Flags Underline Int Set]}
- \underline{J}oint \underline{P}hotographic \underline{E}xperts 
-\underline{G}roup\
-\enddata{fnote,538692616}
-\view{fnotev,538692616,11,0,0}} image file.
-
-
-PBM - Load a Portable Bitmap image file.
-
-
-XWD - Load an X Window Dump image file.
 
 }
 
@@ -182,13 +141,16 @@ The \italic{Export} menu card contains foreign image formats to which we
 can export from the ATK image format:
 
 
-}\leftindent{\leftindent{GIF - Write the image as a GIF image file.
+}\leftindent{\leftindent{Postscript - Write the image as an Encapsulated Postscript file.
 
 
-Postscript - Write the image as an Encapsulated Postscript file.
+CMUWM - Write the image as a cmwum-format file.
 
 
-JPEG - Write the image as a JPEG file.
+By Name - Write the image in a variety of common image file formats.  
+The format is determined from the file name.  The exact list of 
+supported formats is site dependent.  However, at the minimum, it 
+includes PNG, JPEG, TIFF, PCX, Sun rasters, PBM, PNM, X bitmap, X pixmap,
 
 
 }}

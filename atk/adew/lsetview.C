@@ -438,7 +438,9 @@ void lsetview::Update()
     }
     else
         (this)->SetTransferMode(graphic_WHITE);
-    (this)->EraseVisualRect();
+    struct rectangle vb;
+    (this)->GetVisualBounds(&vb);
+    (this)->FillRect(&vb, (this)->WhitePattern());
     (this)->SetTransferMode(graphic_INVERT);
    if(!(this->cursorp)->IsPosted()){
        struct rectangle tr;
@@ -474,15 +476,20 @@ void lsetview::ObservedChanged(class observable  *changed, long  value)
 	if(value ==  observable_OBJECTDESTROYED ){
 	    if(changed == (class observable *)this->child ||
 	       changed == (class observable *) DataObject(this) ){
-		this->child = NULL;this->app = NULL;
+		class view *c = this->child, *a = this->app;
+	        this->child = this->app = NULL;
 		lsetview_DestroyView(this);
-		/*		self->child = NULL;self->app = NULL;
-		lsetview_WantUpdate(self,self); */
+		if(c != (view *)changed)
+		    c->Destroy();
+		if(a != (view *)changed)
+		    a->Destroy();
+		this->WantUpdate(this);
 	    }
 	}
 	else if(changed == (class observable *) DataObject(this)){
 	    if(this->revision != ls->revision){
 		if(this->mode == lsetview_IsSplit){
+		    this->mode = lsetview_UnInitialized;
 		    if(lp->obj[0]){
 			v = lp->obj[0];
 			lp->obj[0] = NULL;

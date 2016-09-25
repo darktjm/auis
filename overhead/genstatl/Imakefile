@@ -12,7 +12,7 @@ MkdirTarget($(DESTDIR)/lib/genstatl)
 
 InstallDocs(genstatl.help, ${DESTDIR}/help)
 
-DEFINES=-DDYNEXT=\"$(DYNEXT)\" -DAFSBASEDIR=\"$(AFSBASEDIR)\" -DJPEGLIBDIR=\"$(JPEGLIBDIR)\" -DTIFFLIBDIR=\"$(TIFFLIBDIR)\"
+DEFINES=-DDYNEXT=\"$(DYNEXT)\" -DAFSBASEDIR=\"$(AFSBASEDIR)\"
 CPPProgramTarget(genstatl, genstatl.o, $(UTILLIB),)
 CPPProgramTarget(fixpaths, fixpaths.o, $(UTILLIB),)
 
