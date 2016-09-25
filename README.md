@@ -75,6 +75,11 @@ So far, the following incompatibilities have been introduced:
    32-bit versions may have trouble reading new files.  Correcting
    this issue is on my todo list.
 
+ - If the image serialization format is set to png (the new default),
+   old versions of ATK will not be able to read it.  This change was
+   necessary, because the old GIF reader/writer was 8-bit colormap
+   only, and jpeg is/was lossy.
+
  - As part of cleaning up and correcting org, written org files are not
    compatible with the old org.  However, the old org was buggy as hell,
    so this is not a real problem.  Note that it can still read, and
@@ -200,3 +205,7 @@ So far, what I've done is:
     one known POSIX-sh variant (busybox).  I didn't make the scripts
     any more robust than they already were:  don't use spaces in file
     names.
+
+  - Removed internal, sometimes obsolete image import/export routines
+    and replaced with a generic external library (DevIL, FreeImage,
+    or ImageMagick).

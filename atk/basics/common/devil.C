@@ -60,9 +60,13 @@ long imageio::WriteNative(FILE  *file, const char  *filename)
     // but calling this for some reason fails
     iluFlipImage();
     ilSetInteger(IL_JPG_QUALITY, this->saveQuality);
-    if(file)
+    if(file) {
+	const char *deftype = this->SaveFormatString();
+	char fname[strlen(deftype) + 3];
+	sprintf(fname, "x.%s", deftype);
+	ILenum type = ilTypeFromExt(fname);
 	ret = ilSaveF(type, file);
-    else {
+    } else {
 	remove(filename);
 	ret = ilSaveImage(filename);
     }

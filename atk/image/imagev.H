@@ -7,8 +7,7 @@ ATK_INTER
 */
 
 /** \addtogroup libimagev libimagev.so
- *  A dynamically loadable ATK class file.  Contains imagev, faces, fbm,
- *  img, mac, mcidas, pbm, pcx, xbitmap, xwd, tif, sunraster, xpixmap
+ *  A dynamically loadable ATK class file.  Contains imagev.
  * @{ */
 #include <rect.h>
  

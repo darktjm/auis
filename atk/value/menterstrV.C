@@ -55,7 +55,7 @@ void menterstrV::ObservedChanged(class observable  *changed,long  value)
 	    val = (class value *)this->dataobject;
 	}
 	str = (val)->GetString();
-	os = (this->etext)->GetSrcString();
+	os = (this->etext)->GetString();
 	if(str == NULL) {
 	    if(os != NULL) (this->etext)->SetChars(NULL,0);
 	}

@@ -681,7 +681,7 @@ celview::celview()
     this->child = this->truechild = NULL;
     this->desw = this->desh = UNSET;
     this->menus = (celviewMenus)->DuplicateML( this);
-    this->drawing = DRAWING;
+    this->drawing = this->OldMode = DRAWING;
     this->sizepending = TRUE;
     this->arb = NULL;
     this->promptforparameters = 0;

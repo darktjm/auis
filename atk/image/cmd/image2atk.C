@@ -1,8 +1,7 @@
-/* xwd2atkimage.C -- convert from XWD format data to ATK image format. */
-/* note: this doesn't work if the imageio object doesn't support xwd */
+/* ppm2atkimage.C -- convert from PPM format data to ATK image format. */
 
 /*
-	Copyright Carnegie Mellon University 1992,1993 - All rights reserved
+	Copyright Carnegie Mellon University 1992,1994 - All rights reserved
 */
 
 #include <andrewos.h> /* strings.h */
@@ -26,6 +25,12 @@ int main(int  argc, char  **argv)
 	    switch(*arg) {
 		case '-':
 		    switch(*(arg+1)) {
+			    case 'p':
+			    case 'P':
+				if( strncmp(arg+1, "PNG", 3) == 0 ||
+				   strncmp(arg+1, "png", 3) == 0) 
+				    saveformat = "png";
+				break;
 			    case 'g':
 			    case 'G':
 				if( strncmp(arg+1, "GIF", 3) == 0 ||
@@ -53,7 +58,7 @@ int main(int  argc, char  **argv)
 		    }
 		    else {
 			if((f = fopen(arg, "r")) == NULL) {
-			    fprintf(stderr, "xwd2atkimage: couldn't open %s for reading.\n", arg);
+			    fprintf(stderr, "image2atk: couldn't open %s for reading.\n", arg);
 			    exit(-1);
 			}
 		    }
@@ -63,13 +68,10 @@ int main(int  argc, char  **argv)
     }
 
     ATKregister(imageio);
-
     ATK::LoadClass("imageio");
     if((self = new imageio)->Load( NULL, f) == 0) {
-	if(saveQuality > 0) {
-	     (self)->SetJPEGSaveQuality( saveQuality);
-	     fprintf(stderr, "saveQ: %ld\n", saveQuality);
-	}
+	if(saveQuality > 0)
+	    (self)->SetJPEGSaveQuality( saveQuality);
 	if(saveformat)
 	    (self)->SetSaveFormatString( saveformat);
 	if((self)->Write( stdout, im::GetWriteID(), -1) == dataobject_NOREADERROR)

@@ -401,15 +401,11 @@ static void arbcon_Create(){
 }
 class celview *arbcon::currentcelview()
 {
-	ATKinit;
-
     if(Gself == NULL) return NULL;
     return Gself->currentcelviewval;
 }
 void arbcon::SetCurrentArbiterview(class arbiterview  *ab)
 {
-	ATKinit;
-  
     static char buf[256];
     if(Gself == NULL) return ;
     if(ab == Gself->CurrentArbiterview || ab == OwnArb) return;
@@ -436,8 +432,6 @@ void arbcon::SetCurrentArbiterview(class arbiterview  *ab)
 }
 void arbcon::DeleteArbiter(class arbiterview  *arb)
 {
-	ATKinit;
-
     if(Gself == NULL) return ;
     if(Gself->CurrentArbiterview == arb) arbcon::SetCurrentArbiterview(NULL);
     arbcon::InitArbiters();
@@ -445,8 +439,6 @@ void arbcon::DeleteArbiter(class arbiterview  *arb)
 
 void arbcon::AddArbiter(class arbiterview  *arb)
 {
-	ATKinit;
-
     char buf[512];
     if(Gself == NULL || arb == OwnArb) return;
     (arb)->GetArbName(buf,512);
@@ -462,8 +454,6 @@ printf("Adding %s (%d) to text %d (%s) \n", buf,strlen(buf),Gself->ArbArbList,(G
 }
 void arbcon::InitArbiters()
 {
-	ATKinit;
-
     class arbiterview *ab,*cab;
     cab = NULL;
     if(Gself == NULL ) return;
@@ -548,8 +538,6 @@ static boolean setupcel(class cel  *cl)
 
 boolean arbcon::InitCel(class celview  *cv,class arbiterview  *abv)
 {
-	ATKinit;
-
 #if 0
     class cel *cl;
     const char  *obstr,*vwstr;
@@ -617,8 +605,6 @@ static void CopyText(class text  *dst,class text  *src)
 #endif /* NOTUSED */
 void arbcon::EditCurrentCelview()
 {
-	ATKinit;
-
     class text *src;
     long i,len,bufsize;
     char foo,*c;
@@ -669,8 +655,6 @@ void arbcon::EditCurrentCelview()
 }
 void arbcon::AddCel(class arbiterview  *arb,class cel  *cl,boolean  notify)
 {
-	ATKinit;
-
     char buf[512];
     class celview *cv;
     const char *str = (cl)->GetRefName();
@@ -702,8 +686,6 @@ void arbcon::AddCel(class arbiterview  *arb,class cel  *cl,boolean  notify)
 }
 void arbcon::DeleteCelview(class arbiterview  *arb,class celview  *cv)
 {
-	ATKinit;
-
     int loc;
     const char *name;
     if(Gself == NULL || cv == NULL) return;
@@ -722,8 +704,6 @@ void arbcon::DeleteCelview(class arbiterview  *arb,class celview  *cv)
 }
 void arbcon::SaveCurrentCelview()
 {
-	ATKinit;
-
 #if 0
     class text *src;
     if(Gself == NULL || Gself->ArbText == NULL || Gself->currentcelviewval == NULL ||
@@ -798,8 +778,6 @@ static boolean isarbcon(class celview  *cv)
 
 void arbcon::SetCurrentCelview(class celview  *cv)
 {
-	ATKinit;
-
     const char *srs;
     char buf[256];
     /* printf("In SetCurrentCelview cv = %d\n",(long)cv); */
@@ -844,12 +822,9 @@ void arbcon::SetCurrentCelview(class celview  *cv)
 }
 void arbcon::DestroyCurrentCelview()
 {
-	ATKinit;
-
-    if(Gself != NULL && Gself->currentcelviewval!= NULL) {
-	class celview *cv;
-	cv = Gself->currentcelviewval;
-	/* cel_Destroy(Cel(cv)); */
+    class celview *cv = currentcelview();
+    if(cv) {
+	cv->GetCel()->Destroy();
 	(cv)->UnlinkTree();
 	(cv)->Destroy();
     }
@@ -1374,8 +1349,6 @@ return TRUE;
 }
 arbcon::~arbcon()
 {
-	ATKinit;
-
 	if(this->ArbLinkCel) (this->ArbLinkCel)->RemoveCallBackObserver( this);
 	if(this->ArbCutCel) (this->ArbCutCel)->RemoveCallBackObserver( this);
 	if(this->ArbApplicationChoice) (this->ArbApplicationChoice)->RemoveCallBackObserver( this);

@@ -424,6 +424,7 @@ lpair::lpair ()
 
 	this->obj[0] = NULL;
 	this->obj[1] = NULL;
+	this->objsize[0] = this->objsize[1] = 0;
 	this->typex = lpair_HORIZONTAL;
 	this->ismoving = FALSE;
 	this->movable = FALSE;

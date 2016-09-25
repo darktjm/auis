@@ -1,16 +1,24 @@
 - finish image rewrite:
+  - maybe replace Gifify with SnapshotToFile for generic image output
+  - maybe de-gif ez2html and other HTML-related stuff
   - verify serialization/deserialization of PNG, GIF, JPEG, and maybe
     others
-  - look at all former uses of hard-coded gif/jpeg and fix if needed
-  - remove xwd2atkimage/ppm2atkimage and replace with generic image2atk
   - maybe support all imageio types at once, with a pref to choose which
     - would need to make them separate shared objects & move back to atk/image
   - test with grayscale images (rasters) and 1-bit bitmaps
   - look at raster library's import/export routines (at least xbm is broken)
-  - clean up export/import menus
+  - clean up export/import menus (combine into one, since it's so small)
   - support parameters (other han just quality) for export (needed for
     some image types, but probably OK to defer to external programs)
     - at the very least, support setting file type independently of name
+- adew: cut doesn't actually delete
+  - when cutting table, table attempts to update due to deferred update
+    even though it may be gone.  Thus, crash.
+- adew: often clears regions and never redisplays contents (maybe due
+  to my "fix" for lack of resize updates)
+- adew: samples for mbuttonv or clicklistV in vallist document anymore
+- adjusting controls doesn't always set modified flag for a document
+- sometimes just loading a doc with controls sets modified flag for it
 - valgrind access hit with dragon.zip - may be bug in XPutImage, or perhaps
   the way xgraphic abuses CreateImage() to create a template image and
   fills in the values manually
@@ -111,8 +119,6 @@
     Cisms where C++ does it differently (and presumably the same or better)
     (note that unlike some idiots, I don't consider cpp macros to be C-only)
 - find out and possibly remove additional CMU/MIT-specific crap
-  - remove all packages available elsewhere; e.g. jpeg, tiff
-    (making sure there is no afs/atk "enhancement" first)
 - build improvements
   - make it possible to build w/o simultaneous install
     It's possible to do "make Makefiles; make All", but some places depend

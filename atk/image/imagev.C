@@ -152,7 +152,7 @@ static struct bind_Description imagevBindings[] = {
 
   {"imagev-set-save-quality", NULL, 0, "Image~20, Set Save Quality~50", 0, IMAGEV_GOODIMAGEMENUS | IMAGEV_JPEGFORMATMENUS, (proctable_fptr) SetSaveQuality, "Set the quality level for the JPEG compressor [5-95]."},
 
-  {"imagev-set-save-format", NULL, 0, "Image~20, Set Save Format~60", 0, IMAGEV_DEFAULTMENUS, (proctable_fptr) SetSaveFormat, "Set the save format to be used by image. Can be gif, png or jpeg."},
+  {"imagev-set-save-format", NULL, 0, "Image~20, Set Save Format~60", 0, IMAGEV_DEFAULTMENUS, (proctable_fptr) SetSaveFormat, "Set the save format to be used by image. Can be png, gif or jpeg."},
 
 #if 0
   {"imagev-image-info", NULL, 0, "Image~20, Info~60", 0, IMAGEV_DEFAULTMENUS, (proctable_fptr) InfoCmd, "Get information about image."},
@@ -1098,6 +1098,7 @@ imagev::Gifify(const char *filename, long *pmaxw, long *pmaxh,
 	image *src = (image *)GetDataObject();	// get the image object
 	imageio out;
 	src->Duplicate(&out);			// Duplicate into a gif object
+	out.SetSaveFormatString("gif"); // <sigh> it *is* Gifify, after all
 	if (pmaxw) *pmaxw = out.Width();	// report size
 	if (pmaxh) *pmaxh = out.Height();
 	return (out.WriteNative(NULL, filename) == 0);	// success if 0

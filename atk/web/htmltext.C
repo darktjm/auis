@@ -2502,7 +2502,7 @@ write_inset(htmltext *txtobj, dataobject *inset, FILE *file,
 			pos+= 1 + ((txtobj)->GetChar(pos+1)=='\n')
 				+ ((txtobj)->GetChar(pos+2)=='\n');
 	}
-	else if (inset->IsType("gif")) {
+	else if (inset->IsType("imageio")) {
 		if (env) {
 			begin_tag = build_first_tag(env->attribs, "img");
 			fprintf(file, "%s", begin_tag);
@@ -3939,10 +3939,8 @@ long htmltext::FindNamedAnchor(const char *target, long pos, long len) {
 image *htmltext::GetImage(const char *file, attlist *atts) {
     image *dat = NULL;
     char *filename, *p;
-    const char *type;
     buffer *buffer;
-    static char *defaultImage= NULL,
-    *defaultImageType= NULL;
+    static char *defaultImage= NULL;
 
     if (*file != '/' && *file != '~') {
         buffer= buffer::FindBufferByData(this);
@@ -3962,14 +3960,8 @@ image *htmltext::GetImage(const char *file, attlist *atts) {
         else   filename = NewString((char *)file);
     }
     else   filename = NewString((char *)file);
-    type= "gif";
-    if (filename && (p=strrchr(filename, '.')) != NULL) {
-        if (strcmp(++p, "jpg")==0 || strcmp(p, "jpeg")==0) {
-            type= "jpeg";
-        }
-    }
 
-    if ((dat=(image*)ATK::NewObject(type)) != NULL) {
+    if ((dat=(image*)ATK::NewObject("imageio")) != NULL) {
         int ok;
         ok= (filename) ? (dat)->Load(filename, NULL)
           : -1;
@@ -3986,22 +3978,9 @@ image *htmltext::GetImage(const char *file, attlist *atts) {
                       (strlen(s)+1);
                     strcpy(defaultImage, s);
                 }
-                /*XXX- Nick says this is bogus, but since we
-                 ain't actually talking to an HTTP server
-                 yet, I've no clue how to do it right */
-                type= "gif";
-                if (filename && (p=strrchr(filename, '.'))
-                    != NULL) {
-                    if (strcmp(++p, "jpg")==0
-                        || strcmp(p, "jpeg")==0) {
-                        type= "jpeg";
-                    }
-                }
-                defaultImageType = strdup(type);
             } // end initing defaultimage
             if (defaultImage &&
-                (dat= (image*)ATK::NewObject(
-                                             defaultImageType)) != NULL) {
+                (dat= (image*)ATK::NewObject("imageio")) != NULL) {
                 FILE *f = fopen(defaultImage, "r");
                 if (f != NULL) {
                     fclose(f);

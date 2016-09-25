@@ -93,33 +93,6 @@ webcom::getfullname(char  *name) {
 }
 
 
-	static const char *
-guessimgtype(class webcom  *self, const char  *url)  {
-	if ((self)->Status() & WEBCOM_Loaded){
-		if (self->mimetype == xbm)  return "xbitmap";
-                if (self->mimetype == gif)  return "gif";
-                if (self->mimetype == jpegatom) return "jpeg";
-        }
-#if 0
-        else {
-		char *p;
-#ifdef GUESSAHEAD
-		p = strrchr(url, '.');
-		if (p != NULL){
-			p++;
-			if (mystrncmp(p, "gif", 3) == 0)
-				return "gif";
-			if (mystrncmp(p, "xbm", 3) == 0)
-				return "xbitmap";
-		}
-#else
-		p = "UNLOADED";
-#endif
-        }
-#endif
-	return NULL;
-}
-
 	static void 
 loadimg(class image  *dat, class webcom  *self, int  status)  {
 	FILE *f;
@@ -164,35 +137,11 @@ loadimg(class image  *dat, class webcom  *self, int  status)  {
 
 	class image * 
 webcom::getimage (char  *url, char  *type)  {
-	const char *gtype;
 	class image* dat;
 	class webcom *new_c;
 	new_c = webcom::Create(url, this, 0, NULL);
 	if (new_c == NULL) return NULL;
-	if ((new_c)->Status() & WEBCOM_Loaded){
-		// image already loaded
-		// xxx Note,  if text_ClearCompletely was good about
-		// dataobjects shared across documents, 
-		// we might be able to have multiple views pointing 
-		// to the same dataobject in this case
-		gtype =  guessimgtype(new_c, url);
-	}
-	else{
-		if ((gtype = guessimgtype(new_c, url)) == NULL){
-			/* at this point we don't know what we got, 
-			 wait for the load and try again */
-			(new_c)->Load(NULL, NULL);
-			int err=new_c->Wait(NULL);
-			if (err == WEBCOM_LOADERROR) return NULL;
-			gtype = guessimgtype(new_c, url);
-		}
-	}
-	if (gtype == NULL){
-		/* apparently unknown image type */
-		fprintf(stderr, "web: apparently unknown image type\n");
-		return NULL;
-	}
-	dat = (class image*) ATK::NewObject(gtype);
+	dat = (class image*) ATK::NewObject("imageio");
 	if (dat) {
 		new_c->data = (class dataobject *) dat;
 		if (new_c->status & WEBCOM_Loaded){
@@ -928,10 +877,8 @@ webcom::CanView()  {
 		return "text";
 	else if (this->mimetype == atkatom){
 		return "atk";
-        } else if(mimetype==gif) {
-            return "gif";
-        } else if(mimetype==jpegatom) {
-            return "jpeg";
+        } else if(mimetype==gif || mimetype==jpegatom || mimetype==xbm) {
+            return "imageio";
         }
 	else return NULL;
 }

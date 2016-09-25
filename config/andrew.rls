@@ -495,7 +495,7 @@ library: objs							@@\
 #define RefsAndLibFileTarget(name,objs,libs,syslibs) @@\
 name.lt:: libs	@@\
 	$(RM) ,name.lt name.lt @@\
-	$(BASEDIR)/etc/fixpaths -d $(STDPACKAGEDIRS) $(LOCALPACKAGEDIRS) - -v ANDREWDIR=$(BASEDIR) AFSBASEDIR=$(AFSBASEDIR) JPEGLIBDIR=$(JPEGLIBDIR) TIFFLIBDIR=$(TIFFLIBDIR) XLIBDIR=$(XLIBDIR) - libs syslibs>,name.lt	@@\
+	$(BASEDIR)/etc/fixpaths -d $(STDPACKAGEDIRS) $(LOCALPACKAGEDIRS) - -v ANDREWDIR=$(BASEDIR) AFSBASEDIR=$(AFSBASEDIR) XLIBDIR=$(XLIBDIR) - libs syslibs>,name.lt	@@\
 	mv ,name.lt name.lt @@\
 name.rf:: objs @@\
 	$(RM) ,name.rf name.rf @@\

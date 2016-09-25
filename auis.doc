@@ -13665,7 +13665,8 @@ Version 2
 n 0
 \enddata{bp,14566368}
 \view{bpv,14566368,26585,0,0}
-\chapter{$\{ANDREWDIR\}/lib/arbiters}
+\chapter{$\{ANDREWDIR\}/lib/arbiters} is a directory containint various 
+support and sample files used with the Andrew DEveloper's Workbench.
 
 \begindata{link,10568912}
 4
@@ -13703,7 +13704,8 @@ black
 white
 \enddata{link,10570176}
 \enddata{link,10570176}
-\view{linkview,10570176,26351,0,0}
+\view{linkview,10570176,26351,0,0} is an arbiter document for the arbcon 
+controller (aka the primary user interface to ADEW).
 
 
 \section{calc.lset}
@@ -13723,7 +13725,8 @@ black
 white
 \enddata{link,10571088}
 \enddata{link,10571088}
-\view{linkview,10571088,26352,0,0}
+\view{linkview,10571088,26352,0,0} is an arbiter document used with calccon 
+ontroller, using lset for layout.
 
 
 \section{calc.tbl}
@@ -13743,7 +13746,8 @@ black
 white
 \enddata{link,10572144}
 \enddata{link,10572144}
-\view{linkview,10572144,26353,0,0}
+\view{linkview,10572144,26353,0,0} is an arbiter document used with calccon 
+ontroller, using table for layout.
 
 
 \section{conpros.awk}
@@ -13763,7 +13767,8 @@ black
 white
 \enddata{link,10573088}
 \enddata{link,10573088}
-\view{linkview,10573088,26354,0,0}
+\view{linkview,10573088,26354,0,0} is an awk script which does the primary 
+work for \bold{createcon} when creating controllers.
 
 
 \section{helparb}
@@ -13783,7 +13788,8 @@ black
 white
 \enddata{link,10574192}
 \enddata{link,10574192}
-\view{linkview,10574192,26355,0,0}
+\view{linkview,10574192,26355,0,0} is an arbiter document used for helpcon 
+controller.
 
 
 \section{instpros.awk}
@@ -13803,27 +13809,8 @@ black
 white
 \enddata{link,10575136}
 \enddata{link,10575136}
-\view{linkview,10575136,26356,0,0}
-
-
-\section{makefile.arb}
-
-\begindata{link,10576160}
-4
-${ANDREWDIR}/lib/arbiters/makefile.arb
-0
-0
-V
-\begindata{link,10576160}
-Datastream version: 2
-makefile.arb
-2
-
-black
-white
-\enddata{link,10576160}
-\enddata{link,10576160}
-\view{linkview,10576160,26357,0,0}
+\view{linkview,10575136,26356,0,0} is an awk script which does the primary 
+work for \bold{createcon} when creating insets.
 
 
 \section{piano.lst}
@@ -13843,7 +13830,8 @@ black
 white
 \enddata{link,10577104}
 \enddata{link,10577104}
-\view{linkview,10577104,26358,0,0}
+\view{linkview,10577104,26358,0,0} is an arbiter document used for pcontrol 
+controller using lset view for layout.
 
 
 \section{piano.txt}
@@ -13863,7 +13851,8 @@ black
 white
 \enddata{link,10553040}
 \enddata{link,10553040}
-\view{linkview,10553040,26359,0,0}
+\view{linkview,10553040,26359,0,0} is an arbiter document used for pcontrol 
+controller using text view for layout.
 
 
 \section{vallist}
@@ -13883,7 +13872,9 @@ black
 white
 \enddata{link,10553984}
 \enddata{link,10553984}
-\view{linkview,10553984,26360,0,0}
+\view{linkview,10553984,26360,0,0} is an arbiter document containing 
+samples of value views.  It is shown by arbcon's "Init Value Window" 
+menu item.
 
 
 \section{viewlist}
@@ -13903,7 +13894,9 @@ black
 white
 \enddata{link,10555008}
 \enddata{link,10555008}
-\view{linkview,10555008,26361,0,0}
+\view{linkview,10555008,26361,0,0} is the listing of common views to 
+select for insertion used by arbcon.
+
 \begindata{bp,7792064}
 Version 2
 n 0

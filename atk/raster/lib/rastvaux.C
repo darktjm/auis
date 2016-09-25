@@ -1187,6 +1187,7 @@ rasterview::Gifify(const char *filename, long *pmaxw, long *pmaxh,
 	in.Load(NULL, rastemp);		// read data into ATK-raster image
 	fclose(rastemp);
 	in.Duplicate(&out);			// copy to image
+	out.SetSaveFormatString("gif");  // <sigh> it *is* Gifify, after all
 	long ret = out.WriteNative(NULL, filename);	// write image
 	*pmaxw = out.Width();
 	*pmaxh = out.Height();

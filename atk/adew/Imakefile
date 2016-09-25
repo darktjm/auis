@@ -25,7 +25,7 @@ MkdirTarget(${DESTDIR}/lib/arbiters)
 
 InstallClassFiles($(HFILES))
 
-InstallMultiple(makefile.arb Arb vallist viewlist, $(INSTINCFLAGS), $(DESTDIR)/lib/arbiters)
+InstallMultiple(Arb vallist viewlist, $(INSTINCFLAGS), $(DESTDIR)/lib/arbiters)
 InstallFile(conpros.awk, $(INSTPROGFLAGS), $(DESTDIR)/lib/arbiters)
 InstallFile(instpros.awk, $(INSTPROGFLAGS), $(DESTDIR)/lib/arbiters)
 

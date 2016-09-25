@@ -253,7 +253,7 @@ for(v = (this->celviewlist), i = 0; i < this->celcount; v++,i++){
 #endif /* 0 */
     if(refname == NULL || *refname == '\0') return FALSE;
     clp = Cel((*v));
-    if(*refname == *((clp)->GetRefName()) && strcmp(refname,(clp)->GetRefName()) == 0 && cv != *v )
+    if((clp)->GetRefName() && *refname == *((clp)->GetRefName()) && strcmp(refname,(clp)->GetRefName()) == 0 && cv != *v )
 	return FALSE;
 }
 #ifdef DEBUG

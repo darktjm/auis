@@ -49,10 +49,14 @@ long imageio::WriteNative(FILE  *file, const char  *filename)
     int ret;
     FREE_IMAGE_FORMAT fif;
 
-    if(!filename || (fif = FreeImage_GetFIFFromFilename(filename)) == FIF_UNKNOWN)
-	/* default to PNG, I guess */
-	/* or, I guess I could abort if filename is unkown */
-	fif = FIF_PNG;
+    if(!filename || (fif = FreeImage_GetFIFFromFilename(filename)) == FIF_UNKNOWN) {
+	const char *deftype = this->SaveFormatString();
+	char fname[strlen(deftype) + 3];
+	sprintf(fname, "x.%s", deftype);
+	fif = FreeImage_GetFIFFromFilename(fname);
+	if(fif == FIF_UNKNOWN)
+	    return -1;
+    }
 
     /* convert to format Image can handle? */
     switch(this->Type()) {

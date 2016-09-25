@@ -574,14 +574,6 @@ Details for selected subordinate directories
 
 	Error handling function, 'errprintf'
 
-./overhead/external/image/jpeg
-
-	Jpeg library
-
-./overhead/external/image/tiff
-
-	Tiff image library
-
 ./overhead/fonts/cmd
 
 	Converters between font formats
