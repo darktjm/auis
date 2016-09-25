@@ -15,7 +15,7 @@ ATK_INTER
  *  atomlist, bind, cursor, dataobject, environ, event, filetype, fontdesc,
  *  graphic, im, init, keymap, keystate, menulist, message, messitem,
  *  msghandler, Namespace, observable, path, pixelimage, proctable,
- *  region, rm, updatelist, view, windowsystem, colormap, image, gif, jpeg,
+ *  region, rm, updatelist, view, windowsystem, colormap, image, imageio,
  *  traced, owatch, ATK, rastio, aaction, multiact, viewholderv, iddimage,
  *  WorkProc, xws, xim, xcursor, xfontdesc, xcolormap, xgraphic, xddimage.
  *  xddimage_draw is there as well, although it isn't technically exported.

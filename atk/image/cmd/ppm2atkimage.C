@@ -7,15 +7,13 @@
 #include <andrewos.h> /* strings.h */
 #include <stdio.h>
 #include <ctype.h>
-#include <pbm.H>
-#include <gif.H>
-#include <jpeg.H>
+#include <imageio.H>
 #include <im.H>
 
 int main(int  argc, char  **argv)
         {
     long saveQuality = -1;
-    class pbm *self;
+    class imageio *self;
     FILE *f = stdin;
     const char *saveformat = NULL;
     boolean qualityComing = FALSE;
@@ -63,14 +61,9 @@ int main(int  argc, char  **argv)
 	}	
     }
 
-    ATKregister(pbm);
-
-/* Need the following because we might have to Load either one as specified by the SaveFormat preference or arg to this program. */
-    ATKregister(gif);
-    ATKregister(jpeg);
-
-    ATK::LoadClass("pbm");
-    if((self = new pbm)->Load( NULL, f) == 0) {
+    ATKregister(imageio);
+    ATK::LoadClass("imageio");
+    if((self = new imageio)->Load( NULL, f) == 0) {
 	if(saveQuality > 0)
 	    (self)->SetJPEGSaveQuality( saveQuality);
 	if(saveformat)

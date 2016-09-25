@@ -38,7 +38,7 @@
 #include <dataobject.H>
 #include <environ.H>
 #include <environment.H>
-#include <gif.H>
+#include <imageio.H>
 /* #include <icon.H>
 #include <iconview.H> */
 #include <im.H>
@@ -1220,8 +1220,7 @@ html::AddImage(long * pos, char * file)	/*  */
 	filename = file;
     }
 
-    /* XXX: Hardcoded to use GIF. Fix up sometime (How? Requires fix of image class) */
-    if ((dat = (class image*) ATK::NewObject("gif"))) {
+    if ((dat = (class image*) ATK::NewObject("imageio"))) {
 	if (filename) {
 	    (dat)->Load( filename, NULL);
 	} else {

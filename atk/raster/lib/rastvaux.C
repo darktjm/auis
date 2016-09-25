@@ -28,7 +28,7 @@
 #include <raster.H>
 #include <rastoolview.H>
 #include <heximage.H>
-#include <gif.H>
+#include <imageio.H>
 #include <cmuwm.H>
 #include <print.H>
 #include <dispbox.h>
@@ -1176,7 +1176,7 @@ void *rasterview::GetPSPrintInterface(const char *printtype)
 rasterview::Gifify(const char *filename, long *pmaxw, long *pmaxh, 
 			struct rectangle *visrect) {
 	cmuwm in;	// temp image of type ATK raster
-	gif out;		// temp image of type gif
+	imageio out;		// temp image of type any
 	FILE *rastemp = tmpfile();	// temp file for raster stream
 	raster *dobj = (raster *)GetDataObject();
 
@@ -1186,8 +1186,8 @@ rasterview::Gifify(const char *filename, long *pmaxw, long *pmaxh,
 	rewind(rastemp);
 	in.Load(NULL, rastemp);		// read data into ATK-raster image
 	fclose(rastemp);
-	in.Duplicate(&out);			// copy to gif image
-	long ret = out.WriteNative(NULL, filename);	// write gif image
+	in.Duplicate(&out);			// copy to image
+	long ret = out.WriteNative(NULL, filename);	// write image
 	*pmaxw = out.Width();
 	*pmaxh = out.Height();
 	return (ret == 0);	// success if 0

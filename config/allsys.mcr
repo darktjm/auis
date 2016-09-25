@@ -168,16 +168,6 @@ XCOMM dynamic objects and shared libraries. (e.g. HP)
         DYNMATHLIB = $(MATHLIB)
         LIBMATHLIB = $(MATHLIB)
 
-/* If there is already a JPEG distribution at your site, #undefine MK_JPEG and set JPEGLIBDIR to point to the library containing libjpeg.a */
-
-JPEGLIBDIR=$(BASEDIR)/lib
-        JPEGLIB =$(JPEGLIBDIR)/libjpeg.a
-
-/* If there is already a TIFF distribution at your site, #undefine MK_TIFF and set TIFFLIBDIR to point to the library containing libtiff.a */
-
-TIFFLIBDIR=$(BASEDIR)/lib
-        TIFFLIB = $(TIFFLIBDIR)/libtiff.a
-
 #ifdef GNU_ENV
 ASMPP_CC = $(CPP)
 AS_FLAGS =

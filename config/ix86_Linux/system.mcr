@@ -59,9 +59,8 @@ ATKLIBFLAGS = -s
 PICFLAG=
 ECOMPFLAGS=
 
-/* jpeg & tiff are too old; use included versions */
-/* also, libutil seems to be getting picked up somewhere else */
-NORELS=libjpeg.a libtiff.a libutil.a
+/* libutil seems to be getting picked up somewhere else */
+NORELS=libutil.a
 LINKPREFIX = $(BASEDIR)/etc/relativize $(LOCALNORELS) $(NORELS) ---
 
         SYS_LIBRARIES = $(DESTDIR)/lib/libatkos.a

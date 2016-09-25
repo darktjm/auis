@@ -462,12 +462,6 @@ INSTUIDFLAGS = -c -m 4755	:ImakeMacros.d:
 IRULESRC = $(TOP)/config	:allsys.mcr:
 
 
-JPEGLIB =$(JPEGLIBDIR)/libjpeg.a	:allsys.mcr:
-
-
-JPEGLIBDIR=$(BASEDIR)/lib	:allsys.mcr:
-
-
 KRBLIB = 	:allsys.mcr:
 
 
@@ -793,12 +787,6 @@ TAGS = ctags	:allsys.mcr:
 TESTING_CFLAGS = -DTESTINGONLYTESTING $(CFLAGS)	:imake.tmpl:
 
 
-TIFFLIB = $(TIFFLIBDIR)/libtiff.a	:allsys.mcr:
-
-
-TIFFLIBDIR=$(BASEDIR)/lib	:allsys.mcr:
-
-
 TMPDYNEXT=$(DYNEXT)	:hp700_90/system.mcr:
 
 TMPDYNEXT=+	:ix86_Linux/system.mcr:
@@ -827,11 +815,6 @@ XBINDIR = /usr/bin/X11	:hp700_90/system.mcr:
 XBINDIR = /usr/bin/X11	:ix86_Linux/system.mcr:
 
 XBINDIR = /usr/local/bin	:sun4_41/system.mcr:
-
-
-XCOMM         JPEGINCLUDES = $\{BASEDIR\}/include	:allsys.mcr:
-
-XCOMM         TIFFINCLUDES = -I$\{BASEDIR\}/include	:allsys.mcr:
 
 
 XFC = /usr/bin/X11/bdftopcf	:hp700_90/system.mcr:

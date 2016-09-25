@@ -85,7 +85,7 @@ and webPath.
 
 \description{\bold{defaultImage}:	This is a pathname of an image to use 
 when no data can be found for an inline image.  This really, really, really 
-should be a correct, readable GIF image.  If not, bizarre effects may 
+should be a correct, readable image.  If not, bizarre effects may 
 occur.
 
 

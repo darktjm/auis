@@ -19,7 +19,7 @@ ATK_IMPL("ez2htmlapp.H")
 #include <util.h>
 #include <environment.H>
 #include <text.H>
-#include <gif.H>
+#include <imageio.H>
 #include <filetype.H>
 #include <stylesheet.H>
 #include <style.H>
@@ -612,7 +612,7 @@ ConvertInsets(htmltext *htxt, long pos, htmlenv *env,
 	attlist al;
 	al.MakeFromString(tags);
 
-	image *dat = new gif;
+	image *dat = new imageio;
 	if ( ! dat) 
 		return FALSE;
 	/* dat->Load(nmbuf);	// the gut of GetImage (not really needed) */

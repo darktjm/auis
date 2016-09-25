@@ -63,31 +63,17 @@ SUBDIRS = $(SYS_CONFDIR)
 
 MkdirTarget($(DESTDIR)/lib/packages)
 
-#ifndef MK_JPEG
-JPEGMAYBE=jpeg
-RegisterLibraries(jpeg, JPEGLIBDIR,$(JPEGLIBDIR),$(JPEGLIB),$(DESTDIR)/lib/packages)
-#else
-JPEGINANDREW=$(JPEGLIB)
-#endif
-
-#ifndef MK_TIFF
-TIFFMAYBE=tiff
-RegisterLibraries(tiff, TIFFLIBDIR,$(TIFFLIBDIR),$(TIFFLIB),$(DESTDIR)/lib/packages)
-#else
-TIFFINANDREW=$(TIFFLIB)
-#endif
-
 RegisterLibraries(x,XLIBDIR,$(XLIBDIR),$(XLIBDIR)/libX11.a, $(DESTDIR)/lib/packages)
 
 
-ANDREWLIBS = $(BASEDIR)/lib/libATKDynLoad.a $(BASEDIR)/lib/libatkos.a $(BASEDIR)/lib/libcmenu.a $(BASEDIR)/lib/libcparser.a $(BASEDIR)/lib/libcui.a $(BASEDIR)/lib/libcuin.a $(BASEDIR)/lib/libdoload.a $(BASEDIR)/lib/libeli.a $(BASEDIR)/lib/liberrors.a $(BASEDIR)/lib/libindex.a $(JPEGINANDREW) $(BASEDIR)/lib/libmail.a $(BASEDIR)/lib/libmsshr.a $(BASEDIR)/lib/libmssrv.a $(BASEDIR)/lib/libossup.a $(BASEDIR)/lib/librxp.a $(BASEDIR)/lib/libshadows.a $(TIFFINANDREW) $(BASEDIR)/lib/libutil.a $(BASEDIR)/lib/libwpi.a
+ANDREWLIBS = $(BASEDIR)/lib/libATKDynLoad.a $(BASEDIR)/lib/libatkos.a $(BASEDIR)/lib/libcmenu.a $(BASEDIR)/lib/libcparser.a $(BASEDIR)/lib/libcui.a $(BASEDIR)/lib/libcuin.a $(BASEDIR)/lib/libdoload.a $(BASEDIR)/lib/libeli.a $(BASEDIR)/lib/liberrors.a $(BASEDIR)/lib/libindex.a $(BASEDIR)/lib/libmail.a $(BASEDIR)/lib/libmsshr.a $(BASEDIR)/lib/libmssrv.a $(BASEDIR)/lib/libossup.a $(BASEDIR)/lib/librxp.a $(BASEDIR)/lib/libshadows.a $(BASEDIR)/lib/libutil.a $(BASEDIR)/lib/libwpi.a
 
 RegisterLibraries(auis, ANDREWDIR,$(BASEDIR), \
 	$(ANDREWLIBS), $(DESTDIR)/lib/packages)
 
 defaults:
 	$(RM) defaults ,defaults
-	echo auis x $(JPEGMAYBE) $(TIFFMAYBE)>,defaults
+	echo auis x jpeg tiff>,defaults
 	mv ,defaults defaults
 clean::
 	$(RM) defaults ,defaults

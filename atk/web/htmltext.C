@@ -19,7 +19,7 @@ ATK_IMPL("htmltext.H")
 #include <fnote.H>
 #include <fontdesc.H>
 #include <image.H>
-#include <gif.H>
+#include <imageio.H>
 #include <style.H>
 #include <stylesheet.H>
 #include <table.H>
@@ -3828,7 +3828,7 @@ GififyViaView(view *v, const char *filename, long width, long height) {
 	Ximg->SetView(v);
 	im::ForceUpdate();
 	drawbl = v->drawable;
-	drawngif = new gif;
+	drawngif = new imageio;
 	if (drawngif == NULL) {
 		retval = "*** Could not create new gif";
 		goto done;

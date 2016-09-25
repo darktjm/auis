@@ -10631,22 +10631,6 @@ white
 \enddata{link,18}
 \enddata{link,18}
 \view{linkview,18,1018,0,0}
- \begindata{link,19}
-4
-${ANDREWDIR}/help/cjpeg.help
-0
-0
-V
-\begindata{link,19}
-Datastream version: 2
-cjpeg
-2
-
-black
-white
-\enddata{link,19}
-\enddata{link,19}
-\view{linkview,19,1019,0,0}
  \begindata{link,20}
 4
 ${ANDREWDIR}/help/clock.help
@@ -10967,22 +10951,6 @@ white
 \enddata{link,39}
 \enddata{link,39}
 \view{linkview,39,1039,0,0}
- \begindata{link,40}
-4
-${ANDREWDIR}/help/djpeg.help
-0
-0
-V
-\begindata{link,40}
-Datastream version: 2
-djpeg
-2
-
-black
-white
-\enddata{link,40}
-\enddata{link,40}
-\view{linkview,40,1040,0,0}
  \begindata{link,41}
 4
 ${ANDREWDIR}/help/dogtags.help
@@ -13535,29 +13503,9 @@ Symbols defined in index.h.  See the API documentation for libindex.
 
 
 
-\section{libjpeg.a}
-
-Supplied version of jpeg library.  It is too old to be easily 
-replaced with a system jpeg library.  Installed headers are jconfig.h, 
-jinclude.h, jpegdata.h.  I didn't bother checking if all symbols 
-exported by this library are in the headers, or vice-versa.  There is 
-no additional documentation for this library.
-
-
-
 \section{libshadows.a}
 
 Symbols defined in shadows.h.  See the API documentation for libshadows.
-
-
-
-\section{libtiff.a}
-
-Supplied version of tiff library.  It is too old to be easily 
-replaced with a system tiff library.  Installed headers are tiff.h, 
-tiffio.h.  I didn't bother checking if all symbols 
-exported by this library are in the headers, or vice-versa.  There is 
-no additional documentation for this library.
 
 
 

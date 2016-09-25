@@ -517,13 +517,6 @@ to add switch specifications like '-ns' to avoid stripping binaries. }\
 
 
 
-\bold{JPEGLIBDIR}=	[Default: $(BASEDIR)/lib]
-
-\leftindent{If there is already a JPEG distribution at your site, #undefine 
-MK_JPEG in the site.h file and set JPEGLIBDIR to the library containing 
-libjpeg.a.}
-
-
 \bold{KRBLIB}=		[Default: (empty)]
 
 \leftindent{If your AFS protection server relies on the MIT Athena Kerberos 
@@ -564,12 +557,6 @@ if this is not the case.}\indent{
 }\indent{SHELL specifies the path to the Bourne shell.
 
 }
-\bold{TIFFLIBDIR}=		[Default: $(BASEDIR)/lib]
-
-\leftindent{If there is already a TIFF distribution at your site, #undefine 
-MK_TIFF and set TIFFLIBDIR to point to the library containing libtiff.a.}
-
-
 \bold{XINCDIR=}	[Default: /usr/include] \
 
 
@@ -922,29 +909,6 @@ directory.  }\
 doc/atk/FilesList and doc/atk/FunctionIndex.  See BuildAndTest.ez.  (This 
 variable is tested in $/doc/Imakefile.)}
 
-
-
-\paragraph{3.2.3.2.  Overhead build options}
-
-
-\bold{MK_JPEG#} [Default: defined]
-
-\leftindent{If your site has already built a jpeg library, you can prevent 
-building it as part of Andrew by undefining MK_JPEG.  You must also set 
-JPEGLIBDIR in the site.mcr file.}
-
-
-\bold{MK_METAMAIL#} [Default: defined]
-
-\leftindent{If your site has already built metamail, you can prevent 
-building it as part of Andrew by undefining MK_METAMAIL.}
-
-
-\bold{MK_TIFF#} [Default: defined]
-
-\leftindent{If your site has already built a tiff library, you can prevent 
-building it as part of Andrew by undefining MK_TIFF.  You must also set 
-TIFFLIBDIR in the site.mcr file.}
 
 
 \paragraph{3.2.3.3. ATK build options}
