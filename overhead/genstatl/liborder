@@ -1,5 +1,3 @@
-$ANDREWDIR/lib/libjpeg.a
-$ANDREWDIR/lib/libtiff.a
 $ANDREWDIR/lib/libcparser.a
 $ANDREWDIR/lib/libcmenu.a
 $ANDREWDIR/lib/libshadows.a

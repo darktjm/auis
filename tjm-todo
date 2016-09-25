@@ -1,3 +1,16 @@
+- finish image rewrite:
+  - verify serialization/deserialization of PNG, GIF, JPEG, and maybe
+    others
+  - look at all former uses of hard-coded gif/jpeg and fix if needed
+  - remove xwd2atkimage/ppm2atkimage and replace with generic image2atk
+  - maybe support all imageio types at once, with a pref to choose which
+    - would need to make them separate shared objects & move back to atk/image
+  - test with grayscale images (rasters) and 1-bit bitmaps
+  - look at raster library's import/export routines (at least xbm is broken)
+  - clean up export/import menus
+  - support parameters (other han just quality) for export (needed for
+    some image types, but probably OK to defer to external programs)
+    - at the very least, support setting file type independently of name
 - valgrind access hit with dragon.zip - may be bug in XPutImage, or perhaps
   the way xgraphic abuses CreateImage() to create a template image and
   fills in the values manually
@@ -122,9 +135,6 @@
 
 Long-term:
   - view/adjust styling boundaries (aka view source)?
-  - more image::WriteNative overrides (at least 1 full-color lossless)
-  - add support for png and/or imagemagick or some other wrapper library
-    and make png default instead of gif
   - add code snippet inset for literate programming
   - make LaTeX the default output format
   - unicode support

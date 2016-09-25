@@ -1,4 +1,5 @@
 /* xwd2atkimage.C -- convert from XWD format data to ATK image format. */
+/* note: this doesn't work if the imageio object doesn't support xwd */
 
 /*
 	Copyright Carnegie Mellon University 1992,1993 - All rights reserved
@@ -7,15 +8,13 @@
 #include <andrewos.h> /* strings.h */
 #include <stdio.h>
 #include <ctype.h>
-#include <xwd.H>
-#include <gif.H>
-#include <jpeg.H>
+#include <imageio.H>
 #include <im.H>
 
 int main(int  argc, char  **argv)
         {
     long saveQuality = -1;
-    class xwd *self;
+    class imageio *self;
     FILE *f = stdin;
     const char *saveformat = NULL;
     boolean qualityComing = FALSE;
@@ -63,14 +62,10 @@ int main(int  argc, char  **argv)
 	}	
     }
 
-    ATKregister(xwd);
+    ATKregister(imageio);
 
-/* Need the following because we might have to Load either one as specified by the SaveFormat preference or arg to this program. */
-    ATKregister(gif);
-    ATKregister(jpeg);
-
-    ATK::LoadClass("xwd");
-    if((self = new xwd)->Load( NULL, f) == 0) {
+    ATK::LoadClass("imageio");
+    if((self = new imageio)->Load( NULL, f) == 0) {
 	if(saveQuality > 0) {
 	     (self)->SetJPEGSaveQuality( saveQuality);
 	     fprintf(stderr, "saveQ: %ld\n", saveQuality);

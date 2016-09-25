@@ -3,6 +3,18 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+# The following has GNU make dependencies:
+#  $(shell ..) ifeq
+ifeq ($(IMAGEIO),devil)
+  IMAGEIO_LIBS = $(shell pkg-config IL ILU --libs)
+endif
+ifeq ($(IMAGEIO),freeimage)
+  IMAGEIO_LIBS = -lfreeimage
+endif
+ifeq ($(IMAGEIO),magick)
+  IMAGEIO_LIBS = $(shell pkg-config MagickWand --libs) $(UTILLIB)
+endif
+
 COMMOBJS = ../common/application.o ../common/ATKdebug.o ../common/atom.o ../common/atomlist.o \
 	../common/bind.o ../common/cursor.o ../common/dataobject.o \
 	../common/environ.o ../common/event.o \
@@ -13,8 +25,8 @@ COMMOBJS = ../common/application.o ../common/ATKdebug.o ../common/atom.o ../comm
 	../common/path.o ../common/physical.o ../common/pixelimage.o ../common/point.o \
 	../common/proctable.o ../common/rect.o ../common/region.o \
 	../common/rm.o ../common/updatelist.o ../common/view.o ../common/windowsystem.o \
-	../common/color.o  ../common/image.o ../common/gif.o \
-	../common/gifwr.o  ../common/jpeg.o ../common/imageaux.o ../common/traced.o ../common/owatch.o \
+	../common/color.o  ../common/image.o ../common/$(IMAGEIO).o \
+	../common/imageaux.o ../common/traced.o ../common/owatch.o \
 	../common/ATK.o ../common/rastio.o ../common/flex.o ../common/mflex.o ../common/oflex.o ../common/avalue.o ../common/aaction.o  ../common/viewholderv.o ../common/ddimage.o ../common/ahash.o ../common/workproc.o
 
 #ifdef X11_ENV
@@ -30,7 +42,7 @@ BASELIBDIR = $(BASEDIR)/lib
 DEBUGLIBS=/usr/local/lib/libtb.a /usr/contrib/lib/malloc/libdbmalloc.a
 #endif
 
-LIBS =$(BASELIBDIR)/libcmenu.a $(BASELIBDIR)/libshadows.a $(JPEGLIB)  $(BASELIBDIR)/liberrors.a $(DYNEXELIBS) $(UTILLIB)
+LIBS =$(BASELIBDIR)/libcmenu.a $(BASELIBDIR)/libshadows.a $(BASELIBDIR)/liberrors.a $(DYNEXELIBS) $(UTILLIB) $(IMAGEIO_LIBS)
 
 ATKLibrary(basics, $(OBJS), $(LIBS),  -L$(XLIBDIR) -lX11 $(DEBUGLIBS) $(LIBMATHLIB),)
 InstallATKLibrary(basics, $(DESTDIR)/lib/atk)

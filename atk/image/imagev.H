@@ -12,24 +12,6 @@ ATK_INTER
  * @{ */
 #include <rect.h>
  
-enum image_fileType {
-  faces_imageType,			/* Faces Project */
-  pbm_imageType,			/* Portable Bit Map (PBM, PGM, PPM) */
-  sunraster_imageType,			/* Sun Rasterfile */
-  gif_imageType,			/* GIF Image */
-  xwd_imageType,			/* X Window Dump */
-  xbitmap_imageType,			/* X Bitmap */
-  xpixmap_imageType,			/* X Pixmap */
-  fbm_imageType,			/* FBM Image */
-  pcx_imageType,			/* PC Paintbrush Image */
-  img_imageType,			/* GEM Bit Image */
-  mac_imageType,			/* MacPaint Image */
-  cmuwm_imageType,			/* CMU WM Raster */
-  jpeg_imageType,			/* JPEG */
-  mcidas_imageType,			/* McIDAS areafile */
-  tif_imageType				/* Tagged Image File Format Image */
-};
-
 #define imagev_Grain (64)
 #define imagev_NormScale (8)
 #define imagev_ImagesPerPix (imagev_Grain/imagev_NormScale)

@@ -25,7 +25,6 @@ SUBDIRS = relativize \
         sys \
 	genmake \
 	util \
-        external \
 	bison \
 	grefs \
 	genstatl \

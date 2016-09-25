@@ -56,18 +56,30 @@ The values shown here are the defaults. */
 #endif /* RESOLVER_ENV */
 
 
-/* If there is already a JPEG distribution at your site, #undefine
- 	MK_JPEG (in site.h) and set JPEGLIBDIR to point to the 
-	library containing libjpeg.a */
-JPEGLIBDIR=$(BASEDIR)/lib
-        JPEGLIB =$(JPEGLIBDIR)/libjpeg.a
+/*
+ * Andrew used to do all image formats itself.  I can't maintain
+ * that, so I've implemented image I/O using a helper library.
+ * Unfortunately, all helper libraries suck in some way, so choose your
+ * poison.
+ * Options:
+ *   devil     - DevIL                  http://openil.sourceforge.net/
+ *     works OK, but doesn't support as many file formats as others
+ *     (in particular, it doesn't support writing GIF)
+ *   freeimage - FreeImage              http://freeimage.sourceforge.net/
+ *     weird license; hard to say if it's even legal to use
+ *   magick    - ImageMagick/MagickWand http://www.imagemagick.org/
+ *     rather heavy, probably slow, but most complete format support
+ *
+ *  Considering: (only libraries available in gentoo at this time)
+ *   imlib - doesn't build on gentoo
+ *   imlib2 - poorly documented, hard to integrate
+ *   AfterImage - probably worse than devil; not worth trying
+ *   SDL[2]-image - too tied to SDL
+ *   OpenImageIO - doesn't support reading/writing anything but named files
+ *   ImageMagick/Magick++ - too C++-centric (hard to implement FILE * I/O)
+ */
 
-/* If there is already a TIFF distribution at your site, #undefine
-	MK_TIFF in site.h and set TIFFLIBDIR to point to 
-	the library containing libtiff.a */
-TIFFLIBDIR=$(BASEDIR)/lib
-        TIFFLIB = $(TIFFLIBDIR)/libtiff.a
-
+IMAGEIO = magick
 
 #if 0
  Other variables we set in our local site.mcr files 

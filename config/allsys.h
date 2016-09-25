@@ -70,10 +70,6 @@
 #define MK_GOFIG 1
 #define MK_MIT 1
 
-/* If you have either libjpeg.a or libtiff.a, #undef appropriately in site.h */
-#define MK_JPEG 1
-#define MK_TIFF 1
-
 /* if this is defined, a runapp including all of ATK will be built */
 /* #define MEGARUNAPP_ENV 1 */
 

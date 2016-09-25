@@ -368,7 +368,7 @@ char *filetype::Lookup(FILE  *file, const char  *filename, long  *objectID, stru
 		if (getc(file)!='F') break;
 		if (getc(file)!='8') break;
 		if ((c= getc(file))=='7' || c=='9')
-		    targetObject= "gif";
+		    targetObject= "imageio";
 		break; }
 #if SY_OS2
 	    case '/': { // "/*"?

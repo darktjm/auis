@@ -32,22 +32,8 @@ ATK_IMPL("imagev.H")
 #include <sbuttonv.H>
 #include <sbutton.H>
 #include <region.H>
-#include <faces.H>
-#include <pbm.H>
-#include <sunraster.H>
-#include <gif.H>
-#include <tif.H>
-#include <xwd.H>
-#include <xbitmap.H>
-#include <xpixmap.H>
-#include <fbm.H>
-#include <pcx.H>
-#include <img.H>
-#include <mac.H>
-#include <cmuwm.H>
-#include <mcidas.H>
-#include <jpeg.H>
 #include <color.H>
+#include <imageio.H>
 #include <imagev.H>
 #include <util.h>
 
@@ -85,11 +71,6 @@ ATKdefineRegistry(imagev, view, imagev::InitializeClass);
 static void PostCursor( class imagev  *self, int  type );
 static void DrawBorder( class imagev  *self, struct rectangle  *outer , struct rectangle  *inner );
 void GetScreenCoordinates( class imagev  *self, struct rectangle  *pixRect );
-static const char * imageTypeName(enum image_fileType  type);
-static class image * image_Import( const char  *filename, enum image_fileType  type );
-static int image_Export( class image  *image, const char  *filename, enum image_fileType  type );
-static void Import_Cmd( class imagev  *self, enum image_fileType  type );
-static void Export_Cmd( class imagev  *self, enum image_fileType  type );
 static void SaveAs( class imagev  *self, long  rock );
 static int  WriteToFile( class imagev   *self, const char  *filename );
 #ifdef THISWORKS
@@ -114,50 +95,25 @@ static void PanToOriginCmd( class imagev  *self, long  rock );
 static void SetSaveQuality( class imagev  *self, long  rock );
 static void SetSaveFormat( class imagev  *self, long  rock );
 
+enum image_fileType {
+  cmuwm_imageType,			/* CMU WM Raster */
+  any_imageType				/* File type supported by devil */
+};
+
+static void Import_Cmd( class imagev  *self, enum image_fileType  type );
+static void Export_Cmd( class imagev  *self, enum image_fileType  type );
 
 static struct bind_Description imagevBindings[] = {
 
-  {"imagev-import-gif", NULL, gif_imageType, "Import~30, GIF~10", gif_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a gif image."},
-
-  {"imagev-import-tif", NULL, tif_imageType, "Import~30, TIFF~12", tif_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a TIFF image."},
-
-  {"imagev-import-jpeg", NULL, jpeg_imageType, "Import~30, JPEG~14", jpeg_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a JPEG image." },
-
-  {"imagev-import-pbm", NULL, pbm_imageType, "Import~30, PBM~16", pbm_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a pbm image."},
-
-  {"imagev-import-xwd", NULL, xwd_imageType, "Import~30, XWD~18", xwd_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a xwd image."},
-
-  {"imagev-import-sunraster", NULL, sunraster_imageType, "Import~12, Sunraster~10", sunraster_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a sunRaster image."},
-
-  {"imagev-import-xbitmap", NULL, xbitmap_imageType, "Import~30, Xbitmap~12", xbitmap_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a X Bitmap image."},
-
-  {"imagev-import-xpixmap", NULL, xpixmap_imageType, "Import~30, Xpixmap~14", xpixmap_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a X Pixmap image."},
-
-#if 0
-  {"imagev-import-mac", NULL, mac_imageType, "Import~30, Mac~16", mac_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a mac image."},
-#endif
+  {"imagev-import-any", NULL, any_imageType, "Import~30, Almost Any~12", any_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import an image."},
 
   {"imagev-import-cmuwm", NULL, cmuwm_imageType, "Import~30, ATK Raster~18", cmuwm_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a cmuwm image."},
 
-  {"imagev-export-gif", NULL, gif_imageType, "Export~40, GIF~10", gif_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Export_Cmd, "Write out a gif image."},
+  {"imagev-export-any", NULL, any_imageType, "Export~40, By Name~17", any_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) (proctable_fptr) Export_Cmd, "Write out an image."},
 
   {"imagev-export-postscript", NULL, 0, "Export~40, Postscript~12", 0, IMAGEV_DEFAULTMENUS, (proctable_fptr) Write_Postscript, "Write out a Postscript file."},
 
-  {"imagev-export-jpeg", NULL, jpeg_imageType, "Export~40, JPEG~14", jpeg_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) (proctable_fptr) Export_Cmd, "Write out a JPEG image."},
-
-  {"imagev-export-cmuwm", NULL, cmuwm_imageType, "Export~40, ATK Raster~16", cmuwm_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) (proctable_fptr) Export_Cmd, "Write out a cmuwm image."},
-
-#ifdef THESEWORK
-  {"imagev-import-faces", NULL, faces_imageType, "Import~30, FACES~18", faces_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) (proctable_fptr) Import_Cmd, "Import a faces image."},
-
-  {"imagev-import-fbm", NULL, fbm_imageType, "Import~30, FBM~21", fbm_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a fbm image."},
-
-  {"imagev-import-pcx", NULL, pcx_imageType, "Import~30, PCX~22", pcx_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a pcx image."},
-
-  {"imagev-import-img", NULL, img_imageType, "Import~30, IMG~23", img_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a img image."},
-
-  {"imagev-import-mcidas", NULL, mcidas_imageType, "Import~30, MCIDAS~24", mcidas_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) Import_Cmd, "Import a mcidas image."},
-#endif /* THESEWORK */
+  {"imagev-export-cmuwm", NULL, cmuwm_imageType, "Export~40, CMU WM~16", cmuwm_imageType, IMAGEV_DEFAULTMENUS, (proctable_fptr) (proctable_fptr) Export_Cmd, "Write out a cmuwm image."},
 
 #ifdef THISWORKS
   {"imagev-gray", NULL, 0, "Image~20, gray~20", 0, IMAGEV_GOODIMAGEMENUS, (proctable_fptr) Gray, "GrayScale an image."},
@@ -196,7 +152,7 @@ static struct bind_Description imagevBindings[] = {
 
   {"imagev-set-save-quality", NULL, 0, "Image~20, Set Save Quality~50", 0, IMAGEV_GOODIMAGEMENUS | IMAGEV_JPEGFORMATMENUS, (proctable_fptr) SetSaveQuality, "Set the quality level for the JPEG compressor [5-95]."},
 
-  {"imagev-set-save-format", NULL, 0, "Image~20, Set Save Format~60", 0, IMAGEV_DEFAULTMENUS, (proctable_fptr) SetSaveFormat, "Set the save format to be used by image. Can be jpeg or gif."},
+  {"imagev-set-save-format", NULL, 0, "Image~20, Set Save Format~60", 0, IMAGEV_DEFAULTMENUS, (proctable_fptr) SetSaveFormat, "Set the save format to be used by image. Can be gif, png or jpeg."},
 
 #if 0
   {"imagev-image-info", NULL, 0, "Image~20, Info~60", 0, IMAGEV_DEFAULTMENUS, (proctable_fptr) InfoCmd, "Get information about image."},
@@ -675,50 +631,11 @@ imageTypeName(enum image_fileType  type)
 {
     static const char *objName = NULL;
     switch (type) {
-	case faces_imageType:
-	    objName = "faces";
-	    break;
-	case pbm_imageType:
-	    objName = "pbm";
-	    break;
-	case sunraster_imageType:
-	    objName = "sunraster";
-	    break;
-	case gif_imageType:
-	    objName = "gif";
-	    break;
-	case tif_imageType:
-	    objName = "tif";
-	    break;
-	case xwd_imageType:
-	    objName = "xwd";
-	    break;
-	case xbitmap_imageType:
-	    objName = "xbitmap";
-	    break;
-	case xpixmap_imageType:
-	    objName = "xpixmap";
-	    break;
-	case fbm_imageType:
-	    objName = "fbm";
-	    break;
-	case pcx_imageType:
-	    objName = "pcx";
-	    break;
-	case img_imageType:
-	    objName = "img";
-	    break;
-	case mac_imageType:
-	    objName = "mac";
+	case any_imageType:
+	    objName = "imageio";
 	    break;
 	case cmuwm_imageType:
 	    objName = "cmuwm";
-	    break;
-	case mcidas_imageType:
-	    objName = "mcidas";
-	    break;
-	case jpeg_imageType:
-	    objName = "jpeg";
 	    break;
 	default:
 	    fprintf(stderr, "imagev: no such image type.\n");
@@ -734,7 +651,10 @@ image_Import( const char  *filename, enum image_fileType  type )
     const char *objName = NULL;
     objName = imageTypeName(type);
     if((image = (class image *) ATK::NewObject(objName))) {
-	(image)->Load(filename, NULL);
+	if((image)->Load(filename, NULL) < 0) {
+	    delete image;
+	    return NULL;
+	}
     }
     return(image);
 }
@@ -1176,7 +1096,7 @@ imagev::Gifify(const char *filename, long *pmaxw, long *pmaxh,
 			struct rectangle *visrect) {
 		// (is supposed to pay attention to input values of pmax*)
 	image *src = (image *)GetDataObject();	// get the image object
-	gif out;
+	imageio out;
 	src->Duplicate(&out);			// Duplicate into a gif object
 	if (pmaxw) *pmaxw = out.Width();	// report size
 	if (pmaxh) *pmaxh = out.Height();
@@ -1608,7 +1528,7 @@ SetSaveFormat( class imagev *self, long  rock )
     class image *image = self->orig;
     const char prompt[] = "New Image Save-Format: ";
     char response[100], *choice;
-    static const char * const choices[3] = {"GIF", "JPEG", NULL};
+    static const char * const choices[] = {"PNG", "GIF", "JPEG", NULL};
     long result = 0;
 
     if(message::MultipleChoiceQuestion(self, 100, prompt, 0, &result, choices, NULL) == -1)

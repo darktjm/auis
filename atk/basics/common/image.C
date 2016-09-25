@@ -48,12 +48,11 @@ ATK_IMPL("image.H")
 	
 #include <attribs.h>
 #include <environ.H>
-#include <jpeg.H>
-#include <gif.H>
 #include <image.H>
 #include <util.h>
 #include <math.h>
 #include <ahash.H>
+#include <imageio.H>
 
 #define MAXFILELINE 255
 #define DEFAULT_SAVE_QUALITY (75)
@@ -280,7 +279,7 @@ image::image( )
     this->origDataSize = 0;
     this->lastModified = (this)->GetModified();
     if(!(saveformat = environ::GetProfile("imagesaveformat")))
-	saveformat = "gif";
+	saveformat = "png";
     this->saveformatstring = strdup(saveformat);
     THROWONFAILURE((TRUE));
 }
@@ -559,7 +558,7 @@ image::SendImageData(FILE  *file)
 	/* duplicate self into savedimage and write native format data into tmp file */
 		(this)->Duplicate( savedimage);
 		if(strcmp(this->saveformatstring, "jpeg") == 0)
-		    ((struct jpeg*) savedimage)->SetSaveQuality( (this)->GetJPEGSaveQuality());
+		    ((struct imageio*) savedimage)->SetSaveQuality( (this)->GetJPEGSaveQuality());
 		(savedimage)->WriteNative( tmpFile, NULL);
 		(savedimage)->Destroy();
 
@@ -2293,13 +2292,13 @@ long image::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usaget
 {
     FILE *tmpfp;
     char Fnam[1000];
-    class gif *gifp = new gif;
+    class imageio *gifp = new imageio;
 
     if(this->writeID == writeID)  return(this->id);
     this->writeID = writeID;
 
-    fprintf(file, "\n--%s\nContent-type: image/gif\nContent-Transfer-Encoding: base64\n\n", boundary);
-    sprintf(Fnam, "/tmp/imagegif.%d.%d", getpid(), tmpfilectr++);
+    fprintf(file, "\n--%s\nContent-type: image/png\nContent-Transfer-Encoding: base64\n\n", boundary);
+    sprintf(Fnam, "/tmp/image.%d.%d.png", getpid(), tmpfilectr++);
     if(!(tmpfp = fopen(Fnam, "w"))) {
 	(gifp)->Destroy();
 	return(0);
@@ -2312,8 +2311,8 @@ long image::WriteOtherFormat(FILE  *file, long  writeID, int  level, int  usaget
 	gifp->RGBUsed()=2;
 	if(gifp->Data()) *(gifp->Data())=0;
     }
-    gifp->WriteNative( tmpfp, NULL);
     fclose(tmpfp);
+    gifp->WriteNative( NULL, Fnam);
     (gifp)->Destroy();
     if(!(tmpfp = fopen(Fnam, "r"))) {
 	unlink(Fnam);
@@ -2334,6 +2333,8 @@ image::ReadOtherFormat(FILE  *file, char  *fmt, char  *encoding, char  *desc)
 
     if (strcmp(fmt, "image/gif")
 	&& strcmp(fmt, "image/x-gif")
+	&& strcmp(fmt, "image/png")
+	&& strcmp(fmt, "image/x-png")
 	&& strcmp(fmt, "image/pbm")
 	&& strcmp(fmt, "image/pbm")
 	&& strcmp(fmt, "image/ppm")
@@ -2343,7 +2344,7 @@ image::ReadOtherFormat(FILE  *file, char  *fmt, char  *encoding, char  *desc)
     /* Need to decode base64 or q-p here */
     if (!strncmp(encoding, "base64", 6)
 	 || !strncmp(encoding, "quoted-printable", 16)) {
-	sprintf(TmpFile, "/tmp/imagegif.%d.%d", getpid(), tmpfilectr++);
+	sprintf(TmpFile, "/tmp/image.%d.%d.png", getpid(), tmpfilectr++);
 	tmpfp = fopen(TmpFile, "w");
 	if (!tmpfp) return(FALSE);
 	if (!strncmp(encoding, "base64", 6)) {

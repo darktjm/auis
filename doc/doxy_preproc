@@ -6,18 +6,10 @@
 hasgr=
 fgrep -i '\addtogroup' "$1" >/dev/null && hasgr=y
 h="${1##*include/}"
-case "$h" in
-   tiff*)    echo "/** \\addtogroup tiff libtiff
- *  The standard TIFF library (very old; obsolete, but used by ATK).  Do not use for new projects.
- * @{ */" ;;
-  j*)    echo "/** \\addtogroup jpeg libjpeg
- *  The standard jpeg library (very old; obsolete, but used by ATK).  Do not use for new projects.
- * @{ */" ;;
- *) g=`echo ${h%.[hH]} | tr /.- ___`
-    test -n "$hasgr" || echo "/** \\addtogroup $g $h
+g=`echo ${h%.[hH]} | tr /.- ___`
+test -n "$hasgr" || echo "/** \\addtogroup $g $h
  * @{ */"
- echo "/** \\file $h */" ;;
-esac
+echo "/** \\file $h */"
 sed -e '/#define/!{
     s/PRINTF_LIKE([^)]*)//g
     s/SCANF_LIKE([^)]*)//g

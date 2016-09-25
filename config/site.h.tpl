@@ -75,14 +75,6 @@
 #define FUNCTION_INDEX_ENV 1 
 */
 
-/* avoid rebuilding stuff  =============== */
-/* If there is already a JPEG distribution at your site, #undefine
- 	MK_JPEG and set JPEGLIBDIR in site.mcr */
-/* #undef MK_JPEG */
-/* If there is already a TIFF distribution at your site, #undefine
-	MK_TIFF and set TIFFLIBDIR in site.mcr */
-/* #undef MK_TIFF */
-
 /* Site specific sources   =============== */
 /* If your site wishes to include sources as part of the build
 	you can add them as subdirectories to $/site
