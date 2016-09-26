@@ -36,7 +36,7 @@ static void stripSuffix(char  *buf,const char  *suffix);
 static void usage()
 {
     fprintf(stderr,"usage:\t%s [-npdD] {-l classname} appclass args...\n",RUNAPP);
-    exit(-1);
+    exit(1);
 }
 
 static char *leaf(char  *path)
@@ -72,7 +72,7 @@ int main(int  argc,char  **argv)
     char appclass[200];
     boolean NoSub=FALSE,addedSuffix;
     boolean staticLoad=TRUE;
-    int exitCode = -1;
+    int exitCode = 1;
 
 #if sys_sun3_41 || sys_sun4_41
     int fd;
@@ -115,7 +115,7 @@ int main(int  argc,char  **argv)
 	    
 	    fprintf(stderr,
 		    "whichdo: a classname argument is required.\n");
-	    exit(-1);
+	    exit(1);
 	}
 	else {
 	    doStaticLoads();
@@ -126,7 +126,7 @@ int main(int  argc,char  **argv)
 		fprintf(stderr,
 			"whichdo: Couldn't load the class %s.\n",
 			*argv);
-		exit(-1);
+		exit(1);
 	    }
 	}
 	exit(0);
@@ -152,6 +152,10 @@ int main(int  argc,char  **argv)
 		    ATK::DynamicLoadTrace()++;
 		    break;
 		case 'l':
+		    if(staticLoad) {
+		        doStaticLoads();
+			staticLoad = FALSE;
+		    }
 		    if(*++*argv=='\0')
 			argv++;
 		    if(*argv==NULL || **argv=='\0')
@@ -212,7 +216,7 @@ int main(int  argc,char  **argv)
     if(!ATK::IsTypeByName(appclass,"application")) {
 	if(NoSub){
 		fprintf(stderr,"%s: There is no known application called %s.\n",RUNAPP,appclass);
-	 	exit(-1);
+	 	exit(1);
 	} else {
 	    if(addedSuffix)
 		stripSuffix(appclass,APPSUFFIX);
@@ -227,6 +231,7 @@ int main(int  argc,char  **argv)
 		if(!ATK::IsTypeByName(appclass,"application")) {
 		    strcpy(appclass,leaf(*argv));
 		    fprintf(stderr,"%s: There is no known application or datatype called %s.\n",RUNAPP,appclass);
+		    exit(1);
 		}
 	    } else
 		strcpy(appclass,DEFAULTAPP);
@@ -236,7 +241,7 @@ int main(int  argc,char  **argv)
     app=(class application *)ATK::NewObject(appclass);
     if(app==NULL){
 	fprintf(stderr,"%s: Error creating the %s object.\n",RUNAPP,appclass);
-	exit(-1);
+	exit(1);
     }
     if((app)->GetName()==NULL){
 	(app)->SetName(leaf(*argv));	/* just make sure */

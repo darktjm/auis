@@ -17,6 +17,10 @@
 - adew: often clears regions and never redisplays contents (maybe due
   to my "fix" for lack of resize updates)
 - adew: samples for mbuttonv or clicklistV in vallist document anymore
+- fix issues found doing load on all objects:
+  - webcon spins if awww dies, and app can't exit any more
+  - pcontrol dies on init if not PC-RT
+- use qsort to sort in deskey instead of external sort command
 - adjusting controls doesn't always set modified flag for a document
 - sometimes just loading a doc with controls sets modified flag for it
 - valgrind access hit with dragon.zip - may be bug in XPutImage, or perhaps

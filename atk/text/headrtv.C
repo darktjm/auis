@@ -282,9 +282,6 @@ static void InstallHeaderVariables()
 
 	p=strdup(headervars);
 	if(!p) return;
-    } else {
-	p = strdup("");
-	if (!p) return;
     }
     hvars=(const char **)malloc(sizeof(char *)*(DEFAULTHEADERVARS+count));
     if(!hvars) return;

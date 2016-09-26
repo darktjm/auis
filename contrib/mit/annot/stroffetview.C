@@ -12,7 +12,6 @@
 #include "stroffetview.H"
 #include "bind.H"
 #include "menulist.H"
-#include "keymap.H"
 #include "text.H"
 #include "proctable.H"
 
@@ -25,7 +24,6 @@
 #define TITLEPTS 12
 
 static class menulist *stroffetviewMenus;
-static class keymap *stroffetviewKeyMap;
 
 
 /****************************************************************/
@@ -99,8 +97,7 @@ stroffetview::InitializeClass()
     struct ATKregistryEntry  *viewtype = ATK::LoadClass("view");
 
     stroffetviewMenus = new menulist;
-    stroffetviewKeyMap =  new keymap;
-    bind::BindList(stroffetviewBindings, stroffetviewKeyMap , stroffetviewMenus, &stroffetview_ATKregistry_ );
+    bind::BindList(stroffetviewBindings, NULL , stroffetviewMenus, &stroffetview_ATKregistry_ );
     proctable::DefineProc("stroffetview-insertstroffet",(proctable_fptr)insert,textviewtype,NULL,"Insert Stroffet Object");
     proctable::DefineProc("stroffetview-openallstroffets",(proctable_fptr)openall,viewtype,NULL,"open Stroffet Views");
     proctable::DefineProc("stroffetview-closeallstroffets",(proctable_fptr)closeall,viewtype,NULL,"close Stroffet Views");

@@ -25,7 +25,6 @@ ATK_IMPL("fcomp.H")
 #include <environ.H>
 #include <environment.H>
 #include <message.H>
-#include <cursor.H>
 #include <style.H>
 #include <stylesheet.H>
 #include <fontdesc.H>
@@ -38,7 +37,6 @@ ATK_IMPL("fcomp.H")
 #include <sys/param.h>
 #include <sys/stat.h>
 
-static class cursor *waitCursor;
 static long searchCmd;
 static long tokenSearchCmd;
 
@@ -605,9 +603,6 @@ static void CompleteCmdBackward(class typescript  *ts, long  key)
 boolean fcomp::InitializeClass()
 {
     struct ATKregistryEntry  *imc;
-
-    waitCursor = cursor::Create(NULL);
-    (waitCursor)->SetStandard( Cursor_Wait);
 
     searchCmd = im::AllocLastCmd();
     tokenSearchCmd = im::AllocLastCmd();

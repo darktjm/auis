@@ -252,7 +252,9 @@ Usage: \bold{be1be2} [\italic{appargs}] \italic{files}
 
 For each given file, the output file is the same, but with any 
 \typewriter{.d}, if present, stripped, and \typewriter{.ez} appended. 
- Standard app arguments are supported; for now, these are only documented \begindata{link,7160016}
+ Standard app arguments are supported; for now, these are only documented 
+ in the documentation for 
+\begindata{link,7160016}
 4
 ${ANDREWDIR}/doc/DEVELOPER/AndrewProgramming.ez
 0
@@ -573,7 +575,7 @@ ${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
 V
 \begindata{link,7216784}
 Datastream version: 2
-AdewReference
+ADEW reference manual
 2
 
 black
@@ -642,7 +644,7 @@ white
 
 \bold{runapp} link: \bold{ezapp} on \bold{eq} object
 
-\begindata{link,7221104}
+See the \begindata{link,7221104}
 4
 ${ANDREWDIR}/help/eq.help
 0
@@ -650,20 +652,22 @@ ${ANDREWDIR}/help/eq.help
 V
 \begindata{link,7221104}
 Datastream version: 2
-eq
+eq on-line help
 2
 
 black
 white
 \enddata{link,7221104}
 \enddata{link,7221104}
-\view{linkview,7221104,25333,0,0}
+\view{linkview,7221104,25333,0,0}.
 
 
 \section{ez}
 
 \bold{runapp} link: \bold{ezapp}
 
+The main entry point to the ATK inset editing system.  For details, 
+see the 
 \begindata{link,7222400}
 4
 ${ANDREWDIR}/help/ez.help
@@ -672,19 +676,19 @@ ${ANDREWDIR}/help/ez.help
 V
 \begindata{link,7222400}
 Datastream version: 2
-ez
+ez on-line help
 2
 
 black
 white
 \enddata{link,7222400}
 \enddata{link,7222400}
-\view{linkview,7222400,25334,0,0}
+\view{linkview,7222400,25334,0,0}.
 
 
 \section{ez2ascii}
 
-\begindata{link,7223376}
+See the \begindata{link,7223376}
 4
 ${ANDREWDIR}/help/ez2ascii.help
 0
@@ -692,21 +696,21 @@ ${ANDREWDIR}/help/ez2ascii.help
 V
 \begindata{link,7223376}
 Datastream version: 2
-ez2ascii
+ez2ascii on-line help
 2
 
 black
 white
 \enddata{link,7223376}
 \enddata{link,7223376}
-\view{linkview,7223376,25335,0,0}
+\view{linkview,7223376,25335,0,0}.
 
 
 \section{ez2html}
 
 \bold{runapp} link: \bold{ez2htmlapp}
 
-\begindata{link,7224672}
+See the \begindata{link,7224672}
 4
 ${ANDREWDIR}/help/ez2html.help
 0
@@ -714,19 +718,19 @@ ${ANDREWDIR}/help/ez2html.help
 V
 \begindata{link,7224672}
 Datastream version: 2
-ez2html
+ez2html on-line help
 2
 
 black
 white
 \enddata{link,7224672}
 \enddata{link,7224672}
-\view{linkview,7224672,25336,0,0}
+\view{linkview,7224672,25336,0,0}.
 
 
 \section{ez2ps}
 
-\begindata{link,7368032}
+See the \begindata{link,7368032}
 4
 ${ANDREWDIR}/help/ez2ps.help
 0
@@ -734,14 +738,14 @@ ${ANDREWDIR}/help/ez2ps.help
 V
 \begindata{link,7368032}
 Datastream version: 2
-ez2ps
+ez2ps on-line help
 2
 
 black
 white
 \enddata{link,7368032}
 \enddata{link,7368032}
-\view{linkview,7368032,25337,0,0}
+\view{linkview,7368032,25337,0,0}.
 
 
 \section{ezpostprocess}
@@ -756,7 +760,7 @@ help.
 
 \bold{runapp} link: \bold{ezprintapp}
 
-\begindata{link,7369888}
+See the \begindata{link,7369888}
 4
 ${ANDREWDIR}/help/ezprint.help
 0
@@ -764,21 +768,21 @@ ${ANDREWDIR}/help/ezprint.help
 V
 \begindata{link,7369888}
 Datastream version: 2
-ezprint
+ezprint on-line help
 2
 
 black
 white
 \enddata{link,7369888}
 \enddata{link,7369888}
-\view{linkview,7369888,25338,0,0}
+\view{linkview,7369888,25338,0,0}.
 
 
 \section{fad}
 
 \bold{runapp} link: \bold{ezapp} on \bold{fad} object
 
-\begindata{link,7371344}
+See the \begindata{link,7371344}
 4
 ${ANDREWDIR}/help/fad.help
 0
@@ -786,21 +790,21 @@ ${ANDREWDIR}/help/fad.help
 V
 \begindata{link,7371344}
 Datastream version: 2
-fad
+fad on-line help
 2
 
 black
 white
 \enddata{link,7371344}
 \enddata{link,7371344}
-\view{linkview,7371344,25339,0,0}
+\view{linkview,7371344,25339,0,0}.
 
 
 \section{figure}
 
 \bold{runapp} link: \bold{ezapp} on \bold{figure} object
 
-\begindata{link,7372960}
+See the \begindata{link,7372960}
 4
 ${ANDREWDIR}/help/figure.help
 0
@@ -808,14 +812,14 @@ ${ANDREWDIR}/help/figure.help
 V
 \begindata{link,7372960}
 Datastream version: 2
-figure
+figure on-line help
 2
 
 black
 white
 \enddata{link,7372960}
 \enddata{link,7372960}
-\view{linkview,7372960,25340,0,0}
+\view{linkview,7372960,25340,0,0}.
 
 
 \section{gdp}
@@ -850,6 +854,8 @@ white
 
 \section{genstatl}
 
+Generate static ATK object loads for an executable.  For more 
+information, see 
 \begindata{link,7375904}
 4
 ${ANDREWDIR}/help/genstatl.help
@@ -858,19 +864,19 @@ ${ANDREWDIR}/help/genstatl.help
 V
 \begindata{link,7375904}
 Datastream version: 2
-genstatl
+genstatl's on-line help
 2
 
 black
 white
 \enddata{link,7375904}
 \enddata{link,7375904}
-\view{linkview,7375904,25342,0,0}
+\view{linkview,7375904,25342,0,0}.
 
 
 \section{gentlex}
 
-\begindata{link,7376880}
+See the \begindata{link,7376880}
 4
 ${ANDREWDIR}/doc/PROGRAMMER/tlex.doc
 0
@@ -878,7 +884,7 @@ ${ANDREWDIR}/doc/PROGRAMMER/tlex.doc
 V
 \begindata{link,7376880}
 Datastream version: 2
-tlex
+tlex documentation
 2
 
 black
@@ -901,7 +907,7 @@ help.
 \bold{runapp} link: \bold{helpapp}
 
 Start help browser on given topic or point running browser to topic. 
- \
+ For more information, see \
 \begindata{link,13142944}
 4
 ${ANDREWDIR}/help/help.help
@@ -910,14 +916,17 @@ ${ANDREWDIR}/help/help.help
 V
 \begindata{link,13142944}
 Datastream version: 2
-help
+help's on-line help
 2
 
 black
 white
 \enddata{link,13142944}
 \enddata{link,13142944}
-\view{linkview,13142944,25344,0,0}
+\view{linkview,13142944,25344,0,0}.  Note that the links in this 
+document are to the help files themselves; apparently it is not 
+possible to link to the help application itself without programming 
+effort.
 
 
 
@@ -926,7 +935,7 @@ white
 \bold{runapp} link: \bold{ezapp} on \bold{image} object ("static", from 
 \typewriter{libbasics.so})
 
-\begindata{link,13144800}
+See the \begindata{link,13144800}
 4
 ${ANDREWDIR}/help/image.help
 0
@@ -934,14 +943,14 @@ ${ANDREWDIR}/help/image.help
 V
 \begindata{link,13144800}
 Datastream version: 2
-image
+image on-line help
 2
 
 black
 white
 \enddata{link,13144800}
 \enddata{link,13144800}
-\view{linkview,13144800,25345,0,0}
+\view{linkview,13144800,25345,0,0}.
 
 
 \section{indexpro}
@@ -962,8 +971,8 @@ no on-line help.
 
 \section{layout}
 
-\bold{runapp} link: \bold{ezapp} on \bold{layout} object
-
+\bold{runapp} link: \bold{ezapp} on \bold{layout} object.  For more 
+information, see the 
 \begindata{link,13147456}
 4
 ${ANDREWDIR}/help/layout.help
@@ -972,14 +981,15 @@ ${ANDREWDIR}/help/layout.help
 V
 \begindata{link,13147456}
 Datastream version: 2
-layout
+layout on-line help
 2
 
 black
 white
 \enddata{link,13147456}
 \enddata{link,13147456}
-\view{linkview,13147456,25346,0,0} 
+\view{linkview,13147456,25346,0,0}.  This is intended for use with 
+the ADEW system; for more information, see the 
 \begindata{link,13147952}
 4
 ${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
@@ -988,14 +998,14 @@ ${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
 V
 \begindata{link,13147952}
 Datastream version: 2
-AdewReference
+ADEW reference manual
 2
 
 black
 white
 \enddata{link,13147952}
 \enddata{link,13147952}
-\view{linkview,13147952,25347,0,0}
+\view{linkview,13147952,25347,0,0}.
 
 
 
@@ -1009,6 +1019,8 @@ Part of zip.  Undocumented.  There is no on-line help.
 
 \section{mkbrowse}
 
+Create an org document for browsing a class hierarchy.  For more 
+information, see 
 \begindata{link,13149760}
 4
 ${ANDREWDIR}/help/mkbrowse.help
@@ -1017,18 +1029,19 @@ ${ANDREWDIR}/help/mkbrowse.help
 V
 \begindata{link,13149760}
 Datastream version: 2
-mkbrowse
+mkbrowse's on-line help
 2
 
 black
 white
 \enddata{link,13149760}
 \enddata{link,13149760}
-\view{linkview,13149760,25348,0,0}
+\view{linkview,13149760,25348,0,0}.
 
 
 \section{mkparser}
 
+Create C parser code.  For more information, see 
 \begindata{link,13150656}
 4
 ${ANDREWDIR}/doc/PROGRAMMER/parser.doc
@@ -1037,7 +1050,7 @@ ${ANDREWDIR}/doc/PROGRAMMER/parser.doc
 V
 \begindata{link,13150656}
 Datastream version: 2
-parser
+mkparser's documentation
 2
 
 black
@@ -1050,6 +1063,7 @@ document, but documentation is hidden in the regular documents.
 
 \section{mkparserclass}
 
+Create C++ parser code.  For more information, see 
 \begindata{link,11896576}
 4
 ${ANDREWDIR}/doc/PROGRAMMER/prsclass.doc
@@ -1058,7 +1072,7 @@ ${ANDREWDIR}/doc/PROGRAMMER/prsclass.doc
 V
 \begindata{link,11896576}
 Datastream version: 2
-prsclass
+mkparserclass' on-line documentation
 2
 
 black
@@ -1071,6 +1085,8 @@ document, but documentation is hidden in the regular documents.
 
 \section{mkurlbutton}
 
+Create a document containing an urlbutton inset.  For more information, 
+see 
 \begindata{link,11897568}
 4
 ${ANDREWDIR}/help/urlbutton.help
@@ -1079,14 +1095,14 @@ ${ANDREWDIR}/help/urlbutton.help
 V
 \begindata{link,11897568}
 Datastream version: 2
-urlbutton
+urlbutton's on-line help
 2
 
 black
 white
 \enddata{link,11897568}
 \enddata{link,11897568}
-\view{linkview,11897568,25351,0,0}
+\view{linkview,11897568,25351,0,0}.
 
 
 \section{mrecord}
@@ -1100,7 +1116,7 @@ no on-line help.
 
 \bold{runapp} link: \bold{nessrunapp}
 
-Run a headless ness script. 
+Run a headless ness script.  For more information, see the
  \
 \begindata{link,11899056}
 4
@@ -1110,14 +1126,14 @@ ${ANDREWDIR}/help/ness.help
 V
 \begindata{link,11899056}
 Datastream version: 2
-ness
+ness on-line help
 2
 
 black
 white
 \enddata{link,11899056}
 \enddata{link,11899056}
-\view{linkview,11899056,25352,0,0}
+\view{linkview,11899056,25352,0,0}.
 
 
 
@@ -1125,6 +1141,12 @@ white
 
 \bold{runapp} link: \bold{orgapp}
 
+Usage: \bold{org} [\italic{appargs}] [\italic{file}]
+
+Creates an \bold{org} object and displays a view on that object.  It 
+loads or creates a file of the given \italic{file} name if given; 
+otherwise, it is not associated with any file.  Some additional 
+documentation is available in 
 \begindata{link,11900512}
 4
 ${ANDREWDIR}/help/org.help
@@ -1133,14 +1155,14 @@ ${ANDREWDIR}/help/org.help
 V
 \begindata{link,11900512}
 Datastream version: 2
-org
+org's on-line help
 2
 
 black
 white
 \enddata{link,11900512}
 \enddata{link,11900512}
-\view{linkview,11900512,25353,0,0}
+\view{linkview,11900512,25353,0,0}.
 
 
 \section{pipescript}
@@ -1148,7 +1170,7 @@ white
 \bold{runapp} link: \bold{pipescriptapp}
 
 Suck stdin into a text 
-inset.\
+inset.  For more information, see \
 \begindata{link,11901808}
 4
 ${ANDREWDIR}/help/pscript.help
@@ -1157,35 +1179,37 @@ ${ANDREWDIR}/help/pscript.help
 V
 \begindata{link,11901808}
 Datastream version: 2
-pscript
+pipescript's on-line help
 2
 
 black
 white
 \enddata{link,11901808}
 \enddata{link,11901808}
-\view{linkview,11901808,25354,0,0}
+\view{linkview,11901808,25354,0,0}.
 
 
 
-\section{ppm2atkimage}
+\section{image2atk}
 
-\begindata{link,11902624}
+Attempts to convert any image to an ATK-compatible image format.  For 
+more information, see
+ \begindata{link,11902624}
 4
-${ANDREWDIR}/help/ppm2atk.help
+${ANDREWDIR}/help/image2atk.help
 0
 0
 V
 \begindata{link,11902624}
 Datastream version: 2
-ppm2atk
+image2atk's on-line help
 2
 
 black
 white
 \enddata{link,11902624}
 \enddata{link,11902624}
-\view{linkview,11902624,25355,0,0}
+\view{linkview,11902624,25355,0,0}.
 
 
 \section{pref}
@@ -1231,8 +1255,8 @@ There is no on-line help.
 \bold{runapp} link: \bold{prefedapp}
 
 Launch preference editor on given preference file 
-(\typewriter{~/.preferences} by default).
-
+(\typewriter{~/.preferences} by default).  For more information, 
+see 
 \begindata{link,11731184}
 4
 ${ANDREWDIR}/help/prefed.help
@@ -1241,21 +1265,21 @@ ${ANDREWDIR}/help/prefed.help
 V
 \begindata{link,11731184}
 Datastream version: 2
-prefed
+prefed's on-line help
 2
 
 black
 white
 \enddata{link,11731184}
 \enddata{link,11731184}
-\view{linkview,11731184,25356,0,0}
+\view{linkview,11731184,25356,0,0}.
 
 
 \section{raster}
 
 \bold{runapp} link: \bold{ezapp} on \bold{raster} object
 
-\begindata{link,11732560}
+See \begindata{link,11732560}
 4
 ${ANDREWDIR}/help/raster.help
 0
@@ -1263,20 +1287,20 @@ ${ANDREWDIR}/help/raster.help
 V
 \begindata{link,11732560}
 Datastream version: 2
-raster
+raster's on-line help
 2
 
 black
 white
 \enddata{link,11732560}
 \enddata{link,11732560}
-\view{linkview,11732560,25357,0,0}
+\view{linkview,11732560,25357,0,0}.
 
 
 \section{recover}
 
 Utility for recovering unknown 
-insets.\
+insets.  For more information, see the on-line help for 
 \begindata{link,11733376}
 4
 ${ANDREWDIR}/help/unknown.help
@@ -1285,14 +1309,14 @@ ${ANDREWDIR}/help/unknown.help
 V
 \begindata{link,11733376}
 Datastream version: 2
-unknown
+unknown insets
 2
 
 black
 white
 \enddata{link,11733376}
 \enddata{link,11733376}
-\view{linkview,11733376,25358,0,0}
+\view{linkview,11733376,25358,0,0}.
 
 
 
@@ -1300,8 +1324,8 @@ white
 
 \bold{runapp} link: \bold{rofftextapp}
 
-Attempts to convert roff source to an ATK 
-document.\
+Attempts to convert roff source to an ATK document.  For more 
+information, see 
 \begindata{link,11734832}
 4
 ${ANDREWDIR}/help/rofftxt.help
@@ -1310,7 +1334,7 @@ ${ANDREWDIR}/help/rofftxt.help
 V
 \begindata{link,11734832}
 Datastream version: 2
-rofftxt
+rofftext's on-line help
 2
 
 black
@@ -1323,8 +1347,8 @@ white
 
 \section{rtf2}
 
-Convert RTF to ATK.  Probably not very good with modern RTF 
-output.\
+Convert RTF to ATK.  Probably not very good with modern RTF output.  
+For more information, see 
 \begindata{link,11933616}
 4
 ${ANDREWDIR}/help/rtf2.help
@@ -1333,14 +1357,14 @@ ${ANDREWDIR}/help/rtf2.help
 V
 \begindata{link,11933616}
 Datastream version: 2
-rtf2
+rtf2's on-line help
 2
 
 black
 white
 \enddata{link,11933616}
 \enddata{link,11933616}
-\view{linkview,11933616,25360,0,0}
+\view{linkview,11933616,25360,0,0}.
 
 
 
@@ -1348,6 +1372,7 @@ white
 
 \bold{runapp} link: \bold{runadewapp}
 
+See section 6 of the 
 \begindata{link,11934992}
 4
 ${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
@@ -1356,7 +1381,7 @@ ${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
 V
 \begindata{link,11934992}
 Datastream version: 2
-AdewReference
+ADEW reference manual
 2
 
 black
@@ -1450,15 +1475,15 @@ Usage: sched [\typewriter{-d}] [\italic{filename}]
 Part of zip: a simple schedule view of one week, 8:00a-6:00p.  Set 
 \typewriter{-d} for debug. Might be more useful if there were actually any 
 docs, instead of just a sample schedule that formats badly on-screen.  Note 
-that it loads the sample schedule, itcCR.scd, if no file name given.  
-There is no on-line help.
+that it loads the sample schedule, \typewriter{itcCR.scd}, if no file name 
+given.  There is no on-line help.
 
 
 
 \section{scribetext}
 
 Apparently low-quality scribe-to-atk 
-converter.\
+converter.  For details, see 
 \begindata{link,11328384}
 4
 ${ANDREWDIR}/help/scribetxt.help
@@ -1467,21 +1492,20 @@ ${ANDREWDIR}/help/scribetxt.help
 V
 \begindata{link,11328384}
 Datastream version: 2
-scribetxt
+scribetext's on-line help
 2
 
 black
 white
 \enddata{link,11328384}
 \enddata{link,11328384}
-\view{linkview,11328384,25363,0,0}
+\view{linkview,11328384,25363,0,0}.
 
 
 
 \section{sys}
 
-Print Andrew's idea of what system you're 
-running.\
+Print Andrew's idea of what system you're running.  For details, see 
 \begindata{link,11329280}
 4
 ${ANDREWDIR}/help/sys.help
@@ -1490,14 +1514,14 @@ ${ANDREWDIR}/help/sys.help
 V
 \begindata{link,11329280}
 Datastream version: 2
-sys
+sys' on-line help
 2
 
 black
 white
 \enddata{link,11329280}
 \enddata{link,11329280}
-\view{linkview,11329280,25364,0,0}
+\view{linkview,11329280,25364,0,0}.
 
 
 
@@ -1505,7 +1529,7 @@ white
 
 \bold{runapp} link: \bold{ezapp} on \bold{table} object
 
-\begindata{link,11331376}
+See \begindata{link,11331376}
 4
 ${ANDREWDIR}/help/table.help
 0
@@ -1513,14 +1537,14 @@ ${ANDREWDIR}/help/table.help
 V
 \begindata{link,11331376}
 Datastream version: 2
-table
+table's on-line help
 2
 
 black
 white
 \enddata{link,11331376}
 \enddata{link,11331376}
-\view{linkview,11331376,25365,0,0}
+\view{linkview,11331376,25365,0,0}.
 
 
 \section{toez}
@@ -1530,7 +1554,7 @@ white
 Convert scribe and roff files to ATK text.  Uses rofftext for roff, and its 
 own scribe-to-atk implementation for scribe.  The documentation claims 
 support for plain-text, but I don't see it in the 
-code.\
+code.  For details, see 
 \begindata{link,11332672}
 4
 ${ANDREWDIR}/help/toez.help
@@ -1539,14 +1563,14 @@ ${ANDREWDIR}/help/toez.help
 V
 \begindata{link,11332672}
 Datastream version: 2
-toez
+toez's on-line help
 2
 
 black
 white
 \enddata{link,11332672}
 \enddata{link,11332672}
-\view{linkview,11332672,25366,0,0}
+\view{linkview,11332672,25366,0,0}.
 
 
 
@@ -1557,11 +1581,11 @@ white
 Kind of stupid terminal emulator for executing shell, etc. within ATK 
 environment.  Note that in zsh, you need to disable colors and:
 
- 	set +o zle
+\typewriter{\indent{set +o zle
 
-	PROMPT=%
+PROMPT=%}}
 
- \
+For details, see 
 \begindata{link,11334048}
 4
 ${ANDREWDIR}/help/tscript.help
@@ -1570,14 +1594,14 @@ ${ANDREWDIR}/help/tscript.help
 V
 \begindata{link,11334048}
 Datastream version: 2
-tscript
+typescript's on-line help
 2
 
 black
 white
 \enddata{link,11334048}
 \enddata{link,11334048}
-\view{linkview,11334048,25367,0,0}
+\view{linkview,11334048,25367,0,0}.
 
 
 
@@ -1604,34 +1628,11 @@ reason fails often.  There is no on-line help.
 
 
 
-\section{xwd2atkimage}
-
-Attempts to convert xwd output to an ATK-compatible image format.  Note 
-that it doesn't work for current xwd. 
- \
-\begindata{link,15182800}
-4
-${ANDREWDIR}/help/xwd2atk.help
-0
-0
-V
-\begindata{link,15182800}
-Datastream version: 2
-xwd2atk
-2
-
-black
-white
-\enddata{link,15182800}
-\enddata{link,15182800}
-\view{linkview,15182800,25368,0,0}
-
-
-
 \section{zip}
 
 \bold{runapp} link: \bold{ezapp} on \bold{zip} object
 
+See the 
 \begindata{link,15184496}
 4
 ${ANDREWDIR}/help/zip.help
@@ -1640,14 +1641,15 @@ ${ANDREWDIR}/help/zip.help
 V
 \begindata{link,15184496}
 Datastream version: 2
-zip
+zip on-line help
 2
 
 black
 white
 \enddata{link,15184496}
 \enddata{link,15184496}
-\view{linkview,15184496,25369,0,0}
+\view{linkview,15184496,25369,0,0}.
+
 \begindata{bp,15184992}
 Version 2
 n 0
@@ -12217,13 +12219,13 @@ white
 \view{linkview,119,1119,0,0}
  \begindata{link,120}
 4
-${ANDREWDIR}/help/ppm2atk.help
+${ANDREWDIR}/help/image2atk.help
 0
 0
 V
 \begindata{link,120}
 Datastream version: 2
-ppm2atk
+image2atk
 2
 
 black
@@ -13095,22 +13097,6 @@ white
 \enddata{link,194}
 \enddata{link,194}
 \view{linkview,194,1194,0,0}
- \begindata{link,195}
-4
-${ANDREWDIR}/help/xwd2atk.help
-0
-0
-V
-\begindata{link,195}
-Datastream version: 2
-xwd2atk
-2
-
-black
-white
-\enddata{link,195}
-\enddata{link,195}
-\view{linkview,195,1195,0,0}
  \begindata{link,196}
 4
 ${ANDREWDIR}/help/zip.help

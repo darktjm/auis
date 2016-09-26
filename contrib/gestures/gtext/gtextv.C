@@ -121,17 +121,14 @@ static proctable_fptr textview_ZapRegionCmd = NULL;
 boolean gtextv::InitializeClass() 
      {
   FILE *fp;
-  char *temp;
-  char *filename;
+  const char *filename;
   struct proctable_Entry *pe=NULL;
   doneclassifier = NULL;
 
-  temp = (char *) environ::GetProfile("GestureFile");
+  filename = environ::GetProfile("GestureFile");
 
-  if(temp == NULL) 
-    filename = strdup(environ::AndrewDir(GESTURE_FILE));
-  else
-    filename = strdup(temp);
+  if(filename == NULL) 
+    filename = environ::AndrewDir(GESTURE_FILE);
 
   fp = fopen(filename,"r");
 
@@ -144,8 +141,6 @@ boolean gtextv::InitializeClass()
   fclose(fp);
 
   fvb = FvAlloc(0);
-
-/*  free(filename);*/
 
   pe=proctable::Lookup("textview-copy-region");
   if(pe) textview_CopyRegionCmd = proctable::GetFunction(pe);

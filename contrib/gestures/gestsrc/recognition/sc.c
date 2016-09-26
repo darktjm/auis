@@ -376,7 +376,6 @@ sRead(FILE *infile)
 	for(i = 0; i < n; i++) {
 		fscanf(infile, "%s", buf);
 		scd = sAddClass(sc, buf);
-		scd->name = recog_scopy(buf);
 		printf("%s ", scd->name), fflush(stdout);
 	}
 	sc->w = allocate(sc->nclasses, Vector);

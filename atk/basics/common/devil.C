@@ -26,7 +26,7 @@ static void print_il_error(bool print)
     ILenum err;
     while((err = ilGetError()) != IL_NO_ERROR)
 	if(print)
-	    fprintf(stdout, "devil error: %s\n", iluErrorString(err));
+	    fprintf(stderr, "devil error: %s\n", iluErrorString(err));
 }
 
 long imageio::WriteNative(FILE  *file, const char  *filename)

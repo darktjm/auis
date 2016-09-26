@@ -21,7 +21,6 @@ ATK_IMPL("matte.H")
 #include <cursor.H>
 #include <graphic.H>
 #include <im.H>
-#include <keymap.H>
 #include <dataobject.H>
 #include <environment.H>
 #include <style.H>
@@ -33,7 +32,6 @@ ATK_IMPL("matte.H")
 #define DRAWING FALSE
 
 static class menulist *matteMenus;
-static class keymap *matteKeyMap;
 
 
 ATKdefineRegistry(matte, view, matte::InitializeClass);
@@ -471,8 +469,7 @@ static struct bind_Description matteBindings[]={
 boolean matte::InitializeClass()
     {
     matteMenus = new menulist;
-    matteKeyMap =  new keymap;
-    bind::BindList(matteBindings, matteKeyMap , matteMenus, &matte_ATKregistry_ );
+    bind::BindList(matteBindings, NULL , matteMenus, &matte_ATKregistry_ );
     return TRUE;
 }
 

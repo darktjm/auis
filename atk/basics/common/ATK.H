@@ -97,7 +97,18 @@ extern void doStaticLoads(void);
  * If an implementation spans many files, the programmer must
  * code the initialization explicitly.  
  */
-#define ATKinit {if (ATKinited_ && *ATKinited_) {boolean (*initfunc)()=(*ATKinited_); (*ATKinited_)=NULL; ATKinited_=NULL; initfunc();  }}
+#define ATKinit do { \
+    if (ATKinited_ && *ATKinited_) { \
+	boolean (*initfunc)()=(*ATKinited_); \
+	(*ATKinited_)=NULL; \
+	ATKinited_=NULL; \
+	if(!initfunc()) { \
+	    /* don't know the class name */ \
+	    fputs("Class initialization failed.\n", stderr); \
+	    exit(1); /* no clean way to deal with this, I guess */ \
+	} \
+    } \
+} while(0)
 
 /*
  * The atk class is the root of entire atk class heirarchy.

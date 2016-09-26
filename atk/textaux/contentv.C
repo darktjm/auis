@@ -14,7 +14,6 @@ ATK_IMPL("contentv.H")
 #include <bind.H>
 #include <view.H>
 #include <menulist.H>
-#include <keymap.H>
 #include <content.H>
 #include <message.H>
 #include <mark.H>
@@ -34,7 +33,6 @@ ATK_IMPL("contentv.H")
 
 #include "contentv.H"
 static class menulist *contentvMenus;
-static class keymap *contentvKeyMap;
 static int ScrollTop = FALSE;
 #define Data(self) ((class content *)(((class view *) self)->dataobject))
 #define Text(v)	(class text *) ((v)->dataobject)
@@ -290,8 +288,7 @@ boolean contentv::InitializeClass()
     {
     struct ATKregistryEntry  *textviewtype = ATK::LoadClass("textview");
     contentvMenus = new menulist;
-    contentvKeyMap =  new keymap;
-    bind::BindList(contentvBindings, contentvKeyMap , contentvMenus, &contentv_ATKregistry_ );
+    bind::BindList(contentvBindings, NULL , contentvMenus, &contentv_ATKregistry_ );
     proctable::DefineProc("contentv-make-window",(proctable_fptr)contentv_MakeContents,textviewtype,NULL,"Make a table of contents window");
     ScrollTop = environ::GetProfileSwitch("ContentsScrollTop", FALSE);
 

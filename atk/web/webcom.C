@@ -387,8 +387,8 @@ eweb(FILE  *f,  void  *td)  {
 
 static	FILE *setuppipes();
 static void zombie(int pid, long data, WAIT_STATUS_TYPE *zs) {
-    fprintf(stderr, "\"aw3c\" exited.  Restarting.\n");
-    message::DisplayString(NULL, 100, "\"aw3c\" exited.  Restarting.\n");
+    fprintf(stderr, "\"awww\" exited.  Restarting.\n");
+    message::DisplayString(NULL, 100, "\"awww\" exited.  Restarting.\n");
     im::ForceUpdate();
     sleep(1);
     fclose(inf);
@@ -420,22 +420,15 @@ setuppipes()  {
 		dup2(towww[0], 0);
 		close(towww[1]);
 		foo[1] = NULL;
-#undef ATKWWW
-#define ATKWWW "aw3c"
-#ifdef ATKWWW
-		foo[0] = ATKWWW;
-		execvp(*foo, (char **)foo);
-#else
 		/* not defined, try "awww" */
-		foo[0] = (char *)environ::AndrewDir("/bin/aw3c");
-#endif
+		foo[0] = (char *)environ::AndrewDir("/etc/awww");
 		execvp(*foo, (char **)foo);
 
-		foo[0] = "aw3c";
+		foo[0] = "awww";
 		execvp(*foo, (char **)foo);
 
 		/* nope, no awww */
-		fprintf(stderr, "web: Cannot find \"aw3c\", %s\n",
+		fprintf(stderr, "web: Cannot find \"awww\", %s\n",
 				"the web interface");
 		exit(9);
 	} else if(kidpid>0) {
@@ -450,7 +443,7 @@ setuppipes()  {
 //	    im::AddFileHandler(errf, (im_filefptr)eweb, NULL, 0);
 	} else {
 	    outf=NULL;
-	    fprintf(stderr, "web: Couldn't fork \"aw3c\".\n");
+	    fprintf(stderr, "web: Couldn't fork \"awww\".\n");
 	}
 	return outf;
 }
@@ -481,7 +474,7 @@ webcom::InitializeClass()  {
 	atkatom = atom::Intern("application/andrew-inset");
 	setuppipes();
 	if (outf == NULL) {
-		fprintf(stderr, "web: Error ,  cannot open aw3c\n");
+		fprintf(stderr, "web: Error ,  cannot open awww\n");
 	}
 	firstcom = NULL;
 	st = en = que;

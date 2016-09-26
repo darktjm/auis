@@ -236,7 +236,6 @@ void SetLogFont(class text  *textObj)
 boolean consoleClass::InitializeClass()
     {
     mydbg(("entering: consoleClass__InitializeClass\n"));
-    ::stdMenulist = new menulist;
     PrepareStdMenus(TRUE, &::stdMenulist, &consoleClass_ATKregistry_ );
     RegionLogs[ERRORREGIONLOG].TextLog = new text;
     SetLogFont(RegionLogs[ERRORREGIONLOG].TextLog);

@@ -16,14 +16,14 @@ static void errhandler(FREE_IMAGE_FORMAT fif, const char *message)
     const char *fmt = FreeImage_GetFormatFromFIF(fif);
     if(!fmt)
 	fmt = "";
-    fprintf(stdout, "FreeImage %s error: %s\n", fmt, message);
+    fprintf(stderr, "FreeImage %s error: %s\n", fmt, message);
 }
 
 static boolean freeimage_init()
 {
     /* may already done by .so _init */
     FreeImage_Initialise(FALSE);
-    fprintf(stdout, "%s\n", FreeImage_GetCopyrightMessage());
+    fprintf(stderr, "%s\n", FreeImage_GetCopyrightMessage());
     FreeImage_SetOutputMessage(errhandler);
     return TRUE;
 }

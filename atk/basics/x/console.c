@@ -102,7 +102,7 @@ void xim_EstablishConsole(char  * xhost, char *progname)
 
 		signal(SIGPIPE, SIG_IGN);
 
-		fclose(stderr);
+		close(2);
 		dup2(fd, 2);
 #ifdef hpux
 	    setvbuf(fdopen(2, "w"), NULL, _IOLBF, BUFSIZ);

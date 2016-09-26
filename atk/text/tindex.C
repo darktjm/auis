@@ -22,7 +22,6 @@ ATK_IMPL("tindex.H")
 #include <content.H>
 #include <buffer.H>
 #include <tindex.H>
-#include <cursor.H>
 
 #include "txtvpse.h"
 
@@ -92,7 +91,6 @@ static class textview *getrealview(class view  *v)
 	return (class textview *) v;
     else return NULL;
 }
-static class cursor *WaitCursor;
 static boolean skipnewlines(class text  *d,long  *pos,long  *len)
 {
     long i,end;
@@ -475,8 +473,6 @@ boolean tindex::InitializeClass()
     proctable::DefineProc("tindex-index-plain",(proctable_fptr) tindex_MakeIndexPlain,viewtype,NULL,"make the index entries plain");
     proctable::DefineProc("tindex-expose-inv-index",(proctable_fptr) tindex_ExposeInvIndex,viewtype,NULL,"Expose the invisible index entries");
     proctable::DefineProc("tindex-hide-inv-index",(proctable_fptr) tindex_HideInvIndex,viewtype,NULL,"Hide the invisible index entries");
-    WaitCursor = cursor::Create(NULL);
-    if(WaitCursor) (WaitCursor)->SetStandard(Cursor_Wait);
     return TRUE;
 }
 

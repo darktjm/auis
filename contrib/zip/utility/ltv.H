@@ -58,6 +58,7 @@ public:
    struct suite_item		    *left_name_item, *right_name_item;
    struct rectangle		     block, enclosure;
    class menulist		    *menu;
+   class keystate		    *keystate;
    class cursor			    *cursor;
    unsigned char			     background_light;
    boolean			     background_exposed;

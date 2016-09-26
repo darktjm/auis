@@ -23,8 +23,8 @@ static long NProcs;
 
 #define KEYSORT 1
 #define PROCSORT 2
-#define KEYSORTSTRING "sort -t\001 -b +0 +1"
-#define PROCSORTSTRING "sort -t\001 -b +1"
+#define KEYSORTSTRING "sort -t\001 -b -k1,2"
+#define PROCSORTSTRING "sort -t\001 -k 2 -k 1"
 #define TMPA "/tmp/,tmp1"
 #define TMPB "/tmp/,tmp2"
 #define TMPC "/tmp/,tmp3"

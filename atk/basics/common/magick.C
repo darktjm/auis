@@ -24,7 +24,7 @@ static void magick_err(MagickWand *wand)
     const char *msg = MagickGetException(wand, &sev);
     if(!msg)
 	msg = "??";
-    fprintf(stdout, "ImageMagick error: %s\n", msg);
+    fprintf(stderr, "ImageMagick error: %s\n", msg);
     DestroyMagickWand(wand);
 }
 

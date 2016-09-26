@@ -51,7 +51,6 @@ static class atom *UNSETFLAG;
 #define RESIZING FALSE
 #define DRAWING FALSE
 static class menulist *celviewMenus;
-static class keymap *celviewKeyMap;
 #define DataObject(A) (A->dataobject)
 #define Cel(A) ((class cel *) DataObject(A))
 #define NameSet(V) (((class view *)V)->name_explicitly_set)
@@ -780,8 +779,7 @@ static void SetInvisible(class celview  *self)
 boolean celview::InitializeClass()
     {
     celviewMenus = new menulist;
-    celviewKeyMap =  new keymap;
-    bind::BindList(celviewBindings, celviewKeyMap , celviewMenus, &celview_ATKregistry_ );
+    bind::BindList(celviewBindings, NULL , celviewMenus, &celview_ATKregistry_ );
     proctable::DefineProc("celview-set-visible", (proctable_fptr)SetVisible,&celview_ATKregistry_ ,NULL, "Make celview visible");
     proctable::DefineProc("celview-set-invisible", (proctable_fptr)SetInvisible,&celview_ATKregistry_ ,NULL, "Make celview invisible");
    UNSETFLAG = atom::Intern("XXXUNDEFINEDXXX");

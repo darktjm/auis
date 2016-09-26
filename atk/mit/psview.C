@@ -28,7 +28,6 @@
 #include <psview.H>
 #include <bind.H>
 #include <menulist.H>
-#include <keymap.H>
 #include <print.H>
 #include <text.H>
 #include <proctable.H>
@@ -54,7 +53,6 @@
 #define TITLEPTS 12
 
 static class menulist *psviewMenus;
-static class keymap *psviewKeyMap;
 
 #define DisplayAndReturn(self, String) {message::DisplayString(self, 0, String); return;}
 
@@ -257,9 +255,8 @@ psview::InitializeClass()
     ATK::LoadClass("view");
 
     psviewMenus = new menulist;
-    psviewKeyMap =  new keymap;
 
-    bind::BindList(psviewBindings, psviewKeyMap , psviewMenus, &psview_ATKregistry_ );
+    bind::BindList(psviewBindings, NULL , psviewMenus, &psview_ATKregistry_ );
     return TRUE;
 }
 

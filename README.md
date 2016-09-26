@@ -64,6 +64,42 @@ to get the original, as modified by me).  Yes, I know how stupid it is
 to need an installed binary to read the installation instructions.
 Again, atk writes ASCII files, so you should be able to read it anyway.
 
+The following known dependencies currently exist:
+
+  - X and other UNIX utilities scattered throughout.
+  - ImageMagick.  You can change this at build-time to DevIL or
+    FreeImage by changing IMAGEIO in config/site.mcr.
+  - GNU roff.
+  - gv. This can be overridden with the PSCPreviewCommand preference.
+  - xditview.  This can be overridden with the PreviewCommand
+    preference.
+
+I recommend the following preference settings in ~/.preferences:
+
+  - `*.ErrorsToConsole: No`
+
+    Without this, messages to standard error will disappear into the
+    ether, unless you are running the AUIS commmand "console".
+
+  - `*.ThumbScroll: Yes`
+  
+    This will enable continuous scrolling while dragging the knob.  In
+    general, keep in mind that scrollbars don't work as you might think,
+    especially if you've never used Athena-based X apps.  You might
+    want to look at "help scroll".
+
+  - `*.PreviewCommand: grops>/tmp/gps.$$; gv /tmp/gps.$$; rm /tmp/gps.$$`
+
+    gv is a slightly better previewer than xditview.  Piping grops
+    directly into gv only works for the first page, at best.  Note this
+    only affects previews of troff-generated output; direct postscript
+    output is handled by PSCPreviewCommand.
+
+  - `*.Geometry: WxH`
+  
+    Replace W and H by something other than the weird default of
+    512x512.
+
 Incompatibilities
 -----------------
 
