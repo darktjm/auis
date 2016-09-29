@@ -1,7 +1,6 @@
 /* Copyright 1995 Carnegie Mellon University -- All rights reserved */
 #ifndef _weblink_H_
 #define _weblink_H_
-ATK_INTER
 /** \addtogroup libhtmltext
  * @{ */
 class text;

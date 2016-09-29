@@ -101,7 +101,6 @@ The following skeletons give the structure of typical Andrew source files.
 
 ====================================
 
-ATK_INTER
 
 #ifndef _\italic{classname}_H_
 

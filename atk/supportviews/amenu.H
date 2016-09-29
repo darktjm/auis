@@ -1,6 +1,5 @@
 #ifndef _AMENU_H
 #define _AMENU_H
-ATK_INTER
 /* Copyright 1995 Carnegie Mellon University All rights reserved. */
 /** \addtogroup libsupviews
  * @{ */

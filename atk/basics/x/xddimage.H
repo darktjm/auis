@@ -1,6 +1,5 @@
 #ifndef _xddimage_H_
 #define _xddimage_H_
-ATK_INTER
 /* Copyright 1995 Carnegie Mellon University All rights reserved. */
 
 

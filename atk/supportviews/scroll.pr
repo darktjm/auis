@@ -779,7 +779,7 @@ mimicing, and to 1 otherwise.
 
 #~endhelp
 
-ScrollbarWindowPadding:
+ScrollWindowPadding:
 
 
 #~type integer
@@ -894,25 +894,7 @@ ContScrollTime: 1000
 
 This controls how fast repeat scrolling  in large (page size) increments 
 occurs.  Again it is in milliseconds.  Increments between the value of 
-MaxContScrollTime and MinContScrollTime is done by interpolating between those 
-two values.
-
-#~endhelp
-
-MinContScrollTime: 1000
-
-
-#~type integer
-
-#~views integer slider
-
-#~range 0 1000
-
-#~help
-
-This controls how fast repeat scrolling  in large (page size) increments 
-occurs.  Again it is in milliseconds.  Increments between the value of 
-MaxContScrollTime and MinContScrollTime is done by interpolating between those 
+MaxContScrollTime and ContScrollTime is done by interpolating between those 
 two values.
 
 #~endhelp

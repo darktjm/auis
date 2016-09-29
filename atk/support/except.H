@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _except_H_
 #define _except_H_
 

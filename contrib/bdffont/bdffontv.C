@@ -1000,7 +1000,6 @@ static struct bind_Description bdffontv_Bindings[] =
 static class keymap *keys;
 static class menulist *menus;
 static class style *fieldstyle;
-static class style *valuestyle;
 static class style *fontnamestyle;
 static class style *helpstyle;
 
@@ -1013,9 +1012,6 @@ boolean bdffontv::InitializeClass()
 
     fieldstyle = new style;
     (fieldstyle)->AddNewFontFace( fontdesc_Italic);
-
-    valuestyle = new style;
-    (valuestyle)->AddNewFontFace( fontdesc_Plain);
 
     fontnamestyle = new style;
     (fontnamestyle)->AddNewFontFace( fontdesc_Bold);

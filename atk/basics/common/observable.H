@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _observable_H_
 #define _observable_H_
 /* ********************************************************************** *\

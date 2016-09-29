@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _htmlform_H_
 #define _htmlform_H_
 /** \addtogroup libhtmltext

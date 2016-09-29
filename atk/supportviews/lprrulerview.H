@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _lprrulerview_H_
 #define _lprrulerview_H_
 /* ********************************************************************** *\

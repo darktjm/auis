@@ -213,7 +213,7 @@ zipedit::InitializeClass( )
 /*===debug=1;===*/
   /*IN(zipedit::InitializeClass );*/
   class_keymap = new keymap;
-  proc = proctable::DefineProc( "self-insert", (proctable_fptr) Accept_Character,
+  proc = proctable::DefineProc( "zipedit-self-insert", (proctable_fptr) Accept_Character,
 				&zipedit_ATKregistry_ , NULL, "Enter Character" );
   string[1] = 0;
   for ( *string = ' '; *string < 127; (*string)++ )

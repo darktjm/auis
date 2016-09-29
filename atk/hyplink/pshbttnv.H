@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _pushbuttonview_H_
 #define _pushbuttonview_H_
 /* ********************************************************************** *\

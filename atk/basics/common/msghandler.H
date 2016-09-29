@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _msghandler_H_
 #define _msghandler_H_
 /* ********************************************************************** *\

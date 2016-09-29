@@ -2,7 +2,6 @@
 
 #ifndef _wbuttonv_H_
 #define _wbuttonv_H_
-ATK_INTER
 /** \addtogroup libhtmltext
  * @{ */
 #include <buttonV.H>

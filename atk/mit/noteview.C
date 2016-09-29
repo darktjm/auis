@@ -12,7 +12,6 @@
 #include "noteview.H"
 #include "bind.H"
 #include "menulist.H"
-#include "keymap.H"
 #include "text.H"
 #include "proctable.H"
 
@@ -25,7 +24,6 @@
 #define TITLEPTS 12
 
 static class menulist *noteviewMenus;
-static class keymap *noteviewKeyMap;
 
 
 /****************************************************************/
@@ -99,8 +97,7 @@ noteview::InitializeClass()
     struct ATKregistryEntry  *viewtype = ATK::LoadClass("view");
 
     noteviewMenus = new menulist;
-    noteviewKeyMap =  new keymap;
-    bind::BindList(noteviewBindings, noteviewKeyMap , noteviewMenus, &noteview_ATKregistry_ );
+    bind::BindList(noteviewBindings, NULL , noteviewMenus, &noteview_ATKregistry_ );
     proctable::DefineProc("noteview-insertnote",(proctable_fptr)insert,textviewtype,NULL,"Insert Note Object");
     proctable::DefineProc("noteview-openallnotes",(proctable_fptr)openall,viewtype,NULL,"open Note Views");
     proctable::DefineProc("noteview-closeallnotes",(proctable_fptr)closeall,viewtype,NULL,"close Note Views");

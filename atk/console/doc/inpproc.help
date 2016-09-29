@@ -7,7 +7,7 @@
 
 
 
-console-toggle-var:  dummy
+console-toggle-var:  dummy (private?)
 
 console-read-new-console-file:  ReadNewConsoleFile,"Display~2, Read New 
 Console File~24"
@@ -27,11 +27,6 @@ console-write-log-file:  "Write Log File~40"
 console-clear-logs:  "Clear All Logs~45"
 
 console-getstats:  "Restart Getstats~60"
-
-console-debug:  "Expert Options~90, Turn Off Debugging~90", "Expert 
-Options~90, Turn On Debugging~90"
-
-console-venus-novelty:  "Expert Options~90, Venus Novelty~10"
 
 console-debug:  "Expert Options~90, Turn Off Debugging~90", "Expert 
 Options~90, Turn On Debugging~90"

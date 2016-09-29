@@ -53,8 +53,7 @@ timeodayview::InitializeClass()
   Initialize all the class data.
 */
   int i;
-  char *menuname;
-  char temp[250];
+  char menuname[250];
   struct proctable_Entry *proc = NULL;
   char menutitlefmt[200];
   static char procname[200];
@@ -67,8 +66,7 @@ timeodayview::InitializeClass()
   sprintf(menutitlefmt, "%s,%%s", "Time O'Day");
   
   for (i=0; formats[i]; i+=2) {
-    sprintf(temp, menutitlefmt, formats[i]);
-    menuname = NewString(temp);
+    sprintf(menuname, menutitlefmt, formats[i]);
     (timeodayview_menulist)->AddToML( menuname, proc, (long)formats[i+1], 0);
   }
   

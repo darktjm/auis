@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _phlumph_H_
 #define _phlumph_H_
 

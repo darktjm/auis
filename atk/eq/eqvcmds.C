@@ -1307,8 +1307,8 @@ static struct bind_Description eqviewBindings[]={
     {"eqview-special", "\033a",0,"Formulae,Insert Symbol...~51",0,0,(proctable_fptr)eqview_Special, "Special symbol (dialog)."},
 
     /* FRONT menu card */
-    {"eqview-cut", "\027",0,NULL,0,0,(proctable_fptr)eqview_Cut, "Cut~11"},
-    {"eqview-copy", "\033w",0,NULL,0,0,(proctable_fptr)eqview_Copy, "Copy~12"},
+    {"eqview-cut", "\027",0,NULL,0,NULL,(proctable_fptr)eqview_Cut, "Cut"},
+    {"eqview-copy", "\033w",0,NULL,0,0,(proctable_fptr)eqview_Copy, "Copy"},
     {"eqview-paste", "\031",0,"Paste~10",0,0,(proctable_fptr)eqview_Paste, "Paste~13"},
 
 /*    {"eqview-save", "\030\023",0,"Save~31",0,0,(proctable_fptr)eqview_Save, "Save equation in default file."}, */

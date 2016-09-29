@@ -87,7 +87,6 @@ static struct bind_Description srctextBindings[]={
     {"srctextview-paren","}",'}'},
     {"srctextview-reformat", "\033\022",0, "Source Text,Format line/region~12",0,textview_NotReadOnlyMenus, (proctable_fptr)reformat, "Indent line or region and reflow comments."},
     {"srctextview-reindent", "\t",0, "Source Text,Indent line/region~11",0,textview_NotReadOnlyMenus, (proctable_fptr)reindent, "Indent the current line or selected region."},
-    {"srctextview-tab", NULL,0, NULL,0,0, (proctable_fptr)reindent, "(Obsolete, replaced by srctextview-reindent.)"},
     {"srctextview-newline", "\n", 0, NULL,0, 0, (proctable_fptr)newline,"Insert a newline and indent properly."},
     {"srctextview-return", "\015", 0, NULL,0, 0, (proctable_fptr)retrn,"Insert a newline."},
     {"srctextview-reindent-return", 0,0, NULL,0,0, (proctable_fptr)reindretrn,"Indent current line properly and insert a newline."},

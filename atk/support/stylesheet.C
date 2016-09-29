@@ -125,7 +125,7 @@ class menulist *stylesheetInternal::GetMenuList(proctable_fptr procname, struct 
     else
         (this->styleMenu)->ClearML();
 
-    proc = proctable::DefineProc("wraplook", procname, infotype, NULL, NULL);
+    proc = proctable::DefineProc("stylesheet-wraplook", procname, infotype, NULL, NULL);
 
     for (i = 0, styles = this->styles; i < this->nstyles; i++, styles++)
 	(this->styleMenu)->AddToML( (*styles)->menuName, proc, (long)(*styles)->GetName(), 0);

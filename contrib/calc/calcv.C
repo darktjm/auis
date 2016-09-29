@@ -199,7 +199,7 @@ calcv::calcv( )
   (this)->SetDimensions(  150, 175 );
   bzero( &this->states, sizeof(struct calcv_states) );
   Keystate = keystate::Create( this, class_keymap );
-  key_proc = proctable::DefineProc( "stroke", (proctable_fptr)Stroke,
+  key_proc = proctable::DefineProc( "calcv-stroke", (proctable_fptr)Stroke,
 		&calcv_ATKregistry_ , NULL, "Type Digit or Operator" );
   AreaCount = 0;
   for ( i = 0; setups[i].string; i++ )

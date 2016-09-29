@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _typescript_H_
 #define _typescript_H_
 /* ********************************************************************** *\

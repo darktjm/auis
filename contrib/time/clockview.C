@@ -204,50 +204,50 @@ clockview::InitializeClass()
 
   proc = proctable::DefineProc("clock-set-num-labels", (proctable_fptr)MenuSetShape, &clockview_ATKregistry_ , NULL, "Set the clock inset's shape parameters.");
   sprintf(menuname, MENUTITLE, "Shape~10", "Circle~1");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"A", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"A", 0);
   sprintf(menuname, MENUTITLE, "Shape~10", "Square~2");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"B", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"B", 0);
   sprintf(menuname, MENUTITLE, "Shape~10", "No border~11");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"1", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"1", 0);
   sprintf(menuname, MENUTITLE, "Shape~10", "Thin border~12");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"2", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"2", 0);
   sprintf(menuname, MENUTITLE, "Shape~10", "Thick border~13");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"3", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"3", 0);
 
   proc = proctable::DefineProc("clock-set-labels", (proctable_fptr)MenuSetLabels, &clockview_ATKregistry_ , NULL, "Set the clock inset's label parameters.");
   sprintf(menuname, MENUTITLE, "Labels~11", "None~1");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"A", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"A", 0);
   sprintf(menuname, MENUTITLE, "Labels~11", "1  (12)~2");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"B", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"B", 0);
   sprintf(menuname, MENUTITLE, "Labels~11", "4 (12  3  6  9)~3");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"C", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"C", 0);
   sprintf(menuname, MENUTITLE, "Labels~11", "12 (12  1  2 ...)~4");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"D", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"D", 0);
 
   sprintf(menuname, MENUTITLE, "Labels~11", "Arabic (12)~11");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"1", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"1", 0);
   sprintf(menuname, MENUTITLE, "Labels~11", "Roman (XII)~12");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"2", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"2", 0);
   sprintf(menuname, MENUTITLE, "Labels~11", "English (Twelve)~13");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"3", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"3", 0);
 
   proc = proctable::DefineProc("clock-set-ticks", (proctable_fptr)MenuSetTicks, &clockview_ATKregistry_ , NULL, "Set the clock inset's tick count parameters.");
   sprintf(menuname, MENUTITLE, "Ticks~12", "None~1");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"A", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"A", 0);
   sprintf(menuname, MENUTITLE, "Ticks~12", "1 / 4~2");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"B", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"B", 0);
   sprintf(menuname, MENUTITLE, "Ticks~12", "4 / 12~3");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"C", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"C", 0);
   sprintf(menuname, MENUTITLE, "Ticks~12", "12 / 60~4");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"D", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"D", 0);
 
   proc = proctable::DefineProc("clock-set-seconds", (proctable_fptr)MenuSetSeconds, &clockview_ATKregistry_ , NULL, "Set the clock inset's seconds hand parameters.");
   sprintf(menuname, MENUTITLE, "Seconds~13", "No Second Hand~1");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"A", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"A", 0);
   sprintf(menuname, MENUTITLE, "Seconds~13", "Radial Hand~2");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"B", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"B", 0);
   sprintf(menuname, MENUTITLE, "Seconds~13", "Floating Tick~3");
-  (clockview_menulist)->AddToML( NewString(menuname), proc, (long)"C", 0);
+  (clockview_menulist)->AddToML( menuname, proc, (long)"C", 0);
 
   return(TRUE);
 }

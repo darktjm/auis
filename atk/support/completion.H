@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _completion_H_
 #define _completion_H_
 /* ********************************************************************** *\

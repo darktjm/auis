@@ -252,7 +252,9 @@ Usage: \bold{be1be2} [\italic{appargs}] \italic{files}
 
 For each given file, the output file is the same, but with any 
 \typewriter{.d}, if present, stripped, and \typewriter{.ez} appended. 
- Standard app arguments are supported; for now, these are only documented \begindata{link,7160016}
+ Standard app arguments are supported; for now, these are only documented 
+ in the documentation for 
+\begindata{link,7160016}
 4
 ${ANDREWDIR}/doc/DEVELOPER/AndrewProgramming.ez
 0
@@ -573,7 +575,7 @@ ${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
 V
 \begindata{link,7216784}
 Datastream version: 2
-AdewReference
+ADEW reference manual
 2
 
 black
@@ -642,7 +644,7 @@ white
 
 \bold{runapp} link: \bold{ezapp} on \bold{eq} object
 
-\begindata{link,7221104}
+See the \begindata{link,7221104}
 4
 ${ANDREWDIR}/help/eq.help
 0
@@ -650,20 +652,22 @@ ${ANDREWDIR}/help/eq.help
 V
 \begindata{link,7221104}
 Datastream version: 2
-eq
+eq on-line help
 2
 
 black
 white
 \enddata{link,7221104}
 \enddata{link,7221104}
-\view{linkview,7221104,25333,0,0}
+\view{linkview,7221104,25333,0,0}.
 
 
 \section{ez}
 
 \bold{runapp} link: \bold{ezapp}
 
+The main entry point to the ATK inset editing system.  For details, 
+see the 
 \begindata{link,7222400}
 4
 ${ANDREWDIR}/help/ez.help
@@ -672,19 +676,19 @@ ${ANDREWDIR}/help/ez.help
 V
 \begindata{link,7222400}
 Datastream version: 2
-ez
+ez on-line help
 2
 
 black
 white
 \enddata{link,7222400}
 \enddata{link,7222400}
-\view{linkview,7222400,25334,0,0}
+\view{linkview,7222400,25334,0,0}.
 
 
 \section{ez2ascii}
 
-\begindata{link,7223376}
+See the \begindata{link,7223376}
 4
 ${ANDREWDIR}/help/ez2ascii.help
 0
@@ -692,21 +696,21 @@ ${ANDREWDIR}/help/ez2ascii.help
 V
 \begindata{link,7223376}
 Datastream version: 2
-ez2ascii
+ez2ascii on-line help
 2
 
 black
 white
 \enddata{link,7223376}
 \enddata{link,7223376}
-\view{linkview,7223376,25335,0,0}
+\view{linkview,7223376,25335,0,0}.
 
 
 \section{ez2html}
 
 \bold{runapp} link: \bold{ez2htmlapp}
 
-\begindata{link,7224672}
+See the \begindata{link,7224672}
 4
 ${ANDREWDIR}/help/ez2html.help
 0
@@ -714,19 +718,19 @@ ${ANDREWDIR}/help/ez2html.help
 V
 \begindata{link,7224672}
 Datastream version: 2
-ez2html
+ez2html on-line help
 2
 
 black
 white
 \enddata{link,7224672}
 \enddata{link,7224672}
-\view{linkview,7224672,25336,0,0}
+\view{linkview,7224672,25336,0,0}.
 
 
 \section{ez2ps}
 
-\begindata{link,7368032}
+See the \begindata{link,7368032}
 4
 ${ANDREWDIR}/help/ez2ps.help
 0
@@ -734,14 +738,14 @@ ${ANDREWDIR}/help/ez2ps.help
 V
 \begindata{link,7368032}
 Datastream version: 2
-ez2ps
+ez2ps on-line help
 2
 
 black
 white
 \enddata{link,7368032}
 \enddata{link,7368032}
-\view{linkview,7368032,25337,0,0}
+\view{linkview,7368032,25337,0,0}.
 
 
 \section{ezpostprocess}
@@ -756,7 +760,7 @@ help.
 
 \bold{runapp} link: \bold{ezprintapp}
 
-\begindata{link,7369888}
+See the \begindata{link,7369888}
 4
 ${ANDREWDIR}/help/ezprint.help
 0
@@ -764,21 +768,21 @@ ${ANDREWDIR}/help/ezprint.help
 V
 \begindata{link,7369888}
 Datastream version: 2
-ezprint
+ezprint on-line help
 2
 
 black
 white
 \enddata{link,7369888}
 \enddata{link,7369888}
-\view{linkview,7369888,25338,0,0}
+\view{linkview,7369888,25338,0,0}.
 
 
 \section{fad}
 
 \bold{runapp} link: \bold{ezapp} on \bold{fad} object
 
-\begindata{link,7371344}
+See the \begindata{link,7371344}
 4
 ${ANDREWDIR}/help/fad.help
 0
@@ -786,21 +790,21 @@ ${ANDREWDIR}/help/fad.help
 V
 \begindata{link,7371344}
 Datastream version: 2
-fad
+fad on-line help
 2
 
 black
 white
 \enddata{link,7371344}
 \enddata{link,7371344}
-\view{linkview,7371344,25339,0,0}
+\view{linkview,7371344,25339,0,0}.
 
 
 \section{figure}
 
 \bold{runapp} link: \bold{ezapp} on \bold{figure} object
 
-\begindata{link,7372960}
+See the \begindata{link,7372960}
 4
 ${ANDREWDIR}/help/figure.help
 0
@@ -808,14 +812,14 @@ ${ANDREWDIR}/help/figure.help
 V
 \begindata{link,7372960}
 Datastream version: 2
-figure
+figure on-line help
 2
 
 black
 white
 \enddata{link,7372960}
 \enddata{link,7372960}
-\view{linkview,7372960,25340,0,0}
+\view{linkview,7372960,25340,0,0}.
 
 
 \section{gdp}
@@ -850,6 +854,8 @@ white
 
 \section{genstatl}
 
+Generate static ATK object loads for an executable.  For more 
+information, see 
 \begindata{link,7375904}
 4
 ${ANDREWDIR}/help/genstatl.help
@@ -858,19 +864,19 @@ ${ANDREWDIR}/help/genstatl.help
 V
 \begindata{link,7375904}
 Datastream version: 2
-genstatl
+genstatl's on-line help
 2
 
 black
 white
 \enddata{link,7375904}
 \enddata{link,7375904}
-\view{linkview,7375904,25342,0,0}
+\view{linkview,7375904,25342,0,0}.
 
 
 \section{gentlex}
 
-\begindata{link,7376880}
+See the \begindata{link,7376880}
 4
 ${ANDREWDIR}/doc/PROGRAMMER/tlex.doc
 0
@@ -878,7 +884,7 @@ ${ANDREWDIR}/doc/PROGRAMMER/tlex.doc
 V
 \begindata{link,7376880}
 Datastream version: 2
-tlex
+tlex documentation
 2
 
 black
@@ -901,7 +907,7 @@ help.
 \bold{runapp} link: \bold{helpapp}
 
 Start help browser on given topic or point running browser to topic. 
- \
+ For more information, see \
 \begindata{link,13142944}
 4
 ${ANDREWDIR}/help/help.help
@@ -910,14 +916,17 @@ ${ANDREWDIR}/help/help.help
 V
 \begindata{link,13142944}
 Datastream version: 2
-help
+help's on-line help
 2
 
 black
 white
 \enddata{link,13142944}
 \enddata{link,13142944}
-\view{linkview,13142944,25344,0,0}
+\view{linkview,13142944,25344,0,0}.  Note that the links in this 
+document are to the help files themselves; apparently it is not 
+possible to link to the help application itself without programming 
+effort.
 
 
 
@@ -926,7 +935,7 @@ white
 \bold{runapp} link: \bold{ezapp} on \bold{image} object ("static", from 
 \typewriter{libbasics.so})
 
-\begindata{link,13144800}
+See the \begindata{link,13144800}
 4
 ${ANDREWDIR}/help/image.help
 0
@@ -934,14 +943,14 @@ ${ANDREWDIR}/help/image.help
 V
 \begindata{link,13144800}
 Datastream version: 2
-image
+image on-line help
 2
 
 black
 white
 \enddata{link,13144800}
 \enddata{link,13144800}
-\view{linkview,13144800,25345,0,0}
+\view{linkview,13144800,25345,0,0}.
 
 
 \section{indexpro}
@@ -962,8 +971,8 @@ no on-line help.
 
 \section{layout}
 
-\bold{runapp} link: \bold{ezapp} on \bold{layout} object
-
+\bold{runapp} link: \bold{ezapp} on \bold{layout} object.  For more 
+information, see the 
 \begindata{link,13147456}
 4
 ${ANDREWDIR}/help/layout.help
@@ -972,14 +981,15 @@ ${ANDREWDIR}/help/layout.help
 V
 \begindata{link,13147456}
 Datastream version: 2
-layout
+layout on-line help
 2
 
 black
 white
 \enddata{link,13147456}
 \enddata{link,13147456}
-\view{linkview,13147456,25346,0,0} 
+\view{linkview,13147456,25346,0,0}.  This is intended for use with 
+the ADEW system; for more information, see the 
 \begindata{link,13147952}
 4
 ${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
@@ -988,14 +998,14 @@ ${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
 V
 \begindata{link,13147952}
 Datastream version: 2
-AdewReference
+ADEW reference manual
 2
 
 black
 white
 \enddata{link,13147952}
 \enddata{link,13147952}
-\view{linkview,13147952,25347,0,0}
+\view{linkview,13147952,25347,0,0}.
 
 
 
@@ -1009,6 +1019,8 @@ Part of zip.  Undocumented.  There is no on-line help.
 
 \section{mkbrowse}
 
+Create an org document for browsing a class hierarchy.  For more 
+information, see 
 \begindata{link,13149760}
 4
 ${ANDREWDIR}/help/mkbrowse.help
@@ -1017,18 +1029,19 @@ ${ANDREWDIR}/help/mkbrowse.help
 V
 \begindata{link,13149760}
 Datastream version: 2
-mkbrowse
+mkbrowse's on-line help
 2
 
 black
 white
 \enddata{link,13149760}
 \enddata{link,13149760}
-\view{linkview,13149760,25348,0,0}
+\view{linkview,13149760,25348,0,0}.
 
 
 \section{mkparser}
 
+Create C parser code.  For more information, see 
 \begindata{link,13150656}
 4
 ${ANDREWDIR}/doc/PROGRAMMER/parser.doc
@@ -1037,7 +1050,7 @@ ${ANDREWDIR}/doc/PROGRAMMER/parser.doc
 V
 \begindata{link,13150656}
 Datastream version: 2
-parser
+mkparser's documentation
 2
 
 black
@@ -1050,6 +1063,7 @@ document, but documentation is hidden in the regular documents.
 
 \section{mkparserclass}
 
+Create C++ parser code.  For more information, see 
 \begindata{link,11896576}
 4
 ${ANDREWDIR}/doc/PROGRAMMER/prsclass.doc
@@ -1058,7 +1072,7 @@ ${ANDREWDIR}/doc/PROGRAMMER/prsclass.doc
 V
 \begindata{link,11896576}
 Datastream version: 2
-prsclass
+mkparserclass' on-line documentation
 2
 
 black
@@ -1071,6 +1085,8 @@ document, but documentation is hidden in the regular documents.
 
 \section{mkurlbutton}
 
+Create a document containing an urlbutton inset.  For more information, 
+see 
 \begindata{link,11897568}
 4
 ${ANDREWDIR}/help/urlbutton.help
@@ -1079,14 +1095,14 @@ ${ANDREWDIR}/help/urlbutton.help
 V
 \begindata{link,11897568}
 Datastream version: 2
-urlbutton
+urlbutton's on-line help
 2
 
 black
 white
 \enddata{link,11897568}
 \enddata{link,11897568}
-\view{linkview,11897568,25351,0,0}
+\view{linkview,11897568,25351,0,0}.
 
 
 \section{mrecord}
@@ -1100,7 +1116,7 @@ no on-line help.
 
 \bold{runapp} link: \bold{nessrunapp}
 
-Run a headless ness script. 
+Run a headless ness script.  For more information, see the
  \
 \begindata{link,11899056}
 4
@@ -1110,14 +1126,14 @@ ${ANDREWDIR}/help/ness.help
 V
 \begindata{link,11899056}
 Datastream version: 2
-ness
+ness on-line help
 2
 
 black
 white
 \enddata{link,11899056}
 \enddata{link,11899056}
-\view{linkview,11899056,25352,0,0}
+\view{linkview,11899056,25352,0,0}.
 
 
 
@@ -1125,6 +1141,12 @@ white
 
 \bold{runapp} link: \bold{orgapp}
 
+Usage: \bold{org} [\italic{appargs}] [\italic{file}]
+
+Creates an \bold{org} object and displays a view on that object.  It 
+loads or creates a file of the given \italic{file} name if given; 
+otherwise, it is not associated with any file.  Some additional 
+documentation is available in 
 \begindata{link,11900512}
 4
 ${ANDREWDIR}/help/org.help
@@ -1133,14 +1155,14 @@ ${ANDREWDIR}/help/org.help
 V
 \begindata{link,11900512}
 Datastream version: 2
-org
+org's on-line help
 2
 
 black
 white
 \enddata{link,11900512}
 \enddata{link,11900512}
-\view{linkview,11900512,25353,0,0}
+\view{linkview,11900512,25353,0,0}.
 
 
 \section{pipescript}
@@ -1148,7 +1170,7 @@ white
 \bold{runapp} link: \bold{pipescriptapp}
 
 Suck stdin into a text 
-inset.\
+inset.  For more information, see \
 \begindata{link,11901808}
 4
 ${ANDREWDIR}/help/pscript.help
@@ -1157,35 +1179,37 @@ ${ANDREWDIR}/help/pscript.help
 V
 \begindata{link,11901808}
 Datastream version: 2
-pscript
+pipescript's on-line help
 2
 
 black
 white
 \enddata{link,11901808}
 \enddata{link,11901808}
-\view{linkview,11901808,25354,0,0}
+\view{linkview,11901808,25354,0,0}.
 
 
 
-\section{ppm2atkimage}
+\section{image2atk}
 
-\begindata{link,11902624}
+Attempts to convert any image to an ATK-compatible image format.  For 
+more information, see
+ \begindata{link,11902624}
 4
-${ANDREWDIR}/help/ppm2atk.help
+${ANDREWDIR}/help/image2atk.help
 0
 0
 V
 \begindata{link,11902624}
 Datastream version: 2
-ppm2atk
+image2atk's on-line help
 2
 
 black
 white
 \enddata{link,11902624}
 \enddata{link,11902624}
-\view{linkview,11902624,25355,0,0}
+\view{linkview,11902624,25355,0,0}.
 
 
 \section{pref}
@@ -1231,8 +1255,8 @@ There is no on-line help.
 \bold{runapp} link: \bold{prefedapp}
 
 Launch preference editor on given preference file 
-(\typewriter{~/.preferences} by default).
-
+(\typewriter{~/.preferences} by default).  For more information, 
+see 
 \begindata{link,11731184}
 4
 ${ANDREWDIR}/help/prefed.help
@@ -1241,21 +1265,21 @@ ${ANDREWDIR}/help/prefed.help
 V
 \begindata{link,11731184}
 Datastream version: 2
-prefed
+prefed's on-line help
 2
 
 black
 white
 \enddata{link,11731184}
 \enddata{link,11731184}
-\view{linkview,11731184,25356,0,0}
+\view{linkview,11731184,25356,0,0}.
 
 
 \section{raster}
 
 \bold{runapp} link: \bold{ezapp} on \bold{raster} object
 
-\begindata{link,11732560}
+See \begindata{link,11732560}
 4
 ${ANDREWDIR}/help/raster.help
 0
@@ -1263,20 +1287,20 @@ ${ANDREWDIR}/help/raster.help
 V
 \begindata{link,11732560}
 Datastream version: 2
-raster
+raster's on-line help
 2
 
 black
 white
 \enddata{link,11732560}
 \enddata{link,11732560}
-\view{linkview,11732560,25357,0,0}
+\view{linkview,11732560,25357,0,0}.
 
 
 \section{recover}
 
 Utility for recovering unknown 
-insets.\
+insets.  For more information, see the on-line help for 
 \begindata{link,11733376}
 4
 ${ANDREWDIR}/help/unknown.help
@@ -1285,14 +1309,14 @@ ${ANDREWDIR}/help/unknown.help
 V
 \begindata{link,11733376}
 Datastream version: 2
-unknown
+unknown insets
 2
 
 black
 white
 \enddata{link,11733376}
 \enddata{link,11733376}
-\view{linkview,11733376,25358,0,0}
+\view{linkview,11733376,25358,0,0}.
 
 
 
@@ -1300,8 +1324,8 @@ white
 
 \bold{runapp} link: \bold{rofftextapp}
 
-Attempts to convert roff source to an ATK 
-document.\
+Attempts to convert roff source to an ATK document.  For more 
+information, see 
 \begindata{link,11734832}
 4
 ${ANDREWDIR}/help/rofftxt.help
@@ -1310,7 +1334,7 @@ ${ANDREWDIR}/help/rofftxt.help
 V
 \begindata{link,11734832}
 Datastream version: 2
-rofftxt
+rofftext's on-line help
 2
 
 black
@@ -1323,8 +1347,8 @@ white
 
 \section{rtf2}
 
-Convert RTF to ATK.  Probably not very good with modern RTF 
-output.\
+Convert RTF to ATK.  Probably not very good with modern RTF output.  
+For more information, see 
 \begindata{link,11933616}
 4
 ${ANDREWDIR}/help/rtf2.help
@@ -1333,14 +1357,14 @@ ${ANDREWDIR}/help/rtf2.help
 V
 \begindata{link,11933616}
 Datastream version: 2
-rtf2
+rtf2's on-line help
 2
 
 black
 white
 \enddata{link,11933616}
 \enddata{link,11933616}
-\view{linkview,11933616,25360,0,0}
+\view{linkview,11933616,25360,0,0}.
 
 
 
@@ -1348,6 +1372,7 @@ white
 
 \bold{runapp} link: \bold{runadewapp}
 
+See section 6 of the 
 \begindata{link,11934992}
 4
 ${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
@@ -1356,7 +1381,7 @@ ${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
 V
 \begindata{link,11934992}
 Datastream version: 2
-AdewReference
+ADEW reference manual
 2
 
 black
@@ -1450,15 +1475,15 @@ Usage: sched [\typewriter{-d}] [\italic{filename}]
 Part of zip: a simple schedule view of one week, 8:00a-6:00p.  Set 
 \typewriter{-d} for debug. Might be more useful if there were actually any 
 docs, instead of just a sample schedule that formats badly on-screen.  Note 
-that it loads the sample schedule, itcCR.scd, if no file name given.  
-There is no on-line help.
+that it loads the sample schedule, \typewriter{itcCR.scd}, if no file name 
+given.  There is no on-line help.
 
 
 
 \section{scribetext}
 
 Apparently low-quality scribe-to-atk 
-converter.\
+converter.  For details, see 
 \begindata{link,11328384}
 4
 ${ANDREWDIR}/help/scribetxt.help
@@ -1467,21 +1492,20 @@ ${ANDREWDIR}/help/scribetxt.help
 V
 \begindata{link,11328384}
 Datastream version: 2
-scribetxt
+scribetext's on-line help
 2
 
 black
 white
 \enddata{link,11328384}
 \enddata{link,11328384}
-\view{linkview,11328384,25363,0,0}
+\view{linkview,11328384,25363,0,0}.
 
 
 
 \section{sys}
 
-Print Andrew's idea of what system you're 
-running.\
+Print Andrew's idea of what system you're running.  For details, see 
 \begindata{link,11329280}
 4
 ${ANDREWDIR}/help/sys.help
@@ -1490,14 +1514,14 @@ ${ANDREWDIR}/help/sys.help
 V
 \begindata{link,11329280}
 Datastream version: 2
-sys
+sys' on-line help
 2
 
 black
 white
 \enddata{link,11329280}
 \enddata{link,11329280}
-\view{linkview,11329280,25364,0,0}
+\view{linkview,11329280,25364,0,0}.
 
 
 
@@ -1505,7 +1529,7 @@ white
 
 \bold{runapp} link: \bold{ezapp} on \bold{table} object
 
-\begindata{link,11331376}
+See \begindata{link,11331376}
 4
 ${ANDREWDIR}/help/table.help
 0
@@ -1513,14 +1537,14 @@ ${ANDREWDIR}/help/table.help
 V
 \begindata{link,11331376}
 Datastream version: 2
-table
+table's on-line help
 2
 
 black
 white
 \enddata{link,11331376}
 \enddata{link,11331376}
-\view{linkview,11331376,25365,0,0}
+\view{linkview,11331376,25365,0,0}.
 
 
 \section{toez}
@@ -1530,7 +1554,7 @@ white
 Convert scribe and roff files to ATK text.  Uses rofftext for roff, and its 
 own scribe-to-atk implementation for scribe.  The documentation claims 
 support for plain-text, but I don't see it in the 
-code.\
+code.  For details, see 
 \begindata{link,11332672}
 4
 ${ANDREWDIR}/help/toez.help
@@ -1539,14 +1563,14 @@ ${ANDREWDIR}/help/toez.help
 V
 \begindata{link,11332672}
 Datastream version: 2
-toez
+toez's on-line help
 2
 
 black
 white
 \enddata{link,11332672}
 \enddata{link,11332672}
-\view{linkview,11332672,25366,0,0}
+\view{linkview,11332672,25366,0,0}.
 
 
 
@@ -1557,11 +1581,11 @@ white
 Kind of stupid terminal emulator for executing shell, etc. within ATK 
 environment.  Note that in zsh, you need to disable colors and:
 
- 	set +o zle
+\typewriter{\indent{set +o zle
 
-	PROMPT=%
+PROMPT=%}}
 
- \
+For details, see 
 \begindata{link,11334048}
 4
 ${ANDREWDIR}/help/tscript.help
@@ -1570,14 +1594,14 @@ ${ANDREWDIR}/help/tscript.help
 V
 \begindata{link,11334048}
 Datastream version: 2
-tscript
+typescript's on-line help
 2
 
 black
 white
 \enddata{link,11334048}
 \enddata{link,11334048}
-\view{linkview,11334048,25367,0,0}
+\view{linkview,11334048,25367,0,0}.
 
 
 
@@ -1604,34 +1628,11 @@ reason fails often.  There is no on-line help.
 
 
 
-\section{xwd2atkimage}
-
-Attempts to convert xwd output to an ATK-compatible image format.  Note 
-that it doesn't work for current xwd. 
- \
-\begindata{link,15182800}
-4
-${ANDREWDIR}/help/xwd2atk.help
-0
-0
-V
-\begindata{link,15182800}
-Datastream version: 2
-xwd2atk
-2
-
-black
-white
-\enddata{link,15182800}
-\enddata{link,15182800}
-\view{linkview,15182800,25368,0,0}
-
-
-
 \section{zip}
 
 \bold{runapp} link: \bold{ezapp} on \bold{zip} object
 
+See the 
 \begindata{link,15184496}
 4
 ${ANDREWDIR}/help/zip.help
@@ -1640,14 +1641,15 @@ ${ANDREWDIR}/help/zip.help
 V
 \begindata{link,15184496}
 Datastream version: 2
-zip
+zip on-line help
 2
 
 black
 white
 \enddata{link,15184496}
 \enddata{link,15184496}
-\view{linkview,15184496,25369,0,0}
+\view{linkview,15184496,25369,0,0}.
+
 \begindata{bp,15184992}
 Version 2
 n 0
@@ -12217,13 +12219,13 @@ white
 \view{linkview,119,1119,0,0}
  \begindata{link,120}
 4
-${ANDREWDIR}/help/ppm2atk.help
+${ANDREWDIR}/help/image2atk.help
 0
 0
 V
 \begindata{link,120}
 Datastream version: 2
-ppm2atk
+image2atk
 2
 
 black
@@ -13095,22 +13097,6 @@ white
 \enddata{link,194}
 \enddata{link,194}
 \view{linkview,194,1194,0,0}
- \begindata{link,195}
-4
-${ANDREWDIR}/help/xwd2atk.help
-0
-0
-V
-\begindata{link,195}
-Datastream version: 2
-xwd2atk
-2
-
-black
-white
-\enddata{link,195}
-\enddata{link,195}
-\view{linkview,195,1195,0,0}
  \begindata{link,196}
 4
 ${ANDREWDIR}/help/zip.help
@@ -19319,5 +19305,5419 @@ application is run.
 
 
 \section{ziptop10.pcf}
+
+\begindata{bp,15466161}
+Version 2
+n 0
+\enddata{bp,15466161}
+\view{bpv,15466161,26581,0,0}
+\chapter{Procedures}
+
+Bindable and Ness-callable procedures:
+
+
+runbuttonview
+
+    "runbutton-set-command" "Set the runbutton command to execute."
+
+      ""
+
+      "RunButton,Set Command~12"
+
+    "runbutton-set-label" "Set the runbutton label."
+
+      ""
+
+      "RunButton,Set Label~22"
+
+alinkview
+
+    "alinkview-insert-alink" "Insert audio link."
+
+      ""
+
+      "Inset~33,Insert Audio~20"
+
+    "alinkview-insert-record" "Insert audio link and record."
+
+      ""
+
+      "Inset~33,Record Audio~21"
+
+    "alinkview-play-audio" "Plays the audio segment."
+
+      ""
+
+      "Audio~1,Play Audio~1"
+
+    "alinkview-record-audio" "Records the audio segment."
+
+      ""
+
+      "Audio~1,Change recording~11"
+
+    "alinkview-set-label-text" "Prompts for user to set the text string of 
+the link button."
+
+      ""
+
+      "Audio~1,Change Label~12"
+
+bdffontv
+
+    "bdffont-help" "Display help information"
+
+      ""
+
+      "Font Edit,Help~10"
+
+    "bdffont-set-char-delta" "Set character delta"
+
+      ""
+
+      "Char Edit,Set Character Delta~13"
+
+    "bdffont-set-char-extent" "Set character extent"
+
+      ""
+
+      "Char Edit,Set Character Extent~11"
+
+    "bdffont-set-char-name" "Set character name"
+
+      ""
+
+      "Char Edit,Set Character Name~14"
+
+    "bdffont-set-char-origin" "Set character origin"
+
+      ""
+
+      "Char Edit,Set Character Origin~12"
+
+    "bdffont-set-default-delta" "Set default character delta"
+
+      ""
+
+      "Font Edit,Set Default Delta~29"
+
+    "bdffont-set-default-extent" "Set default character extent"
+
+      ""
+
+      "Font Edit,Set Default Extent~29"
+
+    "bdffont-set-default-origin" "Set default character origin"
+
+      ""
+
+      "Font Edit,Set Default Origin~29"
+
+    "bdffont-set-font-face" "Set font face"
+
+      ""
+
+      "Font Edit,Set Font Face~29"
+
+    "bdffont-set-font-family" "Set font family"
+
+      ""
+
+      "Font Edit,Set Font Family~29"
+
+    "bdffont-set-font-name" "Set font name"
+
+      ""
+
+      "Font Edit,Set Font Name~29"
+
+    "bdffont-set-font-resolution" "Set font resolution"
+
+      ""
+
+      "Font Edit,Set Font Resolution~29"
+
+    "bdffont-set-font-size" "Set font point size"
+
+      ""
+
+      "Font Edit,Set Point Size~29"
+
+    "bdffont-set-zoom-delta" "Set delta for zoom in/out"
+
+      ""
+
+      "Char Edit,Set Zoom Delta~26"
+
+    "bdffont-zoom-fit" "View at highest zoom that fits"
+
+      ""
+
+      "Char Edit,Zoom To Fit~24"
+
+    "bdffont-zoom-in" "Increase zoom factor by delta to max"
+
+      ""
+
+      "Char Edit,Zoom In~21"
+
+    "bdffont-zoom-normal" "View at normal zoom"
+
+      ""
+
+      "Char Edit,Normal Zoom~23"
+
+    "bdffont-zoom-out" "Decrease zoom factor by delta to min"
+
+      ""
+
+      "Char Edit,Zoom Out~22"
+
+    "bdffont-zoom-previous" "View at previous zoom factor"
+
+      ""
+
+      "Char Edit,Previous Zoom~25"
+
+htmlview
+
+    "htmlview-add-hrule" "Add a horizontal rule"
+
+      ""
+
+      ""
+
+    "htmlview-add-image" "Add an image"
+
+      ""
+
+      ""
+
+    "htmlview-add-random" "Add a random entity to a region of text"
+
+      ""
+
+      ""
+
+    "htmlview-edit-attributes" "Edit the attributes of tag at point"
+
+      ""
+
+      ""
+
+    "htmlview-make-list" "Make a region into a list"
+
+      ""
+
+      ""
+
+    "htmlview-modify-list" "Modify an attribute of a list"
+
+      ""
+
+      ""
+
+    "htmlview-set-img-src" "Set the source of an image"
+
+      ""
+
+      ""
+
+    "htmlview-set-indexable" "Set flag specifying if document is 
+searchable."
+
+      ""
+
+      ""
+
+    "htmlview-set-link" "Turn a region into an active anchor"
+
+      ""
+
+      ""
+
+    "htmlview-set-title" "Set title of document."
+
+      ""
+
+      ""
+
+    "htmlview-unlistify" "Remove all listyness about point or region"
+
+      ""
+
+      ""
+
+stroffetview
+
+    "stroffetview-closeallstroffets" "close Stroffet Views"
+
+      ""
+
+      ""
+
+    "stroffetview-closeall" "close all the stroffets"
+
+      ""
+
+      "stroffets,close all~12"
+
+    "stroffetview-close" "close the stroffet"
+
+      ""
+
+      "stroffets,close~2"
+
+    "stroffetview-insertstroffet" "Insert Stroffet Object"
+
+      ""
+
+      ""
+
+    "stroffetview-openallstroffets" "open Stroffet Views"
+
+      ""
+
+      ""
+
+    "stroffetview-openall" "open all the stroffets"
+
+      ""
+
+      "stroffets,open all~11"
+
+gofig gofigview 
+\begindata{link,6758656}
+4
+${ANDREWDIR}/help/gofig.help
+0
+0
+V
+\begindata{link,6758656}
+Datastream version: 2
+gofig
+2
+
+black
+white
+\enddata{link,6758656}
+\enddata{link,6758656}
+\view{linkview,6758656,0,0,0}
+
+tmview
+
+    "tmview-submit" "Submits a line of input to the subprocess."
+
+      "^M"
+
+      ""
+
+    "tmview-submit-and-stay" "Submits a line of input, but also keeps 
+cursor at this line, and puts it at the top of the screen."
+
+      "^J"
+
+      ""
+
+    "tmview-signal" "Send a signal to the subproces."
+
+      "^C" "^Z" "^\\"
+
+      ""
+
+    "tmview-erase-line" "Erase current line."
+
+      "^U"
+
+      ""
+
+    "tmview-prev-cmd" "Retrieves previous command."
+
+      "Esc-="
+
+      ""
+
+    "tmview-next-cmd" "Retrieves next command."
+
+      "Esc--" "Esc-`"
+
+      ""
+
+    "tmview-next-match-cmd" "Retrieves next matching command."
+
+      "Esc-]"
+
+      ""
+
+    "tmview-move" "Move selected text to end."
+
+      "Esc-+"
+
+      "Move~30"
+
+    "tmview-exec" "Move, then execute command."
+
+      "Esc-^M"
+
+      "Execute~30"
+
+    "tmview-delete-or-eot" "Sends EOT at end of line, otherwise deletes 
+next character."
+
+      "^D"
+
+      ""
+
+    "tmview-start-new-process" "Starts a new child process."
+
+      "^X!"
+
+      "Termulator,Start new process"
+
+    "tmview-beginning-of-line" "Beginning of line or input, whichever is 
+closest."
+
+      "^A"
+
+      ""
+
+    "tmview-clear" "Clears the text of the tm."
+
+      ""
+
+      "Termulator,Clear"
+
+    "tmview-exec-str" "Execute a string."
+
+      ""
+
+      ""
+
+    "tmview-self-insert" "If echoing, insert a key, otherwise store it."
+
+      ""
+
+      ""
+
+    "tmview-raw-key" "Send a key directly to the subprocess in this view."
+
+      ""
+
+      ""
+
+schedv ltv zipview zipedit 
+\begindata{link,6843968}
+4
+${ANDREWDIR}/help/zipproc.help
+0
+0
+V
+\begindata{link,6843968}
+Datastream version: 2
+zipproc
+2
+
+black
+white
+\enddata{link,6843968}
+\enddata{link,6843968}
+\view{linkview,6843968,1,0,0}
+
+dynsearch bpv spell contentv headertv textview tindex 
+\begindata{link,6869248}
+4
+${ANDREWDIR}/help/txtproc.help
+0
+0
+V
+\begindata{link,6869248}
+Datastream version: 2
+txtproc
+2
+
+black
+white
+\enddata{link,6869248}
+\enddata{link,6869248}
+\view{linkview,6869248,2,0,0}
+
+chartv 
+\begindata{link,6869952}
+4
+${ANDREWDIR}/help/chtproc.help
+0
+0
+V
+\begindata{link,6869952}
+Datastream version: 2
+chtproc
+2
+
+black
+white
+\enddata{link,6869952}
+\enddata{link,6869952}
+\view{linkview,6869952,3,0,0}
+
+xim 
+\begindata{link,6870816}
+4
+${ANDREWDIR}/help/menubar.help
+0
+0
+V
+\begindata{link,6870816}
+Datastream version: 2
+menubar
+2
+
+black
+white
+\enddata{link,6870816}
+\enddata{link,6870816}
+\view{linkview,6870816,4,0,0}
+
+im 
+\begindata{link,6871520}
+4
+${ANDREWDIR}/help/improc.help
+0
+0
+V
+\begindata{link,6871520}
+Datastream version: 2
+improc
+2
+
+black
+white
+\enddata{link,6871520}
+\enddata{link,6871520}
+\view{linkview,6871520,5,0,0}
+
+cel pagev lsetview arbcon 
+\begindata{link,6872384}
+4
+${ANDREWDIR}/help/lstproc.help
+0
+0
+V
+\begindata{link,6872384}
+Datastream version: 2
+lstproc
+2
+
+black
+white
+\enddata{link,6872384}
+\enddata{link,6872384}
+\view{linkview,6872384,6,0,0}
+
+arbcon
+
+----- following aren't bound by class init -----
+
+    "arbcon-add-object" "prompt for a new object view pair to add to the 
+list"
+
+      ""
+
+      "Arbcon~0,Add Object~22"
+
+    "arbcon-add-valueview-list" "Bring up window of valueviews"
+
+      ""
+
+      "Arbcon~0,Init Value Window~23"
+
+    "arbcon-chdir" "Change Directory"
+
+      ""
+
+      "ADEW~1,Change Directory~1"
+
+    "arbcon-copy-cel" "Copy the current cel"
+
+      ""
+
+      "Arbcon~0,Copy Cel~3"
+
+    "arbcon-copy-link" "Copy link to current cel"
+
+      ""
+
+      "Arbcon~0,Copy Link~2"
+
+    "arbcon-creatcon" "Create Controller"
+
+      ""
+
+      "ADEW~1,Create Controller~1"
+
+    "arbcon-cut-cel" "Cut the current cel"
+
+      ""
+
+      "Arbcon~0,Cut Cel~10"
+
+    "arbcon-new-window" "prompt for a file for a new window"
+
+      ""
+
+      "Arbcon~0,New Window~20"
+
+    "arbcon-show-cels" "Show cel names"
+
+      ""
+
+      "Arbcon~0,Show Cels~21"
+
+celview
+
+    "celview-Init-Child" "Initialize Child"
+
+      ""
+
+      "celview,Init Child"
+
+    "celview-InsertFile"
+
+      ""
+
+      "celview,Insert File" "Read Child"
+
+    "celview-Paste"
+
+      ""
+
+      "celview,Paste" "Paste Child"
+
+    "celview-set-invisible" "Make celview invisible"
+
+      ""
+
+      ""
+
+    "celview-set-visible" "Make celview visible"
+
+      ""
+
+      ""
+
+matte 
+\begindata{link,6873008}
+4
+${ANDREWDIR}/help/mttproc.help
+0
+0
+V
+\begindata{link,6873008}
+Datastream version: 2
+mttproc
+2
+
+black
+white
+\enddata{link,6873008}
+\enddata{link,6873008}
+\view{linkview,6873008,7,0,0}
+
+ lookzview 
+\begindata{link,6873952}
+4
+${ANDREWDIR}/help/lkzproc.help
+0
+0
+V
+\begindata{link,6873952}
+Datastream version: 2
+lkzproc
+2
+
+black
+white
+\enddata{link,6873952}
+\enddata{link,6873952}
+\view{linkview,6873952,8,0,0}
+
+spread 
+\begindata{link,6874656}
+4
+${ANDREWDIR}/help/tblproc.help
+0
+0
+V
+\begindata{link,6874656}
+Datastream version: 2
+tblproc
+2
+
+black
+white
+\enddata{link,6874656}
+\enddata{link,6874656}
+\view{linkview,6874656,9,0,0}
+
+pvaltv
+
+    "pvaltv-update" "sets the preference value from the text in the entry 
+buffer."
+
+      "^M"
+
+      ""
+
+pvaltvf
+
+    "pvaltvf-complete" "Attempts to complete the filename before the 
+cursor."
+
+      " "
+
+      ""
+
+    "pvaltvf-help" "Provides a list of possible completions in the choices 
+list."
+
+      "?"
+
+      ""
+
+pvaltvc
+
+    "pvaltvc-update" "sets the preference value from the text in the entry 
+buffer."
+
+      " "
+
+      ""
+
+prefsv
+
+    "prefsv-sort" "Sorts the preferences. (Valid arguments are: Name, 
+Group, App, Order)"
+
+      ""
+
+      "Sort,By application" "Sort,By group" "Sort~20,By name" "Sort~20,By 
+order"
+
+awidgetview
+
+    "AWidgetView-invert-debug" "Toggle the AWidgetView debug flag"
+
+      "Esc-^DW"
+
+      ""
+
+srctextview
+
+    "srctextview-balance" "Balance parentheses, brackets, or braces."
+
+      "Esc-m"
+
+      ""
+
+    "srctextview-check-line-lengths" "Display a warning box if any lines 
+exceed max-length."
+
+      ""
+
+      ""
+
+    "srctextview-compress-all" "Compress all lines indented (as far or) 
+farther than the current line."
+
+      ""
+
+      "Source Text,Compress all indents~21"
+
+    "srctextview-compress" "Compress a region of text for viewing general 
+outline."
+
+      ""
+
+      "Source Text,Compress region~20"
+
+    "srctextview-copyright-scramble" "Scrambles or descrambles code. Used 
+to defeat 'copyright-key' protection."
+
+      ""
+
+      ""
+
+    "srctextview-end-comment" "Ends a comment style if part of a comment 
+delimiter."
+
+      ""
+
+      ""
+
+    "srctextview-goto-column" "Prompt for a column number and move the 
+cursor there, appending whitespace to if needed."
+
+      ""
+
+      ""
+
+    "srctextview-insert-comment" "Inserts a comment at the end of the line."
+
+      "Esc-1"
+
+      ""
+
+    "srctextview-insert-linecomment" "Inserts a comment-to-end-of-line."
+
+      "Esc-2"
+
+      ""
+
+    "srctextview-newline" "Insert a newline and indent properly."
+
+      "^J"
+
+      ""
+
+    "srctextview-next-long-line" "Find the next line exceeding max-length 
+and highlight the offending characters."
+
+      "Esc-^T"
+
+      ""
+
+    "srctextview-overstrike-mode-off" "Turn overstrike mode off."
+
+      ""
+
+      ""
+
+    "srctextview-overstrike-mode-on" "Turn overstrike mode on."
+
+      ""
+
+      ""
+
+    "srctextview-paren" "Insert a paren, with balancing."
+
+      ")" "]" "\}"
+
+      ""
+
+    "srctextview-redo-styles" "Wrap styles around comments, functions, 
+keywords, etc in the source code."
+
+      "Esc-r"
+
+      "Source Text,Redo styles~10"
+
+    "srctextview-reformat" "Indent line or region and reflow comments."
+
+      "Esc-^R"
+
+      "Source Text,Format line/region~12"
+
+    "srctextview-reindent-return" "Indent current line properly and insert 
+a newline."
+
+      ""
+
+      ""
+
+    "srctextview-reindent" "Indent the current line or selected region."
+
+      "Tab"
+
+      "Source Text,Indent line/region~11"
+
+    "srctextview-rename-identifier" "Rename identifier in selection region."
+
+      "Esc-Q"
+
+      "Source Text,Rename Identifier~80"
+
+    "srctextview-return" "Insert a newline."
+
+      "^M"
+
+      ""
+
+    "srctextview-self-insert-reindent" "Insert a character, check for 
+preceding keyword, and reindent this line."
+
+      ""
+
+      ""
+
+    "srctextview-self-insert" "Insert a character and check for a preceding 
+keyword."
+
+      " " "(" "[" "\{" "." "," ";"
+
+      ""
+
+    "srctextview-start-comment" "Begins comment style if part of a comment 
+delimiter."
+
+      ""
+
+      ""
+
+    "srctextview-start-linecomment" "Begins a comment to end of line."
+
+      ""
+
+      ""
+
+    "srctextview-style-label" "Puts a style on labels."
+
+      ""
+
+      ""
+
+    "srctextview-style-string" "Starts or ends a string style."
+
+      ""
+
+      ""
+
+    "srctextview-toggle-overstrike-mode" "Turn overstrike mode on or off."
+
+      "Esc-^\\"
+
+      ""
+
+    "srctextview-what-column" "Display in the message window what column 
+the cursor is in."
+
+      ""
+
+      ""
+
+---- transient (not in main listing) ----
+
+    "srctextview-force-upper-off" [transient] "Turn off auto upper casing 
+of keywords"
+
+      ""
+
+      "Source Text,Force Upper Off~90"
+
+    "srctextview-force-upper-on" [transient] "Turn on auto upper casing of 
+keywords"
+
+      ""
+
+      "Source Text,Force Upper On~90"
+
+srctextview/asmtextview
+
+    "srctextview-end-comment" [additional binding "/"]
+
+    "srctextview-start-comment" [additional binding "*"]
+
+srctextview/m3textview
+
+    "m3textview-asterisk" ""
+
+      "*"
+
+      ""
+
+    "m3textview-display-interface" "Find the interface where selected 
+identifier is declared."
+
+      ""
+
+      "Source Text,Display Interface~30"
+
+    "m3textview-display-module" "Find the module where selected procedure's 
+code lies."
+
+      ""
+
+      "Source Text,Display Module~31"
+
+    "m3textview-pragma" ""
+
+      ">"
+
+      ""
+
+srctextview/cpptextview
+
+    "cpptextview-slash" "Insert a slash, possibly an end comment delimiter 
+or the start of a line comment."
+
+      "/"
+
+      ""
+
+srctextview/ltextview
+
+    "srctextview-style-string" [      additional binding """]
+
+    "srctextview-start-linecomment" [      additional binding ";"]
+
+srctextview/mtextview
+
+    "mtextview-asterisk" "If preceded by an open-paren, start a comment."
+
+      "*"
+
+      ""
+
+    "mtextview-display-definition" "Find the definition module where 
+selected identifier is declared."
+
+      ""
+
+      "Source Text,Display Definition~30"
+
+    "mtextview-display-implementation" "Find the implementation module 
+where selected procedure's code lies."
+
+      ""
+
+      "Source Text,Display Implementation~31"
+
+srctextview/ptextview
+
+    "ptextview-asterisk" ""
+
+      "*"
+
+      ""
+
+    "ptextview-brace" ""
+
+      "\}"
+
+      ""
+
+    "ptextview-slash" ""
+
+      "/"
+
+      ""
+
+    "ptextview-startbrace" ""
+
+      "\{"
+
+      ""
+
+srctextview/compressv
+
+    "compressv-compress-lines" "Compresses lines in the specified range (or 
+selected region) into a box; will prompt if none specified."
+
+      ""
+
+      ""
+
+    "compressv-compress-region" "Blindly compresses the selected region, 
+doesn't know how to combine compresses or grab entire lines, but useful if 
+you WANT to nest compresses."
+
+      ""
+
+      ""
+
+    "compressv-decompress-all" "Expand all compressed regions in document 
+to normal size."
+
+      "Esc-Q"
+
+      srctextview/"Source Text,Decompress all~25"
+
+    "compressv-decompress-lines" "Takes any lines within the specified 
+range (or selected region) out of the box they were in."
+
+      ""
+
+      ""
+
+srctextview/ctextview
+
+    "ctextview-start-preproc" "Start preprocessor style if pressed at start 
+of line."
+
+      "#"
+
+      ""
+
+    "srctextview-end-comment" [ additional binding "/"]
+
+    "srctextview-self-insert-reindent" [ additional binding "\{"]
+
+    "srctextview-start-comment" [ additional binding "*"]
+
+    "srctextview-style-label" [ additional binding ":"]
+
+    "srctextview-style-string" [ additional binding "'"]
+
+    "srctextview-style-string" [ additional binding "'"]
+
+srctextview/modtextview
+
+    "modtextview-start-preproc" "Start preprocessor style if pressed at 
+start of line."
+
+      "#"
+
+      ""
+
+    "srctextview-self-insert-reindent" [ additional binding "|"]
+
+    "srctextview-style-string" [ additional binding """]
+
+    "srctextview-style-string" [ additional binding ,"'"]
+
+srctextview/rawtextview
+
+    "rawtextview-toggle-overstrike-mode" "Turn overstrike mode on or off."
+
+      "Esc-^\\"
+
+      ""
+
+srctextview/rexxtextview
+
+    "srctextview-end-comment" [ additional binding "/"]
+
+    "srctextview-start-comment" [ additional binding "*"]
+
+    "srctextview-style-label" [ additional binding ":"]
+
+    "srctextview-style-string" [ additional binding "'"]
+
+    "srctextview-style-string" [ additional binding """]
+
+perltextview
+
+    "perltextview-string-delimiter" "Begins and ends strings with special 
+characters for delimiters"
+
+      "!" "#" ":" ">" "<" "$" "%" "&" "*" "+" "-" "/" "=" "?" "@" "\\" "^" 
+"_" "|" "~" "(" "," "." ";" "[" "\{" """ "'" "`" ")" "]" "\}" \
+
+
+      ""
+
+frame frameview 
+\begindata{link,6875520}
+4
+${ANDREWDIR}/help/frmproc.help
+0
+0
+V
+\begindata{link,6875520}
+Datastream version: 2
+frmproc
+2
+
+black
+white
+\enddata{link,6875520}
+\enddata{link,6875520}
+\view{linkview,6875520,10,0,0}
+
+bushv 
+\begindata{link,6876224}
+4
+${ANDREWDIR}/help/bshproc.help
+0
+0
+V
+\begindata{link,6876224}
+Datastream version: 2
+bshproc
+2
+
+black
+white
+\enddata{link,6876224}
+\enddata{link,6876224}
+\view{linkview,6876224,11,0,0}
+
+imagev
+
+    "imagev-export-any" "Write out an image."
+
+      ""
+
+      "Export~40, By Name~17"
+
+    "imagev-export-cmuwm" "Write out a cmuwm image."
+
+      ""
+
+      "Export~40, ATK Raster~16"
+
+    "imagev-export-postscript" "Write out a Postscript file."
+
+      ""
+
+      "Export~40, Postscript~12"
+
+    "imagev-image-read" "Read in a new image file."
+
+      ""
+
+      "Image~20, Read~10"
+
+    "imagev-image-write" "Save image to file."
+
+      ""
+
+      "Image~20, Write~11"
+
+    "imagev-import-any"
+
+      ""
+
+      "Import~30, Almost Any~12"
+
+      "Import an image."
+
+    "imagev-import-cmuwm"
+
+      ""
+
+      "Import~30, ATK Raster~18"
+
+      "Import a cmuwm image."
+
+    "imagev-pan-to-origin" "Pan to (0,0)."
+
+      "Esc-o"
+
+      "Image~20, Pan to Origin~30"
+
+    "imagev-set-save-format" "Set the save format to be used by image. Can 
+be png, gif or jpeg."
+
+      ""
+
+      "Image~20, Set Save Format~60"
+
+    "imagev-set-save-quality" "Set the quality level for the JPEG 
+compressor [5-95]."
+
+      ""
+
+      "Image~20, Set Save Quality~50"
+
+    "imagev-show-fixed" "Show image with fixed cmap."
+
+      ""
+
+      "Image~20, Show fixed~42"
+
+    "imagev-show-true" "Show image with private cmap."
+
+      ""
+
+      "Image~20, Show true~40"
+
+    "imagev-zoom-in" "Change scale of view."
+
+      "Esc-Z"
+
+      "Image~20, Zoom In~20"
+
+    "imagev-zoom-normal" "Change scale of view."
+
+      "Esc-n"
+
+      "Image~20, Normal Size~24"
+
+    "imagev-zoom-out" "Change scale of view."
+
+      "Esc-z"
+
+      "Image~20, Zoom Out~22"
+
+orgv 
+\begindata{link,6877168}
+4
+${ANDREWDIR}/help/orgproc.help
+0
+0
+V
+\begindata{link,6877168}
+Datastream version: 2
+orgproc
+2
+
+black
+white
+\enddata{link,6877168}
+\enddata{link,6877168}
+\view{linkview,6877168,12,0,0}
+
+incsearch 
+\begindata{link,6877792}
+4
+${ANDREWDIR}/help/isrproc.help
+0
+0
+V
+\begindata{link,6877792}
+Datastream version: 2
+isrproc
+2
+
+black
+white
+\enddata{link,6877792}
+\enddata{link,6877792}
+\view{linkview,6877792,13,0,0}
+
+gsearch 
+\begindata{link,6878656}
+4
+${ANDREWDIR}/help/gsrproc.help
+0
+0
+V
+\begindata{link,6878656}
+Datastream version: 2
+gsrproc
+2
+
+black
+white
+\enddata{link,6878656}
+\enddata{link,6878656}
+\view{linkview,6878656,14,0,0}
+
+recsearch
+
+    "recsearch-begin-at-top" "Begin recursive search at top (IM) level."
+
+      ""
+
+      ""
+
+    "recsearch-begin" "Begin recursive search."
+
+      ""
+
+      ""
+
+    "recsearch-replace" "Replace target of recsearch with a string."
+
+      ""
+
+      ""
+
+    "recsearch-resume" "Resume recursive search."
+
+      ""
+
+      ""
+
+filter 
+\begindata{link,6879280}
+4
+${ANDREWDIR}/help/ftrproc.help
+0
+0
+V
+\begindata{link,6879280}
+Datastream version: 2
+ftrproc
+2
+
+black
+white
+\enddata{link,6879280}
+\enddata{link,6879280}
+\view{linkview,6879280,15,0,0}
+
+ezdiff 
+\begindata{link,6880304}
+4
+${ANDREWDIR}/help/ezdproc.help
+0
+0
+V
+\begindata{link,6880304}
+Datastream version: 2
+ezdproc
+2
+
+black
+white
+\enddata{link,6880304}
+\enddata{link,6880304}
+\view{linkview,6880304,16,0,0}
+
+deskey 
+\begindata{link,6881008}
+4
+${ANDREWDIR}/help/desproc.help
+0
+0
+V
+\begindata{link,6881008}
+Datastream version: 2
+desproc
+2
+
+black
+white
+\enddata{link,6881008}
+\enddata{link,6881008}
+\view{linkview,6881008,17,0,0}
+
+tags 
+\begindata{link,6881872}
+4
+${ANDREWDIR}/help/tgsproc.help
+0
+0
+V
+\begindata{link,6881872}
+Datastream version: 2
+tgsproc
+2
+
+black
+white
+\enddata{link,6881872}
+\enddata{link,6881872}
+\view{linkview,6881872,18,0,0}
+
+compile 
+\begindata{link,6882496}
+4
+${ANDREWDIR}/help/comproc.help
+0
+0
+V
+\begindata{link,6882496}
+Datastream version: 2
+comproc
+2
+
+black
+white
+\enddata{link,6882496}
+\enddata{link,6882496}
+\view{linkview,6882496,19,0,0}
+
+ness nessm nessmv nessview 
+\begindata{link,6883440}
+4
+${ANDREWDIR}/help/ness.help
+0
+0
+V
+\begindata{link,6883440}
+Datastream version: 2
+ness
+2
+
+black
+white
+\enddata{link,6883440}
+\enddata{link,6883440}
+\view{linkview,6883440,20,0,0}
+
+---- generic (not in list unless used) ----
+
+    "%s-NessKeysEvent" [%s=object type that extends keys w/ ness] "Call 
+Ness for a keys event"
+
+      ""
+
+      ""
+
+    "%s-NessMenuEvent" [%s=object type that extends menu w/ ness] "Call 
+Ness for a menu event"
+
+      ""
+
+      ""
+
+eqview (partially in 
+\begindata{link,6884176}
+4
+${ANDREWDIR}/doc/PROGRAMMER/eqv.doc
+0
+0
+V
+\begindata{link,6884176}
+Datastream version: 2
+eqv
+2
+
+black
+white
+\enddata{link,6884176}
+\enddata{link,6884176}
+\view{linkview,6884176,21,0,0})
+
+    "eqview-above-script" "Insert an abovescript."
+
+      "!"
+
+      "Formulae,Above~41"
+
+    "eqview-below-script" "Insert a belowscript."
+
+      "#"
+
+      "Formulae,Below~42"
+
+    "eqview-carriage-return" "Handle carriage returns."
+
+      "^M"
+
+      ""
+
+    "eqview-close-brace" "Insert a close brace."
+
+      "\}"
+
+      ""
+
+    "eqview-close-bracket" "Insert a close bracket."
+
+      "]"
+
+      ""
+
+    "eqview-close-paren" "Insert a close paren."
+
+      ")"
+
+      ""
+
+    "eqview-copy" "Copy"
+
+      "Esc-w"
+
+      "Copy~11"[if region selected]
+
+    "eqview-cut" "Cut"
+
+      "^W"
+
+      "Cut~10"[if region selected]
+
+    "eqview-default" "Insert a character."
+
+      assigned to most keys
+
+      ""
+
+    "eqview-delete-backward" "Delete backward from cursor."
+
+      "^H" "Delete"
+
+      ""
+
+    "eqview-delete-forward" "Delete forward from cursor."
+
+      "^D"
+
+      ""
+
+    "eqview-dump-and-write" "Dump equation and write it to tmp."
+
+      "^X^X"
+
+      ""
+
+    "eqview-fraction" "Insert a fraction."
+
+      "/"
+
+      "Formulae,Fraction~21"
+
+    "eqview-left-brace" "Insert a left brace."
+
+      "\{"
+
+      ""
+
+    "eqview-move-backward" "Move backward."
+
+      "^B"
+
+      ""
+
+    "eqview-move-down" "Move down"
+
+      "^N"
+
+      ""
+
+    "eqview-move-forward" "Move forward."
+
+      "^F"
+
+      ""
+
+    "eqview-move-to-beginning" "Move to the beginning."
+
+      "^A"
+
+      ""
+
+    "eqview-move-to-end" "Move to the end."
+
+      "^E"
+
+      ""
+
+    "eqview-move-up" "Move up."
+
+      "^P"
+
+      ""
+
+    "eqview-paste" "Paste"
+
+      "^Y"
+
+      "Paste~10"
+
+    "eqview-prime" "Insert a prime."
+
+      "'"
+
+      ""
+
+    "eqview-root" "Insert a root."
+
+      "^R" "Esc-root^J"
+
+      "Formulae,Root~11"
+
+    "eqview-special" "Special symbol (dialog)."
+
+      "Esc-a"
+
+      "Formulae,Insert Symbol...~51"
+
+    "eqview-subscript" "Insert a subscript."
+
+      "_"
+
+      "Formulae,Subscript~32"
+
+    "eqview-superscript" "Insert a superscript."
+
+      "^"
+
+      "Formulae,Superscript~31"
+
+    "eqview-write-c" "Write equation in C format."
+
+      "^Zc"
+
+      "File,C~41"
+
+    "eqview-write-dvi" "Write equation in DVI format."
+
+      "^Zd"
+
+      "File,DVI~44"
+
+    "eqview-write-eqn" "Write equation in EQN format."
+
+      "^Ze"
+
+      "File,EQN~42"
+
+    "eqview-write-troff" "Write equation in troff format."
+
+      "^Zt"
+
+      "File,TROFF~43"
+
+-- when cut buffer exists ---
+
+    "eqview-read-in-file" ""
+
+      ""
+
+      "File,Read File~31"
+
+help 
+\begindata{link,6885008}
+4
+${ANDREWDIR}/help/hlpproc.help
+0
+0
+V
+\begindata{link,6885008}
+Datastream version: 2
+hlpproc
+2
+
+black
+white
+\enddata{link,6885008}
+\enddata{link,6885008}
+\view{linkview,6885008,22,0,0}
+
+layoutview
+
+    "layout-author" "Enter authoring mode"
+
+      ""
+
+      "Enter Authoring~60"
+
+    "layout-background" "Expand current selection and move to back"
+
+      "Esc-b"
+
+      "Authoring~1,Background~31"
+
+    "layout-coarse-granularity" "Coarse (18 pixel) granularity of object 
+placement"
+
+      ""
+
+      "Authoring~1,Coarse granularity~52"
+
+    "layout-create-0" "Do not fill in newly created data objects"
+
+      ""
+
+      "Authoring~1,Null on create~40"
+
+    "layout-create-filler" "Use filler for newly created data objects"
+
+      ""
+
+      "Authoring~1,Filler on create~41"
+
+    "layout-create-paste" "Paste into newly created data objects"
+
+      ""
+
+      "Authoring~1,Paste on create~42"
+
+    "layout-destroy-object" "Destroy current selection"
+
+      "^D"
+
+      "Authoring~1,Cut object~22"
+
+    "layout-fine-granularity" "Fine (1 pixel) granularity of object 
+placement"
+
+      ""
+
+      "Authoring~1,Fine granularity~50"
+
+    "layout-imbed-object" "Prompt for object and place in current selection"
+
+      "Esc-Tab"
+
+      "Authoring~1,Imbed object~21"
+
+    "layout-make-fixed" "Component varies only in authoring mode"
+
+      "Esc-f"
+
+      "Authoring~1,Make fixed~35"
+
+    "layout-make-variable" "Allow component to vary"
+
+      "Esc-v"
+
+      "Authoring~1,Make variable~35"
+
+    "layout-medium-granularity" "Medium (6 pixel) granularity of object 
+placement"
+
+      ""
+
+      "Authoring~1,Medium granularity~51"
+
+    "layout-move-to-back" "Move current selection to back"
+
+      "Esc-d"
+
+      "Authoring~1,Move to back~30"
+
+    "layout-paste-object" "Paste into current selection"
+
+      "^Y"
+
+      "Authoring~1,Paste object~20"
+
+    "layout-run" "Enter execution mode"
+
+      "Esc-x"
+
+      "Exit Authoring~60"
+
+    "layout-toggle-debug" "Toggle Debug"
+
+      "Esc-Esc-"
+
+      ""
+
+layout/fillerview
+
+    "fillerview-set-data-object-by-name" "Insert named inset"
+
+      ""
+
+      ""
+
+rastoolview rasterview 
+\begindata{link,6885632}
+4
+${ANDREWDIR}/help/rstproc.help
+0
+0
+V
+\begindata{link,6885632}
+Datastream version: 2
+rstproc
+2
+
+black
+white
+\enddata{link,6885632}
+\enddata{link,6885632}
+\view{linkview,6885632,23,0,0}
+
+helpcon pcontrol calccon 
+\begindata{link,6886656}
+4
+${ANDREWDIR}/help/ctrproc.help
+0
+0
+V
+\begindata{link,6886656}
+Datastream version: 2
+ctrproc
+2
+
+black
+white
+\enddata{link,6886656}
+\enddata{link,6886656}
+\view{linkview,6886656,24,0,0}
+
+suitecv suiteev suite 
+\begindata{link,7152864}
+4
+${ANDREWDIR}/help/steproc.help
+0
+0
+V
+\begindata{link,7152864}
+Datastream version: 2
+steproc
+2
+
+black
+white
+\enddata{link,7152864}
+\enddata{link,7152864}
+\view{linkview,7152864,25,0,0}
+
+psview
+
+    "psview-autobound" "Suck out the bounding box information and use it to 
+set our bounds"
+
+      ""
+
+      "PostScript,Scan for bounds~20"
+
+    "psview-set-inch-size" "Set print size in inches"
+
+      ""
+
+      "PostScript,Set Inch Size~10"
+
+    "psview-set-point-size" "Set print size in points"
+
+      ""
+
+      "PostScript,Set Point Size~11"
+
+noteview
+
+    "noteview-closeallnotes" "close Note Views"
+
+      ""
+
+      ""
+
+    "noteview-closeall" "close all the notes"
+
+      ""
+
+      "notes,close all~12"
+
+    "noteview-close" "close the note"
+
+      ""
+
+      "notes,close~2"
+
+    "noteview-insertnote" "Insert Note Object"
+
+      ""
+
+      ""
+
+    "noteview-openallnotes" "open Note Views"
+
+      ""
+
+      ""
+
+    "noteview-openall" "open all the notes"
+
+      ""
+
+      "notes,open all~11"
+
+vutils
+
+    "vutils-fork-help" "Call Andrew help in a new process."
+
+      ""
+
+      ""
+
+gnucompat
+
+    "gnucompat-add-default-tpl" "Enable basic styles by adding the template 
+named default"
+
+      ""
+
+      ""
+
+    "gnucompat-denumerate" "Delete number from the begining of each 
+paragraph in the region"
+
+      ""
+
+      ""
+
+    "gnucompat-enumerate" "Put number in sequence at the begining of each 
+paragraph in the region"
+
+      ""
+
+      ""
+
+    "gnucompat-fill-para" "Fill Paragraph."
+
+      ""
+
+      ""
+
+    "gnucompat-insert-bullets" "Put a bullet at the begining of each 
+paragraph in the region"
+
+      ""
+
+      ""
+
+    "gnucompat-insert-inset-no-nl" "Insert a named inset without newlines 
+around it"
+
+      ""
+
+      ""
+
+    "gnucompat-insert-inset" "Insert a named inset here"
+
+      ""
+
+      ""
+
+    "gnucompat-remove-bullets" "Remove bullets from the begining of each 
+paragraph in the region"
+
+      ""
+
+      ""
+
+printopts
+
+    "printopts-cancel" "Remove dialog and cancel choices."
+
+      ""
+
+      "Cancel~91"
+
+    "printopts-done" "Remove dialog and accept choices."
+
+      "^X^D" "^X^C"
+
+      "Done~90" "Quit~99"
+
+    "printopts-nop" "Do nothing."
+
+      "Esc-~"
+
+      ""
+
+    "printopts-post-window" "Set options for printing of document"
+
+      ""
+
+      frame/"File~10,Printer Setup~20"
+
+    "printopts-preview" "Preview document."
+
+      ""
+
+      "Preview"
+
+    "printopts-print" "Print document."
+
+      ""
+
+      "Print"
+
+linkview (barely documented in 
+\begindata{link,7170928}
+4
+${ANDREWDIR}/doc/PROGRAMMER/Procs.d
+0
+0
+V
+\begindata{link,7170928}
+Datastream version: 2
+Procs
+2
+
+black
+white
+\enddata{link,7170928}
+\enddata{link,7170928}
+\view{linkview,7170928,26,0,0})
+
+    "linkview-autolink" "Starts the autolink process.  Waits for 
+linkview-set-target to be invoked, which tells this link what file to link 
+to."
+
+      ""
+
+      "Link~1,Start Autolink~1"
+
+    "linkview-insert-link" "Insert a link object in the current document."
+
+      ""
+
+      ""
+
+    "linkview-set-link" "Prompts user for target filename of the link 
+button."
+
+      ""
+
+      "Link~1,Link to File~11"
+
+    "linkview-set-rel-link" "Prompts user for a relative filename to link 
+to."
+
+      ""
+
+      "Link~1,Link to Relative File~12"
+
+    "linkview-set-target" "Execute this proc from the frame of the the 
+buffer for the target file of a link.  To be called after 
+linkview-autolink."
+
+      ""
+
+      ""
+
+    "linkview-set-url-link" "Prompts user for a URL link value."
+
+      ""
+
+      "Link~1,Link to URL~14"
+
+    "linkview-set-var-link" "Prompts user for an uninterpreted link value 
+(may have $\{...\})."
+
+      ""
+
+      "Link~1,Link to $\{...\}/...~13"
+
+plinkview (see above)
+
+    "plinkview-set-tag" "Prompts for user to set search tag of the link 
+button."
+
+      ""
+
+      "Link~1,Set Tag~15"
+
+diredview 
+\begindata{link,7196544}
+4
+${ANDREWDIR}/help/drdproc.help
+0
+0
+V
+\begindata{link,7196544}
+Datastream version: 2
+drdproc
+2
+
+black
+white
+\enddata{link,7196544}
+\enddata{link,7196544}
+\view{linkview,7196544,29,0,0}
+
+unknownv
+
+    "unknownv-display-raw" "Displays the raw data for an unavailable inset."
+
+      ""
+
+      "Unknown~30,Display Raw Data~31"
+
+    "unknownv-help" "Displays the help file for the unknown inset."
+
+      ""
+
+      "Unknown~30,Help~1"
+
+    "unknownv-recover" "Attempts to recover the original form of a document 
+with unknown insets in it."
+
+      ""
+
+      "Unknown~30,Attempt Recovery~20"
+
+    "unknownv-save-raw" "Saves the raw data for an unavailable inset."
+
+      ""
+
+      "Unknown~30,Save Raw Data~30"
+
+htmltextview
+
+    "htmltextview-add-item" "adds another list item to the current list."
+
+      "Tab"
+
+      "List~6,Add list item~20"
+
+    "htmltextview-add-link" "Make an anchor that points to the URL 
+specified from a prompt."
+
+      ""
+
+      "Region~4,Add Link (prompt)~80"
+
+    "htmltextview-add-target" "Gives the highlighted region a name that can 
+be targeted by an anchor with a href=#name."
+
+      ""
+
+      "Region~4,Target for Link (prompt)~81"
+
+    "htmltextview-expose-hidden" "Exposes insets containing raw HTML+ 
+markup."
+
+      ""
+
+      "Page~9,Expose HTML+ insets~41"
+
+    "htmltextview-hide-hidden" "Hides insets containing raw HTML+ markup."
+
+      ""
+
+      "Page~9,Hide HTML+ insets~42"
+
+    "htmltextview-insert-image-here" "Prompts for URL or pathname of image 
+and imbeds it at cursor position. (string parameter supersedes prompt)"
+
+      ""
+
+      "Media,Image...~2"
+
+    "htmltextview-make-list" "makes a list of the selected region"
+
+      "Esc-'Esc-u" "Esc-'Esc-o" "Esc-'Esc-d"
+
+      "List~6,Unordered List~10" "List~6,Ordered List~10" 
+"List~6,Definition List~10"
+
+    "htmltextview-newline-add-item" "adds a blank line (with another item 
+if used inside a list)."
+
+      "^J"
+
+      ""
+
+    "htmltextview-renumber-list" "Replaces and reorders all the numbers in 
+an ordered list."
+
+      "Esc-'Esc-r"
+
+      "List~6,Renumber List~30"
+
+    "htmltextview-show-attributes" "Display and edit attributes of style at 
+cursor position."
+
+      "Esc-a"
+
+      "Region~4,Edit Attributes~95"
+
+    "htmltextview-show-raw" "Display file as raw HTML+ markup."
+
+      ""
+
+      "File~10,Show Raw HTML+~80"
+
+    "htmltextview-set-target" "Execute this proc from the frame of the the 
+buffer for the target file of a link.  To be called after 
+htmltextview-set-source."
+
+      ""
+
+      ""
+
+hiddenview
+
+    "hiddenview-show-normal" "Return to WYSIWYG HTML+ view."
+
+      ""
+
+      "File~10,Show Normal HTML+~80"
+
+weblink
+
+    "weblink-ReplaceText" "replace text with links"
+
+      ""
+
+      ""
+
+    "weblink-RequestURL" "Prompt for a URL to display"
+
+      ""
+
+      ""
+
+    "weblink-WarpToURL" "Display URL document"
+
+      ""
+
+      ""
+
+weblinkview
+
+    "weblinkview-set-urllink" "Prompts for user to set target url of the 
+link button."
+
+      ""
+
+      "Link~1,Set URL~11"
+
+webview
+
+    "webview-Add-Current-to-Hotlist" "Add Current to Hotlist"
+
+      ""
+
+      "Web Navigate~5, Add Current to Hotlist~12"
+
+    "webview-Annotate" "Annotate"
+
+      ""
+
+      "Web Annotate~6, Annotate~1"
+
+    "webview-Back" "Back"
+
+      ""
+
+      "Web Navigate~5, Back~1"
+
+    "webview-Clone Window" "Clone Window "
+
+      ""
+
+      "Web File~4, Clone Window~8"
+
+    "webview-Delete-Annotation" "Delete annotation"
+
+      ""
+
+      "Web Annotate~5, Delete Annotation~3"
+
+    "webview-Edit-Annotation" "Edit Annotation"
+
+      ""
+
+      "Web Annotate~6, Edit Annotation~2"
+
+    "webview-Forward" "Forward"
+
+      ""
+
+      "Web Navigate~5, Forward~2"
+
+    "webview-History" "History"
+
+      ""
+
+      "Web Navigate~5, History~10"
+
+    "webview-Home" "Home"
+
+      ""
+
+      "Web Navigate~5, Home~3"
+
+    "webview-Hotlist" "Hotlist"
+
+      ""
+
+      "Web Navigate~5, Hotlist~11"
+
+    "webview-Internet-Resources-Meta-Index" "Internet Resources Meta Index"
+
+      ""
+
+      "Web Navigate~5, Internet Resources Meta Index~14"
+
+    "webview-Internet-Starting-Points~13" "Internet Starting Points"
+
+      ""
+
+      "Web Navigate~5, Internet Starting Points~13"
+
+    "webview-open-local" "Use the HTML inset to visit a local file"
+
+      ""
+
+      "Web File~4, Open File~2"
+
+    "webview-open-URL" "prompt for a URL "
+
+      ""
+
+      "Web File~4, Open URL~1"
+
+    "webview-Reload-Current" "Reload Current"
+
+      ""
+
+      "Web File~4, Reload Current~3"
+
+    "webview-Save-As" "Writes current document to file "
+
+      ""
+
+      "Web File~4, Save As~5"
+
+    "webview-View-Src" "View Src "
+
+      ""
+
+      "Web File~4, View Src~7"
+
+urlbuttonview
+
+    "urlbutton-set-label" "Set the label."
+
+      ""
+
+      "UrlButton,Set Label~22"
+
+    "urlbutton-set-url" "Set the URL."
+
+      ""
+
+      "UrlButton,Set URL~12"
+
+writestampv (somewhat documented in 
+\begindata{link,7432896}
+4
+${ANDREWDIR}/help/wrtstmp.help
+0
+0
+V
+\begindata{link,7432896}
+Datastream version: 2
+wrtstmp
+2
+
+black
+white
+\enddata{link,7432896}
+\enddata{link,7432896}
+\view{linkview,7432896,31,0,0})
+
+    "writestamp-set-format" "Set the writestamp's inset's format."
+
+      ""
+
+      "Write Stamp/Default~1" "Write Stamp/H:MM AM/PM~10" "Write 
+Stamp/Month DD YYYY~11"
+
+timeodayv (somewhat documented in 
+\begindata{link,7435792}
+4
+${ANDREWDIR}/help/timeday.help
+0
+0
+V
+\begindata{link,7435792}
+Datastream version: 2
+timeday
+2
+
+black
+white
+\enddata{link,7435792}
+\enddata{link,7435792}
+\view{linkview,7435792,36,0,0})
+
+    "timeoday-set-format" "Set the timeoday inset's format."
+
+      ""
+
+      "Time O'Day/Default~1" "Time O'Day/H:MM AM/PM~10" "Time O'Day/Month 
+DD YYYY~11"
+
+clockview
+
+    "clock-set-labels" "Set the clock inset's label parameters."
+
+      ""
+
+      "Clock Labels~11,None~1" "Clock Labels ~11,1  (12)~2" etc.
+
+    "clock-set-num-labels" "Set the clock inset's shape parameters."
+
+      ""
+
+      "Clock Shape~10,Circle~1" "Clock Shape~10,Square~2" etc.
+
+    "clock-set-seconds" "Set the clock inset's seconds hand parameters."
+
+      ""
+
+      "Clock Seconds~13,No Second Hand~1" etc.
+
+    "clock-set-ticks" "Set the clock inset's tick count parameters."
+
+      ""
+
+      "Clock Ticks~12,None~1" "Clock TIcks~12,1 / 4~2" etc.
+
+calcv 
+\begindata{link,7518672}
+4
+${ANDREWDIR}/help/calproc.help
+0
+0
+V
+\begindata{link,7518672}
+Datastream version: 2
+calproc
+2
+
+black
+white
+\enddata{link,7518672}
+\enddata{link,7518672}
+\view{linkview,7518672,41,0,0}
+
+circlepiview
+
+    "circpi-set-depth-limit" "Takes the integer rock and uses it to set the 
+depth limit on recursion."
+
+      ""
+
+      "Depth Limit~10,1~1" .. "Depth Limit~10,10~10"
+
+typescript/fcomp typescript 
+\begindata{link,7162816}
+4
+${ANDREWDIR}/help/typproc.help
+0
+0
+V
+\begindata{link,7162816}
+Datastream version: 2
+typproc
+2
+
+black
+white
+\enddata{link,7162816}
+\enddata{link,7162816}
+\view{linkview,7162816,42,0,0}
+
+--- private/unshown (maybe needs activation first?) ----
+
+    "Read-User-Menus" "Handle user supplied menus"
+
+      ""
+
+      user menu entries
+
+    "typescript-post-window" "Set print options"
+
+      ""
+
+      "File~30,Printer Setup~20"
+
+sbttnav
+
+    "sbuttonv-add-button" "Prompts for user to name a new button."
+
+      ""
+
+      "SButton~20,Add Button~30"
+
+    "sbuttonv-delete-group" "Deletes the group specified by the string 
+given as a rock."
+
+      ""
+
+      ""
+
+    "sbuttonv-delete" "Deletes the selected button."
+
+      ""
+
+      "SButton~20,Delete button~31"
+
+    "sbuttonv-new-group" "Creates a new button group."
+
+      ""
+
+      "SButton~20,New group~95"
+
+    "sbuttonv-rename-group" "Renames the group specified by the rock given."
+
+      ""
+
+      ""
+
+    "sbuttonv-set-button-group" "Choose which group the button will take 
+its appearance from."
+
+      ""
+
+      "SButton~20,Set Button Group~11"
+
+    "sbuttonv-set-colors" "Prompts for user to set the foreground and 
+background color of the SButton."
+
+      ""
+
+      "SButton~20,Set Colors~24"
+
+    "sbuttonv-set-columns" "Sets the number of columns to be used for 
+buttons. Enough rows will be used to ensure that all buttons are visible."
+
+      ""
+
+      "SButton~20,Set Columns~72"
+
+    "sbuttonv-set-depth" "Prompts for user to set the depth of the SButton."
+
+      ""
+
+      "SButton~20,Set Depth~27"
+
+    "sbuttonv-set-font" "Prompts for user to set the font of the sbutton."
+
+      ""
+
+      "SButton~20,Set Font~22"
+
+    "sbuttonv-set-label-color" "Prompts for user to set the foreground and 
+background color of the SButton's label."
+
+      ""
+
+      "SButton~20,Set Label Colors~26"
+
+    "sbuttonv-set-label" "Prompts for user to set the text string of the 
+sbutton."
+
+      ""
+
+      "SButton~20,Set Label~10"
+
+    "sbuttonv-set-rows" "Sets the number of rows to be used for buttons. 
+Enough columns will be used to ensure that all buttons are visible."
+
+      ""
+
+      "SButton~20,Set Rows~71"
+
+    "sbuttonv-set-shadow-colors" "Prompts for user to set the top, bottom 
+and middle shadow colors of the SButton."
+
+      ""
+
+      "SButton~20,Set Shadow Colors~25"
+
+    "sbuttonv-set-style" "Prompts for user to set the appearance of the 
+SButton."
+
+      ""
+
+      "SButton~20,Set Style~23"
+
+    "sbuttonv-set-trigger" "Prompts for user to set the text string of the 
+sbutton."
+
+      ""
+
+      "SButton~20,Set Trigger~11"
+
+compchar
+
+    "compchar-acuteaccent-after" "put a left accent over the next character"
+
+      ""
+
+      ""
+
+    "compchar-acuteaccent" "add a left accent to the character to the left 
+of the cursor."
+
+      ""
+
+      ""
+
+    "compchar-ASCIIToATK" "map local ASCII conventions to ATK ISO 
+characters"
+
+      ""
+
+      ""
+
+    "compchar-ATKToASCII" "map ATK ISO characters to local ASCII"
+
+      ""
+
+      ""
+
+    "compchar-circumflex-after" "put a hat over the next character"
+
+      ""
+
+      ""
+
+    "compchar-circumflex" "add a hat to the character to the left of the 
+cursor."
+
+      ""
+
+      ""
+
+    "compchar-compose2" "improved compchar-compose."
+
+      ""
+
+      ""
+
+    "compchar-compose" "start the composition of a character"
+
+      ""
+
+      ""
+
+    "compchar-graveaccent-after" "put a right accent over the next 
+character"
+
+      ""
+
+      ""
+
+    "compchar-graveaccent" "add a right accent to the character to the left 
+of the cursor."
+
+      ""
+
+      ""
+
+    "compchar-insert" "inserts an arbitrary character specified in an 
+initfile."
+
+      ""
+
+      ""
+
+    "compchar-nop" "nop for use with compchar."
+
+      ""
+
+      ""
+
+    "compchar-tilde-after" "put a tilde over the next character"
+
+      ""
+
+      ""
+
+    "compchar-tilde" "add a tilde to the character to the left of the 
+cursor."
+
+      ""
+
+      ""
+
+    "compchar-umlaut-after" "put an umlaut over the next character"
+
+      ""
+
+      ""
+
+    "compchar-umlaut" "add a umlaut to the character to the left of the 
+cursor."
+
+      ""
+
+      ""
+
+metax 
+\begindata{link,7169760}
+4
+${ANDREWDIR}/help/metax.help
+0
+0
+V
+\begindata{link,7169760}
+Datastream version: 2
+metax
+2
+
+black
+white
+\enddata{link,7169760}
+\enddata{link,7169760}
+\view{linkview,7169760,43,0,0}
+
+metexview etextview 
+\begindata{link,7562624}
+4
+${ANDREWDIR}/help/valproc.help
+0
+0
+V
+\begindata{link,7562624}
+Datastream version: 2
+valproc
+2
+
+black
+white
+\enddata{link,7562624}
+\enddata{link,7562624}
+\view{linkview,7562624,44,0,0}
+
+fadview 
+\begindata{link,7446384}
+4
+${ANDREWDIR}/help/fadproc.help
+0
+0
+V
+\begindata{link,7446384}
+Datastream version: 2
+fadproc
+2
+
+black
+white
+\enddata{link,7446384}
+\enddata{link,7446384}
+\view{linkview,7446384,46,0,0}
+
+stylesheet 
+\begindata{link,7652976}
+4
+${ANDREWDIR}/help/stlproc.help
+0
+0
+V
+\begindata{link,7652976}
+Datastream version: 2
+stlproc
+2
+
+black
+white
+\enddata{link,7652976}
+\enddata{link,7652976}
+\view{linkview,7652976,48,0,0}
+
+figview
+
+    "figview-abort-object" "abort object being created."
+
+      "^G"
+
+      ""
+
+    "figview-copy-selected-inset" "Put dataobject of selected inset in cut 
+buffer."
+
+      ""
+
+      "Copy Inset Contents~3"
+
+    "figview-copy-selection" "Put selected objects in cut buffer."
+
+      "Esc-w"
+
+      "Copy~2"
+
+    "figview-focus-down" "move focus down to subgroup."
+
+      "Esc-B"
+
+      ""
+
+    "figview-focus-left" "move focus left to sibling group."
+
+      "Esc-D"
+
+      ""
+
+    "figview-focus-right" "move focus left to sibling group."
+
+      "Esc-C"
+
+      ""
+
+    "figview-focus-up" "move focus up to parent group."
+
+      "Esc-A"
+
+      ""
+
+    "figview-pan-to-origin" "Pan to (0,0)."
+
+      ""
+
+      "Figure~5,Pan to Origin~19"
+
+    "figview-read-zip-file" "Read a zip datastream into the figure."
+
+      ""
+
+      ""
+
+    "figview-rotate-yank-selection" "Paste an object from the cut buffer 
+and rotate the buffer."
+
+      "Esc-y"
+
+      ""
+
+    "figview-set-expert-mode" "Turns on expert mode for self and toolset."
+
+      ""
+
+      "Figure~5,Expert Mode~40"
+
+    "figview-set-print-landscape" "Set landscape or portrait printing."
+
+      ""
+
+      "File,Portrait Printing~25" "File,Landscape Printing~25"
+
+    "figview-set-print-scale" "Set print scale."
+
+      "Esc-P"
+
+      "File,Set Print Scale~24"
+
+    "figview-show-print-area" "Show page boundaries."
+
+      ""
+
+      "File,Show Print Area~26" "File,Hide Print Area~26"
+
+    "figview-toggle-debug" "Turn debugging on or off."
+
+      ""
+
+      ""
+
+    "figview-toggle-readonly" "Turn read-only flag on or off."
+
+      ""
+
+      ""
+
+    "figview-toolset-create" "Creates toolset window."
+
+      ""
+
+      "Figure~5,Toolset~30"
+
+    "figview-toolset-destroy" "Deletes toolset window."
+
+      ""
+
+      "Figure~5,Remove Toolset~31"
+
+    "figview-unselect" "Select nothing."
+
+      ""
+
+      "Unselect~11"
+
+    "figview-yank-selection" "Paste an object from the cut buffer."
+
+      "^Y"
+
+      "Paste~4"
+
+    "figview-zap-selection" "Remove selected objects and put them in cut 
+buffer."
+
+      "^W"
+
+      "Cut~1"
+
+    "figview-zoom" "Change scale of view."
+
+      "Esc-Z" "Esc-z"
+
+      "Figure~5,Zoom In~10" "Figure~5,Zoom Out~11" "Figure~5,Normal Size~12"
+
+phlumphview
+
+    "phlumph-close" "Close window containing page layouts."
+
+      ""
+
+      "Phlumph~5,Close~11"
+
+    "phlumph-delete-page" "Insert new page before the current one."
+
+      "^Xd"
+
+      "Phlumph~6,Delete This Page~12"
+
+    "phlumph-insert-page" "Insert new page before the current one or at the 
+end."
+
+      "^Xa" "^Xi"
+
+      "Phlumph~6,Add Page~10" "Phlumph~6,Insert Page Here~11"
+
+    "phlumph-next-page" "Go to next page of page list."
+
+      "^X^N"
+
+      "Phlumph~6,Next Page~21"
+
+    "phlumph-open" "Open window containing page layouts."
+
+      ""
+
+      "Phlumph~5,Open~10"
+
+    "phlumph-previous-page" "Go to previous page of page list."
+
+      "^X^P"
+
+      "Phlumph~6,Previous Page~20"
+
+    "phlumph-set-repeat" "Insert new page before the current one."
+
+      ""
+
+      "Phlumph~6,Set Page Repeat~30" "Phlumph~6,Clear Page Repeat~31"
+
+    "phlumph-toolset-suicide" "Deletes this window."
+
+      "^X^D" "^X^C"
+
+      "Quit~99"
+
+figotext
+
+    "figotext-complete-entry" "Finish entering text into this object."
+
+      "Esc-^M"
+
+      ""
+
+    "figotext-delete-char" "Delete a character from this object."
+
+      "^H" "Delete"
+
+      ""
+
+    "figotext-insert-char" "Insert a character into this object."
+
+      many keys
+
+      ""
+
+    "figotext-kill-line" "Delete chars starting at dot."
+
+      "^K"
+
+      ""
+
+    "figotext-move-dot" "Move the dot in this object."
+
+      lots of cursor movement-type keys
+
+      ""
+
+    "figotext-twiddle-chars" "Move the dot in this object."
+
+      "^T"
+
+      ""
+
+figotool
+
+    "figtoolv-abort-object" "Abort the object being built in the figview."
+
+      ""
+
+      "Cancel Object~11"
+
+    "figtoolv-apply-to-selection" "Apply attributes to selected objects."
+
+      ""
+
+      "Apply to Selection~33"
+
+    "figtoolv-toggle-closed" "Open or close selected polylines and splines."
+
+      ""
+
+      "Close / Open~32"
+
+    "figtoolv-toggle-smooth" "Turn selected polylines into splines and 
+back."
+
+      ""
+
+      "Smooth / Unsmooth~31"
+
+    "figtoolv-toolset-destroy" "Deletes toolset window."
+
+      "^X^D" "^X^C"
+
+      "Delete Window~89"
+
+console 
+\begindata{link,7402352}
+4
+${ANDREWDIR}/help/inpproc.help
+0
+0
+V
+\begindata{link,7402352}
+Datastream version: 2
+inpproc
+2
+
+black
+white
+\enddata{link,7402352}
+\enddata{link,7402352}
+\view{linkview,7402352,49,0,0}
+
+console/logview 
+\begindata{link,7623984}
+4
+${ANDREWDIR}/help/lgvproc.help
+0
+0
+V
+\begindata{link,7623984}
+Datastream version: 2
+lgvproc
+2
+
+black
+white
+\enddata{link,7623984}
+\enddata{link,7623984}
+\view{linkview,7623984,50,0,0}
+
+console/errf 
+\begindata{link,7284192}
+4
+${ANDREWDIR}/help/ermproc.help
+0
+0
+V
+\begindata{link,7284192}
+Datastream version: 2
+ermproc
+2
+
+black
+white
+\enddata{link,7284192}
+\enddata{link,7284192}
+\view{linkview,7284192,52,0,0}
+
+pushbuttonview 
+\begindata{link,7012000}
+4
+${ANDREWDIR}/help/pshbttn.help
+0
+0
+V
+\begindata{link,7012000}
+Datastream version: 2
+pshbttn
+2
+
+black
+white
+\enddata{link,7012000}
+\enddata{link,7012000}
+\view{linkview,7012000,53,0,0} is close enough
+
+ezapp/frame 
+\begindata{link,7045632}
+4
+${ANDREWDIR}/help/ezproc.help
+0
+0
+V
+\begindata{link,7045632}
+Datastream version: 2
+ezproc
+2
+
+black
+white
+\enddata{link,7045632}
+\enddata{link,7045632}
+\view{linkview,7045632,56,0,0}
+
+panel
+
+    "panel-key-dispatch" ""
+
+      all keys
+
+      ""
+
+
+\section{listed actions}
+
+
+popupwin
+
+    "popupwin-cancel" "Cancels a popup."
+
+    "^G"
+
+    ""
+
+ness
+
+    "ness-proctable-hook" "Attempts to locate the named function and place 
+it in the proctable."
+
+      ""
+
+      ""
+
+atextv
+
+    "atext-activate" "Invokes the widget's activate callback."
+
+      ""
+
+      ""
+
+    "atext-hit" "Passes a mouse hit to the text."
+
+      ""
+
+      ""
+
+abuttonv
+
+    "abutton-activate" "Disarms the button, then executes the activate 
+callback"
+
+      ""
+
+      ""
+
+    "abutton-arm" "Arms or disarms the button, according to the mouse 
+position."
+
+      ""
+
+      ""
+
+    "abutton-disarm" "Disarms the button."
+
+      ""
+
+      ""
+
+    "abutton-radiotoggle" "Toggles the 'set' state of the button, ensures 
+only one of the radio group buttons is 'set' at any one time."
+
+      ""
+
+      ""
+
+    "abutton-toggle" "Toggles the 'set' state of the button."
+
+      ""
+
+      ""
+
+alistv
+
+    "alist-text-hit" "Called for every mouse hit."
+
+      ""
+
+      ""
+
+aoptionv
+
+    "aoption-button-hit" "Pops up the option list."
+
+      ""
+
+      ""
+
+    "aoption-card-hit" "Pops up the option list."
+
+      ""
+
+      ""
+
+
+\section{unlisted actions}
+
+
+wsactions
+
+    "wsactions-mouse-left-up" "WidgetSelector - select"
+
+      ""
+
+      ""
+
+    "wsactions-mouse-right-up" "WidgetSelector - mutate"
+
+      ""
+
+      ""
+
+butactions
+
+    "butactions-button-design"  "Push button: Compute Design Size"
+
+      ""
+
+      ""
+
+    "butactions-button-left-up"  "Raise left mouse on a button"
+
+      ""
+
+      ""
+
+    "butactions-button-prep"  "Prepare image for push button"
+
+      ""
+
+      ""
+
+    "butactions-check-left-up"  "Toggle check button (L)"
+
+      ""
+
+      ""
+
+    "butactions-check-prep"  "Prepare image for selectable button"
+
+      ""
+
+      ""
+
+    "butactions-radio-left-up"  "Change radio buttons (L)"
+
+      ""
+
+      ""
+
+    "butactions-textres-design"  "Compute size of TextResponse button"
+
+      ""
+
+      ""
+
+    "butactions-textres-left-up"  "Left mouse up on TextResponse button"
+
+      ""
+
+      ""
+
+    "butactions-textres-prep"  "Prepare image for TextResponse button"
+
+      ""
+
+      ""
+
+    "butactions-widget-arm"  "Arm widget while mouse is down inside"
+
+      ""
+
+      ""
+
+
+\section{misc}
+
+
+init (only in init files) 
+\begindata{link,7981152}
+4
+${ANDREWDIR}/help/initfls.help
+0
+0
+V
+\begindata{link,7981152}
+Datastream version: 2
+initfls
+2
+
+black
+white
+\enddata{link,7981152}
+\enddata{link,7981152}
+\view{linkview,7981152,57,0,0}
+
+null: should probably have a sample proclist document
+
+    "null-clear-rectangle" "Clear the rectangle"
+
+      "^C"
+
+      "Clear~10"
+
+    "null-invert-debug" "Toggle the nullview debug flag"
+
+      "Esc-^DD"
+
+      ""
+
+examples:hellowworldview: should probably have a sample proclist document
+
+    "helloworldview-center" 4-13 16+ "Center the helloworldview string."
+
+      "^C"
+
+      "Hello World,Center"
+
+    "helloworldview-invert" 4-13 16+ "Invert the helloworldview string."
+
+      "Tab"
+
+      "Hello World,Invert"
+
+    "helloworldview-relocate" 9-13 16+ "Relocate the helloworld string."
+
+      "^R"
+
+      "Hello World,Relocate"
+
+    "helloworldview-read" 11-13 16+ "Read in a new hello world."
+
+      ""
+
+      "Hello World,Read"
+
+    "helloworldview-write" 11-13 16+ "Write out the current hello world to 
+a file."
+
+      ""
+
+      "Hello World,Write"
+
+    "helloworldview-change-obj" 18+ "Change the object in the square."
+
+      ""
+
+      "Hello World,Change Object"\
+
+
+\begindata{bp,15466162}
+Version 2
+n 0
+\enddata{bp,15466162}
+\view{bpv,15466162,26582,0,0}
+\chapter{Preferences}
+
+./atk/web/urlbuttonview.C:"WWWbrowser" <not found>
+
+./atk/web/urlbuttonview.C:"MosaicNewWindow" <not found>
+
+./atk/web/webview.C:"WebHome" <not found>
+
+./atk/web/webapp.C:"WebHome" <not found>
+
+./atk/web/htmltext.C:"ExposeStylesLikeSGML" <not found>
+
+./atk/web/htmltext.C:"defaultImage" <not found>
+
+./atk/web/ez2htmlapp.C:"HelptopicAnchorSubst" <not found>
+
+./atk/ez/ezapp.C:"MaxInitWindows" ./atk/ez/ez.pr
+
+./atk/ez/ezapp.C:"WindowTitle" <not found>
+
+./atk/ez/ezapp.C:"DefaultStartUpFile" ./atk/ez/ez.pr
+
+./atk/ez/ezapp.C:"DefaultIsScratchBuffer" ./atk/ez/ez.pr
+
+./atk/ez/ezapp.C:"CheckpointInterval" ./atk/ez/ez.pr
+
+./atk/ez/ezapp.C:"CheckpointInterval" ./atk/bush/bush.pr
+
+./atk/ez/ezapp.C:"CheckpointMinimum" ./atk/ez/ez.pr
+
+./atk/ez/ezapp.C:"CheckpointMaxSize" <not found>
+
+./atk/hyplink/Prefs.d:"LinkMenus" <not found>
+
+./atk/hyplink/Prefs.d:"LinkReuseWindow" ./atk/hyplink/link.pr
+
+./atk/hyplink/linkview.C:"LinkMenus" <not found>
+
+./atk/hyplink/linkview.C:"LinkMenus" <not found>
+
+./atk/hyplink/linkview.C:"LinkReuseWindow" ./atk/hyplink/link.pr
+
+./atk/hyplink/pushbutton.C:"pushbuttonstyle" ./atk/hyplink/pshbttn.pr
+
+./atk/hyplink/pushbutton.C:"foreground" ./atk/hyplink/pshbttn.pr
+
+./atk/hyplink/pushbutton.C:"background" ./atk/hyplink/pshbttn.pr
+
+./atk/hyplink/link.C:"linkstyle" ./atk/hyplink/link.pr
+
+./atk/apt/suite/suite.C:"suiteforeground" ./atk/apt/suite/suite.pr
+
+./atk/apt/suite/suite.C:"suitebackground" ./atk/apt/suite/suite.pr
+
+./atk/apt/suite/suite.C:"suitetitleforeground" <not found>
+
+./atk/apt/suite/suite.C:"suitetitlebackground" <not found>
+
+./atk/apt/suite/suite.C:"suitebuttonactiveforeground" ./atk/apt/suite/suite.pr
+
+./atk/apt/suite/suite.C:"suitebuttonactivebackground" ./atk/apt/suite/suite.pr
+
+./atk/apt/suite/suite.C:"suitebuttonpassiveforeground" ./atk/apt/suite/suite.pr
+
+./atk/apt/suite/suite.C:"suitebuttonpassivebackground" ./atk/apt/suite/suite.pr
+
+./atk/console/lib/mailmon.C:"console.mailfrom" ./atk/console/lib/console.pr
+
+./atk/console/lib/mailmon.C:"print.printdir" <not found>
+
+./atk/console/lib/mailmon.C:"print.printer" ./atk/ez/ez.pr
+
+./atk/console/lib/mailmon.C:"print.printer" ./atk/support/printing.pr
+
+./atk/console/lib/mailmon.C:"print.spooldir" ./atk/ez/ez.pr
+
+./atk/console/lib/mailmon.C:"print.printdir" <not found>
+
+./atk/console/lib/setup.C:"bodyfont" ./atk/ez/ez.pr
+
+./atk/console/lib/setup.C:"bodyfont" ./atk/console/lib/console.pr
+
+./atk/console/lib/setup.C:"bodyfont" ./atk/typescript/tscript.pr
+
+./atk/console/lib/setup.C:"bodyfont" ./contrib/zip/zip.pr
+
+./atk/console/lib/setup.C:"SecurityConscious" ./atk/bush/bush.pr
+
+./atk/console/lib/setup.C:"bodyfont" ./atk/ez/ez.pr
+
+./atk/console/lib/setup.C:"bodyfont" ./atk/console/lib/console.pr
+
+./atk/console/lib/setup.C:"bodyfont" ./atk/typescript/tscript.pr
+
+./atk/console/lib/setup.C:"bodyfont" ./contrib/zip/zip.pr
+
+./atk/console/lib/setup.C:"bodyfont" ./atk/ez/ez.pr
+
+./atk/console/lib/setup.C:"bodyfont" ./atk/console/lib/console.pr
+
+./atk/console/lib/setup.C:"bodyfont" ./atk/typescript/tscript.pr
+
+./atk/console/lib/setup.C:"bodyfont" ./contrib/zip/zip.pr
+
+./atk/console/lib/setup.C:"default" ./atk/console/lib/console.pr
+
+./atk/console/lib/drawfreq.C:"SecurityConscious" ./atk/bush/bush.pr
+
+./atk/console/lib/timemon.C:"console.tfhc" ./atk/console/lib/console.pr
+
+./atk/console/lib/consoleClass.C:"bodyfont" ./atk/ez/ez.pr
+
+./atk/console/lib/consoleClass.C:"bodyfont" ./atk/console/lib/console.pr
+
+./atk/console/lib/consoleClass.C:"bodyfont" ./atk/typescript/tscript.pr
+
+./atk/console/lib/consoleClass.C:"bodyfont" ./contrib/zip/zip.pr
+
+./atk/figure/figview.C:"FigureExpertMode" ./atk/figure/figure.pr
+
+./atk/figure/figview.C:"FigureMatteColor" ./atk/figure/figure.pr
+
+./atk/figure/figview.C:"FigureForegroundColor" ./atk/figure/figure.pr
+
+./atk/figure/figview.C:"FigureBackgroundColor" <not found>
+
+./atk/figure/figview.C:"FigureScrollClass" ./atk/figure/figure.pr
+
+./atk/support/completion.C:"UseCurrentWorkingDirectory" ./atk/ez/ez.pr
+
+./atk/support/bufferlist.C:"DirectoryEditor" ./atk/ez/ez.pr
+
+./atk/support/print.C:"previewcommand" ./atk/support/printing.pr
+
+./atk/support/print.C:"pscpreviewcommand" ./atk/support/printing.pr
+
+./atk/support/print.C:"pscprintcommand" ./atk/support/printing.pr
+
+./atk/support/print.C:"printcommand" ./atk/support/printing.pr
+
+./atk/support/print.C:"print.spoolpath" <not found>
+
+./atk/support/print.C:"previewcommand" ./atk/support/printing.pr
+
+./atk/support/print.C:"pscpreviewcommand" ./atk/support/printing.pr
+
+./atk/support/print.C:"pscprintcommand" ./atk/support/printing.pr
+
+./atk/support/print.C:"printcommand" ./atk/support/printing.pr
+
+./atk/support/print.C:"formatcommand" ./atk/support/printing.pr
+
+./atk/support/print.C:"pscformatcommand" <not found>
+
+./atk/support/buffer.C:"ClobberSymlinks" ./atk/ez/ez.pr
+
+./atk/support/buffer.C:"AskAboutSymlinks" ./atk/ez/ez.pr
+
+./atk/support/buffer.C:"BackupExtension" ./atk/ez/ez.pr
+
+./atk/support/buffer.C:"CheckpointExtension" ./atk/ez/ez.pr
+
+./atk/support/buffer.C:"CheckpointDirectory" ./atk/ez/ez.pr
+
+./atk/support/buffer.C:"OverwriteFiles" ./atk/ez/ez.pr
+
+./atk/support/buffer.C:"CheckpointGawdyNames" ./atk/ez/ez.pr
+
+./atk/raster/lib/rasterview.C:"RastersInitiallyShrunk" ./atk/raster/lib/raster.pr
+
+./atk/raster/lib/rasterview.C:"RasterScrollClass" ./atk/raster/lib/raster.pr
+
+./atk/layout/fillerview.C:"FillerInsets" ./atk/layout/layout.pr
+
+./atk/layout/fillerview.C:"bodyfontfamily" ./atk/layout/layout.pr
+
+./atk/layout/fillerview.C:"bodyfontfamily" ./atk/table/table.pr
+
+./atk/help/src/helpapp.C:"SearchPath" ./atk/help/src/help.pr
+
+./atk/help/src/helpaux.C:"ShowPanels" ./atk/help/src/help.pr
+
+./atk/help/src/helpaux.C:"ShowOverviews" ./atk/help/src/help.pr
+
+./atk/help/src/helpaux.C:"ShowPrograms" ./atk/help/src/help.pr
+
+./atk/help/src/helpaux.C:"ShowHistory" ./atk/help/src/help.pr
+
+./atk/help/src/helpaux.C:"ExpandedList" ./atk/help/src/help.pr
+
+./atk/ness/objects/interp.C:"SecurityConscious" ./atk/bush/bush.pr
+
+./atk/ness/objects/ness.C:"NessUseDialogBoxInsteadOfWarning" ./atk/ness/ness.pr
+
+./atk/ness/objects/nessview.C:"DefaultMacrosFile" ./atk/ness/ness.pr
+
+./atk/ness/objects/nessview.C:"ScrollbarPosition" ./atk/supportviews/scroll.pr
+
+./atk/ness/objects/nessview.C:"TextHorizontalScrollbar" <not found>
+
+./atk/ness/objects/nessview.C:"MotifScrollbars" ./atk/supportviews/scroll.pr
+
+./atk/ness/objects/call.C:"nesspath" ./atk/ness/ness.pr
+
+./atk/extensions/ezdiff.C:"EzdiffOPtionPrompt" <not found>
+
+./atk/extensions/ezdiff.C:"EzdiffOptions" <not found>
+
+./atk/extensions/spell.C:"expertmode" ./atk/ez/ez.pr
+
+./atk/extensions/spell.C:"expertmode" ./atk/extensions/spell.pr
+
+./atk/extensions/compile.C:"CompileCommand" ./atk/extensions/compile.pr
+
+./atk/extensions/tags.C:"tagfilename" ./atk/extensions/tags.pr
+
+./atk/extensions/tags.C:"TagRecursiveEdit" <not found>
+
+./atk/extensions/tags.C:"TagRecursiveEdit" <not found>
+
+./atk/extensions/incsearch.C:"incsearchUseSelectionRegion" ./atk/extensions/isearch.pr
+
+./atk/image/imagev.C:"imagebordersize" <not found>
+
+./atk/image/imagev.C:"imagepanstyle" <not found>
+
+./atk/image/imagev.C:"imageclickdraw" <not found>
+
+./atk/image/imagev.C:"imagescrollclass" <not found>
+
+./atk/bush/bushv.C:"editors" ./atk/bush/bush.pr
+
+./atk/bush/bushv.C:"editor" ./atk/ez/ez.pr
+
+./atk/bush/bushv.C:"controlfont" ./atk/bush/bush.pr
+
+./atk/bush/bushv.C:"treenodefont" ./atk/bush/bush.pr
+
+./atk/bush/bushv.C:"listingfont" ./atk/bush/bush.pr
+
+./atk/bush/bushv.C:"CheckpointInterval" ./atk/ez/ez.pr
+
+./atk/bush/bushv.C:"CheckpointInterval" ./atk/bush/bush.pr
+
+./atk/bush/bushv.C:"AutoRescan" ./atk/bush/bush.pr
+
+./atk/bush/bushv.C:"print.printer" ./atk/ez/ez.pr
+
+./atk/bush/bushv.C:"print.printer" ./atk/support/printing.pr
+
+./atk/bush/bushv.C:"print.spooldir" ./atk/ez/ez.pr
+
+./atk/bush/bush.C:"SecurityConscious" ./atk/bush/bush.pr
+
+./atk/frame/framecmds.C:"LastWindowQuitWarning" ./atk/ez/ez.pr
+
+./atk/frame/framecmds.C:"print.printer" ./atk/ez/ez.pr
+
+./atk/frame/framecmds.C:"print.printer" ./atk/support/printing.pr
+
+./atk/frame/framecmds.C:"print.spooldir" ./atk/ez/ez.pr
+
+./atk/frame/frame.C:"frame.MonochromeDialogBoxes" <not found>
+
+./atk/frame/frame.C:"frame.DialogBoxMonochromeForeground" <not found>
+
+./atk/frame/frame.C:"frame.DialogBoxMonochromeBackground" <not found>
+
+./atk/frame/frame.C:"frame.DialogBoxColorForeground" <not found>
+
+./atk/frame/frame.C:"frame.DialogBoxColorBackground" <not found>
+
+./atk/frame/frame.C:"UseBuiltinDialogs" ./atk/ez/ez.pr
+
+./atk/frame/frame.C:"QuitWindowOnly" ./atk/ez/ez.pr
+
+./atk/frame/frame.C:"QuitBuffer" ./atk/ez/ez.pr
+
+./atk/frame/frame.C:"ReadOnlyTitle" ./atk/ez/ez.pr
+
+./atk/frame/frame.C:"dialogstyle" ./atk/supportviews/dialog.pr
+
+./atk/frame/frame.C:"MessageLineBoundaryColor" ./atk/ez/ez.pr
+
+./atk/frame/frame.C:"dialogstyle" ./atk/supportviews/dialog.pr
+
+./atk/frame/frame.C:"ResizableMessageLine" ./atk/ez/ez.pr
+
+./atk/frame/frameview.C:"MinimumMessageLines" ./atk/ez/ez.pr
+
+./atk/frame/frameview.C:"DynamicMessageLineSize" ./atk/ez/ez.pr
+
+./atk/frame/frameview.C:"MessageLineForegroundColor" ./atk/ez/ez.pr
+
+./atk/frame/frameview.C:"MessageLineBackgroundColor" ./atk/ez/ez.pr
+
+./atk/frame/framemessage.C:"DialogPriority" ./atk/ez/ez.pr
+
+./atk/frame/framemessage.C:"MessageTimeout" ./atk/ez/ez.pr
+
+./atk/textaux/contentv.C:"ContentsScrollTop" ./atk/textaux/contents.pr
+
+./atk/srctext/perltextview.C:"autocut" ./atk/ez/ez.pr
+
+./atk/srctext/rexxtextview.C:"autocut" ./atk/ez/ez.pr
+
+./atk/srctext/srctextview.C:"autocut" ./atk/ez/ez.pr
+
+./atk/srctext/srctextview.C:"WasteScreenSpace" <not found>
+
+./atk/srctext/modtextview.C:"autocut" ./atk/ez/ez.pr
+
+./atk/srctext/ctextview.C:"autocut" ./atk/ez/ez.pr
+
+./atk/srctext/compressv.C:"CompressBoxFont" <not found>
+
+./atk/srctext/compressv.C:"CompressBoxWidth" <not found>
+
+./atk/srctext/compressv.C:"CompressBoxForegroundColor" <not found>
+
+./atk/srctext/compressv.C:"CompressBoxBackgroundColor" <not found>
+
+./atk/srctext/ptextview.C:"autocut" ./atk/ez/ez.pr
+
+./atk/srctext/mtextview.C:"autocut" ./atk/ez/ez.pr
+
+./atk/srctext/ltext.C:"ltextindents" <not found>
+
+./atk/srctext/cpptextview.C:"autocut" ./atk/ez/ez.pr
+
+./atk/srctext/m3textview.C:"autocut" ./atk/ez/ez.pr
+
+./atk/srctext/rawtext.C:"rawtext.newlineateof" <not found>
+
+./atk/srctext/srctext.C:"ReindentComments" <not found>
+
+./atk/srctext/srctext.C:"CheckpointInterval" ./atk/ez/ez.pr
+
+./atk/srctext/srctext.C:"CheckpointInterval" ./atk/bush/bush.pr
+
+./atk/srctext/srctext.C:"CheckpointMinimum" ./atk/ez/ez.pr
+
+classname in srctext and all its children
+
+./atk/srctext/srctext.C:"%s_userdef",classname <not found>
+
+./atk/srctext/srctext.C:"%s_uppercase",classname <not found>
+
+./atk/srctext/srctext.C:"srctext.BreakInsetsWithNewlinesLineNumbersBeDamned" <not found>
+
+./atk/srctext/srctext.C:"InitialRedoStyles" <not found>
+
+./atk/srctext/srctext.C:"srctext.BreakInsetsWithNewlinesLineNumbersBeDamned" <not found>
+
+./atk/prefed/prefedapp.C:"PrefEdDefaultFile" ./atk/prefed/prefed.pr
+
+./atk/prefed/prefs.C:"PrefEdPath" ./atk/prefed/prefed.pr
+
+./atk/prefed/prefs.C:"KeepOrigPrefs" ./atk/prefed/prefed.pr
+
+./atk/prefed/pintv.C:"PrefEdAutoList" ./atk/prefed/prefed.pr
+
+./atk/prefed/pintv.C:"KeepOrigPrefs" ./atk/prefed/prefed.pr
+
+./atk/table/spread.C:"limitedspreadhighlight" <not found>
+
+./atk/table/spread.C:"TableHideGridAndLabelsWhenReadOnly" ./atk/table/table.pr
+
+./atk/table/spread.C:"TableBlockInputWhenReadOnly" ./atk/table/table.pr
+
+./atk/table/spread.C:"TableShowLabels" <not found>
+
+./atk/table/spread.C:"bodyfontfamily" ./atk/layout/layout.pr
+
+./atk/table/spread.C:"bodyfontfamily" ./atk/table/table.pr
+
+./atk/table/spread.C:"bodyfontsize" ./atk/table/table.pr
+
+./atk/lookz/tabrulerview.C:"TabScalingMultiplier" ./atk/ez/ez.pr
+
+./atk/lookz/tabrulerview.C:"TabScalingDivisor" ./atk/ez/ez.pr
+
+./atk/lookz/lookzview.C:"lookzautoupdate" ./atk/lookz/lookz.pr
+
+./atk/lookz/lookzview.C:"lookzfontsize" ./atk/lookz/lookz.pr
+
+./atk/supportviews/scroll.C:"MotifScrollbars" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"StartScrollTime" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"ContScrollTime" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"MaxContScrollTime" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"ButtonRepeatTime" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"AdjustScroll" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"ThumbScroll" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"ScrollClass" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"MimicOldScrollbar" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"ScrollDrawBorders" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"ScrollWindowPadding" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollbarWidth" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"DotWidth" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"ElevatorWidth" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"ScrollButtonSize" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"ScrollButtonPadding" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/oscroll.C:"MotifScrollBars" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/oscroll.C:"StartScrollTime" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/oscroll.C:"ContScrollTime" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/oscroll.C:"MaxContScrollTime" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/oscroll.C:"AdjustScroll" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/oscroll.C:"ThumbScroll" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/oscroll.C:"ScrollBarWidth" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/oscroll.C:"DotWidth" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/oscroll.C:"CornerShade" ./atk/supportviews/oscroll.pr
+
+./atk/supportviews/oscroll.C:"EndZoneShade" ./atk/supportviews/oscroll.pr
+
+./atk/supportviews/oscroll.C:"BackgroundShade" ./atk/supportviews/oscroll.pr
+
+./atk/supportviews/oscroll.C:"ElevatorShade" ./atk/supportviews/oscroll.pr
+
+./atk/supportviews/sbutton.C:"sbuttonbackground" ./atk/supportviews/sbutton.pr
+
+./atk/supportviews/sbutton.C:"sbuttontopshadow" ./atk/supportviews/sbutton.pr
+
+./atk/supportviews/sbutton.C:"sbuttontop" ./atk/supportviews/sbutton.pr
+
+./atk/supportviews/sbutton.C:"sbuttonbottomshadow" ./atk/supportviews/sbutton.pr
+
+./atk/supportviews/sbutton.C:"sbuttonforeground" ./atk/supportviews/sbutton.pr
+
+./atk/supportviews/sbutton.C:"sbuttonlabelforeground" ./atk/supportviews/sbutton.pr
+
+./atk/supportviews/sbutton.C:"sbuttonlabelbackground" ./atk/supportviews/sbutton.pr
+
+./atk/supportviews/sbutton.C:"sbuttoninsensitivelabelforeground" <not found>
+
+./atk/supportviews/sbutton.C:"sbuttoninsensitivelabelbackground" <not found>
+
+./atk/supportviews/sbutton.C:"sbuttoninsensitivetop" <not found>
+
+./atk/supportviews/sbutton.C:"sbuttonstyle" ./atk/supportviews/sbutton.pr
+
+./atk/supportviews/sbutton.C:"sbuttonDepth" <not found>
+
+./atk/supportviews/sbutton.C:"sbuttonfont" <not found>
+
+./atk/supportviews/sbutton.C:"sbuttonInherit" <not found>
+
+./contrib/runbtn/runbutton.C:"runbuttonbackground" <not found>
+
+./contrib/runbtn/runbutton.C:"runbuttontopshadow" <not found>
+
+./contrib/runbtn/runbutton.C:"runbuttontop" <not found>
+
+./contrib/runbtn/runbutton.C:"runbuttonbottomshadow" <not found>
+
+./contrib/runbtn/runbutton.C:"runbuttonforeground" <not found>
+
+./contrib/runbtn/runbutton.C:"runbuttonlabelforeground" <not found>
+
+./contrib/runbtn/runbutton.C:"runbuttonlabelbackground" <not found>
+
+./contrib/runbtn/runbutton.C:"runbuttoninsensitivelabelforeground" <not found>
+
+./contrib/runbtn/runbutton.C:"runbuttoninsensitivelabelbackground" <not found>
+
+./contrib/runbtn/runbutton.C:"runbuttoninsensitivetop" <not found>
+
+./contrib/runbtn/runbutton.C:"runbuttonstyle" <not found>
+
+./contrib/runbtn/runbutton.C:"runbuttonDepth" <not found>
+
+./contrib/runbtn/runbutton.C:"runbuttonfont" <not found>
+
+./contrib/runbtn/runbutton.C:"runbuttonInherit" <not found>
+
+./atk/supportviews/amenu.C:"AmenuSepbackground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuSeptopshadow" <not found>
+
+./atk/supportviews/amenu.C:"AmenuSeptop" <not found>
+
+./atk/supportviews/amenu.C:"AmenuSepbottomshadow" <not found>
+
+./atk/supportviews/amenu.C:"AmenuSepforeground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuSeplabelforeground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuSeplabelbackground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuSepinsensitivelabelforeground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuSepinsensitivelabelbackground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuSepinsensitivetop" <not found>
+
+./atk/supportviews/amenu.C:"AmenuSepstyle" <not found>
+
+./atk/supportviews/amenu.C:"AmenuSepDepth" <not found>
+
+./atk/supportviews/amenu.C:"AmenuSepfont" <not found>
+
+./atk/supportviews/amenu.C:"AmenuSepInherit" <not found>
+
+./atk/supportviews/amenu.C:"AmenuOptionbackground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuOptiontopshadow" <not found>
+
+./atk/supportviews/amenu.C:"AmenuOptiontop" <not found>
+
+./atk/supportviews/amenu.C:"AmenuOptionbottomshadow" <not found>
+
+./atk/supportviews/amenu.C:"AmenuOptionforeground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuOptionlabelforeground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuOptionlabelbackground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuOptioninsensitivelabelforeground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuOptioninsensitivelabelbackground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuOptioninsensitivetop" <not found>
+
+./atk/supportviews/amenu.C:"AmenuOptionstyle" <not found>
+
+./atk/supportviews/amenu.C:"AmenuOptionDepth" <not found>
+
+./atk/supportviews/amenu.C:"AmenuOptionfont" <not found>
+
+./atk/supportviews/amenu.C:"AmenuOptionInherit" <not found>
+
+./atk/supportviews/amenu.C:"AmenuLabelbackground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuLabeltopshadow" <not found>
+
+./atk/supportviews/amenu.C:"AmenuLabeltop" <not found>
+
+./atk/supportviews/amenu.C:"AmenuLabelbottomshadow" <not found>
+
+./atk/supportviews/amenu.C:"AmenuLabelforeground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuLabellabelforeground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuLabellabelbackground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuLabelinsensitivelabelforeground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuLabelinsensitivelabelbackground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuLabelinsensitivetop" <not found>
+
+./atk/supportviews/amenu.C:"AmenuLabelstyle" <not found>
+
+./atk/supportviews/amenu.C:"AmenuLabelDepth" <not found>
+
+./atk/supportviews/amenu.C:"AmenuLabelfont" <not found>
+
+./atk/supportviews/amenu.C:"AmenuLabelInherit" <not found>
+
+./atk/supportviews/amenu.C:"AmenuCardbackground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuCardtopshadow" <not found>
+
+./atk/supportviews/amenu.C:"AmenuCardtop" <not found>
+
+./atk/supportviews/amenu.C:"AmenuCardbottomshadow" <not found>
+
+./atk/supportviews/amenu.C:"AmenuCardforeground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuCardlabelforeground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuCardlabelbackground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuCardinsensitivelabelforeground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuCardinsensitivelabelbackground" <not found>
+
+./atk/supportviews/amenu.C:"AmenuCardinsensitivetop" <not found>
+
+./atk/supportviews/amenu.C:"AmenuCardstyle" <not found>
+
+./atk/supportviews/amenu.C:"AmenuCardDepth" <not found>
+
+./atk/supportviews/amenu.C:"AmenuCardfont" <not found>
+
+./atk/supportviews/amenu.C:"AmenuCardInherit" <not found>
+
+./atk/supportviews/scroll.C:"scrollbackground" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrolltopshadow" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrolltop" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollbottomshadow" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollforeground" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrolllabelforeground" <not found>
+
+./atk/supportviews/scroll.C:"scrolllabelbackground" <not found>
+
+./atk/supportviews/scroll.C:"scrollinsensitivelabelforeground" <not found>
+
+./atk/supportviews/scroll.C:"scrollinsensitivelabelbackground" <not found>
+
+./atk/supportviews/scroll.C:"scrollinsensitivetop" <not found>
+
+./atk/supportviews/scroll.C:"scrollstyle" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollDepth" <not found>
+
+./atk/supportviews/scroll.C:"scrollfont" <not found>
+
+./atk/supportviews/scroll.C:"scrollInherit" <not found>
+
+./atk/supportviews/scroll.C:"scrollmattebackground" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollmattetopshadow" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollmattetop" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollmattebottomshadow" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollmatteforeground" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollmattelabelforeground" <not found>
+
+./atk/supportviews/scroll.C:"scrollmattelabelbackground" <not found>
+
+./atk/supportviews/scroll.C:"scrollmatteinsensitivelabelforeground" <not found>
+
+./atk/supportviews/scroll.C:"scrollmatteinsensitivelabelbackground" <not found>
+
+./atk/supportviews/scroll.C:"scrollmatteinsensitivetop" <not found>
+
+./atk/supportviews/scroll.C:"scrollmattestyle" <not found>
+
+./atk/supportviews/scroll.C:"scrollmatteDepth" <not found>
+
+./atk/supportviews/scroll.C:"scrollmattefont" <not found>
+
+./atk/supportviews/scroll.C:"scrollmatteInherit" <not found>
+
+./atk/supportviews/scroll.C:"scrollbarbackground" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollbartopshadow" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollbartop" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollbarbottomshadow" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollbarforeground" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollbarlabelforeground" <not found>
+
+./atk/supportviews/scroll.C:"scrollbarlabelbackground" <not found>
+
+./atk/supportviews/scroll.C:"scrollbarinsensitivelabelforeground" <not found>
+
+./atk/supportviews/scroll.C:"scrollbarinsensitivelabelbackground" <not found>
+
+./atk/supportviews/scroll.C:"scrollbarinsensitivetop" <not found>
+
+./atk/supportviews/scroll.C:"scrollbarstyle" <not found>
+
+./atk/supportviews/scroll.C:"scrollbarDepth" <not found>
+
+./atk/supportviews/scroll.C:"scrollbarfont" <not found>
+
+./atk/supportviews/scroll.C:"scrollbarInherit" <not found>
+
+./atk/supportviews/scroll.C:"scrollbuttonbackground" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollbuttontopshadow" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollbuttontop" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollbuttonbottomshadow" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollbuttonforeground" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollbuttonlabelforeground" <not found>
+
+./atk/supportviews/scroll.C:"scrollbuttonlabelbackground" <not found>
+
+./atk/supportviews/scroll.C:"scrollbuttoninsensitivelabelforeground" <not found>
+
+./atk/supportviews/scroll.C:"scrollbuttoninsensitivelabelbackground" <not found>
+
+./atk/supportviews/scroll.C:"scrollbuttoninsensitivetop" <not found>
+
+./atk/supportviews/scroll.C:"scrollbuttonstyle" <not found>
+
+./atk/supportviews/scroll.C:"scrollbuttonDepth" <not found>
+
+./atk/supportviews/scroll.C:"scrollbuttonfont" <not found>
+
+./atk/supportviews/scroll.C:"scrollbuttonInherit" <not found>
+
+./atk/supportviews/scroll.C:"scrollelevatorbackground" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollelevatortopshadow" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollelevatortop" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollelevatorbottomshadow" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollelevatorforeground" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrollelevatorlabelforeground" <not found>
+
+./atk/supportviews/scroll.C:"scrollelevatorlabelbackground" <not found>
+
+./atk/supportviews/scroll.C:"scrollelevatorinsensitivelabelforeground" <not found>
+
+./atk/supportviews/scroll.C:"scrollelevatorinsensitivelabelbackground" <not found>
+
+./atk/supportviews/scroll.C:"scrollelevatorinsensitivetop" <not found>
+
+./atk/supportviews/scroll.C:"scrollelevatorstyle" <not found>
+
+./atk/supportviews/scroll.C:"scrollelevatorDepth" <not found>
+
+./atk/supportviews/scroll.C:"scrollelevatorfont" <not found>
+
+./atk/supportviews/scroll.C:"scrollelevatorInherit" <not found>
+
+./atk/supportviews/scroll.C:"scrolldotbackground" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrolldottopshadow" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrolldottop" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrolldotbottomshadow" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrolldotforeground" ./atk/supportviews/scroll.pr
+
+./atk/supportviews/scroll.C:"scrolldotlabelforeground" <not found>
+
+./atk/supportviews/scroll.C:"scrolldotlabelbackground" <not found>
+
+./atk/supportviews/scroll.C:"scrolldotinsensitivelabelforeground" <not found>
+
+./atk/supportviews/scroll.C:"scrolldotinsensitivelabelbackground" <not found>
+
+./atk/supportviews/scroll.C:"scrolldotinsensitivetop" <not found>
+
+./atk/supportviews/scroll.C:"scrolldotstyle" <not found>
+
+./atk/supportviews/scroll.C:"scrolldotDepth" <not found>
+
+./atk/supportviews/scroll.C:"scrolldotfont" <not found>
+
+./atk/supportviews/scroll.C:"scrolldotInherit" <not found>
+
+./atk/prefed/pintv.C:"PrefEdbackground" <not found>
+
+./atk/prefed/pintv.C:"PrefEdtopshadow" <not found>
+
+./atk/prefed/pintv.C:"PrefEdtop" <not found>
+
+./atk/prefed/pintv.C:"PrefEdbottomshadow" <not found>
+
+./atk/prefed/pintv.C:"PrefEdforeground" <not found>
+
+./atk/prefed/pintv.C:"PrefEdlabelforeground" <not found>
+
+./atk/prefed/pintv.C:"PrefEdlabelbackground" <not found>
+
+./atk/prefed/pintv.C:"PrefEdinsensitivelabelforeground" <not found>
+
+./atk/prefed/pintv.C:"PrefEdinsensitivelabelbackground" <not found>
+
+./atk/prefed/pintv.C:"PrefEdinsensitivetop" <not found>
+
+./atk/prefed/pintv.C:"PrefEdstyle" <not found>
+
+./atk/prefed/pintv.C:"PrefEdDepth" <not found>
+
+./atk/prefed/pintv.C:"PrefEdfont" <not found>
+
+./atk/prefed/pintv.C:"PrefEdInherit" <not found>
+
+./atk/prefed/pintv.C:"PrefEdButtonsbackground" ./atk/prefed/prefed.pr
+
+./atk/prefed/pintv.C:"PrefEdButtonstopshadow" ./atk/prefed/prefed.pr
+
+./atk/prefed/pintv.C:"PrefEdButtonstop" ./atk/prefed/prefed.pr
+
+./atk/prefed/pintv.C:"PrefEdButtonsbottomshadow" ./atk/prefed/prefed.pr
+
+./atk/prefed/pintv.C:"PrefEdButtonsforeground" ./atk/prefed/prefed.pr
+
+./atk/prefed/pintv.C:"PrefEdButtonslabelforeground" ./atk/prefed/prefed.pr
+
+./atk/prefed/pintv.C:"PrefEdButtonslabelbackground" ./atk/prefed/prefed.pr
+
+./atk/prefed/pintv.C:"PrefEdButtonsinsensitivelabelforeground" <not found>
+
+./atk/prefed/pintv.C:"PrefEdButtonsinsensitivelabelbackground" <not found>
+
+./atk/prefed/pintv.C:"PrefEdButtonsinsensitivetop" <not found>
+
+./atk/prefed/pintv.C:"PrefEdButtonsstyle" ./atk/prefed/prefed.pr
+
+./atk/prefed/pintv.C:"PrefEdButtonsDepth" <not found>
+
+./atk/prefed/pintv.C:"PrefEdButtonsfont" <not found>
+
+./atk/prefed/pintv.C:"PrefEdButtonsInherit" <not found>
+
+./atk/image/imagev.C:"panebuttonbackground" <not found>
+
+./atk/image/imagev.C:"panebuttontopshadow" <not found>
+
+./atk/image/imagev.C:"panebuttontop" <not found>
+
+./atk/image/imagev.C:"panebuttonbottomshadow" <not found>
+
+./atk/image/imagev.C:"panebuttonforeground" <not found>
+
+./atk/image/imagev.C:"panebuttonlabelforeground" <not found>
+
+./atk/image/imagev.C:"panebuttonlabelbackground" <not found>
+
+./atk/image/imagev.C:"panebuttoninsensitivelabelforeground" <not found>
+
+./atk/image/imagev.C:"panebuttoninsensitivelabelbackground" <not found>
+
+./atk/image/imagev.C:"panebuttoninsensitivetop" <not found>
+
+./atk/image/imagev.C:"panebuttonstyle" <not found>
+
+./atk/image/imagev.C:"panebuttonDepth" <not found>
+
+./atk/image/imagev.C:"panebuttonfont" <not found>
+
+./atk/image/imagev.C:"panebuttonInherit" <not found>
+
+./atk/value/buttonV.C:"adewbackground" <not found>
+
+./atk/value/buttonV.C:"adewtopshadow" <not found>
+
+./atk/value/buttonV.C:"adewtop" <not found>
+
+./atk/value/buttonV.C:"adewbottomshadow" <not found>
+
+./atk/value/buttonV.C:"adewforeground" <not found>
+
+./atk/value/buttonV.C:"adewlabelforeground" <not found>
+
+./atk/value/buttonV.C:"adewlabelbackground" <not found>
+
+./atk/value/buttonV.C:"adewinsensitivelabelforeground" <not found>
+
+./atk/value/buttonV.C:"adewinsensitivelabelbackground" <not found>
+
+./atk/value/buttonV.C:"adewinsensitivetop" <not found>
+
+./atk/value/buttonV.C:"adewstyle" <not found>
+
+./atk/value/buttonV.C:"adewDepth" <not found>
+
+./atk/value/buttonV.C:"adewfont" <not found>
+
+./atk/value/buttonV.C:"adewInherit" <not found>
+
+./atk/value/sliderV.C:"adewbackground" <not found>
+
+./atk/value/sliderV.C:"adewtopshadow" <not found>
+
+./atk/value/sliderV.C:"adewtop" <not found>
+
+./atk/value/sliderV.C:"adewbottomshadow" <not found>
+
+./atk/value/sliderV.C:"adewforeground" <not found>
+
+./atk/value/sliderV.C:"adewlabelforeground" <not found>
+
+./atk/value/sliderV.C:"adewlabelbackground" <not found>
+
+./atk/value/sliderV.C:"adewinsensitivelabelforeground" <not found>
+
+./atk/value/sliderV.C:"adewinsensitivelabelbackground" <not found>
+
+./atk/value/sliderV.C:"adewinsensitivetop" <not found>
+
+./atk/value/sliderV.C:"adewstyle" <not found>
+
+./atk/value/sliderV.C:"adewDepth" <not found>
+
+./atk/value/sliderV.C:"adewfont" <not found>
+
+./atk/value/sliderV.C:"adewInherit" <not found>
+
+./atk/apt/suite/suite.C:"suitebackground" ./atk/apt/suite/suite.pr
+
+./atk/apt/suite/suite.C:"suitetopshadow" <not found>
+
+./atk/apt/suite/suite.C:"suitetop" <not found>
+
+./atk/apt/suite/suite.C:"suitebottomshadow" <not found>
+
+./atk/apt/suite/suite.C:"suiteforeground" ./atk/apt/suite/suite.pr
+
+./atk/apt/suite/suite.C:"suitelabelforeground" <not found>
+
+./atk/apt/suite/suite.C:"suitelabelbackground" <not found>
+
+./atk/apt/suite/suite.C:"suiteinsensitivelabelforeground" <not found>
+
+./atk/apt/suite/suite.C:"suiteinsensitivelabelbackground" <not found>
+
+./atk/apt/suite/suite.C:"suiteinsensitivetop" <not found>
+
+./atk/apt/suite/suite.C:"suitestyle" <not found>
+
+./atk/apt/suite/suite.C:"suiteDepth" <not found>
+
+./atk/apt/suite/suite.C:"suitefont" <not found>
+
+./atk/apt/suite/suite.C:"suiteInherit" <not found>
+
+./atk/atp/suite/suiteev.C:"suiteItemPrefsbackground" <not found>
+
+./atk/atp/suite/suiteev.C:"suiteItemPrefstopshadow" <not found>
+
+./atk/atp/suite/suiteev.C:"suiteItemPrefstop" <not found>
+
+./atk/atp/suite/suiteev.C:"suiteItemPrefsbottomshadow" <not found>
+
+./atk/atp/suite/suiteev.C:"suiteItemPrefsforeground" <not found>
+
+./atk/atp/suite/suiteev.C:"suiteItemPrefslabelforeground" <not found>
+
+./atk/atp/suite/suiteev.C:"suiteItemPrefslabelbackground" <not found>
+
+./atk/atp/suite/suiteev.C:"suiteItemPrefsinsensitivelabelforeground" <not found>
+
+./atk/atp/suite/suiteev.C:"suiteItemPrefsinsensitivelabelbackground" <not found>
+
+./atk/atp/suite/suiteev.C:"suiteItemPrefsinsensitivetop" <not found>
+
+./atk/atp/suite/suiteev.C:"suiteItemPrefsstyle" <not found>
+
+./atk/atp/suite/suiteev.C:"suiteItemPrefsDepth" <not found>
+
+./atk/atp/suite/suiteev.C:"suiteItemPrefsfont" <not found>
+
+./atk/atp/suite/suiteev.C:"suiteItemPrefsInherit" <not found>
+
+./atk/utils/dialog.C:"dialogbackground" ./atk/supportviews/dialog.pr
+
+./atk/utils/dialog.C:"dialogtopshadow" ./atk/supportviews/dialog.pr
+
+./atk/utils/dialog.C:"dialogtop" ./atk/supportviews/dialog.pr
+
+./atk/utils/dialog.C:"dialogbottomshadow" ./atk/supportviews/dialog.pr
+
+./atk/utils/dialog.C:"dialogforeground" ./atk/supportviews/dialog.pr
+
+./atk/utils/dialog.C:"dialoglabelforeground" <not found>
+
+./atk/utils/dialog.C:"dialoglabelbackground" <not found>
+
+./atk/utils/dialog.C:"dialoginsensitivelabelforeground" <not found>
+
+./atk/utils/dialog.C:"dialoginsensitivelabelbackground" <not found>
+
+./atk/utils/dialog.C:"dialoginsensitivetop" <not found>
+
+./atk/utils/dialog.C:"dialogstyle" ./atk/supportviews/dialog.pr
+
+./atk/utils/dialog.C:"dialogDepth" <not found>
+
+./atk/utils/dialog.C:"dialogfont" <not found>
+
+./atk/utils/dialog.C:"dialogInherit" <not found>
+
+./atk/utils/dialog.C:"dialogbuttonbackground" ./atk/supportviews/dialog.pr
+
+./atk/utils/dialog.C:"dialogbuttontopshadow" ./atk/supportviews/dialog.pr
+
+./atk/utils/dialog.C:"dialogbuttontop" ./atk/supportviews/dialog.pr
+
+./atk/utils/dialog.C:"dialogbuttonbottomshadow" ./atk/supportviews/dialog.pr
+
+./atk/utils/dialog.C:"dialogbuttonforeground" ./atk/supportviews/dialog.pr
+
+./atk/utils/dialog.C:"dialogbuttonlabelforeground" ./atk/supportviews/dialog.pr
+
+./atk/utils/dialog.C:"dialogbuttonlabelbackground" ./atk/supportviews/dialog.pr
+
+./atk/utils/dialog.C:"dialogbuttoninsensitivelabelforeground" <not found>
+
+./atk/utils/dialog.C:"dialogbuttoninsensitivelabelbackground" <not found>
+
+./atk/utils/dialog.C:"dialogbuttoninsensitivetop" <not found>
+
+./atk/utils/dialog.C:"dialogbuttonstyle" <not found>
+
+./atk/utils/dialog.C:"dialogbuttonDepth" <not found>
+
+./atk/utils/dialog.C:"dialogbuttonfont" ./atk/supportviews/dialog.pr
+
+./atk/utils/dialog.C:"dialogbuttonInherit" <not found>
+
+./atk/web/urlbutton.C:"urlbuttonbackground" <not found>
+
+./atk/web/urlbutton.C:"urlbuttontopshadow" <not found>
+
+./atk/web/urlbutton.C:"urlbuttontop" <not found>
+
+./atk/web/urlbutton.C:"urlbuttonbottomshadow" <not found>
+
+./atk/web/urlbutton.C:"urlbuttonforeground" <not found>
+
+./atk/web/urlbutton.C:"urlbuttonlabelforeground" <not found>
+
+./atk/web/urlbutton.C:"urlbuttonlabelbackground" <not found>
+
+./atk/web/urlbutton.C:"urlbuttoninsensitivelabelforeground" <not found>
+
+./atk/web/urlbutton.C:"urlbuttoninsensitivelabelbackground" <not found>
+
+./atk/web/urlbutton.C:"urlbuttoninsensitivetop" <not found>
+
+./atk/web/urlbutton.C:"urlbuttonstyle" <not found>
+
+./atk/web/urlbutton.C:"urlbuttonDepth" <not found>
+
+./atk/web/urlbutton.C:"urlbuttonfont" <not found>
+
+./atk/web/urlbutton.C:"urlbuttonInherit" <not found>
+
+./atk/supportviews/sbutton.C:"SbuttonAlwaysInherit" ./atk/supportviews/sbutton.pr
+
+./atk/supportviews/panner.C:"MotifPanners" <not found>
+
+./atk/supportviews/panner.C:"PannerShade" <not found>
+
+./atk/supportviews/sbuttonv.C:"UseNewShadows" ./overhead/cmenu/shadows.pr
+
+./atk/supportviews/sbuttonv.C:"SButtonUseNewShadows" ./atk/supportviews/sbutton.pr
+
+./atk/supportviews/sbuttonv.C:"sbuttonvborder" ./atk/supportviews/sbutton.pr
+
+./atk/supportviews/sbuttonv.C:"sbuttonhborder" ./atk/supportviews/sbutton.pr
+
+./atk/supportviews/sbuttonv.C:"sbuttonhspacing" ./atk/supportviews/sbutton.pr
+
+./atk/supportviews/sbuttonv.C:"sbuttonvspacing" ./atk/supportviews/sbutton.pr
+
+./atk/supportviews/matte.C:"ResizeInset" ./atk/supportviews/matte.pr
+
+./atk/supportviews/matte.C:"DrawInsetBorder" ./atk/supportviews/matte.pr
+
+./atk/supportviews/matte.C:"bodyfont" ./atk/ez/ez.pr
+
+./atk/supportviews/matte.C:"bodyfont" ./atk/console/lib/console.pr
+
+./atk/supportviews/matte.C:"bodyfont" ./atk/typescript/tscript.pr
+
+./atk/supportviews/matte.C:"bodyfont" ./contrib/zip/zip.pr
+
+./atk/supportviews/matte.C:"justified" ./atk/ez/ez.pr
+
+./atk/adew/arbcon.C:"ValueFile" ./atk/adew/adew.pr
+
+./atk/adew/arbcon.C:"ObViewList" ./atk/adew/adew.pr
+
+./atk/adew/arbcon.C:"ObViewFile" ./atk/adew/adew.pr
+
+./atk/adew/arbcon.C:"IgnoreDefaultViewList" ./atk/adew/adew.pr
+
+./atk/adew/arbiterview.C:"SecurityConscious" ./atk/bush/bush.pr
+
+./atk/adew/runadewapp.C:"MaxInitWindows" ./atk/ez/ez.pr
+
+./atk/adew/mkcon.C:"SecurityConscious" ./atk/bush/bush.pr
+
+./atk/typescript/typescript.C:"print.printer" ./atk/ez/ez.pr
+
+./atk/typescript/typescript.C:"print.printer" ./atk/support/printing.pr
+
+./atk/typescript/typescript.C:"print.spooldir" ./atk/ez/ez.pr
+
+./atk/typescript/typescript.C:"typescript.bodyfont" ./atk/ez/ez.pr
+
+./atk/typescript/typescript.C:"typescript.bodyfont" ./atk/console/lib/console.pr
+
+./atk/typescript/typescript.C:"typescript.bodyfont" ./atk/typescript/tscript.pr
+
+./atk/typescript/typescript.C:"typescript.bodyfont" ./contrib/zip/zip.pr
+
+./atk/typescript/typescript.C:"maxsize" ./atk/typescript/tscript.pr
+
+./atk/typescript/typescript.C:"maxsize" ./contrib/tm/tm.pr
+
+./atk/basics/common/im.C:"TraceLogDirectory" <not found>
+
+./atk/basics/common/im.C:"ButtonBar" <not found>
+
+./atk/basics/common/im.C:"ButtonBarContainer" <not found>
+
+./atk/basics/common/im.C:"CtrlUCmds" ./atk/basics/common/app.pr
+
+./atk/basics/common/im.C:"XStyleSelections" ./atk/basics/common/app.pr
+
+./atk/basics/common/im.C:"StrictXStyleSelections" ./atk/basics/common/app.pr
+
+./atk/basics/common/im.C:"CopyOnSelect" ./atk/basics/common/app.pr
+
+./atk/basics/common/im.C:"Geometry" ./atk/basics/common/app.pr
+
+./atk/basics/common/view.C:"printer" ./atk/ez/ez.pr
+
+./atk/basics/common/view.C:"printer" ./atk/support/printing.pr
+
+./atk/basics/common/view.C:"PrintToPSFile" <not found>
+
+./atk/basics/common/view.C:"Portrait" <not found>
+
+./atk/basics/common/view.C:"PrintScale" <not found>
+
+./atk/basics/common/view.C:"PaperSize" <not found>
+
+./atk/basics/common/proctable.C:"AutoLoadNessProcs" <not found>
+
+./atk/basics/common/path.C:"CheckOwnerHome" ./atk/basics/common/app.pr
+
+./atk/basics/common/application.C:"StartIconic" <not found>
+
+./atk/basics/common/application.C:"PrintVersionNumber" ./atk/basics/common/app.pr
+
+./atk/basics/common/application.C:"ForeGroundColor" ./atk/basics/common/app.pr
+
+./atk/basics/common/application.C:"BackGroundColor" ./atk/basics/common/app.pr
+
+./atk/basics/common/application.C:"Geometry" ./atk/basics/common/app.pr
+
+./atk/basics/common/image.C:"imagesavequality" <not found>
+
+./atk/basics/common/image.C:"imagesaveformat" <not found>
+
+./atk/basics/common/image.C:"imagesavequality" <not found>
+
+./atk/basics/common/messitem.C:"AndrewLanguage" ./atk/basics/common/app.pr
+
+./atk/basics/common/messitem.C:"AndrewLanguageFile" ./atk/basics/common/app.pr
+
+./atk/basics/common/menulist.C:"AndrewLanguageMenuFile" ./atk/basics/common/app.pr
+
+./atk/basics/common/menulist.C:"AndrewLanguage" ./atk/basics/common/app.pr
+
+./atk/basics/common/menulist.C:"TranslateMenus" ./atk/basics/common/app.pr
+
+./atk/basics/common/ATK.C:"ATKClassAliases" <not found>
+
+./atk/basics/x/xddimage.C:"PixelsPerTransfer" <not found>
+
+./atk/basics/x/xddimage.C:"DitherToCustomColors" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xddimage.C:"UseColorManager" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xddimage.C:"UseColorCube" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xddimage.C:"DitherToCube" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xddimage.C:"UsePixmapsForImages" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xddimage.C:"UsePixmapsForImages" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xgraphic.C:"XDPI" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xgraphic.C:"XHorizontalDPI" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xgraphic.C:"XDPI" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xgraphic.C:"XVerticalDPI" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xgraphic.C:"alwaysuseprivatecmap" <not found>
+
+./atk/basics/x/xgraphic.C:"alwaysdither" <not found>
+
+./atk/basics/x/xgraphic.C:"alwaysfitfixed" <not found>
+
+./atk/basics/x/xgraphic.C:"CacheShades" <not found>
+
+./atk/basics/x/xgraphic.C:"ForceMonochromeThreshold" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xcolormap.C:"colorcubesize" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xcolormap.C:"colorcubesize" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xcolormap.C:"UseColorManager" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xcolormap.C:"ColorManagerQuota" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xfontdesc.C:"AndyFontsFudgeFactor" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xfontdesc.C:"UseXLFDNames" <not found>
+
+./atk/basics/x/xfontdesc.C:"ShowBadGraphicErrors" <not found>
+
+./atk/basics/x/xfontdesc.C:"AnnounceFontSubstitutions" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"PopupMenuList" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"CardOrder" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"PopupCardOrder" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"MenubarCardOrder" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"PriorityStep" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"AddFontPath" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"AndrewFontDir" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"UseProgramNameInTitle" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"sessionmanagement" <not found>
+
+./atk/basics/x/xim.C:"ATKXDEBUG" <not found>
+
+./atk/basics/x/xim.C:"AlwaysMakeCutBuffers" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"ErrorsToConsole" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"NumAndCapsLockHack" <not found>
+
+./atk/basics/x/xim.C:"Menubar" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"PopUpMenus" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"MenusShowKeys" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"MenubarShowKeys" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"PopupsShowKeys" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"MenusShowInactive" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"MenubarShowInactive" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"PopupsShowInactive" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"UseNewShadows" ./overhead/cmenu/shadows.pr
+
+./atk/basics/x/menubar.C:"UseNewShadows" ./overhead/cmenu/shadows.pr
+
+./atk/basics/x/menubar.C:"MenubarUseNewShadows" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"ForceMonochromeThreshold" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarGroupSpacing" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarPadding" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarGrayPercentage" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarTopShadowPercentage" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarHoldButton" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarSpacing" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarCardSpacing" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarKeysSpacing" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarShadowDepth" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarCardDelay" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarTitleFont" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarItemfont" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarKeysfont" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarTitleColor" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarBackgroundColor" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarGrayTitleColor" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarGrayTitleStipple" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarTopShadowStipple" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarTopShadowColor" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarBottomShadowStipple" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarBottomShadowColor" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarItemColor" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarCardBackgroundColor" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarGrayItemColor" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarGrayItemStipple" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarCardTopShadowStipple" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarCardTopShadowColor" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarCardBottomShadowStipple" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarCardBottomShadowColor" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/menubar.C:"MenubarKeysColor" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"TranslateMenus" ./atk/basics/common/app.pr
+
+./atk/basics/x/xim.C:"UseBackingStore" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"MouseHysteresis" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"LeftIncrement" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"TopIncrement" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"LeftIncrementList" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"TopIncrementList" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"SelectionAndCB" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"MaxIconLabelLength" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"MaxTitleLength" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"OptimizeProtocol" <not found>
+
+./atk/basics/x/xim.C:"ParanoidWindowLocationCaching" <not found>
+
+./atk/basics/x/xim.C:"mouseupmovement" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"ForceInstallColormaps" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xim.C:"ForceInstallColormaps" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xcursor.C:"cursorforegroundcolor" ./atk/basics/x/xprefs.pr
+
+./atk/basics/x/xcursor.C:"cursorbackgroundcolor" ./atk/basics/x/xprefs.pr
+
+./atk/text/txtvcmds.C:"UseNewStylePlainer" ./atk/ez/ez.pr
+
+./atk/text/txtvcmds.C:"UseStyleKeybindings" ./atk/ez/ez.pr
+
+./atk/text/txtvcmds.C:"StyleCommandPrefix" ./atk/ez/ez.pr
+
+./atk/text/txtvcmds.C:"AllowKeyToggleToVIMode" ./atk/ez/ez.pr
+
+./atk/text/txtvcsrch.C:"ExpertMode" ./atk/ez/ez.pr
+
+./atk/text/txtvcsrch.C:"ExpertMode" ./atk/extensions/spell.pr
+
+./atk/text/txtvps.C:"justified" ./atk/ez/ez.pr
+
+./atk/text/txtvps.C:"print.bodyfont" ./atk/ez/ez.pr
+
+./atk/text/txtvps.C:"print.bodyfont" ./atk/console/lib/console.pr
+
+./atk/text/txtvps.C:"print.bodyfont" ./atk/typescript/tscript.pr
+
+./atk/text/txtvps.C:"print.bodyfont" ./contrib/zip/zip.pr
+
+./atk/text/txtvps.C:"bodyfont" ./atk/ez/ez.pr
+
+./atk/text/txtvps.C:"bodyfont" ./atk/console/lib/console.pr
+
+./atk/text/txtvps.C:"bodyfont" ./atk/typescript/tscript.pr
+
+./atk/text/txtvps.C:"bodyfont" ./contrib/zip/zip.pr
+
+./atk/text/simpletext.C:"WriteForDOS" ./atk/ez/ez.pr
+
+./atk/text/simpletext.C:"WriteForDOS" ./atk/ez/ez.pr
+
+./atk/text/simpletext.C:"CheckForDOSFormat" ./atk/ez/ez.pr
+
+./atk/text/simpletext.C:"CheckForDOSText" <not found>
+
+./atk/text/txtvcsty.C:"UseOldInsertionRules" ./atk/ez/ez.pr
+
+./atk/text/content.C:"ContentsList" ./atk/ez/ez.pr
+
+./atk/text/content.C:"ContentsList" ./atk/textaux/contents.pr
+
+./atk/text/texttroff.C:"print.bodyfont" ./atk/ez/ez.pr
+
+./atk/text/texttroff.C:"print.bodyfont" ./atk/console/lib/console.pr
+
+./atk/text/texttroff.C:"print.bodyfont" ./atk/typescript/tscript.pr
+
+./atk/text/texttroff.C:"print.bodyfont" ./contrib/zip/zip.pr
+
+./atk/text/texttroff.C:"bodyfont" ./atk/ez/ez.pr
+
+./atk/text/texttroff.C:"bodyfont" ./atk/console/lib/console.pr
+
+./atk/text/texttroff.C:"bodyfont" ./atk/typescript/tscript.pr
+
+./atk/text/texttroff.C:"bodyfont" ./contrib/zip/zip.pr
+
+./atk/text/texttroff.C:"justified" ./atk/ez/ez.pr
+
+./atk/text/texttroff.C:"TabsCharSpaces" ./atk/ez/ez.pr
+
+./atk/text/texttroff.C:"tmacaccentsfile" ./atk/ez/ez.pr
+
+./atk/text/texttroff.C:"tmacfile" ./atk/ez/ez.pr
+
+./atk/text/texttroff.C:"tmacgrofffile" ./atk/ez/ez.pr
+
+./atk/text/texttroff.C:"hyphenate" ./atk/ez/ez.pr
+
+./atk/text/texttroff.C:"ContentsList" ./atk/ez/ez.pr
+
+./atk/text/texttroff.C:"ContentsList" ./atk/textaux/contents.pr
+
+./atk/text/texttroff.C:"InlineMacros" ./atk/ez/ez.pr
+
+./atk/text/txtvcmv.C:"TextHorizontalShiftInterval" <not found>
+
+./atk/text/pcompch.C:"compositesfile" ./atk/text/pcompch.pr
+
+./atk/text/pcompch.C:"overridecomposites" ./atk/text/pcompch.pr
+
+./atk/text/tpllist.C:"atktemplatepath" ./atk/ez/ez.pr
+
+./atk/text/tpllist.C:"be2templatepath" ./atk/ez/ez.pr
+
+./atk/text/drawtxtv.C:"LineNumbersFont" <not found>
+
+./atk/text/textview.C:"LineNumbersWidth" <not found>
+
+./atk/text/textview.C:"LineNumbersBackground" <not found>
+
+./atk/text/textview.C:"LineNumbersForeground" <not found>
+
+./atk/text/textview.C:"editor" ./atk/ez/ez.pr
+
+./atk/text/textview.C:"TabScalingMultiplier" ./atk/ez/ez.pr
+
+./atk/text/textview.C:"TabScalingDivisor" ./atk/ez/ez.pr
+
+./atk/text/textview.C:"LineThruFormatNotes" <not found>
+
+./atk/text/textview.C:"bodyfont" ./atk/ez/ez.pr
+
+./atk/text/textview.C:"bodyfont" ./atk/console/lib/console.pr
+
+./atk/text/textview.C:"bodyfont" ./atk/typescript/tscript.pr
+
+./atk/text/textview.C:"bodyfont" ./contrib/zip/zip.pr
+
+./atk/text/textview.C:"justified" ./atk/ez/ez.pr
+
+./atk/text/textview.C:"ScrollPercent" ./atk/typescript/tscript.pr
+
+./atk/text/textview.C:"ScrollbarPosition" ./atk/supportviews/scroll.pr
+
+./atk/text/textview.C:"TextHorizontalScrollbar" <not found>
+
+./atk/text/textview.C:"MotifScrollbars" ./atk/supportviews/scroll.pr
+
+./atk/text/textview.C:"showcolorstyles" <not found>
+
+./atk/text/textview.C:"LineNumbers3D" <not found>
+
+./atk/text/textview.C:"PrintContents" ./atk/ez/ez.pr
+
+./atk/text/textview.C:"PrintIndex" <not found>
+
+./atk/text/textview.C:"Endnotes" ./atk/ez/ez.pr
+
+./atk/text/textview.C:"Duplex" ./atk/ez/ez.pr
+
+./atk/text/textview.C:"AutoEnumerate" ./atk/ez/ez.pr
+
+./atk/text/textview.C:"InitialChapNumber" ./atk/ez/ez.pr
+
+./atk/text/textview.C:"TwoColumns" <not found>
+
+./atk/text/textview.C:"TabsCharSpaces" ./atk/ez/ez.pr
+
+./atk/text/textview.C:"ExposeStylesOnStartup" ./atk/ez/ez.pr
+
+./atk/text/textview.C:"AlwaysDisplayStyleMenus" ./atk/ez/ez.pr
+
+./atk/text/textview.C:"HighlightToBorders" ./atk/ez/ez.pr
+
+./atk/text/txtvcmod.C:"autocut" ./atk/ez/ez.pr
+
+./atk/text/fnotev.C:"messagefootnote" <not found>
+
+./atk/text/text.C:"stylesincludeend" ./atk/ez/ez.pr
+
+./atk/text/text.C:"stylesincludebeginning" ./atk/ez/ez.pr
+
+./atk/text/text.C:"ViewScrollHack" <not found>
+
+./atk/text/headrtv.C:"headervars" <not found>
+
+./atk/text/headrtv.C:"HeadersInitiallyOpen" <not found>
+
+./contrib/zip/lib/zipview.C:"ZipManualRefresh" ./contrib/zip/zip.pr
+
+./contrib/zip/lib/zipoarrow.C:"ZipCreateTolerance" ./contrib/zip/zip.pr
+
+./contrib/zip/lib/zipoplin.C:"ZipCreateTolerance" ./contrib/zip/zip.pr
+
+./contrib/zip/lib/ziposymbol.C:"ZipSymbolPaths" <not found>
+
+./contrib/zip/lib/ziposymbol.C:"ZipSymbolPath" ./contrib/zip/zip.pr
+
+./contrib/zip/lib/zipvp00.C:"ZipPanningPrecision" ./contrib/zip/zip.pr
+
+./contrib/zip/lib/zipds00.C:"zippaths" <not found>
+
+./contrib/zip/lib/zipds00.C:"zippath" <not found>
+
+./contrib/zip/lib/zip.C:"zip.bodyfont" ./atk/ez/ez.pr
+
+./contrib/zip/lib/zip.C:"zip.bodyfont" ./atk/console/lib/console.pr
+
+./contrib/zip/lib/zip.C:"zip.bodyfont" ./atk/typescript/tscript.pr
+
+./contrib/zip/lib/zip.C:"zip.bodyfont" ./contrib/zip/zip.pr
+
+./contrib/tm/termulator.C:"maxsize" ./atk/typescript/tscript.pr
+
+./contrib/tm/termulator.C:"maxsize" ./contrib/tm/tm.pr
+
+./contrib/tm/tmapp.C:"shmenu" ./contrib/tm/tm.pr
+
+./contrib/champ/read.C:"champpath" ./contrib/champ/champ.pr
+
+./contrib/gofig/gofigview.C:"BoardColor" ./contrib/gofig/gofig.pr
+
+./contrib/html/html.C:"defaultImage" <not found>
+
+./contrib/html/html.C:"webPath" <not found>
+
+./contrib/time/timeoday.C:"timeodaydefaultformat",typename <not found>
+
+./contrib/time/timeoday.C:"timeodaydefaultfontfamily",typename <not found>
+
+./contrib/time/timeoday.C:"timeodaydefaultfonttype",typename <not found>
+
+./contrib/time/timeoday.C:"timeodaydefaultfontsize",typename <not found>
+
+./contrib/time/timeoday.C:"writestampdefaultformat",typename <not found>
+
+./contrib/time/timeoday.C:"writestampdefaultfontfamily",typename <not found>
+
+./contrib/time/timeoday.C:"writestampdefaultfonttype",typename <not found>
+
+./contrib/time/timeoday.C:"writestampdefaultfontsize",typename <not found>
+
+./contrib/alink/alink.C:"alinkstyle" ./contrib/alink/alink.pr
+
+./contrib/alink/alinkview.C:"AlinkMenus" <not found>
+
+./contrib/alink/alinkview.C:"PromptForRecord" ./contrib/alink/alink.pr
+
+./contrib/alink/alinkview.C:"PlayLevel" ./contrib/alink/alink.pr
+
+./contrib/alink/alinkview.C:"Earphones" ./contrib/alink/alink.pr
+
+./contrib/alink/alinkview.C:"RecordLevel" ./contrib/alink/alink.pr
+
+./contrib/atkbook/con/statsob.C:"vmfreq" <not found>
+
+./contrib/atkbook/con/statsob.C:"diskfreq" <not found>
+
+./contrib/gestures/gtext/gtextv.C:"GestureFile" ./contrib/gestures/gtext/gest.pr
+
+./overhead/cmenu/cmcreate.c:"UseNewShadows" ./overhead/cmenu/shadows.pr
+
+./overhead/cmenu/cmcreate.c:"PopupUseNewShadows" <not found>
+
+./overhead/cmenu/cmcreate.c:"ForceMonochromeThreshold" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"MotifPopupMenusOnColor" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"ForceMonochromeThreshold" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"MotifPopupMenus" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"PopupKeysSpacing" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"PopupForegroundColor" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"PopupKeysColor" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"PopupBackgroundColor" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"PopupTopShadowColor" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"PopupBottomShadowColor" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"PopupUseSaveUnder" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"PopupClickInterval" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"PopupTitleFont" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"PopupPaneSpread" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"PopupItemFont" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"PopupKeysFont" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/cmcreate.c:"PopupOverlapPct" ./atk/basics/x/xprefs.pr
+
+./overhead/cmenu/shadows.c:"ShadowsLiteVal" <not found>
+
+./overhead/cmenu/shadows.c:"ShadowsDarkVal" <not found>
+
+./overhead/cmenu/shadows.c:"ShadowsLiteDarkenTop" ./overhead/cmenu/shadows.pr
+
+./overhead/cmenu/shadows.c:"ShadowsLiteDarkenBottom" ./overhead/cmenu/shadows.pr
+
+./overhead/cmenu/shadows.c:"ShadowsDarkLightenTop" ./overhead/cmenu/shadows.pr
+
+./overhead/cmenu/shadows.c:"ShadowsDarkLightenBottom" ./overhead/cmenu/shadows.pr
+
+./overhead/cmenu/shadows.c:"ShadowsMediumLightenTop" ./overhead/cmenu/shadows.pr
+
+./overhead/cmenu/shadows.c:"ShadowsMediumDarkenBottom" ./overhead/cmenu/shadows.pr
+
+./overhead/cmenu/shadows.c:"ShadowsLiteDarkenPressed" ./overhead/cmenu/shadows.pr
+
+./overhead/cmenu/shadows.c:"ShadowsMediumDarkenPressed" ./overhead/cmenu/shadows.pr
+
+./overhead/cmenu/shadows.c:"ShadowsDarkLightenPressed" ./overhead/cmenu/shadows.pr
+
+\begindata{bp,15466163}
+Version 2
+n 0
+\enddata{bp,15466163}
+\view{bpv,15466163,26583,0,0}
+\chapter{Configuration Options}
+
+./atk/console/lib/mailmon.C:"AMS_NonAMSDelivery"
+
+./atk/console/lib/mailmon.C:"print.nonandrew"
+
+./atk/console/lib/mailmon.C:"AMS_DemandSeparatingCharacter"
+
+./atk/console/lib/mailmon.C:"AMS_SeparatingCharacter"
+
+./atk/console/lib/consoleapp.C:"InhibitErrorMonitoring"
+
+./atk/console/lib/consoleapp.C:"ForceErrorMonitoring"
+
+./atk/support/print.C:"printcommand"
+
+./atk/support/print.C:"pscprintcommand"
+
+./atk/support/print.C:"previewcommand"
+
+./atk/support/print.C:"pscpreviewcommand"
+
+./atk/support/print.C:"formatcommand"
+
+./atk/support/print.C:"pscformatcommand"
+
+./atk/support/print.C:"spoolpath"
+
+./atk/support/print.C:"printer"
+
+./atk/support/print.C:"spooldir"
+
+./atk/support/print.C:"printertype"
+
+./atk/help/src/helpaux.C:"HelpChangeDir"
+
+./atk/help/src/helpaux.C:"HelpTutorialDir"
+
+./atk/help/src/helpaux.C:"HelpPanelsDir"
+
+./atk/help/src/helpaux.C:"HelpLib"
+
+./atk/help/src/helpaux.C:"HelpDir"
+
+./atk/help/src/helpaux.C:"HelpIndexDir"
+
+./atk/help/src/help.C:"HelpSendCommentOnAddress"
+
+./atk/help/src/help.C:"HelpPanelsDir"
+
+./atk/help/src/help.C:"HelpDir"
+
+./atk/help/src/helpdb.C:"HelpAliasDir"
+
+./atk/help/src/helpdb.C:"HelpIndexDir"
+
+./atk/help/src/helpdb.C:"HelpMissingDir"
+
+./atk/adew/arbcon.C:"AdewObViewList"
+
+./atk/basics/common/application.C:"SiteConfigName"
+
+./atk/basics/common/application.C:"InitFilePath"
+
+./atk/basics/common/application.C:"LocalLib"
+
+./atk/basics/common/ATK.C:"ATKClassAliases"
+
+./atk/basics/common/init.C:"InitFilePath"
+
+./atk/text/simpletext.C:"BE2TextFormat"
+
+./atk/text/texttroff.C:"tmacaccentsfile"
+
+./atk/text/texttroff.C:"tmacfile"
+
+./atk/text/texttroff.C:"tmacgrofffile"
+
+./atk/text/texttroff.C:"InlineMacros"
+
+./atk/text/text.C:"BE2TextFormat"
+
+./overhead/util/lib/andrwdir.c:"AndrewDir"
+
+./overhead/util/lib/xbasedir.c:"ATKXLibDir"
+
+./overhead/util/lib/hname.c:"ThisDomainSuffix"
+
+./overhead/util/lib/localdir.c:"LocalDir"
+
+./overhead/util/lib/profile.c:"InitFilePath"
+
+./overhead/util/lib/andydir.c:"AndyDir"
+
+\begindata{bp,15466164}
+Version 2
+n 0
+\enddata{bp,15466164}
+\view{bpv,15466164,26584,0,0}
+\chapter{Environment Variables}
+
+via getenv:
+
+
+./atk/web/urlbuttonview.C:"HOME"
+
+./atk/web/webcom.C:"AW3CDEBUG"
+
+./atk/console/lib/mailmon.C:"MAIL"
+
+./atk/console/lib/mailmon.C:"LOGNAME"
+
+./atk/console/lib/mailmon.C:"USER"
+
+./atk/console/lib/mailmon.C:"PRINTDIR"
+
+./atk/console/lib/mailmon.C:"LPDEST"
+
+./atk/console/lib/mailmon.C:"PRINTER"
+
+./atk/console/lib/mailmon.C:"PRINTDIR"
+
+./atk/console/lib/input.C:"CONSOLELIB"
+
+./atk/console/lib/setup.C:%<var>% in console config files
+
+./atk/help/src/network.c:"DISPLAY"
+
+./atk/help/src/help.C:"HELPDEBUG"
+
+./atk/help/src/helpdb.C:"HELPDBDEBUG"
+
+./atk/srctext/mtextview.C:"MPath"
+
+./atk/srctext/mtextview.C:"m2mi"
+
+./atk/srctext/mtextview.C:"m2mp"
+
+./atk/srctext/m3textview.C:"M3Path"
+
+./atk/widgets/driver/avarset.C:"CLASSPATH"
+
+./atk/table/spread.C:"ATKTABLESIZEDEBUG"
+
+./atk/basics/common/ATKdebug.C:"ATKMALLOC"
+
+./atk/basics/common/ATK.C:"CLASSPATH"
+
+./atk/basics/x/console.c:"ATKCONSOLEHOST"
+
+./atk/basics/x/acolorman.C:"ATKCOLORMANAGERQUOTA"
+
+./atk/rofftext/rofftext.C:"ROFFDEBUG"
+
+./contrib/gestures/gestsrc/gdev/gdev.c:"GDEV"
+
+./contrib/gestures/gestsrc/gdev/gdev.c:"HARDCOPYGDEV"
+
+./overhead/grefs/grefs.C:"ATKINCLUDEPATH"
+
+./overhead/util/cmd/paths.C:"AFSBASEDIR"
+
+./overhead/util/lib/getmyhom.c:"HOME"
+
+./overhead/util/lib/procstuf.c:"SHELL"
+
+./overhead/util/lib/andrwdir.c:"ANDREWDIR"
+
+./overhead/util/lib/config.c:config files may depend on env vars
+
+./overhead/util/lib/xbasedir.c:"ATKXLIBDIR"
+
+./overhead/util/lib/gethome.c:"HOME"
+
+./overhead/util/lib/localdir.c:"LOCALDIR"
+
+./overhead/util/lib/profile.c:"PROFILES"
+
+./overhead/util/lib/profile.c:"GLOBALPROFILES"
+
+./overhead/util/lib/andydir.c:"ANDYDIR"
+
+./overhead/genstatl/fixpaths.C:"AUISPACKAGESPATH"
+
+./overhead/genstatl/genstatl.C:library paths may contain $<varname> (ANDREWDIR, XLIBDIR, AFSBASEDIR expanded from config)
+
+./overhead/genstatl/genstatl.C:"AFSBASEDIR"
+
+./overhead/bison/getopt.c:"POSIXLY_CORRECT"
+
+./overhead/bison/files.c:"TMP"
+
+./overhead/bison/files.c:"BISON_SIMPLE"
+
+./overhead/bison/files.c:"INIT"
+
+./overhead/bison/files.c:"BISON_HAIRY"
+
+./overhead/bison/files.c:"INIT"
+
+./WWW/Library/Implementation/HTFTP.c:"USER"
+
+./WWW/Library/Implementation/HTAccess.c:"no_proxy"
+
+./WWW/Library/Implementation/HTAccess.c:"WWW_%s_GATEWAY",access
+
+./WWW/Library/Implementation/HTAccess.c:"%s_proxy",access
+
+./WWW/Library/Implementation/HTAccess.c:"WWW_HOME"
+
+./WWW/Library/Implementation/HTAccess.c:"HOME"
+
+./WWW/Library/Implementation/HTFile.c:"HOME"
+
+./WWW/Library/Implementation/HTNews.c:"NNTPSERVER"
+
+./WWW/Library/Implementation/HTNews.c:"NNTPSERVER"
+
+./WWW/Library/Implementation/HTInit.c:"DISPLAY"
+
+./WWW/Library/Implementation/HTTCP.c:"LOGNAME"
+
+./WWW/Library/Implementation/HTTCP.c:"USER"
+
+./WWW/LineMode/Implementation/HTBrowse.c:"LINES"
+
+./WWW/LineMode/Implementation/HTBrowse.c:"COLUMNS"
+
+./WWW/LineMode/Implementation/HTBrowse.c:"WWW_PRINT_COMMAND"
+
+./WWW/LineMode/Implementation/HTBrowse.c:"WWW_CONFIG"
+
+
+via environ::Get():
+
+
+./atk/web/webview.C:"HOME"
+
+./atk/web/ez2htmlapp.C:"HELPTOPICANCHORSUBST"
+
+./atk/web/ez2htmlapp.C:"USEPLAINTEXTTAG"
+
+./atk/console/lib/errormon.C:"DISPLAY"
+
+./atk/console/lib/errormon.C:"WMHOST"
+
+./atk/support/print.C:"troffpostprocessor"
+
+./atk/support/print.C:"TroffArgs"
+
+./atk/support/print.C:"IndexOnly"
+
+./atk/support/print.C:"troffpostprocessor"
+
+./atk/help/src/helpapp.C:"DISPLAY"
+
+./atk/help/src/helpapp.C:"HELPPATH"
+
+./atk/help/src/helpapp.C:"WMHOST"
+
+./atk/help/src/helpapp.C:"DISPLAY"
+
+./atk/help/src/helpapp.C:"TERM"
+
+./atk/help/src/helpapp.C:"HELPAPPDEBUG"
+
+./atk/help/src/helpaux.C:"PrintContents"
+
+./atk/srctext/srctext.C:"EZPRETTYPRINT"
+
+./atk/prefed/prefs.C:"PREFEDPATH"
+
+./atk/typescript/tscripta.C:"HOME"
+
+./atk/typescript/typescript.C:"SHELL"
+
+./atk/typescript/typescript.C:"HOME"
+
+./atk/typescript/typescript.C:"SHELL"
+
+./atk/basics/common/im.C:"LOGDIRECTORY"
+
+./atk/basics/common/im.C:"PWD"
+
+./atk/basics/common/im.C:"BE2WM"
+
+./atk/basics/common/im.C:"DISPLAY"
+
+./atk/basics/common/path.C:"HOME"
+
+./atk/basics/common/environ.C:"LPDEST"
+
+./atk/basics/common/environ.C:"PRINTER"
+
+./atk/basics/common/application.C:"HOME"
+
+./atk/basics/common/messitem.C:"ANDREWLANGUAGE"
+
+./atk/basics/common/messitem.C:"ANDREWLANGUAGEFILE"
+
+./atk/basics/common/menulist.C:"ANDREWLANGUAGE"
+
+./atk/basics/common/menulist.C:"ANDREWLANGUAGEMENUFILE"
+
+./atk/basics/common/ATK.C:"ATKCLASSALIASES"
+
+./atk/basics/common/init.C:ifdef supports env vars in config files
+
+./atk/basics/x/xfontdesc.C:"MM_CHARSET"
+
+./atk/basics/x/xim.C:"ANDREWFONTDIR"
+
+./atk/basics/x/xim.C:"ATKXDEBUG"
+
+./atk/basics/x/xim.C:"DISPLAY"
+
+./atk/basics/x/xim.C:"ATKDebugSelectionProblems"
+
+./atk/text/textrefv.C:"troffpostprocessor"
+
+./atk/text/txtvps.C:"DIST"
+
+./atk/text/txtvps.C:"IndexOnly"
+
+./atk/text/texttagv.C:"IndexOnly"
+
+./atk/text/content.C:"ContentsList"
+
+./atk/text/texttroff.C:"ATKTMACGROFFFILE"
+
+./atk/text/texttroff.C:"ContentsList"
+
+./atk/text/texttroff.C:"InlineMacros"
+
+./atk/text/texttroff.C:"IndexOnly"
+
+./atk/text/texttroff.C:"InitialChapNumber"
+
+./atk/text/tpllist.C:"TEMPLATEPATH"
+
+./atk/text/textview.C:"PrintContents"
+
+./atk/text/textview.C:"PrintIndex"
+
+./atk/text/textview.C:"Endnotes"
+
+./atk/text/textview.C:"Duplex"
+
+./atk/text/textview.C:"AutoEnumerate"
+
+./atk/text/textview.C:"InitialChapNumber"
+
+./atk/text/text.C:"MM_CHARSET"
+
+./contrib/tm/termulator.C:"HOME"
+
+./contrib/tm/tmview.C:"SHELL"
+
+./contrib/tm/tmapp.C:"SHELL"
+
+./contrib/tm/tmapp.C:"HOME"
+
+./contrib/html/html.C:"HTMLMAGICFILE"
+
+./contrib/runbtn/runbutton.C:"RUNBUTTONPATH"
 
 \enddata{text,7156720}

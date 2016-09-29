@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _consoleapp_H_
 #define _consoleapp_H_
 /* ********************************************************************** *\

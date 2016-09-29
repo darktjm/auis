@@ -47,6 +47,7 @@ public:
    class suite			    *control_buttons;
    struct rectangle		     block, chart_block;
    class menulist		    *menu;
+   class keystate		    *keystate;
    class cursor			    *cursor;
    char				     line_width, line_style, figure_type;
    boolean			     tracking, modified, input_focus, pending_question, pending_duplicate;

@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _textflow_H_
 #define _textflow_H_
 

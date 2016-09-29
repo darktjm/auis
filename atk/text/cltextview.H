@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _cltextview_H_
 #define _cltextview_H_
 /* ********************************************************************** *\

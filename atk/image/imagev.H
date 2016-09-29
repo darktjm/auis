@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _imagev_H_
 #define _imagev_H_
 /* imagev.H - class description for view on images */

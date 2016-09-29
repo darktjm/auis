@@ -1,6 +1,5 @@
 #ifndef _WSactions_H_
 #define _WSactions_H_
-ATK_INTER
 /* ***************************************************
  *	   Copyright Carnegie Mellon, 1995 - All Rights Reserved
  *        For full copyright information see:'andrew/doc/COPYRITE'

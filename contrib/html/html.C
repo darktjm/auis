@@ -312,13 +312,12 @@ static struct HTMLMagicMapping HTMLDefaultCharMap[] = {
     { "\"", 1, "quot" },
     { 0, 0 }
 };
-static struct HTMLMagicMapping* HTMLCharMap = HTMLDefaultCharMap;
+static struct HTMLMagicMapping* HTMLCharMap = 0;
 static char* HTMLMagicCharacters = 0;
 
 boolean 
 html::InitializeClass()
 {
-    struct HTMLMagicMapping* HTMLCharMap = 0;
     struct HTMLMagicMapping* hmap;
     const char* HTMLMagicFile;
     int mapcount = 64; 

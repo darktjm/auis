@@ -494,7 +494,7 @@ void k_DefineKeys (class keymap  *mainmap, class keymap *readonlymap, struct ATK
     struct proctable_Entry *tempProc;
 
     if(mainmap) {
-	tempProc = proctable::DefineProc("self_insert", (proctable_fptr)k_enterchar, classinfo, NULL, "Enter character");
+	tempProc = proctable::DefineProc("table-self-insert", (proctable_fptr)k_enterchar, classinfo, NULL, "Enter character");
 	for (ch = ' '; ch < 127; ch++) {		/* self-insert */
 	    if (ch != '/') {
 		char foo[2];

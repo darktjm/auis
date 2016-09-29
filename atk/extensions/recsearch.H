@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _recsearch_H_
 #define _recsearch_H_
 

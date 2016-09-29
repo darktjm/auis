@@ -72,11 +72,11 @@ All #includes should be prsent exactly as they are in this file, unless otherwis
 #include <atkproto.h>
 #include <errno.h>
 
+/* ATK_INTER is obsolete, and should raise an error if used. */
 #undef ATK_INTER
+/* ATK_IMPLPRAG is obsolete, and should raise an error if used. */
 #undef ATK_IMPLPRAG
 #undef ATK_IMPL
-#define ATK_INTER /* obsolescent */
-#define ATK_IMPLPRAG /* obsolescent */
 #define ATK_IMPL(x)
 
 /* The following list of #includes may be modified as necessary to bring in the required

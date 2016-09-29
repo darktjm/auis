@@ -28,6 +28,7 @@ END-SPECIFICATION  ************************************************************/
 #include <bind.H>
 #include <menulist.H>
 #include <keymap.H>
+#include <keystate.H>
 #include <view.H>
 #include <message.H>
 #include <rect.h>
@@ -76,6 +77,7 @@ static /*===*/class schedv *SELF;
 #define  ButtonTop		    (Bottom - ControlButtonHeight)
 #define  ControlButtonTop	    (ButtonTop)
 #define  Menu			    (self->menu)
+#define  Keystate		    (self->keystate)
 
 
 static void Extend_Button( class schedv  *self, class suite  *suite, struct suite_item  *item, long type, enum view_MouseAction       action, long x, long y, long clicks );
@@ -185,6 +187,7 @@ schedv::schedv( )
     this->data = NULL;
     ZipView = new zipview;
     Menu = (class_menulist)->DuplicateML(  this );
+    Keystate = keystate::Create(this, class_keymap);
     InputFocus = Modified = Tracking = PendingQuestion = PendingDuplicate = false;
     ScheduleStream = NULL;
     CurrentSlotFigure = CurrentTextFigure =
@@ -198,6 +201,7 @@ schedv::~schedv( )
     ATKinit;
     class schedv *self=this;
 
+    if(Keystate) delete Keystate;
     if(Menu) delete Menu;
     if(ZipView) {
 	(ZipView)->UnlinkTree();
@@ -221,6 +225,8 @@ schedv::ReceiveInputFocus( )
     class schedv *self=this;
     IN(schedv_ReceiveInputFocus);
     InputFocus = true;
+    Keystate->next = NULL;
+    (this)->PostKeyState( Keystate );
     (this)->PostMenus(  Menu );
     OUT(schedv_ReceiveInputFocus);
 }

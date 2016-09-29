@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _fontsample_H_
 #define _fontsample_H_
 /** \addtogroup libfigure

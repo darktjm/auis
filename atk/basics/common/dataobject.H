@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _dataobject_H_
 #define _dataobject_H_
 /* ********************************************************************** *\
@@ -10,6 +9,7 @@ ATK_INTER
  * @{ */
 #include <atom.H>
 #include <namespace.H>
+#include <stdio.h>
 
 struct property {
     class atom * type;

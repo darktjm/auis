@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _environment_H_
 #define _environment_H_
 /* ********************************************************************** *\

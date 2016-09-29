@@ -99,17 +99,17 @@ for the eqview class.
 Below is a list of the current set of keybindings for eqview.
 
 
-eqview-write-c	 	\\032c		eqview_WriteC
+eqview-write-c	 	^Zc		eqview_WriteC
 
-eqview-write-eqn	 	\\032e		eqview_WriteEqn
+eqview-write-eqn	 	^Ze		eqview_WriteEqn
 
-eqview-write-troff	 	\\032t		eqview_WriteTroff
+eqview-write-troff	 	^Zt		eqview_WriteTroff
 
-eqview-write-dvi	 	\\032d		eqview_WriteDvi
+eqview-write-dvi	 	^Zd		eqview_WriteDvi
 
-eqview-root		 \\022		eqview_Root
+eqview-root		 ^R		eqview_Root
 
-eqview-root		 \\033root\\n	eqview_Root
+eqview-root		 Esc-root^J	eqview_Root
 
 eqview-fraction		 /		eqview_Fraction
 
@@ -121,35 +121,35 @@ eqview-above-script	 !		eqview_AboveScript
 
 eqview-below-script	 #		eqview_BelowScript
 
-eqview-special	 	\\033a		eqview_Special
+eqview-special	 	Esc-a		eqview_Special
 
-eqview-cut		 \\027		eqview_Cut
+eqview-cut		 ^W		eqview_Cut
 
-eqview-copy	 	\\021		eqview_Copy
+eqview-copy	 	^Q		eqview_Copy
 
-eqview-paste	 	\\031		eqview_Paste
+eqview-paste	 	^Y		eqview_Paste
 
-eqview-dump-and-write	 \\030\\030		eqview_DumpAndWrite
+eqview-dump-and-write	 ^X^X		eqview_DumpAndWrite
 
-eqview-move-forward	 \\006		eqview_MoveForward
+eqview-move-forward	 ^F		eqview_MoveForward
 
-eqview-move-backward	 \\002		eqview_MoveBackward
+eqview-move-backward	 ^B		eqview_MoveBackward
 
-eqview-move-to-beginning	 \\001		eqview_MoveToBeginning
+eqview-move-to-beginning	 ^A		eqview_MoveToBeginning
 
-eqview-move-to-end	 \\005		eqview_MoveToEnd
+eqview-move-to-end	 ^E		eqview_MoveToEnd
 
-eqview-move-up		 \\020		eqview_MoveUp
+eqview-move-up		 ^P		eqview_MoveUp
 
-eqview-move-down	 	\\016		eqview_MoveDown
+eqview-move-down	 	^N		eqview_MoveDown
 
-eqview-carriage-return	 \\015		eqview_CR
+eqview-carriage-return	 ^M		eqview_CR
 
-eqview-delete-forward	 \\004		eqview_DeleteForward
+eqview-delete-forward	 ^D		eqview_DeleteForward
 
-eqview-delete-backward	 \\010		eqview_DeleteBackward
+eqview-delete-backward	 ^H		eqview_DeleteBackward
 
-eqview-delete-backward	 177		eqview_DeleteBackward
+eqview-delete-backward	 Delete		eqview_DeleteBackward
 
 eqview-left-brace	 	\{		eqview_lbrace
 
@@ -159,7 +159,7 @@ eqview-close-bracket	 ]		eqview_Close
 
 eqview-close-brace	 \}		eqview_Close
 
-eqview-prime		 \\'		eqview_Prime
+eqview-prime		 '		eqview_Prime
 
 
 \begindata{bp,538271624}

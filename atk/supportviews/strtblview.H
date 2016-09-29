@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _strtblview_H_
 #define _strtblview_H_
 /* ********************************************************************** *\

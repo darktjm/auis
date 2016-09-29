@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _colorv_H_
 #define _colorv_H_
 class colorv : public  view {

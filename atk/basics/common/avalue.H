@@ -1,6 +1,5 @@
 #ifndef _AVALUE_H
 #define _AVALUE_H 1
-ATK_INTER
 /* Copyright 1995 Carnegie Mellon University All rights reserved. */
 
 /** \addtogroup libbasics

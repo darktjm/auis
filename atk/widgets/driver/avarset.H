@@ -1,6 +1,5 @@
 #ifndef _AVarSet_H_
 #define _AVarSet_H_
-ATK_INTER
 /** \addtogroup libawidget
  * @{ */
 /* ***************************************************

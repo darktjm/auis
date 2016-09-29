@@ -4,7 +4,7 @@
 
 # From info-andrew
 
-addkey "sendmessage-send-message" \003\003		# C-c C-c
+#addkey "sendmessage-send-message" \003\003		# C-c C-c
 addkey "textview-insert-file" \030i			# C-x i
 addkey "frame-exit-recursive-edit" \035			# C-]
 addkey "frame-save-all-files" \030s			# C-x s

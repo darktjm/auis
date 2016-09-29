@@ -8,7 +8,6 @@
     htmltextv, an object for viewing HTML+ formatted files. 
 */
 
-ATK_INTER
 
 #include <textview.H>
 class htmltextview: public textview {

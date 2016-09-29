@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _pvalslv_H_
 #define _pvalslv_H_
 /* Copyright 1992 by the Andrew Toolkit Consortium and Carnegie Mellon University All rights Reserved. */

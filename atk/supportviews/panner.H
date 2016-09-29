@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _panner_H_
 #define _panner_H_
 /* panner.ch - panner box view */

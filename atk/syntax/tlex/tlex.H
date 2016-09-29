@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _tlex_H_
 #define _tlex_H_
 /** \addtogroup libtlex libtlex.so

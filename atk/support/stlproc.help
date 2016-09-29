@@ -4,8 +4,7 @@
 \chapter{Proclist for Stylesheet
 
 }
-wraplook
+stylesheet-wraplook  Add a style.  Parameter is style name.  Menu 
+entry is added as per style definition.
 
-
-proc = proctable_DefineProc("wraplook", procname, infotype, NULL, NULL)\
 \enddata{text,269710108}

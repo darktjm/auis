@@ -1,6 +1,5 @@
 #ifndef _htmltext_H_
 #define _htmltext_H_
-ATK_INTER
 /** \addtogroup libhtmltext libhtmltext.so
  *  A dynamically loadable ATK class file.  Contains htmltext, htmltextview,
  *  attlist, ez2htmlapp, hidden, hiddenview, hr, hrv, htablev, htmlenv,

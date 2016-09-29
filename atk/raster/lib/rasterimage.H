@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _rasterimage_H_
 #define _rasterimage_H_
 /* ********************************************************************** *\

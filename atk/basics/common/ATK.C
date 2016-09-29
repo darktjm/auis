@@ -345,8 +345,11 @@ ATKregistryEntry *ATK::LoadClass(const char *classname)
     if (reg && reg->initfunc) {
 	    boolean (*initfunc)() = reg->initfunc;
 	    reg->initfunc = NULL;
-	    if(!initfunc()) 
-		return NULL;
+	    if(!initfunc()) {
+		/* unlike with ATKinit, at least we can report this error */
+		fprintf(stderr, "class initialization for %s failed.\n", classname);
+		exit(1); /* there is no clean way to deal with this */
+	    }
     }
     return reg;
 }

@@ -61,20 +61,4 @@ when editing a Ness script.
 #~endhelp
 
 DefaultMacrosFile: ~/.atk.macros
-
-
-#~type directory list
-
-#~views filename filechoices
-
-#~help
-
-A list of directories to be processed when attempting to access the methods or 
-classprocedures of a class from within a Ness script.  The default list 
-includes the current directory, /usr/include, $ANDREWDIR/include and 
-$ANDREWDIR/include/atk.
-
-#~endhelp
-
-IncludePath: \
 \enddata{text,538269588}

@@ -1173,21 +1173,7 @@ allow you to alter the appearance and order of the menu cards.
 #~endhelp
 
 
-#~type boolean
-
-#~view string boolean
-
-#~help
-
-When yes, the new shadow color computations are used.   The default value 
-is inherited from the value of the preference UseNewShadows.
-
-#~endhelp
-
-PopupsUseNewShadows: yes
-
-\bold{
-}#~type string list ,
+#~type string list ,
 
 #~view string stringlist
 

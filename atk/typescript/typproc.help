@@ -19,56 +19,65 @@
 
 "typescript-SetPrinter" 	"Set Printer"	"File~30,Set Printer~20"
 
-"typescript-yank"		"Yank text back from kill-buffer."	"\\031"	"Paste~11"
+"typescript-yank"		"Yank text back from kill-buffer."	"^Y"	"Paste~11"
 
 "typescript-rotate-backward-paste" "Rotate kill-buffer backwards. 
- "\\033\\031"
+ "Esc-^Y"
 
-"typescript-rotate-paste"	 "Rotate kill-buffer."		"\\033y"	"Replace~13"
+"typescript-rotate-paste"	 "Rotate kill-buffer."		"Esc-y"	"Replace~13"
 
-"typescript-Grab-Last-Cmd"	 "Grab Last Command	 "\\033="
+"typescript-Grab-Last-Cmd"	 "Grab Last Command	 "Esc-="
 
-"typescript-Grab-Current-Cmd"	 "Grab Current Command"	"\\033+" 	"Move~30"
+"typescript-Grab-Current-Cmd"	 "Grab Current Command"	"Esc-+" 	"Move~30"
 
-"typescript-Execute-Current-Cmd" "Execute Current Command"	"\\033\\015"	
+"typescript-Execute-Current-Cmd" "Execute Current Command"	"Esc-^M"	
 "Execute~31"
 
-"typescript-Grab-Next-Cmd"`"Grab Next Command"	"\\033`"
+"typescript-Grab-Next-Cmd"`"Grab Next Command"	"Esc-`"
 
-"typescript-interupt-command"	 "Handle ^C	 "\\003" "\\177" /* bind DEL too! */
+"typescript-interupt-command"	 "Handle ^C	 "^C" "Delete" /* bind DEL too! */
 
-"typescript-beginning-of-line"	"Move to line beginning"	 "\\001"
+"typescript-beginning-of-line"	"Move to line beginning"	 "^A"
 
-"typescript-end-of-line"	"Move to line end"	"\\005"
+"typescript-end-of-line"	"Move to line end"	"^E"
 
-"typescript-EOT-command"	"Handle ^D"	 "\\004"
+"typescript-EOT-command"	"Handle ^D"	 "^D"
 
-"typescript-return-cmd"	 "Handle enter key"	 "\\015"
+"typescript-return-cmd"	 "Handle enter key"	 "^M"
 
 "typescript-return-and-position"	"Handle enter key and place command at top of 
-the screen"	"\\012"
+the screen"	"^J"
 
-"typescript-ZAP-command"	"Handles ^U line clearing"	 "\\025"
+"typescript-ZAP-command"	"Handles ^U line clearing"	 "^U"
 
-"typescript-Stop-cmd"	"Handle ^Z Stop cmd"	"\\032"
+"typescript-Stop-cmd"	"Handle ^Z Stop cmd"	"^Z"
 
-"typescript-unbound"	"Does nothing."	"\\033~"
+"typescript-unbound"	"Does nothing."	"Esc-~"
 
-"typescript-zap-region"	"Cut region to kill-buffer."	"\\027"	"Cut~11"
+"typescript-zap-region"	"Cut region to kill-buffer."	"^W"	"Cut~11"
 
-"typescript-copy-region"	"Copy region to kill-buffer."	"\\033w"	"Copy~12"
+"typescript-copy-region"	"Copy region to kill-buffer."	"Esc-w"	"Copy~12"
 
-"typescript-QUIT-command"	"Handles quit cmd"	"\\034"
+"typescript-QUIT-command"	"Handles quit cmd"	"^\\"
 
-"typescript-No-Echo-Cmd"	"Turn Off Echoing"	 "\\030\\014"
+"typescript-No-Echo-Cmd"	"Turn Off Echoing"	 "^X^L"
 
-"typescript-delete-previous-character"	"Delete the previous character."	"\\b"	
-"\\177" 
+"typescript-delete-previous-character"	"Delete the previous character."	"^H"	
+"Delete" 
 
 "Typescript-self-insert"	"Insert a character."
 
- "typescript-Clear"		 "Clear Typescript"		"Clear~51"
+"typescript-Clear"		 "Clear Typescript"		"Clear~51"
 
+"typescript-Clear-Text" "Clear the text of the typescript"
+
+"Typescript-digit" "Insert a character." "0" .. "9"
+
+"typescript-drag-cwd" "Drag out current working directory."
+
+"typescript-reset-tty" "Reset the tty (stty sane)"  "Esc-r"
+
+"Typescript-self-insert" "Insert a character."
 
 
 

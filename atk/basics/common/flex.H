@@ -1,6 +1,5 @@
 #ifndef _flex_H_
 #define _flex_H_
-ATK_INTER
 /* ********************************************************************** *\
  *	   Copyright Carnegie Mellon, 1994-1995 - All Rights Reserved     *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *

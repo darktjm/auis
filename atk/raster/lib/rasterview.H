@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _rasterview_H_
 #define _rasterview_H_
 /* ********************************************************************** *\

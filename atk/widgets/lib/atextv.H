@@ -2,7 +2,6 @@
 
 #ifndef _ATextV_H_
 #define _ATextV_H_
-ATK_INTER
 /** \addtogroup libAButton
  * @{ */
 #include <awidgetview.H>

@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _windowsystem_H_
 #define _windowsystem_H_
 /* ********************************************************************** *\

@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _consoleClass_H_
 #define _consoleClass_H_
 /* ********************************************************************** *\

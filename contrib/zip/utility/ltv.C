@@ -32,6 +32,7 @@ END-SPECIFICATION  ************************************************************/
 #include <bind.H>
 #include <menulist.H>
 #include <keymap.H>
+#include <keystate.H>
 #include <view.H>
 #include <message.H>
 #include <rect.h>
@@ -102,6 +103,7 @@ static /*===*/class ltv *SELF;
 #define  ButtonHeight		    (63)
 #define  ButtonTop		    (Top + Height - ButtonHeight)
 #define  Menu			    (self->menu)
+#define  Keystate		    (self->keystate)
 #define  InitialX		    (self->initial_x_pixel)
 #define  InitialY		    (self->initial_y_pixel)
 #define  WM			    (self->wm_type)
@@ -284,6 +286,7 @@ ltv::ltv( )
     RasterView = new rasterview;
     Buttons = suite::Create( ltv_buttons, (long) self );
     Menu = (class_menulist)->DuplicateML(  this );
+    Keystate = keystate::Create(this, class_keymap);
     InputFocus = BackgroundExposed = true;
     BackgroundLight = 0;
     Building = Build = Modifying = Modified = ForegroundPanning =
@@ -304,6 +307,7 @@ ltv::~ltv( )
 {
     ATKinit;
     class ltv *self=this;
+    if(Keystate) delete Keystate;
     if(Menu) delete Menu;
     if(ZipView) {
 	(ZipView)->UnlinkTree();
@@ -334,6 +338,8 @@ ltv::ReceiveInputFocus( )
     IN(ltv_ReceiveInputFocus);
     InputFocus = true;
     (Menu)->SetMask(  hide_background | pan_foreground );
+    Keystate->next = NULL;
+    (this)->PostKeyState( Keystate );
     (this)->PostMenus(  Menu );
     (this)->WantUpdate( this );
     OUT(ltv_ReceiveInputFocus);

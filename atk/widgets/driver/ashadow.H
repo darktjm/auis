@@ -1,7 +1,6 @@
 /* Copyright 1996 Carnegie Mellon University All rights reserved. */
 #ifndef _AShadow_H_
 #define _AShadow_H_
-ATK_INTER
 
 /** \addtogroup libawidget
  * @{ */

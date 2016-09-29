@@ -3,170 +3,176 @@
 \template{help}
 \define{global
 }
-\chapter{Proclist for Text and Textview}\chapter{
-
-}
-"tindex-print",  		"print index"    
-
-"tindex-write-index-file",	 "write a list of index terms " 
-   "tindex-index-italic",	"make the index entries italic" 
-  "tindex-index-plain",	"make the index entries plain" 
-   "tindex-expose-inv-index",	"Expose the invisible index entries" 
-   "tindex-hide-inv-index",	"Hide the invisible index entries"
+\chapter{Proclist for Text and Textview}
 
 
+(\italic{c} = VI command mode; \italic{i} = VI input mode; 
+\italic{e} = emacs mode (default))
 
-txtvcmds:
 
+"textview-self-insert", 	"Insert a character." \italic{i}\italic{e}
 
-"textview-self-insert", 	"Insert a character."
+"textview-digit",  		"Insert a character." \italic{c}
 
-"textview-digit",  		"Insert a character."
+"textview-beginning-of-line", "^A", "Move to beginning of current line.",  
+"Esc-H"\italic{e}\italic{c} "0"\italic{c}
 
-"textview-beginning-of-line", "Move to beginning of current line."  "\\033H"
+"textview-backward-character", "^B" "Move backward one character.", 
+"Esc-D"\italic{e}\italic{c} "^H"\italic{c} "Del"\italic{c}
 
-textview-backward-character", "\\002" "textview-backward-character", "\\033D"
+"textview-delete-next-character", "^D", "Delete the next character."
 
-"textview-delete-next-character", "\\004", "Delete the next character."
+"textview-end-of-line", "^E"  "Move to end of the current line.",  
+"Esc-F"\italic{e}\italic{c} "$"\italic{c}
 
-"textview-end-of-line", "\\005"  "Move to end of the current line.",  "\\033F"
+"textview-forward-character",   "^F"  "Move forward one character." 
+"Esc-C"\italic{e}\italic{c} "040"\italic{c} "l"\italic{c} 
+"Tab"\italic{c} " "\italic{c}
 
-"textview-forward-character",   "\\006"  "Move forward one character." 
-"\\033C"
+"textview-delete-previous-character", "^H"\italic{e}\italic{i},  "Delete the previous 
+character."  "Del"\italic{e}\italic{i} "X"\italic{c}
 
-"textview-delete-previous-character", "\\010",  "Delete the previous 
-character."  "\\177"
+"textview-insert-newline", "^M",  "Insert a newline character."
 
-"textview-insert-newline", "\\015",  "Insert a newline character."
+"textview-next-line", "^N"\italic{e}\italic{c},  "Move to next line.",   
+"Esc-B"\italic{e}\italic{c} "^J"\italic{c} "j"\italic{c}
 
-"textview-next-line", "\\016",  "Move to next line.",   "\\033B"
+"textview-previous-line", "^P"\italic{e}\italic{c},  "Move to previous line."   
+"Esc-A"\italic{e}\italic{c} "^K"\italic{c} "k"\italic{c}
 
-"textview-previous-line", "\\020",  "Move to previous line."   "\\033A"
+"textview-indent", "Esc-i"\italic{e}\italic{c},  "Indent current line."
 
-"textview-set-argument", "\\025",  "Set argument count."
+"textview-GrabReference", ^Xw"\italic{e}\italic{c},  "Grab the next viewref"
 
-"textview-indent", "\\033i",  "Indent current line."
+"textview-PlaceReference", "^Xy"\italic{e}\italic{c},  "Create a new viewref"
 
-"textview-GrabReference", \\030w",  "Grab the next viewref"
+"textview-unindent", "Esc-u"\italic{e}\italic{c},  "Un-indent current line."
 
-"textview-PlaceReference", "\\030y",  "Create a new viewref"
+"textview-exch", "^X^X"\italic{e}\italic{c},  "Exchange dot and mark."
 
-"textview-unindent", "\\033u",  "Un-indent current line."
+"textview-select-region", "Esc-^@"\italic{e}\italic{c},  "Select between dot and mark."
 
-"textview-exch", "\\030\\030",  "Exchange dot and mark."
+"textview-copy-region", "Esc-w",  "Copy~11",  "Copy region to kill-buffer."
+  "ys"\italic{c}
 
-"textview-select-region", "\\033\\200",  "Select between dot and mark."
+"textview-mylf", "^J",   "Skip to next line and indent."
 
-"textview-copy-region", "\\033w",  "Copy~11",  "Copy region to kill-buffer."
-
-"textview-mylf", "\\012",   "Skip to next line and indent."
-
-"textview-zap-region", "\\027",  "Cut~10",  "Remove the text within the 
+"textview-zap-region", "^W",  "Cut~10",  "Remove the text within the 
 selection region and place it in a cutbuffer."
 
-"textview-append-next-cut", "\\033\\027",  "Make next cut command append to 
+"textview-append-next-cut", "Esc-^W"\italic{e}\italic{c},  "Make next cut command append to 
 the cutbuffer as opposed to making a new buffer."
 
-"textview-yank", "\\031",  "Paste~10", "Yank text back from kill-buffer."
+"textview-yank", "^Y",  "Paste~10", "Yank text back from kill-buffer."  
+"ds"\italic{c}
 
-"textview-insert-file", "\\030\\t",  "File~10,Insert File~10",  "Prompt for a 
-filename and insert that file's contents into the document."
+"textview-insert-file", "^X-Tab",  "File~10,Insert File~10",  "Prompt for a 
+filename and insert that file's contents into the document."  
+":r"\italic{c}
 
-"textview-rotate-backward-paste", "\\033\\031",  "Rotate kill-buffer 
+"textview-rotate-backward-paste", "Esc-^Y"\italic{e}\italic{c},  "Rotate kill-buffer 
 backwards."
 
-"textview-line-to-top", "\\033!",  "Move current line to top of screen."
+"textview-line-to-top", "Esc-!"\italic{e}\italic{c},  "Move current line to top of screen."
 
-"textview-rotate-paste", "\\033y",  "Rotate kill-buffer."  
+"textview-rotate-paste", "Esc-y"\italic{e}\italic{c},  "Rotate kill-buffer."  
 
-"textview-forward-para", "\\033]",  "Move to the next paragraph."
+"textview-forward-para", "Esc-]",  "Move to the next paragraph."   
+"}"\italic{c}
 
-"textview-backward-para", "\\033[",  "Move to the next paragraph."
+"textview-backward-para", "Esc-[",  "Move to the previous paragraph."  
+"{"\italic{c}
 
-"textview-open-line", "\\017",  "Insert blank line at current pos."
+"textview-open-line", "^O",  "Insert blank line at current pos."
 
-"textview-plainer", "\\030\\020",  "Plainer~40",  "Remove innermost 
-environment."
+"textview-plainer", "^X^P"\italic{e}\italic{c}\italic{i},  "Plainer~40",  "Remove innermost 
+environment.",   "Esc-'-Esc-p"\italic{e}\italic{c}\italic{i}
 
-"textview-plainest",  "Plainest~41",  "Remove all enclosing styles."
+"textview-plainest",  "Plainest~41",  "Remove all enclosing styles.",   
+"Esc-'-Esc-P"\italic{e}\italic{c}\italic{i}
 
-"textview-prev-screen", "\\033v",  "Move forward to previous screen", 
- "\\033G"
+"textview-prev-screen", "Esc-v",  "Move forward to previous screen", 
+ "Esc-G"\italic{e}\italic{c} "^B"\italic{c}
 
-"textview-next-screen", "\\026",  "Move forward to next screen",  "\\033E"
+"textview-next-screen", "^V",  "Move forward to next screen",  
+"Esc-E"\italic{e}\italic{c} "^F"\italic{c}
 
-"textview-glitch-down", "\\021",  "Glitch screen down one line.", "\\033z"
+"textview-glitch-down", "^Q",  "Glitch screen down one line.", "Esc-z"
 
-"textview-glitch-up", "\\032",  "Glitch screen up one line."
+"textview-glitch-up", "^Z",  "Glitch screen up one line."
 
-"textview-twiddle-chars", "\\024",  "Exchange previous two chars."
+"textview-twiddle-chars", "^T"\italic{e}\italic{c},  "Exchange previous two chars."
 
-"textview-kill-line", "\\013",  "Kill rest of line."
+"textview-kill-line", "^K",  "Kill rest of line.",   
+"D"\italic{c} "d$"\italic{c}
 
-"textview-search", "\\023", "Search/Spell~1,Forward~10",  "Search forward."
+"textview-search", "^S", "Search/Spell~1,Forward~10"\italic{e},  "Search forward."
 
-"textview-reverse-search", "\\022", "Search/Spell~1,Backward~11", "Search 
+"textview-reverse-search", "^R", "Search/Spell~1,Backward~11"\italic{e}, "Search 
 backward."
 
-"textview-search-again", "Search/Spell~1,Search Again~12", "Repeat last 
+"textview-search-again", "Search/Spell~1,Search Again~12"\italic{e}, "Repeat last 
 search."
 
-"textview-insert-inset-here", "\\033\\t",  "Add inset at this location."
+"textview-insert-inset-here", "Esc-Tab"\italic{e}\italic{c},  "Add inset at this location."
 
-"textview-what-paragraph", "\\033N",  "Print current paragraph number."
+"textview-what-paragraph", "Esc-N"\italic{e}\italic{c},  "Print current paragraph number."
 
-"textview-show-styles", "\\033s", "Show styles at dot."
+"textview-show-styles", "Esc-s"\italic{e}\italic{c}, "Show styles at dot."  
+"Esc-'-Esc-s"\italic{e}\italic{c}\italic{i}
 
-"textview-goto-paragraph", "\\033n",  "Go to specific paragraph."
+"textview-goto-paragraph", "Esc-n"\italic{e}\italic{c},  "Go to specific paragraph."
 
-"textview-query-replace", "\\033q",  "Search/Spell~1,Query Replace~20", 
+"textview-query-replace", "Esc-q"\italic{e}\italic{c},  "Search/Spell~1,Query Replace~20", 
  "Query replace."
 
-"spell-check-document",  "Search/Spell~1,Check Spelling~30",  "Checks spelling 
-from the caret on."
-
-"textview-quote", "\\030\\021",  "Uninterpreted insert of any char or octal 
+"textview-quote", "^X^Q",  "Uninterpreted insert of any char or octal 
 code."
 
-"textview-kill-white-space", "\\033k",  "Delete spaces and tabs around the 
+"textview-kill-white-space", "Esc-k"\italic{e}\italic{c},  "Delete spaces and tabs around the 
 current pos."
 
-"textview-ctrl-at", "\\200",  "Set a mark."
+"textview-ctrl-at", "^@"\italic{e}\italic{c},  "Set a mark."
 
-"textview-backward-word", "\\033b",  "Move backward to beginning of word."
+"textview-backward-word", "Esc-b",  "Move backward to beginning of word."   
+"b"\italic{c}
 
-"textview-delete-next-word", "\\033d",  "Delete  the next word."
+"textview-delete-next-word", "Esc-d",  "Delete  the next word.",  
+"dw"\italic{c}
 
-"textview-forward-word", "\\033f",  "Move forward to end of word."
+"textview-forward-word", "Esc-f",  "Move forward to end of word."
 
-"textview-delete-previous-word", "\\033h",  "Delete the previous word." 
- "\\033\\b"  "\\033\\177",
+"textview-delete-previous-word", "Esc-h",  "Delete the previous word." 
+ "Esc-^H"  "Esc-Del",
 
-"textview-end-of-text", "\\033>",  "Move to end of text."
+"textview-end-of-text", "Esc->",  "Move to end of text."
 
-"textview-beginning-of-text", "\\033<",  "Move to beginning of text."
+"textview-beginning-of-text", "Esc-<",  "Move to beginning of text."
 
-"textview-toggle-character-case", "\\036",  "Toggle the case of the character 
+"textview-toggle-character-case", "^^"\italic{e}\italic{c},  "Toggle the case of the character 
 at the dot."
 
-"textview-lowercase-word", "\\033l",  "Convert word (or region) to lower 
-case."   "textview-uppercase-word",  "Convert word (or region) to upper case." 
-   "textview-capitalize-word",  "Capitalize word (or all words within a 
+"textview-lowercase-word", "Esc-l"\italic{e}\italic{c},  "Convert word (or region) to lower 
+case."
+
+"textview-uppercase-word",  "Convert word (or region) to upper case." 
+
+"textview-capitalize-word",  "Capitalize word (or all words within a 
 region)."
 
-"textview-cursor-to-top", "\\033,"  "Moves cursor to the beggining of the line 
-currently at the top of the screen."
+"textview-cursor-to-top", "Esc-,"  "Moves cursor to the beggining of the line 
+currently at the top of the screen."  "H"\italic{c}
 
-"textview-cursor-to-bottom", "\\033.",  "Moves cursor to the beggining of the 
-line currently at the bottom of the screen."
+"textview-cursor-to-bottom", "Esc-.",  "Moves cursor to the beggining of the 
+line currently at the bottom of the screen."  "L"\italic{c}
 
-"textview-cursor-to-center", "\\033/",  "Moves cursor to the beggining of the 
-line currently at the center of the screen."
+"textview-cursor-to-center", "Esc-/",  "Moves cursor to the beggining of the 
+line currently at the center of the screen."   "M"\italic{c}
 
 "textview-change-template",  "File~10,Add Template~31",  "Change to named 
 template."
 
-"textview-toggle-read-only", "\\033~",  "Change read only status of text 
+"textview-toggle-read-only", "Esc-~"\italic{e}\italic{c},  "Change read only status of text 
 object."
 
 "textview-toggle-expose-styles",  "Expose/hide style information"
@@ -185,9 +191,6 @@ break object"
 "textview-insert-footnote", "Page~3,Insert Footnote~20",  "Add footnote at 
 this location."
 
-"contentv-make-window",  "Page~3,Table of Contents~30",  "Make a table of 
-contents window"
-
 "textview-open-footnotes",  "Page~3,Open Footnotes~22",  "Open all footnotes"
 
 "textview-close-footnotes",  "Page~3,Close Footnotes~23",  "Close all 
@@ -195,7 +198,244 @@ footnotes"
 
 "textview-write-footnotes",  "Write all footnotes"
 
+"textview-extend-backward-line", "Extend the dot one line backward."
 
+"textview-extend-backward-screen", "Extend the dot one screen backward."
+
+"textview-extend-backward", "Extend the dot one char backward."
+
+"textview-extend-beginning", "Extend the dot to beginning of text."
+
+"textview-extend-end", "Extend the dot to end of text."
+
+"textview-extend-forward-line", "Extend the dot one line forward."
+
+"textview-extend-forward-screen", "Extend the dot one screen forward."
+
+"textview-extend-forward", "Extend the dot one char forward."
+
+"textview-forward-beginning-of-whitespace-word", "Move forward to beginning of whitespace word."
+
+"textview-kill-next-word", "Kill  the next word, saving it on the kill ring."
+
+"textview-kill-previous-word", "Kill the previous word, saving it on the kill ring."
+
+"textview-MIT-kill-line", "Kill rest of line."
+
+"textview-my-soft-lf", "Esc-j", "Skip to next line/soft return and indent."
+
+"textview-next-screen-move", "Move forward to next screen moving dot."
+
+"textview-prev-screen-move", "Move back to previous screen moving dot."
+
+"textview-noop", "Do absolutely nothing."
+
+"textview-insert-soft-newline", "Esc-^M", "Insert a soft newline character."
+
+"textview-toggle-color-styles", "Show/don't show color styles"
+
+"textview-toggle-editor", "Esc-t", "Switch to vi editor.",
+"Switch to emacs editor." "Esc-t"\italic{c}
+
+"textview-toggle-line-display", "Show/don't show line display"
+
+"textview-balance", "Esc-m", "Balance parentheses, brackets, or braces."   
+"%"\italic{c}
+
+"textview-down-insert-environment", "Esc-'Esc-B"\italic{e}\italic{c}\italic{i}, 
+"Move down environment that will be used for inserting characters."   
+"Esc-'Esc-d"\italic{e}\italic{c}\italic{i}
+
+"textview-insert-environment",	"Esc-'Esc-l"\italic{e}\italic{c}\italic{i}, "Prompt for a style to use for inserting characters."
+
+			  (subscript),	"Esc-'Esc-!"\italic{e}\italic{c}\italic{i}
+
+			     (bigger),	"Esc-'Esc-+"\italic{e}\italic{c}\italic{i}
+
+			    (smaller),	"Esc-'Esc--"\italic{e}\italic{c}\italic{i}
+
+			  (flushleft),	"Esc-'Esc-<"\italic{e}\italic{c}\italic{i}
+
+			     (center),	"Esc-'Esc-="\italic{e}\italic{c}\italic{i}
+
+			 (flushright),	"Esc-'Esc->"\italic{e}\italic{c}\italic{i}
+
+			 (leftindent),	"Esc-'Esc-Tab"\italic{e}\italic{c}\italic{i}
+
+			(superscript),	"Esc-'Esc-^"\italic{e}\italic{c}\italic{i}
+
+			  (underline),	"Esc-'Esc-_"\italic{e}\italic{c}\italic{i}
+
+			        (bold),	"Esc-'Esc-b"\italic{e}\italic{c}\italic{i}
+
+			      (italic),	"Esc-'Esc-i"\italic{e}\italic{c}\italic{i}
+
+			 (typewriter),	"Esc-'Esc-t"\italic{e}\italic{c}\italic{i}
+
+"textview-left-insert-environment", "Esc-'Esc-D"\italic{e}\italic{c}\italic{i}, "Move to the left the environment that will be used for inserting characters."
+
+"textview-right-insert-environment", "Esc-'Esc-C"\italic{e}\italic{c}\italic{i}, "Move to the right the environment that will be used for inserting characters."
+
+"textview-show-insert-environment", "Esc-'Esc-?"\italic{e}\italic{c}\italic{i}, "Show the environment that will be used for inserting characters."
+
+"textview-up-insert-environment", "Esc-'Esc-A"\italic{e}\italic{c}\italic{i}, 
+"Move up environment that will be used for inserting characters."   
+"Esc-'Esc-u"\italic{e}\italic{c}\italic{i}
+
+"textview-backward-whitespace-word", "B"\italic{c}, "Move backward to beginning of word separated by whitespace."
+
+"textview-beginning-of-first-word", "^"\italic{c}, "Move to beginning of first word on current line."
+
+"textview-beginning-of-next-line", "+"\italic{c}, "Move to beginning of next line."   
+"^M"\italic{c}
+
+"textview-beginning-of-previous-line", "-"\italic{c}, "Move to beginning of previous line."
+
+"textview-change-line", "cc"\italic{c}, "Replace current line."
+
+"textview-change-rest-of-line", "C"\italic{c}, "Replace rest of current line."   
+"S"\italic{c}
+
+"textview-change-selection", "cs"\italic{c}, "Replace current selection."
+
+"textview-change-word", "cw"\italic{c}, "Replace current word."
+
+"textview-delete-backward-word", "db"\italic{c}, "Delete the previous word."
+
+"textview-delete-end-of-whitespace-word", "dE"\italic{c}, "Delete end of word separated by whitespace."
+
+"textview-delete-end-of-word", "de"\italic{c}, "Delete end of word."
+
+"textview-delete-next-whitespace-word", "dW"\italic{c}, "Delete the next word separated by whitespace."
+
+"textview-delete-previous-whitespace-word", "dB"\italic{c}, "Delete the previous word separated by whitespace."
+
+"textview-down", "\004"\italic{c}, "Move down. "
+
+"textview-end-of-whitespace-word", "E"\italic{c}, "Move forward to end of word separated by whitespace."
+
+"textview-end-of-word", "e"\italic{c}, "Move forward to end of word."
+
+"textview-forward-beginning-of-word", "w"\italic{c}, "Move forward to beginning of word."
+
+"textview-forward-whitespace-word", "W"\italic{c}, "Move forward to beginning of word separated space."
+
+"textview-go-to", "G"\italic{c}, "Go to line number."   "g"\italic{c}
+
+"textview-input-mode", "a"\italic{c}, "Switch to input mode."   "i"\italic{c}
+
+"textview-insert-at-beginning", "I"\italic{c}, "Insert at beginning of current line."
+
+"textview-insert-at-end", "A"\italic{c}, "Insert at end of current line."
+
+"textview-join", "J"\italic{c}, "Join current and next line."
+
+"textview-open-line-after", "o"\italic{c}, "Insert a new line after the current line."
+
+"textview-open-line-before", "O"\italic{c}, "Insert a new line before the current line."
+
+"textview-put-after", "p"\italic{c}, "Put text back from kill-buffer, after current line."
+
+"textview-put-before", "P"\italic{c}, "Put text back from kill-buffer, before current line."
+
+"textview-replace-char", "r"\italic{c}, "Replace character after cursor."
+
+"textview-shift-down", "^Y"\italic{c}, "Shift display down one line."
+
+"textview-shift-home", "Shift the view horizontally home."
+
+"textview-shift-left", "Shift the view horizontally left."
+
+"textview-shift-right", "Shift the view horizontally right."
+
+"textview-shift-up", "\005"\italic{c}, "Shift display up one line."
+
+"textview-substitute-char", "s"\italic{c}, "Insert over character after cursor."
+
+"textview-toggle-mode", "Esc-Esc"\italic{i}, "Switch to command mode. "   "^E"\italic{i}
+
+"textview-up", "\025"\italic{c}, "Move up. "
+
+"textview-vi-command", ":"\italic{c}, "Execute a vi command via commmand line."
+
+"textview-vi-delete-line", "dd"\italic{c}, "Delete line."
+
+"textview-vi-delete-next-character", "x"\italic{c}, "Delete the next character."
+
+"textview-vi-yank-line", "yy"\italic{c}, "Yank line."   "Y"\italic{c}
+
+"textview-yank-end-of-whitespace-word", "yE"\italic{c}, "Yank end of word separated by whitespace."
+
+"textview-yank-end-of-word", "ye"\italic{c}, "Yank end of word."
+
+"textview-yank-line", "y$"\italic{c}, "Yank rest of line."
+
+"textview-yank-next-whitespace-word", "yW"\italic{c}, "Yank the next word separated by whitespace."
+
+"textview-yank-next-word", "yw"\italic{c}, "Yank the next word."
+
+"textview-yank-previous-whitespace-word", "yB"\italic{c}, "Yank the previous word separated by whitespace."
+
+"textview-yank-previous-word", "yb"\italic{c}, "Yank the previous word."
+
+
+"tindex-print",  		"print index"    
+
+"tindex-write-index-file",	 "write a list of index terms "
+
+"tindex-read-index-file",	"read a list of index terms "
+
+"tindex-index-italic",	"make the index entries italic" 
+
+"tindex-index-plain",	"make the index entries plain"
+
+"tindex-expose-inv-index",	"Expose the invisible index entries"
+
+"tindex-hide-inv-index",	"Hide the invisible index entries"
+
+"tindex-index-term",	"index all instances of a term"
+
+"tindex-preview",	"preview index"
+
+
+"headrtv-newline",  "^J", "Goes to next section of the header/footer."   "^M"
+
+
+"bpv-pagenum-clear", "Pagebreak~5,Clear Page Number~11", "Clear the new page number after this page break."
+
+"bpv-pagenum-set", "Pagebreak~5,Set Page Number~10", "Set the new page number after this page break."
+      
+
+"spell-check-document",  "Search/Spell~1,Check Spelling~30",  "Checks spelling 
+from the caret on."
+
+
+"dynsearch-search-forward", "/"\italic{c}, "Search/Spell~1,Forward~10"\italic{c}, "Search forward for a pattern; uses selection."
+
+"dynsearch-search-reverse", "?"\italic{c}, "Search/Spell~1,Backward~11"\italic{c}, "Search backwards for a pattern; uses selection."
+
+"dynsearch-search-again-opposite", "N"\italic{c}, "Search again in the opposite direction, using the last search pattern."
+
+"dynsearch-search-again", "n"\italic{c}, "Search/Spell~1,Search Again~12"\italic{c}, "Search again in the same direction, using the last search pattern."
+
+
+"contentv-make-window",  "Page~3,Table of Contents~30",  "Make a table of 
+contents window"
+
+
+"contentv-delete-window", "Delete Window~89", "destroy the table of content"
+
+"contentv-destroy", "Quit~99", "destroy the table of content"
+
+"contentv-enumerate", "Contents~1,Enumerate~1", "Enumerate the heading"
+
+"contentv-denumerate", "Contents~1,Denumerate~2", "Denumerate the heading"
+
+"contentv-reinit", "Contents~1,Update Contents~20", "reinitialize the headings"
+
+"contentv-preview", "File~10,Preview~21", "Previews document."
+
+"contentv-print", "File~10,Print~22", "Prints document."
 
 \begindata{bp,537558784}
 \enddata{bp,537558784}

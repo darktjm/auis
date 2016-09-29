@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _scrollandpanner_H_
 #define _scrollandpanner_H_
 /** \addtogroup libsupviews

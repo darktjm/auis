@@ -1278,7 +1278,7 @@ static struct bind_Description 	      bound_menu[] =
 	(proctable_fptr) Landscape_Command,	"...",   NULL },
 { "zipview-print_to_file",  "\033pf",	0,	"Printing~50,To File ...~20",	0,  menu_app,
 	(proctable_fptr) Print_To_File_Command,	"...",   NULL },
-{ "zipview-set_print_size",  "...",	0,	"Printing~50,Set Print Size~30",0,  menu_default,
+{ "zipview-set_print_size", "\033ps",	0,	"Printing~50,Set Print Size~30",0,  menu_default,
 	(proctable_fptr) Set_Print_Size_Command,	"...",   NULL },
 /*===
 { "zipview-next-page",	    " ",	0,	"Page~50,Next~10",	0,  menu_default,

@@ -18,8 +18,7 @@ DeclareFont(amenu12)
 InstallClassFiles($(HFILES)) 
 DependTarget()
 
-InstallDocs(menubar.help, ${DESTDIR}/help)
-InstallDocs(motif.help, ${DESTDIR}/help)
+InstallDocs(menubar.help motif.help xkeys.help, ${DESTDIR}/help)
 InstallDocs(xprefs.pr, ${DESTDIR}/lib/prs)
 
 

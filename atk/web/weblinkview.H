@@ -1,6 +1,5 @@
 #ifndef _weblinkview_H_
 #define _weblinkview_H_
-ATK_INTER
 /** \addtogroup libhtmltext
  * @{ */
 #include <linkview.H>

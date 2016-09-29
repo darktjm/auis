@@ -1,5 +1,4 @@
 #include <andrewos.h>
-ATK_INTER
 
 #ifndef _parser_H_
 #define _parser_H_

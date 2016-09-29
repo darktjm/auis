@@ -1,6 +1,5 @@
 #ifndef _HTMLIMAGE_H_
 #define _HTMLIMAGE_H_
-ATK_INTER
 /** \addtogroup libhtmltext
  * @{ */
 /* Copyright 1996 Carnegie Mellon University All rights reserved. */

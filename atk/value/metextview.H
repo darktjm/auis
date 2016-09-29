@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _metextview_H_
 #define _metextview_H_
 /* ********************************************************************** *\

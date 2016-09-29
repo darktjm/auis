@@ -3210,13 +3210,6 @@ static struct bind_Description imBindings[]={
 			"Play current keyboard macro."},
 	{"im-redraw-window", "\014", 0, NULL, 0, 0, (proctable_fptr)::RedrawWindow, 
 			"Redraw the window."},
-
-	{"exit", 0, 0, 0, 0, 0, imkeyboardexit, "Obsolete"},
-	{"start-keyboard-macro", 0, 0, 0, 0, 0, (proctable_fptr)StartKeyboardMacro, "Obsolete"},
-	{"stop-keyboard-macro", 0, 0, 0, 0, 0, (proctable_fptr)StopKeyboardMacro, "Obsolete"},
-	{"play-keyboard-macro", 0, 0, 0, 0, 0, (proctable_fptr)PlayKeyboardMacro, "Obsolete"},
-	{"redraw-window", 0, 0, 0, 0, 0, (proctable_fptr)::RedrawWindow, "Obsolete"},
-
 	{"im-print-malloc-statistics", "\030\200m", 0, NULL, 0, 0, (proctable_fptr)PrintMallocStats,
 			"Print malloc statisticsp to a file."},
 	{"im-reset-malloc-statistics", "\030\200r", 0, NULL, 0, 0, (proctable_fptr)ResetMallocStats,

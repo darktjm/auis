@@ -64,6 +64,42 @@ to get the original, as modified by me).  Yes, I know how stupid it is
 to need an installed binary to read the installation instructions.
 Again, atk writes ASCII files, so you should be able to read it anyway.
 
+The following known dependencies currently exist:
+
+  - X and other UNIX utilities scattered throughout.
+  - ImageMagick.  You can change this at build-time to DevIL or
+    FreeImage by changing IMAGEIO in config/site.mcr.
+  - GNU roff.
+  - gv. This can be overridden with the PSCPreviewCommand preference.
+  - xditview.  This can be overridden with the PreviewCommand
+    preference.
+
+I recommend the following preference settings in ~/.preferences:
+
+  - `*.ErrorsToConsole: No`
+
+    Without this, messages to standard error will disappear into the
+    ether, unless you are running the AUIS commmand "console".
+
+  - `*.ThumbScroll: Yes`
+  
+    This will enable continuous scrolling while dragging the knob.  In
+    general, keep in mind that scrollbars don't work as you might think,
+    especially if you've never used Athena-based X apps.  You might
+    want to look at "help scroll".
+
+  - `*.PreviewCommand: grops>/tmp/gps.$$; gv /tmp/gps.$$; rm /tmp/gps.$$`
+
+    gv is a slightly better previewer than xditview.  Piping grops
+    directly into gv only works for the first page, at best.  Note this
+    only affects previews of troff-generated output; direct postscript
+    output is handled by PSCPreviewCommand.
+
+  - `*.Geometry: WxH`
+  
+    Replace W and H by something other than the weird default of
+    512x512.
+
 Incompatibilities
 -----------------
 
@@ -128,6 +164,21 @@ So far, the following incompatibilities have been introduced:
  - I have removed all support for fbd font files (both the converter
    and the fbd-format orignals of the Andrew fonts).
 
+ - I have removed all known compatibility aliases for proc names.
+   This means that old key/menu binding files and ness scripts may no
+   longer work.  These should be fixed to use the proper fully
+   qualified proc name.  All 39 commands formerly prefixed by raster-
+   are now prefixed by rasterv-.  In addition: 
+
+     Removed                    Replacement
+     -------                    -----------
+     exit                       im-exit-program
+     play-keyboard-macro        im-play-keyboard-macro
+     redraw-window              im-redraw-window
+     srctextview-tab            srctextview-reindent
+     start-keyboard-macro       im-start-keyboard-macro
+     stop-keyboard-macro        im-stop-keybaord-macro
+
 Goals
 -----
 
@@ -147,7 +198,9 @@ the main points:
   - link-clean: ensure that all exported symbols are defined in a
     header, and all imported symbols come from a header (i.e., no extern
     in C files).  Also, any symbols not meant to be exported must be
-    declared static.
+    declared static.  Note that in C++, I am not aware of a method to
+    prevent exporting class information other than the GCC-specific
+    method of preventing leaks outside of a shared object.
 
   - make it as warning-clean as possible with the strictest set of
     warnings I can manage.
