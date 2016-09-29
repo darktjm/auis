@@ -47,7 +47,6 @@ struct nh {
 static float arr[61];
 
 ATKdefineRegistry(pcontrol, ATK, pcontrol::InitializeClass);
-static void setbl(struct spk_blk  *b,float  freq);
 static void play(char  *buf,int  Speed);
 static class pcontrol *FindSelf(class view  *v);
 static void replayCallBack(class pcontrol  *self,class value  *val,long  r1,long  r2);
@@ -66,9 +65,9 @@ static void initself(class pcontrol  *self,class view  *v);
 static void pcontrol_start(class view  *v,long  dat);
 
 
+#if defined (sys_rt_r3) || defined (sys_rt_aos4)
 static void setbl(struct spk_blk  *b,float  freq)
 {
-#if defined (sys_rt_r3) || defined (sys_rt_aos4)
     if (freq < 23) {
 	b->freqhigh=0;
 	b->freqlow=SPKOLOMIN;
@@ -97,8 +96,8 @@ static void setbl(struct spk_blk  *b,float  freq)
 	b->freqhigh=0;
 	b->freqlow=SPKOLOMIN;
     }
-#endif /* defined (sys_rt_r3) || defined (sys_rt_aos4) */
 }
+#endif /* defined (sys_rt_r3) || defined (sys_rt_aos4) */
 static int sp = 0;
 static void play(char  *buf,int  Speed)
 {

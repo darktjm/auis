@@ -1025,15 +1025,12 @@ void
 imagev::Print( FILE  *f, const char  *process, const char  *final, int  toplevel )
 {
     FILE *tmpFile;
-    char tmpName[MAXPATHLEN];
-    strcpy(tmpName, tmpnam(NULL));
-    if((tmpFile = fopen(tmpName, "w"))) {
+    if((tmpFile = tmpfile())) {
 	int wpts, hpts;
 	char buf[BUFSIZ], buf1[BUFSIZ];
 	const char *prefix;
 	writePS(this, tmpFile, &wpts, &hpts, toplevel);
-	fclose(tmpFile);
-	if((tmpFile = fopen(tmpName, "r"))) {
+	if(!fflush(tmpFile) && !fseek(tmpFile, 0, SEEK_SET)) {
 	    if(strcmp(process, "troff") == 0) {
 		if(toplevel)
 		    texttroff::BeginDoc(f);
@@ -1047,7 +1044,7 @@ imagev::Print( FILE  *f, const char  *process, const char  *final, int  toplevel
 		sprintf(buf1, "%s%s", prefix, buf);
 		fputs(buf1, f);
 	    }
-	    fclose(tmpFile); unlink(tmpName);
+	    fclose(tmpFile);
 	    if (strcmp(process, "troff") == 0) {
 		texttroff::EndPS(f, wpts, hpts);
 		if (toplevel)

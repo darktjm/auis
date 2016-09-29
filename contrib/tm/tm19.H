@@ -18,8 +18,8 @@ public:
         
 	tm19();
     
-         char * GetTermcap()  ;
-         char * GetTerm()  ;
+         const char * GetTermcap()  ;
+         const char * GetTerm()  ;
     
         int savedX,savedY;
         int foldCount;

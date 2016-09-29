@@ -178,7 +178,7 @@ tm19::tm19()
 
 static char tcbuf[2000]; /* stupid HC can't handle statics inside functions */
 
-char *tm19::GetTermcap()
+const char *tm19::GetTermcap()
 {
     sprintf(tcbuf,
 	    "tm19|termulator h19 emulation:"
@@ -189,7 +189,7 @@ char *tm19::GetTermcap()
     return tcbuf;
 }
 
-char *tm19::GetTerm()
+const char *tm19::GetTerm()
 {
     return "tm19";
 }

@@ -43,7 +43,7 @@ int ScaleCoordinate(class consoleClass  *self, int  old, boolean  IsX)
         Range = (self)->GetLogicalHeight();
         GrowthRange = YGrowthRange;
     }
-    if (Range <= DesiredRange || Gmin < 0 || Gmin == 0 && Gmax >= ScaleFactor) {
+    if (Range <= DesiredRange || Gmin < 0 || (Gmin == 0 && Gmax >= ScaleFactor)) {
         return(old * Range / ScaleFactor);
     }
     if (old < Gmin) {

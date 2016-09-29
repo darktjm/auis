@@ -38,7 +38,6 @@ static void DNV(class valueview  * self);
 static void DBV(class valueview  * self);
 static void DH(class valueview  * self);
 static void DDH(class valueview  * self);
-static void valueview__GetCenter( class valueview  * self, long  * x , long  * y );
 
 
 static void LookupParameters(class valueview  * self)
@@ -524,13 +523,14 @@ void valueview::Dehighlight( )
 }
 
 
-
+#if 0 /* unused */
 static void valueview__GetCenter( class valueview  * self, long  * x , long  * y )
           {
   /* this controls the location of a label. */
   *x = self->x + (self->width >> 1);
   *y = self->y + (self->height >> 1);
 }
+#endif
 void valueview::ReceiveInputFocus()
 {
     (this)->PostMenus(NULL);

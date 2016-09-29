@@ -18,7 +18,7 @@
 
 struct cmd {
     struct cmd *next,*prev;
-    char *string;
+    const char *string;
 };
 
 enum termulator_Mode {termulator_ModeCooked, termulator_ModeCbreak, termulator_ModeRaw};
@@ -26,6 +26,8 @@ enum termulator_Mode {termulator_ModeCooked, termulator_ModeCbreak, termulator_M
 #define INTRCHAR '\003'
 #define QUITCHAR '\034'
 #define STOPCHAR '\032'
+
+#include <termios.h>
 
 #include <text.H>
 class termulator;
@@ -44,8 +46,8 @@ public:
 	 long Write(FILE *file, long writeID, int level)  ;
     
         virtual int StartProcess(const char **args)  ;
-	virtual char * GrabPrevCmd(char *str)  ;
-	virtual char * GrabNextCmd(char *str)  ;
+	virtual const char * GrabPrevCmd(char *str)  ;
+	virtual const char * GrabNextCmd(char *str)  ;
 	virtual boolean EnterCmd(char *string)  ;
 	virtual void RewindCmds();
 	virtual void ProcessInput(char *text, long len);
@@ -55,8 +57,8 @@ public:
 	virtual void SetScreenSize(int width,int height);
 	virtual void SetDispSize(int width,int height);
 	virtual void ProcessOutput(char *str, long len);
-	virtual char * GetTermcap()  ;
-	virtual char * GetTerm()  ;
+	virtual const char * GetTermcap()  ;
+	virtual const char * GetTerm()  ;
 	virtual void Untermulate();
 	/* the following are intended to be called from subclasses */
 	virtual void GotoXY(int x,int y);
@@ -86,8 +88,8 @@ public:
 	inline boolean   GetInsert() { return (this->insert); }
 	inline void SetStandout(boolean b) { (this->standout=(b)); }
         inline boolean   GetStandout() { return (this->standout); }
-	inline void SetEscape(char c, termulator_escfptr action) { (this->escapes[c]=(action)); }
-        inline termulator_escfptr GetEscape(char c) { return (this->escapes[c]); }
+	inline void SetEscape(char c, termulator_escfptr action) { (this->escapes[(unsigned char)c]=(action)); }
+        inline termulator_escfptr GetEscape(char c) { return (this->escapes[(unsigned char)c]); }
 	inline void SetParseState(termulator_statefptr rtn) { (this->state=(rtn)); }
         inline termulator_statefptr GetParseState() { return (this->state); }
 	inline char   *GetParseBuf(){ return (this->parseBuf); }
@@ -111,13 +113,13 @@ public:
 	FILE *ptyFile;
 	int pid;
 	struct cmd *lastCmd, *curCmd;
-	char **args;
+	const char * const *args;
 	boolean insert,standout;
-	char *errstr;
-	int errno;
+	const char *errstr;
+	int errnum;
 	class style *cmdStyle,*noechoStyle,*soStyle,*screenStyle;
 	class environment *cmdEnv,*screenEnv;
-	int mode;
+	struct termios mode;
 	boolean remote;
 	long maxsize;
 	long extraroom;

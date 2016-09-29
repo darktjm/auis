@@ -54,12 +54,9 @@
 #include <system.h>
 #include <stdio.h>
 #include <getstats.h>
+#include "getstats_proto.h"
 
 #define sendval(text) {printf text ;fflush(stdout);}
-
-extern GetGVMStats(); /* */
-extern InitGVMStats(); /* */
-extern GetDiskStats(); /* */
 
 #define min(a, b) (((a) <= (b)) ? (a) : (b))
 

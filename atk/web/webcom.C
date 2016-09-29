@@ -36,7 +36,6 @@ static class event *web_event;
 
 ATKdefineRegistry(webcom,  observable,  webcom::InitializeClass);
 
-static const char *guessimgtype(class webcom  *self, const char  *url);
 static void loadimg(class image  *dat, class webcom  *self, int  status);
 static void hweb(FILE  *f,  void  *td);
 static FILE *setuppipes();
@@ -580,8 +579,10 @@ webcom::Create(const char  *url, class webcom  *parent, int  flags, const char *
         if(flags&WEBCOM_Reload) w->reload=TRUE;
         else w->reload=FALSE;
         if(flags&WEBCOM_Post) {
-            w->postfile=NewString(tmpnam(NULL));
-            FILE *fp=fopen(w->postfile, "w");
+	    w->postfile=(char *)malloc(strlen(P_tmpdir) + 10);
+	    sprintf(w->postfile, "%s/pfXXXXXX", P_tmpdir);
+	    int fd = mkstemp(w->postfile);
+            FILE *fp=fdopen(fd, "w");
             if(fp==NULL) {
                 fprintf(stderr, "web: Couldn't write %s for posting.\n", w->postfile);
                 return w;
@@ -933,16 +934,13 @@ webcom_CheckQue()  {
 }
 	void 
 webcom::Load(webcom_cbptr proc, void *rock)  {
-	static char fname[L_tmpnam];
 	char *local_url = (this->url)->Name();
 	if (INPROMPT) webcom_Que(this, proc, rock);
 	
 	this->proc = proc;
 	this->procdata = rock;
-	tmpnam(fname);
-	file=NewString(fname);
-	tmpnam(fname);
-	errfile=NewString(fname);
+	file = (char *)malloc(strlen(P_tmpdir) + 10);
+	errfile = (char *)malloc(strlen(P_tmpdir) + 10);
 	if(file==NULL || errfile==NULL) {
 	    fprintf(stderr, "web: Out of memory loading %s\n", local_url);
 	    if(file) {
@@ -953,7 +951,24 @@ webcom::Load(webcom_cbptr proc, void *rock)  {
 		free(errfile);
 		errfile=NULL;
 	    }
-	}	
+	}
+	sprintf(file, "%s/wcXXXXXX", P_tmpdir);
+	sprintf(errfile, "%s/weXXXXXX", P_tmpdir);
+	int tfd = mkstemp(file);
+	if(tfd >= 0) {
+	    close(tfd);
+	    tfd = mkstemp(errfile);
+	    if(tfd >= 0)
+		close(tfd);
+	    else
+		remove(file);
+	}
+	if(tfd < 0) {
+	    fprintf(stderr, "web: Error creating temp files loading %s\n", local_url);
+	    free(file);
+	    free(errfile);
+	    file = errfile = NULL;
+	}
 	static unsigned long cnt=1;
 	reqid=cnt;
 	// file://localhost

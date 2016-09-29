@@ -19,7 +19,6 @@ ATK_IMPL("metextview.H")
 ATKdefineRegistry(metextview, textview, metextview::InitializeClass);
 static void metextview_CancelCommand(class metextview  *self );
 static void metextview_ReturnCommand(class metextview  *self );
-static void metextview_ClearCommand(class metextview  *self );
 
 
 static void metextview_CancelCommand(class metextview  *self )
@@ -55,13 +54,14 @@ static void metextview_ReturnCommand(class metextview  *self )
 	}
     }
 }
+#if 0  /* use commented out below */
 static void metextview_ClearCommand(class metextview  *self )
 {
     class mentertext *txt = Text(self);
     (txt)->Clear();
     (txt)->NotifyObservers(0);
 }
-
+#endif
 void metextview::ReceiveInputFocus()
 {
     this->hasInputFocus = TRUE;

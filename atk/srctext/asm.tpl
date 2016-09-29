@@ -1,4 +1,4 @@
-\begindata{tpltext,40}
+\begindata{text,40}
 \textdsversion{12}
 \define{comment
 attr:[FontFace Italic Int Set]}
@@ -14,4 +14,4 @@ attr:[Flags ContinueIndent Int Set]
 attr:[FontFace FixedFace Int Set]
 attr:[FontFamily AndyType Int 0]
 attr:[Flags TabsCharacters Int Set]}
-\enddata{tpltext,40}
+\enddata{text,40}

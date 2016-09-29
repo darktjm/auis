@@ -81,7 +81,7 @@
 #define MK_EXAMPLES 1
 #define FUNCTION_INDEX_ENV 1 
 
-#define MEGARUNAPP_ENV 1
+/* #define MEGARUNAPP_ENV 1 */
 
 
 /* Site specific sources   =============== */

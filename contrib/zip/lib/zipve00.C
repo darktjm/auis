@@ -55,18 +55,10 @@ END-SPECIFICATION  ************************************************************/
 
 #define PaneViewObj (self->view_object)
 
-static long Highlight_Pane_Points( class zipedit		  *self, zip_type_pane		   pane );
-static long Normalize_Pane_Points( class zipedit		  *self, zip_type_pane		   pane );
 static int Delete_Inferior_Image( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane );
 static int Undelete_Inferior_Image( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane );
 static int Highlight_Inferior_Image_Points( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane );
 static int Normalize_Inferior_Image_Points( class zipedit		  *self, zip_type_image		   image, zip_type_pane		   pane );
-static long Delete_Stream( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
-static long Undelete_Stream( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
-static long Highlight_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
-static long Normalize_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
-static long Hide_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
-static long Expose_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane );
 static boolean Ratify_Highlighting( class zipedit		  *self, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y );
 static boolean Ratify_Normalizing( class zipedit		  *self, zip_type_pane		   pane, zip_type_pixel		   x , zip_type_pixel		   y );
 
@@ -84,18 +76,6 @@ zipedit::Set_Pane_Highlight_Icon( zip_type_pane		   pane, char				   icon )
   ZIP_STATUS(this->data_object);
   OUT(zipedit::Set_Pane_Highlight_Icon);
   return status;
-  }
-
-static long
-Highlight_Pane_Points( class zipedit		  *self, zip_type_pane		   pane )
-      {
-return zip_ok;
-  }
-
-static long
-Normalize_Pane_Points( class zipedit		  *self, zip_type_pane		   pane )
-      {
-return zip_ok;
   }
 
 long
@@ -703,43 +683,6 @@ zipedit::Expose_Image_Points( zip_type_image		   image, zip_type_pane		   pane )
   ZIP_STATUS(this->data_object);
   OUT(zip_Expose_Image_Points);
   return zip_ok;
-  }
-
-
-static long
-Delete_Stream( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
-        {
-return zip_ok;
-  }
-
-static long
-Undelete_Stream( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
-        {
-return zip_ok;
-  }
-
-static long
-Highlight_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
-        {
-return zip_ok;
-  }
-
-static long
-Normalize_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
-        {
-return zip_ok;
-  }
-
-static long
-Hide_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
-        {
-return zip_ok;
-  }
-
-static long
-Expose_Stream_Points( class zipedit		  *self, zip_type_stream		   stream, zip_type_pane		   pane )
-        {
-return zip_ok;
   }
 
 void zipedit::Expose_Point( zip_type_pane		   pane, zip_type_figure		   figure, zip_type_pixel		   x , zip_type_pixel		   y )

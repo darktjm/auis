@@ -113,7 +113,7 @@ void GetStringFromWindow(class consoleClass  *self, long  maxSize)
 	    case '\177': /* Delete */
 		if (tempString > Pstring4){
 		    --tempString;
-		    Pposx -= fontWidth[*tempString];
+		    Pposx -= fontWidth[(unsigned char)*tempString];
 		    (self)->MoveTo( Pposx, Pposy);
 		    (self)->SetTransferMode( graphic_INVERT);
 		    (self)->DrawString( tempString, graphic_ATLEFT | graphic_BETWEENTOPANDBASELINE);
@@ -123,7 +123,7 @@ void GetStringFromWindow(class consoleClass  *self, long  maxSize)
 	    case '\025': /* ^U */
 		while((tempString - Pstring4) != 0){
 		    --tempString;
-		    Pposx -= fontWidth[*tempString];
+		    Pposx -= fontWidth[(unsigned char)*tempString];
 		    (self)->MoveTo( Pposx, Pposy);
 		    (self)->SetTransferMode( graphic_INVERT);
 		    (self)->DrawString( tempString, graphic_ATLEFT | graphic_BETWEENTOPANDBASELINE);
@@ -170,7 +170,7 @@ void RedrawPrompt(class consoleClass  *self)
 	    int i;
 	    (self)->MoveTo( Pposx, Pposy);
 	    for(i = 0; Pstring4[i] != '\0'; i++){
-		Pposx += fontWidth[Pstring4[i]];
+		Pposx += fontWidth[(unsigned char)Pstring4[i]];
 	    }
 	    (self)->DrawString( Pstring4, graphic_ATLEFT | graphic_BETWEENTOPANDBASELINE);
 	}

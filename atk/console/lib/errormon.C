@@ -69,7 +69,9 @@ NO_DLL_EXPORT u_long ThisHostAddr;
 
 void RestartErrorMonitoring(class consoleClass  *self, const char  *msg);
 int InitErrorMonitoring(class consoleClass  *self,boolean  FirstTime);
-extern "C" int OpenConsoleSocket();
+extern "C" {
+#include "socket.h"
+}
 void ReportInternalError(class consoleClass  *self, const char  *string);
 #if defined(M_UNIX) || defined(__hpux) || defined(hpux)
 int ConsolePipe(class consoleClass  *self);
@@ -95,7 +97,7 @@ void RestartErrorMonitoring(class consoleClass  *self, const char  *msg)
     }
 }
 
-int RealOpenConsoleSocket(class consoleClass *self)
+static int RealOpenConsoleSocket(class consoleClass *self)
 {
     ConsoleSocket=OpenConsoleSocket();
     if(ConsoleSocket<0)

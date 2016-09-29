@@ -1,6 +1,6 @@
 \begindata{text,5380224}
 \textdsversion{12}
-\template{messages}
+\template{default}
 \define{sansserif
 menu:[Font~1,Sans Serif]
 attr:[FontFamily AndySans Int 0]}

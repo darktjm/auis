@@ -1,4 +1,4 @@
-\begindata{tpltext,537950976}
+\begindata{text,537950976}
 \textdsversion{12}
 \define{comment
 
@@ -39,4 +39,4 @@ attr:[FontFamily AndyType Int 0]}
 
 */
 
-\enddata{tpltext,537950976}
+\enddata{text,537950976}

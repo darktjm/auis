@@ -521,7 +521,7 @@ typedef struct {
 
 static int palloc_create_pool (pool_type  **pool, unsigned int expected_size);
 static unsigned char *palloc (pool_type  *pool, unsigned int size);
-static unsigned int palloc_destroy_pool (pool_type  *pool);
+/* static unsigned int palloc_destroy_pool (pool_type  *pool); */
 
 static int palloc_create_pool (pool_type  **pool, unsigned int expected_size)
         {
@@ -550,6 +550,7 @@ static int palloc_create_pool (pool_type  **pool, unsigned int expected_size)
 
     (*pool)->first_block.next_block = 0;
 ===*/
+    *pool = NULL;
     return (0);
 }
 
@@ -587,6 +588,7 @@ return (unsigned char *) malloc( (size + 3) & (~3) );
 ===*/
 }
 
+#if 0 /* unused */
 static unsigned int palloc_destroy_pool (pool_type  *pool)
     {
 /*===
@@ -607,6 +609,7 @@ static unsigned int palloc_destroy_pool (pool_type  *pool)
 ===*/
     return(0);
 }
+#endif
 
 
 /****************************************************************************\

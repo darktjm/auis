@@ -10,7 +10,6 @@
 #include <sys/param.h>
 #include <pwd.h>
 #include <util.h>
-#include <environ.H>
 #include <errno.h>
 
 NO_DLL_EXPORT struct eventnode *RootEventNode = NULL;
@@ -65,7 +64,7 @@ int ReadDatesFromChampPath(const char  *champpath)
     FILE *fp;
     char *pathbuf;
 
-    if (!champpath) champpath = environ::GetProfile("champpath");
+    if (!champpath) champpath = getprofile("champpath");
     if (!champpath) champpath = "~/events.champ:~/.events.champ";
     champpath=pathbuf=NewString(champpath);
     while(pathbuf) {

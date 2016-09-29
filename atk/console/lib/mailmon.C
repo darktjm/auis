@@ -296,7 +296,7 @@ static int NewMsgs(FILE  *mf)
 
 	/* read a line into our buffer */
 	while ((c = getc(mf)) != EOF && c != '\n') {
-	    if (cp - line >= sizeof(line) - 1) {
+	    if (cp - line >= (int)sizeof(line) - 1) {
 		/* skip over the part that won't fit */
 		while ((c = getc(mf)) != EOF && c != '\n');
 		break;

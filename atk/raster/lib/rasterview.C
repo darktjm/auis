@@ -867,7 +867,8 @@ static void RasterIOCommand(class rasterview  *self, enum RasterIOType  rock)
 	char cmd[100];
 	int res;
 	strcpy(filename, "/tmp/wdXXXXXX");
-	mktemp(filename);
+	res = mkstemp(filename);
+	close(res);
 	if (rock == MakeWD)
 	    sprintf(cmd, "xwd %s -out %s", ((self)->DisplayClass() & graphic_Monochrome) ? "-xy" : "", filename);
 	else

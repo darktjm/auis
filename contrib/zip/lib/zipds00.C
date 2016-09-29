@@ -477,8 +477,9 @@ zip::Set_Stream_Source( zip_type_stream	       stream, const char			      *sourc
 /*=== deallocate any prior objects ===*/
     stream->zip_stream_image_anchor->zip_image_inferior = NULL;
     strcpy(temp_name, "/tmp/ZIPXXXXXX");
-    strcat(mktemp(temp_name), ".zip");
-    if ( ( temp_file = fopen( temp_name, "w+" ) ) )
+    int fd = mkstemp(temp_name);
+    /* strcat(temp_name, ".zip"); */ /* tjm - is this necessary? */
+    if ( ( temp_file = fdopen( fd, "w+" ) ) )
       { DEBUG(Open OK);
       if ( fwrite( source, 1, strlen( source ), temp_file ) )
 	{ DEBUG(Write OK);

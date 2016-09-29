@@ -92,6 +92,7 @@
 #include <sys/param.h>
 #include <sys/times.h>
 #include <fcntl.h>
+#include "../common/getstats_proto.h"
 
 #define	DF_COMMAND	"/bin/df"
 

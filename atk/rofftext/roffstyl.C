@@ -21,18 +21,11 @@
  *  This is a no-no on SPARC.
  */
 
-static void WriteText(class rofftext  *self);
 int ChangeStyle(class rofftext  *self,int  id,const char  *st);
 static void CloseStyle(class rofftext  *self);
 int BeginStyle(class rofftext  *self,const char  *st);
 void EndStyle(class rofftext  *self,int  ID);
 void CloseAllStyles(class rofftext  *self);
-
-
-static void WriteText(class rofftext  *self)
-{
-    (self)->Write(stdout,(long)self,1);
-}
 
 
 /* change style with id='id' to new style 'st'

@@ -14,15 +14,15 @@
 
 
 struct ps_statm {
-  int size, resident, share, trs, lrs, drs, dt;
+  long size, resident, share, trs, lrs, drs, dt;
 };
 
 struct ps_proc {
   char user[10], cmdline[256], cmd[40], ttyc[3], state;
-  int uid, pid, ppid, pgrp, session, tty, tpgid, utime, stime,
+  long uid, pid, ppid, pgrp, session, tty, tpgid, utime, stime,
     cutime, cstime, counter, priority, start_time, signal, blocked,
     sigignore, sigcatch;
-  unsigned int flags, min_flt, cmin_flt, maj_flt, cmaj_flt, timeout,
+  unsigned long flags, min_flt, cmin_flt, maj_flt, cmaj_flt, timeout,
     it_real_value, vsize, rss, rss_rlim, start_code, end_code,
     start_stack, kstk_esp, kstk_eip, wchan;
   struct ps_statm statm;

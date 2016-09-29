@@ -10,10 +10,6 @@ LIBS = ${UTILLIB}
 NormalObjectRule()
 NormalATKRule()
 
-#ifdef linux
-SYSLIBS=-lbsd
-#endif
-
 DynamicMultiObject(termulator, tm19 tmapp tmview, $(OBJS), $(UTILLIB),$(SYSLIBS),)
 InstallDynamicObject(termulator, tm19 tmapp tmview, $(FULLATKDLIBDIR))
 

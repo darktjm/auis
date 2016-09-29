@@ -357,7 +357,7 @@ typedef unsigned long Texpr;
 
 /* a struct compilation is used for each compilation.  
 	Old ones are saved for reuse */
-struct compilation {
+struct NO_DLL_EXPORT compilation {
 	struct compilation *next;
 	class tlex *tlex;
 	class rules *parser;

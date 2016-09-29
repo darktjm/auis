@@ -15,6 +15,7 @@
 #include <sitevars.h>
 #include <errno.h>
 #include <util.h>
+#include "socket.h"
 
 #ifdef ANSI_COMPILER
 extern char *inet_ntoa(unsigned long addr);
@@ -72,7 +73,7 @@ static void maptolower(char  *str)
 	ReportInternalError(self, "console:<make_socket> bind failed");
  */
 
-int make_socket(int  port)
+static int make_socket(int  port)
 {
 
     int desc, protonum;
@@ -186,7 +187,8 @@ if ((j = recvfrom(ConsoleSocket, ConsoleMessage, MESSAGESIZE, 0, (struct sockadd
     return 0;
 }
 
-int Bind (int  service, char  *host)
+#if 0
+static int Bind (int  service, char  *host)
         {
     int s;
     char buf[100];
@@ -219,4 +221,4 @@ int Bind (int  service, char  *host)
     }
     return s;
 }
-
+#endif
