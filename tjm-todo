@@ -1,16 +1,15 @@
 - finish image rewrite:
   - maybe replace Gifify with SnapshotToFile for generic image output
   - maybe de-gif ez2html and other HTML-related stuff
-  - verify serialization/deserialization of PNG, GIF, JPEG, and maybe
-    others
-  - maybe support all imageio types at once, with a pref to choose which
+  - maybe build all 3 imageio implementations at once, w/ pref to choose which
     - would need to make them separate shared objects & move back to atk/image
   - test with grayscale images (rasters) and 1-bit bitmaps
-  - look at raster library's import/export routines (at least xbm is broken)
+  - look at raster library's import/export routines (at least xbm & xwd broken)
   - clean up export/import menus (combine into one, since it's so small)
   - support parameters (other han just quality) for export (needed for
     some image types, but probably OK to defer to external programs)
     - at the very least, support setting file type independently of name
+- adew crashes a lot just doing the tutorial
 - adew: cut doesn't actually delete
   - when cutting table, table attempts to update due to deferred update
     even though it may be gone.  Thus, crash.
@@ -49,13 +48,11 @@
       ness finishes.  That's a lot of work for little benefit.  Another
       option would be to just crash more obviously when an in-progress
       script deletes itself or the item it's executing for.
-- adew crashes a lot just doing the tutorial
-- arbcon sometimes loses everything in the lower areas or side panels
 - recompiling some ness code after error crashes (found playing w/ letter.tmpl)
   not yet easily reproducable
 - need play module to either work or ignore (atk/music was dropped in 8.0)
 - many 3d link buttons have text overlapping bottom edge
-- pagedown eventually stops working (e.g. 2rtf) (and doesn't move cursor?)
+- pagedown eventually stops working (e.g. 2rtf)
 - questionaire.msg ice cream question doesn't do anything
 - org/treev: unfolded expands size, but doesn't shift tree to right
   if needed (i.e., left is severely cut off).  Also doesn't shift tree down
@@ -70,22 +67,18 @@
   - crashes on cleanup (e.g. AndrewProgramming.ez)
   - wrong ps filename (maybe due to crash on cleanup): .n instead of .ps
   - TOC is a nasty mess
-  - preview never starts up
 - enable mouse scroll wheel
 - add help-type hyperlink or other help button of some sort
   - add support for loading files directly in help, instead of just indexed
 - fix lack of updates when resizing windows
 - fix contrib/tm to use termios, etc.
-- fix console for modern Linux
 - org doesn't mark entire doc as modified when doc inset is modified
-- tests all apps, all insets, all docs, etc.
+- test all apps, all insets, all docs, etc.
   - squash any crashes
   - run valgrind on as much as possible
   - fix example docs to document C++-style code
   - find out purpose of every file installed in auis, and document.
-    - maybe switch to doxygen for API docs, since it's designed for C++
-    - separate docs for C++ API, .atkinit/bind commands, ness, prefs, apps
-    - get rid of all that stub documentation
+    - get rid of or fill in all that stub documentation (e.g. "proctables")
 - general cleanup:
   - remove all warnings
   - remove externs in c files
@@ -150,7 +143,6 @@ Long-term:
   - unicode support
   - truetype font support
   - make index entries insets
-  - make entire beast literate
   - undo
   - freedesktop.org integration
   - move from included bison to standard bison instead of cleaning it up
@@ -180,3 +172,4 @@ Long-term:
     few bugs due to bad if/else indentation, and I hate the indentation
     style used in general.  However, unless I can find a tool to do this
     without too much aggravation (GNU indent ain't it), this will wait.
+  - make entire beast literate (yeah, right - way too much effort)

@@ -404,6 +404,7 @@ html_MagicToString(char * x,int * len)
 	    return buf;
 	}
     }
+    *len = 0;
     return 0;
 }
 

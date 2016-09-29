@@ -418,7 +418,8 @@ psview::Gifify(const char *filename, long *pmaxw, long *pmaxh,
 
 	char command[300];
 	char tfnm[L_tmpnam];
-	tmpnam(tfnm);
+	sprintf(tfnm, "%s/XXXXXX", P_tmpdir);
+	close(mkstemp(tfnm));
 	sprintf(command, "%s %s | %s | %s | %s > %s",
 			"gs -q -sDEVICE=ppm -sOutputFile=-",
 			tfnm,

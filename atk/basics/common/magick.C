@@ -113,6 +113,8 @@ int imageio::Load(const char *fname, FILE *f)
 	    *dest++ = PixelGetBlueQuantum(pix[i]);
 	}
     }
+    /* apparently, destroying the wand doesn't free the pixel iterator */
+    DestroyPixelIterator(iter);
     DestroyMagickWand(wand);
     return 0;
 }

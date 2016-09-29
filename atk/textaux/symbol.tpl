@@ -1,4 +1,4 @@
-\begindata{tpltext,1}
+\begindata{text,1}
 \textdsversion{12}
 \define{symbol
 
@@ -10,4 +10,4 @@ attr:[FontFamily symbol Int 0]}
 attr:[Flags IncludeBeginning Int Clear]
 attr:[Flags IncludeEnd Int Clear]
 attr:[FontFamily symbola Int 0]}
-\enddata{tpltext,1}
+\enddata{text,1}

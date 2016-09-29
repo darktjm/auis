@@ -55,7 +55,7 @@ In the documentation, the source directory will be referred to as
 version in Andrew format is in the distribution at:}}
 
 
-\center{\typewriter{$ANDREWDIR/build/}}\typewriter{SetUp}\smaller{
+\center{\typewriter{$ANDREWDIR/build/}\typewriter{SetUp}}
 
 
 
@@ -65,9 +65,9 @@ version in Andrew format is in the distribution at:}}
 
 
 
-\smaller{\bigger{Copyright 1992, 1996 Carnegie Mellon University and IBM. 
+\smaller{Copyright 1992, 1996 Carnegie Mellon University and IBM. 
  All rights reserved. Please see further copyrights and disclaimer at the 
-end of this file.}}}
+end of this file.}
 
 \begindata{bp,538179592}
 Version 2
@@ -378,7 +378,7 @@ Comment on Help" command.
 
 "Yes" specifies that the Andrew Message System and other applications 
 should "try to" keep all file names under 14 characters.  "No" specifies 
-that they should not try to keep file names short, and probably won't.}
+that they should not try to keep file names short, and probably won't.}}
 
 
 \bigger{\section{	10.  Bulletin Board Database}
@@ -433,7 +433,7 @@ The previous value of the OfficialBboardRoot before it was last moved.}
 
 Specifies the default path giving the roots of all the message trees a user 
 will be able to see.  Users can override this with their *.mspath 
-preference.
+preference.}
 
 \italic{RequiredSubsFile: pathname}
 
@@ -679,14 +679,14 @@ pw_gecos field may contain information besides a user name.  \
 this option is "yes", validation via /usr/lib/aliases is always tried 
 before other validation mechanisms.
 
-}}\indent{\indent{
-}}The next three options are used to determine how local addresses are 
+}}\indent{
+The next three options are used to determine how local addresses are 
 validated.  All three values take an integer as an option.  Options with a 
 value of zero are not used for local address validation.  Options with 
 values greater than zero are taken in order from smallest value to largest. 
  If two options are assigned the same number, they are taken in arbitrary 
 order.   Names are considered valid if they can be validated by any of the 
-following options whose value is greater than 0.
+following options whose value is greater than 0.}
 
 
 \leftindent{\italic{AMS_WPValidation: integer
@@ -695,7 +695,7 @@ following options whose value is greater than 0.
 
 A value greater than 0 specifies that the White Pages may be used in local 
 name validation.  0 specifies that the White Pages will not be used in 
-local name validation.
+local name validation.}
 
 \italic{AMS_PasswdValidation: integer
 
@@ -704,7 +704,7 @@ local name validation.
 A value greater than 0  specifies that /etc/passwd may be used for local 
 validation. "0" specifies that /etc/passwd is not used for local 
 validation.  \
-
+}
 
 \italic{AMS_LocalDatabaseValidation: integer
 
@@ -1132,7 +1132,7 @@ Selected Word" from the pop-up menu to see the help document for: \
 
 }\helptopic{white-pages}}\italic{
 
-}
+}}
 \begindata{bp,538231848}
 Version 2
 n 0

@@ -42,6 +42,8 @@
 #include <setjmp.h>
 #include "ps.h"
 #include "getstats.h"
+#include "../common/getstats_proto.h"
+
 
 #define sendval(text) {printf text ;fflush(stdout);}
 /********************************************************************
@@ -205,25 +207,25 @@ float get_elapsed_time(void)
 unsigned int show_meminfo(void)
 {
   char memory[1024];
-  static int fd;
-  unsigned int main_mem, used_mem, free_mem, shared_mem, buf_mem;
-  unsigned int swap_mem, used_swap, free_swap;
+  FILE *fd;
+  unsigned long main_mem, used_mem, free_mem, shared_mem, buf_mem;
+  unsigned long swap_mem, used_swap, free_swap;
 
-  fd = open("/proc/meminfo", O_RDONLY, 0);
-  if (fd == -1) 
+  fd = popen("/usr/bin/free", "r");
+  if (!fd) 
     {
       end();
     }
-  read(fd,memory,sizeof(memory)-1);
-  close(fd);
-  sscanf(memory, "%*s %*s %*s %*s %*s %*s %u %u %u %u %u %*s %u %u %u",
+  fread(memory,sizeof(memory)-1, 1, fd);
+  fclose(fd);
+  sscanf(memory, "%*s %*s %*s %*s %*s %*s %*s %lu %lu %lu %lu %lu %*s %lu %lu %lu",
 	 &main_mem, &used_mem, &free_mem, &shared_mem, &buf_mem,
 	 &swap_mem, &used_swap, &free_swap);
 
   sendval(("%d:%d\n", VM, (int) (100 - (((float) free_mem / main_mem) * 100))));
-  sendval(("%d:%d\n", PAGEREPLACABLE, buf_mem / 1024));
-  sendval(("%d:%d\n", MEMACTIVE, used_mem / 1024));
-  sendval(("%d:%d\n", MEMFREE, free_mem / 1024));
+  sendval(("%d:%ld\n", PAGEREPLACABLE, buf_mem / 1024));
+  sendval(("%d:%ld\n", MEMACTIVE, used_mem / 1024));
+  sendval(("%d:%ld\n", MEMFREE, free_mem / 1024));
 #if 0
   printf("Mem:  %5dK av, %5dK used, %5dK free, %5dK shrd, %5d buff%s\n",
 	 main_mem/1024, used_mem/1024, free_mem/1024, 

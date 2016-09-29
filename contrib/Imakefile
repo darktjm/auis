@@ -21,7 +21,7 @@ RUNBTN = runbtn
 ZIP = zip
 #endif
 
-#if !defined(SGI_4D_ENV) && !SY_OS2 && !defined(linux)
+#if !defined(SGI_4D_ENV) && !SY_OS2
 TM = tm
 #endif
 

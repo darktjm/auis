@@ -6,27 +6,9 @@
 #include <andrewos.h>
 #include <sys/signal.h>
 #include <sys/errno.h>
-#ifdef linux
-#include <bsd/sgtty.h>
-#else
 
-#ifdef SOLARIS
-#undef M_UNIX
-#define M_UNIX 1
-#endif
-
-#ifdef M_UNIX
-#include <sys/termio.h>
-#include <sys/stream.h>
-#include <sys/ptem.h>
-#include <sys/ttold.h>
-#define CRMOD O_CRMOD
-#define RAW O_RAW
-#define CBREAK O_CBREAK
-#else
+#include <termios.h>
 #include <sgtty.h>
-#endif
-#endif
 
 #include <ctype.h>
 
@@ -127,15 +109,15 @@ static void trackTermulator(class tmview  *self)
     class termulator *tm=(class termulator *)self->dataobject;
     int pos=tm->cursor;
 
-    if(tm->mode&(CBREAK|RAW))
+    if(!(tm->mode.c_lflag&(ICANON))) /* what rawness matters? - tjm */
 	(self->keystate)->SetOverride((keystate_fptr)rawKeyLookup,(long)self);
     else
 	(self->keystate)->SetOverride(NULL,0);
 
     if(tm->errstr!=NULL && self->hasInputFocus){
 	char buf[100];
-	if(tm->errno!=0){
-	    sprintf(buf,"%s: %s",tm->errstr,strerror(tm->errno));
+	if(tm->errnum!=0){
+	    sprintf(buf,"%s: %s",tm->errstr,strerror(tm->errnum));
 	    message::DisplayString(self,0,buf);
 	}else
 	    message::DisplayString(self,0,tm->errstr);
@@ -158,7 +140,7 @@ static void trackTermulator(class tmview  *self)
     if((self)->GetDotLength()==0){
 	int dot=(self)->GetDotPosition();
 	if(dot!=pos &&
-	   (tm->mode&(CBREAK|RAW) ||
+	   (!(tm->mode.c_lflag&(ICANON)) || /* what rawness matters? */
 	    dot==(self->curpos)->GetPos())){
 	   (self)->SetDotPosition(pos);
 	   if((self)->Visible(dot))
@@ -266,7 +248,7 @@ void tmview::PostKeyState(class keystate  *ks)
 {
     class termulator *tm=(class termulator *)this->dataobject;
 
-    if(tm->mode&(CBREAK|RAW))
+    if(!(tm->mode.c_lflag&(ICANON))) /* what rawness matters? */
 	(this->keystate)->SetOverride((keystate_fptr)rawKeyLookup,(long)this);
     else
 	(this->keystate)->SetOverride(NULL,0);
@@ -340,7 +322,7 @@ static void selfInsert(class tmview  *self,long  key)
 	pos=(tm)->GetLength();
 
 #ifdef HACKEDNOECHO
-    if(tm->mode&ECHO)
+    if(tm->mode.c_lflag&ECHO)
 #endif /* HACKEDNOECHO */
 	(tm)->InsertCharacters(pos++,&c,1);
 #ifdef HACKEDNOECHO
@@ -379,7 +361,7 @@ static void eraseLine(class tmview  *self)
     fence=(tm)->GetFence();
 
 #ifdef HACKEDNOECHO
-    if(tm->mode&ECHO)
+    if(tm->mode.c_lflag&ECHO)
 #endif /* HACKEDNOECHO */
 	(tm)->DeleteCharacters(fence,(tm)->GetLength()-fence);
 
@@ -397,7 +379,8 @@ static void replaceCmd(class tmview  *self,long  how)
     class termulator *tm=
       (class termulator *)self->dataobject;
     int pos,len,fence,c;
-    char *cmd,buf[200],*p=buf;
+    const char *cmd;
+    char buf[200],*p=buf;
 
     tm->inpView=self;
 
@@ -533,8 +516,8 @@ static void startProc(class tmview  *self)
 {
     class termulator *tm=(class termulator *)self->dataobject;
     char buf[5000],*com;
-    char *shell=environ::Get("SHELL");
-    char *argbuf[500],**argv;
+    const char *shell=environ::Get("SHELL");
+    const char *argbuf[500],**argv;
 
     tm->inpView=self;
 

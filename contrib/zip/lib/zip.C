@@ -348,10 +348,11 @@ long Generate_Temp_File( class zip		      *self, FILE			      *file, char			    
 
   IN(Generate_Temp_File);
   strcpy(temp_name, "/tmp/ZIPXXXXXX");
-  strcat(mktemp(temp_name), ".zip");
+  int fd = mkstemp(temp_name);
+  /* strcat(temp_name, ".zip"); */ /* tjm - is this necessary? */
   DEBUGst(Temp-Name,temp_name);
   *generated_file_name = temp_name;
-  if ( (temp_file = fopen( temp_name, "w+" )) == NULL )
+  if ( (temp_file = fdopen( fd, "w+" )) == NULL )
     { DEBUG(Open Temp-File ERROR);
     status = zip_failure;
     }

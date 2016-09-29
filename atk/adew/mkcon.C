@@ -4,7 +4,7 @@
 \* ********************************************************************** */
 
 #include <andrewos.h> /* sys/file.h */
-#include <environ.H>
+#include <util.h>
 #include <stdio.h>
 #include <sys/param.h>
 #include <ctype.h>
@@ -48,8 +48,8 @@ static const char defstring[] =
 "-Help\n"
 "	Display this help message.\n";
 
-#define AWKPROG environ::AndrewDir("/lib/arbiters/conpros.awk")
-#define INSETAWKPROG environ::AndrewDir("/lib/arbiters/instpros.awk")
+#define AWKPROG AndrewDir("/lib/arbiters/conpros.awk")
+#define INSETAWKPROG AndrewDir("/lib/arbiters/instpros.awk")
 #define START "* user code begins here for "
 #define END "* user code ends here for "
 #define STARTCHAR '/'
@@ -388,7 +388,7 @@ int main(int argc, char  *argv[])
     int domake = FALSE;
     const char *func,*title,*sname;
     FILE *f;
-    if(environ::GetProfileSwitch("SecurityConscious", FALSE)) {
+    if(getprofileswitch("SecurityConscious", FALSE)) {
 	fprintf(stderr, "SecurityConsciousness does not permit createcon to run.\n");
 	exit(-1);
     }

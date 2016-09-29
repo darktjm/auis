@@ -636,16 +636,12 @@ long srctext::TranslateSrcInset(long pos)
 {
     long startinset=pos++, len=GetLength();
     int c, remembernewlines=0;
-    char linebuffer[81], filename[MAXPATHLEN+1];
+    char linebuffer[81];
     FILE *decodedfile;
     long difflength=0;
 
     /* open decoded file */
-    char *tfn=tmpnam(filename); /* randomize the filename */
-    if(tfn==NULL) {
-	fprintf(stderr, "srctext: Couldn't get a temporary filename.\n");
-    }
-    decodedfile= fopen(filename, "w+");
+    decodedfile= tmpfile();
     do  {
 	long chunklen;
 	/* skip over chunk separator (spaces), and count doomed newlines */
@@ -664,7 +660,6 @@ long srctext::TranslateSrcInset(long pos)
     } while (pos<len && linebuffer[0]!=SRCINSET_ENDCHAR);
     if (linebuffer[0]!=SRCINSET_ENDCHAR) {
 	/* bogus inset, not terminated */
-	unlink(filename);
 	fclose(decodedfile);
 	return 0;
     }
@@ -679,8 +674,7 @@ long srctext::TranslateSrcInset(long pos)
 
     /* insert decoded file into source */
     rewind(decodedfile);
-    difflength+= InsertSrcInsetFile(this, decodedfile, filename, pos);
-    unlink(filename); /* delete temporary decoded file */
+    difflength+= InsertSrcInsetFile(this, decodedfile, NULL, pos);
     fclose(decodedfile);
 
     /* remove SrcInset data */
@@ -916,7 +910,7 @@ boolean srctext::OutputSrcInset(FILE *file, long writeID, dataobject *inset)
 {
     boolean success=TRUE;
     FILE *tempfile;
-    char paddedbuffer[84], *linebuffer, filename[MAXPATHLEN+1];
+    char paddedbuffer[84], *linebuffer;
     /* check for special cases (compress insets) */
     if (ATK::IsTypeByName((inset)->GetTypeName(), "compress")) {
 	srctext *compresscontents= new srctext;
@@ -932,13 +926,8 @@ boolean srctext::OutputSrcInset(FILE *file, long writeID, dataobject *inset)
     linebuffer= paddedbuffer+1; /* don't mess with the separator char */
 
     /* open temp file and write inset out in normal format */
-    char *tfn=tmpnam(filename);
-    if(tfn==NULL) {
-	fprintf(stderr, "srctext: Couldn't get a temporary filename.\n");
-    }
-    tempfile= fopen(filename, "w+");
+    tempfile= tmpfile();
     if (!tempfile) return FALSE;
-    unlink(filename); /* this file is REALLY temporary */
     (inset)->Write(tempfile, writeID, 2 /* level 2, an inset */);
     /* read the temp file back in, encode64 it, and send result to source file */
     rewind(tempfile);

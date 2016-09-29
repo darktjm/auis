@@ -1,4 +1,4 @@
-\begindata{tpltext,538810860}
+\begindata{text,538810860}
 \textdsversion{12}
 \define{global
 }
@@ -258,4 +258,4 @@ attr:['color' 'Blue']}
 \define{magenta
 menu:[Color~5,Magenta~15]
 attr:['color' 'Magenta']}
-\enddata{tpltext,538810860}
+\enddata{text,538810860}

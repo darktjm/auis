@@ -52,9 +52,7 @@ CloneFigure(figview *viewer, figure *src, figure *dest,
 	figogrp *o;
 	struct point tmppt;
 
-	char *tnm = tmpnam(NULL);
-	FILE *fp = fopen(tnm, "w+");
-	unlink(tnm);
+	FILE *fp = tmpfile();
 
 	// write from src
 	src->Write(fp, im::GetWriteID(), 0);

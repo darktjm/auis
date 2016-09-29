@@ -446,13 +446,6 @@ void TurnOffAlarm(class ATK *atkarg_self, char  *rock)
 }
 
 
-static int LastX = 0, LastY = 0, MovingX;
-/* 
- * MovingX is 1 if X boundary is being moved, 0 if y is
- * being moved, and -1 if the right click was not near
- * any boundary.
- */
-
 struct display *FindInstrument(class consoleClass  *self, int  x, int  y)
 {
     struct display *mydisp;
@@ -500,6 +493,12 @@ int CheckMovingX(class consoleClass  *self, int  x , int  y)
     return(-1);
 }
 
+
+/* 
+ * MovingX is 1 if X boundary is being moved, 0 if y is
+ * being moved, and -1 if the right click was not near
+ * any boundary.
+ */
 
 void ResizeDisplay(class consoleClass  *self, int  x , int  y , int  LastX , int  LastY , int  MovingX)
 {

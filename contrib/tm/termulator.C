@@ -7,7 +7,7 @@
 #include <ctype.h>
 #include <sys/ioctl.h>
 #include <sys/signal.h>
-#include <sys/errno.h>
+#include <errno.h>
 #ifndef O_NDELAY
 #include <fcntl.h>
 #endif /* O_NDELAY */
@@ -26,31 +26,7 @@
 #include <attribs.h>
 #include <util.h>
 
-#ifdef hpux
-#include <sgtty.h>
-#include <sys/ptyio.h>
-#define CBREAK 0
-#endif /* hpux */
-
-#ifdef linux
-#undef M_UNIX
-#define M_UNIX 1
-#endif
-
-#ifdef SOLARIS
-#undef M_UNIX
-#define M_UNIX 1
-#endif
-
-#ifdef M_UNIX
-#include <sys/termio.h>
-#include <sys/stream.h>
-#include <sys/ptem.h>
-#include <sys/ttold.h>
-#define CRMOD O_CRMOD
-#define RAW O_RAW
-#define CBREAK O_CBREAK
-#endif
+#include <termios.h>
 
 /* ---------------------------------------------------------------- */
 
@@ -58,7 +34,7 @@
  ((self)->screen+(y)*((self)->width+1)+(x))
 
 static const char spaces[]="                                                                                ";
-#define SPACES (sizeof(spaces)-1)
+#define SPACES ((int)sizeof(spaces)-1)
 
 
 ATKdefineRegistry(termulator, text, NULL);
@@ -73,22 +49,7 @@ static char *cntlChar(class termulator  *self,char  *buf,long  len);
 static char *specialChar(class termulator  *self,char  *buf,long  len);
 static char *readDir(class termulator  *self,char  *buf,long  len);
 static void setupStyles(class termulator  *self);
-#ifdef hp9000s300
-#else /* hp9000s300 */
-#endif /* hp9000s300 */
 static void childDied(int  pid,class termulator  *self,int  *status);
-#if defined(hpux) || defined(_IBMR2) || defined(NeXT) || defined(sys_pmax_ul4) || defined(sys_dec_alpha)
-#ifndef INCORRECTSIGNALS
-#endif /* INCORRECTSIGNALS */
-#else /* !defined(hpux) && !defined(_IBMR2) && !defined(NeXT) && !defined(sys_pmax_ul4) */
-#if !defined(M_UNIX)
-#ifndef INCORRECTSIGNALS
-#endif /* INCORRECTSIGNALS */
-#else /* M_UNIX */
-#ifndef INCORRECTSIGNALS
-#endif /* INCORRECTSIGNALS */
-#endif /*M_UNIX */
-#endif /* defined(hpux) || defined(_IBMR2) || defined(NeXT) || defined(sys_pmax_ul4) */
 static void preInsert(class termulator  *self,long  *posP ,long  *fenceP);
 static void postInsert(class termulator  *self,long  pos,long  fence);
 
@@ -321,7 +282,7 @@ void termulator::Tab()
 void termulator::Newline(int  num)
 {
     if(this->screen>=0){
-	if((this->mode&(CRMOD|RAW))==CRMOD) /* \n -> \r\n */
+	if(this->mode.c_oflag & OCRNL) /* \n -> \r\n */
 	    this->x=0;
 	this->y+=num;
 	if(this->y>=this->height)
@@ -572,15 +533,14 @@ void termulator::Scroll(int  num)
 /* ---------------------------------------------------------------- */
 
 #define SYSERROR(str) \
-(this->errstr=str,this->errno=::errno,(this)->NotifyObservers(0))
+(this->errstr=str,this->errnum=errno,(this)->NotifyObservers(0))
 #define ERROR(str) \
-   (self->errstr=str,self->errno=0,(self)->NotifyObservers(0))
+   (self->errstr=str,self->errnum=0,(self)->NotifyObservers(0))
 
 static void readFromProc(FILE  *fp,class termulator  *self)
 {
     int pty=fileno(fp);
     int len;
-    struct sgttyb tty;
     char buf[4000];
 
     len=read(pty,buf,sizeof(buf));
@@ -592,7 +552,7 @@ static void readFromProc(FILE  *fp,class termulator  *self)
 	ERROR("EOF from child.");
 	return;
     }else if(len==-1){
-	if(::errno!=EINTR){
+	if(errno!=EINTR){
 	    im::RemoveFileHandler(fp);
 	    fclose(fp);
 	    self->ptyFile=NULL;
@@ -601,8 +561,7 @@ static void readFromProc(FILE  *fp,class termulator  *self)
 	return;
     }
 
-    ioctl(pty,TIOCGETP,&tty);
-    self->mode=tty.sg_flags;
+    tcgetattr(pty, &self->mode);
 
     (self)->ProcessOutput(buf,len);
 
@@ -675,7 +634,7 @@ static char *readDir(class termulator  *self,char  *buf,long  len)
     }
 
     if(len>0){
-	char *home=environ::Get("HOME");
+	const char *home=environ::Get("HOME");
 
 	if(self->cwd!=NULL)
 	    free(self->cwd);
@@ -833,7 +792,7 @@ termulator::termulator()
     this->screen= -1;
     this->cursor=0;
     this->lastSubmit=0;
-    this->mode=0;
+    memset(&this->mode, 0, sizeof(this->mode));
     this->insert=FALSE;
     this->standout=FALSE;
     this->width=80;
@@ -919,15 +878,15 @@ static void childDied(int  pid,class termulator  *self,WAIT_STATUS_TYPE  *status
     }
 
     self->pid=0;
-    self->mode=0;
+    memset(&self->mode, 0, sizeof(self->mode));
 
     ERROR(buf);
 }
 
+#if defined(hpux) || defined(_IBMR2) || defined(NeXT) || defined(sys_pmax_ul4) || defined(sys_dec_alpha)
+
 static int ON=1;
 /* Does ioctl take a pointer arg? */
-
-#if defined(hpux) || defined(_IBMR2) || defined(NeXT) || defined(sys_pmax_ul4) || defined(sys_dec_alpha)
 
 #define ENTER_TIOCREMOTE(self) \
 (self->remote || \
@@ -974,12 +933,13 @@ int termulator::StartProcess(const char  **args)
     class termulator *self=this;
     int     pid/*,ppid=getpid()*/;
     int     pty, slave;
+#if 0 /* use commented out below */
 #if POSIX_ENV
     int pgrp = getpgrp();
 #else
     int pgrp = getpgrp(0);
 #endif
-    struct sgttyb tty;
+#endif
 #ifdef TIOCSWINSZ
     struct winsize ws;
 #endif /* TIOCSWINSZ */
@@ -1030,7 +990,7 @@ int termulator::StartProcess(const char  **args)
 
     if((pid = osi_vfork()) < 0){
 	SYSERROR("startSubProc(vfork)");
-	return ::errno;
+	return errno;
     }
 
     if(pid == 0){
@@ -1079,13 +1039,10 @@ int termulator::StartProcess(const char  **args)
 	environ::Put("TERMCAP",(this)->GetTermcap());
 
 	/* kernel doesn't reset pty's */
-	ioctl(0,TIOCGETP,&tty);
-	tty.sg_flags|=CRMOD+ECHO;
-	tty.sg_flags&=~(CBREAK|RAW);
+	/* screw trying to replicate stty sane; just let it do the work */
+	system("/bin/stty sane");
 
-	ioctl(0,TIOCSETP,&tty);
-
-	execvp(args[0],args);
+	execvp(args[0],(char **)args);
 
 	/* totally lost it; can't do much else... */
 	_exit(-1);
@@ -1100,8 +1057,7 @@ int termulator::StartProcess(const char  **args)
 
     this->args=args;
 
-    ioctl(pty,TIOCGETP,&tty);
-    this->mode=tty.sg_flags;
+    tcgetattr(pty, &this->mode);
 
     return 0;
 }
@@ -1119,18 +1075,14 @@ void termulator::ProcessInput(char  *buf,long  len)
 {
     char *end=buf;
 
-#ifdef INCORRECTSIGNALS
-    if(this->mode&RAW)
-#else /* INCORRECTSIGNALS */
-    if(this->mode&(RAW|CBREAK))
-#endif /* INCORRECTSIGNALS */
+    if(!(this->mode.c_lflag & (ISIG|ICANON))) /* RAW - but what rawness? - tjm */
 	(this)->SendInput(buf,len);
     else{
 	while(len-->0)
 	    switch(*end++){
 		case '\r':
 #ifdef INCORRECTSIGNALS
-		    if(this->mode&CBREAK)
+		    if(!(this->mode.c_lflag & ICANON)) /* CBREAK - but what? */
 			end[-1]='\n';
 		    else
 #endif /* INCORRECTSIGNALS */
@@ -1161,7 +1113,7 @@ void termulator::ProcessInput(char  *buf,long  len)
 #endif /* hp9000s300 */
 		    }
 
-		    if(this->mode&ECHO)
+		    if(this->mode.c_lflag&ECHO)
 		        echoCTRL(this,*end);
 
 		    buf=end+1;
@@ -1190,8 +1142,8 @@ void termulator::SendInput(char  *buf,long  len)
 	SYSERROR("SendInput(write)");
 
 #ifdef INCORRECTSIGNALS
-    if(this->mode&ECHO){
-	if(this->mode&RAW)
+    if(this->mode.c_lflag&ECHO){
+	if(!(this->mode.c_lflag&(ICANON|ISIG))) /* what rawness matters? */
 	    (this)->ProcessOutput(buf,newlen);
 	else{
 	    char *end=buf;
@@ -1238,7 +1190,7 @@ void termulator::Submit()
 #endif /* INCORRECTSIGNALS */
 
 #ifdef HACKEDNOECHO
-    if(this->mode&ECHO)
+    if(this->mode.c_lflag&ECHO)
 #endif /* HACKEDNOECHO */
     {
 	char buf[5000],*p,*save;
@@ -1261,7 +1213,7 @@ void termulator::Submit()
 
 	    wrote=write(fileno(this->ptyFile),buf,p-buf);
 
-	    if(wrote==-1 && ::errno==EWOULDBLOCK){
+	    if(wrote==-1 && errno==EWOULDBLOCK){
 		ERROR("Process not ready for input.");
 		pos=opos;
 		break;
@@ -1352,7 +1304,7 @@ static void preInsert(class termulator  *self,long  *posP ,long  *fenceP)
 	    self->cmdEnv=
 	      (self->rootEnvironment)->InsertStyle(
 				 *fenceP,
-				 (self->mode&ECHO
+				 (self->mode.c_lflag&ECHO
 				  ?self->cmdStyle
 				  :self->noechoStyle),
 				 TRUE);
@@ -1376,8 +1328,7 @@ static void postInsert(class termulator  *self,long  pos,long  fence)
 long termulator::Read(FILE  *fp,long  id)
 {
     char buf[1000];
-    static char *argbuf[500];
-    char **args,dummyS[100];
+    char dummyS[100];
     int dummyI;
 
     if(this->currentlyReadingTemplateKluge)
@@ -1385,11 +1336,6 @@ long termulator::Read(FILE  *fp,long  id)
 
     if(fgets(buf,sizeof(buf),fp)==NULL)
 	return dataobject_PREMATUREEOF;
-
-    if(*buf=='\0')
-	args=NULL;
-    else
-	args=strtoargv(buf,argbuf,sizeof(argbuf));
 
     if(fscanf(fp,"\\enddata{%[^,],%d}\n",dummyS,&dummyI)!=2)
 	return dataobject_MISSINGENDDATAMARKER;
@@ -1407,7 +1353,7 @@ long termulator::Write(FILE  *fp,long  writeID,int  level)
 
 	(this)->SetWriteID(writeID);
 
-	fprintf(fp,"\\begindata{%s,%d}\n",
+	fprintf(fp,"\\begindata{%s,%ld}\n",
 		(this)->GetTypeName(), (this)->UniqueID());
 
 	if(this->args==NULL)
@@ -1415,7 +1361,7 @@ long termulator::Write(FILE  *fp,long  writeID,int  level)
 	else
 	    argvtostr(this->args,buf,sizeof(buf));
 
-	fprintf(fp,"%s\n\\enddata{%s,%d}\n",
+	fprintf(fp,"%s\n\\enddata{%s,%ld}\n",
 		buf,(this)->GetTypeName(), (this)->UniqueID());
     }
 
@@ -1455,8 +1401,6 @@ void termulator::EOT()
 
 void termulator::Signal(int  signo)
 {
-    int pgrp;
-
 #ifdef POSIX_ENV
     /*
      * NOTE: we assume here that if you have a POSIX system, you also
@@ -1483,29 +1427,20 @@ void termulator::Signal(int  signo)
 	SYSERROR("Signal(ioctl)");
 #endif /* TIOCSIG */
 #endif /* TIOCSIGNAL */
-#else /* POSIX_ENV */
-#ifdef hpux
-    if (0) {}
-#else /* hpux */
-    if(ioctl(fileno(this->ptyFile),TIOCGPGRP,&pgrp)<0)
-	SYSERROR("Signal(ioctl)");
-#endif /* hpux */
-    else if(killpg(pgrp,signo)==-1)
-	SYSERROR("Signal(kill)");
 #endif /* POSIX_ENV */
 }
 
-char *termulator::GetTerm()
+const char *termulator::GetTerm()
 {
     return "wm";
 }
 
-char *termulator::GetTermcap()
+const char *termulator::GetTermcap()
 {
     return "wm|termulator dumb terminal:bs";
 }
 
-char *termulator::GrabPrevCmd(char  *str)
+const char *termulator::GrabPrevCmd(char  *str)
 {
     long slen=(str==NULL ? 0 : strlen(str));
     struct cmd *start=this->curCmd;
@@ -1521,7 +1456,7 @@ char *termulator::GrabPrevCmd(char  *str)
     return NULL;
 }
 
-char *termulator::GrabNextCmd(char  *str)
+const char *termulator::GrabNextCmd(char  *str)
 {
     long slen=(str==NULL ? 0 : strlen(str));
     struct cmd *start=this->curCmd;

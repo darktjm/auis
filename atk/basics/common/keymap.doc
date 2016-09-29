@@ -299,7 +299,7 @@ boolean \bold{keymap_BindToKey} (
 
 \begindata{ctext,539485448}
 \textdsversion{12}
-\template{ctext}
+\template{c}
 \define{programexample
 }
 si=\function{proctable_DefineProc}("textview-self-insert", 

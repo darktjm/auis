@@ -73,7 +73,7 @@ extern int	ForceErrorMonitoring;
 
 
 void ToggleDebugging (class consoleClass  *self, char  *rock);
-static int LaccNameLookup(char  *string, char  **table);
+/* static int LaccNameLookup(char  *string, char  **table); */
 class fontdesc *SetupFont(const char  *fontname);
 static void CleanOldState(class consoleClass  *self);
 void KillInitExecProcesses(boolean  killPIDs);
@@ -442,6 +442,7 @@ const char * const ClickOptions[] = {
 };
 
 
+#if 0
 static int LaccNameLookup(const char  *string, const char  * const *table)
 {
     int i;
@@ -454,6 +455,7 @@ static int LaccNameLookup(const char  *string, const char  * const *table)
     }
     return(-1);
 }
+#endif
 
 
 static struct FuncStruct *AuxFuncLookup(const char  *string, int  index, int  len , int  *num)
@@ -666,7 +668,6 @@ static void CleanOldState(class consoleClass  *self)
 
 void KillInitExecProcesses(boolean  killPIDs)
 {
-    int     i;
     int     j;
     int    *child;
     SIGSET_TYPE the_mask, oldmask;
@@ -772,7 +773,7 @@ static char *lcfilename(char  *s				/* source string */)
     p = strrchr(s, '/');
     if (p == NULL || *p == '\0') p = s;
 
-    for (c = p; *c != '\0'; *c++) *c = DOWNCASE(*c);
+    for (c = p; *c != '\0'; c++) *c = DOWNCASE(*c);
 
     return(s);
 }
@@ -1178,7 +1179,7 @@ void SetupFromConsoleFile(class consoleClass  *self, boolean  IsStartup)
 	lineno = 1;
     if (pfd != NULL){
     while (*(string = GetNextToken(self, TRUE, pfd, &lineno, FALSE)) && !ParsingError) {
-	if ((string != NULL) && (string != "\n") && (string != "\0")) {
+	if (*string != '\n') { /* tjm - old tests were outright wrong */
 	    findex = stablk(string, OptionTable, 1);
 	} else {
 	    if(triedOnce) {

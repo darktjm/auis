@@ -4,7 +4,7 @@
 \* ********************************************************************** */
 
 /* evalstrdata is passed as the rock to parser and lexer */
-struct evalstrdata {
+struct NO_DLL_EXPORT evalstrdata {
 	int nextdbl;			/* which element of dbls to use next */
 	double dbls[20];		/* pointed to from value stack */
 	double dummydbl;		/* value to point to if none left */

@@ -1121,7 +1121,9 @@ print::print() {
 
 	bodystream = tmpfile();
 
-	filename = NewString(tmpnam(NULL));
+	filename = (char *)malloc(strlen(P_tmpdir) + 10);
+	sprintf(filename, "%s/prXXXXXX", P_tmpdir);
+	close(mkstemp(filename));
 	title = NewString("Andrew Document");
 
 	next_earlier = current_print;

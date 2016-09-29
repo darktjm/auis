@@ -245,7 +245,7 @@ the bottom row, and so on.
 \bold{D:}  Dump gofig values to stdout
 
 \bold{Esc-^DD:}  Toggle the debug flag
-}
+}}
 \section{Preferences}
 
 
@@ -332,7 +332,7 @@ sequence for subsequent stones (a, 0, or -)
 debug flag}
 
 
-}\section{ASCII Format}
+}}\section{ASCII Format}
 
 
 \leftindent{The ASCII format processor assumes that each line begins with a 

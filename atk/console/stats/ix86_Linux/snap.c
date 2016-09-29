@@ -18,7 +18,7 @@
 #include "ps.h"
 
 
-int mycpy(char *directory, char *ret, char *what, int cap, int nulls)
+static int mycpy(char *directory, char *ret, const char *what, int cap, int nulls)
 {
   static char filename[80];
   int fd;
@@ -49,9 +49,10 @@ struct ps_proc_head *take_snapshot(char a, char u, char x, char m, char r,
   struct ps_proc_head *ph = NULL;
   struct ps_proc *this = NULL, *that = NULL;
   struct stat sb;
+  regex_t reg;
 
   proc = opendir("/proc");
-  re_comp("^[0-9]*$");
+  regcomp(&reg, "^[0-9]*$", REG_NOSUB);
 
   ph = (struct ps_proc_head *) xcalloc(ph, sizeof(struct ps_proc_head));
   /* initializes ph->head and ph->count to zero ;-) */
@@ -59,7 +60,7 @@ struct ps_proc_head *take_snapshot(char a, char u, char x, char m, char r,
   this = ph->head;
 
   while((ent = readdir(proc))) { /* Extra parens to make gcc -Wall happy... */
-    if(!re_exec(ent->d_name)) continue;
+    if(regexec(&reg, ent->d_name, 0, NULL, 0)) continue;
     sprintf(filename, "/proc/%s", ent->d_name);
     stat(filename, &sb);
     if(!a && (sb.st_uid != uid)) continue;
@@ -67,9 +68,9 @@ struct ps_proc_head *take_snapshot(char a, char u, char x, char m, char r,
     mycpy(ent->d_name, this->cmdline, "cmdline", sizeof(this->cmdline), 1);
     if(!mycpy(ent->d_name, stat_str, "stat", sizeof(stat_str), 0)) continue;
 
-    sscanf(stat_str, "%d %s %c %d %d %d %d %d %u %u "
-	   "%u %u %u %d %d %d %d %d %d %u %u %d %u %u %u %u %u %u %u %u %d "
-	   "%d %d %d %u",
+    sscanf(stat_str, "%ld %s %c %ld %ld %ld %ld %ld %lu %lu "
+	   "%lu %lu %lu %ld %ld %ld %ld %ld %ld %lu %lu %ld %lu %lu %lu %lu %lu %lu %lu %lu %ld "
+	   "%ld %ld %ld %lu",
 	   &this->pid, this->cmd, &this->state, &this->ppid,
 	   &this->pgrp, &this->session, &this->tty, &this->tpgid,
 	   &this->flags, &this->min_flt, &this->cmin_flt,
@@ -92,7 +93,7 @@ struct ps_proc_head *take_snapshot(char a, char u, char x, char m, char r,
        proc filesystem, so this only happens if a specific tty was passed. */
     if(m) {
       if(!mycpy(ent->d_name, stat_str, "statm", sizeof(stat_str), 0)) continue;
-      sscanf(stat_str, "%d %d %d %d %d %d %d",
+      sscanf(stat_str, "%ld %ld %ld %ld %ld %ld %ld",
 	     &this->statm.size, &this->statm.resident,
 	     &this->statm.share, &this->statm.trs,
 	     &this->statm.lrs, &this->statm.drs,
@@ -120,6 +121,7 @@ struct ps_proc_head *take_snapshot(char a, char u, char x, char m, char r,
     that->next = (struct ps_proc *) NULL;
     free (this);
   } else this->next = (struct ps_proc *) NULL;
+  regfree(&reg);
   return ph;
 }
 
@@ -144,9 +146,9 @@ struct ps_proc_head *get_process(int pid, int m) {
   if(!mycpy(fn, stat_str, "stat", sizeof(stat_str), 0))
     { free(ret); return ph; }
 
-  sscanf(stat_str, "%d %s %c %d %d %d %d %d %u %u "
-	 "%u %u %u %d %d %d %d %d %d %u %u %d %u %u %u %u %u %u %u %u %d "
-	 "%d %d %d %u",
+  sscanf(stat_str, "%ld %s %c %ld %ld %ld %ld %ld %lu %lu "
+	 "%lu %lu %lu %ld %ld %ld %ld %ld %ld %lu %lu %ld %lu %lu %lu %lu %lu %lu %lu %lu %ld "
+	 "%ld %ld %ld %lu",
 	 &ret->pid, ret->cmd, &ret->state, &ret->ppid,
 	 &ret->pgrp, &ret->session, &ret->tty, &ret->tpgid,
 	 &ret->flags, &ret->min_flt, &ret->cmin_flt,
@@ -162,7 +164,7 @@ struct ps_proc_head *get_process(int pid, int m) {
   if(m) {
     if(!mycpy(fn, stat_str, "statm", sizeof(stat_str), 0))
       { free(ret); return ph; }
-    sscanf(stat_str, "%d %d %d %d %d %d %d",
+    sscanf(stat_str, "%ld %ld %ld %ld %ld %ld %ld",
 	   &ret->statm.size, &ret->statm.resident,
 	   &ret->statm.share, &ret->statm.trs,
 	   &ret->statm.lrs, &ret->statm.drs,
@@ -189,15 +191,16 @@ struct ps_proc_head *refresh_snapshot(struct ps_proc_head *ph,
   static char stat_str[4096];
   struct ps_proc *this = NULL, *that = NULL;
   struct stat sb;
+  regex_t reg;
 
   proc = opendir("/proc");
-  re_comp("^[0-9]*$");
+  regcomp(&reg, "^[0-9]*$", REG_NOSUB);
 
   ph->count = 0;
   this = ph->head;
 
   while((ent = readdir(proc))) { /* Extra parens to make gcc -Wall happy... */
-    if(!re_exec(ent->d_name)) continue;
+    if(regexec(&reg, ent->d_name, 0, NULL, 0)) continue;
     sprintf(filename, "/proc/%s", ent->d_name);
     stat(filename, &sb);
     if(!a && (sb.st_uid != uid)) continue;
@@ -205,9 +208,9 @@ struct ps_proc_head *refresh_snapshot(struct ps_proc_head *ph,
     mycpy(ent->d_name, this->cmdline, "cmdline", sizeof(this->cmdline), 1);
     if(!mycpy(ent->d_name, stat_str, "stat", sizeof(stat_str), 0)) continue;
 
-    sscanf(stat_str, "%d %s %c %d %d %d %d %d %u %u "
-	   "%u %u %u %d %d %d %d %d %d %u %u %d %u %u %u %u %u %u %u %u %d "
-	   "%d %d %d %u",
+    sscanf(stat_str, "%ld %s %c %ld %ld %ld %ld %ld %lu %lu "
+	   "%lu %lu %lu %ld %ld %ld %ld %ld %ld %lu %lu %ld %lu %lu %lu %lu %lu %lu %lu %lu %ld "
+	   "%ld %ld %ld %lu",
 	   &this->pid, this->cmd, &this->state, &this->ppid,
 	   &this->pgrp, &this->session, &this->tty, &this->tpgid,
 	   &this->flags, &this->min_flt, &this->cmin_flt,
@@ -230,7 +233,7 @@ struct ps_proc_head *refresh_snapshot(struct ps_proc_head *ph,
        proc filesystem, so this only happens if a specific tty was passed. */
     if(m) {
       if(!mycpy(ent->d_name, stat_str, "statm", sizeof(stat_str), 0)) continue;
-      sscanf(stat_str, "%d %d %d %d %d %d %d",
+      sscanf(stat_str, "%ld %ld %ld %ld %ld %ld %ld",
 	     &this->statm.size, &this->statm.resident,
 	     &this->statm.share, &this->statm.trs,
 	     &this->statm.lrs, &this->statm.drs,
@@ -263,6 +266,7 @@ struct ps_proc_head *refresh_snapshot(struct ps_proc_head *ph,
       free_psproc(this->next);
     this->next = (struct ps_proc *) NULL;
   }
+  regfree(&reg);
   return ph;
 }
 

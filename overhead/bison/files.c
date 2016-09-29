@@ -59,11 +59,9 @@ char *tabfile;
 char *attrsfile;
 char *guardfile;
 char *actfile;
-static char *tmpattrsfile;
-static char *tmptabfile;
-static char *tmpdefsfile;
 
 static FILE *tryopen(const char *name, const char *mode);
+static FILE *tryopen_tmp();
 
 int fixed_outfiles = 0;
 
@@ -96,21 +94,9 @@ openfiles(void)
   int base_length;
   int short_base_length;
 
-#if defined (VMS) & !defined (__VMS_POSIX)
-  const char *tmp_base = "sys$scratch:b_";
-#else
-  const char *tmp_base = "/tmp/b.";
-#endif
-  int tmp_len;
-
 #ifdef MSDOS
-  tmp_base = getenv ("TMP");
-  if (tmp_base == 0)
-    tmp_base = "";
   strlwr (infile);
 #endif /* MSDOS */
-
-  tmp_len = strlen (tmp_base);
 
   if (spec_outfile)
     {
@@ -214,39 +200,16 @@ openfiles(void)
       actfile = stringappend(name_base, short_base_length, ".act");
       faction = tryopen(actfile, "w");
     } 
-
-#ifdef MSDOS
-  if (! noparserflag)
-    actfile = mktemp(stringappend(tmp_base, tmp_len, "acXXXXXX"));
-  tmpattrsfile = mktemp(stringappend(tmp_base, tmp_len, "atXXXXXX"));
-  tmptabfile = mktemp(stringappend(tmp_base, tmp_len, "taXXXXXX"));
-  tmpdefsfile = mktemp(stringappend(tmp_base, tmp_len, "deXXXXXX"));
-#else
-  if (! noparserflag)
-    actfile = mktemp(stringappend(tmp_base, tmp_len, "act.XXXXXX"));
-  tmpattrsfile = mktemp(stringappend(tmp_base, tmp_len, "attrs.XXXXXX"));
-  tmptabfile = mktemp(stringappend(tmp_base, tmp_len, "tab.XXXXXX"));
-  tmpdefsfile = mktemp(stringappend(tmp_base, tmp_len, "defs.XXXXXX"));
-#endif /* not MSDOS */
-
-  if (! noparserflag)
-    faction = tryopen(actfile, "w+");
-  fattrs = tryopen(tmpattrsfile,"w+");
-  ftable = tryopen(tmptabfile, "w+");
+  else
+    faction = tryopen_tmp();
+  fattrs = tryopen_tmp();
+  ftable = tryopen_tmp();
 
   if (definesflag)
     {
       defsfile = stringappend(name_base, base_length, ".h");
-      fdefines = tryopen(tmpdefsfile, "w+");
+      fdefines = tryopen_tmp();
     }
-
-#ifndef MSDOS
-  if (! noparserflag)
-    unlink(actfile);
-  unlink(tmpattrsfile);
-  unlink(tmptabfile);
-  unlink(tmpdefsfile);
-#endif
 
 	/* These are opened by `done' or `open_extra_files', if at all */
   if (spec_outfile)
@@ -333,6 +296,20 @@ tryopen(const char *name, const char *mode)
   return ptr;
 }
 
+static FILE *
+tryopen_tmp(void)
+{
+  FILE	*ptr;
+
+  ptr = tmpfile();
+  if (ptr == NULL)
+    {
+      perror(program_name);
+      done(2);
+    }
+  return ptr;
+}
+
 void
 done(int k)
 {
@@ -380,21 +357,9 @@ done(int k)
     }
 
 #if defined (VMS) & !defined (__VMS_POSIX)
-  if (faction && ! noparserflag)
-    delete(actfile);
-  if (fattrs)
-    delete(tmpattrsfile);
-  if (ftable)
-    delete(tmptabfile);
   if (k==0) sys$exit(SS$_NORMAL);
   sys$exit(SS$_ABORT);
 #else
-#ifdef MSDOS
-  if (actfile && ! noparserflag) unlink(actfile);
-  if (tmpattrsfile) unlink(tmpattrsfile);
-  if (tmptabfile) unlink(tmptabfile);
-  if (tmpdefsfile) unlink(tmpdefsfile);
-#endif /* MSDOS */
   exit(k);
 #endif /* not VMS, or __VMS_POSIX */
 }
