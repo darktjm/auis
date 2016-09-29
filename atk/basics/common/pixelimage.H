@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _pixelimage_H_
 #define _pixelimage_H_
 /* ********************************************************************** *\

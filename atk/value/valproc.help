@@ -7,18 +7,14 @@
 
 }
 
-"etextview-return-cmd" 	"Handle enter key"	"\\015"
+"etextview-return-cmd" 	"Handle enter key"	"^M"
 
-"etextview-cancel-cmd"	"Handle ^G"	 "\\007"
+"etextview-cancel-cmd"	"Handle ^G"	 "^G"
 
-"etextview-clear-cmd"	"Handle ^U"	 "\\025"
+"etextview-clear-cmd"	"Handle ^U"	 "^U"
 
 
-"metextview-return-cmd"	"Handle menter key"	"\\015"
-
-"metextview-cancel-cmd"	"Handle ^G	 "\\007"
-
-"metextview-clear-cmd"	"Handle ^U"	 "\\025"
+"metextview-return-cmd"	"Handle menter key"	"^M"
 
 
 \begindata{bp,537558784}

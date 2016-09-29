@@ -149,7 +149,7 @@ the set a, b, c, ..., n.
 \bold{No Auto Notes:}  No annotations will be inserted automatically.
 
 
-Enter Note:  You are prompted in the message line for a note.  You may type 
+\bold{Enter Note:}  You are prompted in the message line for a note.  You may type 
 an integer, a letter, or any graphic character.  These characters are 
 displayed specially:   ^ + % @ # - ~ _ &;  see the discussion of 
 \bold{ASCII format}.}
@@ -242,8 +242,9 @@ the bottom row, and so on.
 \bold{ESC-y: }Copy ASCII from cut buffer and fill diagram.
 
 \smaller{
-\bold{D:}  Dump gofig values to stdout}
+\bold{D:}  Dump gofig values to stdout
 
+\bold{Esc-^DD:}  Toggle the debug flag
 }
 \section{Preferences}
 
@@ -261,6 +262,10 @@ An operation is available to convert ASCII diagrams to gofigs in place:
 replaced by a gofig containing the converted form of the diagram. 
  Initiating the object is done by whatever keystroke or menu binding you 
 choose.
+
+
+\bindlist{\bold{gofig-convert}   }\binddesc{- convert selected text to 
+a gofig object}
 
 
 Bindings are specified in your $HOME/.atkinit file or the .\italic{app}init 
@@ -322,9 +327,6 @@ clicking on stones (A, B, W, E, or S)}
 
 \bindlist{\bold{gofigview-set-note-mode}}\binddesc{  - chooses note 
 sequence for subsequent stones (a, 0, or -)
-
-\bindlist{\bold{gofigview-board-color}    }\binddesc{- adjust board color 
-(R, G, B, r, g, b)}}
 
 \bindlist{\bold{gofig-invert-debug}       }\binddesc{- Toggle the gofigview 
 debug flag}

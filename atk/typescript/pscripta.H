@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _pipescriptapp_H_
 #define _pipescriptapp_H_
 /* ********************************************************************** *\

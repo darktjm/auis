@@ -1,6 +1,5 @@
 #ifndef _ATEXT_H_
 #define _ATEXT_H_
-ATK_INTER
 /* Copyright 1996 Carnegie Mellon University All rights reserved. */
 #include <awidget.H>
 #include <fontdesc.H>

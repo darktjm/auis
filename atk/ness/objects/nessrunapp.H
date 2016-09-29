@@ -1,4 +1,3 @@
-ATK_INTER
 
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1991 - All Rights Reserved      *

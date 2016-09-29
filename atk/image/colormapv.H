@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _colormapv_H_
 #define _colormapv_H_
 

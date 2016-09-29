@@ -1,7 +1,6 @@
 /* Copyright 1995 Carnegie Mellon University  --All rights reserved */
 #ifndef _webview_H_
 #define _webview_H_
-ATK_INTER
 /** \addtogroup libhtmltext
  * @{ */
 #include <htmltextview.H>

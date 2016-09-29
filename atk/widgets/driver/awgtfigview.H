@@ -1,6 +1,5 @@
 #ifndef _AWgtFigView_H_
 #define _AWgtFigView_H_
-ATK_INTER
 /* Copyright 1996 Carnegie Mellon University All rights reserved. */
 /** \addtogroup libawidget
  * @{ */

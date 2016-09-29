@@ -33,20 +33,6 @@ SuiteButtonActiveBackground: black
 #~type color
 #~views string color
 #~help
-The color of the label for an active button.
-#~endhelp
-SuiteButtonActiveCaptionColor: black
-
-#~type color
-#~views string color
-#~help
-The color of the label for a passive button.
-#~endhelp
-SuiteButtonPassiveCaptionColor: grey
-
-#~type color
-#~views string color
-#~help
 The foreground color for a passive button.
 #~endhelp
 SuiteButtonPassiveForeground: black

@@ -164,6 +164,21 @@ So far, the following incompatibilities have been introduced:
  - I have removed all support for fbd font files (both the converter
    and the fbd-format orignals of the Andrew fonts).
 
+ - I have removed all known compatibility aliases for proc names.
+   This means that old key/menu binding files and ness scripts may no
+   longer work.  These should be fixed to use the proper fully
+   qualified proc name.  All 39 commands formerly prefixed by raster-
+   are now prefixed by rasterv-.  In addition: 
+
+     Removed                    Replacement
+     -------                    -----------
+     exit                       im-exit-program
+     play-keyboard-macro        im-play-keyboard-macro
+     redraw-window              im-redraw-window
+     srctextview-tab            srctextview-reindent
+     start-keyboard-macro       im-start-keyboard-macro
+     stop-keyboard-macro        im-stop-keybaord-macro
+
 Goals
 -----
 
@@ -183,7 +198,9 @@ the main points:
   - link-clean: ensure that all exported symbols are defined in a
     header, and all imported symbols come from a header (i.e., no extern
     in C files).  Also, any symbols not meant to be exported must be
-    declared static.
+    declared static.  Note that in C++, I am not aware of a method to
+    prevent exporting class information other than the GCC-specific
+    method of preventing leaks outside of a shared object.
 
   - make it as warning-clean as possible with the strictest set of
     warnings I can manage.

@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _dictionary_H_
 #define _dictionary_H_
 /* ********************************************************************** *\

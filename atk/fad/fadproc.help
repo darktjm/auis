@@ -11,53 +11,58 @@ fadview-keys:  Get keyed commands
 
 
 
-Menu functions:
+Menu functions: (and key parameter, and key equivalents, unless in parentheses)
 
 
-"File,Read Fad~50"
+R "File,Read Fad~50"
 
-"Icon~5,Next icon~10"
+f "Icon~5,Next icon~10"
 
-"Icon~5,Previous icon~11"
+u "Icon~5,Previous icon~11"
 
-"Icon~5,Pick new icons~21"
+I "Icon~5,Pick new icons~21"
 
-"Mode~2,Line~1"
+N "Mode~2,Line~1"
 
-"Mode~2,Icon~2"
+E "Mode~2,Icon~2"
 
-"Mode~2,Label~3"
+(L) "Mode~2,Label~3"
 
-"Mode~2,Box~4"
+b "Mode~2,Box~4"
 
-"Mode~2,Action Button~5"
+B "Mode~2,Action Button~5"
 
-"Misc~7,Delete last item~10"
+d "Misc~7,Delete last item~10"
 
-"Misc~7,Delete current frame~11"
+D "Misc~7,Delete current frame~11"
 
-"Misc~7,Set Label Font~30"
+(F) "Misc~7,Set Label Font~30"
 
-"Misc~7,Set # animation frames~31"
+(#) "Misc~7,Set # animation frames~31"
 
-"Misc~7,Set frame delay~32"
+(t) "Misc~7,Set frame delay~32"
 
-"Fad~1,Repeat frame~30"
+r "Fad~1,Repeat frame~30"
 
-"Fad~1,Pick frame~22"
+(p) "Fad~1,Pick frame~22"
 
-"Fad~1,Next frame~20"
+n "Fad~1,Next frame~20"
 
-"Fad~1,Previous frame~21"
+l "Fad~1,Previous frame~21"
 
-"Fad~1,Animate~5"
+a "Fad~1,Animate~5"
 
-"Fad~1,Animate portion~6"
+(A) "Fad~1,Animate portion~6"
 
-"Fad,Copy last frame
+m ?
+
+P ?
+
+(H) is an alias for a
 
 \begindata{bp,537558784}
 \enddata{bp,537558784}
 \view{bpv,537558784,814,0,0}
 Copyright 1992 Carnegie Mellon University and IBM.  All rights reserved.
 \enddata{text,538375988}
+

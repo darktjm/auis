@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _application_H_
 #define _application_H_
 /* ********************************************************************** *\

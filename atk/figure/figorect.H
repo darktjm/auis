@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _figorect_H_
 #define _figorect_H_
 /** \addtogroup libfigure

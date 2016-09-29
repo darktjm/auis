@@ -7,7 +7,6 @@
 
 #ifndef _ez2htmlapp_H_
 #define _ez2htmlapp_H_
-ATK_INTER
 /** \addtogroup libhtmltext
  * @{ */
 enum gifmode {

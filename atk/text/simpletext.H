@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _simpletext_H_
 #define _simpletext_H_
 /* ********************************************************************** *\

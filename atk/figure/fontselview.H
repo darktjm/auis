@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _fontselview_H_
 #define _fontselview_H_
 /** \addtogroup libfigure

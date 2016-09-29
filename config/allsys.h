@@ -222,7 +222,6 @@ typedef int (*procedure)();
 #define HAVE_POSIX_SIGNALS 1
 #define HAVE_WAITPID 1
 
-#define ATK_INTER 
 #define ATK_IMPL(x)
 #endif /* In_Imake */
 

@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _textflowview_H_
 #define _textflowview_H_
 

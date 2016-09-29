@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _rastoolview_H_
 #define _rastoolview_H_
 /* ********************************************************************** *\

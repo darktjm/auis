@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _figure_H_
 #define _figure_H_
 /** \addtogroup libfigure libfigure.so

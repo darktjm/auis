@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _stylesheet_H_
 #define _stylesheet_H_
 /* ********************************************************************** *\

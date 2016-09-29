@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _clicklistV_H_
 #define _clicklistV_H_
 /* ********************************************************************** *\

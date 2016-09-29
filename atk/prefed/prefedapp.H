@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _prefedapp_H_
 #define _prefedapp_H_
 /* Copyright 1992 Carnegie Mellon University All rights reserved. */

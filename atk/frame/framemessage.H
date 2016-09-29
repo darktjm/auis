@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _framemessage_H_
 #define _framemessage_H_
 /* ********************************************************************** *\

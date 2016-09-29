@@ -5,7 +5,7 @@
 
 }
 
-tags-rebuild-tags [for textview]    Regenerate the tag file with ctags
+tags-open [for textview]            Goto the tag whose name is passed on the command line.
 
 tags-load-tag-file [for textview]   Load a tag file from the current directory
 

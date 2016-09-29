@@ -1,7 +1,6 @@
 /* Copyright 1995 Carnegie Mellon University All rights reserved. */
 #ifndef _AString_H_
 #define _AString_H_
-ATK_INTER
 
 /** \addtogroup libawidget
  * @{ */

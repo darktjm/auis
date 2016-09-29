@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _launchapp_H_
 #define _launchapp_H_
 /* Copyright 1992 Carnegie Mellon University All rights reserved. */

@@ -1,6 +1,5 @@
 #ifndef _ahash_H_
 #define _ahash_H_
-ATK_INTER
 /* ********************************************************************** *\
  *	   Copyright Carnegie Mellon, 1996 - All Rights Reserved          *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *

@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _suitex1app_H_
 #define _suitex1app_H_
 /* Copyright 1993 Carnegie Mellon University All rights reserved. */

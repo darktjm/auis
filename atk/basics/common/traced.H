@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _traced_H_
 #define _traced_H_
 /* Copyright 1992 Andrew Toolkit Consortium, Carnegie Mellon University */

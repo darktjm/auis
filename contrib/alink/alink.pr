@@ -22,7 +22,7 @@ ALinkStyle: 2
 #~help
 When set to yes you will be prompted to press return to start recording when you use the menu, or the proctable function to change the alink's recording.  Otherwise recording will begin immediately.
 #~endhelp
-PromptForRecording: yes
+PromptForRecord: yes
 
 #~type integer
 #~views integer slider
@@ -46,17 +46,3 @@ Earphones: no
 Sets the recording gain, 0 is effectively off, 99 is the loudest.
 #~endhelp
 RecordLevel: 50
-
-#~type color
-#~views string color
-#~help
-The foreground color, used for the text of the button.  Also combined with the background color to compute shadow colors for the 3d styles.
-#~endhelp
-ALinkForeground: black
-
-#~type color
-#~views string color
-#~help
-The background color, used for the text of the button.  Also combined with the fackground color to compute shadow colors for the 3d styles.
-#~endhelp
-ALinkBackground: black

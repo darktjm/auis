@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _helloworldapp_H_
 #define _helloworldapp_H_
 /* ********************************************************************** *\

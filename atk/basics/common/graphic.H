@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _graphic_H_
 #define _graphic_H_
 

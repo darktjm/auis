@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _nestedmark_H_
 #define _nestedmark_H_
 /* ********************************************************************** *\

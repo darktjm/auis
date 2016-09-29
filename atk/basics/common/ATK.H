@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _ATK_H
 #define _ATK_H
 

@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _chlistview_H_
 #define _chlistview_H_
 /* ********************************************************************** *\

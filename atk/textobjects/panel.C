@@ -167,7 +167,7 @@ boolean panel::InitializeClass()
         struct proctable_Entry *pte;
         unsigned char s[2];
 
-        pte = proctable::DefineProc("key-dispatch",
+        pte = proctable::DefineProc("panel-key-dispatch",
           (proctable_fptr)KeyDispatch, &panel_ATKregistry_ , NULL, NULL);
 
         s[1] = '\0';

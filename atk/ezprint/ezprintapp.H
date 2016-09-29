@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _ezprintapp_H_
 #define _ezprintapp_H_
 /* ********************************************************************** *\

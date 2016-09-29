@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _helpcon_H_
 #define _helpcon_H_
 /* user code begins here for HeaderInfo */

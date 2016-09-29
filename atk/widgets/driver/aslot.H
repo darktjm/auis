@@ -1,7 +1,6 @@
 /* Copyright 1995 Carnegie Mellon University All rights reserved. */
 #ifndef _ASlot_H_
 #define _ASlot_H_
-ATK_INTER
 
 /** \addtogroup libawidget
  * @{ */

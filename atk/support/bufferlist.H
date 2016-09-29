@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _bufferlist_H_
 #define _bufferlist_H_
 /* ********************************************************************** *\

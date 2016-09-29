@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _phlumphview_H_
 #define _phlumphview_H_
 

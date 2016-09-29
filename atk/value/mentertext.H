@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _mentertext_H_
 #define _mentertext_H_
 /* ********************************************************************** *\

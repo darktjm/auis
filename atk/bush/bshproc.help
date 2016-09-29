@@ -5,9 +5,30 @@
 
 
 
-bushv-exit:  exit bush; menulist "Quit~70"
+bushv-exit:  Exit.  If any file is modified ask for confirmation. 
+("^X^C"; "Quit~99") 
 
-bushv-debug:  toggle bush debug flag
+bushv-DEBUG:  Toggle bush debug flag
 
-bushv-change-directory:  change the root dir to the passed string\
+bushv-switch:  Switch to a new directory.
+
+bushv-destroy:  Destroy the current directory/files.
+
+bushv-entries-page-down:  Scroll entries list down.  ("Esc-E", "^V"; 
+"Entries~10,Page Down~10")
+
+bushv-entries-page-up:  Scroll entries list up.  ("Esc-G", "Esc-v"; 
+"Entries~10,Page Up~20")
+
+bushv-pop:  Pop up a level.
+
+bushv-rescan:  Rescan the current directory.
+
+bushv-save-file:  Saves buffer into its current file.  ("^X^S"; 
+"Save~20")
+
+bushv-set-printer:  Set the default printer.  ("File~10,Set Printer~20")
+
+bushv-write-file  Prompt for a file to save.  ("^X^W", 
+"File~10,Save As~1")
 \enddata{text,268849924}

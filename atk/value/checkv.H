@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _checkv_H_
 #define _checkv_H_
 

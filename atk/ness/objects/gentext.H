@@ -2,7 +2,6 @@
 
 #ifndef _gentext_H_
 #define _gentext_H_
-ATK_INTER
 /** \addtogroup libness
  * @{ */
 /* gentext.H

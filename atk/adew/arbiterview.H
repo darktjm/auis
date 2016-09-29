@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _arbiterview_H_
 #define _arbiterview_H_
 /* ********************************************************************** *\

@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _updatelist_H_
 #define _updatelist_H_
 /* ********************************************************************** *\

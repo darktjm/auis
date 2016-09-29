@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _rofftextapp_H_
 #define _rofftextapp_H_
 /* ********************************************************************** *\

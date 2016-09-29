@@ -1,4 +1,3 @@
-ATK_INTER
 /* Copyright 1994 Carnegie Mellon University All rights reserved. */
 #ifndef _scrolling_H_
 #define _scrolling_H_

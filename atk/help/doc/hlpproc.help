@@ -9,67 +9,123 @@
 
 help-add-bookmark                   add a history entry for this file
 
+		"Other~10,Make Bookmark~30"
+
 help-print                          print current help file
+
+		"Print~6,Print This File~22"
 
 help-toggle-panels                  toggle help panels
 
+		"Panels~10,Hide Panels~2" "Panels~10,Show Panels~2"
+
 help-add-search-dir                 add a directory to the search path
+
+		"Other~10,Add Search Directory~20"
 
 help-delete-window                  delete this window
 
+		"Delete Window~80"
+
 help-toggle-history                 toggle history panel
+
+		"Panels~10,Hide History~24" "Panels~10,Show History~24"
 
 help-readonly-key                   fake readonliness
 
 help-changes                        show changes on topic
 
+		"Show Changes~34"
+
 help-show-tutorial                  show tutorial
 
+		"Show Tutorial~32"
+
 help-comments                       send comments on help
+
+		"Send Comment On Help~31"
 
 help-prev-screen                    go back to previous screen
 
 help-toggle-size                    toggle program list size
 
+		"Panels~10,Shrink Programs List~10" "Panels~10,Expand Programs List~10"
+
 help-next-screen                    advance to next screen
 
 help-copy-region                    Copy region to kill-buffer
 
+		"Copy~2"
+
 help-refilter-programs              filter-programs
+
+		"Other~10,ReFilter Programs Panel~12"
 
 help-search                         forward search
 
-help-set-printer                    set the printer
+		"Search~4,Forward~12"
+
+help-printer-setup                  Pop up dialogue box to set printer name and other parameters.
+
+		"Print~6,Printer Setup~12"
 
 help-search-overviews               search overviews
 
+		"Search~4,Search Overviews~20"
+
 help-search-programs                search programs
+
+		"Search~4,Search Programs~22"
 
 help-new-show-help-on-selected      show help on selected region in a new 
 window
 
+		"Window~12,Show Help on Selected Word~26"
+
 help-show-help-on-selected          show help on selected region
+
+		"Show Help on Selected Word~16"
 
 help-new-show-help-on               show help on a prompted keyword in a new 
 window
 
+		"Window~12,Show Help on...~14"
+
 help-toggle-overviews               toggle overviews panel
+
+		"Panels~10,Hide Overviews~20" "Panels~10,Show Overviews~20"
 
 help-toggle-programs                toggle programs panel
 
+		"Panels~10,Hide Programs~22" "Panels~10,Show Programs~22"
+
 help-restore-programs               restore programs panel
+
+		"Other~10,Restore Programs Panel~10"
 
 help-filter-programs                filter-programs
 
+		"Other~10,Filter Programs Panel~10"
+
 help-reverse-search                 reverse search
+
+		"Search~4,Backward~14"
 
 help-show-help-on                   show help on a prompted keyword
 
+		"Show Help on ...~14"
+
 help-show-more                      show more documentation
+
+		"Show More Documentation~30"
 
 help-search-again                   search again
 
+		"Search~4,Search Again~16"
 
+help-quit                           quit help
+
+		"Quit~99"
 
 \begindata{bp,537558784}
 \enddata{bp,537558784}

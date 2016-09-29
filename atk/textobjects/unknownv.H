@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _unknownv_H_
 #define _unknownv_H_
 /* Copyright 1994 Carnegie Mellon University All rights reserved. */

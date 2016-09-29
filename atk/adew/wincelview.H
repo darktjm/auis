@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _wincelview_H_
 #define _wincelview_H_
 /* ********************************************************************** *\

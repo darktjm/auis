@@ -1,6 +1,5 @@
 #ifndef _AOPTIONV_H_
 #define _AOPTIONV_H_
-ATK_INTER
 /* Copyright 1996 Carnegie Mellon University All rights reserved. */
 /** \addtogroup libAButton
  * @{ */

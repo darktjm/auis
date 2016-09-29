@@ -34,10 +34,6 @@ ReChart To Dot;  "ReChart~10,Dot~3",
 
 ReChart To Line;  "ReChart~10,Line~4"
 
-ReChart To Cartesian;   "ReChart~10,Cartesian~5"
-
-ReChart To Stack;  "ReChart~10,Stack~11"
-
 
 chartv-Sort:
 

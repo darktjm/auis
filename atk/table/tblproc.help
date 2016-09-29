@@ -6,59 +6,62 @@
 \chapter{Proclist for Table
 
 }
-self_insert	 "Enter character"
+table-self_insert	 "Enter character"
 
-table-begin-row, "\\001" "Beginning of row"
+table-begin-row, "^A" "Beginning of row"
 
-table-left, "\\002" "Left one column"
+table-left, "^B" "Left one column"
 
-table-end-row, "\\005" "End of row"
+table-end-row, "^E" "End of row"
 
-table-right, "\\006" "Right one column"
+table-right, "^F" "Right one column"
 
-table-down, "\\016"  "Down one row"
+table-down, "^N"  "Down one row"
 
-table-up, "\\020"  "Up one row"
+table-up, "^P"  "Up one row"
+
+table-top, "Esc-<"  "Top"
+
+table-bottom, "Esc->"   "Bottom"
 
 table-backspace"  "Backspace"
 
-table-tab, "\\011" "Tab"
+table-tab, "Tab" "Tab"
 
-table-newline, "\\012"  "New line"
+table-newline, "^J"  "New line"
 
-table-return, "\\015"  "Carriage return"
+table-return, "^M"  "Carriage return"
 
-table-DELchar, "\\177"  "DEL"
+table-DELchar, "Delete"  "DEL"
 
-table-erase, "\\025"  "Erase"
+table-erase, "^U"  "Erase"
 
-table-up, "\\033A"  "Up"
+table-toggle-readonly, "Esc-~", "Toggle the read-only status of the table."
 
-table-down, "\\033B"  "Down"
+table-toggle-debug, "Esc-Esc", "Toggle Debug"
 
-table-right, "\\033C"  "Right"
 
-table-left, "\\033D"  "Left"
+table-up, "Esc-A"  "Up"
 
-table-end-row, "\\033J"  "End"
+table-down, "Esc-B"  "Down"
 
-table-begin-row, "\\033H"  "home"
+table-right, "Esc-C"  "Right"
 
-table-top, "\\033<"  "Top"
+table-left, "Esc-D"  "Left"
 
-table-bottom, "\\033>"   "Bottom"
+table-end-row, "Esc-J"  "End"
 
-table-toggle-debug, "\\033\\033", "Toggle Debug"
+table-begin-row, "Esc-H"  "home"
 
 
 menu:
 
 
-table-cut, "\\027",  "Cut~10",  "Save and erase cells"
+table-cut, "^W",  "Cut~10",  "Save and erase cells"
 
-table-copy, "\\033w",  "Copy~11",  "Copy cells to cutbuffer"
+table-copy, "Esc-w",  "Copy~11",  "Copy cells to cutbuffer"
 
-table-paste, "\\031",  "Paste~12",   "Copy cutbuffer to cells"
+table-paste, "^Y",  "Paste~12",   "Copy cutbuffer to cells"
 
 table-write, "/fw",  "Write table~80"   "Write table file"
 
@@ -80,7 +83,7 @@ table-lock, "/rl",  "Cells~1,Lock~30",  "Protect cells against modification"
 
 table-unlock, "/ru", "Cells~1,Unlock~31", "Allow cells to be modified"
 
-table-imbed, "\\033\\t",  "Cells~1,Imbed~40"  "Place BE2 object in cell"
+table-imbed, "Esc-Tab",  "Cells~1,Imbed~40"  "Place BE2 object in cell"
 
 table-reset-height,  "Cells~1,Reset Heights~41"  "Comput row heights 
 automatically"

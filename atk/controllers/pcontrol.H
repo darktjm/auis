@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _pcontrol_H_
 #define _pcontrol_H_
 /* user code begins here for HeaderInfo */

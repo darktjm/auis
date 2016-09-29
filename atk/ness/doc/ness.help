@@ -340,18 +340,63 @@ ness-load 			Read and compile a Ness program file \
 
 nessview-next-error  	See the source code for the next error
 
+				Esc-^N  [Ness~10,Next Danger~10]
+
 nessview-show-origin 	Show the author and date of last change
+
+				^X^NO  Ness~10,Show Origin~12
 
 nessview-scan-for-danger 	Check for any statements that might be harmful
 
+				^X^NS  Ness~10,Scan for danger~15
+
 nessview-compile 		Compile the text in this view
 
+				Esc-^NC Ness~10,Empower-compile~22
+
 nessview-execute 		Compile Ness and execute function main()
+
+				^X^E  Ness~10,Do main()~24
 
 nessview-author-mode 	Change to be an author; remove warning text;  make 
 read-write
 
+				Esc-~ Ness~10,Author mode~32
+
 nessview-user-mode 		Reinsert the warning text and be readonly
+
+				Esc-~   Ness~10,Add warning~32
+
+nessview-append-to-file         Append the current buffer to a Ness file.
+
+				Ness,Append to File~40
+
+nessview-visit-script           Visit an existing Ness script.
+
+				Ness,Visit Script~50  [frame:Ness~99,Visit Script~41]
+
+nessview-invert-debug           Toggle the nessview debug flag
+
+				Esc-^DD
+
+nessm-make-macro                Converts a keyboard macro to ness code.
+
+				[frame:Ness~99,Make Macro~1]
+
+
+\subsection{In Ness macro view:}
+
+nessmv-append-to-file           Append the current buffer to a Ness file.
+
+				Ness,Append to File~40
+
+nessmv-append-to-script         Append the current buffer to a Ness script.
+
+				Ness,Append to Script~45
+
+nessmv-visit-script             Visit an existing Ness script.
+
+				Ness,Visit Script~50
 
 }
 

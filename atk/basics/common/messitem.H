@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _messitem_H_
 #define _messitem_H_
 /* Copyright 1993 Carnegie Mellon University All rights reserved. */

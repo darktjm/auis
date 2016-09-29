@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _sliderstrV_H_
 #define _sliderstrV_H_
 /* ********************************************************************** *\

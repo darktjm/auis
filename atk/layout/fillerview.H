@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _fillerview_H_
 #define _fillerview_H_
 /* ********************************************************************** *\

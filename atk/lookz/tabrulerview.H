@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _tabrulerview_H_
 #define _tabrulerview_H_
 /* ********************************************************************** *\

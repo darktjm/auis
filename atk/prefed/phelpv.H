@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _phelpv_H_
 #define _phelpv_H_
 /* Copyright 1992 by Carnegie Mellon University All rights Reserved. */

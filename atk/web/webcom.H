@@ -1,7 +1,6 @@
 /* Copyright 1995 Carnegie Mellon University -- All rights reserved */
 #ifndef _webcom_H_
 #define _webcom_H_
-ATK_INTER
 /** \addtogroup libhtmltext
  * @{ */
 #include <atom.H>

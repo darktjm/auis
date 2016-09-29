@@ -7,26 +7,26 @@
 
 \chapter{
 }
-"im-exit", "\\030\\003", "Quit~99",  "Exit program."
+"im-exit-program", "^X^C", "Quit~99",  "Exit program."
 
-"im-start-keyboard-macro", "\\030(", "Start recording input events."
+"im-start-keyboard-macro", "^X(", "Start recording input events."
 
-"im-stop-keyboard-macro", "\\030)", "Stop recording input events."
+"im-stop-keyboard-macro", "^X)", "Stop recording input events."
 
-"im-play-keyboard-macro", "\\030e", "Play current keyboard macro."
+"im-play-keyboard-macro", "^Xe", "Play current keyboard macro."
 
-"im-redraw-window", "\\014", "Redraw the window."
+"im-redraw-window", "^L", "Redraw the window."
 
-"im-print-malloc-statistics", "\\030\\200m", "Print malloc statisticsp to a 
+"im-print-malloc-statistics", "^X^@m", "Print malloc statisticsp to a 
 file."
 
-"im-reset-malloc-statistics", "\\030\\200r", "Reset malloc statistics."
+"im-reset-malloc-statistics", "^X^@r", "Reset malloc statistics."
 
-"im-print-malloc-table", "\\030\\200t", "Print malloc table to a file."
+"im-print-malloc-table", "^X^@t", "Print malloc table to a file."
 
-"im-start-profile", "\\030\\200p", "Start profiling program."
+"im-start-profile", "^X^@p", "Start profiling program."
 
-"im-stop-profile", "\\030\\200q", "Stop profiling program."
+"im-stop-profile", "^X^@q", "Stop profiling program."
 
 
 

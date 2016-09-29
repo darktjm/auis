@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _mbuttonv_H_
 #define _mbuttonv_H_
 /** \addtogroup libvalue

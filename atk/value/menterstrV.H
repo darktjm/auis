@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _menterstrV_H_
 #define _menterstrV_H_
 /* ********************************************************************** *\

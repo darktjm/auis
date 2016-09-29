@@ -14,7 +14,7 @@ dired-delete", "d",  "Directory Edit,Delete~20",  "Delete selected file(s)."
 
 dired-rename", "r",  "Directory Edit,Rename~30",  "Rename selected file(s).",
 
-dired-refresh", "\\r", "Directory Edit,Refresh~40", "Reread current 
+dired-refresh", "^M", "Directory Edit,Refresh~40", "Reread current 
 directory."
 
 dired-toggle-select", " ", "Toggle file at cursor." 

@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _runadewapp_H_
 #define _runadewapp_H_
 /* ********************************************************************** *\

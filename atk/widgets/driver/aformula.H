@@ -1,7 +1,6 @@
 #ifndef _AFORMULA_H_
 #define _AFORMULA_H_
 /* Copyright 1996 Carnegie Mellon University All rights reserved. */
-ATK_INTER
 
 /** \addtogroup libawidget
  * @{ */

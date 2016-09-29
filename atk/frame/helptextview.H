@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _helptextview_H_
 #define _helptextview_H_
 /* ********************************************************************** *\

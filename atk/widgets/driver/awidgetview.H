@@ -1,4 +1,3 @@
-ATK_INTER
 #ifndef _AWidgetView_H_
 #define _AWidgetView_H_
 /** \addtogroup libawidget
