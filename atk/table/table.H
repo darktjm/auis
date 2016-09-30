@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+#include <andrewos.h>
+
 NO_DLL_EXPORT extern int table_DefaultPrecision;
 
 /** \addtogroup libtable libtable.so

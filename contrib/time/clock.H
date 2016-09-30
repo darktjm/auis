@@ -10,6 +10,7 @@
 /* #include <time.h> */
 #include <fontdesc.H>
 #include <event.H>
+#include <time.h>
 
 struct clock_time {
   double hours, minutes, seconds;

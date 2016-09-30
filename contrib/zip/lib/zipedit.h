@@ -201,6 +201,9 @@ END-SPECIFICATION  ************************************************************/
 #define  FigureSelection		2
 #define  ImageSelection			3
 
+#include <atkproto.h>
+#include <zippane.h>
+
 extern NO_DLL_EXPORT int zipedit_Handle_Font_Family_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action, long  x , long y , long clicks );
 extern NO_DLL_EXPORT int zipedit_Handle_Font_Height_Selection( class zipedit *self, zip_type_pane pane, enum view_MouseAction action, long x , long              y , long clicks );
 extern NO_DLL_EXPORT int zipedit_Handle_Font_Italic_Selection( class zipedit  *self, zip_type_pane pane, enum view_MouseAction action , long x , long y , long  clicks );

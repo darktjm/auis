@@ -23,6 +23,7 @@ gofigv.H
 enum actionopts {Alternate, White, Black, Empty, Select};
 enum noteopts {Number,Letter,None};
 
+#include "gofig.H"
 #include <view.H>
 class gofigview  : public  view    {
 public:

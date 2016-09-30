@@ -11,6 +11,7 @@
 
 #include <fontdesc.H>
 #include <event.H>
+#include <time.h>
 
 #include <dataobject.H>
 class timeoday: public  dataobject {

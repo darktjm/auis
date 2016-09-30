@@ -12,7 +12,7 @@
  *
  */
 
-
+#include <stdio.h>
 #include <ATK.H>
 
 class filetype : public ATK {

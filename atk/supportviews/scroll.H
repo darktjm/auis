@@ -22,12 +22,6 @@
 #define scroll_TOP (1<<scroll__TOP)
 #define scroll_BOTTOM (1<<scroll__BOTTOM)
 
-/* The different types of scrollbars supported. Currently only vertical and horizontal */
-#define scroll_TYPES 2
-#define scroll_VERT 0
-#define scroll_HORIZ 1
-#define scroll_BOTH scroll_TYPES
-
 #include <scrolling.H>
 
 

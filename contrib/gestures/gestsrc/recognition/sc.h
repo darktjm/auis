@@ -32,6 +32,8 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  single path classifier
 */
 
+#include "matrix.h"
+
 #define	MAXSCLASSES	100
 
 typedef struct sclassifier *sClassifier; /* single feature-vector classifier */

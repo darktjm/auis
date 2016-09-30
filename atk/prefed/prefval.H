@@ -2,6 +2,7 @@
 #define _prefval_H_
 /* Copyright 1992 by the Andrew Toolkit Consortium and Carnegie Mellon University All rights Reserved. */
 
+#include <andrewos.h>
 /** \addtogroup libprefs
  * @{ */
 enum prefval_Type {

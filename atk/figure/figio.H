@@ -8,6 +8,7 @@
   */
 
 #include <ATK.H>
+#include <stdio.h>
 
 class figio : public ATK  {
 public:

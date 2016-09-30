@@ -9,7 +9,7 @@
  *  A dynamically loadable ATK class file.  Contains toezapp.
  * @{ */
 /* toandrew application */
-
+#include <stdio.h>
 #include <application.H>
 class toezapp : public  application {
 public:

@@ -8,6 +8,7 @@
 /** \addtogroup libsupport
  * @{ */
 #include <namespace.H>
+#include <stdio.h>
 
 #define style_VERSION   1
 

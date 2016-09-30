@@ -38,18 +38,6 @@ char *rexxtext::Keywordify(char *buff, boolean checkforceupper)
 void rexxtext::SetAttributes(struct attributes *atts)
 {
     (this)->srctext::SetAttributes(atts);
-#if 0 /* ctext leftovers */
-    while (atts!=NULL) {
-	char *key=atts->key;
-	if (strcmp(key,"brace-indent")==0)
-	    this->braceIndent=atoi(atts->value.string);
-	else if (strcmp(key,"switch-label-undent")==0)
-	    this->switchLabelUndent=atoi(atts->value.string);
-	else if (strcmp(key,"switch-level-indent")==0)
-	    this->switchLevelIndent=atoi(atts->value.string);
-	atts=atts->next;
-    }
-#endif /* ctext leftovers */
 }
 
 static void SetupStyles(rexxtext *self)

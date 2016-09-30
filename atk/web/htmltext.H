@@ -10,7 +10,7 @@
        (c) Copyright IBM Corp 1995.  All rights reserved. 
 
     htmltext, an object for reading and writing HTML+ formatted files. */
-
+#include <andrewos.h>
 class style;
 class attlist;
 class htmltext;

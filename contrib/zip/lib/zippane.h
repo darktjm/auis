@@ -26,6 +26,10 @@ DESCRIPTION
 END-SPECIFICATION  ************************************************************/
 
 #include <view.H>
+#include <zip.h>
+#include <zipstrm.h>
+#include <zipimage.h>
+#include <zipfig.h>
 
 #define  ZIP_pane_coordinate_thickness		26
 #define  ZIP_pane_coordinate_font_name		"andysans8"

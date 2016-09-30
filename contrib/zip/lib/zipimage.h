@@ -47,6 +47,8 @@ HISTORY
 
 END-SPECIFICATION  ************************************************************/
 
+#include <zipfig.h>
+
 #define  zip_image_exposed			  1
 #define  zip_image_hidden			  2
 

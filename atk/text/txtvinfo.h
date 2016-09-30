@@ -6,6 +6,7 @@
 /** \addtogroup libtext
  * @{ */
 #include <txtstvec.h>
+#include <rect.h>
 
 /* Redisplay structure giving font and position info in a large buffer. */
 

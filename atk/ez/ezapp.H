@@ -5,6 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+#include <andrewos.h>
 /** \addtogroup libez libez.so
  *  A statically loadable ATK class file.  Contains ezapp.
  * @{ */

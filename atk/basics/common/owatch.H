@@ -2,6 +2,8 @@
 #define _owatch_H_
 /* Copyright 1992 Carnegie Mellon University, All rights reserved. */
 
+#include <andrewos.h>
+
 /** \addtogroup libbasics
  * @{ */
 struct owatch_data {

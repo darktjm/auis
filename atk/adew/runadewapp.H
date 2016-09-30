@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+#include <andrewos.h>
+
 /** \addtogroup libarbiter
  * @{ */
 struct runadewapp_fileList {

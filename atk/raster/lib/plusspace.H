@@ -21,6 +21,7 @@
 
 #define  plusspace_PROGRAMMERVERSION    1
 
+#include <stdio.h>
 #include <ATK.H>
 class plusspace : public ATK  {
 public:

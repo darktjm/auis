@@ -19,6 +19,8 @@ directory, and re-read it only if necessary.
 */
 
 #include <observable.H>
+#include <stdio.h>
+#include <time.h>
 
 class path : public  observable {
 public:

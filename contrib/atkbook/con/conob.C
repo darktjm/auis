@@ -185,7 +185,7 @@ void conob::SetDisplayTemplate(const char  *dt)
     if (this->DisplayTemplate != NULL) {
 	strcpy(this->DisplayTemplate, dt);
 	s = index(this->DisplayTemplate, '\n');
-	if (s) *s = NULL; /* End templates at newlines */
+	if (s) *s = 0; /* End templates at newlines */
     }
 }
 

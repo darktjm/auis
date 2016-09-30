@@ -52,9 +52,9 @@ boolean hgghview::InitializeClass()
 
     (hgghview_keymap)->BindToKey( "!", proc, 0);
     (hgghview_menulist)->AddToML( "Toggle Me!",
-		      proc, NULL, 0);
+		      proc, 0, 0);
     (hgghview_menulist)->AddToML( "HGGH,Toggle Me!",
-		      proc, NULL, 0);
+		      proc, 0, 0);
     return(TRUE);
 }
 

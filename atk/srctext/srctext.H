@@ -32,6 +32,8 @@ typedef struct DictStruct {
     struct DictStruct *next;
 } Dict;
 
+#include <stdio.h>
+
 typedef void (*srctext_writefptr)(class srctext *self, FILE *file, long writeID, int level);
 
 #include <text.H>

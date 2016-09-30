@@ -10,6 +10,7 @@
 */
 
 #include <atkproto.h>
+#include <stdio.h>
 BEGINCPLUSPLUSPROTOS
 
 struct USString {

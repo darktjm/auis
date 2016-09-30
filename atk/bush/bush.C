@@ -133,6 +133,7 @@ bush::Create( const char			 *init_dir )
 
 void bush::SetAttributes(struct attributes *attributes)
 {
+    this->dataobject::SetAttributes(attributes);
     while(attributes) {
 	if(!strcmp(attributes->key, "dir")) {
 	    class bush *self=this;

@@ -9,7 +9,8 @@
  * @{ */
 /* Flags for various things texttroff should or should not do. (each should be a power of 2) */
 #define	texttroff_Revert 1	/* if set texttroff will revert to the parents state after processing, otherwise the state will be left however it ended up. */
-				  
+
+#include <stdio.h>
 #include <ATK.H>
 
 class texttroff : public ATK  {

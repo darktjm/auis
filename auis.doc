@@ -24356,6 +24356,41 @@ n 0
 \view{bpv,15466163,26583,0,0}
 \chapter{Configuration Options}
 
+See 
+\begindata{link,6929584}
+4
+${ANDREWDIR}/help/setup.help
+0
+0
+V
+\begindata{link,6929584}
+Datastream version: 2
+help for setup
+2
+
+black
+white
+\enddata{link,6929584}
+\enddata{link,6929584}
+\view{linkview,6929584,0,0,0} and/or 
+\begindata{link,6968320}
+4
+${ANDREWDIR}/doc/ADMINISTRATOR/SetUp
+0
+0
+V
+\begindata{link,6968320}
+Datastream version: 2
+SetUp
+2
+
+black
+white
+\enddata{link,6968320}
+\enddata{link,6968320}
+\view{linkview,6968320,1,0,0} (why there are two separate files to 
+maintain, I don't know -- one should really be generated from the other).
+
 ./atk/console/lib/mailmon.C:"AMS_NonAMSDelivery"
 
 ./atk/console/lib/mailmon.C:"print.nonandrew"

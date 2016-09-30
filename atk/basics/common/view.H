@@ -80,6 +80,7 @@ typedef int view_DSattributes;
 #include <graphic.H>
 #include <observable.H>
 #include <color.H>
+#include <stdio.h>
 
 struct view_printopt {
     atom *name, *type;

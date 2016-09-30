@@ -17,6 +17,8 @@ ziposymbol.H
   07/10/88	Create for ATK (TCP)
 */
 
+#include <andrewos.h>
+#include <stdio.h>
 #define  ziposymbol_VERSION    1
 
 

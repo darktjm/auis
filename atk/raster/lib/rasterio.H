@@ -32,6 +32,7 @@
 
 #define  rasterio_PROGRAMMERVERSION    1
 
+#include <stdio.h>
 #include <ATK.H>
 class rasterio : public ATK 
 

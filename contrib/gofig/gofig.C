@@ -423,7 +423,7 @@ gofig::Write( FILE *file, long writeID, int level ) {
 		while (i < nstones()) {
 			struct stone &s = (*stones)[i];
 			if (s.color == '/' && s.note == 0)
-				stones->erase( i );
+				stones->Remove( i );
 			else i++;
 		}
 
@@ -520,7 +520,7 @@ gofig::addstone( int row, int col ) {
 	if (h > height || w > width)
 		setdimensions(w, h);
 
-	struct stone *s = (stones)->append();
+	struct stone *s = (stones)->Append();
 	s->row = row;
 	s->col = col;
 	s->note = 0;
@@ -537,7 +537,7 @@ gofig::deletestone( int row, int col ) {
 	for (j = nstones(); j--; ) {
 		struct stone &s = (*stones)[j];
 		if (s.row == row && s.col == col) {
-			stones->erase( j );
+			stones->Remove( j );
 			return;
 		}
 	}

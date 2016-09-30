@@ -2,6 +2,9 @@
 
 /** \addtogroup libbasics
  * @{ */
+#include <andrewos.h>
+#include <X11/X.h>
+#include <X11/Xlib.h>
 extern Atom *xim_SetupAtoms(Display *dpy, boolean force);
 
 

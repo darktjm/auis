@@ -59,18 +59,18 @@ boolean flexview::InitializeClass()
     proc = proctable::DefineProc("flexview-insert-object", (proctable_fptr)InsertObject, &flexview_ATKregistry_ , NULL, "Inserts a new inset in the flex.");
     (flexview_keymap_noviews)->BindToKey( "^X!", proc, 0);
     (flexview_menulist_noviews)->AddToML(
-	"flex~96,Insert Object", proc, NULL, 0);
+	"flex~96,Insert Object", proc, 0, 0);
 
     proc = proctable::DefineProc("flexview-alter-pair", (proctable_fptr)AlterPair, &flexview_ATKregistry_ , NULL, "Alters some of the settings of the flex.");
     (flexview_keymap_views)->BindToKey( "^X%",
 		      proc, 0);
     (flexview_menulist_views)->AddToML(
-	"flex~96,Alter Pair", proc, NULL, 0);
+	"flex~96,Alter Pair", proc, 0, 0);
 
     proc = proctable::DefineProc("flexview-delete-objects", (proctable_fptr)DeleteObjects, &flexview_ATKregistry_ , NULL, "Delete the children of of the flex.");
     (flexview_keymap_views)->BindToKey( "^X&", proc, 0);
     (flexview_menulist_views)->AddToML(
-	"flex~96,Delete Objects", proc, NULL, 0);
+	"flex~96,Delete Objects", proc, 0, 0);
 
     return(TRUE);
 }

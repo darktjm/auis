@@ -64,6 +64,7 @@
  * 
  * Revision 1.0  94/08/16  13:10:47  wjh
  */
+#include <stddef.h> /* size_t */
 
 class flex
 {

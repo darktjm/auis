@@ -5,6 +5,7 @@
  * @{ */
 #include <abuttonv.H>
 #include <aaction.H>
+#include <aoption.H>
 class popupwin;
 
 class AOptionMenuv;

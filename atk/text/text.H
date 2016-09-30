@@ -5,6 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+#include <andrewos.h>
 /** \addtogroup libtext libtext.so
  *  A statically loadable ATK class file.  Contains text, textview, be1be2,
  *  be1be2app, bp, bpv, cltextview, content, fnote, fnotev, pcompch, readscr,

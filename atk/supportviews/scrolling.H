@@ -9,6 +9,12 @@
 #include <rect.h>
 #include <view.H>
 
+/* The different types of scrollbars supported. Currently only vertical and horizontal */
+#define scroll_TYPES 2
+#define scroll_VERT 0
+#define scroll_HORIZ 1
+#define scroll_BOTH scroll_TYPES
+
 enum scroll_Direction {
     scroll_Up,
     scroll_Down,

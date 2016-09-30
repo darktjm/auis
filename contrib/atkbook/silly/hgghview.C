@@ -60,16 +60,16 @@ boolean hgghview::InitializeClass()
 
     proc = proctable::DefineProc("hgghview-toggle", (proctable_fptr)ToggleProc, &hgghview_ATKregistry_ , NULL, "toggles the two parts of the hgghview.");
     (hgghview_keymap)->BindToKey( "!", proc, 0);
-    (hgghview_menulist)->AddToML( "Toggle Me!", proc, NULL, 0);
+    (hgghview_menulist)->AddToML( "Toggle Me!", proc, 0, 0);
 
     proc = proctable::DefineProc("hgghview-change-button", (proctable_fptr)ChangeButton, &hgghview_ATKregistry_ , NULL, "Changes the text in the toggling button.");
-    (hgghview_menulist)->AddToML("HGGH,Change Button Text", proc, NULL, 0);
+    (hgghview_menulist)->AddToML("HGGH,Change Button Text", proc, 0, 0);
 
     proc = proctable::DefineProc("hgghview-change-short-list", (proctable_fptr)ChangeFromShortList, &hgghview_ATKregistry_ , NULL, "Change toggling text from short list.");
-    (hgghview_menulist)->AddToML("HGGH,Change From Short List", proc, NULL, 0);
+    (hgghview_menulist)->AddToML("HGGH,Change From Short List", proc, 0, 0);
 
     proc = proctable::DefineProc("hgghview-change-long-list", (proctable_fptr)ChangeFromLongList, &hgghview_ATKregistry_ , NULL, "Changes the toggling text using a long list.");
-    (hgghview_menulist)->AddToML("HGGH,Change From Long List", proc, NULL, 0);
+    (hgghview_menulist)->AddToML("HGGH,Change From Long List", proc, 0, 0);
 
     return(TRUE);
 }

@@ -3,6 +3,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+#include <X11/X.h>
+#include <X11/Xlib.h>
 /** \addtogroup libbasics
  * @{ */
 #define mb_FullRedraw 0
