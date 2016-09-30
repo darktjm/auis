@@ -7,6 +7,7 @@
 
 /** \addtogroup libtypescript
  * @{ */
+#include <stdio.h>
 #include <application.H>
 class pipescriptapp : public application {
 public:

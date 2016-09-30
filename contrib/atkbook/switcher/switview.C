@@ -64,21 +64,21 @@ boolean switview::InitializeClass()
 	"Changes the switcher to look at the next object.");
     (switview_keymap)->BindToKey( "^X^N", proc, 0);
     (switview_menulist)->AddToML(
-	"Switcher~95,Next Switchee~90", proc, NULL, 0);
+	"Switcher~95,Next Switchee~90", proc, 0, 0);
 
     proc = proctable::DefineProc("switview-add-switchee",
 	(proctable_fptr)AddSwitchee, &switview_ATKregistry_ , NULL,
 	"Adds a new thing for the switcher to switch to.");
     (switview_keymap)->BindToKey( "^X^A", proc, 0);
     (switview_menulist)->AddToML(
-	"Switcher~95,Add Switchee~91", proc, NULL, 0);
+	"Switcher~95,Add Switchee~91", proc, 0, 0);
 
     proc = proctable::DefineProc("switview-add-from-file",
 	(proctable_fptr)AddSwitcheeFromFile, &switview_ATKregistry_ , NULL,
 	"Adds the contents of a file as a new switchee.");
     (switview_keymap)->BindToKey( "^X5", proc, 0);
     (switview_menulist)->AddToML(
-	"Switcher~95,Insert File~92", proc, NULL, 0);
+	"Switcher~95,Insert File~92", proc, 0, 0);
 
     switchobjproc = proctable::DefineProc(
 	"switview-switch-object", (proctable_fptr)SwitchObject,

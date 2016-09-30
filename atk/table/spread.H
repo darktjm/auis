@@ -43,7 +43,7 @@ struct colInformation {
 };
 
 /* Interface definition */
-
+#include <table.H>
 #include <view.H>
 class spread: public  view {
     public:

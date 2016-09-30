@@ -16,6 +16,7 @@
 
 #include <observable.H>
 #include <proctable.H>
+#include <stdio.h>
 
 	typedef boolean (*stylesheet_efptr)(class style *self, long data);
 

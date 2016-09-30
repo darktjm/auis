@@ -4,6 +4,8 @@
 \* ********************************************************************** */
 
 #ifndef CHAMP_DEFINED
+#include <andrewos.h>
+
 struct gregoriandatespec {
     int year, month, day, hour, min, wkday, wkdayselector;
 };

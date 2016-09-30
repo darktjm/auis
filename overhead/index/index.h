@@ -31,6 +31,7 @@
  */
 
 #include <atkproto.h>
+#include <stdio.h>
 BEGINCPLUSPLUSPROTOS
 
 #define MAXSTRLENGTH		1024		/* max string size */

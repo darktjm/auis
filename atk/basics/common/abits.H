@@ -1,6 +1,7 @@
 #ifndef _abits_H_
 #define _abits_H_
 /* Copyright 1995 Carnegie Mellon University All rights reserved. */
+#include <andrewos.h>
 
 /** \addtogroup libbasics
  * @{ */

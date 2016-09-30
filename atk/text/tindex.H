@@ -7,6 +7,7 @@
 
 /** \addtogroup libtext
  * @{ */
+#include <stdio.h>
 #include <ATK.H>
 class tindex : public ATK  {
   public:

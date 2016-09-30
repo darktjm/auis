@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+#include <andrewos.h>
+
 /** \addtogroup libtextobjs
  * @{ */
 struct p_option {

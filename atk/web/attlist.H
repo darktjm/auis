@@ -3,6 +3,7 @@
 /* File attlist.H created by Ward Nelson
    (c) Copyright IBM Corp 1995.  All rights reserved.  */
 
+#include <andrewos.h>
 /** \addtogroup libhtmltext
  * @{ */
 struct htmlatts {

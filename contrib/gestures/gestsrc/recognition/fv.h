@@ -45,6 +45,7 @@ Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 /* ---------- Interface ---------- */
 
+#include "matrix.h"
 typedef struct fv *FV;		/* During gesture collection, an FV holds
 				   all intermediate results used in the
 				   calculation of a single feature vector */

@@ -9,7 +9,7 @@
 
 /** \addtogroup libbasics
  * @{ */
-#include <atkproto.h>
+#include <andrewos.h>
 BEGINCPLUSPLUSPROTOS
 
 

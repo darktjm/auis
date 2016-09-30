@@ -40,6 +40,7 @@ END-SPECIFICATION  ************************************************************/
 #define MAXEDITORS		    25
 
 #include <aptv.H>
+#include <tree.H>
 class bushv : public  aptv {
 public:
 	virtual ATKregistryEntry *ATKregistry();

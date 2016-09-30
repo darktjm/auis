@@ -182,8 +182,8 @@ static int ReadOneObject(class flexd  *self, FILE  *fp, boolean  IsLeft)
     if (fgets(LineBuf, sizeof(LineBuf)-1, fp) == NULL) {
 	return(dataobject_PREMATUREEOF);
     }
-    if (strncmp(LineBuf, "\\begindata{", 11) != NULL) {
-	if (strncmp(LineBuf, "\\ObjectEmpty", 12) != NULL) {
+    if (strncmp(LineBuf, "\\begindata{", 11) != 0) {
+	if (strncmp(LineBuf, "\\ObjectEmpty", 12) != 0) {
 	    return(dataobject_BADFORMAT);
 	}
 	if (IsLeft) {

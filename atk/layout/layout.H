@@ -11,6 +11,7 @@
  * @{ */
 /* layout.H - layout data object definition and interface */
 
+#include <andrewos.h>
 #define layout_VERSION 1
 /* component data structure */
 

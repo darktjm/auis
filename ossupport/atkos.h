@@ -6,6 +6,7 @@
  * Low-level functions for OS support.
  * @{ */
 
+#include <atkproto.h>
 #include <stdio.h> /* needed so that we can declare Andrew_tmpfile. */
 
 extern void ATKUseExportsFiles(char *arg, char *dot, char *slash);

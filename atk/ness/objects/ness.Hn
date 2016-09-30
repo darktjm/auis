@@ -23,6 +23,7 @@ ness.H		ness data object
 	from the original C version.
 
 */
+#include <andrewos.h>
 #include <atom.H>
 #include <proctable.H>
 #include <text.H>

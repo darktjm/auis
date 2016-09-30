@@ -170,14 +170,17 @@ So far, the following incompatibilities have been introduced:
    qualified proc name.  All 39 commands formerly prefixed by raster-
    are now prefixed by rasterv-.  In addition: 
 
-     Removed                    Replacement
-     -------                    -----------
-     exit                       im-exit-program
-     play-keyboard-macro        im-play-keyboard-macro
-     redraw-window              im-redraw-window
-     srctextview-tab            srctextview-reindent
-     start-keyboard-macro       im-start-keyboard-macro
-     stop-keyboard-macro        im-stop-keybaord-macro
+     exit                  =>   im-exit-program
+
+     play-keyboard-macro   =>   im-play-keyboard-macro
+
+     redraw-window         =>   im-redraw-window
+
+     srctextview-tab       =>   srctextview-reindent
+
+     start-keyboard-macro  =>   im-start-keyboard-macro
+
+     stop-keyboard-macro   =>   im-stop-keybaord-macro
 
 Goals
 -----
@@ -208,7 +211,9 @@ the main points:
   - document - provide as complete documentation as possible for all
     provided classes, functions, and executables
 
-  - ensure everything actually works
+  - ensure everything actually works (note that this means that I will
+    just remove anything that I can't or don't want to put in the effort
+    to verify, such as AMS, AFS, and support for hardware I don't have)
 
 Progress
 --------
@@ -223,16 +228,16 @@ So far, what I've done is:
     continuing to find and fix issues as I do that.
 
   - Cleaned up warnings in everything remaining after the big
-    deletes, except for atk/console and contrib/tm.  Note that the
-    main thing that made most things work was printf/scanf warning
-    removal, as most of the code assumed sizeof(int) ==
-    sizeof(long) == sizeof(void *) == 4.  Some such assumptions still
-    exist, and require manual location and removal.
+    deletes.  Note that the main thing that made most things work
+    was printf/scanf warning removal, as most of the code assumed
+    sizeof(int) == sizeof(long) == sizeof(void *) == 4.  Some such
+    assumptions still exist, and require manual location and
+    removal.
 
   - Started on documentation, now in a plain ez text file instead
     of org (org seemed nifty, but it can't print and you can't
     assign styles to node labels and the app is in general not
-    very user-friendly). If I don't get cracking on the latex
+    very user-friendly).  If I don't get cracking on the latex
     output, I'll probably abandon this as well in favor of a plain
     latex document.
 

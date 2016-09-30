@@ -90,9 +90,9 @@ boolean hgghview::InitializeClass()
     (hgghview_keymap)->BindToKey( "!", proc, 0);
 
     hgghview_menulist = new menulist;
-    (hgghview_menulist)->AddToML( "Toggle Me!", proc, NULL, 0);
+    (hgghview_menulist)->AddToML( "Toggle Me!", proc, 0, 0);
     proc = proctable::DefineProc("hgghview-change-button", (proctable_fptr)ChangeButton, &hgghview_ATKregistry_ , NULL, "Changes the text in the toggling button.");
-    (hgghview_menulist)->AddToML( "HGGH,Change Button Text", proc, NULL, 0);
+    (hgghview_menulist)->AddToML( "HGGH,Change Button Text", proc, 0, 0);
 
     return(TRUE);
 }

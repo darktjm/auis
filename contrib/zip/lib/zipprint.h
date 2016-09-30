@@ -29,6 +29,10 @@ HISTORY
   
 END-SPECIFICATION ************************************************************/
 
+#include <andrewos.h>
+#include <zip.h>
+#include <stdio.h>
+
 #define  zip_troff				1
 #define  zip_postscript				2
 

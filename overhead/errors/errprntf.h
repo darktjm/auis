@@ -1,4 +1,6 @@
 #include <atkproto.h>
+#include <stdarg.h>
+#include <stdio.h>
 BEGINCPLUSPLUSPROTOS
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *

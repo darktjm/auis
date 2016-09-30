@@ -68,6 +68,9 @@ usage:
  * Created by Fred Hansen 12 September, 1995
 */
 
+#include <andrewos.h>
+#include <stdio.h>
+
 class AString {
 private:
 	size_t space, used;

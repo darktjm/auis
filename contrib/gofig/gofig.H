@@ -51,7 +51,23 @@ gofig.H
 #define gofig_DATACHANGED 1
 #define gofig_SIZECHANGED 2
 
-#include <gflex.H>
+struct stone {
+	int col, row, note;
+		/* note - if non-zero, display a value
+		  positive: display integer;  
+		  negative display character (-note) or special character:
+			  given as the negative of ^ + % @ # *
+		*/
+	char color; 	/*  W - white,  B - black,  / - empty  */
+	long accnum;	/* assigned sequentially on update
+			useful for updating views */
+};
+
+#include <andrewos.h>
+#include <mflex.H>
+
+class NO_DLL_EXPORT gflex;
+DEFINE_MFLEX_CLASS(gflex,stone,20);
 
 #include <dataobject.H>
 class gofig : public  dataobject 
@@ -99,10 +115,10 @@ public:
 
 	void deletestone(int row, int col);
 		/* removes the indicated stone */
-	inline void deletestone(struct stone *s) {(stones)->erase( s );}
-	inline void deletestone(struct stone &s) {(stones)->erase( s );}
+	inline void deletestone(struct stone *s) {(stones)->Remove( s );}
+	inline void deletestone(struct stone &s) {(stones)->Remove( &s );}
 
-	inline int nstones() {return stones->getn();}
+	inline int nstones() {return stones->GetN();}
 
 	inline void getedges(unsigned *e)  {*e = edges;}
 	inline void setedges(unsigned e)  {edges = e;}

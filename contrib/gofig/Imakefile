@@ -3,7 +3,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-OBJS = gflex.o gofig.o gofigview.o gofigapp.o
+OBJS = gofig.o gofigview.o gofigapp.o
 HFILES = gofig.H gofigview.H gofigapp.H
 
 NormalObjectRule()
@@ -26,11 +26,10 @@ InstallClassFiles($(HFILES))
  -a  		suppresses loading gofigapp into the executable 
  -r .  		to build test program before libgofig.a has been installed
  -m gofigvt.o 	to use main() from gofigvt.o (Instead of default main)
-gflex.o		non-ATK class needed
  -c ...		additional classes to include
 */
 REQUIRED = frame view texttroff print
-VTGENSTATLARGS = -a -r . -m gofigvt.o gflex.o -c gofigapp ${REQUIRED}
+VTGENSTATLARGS = -a -r . -m gofigvt.o -c gofigapp ${REQUIRED}
 Runapp(gofigvt,$(VTGENSTATLARGS))
 #endif 
 

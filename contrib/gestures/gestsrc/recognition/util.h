@@ -40,7 +40,7 @@ the full agreement.
 
 #define	STREQ(a,b)	( ! strcmp(a,b) )
 
-void	*recog_myalloc(int nitems, int itemsize, const char *typename);	/* Do not call this function directly */
+void	*recog_myalloc(int nitems, int itemsize, const char *typname);	/* Do not call this function directly */
 char *recog_scopy(const char *s);
 void PRINTF_LIKE(1,2) recog_debug(const char *a, ...);	/* printf on stderr -
 			   setting DebugFlag = 0 turns off debugging */

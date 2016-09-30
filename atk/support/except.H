@@ -1,6 +1,7 @@
 #ifndef _except_H_
 #define _except_H_
 
+#include <andrewos.h>
 #include <setjmp.h>
 
 /** \addtogroup libsupport

@@ -11,6 +11,8 @@
 BEGINCPLUSPLUSPROTOS
 
 #include <cmerror.h>
+#include <X11/X.h>
+#include <X11/Xlib.h>
 
 /* Could have just as easily used TRUE and FALSE for these. */
 #define cmenu_Inactive                  0

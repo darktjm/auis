@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+#include <andrewos.h>
+
 /** \addtogroup libsupport libsupport.so
  *  A statically loadable ATK class file.  Contains buffer, bufferlist,
  *  completion, dictionary, environment, except, ghash, glist, hash, list,

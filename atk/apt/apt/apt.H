@@ -86,6 +86,7 @@ struct apt_field_contents
   class apt;
   typedef void (*apt_readfptr)(class apt *self);
   typedef void (*apt_writefptr)(class apt *self);
+#include <andrewos.h>
 #include <dataobject.H>
 class apt : public  dataobject
   {
@@ -230,6 +231,7 @@ Initial revision
 #define  on	1
 #define  off	0
 
+#include <atkproto.h>
 
 /* tjm - FIXME: only define these in C files that actually use the timers */
 static UNUSED struct timeval	  tod;

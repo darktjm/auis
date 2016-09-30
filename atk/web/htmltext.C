@@ -3933,7 +3933,7 @@ long htmltext::FindNamedAnchor(const char *target, long pos, long len) {
 			checkanchor, (long)target);
     if(env)
 		return env->Eval();
-    return NULL;
+    return 0;
 }
 
 

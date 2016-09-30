@@ -173,6 +173,11 @@ EXAMPLE ---
 
 ****************************************************************************************/
 
+#include <andrewos.h>
+#include <stdio.h>
+#include <zipfig.h>
+#include <zipimage.h>
+
 /*===
 #define  Xip_Close_Stream( x )\
 	{ziP_Close_Stream(x);\

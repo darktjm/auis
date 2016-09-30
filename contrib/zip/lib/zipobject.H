@@ -28,6 +28,8 @@ zipobject.ch
 #define  CurrentStream			((pane)->zip_pane_current_stream)
 
 #include <view.H>
+#include <zipfig.h>
+#include <zippane.h>
 class zipobject : public  view {
 public:
 	virtual ATKregistryEntry *ATKregistry();

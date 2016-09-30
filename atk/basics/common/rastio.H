@@ -25,6 +25,7 @@
 #define  rastio_PROGRAMMERVERSION    1
 
 #include <ATK.H>
+#include <stdio.h>
 
 class rastio : public ATK  {
 public:

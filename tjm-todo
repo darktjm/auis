@@ -81,6 +81,36 @@
     - get rid of or fill in all that stub documentation (e.g. "proctables")
 - general cleanup:
   - remove all warnings
+    2x flex output errors that probably can't be fixed:
+    overhead/grefs:
+    <stdout>:827:18: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    <stdout>:1522:23: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    <stdout>:2060:17: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    doc/mkbrowse:
+    lex.yy.c:1494:23: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    lex.yy.c:2032:17: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+
+    visibility errors that probably can't be fixed easily:
+    atk/web:
+    ./htmlform.H:68:7: warning: ‘htmlform’ declared with greater visibility than the type of its field ‘htmlform::fields’ [-Wattributes]
+    ./htmlform.H:68:7: warning: ‘htmlform’ declared with greater visibility than the type of its field ‘htmlform::fields’ [-Wattributes]
+    contrib/gofig:
+    ./gofig.H:73:7: warning: ‘gofig’ declared with greater visibility than the type of its field ‘gofig::stones’ [-Wattributes]
+    ./gofig.H:73:7: warning: ‘gofig’ declared with greater visibility than the type of its field ‘gofig::stones’ [-Wattributes]
+    ./gofig.H:73:7: warning: ‘gofig’ declared with greater visibility than the type of its field ‘gofig::stones’ [-Wattributes]
+
+    Pointer aliasing issues that can't be fixed easily:
+    contrib/gestures/gsestsrc/gdp:
+    set.c:202:4: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+    set.c:269:4: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+
+    gccmakedep errors that can't be fixed easily:
+    overhead/genstatl: (depped before atk/im.H; runapp never compiled here)
+    runapp.C:13:16: fatal error: im.H: No such file or directory
+    atk/basics/common: (only if magick not selected for build)
+    magick.C:11:29: fatal error: wand/MagickWand.h: No such file or directory
+    [also atk/basics/common/{devil,magick,freeimage}.C when the dependent
+    packages aren't installed.]
   - remove externs in c files
   - remove all statics in header files, if possible (gads, help.h is awful)
   - Unfortunately, there is no easy, portable way to avoid exporting

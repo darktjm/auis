@@ -552,8 +552,6 @@ ENDCPLUSPLUSPROTOS
 #ifdef __cplusplus
 #include <new>
 #endif
-#undef NULL
-#define NULL 0UL
 
 /* GETDOMAIN_ENV should be defined as 1 if the getdomain() function is defined and can be concatenated with the result of gethostname to make a fully qualified hostname. */
 #define GETDOMAIN_ENV 1

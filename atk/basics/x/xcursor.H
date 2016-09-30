@@ -11,6 +11,8 @@
  *	cursor.ch
  */
 
+#include <X11/X.h>
+#include <X11/Xlib.h>
 #include <rect.h>
 
 #include <cursor.H>

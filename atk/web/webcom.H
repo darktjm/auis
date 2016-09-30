@@ -50,7 +50,8 @@
 class webcom;
 typedef void  (*webcom_cbptr)(void *, webcom *, int);
 
-
+#include <stdio.h>
+#include <flex.H>
 #include <observable.H>
 class webcom: public observable{
 public:
