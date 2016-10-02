@@ -16,25 +16,25 @@ All #includes should be prsent exactly as they are in this file, unless otherwis
 
 /* The default definitions of ANSI_COMPILER, ANSI_CPP and ANSI_IMAKECPP may be overridden here and/or in site.h */
 #undef ANSI_COMPILER
-#define ANSI_COMPILER 1
+#define ANSI_COMPILER 1 /**< Using c89+ C compiler.  Should always be defined. */
 #undef ANSI_CPP
-#define ANSI_CPP 1
+#define ANSI_CPP 1 /**< Using c89+ C preprocessor.  Should always be defined if compiling C code.  However, Imake uses pre-c89 cpp. */
 #undef ANSI_IMAKECPP
 
-#define STDC_HEADERS 1
+#define STDC_HEADERS 1  /**< Using c89+ libc.  Should always be defined. */
 
 /* presite.h should be used to select a compiler if the system.h file has support for multiple compilers. */
 #include <presite.h>
 
 #include <allsys.h>
 
-#define	OPSYSNAME	"ix86_Linux" /* the full name of this operating system */
-#define	sys_ix86_Linux	1	/* sys_<system-type-name> should be defined to 1 */
-#define	SYS_NAME	"ix86_Linux" /* the short name of this operating system, should be the same as the system-type-name */
+#define	OPSYSNAME	"ix86_Linux" /**< the full name of this operating system (C string) */
+#define	sys_ix86_Linux	1	/**< sys_<system-type-name> should be defined to 1 */
+#define	SYS_NAME	"ix86_Linux" /**< the short name of this operating system, should be the same as the system-type-name (C string) */
 
 #ifdef In_Imake
 #undef FAILEXIT
-#define FAILEXIT test $$? -eq 0 || exit 1
+#define FAILEXIT test $$? -eq 0 || exit 1  /**< macro for exiting on error due to lack of "set -e" in make actions */
 #endif
 
 /* The SY_ macros should hopefully become obsolete fairly soon, in the mean time you should
@@ -59,8 +59,12 @@ All #includes should be prsent exactly as they are in this file, unless otherwis
 /* Here follow the overrides for this system. */
 #undef  SY_U53
 #define SY_U53  1 /* This system is most like SVR3 */
+/**< Some old code does the right thing if this is defined.  Should be
+ *   dropped in favor of pure Single UNIX Spec conformance.  */
 #undef SY_U5x
 #define SY_U5x 1
+/**< Some old code does the right thing if this is defined.  Should be
+ *   dropped in favor of pure Single UNIX Spec conformance.  */
 
 
 /* The following section includes #defines, #includes and any other hackery which is needed
@@ -78,7 +82,13 @@ All #includes should be prsent exactly as they are in this file, unless otherwis
 #undef ATK_IMPLPRAG
 #undef ATK_IMPL
 #define ATK_IMPL(x)
+/**< Some systems may benefit from defining this to a pragma.  Of course
+ *   C doesn't allow pragmas in preprocessor macro expansions, so maybe
+ *   just leave it blank. */
 
+
+/* tjm: The following list of #includes needs to go.  Each file should include
+ *      exactly what it needs:  no more, no less. */
 /* The following list of #includes may be modified as necessary to bring in the required
  types, macros and functions. */
 /* the following types should be included.  (usually from sys/types.h)
@@ -387,7 +397,7 @@ char *tzname
 #include <ctype.h>
 
 #define OSI_HAS_SYMLINKS 1
-/* If OSI_HAS_SYMLINKS is not defined, osi_readlink is present in libutil. */
+/* If OSI_HAS_SYMLINKS is not defined, osi_readlink is present in libatkos. */
 #define osi_readlink(PATH,BUF,SIZE) readlink((PATH),(BUF),(SIZE))
 
 /* fcntl is specified by posix:
@@ -445,10 +455,6 @@ Macros:
 #define	osi_setjmp  setjmp
 #define	osi_longjmp longjmp
 
-/** @} */
-/* This one function is in libutil.  It should probably go into libatkos. */
-/** \addtogroup libutil
- * @{ */
 /* Make a time standard, see the ATK Coding Standards document */
 struct osi_Times {unsigned long int Secs; unsigned long int USecs;};
 /* Set one of the above with a call to osi_GetTimes(&foo) */
@@ -460,11 +466,8 @@ struct osi_Times {unsigned long int Secs; unsigned long int USecs;};
 
 #define HAS_GETTIMEOFDAY 1
 BEGINCPLUSPLUSPROTOS
-extern int osi_GetTimes(struct osi_Times *p); /* in libutil.a */
+extern int osi_GetTimes(struct osi_Times *p); /* in libatkos.a */
 ENDCPLUSPLUSPROTOS
-/** @} */
-/** \addtogroup libatkos
- * @{ */
 
 /* More BSD-isms,  if your system has setlinebuf in libc you can remove this line. */
 #define setlinebuf(file) setvbuf(file, NULL, _IOLBF, BUFSIZ)

@@ -16,7 +16,7 @@ class AHashStringKey {
     const char *key;
   public:
     inline AHashStringKey(const char *k) {
-	key=NewString((char *)k);
+	key=strdup((char *)k);
 	if(key) len=strlen(k);
 	else len=0;
     }
@@ -26,7 +26,7 @@ class AHashStringKey {
     }
     inline AHashStringKey(const AHashStringKey &src) {
 	if(src.key) {
-	    key=NewString((char *)src.key);
+	    key=strdup((char *)src.key);
 	    if(key) len=strlen(key);
 	    else len=0;
 	} else {
@@ -43,7 +43,7 @@ class AHashStringKey {
     inline AHashStringKey &operator=(const AHashStringKey &src) {
 	if(key) free((char *)key);
 	if(src.key) {
-	    key=NewString((char *)src.key);
+	    key=strdup((char *)src.key);
 	    if(key) len=strlen(key);
 	    else len=0;
 	} else {

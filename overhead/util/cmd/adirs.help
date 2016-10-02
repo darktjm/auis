@@ -14,7 +14,7 @@ parts of AUIS.  It is intended primarily for use in shell scripts.}
 \section{Quick reference
 
 }\leftindent{
-andrewdirs [andrewdir] [xlibdir] [andydir] [localdir] [afsbasedir]
+andrewdirs [andrewdir] [xlibdir] [localdir] [afsbasedir]
 
 
 Any or all of the optional arguments may be present.  The requested 

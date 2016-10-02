@@ -7,8 +7,8 @@ The copyright notice may be dropped or replaced with your copyright notice.  Any
 #ifndef	SYSTEM_H
 #define	SYSTEM_H
 
-#include <allsys.h>
-
+/** \addtogroup libatkos
+ * @{ */
 
 #undef ANSI_COMPILER
 #define ANSI_COMPILER 1
@@ -20,6 +20,8 @@ The copyright notice may be dropped or replaced with your copyright notice.  Any
 
 
 #include <presite.h>
+
+#include <allsys.h>
 
 #undef MAX
 #undef MIN

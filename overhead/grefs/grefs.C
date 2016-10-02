@@ -42,7 +42,7 @@ static void PushFile(char *name, FILE *file)
         exit(-1);
     }
     FileStack[FilePtr] = file;
-    FileNames[FilePtr] = NewString(name);
+    FileNames[FilePtr] = strdup(name);
 #ifdef FLEX_ENV
     FileBuffers[FilePtr] = yy_create_buffer(file, 4096);
     yy_switch_to_buffer(FileBuffers[FilePtr]);
@@ -178,7 +178,7 @@ static int AddClass(char *cname, int tok) {
 	fprintf(stderr, "out of memory.\n");
 	exit(-1);
     }
-    result->cname=NewString(cname);
+    result->cname=strdup(cname);
     if(result->cname==NULL) {
 	fprintf(stderr, "out of memory.\n");
 	exit(-1);

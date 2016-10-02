@@ -134,7 +134,7 @@ void urlbutton::SetURL(char  *url)
 {
     if (current_url)
 	free(current_url);
-    current_url = NewString(url);
+    current_url = strdup(url);
     if (!has_label) {
 	/* We do this as a convenience. */
 	SetLabel( 0, url);

@@ -322,7 +322,7 @@ void\bold{ DisRemember()}
 
 	set string that will be written to data stream
 
-	uses NewString to make a copy of its argument
+	uses strdup to make a copy of its argument
 
 \bold{const char *GetSource()}
 
@@ -346,9 +346,9 @@ void\bold{ DisRemember()}
 assignment of a new value to the slot}
 
 
-the setit function for an ASlotString slot should NOT use NewString
+the setit function for an ASlotString slot should NOT use strdup
 
-the setit function for an ASlotFile slot should NOT use NewString
+the setit function for an ASlotFile slot should NOT use strdup
 
 
 // ASlotAssign - class for aactions supplied as Assign function

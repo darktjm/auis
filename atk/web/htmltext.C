@@ -734,7 +734,7 @@ StyleToCodes(style *sty) {
 			AppendIndentCode(&codex, 'R', val, Unit);
 
 	*codex++ = '\0';
-	return NewString(codes);
+	return strdup(codes);
 }
 
 /* CodesToTags
@@ -3958,9 +3958,9 @@ image *htmltext::GetImage(const char *file, attlist *atts) {
                 }
             }
         }
-        else   filename = NewString((char *)file);
+        else   filename = strdup((char *)file);
     }
-    else   filename = NewString((char *)file);
+    else   filename = strdup((char *)file);
 
     if ((dat=(image*)ATK::NewObject("imageio")) != NULL) {
         int ok;

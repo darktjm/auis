@@ -165,6 +165,8 @@
     - renamed dataobject to flexd to avoid conflict
     - seems to want to be renamed flexpair for compatibility with con
   - switcher: builds OK.  Not sure what it does
+- figure out what ANSI standard ansitext refers to, and document it
+- get rid of include/ prefix on all headers in doxygen
 
 Long-term:
   - view/adjust styling boundaries (aka view source)?

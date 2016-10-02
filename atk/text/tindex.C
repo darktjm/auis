@@ -534,7 +534,7 @@ class text *tindex::BuildIndexText(struct textps_locatag *taglist)
 	    entlist[numents].tag = tag;
 	    cx = strstr(tag->name, "++");
 	    if (!cx) {
-		term = NewString(tag->name);
+		term = strdup(tag->name);
 		subterm = NULL;
 	    }
 	    else {
@@ -542,7 +542,7 @@ class text *tindex::BuildIndexText(struct textps_locatag *taglist)
 		term = (char *)malloc(len+1);
 		strncpy(term, tag->name, len);
 		term[len] = '\0';
-		subterm = NewString(cx+2);
+		subterm = strdup(cx+2);
 	    }
 	    if (islower(*term))
 		*term = (toupper(*term));

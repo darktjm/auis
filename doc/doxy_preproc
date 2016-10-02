@@ -8,7 +8,7 @@ h="${1##*include/}"
 g=`echo ${h%.[hH]} | tr /.- ___`
 test -n "$hasgr" || echo "/** \\addtogroup $g $h
  * @{ */"
-echo "/** \\file $h */"
+echo "/** \\file include/$h */"
 sed -e '/#define/!{
     s/PRINTF_LIKE([^)]*)//g
     s/SCANF_LIKE([^)]*)//g

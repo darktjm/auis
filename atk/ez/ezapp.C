@@ -689,7 +689,7 @@ int ezapp::Run()
 		    sprintf(errorMessage,"Attempt to visit directory without trailing slash.");
 		    break;
 		default:
-		    sprintf(errorMessage, "File '%s' not found; could not create. %s.", fileEntry->filename, UnixError(errno));
+		    sprintf(errorMessage, "File '%s' not found; could not create. %s.", fileEntry->filename, strerror(errno));
 		    break;
 	    }
             StartupError(errtext,errorMessage);

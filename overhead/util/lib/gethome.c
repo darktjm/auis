@@ -9,10 +9,6 @@
 #include <errno.h>
 #include <util.h>
 
-#ifndef NULL
-#define NULL 0
-#endif
-
 static char *home = NULL;
 
 const char *gethome(const char *name)

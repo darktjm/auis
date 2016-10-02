@@ -278,7 +278,7 @@ ThisUser() {
 	struct passwd *pw;
 	static char buf[300];
 
-	if ((uid = getvuid()) != -1 && (pw = getvpwuid(uid)) != NULL) {
+	if ((uid = getuid()) != -1 && (pw = getpwuid(uid)) != NULL) {
 		/* got a name from passwd file */
 		login = (char *)pw->pw_name;
 		name = (char *)pw->pw_gecos;

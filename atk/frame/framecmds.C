@@ -50,6 +50,7 @@ ATK_IMPL("framecmds.H")
 #include <signal.h> /* needed for hp - sometimes included in sys/param.h */
 #include <sys/stat.h>
 #include <errno.h>
+#include <setjmp.h>
 
 static class keymap *framecmdsKeymap, *framecmdsDefaultKeymap;
 static class menulist *framecmdsMenus;
@@ -344,7 +345,7 @@ saveBuffer(class frame  *outputFrame, class buffer  *buffer, char  *filename)
 	 "File not found; could not create. Attempt to write to a directory.");
                 break;
             default:
-                sprintf(message, "Could not save file: %s.", UnixError(errno));
+                sprintf(message, "Could not save file: %s.", strerror(errno));
                 message::DisplayString(outputFrame, 0, message);
         }
 
@@ -1195,7 +1196,7 @@ static class buffer *LocalGetBufferOnFile(class frame  *self, const char  *filen
 			"Attempt to visit directory without trailing slash.");
                 break;
             default:
-                sprintf(msgbuf, "File not found; could not create. %s.", UnixError(localerrno));
+                sprintf(msgbuf, "File not found; could not create. %s.", strerror(localerrno));
                 message::DisplayString(self, 0, msgbuf);
                 break;
         }

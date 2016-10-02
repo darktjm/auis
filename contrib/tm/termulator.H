@@ -5,6 +5,10 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtermulator libtermulator.so
+ * A dynamically loadable ATK class file.  Contains termulator, tm19, tmapp,
+ * tmview.
+ * @{ */
 /*
  * terminal emulator for text
  */
@@ -127,5 +131,5 @@ public:
 	termulator_statefptr state;
 	boolean currentlyReadingTemplateKluge;
 };
-
+/** @} */
 #endif /* _termulator_H_ */

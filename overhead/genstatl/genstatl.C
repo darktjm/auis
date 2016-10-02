@@ -82,7 +82,7 @@ static boolean AddClass(char  *name, struct hashf *sf)
 	fprintf(stderr, "genstatl: out of memory.\n");
 	exit(-1);
     }
-    result->classname=NewString(name);
+    result->classname=strdup(name);
     result->lib=sf;
     result->needed=0;
     result->next=all[ind];
@@ -135,7 +135,7 @@ static struct hashf *AddFile(char  *path, boolean  exists)
 	exit(-1);
     }
     result->reflevel=result->liblevel=0;
-    result->pathname=NewString(path);
+    result->pathname=strdup(path);
     DisplayHashf(result,__LINE__);
     result->dev=statbuf.st_dev;
     result->ino=statbuf.st_ino;
@@ -1092,7 +1092,7 @@ int main(int argc, char **argv)
     FILE *ifp;
     const char *executablename="runapp";
     char **objects=NULL;
-    char *extras=NewString("");
+    char *extras=strdup("");
     int ocount=0;
     char *directory=NULL;
     const char *odir="";
@@ -1101,13 +1101,13 @@ int main(int argc, char **argv)
     char mainFile[MAXPATHLEN];
     FILE *mfp=NULL; /*file to write entry point function 'libName_main_()' in*/
     char ibuf[MAXPATHLEN];
-    AndrewDirStr=NewString(AndrewDir(""));
-    XLibDirStr=NewString(XLibDir(""));
+    AndrewDirStr=strdup(AndrewDir(""));
+    XLibDirStr=strdup(XLibDir(""));
     AFSBaseDirStr=getenv("AFSBASEDIR");
     if(AFSBaseDirStr==NULL) AFSBaseDirStr=AFSBASEDIR;
-    AFSBaseDirStr=NewString(AFSBaseDirStr);
+    AFSBaseDirStr=strdup(AFSBaseDirStr);
     
-    orderfilename=NewString( AndrewDir("/lib/genstatl/liborder"));
+    orderfilename=strdup( AndrewDir("/lib/genstatl/liborder"));
 
     getwd(wd);
     

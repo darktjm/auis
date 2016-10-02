@@ -45,7 +45,7 @@ static int AddClass(char *cname) {
     struct clist *result=NULL;
     int tok=refs_Name;
     char *super=NULL;
-    super=NewString(yytext);
+    super=strdup(yytext);
     tok=NextNonWhiteSpace();
     entries++;
     result=(struct clist *)malloc(sizeof(struct clist));
@@ -53,7 +53,7 @@ static int AddClass(char *cname) {
 	fprintf(stderr, "out of memory.\n");
 	exit(-1);
     }
-    result->cname=NewString(cname);
+    result->cname=strdup(cname);
     if(result->cname==NULL) {
 	fprintf(stderr, "out of memory.\n");
 	exit(-1);

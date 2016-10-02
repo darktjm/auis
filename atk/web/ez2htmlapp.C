@@ -190,7 +190,7 @@ ez2htmlapp::ParseArgs(int argc, const char *argv[]) {
 		case 'h':	// help
 			ShowUsage(this);  return FALSE;
 		case 'o':	// object type
-			objectType = NewString(((*argv)[2]) ? (*argv)+2
+			objectType = strdup(((*argv)[2]) ? (*argv)+2
 					: (--argc, *++argv));  
 			break;
 		case 'f':	// output file prefix
@@ -289,12 +289,12 @@ ez2htmlapp::ParseArgs(int argc, const char *argv[]) {
 	if (tx) {
 		char t = tx[1];
 		tx[1] = '\0';
-		outPath = NewString(outFileArg);
+		outPath = strdup(outFileArg);
 		tx[1] = t;
 		tx++;		// pt to outFileNm (if any)
 	}
 	else {
-		outPath = NewString("");
+		outPath = strdup("");
 		tx = outFileArg;  	// pt to outFileNm (if any)
 	}
 
@@ -304,7 +304,7 @@ ez2htmlapp::ParseArgs(int argc, const char *argv[]) {
 		if (tx) tx++;
 		else tx = inputFile;
 	}
-	outFileNm = NewString(tx);
+	outFileNm = strdup(tx);
 
 	//  Strip extension from outFileNm
 	tx = strrchr(outFileNm, '.');
@@ -320,7 +320,7 @@ ez2htmlapp::ParseArgs(int argc, const char *argv[]) {
 	}
 
 	// check gifDir   (reuse variable outFileArg for another purpose)
-	if ( ! gifDir) gifDir = NewString("./");
+	if ( ! gifDir) gifDir = strdup("./");
 	if (*gifDir == '/')
 		strcpy(outFileArg, gifDir);
 	else
@@ -383,7 +383,7 @@ OpenInfile(ez2htmlapp *self) {
 		return NULL;
 	}
 	free(self->inputFile);
-	self->inputFile = NewString(filename);
+	self->inputFile = strdup(filename);
 
 	return fopen(self->inputFile, "r");
 }

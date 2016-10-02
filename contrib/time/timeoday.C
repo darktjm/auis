@@ -245,18 +245,18 @@ timeoday::SetFormat(char  *format)
   if (this->format) free(this->format);
   sprintf(prof_namebuf, "%sdefaultformat", (this)->GetTypeName());
   if (format != NULL) {
-      this->format = NewString(format);
+      this->format = strdup(format);
   } else {
       const char *format = environ::GetProfile(prof_namebuf);
       if (format == NULL) {
-	  this->format = NewString("");
+	  this->format = strdup("");
       } else {
-	  this->format = NewString(format);
+	  this->format = strdup(format);
       }
   }
   if (strcmp(this->format, "")==0) {
     if (this->format) free(this->format);
-    this->format = NewString("%o %A, %Y");
+    this->format = strdup("%o %A, %Y");
   }
   this->epoch = SECMIN*MINHOUR*HOURDAY;
   for(i=0; this->format[i]; ++i) {

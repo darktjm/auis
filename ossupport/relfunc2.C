@@ -12,7 +12,7 @@ static struct nmlist {
 static void EnterName(char *libname) {
     struct nmlist *result=new nmlist;
     result->next=first;
-    result->name=NewString(libname);
+    result->name=strdup(libname);
     first=result;
 }
 

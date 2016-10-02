@@ -2,7 +2,7 @@
 #define _imageio_H_
 /* copied from jpeg.H.  Bite me, IBM. */
 
-/** \addtogroup libimagev
+/** \addtogroup libbasics
  * @{ */
 #include <image.H>
 

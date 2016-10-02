@@ -70,9 +70,9 @@ pushbutton::pushbutton()
 
     const char *name = environ::GetProfile("foreground");
     if ((name == NULL) || (strcmp(name, "") == 0)) {
-	this->foreground_name = NewString("black");
+	this->foreground_name = strdup("black");
     } else {
-	this->background_name = NewString(name);
+	this->background_name = strdup(name);
     }
     this->foreground_color[0] = 0;
     this->foreground_color[1] = 0;
@@ -80,9 +80,9 @@ pushbutton::pushbutton()
 
     name = environ::GetProfile("background");
     if ((name == NULL) || (strcmp(name, "") == 0)) {
-	this->background_name = NewString("white");
+	this->background_name = strdup("white");
     } else {
-	this->background_name = NewString(name);
+	this->background_name = strdup(name);
     }
     this->background_color[0] = 0;
     this->background_color[1] = 0;
@@ -341,11 +341,11 @@ pushbutton::SetText(const char  *txt)
 {
 /*
   Set the text label for this object.
-	Do the NewString before the free so the cache will be 
+	Do the strdup before the free so the cache will be 
 	sure to see a change in the label.
 */
     char *oldtxt = text;
-    text = (txt) ? NewString(txt) : NULL; 
+    text = (txt) ? strdup(txt) : NULL; 
     SetModified();
     NotifyObservers(observable_OBJECTCHANGED);
     if (oldtxt) 
@@ -394,7 +394,7 @@ pushbutton::SetFGColor(char  *name, int  red , int  green , int  blue)
     this->foreground_name = NULL;
 
     if (name != NULL) {
-	this->foreground_name = NewString(name);
+	this->foreground_name = strdup(name);
 	this->foreground_color[0] = 0;
 	this->foreground_color[1] = 0;
 	this->foreground_color[2] = 0;
@@ -423,7 +423,7 @@ pushbutton::SetBGColor(char  *name, int  red , int  green , int  blue)
     this->background_name = NULL;
 
     if (name != NULL) {
-	this->background_name = NewString(name);
+	this->background_name = strdup(name);
 	this->background_color[0] = 0;
 	this->background_color[1] = 0;
 	this->background_color[2] = 0;

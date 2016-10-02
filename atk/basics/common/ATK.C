@@ -101,7 +101,7 @@ static void ReadAliasFile(const char *path) {
 	if(*p=='\0') continue;
 	*p++='\0';
 	while(*p==' ' || *p=='\t') p++;
-	new ATK_aliases(NewString(mapping), NewString(p));
+	new ATK_aliases(strdup(mapping), strdup(p));
     }
     fclose(fp);
 }

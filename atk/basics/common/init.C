@@ -331,10 +331,10 @@ static void BindFunction(class init  *init, char  **args, boolean  forceLoad, en
 	   if(res) {
 	       strcpy(res, "list:( ");
 	       strcat(res, parameterString + 2);
-	       parameterString=NewString(res);
+	       parameterString=strdup(res);
 	       free(res);
 	   } else parameterString=NULL;
-       } else parameterString=NewString(parameterString);
+       } else parameterString=strdup(parameterString);
     }
     if (type == init_KEY)
         if (TranslateKeySequence(binding, translatedKeys) < 0) {
@@ -538,7 +538,7 @@ static void Include(class init  *init, char  **args, boolean  forceLoad)
 	&& (tmpFullName[0]!='\\') && !(isalpha(tmpFullName[0]) && tmpFullName[1]==':')
 #endif
 	) {
-	char *tmpfname = NewString(tmpFullName);
+	char *tmpfname = strdup(tmpFullName);
 	const char *initfilepath = environ::GetConfiguration("InitFilePath");
 	if (initfilepath != NULL) {
 	    path::FindFileInPath(tmpFullName, initfilepath, tmpfname);

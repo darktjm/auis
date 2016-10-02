@@ -31,7 +31,7 @@ void unknown::SetRealClass(char  *rclass)
     /* delete the old message */
     (this)->AlwaysDeleteCharacters( 0, (this)->GetLength());
     if(rclass) {
-	this->realclass=NewString(rclass);
+	this->realclass=strdup(rclass);
 	/* tell the user that the inset is not supported */
 	sprintf(buf, "? (see 'help unknown')\nThe %s inset is not supported in this version of AUIS.\n", this->realclass);
     } else {

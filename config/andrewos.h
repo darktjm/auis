@@ -9,7 +9,7 @@
 
 /** \addtogroup libatkos
  * @{ */
-/** \file andrewos.h
+/** \file include/andrewos.h
  * This file should be included in every ATK C file. */
 
 #include <system.h>

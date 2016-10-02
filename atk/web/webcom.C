@@ -174,7 +174,7 @@ static void HandleLoaded(webcom *self, char *buf) {
     self->status|=WEBCOM_Loaded;
     if(*buf) {
 	if(self->file) free(self->file);
-	self->file=NewString(buf);
+	self->file=strdup(buf);
     }
     webcom_DoCallback(self, WEBCOM_SUCCESS_WEB);
     webcom_CheckQue();

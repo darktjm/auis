@@ -132,7 +132,7 @@ void application::SaveInitArgv(int argc, const char **argv)
     for (i = 0; i < argc; i++) {
 	if (argv[i] == NULL)
 	    break;	/* The caller lied about argc! */
-	init_argv[i] = NewString(argv[i]);
+	init_argv[i] = strdup(argv[i]);
     }
     init_argv[i] = NULL;
 }

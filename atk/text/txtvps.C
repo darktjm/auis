@@ -226,7 +226,7 @@ static void DefaultStyle(struct textps_style  *ts)
 	    fontStyle = fontdesc_Plain;
 	}
 
-	ts->fontfamily = NewString(namebuf);
+	ts->fontfamily = strdup(namebuf);
 	ts->fontsize = fontSize;
 	ts->realfontsize = ts->fontsize;
 	ts->fontfaces = fontStyle;
@@ -263,7 +263,7 @@ static int tabsortsplot(struct textps_tabentry  *e1 , struct textps_tabentry  *e
 
 static void copy_textps_style(struct textps_style  *tsnew , struct textps_style  *ts)
 {
-    tsnew->fontfamily = NewString(ts->fontfamily);
+    tsnew->fontfamily = strdup(ts->fontfamily);
     tsnew->realfontsize = ts->realfontsize;
     tsnew->fontfaces = ts->fontfaces;
     if (tsnew->realfontsize < 1)
@@ -282,7 +282,7 @@ static void copy_textps_style(struct textps_style  *tsnew , struct textps_style 
     tsnew->leftmargin = ts->leftmargin;
     tsnew->rightmargin = ts->rightmargin;
     if (ts->tabfill)
-	tsnew->tabfill = NewString(ts->tabfill);
+	tsnew->tabfill = strdup(ts->tabfill);
     else
 	tsnew->tabfill = NULL;
     tsnew->tabs = ts->tabs;
@@ -385,11 +385,11 @@ static void PushStyle(struct textps_slurp  *slurp, void  *pushval, int  pushtype
 
 	(sty)->GetFontFamily( namebuf, 254);
 	if (namebuf[0]) {
-	    tsnew->fontfamily = NewString(namebuf);
+	    tsnew->fontfamily = strdup(namebuf);
 	    afm_changed = TRUE;
 	}
 	else {
-	    tsnew->fontfamily = NewString(ts->fontfamily);
+	    tsnew->fontfamily = strdup(ts->fontfamily);
 	}
 
 	tsnew->fontfaces = (ts->fontfaces | (sty)->GetAddedFontFaces()) & (sty)->GetRemovedFontFaces();
@@ -494,11 +494,11 @@ static void PushStyle(struct textps_slurp  *slurp, void  *pushval, int  pushtype
 
 	cx = (sty)->GetAttribute("tabfill");
 	if (cx) {
-	    tsnew->tabfill = NewString(cx);
+	    tsnew->tabfill = strdup(cx);
 	}
 	else {
 	    if (ts->tabfill) {
-		tsnew->tabfill = NewString(ts->tabfill);
+		tsnew->tabfill = strdup(ts->tabfill);
 	    }
 	    else {
 		tsnew->tabfill = NULL;
@@ -3262,7 +3262,7 @@ void SetIBMClassFooter(struct textps_layout_blonk *blonk)
 	    break;
     if (i < 6) {
 	/* Found it.  Set the current value. */
-	blonk->head[header_FOOTER].string[header_ctext] = NewString(classifications[i]);
+	blonk->head[header_FOOTER].string[header_ctext] = strdup(classifications[i]);
 	blonk->head[header_FOOTER].haspage |= (1<<header_ctext);
     }
 }
@@ -3586,7 +3586,7 @@ static void PrintPSText(class textview *self, FILE *outfile, long width, long he
 	    blonk.head[headflag].haspage = 0;
 	    blonk.head[headflag].dirty = TRUE;
 	}
-	blonk.head[header_HEADER].string[header_ctext] = NewString("- \\\\n% -");
+	blonk.head[header_HEADER].string[header_ctext] = strdup("- \\\\n% -");
 	blonk.head[header_HEADER].haspage |= (1<<header_ctext);
 #ifdef RCH_ENV
     SetIBMClassFooter(&blonk);

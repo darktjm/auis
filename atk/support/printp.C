@@ -1124,7 +1124,7 @@ print::print() {
 	filename = (char *)malloc(strlen(P_tmpdir) + 10);
 	sprintf(filename, "%s/prXXXXXX", P_tmpdir);
 	close(mkstemp(filename));
-	title = NewString("Andrew Document");
+	title = strdup("Andrew Document");
 
 	next_earlier = current_print;
 	current_print = this;
@@ -1204,7 +1204,7 @@ print::SetFromProperties(view *v, long *pwidth, long *pheight) {
 
 	class buffer *buf;
 	buf = buffer::FindBufferByData(v->GetDataObject());
-	if (buf) title = NewString(buf->GetName());
+	if (buf) title = strdup(buf->GetName());
 }
 
 	boolean

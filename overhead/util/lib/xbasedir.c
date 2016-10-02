@@ -9,8 +9,6 @@
 	use a common tree for all installed X facilities )	
 */
 
-/* andydir.c */
-
 #include <util.h>
 #include <stdio.h>
 #include <andrdir.h>

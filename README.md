@@ -182,6 +182,13 @@ So far, the following incompatibilities have been introduced:
 
      stop-keyboard-macro   =>   im-stop-keybaord-macro
 
+  - When I added the generic image reader, I made the makefile somewhat
+    dependent on GNU make.  That is, the make you use must support the
+    `$(shell ...)` function and the `ifeq` .. `endif` construct.  In
+    particular, the Single UNIX Spec make does not support these
+    features.  Fix atk/basics/{common,lib}/Imakefile if this is a
+    problem for you. 
+
 Goals
 -----
 

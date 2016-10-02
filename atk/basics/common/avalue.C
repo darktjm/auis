@@ -334,7 +334,7 @@ int avalueflex::InterpretString(const char **str) {
 	    *str.Append()='\0';
 	    size_t dummy;
 	    const char *res=str.GetBuf(0,str.GetN(),&dummy);
-	    res=NewString((char *)res);
+	    res=strdup((char *)res);
 	    if(res==NULL) continue;
 	    add(res,aname,ParseType(&p));
 	    aname=NULL;

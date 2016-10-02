@@ -840,7 +840,7 @@ static void changecondition(class pintv  *self, class sbutton  *sb, struct prefd
 	return;
     }
 
-    pd->cond=newcond?NewString(newcond):NULL;
+    pd->cond=newcond?strdup(newcond):NULL;
     (pd->obj)->SetCondition( pd->cond);
     (pd->obj)->NotifyObservers( observable_OBJECTCHANGED);
     FixPref(self, pd);

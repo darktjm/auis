@@ -25,7 +25,7 @@ static void initMyHome(void)
 {
     const char *cp;
     if (homeLen == -1) {
-	cp = getMyHome();  /* only use home to shorten if it's 2 chars or more */
+	cp = gethome(NULL);  /* only use home to shorten if it's 2 chars or more */
 	if (cp != NULL && cp[0] != '\0' && cp[1] != '\0') {
 	    myHome = strdup(cp);
 	    homeLen = strlen(cp);
@@ -144,7 +144,7 @@ int main(void)
     char *cp; int maxLen;
     char auxID[300], auxHome[1000];
 
-    cp = getMyHome();
+    cp = gethome(NULL);
     printf("Using %s for my home directory.\n", cp == NULL ? "NULL" : cp);
     auxID[0] = auxHome[0] = '\0';
     printf("Aux ID: "); fflush(stdout);

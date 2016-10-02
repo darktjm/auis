@@ -9,8 +9,6 @@
 #include <andrdir.h>
 #include <util.h>
 
-/* andydir.c */
-
 /* Return a string with the current value for ANDREWDIR imbedded in it. */
 const char *AndrewDir(const char *str)
 {

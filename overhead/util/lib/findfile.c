@@ -2,7 +2,7 @@
 */
  
 #include <andrewos.h>    /* types */
-#include <util.h>	/* NewString */
+#include <util.h>	/* strdup */
 
 #ifdef DOS_STYLE_PATHNAMES
 #define PATH_DELIMITER ';'

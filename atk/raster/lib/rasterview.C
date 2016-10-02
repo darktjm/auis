@@ -873,7 +873,7 @@ static void RasterIOCommand(class rasterview  *self, enum RasterIOType  rock)
 	    sprintf(cmd, "xwd %s -out %s", ((self)->DisplayClass() & graphic_Monochrome) ? "-xy" : "", filename);
 	else
 	    sprintf(cmd, "asnap -atk -noshow -file %s", filename);
-	res = os_system(cmd);
+	res = system(cmd);
 	if (res != 0) {
 	    char err[500];
 	    if (rock == MakeWD) sprintf(err, "Failed: could not find xwd.");

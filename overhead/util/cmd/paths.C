@@ -4,7 +4,7 @@
 
 #include <util.h>
 
-static const char usage[]= "usage: andrewdirs [andrewdir] [xlibdir] [afsbasedir] [localdir] [andydir]\n";
+static const char usage[]= "usage: andrewdirs [andrewdir] [xlibdir] [afsbasedir] [localdir]\n";
 int main(int argc, char **argv)
 {
     int i, len;
@@ -22,7 +22,6 @@ int main(int argc, char **argv)
 	}
 	else if (strcmp(argv[i], "xlibdir")==0) r=XLibDir("");
 	else if (strcmp(argv[i], "localdir")==0) r=LocalDir("");
-	else if (strcmp(argv[i], "andydir")==0) r=AndyDir("");
 	else {
 	    fprintf(stderr, usage);
 	    return 1;
