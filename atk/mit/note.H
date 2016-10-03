@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libnote libnote.so
+/** \addtogroup libnote Object note
  *  A dynamically loadable ATK class file.  Contains note, noteview,
  *  icon, iconview, ps, psview, gnucompat, vutils.
  * @{ */

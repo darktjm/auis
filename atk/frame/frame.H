@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libframe libframe.so
+/** \addtogroup libframe Object frame
  *  A statically loadable ATK class file.  Contains frame, frameview,
  *  framecmds, framemessage, helptextview.  Note that while the object
  *  name is frame, which matches the primary class name, none of the others

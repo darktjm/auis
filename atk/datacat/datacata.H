@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libdatacata libdatacata.so
+/** \addtogroup libdatacata Object datacata
  *  A dynamically loadable ATK class file.  Contains datacata.
  * @{ */
 #define datacata_IncludeNo (0)

@@ -15,14 +15,14 @@ endif
 OBJS=ATK.o ATKdebug.o application.o atom.o atomlist.o bind.o   cursor.o dataobject.o  environ.o event.o filetype.o fontdesc.o gbuf.o graphic.o im.o image.o $(IMAGEIO).o init.o keymap.o keystate.o menulist.o message.o messitem.o msghandler.o namespace.o observable.o owatch.o path.o pixelimage.o proctable.o rastio.o region.o rm.o traced.o updatelist.o view.o windowsystem.o imageaux.o physical.o rect.o point.o lwpstubs.o flex.o mflex.o avalue.o oflex.o aaction.o ddimage.o color.o viewholderv.o ahash.o workproc.o
 HFILES=ATK.H ATKdebug.H application.H atom.H atomlist.H bind.H   cursor.H dataobject.H  environ.H event.H filetype.H fontdesc.H gbuf.H graphic.H im.H image.H imageio.H init.H keymap.H keystate.H menulist.H message.H messitem.H msghandler.H namespace.H observable.H owatch.H path.H pixelimage.H proctable.H rastio.H region.H rm.H traced.H updatelist.H view.H windowsystem.H attribs.h viewholderv.H physical.h point.h rect.h sizes.h flex.H mflex.H oflex.H avalue.H aaction.H ddimage.H color.H ahash.H workproc.H abits.H
 
-DOCS = app.doc atom.doc atomlist.doc attribs.doc basinit.doc \
+DOCS = app.doc atom.doc atomlist.doc \
 	bind.doc cursor.doc dataobj.doc  environ.doc \
 	event.doc filetype.doc fontdesc.doc graphic.doc im.doc \
-	init.doc keymap.doc keystate.doc lwpstubs.doc \
-	menulist.doc message.doc msghndlr.doc namespc.doc \
-	observe.doc physical.doc pixelimg.doc proctbl.doc \
+	init.doc keymap.doc keystate.doc \
+	menulist.doc message.doc msghndlr.doc \
+	observe.doc proctbl.doc \
 	region.doc rm.doc updlist.doc view.doc \
-	winsys.doc image.doc
+	image.doc
 
 NormalObjectRule()
 NormalATKRule()

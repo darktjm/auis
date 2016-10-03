@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libtree libtree.so
+/** \addtogroup libtree Object tree
  *  A dynamically loadable ATK class file.  Contains tree, treev.
  * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************

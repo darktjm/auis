@@ -10,7 +10,6 @@ CleanTarget(README)
 InstallFile(README, $(INSTMANFLAGS), ${DESTDIR})
 InstallDocs(README.ez, ${DESTDIR}/doc/ADMINISTRATOR)
 InstallDocs(FAQ.ez, ${DESTDIR}/doc/ADMINISTRATOR)
-InstallDocs(CONTENTS.ez, ${DESTDIR}/doc)
 InstallDocs(COPYRITE,${DESTDIR}/doc)
 InstallDocs(COPYRITE.bls,${DESTDIR}/doc)
 InstallDocs(COPYRITE.att,${DESTDIR}/doc)
@@ -33,6 +32,9 @@ CleanTarget(prefs.def)
 
 #ifdef MK_DOXYDOC
 all::ATK-API.pdf
+/* doxy target for doxy check w/o painfully long pdflatex process */
+doxy: dox/latex/hierarchy.tex
+/* GNU make dependency: $(shell) */
 dox/latex/hierarchy.tex: $(shell find $(DESTDIR)/include -type f) doxyfile doxy_preproc
 	$(RM) -rf dox
 	sed -e 's#$${ANDREWDIR}#$(DESTDIR)#g' < doxyfile | doxygen -

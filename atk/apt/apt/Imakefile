@@ -19,7 +19,5 @@ DynamicMultiObjectWithExports(apt,apts aptv,$(OBJS), $(LIBS),,)
 InstallDynamicObjectWithExports(apt,apts aptv,$(FULLATKDLIBDIR))
 InstallClassFiles($(HFILES))
 
-InstallDocs(AptPG.doc, ${DESTDIR}/doc/PROGRAMMER)
-
 
 

@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libtermulator libtermulator.so
+/** \addtogroup libtermulator Object termulator
  * A dynamically loadable ATK class file.  Contains termulator, tm19, tmapp,
  * tmview.
  * @{ */

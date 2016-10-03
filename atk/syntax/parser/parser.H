@@ -3,7 +3,7 @@
 #ifndef _parser_H_
 #define _parser_H_
 
-/** \addtogroup libparser libparser.so
+/** \addtogroup libparser Object parser
  *  A dynamically loadable ATK class file.  Contains parser.
  * @{ */
 /*	parser.H: headers for parser class  */

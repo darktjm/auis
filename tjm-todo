@@ -167,6 +167,8 @@
   - switcher: builds OK.  Not sure what it does
 - figure out what ANSI standard ansitext refers to, and document it
 - get rid of include/ prefix on all headers in doxygen
+- implement or get rid of alink, ezscan
+- maybe try converting doxy latex output to ez (rtf is hopeless)
 
 Long-term:
   - view/adjust styling boundaries (aka view source)?

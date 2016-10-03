@@ -4,7 +4,7 @@
 #include <awidget.H>
 #include <fontdesc.H>
 #include <aaction.H>
-/** \addtogroup libAButton libAButton.so
+/** \addtogroup libAButton Object AButton
  *  A dynamically loadable ATK class file.  Contains AText, ATextv,
  *  AOptionCardv, AOptionMenuv, AOptionMenu, AList, AListv, AButton,
  *  AButtonv, AOptionSourceFormula, AButtonSizeFormula, ATextSizeFormula.

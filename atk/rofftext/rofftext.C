@@ -30,7 +30,7 @@ ATK_IMPL("rofftext.H")
 #include <mantext.H>
 
 #include <rofftext.H>
-/*#include "rofftext.h"*/
+#include "rofftext.h"
 #include <roffcmds.h>
 #include <roffstyl.h>
 #include <roffutil.h>
@@ -57,15 +57,8 @@ int ROFFDEBUG = 0;
 
 typedef void (*cmdfptr)(class rofftext  *self,Trickle  t,boolean  br,int  argc,const char  * const argv[]);
 ATKdefineRegistry(rofftext, text, rofftext::InitializeClass);
-void SetIndent(class rofftext  *self,int  u);
-void SetTempIndent(class rofftext  *self,int  u);
-static boolean Is_BOL(class rofftext  *self);
-void Set_BOL(class rofftext  *self);
-static void DestroyContext(IC  c);
 static Trickle topen(class rofftext  *self,char  *filename,FILE  *f,char  *s);
 static int g(class rofftext  *self,Trickle  t);
-void ung(class rofftext  *self,int  c,Trickle  t);
-void tpush(class rofftext  *self,Trickle  t,const char  *filename,FILE  *f,const char  *s,boolean  push,int  argc,const char  * const argv[]);
 static void munch(class rofftext  *self,Trickle  t);
 static void special(class rofftext  *self,Trickle  t);
 static void setfont(class rofftext  *self,Trickle  t);
@@ -75,19 +68,8 @@ static int munchmove(class rofftext  *self,Trickle  t);
 static void getname(class rofftext  *self,Trickle  t,char  *name);
 static int getsize(class rofftext  *self,Trickle  t);
 static const char *getregister(class rofftext  *self,Trickle  t);
-void putregister(class rofftext  *self,const char  *name,int  value,enum RegFmt  fmt,int  inc,boolean  relative);
-const char *getstring(class rofftext  *self,const char  *name);
-void putstring(class rofftext  *self,const char  *name,const char  *value);
-void getarg(class rofftext  *self,Trickle  t,char  *buf,int  n,boolean  copymode);
-void put(class rofftext  *self,int c);
-void DoBreak(class rofftext  *self);
-int get(class rofftext  *self,Trickle  t);
-#if defined(__STDC__) && !defined(__HIGHC__)
-#else /* defined(__STDC__) && !defined(__HIGHC__) */
-#endif /* defined(__STDC__) && !defined(__HIGHC__) */
 static void CreateDefaultCommands(class rofftext  *self);
 static void DoCommand(class rofftext  *self,Trickle  t,char  *name,boolean  br);
-void Scan(class rofftext  *self,Trickle  t,const char  *cmd);
 static int setmode(class rofftext  *self, int  oldmode , int  newmode );
 static long ReadFormatted(class rofftext  *self, FILE  *file, long  id);
 static boolean istroff(FILE  *fp );

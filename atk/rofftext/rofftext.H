@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup librofftext librofftext.so
+/** \addtogroup librofftext Object rofftext
  *  A dynamically loadable ATK class file.  Contains rofftext, rofftextapp,
  *  mmtext, mantext.
  * @{ */
@@ -59,27 +59,7 @@ struct reg {
 };
 typedef struct reg *Reg;
 
-enum trickle_type {
-    trickle_File,
-    trickle_String
-};
-
-struct trickle {
-    struct _trickle *t;
-};
-
-struct _trickle {
-    enum trickle_type type;
-    union {
-        FILE *f;
-        const char *s;
-    }u;
-    const char *filename;
-    int LineNumber;
-    char *buf;
-    boolean pop;
-    struct _trickle *prev;
-};
+struct trickle;
 typedef struct trickle *Trickle;
 
 struct MagicBuf {

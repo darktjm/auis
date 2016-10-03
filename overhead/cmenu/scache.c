@@ -9,8 +9,21 @@
 
 /* This file (scache.c) and scache.h will implement a string cacheing mechanism so that even if menus are leaked they won't represent much of a drain... */
 
+struct scache_el {
+    long refcount;
+    char str[1];
+};
+
+#define scache_REFCOUNT(string) (*(long *)((string)-(long)((struct scache_el *)0)->str))
+
+struct scache_node {
+    unsigned long els, maxels;
+    struct scache_el **scache_el;
+};
+
 static struct scache_node scache[256] = {};
 
+/* this hash function is pretty poor as far as magic functions go, but it's not too bad... */
 #define HASH(str,len) (((*(str)<<2)+((str)[(len)>>1])+((str)[(len)-(len)?1:0]<<2)+((str)[len>>2]<<2)+(len))&0xff)
 #define BLOCKSIZE 5
 #define GROWTHFACTOR 2

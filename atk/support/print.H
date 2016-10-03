@@ -29,18 +29,7 @@ class fontdesc;
 typedef void (*print_cleanup_fptr)(const void *rock);
 typedef void (*print_header_fptr)(FILE *outfile, const void *rock);
 
-struct afm_font_hashnode {
-    char *name;
-    void *data;
-    int entrynum;
-    struct afm_font_hashnode *chain, *next;
-};
-
-typedef struct _afm_font_hashtable {
-    struct afm_font_hashnode *chain, **chainnext;
-    struct afm_font_hashnode **tab;
-    int numentries;
-} afm_font_hashtable;
+struct _afm_font_hashtable;
 
 struct font_afm_dir {
     double underlineposition, underlinethickness;
@@ -132,10 +121,11 @@ class print : public ATK  {
 	inline void SetTitle(const char *tnm) { title = strdup(tnm); }
 	inline const char *GetTitle() { return title; }
 
+    private:
 	char *filename;
 	char *title;
 
-	afm_font_hashtable *fontsregistered, 
+	struct _afm_font_hashtable *fontsregistered, 
 			*defsregistered, *headsregistered;
 	struct cleanup *cleanupsregistered, **cleanupsptr;
 	short defsused;

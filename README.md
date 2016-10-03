@@ -187,7 +187,8 @@ So far, the following incompatibilities have been introduced:
     `$(shell ...)` function and the `ifeq` .. `endif` construct.  In
     particular, the Single UNIX Spec make does not support these
     features.  Fix atk/basics/{common,lib}/Imakefile if this is a
-    problem for you. 
+    problem for you.  Adding doxygen support made such a dependency as 
+    well; fix doc/Imakefile if you don't have `$(shell ...)`.
 
 Goals
 -----

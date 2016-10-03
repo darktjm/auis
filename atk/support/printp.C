@@ -25,6 +25,19 @@
 
 #define PSHASHSIZE 33
 
+struct afm_font_hashnode {
+    char *name;
+    void *data;
+    int entrynum;
+    struct afm_font_hashnode *chain, *next;
+};
+
+typedef struct _afm_font_hashtable {
+    struct afm_font_hashnode *chain, **chainnext;
+    struct afm_font_hashnode **tab;
+    int numentries;
+} afm_font_hashtable;
+
 static afm_font_hashtable *AFMCache;
 static struct font_afm *symbolfont = NULL;
 static class atom *A_landscape, *A_scale, *A_papersize;

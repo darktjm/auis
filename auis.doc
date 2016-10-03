@@ -1,17 +1,17 @@
 \begindata{text,7156720}
 \textdsversion{12}
 \template{default}
-\chapter{$\{ANDREWDIR\}}
+\chapter{$ANDREWDIR}
 
 \begindata{link,15135200}
 4
-${ANDREWDIR}
+$ANDREWDIR
 0
 0
 V
 \begindata{link,15135200}
 Datastream version: 2
-${ANDREWDIR}
+$ANDREWDIR
 2
 
 black
@@ -20,7 +20,7 @@ white
 \enddata{link,15135200}
 \view{linkview,15135200,25311,0,0} is the root of the installation 
 directory.   Note that while I refer to it here as 
-\typewriter{$\{ANDREWDIR\}}, and it can be written in some contexts that 
+\typewriter{$ANDREWDIR}, and it can be written in some contexts that 
 way, it is not necessary to actually set an environment variable to the 
 default configured installation directory.  Other than data files and some 
 configuration files, all Andrew-related items are under this tree, although 
@@ -35,7 +35,7 @@ in the following list:
 [\italic{note: a site may insert a path here using} 
 \typewriter{LOCAL_ANDREW_SETUP_ENV}]
 
-\typewriter{$\{ANDREWDIR\}/etc/AndrewSetup}
+\typewriter{$ANDREWDIR/etc/AndrewSetup}
 
 \typewriter{/usr/andrew/etc/AndrewSetup}}
 
@@ -63,12 +63,12 @@ configuration parameters.
 menu in \bold{typescript}.
 
 
-The files directly under \typewriter{$\{ANDREWDIR\}} are:
+The files directly under \typewriter{$ANDREWDIR} are:
 
 	\
 \begindata{link,11636496}
 4
-${ANDREWDIR}/COPYRITE
+$ANDREWDIR/COPYRITE
 0
 0
 V
@@ -86,7 +86,7 @@ white
 	\
 \begindata{link,11930720}
 4
-${ANDREWDIR}/README
+$ANDREWDIR/README
 0
 0
 V
@@ -107,12 +107,12 @@ Version 2
 n 0
 \enddata{bp,11633824}
 \view{bpv,11633824,25314,0,0}
-\chapter{$\{ANDREWDIR\}/bin}
+\chapter{$ANDREWDIR/bin}
 
 The 
 \begindata{link,7162864}
 4
-${ANDREWDIR}/bin
+$ANDREWDIR/bin
 0
 0
 V
@@ -136,7 +136,7 @@ intended to be run directly by users.  It is the one to add to
 An ATK to RTF converter.  See 
 \begindata{link,12563792}
 4
-${ANDREWDIR}/help/2rtf.help
+$ANDREWDIR/help/2rtf.help
 0
 0
 V
@@ -166,7 +166,7 @@ no on-line help.
 Display standard directories.  See 
 \begindata{link,12559360}
 4
-${ANDREWDIR}/help/adirs.help
+$ANDREWDIR/help/adirs.help
 0
 0
 V
@@ -189,7 +189,7 @@ Starts up ez with the arbcon window, for ATK visual application
 development.  For more information, see 
 \begindata{link,12560288}
 4
-${ANDREWDIR}/doc/PROGRAMMER/AdewOverview.doc
+$ANDREWDIR/doc/PROGRAMMER/AdewOverview.doc
 0
 0
 V
@@ -221,7 +221,7 @@ anywhere.  There is no on-line help.
 Display and edit bdf font files.  See 
 \begindata{link,12561936}
 4
-${ANDREWDIR}/help/bdffont.help
+$ANDREWDIR/help/bdffont.help
 0
 0
 V
@@ -254,7 +254,7 @@ For each given file, the output file is the same, but with any
  in the documentation for 
 \begindata{link,7160016}
 4
-${ANDREWDIR}/doc/DEVELOPER/AndrewProgramming.ez
+$ANDREWDIR/doc/DEVELOPER/AndrewProgramming.ez
 0
 0
 V
@@ -284,7 +284,7 @@ man/info format, as for most FSF software, so it can't be read easily with
 (\
 \begindata{link,7161664}
 4
-${ANDREWDIR}/doc/syntax
+$ANDREWDIR/doc/syntax
 0
 0
 V
@@ -315,7 +315,7 @@ rooted on the current directory.  Some additional documentation is
 available in 
 \begindata{link,11640128}
 4
-${ANDREWDIR}/help/bush.help
+$ANDREWDIR/help/bush.help
 0
 0
 V
@@ -333,7 +333,7 @@ for now, these are only documented in the documentation for
 application::ParseArgs in 
 \begindata{link,11640624}
 4
-${ANDREWDIR}/doc/DEVELOPER/AndrewProgramming.ez
+$ANDREWDIR/doc/DEVELOPER/AndrewProgramming.ez
 0
 0
 V
@@ -362,7 +362,7 @@ Creates a \bold{chart} object and displays a view on that object.   If
 is available in 
 \begindata{link,12810416}
 4
-${ANDREWDIR}/help/chart.help
+$ANDREWDIR/help/chart.help
 0
 0
 V
@@ -380,7 +380,7 @@ for now, these are only documented in the documentation for
 application::ParseArgs in 
 \begindata{link,12810912}
 4
-${ANDREWDIR}/doc/DEVELOPER/AndrewProgramming.ez
+$ANDREWDIR/doc/DEVELOPER/AndrewProgramming.ez
 0
 0
 V
@@ -403,7 +403,7 @@ Check for events in ~/events.champ.   See
  \
 \begindata{link,12811680}
 4
-${ANDREWDIR}/help/chump.help
+$ANDREWDIR/help/chump.help
 0
 0
 V
@@ -419,7 +419,7 @@ white
 \view{linkview,12811680,25326,0,0} as well as the 
 \begindata{link,12812576}
 4
-${ANDREWDIR}/help/champ.help
+$ANDREWDIR/help/champ.help
 0
 0
 V
@@ -444,7 +444,7 @@ Run the Andrew system monitoring console.  Additional documentation is
 available in 
 \begindata{link,12813872}
 4
-${ANDREWDIR}/help/console.help
+$ANDREWDIR/help/console.help
 0
 0
 V
@@ -469,7 +469,7 @@ writing.  Better to use ImageMagick or the Utah Raster Toolkit or some
 other more capable package, since this supports so few image formats.  See 
 \begindata{link,12814688}
 4
-${ANDREWDIR}/help/convras.help
+$ANDREWDIR/help/convras.help
 0
 0
 V
@@ -556,8 +556,8 @@ containing the object is saved. }\
 
 \indent{This utility uses \bold{awk} to perform some work.  You can 
 override the command used here (by default \typewriter{awk -f 
-$\{ANDREWDIR\}/lib/arbiters/conpros.awk} when not creating insets, or 
-\typewriter{awk -f $\{ANDREWDIR\}/lib/arbiters/instpros.awk} otherwise)}
+$ANDREWDIR/lib/arbiters/conpros.awk} when not creating insets, or 
+\typewriter{awk -f $ANDREWDIR/lib/arbiters/instpros.awk} otherwise)}
 
 \typewriter{-H}
 
@@ -567,7 +567,7 @@ $\{ANDREWDIR\}/lib/arbiters/conpros.awk} when not creating insets, or
 For more details, see the 
 \begindata{link,7216784}
 4
-${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
+$ANDREWDIR/doc/PROGRAMMER/AdewReference.doc
 0
 0
 V
@@ -594,7 +594,7 @@ Usage: \bold{createinset} \italic{basename}
 For more information, see the 
 \begindata{link,7218112}
 4
-${ANDREWDIR}/help/cres8et.help
+$ANDREWDIR/help/cres8et.help
 0
 0
 V
@@ -621,7 +621,7 @@ line).  Also supports optional explicit "include" directives.  For more
 information, see the 
 \begindata{link,7219488}
 4
-${ANDREWDIR}/help/datacat.help
+$ANDREWDIR/help/datacat.help
 0
 0
 V
@@ -644,7 +644,7 @@ white
 
 See the \begindata{link,7221104}
 4
-${ANDREWDIR}/help/eq.help
+$ANDREWDIR/help/eq.help
 0
 0
 V
@@ -668,7 +668,7 @@ The main entry point to the ATK inset editing system.  For details,
 see the 
 \begindata{link,7222400}
 4
-${ANDREWDIR}/help/ez.help
+$ANDREWDIR/help/ez.help
 0
 0
 V
@@ -688,7 +688,7 @@ white
 
 See the \begindata{link,7223376}
 4
-${ANDREWDIR}/help/ez2ascii.help
+$ANDREWDIR/help/ez2ascii.help
 0
 0
 V
@@ -710,7 +710,7 @@ white
 
 See the \begindata{link,7224672}
 4
-${ANDREWDIR}/help/ez2html.help
+$ANDREWDIR/help/ez2html.help
 0
 0
 V
@@ -730,7 +730,7 @@ white
 
 See the \begindata{link,7368032}
 4
-${ANDREWDIR}/help/ez2ps.help
+$ANDREWDIR/help/ez2ps.help
 0
 0
 V
@@ -760,7 +760,7 @@ help.
 
 See the \begindata{link,7369888}
 4
-${ANDREWDIR}/help/ezprint.help
+$ANDREWDIR/help/ezprint.help
 0
 0
 V
@@ -782,7 +782,7 @@ white
 
 See the \begindata{link,7371344}
 4
-${ANDREWDIR}/help/fad.help
+$ANDREWDIR/help/fad.help
 0
 0
 V
@@ -804,7 +804,7 @@ white
 
 See the \begindata{link,7372960}
 4
-${ANDREWDIR}/help/figure.help
+$ANDREWDIR/help/figure.help
 0
 0
 V
@@ -833,7 +833,7 @@ Run \bold{imake} on the \typewriter{Imakefile} in an ATK project directory
 to create a \typewriter{Makefile}.  For more information, see 
 \begindata{link,7375136}
 4
-${ANDREWDIR}/help/genmake.help
+$ANDREWDIR/help/genmake.help
 0
 0
 V
@@ -856,7 +856,7 @@ Generate static ATK object loads for an executable.  For more
 information, see 
 \begindata{link,7375904}
 4
-${ANDREWDIR}/help/genstatl.help
+$ANDREWDIR/help/genstatl.help
 0
 0
 V
@@ -876,7 +876,7 @@ white
 
 See the \begindata{link,7376880}
 4
-${ANDREWDIR}/doc/PROGRAMMER/tlex.doc
+$ANDREWDIR/doc/PROGRAMMER/tlex.doc
 0
 0
 V
@@ -908,7 +908,7 @@ Start help browser on given topic or point running browser to topic.
  For more information, see \
 \begindata{link,13142944}
 4
-${ANDREWDIR}/help/help.help
+$ANDREWDIR/help/help.help
 0
 0
 V
@@ -935,7 +935,7 @@ effort.
 
 See the \begindata{link,13144800}
 4
-${ANDREWDIR}/help/image.help
+$ANDREWDIR/help/image.help
 0
 0
 V
@@ -973,7 +973,7 @@ no on-line help.
 information, see the 
 \begindata{link,13147456}
 4
-${ANDREWDIR}/help/layout.help
+$ANDREWDIR/help/layout.help
 0
 0
 V
@@ -990,7 +990,7 @@ white
 the ADEW system; for more information, see the 
 \begindata{link,13147952}
 4
-${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
+$ANDREWDIR/doc/PROGRAMMER/AdewReference.doc
 0
 0
 V
@@ -1021,7 +1021,7 @@ Create an org document for browsing a class hierarchy.  For more
 information, see 
 \begindata{link,13149760}
 4
-${ANDREWDIR}/help/mkbrowse.help
+$ANDREWDIR/help/mkbrowse.help
 0
 0
 V
@@ -1042,7 +1042,7 @@ white
 Create C parser code.  For more information, see 
 \begindata{link,13150656}
 4
-${ANDREWDIR}/doc/PROGRAMMER/parser.doc
+$ANDREWDIR/doc/PROGRAMMER/parser.doc
 0
 0
 V
@@ -1064,7 +1064,7 @@ document, but documentation is hidden in the regular documents.
 Create C++ parser code.  For more information, see 
 \begindata{link,11896576}
 4
-${ANDREWDIR}/doc/PROGRAMMER/prsclass.doc
+$ANDREWDIR/doc/PROGRAMMER/prsclass.doc
 0
 0
 V
@@ -1087,7 +1087,7 @@ Create a document containing an urlbutton inset.  For more information,
 see 
 \begindata{link,11897568}
 4
-${ANDREWDIR}/help/urlbutton.help
+$ANDREWDIR/help/urlbutton.help
 0
 0
 V
@@ -1118,7 +1118,7 @@ Run a headless ness script.  For more information, see the
  \
 \begindata{link,11899056}
 4
-${ANDREWDIR}/help/ness.help
+$ANDREWDIR/help/ness.help
 0
 0
 V
@@ -1147,7 +1147,7 @@ otherwise, it is not associated with any file.  Some additional
 documentation is available in 
 \begindata{link,11900512}
 4
-${ANDREWDIR}/help/org.help
+$ANDREWDIR/help/org.help
 0
 0
 V
@@ -1171,7 +1171,7 @@ Suck stdin into a text
 inset.  For more information, see \
 \begindata{link,11901808}
 4
-${ANDREWDIR}/help/pscript.help
+$ANDREWDIR/help/pscript.help
 0
 0
 V
@@ -1194,7 +1194,7 @@ Attempts to convert any image to an ATK-compatible image format.  For
 more information, see
  \begindata{link,11902624}
 4
-${ANDREWDIR}/help/image2atk.help
+$ANDREWDIR/help/image2atk.help
 0
 0
 V
@@ -1257,7 +1257,7 @@ Launch preference editor on given preference file
 see 
 \begindata{link,11731184}
 4
-${ANDREWDIR}/help/prefed.help
+$ANDREWDIR/help/prefed.help
 0
 0
 V
@@ -1279,7 +1279,7 @@ white
 
 See \begindata{link,11732560}
 4
-${ANDREWDIR}/help/raster.help
+$ANDREWDIR/help/raster.help
 0
 0
 V
@@ -1301,7 +1301,7 @@ Utility for recovering unknown
 insets.  For more information, see the on-line help for 
 \begindata{link,11733376}
 4
-${ANDREWDIR}/help/unknown.help
+$ANDREWDIR/help/unknown.help
 0
 0
 V
@@ -1326,7 +1326,7 @@ Attempts to convert roff source to an ATK document.  For more
 information, see 
 \begindata{link,11734832}
 4
-${ANDREWDIR}/help/rofftxt.help
+$ANDREWDIR/help/rofftxt.help
 0
 0
 V
@@ -1349,7 +1349,7 @@ Convert RTF to ATK.  Probably not very good with modern RTF output.
 For more information, see 
 \begindata{link,11933616}
 4
-${ANDREWDIR}/help/rtf2.help
+$ANDREWDIR/help/rtf2.help
 0
 0
 V
@@ -1373,7 +1373,7 @@ white
 See section 6 of the 
 \begindata{link,11934992}
 4
-${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
+$ANDREWDIR/doc/PROGRAMMER/AdewReference.doc
 0
 0
 V
@@ -1395,7 +1395,7 @@ document, but documentation is hidden in the regular documents.
 Launcher for application objects.  For more information, see 
 \begindata{link,11935936}
 4
-${ANDREWDIR}/help/runapp.help
+$ANDREWDIR/help/runapp.help
 0
 0
 V
@@ -1484,7 +1484,7 @@ Apparently low-quality scribe-to-atk
 converter.  For details, see 
 \begindata{link,11328384}
 4
-${ANDREWDIR}/help/scribetxt.help
+$ANDREWDIR/help/scribetxt.help
 0
 0
 V
@@ -1506,7 +1506,7 @@ white
 Print Andrew's idea of what system you're running.  For details, see 
 \begindata{link,11329280}
 4
-${ANDREWDIR}/help/sys.help
+$ANDREWDIR/help/sys.help
 0
 0
 V
@@ -1529,7 +1529,7 @@ white
 
 See \begindata{link,11331376}
 4
-${ANDREWDIR}/help/table.help
+$ANDREWDIR/help/table.help
 0
 0
 V
@@ -1555,7 +1555,7 @@ support for plain-text, but I don't see it in the
 code.  For details, see 
 \begindata{link,11332672}
 4
-${ANDREWDIR}/help/toez.help
+$ANDREWDIR/help/toez.help
 0
 0
 V
@@ -1586,7 +1586,7 @@ PROMPT=%}}
 For details, see 
 \begindata{link,11334048}
 4
-${ANDREWDIR}/help/tscript.help
+$ANDREWDIR/help/tscript.help
 0
 0
 V
@@ -1633,7 +1633,7 @@ reason fails often.  There is no on-line help.
 See the 
 \begindata{link,15184496}
 4
-${ANDREWDIR}/help/zip.help
+$ANDREWDIR/help/zip.help
 0
 0
 V
@@ -1653,12 +1653,12 @@ Version 2
 n 0
 \enddata{bp,15184992}
 \view{bpv,15184992,25370,0,0}
-\chapter{$\{ANDREWDIR\}/config}
+\chapter{$ANDREWDIR/config}
 
 The 
 \begindata{link,15185760}
 4
-${ANDREWDIR}/config
+$ANDREWDIR/config
 0
 0
 V
@@ -1681,7 +1681,7 @@ generating \typewriter{Makefile}s for building.
 Link to 
 \begindata{link,15187280}
 4
-${ANDREWDIR}/include/aconcat.h
+$ANDREWDIR/include/aconcat.h
 0
 0
 V
@@ -1704,7 +1704,7 @@ the build system.
 Link to 
 \begindata{link,15188096}
 4
-${ANDREWDIR}/include/allsys.h
+$ANDREWDIR/include/allsys.h
 0
 0
 V
@@ -1726,7 +1726,7 @@ the build system.
 
 \begindata{link,15188992}
 4
-${ANDREWDIR}/config/allsys.mcr
+$ANDREWDIR/config/allsys.mcr
 0
 0
 V
@@ -1749,7 +1749,7 @@ system.
 
 \begindata{link,15189808}
 4
-${ANDREWDIR}/config/andrew.rls
+$ANDREWDIR/config/andrew.rls
 0
 0
 V
@@ -1772,7 +1772,7 @@ system.
 
 \begindata{link,15190784}
 4
-${ANDREWDIR}/config/depend
+$ANDREWDIR/config/depend
 0
 0
 V
@@ -1790,7 +1790,7 @@ Helper script used by build system to attach the results of the dependency
 builder onto the Makefile.  Currently, the only supported dep builder is 
 \begindata{link,15191280}
 4
-${ANDREWDIR}/etc/gccmakedep
+$ANDREWDIR/etc/gccmakedep
 0
 0
 V
@@ -1811,7 +1811,7 @@ white
 
 \begindata{link,11336944}
 4
-${ANDREWDIR}/config/imake.tmpl
+$ANDREWDIR/config/imake.tmpl
 0
 0
 V
@@ -1833,7 +1833,7 @@ The main Makefile skeleton; used by the build system to generate Makefile.
 
 \begindata{link,11337840}
 4
-${ANDREWDIR}/config/platform.tmpl
+$ANDREWDIR/config/platform.tmpl
 0
 0
 V
@@ -1857,7 +1857,7 @@ Makefile creation by the build system.
 Link to 
 \begindata{link,11338656}
 4
-${ANDREWDIR}/include/presite.h
+$ANDREWDIR/include/presite.h
 0
 0
 V
@@ -1880,7 +1880,7 @@ the build system.
 Link to 
 \begindata{link,11339712}
 4
-${ANDREWDIR}/include/site.h
+$ANDREWDIR/include/site.h
 0
 0
 V
@@ -1902,7 +1902,7 @@ the build system.
 
 \begindata{link,11340640}
 4
-${ANDREWDIR}/config/site.mcr
+$ANDREWDIR/config/site.mcr
 0
 0
 V
@@ -1925,7 +1925,7 @@ Makefile creation by the build system.
 
 \begindata{link,11341536}
 4
-${ANDREWDIR}/config/site.rls
+$ANDREWDIR/config/site.rls
 0
 0
 V
@@ -1949,7 +1949,7 @@ creation by the build system.
 Link to 
 \begindata{link,11342352}
 4
-${ANDREWDIR}/include/system.h
+$ANDREWDIR/include/system.h
 0
 0
 V
@@ -1971,7 +1971,7 @@ the build system.
 
 \begindata{link,11343328}
 4
-${ANDREWDIR}/config/system.mcr
+$ANDREWDIR/config/system.mcr
 0
 0
 V
@@ -1993,12 +1993,12 @@ Version 2
 n 0
 \enddata{bp,11344064}
 \view{bpv,11344064,25386,0,0}
-\chapter{$\{ANDREWDIR\}/doc}
+\chapter{$ANDREWDIR/doc}
 
 The 
 \begindata{link,11344832}
 4
-${ANDREWDIR}/doc
+$ANDREWDIR/doc
 0
 0
 V
@@ -2015,31 +2015,11 @@ white
 files not incorporated into the help system.
 
 
-\section{CONTENTS.ez}
-
-\begindata{link,11345600}
-4
-${ANDREWDIR}/doc/CONTENTS.ez
-0
-0
-V
-\begindata{link,11345600}
-Datastream version: 2
-CONTENTS.ez
-2
-
-black
-white
-\enddata{link,11345600}
-\enddata{link,11345600}
-\view{linkview,11345600,25388,0,0}
-
-
 \section{COPYRITE}
 
 \begindata{link,6979968}
 4
-${ANDREWDIR}/doc/COPYRITE
+$ANDREWDIR/doc/COPYRITE
 0
 0
 V
@@ -2062,7 +2042,7 @@ additional copyright blurbs in this dir as well.
 
 \begindata{link,6980784}
 4
-${ANDREWDIR}/doc/COPYRITE.att
+$ANDREWDIR/doc/COPYRITE.att
 0
 0
 V
@@ -2085,7 +2065,7 @@ IBM replaced by AT&T)
 
 \begindata{link,6981680}
 4
-${ANDREWDIR}/doc/COPYRITE.bls
+$ANDREWDIR/doc/COPYRITE.bls
 0
 0
 V
@@ -2107,7 +2087,7 @@ Copyright notice for BellSouth; same license as IBM
 
 \begindata{link,6982688}
 4
-${ANDREWDIR}/doc/COPYRITE.img
+$ANDREWDIR/doc/COPYRITE.img
 0
 0
 V
@@ -2129,11 +2109,11 @@ Version 2
 n 0
 \enddata{bp,6983184}
 \view{bpv,6983184,25393,0,0}
-\chapter{$\{ANDREWDIR\}/doc/ADMINISTRATOR}
+\chapter{$ANDREWDIR/doc/ADMINISTRATOR}
 
 \begindata{link,6984032}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR
+$ANDREWDIR/doc/ADMINISTRATOR
 0
 0
 V
@@ -2154,7 +2134,7 @@ white
 
 \begindata{link,6984848}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/FAQ.ez
+$ANDREWDIR/doc/ADMINISTRATOR/FAQ.ez
 0
 0
 V
@@ -2174,7 +2154,7 @@ white
 
 \begindata{link,6985744}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/global.atkinit
+$ANDREWDIR/doc/ADMINISTRATOR/global.atkinit
 0
 0
 V
@@ -2194,7 +2174,7 @@ white
 
 \begindata{link,6986512}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/global.ezinit
+$ANDREWDIR/doc/ADMINISTRATOR/global.ezinit
 0
 0
 V
@@ -2214,7 +2194,7 @@ white
 
 \begindata{link,6987520}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/global.prf
+$ANDREWDIR/doc/ADMINISTRATOR/global.prf
 0
 0
 V
@@ -2234,7 +2214,7 @@ white
 
 \begindata{link,6988352}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/ImakeMacros.ez
+$ANDREWDIR/doc/ADMINISTRATOR/ImakeMacros.ez
 0
 0
 V
@@ -2254,7 +2234,7 @@ white
 
 \begindata{link,12837376}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/ImakeVars.ez
+$ANDREWDIR/doc/ADMINISTRATOR/ImakeVars.ez
 0
 0
 V
@@ -2274,7 +2254,7 @@ white
 
 \begindata{link,12838144}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/INSTALL.ez
+$ANDREWDIR/doc/ADMINISTRATOR/INSTALL.ez
 0
 0
 V
@@ -2294,7 +2274,7 @@ white
 
 \begindata{link,12839248}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/README.ez
+$ANDREWDIR/doc/ADMINISTRATOR/README.ez
 0
 0
 V
@@ -2314,7 +2294,7 @@ white
 
 \begindata{link,12840080}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/README.samples
+$ANDREWDIR/doc/ADMINISTRATOR/README.samples
 0
 0
 V
@@ -2334,7 +2314,7 @@ white
 
 \begindata{link,12840992}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/SetUp
+$ANDREWDIR/doc/ADMINISTRATOR/SetUp
 0
 0
 V
@@ -2353,11 +2333,11 @@ Version 2
 n 0
 \enddata{bp,12841728}
 \view{bpv,12841728,25405,0,0}
-\chapter{$\{ANDREWDIR\}/doc/ADMINISTRATOR/samples}
+\chapter{$ANDREWDIR/doc/ADMINISTRATOR/samples}
 
 \begindata{link,12842736}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples
+$ANDREWDIR/doc/ADMINISTRATOR/samples
 0
 0
 V
@@ -2381,7 +2361,7 @@ obsolete.
 
 \begindata{link,12843552}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/bobg.atkinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/bobg.atkinit
 0
 0
 V
@@ -2401,7 +2381,7 @@ white
 
 \begindata{link,12844464}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/bobg.cshrc
+$ANDREWDIR/doc/ADMINISTRATOR/samples/bobg.cshrc
 0
 0
 V
@@ -2421,7 +2401,7 @@ white
 
 \begindata{link,12845296}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/bobg.ezinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/bobg.ezinit
 0
 0
 V
@@ -2441,7 +2421,7 @@ white
 
 \begindata{link,12846288}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/bobg.helpinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/bobg.helpinit
 0
 0
 V
@@ -2461,7 +2441,7 @@ white
 
 \begindata{link,11305312}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/bobg.messagesinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/bobg.messagesinit
 0
 0
 V
@@ -2481,7 +2461,7 @@ white
 
 \begindata{link,12839056}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/bobg.preferences
+$ANDREWDIR/doc/ADMINISTRATOR/samples/bobg.preferences
 0
 0
 V
@@ -2501,7 +2481,7 @@ white
 
 \begindata{link,11307168}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/bobg.sendmessageinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/bobg.sendmessageinit
 0
 0
 V
@@ -2521,7 +2501,7 @@ white
 
 \begindata{link,11308256}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/bobg.typescriptinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/bobg.typescriptinit
 0
 0
 V
@@ -2541,7 +2521,7 @@ white
 
 \begindata{link,11309104}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/bobg.Xdefaults
+$ANDREWDIR/doc/ADMINISTRATOR/samples/bobg.Xdefaults
 0
 0
 V
@@ -2561,7 +2541,7 @@ white
 
 \begindata{link,11310016}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/ghoti.atkinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/ghoti.atkinit
 0
 0
 V
@@ -2581,7 +2561,7 @@ white
 
 \begindata{link,11310848}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/ghoti.bushinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/ghoti.bushinit
 0
 0
 V
@@ -2601,7 +2581,7 @@ white
 
 \begindata{link,11311840}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/ghoti.cshrc
+$ANDREWDIR/doc/ADMINISTRATOR/samples/ghoti.cshrc
 0
 0
 V
@@ -2621,7 +2601,7 @@ white
 
 \begindata{link,11312672}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/ghoti.ezinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/ghoti.ezinit
 0
 0
 V
@@ -2641,7 +2621,7 @@ white
 
 \begindata{link,11313584}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/ghoti.gdbinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/ghoti.gdbinit
 0
 0
 V
@@ -2661,7 +2641,7 @@ white
 
 \begindata{link,11314416}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/ghoti.login
+$ANDREWDIR/doc/ADMINISTRATOR/samples/ghoti.login
 0
 0
 V
@@ -2681,7 +2661,7 @@ white
 
 \begindata{link,7389664}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/ghoti.messagesinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/ghoti.messagesinit
 0
 0
 V
@@ -2701,7 +2681,7 @@ white
 
 \begindata{link,7390512}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/ghoti.pipescriptinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/ghoti.pipescriptinit
 0
 0
 V
@@ -2721,7 +2701,7 @@ white
 
 \begindata{link,7391440}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/ghoti.preferences
+$ANDREWDIR/doc/ADMINISTRATOR/samples/ghoti.preferences
 0
 0
 V
@@ -2741,7 +2721,7 @@ white
 
 \begindata{link,7392288}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jhh.atkinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jhh.atkinit
 0
 0
 V
@@ -2761,7 +2741,7 @@ white
 
 \begindata{link,7393344}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jhh.cshrc
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jhh.cshrc
 0
 0
 V
@@ -2781,7 +2761,7 @@ white
 
 \begindata{link,7394304}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jhh.ezinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jhh.ezinit
 0
 0
 V
@@ -2801,7 +2781,7 @@ white
 
 \begindata{link,7395344}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jhh.login
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jhh.login
 0
 0
 V
@@ -2821,7 +2801,7 @@ white
 
 \begindata{link,7396304}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jhh.messagesinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jhh.messagesinit
 0
 0
 V
@@ -2841,7 +2821,7 @@ white
 
 \begindata{link,7397504}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jhh.preferences
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jhh.preferences
 0
 0
 V
@@ -2861,7 +2841,7 @@ white
 
 \begindata{link,11272592}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jhh.sendmessageinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jhh.sendmessageinit
 0
 0
 V
@@ -2881,7 +2861,7 @@ white
 
 \begindata{link,7389008}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jhh.Xclients
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jhh.Xclients
 0
 0
 V
@@ -2901,7 +2881,7 @@ white
 
 \begindata{link,11274624}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jz1j.atkinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jz1j.atkinit
 0
 0
 V
@@ -2921,7 +2901,7 @@ white
 
 \begindata{link,11275680}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jz1j.consoleinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jz1j.consoleinit
 0
 0
 V
@@ -2941,7 +2921,7 @@ white
 
 \begindata{link,11276640}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jz1j.cshrc
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jz1j.cshrc
 0
 0
 V
@@ -2961,7 +2941,7 @@ white
 
 \begindata{link,11277680}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jz1j.ezinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jz1j.ezinit
 0
 0
 V
@@ -2981,7 +2961,7 @@ white
 
 \begindata{link,11278640}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jz1j.gdbinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jz1j.gdbinit
 0
 0
 V
@@ -3001,7 +2981,7 @@ white
 
 \begindata{link,11279920}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jz1j.messages-sendinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jz1j.messages-sendinit
 0
 0
 V
@@ -3021,7 +3001,7 @@ white
 
 \begindata{link,11280896}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jz1j.pipescriptinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jz1j.pipescriptinit
 0
 0
 V
@@ -3041,7 +3021,7 @@ white
 
 \begindata{link,13124112}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jz1j.preferences
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jz1j.preferences
 0
 0
 V
@@ -3061,7 +3041,7 @@ white
 
 \begindata{link,13124976}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jz1j.sendmessageinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jz1j.sendmessageinit
 0
 0
 V
@@ -3081,7 +3061,7 @@ white
 
 \begindata{link,11273648}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/jz1j.typescriptinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/jz1j.typescriptinit
 0
 0
 V
@@ -3101,7 +3081,7 @@ white
 
 \begindata{link,13127120}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/mcinerny.atkinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/mcinerny.atkinit
 0
 0
 V
@@ -3121,7 +3101,7 @@ white
 
 \begindata{link,13128224}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/mcinerny.cshrc
+$ANDREWDIR/doc/ADMINISTRATOR/samples/mcinerny.cshrc
 0
 0
 V
@@ -3141,7 +3121,7 @@ white
 
 \begindata{link,13129184}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/mcinerny.ezinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/mcinerny.ezinit
 0
 0
 V
@@ -3161,7 +3141,7 @@ white
 
 \begindata{link,13130384}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/mcinerny.login
+$ANDREWDIR/doc/ADMINISTRATOR/samples/mcinerny.login
 0
 0
 V
@@ -3181,7 +3161,7 @@ white
 
 \begindata{link,13131344}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/mcinerny.messagesinit
+$ANDREWDIR/doc/ADMINISTRATOR/samples/mcinerny.messagesinit
 0
 0
 V
@@ -3201,7 +3181,7 @@ white
 
 \begindata{link,13132400}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/samples/mcinerny.preferences
+$ANDREWDIR/doc/ADMINISTRATOR/samples/mcinerny.preferences
 0
 0
 V
@@ -3220,11 +3200,11 @@ Version 2
 n 0
 \enddata{bp,13133056}
 \view{bpv,13133056,25449,0,0}
-\chapter{$\{ANDREWDIR\}/doc/AtkTour}
+\chapter{$ANDREWDIR/doc/AtkTour}
 
 \begindata{link,13133744}
 4
-${ANDREWDIR}/doc/AtkTour
+$ANDREWDIR/doc/AtkTour
 0
 0
 V
@@ -3245,7 +3225,7 @@ white
 
 \begindata{link,10630656}
 4
-${ANDREWDIR}/doc/AtkTour/Adew
+$ANDREWDIR/doc/AtkTour/Adew
 0
 0
 V
@@ -3265,7 +3245,7 @@ white
 
 \begindata{link,13125872}
 4
-${ANDREWDIR}/doc/AtkTour/Birth
+$ANDREWDIR/doc/AtkTour/Birth
 0
 0
 V
@@ -3285,7 +3265,7 @@ white
 
 \begindata{link,10632720}
 4
-${ANDREWDIR}/doc/AtkTour/Class
+$ANDREWDIR/doc/AtkTour/Class
 0
 0
 V
@@ -3305,7 +3285,7 @@ white
 
 \begindata{link,10633664}
 4
-${ANDREWDIR}/doc/AtkTour/Datastream
+$ANDREWDIR/doc/AtkTour/Datastream
 0
 0
 V
@@ -3325,7 +3305,7 @@ white
 
 \begindata{link,10635008}
 4
-${ANDREWDIR}/doc/AtkTour/Dict
+$ANDREWDIR/doc/AtkTour/Dict
 0
 0
 V
@@ -3345,7 +3325,7 @@ white
 
 \begindata{link,10635952}
 4
-${ANDREWDIR}/doc/AtkTour/Focus
+$ANDREWDIR/doc/AtkTour/Focus
 0
 0
 V
@@ -3365,7 +3345,7 @@ white
 
 \begindata{link,10636976}
 4
-${ANDREWDIR}/doc/AtkTour/Insets
+$ANDREWDIR/doc/AtkTour/Insets
 0
 0
 V
@@ -3385,7 +3365,7 @@ white
 
 \begindata{link,10637920}
 4
-${ANDREWDIR}/doc/AtkTour/Layout
+$ANDREWDIR/doc/AtkTour/Layout
 0
 0
 V
@@ -3405,7 +3385,7 @@ white
 
 \begindata{link,10639024}
 4
-${ANDREWDIR}/doc/AtkTour/Media
+$ANDREWDIR/doc/AtkTour/Media
 0
 0
 V
@@ -3425,7 +3405,7 @@ white
 
 \begindata{link,12194288}
 4
-${ANDREWDIR}/doc/AtkTour/Menu
+$ANDREWDIR/doc/AtkTour/Menu
 0
 0
 V
@@ -3445,7 +3425,7 @@ white
 
 \begindata{link,12195312}
 4
-${ANDREWDIR}/doc/AtkTour/Ness
+$ANDREWDIR/doc/AtkTour/Ness
 0
 0
 V
@@ -3465,7 +3445,7 @@ white
 
 \begindata{link,10631568}
 4
-${ANDREWDIR}/doc/AtkTour/Text
+$ANDREWDIR/doc/AtkTour/Text
 0
 0
 V
@@ -3485,7 +3465,7 @@ white
 
 \begindata{link,12197536}
 4
-${ANDREWDIR}/doc/AtkTour/Tour
+$ANDREWDIR/doc/AtkTour/Tour
 0
 0
 V
@@ -3505,7 +3485,7 @@ white
 
 \begindata{link,12198480}
 4
-${ANDREWDIR}/doc/AtkTour/Volume
+$ANDREWDIR/doc/AtkTour/Volume
 0
 0
 V
@@ -3524,11 +3504,11 @@ Version 2
 n 0
 \enddata{bp,12199424}
 \view{bpv,12199424,25465,0,0}
-\chapter{$\{ANDREWDIR\}/doc/DEVELOPER}
+\chapter{$ANDREWDIR/doc/DEVELOPER}
 
 \begindata{link,12200112}
 4
-${ANDREWDIR}/doc/DEVELOPER
+$ANDREWDIR/doc/DEVELOPER
 0
 0
 V
@@ -3549,7 +3529,7 @@ white
 
 \begindata{link,12201248}
 4
-${ANDREWDIR}/doc/DEVELOPER/AndrewCoding.ez
+$ANDREWDIR/doc/DEVELOPER/AndrewCoding.ez
 0
 0
 V
@@ -3569,7 +3549,7 @@ white
 
 \begindata{link,12202272}
 4
-${ANDREWDIR}/doc/DEVELOPER/AndrewProgramming.ez
+$ANDREWDIR/doc/DEVELOPER/AndrewProgramming.ez
 0
 0
 V
@@ -3589,7 +3569,7 @@ white
 
 \begindata{link,12203312}
 4
-${ANDREWDIR}/doc/DEVELOPER/ATKinC++.ez
+$ANDREWDIR/doc/DEVELOPER/ATKinC++.ez
 0
 0
 V
@@ -3609,7 +3589,7 @@ white
 
 \begindata{link,14457632}
 4
-${ANDREWDIR}/doc/DEVELOPER/BuildAndTest.ez
+$ANDREWDIR/doc/DEVELOPER/BuildAndTest.ez
 0
 0
 V
@@ -3629,7 +3609,7 @@ white
 
 \begindata{link,14458864}
 4
-${ANDREWDIR}/doc/DEVELOPER/C++Conversion.ez
+$ANDREWDIR/doc/DEVELOPER/C++Conversion.ez
 0
 0
 V
@@ -3649,7 +3629,7 @@ white
 
 \begindata{link,12196224}
 4
-${ANDREWDIR}/doc/DEVELOPER/CodeAppearance.ez
+$ANDREWDIR/doc/DEVELOPER/CodeAppearance.ez
 0
 0
 V
@@ -3669,7 +3649,7 @@ white
 
 \begindata{link,14460976}
 4
-${ANDREWDIR}/doc/DEVELOPER/Porting.ez
+$ANDREWDIR/doc/DEVELOPER/Porting.ez
 0
 0
 V
@@ -3689,7 +3669,7 @@ white
 
 \begindata{link,14461920}
 4
-${ANDREWDIR}/doc/DEVELOPER/protosys.h
+$ANDREWDIR/doc/DEVELOPER/protosys.h
 0
 0
 V
@@ -3708,11 +3688,11 @@ Version 2
 n 0
 \enddata{bp,14462544}
 \view{bpv,14462544,25475,0,0}
-\chapter{$\{ANDREWDIR\}/doc/PROGRAMMER}
+\chapter{$ANDREWDIR/doc/PROGRAMMER}
 
 \begindata{link,14463392}
 4
-${ANDREWDIR}/doc/PROGRAMMER
+$ANDREWDIR/doc/PROGRAMMER
 0
 0
 V
@@ -3733,7 +3713,7 @@ white
 
 \begindata{link,14464368}
 4
-${ANDREWDIR}/doc/PROGRAMMER/AdewOverview.doc
+$ANDREWDIR/doc/PROGRAMMER/AdewOverview.doc
 0
 0
 V
@@ -3753,7 +3733,7 @@ white
 
 \begindata{link,14465408}
 4
-${ANDREWDIR}/doc/PROGRAMMER/AdewReference.doc
+$ANDREWDIR/doc/PROGRAMMER/AdewReference.doc
 0
 0
 V
@@ -3773,7 +3753,7 @@ white
 
 \begindata{link,14466368}
 4
-${ANDREWDIR}/doc/PROGRAMMER/AdewTutorial.doc
+$ANDREWDIR/doc/PROGRAMMER/AdewTutorial.doc
 0
 0
 V
@@ -3793,7 +3773,7 @@ white
 
 \begindata{link,12944336}
 4
-${ANDREWDIR}/doc/PROGRAMMER/app.doc
+$ANDREWDIR/doc/PROGRAMMER/app.doc
 0
 0
 V
@@ -3809,31 +3789,11 @@ white
 \view{linkview,12944336,25480,0,0}
 
 
-\section{AptPG.doc}
-
-\begindata{link,12945248}
-4
-${ANDREWDIR}/doc/PROGRAMMER/AptPG.doc
-0
-0
-V
-\begindata{link,12945248}
-Datastream version: 2
-AptPG.doc
-2
-
-black
-white
-\enddata{link,12945248}
-\enddata{link,12945248}
-\view{linkview,12945248,25481,0,0}
-
-
 \section{aslot.doc}
 
 \begindata{link,14459824}
 4
-${ANDREWDIR}/doc/PROGRAMMER/aslot.doc
+$ANDREWDIR/doc/PROGRAMMER/aslot.doc
 0
 0
 V
@@ -3853,7 +3813,7 @@ white
 
 \begindata{link,12947312}
 4
-${ANDREWDIR}/doc/PROGRAMMER/astring.doc
+$ANDREWDIR/doc/PROGRAMMER/astring.doc
 0
 0
 V
@@ -3873,7 +3833,7 @@ white
 
 \begindata{link,12948416}
 4
-${ANDREWDIR}/doc/PROGRAMMER/atkvers.doc
+$ANDREWDIR/doc/PROGRAMMER/atkvers.doc
 0
 0
 V
@@ -3893,7 +3853,7 @@ white
 
 \begindata{link,12949360}
 4
-${ANDREWDIR}/doc/PROGRAMMER/atom.doc
+$ANDREWDIR/doc/PROGRAMMER/atom.doc
 0
 0
 V
@@ -3913,7 +3873,7 @@ white
 
 \begindata{link,12950384}
 4
-${ANDREWDIR}/doc/PROGRAMMER/atomlist.doc
+$ANDREWDIR/doc/PROGRAMMER/atomlist.doc
 0
 0
 V
@@ -3929,31 +3889,11 @@ white
 \view{linkview,12950384,25486,0,0}
 
 
-\section{attribs.doc}
-
-\begindata{link,12951344}
-4
-${ANDREWDIR}/doc/PROGRAMMER/attribs.doc
-0
-0
-V
-\begindata{link,12951344}
-Datastream version: 2
-attribs.doc
-2
-
-black
-white
-\enddata{link,12951344}
-\enddata{link,12951344}
-\view{linkview,12951344,25487,0,0}
-
-
 \section{avarset.doc}
 
 \begindata{link,12952928}
 4
-${ANDREWDIR}/doc/PROGRAMMER/avarset.doc
+$ANDREWDIR/doc/PROGRAMMER/avarset.doc
 0
 0
 V
@@ -3973,7 +3913,7 @@ white
 
 \begindata{link,12953872}
 4
-${ANDREWDIR}/doc/PROGRAMMER/awidget.doc
+$ANDREWDIR/doc/PROGRAMMER/awidget.doc
 0
 0
 V
@@ -3993,7 +3933,7 @@ white
 
 \begindata{link,11773488}
 4
-${ANDREWDIR}/doc/PROGRAMMER/awidgetview.doc
+$ANDREWDIR/doc/PROGRAMMER/awidgetview.doc
 0
 0
 V
@@ -4009,31 +3949,11 @@ white
 \view{linkview,11773488,25490,0,0}
 
 
-\section{basinit.doc}
-
-\begindata{link,11774448}
-4
-${ANDREWDIR}/doc/PROGRAMMER/basinit.doc
-0
-0
-V
-\begindata{link,11774448}
-Datastream version: 2
-basinit.doc
-2
-
-black
-white
-\enddata{link,11774448}
-\enddata{link,11774448}
-\view{linkview,11774448,25491,0,0}
-
-
 \section{bind.doc}
 
 \begindata{link,12946320}
 4
-${ANDREWDIR}/doc/PROGRAMMER/bind.doc
+$ANDREWDIR/doc/PROGRAMMER/bind.doc
 0
 0
 V
@@ -4053,7 +3973,7 @@ white
 
 \begindata{link,11776592}
 4
-${ANDREWDIR}/doc/PROGRAMMER/box.doc
+$ANDREWDIR/doc/PROGRAMMER/box.doc
 0
 0
 V
@@ -4069,71 +3989,11 @@ white
 \view{linkview,11776592,25493,0,0}
 
 
-\section{bpair.doc}
-
-\begindata{link,11777616}
-4
-${ANDREWDIR}/doc/PROGRAMMER/bpair.doc
-0
-0
-V
-\begindata{link,11777616}
-Datastream version: 2
-bpair.doc
-2
-
-black
-white
-\enddata{link,11777616}
-\enddata{link,11777616}
-\view{linkview,11777616,25494,0,0}
-
-
-\section{bp.doc}
-
-\begindata{link,11778560}
-4
-${ANDREWDIR}/doc/PROGRAMMER/bp.doc
-0
-0
-V
-\begindata{link,11778560}
-Datastream version: 2
-bp.doc
-2
-
-black
-white
-\enddata{link,11778560}
-\enddata{link,11778560}
-\view{linkview,11778560,25495,0,0}
-
-
-\section{bpv.doc}
-
-\begindata{link,11779744}
-4
-${ANDREWDIR}/doc/PROGRAMMER/bpv.doc
-0
-0
-V
-\begindata{link,11779744}
-Datastream version: 2
-bpv.doc
-2
-
-black
-white
-\enddata{link,11779744}
-\enddata{link,11779744}
-\view{linkview,11779744,25496,0,0}
-
-
 \section{buffer.doc}
 
 \begindata{link,11780688}
 4
-${ANDREWDIR}/doc/PROGRAMMER/buffer.doc
+$ANDREWDIR/doc/PROGRAMMER/buffer.doc
 0
 0
 V
@@ -4153,7 +4013,7 @@ white
 
 \begindata{link,11781712}
 4
-${ANDREWDIR}/doc/PROGRAMMER/ChartPG.doc
+$ANDREWDIR/doc/PROGRAMMER/ChartPG.doc
 0
 0
 V
@@ -4169,31 +4029,11 @@ white
 \view{linkview,11781712,25498,0,0}
 
 
-\section{class.doc}
-
-\begindata{link,11782656}
-4
-${ANDREWDIR}/doc/PROGRAMMER/class.doc
-0
-0
-V
-\begindata{link,11782656}
-Datastream version: 2
-class.doc
-2
-
-black
-white
-\enddata{link,11782656}
-\enddata{link,11782656}
-\view{linkview,11782656,25499,0,0}
-
-
 \section{classes.org}
 
 \begindata{link,12875312}
 4
-${ANDREWDIR}/doc/PROGRAMMER/classes.org
+$ANDREWDIR/doc/PROGRAMMER/classes.org
 0
 0
 V
@@ -4213,7 +4053,7 @@ white
 
 \begindata{link,12876256}
 4
-${ANDREWDIR}/doc/PROGRAMMER/complete.doc
+$ANDREWDIR/doc/PROGRAMMER/complete.doc
 0
 0
 V
@@ -4229,71 +4069,11 @@ white
 \view{linkview,12876256,25501,0,0}
 
 
-\section{console.doc}
-
-\begindata{link,11775440}
-4
-${ANDREWDIR}/doc/PROGRAMMER/console.doc
-0
-0
-V
-\begindata{link,11775440}
-Datastream version: 2
-console.doc
-2
-
-black
-white
-\enddata{link,11775440}
-\enddata{link,11775440}
-\view{linkview,11775440,25502,0,0}
-
-
-\section{contentv.doc}
-
-\begindata{link,12878352}
-4
-${ANDREWDIR}/doc/PROGRAMMER/contentv.doc
-0
-0
-V
-\begindata{link,12878352}
-Datastream version: 2
-contentv.doc
-2
-
-black
-white
-\enddata{link,12878352}
-\enddata{link,12878352}
-\view{linkview,12878352,25503,0,0}
-
-
-\section{controllers.doc}
-
-\begindata{link,12879776}
-4
-${ANDREWDIR}/doc/PROGRAMMER/controllers.doc
-0
-0
-V
-\begindata{link,12879776}
-Datastream version: 2
-controllers.doc
-2
-
-black
-white
-\enddata{link,12879776}
-\enddata{link,12879776}
-\view{linkview,12879776,25504,0,0}
-
-
 \section{cursor.doc}
 
 \begindata{link,12880640}
 4
-${ANDREWDIR}/doc/PROGRAMMER/cursor.doc
+$ANDREWDIR/doc/PROGRAMMER/cursor.doc
 0
 0
 V
@@ -4313,7 +4093,7 @@ white
 
 \begindata{link,12881664}
 4
-${ANDREWDIR}/doc/PROGRAMMER/dataobj.doc
+$ANDREWDIR/doc/PROGRAMMER/dataobj.doc
 0
 0
 V
@@ -4333,7 +4113,7 @@ white
 
 \begindata{link,12882608}
 4
-${ANDREWDIR}/doc/PROGRAMMER/datastrm.doc
+$ANDREWDIR/doc/PROGRAMMER/datastrm.doc
 0
 0
 V
@@ -4353,7 +4133,7 @@ white
 
 \begindata{link,12883728}
 4
-${ANDREWDIR}/doc/PROGRAMMER/deskey.doc
+$ANDREWDIR/doc/PROGRAMMER/deskey.doc
 0
 0
 V
@@ -4373,7 +4153,7 @@ white
 
 \begindata{link,8720928}
 4
-${ANDREWDIR}/doc/PROGRAMMER/Developr.d
+$ANDREWDIR/doc/PROGRAMMER/Developr.d
 0
 0
 V
@@ -4393,7 +4173,7 @@ white
 
 \begindata{link,8721952}
 4
-${ANDREWDIR}/doc/PROGRAMMER/dict.doc
+$ANDREWDIR/doc/PROGRAMMER/dict.doc
 0
 0
 V
@@ -4409,31 +4189,11 @@ white
 \view{linkview,8721952,25510,0,0}
 
 
-\section{dired.doc}
-
-\begindata{link,8722896}
-4
-${ANDREWDIR}/doc/PROGRAMMER/dired.doc
-0
-0
-V
-\begindata{link,8722896}
-Datastream version: 2
-dired.doc
-2
-
-black
-white
-\enddata{link,8722896}
-\enddata{link,8722896}
-\view{linkview,8722896,25511,0,0}
-
-
 \section{doclaunch}
 
 \begindata{link,12877440}
 4
-${ANDREWDIR}/doc/PROGRAMMER/doclaunch
+$ANDREWDIR/doc/PROGRAMMER/doclaunch
 0
 0
 V
@@ -4449,31 +4209,11 @@ white
 \view{linkview,12877440,25512,0,0}
 
 
-\section{dsearch.doc}
-
-\begindata{link,8725120}
-4
-${ANDREWDIR}/doc/PROGRAMMER/dsearch.doc
-0
-0
-V
-\begindata{link,8725120}
-Datastream version: 2
-dsearch.doc
-2
-
-black
-white
-\enddata{link,8725120}
-\enddata{link,8725120}
-\view{linkview,8725120,25513,0,0}
-
-
 \section{environ.doc}
 
 \begindata{link,8726144}
 4
-${ANDREWDIR}/doc/PROGRAMMER/environ.doc
+$ANDREWDIR/doc/PROGRAMMER/environ.doc
 0
 0
 V
@@ -4493,7 +4233,7 @@ white
 
 \begindata{link,8727088}
 4
-${ANDREWDIR}/doc/PROGRAMMER/envrment.doc
+$ANDREWDIR/doc/PROGRAMMER/envrment.doc
 0
 0
 V
@@ -4513,7 +4253,7 @@ white
 
 \begindata{link,8728208}
 4
-${ANDREWDIR}/doc/PROGRAMMER/eq.doc
+$ANDREWDIR/doc/PROGRAMMER/eq.doc
 0
 0
 V
@@ -4533,7 +4273,7 @@ white
 
 \begindata{link,8729152}
 4
-${ANDREWDIR}/doc/PROGRAMMER/eqv.doc
+$ANDREWDIR/doc/PROGRAMMER/eqv.doc
 0
 0
 V
@@ -4553,7 +4293,7 @@ white
 
 \begindata{link,8730176}
 4
-${ANDREWDIR}/doc/PROGRAMMER/event.doc
+$ANDREWDIR/doc/PROGRAMMER/event.doc
 0
 0
 V
@@ -4573,7 +4313,7 @@ white
 
 \begindata{link,14339040}
 4
-${ANDREWDIR}/doc/PROGRAMMER/example1.org
+$ANDREWDIR/doc/PROGRAMMER/example1.org
 0
 0
 V
@@ -4593,7 +4333,7 @@ white
 
 \begindata{link,14340368}
 4
-${ANDREWDIR}/doc/PROGRAMMER/example2.org
+$ANDREWDIR/doc/PROGRAMMER/example2.org
 0
 0
 V
@@ -4613,7 +4353,7 @@ white
 
 \begindata{link,14341328}
 4
-${ANDREWDIR}/doc/PROGRAMMER/example3.org
+$ANDREWDIR/doc/PROGRAMMER/example3.org
 0
 0
 V
@@ -4629,51 +4369,11 @@ white
 \view{linkview,14341328,25521,0,0}
 
 
-\section{ezdiff.doc}
-
-\begindata{link,8723888}
-4
-${ANDREWDIR}/doc/PROGRAMMER/ezdiff.doc
-0
-0
-V
-\begindata{link,8723888}
-Datastream version: 2
-ezdiff.doc
-2
-
-black
-white
-\enddata{link,8723888}
-\enddata{link,8723888}
-\view{linkview,8723888,25522,0,0}
-
-
-\section{fad.doc}
-
-\begindata{link,14343440}
-4
-${ANDREWDIR}/doc/PROGRAMMER/fad.doc
-0
-0
-V
-\begindata{link,14343440}
-Datastream version: 2
-fad.doc
-2
-
-black
-white
-\enddata{link,14343440}
-\enddata{link,14343440}
-\view{linkview,14343440,25523,0,0}
-
-
 \section{figattr.doc}
 
 \begindata{link,14344448}
 4
-${ANDREWDIR}/doc/PROGRAMMER/figattr.doc
+$ANDREWDIR/doc/PROGRAMMER/figattr.doc
 0
 0
 V
@@ -4693,7 +4393,7 @@ white
 
 \begindata{link,14345392}
 4
-${ANDREWDIR}/doc/PROGRAMMER/figobj.doc
+$ANDREWDIR/doc/PROGRAMMER/figobj.doc
 0
 0
 V
@@ -4713,7 +4413,7 @@ white
 
 \begindata{link,14346416}
 4
-${ANDREWDIR}/doc/PROGRAMMER/figure.doc
+$ANDREWDIR/doc/PROGRAMMER/figure.doc
 0
 0
 V
@@ -4733,7 +4433,7 @@ white
 
 \begindata{link,14347360}
 4
-${ANDREWDIR}/doc/PROGRAMMER/figv.doc
+$ANDREWDIR/doc/PROGRAMMER/figv.doc
 0
 0
 V
@@ -4753,7 +4453,7 @@ white
 
 \begindata{link,14348544}
 4
-${ANDREWDIR}/doc/PROGRAMMER/filetype.doc
+$ANDREWDIR/doc/PROGRAMMER/filetype.doc
 0
 0
 V
@@ -4773,7 +4473,7 @@ white
 
 \begindata{link,14471824}
 4
-${ANDREWDIR}/doc/PROGRAMMER/filler.doc
+$ANDREWDIR/doc/PROGRAMMER/filler.doc
 0
 0
 V
@@ -4789,31 +4489,11 @@ white
 \view{linkview,14471824,25529,0,0}
 
 
-\section{filter.doc}
-
-\begindata{link,14472816}
-4
-${ANDREWDIR}/doc/PROGRAMMER/filter.doc
-0
-0
-V
-\begindata{link,14472816}
-Datastream version: 2
-filter.doc
-2
-
-black
-white
-\enddata{link,14472816}
-\enddata{link,14472816}
-\view{linkview,14472816,25530,0,0}
-
-
 \section{fontdesc.doc}
 
 \begindata{link,14473760}
 4
-${ANDREWDIR}/doc/PROGRAMMER/fontdesc.doc
+$ANDREWDIR/doc/PROGRAMMER/fontdesc.doc
 0
 0
 V
@@ -4833,7 +4513,7 @@ white
 
 \begindata{link,14342368}
 4
-${ANDREWDIR}/doc/PROGRAMMER/frame.doc
+$ANDREWDIR/doc/PROGRAMMER/frame.doc
 0
 0
 V
@@ -4853,7 +4533,7 @@ white
 
 \begindata{link,14475952}
 4
-${ANDREWDIR}/doc/PROGRAMMER/framemsg.doc
+$ANDREWDIR/doc/PROGRAMMER/framemsg.doc
 0
 0
 V
@@ -4873,7 +4553,7 @@ white
 
 \begindata{link,14476960}
 4
-${ANDREWDIR}/doc/PROGRAMMER/framev.doc
+$ANDREWDIR/doc/PROGRAMMER/framev.doc
 0
 0
 V
@@ -4893,7 +4573,7 @@ white
 
 \begindata{link,14477872}
 4
-${ANDREWDIR}/doc/PROGRAMMER/FunctionIndex
+$ANDREWDIR/doc/PROGRAMMER/FunctionIndex
 0
 0
 V
@@ -4913,7 +4593,7 @@ white
 
 \begindata{link,14479184}
 4
-${ANDREWDIR}/doc/PROGRAMMER/future.doc
+$ANDREWDIR/doc/PROGRAMMER/future.doc
 0
 0
 V
@@ -4929,31 +4609,11 @@ white
 \view{linkview,14479184,25536,0,0}
 
 
-\section{glist.doc}
-
-\begindata{link,14480128}
-4
-${ANDREWDIR}/doc/PROGRAMMER/glist.doc
-0
-0
-V
-\begindata{link,14480128}
-Datastream version: 2
-glist.doc
-2
-
-black
-white
-\enddata{link,14480128}
-\enddata{link,14480128}
-\view{linkview,14480128,25537,0,0}
-
-
 \section{graphic.doc}
 
 \begindata{link,14481152}
 4
-${ANDREWDIR}/doc/PROGRAMMER/graphic.doc
+$ANDREWDIR/doc/PROGRAMMER/graphic.doc
 0
 0
 V
@@ -4973,7 +4633,7 @@ white
 
 \begindata{link,11248512}
 4
-${ANDREWDIR}/doc/PROGRAMMER/header.doc
+$ANDREWDIR/doc/PROGRAMMER/header.doc
 0
 0
 V
@@ -4993,7 +4653,7 @@ white
 
 \begindata{link,11249616}
 4
-${ANDREWDIR}/doc/PROGRAMMER/Help.d
+$ANDREWDIR/doc/PROGRAMMER/Help.d
 0
 0
 V
@@ -5013,7 +4673,7 @@ white
 
 \begindata{link,11250560}
 4
-${ANDREWDIR}/doc/PROGRAMMER/help-maint.doc
+$ANDREWDIR/doc/PROGRAMMER/help-maint.doc
 0
 0
 V
@@ -5033,7 +4693,7 @@ white
 
 \begindata{link,14474720}
 4
-${ANDREWDIR}/doc/PROGRAMMER/image.doc
+$ANDREWDIR/doc/PROGRAMMER/image.doc
 0
 0
 V
@@ -5053,7 +4713,7 @@ white
 
 \begindata{link,14475696}
 4
-${ANDREWDIR}/doc/PROGRAMMER/imagev.doc
+$ANDREWDIR/doc/PROGRAMMER/imagev.doc
 0
 0
 V
@@ -5073,7 +4733,7 @@ white
 
 \begindata{link,11253760}
 4
-${ANDREWDIR}/doc/PROGRAMMER/im.doc
+$ANDREWDIR/doc/PROGRAMMER/im.doc
 0
 0
 V
@@ -5093,7 +4753,7 @@ white
 
 \begindata{link,11254704}
 4
-${ANDREWDIR}/doc/PROGRAMMER/init.doc
+$ANDREWDIR/doc/PROGRAMMER/init.doc
 0
 0
 V
@@ -5113,7 +4773,7 @@ white
 
 \begindata{link,11255728}
 4
-${ANDREWDIR}/doc/PROGRAMMER/insets.d
+$ANDREWDIR/doc/PROGRAMMER/insets.d
 0
 0
 V
@@ -5129,31 +4789,11 @@ white
 \view{linkview,11255728,25546,0,0}
 
 
-\section{insets.doc}
-
-\begindata{link,11256672}
-4
-${ANDREWDIR}/doc/PROGRAMMER/insets.doc
-0
-0
-V
-\begindata{link,11256672}
-Datastream version: 2
-insets.doc
-2
-
-black
-white
-\enddata{link,11256672}
-\enddata{link,11256672}
-\view{linkview,11256672,25547,0,0}
-
-
 \section{intro.doc}
 
 \begindata{link,11257776}
 4
-${ANDREWDIR}/doc/PROGRAMMER/intro.doc
+$ANDREWDIR/doc/PROGRAMMER/intro.doc
 0
 0
 V
@@ -5169,31 +4809,11 @@ white
 \view{linkview,11257776,25548,0,0}
 
 
-\section{isearch.doc}
-
-\begindata{link,7061728}
-4
-${ANDREWDIR}/doc/PROGRAMMER/isearch.doc
-0
-0
-V
-\begindata{link,7061728}
-Datastream version: 2
-isearch.doc
-2
-
-black
-white
-\enddata{link,7061728}
-\enddata{link,7061728}
-\view{linkview,7061728,25549,0,0}
-
-
 \section{keymap.doc}
 
 \begindata{link,7062752}
 4
-${ANDREWDIR}/doc/PROGRAMMER/keymap.doc
+$ANDREWDIR/doc/PROGRAMMER/keymap.doc
 0
 0
 V
@@ -5213,7 +4833,7 @@ white
 
 \begindata{link,7063696}
 4
-${ANDREWDIR}/doc/PROGRAMMER/keystate.doc
+$ANDREWDIR/doc/PROGRAMMER/keystate.doc
 0
 0
 V
@@ -5229,51 +4849,11 @@ white
 \view{linkview,7063696,25551,0,0}
 
 
-\section{label.doc}
-
-\begindata{link,11251920}
-4
-${ANDREWDIR}/doc/PROGRAMMER/label.doc
-0
-0
-V
-\begindata{link,11251920}
-Datastream version: 2
-label.doc
-2
-
-black
-white
-\enddata{link,11251920}
-\enddata{link,11251920}
-\view{linkview,11251920,25552,0,0}
-
-
-\section{labelv.doc}
-
-\begindata{link,7066192}
-4
-${ANDREWDIR}/doc/PROGRAMMER/labelv.doc
-0
-0
-V
-\begindata{link,7066192}
-Datastream version: 2
-labelv.doc
-2
-
-black
-white
-\enddata{link,7066192}
-\enddata{link,7066192}
-\view{linkview,7066192,25553,0,0}
-
-
 \section{layout.doc}
 
 \begindata{link,7067296}
 4
-${ANDREWDIR}/doc/PROGRAMMER/layout.doc
+$ANDREWDIR/doc/PROGRAMMER/layout.doc
 0
 0
 V
@@ -5293,7 +4873,7 @@ white
 
 \begindata{link,7068144}
 4
-${ANDREWDIR}/doc/PROGRAMMER/Link.d
+$ANDREWDIR/doc/PROGRAMMER/Link.d
 0
 0
 V
@@ -5309,31 +4889,11 @@ white
 \view{linkview,7068144,25555,0,0}
 
 
-\section{list.doc}
-
-\begindata{link,7069248}
-4
-${ANDREWDIR}/doc/PROGRAMMER/list.doc
-0
-0
-V
-\begindata{link,7069248}
-Datastream version: 2
-list.doc
-2
-
-black
-white
-\enddata{link,7069248}
-\enddata{link,7069248}
-\view{linkview,7069248,25556,0,0}
-
-
 \section{lpair.doc}
 
 \begindata{link,7070192}
 4
-${ANDREWDIR}/doc/PROGRAMMER/lpair.doc
+$ANDREWDIR/doc/PROGRAMMER/lpair.doc
 0
 0
 V
@@ -5349,71 +4909,11 @@ white
 \view{linkview,7070192,25557,0,0}
 
 
-\section{lprruler.doc}
-
-\begindata{link,7071216}
-4
-${ANDREWDIR}/doc/PROGRAMMER/lprruler.doc
-0
-0
-V
-\begindata{link,7071216}
-Datastream version: 2
-lprruler.doc
-2
-
-black
-white
-\enddata{link,7071216}
-\enddata{link,7071216}
-\view{linkview,7071216,25558,0,0}
-
-
-\section{lprrulv.doc}
-
-\begindata{link,10683392}
-4
-${ANDREWDIR}/doc/PROGRAMMER/lprrulv.doc
-0
-0
-V
-\begindata{link,10683392}
-Datastream version: 2
-lprrulv.doc
-2
-
-black
-white
-\enddata{link,10683392}
-\enddata{link,10683392}
-\view{linkview,10683392,25559,0,0}
-
-
-\section{lwpstubs.doc}
-
-\begindata{link,10684544}
-4
-${ANDREWDIR}/doc/PROGRAMMER/lwpstubs.doc
-0
-0
-V
-\begindata{link,10684544}
-Datastream version: 2
-lwpstubs.doc
-2
-
-black
-white
-\enddata{link,10684544}
-\enddata{link,10684544}
-\view{linkview,10684544,25560,0,0}
-
-
 \section{mark.doc}
 
 \begindata{link,10685504}
 4
-${ANDREWDIR}/doc/PROGRAMMER/mark.doc
+$ANDREWDIR/doc/PROGRAMMER/mark.doc
 0
 0
 V
@@ -5429,31 +4929,11 @@ white
 \view{linkview,10685504,25561,0,0}
 
 
-\section{matte.doc}
-
-\begindata{link,7064720}
-4
-${ANDREWDIR}/doc/PROGRAMMER/matte.doc
-0
-0
-V
-\begindata{link,7064720}
-Datastream version: 2
-matte.doc
-2
-
-black
-white
-\enddata{link,7064720}
-\enddata{link,7064720}
-\view{linkview,7064720,25562,0,0}
-
-
 \section{menulist.doc}
 
 \begindata{link,7065696}
 4
-${ANDREWDIR}/doc/PROGRAMMER/menulist.doc
+$ANDREWDIR/doc/PROGRAMMER/menulist.doc
 0
 0
 V
@@ -5473,7 +4953,7 @@ white
 
 \begindata{link,10688672}
 4
-${ANDREWDIR}/doc/PROGRAMMER/message.doc
+$ANDREWDIR/doc/PROGRAMMER/message.doc
 0
 0
 V
@@ -5493,7 +4973,7 @@ white
 
 \begindata{link,10689616}
 4
-${ANDREWDIR}/doc/PROGRAMMER/msghndlr.doc
+$ANDREWDIR/doc/PROGRAMMER/msghndlr.doc
 0
 0
 V
@@ -5509,31 +4989,11 @@ white
 \view{linkview,10689616,25565,0,0}
 
 
-\section{namespc.doc}
-
-\begindata{link,10690656}
-4
-${ANDREWDIR}/doc/PROGRAMMER/namespc.doc
-0
-0
-V
-\begindata{link,10690656}
-Datastream version: 2
-namespc.doc
-2
-
-black
-white
-\enddata{link,10690656}
-\enddata{link,10690656}
-\view{linkview,10690656,25566,0,0}
-
-
 \section{nessauth.doc}
 
 \begindata{link,10691600}
 4
-${ANDREWDIR}/doc/PROGRAMMER/nessauth.doc
+$ANDREWDIR/doc/PROGRAMMER/nessauth.doc
 0
 0
 V
@@ -5553,7 +5013,7 @@ white
 
 \begindata{link,10692880}
 4
-${ANDREWDIR}/doc/PROGRAMMER/nessfunc.doc
+$ANDREWDIR/doc/PROGRAMMER/nessfunc.doc
 0
 0
 V
@@ -5573,7 +5033,7 @@ white
 
 \begindata{link,9897520}
 4
-${ANDREWDIR}/doc/PROGRAMMER/nesshack.doc
+$ANDREWDIR/doc/PROGRAMMER/nesshack.doc
 0
 0
 V
@@ -5593,7 +5053,7 @@ white
 
 \begindata{link,9898512}
 4
-${ANDREWDIR}/doc/PROGRAMMER/nessman.doc
+$ANDREWDIR/doc/PROGRAMMER/nessman.doc
 0
 0
 V
@@ -5613,7 +5073,7 @@ white
 
 \begindata{link,9899456}
 4
-${ANDREWDIR}/doc/PROGRAMMER/nesstut.doc
+$ANDREWDIR/doc/PROGRAMMER/nesstut.doc
 0
 0
 V
@@ -5633,7 +5093,7 @@ white
 
 \begindata{link,10686576}
 4
-${ANDREWDIR}/doc/PROGRAMMER/nessuser.doc
+$ANDREWDIR/doc/PROGRAMMER/nessuser.doc
 0
 0
 V
@@ -5653,7 +5113,7 @@ white
 
 \begindata{link,10687568}
 4
-${ANDREWDIR}/doc/PROGRAMMER/nstdmark.doc
+$ANDREWDIR/doc/PROGRAMMER/nstdmark.doc
 0
 0
 V
@@ -5673,7 +5133,7 @@ white
 
 \begindata{link,9902704}
 4
-${ANDREWDIR}/doc/PROGRAMMER/observe.doc
+$ANDREWDIR/doc/PROGRAMMER/observe.doc
 0
 0
 V
@@ -5693,7 +5153,7 @@ white
 
 \begindata{link,9903648}
 4
-${ANDREWDIR}/doc/PROGRAMMER/OrgPG.doc
+$ANDREWDIR/doc/PROGRAMMER/OrgPG.doc
 0
 0
 V
@@ -5713,7 +5173,7 @@ white
 
 \begindata{link,9904832}
 4
-${ANDREWDIR}/doc/PROGRAMMER/oscroll.doc
+$ANDREWDIR/doc/PROGRAMMER/oscroll.doc
 0
 0
 V
@@ -5729,51 +5189,11 @@ white
 \view{linkview,9904832,25576,0,0}
 
 
-\section{palette.doc}
-
-\begindata{link,9905776}
-4
-${ANDREWDIR}/doc/PROGRAMMER/palette.doc
-0
-0
-V
-\begindata{link,9905776}
-Datastream version: 2
-palette.doc
-2
-
-black
-white
-\enddata{link,9905776}
-\enddata{link,9905776}
-\view{linkview,9905776,25577,0,0}
-
-
-\section{panel.doc}
-
-\begindata{link,9906800}
-4
-${ANDREWDIR}/doc/PROGRAMMER/panel.doc
-0
-0
-V
-\begindata{link,9906800}
-Datastream version: 2
-panel.doc
-2
-
-black
-white
-\enddata{link,9906800}
-\enddata{link,9906800}
-\view{linkview,9906800,25578,0,0}
-
-
 \section{parser.doc}
 
 \begindata{link,8576608}
 4
-${ANDREWDIR}/doc/PROGRAMMER/parser.doc
+$ANDREWDIR/doc/PROGRAMMER/parser.doc
 0
 0
 V
@@ -5789,31 +5209,11 @@ white
 \view{linkview,8576608,25579,0,0}
 
 
-\section{physical.doc}
-
-\begindata{link,8577632}
-4
-${ANDREWDIR}/doc/PROGRAMMER/physical.doc
-0
-0
-V
-\begindata{link,8577632}
-Datastream version: 2
-physical.doc
-2
-
-black
-white
-\enddata{link,8577632}
-\enddata{link,8577632}
-\view{linkview,8577632,25580,0,0}
-
-
 \section{pinsets.d}
 
 \begindata{link,8578528}
 4
-${ANDREWDIR}/doc/PROGRAMMER/pinsets.d
+$ANDREWDIR/doc/PROGRAMMER/pinsets.d
 0
 0
 V
@@ -5829,31 +5229,11 @@ white
 \view{linkview,8578528,25581,0,0}
 
 
-\section{pixelimg.doc}
-
-\begindata{link,9900448}
-4
-${ANDREWDIR}/doc/PROGRAMMER/pixelimg.doc
-0
-0
-V
-\begindata{link,9900448}
-Datastream version: 2
-pixelimg.doc
-2
-
-black
-white
-\enddata{link,9900448}
-\enddata{link,9900448}
-\view{linkview,9900448,25582,0,0}
-
-
 \section{Prefs.d}
 
 \begindata{link,9901440}
 4
-${ANDREWDIR}/doc/PROGRAMMER/Prefs.d
+$ANDREWDIR/doc/PROGRAMMER/Prefs.d
 0
 0
 V
@@ -5873,7 +5253,7 @@ white
 
 \begindata{link,8581952}
 4
-${ANDREWDIR}/doc/PROGRAMMER/print.doc
+$ANDREWDIR/doc/PROGRAMMER/print.doc
 0
 0
 V
@@ -5893,7 +5273,7 @@ white
 
 \begindata{link,8582896}
 4
-${ANDREWDIR}/doc/PROGRAMMER/Procs.d
+$ANDREWDIR/doc/PROGRAMMER/Procs.d
 0
 0
 V
@@ -5913,7 +5293,7 @@ white
 
 \begindata{link,8583920}
 4
-${ANDREWDIR}/doc/PROGRAMMER/proctbl.doc
+$ANDREWDIR/doc/PROGRAMMER/proctbl.doc
 0
 0
 V
@@ -5933,7 +5313,7 @@ white
 
 \begindata{link,8584864}
 4
-${ANDREWDIR}/doc/PROGRAMMER/progtools.d
+$ANDREWDIR/doc/PROGRAMMER/progtools.d
 0
 0
 V
@@ -5953,7 +5333,7 @@ white
 
 \begindata{link,8585968}
 4
-${ANDREWDIR}/doc/PROGRAMMER/prsclass.doc
+$ANDREWDIR/doc/PROGRAMMER/prsclass.doc
 0
 0
 V
@@ -5969,31 +5349,11 @@ white
 \view{linkview,8585968,25588,0,0}
 
 
-\section{raster.doc}
-
-\begindata{link,8586928}
-4
-${ANDREWDIR}/doc/PROGRAMMER/raster.doc
-0
-0
-V
-\begindata{link,8586928}
-Datastream version: 2
-raster.doc
-2
-
-black
-white
-\enddata{link,8586928}
-\enddata{link,8586928}
-\view{linkview,8586928,25589,0,0}
-
-
 \section{Readme.doc}
 
 \begindata{link,7649088}
 4
-${ANDREWDIR}/doc/PROGRAMMER/Readme.doc
+$ANDREWDIR/doc/PROGRAMMER/Readme.doc
 0
 0
 V
@@ -6013,7 +5373,7 @@ white
 
 \begindata{link,7650000}
 4
-${ANDREWDIR}/doc/PROGRAMMER/rectlist.doc
+$ANDREWDIR/doc/PROGRAMMER/rectlist.doc
 0
 0
 V
@@ -6033,7 +5393,7 @@ white
 
 \begindata{link,8579680}
 4
-${ANDREWDIR}/doc/PROGRAMMER/region.doc
+$ANDREWDIR/doc/PROGRAMMER/region.doc
 0
 0
 V
@@ -6053,7 +5413,7 @@ white
 
 \begindata{link,8580656}
 4
-${ANDREWDIR}/doc/PROGRAMMER/rexf.doc
+$ANDREWDIR/doc/PROGRAMMER/rexf.doc
 0
 0
 V
@@ -6073,7 +5433,7 @@ white
 
 \begindata{link,7653200}
 4
-${ANDREWDIR}/doc/PROGRAMMER/rm.doc
+$ANDREWDIR/doc/PROGRAMMER/rm.doc
 0
 0
 V
@@ -6089,51 +5449,11 @@ white
 \view{linkview,7653200,25594,0,0}
 
 
-\section{rofftext.doc}
-
-\begindata{link,7654144}
-4
-${ANDREWDIR}/doc/PROGRAMMER/rofftext.doc
-0
-0
-V
-\begindata{link,7654144}
-Datastream version: 2
-rofftext.doc
-2
-
-black
-white
-\enddata{link,7654144}
-\enddata{link,7654144}
-\view{linkview,7654144,25595,0,0}
-
-
-\section{runapp.doc}
-
-\begindata{link,7655328}
-4
-${ANDREWDIR}/doc/PROGRAMMER/runapp.doc
-0
-0
-V
-\begindata{link,7655328}
-Datastream version: 2
-runapp.doc
-2
-
-black
-white
-\enddata{link,7655328}
-\enddata{link,7655328}
-\view{linkview,7655328,25596,0,0}
-
-
 \section{sample.cht}
 
 \begindata{link,7656272}
 4
-${ANDREWDIR}/doc/PROGRAMMER/sample.cht
+$ANDREWDIR/doc/PROGRAMMER/sample.cht
 0
 0
 V
@@ -6153,7 +5473,7 @@ white
 
 \begindata{link,7657296}
 4
-${ANDREWDIR}/doc/PROGRAMMER/scroll.doc
+$ANDREWDIR/doc/PROGRAMMER/scroll.doc
 0
 0
 V
@@ -6173,7 +5493,7 @@ white
 
 \begindata{link,7658240}
 4
-${ANDREWDIR}/doc/PROGRAMMER/search.doc
+$ANDREWDIR/doc/PROGRAMMER/search.doc
 0
 0
 V
@@ -6193,7 +5513,7 @@ white
 
 \begindata{link,8612768}
 4
-${ANDREWDIR}/doc/PROGRAMMER/smpltext.doc
+$ANDREWDIR/doc/PROGRAMMER/smpltext.doc
 0
 0
 V
@@ -6209,111 +5529,11 @@ white
 \view{linkview,8612768,25600,0,0}
 
 
-\section{spell.doc}
-
-\begindata{link,8613680}
-4
-${ANDREWDIR}/doc/PROGRAMMER/spell.doc
-0
-0
-V
-\begindata{link,8613680}
-Datastream version: 2
-spell.doc
-2
-
-black
-white
-\enddata{link,8613680}
-\enddata{link,8613680}
-\view{linkview,8613680,25601,0,0}
-
-
-\section{spread.doc}
-
-\begindata{link,7650960}
-4
-${ANDREWDIR}/doc/PROGRAMMER/spread.doc
-0
-0
-V
-\begindata{link,7650960}
-Datastream version: 2
-spread.doc
-2
-
-black
-white
-\enddata{link,7650960}
-\enddata{link,7650960}
-\view{linkview,7650960,25602,0,0}
-
-
-\section{statload.doc}
-
-\begindata{link,7651936}
-4
-${ANDREWDIR}/doc/PROGRAMMER/statload.doc
-0
-0
-V
-\begindata{link,7651936}
-Datastream version: 2
-statload.doc
-2
-
-black
-white
-\enddata{link,7651936}
-\enddata{link,7651936}
-\view{linkview,7651936,25603,0,0}
-
-
-\section{strtbl.doc}
-
-\begindata{link,8616864}
-4
-${ANDREWDIR}/doc/PROGRAMMER/strtbl.doc
-0
-0
-V
-\begindata{link,8616864}
-Datastream version: 2
-strtbl.doc
-2
-
-black
-white
-\enddata{link,8616864}
-\enddata{link,8616864}
-\view{linkview,8616864,25604,0,0}
-
-
-\section{strtblv.doc}
-
-\begindata{link,8617808}
-4
-${ANDREWDIR}/doc/PROGRAMMER/strtblv.doc
-0
-0
-V
-\begindata{link,8617808}
-Datastream version: 2
-strtblv.doc
-2
-
-black
-white
-\enddata{link,8617808}
-\enddata{link,8617808}
-\view{linkview,8617808,25605,0,0}
-
-
 \section{style.doc}
 
 \begindata{link,8618832}
 4
-${ANDREWDIR}/doc/PROGRAMMER/style.doc
+$ANDREWDIR/doc/PROGRAMMER/style.doc
 0
 0
 V
@@ -6333,7 +5553,7 @@ white
 
 \begindata{link,8619776}
 4
-${ANDREWDIR}/doc/PROGRAMMER/stylesht.doc
+$ANDREWDIR/doc/PROGRAMMER/stylesht.doc
 0
 0
 V
@@ -6353,7 +5573,7 @@ white
 
 \begindata{link,8620976}
 4
-${ANDREWDIR}/doc/PROGRAMMER/SuitePG.doc
+$ANDREWDIR/doc/PROGRAMMER/SuitePG.doc
 0
 0
 V
@@ -6373,7 +5593,7 @@ white
 
 \begindata{link,8621920}
 4
-${ANDREWDIR}/doc/PROGRAMMER/sym.doc
+$ANDREWDIR/doc/PROGRAMMER/sym.doc
 0
 0
 V
@@ -6389,31 +5609,11 @@ white
 \view{linkview,8621920,25609,0,0}
 
 
-\section{table.doc}
-
-\begindata{link,8622944}
-4
-${ANDREWDIR}/doc/PROGRAMMER/table.doc
-0
-0
-V
-\begindata{link,8622944}
-Datastream version: 2
-table.doc
-2
-
-black
-white
-\enddata{link,8622944}
-\enddata{link,8622944}
-\view{linkview,8622944,25610,0,0}
-
-
 \section{tabs.doc}
 
 \begindata{link,9908304}
 4
-${ANDREWDIR}/doc/PROGRAMMER/tabs.doc
+$ANDREWDIR/doc/PROGRAMMER/tabs.doc
 0
 0
 V
@@ -6429,33 +5629,11 @@ white
 \view{linkview,9908304,25611,0,0}
 
 
-\section{tags.doc}
-
-\begindata{link,8614752}
-4
-${ANDREWDIR}/doc/PROGRAMMER/tags.doc
-0
-0
-V
-\begindata{link,8614752}
-Datastream version: 2
-tags.doc
-2
-
-black
-white
-\enddata{link,8614752}
-\enddata{link,8614752}
-\view{linkview,8614752,25612,0,0}
-
-texttools.d
-
-
 \section{textv.doc}
 
 \begindata{link,8615728}
 4
-${ANDREWDIR}/doc/PROGRAMMER/textv.doc
+$ANDREWDIR/doc/PROGRAMMER/textv.doc
 0
 0
 V
@@ -6475,7 +5653,7 @@ white
 
 \begindata{link,9911456}
 4
-${ANDREWDIR}/doc/PROGRAMMER/tlex.doc
+$ANDREWDIR/doc/PROGRAMMER/tlex.doc
 0
 0
 V
@@ -6495,7 +5673,7 @@ white
 
 \begindata{link,9912368}
 4
-${ANDREWDIR}/doc/PROGRAMMER/tree23.doc
+$ANDREWDIR/doc/PROGRAMMER/tree23.doc
 0
 0
 V
@@ -6515,7 +5693,7 @@ white
 
 \begindata{link,9913872}
 4
-${ANDREWDIR}/doc/PROGRAMMER/TreePG.doc
+$ANDREWDIR/doc/PROGRAMMER/TreePG.doc
 0
 0
 V
@@ -6535,7 +5713,7 @@ white
 
 \begindata{link,9914816}
 4
-${ANDREWDIR}/doc/PROGRAMMER/txtstvec.doc
+$ANDREWDIR/doc/PROGRAMMER/txtstvec.doc
 0
 0
 V
@@ -6555,7 +5733,7 @@ white
 
 \begindata{link,9915856}
 4
-${ANDREWDIR}/doc/PROGRAMMER/updlist.doc
+$ANDREWDIR/doc/PROGRAMMER/updlist.doc
 0
 0
 V
@@ -6575,7 +5753,7 @@ white
 
 \begindata{link,9916800}
 4
-${ANDREWDIR}/doc/PROGRAMMER/view.doc
+$ANDREWDIR/doc/PROGRAMMER/view.doc
 0
 0
 V
@@ -6591,31 +5769,11 @@ white
 \view{linkview,9916800,25619,0,0}
 
 
-\section{viewref.doc}
-
-\begindata{link,9917904}
-4
-${ANDREWDIR}/doc/PROGRAMMER/viewref.doc
-0
-0
-V
-\begindata{link,9917904}
-Datastream version: 2
-viewref.doc
-2
-
-black
-white
-\enddata{link,9917904}
-\enddata{link,9917904}
-\view{linkview,9917904,25620,0,0}
-
-
 \section{WidgetUser.d}
 
 \begindata{link,10027024}
 4
-${ANDREWDIR}/doc/PROGRAMMER/WidgetUser.d
+$ANDREWDIR/doc/PROGRAMMER/WidgetUser.d
 0
 0
 V
@@ -6631,31 +5789,11 @@ white
 \view{linkview,10027024,25621,0,0}
 
 
-\section{winsys.doc}
-
-\begindata{link,9909264}
-4
-${ANDREWDIR}/doc/PROGRAMMER/winsys.doc
-0
-0
-V
-\begindata{link,9909264}
-Datastream version: 2
-winsys.doc
-2
-
-black
-white
-\enddata{link,9909264}
-\enddata{link,9909264}
-\view{linkview,9909264,25622,0,0}
-
-
 \section{writing-pr.doc}
 
 \begindata{link,9910240}
 4
-${ANDREWDIR}/doc/PROGRAMMER/writing-pr.doc
+$ANDREWDIR/doc/PROGRAMMER/writing-pr.doc
 0
 0
 V
@@ -6671,55 +5809,11 @@ white
 \view{linkview,9910240,25623,0,0}
 
 
-\section{ZipPG.doc}
-
-\begindata{link,10030256}
-4
-${ANDREWDIR}/doc/PROGRAMMER/ZipPG.doc
-0
-0
-V
-\begindata{link,10030256}
-Datastream version: 2
-ZipPG.doc
-2
-
-black
-white
-\enddata{link,10030256}
-\enddata{link,10030256}
-\view{linkview,10030256,25624,0,0}
-\begindata{bp,9911040}
-Version 2
-n 0
-\enddata{bp,9911040}
-\view{bpv,9911040,25625,0,0}
-\chapter{$\{ANDREWDIR\}/doc/syntax}
-
-\begindata{link,10031872}
-4
-${ANDREWDIR}/doc/syntax
-0
-0
-V
-\begindata{link,10031872}
-Datastream version: 2
-syntax
-2
-
-black
-white
-\enddata{link,10031872}
-\enddata{link,10031872}
-\view{linkview,10031872,25626,0,0}
-
-
-
 \section{bison.1}
 
 \begindata{link,10032832}
 4
-${ANDREWDIR}/doc/syntax/bison.1
+$ANDREWDIR/doc/syntax/bison.1
 0
 0
 V
@@ -6739,7 +5833,7 @@ white
 
 \begindata{link,10033936}
 4
-${ANDREWDIR}/doc/syntax/bison.info
+$ANDREWDIR/doc/syntax/bison.info
 0
 0
 V
@@ -6759,7 +5853,7 @@ white
 
 \begindata{link,10034880}
 4
-${ANDREWDIR}/doc/syntax/bison.info-1
+$ANDREWDIR/doc/syntax/bison.info-1
 0
 0
 V
@@ -6779,7 +5873,7 @@ white
 
 \begindata{link,10035904}
 4
-${ANDREWDIR}/doc/syntax/bison.info-2
+$ANDREWDIR/doc/syntax/bison.info-2
 0
 0
 V
@@ -6799,7 +5893,7 @@ white
 
 \begindata{link,10036848}
 4
-${ANDREWDIR}/doc/syntax/bison.info-3
+$ANDREWDIR/doc/syntax/bison.info-3
 0
 0
 V
@@ -6819,7 +5913,7 @@ white
 
 \begindata{link,10027600}
 4
-${ANDREWDIR}/doc/syntax/bison.info-4
+$ANDREWDIR/doc/syntax/bison.info-4
 0
 0
 V
@@ -6839,7 +5933,7 @@ white
 
 \begindata{link,10028576}
 4
-${ANDREWDIR}/doc/syntax/bison.info-5
+$ANDREWDIR/doc/syntax/bison.info-5
 0
 0
 V
@@ -6858,12 +5952,12 @@ Version 2
 n 0
 \enddata{bp,10029200}
 \view{bpv,10029200,25634,0,0}
-\chapter{$\{ANDREWDIR\}/etc}
+\chapter{$ANDREWDIR/etc}
 
 In old UNIX tradition, the 
 \begindata{link,9800608}
 4
-${ANDREWDIR}/etc
+$ANDREWDIR/etc
 0
 0
 V
@@ -6911,7 +6005,7 @@ Used by help system during index and alias file generation.
 
 \begindata{link,9802960}
 4
-${ANDREWDIR}/etc/bison.hairy
+$ANDREWDIR/etc/bison.hairy
 0
 0
 V
@@ -6934,7 +6028,7 @@ Bison config file: parser boilerplate code
 
 \begindata{link,9803904}
 4
-${ANDREWDIR}/etc/bison.simple
+$ANDREWDIR/etc/bison.simple
 0
 0
 V
@@ -6963,7 +6057,7 @@ references.
 
 Variable references are given either directly (-v groups) or by package 
 directories (-d groups and :-separated $\{AUISPACKAGESPATH\} 
-($\{ANDREWDIR\}/lib/packages by default).  Package directories contain a 
+($ANDREWDIR/lib/packages by default).  Package directories contain a 
 \typewriter{defaults} file containing names of files to read for library 
 definitions.  Library definition files contain the name of the variable on 
 the first line, and all libraries to retrieve from that directory on 
@@ -6998,7 +6092,7 @@ Dependency generator for the build system.
 
 \begindata{link,9808208}
 4
-${ANDREWDIR}/etc/gen.awk
+$ANDREWDIR/etc/gen.awk
 0
 0
 V
@@ -7021,7 +6115,7 @@ Part of old ATK library content parser \bold{genrefs}.
 
 \begindata{link,7078960}
 4
-${ANDREWDIR}/etc/genrefs
+$ANDREWDIR/etc/genrefs
 0
 0
 V
@@ -7046,7 +6140,7 @@ Prints \italic{libs} to \italic{libname}.lt.  Pipes the results of
 \italic{basedir}/etc/\
 \begindata{link,7082192}
 4
-${ANDREWDIR}/etc/gen.awk
+$ANDREWDIR/etc/gen.awk
 0
 0
 V
@@ -7094,7 +6188,7 @@ superflous includes are not detectable.  The "old" method
 (\
 \begindata{link,7087296}
 4
-${ANDREWDIR}/etc/genrefs
+$ANDREWDIR/etc/genrefs
 0
 0
 V
@@ -7191,12 +6285,12 @@ Version 2
 n 0
 \enddata{bp,10038112}
 \view{bpv,10038112,25643,0,0}
-\chapter{$\{ANDREWDIR\}/examples}
+\chapter{$ANDREWDIR/examples}
 
 The 
 \begindata{link,10038832}
 4
-${ANDREWDIR}/examples
+$ANDREWDIR/examples
 0
 0
 V
@@ -7219,7 +6313,7 @@ documentation, and binaries for the ATK tutorial examples.
 
 \begindata{link,10040032}
 4
-${ANDREWDIR}/examples/doc
+$ANDREWDIR/examples/doc
 0
 0
 V
@@ -7240,7 +6334,7 @@ white
 
 \begindata{link,10040976}
 4
-${ANDREWDIR}/examples/doc/examples.doc
+$ANDREWDIR/examples/doc/examples.doc
 0
 0
 V
@@ -7260,7 +6354,7 @@ white
 
 \begindata{link,10042000}
 4
-${ANDREWDIR}/examples/doc/ex1.doc
+$ANDREWDIR/examples/doc/ex1.doc
 0
 0
 V
@@ -7280,7 +6374,7 @@ white
 
 \begindata{link,10045648}
 4
-${ANDREWDIR}/examples/doc/ex2.doc
+$ANDREWDIR/examples/doc/ex2.doc
 0
 0
 V
@@ -7300,7 +6394,7 @@ white
 
 \begindata{link,10046752}
 4
-${ANDREWDIR}/examples/doc/ex3.doc
+$ANDREWDIR/examples/doc/ex3.doc
 0
 0
 V
@@ -7320,7 +6414,7 @@ white
 
 \begindata{link,10047696}
 4
-${ANDREWDIR}/examples/doc/ex4.doc
+$ANDREWDIR/examples/doc/ex4.doc
 0
 0
 V
@@ -7340,7 +6434,7 @@ white
 
 \begindata{link,10048720}
 4
-${ANDREWDIR}/examples/doc/ex5.doc
+$ANDREWDIR/examples/doc/ex5.doc
 0
 0
 V
@@ -7360,7 +6454,7 @@ white
 
 \begindata{link,10049632}
 4
-${ANDREWDIR}/examples/doc/ex6.doc
+$ANDREWDIR/examples/doc/ex6.doc
 0
 0
 V
@@ -7380,7 +6474,7 @@ white
 
 \begindata{link,7088384}
 4
-${ANDREWDIR}/examples/doc/ex7.doc
+$ANDREWDIR/examples/doc/ex7.doc
 0
 0
 V
@@ -7400,7 +6494,7 @@ white
 
 \begindata{link,7089328}
 4
-${ANDREWDIR}/examples/doc/ex8.doc
+$ANDREWDIR/examples/doc/ex8.doc
 0
 0
 V
@@ -7420,7 +6514,7 @@ white
 
 \begindata{link,15195104}
 4
-${ANDREWDIR}/examples/doc/ex9.doc
+$ANDREWDIR/examples/doc/ex9.doc
 0
 0
 V
@@ -7440,7 +6534,7 @@ white
 
 \begindata{link,15196000}
 4
-${ANDREWDIR}/examples/doc/ex10.doc
+$ANDREWDIR/examples/doc/ex10.doc
 0
 0
 V
@@ -7460,7 +6554,7 @@ white
 
 \begindata{link,15197104}
 4
-${ANDREWDIR}/examples/doc/ex11.doc
+$ANDREWDIR/examples/doc/ex11.doc
 0
 0
 V
@@ -7480,7 +6574,7 @@ white
 
 \begindata{link,15198048}
 4
-${ANDREWDIR}/examples/doc/ex12.doc
+$ANDREWDIR/examples/doc/ex12.doc
 0
 0
 V
@@ -7500,7 +6594,7 @@ white
 
 \begindata{link,15199072}
 4
-${ANDREWDIR}/examples/doc/ex13.doc
+$ANDREWDIR/examples/doc/ex13.doc
 0
 0
 V
@@ -7520,7 +6614,7 @@ white
 
 \begindata{link,15200016}
 4
-${ANDREWDIR}/examples/doc/ex14.doc
+$ANDREWDIR/examples/doc/ex14.doc
 0
 0
 V
@@ -7540,7 +6634,7 @@ white
 
 \begindata{link,15201200}
 4
-${ANDREWDIR}/examples/doc/ex15.doc
+$ANDREWDIR/examples/doc/ex15.doc
 0
 0
 V
@@ -7560,7 +6654,7 @@ white
 
 \begindata{link,15192528}
 4
-${ANDREWDIR}/examples/doc/ex16.doc
+$ANDREWDIR/examples/doc/ex16.doc
 0
 0
 V
@@ -7580,7 +6674,7 @@ white
 
 \begindata{link,15193552}
 4
-${ANDREWDIR}/examples/doc/ex17.doc
+$ANDREWDIR/examples/doc/ex17.doc
 0
 0
 V
@@ -7600,7 +6694,7 @@ white
 
 \begindata{link,15194464}
 4
-${ANDREWDIR}/examples/doc/ex18.doc
+$ANDREWDIR/examples/doc/ex18.doc
 0
 0
 V
@@ -7620,7 +6714,7 @@ white
 
 \begindata{link,12120528}
 4
-${ANDREWDIR}/examples/doc/ex19.doc
+$ANDREWDIR/examples/doc/ex19.doc
 0
 0
 V
@@ -7641,7 +6735,7 @@ white
 
 \begindata{link,12121472}
 4
-${ANDREWDIR}/examples/ex1
+$ANDREWDIR/examples/ex1
 0
 0
 V
@@ -7666,7 +6760,7 @@ white
 
 \begindata{link,12122576}
 4
-${ANDREWDIR}/examples/ex1/hwapp.C
+$ANDREWDIR/examples/ex1/hwapp.C
 0
 0
 V
@@ -7686,7 +6780,7 @@ white
 
 \begindata{link,12123520}
 4
-${ANDREWDIR}/examples/ex1/hwapp.H
+$ANDREWDIR/examples/ex1/hwapp.H
 0
 0
 V
@@ -7706,7 +6800,7 @@ white
 
 \begindata{link,12124784}
 4
-${ANDREWDIR}/examples/ex1/hwview.C
+$ANDREWDIR/examples/ex1/hwview.C
 0
 0
 V
@@ -7726,7 +6820,7 @@ white
 
 \begindata{link,12125728}
 4
-${ANDREWDIR}/examples/ex1/hwview.H
+$ANDREWDIR/examples/ex1/hwview.H
 0
 0
 V
@@ -7746,7 +6840,7 @@ white
 
 \begindata{link,12126752}
 4
-${ANDREWDIR}/examples/ex1/Imakefile
+$ANDREWDIR/examples/ex1/Imakefile
 0
 0
 V
@@ -7767,7 +6861,7 @@ white
 
 \begindata{link,12130640}
 4
-${ANDREWDIR}/examples/ex2
+$ANDREWDIR/examples/ex2
 0
 0
 V
@@ -7793,7 +6887,7 @@ white
 
 \begindata{link,12132096}
 4
-${ANDREWDIR}/examples/ex2/hwapp.C
+$ANDREWDIR/examples/ex2/hwapp.C
 0
 0
 V
@@ -7813,7 +6907,7 @@ white
 
 \begindata{link,15201968}
 4
-${ANDREWDIR}/examples/ex2/hwapp.H
+$ANDREWDIR/examples/ex2/hwapp.H
 0
 0
 V
@@ -7833,7 +6927,7 @@ white
 
 \begindata{link,15202912}
 4
-${ANDREWDIR}/examples/ex2/hwview.C
+$ANDREWDIR/examples/ex2/hwview.C
 0
 0
 V
@@ -7853,7 +6947,7 @@ white
 
 \begindata{link,15204096}
 4
-${ANDREWDIR}/examples/ex2/hwview.H
+$ANDREWDIR/examples/ex2/hwview.H
 0
 0
 V
@@ -7873,7 +6967,7 @@ white
 
 \begindata{link,7243824}
 4
-${ANDREWDIR}/examples/ex2/Imakefile
+$ANDREWDIR/examples/ex2/Imakefile
 0
 0
 V
@@ -7894,7 +6988,7 @@ white
 
 \begindata{link,7244816}
 4
-${ANDREWDIR}/examples/ex3
+$ANDREWDIR/examples/ex3
 0
 0
 V
@@ -7920,7 +7014,7 @@ white
 
 \begindata{link,7245840}
 4
-${ANDREWDIR}/examples/ex3/hwapp.C
+$ANDREWDIR/examples/ex3/hwapp.C
 0
 0
 V
@@ -7940,7 +7034,7 @@ white
 
 \begindata{link,7246944}
 4
-${ANDREWDIR}/examples/ex3/hwapp.H
+$ANDREWDIR/examples/ex3/hwapp.H
 0
 0
 V
@@ -7960,7 +7054,7 @@ white
 
 \begindata{link,7247888}
 4
-${ANDREWDIR}/examples/ex3/hwview.C
+$ANDREWDIR/examples/ex3/hwview.C
 0
 0
 V
@@ -7980,7 +7074,7 @@ white
 
 \begindata{link,12127744}
 4
-${ANDREWDIR}/examples/ex3/hwview.H
+$ANDREWDIR/examples/ex3/hwview.H
 0
 0
 V
@@ -8000,7 +7094,7 @@ white
 
 \begindata{link,12128720}
 4
-${ANDREWDIR}/examples/ex3/Imakefile
+$ANDREWDIR/examples/ex3/Imakefile
 0
 0
 V
@@ -8021,7 +7115,7 @@ white
 
 \begindata{link,7251312}
 4
-${ANDREWDIR}/examples/ex4
+$ANDREWDIR/examples/ex4
 0
 0
 V
@@ -8047,7 +7141,7 @@ white
 
 \begindata{link,7252624}
 4
-${ANDREWDIR}/examples/ex4/hwapp.C
+$ANDREWDIR/examples/ex4/hwapp.C
 0
 0
 V
@@ -8067,7 +7161,7 @@ white
 
 \begindata{link,7253568}
 4
-${ANDREWDIR}/examples/ex4/hwapp.H
+$ANDREWDIR/examples/ex4/hwapp.H
 0
 0
 V
@@ -8087,7 +7181,7 @@ white
 
 \begindata{link,7254672}
 4
-${ANDREWDIR}/examples/ex4/hwview.C
+$ANDREWDIR/examples/ex4/hwview.C
 0
 0
 V
@@ -8107,7 +7201,7 @@ white
 
 \begindata{link,7255616}
 4
-${ANDREWDIR}/examples/ex4/hwview.H
+$ANDREWDIR/examples/ex4/hwview.H
 0
 0
 V
@@ -8127,7 +7221,7 @@ white
 
 \begindata{link,12899056}
 4
-${ANDREWDIR}/examples/ex4/Imakefile
+$ANDREWDIR/examples/ex4/Imakefile
 0
 0
 V
@@ -8148,7 +7242,7 @@ white
 
 \begindata{link,12900000}
 4
-${ANDREWDIR}/examples/ex5
+$ANDREWDIR/examples/ex5
 0
 0
 V
@@ -8174,7 +7268,7 @@ white
 
 \begindata{link,12901264}
 4
-${ANDREWDIR}/examples/ex5/hwapp.C
+$ANDREWDIR/examples/ex5/hwapp.C
 0
 0
 V
@@ -8194,7 +7288,7 @@ white
 
 \begindata{link,7248800}
 4
-${ANDREWDIR}/examples/ex5/hwapp.H
+$ANDREWDIR/examples/ex5/hwapp.H
 0
 0
 V
@@ -8214,7 +7308,7 @@ white
 
 \begindata{link,7249856}
 4
-${ANDREWDIR}/examples/ex5/hwview.C
+$ANDREWDIR/examples/ex5/hwview.C
 0
 0
 V
@@ -8234,7 +7328,7 @@ white
 
 \begindata{link,7250800}
 4
-${ANDREWDIR}/examples/ex5/hwview.H
+$ANDREWDIR/examples/ex5/hwview.H
 0
 0
 V
@@ -8254,7 +7348,7 @@ white
 
 \begindata{link,12905328}
 4
-${ANDREWDIR}/examples/ex5/Imakefile
+$ANDREWDIR/examples/ex5/Imakefile
 0
 0
 V
@@ -8275,7 +7369,7 @@ white
 
 \begindata{link,12906272}
 4
-${ANDREWDIR}/examples/ex6
+$ANDREWDIR/examples/ex6
 0
 0
 V
@@ -8301,7 +7395,7 @@ white
 
 \begindata{link,12907616}
 4
-${ANDREWDIR}/examples/ex6/hwapp.C
+$ANDREWDIR/examples/ex6/hwapp.C
 0
 0
 V
@@ -8321,7 +7415,7 @@ white
 
 \begindata{link,12908880}
 4
-${ANDREWDIR}/examples/ex6/hwapp.H
+$ANDREWDIR/examples/ex6/hwapp.H
 0
 0
 V
@@ -8341,7 +7435,7 @@ white
 
 \begindata{link,12909824}
 4
-${ANDREWDIR}/examples/ex6/hwview.C
+$ANDREWDIR/examples/ex6/hwview.C
 0
 0
 V
@@ -8361,7 +7455,7 @@ white
 
 \begindata{link,12910848}
 4
-${ANDREWDIR}/examples/ex6/hwview.H
+$ANDREWDIR/examples/ex6/hwview.H
 0
 0
 V
@@ -8381,7 +7475,7 @@ white
 
 \begindata{link,12236784}
 4
-${ANDREWDIR}/examples/ex6/Imakefile
+$ANDREWDIR/examples/ex6/Imakefile
 0
 0
 V
@@ -8402,7 +7496,7 @@ white
 
 \begindata{link,12902336}
 4
-${ANDREWDIR}/examples/ex7
+$ANDREWDIR/examples/ex7
 0
 0
 V
@@ -8428,7 +7522,7 @@ white
 
 \begindata{link,12903392}
 4
-${ANDREWDIR}/examples/ex7/hwapp.C
+$ANDREWDIR/examples/ex7/hwapp.C
 0
 0
 V
@@ -8448,7 +7542,7 @@ white
 
 \begindata{link,12904416}
 4
-${ANDREWDIR}/examples/ex7/hwapp.H
+$ANDREWDIR/examples/ex7/hwapp.H
 0
 0
 V
@@ -8468,7 +7562,7 @@ white
 
 \begindata{link,12240880}
 4
-${ANDREWDIR}/examples/ex7/hwview.C
+$ANDREWDIR/examples/ex7/hwview.C
 0
 0
 V
@@ -8488,7 +7582,7 @@ white
 
 \begindata{link,12242000}
 4
-${ANDREWDIR}/examples/ex7/hwview.H
+$ANDREWDIR/examples/ex7/hwview.H
 0
 0
 V
@@ -8508,7 +7602,7 @@ white
 
 \begindata{link,12242944}
 4
-${ANDREWDIR}/examples/ex7/Imakefile
+$ANDREWDIR/examples/ex7/Imakefile
 0
 0
 V
@@ -8529,7 +7623,7 @@ white
 
 \begindata{link,12243968}
 4
-${ANDREWDIR}/examples/ex8
+$ANDREWDIR/examples/ex8
 0
 0
 V
@@ -8555,7 +7649,7 @@ white
 
 \begindata{link,12245392}
 4
-${ANDREWDIR}/examples/ex8/hwapp.C
+$ANDREWDIR/examples/ex8/hwapp.C
 0
 0
 V
@@ -8575,7 +7669,7 @@ white
 
 \begindata{link,12246336}
 4
-${ANDREWDIR}/examples/ex8/hwapp.H
+$ANDREWDIR/examples/ex8/hwapp.H
 0
 0
 V
@@ -8595,7 +7689,7 @@ white
 
 \begindata{link,12247360}
 4
-${ANDREWDIR}/examples/ex8/hwview.C
+$ANDREWDIR/examples/ex8/hwview.C
 0
 0
 V
@@ -8615,7 +7709,7 @@ white
 
 \begindata{link,12248272}
 4
-${ANDREWDIR}/examples/ex8/hwview.H
+$ANDREWDIR/examples/ex8/hwview.H
 0
 0
 V
@@ -8635,7 +7729,7 @@ white
 
 \begindata{link,12237440}
 4
-${ANDREWDIR}/examples/ex8/Imakefile
+$ANDREWDIR/examples/ex8/Imakefile
 0
 0
 V
@@ -8656,7 +7750,7 @@ white
 
 \begindata{link,12238416}
 4
-${ANDREWDIR}/examples/ex9
+$ANDREWDIR/examples/ex9
 0
 0
 V
@@ -8682,7 +7776,7 @@ white
 
 \begindata{link,12239520}
 4
-${ANDREWDIR}/examples/ex9/hwapp.C
+$ANDREWDIR/examples/ex9/hwapp.C
 0
 0
 V
@@ -8702,7 +7796,7 @@ white
 
 \begindata{link,12373744}
 4
-${ANDREWDIR}/examples/ex9/hwapp.H
+$ANDREWDIR/examples/ex9/hwapp.H
 0
 0
 V
@@ -8722,7 +7816,7 @@ white
 
 \begindata{link,12374816}
 4
-${ANDREWDIR}/examples/ex9/hwview.C
+$ANDREWDIR/examples/ex9/hwview.C
 0
 0
 V
@@ -8742,7 +7836,7 @@ white
 
 \begindata{link,12375760}
 4
-${ANDREWDIR}/examples/ex9/hwview.H
+$ANDREWDIR/examples/ex9/hwview.H
 0
 0
 V
@@ -8762,7 +7856,7 @@ white
 
 \begindata{link,12376784}
 4
-${ANDREWDIR}/examples/ex9/Imakefile
+$ANDREWDIR/examples/ex9/Imakefile
 0
 0
 V
@@ -8783,7 +7877,7 @@ white
 
 \begindata{link,12377728}
 4
-${ANDREWDIR}/examples/ex10
+$ANDREWDIR/examples/ex10
 0
 0
 V
@@ -8809,7 +7903,7 @@ white
 
 \begindata{link,12379232}
 4
-${ANDREWDIR}/examples/ex10/helloworld.C
+$ANDREWDIR/examples/ex10/helloworld.C
 0
 0
 V
@@ -8829,7 +7923,7 @@ white
 
 \begindata{link,12370288}
 4
-${ANDREWDIR}/examples/ex10/helloworld.H
+$ANDREWDIR/examples/ex10/helloworld.H
 0
 0
 V
@@ -8849,7 +7943,7 @@ white
 
 \begindata{link,12371232}
 4
-${ANDREWDIR}/examples/ex10/hwapp.C
+$ANDREWDIR/examples/ex10/hwapp.C
 0
 0
 V
@@ -8869,7 +7963,7 @@ white
 
 \begindata{link,12372336}
 4
-${ANDREWDIR}/examples/ex10/hwapp.H
+$ANDREWDIR/examples/ex10/hwapp.H
 0
 0
 V
@@ -8889,7 +7983,7 @@ white
 
 \begindata{link,12373280}
 4
-${ANDREWDIR}/examples/ex10/hwview.C
+$ANDREWDIR/examples/ex10/hwview.C
 0
 0
 V
@@ -8909,7 +8003,7 @@ white
 
 \begindata{link,9828992}
 4
-${ANDREWDIR}/examples/ex10/hwview.H
+$ANDREWDIR/examples/ex10/hwview.H
 0
 0
 V
@@ -8929,7 +8023,7 @@ white
 
 \begindata{link,9829936}
 4
-${ANDREWDIR}/examples/ex10/Imakefile
+$ANDREWDIR/examples/ex10/Imakefile
 0
 0
 V
@@ -8950,7 +8044,7 @@ white
 
 \begindata{link,9831200}
 4
-${ANDREWDIR}/examples/ex11
+$ANDREWDIR/examples/ex11
 0
 0
 V
@@ -8976,7 +8070,7 @@ white
 
 \begindata{link,9832224}
 4
-${ANDREWDIR}/examples/ex11/helloworld.C
+$ANDREWDIR/examples/ex11/helloworld.C
 0
 0
 V
@@ -8996,7 +8090,7 @@ white
 
 \begindata{link,9833248}
 4
-${ANDREWDIR}/examples/ex11/helloworld.H
+$ANDREWDIR/examples/ex11/helloworld.H
 0
 0
 V
@@ -9016,7 +8110,7 @@ white
 
 \begindata{link,9834192}
 4
-${ANDREWDIR}/examples/ex11/hwapp.C
+$ANDREWDIR/examples/ex11/hwapp.C
 0
 0
 V
@@ -9036,7 +8130,7 @@ white
 
 \begindata{link,12380304}
 4
-${ANDREWDIR}/examples/ex11/hwapp.H
+$ANDREWDIR/examples/ex11/hwapp.H
 0
 0
 V
@@ -9056,7 +8150,7 @@ white
 
 \begindata{link,12381280}
 4
-${ANDREWDIR}/examples/ex11/hwview.C
+$ANDREWDIR/examples/ex11/hwview.C
 0
 0
 V
@@ -9076,7 +8170,7 @@ white
 
 \begindata{link,12382304}
 4
-${ANDREWDIR}/examples/ex11/hwview.H
+$ANDREWDIR/examples/ex11/hwview.H
 0
 0
 V
@@ -9096,7 +8190,7 @@ white
 
 \begindata{link,9838336}
 4
-${ANDREWDIR}/examples/ex11/Imakefile
+$ANDREWDIR/examples/ex11/Imakefile
 0
 0
 V
@@ -9117,7 +8211,7 @@ white
 
 \begindata{link,9839472}
 4
-${ANDREWDIR}/examples/ex12
+$ANDREWDIR/examples/ex12
 0
 0
 V
@@ -9143,7 +8237,7 @@ white
 
 \begindata{link,9840816}
 4
-${ANDREWDIR}/examples/ex12/helloworld.C
+$ANDREWDIR/examples/ex12/helloworld.C
 0
 0
 V
@@ -9163,7 +8257,7 @@ white
 
 \begindata{link,13757120}
 4
-${ANDREWDIR}/examples/ex12/helloworld.H
+$ANDREWDIR/examples/ex12/helloworld.H
 0
 0
 V
@@ -9183,7 +8277,7 @@ white
 
 \begindata{link,13758224}
 4
-${ANDREWDIR}/examples/ex12/hwapp.C
+$ANDREWDIR/examples/ex12/hwapp.C
 0
 0
 V
@@ -9203,7 +8297,7 @@ white
 
 \begindata{link,13759168}
 4
-${ANDREWDIR}/examples/ex12/hwapp.H
+$ANDREWDIR/examples/ex12/hwapp.H
 0
 0
 V
@@ -9223,7 +8317,7 @@ white
 
 \begindata{link,13760192}
 4
-${ANDREWDIR}/examples/ex12/hwview.C
+$ANDREWDIR/examples/ex12/hwview.C
 0
 0
 V
@@ -9243,7 +8337,7 @@ white
 
 \begindata{link,9835104}
 4
-${ANDREWDIR}/examples/ex12/hwview.H
+$ANDREWDIR/examples/ex12/hwview.H
 0
 0
 V
@@ -9263,7 +8357,7 @@ white
 
 \begindata{link,9836480}
 4
-${ANDREWDIR}/examples/ex12/Imakefile
+$ANDREWDIR/examples/ex12/Imakefile
 0
 0
 V
@@ -9284,7 +8378,7 @@ white
 
 \begindata{link,9837424}
 4
-${ANDREWDIR}/examples/ex13
+$ANDREWDIR/examples/ex13
 0
 0
 V
@@ -9310,7 +8404,7 @@ white
 
 \begindata{link,13764656}
 4
-${ANDREWDIR}/examples/ex13/helloworld.C
+$ANDREWDIR/examples/ex13/helloworld.C
 0
 0
 V
@@ -9330,7 +8424,7 @@ white
 
 \begindata{link,13765552}
 4
-${ANDREWDIR}/examples/ex13/helloworld.H
+$ANDREWDIR/examples/ex13/helloworld.H
 0
 0
 V
@@ -9350,7 +8444,7 @@ white
 
 \begindata{link,13766656}
 4
-${ANDREWDIR}/examples/ex13/hwapp.C
+$ANDREWDIR/examples/ex13/hwapp.C
 0
 0
 V
@@ -9370,7 +8464,7 @@ white
 
 \begindata{link,13767600}
 4
-${ANDREWDIR}/examples/ex13/hwapp.H
+$ANDREWDIR/examples/ex13/hwapp.H
 0
 0
 V
@@ -9390,7 +8484,7 @@ white
 
 \begindata{link,13768624}
 4
-${ANDREWDIR}/examples/ex13/hwview.C
+$ANDREWDIR/examples/ex13/hwview.C
 0
 0
 V
@@ -9410,7 +8504,7 @@ white
 
 \begindata{link,13769568}
 4
-${ANDREWDIR}/examples/ex13/hwview.H
+$ANDREWDIR/examples/ex13/hwview.H
 0
 0
 V
@@ -9430,7 +8524,7 @@ white
 
 \begindata{link,8525792}
 4
-${ANDREWDIR}/examples/ex13/Imakefile
+$ANDREWDIR/examples/ex13/Imakefile
 0
 0
 V
@@ -9451,7 +8545,7 @@ white
 
 \begindata{link,13761104}
 4
-${ANDREWDIR}/examples/ex14
+$ANDREWDIR/examples/ex14
 0
 0
 V
@@ -9477,7 +8571,7 @@ white
 
 \begindata{link,13762480}
 4
-${ANDREWDIR}/examples/ex14/hwapp.C
+$ANDREWDIR/examples/ex14/hwapp.C
 0
 0
 V
@@ -9497,7 +8591,7 @@ white
 
 \begindata{link,13763584}
 4
-${ANDREWDIR}/examples/ex14/hwapp.H
+$ANDREWDIR/examples/ex14/hwapp.H
 0
 0
 V
@@ -9517,7 +8611,7 @@ white
 
 \begindata{link,8530176}
 4
-${ANDREWDIR}/examples/ex14/Imakefile
+$ANDREWDIR/examples/ex14/Imakefile
 0
 0
 V
@@ -9538,7 +8632,7 @@ white
 
 \begindata{link,8531200}
 4
-${ANDREWDIR}/examples/ex15
+$ANDREWDIR/examples/ex15
 0
 0
 V
@@ -9564,7 +8658,7 @@ white
 
 \begindata{link,8532224}
 4
-${ANDREWDIR}/examples/ex15/hwapp.C
+$ANDREWDIR/examples/ex15/hwapp.C
 0
 0
 V
@@ -9584,7 +8678,7 @@ white
 
 \begindata{link,8533488}
 4
-${ANDREWDIR}/examples/ex15/hwapp.H
+$ANDREWDIR/examples/ex15/hwapp.H
 0
 0
 V
@@ -9604,7 +8698,7 @@ white
 
 \begindata{link,8534432}
 4
-${ANDREWDIR}/examples/ex15/Imakefile
+$ANDREWDIR/examples/ex15/Imakefile
 0
 0
 V
@@ -9625,7 +8719,7 @@ white
 
 \begindata{link,8535456}
 4
-${ANDREWDIR}/examples/ex16
+$ANDREWDIR/examples/ex16
 0
 0
 V
@@ -9651,7 +8745,7 @@ white
 
 \begindata{link,8536880}
 4
-${ANDREWDIR}/examples/ex16/helloworld.C
+$ANDREWDIR/examples/ex16/helloworld.C
 0
 0
 V
@@ -9671,7 +8765,7 @@ white
 
 \begindata{link,8537792}
 4
-${ANDREWDIR}/examples/ex16/helloworld.H
+$ANDREWDIR/examples/ex16/helloworld.H
 0
 0
 V
@@ -9691,7 +8785,7 @@ white
 
 \begindata{link,8538848}
 4
-${ANDREWDIR}/examples/ex16/hwapp.C
+$ANDREWDIR/examples/ex16/hwapp.C
 0
 0
 V
@@ -9711,7 +8805,7 @@ white
 
 \begindata{link,8526656}
 4
-${ANDREWDIR}/examples/ex16/hwapp.H
+$ANDREWDIR/examples/ex16/hwapp.H
 0
 0
 V
@@ -9731,7 +8825,7 @@ white
 
 \begindata{link,8527840}
 4
-${ANDREWDIR}/examples/ex16/hwview.C
+$ANDREWDIR/examples/ex16/hwview.C
 0
 0
 V
@@ -9751,7 +8845,7 @@ white
 
 \begindata{link,8528784}
 4
-${ANDREWDIR}/examples/ex16/hwview.H
+$ANDREWDIR/examples/ex16/hwview.H
 0
 0
 V
@@ -9771,7 +8865,7 @@ white
 
 \begindata{link,10542192}
 4
-${ANDREWDIR}/examples/ex16/Imakefile
+$ANDREWDIR/examples/ex16/Imakefile
 0
 0
 V
@@ -9792,7 +8886,7 @@ white
 
 \begindata{link,10543088}
 4
-${ANDREWDIR}/examples/ex17
+$ANDREWDIR/examples/ex17
 0
 0
 V
@@ -9818,7 +8912,7 @@ white
 
 \begindata{link,10544272}
 4
-${ANDREWDIR}/examples/ex17/helloworld.C
+$ANDREWDIR/examples/ex17/helloworld.C
 0
 0
 V
@@ -9838,7 +8932,7 @@ white
 
 \begindata{link,10545216}
 4
-${ANDREWDIR}/examples/ex17/helloworld.H
+$ANDREWDIR/examples/ex17/helloworld.H
 0
 0
 V
@@ -9858,7 +8952,7 @@ white
 
 \begindata{link,10546240}
 4
-${ANDREWDIR}/examples/ex17/hwapp.C
+$ANDREWDIR/examples/ex17/hwapp.C
 0
 0
 V
@@ -9878,7 +8972,7 @@ white
 
 \begindata{link,10550928}
 4
-${ANDREWDIR}/examples/ex17/hwapp.H
+$ANDREWDIR/examples/ex17/hwapp.H
 0
 0
 V
@@ -9898,7 +8992,7 @@ white
 
 \begindata{link,10538736}
 4
-${ANDREWDIR}/examples/ex17/hwview.C
+$ANDREWDIR/examples/ex17/hwview.C
 0
 0
 V
@@ -9918,7 +9012,7 @@ white
 
 \begindata{link,10539680}
 4
-${ANDREWDIR}/examples/ex17/hwview.H
+$ANDREWDIR/examples/ex17/hwview.H
 0
 0
 V
@@ -9938,7 +9032,7 @@ white
 
 \begindata{link,10540704}
 4
-${ANDREWDIR}/examples/ex17/Imakefile
+$ANDREWDIR/examples/ex17/Imakefile
 0
 0
 V
@@ -9959,7 +9053,7 @@ white
 
 \begindata{link,10541648}
 4
-${ANDREWDIR}/examples/ex18
+$ANDREWDIR/examples/ex18
 0
 0
 V
@@ -9985,7 +9079,7 @@ white
 
 \begindata{link,14482720}
 4
-${ANDREWDIR}/examples/ex18/helloworld.C
+$ANDREWDIR/examples/ex18/helloworld.C
 0
 0
 V
@@ -10005,7 +9099,7 @@ white
 
 \begindata{link,14483744}
 4
-${ANDREWDIR}/examples/ex18/helloworld.H
+$ANDREWDIR/examples/ex18/helloworld.H
 0
 0
 V
@@ -10025,7 +9119,7 @@ white
 
 \begindata{link,14484688}
 4
-${ANDREWDIR}/examples/ex18/hwapp.C
+$ANDREWDIR/examples/ex18/hwapp.C
 0
 0
 V
@@ -10045,7 +9139,7 @@ white
 
 \begindata{link,14485872}
 4
-${ANDREWDIR}/examples/ex18/hwapp.H
+$ANDREWDIR/examples/ex18/hwapp.H
 0
 0
 V
@@ -10065,7 +9159,7 @@ white
 
 \begindata{link,14486816}
 4
-${ANDREWDIR}/examples/ex18/hwview.C
+$ANDREWDIR/examples/ex18/hwview.C
 0
 0
 V
@@ -10085,7 +9179,7 @@ white
 
 \begindata{link,10547232}
 4
-${ANDREWDIR}/examples/ex18/hwview.H
+$ANDREWDIR/examples/ex18/hwview.H
 0
 0
 V
@@ -10105,7 +9199,7 @@ white
 
 \begindata{link,10548208}
 4
-${ANDREWDIR}/examples/ex18/Imakefile
+$ANDREWDIR/examples/ex18/Imakefile
 0
 0
 V
@@ -10126,7 +9220,7 @@ white
 
 \begindata{link,10549312}
 4
-${ANDREWDIR}/examples/ex19
+$ANDREWDIR/examples/ex19
 0
 0
 V
@@ -10152,7 +9246,7 @@ white
 
 \begindata{link,14491040}
 4
-${ANDREWDIR}/examples/ex19/helloworld.C
+$ANDREWDIR/examples/ex19/helloworld.C
 0
 0
 V
@@ -10172,7 +9266,7 @@ white
 
 \begindata{link,14492016}
 4
-${ANDREWDIR}/examples/ex19/helloworld.H
+$ANDREWDIR/examples/ex19/helloworld.H
 0
 0
 V
@@ -10192,7 +9286,7 @@ white
 
 \begindata{link,14492960}
 4
-${ANDREWDIR}/examples/ex19/hwapp.C
+$ANDREWDIR/examples/ex19/hwapp.C
 0
 0
 V
@@ -10212,7 +9306,7 @@ white
 
 \begindata{link,14494224}
 4
-${ANDREWDIR}/examples/ex19/hwapp.H
+$ANDREWDIR/examples/ex19/hwapp.H
 0
 0
 V
@@ -10232,7 +9326,7 @@ white
 
 \begindata{link,14495168}
 4
-${ANDREWDIR}/examples/ex19/hwview.C
+$ANDREWDIR/examples/ex19/hwview.C
 0
 0
 V
@@ -10252,7 +9346,7 @@ white
 
 \begindata{link,13725152}
 4
-${ANDREWDIR}/examples/ex19/hwview.H
+$ANDREWDIR/examples/ex19/hwview.H
 0
 0
 V
@@ -10272,7 +9366,7 @@ white
 
 \begindata{link,13726096}
 4
-${ANDREWDIR}/examples/ex19/Imakefile
+$ANDREWDIR/examples/ex19/Imakefile
 0
 0
 V
@@ -10294,7 +9388,7 @@ white
 The 
 \begindata{link,14487888}
 4
-${ANDREWDIR}/examples/lib
+$ANDREWDIR/examples/lib
 0
 0
 V
@@ -10320,12 +9414,12 @@ Version 2
 n 0
 \enddata{bp,13331872}
 \view{bpv,13331872,25793,0,0}
-\chapter{$\{ANDREWDIR\}/help}
+\chapter{$ANDREWDIR/help}
 
 The 
 \begindata{link,13332640}
 4
-${ANDREWDIR}/help
+$ANDREWDIR/help
 0
 0
 V
@@ -10340,13 +9434,13 @@ white
 \enddata{link,13332640}
 \view{linkview,13332640,25794,0,0} directory contains help files for 
 \bold{help} command.  Note that the index and config files reside in 
-\typewriter{$\{ANDREWDIR\}/lib}.  Help is currently available on the 
+\typewriter{$ANDREWDIR/lib}.  Help is currently available on the 
 following topics:
 
 
 \begindata{link,1}
 4
-${ANDREWDIR}/help/2rtf.help
+$ANDREWDIR/help/2rtf.help
 0
 0
 V
@@ -10361,7 +9455,7 @@ white
 \enddata{link,1}
 \view{linkview,1,1001,0,0} \begindata{link,2}
 4
-${ANDREWDIR}/help/adew.help
+$ANDREWDIR/help/adew.help
 0
 0
 V
@@ -10377,7 +9471,7 @@ white
 \view{linkview,2,1002,0,0}
  \begindata{link,3}
 4
-${ANDREWDIR}/help/adirs.help
+$ANDREWDIR/help/adirs.help
 0
 0
 V
@@ -10393,7 +9487,7 @@ white
 \view{linkview,3,1003,0,0}
  \begindata{link,4}
 4
-${ANDREWDIR}/help/asmtext.help
+$ANDREWDIR/help/asmtext.help
 0
 0
 V
@@ -10409,7 +9503,7 @@ white
 \view{linkview,4,1004,0,0}
  \begindata{link,5}
 4
-${ANDREWDIR}/help/atk.help
+$ANDREWDIR/help/atk.help
 0
 0
 V
@@ -10425,7 +9519,7 @@ white
 \view{linkview,5,1005,0,0}
  \begindata{link,6}
 4
-${ANDREWDIR}/help/bdffont.help
+$ANDREWDIR/help/bdffont.help
 0
 0
 V
@@ -10441,7 +9535,7 @@ white
 \view{linkview,6,1006,0,0}
  \begindata{link,7}
 4
-${ANDREWDIR}/help/bshproc.help
+$ANDREWDIR/help/bshproc.help
 0
 0
 V
@@ -10457,7 +9551,7 @@ white
 \view{linkview,7,1007,0,0}
  \begindata{link,8}
 4
-${ANDREWDIR}/help/buffer.help
+$ANDREWDIR/help/buffer.help
 0
 0
 V
@@ -10473,7 +9567,7 @@ white
 \view{linkview,8,1008,0,0}
  \begindata{link,9}
 4
-${ANDREWDIR}/help/bush.help
+$ANDREWDIR/help/bush.help
 0
 0
 V
@@ -10489,7 +9583,7 @@ white
 \view{linkview,9,1009,0,0}
  \begindata{link,10}
 4
-${ANDREWDIR}/help/calc.help
+$ANDREWDIR/help/calc.help
 0
 0
 V
@@ -10505,7 +9599,7 @@ white
 \view{linkview,10,1010,0,0}
  \begindata{link,11}
 4
-${ANDREWDIR}/help/calndrs.help
+$ANDREWDIR/help/calndrs.help
 0
 0
 V
@@ -10521,7 +9615,7 @@ white
 \view{linkview,11,1011,0,0}
  \begindata{link,12}
 4
-${ANDREWDIR}/help/calproc.help
+$ANDREWDIR/help/calproc.help
 0
 0
 V
@@ -10537,7 +9631,7 @@ white
 \view{linkview,12,1012,0,0}
  \begindata{link,13}
 4
-${ANDREWDIR}/help/champ.help
+$ANDREWDIR/help/champ.help
 0
 0
 V
@@ -10553,7 +9647,7 @@ white
 \view{linkview,13,1013,0,0}
  \begindata{link,14}
 4
-${ANDREWDIR}/help/chart.help
+$ANDREWDIR/help/chart.help
 0
 0
 V
@@ -10569,7 +9663,7 @@ white
 \view{linkview,14,1014,0,0}
  \begindata{link,15}
 4
-${ANDREWDIR}/help/chimp.help
+$ANDREWDIR/help/chimp.help
 0
 0
 V
@@ -10585,7 +9679,7 @@ white
 \view{linkview,15,1015,0,0}
  \begindata{link,16}
 4
-${ANDREWDIR}/help/chtproc.help
+$ANDREWDIR/help/chtproc.help
 0
 0
 V
@@ -10601,7 +9695,7 @@ white
 \view{linkview,16,1016,0,0}
  \begindata{link,17}
 4
-${ANDREWDIR}/help/chump.help
+$ANDREWDIR/help/chump.help
 0
 0
 V
@@ -10617,7 +9711,7 @@ white
 \view{linkview,17,1017,0,0}
  \begindata{link,18}
 4
-${ANDREWDIR}/help/circpi.help
+$ANDREWDIR/help/circpi.help
 0
 0
 V
@@ -10633,7 +9727,7 @@ white
 \view{linkview,18,1018,0,0}
  \begindata{link,20}
 4
-${ANDREWDIR}/help/clock.help
+$ANDREWDIR/help/clock.help
 0
 0
 V
@@ -10649,7 +9743,7 @@ white
 \view{linkview,20,1020,0,0}
  \begindata{link,21}
 4
-${ANDREWDIR}/help/cmenu.help
+$ANDREWDIR/help/cmenu.help
 0
 0
 V
@@ -10663,25 +9757,9 @@ white
 \enddata{link,21}
 \enddata{link,21}
 \view{linkview,21,1021,0,0}
- \begindata{link,22}
-4
-${ANDREWDIR}/help/cnclass.help
-0
-0
-V
-\begindata{link,22}
-Datastream version: 2
-cnclass
-2
-
-black
-white
-\enddata{link,22}
-\enddata{link,22}
-\view{linkview,22,1022,0,0}
  \begindata{link,23}
 4
-${ANDREWDIR}/help/cntproc.help
+$ANDREWDIR/help/cntproc.help
 0
 0
 V
@@ -10697,7 +9775,7 @@ white
 \view{linkview,23,1023,0,0}
  \begindata{link,24}
 4
-${ANDREWDIR}/help/color.help
+$ANDREWDIR/help/color.help
 0
 0
 V
@@ -10713,7 +9791,7 @@ white
 \view{linkview,24,1024,0,0}
  \begindata{link,25}
 4
-${ANDREWDIR}/help/compile.help
+$ANDREWDIR/help/compile.help
 0
 0
 V
@@ -10729,7 +9807,7 @@ white
 \view{linkview,25,1025,0,0}
  \begindata{link,26}
 4
-${ANDREWDIR}/help/comproc.help
+$ANDREWDIR/help/comproc.help
 0
 0
 V
@@ -10745,7 +9823,7 @@ white
 \view{linkview,26,1026,0,0}
  \begindata{link,27}
 4
-${ANDREWDIR}/help/console.help
+$ANDREWDIR/help/console.help
 0
 0
 V
@@ -10761,7 +9839,7 @@ white
 \view{linkview,27,1027,0,0}
  \begindata{link,28}
 4
-${ANDREWDIR}/help/content.help
+$ANDREWDIR/help/content.help
 0
 0
 V
@@ -10777,7 +9855,7 @@ white
 \view{linkview,28,1028,0,0}
  \begindata{link,29}
 4
-${ANDREWDIR}/help/convras.help
+$ANDREWDIR/help/convras.help
 0
 0
 V
@@ -10793,7 +9871,7 @@ white
 \view{linkview,29,1029,0,0}
  \begindata{link,30}
 4
-${ANDREWDIR}/help/cpchar.help
+$ANDREWDIR/help/cpchar.help
 0
 0
 V
@@ -10809,7 +9887,7 @@ white
 \view{linkview,30,1030,0,0}
  \begindata{link,31}
 4
-${ANDREWDIR}/help/cpptext.help
+$ANDREWDIR/help/cpptext.help
 0
 0
 V
@@ -10825,7 +9903,7 @@ white
 \view{linkview,31,1031,0,0}
  \begindata{link,32}
 4
-${ANDREWDIR}/help/cres8et.help
+$ANDREWDIR/help/cres8et.help
 0
 0
 V
@@ -10841,7 +9919,7 @@ white
 \view{linkview,32,1032,0,0}
  \begindata{link,33}
 4
-${ANDREWDIR}/help/crossrf.help
+$ANDREWDIR/help/crossrf.help
 0
 0
 V
@@ -10857,7 +9935,7 @@ white
 \view{linkview,33,1033,0,0}
  \begindata{link,34}
 4
-${ANDREWDIR}/help/ctext.help
+$ANDREWDIR/help/ctext.help
 0
 0
 V
@@ -10873,7 +9951,7 @@ white
 \view{linkview,34,1034,0,0}
  \begindata{link,35}
 4
-${ANDREWDIR}/help/ctrproc.help
+$ANDREWDIR/help/ctrproc.help
 0
 0
 V
@@ -10889,7 +9967,7 @@ white
 \view{linkview,35,1035,0,0}
  \begindata{link,36}
 4
-${ANDREWDIR}/help/cutbuf.help
+$ANDREWDIR/help/cutbuf.help
 0
 0
 V
@@ -10905,7 +9983,7 @@ white
 \view{linkview,36,1036,0,0}
  \begindata{link,37}
 4
-${ANDREWDIR}/help/datacat.help
+$ANDREWDIR/help/datacat.help
 0
 0
 V
@@ -10921,7 +9999,7 @@ white
 \view{linkview,37,1037,0,0}
  \begindata{link,38}
 4
-${ANDREWDIR}/help/desproc.help
+$ANDREWDIR/help/desproc.help
 0
 0
 V
@@ -10937,7 +10015,7 @@ white
 \view{linkview,38,1038,0,0}
  \begindata{link,39}
 4
-${ANDREWDIR}/help/dialogs.help
+$ANDREWDIR/help/dialogs.help
 0
 0
 V
@@ -10953,7 +10031,7 @@ white
 \view{linkview,39,1039,0,0}
  \begindata{link,41}
 4
-${ANDREWDIR}/help/dogtags.help
+$ANDREWDIR/help/dogtags.help
 0
 0
 V
@@ -10969,7 +10047,7 @@ white
 \view{linkview,41,1041,0,0}
  \begindata{link,42}
 4
-${ANDREWDIR}/help/drdproc.help
+$ANDREWDIR/help/drdproc.help
 0
 0
 V
@@ -10983,25 +10061,9 @@ white
 \enddata{link,42}
 \enddata{link,42}
 \view{linkview,42,1042,0,0}
- \begindata{link,43}
-4
-${ANDREWDIR}/help/dsrproc.help
-0
-0
-V
-\begindata{link,43}
-Datastream version: 2
-dsrproc
-2
-
-black
-white
-\enddata{link,43}
-\enddata{link,43}
-\view{linkview,43,1043,0,0}
  \begindata{link,44}
 4
-${ANDREWDIR}/help/eq.help
+$ANDREWDIR/help/eq.help
 0
 0
 V
@@ -11017,7 +10079,7 @@ white
 \view{linkview,44,1044,0,0}
  \begindata{link,45}
 4
-${ANDREWDIR}/help/ermproc.help
+$ANDREWDIR/help/ermproc.help
 0
 0
 V
@@ -11033,7 +10095,7 @@ white
 \view{linkview,45,1045,0,0}
  \begindata{link,46}
 4
-${ANDREWDIR}/help/erprintf.help
+$ANDREWDIR/help/erprintf.help
 0
 0
 V
@@ -11049,7 +10111,7 @@ white
 \view{linkview,46,1046,0,0}
  \begindata{link,47}
 4
-${ANDREWDIR}/help/evnts.help
+$ANDREWDIR/help/evnts.help
 0
 0
 V
@@ -11065,7 +10127,7 @@ white
 \view{linkview,47,1047,0,0}
  \begindata{link,48}
 4
-${ANDREWDIR}/help/ez2ascii.help
+$ANDREWDIR/help/ez2ascii.help
 0
 0
 V
@@ -11081,7 +10143,7 @@ white
 \view{linkview,48,1048,0,0}
  \begindata{link,49}
 4
-${ANDREWDIR}/help/ez2html.help
+$ANDREWDIR/help/ez2html.help
 0
 0
 V
@@ -11097,7 +10159,7 @@ white
 \view{linkview,49,1049,0,0}
  \begindata{link,50}
 4
-${ANDREWDIR}/help/ez2ps.help
+$ANDREWDIR/help/ez2ps.help
 0
 0
 V
@@ -11113,7 +10175,7 @@ white
 \view{linkview,50,1050,0,0}
  \begindata{link,51}
 4
-${ANDREWDIR}/help/ezcomm.help
+$ANDREWDIR/help/ezcomm.help
 0
 0
 V
@@ -11129,7 +10191,7 @@ white
 \view{linkview,51,1051,0,0}
  \begindata{link,52}
 4
-${ANDREWDIR}/help/ezdiff.help
+$ANDREWDIR/help/ezdiff.help
 0
 0
 V
@@ -11145,7 +10207,7 @@ white
 \view{linkview,52,1052,0,0}
  \begindata{link,53}
 4
-${ANDREWDIR}/help/ezdproc.help
+$ANDREWDIR/help/ezdproc.help
 0
 0
 V
@@ -11161,7 +10223,7 @@ white
 \view{linkview,53,1053,0,0}
  \begindata{link,54}
 4
-${ANDREWDIR}/help/ezext.help
+$ANDREWDIR/help/ezext.help
 0
 0
 V
@@ -11177,7 +10239,7 @@ white
 \view{linkview,54,1054,0,0}
  \begindata{link,55}
 4
-${ANDREWDIR}/help/ez.help
+$ANDREWDIR/help/ez.help
 0
 0
 V
@@ -11193,7 +10255,7 @@ white
 \view{linkview,55,1055,0,0}
  \begindata{link,56}
 4
-${ANDREWDIR}/help/ezkeys.help
+$ANDREWDIR/help/ezkeys.help
 0
 0
 V
@@ -11209,7 +10271,7 @@ white
 \view{linkview,56,1056,0,0}
  \begindata{link,57}
 4
-${ANDREWDIR}/help/ezpretty.help
+$ANDREWDIR/help/ezpretty.help
 0
 0
 V
@@ -11225,7 +10287,7 @@ white
 \view{linkview,57,1057,0,0}
  \begindata{link,58}
 4
-${ANDREWDIR}/help/ezprint.help
+$ANDREWDIR/help/ezprint.help
 0
 0
 V
@@ -11241,7 +10303,7 @@ white
 \view{linkview,58,1058,0,0}
  \begindata{link,59}
 4
-${ANDREWDIR}/help/ezproc.help
+$ANDREWDIR/help/ezproc.help
 0
 0
 V
@@ -11257,7 +10319,7 @@ white
 \view{linkview,59,1059,0,0}
  \begindata{link,60}
 4
-${ANDREWDIR}/help/ezps.help
+$ANDREWDIR/help/ezps.help
 0
 0
 V
@@ -11273,7 +10335,7 @@ white
 \view{linkview,60,1060,0,0}
  \begindata{link,61}
 4
-${ANDREWDIR}/help/ezstyle.help
+$ANDREWDIR/help/ezstyle.help
 0
 0
 V
@@ -11289,7 +10351,7 @@ white
 \view{linkview,61,1061,0,0}
  \begindata{link,62}
 4
-${ANDREWDIR}/help/eztroff.help
+$ANDREWDIR/help/eztroff.help
 0
 0
 V
@@ -11305,7 +10367,7 @@ white
 \view{linkview,62,1062,0,0}
  \begindata{link,63}
 4
-${ANDREWDIR}/help/fad.help
+$ANDREWDIR/help/fad.help
 0
 0
 V
@@ -11321,7 +10383,7 @@ white
 \view{linkview,63,1063,0,0}
  \begindata{link,64}
 4
-${ANDREWDIR}/help/fadproc.help
+$ANDREWDIR/help/fadproc.help
 0
 0
 V
@@ -11337,7 +10399,7 @@ white
 \view{linkview,64,1064,0,0}
  \begindata{link,65}
 4
-${ANDREWDIR}/help/figure.help
+$ANDREWDIR/help/figure.help
 0
 0
 V
@@ -11353,7 +10415,7 @@ white
 \view{linkview,65,1065,0,0}
  \begindata{link,66}
 4
-${ANDREWDIR}/help/fnote.help
+$ANDREWDIR/help/fnote.help
 0
 0
 V
@@ -11369,7 +10431,7 @@ white
 \view{linkview,66,1066,0,0}
  \begindata{link,67}
 4
-${ANDREWDIR}/help/fontprob.help
+$ANDREWDIR/help/fontprob.help
 0
 0
 V
@@ -11385,7 +10447,7 @@ white
 \view{linkview,67,1067,0,0}
  \begindata{link,68}
 4
-${ANDREWDIR}/help/frmproc.help
+$ANDREWDIR/help/frmproc.help
 0
 0
 V
@@ -11401,7 +10463,7 @@ white
 \view{linkview,68,1068,0,0}
  \begindata{link,69}
 4
-${ANDREWDIR}/help/ftrproc.help
+$ANDREWDIR/help/ftrproc.help
 0
 0
 V
@@ -11417,7 +10479,7 @@ white
 \view{linkview,69,1069,0,0}
  \begindata{link,70}
 4
-${ANDREWDIR}/help/gemacscp.help
+$ANDREWDIR/help/gemacscp.help
 0
 0
 V
@@ -11433,7 +10495,7 @@ white
 \view{linkview,70,1070,0,0}
  \begindata{link,71}
 4
-${ANDREWDIR}/help/gemacsdf.help
+$ANDREWDIR/help/gemacsdf.help
 0
 0
 V
@@ -11449,7 +10511,7 @@ white
 \view{linkview,71,1071,0,0}
  \begindata{link,72}
 4
-${ANDREWDIR}/help/genmake.help
+$ANDREWDIR/help/genmake.help
 0
 0
 V
@@ -11465,7 +10527,7 @@ white
 \view{linkview,72,1072,0,0}
  \begindata{link,73}
 4
-${ANDREWDIR}/help/genstatl.help
+$ANDREWDIR/help/genstatl.help
 0
 0
 V
@@ -11481,7 +10543,7 @@ white
 \view{linkview,73,1073,0,0}
  \begindata{link,74}
 4
-${ANDREWDIR}/help/geomtry.help
+$ANDREWDIR/help/geomtry.help
 0
 0
 V
@@ -11497,7 +10559,7 @@ white
 \view{linkview,74,1074,0,0}
  \begindata{link,75}
 4
-${ANDREWDIR}/help/gofig.help
+$ANDREWDIR/help/gofig.help
 0
 0
 V
@@ -11513,7 +10575,7 @@ white
 \view{linkview,75,1075,0,0}
  \begindata{link,76}
 4
-${ANDREWDIR}/help/gsearch.help
+$ANDREWDIR/help/gsearch.help
 0
 0
 V
@@ -11529,7 +10591,7 @@ white
 \view{linkview,76,1076,0,0}
  \begindata{link,77}
 4
-${ANDREWDIR}/help/gsrproc.help
+$ANDREWDIR/help/gsrproc.help
 0
 0
 V
@@ -11545,7 +10607,7 @@ white
 \view{linkview,77,1077,0,0}
  \begindata{link,78}
 4
-${ANDREWDIR}/help/headertxt.help
+$ANDREWDIR/help/headertxt.help
 0
 0
 V
@@ -11561,7 +10623,7 @@ white
 \view{linkview,78,1078,0,0}
  \begindata{link,79}
 4
-${ANDREWDIR}/help/help.aliases
+$ANDREWDIR/help/help.aliases
 0
 0
 V
@@ -11577,7 +10639,7 @@ white
 \view{linkview,79,1079,0,0}
  \begindata{link,80}
 4
-${ANDREWDIR}/help/help.help
+$ANDREWDIR/help/help.help
 0
 0
 V
@@ -11593,7 +10655,7 @@ white
 \view{linkview,80,1080,0,0}
  \begindata{link,81}
 4
-${ANDREWDIR}/help/helpkys.help
+$ANDREWDIR/help/helpkys.help
 0
 0
 V
@@ -11609,7 +10671,7 @@ white
 \view{linkview,81,1081,0,0}
  \begindata{link,82}
 4
-${ANDREWDIR}/help/hlpproc.help
+$ANDREWDIR/help/hlpproc.help
 0
 0
 V
@@ -11625,7 +10687,7 @@ white
 \view{linkview,82,1082,0,0}
  \begindata{link,83}
 4
-${ANDREWDIR}/help/hlptext.help
+$ANDREWDIR/help/hlptext.help
 0
 0
 V
@@ -11641,7 +10703,7 @@ white
 \view{linkview,83,1083,0,0}
  \begindata{link,84}
 4
-${ANDREWDIR}/help/htmltext.help
+$ANDREWDIR/help/htmltext.help
 0
 0
 V
@@ -11657,7 +10719,7 @@ white
 \view{linkview,84,1084,0,0}
  \begindata{link,85}
 4
-${ANDREWDIR}/help/htmlview.help
+$ANDREWDIR/help/htmlview.help
 0
 0
 V
@@ -11673,7 +10735,7 @@ white
 \view{linkview,85,1085,0,0}
  \begindata{link,86}
 4
-${ANDREWDIR}/help/idltext.help
+$ANDREWDIR/help/idltext.help
 0
 0
 V
@@ -11689,7 +10751,7 @@ white
 \view{linkview,86,1086,0,0}
  \begindata{link,87}
 4
-${ANDREWDIR}/help/image.help
+$ANDREWDIR/help/image.help
 0
 0
 V
@@ -11705,7 +10767,7 @@ white
 \view{linkview,87,1087,0,0}
  \begindata{link,88}
 4
-${ANDREWDIR}/help/improc.help
+$ANDREWDIR/help/improc.help
 0
 0
 V
@@ -11721,7 +10783,7 @@ white
 \view{linkview,88,1088,0,0}
  \begindata{link,89}
 4
-${ANDREWDIR}/help/initfls.help
+$ANDREWDIR/help/initfls.help
 0
 0
 V
@@ -11737,7 +10799,7 @@ white
 \view{linkview,89,1089,0,0}
  \begindata{link,90}
 4
-${ANDREWDIR}/help/inpproc.help
+$ANDREWDIR/help/inpproc.help
 0
 0
 V
@@ -11753,7 +10815,7 @@ white
 \view{linkview,90,1090,0,0}
  \begindata{link,91}
 4
-${ANDREWDIR}/help/insets.help
+$ANDREWDIR/help/insets.help
 0
 0
 V
@@ -11769,7 +10831,7 @@ white
 \view{linkview,91,1091,0,0}
  \begindata{link,92}
 4
-${ANDREWDIR}/help/isrproc.help
+$ANDREWDIR/help/isrproc.help
 0
 0
 V
@@ -11785,7 +10847,7 @@ white
 \view{linkview,92,1092,0,0}
  \begindata{link,93}
 4
-${ANDREWDIR}/help/lacc.help
+$ANDREWDIR/help/lacc.help
 0
 0
 V
@@ -11801,7 +10863,7 @@ white
 \view{linkview,93,1093,0,0}
  \begindata{link,94}
 4
-${ANDREWDIR}/help/laccqr.help
+$ANDREWDIR/help/laccqr.help
 0
 0
 V
@@ -11817,7 +10879,7 @@ white
 \view{linkview,94,1094,0,0}
  \begindata{link,95}
 4
-${ANDREWDIR}/help/layout.help
+$ANDREWDIR/help/layout.help
 0
 0
 V
@@ -11833,7 +10895,7 @@ white
 \view{linkview,95,1095,0,0}
  \begindata{link,96}
 4
-${ANDREWDIR}/help/lgvproc.help
+$ANDREWDIR/help/lgvproc.help
 0
 0
 V
@@ -11849,7 +10911,7 @@ white
 \view{linkview,96,1096,0,0}
  \begindata{link,97}
 4
-${ANDREWDIR}/help/linkins.help
+$ANDREWDIR/help/linkins.help
 0
 0
 V
@@ -11865,7 +10927,7 @@ white
 \view{linkview,97,1097,0,0}
  \begindata{link,98}
 4
-${ANDREWDIR}/help/link.intro
+$ANDREWDIR/help/link.intro
 0
 0
 V
@@ -11881,7 +10943,7 @@ white
 \view{linkview,98,1098,0,0}
  \begindata{link,99}
 4
-${ANDREWDIR}/help/lkzproc.help
+$ANDREWDIR/help/lkzproc.help
 0
 0
 V
@@ -11897,7 +10959,7 @@ white
 \view{linkview,99,1099,0,0}
  \begindata{link,100}
 4
-${ANDREWDIR}/help/lookz.help
+$ANDREWDIR/help/lookz.help
 0
 0
 V
@@ -11913,7 +10975,7 @@ white
 \view{linkview,100,1100,0,0}
  \begindata{link,101}
 4
-${ANDREWDIR}/help/lstproc.help
+$ANDREWDIR/help/lstproc.help
 0
 0
 V
@@ -11929,7 +10991,7 @@ white
 \view{linkview,101,1101,0,0}
  \begindata{link,102}
 4
-${ANDREWDIR}/help/ltext.help
+$ANDREWDIR/help/ltext.help
 0
 0
 V
@@ -11945,7 +11007,7 @@ white
 \view{linkview,102,1102,0,0}
  \begindata{link,103}
 4
-${ANDREWDIR}/help/m3text.help
+$ANDREWDIR/help/m3text.help
 0
 0
 V
@@ -11961,7 +11023,7 @@ white
 \view{linkview,103,1103,0,0}
  \begindata{link,104}
 4
-${ANDREWDIR}/help/macros.help
+$ANDREWDIR/help/macros.help
 0
 0
 V
@@ -11977,7 +11039,7 @@ white
 \view{linkview,104,1104,0,0}
  \begindata{link,105}
 4
-${ANDREWDIR}/help/menubar.help
+$ANDREWDIR/help/menubar.help
 0
 0
 V
@@ -11993,7 +11055,7 @@ white
 \view{linkview,105,1105,0,0}
  \begindata{link,106}
 4
-${ANDREWDIR}/help/menus.help
+$ANDREWDIR/help/menus.help
 0
 0
 V
@@ -12009,7 +11071,7 @@ white
 \view{linkview,106,1106,0,0}
  \begindata{link,107}
 4
-${ANDREWDIR}/help/metax.help
+$ANDREWDIR/help/metax.help
 0
 0
 V
@@ -12025,7 +11087,7 @@ white
 \view{linkview,107,1107,0,0}
  \begindata{link,108}
 4
-${ANDREWDIR}/help/mkbrowse.help
+$ANDREWDIR/help/mkbrowse.help
 0
 0
 V
@@ -12041,7 +11103,7 @@ white
 \view{linkview,108,1108,0,0}
  \begindata{link,109}
 4
-${ANDREWDIR}/help/motif.help
+$ANDREWDIR/help/motif.help
 0
 0
 V
@@ -12057,7 +11119,7 @@ white
 \view{linkview,109,1109,0,0}
  \begindata{link,110}
 4
-${ANDREWDIR}/help/mtext.help
+$ANDREWDIR/help/mtext.help
 0
 0
 V
@@ -12073,7 +11135,7 @@ white
 \view{linkview,110,1110,0,0}
  \begindata{link,111}
 4
-${ANDREWDIR}/help/mttproc.help
+$ANDREWDIR/help/mttproc.help
 0
 0
 V
@@ -12089,7 +11151,7 @@ white
 \view{linkview,111,1111,0,0}
  \begindata{link,112}
 4
-${ANDREWDIR}/help/ness.help
+$ANDREWDIR/help/ness.help
 0
 0
 V
@@ -12105,7 +11167,7 @@ white
 \view{linkview,112,1112,0,0}
  \begindata{link,113}
 4
-${ANDREWDIR}/help/note.help
+$ANDREWDIR/help/note.help
 0
 0
 V
@@ -12121,7 +11183,7 @@ white
 \view{linkview,113,1113,0,0}
  \begindata{link,114}
 4
-${ANDREWDIR}/help/org.help
+$ANDREWDIR/help/org.help
 0
 0
 V
@@ -12137,7 +11199,7 @@ white
 \view{linkview,114,1114,0,0}
  \begindata{link,115}
 4
-${ANDREWDIR}/help/orgproc.help
+$ANDREWDIR/help/orgproc.help
 0
 0
 V
@@ -12153,7 +11215,7 @@ white
 \view{linkview,115,1115,0,0}
  \begindata{link,116}
 4
-${ANDREWDIR}/help/oscroll.help
+$ANDREWDIR/help/oscroll.help
 0
 0
 V
@@ -12169,7 +11231,7 @@ white
 \view{linkview,116,1116,0,0}
  \begindata{link,117}
 4
-${ANDREWDIR}/help/panner.help
+$ANDREWDIR/help/panner.help
 0
 0
 V
@@ -12185,7 +11247,7 @@ white
 \view{linkview,117,1117,0,0}
  \begindata{link,118}
 4
-${ANDREWDIR}/help/parse.help
+$ANDREWDIR/help/parse.help
 0
 0
 V
@@ -12201,7 +11263,7 @@ white
 \view{linkview,118,1118,0,0}
  \begindata{link,119}
 4
-${ANDREWDIR}/help/perltext.help
+$ANDREWDIR/help/perltext.help
 0
 0
 V
@@ -12217,7 +11279,7 @@ white
 \view{linkview,119,1119,0,0}
  \begindata{link,120}
 4
-${ANDREWDIR}/help/image2atk.help
+$ANDREWDIR/help/image2atk.help
 0
 0
 V
@@ -12233,7 +11295,7 @@ white
 \view{linkview,120,1120,0,0}
  \begindata{link,121}
 4
-${ANDREWDIR}/help/prefed.help
+$ANDREWDIR/help/prefed.help
 0
 0
 V
@@ -12249,7 +11311,7 @@ white
 \view{linkview,121,1121,0,0}
  \begindata{link,122}
 4
-${ANDREWDIR}/help/prefs.help
+$ANDREWDIR/help/prefs.help
 0
 0
 V
@@ -12265,7 +11327,7 @@ white
 \view{linkview,122,1122,0,0}
  \begindata{link,123}
 4
-${ANDREWDIR}/help/prefs.tutr
+$ANDREWDIR/help/prefs.tutr
 0
 0
 V
@@ -12279,25 +11341,9 @@ white
 \enddata{link,123}
 \enddata{link,123}
 \view{linkview,123,1123,0,0}
- \begindata{link,124}
-4
-${ANDREWDIR}/help/preview.help
-0
-0
-V
-\begindata{link,124}
-Datastream version: 2
-preview
-2
-
-black
-white
-\enddata{link,124}
-\enddata{link,124}
-\view{linkview,124,1124,0,0}
  \begindata{link,125}
 4
-${ANDREWDIR}/help/procs.help
+$ANDREWDIR/help/procs.help
 0
 0
 V
@@ -12313,7 +11359,7 @@ white
 \view{linkview,125,1125,0,0}
  \begindata{link,126}
 4
-${ANDREWDIR}/help/prog.help
+$ANDREWDIR/help/prog.help
 0
 0
 V
@@ -12327,25 +11373,9 @@ white
 \enddata{link,126}
 \enddata{link,126}
 \view{linkview,126,1126,0,0}
- \begindata{link,127}
-4
-${ANDREWDIR}/help/prvproc.help
-0
-0
-V
-\begindata{link,127}
-Datastream version: 2
-prvproc
-2
-
-black
-white
-\enddata{link,127}
-\enddata{link,127}
-\view{linkview,127,1127,0,0}
  \begindata{link,128}
 4
-${ANDREWDIR}/help/pscript.help
+$ANDREWDIR/help/pscript.help
 0
 0
 V
@@ -12361,7 +11391,7 @@ white
 \view{linkview,128,1128,0,0}
  \begindata{link,129}
 4
-${ANDREWDIR}/help/pshbttn.help
+$ANDREWDIR/help/pshbttn.help
 0
 0
 V
@@ -12377,7 +11407,7 @@ white
 \view{linkview,129,1129,0,0}
  \begindata{link,130}
 4
-${ANDREWDIR}/help/psinset.help
+$ANDREWDIR/help/psinset.help
 0
 0
 V
@@ -12393,7 +11423,7 @@ white
 \view{linkview,130,1130,0,0}
  \begindata{link,131}
 4
-${ANDREWDIR}/help/ptext.help
+$ANDREWDIR/help/ptext.help
 0
 0
 V
@@ -12409,7 +11439,7 @@ white
 \view{linkview,131,1131,0,0}
  \begindata{link,132}
 4
-${ANDREWDIR}/help/qryrplc.help
+$ANDREWDIR/help/qryrplc.help
 0
 0
 V
@@ -12425,7 +11455,7 @@ white
 \view{linkview,132,1132,0,0}
  \begindata{link,133}
 4
-${ANDREWDIR}/help/raster.help
+$ANDREWDIR/help/raster.help
 0
 0
 V
@@ -12441,7 +11471,7 @@ white
 \view{linkview,133,1133,0,0}
  \begindata{link,134}
 4
-${ANDREWDIR}/help/rasters.help
+$ANDREWDIR/help/rasters.help
 0
 0
 V
@@ -12457,7 +11487,7 @@ white
 \view{linkview,134,1134,0,0}
  \begindata{link,135}
 4
-${ANDREWDIR}/help/rawtext.help
+$ANDREWDIR/help/rawtext.help
 0
 0
 V
@@ -12473,7 +11503,7 @@ white
 \view{linkview,135,1135,0,0}
  \begindata{link,136}
 4
-${ANDREWDIR}/help/relativiz.help
+$ANDREWDIR/help/relativiz.help
 0
 0
 V
@@ -12489,7 +11519,7 @@ white
 \view{linkview,136,1136,0,0}
  \begindata{link,137}
 4
-${ANDREWDIR}/help/rexxtext.help
+$ANDREWDIR/help/rexxtext.help
 0
 0
 V
@@ -12505,7 +11535,7 @@ white
 \view{linkview,137,1137,0,0}
  \begindata{link,138}
 4
-${ANDREWDIR}/help/rofftxt.help
+$ANDREWDIR/help/rofftxt.help
 0
 0
 V
@@ -12521,7 +11551,7 @@ white
 \view{linkview,138,1138,0,0}
  \begindata{link,139}
 4
-${ANDREWDIR}/help/rstproc.help
+$ANDREWDIR/help/rstproc.help
 0
 0
 V
@@ -12537,7 +11567,7 @@ white
 \view{linkview,139,1139,0,0}
  \begindata{link,140}
 4
-${ANDREWDIR}/help/rtf2.help
+$ANDREWDIR/help/rtf2.help
 0
 0
 V
@@ -12553,7 +11583,7 @@ white
 \view{linkview,140,1140,0,0}
  \begindata{link,141}
 4
-${ANDREWDIR}/help/runapp.help
+$ANDREWDIR/help/runapp.help
 0
 0
 V
@@ -12569,7 +11599,7 @@ white
 \view{linkview,141,1141,0,0}
  \begindata{link,142}
 4
-${ANDREWDIR}/help/runbutton.help
+$ANDREWDIR/help/runbutton.help
 0
 0
 V
@@ -12585,7 +11615,7 @@ white
 \view{linkview,142,1142,0,0}
  \begindata{link,143}
 4
-${ANDREWDIR}/help/sbutton.help
+$ANDREWDIR/help/sbutton.help
 0
 0
 V
@@ -12601,7 +11631,7 @@ white
 \view{linkview,143,1143,0,0}
  \begindata{link,144}
 4
-${ANDREWDIR}/help/scribetxt.help
+$ANDREWDIR/help/scribetxt.help
 0
 0
 V
@@ -12617,7 +11647,7 @@ white
 \view{linkview,144,1144,0,0}
  \begindata{link,145}
 4
-${ANDREWDIR}/help/scroll.help
+$ANDREWDIR/help/scroll.help
 0
 0
 V
@@ -12633,7 +11663,7 @@ white
 \view{linkview,145,1145,0,0}
  \begindata{link,146}
 4
-${ANDREWDIR}/help/search.help
+$ANDREWDIR/help/search.help
 0
 0
 V
@@ -12649,7 +11679,7 @@ white
 \view{linkview,146,1146,0,0}
  \begindata{link,147}
 4
-${ANDREWDIR}/help/select.help
+$ANDREWDIR/help/select.help
 0
 0
 V
@@ -12665,7 +11695,7 @@ white
 \view{linkview,147,1147,0,0}
  \begindata{link,148}
 4
-${ANDREWDIR}/help/setup.help
+$ANDREWDIR/help/setup.help
 0
 0
 V
@@ -12681,7 +11711,7 @@ white
 \view{linkview,148,1148,0,0}
  \begindata{link,149}
 4
-${ANDREWDIR}/help/spellck.help
+$ANDREWDIR/help/spellck.help
 0
 0
 V
@@ -12695,25 +11725,9 @@ white
 \enddata{link,149}
 \enddata{link,149}
 \view{linkview,149,1149,0,0}
- \begindata{link,150}
-4
-${ANDREWDIR}/help/splproc.help
-0
-0
-V
-\begindata{link,150}
-Datastream version: 2
-splproc
-2
-
-black
-white
-\enddata{link,150}
-\enddata{link,150}
-\view{linkview,150,1150,0,0}
  \begindata{link,151}
 4
-${ANDREWDIR}/help/srctext.help
+$ANDREWDIR/help/srctext.help
 0
 0
 V
@@ -12729,7 +11743,7 @@ white
 \view{linkview,151,1151,0,0}
  \begindata{link,152}
 4
-${ANDREWDIR}/help/steproc.help
+$ANDREWDIR/help/steproc.help
 0
 0
 V
@@ -12745,7 +11759,7 @@ white
 \view{linkview,152,1152,0,0}
  \begindata{link,153}
 4
-${ANDREWDIR}/help/stlproc.help
+$ANDREWDIR/help/stlproc.help
 0
 0
 V
@@ -12761,7 +11775,7 @@ white
 \view{linkview,153,1153,0,0}
  \begindata{link,154}
 4
-${ANDREWDIR}/help/stroffet.help
+$ANDREWDIR/help/stroffet.help
 0
 0
 V
@@ -12777,7 +11791,7 @@ white
 \view{linkview,154,1154,0,0}
  \begindata{link,155}
 4
-${ANDREWDIR}/help/sys.help
+$ANDREWDIR/help/sys.help
 0
 0
 V
@@ -12793,7 +11807,7 @@ white
 \view{linkview,155,1155,0,0}
  \begindata{link,156}
 4
-${ANDREWDIR}/help/table.help
+$ANDREWDIR/help/table.help
 0
 0
 V
@@ -12809,7 +11823,7 @@ white
 \view{linkview,156,1156,0,0}
  \begindata{link,157}
 4
-${ANDREWDIR}/help/tags.help
+$ANDREWDIR/help/tags.help
 0
 0
 V
@@ -12825,7 +11839,7 @@ white
 \view{linkview,157,1157,0,0}
  \begindata{link,158}
 4
-${ANDREWDIR}/help/tblproc.help
+$ANDREWDIR/help/tblproc.help
 0
 0
 V
@@ -12841,7 +11855,7 @@ white
 \view{linkview,158,1158,0,0}
  \begindata{link,159}
 4
-${ANDREWDIR}/help/text.help
+$ANDREWDIR/help/text.help
 0
 0
 V
@@ -12857,7 +11871,7 @@ white
 \view{linkview,159,1159,0,0}
  \begindata{link,160}
 4
-${ANDREWDIR}/help/tgsproc.help
+$ANDREWDIR/help/tgsproc.help
 0
 0
 V
@@ -12873,7 +11887,7 @@ white
 \view{linkview,160,1160,0,0}
  \begindata{link,161}
 4
-${ANDREWDIR}/help/timeday.help
+$ANDREWDIR/help/timeday.help
 0
 0
 V
@@ -12889,7 +11903,7 @@ white
 \view{linkview,161,1161,0,0}
  \begindata{link,162}
 4
-${ANDREWDIR}/help/tindex.help
+$ANDREWDIR/help/tindex.help
 0
 0
 V
@@ -12905,7 +11919,7 @@ white
 \view{linkview,162,1162,0,0}
  \begindata{link,163}
 4
-${ANDREWDIR}/help/tmplts.help
+$ANDREWDIR/help/tmplts.help
 0
 0
 V
@@ -12921,7 +11935,7 @@ white
 \view{linkview,163,1163,0,0}
  \begindata{link,164}
 4
-${ANDREWDIR}/help/toez.help
+$ANDREWDIR/help/toez.help
 0
 0
 V
@@ -12937,7 +11951,7 @@ white
 \view{linkview,164,1164,0,0}
  \begindata{link,165}
 4
-${ANDREWDIR}/help/tour.help
+$ANDREWDIR/help/tour.help
 0
 0
 V
@@ -12953,7 +11967,7 @@ white
 \view{linkview,165,1165,0,0}
  \begindata{link,166}
 4
-${ANDREWDIR}/help/tsckeys.help
+$ANDREWDIR/help/tsckeys.help
 0
 0
 V
@@ -12969,7 +11983,7 @@ white
 \view{linkview,166,1166,0,0}
  \begindata{link,187}
 4
-${ANDREWDIR}/help/tscript.help
+$ANDREWDIR/help/tscript.help
 0
 0
 V
@@ -12985,7 +11999,7 @@ white
 \view{linkview,187,1187,0,0}
  \begindata{link,188}
 4
-${ANDREWDIR}/help/txtproc.help
+$ANDREWDIR/help/txtproc.help
 0
 0
 V
@@ -13001,7 +12015,7 @@ white
 \view{linkview,188,1188,0,0}
  \begindata{link,189}
 4
-${ANDREWDIR}/help/typproc.help
+$ANDREWDIR/help/typproc.help
 0
 0
 V
@@ -13017,7 +12031,7 @@ white
 \view{linkview,189,1189,0,0}
  \begindata{link,190}
 4
-${ANDREWDIR}/help/unknown.help
+$ANDREWDIR/help/unknown.help
 0
 0
 V
@@ -13033,7 +12047,7 @@ white
 \view{linkview,190,1190,0,0}
  \begindata{link,191}
 4
-${ANDREWDIR}/help/urlbutton.help
+$ANDREWDIR/help/urlbutton.help
 0
 0
 V
@@ -13049,7 +12063,7 @@ white
 \view{linkview,191,1191,0,0}
  \begindata{link,192}
 4
-${ANDREWDIR}/help/valproc.help
+$ANDREWDIR/help/valproc.help
 0
 0
 V
@@ -13065,7 +12079,7 @@ white
 \view{linkview,192,1192,0,0}
  \begindata{link,193}
 4
-${ANDREWDIR}/help/vi.help
+$ANDREWDIR/help/vi.help
 0
 0
 V
@@ -13081,7 +12095,7 @@ white
 \view{linkview,193,1193,0,0}
  \begindata{link,194}
 4
-${ANDREWDIR}/help/wrtstmp.help
+$ANDREWDIR/help/wrtstmp.help
 0
 0
 V
@@ -13097,7 +12111,7 @@ white
 \view{linkview,194,1194,0,0}
  \begindata{link,196}
 4
-${ANDREWDIR}/help/zip.help
+$ANDREWDIR/help/zip.help
 0
 0
 V
@@ -13113,7 +12127,7 @@ white
 \view{linkview,196,1196,0,0}
  \begindata{link,197}
 4
-${ANDREWDIR}/help/zipproc.help
+$ANDREWDIR/help/zipproc.help
 0
 0
 V
@@ -13133,12 +12147,12 @@ Version 2
 n 0
 \enddata{bp,13343120}
 \view{bpv,13343120,25795,0,0}
-\chapter{$\{ANDREWDIR\}/include}
+\chapter{$ANDREWDIR/include}
 
 The 
 \begindata{link,10143888}
 4
-${ANDREWDIR}/include
+$ANDREWDIR/include
 0
 0
 V
@@ -13161,12 +12175,12 @@ to that document within ez at present.
 
 
 
-\chapter{$\{ANDREWDIR\}/lib}
+\chapter{$ANDREWDIR/lib}
 
 In old UNIX tradition, the 
 \begindata{link,10662544}
 4
-${ANDREWDIR}/lib
+$ANDREWDIR/lib
 0
 0
 V
@@ -13197,7 +12211,7 @@ can also be overridden by the environment variable GLOBALPROFILES.
 
 \begindata{link,10663584}
 4
-${ANDREWDIR}/lib/2rtf.trans
+$ANDREWDIR/lib/2rtf.trans
 0
 0
 V
@@ -13219,7 +12233,7 @@ into when converting to RTF.
 
 \begindata{link,10641968}
 4
-${ANDREWDIR}/lib/atkvers.num
+$ANDREWDIR/lib/atkvers.num
 0
 0
 V
@@ -13242,7 +12256,7 @@ to tag a release.
 
 \begindata{link,10642912}
 4
-${ANDREWDIR}/lib/global.ezinit
+$ANDREWDIR/lib/global.ezinit
 0
 0
 V
@@ -13265,7 +12279,7 @@ but an \typewriter{include} directive can be used to merge this in.
 
 \begindata{link,10643936}
 4
-${ANDREWDIR}/lib/gnu.atkinit
+$ANDREWDIR/lib/gnu.atkinit
 0
 0
 V
@@ -13287,7 +12301,7 @@ is meant to be \typewriter{include}d into
 
 \begindata{link,10644880}
 4
-${ANDREWDIR}/lib/gnu.prf
+$ANDREWDIR/lib/gnu.prf
 0
 0
 V
@@ -13310,7 +12324,7 @@ more like GNU emacs.
 
 \begindata{link,10646144}
 4
-${ANDREWDIR}/lib/help.overviews
+$ANDREWDIR/lib/help.overviews
 0
 0
 V
@@ -13332,7 +12346,7 @@ displayed in the upper-right panel.
 
 \begindata{link,10647088}
 4
-${ANDREWDIR}/lib/help.programs
+$ANDREWDIR/lib/help.programs
 0
 0
 V
@@ -13354,7 +12368,7 @@ commonly  displayed in the lower-right panel.
 
 \begindata{link,10648080}
 4
-${ANDREWDIR}/lib/html.init
+$ANDREWDIR/lib/html.init
 0
 0
 V
@@ -13378,7 +12392,7 @@ is meant to be \typewriter{include}d into
 
 \begindata{link,10649056}
 4
-${ANDREWDIR}/lib/htmlmagic
+$ANDREWDIR/lib/htmlmagic
 0
 0
 V
@@ -13512,7 +12526,7 @@ fdplumb.h.  See the API documentation for libutil.
 
 \begindata{link,10655120}
 4
-${ANDREWDIR}/lib/prefs.def
+$ANDREWDIR/lib/prefs.def
 0
 0
 V
@@ -13536,7 +12550,7 @@ preferences.  It is currently missing a few.
 
 \begindata{link,10656064}
 4
-${ANDREWDIR}/lib/rtf2.trans
+$ANDREWDIR/lib/rtf2.trans
 0
 0
 V
@@ -13558,7 +12572,7 @@ into when converting to ez text.
 
 \begindata{link,10657168}
 4
-${ANDREWDIR}/lib/scribe.trans
+$ANDREWDIR/lib/scribe.trans
 0
 0
 V
@@ -13580,7 +12594,7 @@ into when converting to ez text.
 
 \begindata{link,10658112}
 4
-${ANDREWDIR}/lib/shmenu
+$ANDREWDIR/lib/shmenu
 0
 0
 V
@@ -13605,7 +12619,7 @@ command.
 
 \begindata{link,10659120}
 4
-${ANDREWDIR}/lib/special.ezinit
+$ANDREWDIR/lib/special.ezinit
 0
 0
 V
@@ -13628,11 +12642,11 @@ Version 2
 n 0
 \enddata{bp,7793632}
 \view{bpv,7793632,26584,0,0}
-\chapter{$\{ANDREWDIR\}/lib/afm}
+\chapter{$ANDREWDIR/lib/afm}
 
 \begindata{link,10560496}
 4
-${ANDREWDIR}/lib/afm
+$ANDREWDIR/lib/afm
 0
 0
 V
@@ -13655,12 +12669,12 @@ Version 2
 n 0
 \enddata{bp,14566368}
 \view{bpv,14566368,26585,0,0}
-\chapter{$\{ANDREWDIR\}/lib/arbiters} is a directory containint various 
+\chapter{$ANDREWDIR/lib/arbiters} is a directory containint various 
 support and sample files used with the Andrew DEveloper's Workbench.
 
 \begindata{link,10568912}
 4
-${ANDREWDIR}/lib/arbiters
+$ANDREWDIR/lib/arbiters
 0
 0
 V
@@ -13681,7 +12695,7 @@ white
 
 \begindata{link,10570176}
 4
-${ANDREWDIR}/lib/arbiters/Arb
+$ANDREWDIR/lib/arbiters/Arb
 0
 0
 V
@@ -13702,7 +12716,7 @@ controller (aka the primary user interface to ADEW).
 
 \begindata{link,10571088}
 4
-${ANDREWDIR}/lib/arbiters/calc.lset
+$ANDREWDIR/lib/arbiters/calc.lset
 0
 0
 V
@@ -13723,7 +12737,7 @@ ontroller, using lset for layout.
 
 \begindata{link,10572144}
 4
-${ANDREWDIR}/lib/arbiters/calc.tbl
+$ANDREWDIR/lib/arbiters/calc.tbl
 0
 0
 V
@@ -13744,7 +12758,7 @@ ontroller, using table for layout.
 
 \begindata{link,10573088}
 4
-${ANDREWDIR}/lib/arbiters/conpros.awk
+$ANDREWDIR/lib/arbiters/conpros.awk
 0
 0
 V
@@ -13765,7 +12779,7 @@ work for \bold{createcon} when creating controllers.
 
 \begindata{link,10574192}
 4
-${ANDREWDIR}/lib/arbiters/helparb
+$ANDREWDIR/lib/arbiters/helparb
 0
 0
 V
@@ -13786,7 +12800,7 @@ controller.
 
 \begindata{link,10575136}
 4
-${ANDREWDIR}/lib/arbiters/instpros.awk
+$ANDREWDIR/lib/arbiters/instpros.awk
 0
 0
 V
@@ -13807,7 +12821,7 @@ work for \bold{createcon} when creating insets.
 
 \begindata{link,10577104}
 4
-${ANDREWDIR}/lib/arbiters/piano.lst
+$ANDREWDIR/lib/arbiters/piano.lst
 0
 0
 V
@@ -13828,7 +12842,7 @@ controller using lset view for layout.
 
 \begindata{link,10553040}
 4
-${ANDREWDIR}/lib/arbiters/piano.txt
+$ANDREWDIR/lib/arbiters/piano.txt
 0
 0
 V
@@ -13849,7 +12863,7 @@ controller using text view for layout.
 
 \begindata{link,10553984}
 4
-${ANDREWDIR}/lib/arbiters/vallist
+$ANDREWDIR/lib/arbiters/vallist
 0
 0
 V
@@ -13871,7 +12885,7 @@ menu item.
 
 \begindata{link,10555008}
 4
-${ANDREWDIR}/lib/arbiters/viewlist
+$ANDREWDIR/lib/arbiters/viewlist
 0
 0
 V
@@ -13892,12 +12906,12 @@ Version 2
 n 0
 \enddata{bp,7792064}
 \view{bpv,7792064,26586,0,0}
-\chapter{$\{ANDREWDIR\}/lib/atk}
+\chapter{$ANDREWDIR/lib/atk}
 
 The 
 \begindata{link,10555952}
 4
-${ANDREWDIR}/lib/atk
+$ANDREWDIR/lib/atk
 0
 0
 V
@@ -13943,7 +12957,7 @@ have no links from object names to the base object file.
 For more details, see the docs for 
 \begindata{link,7375905}
 4
-${ANDREWDIR}/help/genstatl.help
+$ANDREWDIR/help/genstatl.help
 0
 0
 V
@@ -14589,7 +13603,7 @@ class avalueflex_base [dup - OFLEX]
 
 \begindata{link,11187424}
 4
-${ANDREWDIR}/lib/atk/libs.all
+$ANDREWDIR/lib/atk/libs.all
 0
 0
 V
@@ -14610,11 +13624,11 @@ Version 2
 n 0
 \enddata{bp,14290720}
 \view{bpv,14290720,26587,0,0}
-\chapter{$\{ANDREWDIR\}/lib/compchar}
+\chapter{$ANDREWDIR/lib/compchar}
 
 \begindata{link,14372368}
 4
-${ANDREWDIR}/lib/compchar
+$ANDREWDIR/lib/compchar
 0
 0
 V
@@ -14635,7 +13649,7 @@ white
 
 \begindata{link,14373264}
 4
-${ANDREWDIR}/lib/compchar/comps
+$ANDREWDIR/lib/compchar/comps
 0
 0
 V
@@ -14654,11 +13668,11 @@ Version 2
 n 0
 \enddata{bp,6984528}
 \view{bpv,6984528,26588,0,0}
-\chapter{$\{ANDREWDIR\}/lib/consoles}
+\chapter{$ANDREWDIR/lib/consoles}
 
 \begindata{link,14374368}
 4
-${ANDREWDIR}/lib/consoles
+$ANDREWDIR/lib/consoles
 0
 0
 V
@@ -14679,7 +13693,7 @@ white
 
 \begindata{link,14375312}
 4
-${ANDREWDIR}/lib/consoles/busybox.con
+$ANDREWDIR/lib/consoles/busybox.con
 0
 0
 V
@@ -14699,7 +13713,7 @@ white
 
 \begindata{link,14376336}
 4
-${ANDREWDIR}/lib/consoles/default.con
+$ANDREWDIR/lib/consoles/default.con
 0
 0
 V
@@ -14719,7 +13733,7 @@ white
 
 \begindata{link,14377280}
 4
-${ANDREWDIR}/lib/consoles/fudgenut.con
+$ANDREWDIR/lib/consoles/fudgenut.con
 0
 0
 V
@@ -14739,7 +13753,7 @@ white
 
 \begindata{link,14378464}
 4
-${ANDREWDIR}/lib/consoles/muchvice.con
+$ANDREWDIR/lib/consoles/muchvice.con
 0
 0
 V
@@ -14759,7 +13773,7 @@ white
 
 \begindata{link,14379408}
 4
-${ANDREWDIR}/lib/consoles/smallfry.con
+$ANDREWDIR/lib/consoles/smallfry.con
 0
 0
 V
@@ -14779,7 +13793,7 @@ white
 
 \begindata{link,11218160}
 4
-${ANDREWDIR}/lib/consoles/tang.con
+$ANDREWDIR/lib/consoles/tang.con
 0
 0
 V
@@ -14799,7 +13813,7 @@ white
 
 \begindata{link,11219136}
 4
-${ANDREWDIR}/lib/consoles/vicemore.con
+$ANDREWDIR/lib/consoles/vicemore.con
 0
 0
 V
@@ -14818,11 +13832,11 @@ Version 2
 n 0
 \enddata{bp,10876352}
 \view{bpv,10876352,26589,0,0}
-\chapter{$\{ANDREWDIR\}/lib/genstatl}
+\chapter{$ANDREWDIR/lib/genstatl}
 
 \begindata{link,11220240}
 4
-${ANDREWDIR}/lib/genstatl
+$ANDREWDIR/lib/genstatl
 0
 0
 V
@@ -14843,7 +13857,7 @@ white
 
 \begindata{link,11221184}
 4
-${ANDREWDIR}/lib/genstatl/liborder
+$ANDREWDIR/lib/genstatl/liborder
 0
 0
 V
@@ -14864,7 +13878,7 @@ white
 
 \begindata{link,11222208}
 4
-${ANDREWDIR}/lib/genstatl/runapp.C
+$ANDREWDIR/lib/genstatl/runapp.C
 0
 0
 V
@@ -14883,11 +13897,11 @@ Version 2
 n 0
 \enddata{bp,11825952}
 \view{bpv,11825952,26590,0,0}
-\chapter{$\{ANDREWDIR\}/lib/gestures}
+\chapter{$ANDREWDIR/lib/gestures}
 
 \begindata{link,11223152}
 4
-${ANDREWDIR}/lib/gestures
+$ANDREWDIR/lib/gestures
 0
 0
 V
@@ -14908,7 +13922,7 @@ white
 
 \begindata{link,11224416}
 4
-${ANDREWDIR}/lib/gestures/gest.cl
+$ANDREWDIR/lib/gestures/gest.cl
 0
 0
 V
@@ -15001,11 +14015,11 @@ Version 2
 n 0
 \enddata{bp,13994048}
 \view{bpv,13994048,26591,0,0}
-\chapter{$\{ANDREWDIR\}/lib/help.index}
+\chapter{$ANDREWDIR/lib/help.index}
 
 \begindata{link,11225840}
 4
-${ANDREWDIR}/lib/help.index
+$ANDREWDIR/lib/help.index
 0
 0
 V
@@ -15062,11 +14076,11 @@ Version 2
 n 0
 \enddata{bp,15478016}
 \view{bpv,15478016,26592,0,0}
-\chapter{$\{ANDREWDIR\}/lib/ness}
+\chapter{$ANDREWDIR/lib/ness}
 
 \begindata{link,14391936}
 4
-${ANDREWDIR}/lib/ness
+$ANDREWDIR/lib/ness
 0
 0
 V
@@ -15087,7 +14101,7 @@ white
 
 \begindata{link,14392944}
 4
-${ANDREWDIR}/lib/ness/ctype.n
+$ANDREWDIR/lib/ness/ctype.n
 0
 0
 V
@@ -15107,7 +14121,7 @@ white
 
 \begindata{link,14402512}
 4
-${ANDREWDIR}/lib/ness/date.n
+$ANDREWDIR/lib/ness/date.n
 0
 0
 V
@@ -15127,7 +14141,7 @@ white
 
 \begindata{link,14403648}
 4
-${ANDREWDIR}/lib/ness/enum.n
+$ANDREWDIR/lib/ness/enum.n
 0
 0
 V
@@ -15147,7 +14161,7 @@ white
 
 \begindata{link,14404592}
 4
-${ANDREWDIR}/lib/ness/fileconvert.n
+$ANDREWDIR/lib/ness/fileconvert.n
 0
 0
 V
@@ -15167,7 +14181,7 @@ white
 
 \begindata{link,14405616}
 4
-${ANDREWDIR}/lib/ness/format.n
+$ANDREWDIR/lib/ness/format.n
 0
 0
 V
@@ -15187,7 +14201,7 @@ white
 
 \begindata{link,14406560}
 4
-${ANDREWDIR}/lib/ness/fromrtf.n
+$ANDREWDIR/lib/ness/fromrtf.n
 0
 0
 V
@@ -15207,7 +14221,7 @@ white
 
 \begindata{link,14407904}
 4
-${ANDREWDIR}/lib/ness/funchdr.n
+$ANDREWDIR/lib/ness/funchdr.n
 0
 0
 V
@@ -15227,7 +14241,7 @@ white
 
 \begindata{link,14379856}
 4
-${ANDREWDIR}/lib/ness/gnutranspose.n
+$ANDREWDIR/lib/ness/gnutranspose.n
 0
 0
 V
@@ -15247,7 +14261,7 @@ white
 
 \begindata{link,14380880}
 4
-${ANDREWDIR}/lib/ness/italicize.n
+$ANDREWDIR/lib/ness/italicize.n
 0
 0
 V
@@ -15267,7 +14281,7 @@ white
 
 \begindata{link,14381824}
 4
-${ANDREWDIR}/lib/ness/mtmpl.n
+$ANDREWDIR/lib/ness/mtmpl.n
 0
 0
 V
@@ -15287,7 +14301,7 @@ white
 
 \begindata{link,14382928}
 4
-${ANDREWDIR}/lib/ness/nesswarn.d
+$ANDREWDIR/lib/ness/nesswarn.d
 0
 0
 V
@@ -15307,7 +14321,7 @@ white
 
 \begindata{link,14383840}
 4
-${ANDREWDIR}/lib/ness/octalimage.n
+$ANDREWDIR/lib/ness/octalimage.n
 0
 0
 V
@@ -15327,7 +14341,7 @@ white
 
 \begindata{link,14384896}
 4
-${ANDREWDIR}/lib/ness/sort.n
+$ANDREWDIR/lib/ness/sort.n
 0
 0
 V
@@ -15347,7 +14361,7 @@ white
 
 \begindata{link,14385840}
 4
-${ANDREWDIR}/lib/ness/swap.n
+$ANDREWDIR/lib/ness/swap.n
 0
 0
 V
@@ -15367,7 +14381,7 @@ white
 
 \begindata{link,14387024}
 4
-${ANDREWDIR}/lib/ness/tokens.n
+$ANDREWDIR/lib/ness/tokens.n
 0
 0
 V
@@ -15387,7 +14401,7 @@ white
 
 \begindata{link,14387968}
 4
-${ANDREWDIR}/lib/ness/unscribe.n
+$ANDREWDIR/lib/ness/unscribe.n
 0
 0
 V
@@ -15407,7 +14421,7 @@ white
 
 \begindata{link,14393936}
 4
-${ANDREWDIR}/lib/ness/vp2scribe.n
+$ANDREWDIR/lib/ness/vp2scribe.n
 0
 0
 V
@@ -15427,7 +14441,7 @@ white
 
 \begindata{link,14394848}
 4
-${ANDREWDIR}/lib/ness/wc.n
+$ANDREWDIR/lib/ness/wc.n
 0
 0
 V
@@ -15447,7 +14461,7 @@ white
 
 \begindata{link,14395952}
 4
-${ANDREWDIR}/lib/ness/xwipe.n
+$ANDREWDIR/lib/ness/xwipe.n
 0
 0
 V
@@ -15466,11 +14480,11 @@ Version 2
 n 0
 \enddata{bp,10272688}
 \view{bpv,10272688,26593,0,0}
-\chapter{$\{ANDREWDIR\}/lib/ness/demos}
+\chapter{$ANDREWDIR/lib/ness/demos}
 
 \begindata{link,14396896}
 4
-${ANDREWDIR}/lib/ness/demos
+$ANDREWDIR/lib/ness/demos
 0
 0
 V
@@ -15491,7 +14505,7 @@ white
 
 \begindata{link,14397920}
 4
-${ANDREWDIR}/lib/ness/demos/badsub.n
+$ANDREWDIR/lib/ness/demos/badsub.n
 0
 0
 V
@@ -15511,7 +14525,7 @@ white
 
 \begindata{link,14398832}
 4
-${ANDREWDIR}/lib/ness/demos/bank.d
+$ANDREWDIR/lib/ness/demos/bank.d
 0
 0
 V
@@ -15531,7 +14545,7 @@ white
 
 \begindata{link,14400128}
 4
-${ANDREWDIR}/lib/ness/demos/birth.db
+$ANDREWDIR/lib/ness/demos/birth.db
 0
 0
 V
@@ -15551,7 +14565,7 @@ white
 
 \begindata{link,14401072}
 4
-${ANDREWDIR}/lib/ness/demos/calc.d
+$ANDREWDIR/lib/ness/demos/calc.d
 0
 0
 V
@@ -15571,7 +14585,7 @@ white
 
 \begindata{link,14948976}
 4
-${ANDREWDIR}/lib/ness/demos/calcr.d
+$ANDREWDIR/lib/ness/demos/calcr.d
 0
 0
 V
@@ -15591,7 +14605,7 @@ white
 
 \begindata{link,14949888}
 4
-${ANDREWDIR}/lib/ness/demos/capstest.d
+$ANDREWDIR/lib/ness/demos/capstest.d
 0
 0
 V
@@ -15611,7 +14625,7 @@ white
 
 \begindata{link,14950992}
 4
-${ANDREWDIR}/lib/ness/demos/docbody.d
+$ANDREWDIR/lib/ness/demos/docbody.d
 0
 0
 V
@@ -15631,7 +14645,7 @@ white
 
 \begindata{link,14951936}
 4
-${ANDREWDIR}/lib/ness/demos/docheader.d
+$ANDREWDIR/lib/ness/demos/docheader.d
 0
 0
 V
@@ -15651,7 +14665,7 @@ white
 
 \begindata{link,14952960}
 4
-${ANDREWDIR}/lib/ness/demos/gendoc.n
+$ANDREWDIR/lib/ness/demos/gendoc.n
 0
 0
 V
@@ -15671,7 +14685,7 @@ white
 
 \begindata{link,14953904}
 4
-${ANDREWDIR}/lib/ness/demos/happybday.d
+$ANDREWDIR/lib/ness/demos/happybday.d
 0
 0
 V
@@ -15691,7 +14705,7 @@ white
 
 \begindata{link,14955088}
 4
-${ANDREWDIR}/lib/ness/demos/happybday.n
+$ANDREWDIR/lib/ness/demos/happybday.n
 0
 0
 V
@@ -15711,7 +14725,7 @@ white
 
 \begindata{link,14940544}
 4
-${ANDREWDIR}/lib/ness/demos/letter.tpl
+$ANDREWDIR/lib/ness/demos/letter.tpl
 0
 0
 V
@@ -15731,7 +14745,7 @@ white
 
 \begindata{link,14941600}
 4
-${ANDREWDIR}/lib/ness/demos/qrbody.d
+$ANDREWDIR/lib/ness/demos/qrbody.d
 0
 0
 V
@@ -15751,7 +14765,7 @@ white
 
 \begindata{link,14942544}
 4
-${ANDREWDIR}/lib/ness/demos/qrheader.d
+$ANDREWDIR/lib/ness/demos/qrheader.d
 0
 0
 V
@@ -15771,7 +14785,7 @@ white
 
 \begindata{link,14943648}
 4
-${ANDREWDIR}/lib/ness/demos/questionnaire.msg
+$ANDREWDIR/lib/ness/demos/questionnaire.msg
 0
 0
 V
@@ -15791,7 +14805,7 @@ white
 
 \begindata{link,14944672}
 4
-${ANDREWDIR}/lib/ness/demos/startez.d
+$ANDREWDIR/lib/ness/demos/startez.d
 0
 0
 V
@@ -15811,7 +14825,7 @@ white
 
 \begindata{link,14945696}
 4
-${ANDREWDIR}/lib/ness/demos/testness.n
+$ANDREWDIR/lib/ness/demos/testness.n
 0
 0
 V
@@ -15831,7 +14845,7 @@ white
 
 \begindata{link,14946640}
 4
-${ANDREWDIR}/lib/ness/demos/volume.d
+$ANDREWDIR/lib/ness/demos/volume.d
 0
 0
 V
@@ -15851,7 +14865,7 @@ white
 
 \begindata{link,14948064}
 4
-${ANDREWDIR}/lib/ness/demos/xmas.d
+$ANDREWDIR/lib/ness/demos/xmas.d
 0
 0
 V
@@ -15870,11 +14884,11 @@ Version 2
 n 0
 \enddata{bp,15461856}
 \view{bpv,15461856,26594,0,0}
-\chapter{$\{ANDREWDIR\}/lib/null}
+\chapter{$ANDREWDIR/lib/null}
 
 \begindata{link,14964592}
 4
-${ANDREWDIR}/lib/null
+$ANDREWDIR/lib/null
 0
 0
 V
@@ -15895,7 +14909,7 @@ white
 
 \begindata{link,14965552}
 4
-${ANDREWDIR}/lib/null/Imakefile
+$ANDREWDIR/lib/null/Imakefile
 0
 0
 V
@@ -15915,7 +14929,7 @@ white
 
 \begindata{link,14956000}
 4
-${ANDREWDIR}/lib/null/nullapp.C
+$ANDREWDIR/lib/null/nullapp.C
 0
 0
 V
@@ -15935,7 +14949,7 @@ white
 
 \begindata{link,14957136}
 4
-${ANDREWDIR}/lib/null/nullapp.H
+$ANDREWDIR/lib/null/nullapp.H
 0
 0
 V
@@ -15955,7 +14969,7 @@ white
 
 \begindata{link,14958080}
 4
-${ANDREWDIR}/lib/null/null.C
+$ANDREWDIR/lib/null/null.C
 0
 0
 V
@@ -15975,7 +14989,7 @@ white
 
 \begindata{link,14959104}
 4
-${ANDREWDIR}/lib/null/null.H
+$ANDREWDIR/lib/null/null.H
 0
 0
 V
@@ -15995,7 +15009,7 @@ white
 
 \begindata{link,14960048}
 4
-${ANDREWDIR}/lib/null/null.help
+$ANDREWDIR/lib/null/null.help
 0
 0
 V
@@ -16015,7 +15029,7 @@ white
 
 \begindata{link,14961232}
 4
-${ANDREWDIR}/lib/null/nullview.C
+$ANDREWDIR/lib/null/nullview.C
 0
 0
 V
@@ -16035,7 +15049,7 @@ white
 
 \begindata{link,14962176}
 4
-${ANDREWDIR}/lib/null/nullview.H
+$ANDREWDIR/lib/null/nullview.H
 0
 0
 V
@@ -16055,7 +15069,7 @@ white
 
 \begindata{link,14963200}
 4
-${ANDREWDIR}/lib/null/nullvt.C
+$ANDREWDIR/lib/null/nullvt.C
 0
 0
 V
@@ -16074,11 +15088,11 @@ Version 2
 n 0
 \enddata{bp,15482352}
 \view{bpv,15482352,26595,0,0}
-\chapter{$\{ANDREWDIR\}/lib/packages}
+\chapter{$ANDREWDIR/lib/packages}
 
 \begindata{link,14964144}
 4
-${ANDREWDIR}/lib/packages
+$ANDREWDIR/lib/packages
 0
 0
 V
@@ -16099,7 +15113,7 @@ white
 
 \begindata{link,14975728}
 4
-${ANDREWDIR}/lib/packages/auis
+$ANDREWDIR/lib/packages/auis
 0
 0
 V
@@ -16119,7 +15133,7 @@ white
 
 \begindata{link,14966464}
 4
-${ANDREWDIR}/lib/packages/contrib
+$ANDREWDIR/lib/packages/contrib
 0
 0
 V
@@ -16139,7 +15153,7 @@ white
 
 \begindata{link,14967488}
 4
-${ANDREWDIR}/lib/packages/defaults
+$ANDREWDIR/lib/packages/defaults
 0
 0
 V
@@ -16159,7 +15173,7 @@ white
 
 \begindata{link,14968464}
 4
-${ANDREWDIR}/lib/packages/x
+$ANDREWDIR/lib/packages/x
 0
 0
 V
@@ -16179,7 +15193,7 @@ white
 
 \begindata{link,14969728}
 4
-${ANDREWDIR}/lib/packages/atk
+$ANDREWDIR/lib/packages/atk
 0
 0
 V
@@ -16200,7 +15214,7 @@ white
 
 \begindata{link,14970672}
 4
-${ANDREWDIR}/lib/packages/atk/atk
+$ANDREWDIR/lib/packages/atk/atk
 0
 0
 V
@@ -16220,7 +15234,7 @@ white
 
 \begindata{link,14971696}
 4
-${ANDREWDIR}/lib/packages/atk/defaults
+$ANDREWDIR/lib/packages/atk/defaults
 0
 0
 V
@@ -16239,11 +15253,11 @@ Version 2
 n 0
 \enddata{bp,14660544}
 \view{bpv,14660544,26596,0,0}
-\chapter{$\{ANDREWDIR\}/lib/prs}
+\chapter{$ANDREWDIR/lib/prs}
 
 \begindata{link,14972640}
 4
-${ANDREWDIR}/lib/prs
+$ANDREWDIR/lib/prs
 0
 0
 V
@@ -16264,7 +15278,7 @@ white
 
 \begindata{link,14973728}
 4
-${ANDREWDIR}/lib/prs/adew.pr
+$ANDREWDIR/lib/prs/adew.pr
 0
 0
 V
@@ -16284,7 +15298,7 @@ white
 
 \begindata{link,14974672}
 4
-${ANDREWDIR}/lib/prs/app.pr
+$ANDREWDIR/lib/prs/app.pr
 0
 0
 V
@@ -16304,7 +15318,7 @@ white
 
 \begindata{link,14985952}
 4
-${ANDREWDIR}/lib/prs/bush.pr
+$ANDREWDIR/lib/prs/bush.pr
 0
 0
 V
@@ -16324,7 +15338,7 @@ white
 
 \begindata{link,14976640}
 4
-${ANDREWDIR}/lib/prs/champ.pr
+$ANDREWDIR/lib/prs/champ.pr
 0
 0
 V
@@ -16344,7 +15358,7 @@ white
 
 \begindata{link,14977856}
 4
-${ANDREWDIR}/lib/prs/compile.pr
+$ANDREWDIR/lib/prs/compile.pr
 0
 0
 V
@@ -16364,7 +15378,7 @@ white
 
 \begindata{link,14978800}
 4
-${ANDREWDIR}/lib/prs/console.pr
+$ANDREWDIR/lib/prs/console.pr
 0
 0
 V
@@ -16384,7 +15398,7 @@ white
 
 \begindata{link,14979824}
 4
-${ANDREWDIR}/lib/prs/contents.pr
+$ANDREWDIR/lib/prs/contents.pr
 0
 0
 V
@@ -16404,7 +15418,7 @@ white
 
 \begindata{link,14980768}
 4
-${ANDREWDIR}/lib/prs/dialog.pr
+$ANDREWDIR/lib/prs/dialog.pr
 0
 0
 V
@@ -16424,7 +15438,7 @@ white
 
 \begindata{link,14981872}
 4
-${ANDREWDIR}/lib/prs/ezdiff.pr
+$ANDREWDIR/lib/prs/ezdiff.pr
 0
 0
 V
@@ -16444,7 +15458,7 @@ white
 
 \begindata{link,14982816}
 4
-${ANDREWDIR}/lib/prs/ez.pr
+$ANDREWDIR/lib/prs/ez.pr
 0
 0
 V
@@ -16464,7 +15478,7 @@ white
 
 \begindata{link,14983840}
 4
-${ANDREWDIR}/lib/prs/figure.pr
+$ANDREWDIR/lib/prs/figure.pr
 0
 0
 V
@@ -16484,7 +15498,7 @@ white
 
 \begindata{link,14984784}
 4
-${ANDREWDIR}/lib/prs/gofig.pr
+$ANDREWDIR/lib/prs/gofig.pr
 0
 0
 V
@@ -16504,7 +15518,7 @@ white
 
 \begindata{link,14996432}
 4
-${ANDREWDIR}/lib/prs/gest.pr
+$ANDREWDIR/lib/prs/gest.pr
 0
 0
 V
@@ -16524,7 +15538,7 @@ white
 
 \begindata{link,14986864}
 4
-${ANDREWDIR}/lib/prs/help.pr
+$ANDREWDIR/lib/prs/help.pr
 0
 0
 V
@@ -16544,7 +15558,7 @@ white
 
 \begindata{link,14987920}
 4
-${ANDREWDIR}/lib/prs/isearch.pr
+$ANDREWDIR/lib/prs/isearch.pr
 0
 0
 V
@@ -16564,7 +15578,7 @@ white
 
 \begindata{link,14988864}
 4
-${ANDREWDIR}/lib/prs/layout.pr
+$ANDREWDIR/lib/prs/layout.pr
 0
 0
 V
@@ -16584,7 +15598,7 @@ white
 
 \begindata{link,14989968}
 4
-${ANDREWDIR}/lib/prs/link.pr
+$ANDREWDIR/lib/prs/link.pr
 0
 0
 V
@@ -16604,7 +15618,7 @@ white
 
 \begindata{link,14990912}
 4
-${ANDREWDIR}/lib/prs/lookz.pr
+$ANDREWDIR/lib/prs/lookz.pr
 0
 0
 V
@@ -16624,7 +15638,7 @@ white
 
 \begindata{link,14991936}
 4
-${ANDREWDIR}/lib/prs/matte.pr
+$ANDREWDIR/lib/prs/matte.pr
 0
 0
 V
@@ -16644,7 +15658,7 @@ white
 
 \begindata{link,14992880}
 4
-${ANDREWDIR}/lib/prs/ness.pr
+$ANDREWDIR/lib/prs/ness.pr
 0
 0
 V
@@ -16664,7 +15678,7 @@ white
 
 \begindata{link,14994064}
 4
-${ANDREWDIR}/lib/prs/oscroll.pr
+$ANDREWDIR/lib/prs/oscroll.pr
 0
 0
 V
@@ -16684,7 +15698,7 @@ white
 
 \begindata{link,14995008}
 4
-${ANDREWDIR}/lib/prs/pcompch.pr
+$ANDREWDIR/lib/prs/pcompch.pr
 0
 0
 V
@@ -16704,7 +15718,7 @@ white
 
 \begindata{link,15006592}
 4
-${ANDREWDIR}/lib/prs/prefed.pr
+$ANDREWDIR/lib/prs/prefed.pr
 0
 0
 V
@@ -16724,7 +15738,7 @@ white
 
 \begindata{link,14997344}
 4
-${ANDREWDIR}/lib/prs/printing.pr
+$ANDREWDIR/lib/prs/printing.pr
 0
 0
 V
@@ -16744,7 +15758,7 @@ white
 
 \begindata{link,14998480}
 4
-${ANDREWDIR}/lib/prs/pshbttn.pr
+$ANDREWDIR/lib/prs/pshbttn.pr
 0
 0
 V
@@ -16764,7 +15778,7 @@ white
 
 \begindata{link,14999424}
 4
-${ANDREWDIR}/lib/prs/raster.pr
+$ANDREWDIR/lib/prs/raster.pr
 0
 0
 V
@@ -16784,7 +15798,7 @@ white
 
 \begindata{link,15000448}
 4
-${ANDREWDIR}/lib/prs/sbutton.pr
+$ANDREWDIR/lib/prs/sbutton.pr
 0
 0
 V
@@ -16804,7 +15818,7 @@ white
 
 \begindata{link,15001392}
 4
-${ANDREWDIR}/lib/prs/scroll.pr
+$ANDREWDIR/lib/prs/scroll.pr
 0
 0
 V
@@ -16824,7 +15838,7 @@ white
 
 \begindata{link,15002656}
 4
-${ANDREWDIR}/lib/prs/shadows.pr
+$ANDREWDIR/lib/prs/shadows.pr
 0
 0
 V
@@ -16844,7 +15858,7 @@ white
 
 \begindata{link,15003600}
 4
-${ANDREWDIR}/lib/prs/spell.pr
+$ANDREWDIR/lib/prs/spell.pr
 0
 0
 V
@@ -16864,7 +15878,7 @@ white
 
 \begindata{link,15004624}
 4
-${ANDREWDIR}/lib/prs/suite.pr
+$ANDREWDIR/lib/prs/suite.pr
 0
 0
 V
@@ -16884,7 +15898,7 @@ white
 
 \begindata{link,15005568}
 4
-${ANDREWDIR}/lib/prs/table.pr
+$ANDREWDIR/lib/prs/table.pr
 0
 0
 V
@@ -16904,7 +15918,7 @@ white
 
 \begindata{link,15016912}
 4
-${ANDREWDIR}/lib/prs/tags.pr
+$ANDREWDIR/lib/prs/tags.pr
 0
 0
 V
@@ -16924,7 +15938,7 @@ white
 
 \begindata{link,15007504}
 4
-${ANDREWDIR}/lib/prs/tscript.pr
+$ANDREWDIR/lib/prs/tscript.pr
 0
 0
 V
@@ -16944,7 +15958,7 @@ white
 
 \begindata{link,15008560}
 4
-${ANDREWDIR}/lib/prs/xprefs.pr
+$ANDREWDIR/lib/prs/xprefs.pr
 0
 0
 V
@@ -16964,7 +15978,7 @@ white
 
 \begindata{link,15009504}
 4
-${ANDREWDIR}/lib/prs/zip.pr
+$ANDREWDIR/lib/prs/zip.pr
 0
 0
 V
@@ -16983,11 +15997,11 @@ Version 2
 n 0
 \enddata{bp,13985968}
 \view{bpv,13985968,26597,0,0}
-\chapter{$\{ANDREWDIR\}/lib/rasters}
+\chapter{$ANDREWDIR/lib/rasters}
 
 \begindata{link,15010688}
 4
-${ANDREWDIR}/lib/rasters
+$ANDREWDIR/lib/rasters
 0
 0
 V
@@ -17008,7 +16022,7 @@ white
 
 \begindata{link,15011632}
 4
-${ANDREWDIR}/lib/rasters/car.raster
+$ANDREWDIR/lib/rasters/car.raster
 0
 0
 V
@@ -17028,7 +16042,7 @@ white
 
 \begindata{link,15012656}
 4
-${ANDREWDIR}/lib/rasters/christy.raster
+$ANDREWDIR/lib/rasters/christy.raster
 0
 0
 V
@@ -17048,7 +16062,7 @@ white
 
 \begindata{link,15013600}
 4
-${ANDREWDIR}/lib/rasters/cube.raster
+$ANDREWDIR/lib/rasters/cube.raster
 0
 0
 V
@@ -17068,7 +16082,7 @@ white
 
 \begindata{link,15014704}
 4
-${ANDREWDIR}/lib/rasters/doug.raster
+$ANDREWDIR/lib/rasters/doug.raster
 0
 0
 V
@@ -17088,7 +16102,7 @@ white
 
 \begindata{link,15015648}
 4
-${ANDREWDIR}/lib/rasters/dragon.raster
+$ANDREWDIR/lib/rasters/dragon.raster
 0
 0
 V
@@ -17108,7 +16122,7 @@ white
 
 \begindata{link,15027136}
 4
-${ANDREWDIR}/lib/rasters/face.raster
+$ANDREWDIR/lib/rasters/face.raster
 0
 0
 V
@@ -17128,7 +16142,7 @@ white
 
 \begindata{link,15017824}
 4
-${ANDREWDIR}/lib/rasters/flag.raster
+$ANDREWDIR/lib/rasters/flag.raster
 0
 0
 V
@@ -17148,7 +16162,7 @@ white
 
 \begindata{link,15019360}
 4
-${ANDREWDIR}/lib/rasters/fred.raster
+$ANDREWDIR/lib/rasters/fred.raster
 0
 0
 V
@@ -17168,7 +16182,7 @@ white
 
 \begindata{link,15020304}
 4
-${ANDREWDIR}/lib/rasters/horse.raster
+$ANDREWDIR/lib/rasters/horse.raster
 0
 0
 V
@@ -17188,7 +16202,7 @@ white
 
 \begindata{link,15021328}
 4
-${ANDREWDIR}/lib/rasters/itclogo.raster
+$ANDREWDIR/lib/rasters/itclogo.raster
 0
 0
 V
@@ -17208,7 +16222,7 @@ white
 
 \begindata{link,15022272}
 4
-${ANDREWDIR}/lib/rasters/rtfm.raster
+$ANDREWDIR/lib/rasters/rtfm.raster
 0
 0
 V
@@ -17228,7 +16242,7 @@ white
 
 \begindata{link,15023376}
 4
-${ANDREWDIR}/lib/rasters/tree.raster
+$ANDREWDIR/lib/rasters/tree.raster
 0
 0
 V
@@ -17247,11 +16261,11 @@ Version 2
 n 0
 \enddata{bp,15024720}
 \view{bpv,15024720,26600,0,0}
-\chapter{$\{ANDREWDIR\}/lib/tmac}
+\chapter{$ANDREWDIR/lib/tmac}
 
 \begindata{link,15025344}
 4
-${ANDREWDIR}/lib/tmac
+$ANDREWDIR/lib/tmac
 0
 0
 V
@@ -17272,7 +16286,7 @@ white
 
 \begindata{link,15026272}
 4
-${ANDREWDIR}/lib/tmac/helpmac.an
+$ANDREWDIR/lib/tmac/helpmac.an
 0
 0
 V
@@ -17292,7 +16306,7 @@ white
 
 \begindata{link,15037744}
 4
-${ANDREWDIR}/lib/tmac/tmac.acc
+$ANDREWDIR/lib/tmac/tmac.acc
 0
 0
 V
@@ -17312,7 +16326,7 @@ white
 
 \begindata{link,15028048}
 4
-${ANDREWDIR}/lib/tmac/tmac.arf
+$ANDREWDIR/lib/tmac/tmac.arf
 0
 0
 V
@@ -17332,7 +16346,7 @@ white
 
 \begindata{link,15029104}
 4
-${ANDREWDIR}/lib/tmac/tmac.atk
+$ANDREWDIR/lib/tmac/tmac.atk
 0
 0
 V
@@ -17352,7 +16366,7 @@ white
 
 \begindata{link,15030048}
 4
-${ANDREWDIR}/lib/tmac/tmac.m
+$ANDREWDIR/lib/tmac/tmac.m
 0
 0
 V
@@ -17372,7 +16386,7 @@ white
 
 \begindata{link,15031152}
 4
-${ANDREWDIR}/lib/tmac/tmac.psatk
+$ANDREWDIR/lib/tmac/tmac.psatk
 0
 0
 V
@@ -17389,11 +16403,11 @@ white
 
 
 
-\chapter{$\{ANDREWDIR\}/lib/tpls}
+\chapter{$ANDREWDIR/lib/tpls}
 
 \begindata{link,15032096}
 4
-${ANDREWDIR}/lib/tpls
+$ANDREWDIR/lib/tpls
 0
 0
 V
@@ -17407,10 +16421,10 @@ white
 \enddata{link,15032096}
 \enddata{link,15032096}
 \view{linkview,15032096,26496,0,0}
-Also known as $\{ANDREWDIR\}/lib/templates 
+Also known as $ANDREWDIR/lib/templates 
 \begindata{link,11635536}
 4
-${ANDREWDIR}/lib/templates
+$ANDREWDIR/lib/templates
 0
 0
 V
@@ -17432,7 +16446,7 @@ white
 
 \begindata{link,15033104}
 4
-${ANDREWDIR}/lib/tpls/asm.tpl
+$ANDREWDIR/lib/tpls/asm.tpl
 0
 0
 V
@@ -17452,7 +16466,7 @@ white
 
 \begindata{link,15034048}
 4
-${ANDREWDIR}/lib/tpls/be2guide.tpl
+$ANDREWDIR/lib/tpls/be2guide.tpl
 0
 0
 V
@@ -17472,7 +16486,7 @@ white
 
 \begindata{link,15035312}
 4
-${ANDREWDIR}/lib/tpls/compile.tpl
+$ANDREWDIR/lib/tpls/compile.tpl
 0
 0
 V
@@ -17492,7 +16506,7 @@ white
 
 \begindata{link,15036256}
 4
-${ANDREWDIR}/lib/tpls/contenttab.tpl
+$ANDREWDIR/lib/tpls/contenttab.tpl
 0
 0
 V
@@ -17512,7 +16526,7 @@ white
 
 \begindata{link,15047936}
 4
-${ANDREWDIR}/lib/tpls/c.tpl
+$ANDREWDIR/lib/tpls/c.tpl
 0
 0
 V
@@ -17532,7 +16546,7 @@ white
 
 \begindata{link,15038624}
 4
-${ANDREWDIR}/lib/tpls/C.tpl
+$ANDREWDIR/lib/tpls/C.tpl
 0
 0
 V
@@ -17552,7 +16566,7 @@ white
 
 \begindata{link,15039760}
 4
-${ANDREWDIR}/lib/tpls/default.tpl
+$ANDREWDIR/lib/tpls/default.tpl
 0
 0
 V
@@ -17572,7 +16586,7 @@ white
 
 \begindata{link,15040704}
 4
-${ANDREWDIR}/lib/tpls/def.tpl
+$ANDREWDIR/lib/tpls/def.tpl
 0
 0
 V
@@ -17592,7 +16606,7 @@ white
 
 \begindata{link,15041728}
 4
-${ANDREWDIR}/lib/tpls/dialog.tpl
+$ANDREWDIR/lib/tpls/dialog.tpl
 0
 0
 V
@@ -17612,7 +16626,7 @@ white
 
 \begindata{link,15042672}
 4
-${ANDREWDIR}/lib/tpls/dired.tpl
+$ANDREWDIR/lib/tpls/dired.tpl
 0
 0
 V
@@ -17632,7 +16646,7 @@ white
 
 \begindata{link,15043856}
 4
-${ANDREWDIR}/lib/tpls/help.tpl
+$ANDREWDIR/lib/tpls/help.tpl
 0
 0
 V
@@ -17652,7 +16666,7 @@ white
 
 \begindata{link,15044800}
 4
-${ANDREWDIR}/lib/tpls/hlp.tpl
+$ANDREWDIR/lib/tpls/hlp.tpl
 0
 0
 V
@@ -17672,7 +16686,7 @@ white
 
 \begindata{link,15045824}
 4
-${ANDREWDIR}/lib/tpls/html.tpl
+$ANDREWDIR/lib/tpls/html.tpl
 0
 0
 V
@@ -17692,7 +16706,7 @@ white
 
 \begindata{link,15046768}
 4
-${ANDREWDIR}/lib/tpls/h.tpl
+$ANDREWDIR/lib/tpls/h.tpl
 0
 0
 V
@@ -17712,7 +16726,7 @@ white
 
 \begindata{link,15058240}
 4
-${ANDREWDIR}/lib/tpls/H.tpl
+$ANDREWDIR/lib/tpls/H.tpl
 0
 0
 V
@@ -17732,7 +16746,7 @@ white
 
 \begindata{link,15048848}
 4
-${ANDREWDIR}/lib/tpls/i3.tpl
+$ANDREWDIR/lib/tpls/i3.tpl
 0
 0
 V
@@ -17752,7 +16766,7 @@ white
 
 \begindata{link,15049904}
 4
-${ANDREWDIR}/lib/tpls/idl.tpl
+$ANDREWDIR/lib/tpls/idl.tpl
 0
 0
 V
@@ -17772,7 +16786,7 @@ white
 
 \begindata{link,15050848}
 4
-${ANDREWDIR}/lib/tpls/index.tpl
+$ANDREWDIR/lib/tpls/index.tpl
 0
 0
 V
@@ -17792,7 +16806,7 @@ white
 
 \begindata{link,15052192}
 4
-${ANDREWDIR}/lib/tpls/letter.tpl
+$ANDREWDIR/lib/tpls/letter.tpl
 0
 0
 V
@@ -17812,7 +16826,7 @@ white
 
 \begindata{link,15053136}
 4
-${ANDREWDIR}/lib/tpls/m3.tpl
+$ANDREWDIR/lib/tpls/m3.tpl
 0
 0
 V
@@ -17832,7 +16846,7 @@ white
 
 \begindata{link,15054160}
 4
-${ANDREWDIR}/lib/tpls/mantext.tpl
+$ANDREWDIR/lib/tpls/mantext.tpl
 0
 0
 V
@@ -17852,7 +16866,7 @@ white
 
 \begindata{link,15055104}
 4
-${ANDREWDIR}/lib/tpls/man.tpl
+$ANDREWDIR/lib/tpls/man.tpl
 0
 0
 V
@@ -17872,7 +16886,7 @@ white
 
 \begindata{link,15056208}
 4
-${ANDREWDIR}/lib/tpls/memo.tpl
+$ANDREWDIR/lib/tpls/memo.tpl
 0
 0
 V
@@ -17892,7 +16906,7 @@ white
 
 \begindata{link,15057152}
 4
-${ANDREWDIR}/lib/tpls/mmtext.tpl
+$ANDREWDIR/lib/tpls/mmtext.tpl
 0
 0
 V
@@ -17912,7 +16926,7 @@ white
 
 \begindata{link,15068624}
 4
-${ANDREWDIR}/lib/tpls/mod.tpl
+$ANDREWDIR/lib/tpls/mod.tpl
 0
 0
 V
@@ -17932,7 +16946,7 @@ white
 
 \begindata{link,15079312}
 4
-${ANDREWDIR}/lib/tpls/prefhelp.tpl
+$ANDREWDIR/lib/tpls/prefhelp.tpl
 0
 0
 V
@@ -17952,7 +16966,7 @@ white
 
 \begindata{link,15080528}
 4
-${ANDREWDIR}/lib/tpls/prefs.tpl
+$ANDREWDIR/lib/tpls/prefs.tpl
 0
 0
 V
@@ -17972,7 +16986,7 @@ white
 
 \begindata{link,15058848}
 4
-${ANDREWDIR}/lib/tpls/printopt.tpl
+$ANDREWDIR/lib/tpls/printopt.tpl
 0
 0
 V
@@ -17992,7 +17006,7 @@ white
 
 \begindata{link,15059824}
 4
-${ANDREWDIR}/lib/tpls/rawtext.tpl
+$ANDREWDIR/lib/tpls/rawtext.tpl
 0
 0
 V
@@ -18012,7 +17026,7 @@ white
 
 \begindata{link,15060768}
 4
-${ANDREWDIR}/lib/tpls/roff.tpl
+$ANDREWDIR/lib/tpls/roff.tpl
 0
 0
 V
@@ -18032,7 +17046,7 @@ white
 
 \begindata{link,15061872}
 4
-${ANDREWDIR}/lib/tpls/scribe.tpl
+$ANDREWDIR/lib/tpls/scribe.tpl
 0
 0
 V
@@ -18052,7 +17066,7 @@ white
 
 \begindata{link,15062816}
 4
-${ANDREWDIR}/lib/tpls/symbol.tpl
+$ANDREWDIR/lib/tpls/symbol.tpl
 0
 0
 V
@@ -18072,7 +17086,7 @@ white
 
 \begindata{link,15063840}
 4
-${ANDREWDIR}/lib/tpls/template.tpl
+$ANDREWDIR/lib/tpls/template.tpl
 0
 0
 V
@@ -18092,7 +17106,7 @@ white
 
 \begindata{link,15064784}
 4
-${ANDREWDIR}/lib/tpls/typescript.tpl
+$ANDREWDIR/lib/tpls/typescript.tpl
 0
 0
 V
@@ -18111,11 +17125,11 @@ Version 2
 n 0
 \enddata{bp,11638192}
 \view{bpv,11638192,26603,0,0}
-\chapter{$\{ANDREWDIR\}/lib/widgets}
+\chapter{$ANDREWDIR/lib/widgets}
 
 \begindata{link,15066048}
 4
-${ANDREWDIR}/lib/widgets
+$ANDREWDIR/lib/widgets
 0
 0
 V
@@ -18136,7 +17150,7 @@ white
 
 \begindata{link,15066960}
 4
-${ANDREWDIR}/lib/widgets/Button.wgt
+$ANDREWDIR/lib/widgets/Button.wgt
 0
 0
 V
@@ -18156,7 +17170,7 @@ white
 
 \begindata{link,15068016}
 4
-${ANDREWDIR}/lib/widgets/CheckButton.wgt
+$ANDREWDIR/lib/widgets/CheckButton.wgt
 0
 0
 V
@@ -18176,7 +17190,7 @@ white
 
 \begindata{link,15069600}
 4
-${ANDREWDIR}/lib/widgets/ImageMap.wgt
+$ANDREWDIR/lib/widgets/ImageMap.wgt
 0
 0
 V
@@ -18196,7 +17210,7 @@ white
 
 \begindata{link,15070704}
 4
-${ANDREWDIR}/lib/widgets/List.wgt
+$ANDREWDIR/lib/widgets/List.wgt
 0
 0
 V
@@ -18216,7 +17230,7 @@ white
 
 \begindata{link,15071648}
 4
-${ANDREWDIR}/lib/widgets/OptionCard.wgt
+$ANDREWDIR/lib/widgets/OptionCard.wgt
 0
 0
 V
@@ -18236,7 +17250,7 @@ white
 
 \begindata{link,15072672}
 4
-${ANDREWDIR}/lib/widgets/OptionMenu.wgt
+$ANDREWDIR/lib/widgets/OptionMenu.wgt
 0
 0
 V
@@ -18256,7 +17270,7 @@ white
 
 \begindata{link,15073616}
 4
-${ANDREWDIR}/lib/widgets/Password.wgt
+$ANDREWDIR/lib/widgets/Password.wgt
 0
 0
 V
@@ -18276,7 +17290,7 @@ white
 
 \begindata{link,15074800}
 4
-${ANDREWDIR}/lib/widgets/PopupList.wgt
+$ANDREWDIR/lib/widgets/PopupList.wgt
 0
 0
 V
@@ -18296,7 +17310,7 @@ white
 
 \begindata{link,15075744}
 4
-${ANDREWDIR}/lib/widgets/PushButton.wgt
+$ANDREWDIR/lib/widgets/PushButton.wgt
 0
 0
 V
@@ -18316,7 +17330,7 @@ white
 
 \begindata{link,15076768}
 4
-${ANDREWDIR}/lib/widgets/RadioButton.wgt
+$ANDREWDIR/lib/widgets/RadioButton.wgt
 0
 0
 V
@@ -18336,7 +17350,7 @@ white
 
 \begindata{link,15077648}
 4
-${ANDREWDIR}/lib/widgets/ScrollingList.wgt
+$ANDREWDIR/lib/widgets/ScrollingList.wgt
 0
 0
 V
@@ -18356,7 +17370,7 @@ white
 
 \begindata{link,15438624}
 4
-${ANDREWDIR}/lib/widgets/TextResponse.wgt
+$ANDREWDIR/lib/widgets/TextResponse.wgt
 0
 0
 V
@@ -18376,7 +17390,7 @@ white
 
 \begindata{link,15439520}
 4
-${ANDREWDIR}/lib/widgets/Text.wgt
+$ANDREWDIR/lib/widgets/Text.wgt
 0
 0
 V
@@ -18395,11 +17409,11 @@ Version 2
 n 0
 \enddata{bp,11637872}
 \view{bpv,11637872,26604,0,0}
-\chapter{$\{ANDREWDIR\}/lib/xicons}
+\chapter{$ANDREWDIR/lib/xicons}
 
 \begindata{link,15440544}
 4
-${ANDREWDIR}/lib/xicons
+$ANDREWDIR/lib/xicons
 0
 0
 V
@@ -18420,7 +17434,7 @@ white
 
 \begindata{link,15441472}
 4
-${ANDREWDIR}/lib/xicons/alogo.icon
+$ANDREWDIR/lib/xicons/alogo.icon
 0
 0
 V
@@ -18440,7 +17454,7 @@ white
 
 \begindata{link,15442896}
 4
-${ANDREWDIR}/lib/xicons/con1.icon
+$ANDREWDIR/lib/xicons/con1.icon
 0
 0
 V
@@ -18460,7 +17474,7 @@ white
 
 \begindata{link,15443840}
 4
-${ANDREWDIR}/lib/xicons/con2.icon
+$ANDREWDIR/lib/xicons/con2.icon
 0
 0
 V
@@ -18480,7 +17494,7 @@ white
 
 \begindata{link,15444864}
 4
-${ANDREWDIR}/lib/xicons/con3.icon
+$ANDREWDIR/lib/xicons/con3.icon
 0
 0
 V
@@ -18500,7 +17514,7 @@ white
 
 \begindata{link,15445808}
 4
-${ANDREWDIR}/lib/xicons/ez.icon
+$ANDREWDIR/lib/xicons/ez.icon
 0
 0
 V
@@ -18520,7 +17534,7 @@ white
 
 \begindata{link,15446912}
 4
-${ANDREWDIR}/lib/xicons/help.icon
+$ANDREWDIR/lib/xicons/help.icon
 0
 0
 V
@@ -18540,7 +17554,7 @@ white
 
 \begindata{link,15429072}
 4
-${ANDREWDIR}/lib/xicons/itc.icon
+$ANDREWDIR/lib/xicons/itc.icon
 0
 0
 V
@@ -18560,7 +17574,7 @@ white
 
 \begindata{link,15430128}
 4
-${ANDREWDIR}/lib/xicons/msgs.icon
+$ANDREWDIR/lib/xicons/msgs.icon
 0
 0
 V
@@ -18580,7 +17594,7 @@ white
 
 \begindata{link,15431072}
 4
-${ANDREWDIR}/lib/xicons/pipe.icon
+$ANDREWDIR/lib/xicons/pipe.icon
 0
 0
 V
@@ -18600,7 +17614,7 @@ white
 
 \begindata{link,15432256}
 4
-${ANDREWDIR}/lib/xicons/sendmsg.icon
+$ANDREWDIR/lib/xicons/sendmsg.icon
 0
 0
 V
@@ -18620,7 +17634,7 @@ white
 
 \begindata{link,15433200}
 4
-${ANDREWDIR}/lib/xicons/tx.icon
+$ANDREWDIR/lib/xicons/tx.icon
 0
 0
 V
@@ -18640,7 +17654,7 @@ white
 
 \begindata{link,15434224}
 4
-${ANDREWDIR}/lib/xicons/xatk.icon
+$ANDREWDIR/lib/xicons/xatk.icon
 0
 0
 V
@@ -18659,11 +17673,11 @@ Version 2
 n 0
 \enddata{bp,11869696}
 \view{bpv,11869696,26605,0,0}
-\chapter{$\{ANDREWDIR\}/lib/zip}
+\chapter{$ANDREWDIR/lib/zip}
 
 \begindata{link,15435168}
 4
-${ANDREWDIR}/lib/zip
+$ANDREWDIR/lib/zip
 0
 0
 V
@@ -18684,7 +17698,7 @@ white
 
 \begindata{link,15436256}
 4
-${ANDREWDIR}/lib/zip/itcCR.scd
+$ANDREWDIR/lib/zip/itcCR.scd
 0
 0
 V
@@ -18703,11 +17717,11 @@ Version 2
 n 0
 \enddata{bp,14114016}
 \view{bpv,14114016,26606,0,0}
-\chapter{$\{ANDREWDIR\}/lib/zip/samples}
+\chapter{$ANDREWDIR/lib/zip/samples}
 
 \begindata{link,15437200}
 4
-${ANDREWDIR}/lib/zip/samples
+$ANDREWDIR/lib/zip/samples
 0
 0
 V
@@ -18728,7 +17742,7 @@ white
 
 \begindata{link,15438224}
 4
-${ANDREWDIR}/lib/zip/samples/charts.zip
+$ANDREWDIR/lib/zip/samples/charts.zip
 0
 0
 V
@@ -18748,7 +17762,7 @@ white
 
 \begindata{link,15447872}
 4
-${ANDREWDIR}/lib/zip/samples/dragon.zip
+$ANDREWDIR/lib/zip/samples/dragon.zip
 0
 0
 V
@@ -18768,7 +17782,7 @@ white
 
 \begindata{link,15449136}
 4
-${ANDREWDIR}/lib/zip/samples/features.zip
+$ANDREWDIR/lib/zip/samples/features.zip
 0
 0
 V
@@ -18788,7 +17802,7 @@ white
 
 \begindata{link,15450160}
 4
-${ANDREWDIR}/lib/zip/samples/obfuscat.zip
+$ANDREWDIR/lib/zip/samples/obfuscat.zip
 0
 0
 V
@@ -18808,7 +17822,7 @@ white
 
 \begindata{link,15451200}
 4
-${ANDREWDIR}/lib/zip/samples/states.zip
+$ANDREWDIR/lib/zip/samples/states.zip
 0
 0
 V
@@ -18827,11 +17841,11 @@ Version 2
 n 0
 \enddata{bp,13605264}
 \view{bpv,13605264,26607,0,0}
-\chapter{$\{ANDREWDIR\}/lib/zip/symbols}
+\chapter{$ANDREWDIR/lib/zip/symbols}
 
 \begindata{link,15452144}
 4
-${ANDREWDIR}/lib/zip/symbols
+$ANDREWDIR/lib/zip/symbols
 0
 0
 V
@@ -18852,7 +17866,7 @@ white
 
 \begindata{link,15453248}
 4
-${ANDREWDIR}/lib/zip/symbols/cmu
+$ANDREWDIR/lib/zip/symbols/cmu
 0
 0
 V
@@ -18872,7 +17886,7 @@ white
 
 \begindata{link,15454192}
 4
-${ANDREWDIR}/lib/zip/symbols/computer
+$ANDREWDIR/lib/zip/symbols/computer
 0
 0
 V
@@ -18892,7 +17906,7 @@ white
 
 \begindata{link,15455216}
 4
-${ANDREWDIR}/lib/zip/symbols/daybooks
+$ANDREWDIR/lib/zip/symbols/daybooks
 0
 0
 V
@@ -18912,7 +17926,7 @@ white
 
 \begindata{link,15456160}
 4
-${ANDREWDIR}/lib/zip/symbols/flowchrt
+$ANDREWDIR/lib/zip/symbols/flowchrt
 0
 0
 V
@@ -18932,7 +17946,7 @@ white
 
 \begindata{link,15467488}
 4
-${ANDREWDIR}/lib/zip/symbols/games
+$ANDREWDIR/lib/zip/symbols/games
 0
 0
 V
@@ -18952,7 +17966,7 @@ white
 
 \begindata{link,15457936}
 4
-${ANDREWDIR}/lib/zip/symbols/general
+$ANDREWDIR/lib/zip/symbols/general
 0
 0
 V
@@ -18972,7 +17986,7 @@ white
 
 \begindata{link,15458992}
 4
-${ANDREWDIR}/lib/zip/symbols/home
+$ANDREWDIR/lib/zip/symbols/home
 0
 0
 V
@@ -18992,7 +18006,7 @@ white
 
 \begindata{link,15459936}
 4
-${ANDREWDIR}/lib/zip/symbols/itc
+$ANDREWDIR/lib/zip/symbols/itc
 0
 0
 V
@@ -19012,7 +18026,7 @@ white
 
 \begindata{link,15461040}
 4
-${ANDREWDIR}/lib/zip/symbols/math
+$ANDREWDIR/lib/zip/symbols/math
 0
 0
 V
@@ -19032,7 +18046,7 @@ white
 
 \begindata{link,15461984}
 4
-${ANDREWDIR}/lib/zip/symbols/months
+$ANDREWDIR/lib/zip/symbols/months
 0
 0
 V
@@ -19052,7 +18066,7 @@ white
 
 \begindata{link,15463008}
 4
-${ANDREWDIR}/lib/zip/symbols/organize
+$ANDREWDIR/lib/zip/symbols/organize
 0
 0
 V
@@ -19072,7 +18086,7 @@ white
 
 \begindata{link,15463952}
 4
-${ANDREWDIR}/lib/zip/symbols/shields
+$ANDREWDIR/lib/zip/symbols/shields
 0
 0
 V
@@ -19092,7 +18106,7 @@ white
 
 \begindata{link,15465296}
 4
-${ANDREWDIR}/lib/zip/symbols/stars
+$ANDREWDIR/lib/zip/symbols/stars
 0
 0
 V
@@ -19111,12 +18125,12 @@ Version 2
 n 0
 \enddata{bp,15466160}
 \view{bpv,15466160,26580,0,0}
-\chapter{$\{ANDREWDIR\}/X11fonts}
+\chapter{$ANDREWDIR/X11fonts}
 
 The 
 \begindata{link,15466928}
 4
-${ANDREWDIR}/X11fonts
+$ANDREWDIR/X11fonts
 0
 0
 V
@@ -19593,7 +18607,7 @@ stroffetview
 gofig gofigview 
 \begindata{link,6758656}
 4
-${ANDREWDIR}/help/gofig.help
+$ANDREWDIR/help/gofig.help
 0
 0
 V
@@ -19712,7 +18726,7 @@ closest."
 schedv ltv zipview zipedit 
 \begindata{link,6843968}
 4
-${ANDREWDIR}/help/zipproc.help
+$ANDREWDIR/help/zipproc.help
 0
 0
 V
@@ -19730,7 +18744,7 @@ white
 dynsearch bpv spell contentv headertv textview tindex 
 \begindata{link,6869248}
 4
-${ANDREWDIR}/help/txtproc.help
+$ANDREWDIR/help/txtproc.help
 0
 0
 V
@@ -19748,7 +18762,7 @@ white
 chartv 
 \begindata{link,6869952}
 4
-${ANDREWDIR}/help/chtproc.help
+$ANDREWDIR/help/chtproc.help
 0
 0
 V
@@ -19766,7 +18780,7 @@ white
 xim 
 \begindata{link,6870816}
 4
-${ANDREWDIR}/help/menubar.help
+$ANDREWDIR/help/menubar.help
 0
 0
 V
@@ -19784,7 +18798,7 @@ white
 im 
 \begindata{link,6871520}
 4
-${ANDREWDIR}/help/improc.help
+$ANDREWDIR/help/improc.help
 0
 0
 V
@@ -19802,7 +18816,7 @@ white
 cel pagev lsetview arbcon 
 \begindata{link,6872384}
 4
-${ANDREWDIR}/help/lstproc.help
+$ANDREWDIR/help/lstproc.help
 0
 0
 V
@@ -19911,7 +18925,7 @@ celview
 matte 
 \begindata{link,6873008}
 4
-${ANDREWDIR}/help/mttproc.help
+$ANDREWDIR/help/mttproc.help
 0
 0
 V
@@ -19929,7 +18943,7 @@ white
  lookzview 
 \begindata{link,6873952}
 4
-${ANDREWDIR}/help/lkzproc.help
+$ANDREWDIR/help/lkzproc.help
 0
 0
 V
@@ -19947,7 +18961,7 @@ white
 spread 
 \begindata{link,6874656}
 4
-${ANDREWDIR}/help/tblproc.help
+$ANDREWDIR/help/tblproc.help
 0
 0
 V
@@ -20411,7 +19425,7 @@ characters for delimiters"
 frame frameview 
 \begindata{link,6875520}
 4
-${ANDREWDIR}/help/frmproc.help
+$ANDREWDIR/help/frmproc.help
 0
 0
 V
@@ -20429,7 +19443,7 @@ white
 bushv 
 \begindata{link,6876224}
 4
-${ANDREWDIR}/help/bshproc.help
+$ANDREWDIR/help/bshproc.help
 0
 0
 V
@@ -20545,7 +19559,7 @@ compressor [5-95]."
 orgv 
 \begindata{link,6877168}
 4
-${ANDREWDIR}/help/orgproc.help
+$ANDREWDIR/help/orgproc.help
 0
 0
 V
@@ -20563,7 +19577,7 @@ white
 incsearch 
 \begindata{link,6877792}
 4
-${ANDREWDIR}/help/isrproc.help
+$ANDREWDIR/help/isrproc.help
 0
 0
 V
@@ -20581,7 +19595,7 @@ white
 gsearch 
 \begindata{link,6878656}
 4
-${ANDREWDIR}/help/gsrproc.help
+$ANDREWDIR/help/gsrproc.help
 0
 0
 V
@@ -20625,7 +19639,7 @@ recsearch
 filter 
 \begindata{link,6879280}
 4
-${ANDREWDIR}/help/ftrproc.help
+$ANDREWDIR/help/ftrproc.help
 0
 0
 V
@@ -20643,7 +19657,7 @@ white
 ezdiff 
 \begindata{link,6880304}
 4
-${ANDREWDIR}/help/ezdproc.help
+$ANDREWDIR/help/ezdproc.help
 0
 0
 V
@@ -20661,7 +19675,7 @@ white
 deskey 
 \begindata{link,6881008}
 4
-${ANDREWDIR}/help/desproc.help
+$ANDREWDIR/help/desproc.help
 0
 0
 V
@@ -20679,7 +19693,7 @@ white
 tags 
 \begindata{link,6881872}
 4
-${ANDREWDIR}/help/tgsproc.help
+$ANDREWDIR/help/tgsproc.help
 0
 0
 V
@@ -20697,7 +19711,7 @@ white
 compile 
 \begindata{link,6882496}
 4
-${ANDREWDIR}/help/comproc.help
+$ANDREWDIR/help/comproc.help
 0
 0
 V
@@ -20715,7 +19729,7 @@ white
 ness nessm nessmv nessview 
 \begindata{link,6883440}
 4
-${ANDREWDIR}/help/ness.help
+$ANDREWDIR/help/ness.help
 0
 0
 V
@@ -20749,7 +19763,7 @@ Ness for a menu event"
 eqview (partially in 
 \begindata{link,6884176}
 4
-${ANDREWDIR}/doc/PROGRAMMER/eqv.doc
+$ANDREWDIR/doc/PROGRAMMER/eqv.doc
 0
 0
 V
@@ -20955,7 +19969,7 @@ white
 help 
 \begindata{link,6885008}
 4
-${ANDREWDIR}/help/hlpproc.help
+$ANDREWDIR/help/hlpproc.help
 0
 0
 V
@@ -21082,7 +20096,7 @@ layout/fillerview
 rastoolview rasterview 
 \begindata{link,6885632}
 4
-${ANDREWDIR}/help/rstproc.help
+$ANDREWDIR/help/rstproc.help
 0
 0
 V
@@ -21100,7 +20114,7 @@ white
 helpcon pcontrol calccon 
 \begindata{link,6886656}
 4
-${ANDREWDIR}/help/ctrproc.help
+$ANDREWDIR/help/ctrproc.help
 0
 0
 V
@@ -21118,7 +20132,7 @@ white
 suitecv suiteev suite 
 \begindata{link,7152864}
 4
-${ANDREWDIR}/help/steproc.help
+$ANDREWDIR/help/steproc.help
 0
 0
 V
@@ -21297,7 +20311,7 @@ printopts
 linkview (barely documented in 
 \begindata{link,7170928}
 4
-${ANDREWDIR}/doc/PROGRAMMER/Procs.d
+$ANDREWDIR/doc/PROGRAMMER/Procs.d
 0
 0
 V
@@ -21373,7 +20387,7 @@ button."
 diredview 
 \begindata{link,7196544}
 4
-${ANDREWDIR}/help/drdproc.help
+$ANDREWDIR/help/drdproc.help
 0
 0
 V
@@ -21657,7 +20671,7 @@ urlbuttonview
 writestampv (somewhat documented in 
 \begindata{link,7432896}
 4
-${ANDREWDIR}/help/wrtstmp.help
+$ANDREWDIR/help/wrtstmp.help
 0
 0
 V
@@ -21682,7 +20696,7 @@ Stamp/Month DD YYYY~11"
 timeodayv (somewhat documented in 
 \begindata{link,7435792}
 4
-${ANDREWDIR}/help/timeday.help
+$ANDREWDIR/help/timeday.help
 0
 0
 V
@@ -21733,7 +20747,7 @@ clockview
 calcv 
 \begindata{link,7518672}
 4
-${ANDREWDIR}/help/calproc.help
+$ANDREWDIR/help/calproc.help
 0
 0
 V
@@ -21760,7 +20774,7 @@ depth limit on recursion."
 typescript/fcomp typescript 
 \begindata{link,7162816}
 4
-${ANDREWDIR}/help/typproc.help
+$ANDREWDIR/help/typproc.help
 0
 0
 V
@@ -22006,7 +21020,7 @@ cursor."
 metax 
 \begindata{link,7169760}
 4
-${ANDREWDIR}/help/metax.help
+$ANDREWDIR/help/metax.help
 0
 0
 V
@@ -22024,7 +21038,7 @@ white
 metexview etextview 
 \begindata{link,7562624}
 4
-${ANDREWDIR}/help/valproc.help
+$ANDREWDIR/help/valproc.help
 0
 0
 V
@@ -22042,7 +21056,7 @@ white
 fadview 
 \begindata{link,7446384}
 4
-${ANDREWDIR}/help/fadproc.help
+$ANDREWDIR/help/fadproc.help
 0
 0
 V
@@ -22060,7 +21074,7 @@ white
 stylesheet 
 \begindata{link,7652976}
 4
-${ANDREWDIR}/help/stlproc.help
+$ANDREWDIR/help/stlproc.help
 0
 0
 V
@@ -22337,7 +21351,7 @@ back."
 console 
 \begindata{link,7402352}
 4
-${ANDREWDIR}/help/inpproc.help
+$ANDREWDIR/help/inpproc.help
 0
 0
 V
@@ -22355,7 +21369,7 @@ white
 console/logview 
 \begindata{link,7623984}
 4
-${ANDREWDIR}/help/lgvproc.help
+$ANDREWDIR/help/lgvproc.help
 0
 0
 V
@@ -22373,7 +21387,7 @@ white
 console/errf 
 \begindata{link,7284192}
 4
-${ANDREWDIR}/help/ermproc.help
+$ANDREWDIR/help/ermproc.help
 0
 0
 V
@@ -22391,7 +21405,7 @@ white
 pushbuttonview 
 \begindata{link,7012000}
 4
-${ANDREWDIR}/help/pshbttn.help
+$ANDREWDIR/help/pshbttn.help
 0
 0
 V
@@ -22409,7 +21423,7 @@ white
 ezapp/frame 
 \begindata{link,7045632}
 4
-${ANDREWDIR}/help/ezproc.help
+$ANDREWDIR/help/ezproc.help
 0
 0
 V
@@ -22611,7 +21625,7 @@ butactions
 init (only in init files) 
 \begindata{link,7981152}
 4
-${ANDREWDIR}/help/initfls.help
+$ANDREWDIR/help/initfls.help
 0
 0
 V
@@ -24363,7 +23377,7 @@ n 0
 See 
 \begindata{link,6929584}
 4
-${ANDREWDIR}/help/setup.help
+$ANDREWDIR/help/setup.help
 0
 0
 V
@@ -24379,7 +23393,7 @@ white
 \view{linkview,6929584,0,0,0} and/or 
 \begindata{link,6968320}
 4
-${ANDREWDIR}/doc/ADMINISTRATOR/SetUp
+$ANDREWDIR/doc/ADMINISTRATOR/SetUp
 0
 0
 V
@@ -24577,7 +23591,7 @@ of a path is expanded to \typewriter{$HOME}, if valid.  Default:
 ./overhead/util/lib/profile.c:"GLOBALPROFILES" - :-separated list of config 
 files to read for global preferences.  A \typewriter{~} at the 
 beginning of a path is expanded to \typewriter{$HOME}, if valid.  Default:  
-\typewriter{${ANDREWDIR}/lib/global.prf} (expanded; $ is not normally 
+\typewriter{$ANDREWDIR/lib/global.prf} (expanded; $ is not normally 
 expanded).
 
 ./overhead/util/lib/andydir.c:"ANDYDIR"

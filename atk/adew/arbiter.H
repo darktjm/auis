@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libarbiter libarbiter.so
+/** \addtogroup libarbiter Object arbiter
  *  A dynamically loadable ATK class file.  Contains arbiter, arbiterview,
  *  arbcon, cel, celview, lset, lsetview, page, pagev, runadewapp,
  *  wincelview.

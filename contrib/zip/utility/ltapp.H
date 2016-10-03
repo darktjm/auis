@@ -17,7 +17,7 @@ public:
   boolean ParseArgs( int argc, const char **argv);
   boolean Start();
 
-  
+private:
   class frame		    	*framep;
   class im			*imp;
   class lt			*ltp;

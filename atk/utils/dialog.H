@@ -4,7 +4,7 @@
  *         Copyright IBM Corporation 1991 - All Rights Reserved           *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-/** \addtogroup libatkutils libatkutils.so
+/** \addtogroup libatkutils Object atkutils
  *  A statically loadable ATK class file.  Contains dialog, dialogv,
  *  strinput.
  * @{ */

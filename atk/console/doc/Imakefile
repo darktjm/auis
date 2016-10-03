@@ -16,5 +16,3 @@ InstallHelpAlias(ermproc, errmonf errmonfproc)
 InstallHelpAlias(inpproc, inputproc)
 InstallHelpAlias(lgvproc, logvproc logview)
 InstallHelpAlias(erprintf, errprintf)
-
-InstallDocs (console.doc, ${DESTDIR}/doc/PROGRAMMER)

@@ -1,6 +1,6 @@
 #ifndef _runbutton_H_
 #define _runbutton_H_
-/** \addtogroup librunbutton librunbutton.so
+/** \addtogroup librunbutton Object runbutton
  *  A dynamically loadable ATK class file.  Contains runbutton, runbuttonview.
  * @{ */
 /*

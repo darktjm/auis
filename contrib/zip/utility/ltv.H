@@ -50,6 +50,8 @@ public:
    ltv();
    virtual ~ltv();
 
+private:
+   friend class ltv_private; /* ick */
    class lt			    *data;
    class zipview		    *zipviewp;
    struct zip_pane		    *background_pane, *foreground_pane;

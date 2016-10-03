@@ -4,7 +4,7 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-/** \addtogroup libzip libzip.so
+/** \addtogroup libzip Object zip
  *  A dynamically loadable ATK class file.  Contains zip, zipview,
  *  zipstatus, zipprint, zipobject, zipotrap, ziposymbol, ziporect,
  *  ziporang, zipopolygon, zipoplin, zipopath, zipoline, zipoimbed,

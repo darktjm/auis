@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libtypescript libtypescript.so
+/** \addtogroup libtypescript Object typescript
  *  A dynamically loadable ATK class file.  Contains typescript,
  *  typescriptapp, pipescriptapp, typetext, fcomp.
  * @{ */

@@ -49,7 +49,7 @@ GENERATE_LATEX         = YES
 PAPER_TYPE             = letter
 
 # probably need to find any preproc functions that create classes and add here
-PREDEFINED             = __GNUC__
+PREDEFINED             = __GNUC__ __STDC__
 MACRO_EXPANSION        = YES
 EXPAND_ONLY_PREDEF     = YES
 EXPAND_AS_DEFINED      = BEGINCPLUSPLUSPROTOS ENDCPLUSPLUSPROTOS \
@@ -65,7 +65,8 @@ EXPAND_AS_DEFINED      = BEGINCPLUSPLUSPROTOS ENDCPLUSPLUSPROTOS \
 			 WIDGET_VIEW_METHOD_CLASS WIDGET_FUNC_AND_METHOD_CLASS \
 			 DECLARE_GLIST_CLASS GLIST_CLASS \
 			 DEFINE_AMHASH_CLASS DEFINE_AOHASH_CLASS DEFINE_AHASH_CLASS_ITER \
-			 ATK_CLASS ASEQ ASTYPE
+			 ATK_CLASS ASEQ ASEQC ASTYPE AVSSET \
+			 Concat Concat3 Stringize
 # supposedly this is only needed for including files not processed, but
 # this is necessary to get the EXPAND_AS_DEFINED option to work
 INCLUDE_PATH           = ${ANDREWDIR}/include ${ANDREWDIR}/include/atk

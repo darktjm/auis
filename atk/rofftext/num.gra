@@ -5,7 +5,8 @@
 \* ********************************************************************** */
 #include <andrewos.h>
 #include <ctype.h>
-#include <rofftext.H> 
+#include <rofftext.H>
+#include "rofftext.h"
 #include <roffutil.h>
 
 #define DATA(p) ((struct evalstrdata *)((p)->GetRock()))

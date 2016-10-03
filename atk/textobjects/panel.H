@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libtextobjs libtextobjs.so
+/** \addtogroup libtextobjs Object textobjs
  *  A statically loadable ATK class file.  Contains chlist, chlistview,
  *  dired, diredview, panel, unknown, unknownv, printopts.
  * @{ */

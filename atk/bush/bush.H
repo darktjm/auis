@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libbush libbush.so
+/** \addtogroup libbush Object bush
  *  A dynamically loadable ATK class file.  Contains bush, bushv, bushapp.
  * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************

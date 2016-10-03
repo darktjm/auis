@@ -4,7 +4,7 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-/** \addtogroup libcompile libcompile.so
+/** \addtogroup libcompile Object compile
  *  A dynamically loadable ATK class file.  Contains compile.
  * @{ */
 #include <ATK.H>

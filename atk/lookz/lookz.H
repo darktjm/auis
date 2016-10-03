@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup liblookz liblookz.so
+/** \addtogroup liblookz Object lookz
  *  A dynamically loadable ATK class file.  Contains lookz, lookzview,
  *  tabrulerview.
  * @{ */

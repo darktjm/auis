@@ -13,7 +13,7 @@
 #include <stdio.h>
 BEGINCPLUSPLUSPROTOS
 
-struct ScribeState; /**< Scribe processing state.  Create with UnScribeInit() */
+struct ScribeState;
 
 extern int UnScribeInit(const char  *fieldvalue, struct ScribeState  **refstate);
 /**< Allocate and initialize a state for converting scribe text to ATK text.

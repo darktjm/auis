@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libmetax libmetax.so
+/** \addtogroup libmetax Object metax
  *  A dynamically loadable ATK class file.  Contains metax.
  * @{ */
 /* metax package for ATK by Rob Ryan March 19, 1989 */
