@@ -100,6 +100,7 @@ public:
 	inline int   GetParseBufLen() { return (this->parseLen); }
 	inline void SetParseBufLen(int l) { (this->parseLen=(l)); }
         inline unsigned long GetParseBufMax() { return (sizeof(this->parseBuf)); }
+	void CheckChild(void);
     
         int screen,cursor,lastSubmit;
 	int width,height;
@@ -116,6 +117,7 @@ public:
 	int pty;
 	FILE *ptyFile;
 	int pid;
+	WAIT_STATUS_TYPE child_status;
 	struct cmd *lastCmd, *curCmd;
 	const char * const *args;
 	boolean insert,standout;

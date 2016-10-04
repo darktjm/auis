@@ -91,4 +91,4 @@ DeclareFont(symba12)
 DeclareFont(symba16)
 DeclareFont(symba22)
 
-/* InstallDocs(fonts.doc, ${DESTDIR}/doc/atk) */
+InstallDocs(fonts.doc, ${DESTDIR}/doc/ADMINISTRATOR)

@@ -458,7 +458,21 @@ white
 text formatting
 
 
-panel.doc [removed - stub] - supports simple caption lists
+\begindata{link,539847928}
+Datastream version: 3
+$ANDREWDIR/doc/PROGRAMMER/panel.doc
+0
+0
+\begindata{link,539847928}
+Datastream version: 2
+panel
+2
+
+black
+white
+\enddata{link,539847928}
+\enddata{link,539847928}
+\view{linkview,539847928,55,0,0}panel.doc - supports simple caption lists
 
 
 \begindata{link,539848600}

@@ -20,7 +20,7 @@ DOCS = app.doc atom.doc atomlist.doc \
 	event.doc filetype.doc fontdesc.doc graphic.doc im.doc \
 	init.doc keymap.doc keystate.doc \
 	menulist.doc message.doc msghndlr.doc \
-	observe.doc proctbl.doc \
+	observe.doc path.doc proctbl.doc \
 	region.doc rm.doc updlist.doc view.doc \
 	image.doc
 

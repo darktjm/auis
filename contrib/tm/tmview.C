@@ -109,7 +109,8 @@ static void trackTermulator(class tmview  *self)
     class termulator *tm=(class termulator *)self->dataobject;
     int pos=tm->cursor;
 
-    if(!(tm->mode.c_lflag&(ICANON))) /* what rawness matters? - tjm */
+    tm->CheckChild();
+    if(tm->pid && !(tm->mode.c_lflag&(ICANON))) /* what rawness matters? - tjm */
 	(self->keystate)->SetOverride((keystate_fptr)rawKeyLookup,(long)self);
     else
 	(self->keystate)->SetOverride(NULL,0);
@@ -248,7 +249,8 @@ void tmview::PostKeyState(class keystate  *ks)
 {
     class termulator *tm=(class termulator *)this->dataobject;
 
-    if(!(tm->mode.c_lflag&(ICANON))) /* what rawness matters? */
+    tm->CheckChild();
+    if(tm->pid && !(tm->mode.c_lflag&(ICANON))) /* what rawness matters? */
 	(this->keystate)->SetOverride((keystate_fptr)rawKeyLookup,(long)this);
     else
 	(this->keystate)->SetOverride(NULL,0);

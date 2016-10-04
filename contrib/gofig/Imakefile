@@ -3,8 +3,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-OBJS = gofig.o gofigview.o gofigapp.o
-HFILES = gofig.H gofigview.H gofigapp.H
+OBJS = gofig.o gofigview.o
+HFILES = gofig.H gofigview.H
 
 NormalObjectRule()
 NormalATKRule()
@@ -14,8 +14,8 @@ system, and user libraries need to be included in the LIBS list below.
 The appropriate ATK libraries will be determined automatically. */
 LIBS = $(UTILLIB) 
 
-DynamicMultiObject(gofig,gofigview gofigapp,$(OBJS),$(LIBS),,)
-InstallDynamicObject(gofig,gofigview gofigapp,$(FULLATKDLIBDIR))
+DynamicMultiObject(gofig,gofigview,$(OBJS),$(LIBS),,)
+InstallDynamicObject(gofig,gofigview,$(FULLATKDLIBDIR))
 
 InstallClassFiles($(HFILES))
 

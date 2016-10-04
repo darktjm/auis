@@ -327,7 +327,7 @@ zipview::PostMenus( class menulist	      *menulist )
       else
       { DEBUG(Not InputFocus);
       menu = menulist;
-      if ( Editing  &&  Editor->menu ) /*===dirty===*/
+      if ( Editing  &&  Editor->menu && Editor->menu != menu ) /*===dirty===*/
         (menu)->ChainAfterML(  Editor->menu, (long) Editor->menu );
       }
     }

@@ -173,9 +173,12 @@
 Long-term:
   - view/adjust styling boundaries (aka view source)?
   - add code snippet inset for literate programming
-  - make LaTeX the default output format
+  - make LaTeX a possible output format (and the default)
   - unicode support
+  - internationalization support (probably just GNU gettext)
+    currently menus can be replaced, but messages & the like cannot
   - truetype font support
+  - unicode-bidir support
   - make index entries insets
   - undo
   - freedesktop.org integration

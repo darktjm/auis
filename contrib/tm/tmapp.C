@@ -112,6 +112,7 @@ boolean tmapp::Start()
 	(tm)->SetScreenSize(this->cols,this->rows);
     }
 
+    this->Fork(); // if you fork later, you lose control of children
     (tm)->StartProcess(this->args);
 
     tmv=new tmview;
