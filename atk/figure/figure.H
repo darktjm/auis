@@ -1,6 +1,6 @@
 #ifndef _figure_H_
 #define _figure_H_
-/** \addtogroup libfigure libfigure.so
+/** \addtogroup libfigure Object figure
  *  A statically loadable ATK class file.  Contains figure, figattr, figio,
  *  figobj, figoell, figogrp, figoins, figoplin, figorect, figorrec,
  *  figospli, figotext, figoflow, figtoolview, figview, fontsample,

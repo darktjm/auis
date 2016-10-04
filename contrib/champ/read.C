@@ -37,7 +37,7 @@ static void ResolveTildes(char    *in , char    *out)
 	return;
     }
     if (*++in == '/') {
-	p = getvpwuid(getvuid());
+	p = getpwuid(getuid());
 	if (p) {
 	    sprintf(out, "%s/%s", p->pw_dir, ++in);
 	} else {
@@ -50,7 +50,7 @@ static void ResolveTildes(char    *in , char    *out)
     }
     *t = '\0';
     if (*in) ++in;
-    p = getvpwnam(user);
+    p = getpwnam(user);
     if (!p) {
 	strcpy(out, in);
 	return;
@@ -66,7 +66,7 @@ int ReadDatesFromChampPath(const char  *champpath)
 
     if (!champpath) champpath = getprofile("champpath");
     if (!champpath) champpath = "~/events.champ:~/.events.champ";
-    champpath=pathbuf=NewString(champpath);
+    champpath=pathbuf=strdup(champpath);
     while(pathbuf) {
 	colon = strchr(pathbuf, ':');
 	if (colon) *colon++ = '\0';

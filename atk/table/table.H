@@ -9,7 +9,7 @@
 
 NO_DLL_EXPORT extern int table_DefaultPrecision;
 
-/** \addtogroup libtable libtable.so
+/** \addtogroup libtable Object table
  *  A dynamically loadable ATK class file.  Contains table, spread.
  * @{ */
 /* table.H - table data object definition and interface */

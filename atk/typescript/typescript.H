@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libtypescript libtypescript.so
+/** \addtogroup libtypescript Object typescript
  *  A dynamically loadable ATK class file.  Contains typescript,
  *  typescriptapp, pipescriptapp, typetext, fcomp.
  * @{ */
@@ -48,7 +48,8 @@ public:
     
 	static boolean InitializeClass();
 
-    
+    void CheckChild(void);
+
 	virtual ~typescript();
 
     class frame *frame;	/* First frame on the window (for setting the title) */
@@ -70,6 +71,8 @@ public:
     char *title;
     class text *cmdText;
     long lastCmdPos;
+    int pid;
+    WAIT_STATUS_TYPE child_status;
 };
 /** @} */
 #endif /* _typescript_H_ */

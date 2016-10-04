@@ -9,7 +9,7 @@
 	For full copyright information see: andrew/doc/COPYRITE 
 */
 
-/** \addtogroup libbasics libbasics.so
+/** \addtogroup libbasics Object basics
  *  A statically loadable ATK class file.  Contains application, atom,
  *  atomlist, bind, cursor, dataobject, environ, event, filetype, fontdesc,
  *  graphic, im, init, keymap, keystate, menulist, message, messitem,

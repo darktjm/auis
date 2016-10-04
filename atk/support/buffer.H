@@ -7,7 +7,7 @@
 
 #include <andrewos.h>
 
-/** \addtogroup libsupport libsupport.so
+/** \addtogroup libsupport Object support
  *  A statically loadable ATK class file.  Contains buffer, bufferlist,
  *  completion, dictionary, environment, except, ghash, glist, hash, list,
  *  mark, nestedmark, print, rectlist, strcache, style, stylesheet,

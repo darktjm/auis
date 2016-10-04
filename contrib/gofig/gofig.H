@@ -4,7 +4,7 @@
  *	   Copyright Carnegie Mellon, 1994 - All Rights Reserved          *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-/** \addtogroup libgofig libgofig.so
+/** \addtogroup libgofig Object gofig
  *  A dynamically loadable ATK class file.  Contains gofig, gofigapp, gofigview.
  * @{ */
 /*

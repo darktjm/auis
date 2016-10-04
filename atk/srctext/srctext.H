@@ -1,6 +1,6 @@
 #ifndef _srctext_H_
 #define _srctext_H_
-/** \addtogroup libsrctext libsrctext.so
+/** \addtogroup libsrctext Object srctext
  *  A dynamically loadable ATK class file.  Contains srctext, srctextview,
  *  cpptextview, ctext, ctextview, hlptext, idltext, idltextview, ltext,
  *  ltextview, m3text, m3textview, modtext, modtextview, mtext, mtextview,

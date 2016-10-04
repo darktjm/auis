@@ -21,8 +21,6 @@ InstallFiles(vallist helparb piano.txt piano.lst calc.lset calc.tbl, $(INSTINCFL
 
 DependTarget()
 
-InstallDocs(controllers.doc,${DESTDIR}/doc/PROGRAMMER)
-
 NormalHelpRule()
 InstallDocs(ctrproc.help, ${DESTDIR}/help)
 InstallHelpAlias(ctrproc, controllersprocs controllersproc)

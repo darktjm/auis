@@ -4,7 +4,7 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-/** \addtogroup libfilter libfilter.so
+/** \addtogroup libfilter Object filter
  *  A dynamically loadable ATK class file.  Contains filter.
  * @{ */
 /* filter the textview selection region through a command

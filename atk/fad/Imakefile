@@ -17,5 +17,3 @@ NormalHelpRule()
 InstallDocs(fad.help fadproc.help, ${DESTDIR}/help)
 InstallHelpAlias(fad, animation animations animate)
 InstallHelpAlias(fadproc, fadprocs)
-
-InstallDocs(fad.doc,${DESTDIR}/doc/PROGRAMMER)

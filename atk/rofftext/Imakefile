@@ -41,6 +41,5 @@ DependTarget()
 NormalHelpRule()
 InstallDocs(rofftxt.help,${DESTDIR}/help)
 InstallHelpAlias(rofftxt,rofftext)
-InstallDocs(rofftext.doc,${DESTDIR}/doc/PROGRAMMER)
 
 InstallLink(runapp, $(DESTDIR)/bin/rofftext)

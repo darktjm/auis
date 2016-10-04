@@ -4,7 +4,7 @@
 \* ********************************************************************** */
 
 HELPS = atk.help color.help geomtry.help insets.help procs.help prog.help tour.help
-TOPDOCS =  Readme.doc class.doc datastrm.doc insets.doc intro.doc install.doc doclaunch insets.d progtools.d pinsets.d texttools.d
+TOPDOCS =  Readme.doc datastrm.doc intro.doc doclaunch insets.d progtools.d pinsets.d texttools.d
 
 NormalHelpRule()
 InstallDocs(${HELPS}, ${DESTDIR}/help)

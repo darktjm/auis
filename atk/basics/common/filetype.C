@@ -403,7 +403,7 @@ void filetype::CanonicalizeFilename(char  *canonicalName , const char  *name, in
 #ifdef DOS_STYLE_PATHNAMES
     char *slash;
     char *tmpstr;
-    tmpstr = NewString(name);
+    tmpstr = strdup(name);
     /* Change all backslashes to forward slashes */
     while ((slash = strchr(tmpstr, '\\')) != NULL)
 	*slash = '/';

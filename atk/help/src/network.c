@@ -90,16 +90,16 @@ helpapp_ncproc (void)
 	    addrlen = read(ns, buf, len);
 	    switch(buf[0]) {
 		case 's':		/* add a search dir */
-		    ncproc_AddSearchDir=NewString(buf+1);
+		    ncproc_AddSearchDir=strdup(buf+1);
 		break;
 	    case 'i':		/* change the index */
-		ncproc_SetIndex=NewString(buf+1);
+		ncproc_SetIndex=strdup(buf+1);
 		break;
 	    case 'a':		/* add an alias file */
-		ncproc_SetAliasesFile=NewString(buf+1);
+		ncproc_SetAliasesFile=strdup(buf+1);
 		break;
 	    case 'h':		/* get help on a topic */
-		ncproc_GetHelpOn=NewString(buf+1);
+		ncproc_GetHelpOn=strdup(buf+1);
 		break;
 	    }
 	}

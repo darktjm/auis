@@ -4,7 +4,7 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-/** \addtogroup libcalc libcalc.so
+/** \addtogroup libcalc Object calc
  *  A dynamically loadable ATK class file.  Contains calc, calcv.
  * @{ */
 /*

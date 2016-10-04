@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libconsoleapp libconsoleapp.so
+/** \addtogroup libconsoleapp Object consoleapp
  *  A dynamically loadable ATK class file.  Contains consoleapp,
  *  consoleClass, logview.
  * @{ */

@@ -44,4 +44,3 @@ NSDeclareFont(ziptop10)
 
 DependTarget()
 
-InstallDocs(ZipPG.doc,${DESTDIR}/doc/PROGRAMMER)

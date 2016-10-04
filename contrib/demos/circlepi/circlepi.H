@@ -4,7 +4,7 @@
  *         Copyright IBM Corporation 1991 - All Rights Reserved           *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-/** \addtogroup libcirclepi libcirclepi.so
+/** \addtogroup libcirclepi Object circlepi
  *  A dynamically loadable ATK class file.  Contains circlepi circlepiview.
  * @{ */
 #include <dataobject.H>

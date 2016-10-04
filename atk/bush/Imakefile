@@ -3,8 +3,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-OBJS = bush.o bushv.o bushapp.o
-HFILES = bush.H bushv.H bushapp.H
+OBJS = bush.o bushv.o
+HFILES = bush.H bushv.H
 
 LIBS = 	$(UTILLIB)
 
@@ -14,8 +14,8 @@ DependTarget()
 
 InstallClassFiles($(HFILES))
 
-DynamicMultiObject(bush,bushv bushapp,$(OBJS),$(LIBS),$(SYS_LIBRARIES),)
-InstallDynamicObject(bush,bushv bushapp,$(FULLATKDLIBDIR))
+DynamicMultiObject(bush,bushv,$(OBJS),$(LIBS),$(SYS_LIBRARIES),)
+InstallDynamicObject(bush,bushv,$(FULLATKDLIBDIR))
 
 OptionalATKLibrary(bush, $(OBJS), $(LIBS),,)
 InstallOptionalATKLibrary(bush, ${DESTDIR}/lib/atk)

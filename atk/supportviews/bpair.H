@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libsupviews libsupviews.so
+/** \addtogroup libsupviews Object supviews
  *  A statically loadable ATK class file.  Contains bpair, label, labelview,
  *  lpair, lprruler, lprrulerview, matte, oscroll, palette, panner, sbttnav,
  *  sbutton, sbuttonv, scroll, scrollandpanner, stringtbl, strtblview,

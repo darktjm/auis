@@ -5,7 +5,7 @@
 	Copyright Carnegie Mellon University 1992 - All rights reserved
 */
 
-/** \addtogroup libimagev libimagev.so
+/** \addtogroup libimagev Object imagev
  *  A dynamically loadable ATK class file.  Contains imagev.
  * @{ */
 #include <rect.h>

@@ -2869,7 +2869,7 @@ contains many comments of the form.
 /* user code ends here for outputCallBack */
 
 }
-	The application programmer should insure that all of his/her code is placed 
+	The application programmer should ensure that all of his/her code is placed 
 in the framework of these comments, as this allows Createcon to preserve this 
 code in future versions. 
 
@@ -3739,7 +3739,7 @@ struct view *\bold{MouseProc}(cv, action, x, y, numberofclicks, rock)
 \}
 
 
-This (or option 1) insures that the proper view (the one that took the hit) is 
+This (or option 1) ensures that the proper view (the one that took the hit) is 
 returned up the view tree. For additional information on dealing with mouse 
 hits, see the ATK documentation.
 
@@ -3863,7 +3863,7 @@ to combine into a single application, it would be reasonable to create a
 window with Adew, inset arbiter objects within the application, and then read 
 each of the three applications into the arbiters. They can then each operate 
 without fear of a namespace collision. Alternately, one could just look at the 
-applications and insure that no names are common between them , and then even 
+applications and ensure that no names are common between them , and then even 
 this use of the arbiters would be unnecessary. 
 
 

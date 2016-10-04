@@ -592,8 +592,8 @@ webview::webview()
 	this->web_menus = (web_Menus)->DuplicateML( this);
 	if(starttm==NULL) {
 	    if ((t = environ::GetProfile("WebHome")) != NULL)
-		starttm=NewString(t);
-	    else starttm=NewString(DEFAULTHOME);
+		starttm=strdup(t);
+	    else starttm=strdup(DEFAULTHOME);
         }
         mouseFocus=NULL;
 	THROWONFAILURE( TRUE);

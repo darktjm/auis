@@ -422,7 +422,7 @@ static long ReadIt(class bdffont *self, FILE *file) {
 	switch(kv) {
 	    case STARTFONT:
 		{
-		self->version=NewString(value);
+		self->version=strdup(value);
 		self->comments=(char *)malloc(bdfparse_Increment);
 		self->comments[0]='\0';
 		bdfparse_Next=self->comments;
@@ -435,7 +435,7 @@ static long ReadIt(class bdffont *self, FILE *file) {
 		else AddComment(self, key, value);
 		break;
 	    case FONT:
-		self->fontname=NewString(value);
+		self->fontname=strdup(value);
 		break;
 	    case SIZE:
  		p=Tokenize(&value);
@@ -621,7 +621,7 @@ static long ReadIt(class bdffont *self, FILE *file) {
 		self->fontweight=atol(value);
 		break;
 	    case FAMILY:
-		self->fontfamily=NewString(value);
+		self->fontfamily=strdup(value);
 		break;
 	    case WEIGHT_NAME:
 		{

@@ -151,7 +151,7 @@ char *x=x2;\
     }\
 }
 
-#define ENSURESIZE(x)  do { if((pos+=(x))>=size) { *buff=(char *)realloc(*buff, size+=100+(x)); cp=(*buff)+pos-(x); if(*buff==NULL) { *buff=NewString("OUT OF MEMORY!!!"); return; } } } while (0)
+#define ENSURESIZE(x)  do { if((pos+=(x))>=size) { *buff=(char *)realloc(*buff, size+=100+(x)); cp=(*buff)+pos-(x); if(*buff==NULL) { *buff=strdup("OUT OF MEMORY!!!"); return; } } } while (0)
 
 /* write contents of one cell */
 

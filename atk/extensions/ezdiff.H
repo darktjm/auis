@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libezdiff libezdiff.so
+/** \addtogroup libezdiff Object ezdiff
  *  A dynamically loadable ATK class file.  Contains ezdiff.
  * @{ */
 #include <observable.H>

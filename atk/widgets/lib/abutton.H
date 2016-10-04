@@ -4,11 +4,10 @@
 #include <awidget.H>
 #include <fontdesc.H>
 #include <aaction.H>
-/** \addtogroup libAButton libAButton.so
+/** \addtogroup libAButton Object AButton
  *  A dynamically loadable ATK class file.  Contains AText, ATextv,
  *  AOptionCardv, AOptionMenuv, AOptionMenu, AList, AListv, AButton,
- *  AButtonv.  Also contains AOptionSourceFormula, AButtonSizeFormula,
- *  ATextSizeFormula, but these are not linked.
+ *  AButtonv, AOptionSourceFormula, AButtonSizeFormula, ATextSizeFormula.
  * @{ */
 #define ABUTTON_INHERIT_FontFamily (1<<15)
 #define ABUTTON_INHERIT_FontSize (1<<14)

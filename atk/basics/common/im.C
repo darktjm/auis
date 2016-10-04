@@ -2493,7 +2493,7 @@ void im::SetCleanUpZombies(boolean  value)
 	sigset_t empty;
 
 	sigemptyset(&empty);
-        if ((cleanUpZombies = value)) /* Insure proper state of signal handler. */
+        if ((cleanUpZombies = value)) /* Ensure proper state of signal handler. */
             sa.sa_handler = SIGACTIONHANDLERFUNC(DeathInTheFamily);
         else
 	    sa.sa_handler = SIGACTIONHANDLERFUNC(SIG_DFL);
@@ -2502,7 +2502,7 @@ void im::SetCleanUpZombies(boolean  value)
 	sigaction(SIGCHLD, &sa, NULL);
     }
 #else
-    if ((cleanUpZombies = value)) /* Insure proper state of signal handler. */
+    if ((cleanUpZombies = value)) /* Ensure proper state of signal handler. */
         signal(SIGCHLD, DeathInTheFamily);
     else
         signal(SIGCHLD, SIG_DFL);

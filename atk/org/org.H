@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup liborg liborg.so
+/** \addtogroup liborg Object org
  *  A dynamically loadable ATK class file.  Contains org, orgv, orgapp.
  * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************

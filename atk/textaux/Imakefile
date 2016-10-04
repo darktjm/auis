@@ -33,5 +33,3 @@ InstallDocs(gemacsdf.help, ${DESTDIR}/help)
 InstallHelpAlias(gemacsdf, ez-emacs-diffs)
 
 InstallFile(symbol.tpl, $(INSTINCFLAGS), ${DESTDIR}/lib/tpls)
-
-InstallDocs(contentv.doc,${DESTDIR}/doc/PROGRAMMER)

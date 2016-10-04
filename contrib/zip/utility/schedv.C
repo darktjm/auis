@@ -42,7 +42,24 @@ static boolean debug=FALSE;
 static class menulist		     *class_menulist;
 static class keymap		     *class_keymap;
 
+struct NO_DLL_EXPORT schedv_private {
+   static void Extend_Button( class schedv  *self, class suite  *suite, struct suite_item  *item, long type, enum view_MouseAction       action, long x, long y, long clicks );
+   static void Split_Button( class schedv *self, class suite *suite, struct suite_item *item, long type, enum view_MouseAction       action, long x, long y, long clicks );
+   static void Clear_Button( class schedv  *self, class suite  *suite, struct suite_item *item, long type, enum view_MouseAction       action, long x, long y, long clicks );
+   static void Save_Button( class schedv *self, class suite *suite, struct suite_item *item, long type, enum view_MouseAction       action, long x, long y, long clicks );
+   static void Print_Button( class schedv *self, class suite  *suite, struct suite_item	 *item, long type, enum view_MouseAction       action, long x, long y, long clicks );
+   static void Quit_Button( class schedv *self, class suite *suite, struct suite_item *item, long type, enum view_MouseAction       action, long x, long y, long clicks );
+   static void Debug_Command( class schedv  *self );
+   static void Quit_Command( class schedv *self );
 
+   static void Initialize( class schedv  *self );
+   static void Handle_Slot_Hit( class schedv *self, zip_type_figure   slot_figure );
+   static void Remember_Slot_Hit( class schedv  *self, zip_type_figure slot_figure );
+   static void Move_Slot( class schedv *self, zip_type_figure slot_figure );
+   static void Normalize_Previous_Slot_Figure( class schedv *self );
+   static void Normalize_Current_Slot_Figure( class schedv  *self );
+   static long Exceptions( class schedv *self, char *facility, long  status  );
+};
 
 static /*===*/class schedv *SELF;
 
@@ -80,85 +97,7 @@ static /*===*/class schedv *SELF;
 #define  Keystate		    (self->keystate)
 
 
-static void Extend_Button( class schedv  *self, class suite  *suite, struct suite_item  *item, long type, enum view_MouseAction       action, long x, long y, long clicks );
-static void Split_Button( class schedv *self, class suite *suite, struct suite_item *item, long type, enum view_MouseAction       action, long x, long y, long clicks );
-static void Clear_Button( class schedv  *self, class suite  *suite, struct suite_item *item, long type, enum view_MouseAction       action, long x, long y, long clicks );
-static void Save_Button( class schedv *self, class suite *suite, struct suite_item *item, long type, enum view_MouseAction       action, long x, long y, long clicks );
-static void Print_Button( class schedv *self, class suite  *suite, struct suite_item	 *item, long type, enum view_MouseAction       action, long x, long y, long clicks );
-static void Quit_Button( class schedv *self, class suite *suite, struct suite_item *item, long type, enum view_MouseAction       action, long x, long y, long clicks );
-static void Debug_Command( class schedv  *self );
-static void Quit_Command( class schedv *self );
-
-static const struct bind_Description	 menu[] = {
-{   "schedv-quit",		"\033q",    0,	    "Quit~99",		0,  0,
-    (proctable_fptr) Quit_Command,		"Quit",		    NULL},
-{   "schedv-debug",		"\033z",    0,	    "DEBUG~88",		0,  0,
-    (proctable_fptr) Debug_Command,		"Debug",	    NULL},
-NULL
-};
-
-
-static const suite_Specification  extend_button[] =  {
-  suite_ItemCaption( "Extend" ),
-  suite_ItemHitHandler( Extend_Button ),
-  0
-};
-
-static const suite_Specification  split_button[] = {
-  suite_ItemCaption( "Split" ),
-  suite_ItemHitHandler( Split_Button ),
-  0
-};
-
-static const suite_Specification  clear_button[] = {
-  suite_ItemCaption( "Clear" ),
-  suite_ItemHitHandler( Clear_Button ),
-  0
-};
-
-static const suite_Specification  save_button[] = {
-  suite_ItemCaption( "Save" ),
-  suite_ItemHitHandler( Save_Button ),
-  0
-};
-
-static const suite_Specification print_button[] = {
-  suite_ItemCaption( "Print" ),
-  suite_ItemHitHandler( Print_Button ),
-  0
-};
-
-static const suite_Specification quit_button[] =
-  {
-  suite_ItemCaption( "Quit" ),
-  suite_ItemHitHandler( Quit_Button ),
-  0
-};
-
-static const suite_Specification control_buttons[] = {
-  suite_ItemCaptionFontName( "andysans10b" ),
-/*===
-  suite_Item( extend_button ),
-  suite_Item( split_button ),
-===*/
-  suite_Item( clear_button ),
-  suite_Item( save_button ),
-  suite_Item( print_button ),
-  suite_Item( quit_button ),
-  suite_Arrangement( suite_Row ),
-  0
-};
-
 ATKdefineRegistry(schedv, view, schedv::InitializeClass);
-
-static void Initialize( class schedv  *self );
-static void Handle_Slot_Hit( class schedv *self, zip_type_figure   slot_figure );
-static void Remember_Slot_Hit( class schedv  *self, zip_type_figure slot_figure );
-static void Move_Slot( class schedv *self, zip_type_figure slot_figure );
-static void Normalize_Previous_Slot_Figure( class schedv *self );
-static void Normalize_Current_Slot_Figure( class schedv  *self );
-static long Exceptions( class schedv *self, char *facility, long  status  );
-
 
 void
 schedv::Set_Debug( boolean mode )
@@ -169,10 +108,19 @@ schedv::Set_Debug( boolean mode )
 boolean
 schedv::InitializeClass( )
 {
+static const struct bind_Description	 menu[] = {
+{   "schedv-quit",		"\033q",    0,	    "Quit~99",		0,  0,
+    (proctable_fptr) schedv_private::Quit_Command,		"Quit",		    NULL},
+{   "schedv-debug",		"\033z",    0,	    "DEBUG~88",		0,  0,
+    (proctable_fptr) schedv_private::Debug_Command,		"Debug",	    NULL},
+NULL
+};
+
+
     IN(schedv_InitializeClass);
     class_menulist = new menulist;
     class_keymap = new keymap;
-    bind::BindList( ::menu, class_keymap, class_menulist, &schedv_ATKregistry_  );
+    bind::BindList( menu, class_keymap, class_menulist, &schedv_ATKregistry_  );
     OUT(schedv_InitializeClass);
     return TRUE;
 }
@@ -216,7 +164,7 @@ schedv::SetDataObject( class dataobject *data )
     class schedv *self=this;
     this->data = (class sched *) data;
     (ZipView)->SetDataObject( Zip );
-    (Zip)->Set_general_Exception_Handler(  (zip_generalexceptfptr) Exceptions );
+    (Zip)->Set_general_Exception_Handler(  (zip_generalexceptfptr) schedv_private::Exceptions );
 }
 
 void
@@ -251,7 +199,7 @@ schedv::FullUpdate( enum view_UpdateType type, long left , long  top , long  wid
 	ChartLeft = Left;   ChartTop = Top;
 	ChartWidth = Width; ChartHeight = Height - ButtonHeight;
 	if ( ChartPane == NULL )
-	    Initialize( this );
+	    schedv_private::Initialize( this );
 	(ZipView)->InsertViewSize(  this, ChartLeft, ChartTop, ChartWidth, ChartHeight );
 	(ZipView)->FullUpdate(  type, 0, 0, ChartWidth, ChartHeight );
 	(ControlButtons)->InsertViewSize(  this, Left, ControlButtonTop,
@@ -261,9 +209,61 @@ schedv::FullUpdate( enum view_UpdateType type, long left , long  top , long  wid
     OUT(schedv_FullUpdate);
 }
 
-static
-void Initialize( class schedv *self )
+void schedv_private::Initialize( class schedv *self )
 {
+#if 0
+static const suite_Specification  extend_button[] =  {
+  suite_ItemCaption( "Extend" ),
+  suite_ItemHitHandler( schedv::Extend_Button ),
+  0
+};
+
+static const suite_Specification  split_button[] = {
+  suite_ItemCaption( "Split" ),
+  suite_ItemHitHandler( schedv::Split_Button ),
+  0
+};
+#endif
+
+static const suite_Specification  clear_button[] = {
+  suite_ItemCaption( "Clear" ),
+  suite_ItemHitHandler( schedv_private::Clear_Button ),
+  0
+};
+
+static const suite_Specification  save_button[] = {
+  suite_ItemCaption( "Save" ),
+  suite_ItemHitHandler( schedv_private::Save_Button ),
+  0
+};
+
+static const suite_Specification print_button[] = {
+  suite_ItemCaption( "Print" ),
+  suite_ItemHitHandler( schedv_private::Print_Button ),
+  0
+};
+
+static const suite_Specification quit_button[] =
+  {
+  suite_ItemCaption( "Quit" ),
+  suite_ItemHitHandler( schedv_private::Quit_Button ),
+  0
+};
+
+static const suite_Specification control_buttons[] = {
+  suite_ItemCaptionFontName( "andysans10b" ),
+/*===
+  suite_Item( extend_button ),
+  suite_Item( split_button ),
+===*/
+  suite_Item( clear_button ),
+  suite_Item( save_button ),
+  suite_Item( print_button ),
+  suite_Item( quit_button ),
+  suite_Arrangement( suite_Row ),
+  0
+};
+
     const UNUSED char *reply; // used with DB=1
 
     IN(Initialize);
@@ -274,7 +274,7 @@ void Initialize( class schedv *self )
     (ZipView)->Create_Pane(  &ChartPane, "Chart-Pane", ChartBlock, zip_opaque );
     (ZipView)->Set_Pane_Cursor(  ChartPane, 'A', "aptcsr20" );
     (ZipView)->Set_Pane_Stream(  ChartPane, ScheduleStream = self->data->stream );
-    ControlButtons = suite::Create( ::control_buttons, (long) self );
+    ControlButtons = suite::Create( control_buttons, (long) self );
     (ControlButtons)->LinkTree(  self );
     (ZipView )->Use_Normal_Pane_Cursors( );
     OUT(Initialize);
@@ -294,14 +294,14 @@ schedv::Hit( enum view_MouseAction action, long  x , long y , long clicks )
 	PendingQuestion = false;
 	message::CancelQuestion( this );
 	(ZipView)->Announce(  " " );
-	Normalize_Current_Slot_Figure( this );
+	schedv_private::Normalize_Current_Slot_Figure( this );
     }
     if ( PendingDuplicate &&  action == view_LeftDown )
-	Normalize_Previous_Slot_Figure( this );
+	schedv_private::Normalize_Previous_Slot_Figure( this );
     if ( y > ButtonTop )
     { DEBUG(Buttons ::Hit);
     if ( action == view_RightUp && PreviousTextFigure != NULL )
-	Normalize_Previous_Slot_Figure( this );
+	schedv_private::Normalize_Previous_Slot_Figure( this );
     hit = (ControlButtons)->Hit(  action,
 				(ControlButtons)->EnclosedXToLocalX(  x ),
 				(ControlButtons)->EnclosedYToLocalY(  y ), clicks );
@@ -320,21 +320,21 @@ schedv::Hit( enum view_MouseAction action, long  x , long y , long clicks )
 	{
 	    case view_LeftDown:
 		if ( fig )
-		    Handle_Slot_Hit( this, fig );
+		    schedv_private::Handle_Slot_Hit( this, fig );
 		break;
 	    case view_RightDown:
 		if ( fig )
-		    Remember_Slot_Hit( this, fig );
+		    schedv_private::Remember_Slot_Hit( this, fig );
 		else
 		    if ( PendingDuplicate )
-			Normalize_Previous_Slot_Figure( this ); 
+			schedv_private::Normalize_Previous_Slot_Figure( this ); 
 		break;
 	    case view_RightUp:
 		if ( fig )
-		    Move_Slot( this, fig );
+		    schedv_private::Move_Slot( this, fig );
 		else
 		    if ( PreviousSlotFigure )
-			Normalize_Previous_Slot_Figure( this );
+			schedv_private::Normalize_Previous_Slot_Figure( this );
 		break;
 	    default:
 	        break;
@@ -345,8 +345,7 @@ schedv::Hit( enum view_MouseAction action, long  x , long y , long clicks )
     return  hit;
 }
 
-static
-void Handle_Slot_Hit( class schedv *self, zip_type_figure slot_figure )
+void schedv_private::Handle_Slot_Hit( class schedv *self, zip_type_figure slot_figure )
 {
     char				      reply[512], string[512];
     long			      shade;
@@ -390,8 +389,7 @@ void Handle_Slot_Hit( class schedv *self, zip_type_figure slot_figure )
     OUT(Handle_Slot_Hit);
 }
 
-static
-void Remember_Slot_Hit( class schedv  *self, zip_type_figure slot_figure )
+void schedv_private::Remember_Slot_Hit( class schedv  *self, zip_type_figure slot_figure )
 {
     char				      string[512];
     zip_type_figure	      text_figure;
@@ -412,8 +410,7 @@ void Remember_Slot_Hit( class schedv  *self, zip_type_figure slot_figure )
     OUT(Remember_Slot_Hit);
 }
 
-static
-void Move_Slot( class schedv *self, zip_type_figure slot_figure )
+void schedv_private::Move_Slot( class schedv *self, zip_type_figure slot_figure )
 {
     char				      string[512];
     zip_type_figure	      text_figure;
@@ -456,8 +453,7 @@ void Move_Slot( class schedv *self, zip_type_figure slot_figure )
     OUT(Move_Slot);
 }
 
-static
-void Normalize_Previous_Slot_Figure( class schedv *self )
+void schedv_private::Normalize_Previous_Slot_Figure( class schedv *self )
 {
     IN(Normalize_Previous_Slot_Figure);
     (ZipView)->Clear_Figure(  PreviousSlotFigure, ChartPane );
@@ -469,8 +465,7 @@ void Normalize_Previous_Slot_Figure( class schedv *self )
     OUT(Normalize_Previous_Slot_Figure);
 }
 
-static
-void Normalize_Current_Slot_Figure( class schedv  *self )
+void schedv_private::Normalize_Current_Slot_Figure( class schedv  *self )
 {
     long			      shade = 0;
 
@@ -489,8 +484,7 @@ void Normalize_Current_Slot_Figure( class schedv  *self )
     OUT(Normalize_Current_Slot_Figure);
 }
 
-static
-void Extend_Button( class schedv *self, class suite *suite, struct suite_item  *item, long type, enum view_MouseAction       action, long x, long y, long clicks )
+void schedv_private::Extend_Button( class schedv *self, class suite *suite, struct suite_item  *item, long type, enum view_MouseAction       action, long x, long y, long clicks )
 {
     IN(Extend_Button);
     // unimplemented?
@@ -498,8 +492,7 @@ void Extend_Button( class schedv *self, class suite *suite, struct suite_item  *
     OUT(Extend_Button);
 }
 
-static
-void Split_Button( class schedv *self, class suite  *suite, struct suite_item *item, long type, enum view_MouseAction       action, long x, long y, long clicks )
+void schedv_private::Split_Button( class schedv *self, class suite  *suite, struct suite_item *item, long type, enum view_MouseAction       action, long x, long y, long clicks )
 {
     IN(Split_Button);
     // unimplemented?
@@ -507,8 +500,7 @@ void Split_Button( class schedv *self, class suite  *suite, struct suite_item *i
     OUT(Split_Button);
 }
 
-static
-void Clear_Button( class schedv *self, class suite  *suite, struct suite_item  *item, long type, enum view_MouseAction       action, long x, long y, long clicks )
+void schedv_private::Clear_Button( class schedv *self, class suite  *suite, struct suite_item  *item, long type, enum view_MouseAction       action, long x, long y, long clicks )
 {
     zip_type_image	      img = (Zip)->Image_Root(  ScheduleStream );
     zip_type_figure	      fig,
@@ -544,8 +536,7 @@ void Clear_Button( class schedv *self, class suite  *suite, struct suite_item  *
     OUT(Clear_Button);
 }
 
-static
-void Save_Button( class schedv	  *self, class suite  *suite, struct suite_item  *item, long type, enum view_MouseAction action, long x, long y, long clicks )
+void schedv_private::Save_Button( class schedv	  *self, class suite  *suite, struct suite_item  *item, long type, enum view_MouseAction action, long x, long y, long clicks )
 {
     char				      msg[512];
     long			      status;
@@ -566,8 +557,7 @@ void Save_Button( class schedv	  *self, class suite  *suite, struct suite_item  
     OUT(Save_Button);
 }
 
-static
-void Print_Button( class schedv  *self, class suite  *suite, struct suite_item *item, long type, enum view_MouseAction       action, long x, long y, long clicks )
+void schedv_private::Print_Button( class schedv  *self, class suite  *suite, struct suite_item *item, long type, enum view_MouseAction       action, long x, long y, long clicks )
 {
     char				      msg[512];
     long			      status;
@@ -598,8 +588,7 @@ void Print_Button( class schedv  *self, class suite  *suite, struct suite_item *
     OUT(Print_Button);
 }
 
-static
-void Quit_Button( class schedv *self, class suite  *suite, struct suite_item	 *item, long type, enum view_MouseAction       action, long x, long y, long clicks )
+void schedv_private::Quit_Button( class schedv *self, class suite  *suite, struct suite_item	 *item, long type, enum view_MouseAction       action, long x, long y, long clicks )
 {
     static const char		     * const choices[] =
     {"Cancel", "Save", "Save & Quit", "Quit Anyway", 0};
@@ -630,24 +619,24 @@ void Quit_Button( class schedv *self, class suite  *suite, struct suite_item	 *i
     OUT(Quit_Button);
 }
 
-static void
-Debug_Command( class schedv *self )
+void
+schedv_private::Debug_Command( class schedv *self )
 {
     IN(Debug_Command);
     debug = !debug;
     OUT(Debug_Command);
 }
 
-static void
-Quit_Command( class schedv *self )
+void
+schedv_private::Quit_Command( class schedv *self )
 {
     IN(Quit_Command);
     Quit_Button( self, NULL, NULL, suite_ItemObject, view_LeftUp, 0, 0, 0 );
     OUT(Quit_Command);
 }
 
-static long
-Exceptions( class schedv *self, char *facility, long   status  )
+long
+schedv_private::Exceptions( class schedv *self, char *facility, long   status  )
 {
     char				      msg[512];
 

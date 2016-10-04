@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup liblayout liblayout.so
+/** \addtogroup liblayout Object layout
  *  A dynamically loadable ATK class file.  Contains layout, layoutview,
  *  box, boxview, filler, fillerview.
  * @{ */

@@ -4,7 +4,7 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-/** \addtogroup libdeskey libdeskey.so
+/** \addtogroup libdeskey Object deskey
  *  A dynamically loadable ATK class file.  Contains deskey.
  * @{ */
 /* deskey.H -- EZ package to describe key sequences.

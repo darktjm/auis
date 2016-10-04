@@ -4,7 +4,7 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-/** \addtogroup libchamp libchamp.so
+/** \addtogroup libchamp Object champ
  *  A dynamically loadable ATK class file.  Contains butter, butterview,
  *  champ, chimp, chimpview, chomp, chompview, enode, enodeview, month,
  *  monthview.

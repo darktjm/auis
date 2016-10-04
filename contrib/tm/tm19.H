@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtermulator
+ * @{ */
 /*
  * subclass of termulator implementing h19 escape sequences
  */
@@ -24,5 +26,5 @@ public:
         int savedX,savedY;
         int foldCount;
 };
-
+/** @} */
 #endif /* _tm19_H_ */

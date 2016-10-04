@@ -1,7 +1,7 @@
 #ifndef _graphic_H_
 #define _graphic_H_
 
-/** \addtogroup libbasics libbasics.so
+/** \addtogroup libbasics Object basics
  * @{ */
 /* ********************************************************************** *\
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *

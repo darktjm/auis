@@ -450,7 +450,7 @@ void GetFormula (class spread  * V, Chunk  chunk, char  **keybuff)
 	printf("GetFormula entered\n");
 
     if (chunk->TopRow > chunk->BotRow || chunk->LeftCol > chunk->RightCol || chunk->TopRow < 0 || chunk->LeftCol < 0)
-	 *keybuff = NewString("");
+	 *keybuff = strdup("");
 
     else
 	(MyTable(V))->FormatCell(

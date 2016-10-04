@@ -1,6 +1,6 @@
 #ifndef _gtext_H_
 #define _gtext_H_
-/** \addtogroup libgtext libgtext.so
+/** \addtogroup libgtext Object gtext
  *  A dynamically loadable ATK class file.  Contains gtext, gtextview.
  * @{ */
 #include <text.H>

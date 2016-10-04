@@ -105,7 +105,7 @@ void monthview::ResetMonth(boolean  ForceRedraw)
 	dayct += MonthLength(this->myyear, i);
     }
     MyTime.tm_yday = dayct;
-    clock = gtime(&MyTime);
+    clock = mktime(&MyTime);
     FullTime = gmtime(&clock);
     this->skippedatstart = FullTime->tm_wday - 1;
     if (this->skippedatstart == -1) this->skippedatstart = 6;

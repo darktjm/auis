@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libeq libeq.so
+/** \addtogroup libeq Object eq
  *  A dynamically loadable ATK class file.  Contains eq, eqview.
  * @{ */
 /*

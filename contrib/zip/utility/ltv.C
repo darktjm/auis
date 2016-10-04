@@ -116,13 +116,60 @@ static /*===*/class ltv *SELF;
 #define  EnclosureWidth		    (self->enclosure.width)
 #define  EnclosureHeight	    (self->enclosure.height)
 
-static void Begin_Chain_Button( class ltv *self, class suite  *suite, struct suite_item     *item, long type, enum view_MouseAction  action, long x, long y, long clicks );
-static void End_Chain_Button( class ltv  *self, class suite  *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks );
-static void End_Chain( class ltv *self );
-static void Delete_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks );
-static void Rename_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks );
-static void Left_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks );
-static void Right_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks );
+struct NO_DLL_EXPORT ltv_private {
+  static void Begin_Chain_Button( class ltv *self, class suite  *suite, struct suite_item     *item, long type, enum view_MouseAction  action, long x, long y, long clicks );
+  static void End_Chain_Button( class ltv  *self, class suite  *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks );
+  static void End_Chain( class ltv *self );
+  static void Delete_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks );
+  static void Rename_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks );
+  static void Left_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks );
+  static void Right_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks );
+
+  static void Detect( class ltv  *self, class suite *suite, struct suite_item *item, long    datum );
+  static void Initialize( class ltv  *self );
+  static void Build_Chain( class ltv  *self, enum view_MouseAction action, long  x, long	 y, long clicks );
+  static int Which_Figure_Point( class ltv *self, zip_type_figure figure, zip_type_pane       pane, zip_type_pixel x , zip_type_pixel y );
+  static void Modify_Chain( class ltv *self, enum view_MouseAction action, long x, long	 y, long clicks );
+  static void Track_Enclosure( class ltv *self, enum view_MouseAction action, long x, long y , long  clicks );
+  static void Cancel_Enclosure( class ltv *self );
+  static void Clear_Enclosure( class ltv *self );
+  static void Draw_Enclosure( class ltv  *self );
+  static void Invert_Enclosure( class ltv *self );
+  static long Neighbor( class ltv *self, zip_type_pixel x , zip_type_pixel y, zip_type_figure    *figure, zip_type_point *X , zip_type_point *Y, long  *point );
+  static void Normalize_Command( class ltv *self );
+  static void Zoom_In_Command( class ltv  *self );
+  static void Zoom_Out_Command( class ltv *self );
+  static void Scale_Pane( class ltv *self, float  scale );
+  static void Scale_Normal_Command( class ltv  *self );
+  static void Scale_Smaller_Command( class ltv *self );
+  static void Scale_Smaller_10_Command( class ltv *self );
+  static void Scale_Larger_Command( class ltv *self );
+  static void Scale_Larger_10_Command( class ltv *self );
+  static void Scale_Half_Command( class ltv *self );
+  static void Scale_Double_Command( class ltv *self );
+  static void Pan_Foreground_Command( class ltv	 *self );
+  static void Pan_Together_Command( class ltv *self );
+  static void Fit_Command( class ltv *self );
+  static void Show_Chain_Names( class ltv *self );
+  static void Clear_Chain_Names( class ltv    *self );
+  static long Rename_Exception( class ltv *self, char *facility, long  status  );
+  static void Name_Chain( class ltv *self );
+  static void Split_Chain_Name( class ltv *self, zip_type_figure figure, char **right_name, char **left_name  );
+  static void Passivate( class ltv *self, long datum );
+  static void Activate( class ltv *self, long datum );
+  static void Lighten_Background_Command( class ltv *self );
+  static void Lighten_Background( class ltv *self );
+  static void Darken_Background_Command( class ltv *self );
+  static void Hide_Background_Command( class ltv *self );
+  static void Expose_Background_Command( class ltv *self );
+  static void Show_Background( class ltv  *self );
+  static void Save_Command( class ltv *self );
+  static void Print_Command( class ltv *self );
+  static void Quit_Command( class ltv *self );
+  static void Debug_Command( class ltv  *self );
+  static void Build_Menu();
+  static long Exceptions( class ltv *self, char *facility, long  status  );
+};
 
 #define  ChangeItemCaption(o,i,c) \
       (o)->ChangeItemAttribute(  i, suite_ItemCaption(c) )
@@ -138,7 +185,7 @@ static suite_Specification		    begin_button[] =
   {
   suite_ItemCaption( "Begin Chain" ),
   suite_ItemDatum( begin_code ),
-  suite_ItemHitHandler( Begin_Chain_Button ),
+  suite_ItemHitHandler( ltv_private::Begin_Chain_Button ),
   0
   };
 
@@ -146,7 +193,7 @@ static suite_Specification		    end_button[] =
   {
   suite_ItemCaption( "End Chain" ),
   suite_ItemDatum( end_code ),
-  suite_ItemHitHandler( End_Chain_Button ),
+  suite_ItemHitHandler( ltv_private::End_Chain_Button ),
   0
   };
 
@@ -154,7 +201,7 @@ static suite_Specification		    rename_button[] =
   {
   suite_ItemCaption( "Rename Chain" ),
   suite_ItemDatum( rename_code ),
-  suite_ItemHitHandler( Rename_Chain_Button ),
+  suite_ItemHitHandler( ltv_private::Rename_Chain_Button ),
   0
   };
 
@@ -162,7 +209,7 @@ static suite_Specification		    delete_button[] =
   {
   suite_ItemCaption( "Delete Chain" ),
   suite_ItemDatum( delete_code ),
-  suite_ItemHitHandler( Delete_Chain_Button ),
+  suite_ItemHitHandler( ltv_private::Delete_Chain_Button ),
   0
   };
 
@@ -174,7 +221,7 @@ static suite_Specification		    right_name_button[] =
   suite_ItemTitleFontName( "andysans10b" ),
   suite_ItemCaptionFontName( "andy10b" ),
 /*===  suite_ItemType( suite_ReadWrite ),*/
-  suite_ItemHitHandler( Right_Chain_Button ),
+  suite_ItemHitHandler( ltv_private::Right_Chain_Button ),
   0
   };
 
@@ -186,7 +233,7 @@ static suite_Specification		    left_name_button[] =
   suite_ItemTitleFontName( "andysans10b" ),
   suite_ItemCaptionFontName( "andy10b" ),
 /*===  suite_ItemType( suite_ReadWrite ),*/
-  suite_ItemHitHandler( Left_Chain_Button ),
+  suite_ItemHitHandler( ltv_private::Left_Chain_Button ),
   0
   };
 
@@ -207,52 +254,6 @@ static suite_Specification		    ltv_buttons[] =
 
 ATKdefineRegistry(ltv, view, ltv::InitializeClass);
 
-static void Detect( class ltv  *self, class suite *suite, struct suite_item *item, long    datum );
-static void Initialize( class ltv  *self );
-static void Build_Chain( class ltv  *self, enum view_MouseAction action, long  x, long	 y, long clicks );
-static int Which_Figure_Point( class ltv *self, zip_type_figure figure, zip_type_pane       pane, zip_type_pixel x , zip_type_pixel y );
-static void Modify_Chain( class ltv *self, enum view_MouseAction action, long x, long	 y, long clicks );
-static void Track_Enclosure( class ltv *self, enum view_MouseAction action, long x, long y , long  clicks );
-static void Cancel_Enclosure( class ltv *self );
-static void Clear_Enclosure( class ltv *self );
-static void Draw_Enclosure( class ltv  *self );
-static void Invert_Enclosure( class ltv *self );
-static long Neighbor( class ltv *self, zip_type_pixel x , zip_type_pixel y, zip_type_figure    *figure, zip_type_point *X , zip_type_point *Y, long  *point );
-static void Normalize_Command( class ltv *self );
-static void Zoom_In_Command( class ltv  *self );
-static void Zoom_Out_Command( class ltv *self );
-static void Scale_Pane( class ltv *self, float  scale );
-static void Scale_Normal_Command( class ltv  *self );
-static void Scale_Smaller_Command( class ltv *self );
-static void Scale_Smaller_10_Command( class ltv *self );
-static void Scale_Larger_Command( class ltv *self );
-static void Scale_Larger_10_Command( class ltv *self );
-static void Scale_Half_Command( class ltv *self );
-static void Scale_Double_Command( class ltv *self );
-static void Pan_Foreground_Command( class ltv	 *self );
-static void Pan_Together_Command( class ltv *self );
-static void Fit_Command( class ltv *self );
-static void Show_Chain_Names( class ltv *self );
-static void Clear_Chain_Names( class ltv    *self );
-static long Rename_Exception( class ltv *self, char *facility, long  status  );
-static void Name_Chain( class ltv *self );
-static void Split_Chain_Name( class ltv *self, zip_type_figure figure, char **right_name, char **left_name  );
-static void Passivate( class ltv *self, long datum );
-static void Activate( class ltv *self, long datum );
-static void Lighten_Background_Command( class ltv *self );
-static void Lighten_Background( class ltv *self );
-static void Darken_Background_Command( class ltv *self );
-static void Hide_Background_Command( class ltv *self );
-static void Expose_Background_Command( class ltv *self );
-static void Show_Background( class ltv  *self );
-static void Save_Command( class ltv *self );
-static void Print_Command( class ltv *self );
-static void Quit_Command( class ltv *self );
-static void Debug_Command( class ltv  *self );
-static void Build_Menu();
-static long Exceptions( class ltv *self, char *facility, long  status  );
-
-
 void
 ltv::Set_Debug( boolean mode )
 {
@@ -267,7 +268,7 @@ ltv::InitializeClass( )
     IN(ltv_InitializeClass);
     class_menulist = new menulist;
     class_keymap = new keymap;
-    Build_Menu();
+    ltv_private::Build_Menu();
     OUT(ltv_InitializeClass);
     return TRUE;
 }
@@ -328,7 +329,7 @@ ltv::SetDataObject( class dataobject *data )
     this->data = (class lt *) data;
     (ZipView)->SetDataObject(  Zip );
     (this->data)->AddObserver(  this );
-    (Zip)->Set_general_Exception_Handler( (zip_generalexceptfptr) Exceptions );
+    (Zip)->Set_general_Exception_Handler( (zip_generalexceptfptr) ltv_private::Exceptions );
 }
 
 void
@@ -371,7 +372,7 @@ ltv::FullUpdate( enum view_UpdateType type, long left , long top , long width , 
     IN(ltv_FullUpdate);
     if ( type == view_FullRedraw || type == view_LastPartialRedraw )
     {
-	Cancel_Enclosure( this );
+	ltv_private::Cancel_Enclosure( this );
 	(this)->GetVisualBounds(  Block );
 	DEBUGdt(Left,Left); DEBUGdt(Top,Top);
 	DEBUGdt(Width,Width); DEBUGdt(Height,Height);
@@ -380,20 +381,19 @@ ltv::FullUpdate( enum view_UpdateType type, long left , long top , long width , 
 	(Buttons)->FullUpdate(  type, 0, 0, Width, ButtonHeight );
 	if ( Figure == NULL )
 	{
-	    Passivate( this, delete_code );
-	    Passivate( this, rename_code );
-	    Passivate( this, end_code );
+	    ltv_private::Passivate( this, delete_code );
+	    ltv_private::Passivate( this, rename_code );
+	    ltv_private::Passivate( this, end_code );
 	}
 	BackgroundLeft = (Left + Width/2) - BackgroundWidth/2;
 	BackgroundTop  = (Top + Height/2) - BackgroundHeight/2;
-	Show_Background( this );
+	ltv_private::Show_Background( this );
 	(ZipView )->Use_Normal_Pane_Cursors( );
     }
     OUT(ltv_FullUpdate);
 }
 
-static
-void Detect( class ltv *self, class suite *suite, struct suite_item *item, long datum )
+void ltv_private::Detect( class ltv *self, class suite *suite, struct suite_item *item, long datum )
 {
     IN(Detect);
     switch ( (Buttons/*===*/)->ItemAttribute(  item, suite_itemdatum ) )
@@ -408,8 +408,7 @@ void Detect( class ltv *self, class suite *suite, struct suite_item *item, long 
     OUT(Detect);
 }
 
-static
-void Initialize( class ltv  *self )
+void ltv_private::Initialize( class ltv  *self )
 {
     long		status = 0;
     zip_type_image     root_image;
@@ -487,8 +486,8 @@ ltv::Update( )
     class ltv* self=this;
     IN(ltv_Update);
     if ( ForegroundPane == NULL ) {
-	Initialize( this );
-	Show_Background( this );
+	ltv_private::Initialize( this );
+	ltv_private::Show_Background( this );
     }
     OUT(ltv_Update);
 }
@@ -520,40 +519,40 @@ ltv::Hit( enum view_MouseAction action, long  x , long  y , long clicks )
 	switch ( action )
 	{
 	    case view_LeftDown:
-		Clear_Chain_Names( this );
+		ltv_private::Clear_Chain_Names( this );
 	    case view_LeftMovement:
 	    case view_LeftUp:
 		if ( Building )
 		{ DEBUG(Building);
-		Build_Chain( this, action, x, y, clicks );
+		ltv_private::Build_Chain( this, action, x, y, clicks );
 		}
 		else
 		{ DEBUG(NotBuilding);
-		Passivate( this, end_code );
+		ltv_private::Passivate( this, end_code );
 		if ( Modifying  ||  (action == view_LeftDown  &&  
 				     (Figure = (ZipView)->Which_Pane_Figure(  x, y, ForegroundPane ))) )
 		{ DEBUGst(Figure-name, Figure->zip_figure_name);
-		Modify_Chain( this, action, x, y, clicks );
+		ltv_private::Modify_Chain( this, action, x, y, clicks );
 		}
 		else
 		{
 		    (ZipView)->Announce(  " " );
-		    Track_Enclosure( this, action, x, y, clicks );
+		    ltv_private::Track_Enclosure( this, action, x, y, clicks );
 		}
 		}
 		if ( Figure  &&  !Building )
 		{
-		    Activate( this, delete_code );
-		    Activate( this, rename_code );
+		    ltv_private::Activate( this, delete_code );
+		    ltv_private::Activate( this, rename_code );
 		}
 		else
 		{
-		    Passivate( this, delete_code );
-		    Passivate( this, rename_code );
+		    ltv_private::Passivate( this, delete_code );
+		    ltv_private::Passivate( this, rename_code );
 		}
 		break;
 	    case view_RightDown:
-		Cancel_Enclosure( this );
+		ltv_private::Cancel_Enclosure( this );
 		(ZipView)->Initiate_Panning(  ForegroundPane, x, y, 0 );
 		break;
 	    case view_RightMovement:
@@ -570,7 +569,7 @@ ltv::Hit( enum view_MouseAction action, long  x , long  y , long clicks )
 		    }
 		    else  (ZipView)->Clear_Pane(  ForegroundPane );
 		    (ZipView)->Pan_Pane(  ForegroundPane, x_delta, -y_delta );
-		    Show_Background( this );
+		    ltv_private::Show_Background( this );
 		}
 		(ZipView )->Use_Normal_Pane_Cursors( );
 		break;
@@ -583,8 +582,7 @@ ltv::Hit( enum view_MouseAction action, long  x , long  y , long clicks )
     return  hit;
 }
 
-static
-void Build_Chain( class ltv *self, enum view_MouseAction action, long	x , long y , long clicks )
+void ltv_private::Build_Chain( class ltv *self, enum view_MouseAction action, long	x , long y , long clicks )
 {
     long		      X, Y, status = 0;
     long neighbor = 0;
@@ -679,8 +677,8 @@ void Build_Chain( class ltv *self, enum view_MouseAction action, long	x , long y
 }
 
  /*=========*/
-static int
-Which_Figure_Point( class ltv	*self, zip_type_figure figure, zip_type_pane  pane, zip_type_pixel x , zip_type_pixel y )
+int
+ltv_private::Which_Figure_Point( class ltv	*self, zip_type_figure figure, zip_type_pane  pane, zip_type_pixel x , zip_type_pixel y )
 {
     long		      p;
     static class zipobject    *PO;
@@ -699,8 +697,7 @@ Which_Figure_Point( class ltv	*self, zip_type_figure figure, zip_type_pane  pane
 }
 
 
-static
-void Modify_Chain( class ltv *self, enum view_MouseAction action, long	 x , long y , long clicks )
+void ltv_private::Modify_Chain( class ltv *self, enum view_MouseAction action, long	 x , long y , long clicks )
 {
     long		      X, Y, status = 0;
     static long		      down_x, down_y, down_X, down_Y, moved;
@@ -760,8 +757,7 @@ void Modify_Chain( class ltv *self, enum view_MouseAction action, long	 x , long
     OUT(Modify_Chain);
 }
 
-static
-void Track_Enclosure( class ltv *self, enum view_MouseAction action, long x , long		       y , long clicks )
+void ltv_private::Track_Enclosure( class ltv *self, enum view_MouseAction action, long x , long		       y , long clicks )
 {
     IN(Track_Enclosure);
     Clear_Enclosure( self );
@@ -810,8 +806,7 @@ void Track_Enclosure( class ltv *self, enum view_MouseAction action, long x , lo
     OUT(Track_Enclosure);
 }
 
-static
-void Cancel_Enclosure( class ltv  *self )
+void ltv_private::Cancel_Enclosure( class ltv  *self )
 {
     IN(Cancel_Enclosure);
     Clear_Enclosure( self );
@@ -820,24 +815,21 @@ void Cancel_Enclosure( class ltv  *self )
     OUT(Cancel_Enclosure);
 }
 
-static
-void Clear_Enclosure( class ltv *self )
+void ltv_private::Clear_Enclosure( class ltv *self )
 {
     IN(Clear_Enclosure);
     Invert_Enclosure( self );
     OUT(Clear_Enclosure);
 }
 
-static
-void Draw_Enclosure( class ltv	 *self )
+void ltv_private::Draw_Enclosure( class ltv	 *self )
 {
     IN(Draw_Enclosure);
     Invert_Enclosure( self );
     OUT(Draw_Enclosure);
 }
 
-static
-void Invert_Enclosure( class ltv *self )
+void ltv_private::Invert_Enclosure( class ltv *self )
 {
     IN(Invert_Enclosure);
     if ( EnclosureExposed )
@@ -856,8 +848,7 @@ void Invert_Enclosure( class ltv *self )
     either a Start or and End Point of that neighbor.
 
 \*******************************************************************/
-static
-long Neighbor( class ltv *self, zip_type_pixel x , zip_type_pixel y, zip_type_figure    *figure, zip_type_point *X , zip_type_point *Y, long *point )
+long ltv_private::Neighbor( class ltv *self, zip_type_pixel x , zip_type_pixel y, zip_type_figure    *figure, zip_type_point *X , zip_type_point *Y, long *point )
 {
     long		      status = false;
 
@@ -890,8 +881,8 @@ long Neighbor( class ltv *self, zip_type_pixel x , zip_type_pixel y, zip_type_fi
     return status;
 }
 
-static void
-Normalize_Command( class ltv *self )
+void
+ltv_private::Normalize_Command( class ltv *self )
 {
     IN(Normalize_Command);
     Cancel_Enclosure( self );
@@ -902,8 +893,8 @@ Normalize_Command( class ltv *self )
     OUT(Normalize_Command);
 }
 
-static void
-Zoom_In_Command( class ltv *self )
+void
+ltv_private::Zoom_In_Command( class ltv *self )
 {
     IN(Zoom_In_Command);
     Cancel_Enclosure( self );
@@ -916,8 +907,8 @@ Zoom_In_Command( class ltv *self )
     OUT(Zoom_In_Command);
 }
 
-static void
-Zoom_Out_Command( class ltv *self )
+void
+ltv_private::Zoom_Out_Command( class ltv *self )
 {
     IN(Zoom_Out_Command);
     Cancel_Enclosure( self );
@@ -934,8 +925,8 @@ Zoom_Out_Command( class ltv *self )
     OUT(Zoom_Out_Command);
 }
 
-static void
-Scale_Pane( class ltv *self, float  scale )
+void
+ltv_private::Scale_Pane( class ltv *self, float  scale )
 {
 /*  float	       x, y; */
 
@@ -961,31 +952,31 @@ Scale_Pane( class ltv *self, float  scale )
     OUT(Scale_Pane);
 }
 
-static void
-Scale_Normal_Command( class ltv  *self )
+void
+ltv_private::Scale_Normal_Command( class ltv  *self )
 {
     (ZipView)->Set_Pane_Scale(  ForegroundPane, 1.0 );
     Scale_Pane( self, 0.0 );
 }
 
-static void
-Scale_Smaller_Command( class ltv *self )
+void
+ltv_private::Scale_Smaller_Command( class ltv *self )
 {  Scale_Pane( self, -0.01 );  }
 
-static void
-Scale_Smaller_10_Command( class ltv *self )
+void
+ltv_private::Scale_Smaller_10_Command( class ltv *self )
 {  Scale_Pane( self, -0.1 );  }
 
-static void
-Scale_Larger_Command( class ltv *self )
+void
+ltv_private::Scale_Larger_Command( class ltv *self )
     {  Scale_Pane( self, 0.01 );  }
 
-static void
-Scale_Larger_10_Command( class ltv *self )
+void
+ltv_private::Scale_Larger_10_Command( class ltv *self )
     {  Scale_Pane( self, 0.1 );  }
 
-static void
-Scale_Half_Command( class ltv  *self )
+void
+ltv_private::Scale_Half_Command( class ltv  *self )
 {
     IN(Scale_Half_Command);
     (ZipView)->Set_Pane_Scale(  ForegroundPane,
@@ -994,8 +985,8 @@ Scale_Half_Command( class ltv  *self )
     OUT(Scale_Half_Command);
 }
 
-static void
-Scale_Double_Command( class ltv  *self )
+void
+ltv_private::Scale_Double_Command( class ltv  *self )
 {
     IN(Scale_Double_Command);
     (ZipView)->Set_Pane_Scale(  ForegroundPane,
@@ -1004,8 +995,8 @@ Scale_Double_Command( class ltv  *self )
     OUT(Scale_Double_Command);
 }
 
-static void
-Pan_Foreground_Command( class ltv *self )
+void
+ltv_private::Pan_Foreground_Command( class ltv *self )
 {
     IN(Pan_Foreground_Command);
     (Menu)->SetMask(  ((Menu )->GetMask( ) & ~pan_foreground) | pan_together );
@@ -1014,8 +1005,8 @@ Pan_Foreground_Command( class ltv *self )
     OUT(Pan_Foreground_Command);
 }
 
-static void
-Pan_Together_Command( class ltv *self )
+void
+ltv_private::Pan_Together_Command( class ltv *self )
 {
     IN(Pan_Together_Command);
     Cancel_Enclosure( self );
@@ -1025,8 +1016,8 @@ Pan_Together_Command( class ltv *self )
     OUT(Pan_Together_Command);
 }
 
-static void
-Fit_Command( class ltv *self )
+void
+ltv_private::Fit_Command( class ltv *self )
 {
     float	      scale, EW, EH;
     zip_type_point     x, y;
@@ -1050,8 +1041,7 @@ Fit_Command( class ltv *self )
     OUT(Fit_Command);
 }
 
-static
-void Show_Chain_Names( class ltv *self )
+void ltv_private::Show_Chain_Names( class ltv *self )
 {
     char			     *left_name, *right_name;
 
@@ -1069,8 +1059,7 @@ void Show_Chain_Names( class ltv *self )
     OUT(Show_Chain_Names);
 }
 
-static
-void Clear_Chain_Names( class ltv  *self )
+void ltv_private::Clear_Chain_Names( class ltv  *self )
 {
     IN(Clear_Chain_Names);
     if ( LeftNameItem )
@@ -1081,8 +1070,7 @@ void Clear_Chain_Names( class ltv  *self )
 OUT(Clear_Chain_Names);
 }
 
-static
-void Begin_Chain_Button( class ltv  *self, class suite   *suite, struct suite_item     *item, long type, enum view_MouseAction  action, long x, long y, long clicks )
+void ltv_private::Begin_Chain_Button( class ltv  *self, class suite   *suite, struct suite_item     *item, long type, enum view_MouseAction  action, long x, long y, long clicks )
 {
     IN(Begin_Chain_Button);
     if ( type == suite_ItemObject  &&  action == view_LeftUp )
@@ -1100,8 +1088,7 @@ void Begin_Chain_Button( class ltv  *self, class suite   *suite, struct suite_it
     OUT(Begin_Chain_Button);   
 }
 
-static
-void End_Chain_Button( class ltv *self, class suite  *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks )
+void ltv_private::End_Chain_Button( class ltv *self, class suite  *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks )
 {
     IN(End_Chain_Button);
     if ( Building  &&  type == suite_ItemObject  &&  action == view_LeftUp )
@@ -1112,8 +1099,7 @@ void End_Chain_Button( class ltv *self, class suite  *suite, struct suite_item	 
     OUT(End_Chain_Button);  
 }
 
-static
-void End_Chain( class ltv  *self )
+void ltv_private::End_Chain( class ltv  *self )
 {
     IN(End_Chain);
     Passivate( self, end_code );
@@ -1126,8 +1112,7 @@ void End_Chain( class ltv  *self )
     OUT(End_Chain);
 }
 
-static
-void Delete_Chain_Button( class ltv *self, class suite  *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks )
+void ltv_private::Delete_Chain_Button( class ltv *self, class suite  *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks )
 {
     IN(Delete_Chain_Button);
     Building = false;
@@ -1148,8 +1133,8 @@ void Delete_Chain_Button( class ltv *self, class suite  *suite, struct suite_ite
     OUT(Delete_Chain_Button);
 }
 
-static long
-Rename_Exception( class ltv  *self, char *facility, long  status  )
+long
+ltv_private::Rename_Exception( class ltv  *self, char *facility, long  status  )
 {
     char				      msg[512];
     char				      chain_name[512];
@@ -1184,8 +1169,7 @@ Rename_Exception( class ltv  *self, char *facility, long  status  )
      return  0;
 }
 
-static
-void Rename_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks )
+void ltv_private::Rename_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks )
 {
     IN(Rename_Chain_Button);
     if ( type == suite_ItemObject  &&  action == view_LeftUp )
@@ -1196,8 +1180,7 @@ void Rename_Chain_Button( class ltv *self, class suite *suite, struct suite_item
     OUT(Rename_Chain_Button); 
 }
 
-static
-void Left_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks )
+void ltv_private::Left_Chain_Button( class ltv *self, class suite *suite, struct suite_item	      *item, long type, enum view_MouseAction action, long x, long y, long clicks )
 {
     IN(Left_Chain_Button);
     if ( type == suite_ItemObject  &&  action == view_LeftUp )
@@ -1209,8 +1192,7 @@ void Left_Chain_Button( class ltv *self, class suite *suite, struct suite_item	 
     OUT(Left_Chain_Button); 
 }
 
-static
-void Right_Chain_Button( class ltv *self, class suite	  *suite, struct suite_item	      *item, long type, enum view_MouseAction   action, long x, long y, long clicks )
+void ltv_private::Right_Chain_Button( class ltv *self, class suite	  *suite, struct suite_item	      *item, long type, enum view_MouseAction   action, long x, long y, long clicks )
 {
     IN(Right_Chain_Button);
     if ( type == suite_ItemObject  &&  action == view_LeftUp )
@@ -1222,8 +1204,7 @@ void Right_Chain_Button( class ltv *self, class suite	  *suite, struct suite_ite
     OUT(Right_Chain_Button); 
 }
 
-static
-void Name_Chain( class ltv  *self )
+void ltv_private::Name_Chain( class ltv  *self )
 {
     char			     *reply, *left_name, *right_name;
 
@@ -1251,8 +1232,7 @@ void Name_Chain( class ltv  *self )
     OUT(Name_Chain);
 }
 
-static
-void Split_Chain_Name( class ltv *self, zip_type_figure  figure, char		     **right_name, char **left_name  )
+void ltv_private::Split_Chain_Name( class ltv *self, zip_type_figure  figure, char		     **right_name, char **left_name  )
 {
     static char		      left[257], right[257],
     full[257], *comma;
@@ -1269,19 +1249,18 @@ void Split_Chain_Name( class ltv *self, zip_type_figure  figure, char		     **ri
     }
 }
 
-static
-void Passivate( class ltv *self, long  datum )
+void ltv_private::Passivate( class ltv *self, long  datum )
 {
     (Buttons)->PassivateItem(  (Buttons)->ItemOfDatum(  datum ) );
 }
 
-static void Activate( class ltv	      *self, long		       datum )
+void ltv_private::Activate( class ltv	      *self, long		       datum )
 {
     (Buttons)->ActivateItem(  (Buttons)->ItemOfDatum(  datum ) );
 }
 
-static void
-Lighten_Background_Command( class ltv  *self )
+void
+ltv_private::Lighten_Background_Command( class ltv  *self )
 {
     IN(Lighten_Background_Command);
     if ( BackgroundLight == 0 ) {
@@ -1299,8 +1278,7 @@ Lighten_Background_Command( class ltv  *self )
     OUT(Lighten_Background_Command);
 }
 
-static
-void Lighten_Background( class ltv *self )
+void ltv_private::Lighten_Background( class ltv *self )
 {
     if ( WMWM )
 	(self)->SetTransferMode(  graphic_WHITE );
@@ -1314,8 +1292,8 @@ void Lighten_Background( class ltv *self )
 	Draw_Enclosure( self );
 }
 
-static void
-Darken_Background_Command( class ltv	*self )
+void
+ltv_private::Darken_Background_Command( class ltv	*self )
 {
     IN(Darken_Background_Command);
     BackgroundLight = 0;
@@ -1325,8 +1303,8 @@ Darken_Background_Command( class ltv	*self )
     OUT(Darken_Background_Command);
 }
 
-static void
-Hide_Background_Command( class ltv  *self )
+void
+ltv_private::Hide_Background_Command( class ltv  *self )
 {
     IN(Hide_Background_Command);
     BackgroundExposed = false;
@@ -1339,8 +1317,8 @@ Hide_Background_Command( class ltv  *self )
     OUT(Hide_Background_Command);
 }
 
-static void
-Expose_Background_Command( class ltv *self )
+void
+ltv_private::Expose_Background_Command( class ltv *self )
 {
     IN(Expose_Background_Command);
     BackgroundExposed = true;
@@ -1352,8 +1330,7 @@ Expose_Background_Command( class ltv *self )
     OUT(Expose_Background_Command);
 }
 
-static
-void Show_Background( class ltv *self )
+void ltv_private::Show_Background( class ltv *self )
 {
     long		      height = (Height - ButtonHeight) - BackgroundTopY;
 
@@ -1373,8 +1350,8 @@ void Show_Background( class ltv *self )
     OUT(Show_Background);
 }
 
-static void
-Save_Command( class ltv *self )
+void
+ltv_private::Save_Command( class ltv *self )
 {
     char			      msg[512];
     long		      status;
@@ -1389,8 +1366,8 @@ Save_Command( class ltv *self )
     OUT(Save_Command);
 }
 
-static void
-Print_Command( class ltv  *self )
+void
+ltv_private::Print_Command( class ltv  *self )
 {
     char			      msg[512];
     long		      status;
@@ -1417,8 +1394,8 @@ Print_Command( class ltv  *self )
     OUT(Print_Command);
 }
 
-static void
-Quit_Command( class ltv  *self )
+void
+ltv_private::Quit_Command( class ltv  *self )
 {
     static const char	     * const choices[] =
     {"Cancel", "Save", "Save & Quit", "Quit Anyway", 0};
@@ -1452,8 +1429,8 @@ Quit_Command( class ltv  *self )
     OUT(Quit_Command);
 }
 
-static void
-Debug_Command( class ltv *self )
+void
+ltv_private::Debug_Command( class ltv *self )
 {
     IN(Debug_Command);
     debug = !debug;
@@ -1464,64 +1441,63 @@ Debug_Command( class ltv *self )
 
 static struct bind_Description	      menu[] = {
 {   "ltv-save",		"\033s",    0,	    "Save~10",		0,  0,
-    (proctable_fptr) Save_Command,		"Save",		    NULL},
+    (proctable_fptr) ltv_private::Save_Command,		"Save",		    NULL},
 {   "ltv-print",		"\033p",    0,	    "Print~20",		0,  0,
-    (proctable_fptr) Print_Command,		"Print",	    NULL},
+    (proctable_fptr) ltv_private::Print_Command,		"Print",	    NULL},
 {   "ltv-quit",		"\033q",    0,	    "Quit~99",		0,  0,
-    (proctable_fptr) Quit_Command,		"Quit",		    NULL},
+    (proctable_fptr) ltv_private::Quit_Command,		"Quit",		    NULL},
 {   "ltv-debug",		"\033z",    0,	    "DEBUG~88",		0,  0,
-    (proctable_fptr) Debug_Command,		"Debug",	    NULL},
+    (proctable_fptr) ltv_private::Debug_Command,		"Debug",	    NULL},
 
 {   "ltv-hide-background",	"\033x",    0,	    "Background~20,Hide",0,  hide_background,
-    (proctable_fptr) Hide_Background_Command,	"Hide Background",  NULL},
+    (proctable_fptr) ltv_private::Hide_Background_Command,	"Hide Background",  NULL},
 {   "ltv-expose-background",	"\033y",    0,	    "Background~20,Expose",0,  expose_background,
-    (proctable_fptr) Expose_Background_Command,	"Expose Background", NULL},
+    (proctable_fptr) ltv_private::Expose_Background_Command,	"Expose Background", NULL},
 {   "ltv-lighten-background","\033l",    0,	    "Background~20,Lighten",0,  0,
-    (proctable_fptr) Lighten_Background_Command,	"Lighten Background", NULL},
+    (proctable_fptr) ltv_private::Lighten_Background_Command,	"Lighten Background", NULL},
 {   "ltv-darken-background",	"\033d",    0,	    "Background~20,Darken",0,  0,
-    (proctable_fptr) Darken_Background_Command,	"Darken Background", NULL},
+    (proctable_fptr) ltv_private::Darken_Background_Command,	"Darken Background", NULL},
 
 {   "ltv-normalize",		"\033b",    0,	    "Pane~30,Normalize~00",0,  0,
-    (proctable_fptr) Normalize_Command,		"Normalize",	    NULL},
+    (proctable_fptr) ltv_private::Normalize_Command,		"Normalize",	    NULL},
 {   "ltv-zoom_in",		"\033b",    0,	    "Pane~30,Zoom-In~10",	0,  0,
-    (proctable_fptr) Zoom_In_Command,		"Zoom In",	    NULL},
+    (proctable_fptr) ltv_private::Zoom_In_Command,		"Zoom In",	    NULL},
 {   "ltv-zoom_out",		"\033b",    0,	    "Pane~30,Zoom-Out~11",	0,  0,
-    (proctable_fptr) Zoom_Out_Command,		"Zoom Out",	    NULL},
+    (proctable_fptr) ltv_private::Zoom_Out_Command,		"Zoom Out",	    NULL},
 {   "ltv-pan_foreground",	"\033b",    0,	    "Pane~30,Pan Foreground~30",0,  pan_foreground,
-    (proctable_fptr) Pan_Foreground_Command,	"Pan Foreground",    NULL},
+    (proctable_fptr) ltv_private::Pan_Foreground_Command,	"Pan Foreground",    NULL},
 {   "ltv-pan_together",	"\033b",    0,	    "Pane~30,Pan Together~30",	0,  pan_together,
-    (proctable_fptr) Pan_Together_Command,	"Pan Together",	    NULL},
+    (proctable_fptr) ltv_private::Pan_Together_Command,	"Pan Together",	    NULL},
 {   "ltv-fit",		"\033b",    0,	    "Pane~30,Fit~40",	0,  0,
-    (proctable_fptr) Fit_Command,		"Fit",    NULL},
+    (proctable_fptr) ltv_private::Fit_Command,		"Fit",    NULL},
 
 {   "ltv-scale-normal",	"\033s0",   0,	    "Pane Scale~40,Normal~00",0, 0,
-    (proctable_fptr) Scale_Normal_Command,	"...",		    NULL },
+    (proctable_fptr) ltv_private::Scale_Normal_Command,	"...",		    NULL },
 {   "ltv-scale-100s",	"\033ssh",  0,	    "Pane Scale~40,100th Smaller~10",0,0,
-    (proctable_fptr) Scale_Smaller_Command,	"...",		    NULL },
+    (proctable_fptr) ltv_private::Scale_Smaller_Command,	"...",		    NULL },
 {   "ltv-scale-10s",		"\033sst",  0,	    "Pane Scale~40,10th Smaller~11", 0,0,
-    (proctable_fptr) Scale_Smaller_10_Command,	"...",		    NULL },
+    (proctable_fptr) ltv_private::Scale_Smaller_10_Command,	"...",		    NULL },
 {   "ltv-scale-half",        "\033sh",   0,	    "Pane Scale~40,Half Size~12", 0,0,
-    (proctable_fptr) Scale_Half_Command,		"...",		    NULL },
+    (proctable_fptr) ltv_private::Scale_Half_Command,		"...",		    NULL },
 {   "ltv-scale-100l",        "\033slh",  0,	    "Pane Scale~40,100th Larger~20", 0, 0,
-    (proctable_fptr) Scale_Larger_Command,	"...",		     NULL },
+    (proctable_fptr) ltv_private::Scale_Larger_Command,	"...",		     NULL },
 {   "ltv-scale-10l",		"\033slt",  0,	    "Pane Scale~40,10th Larger~21",  0, 0,
-    (proctable_fptr) Scale_Larger_10_Command,	"...",		    NULL },
+    (proctable_fptr) ltv_private::Scale_Larger_10_Command,	"...",		    NULL },
 {   "ltv-scale-double",	"\033sd",   0,	    "Pane Scale~40,Double Size~22",  0,0,
-    (proctable_fptr) Scale_Double_Command,	"...",		    NULL },
+    (proctable_fptr) ltv_private::Scale_Double_Command,	"...",		    NULL },
 NULL
 };
 
 
-static
-void Build_Menu()
+void ltv_private::Build_Menu()
 {
     IN(Build_Menu);
     bind::BindList( ::menu, class_keymap, class_menulist, &ltv_ATKregistry_  );
     OUT(Build_Menu);
 }
 
-static long
-Exceptions( class ltv *self, char *facility, long  status  )
+long
+ltv_private::Exceptions( class ltv *self, char *facility, long  status  )
 {
     char			      msg[512];
 

@@ -400,7 +400,7 @@ void runbutton::SetCommandString(const char *cmd)
 {
     if (commandString)
 	free(commandString);
-    commandString = NewString((char *)cmd);
+    commandString = strdup((char *)cmd);
     if (!has_label) {
 	// We do this as a convenience.
 	SetLabel(0, commandString);

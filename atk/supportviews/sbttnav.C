@@ -600,7 +600,7 @@ static void RenameProc(class sbttnav  *self, long  rock)
 	free(*g);
 	*g=h;
 	if(prefs->name!=NULL) free(prefs->name);
-	prefs->name=NewString(buf);
+	prefs->name=strdup(buf);
 	if(prefs->name!=NULL) AddGroupMenu(self, prefs, prio);
     }
     (self)->PostMenus( NULL);

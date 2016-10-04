@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtermulator
+ * @{ */
 #include <textview.H>
 class tmview: public  textview {
 public:
@@ -42,5 +44,5 @@ public:
 	const char *title;
 	int height,width;
 };
-
+/** @} */
 #endif /* _tmview_H_ */

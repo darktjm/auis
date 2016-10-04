@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libhelp libhelp.so
+/** \addtogroup libhelp Object help
  *  A dynamically loadable ATK class file.  Contains help, hlptextview,
  *  helpdb, helpapp.
  * @{ */

@@ -385,6 +385,19 @@ file in your home directory.  You can then use this preference to override
 that file when needed.)
 
 }}
+\section{Modern shell compatibility}
+
+
+\leftindent{In order to use this with modern systems, you need to first 
+turn coloring off.  If you set DIR_COLORS, for example, turn it off if 
+$TERM is wm.  Also turn off any ANSI escape sequences in the 
+prompt(s).  In addition, Typescript is not compatible with zsh's zle or 
+prompt_cr, so turn them off if $TERM is wm:
+
+
+\indent{\typewriter{test wm = "$TERM" && unsetopt zle prompt_cr}}}
+
+
 \section{Related tools}  \
 
 

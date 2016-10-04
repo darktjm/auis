@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libsuite libsuite.so
+/** \addtogroup libsuite Object suite
  *  A dynamically loadable ATK class file.  Contains suite, suitecv,
  *  suiteev, suitetapp, suitex1app, vector.
  * @{ */

@@ -4,7 +4,7 @@
  *         Copyright IBM Corporation 1991 - All Rights Reserved           *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-/** \addtogroup libtimeoday libtimeoday.so
+/** \addtogroup libtimeoday Object timeoday
  *  A dynamically loadable ATK class file.  Contains timeoday, timeodayview,
  *  writestamp, writestampview.
  * @{ */

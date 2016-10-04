@@ -4,7 +4,7 @@
  *         Copyright IBM Corporation 1991 - All Rights Reserved           *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-/** \addtogroup libclock libclock.so
+/** \addtogroup libclock Object clock
  *  A dynamically loadable ATK class file.  Contains clock, clockview.
  * @{ */
 /* #include <time.h> */

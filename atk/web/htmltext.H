@@ -1,6 +1,6 @@
 #ifndef _htmltext_H_
 #define _htmltext_H_
-/** \addtogroup libhtmltext libhtmltext.so
+/** \addtogroup libhtmltext Object htmltext
  *  A dynamically loadable ATK class file.  Contains htmltext, htmltextview,
  *  attlist, ez2htmlapp, hidden, hiddenview, hr, hrv, htablev, htmlenv,
  *  htmlform, htmlimagev, urlbutton, urlbuttonview, wbuttonv, webapp,

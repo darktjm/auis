@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libgsearch libgsearch.so
+/** \addtogroup libgsearch Object gsearch
  *  A dynamically loadable ATK class file.  Contains gsearch.
  * @{ */
 #include <ATK.H>

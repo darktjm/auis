@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libfad libfad.so
+/** \addtogroup libfad Object fad
  *  A dynamically loadable ATK class file.  Contains fad, fadview.
  * @{ */
 #ifndef FAD_DEFS

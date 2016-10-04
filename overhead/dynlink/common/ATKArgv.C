@@ -52,7 +52,7 @@ void ATKArgv::InsertArguments(char **args, int pos, int count) {
     // Add the arguments.
     argc+=count;
     while(count>0 && *args) {
-	argv[pos]=NewString(*args);
+	argv[pos]=strdup(*args);
 	if(argv[pos]==NULL) {
 	    error=1;
 	    return;

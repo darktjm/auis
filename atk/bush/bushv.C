@@ -1166,7 +1166,7 @@ PerformPrint( class bushv	 *self )
       struct proctable_Entry *pe = proctable::Lookup("rchprint-doprint");
       if (pe) {
 	  void (*doprint)(view *, view *, char *, int) = (void (*)(view *, view *, char *, int))(pe->proc);
-	  doprint(self, self->entry_view, NewString(fname), 1);
+	  doprint(self, self->entry_view, strdup(fname), 1);
       } else
 	  Announce("Cannot load rchprint dialog.");
 #else

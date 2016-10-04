@@ -10,10 +10,6 @@
 	Copyright Carnegie Mellon University 1992, 1994 - All rights reserved
 */
 
-#ifndef NULL
-#define NULL 0UL
-#endif
-
 /* a semantic action routine is the C code in braces, {...}, in grammar rules.
 	Actions may terminate with the special macros defined here.	
 	parser_CLEARIN and parser_ERROROK have meaning primarily in 

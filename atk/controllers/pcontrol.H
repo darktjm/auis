@@ -8,7 +8,7 @@
 
 /* user code ends here for HeaderInfo */
 
-/** \addtogroup libpcontrol libpcontrol.so
+/** \addtogroup libpcontrol Object pcontrol
  *  A dynamically loadable ATK class file.  Contains pcontrol, calccon,
  *  helpcon.
  * @{ */

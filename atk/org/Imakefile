@@ -3,16 +3,16 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-OBJS = org.o orgv.o orgapp.o
-HFILES = org.H orgv.H orgapp.H	 
+OBJS = org.o orgv.o
+HFILES = org.H orgv.H
 
 DependTarget()
 
 NormalObjectRule()
 NormalATKRule()
 
-DynamicMultiObjectWithExports(org,orgv orgapp,$(OBJS),$(LIBS),,)
-InstallDynamicObjectWithExports(org,orgv orgapp,$(FULLATKDLIBDIR))
+DynamicMultiObjectWithExports(org,orgv,$(OBJS),$(LIBS),,)
+InstallDynamicObjectWithExports(org,orgv,$(FULLATKDLIBDIR))
 
 InstallClassFiles($(HFILES))
 

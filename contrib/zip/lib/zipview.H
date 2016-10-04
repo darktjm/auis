@@ -207,7 +207,7 @@ public:
   virtual class fontdesc * Select_Contextual_Figure_Font( zip_type_figure figure );
 
   /****  Following Facilities For Sub-Class (Internal) Usage Only  ****/
-
+// protected:
   virtual class graphic * Define_Graphic( class fontdesc *font, unsigned char pattern );
   virtual void Set_Clip_Area( zip_type_pane pane, long left, long top, long width, long height );
   virtual void Set_Pane_Clip_Area( zip_type_pane pane );
@@ -233,6 +233,7 @@ public:
   virtual zip_type_stream Within_Which_Stream( long x , long	y );
 
 
+public:
   inline boolean Figure_Exposed(zip_type_figure figure)	{ return ((figure)->zip_figure_visibility == zip_figure_exposed); }
   inline boolean Figure_Hidden(zip_type_figure figure)		{ return ((figure)->zip_figure_visibility == zip_figure_hidden); }
 
@@ -315,6 +316,7 @@ public:
   inline void Reset_Pane_Exception_Handler() 
     {(this)->pane_exception_handler = NULL;}
 
+// private:
   class zip			*data_object;
   class zipedit			*edit_object;
   class zipprint		*print_object;

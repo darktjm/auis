@@ -79,6 +79,40 @@ version of the datastream interpretation.
 } while(0)
 
 
+struct USString {
+	char *s;
+	int used;	/* length of string, excluding trailing \0 */
+	int avail;	/* one less than size of *s */
+};
+
+struct ScribeState {
+    int	statecode;		/* current state */
+    int	previous_state;	/* last state, before \ processing */
+    int 	writecount;		/* # chars written on current line */
+
+    /* The following are only used by Version 10 and higher */
+    int	begindatacount;	/* depth in dataobject tree. */
+    struct USString linefrag;	/* Line buffer. */
+    struct USString keyword;	/* Keyword buffer. */
+    struct USString tempbuf;	/* Buffer for {} contents. Used to name views */
+    short lmargin;	/* left margin of current line */
+    short rmargin;	/* right margin of current line */
+    short justify;	/* justification for this line */
+    short indent;	/* indentation for this line */
+    short specials;	/* count of extra characters needed at end of line */
+    short face;		/* face state from previous line */
+    short newpara;    /* flag: indicates that the first line of the paragraph is yet to be printed */
+    struct StateVector *vector;	/* Stack of style states kept as a linked list */
+
+    /* fields for dataobject processing */
+    const char *((*dobjrcvr)(struct ScribeState *, char));	/* function to process characters */
+    long oid;  		/* object id from \begindata */
+    short sawcomma;  	/* used in v10StateBeginData */
+    int rcvrstate;  	/* secondary state maintained by rcvr */
+    void *objdata;  	/* pointer to struct for the object */
+
+};
+
 struct StateVector {
     short lmargin;
     short rmargin;
@@ -542,7 +576,7 @@ gofigRcvr(struct ScribeState *state, char ch)
 			if (braces)  SAPPEND(&state->tempbuf, ">\n");
 
 			gofigFree(state);
-		}	return NewString(STEXT(&state->tempbuf));
+		}	return strdup(STEXT(&state->tempbuf));
 		} /* end switch(ch) */
 		break;
 	case RcvrError: 
@@ -561,7 +595,7 @@ gofigRcvr(struct ScribeState *state, char ch)
 					"and could not be converted to ASCII.]");
 			gofigFree(state);
 
-			return NewString(STEXT(&state->tempbuf));
+			return strdup(STEXT(&state->tempbuf));
 		case '\n':
 			SCLEAR(&state->tempbuf);
 			break;
@@ -1430,125 +1464,6 @@ UnScribeAbort(int code, struct ScribeState **refstate)
 	}
     }
     return 0;
-}
-
-
-/* return the number of characters written, or negative error value 
-*/
-	int 
-PrintMaybeFoldQuotingFormatting(FILE *fp, const char *text, const char *format, int len, int DoFold)
-{ 
-    int whichformat;
-    const char *s;
-    int numWritten, WasNL, Buffered, Column, CurrentLineMax;
-    char *newNL, oldC, BreakCode;
-    char LineBuf[2*MAXLONGLINE + 10], *LBP;
-
-    if (!format || !*format) {
-	whichformat = -1;
-    } else {
-	whichformat = usVersion(format);
-    }
-    CurrentLineMax = (DoFold ? LINEMAX : MAXLONGLINE);
-    numWritten = 0; LBP = LineBuf;
-    WasNL = 1; Buffered = Column = 0;
-    for (s = text; *s && len--; ++s) {
-	switch(*s) {
-	    case '\\': case '{': case '}':	/* sometimes need quoting */
-		if (whichformat == Version10 || whichformat == Version12)
-			{*LBP++ = '\\'; ++Buffered;}
-		goto NormalChar;
-	    case '@':			/* sometimes needs quoting */
-		if (whichformat == Version1 || whichformat == Version2)
-			{*LBP++ = '@'; ++Buffered;}
-		goto NormalChar;
-	    case '\n':
-		if (WasNL == 0) {		/* First newline in a sequence */
-		    *LBP++ = '\0';	/* Unbuffer what's been buffered. */
-		    if (fputs(LineBuf, fp) == EOF) return -1;
-		    numWritten += Buffered;
-		    LBP = LineBuf; Buffered = Column = 0;
-		    switch (whichformat) {	/* Handle the end-of-line as format dictates. */
-		case Version1:	/* Scribe newline convention */
-			if (putc('@', fp) == EOF) return -1;
-			if (putc('*', fp) == EOF) return -1;
-			numWritten += 2;
-			break;
-		case Version2:
-		case Version12:	/* add one NL to a sequence of newlines */
-			if (putc('\n', fp) == EOF) return -1;
-			++numWritten;
-			break;
-		case Version10:	/* no special treatment (BOGUS!) */
-		default:		/* if not formatted, do nothing. */
-			break;
-		    }
-		}
-		if (putc('\n', fp) == EOF) return -1;	/* write the newline itself. */
-		++numWritten;
-		WasNL = 1;
-		break;
-	    default:  NormalChar:
-		*LBP++ = *s;
-		++Buffered;
-		if (*s == '\t') Column |= 07;	/* Hack for 8-character tab stops */
-		++Column;
-		if (Buffered >= CurrentLineMax || Column >= CurrentLineMax) {
-			*LBP = '\0';	/* Do newline processing in LineBuf. */
-			newNL = LBP - 1;
-			while (newNL > LineBuf && *newNL != ' ')
-				--newNL;
-			if (*newNL == ' ') { /* have a space to use */
-				while (*newNL == ' ') ++newNL;
-				if (whichformat < 0) --newNL;
-				BreakCode = 1;
-			} else {		/* no space at which to break it */
-				newNL = LBP;
-				BreakCode = 0;
-			}
-			oldC = *newNL;
-			*newNL = '\0';
-			if (fputs(LineBuf, fp) == EOF) return -1;
-			*newNL = oldC;
-			numWritten += (newNL - LineBuf);
-			if (BreakCode == 0) {	/* Trying to break a word in the middle */
-			    if (whichformat == Version12) {
-				if (fputs("\\\n", fp) == EOF) return -1;
-				numWritten += 2;
-			    }
-			} else {
-				while (*newNL == ' ') ++newNL;
-				if (putc('\n', fp) == EOF) return -1;
-				++numWritten;
-			}
-			strcpy(LineBuf, newNL);
-			Buffered = LBP - newNL;
-			LBP = &LineBuf[Buffered];
-			Column = 0;
-			for (newNL = LineBuf; newNL < LBP; ++newNL) {
-				if (*newNL == '\t') Column |= 07;
-				++Column;	/* Get column count straight */
-			}
-		}
-		WasNL = 0;
-		break;
-	}
-    }
-    if (Buffered > 0) {
-	*LBP++ = '\0';	/* Unbuffer what's been buffered. */
-	if (fputs(LineBuf, fp) == EOF) return -1;
-	numWritten += Buffered;
-    }
-    return numWritten;
-}
-
-
-/* return the number of characters written, or negative error value 
-*/
-	int 
-PrintQuotingFormatting(FILE *fp, const char *text, const char *format, int len)
-{ 
-    return PrintMaybeFoldQuotingFormatting(fp, text, format, len, 0);
 }
 
 

@@ -11,7 +11,7 @@
 	\begindata \enddata.  Contained is an avarset object.
 */
 
-/** \addtogroup libawidget libawidget.so
+/** \addtogroup libawidget Object awidget
  *  A statically loadable ATK class file.  Contains AWidget.  Also contains
  *  ASlot, ASlotInt, ASlotReal, ASlotString, ASlotFile, ASlotPtr, ASlotATK
  *  ASlotFunction, ASlotDataObj, ASlotFigure, ASlotFont, ASlotBool,

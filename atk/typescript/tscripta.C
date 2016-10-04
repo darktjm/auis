@@ -130,6 +130,7 @@ boolean typescriptapp::Start()
 	    }
 	}
     }
+    this->Fork(); // forking later loses control of children
     /* note: typescript::typescript closes df */
     this->ss = typescript::Create(this->argv,df,this->filemenu);
     if (ss == NULL)

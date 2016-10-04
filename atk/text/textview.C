@@ -1390,13 +1390,13 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 	    self->SetBackgroundColor(bgcolor, 0, 0, 0);
 	    if (self->cur_bgcolor)
 		free(self->cur_bgcolor);
-	    self->cur_bgcolor = NewString(bgcolor);
+	    self->cur_bgcolor = strdup(bgcolor);
 	    self->force = TRUE;
 	}
 	fgcolor = globalStyle->GetAttribute("color");
 	if (fgcolor && (self->cur_fgcolor == NULL || strcmp(fgcolor, self->cur_fgcolor) != 0)) {
 	    /* Set foreground color now so the cursor will pick it up. */
-	    self->cur_fgcolor = NewString(fgcolor);
+	    self->cur_fgcolor = strdup(fgcolor);
 	    self->SetForegroundColor(fgcolor, 0, 0, 0);
 	}
     }
@@ -1411,7 +1411,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 	    sprintf(buf, "#%04lx%04lx%04lx", r, g, b);
 	    s = buf;
 	}
-	self->cur_bgcolor = NewString(s);
+	self->cur_bgcolor = strdup(s);
     }
     if (self->cur_fgcolor == NULL) {
 	const char *s;
@@ -1422,7 +1422,7 @@ static void DoUpdate(class textview  *self, boolean  reformat)
 	    sprintf(buf, "#%04lx%04lx%04lx", r, g, b);
 	    s = buf;
 	}
-	self->cur_fgcolor = NewString(s);
+	self->cur_fgcolor = strdup(s);
     }
 
     self->needUpdate = FALSE;

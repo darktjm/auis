@@ -6,7 +6,7 @@
 \* ********************************************************************** */
 #include <ATK.H>
 
-/** \addtogroup libdynsearch libdynsearch.so
+/** \addtogroup libdynsearch Object dynsearch
  *  A dynamically loadable ATK class file.  Contains dynsearch.
  * @{ */
 class dynsearch : public ATK  {

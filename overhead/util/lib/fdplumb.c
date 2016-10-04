@@ -16,7 +16,7 @@ static char **OpenedFileNames = NULL;
 static int *OpenCodes = NULL;
 
 static const char *
-DescribeOpenCode(int code)
+DescribeOpenCode(enum fdleak_code code)
 {
     switch(code) {
 	case FDLEAK_OPENCODE_OPEN: return "open";
@@ -59,7 +59,7 @@ int fdplumb_SpillGutsToFile(FILE *fp, int ExtraNewLines)
     return total;
 }
 
-void RegisterOpenFile(int fd, const char *path, int Code)
+void RegisterOpenFile(int fd, const char *path, enum fdleak_code Code)
 {
     int i;
 

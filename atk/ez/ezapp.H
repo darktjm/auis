@@ -6,7 +6,7 @@
 \* ********************************************************************** */
 
 #include <andrewos.h>
-/** \addtogroup libez libez.so
+/** \addtogroup libez Object ez
  *  A statically loadable ATK class file.  Contains ezapp.
  * @{ */
 struct ezapp_fileList {

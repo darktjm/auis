@@ -1,7 +1,7 @@
 #ifndef _launchapp_H_
 #define _launchapp_H_
 /* Copyright 1992 Carnegie Mellon University All rights reserved. */
-/** \addtogroup liblaunchapp liblaunchapp.so
+/** \addtogroup liblaunchapp Object launchapp
  *  A dynamically loadable ATK class file.  Contains launchapp.
  * @{ */
 #include <application.H>

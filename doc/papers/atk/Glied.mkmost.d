@@ -1142,7 +1142,7 @@ type specified by the "template=" keyword.
 
 
 Editing \italic{.Xdefaults} will have the template \italic{\bold{rawtext}} 
-(which will insure that copying an AUIS datastream results in a simply 
+(which will ensure that copying an AUIS datastream results in a simply 
 ASCII string and not some \bold{bold} text) and editing 
 \italic{.Xdefaults.old} results in the \italic{\bold{default}} template 
 (which allows you to copy and retain \bold{bold} text) which is probably 

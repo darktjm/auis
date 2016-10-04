@@ -564,6 +564,7 @@ TypescriptEOTCommand(class typescript    *tv )
     fd_set wfds;
 
 
+    tv->CheckChild();
     if(tv->SubChannel < 0) 
 	return;
     
@@ -657,6 +658,7 @@ SendSig (class typescript  *tv , int sig)
     return;
 #else /* defined(POSIX_ENV) && !defined(sun) */
     int pgrp = 0;
+    tv->CheckChild();
     if(tv->SubChannel < 0) 
 	return;
 #if SY_AIX221
@@ -696,6 +698,7 @@ TypescriptDoReturnCommand (class typescript  *tv,long  endpos)
     int stpos, len;
     static struct timeval t = { 0, 0};
 
+    tv->CheckChild();
     if(tv->SubChannel < 0) {
 	AnounceDeath(tv);
 	return;
@@ -1250,11 +1253,31 @@ ResetTTY(int  fd	    /* file descriptor for the tty */)
 #endif /* defined(POSIX_ENV) && !defined(sun) */
 }
 
+void typescript::CheckChild(void)
+{
+    if(!this->pid && this->SubChannel >= 0) {
+	static char buf[40];
+
+	close(SubChannel);
+	SubChannel = -1;
+	strcpy(buf,"Child ");
+	statustostr(&child_status,buf+6,34);
+	fprintf(stderr, "%s\n", buf);
+    }
+}
+
+static void childDied(int  pid,long rock,WAIT_STATUS_TYPE  *status)
+{
+    class typescript *self = (class typescript *)rock;
+
+    self->pid=0;
+    self->child_status = *status;
+}
+
 typescript::typescript()
 {
 	ATKinit;
 
-    int pid;
     const char **arglist = NULL;
     int ptyChannel;
     int masterChannel;
@@ -1470,6 +1493,7 @@ typescript::typescript()
 	    _exit(1);
 	}
     }
+    im::AddZombieHandler(pid,childDied,(long)this);
 #ifndef POSIX_ENV
 #if SY_AIX221
     this->pgrpid = pid;	/* save pid for sending quit and intr signals */
@@ -1535,6 +1559,7 @@ MyCanOutHandler(FILE  *afile, class typescript  *ad )
     char *tp, tc;
     char buffer[COBSIZE];
 
+    ad->CheckChild();
     if(ad->SubChannel < 0) 
 	return;
     if(ad->readOnlyLen > 0) {
@@ -1578,6 +1603,8 @@ typescript::~typescript()
 #endif
 	free(this->ptyname);
     }
+    if(this->pid)
+	im::RemoveZombieHandler(this->pid);
 }
 
 void 

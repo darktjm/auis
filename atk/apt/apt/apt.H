@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libapt libapt.so
+/** \addtogroup libapt Object apt
  *  A dynamically loadable ATK class file.  Contains apt, apts, aptv.
  * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************

@@ -47,7 +47,7 @@ underlying window system:  application programs must often be ported to
 other workstations that will eventually be deployed.  The workstations 
 often have similar, but not identical, display capabilities and the 
 hardware can be significantly different; the underlying window system may 
-be different.  To insure portability of your application, you should never 
+be different.  To ensure portability of your application, you should never 
 make direct calls to the underlying window system; you should always use 
 the \italic{view} class procedures and methods; doing so will maximize the 
 device independence and portabilty of your application program. 

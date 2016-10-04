@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libchart libchart.so
+/** \addtogroup libchart Object chart
  *  A dynamically loadable ATK class file.  Contains chart, chartv,
  *  chartapp, chartobj, chartdot, chartpie, chartx1app, charthst,
  *  chartstk, chartcsn, chartlin.

@@ -722,16 +722,7 @@ in a constructor should be deallocated in the corresponding destructor.
 An important special case is strings.  When function 'Caller' passes a 
 string as an argument to function 'Callee', the Caller remains responsible 
 for the string.  If Callee wants to retain a pointer to the string, it must 
-make a copy.  To aid in this, there is a function to clone a string: \
-
-
-	#include <util.h>
-
-	...
-
-	NewString(char *)
-
-The resulting module must be linked against $(UTILLIB).
+make a copy.  Use the standard strdup function to accomplish this.
 
 
 

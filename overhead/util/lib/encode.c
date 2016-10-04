@@ -35,7 +35,7 @@ void to64(FILE *infile, FILE *outfile)
     fflush(outfile);
 }
 
-void output64chunk(int c1, int c2, int c3, int pads, FILE *outfile)
+void output64chunk(unsigned char c1, unsigned char c2, unsigned char c3, int pads, FILE *outfile)
 {
     putc(basis_64[c1>>2], outfile);
     putc(basis_64[((c1 & 0x3)<< 4) | ((c2 & 0xF0) >> 4)], outfile);
@@ -50,15 +50,17 @@ void output64chunk(int c1, int c2, int c3, int pads, FILE *outfile)
         putc(basis_64[c3 & 0x3F], outfile);
     }
 }
-static const char basis_hex[] = "0123456789ABCDEF";
-
 int hexchar(char c)
 {
-    char *s;
-    if (islower(c)) c = toupper(c);
-    s = strchr(basis_hex, c);
-    if (s) return(s-basis_hex);
-    return(-1);
+    if(c < '0')
+	return -1;
+    if(c <= '9')
+	return c - '0';
+    if(c >= 'a')
+	c -= 'a' - 'A';
+    if(c < 'A' || c > 'F')
+	return -1;
+    return c - 'A' + 10;
 }
 
 

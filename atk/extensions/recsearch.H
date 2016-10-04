@@ -1,7 +1,7 @@
 #ifndef _recsearch_H_
 #define _recsearch_H_
 
-/** \addtogroup librecsearch librecsearch.so
+/** \addtogroup librecsearch Object recsearch
  *  A dynamically loadable ATK class file.  Contains recsearch.
  * @{ */
 #include <ATK.H>

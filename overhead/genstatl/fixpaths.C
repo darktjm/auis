@@ -43,8 +43,8 @@ static void AddVar(const char *var)
 	fprintf(stderr, "fixpaths warning: Out of memory.");
 	exit(-1);
     }
-    result->var=NewString(buf);
-    result->path=NewString(p);
+    result->var=strdup(buf);
+    result->path=strdup(p);
     result->next=(*addptd);
     *addptd=result;
     addptd=(&result->next);
@@ -68,7 +68,7 @@ static void AddLibs(const char *path)
     while(*q && !(isspace(*q) || *q=='\n')) q++;
     *q='\0'; 
 
-    char *var=NewString(p);
+    char *var=strdup(p);
 
     while(!feof(fp) && fgets(buf,sizeof(buf)-1,fp)) {
 	struct lib *result=(struct lib *)malloc(sizeof(struct lib));
@@ -77,7 +77,7 @@ static void AddLibs(const char *path)
 	if(result==NULL) goto error;
 
 	result->var=var;
-	result->path=NewString(buf);
+	result->path=strdup(buf);
 	result->next=(*addpt);
 	*addpt=result;
 	addpt=(&result->next);

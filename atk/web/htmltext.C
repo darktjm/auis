@@ -734,7 +734,7 @@ StyleToCodes(style *sty) {
 			AppendIndentCode(&codex, 'R', val, Unit);
 
 	*codex++ = '\0';
-	return NewString(codes);
+	return strdup(codes);
 }
 
 /* CodesToTags
@@ -3958,9 +3958,9 @@ image *htmltext::GetImage(const char *file, attlist *atts) {
                 }
             }
         }
-        else   filename = NewString((char *)file);
+        else   filename = strdup((char *)file);
     }
-    else   filename = NewString((char *)file);
+    else   filename = strdup((char *)file);
 
     if ((dat=(image*)ATK::NewObject("imageio")) != NULL) {
         int ok;
@@ -4021,7 +4021,7 @@ image *htmltext::GetImage(const char *file, attlist *atts) {
 
 /* XXX - this structure is not currently being used in this code.
 It is meant to be used in conjunction with the "nested" table below
-to insure that styles could not be nested improperly */
+to ensure that styles could not be nested improperly */
 
 static struct stylemap styletable[] = {
     { "abbrev", EMPH },

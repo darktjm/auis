@@ -144,7 +144,7 @@ AmenuLabel &AmenuLabel::SetLabel(const char *label, boolean atomize) {
 	if(astr) str=astr->Name();
 	else str=NULL;
     } else {
-	str=NewString((char *)label);
+	str=strdup((char *)label);
 	astr=NULL;
     }
     return *this;

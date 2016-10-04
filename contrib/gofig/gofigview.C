@@ -1313,7 +1313,7 @@ gofigview::InitializeClass() {
 	const char *colorstr;
 	colorstr = environ::GetProfile("BoardColor");
 	if (colorstr == NULL) colorstr = "#FFD29B";   /* 255, 210, 155 */
-	BoardColor = NewString(colorstr);
+	BoardColor = strdup(colorstr);
 
 	EmbeddedMenus = new menulist;
 	EmbeddedKeymap = new keymap;

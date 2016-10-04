@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup liblt liblt.so
+/** \addtogroup liblt Object lt
  *  A dynamically loadable ATK class file.  Contains ltapp, lt, ltv.
  * @{ */
 /***  SPECIFICATION -- External Facility Suite  *********************************
@@ -35,6 +35,9 @@ public:
  
   lt();
 
+private:
+  friend class ltv; /* ick */
+  friend class ltv_private; /* double ick */
   class zip			     *zipp;
   struct zip_stream		     *foreground_stream;
   char				      foreground_stream_name[512];

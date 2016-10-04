@@ -330,7 +330,7 @@ link::Read(FILE  *fp, long  id)	{
 link::SetLink(char *link) {
 	if ((this)->GetRawLink()) free((this)->GetRawLink());
 	if (link) {
-		this->rawlink = NewString(link);
+		this->rawlink = strdup(link);
 		SetTypeCode((strchr(link, '$')) ? VarFileLink : FileLink);
 	}
 	else {

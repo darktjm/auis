@@ -284,7 +284,7 @@ other format.
 
 
 Because ATK supports embedded \classobject{dataobjects} and  multiple 
-\classobject{views} of the same data object, there is a mechanism to insure 
+\classobject{views} of the same data object, there is a mechanism to ensure 
 that a\classobject{ dataobject} does not write itself in the same file more 
 than once.  This is accomplished by a \class{dataobject} datum called the 
 \datamember{writeID}.  The caller of the \bold{\virtualmemberfunction{Write}} 

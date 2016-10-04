@@ -28,5 +28,4 @@ InstallDocs(raster.help rasters.help rstproc.help, ${DESTDIR}/help)
 InstallHelpAlias(raster, pictures)
 InstallHelpAlias(rstproc, rasterproc rasterprocs)
 
-InstallDocs(raster.doc,${DESTDIR}/doc/PROGRAMMER)
 InstallDocs(raster.pr, ${DESTDIR}/lib/prs)

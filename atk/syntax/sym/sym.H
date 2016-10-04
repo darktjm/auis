@@ -4,7 +4,7 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
 \* ********************************************************************** */
 
-/** \addtogroup libsym libsym.so
+/** \addtogroup libsym Object sym
  *  A dynamically loadable ATK class file.  Contains sym, toksym.
  * @{ */
 /* sym.c

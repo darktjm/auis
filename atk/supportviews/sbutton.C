@@ -106,7 +106,7 @@ static boolean SetupInitialState(class sbutton  *self)
 {
     self->prefs=sbutton::GetNewPrefs(NULL);
     if(self->prefs==NULL) return FALSE;
-    self->prefs->name=NewString("Default");
+    self->prefs->name=strdup("Default");
     self->prefs->writeid= (self)->GetWriteID();
     return TRUE;
 }
@@ -276,7 +276,7 @@ struct sbutton_prefs *sbutton::DuplicatePrefs(struct sbutton_prefs  *prefs, cons
     if(result==NULL) return result;
     *result=(*prefs);
     result->refcount=0;
-    if(name!=NULL) result->name=NewString(name);
+    if(name!=NULL) result->name=strdup(name);
     else result->name=NULL;
     return result;
 }
@@ -308,7 +308,7 @@ sbutton::sbutton()
 
     /* self->prefs=sbutton_GetNewPrefs(NULL);
     if(self->prefs==NULL) return FALSE;
-    self->prefs->name=NewString("Default");
+    self->prefs->name=strdup("Default");
     self->prefs->writeid= sbutton_GetWriteID(self);
 */
     this->matteprefs = NULL;
@@ -581,11 +581,11 @@ static boolean depthproc(class sbutton  *self, struct read_status  *rock, char  
 static boolean nameproc(class sbutton  *self, struct read_status  *rock, char  *buf)
 {
     if(rock->lastprefs<0 || rock->lastprefs>=rock->maxprefs) return TRUE;
-    if(*buf!='\0') sbutton::GetName(rock->prefs[rock->lastprefs]) = NewString(buf);
+    if(*buf!='\0') sbutton::GetName(rock->prefs[rock->lastprefs]) = strdup(buf);
     else {
 	char buf2[256];
 	sprintf(buf2, rock->lastprefs?"Default %d":"Default", rock->lastprefs);
-	sbutton::GetName(rock->prefs[rock->lastprefs]) = NewString(buf2);
+	sbutton::GetName(rock->prefs[rock->lastprefs]) = strdup(buf2);
     }
     return FALSE;}
 
@@ -960,7 +960,7 @@ void sbutton::SetLabel(int  ind, const char  *txt)
       this->buttons[ind].label = NULL;
     }
     
-    if (txt)this->buttons[ind].label = NewString(txt);
+    if (txt)this->buttons[ind].label = strdup(txt);
     (this)->SetModified();
     (this)->SetChangeFlag( sbutton_LABELCHANGED);
     (this)->NotifyObservers( ind+sbutton_CHANGEBASE);

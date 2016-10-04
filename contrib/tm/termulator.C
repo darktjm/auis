@@ -862,25 +862,10 @@ termulator::~termulator()
 }
 
 static void childDied(int  pid,class termulator  *self,WAIT_STATUS_TYPE  *status)
-#ifdef hp9000s300
-#else /* hp9000s300 */
-#endif /* hp9000s300 */
 {
-    static char buf[40];
-
-    strcpy(buf,"Child ");
-    statustostr(status,buf+6,34);
-
-    if(self->ptyFile!=NULL){
-	im::RemoveFileHandler(self->ptyFile);
-	fclose(self->ptyFile);
-	self->ptyFile=NULL;
-    }
-
     self->pid=0;
     memset(&self->mode, 0, sizeof(self->mode));
-
-    ERROR(buf);
+    self->child_status = *status;
 }
 
 #if defined(hpux) || defined(_IBMR2) || defined(NeXT) || defined(sys_pmax_ul4) || defined(sys_dec_alpha)
@@ -1071,9 +1056,30 @@ static char ctrlbuf[2]="^";
 #define echoCTRL(self,c) \
   (ctrlbuf[1]=(((c)+'@')&0x7f),(self)->WriteChars(ctrlbuf,2))
 
+void termulator::CheckChild(void)
+{
+    if(!this->pid && this->ptyFile){
+	static char buf[40];
+	termulator *self = this;
+
+	im::RemoveFileHandler(this->ptyFile);
+	fclose(this->ptyFile);
+	this->ptyFile=NULL;
+
+	strcpy(buf,"Child ");
+	statustostr(&this->child_status,buf+6,34);
+	ERROR(buf);
+	return;
+    }
+}
+
 void termulator::ProcessInput(char  *buf,long  len)
 {
     char *end=buf;
+
+    CheckChild();
+    if(!this->ptyFile)
+	return;
 
     if(!(this->mode.c_lflag & (ISIG|ICANON))) /* RAW - but what rawness? - tjm */
 	(this)->SendInput(buf,len);
@@ -1143,7 +1149,7 @@ void termulator::SendInput(char  *buf,long  len)
 
 #ifdef INCORRECTSIGNALS
     if(this->mode.c_lflag&ECHO){
-	if(!(this->mode.c_lflag&(ICANON|ISIG))) /* what rawness matters? */
+	if(!(this->mode.c_lflag&ICANON)) /* what rawness matters? */
 	    (this)->ProcessOutput(buf,newlen);
 	else{
 	    char *end=buf;
@@ -1437,7 +1443,7 @@ const char *termulator::GetTerm()
 
 const char *termulator::GetTermcap()
 {
-    return "wm|termulator dumb terminal:bs";
+    return "wm|termulator dumb terminal:bs:";
 }
 
 const char *termulator::GrabPrevCmd(char  *str)

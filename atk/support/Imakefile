@@ -65,9 +65,9 @@ InstallHelpAlias(buffer, ez-buffers buffers)
 
 InstallDocs(printing.pr, ${DESTDIR}/lib/prs)
 
-DOCS = buffer.doc complete.doc dict.doc envrment.doc list.doc \
+DOCS = buffer.doc complete.doc dict.doc envrment.doc \
 	mark.doc nstdmark.doc print.doc rectlist.doc style.doc \
-	stylesht.doc tree23.doc viewref.doc glist.doc
+	stylesht.doc tree23.doc
 
 InstallDocs($(DOCS), $(DESTDIR)/doc/PROGRAMMER)
 

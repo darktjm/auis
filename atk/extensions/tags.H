@@ -4,7 +4,7 @@
  *         Copyright IBM Corporation 1988,1991 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-/** \addtogroup libtags libtags.so
+/** \addtogroup libtags Object tags
  *  A dynamically loadable ATK class file.  Contains tags.
  * @{ */
 /* tags.H -- class header file for tags package */

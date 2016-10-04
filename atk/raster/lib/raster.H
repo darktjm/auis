@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libraster libraster.so
+/** \addtogroup libraster Object raster
  *  A dynamically loadable ATK class file.  Contains raster, rasterview,
  *  pheximage, oldRF, paint, plusspace, rasterio, xbm, xwdio, cmuwm,
  *  rasterimage, rastoolview.

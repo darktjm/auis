@@ -90,7 +90,7 @@ void figobj::SetName(char *name)
     this->name = NULL;
 
     if (name) {
-	this->name = NewString(name);
+	this->name = strdup(name);
     }
 }
 

@@ -5,6 +5,8 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtermulator
+ * @{ */
 #include <application.H>
 class tmapp : public  application {
 public:
@@ -23,5 +25,5 @@ public:
 	boolean fileMenus;
 	int rows,cols;
 };
-
+/** @} */
 #endif /* _tmapp_H_ */

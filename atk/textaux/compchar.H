@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libtextaux libtextaux.so
+/** \addtogroup libtextaux Object textaux
  *  A statically loadable ATK class file.  Contains compchar, contentv.
  * @{ */
 #include <ATK.H>

@@ -14,4 +14,4 @@ InstallRunappAPP(whichdo)
 DependTarget()
 
 InstallDocs(runapp.help, ${DESTDIR}/help)
-InstallDocs(runapp.doc statload.doc, ${DESTDIR}/doc/PROGRAMMER)
+

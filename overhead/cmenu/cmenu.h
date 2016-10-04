@@ -27,6 +27,7 @@ BEGINCPLUSPLUSPROTOS
 #define cmenu_BackgroundPixmap          2
 #define cmenu_NoSaveUnder               3
 
+struct cmenu;
 typedef void (*cmenu_FreeFunction)(void *f);
 extern struct cmenu *cmenu_Create(Display *display, Window parent,
                          const char *defaultEnvironment, cmenu_FreeFunction freeFunction);

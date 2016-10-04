@@ -1,7 +1,7 @@
 #ifndef _bdffont_H_
 #define _bdffont_H_
 /* bdffont.H - font editor for bdf format fonts */
-/** \addtogroup libbdffont libbdffont.so
+/** \addtogroup libbdffont Object bdffont
  *  A dynamically loadable ATK class file.  Contains bdffont, bdffontv
  * @{ */
 #include <units.h>

@@ -55,21 +55,7 @@ white
 equation inset
 
 
-\begindata{link,539333928}
-Datastream version: 3
-$ANDREWDIR/doc/PROGRAMMER/fad.doc
-0
-0
-\begindata{link,539333928}
-Datastream version: 2
-fad
-2
-
-black
-white
-\enddata{link,539333928}
-\enddata{link,539333928}
-\view{linkview,539333928,3,0,0} fad.doc - quick reference list for fad, 
+fad.doc[removed] - quick reference list for fad, 
 which creates and views simple animation
 
 
@@ -126,24 +112,6 @@ white
 links to other org examples
 
 
-\begindata{link,539345416}
-Datastream version: 3
-$ANDREWDIR/doc/PROGRAMMER/raster.doc
-0
-0
-\begindata{link,539345416}
-Datastream version: 2
-raster
-2
-
-black
-white
-\enddata{link,539345416}
-\enddata{link,539345416}
-\view{linkview,539345416,10,0,0} raster.doc - quick reference list for 
-raster
-
-
 \begindata{link,539345864}
 Datastream version: 3
 $ANDREWDIR/doc/PROGRAMMER/image.doc
@@ -185,39 +153,6 @@ the internal structure of its associated dataobject (image), cat/paste, and
 panning/scrolling
 
 
-\begindata{link,539346840}
-Datastream version: 3
-$ANDREWDIR/doc/PROGRAMMER/spread.doc
-0
-0
-\begindata{link,539346840}
-Datastream version: 2
-spread
-2
-
-black
-white
-\enddata{link,539346840}
-\enddata{link,539346840}
-\view{linkview,539346840,13,0,0} spread.doc - quick reference guide for 
-spread
-
-
-\begindata{link,539347352}
-Datastream version: 3
-$ANDREWDIR/doc/PROGRAMMER/table.doc
-0
-0
-\begindata{link,539347352}
-Datastream version: 2
-table
-2
-
-black
-white
-\enddata{link,539347352}
-\enddata{link,539347352}
-\view{linkview,539347352,14,0,0} table.doc - quick reference guide for table
-
-
+Stub doc links removed for fad, raster, spread, table.  Left fad
+summary as it contains information.
 \enddata{text,538429064}

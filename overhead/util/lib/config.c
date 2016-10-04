@@ -16,20 +16,19 @@ char ProgramName[100];
 
 #define MAXCONFIGSIZE 2000
 
-const char *conf_ConfigNames[conf_NumConfigNames + 1] =  {
+static const char *conf_ConfigNames[] =  {
     "/AndrewSetup",
     "/etc/AndrewSetup",
 #ifdef LOCAL_ANDREW_SETUP_ENV
     LOCAL_ANDREW_SETUP_ENV ,
 #endif /* LOCAL_ANDREW_SETUP_ENV */
-    "/usr/vice/etc/AndrewSetup",
 /* Include a name based on DEFAULT_ANDREWDIR_ENV */
     QUOTED_DEFAULT_ANDREWDIR_ANDREWSETUP,
     "/usr/andrew/etc/AndrewSetup",
     NULL
 };
-int conf_ConfigUsed = -1;
-int conf_ConfigErrno = -1;
+static int conf_ConfigUsed = -1;
+static int conf_ConfigErrno = -1;
 
 /* 
 

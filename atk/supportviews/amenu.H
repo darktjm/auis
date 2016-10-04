@@ -65,6 +65,7 @@ DEFINE_MFLEX_CLASS(AmenuAuxlabels_base,AmenuGraphicdata,1);
 class AmenuAuxlabels : public AmenuAuxlabels_base {
     boolean sorted;
   public:
+    AmenuAuxlabels() : sorted(0) {}
     void Sort();
     boolean Sorted();
     void MarkChanged();

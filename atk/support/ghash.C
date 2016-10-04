@@ -62,7 +62,7 @@ ghash::ghash()
         this->buckets[i] = NULL;
     this->hash = DefaultHash;
     (this)->SetFreeKey( (ghash_freekeyfptr)free);
-    (this)->SetCopyKey( NewString);
+    (this)->SetCopyKey( strdup);
     (this)->SetCompareKey( safestrcmp);
     (this)->SetCopyVal( NULL);
     (this)->SetFreeVal( NULL);

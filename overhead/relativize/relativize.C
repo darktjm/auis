@@ -5,11 +5,6 @@
 #include <andrewos.h>
 #include <string.h>
 
-/* Define this function here so that this can be compiled before everything else. */
-static char *NewString(char *str)
-{
-    return str ? strdup(str) : NULL;
-}
 struct dontlist {
     char *path;
     struct dontlist *next;
@@ -29,7 +24,7 @@ static int AddToDontList(char *path)
     }
     if(s==NULL) {
 	struct dontlist *result=(struct dontlist *)malloc(sizeof(struct dontlist));
-	result->path=NewString(path);
+	result->path=strdup(path);
 	result->next=NULL;
 	*lastdont=result;
 	lastdont=(&result->next);
@@ -68,7 +63,7 @@ static int AddToDirList(char *path)
     }
     if(s==NULL) {
 	struct dirlist *result=(struct dirlist *)malloc(sizeof(struct dirlist));
-	result->path=NewString(path);
+	result->path=strdup(path);
 	result->next=NULL;
 	*last=result;
 	last=(&result->next);
@@ -88,7 +83,7 @@ static void AddArg(char *arg)
 	if(newargv) newargv=(char **)realloc(newargv, size*sizeof(char *));
 	else newargv=(char **)malloc(size*sizeof(char *));
     }
-    newargv[newargc]=NewString(arg);
+    newargv[newargc]=arg ? strdup(arg) : arg;
     newargc++;
 }
 
@@ -170,7 +165,7 @@ int main(int argc, char **argv)
     ATK_RELATIVIZE_START_HOOK(argc, argv, i);
 #endif
     for(;i<=argc-1;i++) {
-	char *arg=NewString(argv[i]);
+	char *arg=strdup(argv[i]);
 	char *p=strrchr(arg, '.');
 	char *q=strrchr(arg, '/');
 #ifndef ATK_RELATIVIZE_FUNCTION

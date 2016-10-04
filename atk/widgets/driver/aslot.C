@@ -119,7 +119,7 @@ ASlot::Assign(CONST ASlot *src) {
             if(src->IsType((ATK *)this) || ( src->IsType(ASlot::intslotreg) && IsType(ASlot::boolslotreg))) {
 		Assign(&src->val);
 		if (src->source)
-			source = NewString(src->source);
+			source = strdup(src->source);
 	}
 	else
 		CantTake(src);
@@ -493,7 +493,7 @@ ASlot::NewASlot(const char *typenm) {
 ASlot::SetSource(const char *src) {
 	if (source) free(source); 
 	if (src && *src)
-		source = NewString((char *)src); 
+		source = strdup((char *)src); 
 	else source = NULL;
 }
  
@@ -691,7 +691,7 @@ ASlotString::Default() {
 ASlotString::operator=(const char *s) {
 	avalue_u v;
 	const char *oldcstr = val.cstr;
-	v.cstr = (s && *s) ? NewString((char *)s) : empty;
+	v.cstr = (s && *s) ? strdup((char *)s) : empty;
 	Assign(&v);  
 	if (oldcstr != empty && oldcstr!=val.cstr) free((void *)oldcstr);
 	if(v.cstr!=empty && v.cstr!=val.cstr) free((void *)v.cstr);
@@ -705,7 +705,7 @@ ASlotString::operator=(CONST ASlot *s) {
 	if (val.cstr != oldcstr) {
 		if (!val.cstr || !*val.cstr)
 		    val.cstr = empty;
-		else val.cstr = NewString((char *)val.cstr);
+		else val.cstr = strdup((char *)val.cstr);
 		if (oldcstr != empty) free((void *)oldcstr);
 	}
 	return *this;
@@ -748,7 +748,7 @@ ASlotFile::operator=(const char *s) {
 	avalue_u v;
 	const char *oldcstr = val.cstr;
 	while (isspace(*s)) s++;
-	v.cstr = (s && *s) ? NewString((char *)s) : devnull;
+	v.cstr = (s && *s) ? strdup((char *)s) : devnull;
 	Assign(&v);  
 	if (oldcstr != devnull) free((void *)oldcstr);
 	return *this;
@@ -761,7 +761,7 @@ ASlotFile::operator=(CONST ASlot *s) {
 	if (val.cstr != oldcstr) {
 		if (!val.cstr || !*val.cstr)
 			val.cstr = devnull;
-		else val.cstr = NewString((char *)val.cstr);
+		else val.cstr = strdup((char *)val.cstr);
 		if (oldcstr != devnull) free((void *)oldcstr);
 	}
 	return *this;
@@ -1298,21 +1298,21 @@ boolean ASlotFont::Equal(const avalue_u &dest, const avalue_u &src) const {
 
 ASlotFont::ASlotFont(const char *s) {
 	if (!s) s = "andy12";
-	fontname=NewString((char *)s);
+	fontname=strdup((char *)s);
 	val.obj=fontdesc::Create("andy", fontdesc_Plain, 12);
 }
 
 ASlotFont::ASlotFont(atom *name, const char *s)  {
 	if (name) SetName(name);
 	if (!s) s = "andy12";
-	fontname=NewString((char *)s);
+	fontname=strdup((char *)s);
 	val.obj=fontdesc::Create("andy", fontdesc_Plain, 12);
 }
 
 ASlot &ASlotFont::Default() {
 	if (IsDefault()) return *this;
 	if (fontname) free((void *)fontname);
-	fontname = NewString("andy12");
+	fontname = strdup("andy12");
 	*this = (const char *)NULL;
 	EnableFlags(isdefault);
 	return *this;
@@ -1332,7 +1332,7 @@ ASlot &ASlotFont::operator=(const char *s) {
 	tval.obj=fontdesc::Create(family, style, size);
 	Assign(&tval);
 	if(fontname) free((void *)fontname);
-	fontname=NewString((char *)s);
+	fontname=strdup((char *)s);
 	return *this;
 }
 
@@ -1352,14 +1352,14 @@ ASlot &ASlotFont::operator=(fontdesc *f) {
 	if (style & fontdesc_Bold) ftnm.Append('b');
 	if (style & fontdesc_Italic) ftnm.Append('i');
 	if (style & fontdesc_Fixed) ftnm.Append('f');
-	fontname = NewString((char *)ftnm);
+	fontname = strdup((char *)ftnm);
 	return *this;
 }
 
 ASlot &ASlotFont::operator=(CONST ASlot *s) {
 	if (s->IsType(this)) {
 		if (fontname) free((void *)fontname);
-		fontname = NewString(
+		fontname = strdup(
 				(char *)((ASlotFont *)s)->fontname);
 	}
 	/* else;	// (here Assign does nothing and gives an error message) */

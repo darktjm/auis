@@ -25,6 +25,7 @@ END-SPECIFICATION  ************************************************************/
 
 #define  schedv_VERSION		    1
 
+#include <zipfig.h>
 
 #include <view.H>
 class schedv : public  view {
@@ -40,7 +41,7 @@ public:
    static boolean atk_inited;
    schedv();
    virtual ~schedv();
-
+private:
    class sched			    *data;
    class zipview		    *zipviewp;
    struct zip_pane		    *chart_pane;
@@ -57,6 +58,7 @@ public:
    long				     point;
    long				     initial_x_pixel, initial_y_pixel;
    unsigned char		     wm_type;
+   friend class schedv_private; /* ick */
 };
 /** @} */
 #endif /* _schedv_H_ */

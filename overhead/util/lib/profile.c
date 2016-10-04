@@ -46,30 +46,34 @@ openprofile(const char *filename, const char *defaultname, int savefname)
     struct configurelist *cl;
     char tmpFileName[MAXPATHLEN];
 
-    if(pl)
+    if(pl && *pl)
 	pl = strdup(pl);
-    if(pl==NULL || *pl=='\0') {
+    else
+	pl = NULL;
+    if(pl==NULL) {
 	/* Only check InitFilePath for Global profiles */
 	if (!strcmp(filename, "GLOBALPROFILES")) {
 	    /* Look for GLOBALPRFNAME in InitFilePath (if it exists), else use default */	
 	    const char *initpath = GetConfiguration("InitFilePath");
 	    if (initpath != NULL && *initpath!='\0') {
 		pl = malloc(MAXPATHLEN);
-		if(pl) findfileinpath((char *)pl, initpath, GLOBALPRFNAME);
-		if (pl == NULL || *pl == '\0')
-		    pl=strdup(defaultname);
+		if(pl) findfileinpath(pl, initpath, GLOBALPRFNAME);
+		if (*pl == '\0') {
+		    free(pl);
+		    pl = NULL;
+		}
 	    }
-	    else pl=strdup(defaultname);
 	}
-	else pl=strdup(defaultname);
     }
+    if(pl==NULL)
+	pl=strdup(defaultname);
     pl0 = pl;
 
     do{
 	const char *name;
 	int namelen;
 
-	sep=(char *)index(pl,sepchar);
+	sep=strchr(pl,sepchar);
 
 	name = pl;
 
@@ -112,25 +116,25 @@ openprofile(const char *filename, const char *defaultname, int savefname)
 
 }
 
-const char *GetProfileFileName(void)
+
+static void init_profile(void)
 {
     if (! inited)  {
 	profileHead = openprofile("PROFILES", DEFAULTPROFILES, 1);
 	GloprofileHead = openprofile("GLOBALPROFILES", GLOBALPROFILE, 0);
 	inited = 1;
     }
+}
 
+const char *GetProfileFileName(void)
+{
+    init_profile();
     return profileFileName;
 }
 
 const char *GetFirstProfileFileName(void)
 {
-    if (! inited)  {
-	profileHead = openprofile("PROFILES", DEFAULTPROFILES, 1);
-	GloprofileHead = openprofile("GLOBALPROFILES", GLOBALPROFILE, 0);
-	inited = 1;
-    }
-
+    init_profile();
     return firstProfileFileName;
 }
 
@@ -142,6 +146,10 @@ void refreshprofile(void) {  /* Force rereading */
     if (profileFileName != NULL)  {
 	free(profileFileName);
 	profileFileName = NULL;
+    }
+    if (firstProfileFileName != NULL) {
+	free(firstProfileFileName);
+	firstProfileFileName = NULL;
     }
     inited = 0;
 }
@@ -162,11 +170,8 @@ void addstringprofile(char *s)
 const char *getprofile (const char *var)
 {
     const char *retval;
-    if (! inited)  {
-	profileHead = openprofile("PROFILES", DEFAULTPROFILES, 1);
-	GloprofileHead = openprofile("GLOBALPROFILES", GLOBALPROFILE, 0);
-	inited = 1;
-    }
+
+    init_profile();
 #ifdef GLOBALPREFERENCE
 /* check for exact match in string profile */
     if((retval = (char *) GetConfig(StringProfileHead, var, 0)) != NULL)
@@ -191,7 +196,7 @@ const char *getprofile (const char *var)
 int getprofileswitch (const char *var, int DefaultValue)
 {
     const char   *val;
-    static struct keys {
+    static const struct keys {
 	const char   *name;
 	int     value;
     }                   keys[] = {
@@ -205,7 +210,7 @@ int getprofileswitch (const char *var, int DefaultValue)
 	                    {"0", 0},
 	                    {0, 0}
     };
-    struct keys   *p;
+    const struct keys   *p;
     if (var && (val = getprofile (var))) {
 	for (p = keys; p -> name; p++)
 	    if (FOLDEDEQ(p->name, val))
@@ -243,11 +248,7 @@ int getprofileint (const char *var, int DefaultValue)
 int profileentryexists(const char *var, int usedefault)
 {
 
-    if (! inited)  {
-	profileHead = openprofile("PROFILES", DEFAULTPROFILES, 1);
-	GloprofileHead = openprofile("GLOBALPROFILES", GLOBALPROFILE, 0);
-	inited = 1;
-    }
+    init_profile();
 
     return (var != NULL && ( (GetConfig(StringProfileHead, var, usedefault) != NULL) || 
 			     (GetConfig(profileHead, var, usedefault) != NULL) || 

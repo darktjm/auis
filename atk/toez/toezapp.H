@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libtoezapp libtoezapp.so
+/** \addtogroup libtoezapp Object toezapp
  *  A dynamically loadable ATK class file.  Contains toezapp.
  * @{ */
 /* toandrew application */

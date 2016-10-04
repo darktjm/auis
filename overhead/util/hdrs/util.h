@@ -14,377 +14,606 @@
 BEGINCPLUSPLUSPROTOS
 
 /* fdplumb*.c */
+/** \addtogroup fdplumb File Descriptor Leak Detection
+ *  Many file descriptor allocation functions are intercepted and logged
+ *  when fdplumb.h is included.  When the current statistics should be
+ *  printed, call one of the SpillGuts routines.
+ * @{ */
 extern int fdplumb_SpillGuts(void);
+/**< Dump file descriptor leak detection statistics to stderr
+ *   \return Number of leaks.
+ */
 extern int fdplumb_SpillGutsToFile(FILE *fp, int ExtraNewLines);
-extern int dbg_creat(const char *path, int mode);
-extern int dbg_open(const char *path, int flags, int mode);
-extern FILE *dbg_fopen(const char *path, const char *type);
-extern int dbg_close(int fd);
-extern int dbg_fclose(FILE *fp);
-extern int dbg_dup(int oldfd);
-extern int dbg_dup2(int oldfd, int newfd);
-extern int dbg_pipe(int fdarr[2]);
-extern int dbg_socket(int af, int typ, int prot);
-int dbg_socketpair(int dom, int typ, int prot, int sv[]);
-FILE *dbg_popen(const char *path, const char *type);
-int dbg_pclose(FILE *fp);
-FILE *dbg_qopen(const char *path, const char * const argv[], const char *mode);
-FILE *dbg_topen(const char *path, const char * const argv[], const char *mode, int *pgrp);
-int dbg_qclose(FILE *fp);
-int dbg_tclose(FILE *fp, int seconds, int *timeout);
-int dbg_t2open(const char *name, char * const argv[], FILE **r, FILE **w);
-int dbg_t2close(FILE *fp, int seconds, int *timedout);
+/**< Dump file descriptor leak detection statistics.
+ *   \param fp File to receive report
+ *   \param ExtraNewLines non-zero double-spaces output (e.g. for import into ATK text)
+ *   \return Number of leaks. */
+extern int dbg_creat(const char *path, int mode); /**< fdplumb debugging version of creat(2) */
+extern int dbg_open(const char *path, int flags, int mode); /**< fdplumb debugging version of open(2).  Note that the mode parameter is not optional. */
+extern FILE *dbg_fopen(const char *path, const char *type); /**< fdplumb debugging version of fopen(3) */
+extern int dbg_close(int fd); /**< fdplumb debugging version of close(2) */
+extern int dbg_fclose(FILE *fp); /**< fdplumb debugging version of fclose(3) */
+extern int dbg_dup(int oldfd); /**< fdplumb debugging version of dup(2) */
+extern int dbg_dup2(int oldfd, int newfd); /**< fdplumb debugging version of dup2(2) */
+extern int dbg_pipe(int fdarr[2]); /**< fdplumb debugging version of pipe(2) */
+extern int dbg_socket(int af, int typ, int prot); /**< fdplumb debugging version of socket(2) */
+int dbg_socketpair(int dom, int typ, int prot, int sv[]); /**< fdplumb debugging version of socketpair(2) */
+FILE *dbg_popen(const char *path, const char *type); /**< fdplumb debugging version of popen(3) */
+int dbg_pclose(FILE *fp); /**< fdplumb debugging version of pclose(3) */
+FILE *dbg_qopen(const char *path, const char * const argv[], const char *mode); /**< fdplumb debugging version of qopen() */
+FILE *dbg_topen(const char *path, const char * const argv[], const char *mode, int *pgrp); /**< fdplumb debugging version of topen() */
+int dbg_qclose(FILE *fp); /**< fdplumb debugging version of qclose() */
+int dbg_tclose(FILE *fp, int seconds, int *timeout); /**< fdplumb debugging version of tclose() */
+int dbg_t2open(const char *name, char * const argv[], FILE **r, FILE **w); /**< fdplumb debugging version of t2open() */
+int dbg_t2close(FILE *fp, int seconds, int *timedout); /**< fdplumb debugging version of t2close() */
 #include <dirent.h>
-DIR *dbg_opendir(const char *name);
-void dbg_closedir(DIR *d);
-
-/* gtime.c */
-extern time_t gtime(struct tm *ct);
+DIR *dbg_opendir(const char *name); /**< fdplumb debugging version of opendir(3).  Not really functional. */
+void dbg_closedir(DIR *d); /**< fdplumb debugging version of closedir(3).  Not really functional. */
+/** @} */
 
 /* fpacheck.c */
-extern boolean fpacheck(void);
-
-/* system.c */
-extern int os_system(const char *cmd);
+extern boolean fpacheck(void); /**< Returns TRUE if floating-point arithmetic works as intended; FALSE otherwise. */
 
 /* procstuf.c */
 extern char *statustostr(WAIT_STATUS_TYPE *status, char *buf, int len);
+/**< Convert wait(2) return code into more human-readable string.
+ *   \param status Return code from wait(2)
+ *   \param buf Buffer into which to place message.
+ *   \param len Space in buffer.  If buffer is too small, it may not be 0-terminated.
+ *   \return buf */
 extern const char **strtoargv(char *command, const char **argvbuf, int len);
+/**< Parse a command-line into an argument array for execv(3).  The array
+ *   is NULL-terminated.  This function does not process special shell
+ *   characters.  Instead, if it detects any special characters, it calls
+ *   ${SHELL} to interpret them (e.g. sh -c "exec <command>").
+ *   \param command The command string.  It will have zeroes inserted between arguments.
+ *   \param argv The argument array.  It will receive the arguments, followed by a NULL terminator.
+ *   \param len  The space in the argument array. [bug: len is only checked for the shell execution form]
+ *   \return argvbuf */
 extern char *argvtostr(const char * const *argv,char *buf,unsigned int len);
+/**< Convert an argument array into a simple command string.
+ *   It simply separates the arguments by spaces, unless it detects the
+ *   calling of ${SHELL} as generated by strtoargv, in which case it
+ *   inserts the command argument literally.  [bug: doesn't detect/skip -f if using csh]
+ *   \param argv The argument array (NULL-terminated)
+ *   \param buf The output string
+ *   \param len The space in buf
+ *   \return buf */
 
-extern int GetPty(int *master, int *pty); /* opens up both ends of a pty */
+/* getpty.c */
+extern int GetPty(int *master, int *pty);
+/**< Opens up both ends of a pseudo-terminal pair.  Note that although either
+ *   parameter may be NULL, the file descriptor is still opened, and lost.
+ *  \param master The master end's file descriptor is placed here, if non-NULL
+ *  \param pty The slave end's file descriptor is placed here, if non-NULL  */
 extern int GetPtyandName(int *master, int *pty, char *ptyname, int ptysize);
-/* Real wp backwards compatibility. */
-#define getvuid getuid
-#define getvpwuid getpwuid
-#define getvpwnam getpwnam
-#define getvpwent getpwent
-#define setvpwent setpwent
-#define endvpwent endpwent
-#define getcpwuid(X, Y) getpwuid(X)
-#define getcpwnam(X, Y) getpwnam(X)
-#define cpw_error errno
+/**< Opens up both ends of a pseudo-terminal pair.  Note that although either
+ *   descriptor parameter may be NULL, the file descriptor is still opened,
+ *   and lost.  This includes the slave end, even if ptyname is supplied.
+ *  \param master The master end's file descriptor is placed here, if non-NULL
+ *  \param pty The slave end's file descriptor is placed here, if non-NULL
+ *  \param ptyname The name of the slave end is placed here, if non-NULL
+ *  \param ptysize The size of ptyname.  ptyname may not be 0-terminated if this is too short.  */
 
 /* foldedeq.c */
 extern const int     FoldTRT[256];
+/**< A rather esoteric mapping for case folding.  Corresponds to no known
+ *   8-bit encoding, so don't use this for anything but 7-bit ASCII. */
 
 extern boolean FoldedEQ(const char *a, const char *b);
+/**< A case-insensitive string comparison using the FoldTRT mapping.
+ *   \param a A string
+ *   \param b A string
+ *   \return TRUE if equal, FALSE otherwise.
+ */
 extern boolean FoldedEQn(const char *a, const char *b, int n);
+/**< A case-insensitive string comparison using the FoldTRT mapping.
+ *   \param a A string
+ *   \param b A string
+ *   \param n The maximum number of characters to compare
+ *   \return TRUE if equal, FALSE otherwise.
+ */
 extern boolean FoldedWildEQ(const char *a, const char *b, boolean ignorecase);
+/**< A case-insensitive string comparison using the FoldTRT mapping.
+ *   \param a A string
+ *   \param b A string.  This may contain *, ?, or \.  * matches any sequence
+ *                       of characters, ? matches a single character and
+ *                       \ matches the next character exactly, even if it
+ *                       is \, * or ?.
+ *   \return TRUE if match, FALSE otherwise.
+ */
 #define FOLDEDEQ(s1,s2) (FoldTRT[(unsigned char)(s1)[0]]==FoldTRT[(unsigned char)(s2)[0]] && FoldedEQ(s1,s2))
+/**< "faster" version of FoldedEQ which skips the function call if the
+ *   first two characters do not match.
+ *   \param s1 A string
+ *   \param s2 A string
+ *   \return TRUE if equal, FALSE otherwise.
+ */
 #define FOLDEDEQN(s1,s2,n) (n <= 0 || (FoldTRT[(unsigned char)(s1)[0]]==FoldTRT[(unsigned char)(s2)[0]] && FoldedEQn(s1,s2,n)))
+/**< "faster" version of FoldedEQn which skips the function call if the
+ *   first two characters do not match.
+ *   \param s1 A string
+ *   \param s2 A string
+ *   \param n The maximum number of characters to compare
+ *   \return TRUE if equal, FALSE otherwise.
+ */
 
 extern int lc_strcmp(const char *a, const char *b);
+/**< A case-insensitive string comparison using the FoldTRT mapping.
+ *   \param a A string
+ *   \param b A string
+ *   \return 0 or difference of first folded characters which mismatch.
+ */
 extern int lc_strncmp(const char *a, const char *b, int n);
+/**< A case-insensitive string comparison using the FoldTRT mapping.
+ *   \param a A string
+ *   \param b A string
+ *   \param n The maximum number of characters to compare
+ *   \return 0 or difference of first folded characters which mismatch.
+ */
 
 /* lcappend.c */
 void LCappend(char *s1, const char *s2);
+/**< Append a string while converting it to lower-case.
+ *   \param s1 The target.
+ *   \param s2 The source, to be folded using tolower(3).
+ */
 
 /* getla.c */
 extern double getla(int index);
+/**< Get number of active, queued processes over a given time period.
+ *   \param index Time period: 0=1 min, 1=5 min, 2=15 min
+ *   \return Load average */
 extern void getla_ShutDown(void);
+/**< If resources are in constant use after using getla(), this will
+ *   free those resources.  Its necessity is system-dependent.  */
 
 /* gethome.c */
 extern const char *gethome(const char  *name);
-
-/* getmyhom.c */
-extern const char *getMyHome(void);
+/**< Return a user's home directory.
+ *   \param name The user's name (NULL = $HOME; otherwise (or if
+ *               $HOME invalid) via password file)
+ *   \return The user's home directory.  The return value points to
+ *           static storage which may change if this is called again,
+ *           although it is guaranteed to be persistent for NULL/$HOME.
+ */
 
 /* hname.c */
-extern int GetHostDomainName(char  *buf , int  buflen);	/* works like gethostname() but extends with getdomainname() if necessary. */
+extern int GetHostDomainName(char  *buf , int  buflen);
+/**< Retrieve fully qualified hostname via gethostname(3) and the
+ *   Andrew configuration parameter ThisDommainSuffix.  If that parameter
+ *   is not present, getdomainname(3) is used, instead.
+ *   \param buf Where to put the name
+ *   \param buflen The size of buf
+ *   \return 0 on success; -1 otherwise.  This may set errno.
+ */
 
 /* andrwdir.c */
 extern const char *AndrewDir(const char *suffix);
-
-/* andydir.c */
-extern const char *AndyDir(const char *suffix);
+/**< Generates a string with the current value for ANDREWDIR prefixed.
+ *   If the environment variable is not set, the default value is used.
+ *   ANDREWDIR is the primary installation directory for AUIS.
+ *   \param suffix The string to append (may be NULL for nothing).
+ *   \return ANDREWDIR, with suffix appended.  Note that this is a pointer
+ *           to static space which will change at the next call. */
 
 /* localdir.c */
 extern const char *LocalDir(const char *suffix);
+/**< Generates a string with the current value for LOCALDIR prefixed.
+ *   If the environment variable is not set, the default value is used.
+ *   LOCALDIR is a configured local extension directory, usually /usr/local.
+ *   \param suffix The string to append (may be NULL for nothing).
+ *   \return LOCALDIR, with suffix appended.  Note that this is a pointer
+ *           to static space which will change at the next call. */
 
 /* xbasedir.c */
 extern const char *XLibDir(const char *suffix);
+/**< Generates a string with the current value for ATKXLIBDIR prefixed.
+ *   If the environment variable is not set, the default value is used.
+ *   The default value may come from the Andrew configuration variable
+ *   ATKXLibDir.
+ *   XLIBDIR is the location of X11 libraries, usually /usr/X11/lib.
+ *   \param suffix The string to append (may be NULL for nothing).
+ *   \return ATKXLIBDIR, with suffix appended.  Note that this is a pointer
+ *           to static space which will change at the next call. */
 
 /* config.c */
 extern char ProgramName[];
-#ifdef LOCAL_ANDREW_SETUP_ENV
-#define conf_NumConfigNames 6
-#else
-#define conf_NumConfigNames 5
-#endif
-extern const char *conf_ConfigNames[conf_NumConfigNames + 1];
-extern int conf_ConfigUsed, conf_ConfigErrno;
+/**< A 100-byte buffer for storing the program base name.  This is used
+ *   by various routines to display the name or to qualify names.
+ *   Fill this in before using any configuration routines.
+ *   Generally, this is referenced via im::SetProgramName() and
+ *   im::GetProgramname().  */
 
+/** Configuration parameters returned by config routines.  */
 struct configurelist {
-    char           *programName;
-    char           *key;
-    char           *value;
-    struct configurelist *next;
+    char           *programName; /**< The program name associated with this parameter */
+    char           *key;  /**< The configuration parameter name */
+    char           *value; /**< The configuration parameter's value */
+    struct configurelist *next;  /**< More parameters */
 };
 
-#define CONFIG_EOF -1
-#define CONFIG_FOUNDENTRY 0
-#define CONFIG_BADENTRY 1
-#define CONFIG_COMMENT 2
-#define CONFIG_FALSECONDITION 3
-#define CONFIG_EMPTYLINE 4
-#define CONFIG_NOKEY 5
-#define CONFIG_NOVALUE 6
-extern int ReadConfigureLine(FILE  *fp, char  *text, int  maxTextLength, const char  **program, int  *programLength, const char  **key, int  *keyLength, const char  **value, int  *valueLength, const char  **condition, int  *conditionLength);   /* Reads a line from a file in
-                                        * configure file format - returns one
-                                        * of the above values */
-extern struct configurelist *ReadConfigureFile(const char  *fileName);       /* reads a configure
-                                                         * file given by
-                                                         * filename */
-extern const char *GetConfig(const struct configurelist  *header, const char  *key, int  usedefault);           /* returns the value corresponding to a
-                                        * key for a given configurelist */
-extern const char *GetConfiguration(const char  *key);    /* returns the value for a key in the
-                                        * AndrewSetup file */
+/** Return codes from ReadConfigureLine() */
+enum readconfig_return {
+    CONFIG_EOF = -1, /**< EOF encountered before any config value */
+    CONFIG_FOUNDENTRY = 0, /**< Valid config value */
+    CONFIG_BADENTRY,  /**< Malformed config value */
+    CONFIG_COMMENT,  /**< Comment */
+    CONFIG_FALSECONDITION,  /**< Conditional config value (ignored) */
+    CONFIG_EMPTYLINE,  /**< Blank line */
+    CONFIG_NOKEY,  /**< Malformed config value: no key */
+    CONFIG_NOVALUE  /**< Malformed config value: no value */
+};
+extern enum readconfig_return ReadConfigureLine(FILE  *fp, char  *text, int  maxTextLength, const char  **program, int  *programLength, const char  **key, int  *keyLength, const char  **value, int  *valueLength, const char  **condition, int  *conditionLength);
+/**< Reads a line from a file in configure file format.  The caller supplies
+ *   the line buffer.  Pointers into that buffer are returned for the parsed
+ *   components.   For each component, the value is only filled in if both
+ *   the buffer pointer and the length pointer is non-NULL.  If the given
+ *   component is not found, the pointer is NULL and the length is 0.
+ *   \param fp File to read from
+ *   \param text Buffer to read the line into.
+ *   \param maxTextLength Length of input buffer.
+ *   \param program Pointer into buffer to the program name for this parameter (may be NULL)
+ *   \param programLength Length of program name for this parameter (may be NULL)
+ *   \param key Pointer into buffer to the key name for this parameter (may be NULL)
+ *   \param keyLength Length of the key name for this parameter (may be NULL)
+ *   \param value Pointer into the buffer to the value for this parameter (may be NULL)
+ *   \param valueLength Length of the value for this parameter (may be NULL)
+ *   \param condition Pointer into the buffer to the condition for a conditional parameter (may be NULL).
+ *   \param conditionLength Length of the condition text for a conditional parameter (may be NULL) */
+extern struct configurelist *ReadConfigureFile(const char  *fileName);
+/**< Read an entire configuration file.  All valid entries are returned, in
+ *   the order that they appear in the configuration file.  Both the
+ *   configurelist structures and the non-NULL members are allocated from
+ *   the heap, and should be freed with FreeConfigureList.
+ *   \param fileName Name of configuration file to read
+ *   \return A linked list of configuration parameters
+ */
+extern const char *GetConfig(const struct configurelist  *header, const char  *key, int  usedefault);
+/**< Search a linked list of configuration parameters for the given key.
+ *   Both the key and the program name are case-insensitive.
+ *   \param key The key to look for.  If it does not contain a dot, the program
+ *              name ProgramName is used.  Otherwise, the program name is the
+ *              text before the dot.
+ *   \param usedefault If zero, the program name and key in the configuration
+ *                     entry must match the requested program name and key
+ *                     exactly.  Otherwise, * and ? wildcards are expanded in
+ *                     the configuration entry's program name and key.
+ *   \return The value field of the matching configuration option, or NULL
+ *           if not found.
+ */
+extern const char *GetConfiguration(const char  *key);
+/**< Search the system configuration file for given key.
+ *   The system configuration file may contain wildcards * and ? in both
+ *   program name and key fields, and are otherwise matched without regard
+ *   to case.  The location of the system configuration file is
+ *   system-defined; see the administration documentation for details.
+ *   \param key The key to look for.  If it does not contain a dot, the program
+ *              name ProgramName is used.  Otherwise, the program name is the
+ *              text before the dot.
+ *   \return The value field of the matching configuration option, or NULL
+ *           if not found.  This is static data guaranteed to remain for the
+ *           lifetime of the program.
+ */
 extern struct configurelist *ReadStringConfig(char *str);
-extern void FreeConfigureList(struct configurelist  *cList);   /* frees a configure list */
+/**< Parse a single configuration line from a string.
+ *   \param str The configuration file format line.
+ *   \return If the string contains a valid configuration line, the single
+ *           configuration parameter it represents.  Otherwise, NULL. */
+extern void FreeConfigureList(struct configurelist  *cList);
+/**< Frees a configure list and all non-NULL fields therein.
+ *   \param cList The list to clear
+ */
 
 /* profile.c */
 extern void addstringprofile(char *str);
+/**< Adds a single preference setting to the user's profile.  These
+ *   settings are not saved to a file and remain in effect until the
+ *   end of the program.  They override any settings found in
+ *   global or user preference files.
+ *   \param str A single line of a configuration file */
 extern const char *getprofile (const char  *var );
+/**< Retrieve the value associated with a key in the user preferences.
+ *   User preferences override global preferences, and string preferences
+ *   override both.  See GetConfig() for details; matching is always
+ *   done with wildcards (i.e., usedefault=1).
+ *   \param var The key to search for.  If it does not contain a dot, the
+ *              program name ProgramName is used.  Otherwise, the program
+ *              name is the text before the dot.
+ *   \return The value assoicated with var, even if blank.  This points
+ *           to static space which will remain until program end or
+ *           refreshprofile() is called.  Returns NULL if there is no value. */
 extern int getprofileint (const char    *var , int DefaultValue);
+/**< Retrieve the value associated with a key in the user preferences.
+ *   See getprofile() for details.  This parses the value as an integer.
+ *   [note: the parsing is a bit sloppy, allowing minus signs and spaces
+ *   to appear anywhere, and even allowing no digits at all and no
+ *   overflow detection]
+ *   \param var The key to search for.  If it does not contain a dot, the
+ *              program name ProgramName is used.  Otherwise, the program
+ *              name is the text before the dot.
+ *   \param DefaultValue Default return value
+ *   \return The value assoicated with var, converted to an integer.
+ *           If there is no value associated with var, or an invalid
+ *           character is present in the value, DefaultValue is returned */
 extern int getprofileswitch (const char    *var , boolean DefaultValue);
-extern int profileentryexists (const char    *var , boolean DefaultValue);
+/**< Retrieve the value associated with a key in the user preferences.
+ *   See getprofile() for details.  This parses the value as a boolean.
+ *   True values are true, on, yes and 1.  False values are false, off,
+ *   no and 0.  Values are case-insensitive.
+ *   \param var The key to search for.  If it does not contain a dot, the
+ *              program name ProgramName is used.  Otherwise, the program
+ *              name is the text before the dot.
+ *   \param DefaultValue Default return value
+ *   \return The value assoicated with var, converted to FALSE (0) or
+ *           TRUE (1).  If there is no value associated with var, or the
+ *           value does not match one of the accepted strings exactly,
+ *           DefaultValue is returned */
+extern int profileentryexists (const char    *var , int usedefault);
+/**< Determine if a value associated with a key exists in the user preferences.
+ *   See getprofile() for details.
+ *   \param var The key to search for.  If it does not contain a dot, the
+ *              program name ProgramName is used.  Otherwise, the program
+ *              name is the text before the dot.
+ *   \param usedefault If 0, only exact matches are allowed.  Otherwise,
+ *                     * and ? may be present in the profile value.
+ *   \return TRUE (1) if a value exists; FALSE (0) otherwise. */
 extern const char *GetProfileFileName(void);
+/**< Obtain the name of the last file read for preferences.  If the user
+ *   has a preference file containing settings, this will be the user
+ *   prefernece file.  Otherwise, it will be the global preference file,
+ *   if present and containing settings.  Otherwise, it will be NULL.
+ *   \return A pointer to static space guaranteed to remain valid until
+ *           end-of-program or refreshprofile(). */
 extern const char *GetFirstProfileFileName(void);
+/**< Obtain the name of the first file read for preferences.  If there is
+ *   a global preference file containing settings, this will be the global
+ *   prefernece file.  Otherwise, it will be the user preference file,
+ *   if present and containing settings.  Otherwise, it will be NULL.
+ *   \return A pointer to static space guaranteed to remain valid until
+ *           end-of-program or refreshprofile(). */
 extern void refreshprofile(void);
-
-/* desym.c */
-extern int DeSymLink(const char *inp, char *outp, int newRoots);
+/**< Force re-reading of global and user preference files.  Environment
+ *   variables and system configuration parameters which affect the
+ *   preferences are re-checked as well.  However, the preferences
+ *   added via addstringprofile() are not reset.  */
 
 /* setprof.c */
 extern int setprofilestring(const char  *prog , const char  *pref , const char  *val);
+/**< Set a preference/profile entry in the user's preference file.
+ *   Unlike addstringtoprofile(), this adds the preference at the
+ *   user configuration file level, and prepends it to the user's preference
+ *   file, as wel, removing any existing like-named preferencel.  Note that
+ *   for this to work, the user must actually have a preference file, the
+ *   file must have at least one preference in it and the preference file
+ *   must be writable.  If none of these are true, the preference is not
+ *   even set in the current profile.  This calls refreshprofile(), thus
+ *   invalidating any existing profile value pointers.
+ *   \param prog The program name to use; ProgramName if NULL
+ *   \param pref The preference name (should not contain a dot)
+ *   \param val  The value to assign to the preference
+ */
 
 /* findfile.c */
 extern void findfileinpath(char *buffer, const char *path, const char *fname);
+/**< Search for file in each directory of a colon-separated path.  If not
+ *   found, an empty string is returned.
+ *   \param buffer Output buffer; should be big enough to hold max path + fname + 2
+ *   \param path The colon-separated list of directories.
+ *   \param fname The file to find (note: any path entry with read access may match,
+ *                not just files).
+ */
 
 /* abbrpath.c */
 /* note: "const" pathname only applies if it isn't shorten's static buffer */
-extern const char *ap_Shorten(const char  *pathname);          /* ap_Shorten(path) tries to shorten
-                                        * path using the current home dir */
-extern const char *ap_ShortenAlso(const char  *pathname , const char  *auxI , const char  *auxH);      /* (path, otherID, otherHD does the
-                                        * same but with otherID/otherHD also. */
-extern const char *ap_ShortenTo(const char  *pathname , int  maxLen);        /* (pathname, maxlen) shortens to a
-                                        * maximum length, abbreviating the
-                                        * path prefix to hyphens. */
-extern const char *ap_ShortenAlsoTo(const char  *pathname , const char  *auxI , const char  *auxH , int  maxLen);    /* (pathname, otherID, otherHD, maxlen)
-                                        * does both things. */
+extern const char *ap_Shorten(const char  *pathname);
+/**< Attempt to replace prefix of user's home directory with ~.
+ *   \param pathname Path to shorten
+ *   \return pathname or a static buffer containing the shortened path.
+ *           This buffer may be overwritten by next call to any ap_Shorten*
+ *           functions */
+extern const char *ap_ShortenAlso(const char  *pathname , const char  *auxI , const char  *auxH);
+/**< Attempt to replace prefix of user's home directory with ~ and maybe
+ *   other user's home directory as ~user
+ *   \param pathname Path to shorten
+ *   \param auxI Other user's name
+ *   \param auxN Other user's home directory
+ *   \return pathname or a static buffer containing the shortened path.
+ *           This buffer may be overwritten by next call to any ap_Shorten*
+ *           functions */
+extern const char *ap_ShortenTo(const char  *pathname , int  maxLen);
+/**< Shorten path by removing prefix components, replacing all removed
+ *   components with three dashes.  For example, /x/y/z/a/b -> ---/a/b
+ *   Note that this calls ap_Shorten() to change the user's home
+ *   directory to ~ as well.
+ *   \param pathname Path to shorten
+ *   \param maxLen Length to shorten it to
+ *   \return pathname or a static buffer containing the shortened path.
+ *           Note that if the last element of the path is too long, this path
+ *           may still be longer than maxLen, because shortening is impossible.
+ *           This buffer may be overwritten by next call to any ap_Shorten*
+ *           functions */
+extern const char *ap_ShortenAlsoTo(const char  *pathname , const char  *auxI , const char  *auxH , int  maxLen);
+/**< Shorten path by removing prefix components, replacing all removed
+ *   components with three dashes.  For example, /x/y/z/a/b -> ---/a/b
+ *   Note that this calls ap_ShortenAlso() to change the user's home
+ *   directory and an alternate home directory to ~/~user as well.
+ *   \param pathname Path to shorten
+ *   \param auxI Other user's name
+ *   \param auxH Other user's home directory
+ *   \param maxLen Length to shorten it to
+ *   \return pathname or a static buffer containing the shortened path.
+ *           Note that if the last element of the path is too long, this path
+ *           may still be longer than maxLen, because shortening is impossible.
+ *           This buffer may be overwritten by next call to any ap_Shorten*
+ *           functions */
+
 
 /* fselect.c */
 extern int fselect(int nfds, FILE **rfiles, FILE **wfiles, FILE **xfiles, struct timeval *timeout);
-
-/* fwrtallc.c */
-extern int fwriteallchars(const char  *Thing, int  NItems, FILE  *stream);      /* pass (text, num, stream) and it
-                                        * retries fwrite on interruption */
-
-/* writeall.c */
-extern int writeall(int  fd, const char  *Buf, int  NBytes);            /* pass (fd, buf, nbytes) and it
-                                        * retries write on interruption */
+/**< Wait for activity on multiple stdio FILE descriptors.  Note that this
+ *   function cannot wait on any file whose underlying descriptor is greater
+ *   than FD_SETSIZE (see select(2) for details).
+ *   \param nfds length of non-NULL rfiles, wfiles and/or xfiles arrays.
+ *   \param rfiles Files to wait for data available for reading, if non-NULL.
+ *                 On return, only entries on which activity was detected
+ *                 will be non-NULL.
+ *   \param wfiles Files to wait for ready to write more data, if non-NULL
+ *                 On return, only entries on which activity was detected
+ *                 will be non-NULL.
+ *   \param xfiles Files to wait for exceptions, if non-NULL
+ *                 On return, only entries on which activity was detected
+ *                 will be non-NULL.
+ *   \param timeout Microseconds to wait for activity, at most, if non-NULL.
+ *                  If activity occurs before this time, timeout is updated
+ *                  with the time remaining.  If NULL, block indefinitely.
+ *   \return The number of descriptors on which I/O was waiting (0 if timeout).
+ */
 
 /* nicetime.c */
-extern const char *NiceTime(long int Time);            /* Converts long arg to printable time
-                                        * string without newline */
-
-struct LinePromState {
-    int             BeginDataLevel;
-    char            InDefine, Promoting, SawBlankLine;
-};
-
-/* lineprom.c */
-extern int BE2LinePromoteInit(struct LinePromState  **refstate);
- /*
-  * int BE2LinePromoteInit(refstate) struct LinePromState **refstate; Returns
-  * < 0 for (malloc) failure, 0 for OK.  Initializes *refstate to point to
-  * malloc'ed storage that will hold the LinePromote state.
-  */
-extern int BE2LinePromote(const char  *line , struct LinePromState  *state);
- /*
-  * int BE2LinePromote(line, state) char *Line; struct LinePromState *state;
-  * Works only on BE2 Datastream messages* Returns 2 if this line (including
-  * the newline) should be ``promoted'' from the beginning of a message to the
-  * beginning of an error message that encapsulates the message.  Returns 0 if
-  * the line should stay where it is. Returns 1 if this line should be
-  * ``demoted'' to the very tail end of the encapsulated message.  Returns < 0
-  * on errors.
-  */
-extern int BE2LinePromoteEnd(struct LinePromState  *state);
- /*
-  * int BE2LinePromoteEnd(state) struct LinePromState *state; Cleans up the
-  * malloc'ed storage and returns 0 if OK, non-zero on errors.
-  */
-
-/* usignal.h */
-extern const char *UnixSignal(int	 signalNumber);          /* Pass it a signal and it returns a
-                                        * static string giving its name */
-
-/* tfail.c */
-extern int tfail(int  errorNumber);               /* return TRUE iff the errno value
-                                        * passed as arg is a temp failure */
+extern const char *NiceTime(long int Time);
+/**< Converts system time to printable time string without newline
+ *   \param Time - Seconds since the epoch
+ *   \return a static buffer containing a string representatino of Time */
 
 /* topen.c */
-extern FILE *topen(const char  *name , const char  * const argv[] , const char  *mode, int  *pgrp);               /* like popen(void) but enable timeouts for
-                                        * the close */
-extern FILE *qopen(const char  *name , const char  * const argv[] , const char  *mode);               /* topen(void) with simplified calling
-                                        * sequence */
-
-extern int tclose(FILE  *ptr, int  seconds , int  *timedout);              /* pclose(void) sensitive to subprocess
-                                        * timeouts */
-extern int qclose(FILE  *ptr);              /* tclose(void) with simplified calling
-                                        * sequence */
+extern FILE *topen(const char  *name , const char  * const argv[] , const char  *mode, int  *pgrp);
+/**< Spawn a process in a pipe.  To be used with tclose() or qclose(), which
+ *   provide a timeout for closing.
+ *   \param name Process name for execv()
+ *   \param argv Process arguments for exec()
+ *   \param mode File mode (like fopen) for local end of pipe
+ *   \param pgrp Return of process group of spawned child
+ *   \return stdio FILE descriptor for local end of pipe */
+extern FILE *qopen(const char  *name , const char  * const argv[] , const char  *mode);
+/**< Spawn a process in a pipe.  To be used with qclose() or tclose(), which
+ *   provide a timeout for closing.  Unlike tclose(), the child process ID is
+ *   not returned.
+ *   \param name Process name for execv()
+ *   \param argv Process arguments for exec()
+ *   \param mode File mode (like fopen) for local end of pipe
+ *   \return stdio FILE descriptor for local end of pipe */
+extern int tclose(FILE  *ptr, int  seconds , int  *timedout);
+/**< Close spawned process pipe and reap prcoess.  To be used with topen()
+ *   or qopen().
+ *   \param ptr The file descriptor returned by topen()
+ *   \param seconds How long to wait, in seconds, for the process to die on
+ *          its own.  If this is exceeded, the process is not reaped.
+ *   \param timedout Set to 0 if process reaped, 1 if timed out instead.
+ *                   If NULL, the seconds parameter is ignored and tclose
+ *                   will wait for the child process indefinitely.
+ *   \return on timeout, -1; otherwise, the status of the child process
+ *           (see wait(2)) */
+extern int qclose(FILE  *ptr);
+/**< Close spawned process pipe and reap prcoess.  To be used with qopen()
+ *   or topen().  Unlike tclose(), qclose() always waits indefinitely for
+ *   the child to terminate.
+ *   \param ptr The file descriptor returned by qopen()
+ *   \return the status of the child process (see wait(2)) */
 
 /* t2open.c */
-extern int t2open(const char  *name , char  * const argv[], FILE  **r , FILE  **w);              /* topen(void) with both reading and
-                                        * writing of subprocesses */
-extern int t2close(FILE  *ptr, int  seconds , int  *timedout);             /* close the t2open(void) */
-
-/* ulsindex.c */
-extern char *ULsindex(const char  *big , const char  *small);            /* Searches for substring of arg1 that
-                                        * matches arg2, ignoring alpha case,
-                                        * and returns a pointer to this
-                                        * substr. If no match is found,
-                                        * returns a 0. */
+extern int t2open(const char  *name , char  * const argv[], FILE  **r , FILE  **w);
+/**< Spawn a process with two pipes.  Close with t2close().
+ *   \param name Process name for execv()
+ *   \param argv Process arguments for exec()
+ *   \param r returned stdio FILE for read from process' standard output
+ *   \param w returned stdio FILE for write to process' standard input
+ *   \return 0 on success; -1 otherwise */
+extern int t2close(FILE  *ptr, int  seconds , int  *timedout);
+/**< Close spawned process pipes and reap process.   To be used with t2open().
+ *   Note that the read descriptor from t2open (r) should be closed independently,
+ *   using fclose(3).
+ *   \param ptr The write descriptor from t2open (w)
+ *   \param seconds How long to wait, in seconds, for the process to die on
+ *          its own.  If this is exceeded, the process is not reaped.
+ *   \param timedout Set to 0 if process reaped, 1 if timed out instead.
+ *                   If NULL, the seconds parameter is ignored and tclose
+ *                   will wait for the child process indefinitely.
+ *   \return on timeout, -1; otherwise, the status of the child process
+ *           (see wait(2)) */
 
 /* ulstrcmp.c */
-extern int ULstrcmp(const char  *s1 , const char  *s2);            /* Compares two arg strings, ignoring
-                                        * alpha case, like strcmp. */
-extern int ULstrncmp(const char  *s1 ,const char  *s2,int  n);	       /* Compares two arg strings, ignoring
-                                        * alpha case, like strncmp. */
-
-/* ulstlmat.c */
-extern int ULstlmatch (const char  *big,const char  *small );          /* Returns 1 iff initial characters of
-                                        * arg1 match arg2, ignoring alpha
-                                        * case, else 0. */
+extern int ULstrcmp(const char  *s1 , const char  *s2);
+/**< Compare two strings, ignoring ASCII-alpha case.
+ *   \param s1 A string
+ *   \param s2 A string
+ *   \return tolower(*s1)-tolower(*s2) where they differ, or 0 if match */
+extern int ULstrncmp(const char  *s1 ,const char  *s2,int  n);
+/**< Compare two strings, ignoring ASCII-alpha case.
+ *   \param s1 A string
+ *   \param s2 A string
+ *   \param n Compare at most n characters
+ *   \return tolower(*s1)-tolower(*s2) where they differ, or 0 if match */
 
 /* formerly newstr.o */
-#define NewString strdup
 #define FREESTRINGVAR(s)   \
 		((s) = (char *)((s) ? (free(s), NULL) : NULL))
-                                        /* Deallocate value from NewString.
-                                        *  Set variable to NULL. */
-
-/* uerror.c */
-extern const char *UnixError(int	 errorNumber);           /* Pass it an errno value and it
-                                        * returns a static (canned) string
-                                        * describing the error */
-
-/* titles.c */
-extern void SetInitialArgs(int  argc , char  **argv , char  **envp);      /* SetInitialArgs(argc, argv,
-                                        * envp|NULL)--pass proc title stuff
-                                        * after copying everything wanted from
-                                        * argv, and from envp, too, if that's
-                                        * passed also. */
-extern void SetProcTitle(const char  *str, ...);        /* SetProcTitle(str, a1, a2, a3, a4,
-                                        * a5)--like printf into the process
-                                        * title. */
+/**< Deallocate value and set variable to NULL.
+ *   \param s Variable to read and set.  If NULL, does nothing. */
 
 /* getaddr.c */
-extern unsigned long getaddr (void);	       /* Return our internet address as a 
-				        * long in network byte order.  
-					* Returns zero if it can't find one. */
+extern unsigned long getaddr (void);
+/**< Return machine's default internet address.
+ *   \return IPv4 internet address in network byte order, or zero if it
+ *           can't find one. */
 
 /* encode.c */
-extern void output64chunk(int c1, int c2, int c3, int pads, FILE *fp);
+extern void output64chunk(unsigned char c1, unsigned char c2, unsigned char c3, int pads, FILE *fp);
+/**< Output 3 consecutive bytes to a file, base-64-encoded (always writes 4 characters).
+ *   \param c1 First byte
+ *   \param c2 Second byte
+ *   \param c3 Third byte
+ *   \param pads Number of padding bytes at end (0, 1, or 2).  I.e.,
+ *               number of parameters to ignore.
+ *   \param fp Output file */
 extern int hexchar(char c);
+/**< Convert hex digit to number.
+ *   \param c The hex digit
+ *   \return the integer value of c (0-15), or -1 if c is not a hex digit */
 extern int char64(char c);
-extern int from64(FILE *, FILE *);
+/**< Convert character in base-64 encoding to number.
+ *   \param c The base-64 encoded character
+ *   \return the integer value of c (0-63), or -1 if c is not base-64 encoded */
+extern int from64(FILE *infile, FILE *outfile);
+/**< Convert file in base-64 encoding to its binary equivalent.
+ *   \param infile Input file
+ *   \param outfile Output file
+ *   \return the number of bytes it thinks it's written (no error checking on write). */
 extern void to64(FILE *, FILE *);
+/**< Convert binary file to file in base-64 encoding.
+ *   \param infile Input file
+ *   \param outfile Output file */
 extern int fromqp(FILE *, FILE *);
+/**< Convert file from quoted-printable encoding to binary equivalent.
+ *   \param infile Input file
+ *   \param outfile Output file
+ *   \return the number of bytes it thinks it's written (no error checking on write). */
 
 #define ORDINALIZE(i) \
   (((((i)%100)==11)||(((i)%100)==12)||(((i)%100)==13))?"th": \
    (((i)%10)==1)?"st": \
    (((i)%10)==2)?"nd": \
    (((i)%10)==3)?"rd":"th")
-/* Use ORDINALIZE like this:
-   printf("the %d%s element is %s,\n",
-          i, ORDINALIZE(i), a[i]);
-*/
+/**< Figure out ordinal suffix for number.
+ *   For example:  `printf("the %d%s element is %s,\n", i, ORDINALIZE(i), a[i]);`
+ *   \param i The number (evaluated more than once)
+ *   \return string constant to append to number to make it ordinal */
 
 #define CARDINALIZE(i,z,o,m) \
   (((i)==0)?(z): \
    ((i)==1)?(o):m)
-/* Use CARDINALIZE like this:
-   printf(CARDINALIZE(n, 
-                      "There are no elements.\n",
-		      "There is one element.\n",
-		      "There are %d elements.\n"),
-	  n); */
-
-/* errhdlr.c */
-#include <setjmp.h>
-#include <sys/param.h>
-
-#define EH_ERR_MSG_BUF_SIZE (4*MAXPATHLEN)
-
-typedef struct {
-  jmp_buf jb;
-} EH_environment;
-
-extern char EH_Error_Msg[];
-extern EH_environment *_error_handler_env;
-
-#define EH_ret_code(module, code) ((int)(((int)(module)*0x10000)+(ABS((int)(code))&0xffff)))
-#define EH_module(ehcode) (((int)ehcode)/0x10000)
-#define EH_code(ehcode) (((int)ehcode)%0x10000)
-
-#define EH_err(errcode, errmsg) \
-  (strncpy(EH_Error_Msg, (errmsg), EH_ERR_MSG_BUF_SIZE), \
-   longjmp(_error_handler_env->jb, (errcode)))
-
-#define EH_cond_error_on(test, errcode, errmsg) \
-  if (test) EH_err((errcode),(errmsg))
-
-#define EH_propagate_error(comment) \
-  (strncat(EH_Error_Msg, ", ", EH_ERR_MSG_BUF_SIZE-strlen(EH_Error_Msg)-1), \
-   strncat(EH_Error_Msg, (comment), EH_ERR_MSG_BUF_SIZE-strlen(EH_Error_Msg)-1), \
-   longjmp(_error_handler_env->jb, _err_code))
-
-#define EH_restore_handler \
-  _error_handler_env = _saved_handler_env
-
-#define EH_begin \
-{ \
-  int _err_code; \
-  EH_environment *_saved_handler_env, _new_handler_env; \
-  _saved_handler_env = _error_handler_env; \
-  if ((_err_code = setjmp(_new_handler_env.jb)) == 0) { \
-    _error_handler_env = &(_new_handler_env);
-
-#define EH_handle \
-  } else { \
-    EH_restore_handler;
-
-#define EH_end \
-  } \
-  EH_restore_handler; \
-}
-
-#define EH_break         EH_restore_handler; break
-#define EH_continue      EH_restore_handler; continue
-#define EH_goto          EH_restore_handler; goto
-#define EH_return        EH_restore_handler; return
-#define EH_return_val(x) EH_restore_handler; return(x)
-
-/*
-  Standard routines:
-     These routines will signal errors, so be prepared to catch those errors.
-*/
-
-extern void *emalloc(long  size);
-extern void *erealloc(void  *old, long  newsize);
-#define CopyString strdup
-
-/*
-  Module definitions:
-*/
-
-#define EH_module_system 0
-#define EH_module_prs 1
-#define EH_module_alq 2
+/**< Select parameter based on how many there are.  For exmaple:
+ * `printf(CARDINALIZE(n, 
+ *                    "There are no elements.\n",
+ *		      "There is one element.\n",
+ *		      "There are %d elements.\n"),
+ *	  n);`
+ *   This example may result in a format string warning.
+ *   \param i The number (evaluated more than once)
+ *   \param z The selection for zero
+ *   \param o The selection for one
+ *   \param m The selection fro many
+ *   \return z, o, or m */
 
 /** @} */
 
@@ -394,9 +623,22 @@ extern void *erealloc(void  *old, long  newsize);
 
 /* lcstring.c */
 char *lcstring(char *d, const char *s, int n);
+/**< Convert ASCII upper-case letters in a string to lower-case.
+ *   [bug: if n == 0, d[-1] will be set to 0]
+ *   \param d The destination buffer
+ *   \param s The source string
+ *   \param n The space available at d.  At most n-1 characters will be
+ *            converted and copied, and d will always be 0-terminated. */
 
 /* ucstring.c */
 char *ucstring(char *d, const char *s, int n);
+/**< Convert ASCII lower-case letters in a string to upper-case.
+ *   [bug: if n == 0, d[-1] will be set to 0]
+ *   \param d The destination buffer
+ *   \param s The source string
+ *   \param n The space available at d.  At most n-1 characters will be
+ *            converted and copied, and d will always be 0-terminated. */
+
 
 ENDCPLUSPLUSPROTOS
 

@@ -374,7 +374,7 @@ htmlform::AddInputNode(attlist *atts) {
 		w = AWidget::NewWidget("ImageMap");
 		attx = atts->GetAttribute("align");
 		if (attx) 
-			w->Set(slot_align, NewString(attx->value));
+			w->Set(slot_align, strdup(attx->value));
 		w->Set(slot_labelActivateCallback, &CBMapClick);
 
 		// get URL - initiate fetch
@@ -533,7 +533,7 @@ void htmlform::ApplyOptionAttrs(attlist *atts) {
         else values=(const char **)realloc(values, al->ItemCount()*sizeof(const char *));
         al->Set(slot_optionValues, values);
         if(att && att->value) {
-            values[al->ItemCount()-1]=NewString(att->value);
+            values[al->ItemCount()-1]=strdup(att->value);
         } else values[al->ItemCount()-1]=NULL;
     } else if(wgt->IsType(class_AOptionMenu)) {
         AOptionMenu *am=(AOptionMenu *)fields[fields.GetN()-1].wgt;
@@ -545,7 +545,7 @@ void htmlform::ApplyOptionAttrs(attlist *atts) {
         else values=(const char **)realloc(values, am->ItemCount()*sizeof(const char *));
         am->AWidget::Set(slot_optionValues, values);
         if(att && att->value) {
-            values[am->ItemCount()-1]=NewString(att->value);
+            values[am->ItemCount()-1]=strdup(att->value);
         } else values[am->ItemCount()-1]=NULL;
     }
 }

@@ -70,6 +70,6 @@ InstallHelpAlias(search, searching)
 InstallHelpAlias(spellck, spellcheck checkspell checkspelling ez-spell ez-spellcheck ez-spelling ezspellcheck spelling)
 InstallHelpAlias(tags, tag)
 
-InstallDocs(ezdiff.doc deskey.doc dsearch.doc isearch.doc filter.doc spell.doc tags.doc,${DESTDIR}/doc/PROGRAMMER)
+InstallDocs(deskey.doc,${DESTDIR}/doc/PROGRAMMER)
 InstallDocs(ezdiff.pr compile.pr tags.pr isearch.pr spell.pr, ${DESTDIR}/lib/prs)
 

@@ -350,7 +350,7 @@ the \italic{dataobject} to a given \italic{stdio} stream.
 
 
 Because the Toolkit architecture supports embedded data objects and  multiple 
-views of the same data object, there is a mechanism to insure that a data 
+views of the same data object, there is a mechanism to ensure that a data 
 object does not write itself more than once.  The mechanism is a 
 \italic{writeID}.  The first \italic{Write} method generates a 
 \italic{WriteID}.  If the method encounters an embedded data object which 

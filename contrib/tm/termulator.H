@@ -5,6 +5,10 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
+/** \addtogroup libtermulator Object termulator
+ * A dynamically loadable ATK class file.  Contains termulator, tm19, tmapp,
+ * tmview.
+ * @{ */
 /*
  * terminal emulator for text
  */
@@ -96,6 +100,7 @@ public:
 	inline int   GetParseBufLen() { return (this->parseLen); }
 	inline void SetParseBufLen(int l) { (this->parseLen=(l)); }
         inline unsigned long GetParseBufMax() { return (sizeof(this->parseBuf)); }
+	void CheckChild(void);
     
         int screen,cursor,lastSubmit;
 	int width,height;
@@ -112,6 +117,7 @@ public:
 	int pty;
 	FILE *ptyFile;
 	int pid;
+	WAIT_STATUS_TYPE child_status;
 	struct cmd *lastCmd, *curCmd;
 	const char * const *args;
 	boolean insert,standout;
@@ -127,5 +133,5 @@ public:
 	termulator_statefptr state;
 	boolean currentlyReadingTemplateKluge;
 };
-
+/** @} */
 #endif /* _termulator_H_ */

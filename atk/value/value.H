@@ -4,7 +4,7 @@
  *         Copyright IBM Corporation 1988,1989 - All Rights Reserved      *
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
-/** \addtogroup libvalue libvalue.so
+/** \addtogroup libvalue Object value
  *  A dynamically loadable ATK class file.  Contains value, valueview,
  *  GetRecV, bargraphV, buttonV, checkv, clicklistV, controlV, enterstrV,
  *  entertext, etextview, fourwayV, mbuttonv, menterstrV, mentertext,

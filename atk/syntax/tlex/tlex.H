@@ -1,6 +1,6 @@
 #ifndef _tlex_H_
 #define _tlex_H_
-/** \addtogroup libtlex libtlex.so
+/** \addtogroup libtlex Object tlex
  *  A dynamically loadable ATK class file.  Contains tlex.
  * @{ */
 /* tlex.H - lexical analyzer which reads from ATK text  */

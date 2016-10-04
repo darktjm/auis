@@ -724,7 +724,7 @@ management system:  application programs must often be ported to other
 workstations that will eventually be deployed.  The workstations often have 
 similar, but not identical display capabilities and the hardware can be 
 significantly different; the underlying window manager may be different. 
- To insure portability \indexi{Application program++Portability} of your 
+ To ensure portability \indexi{Application program++Portability} of your 
 application, you should never make direct calls to an underlying window 
 management system; you should always use the \italic{graphic} class 
 procedures and methods; doing so will maximize the device independence and 

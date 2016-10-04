@@ -8,10 +8,12 @@ FILE_PATTERNS          = *.h *.H
 PROJECT_NAME           = "Andrew Toolkit"
 PROJECT_BRIEF          = The Andrew User Interface System
 PROJECT_LOGO           = ${ANDREWDIR}/lib/xicons/alogo.icon
-ALWAYS_DETAILED_SEC    = YES
+# Enabling is more consistent, but doxy repeats so much crap everywhere
+# that it's better to just leave it off.
+#ALWAYS_DETAILED_SEC    = YES
 INLINE_INHERITED_MEMB  = YES
 STRIP_FROM_PATH        = ${ANDREWDIR}
-STRIP_FROM_INC_PATH    = ${ANDREWDIR}/include ${ANDREWDIR}/include/atk
+STRIP_FROM_INC_PATH    = ${ANDREWDIR}
 JAVADOC_AUTOBRIEF      = YES
 TAB_SIZE               = 8
 #OPTIMIZE_OUTPUT_FOR_C  = YES
@@ -47,7 +49,7 @@ GENERATE_LATEX         = YES
 PAPER_TYPE             = letter
 
 # probably need to find any preproc functions that create classes and add here
-PREDEFINED             = __GNUC__
+PREDEFINED             = __GNUC__ __STDC__
 MACRO_EXPANSION        = YES
 EXPAND_ONLY_PREDEF     = YES
 EXPAND_AS_DEFINED      = BEGINCPLUSPLUSPROTOS ENDCPLUSPLUSPROTOS \
@@ -62,7 +64,12 @@ EXPAND_AS_DEFINED      = BEGINCPLUSPLUSPROTOS ENDCPLUSPLUSPROTOS \
 			 WIDGET_DATA_FUNC_CLASS WIDGET_VIEW_FUNC_CLASS WIDGET_DATA_METHOD_CLASS \
 			 WIDGET_VIEW_METHOD_CLASS WIDGET_FUNC_AND_METHOD_CLASS \
 			 DECLARE_GLIST_CLASS GLIST_CLASS \
-			 DEFINE_AMHASH_CLASS DEFINE_AOHASH_CLASS DEFINE_AHASH_CLASS_ITER
+			 DEFINE_AMHASH_CLASS DEFINE_AOHASH_CLASS DEFINE_AHASH_CLASS_ITER \
+			 ATK_CLASS ASEQ ASEQC ASTYPE AVSSET \
+			 Concat Concat3 Stringize
+# supposedly this is only needed for including files not processed, but
+# this is necessary to get the EXPAND_AS_DEFINED option to work
+INCLUDE_PATH           = ${ANDREWDIR}/include ${ANDREWDIR}/include/atk
 
 SKIP_FUNCTION_MACROS   = NO
 

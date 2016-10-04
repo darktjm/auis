@@ -135,13 +135,11 @@ InstallDocs(headertxt.help,${DESTDIR}/help)
 InstallHelpAlias(headertxt, header footer headers footers)
 
 
-InstallDocs(bp.doc,${DESTDIR}/doc/PROGRAMMER)
-InstallDocs(bpv.doc,${DESTDIR}/doc/PROGRAMMER)
-
 InstallDocs(search.doc,${DESTDIR}/doc/PROGRAMMER)
 InstallDocs(smpltext.doc,${DESTDIR}/doc/PROGRAMMER)
 InstallDocs(tabs.doc,${DESTDIR}/doc/PROGRAMMER)
 
+InstallDocs(text.doc,${DESTDIR}/doc/PROGRAMMER)
 InstallDocs(textv.doc,${DESTDIR}/doc/PROGRAMMER)
 InstallDocs(txtstvec.doc,${DESTDIR}/doc/PROGRAMMER)
 

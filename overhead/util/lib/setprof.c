@@ -42,8 +42,8 @@ int setprofilestring(const char *prog, const char *pref, const char *val)
     char newProfileFileName[MAXPATHLEN+20]; /* the extra because we */
 					    /* tack extensions onto */
 					    /* existing filenames */
-    char finalProfileFileName[MAXPATHLEN];
-    char LineBuf[BIGPREF];
+    const char *finalProfileFileName;
+    char LineBuf[BIGPREF], *real = NULL;
     const char *program;
     const char *key;
     const char *condition;
@@ -63,7 +63,7 @@ int setprofilestring(const char *prog, const char *pref, const char *val)
 
 
     if (!(profileFileName = GetProfileFileName()) ||
-	strcmp(profileFileName, (char*) AndrewDir("/lib/global.prf")) == 0 ||
+	strcmp(profileFileName, AndrewDir("/lib/global.prf")) == 0 ||
 	 access(profileFileName, W_OK))
 	if (!(profileFileName = GetFirstProfileFileName()))  /* ~/preferences */
 	    return -1;
@@ -74,41 +74,20 @@ int setprofilestring(const char *prog, const char *pref, const char *val)
      * of it and want to preserve the link.
      */
 
-    {
-	char buf1[MAXPATHLEN];
-	char buf2[MAXPATHLEN];
-	char *lastbuf;
-	char *nextbuf;
-
-	strcpy(buf1, profileFileName);
-	lastbuf = buf1;
-	nextbuf = buf2;
-
-	while (osi_readlink(lastbuf, nextbuf, MAXPATHLEN) > 0) {
-	    char *t;
-
-	    /* symlinks may be stated relative to their directory. */
-	    /* bletch. */
-
-	    if (nextbuf[0] != '/' && (t = strrchr(lastbuf, '/')) != NULL)
-		strcpy(t + 1, nextbuf);
-	    else {
-		t = lastbuf;
-		lastbuf = nextbuf;
-		nextbuf = t;
-	    }
-
-	}
-
-	strcpy(finalProfileFileName, lastbuf);
-    }
+    real = realpath(profileFileName, NULL);
+    if(!real)
+	finalProfileFileName = profileFileName;
+    else
+	finalProfileFileName = real;
 
 
     /* Strictly speaking, this test just saves time.  It could be omitted. */
     if ((access(finalProfileFileName, W_OK) != 0) && (errno != ENOENT)) {
 	fprintf(stderr,
 		"<error:setprofile>No write access on file '%s'.\n",
-		finalProfileFileName); 
+		finalProfileFileName);
+	if(real)
+	    free(real);
 	return -1;
     }
 
@@ -127,11 +106,15 @@ int setprofilestring(const char *prog, const char *pref, const char *val)
 		    profileFileName); 
 	    newW = fopen(profileFileName, "w");
 	    if (newW == NULL) {
+		if(real)
+		    free(real);
 		return(-2);
 	    }
 	    fclose(newW);
 	    oldR = fopen(profileFileName, osi_F_READLOCK);
 	    if (oldR == NULL) {
+		if(real)
+		    free(real);
 		return(-3);
 	    }
 	}
@@ -139,6 +122,8 @@ int setprofilestring(const char *prog, const char *pref, const char *val)
 
     if (osi_ExclusiveLockNoBlock(fileno(oldR))){
 	fclose(oldR);
+	if(real)
+	    free(real);
 	return(-4);
     }
 
@@ -146,6 +131,8 @@ int setprofilestring(const char *prog, const char *pref, const char *val)
     newW = fopen(newProfileFileName, "w");
     if (newW == NULL) {
 	fclose(oldR);
+	if(real)
+	    free(real);
 	return(-5);
     }
 
@@ -155,12 +142,16 @@ int setprofilestring(const char *prog, const char *pref, const char *val)
     if (newR == NULL) {
 	fclose(oldR);
 	fclose(newW);
+	if(real)
+	    free(real);
 	return(-6);
     }
     if (osi_ExclusiveLockNoBlock(fileno(newR))){
 	fclose(newR);
 	fclose(oldR);
 	fclose(newW);
+	if(real)
+	    free(real);
 	return(-7);
     }
 
@@ -190,18 +181,24 @@ int setprofilestring(const char *prog, const char *pref, const char *val)
     if (fclose(newW)) {
 	fclose(oldR);
 	fclose(newR);
-	unlink(newProfileFileName);
+	remove(newProfileFileName);
+	if(real)
+	    free(real);
 	return(-8);
     }
 
     if (rename(newProfileFileName, finalProfileFileName)) {
 	fclose(newR);
 	fclose(oldR);
+	if(real)
+	    free(real);
 	return(-9);
     }
 
     fclose(oldR);
     fclose(newR);
+    if(real)
+	free(real);
     return(0);
 }
 

@@ -62,7 +62,7 @@ schedapp::Start( )
 	fprintf(stderr,"sched: Failed to create new window; exiting.\n");
 	return(FALSE);
     }
-    if (*this->stream_name == 0 ) strcpy( this->stream_name,"itcCR.scd");
+    if (*this->stream_name == 0 ) strcpy( this->stream_name,environ::AndrewDir("/lib/zip/itcCR.scd"));
     if((this->schedp = sched::Create( this->stream_name )) == NULL) {
 	fprintf(stderr,"sched: Could not allocate enough memory; exiting.\n");
 	return(FALSE);

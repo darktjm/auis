@@ -5,7 +5,7 @@
  *        For full copyright information see:'andrew/doc/COPYRITE'        *
 \* ********************************************************************** */
 
-/** \addtogroup libincsearch libincsearch.so
+/** \addtogroup libincsearch Object incsearch
  *  A dynamically loadable ATK class file.  Contains incsearch.
  * @{ */
 #include <ATK.H>
