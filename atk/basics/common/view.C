@@ -632,7 +632,7 @@ void view::InitChildren()
     /*
       All parent views are responsible for overriding this method.
       This is a request to instantiate all one's children.
-      i.e. insure that all child views 
+      i.e. ensure that all child views 
       1. exist and
       2. are linked into the view tree.
  

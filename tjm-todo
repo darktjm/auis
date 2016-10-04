@@ -142,6 +142,14 @@
       -Wpointer-to-int-cast (on by default)
   - remove any unsupportable code (i.e., old UNIX, DOS, OS/2)
   - remove any functions which duplicate standard functions (e.g. strdup)
+  - make the sysdep stuff more conformant with what I support: Single
+    UNIX by default; the only things in Linux-specific dirs and code is
+    stuff which is actually Linux-dependent, like the way to generate
+    shared objects (loading them is standardized), system paths and
+    default commands (e.g. groff, /usr/share/man, etc.) and kernel
+    access via proc and Linux-specific libc calls.  Also, update
+    porting documents to get rid of obsolete assumptions, like <=14-char
+    file names.  Also, update installation instructions as needed.
   - much of it is C++.  It might be a good idea to look for and remove
     Cisms where C++ does it differently (and presumably the same or better)
     (note that unlike some idiots, I don't consider cpp macros to be C-only)

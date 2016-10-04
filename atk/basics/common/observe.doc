@@ -325,7 +325,7 @@ long strlen; \{
 
 }
 
-The call \italic{budget_NotifyObservers} insures that any observers (e.g., 
+The call \italic{budget_NotifyObservers} ensures that any observers (e.g., 
 instances of \italic{spreadsheet} or \italic{piechart}) are notified of the 
 change in the cell value. 
 

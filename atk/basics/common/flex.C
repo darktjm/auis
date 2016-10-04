@@ -72,11 +72,12 @@ ATK_IMPL("flex.H")
 #include <flex.H>
 
 
-void flex::MemCpy(char *dest, char *src, size_t len) {
+void flex::CopyTo(char *dest, char *src, size_t len) {
     memcpy(dest, src, len);
 }
 
-void flex::MemMove(char *dest, char *src, size_t len) {
+void flex::MoveTo(char *dest, char *src, size_t len) {
+    /* assume efficient implementation which adds little if anything to memcpy */
     memmove(dest, src, len);
 }
 
@@ -121,9 +122,9 @@ flex::MakeGap(size_t i, size_t len ) {
 			 part to be moved to follow the gap
 			 part after the old gap
 			 */
-			MemCpy( telts, elts, i*esize );
-			MemCpy( telts+i+newgaplen, elts+i, (gaploc-i)*esize );
-			MemCpy( telts+gaploc+newgaplen,
+			MoveTo( telts, elts, i*esize );
+			MoveTo( telts+i+newgaplen, elts+i, (gaploc-i)*esize );
+			MoveTo( telts+gaploc+newgaplen,
 				elts+gaploc+gaplen,
 				(n-gaploc)*esize );
 		    }
@@ -133,12 +134,12 @@ flex::MakeGap(size_t i, size_t len ) {
 			 part to precede the new gap (if any)
 			 part to be after gap
 			 */
-			MemCpy( telts, elts, gaploc*esize );
+			MoveTo( telts, elts, gaploc*esize );
 			if (gaploc < i)
-			    MemCpy(  telts+gaploc,
+			    MoveTo(  telts+gaploc,
 				     elts+gaploc+gaplen,
 				     (i-gaploc)*esize );
-			MemCpy( telts+i+newgaplen, elts+i+gaplen, 
+			MoveTo( telts+i+newgaplen, elts+i+gaplen, 
 				(n-i)*esize );
 		    }
 		    Deallocate(elts);
@@ -149,11 +150,11 @@ flex::MakeGap(size_t i, size_t len ) {
 	    if(elts==NULL) elts=(char *)Allocate(gaplen * sizeof(char));
 	    if (i < gaploc) {
 		/* move gap to the left (move segment previously before gap) */
-		if(elts) MemMove( elts+gaplen+i, elts+i, 
+		if(elts) MoveTo( elts+gaplen+i, elts+i, 
 				  (gaploc - i)*esize );
 	    } else if (i > gaploc) {
 		/* move gap to the right (move segment previously after gap) */
-		if(elts) MemMove( elts+gaploc, elts+gaplen+gaploc, 
+		if(elts) MoveTo( elts+gaploc, elts+gaplen+gaploc, 
 				  (i - gaploc)*esize );
 	    }
 	}
@@ -191,20 +192,24 @@ flex::flex(const flex &src) {
     gaplen=src.gaplen;
     if(src.n==0) return;
     elts=Allocate(src.n);
-    if(src.gaploc) MemCpy(elts, src.elts, src.gaploc);
-    if(src.n>src.gaploc) MemCpy(elts+src.gaploc, src.elts+src.gaploc+src.gaplen, src.n-src.gaploc);
+    if(src.gaploc) CopyTo(elts, src.elts, src.gaploc);
+    if(src.n>src.gaploc) CopyTo(elts+src.gaploc, src.elts+src.gaploc+src.gaplen, src.n-src.gaploc);
 }
 
 flex &flex::operator=(const flex &src) {
+    if(gaploc)
+	Invalidate(0, gaploc);
+    if(n > gaploc)
+	Invalidate(gaploc+gaplen, n - gaploc);
     Deallocate(elts);
     elts=NULL;
     n=src.n;
     gaploc=src.n;
     gaplen=src.gaplen;
     if(src.n==0) return *this;
-    elts=Allocate(src.n);
-    if(src.gaploc) MemCpy(elts, src.elts, src.gaploc);
-    if(src.n>src.gaploc) MemCpy(elts+src.gaploc, src.elts+src.gaploc+src.gaplen, src.n-src.gaploc);
+    elts=Allocate(src.n + src.gaplen);
+    if(src.gaploc) CopyTo(elts, src.elts, src.gaploc);
+    if(src.n>src.gaploc) CopyTo(elts+src.gaploc, src.elts+src.gaploc+src.gaplen, src.n-src.gaploc);
     return *this;
 }
 

@@ -105,7 +105,7 @@ class buffer *bufferlist::CreateBuffer(const char  *bufferName , const char  *fi
     char realName[MAXPATHLEN];
     class buffer *thisBuffer;
 
-/* Probably ought to insure that buffer names are unique. */
+/* Probably ought to ensure that buffer names are unique. */
     thisBuffer = new buffer;
 
     (thisBuffer)->SetName( bufferName);

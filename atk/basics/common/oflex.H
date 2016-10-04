@@ -8,15 +8,15 @@
  * @{ */
 class oflex : public mflex {
   protected:
-    virtual void MemCpy(char *dest, char *src, size_t bytelength);
+    virtual void CopyTo(char *dest, char *src, size_t bytelength);
 
-    virtual void MemMove(char *dest, char *src, size_t bytelength);
+    virtual void MoveTo(char *dest, char *src, size_t bytelength);
 
     virtual void DestroyElement(void *src);
 
     virtual void ConstructElement(void *src);
 
-    virtual void CopyElement(void *dest, void *src);
+    virtual void CopyElement(void *dest, const void *src);
 
     virtual void Invalidate(size_t i, size_t len);
     
@@ -40,18 +40,20 @@ class name : public oflex { \
   public: \
     inline name(size_t n=minsize) : oflex(sizeof(type), n) { \
     } \
-inline name(const name &src) : oflex(sizeof(type), src.GetN()) { \
-if(src.GetN()>0) { \
-type *pelts=Insert(0, src.GetN()); \
-MemCpy((char *)pelts, (char *)&src[0], typesize*src.GetN()); } \
+    inline name(const name &src) : oflex(sizeof(type), src.GetN()) { \
+	if(src.GetN()>0) { \
+	    type *pelts=Insert(0, src.GetN()); \
+	    /* using CopyTo() here will fail if src has a gap */ \
+	    for(size_t i=0;i<GetN();i++) CopyElement(&pelts[i], &src[i]); \
+	} \
     } \
-inline virtual ~name() { \
-for(size_t i=0;i<GetN();i++) DestroyElement(&((*this)[i])); \
+    inline virtual ~name() { \
+	for(size_t i=0;i<GetN();i++) DestroyElement(&((*this)[i])); \
     } \
-inline const type &operator[](size_t i) const{ \
+    inline const type &operator[](size_t i) const{ \
 	return *(type *)&(*(oflex *)this)[i]; \
     } \
-inline type &operator[](size_t i) { \
+    inline type &operator[](size_t i) { \
 	return *(type *)&(*(oflex *)this)[i]; \
     } \
     inline type *Insert(size_t i, size_t len=1) { \
@@ -60,23 +62,23 @@ inline type &operator[](size_t i) { \
     inline type *Append(size_t len=1) { \
 	return (type *)oflex::Insert(GetN(),len); \
     } \
-inline type *Insert(size_t i, const type &o) { \
-void *res=mflex::Insert(i,1); \
-return new(res) type(o); \
-} \
-inline type *Insert(size_t i, const type *o) { \
-return Insert(i,*o); \
-} \
-inline type *Append(const type &o) { \
-return Insert(GetN(),o); \
-} \
-inline type *Append(const type *o) { \
-    return Append(*o); \
-} \
+    inline type *Insert(size_t i, const type &o) { \
+	void *res=mflex::Insert(i,1); \
+	return new(res) type(o); \
+    } \
+    inline type *Insert(size_t i, const type *o) { \
+	return Insert(i,*o); \
+    } \
+    inline type *Append(const type &o) { \
+	return Insert(GetN(),o); \
+    } \
+    inline type *Append(const type *o) { \
+	return Append(*o); \
+    } \
     inline size_t Find(const type &o) { \
 	return oflex::Find((const char *)&o); \
     } \
-inline size_t Find( const type *o ) {return Find( *o );}; \
+    inline size_t Find( const type *o ) {return Find( *o );}; \
     inline void Remove(size_t i, size_t len=1) { \
 	oflex::Remove(i, len); \
     } \
@@ -86,12 +88,12 @@ inline size_t Find( const type *o ) {return Find( *o );}; \
     inline type *GetBuf(size_t i, size_t len, size_t *gotlenp) { \
 	return (type *)oflex::GetBuf(i, len, gotlenp); \
     } \
-inline virtual void ConstructElement(void *src) { \
-new((void *)src) type(); } \
-inline virtual void DestroyElement(void *src) { \
-((type *)src)->~type(); } \
-inline virtual void CopyElement(void *dest, void *src) { \
-new(dest) type(*(const type *)src); } \
+    inline virtual void ConstructElement(void *src) { \
+	new(src) type(); } \
+    inline virtual void DestroyElement(void *src) { \
+	((type *)src)->~type(); } \
+    inline virtual void CopyElement(void *dest, const void *src) { \
+	new(dest) type(*(const type *)src); } \
 }
 
 #define DEFINE_OFLEX_ITER(name,type) \

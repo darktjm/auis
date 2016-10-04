@@ -4021,7 +4021,7 @@ image *htmltext::GetImage(const char *file, attlist *atts) {
 
 /* XXX - this structure is not currently being used in this code.
 It is meant to be used in conjunction with the "nested" table below
-to insure that styles could not be nested improperly */
+to ensure that styles could not be nested improperly */
 
 static struct stylemap styletable[] = {
     { "abbrev", EMPH },

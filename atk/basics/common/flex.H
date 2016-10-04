@@ -83,17 +83,16 @@ class flex
 
     void (*deallocate)(char *&ptr);
     /* Deallocates len bytes. */
- 
+
     inline void Deallocate(char *&ptr) {
 	if(deallocate) deallocate(ptr);
     }
     /* Deallocates len bytes. */
 
-    virtual void MemCpy(char *dest, char *src, size_t len);
-    /* Copies the src chars to dest. src and dest do not overlap.  Subclasses can override this to do object copies if necessary. */
-    virtual void MemMove(char *dest, char *src, size_t len);
-    /* Copies the src chars to dest.  src and dest may overlap.  Subclasses can override this to do object copies if necessary. */
-    /* Both MemCpy and MemMove should call destructors on the src objects, after constructing the destination objects. */
+    virtual void CopyTo(char *dest, char *src, size_t len);
+    /* Copies the src chars to dest. src and dest may not overlap.  Subclasses can override this to do object copies if necessary. Do not call destructors on src.  */
+    virtual void MoveTo(char *dest, char *src, size_t len);
+    /* Moves the src chars to dest, invalidating src.  src and dest may overlap.  Subclasses can override this to do object copies if necessary. Call destructors on src.  */
 
     virtual size_t RoundSize(size_t n) const;
     /* Rounds a number of bytes up to a full object size.  Subclasses can override this to ensure that the flex is always a multiple of the size of the objects stored within. */

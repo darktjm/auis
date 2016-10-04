@@ -17,13 +17,22 @@ oflex::oflex(const oflex &src) : mflex(src.typesize, src.GetN()) {
 oflex::~oflex() {
 }
 
-void oflex::MemCpy(char *dest, char *src, size_t bytelength) {
-    MemMove(dest, src, bytelength);
+void oflex::CopyTo(char *dest, char *src, size_t bytelength) {
+    size_t len=bytelength/typesize;
+
+    /* copy forward */
+    while(len-->0) {
+	CopyElement((void *)dest,(void *)src);
+	dest+=typesize;
+	src+=typesize;
+    }
 }
 
-void oflex::MemMove(char *dest, char *src, size_t bytelength) {
+void oflex::MoveTo(char *dest, char *src, size_t bytelength) {
     size_t len=bytelength/typesize;
-    if((size_t)(dest-src)>=bytelength) {
+    if(dest == src)
+	return;
+    if(dest < src || dest >= src+bytelength) {
 	/* copy forward */
 	while(len-->0) {
 	    CopyElement((void *)dest,(void *)src);
@@ -69,5 +78,5 @@ void oflex::DestroyElement(void */* src */) {
 void oflex::ConstructElement(void */* src */) {
 }
 
-void oflex::CopyElement(void */*dest */, void */*src*/) {
+void oflex::CopyElement(void */*dest */, const void */*src*/) {
 }

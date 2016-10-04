@@ -1385,7 +1385,7 @@ layoutview::Print(FILE  *f					/* output file */, const char  *processor				/* p
 
     fprintf(f, ".rs\n");		/* be sure we are really spacing */
     fprintf(f, ".sp -\\n(VSu\n");	/* compensate for baseline offset */
-    fprintf(f, ".ne %ldp\n", height);	/* insure enough space to next trap */
+    fprintf(f, ".ne %ldp\n", height);	/* ensure enough space to next trap */
     fprintf(f, ".mk\n");		/* mark this starting position */
 
     /* print all components back to front */
