@@ -14,6 +14,10 @@
 
 #include <ATK.H>
 
+/** A pointer to a function called to report initialization errors.
+ *  \param rock A generic parameter passed down to the reporting function.
+ *  \param buf A 0-terminated string describing the error.
+ */
 typedef void (*init_fptr)(long rock, char *buf);
 
 struct menus {

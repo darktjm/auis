@@ -150,6 +150,7 @@
     access via proc and Linux-specific libc calls.  Also, update
     porting documents to get rid of obsolete assumptions, like <=14-char
     file names.  Also, update installation instructions as needed.
+  - remove all uses of this-> in class methods
   - much of it is C++.  It might be a good idea to look for and remove
     Cisms where C++ does it differently (and presumably the same or better)
     (note that unlike some idiots, I don't consider cpp macros to be C-only)
@@ -176,7 +177,8 @@
 - figure out what ANSI standard ansitext refers to, and document it
 - get rid of include/ prefix on all headers in doxygen
 - implement or get rid of alink, ezscan
-- maybe try converting doxy latex output to ez (rtf is hopeless)
+- maybe try converting doxy latex output to ez (rtf is hopeless, and
+  like the rest of the www, html is javascript-laden bloated mess)
 
 Long-term:
   - view/adjust styling boundaries (aka view source)?
