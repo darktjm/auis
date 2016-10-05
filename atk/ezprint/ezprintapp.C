@@ -160,9 +160,10 @@ boolean ezprintapp::ParseArgs (int  argc, const char  **argv)
     boolean enumcontents=FALSE;
     boolean printendnotes=FALSE;
     /* initialize as if ez */
-    ((class application * )this)->name = "ez";
+    const char *name = this->GetName();
+    this->SetName("ez");
     (this)->application::ReadInitFile();
-    ((class application * )this)->name = "ezprint";
+    this->SetName(name);
     d = NULL;
     printargs = "";
     DocumentName = NULL;

@@ -222,7 +222,8 @@ boolean datacata::ParseArgs (int  argc, const char  **argv)
     int i;
 
     /* initialize as if ez */
-    ((class application * )this)->name = "ez";
+    
+    this->SetName("ez");
     (this)->application::ReadInitFile();
 
     (this)->BeginRun(); /* sets stuff up, sets application name to "datacat" */
@@ -317,7 +318,7 @@ datacata::datacata()
 /* prepare self for an execution cycle. */
 void datacata::BeginRun()
 {
-    ((class application * )this)->name = "datacat";
+    this->SetName("datacat");
 
     this->insertedtemplate = FALSE;
     this->ofilename = NULL;

@@ -582,7 +582,7 @@ SetWMProperties(class xim  *self, boolean  nameChanged , boolean  iconic)
 	 * NOTE: currently we do this only once per process (on the first im created).
 	 */
 	int argc;
-	char **argv;
+	const char * const *argv;
 
 	self->doing_session_mgmt = environ::GetProfileSwitch("sessionmanagement", FALSE);
 	if (self->doing_session_mgmt) {
@@ -590,7 +590,7 @@ SetWMProperties(class xim  *self, boolean  nameChanged , boolean  iconic)
 	    if (argv != NULL) {
 		for (argc = 0; argv[argc] != NULL; argc++)
 		    /* Counting arguments... */;
-		XSetCommand(xim2display(self), xim2window(self), argv, argc);
+		XSetCommand(xim2display(self), xim2window(self), (char **)argv, argc);
 	    }
 	}
 	initialized_session_mgmt = TRUE;

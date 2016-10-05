@@ -59,7 +59,8 @@ application::application()
 
 application::~application()
 {
-    startup_app = NULL;
+    if(this == startup_app)
+	startup_app = NULL;
 }
 
 application *application::GetStartupApplication()
@@ -74,11 +75,11 @@ const char *application::AppGetName()
 {
     return (startup_app) ? startup_app->GetName() : NULL;
 }
-void application::AppSetName(char *s)
+void application::AppSetName(const char *s)
 {
     if (startup_app) startup_app->SetName(s);
 }
-char **application::AppGetInitialArgv()
+const char * const *application::AppGetInitialArgv()
 {
     return (startup_app) ? startup_app->GetInitialArgv() : NULL;
 }

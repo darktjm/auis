@@ -192,7 +192,7 @@ void typescriptapp::Stop()
  */
 const char * const *typescriptapp::SessionCheckpoint()
 {
-    char **argv;
+    const char * const *argv;
     int i, new_argc;
     static const char *new_argv[50];
     static char cwd[4096];

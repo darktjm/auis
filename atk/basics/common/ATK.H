@@ -1,6 +1,8 @@
 #ifndef _ATK_H
 #define _ATK_H
 
+#include <andrewos.h>
+#include <truth.h>
 /*
 		ATK.H - Base class for all of Andrew
 		Provides class registry
@@ -22,37 +24,42 @@
  *  as well; it is one of the few objects which export C and C++ functions
  *  directly.  Note that environ's C++ class is named environclass.
  * @{ */
-#define THROWONFAILURE(x) do { if(!(x)) ATKConstructorFailure(); return; } while (0)
-#ifndef boolean /* if somebody wants to use a macro for boolean, let them. */
-typedef int boolean;
-#endif
-#ifndef NULL
-#define NULL 0
-#endif
-#ifndef TRUE
-#define TRUE 1
-#define FALSE 0
-#endif
 
+/** Raise an error if x is zero.  For use in class constructor functions.  */
+#define THROWONFAILURE(x) do { if(!(x)) ATKConstructorFailure(); return; } while (0)
+
+/** A pointer to a class initialization function.  Returns 0 (FALSE) on error. */
 typedef boolean (*ATKinitfptr)(void);
-/*
+/**
  * Use the ATKdefineRegistry macro to enter a class into the runtime
  * registry.  It expands to a variable declaration and should probably
  * appear immediately after the include files in a class' implementation.
+ * It exports a symbol called <class>_ATKregistry_, defines the
+ * <class>::ATKregistry() function, creates a static function called
+ * <class>_new_ and declares a static variable called ATKinited_.  Note
+ * that the latter means that you can have no more than one call of this
+ * macro in a given C++ file.
+ *
  * Its use looks like this (example):
  *
- *    ATKdefineRegistry(textview, view, initfunc);
+ *    `ATKdefineRegistry(textview, view, initfunc);`
  *
  * For multiple inheritance, ATKdefineRegistry2(class, supclass1, supclass2)
  * can be defined, and so on.  We will defer defining these until
- * someone actually askes for them.  In any case, the extra classes
+ * someone actually asks for them.  In any case, the extra classes
  * must themselves be subclasses of ATK, otherwise the runtime system
  * is not interested in them, and they may be safely omitted.
  *
- *    ATKdefineRegistryNoInit(textview, view);
- *
- * Should be used when no class initialization is required or
- * you will be providing your own initialization mechanism.
+ * \param me The class being registered
+ * \param sup The superclass (immediate parent) of the class being registered
+ * \param initf A function to call to initialize the class.  This is a
+ *              function (pointer) of type ATKinitfptr.  It is called
+ *              automatically by ATK::LoadClass(), but not by
+ *              ATK::DynamicLoad().  A class is expected to call this
+ *              function itself in its own constructors or methods
+ *              using the ATKinit macro.  Calling the function by either
+ *              of these methods will ensure it is called only once.
+ *              If NULL, no initialization function is called.
  */
 #define ATKdefineRegistry(me,sup, initf) \
   static ATK *me ## _new_() { return new me; };\
@@ -62,6 +69,26 @@ typedef boolean (*ATKinitfptr)(void);
 ATKregistryEntry *me ::ATKregistry() { return &me ## _ATKregistry_; }\
 static UNUSED ATKinitfptr *ATKinited_= &(me ## _ATKregistry_.initfunc);
 
+/** This is the maximum number of parents supported by ATK.  Currently,
+ *  this is one. */
+#define ATKmaxRegistryParents 1
+
+/**
+ * Use the ATKdefineRegistry macro to enter a class into the runtime
+ * registry.  See ATKdefineRegistry for details.
+ * It should be used when no class initialization is required or
+ * you will be providing your own initialization mechanism.
+ *
+ *    `ATKdefineRegistryNoInit(textview, view);`
+ *
+ * is equivalent to
+ *
+ *    `ATKdefineRegistry(textview, view, NULL);`
+ *
+ * Note that the lack of initialization also means that the static
+ * ATKinited_ variable is no longer declared, so more than one of these
+ * may appear in a C++ file.
+ */
 #define ATKdefineRegistryNoInit(me, sup) \
   static ATK *me ## _new_() { return new me; };\
   extern ATKregistryEntry sup ## _ATKregistry_;\
@@ -69,30 +96,46 @@ static UNUSED ATKinitfptr *ATKinited_= &(me ## _ATKregistry_.initfunc);
 {#me, me ## _new_, NULL, {&sup ## _ATKregistry_ }};\
 ATKregistryEntry *me ::ATKregistry() { return &me ## _ATKregistry_; }
 
-/*
+/**
  * Use the ATKregister macro to register a class.
  * It will automatically register this class and all superclasses
  * of this class.  It generates executable code.  Use it as follows:
  *
  *     ATKregister(textview);
+ *
+ * There is never a reason to call this manually.  Instead, the
+ * build system generates such calls for static loading via the
+ * doStaticLoads() function or dynamic loading to be executed
+ * during static constructor execution when the object is loaded.
+ * However, it is safe to call any time, as it will do nothing if
+ * the class is already registered.
+ *
+ * \param classname The class to register.  The object file containing
+ *                  the ATKdefineRegistry() or ATKdefineRegistryNoInit()
+ *                  call for this class must be linked in at the time of
+ *                  the call.
  */
 #define ATKregister(classname) \
   extern ATKregistryEntry classname ## _ATKregistry_;\
   ATK::RegisterClass(&classname ## _ATKregistry_);
 
-/*
+/**
+ * Register all statically loadable classes.
  * The build process generates a list of statically bound classes
  * in statl.C (using genstatl), containing only one function to
  * call to register all of the statically bound classes:
  */
 extern void doStaticLoads(void);
 
-/*
+/**
+ * Call the registered class initialization function, exactly once.
  * Use the ATKinit macro at the start of each constructor,
- * and at the start of each classprocedure implementation.
+ * and at the start of each static class function implementation.
  * It checks if the class has been initialized, and if not
- * calls the function InitializeClass.
+ * calls the registered initialization function.
  *
+ * This must appear in the same file as the ATKdefineRegistry()
+ * macro call for the class.
  * If an implementation spans many files, the programmer must
  * code the initialization explicitly.  
  */
@@ -109,103 +152,178 @@ extern void doStaticLoads(void);
     } \
 } while(0)
 
-/*
- * The atk class is the root of entire atk class heirarchy.
- * Only subclasses of atk may be registered with the runtime
- * system.
- */
-#define ATKmaxRegistryParents 1
 class ATK;
 
+/** The registry structure used for dynamic ATK class registration.
+ *
+ * This structure is not meant to be created or manipulated
+ * manually.  It is the structure created by ATKdefineRegistry()
+ * and ATKdefineRegistryNoInit(). */
 struct ATKregistryEntry {
     const char *ClassName;
+    ///< The name of the class.  The actual C++ name of the class
+    ///< may (but should not) differ; this is what the class
+    ///< system knows it by.
     ATK *(*New)();
-	    //  Create a new object of the class.
-    ATKinitfptr initfunc;    
-	    // initfunc is called when the first static member
-	    // function, or constructor is called.  (All static
-	    // member functions and constructors should
-	    // begin with ATKinit;)	
+    ///<  Create a new object of the class.
+    ATKinitfptr initfunc;
+    ///< initfunc is called when the first static member
+    ///< function, or constructor is called.  (All static
+    ///< member functions and constructors should
+    ///< begin with ATKinit;)
     ATKregistryEntry *parents[ATKmaxRegistryParents];
-	    // The parents of this class, so far we only support
-	    // single inheritance in the run-time system.
+    ///< The parents of this class; so far, we only support
+    ///< single inheritance in the run-time system.
     ATKregistryEntry *next;
-	    // The next ATKregistryEntry in the list of loaded
-	    // classes.
+    ///< The next ATKregistryEntry in the list of loaded
+    ///< classes.  Maintained by the loader.  Must be
+    ///< initialized to NULL.
     inline const char *GetTypeName() const { return ClassName; }
-	    // Returns the name of the class.
+    ///< Returns the name of the class.
 
     // Analogs of the IsType methods listed below for ATK.
     boolean IsType(const ATKregistryEntry *typeobject) const;
+    ///< Check if "this" is defined by typeobject or one
+    ///< of its descendents.
+    ///< \param typeobject The type descriptor of the type to test for.
+    ///< \return TRUE iff "this" is defined by typeobject or one
+    ///< of its descendents.
     boolean IsType(const char *classname) const;
+    ///< Check if "this" is named classname or is one of classname's
+    ///< descendents.
+    ///< \param classname The registered name of a class
+    ///< \return TRUE iff "this" is named classname or is one of classname's
+    ///< descendents.
     boolean IsType(const ATK *typeobject) const;
+    ///< Check if "this" is the same class as typeobject or one of
+    ///< typeobject's class' descendents.
+    ///< \param typeobject An object of an ATK-descendent type.
+    ///< \return TRUE if "this" is the same class as typeobject or one of
 };
 
 
+/**
+ * The ATK class is the root of entire atk class heirarchy.
+ * Only subclasses of ATK may be registered with the runtime
+ * system.
+ */
 class ATK {
   public:
-    // Runtime registry information for this class.
-    // This function is generally not used by ATK users.  The
-    // ATKregister macro expands to a call to this function.
+    /// Add runtime registry information for a class.
+    /// This function is generally not used directly by ATK users.  The
+    /// ATKregister macro expands to a call to this function with the
+    /// appropriate parameter for the class being registered.
+    /// \param classent A registery structure for a class to register.
     static void RegisterClass(ATKregistryEntry *classent);
 
-    // All subclasses of ATK must provide their own registry entry.
-    // The ATKregister macro defines this member function, but the ATK
-    // programmer must nonetheless declare it in his class.
+    /// Return the registry entry reperesenting the class of the object.
+    /// All subclasses of ATK must provide their own registry entry.
+    /// The ATKdefineRegistry and ATKdefineRegistryNoInit macros define
+    /// this member function, but this declaration must nonetheless be
+    /// added manually to the class definition.
     virtual ATKregistryEntry *ATKregistry();
 
     // Support for looking up an ATKregistryEntry by name,
     // and dynamically loading a class.
     static ATKregistryEntry *DynamicLoad(const char *classname, boolean trace=FALSE);
-    static int &DynamicLoadTrace();	/* non-zero writes msgs to stdout */
+    ///< Dynamically load a class object.  If the object is already registered,
+    ///< this loads nothing.  The naming conventions for class files are
+    ///< system-dependent.  The location for class files is one of the
+    ///< :-separated members of $CLASSPATH, or $ANDREWDIR/lib/atk by
+    ///< default.
+    ///< \param classname The name of the class to load.
+    ///< \param trace TRUE if extra tracing of the load process is desired.
+    ///<              The nature of the trace is system-defined, and may
+    ///<              be nothing.
+    ///< \return The registry definition structure for the loaded and
+    ///<         registered class, or NULL on error.
     
+    static int &DynamicLoadTrace();
+    ///< Set to non-zero to write trace information to stdout.
+    ///< Overrides trace parameter's default for DymanicLoad().
+    ///< \return a reference to a global trace setting.
+
     static ATKregistryEntry *LoadClass(const char *classname);
-    // Returns TRUE iff the named class is already loaded.
+    ///< Load and initialize a class.  See DynamicLoad() for more
+    ///< information.  Note that superclasses automatically loaded by
+    ///< this function will not be initialized; either call LoadClass()
+    ///< manually to perform immediate initialization, or wait for the
+    ///< class to automatically initialize itself.
+    ///< \param classname The name of the class to load and initialize.
+    ///< \return The registry definition structure for the loaded,
+    ///<         registered and initialized class, or NULL on error.
     static boolean IsLoaded(const char *classname);
-    
-    
+    ///< Checks if a class is already loaded and registered.
+    ///< \param classname The class to check.
+    ///< \return TRUE iff the named class is already loaded.
+
+
     // IsType returns true if "this" is a subclass of the given
     // registry, classname or other ATK object.
     inline boolean IsType(const ATKregistryEntry *classent) const {
 	return ((ATK *)this)->ATKregistry()->IsType(classent);
     }
+    ///< Check if "this" is defined by classent or one
+    ///< of its descendents.
+    ///< \param classent The type descriptor of the type to test for.
+    ///< \return TRUE iff "this" is defined by typeobject or one
+    ///< of its descendents.
     inline boolean IsType(const char *classname) const {
 	return ((ATK *)this)->ATKregistry()->IsType(classname);
     }
+    ///< Check if "this" is named classname or is one of classname's
+    ///< descendents.
+    ///< \param classname The registered name of a class
+    ///< \return TRUE iff "this" is named classname or is one of classname's
+    ///< descendents.
     inline boolean IsType(const ATK *typeobject) const {
 	return ((ATK *)this)->ATKregistry()->IsType(typeobject);
     }
+    ///< Check if "this" is the same class as typeobject or one of
+    ///< typeobject's class' descendents.
+    ///< \param typeobject An object of an ATK-descendent type.
+    ///< \return TRUE iff "this" is the same class as typeobject or one of
+    ///< typeobject's class' descendents.
 
-    // Create a new object of the same type as this object.
-    // You will need to cast the return value to the appropriate
-    // type.
+    /// Create a new object of the same type as this object.
+    /// You will need to cast the return value to the appropriate
+    /// type.
+    /// \return A new object of the same type as this.
     inline ATK *NewFromObject() const {
 	return ((ATK *)this)->ATKregistry()->New();
     }
     
     
-    // IsTypeByName returns true if sub is a subclass of super.
+    /// Check if classes are related.
+    /// \param sub The name of a potential subclass.
+    /// \param super The name of a potential superclass.
+    /// \return TRUE iff sub is a subclass of super.
     static boolean IsTypeByName(const char *sub, const char *super);
 
-    // GetTypeName returns a string representing the classname
-    // of any given ATK object.
+    /// Obtain the registered name for this class.
+    /// \return a string representing the classname
+    ///         of any given ATK object.
     inline const char *GetTypeName() const { return ((ATK *)this)->ATKregistry()->ClassName; };
 
-    // The NewObject function can create an instance of any ATK class
-    // that has been registered with the ATK runtime system (with ATKregister).
+    /// Obtain a new object of any ATK class that has been registered
+    /// with the ATK runtime system (with ATKregister).
+    /// The class is automatically loaded and initialized, if necessary.
+    /// \param classname The name of the registered class.
+    /// \return an instance of the class, or NULL if there is no such class
+    ///         or there was an error creating the instance.
     static ATK *NewObject(const char *classname);
 
-    // Called by the THROWONFAILURE macro when a constructor fails.
-    // This can be overridden to print a different message.
-    // Note that it CANNOT access virtual functions of the class.
-    // Also, it cannot be virtual.  Calling virtual functions in
-    // a constructor results in one of the base class versions
-    // of the function being called.
+    /// Called by the THROWONFAILURE macro when a constructor fails.
+    /// This can be overridden to print a different message.
+    /// Note that it CANNOT access virtual functions of the class.
+    /// Also, it cannot be virtual.  Calling virtual functions in
+    /// a constructor results in one of the base class versions
+    /// of the function being called.
     static void ATKConstructorFailure();
 };
 
 
-/* The following class and macro simplify creation of 
+/** The following class and macro simplify creation of 
 	references to ATKregistry entries.  The macro call
 		ATK_CLASS(aclassname)
 	creates the declaration of identifier
@@ -213,25 +331,34 @@ class ATK {
 	This identifier can be used wherever an ATKregistryEntry is needed.
 */
 class ATK_def {
-	ATKregistryEntry *e;
-	const char *classname;
-public:
-	inline ATK_def(const char *classnm) {
-		classname = classnm;
-		e = NULL;
-	}
-	inline operator ATKregistryEntry *() const {
-		if ( ! e) ((ATK_def *)this)->e 
-				= ATK::LoadClass(classname);
-		return e;
-	}
-	inline ATKregistryEntry *operator->() const {
-		if ( ! e) ((ATK_def *)this)->e 
-				= ATK::LoadClass(classname);
-		return e;
-	}
+    ATKregistryEntry *e;
+    const char *classname;
+  public:
+    /// Constructor called by ATK_CLASS() to make a reference
+    /// \param classnm The name of the class.
+    inline ATK_def(const char *classnm) {
+	classname = classnm;
+	e = NULL;
+    }
+    /// Use the registry entry for the given class.
+    inline operator ATKregistryEntry *() const {
+	if ( ! e) ((ATK_def *)this)->e
+	    = ATK::LoadClass(classname);
+	return e;
+    }
+    /// Use the registry entry for the given class.
+    inline ATKregistryEntry *operator->() const {
+	if ( ! e) ((ATK_def *)this)->e
+	    = ATK::LoadClass(classname);
+	return e;
+    }
 };
+/// Create a static object to reference a class' registry structure.
+/// An object named class_<class> is created, which can be used in
+/// places a pointer to the registry structure for that class would
+/// normally be used.
+/// \param The class name
 #define ATK_CLASS(class) \
-	static ATK_def Concat(class_,class) (Stringize(class))
+  static ATK_def Concat(class_,class) (Stringize(class))
 /** @} */
 #endif /* _ATK_H */
