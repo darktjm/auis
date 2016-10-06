@@ -17,8 +17,8 @@ static class atomlist *  AL_forecolor;
 static class atomlist *  AL_backcolor;
 static class atomlist *  AL_style;
 
-static class atom *  A_long;
-static class atom *  A_string;
+static const class atom *  A_long;
+static const class atom *  A_string;
 #define rectangle_TempSet(X,Y,W,H,R) ((R)->top = (Y), (R)->left = (X), \
 				      (R)->height = (H), (R)->width = (W), (R))
 

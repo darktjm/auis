@@ -10,7 +10,7 @@ struct adew_array {
     class dataobject **object;
     class view **view;
     class cel *cel;
-    class atom *name;
+    const class atom *name;
     adew_cbfptr callback;
     long rock;
 };
@@ -34,7 +34,7 @@ for(aa = ARRAY; aa->object != NULL;aa++){\
     }\
 };
 #define adew_InitApplicationCel(SELF,CL,CLV,ARRAY,ICNT){ class cel *cel = NULL;\
-    struct adew_array *aa ;class atom *nm;\
+    struct adew_array *aa ;const class atom *nm;\
     if(CL) cel = CL;\
     else if(CLV) cel = (class cel *) (cv)->GetDataObject();\
     if(cel != NULL) { \

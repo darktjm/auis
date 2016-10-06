@@ -88,7 +88,7 @@ static print_sigAlrm()
 #endif /* hp9000s300 */
 
 static const char hexchars[]="0123456789abcdef";
-static class atom *A_printer, *A_tofile, *A_psfile;
+static const class atom *A_printer, *A_tofile, *A_psfile;
 
 static int mystrtol16(char *p, char **pp)
 {

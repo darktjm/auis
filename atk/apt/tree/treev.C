@@ -421,7 +421,7 @@ static void Dump_Trees( class treev	      *self );
 
 static void treev_FlipColors(class treev  *self)
 {
-    class atom *a;
+    const class atom *a;
     (self)->GetForegroundColor( &treev_fg, &treev_fgr, &treev_fgg, &treev_fgb);
     (self)->GetBackgroundColor( &treev_bg, &treev_bgr, &treev_bgg, &treev_bgb);
     if(treev_fg) {

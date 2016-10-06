@@ -35,7 +35,7 @@ static struct proctable_Entry *scpe=NULL, *lcpe=NULL, *triggerpe=NULL, *gdeletep
 
 
 ATKdefineRegistry(sbttnav, sbuttonv, sbttnav::InitializeClass);
-static char *Intern(char  *str);
+static const char *Intern(const char  *str);
 static struct sbutton_prefs *LookupGroupPrefs(class sbttnav  *self, char  *name);
 static struct groups **LookupGroup(class sbttnav  *self, char  *name);
 static void AddGroupMenu(class sbttnav  *self, struct sbutton_prefs  *prefs, int  prio);
@@ -59,9 +59,9 @@ static void LabelColorProc(class sbttnav  *self, long  param);
 static void DepthProc(class sbttnav  *self, long  param);
 
 
-static char *Intern(char  *str)
+static const char *Intern(const char  *str)
 {
-    class atom *a=atom::Intern(str);
+    const class atom *a=atom::Intern(str);
     if(a!=NULL) return (a)->Name();
     else return NULL;
 }
@@ -351,7 +351,7 @@ static void TriggerProc(class sbttnav  *self, long  param)
 {
     char buf[MAXPATHLEN];
     class sbutton *b = (self)->ButtonData();
-    char *oldtext;
+    const char *oldtext;
 
     if((b)->GetTrigger( (self)->LastButton())) oldtext = ((b)->GetTrigger( (self)->LastButton()))->Name();
     else oldtext=NULL;

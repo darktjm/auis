@@ -43,7 +43,7 @@ are not ordinarily of interest to the applications programmer.
 
 
 \fixedtext{void \bold{atomlist_}Append }\fixedindent{(struct atomlist 
-*\paramname{atomlist}, struct atom *\paramname{newitem});} 
+*\paramname{atomlist}, const struct atom *\paramname{newitem});} 
 
 \fixedtext{struct atomlist *\bold{atomlist_}Copy }\fixedindent{(struct 
 atomlist *\paramname{oldlist});} 
@@ -69,17 +69,17 @@ atomlist *\paramname{self});}
 \fixedtext{void \bold{atomlist_}JoinToEnd }\fixedindent{(struct atomlist 
 *\paramname{atomlist}, struct atomlist *\paramname{otherlist});} 
 
-\fixedtext{struct atom *\bold{atomlist_}Last }\fixedindent{(struct atomlist 
+\fixedtext{const struct atom *\bold{atomlist_}Last }\fixedindent{(struct atomlist 
 *\paramname{atomlist});} 
 
 \fixedtext{\bold{atomlist_}Mark }\fixedindent{(struct atomlist 
 *\paramname{atomlist});} 
 
 \fixedtext{short \bold{atomlist_}Memberp }\fixedindent{(struct atomlist 
-*\paramname{atomlist}, struct atom *\paramname{list});} 
+*\paramname{atomlist}, const struct atom *\paramname{list});} 
 
 \fixedtext{void \bold{atomlist_}Prepend }\fixedindent{(struct atomlist 
-*\paramname{atomlist}, struct atom *\paramname{newitem});} 
+*\paramname{atomlist}, const struct atom *\paramname{newitem});} 
 
 \fixedtext{struct atomlist *\bold{atomlist_}StringToAtomlist 
 }\fixedindent{(char *\paramname{string});} 
@@ -159,7 +159,7 @@ struct atoms * loc;}
 
 \paragraph{Setting the traversal atom} \indexi{ \italic{atomlist_TraversalAtom}}
 
-\example{struct atom * atomlist_TraversalAtom( atomlis, loc )
+\example{const struct atom * atomlist_TraversalAtom( atomlis, loc )
 
 struct atomlist * atomlis;
 
@@ -173,7 +173,7 @@ struct atoms * loc;}
 \paragraph{Getting the first atom on the atom list} 
 \indexi{ \italic{atomlist_First}}
 
-\example{struct atom * atomlist_First( atomlis )
+\example{const struct atom * atomlist_First( atomlis )
 
 struct atomlist * atomlis;} 
 
@@ -185,7 +185,7 @@ struct atomlist * atomlis;}
 \paragraph{Getting the last atom on the atom list} 
 \indexi{ \italic{atomlist_Last}}
 
-\example{struct atom * atomlist_Last( atomlis )
+\example{const struct atom * atomlist_Last( atomlis )
 
 struct atomlist * atomlis;} 
 
@@ -203,7 +203,7 @@ struct atomlist * atomlis;}
 
 struct atomlist * atomlis;
 
-struct atom * key;} 
+const struct atom * key;} 
 
 
 \leftindent{\bold{Method description.  }  Finds if an atom is on the atom 
@@ -228,7 +228,7 @@ struct atomlist * atomlis;}
 
 struct atomlist * atomlis;
 
-struct atom * atom;} 
+const struct atom * atom;} 
 
 
 \leftindent{\bold{Method description.  }  Prepends an atom to a list. 
@@ -241,7 +241,7 @@ struct atom * atom;}
 
 struct atomlist * atomlis;
 
-struct atom * atom;} 
+const struct atom * atom;} 
 
 
 \leftindent{\bold{Method description.  }  Appends an atom to a list. 

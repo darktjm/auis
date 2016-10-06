@@ -83,7 +83,7 @@ typedef int view_DSattributes;
 #include <stdio.h>
 
 struct view_printopt {
-    atom *name, *type;
+    const atom *name, *type;
     const char *label;
 };
 struct view_printoptlist {
@@ -194,7 +194,7 @@ public:
     virtual void PrintPSRect(FILE *outfile, long logwidth, long logheight, 
 			struct rectangle *visrect);
     virtual struct view_printoptlist *PrintOptions();
-    virtual long GetPrintOption(atom *popt);
+    virtual long GetPrintOption(const atom *popt);
     virtual void SetPrintOption(struct view_printopt *vopt, long value);
 
     virtual boolean Gifify(const char *filename, long *pmaxw, long *pmaxh, 
@@ -215,12 +215,12 @@ public:
     virtual ScrollInterface *GetScrollInterface();
 
     // resources and parameters
-    virtual short GetParameter(atomlist *name, atom *type, long *datum );
+    virtual short GetParameter(atomlist *name, const atom *type, long *datum );
     virtual short GetResource(atomlist *name, atomlist *class_c,
-		atom *type, long *datum );
+		const atom *type, long *datum );
     virtual void GetManyParameters(struct resourceList *resources,
     atomlist *name, atomlist *class_c );		      
-    virtual void PostResource(atomlist *path, atom *type, long datum );
+    virtual void PostResource(atomlist *path, const atom *type, long datum );
 
 
 	// The following avoid multiple inheritance

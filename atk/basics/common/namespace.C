@@ -26,11 +26,11 @@ ATK_IMPL("namespace.H")
 
 
 ATKdefineRegistry(Namespace, ATK, NULL);
-static int Index(class Namespace  * self,class atom  * key);
-static int Create( class Namespace  * self, class atom  * key );
+static int Index(class Namespace  * self,const class atom  * key);
+static int Create( class Namespace  * self, const class atom  * key );
 
 
-static int Index(class Namespace  * self,class atom  * key)
+static int Index(class Namespace  * self,const class atom  * key)
           {
   int i;
   for (i = 0; i < self->nspaceSize; ++i)
@@ -40,7 +40,7 @@ static int Index(class Namespace  * self,class atom  * key)
 }
 
 
-static int Create( class Namespace  * self, class atom  * key )
+static int Create( class Namespace  * self, const class atom  * key )
           {
   struct namespace_entry * de;
 
@@ -89,13 +89,13 @@ Namespace::~Namespace()
 }
 
 
-int Namespace::Lookup( class atom  * name )
+int Namespace::Lookup( const class atom  * name )
           {
   return Index(this,name);
 }
 
 
-int Namespace::LookupCreate( class atom  * name )
+int Namespace::LookupCreate( const class atom  * name )
           {
   int index = Index( this, name );
 
@@ -128,7 +128,7 @@ void Namespace::UnbindAt( int  index )
 }
 
 
-class atom * Namespace::NameAt( int  index )
+const class atom * Namespace::NameAt( int  index )
           {
   return (index >= 0 && index < this->nspaceSize) ?
     this->nspace[index].name : NULL;
@@ -147,19 +147,19 @@ void Namespace::SetValueAt( int  index, long  value )
 }
 
 
-void Namespace::SetValue( class atom  * name, long  value )
+void Namespace::SetValue( const class atom  * name, long  value )
                {
   (this)->SetValueAt(  (this)->LookupCreate(name), value );
 }
 
 
-long Namespace::GetValue( class atom  * name )
+long Namespace::GetValue( const class atom  * name )
           {
   return (this)->ValueAt(  (this)->Lookup( name) );
 }
 
 
-short Namespace::Boundp( class atom  * name, long  * value )
+short Namespace::Boundp( const class atom  * name, long  * value )
                {
   int index = Index( this, name );
   if (index >= 0 && this->nspace[index].boundp && value != NULL)
@@ -167,7 +167,7 @@ short Namespace::Boundp( class atom  * name, long  * value )
   return index >= 0 && this->nspace[index].boundp;
 }
 
-void Namespace::Unbind( class atom  * name )
+void Namespace::Unbind( const class atom  * name )
           {
   int index = Index( this, name );
   if (index >= 0)
@@ -178,7 +178,7 @@ void Namespace::Unbind( class atom  * name )
 }
 
 
-class atom * Namespace::WhereIsValue( long  value )
+const class atom * Namespace::WhereIsValue( long  value )
           {
   int x;
   for (x = 0; x < this->nspaceSize; ++x)

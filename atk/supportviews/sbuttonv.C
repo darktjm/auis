@@ -50,7 +50,7 @@ ATK_IMPL("sbuttonv.H")
 /* External Declarations */
 
 /* Global Variables */
-static class atom *buttonpushed=NULL;
+static const class atom *buttonpushed=NULL;
 static boolean newcolors=TRUE;
 
 

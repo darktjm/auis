@@ -15,6 +15,11 @@ const atom *avalue::voidatom=NULL;
 const atom *avalue::atomatom=NULL;
 const atom *avalue::atkatom=NULL;
 
+static class avalue_init {
+  public:
+    avalue_init();
+} avalue_init_foo;
+
 avalue_init::avalue_init() {
     static boolean t=0;
     if(!t) {
@@ -88,12 +93,6 @@ void *avalue::VoidPtr(const atom *t) const {
 }
 
 avalueflex *avalue::ValueFlex(const atom *t) const {
-    if(t==NULL) t=avalue::valueflex;
-    if(t!=type) return NULL;
-    return (avalueflex *)val.obj;
-}
-
-avalueflex *avalue::List(const atom *t) const {
     if(t==NULL) t=avalue::valueflex;
     if(t!=type) return NULL;
     return (avalueflex *)val.obj;
@@ -351,38 +350,6 @@ int avalueflex::InterpretString(const char **str) {
     *str=p;
     return -1;
 }
-
-#ifdef USE_OBSOLETE_AVALUEARGS_CLASS
-avalueargs::avalueargs() {
-}
-
-avalueargs::avalueargs(long integer, const atom *name, const atom *type) {
-    Append()->Set(integer, name, type);
-}
-avalueargs::avalueargs(double real, const atom *name, const atom *type) {
-    Append()->Set(real, name, type);
-}
-
-avalueargs::avalueargs(const char *str, const atom *name, const atom *type) {
-    Append()->Set(str, name, type);
-}
-
-avalueargs::avalueargs(void *ptr, const atom *name, const atom *type) {
-    Append()->Set(ptr, name, type);
-}
-
-avalueargs::avalueargs(avalueflex *avf, const atom *name, const atom *type) {
-    Append()->Set(avf, name, type);
-}
-
-avalueargs::avalueargs(const atom *a, const atom *name, const atom *type) {
-    Append()->Set(a, name, type);
-}
-
-avalueargs::avalueargs(ATK *a, const atom *name) {
-    Append()->Set(a, name);
-}
-#endif
 
 avalueflex::avalueflex()  {
     deallocate=fdeallocate;

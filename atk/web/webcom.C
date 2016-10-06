@@ -19,9 +19,9 @@ ATK_IMPL("webcom.H")
 #endif
 
 #define  GUESSAHEAD
-static class atom *xbm;
-static class atom *gif;
-static class atom *htmlatom, *plainatom,  *atkatom, *jpegatom;
+static const class atom *xbm;
+static const class atom *gif;
+static const class atom *htmlatom, *plainatom,  *atkatom, *jpegatom;
 static int kidpid;
 static FILE *inf, *outf; // * errf
 #define QUESIZE 512
@@ -569,7 +569,7 @@ webcom::Cancel(const char  *buf){
 webcom::Create(const char  *url, class webcom  *parent, int  flags, const char *postdata)  {
 	ATKinit;
 	class webcom *w;
-	class atom *atm;
+	const class atom *atm;
         atm=atom::Intern(url);
         w = new webcom;
         w->url = atm;
@@ -812,7 +812,7 @@ webcom::Error()  {
 	return this->context;
 }
 
-	char *
+	const char *
 webcom::GetURL()  {
 	return (this->url)->Name();
 }
@@ -841,7 +841,7 @@ webcom::Close(FILE  *f)  {
 	fclose(f);
 }
 
-	class atom * 
+	const class atom * 
 webcom::Type()  {
 	return this->mimetype;
 }
@@ -934,7 +934,7 @@ webcom_CheckQue()  {
 }
 	void 
 webcom::Load(webcom_cbptr proc, void *rock)  {
-	char *local_url = (this->url)->Name();
+	const char *local_url = (this->url)->Name();
 	if (INPROMPT) webcom_Que(this, proc, rock);
 	
 	this->proc = proc;
@@ -973,7 +973,7 @@ webcom::Load(webcom_cbptr proc, void *rock)  {
 	reqid=cnt;
 	// file://localhost
 	char cdir[MAXPATHLEN+17 /* file: prefix, and '/' suffix + NUL */];
-	char *referer=NULL;
+	const char *referer=NULL;
 	if(parent && parent->url) {
 	    referer=parent->url->Name();
 	} else {

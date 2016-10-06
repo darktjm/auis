@@ -47,7 +47,7 @@ ATK_IMPL("celview.H")
 #define Parent(A) (A->parent)
 #define Data(A) ((class cel *)DataObject(A) )
 #define VALUE 10
-static class atom *UNSETFLAG;
+static const class atom *UNSETFLAG;
 #define RESIZING FALSE
 #define DRAWING FALSE
 static class menulist *celviewMenus;
@@ -80,7 +80,7 @@ static void drawshadow(class celview  *self,struct rectangle  *r);
 static void SetVisible(class celview  *self);
 static void SetInvisible(class celview  *self);
 static boolean objecttest(class celview   *self,const char  *name,const char  *desiredname);
-static int lookuptype(char  *ty);
+static int lookuptype(const char  *ty);
 static char * atomlisttostring(class atomlist  *al);
 static void appendresourceList( class celview  * self, struct resourceList  * resources);
 static void editresourceList( class celview  * self, struct resourceList  * resources,int  askres,int  maxcount );
@@ -815,7 +815,7 @@ static const struct types typearray[] = {
     {"",0}
 };
 
-static int lookuptype(char  *ty)
+static int lookuptype(const char  *ty)
 {
     const struct types *tp;
     for(tp = typearray;tp->val != 0; tp++)
@@ -828,14 +828,15 @@ static char * atomlisttostring(class atomlist  *al)
 /* should be an atomlist call */
 {
     static char buf[512];
-    char *cp,*alcp;
+    char *cp;
+    const char *alcp;
     struct atoms *at;
     cp = buf;
     for(at = (al)->TraversalStart(); at != NULL; at = (al)->TraversalNext(at)){
 #ifdef DEBUG
-printf("--> %s\n",at->atom->name);
+printf("--> %s\n",at->atom->Name());
 #endif /* DEBUG */
-	for(alcp = at->atom->name; *alcp; alcp++)
+	for(alcp = at->atom->Name(); *alcp; alcp++)
 	    *cp++ = *alcp;
 	*cp++ = '.';
     }
@@ -860,26 +861,26 @@ printf("In RLtoS found = %d %s\n",rl->found,rl->type->name);
 printf("In RLtoS Not found = %d %s %s\n",rl->found,rl->type->name,res);
 #endif /* DEBUG */
 
-	sprintf(str,"[%s] <%s> ()",rl->type->name,res);
+	sprintf(str,"[%s] <%s> ()",rl->type->Name(),res);
 #ifdef DEBUG
 printf("out of sprintf\n");
 #endif /* DEBUG */
     }
-    else switch(lookuptype(rl->type->name)){
+    else switch(lookuptype(rl->type->Name())){
 	case STRING:
-	    sprintf(str,"[%s] <%s> (%s)",rl->type->name,atomlisttostring(rl->name),
+	    sprintf(str,"[%s] <%s> (%s)",rl->type->Name(),atomlisttostring(rl->name),
 		    (char *) rl->data);
 	    break;
 	case FLOAT:
-	    sprintf(str,"[%s] <%s> (%f)",rl->type->name,atomlisttostring(rl->name),
+	    sprintf(str,"[%s] <%s> (%f)",rl->type->Name(),atomlisttostring(rl->name),
 		    (float) rl->data);
 	    break;
 	case LONG:
-	    sprintf(str,"[%s] <%s> (%ld)",rl->type->name,atomlisttostring(rl->name),
+	    sprintf(str,"[%s] <%s> (%ld)",rl->type->Name(),atomlisttostring(rl->name),
 		    rl->data);
 	    break;
 	default:   
-	    sprintf(str,"Unknown Type %s", rl->type->name);
+	    sprintf(str,"Unknown Type %s", rl->type->Name());
 	    return FALSE;
     }
 #ifdef DEBUG

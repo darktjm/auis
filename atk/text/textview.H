@@ -216,7 +216,7 @@ class textview : public  view {
       void PrintPSRect(FILE *outfile, long logwidth, long logheight, struct rectangle *visrect);
 
       struct view_printoptlist *PrintOptions();
-      long GetPrintOption(class atom *popt);
+      long GetPrintOption(const class atom *popt);
 
       virtual void SetDotPosition(long newPosition);
       virtual void SetDotLength(long newLength);

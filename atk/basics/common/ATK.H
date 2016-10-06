@@ -325,9 +325,9 @@ class ATK {
 
 /** The following class and macro simplify creation of 
 	references to ATKregistry entries.  The macro call
-		ATK_CLASS(aclassname)
+		ATK_CLASS(<em>aclassname</em>)
 	creates the declaration of identifier
-		class_aclassname
+		class_<em>aclassname</em>
 	This identifier can be used wherever an ATKregistryEntry is needed.
 */
 class ATK_def {

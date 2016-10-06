@@ -181,11 +181,11 @@ void rectlist::InvertRectangles(class view  *vPtr, spotcolor *spots)
 			vPtr->GetBackgroundColor(&obcolor, &obc1, &obc2, &obc3);
 			vPtr->GetForegroundColor(&ofcolor, &ofc1, &ofc2, &ofc3);
 			if(ofcolor) {
-			    atom *a=atom::Intern(ofcolor);
+			    const atom *a=atom::Intern(ofcolor);
 			    if(a) ofcolor=a->Name();
 			}
 			if(obcolor) {
-			    atom *a=atom::Intern(obcolor);
+			    const atom *a=atom::Intern(obcolor);
 			    if(a) obcolor=a->Name();
 			}
 			vPtr->SetTransferMode(graphic_XOR);
@@ -220,11 +220,11 @@ void rectlist::InvertRectangles(class view  *vPtr, spotcolor *spots)
 			vPtr->GetBackgroundColor(&obcolor, &obc1, &obc2, &obc3);
 			vPtr->GetForegroundColor(&ofcolor, &ofc1, &ofc2, &ofc3);
 			if(ofcolor) {
-			    atom *a=atom::Intern(ofcolor);
+			    const atom *a=atom::Intern(ofcolor);
 			    if(a) ofcolor=a->Name();
 			}
 			if(obcolor) {
-			    atom *a=atom::Intern(obcolor);
+			    const atom *a=atom::Intern(obcolor);
 			    if(a) obcolor=a->Name();
 			}
 			reset=TRUE;
@@ -264,11 +264,11 @@ void rectlist::InvertRectangles(class view  *vPtr, spotcolor *spots)
 			vPtr->GetBackgroundColor(&obcolor, &obc1, &obc2, &obc3);
 			vPtr->GetForegroundColor(&ofcolor, &ofc1, &ofc2, &ofc3);
 			if(ofcolor) {
-			    atom *a=atom::Intern(ofcolor);
+			    const atom *a=atom::Intern(ofcolor);
 			    if(a) ofcolor=a->Name();
 			}
 			if(obcolor) {
-			    atom *a=atom::Intern(obcolor);
+			    const atom *a=atom::Intern(obcolor);
 			    if(a) obcolor=a->Name();
 			}
 			vPtr->SetTransferMode(graphic_XOR);
@@ -302,11 +302,11 @@ void rectlist::InvertRectangles(class view  *vPtr, spotcolor *spots)
 			vPtr->GetBackgroundColor(&obcolor, &obc1, &obc2, &obc3);
 			vPtr->GetForegroundColor(&ofcolor, &ofc1, &ofc2, &ofc3);
 			if(ofcolor) {
-			    atom *a=atom::Intern(ofcolor);
+			    const atom *a=atom::Intern(ofcolor);
 			    if(a) ofcolor=a->Name();
 			}
 			if(obcolor) {
-			    atom *a=atom::Intern(obcolor);
+			    const atom *a=atom::Intern(obcolor);
 			    if(a) obcolor=a->Name();
 			}
 			reset=TRUE;

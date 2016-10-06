@@ -307,7 +307,7 @@ AddCurrent(view  *self) {
 	int need = FALSE;
 	FILE *f;
 	char buf[1024], obuf[1024];
-	char *u = NULL;
+	const char *u = NULL;
 	long t;
 	gethotlist(buf);
 	if (web && (wc = web->getwebcom()))
@@ -984,7 +984,7 @@ HLtoHTML(FILE  *in, FILE  *outf) {
 }
 
 struct perlog{
-	class atom *url;
+	const class atom *url;
 	int *logs, cnt;
 	struct perlog *next;
 };
@@ -1061,8 +1061,8 @@ static long ReverseNewline(class text *self, long pos)
 void webview::MoveToAnchor() {
     web *w=(web *)GetDataObject();
     if(w->webcomp && w->webcomp->url && w->webcomp->url->Name()) {
-	char *url=w->webcomp->url->Name();
-	char *p=strrchr(url, '#');
+	const char *url=w->webcomp->url->Name();
+	const char *p=strrchr(url, '#');
 	if(p) {
 	    long pos=w->FindNamedAnchor(p+1);
 	    if(pos>=0) {

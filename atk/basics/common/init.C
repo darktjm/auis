@@ -52,7 +52,7 @@ ATK_IMPL("init.H")
 
 struct keys {
     struct keys *next;
-    char *class_c;
+    const char *class_c;
     boolean inherit;
     class keymap *keymap;
     class keymap *orig;
@@ -100,7 +100,7 @@ static const char *GetToken(char  **pp);
 static int TranslateKeySequence(const char  *from, char  *to);
 static int parseBackslashed(const char  **fromChars);
 static struct keys *GetKeyFromKeystate(class init  *self, class keystate  *keystate);
-static ATK  *CheckML(class menulist  *menulist, char  *class_c, boolean  inherit);
+static ATK  *CheckML(class menulist  *menulist, const char  *class_c, boolean  inherit);
 static char *MapFile(const char  *filename, long  *fileLength );
 static int ReadFile(class init  *init, const char  *filename, boolean  executeImmediately);
 static PRINTF_LIKE(1,2) void ErrorMsg(const char  *msg, ...);
@@ -195,7 +195,7 @@ static class keymap *GetKeymap(class init  *init, const char  *className, boolea
     for (keys = init->keys; keys != NULL && ((strcmp(className, keys->class_c) != 0) || (keys->inherit != inheritFlag)); keys = keys->next)
         ;
     if (keys == NULL) {
-	atom *a=atom::Intern(className);
+	const atom *a=atom::Intern(className);
         keys = (struct keys *) malloc(sizeof(struct keys));
         keys->class_c = a->Name();
 	keys->keymap = new keymap;
@@ -215,7 +215,7 @@ static class menulist *GetMenulist(class init  *init, const char  *className, bo
     for (menus = init->menus; menus != NULL && ((strcmp(className, menus->class_c) != 0) || (menus->inherit != inheritFlag)); menus = menus->next)
         ;
     if (menus == NULL) {
-	atom *a=atom::Intern(className);
+	const atom *a=atom::Intern(className);
         menus = (struct menus *) malloc(sizeof(struct menus));
         menus->class_c = a->Name();
 	menus->menulist = new menulist;
@@ -741,7 +741,7 @@ class keystate *init::ModifyKeystate(class keystate  *keystate)
     return keystate;
 }
 
-static ATK  *CheckML(class menulist  *menulist, char  *class_c, boolean  inherit)
+static ATK  *CheckML(class menulist  *menulist, const char  *class_c, boolean  inherit)
             {
 
     class menulist *thisML;
@@ -1043,7 +1043,7 @@ init::AddKeyBinding(char  *class_c, boolean  inherit, class keymap  *keymapp)
 	    (kids->child)->AddKeyBinding( class_c, inherit, keymapp);
 	    kids=kids->next;
 	}
-	atom *a=atom::Intern(class_c);
+	const atom *a=atom::Intern(class_c);
 	keys = (struct keys *)malloc(sizeof(struct keys));
 	keys->class_c = a->Name();
 	keys->inherit = inherit;
@@ -1093,7 +1093,7 @@ init::AddMenuBinding(char  *class_c, boolean  inherit, class menulist  *menulist
 	    (kids->child)->AddMenuBinding( class_c, inherit, menulist);
 	    kids=kids->next;
 	}
-	atom *a=atom::Intern(class_c);
+	const atom *a=atom::Intern(class_c);
 	menus = (struct menus *)malloc(sizeof(struct menus));
 	menus->class_c = a->Name();
 	menus->inherit = inherit;

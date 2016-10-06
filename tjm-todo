@@ -179,7 +179,13 @@
 - implement or get rid of alink, ezscan
 - maybe try converting doxy latex output to ez (rtf is hopeless, and
   like the rest of the www, html is javascript-laden bloated mess)
-
+- maybe incorporate app.doc into application.H as well.
+- change atom class to be pointer, and no longer force explicit pointer usage
+  also removes issue of possible accidental deletion
+- add atom::InternStatic which does not strdup (for static lifetime strings)
+  - probably doesn't buy enough to be worthwhile, since most atoms are
+    created dynamically.  Maybe using a buffer list for string storage
+    would be more worthwhile.
 Long-term:
   - view/adjust styling boundaries (aka view source)?
   - add code snippet inset for literate programming

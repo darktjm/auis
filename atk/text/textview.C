@@ -53,7 +53,7 @@ static class graphic *pat;
 #define FINEGRID 12
 
 static class fontdesc *iconFont = NULL;
-static atom *A_boolean, *A_printoption;
+static const atom *A_boolean, *A_printoption;
 
 static class keymap *textviewEmacsKeymap;
 static class keymap *textviewViInputModeKeymap;
@@ -3712,7 +3712,7 @@ const void *textview::GetInterface(const char  *interfaceName)
     return NULL;
 }
 
-long textview::GetPrintOption(class atom *popt)
+long textview::GetPrintOption(const class atom *popt)
 {
     long value;
     short gotit;

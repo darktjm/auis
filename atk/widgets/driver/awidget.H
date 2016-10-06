@@ -108,7 +108,7 @@ DEFINE_AACTION_CLASS(Concat(DataClass,MethodAct),DataClass)
 
 #define WIDGET_VIEW_METHOD_CLASS(DataClass,ViewClass) \
 DEFINE_AACTION_CLASS(Concat(ViewClass,MethodActBase), ViewClass); \
-AACTION_DUMMY_CLASS Concat(ViewClass,MethodAct) : public Concat(ViewClass,MethodActBase) { \
+class Concat(ViewClass,MethodAct) : public Concat(ViewClass,MethodActBase) { \
   public: \
 	inline Concat(ViewClass,MethodAct)(void (ViewClass::*p)(const avalueflex &aux,  const avalueflex &in, avalueflex &out), const avalueflex &a) : Concat(ViewClass,MethodActBase)(p, a) { \
     	} \

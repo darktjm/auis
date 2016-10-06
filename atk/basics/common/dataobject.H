@@ -12,7 +12,7 @@
 #include <stdio.h>
 
 struct property {
-    class atom * type;
+    const class atom * type;
     long data;
 };
 
@@ -40,8 +40,8 @@ public:
     virtual void SetModified();
     virtual const char * ViewName()  ;
     virtual void SetAttributes(struct attributes *attributes);
-    virtual void Put( class atom * property, class atom * type, long rock );
-    virtual short Get( class atom * property, class atom ** type, long * rock )
+    virtual void Put( const class atom * property, const class atom * type, long rock );
+    virtual short Get( const class atom * property, const class atom ** type, long * rock )
        ;
     virtual int ListCurrentViews(class view **array,int size)  ;
     virtual void RestoreModified(long oldmodified);

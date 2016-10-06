@@ -37,8 +37,8 @@ class AmenuLabel : public AmenuGraphic {
     AmenuLabel &SetPrefs(struct sbutton_prefs *prefs);
     AmenuLabel &SetColor(const char *c);
     AmenuLabel &SetFont(const char *f);
-    atom *astr;
-    char *str;
+    const atom *astr;
+    const char *str;
     unsigned short pos;
     struct sbutton_prefs *prefs;
 };
@@ -89,10 +89,10 @@ class AmenuEntry  {
     /* The object on which this action will be invoked. */
     ATK *obj;
     /* The key to be used to identify this entry. */
-    atom *key;
+    const atom *key;
     
     /* Sets the label graphic for this key. */
-    inline AmenuEntry &SetKey(atom *k) {
+    inline AmenuEntry &SetKey(const atom *k) {
 	key=k;
 	return *this;
     }
@@ -163,7 +163,7 @@ class AmenuCard : public dataobject {
     virtual AmenuEntry &AddSeparator(int piority, struct sbutton_prefs *prefs=NULL);
     virtual AmenuEntry &AddSeparator(int priority, const char *topshadow, const char *bottomshadow);
     virtual void RemoveEntry(AmenuEntry *e);
-    virtual void RemoveEntry(atom *key); 
+    virtual void RemoveEntry(const atom *key); 
     inline void Sort() { entries.Sort(); }
     inline AmenuEntry &operator[](size_t i) { return *entries[i].ptr; }
     inline size_t GetN() { return entries.GetN(); }

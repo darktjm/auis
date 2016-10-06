@@ -18,7 +18,7 @@ ATK_IMPL("lset.H")
 
 #define VALUE 10
 #define CEL 5
-static class atom *a_vp,*a_name,*a_atomlist;
+static const class atom *a_vp,*a_name,*a_atomlist;
 
 
 ATKdefineRegistry(lset, dataobject, lset::InitializeClass);

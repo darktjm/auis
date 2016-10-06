@@ -39,7 +39,7 @@ ATK_IMPL("printopts.H")
 
 #define ANSWERLEN (12)
 
-static class atom *A_int, *A_string, *A_file, *A_boolean, *A_tofile, *A_printer, *A_psfile;
+static const class atom *A_int, *A_string, *A_file, *A_boolean, *A_tofile, *A_printer, *A_psfile;
 
 static void ApplyValues(class printopts  *self);
 static void printopts_Nop(class printopts  *self, long  rock);
@@ -673,7 +673,7 @@ static void CreateWindow(class view  *callview, long  rock)
     self->filenamenum = (-1);
 
     for (ix=0; ix<self->numops; ix++) {
-	class atom *ax;
+	const class atom *ax;
 	num = tx->GetLength();
 	label = self->oplist[ix].op->label;
 	tx->InsertCharacters(999999, label, strlen(label));

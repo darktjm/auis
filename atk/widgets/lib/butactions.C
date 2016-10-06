@@ -47,7 +47,7 @@ ATK_CLASS(fontdesc);
 ATK_CLASS(ASlotInt);
 ATK_CLASS(ASlotReal);
 
-AACTION_ARG_CLASS(AWgtFig);
+AACTION_FUNC_CLASS(AWgtFig);
 
 enum buttonType {
 	Empty_Button,

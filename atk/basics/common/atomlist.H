@@ -11,22 +11,21 @@
 
 struct atoms 
 {
-    class atom *atom;
+    const class atom *atom;
     struct atoms *next;
 };
 
 #include <ATK.H>
 
 class atomlist : public ATK  {
-public:
-	virtual ATKregistryEntry *ATKregistry();
+  public:
+    virtual ATKregistryEntry *ATKregistry();
 
-
-  virtual class atom * Last()  ;
-    virtual short Memberp(class atom *list)  ;
-  virtual void DropFirst();
-    virtual void Prepend(class atom *newitem);
-    virtual void Append(class atom *newitem);
+    virtual const class atom * Last()  ;
+    virtual short Memberp(const class atom *list)  ;
+    virtual void DropFirst();
+    virtual void Prepend(const class atom *newitem);
+    virtual void Append(const class atom *newitem);
     virtual void JoinToEnd(class atomlist *otherlist);
     virtual void JoinToBeginning(class atomlist *otherlist);
     virtual void Cut(struct atoms *mark);
@@ -34,19 +33,19 @@ public:
     inline struct atoms * TraversalStart() { return (this->atoms); }
     inline struct atoms * TraversalNext(struct atoms *loc)  
             { return ((loc) == NULL ? NULL : (loc)->next); }
-    inline class atom * TraversalAtom(struct atoms *loc)  
+    inline const class atom * TraversalAtom(struct atoms *loc)  
             { return ((loc) == NULL ? NULL : (loc)->atom); }
-    inline class atom * First() { return (this->atoms != NULL ? this->atoms->atom : NULL); }
+    inline const class atom * First() { return (this->atoms != NULL ? this->atoms->atom : NULL); }
     inline struct atoms * Mark() { return (this->atoms); }
 
-    
-	atomlist();
-    
-	virtual ~atomlist();
+
+    atomlist();
+    virtual ~atomlist();
+
     static class atomlist * Copy(class atomlist *oldlist)  ;
     static class atomlist * StringToAtomlist(const char *string)  ;
-    
 
+  private:
     struct atoms *atoms;
 };
 /** @} */

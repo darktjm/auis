@@ -18,10 +18,10 @@ ATK_IMPL("view.H")
 
 #define min(v1,v2) ((v1)<(v2) ? (v1) : (v2))
 #define view_STARTHEIGHT 150
-static class atom * A_name;
-static class atom * A_atomlist;
-static class atom * A_context;
-static class atom *A_printoption, *A_printer, *A_psfile, *A_papersize, *A_file, *A_string;
+static const class atom * A_name;
+static const class atom * A_atomlist;
+static const class atom * A_context;
+static const class atom *A_printoption, *A_printer, *A_psfile, *A_papersize, *A_file, *A_string;
 
 static struct view_printopt view_printoptels[6]; /* printer; PS file; print to printer/file; landscape/portrait; print scale; paper size */
 static struct view_printoptlist view_printopts = {
@@ -551,7 +551,7 @@ class atomlist * view::GetClass( )
 
 
 
-short view::GetParameter( class atomlist  * name, class atom  * type, long  * data )
+short view::GetParameter( class atomlist  * name, const class atom  * type, long  * data )
                     {
   class atomlist * dup;
   short val;
@@ -562,7 +562,7 @@ short view::GetParameter( class atomlist  * name, class atom  * type, long  * da
 }
 
 
-short view::GetResource( class atomlist  * name, class atomlist  * class_c, class atom  * type, long  * data )
+short view::GetResource( class atomlist  * name, class atomlist  * class_c, const class atom  * type, long  * data )
                          {
   struct atoms * nameMark = (name )->Mark( );
   struct atoms * classMark = (class_c )->Mark( );
@@ -614,7 +614,7 @@ void view::GetManyParameters( struct resourceList  * resources, class atomlist  
     }
 }
 
-void view::PostResource( class atomlist  * path, class atom  * type, long  data )
+void view::PostResource( class atomlist  * path, const class atom  * type, long  data )
                     {
   struct atoms * pathMark = (path )->Mark( );
   EnsureName(this);
@@ -728,7 +728,7 @@ struct view_printoptlist *view::PrintOptions()
 }
 
 /* remember, strings (and files) returned from this method are static and may be overwritten by the next call. */
-long view::GetPrintOption(class atom *popt)
+long view::GetPrintOption(const class atom *popt)
 {
     const char *prname;
     long value;

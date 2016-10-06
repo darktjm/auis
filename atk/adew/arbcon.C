@@ -62,7 +62,7 @@ static class arbiterview *OwnArb;
 static const char defaultvwlist[] = "text,fad,table,eq,raster,lookz,lset,page,ness,zip,link,chomp,calc,bush,chart,value bargraphV,value fourwayV,value sliderV,value thumbV,value buttonV,"
 "value onoffV,value sliderstrV,value thumbstrV,value controlV,value pianoV,value stringV,value enterstrV,value menterstrV,value clicklistV,arbiter" ;
 static class menulist *arbconMenus;
-static class atom *atta[7];
+static const class atom *atta[7];
 
 ATKdefineRegistry(arbcon, observable, arbcon::InitializeClass);
 static void DoCopy(class arbcon  *self,boolean  clear);
@@ -766,7 +766,7 @@ void arbcon::SaveCurrentCelview()
 
 static boolean isarbcon(class celview  *cv)
 {
-    class atom *att,**atp;
+    const class atom *att,**atp;
     att =  (Cel(cv))->GetRefAtom();
     for(atp = atta; *atp != NULL; atp++)
 	if(*atp == att){

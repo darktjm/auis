@@ -3,24 +3,6 @@
 \template{default}
 
 
-\begindata{link,539653752}
-Datastream version: 3
-$ANDREWDIR/doc/PROGRAMMER/atom.doc
-0
-0
-\begindata{link,539653752}
-Datastream version: 2
-atom
-2
-
-black
-white
-\enddata{link,539653752}
-\enddata{link,539653752}
-\view{linkview,539653752,8,0,0}atom.doc -  the atom package exists to 
-provide convenient handles for strings
-
-
 \begindata{link,539654104}
 Datastream version: 3
 $ANDREWDIR/doc/PROGRAMMER/atomlist.doc

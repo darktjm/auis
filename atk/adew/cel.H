@@ -28,7 +28,7 @@ public:
 
 
      void ObservedChanged (class observable *changed, long value);
-     short Get( class atom * property, class atom ** type, long * rock )
+     short Get( const class atom * property, const class atom ** type, long * rock )
        ;
      long Read (FILE *file, long id)  ;
      long Write (FILE *file, long writeid, int level)  ;
@@ -68,11 +68,11 @@ public:
     inline const char * GetRefName() { return (this->refname); }
     inline const char * GetViewName() { return (this->viewType); }
     inline const char * GetObjectName() { return (this->dataType); }
-    inline class atom * GetRefAtom() { return (this->refatm); }
-    inline class atom * GetViewAtom() { return (this->viewatm); }
-    inline class atom * GetObjectAtom() { return (this->dataatm); }
+    inline const class atom * GetRefAtom() { return (this->refatm); }
+    inline const class atom * GetViewAtom() { return (this->viewatm); }
+    inline const class atom * GetObjectAtom() { return (this->dataatm); }
     inline const char * GetLinkName() { return (this->linkname); }
-    inline class atom * GetLinkAtom() { return (this->linkatm); }
+    inline const class atom * GetLinkAtom() { return (this->linkatm); }
     inline boolean GetApplication() { return (this->application); }
     inline class text * GetScript() { return (this->script); }
     inline void SetVisible() { (this)->SetVisibilityBit(cel_VISIBLE); }
@@ -90,7 +90,7 @@ public:
     inline class arbiter * GetArbiter() { return ((this)->ab); }
     inline void SetArbiter(class arbiter *AA) { ((this)->ab = (AA)); }
 
-    class atom *viewatm,*dataatm,*refatm,*linkatm;
+    const class atom *viewatm,*dataatm,*refatm,*linkatm;
     const char *viewType, *dataType, *refname, *linkname;
     long viewID;
     class dataobject *dataObject;

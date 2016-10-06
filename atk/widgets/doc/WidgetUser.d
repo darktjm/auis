@@ -1283,12 +1283,12 @@ treated as a percent of full volume.   (Warning:  A volume of zero will
 cause no beep.)
 
 }
-figobj *\bold{GetFigObj}(atom *figoname)  \{Method on figure values\}
+figobj *\bold{GetFigObj}(const atom *figoname)  \{Method on figure values\}
 
-figobj *\bold{awidgetview_GetFigObj}(figure *fig, atom *figoname) 
+figobj *\bold{awidgetview_GetFigObj}(figure *fig, const atom *figoname) 
  \{proctable\}
 
-figobj *AddFigObj(figobj *anchor, int offset, atom *type);
+figobj *AddFigObj(figobj *anchor, int offset, const atom *type);
 
 Adds a figobj to the figure at a position relative to anchor.  The 'offset' 
 is an index of the positions between figobj's, with zero being the position 
@@ -1297,16 +1297,16 @@ negative values skip backward.  Negative one is the position immediately
 preceding anchor.
 
 
-\bold{SetFigAttr}(atom *figoname,  atom *figattr, T value)  \{Method on 
+\bold{SetFigAttr}(const atom *figoname,  const atom *figattr, T value)  \{Method on 
 awidgetview values
 
-\bold{awidgetview_SetFigAttrI}(awidgetview *updatee, atom *figoname,  atom 
+\bold{awidgetview_SetFigAttrI}(awidgetview *updatee, const atom *figoname,  const atom 
 *figattr, int V)  \{proctable\}
 
-\bold{awidgetview_SetFigAttrS}(awidgetview *updatee, atom *figoname,  atom 
+\bold{awidgetview_SetFigAttrS}(awidgetview *updatee, const atom *figoname,  const atom 
 *figattr, string V)  \{proctable\}
 
-\bold{awidgetview_SetFigAttrO}(awidgetview *updatee, atom *figoname,  atom 
+\bold{awidgetview_SetFigAttrO}(awidgetview *updatee, const atom *figoname,  const atom 
 *figattr, object V)  \{proctable\}
 
 
@@ -1510,7 +1510,7 @@ struct rectangle *visrect);
 
 virtual struct view_printoptlist *PrintOptions();
 
-virtual long GetPrintOption(class atom *popt);
+virtual long GetPrintOption(const class atom *popt);
 
 virtual void SetPrintOption(struct view_printopt *vopt, long value);
 

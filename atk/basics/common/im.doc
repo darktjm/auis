@@ -178,7 +178,7 @@ unsigned char *\paramname{itemname});}
 
 \fixedtext{short \bold{im_}GetResource }\fixedindent{(struct im 
 *\paramname{im}, struct atomlist *\paramname{name}, struct atomlist 
-*\paramname{className}, struct atom *\paramname{type}, long 
+*\paramname{className}, const struct atom *\paramname{type}, long 
 *\paramname{data});} 
 
 \fixedtext{char *\bold{im_}GetTitle }\fixedindent{(struct im *\paramname{im});} 
@@ -250,7 +250,7 @@ struct rectangle *\paramname{rec}, struct cursor *\paramname{cursor});}
 struct menulist *\paramname{menulist});} 
 
 \fixedtext{void \bold{im_}PostResource }\fixedindent{(struct im 
-*\paramname{im}, struct atomlist *\paramname{path}, struct atom 
+*\paramname{im}, struct atomlist *\paramname{path}, const struct atom 
 *\paramname{type}, long \paramname{data});} 
 
 \fixedtext{void \bold{im_}ProvideArg }\fixedindent{(struct im *\paramname{im}, 

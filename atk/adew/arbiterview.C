@@ -40,7 +40,7 @@ static class cursor *WaitCursor;
 #define NamedView 0
 #define ExistingObject 0
 #define SaveAll 0
-static class atom *a_vp;
+static const class atom *a_vp;
 static class arbiterview *firstlink , *lastlink;
 #define NameSet(V) (((class view *)V)->name_explicitly_set)
 #define DataObject(A) (A->dataobject)
@@ -411,7 +411,7 @@ class dataobject * arbiterview::GetNamedObject(class view  *vw,const char  *name
     class atomlist *al;
     class celview **v;
     int i ;
-    class atom *at;
+    const class atom *at;
     char *ObjectName,buf[1024];
     strcpy(buf,name);
     ObjectName = buf;

@@ -101,7 +101,7 @@ class celview: public view {
       int Moving,resizing,WasMoving, WasResizing;
       class menulist *menus;
       int drawing, OldMode,sizepending,NeedsPost,vismode;
-      class atom *viewatm,*dataatm,*refatm;
+      const class atom *viewatm,*dataatm,*refatm;
       int application,NeedsRemade,NeedsReinit;
       celview_hitfptr hitfunc;
       long hitrock;

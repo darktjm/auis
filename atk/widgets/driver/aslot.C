@@ -43,7 +43,7 @@ static ATKregistryEntry *aactionreg = NULL;
 
 const char *ASlot::client = NULL;
 
-atom *ASlot::in0type;
+const atom *ASlot::in0type;
 
 const unsigned short ASlot::fromresources = 1<<0;
 	// value came from resource file or inherited in tree
@@ -418,7 +418,7 @@ ASlot::EatAvalue(const avalue *v) {
 	if (v->Type() == avalue::cstring) 
 		return EatString((char *)v);
 	else if (v->Type() == avalue::atomatom) 
-		return EatString(((atom *)v)->Name());
+		return EatString(((const atom *)v)->Name());
 	else if (v->Type() == avalue::atkatom) 
 		// I assume this means the value is an ATK object
 		// which includes aaction values xxx ???
@@ -1003,7 +1003,7 @@ ASlotFunction::ASlotFunction()  {
 	val.obj = (void *) &dummy;
 	pe = NULL; 
 }
-ASlotFunction::ASlotFunction(atom *n)  { 
+ASlotFunction::ASlotFunction(const atom *n)  { 
 	SetName(n);  
 	val.obj = (void *) &dummy;
 	pe = NULL; 
@@ -1013,7 +1013,7 @@ ASlotFunction::ASlotFunction(aaction *s) {
 	pe = NULL; 
 	*this=s; 
 }
-ASlotFunction::ASlotFunction(atom *n, aaction *s) { 
+ASlotFunction::ASlotFunction(const atom *n, aaction *s) { 
 	SetName(n);  
 	val.obj = (void *) &dummy;
 	pe = NULL; 
@@ -1302,7 +1302,7 @@ ASlotFont::ASlotFont(const char *s) {
 	val.obj=fontdesc::Create("andy", fontdesc_Plain, 12);
 }
 
-ASlotFont::ASlotFont(atom *name, const char *s)  {
+ASlotFont::ASlotFont(const atom *name, const char *s)  {
 	if (name) SetName(name);
 	if (!s) s = "andy12";
 	fontname=strdup((char *)s);

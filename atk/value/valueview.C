@@ -17,8 +17,8 @@ ATK_IMPL("valueview.H")
 static class atomlist *  AL_background;
 static class atomlist *  AL_border;
 static class atomlist *  AL_border_width;
-static class atom *  A_graphic;
-static class atom *  A_long;
+static const class atom *  A_graphic;
+static const class atom *  A_long;
 #define InternAtoms ( \
    AL_background = atomlist::StringToAtomlist("background") ,\
    AL_border = atomlist::StringToAtomlist("border") ,\

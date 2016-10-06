@@ -82,7 +82,7 @@ static void DeleteLayoutPlanProc(const void *rock);
 void textview_DestroyPrintingLayout(class textview  *txtv);
 void textview_DestroyPrintingLayoutPlan(class textview  *txtv);
 
-static class atom *A_twocolumns, *A_swapheaders, *A_endnotes, *A_docontents, *A_doindex;
+static const class atom *A_twocolumns, *A_swapheaders, *A_endnotes, *A_docontents, *A_doindex;
 
 /* called from InitializeClass */
 void textview_InitializePS(void)

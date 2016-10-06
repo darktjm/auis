@@ -207,7 +207,7 @@ static boolean addindex;
 #define COLORPTN "'if  \\n(zT  \\{\\\n\\X'%f %f %f setrgbcolor'\n\\}\n"
 #define PUTCOLOR(R, G, B, F)   fprintf(F, COLORPTN, R, G, B )
 
-static class atom *A_swapheaders, *A_enumcontents, *A_docontents, *A_endnotes;
+static const class atom *A_swapheaders, *A_enumcontents, *A_docontents, *A_endnotes;
 
 ATKdefineRegistry(texttroff, ATK, texttroff::InitializeClass);
 

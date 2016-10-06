@@ -193,7 +193,7 @@ class AVarSet : public  dataobject
 #undef AVSSET
 
 	AVarSet &Set(ASlot_NameParam name, ASlot *v);
-	virtual inline short Get(struct atom*name, struct atom**rtype, long *val) {
+	virtual inline short Get(const struct atom*name, const struct atom**rtype, long *val) {
 	    return dataobject::Get(name,rtype,val);
 	}
     ASlot *Get(ASlot_NameParam name);
