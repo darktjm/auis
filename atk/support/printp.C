@@ -40,7 +40,7 @@ typedef struct _afm_font_hashtable {
 
 static afm_font_hashtable *AFMCache;
 static struct font_afm *symbolfont = NULL;
-static class atom *A_landscape, *A_scale, *A_papersize;
+static const class atom *A_landscape, *A_scale, *A_papersize;
 
 struct afm_keyword {
     const char *name;

@@ -12,10 +12,10 @@ ATK_IMPL("atom.H")
 #define Log2HashTableSize   9
 #define HashTableSize       (1 << Log2HashTableSize)
 
-struct alist
+struct alist : public atom
 {
-    class atom *atom;
     struct alist *next;
+    static const class atom *CreateAtom(const char *name, int index);
 };
 
 static struct alist *hashTable[HashTableSize];
@@ -26,11 +26,9 @@ static struct alist *hashTable[HashTableSize];
 
 
 ATKdefineRegistry(atom, ATK, atom::InitializeClass);
-static int Hash(unsigned char *word);
-static class atom *CreateAtom(const char  *name, int  index);
 
 
-static int Hash(unsigned char *word)
+static int Hash(unsigned const char *word)
 {
     unsigned int total = 0;
 
@@ -42,56 +40,36 @@ static int Hash(unsigned char *word)
     return total & (HashTableSize - 1);
 }
 
-static class atom *CreateAtom(const char  *name, int  index)
+const class atom *alist::CreateAtom(const char  *name, int  index)
 {
-    class atom *a;
     struct alist *l;
 
-    a = new atom;
-    a->name = strdup(name);
-
-    l = (struct alist *) malloc(sizeof (struct alist));
-    l->atom = a;
+    l = new alist;
+    l->name = strdup(name);
     l->next = hashTable[index];
 
     hashTable[index] = l;
-    return a;
+    return const_cast<const atom *>(static_cast<atom *>(l));
 }
 
 /*
  * Class procedures
  */
 
-class atom *atom::Intern(const char  *name)
+const class atom *atom::Intern(const char  *name)
 {
 	ATKinit;
 
     int index;
-    struct alist *a;
+    const struct alist *a;
 
     index = Hash((unsigned char *)name);
 
     for (a = hashTable[index]; a != NULL; a = a->next)
-        if (0 == strcmp(name, (a->atom)->Name()))
-            return a->atom;
+        if (0 == strcmp(name, static_cast<const atom *>(a)->Name()))
+            return static_cast<const atom *>(a);
 
-    return CreateAtom(name, index);
-}
-
-class atom *atom::Intern(char  *name)
-{
-    return Intern((const char *)name);
-}
-
-
-class atom *atom::InternRock(long  rock)
-{
-	ATKinit;
-
-    char temp[20];
-
-    sprintf(temp, "g0x%lx", rock); 
-    return atom::Intern(temp);
+    return alist::CreateAtom(name, index);
 }
 
 boolean atom::InitializeClass()
@@ -107,7 +85,7 @@ boolean atom::InitializeClass()
 
 atom::atom()
 {
-	ATKinit;
+    ATKinit;
 
     this->name = NULL;
     THROWONFAILURE( TRUE);
@@ -115,7 +93,5 @@ atom::atom()
 
 atom::~atom()
 {
-	ATKinit;
-
-	fprintf(stderr, "Illegal Destruction of an Atom\n");
+    fprintf(stderr, "Illegal Destruction of an Atom\n");
 }

@@ -98,7 +98,6 @@ void flex::Invalidate(size_t /* i */, size_t /* len */) {
 	void
 flex::MakeGap(size_t i, size_t len ) {
 
-	const size_t esize = sizeof(char);
 	if (len > gaplen) {
 		/* have to make elts array bigger */
 		size_t newsize = /* itrunc */( 14*(n+gaplen)/10 );
@@ -106,7 +105,7 @@ flex::MakeGap(size_t i, size_t len ) {
 		    newsize = /* itrunc */( 12*(len+n)/10 );
 		newsize=RoundSize(newsize);
 		char *telts= 
-		      (char *)Allocate(newsize * esize);
+		      (char *)Allocate(newsize);
 		
 		const size_t newgaplen = newsize - n;
 
@@ -122,11 +121,11 @@ flex::MakeGap(size_t i, size_t len ) {
 			 part to be moved to follow the gap
 			 part after the old gap
 			 */
-			MoveTo( telts, elts, i*esize );
-			MoveTo( telts+i+newgaplen, elts+i, (gaploc-i)*esize );
+			MoveTo( telts, elts, i );
+			MoveTo( telts+i+newgaplen, elts+i, (gaploc-i) );
 			MoveTo( telts+gaploc+newgaplen,
 				elts+gaploc+gaplen,
-				(n-gaploc)*esize );
+				(n-gaploc) );
 		    }
 		    else {
 			/* gap is ok or too far left. Move: 
@@ -134,28 +133,28 @@ flex::MakeGap(size_t i, size_t len ) {
 			 part to precede the new gap (if any)
 			 part to be after gap
 			 */
-			MoveTo( telts, elts, gaploc*esize );
+			MoveTo( telts, elts, gaploc );
 			if (gaploc < i)
 			    MoveTo(  telts+gaploc,
 				     elts+gaploc+gaplen,
-				     (i-gaploc)*esize );
+				     (i-gaploc) );
 			MoveTo( telts+i+newgaplen, elts+i+gaplen, 
-				(n-i)*esize );
+				(n-i) );
 		    }
 		    Deallocate(elts);
 		}
 		elts = telts;
 		gaplen = newgaplen;
 	} else {
-	    if(elts==NULL) elts=(char *)Allocate(gaplen * sizeof(char));
+	    if(elts==NULL) elts=(char *)Allocate(gaplen);
 	    if (i < gaploc) {
 		/* move gap to the left (move segment previously before gap) */
 		if(elts) MoveTo( elts+gaplen+i, elts+i, 
-				  (gaploc - i)*esize );
+				  (gaploc - i) );
 	    } else if (i > gaploc) {
 		/* move gap to the right (move segment previously after gap) */
 		if(elts) MoveTo( elts+gaploc, elts+gaplen+gaploc, 
-				  (i - gaploc)*esize );
+				  (i - gaploc) );
 	    }
 	}
 	gaploc = i;
@@ -293,7 +292,10 @@ flex::Find( const char &o ) const {
 */
 	char *
 flex::GetBuf( size_t i, size_t len, size_t *gotlenp ) {
-	if(elts==NULL) return NULL;
+	if(elts==NULL || i > len) {
+	    *gotlenp = 0;
+	    return NULL;
+	}
 	/* if (i < 0) i = 0; */
 	if (i+len > n) len = n-i;
 	if (gaploc <= i) {

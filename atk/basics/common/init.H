@@ -22,7 +22,7 @@ typedef void (*init_fptr)(long rock, char *buf);
 
 struct menus {
     struct menus *next;
-    char *class_c;
+    const char *class_c;
     boolean inherit;
     class menulist *menulist;
     class menulist *orig;

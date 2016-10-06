@@ -12,7 +12,7 @@ ATK_IMPL("value.H")
 #include <view.H>
 #define INITIALNUMOBSERVERS 4
 
-static class atom *rock1atom, *rock2atom, *stringatom, *stringarrayatom, *valueatom;
+static const class atom *rock1atom, *rock2atom, *stringatom, *stringarrayatom, *valueatom;
 
 /****************************************************************/
 /*		static support					*/

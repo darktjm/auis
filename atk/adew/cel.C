@@ -26,7 +26,7 @@ static long viewID = 0;
 ATKdefineRegistry(cel, dataobject, cel::InitializeClass);
 static void SetVisible(class cel  *self);
 static void SetInvisible(class cel  *self);
-static class atom *getline(char  **place);
+static const class atom *getline(char  **place);
 static long                      searchatt(class cel  *self,char  *attname,long  *len);
 void cel__FinializeObject(struct classheader  *classID, class cel  *self);
 #if 0
@@ -46,7 +46,7 @@ void cel::ObservedChanged(class observable  *changed, long  value)
     (this)->dataobject::ObservedChanged( changed, value);
 }
 
-short cel::Get(class atom  *property, class atom  **type, long  *rock)
+short cel::Get(const class atom  *property, const class atom  **type, long  *rock)
 {
     short result=(this)->dataobject::Get(property,type,rock);
     if(this->dataObject && !result)
@@ -304,7 +304,7 @@ void cel::InsertObject (class dataobject  *newobject, char  *dataname,const char
 printf("Initing v = %s, d = %s, r = %s\n",this->viewType,this->dataType,this->refname);
 #endif /* DEBUG */
 }
-static class atom *getline(char  **place)
+static const class atom *getline(char  **place)
 {
     char tmpbuf[512];
     char *c = tmpbuf;

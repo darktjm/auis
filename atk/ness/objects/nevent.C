@@ -44,7 +44,7 @@ static char *LastMenu = NULL;
 
 static class init *globalInit = NULL;
 
-static char *pfreeze(char  *name);
+static const char *pfreeze(char  *name);
 static char * CelSymName(char *name);
 class nesssym * neventStartExtend(class nesssym  *currobj, class nesssym  *name);
 class nesssym * neventFinishExtend(class nesssym  *obj);
@@ -70,7 +70,7 @@ static void PostKeysEvent(class ness  *ness, struct objnode  *onode,
 		struct eventnode  *enode);
 static void PostMouseEvent(class ness  *ness, struct objnode  *onode, 
 		struct eventnode  *enode);
-static boolean TryTrigger(class observable  *obj, class atom  *trigger, 
+static boolean TryTrigger(class observable  *obj, const class atom  *trigger, 
 		class ness  *ness, struct eventnode  *enode);
 static void PostEventEvent(class ness  *ness, struct objnode  *onode, 
 		struct eventnode  *enode);
@@ -85,9 +85,9 @@ void neventUnpost (class ness  *ness, boolean  debug);
 	Hopefully we will want this same string many times, 
 	and won't want too many different strings frozen. 
 */
-	static char *
+	static const char *
 pfreeze(char  *name) {
-	class atom *a=atom::Intern(name);
+	const class atom *a=atom::Intern(name);
 	return (a)->Name();
 }
 
@@ -825,7 +825,7 @@ PostMouseEvent(class ness  *ness, struct objnode  *onode, struct eventnode  *eno
 	return TRUE for success and FALSE for failure
 */
 	static boolean
-TryTrigger(class observable  *obj, class atom  *trigger, class ness  *ness, 
+TryTrigger(class observable  *obj, const class atom  *trigger, class ness  *ness, 
 		struct eventnode  *enode) {
 	if (obj == NULL) {
 		return FALSE;
@@ -856,7 +856,7 @@ TryTrigger(class observable  *obj, class atom  *trigger, class ness  *ness,
 */
 	static void 
 PostEventEvent(class ness  *ness, struct objnode  *onode, struct eventnode  *enode) {
-	class atom *trigger;
+	const class atom *trigger;
 
 	if (FOLDEDEQ("becamevisible", enode->spec)) {
 		enode->enabled = TRUE;

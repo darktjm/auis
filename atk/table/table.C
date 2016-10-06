@@ -902,9 +902,9 @@ void rcref (class table  * T, extended_double  *result, int      r , int      c 
 		break;
 	    case table_ImbeddedObject:
 		{
-		class atom *rock1=atom::Intern("rock1");
-		class atom *string=atom::Intern("string");
-		class atom *value=atom::Intern("value");
+		const class atom *rock1=atom::Intern("rock1");
+		const class atom *string=atom::Intern("string");
+		const class atom *value=atom::Intern("value");
 		long rock;
 		char *rockp;
 		if((cell->interior.ImbeddedObject.data)->Get(value, &string,(long *)&rockp)) MakeStandard(result,atof(rockp));

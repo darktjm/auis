@@ -51,7 +51,7 @@ class atomlist *atomlist::StringToAtomlist(const char  *string)
 {
     char *atomstart;
     char *atomend;
-    class atom *atom;
+    const class atom *atom;
     class atomlist *newlist = new atomlist;
     int len=strlen(string)+1;
     if(len>strsize) {
@@ -76,7 +76,7 @@ class atomlist *atomlist::StringToAtomlist(const char  *string)
  * Methods
  */
 
-class atom *atomlist::Last()
+const class atom *atomlist::Last()
 {
     struct atoms *atoms;
 
@@ -87,7 +87,7 @@ class atom *atomlist::Last()
 }
 
 
-short atomlist::Memberp(class atom  *key)
+short atomlist::Memberp(const class atom  *key)
 {
     struct atoms *atoms;
 
@@ -107,7 +107,7 @@ void atomlist::DropFirst()
     }
 }
 
-void atomlist::Prepend(class atom  *atom)
+void atomlist::Prepend(const class atom  *atom)
 {
     struct atoms *atoms;
 
@@ -118,7 +118,7 @@ void atomlist::Prepend(class atom  *atom)
     this->atoms = atoms;
 }
 
-void atomlist::Append(class atom  *atom)
+void atomlist::Append(const class atom  *atom)
 {
     struct atoms *new_c;
     struct atoms **last;

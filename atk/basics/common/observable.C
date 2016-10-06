@@ -28,7 +28,7 @@ struct triggerinstance {
 	it contains the list of functions to be called when the trigger is pulled */
 struct triggerhousing {
 	struct triggerhousing *next;
-	class atom *trigger;
+	const class atom *trigger;
 	struct triggerinstance *instances;
 	long disablecount;	/* enable if zero. disabled if > 0 */
 	boolean firepending;	/* set True if fired while disabled */
@@ -80,7 +80,7 @@ observable::~observable()
 }
 
 void observable::Destroy() {
-    if(refcount==1) NotifyObservers( observable_OBJECTDESTROYED);
+    if(ReferenceCount()==1) NotifyObservers( observable_OBJECTDESTROYED);
     traced::Destroy();
 }
     
@@ -161,7 +161,7 @@ void observable::ObservedChanged(class observable  *changed, long  value  )
 	associate the atom as a possible trigger for the class 
 */
 	void
-observable::DefineTrigger(ATKregistryEntry   *info, class atom  *trigger)
+observable::DefineTrigger(ATKregistryEntry   *info, const class atom  *trigger)
 			{
 	struct triggerclass *tc;
 	for (tc = Triggers; 
@@ -196,7 +196,7 @@ observable::ListTriggers(ATKregistryEntry   *info)
 	return result;
 }
 
-static struct triggerhousing *FindOrMakeTrigger(observable *self, atom *trigger) {
+static struct triggerhousing *FindOrMakeTrigger(observable *self, const atom *trigger) {
     struct triggerclass *tc;
     struct triggerhousing *th;
     for (th	= self->triggers; th !=	NULL &&	th->trigger != trigger; th = th->next) {};
@@ -221,7 +221,7 @@ static struct triggerhousing *FindOrMakeTrigger(observable *self, atom *trigger)
     return th;
 }
 
-boolean observable::AddRecipient(class atom  *trigger, ATK   *rcvr, const aaction &act) {
+boolean observable::AddRecipient(const class atom  *trigger, ATK   *rcvr, const aaction &act) {
     struct triggerhousing *th=FindOrMakeTrigger(this,trigger);
     struct triggerinstance *ti;
     if(th==NULL) return FALSE;
@@ -253,7 +253,7 @@ boolean observable::AddRecipient(class atom  *trigger, ATK   *rcvr, const aactio
 		func(rcvr, self, rock)
 */
 	boolean
-observable::AddRecipient(class atom  *trigger, ATK   *rcvr, observable_fptr func, long  rock)
+observable::AddRecipient(const class atom  *trigger, ATK   *rcvr, observable_fptr func, long  rock)
 					{
 	struct triggerhousing *th=FindOrMakeTrigger(this,trigger);
 	struct triggerinstance *ti;
@@ -282,7 +282,7 @@ observable::AddRecipient(class atom  *trigger, ATK   *rcvr, observable_fptr func
 	removes the receiver from the list of recipients
 */
 	void
-observable::DeleteRecipient(class atom  *trigger, ATK   *rcvr)
+observable::DeleteRecipient(const class atom  *trigger, ATK   *rcvr)
 			{
 	struct triggerhousing *th;
 	struct triggerinstance *ti, *pi;
@@ -305,7 +305,7 @@ observable::DeleteRecipient(class atom  *trigger, ATK   *rcvr)
 /* observable__PullTrigger(self, trigger)
 	call all funcs associated with this trigger on this object
  */
-void observable::PullTrigger(class atom  *trigger, const avalueflex &args) {
+void observable::PullTrigger(const class atom  *trigger, const avalueflex &args) {
     struct triggerhousing *th;
     struct triggerinstance *ti;
     struct owatch_data *w1;
@@ -332,7 +332,7 @@ void observable::PullTrigger(class atom  *trigger, const avalueflex &args) {
     owatch::Delete(w1);
 }
 	void
-observable::PullTrigger(class atom  *trigger)
+observable::PullTrigger(const class atom  *trigger)
 		{
 	struct triggerhousing *th;
 	struct triggerinstance *ti;
@@ -373,7 +373,7 @@ observable::PullTrigger(class atom  *trigger)
 			for each time Disable has been called.
 */
 	void
-observable::DisableTrigger(class atom  *trigger)
+observable::DisableTrigger(const class atom  *trigger)
 		{
 	struct triggerhousing *th;
 	for (th = this->triggers; th != NULL && th->trigger != trigger; th = th->next) 
@@ -389,7 +389,7 @@ observable::DisableTrigger(class atom  *trigger)
 	this trigger will once again produce call backs
 */
 	void
-observable::EnableTrigger(class atom  *trigger)
+observable::EnableTrigger(const class atom  *trigger)
 		{
 	struct triggerhousing *th;
 	for (th = this->triggers; th != NULL && th->trigger != trigger; th = th->next) 
@@ -406,7 +406,7 @@ observable::EnableTrigger(class atom  *trigger)
 /* observable__DisableCount(self, trigger)
 	return the number of outstanding DisableTrigger calls
 */
-long observable::DisableCount(class atom  *trigger)
+long observable::DisableCount(const class atom  *trigger)
 {
     struct triggerhousing *th;
     struct triggerclass *tc;

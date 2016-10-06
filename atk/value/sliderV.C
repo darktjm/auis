@@ -32,8 +32,8 @@ static class atomlist *  AL_readonly;
 static class atomlist *  AL_immediate;
 static class atomlist *  AL_style;
 
-static class atom *  A_long;
-static class atom *  A_string;
+static const class atom *  A_long;
+static const class atom *  A_string;
 
 #define InternAtoms ( \
    AL_bodyfont = atomlist::StringToAtomlist("bodyfont") ,\

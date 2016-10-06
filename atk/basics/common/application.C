@@ -50,6 +50,8 @@ application::application()
     this->majorversion = -42;
     this->minorversion = -42;
     this->printversioninfo = TRUE;
+    /* tjm - this is probably wrong, since it happens before the
+     * app has a chance to set up the config */
     this->iconic=environ::GetProfileSwitch("StartIconic", FALSE);
     init_argv = NULL;
     if (startup_app == NULL)

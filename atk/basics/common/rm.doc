@@ -43,27 +43,27 @@ The resouce manager, rm, manages resources in the Andrew Toolkit.
 
 \fixedtext{void \bold{rm_}ContextualPostResource }\fixedindent{(struct 
 atomlist *\paramname{context}, *\paramname{path}, long \paramname{data}, 
-struct atom *\paramname{type});} 
+const struct atom *\paramname{type});} 
 
 \fixedtext{void \bold{rm_}GetManyResources }\fixedindent{(struct resourceList 
 *\paramname{resources}, struct atomlist *\paramname{name}, struct atomlist 
 *\paramname{className});} 
 
 \fixedtext{short \bold{rm_}GetResource }\fixedindent{(struct atomlist 
-*\paramname{name}, struct atomlist *\paramname{className}, struct atom 
+*\paramname{name}, struct atomlist *\paramname{className}, const struct atom 
 *\paramname{type}, long *\paramname{data});} 
 
 \fixedtext{boolean \bold{rm_}InitializeClass }\fixedindent{();} 
 
-\fixedtext{void \bold{rm_}PostConverter }\fixedindent{(struct atom 
-*\paramname{fromtype}, struct atom *\paramname{totype}, procedure 
+\fixedtext{void \bold{rm_}PostConverter }\fixedindent{(const struct atom 
+*\paramname{fromtype}, const struct atom *\paramname{totype}, procedure 
 \paramname{converter});} 
 
 \fixedtext{void \bold{rm_}PostManyResources }\fixedindent{(struct resourceList 
 *\paramname{resources}, struct atomlist *\paramname{context});} 
 
 \fixedtext{void \bold{rm_}PostResource }\fixedindent{(struct atomlist 
-*\paramname{path}, long \paramname{data}, struct atom *\paramname{type});} 
+*\paramname{path}, long \paramname{data}, const struct atom *\paramname{type});} 
 
 
 
@@ -81,9 +81,9 @@ struct atom *\paramname{type});}
 
 \example{void rm_PostConverter( classID, from, to, converter )
 
-struct atom * from;
+const struct atom * from;
 
-struct atom * to;
+const struct atom * to;
 
 procedure converter;
 
@@ -114,7 +114,7 @@ struct atomlist * name;
 
 struct atomlist * class;
 
-struct atom * type;
+const struct atom * type;
 
 long * data;} 
 
@@ -138,7 +138,7 @@ struct atomlist * name;
 
 struct atomlist * class;
 
-struct atom * type;
+const struct atom * type;
 
 long * data;
 
@@ -161,7 +161,7 @@ struct atomlist * path;
 
 long data;
 
-struct atom * type;} 
+const struct atom * type;} 
 
 
 \leftindent{\bold{Class procedure description.  }  Posts a resource.} 

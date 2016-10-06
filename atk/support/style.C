@@ -368,8 +368,8 @@ void style::Reset()
 static int style_copyattributes(long  procdata, class Namespace  * curnamespace, int  indexvalue )
 {
     char * tmpValue;
-    char * tmpAttributeName;
-    class atom * tmpAttributeAtom;
+    const char * tmpAttributeName;
+    const class atom * tmpAttributeAtom;
     if ((curnamespace)->BoundpAt(indexvalue)) {
 	tmpValue = (char *) (curnamespace)->ValueAt(indexvalue);
 	tmpAttributeAtom = (curnamespace)->NameAt( indexvalue);
@@ -921,7 +921,7 @@ void style::GetTabChangeList(long  *RefNumTabChanges, struct tabentry  ***RefTab
 
 void style::AddAttribute(const char  * NewAttributeName, const char  * NewAttributeValue )
 {
-    class atom *tmpAtom;
+    const class atom *tmpAtom;
     char * tmpValue;
 
     tmpAtom = atom::Intern(NewAttributeName);
@@ -934,7 +934,7 @@ void style::AddAttribute(const char  * NewAttributeName, const char  * NewAttrib
 
 void style::RemoveAttribute(const char  * OldAttributeName)
 {
-    class atom * tmpAtom;
+    const class atom * tmpAtom;
     long tmpValue;
 
     if (!this->AdditionalAttributes) return;
@@ -947,7 +947,7 @@ void style::RemoveAttribute(const char  * OldAttributeName)
 
 char * style::GetAttribute(const char  * OldAttributeName )
 {
-    class atom * tmpAtom;
+    const class atom * tmpAtom;
     long tmpValue;
 
     if (!this->AdditionalAttributes) return NULL;
@@ -960,7 +960,7 @@ char * style::GetAttribute(const char  * OldAttributeName )
 
 boolean style::IsAttribute(const char  * TestAttributeName)
 {
-    class atom * tmpAtom;
+    const class atom * tmpAtom;
 
     if (!this->AdditionalAttributes) return FALSE;
     tmpAtom = atom::Intern(TestAttributeName);
@@ -1003,8 +1003,8 @@ long style::ReadMenu(FILE  *fp)
 static int style_writeAdditionalAttribute(FILE  *fileptr, class Namespace  * curnamespace, int  indexvalue )
 {
     char * tmpValue;
-    char * tmpAttributeName;
-    class atom * tmpAttributeAtom;
+    const char * tmpAttributeName;
+    const class atom * tmpAttributeAtom;
 
     if ((curnamespace)->BoundpAt(indexvalue)) {
 	tmpAttributeAtom = (curnamespace)->NameAt( indexvalue);

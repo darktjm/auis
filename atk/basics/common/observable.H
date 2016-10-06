@@ -28,7 +28,7 @@ public:
 	/* the following methods implement a scheme for "triggers", 
 		a set of named messages,  each trigger must first be
 		defined with a call to DefineTrigger */
-	virtual boolean AddRecipient(/* struct thisobject *self, */ class atom *trigger,
+	virtual boolean AddRecipient(/* struct thisobject *self, */ const class atom *trigger,
 			ATK  *rcvr, observable_fptr func, 
 			long rock)  ;
 		/* when the trigger is Pulled, the 'func' will be called thus:
@@ -37,26 +37,26 @@ public:
 		    (each rcvr can be registered only once with each trigger 
 			on a given object)
 		 */
-	virtual boolean AddRecipient(class atom *trigger, ATK  *rcvr, const aaction &act);
-	virtual void DeleteRecipient(/* struct thisobject *self, */ class atom *trigger,
+	virtual boolean AddRecipient(const class atom *trigger, ATK  *rcvr, const aaction &act);
+	virtual void DeleteRecipient(/* struct thisobject *self, */ const class atom *trigger,
 			ATK  *rcvr);
 		/* removes the receiver from the list of recipients */
-	virtual void PullTrigger(/* struct thisobject *self, */ class atom *trigger);
+	virtual void PullTrigger(/* struct thisobject *self, */ const class atom *trigger);
 		/* call all funcs associated with this trigger on this object 
 			Only the object itself should call PullTrigger.  */
-	virtual void PullTrigger(class atom *trigger, const avalueflex &args);
+	virtual void PullTrigger(const class atom *trigger, const avalueflex &args);
 	/* if a client is calling a number of operations which would pull a trigger 
 		too many times, it can disable the trigger temporarily.  
 		It must later Enable the trigger.  At that time one call back 
 		is autometically made for the trigger if it has 
 		been Pulled one or more times in the interim.  */
-	virtual void DisableTrigger(/* struct thisobject *self, */ class atom *trigger);
+	virtual void DisableTrigger(/* struct thisobject *self, */ const class atom *trigger);
 		/* until Enabled, this trigger will no produce call backs 
 			Enable MUST be called once 
 			for each time Disable has been called. */
-	virtual void EnableTrigger(/* struct thisobject *self, */ class atom *trigger);
+	virtual void EnableTrigger(/* struct thisobject *self, */ const class atom *trigger);
 		/* this trigger will once again produce call backs  */
-	virtual long DisableCount(/* struct thisobject *self, */ class atom *trigger)  ;
+	virtual long DisableCount(/* struct thisobject *self, */ const class atom *trigger)  ;
 		/* returns a non-negative integer giving the
 			number of outstanding calls to DisableTrigger
 		   if the trigger does not exist, returns -1  */
@@ -69,7 +69,7 @@ public:
 	
 	virtual ~observable();
 
-	static void DefineTrigger(ATKregistryEntry  *classinstance, class atom *trigger);
+	static void DefineTrigger(ATKregistryEntry  *classinstance, const class atom *trigger);
 		/* associate the atom as a possible trigger for the class.
 			The xxx_InitializeClass routine can use
 			xxx_classinfo as the first argument. */

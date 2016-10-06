@@ -190,6 +190,12 @@ So far, the following incompatibilities have been introduced:
     problem for you.  Adding doxygen support made such a dependency as 
     well; fix doc/Imakefile if you don't have `$(shell ...)`.
 
+  - I have removed many obsolete symbols.  Any external code relying on
+    them should study the SVN logs and update to the correct symbol (or
+    remove the usage of that symbol) as needed.  I will not list these
+    here; compile your code and if it fails, do the work to figure out
+    why yourself.
+
   - This is minor, but my coding rules differ from AndrewCoding.ez in
     the following ways:
     

@@ -34,10 +34,10 @@ typedef boolean (*ATKinitfptr)(void);
  * Use the ATKdefineRegistry macro to enter a class into the runtime
  * registry.  It expands to a variable declaration and should probably
  * appear immediately after the include files in a class' implementation.
- * It exports a symbol called <class>_ATKregistry_, defines the
- * <class>::ATKregistry() function, creates a static function called
- * <class>_new_ and declares a static variable called ATKinited_.  Note
- * that the latter means that you can have no more than one call of this
+ * It exports a symbol called \c <em>class</em>_ATKregistry_, defines the
+ * \c <em>class</em>::%ATKregistry() function, creates a static function called
+ * \c <em>class</em>_new_ and declares a static variable called \c ATKinited_.
+ * Note that the latter means that you can have no more than one call of this
  * macro in a given C++ file.
  *
  * Its use looks like this (example):
@@ -221,6 +221,7 @@ class ATK {
     /// The ATKdefineRegistry and ATKdefineRegistryNoInit macros define
     /// this member function, but this declaration must nonetheless be
     /// added manually to the class definition.
+    /// \return the registry entry.
     virtual ATKregistryEntry *ATKregistry();
 
     // Support for looking up an ATKregistryEntry by name,
@@ -325,9 +326,9 @@ class ATK {
 
 /** The following class and macro simplify creation of 
 	references to ATKregistry entries.  The macro call
-		ATK_CLASS(aclassname)
+		ATK_CLASS(<em>aclassname</em>)
 	creates the declaration of identifier
-		class_aclassname
+		class_<em>aclassname</em>
 	This identifier can be used wherever an ATKregistryEntry is needed.
 */
 class ATK_def {
@@ -354,10 +355,10 @@ class ATK_def {
     }
 };
 /// Create a static object to reference a class' registry structure.
-/// An object named class_<class> is created, which can be used in
+/// An object named \c class_<em>class</em> is created, which can be used in
 /// places a pointer to the registry structure for that class would
 /// normally be used.
-/// \param The class name
+/// \param class The class name
 #define ATK_CLASS(class) \
   static ATK_def Concat(class_,class) (Stringize(class))
 /** @} */

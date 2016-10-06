@@ -28,7 +28,7 @@ ATK_IMPL("sbutton.H")
   
 
 /* Global variables */
-static class atom *buttonpushed=NULL;
+static const class atom *buttonpushed=NULL;
 static boolean linehascontrol=FALSE;
 static const char True[]="True";
 static const char False[]="False";
@@ -69,7 +69,7 @@ static char *EncodeFont(class fontdesc  *font);
 
 static const char *Intern(const char  *str)
 {
-    class atom *a;
+    const class atom *a;
     if(str==NULL) return NULL;
     a=atom::Intern(str);
     if(a!=NULL) return (a)->Name();

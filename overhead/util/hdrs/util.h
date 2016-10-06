@@ -52,7 +52,9 @@ void dbg_closedir(DIR *d); /**< fdplumb debugging version of closedir(3).  Not r
 /** @} */
 
 /* fpacheck.c */
-extern boolean fpacheck(void); /**< Returns TRUE if floating-point arithmetic works as intended; FALSE otherwise. */
+extern boolean fpacheck(void);
+/**< Check if floating-point arithmetic seems to work.
+ *   \return TRUE if floating-point arithmetic works as intended; FALSE otherwise. */
 
 /* procstuf.c */
 extern char *statustostr(WAIT_STATUS_TYPE *status, char *buf, int len);
@@ -67,7 +69,7 @@ extern const char **strtoargv(char *command, const char **argvbuf, int len);
  *   characters.  Instead, if it detects any special characters, it calls
  *   ${SHELL} to interpret them (e.g. sh -c "exec <command>").
  *   \param command The command string.  It will have zeroes inserted between arguments.
- *   \param argv The argument array.  It will receive the arguments, followed by a NULL terminator.
+ *   \param argvbuf The argument array.  It will receive the arguments, followed by a NULL terminator.
  *   \param len  The space in the argument array. [bug: len is only checked for the shell execution form]
  *   \return argvbuf */
 extern char *argvtostr(const char * const *argv,char *buf,unsigned int len);
@@ -85,7 +87,8 @@ extern int GetPty(int *master, int *pty);
 /**< Opens up both ends of a pseudo-terminal pair.  Note that although either
  *   parameter may be NULL, the file descriptor is still opened, and lost.
  *  \param master The master end's file descriptor is placed here, if non-NULL
- *  \param pty The slave end's file descriptor is placed here, if non-NULL  */
+ *  \param pty The slave end's file descriptor is placed here, if non-NULL
+ *  \return TRUE on success; check errno on error. */
 extern int GetPtyandName(int *master, int *pty, char *ptyname, int ptysize);
 /**< Opens up both ends of a pseudo-terminal pair.  Note that although either
  *   descriptor parameter may be NULL, the file descriptor is still opened,
@@ -93,7 +96,8 @@ extern int GetPtyandName(int *master, int *pty, char *ptyname, int ptysize);
  *  \param master The master end's file descriptor is placed here, if non-NULL
  *  \param pty The slave end's file descriptor is placed here, if non-NULL
  *  \param ptyname The name of the slave end is placed here, if non-NULL
- *  \param ptysize The size of ptyname.  ptyname may not be 0-terminated if this is too short.  */
+ *  \param ptysize The size of ptyname.  ptyname may not be 0-terminated if this is too short.
+ *  \return TRUE on success; check errno on error. */
 
 /* foldedeq.c */
 extern const int     FoldTRT[256];
@@ -114,12 +118,14 @@ extern boolean FoldedEQn(const char *a, const char *b, int n);
  *   \return TRUE if equal, FALSE otherwise.
  */
 extern boolean FoldedWildEQ(const char *a, const char *b, boolean ignorecase);
-/**< A case-insensitive string comparison using the FoldTRT mapping.
+/**< A wildcard-matching string comparison.
  *   \param a A string
  *   \param b A string.  This may contain *, ?, or \.  * matches any sequence
  *                       of characters, ? matches a single character and
  *                       \ matches the next character exactly, even if it
  *                       is \, * or ?.
+ *   \param ignorecase TRUE to case fold using the FoldTRT mapping.  Otherwise,
+ *                     leave characters as-is.
  *   \return TRUE if match, FALSE otherwise.
  */
 #define FOLDEDEQ(s1,s2) (FoldTRT[(unsigned char)(s1)[0]]==FoldTRT[(unsigned char)(s2)[0]] && FoldedEQ(s1,s2))
@@ -260,7 +266,8 @@ extern enum readconfig_return ReadConfigureLine(FILE  *fp, char  *text, int  max
  *   \param value Pointer into the buffer to the value for this parameter (may be NULL)
  *   \param valueLength Length of the value for this parameter (may be NULL)
  *   \param condition Pointer into the buffer to the condition for a conditional parameter (may be NULL).
- *   \param conditionLength Length of the condition text for a conditional parameter (may be NULL) */
+ *   \param conditionLength Length of the condition text for a conditional parameter (may be NULL)
+ *   \return CONFIG_FOUNDENTRY on success; error-specific return code otherwise. */
 extern struct configurelist *ReadConfigureFile(const char  *fileName);
 /**< Read an entire configuration file.  All valid entries are returned, in
  *   the order that they appear in the configuration file.  Both the
@@ -272,6 +279,7 @@ extern struct configurelist *ReadConfigureFile(const char  *fileName);
 extern const char *GetConfig(const struct configurelist  *header, const char  *key, int  usedefault);
 /**< Search a linked list of configuration parameters for the given key.
  *   Both the key and the program name are case-insensitive.
+ *   \param header The linked list of configuration items to search.
  *   \param key The key to look for.  If it does not contain a dot, the program
  *              name ProgramName is used.  Otherwise, the program name is the
  *              text before the dot.
@@ -392,6 +400,7 @@ extern int setprofilestring(const char  *prog , const char  *pref , const char  
  *   \param prog The program name to use; ProgramName if NULL
  *   \param pref The preference name (should not contain a dot)
  *   \param val  The value to assign to the preference
+ *   \return 0 on success; less than 0 otherwise.
  */
 
 /* findfile.c */
@@ -417,7 +426,7 @@ extern const char *ap_ShortenAlso(const char  *pathname , const char  *auxI , co
  *   other user's home directory as ~user
  *   \param pathname Path to shorten
  *   \param auxI Other user's name
- *   \param auxN Other user's home directory
+ *   \param auxH Other user's home directory
  *   \return pathname or a static buffer containing the shortened path.
  *           This buffer may be overwritten by next call to any ap_Shorten*
  *           functions */
@@ -579,11 +588,11 @@ extern int from64(FILE *infile, FILE *outfile);
  *   \param infile Input file
  *   \param outfile Output file
  *   \return the number of bytes it thinks it's written (no error checking on write). */
-extern void to64(FILE *, FILE *);
+extern void to64(FILE *infile, FILE *outfile);
 /**< Convert binary file to file in base-64 encoding.
  *   \param infile Input file
  *   \param outfile Output file */
-extern int fromqp(FILE *, FILE *);
+extern int fromqp(FILE *infile, FILE *outfile);
 /**< Convert file from quoted-printable encoding to binary equivalent.
  *   \param infile Input file
  *   \param outfile Output file
@@ -628,7 +637,8 @@ char *lcstring(char *d, const char *s, int n);
  *   \param d The destination buffer
  *   \param s The source string
  *   \param n The space available at d.  At most n-1 characters will be
- *            converted and copied, and d will always be 0-terminated. */
+ *            converted and copied, and d will always be 0-terminated.
+ *   \return d. */
 
 /* ucstring.c */
 char *ucstring(char *d, const char *s, int n);
@@ -637,7 +647,8 @@ char *ucstring(char *d, const char *s, int n);
  *   \param d The destination buffer
  *   \param s The source string
  *   \param n The space available at d.  At most n-1 characters will be
- *            converted and copied, and d will always be 0-terminated. */
+ *            converted and copied, and d will always be 0-terminated.
+ *   \return d.  */
 
 
 ENDCPLUSPLUSPROTOS

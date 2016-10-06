@@ -34,7 +34,7 @@ void pvalcv::UpdateSButton()
 {
     class sbutton *sb=(this)->GetSButton();
     const char *ps=(DATA(this))->IndexValueString( 0);
-    class atom *a;
+    const class atom *a;
 
     if(ps==NULL) return;
 

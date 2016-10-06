@@ -12,7 +12,7 @@
 
 struct namespace_entry
 {
-  class atom * name;
+  const class atom * name;
   long binding;
   short boundp;
 };
@@ -31,21 +31,21 @@ public:
 
   virtual void Clear();
 
-  virtual int Lookup(class atom * name)  ;
-  virtual int LookupCreate(class atom * name )  ;
+  virtual int Lookup(const class atom * name)  ;
+  virtual int LookupCreate(const class atom * name )  ;
 
   virtual short BoundpAt( int index )  ;
   virtual long ValueAt( int index )  ;
   virtual void UnbindAt( int index );
-  virtual class atom * NameAt( int index )  ;
+  virtual const class atom * NameAt( int index )  ;
   virtual void SetValueAt( int index, long value );
 
-  virtual void SetValue( class atom * name, long value );
-  virtual long GetValue( class atom * name )  ;
-  virtual short Boundp( class atom * name, long * data )  ;
-  virtual void Unbind( class atom * name);
+  virtual void SetValue( const class atom * name, long value );
+  virtual long GetValue( const class atom * name )  ;
+  virtual short Boundp( const class atom * name, long * data )  ;
+  virtual void Unbind( const class atom * name);
 
-  virtual class atom * WhereIsValue( long value )  ;
+  virtual const class atom * WhereIsValue( long value )  ;
 
 
   struct namespace_entry * nspace;

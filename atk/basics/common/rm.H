@@ -12,7 +12,7 @@
 struct resourceList
 {
   class atomlist * name;
-  class atom * type;
+  const class atom * type;
   long data;
   short found;
 };
@@ -30,19 +30,19 @@ public:
 	static boolean InitializeClass();
 
   static void ContextualPostResource( class atomlist * context, class atomlist *path,
-			 long data, class atom * type );
+			 long data, const class atom * type );
   static void PostResource( class atomlist * path, long data,
-	       class atom * type );
+	       const class atom * type );
   static void PostManyResources( struct resourceList * resources,
 		    class atomlist * context );
   static short GetResource( class atomlist * name,
 	      class atomlist * className,
-	      class atom * type,
+	      const class atom * type,
 	      long * data )  ;
   static void GetManyResources( struct resourceList * resources,
 		   class atomlist * name,
 		   class atomlist * className );
-  static void PostConverter( class atom * fromtype, class atom * totype, rm_fptr converter );
+  static void PostConverter( const class atom * fromtype, const class atom * totype, rm_fptr converter );
 };
 
 

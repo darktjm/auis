@@ -66,7 +66,7 @@ ATK_IMPL("pshbttnv.H")
    
 
 /* Global Variables */
-static class atom *pushedtrigger;
+static const class atom *pushedtrigger;
 static class menulist *pbvmenulist = NULL;
 static class style *printstyle;
 

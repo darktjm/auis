@@ -69,7 +69,7 @@ static const char *progname;
 
 boolean ezprintapp::InitializeClass()
 {
-    class atom *A_boolean = atom::Intern("boolean");
+    const class atom *A_boolean = atom::Intern("boolean");
 
     po_printer.name = atom::Intern("printer");
     po_printer.type = atom::Intern("string");

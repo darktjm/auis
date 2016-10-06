@@ -60,7 +60,7 @@ the same data.
 *\paramname{dataobject});} 
 
 \fixedtext{short \bold{dataobject_}Get }\fixedindent{(struct dataobject 
-*\paramname{dataobject}, struct atom *\paramname{property}, struct atom 
+*\paramname{dataobject}, const struct atom *\paramname{property}, const struct atom 
 **\paramname{type}, long *\paramname{rock});} 
 
 \fixedtext{int \bold{dataobject_}ListCurrentViews }\fixedindent{(struct 
@@ -68,7 +68,7 @@ dataobject *\paramname{dataobject}, struct view **\paramname{array}, int
 \paramname{size});} 
 
 \fixedtext{void \bold{dataobject_}Put }\fixedindent{(struct dataobject 
-*\paramname{dataobject}, struct atom *\paramname{property}, struct atom 
+*\paramname{dataobject}, const struct atom *\paramname{property}, const struct atom 
 *\paramname{type}, long \paramname{rock});} 
 
 \fixedtext{long \bold{dataobject_}Read }\fixedindent{(struct dataobject 

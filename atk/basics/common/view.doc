@@ -347,12 +347,12 @@ atomlist *\paramname{name}, struct atomlist *\paramname{class});}
 *\paramname{originX}, long *\paramname{originY});} 
 
 \fixedtext{short \bold{view_}GetParameter }\fixedindent{(struct view 
-*\paramname{view}, struct atomlist *\paramname{name}, struct atom 
+*\paramname{view}, struct atomlist *\paramname{name}, const struct atom 
 *\paramname{type}, long *\paramname{data});} 
 
 \fixedtext{short \bold{view_}GetResource }\fixedindent{(struct view 
 *\paramname{view}, struct atomlist *\paramname{name}, struct atomlist 
-*\paramname{class}, struct atom *\paramname{type}, long *\paramname{data});} 
+*\paramname{class}, const struct atom *\paramname{type}, long *\paramname{data});} 
 
 \fixedtext{\bold{view_}GetSpaceShim }\fixedindent{(struct view 
 *\paramname{view});} 
@@ -455,7 +455,7 @@ view *\paramname{view});}
 *\paramname{view}, struct menulist *\paramname{menulist});} 
 
 \fixedtext{void \bold{view_}PostResource }\fixedindent{(struct view 
-*\paramname{view}, struct atomlist *\paramname{path}, struct atom 
+*\paramname{view}, struct atomlist *\paramname{path}, const struct atom 
 *\paramname{type}, long \paramname{data});} 
 
 \fixedtext{void \bold{view_}Print }\fixedindent{(struct view 
@@ -2276,7 +2276,7 @@ struct view  *v;
 
 struct atomlist *name;  
 
-struct atom *type;  
+const struct atom *type;  
 
 long *data;} 
 
@@ -2300,7 +2300,7 @@ struct atomlist *name;
 
 struct atomlist *class;  
 
-struct atom *type;  
+const struct atom *type;  
 
 long * data;} 
 
@@ -2350,7 +2350,7 @@ struct view *v;
 
 struct atomlist *path;  
 
-struct atom *type;  
+const struct atom *type;  
 
 long data;} 
 

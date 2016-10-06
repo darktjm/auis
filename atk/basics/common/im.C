@@ -77,8 +77,8 @@ struct handler {
 
 static class windowsystem *currentWS = NULL; /* Used to distiguish window systems. */
 
-static class atom * A_application;
-static class atom * ProgramNameAtom;
+static const class atom * A_application;
+static const class atom * ProgramNameAtom;
 
 /* Handlers for im_AddZombieHandler function. */
 struct zombiehandler {
@@ -1568,7 +1568,7 @@ im::im()
 #if 0
     /* really the im name should be unique, but this
      way is a core leak... */
-    class atom * atom;
+    const class atom * atom;
 
     atom = atom::InternRock((long) this);
     this->name = new atomlist; /* can't use setname here because of a class `feature' */    
@@ -3658,7 +3658,7 @@ class graphic * im::GetGraphic()
     return (im::GetWindowSystem())->CreateGraphic();
 }
 
-short im::GetResource( class atomlist  * name, class atomlist  * class_c, class atom  * type, long  * data )
+short im::GetResource( class atomlist  * name, class atomlist  * class_c, const class atom  * type, long  * data )
                          {
   struct atoms * nameMark = (name)->Mark();
   struct atoms * classMark = (name)->Mark();
@@ -3675,7 +3675,7 @@ short im::GetResource( class atomlist  * name, class atomlist  * class_c, class 
 }
 
 
-void im::PostResource( class atomlist  * path, class atom  * type, long  data )
+void im::PostResource( class atomlist  * path, const class atom  * type, long  data )
                     {
   struct atoms * pathMark = (path)->Mark();
 

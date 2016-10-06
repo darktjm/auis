@@ -115,8 +115,8 @@ public:
      void RetractViewCursors(class view *requestor);
      void PostDefaultHandler(const char *handlerName, ATK  *handler);
      short GetResource( class atomlist * name, class atomlist * className,
-		class atom * type, long * data )  ;
-     void PostResource( class atomlist * path, class atom * type,
+		const class atom * type, long * data )  ;
+     void PostResource( class atomlist * path, const class atom * type,
 		 long data );
      void GetManyParameters( struct resourceList * resources,
 		      class atomlist * name,
@@ -332,7 +332,7 @@ public:
 
     boolean WasMetaVal;		/* TRUE if GetCharacter returned
 				 * an "invented" escape */
-    class atom * programNameAtom;
+    const class atom * programNameAtom;
     class im *next;			/* Next im allocated object */
     boolean doRedraw;			/* TRUE if redraw must be done */
     boolean inRedraw;			/* TRUE if in redraw routine */

@@ -23,6 +23,10 @@ void traced::Destroy()
 
 traced::~traced()
 {
+    /* allow refcount == 1 in case of static allocation */
+    if(this->refcount > 1)
+	/* somebody called delete instead of Destroy() */
+	kill(getpid(), 11);
     return;
 }
 

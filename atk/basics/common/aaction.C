@@ -19,19 +19,6 @@ avalueflex &aaction::RetTypes() {
     return empty;
 }
 
-aaction::~aaction() {
-}
-
-void aaction::Destroy() {
-    if(refs>0) {
-	refs--;
-	if(refs==0) {
-	    delete this;
-	    return;
-	}
-    }
-}
-
 ATKdefineRegistryNoInit(multiact,aaction);
 
 multiact &multiact::Prepend(aaction *act) {
@@ -79,7 +66,7 @@ multiact *multiact::ChainAfter(aaction *current, aaction *newact) {
 	m->Append(newact);
     } else {
 	m=new multiact;
-	m->DeReference();
+	m->UnReference();
 	if(current) m->Append(current);
 	m->Append(newact);
     }

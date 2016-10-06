@@ -28,18 +28,18 @@ static class Namespace * converters;
 
 ATKdefineRegistry(rm, ATK, rm::InitializeClass);
 #if DEBUG_RM
-void Patom( class atom  * atom );
+void Patom( const class atom  * atom );
 void Plist( class atomlist  * list );
 #endif
 int FindResource( class atomlist  * name, struct atoms  * namecar, class atomlist  * class_c, struct atoms  * classcar, struct resourceTree_s  ** tree );
 int FindManyResources( struct resourceList  * resources, class atomlist  * name, struct atoms  * namecar, class atomlist  * class_c, struct atoms  * classcar, struct resourceTree_s  ** tree );
 int Convertp( class Namespace  * toconverters, class Namespace  * Namespace, int  index );
-short TryConversion( struct resourceTree_s  * tree, class atom  * type, long  * data );
+short TryConversion( struct resourceTree_s  * tree, const class atom  * type, long  * data );
 static struct  resourceTree_s * FindNodeCreate( class atomlist  * path, struct resourceTree_s  * tree );
-void PostResourceAt( struct resourceTree_s  * root, class atomlist  * path, long  data, class atom  * type );
+void PostResourceAt( struct resourceTree_s  * root, class atomlist  * path, long  data, const class atom  * type );
 
 #if DEBUG_RM
-void Patom( class atom  * atom )
+void Patom( const class atom  * atom )
      {
   printf("%s",(atom)->Name());
 }
@@ -119,8 +119,8 @@ int FindResource( class atomlist  * name, struct atoms  * namecar, class atomlis
 	    }
 	  else
 	    {
-	      class atom * nameatom;
-	      class atom * classatom;
+	      const class atom * nameatom;
+	      const class atom * classatom;
 #if DEBUG_RM
 	      if (debug_rm)
 		{
@@ -226,8 +226,8 @@ int FindManyResources( struct resourceList  * resources, class atomlist  * name,
 	    }
 	  else
 	    {
-	      class atom * nameatom;
-	      class atom * classatom;
+	      const class atom * nameatom;
+	      const class atom * classatom;
 #if DEBUG_RM
 	      if (debug_rm)
 		{
@@ -268,7 +268,7 @@ boolean Convertp( class Namespace  * toconverters, class Namespace  * Namespace,
 }
 
 
-short TryConversion( struct resourceTree_s  * tree, class atom  * type, long  * data )
+short TryConversion( struct resourceTree_s  * tree, const class atom  * type, long  * data )
                {
   int fromtype;
   class Namespace * toconverters;
@@ -304,7 +304,7 @@ boolean rm::InitializeClass( )
   return TRUE;
 }
 
-void rm::PostConverter( class atom  * from, class atom  * to, rm_fptr  converter )
+void rm::PostConverter( const class atom  * from, const class atom  * to, rm_fptr  converter )
                     {
 	ATKinit;
 
@@ -345,7 +345,7 @@ static struct  resourceTree_s * FindNodeCreate( class atomlist  * path, struct r
 }
 
 
-void PostResourceAt( struct resourceTree_s  * root, class atomlist  * path, long  data, class atom  * type )
+void PostResourceAt( struct resourceTree_s  * root, class atomlist  * path, long  data, const class atom  * type )
                     {
   struct resourceTree_s * tree = FindNodeCreate( path, root );
 
@@ -372,7 +372,7 @@ void rm::PostManyResources( struct resourceList  * resources, class atomlist  * 
 }
 
 
-void rm::PostResource( class atomlist  * path, long  data, class atom  * type )
+void rm::PostResource( class atomlist  * path, long  data, const class atom  * type )
                     {
 	ATKinit;
 
@@ -391,7 +391,7 @@ void rm::PostResource( class atomlist  * path, long  data, class atom  * type )
 
 
 /* name and class had better be the same length! */
-short rm::GetResource( class atomlist  * name, class atomlist  * class_c, class atom  * type, long  * data )
+short rm::GetResource( class atomlist  * name, class atomlist  * class_c, const class atom  * type, long  * data )
                          {
 	ATKinit;
 
@@ -469,7 +469,7 @@ void rm::GetManyResources( struct resourceList * resources, class atomlist  * na
 
 
 void
-rm::ContextualPostResource( class atomlist  * context, class atomlist  * path, long  data, class atom  * type )
+rm::ContextualPostResource( class atomlist  * context, class atomlist  * path, long  data, const class atom  * type )
                          {
 	ATKinit;
 

@@ -64,7 +64,7 @@ struct sbutton_info {
     struct sbutton_prefs *prefs;
     const char *label;
     long rock;
-    class atom *trigger;
+    const class atom *trigger;
     boolean lit;
     boolean sensitive;
 };
@@ -159,7 +159,7 @@ public:
     inline boolean GetLit(int ind) { return (((ind)<(this)->count && (ind)>=0)?(this)->buttons[ind].lit:FALSE); }
     inline const char * GetLabel(int ind) { return (((ind)<(this)->count && (ind)>=0)?(this)->buttons[ind].label:NULL); }
     inline struct sbutton_prefs * GetPrefs(int ind) { return (((ind)<(this)->count && (ind)>=0)?(this)->buttons[ind].prefs:NULL); }
-    inline class atom * GetTrigger(int ind) { return (((ind)<(this)->count && (ind)>=0)?(this)->buttons[ind].trigger:NULL); }
+    inline const class atom * GetTrigger(int ind) { return (((ind)<(this)->count && (ind)>=0)?(this)->buttons[ind].trigger:NULL); }
 
     inline boolean &GetSingleActivationFlag() { return ((this)->singleactivation); }
     inline struct sbutton_info * &GetButtons() { return ((this)->buttons); }

@@ -29,7 +29,7 @@ ATK_IMPL("pushbutton.H")
   
 
 /* Global variables */
-static class atom *pushbutton_trigger;
+static const class atom *pushbutton_trigger;
 
 
 

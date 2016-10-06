@@ -264,7 +264,7 @@ xcursor::~xcursor()
 
 boolean xcursor::InitializeClass()
 {
-    class atom *a;
+    const class atom *a;
     foreground = environ::GetProfile("cursorforegroundcolor");
     if (foreground == NULL || *foreground == '\0') {
 	foreground = "black";

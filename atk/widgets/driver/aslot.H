@@ -260,7 +260,7 @@ public:
 	inline void UseOnlyFromAnAssignFunction
 			(const avalue_u *src)  { val = *src; }
 	void DumpSlot(FILE *f);
-	static atom *in0type;
+	static const atom *in0type;
 
 	inline static const char *Client(const char *objnm)
 			{ const char *old = client;  
@@ -362,9 +362,9 @@ class ASlotInt : public ASlot {
     ATKregistryEntry *ATKregistry();
     inline ASlotInt() { val.integer = -999; }
     inline ASlotInt(int i)  { *this = i; }
-    inline ASlotInt(atom *name) 
+    inline ASlotInt(const atom *name) 
 		{ val.integer = -999;  SetName(name);}
-    inline ASlotInt(atom *name, int i) 
+    inline ASlotInt(const atom *name, int i) 
 		{*this = i; SetName(name);}
     ASlot &Default();
 
@@ -403,9 +403,9 @@ class ASlotReal : public ASlot {
     ATKregistryEntry *ATKregistry();
     inline ASlotReal() { val.real = -999.0; }
     inline ASlotReal(double r) { *this = r; }
-    inline ASlotReal(atom *name) 
+    inline ASlotReal(const atom *name) 
 		{ val.real = -999.0;  SetName(name); }
-    inline ASlotReal(atom *name, double r) 
+    inline ASlotReal(const atom *name, double r) 
 		{ *this = r; SetName(name); }
     ASlot &Default(); 
 
@@ -446,9 +446,9 @@ class ASlotString : public ASlot {
     inline ASlotString() { val.cstr = empty; }
     inline ASlotString(const char* s) 
 		{ val.cstr = empty; *this = s; }
-    inline ASlotString(atom *name) 
+    inline ASlotString(const atom *name) 
 		{ val.cstr = empty; SetName(name); }
-    inline ASlotString(atom *name, const char *s) 
+    inline ASlotString(const atom *name, const char *s) 
 		{ val.cstr = empty; SetName(name); *this = s; }
     inline virtual ~ASlotString() 
 		{ if (val.cstr && val.cstr != empty) free((void *)val.cstr); }
@@ -492,9 +492,9 @@ class ASlotFile : public ASlotString {
     ATKregistryEntry *ATKregistry();
     inline ASlotFile() { val.cstr = devnull; }
     inline ASlotFile(const char *s)  {val.cstr = devnull; *this = s;}
-    inline ASlotFile(atom *name) 
+    inline ASlotFile(const atom *name) 
 		{val.cstr = devnull; SetName(name); }
-    inline ASlotFile(atom *name, const char *s) 
+    inline ASlotFile(const atom *name, const char *s) 
 		{ val.cstr = devnull; SetName(name); *this = s; }
     inline virtual ~ASlotFile() 
 		{ if (val.cstr && val.cstr != devnull) free((void *)val.cstr); val.cstr = NULL;}
@@ -534,10 +534,10 @@ class ASlotPtr : public ASlot {
   public:
     ATKregistryEntry *ATKregistry();
     inline ASlotPtr() { }
-    inline ASlotPtr(atom *n)
+    inline ASlotPtr(const atom *n)
 		{ SetName(n); }
     inline ASlotPtr(void *s) { *this = s; }
-    inline ASlotPtr(atom *n, void *s)
+    inline ASlotPtr(const atom *n, void *s)
 		{ SetName(n);  *this = s; }
 	// There is no destructor to free the pointee
     ASlot &Default();
@@ -576,8 +576,8 @@ class ASlotATK : public ASlotPtr {
     ATKregistryEntry *ATKregistry();
     inline ASlotATK() { }
     inline ASlotATK(ATK *s)   { *this = s; }
-    inline ASlotATK(atom *n) { SetName(n);  }
-    inline ASlotATK(atom *n, ATK *s)  
+    inline ASlotATK(const atom *n) { SetName(n);  }
+    inline ASlotATK(const atom *n, ATK *s)  
 		{ SetName(n);  *this=s; }
 
     inline operator ATK *() const {  Check();  return (ATK *)val.obj; }
@@ -614,9 +614,9 @@ class ASlotFunction : public ASlotATK {
   public:
     ATKregistryEntry *ATKregistry();
     ASlotFunction();
-    ASlotFunction(atom *n);
+    ASlotFunction(const atom *n);
     ASlotFunction(aaction *s);
-    ASlotFunction(atom *n, aaction *s);
+    ASlotFunction(const atom *n, aaction *s);
     inline virtual ~ASlotFunction() 
 		{ if (GetFlags(isowner)) 
 				((aaction *)val.obj)->Destroy(); }
@@ -655,9 +655,9 @@ class ASlotDataObj : public ASlotATK {
     inline ASlotDataObj() { val.obj = NULL; }
     inline ASlotDataObj(dataobject *s) 
 		{ val.obj = NULL; *this = s; }
-    inline ASlotDataObj(atom *n) 
+    inline ASlotDataObj(const atom *n) 
 		{ val.obj = NULL; SetName(n); }
-    inline ASlotDataObj(atom *n, dataobject *s)  
+    inline ASlotDataObj(const atom *n, dataobject *s)  
 		{ val.obj = NULL; SetName(n);  *this=s; }
     virtual ~ASlotDataObj();
     ASlot &Default();
@@ -690,9 +690,9 @@ class ASlotFigure : public ASlotDataObj {
   public:
     ATKregistryEntry *ATKregistry();
     inline ASlotFigure() { }
-    inline ASlotFigure(atom *n)  { SetName(n); }
+    inline ASlotFigure(const atom *n)  { SetName(n); }
     inline ASlotFigure(figure *s)   { *this=s; }
-    inline ASlotFigure(atom *n, figure *s) 
+    inline ASlotFigure(const atom *n, figure *s) 
 		{ SetName(n);  *this=s; }
 
     inline operator figure *() const { Check();  return (figure *)val.obj; }
@@ -725,7 +725,7 @@ class ASlotFont : public ASlot {
   public:
 	ATKregistryEntry *ATKregistry();
 	ASlotFont(const char *s = NULL); 
-	ASlotFont(atom *name, const char *s = NULL); 
+	ASlotFont(const atom *name, const char *s = NULL); 
 	inline virtual ~ASlotFont() 
 		{ if(fontname) free((void *)fontname); }
 	ASlot &Default();
@@ -758,9 +758,9 @@ class ASlotBool : public ASlotInt {
     ATKregistryEntry *ATKregistry();
     inline ASlotBool() { val.integer = FALSE; }
     inline ASlotBool(boolean i)  { val.integer = i; }
-    inline ASlotBool(atom *name) 
+    inline ASlotBool(const atom *name) 
 		{ val.integer = FALSE;  SetName(name);}
-    inline ASlotBool(atom *name, boolean i)
+    inline ASlotBool(const atom *name, boolean i)
 		{ val.integer = i; SetName(name); }
     ASlot &Default();
 
@@ -806,13 +806,13 @@ class ASlotColor : public ASlot {
 	    val.obj = icolor::Create(r, g, b);
 	}
     }
-    inline ASlotColor(atom *name)
+    inline ASlotColor(const atom *name)
 		{ SetName(name); 
 		val.obj = icolor::Create("NONE"); }
-    inline ASlotColor(atom *name, const char *s) 
+    inline ASlotColor(const atom *name, const char *s) 
 		{ SetName(name); 
 		val.obj = icolor::Create(s); }
-    inline ASlotColor(atom *name, const color &s) {
+    inline ASlotColor(const atom *name, const color &s) {
 	color &lcol=(color &)s;
 	SetName(name);
 	if(lcol.Name()) val.obj = icolor::Create(lcol.Name());

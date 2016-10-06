@@ -3605,26 +3605,6 @@ white
 \view{linkview,14457632,25470,0,0}
 
 
-\section{C++Conversion.ez}
-
-\begindata{link,14458864}
-4
-$ANDREWDIR/doc/DEVELOPER/C++Conversion.ez
-0
-0
-V
-\begindata{link,14458864}
-Datastream version: 2
-C++Conversion.ez
-2
-
-black
-white
-\enddata{link,14458864}
-\enddata{link,14458864}
-\view{linkview,14458864,25471,0,0}
-
-
 \section{CodeAppearance.ez}
 
 \begindata{link,12196224}
@@ -3847,26 +3827,6 @@ white
 \enddata{link,12948416}
 \enddata{link,12948416}
 \view{linkview,12948416,25484,0,0}
-
-
-\section{atom.doc}
-
-\begindata{link,12949360}
-4
-$ANDREWDIR/doc/PROGRAMMER/atom.doc
-0
-0
-V
-\begindata{link,12949360}
-Datastream version: 2
-atom.doc
-2
-
-black
-white
-\enddata{link,12949360}
-\enddata{link,12949360}
-\view{linkview,12949360,25485,0,0}
 
 
 \section{atomlist.doc}

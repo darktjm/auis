@@ -94,12 +94,12 @@ public:
 	virtual void SetPreserve( boolean doit);
 	virtual long  Size()  ;
 	virtual char * Error()  ;
-	virtual char * GetURL () ;
+	virtual const char * GetURL () ;
 	virtual const char * GetTitle () ;
 	virtual void SetTitle (const char *title);
 	virtual FILE * Open(boolean readcontext)  ;
 	virtual void Close(FILE *f);
-	virtual class atom *  Type()  ;
+	virtual const class atom *  Type()  ;
 	virtual int  ExternalView()   ;
 	virtual const char *  CanView()  ;
 	virtual int Delete()  ;
@@ -110,9 +110,9 @@ public:
 	virtual void SetContext(char *begin);
         virtual void ReadContext(FILE *file,int id);
         static void EncodeForURL(flex &url, const char *fragment);
-	inline class atom  * GetType() { return ((this)->type); }
+	inline const class atom  * GetType() { return ((this)->type); }
 	
-	class atom *type,*url;
+	const class atom *type,*url;
 	int status;
 	class dataobject *data; /* may be web */
 	class buffer *buffer;
@@ -121,8 +121,8 @@ public:
 	class webcom *next;
 	webcom_cbptr proc;	/* procedure to call for event */
 	void *procdata;	/* data to be passed to proc */
-	class atom *mimetype;
-	class atom *title;
+	const class atom *mimetype;
+	const class atom *title;
 	unsigned long reqid;
 	char *file;
         char *errfile;

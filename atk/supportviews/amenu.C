@@ -132,13 +132,13 @@ AmenuLabel::AmenuLabel() {
 }
 
 AmenuLabel::~AmenuLabel() {
-    if(astr==NULL && str) free(str);
+    if(astr==NULL && str) free((char *)str);
     if(prefs) sbutton::FreePrefs(prefs);
 }
 
 AmenuLabel &AmenuLabel::SetLabel(const char *label, boolean atomize) {
     if(label==NULL) return *this;
-    if(astr==NULL && str) free(str);
+    if(astr==NULL && str) free((char *)str);
     if(atomize) {
 	astr=atom::Intern(label);
 	if(astr) str=astr->Name();
@@ -534,7 +534,7 @@ void AmenuCard::RemoveEntry(AmenuEntry *e) {
     }
 }
 
-void AmenuCard::RemoveEntry(atom *key) {
+void AmenuCard::RemoveEntry(const atom *key) {
     for(size_t i=0;i<entries.GetN();i++) {
 	if(entries[i].ptr->key==key) {
 	    delete entries[i].ptr;

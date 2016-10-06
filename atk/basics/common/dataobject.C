@@ -186,7 +186,7 @@ void dataobject::SetAttributes(struct attributes  *attributes) {
 }
 
 
-void dataobject::Put( class atom  * property, class atom  * type, long  value )
+void dataobject::Put( const class atom  * property, const class atom  * type, long  value )
 {
     struct property *oldprop = NULL;
     struct property * newprop =
@@ -205,7 +205,7 @@ void dataobject::Put( class atom  * property, class atom  * type, long  value )
 }
 
 
-short dataobject::Get( class atom  * property, class atom  **type, long  * value )
+short dataobject::Get( const class atom  * property, const class atom  **type, long  * value )
                     {
   struct property * prop;
 

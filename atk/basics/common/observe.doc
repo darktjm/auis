@@ -57,25 +57,25 @@ observing another object.
 *\paramname{observable}, struct thisobject *\paramname{observer});} 
 
 \fixedtext{boolean \bold{observable_}AddRecipient }\fixedindent{(struct 
-observable *\paramname{observable}, struct atom *\paramname{trigger}, struct 
+observable *\paramname{observable}, const struct atom *\paramname{trigger}, struct 
 basicobject *\paramname{rcvr}, void (*func)(\paramname{)}, long 
 \paramname{rock});} 
 
 \fixedtext{void \bold{observable_}DefineTrigger }\fixedindent{(struct 
-basicsobject *\paramname{classinstance}, struct atom *\paramname{trigger});} 
+basicsobject *\paramname{classinstance}, const struct atom *\paramname{trigger});} 
 
 \fixedtext{void \bold{observable_}DeleteRecipient }\fixedindent{(struct 
-observable *\paramname{observable}, struct atom *\paramname{trigger}, struct 
+observable *\paramname{observable}, const struct atom *\paramname{trigger}, struct 
 basicobject *\paramname{rcvr});} 
 
 \fixedtext{long \bold{observable_}DisableCount }\fixedindent{(struct 
-observable *\paramname{observable}, struct atom *\paramname{trigger});} 
+observable *\paramname{observable}, const struct atom *\paramname{trigger});} 
 
 \fixedtext{void \bold{observable_}DisableTrigger }\fixedindent{(struct 
-observable *\paramname{observable}, struct atom *\paramname{trigger});} 
+observable *\paramname{observable}, const struct atom *\paramname{trigger});} 
 
 \fixedtext{void \bold{observable_}EnableTrigger }\fixedindent{(struct 
-observable *\paramname{observable}, struct atom *\paramname{trigger});} 
+observable *\paramname{observable}, const struct atom *\paramname{trigger});} 
 
 \fixedtext{void \bold{observable_}FinalizeObject }\fixedindent{(struct 
 observable *\paramname{self});} 
@@ -94,7 +94,7 @@ observable *\paramname{observable}, struct thisobject *\paramname{changed},
 long \paramname{value});} 
 
 \fixedtext{void \bold{observable_}PullTrigger }\fixedindent{(struct observable 
-*\paramname{observable}, struct atom *\paramname{trigger});} 
+*\paramname{observable}, const struct atom *\paramname{trigger});} 
 
 \fixedtext{void \bold{observable_}RemoveObserver }\fixedindent{(struct 
 observable *\paramname{observable}, struct thisobject *\paramname{observer});} 
