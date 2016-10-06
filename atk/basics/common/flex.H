@@ -150,7 +150,7 @@ class flex
     char &operator[]( size_t i )   /* throw (int) */  ;		
     /**< Returns a reference to the ith element
      *   This does not automatically expand the array if needed.
-     *   \pram i The element to access.
+     *   \param i The element to access.
      *   \return a variable reference to the requested element.  This
      *           reference is valid until the next Insert, Append, Remove,
      *           or GetBuf.
@@ -170,7 +170,7 @@ class flex
      */
     char *Insert( size_t i, size_t len = 1 );	
     /**< Create space for new elements in array.
-     *   \pram i The array element to move up.  All elements equal to
+     *   \param i The array element to move up.  All elements equal to
      *           or greater than i will have their index incremented by len.
      *   \param len The number of elements to insert.
      *   \return a pointer to start of the newly added space.  This

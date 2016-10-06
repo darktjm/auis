@@ -79,7 +79,9 @@ class atom_def {
     inline const atom *operator->() const {
 	return a;
     }
-    /**< Uses a pointer to the atom, rather than this. */
+    /**< Uses a pointer to the atom, rather than this.
+     *   \return a pointer to the atom.
+     */
 };
 /** @} */
 #endif /* _atom_H_ */

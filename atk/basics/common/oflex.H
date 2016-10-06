@@ -71,7 +71,9 @@ class oflex : public mflex {
      *   \param typesize Size of elements, in bytes.
      *   \param n Number of elements to initially allocate. */
     oflex(const oflex &src);
-    /**< Copy constructor. */
+    /**< Copy constructor.
+     *   \param src The oflex to copy.
+     */
     
     virtual ~oflex();
     /**< Destructor.  Destroys all elements in the array, as well. */
@@ -131,16 +133,36 @@ class name : public oflex { \
     inline type *Insert(size_t i, const type &o) { \
 	void *res=oflex::Insert(i,1); \
 	return new(res) type(o); \
-    } /**< \copydoc oflex::Insert */ \
+    } \
+    /**< Insert an object into the array.
+     *   \param i The array element to insert.  All elements equal to
+     *           or greater than i will have their index incremented by 1.
+     *   \param o The object to insert.
+     *   \return a pointer to the newly added element.
+     */ \
     inline type *Insert(size_t i, const type *o) { \
 	return Insert(i,*o); \
-    } /**< \copydoc oflex::Insert */ \
+    } \
+    /**< Insert an object into the array.
+     *   \param i The array element to insert.  All elements equal to
+     *           or greater than i will have their index incremented by 1.
+     *   \param o A pointer to the object to insert.
+     *   \return a pointer to the newly added element.
+     */ \
     inline type *Append(const type &o) { \
 	return Insert(GetN(),o); \
-    } /**< \copydoc oflex::Append */ \
+    } \
+    /**< Append an object to the array.
+     *   \param o The object to append.
+     *   \return a pointer to the newly added element.
+     */ \
     inline type *Append(const type *o) { \
 	return Append(*o); \
-    } /**< \copydoc oflex::Append */ \
+    } \
+    /**< Append an object to the array.
+     *   \param o A pointer to the object to append.
+     *   \return a pointer to the newly added element.
+     */ \
     inline size_t Find(const type &o) { \
 	return oflex::Find((const char *)&o); \
     } /**< \copydoc oflex::Find */ \
@@ -151,7 +173,10 @@ class name : public oflex { \
     } /**< \copydoc oflex::Remove */ \
     inline void Remove(const type *o, size_t len=1) { \
 	oflex::Remove((char *)o, len); \
-    } /**< \copydoc oflex::Remove */ \
+    } \
+    /**< Remove an object from the array.
+     *   \param o A pointer to a valid array element.
+     *   \param len The number of elements to remove, including and following o. */ \
     inline type *GetBuf(size_t i, size_t len, size_t *gotlenp) { \
 	return (type *)oflex::GetBuf(i, len, gotlenp); \
     } /**< \copydoc oflex::GetBuf */ \
@@ -182,7 +207,7 @@ class Concat(name,_iter) { \
     /**< Create an iterator over a given range.
      *   \param o The array over which to iterate.
      *   \param ia The first element over which to iterate.
-     *   \param in The maximum number of elements to iterate over.
+     *   \param na The maximum number of elements to iterate over.
      *            If 0, the remainder of the array is iterated over.
      */ \
     inline Concat(name,_iter)(name &o, size_t ia=0, size_t na=0) : obj(o) { \
@@ -193,7 +218,7 @@ class Concat(name,_iter) { \
     /**< Create an iterator over a given range.
      *   \param o The array over which to iterate.
      *   \param ia The first element over which to iterate.
-     *   \param in The maximum number of elements to iterate over.
+     *   \param na The maximum number of elements to iterate over.
      *            If 0, the remainder of the array is iterated over.
      */ \
     inline Concat(name,_iter) &first() { \
@@ -262,7 +287,7 @@ class Concat(name,_citer) { \
     /**< Create an iterator over a given range.
      *   \param o The array over which to iterate.
      *   \param ia The first element over which to iterate.
-     *   \param in The maximum number of elements to iterate over.
+     *   \param na The maximum number of elements to iterate over.
      *            If 0, the remainder of the array is iterated over.
      */ \
     inline Concat(name,_citer)(const name &o, size_t ia=0, size_t na=0) : obj(o) { \
@@ -273,7 +298,7 @@ class Concat(name,_citer) { \
     /**< Create an iterator over a given range.
      *   \param o The array over which to iterate.
      *   \param ia The first element over which to iterate.
-     *   \param in The maximum number of elements to iterate over.
+     *   \param na The maximum number of elements to iterate over.
      *            If 0, the remainder of the array is iterated over.
      */ \
     inline Concat(name,_citer) &first() { \

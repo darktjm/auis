@@ -202,13 +202,13 @@ class name : public aaction { \
 */
 /** Create an aaction which calls a configurable function.
  *  The name of the aaction-derived class is <em>type</em>Act.
- *  \param type The type of the primary argument to the function. */
+ *  \param target The type of the primary argument to the function. */
 #define AACTION_FUNC_CLASS(target) \
 	DEFINE_AACTION_FUNC_CLASS(Concat(target,Act), target);
 
 /** Create an aaction which calls a configurable class method.
  *  The name of the aaction-derived class is <em>type</em>MethodAct.
- *  \param type The type of the primary argument to the method. */
+ *  \param target The type of the primary argument to the method. */
 #define AACTION_METHOD_CLASS(target) \
 DEFINE_AACTION_CLASS(Concat(target,MethodAct), target);
 
@@ -216,7 +216,7 @@ DEFINE_AACTION_CLASS(Concat(target,MethodAct), target);
  *  a configurable method.
  *  The names of the aaction-derived classes are <em>type</em>Act for the
  *  function caller, and <em>type</em>MethodAct for the method caller.
- *  \param type The type of the primary argument to the function/method. */
+ *  \param target The type of the primary argument to the function/method. */
 #define AACTION_FUNC_AND_METHOD_CLASS(target) \
 DEFINE_AACTION_FUNC_CLASS(Concat(target,Act), target); \
 DEFINE_AACTION_CLASS(Concat(target,MethodAct), target);

@@ -17,7 +17,7 @@
  * application, this class should have a name ending in "app".  runapp
  * or another base executable (such as created by genstatl) includes code in
  * main to perform a variety of setup operations and then creates an
- * \classobject{application} object of the appropriate type.  The appropriate
+ * application object of the appropriate type.  The appropriate
  * type is determined by the command line arguments to runapp if it is invoked
  * by that name, or by the name used to invoke runapp with "app" appended.
  *  For example ez is actually a symlink to runapp so when you run ez the
@@ -114,6 +114,12 @@ class application : public ATK  {
      *    Sets or overrides a preference value; any value specified in a
      *    preference file will be ignored if there was a \c -pref switch for
      *    the preference on the command line.
+     *
+     *  \param argc The argument count; usually from main()'s argc.
+     *  \param argv The argument list; usually from main()'s argv, but
+     *              this may be modified to be a shorter (NULL-terminated)
+     *              list.  Make sure and update argc if needed.
+     *  \return TRUE if successful.  If not, some argument error occurred.
      */
     virtual void ReadInitFile();
     /**< Parse the appropriate init files.
@@ -172,6 +178,7 @@ class application : public ATK  {
      * command-line option) or Fork() has been called once already this
      * function will fork, giving the command prompt back to the user.
      * This is called by the default Run() method.
+     * \return TRUE on success, FALSE otherwise.
      */
     virtual void PrintVersionNumber();
     /**< Print application version number.
@@ -212,8 +219,8 @@ class application : public ATK  {
     inline void SetForceLoad(boolean f) { ((this)->forceload=(f)); }
     /**< Set whether or not to load classes referenced by init files.
      *   By default any classes referenced in initfiles are only loaded
-     *   as needed.  If \SetForceLoad}(TRUE) is called on the
-     *   application ReadInitFile will force all the
+     *   as needed.  If SetForceLoad}(TRUE) is called on the
+     *   application ReadInitFile() will force all the
      *   referenced classes to be loaded immediately.
      *   \param f TRUE if referenced classes should be loaded; FALSE otherwise.
      */
@@ -335,6 +342,9 @@ class application : public ATK  {
      *   This is a shortcut to call SessionCheckpoint() for the startup
      *   application (which is the only one that can really be checkpointed,
      *   anyway).
+     *   \return a NULL-terminated argument list for re-invoking applicaiton.
+     *   NOTE:  The caller is responsible for making a copy of the value
+     *          returned here.
      */
     static const char *AppGetName();
     /**< Return the startup application's name.

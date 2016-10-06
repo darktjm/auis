@@ -18,12 +18,12 @@ union avalue_u {
     void *obj; /**< (Pointers to) Objects */
 };
 
-/**< A container for a value and its type.
- *   This is intended for providing generic typeed arguments to functions.
- *   The value is one of those supported by avalue_u.  The type is a string,
- *   represented as an atom for easy comparison.  A name may also be
- *   associated with the value, in which case it is also a string, represented
- *   as an atom.  */
+/** A container for a value and its type.
+ *  This is intended for providing generic typeed arguments to functions.
+ *  The value is one of those supported by avalue_u.  The type is a string,
+ *  represented as an atom for easy comparison.  A name may also be
+ *  associated with the value, in which case it is also a string, represented
+ *  as an atom.  */
 class avalue {
     avalue_u val;
     const atom *type;
@@ -41,8 +41,13 @@ class avalue {
     static const atom *atomatom; /**< The type name "atom", for a string in the form of an atom object.  */
     static const atom *atkatom; /**< The type name "ATK", for an object derived from ATK.  */
     avalue(); /**< Default constructor.  The name and type are NULL, and the value is uninitialized.  */
-    avalue(const avalue &src); /**< Copy constructor.  */
-    avalue &operator=(const avalue &src); /**< Assignment copy operator.  */
+    avalue(const avalue &src);
+    /**< Copy constructor.
+     *   \param src The avalue to copy. */
+    avalue &operator=(const avalue &src);
+    /**< Assignment copy operator.
+     *   \param src The avalue to copy.
+     *   \return the copied avalue. */
     ~avalue(); /**< Destructor.  The value is neither freed nor destroyed.  */
     // Accessor functions for the various types.  If the type given doesn't match the actual type 0 will be returned.  If no type is given the effect is as if the type indicated by the function name had been given.  The pointers returned are owned by the object which set the avalue.
     long Integer(const atom *type=NULL) const;
@@ -99,10 +104,12 @@ class avalue {
     } /**< Return the atom pointer value.  If the type is not avalue::atomatom, the value is NULL.  */
     inline const atom *Type() const {
 	return type;
-    } /**< Return the currently assigned type for this value.  */
+    } /**< Return the currently assigned type for this value.
+       *   \return the type atom. */
     inline const atom *Name() const {
 	return name;
-    } /**< Return the currently assigned name for this value.  */
+    } /**< Return the currently assigned name for this value.
+       *   \return the name atom. */
 
     // Sets the avalue to the indicated value, name and type.
     // Pointers are owned by the calling code.
@@ -146,31 +153,45 @@ class avalue {
     inline avalue &operator=(long integer) {
 	Set(integer);
 	return *this;
-    } /**< Create an integer avalue via assignment.  */
+    } /**< Create an integer avalue via assignment.
+       *   \param integer The integer.
+       *   \return the new avalue. */
      inline avalue &operator=(ATK *obj) {
 	Set(obj);
 	return *this;
-    } /**< Create an ATK object pointer avalue via assignment.  */
+    } /**< Create an ATK object pointer avalue via assignment.
+       *   \param obj The ATK object pointer.
+       *   \return the new avalue. */
     inline avalue &operator=(double real) {
 	Set(real);
 	return *this;
-    } /**< Create a floating-point avalue via assignment.  */
+    } /**< Create a floating-point avalue via assignment.
+       *   \param real The floating-point value.
+       *   \return the new avalue. */
     inline avalue &operator=(char *str) {
 	Set(str);
 	return *this;
-    }  /**< Create a C string pointer avalue via assignment.  */
+    }  /**< Create a C string pointer avalue via assignment.
+       *   \param str The C string pointer.
+       *   \return the new avalue. */
     inline avalue &operator=(void *ptr) {
 	Set(ptr);
 	return *this;
-    } /**< Create a generic pointer avalue via assignment.  */
+    } /**< Create a generic pointer avalue via assignment.
+       *   \param ptr The generic pointer.
+       *   \return the new avalue. */
     inline avalue &operator=(avalueflex *alist) {
 	Set(alist);
 	return *this;
-    } /**< Create an avalueflex array pointer avalue via assignment.  */
+    } /**< Create an avalueflex array pointer avalue via assignment.
+       *   \param alist The avalueflex array pointer.
+       *   \return the new avalue. */
     inline avalue &operator=(const atom *a) {
 	Set(a);
 	return *this;
-    } /**< Create an atom pointer avalue via assignment.  */
+    } /**< Create an atom pointer avalue via assignment.
+       *   \param a The atom pointer.
+       *   \return the new avalue. */
 
     // Sets the name of an avalue.
     void SetName(const atom *name);
@@ -225,7 +246,7 @@ class avalue {
     }
     /**< Constructor shortcut for creating ATK object pointer avalue.
      *   The type atom is set to the name of the type, given by ATK::GetTYpeName().
-     *   \param obj The value.  Its lifetime must match the avalue lifetime.
+     *   \param a The value.  Its lifetime must match the avalue lifetime.
      *   \param name The name.  If NULL, use avalue::none. */
 };
 
@@ -316,8 +337,8 @@ class avalueflex : public avalueflex_base {
     avalue *Find(const atom *name, const atom *type=NULL);
     /** Returns the first avalue with the given name and type.
      *  This includes depth-first recursively searching avalues with avalue::avalueflex type.
-     *  \param name The name of the desired avalue.
-     *  \param type The type of the desired avalue, or NULL if it doesn't matter.
+     *  \param n The name of the desired avalue.
+     *  \param t The type of the desired avalue, or NULL if it doesn't matter.
      *  \return an avalue with the given name and type, or NULL if none match. */
     inline const avalue *Find(const atom *n, const atom *t=NULL) const {
 	avalueflex *huh=(avalueflex *)this;
@@ -331,49 +352,56 @@ class avalueflex : public avalueflex_base {
     }
     /**< Convenience operator for creating nameless arrays in code.
      *   To the left is an array.  To the right is an ATK object pointer to add to that array.
-     *   Returns an array, so it can be chained. */
+     *   \param a An ATK object pointer.
+     *   \return an array, so it can be chained. */
     inline avalueflex &operator|(long integer) {
 	Append()->Set(integer);
 	return *this;
     }
     /**< Convenience operator for creating nameless arrays in code.
      *   To the left is an array.  To the right is a long integer to add to that array.
-     *   Returns an array, so it can be chained. */
+     *   \param integer An integer.
+     *   \return an array, so it can be chained. */
     inline avalueflex &operator|(double real) {
 	Append()->Set(real);
 	return *this;
     }
     /**< Convenience operator for creating nameless arrays in code.
      *   To the left is an array.  To the right is a floating-point value to add to that array.
-     *   Returns an array, so it can be chained. */
+     *   \param real A floating-point number.
+     *   \return an array, so it can be chained. */
     inline avalueflex &operator|(char *str) {
 	Append()->Set(str);
 	return *this;
     }
     /**< Convenience operator for creating nameless arrays in code.
      *   To the left is an array.  To the right is a C string pointer to add to that array.
-     *   Returns an array, so it can be chained. */
+     *   \param str A C string pointer.
+     *   \return an array, so it can be chained. */
     inline avalueflex &operator|(void *ptr) {
 	Append()->Set(ptr);
 	return *this;
     }
     /**< Convenience operator for creating nameless arrays in code.
      *   To the left is an array.  To the right is a generic pointer to add to that array.
-     *   Returns an array, so it can be chained. */
+     *   \param ptr A generic pointer.
+     *   \return an array, so it can be chained. */
     inline avalueflex &operator|(avalueflex *avf) {
 	Append()->Set(avf);
 	return *this;
     }
     /**< Convenience operator for creating nameless arrays in code.
      *   To the left is an array.  To the right is an array pointer to add to that array.
-     *   Returns an array, so it can be chained. */
+     *   \param avf An avalueflex array pointer.
+     *   \return an array, so it can be chained. */
     inline avalueflex &operator|(const atom *a) {
 	Append()->Set(a);
 	return *this;
     }
     /**< Convenience operator for creating nameless arrays in code.
      *   To the left is an array.  To the right is an atom pointer to add to that array.
-     *   Returns an array, so it can be chained. */
+     *   \param a An atom pointer.
+     *   \return an array, so it can be chained. */
     // Support for adding named or typed elements in a more list-like syntax.
     inline avalueflex &add(ATK *a, const atom *name=NULL) {
 	Append()->Set(a, name);
@@ -381,6 +409,7 @@ class avalueflex : public avalueflex_base {
     }
     /**< Convenience function for creating named arrays in code.
      *   Add an ATK object pointer to an array, and return the array so more calls can be chained.
+     *   The type will always be the registered name for the object type.
      *   \param a The ATK object pointer.
      *   \param name The name.  If NULL, use avalue::none.
      *   \return modified array. */
@@ -392,6 +421,7 @@ class avalueflex : public avalueflex_base {
      *   Add an integer to an array, and return the array so more calls can be chained.
      *   \param integer The integer.
      *   \param name The name.  If NULL, use avalue::none.
+     *   \param type The type.  If NULL, use avalue::integer.
      *   \return modified array. */
     inline avalueflex &add(double real, const atom *name=NULL, const atom *type=NULL) {
 	Append()->Set(real, name, type);
@@ -401,6 +431,7 @@ class avalueflex : public avalueflex_base {
      *   Add a floating-point number to an array, and return the array so more calls can be chained.
      *   \param real The floating-point number.
      *   \param name The name.  If NULL, use avalue::none.
+     *   \param type The type.  If NULL, use avalue::real.
      *   \return modified array. */
     inline avalueflex &add(const char *str, const atom *name=NULL, const atom *type=NULL) {
 	Append()->Set(str, name, type);
@@ -410,6 +441,7 @@ class avalueflex : public avalueflex_base {
      *   Add a C string pointer to an array, and return the array so more calls can be chained.
      *   \param str The C string pointer.
      *   \param name The name.  If NULL, use avalue::none.
+     *   \param type The type.  If NULL, use avalue::cstring.
      *   \return modified array. */
     inline avalueflex &add(void *ptr, const atom *name=NULL, const atom *type=NULL) {
 	Append()->Set(ptr, name, type);
@@ -419,6 +451,7 @@ class avalueflex : public avalueflex_base {
      *   Add a generic pointer to an array, and return the array so more calls can be chained.
      *   \param ptr The generic pointer.
      *   \param name The name.  If NULL, use avalue::none.
+     *   \param type The type.  If NULL, use avalue::voidptr.
      *   \return modified array. */
     inline avalueflex &add(avalueflex *avf, const atom *name=NULL, const atom *type=NULL) {
 	Append()->Set(avf, name, type);
@@ -428,6 +461,7 @@ class avalueflex : public avalueflex_base {
      *   Add an avalueflex array pointer to an array, and return the array so more calls can be chained.
      *   \param avf The avalueflex array pointer.
      *   \param name The name.  If NULL, use avalue::none.
+     *   \param type The type.  If NULL, use avalue::valueflex.
      *   \return modified array. */
     inline avalueflex &add(const atom *a, const atom *name=NULL, const atom *type=NULL) {
 	Append()->Set(a, name, type);
@@ -437,6 +471,7 @@ class avalueflex : public avalueflex_base {
      *   Add an atom pointer to an array, and return the array so more calls can be chained.
      *   \param a The atom pointer.
      *   \param name The name.  If NULL, use avalue::none.
+     *   \param type The type.  If NULL, use avalue::atomatom.
      *   \return modified array. */
     int InterpretString(const char **str);
     /**< Add array elements from a string descriptor.
@@ -469,7 +504,7 @@ class avalueflex : public avalueflex_base {
      *
      *     string-char = not-"\\ \\e \\b \\r \\n \\t \\nnn \\" etc.
      *
-     *     atom = [alpha] { [^ \t=:)] }
+     *     atom = [alpha] { [^ \\t=:)] }
      *
      *   \param str A pointer to a variable pointing to the string to
      *              interpret.  On successful parse, this will be advanced

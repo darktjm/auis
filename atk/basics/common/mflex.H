@@ -185,7 +185,10 @@ class name : public mflex { \
     /**< \copydoc mflex::Find */ \
     inline void Remove(type *o, size_t len=1) { \
 	mflex::Remove((char *)o, len); \
-    } /**< \copydoc mflex::Remove */ \
+    } \
+    /**< Remove an object from the array.
+     *   \param o A pointer to a valid array element.
+     *   \param len The number of elements to remove, including and following o. */ \
     inline void Remove( size_t i, size_t len=1 ) { \
 	mflex::Remove(i,len); \
     } /**< \copydoc mflex::Remove */ \
