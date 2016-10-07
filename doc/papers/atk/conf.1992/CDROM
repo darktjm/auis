@@ -46,7 +46,7 @@ closer to a turnkey system that made it easy for people who have heard of
 Andrew through word-of-mouth to get a real taste of what it can mean to live 
 in a media-rich  environment.  Second,  we wanted to archive the efforts of 
 the ITC over the past 10 years onto a permanent medium.   Third, we choose 
-CDROM over other media because of several attractive properties:  its size 
+CDROM over other media because of several attractive properties:  it's size 
 makes it possible to pack up multiple set of binaries, allowing us to cover 
 the set of most widely used platforms;  there are CDROM format standards 
 (ISO9660 & Rock Ridge) so CDROMs can be accessed by anyone with the right 
@@ -167,7 +167,7 @@ format of the data set.  You will recall that the more prevelant ISO9660
 standard limits both filenames and directory depths while the Rock Ridge 
 Extensions to that standard have not such restrictions and, in fact, make the 
 contents of the CDROM a UNIX directory.   If we only had to worry about the 
-Rock Ridge encoding, we could have provided the data set in its most natural 
+Rock Ridge encoding, we could have provided the data set in it's most natural 
 form -- a UNIX directory.  In this situation, we nearly have a turnkey system: 
  the only steps necessary for executing the binaries directly from the disc 
 would be (1) mount the disc as a Rock Ridge filesystem, (2) set two 

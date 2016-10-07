@@ -821,7 +821,7 @@ dataobj_ReadOtherFormat}
 Moderately general method for reading & writing "alternative" data stream
 
 
-So far: dataobject::OTHERFORMAT_MAIL
+So far: dataobject_OTHERFORMAT_MAIL
 
 
 Andrew mail without styles is written as text/plain.
